@@ -77,3 +77,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (20:15Z) Owner: selected state in face picker ugly (yellow box behind frame + check over crest). Kit: one selected style everywhere — glow following frame outline, slight enlarge, unselected dimmed, small check at bottom-right inside frame; no box.
 - (20:30Z) Owner: selected state = gold glow around the frame is OK; NO check badge.
 - (20:50Z) Owner: map lacks servants' quarters, kitchen, physicians, study rooms etc. Decided to add: Dãy nhà cung nhân, Ngự thiện phòng, Nội vụ phủ, Hoán y cục, Phật đường, học đường/Thượng thư phòng; check Thái y viện + Ngự thư phòng reachable. Plan + pilot scene first (review/places).
+- (21:00Z) Owner: result/report texts (e.g. spy 'dò la' result) as bullet lists, one fact per line; gains/costs coloured; filler as footnote. All result/report/news/event texts.
