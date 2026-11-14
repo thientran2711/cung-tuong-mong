@@ -64,39 +64,23 @@ const WD={/* KNOBS (dev/WARDROBE.md §Núm) */
  rewardGarment:45,ntSon:35,ntPromo:25,ntContest:15,ntStory:60,ntTH:1, /* % chances a bestowal brings a garment / a ngự tứ */
  frameMalice:60,frameHost:60,frameP:3,            /* NPC giá họa: needs malice and hostility, % per month */
  warnBase:20,                                     /* tai mắt warning before a frame-up lands */
- traceBase:35,traceMat:5,clearBase:55,clearMat:5};
+ traceBase:35,traceMat:5,clearBase:55,clearMat:5,
+ gBump:.15,             /* each grade step inside a tier (Thường→Tuyệt) adds this much of a phẩm step to the outfit level */
+ colMs:[[20,5,"Hương khuê sơ tập"],[50,10,"Cẩm tú doanh rương"],[100,20,"Bách bảo trang đài"],[200,35,"Thiên y các chủ"]]};/* sưu tập: items owned in one life → title + Phúc duyên, once each per life */
 const WD_GRADE=["Thường","Tinh phẩm","Trân phẩm","Tuyệt phẩm","Ngự tứ"];
-const WD_PR=[12,20,30,45,70,100,150,220,320];
-function wdPName(P){return P<=0?"cung nhân":P>=9?"Thái hậu":P>=8?"Hoàng hậu":RANKS[P-1]?RANKS[P-1].n:"?"}
-/* catalogue: [key, slot, name, P, grade, colour, effect, note]; colour do/vang count as festive (forbidden in quốc tang) */
-const WD_LIST=[
- ["tram_dao","tram","Trâm gỗ đào",0,0,"nau",{sac:1}],["tram_dong","tram","Trâm đồng mai hoa",0,0,"vang",{sac:1}],
- ["tramngoc","tram","Trâm ngọc bích",1,0,"xanh",{sac:2}],["tram_hoalua","tram","Trâm hoa lụa",1,0,"hong",{sac:2}],
- ["tram_ngoclan","tram","Trâm bạc ngọc lan",2,1,"trang",{sac:2}],["thoa_diep","tram","Thoa bạc song điệp",2,1,"trang",{sac:3}],
- ["tram_hong","tram","Trâm thạch anh hồng",3,1,"hong",{sac:3}],["hoadien_bac","tram","Hoa điền bạc khảm lưu ly",3,2,"lam",{sac:3,danh:1}],
- ["thoa_vang","tram","Thoa vàng hồ điệp",4,2,"vang",{sac:4,danh:1}],["tram_phithuy","tram","Trâm phỉ thúy hải đường",4,1,"xanh",{sac:4,danh:1}],
- ["boodieu","tram","Bộ diêu vàng",5,2,"vang",{sac:5,danh:2}],["dientu_thuy","tram","Điền tử điểm thúy",5,2,"lam",{sac:5,danh:2}],
- ["bd_phuong","tram","Bộ diêu kim phượng ngậm châu",6,3,"vang",{sac:6,danh:3}],["tram_maudon","tram","Trâm hồng ngọc mẫu đơn",6,2,"do",{sac:6,danh:2}],
- ["diemthuy_cuu","tram","Điểm thúy cửu điệp",7,3,"lam",{sac:7,danh:3}],["kimthoa_phuong","tram","Kim thoa song phượng",7,3,"vang",{sac:7,danh:3}],
- ["tramphuong","tram","Trâm phượng cửu vĩ",8,3,"vang",{sac:8,danh:4}],["phuongquan","tram","Phượng quan bán giá",8,3,"vang",{sac:8,danh:5}],
- ["nt_nhuy","tram","Trâm ngọc như ý ngự tứ",5,4,"xanh",{sac:5,danh:3}],["nt_haiduong","tram","Bộ diêu «Hải đường xuân thụy» ngự tứ",6,4,"hong",{sac:6,danh:4}],["nt_dongchau","tram","Trâm đông châu ngự tứ",7,4,"trang",{sac:7,danh:5}],
- ["y_cungnu","y","Áo vải xanh cung nhân",0,0,"xanh",{}],["y_luamoc","y","Áo lụa mộc hồng nhạt",0,0,"hong",{sac:1}],
- ["y_hoanho","y","Áo lụa thêu hoa nhỏ",1,0,"hong",{sac:1}],["y_saxanh","y","Váy sa xanh ngọc",1,0,"xanh",{sac:2}],
- ["y_maimai","y","Áo gấm hoa mai",2,1,"hong",{sac:2}],["y_vanthuy","y","Áo lụa Hàng Châu vân thủy",2,1,"lam",{sac:2}],
- ["y_lan","y","Áo the thêu lan",3,1,"xanh",{sac:3}],["y_tramnep","y","Váy lụa bách điệp",3,1,"tim",{sac:3}],
- ["y_haiduong","y","Áo gấm thêu hải đường",4,2,"hong",{sac:4,danh:1}],["y_chimen","y","Áo choàng lụa thêu chim én",4,1,"lam",{sac:4}],
- ["y_maudon","y","Áo gấm Tô Châu thêu mẫu đơn",5,2,"tim",{sac:5,danh:1}],["y_hac","y","Cát phục tím thêu hạc",5,2,"tim",{sac:5,danh:2}],
- ["y_kimtuyen","y","Cát phục đỏ thêu kim tuyến",6,3,"do",{sac:6,danh:2}],["y_vancam","y","Áo gấm vân cẩm",6,2,"lam",{sac:6,danh:2}],
- ["y_trieutim","y","Triều phục tím chạm phượng",7,3,"tim",{sac:7,danh:3}],["y_bachdieu","y","Áo gấm thêu bách điểu",7,3,"do",{sac:7,danh:3}],
- ["y_minhhoang","y","Triều phục minh hoàng thêu phượng",8,3,"vang",{sac:8,danh:4}],["y_phuongbao","y","Phượng bào đỏ thắm",8,3,"do",{sac:8,danh:4}],
- ["nt_longchon","y","Áo lông chồn ngự tứ",5,4,"nau",{sac:5,danh:3}],["nt_bachhoa","y","Cát phục «Bách hoa» ngự tứ",6,4,"hong",{sac:6,danh:4}],["nt_hocuu","y","Hồ cừu trắng ngự tứ",7,4,"trang",{sac:7,danh:5}],
- ["y_tang","y","Áo tang vải trắng",0,0,"trang",{},"mặc trong quốc tang"]];
+function wdPName(P){if(P<=0){const t=WD_TIERS.find(x=>x[1]===P);return t?t[2].toLowerCase():"cung nhân"}return P>=9?"Thái hậu":P>=8?"Hoàng hậu":RANKS[P-1]?RANKS[P-1].n:"?"}
+function wdTierName(P){const t=WD_TIERS.find(x=>x[1]===P);return t?t[2]:wdPName(P)}
+/* catalogue WD_LIST / WD_TIERS / WD_OLDKEY: j92cat.js (13 tiers x 20 items + ngự tứ + áo tang) */
 const WD_ITEMS={};
-(function(){for(const [k,sl,n,P,g,col,w,note] of WD_LIST){const it={k,sl,n,P,g,col,w,nt:g===4?1:0,pr:g===4?0:WD_PR[P],icon:`img/wd-${k.replace(/_/g,"-")}.webp`,note:note||""};WD_ITEMS[k]=it;
-  const d=`${sl==="tram"?"Cài tóc":"Mặc"}: ${Object.keys(w).length?plainFx(w):"giản dị"} · ${WD_GRADE[g]}${it.nt?" · chỉ có khi được ban, không bán, không tặng":""}${note?" · "+note:""}`;
+(function(){for(const [k,sl,n,P,g,col,w,note,ic,xa,pr,tier] of WD_LIST){const it={k,sl,n,P,g,col,w,nt:g===4?1:0,pr:g===4?0:pr,icon:`img/${ic}.webp`,big:`img/wd512/${ic}.webp`,xa,tier,note:note||""};WD_ITEMS[k]=it;
+  const d=`${sl==="tram"?"Cài tóc":"Mặc"}: ${Object.keys(w).length?plainFx(w):"giản dị"} · ${WD_GRADE[g]} · Xa hoa ${xa}/10${it.nt?" · chỉ có khi được ban, không bán, không tặng":""}${note?" · "+note:""}`;
   /* register in the chest's IT table; keep old fields of the three old hair items (tramngoc, boodieu, tramphuong) but hide their rank hint */
   IT[k]=Object.assign(IT[k]||{tg:sl==="tram"?["hh","rv"]:["rv"]},{n,kd:sl==="tram"?"Trâm cài":"Y phục",d,pr:it.pr,wsl:sl,wd:1});if(it.nt){IT[k].keep=1;IT[k].tg=[]}
-  if(IT[k].sl==="hair")delete IT[k].sl}})();
+  if(IT[k].sl==="hair")delete IT[k].sl}
+ /* old saves: retired keys read as their new item (same tier and grade) until wdFixE renames them */
+ for(const o in WD_OLDKEY){const n=WD_OLDKEY[o];WD_ITEMS[o]=WD_ITEMS[n];IT[o]=IT[n]}})();
+function wdFixE(e){if(e&&e.k&&WD_OLDKEY[e.k])e.k=WD_OLDKEY[e.k];return e}
+function wdIsTang(k){return k==="y_tang"||k==="y_tanggai"}
 function plainFx(o){return Object.entries(o||{}).filter(([k,v])=>v&&NAMES[k]).map(([k,v])=>`${NAMES[k]} ${v>0?"+":""}${v}`).join(", ")}
 /* old ngự-ban things are ngự tứ too */
 ["ngocboi","bienngu"].forEach(k=>{if(IT[k]){IT[k].nt=1}});
@@ -104,19 +88,25 @@ function wdIsNt(e){return !!(e&&((WD_ITEMS[e.k]&&WD_ITEMS[e.k].nt)||e.nt||(IT[e.
 
 /* ---------- who is what ---------- */
 function wdPOf(p){try{if(!p)return 1;const rr=typeof personRoleRank==="function"?personRoleRank(p):null;
-  if(rr){if(rr.role==="maid"||rr.role==="mama"||rr.role==="cold")return 0;if(rr.role==="thaihau")return 9;if(rr.role==="player"||rr.role==="consort")return Math.max(0,Math.min(7,rr.rank|0))+1}
+  if(rr){if(rr.role==="maid")return (Math.max(0,Math.min(4,rr.rank|0))-4)/2;if(rr.role==="mama")return 0;if(rr.role==="cold")return -1;if(rr.role==="thaihau")return 9;if(rr.role==="player"||rr.role==="consort")return Math.max(0,Math.min(7,rr.rank|0))+1}
   if(p.out)return 0;return (typeof rkOf==="function"&&(p===S||p.rank!=null)?rkOf(p):0)+1}catch(e){return 1}}
 function wdKey(p){return p===S?"me":p&&p.id!=null?String(p.id):p&&p.name?"n:"+p.name:"?"}
 function wdHash(s){let h=7;s=String(s);for(let i=0;i<s.length;i++)h=(h*31+s.charCodeAt(i))>>>0;return h}
-function wdPool(sl,P,noNt){return WD_LIST.filter(r=>r[1]===sl&&r[3]===P&&(!noNt||r[4]!==4)&&r[0]!=="y_tang").map(r=>r[0])}
-function wdDefault(p,sl){const P=Math.min(8,wdPOf(p));const L=wdPool(sl,P,true);return L.length?L[wdHash(wdKey(p)+sl)%L.length]:null}
+function wdTierP(P){P=+P||0;let b=WD_TIERS[0][1];for(const t of WD_TIERS)if(Math.abs(t[1]-P)<Math.abs(b-P))b=t[1];return b}
+function wdPool(sl,P,noNt){P=wdTierP(Math.min(8,P));return WD_LIST.filter(r=>r[1]===sl&&r[3]===P&&(!noNt||r[4]!==4)&&!wdIsTang(r[0])).map(r=>r[0])}
+function wdDefault(p,sl){const P=Math.min(8,wdPOf(p));const L0=wdPool(sl,P,true),L1=L0.filter(k=>WD_ITEMS[k].g<=1),L=L1.length?L1:L0;return L.length?L[wdHash(wdKey(p)+sl)%L.length]:null}
 /* lazily give everybody (old saves too) a default outfit at their own P: nobody starts wrong */
-function wdOf(p){if(!p)return null;if(!p.wd||typeof p.wd!=="object"){p.wd={tram:null,y:null};
+function wdOf(p){if(!p)return null;if(p.wd&&typeof p.wd==="object"&&!p.wdV2){p.wdV2=1;wdFixE(p.wd.tram);wdFixE(p.wd.y);(p.inv||[]).forEach(wdFixE);if(p.wdk)for(const o in WD_OLDKEY)if(p.wdk[o]){p.wdk[WD_OLDKEY[o]]=1;delete p.wdk[o]}
+  if(p===S){(S.wdPawn||[]).forEach(x=>wdFixE(x&&x.e));if(S.shop)S.shop=S.shop.map(k=>WD_OLDKEY[k]||k)}}
+ if(!p.wd||typeof p.wd!=="object"){p.wdV2=1;p.wd={tram:null,y:null};
   if(p===S&&S.inv){const i=S.inv.findIndex(e=>e&&e.w&&IT[e.k]&&IT[e.k].wsl==="tram"&&!e.h);if(i>=0){const e=S.inv.splice(i,1)[0];delete e.w;p.wd.tram=e}}
   for(const sl of ["tram","y"])if(!p.wd[sl]){const k=wdDefault(p,sl);if(k)p.wd[sl]={k,from:"base"}}}
- if(p.inv)p.inv.forEach(e=>{if(e&&e.w&&IT[e.k]&&IT[e.k].wsl)delete e.w});return p.wd}
+ /* the issued (base) phẩm phục follows her current tier (promotion, demotion, cung nữ thăng bậc) */
+ if(!wdTang())for(const sl of ["tram","y"]){const e=p.wd[sl];if(e&&e.from==="base"&&WD_ITEMS[e.k]&&!wdIsTang(e.k)&&WD_ITEMS[e.k].P!==wdTierP(Math.min(8,wdPOf(p)))){const k=wdDefault(p,sl);if(k)p.wd[sl]={k,from:"base"}}}
+ if(p.inv)p.inv.forEach(e=>{if(e&&e.w&&IT[e.k]&&IT[e.k].wsl)delete e.w});if(p===S)wdColScan();return p.wd}
 function wdItem(e){return e&&WD_ITEMS[e.k]||null}
-function wdP(e,p){const it=wdItem(e);if(!it)return 0;if(it.nt&&e.own&&e.own===wdKey(p))return Math.min(it.P,wdPOf(p));return it.P}
+function wdIP(it){return it?it.P+(it.nt?0:(it.g|0)*WD.gBump):0}
+function wdP(e,p){const it=wdItem(e);if(!it)return 0;if(it.nt&&e.own&&e.own===wdKey(p))return Math.min(it.P,wdPOf(p));return wdIP(it)}
 function wdLevel(p){const w=wdOf(p);return WD.wT*wdP(w.tram,p)+WD.wY*wdP(w.y,p)}
 function wdTang(){return !!(S&&S.wdTang&&S.wdTang>S.turn)}
 function wdFest(){try{return typeof festToday==="function"&&!!festToday()}catch(e){return false}}
@@ -144,18 +134,18 @@ function wdSlots(p){const w=wdOf(p);const lab=wdKnownStatus(p);return ["tram","y
 window.wdSlots=wdSlots;window.WD=WD;window.WD_ITEMS=WD_ITEMS;
 
 /* ---------- putting things on: the same rules for everyone ---------- */
-function wdWearEntry(p,e){const it=wdItem(e);if(!it)return"";const w=wdOf(p);const old=w[it.sl];if(old&&old.from!=="base"){p.inv=p.inv||[];p.inv.push(old)}w[it.sl]=e;return it.n}
+function wdWearEntry(p,e){const it=wdItem(e);if(!it)return"";if(p===S)wdColAdd(it.k);const w=wdOf(p);const old=w[it.sl];if(old&&old.from!=="base"){p.inv=p.inv||[];p.inv.push(old)}w[it.sl]=e;return it.n}
 function wdTakeOff(p,sl){const w=wdOf(p);const e=w[sl];if(!e)return;if(e.from!=="base"){p.inv=p.inv||[];p.inv.push(e)}w[sl]=null}
 function wdWear(p,ix){const e=p.inv&&p.inv[ix];if(!e||e.h||!wdItem(e))return"";p.inv.splice(ix,1);delete e.w;return wdWearEntry(p,e)}
 /* what someone BELIEVES an item's P is: true if known, else a fixed hidden noise per item kind (per person) */
-function wdBelP(p,k){const it=WD_ITEMS[k];if(!it)return 0;if(p===S?wdKnowsItem(k):((p.wdk||{})[k]))return it.P;
- const n=WD.autoErr[wdHash(wdKey(p)+k)%WD.autoErr.length];return it.P+n}
+function wdBelP(p,k){const it=WD_ITEMS[k];if(!it)return 0;if(p===S?wdKnowsItem(k):((p.wdk||{})[k]))return wdIP(it);
+ const n=WD.autoErr[wdHash(wdKey(p)+k)%WD.autoErr.length];return wdIP(it)+n}
 /* all candidate pairs from the worn items + chest; score by a P function */
 function wdCands(p){const w=wdOf(p);const C={tram:[null],y:[null]};
  for(const sl of ["tram","y"]){if(w[sl])C[sl].push({src:"w",e:w[sl]});(p.inv||[]).forEach((e,i)=>{if(e&&!e.h&&wdItem(e)&&wdItem(e).sl===sl)C[sl].push({src:i,e})})}
  /* the issued phẩm phục of her own rank is always at hand (Nội vụ phủ), and white mourning clothes in quốc tang */
  for(const sl of ["tram","y"]){const k=wdDefault(p,sl);if(k&&!C[sl].some(x=>x&&x.e.k===k))C[sl].push({src:"base",e:{k,from:"base"}})}
- if(wdTang()){const t=(p.inv||[]).findIndex(e=>e&&e.k==="y_tang"&&!e.h);if(t<0)C.y.push({src:"tang",e:{k:"y_tang",from:"base"}})}
+ if(wdTang()){const t=(p.inv||[]).findIndex(e=>e&&wdIsTang(e.k)&&!e.h);if(t<0)C.y.push({src:"tang",e:{k:"y_tang",from:"base"}})}
  return C}
 function wdBest(p,target,pf){const C=wdCands(p);let best=null,bd=1e9;
  for(const a of C.tram)for(const b of C.y){if(!b)continue;const L=WD.wT*(a?pf(a.e):0)+WD.wY*pf(b.e);
@@ -170,7 +160,7 @@ function wdApply(p,pair){if(!pair)return;const w=wdOf(p);const take=x=>{if(!x)re
  if(!a)w.tram=null}
 /* Tự chọn đồ: quick, by belief (may be wrong) */
 /* obs's belief of the P of entry e worn by owner (a ngự tứ worn by its owner is known to be by right) */
-function wdBelPE(obs,e,owner){const it=wdItem(e);if(!it)return 0;if(it.nt&&e.own&&owner&&e.own===wdKey(owner))return Math.min(it.P,wdPOf(owner));if(obs===owner&&(e.from==="base"||e.nvp))return it.P;/* her own issued phẩm phục */return wdBelP(obs,it.k)}
+function wdBelPE(obs,e,owner){const it=wdItem(e);if(!it)return 0;if(it.nt&&e.own&&owner&&e.own===wdKey(owner))return Math.min(it.P,wdPOf(owner));if(obs===owner&&(e.from==="base"||e.nvp))return wdIP(it);/* her own issued phẩm phục */return wdBelP(obs,it.k)}
 function wdBelStatus(obs,t){return wdStatusBy(t,e=>wdBelPE(obs,e,t))}
 function wdAutoFor(p,bias){const tgt=Math.min(8,wdPOf(p))+(bias||0);wdApply(p,wdBest(p,tgt,e=>wdBelPE(p,e,p)))}
 /* NPC choice: by belief + trait (Kiêu ngạo / Tham vọng dress up, Hiền lành / Nhu mì keep modest) */
@@ -213,12 +203,12 @@ function wdAgent(p){const L=[p.maid].concat(p.staff||[]).filter(s=>s&&!s.spyFor&
 
 /* ---------- getting things: a real item into the chest (rewards, purchases, gifts) ---------- */
 function wdNtFree(){S.wdNt=S.wdNt||[];return WD_LIST.filter(r=>r[4]===4&&!S.wdNt.includes(r[0])).map(r=>r[0])}
-function wdPickAt(P,sl,gMin){P=cl(Math.round(P),0,8);let L=WD_LIST.filter(r=>r[4]!==4&&r[0]!=="y_tang"&&(!sl||r[1]===sl)&&r[3]===P&&r[4]>=(gMin||0));
- if(!L.length)L=WD_LIST.filter(r=>r[4]!==4&&r[0]!=="y_tang"&&(!sl||r[1]===sl)&&r[3]===P);return L.length?pick(L)[0]:null}
+function wdPickAt(P,sl,gMin){P=wdTierP(Math.min(8,P));let L=WD_LIST.filter(r=>r[4]!==4&&!wdIsTang(r[0])&&(!sl||r[1]===sl)&&r[3]===P&&r[4]>=(gMin||0));
+ if(!L.length)L=WD_LIST.filter(r=>r[4]!==4&&!wdIsTang(r[0])&&(!sl||r[1]===sl)&&r[3]===P);return L.length?pick(L)[0]:null}
 function wdGain(p,k,src){src=src||{};const it=WD_ITEMS[k];if(!p||!it)return null;p.inv=p.inv||[];const e={k,from:src.from||"emp"};
  if(src.giver)e.giver=src.giver;e.d=wdWhen();if(it.nt){e.own=wdKey(p);S.wdNt=S.wdNt||[];if(!S.wdNt.includes(k))S.wdNt.push(k)}
  if(src.nvp){e.nvp=1;if(p===S)wdReveal(k,"y phục Nội vụ phủ đưa theo phẩm mới");else{p.wdk=p.wdk||{};p.wdk[k]=1}}
- p.inv.push(e);let r="";
+ p.inv.push(e);let r="";if(p===S)wdColAdd(k);
  if(p===S&&!it.nt&&!src.nvp&&!wdKnowsItem(k)){const m=wdMama(S);if(m&&roll(WD.mamaReveal)){wdReveal(k,`${m.name} tinh ý nhận ra`);r=` ${m.name} tinh ý, nhận ra đây là đồ phẩm ${wdPName(it.P)}.`}}
  else if(p!==S&&!it.nt&&roll(WD.mamaReveal)){p.wdk=p.wdk||{};p.wdk[k]=1}
  return {e,txt:r}}
@@ -452,7 +442,7 @@ function wdSrcTxt(e){if(!e)return"";if(e.from==="base")return"phẩm phục đư
 function wdInvHTML(){const w=wdOf(S);const lab=wdKnownStatus(S);const self=S.wdSelf&&S.wdSelf.it===wdCur(S)?S.wdSelf:null;const ag=wdAgent(S);
  const head=lab?`Đã biết: ${WD_LABEL[lab]}`:self?`Lời ${self.by}: ${WD_LABEL[self.st]} (chưa chắc)`:"Chưa ai nhận xét bộ đang mặc";
  const row=(it,title,info,B)=>`<div class="ph"><span>${wdIcon(it,24)}<b>${title}</b></span><span>${info}</span></div>${B.length?`<div class="rbtn" style="margin-bottom:8px">${B.join("")}</div>`:""}`;
- let h=`<div class="ph"><span><b>Trang phục đang mặc</b></span><span>${head}</span></div>`;
+ let h=`<div class="ph"><span><b>Trang phục đang mặc</b></span><span>${head}</span></div>`;const ci=wdColInfo();h+=`<div class="ph"><span><b>Sưu tập kiếp này</b></span><span>${ci.n} món${ci.title?` · danh hiệu «${ci.title}»`:""}${ci.next?` · mốc sau: ${ci.next[0]} món (Phúc duyên +${ci.next[1]})`:""}</span></div>`;
  for(const sl of ["tram","y"]){const e=w[sl],it=wdItem(e);const B=[];if(it&&!(sl==="y"&&e.from==="base"))B.push(pbtn(`data-wd="off" data-sl="${sl}"`,"Tháo",`thành: ${sl==="y"?"thay về phẩm phục được cấp":"để tóc trơn"}`,""));
   h+=row(it,`${sl==="tram"?"Trâm cài":"Y phục"}: ${it?it.n:(sl==="tram"?"Chưa cài":"Thường phục")}`,it?`${WD_GRADE[it.g]} · ${plainFx(it.w)||"giản dị"} · ${wdSrcTxt(e)} · ${wdKnowsE(e)?"đồ phẩm "+wdPName(wdP(e,S)):e.from==="base"?"cấp theo phẩm hiện tại":"chưa rõ phẩm"}`:"",B)}
  h+=`<div class="rbtn" style="margin-bottom:8px">`+pbtn(`data-wd="auto"`,"Tự chọn đồ",`${word(wdAutoOdds())} · tốn: 0 khắc · thành: thay ngay bộ ngươi cho là hợp phẩm · kèm: có thể trúng bộ sai phẩm (${wdUnknownN()} món chưa rõ phẩm)`,"")+
@@ -478,3 +468,22 @@ document.addEventListener("click",ev=>{const b=ev.target.closest("[data-wd]");if
   if(p&&(p===S||(typeof knows!=="function"||knows(p)))){const sl=wdSlots(p);const C=sl.map(x=>chip(`${x.slot==="tram"?"Trâm":"Y phục"}: ${x.name}${x.empty?"":" · "+x.gradeName}`,x.nt?"ok":""));
    if(sl[0].label)C.push(chip(sl[0].label,sl[0].labelKey==="ok"?"ok":"hot"));o=Object.assign({},o,{chips:(o.chips||[]).concat(C)})}}}catch(e){}return p0.call(this,o)}})();
 window.wdAutoUI=wdAutoUI;window.wdGroomUI=wdGroomUI;window.wdSell=wdSell;window.wdPawn=wdPawn;window.wdRedeem=wdRedeem;window.wdWear=wdWear;window.wdTakeOff=wdTakeOff;
+
+/* ---------- SƯU TẬP (owner 11/14): every item she has owned in THIS life counts once (worn, in the chest, pawned or sold later).
+   Milestones WD.colMs [count, Phúc duyên, title]: a title for this life's line in the Sổ luân hồi + Phúc duyên (j52 pdAdd), once each per life.
+   Nothing carries over (chết là hết): only the title is written in the Sổ luân hồi; a kiếp dở dang loses that life's Phúc duyên (jkiep) incl. this. ---------- */
+function wdColKey(k){return WD_OLDKEY[k]||k}
+function wdColAdd(k){if(!S||!k||!WD_ITEMS[k]||wdIsTang(k))return;S.wdCol=S.wdCol||{};k=wdColKey(k);if(S.wdCol[k])return;S.wdCol[k]=1;wdColCheck()}
+function wdColScan(){if(!S||S.wdColBusy)return;S.wdColBusy=1;try{const w=S.wd||{};for(const sl of ["tram","y"])if(w[sl])wdColAdd(w[sl].k);(S.inv||[]).forEach(e=>{if(e&&WD_ITEMS[e.k])wdColAdd(e.k)});(S.wdPawn||[]).forEach(x=>{if(x&&x.e)wdColAdd(x.e.k)})}catch(e){}delete S.wdColBusy}
+function wdColN(){return S&&S.wdCol?Object.keys(S.wdCol).length:0}
+function wdColInfo(){const n=wdColN();let title=null,next=null;for(const m of WD.colMs){if(n>=m[0])title=m[2];else if(!next)next=m}return{n,title,next,total:WD_LIST.filter(r=>!wdIsTang(r[0])).length}}
+function wdColCheck(){if(!S||S.dead)return;S.wdColT=S.wdColT||[];const n=wdColN();
+ for(const [m,pd,t] of WD.colMs){if(n<m||S.wdColT.includes(m))continue;S.wdColT.push(m);
+  const nlp=typeof NLP!=="undefined"&&NLP;if(!nlp&&typeof pdAdd==="function")pdAdd(pd,`sưu tập đủ ${m} món trâm cài, y phục: danh hiệu «${t}»`,"wdcol"+m);
+  try{log(`<b class="g">Sưu tập ${m} món: danh hiệu «${t}»</b>${nlp?"":` · Phúc duyên +${pd}`}.`)}catch(e){}
+  try{Q.push({t:"Danh hiệu sưu tập",who:pMe(),h:`<p>Kiếp này ngươi đã từng có <b>${m}</b> món trâm cài, y phục khác nhau.</p><p>Danh hiệu: <b>«${t}»</b>${nlp?"":` · <span class="g">Phúc duyên +${pd}</span>`}</p><p class="past">Danh hiệu được ghi vào Sổ luân hồi. Đồ vật không mang sang kiếp sau.</p>`})}catch(e){}}}
+window.wdColInfo=wdColInfo;
+if(typeof lifeSave==="function")(function(){const l0=lifeSave;lifeSave=function(fate){try{const ci=wdColInfo();if(ci.title)fate=`${fate} · Sưu tập: «${ci.title}» (${ci.n} món)`}catch(e){}return l0.call(this,fate)}})();
+try{if(typeof KIT_GLOSS==="object"){KIT_GLOSS["Sưu tập"]="Số món trâm cài, y phục khác nhau ngươi từng có trong kiếp này. Đủ 20, 50, 100, 200 món được danh hiệu ghi vào Sổ luân hồi và Phúc duyên +5, +10, +20, +35 (mỗi mốc một lần mỗi kiếp). Đồ không mang sang kiếp sau; kiếp dở dang thì mất Phúc duyên của kiếp đó.";
+ KIT_GLOSS["Xa hoa"]="Độ lộng lẫy của món đồ (1–10): theo bậc của món và phẩm cấp Thường, Tinh phẩm, Trân phẩm, Tuyệt phẩm, Ngự tứ.";
+ KIT_GLOSS["Phẩm cấp"]="Thường, Tinh phẩm, Trân phẩm, Tuyệt phẩm trong mỗi bậc; Ngự tứ là đồ Hoàng thượng ban, độc nhất. Món đồ thuộc một bậc phi tần hay cung nữ; mặc đồ bậc cao hơn mình là vượt phẩm, thấp hơn hai bậc là quá giản dị."}}catch(e){}
