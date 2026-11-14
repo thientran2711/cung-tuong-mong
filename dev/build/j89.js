@@ -15,3 +15,13 @@ function evArtCat(id){const A=EVART;if(!A||!id)return null;id=String(id);const E
 function evArtOf(id,salt){try{const A=EVART;if(!A)return"";const c=evArtCat(id)||A.default;const C=A.categories[c]||A.categories[A.default];if(!C||!C.files||!C.files.length)return"";
  const s=String(id)+"|"+(salt==null?"":salt);let h=0;for(let i=0;i<s.length;i++)h=(h*31+s.charCodeAt(i))>>>0;return C.files[h%C.files.length]}catch(e){return""}}
 function evArtTitle(id){const A=EVART;const c=A&&(evArtCat(id)||A.default);return c&&A.categories[c]?A.categories[c].title:""}
+/* ---- Mệnh truyện (j67): stArtOf(arcId, beat, ending) -> image path. beat = beat id ("s1","c2","t1","x1"...; "G.x" global beats use ev art),
+   ending = ending key ("win","mid","lose",...) or null; with neither -> the arc cover ("bia"). Missing file -> the arc's own cover,
+   then the ev-* category that fits (EVENTS.json stories[arc].fb / efb). */
+function stArtOf(arc,beat,ending){try{const A=EVART;if(!A||!A.stories)return"";const s=A.stories[arc];
+ const G={rumor:"tin-don",emp:"hoang-de-vui",spy:"tai-mat",th:"thinh-an",rival:"tranh-sung",hh:"thinh-an",gift:"khach-den",night:"hoang-de-dem",srv:"cung-nhan",ill:"benh-tat"};
+ const evc=c=>{const C=c&&A.categories[c];return C&&C.files.length?C.files[0]:""};
+ if(beat&&String(beat).startsWith("G."))return evc(G[String(beat).slice(2)])||evArtOf("j67:"+beat);
+ if(!s)return evArtOf("arc:"+arc);
+ const key=ending?"ket-"+ending:(beat||"bia");
+ return s.files[key]||(ending&&s.efb&&evc(s.efb[ending]))||s.files.bia||evc(s.fb)||evArtOf("arc:"+arc)}catch(e){return""}}
