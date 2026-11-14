@@ -108,3 +108,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (23:20Z) Owner: act/event pictures must keep a distinct frame per category/type (colour + ornament), no tassel.
 - (23:30Z) Owner principle (binding): iPad landscape = two phone-portrait screens side by side (left: room home, right: open tab panel). Phone shows one half at a time with the SAME components/layout — no separate phone variants.
 - (23:40Z) Owner correction: option-button layout is decided PER SCREEN (some 2-col, some full-width rows) — analyse each screen: long options (Cần/Tốn/Được/odds) → full-width rows; short options → 2-col grid; table in KIT.md for owner review.
+- (23:50Z) Owner: big events and the week book use full-body figures of the involved person standing big beside the text (like the identity card), with a wide scene band on top; replaces small avatars where space allows (kitEventStage).
