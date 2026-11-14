@@ -6,18 +6,18 @@ Owner addition: anger/jealousy only raise the WISH to harm. Đức and traits ar
 
 ## 1. States
 One record per person `p.emo = {k, v 0–100, t (target key), why (true cause), w (tuần)}`; v < 15 = Bình thường.
-| key | name | seal (img/kit/emo-*.webp) | ring colour |
-|---|---|---|---|
-| vui | Vui | yellow, smiling arcs | #f2c230 |
-| binh | Bình thường | pale jade, level face | (no ring) |
-| buon | Buồn | blue, drooping | #3f7fd0 |
-| gian | Giận | red, V brows | #d8322a |
-| so | Sợ | violet, round eyes + sweat | #8a5cc8 |
-| ghen | Ghen | green, side glance | #3fa04a |
-| lo | Lo âu | orange, wavy mouth + sweat | #f08a24 |
-| dau | Đau khổ | indigo, closed eyes + tear | #2e3a8c |
-| muu | Toan tính | teal, sly half-smile | #1f6f6a |
-| an | Chưa rõ | grey "?" (fog) | – |
+| key | name | seal (img/kit/emo-*.webp) |
+|---|---|---|
+| vui | Vui | yellow, smiling arcs |
+| binh | Bình thường | pale jade, level face |
+| buon | Buồn | blue, drooping |
+| gian | Giận | red, V brows |
+| so | Sợ | violet, round eyes + sweat |
+| ghen | Ghen | green, side glance |
+| lo | Lo âu | orange, wavy mouth + sweat |
+| dau | Đau khổ | indigo, closed eyes + tear |
+| muu | Toan tính | teal, sly half-smile |
+| an | Chưa rõ | grey "?" (fog) |
 
 Who: her, the 12+ consorts (incl. Hoàng hậu), servants (staff + thân tín), Hoàng thượng (`S.emp.emo`, kept in step with the old `S.emp.mood` 0–3
 both ways at strength ≥ 40), Thái hậu (`S.thO.emo`, in step with jcmood `S.cm.th`), officials (`S.court`), men, children.
@@ -92,9 +92,8 @@ Her own: always. Others: known when she saw them within 2 tuần (anyone in `cur
 `cmKnown`, all consorts when Tai mắt ≥ 3; the Emperor always (his mood is public court news). Known person but no fresh news → grey "?" seal; stranger (`kitIsKnown` false) → no seal.
 
 ## 6. UI (KIT.md 31)
-`pcPort` draws `img.kemo` (the seal) on every frame size (tall frame, person card, small `mdH` frames incl. xs/sm strips) and a soft drop-shadow glow in the
-emotion colour around the frame picture (`img.kfr[data-emo]`). Tooltip/alt: "Tâm trạng: Giận (bị ngươi làm nhục)". API `window.kitEmotion(p)` →
-`{k,name,v,why,known}`. Owner 22:50Z: no code-reshaped facial expressions; this seal + ring is the ONLY display of feelings.
+`pcPort` draws `img.kemo` (the seal) on every frame size (tall frame, person card, small `mdH` frames incl. xs/sm strips) (no ring around the frame: owner removed it). Tooltip/alt: "Tâm trạng: Giận (bị ngươi làm nhục)". API `window.kitEmotion(p)` →
+`{k,name,v,why,known}`. Owner 22:50Z: no code-reshaped facial expressions; this seal is the ONLY display of feelings.
 The Emperor's mood is public (as the Hoàng thượng box always showed): his seal follows `S.emp.mood` unless a stronger (≥ 40) feeling is set.
 
 ## 7. Measurement

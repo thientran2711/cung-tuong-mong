@@ -836,7 +836,6 @@ Not done here (other owners): kitRoulette (thân phận, review/kit-2b) and the 
   Keys: vui · binh · buon · gian · so · ghen · lo · dau · muu · an (chưa rõ "?").
 - Place: top-left corner of the photo window, over the frame edge (left 8.5 %, top 17.5 %, width 22 % of the canvas); sm 30 %, xs 38 % so it stays ≥ 11 px.
   z-index 4 (above frame and crest), drop shadow. Giận and Đau khổ pulse softly (off with reduced motion).
-- Ring: when the feeling is known and not Bình thường, the frame picture gets a glow in the emotion colour (`img.kfr[data-emo]` with `--emoc`; the `<span class="kin">` tag is never changed: jk2b mdH looks for it):
-  vui #f2c230 · buon #3f7fd0 · gian #d8322a · so #8a5cc8 · ghen #3fa04a · lo #f08a24 · dau #2e3a8c · muu #1f6f6a.
+- No ring/aura around the frame (owner 11/14 late: removed); the seal alone shows the feeling.
 - Fog: stranger → nothing; known person, no fresh news → grey "?" seal; her own → always.
 - Data only through `window.kitEmotion(p)` → `{k,name,v,why,known}`; tooltip/alt "Tâm trạng: <tên> (<cause>)". Nobody draws another mood icon; no code-reshaped facial expressions (owner 22:50Z): the seal + ring are the only display of feelings.

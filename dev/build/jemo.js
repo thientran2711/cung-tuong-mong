@@ -10,7 +10,6 @@
    Badge: the painted seal img/kit/emo-<k>.webp drawn by pcPort on every frame size (KIT.md 31). Off switch for measuring: window.__emoOff=1.
    ===================================================================================================================== */
 const EMO={vui:"Vui",binh:"Bình thường",buon:"Buồn",gian:"Giận",so:"Sợ",ghen:"Ghen",lo:"Lo âu",dau:"Đau khổ",muu:"Toan tính"};
-const EMO_COL={vui:"#f2c230",binh:"#9cc9a8",buon:"#3f7fd0",gian:"#d8322a",so:"#8a5cc8",ghen:"#3fa04a",lo:"#f08a24",dau:"#2e3a8c",muu:"#1f6f6a"};
 /* default reaction of an event: [emotion, strength]; null = no feeling */
 const EMO_EV={selfUp:["vui",60],selfDown:["buon",55],rivalUp:["ghen",30],friendUp:["vui",20],foeDown:["vui",20],gift:["vui",25],slight:["gian",35],
  kidBorn:["vui",70],kidDie:["dau",95],otherKid:["ghen",25],punished:["so",50],cold:["dau",85],night:["vui",35],neglect:["buon",30],ill:["lo",35],
@@ -174,14 +173,12 @@ function emoBadge(p){const m=window.kitEmotion(p);if(!m)return"";const t=m.known
 (function(){const p0=pcPort;pcPort=function(f){let h=p0.apply(this,arguments);try{if(!emoOn()||!f||!f.__kp||/class="kemo/.test(h))return h;const b=emoBadge(f.__kp);if(!b)return h;
   const i=h.indexOf('<span class="kin">');if(i<0)return h;const j=h.indexOf('<img class="kfr"',i);if(j<0)return h;
   let depth=0,end=-1;const re=/<\/?span\b[^>]*>/g;re.lastIndex=i;let mm;while((mm=re.exec(h))){if(mm[0][1]==="/"){depth--;if(depth===0){end=mm.index;break}}else depth++}
-  if(end<0)return h;let o=h.slice(0,end)+b+h.slice(end);const m=window.kitEmotion(f.__kp);
-  if(m&&m.known&&m.k!=="binh"&&EMO_COL[m.k])o=o.replace(/(<img class="kfr" src="[^"]*")/,`$1 data-emo="${m.k}" style="--emoc:${EMO_COL[m.k]}"`);return o}catch(e){return h}}})();
+  if(end<0)return h;return h.slice(0,end)+b+h.slice(end)}catch(e){return h}}})();
 (function(){const st=document.createElement("style");st.id="kemo-css";st.textContent=`
 .kin>img.kemo,.pcp.kit .kin>img.kemo:not(.kfr):not(.kgem):not(.kemb):not(.kpor),span.md.kfc .kin>img.kemo{position:absolute!important;inset:auto!important;left:8.5%!important;top:17.5%!important;right:auto!important;bottom:auto!important;width:22%!important;height:auto!important;aspect-ratio:1;max-width:none!important;max-height:none!important;object-fit:contain!important;border-radius:50%!important;clip-path:none!important;z-index:4!important;pointer-events:auto;filter:drop-shadow(0 1px 1.5px #000a);animation:none!important;transform:none!important;box-shadow:none!important;opacity:1!important}
 span.md.kfc.sm .kin>img.kemo{width:30%!important;left:5%!important;top:16%!important}
 span.md.kfc.xs .kin>img.kemo{width:38%!important;left:2%!important;top:14%!important}
 .kin>img.kemo.kemo-an{opacity:.85!important}
-.kin>img.kfr[data-emo],span.md.kfc .kin>img.kfr[data-emo]{filter:drop-shadow(0 0 1.5px var(--emoc)) drop-shadow(0 0 4px var(--emoc)) drop-shadow(0 0 7px var(--emoc))!important}
 @media (prefers-reduced-motion:no-preference){.kin>img.kemo.kemo-gian,.kin>img.kemo.kemo-dau{animation:kemoPulse 2.4s ease-in-out infinite!important}}
 @keyframes kemoPulse{0%,100%{filter:drop-shadow(0 1px 1.5px #000a)}50%{filter:drop-shadow(0 0 4px #ffcf8a) drop-shadow(0 1px 1.5px #000a)}}
 `;document.head.appendChild(st)})();
