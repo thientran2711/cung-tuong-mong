@@ -368,7 +368,9 @@ C-m46-tcold huR4EQNvqL coldB(silk)
 C-m47-tcold P3EmiZl42C coldB(silk)
 C-m48-tcold YMLKVd1WeC coldB(silk)
 C-m41-tcold yiCtiAYPW9 coldB-redo(a48 grey temples)
-C-m49-tcold O6fIircynm B28
+C-m49-tcold O6fIircynm B28-bad-grey
 C-m50-tcold JNa86sEOq4 B28
 C-m51-tcold UPmX4jgwny B28
-C-m52-tcold u5nRKaJQLD B28
+C-m52-tcold u5nRKaJQLD B28-bad-spots
+C-m49-tcold jUXVJNkLD0 B28 redo
+C-m52-tcold gOIe42WSXO B28 redo

@@ -11,6 +11,7 @@ for try in 1 2 3 4 5 6; do
   cp $C/cf/*.py dev/figwork/maidCB/ 2>/dev/null
   for f in $C/sheets/C_m*.jpg; do case $(basename $f) in C_m2[7-9]_*|C_m[34][0-9]_*|C_m5[0-2]_*) cp $f dev/figwork/sheets/;; esac; done
   [ -n "$P" ] && python3 $C/addprog.py dev/figwork/PROGRESS_C.md "$P"
+  [ -n "$STATUS" ] && python3 $C/status.py dev/figwork/PROGRESS_C.md "$STATUS"
   python3 $C/merge.py $W || exit 1
   python3 -m json.tool img/FIGURES-servants.json >/dev/null || { echo BADJSON; exit 1; }
   git add img dev/figwork && git commit -q -m "$m
