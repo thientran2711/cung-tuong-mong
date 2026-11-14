@@ -44,6 +44,7 @@
 - OLD images that may carry a mole (feature list said so; edit away when touched): c01, c04, c07, c09, c12, c15, c17, c20, c23 (m0–m4).
   OLD images that may carry a huadian (c03, c11, c19 m0–m4): remove in the same edit as any hair/mole fix. Status of each is logged below.
 - B_b16: c25 m0–m4, c26 m0–m2 (128 lineups total). Clean: dark 48yo hair, no moles, no huadian.
+- B_b17: c26 m3–m4, c27 m0–m4, c28 m0 (136 lineups total). Clean.
 
 ## NEXT (exact)
 - (B_b16 done) c26 m3 ... c32 m4, in order (8 per batch → sheets B_b16.jpg .. B_b20.jpg). Same per-batch steps as below.
