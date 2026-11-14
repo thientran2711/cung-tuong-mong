@@ -291,11 +291,29 @@ N-c29-t6 0eg5kiwTfW v6
 N-c30-t6 lJ8TMqIgv9 v6c (strong colour clause)
 N-c31-t6 1lpzYEnr4r v6c (strong colour clause)
 N-c32-t6 lJ8TM55gv9 v6c (strong colour clause)
-N-c01-t7 4Ru8aMs9Aa v7
-N-c02-t7 gOIVXzsSXO v7
-N-c03-t7 lJ8Tdn7gv9 v7
-N-c04-t7 SytMBcZUb8 v7
-N-c05-t7 LwBcp8hswO v7
-N-c06-t7 lJ8TdmYgv9 v7
-N-c07-t7 u5nN20zQLD v7
-N-c08-t7 rgenV8Extc v7
+N-c01-t7 4Ru8aMs9Aa REJECT v7a: SMALL crown, looked poorer than t6 (ladder)
+N-c02-t7 gOIVXzsSXO REJECT v7a: SMALL crown, looked poorer than t6 (ladder)
+N-c03-t7 lJ8Tdn7gv9 REJECT v7a: SMALL crown, looked poorer than t6 (ladder)
+N-c04-t7 SytMBcZUb8 REJECT v7a: SMALL crown, looked poorer than t6 (ladder)
+N-c05-t7 LwBcp8hswO REJECT v7a: SMALL crown, looked poorer than t6 (ladder)
+N-c06-t7 lJ8TdmYgv9 REJECT v7a: SMALL crown, looked poorer than t6 (ladder)
+N-c07-t7 u5nN20zQLD REJECT v7a: SMALL crown, looked poorer than t6 (ladder)
+N-c08-t7 rgenV8Extc REJECT v7a: SMALL crown, looked poorer than t6 (ladder)
+N-c01-t7 jUXWe13LD0 v7b (LARGE crown + cape)
+N-c02-t7 5jV20qkKxe v7b (LARGE crown + cape)
+N-c03-t7 UPmDm9awny v7b
+N-c04-t7 rgenewMxtc v7b
+N-c05-t7 p8JxJhUehw v7b
+N-c06-t7 XmPsPEfBfo v7b
+N-c07-t7 lJ8T867gv9 v7b
+N-c08-t7 6AHmH09iJO v7b
+N-c09-t7 UPmDmERwny v7b
+N-c10-t7 yiCBC5nPW9 v7b
+N-c11-t7 N2FtFxB6D9 v7b
+N-c12-t7 N2FtFjo6D9 v7b
+N-c13-t7 0eg5SuVTfW v7b
+N-c14-t7 9ZQIFePNYZ v7b
+N-c15-t7 KLMAD3Vkqp v7b
+N-c16-t7 79veaMCJAL v7b
+N-c30-t4 ksDG8OJ16B v6t4 (calm redraw, opaque; coordinator smudge bug)
+N-c25-t4 JNadHzTOq4 v6t4 (calm redraw, opaque; sheer sash)

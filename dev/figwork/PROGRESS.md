@@ -10,7 +10,23 @@
 - LÃNH CUNG prompts added: jobs N-cXX-tcold (spec5.py end: COLDO shared outfit, IDC identity = face/features/hair colour only, cold_pose(g) rotates
   broom / bowl / lamp / hands-folded so the four figures hold different things). figs files fig-consort-cNN-tcold-aAA, tier "cold".
 - DONE: t6 all 32 (c17–c32 this session; c17 c20 c28 c30 c31 c32 with the strong colour clause). Sheet: scratchpad/sheets/tier6.jpg.
-- IN PROGRESS: t7.
+- DONE: t7 c01–c16 (v7b). First t7 try (v7a, "SMALL gold phoenix crown", no cape) looked POORER than t6 -> rejected; spec5 LAD[7] now =
+  jewelled pearl-edged cloud-collar cape + jade-gold belt + LARGE gold phoenix crown with spreading wings; LAD[8] = gold-and-pearl cape +
+  "the GRANDEST headdress of all: FULL tall gold phoenix crown with nine phoenixes". (t8 not drawn yet — check one t8 against t7 first.)
+  Sheets: scratchpad/sheets/tier7_partial.jpg (c01–c16), ladder_c01.jpg (t1–t7; t4 still the old motion lineup).
+  propchk on t7: NECK 4.9–5.1 everywhere = the taller crown (bodies are fine by eye); WIDE 1.74–1.98 mostly on a51 = the floor train
+  spreading (t7 spec), checked by eye: tall and slim, not squat. OPEN QUESTION for owner review: a51 hair at t7 is greyer than the
+  "few faint silver strands" rule on c03, c13 (and a bit c05/c14) — redo those a51 if the owner flags it; for new prompts consider adding
+  "dark hair with only two or three thin silver strands" to the a51 wording.
+- COORDINATOR BUGS (fixed): c30-t4-a18 grey bg-removal smudge + sheer floating sash -> c30 t4 REDRAWN calm (opaque silk clause:
+  "all fabrics opaque silk, NO sheer see-through gauze, NO floating stole"); c25-t4 had the same sheer floating sash -> REDRAWN calm too
+  (both pass propchk; sheet scratchpad/sheets/tier4_calm_partial.jpg). c04-t4-a18, c04-t3-a51, c29-t1-a18 (sheer sleeves letting the
+  background through) fixed in place with new fixalpha.py (inside the hole-filled silhouette, >3 px from the edge, partial alpha is
+  composited over parchment and made opaque; por re-cut). Do NOT use fixalpha on figures with big floating sheer sashes (it fills the
+  loops with cream) — redraw those instead. Add the opaque clause to every remaining t4 calm redraw and to t1–t3 redraws.
+- NEXT (in order): t7 c17–c32 (`python3 cv3.py 7 c17 ..`, prompt = pj.py N-cXX-t7), then t8 all 32, then tcold all 32 (pj.py N-cXX-tcold),
+  then t4 calm redraw of c01 c07 c19 c20–c24 c26–c29 c31 c32 (c25 c30 done) + eye-check c04/c16 t4 a18, then t1–t3 redraw (pin new t1 in
+  idfix.json only after side-by-side with the old one). Gen ids: sheets5.txt; bg ids: sheets4_bg.txt.
 
 ## CURRENT STATE (art worker #3, newest first — read this before anything below)
 - WORKTREE/PUBLISH: work copy = scratchpad/figwork (scripts write figures into scratchpad/wt-art3/img = branch art3, NOT the shared
