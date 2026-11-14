@@ -2,7 +2,7 @@
 // New life -> "Ở nhà chờ tuyển tú" (origin tt) -> screenshots of every tab, then plays 8 weeks by clicking cards / options;
 // reports page errors, horizontal overflow, truncated card titles.
 const {chromium}=require('playwright');const path=require('path');const fs=require('fs');
-const ROOT=path.resolve(__dirname,'../../..');const GAME='http://game.local/zz-test.html';
+const ROOT=path.resolve(__dirname,'../../..');const GAME='http://game.local/'+(process.env.GF||'zz-test.html');
 const MT={html:'text/html',js:'text/javascript',json:'application/json',webp:'image/webp',png:'image/png',jpg:'image/jpeg',mp3:'audio/mpeg',ogg:'audio/ogg',css:'text/css',svg:'image/svg+xml'};
 async function serve(c){await c.route('http://game.local/**',r=>{const u=decodeURIComponent(new URL(r.request().url()).pathname);const f=path.join(ROOT,u);if(!f.startsWith(ROOT)||!fs.existsSync(f)||fs.statSync(f).isDirectory())return r.fulfill({status:404,body:''});r.fulfill({status:200,body:fs.readFileSync(f),contentType:MT[f.split('.').pop()]||'application/octet-stream'})})}
 const OUT=process.argv[2]||'.';const sizes=[];for(let i=3;i+2<process.argv.length;i+=3)sizes.push(process.argv.slice(i,i+3).map(Number));if(!sizes.length)sizes.push([686,880,2.2],[1180,820,2]);

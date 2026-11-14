@@ -1,7 +1,7 @@
 // Outside route (jkc) screenshot / probe: node dev/test/outside/shot.js <w> <h> <dpr> <out.png> [js evaluated after a new game] [js2 after]
 // Needs zz-test.html at the repo root (dev/index.html with a <meta charset> wrapper; not committed).
 const {chromium}=require('playwright');const path=require('path');const [,,W,H,D,OUT,JS,JS2]=process.argv;
-const ROOT=path.resolve(__dirname,'../../..');const GAME='http://game.local/zz-test.html';const fs=require('fs');
+const ROOT=path.resolve(__dirname,'../../..');const GAME='http://game.local/'+(process.env.GF||'zz-test.html');const fs=require('fs');
 const MT={html:'text/html',js:'text/javascript',json:'application/json',webp:'image/webp',png:'image/png',jpg:'image/jpeg',mp3:'audio/mpeg',ogg:'audio/ogg',css:'text/css',svg:'image/svg+xml'};
 async function serve(c){await c.route('http://game.local/**',r=>{const u=decodeURIComponent(new URL(r.request().url()).pathname);const f=path.join(ROOT,u);if(!f.startsWith(ROOT)||!fs.existsSync(f)||fs.statSync(f).isDirectory())return r.fulfill({status:404,body:''});r.fulfill({status:200,body:fs.readFileSync(f),contentType:MT[f.split('.').pop()]||'application/octet-stream'})})}
 module.exports={serve,GAME};
