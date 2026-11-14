@@ -504,3 +504,9 @@ for the figure. Phone portrait: stage 40 % of the screen on scene tabs, 24 % on 
 ### 26.5 "COVERS NO FIGURE" = the painted silhouette
 `kitFigRects()` (j79, replaced in jk2b) returns per figure 24 horizontal bands with the opaque extent of the art (alpha mask read once per picture),
 so stage blocks may stand beside a head or between figures, never over the painted body. Used by #kstat, #kcourt and every later stage overlay.
+### 26.6 OPTION MODE "cost" (hidden outcomes for EVENT choices)
+- Event choices (weekly events j68, Mệnh truyện chapters j67, side events, dilemmas) show ONLY the cost: the Tốn row with Sức / khắc / Bạc
+  (`.ka.khideout`); no Được / Mất / Kèm / Ghi chú rows and no odds meter. No cost → "Tốn: không". Conditions (Cần row) stay.
+- The result card (section 7) is unchanged and shows the true numbers after the choice.
+- Use (data only): `Q.push({…, hideOut:true, opts:[…]})` / `kitModal({…, hideOut:true})` hides every option; `{n, fx, x, hideOut:true}` one option;
+  any other priced button: `data-khide="1"`. Normal act cards, person-card acts and shop buttons never use it.

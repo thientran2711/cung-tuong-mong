@@ -156,3 +156,20 @@ function kitMask(src){if(KIT_MASK[src])return KIT_MASK[src].b?KIT_MASK[src]:null
 kitFigRects=function(){const st=$("stage");if(!st)return[];const out=[];st.querySelectorAll("#mefig, #tokens .tok img.figimg, #tokens .tok:not(.fig) .md").forEach(e=>{if(!e.offsetParent&&e.id!=="mefig")return;const r=e.getBoundingClientRect();if(r.width<8||r.height<8)return;
   const m=e.tagName==="IMG"?kitMask(e.currentSrc||e.src):null;if(!m){out.push({left:r.left,right:r.right,top:r.top,bottom:r.bottom});return}
   const N=m.b.length,bh=r.height/N;m.b.forEach((x,i)=>{if(x)out.push({left:r.left+r.width*x[0]-4,right:r.left+r.width*x[1]+4,top:r.top+i*bh,bottom:r.top+(i+1)*bh})})});return out};
+
+/* ---------- 6. OPTION MODE "cost" — hidden outcomes for EVENT choices (owner 11/14) ----------
+   Weekly events (j68), Mệnh truyện chapters (j67), side events and dilemmas: the option shows ONLY what it costs (Sức, khắc, Bạc) — no Được/Mất/Kèm,
+   no odds word, no notes. The result card afterwards still shows the true numbers (resultShow is untouched). Normal act cards keep everything.
+   Use (data only): a Q / kitModal item with `hideOut:true` (every option) or an option with `hideOut:true`; any priced button may also carry
+   `data-khide="1"`. An option with no such cost reads "Tốn: không". ---------- */
+const KIT_COSTRE=/khắc|\bSức\b|\bBạc\b|\bbạc\b/i;
+function kitHideOut(b){try{if(!b||!b.classList.contains("ka")||b.dataset.khid==="1")return;b.dataset.khid="1";b.classList.add("khideout");
+ const od=b.querySelector(":scope > .kat > .kodds");if(od)od.remove();b.querySelectorAll(".kb .kr").forEach(r=>{if(!r.classList.contains("kr-ton")&&!r.classList.contains("kr-why"))r.remove()});
+ const kb=b.querySelector(".kb");let ton=b.querySelector(".kr-ton");if(ton){const v=ton.querySelector(".krv");[...v.children].forEach(e=>{if(e.classList.contains("ksep"))return;if(!KIT_COSTRE.test(e.textContent))e.remove()});
+  [...v.children].forEach((e,i,a)=>{if(e.classList.contains("ksep")&&(!e.previousElementSibling||e.previousElementSibling.classList.contains("ksep")||!e.nextElementSibling))e.remove()});
+  if(!v.querySelector(".ef"))v.innerHTML=`<span class="ef n">không</span>`}
+ else if(kb){kb.insertAdjacentHTML("beforeend",`<span class="kr kr-ton"><span class="krl">Tốn</span><span class="krv"><span class="ef n">không</span></span></span>`)}
+ else b.insertAdjacentHTML("beforeend",`<small class="kb"><span class="kr kr-ton"><span class="krl">Tốn</span><span class="krv"><span class="ef n">không</span></span></span></small>`)}catch(e){console.error("kitHideOut",e)}}
+(function(){const n0=kaNorm1;kaNorm1=function(b){const r=n0.apply(this,arguments);try{if(b&&b.dataset&&(b.dataset.khide==="1"||b.closest("[data-khide-all]")))kitHideOut(b)}catch(e){}return r}})();
+(function(){const s0=showModal;showModal=function(){const m=Q[0];const r=s0.apply(this,arguments);try{if(m&&m.opts&&(m.hideOut||m.opts.some(o=>o&&o.hideOut))){
+  document.querySelectorAll("#modal .opts > button[data-m], #modal .opts button.opt").forEach(b=>{const o=m.opts[+b.dataset.m];if(m.hideOut||(o&&o.hideOut)){b.dataset.khide="1";if(b.classList.contains("ka"))kitHideOut(b)}})}}catch(e){console.error("hideOut",e)}return r}})();
