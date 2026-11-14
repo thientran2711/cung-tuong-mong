@@ -86,6 +86,7 @@ Mã không có tiền tố được dò qua mọi tiền tố; mã lạ rơi v�
 - Magnific, model `gpt-2-6`, 3:4, 1k (40 tín dụng/tranh), thư mục ba4aecfe-efce-47e2-b53f-30d292091886, đúng 1 style ref:
   sáng = cảnh Ngự hoa viên (cplQijT0eP), tối = tẩm cung đêm (iGq8UJy3uK), giống tranh thẻ việc.
 - Khung lời: `dev/figwork/events/prompt.py <khóa>`. Không mặt người: người chỉ ở xa, bóng dáng hoặc sau lưng; nhóm mưu hại/tang/lãnh cung theo khuôn tối (70% khung hình trong bóng, một nguồn sáng).
+- **Bảng màu (chủ game 15/11, bắt buộc):** tranh sự kiện phải cùng tông với tranh xuất thân trên thẻ thân phận (`img/origin-wide-*`, `img/bg-origin-*`): màu dịu, mềm, ít bão hòa, ánh sáng mờ sương kiểu tranh vẽ, tương phản nhẹ, bề mặt mờ (không sàn bóng gương). Không màu rực/chói (vàng kim, đỏ son bão hòa, nến sáng lóa) — "màu càng rực nhìn càng AI". Khi vẽ: đưa 1–2 tranh xuất thân làm tham chiếu kiểu, ghi rõ trong lời "desaturate gold and red strongly, muted, hazy, matte"; tự so cạnh một tranh xuất thân trước khi nhận (độ bão hòa HSV trung bình nên ≤ ~100/255, tranh xuất thân 64–97). Mẫu: `img/ev-tien-de-bang-ha.webp` (bản 15/11).
 - Thêm nhóm hay biến thể: sửa `ev_data.py` (cat/m), vẽ, ghi `khóa id` vào `gens.txt`, chạy `fetch.py <khóa>` rồi `make_json.py`.
 
 ## Mệnh truyện (j67): img/st-<tuyến>-<khóa>.webp

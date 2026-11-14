@@ -13,3 +13,4 @@ Test: node dev/test/succession.js <url> 686x880@2.2 <outdir>  (serve repo root o
 - End card label "Chết vì" (j79/j52 end card, not this module) reads oddly for living endings — kit owner.
 ## Status: SẴN SÀNG KIỂM
 - (20:30Z) Pilot art: img/ev-tien-de-bang-ha.webp (gpt-2-6 edit of duong-tam-dien-thu-chieu, Magnific creation 'Tiên đế băng hà' + creative upscale 2x); high-res dev/review/succession2/ev-tien-de-bang-ha-2688.jpg. Wired as m.sceneArt → wide band via kitSceneArt (drawn only once the kit piece from review/identity-card is on the branch).
+- (21:10Z) Owner 00:25Z: event art too saturated → REDONE muted (gpt-2-6 edit of the old picture with origin-wide-td + origin-wide-nc as style refs, 2 candidates, picked the one with a clear jade seal; ultra-sublime 2x upscale). Avg HSV saturation 156 → 78 (origin pictures 64–97). img/ev-tien-de-bang-ha.webp 1920x1074 + dev/review/succession2/ev-tien-de-bang-ha-2688.jpg. Rule added to dev/art/EVENT_ART.md (Bảng màu).
