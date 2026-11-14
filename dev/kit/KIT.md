@@ -583,7 +583,7 @@ kitBook({head:"Sổ tuần · Tháng tư · thượng tuần · năm thứ nhấ
 - Layout: two-page spread when the viewport is ≥ 900 px wide and landscape (iPad 1180x820, 1366x1024), the closed cover centred; one page at a
   time otherwise (Fold 755x1000, phones). Person page: portrait column `--por` beside name/chips/facts; under 440 px page width facts run full
   width below the portrait. Font scales with the page (`--fs` 13–17 px).
-- Turning: drag/swipe follows the finger with a 3D turn (`perspective() rotateY`, shading on both faces, cast shadow on the page beneath);
+- Turning (page-curl kit, §32): drag/swipe follows the finger with a paper CURL (`kitCurl`: the sheet bends in strips, both faces shaded, moving cast shadow; 560 ms);
   release past ~40 % or a flick completes, else it falls back. Tap the right/left page edge, the ‹ › buttons, ←/→/PageUp/PageDown, Esc = Lui.
   `prefers-reduced-motion` (or Cảnh động off): cross-fade instead of the turn. Soft paper sound with the Tiếng động slider.
 - Art: `img/book-cover.webp` (indigo thread-bound cover, title label strip: the title is written in it, word per line), `book-right.webp`
@@ -957,6 +957,69 @@ A dialog may carry `headArt:"img/…webp"` or `{src,label}` → wide kitSceneArt
   per category (square / round / diamond …), inner hairline style per category, label plaque at the bottom; never a tassel.
 - Top bar ≥ 1000 px: the four Tư chất cells are drawn like Bạc / Sức / Sủng / Danh (icon + small label above, number below in the same font,
   size and weight, read from the live stat cell), one row, equal gaps, shared baseline.
+
+## 32. BOOK UI · kitCurl (page curl) + kitBookSpread (two-page book) — `dev/build/jbook.js` (before j87) — KIT READY: page-curl
+Owner 11/14 (00:15Z, 00:45Z approval + later change): the UI is an open book. **iPad landscape = two-page spread**: LEFT = picture page
+(illustration only: the big full-body figure / scene that goes with the right page; it never takes info away from the right page),
+RIGHT = the text page exactly as already approved (Hậu cung card with its own frame, chips, tabs, acts…). **Phone / portrait = the RIGHT
+page only** (no illustration page on phones, accepted loss; no "Mở trang" button). **A tab switch is a page turn on both devices**, and
+every page turn CURLS like real paper. Mockups (not wired yet; the fold-layout kit owner wires it): `dev/shots/book/`.
+
+### 32.1 kitCurl — the one page-turn engine (week book, tab switch, any future book)
+```js
+const c=kitCurl({host, front, back, w, h, x, y, dir:1, shadeL:true, shadeR:true, po, persp, n});  // spine at (x,y) of host, sheet w×h to its right
+c.set(p, dir);      // p 0 = flat on the right … 1 = flat on the left; dir 1 forward (right→left), -1 back
+kitCurlRun(c, from, to, ms, done, ease);   // rAF tween (default ease in-out cubic); returns cancel()
+c.destroy();
+kitCurlOff();       // true when "Cảnh động" is off (OPT.fxon=false) or prefers-reduced-motion → use kitCurlFade(el, mid, done) (cross-fade)
+```
+- front/back: an Element (copied once, then per strip), HTML, or null (plain paper). Copies drop ids, sticky → relative, keep scroll offsets.
+- Look: the sheet is split into n vertical strips (10–18, ~34 px) chained with `rotateY` (preserve-3d), so it BENDS: the tangent angle runs
+  from the spine to the edge (`φ + Δ·(u^1.4 − m)`, chord φ = 180·p, bend Δ = 92°·sin(πp) leading in the turn direction). Each strip face
+  has a gradient overlay from a light model (soft diffuse from upper-left + a moving sheen); the back side is visible as it lifts; a cast
+  shadow moves on the page being uncovered (right) and the page it lands on (left, spread only). Perspective 6×w, origin at the spine
+  (spread) or page centre (single page). Duration 560 ms (week book) / 600 ms (spread tab switch).
+- Only transform + background of small strips change per frame (no layout); no canvas/WebGL needed.
+
+### 32.2 kitBookSpread — the book container
+```js
+const bs=kitBookSpread(host,{pic, text, double, mode:"auto"});   // host = the area between the top bar and the tab bar
+bs.set({pic, text, double});              // replace content (no turn). text: an Element is MOVED in (stays live, e.g. #panel)
+bs.swap(()=>{ /* switch tab: the game re-renders #panel */ bs.set({pic:kitBookPic({...})}) }, {dir:1});  // tab switch = curl
+bs.mode   // "spread" (host ≥ 900 px wide and landscape, same rule as kitBook) | "single"
+kitBookSpread.wantsPic(host)              // false on phones: skip building the picture page there
+```
+- Spread: two `.kpaper` pages, outer page edges (stacked leaves), soft gutter shadow + crease, cover board behind. Forward swap: the old right
+  page curls over to the left, its back already showing the NEW left picture; the new right page lies underneath. dir −1: the new right page
+  curls back in from the left over the old spread.
+- Single: only the text page (`.kbs-r`). Forward swap: the old page curls away to the left revealing the new one; dir −1: the new page curls
+  back in. Swipes are left to the caller (tab bar / gestures of the live layout).
+- `double`: an Element spanning BOTH pages of a spread (Dư đồ: the map is one double-page illustration across the gutter; the gutter shadow
+  lies over it). On one page it goes on the text page.
+- Paper skin `.kpaper` (warm paper, faint fibres, edge tint) is reusable on its own for any page-like surface.
+
+### 32.3 kitBookPic — the picture page (illustration only)
+`kitBookPic({scene, ax, feet, figs:[{src,h,x,dim}], cap, slots:[{label,n,img}], plate})` → HTML: a printed plate inside a thin red double
+rule: the room picture cover-cropped on its floor anchor (`ax` = KIT_FANCHOR x, 31.4), full-body figures (`kitFigOf(p)`) standing on the
+`feet` line, `h` = height fraction; `dim` = anonymous silhouettes (`img/kit/unknown-fig-*.webp`); `cap` = small caption plaque (place name /
+"Thử y phục" — a caption, never the right page's facts); `slots` = try-on slots beside her figure (Tư trang).
+
+### 32.4 Page mapping (owner-approved; iPad left page · right page)
+| tab | LEFT (picture, iPad only) | RIGHT (text, iPad + phone) |
+|---|---|---|
+| Hành sự / home | her room with her figure | act categories + acts |
+| Dư đồ | the map spans BOTH pages (`double`); a tapped place → left = place scene with silhouettes | map · place info + acts |
+| Hậu cung › Phi tần | the selected consort full-body in her palace (caption = palace) | picker strip + card + action tabs + acts (as approved) |
+| Giao tình / Phe phái | relation web / faction emblems picture | lists |
+| Cung nhân, Hoàng tự, Hoàng thượng / Thái hậu cards | the selected person full-body in their place | card + chips + acts |
+| Tư trang | her full body in the current outfit + Trâm / Y phục / Ngọc bội slots | chest grid |
+| Tài nghệ | the art picture (`img/art-*.webp`) with her practising | levels + lessons |
+| Mệnh truyện / events / Sổ tuần | chapter or scene picture / full-body figure | text + choices |
+| Sổ ghi | calendar | entries |
+
+### 32.5 Tests · shots
+`node dev/test/page-curl.js <url> WxH@dpr <out>` (week book: frozen mid-curl frames, back turn, finger drag, reduced motion = fade, no
+page errors) · `node dev/test/book-mock.js <url> WxH@dpr <out> <tag>` (mockups). Shots: `dev/shots/book/`.
 
 ## OWNER POINTS 14/11 (fold-layout) — checklist (✔ = verified in screenshots dev/shots/fold-layout/ at 686x880@2.2 + 1180x820@2)
 | time | point | component | status |
