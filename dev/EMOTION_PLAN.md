@@ -62,13 +62,13 @@ All effects scale by v/100.
 | emotion | harm acts | kind acts (help, visit, warn, gift, ally…) | other | odds of own acts | tablet chance |
 |---|---|---|---|---|---|
 | Vui | ×.75 | ×1.5 | idle ×.9 | +1 | – |
-| Giận | ×1.6 (through the brake) | ×.6 | provoke/humiliate ×1.3, Emperor punish ×1.4 | −2 | – |
-| Buồn | ×.75 | ×.75, visit ×.5 | idle ×1.7 (withdraws) | −1 | ×1.05 with a nhân từ Emperor |
-| Sợ | ×.6 | ×.9 | apologise ×1.8, idle ×1.3 | −2 | – |
-| Ghen | ×1.3 (brake); steal/block ×1.6, trip/rumor ×1.4 | ×.8 | | −1 | – |
-| Lo âu | ×.9 | | spy/check ×1.6 | −1 | – |
-| Đau khổ | ×.7 | ×.6 | idle ×2 | −2 | ×1.05 with a nhân từ Emperor |
-| Toan tính | frame/plant/bribe/ally ×1.5, feign ×1.6, provoke ×.7 | | | +1 | |
+| Giận | ×1.6 (through the brake) | ×.6 | provoke/humiliate ×1.3, Emperor punish ×1.4 | −1 | – |
+| Buồn | ×.75 | ×.8, visit ×.6 | idle ×1.3 (withdraws) | 0 | ×1.05 with a nhân từ Emperor |
+| Sợ | ×.6 | ×.9 | apologise ×1.8, idle ×1.15 | −1 | – |
+| Ghen | ×1.3 (brake); steal/block ×1.6, trip/rumor ×1.4 | ×.8 | | 0 | – |
+| Lo âu | ×.9 | | spy/check ×1.6 | 0 | – |
+| Đau khổ | ×.7 | ×.7 | idle ×1.5 | −1 | ×1.05 with a nhân từ Emperor |
+| Toan tính | frame/plant/bribe/ally ×1.5, feign ×1.6, provoke ×.7 | | | 0 | |
 
 - **Đức + personality brake** (EMO_BRAKE). Effective Đức = Đức + trait offset (Hiền lành +15, Nhu mì +8, Trọng nghĩa +8, Hiếu thảo +5,
   Hiểm độc −10, Tham vọng −5, Thù dai −5). Share `f` of the emotional harm boost that becomes harm:
@@ -83,7 +83,7 @@ All effects scale by v/100.
 - **Motive gate (j95 `motiveOK`, wrapped lazily when the module is present)**: harm with "động cơ yếu" passes only when the feeling is aimed at that person,
   v ≥ 50 and f ≥ 1; the recorded reason reads "vì đang giận / ghen với / toan tính hạ <tên> (<cause>)". Passing harm gets the same phrase appended.
   Sợ/Đau khổ ≥ 60 block harm ("không còn lòng dạ nào"); Vui ≥ 60 opens friendly acts; Buồn/Đau khổ ≥ 60 refuse half of friendly calls ("muốn ở một mình").
-- **Odds**: `odA` / `odT` (every act of every person, incl. her `od()`) get the odds column above (at most ±2 points).
+- **Odds**: `odA` / `odT` (every act of every person, incl. her `od()`) get the odds column above (at most ±1 point).
 - **Emperor's choice of whom to visit** (`nightCh`) follows HIS feelings (v3): the person he is angry with ×(1 − .5·v/100); when he is sad/grieving/worried,
   Hiền lành and Nhu mì consorts ×1.08; a nhân từ Emperor comforts a sad/grieving consort ×1.05. Her own mood no longer moves the tablet (v1/v2 measured a
   happy → more nights → happier loop).
@@ -109,7 +109,12 @@ Bot `dev/measure/run5b.sh` (sensible bot, 9 origins), emotion off (`window.__emo
 | OFF (baseline) | 61 | 31 % | 36 % | 18 | 138 | 108 |
 | ON v1 (odds ±4, tablet ×1.15, danger +12) | 60 | 43 % | 48 % | 19 | 137 | 110 |
 | ON v2 (odds ±2, tablet ×1.06, danger +8, Emperor fondness ×1.08) | 30 | 50 % | 33 % | 9 | 125 | 97 |
-| ON v3 (no tablet change from her own mood, no fondness, vui +1) | see PROGRESS_emotion.md | | | | | |
+| ON v3 (no tablet change from her own mood, no fondness, vui +1) | 30 | 43 % | 40 % | 6 | 149 | 106 |
+| ON v4 = shipped (odds ±1: vui +1, giận/sợ/đau khổ −1; milder withdrawal) | 30 | 27 % | 57 % | 12 | 128 | 107 |
+| ON v3+v4 pooled (nearly the same rules) | 60 | 35 % | 48 % | 18 | 138 | 106 |
 Harm frequency does not spiral (NPC harm acts per year equal or lower with emotions on). With n = 30–60 a share has a standard error of
-6–9 points, so ±3 cannot be shown by these runs alone; the early-death rate of v2 is inside ±3 of the baseline, Hoàng hậu was not (v1/v2 too high) → v3.
+6–9 points, so ±3 cannot be shown by these runs alone; the early-death rate of v2 is inside ±3 of the baseline, Hoàng hậu was not (v1/v2 too high) → v3, v4.
+v4 (shipped numbers in section 4): NPC harm per year is the same as with emotions off (pooled 138 vs 138), so emotions do not make the palace spiral.
+The swing between two 30-life runs of nearly the same rules (v3 43 %/40 %, v4 27 %/57 %) shows the noise: proving ±3 needs ~150 lives per arm
+(≈ 4–5 h on this machine). Open: run 150 + 150 (off vs v4) when the machine is free, and only then tune the remaining knobs (EMO_OD, EMO_W idle, danger cap).
 Analysis: `python3 dev/measure/anemo.py "OFF=<dir>/off*_*.json" "ON=<dir>/onD_*.json"`.
