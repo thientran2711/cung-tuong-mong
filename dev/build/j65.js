@@ -19,9 +19,8 @@
    - stated deltas are the real ones: "Lòng cung nữ +6" at 97 becomes "+3 (đã đầy 100)" in log, pop card, toast, week card
    - talk in a pop card: one statement in the card (no repeat line, no toast while the card shows it); card numbers read live
    - tooltips equal to the visible (uncut) text dropped; consort roster: one "thiên điện riêng" group
-   j65b: named people carry rank/role in narrative text (logs, modals, week card); news/event modals show the people named
-   (main subject large, others small beside their sentence); week card: faces beside their lines, no lone choice labels, own act
-   results folded into the week totals (incl. Lòng cung nữ). j65c: Việc list drops acts that live in their own tab. */
+   j65b: week summary facts de-duplicated (no lone choice labels, own act results folded into the week totals incl. Lòng cung nữ);
+   names/faces/rank colours are NOT drawn here: the kit (j79 kitFacts/kitName, kpBuild, dawn) draws them; Nhật ký rows use kpPeopleIn. j65c: Việc list drops acts that live in their own tab. */
 (function(){
 const T=s=>String(s==null?"":s).replace(/<[^>]+>/g,"").replace(/\s+/g," ").trim();
 const HIDE=(e,on)=>{if(on===false)e.style.removeProperty("display");else e.style.setProperty("display","none","important")};
@@ -188,41 +187,9 @@ document.addEventListener("click",()=>setTimeout(nrDOM,0));
 /* ===== j65b (owner 11/14, later screenshots) ===== */
 (function(){
 const T=s=>String(s==null?"":s).replace(/<[^>]+>/g,"").replace(/\s+/g," ").trim();
-const ESC=s=>s.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
-/* --- 1. a named person carries her rank/role: "Quý nhân Lục Cẩm Tú", "Đại cung nữ Xuân Hạnh" (rank word in the rank colour) --- */
-function titles(){const t=new Set(["Hoàng hậu","Hoàng quý phi","Thái hậu","Hoàng thượng","Hoàng tử","Công chúa","Thái tử","cung nữ","thái giám","Tổng quản","Chưởng sự","Thái phi","phi tần","nàng","Phế phi"]);
- try{RANKS.forEach(r=>t.add(r.n))}catch(e){}try{[].concat(SRK.maid,SRK.eunuch).forEach(x=>t.add(x))}catch(e){}return [...t]}
-function people(){const L=[];try{for(const v of rivals){if(!v||!v.name||v.name.split(" ").length<2)continue;const r=rkOf(v);L.push([v.name,v.out&&!v.alive?rkName(v):rkName(v),RCOL[Math.min(7,r)]||RCOL[0]])}}catch(e){}
- try{for(const s of (S.staff||[]).concat(S.maid&&!(S.staff||[]).includes(S.maid)?[S.maid]:[])){if(!s||!s.name)continue;L.push([s.name,srkName(s),"#8a6a4a"])}}catch(e){}
- return L.sort((a,b)=>b[0].length-a[0].length)}
-let TT=null;
-function titleize(h){if(!h||typeof S==="undefined"||!S)return h;const P=people();if(!P.length)return h;TT=TT||titles();
- const parts=String(h).split(/(<[^>]+>)/);let plainSoFar="";const allPlain=T(h);
- for(let i=0;i<parts.length;i++){let s=parts[i];if(!s||s[0]==="<")continue;
-  for(const [nm,lab,col] of P){if(!s.includes(nm))continue;
-   s=s.replace(new RegExp(`(^|[^\\p{L}\\d])(${ESC(nm)})(?![\\p{L}\\d])`,"gu"),(m,pre,n,off,str)=>{const before=(plainSoFar+str.slice(0,off)+pre).replace(/\s+$/,"");
-     if(TT.some(t=>before.toLowerCase().endsWith(t.toLowerCase()))||/(của|nhà|họ)$/.test(before)&&false)return m;
-     /* same sentence already says the rank ("… phong Thường tại", "giáng xuống Đáp ứng") */
-     const rest=str.slice(off+m.length);const sent=rest.split(/[.!?]/)[0];if(sent.includes(lab))return m;
-     if(before.endsWith(lab))return m;
-     return `${pre}<span class="nrk" style="color:color-mix(in srgb,${col} 55%,#3a2410)">${lab}</span> ${n}`});}
-  parts[i]=s;plainSoFar+=s.replace(/<[^>]+>/g,"")}
- return parts.join("")}
-window.nrTitleize=titleize;
-try{const l0=log;log=function(h){try{h=titleize(h)}catch(e){}return l0.call(this,h)}}catch(e){}
-/* --- 2. event / news modals about people show those people --- */
-function namedIn(txt){const out=[];try{for(const v of rivals){if(v&&v.name&&txt.includes(v.name))out.push([txt.indexOf(v.name),v,pv(v)])}}catch(e){}
- try{if(/Hoàng thượng/.test(txt))out.push([txt.indexOf("Hoàng thượng"),"emp",pEmp()])}catch(e){}
- return out.sort((a,b)=>a[0]-b[0])}
-try{const sm0=showModal;showModal=function(){try{const m=Q[0];if(m&&!m.__nr){m.__nr=1;
-  if(typeof m.h==="string")m.h=titleize(m.h);
-  if(!m.who&&!m.faces&&!/pcm/.test(m.cls||"")&&typeof m.h==="string"&&!m.nl){const N=namedIn(T(m.h));
-   if(N.length){const main=N[0];m.who=main[2];
-    /* the others: a small face beside their own sentence */
-    const others=N.slice(1).filter(x=>x[1]!==main[1]);
-    if(others.length)m.h=m.h.replace(/<p>([^<]*(?:<(?!\/?p[ >])[^>]*>[^<]*)*)<\/p>/g,(pm,inner)=>{const sents=inner.split(/(?<=[.!?])\s+/);if(sents.length<2&&!others.some(o=>inner.includes(o[1].name||"Hoàng thượng")))return pm;
-      return sents.map(sx=>{const o=others.find(o=>T(sx).includes(o[1]==="emp"?"Hoàng thượng":o[1].name));return o?`<div class="rrow2">${mdH(o[2],"sm")}<div>${sx}</div></div>`:`<p>${sx}</p>`}).join("")})}}}}catch(e){console.error(e)}
-  return sm0.apply(this,arguments)}}catch(e){}
+/* --- 1+2. names and faces: drawn by the kit (j79). Panels: kpBuild/kitFacts put the face beside each fact and the first mention
+   as rank title + name in rank colour (kitName). Nhật ký rows use the same kit function at render time (stored log text stays plain). --- */
+function kitNames(h){try{if(typeof kpPeopleIn!=="function"||typeof kpPeople!=="function"||!h)return h;return kpPeopleIn(h,kpPeople())[0]}catch(e){return h}}
 /* --- 3. week card: true deltas, no leftover choice labels, each fact once, faces beside their lines --- */
 const LONE=/^[^\s.·:]+(?: [^\s.·:]+)?\.$/;          /* "Thôi." — a choice label with nothing after it */
 const ACTRES=/^[^.]{1,60}\.(?: (?:Thành|Hỏng)\.)?\s*((?:[A-ZĐÀ-Ỹ][^·.+\-\d]*? (?:[+-]\d+(?: \((?:đã đầy|chạm đáy) -?\d+\))?|đã đầy -?\d+|chạm đáy -?\d+)\s*(?:·\s*)?)+)$/;
@@ -236,15 +203,9 @@ try{const wk0=wkSummary;wkSummary=function(){const s=S.wkSnap;const r=wk0.apply(
   const oth=S.logs.slice(0,n).map(plain).filter(x=>x&&!/^Xin xăm|^Gieo lại|^Đến /.test(x)&&!used.has(x)&&!ACTRES.test(T(x))).filter(ok).slice(0,3);
   if(oth.length)r.groups.push(["Chuyện khác",oth]);r.groups=r.groups.filter(g=>g[1].length);
   window.__nrWk=r}}catch(e){console.error(e)}return r}}catch(e){}
-try{const dw0=dawn;dawn=function(){const r=dw0.apply(this,arguments);try{const sum=window.__nrWk;const card=document.querySelector("#dawn .dcard");if(sum&&card){
-  card.querySelectorAll(":scope > h5, :scope > h5 ~ p").forEach(e=>e.remove());const old=card.querySelector(":scope > .past");if(old&&/yên ả/.test(old.textContent)&&sum.groups.length)old.remove();
-  const html=sum.groups.map(([h,L])=>`<h5>${h}</h5>`+L.map(x=>{const rows=[];for(const sx of String(x).split(/(?<=[.!?])\s+/)){const N=namedIn(T(sx));const t=titleize(sx);
-     if(N.length)rows.push([N[0][2],[t]]);else if(rows.length)rows[rows.length-1][1].push(t);else rows.push([null,[t]])}
-    return rows.map(([f,ts])=>f?`<div class="rrow2">${mdH(f,"")}<div>${ts.join(" ")}</div></div>`:`<p>${ts.join(" ")}</p>`).join("")}).join("")).join("");
-  const anchor=card.querySelector(":scope > .ddelta");const extra=[...card.children].filter(e=>e!==anchor&&e.tagName==="P"&&/Được thăng|Bị giáng|Thêm \d+ con/.test(e.textContent));const after=extra.length?extra[extra.length-1]:anchor;
-  if(html)after.insertAdjacentHTML("afterend",html)}}catch(e){console.error(e)}return r}}catch(e){}
+/* week card markup: j79 dawn() draws wkSummary() (groups above) through kitFacts; no markup here */
 /* Nhật ký: no lone choice labels */
-const rp0=renderPanel;renderPanel=function(){const r=rp0.apply(this,arguments);try{const P=document.getElementById("panel");if(P&&P.dataset.tab==="log")P.querySelectorAll(".logs > div:not([data-nrh])").forEach(d=>{if(LONE.test(T(d.textContent))){d.remove();return}const h=d.innerHTML,t=titleize(h);if(t!==h)d.innerHTML=t})}catch(e){}return r};
+const rp0=renderPanel;renderPanel=function(){const r=rp0.apply(this,arguments);try{const P=document.getElementById("panel");if(P&&P.dataset.tab==="log")P.querySelectorAll(".logs > div:not([data-nrh])").forEach(d=>{if(LONE.test(T(d.textContent))){d.remove();return}if(d.dataset.nrk)return;d.dataset.nrk=1;const h=d.innerHTML,t=kitNames(h);if(t!==h)d.innerHTML=t})}catch(e){}return r};
 })();
 /* ===== j65c: one place per job — Việc list drops acts that live in their own tab (owner 11/14) =====
    Luyện cầm kỳ thi họa -> Tài nghệ tab · Dạy hoàng tử/công chúa học chữ, Đưa con đến thỉnh an -> Con cái tab · Thưởng cung nữ -> Kẻ hầu tab */
