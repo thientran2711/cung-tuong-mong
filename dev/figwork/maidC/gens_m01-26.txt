@@ -100,3 +100,11 @@ C-m13-t5 vQZ4f6Na47 hands nomole
 C-m14-t5 ksDYrVU16B hands
 C-m15-t5 UPmd7tuwny hands
 C-m16-t5 ksDYrpJ16B hands
+C-m17-t5 3zbCzmhREY hands
+C-m18-t5 Do7Lo1npcl hands (a48 sachet->teacup)
+C-m19-t5 JNaoNXAOq4 hands
+C-m20-t5 0eg1ekPTfW hands
+C-m21-t5 xSd0S0rjfW hands
+C-m22-t5 xSd0SVdjfW hands (a48 letter->lantern)
+C-m23-t5 XmPSmJIBfo hands
+C-m24-t5 9ZQhZExNYZ hands
