@@ -129,3 +129,11 @@ C-m47-t1 0egkoHsTfW hands
 C-m48-t1 cplKBHU0eP hands
 C-m49-t1 huRyq7WvqL hands
 C-m50-t1 WDs5XbrcXe hands
+C-m51-t1 Do7jvdKpcl hands
+C-m52-t1 5jVGUrWKxe hands
+C-m01-t2 jUX0PSQLD0 hands
+C-m02-t2 JNaB2NbOq4 hands
+C-m03-t2 LwBT47uswO hands
+C-m04-t2 4RutnAN9Aa hands
+C-m05-t2 YMLbBduWeC hands
+C-m06-t2 cplK8oF0eP hands
