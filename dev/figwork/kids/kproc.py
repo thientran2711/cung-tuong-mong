@@ -77,7 +77,7 @@ for line in open(sys.argv[1]):
     j=J[jid]; f0=j["figs"][0]["file"]
     if not only and os.path.exists(f"{OUT}/{f0}.webp") and byfile.get(f"img/{f0}.webp",{}).get("bg")==bid: continue
     raw=f"{W}/bg/{jid}-{bid}.png"
-    if not os.path.exists(raw): subprocess.run(["curl","-sS","-o",raw,url],check=True)
+    if not os.path.exists(raw): subprocess.run(["curl","-sS","--retry","5","--retry-all-errors","-o",raw,url],check=True)
     im=Image.open(raw).convert("RGBA"); n=len(j["figs"])
     cols=split(im,n)
     for (x0,x1),fr in zip(cols,j["figs"]):

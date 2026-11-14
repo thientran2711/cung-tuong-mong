@@ -62,7 +62,7 @@ def princess(i):
      f"gold embroidery, embroidered sash, elegant chignon with gold phoenix hairpins and a dangling bu yao ornament, {r(Q20,5)}. "
      "Calm composed upright standing poses, still, no motion, sleeves and skirts hanging straight; graceful, serene. Full-length modest robes, high collars. "
      "No text, no frames.")
-OVR={"p07":("holding a bamboo flute; 3)","holding a rolled scroll; 3)"),"p10":("holding a rolled scroll. Calm","holding a sheathed sword. Calm")}
+OVR={"p07":("holding a bamboo flute; 3)","holding a rolled scroll; 3)"),"p10":("holding a rolled scroll. Calm","holding a sheathed sword. Calm"),"p20":("holding an open book; 4)","holding a hunting bow at his side; 4)"),"p22":("holding a sheathed sword. Calm","holding a rolled scroll. Calm"),"p24":("holding a closed folding fan. Calm","holding a jade pendant. Calm")}
 J={}
 for i in range(24):
     for sx,fn in (("p",prince),("f",princess)):
