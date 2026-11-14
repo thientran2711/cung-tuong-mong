@@ -25,6 +25,8 @@
 - B_b10: c15 m2–m4, c16 m0–m4 → c01–c16 COMPLETE (80 lineups, 320 figures). Known soft spot: some ~48 figures
   (c12-m4, c14-m2/m3/m4, c15-m2/m3, c16-m3) still show more silver at the temples than "two or three strands"; one retry
   (c12-m4) did not fix it, so they were kept.
+- From c17 the AGES 48yo line says FULLY DARK, same colour as at 32, at most two barely visible silver hairs (hc.py strip after each batch).
+- B_b11: c17 m0–m4, c18 m0–m2 (88 lineups total).
 
 ## NEXT (exact)
 - c17–c32 × m0..m4 (80 lineups), in order B-c17-m0 B-c17-m1 ... (8 per batch → sheets B_b11.jpg ...).
