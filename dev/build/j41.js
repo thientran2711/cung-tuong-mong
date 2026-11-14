@@ -101,7 +101,7 @@ function accSpot(all,cls,k,attrs,inner){const st=accState(k);if(st.here||!st.why
 /* TRA CỨU: Ra vào cung cấm */
 function accInfo(){if(!S||Q.length)return;const R=n=>`<b>${n}</b>`;
  Q.push({t:"Ra vào cung cấm",h:`<div class="acinfo"><p>Một luật cho mọi người trong cung, cả phi tần khác.</p>
- <p>${R("Dưỡng Hòa điện, Cần Chính điện")}: khi được triệu. Từ Phi: xin yết kiến (ngài có thể từ chối).</p>
+ <p>${R("Dưỡng Hòa điện, Cần Chính điện")}: khi được triệu. Từ Phi: xin yết kiến (được cho vào: ${word(accAskO("dtd"))}).</p>
  <p>${R("Càn Ninh cung")}: sáng thỉnh an, ai cũng vào. Lúc khác: được mời, hoặc từ Quý phi.</p>
  <p>${R("Đức Thọ cung")}: sáng thỉnh an, từ Quý nhân. Thấp hơn: khi Thái hậu triệu.</p>
  <p>${R("Cung phi tần khác")}: phẩm ngươi không thấp hơn chủ cung quá một bậc, hoặc được mời.</p>
