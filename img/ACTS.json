@@ -1,0 +1,180 @@
+{
+ "cat-hau-ha": {
+  "file": "img/act-cat-hau-ha.webp",
+  "cat": "hau-ha",
+  "names": [],
+  "label": "hầu hạ"
+ },
+ "cat-hoc-tap": {
+  "file": "img/act-cat-hoc-tap.webp",
+  "cat": "hoc-tap",
+  "names": [],
+  "label": "học tập"
+ },
+ "cat-giao-thiep": {
+  "file": "img/act-cat-giao-thiep.webp",
+  "cat": "giao-thiep",
+  "names": [],
+  "label": "giao thiệp"
+ },
+ "cat-muu-ke": {
+  "file": "img/act-cat-muu-ke.webp",
+  "cat": "muu-ke",
+  "names": [],
+  "label": "mưu kế"
+ },
+ "cat-hai-nguoi": {
+  "file": "img/act-cat-hai-nguoi.webp",
+  "cat": "hai-nguoi",
+  "names": [],
+  "label": "hại người"
+ },
+ "cat-nghi-ngoi": {
+  "file": "img/act-cat-nghi-ngoi.webp",
+  "cat": "nghi-ngoi",
+  "names": [],
+  "label": "nghỉ ngơi"
+ },
+ "cat-buon-ban": {
+  "file": "img/act-cat-buon-ban.webp",
+  "cat": "buon-ban",
+  "names": [],
+  "label": "buôn bán"
+ },
+ "cat-le-nghi": {
+  "file": "img/act-cat-le-nghi.webp",
+  "cat": "le-nghi",
+  "names": [],
+  "label": "lễ nghi"
+ },
+ "cat-di-lai": {
+  "file": "img/act-cat-di-lai.webp",
+  "cat": "di-lai",
+  "names": [],
+  "label": "đi lại"
+ },
+ "cat-tai-nghe": {
+  "file": "img/act-cat-tai-nghe.webp",
+  "cat": "tai-nghe",
+  "names": [],
+  "label": "tài nghệ"
+ },
+ "cat-cham-con": {
+  "file": "img/act-cat-cham-con.webp",
+  "cat": "cham-con",
+  "names": [],
+  "label": "chăm con"
+ },
+ "cat-trieu-chinh": {
+  "file": "img/act-cat-trieu-chinh.webp",
+  "cat": "trieu-chinh",
+  "names": [],
+  "label": "triều chính"
+ },
+ "cat-y-duoc": {
+  "file": "img/act-cat-y-duoc.webp",
+  "cat": "y-duoc",
+  "names": [],
+  "label": "y dược"
+ },
+ "cat-sung-ai": {
+  "file": "img/act-cat-sung-ai.webp",
+  "cat": "sung-ai",
+  "names": [],
+  "label": "sủng ái"
+ },
+ "cat-ban-thuong": {
+  "file": "img/act-cat-ban-thuong.webp",
+  "cat": "ban-thuong",
+  "names": [],
+  "label": "ban thưởng"
+ },
+ "cat-trang-diem": {
+  "file": "img/act-cat-trang-diem.webp",
+  "cat": "trang-diem",
+  "names": [],
+  "label": "trang điểm"
+ },
+ "cat-tu-tinh": {
+  "file": "img/act-cat-tu-tinh.webp",
+  "cat": "tu-tinh",
+  "names": [],
+  "label": "tư tình"
+ },
+ "dan-dem-trang": {
+  "file": "img/act-dan-dem-trang.webp",
+  "cat": "tai-nghe",
+  "names": [
+   "Đánh đàn ở ngự hoa viên",
+   "Đàn khúc Phượng cầu hoàng",
+   "Hiến khúc đàn dưới trăng",
+   "Phô tài: *"
+  ]
+ },
+ "dang-canh": {
+  "file": "img/act-dang-canh.webp",
+  "cat": "hau-ha",
+  "names": [
+   "Dâng canh ở ngự thư phòng",
+   "Dâng cháo lên Hoàng thượng"
+  ]
+ },
+ "mua-yen": {
+  "file": "img/act-mua-yen.webp",
+  "cat": "tai-nghe",
+  "names": [
+   "Múa trong yến tiệc",
+   "Kinh hồng vũ"
+  ]
+ },
+ "cam-hoa": {
+  "file": "img/act-cam-hoa.webp",
+  "cat": "tai-nghe",
+  "names": [
+   "Cắm hoa dâng Hoàng thượng"
+  ]
+ },
+ "cai-tai-mat": {
+  "file": "img/act-cai-tai-mat.webp",
+  "cat": "muu-ke",
+  "names": [
+   "Cài tai mắt",
+   "Mua chuộc cung nữ",
+   "Mua chuộc",
+   "Cài người vào cung khác",
+   "Nghe lời, làm tai mắt",
+   "Nhận bạc, làm tai mắt"
+  ],
+  "ids": [
+   "bribe"
+  ]
+ },
+ "lat-the": {
+  "file": "img/act-lat-the.webp",
+  "cat": "sung-ai",
+  "names": [
+   "Tranh sủng",
+   "Rút thẻ bài",
+   "Đút lót lật thẻ",
+   "Giữ thẻ bài"
+  ],
+  "ids": [
+   "steal",
+   "block"
+  ]
+ },
+ "ha-doc": {
+  "file": "img/act-ha-doc.webp",
+  "cat": "hai-nguoi",
+  "names": [
+   "Hạ độc",
+   "Hạ độc dần",
+   "Hạ độc con nàng"
+  ],
+  "ids": [
+   "poison",
+   "slowpoison",
+   "kpoison"
+  ]
+ }
+}
