@@ -36,7 +36,7 @@ def pose_for(tr,i,t,prop,g=0):
         else: j+=1
     o2,o3,o4=pick
     ps=[H19[(g+t)%5].format(o=sig),H24[(g*2+t)%5].format(o=o2),H32[(g*3+t)%5].format(o=o3),H48[(g+2*t)%5].format(o=o4)]
-    if t==8 and g%3==0: ps[3]="standing in stately stillness, hands hidden in her long wide sleeves before her, the long train spread on the ground behind her"
+    # C-B: removed t8 "hands hidden in sleeves" override (every age must hold a different prop)
     suf=", with regal stately grace" if t>=7 else (", stately poised posture" if t>=5 else "")
     ps=[p+suf if "stately stillness" not in p else p for p in ps]
     return ("Poses (NEW, NOT the reference's poses; calm standing poses; LIVELY HANDS: a different hand gesture and a different held object for each figure, never the same gesture twice, not hands clasped at the belly), left to right: "
