@@ -25,4 +25,5 @@ SẴN SÀNG KIỂM
 - Veil works for rash (jveil vlNeed = scar or rash): same grade cover, same Vượt phẩm rule; healed → veil back to chest.
 - Her card "Nổi mẩn" (every 3 tuần while it lasts): thái y / thảo mộc / đeo-tháo-tìm mạng / để tự khỏi. Person-card chip "Nổi mẩn (vừa) · còn N tuần" when known.
 - Overlay art PILOT (gpt-2-6, Magnific folder ba4aecfe; red-on-white paintings turned transparent, edge fade): img/rash-1..3.png; placed from veil-fit boxes (KIT_RASH.style); layer portrait < rash < scar < veil < frame. Pilot sheets: dev/shots/rash-pilot/pilot-c05.jpg, pilot-c18.jpg (lành / nhẹ / vừa / nặng / nặng + mạng). KIT_RASH.ready=false until approved → logic live, picture hidden. To ship: set ready true.
+- (15/11, owner 00:25Z) Nấc 1 (nhẹ) trông như má hồng → vẽ lại img/rash-1.png (gpt-2-6, ref = raw nấc 2 + raw nấc 1 cũ): cụm nốt đỏ nhỏ rời, hơi nổi trên hai má + 5–7 nốt ở trán + vài nốt cằm, chỉ một lớp hồng rất nhạt giữa các nốt; cùng mkalpha.py (gain 1). Nấc 2, 3 đã duyệt, giữ nguyên. Tờ thử c05/c18 vẽ lại.
 - Tests 686x880@2.2 + 1180x820@2: act (caught path), card, veil cover 16→8, heal → veil to chest, NPC rash → obtains veil; no errors/overflow.
