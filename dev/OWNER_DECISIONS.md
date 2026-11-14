@@ -94,3 +94,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (20:35Z) Owner APPROVED t8 huadian style = the c26 pilot (small symmetric vertical gold phoenix around her motif), but ~15–20% smaller. Roll out to all 32 consorts × 4 ages (incl. redoing the 4 pilots smaller).
 - (20:45Z) Owner: art previews must be HIGH resolution (native-res crops, one consort per file), not blurry downscaled sheets.
 - (21:10Z) Owner gave Cloudflare Account ID (dev/coop/CLOUDFLARE.md). Co-op backend = Cloudflare Workers + Durable Objects. Token later via secure form.
+- (21:20Z) Owner: Part C a51 hair jet-black and colour off vs a18–a36. Rule for all ageing: keep her warm dark-brown hair with painted highlights (subtle silver OK, never jet-black), colour-match a51 to the same tier's other ages.
