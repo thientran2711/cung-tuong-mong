@@ -64,7 +64,7 @@ Read it live: `RCOL[rank]`, or `KIT_RANK_COL[rank]` / `KIT_RANK_COL.cold` / `kit
 - body font `--body` "Be Vietnam Pro"; display/titles `--display` "Noto Serif".
 - act card text `--kfs`: `.76rem` (phone) / `.8rem` / `.875rem` (wide); `.kl` labels `.66rem` uppercase; chips `.75rem` (`.68rem` phone);
   buttons `.8rem`; frame label `.pfrw` `.7rem` gold 600; "Người lạ" label `.klab` `.72rem`.
-- Never shrink text to fit: text wraps; no truncation (`…`) on names, labels, prices. The only clamp is the act card body, whose ⓘ opens the full card (jkit).
+- Never shrink text to fit: text wraps; no truncation (`…`, line-clamp) anywhere, act cards included (see 6: cards grow, rows of cards share one height, the panel scrolls).
 
 ---
 
@@ -74,10 +74,10 @@ Read it live: `RCOL[rank]`, or `KIT_RANK_COL[rank]` / `KIT_RANK_COL.cold` / `kit
 |---|---|---|
 | effect token | `eff(t)`, `effList(tokens,def)` → `.ef g/r/n` | colours of 1.2 |
 | odds chip | `oddsChip(word)` → `.oc .oc0..oc7` | ladder Liều/Khó/Năm ăn năm thua/Khá chắc/Chắc/Rất chắc/Nắm chắc; never %, never "Chắc chắn" (sure acts show no word) |
-| any price line | `kitParse('word · tốn: … · thành: … · hỏng: … · kèm: …')` | used by `optLine`, `dilLine`, `actLine`, `kitFix` |
-| act card | `cardH(a,i)` → `button.card.kcard` | title, khắc pips, text, odds chip, rows Tốn / Thành / Kèm / Hỏng; ONE height `--kh` (232/250/268 px) for every card (jkit); ⓘ opens full card; disabled says why (`.kwhy`, `cardWhy`) |
-| option (dialogs) | `button.opt` + `<small>` through `kitParse` | `--panel2`, `1px --line`, radius 6, min-height 42 |
-| button with price | `pbtn(attrs,name,line,why)` | name + `<small>` price/gain/loss; disabled reason first |
+| any price line | `kitParse('word · tốn: … · thành: … · hỏng: … · kèm: …')` | used by `optLine`, `dilLine`, `actLine`, `kitFix`; returns the labelled rows of section 6 (j63) |
+| act card | `cardH(a,i)` → `button.card.kcard.ka` | the ACT CARD frame of section 6 (j63): title + odds chip, description, rows Vì sao / Tốn / Được / Mất / Kèm / Ghi chú |
+| option (dialogs) | `button.opt` + `<small>` through `kitParse` → `.ka` | same ACT CARD frame (section 6) |
+| button with price | `pbtn(attrs,name,line,why)` → `.ka` | same ACT CARD frame (section 6); disabled reason = Vì sao row |
 | plain button | `.btn` | `#fffaf0`, `1px --line`, radius 6, min-height 40 |
 | tabs inside a person card | `pcard({groups})` → `.pctabs .pct` (+ count `<i>`), active `.pct.on` = gold fill | groups for rivals come from `RVGRP` (Giao thiệp / Hại nhỏ / Hại nặng / Sát hại) |
 | main tabs | `#tabs [data-tab]` (Hành động, Bản đồ, Phi tần, Quan hệ, Phe phái, Kẻ hầu, Con cái, Rương đồ, Tài nghệ, Tuyến truyện, Nhật ký) | servant-start uses `SRVTABS` |
@@ -151,3 +151,52 @@ Stage strangers: full-body grey silhouettes `img/kit/unknown-fig-f|m|k.webp` (90
 ## 5. Layout rules (all screens)
 - No horizontal page scroll at any of the four sizes; no truncated text; act cards one size; the scene is not covered (slim ribbon, collapsible status); map full screen.
 - Every name has its face (portrait kit); every bar labelled; disabled buttons say why.
+
+---
+
+## 6. ACT CARD (j63) — one frame for every act, option and priced button
+
+Applies to: act cards (Hành động, servant road), person-card act groups (`.pcb`: consort, child, servant, court houses…),
+dialog options (`.opt` / `.opts`), priced buttons (`pbtn`, `.btn`, `.rbtn`: court, festival, shop…). Built ONLY through
+`kitParse()` (string → rows) and the frame `kaNorm()` (j63), which rebuilds every such button into the markup below
+(a MutationObserver runs it after any render; `kitFix()` also calls it). Nobody writes this markup by hand.
+
+```
+button.ka [.kdis when disabled]
+  span.kat                      title row
+    span.kan                    action name (+ inline round avatar .md.xs, never on its own line, never over the title)
+    span.kodds                  odds chip .oc (ladder colour) on the right; "Quẻ: dễ/khó hơn…" under it (green/red)
+  span.klead                    act description (act cards only), dim, wraps, never clamped
+  small.kb                      grid: label column (fixed 3.4rem; 3.3rem under 600px) | values
+    span.kr.kr-why  > .krl "Vì sao"  .krv > .kwhy   (disabled only, first)
+    span.kr.kr-ton  > .krl "Tốn"     .krv > .ef.t time "2 khắc" (dark ink) · .ef.r resources (red)
+    span.kr.kr-duoc > .krl "Được"    .krv > .ef.g (green)
+    span.kr.kr-mat  > .krl "Mất"     .krv > .ef.r (red; outcome if it fails; old "hỏng" maps here)
+    span.kr.kr-kem  > .krl "Kèm"     .krv > .ef.r (red; side risks: jealousy, exposure, Đức warning, "có thể bị phát giác")
+    span.kr.kr-note > .krl "Ghi chú" .krv > .ef.n (dim, small; "(mỗi mùa dạy một lần)", "(chỉ buổi tối)", conditions)
+  values in one row are separated by .ksep "·"
+```
+
+Rules
+- Rows always in this order; an empty row is left out. Labels are Vietnamese title case `Vì sao / Tốn / Được / Mất / Kèm / Ghi chú`,
+  shown small-caps in `#8a7350` (Vì sao label red). The old inline `TỐN / THÀNH / HỎNG / KÈM` labels are gone.
+- A value goes to its row by meaning (`kaRows`): a gain is always green and in Được; a cost/loss is always red (Tốn, Mất, Kèm).
+  Sentiment uses `kcls` (j19 + j25): `+N` is a gain unless it is hostile (`ghen +`, `oán ngươi +`); harm to a rival ("nàng … -N") is a gain.
+  Exceptions: a failure that still gives something ("đêm nhạt, Sủng +3") stays in Mất but its `+N` is green; "không mất gì" is neutral.
+  Time (`N khắc`, `1-2 khắc`) is in Tốn in dark ink, never red. "không" disappears when a row has a real value.
+  Sign wins: a value whose only number is negative (`lòng -5`, `kẻ hầu khác dễ lơ là (lòng -1)`) is a loss → red, never in Được
+  (except harm to a rival, "nàng … -N", and less hostility, "oán -N"). Losses that come with a SURE act or option go to Tốn when they
+  are her resources (Bạc, Sức, Sủng, Danh, Đức…) and to Mất otherwise (e.g. option "Phạt vì làm vỡ chén ngọc" → Được: kẻ hầu khác giữ
+  kỷ cương (lòng +1) · Mất: lòng -5); a ROLLED act's side loss on success goes to Kèm (Mất is kept for the failure outcome).
+  Trailing "(…)" notes split off into Ghi chú.
+- Odds: ladder word only (Liều/Khó/Năm ăn năm thua/Khá chắc/Chắc/Rất chắc/Nắm chắc), never %; sure acts show no chip.
+- Disabled (`.kdis`): grey ground `#eee7da`, grey title, chip greyed; a "Vì sao" row (from `.kwhy` / `cardWhy` / `guessWhy`) replaces
+  the rows that cannot apply (Mất and Kèm hidden; Tốn and Được stay so she sees what it would give). Never opacity below 1 on the text.
+- Frame: `#fffaf0`, `1px var(--line)`, radius 8, title row with a `#e6d3ac` hairline under it; hover border `--gold`.
+- Size: cards sit in CSS grids with `grid-auto-rows:1fr` → every card in a grid has the same height (the tallest one's), the
+  same width; text wraps inside its row; nothing is clamped or cut (no `…`, no line-clamp, no ⓘ needed); the panel scrolls.
+  Columns — act cards `.cards`: 3 at ≥1200px, 2 at 600–1199px, 1 under 600px. `.pcb` / `.rbtn`: auto-fill min 230/260px, 1 under 600px.
+  Dialog `.opts`: auto-fill min 250px (1 column in the dialog), 1 under 600px.
+- CSS is scoped to `button.ka`, `.kb`, `.kr*`, and to `.cards/.pcb/.opts/.rbtn:has(> button.ka)`; other kit parts are untouched.
+- Not converted on purpose: the tiny map hotspot chips (`.mspot .acb`, j41) stay chips so the map is not covered; their odds use `oddsChip`.
+
