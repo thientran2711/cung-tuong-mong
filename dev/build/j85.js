@@ -149,7 +149,7 @@ function v85Month(){if(!S||S.dead)return"";let ev="";const season=S.turn%3===0;
 (function(){if(typeof bandCard!=="function")return;const b0=bandCard;bandCard=function(){return b0.apply(this,arguments)+`<p>Đức của người ra tay cũng tính: cộng (50 − Đức) ÷ 5. Đức 10 thì +8, Đức 90 thì −8. Ngươi: Đức ${S.duc}, ${ducDanger(S)>=0?"+":""}${ducDanger(S)}.</p>`}})();
 /* ---- the Tài nghệ tab: what each level gives, what the next one opens ---- */
 function fxItems(s,cls){return String(s).split(" · ").map(x=>`<span class="ef ${cls}">${x}</span>`)}
-function lvRows(fx,l,nm){const rows=[];if(l>0)rows.push(["Đang có",fx.slice(0,l).map((s,i)=>`<span class="ef g">Bậc ${i+1}: ${s}</span>`),"g"]);if(l<5)rows.push([`Bậc ${l+1} mở`,fxItems(fx[l],"n"),"n"]);return kitRows(rows)}
+function lvRows(fx,l,nm){const rows=[];fx.slice(0,l).forEach((s,i)=>rows.push([`Bậc ${i+1}`,fxItems(s,"g"),"g"]));if(l<5)rows.push([`Bậc ${l+1} mở`,fxItems(fx[l],"n"),"n"]);return kitRows(rows)}
 function v85Table(k){const V=VIR.find(x=>x.k===k),A=ARTS.find(x=>x.k===k);
  if(k==="duc")return v85DucPanel();const fx=V?VIRFX[k]:ARTFX[k],l=V?virLv(S,k):artLv(S,k);if(!fx)return;
  kitModal({kind:"rule",title:V?`${V.n} · ${V.full}`:`${A.n}`,sub:V?V.d:(ARTDO[k]||""),sections:[{h:"Năm bậc",tiers:fx.map((s,i)=>({k:`Bậc ${i+1}`,n:s,c:i<l?"g":"",on:i+1===l}))}].concat(V?[]:[{h:"Ghi chú",rows:[["Lên bậc",`${A.st==="sac"?"Sắc":"Tài"} +2 mỗi bậc; bậc 3 Danh +3, bậc 5 Danh +6`,"t"]].concat(["cam","ky","thi","hoa"].includes(k)?[["Hoàng thượng trọng tài","thi tài, phô tài tính bậc này gấp đôi","t"]]:k==="vu"?[["Hoàng thượng mê sắc","múa, lật thẻ tính bậc này gấp đôi","t"]]:[])}]),btn:"Đã hiểu"})}
