@@ -16,3 +16,4 @@
 - Mỗi ảnh EDIT thẳng từ ảnh gốc (không nối tiếp ảnh đã sửa) để không trôi bố cục. Không dùng style ref (ảnh gốc đã là chuẩn phong cách). Đầu ra 1344x752 → cắt-co về 1280x720, webp q~80.
 
 ## Tiến độ
+- [x] SÁNG: 40/40 (10 cảnh × 4 mùa), đã xem từng ảnh: bố cục, phối cảnh, sàn giữ nguyên; không có người. 40 lượt × 40 = 1.600 tín dụng (thêm 0 lượt vẽ lại).
