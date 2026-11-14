@@ -67,3 +67,11 @@ G6set("kidTutor",{vf:p=>{const k=(S.kids||[]).find(x=>x.name===p.a0);const t=k?k
 G6set("kidGift",{pp:()=>{const a=kid6(k=>k.age>=5&&(k.fond||0)>=35);return a==null?null:{a0:a}}});
 /* --- court: the real house behind the consort --- */
 G6set("clanFather",{pp:()=>{if(!td6())return null;const a=rv6(v=>{try{return !!tdHeadOf(v)}catch(e){return false}});return a==null?null:{a0:a}},vf:p=>{let h=null;try{h=tdHeadOf(RV(p.a0))}catch(e){}if(!h)return[];return h.corrupt?[0,1]:h.pow>=60?[2]:[1,3]}});
+/* j7 rumours named a random consort as the culprit; now the culprit is a consort who really bears her ill will (or nobody) */
+(function(){try{const h=()=>{const L=liveRivals(false).filter(v=>band6(v)>=1);return L.length?pick(L).id:null};
+ if(EVI.ghost)EVI.ghost.pp=()=>({v:h()});if(EVI.guardrumour){const p0=EVI.guardrumour.pp;EVI.guardrumour.pp=()=>Object.assign(p0?p0():{},{v:h()})}}catch(e){}})();
+/* the theft's options must not name the culprit before she finds out; the reporter is her maid */
+G6set("hairpinThief",{who:()=>S.maid?pMaid():null,o:X=>{const G=[X.A,X.B,X.C][X.p.g];const hit=()=>relDo(G,-25);return[
+ c6("Tra xét kỹ từng manh mối",{c:{suc:-6},p:od(40+S.tamco/3+S.mat*4),w:{tamco:1},wt:[G6("tìm ra kẻ lấy, lấy lại đồ"),R6("kẻ lấy mất lòng -25")],l:{danh:-1},lt:[R6("không ra manh mối, đồ mất")],ok:()=>{hit();try{G.o.cause={txt:"ăn cắp đồ của chủ",fault:true,w:wk()}}catch(e){}return `Vết sáp nến trên tay áo và lời chứng của tiểu thái giám chỉ đúng ${G.n}; đồ tìm thấy dưới gối ${G.n}. Ngươi có cớ để xử.`},no:()=>"Manh mối đứt, không ai bị buộc tội oan."}),
+ c6("Nhờ Cung Chính ti tra",{c:{bac:-25},p:80,wt:[G6("tìm ra kẻ lấy"),R6("kẻ lấy mất lòng -25")],k:[R6("chuyện xấu lan ra ngoài: Danh -1")],l:{danh:-1},lt:[R6("tra không ra")],ok:()=>{hit();apply({danh:-1});try{G.o.cause={txt:"ăn cắp đồ của chủ",fault:true,w:wk()}}catch(e){}return `Cung Chính ti tra ra ${G.n}.`}}),
+ c6("Cho kẻ lấy một đêm tự trả lại",{w:{duc:2},p:55,wt:[G6("đồ được trả, không ai mất mặt")],lt:[R6("không ai trả, đồ mất hẳn")],l:{tamco:-1},ok:()=>{relDo(G,6);return "Sáng hôm sau đồ nằm lại trong tráp; ngươi không truy nữa."}})]}});
