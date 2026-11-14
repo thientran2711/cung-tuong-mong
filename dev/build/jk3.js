@@ -163,4 +163,47 @@ html body .stage.k3g.k3n #sc-t h2{font-size:.86rem}
 .stage.k3n .ksh .k3ps .k3r .k3l{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 .stage.k3n .ksh .k3c .k3v small{font-size:.58rem}
 `;document.head.appendChild(css);
+
+/* ---------- 6. kitPhoneShell (KIT 31.7, owner 11/14): portrait screens under 1000 px wide (Fold, phones) work as TWO views.
+   HOME = the room scene full screen between the slim top bar and the bottom tab bar (stage HUD plaques on it; tap a person = card).
+   PANEL = a bottom tab opens full screen in place of the room (sub-tabs, picker, person card get the whole height).
+   Back to the room: tap the active tab again, or the "Phòng" button in the top bar; "Qua buổi" always lands in the room. A person card
+   opened from the room (#popw) shows full screen too and returns to the room when closed. Result cards / events overlay as before.
+   Wider or landscape screens keep the split stage | panel. ---------- */
+const K3SH={home:true};
+function k3Phone(){return innerWidth<1000&&innerHeight>innerWidth}
+function k3Shell(){try{const gm=document.querySelector(".game");if(!gm)return;const on=k3Phone()&&!!S&&!S.dead;gm.classList.toggle("k3ph",on);
+ const pw=$$("popw");const pop=!!(pw&&pw.children.length&&pw.textContent.trim());
+ gm.classList.toggle("k3home",on&&K3SH.home&&!pop);gm.classList.toggle("k3pop",on&&pop);
+ let rb=$$("k3room");const hd=document.querySelector("header.hud");
+ if(on&&!rb&&hd){rb=document.createElement("button");rb.id="k3room";rb.type="button";rb.className="btn k3room";rb.innerHTML="‹ Phòng";rb.title="Về phòng";rb.addEventListener("click",e=>{e.stopPropagation();k3Home()});hd.appendChild(rb)}
+ if(rb)rb.hidden=!(on&&(!K3SH.home||pop));
+ document.querySelectorAll("#tabs [data-tab]").forEach(b=>b.classList.toggle("k3dim",on&&K3SH.home&&!pop))}catch(e){console.error("k3Shell",e)}}
+window.k3Shell=k3Shell;
+function k3Home(){K3SH.home=true;try{if(typeof popIdx!=="undefined"&&popIdx!=null){popIdx=null;if(typeof renderStage==="function")renderStage()}}catch(e){}const pw=$$("popw");if(pw&&pw.children.length)pw.innerHTML="";k3Shell();setTimeout(()=>{try{window.j59lay&&j59lay();typeof kitFloorFit==="function"&&kitFloorFit()}catch(e){}},30)}
+window.k3Home=k3Home;
+document.addEventListener("click",e=>{if(!k3Phone())return;const b=e.target.closest&&e.target.closest("#tabs [data-tab], #tabs [data-kg]");
+ if(b){const active=b.classList.contains("on")||b.classList.contains("kgon")||b.getAttribute("aria-selected")==="true";
+  if(!K3SH.home&&active&&!b.classList.contains("kghide")){e.preventDefault();e.stopPropagation();k3Home();return}
+  K3SH.home=false;setTimeout(k3Shell,0);return}
+ if(e.target.closest&&e.target.closest("#next")){K3SH.home=true;setTimeout(k3Home,0)}},true);
+try{const pw=$$("popw");if(pw)new MutationObserver(()=>{clearTimeout(window.__k3pw);window.__k3pw=setTimeout(k3Shell,0)}).observe(pw,{childList:true})}catch(e){}
+addEventListener("resize",()=>{clearTimeout(window.__k3sh);window.__k3sh=setTimeout(k3Shell,60)});
+if(typeof render==="function"){const r0=render;render=function(){const r=r0.apply(this,arguments);try{k3Shell()}catch(e){}return r}}
+/* any code path that switches tab on its own (rank chip, court chips, links "Xem đầy đủ ở Nhật ký") opens the panel view */
+(function(){let t0=typeof tab!=="undefined"?tab:null;setInterval(()=>{try{if(tab!==t0){t0=tab;if(k3Phone()&&K3SH.home&&!window.__k3quiet){K3SH.home=false;k3Shell()}}}catch(e){}},150)})();
+const cssS=document.createElement("style");cssS.id="k3-shell";cssS.textContent=`
+html body .game#game.k3ph.k3home:not(.maptab){grid-template-rows:auto minmax(0,1fr) 0 auto!important}
+html body .game#game.k3ph.k3home:not(.maptab)>#panel{display:none!important}
+html body .game#game.k3ph:not(.k3home):not(.maptab){grid-template-rows:auto 0 minmax(0,1fr) auto!important}
+html body .game#game.k3ph:not(.k3home):not(.maptab)>#stage{visibility:hidden!important;min-height:0!important;height:0!important;border:0!important;overflow:hidden!important}
+html body .game#game.k3ph.k3pop>#panel{display:none!important}
+html body .game#game.k3ph:not(.k3pop)>#popw{display:none!important}
+html body header.hud>#k3room{grid-area:stats;justify-self:start;min-height:40px;padding:0 12px;font-weight:600;color:var(--gold);white-space:nowrap}
+html body header.hud>#k3room[hidden]{display:none!important}
+html body .game#game.k3ph header.hud:has(#k3room:not([hidden])){grid-template-columns:auto minmax(0,1fr) auto auto!important;grid-template-areas:"menu me room stats"!important}
+html body .game#game.k3ph header.hud>#k3room:not([hidden]){grid-area:room}
+@media (max-width:599px){html body .game#game.k3ph header.hud:has(#k3room:not([hidden])){grid-template-columns:auto minmax(0,1fr) auto!important;grid-template-areas:"menu me room" "stats stats stats"!important}}
+#tabs [data-tab].k3dim{background:var(--panel)!important;color:var(--ink)!important;box-shadow:none!important}
+`;document.head.appendChild(cssS);
 })();

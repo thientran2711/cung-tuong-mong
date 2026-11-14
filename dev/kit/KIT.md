@@ -801,7 +801,7 @@ Plaques: `--k3pl` = `rgba(255,250,240,.88)`, `1px --line`, radius 8, text ≥ .7
   rows hidden in the sheet's Nhân tâm), Sủng (top bar), Chủ tin (top bar on the servant road).
 
 ### 31.3 ONE STAGE SIZE
-Portrait screens: `--kstH` = 42 dvh on EVERY tab (no more 22/24 dvh "card tab" squeeze); the panel below scrolls. Landscape: the left column.
+Portrait split (only when the phone shell 31.7 is off): fixed aspect 2:1 (600–999 px) / 3:2 (< 600 px) on EVERY tab (no more 22/24 dvh "card tab" squeeze); the panel below scrolls. Landscape: the left column.
 Figures (j59): one height for all adults, 80–85 % of the stage at Fold/iPad (measured), feet on one floor line.
 
 ### 31.4 SCENE CROP + FLOOR ANCHOR (`KIT_FANCHOR`, jk2b §2)
@@ -815,6 +815,26 @@ tam-cung-dem .68/.94, thai-y-vien .45/.9, tu-ninh-cung .5/.9. A new room adds it
 - Every sticky bar in the panel (`.ksub` sub-tabs, card blocks 28.17) is opaque and covers the panel's top padding band; nothing peeks above it.
 - Chip lists / selectors (`.relsel` "Xem quan hệ của", `.pctabs`, `.chips`, `.kchips`) wrap, never clip; the panel scrolls.
 - No lone button rows (28.18).
+
+### 31.7 kitPhoneShell (jk3 §6) — portrait screens under 1000 px wide (Fold, phones)
+Two views instead of the split: HOME = the room full screen between the slim top bar and the tab bar (stage HUD plaques on it; figures big on the
+floor; tap a person = card) · PANEL = a bottom tab opens full screen in place of the room (sub-tabs, compact picker strip, person card get the
+whole height). Back to the room: tap the active tab again, or "‹ Phòng" (kit `.btn`, top bar, only shown in PANEL view); "Qua buổi" always lands
+in the room; any code that switches tab opens the PANEL view. A card opened from the room (`#popw`) shows full screen and returns to the room.
+Result cards / events overlay as before. Classes on `.game`: `k3ph` (shell on) · `k3home` · `k3pop`. Room view measured: 686x880 670x720 (0.93) ·
+755x1000 739x867 (0.85) · 412x1058 400x860 (0.47) · 390x844 378x646 (0.59). Landscape / ≥ 1000 px keep the split (31.3).
+
+### 31.8 Portrait room paintings (stage tier "p", jk2b §2)
+`img/<scene>-<season>-<buoi>-p.webp` (3:4, 1536x2048, people-free, open floor lower 45 %, details in the middle 60 % of the width). Used whenever
+the room view is taller than wide (phone shell, iPad left column) and `KIT_STAGE_P[scene]` is true; floor anchor `KIT_FANCHOR["<scene>-p"]={x,feet}`.
+No other code change; until then the 16:9 art + its anchors are used.
+
+### 31.9 PERSON CARD INFO GRID (jk2b §20) — every person card
+Facts as short labelled value chips `.kpgrid > .kpgr > .kpq` (relation row: Ghen · Thiện cảm N ▮ · Oán N ▮ · Nàng với ngươi · Lòng/Chủ tin;
+stats row: Sủng · Đức · Danh · Sắc · Tài · Tâm cơ; small row: Muốn hại ngươi ⓘ · Tuổi · Tính nết; status chips after). Unknown = "?" (dim), the
+long wording is the chip's tooltip (tap = kpPop). Fold/phones: next to the portrait (name + rank on one line above); iPad: under the portrait.
+Act-group tabs: one sticky row (sideways scroll on narrow). The helper sentence ("Không gặp mặt: phải sai người…") is a Ghi chú row on the acts it
+explains, never a body line. Compact picker strip always visible above the card (palace labels dropped under 1000 px portrait).
 
 ### 31.6 INVENTORY (group → member → status; screenshots dev/shots/fold-layout/)
 | group | members | status |

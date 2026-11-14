@@ -41,18 +41,18 @@ window.KIT_FLOOR=Object.assign({"duong-tam-dien":.70,"khon-ninh-cung":.72,"kinh-
 const KIT_BGSZ={};
 /* open-floor anchor per room (fractions of the picture): x = centre of the open floor, feet = where the feet stand. Read from the paintings
    (same composition in every season and buổi). People never stand on furniture: the group is centred on this spot. */
-/* phone-shaped room paintings (3:2, 1536x1024, same room, people-free): scene → true when img/<scene>-<season>-<buoi>-ph.webp exist for all
-   16 season × buổi; their own floor anchor goes in KIT_FANCHOR["<scene>-ph"]. Empty until the art lands: nothing changes. */
-window.KIT_STAGE_PH=window.KIT_STAGE_PH||{};
+/* portrait room paintings (3:4, 1536x2048, same room, people-free): scene → true when img/<scene>-<season>-<buoi>-p.webp exist for every
+   season × buổi; their own floor anchor goes in KIT_FANCHOR["<scene>-p"]. Empty until the art lands: nothing changes. */
+window.KIT_STAGE_P=window.KIT_STAGE_P||{};
 window.KIT_FANCHOR=Object.assign({"duong-tam-dien":{x:.5,feet:.93},"khon-ninh-cung":{x:.55,feet:.92},"kinh-su-phong":{x:.45,feet:.92},"lanh-cung":{x:.36,feet:.93},
  "ngu-hoa-vien":{x:.3,feet:.9},"ngu-thu-phong":{x:.5,feet:.92},"phi-tan-cung":{x:.5,feet:.9},"tam-cung-dem":{x:.68,feet:.94},"thai-y-vien":{x:.45,feet:.9},
  "tu-ninh-cung":{x:.5,feet:.9},_default:{x:.5,feet:null}},window.KIT_FANCHOR||{});
 function kitFloorFit(){try{const st=$("stage"),im=$("scimg");if(!st||!im)return;const m=/url\(["']?([^"')]+)["']?\)/.exec(im.style.backgroundImage||"");if(!m){st.style.removeProperty("--kfb");st.style.removeProperty("--kfh");im.style.backgroundPosition="";return}
  let url=m[1];
- /* phone tier (KIT 31.4): a stage narrower than 1.75:1 (Fold / phone portrait) uses the scene's phone-shaped painting
-    img/<scene>-<season>-<buoi>-ph.webp when KIT_STAGE_PH lists the scene; it is swapped in place, the season/buổi part is kept */
- try{const W0=st.clientWidth,H0=st.clientHeight;const base=url.replace(/-ph(\.\w+)$/,"$1");const sc0=base.split("/").pop().replace(/\.\w+$/,"").replace(/-(xuan|ha|thu|dong)(-(sang|trua|chieu|toi))?$/,"");
-  const want=W0&&H0&&W0/H0<1.75&&window.KIT_STAGE_PH&&KIT_STAGE_PH[sc0]?base.replace(/(\.\w+)$/,"-ph$1"):base;
+ /* portrait tier (KIT 31.4): a room view taller than wide (phone shell, iPad column) uses the scene's portrait painting
+    img/<scene>-<season>-<buoi>-p.webp (3:4) when KIT_STAGE_P lists the scene; it is swapped in place, the season/buổi part is kept */
+ try{const W0=st.clientWidth,H0=st.clientHeight;const base=url.replace(/-p(\.\w+)$/,"$1");const sc0=base.split("/").pop().replace(/\.\w+$/,"").replace(/-(xuan|ha|thu|dong)(-(sang|trua|chieu|toi))?$/,"");
+  const want=W0&&H0&&W0/H0<1&&window.KIT_STAGE_P&&KIT_STAGE_P[sc0]?base.replace(/(\.\w+)$/,"-p$1"):base;
   if(want!==url){im.style.backgroundImage=`url("${want}")`;url=want}}catch(e){}
  const name=url.split("/").pop().replace(/\.\w+$/,"");const sz=KIT_BGSZ[url];
  if(!sz){KIT_BGSZ[url]={w:1280,h:720,pending:1};const I=new Image();I.onload=()=>{KIT_BGSZ[url]={w:I.naturalWidth,h:I.naturalHeight};kitFloorFit()};I.src=url}
@@ -61,7 +61,7 @@ function kitFloorFit(){try{const st=$("stage"),im=$("scimg");if(!st||!im)return;
  if(dh>H+1){y0=Math.min(0,Math.max(H-dh,.40*H-ft*dh));py=(y0/(H-dh))*100}
  /* KIT_FLOOR anchors (kit 3, owner 11/14): every room has an open-floor spot (x centre, feet line); on a narrow/tall stage the picture
     slides sideways so that spot is in the middle of the free zone between the stage plaques; feet stand on the painted floor */
- const ph=/-ph$/.test(name);const scene=name.replace(/-ph$/,"").replace(/-(xuan|ha|thu|dong)(-(sang|trua|chieu|toi))?$/,"");const A=(ph&&KIT_FANCHOR[scene+"-ph"])||KIT_FANCHOR[scene]||KIT_FANCHOR._default;
+ const ph=/-p$/.test(name);const scene=name.replace(/-p$/,"").replace(/-(xuan|ha|thu|dong)(-(sang|trua|chieu|toi))?$/,"");const A=(ph&&KIT_FANCHOR[scene+"-p"])||KIT_FANCHOR[scene]||KIT_FANCHOR._default;
  const dw=S0.w*s;let x0=(W-dw)/2,px=50;if(dw>W+1){const gl=parseFloat(st.style.getPropertyValue("--kgl"))||0,gr=parseFloat(st.style.getPropertyValue("--kgr"))||0;
   const cx=(gl+(W-gr))/2;x0=Math.max(W-dw,Math.min(0,cx-A.x*dw));px=(x0/(W-dw))*100}
  im.style.backgroundPosition=`${px.toFixed(1)}% ${py.toFixed(1)}%`;
@@ -636,7 +636,7 @@ kitPcFix=function(pc){try{if(!pc||pc.dataset.k2==="1")return;const L=pc.querySel
   /* the helper sentence ("Không gặp mặt: phải sai người…") becomes a Ghi chú on the act cards it explains, not a line in the card body */
   Rr.querySelectorAll(".pcb button.ka").forEach(b=>{if(b.querySelector(".kr-note"))return;const kb=b.querySelector(".kb");if(kb&&/sai|nhờ|gửi/i.test(b.textContent))kb.insertAdjacentHTML("beforeend",`<span class="kr kr-note"><span class="krl">Ghi chú</span><span class="krv"><span class="ef n">${tx}</span></span></span>`)});nt.remove()}}
  /* right: one opaque sticky block = (info) + note + act-group tabs */
- const stick=document.createElement("div");stick.className="kpstick";if(!wide&&bars.children.length)stick.appendChild(bars);
+ const stick=document.createElement("div");stick.className="kpstick";
  const note=Rr.querySelector(":scope > .pcn");if(note)stick.appendChild(note);const tabs=Rr.querySelector(":scope > .pctabs");if(tabs)stick.appendChild(tabs);
  if(stick.children.length)Rr.prepend(stick);
  /* wear slots (K1) under the portrait */
@@ -750,7 +750,7 @@ html body #panel .ksub{top:0!important;z-index:7!important;box-shadow:0 -9px 0 0
    Unknown = "?" (dim); the long wording ("chưa rõ (xem sổ thị tẩm)", "Bình thường") lives in the chip's tooltip (tap = kpPop). ---------- */
 function kitPcGrid(pc){try{if(!pc||pc.querySelector(".kpgrid"))return;const L=pc.querySelector(":scope > .pcl");if(!L)return;
  const T=e=>String(e||"").replace(/\s+/g," ").trim();const unk=v=>/^(chưa rõ|\?|không rõ)/i.test(v);
- const chip=(lab,val,full,extra)=>{const u=unk(val);const c=document.createElement("span");c.className="kpc"+(u?" kpu":"");c.title=full||(lab+": "+val);
+ const chip=(lab,val,full,extra)=>{const u=unk(val);const c=document.createElement("span");c.className="kpq"+(u?" kpu":"");c.title=full||(lab+": "+val);
   c.innerHTML=`<small>${lab}</small><b>${u?"?":val}</b>`;if(extra)extra.forEach(x=>x&&c.appendChild(x));return c};
  const rowA=[],rowB=[],rowC=[];
  const bars=pc.querySelector(".kpbars");
@@ -763,7 +763,7 @@ function kitPcGrid(pc){try{if(!pc||pc.querySelector(".kpgrid"))return;const L=pc
   if(/^Nàng với ngươi/.test(t)){const v=T(t.replace(/^Nàng với ngươi:?/,""));const n=v.match(/·\s*(-?\d+)/);rowA.push(chip("Nàng với ngươi",n?n[1]:v,t,[...r.querySelectorAll(".fbar")]));return}
   if(/^Sủng/.test(t)){const v=T(t.replace(/^Sủng:?/,""));rowB.push(chip("Sủng",unk(v)?"?":v.replace(/\s*\(.*\)$/,""),t));return}
   if(/^(Lòng|Chủ tin|Thương)/.test(t)){const m=t.match(/^([^:\d]+):?\s*(.*)$/);rowA.push(chip(T(m[1]),T(m[2]).replace(/\s*\(.*\)$/,""),t,[...r.querySelectorAll(".fbar,.mini")]));return}
-  const m=t.match(/^([^:]{1,24}):\s*(.*)$/);if(m)rowA.push(chip(T(m[1]),T(m[2]),t,[...r.querySelectorAll(".fbar,.mini")]));else{const c=document.createElement("span");c.className="kpc";c.appendChild(r);rowA.push(c)}});
+  const m=t.match(/^([^:]{1,24}):\s*(.*)$/);if(m)rowA.push(chip(T(m[1]),T(m[2]),t,[...r.querySelectorAll(".fbar,.mini")]));else{const c=document.createElement("span");c.className="kpq";c.appendChild(r);rowA.push(c)}});
  pc.querySelectorAll(".ktile").forEach(k=>{if(k.hidden&&!/Sủng/.test(k.textContent))return;const l=T((k.querySelector("small")||{}).textContent),v=T((k.querySelector("b")||{}).textContent);
   if(/^Sủng$/i.test(l)&&rowB.some(c=>/Sủng/.test(c.textContent)))return;rowB.push(chip(l.charAt(0)+l.slice(1).toLowerCase(),v,l+": "+v))});
  const tiles=pc.querySelector(".ktiles");
@@ -777,20 +777,20 @@ function kitPcGrid(pc){try{if(!pc||pc.querySelector(".kpgrid"))return;const L=pc
  const fx=pc.querySelector(":scope > .pcl > .kpfacts");if(fx)g.after(fx);
  }catch(e){console.error("kitPcGrid",e)}}
 (function(){const f0=kitPcFix;kitPcFix=function(pc){const r=f0.apply(this,arguments);try{kitPcGrid(pc)}catch(e){}try{kitPcSize()}catch(e){}return r}})();
-document.addEventListener("click",e=>{const c=e.target.closest&&e.target.closest(".kpgrid .kpc");if(!c||e.target.closest("button"))return;try{if(typeof kpPop==="function"){kpPop(c,`<div class="kpopt">${c.title}</div>`);e.stopPropagation()}}catch(x){}},true);
+document.addEventListener("click",e=>{const c=e.target.closest&&e.target.closest(".kpgrid .kpq");if(!c||e.target.closest("button"))return;try{if(typeof kpPop==="function"){kpPop(c,`<div class="kpopt">${c.title}</div>`);e.stopPropagation()}}catch(x){}},true);
 (function(){const st=document.createElement("style");st.id="k2b-pcgrid";st.textContent=`
 .kpgrid{display:flex;flex-direction:column;gap:4px;margin:4px 0 6px}
 .kpgr{display:flex;flex-wrap:wrap;gap:4px}
-.kpc{display:inline-flex;align-items:center;gap:4px;padding:2px 7px;border:1px solid var(--k-hair,#e6d3ac);border-radius:7px;background:var(--k-card,#fffaf0);font-size:.76rem;line-height:1.25;white-space:nowrap;cursor:help}
-.kpc>small{color:var(--k-lab,#8a7350);font-size:.68rem;font-weight:600}
-.kpc>b{color:var(--ink);font-weight:700}
-.kpc.kpu>b{color:var(--dim);font-weight:500}
-.kpc .fbar{display:inline-block!important;width:34px!important;margin:0!important;vertical-align:middle}
-.kpc button.lnk{padding:0 2px;min-height:0;font-size:.8rem}
-.kpgr0 .kpc{background:color-mix(in srgb,var(--k-card,#fffaf0) 80%,#f3dfc0)}
+.kpq{display:inline-flex;align-items:center;gap:4px;padding:2px 7px;border:1px solid var(--k-hair,#e6d3ac);border-radius:7px;background:var(--k-card,#fffaf0);font-size:.76rem;line-height:1.25;white-space:nowrap;cursor:help}
+.kpq>small{color:var(--k-lab,#8a7350);font-size:.68rem;font-weight:600}
+.kpq>b{color:var(--ink);font-weight:700}
+.kpq.kpu>b{color:var(--dim);font-weight:500}
+.kpq .fbar{display:inline-block!important;width:34px!important;margin:0!important;vertical-align:middle}
+.kpq button.lnk{padding:0 2px;min-height:0;font-size:.8rem}
+.kpgr0 .kpq{background:color-mix(in srgb,var(--k-card,#fffaf0) 80%,#f3dfc0)}
 .pc[data-k2]>.pcl>.kpgrid{order:0}
 .pc.kpnar[data-k2]>.pcl>.kpgrid{grid-area:bars;margin:2px 0 0}
 .pc.kpnar[data-k2]>.pcl>.kpfacts{display:flex!important;grid-area:fx;margin:4px 0 0;flex-direction:column;gap:4px}
 .pc.kpnar[data-k2]>.pcl>.kpfacts .chips{gap:4px}
-@media (max-width:599px){.kpc{font-size:.7rem;padding:1px 5px}.kpc>small{font-size:.62rem}.kpc .fbar{width:24px!important}}
+@media (max-width:599px){.kpq{font-size:.7rem;padding:1px 5px}.kpq>small{font-size:.62rem}.kpq .fbar{width:24px!important}}
 `;document.head.appendChild(st)})();
