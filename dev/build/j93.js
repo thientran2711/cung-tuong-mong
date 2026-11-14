@@ -384,6 +384,9 @@ window.kitReward=kitReward;window.kitFlyItem=kitFlyItem;window.kitAlarm=kitAlarm
 .kmwxh{display:flex;align-items:center;gap:8px}.kmwxh img{border-radius:50%;flex:none}.kmwxh small{display:block;font-family:var(--body);font-weight:400;font-size:.72rem;color:var(--dim)}
 .kmwxl p{margin:3px 0;font-size:.8rem;line-height:1.35}.kmwxl .ef.n{color:var(--ink)}
 /* reduced motion: final frames, no travel */
+/* reduced motion (global rule in p1 removes every animation): pin each piece to its final frame */
+@media (prefers-reduced-motion:reduce){.kmcard{transform:rotateY(180deg)}.kmtab-c{transform:translateY(-4%) scale(1.06)}.kmsc-c,.kmfr-old,.kmsweep{display:none}.kmsc-o{clip-path:none}
+ .kmit{opacity:1}.km-open .kmrays{opacity:1;transform:translate(-50%,-50%) scale(1)}.kmblot{opacity:.97;transform:translate(-50%,-50%) scale(3.2)}.kmstick{transform:translate(10px,6px) rotate(64deg)}.kmdark{opacity:1}}
 @media (prefers-reduced-motion:reduce){.kmov *,.kmseal,.kmxam *,.kmcal,.kmfl,.kmalarm,.dlg,#kpop,.rtoast.karesult.on{animation-duration:.01s!important;animation-delay:0s!important;animation-iteration-count:1!important}.kmfls,.kmalarm,.kmcal{display:none}}
 @media (max-width:599px){.kmtabs{height:min(46vh,360px)}.kmcap{font-size:.95rem}}
 @media (orientation:landscape) and (max-height:860px){.kmtabs{height:min(50vh,380px)}.kmbloom{height:min(74vh,520px)}.kmbox{width:min(40vw,320px)}}
