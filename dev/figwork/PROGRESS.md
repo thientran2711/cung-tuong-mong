@@ -26,9 +26,16 @@
   mm_fa (sheer sleeves). Gen ids: sheets5.txt / sheets4_bg.txt. Sheet: scratchpad/sheets/por_t4.jpg.
 - T6 c01-c16 REDRAWN (saturated, calm, distinct props via spec7.py P6, t6 flat huadian with tiny pearl dot): all 16 looked at,
   colours clearly their palette, a51 hair dark, moles mostly removed by demole. Sheet scratchpad/sheets/por_t6a.jpg.
-- FOUND (step 4 of the plan): heads.py on t5 and t6 a51 -> almost ALL grey-haired (t5 c02-c32, t6 c01-c32) and many have cheek moles
-  and no huadian (drawn before those rules). Needs hair+mole(+huadian) edits on t5 all 32 and t6 c17-c32 (t6 c01-c16 get redrawn anyway).
-- Credits used by art8 so far: ~11.0k (balance ~2.007M).
+- T5/T6 HAIR (step 4) DONE: heads.py showed t5 a51 almost all grey + cheek moles + no/odd huadian. One gpt-2-6 edit per lineup
+  (_edits_t56.json: dark hair, remove moles, add the tier huadian painted flat) on t5 c01-c32 and t6 c17-c32 (48 edits, ids in sheets5.txt
+  "hair/mole/huadian edit of"); c24 ginkgo came out big twice -> shrink edits (t5 gOIDrdeSXO, t6 huRyB6QvqL). All looked at: hair dark,
+  huadian present; a few faint cheek moles remain where the frozen t1 face has one (c07, c09, c17, c23) - demole catches most.
+  mm_fa applied again on sheer lineups (c04/c11 t5, c16/c25 t5, c30 t6). Sheets scratchpad/sheets/heads_t5_after.jpg, heads_t6_after.jpg.
+- NEXT: step 5 = t1-t3 calm redraw (96 lineups). Prompts READY: spec7.py now also rewrites N-cXX-t1/t2/t3 poses (a19 keeps her signature
+  prop, a24/a32/a48 rotate the pool skipping props that clash with the signature). Identity ref stays the frozen t1 (idfix.json); draw a
+  pilot (e.g. c01 t1) and compare side by side with the old t1 before pinning anything; old t1-t3 lineups have no huadian and some moles.
+  Also open: t4 c02 c03 c05 c06 c08-c18 (+c25 c30) are the older calm lineups without huadian; t7/t8 lineups predate huadian too.
+- Credits used by art8: ~25.4k by my own count (6 huadian edits 1.05k, 30 lineups 8.1k, 58 lineup edits 15.7k, ~185 bg cuts 0.56k). Account balance 1.944M (shared with other workers).
 
 ## CURRENT STATE (art worker #6, newest first — read this first)
 - WORKTREE/PUBLISH: same as art5 but wt-art6 / branch art6 (scripts in scratchpad/figwork already sed'ed to wt-art6; next worker:

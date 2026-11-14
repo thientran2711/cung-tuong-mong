@@ -21,6 +21,32 @@ P6={"c01":"DGK","c02":"BEC","c03":"FBK","c04":"CDE","c05":"GBD","c06":"EKC","c07
 "c11":"BFC","c12":"IEC","c13":"BDC","c14":"GIK","c15":"IDC","c16":"FEK"}
 SIGFIX={"c20":("lace-like gauze folding fan","embroidered silk folding fan"),"c04":("round gauze fan","round silk fan")}
 JOBS=[(f"N-{c}-t4",c,v,"") for c,v in P4.items()]+[(f"N-{c}-t6",c,v,", stately poised posture") for c,v in P6.items()]
+
+# t1-t3 (art8, for the t1-t3 calm redraw): rotate the pool per consort/tier, skipping props that clash with her signature (a19) prop
+POOL="ABCDEFGHIKL"
+def excl(sig):
+    s=sig.lower(); x=set()
+    if "fan" in s: x|={"I","L"}
+    if any(w in s for w in ("flower","blossom","jasmine","lotus","sprig","basket")): x.add("B")
+    if "handkerchief" in s: x.add("H")
+    if "flute" in s: x.add("G")
+    if "box" in s: x.add("D")
+    if any(w in s for w in ("bead","pearl")): x.add("K")
+    if any(w in s for w in ("scroll","letter","paper")): x.add("E")
+    if "hairpin" in s: x.add("A")
+    return x
+for t in (1,2,3):
+    for n in range(1,33):
+        c="c%02d"%n; k=f"N-{c}-t{t}"
+        if k not in J: continue
+        m=re.search(r"left to right: (about 19.*?); about 24",J[k]["prompt"])
+        if not m: continue
+        x=excl(m.group(1)); o=(n*3+t*5)%len(POOL); codes=""
+        for i in range(len(POOL)):
+            L=POOL[(o+i)%len(POOL)]
+            if L not in x and L not in codes: codes+=L
+            if len(codes)==3: break
+        JOBS.append((k,c,codes,""))
 for k,c,codes,suf in JOBS:
     p=J[k]["prompt"]
     if c in SIGFIX: p=p.replace(*SIGFIX[c])
