@@ -317,3 +317,48 @@ N-c15-t7 KLMAD3Vkqp v7b
 N-c16-t7 79veaMCJAL v7b
 N-c30-t4 ksDG8OJ16B v6t4 (calm redraw, opaque; coordinator smudge bug)
 N-c25-t4 JNadHzTOq4 v6t4 (calm redraw, opaque; sheer sash)
+N-c17-t7 ov9gnBo829 v7c art5 (a48 dark hair, opaque)
+N-c18-t7 bxTZIbD5Y2 v7c art5
+N-c19-t7 SytMqNEUb8 v7c art5
+N-c20-t7 Bh4lnE3oQR v7c art5
+N-c21-t7 YMLH9MUWeC v7c art5
+N-c22-t7 tCiwTE7mZJ v7c art5
+N-c23-t7 O6fXr3Lynm v7c art5
+N-c24-t7 yiCBx2oPW9 v7c art5
+N-c25-t7 Ebz9BXruuO v7c art5
+N-c26-t7 lJ8TqqMgv9 v7c art5
+N-c27-t7 MBw12A6DCm v7c art5
+N-c28-t7 8aNS0VeIrU v7c art5
+N-c30-t7 9ZQISpkNYZ v7c art5
+N-c31-t7 LwBcqzGswO v7c art5
+N-c32-t7 jUXWHzWLD0 v7c art5
+N-c29-t7 rgenQ80xtc v7c art5
+N-c20-t7 1lpzFntr4r v7d art5 (dark-hair test)
+N-c30-t7 nVjFRSIYQD v7e hair-edit of 9ZQISpkNYZ
+N-c02-t7 TdSKnyrVNR v7e hair-edit
+N-c03-t7 mE37BnWhJQ v7e hair-edit
+N-c05-t7 MBw1W6gDCm v7e hair-edit
+N-c06-t7 TdSKnNsVNR v7e hair-edit
+N-c07-t7 huRJoTjvqL v7e hair-edit
+N-c09-t7 XmPsMzsBfo v7e hair-edit
+N-c10-t7 xSdY5uWjfW v7e hair-edit
+N-c11-t7 xSdY5FljfW v7e hair-edit
+N-c12-t7 8aNSdbFIrU v7e hair-edit
+N-c13-t7 LwBc16KswO v7e hair-edit
+N-c14-t7 aF2ytLUfSh v7e hair-edit
+N-c15-t7 s7o0rZZl8e v7e hair-edit
+N-c16-t7 u5nNa78QLD v7e hair-edit
+N-c17-t7 s7o0rG1l8e v7e hair-edit
+N-c18-t7 5jV2FRjKxe v7e hair-edit
+N-c21-t7 3zbv9hFREY v7e hair-edit
+N-c22-t7 YMLHGkGWeC v7e hair-edit
+N-c23-t7 9ZQIyflNYZ v7e hair-edit
+N-c25-t7 mE378NNhJQ v7e hair-edit
+N-c26-t7 8aNSX4JIrU v7e hair-edit
+N-c27-t7 O6fXwaZynm v7e hair-edit
+N-c28-t7 Bh4lePDoQR v7e hair-edit
+N-c31-t7 6AHm4H6iJO v7e hair-edit
+N-c32-t7 fHAPhGmCDY v7e hair-edit
+N-c29-t7 cpl5psZ0eP v7e hair-edit
+N-c18-t7 YMLqMLZWeC v7f hair-edit2 of 5jV2FRjKxe
+N-c01-t8 iGqvzwk3uK v8a art5 trial

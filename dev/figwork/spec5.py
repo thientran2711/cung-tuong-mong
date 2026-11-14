@@ -192,3 +192,36 @@ for cid,tr,mi in CONS:
     figs=[dict(f,file=f["file"].replace("-t5-","-tcold-"),tier="cold",palette="undyed grey-white linen") for f in b["figs"]]
     J[f"N-{cid}-tcold"]={"prompt":p,"ref":b["ref"],"style":b["style"],"figs":figs,"pal":"undyed grey-white linen","pose":cold_pose(g)}
 json.dump(J,open("jobs.json","w"),indent=0)
+# ---- art5: owner a48 hair rule (binding): dark hair with only two or three thin silver strands, nothing greyer ----
+A48O="about 48, a graceful elegant lady, only a few faint silver strands at the temples at most, minimal faint lines, still clearly beautiful, not elderly"
+A48N="about 48, a graceful elegant lady, her hair still fully DARK black-brown like the younger figures, at most two or three single fine silver hairs barely visible, NO grey streak, NO grey or silver temples, NOT grey-haired, minimal faint lines, still clearly beautiful, not elderly"
+for key,j in J.items():
+    if key.startswith("N-") and A48O in j["prompt"]: j["prompt"]=j["prompt"].replace(A48O,A48N)
+json.dump(J,open("jobs.json","w"),indent=0)
+# art5: opaque clause everywhere (owner: all fabrics opaque silk, no sheer gauze, no floating stole)
+OPQ="NO swirling and NO flying fabric; "
+OPQN="NO swirling and NO flying fabric; all fabrics opaque silk, NO sheer see-through gauze, NO floating stole; "
+for key,j in J.items():
+    if key.startswith("N-") and OPQ in j["prompt"] and "NO floating stole" not in j["prompt"]: j["prompt"]=j["prompt"].replace(OPQ,OPQN)
+json.dump(J,open("jobs.json","w"),indent=0)
+# ---- art5: t8 (Empress) made clearly grander than t7: dense embroidery, floor-length mantle, wide pearl collar, taller wider nine-phoenix crown ----
+L8O=re.compile(r"the Empress's imperial phoenix ceremonial robe of (SATURATED |)(.+?) silk with large phoenixes.*?clearly grander than every other rank")
+def L8N(m):
+    sat,c=m.group(1),m.group(2)
+    return (f"the Empress's imperial phoenix ceremonial robe of {sat}{c} silk, richly embroidered on the chest, shoulders and wide sleeves with large phoenixes, peonies "
+     f"and clouds in gold and kingfisher-blue silk thread (far denser and richer embroidery than any other rank), over it a long ceremonial {c} silk mantle "
+     f"falling from the shoulders to the floor, edged with a broad band of gold brocade and pearls, a wide jewelled gold-and-pearl cloud collar with layered "
+     f"pearl fringes over the shoulders, many long strands of pearls and jade across the chest, a jade-and-gold belt with long tassels and jade pendants, "
+     f"a VERY long {c} train spread on the ground behind her; the GRANDEST headdress of all: a FULL tall imperial nine-phoenix crown, clearly taller and "
+     f"wider than a noble consort's crown, with a large central gold phoenix holding a pearl string in its beak, jewelled wings spreading wide on both sides, "
+     f"kingfisher-blue inlay, rubies and pearls, and long curtains of pearl tassels hanging at both sides down to the shoulders; the most splendid outfit of all, "
+     f"clearly grander than every other rank")
+for key,j in J.items():
+    if re.match(r"N-c\d\d-t8$",key): j["prompt"]=L8O.sub(L8N,j["prompt"],count=1)
+json.dump(J,open("jobs.json","w"),indent=0)
+# art5: t8 trial c01 had a36/a51 squat (train spread wide, H/W 1.76-1.86) -> train trails straight, slim silhouette
+for key,j in J.items():
+    if re.match(r"N-c\d\d-t8$",key):
+        p=re.sub(r"a VERY long (.+?) train spread on the ground behind her",r"a VERY long \1 train trailing straight behind her, skirt and train NOT spread wide to the sides, slim tall silhouette",j["prompt"])
+        j["prompt"]=p.replace("the long train spread on the ground behind her","the long train trailing straight behind her")
+json.dump(J,open("jobs.json","w"),indent=0)

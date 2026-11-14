@@ -1,7 +1,7 @@
 # idsheet.py out.jpg "row1f1,row1f2,..." "row2..." ; names without fig- prefix/.webp
 import sys
 from PIL import Image, ImageDraw
-OUT="/tmp/claude-0/-home-user-cung-tuong-mong/84f333ce-ebd1-5e4a-9b0c-43035da11b67/scratchpad/wt-art4/img"
+OUT="/tmp/claude-0/-home-user-cung-tuong-mong/84f333ce-ebd1-5e4a-9b0c-43035da11b67/scratchpad/wt-art5/img"
 rows=[r.split(",") for r in sys.argv[2:]]; TW,TH=150,270
 cols=max(len(r) for r in rows)
 sh=Image.new("RGB",(cols*TW,len(rows)*(TH+16)),(240,230,210)); d=ImageDraw.Draw(sh)

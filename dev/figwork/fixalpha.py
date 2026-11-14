@@ -5,7 +5,7 @@
 import sys,io,numpy as np
 from PIL import Image
 from scipy import ndimage as nd
-OUT="/tmp/claude-0/-home-user-cung-tuong-mong/84f333ce-ebd1-5e4a-9b0c-43035da11b67/scratchpad/wt-art4/img"
+OUT="/tmp/claude-0/-home-user-cung-tuong-mong/84f333ce-ebd1-5e4a-9b0c-43035da11b67/scratchpad/wt-art5/img"
 PARCH=np.array([240,232,218],float)
 def save_webp(im,path,maxkb=250):
     for q in (86,80,74,68,60,52):
