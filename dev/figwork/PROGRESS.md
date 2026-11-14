@@ -1,5 +1,15 @@
 # Art progress (art worker, 11/14/2026)
 
+## CURRENT STATE (art worker #9, newest first — read this first)
+- Same worktree/scripts as art8 (scratchpad/wt-art8, branch art8 -> review/consort-art). DISK: the volume fills up (0 MB free once);
+  delete figwork/raw/*.png and figwork/bg/*.png after each published batch (all re-downloadable from urls.json).
+- T1 CALM REDRAW DONE (32/32, incl. the approved pilot c01 mE3yQeWhJQ): prompt = `python3 p7.py N-cXX-tT` (pj.py prompt with the
+  approved pilot wording: "keep EXACTLY her face ... (the same woman)"; t2/t3 still say NEW outfit). `python3 p7v.py JIDs` prints only
+  the variable parts and checks the rest equals the template. Gen ids in sheets5.txt ("art9 calm+props"), bg in sheets4_bg.txt.
+  All looked at (raw sheets + heads): same faces, calm, 4 different props, dark hair at 48, t1 huadian present; moles in the frozen
+  faces (c07 c09 c15 c17 c23) removed by demole in run.sh. mm_fa (fa_apply.py, solidSheer) on c04 c11 c29 t1. idfix.json NOT changed.
+- Credits art9: see bottom line.
+
 ## CURRENT STATE (art worker #8, newest first — read this first)
 - WORKTREE/PUBLISH: scratchpad/figwork (work copy, copied from dev/figwork) + worktree scratchpad/wt-art8 (branch art8). Scripts sed'ed
   wt-art7 -> wt-art8. Next worker: `sed -i 's/wt-art8/wt-art9/g; s/origin art8:/origin art9:/'` on bigsheet.py cmp.py fixalpha.py idsheet.py
