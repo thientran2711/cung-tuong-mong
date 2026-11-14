@@ -15,8 +15,7 @@ const T=$("title");if(!T)return;const BOX=T.querySelector(".tbox");if(!BOX)retur
 let PG="home";
 const st=document.createElement("style");
 st.textContent=`
-#title.title{background:linear-gradient(rgba(245,236,220,0) 56%,rgba(245,236,220,.72)),url(img/title-key.webp) center top/cover no-repeat,#f3e6d6!important}
-@media (orientation:landscape){#title.title{background:linear-gradient(90deg,rgba(245,236,220,0) calc(75vh - 90px),rgba(245,236,220,.6) 75vh),url(img/title-key.webp) left top/auto 100% no-repeat,linear-gradient(rgba(245,236,220,.74),rgba(245,236,220,.74)),url(img/title-key.webp) center/cover no-repeat,#f3e6d6!important}}
+/* #title backdrop: jbd KIT_BD.title (portrait title-key / landscape title-key-l) */
 #title .tbox{display:none!important}
 .modal.kptitle{z-index:55;background:none}
 .modal.kpthome .dlg #mr{display:none!important}
