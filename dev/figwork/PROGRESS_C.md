@@ -44,3 +44,4 @@ Mẻ 8: t2 m07–m14 (8 lineup). Tín dụng 8×273 = 2184. Cộng dồn phiên 
 ## C-B (thợ m27–m52): mẻ và tín dụng
 Mẻ B1: t2 m27–m34 (vẽ lại m27–m33, đạo cụ khác loại mỗi tuổi). 8 lineup, tín dụng 8×273 = 2184.
 Mẻ 9 (thợ m01–m26): t2 m15–m22 (8 lineup + 2 vẽ lại hoa điền m16 m21). Tín dụng 10×270 + 8×3 = 2724.
+Mẻ B2: t2 m35–m42 (8 lineup + 1 vẽ lại m40 vì hoa điền to). Tín dụng 9×273 = 2457.
