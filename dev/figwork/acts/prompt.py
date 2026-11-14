@@ -14,7 +14,7 @@ def P(k):
         a=[x for x in D['acts'] if x['key']==k][0]; s=a['scene']; dark=a['cat'] in DARKCAT or k in DARKKEY
     return HEAD.format(s=s)+(DK if dark else BR)+TAIL
 if sys.argv[1:]==['--todo']:
-    done={l.split()[0] for l in open(os.path.join(H,'gens.txt')) if l.strip()}
+    done={l.split()[0] for l in open(os.path.join(H,'gens.txt')) if l.strip() and not l.startswith('#')}
     print(' '.join(a['key'] for a in sorted(D['acts'],key=lambda a:a['pri']) if a['key'] not in done))
 else:
     for k in sys.argv[1:]: print(k,'||',P(k))

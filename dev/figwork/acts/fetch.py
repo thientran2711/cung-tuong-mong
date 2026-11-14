@@ -9,7 +9,7 @@ os.makedirs(RAW,exist_ok=True)
 G={}
 for l in open(os.environ.get('GENS',os.path.join(H,'gens.txt'))):
     p=l.split()
-    if len(p)>=2: G[p[0]]=p[1]   # last line wins (redos)
+    if len(p)>=2 and not p[0].startswith('#'): G[p[0]]=p[1]   # last line wins (redos)
 U={}
 for f in glob.glob(os.path.expanduser(os.environ.get('TRX','~/.claude/projects/-home-user-cung-tuong-mong/84f333ce-ebd1-5e4a-9b0c-43035da11b67/subagents/agent-a58f230e6603d7a6d.jsonl'))):
     s=open(f,errors='ignore').read().replace('\\"','"')
