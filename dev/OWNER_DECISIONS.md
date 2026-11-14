@@ -64,3 +64,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (18:20Z) Owner: her Tư chất (Sắc/Tài/Tâm cơ/Đức) must be visible at all times on phone too (in the slim top bar), not only on the room home. Always send her BOTH Fold and iPad screenshots together.
 - (18:40Z) Owner (room home): why is Đức red (stats in normal ink; red only for cost/risk, warnings as a small mark+tooltip); 'còn 4 khắc' → 4 round dots; place name text directly on the scene, no frame, one line; figure name labels without background, rank+name one line.
 - (18:45Z) Owner: palace names (Càn Ninh cung…) must stay on the consort picker at all sizes (compact Fold version dropped them — restore).
+- (18:55Z) Owner: tassels (tua rua) only on people portraits; act/event/story/item/place pictures use a simple frame without tassel; act pictures larger in their area. Owner also: person-card portrait bigger, filling from card top to the action-tab row.
