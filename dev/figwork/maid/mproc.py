@@ -6,7 +6,7 @@ H=os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0,"/home/user/cung-tuong-mong/dev/figwork")
 import importlib.util
 spec=importlib.util.spec_from_file_location("sp_funcs",H+"/spfuncs.py"); sp=importlib.util.module_from_spec(spec); spec.loader.exec_module(sp)
-WT="/tmp/claude-0/-home-user-cung-tuong-mong/84f333ce-ebd1-5e4a-9b0c-43035da11b67/scratchpad/wt-maid"
+WT="/tmp/claude-0/-home-user-cung-tuong-mong/84f333ce-ebd1-5e4a-9b0c-43035da11b67/scratchpad/wt-maid2"
 OUT=WT+"/img"; sp.OUT=OUT
 subprocess.run(["python3",H+"/urls.py"],stdout=subprocess.DEVNULL)
 db=json.load(open(H+"/urls.json"))

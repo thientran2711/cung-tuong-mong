@@ -1,7 +1,7 @@
 # msheet.py out.jpg ROLE TIERS ID... : rows = identities, columns = tiers (each 4 ages). TIERS comma list of file tags e.g. tm0,m1,tm2 (m1 = original maid files)
 import sys,os
 from PIL import Image,ImageDraw,ImageFont
-WT="/tmp/claude-0/-home-user-cung-tuong-mong/84f333ce-ebd1-5e4a-9b0c-43035da11b67/scratchpad/wt-maid/img"
+WT="/tmp/claude-0/-home-user-cung-tuong-mong/84f333ce-ebd1-5e4a-9b0c-43035da11b67/scratchpad/wt-maid2/img"
 out,role,tiers=sys.argv[1:4]; ids=sys.argv[4:]; tiers=tiers.split(",")
 TH=int(os.environ.get("TH",260)); FW=int(TH*0.42); AG=["a18","a26","a36","a51"]; LB=24
 W=len(tiers)*(4*FW+16)+70; Hh=len(ids)*(TH+8)+LB
