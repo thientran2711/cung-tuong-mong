@@ -485,10 +485,30 @@ img/veil*.png is rejected). Status chips such as "Hủy dung (vừa) · còn N t
   (384x506 canvas units) has the same size for every rank and role. Nobody sets another size.
 - Layout: portrait floats left; name, rank title, ghen line, stat tiles and the info rows sit beside it; act groups run full width below.
   The Fold (755x1000) shows portrait + name + rank + the first info rows without scrolling; the card scrolls as one block (`.pc` overflow).
+### 26.0 ONE FRAME FUNCTION (owner 11/14 B) — `pcPort(face)` everywhere
+- Every portrait frame — person card, dialog subject, act-art frame, small frames in face strips (Bảng phẩm vị, pager), header, Hoàng thượng
+  box, chips, facts, podium, week book, strips — is the SAME `pcPort` cell (j60 layers on the 550x1037 canvas). `mdH(face,size)` calls pcPort
+  and shows the same cell at a smaller width (`span.md.kit.kfc`, xs 26 px · sm 38 · default 60 · big 84; aspect 550:795). No other frame
+  markup exists (the old cropped `.kmini` body frame is gone). A change to the frame shows at every size.
+- Cell = canvas x 0–550, y 0–795: crest room on top, photo window, band; the pendant/tassel below is drawn only where the full canvas shows.
+- Portrait cut (C1): the por picture is 1.14x the window, raised 5 % of its height and clipped to the window (head near the top edge, the
+  person larger); old `face-*` art and the grey silhouette keep the plain window.
+- Crests (C2): every rank and role has its own crest on the top bar, `img/kit/crest-<key>.webp` (gpt-2-6, one style reference = the approved
+  Hoàng hậu frame; sheets in Magnific folder ba4aecfe…): consort-0 plum sprig (wood) · consort-1 orchid (green lacquer) · consort-2 silver lotus
+  · consort-3 clouds + pink lotus · consort-4 small luan + chrysanthemums · consort-5 luan + red peony · consort-6 small phoenix + amber ·
+  Hoàng hậu / Hoàng thượng / Thái hậu / Thái tử keep the crest painted in their frame · maid-0..4 (and ma ma of the same rank) silk bow →
+  bow + jade flower → bow + silver bell → silver plum + jade bells → gold plum + pearl bells · eunuch jade ring · eunuch-3 gold ruyi cloud ·
+  prince qilin · princess peach blossom · official crane · physician bamboo + gourd · man jade disc · royal python · guard tiger + halberds ·
+  cold withered plum · unknown grey stone cloud. Width grows with rank (300→432 canvas units for consorts), base on the top bar (y 172).
+  Data: `KIT_CREST` {ar, base, w, key(frameUrl), html(frameUrl)}; a new role adds its crest here.
+
 ### 26.2 STAGE SCALE (one scale, one floor)
 - `kitStageScale()` after every `renderStage` + resize: every adult figure (her `#mefig`, every `#tokens .tok.fig img.figimg`) gets the SAME height
   `--kfig` (all fig-*.webp are cut head-to-hem on 900 px); children keep their j73 age ratio of that height. Feet on the floor line `--kfb` (26.3).
-- Crowded row: everyone shrinks by ONE common factor; when she is on stage she steps to the left edge and the row takes the rest of the width.
+- Height (owner A): the figures fill the stage — feet on the floor band near the bottom (KIT_FLOOR feet line 90 % of the way from the floor
+  top to the picture bottom), head ~2.5 % under the top edge; room under the feet for the name tags.
+- Crowded row: neighbours may overlap by 20 % of a figure's width (a group, sleeves overlap); beyond that everyone shrinks by ONE common factor.
+  When she is on stage with others she stands at the left and the row takes the rest of the width.
 - Name tags hang under the feet (absolute, one line, never cut). When neighbours would touch, tags drop to 2 or 3 staggered lines and the
   floor band grows to fit them.
 ### 26.3 STAGE FLOOR
@@ -497,8 +517,10 @@ for the figure. Phone portrait: stage 40 % of the screen on scene tabs, 24 % on 
 ### 26.4 TRONG CUNG BLOCK (Hoàng thượng · Thái hậu · Hoàng hậu)
 - `kitCourtHTML(cls)` → `.kcourt`: per person a row = small kit frame (`mdH xs`) + name + "Tâm trạng <word>" + "Với ngươi <word>" (green/red/neutral
   `.ef`), "chưa rõ" when unknown. Tap a row = that person's card (Hoàng thượng `showEmp`, Thái hậu → Giao tình on her, Hoàng hậu → Hậu cung on her).
-- Landscape (iPad 1180x820, 1366x1024, 1024x768): `#kcourt` on the stage under the Tư chất block, same side, shown ONLY when it covers no figure.
-- Portrait (Fold, phones) and always in the expanded status sheet: a "Trong cung" column in `#hud2 .khg`.
+- Header chips (owner E): Thái hậu and Hoàng hậu chips (`#kcchips .kcchip`: mini frame, title, mood) beside the Hoàng thượng box on wide screens
+  (≥1000 px), at the right end of the status row on the Fold and phones. Tap = card.
+- The full table is a "Trong cung" column in the status sheet (`#hud2 .khg`). Nothing of it is on the stage; the Tư chất block also left the
+  stage (it is in the sheet: "▾ Tư chất").
 - Hooks (data only): `window.kitCourtMood(who)` → text|[text,"g"|"r"]|null, `window.kitCourtKnown(who)` → bool (who = emp|th|hh). Default: the
   Emperor's mood is public (MOODS), Thái hậu / Hoàng hậu moods "chưa rõ" until a module says; attitudes from Sủng / `S.th` / `S.hh` (`affW`).
 ### 26.5 "COVERS NO FIGURE" = the painted silhouette
@@ -510,3 +532,20 @@ so stage blocks may stand beside a head or between figures, never over the paint
 - The result card (section 7) is unchanged and shows the true numbers after the choice.
 - Use (data only): `Q.push({…, hideOut:true, opts:[…]})` / `kitModal({…, hideOut:true})` hides every option; `{n, fx, x, hideOut:true}` one option;
   any other priced button: `data-khide="1"`. Normal act cards, person-card acts and shop buttons never use it.
+
+### 26.7 PERSON CARD: portrait and bars always in view (owner D)
+- Left column = portrait cell, name, rank title, the BARS (`.kpbars`: Ghen, Ngươi với nàng · thiện cảm, Oán, Nàng với ngươi, Sủng).
+  Right column (`.pcr`) = facts (`.kpfacts`: stat tiles, age, nature, chips) → act-group tabs (`.pctabs`) → act cards (`.pcb`).
+- Wide screens (≥1000 px, iPad): two columns; the left column is sticky while the right one scrolls, so the bars stay visible next to the buttons.
+- Fold and phones: portrait left with name, rank and bars beside it; facts, tabs and act cards below. When the portrait scrolls out, a slim
+  sticky strip (`.kpstrip`: small frame, name, rank, the same bars) stays at the top of the card.
+- After an act the bars run from the old value to the new one (0.6 s, `KIT_BARW` remembers the last width per person and bar; none with
+  prefers-reduced-motion). j93 kit-motion may replace the easing, not the markup.
+
+### 26.8 VEIL + SCAR LAYERS (review/wardrobe j92)
+- Layer order everywhere: portrait < scar strokes (`img.kscar`) < veil (`img.kveil2`) < frame. Placed per picture from `KIT_SCAR.fit` /
+  `KIT_VEIL.fit` (`style(file,tier)`); the por-* boxes were re-derived from the fig-* boxes through the porcrop geometry (the por pictures were
+  re-cut after the fit was measured). No fit data → nothing drawn (never a guessed place).
+- Tall frame and small frame: `.kfxc` (clip = photo window) > `.kfx` (box of the por picture, same 1.14x cut as the portrait); stage figures:
+  `.kfxf` box laid over the figure image (idle animation off on that figure).
+- Scar only when the player knows (`KIT_SCAR.on`: herself or j70 `knows(p)`, or `p.scar.known`); a veil is public; never on the grey silhouette.
