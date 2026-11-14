@@ -25,16 +25,56 @@ st.textContent=`
 .kpmenu .kbtn.k1{grid-column:1/-1;min-height:54px}
 .kpmenu .kbtn small{display:block;font-family:var(--body);font-weight:400;font-size:.74rem;opacity:.9}
 .kpmenu.n4{grid-template-columns:repeat(3,minmax(0,1fr))}
+/* Chọn sổ: one kit section per sổ (h4.kpst label + kitRows + .kbtn) */
+#modal .kpt-mount #slots{display:flex;flex-direction:column;gap:6px;margin:0 0 6px}
+.kslot{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;align-items:center;padding:2px 0 6px;border-bottom:1px solid var(--k-hair,#e6d3ac)}
+.kslot>.kpst{grid-column:1/-1;margin:0}
+.kslot .kb{margin:0}
+.kslot-a{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.kslot-a .kbtn{min-height:40px;padding:6px 14px;font-size:.84rem}
+.kslot-a .kbtn small{display:block;font-family:var(--body);font-weight:400;font-size:.7rem}
+@media (max-width:599px){.kslot{grid-template-columns:1fr}.kslot-a{justify-content:stretch}.kslot-a .kbtn{flex:1 1 0}}
+/* Thiết lập: kit controls (KIT.md 28) */
+.optwrap .optbox.kctls{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:0 18px;justify-content:stretch;align-items:stretch;font-size:inherit;margin:0 0 6px}
+.optwrap .optbox.kctls label{display:grid}
+.optwrap .optbox.kctls input[type=range]{width:100%}
+.xiobox .kctl.kinp{padding:0}
+.xiobox .kbtn{min-height:40px;padding:6px 14px;font-size:.84rem}
+.xiobox .kbtn small{display:block;font-family:var(--body);font-weight:400;font-size:.7rem}
 `;
 document.head.appendChild(st);
 /* remove the inline backgrounds of j37/j50 so the rule above decides */
 T.style.removeProperty("background");
 const HEAD={slots:"Chọn sổ",opt:"Thiết lập",past:"Sổ luân hồi"};
 const SUBH={slots:"Mỗi sổ là một kiếp. Phúc duyên ở dưới.",opt:"Tiếng, nhạc, giọng, rung; chép sổ và nạp sổ.",past:"Những kiếp đã qua."};
+const SONO=["một","hai","ba"];
+function slotWho(s){try{if(s.srv&&!s.srv.risen)return s.srv.lau>0?"Cung nữ Tân Giả khố":(typeof SRK!=="undefined"&&SRK.maid&&SRK.maid[s.srv.rk])||"Cung nữ";return (RANKS[Math.min(s.rank,RANKS.length-1)]||{}).n||""}catch(e){return ""}}
+function slotDate(s){try{return kitDate(s.month,s.year,s.tuan)}catch(e){return `Tháng ${s.month}, năm ${s.year}`}}
+function slotsHTML(){return [1,2,3].map(n=>{const d=loadSlot(n);const h=`<h4 class="kpst">Sổ ${SONO[n-1]}</h4>`;
+  if(!d)return `<div class="kslot">${h}${kitRows([["Kiếp","Chưa ghi","n"]])}<div class="kslot-a"><button class="kbtn" data-new="${n}">Bắt đầu kiếp mới</button></div></div>`;
+  const s=d.S;return `<div class="kslot">${h}${kitRows([["Kiếp",`${slotWho(s)} ${s.name}`,"t"],["Ngày",slotDate(s),"n"]])}<div class="kslot-a"><button class="kbtn" data-load="${n}">Tiếp tục kiếp này</button><button class="kbtn alt" data-new="${n}" data-ask="1">Kiếp mới</button></div></div>`}).join("")}
+function drawSlots(){const s=$("slots");if(s)s.innerHTML=slotsHTML()}
+/* Thiết lập with the kit controls; "Mở tiếng" and "Im tiếng" are ONE switch (Tiếng) */
+optHTML=function(){return `<div class="optbox kctls">${kitToggle({id:"o-snd",label:"Tiếng",sub:"nhạc, tiếng động, giọng",on:!!(OPT.snd&&!OPT.mute),yes:"Mở tiếng",no:"Im tiếng"})}
+ ${kitSlider({id:"o-mus",label:"Nhạc",value:OPT.mus})}${kitSlider({id:"o-sfx",label:"Tiếng động",value:OPT.sfx})}${kitSlider({id:"o-vo",label:"Giọng",value:OPT.vo==null?.7:OPT.vo})}
+ ${kitToggle({id:"o-vib",label:"Rung",on:!!OPT.vib})}${kitToggle({id:"o-fx",label:"Cảnh động",on:!!OPT.fxon})}</div>`};
+wireOpt=function(){const T=$("title");if(!T)return;let b=T.querySelector(".optwrap")||document.querySelector("#modal .optwrap");if(!b){b=document.createElement("div");b.className="optwrap";T.querySelector(".tbox").appendChild(b)}b.innerHTML=optHTML();
+ $("o-snd").onchange=e=>{const on=e.target.checked;OPT.snd=on;OPT.mute=false;AU.unlocked=true;saveOpt();auTick();if(on)try{sfx("sfx-tap")}catch(x){}};
+ $("o-mus").oninput=e=>{OPT.mus=+e.target.value;saveOpt();auTick()};$("o-sfx").oninput=e=>{OPT.sfx=+e.target.value;saveOpt()};$("o-vo").oninput=e=>{OPT.vo=+e.target.value;saveOpt();try{voice("f-softlaugh",1)}catch(x){}};
+ $("o-vib").onchange=e=>{OPT.vib=e.target.checked;saveOpt()};$("o-fx").onchange=e=>{OPT.fxon=e.target.checked;saveOpt();try{pxScene()}catch(x){}}};
+/* Chép sổ / Nạp sổ: kit text boxes and buttons */
+function kitXio(){const w=document.querySelector(".xiowrap");if(!w)return;w.querySelectorAll(".xiobox textarea").forEach(x=>kitInputize(x,x.id==="x-in"?"Dán bản chép":"Bản chép"));
+ w.querySelectorAll(".xiobox button.main").forEach(b=>{b.classList.remove("main");b.classList.add("kbtn")});
+ w.querySelectorAll(".xiobox button.btn").forEach(b=>{b.classList.remove("btn");b.classList.add("kbtn","alt")});
+ w.querySelectorAll(".xiobox .kbtn[aria-pressed]").forEach(b=>b.classList.toggle("ksel",b.getAttribute("aria-pressed")==="true"))}
+{const wx0=wireXio;wireXio=function(){const r=wx0.apply(this,arguments);try{kitXio()}catch(e){}return r}}
+try{const ow=T.querySelector(".optwrap");if(ow&&ow.querySelector("#o-mute"))wireOpt()}catch(e){}
+try{drawSlots()}catch(e){}
+function xioReset(){try{XIO.m="";XIO.msg="";XIO.imp=null;XIO.to=0;XIO.ask=0;XIO.code=""}catch(e){}}
 function numVi(n){try{return window.VP&&VP.num?VP.num(n):String(n)}catch(e){return String(n)}}
 function lastSlot(){const F=[1,2,3].filter(n=>loadSlot(n));if(!F.length)return 0;return F.includes(SLOT)?SLOT:F[0]}
 function homeMenu(){const n=lastSlot();let info="";
- if(n){const el=$("slots").querySelector(`[data-load="${n}"]`);const sl=el&&el.closest(".slot");const nm=sl&&sl.querySelector("b"),ps=sl&&sl.querySelector(".past");info=[nm?nm.textContent:"Sổ "+numVi(n),ps?ps.textContent:""].filter(Boolean).join(" · ")}
+ if(n){const d=loadSlot(n);if(d&&d.S)info=[`${slotWho(d.S)} ${d.S.name}`,slotDate(d.S)].filter(Boolean).join(" · ")}
  const B=n?`<button class="kbtn k1" data-tgo="cont">Tiếp tục<small>${info}</small></button><button class="kbtn alt" data-tgo="slots">Kiếp mới</button>`
           :`<button class="kbtn k1" data-tgo="slots">Bắt đầu<small>chọn sổ, xem Phúc duyên</small></button>`;
  return `<div class="kpmenu${n?" n4":""}">${B}<button class="kbtn alt" data-tgo="past">Sổ luân hồi</button><button class="kbtn alt" data-tgo="opt">Thiết lập</button></div>`}
@@ -55,11 +95,12 @@ function mount(){const M=$("modal");if(!SM||Q[0]!==SM||M.hidden)return;const box
 function dropAll(){const M=$("modal");park();[HM,SM].forEach(m=>{if(!m)return;const i=Q.indexOf(m);if(i>=0)Q.splice(i,1)});HM=SM=null;
  if(M&&M.classList.contains("kptitle")){M.classList.remove("kptitle","kpthome","kpscene");if(T.hidden&&Q.length)showModal();else M.hidden=true}}
 function homeOpen(){dropAll();HM=kitModal({scene:true,kind:"notice",title:"Cung Tường Mộng",sub:"Mỗi kiếp một thân phận. Leo từ Đáp ứng lên Hoàng hậu, rồi đưa con lên ngôi.",html:homeMenu(),cls:"kptitle kpthome"});noSeal($("modal"))}
-function subOpen(pg){dropAll();if(pg==="opt"){try{if(!T.querySelector(".optwrap"))wireOpt();if(!T.querySelector(".xiowrap"))wireXio()}catch(e){}}
+function subOpen(pg){dropAll();if(pg==="opt"){xioReset();try{wireOpt();wireXio()}catch(e){}}
+ if(pg==="slots")drawSlots();
  SM=kitModal({scene:true,kind:"notice",title:HEAD[pg]||"",sub:SUBH[pg]||"",html:`<div class="kpt-mount" data-pg="${pg}"></div>`,cls:"kptitle"});mount()}
 function pastBody(){let h="";try{h=pastHTML()||""}catch(e){}h=h.replace(/^<h3>Sổ luân hồi<\/h3>/,"");
  if(!/pcrow|Kiếp \d/.test(h))h=`<p class="past">Chưa có kiếp nào được ghi.</p>`+h;return h}
-function go(pg,focus){PG=pg;T.dataset.pg=pg;if(T.hidden){dropAll();return}
+function go(pg,focus){if(PG==="opt"&&pg!=="opt")xioReset();PG=pg;T.dataset.pg=pg;if(T.hidden){dropAll();return}
  if(pg==="home")homeOpen();else subOpen(pg);
  const M=$("modal");if(M)M.scrollTop=0;
  if(focus!==false){const f=pg==="home"?document.querySelector("#modal.kptitle .kpmenu .kbtn"):document.querySelector("#modal.kptitle #mr .kbtn");if(f)f.focus({preventScroll:true})}}
@@ -70,7 +111,7 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!T.hidden&&PG!=="ho
 /* re-renderers of the borrowed parts: give the parts back first, re-mount after */
 function wrapPark(name){const f=window[name];if(typeof f!=="function")return;window[name]=function(){park();let r;try{r=f.apply(this,arguments)}finally{try{if(!T.hidden)mount()}catch(e){}}return r}}
 /* showTitle: from the game (title was hidden) always opens on the home screen; a refresh while open keeps the sub-screen */
-const t0=showTitle;showTitle=function(){const was=T.hidden;park();const r=t0.apply(this,arguments);try{go(was?"home":PG,was)}catch(e){console.error(e)}return r};
+const t0=showTitle;showTitle=function(){const was=T.hidden;park();const r=t0.apply(this,arguments);try{drawSlots()}catch(e){}try{go(was?"home":PG,was)}catch(e){console.error(e)}return r};
 window.showTitle=showTitle;
 const m=$("menu");if(m){const m0=m.onclick;m.onclick=function(){PG="home";return m0&&m0.apply(this,arguments)}}
 new MutationObserver(()=>{if(T.hidden&&(HM||SM))dropAll()}).observe(T,{attributes:true,attributeFilter:["hidden"]});
