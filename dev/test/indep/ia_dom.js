@@ -29,7 +29,7 @@ const HOOK=fs.readFileSync(path.join(__dirname,'ia_hook.js'),'utf8');
   else{await p.evaluate(rr=>{try{if(rr<.45)nextBuoi();else if(rr<.8){const L=places().map(x=>x.k).filter(k=>k!==S.place&&accessOf(S,k).ok);if(L.length)goTo(L[Math.floor(Math.random()*L.length)])}else{const b=[...document.querySelectorAll('#panel button.act-card:not([disabled]), #panel .acts button:not([disabled])')];if(b.length)b[Math.floor(Math.random()*b.length)].click()}}catch(e){}},r);
    what=r<.45?"buổi":r<.8?"đi":"hành sự";await clear(Math.random()<.3)}
   await p.evaluate(()=>{tab="go";render()});await p.waitForTimeout(500);
-  const M=await p.evaluate(()=>{const R=S.roster,kh=j95kh();if(!R||R.key!==j95key())return{skip:1,key:R&&R.key,now:j95key()};const C={};for(const id in R.P){const k=R.P[id][kh][0];C[k]=(C[k]||0)+1}
+  const M=await p.evaluate(()=>{const R=S.roster,kh=j95kh();if(!R||R.key!==j95key())return{skip:1,key:R&&R.key,now:j95key()};/* j95c pass: a promotion card switches back to the stage tab; no map on screen = nothing to compare */if(!document.querySelector('.mapw'))return{skip:1,nomap:tab};const C={};for(const id in R.P){const k=R.P[id][kh][0];C[k]=(C[k]||0)+1}
    const out=[];const seen={};for(const sp of document.querySelectorAll('.mapw .mspot')){const k=sp.dataset.go||sp.dataset.ak;if(!k)continue;const s=sp.querySelector('.msil');const n=s?+(/(\d+)/.exec(s.getAttribute('aria-label'))||[0,0])[1]:0;
     if(seen[k]!=null&&seen[k]!==n)out.push(`${k}: hai ô khác số (${seen[k]} / ${n})`);seen[k]=n;if(n!==(C[k]||0))out.push(`${k}: bản đồ ${n}, sổ ${C[k]||0}`)}
    for(const k in C)if(seen[k]==null&&k!=="home"&&C[k])out.push(`${k}: sổ có ${C[k]} người mà bản đồ không có ô`);
@@ -39,7 +39,7 @@ const HOOK=fs.readFileSync(path.join(__dirname,'ia_hook.js'),'utf8');
   await p.evaluate(()=>{tab="act";render()});await p.waitForTimeout(500);
   const T=await p.evaluate(()=>{const R=S.roster,kh=j95kh();if(!R||R.key!==j95key())return{skip:1};const here=S.place;const out=[];
    const byName={};for(const id in R.P){const w=R.who[id];if(w)(byName[w[0]]=byName[w[0]]||[]).push(id)}
-   const TK=[...document.querySelectorAll('#tokens .tok')].map(t=>{const n=t.querySelector('.j59n'),r=t.querySelector('.j59t');const i=+t.dataset.p;const pp=S.visit&&S.visit.people?S.visit.people[i]:null;return{nm:n?n.textContent.trim():'',rl:r?r.textContent.trim():'',p:pp}}).filter(x=>x.nm);
+   const TK=[...document.querySelectorAll('#tokens .tok')].map(t=>{const n=t.querySelector('.j59n')||t.querySelector('.j59only'),r=t.querySelector('.j59t');/* j95c pass: Thái hậu / Hoàng thượng carry only a title tag (.j59only) */const i=+t.dataset.p;const pp=S.visit&&S.visit.people?S.visit.people[i]:null;return{nm:n?n.textContent.trim():'',rl:r?r.textContent.trim():'',p:pp}}).filter(x=>x.nm);
    const toks=TK.map(x=>x.nm);
    for(const x of TK){const nm=x.nm;if(x.p&&(x.p.kind==="obj"||x.p.kind==="chest"||/^Rương/.test(nm)))continue;let n2=nm.replace(/^Hoàng hậu /,"");let ids=byName[n2]||byName[nm]||(nm==="Hoàng thượng"?["emp"]:nm==="Thái hậu"?["th"]:null);
     if(!ids&&x.p&&x.p.ref&&x.p.ref.id!=null){const rid=x.p.kind==="man"?x.p.ref.id:x.p.ref.rel!=null?"v"+x.p.ref.id:null;if(rid&&R.P[rid])ids=[rid]}

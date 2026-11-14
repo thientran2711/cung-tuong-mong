@@ -59,7 +59,9 @@ const P95B={/* other saveable cards (mkP id): params → role; at = place per pa
  giftpick:{p:{v:{me:1}}},plantpick:{p:{v:{me:1}}},j70start:{p:{v:{me:1}}},
  cnvBribe:{p:{r:{h:"bribe",toMis:1}}},cnvBlack:{p:{r:{h:"uyhiep"}}},cnvOrd:{p:{t:{tgt:"mis",h:"$k"}}},
  j71m:{p:{a0:{n:"việc lập công (ngươi tự quyết)",opt:1}}},q72o:{q72:1},
- j70thr:{p:{v:{h:"plot",warn:1}}},j71f:{p:{a:{f:"visit",nr:1,opt:1}}}};
+ j70thr:{p:{v:{h:"plot",warn:1}}},j71f:{p:{a:{f:"visit",nr:1,opt:1}}},
+ /* j92 "Bị tố ăn cắp": the accuser planted the thing weeks ago; that act passed the gate then (j95c wdFrame) and its reason was kept */
+ wdframe:{p:{a:{h:"giahoa",nb:1,key:1,plant:1}}}};
 const ROLEK95={rv:"rv",sv:"sv",maid:"maid",emp:"emp",th:"th",doc:"doc",eun:"eun",ksp:"ksp",kid:"kid",man:"man"};
 
 /* the record id of an actor object (j68 A6 shape {o,k} or a rival) */
@@ -103,7 +105,8 @@ function j95bActors(id,pp){/* → [{slot,k,o,role,t,kind}] */const out=[];
  for(const r of out){const ro=r.role;if(ro.to)r.t=(out.find(x=>x.slot===ro.to)||{}).o;if(ro.toMis||ro.tgt==="mis"){let m=null;try{m=srvM()}catch(e){}if(ro.toMis)r.t=m;else r.by=m||null}if(ro.h==="$k")ro.hk=pp.k}
  if(T.q){/* pact: the ally also moves against the Hoàng hậu */const v=(out.find(x=>x.slot==="v")||{}).o;try{if(v&&qOn()&&rivals[0]!==v)out.push({slot:"queen",k:"rv",o:v,role:{h:T.q.h},t:rivals[0],xtra:1})}catch(e){}}
  return out}
-function j95bJudge(r){const ro=r.role;if(ro.tgt!=null&&r.by!==undefined){const a=r.by;if(!a)return{ok:true,why:"không có ai"};const k=ro.hk||ro.h;return j95bGate({h:k},a,r.o,k)}
+function j95bPlanted(a,t){try{return j95z().plant[key(a)+">"+key(t||S)]||null}catch(e){return null}}
+function j95bJudge(r){const ro=r.role;if(ro.plant&&r.o){const f=j95bPlanted(r.o,r.t||S);return{ok:true,ex:1,why:f?`đã sai người lén đặt đồ từ tuần ${f.w} (lúc ấy: ${f.why})`:"đã sai người lén đặt đồ từ trước (ván cũ chưa ghi lý do lúc đặt)"}}if(ro.tgt!=null&&r.by!==undefined){const a=r.by;if(!a)return{ok:true,why:"không có ai"};const k=ro.hk||ro.h;return j95bGate({h:k},a,r.o,k)}
  return j95bGate(ro,r.o,r.t||S,ro.hk||ro.h||ro.f)}
 function j95bCheck(id,pp){const L=j95bActors(id,pp);if(L==null)return null;if(L.miss)return{ok:true,list:[],miss:1};
  for(const r of L){r.g=j95bJudge(r);
@@ -147,17 +150,22 @@ function j95bPlaceCard(m){/* table-driven for template cards, lexicon for the re
  if(id&&(E95B[String(id).slice(3)]||P95B[id]))return{table:1,L:out};
  return{table:0,L:j95bScan((m.h||"")+" "+(m.t&&!m.h?m.t:""))}}
 
-/* an act decided between buổi (NPC effort at the turn of the week): it happened in the buổi just ended → write it there (it is logged) */
-function j95bPutPast(id,k,act,why,src){const R=S.roster;if(!R||!R.P||!R.P[id])return"norec";if(id[0]==="v"){const v=RV(+id.slice(1));if(!v||!v.alive||v.out||v.confined)return"skip"}
- const U=R.__pb=R.__pb||{};const used=U[id]=U[id]||[];let kh=R.key===j95key()?j95kh():3;while(kh>0&&(used.includes(kh)||R.P[id][kh][1]==="tryst"||R.P[id][kh][1]==="meet"))kh--;if(used.includes(kh))return"full";used.push(kh);R.P[id][kh]=[k,act,null,why];if(R.m)R.m[kh]=j95counts(R,kh);
- J95B.bind.push({id,k,kh,key:R.key,wk:R.wk,b:R.b,past:1,src,why});if(J95B.bind.length>400)J95B.bind.splice(0,100);J95B.stat.bind++;return"ok"}
+/* an act decided between buổi (NPC effort at the turn of the week / month). The khắc already shown keep what was shown (never rewritten,
+   map counts R.m untouched): if the record of the buổi just ended already has her there, that is the moment; otherwise the act lands at
+   the start of the coming buổi (applied by j95c right after that buổi is planned, before anyone sees it). In the present buổi it happens
+   now, unless she stands where the change would show (then the line is not told: "seen"). */
+function j95bPutPast(id,k,act,why,src){const R=S.roster;if(!R||!R.P)return"norec";if(id[0]==="v"){const v=RV(+id.slice(1));if(!v||!v.alive||v.out||v.confined)return"skip"}
+ const e=R.P[id];
+ if(R.key===j95key()){if(!e)return"norec";const kh=j95kh();if(e[kh][0]===k)return"ok";const me=R.P.me?R.P.me[kh][0]:S.place;if(e[kh][0]===me||k===me){J95B.stat.pastSeen=(J95B.stat.pastSeen||0)+1;return"seen"}return j95bPut(id,k,act,why,src)}
+ if(e)for(let i=3;i>=0;i--)if(e[i]&&e[i][0]===k){J95B.bind.push({id,k,kh:i,key:R.key,wk:R.wk,b:R.b,past:1,src,why,had:1});if(J95B.bind.length>400)J95B.bind.splice(0,100);J95B.stat.bind++;return"ok"}
+ const P=J95B.next=J95B.next||[];if(!P.some(x=>x.id===id&&x.k===k))P.push({id,k,act,why,src});J95B.stat.pastNext=(J95B.stat.pastNext||0)+1;return"ok"}
 function j95bPastHas(id,k){for(let i=J95B.bind.length-1;i>=0;i--){const b=J95B.bind[i];if(b.past&&b.id===id&&b.k===k&&wk()-b.wk<=1)return b}return null}
 function j95bLexOf(t){const lo=String(t||"").toLowerCase();for(const [re,c] of LEX95B)if(re.test(lo))return c;return null}
 
 function j95bPastText(r,src){/* bind every "X ... at <place>" sentence of a turn report to the buổi just ended; drop false ones */
  const parts=String(r).split(/(?<=[.!?])\s+/);const keep=[];
  for(const sen of parts){const L=j95bScan(sen);let drop=false;for(const x of L){if(x.id[0]!=="v")continue;const v=RV(+x.id.slice(1));if(!v)continue;
-   if((v.out&&x.k!=="lc")||(v.confined&&x.k!==palaceOf(v))){drop=true;break}j95bPutPast(x.id,x.k,"here",x.why,src)}if(!drop)keep.push(sen)}
+   if((v.out&&x.k!=="lc")||(v.confined&&x.k!==palaceOf(v))){drop=true;break}if(j95bPutPast(x.id,x.k,"here",x.why,src)==="seen"){drop=true;break}}if(!drop)keep.push(sen)}
  return keep.join(" ")}
 /* warnings ("Lời cảnh báo" from the head maid, "Tai mắt báo tin" from a tell) about someone who has no motive and no real plot are not true: dropped */
 function j95bRealPlot(v){try{const z=typeof j70==="function"&&j70();return !!(z&&z.pl&&z.pl.some(p=>!p.end&&p.a===v.id&&p.t==="me"))||!!(v.plan&&v.plan.t===key(S))}catch(e){return false}}
@@ -245,8 +253,10 @@ function j95bWeek(){if(!j95bOn()||S.dead||(typeof isSrv==="function"&&isSrv()))r
   try{if(id.indexOf("e68")===0||P95B[id]){chk=j95bCheck(id,pp);if(chk&&!chk.ok){J95B.stat.evBlock++;for(const r of chk.bad){const rid=r.o&&r.o.id!=null&&r.o.rel!=null?"v"+r.o.id:null;if(rid)j95bAct(rid,r.role.h||r.role.f,r.t&&r.t!==S?"v"+r.t.id:"me",r.g,id)}return null}}}catch(e){j95bErr("mkP",e)}
   const d=mk0.call(this,id,pp);try{if(d&&chk)J95B.pend.set(d.pp||pp,chk);if(d&&chk&&J95B.inAp){const h=chk.list.find(r=>(r.role.h||r.role.f)&&!r.t&&r.o&&r.o.rel!=null);if(h)J95B.apG={a:h.o,g:h.g}}}catch(e){}return d};
  if(typeof approachOne==="function"){const ao=approachOne;approachOne=function(){J95B.inAp=1;J95B.apG=null;const R=S&&S.roster;const kh=j95kh();const snap={};
-  if(R&&R.key===j95key())for(const id in R.P)if(id[0]==="v")snap[id]=R.P[id][kh].slice();let m;try{m=ao.apply(this,arguments)}finally{J95B.inAp=0;J95B.apG=null}
-  try{if(j95bOn()&&R&&S.roster===R&&R.key===j95key()){const ch=[];for(const id in snap){const e=R.P[id];if(e&&JSON.stringify(e[kh])!==JSON.stringify(snap[id])){ch.push([id,e[kh].slice()]);e[kh]=snap[id]}}
+  if(R&&R.key===j95key())for(const id in R.P)if(id[0]==="v")snap[id]=R.P[id][kh].slice();const nb0=J95B.stat.bind;let m;try{m=ao.apply(this,arguments)}finally{J95B.inAp=0;J95B.apG=null}
+  /* a card shown during the approach (its words placed someone) keeps its placement; a housing resync keeps its move */
+  const keep=new Set();try{const nb=J95B.stat.bind-nb0;if(nb>0)for(const x of J95B.bind.slice(-nb))if(x.src!=="j24")keep.add(x.id)}catch(e){}
+  try{if(j95bOn()&&R&&S.roster===R&&R.key===j95key()){const ch=[];for(const id in snap){if(keep.has(id))continue;const e=R.P[id];if(e&&JSON.stringify(e[kh])!==JSON.stringify(snap[id])&&!(e[kh][1]===snap[id][1]&&e[kh][3]===snap[id][3])){ch.push([id,e[kh].slice()]);e[kh]=snap[id]}}
     if(ch.length){if(m)m.__ap95=ch;j95sync()}}}catch(e){j95bErr("approach",e)}return m}}
  /* acts decided at the turn of a buổi / week / month (j75 effort, monthly acts, NPC buổi acts): the place their words name is where
     the person was in the buổi just ended; a line that puts a fallen or confined consort out and about is not true, so it is dropped */
@@ -271,7 +281,7 @@ function j95bWeek(){if(!j95bOn()||S.dead||(typeof isSrv==="function"&&isSrv()))r
    if(a&&t&&a!==S&&t!==S&&t.alive&&!/bị cắt|bị bắt|quả tang|thời cơ đã qua/.test(r)&&hostility(a,S)>=45&&j95dice(25)&&motiveOK(a,S,"frame").ok){const M=pm70(p);j95bSeed(a,t,"j70",{txt:`đứng sau vụ ${M?M.n.toLowerCase():"mưu hại"} nhắm vào nàng`,truth:false})}}}catch(e){j95bErr("exec70",e)}return r}}
  const et0=endTurn;endTurn=function(){const w0=S&&!S.dead?wk():null;const r=et0.apply(this,arguments);after();try{if(j95bOn()&&S&&!S.dead&&w0!=null&&wk()!==w0){j95bWeek();if(Q.length&&$("modal").hidden)showModal()}}catch(e){j95bErr("week",e)}return r};
  /* a new life: the in-memory audit lists start again (the save holds what matters) */
- if(typeof start==="function"){const st0=start;start=function(){J95B.bind=[];J95B.ev=[];J95B.notes=[];return st0.apply(this,arguments)}}
+ if(typeof start==="function"){const st0=start;start=function(){J95B.bind=[];J95B.ev=[];J95B.notes=[];J95B.next=[];return st0.apply(this,arguments)}}
  /* face to face: clear a misunderstanding she has heard of */
  const t0=talkOpts;talkOpts=function(p){const A=t0.apply(this,arguments);try{if(j95bOn()&&p&&(p.kind==="rival"||p.kind==="hh")&&p.ref){const r=j95bRumOf(p.ref);if(r&&r.known){const o=j95bClearOdds(r);
     A.push({n:"Giải bày hiểu lầm",o,x:`gỡ hiểu lầm do lời đồn (${p.ref.name} oán ngươi bớt)`,run:()=>j95bClear(r.u,"face",true)})}}}catch(e){}return A};

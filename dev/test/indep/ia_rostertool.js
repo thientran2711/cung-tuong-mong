@@ -7,7 +7,7 @@ const [,,URL,REPO,OUT,ORI='cn',WEEKS='9']=process.argv;fs.mkdirSync(OUT,{recursi
 (async()=>{const b=await chromium.launch();const p=await (await b.newContext()).newPage();await p.route(/\.(webp|png|jpg|mp3|ogg)$/,r=>r.abort());
  await p.goto(URL);await p.waitForTimeout(1500);
  await p.evaluate(o=>{localStorage.clear();window.__forceOrigin=o;SLOT=1;document.getElementById('title').hidden=true;start();if(NLP)nlAccept(true);Q.length=0;try{closeModal()}catch(e){}},ORI);
- for(const f of ['inpage5.js','inbal.js'])await p.evaluate(fs.readFileSync(path.join(REPO,'dev/measure',f),'utf8'));
+ for(const f of [process.env.BOT||'inpage6.js','inbal.js'])await p.evaluate(fs.readFileSync(path.join(REPO,'dev/measure',f),'utf8'));
  const snaps=await p.evaluate(W=>{const snap={};const take=()=>{const R=S.roster;if(!R)return;const k=R.key;snap[k]=snap[k]||{};for(let kh=0;kh<4;kh++){snap[k][kh]=snap[k][kh]||{};for(const id in R.P){const e=R.P[id][kh];snap[k][kh][id]=[e[0],e[1],e[2],e[3]]}}};
   const o=nextBuoi;nextBuoi=function(){take();return o.apply(this,arguments)};const w0=wk();let n=0;while(wk()<w0+W&&n++<20000){window.__bot.step('sens',1);if(S.dead)break}
   /* stop on a clean moment */let m=0;while(Q.length&&m++<30){try{if(Q[0].opts&&Q[0].opts.length)chooseM(0);else closeModal()}catch(e){Q.shift()}}

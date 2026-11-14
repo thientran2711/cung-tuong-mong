@@ -3,6 +3,27 @@
 Nhánh `review/schedules` từ `origin/review/balance`. Chỉ thêm module mới `dev/build/j95.js` (nối cuối `assemble.py`, sau j84),
 không sửa file cũ. Chưa gộp main: chờ thợ cân bằng gộp vào review/balance và đo lại.
 
+## review/schedules2 (2026-11-14): sửa theo kiểm độc lập (dev/test/ROSTER_AUDIT_INDEPENDENT.md, KHÔNG ĐẠT 6 lỗi + 5 lỗi nhỏ)
+Nhánh `review/schedules2` từ `origin/review/schedules-audit` (gộp thêm `origin/review/balance` 14c3c45). Chỉ sửa j95.js, j95b.js và
+module mới `dev/build/j95c.js` (nối sau j95b trong assemble.py). Không sửa module khác.
+1. Giá họa: `giahoa` vào H95 (runAct qua cổng); j95c bọc `wdFrame` (đường hằng tháng jwd92b và kế hoạch NPC gọi thẳng ACT.f): motiveOK,
+   ghi sổ, lưu lý do lúc đặt đồ (`j95z().plant`); thẻ "Bị tố ăn cắp" khai `P95B.wdframe` (vai h giahoa, lý do = lý do lúc đặt), dòng sổ ghi
+   ngay khi tạo thẻ. Thêm cổng cho bỏ độc vào món (j83 `wkPoison`).
+2. Đổi cung: `j95fixHouse` (trong j95sync, từ khắc hiện tại): việc ở nhà sang cung mới, đi thăm theo người được thăm hoặc quay về, không ai ở
+   cung của người đã mất / bị phế / không làm chủ cung, thái y bắt mạch theo bệnh nhân, hoàng tự ở nhà mẹ hiện tại. j95c: palFix đổi cung
+   thì đồng bộ ngay; mỗi lần đồng bộ thấy cung ai đổi thì palFix trước; phế, chết, vào/ra lãnh cung thì palFix + đồng bộ ngay.
+3. Cung nữ thân tín dựng lại theo dòng hiện thời của chủ (chủ ra ngoài thì theo, về thì hầu ở nhà); kẻ hầu phận sự ở cung hiện tại.
+4. `j95bPutPast` không bao giờ sửa khắc đã hiện, không tính lại R.m: nếu sổ buổi vừa qua đã có nàng ở đó thì ghi theo khắc ấy; nếu không, việc
+   rơi vào đầu buổi mới (J95B.next, j95c đặt ngay sau khi lập buổi, trước khi ai thấy); buổi hiện tại mà ngươi đứng ở chỗ cũ / chỗ mới thì bỏ câu.
+5–6. Sân khấu đối chiếu sổ mỗi khi dựng lại (nạp ván, coldVisit, homePeople, goTo): khách ở cung ngươi còn sau khi tải lại; lãnh cung vẽ đủ
+   phế phi trong sổ, không có "Phế phi họ Lý", vắng thì để trống với câu tả cảnh.
+Nhỏ: thái giám Kính sự phòng mang tên thật (không "Tổng quản"); tên kẻ hầu không trùng (thêm số khi trùng); ngươi vào lãnh cung thì kẻ hầu
+còn lại hầu ở lãnh cung, con về Hoàng hậu / Thái hậu như con phế phi; sổ bỏ người chết ngay sau deathSentence; nạp ván không sinh thêm kẻ
+hầu (staffInit lúc nạp chỉ khởi tạo ai chưa có danh sách); nạp ván / qua buổi mà ngươi ở lãnh cung thì đứng ở lãnh cung, sân khấu khớp nơi đứng.
+Kit (review/kit-j95): `j95habitsMine()` có `told` (tai mắt đã báo kẻ thù biết chỗ quen; `watchers` chỉ đếm kẻ đã được báo), `j95followers(p)`
+trả [{id,name,role}] người đang theo hầu p ở khắc hiện tại.
+Kiểm: bất biến mới (j)–(q) trong `dev/test/roster_audit_c.js`; kết quả trong dev/test/ROSTER_AUDIT.md.
+
 ## Đã làm
 
 ### 1. Sổ vị trí (một bản ghi duy nhất, `S.roster`)

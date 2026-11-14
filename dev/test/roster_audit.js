@@ -10,7 +10,8 @@
        no hostile actor toward her at affection >= 40 without a recorded exception; no card with a consort in its params left undeclared
    (h) words that put someone somewhere now (event cards, news) match the record at that khắc (or the record says why not: lãnh cung, cấm túc, hẹn kín)
    (i) rumour misunderstandings: each one recorded as "tin đồn: …, nguồn: …"; she is told only as hearsay ("Nghe đồn" / "Lời đồn"); retaliation carries the rumour reason
-   usage: node dev/test/roster_audit.js <sens|rand> <lives> <out.json> [shard]     (GAME=path to dev/index.html, NB=4 for 4 buổi a day)  */
+   usage: node dev/test/roster_audit.js <sens|rand> <lives> <out.json> [shard]     (GAME=path to dev/index.html, NB=4 only for a 3-buổi build, BOT=inpage6.js default)
+   (j)..(q): j95c invariants, dev/test/roster_audit_c.js  */
 const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
 const mode=process.argv[2]||'sens',LIVES=+process.argv[3]||18,OUT=process.argv[4]||'/dev/stdout',SH=+process.argv[5]||0;
 const M=path.join(__dirname,'..','measure'),GAME=process.env.GAME||path.join(__dirname,'..','index.html');
@@ -75,10 +76,10 @@ const HOOK2=`(function(){const A=window.__aud;const bad=(k,m)=>{A.err[k]++;if(A.
     if(e.actors.length<need)bad("g","thẻ "+pid+" có "+need+" diễn viên mà chỉ "+e.actors.length+" lý do");
     for(const x of e.actors){A.evActors++;if(!x.ok||!x.why)bad("g","diễn viên không qua cổng: "+pid+" "+x.id+" "+x.k+" ("+x.why+")");
      const L=S.roster&&S.roster.acts||[];if(!L.some(r=>r.src===pid&&r.id===x.id&&r.k===x.k))bad("g","lý do không có trong sổ: "+pid+" "+x.id);
-     if(x.role==="h"&&x.t==="me"){A.evHostile++;const v=RV(+String(x.id).slice(1));const af=v?aff(v,S):0;if(af>=40&&!x.ex)bad("g","người thiện cảm "+af+" hại ngươi không lý do: "+pid+" "+(v&&v.name))}}}}
+     if(x.role==="h"&&x.t==="me"){A.evHostile++;const v=String(x.id)[0]==="v"?RV(+String(x.id).slice(1)):null;const af=v?aff(v,S):0;if(af>=40&&!x.ex)bad("g","người thiện cảm "+af+" hại ngươi không lý do: "+pid+" "+(v&&v.name))}}}}
   /* (i) hearsay label */
   if(m.rum95&&!(/Nghe đồn/.test(m.h)&&/Lời đồn/.test(m.h)))bad("i","tin đồn báo cho ngươi như sự thật: "+strip(m.h).slice(0,80));
-  if(!m.rum95){const txt=strip(m.h||m.t);for(const r of (S.j95b&&S.j95b.rum)||[]){if(r.cleared)continue;if(txt.includes("rằng ngươi "+r.txt)&&!/đồn/i.test(txt))bad("i","lời đồn bị nói như sự thật: "+txt.slice(0,80))}}
+  if(!m.rum95&&!m.pid){/* j68 template cards report an NPC's accusation (her act), not the claim as fact */const txt=strip(m.h||m.t);for(const r of (S.j95b&&S.j95b.rum)||[]){if(r.cleared)continue;if(txt.includes("rằng ngươi "+r.txt)&&!/đồn/i.test(txt))bad("i","lời đồn bị nói như sự thật: "+txt.slice(0,80))}}
   /* (h) places in words */
   const R=S.roster;if(!R||R.key!==j95key())return;const kh=ent&&ent.key===j95key()?ent.kh:j95kh();
   if(ent)for(const p of ent.places){if(p.res!=="ok"){A.placeSkip++;continue}A.placeChk++;const rid=p.id;const e=R.P[rid];let k=p.k;if(k==="here")k=S.place;if(k==="own"){const v=rid[0]==="v"?RV(+rid.slice(1)):null;k=v?(v.out?"lc":palaceOf(v)):rid==="th"?"tn":"dtd"}
@@ -109,9 +110,9 @@ const HOOK2=`(function(){const A=window.__aud;const bad=(k,m)=>{A.err[k]++;if(A.
  await page.evaluate(()=>localStorage.clear());await page.reload({waitUntil:'domcontentloaded'});await page.waitForTimeout(500);
  await page.evaluate(PRE);await page.evaluate(()=>document.querySelector('#slots button[data-new="1"]').click());await page.waitForTimeout(800);
  await page.evaluate(`window.__servPolicy='';window.__aff=0;window.__balO=null;window.__fairO=null;window.__q72O=null;window.__xO=null;window.__q72off=1`);
- for(const f of ['inpage5.js','inbal.js'])await page.evaluate(fs.readFileSync(path.join(M,f),'utf8'));
- await page.evaluate(HOOK);await page.evaluate(HOOK2);await page.evaluate(()=>{J95.stat={gate:0,gateBy:{},pass:0,bad:[]};start()});
+ for(const f of [process.env.BOT||'inpage6.js','inbal.js'])await page.evaluate(fs.readFileSync(path.join(M,f),'utf8'));
+ await page.evaluate(HOOK);await page.evaluate(HOOK2);await page.evaluate(fs.readFileSync(path.join(__dirname,'roster_audit_c.js'),'utf8'));await page.evaluate(()=>window.__AUDC());await page.evaluate(()=>{J95.stat={gate:0,gateBy:{},pass:0,bad:[]};start()});
  const t0=Date.now();let n=0;
  while(true){n=await page.evaluate(([m])=>{window.__bot.step(m,200);return window.__aud.lives},[mode]);if(n>=LIVES)break;if(Date.now()-t0>(+process.env.CAP||3000)*1e3){console.log('time cap');break}}
- const out=await page.evaluate(()=>Object.assign({},window.__aud,{gateStat:J95.stat,j95errs:J95.errs,j95b:J95B.stat,j95berrs:J95B.errs,res:window.__res.slice(-80).map(r=>({o:r.origin,t:r.title,turns:r.turns}))}));out.pageErrors=errs.slice(0,20);out.pageErrorN=errs.length;out.mode=mode;out.nb=NB;
+ const out=await page.evaluate(()=>Object.assign({},window.__aud,{gateStat:J95.stat,j95errs:J95.errs,j95b:J95B.stat,j95berrs:J95B.errs,j95c:window.__j95c?window.__j95c():null,res:window.__res.slice(-80).map(r=>({o:r.origin,t:r.title,turns:r.turns}))}));out.pageErrors=errs.slice(0,20);out.pageErrorN=errs.length;out.mode=mode;out.nb=NB;
  fs.writeFileSync(OUT,JSON.stringify(out,null,1));console.log(mode,'nb',NB,'lives',out.lives,'checks',out.checks,'err',JSON.stringify(out.err),'gate',out.gate,'pass',out.gatePass,'pageErr',errs.length);await b.close()})().catch(e=>{console.error(e);process.exit(1)});

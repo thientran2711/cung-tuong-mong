@@ -11,7 +11,7 @@ const MEAS=process.env.MEAS||path.join(__dirname,'..','..','measure');const HOOK
  await p.evaluate(`(function(){const O=['tt','dtq','muoi','cn','nc','td','ch','thd','cnv'];let i=${+OFF};const s0=start;start=function(){window.__forceOrigin=O[(i++)%9];return s0.apply(this,arguments)}})()`);
  await p.evaluate(()=>document.querySelector('#slots button[data-new="1"]').click());await p.waitForTimeout(600);
  await p.evaluate(`window.__servPolicy='';window.__aff=0;window.__balO=null;window.__fairO=null;window.__q72O=null;window.__xO=null;window.__q72off=1`);
- for(const f of ['inpage5.js','inbal.js'])await p.evaluate(fs.readFileSync(path.join(MEAS,f),'utf8'));
+ for(const f of [process.env.BOT||'inpage6.js','inbal.js'])await p.evaluate(fs.readFileSync(path.join(MEAS,f),'utf8'));
  await p.evaluate(HOOK);
  await p.evaluate(()=>{const IA=window.__IA;IA.lives=[];
   const w=(n)=>{const o=window[n];window[n]=function(){const r=o.apply(this,arguments);try{IA.check(n);if(Math.random()<.04)IA.roundTrip(n)}catch(e){IA.bad("X",n+": "+e.message)}return r}};
