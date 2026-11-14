@@ -168,3 +168,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (05:25Z) Owner: stage name labels = rank on top line, name below, text coloured by rank (kit rule, all stages).
 - (05:40Z) Owner: no 'Gánh hàng rong' inside the palace — renamed to 'Nhờ thái giám mua đồ' (Nội vụ phủ eunuch buys from outside).
 - (05:45Z) Owner: category tab row must sit centred (equal gaps) between the card row above and the content below; sticky row must not cover content.
+- (05:50Z) Owner: worn items have a luxury axis too: within rank but too luxurious → jealousy/ghen ghét, superiors' disapproval; modest dress small Đức/Danh. Same for NPCs; shown in Đang mang.
