@@ -101,3 +101,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (22:05Z) Owner APPROVED the Tiểu thư ngoài cung plan (dev/OUTSIDE_PLAN.md on review/outside) — build it. Also fix tuyenTu() ages to 18+.
 - (22:20Z) Owner set GitHub secrets CLOUDFLARE_API_TOKEN + CLOUDFLARE_ACCOUNT_ID; co-op and single-player live in the same app/link (title: Chơi một mình / Chơi cùng bạn).
 - (22:30Z) Coordinator decision: the succession choice card (Hoàng thái hậu/Nhiếp chính/Nữ đế) shows full outcomes + odds like a normal act (it's a deliberate decision, not a hidden event); epilogue chapter choices stay costs-only.
+- (22:45Z) Owner: add allergy (dị ứng) — painted rash overlay on the face (like scars), veil can be used for it too. Two-way; causes incl. rival schemes; heals over weeks / Thái y. Pilot overlay art first.
