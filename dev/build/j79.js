@@ -395,7 +395,7 @@ function kpIdentity(M,m){const dlg=M.querySelector(".dlg"),mb=$("mb");const o=S.
  const opts=mb.querySelector(".nlopts");if(opts)opts.remove();
  const name=`<b class="kname" style="--rc:${srv?kitServCol("maid",1):RCOL[cl(S.rank||0,0,7)]}"><span class="kti">${pos}</span> ${S.name}</b>`;
  const tiles=[["Tài",S.tai],["Sắc",S.sac],["Tâm cơ",S.tamco],["Đức",S.duc],["Danh",S.danh],["Thái hậu ưa",S.th],["Bạc",S.bac],["Hoàng thượng",`${S.emp.era} · ${S.emp.age} tuổi`]];
- mb.innerHTML=`<div class="kpb kphas kpid"><div class="kpsubj">${pframe(pMe())}</div><div class="kpmain"><div class="kpidn">${name}<small>${o.n} · ${S.age} tuổi</small></div><div class="kpidt">${o.t||""}</div></div></div>${kitTiles(tiles)}<div class="kpnote">Thân phận đã định: tải lại trang, đổi ô hay bấm Kiếp mới vẫn ra thân phận này.</div>`;
+ mb.innerHTML=`<div class="kpb kphas kpid"><div class="kpsubj">${pframe(pMe())}</div><div class="kpmain"><div class="kpidn">${name}<small>${o.n} · ${S.age} tuổi</small></div><div class="kpidt">${o.t||""}</div></div></div>${kitTiles(tiles)}<div class="kpnote">Thân phận đã định: nạp lại sổ, đổi sổ hay bắt đầu kiếp mới vẫn ra đúng thân phận này.</div>`;
  if(opts){opts.classList.add("kpopts","kpscopts");mb.appendChild(opts)}
  dlg.querySelector(":scope > .kph").outerHTML=kpHeader("end","Thân phận kiếp này",`${kitGloss("Phúc duyên")} đang có: ${pts}`)}
 KIT_GLOSS["Phúc duyên"]="Điểm tích qua các kiếp. Dùng để đổi thân phận khi bắt đầu kiếp mới.";
@@ -689,7 +689,7 @@ button.ka.kcard.kart{border-left:4px solid var(--kcc0,var(--line))!important}
 @media (orientation:portrait) and (min-width:600px){.modal.kpscene.kpfig{align-items:flex-end!important;padding:12px 3vw 18px!important}.modal.kpscene.kpfig .dlg.kpsc{max-width:58vw!important}.modal.kpscene.kpfig>img.kidfig2{width:40vw;height:86dvh;left:0}}
 @media (orientation:portrait) and (max-width:599px){.modal.kpscene.kpfig{justify-content:center!important;align-items:flex-end!important;padding:8px!important}.modal.kpscene.kpfig .dlg.kpsc{max-width:100%!important}
  .modal.kpscene.kpfig>img.kidfig2{top:6px;bottom:auto;left:0;width:100vw;height:var(--kidh,40dvh)}
- .dlg.kpsc .kpid.kpidf .ktiles{grid-template-columns:repeat(4,minmax(0,1fr))}.dlg.kpsc .kpid.kpidf .ktile{flex-direction:column;align-items:flex-start;gap:0}.dlg.kpsc .kpid.kpidf .ktile b{text-align:left}}
+ .dlg.kpsc .kpid.kpidf .ktiles{grid-template-columns:repeat(4,minmax(0,1fr))}.dlg.kpsc .kpid.kpidf .ktile{flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:0}.dlg.kpsc .kpid.kpidf .ktile b{text-align:left}}
 /* 4 · status grouped by purpose */
 #hud2.kgrp{flex-wrap:wrap}
 #hud2 .khg{position:fixed;z-index:40;left:var(--shL,8px);top:var(--shT,40vh);width:var(--shW,calc(100vw - 16px));max-height:var(--shH,50vh);overflow:auto;box-sizing:border-box;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));align-content:start;gap:6px 10px;padding:8px;background:var(--k-card,#fffaf0);border:1px solid var(--gold);border-radius:10px;box-shadow:0 8px 28px #3a201055}
@@ -699,7 +699,8 @@ button.ka.kcard.kart{border-left:4px solid var(--kcc0,var(--line))!important}
 #hud2 .khc .hc[data-hx="date"]{display:none!important}
 #hud2 .khc .hc{display:grid!important;grid-template-columns:auto minmax(0,1fr) auto;justify-items:start;align-items:center;column-gap:5px;border:0!important;background:none!important;padding:1px 0!important;min-height:0!important;border-radius:0!important;text-align:left;white-space:normal;font-size:.76rem}
 #hud2 .khc .hc+.hc{border-top:1px dotted var(--k-hair)!important}
-#hud2 .khc .hc>b,#hud2 .khc .hc>.kodm{grid-column:3;justify-self:end}#hud2 .khc .hc>img{grid-column:1}
+#hud2 .khc .hc>b,#hud2 .khc .hc>.kodm{grid-column:3;justify-self:end;text-align:right;white-space:normal}
+.stop .scene-t,.stop .scene-t *{white-space:normal!important;overflow-wrap:anywhere}#hud2 .khc .hc>img{grid-column:1}
 /* stage name tags: one line, never cut, never three lines over a child figure (reviewer 11/14) */
 #tokens .tok .tag{white-space:nowrap!important;text-overflow:clip!important;max-width:none!important;width:max-content!important;overflow:visible!important}
 @media (max-width:599px){#tokens .tok .tag{font-size:.66rem!important;padding:0 5px!important}}
@@ -804,4 +805,70 @@ function kitPersonStats(v){const val=k=>{if(!kitStatKnown0(v,k))return["chưa r�
 (function(){const st=document.createElement("style");st.id="kit2-pstats";st.textContent=`
 .kpstats .ktiles{grid-template-columns:repeat(2,minmax(0,1fr));gap:3px;margin:2px 0 4px}.kpstats .ktile{flex-direction:column;align-items:flex-start;gap:0;padding:2px 6px}
 .kpstats .ktile b{font-size:.84rem}.kpstats .ktile b.kunk{font-weight:500;font-size:.72rem;color:#9a8a78}
+`;document.head.appendChild(st)})();
+/* ---- PORTRAIT PICKER (kit component; owner/reviewer 11/14): choose one of N portraits.
+   kitPicker({id, title, items:[{k, face, label}], cur, filters:[[key,label]], filter, rows:2, note, onPick(k), onFilter(key)}) -> html.
+   Small rectangular kit frames (mdH .kmini: no tassels), whole rows only, pages with ‹ › and "trang 1/4" (no half-cut row, no inner scroll),
+   selection = gold ring + check badge (.ksel), radio semantics, arrow keys move, Enter/Space picks. Filter tabs use the sub-tab look (.ksub). */
+const KIT_PICK={};
+function kitPicker(o){o=o||{};KIT_PICK[o.id]=o;const items=o.items||[];
+ const flt=o.filters&&o.filters.length>1?`<nav class="ksub kpkf" role="tablist">${o.filters.map(([k,l])=>`<button type="button" class="ksubb${k===o.filter?" on":""}" data-pkf="${k}" role="tab" aria-selected="${k===o.filter}">${l}</button>`).join("")}</nav>`:"";
+ const it=items.map(x=>{const on=x.k===o.cur;return `<button type="button" class="kpki${on?" on ksel":""}" role="radio" aria-checked="${on}" tabindex="${on?0:-1}" data-pk="${x.k}" aria-label="${x.label||x.k}">${mdH(x.face||{},"")}<i class="kpkck" aria-hidden="true">✓</i></button>`}).join("");
+ return `<div class="kpsec kpick" data-pick="${o.id}" data-rows="${o.rows||2}">${o.title?`<h4 class="kpst">${o.title}</h4>`:""}${flt}<div class="kpkwrap"><button type="button" class="kpkpg" data-pkpg="-1" aria-label="Trang trước">‹</button><div class="kpkgrid" role="radiogroup" aria-label="${o.title||"Chọn"}">${it}</div><button type="button" class="kpkpg" data-pkpg="1" aria-label="Trang sau">›</button></div><div class="kpkpn"></div>${o.note?`<div class="kpnote">${o.note}</div>`:""}</div>`}
+function kitPickerLayout(root,keepPage){try{const g=root.querySelector(".kpkgrid");const B=[...g.querySelectorAll(".kpki")];if(!B.length)return;B.forEach(b=>b.hidden=false);
+ const cs=getComputedStyle(g);const gap=parseFloat(cs.columnGap)||6;const iw=B[0].getBoundingClientRect().width||58;const cols=Math.max(3,Math.floor((g.clientWidth+gap)/(iw+gap)));const rows=+root.dataset.rows||2;const per=cols*rows;
+ const pages=Math.max(1,Math.ceil(B.length/per));let pg=keepPage&&root.dataset.pg!=null?+root.dataset.pg:Math.floor(Math.max(0,B.findIndex(b=>b.classList.contains("on")))/per);pg=Math.min(Math.max(0,pg),pages-1);root.dataset.pg=pg;
+ g.style.setProperty("--kpcols",cols);B.forEach((b,i)=>b.hidden=!(i>=pg*per&&i<(pg+1)*per));
+ const [pv,nx]=root.querySelectorAll(".kpkpg");pv.disabled=pg<=0;nx.disabled=pg>=pages-1;pv.hidden=nx.hidden=pages<2;root.querySelector(".kpkpn").textContent=pages>1?`trang ${pg+1}/${pages} · ${B.length} dung mạo`:"";}catch(e){}}
+function kitPickerInit(scope){(scope||document).querySelectorAll(".kpick").forEach(r=>kitPickerLayout(r,false))}
+document.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest(".kpick [data-pk],.kpick [data-pkpg],.kpick [data-pkf]");if(!t)return;const root=t.closest(".kpick");const o=KIT_PICK[root.dataset.pick]||{};e.preventDefault();e.stopPropagation();
+ if(t.dataset.pkpg){root.dataset.pg=(+root.dataset.pg||0)+(+t.dataset.pkpg);kitPickerLayout(root,true);return}
+ if(t.dataset.pkf){if(o.onFilter)o.onFilter(t.dataset.pkf);return}
+ if(t.dataset.pk&&o.onPick)o.onPick(t.dataset.pk)},true);
+document.addEventListener("keydown",e=>{const b=e.target.closest&&e.target.closest(".kpick .kpki");if(!b)return;const V=[...b.parentNode.querySelectorAll(".kpki:not([hidden])")];const i=V.indexOf(b);const cols=+getComputedStyle(b.parentNode).getPropertyValue("--kpcols")||4;
+ const d={ArrowRight:1,ArrowLeft:-1,ArrowDown:cols,ArrowUp:-cols}[e.key];if(d==null)return;e.preventDefault();const n=V[Math.min(V.length-1,Math.max(0,i+d))];if(n){V.forEach(x=>x.tabIndex=-1);n.tabIndex=0;n.focus()}});
+addEventListener("resize",()=>{clearTimeout(window.__kpkT);window.__kpkT=setTimeout(()=>kitPickerInit(),120)});
+(function(){const st=document.createElement("style");st.id="kit2-pick";st.textContent=`
+.kpick{display:flex;flex-direction:column;gap:4px;margin:4px 0}
+.kpick .kpkf{margin:0 0 2px}
+.kpkwrap{display:grid;grid-template-columns:28px minmax(0,1fr) 28px;align-items:center;gap:4px}
+.kpkgrid{display:grid;grid-template-columns:repeat(var(--kpcols,6),58px);justify-content:center;gap:6px;padding:6px 2px;border:1px solid var(--k-hair);border-radius:var(--k-rad,8px);background:#fffdf8c8;min-width:0}
+.kpki{all:unset;box-sizing:border-box;position:relative;width:58px;display:grid;place-items:center;padding:3px;border-radius:6px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.kpki[hidden]{display:none!important}
+.kpki span.md.kmini.kmini{width:52px!important}
+.kpki:hover{background:#f6ead6}
+.kpki:focus-visible{outline:2px dashed var(--gold);outline-offset:1px}
+.kpki.on{background:#fff3c4}
+.kpki .kpkck{position:absolute;right:-3px;top:-3px;width:20px;height:20px;border-radius:50%;display:none;place-items:center;font-style:normal;font-size:.8rem;font-weight:800;color:#fff;background:var(--k-sel-ring,#a8740c);box-shadow:0 0 0 2px #fff,0 1px 3px #0006;z-index:3}
+.kpki.on .kpkck{display:grid}
+.kpkpg{min-height:44px;border:1px solid var(--line);border-radius:6px;background:#fffaf0;font-size:1.2rem;color:var(--gold);cursor:pointer;padding:0}
+.kpkpg:disabled{opacity:.35;cursor:default}.kpkpg[hidden]{visibility:hidden;display:block}
+.kpkpn{font-size:.72rem;color:var(--k-lab);text-align:center;min-height:1em}
+@media (max-width:599px){.kpkgrid{grid-template-columns:repeat(var(--kpcols,4),50px);gap:4px}.kpki{width:50px}.kpki span.md.kmini.kmini{width:44px!important}.kpkwrap{grid-template-columns:24px minmax(0,1fr) 24px}}
+`;document.head.appendChild(st)})();
+/* ---- compact header on phones (owner 11/14: the stage must keep room): menu · her · Hoàng thượng on one row, the four bars under, status row last ---- */
+(function(){const st=document.createElement("style");st.id="kit2-phonehud";st.textContent=`
+@media (max-width:599px) and (orientation:portrait){
+ header.hud{display:grid!important;grid-template-columns:auto minmax(0,1fr) auto!important;grid-template-areas:"menu me emp" "stats stats stats" "h2 h2 h2"!important;gap:3px 6px!important;padding:5px 6px!important;align-items:center}
+ header.hud>#menu{grid-area:menu;min-height:34px!important;min-width:34px!important;padding:0 6px!important}
+ header.hud>.me{grid-area:me;min-width:0}header.hud>.me .mi b{font-size:1rem!important}header.hud>.me .dt{font-size:.7rem!important;line-height:1.25}
+ header.hud>.emp{grid-area:emp;padding:2px 6px!important;min-height:0!important;gap:4px!important;max-width:42vw}header.hud>.emp b{font-size:.8rem!important}header.hud>.emp span#emp-m{font-size:.68rem!important}
+ header.hud>.emp span.md.kmini.kmini{width:26px!important}
+ header.hud>.stats{grid-area:stats;margin:0!important;gap:4px!important}header.hud>.stats .st small{font-size:.64rem!important}header.hud>.stats .st>span{font-size:.95rem!important;line-height:1.1}
+ header.hud>.hud2{grid-area:h2;margin:0!important;flex-wrap:nowrap!important;overflow-x:auto;gap:4px!important}header.hud>.hud2 .hc{font-size:.68rem!important;min-height:26px!important;padding:1px 6px!important;white-space:nowrap}
+ header.hud>.hud2>.h2t{min-height:26px!important;padding:0 8px!important;font-size:.72rem!important}
+ .game{grid-template-rows:auto minmax(0,1fr) minmax(0,40%) auto!important}
+}`;document.head.appendChild(st)})();
+/* ---- face strip (pager): only WHOLE faces, never a name cut at the edge; the window follows the chosen person; group labels wrap ---- */
+function kitStripFit(){document.querySelectorAll(".pstrip .pfaces").forEach(P=>{try{const F=[...P.querySelectorAll(".pface")];if(!F.length)return;F.forEach(f=>f.classList.remove("kpfh"));P.querySelectorAll(".pgrp").forEach(g=>g.classList.remove("kpfh"));
+  P.scrollLeft=0;const W=P.clientWidth;const w=F.map(f=>f.getBoundingClientRect().width+8);let on=F.findIndex(f=>f.classList.contains("on"));if(on<0)on=0;
+  let s=on,e=on,sum=w[on];let turn=0;while(true){const canL=s>0&&sum+w[s-1]<=W,canR=e<F.length-1&&sum+w[e+1]<=W;if(!canL&&!canR)break;if((turn++%2===0&&canR)||!canL){e++;sum+=w[e]}else{s--;sum+=w[s]}}
+  F.forEach((f,i)=>{if(i<s||i>e)f.classList.add("kpfh")});P.querySelectorAll(".pgrp").forEach(g=>{if(!g.querySelector(".pface:not(.kpfh)"))g.classList.add("kpfh")})}catch(x){}})}
+(function(){const r0=renderPanel;renderPanel=function(){const r=r0.apply(this,arguments);try{requestAnimationFrame(kitStripFit)}catch(e){}return r}})();
+addEventListener("resize",()=>{clearTimeout(window.__ksfT);window.__ksfT=setTimeout(kitStripFit,120)});
+(function(){const st=document.createElement("style");st.id="kit2-strip";st.textContent=`
+.pstrip .pfaces{overflow:hidden!important}.pstrip .kpfh{display:none!important}
+.pstrip .psep{white-space:normal!important;overflow:visible!important;text-overflow:clip!important;max-width:100%;display:block;line-height:1.15}
+.pstrip .pface span{white-space:nowrap!important;overflow:visible!important;text-overflow:clip!important;max-width:none!important}
+.pstrip .pgrp{min-width:0}
 `;document.head.appendChild(st)})();
