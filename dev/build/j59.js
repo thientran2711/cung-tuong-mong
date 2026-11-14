@@ -109,7 +109,8 @@ function j59lay(force){const st=document.getElementById("stage");if(!st||!S)retu
  const tagH=Math.max(14,mt?mt.firstChild.offsetHeight:0,...it.map(x=>x.tag?x.tag.offsetHeight:0));
  /* name tags sit under the feet, never over a figure; crowded neighbours alternate between two rows.
     Too many people for the width: a horizontal strip that scrolls, so nobody shrinks to a doll or hides */
- const place=(rows)=>{const fo=Math.max(sH*.03,rows*(tagH+3)+6);const Hb=Math.min(sH*.9,(sH-fo-topR)/MANF);let H=Hb,ov=0,strip=false;
+ const KA=st.__kfa;/* KIT_FLOOR anchor (jk2b kitFloorFit): feet on the painted floor line, group centred on the open floor */
+ const place=(rows)=>{const fo=Math.max(sH*.03,rows*(tagH+3)+6,KA&&KA.feet?Math.min(sH*.3,sH-KA.feet):0);const Hb=Math.min(sH*.9,(sH-fo-topR)/MANF);let H=Hb,ov=0,strip=false;
   if(total(H,0)>avail){ov=me?.3:0;let lo=sH*.1,hi=H;for(let k=0;k<22;k++){const m=(lo+hi)/2;if(total(m,ov)>avail)hi=m;else lo=m}H=lo;
    if(H<Hb*.66&&it.length>1){strip=true;ov=0;H=Hb*SF}}return{fo,H,ov,strip}};
  let P=place(1);const tw=it.map(x=>x.tag?x.tag.offsetWidth:0);let crowd=!!force;
@@ -120,7 +121,7 @@ function j59lay(force){const st=document.getElementById("stage");if(!st||!S)retu
  const pad=strip?Math.ceil(Math.max(0,...tw)/2):0;
  if(tk){tk.classList.toggle("j59st",crowd);tk.classList.toggle("j59strip",strip);tk.style.setProperty("--j59m1",(tagH+6)+"px");
   if(strip){const x0=8+gL;if(me)me.style.left=(x0+meW/2).toFixed(1)+"px";tk.style.left=((me?x0+meW+gap:x0)+J59CUE).toFixed(1)+"px";tk.style.right=(rightR+J59CUE)+"px";tk.style.bottom="0px";tk.style.paddingBottom=fo.toFixed(1)+"px";tk.style.paddingLeft=tk.style.paddingRight=pad+"px";tk.style.justifyContent="flex-start"}
-  else{tk.style.bottom=fo.toFixed(1)+"px";tk.style.paddingBottom="";const x0=8+gL+Math.max(0,(avail-total(H,ov))/2);
+  else{tk.style.bottom=fo.toFixed(1)+"px";tk.style.paddingBottom="";const tw0=total(H,ov);let x0=8+gL+Math.max(0,(avail-tw0)/2);if(KA&&KA.ax!=null&&tw0<avail)x0=Math.max(8+gL,Math.min(8+gL+avail-tw0,KA.ax-tw0/2));
    if(me){me.style.left=(x0+meW/2).toFixed(1)+"px";tk.style.left=(x0+meW*(1-ov)+gap).toFixed(1)+"px"}else tk.style.left=x0.toFixed(1)+"px";
    tk.style.right="auto";tk.style.justifyContent="flex-start";tk.style.paddingLeft=tk.style.paddingRight="0px"}}
  else if(me)me.style.left="";

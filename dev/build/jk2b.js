@@ -39,14 +39,26 @@
 window.KIT_FLOOR=Object.assign({"duong-tam-dien":.70,"khon-ninh-cung":.72,"kinh-su-phong":.66,"lanh-cung":.62,"ngu-hoa-vien":.62,"ngu-thu-phong":.68,
  "phi-tan-cung":.62,"tam-cung-dem":.70,"thai-y-vien":.68,"tu-ninh-cung":.66,_default:.66},window.KIT_FLOOR||{});
 const KIT_BGSZ={};
+/* open-floor anchor per room (fractions of the picture): x = centre of the open floor, feet = where the feet stand. Read from the paintings
+   (same composition in every season and buổi). People never stand on furniture: the group is centred on this spot. */
+window.KIT_FANCHOR=Object.assign({"duong-tam-dien":{x:.5,feet:.93},"khon-ninh-cung":{x:.55,feet:.92},"kinh-su-phong":{x:.45,feet:.92},"lanh-cung":{x:.36,feet:.93},
+ "ngu-hoa-vien":{x:.3,feet:.9},"ngu-thu-phong":{x:.5,feet:.92},"phi-tan-cung":{x:.5,feet:.9},"tam-cung-dem":{x:.68,feet:.94},"thai-y-vien":{x:.45,feet:.9},
+ "tu-ninh-cung":{x:.5,feet:.9},_default:{x:.5,feet:null}},window.KIT_FANCHOR||{});
 function kitFloorFit(){try{const st=$("stage"),im=$("scimg");if(!st||!im)return;const m=/url\(["']?([^"')]+)["']?\)/.exec(im.style.backgroundImage||"");if(!m){st.style.removeProperty("--kfb");st.style.removeProperty("--kfh");im.style.backgroundPosition="";return}
  const url=m[1],name=url.split("/").pop().replace(/\.\w+$/,"");const sz=KIT_BGSZ[url];
  if(!sz){KIT_BGSZ[url]={w:1280,h:720,pending:1};const I=new Image();I.onload=()=>{KIT_BGSZ[url]={w:I.naturalWidth,h:I.naturalHeight};kitFloorFit()};I.src=url}
  const S0=KIT_BGSZ[url];const W=st.clientWidth,H=st.clientHeight;if(!W||!H)return;const ft=KIT_FLOOR[name]!=null?KIT_FLOOR[name]:KIT_FLOOR._default;
  const s=Math.max(W/S0.w,H/S0.h),dh=S0.h*s;let y0=0,py=50;
  if(dh>H+1){y0=Math.min(0,Math.max(H-dh,.40*H-ft*dh));py=(y0/(H-dh))*100}
- im.style.backgroundPosition=`50% ${py.toFixed(1)}%`;
- const fs=ft+.9*(1-ft);let feet=Math.min(H*.97,y0+fs*dh);const kfb=Math.max(H*.03,24,H-feet);st.style.setProperty("--kfb",kfb.toFixed(0)+"px");st.style.setProperty("--kfh",Math.max(H*.45,H-kfb-H*.03).toFixed(0)+"px");st.dataset.kfloor=name}catch(e){}}
+ /* KIT_FLOOR anchors (kit 3, owner 11/14): every room has an open-floor spot (x centre, feet line); on a narrow/tall stage the picture
+    slides sideways so that spot is in the middle of the free zone between the stage plaques; feet stand on the painted floor */
+ const scene=name.replace(/-(xuan|ha|thu|dong)(-(sang|trua|chieu|toi))?$/,"");const A=KIT_FANCHOR[scene]||KIT_FANCHOR._default;
+ const dw=S0.w*s;let x0=(W-dw)/2,px=50;if(dw>W+1){const gl=parseFloat(st.style.getPropertyValue("--kgl"))||0,gr=parseFloat(st.style.getPropertyValue("--kgr"))||0;
+  const cx=(gl+(W-gr))/2;x0=Math.max(W-dw,Math.min(0,cx-A.x*dw));px=(x0/(W-dw))*100}
+ im.style.backgroundPosition=`${px.toFixed(1)}% ${py.toFixed(1)}%`;
+ const ftA=KIT_FLOOR[scene]!=null?KIT_FLOOR[scene]:ft;const fs=A.feet!=null?A.feet:ftA+.9*(1-ftA);let feet=Math.min(H*.97,y0+fs*dh);
+ const old=st.__kfa;st.__kfa={feet:Math.round(feet),ax:Math.round(x0+A.x*dw),scene};
+ if(!old||old.feet!==st.__kfa.feet||old.ax!==st.__kfa.ax){clearTimeout(st.__kfaT);st.__kfaT=setTimeout(()=>{try{window.j59lay&&window.j59lay()}catch(e){}},0)}const kfb=Math.max(H*.03,24,H-feet);st.style.setProperty("--kfb",kfb.toFixed(0)+"px");st.style.setProperty("--kfh",Math.max(H*.45,H-kfb-H*.03).toFixed(0)+"px");st.dataset.kfloor=name}catch(e){}}
 (function(){if(typeof renderStage!=="function")return;const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);kitFloorFit();return r};
  try{let ro=null;const hook=()=>{const st=$("stage");if(!st||ro)return;ro=new ResizeObserver(()=>kitFloorFit());ro.observe(st)};if(document.readyState!=="loading")hook();else addEventListener("DOMContentLoaded",hook)}catch(e){}
  const st=document.createElement("style");st.id="k2b-floor";st.textContent=`
