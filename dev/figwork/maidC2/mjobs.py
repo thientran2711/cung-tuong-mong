@@ -30,8 +30,10 @@ def hmat(t,i):
     if t<=4: return f"painted in {c}, finer detailed lines"
     if t<=6: return f"painted in {c} with a thin fine gold outline, more detailed"
     return "in gold leaf and cinnabar red with one tiny pearl dot, the finest detail"
+exec(open(H+"/hl.py").read())
 def huadian(t,i):
     if t=="cold": return " No huadian on the forehead."
+    if t>=2: return f" Forehead: a huadian ornament between the brows: {hdesc(t,HD[i],HCOL[i%8])}; the same huadian on all four figures."
     return (f" Forehead: a small, delicate, refined huadian between the brows, elegant, not large, about the size of a fingertip and clearly visible (like the small red flower between the brows in a classic portrait): her signature motif {HD[i]}, {hmat(t,i)}; "
             "same small size at every rank, never covering the forehead or spreading to the brows; the same huadian on all four figures.")
 SHORT=("Semi-realistic painterly guofeng portrait style, near-3D realistic rendering, soft natural light, fine detail, exactly matching the rendering of the reference portraits; plain light parchment background, soft even light. "

@@ -18,3 +18,4 @@
 - Vẽ lại dáng yên: C-m38-t1 (tấm thử đầu tiên, sheet C_m38_t1.jpg). 273 tín dụng.
 - Vẽ lại dáng yên t1 m27–m34 (8 lineup, đè file cũ). Tín dụng 2184.
 - Vẽ lại dáng yên t1 m35–m43 (trừ m38 đã xong), 8 lineup; por mới 384x506 bằng porcrop.py, cutcheck sạch. Tín dụng 2184.
+- Vẽ lại dáng yên t1 m44–m51 (8 lineup). Tín dụng 2184.
