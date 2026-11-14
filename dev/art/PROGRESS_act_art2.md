@@ -1,12 +1,13 @@
 # review/act-art2: tranh thẻ việc cho rõ việc (14/11)
 
 ## Trạng thái
-- DỪNG vẽ mới theo lệnh điều phối (chủ: "coi chừng vẽ dư"). Chờ điều phối duyệt danh sách SAI / KHÔNG RÕ rồi mới vẽ tiếp.
+- XONG. Chủ quyết (14/11): KHÔNG vẽ lại tranh thẻ việc. Mọi act-*.webp và img/ACTS.json đã trả về bản gốc (cbebfe3c = main),
+  chỉ giữ act-chan-ngu-gia bản đêm (TdSsziPVNR). Các bản vẽ thử bên dưới KHÔNG dùng, chỉ ghi id để tra cứu.
 - Code (commit e826ec83 + sửa thêm ở commit sau): j79 `kitActKey`/`kpActName`: tên thẻ đọc bỏ chân dung người nhận; khớp tên, slug, `prefix`, dấu `*`,
   tên dài nhất mà tiêu đề bắt đầu bằng; chạy lại khi ACTS.json về muộn (tiêu đề nằm trong .kabody). Nhóm mới `sung-ai` "Tranh sủng" #b03a7a.
 - Kiểm tranh: dev/art/ACT_ART_AUDIT.md (bảng 108 tranh + danh sách thẻ rơi về tranh nhóm).
 
-## Đã vẽ (gpt-2-6, 3:4, 1k, thư mục ba4aecfe…; khóa -> id, lần cuối là bản dùng; cũng ghi ở dev/figwork/acts/gens.txt)
+## Bản vẽ thử, đã trả lại, không dùng (gpt-2-6, 3:4, 1k, thư mục ba4aecfe…; khóa -> id, lần cuối là bản dùng; cũng ghi ở dev/figwork/acts/gens.txt)
 Lời vẽ: dev/figwork/acts/act2_prompts.py (bản sáng ref cplQijT0eP, bản tối ref iGq8UJy3uK). Tải + cắt 384x506: harvest2.py / fetch2.py.
 - Bản đêm, giữ bố cục (sửa trên ảnh cũ): chan-ngu-gia TdSsziPVNR (thử 1: VXUlnIPMMU), binh-phong fHARhcbCDY
 - Tranh mới cho thẻ buổi tối: tranh-sung Bh4OpdloQR ("Tranh sủng"), hau-tra-dem LwBerwqswO ("Hầu trà khi ngự giá"), ghi vào img/ACTS.json
@@ -20,5 +21,5 @@ Lời vẽ: dev/figwork/acts/act2_prompts.py (bản sáng ref cplQijT0eP, bản 
 - Bảng xem: scratchpad aa/act2-before.jpg, aa/act2-after.jpg (sheet.py, cùng thứ tự).
 
 ## Còn lại
-- Chờ điều phối: giữ / trả lại từng tranh KHÔNG RÕ (git checkout cbebfe3c -- img/act-<key>.webp để trả bản cũ).
+- Không còn việc vẽ. Thẻ "Xin Hoàng hậu giáng" (nhóm Trừng phạt) chưa có tranh nào, kể cả tranh nhóm (ghi ở ACT_ART_AUDIT.md).
 - Các thẻ rơi về tranh nhóm: xem cuối ACT_ART_AUDIT.md (cần tranh riêng nếu chủ muốn).
