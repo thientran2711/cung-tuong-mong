@@ -78,3 +78,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (20:30Z) Owner: selected state = gold glow around the frame is OK; NO check badge.
 - (20:50Z) Owner: map lacks servants' quarters, kitchen, physicians, study rooms etc. Decided to add: Dãy nhà cung nhân, Ngự thiện phòng, Nội vụ phủ, Hoán y cục, Phật đường, học đường/Thượng thư phòng; check Thái y viện + Ngự thư phòng reachable. Plan + pilot scene first (review/places).
 - (21:00Z) Owner: result/report texts (e.g. spy 'dò la' result) as bullet lists, one fact per line; gains/costs coloured; filler as footnote. All result/report/news/event texts.
+- (21:05Z) Owner, final: do NOT redraw act pictures. Keep originals; only the lookup bug fix + Tranh sủng category + night Chặn ngự giá. Rule for coordinator: never start redraws the owner didn't ask for; existing art stays unless she asks.
