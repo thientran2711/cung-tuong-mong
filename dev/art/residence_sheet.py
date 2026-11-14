@@ -11,9 +11,10 @@ W,H,G,LB,TOP=1100,733,24,64,150
 F=lambda s,b=False:ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSerif%s.ttf'%('-Bold' if b else ''),s)
 rows=len(P)+1;SW=G+3*(W+G);SH=TOP+rows*(H+LB+G)+G
 S=Image.new('RGB',(SW,SH),(246,236,214));d=ImageDraw.Draw(S)
-d.text((G,30),f'Nơi ở trong cung · {VN} · Magnific gpt-2-6 · 3:2 (bản gốc 3504x2336)',font=F(52,True),fill=(90,30,20))
+d.text((G,30),f'Nơi ở trong cung · {VN} · Magnific gpt-2-6 · 3:2',font=F(52,True),fill=(90,30,20))
 def cell(f,x,y,lab):
     p=R+f+'.webp'
+    if not os.path.exists(p):p=R+'../../../img/'+f+'.webp'
     if os.path.exists(p):S.paste(Image.open(p).convert('RGB').resize((W,H),Image.LANCZOS),(x,y+LB))
     else:d.rectangle([x,y+LB,x+W,y+LB+H],outline=(150,120,90),width=3);d.text((x+30,y+LB+30),'chưa có',font=F(40),fill=(150,120,90))
     d.text((x+6,y+10),lab,font=F(40,True),fill=(90,30,20))
