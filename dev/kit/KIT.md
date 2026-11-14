@@ -415,13 +415,14 @@ Category colour (owner 11/14): the brocade is tinted, the photo window gets a co
 | trung-phat | Trừng phạt | `#5a3a2a` |
 | muu-ke | Mưu kế | `#5a3f8f` |
 | hai-nguoi | Hại người | `#7a0f14` (blood red) |
+| sung-ai | Tranh sủng | `#b03a7a` (Chặn ngự giá, Tranh sủng, lật/rút/giữ thẻ, Liếc mắt đưa tình: winning the Emperor's night, checked first) |
 | nghi-ngoi | Nghỉ ngơi | `#5f9a5f` |
 | buon-ban | Buôn bán | `#a8692a` |
 | di-lai | Đi lại | `#7d8456` |
 | cham-con | Chăm con | `#e08a6a` |
 | trieu-chinh | Triều chính | `#22405f` |
 Older text below (square slot) is replaced by this. Image = `img/act-<key>.webp` where `img/ACTS.json` `acts` maps the card title (or its slug)
-to `<key>`; otherwise `img/act-cat-<category>.webp` when listed in `ACTS.json` `have`; otherwise the brocade tile with the category word.
+to `<key>` (title read WITHOUT the target's mini portrait; then ACTS.json `prefix`, names with `*`, longest act name the title starts with: j79 `kitActKey`); otherwise `img/act-cat-<category>.webp` when listed in `ACTS.json` `have`; otherwise the brocade tile with the category word.
 Categories (`kitActCat(name)`): hau-ha Hầu hạ · hoc-tap Học tập · giao-thiep Giao thiệp · muu-ke Mưu kế · hai-nguoi Hại người · nghi-ngoi Nghỉ ngơi ·
 buon-ban Buôn bán · le-nghi Lễ nghi · di-lai Đi lại. Art: square, painterly, same style anchor as portraits, ≤ 60 KB webp.
 Grid rows: every card in a row has the row's height (fitted to content, `grid-auto-rows:auto` + stretch), no empty space from a taller row.

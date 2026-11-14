@@ -585,6 +585,26 @@ kpActArt=function(b){if(b.dataset.kart)return;const kan=b.querySelector(":scope 
  let body=b.querySelector(":scope > .kabody");if(!body){body=document.createElement("span");body.className="kabody";[...b.childNodes].forEach(n=>{if(!(n.nodeType===1&&n.classList.contains("kaart")))body.appendChild(n)});b.appendChild(body)}
  let art=b.querySelector(":scope > .kaart");if(!art){art=document.createElement("span");art.className="kaart";b.prepend(art)}
  art.innerHTML=kitArtFrame(a.src,a.label,"kcat-"+a.cat,a.col);art.title=a.label;if(a.col)b.style.setProperty("--kcc0",a.col);b.classList.add("kart")};
+/* act art lookup fix (owner 11/14: every act with its own picture shows it). The card title (.kan) can hold the target's mini portrait
+   (its name text was glued to the act name: "Hoàng hậuThỉnh an Hoàng hậu") or run-time words after the act name ("Thỉnh an Hoàng hậu", "Phô tài: Đàn").
+   Name = .kan text without portraits; key = exact, slug, ACTS.json "prefix", names with "*", then the longest act name the title starts with.
+   New category sung-ai "Tranh sủng" (Chặn ngự giá, Tranh sủng, lật thẻ…): winning the Emperor's night is not "Hại người". */
+try{KIT_CAT["sung-ai"]=["Tranh sủng","#b03a7a"];KIT_ACT_CATS.unshift(["sung-ai",/chặn ngự giá|tranh sủng|lật thẻ|rút thẻ|giữ thẻ|liếc mắt đưa tình/i])}catch(e){}
+function kpActName(kan){const c=kan.cloneNode(true);c.querySelectorAll(".md,.kit,.pcp,.kodds,img,svg").forEach(e=>e.remove());return kpPlain(c.textContent)}
+const kpReEsc=s=>s.replace(/[.+?^$|()[\]{}\\]/g,"\\$&");
+function kitActKey(name){const A=KIT_ACTS.acts||{},P=KIT_ACTS.prefix||{};name=kpPlain(name);if(!name)return"";if(A[name])return A[name];const sl=kpSlug(name);if(A[sl])return A[sl];
+ let best="",key="";const take=(n,k)=>{if(n.length>best.length){best=n;key=k}};
+ for(const p in P)if(name.startsWith(p))take(p,P[p]);
+ for(const n in A){if(n.includes("*")){if(new RegExp("^"+n.split("*").map(kpReEsc).join(".+")+"$").test(name))take(n,A[n])}
+  else if(n!==kpSlug(n)&&(name.startsWith(n+" ")||name.startsWith(n+":")||name.startsWith(n+",")))take(n,A[n])}
+ if(key)return key;
+ if(name.length>=6)for(const n in A)if(!n.includes("*")&&n.startsWith(name+" "))return A[n];
+ return""}
+(function(){const k0=kitActArt;kitActArt=function(name){const r=k0.apply(this,arguments);try{const key=kitActKey(name);if(key)r.src=`img/act-${key}.webp`}catch(e){}return r}})();
+kpActArt=function(b){if(b.dataset.kart)return;const kan=b.querySelector(":scope > .kat > .kan");if(!kan)return;const name=kpActName(kan);const a=kitActArt(name);b.dataset.kart=a.cat;
+ let body=b.querySelector(":scope > .kabody");if(!body){body=document.createElement("span");body.className="kabody";[...b.childNodes].forEach(n=>{if(!(n.nodeType===1&&n.classList.contains("kaart")))body.appendChild(n)});b.appendChild(body)}
+ let art=b.querySelector(":scope > .kaart");if(!art){art=document.createElement("span");art.className="kaart";b.prepend(art)}
+ art.innerHTML=kitArtFrame(a.src,a.label,"kcat-"+a.cat,a.col);art.title=a.label;if(a.col)b.style.setProperty("--kcc0",a.col);b.classList.add("kart")};
 /* ---- 2. info art: title -> key; manifest img/INFO.json {have:[...]} ---- */
 const KIT_INFO=[["nguy-hiem",/nguy hiểm/i],["ra-vao",/ra vào/i],["que",/^qu[eẻ]|gieo quẻ/i],["bong-loc",/bổng lộc/i],["an-thuong",/ân thưởng|ban thưởng/i],
  ["sac",/^sắc\b/i],["tai",/^tài\b(?! nghệ)/i],["tam-co",/tâm cơ/i],["duc",/^đức\b/i],["tai-mat",/tai mắt/i],["thai-hau",/thái hậu/i],["hoang-hau",/hoàng hậu|mẫu nghi/i],
