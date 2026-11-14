@@ -145,3 +145,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (00:25Z) Owner: emotion = icon only, NO colour ring/aura around avatar frames. PRIORITY: finish the new book UI (page-curl, on top of fold-layout) first; all other UI work is then rebuilt/fixed on the new UI (no owner shots from other UI branches until book UI is final).
 - (00:35Z) Owner: audit every place/room backdrop; any without full 4 seasons × 4 times → paint the missing variants now (edits of existing, keep old art). Worker on review/place-seasons.
 - (00:45Z) Owner: as soon as the book UI is finished, put it live immediately (fast kit review + Fold/iPad play-test, then merge fold-layout+page-curl to main).
+- (01:00Z) Owner: hairpin emotion icons look male — must clearly read as ancient-court women (feminine face, lips, fuller hairstyle with flowers/bộ diêu, no single topknot), still legible small.
