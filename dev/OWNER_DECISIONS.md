@@ -139,3 +139,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (23:40Z) Owner approved the residence backdrop look (Cảnh Phúc chính điện pilot: 'Nền ok'). Asked to check whether the Quý phi's outfit is right for her rank (shot dev/owner-shots/1115-residence-quyphi.jpg) — sent to consort-art worker to verify tier/pose.
 - (23:55Z) Owner: the wide sweeping skirt pose is OK — do not raise pose issues she didn't complain about; only answer exactly what she asks (here: is the Quý phi outfit right for her rank).
 - (00:00Z) Owner rejected the seasons redraw pilot (Ngự hoa viên v2): KEEP the old place backdrops. No seasons rollout; review/seasons not merged.
+- (00:05Z) Owner: emotion icons don't look cổ trang — same simple drawing style but faces with ancient hairstyle + hairpins (cài trâm) like consorts; must stay readable small.
