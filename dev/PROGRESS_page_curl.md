@@ -34,6 +34,11 @@ Nhánh `review/page-curl` từ origin/review/fold-layout (đã gộp tới e7deb
   Vào Dư đồ: bản đồ trải ra từ giữa (kitUnroll 620 ms). kitBookSpread `double` cũng là bản đồ da phủ cả sách.
 - KIT.md §32.1 (v2) + §32.1b kitLeather. Thử: `dev/test/curl-live.js` (game thật: bản đồ, khung giữa lật tab, lật lùi, đi hết các tab,
   giảm chuyển động), `dev/test/page-curl.js` (sổ tuần).
+- SÁCH SỐNG (kitBookLive, 15/11 theo lệnh ưu tiên): game thật = cuốn sách mở. iPad ngang: sân khấu phòng = trang tranh trái, bảng tab = trang
+  chữ phải, gáy giữa, bìa chàm phía sau; điện thoại: một trang giấy. Mọi tab, cả đường cung nữ. Dư đồ không phải trang (da).
+- MỘT PHÔNG phòng: j11 Pixi chỉ vẽ bản sao phòng khi đúng tranh + khung của #scimg (kể cả tranh dọc -p) và phủ kín; không thì ẩn, chỉ CSS.
+- Đã gộp origin/review/fold-layout (27d79926).
+- Thử: `dev/test/book-live.js <base> <WxH@dpr> <out> <tag> [srv] [tabs]` (ảnh từng tab, đếm phông, tràn ngang, lỗi).
 
 ## Kiểm thử (Playwright)
 - page-curl: 1180x820@2, 1366x1024@2, 686x880@2.2, 755x1000@2 — không lỗi trang, không tràn ngang, giảm chuyển động = không cong (mờ chéo).
