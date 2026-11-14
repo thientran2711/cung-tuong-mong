@@ -1,0 +1,164 @@
+{
+ "note": "Event art (3:4, 768x1024 webp, no faces). events: eventId -> category; ids are namespaced (e68:, j7:, arc:, plot:, qs:, fest:, news:, sys:, j3:, j24:, j54:, j55:, j22:); \"hh:*\", \"lc:*\", \"cnv:*\", \"j42:*\" = whole prefix. Pick a file by a stable hash of the event id/variant. See dev/art/EVENT_ART.md.",
+ "default": "trieu-chinh",
+ "categories": {
+  "trieu-chinh": {
+   "title": "Triều chính",
+   "files": [
+    "img/ev-trieu-chinh.webp",
+    "img/ev-trieu-chinh-2.webp"
+   ]
+  },
+  "tham-quan": {
+   "title": "Án tham ô",
+   "files": [
+    "img/ev-tham-quan.webp"
+   ]
+  },
+  "duoc-mua": {
+   "title": "Được mùa",
+   "files": [
+    "img/ev-duoc-mua.webp"
+   ]
+  },
+  "lu-lut": {
+   "title": "Lũ lụt",
+   "files": [
+    "img/ev-lu-lut.webp"
+   ]
+  },
+  "han-han": {
+   "title": "Hạn hán, cầu mưa",
+   "files": [
+    "img/ev-han-han.webp"
+   ]
+  },
+  "bien-ai": {
+   "title": "Chiến sự biên ải",
+   "files": [
+    "img/ev-bien-ai.webp",
+    "img/ev-bien-ai-2.webp"
+   ]
+  },
+  "thang-tran": {
+   "title": "Thắng trận",
+   "files": [
+    "img/ev-thang-tran.webp"
+   ]
+  },
+  "su-than": {
+   "title": "Sứ thần, triều cống",
+   "files": [
+    "img/ev-su-than.webp",
+    "img/ev-su-than-2.webp"
+   ]
+  },
+  "hoa-than": {
+   "title": "Hòa thân",
+   "files": [
+    "img/ev-hoa-than.webp"
+   ]
+  },
+  "hoang-de-vui": {
+   "title": "Hoàng thượng vui",
+   "files": [
+    "img/ev-hoang-de-vui.webp",
+    "img/ev-hoang-de-vui-2.webp"
+   ]
+  },
+  "hoang-de-gian": {
+   "title": "Hoàng thượng phiền muộn, giận",
+   "files": [
+    "img/ev-hoang-de-gian.webp"
+   ]
+  },
+  "hoang-de-dem": {
+   "title": "Hoàng thượng ngự giá",
+   "files": [
+    "img/ev-hoang-de-dem.webp"
+   ]
+  },
+  "vi-hanh": {
+   "title": "Vi hành, chơi đùa",
+   "files": [
+    "img/ev-vi-hanh.webp",
+    "img/ev-vi-hanh-2.webp"
+   ]
+  },
+  "le-xuan": {
+   "title": "Lễ hội mùa xuân",
+   "files": [
+    "img/ev-le-xuan.webp"
+   ]
+  },
+  "dau-doc": {
+   "title": "Đầu độc",
+   "files": [
+    "img/ev-dau-doc.webp"
+   ]
+  }
+ },
+ "events": {
+  "arc:cnv_mat": "hoang-de-dem",
+  "arc:dtq_bien": "bien-ai",
+  "arc:dtq_binh": "bien-ai",
+  "arc:dtq_huynh": "bien-ai",
+  "arc:muoi_doi": "lu-lut",
+  "arc:muoi_lau": "tham-quan",
+  "arc:muoi_no": "tham-quan",
+  "arc:nc_su": "su-than",
+  "arc:nc_vuong": "su-than",
+  "arc:s_su": "su-than",
+  "arc:thd_sach": "tham-quan",
+  "arc:thd_tro": "tham-quan",
+  "arc:tt_oan": "tham-quan",
+  "e68:borderNews": "bien-ai",
+  "e68:clanFather": "tham-quan",
+  "e68:droughtPrayer": "han-han",
+  "e68:empAsksAbout": "hoang-de-vui",
+  "e68:empChess": "hoang-de-vui",
+  "e68:empDish": "hoang-de-vui",
+  "e68:empGiftOdd": "hoang-de-vui",
+  "e68:empIncognito": "vi-hanh",
+  "e68:empOldFlame": "hoang-de-gian",
+  "e68:empPoem": "hoang-de-vui",
+  "e68:empSleepRead": "hoang-de-dem",
+  "e68:empSulk": "hoang-de-gian",
+  "e68:empWager": "vi-hanh",
+  "e68:envoyGift": "su-than",
+  "e68:famineDonate": "lu-lut",
+  "e68:spoiledFood": "dau-doc",
+  "fest:newyear": "le-xuan",
+  "fest:nguyentieu": "le-xuan",
+  "fest:thanhminh": "le-xuan",
+  "j24:hoang-thuong-den": "hoang-de-dem",
+  "j3:embezzle": "tham-quan",
+  "j55:tdPop": "trieu-chinh",
+  "j7:empnight": "hoang-de-dem",
+  "j7:flood": "lu-lut",
+  "j7:foreignwed": "hoa-than",
+  "j7:jealousprince": "hoang-de-gian",
+  "j7:minister": "trieu-chinh",
+  "j7:poisongift": "dau-doc",
+  "j7:taster": "dau-doc",
+  "news:hoa-than": "hoa-than",
+  "news:nam-chieu": "bien-ai",
+  "news:thang-tran": "thang-tran",
+  "news:thua-tran": "bien-ai",
+  "plot:kpoison": "dau-doc",
+  "plot:poison": "dau-doc",
+  "qs:cong": "su-than",
+  "qs:giac-thang": "thang-tran",
+  "qs:giac-thua": "bien-ai",
+  "qs:han": "han-han",
+  "qs:lut": "lu-lut",
+  "qs:mua": "duoc-mua",
+  "qs:tham": "tham-quan",
+  "qs:yen": "trieu-chinh",
+  "sys:mood-binh": "trieu-chinh",
+  "sys:mood-gian": "hoang-de-gian",
+  "sys:mood-phien": "hoang-de-gian",
+  "sys:mood-vui": "hoang-de-vui",
+  "sys:thi-tam": "hoang-de-dem"
+ }
+}
