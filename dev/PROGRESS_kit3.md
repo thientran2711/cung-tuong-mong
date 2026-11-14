@@ -11,3 +11,12 @@ Test harness (scratchpad k3/): mk.sh builds _t.html, server `python3 -m http.ser
 fr.js (frame gap), s1.js, ev2.js, final3.js, fb.js (book), sweep.js (7 sizes), oldsave.js.
 Open (next): one kitBar for the 6 bar variants, one tab-row builder, status-sheet chips → kit cells, old .btn screens (KIT 32.4);
 allergy rash overlay art (KIT_RASH hook ready); index.html/sw.js not rebuilt on this branch (merger runs dev/site/build_site.sh).
+
+## 11/15 — review r3 FAIL (1366 stage strip) → KIT 33 ONE FIGURE SCALE (KIT_FIG) + kitImgErr
+- KIT_FIG (jkit.js top): woman .86 of stage height, man/eunuch ×1.08, child .55+.03·age; j59 reads it (MANF/MEN/.7 strip factor removed).
+- j59: one scale per scene, never shrink to fit more; strip = equal whole-person slots (snap per person, exact N slots wide), "› N"/"N ‹"
+  in the empty right gutter under the plaques; widths by visible bbox; only exception = scale down to fit her + one whole person.
+- jk3 k3Gut: empty plaque column reserves no gutter. jk4 kitStageFig: --kfr = KIT_FIG.fac/man, feet aligned.
+- kitImgErr (jkit.js): null-safe inline onerror for j15 pcPort, j3, j90 podium, jk4 event stage (fixes "reading 'classList' of null").
+- Measured 686/1180/1366/1024 (KIT.md §33 table), consort + cung nữ 1/3/5/6 people: all whole, chips uncut, 0 errors, 0 overflow.
+  Shots dev/shots/review/fold-layout/k33-*.jpg. Harness: scratchpad k3/st.js + h2.js (route-served files, no server).
