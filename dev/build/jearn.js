@@ -4,3 +4,30 @@
 /* review/balance carries jk2b's Tư trang (K2) but not j92cat's collection counter: without it the wardrobe block threw
    "wdColInfo is not defined" and vanished. Minimal stand-in until the wardrobe catalogue (j92cat) lands: count what she holds. */
 if(typeof wdColInfo!=="function"){window.wdColInfo=function(){let n=0;try{const w=wdOf(S);const seen={};for(const sl of ["tram","y"])if(w[sl])seen[w[sl].k]=1;(S.inv||[]).forEach(e=>{if(e&&!e.h&&wdItem(e))seen[e.k]=1});n=Object.keys(seen).length}catch(e){}return{n,title:null,next:null}}}
+
+/* ---------- 1. Trang phục: no phantom "phẩm phục được cấp" that is always at hand ----------
+   Before (j92): everyone wore a free {from:"base"} outfit of her CURRENT phẩm, re-issued out of nothing after a promotion,
+   a demotion, a confiscation or taking the y phục off, and Tự chọn đồ / Chải chuốt could always pick it.
+   Now: what she wears on entering the palace is a real starting kit (Nội vụ phủ issue: one trâm + one y phục of her phẩm,
+   plus one spare plain y phục for the player), kept like any other item; new phẩm phục come only from the existing
+   promotion issue (j92 nvp), purchases, gifts and rewards. Nobody is left without clothes: if a confiscated / lost y phục
+   cannot be replaced from her own chest, Nội vụ phủ issues a plain one of her phẩm (an issue, recorded as such).
+   Mourning clothes in quốc tang stay a Nội vụ phủ issue to everyone. Old saves: worn base items become real starting-kit
+   items (same item, nothing visible changes). */
+function earnK(p,k){if(!k)return;if(p===S){S.wdk=S.wdk||{};S.wdk[k]=1}else{p.wdk=p.wdk||{};p.wdk[k]=1}}
+function earnPlainY(p){const P=Math.min(8,wdPOf(p));let L=WD_LIST.filter(r=>r[1]==="y"&&r[3]===P&&r[4]===0).map(r=>r[0]);if(!L.length)L=wdPool("y",P,true);return L.length?L[wdHash(wdKey(p)+"y0")%L.length]:null}
+function earnFromChest(p,sl){const P=Math.min(8,wdPOf(p));const L=(p.inv||[]).filter(e=>e&&!e.h&&wdItem(e)&&wdItem(e).sl===sl&&e.k!=="y_tang"&&wdBelPE(p,e,p)<=P);
+ if(!L.length)return null;L.sort((a,b)=>wdBelPE(p,b,p)-wdBelPE(p,a,p));const e=L[0];p.inv.splice(p.inv.indexOf(e),1);return e}
+(function(){if(typeof wdOf!=="function")return;const o0=wdOf;wdOf=function(p){const w=o0.apply(this,arguments);if(!w||!p)return w;try{
+  if(!p.wdK0){p.wdK0=1;for(const sl of ["tram","y"]){const e=w[sl];if(e&&e.from==="base"){w[sl]={k:e.k,src:"cap",nvp:1};earnK(p,e.k)}}
+   if(p===S&&(S.turn||0)<=1){const P=Math.min(8,wdPOf(S)),wk0=w.y&&w.y.k;let k=null;for(const q of [P,P-1,P-2]){const L=WD_LIST.filter(r=>r[1]==="y"&&r[3]===q&&r[4]===0&&r[0]!==wk0&&r[0]!=="y_tang").map(r=>r[0]);if(L.length){k=L[wdHash(wdKey(S)+"y1")%L.length];break}}if(k){S.inv=S.inv||[];S.inv.push({k,src:"cap",nvp:1});earnK(S,k)}}}
+  else for(const sl of ["tram","y"]){const e=w[sl];if(!e||e.from!=="base")continue;
+   if(e.k==="y_tang"){w[sl]={k:"y_tang",src:"nvp",nvp:1,giver:"Nội vụ phủ"};continue}
+   const c=earnFromChest(p,sl);if(c){w[sl]=c;continue}
+   if(sl==="y"){const k=earnPlainY(p)||e.k;w.y={k,src:"nvp",nvp:1,giver:"Nội vụ phủ"};earnK(p,k)}else w.tram=null}}catch(x){console.error(x)}return w}})();
+/* Tự chọn đồ / Chải chuốt choose only among things she really has (+ the mourning issue in quốc tang) */
+(function(){if(typeof wdCands!=="function")return;const c0=wdCands;wdCands=function(p){const C=c0.apply(this,arguments);try{for(const sl of ["tram","y"]){const L=C[sl].filter(x=>!x||x.src!=="base");if(sl==="tram"||L.some(Boolean))C[sl]=L}}catch(e){}return C}})();
+/* taking the y phục off without another to put on is no longer possible (only changing into another one) */
+(function(){if(typeof wdOffUI!=="function")return;const f0=wdOffUI;wdOffUI=function(sl){if(sl==="y"){try{log("Muốn thay y phục, chọn bộ khác trong Rương đồ rồi Mặc.")}catch(e){}return}return f0.apply(this,arguments)};window.wdOffUI=wdOffUI})();
+(function(){if(typeof wdInvHTML!=="function")return;const h0=wdInvHTML;wdInvHTML=function(){const h=h0.apply(this,arguments);return h.replace(/<button data-wd="off" data-sl="y"[\s\S]*?<\/button>/g,"")}})();
+(function(){if(typeof wdSrcTxt!=="function")return;const s0=wdSrcTxt;wdSrcTxt=function(e){if(e&&e.src==="cap")return"Nội vụ phủ cấp khi nhập cung";if(e&&e.src==="nvp")return`Nội vụ phủ cấp${e.d?", "+e.d:""}`;return s0.apply(this,arguments)}})();
