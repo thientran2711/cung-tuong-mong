@@ -152,3 +152,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (01:40Z) Owner approved the residence xuân-sáng sheet (25 rooms) → rollout all 16 variants per room + wire into game.
 - (01:55Z) Owner approved the emotion icon set 'palace lady' (pilot-emo-lady: oval face, red lips, two-bun chignon, flower, bộ diêu).
 - (02:00Z) Owner: co-op players have the FULL interaction set with each other like with NPCs, incl. harm/scheme/sát hại, depending on place/rank/conditions; not a simple Nhận/Từ chối card — only invitation-type acts ask the target; harm resolves with normal odds/detection.
+- (02:30Z) Owner: Dư đồ → tap a palace → palace DETAIL map (like reference game's drawn map) showing Chính điện / Đông viện / Tây viện each with 'N bóng người' (real count this buổi) → tap a part → that room painting with exactly the people there. Pilot Cảnh Phúc detail map first (review/palace-map).
