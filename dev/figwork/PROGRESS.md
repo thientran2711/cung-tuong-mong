@@ -86,3 +86,14 @@
   refs [style STY, image ref] as printed) → append "jid gen" to gens.txt → creations_wait → images_remove_background → append "jid gen bg" to bg.txt
   → `python3 mproc.py bg.txt <jids>` → `TH=180 python3 msheet.py ../sheets/X.jpg maid tm0,m1,tm2,tm3,tm4 mNN mMM` → `bash pubm.sh "msg" sheet.jpg`.
   Work copy lives in scratchpad/maid (copy of dev/figwork/maid); worktree scratchpad/wt-maid on branch review/maid-art.
+
+### STATUS (maid-art, end of session 2)
+- DONE part A: m01–m20 × m0/m2/m3/m4 (80 lineups, 320 figures). Session 2 added m11–m20 (40 lineups, 10 800 credits gen + bg 3 each),
+  sheets dev/figwork/sheets/A_b5.jpg (m11,m12), A_b6.jpg (m13,m14), A_b7.jpg (m15,m16), A_b8.jpg (m17,m18), A_b9.jpg (m19,m20).
+  All checked: proportions ~1:7, faces match the m1 lineup, no green drift, m0 embroidered + silver trâm, m3 dark non-red, m4 red + crane square + winged cap.
+- NEXT (exact): part A m21–m52 (128 lineups, next batch A-m21-m0 A-m21-m2 A-m21-m3 A-m21-m4 A-m22-m0 ... → sheet A_b10.jpg)
+  → part B c01–c32 × m0..m4 (160) → part C m01–m52 × t1..t8 + tcold (468).
+- Session-2 tool notes: worktree is now scratchpad/wt-maid2 (mjobs/mproc/msheet/pubm point there; change WT if a new worktree is used).
+  `python3 vs.py JID...` prints a compact line per job (style ref | colour/flower | 4 poses) — the rest of the prompt is the fixed template from
+  `python3 mjobs.py JID`. `bash addbg.sh "jid..." "bg..."` appends "jid gen bg" lines to bg.txt (gen looked up in gens.txt, same order).
+  mproc.py takes ~2 min per batch (urls.py scans transcripts): run it in the background.
