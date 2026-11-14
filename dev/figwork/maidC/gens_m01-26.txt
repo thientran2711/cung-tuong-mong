@@ -108,3 +108,18 @@ C-m21-t5 xSd0S0rjfW hands
 C-m22-t5 xSd0SVdjfW hands (a48 letter->lantern)
 C-m23-t5 XmPSmJIBfo hands
 C-m24-t5 9ZQhZExNYZ hands
+C-m21-t5 mE3yFFmhJQ edit xSd0S0rjfW: solid crane huadian
+C-m18-t5 jUXTJyHLD0 edit Do7Lo1npcl: a48 hair dark
+C-m25-t5 yiCI2VTPW9 hands
+C-m26-t5 4RumGpT9Aa hands nomole
+C-m01-t6 u5n3rOVQLD hands
+C-m02-t6 KLMnSRLkqp hands
+C-m03-t6 u5n3r4pQLD hands
+C-m04-t6 8aN7uSHIrU hands
+C-m05-t6 gOIp9MdSXO hands
+C-m06-t6 MBwjtjBDCm hands
+C-m21-t5 UPmd6sswny edit2 xSd0S0rjfW: soft pink bird huadian
+C-m02-t6 lJ8DN7Ngv9 edit KLMnSRLkqp: a48 hair dark
+C-m05-t6 ov9wQPF829 edit gOIp9MdSXO: flat huadian, no pendant
+C-m06-t6 lJ8DNoagv9 edit MBwjtjBDCm: flat huadian, no pendant
+C-m04-t6 JNao2FVOq4 edit 8aN7uSHIrU: flat huadian, no pendant
