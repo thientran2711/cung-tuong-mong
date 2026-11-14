@@ -214,8 +214,8 @@
   "ageBand": "a18",
   "look": "kieungao",
   "palette": "rose red and gold",
-  "magnificUrl": "https://www.magnific.com/app/creation/CqGNDfgEEy",
-  "bg": "fHA98F6CDY",
+  "magnificUrl": "https://www.magnific.com/app/creation/aF2N9XPfSh",
+  "bg": "XmPUwhQBfo",
   "sheet": "N-c01-t5",
   "file": "img/fig-consort-c01-t5-a18.webp",
   "por": "img/por-consort-c01-t5-a18.webp"
@@ -227,8 +227,8 @@
   "ageBand": "a26",
   "look": "kieungao",
   "palette": "rose red and gold",
-  "magnificUrl": "https://www.magnific.com/app/creation/CqGNDfgEEy",
-  "bg": "fHA98F6CDY",
+  "magnificUrl": "https://www.magnific.com/app/creation/aF2N9XPfSh",
+  "bg": "XmPUwhQBfo",
   "sheet": "N-c01-t5",
   "file": "img/fig-consort-c01-t5-a26.webp",
   "por": "img/por-consort-c01-t5-a26.webp"
@@ -240,8 +240,8 @@
   "ageBand": "a36",
   "look": "kieungao",
   "palette": "rose red and gold",
-  "magnificUrl": "https://www.magnific.com/app/creation/CqGNDfgEEy",
-  "bg": "fHA98F6CDY",
+  "magnificUrl": "https://www.magnific.com/app/creation/aF2N9XPfSh",
+  "bg": "XmPUwhQBfo",
   "sheet": "N-c01-t5",
   "file": "img/fig-consort-c01-t5-a36.webp",
   "por": "img/por-consort-c01-t5-a36.webp"
@@ -253,8 +253,8 @@
   "ageBand": "a51",
   "look": "kieungao",
   "palette": "rose red and gold",
-  "magnificUrl": "https://www.magnific.com/app/creation/CqGNDfgEEy",
-  "bg": "fHA98F6CDY",
+  "magnificUrl": "https://www.magnific.com/app/creation/aF2N9XPfSh",
+  "bg": "XmPUwhQBfo",
   "sheet": "N-c01-t5",
   "file": "img/fig-consort-c01-t5-a51.webp",
   "por": "img/por-consort-c01-t5-a51.webp"
@@ -322,8 +322,7 @@
   "bg": "xSdTL4EjfW",
   "sheet": "N-c01-t7",
   "file": "img/fig-consort-c01-t7-a18.webp",
-  "por": "img/por-consort-c01-t7-a18.webp",
-  "solidSheer": true
+  "por": "img/por-consort-c01-t7-a18.webp"
  },
  {
   "role": "consort",
@@ -336,8 +335,7 @@
   "bg": "xSdTL4EjfW",
   "sheet": "N-c01-t7",
   "file": "img/fig-consort-c01-t7-a26.webp",
-  "por": "img/por-consort-c01-t7-a26.webp",
-  "solidSheer": true
+  "por": "img/por-consort-c01-t7-a26.webp"
  },
  {
   "role": "consort",
@@ -350,8 +348,7 @@
   "bg": "xSdTL4EjfW",
   "sheet": "N-c01-t7",
   "file": "img/fig-consort-c01-t7-a36.webp",
-  "por": "img/por-consort-c01-t7-a36.webp",
-  "solidSheer": true
+  "por": "img/por-consort-c01-t7-a36.webp"
  },
  {
   "role": "consort",
@@ -364,8 +361,7 @@
   "bg": "xSdTL4EjfW",
   "sheet": "N-c01-t7",
   "file": "img/fig-consort-c01-t7-a51.webp",
-  "por": "img/por-consort-c01-t7-a51.webp",
-  "solidSheer": true
+  "por": "img/por-consort-c01-t7-a51.webp"
  },
  {
   "role": "consort",
@@ -374,12 +370,11 @@
   "ageBand": "a18",
   "look": "kieungao",
   "palette": "rose red and gold",
-  "magnificUrl": "https://www.magnific.com/app/creation/w4he3Ez7EI",
-  "bg": "eIOLfQ6dqL",
+  "magnificUrl": "https://www.magnific.com/app/creation/dtySuREXSL",
+  "bg": "6AHfMhqiJO",
   "sheet": "N-c01-t8",
   "file": "img/fig-consort-c01-t8-a18.webp",
-  "por": "img/por-consort-c01-t8-a18.webp",
-  "rematte": "YMLb0uyWeC"
+  "por": "img/por-consort-c01-t8-a18.webp"
  },
  {
   "role": "consort",
@@ -388,12 +383,11 @@
   "ageBand": "a26",
   "look": "kieungao",
   "palette": "rose red and gold",
-  "magnificUrl": "https://www.magnific.com/app/creation/w4he3Ez7EI",
-  "bg": "eIOLfQ6dqL",
+  "magnificUrl": "https://www.magnific.com/app/creation/dtySuREXSL",
+  "bg": "6AHfMhqiJO",
   "sheet": "N-c01-t8",
   "file": "img/fig-consort-c01-t8-a26.webp",
-  "por": "img/por-consort-c01-t8-a26.webp",
-  "rematte": "8aNwmlKIrU"
+  "por": "img/por-consort-c01-t8-a26.webp"
  },
  {
   "role": "consort",
@@ -402,8 +396,8 @@
   "ageBand": "a36",
   "look": "kieungao",
   "palette": "rose red and gold",
-  "magnificUrl": "https://www.magnific.com/app/creation/w4he3Ez7EI",
-  "bg": "eIOLfQ6dqL",
+  "magnificUrl": "https://www.magnific.com/app/creation/dtySuREXSL",
+  "bg": "6AHfMhqiJO",
   "sheet": "N-c01-t8",
   "file": "img/fig-consort-c01-t8-a36.webp",
   "por": "img/por-consort-c01-t8-a36.webp"
@@ -415,13 +409,11 @@
   "ageBand": "a51",
   "look": "kieungao",
   "palette": "rose red and gold",
-  "magnificUrl": "https://www.magnific.com/app/creation/w4he3Ez7EI",
-  "bg": "eIOLfQ6dqL",
+  "magnificUrl": "https://www.magnific.com/app/creation/dtySuREXSL",
+  "bg": "6AHfMhqiJO",
   "sheet": "N-c01-t8",
   "file": "img/fig-consort-c01-t8-a51.webp",
-  "por": "img/por-consort-c01-t8-a51.webp",
-  "rematte": "dtylojoXSL",
-  "solidSheer": true
+  "por": "img/por-consort-c01-t8-a51.webp"
  },
  {
   "role": "consort",
@@ -642,8 +634,7 @@
   "bg": "UPmds57wny",
   "sheet": "N-c02-t4",
   "file": "img/fig-consort-c02-t4-a18.webp",
-  "por": "img/por-consort-c02-t4-a18.webp",
-  "solidSheer": true
+  "por": "img/por-consort-c02-t4-a18.webp"
  },
  {
   "role": "consort",
@@ -691,8 +682,8 @@
   "ageBand": "a18",
   "look": "kieungao",
   "palette": "sapphire blue and silver",
-  "magnificUrl": "https://www.magnific.com/app/creation/dtylGumXSL",
-  "bg": "4RutURV9Aa",
+  "magnificUrl": "https://www.magnific.com/app/creation/P3EmtSn42C",
+  "bg": "SytdX4OUb8",
   "sheet": "N-c02-t5",
   "file": "img/fig-consort-c02-t5-a18.webp",
   "por": "img/por-consort-c02-t5-a18.webp"
@@ -704,8 +695,8 @@
   "ageBand": "a26",
   "look": "kieungao",
   "palette": "sapphire blue and silver",
-  "magnificUrl": "https://www.magnific.com/app/creation/dtylGumXSL",
-  "bg": "4RutURV9Aa",
+  "magnificUrl": "https://www.magnific.com/app/creation/P3EmtSn42C",
+  "bg": "SytdX4OUb8",
   "sheet": "N-c02-t5",
   "file": "img/fig-consort-c02-t5-a26.webp",
   "por": "img/por-consort-c02-t5-a26.webp"
@@ -717,8 +708,8 @@
   "ageBand": "a36",
   "look": "kieungao",
   "palette": "sapphire blue and silver",
-  "magnificUrl": "https://www.magnific.com/app/creation/dtylGumXSL",
-  "bg": "4RutURV9Aa",
+  "magnificUrl": "https://www.magnific.com/app/creation/P3EmtSn42C",
+  "bg": "SytdX4OUb8",
   "sheet": "N-c02-t5",
   "file": "img/fig-consort-c02-t5-a36.webp",
   "por": "img/por-consort-c02-t5-a36.webp"
@@ -730,8 +721,8 @@
   "ageBand": "a51",
   "look": "kieungao",
   "palette": "sapphire blue and silver",
-  "magnificUrl": "https://www.magnific.com/app/creation/dtylGumXSL",
-  "bg": "4RutURV9Aa",
+  "magnificUrl": "https://www.magnific.com/app/creation/P3EmtSn42C",
+  "bg": "SytdX4OUb8",
   "sheet": "N-c02-t5",
   "file": "img/fig-consort-c02-t5-a51.webp",
   "por": "img/por-consort-c02-t5-a51.webp"
@@ -847,8 +838,8 @@
   "ageBand": "a18",
   "look": "kieungao",
   "palette": "sapphire blue and silver",
-  "magnificUrl": "https://www.magnific.com/app/creation/O6fB2b6ynm",
-  "bg": "p8JjaF8ehw",
+  "magnificUrl": "https://www.magnific.com/app/creation/UPmXZFEwny",
+  "bg": "6AHfMvbiJO",
   "sheet": "N-c02-t8",
   "file": "img/fig-consort-c02-t8-a18.webp",
   "por": "img/por-consort-c02-t8-a18.webp"
@@ -860,8 +851,8 @@
   "ageBand": "a26",
   "look": "kieungao",
   "palette": "sapphire blue and silver",
-  "magnificUrl": "https://www.magnific.com/app/creation/O6fB2b6ynm",
-  "bg": "p8JjaF8ehw",
+  "magnificUrl": "https://www.magnific.com/app/creation/UPmXZFEwny",
+  "bg": "6AHfMvbiJO",
   "sheet": "N-c02-t8",
   "file": "img/fig-consort-c02-t8-a26.webp",
   "por": "img/por-consort-c02-t8-a26.webp"
@@ -873,8 +864,8 @@
   "ageBand": "a36",
   "look": "kieungao",
   "palette": "sapphire blue and silver",
-  "magnificUrl": "https://www.magnific.com/app/creation/O6fB2b6ynm",
-  "bg": "p8JjaF8ehw",
+  "magnificUrl": "https://www.magnific.com/app/creation/UPmXZFEwny",
+  "bg": "6AHfMvbiJO",
   "sheet": "N-c02-t8",
   "file": "img/fig-consort-c02-t8-a36.webp",
   "por": "img/por-consort-c02-t8-a36.webp"
@@ -886,13 +877,11 @@
   "ageBand": "a51",
   "look": "kieungao",
   "palette": "sapphire blue and silver",
-  "magnificUrl": "https://www.magnific.com/app/creation/O6fB2b6ynm",
-  "bg": "p8JjaF8ehw",
+  "magnificUrl": "https://www.magnific.com/app/creation/UPmXZFEwny",
+  "bg": "6AHfMvbiJO",
   "sheet": "N-c02-t8",
   "file": "img/fig-consort-c02-t8-a51.webp",
-  "por": "img/por-consort-c02-t8-a51.webp",
-  "rematte": "mE3Oa7ghJQ",
-  "solidSheer": true
+  "por": "img/por-consort-c02-t8-a51.webp"
  },
  {
   "role": "consort",
@@ -1161,8 +1150,8 @@
   "ageBand": "a18",
   "look": "kieungao",
   "palette": "emerald green and cream",
-  "magnificUrl": "https://www.magnific.com/app/creation/8aNwWbLIrU",
-  "bg": "P3EIS3y42C",
+  "magnificUrl": "https://www.magnific.com/app/creation/9ZQvh71NYZ",
+  "bg": "1lpc0SEr4r",
   "sheet": "N-c03-t5",
   "file": "img/fig-consort-c03-t5-a18.webp",
   "por": "img/por-consort-c03-t5-a18.webp"
@@ -1174,8 +1163,8 @@
   "ageBand": "a26",
   "look": "kieungao",
   "palette": "emerald green and cream",
-  "magnificUrl": "https://www.magnific.com/app/creation/8aNwWbLIrU",
-  "bg": "P3EIS3y42C",
+  "magnificUrl": "https://www.magnific.com/app/creation/9ZQvh71NYZ",
+  "bg": "1lpc0SEr4r",
   "sheet": "N-c03-t5",
   "file": "img/fig-consort-c03-t5-a26.webp",
   "por": "img/por-consort-c03-t5-a26.webp"
@@ -1187,8 +1176,8 @@
   "ageBand": "a36",
   "look": "kieungao",
   "palette": "emerald green and cream",
-  "magnificUrl": "https://www.magnific.com/app/creation/8aNwWbLIrU",
-  "bg": "P3EIS3y42C",
+  "magnificUrl": "https://www.magnific.com/app/creation/9ZQvh71NYZ",
+  "bg": "1lpc0SEr4r",
   "sheet": "N-c03-t5",
   "file": "img/fig-consort-c03-t5-a36.webp",
   "por": "img/por-consort-c03-t5-a36.webp"
@@ -1200,8 +1189,8 @@
   "ageBand": "a51",
   "look": "kieungao",
   "palette": "emerald green and cream",
-  "magnificUrl": "https://www.magnific.com/app/creation/8aNwWbLIrU",
-  "bg": "P3EIS3y42C",
+  "magnificUrl": "https://www.magnific.com/app/creation/9ZQvh71NYZ",
+  "bg": "1lpc0SEr4r",
   "sheet": "N-c03-t5",
   "file": "img/fig-consort-c03-t5-a51.webp",
   "por": "img/por-consort-c03-t5-a51.webp"
@@ -1317,8 +1306,8 @@
   "ageBand": "a18",
   "look": "kieungao",
   "palette": "emerald green and cream",
-  "magnificUrl": "https://www.magnific.com/app/creation/JNaXZbDOq4",
-  "bg": "s7oT92Ul8e",
+  "magnificUrl": "https://www.magnific.com/app/creation/ov97Hns829",
+  "bg": "VXUjfxwMMU",
   "sheet": "N-c03-t8",
   "file": "img/fig-consort-c03-t8-a18.webp",
   "por": "img/por-consort-c03-t8-a18.webp"
@@ -1330,8 +1319,8 @@
   "ageBand": "a26",
   "look": "kieungao",
   "palette": "emerald green and cream",
-  "magnificUrl": "https://www.magnific.com/app/creation/JNaXZbDOq4",
-  "bg": "s7oT92Ul8e",
+  "magnificUrl": "https://www.magnific.com/app/creation/ov97Hns829",
+  "bg": "VXUjfxwMMU",
   "sheet": "N-c03-t8",
   "file": "img/fig-consort-c03-t8-a26.webp",
   "por": "img/por-consort-c03-t8-a26.webp"
@@ -1343,8 +1332,8 @@
   "ageBand": "a36",
   "look": "kieungao",
   "palette": "emerald green and cream",
-  "magnificUrl": "https://www.magnific.com/app/creation/JNaXZbDOq4",
-  "bg": "s7oT92Ul8e",
+  "magnificUrl": "https://www.magnific.com/app/creation/ov97Hns829",
+  "bg": "VXUjfxwMMU",
   "sheet": "N-c03-t8",
   "file": "img/fig-consort-c03-t8-a36.webp",
   "por": "img/por-consort-c03-t8-a36.webp"
@@ -1356,8 +1345,8 @@
   "ageBand": "a51",
   "look": "kieungao",
   "palette": "emerald green and cream",
-  "magnificUrl": "https://www.magnific.com/app/creation/JNaXZbDOq4",
-  "bg": "s7oT92Ul8e",
+  "magnificUrl": "https://www.magnific.com/app/creation/ov97Hns829",
+  "bg": "VXUjfxwMMU",
   "sheet": "N-c03-t8",
   "file": "img/fig-consort-c03-t8-a51.webp",
   "por": "img/por-consort-c03-t8-a51.webp"
@@ -1425,8 +1414,7 @@
   "bg": "tCiOkEvmZJ",
   "sheet": "N-c04-t1",
   "file": "img/fig-consort-c04-t1-a18.webp",
-  "por": "img/por-consort-c04-t1-a18.webp",
-  "solidSheer": true
+  "por": "img/por-consort-c04-t1-a18.webp"
  },
  {
   "role": "consort",
@@ -1439,8 +1427,7 @@
   "bg": "tCiOkEvmZJ",
   "sheet": "N-c04-t1",
   "file": "img/fig-consort-c04-t1-a26.webp",
-  "por": "img/por-consort-c04-t1-a26.webp",
-  "solidSheer": true
+  "por": "img/por-consort-c04-t1-a26.webp"
  },
  {
   "role": "consort",
@@ -1453,8 +1440,7 @@
   "bg": "tCiOkEvmZJ",
   "sheet": "N-c04-t1",
   "file": "img/fig-consort-c04-t1-a36.webp",
-  "por": "img/por-consort-c04-t1-a36.webp",
-  "solidSheer": true
+  "por": "img/por-consort-c04-t1-a36.webp"
  },
  {
   "role": "consort",
@@ -1467,8 +1453,7 @@
   "bg": "tCiOkEvmZJ",
   "sheet": "N-c04-t1",
   "file": "img/fig-consort-c04-t1-a51.webp",
-  "por": "img/por-consort-c04-t1-a51.webp",
-  "solidSheer": true
+  "por": "img/por-consort-c04-t1-a51.webp"
  },
  {
   "role": "consort",
@@ -1481,8 +1466,7 @@
   "bg": "yiCImAxPW9",
   "sheet": "N-c04-t2",
   "file": "img/fig-consort-c04-t2-a18.webp",
-  "por": "img/por-consort-c04-t2-a18.webp",
-  "solidSheer": true
+  "por": "img/por-consort-c04-t2-a18.webp"
  },
  {
   "role": "consort",
@@ -1495,8 +1479,7 @@
   "bg": "yiCImAxPW9",
   "sheet": "N-c04-t2",
   "file": "img/fig-consort-c04-t2-a26.webp",
-  "por": "img/por-consort-c04-t2-a26.webp",
-  "solidSheer": true
+  "por": "img/por-consort-c04-t2-a26.webp"
  },
  {
   "role": "consort",
@@ -1509,8 +1492,7 @@
   "bg": "yiCImAxPW9",
   "sheet": "N-c04-t2",
   "file": "img/fig-consort-c04-t2-a36.webp",
-  "por": "img/por-consort-c04-t2-a36.webp",
-  "solidSheer": true
+  "por": "img/por-consort-c04-t2-a36.webp"
  },
  {
   "role": "consort",
@@ -1523,8 +1505,7 @@
   "bg": "yiCImAxPW9",
   "sheet": "N-c04-t2",
   "file": "img/fig-consort-c04-t2-a51.webp",
-  "por": "img/por-consort-c04-t2-a51.webp",
-  "solidSheer": true
+  "por": "img/por-consort-c04-t2-a51.webp"
  },
  {
   "role": "consort",
@@ -1537,8 +1518,7 @@
   "bg": "cplkPfW0eP",
   "sheet": "N-c04-t3",
   "file": "img/fig-consort-c04-t3-a18.webp",
-  "por": "img/por-consort-c04-t3-a18.webp",
-  "solidSheer": true
+  "por": "img/por-consort-c04-t3-a18.webp"
  },
  {
   "role": "consort",
@@ -1551,8 +1531,7 @@
   "bg": "cplkPfW0eP",
   "sheet": "N-c04-t3",
   "file": "img/fig-consort-c04-t3-a26.webp",
-  "por": "img/por-consort-c04-t3-a26.webp",
-  "solidSheer": true
+  "por": "img/por-consort-c04-t3-a26.webp"
  },
  {
   "role": "consort",
@@ -1565,8 +1544,7 @@
   "bg": "cplkPfW0eP",
   "sheet": "N-c04-t3",
   "file": "img/fig-consort-c04-t3-a36.webp",
-  "por": "img/por-consort-c04-t3-a36.webp",
-  "solidSheer": true
+  "por": "img/por-consort-c04-t3-a36.webp"
  },
  {
   "role": "consort",
@@ -1579,8 +1557,7 @@
   "bg": "cplkPfW0eP",
   "sheet": "N-c04-t3",
   "file": "img/fig-consort-c04-t3-a51.webp",
-  "por": "img/por-consort-c04-t3-a51.webp",
-  "solidSheer": true
+  "por": "img/por-consort-c04-t3-a51.webp"
  },
  {
   "role": "consort",
@@ -1641,8 +1618,8 @@
   "ageBand": "a18",
   "look": "kieungao",
   "palette": "royal purple and lavender",
-  "magnificUrl": "https://www.magnific.com/app/creation/UPmebAhwny",
-  "bg": "s7oVKJul8e",
+  "magnificUrl": "https://www.magnific.com/app/creation/ksDWYqJ16B",
+  "bg": "WDsk1d2cXe",
   "sheet": "N-c04-t5",
   "file": "img/fig-consort-c04-t5-a18.webp",
   "por": "img/por-consort-c04-t5-a18.webp"
@@ -1654,8 +1631,8 @@
   "ageBand": "a26",
   "look": "kieungao",
   "palette": "royal purple and lavender",
-  "magnificUrl": "https://www.magnific.com/app/creation/UPmebAhwny",
-  "bg": "s7oVKJul8e",
+  "magnificUrl": "https://www.magnific.com/app/creation/ksDWYqJ16B",
+  "bg": "WDsk1d2cXe",
   "sheet": "N-c04-t5",
   "file": "img/fig-consort-c04-t5-a26.webp",
   "por": "img/por-consort-c04-t5-a26.webp"
@@ -1667,8 +1644,8 @@
   "ageBand": "a36",
   "look": "kieungao",
   "palette": "royal purple and lavender",
-  "magnificUrl": "https://www.magnific.com/app/creation/UPmebAhwny",
-  "bg": "s7oVKJul8e",
+  "magnificUrl": "https://www.magnific.com/app/creation/ksDWYqJ16B",
+  "bg": "WDsk1d2cXe",
   "sheet": "N-c04-t5",
   "file": "img/fig-consort-c04-t5-a36.webp",
   "por": "img/por-consort-c04-t5-a36.webp"
@@ -1680,8 +1657,8 @@
   "ageBand": "a51",
   "look": "kieungao",
   "palette": "royal purple and lavender",
-  "magnificUrl": "https://www.magnific.com/app/creation/UPmebAhwny",
-  "bg": "s7oVKJul8e",
+  "magnificUrl": "https://www.magnific.com/app/creation/ksDWYqJ16B",
+  "bg": "WDsk1d2cXe",
   "sheet": "N-c04-t5",
   "file": "img/fig-consort-c04-t5-a51.webp",
   "por": "img/por-consort-c04-t5-a51.webp"
@@ -1749,8 +1726,7 @@
   "bg": "6AHf3DKiJO",
   "sheet": "N-c04-t7",
   "file": "img/fig-consort-c04-t7-a18.webp",
-  "por": "img/por-consort-c04-t7-a18.webp",
-  "solidSheer": true
+  "por": "img/por-consort-c04-t7-a18.webp"
  },
  {
   "role": "consort",
@@ -1776,8 +1752,7 @@
   "bg": "6AHf3DKiJO",
   "sheet": "N-c04-t7",
   "file": "img/fig-consort-c04-t7-a36.webp",
-  "por": "img/por-consort-c04-t7-a36.webp",
-  "solidSheer": true
+  "por": "img/por-consort-c04-t7-a36.webp"
  },
  {
   "role": "consort",
@@ -1790,8 +1765,7 @@
   "bg": "6AHf3DKiJO",
   "sheet": "N-c04-t7",
   "file": "img/fig-consort-c04-t7-a51.webp",
-  "por": "img/por-consort-c04-t7-a51.webp",
-  "solidSheer": true
+  "por": "img/por-consort-c04-t7-a51.webp"
  },
  {
   "role": "consort",
@@ -1800,8 +1774,8 @@
   "ageBand": "a18",
   "look": "kieungao",
   "palette": "royal purple and lavender",
-  "magnificUrl": "https://www.magnific.com/app/creation/vQZy5T3a47",
-  "bg": "Do7xvFOpcl",
+  "magnificUrl": "https://www.magnific.com/app/creation/6AHfTlNiJO",
+  "bg": "O6fIYIjynm",
   "sheet": "N-c04-t8",
   "file": "img/fig-consort-c04-t8-a18.webp",
   "por": "img/por-consort-c04-t8-a18.webp"
@@ -1813,8 +1787,8 @@
   "ageBand": "a26",
   "look": "kieungao",
   "palette": "royal purple and lavender",
-  "magnificUrl": "https://www.magnific.com/app/creation/vQZy5T3a47",
-  "bg": "Do7xvFOpcl",
+  "magnificUrl": "https://www.magnific.com/app/creation/6AHfTlNiJO",
+  "bg": "O6fIYIjynm",
   "sheet": "N-c04-t8",
   "file": "img/fig-consort-c04-t8-a26.webp",
   "por": "img/por-consort-c04-t8-a26.webp"
@@ -1826,13 +1800,11 @@
   "ageBand": "a36",
   "look": "kieungao",
   "palette": "royal purple and lavender",
-  "magnificUrl": "https://www.magnific.com/app/creation/vQZy5T3a47",
-  "bg": "Do7xvFOpcl",
+  "magnificUrl": "https://www.magnific.com/app/creation/6AHfTlNiJO",
+  "bg": "O6fIYIjynm",
   "sheet": "N-c04-t8",
   "file": "img/fig-consort-c04-t8-a36.webp",
-  "por": "img/por-consort-c04-t8-a36.webp",
-  "rematte": "dtyloZ1XSL",
-  "solidSheer": true
+  "por": "img/por-consort-c04-t8-a36.webp"
  },
  {
   "role": "consort",
@@ -1841,13 +1813,11 @@
   "ageBand": "a51",
   "look": "kieungao",
   "palette": "royal purple and lavender",
-  "magnificUrl": "https://www.magnific.com/app/creation/vQZy5T3a47",
-  "bg": "Do7xvFOpcl",
+  "magnificUrl": "https://www.magnific.com/app/creation/6AHfTlNiJO",
+  "bg": "O6fIYIjynm",
   "sheet": "N-c04-t8",
   "file": "img/fig-consort-c04-t8-a51.webp",
-  "por": "img/por-consort-c04-t8-a51.webp",
-  "rematte": "6AHvRLAiJO",
-  "solidSheer": true
+  "por": "img/por-consort-c04-t8-a51.webp"
  },
  {
   "role": "consort",
@@ -2116,8 +2086,8 @@
   "ageBand": "a18",
   "look": "kieungao",
   "palette": "peacock teal and gold",
-  "magnificUrl": "https://www.magnific.com/app/creation/UPmebGvwny",
-  "bg": "cplK2dU0eP",
+  "magnificUrl": "https://www.magnific.com/app/creation/N2FavPj6D9",
+  "bg": "3zbEu0SREY",
   "sheet": "N-c05-t5",
   "file": "img/fig-consort-c05-t5-a18.webp",
   "por": "img/por-consort-c05-t5-a18.webp"
@@ -2129,8 +2099,8 @@
   "ageBand": "a26",
   "look": "kieungao",
   "palette": "peacock teal and gold",
-  "magnificUrl": "https://www.magnific.com/app/creation/UPmebGvwny",
-  "bg": "cplK2dU0eP",
+  "magnificUrl": "https://www.magnific.com/app/creation/N2FavPj6D9",
+  "bg": "3zbEu0SREY",
   "sheet": "N-c05-t5",
   "file": "img/fig-consort-c05-t5-a26.webp",
   "por": "img/por-consort-c05-t5-a26.webp"
@@ -2142,8 +2112,8 @@
   "ageBand": "a36",
   "look": "kieungao",
   "palette": "peacock teal and gold",
-  "magnificUrl": "https://www.magnific.com/app/creation/UPmebGvwny",
-  "bg": "cplK2dU0eP",
+  "magnificUrl": "https://www.magnific.com/app/creation/N2FavPj6D9",
+  "bg": "3zbEu0SREY",
   "sheet": "N-c05-t5",
   "file": "img/fig-consort-c05-t5-a36.webp",
   "por": "img/por-consort-c05-t5-a36.webp"
@@ -2155,8 +2125,8 @@
   "ageBand": "a51",
   "look": "kieungao",
   "palette": "peacock teal and gold",
-  "magnificUrl": "https://www.magnific.com/app/creation/UPmebGvwny",
-  "bg": "cplK2dU0eP",
+  "magnificUrl": "https://www.magnific.com/app/creation/N2FavPj6D9",
+  "bg": "3zbEu0SREY",
   "sheet": "N-c05-t5",
   "file": "img/fig-consort-c05-t5-a51.webp",
   "por": "img/por-consort-c05-t5-a51.webp"
@@ -2272,8 +2242,8 @@
   "ageBand": "a18",
   "look": "kieungao",
   "palette": "peacock teal and gold",
-  "magnificUrl": "https://www.magnific.com/app/creation/8aNUqhzIrU",
-  "bg": "tCi75zZmZJ",
+  "magnificUrl": "https://www.magnific.com/app/creation/xSdT4uPjfW",
+  "bg": "fHA6LiACDY",
   "sheet": "N-c05-t8",
   "file": "img/fig-consort-c05-t8-a18.webp",
   "por": "img/por-consort-c05-t8-a18.webp"
@@ -2285,8 +2255,8 @@
   "ageBand": "a26",
   "look": "kieungao",
   "palette": "peacock teal and gold",
-  "magnificUrl": "https://www.magnific.com/app/creation/8aNUqhzIrU",
-  "bg": "tCi75zZmZJ",
+  "magnificUrl": "https://www.magnific.com/app/creation/xSdT4uPjfW",
+  "bg": "fHA6LiACDY",
   "sheet": "N-c05-t8",
   "file": "img/fig-consort-c05-t8-a26.webp",
   "por": "img/por-consort-c05-t8-a26.webp"
@@ -2298,8 +2268,8 @@
   "ageBand": "a36",
   "look": "kieungao",
   "palette": "peacock teal and gold",
-  "magnificUrl": "https://www.magnific.com/app/creation/8aNUqhzIrU",
-  "bg": "tCi75zZmZJ",
+  "magnificUrl": "https://www.magnific.com/app/creation/xSdT4uPjfW",
+  "bg": "fHA6LiACDY",
   "sheet": "N-c05-t8",
   "file": "img/fig-consort-c05-t8-a36.webp",
   "por": "img/por-consort-c05-t8-a36.webp"
@@ -2311,8 +2281,8 @@
   "ageBand": "a51",
   "look": "kieungao",
   "palette": "peacock teal and gold",
-  "magnificUrl": "https://www.magnific.com/app/creation/8aNUqhzIrU",
-  "bg": "tCi75zZmZJ",
+  "magnificUrl": "https://www.magnific.com/app/creation/xSdT4uPjfW",
+  "bg": "fHA6LiACDY",
   "sheet": "N-c05-t8",
   "file": "img/fig-consort-c05-t8-a51.webp",
   "por": "img/por-consort-c05-t8-a51.webp"
@@ -2584,8 +2554,8 @@
   "ageBand": "a18",
   "look": "kieungao",
   "palette": "vermilion and ivory",
-  "magnificUrl": "https://www.magnific.com/app/creation/iGqagda3uK",
-  "bg": "yiC8gZePW9",
+  "magnificUrl": "https://www.magnific.com/app/creation/Bh4wUX0oQR",
+  "bg": "1lpc0JCr4r",
   "sheet": "N-c06-t5",
   "file": "img/fig-consort-c06-t5-a18.webp",
   "por": "img/por-consort-c06-t5-a18.webp"
@@ -2597,8 +2567,8 @@
   "ageBand": "a26",
   "look": "kieungao",
   "palette": "vermilion and ivory",
-  "magnificUrl": "https://www.magnific.com/app/creation/iGqagda3uK",
-  "bg": "yiC8gZePW9",
+  "magnificUrl": "https://www.magnific.com/app/creation/Bh4wUX0oQR",
+  "bg": "1lpc0JCr4r",
   "sheet": "N-c06-t5",
   "file": "img/fig-consort-c06-t5-a26.webp",
   "por": "img/por-consort-c06-t5-a26.webp"
@@ -2610,8 +2580,8 @@
   "ageBand": "a36",
   "look": "kieungao",
   "palette": "vermilion and ivory",
-  "magnificUrl": "https://www.magnific.com/app/creation/iGqagda3uK",
-  "bg": "yiC8gZePW9",
+  "magnificUrl": "https://www.magnific.com/app/creation/Bh4wUX0oQR",
+  "bg": "1lpc0JCr4r",
   "sheet": "N-c06-t5",
   "file": "img/fig-consort-c06-t5-a36.webp",
   "por": "img/por-consort-c06-t5-a36.webp"
@@ -2623,8 +2593,8 @@
   "ageBand": "a51",
   "look": "kieungao",
   "palette": "vermilion and ivory",
-  "magnificUrl": "https://www.magnific.com/app/creation/iGqagda3uK",
-  "bg": "yiC8gZePW9",
+  "magnificUrl": "https://www.magnific.com/app/creation/Bh4wUX0oQR",
+  "bg": "1lpc0JCr4r",
   "sheet": "N-c06-t5",
   "file": "img/fig-consort-c06-t5-a51.webp",
   "por": "img/por-consort-c06-t5-a51.webp"
@@ -2705,8 +2675,7 @@
   "bg": "mE3PvjxhJQ",
   "sheet": "N-c06-t7",
   "file": "img/fig-consort-c06-t7-a26.webp",
-  "por": "img/por-consort-c06-t7-a26.webp",
-  "solidSheer": true
+  "por": "img/por-consort-c06-t7-a26.webp"
  },
  {
   "role": "consort",
@@ -2741,8 +2710,8 @@
   "ageBand": "a18",
   "look": "kieungao",
   "palette": "vermilion and ivory",
-  "magnificUrl": "https://www.magnific.com/app/creation/EbzNLsLuuO",
-  "bg": "mE3JKYOhJQ",
+  "magnificUrl": "https://www.magnific.com/app/creation/lJ8pibxgv9",
+  "bg": "Sytd2BQUb8",
   "sheet": "N-c06-t8",
   "file": "img/fig-consort-c06-t8-a18.webp",
   "por": "img/por-consort-c06-t8-a18.webp"
@@ -2754,8 +2723,8 @@
   "ageBand": "a26",
   "look": "kieungao",
   "palette": "vermilion and ivory",
-  "magnificUrl": "https://www.magnific.com/app/creation/EbzNLsLuuO",
-  "bg": "mE3JKYOhJQ",
+  "magnificUrl": "https://www.magnific.com/app/creation/lJ8pibxgv9",
+  "bg": "Sytd2BQUb8",
   "sheet": "N-c06-t8",
   "file": "img/fig-consort-c06-t8-a26.webp",
   "por": "img/por-consort-c06-t8-a26.webp"
@@ -2767,8 +2736,8 @@
   "ageBand": "a36",
   "look": "kieungao",
   "palette": "vermilion and ivory",
-  "magnificUrl": "https://www.magnific.com/app/creation/EbzNLsLuuO",
-  "bg": "mE3JKYOhJQ",
+  "magnificUrl": "https://www.magnific.com/app/creation/lJ8pibxgv9",
+  "bg": "Sytd2BQUb8",
   "sheet": "N-c06-t8",
   "file": "img/fig-consort-c06-t8-a36.webp",
   "por": "img/por-consort-c06-t8-a36.webp"
@@ -2780,8 +2749,8 @@
   "ageBand": "a51",
   "look": "kieungao",
   "palette": "vermilion and ivory",
-  "magnificUrl": "https://www.magnific.com/app/creation/EbzNLsLuuO",
-  "bg": "mE3JKYOhJQ",
+  "magnificUrl": "https://www.magnific.com/app/creation/lJ8pibxgv9",
+  "bg": "Sytd2BQUb8",
   "sheet": "N-c06-t8",
   "file": "img/fig-consort-c06-t8-a51.webp",
   "por": "img/por-consort-c06-t8-a51.webp"
@@ -3053,8 +3022,8 @@
   "ageBand": "a18",
   "look": "numi",
   "palette": "lavender and pale pink",
-  "magnificUrl": "https://www.magnific.com/app/creation/rgeWfR9xtc",
-  "bg": "s7oVKPil8e",
+  "magnificUrl": "https://www.magnific.com/app/creation/dtySSBQXSL",
+  "bg": "JNa8IGvOq4",
   "sheet": "N-c07-t5",
   "file": "img/fig-consort-c07-t5-a18.webp",
   "por": "img/por-consort-c07-t5-a18.webp"
@@ -3066,8 +3035,8 @@
   "ageBand": "a26",
   "look": "numi",
   "palette": "lavender and pale pink",
-  "magnificUrl": "https://www.magnific.com/app/creation/rgeWfR9xtc",
-  "bg": "s7oVKPil8e",
+  "magnificUrl": "https://www.magnific.com/app/creation/dtySSBQXSL",
+  "bg": "JNa8IGvOq4",
   "sheet": "N-c07-t5",
   "file": "img/fig-consort-c07-t5-a26.webp",
   "por": "img/por-consort-c07-t5-a26.webp"
@@ -3079,8 +3048,8 @@
   "ageBand": "a36",
   "look": "numi",
   "palette": "lavender and pale pink",
-  "magnificUrl": "https://www.magnific.com/app/creation/rgeWfR9xtc",
-  "bg": "s7oVKPil8e",
+  "magnificUrl": "https://www.magnific.com/app/creation/dtySSBQXSL",
+  "bg": "JNa8IGvOq4",
   "sheet": "N-c07-t5",
   "file": "img/fig-consort-c07-t5-a36.webp",
   "por": "img/por-consort-c07-t5-a36.webp"
@@ -3092,8 +3061,8 @@
   "ageBand": "a51",
   "look": "numi",
   "palette": "lavender and pale pink",
-  "magnificUrl": "https://www.magnific.com/app/creation/rgeWfR9xtc",
-  "bg": "s7oVKPil8e",
+  "magnificUrl": "https://www.magnific.com/app/creation/dtySSBQXSL",
+  "bg": "JNa8IGvOq4",
   "sheet": "N-c07-t5",
   "file": "img/fig-consort-c07-t5-a51.webp",
   "por": "img/por-consort-c07-t5-a51.webp"
@@ -3209,12 +3178,11 @@
   "ageBand": "a18",
   "look": "numi",
   "palette": "lavender and pale pink",
-  "magnificUrl": "https://www.magnific.com/app/creation/Bh4gFswoQR",
-  "bg": "xSdW9iyjfW",
+  "magnificUrl": "https://www.magnific.com/app/creation/ov97HV7829",
+  "bg": "gOIeZBXSXO",
   "sheet": "N-c07-t8",
   "file": "img/fig-consort-c07-t8-a18.webp",
-  "por": "img/por-consort-c07-t8-a18.webp",
-  "solidSheer": true
+  "por": "img/por-consort-c07-t8-a18.webp"
  },
  {
   "role": "consort",
@@ -3223,8 +3191,8 @@
   "ageBand": "a26",
   "look": "numi",
   "palette": "lavender and pale pink",
-  "magnificUrl": "https://www.magnific.com/app/creation/Bh4gFswoQR",
-  "bg": "xSdW9iyjfW",
+  "magnificUrl": "https://www.magnific.com/app/creation/ov97HV7829",
+  "bg": "gOIeZBXSXO",
   "sheet": "N-c07-t8",
   "file": "img/fig-consort-c07-t8-a26.webp",
   "por": "img/por-consort-c07-t8-a26.webp"
@@ -3236,13 +3204,11 @@
   "ageBand": "a36",
   "look": "numi",
   "palette": "lavender and pale pink",
-  "magnificUrl": "https://www.magnific.com/app/creation/Bh4gFswoQR",
-  "bg": "xSdW9iyjfW",
+  "magnificUrl": "https://www.magnific.com/app/creation/ov97HV7829",
+  "bg": "gOIeZBXSXO",
   "sheet": "N-c07-t8",
   "file": "img/fig-consort-c07-t8-a36.webp",
-  "por": "img/por-consort-c07-t8-a36.webp",
-  "rematte": "s7oVwoMl8e",
-  "solidSheer": true
+  "por": "img/por-consort-c07-t8-a36.webp"
  },
  {
   "role": "consort",
@@ -3251,13 +3217,11 @@
   "ageBand": "a51",
   "look": "numi",
   "palette": "lavender and pale pink",
-  "magnificUrl": "https://www.magnific.com/app/creation/Bh4gFswoQR",
-  "bg": "xSdW9iyjfW",
+  "magnificUrl": "https://www.magnific.com/app/creation/ov97HV7829",
+  "bg": "gOIeZBXSXO",
   "sheet": "N-c07-t8",
   "file": "img/fig-consort-c07-t8-a51.webp",
-  "por": "img/por-consort-c07-t8-a51.webp",
-  "rematte": "3zbfG5KREY",
-  "solidSheer": true
+  "por": "img/por-consort-c07-t8-a51.webp"
  },
  {
   "role": "consort",
@@ -3526,8 +3490,8 @@
   "ageBand": "a18",
   "look": "numi",
   "palette": "cherry-blossom pink and pale green",
-  "magnificUrl": "https://www.magnific.com/app/creation/MBwxR5qDCm",
-  "bg": "LwBT5yKswO",
+  "magnificUrl": "https://www.magnific.com/app/creation/N2Faa3S6D9",
+  "bg": "jUXVMNmLD0",
   "sheet": "N-c08-t5",
   "file": "img/fig-consort-c08-t5-a18.webp",
   "por": "img/por-consort-c08-t5-a18.webp"
@@ -3539,8 +3503,8 @@
   "ageBand": "a26",
   "look": "numi",
   "palette": "cherry-blossom pink and pale green",
-  "magnificUrl": "https://www.magnific.com/app/creation/MBwxR5qDCm",
-  "bg": "LwBT5yKswO",
+  "magnificUrl": "https://www.magnific.com/app/creation/N2Faa3S6D9",
+  "bg": "jUXVMNmLD0",
   "sheet": "N-c08-t5",
   "file": "img/fig-consort-c08-t5-a26.webp",
   "por": "img/por-consort-c08-t5-a26.webp"
@@ -3552,8 +3516,8 @@
   "ageBand": "a36",
   "look": "numi",
   "palette": "cherry-blossom pink and pale green",
-  "magnificUrl": "https://www.magnific.com/app/creation/MBwxR5qDCm",
-  "bg": "LwBT5yKswO",
+  "magnificUrl": "https://www.magnific.com/app/creation/N2Faa3S6D9",
+  "bg": "jUXVMNmLD0",
   "sheet": "N-c08-t5",
   "file": "img/fig-consort-c08-t5-a36.webp",
   "por": "img/por-consort-c08-t5-a36.webp"
@@ -3565,8 +3529,8 @@
   "ageBand": "a51",
   "look": "numi",
   "palette": "cherry-blossom pink and pale green",
-  "magnificUrl": "https://www.magnific.com/app/creation/MBwxR5qDCm",
-  "bg": "LwBT5yKswO",
+  "magnificUrl": "https://www.magnific.com/app/creation/N2Faa3S6D9",
+  "bg": "jUXVMNmLD0",
   "sheet": "N-c08-t5",
   "file": "img/fig-consort-c08-t5-a51.webp",
   "por": "img/por-consort-c08-t5-a51.webp"
@@ -3682,8 +3646,8 @@
   "ageBand": "a18",
   "look": "numi",
   "palette": "cherry-blossom pink and pale green",
-  "magnificUrl": "https://www.magnific.com/app/creation/ksDzOGH16B",
-  "bg": "1lpnP6Pr4r",
+  "magnificUrl": "https://www.magnific.com/app/creation/WDskIZGcXe",
+  "bg": "WDskmjLcXe",
   "sheet": "N-c08-t8",
   "file": "img/fig-consort-c08-t8-a18.webp",
   "por": "img/por-consort-c08-t8-a18.webp"
@@ -3695,13 +3659,11 @@
   "ageBand": "a26",
   "look": "numi",
   "palette": "cherry-blossom pink and pale green",
-  "magnificUrl": "https://www.magnific.com/app/creation/ksDzOGH16B",
-  "bg": "1lpnP6Pr4r",
+  "magnificUrl": "https://www.magnific.com/app/creation/WDskIZGcXe",
+  "bg": "WDskmjLcXe",
   "sheet": "N-c08-t8",
   "file": "img/fig-consort-c08-t8-a26.webp",
-  "por": "img/por-consort-c08-t8-a26.webp",
-  "rematte": "gOIDJmVSXO",
-  "solidSheer": true
+  "por": "img/por-consort-c08-t8-a26.webp"
  },
  {
   "role": "consort",
@@ -3710,13 +3672,11 @@
   "ageBand": "a36",
   "look": "numi",
   "palette": "cherry-blossom pink and pale green",
-  "magnificUrl": "https://www.magnific.com/app/creation/ksDzOGH16B",
-  "bg": "1lpnP6Pr4r",
+  "magnificUrl": "https://www.magnific.com/app/creation/WDskIZGcXe",
+  "bg": "WDskmjLcXe",
   "sheet": "N-c08-t8",
   "file": "img/fig-consort-c08-t8-a36.webp",
-  "por": "img/por-consort-c08-t8-a36.webp",
-  "rematte": "eIOs84CdqL",
-  "solidSheer": true
+  "por": "img/por-consort-c08-t8-a36.webp"
  },
  {
   "role": "consort",
@@ -3725,12 +3685,11 @@
   "ageBand": "a51",
   "look": "numi",
   "palette": "cherry-blossom pink and pale green",
-  "magnificUrl": "https://www.magnific.com/app/creation/ksDzOGH16B",
-  "bg": "1lpnP6Pr4r",
+  "magnificUrl": "https://www.magnific.com/app/creation/WDskIZGcXe",
+  "bg": "WDskmjLcXe",
   "sheet": "N-c08-t8",
   "file": "img/fig-consort-c08-t8-a51.webp",
-  "por": "img/por-consort-c08-t8-a51.webp",
-  "rematte": "s7oVwmOl8e"
+  "por": "img/por-consort-c08-t8-a51.webp"
  },
  {
   "role": "consort",
@@ -3964,8 +3923,7 @@
   "bg": "s7oMrKrl8e",
   "sheet": "N-c09-t4",
   "file": "img/fig-consort-c09-t4-a26.webp",
-  "por": "img/por-consort-c09-t4-a26.webp",
-  "solidSheer": true
+  "por": "img/por-consort-c09-t4-a26.webp"
  },
  {
   "role": "consort",
@@ -4000,8 +3958,8 @@
   "ageBand": "a18",
   "look": "numi",
   "palette": "powder blue and white",
-  "magnificUrl": "https://www.magnific.com/app/creation/mE3OTwRhJQ",
-  "bg": "N2Fh7YE6D9",
+  "magnificUrl": "https://www.magnific.com/app/creation/dtySUOAXSL",
+  "bg": "w4hBI8K7EI",
   "sheet": "N-c09-t5",
   "file": "img/fig-consort-c09-t5-a18.webp",
   "por": "img/por-consort-c09-t5-a18.webp"
@@ -4013,8 +3971,8 @@
   "ageBand": "a26",
   "look": "numi",
   "palette": "powder blue and white",
-  "magnificUrl": "https://www.magnific.com/app/creation/mE3OTwRhJQ",
-  "bg": "N2Fh7YE6D9",
+  "magnificUrl": "https://www.magnific.com/app/creation/dtySUOAXSL",
+  "bg": "w4hBI8K7EI",
   "sheet": "N-c09-t5",
   "file": "img/fig-consort-c09-t5-a26.webp",
   "por": "img/por-consort-c09-t5-a26.webp"
@@ -4026,8 +3984,8 @@
   "ageBand": "a36",
   "look": "numi",
   "palette": "powder blue and white",
-  "magnificUrl": "https://www.magnific.com/app/creation/mE3OTwRhJQ",
-  "bg": "N2Fh7YE6D9",
+  "magnificUrl": "https://www.magnific.com/app/creation/dtySUOAXSL",
+  "bg": "w4hBI8K7EI",
   "sheet": "N-c09-t5",
   "file": "img/fig-consort-c09-t5-a36.webp",
   "por": "img/por-consort-c09-t5-a36.webp"
@@ -4039,8 +3997,8 @@
   "ageBand": "a51",
   "look": "numi",
   "palette": "powder blue and white",
-  "magnificUrl": "https://www.magnific.com/app/creation/mE3OTwRhJQ",
-  "bg": "N2Fh7YE6D9",
+  "magnificUrl": "https://www.magnific.com/app/creation/dtySUOAXSL",
+  "bg": "w4hBI8K7EI",
   "sheet": "N-c09-t5",
   "file": "img/fig-consort-c09-t5-a51.webp",
   "por": "img/por-consort-c09-t5-a51.webp"
@@ -4156,13 +4114,11 @@
   "ageBand": "a18",
   "look": "numi",
   "palette": "powder blue and white",
-  "magnificUrl": "https://www.magnific.com/app/creation/ksDzimg16B",
-  "bg": "cpl5uvf0eP",
+  "magnificUrl": "https://www.magnific.com/app/creation/XmPUqQyBfo",
+  "bg": "5jVn9lYKxe",
   "sheet": "N-c09-t8",
   "file": "img/fig-consort-c09-t8-a18.webp",
-  "por": "img/por-consort-c09-t8-a18.webp",
-  "rematte": "0egkp7zTfW",
-  "solidSheer": true
+  "por": "img/por-consort-c09-t8-a18.webp"
  },
  {
   "role": "consort",
@@ -4171,13 +4127,11 @@
   "ageBand": "a26",
   "look": "numi",
   "palette": "powder blue and white",
-  "magnificUrl": "https://www.magnific.com/app/creation/ksDzimg16B",
-  "bg": "cpl5uvf0eP",
+  "magnificUrl": "https://www.magnific.com/app/creation/XmPUqQyBfo",
+  "bg": "5jVn9lYKxe",
   "sheet": "N-c09-t8",
   "file": "img/fig-consort-c09-t8-a26.webp",
-  "por": "img/por-consort-c09-t8-a26.webp",
-  "rematte": "UPmeyCFwny",
-  "solidSheer": true
+  "por": "img/por-consort-c09-t8-a26.webp"
  },
  {
   "role": "consort",
@@ -4186,13 +4140,11 @@
   "ageBand": "a36",
   "look": "numi",
   "palette": "powder blue and white",
-  "magnificUrl": "https://www.magnific.com/app/creation/ksDzimg16B",
-  "bg": "cpl5uvf0eP",
+  "magnificUrl": "https://www.magnific.com/app/creation/XmPUqQyBfo",
+  "bg": "5jVn9lYKxe",
   "sheet": "N-c09-t8",
   "file": "img/fig-consort-c09-t8-a36.webp",
-  "por": "img/por-consort-c09-t8-a36.webp",
-  "rematte": "KLMzjBzkqp",
-  "solidSheer": true
+  "por": "img/por-consort-c09-t8-a36.webp"
  },
  {
   "role": "consort",
@@ -4201,8 +4153,8 @@
   "ageBand": "a51",
   "look": "numi",
   "palette": "powder blue and white",
-  "magnificUrl": "https://www.magnific.com/app/creation/ksDzimg16B",
-  "bg": "cpl5uvf0eP",
+  "magnificUrl": "https://www.magnific.com/app/creation/XmPUqQyBfo",
+  "bg": "5jVn9lYKxe",
   "sheet": "N-c09-t8",
   "file": "img/fig-consort-c09-t8-a51.webp",
   "por": "img/por-consort-c09-t8-a51.webp"
@@ -4474,8 +4426,8 @@
   "ageBand": "a18",
   "look": "numi",
   "palette": "peach and cream",
-  "magnificUrl": "https://www.magnific.com/app/creation/Bh4SnY1oQR",
-  "bg": "LwBT54PswO",
+  "magnificUrl": "https://www.magnific.com/app/creation/tCiyP3xmZJ",
+  "bg": "huR46i9vqL",
   "sheet": "N-c10-t5",
   "file": "img/fig-consort-c10-t5-a18.webp",
   "por": "img/por-consort-c10-t5-a18.webp"
@@ -4487,8 +4439,8 @@
   "ageBand": "a26",
   "look": "numi",
   "palette": "peach and cream",
-  "magnificUrl": "https://www.magnific.com/app/creation/Bh4SnY1oQR",
-  "bg": "LwBT54PswO",
+  "magnificUrl": "https://www.magnific.com/app/creation/tCiyP3xmZJ",
+  "bg": "huR46i9vqL",
   "sheet": "N-c10-t5",
   "file": "img/fig-consort-c10-t5-a26.webp",
   "por": "img/por-consort-c10-t5-a26.webp"
@@ -4500,8 +4452,8 @@
   "ageBand": "a36",
   "look": "numi",
   "palette": "peach and cream",
-  "magnificUrl": "https://www.magnific.com/app/creation/Bh4SnY1oQR",
-  "bg": "LwBT54PswO",
+  "magnificUrl": "https://www.magnific.com/app/creation/tCiyP3xmZJ",
+  "bg": "huR46i9vqL",
   "sheet": "N-c10-t5",
   "file": "img/fig-consort-c10-t5-a36.webp",
   "por": "img/por-consort-c10-t5-a36.webp"
@@ -4513,8 +4465,8 @@
   "ageBand": "a51",
   "look": "numi",
   "palette": "peach and cream",
-  "magnificUrl": "https://www.magnific.com/app/creation/Bh4SnY1oQR",
-  "bg": "LwBT54PswO",
+  "magnificUrl": "https://www.magnific.com/app/creation/tCiyP3xmZJ",
+  "bg": "huR46i9vqL",
   "sheet": "N-c10-t5",
   "file": "img/fig-consort-c10-t5-a51.webp",
   "por": "img/por-consort-c10-t5-a51.webp"
@@ -4630,13 +4582,11 @@
   "ageBand": "a18",
   "look": "numi",
   "palette": "peach and cream",
-  "magnificUrl": "https://www.magnific.com/app/creation/LwB0NxBswO",
-  "bg": "tCi7KzRmZJ",
+  "magnificUrl": "https://www.magnific.com/app/creation/fHA6sLSCDY",
+  "bg": "huR4sqlvqL",
   "sheet": "N-c10-t8",
   "file": "img/fig-consort-c10-t8-a18.webp",
-  "por": "img/por-consort-c10-t8-a18.webp",
-  "rematte": "bxTArXr5Y2",
-  "solidSheer": true
+  "por": "img/por-consort-c10-t8-a18.webp"
  },
  {
   "role": "consort",
@@ -4645,13 +4595,11 @@
   "ageBand": "a26",
   "look": "numi",
   "palette": "peach and cream",
-  "magnificUrl": "https://www.magnific.com/app/creation/LwB0NxBswO",
-  "bg": "tCi7KzRmZJ",
+  "magnificUrl": "https://www.magnific.com/app/creation/fHA6sLSCDY",
+  "bg": "huR4sqlvqL",
   "sheet": "N-c10-t8",
   "file": "img/fig-consort-c10-t8-a26.webp",
-  "por": "img/por-consort-c10-t8-a26.webp",
-  "rematte": "KLMzjvVkqp",
-  "solidSheer": true
+  "por": "img/por-consort-c10-t8-a26.webp"
  },
  {
   "role": "consort",
@@ -4660,12 +4608,11 @@
   "ageBand": "a36",
   "look": "numi",
   "palette": "peach and cream",
-  "magnificUrl": "https://www.magnific.com/app/creation/LwB0NxBswO",
-  "bg": "tCi7KzRmZJ",
+  "magnificUrl": "https://www.magnific.com/app/creation/fHA6sLSCDY",
+  "bg": "huR4sqlvqL",
   "sheet": "N-c10-t8",
   "file": "img/fig-consort-c10-t8-a36.webp",
-  "por": "img/por-consort-c10-t8-a36.webp",
-  "solidSheer": true
+  "por": "img/por-consort-c10-t8-a36.webp"
  },
  {
   "role": "consort",
@@ -4674,13 +4621,11 @@
   "ageBand": "a51",
   "look": "numi",
   "palette": "peach and cream",
-  "magnificUrl": "https://www.magnific.com/app/creation/LwB0NxBswO",
-  "bg": "tCi7KzRmZJ",
+  "magnificUrl": "https://www.magnific.com/app/creation/fHA6sLSCDY",
+  "bg": "huR4sqlvqL",
   "sheet": "N-c10-t8",
   "file": "img/fig-consort-c10-t8-a51.webp",
-  "por": "img/por-consort-c10-t8-a51.webp",
-  "rematte": "8aNwv0RIrU",
-  "solidSheer": true
+  "por": "img/por-consort-c10-t8-a51.webp"
  },
  {
   "role": "consort",
@@ -4745,8 +4690,7 @@
   "bg": "lJ8DZ63gv9",
   "sheet": "N-c11-t1",
   "file": "img/fig-consort-c11-t1-a18.webp",
-  "por": "img/por-consort-c11-t1-a18.webp",
-  "solidSheer": true
+  "por": "img/por-consort-c11-t1-a18.webp"
  },
  {
   "role": "consort",
@@ -4759,8 +4703,7 @@
   "bg": "lJ8DZ63gv9",
   "sheet": "N-c11-t1",
   "file": "img/fig-consort-c11-t1-a26.webp",
-  "por": "img/por-consort-c11-t1-a26.webp",
-  "solidSheer": true
+  "por": "img/por-consort-c11-t1-a26.webp"
  },
  {
   "role": "consort",
@@ -4773,8 +4716,7 @@
   "bg": "lJ8DZ63gv9",
   "sheet": "N-c11-t1",
   "file": "img/fig-consort-c11-t1-a36.webp",
-  "por": "img/por-consort-c11-t1-a36.webp",
-  "solidSheer": true
+  "por": "img/por-consort-c11-t1-a36.webp"
  },
  {
   "role": "consort",
@@ -4787,8 +4729,7 @@
   "bg": "lJ8DZ63gv9",
   "sheet": "N-c11-t1",
   "file": "img/fig-consort-c11-t1-a51.webp",
-  "por": "img/por-consort-c11-t1-a51.webp",
-  "solidSheer": true
+  "por": "img/por-consort-c11-t1-a51.webp"
  },
  {
   "role": "consort",
@@ -4918,8 +4859,7 @@
   "bg": "If6JXdAtvE",
   "sheet": "N-c11-t4",
   "file": "img/fig-consort-c11-t4-a26.webp",
-  "por": "img/por-consort-c11-t4-a26.webp",
-  "solidSheer": true
+  "por": "img/por-consort-c11-t4-a26.webp"
  },
  {
   "role": "consort",
@@ -4932,8 +4872,7 @@
   "bg": "If6JXdAtvE",
   "sheet": "N-c11-t4",
   "file": "img/fig-consort-c11-t4-a36.webp",
-  "por": "img/por-consort-c11-t4-a36.webp",
-  "solidSheer": true
+  "por": "img/por-consort-c11-t4-a36.webp"
  },
  {
   "role": "consort",
@@ -4955,8 +4894,8 @@
   "ageBand": "a18",
   "look": "numi",
   "palette": "lilac and silver",
-  "magnificUrl": "https://www.magnific.com/app/creation/eIOsAzNdqL",
-  "bg": "huRyX5TvqL",
+  "magnificUrl": "https://www.magnific.com/app/creation/jUXVMo1LD0",
+  "bg": "8aNJP9oIrU",
   "sheet": "N-c11-t5",
   "file": "img/fig-consort-c11-t5-a18.webp",
   "por": "img/por-consort-c11-t5-a18.webp"
@@ -4968,8 +4907,8 @@
   "ageBand": "a26",
   "look": "numi",
   "palette": "lilac and silver",
-  "magnificUrl": "https://www.magnific.com/app/creation/eIOsAzNdqL",
-  "bg": "huRyX5TvqL",
+  "magnificUrl": "https://www.magnific.com/app/creation/jUXVMo1LD0",
+  "bg": "8aNJP9oIrU",
   "sheet": "N-c11-t5",
   "file": "img/fig-consort-c11-t5-a26.webp",
   "por": "img/por-consort-c11-t5-a26.webp"
@@ -4981,8 +4920,8 @@
   "ageBand": "a36",
   "look": "numi",
   "palette": "lilac and silver",
-  "magnificUrl": "https://www.magnific.com/app/creation/eIOsAzNdqL",
-  "bg": "huRyX5TvqL",
+  "magnificUrl": "https://www.magnific.com/app/creation/jUXVMo1LD0",
+  "bg": "8aNJP9oIrU",
   "sheet": "N-c11-t5",
   "file": "img/fig-consort-c11-t5-a36.webp",
   "por": "img/por-consort-c11-t5-a36.webp"
@@ -4994,8 +4933,8 @@
   "ageBand": "a51",
   "look": "numi",
   "palette": "lilac and silver",
-  "magnificUrl": "https://www.magnific.com/app/creation/eIOsAzNdqL",
-  "bg": "huRyX5TvqL",
+  "magnificUrl": "https://www.magnific.com/app/creation/jUXVMo1LD0",
+  "bg": "8aNJP9oIrU",
   "sheet": "N-c11-t5",
   "file": "img/fig-consort-c11-t5-a51.webp",
   "por": "img/por-consort-c11-t5-a51.webp"
@@ -5111,8 +5050,8 @@
   "ageBand": "a18",
   "look": "numi",
   "palette": "lilac and silver",
-  "magnificUrl": "https://www.magnific.com/app/creation/LwB062hswO",
-  "bg": "SytDZ1gUb8",
+  "magnificUrl": "https://www.magnific.com/app/creation/s7oDRRBl8e",
+  "bg": "0egrE8mTfW",
   "sheet": "N-c11-t8",
   "file": "img/fig-consort-c11-t8-a18.webp",
   "por": "img/por-consort-c11-t8-a18.webp"
@@ -5124,8 +5063,8 @@
   "ageBand": "a26",
   "look": "numi",
   "palette": "lilac and silver",
-  "magnificUrl": "https://www.magnific.com/app/creation/LwB062hswO",
-  "bg": "SytDZ1gUb8",
+  "magnificUrl": "https://www.magnific.com/app/creation/s7oDRRBl8e",
+  "bg": "0egrE8mTfW",
   "sheet": "N-c11-t8",
   "file": "img/fig-consort-c11-t8-a26.webp",
   "por": "img/por-consort-c11-t8-a26.webp"
@@ -5137,8 +5076,8 @@
   "ageBand": "a36",
   "look": "numi",
   "palette": "lilac and silver",
-  "magnificUrl": "https://www.magnific.com/app/creation/LwB062hswO",
-  "bg": "SytDZ1gUb8",
+  "magnificUrl": "https://www.magnific.com/app/creation/s7oDRRBl8e",
+  "bg": "0egrE8mTfW",
   "sheet": "N-c11-t8",
   "file": "img/fig-consort-c11-t8-a36.webp",
   "por": "img/por-consort-c11-t8-a36.webp"
@@ -5150,8 +5089,8 @@
   "ageBand": "a51",
   "look": "numi",
   "palette": "lilac and silver",
-  "magnificUrl": "https://www.magnific.com/app/creation/LwB062hswO",
-  "bg": "SytDZ1gUb8",
+  "magnificUrl": "https://www.magnific.com/app/creation/s7oDRRBl8e",
+  "bg": "0egrE8mTfW",
   "sheet": "N-c11-t8",
   "file": "img/fig-consort-c11-t8-a51.webp",
   "por": "img/por-consort-c11-t8-a51.webp"
@@ -5423,8 +5362,8 @@
   "ageBand": "a18",
   "look": "numi",
   "palette": "mint green and white",
-  "magnificUrl": "https://www.magnific.com/app/creation/rgeWfQgxtc",
-  "bg": "mE3Od5jhJQ",
+  "magnificUrl": "https://www.magnific.com/app/creation/lJ8pehMgv9",
+  "bg": "UPmX8h2wny",
   "sheet": "N-c12-t5",
   "file": "img/fig-consort-c12-t5-a18.webp",
   "por": "img/por-consort-c12-t5-a18.webp"
@@ -5436,8 +5375,8 @@
   "ageBand": "a26",
   "look": "numi",
   "palette": "mint green and white",
-  "magnificUrl": "https://www.magnific.com/app/creation/rgeWfQgxtc",
-  "bg": "mE3Od5jhJQ",
+  "magnificUrl": "https://www.magnific.com/app/creation/lJ8pehMgv9",
+  "bg": "UPmX8h2wny",
   "sheet": "N-c12-t5",
   "file": "img/fig-consort-c12-t5-a26.webp",
   "por": "img/por-consort-c12-t5-a26.webp"
@@ -5449,8 +5388,8 @@
   "ageBand": "a36",
   "look": "numi",
   "palette": "mint green and white",
-  "magnificUrl": "https://www.magnific.com/app/creation/rgeWfQgxtc",
-  "bg": "mE3Od5jhJQ",
+  "magnificUrl": "https://www.magnific.com/app/creation/lJ8pehMgv9",
+  "bg": "UPmX8h2wny",
   "sheet": "N-c12-t5",
   "file": "img/fig-consort-c12-t5-a36.webp",
   "por": "img/por-consort-c12-t5-a36.webp"
@@ -5462,8 +5401,8 @@
   "ageBand": "a51",
   "look": "numi",
   "palette": "mint green and white",
-  "magnificUrl": "https://www.magnific.com/app/creation/rgeWfQgxtc",
-  "bg": "mE3Od5jhJQ",
+  "magnificUrl": "https://www.magnific.com/app/creation/lJ8pehMgv9",
+  "bg": "UPmX8h2wny",
   "sheet": "N-c12-t5",
   "file": "img/fig-consort-c12-t5-a51.webp",
   "por": "img/por-consort-c12-t5-a51.webp"
@@ -5579,8 +5518,8 @@
   "ageBand": "a18",
   "look": "numi",
   "palette": "mint green and white",
-  "magnificUrl": "https://www.magnific.com/app/creation/jUXcN2bLD0",
-  "bg": "vQZyrBAa47",
+  "magnificUrl": "https://www.magnific.com/app/creation/JNa8YWsOq4",
+  "bg": "fHA6S1rCDY",
   "sheet": "N-c12-t8",
   "file": "img/fig-consort-c12-t8-a18.webp",
   "por": "img/por-consort-c12-t8-a18.webp"
@@ -5592,8 +5531,8 @@
   "ageBand": "a26",
   "look": "numi",
   "palette": "mint green and white",
-  "magnificUrl": "https://www.magnific.com/app/creation/jUXcN2bLD0",
-  "bg": "vQZyrBAa47",
+  "magnificUrl": "https://www.magnific.com/app/creation/JNa8YWsOq4",
+  "bg": "fHA6S1rCDY",
   "sheet": "N-c12-t8",
   "file": "img/fig-consort-c12-t8-a26.webp",
   "por": "img/por-consort-c12-t8-a26.webp"
@@ -5605,8 +5544,8 @@
   "ageBand": "a36",
   "look": "numi",
   "palette": "mint green and white",
-  "magnificUrl": "https://www.magnific.com/app/creation/jUXcN2bLD0",
-  "bg": "vQZyrBAa47",
+  "magnificUrl": "https://www.magnific.com/app/creation/JNa8YWsOq4",
+  "bg": "fHA6S1rCDY",
   "sheet": "N-c12-t8",
   "file": "img/fig-consort-c12-t8-a36.webp",
   "por": "img/por-consort-c12-t8-a36.webp"
@@ -5618,8 +5557,8 @@
   "ageBand": "a51",
   "look": "numi",
   "palette": "mint green and white",
-  "magnificUrl": "https://www.magnific.com/app/creation/jUXcN2bLD0",
-  "bg": "vQZyrBAa47",
+  "magnificUrl": "https://www.magnific.com/app/creation/JNa8YWsOq4",
+  "bg": "fHA6S1rCDY",
   "sheet": "N-c12-t8",
   "file": "img/fig-consort-c12-t8-a51.webp",
   "por": "img/por-consort-c12-t8-a51.webp"
@@ -5891,8 +5830,8 @@
   "ageBand": "a18",
   "look": "hienlanh",
   "palette": "apricot and cream",
-  "magnificUrl": "https://www.magnific.com/app/creation/gOIDHkASXO",
-  "bg": "If67pbmtvE",
+  "magnificUrl": "https://www.magnific.com/app/creation/rge0TI4xtc",
+  "bg": "O6fIhEFynm",
   "sheet": "N-c13-t5",
   "file": "img/fig-consort-c13-t5-a18.webp",
   "por": "img/por-consort-c13-t5-a18.webp"
@@ -5904,8 +5843,8 @@
   "ageBand": "a26",
   "look": "hienlanh",
   "palette": "apricot and cream",
-  "magnificUrl": "https://www.magnific.com/app/creation/gOIDHkASXO",
-  "bg": "If67pbmtvE",
+  "magnificUrl": "https://www.magnific.com/app/creation/rge0TI4xtc",
+  "bg": "O6fIhEFynm",
   "sheet": "N-c13-t5",
   "file": "img/fig-consort-c13-t5-a26.webp",
   "por": "img/por-consort-c13-t5-a26.webp"
@@ -5917,8 +5856,8 @@
   "ageBand": "a36",
   "look": "hienlanh",
   "palette": "apricot and cream",
-  "magnificUrl": "https://www.magnific.com/app/creation/gOIDHkASXO",
-  "bg": "If67pbmtvE",
+  "magnificUrl": "https://www.magnific.com/app/creation/rge0TI4xtc",
+  "bg": "O6fIhEFynm",
   "sheet": "N-c13-t5",
   "file": "img/fig-consort-c13-t5-a36.webp",
   "por": "img/por-consort-c13-t5-a36.webp"
@@ -5930,8 +5869,8 @@
   "ageBand": "a51",
   "look": "hienlanh",
   "palette": "apricot and cream",
-  "magnificUrl": "https://www.magnific.com/app/creation/gOIDHkASXO",
-  "bg": "If67pbmtvE",
+  "magnificUrl": "https://www.magnific.com/app/creation/rge0TI4xtc",
+  "bg": "O6fIhEFynm",
   "sheet": "N-c13-t5",
   "file": "img/fig-consort-c13-t5-a51.webp",
   "por": "img/por-consort-c13-t5-a51.webp"
@@ -6047,12 +5986,11 @@
   "ageBand": "a18",
   "look": "hienlanh",
   "palette": "apricot and cream",
-  "magnificUrl": "https://www.magnific.com/app/creation/gOIMndwSXO",
-  "bg": "rgeYRr8xtc",
+  "magnificUrl": "https://www.magnific.com/app/creation/SytdAnDUb8",
+  "bg": "WDskf8XcXe",
   "sheet": "N-c13-t8",
   "file": "img/fig-consort-c13-t8-a18.webp",
-  "por": "img/por-consort-c13-t8-a18.webp",
-  "solidSheer": true
+  "por": "img/por-consort-c13-t8-a18.webp"
  },
  {
   "role": "consort",
@@ -6061,8 +5999,8 @@
   "ageBand": "a26",
   "look": "hienlanh",
   "palette": "apricot and cream",
-  "magnificUrl": "https://www.magnific.com/app/creation/gOIMndwSXO",
-  "bg": "rgeYRr8xtc",
+  "magnificUrl": "https://www.magnific.com/app/creation/SytdAnDUb8",
+  "bg": "WDskf8XcXe",
   "sheet": "N-c13-t8",
   "file": "img/fig-consort-c13-t8-a26.webp",
   "por": "img/por-consort-c13-t8-a26.webp"
@@ -6074,8 +6012,8 @@
   "ageBand": "a36",
   "look": "hienlanh",
   "palette": "apricot and cream",
-  "magnificUrl": "https://www.magnific.com/app/creation/gOIMndwSXO",
-  "bg": "rgeYRr8xtc",
+  "magnificUrl": "https://www.magnific.com/app/creation/SytdAnDUb8",
+  "bg": "WDskf8XcXe",
   "sheet": "N-c13-t8",
   "file": "img/fig-consort-c13-t8-a36.webp",
   "por": "img/por-consort-c13-t8-a36.webp"
@@ -6087,13 +6025,11 @@
   "ageBand": "a51",
   "look": "hienlanh",
   "palette": "apricot and cream",
-  "magnificUrl": "https://www.magnific.com/app/creation/gOIMndwSXO",
-  "bg": "rgeYRr8xtc",
+  "magnificUrl": "https://www.magnific.com/app/creation/SytdAnDUb8",
+  "bg": "WDskf8XcXe",
   "sheet": "N-c13-t8",
   "file": "img/fig-consort-c13-t8-a51.webp",
-  "por": "img/por-consort-c13-t8-a51.webp",
-  "rematte": "eIOsIkTdqL",
-  "solidSheer": true
+  "por": "img/por-consort-c13-t8-a51.webp"
  },
  {
   "role": "consort",
@@ -6210,8 +6146,7 @@
   "bg": "79vBtypJAL",
   "sheet": "N-c14-t2",
   "file": "img/fig-consort-c14-t2-a18.webp",
-  "por": "img/por-consort-c14-t2-a18.webp",
-  "solidSheer": true
+  "por": "img/por-consort-c14-t2-a18.webp"
  },
  {
   "role": "consort",
@@ -6224,8 +6159,7 @@
   "bg": "79vBtypJAL",
   "sheet": "N-c14-t2",
   "file": "img/fig-consort-c14-t2-a26.webp",
-  "por": "img/por-consort-c14-t2-a26.webp",
-  "solidSheer": true
+  "por": "img/por-consort-c14-t2-a26.webp"
  },
  {
   "role": "consort",
@@ -6238,8 +6172,7 @@
   "bg": "79vBtypJAL",
   "sheet": "N-c14-t2",
   "file": "img/fig-consort-c14-t2-a36.webp",
-  "por": "img/por-consort-c14-t2-a36.webp",
-  "solidSheer": true
+  "por": "img/por-consort-c14-t2-a36.webp"
  },
  {
   "role": "consort",
@@ -6252,8 +6185,7 @@
   "bg": "79vBtypJAL",
   "sheet": "N-c14-t2",
   "file": "img/fig-consort-c14-t2-a51.webp",
-  "por": "img/por-consort-c14-t2-a51.webp",
-  "solidSheer": true
+  "por": "img/por-consort-c14-t2-a51.webp"
  },
  {
   "role": "consort",
@@ -6366,8 +6298,8 @@
   "ageBand": "a18",
   "look": "hienlanh",
   "palette": "soft butter yellow and white",
-  "magnificUrl": "https://www.magnific.com/app/creation/SytpqrpUb8",
-  "bg": "JNaBsz2Oq4",
+  "magnificUrl": "https://www.magnific.com/app/creation/w4hBoFJ7EI",
+  "bg": "u5nRAcYQLD",
   "sheet": "N-c14-t5",
   "file": "img/fig-consort-c14-t5-a18.webp",
   "por": "img/por-consort-c14-t5-a18.webp"
@@ -6379,8 +6311,8 @@
   "ageBand": "a26",
   "look": "hienlanh",
   "palette": "soft butter yellow and white",
-  "magnificUrl": "https://www.magnific.com/app/creation/SytpqrpUb8",
-  "bg": "JNaBsz2Oq4",
+  "magnificUrl": "https://www.magnific.com/app/creation/w4hBoFJ7EI",
+  "bg": "u5nRAcYQLD",
   "sheet": "N-c14-t5",
   "file": "img/fig-consort-c14-t5-a26.webp",
   "por": "img/por-consort-c14-t5-a26.webp"
@@ -6392,8 +6324,8 @@
   "ageBand": "a36",
   "look": "hienlanh",
   "palette": "soft butter yellow and white",
-  "magnificUrl": "https://www.magnific.com/app/creation/SytpqrpUb8",
-  "bg": "JNaBsz2Oq4",
+  "magnificUrl": "https://www.magnific.com/app/creation/w4hBoFJ7EI",
+  "bg": "u5nRAcYQLD",
   "sheet": "N-c14-t5",
   "file": "img/fig-consort-c14-t5-a36.webp",
   "por": "img/por-consort-c14-t5-a36.webp"
@@ -6405,8 +6337,8 @@
   "ageBand": "a51",
   "look": "hienlanh",
   "palette": "soft butter yellow and white",
-  "magnificUrl": "https://www.magnific.com/app/creation/SytpqrpUb8",
-  "bg": "JNaBsz2Oq4",
+  "magnificUrl": "https://www.magnific.com/app/creation/w4hBoFJ7EI",
+  "bg": "u5nRAcYQLD",
   "sheet": "N-c14-t5",
   "file": "img/fig-consort-c14-t5-a51.webp",
   "por": "img/por-consort-c14-t5-a51.webp"
@@ -6470,8 +6402,8 @@
   "ageBand": "a18",
   "look": "hienlanh",
   "palette": "soft butter yellow and white",
-  "magnificUrl": "https://www.magnific.com/app/creation/aF2ytLUfSh",
-  "bg": "nVjFA2qYQD",
+  "magnificUrl": "https://www.magnific.com/app/creation/cplkcmw0eP",
+  "bg": "5jVnr6bKxe",
   "sheet": "N-c14-t7",
   "file": "img/fig-consort-c14-t7-a18.webp",
   "por": "img/por-consort-c14-t7-a18.webp"
@@ -6483,8 +6415,8 @@
   "ageBand": "a26",
   "look": "hienlanh",
   "palette": "soft butter yellow and white",
-  "magnificUrl": "https://www.magnific.com/app/creation/aF2ytLUfSh",
-  "bg": "nVjFA2qYQD",
+  "magnificUrl": "https://www.magnific.com/app/creation/cplkcmw0eP",
+  "bg": "5jVnr6bKxe",
   "sheet": "N-c14-t7",
   "file": "img/fig-consort-c14-t7-a26.webp",
   "por": "img/por-consort-c14-t7-a26.webp"
@@ -6496,8 +6428,8 @@
   "ageBand": "a36",
   "look": "hienlanh",
   "palette": "soft butter yellow and white",
-  "magnificUrl": "https://www.magnific.com/app/creation/aF2ytLUfSh",
-  "bg": "nVjFA2qYQD",
+  "magnificUrl": "https://www.magnific.com/app/creation/cplkcmw0eP",
+  "bg": "5jVnr6bKxe",
   "sheet": "N-c14-t7",
   "file": "img/fig-consort-c14-t7-a36.webp",
   "por": "img/por-consort-c14-t7-a36.webp"
@@ -6509,8 +6441,8 @@
   "ageBand": "a51",
   "look": "hienlanh",
   "palette": "soft butter yellow and white",
-  "magnificUrl": "https://www.magnific.com/app/creation/aF2ytLUfSh",
-  "bg": "nVjFA2qYQD",
+  "magnificUrl": "https://www.magnific.com/app/creation/cplkcmw0eP",
+  "bg": "5jVnr6bKxe",
   "sheet": "N-c14-t7",
   "file": "img/fig-consort-c14-t7-a51.webp",
   "por": "img/por-consort-c14-t7-a51.webp"
@@ -6522,8 +6454,8 @@
   "ageBand": "a18",
   "look": "hienlanh",
   "palette": "soft butter yellow and white",
-  "magnificUrl": "https://www.magnific.com/app/creation/N2FmTxx6D9",
-  "bg": "O6fBY8kynm",
+  "magnificUrl": "https://www.magnific.com/app/creation/CqGil71EEy",
+  "bg": "CqGiUxfEEy",
   "sheet": "N-c14-t8",
   "file": "img/fig-consort-c14-t8-a18.webp",
   "por": "img/por-consort-c14-t8-a18.webp"
@@ -6535,8 +6467,8 @@
   "ageBand": "a26",
   "look": "hienlanh",
   "palette": "soft butter yellow and white",
-  "magnificUrl": "https://www.magnific.com/app/creation/N2FmTxx6D9",
-  "bg": "O6fBY8kynm",
+  "magnificUrl": "https://www.magnific.com/app/creation/CqGil71EEy",
+  "bg": "CqGiUxfEEy",
   "sheet": "N-c14-t8",
   "file": "img/fig-consort-c14-t8-a26.webp",
   "por": "img/por-consort-c14-t8-a26.webp"
@@ -6548,8 +6480,8 @@
   "ageBand": "a36",
   "look": "hienlanh",
   "palette": "soft butter yellow and white",
-  "magnificUrl": "https://www.magnific.com/app/creation/N2FmTxx6D9",
-  "bg": "O6fBY8kynm",
+  "magnificUrl": "https://www.magnific.com/app/creation/CqGil71EEy",
+  "bg": "CqGiUxfEEy",
   "sheet": "N-c14-t8",
   "file": "img/fig-consort-c14-t8-a36.webp",
   "por": "img/por-consort-c14-t8-a36.webp"
@@ -6561,8 +6493,8 @@
   "ageBand": "a51",
   "look": "hienlanh",
   "palette": "soft butter yellow and white",
-  "magnificUrl": "https://www.magnific.com/app/creation/N2FmTxx6D9",
-  "bg": "O6fBY8kynm",
+  "magnificUrl": "https://www.magnific.com/app/creation/CqGil71EEy",
+  "bg": "CqGiUxfEEy",
   "sheet": "N-c14-t8",
   "file": "img/fig-consort-c14-t8-a51.webp",
   "por": "img/por-consort-c14-t8-a51.webp"
@@ -6834,8 +6766,8 @@
   "ageBand": "a18",
   "look": "hienlanh",
   "palette": "coral pink and ivory",
-  "magnificUrl": "https://www.magnific.com/app/creation/Bh4SnpSoQR",
-  "bg": "ksDnQPs16B",
+  "magnificUrl": "https://www.magnific.com/app/creation/WDsk1ykcXe",
+  "bg": "LwBMetEswO",
   "sheet": "N-c15-t5",
   "file": "img/fig-consort-c15-t5-a18.webp",
   "por": "img/por-consort-c15-t5-a18.webp"
@@ -6847,8 +6779,8 @@
   "ageBand": "a26",
   "look": "hienlanh",
   "palette": "coral pink and ivory",
-  "magnificUrl": "https://www.magnific.com/app/creation/Bh4SnpSoQR",
-  "bg": "ksDnQPs16B",
+  "magnificUrl": "https://www.magnific.com/app/creation/WDsk1ykcXe",
+  "bg": "LwBMetEswO",
   "sheet": "N-c15-t5",
   "file": "img/fig-consort-c15-t5-a26.webp",
   "por": "img/por-consort-c15-t5-a26.webp"
@@ -6860,8 +6792,8 @@
   "ageBand": "a36",
   "look": "hienlanh",
   "palette": "coral pink and ivory",
-  "magnificUrl": "https://www.magnific.com/app/creation/Bh4SnpSoQR",
-  "bg": "ksDnQPs16B",
+  "magnificUrl": "https://www.magnific.com/app/creation/WDsk1ykcXe",
+  "bg": "LwBMetEswO",
   "sheet": "N-c15-t5",
   "file": "img/fig-consort-c15-t5-a36.webp",
   "por": "img/por-consort-c15-t5-a36.webp"
@@ -6873,8 +6805,8 @@
   "ageBand": "a51",
   "look": "hienlanh",
   "palette": "coral pink and ivory",
-  "magnificUrl": "https://www.magnific.com/app/creation/Bh4SnpSoQR",
-  "bg": "ksDnQPs16B",
+  "magnificUrl": "https://www.magnific.com/app/creation/WDsk1ykcXe",
+  "bg": "LwBMetEswO",
   "sheet": "N-c15-t5",
   "file": "img/fig-consort-c15-t5-a51.webp",
   "por": "img/por-consort-c15-t5-a51.webp"
@@ -6938,8 +6870,8 @@
   "ageBand": "a18",
   "look": "hienlanh",
   "palette": "coral pink and ivory",
-  "magnificUrl": "https://www.magnific.com/app/creation/s7o0rZZl8e",
-  "bg": "lJ8TjjRgv9",
+  "magnificUrl": "https://www.magnific.com/app/creation/VXUxVEOMMU",
+  "bg": "79voPMzJAL",
   "sheet": "N-c15-t7",
   "file": "img/fig-consort-c15-t7-a18.webp",
   "por": "img/por-consort-c15-t7-a18.webp"
@@ -6951,8 +6883,8 @@
   "ageBand": "a26",
   "look": "hienlanh",
   "palette": "coral pink and ivory",
-  "magnificUrl": "https://www.magnific.com/app/creation/s7o0rZZl8e",
-  "bg": "lJ8TjjRgv9",
+  "magnificUrl": "https://www.magnific.com/app/creation/VXUxVEOMMU",
+  "bg": "79voPMzJAL",
   "sheet": "N-c15-t7",
   "file": "img/fig-consort-c15-t7-a26.webp",
   "por": "img/por-consort-c15-t7-a26.webp"
@@ -6964,8 +6896,8 @@
   "ageBand": "a36",
   "look": "hienlanh",
   "palette": "coral pink and ivory",
-  "magnificUrl": "https://www.magnific.com/app/creation/s7o0rZZl8e",
-  "bg": "lJ8TjjRgv9",
+  "magnificUrl": "https://www.magnific.com/app/creation/VXUxVEOMMU",
+  "bg": "79voPMzJAL",
   "sheet": "N-c15-t7",
   "file": "img/fig-consort-c15-t7-a36.webp",
   "por": "img/por-consort-c15-t7-a36.webp"
@@ -6977,8 +6909,8 @@
   "ageBand": "a51",
   "look": "hienlanh",
   "palette": "coral pink and ivory",
-  "magnificUrl": "https://www.magnific.com/app/creation/s7o0rZZl8e",
-  "bg": "lJ8TjjRgv9",
+  "magnificUrl": "https://www.magnific.com/app/creation/VXUxVEOMMU",
+  "bg": "79voPMzJAL",
   "sheet": "N-c15-t7",
   "file": "img/fig-consort-c15-t7-a51.webp",
   "por": "img/por-consort-c15-t7-a51.webp"
@@ -6990,8 +6922,8 @@
   "ageBand": "a18",
   "look": "hienlanh",
   "palette": "coral pink and ivory",
-  "magnificUrl": "https://www.magnific.com/app/creation/yiCoWmpPW9",
-  "bg": "XmPlqFJBfo",
+  "magnificUrl": "https://www.magnific.com/app/creation/ksDW4Rt16B",
+  "bg": "MBwLFa4DCm",
   "sheet": "N-c15-t8",
   "file": "img/fig-consort-c15-t8-a18.webp",
   "por": "img/por-consort-c15-t8-a18.webp"
@@ -7003,8 +6935,8 @@
   "ageBand": "a26",
   "look": "hienlanh",
   "palette": "coral pink and ivory",
-  "magnificUrl": "https://www.magnific.com/app/creation/yiCoWmpPW9",
-  "bg": "XmPlqFJBfo",
+  "magnificUrl": "https://www.magnific.com/app/creation/ksDW4Rt16B",
+  "bg": "MBwLFa4DCm",
   "sheet": "N-c15-t8",
   "file": "img/fig-consort-c15-t8-a26.webp",
   "por": "img/por-consort-c15-t8-a26.webp"
@@ -7016,8 +6948,8 @@
   "ageBand": "a36",
   "look": "hienlanh",
   "palette": "coral pink and ivory",
-  "magnificUrl": "https://www.magnific.com/app/creation/yiCoWmpPW9",
-  "bg": "XmPlqFJBfo",
+  "magnificUrl": "https://www.magnific.com/app/creation/ksDW4Rt16B",
+  "bg": "MBwLFa4DCm",
   "sheet": "N-c15-t8",
   "file": "img/fig-consort-c15-t8-a36.webp",
   "por": "img/por-consort-c15-t8-a36.webp"
@@ -7029,8 +6961,8 @@
   "ageBand": "a51",
   "look": "hienlanh",
   "palette": "coral pink and ivory",
-  "magnificUrl": "https://www.magnific.com/app/creation/yiCoWmpPW9",
-  "bg": "XmPlqFJBfo",
+  "magnificUrl": "https://www.magnific.com/app/creation/ksDW4Rt16B",
+  "bg": "MBwLFa4DCm",
   "sheet": "N-c15-t8",
   "file": "img/fig-consort-c15-t8-a51.webp",
   "por": "img/por-consort-c15-t8-a51.webp"
@@ -7302,8 +7234,8 @@
   "ageBand": "a18",
   "look": "hienlanh",
   "palette": "sage green and cream",
-  "magnificUrl": "https://www.magnific.com/app/creation/SytpqsBUb8",
-  "bg": "rgeWHNgxtc",
+  "magnificUrl": "https://www.magnific.com/app/creation/ksDWcmk16B",
+  "bg": "s7oDdvyl8e",
   "sheet": "N-c16-t5",
   "file": "img/fig-consort-c16-t5-a18.webp",
   "por": "img/por-consort-c16-t5-a18.webp"
@@ -7315,8 +7247,8 @@
   "ageBand": "a26",
   "look": "hienlanh",
   "palette": "sage green and cream",
-  "magnificUrl": "https://www.magnific.com/app/creation/SytpqsBUb8",
-  "bg": "rgeWHNgxtc",
+  "magnificUrl": "https://www.magnific.com/app/creation/ksDWcmk16B",
+  "bg": "s7oDdvyl8e",
   "sheet": "N-c16-t5",
   "file": "img/fig-consort-c16-t5-a26.webp",
   "por": "img/por-consort-c16-t5-a26.webp"
@@ -7328,8 +7260,8 @@
   "ageBand": "a36",
   "look": "hienlanh",
   "palette": "sage green and cream",
-  "magnificUrl": "https://www.magnific.com/app/creation/SytpqsBUb8",
-  "bg": "rgeWHNgxtc",
+  "magnificUrl": "https://www.magnific.com/app/creation/ksDWcmk16B",
+  "bg": "s7oDdvyl8e",
   "sheet": "N-c16-t5",
   "file": "img/fig-consort-c16-t5-a36.webp",
   "por": "img/por-consort-c16-t5-a36.webp"
@@ -7341,8 +7273,8 @@
   "ageBand": "a51",
   "look": "hienlanh",
   "palette": "sage green and cream",
-  "magnificUrl": "https://www.magnific.com/app/creation/SytpqsBUb8",
-  "bg": "rgeWHNgxtc",
+  "magnificUrl": "https://www.magnific.com/app/creation/ksDWcmk16B",
+  "bg": "s7oDdvyl8e",
   "sheet": "N-c16-t5",
   "file": "img/fig-consort-c16-t5-a51.webp",
   "por": "img/por-consort-c16-t5-a51.webp"
@@ -7406,8 +7338,8 @@
   "ageBand": "a18",
   "look": "hienlanh",
   "palette": "sage green and cream",
-  "magnificUrl": "https://www.magnific.com/app/creation/u5nNa78QLD",
-  "bg": "gOIVLs6SXO",
+  "magnificUrl": "https://www.magnific.com/app/creation/rgecr3Lxtc",
+  "bg": "ksDWj2s16B",
   "sheet": "N-c16-t7",
   "file": "img/fig-consort-c16-t7-a18.webp",
   "por": "img/por-consort-c16-t7-a18.webp"
@@ -7419,8 +7351,8 @@
   "ageBand": "a26",
   "look": "hienlanh",
   "palette": "sage green and cream",
-  "magnificUrl": "https://www.magnific.com/app/creation/u5nNa78QLD",
-  "bg": "gOIVLs6SXO",
+  "magnificUrl": "https://www.magnific.com/app/creation/rgecr3Lxtc",
+  "bg": "ksDWj2s16B",
   "sheet": "N-c16-t7",
   "file": "img/fig-consort-c16-t7-a26.webp",
   "por": "img/por-consort-c16-t7-a26.webp"
@@ -7432,8 +7364,8 @@
   "ageBand": "a36",
   "look": "hienlanh",
   "palette": "sage green and cream",
-  "magnificUrl": "https://www.magnific.com/app/creation/u5nNa78QLD",
-  "bg": "gOIVLs6SXO",
+  "magnificUrl": "https://www.magnific.com/app/creation/rgecr3Lxtc",
+  "bg": "ksDWj2s16B",
   "sheet": "N-c16-t7",
   "file": "img/fig-consort-c16-t7-a36.webp",
   "por": "img/por-consort-c16-t7-a36.webp"
@@ -7445,8 +7377,8 @@
   "ageBand": "a51",
   "look": "hienlanh",
   "palette": "sage green and cream",
-  "magnificUrl": "https://www.magnific.com/app/creation/u5nNa78QLD",
-  "bg": "gOIVLs6SXO",
+  "magnificUrl": "https://www.magnific.com/app/creation/rgecr3Lxtc",
+  "bg": "ksDWj2s16B",
   "sheet": "N-c16-t7",
   "file": "img/fig-consort-c16-t7-a51.webp",
   "por": "img/por-consort-c16-t7-a51.webp"
@@ -7458,13 +7390,11 @@
   "ageBand": "a18",
   "look": "hienlanh",
   "palette": "sage green and cream",
-  "magnificUrl": "https://www.magnific.com/app/creation/XmPlH7cBfo",
-  "bg": "gOIM2ZNSXO",
+  "magnificUrl": "https://www.magnific.com/app/creation/1lpc9ARr4r",
+  "bg": "ksDW6yV16B",
   "sheet": "N-c16-t8",
   "file": "img/fig-consort-c16-t8-a18.webp",
-  "por": "img/por-consort-c16-t8-a18.webp",
-  "rematte": "bxTAxio5Y2",
-  "solidSheer": true
+  "por": "img/por-consort-c16-t8-a18.webp"
  },
  {
   "role": "consort",
@@ -7473,13 +7403,11 @@
   "ageBand": "a26",
   "look": "hienlanh",
   "palette": "sage green and cream",
-  "magnificUrl": "https://www.magnific.com/app/creation/XmPlH7cBfo",
-  "bg": "gOIM2ZNSXO",
+  "magnificUrl": "https://www.magnific.com/app/creation/1lpc9ARr4r",
+  "bg": "ksDW6yV16B",
   "sheet": "N-c16-t8",
   "file": "img/fig-consort-c16-t8-a26.webp",
-  "por": "img/por-consort-c16-t8-a26.webp",
-  "rematte": "SytpyTfUb8",
-  "solidSheer": true
+  "por": "img/por-consort-c16-t8-a26.webp"
  },
  {
   "role": "consort",
@@ -7488,13 +7416,11 @@
   "ageBand": "a36",
   "look": "hienlanh",
   "palette": "sage green and cream",
-  "magnificUrl": "https://www.magnific.com/app/creation/XmPlH7cBfo",
-  "bg": "gOIM2ZNSXO",
+  "magnificUrl": "https://www.magnific.com/app/creation/1lpc9ARr4r",
+  "bg": "ksDW6yV16B",
   "sheet": "N-c16-t8",
   "file": "img/fig-consort-c16-t8-a36.webp",
-  "por": "img/por-consort-c16-t8-a36.webp",
-  "rematte": "xSdcSn0jfW",
-  "solidSheer": true
+  "por": "img/por-consort-c16-t8-a36.webp"
  },
  {
   "role": "consort",
@@ -7503,8 +7429,8 @@
   "ageBand": "a51",
   "look": "hienlanh",
   "palette": "sage green and cream",
-  "magnificUrl": "https://www.magnific.com/app/creation/XmPlH7cBfo",
-  "bg": "gOIM2ZNSXO",
+  "magnificUrl": "https://www.magnific.com/app/creation/1lpc9ARr4r",
+  "bg": "ksDW6yV16B",
   "sheet": "N-c16-t8",
   "file": "img/fig-consort-c16-t8-a51.webp",
   "por": "img/por-consort-c16-t8-a51.webp"
@@ -7776,8 +7702,8 @@
   "ageBand": "a18",
   "look": "hienlanh",
   "palette": "blush pink and pale gold",
-  "magnificUrl": "https://www.magnific.com/app/creation/XmPgzdzBfo",
-  "bg": "Sytprd7Ub8",
+  "magnificUrl": "https://www.magnific.com/app/creation/UPmXo9qwny",
+  "bg": "P3Emfky42C",
   "sheet": "N-c17-t5",
   "file": "img/fig-consort-c17-t5-a18.webp",
   "por": "img/por-consort-c17-t5-a18.webp"
@@ -7789,8 +7715,8 @@
   "ageBand": "a26",
   "look": "hienlanh",
   "palette": "blush pink and pale gold",
-  "magnificUrl": "https://www.magnific.com/app/creation/XmPgzdzBfo",
-  "bg": "Sytprd7Ub8",
+  "magnificUrl": "https://www.magnific.com/app/creation/UPmXo9qwny",
+  "bg": "P3Emfky42C",
   "sheet": "N-c17-t5",
   "file": "img/fig-consort-c17-t5-a26.webp",
   "por": "img/por-consort-c17-t5-a26.webp"
@@ -7802,8 +7728,8 @@
   "ageBand": "a36",
   "look": "hienlanh",
   "palette": "blush pink and pale gold",
-  "magnificUrl": "https://www.magnific.com/app/creation/XmPgzdzBfo",
-  "bg": "Sytprd7Ub8",
+  "magnificUrl": "https://www.magnific.com/app/creation/UPmXo9qwny",
+  "bg": "P3Emfky42C",
   "sheet": "N-c17-t5",
   "file": "img/fig-consort-c17-t5-a36.webp",
   "por": "img/por-consort-c17-t5-a36.webp"
@@ -7815,8 +7741,8 @@
   "ageBand": "a51",
   "look": "hienlanh",
   "palette": "blush pink and pale gold",
-  "magnificUrl": "https://www.magnific.com/app/creation/XmPgzdzBfo",
-  "bg": "Sytprd7Ub8",
+  "magnificUrl": "https://www.magnific.com/app/creation/UPmXo9qwny",
+  "bg": "P3Emfky42C",
   "sheet": "N-c17-t5",
   "file": "img/fig-consort-c17-t5-a51.webp",
   "por": "img/por-consort-c17-t5-a51.webp"
@@ -7880,8 +7806,8 @@
   "ageBand": "a18",
   "look": "hienlanh",
   "palette": "blush pink and pale gold",
-  "magnificUrl": "https://www.magnific.com/app/creation/s7o0rG1l8e",
-  "bg": "u5nNfE3QLD",
+  "magnificUrl": "https://www.magnific.com/app/creation/huR4aoUvqL",
+  "bg": "gOIeiRLSXO",
   "sheet": "N-c17-t7",
   "file": "img/fig-consort-c17-t7-a18.webp",
   "por": "img/por-consort-c17-t7-a18.webp"
@@ -7893,8 +7819,8 @@
   "ageBand": "a26",
   "look": "hienlanh",
   "palette": "blush pink and pale gold",
-  "magnificUrl": "https://www.magnific.com/app/creation/s7o0rG1l8e",
-  "bg": "u5nNfE3QLD",
+  "magnificUrl": "https://www.magnific.com/app/creation/huR4aoUvqL",
+  "bg": "gOIeiRLSXO",
   "sheet": "N-c17-t7",
   "file": "img/fig-consort-c17-t7-a26.webp",
   "por": "img/por-consort-c17-t7-a26.webp"
@@ -7906,8 +7832,8 @@
   "ageBand": "a36",
   "look": "hienlanh",
   "palette": "blush pink and pale gold",
-  "magnificUrl": "https://www.magnific.com/app/creation/s7o0rG1l8e",
-  "bg": "u5nNfE3QLD",
+  "magnificUrl": "https://www.magnific.com/app/creation/huR4aoUvqL",
+  "bg": "gOIeiRLSXO",
   "sheet": "N-c17-t7",
   "file": "img/fig-consort-c17-t7-a36.webp",
   "por": "img/por-consort-c17-t7-a36.webp"
@@ -7919,8 +7845,8 @@
   "ageBand": "a51",
   "look": "hienlanh",
   "palette": "blush pink and pale gold",
-  "magnificUrl": "https://www.magnific.com/app/creation/s7o0rG1l8e",
-  "bg": "u5nNfE3QLD",
+  "magnificUrl": "https://www.magnific.com/app/creation/huR4aoUvqL",
+  "bg": "gOIeiRLSXO",
   "sheet": "N-c17-t7",
   "file": "img/fig-consort-c17-t7-a51.webp",
   "por": "img/por-consort-c17-t7-a51.webp"
@@ -7932,8 +7858,8 @@
   "ageBand": "a18",
   "look": "hienlanh",
   "palette": "blush pink and pale gold",
-  "magnificUrl": "https://www.magnific.com/app/creation/1lpn3vTr4r",
-  "bg": "fHA4wlxCDY",
+  "magnificUrl": "https://www.magnific.com/app/creation/huR4jNcvqL",
+  "bg": "5jVn9vUKxe",
   "sheet": "N-c17-t8",
   "file": "img/fig-consort-c17-t8-a18.webp",
   "por": "img/por-consort-c17-t8-a18.webp"
@@ -7945,8 +7871,8 @@
   "ageBand": "a26",
   "look": "hienlanh",
   "palette": "blush pink and pale gold",
-  "magnificUrl": "https://www.magnific.com/app/creation/1lpn3vTr4r",
-  "bg": "fHA4wlxCDY",
+  "magnificUrl": "https://www.magnific.com/app/creation/huR4jNcvqL",
+  "bg": "5jVn9vUKxe",
   "sheet": "N-c17-t8",
   "file": "img/fig-consort-c17-t8-a26.webp",
   "por": "img/por-consort-c17-t8-a26.webp"
@@ -7958,8 +7884,8 @@
   "ageBand": "a36",
   "look": "hienlanh",
   "palette": "blush pink and pale gold",
-  "magnificUrl": "https://www.magnific.com/app/creation/1lpn3vTr4r",
-  "bg": "fHA4wlxCDY",
+  "magnificUrl": "https://www.magnific.com/app/creation/huR4jNcvqL",
+  "bg": "5jVn9vUKxe",
   "sheet": "N-c17-t8",
   "file": "img/fig-consort-c17-t8-a36.webp",
   "por": "img/por-consort-c17-t8-a36.webp"
@@ -7971,8 +7897,8 @@
   "ageBand": "a51",
   "look": "hienlanh",
   "palette": "blush pink and pale gold",
-  "magnificUrl": "https://www.magnific.com/app/creation/1lpn3vTr4r",
-  "bg": "fHA4wlxCDY",
+  "magnificUrl": "https://www.magnific.com/app/creation/huR4jNcvqL",
+  "bg": "5jVn9vUKxe",
   "sheet": "N-c17-t8",
   "file": "img/fig-consort-c17-t8-a51.webp",
   "por": "img/por-consort-c17-t8-a51.webp"
@@ -8244,8 +8170,8 @@
   "ageBand": "a18",
   "look": "dangi",
   "palette": "magenta rose and lilac",
-  "magnificUrl": "https://www.magnific.com/app/creation/jUX0uAALD0",
-  "bg": "UPmexXHwny",
+  "magnificUrl": "https://www.magnific.com/app/creation/xSdTMJ9jfW",
+  "bg": "rge0DaNxtc",
   "sheet": "N-c18-t5",
   "file": "img/fig-consort-c18-t5-a18.webp",
   "por": "img/por-consort-c18-t5-a18.webp"
@@ -8257,8 +8183,8 @@
   "ageBand": "a26",
   "look": "dangi",
   "palette": "magenta rose and lilac",
-  "magnificUrl": "https://www.magnific.com/app/creation/jUX0uAALD0",
-  "bg": "UPmexXHwny",
+  "magnificUrl": "https://www.magnific.com/app/creation/xSdTMJ9jfW",
+  "bg": "rge0DaNxtc",
   "sheet": "N-c18-t5",
   "file": "img/fig-consort-c18-t5-a26.webp",
   "por": "img/por-consort-c18-t5-a26.webp"
@@ -8270,8 +8196,8 @@
   "ageBand": "a36",
   "look": "dangi",
   "palette": "magenta rose and lilac",
-  "magnificUrl": "https://www.magnific.com/app/creation/jUX0uAALD0",
-  "bg": "UPmexXHwny",
+  "magnificUrl": "https://www.magnific.com/app/creation/xSdTMJ9jfW",
+  "bg": "rge0DaNxtc",
   "sheet": "N-c18-t5",
   "file": "img/fig-consort-c18-t5-a36.webp",
   "por": "img/por-consort-c18-t5-a36.webp"
@@ -8283,8 +8209,8 @@
   "ageBand": "a51",
   "look": "dangi",
   "palette": "magenta rose and lilac",
-  "magnificUrl": "https://www.magnific.com/app/creation/jUX0uAALD0",
-  "bg": "UPmexXHwny",
+  "magnificUrl": "https://www.magnific.com/app/creation/xSdTMJ9jfW",
+  "bg": "rge0DaNxtc",
   "sheet": "N-c18-t5",
   "file": "img/fig-consort-c18-t5-a51.webp",
   "por": "img/por-consort-c18-t5-a51.webp"
@@ -8348,8 +8274,8 @@
   "ageBand": "a18",
   "look": "dangi",
   "palette": "magenta rose and lilac",
-  "magnificUrl": "https://www.magnific.com/app/creation/YMLqMLZWeC",
-  "bg": "CqG95SjEEy",
+  "magnificUrl": "https://www.magnific.com/app/creation/gOIeUjbSXO",
+  "bg": "p8JlfQIehw",
   "sheet": "N-c18-t7",
   "file": "img/fig-consort-c18-t7-a18.webp",
   "por": "img/por-consort-c18-t7-a18.webp"
@@ -8361,8 +8287,8 @@
   "ageBand": "a26",
   "look": "dangi",
   "palette": "magenta rose and lilac",
-  "magnificUrl": "https://www.magnific.com/app/creation/YMLqMLZWeC",
-  "bg": "CqG95SjEEy",
+  "magnificUrl": "https://www.magnific.com/app/creation/gOIeUjbSXO",
+  "bg": "p8JlfQIehw",
   "sheet": "N-c18-t7",
   "file": "img/fig-consort-c18-t7-a26.webp",
   "por": "img/por-consort-c18-t7-a26.webp"
@@ -8374,8 +8300,8 @@
   "ageBand": "a36",
   "look": "dangi",
   "palette": "magenta rose and lilac",
-  "magnificUrl": "https://www.magnific.com/app/creation/YMLqMLZWeC",
-  "bg": "CqG95SjEEy",
+  "magnificUrl": "https://www.magnific.com/app/creation/gOIeUjbSXO",
+  "bg": "p8JlfQIehw",
   "sheet": "N-c18-t7",
   "file": "img/fig-consort-c18-t7-a36.webp",
   "por": "img/por-consort-c18-t7-a36.webp"
@@ -8387,8 +8313,8 @@
   "ageBand": "a51",
   "look": "dangi",
   "palette": "magenta rose and lilac",
-  "magnificUrl": "https://www.magnific.com/app/creation/YMLqMLZWeC",
-  "bg": "CqG95SjEEy",
+  "magnificUrl": "https://www.magnific.com/app/creation/gOIeUjbSXO",
+  "bg": "p8JlfQIehw",
   "sheet": "N-c18-t7",
   "file": "img/fig-consort-c18-t7-a51.webp",
   "por": "img/por-consort-c18-t7-a51.webp"
@@ -8400,8 +8326,8 @@
   "ageBand": "a18",
   "look": "dangi",
   "palette": "magenta rose and lilac",
-  "magnificUrl": "https://www.magnific.com/app/creation/Bh4g1nGoQR",
-  "bg": "gOIMYG4SXO",
+  "magnificUrl": "https://www.magnific.com/app/creation/Do7sQSApcl",
+  "bg": "xSdTRQwjfW",
   "sheet": "N-c18-t8",
   "file": "img/fig-consort-c18-t8-a18.webp",
   "por": "img/por-consort-c18-t8-a18.webp"
@@ -8413,8 +8339,8 @@
   "ageBand": "a26",
   "look": "dangi",
   "palette": "magenta rose and lilac",
-  "magnificUrl": "https://www.magnific.com/app/creation/Bh4g1nGoQR",
-  "bg": "gOIMYG4SXO",
+  "magnificUrl": "https://www.magnific.com/app/creation/Do7sQSApcl",
+  "bg": "xSdTRQwjfW",
   "sheet": "N-c18-t8",
   "file": "img/fig-consort-c18-t8-a26.webp",
   "por": "img/por-consort-c18-t8-a26.webp"
@@ -8426,8 +8352,8 @@
   "ageBand": "a36",
   "look": "dangi",
   "palette": "magenta rose and lilac",
-  "magnificUrl": "https://www.magnific.com/app/creation/Bh4g1nGoQR",
-  "bg": "gOIMYG4SXO",
+  "magnificUrl": "https://www.magnific.com/app/creation/Do7sQSApcl",
+  "bg": "xSdTRQwjfW",
   "sheet": "N-c18-t8",
   "file": "img/fig-consort-c18-t8-a36.webp",
   "por": "img/por-consort-c18-t8-a36.webp"
@@ -8439,8 +8365,8 @@
   "ageBand": "a51",
   "look": "dangi",
   "palette": "magenta rose and lilac",
-  "magnificUrl": "https://www.magnific.com/app/creation/Bh4g1nGoQR",
-  "bg": "gOIMYG4SXO",
+  "magnificUrl": "https://www.magnific.com/app/creation/Do7sQSApcl",
+  "bg": "xSdTRQwjfW",
   "sheet": "N-c18-t8",
   "file": "img/fig-consort-c18-t8-a51.webp",
   "por": "img/por-consort-c18-t8-a51.webp"
@@ -8712,8 +8638,8 @@
   "ageBand": "a18",
   "look": "dangi",
   "palette": "plum and pink",
-  "magnificUrl": "https://www.magnific.com/app/creation/0egkiFGTfW",
-  "bg": "rgeWHTRxtc",
+  "magnificUrl": "https://www.magnific.com/app/creation/tCiy4HDmZJ",
+  "bg": "xSdTpCnjfW",
   "sheet": "N-c19-t5",
   "file": "img/fig-consort-c19-t5-a18.webp",
   "por": "img/por-consort-c19-t5-a18.webp"
@@ -8725,8 +8651,8 @@
   "ageBand": "a26",
   "look": "dangi",
   "palette": "plum and pink",
-  "magnificUrl": "https://www.magnific.com/app/creation/0egkiFGTfW",
-  "bg": "rgeWHTRxtc",
+  "magnificUrl": "https://www.magnific.com/app/creation/tCiy4HDmZJ",
+  "bg": "xSdTpCnjfW",
   "sheet": "N-c19-t5",
   "file": "img/fig-consort-c19-t5-a26.webp",
   "por": "img/por-consort-c19-t5-a26.webp"
@@ -8738,8 +8664,8 @@
   "ageBand": "a36",
   "look": "dangi",
   "palette": "plum and pink",
-  "magnificUrl": "https://www.magnific.com/app/creation/0egkiFGTfW",
-  "bg": "rgeWHTRxtc",
+  "magnificUrl": "https://www.magnific.com/app/creation/tCiy4HDmZJ",
+  "bg": "xSdTpCnjfW",
   "sheet": "N-c19-t5",
   "file": "img/fig-consort-c19-t5-a36.webp",
   "por": "img/por-consort-c19-t5-a36.webp"
@@ -8751,8 +8677,8 @@
   "ageBand": "a51",
   "look": "dangi",
   "palette": "plum and pink",
-  "magnificUrl": "https://www.magnific.com/app/creation/0egkiFGTfW",
-  "bg": "rgeWHTRxtc",
+  "magnificUrl": "https://www.magnific.com/app/creation/tCiy4HDmZJ",
+  "bg": "xSdTpCnjfW",
   "sheet": "N-c19-t5",
   "file": "img/fig-consort-c19-t5-a51.webp",
   "por": "img/por-consort-c19-t5-a51.webp"
@@ -8816,8 +8742,8 @@
   "ageBand": "a18",
   "look": "dangi",
   "palette": "plum and pink",
-  "magnificUrl": "https://www.magnific.com/app/creation/SytMqNEUb8",
-  "bg": "O6fX1CMynm",
+  "magnificUrl": "https://www.magnific.com/app/creation/dtySBp9XSL",
+  "bg": "aF2N1s5fSh",
   "sheet": "N-c19-t7",
   "file": "img/fig-consort-c19-t7-a18.webp",
   "por": "img/por-consort-c19-t7-a18.webp"
@@ -8829,8 +8755,8 @@
   "ageBand": "a26",
   "look": "dangi",
   "palette": "plum and pink",
-  "magnificUrl": "https://www.magnific.com/app/creation/SytMqNEUb8",
-  "bg": "O6fX1CMynm",
+  "magnificUrl": "https://www.magnific.com/app/creation/dtySBp9XSL",
+  "bg": "aF2N1s5fSh",
   "sheet": "N-c19-t7",
   "file": "img/fig-consort-c19-t7-a26.webp",
   "por": "img/por-consort-c19-t7-a26.webp"
@@ -8842,8 +8768,8 @@
   "ageBand": "a36",
   "look": "dangi",
   "palette": "plum and pink",
-  "magnificUrl": "https://www.magnific.com/app/creation/SytMqNEUb8",
-  "bg": "O6fX1CMynm",
+  "magnificUrl": "https://www.magnific.com/app/creation/dtySBp9XSL",
+  "bg": "aF2N1s5fSh",
   "sheet": "N-c19-t7",
   "file": "img/fig-consort-c19-t7-a36.webp",
   "por": "img/por-consort-c19-t7-a36.webp"
@@ -8855,8 +8781,8 @@
   "ageBand": "a51",
   "look": "dangi",
   "palette": "plum and pink",
-  "magnificUrl": "https://www.magnific.com/app/creation/SytMqNEUb8",
-  "bg": "O6fX1CMynm",
+  "magnificUrl": "https://www.magnific.com/app/creation/dtySBp9XSL",
+  "bg": "aF2N1s5fSh",
   "sheet": "N-c19-t7",
   "file": "img/fig-consort-c19-t7-a51.webp",
   "por": "img/por-consort-c19-t7-a51.webp"
@@ -8868,12 +8794,11 @@
   "ageBand": "a18",
   "look": "dangi",
   "palette": "plum and pink",
-  "magnificUrl": "https://www.magnific.com/app/creation/1lpn3CBr4r",
-  "bg": "Bh4grkboQR",
+  "magnificUrl": "https://www.magnific.com/app/creation/p8JlF7behw",
+  "bg": "vQZ9ld3a47",
   "sheet": "N-c19-t8",
   "file": "img/fig-consort-c19-t8-a18.webp",
-  "por": "img/por-consort-c19-t8-a18.webp",
-  "solidSheer": true
+  "por": "img/por-consort-c19-t8-a18.webp"
  },
  {
   "role": "consort",
@@ -8882,13 +8807,11 @@
   "ageBand": "a26",
   "look": "dangi",
   "palette": "plum and pink",
-  "magnificUrl": "https://www.magnific.com/app/creation/1lpn3CBr4r",
-  "bg": "Bh4grkboQR",
+  "magnificUrl": "https://www.magnific.com/app/creation/p8JlF7behw",
+  "bg": "vQZ9ld3a47",
   "sheet": "N-c19-t8",
   "file": "img/fig-consort-c19-t8-a26.webp",
-  "por": "img/por-consort-c19-t8-a26.webp",
-  "rematte": "79vX9dzJAL",
-  "solidSheer": true
+  "por": "img/por-consort-c19-t8-a26.webp"
  },
  {
   "role": "consort",
@@ -8897,13 +8820,11 @@
   "ageBand": "a36",
   "look": "dangi",
   "palette": "plum and pink",
-  "magnificUrl": "https://www.magnific.com/app/creation/1lpn3CBr4r",
-  "bg": "Bh4grkboQR",
+  "magnificUrl": "https://www.magnific.com/app/creation/p8JlF7behw",
+  "bg": "vQZ9ld3a47",
   "sheet": "N-c19-t8",
   "file": "img/fig-consort-c19-t8-a36.webp",
-  "por": "img/por-consort-c19-t8-a36.webp",
-  "rematte": "KLMzLzJkqp",
-  "solidSheer": true
+  "por": "img/por-consort-c19-t8-a36.webp"
  },
  {
   "role": "consort",
@@ -8912,13 +8833,11 @@
   "ageBand": "a51",
   "look": "dangi",
   "palette": "plum and pink",
-  "magnificUrl": "https://www.magnific.com/app/creation/1lpn3CBr4r",
-  "bg": "Bh4grkboQR",
+  "magnificUrl": "https://www.magnific.com/app/creation/p8JlF7behw",
+  "bg": "vQZ9ld3a47",
   "sheet": "N-c19-t8",
   "file": "img/fig-consort-c19-t8-a51.webp",
-  "por": "img/por-consort-c19-t8-a51.webp",
-  "rematte": "LwBTwTLswO",
-  "solidSheer": true
+  "por": "img/por-consort-c19-t8-a51.webp"
  },
  {
   "role": "consort",
@@ -9187,8 +9106,8 @@
   "ageBand": "a18",
   "look": "dangi",
   "palette": "lotus pink and celadon",
-  "magnificUrl": "https://www.magnific.com/app/creation/P3EIjBd42C",
-  "bg": "huRyXNQvqL",
+  "magnificUrl": "https://www.magnific.com/app/creation/O6fImGWynm",
+  "bg": "KLMYTvlkqp",
   "sheet": "N-c20-t5",
   "file": "img/fig-consort-c20-t5-a18.webp",
   "por": "img/por-consort-c20-t5-a18.webp"
@@ -9200,8 +9119,8 @@
   "ageBand": "a26",
   "look": "dangi",
   "palette": "lotus pink and celadon",
-  "magnificUrl": "https://www.magnific.com/app/creation/P3EIjBd42C",
-  "bg": "huRyXNQvqL",
+  "magnificUrl": "https://www.magnific.com/app/creation/O6fImGWynm",
+  "bg": "KLMYTvlkqp",
   "sheet": "N-c20-t5",
   "file": "img/fig-consort-c20-t5-a26.webp",
   "por": "img/por-consort-c20-t5-a26.webp"
@@ -9213,8 +9132,8 @@
   "ageBand": "a36",
   "look": "dangi",
   "palette": "lotus pink and celadon",
-  "magnificUrl": "https://www.magnific.com/app/creation/P3EIjBd42C",
-  "bg": "huRyXNQvqL",
+  "magnificUrl": "https://www.magnific.com/app/creation/O6fImGWynm",
+  "bg": "KLMYTvlkqp",
   "sheet": "N-c20-t5",
   "file": "img/fig-consort-c20-t5-a36.webp",
   "por": "img/por-consort-c20-t5-a36.webp"
@@ -9226,8 +9145,8 @@
   "ageBand": "a51",
   "look": "dangi",
   "palette": "lotus pink and celadon",
-  "magnificUrl": "https://www.magnific.com/app/creation/P3EIjBd42C",
-  "bg": "huRyXNQvqL",
+  "magnificUrl": "https://www.magnific.com/app/creation/O6fImGWynm",
+  "bg": "KLMYTvlkqp",
   "sheet": "N-c20-t5",
   "file": "img/fig-consort-c20-t5-a51.webp",
   "por": "img/por-consort-c20-t5-a51.webp"
@@ -9291,8 +9210,8 @@
   "ageBand": "a18",
   "look": "dangi",
   "palette": "lotus pink and celadon",
-  "magnificUrl": "https://www.magnific.com/app/creation/1lpzFntr4r",
-  "bg": "LwBc55HswO",
+  "magnificUrl": "https://www.magnific.com/app/creation/WDsk0WtcXe",
+  "bg": "N2Facpo6D9",
   "sheet": "N-c20-t7",
   "file": "img/fig-consort-c20-t7-a18.webp",
   "por": "img/por-consort-c20-t7-a18.webp"
@@ -9304,8 +9223,8 @@
   "ageBand": "a26",
   "look": "dangi",
   "palette": "lotus pink and celadon",
-  "magnificUrl": "https://www.magnific.com/app/creation/1lpzFntr4r",
-  "bg": "LwBc55HswO",
+  "magnificUrl": "https://www.magnific.com/app/creation/WDsk0WtcXe",
+  "bg": "N2Facpo6D9",
   "sheet": "N-c20-t7",
   "file": "img/fig-consort-c20-t7-a26.webp",
   "por": "img/por-consort-c20-t7-a26.webp"
@@ -9317,8 +9236,8 @@
   "ageBand": "a36",
   "look": "dangi",
   "palette": "lotus pink and celadon",
-  "magnificUrl": "https://www.magnific.com/app/creation/1lpzFntr4r",
-  "bg": "LwBc55HswO",
+  "magnificUrl": "https://www.magnific.com/app/creation/WDsk0WtcXe",
+  "bg": "N2Facpo6D9",
   "sheet": "N-c20-t7",
   "file": "img/fig-consort-c20-t7-a36.webp",
   "por": "img/por-consort-c20-t7-a36.webp"
@@ -9330,8 +9249,8 @@
   "ageBand": "a51",
   "look": "dangi",
   "palette": "lotus pink and celadon",
-  "magnificUrl": "https://www.magnific.com/app/creation/1lpzFntr4r",
-  "bg": "LwBc55HswO",
+  "magnificUrl": "https://www.magnific.com/app/creation/WDsk0WtcXe",
+  "bg": "N2Facpo6D9",
   "sheet": "N-c20-t7",
   "file": "img/fig-consort-c20-t7-a51.webp",
   "por": "img/por-consort-c20-t7-a51.webp"
@@ -9343,8 +9262,8 @@
   "ageBand": "a18",
   "look": "dangi",
   "palette": "lotus pink and celadon",
-  "magnificUrl": "https://www.magnific.com/app/creation/bxT2OPA5Y2",
-  "bg": "TdSkf0KVNR",
+  "magnificUrl": "https://www.magnific.com/app/creation/yiCt0EIPW9",
+  "bg": "gOIezkDSXO",
   "sheet": "N-c20-t8",
   "file": "img/fig-consort-c20-t8-a18.webp",
   "por": "img/por-consort-c20-t8-a18.webp"
@@ -9356,12 +9275,11 @@
   "ageBand": "a26",
   "look": "dangi",
   "palette": "lotus pink and celadon",
-  "magnificUrl": "https://www.magnific.com/app/creation/bxT2OPA5Y2",
-  "bg": "TdSkf0KVNR",
+  "magnificUrl": "https://www.magnific.com/app/creation/yiCt0EIPW9",
+  "bg": "gOIezkDSXO",
   "sheet": "N-c20-t8",
   "file": "img/fig-consort-c20-t8-a26.webp",
-  "por": "img/por-consort-c20-t8-a26.webp",
-  "solidSheer": true
+  "por": "img/por-consort-c20-t8-a26.webp"
  },
  {
   "role": "consort",
@@ -9370,13 +9288,11 @@
   "ageBand": "a36",
   "look": "dangi",
   "palette": "lotus pink and celadon",
-  "magnificUrl": "https://www.magnific.com/app/creation/bxT2OPA5Y2",
-  "bg": "TdSkf0KVNR",
+  "magnificUrl": "https://www.magnific.com/app/creation/yiCt0EIPW9",
+  "bg": "gOIezkDSXO",
   "sheet": "N-c20-t8",
   "file": "img/fig-consort-c20-t8-a36.webp",
-  "por": "img/por-consort-c20-t8-a36.webp",
-  "rematte": "1lpYlcpr4r",
-  "solidSheer": true
+  "por": "img/por-consort-c20-t8-a36.webp"
  },
  {
   "role": "consort",
@@ -9385,13 +9301,11 @@
   "ageBand": "a51",
   "look": "dangi",
   "palette": "lotus pink and celadon",
-  "magnificUrl": "https://www.magnific.com/app/creation/bxT2OPA5Y2",
-  "bg": "TdSkf0KVNR",
+  "magnificUrl": "https://www.magnific.com/app/creation/yiCt0EIPW9",
+  "bg": "gOIezkDSXO",
   "sheet": "N-c20-t8",
   "file": "img/fig-consort-c20-t8-a51.webp",
-  "por": "img/por-consort-c20-t8-a51.webp",
-  "rematte": "KLMzLWPkqp",
-  "solidSheer": true
+  "por": "img/por-consort-c20-t8-a51.webp"
  },
  {
   "role": "consort",
@@ -9660,8 +9574,8 @@
   "ageBand": "a18",
   "look": "dangi",
   "palette": "ruby and blush pink",
-  "magnificUrl": "https://www.magnific.com/app/creation/gOIDqDBSXO",
-  "bg": "yiC8gh1PW9",
+  "magnificUrl": "https://www.magnific.com/app/creation/TdSxLh1VNR",
+  "bg": "ksDWVak16B",
   "sheet": "N-c21-t5",
   "file": "img/fig-consort-c21-t5-a18.webp",
   "por": "img/por-consort-c21-t5-a18.webp"
@@ -9673,8 +9587,8 @@
   "ageBand": "a26",
   "look": "dangi",
   "palette": "ruby and blush pink",
-  "magnificUrl": "https://www.magnific.com/app/creation/gOIDqDBSXO",
-  "bg": "yiC8gh1PW9",
+  "magnificUrl": "https://www.magnific.com/app/creation/TdSxLh1VNR",
+  "bg": "ksDWVak16B",
   "sheet": "N-c21-t5",
   "file": "img/fig-consort-c21-t5-a26.webp",
   "por": "img/por-consort-c21-t5-a26.webp"
@@ -9686,8 +9600,8 @@
   "ageBand": "a36",
   "look": "dangi",
   "palette": "ruby and blush pink",
-  "magnificUrl": "https://www.magnific.com/app/creation/gOIDqDBSXO",
-  "bg": "yiC8gh1PW9",
+  "magnificUrl": "https://www.magnific.com/app/creation/TdSxLh1VNR",
+  "bg": "ksDWVak16B",
   "sheet": "N-c21-t5",
   "file": "img/fig-consort-c21-t5-a36.webp",
   "por": "img/por-consort-c21-t5-a36.webp"
@@ -9699,8 +9613,8 @@
   "ageBand": "a51",
   "look": "dangi",
   "palette": "ruby and blush pink",
-  "magnificUrl": "https://www.magnific.com/app/creation/gOIDqDBSXO",
-  "bg": "yiC8gh1PW9",
+  "magnificUrl": "https://www.magnific.com/app/creation/TdSxLh1VNR",
+  "bg": "ksDWVak16B",
   "sheet": "N-c21-t5",
   "file": "img/fig-consort-c21-t5-a51.webp",
   "por": "img/por-consort-c21-t5-a51.webp"
@@ -9764,8 +9678,8 @@
   "ageBand": "a18",
   "look": "dangi",
   "palette": "ruby and blush pink",
-  "magnificUrl": "https://www.magnific.com/app/creation/3zbv9hFREY",
-  "bg": "KLMAbjHkqp",
+  "magnificUrl": "https://www.magnific.com/app/creation/WDskTMacXe",
+  "bg": "6AHf0dEiJO",
   "sheet": "N-c21-t7",
   "file": "img/fig-consort-c21-t7-a18.webp",
   "por": "img/por-consort-c21-t7-a18.webp"
@@ -9777,8 +9691,8 @@
   "ageBand": "a26",
   "look": "dangi",
   "palette": "ruby and blush pink",
-  "magnificUrl": "https://www.magnific.com/app/creation/3zbv9hFREY",
-  "bg": "KLMAbjHkqp",
+  "magnificUrl": "https://www.magnific.com/app/creation/WDskTMacXe",
+  "bg": "6AHf0dEiJO",
   "sheet": "N-c21-t7",
   "file": "img/fig-consort-c21-t7-a26.webp",
   "por": "img/por-consort-c21-t7-a26.webp"
@@ -9790,8 +9704,8 @@
   "ageBand": "a36",
   "look": "dangi",
   "palette": "ruby and blush pink",
-  "magnificUrl": "https://www.magnific.com/app/creation/3zbv9hFREY",
-  "bg": "KLMAbjHkqp",
+  "magnificUrl": "https://www.magnific.com/app/creation/WDskTMacXe",
+  "bg": "6AHf0dEiJO",
   "sheet": "N-c21-t7",
   "file": "img/fig-consort-c21-t7-a36.webp",
   "por": "img/por-consort-c21-t7-a36.webp"
@@ -9803,8 +9717,8 @@
   "ageBand": "a51",
   "look": "dangi",
   "palette": "ruby and blush pink",
-  "magnificUrl": "https://www.magnific.com/app/creation/3zbv9hFREY",
-  "bg": "KLMAbjHkqp",
+  "magnificUrl": "https://www.magnific.com/app/creation/WDskTMacXe",
+  "bg": "6AHf0dEiJO",
   "sheet": "N-c21-t7",
   "file": "img/fig-consort-c21-t7-a51.webp",
   "por": "img/por-consort-c21-t7-a51.webp"
@@ -9816,8 +9730,8 @@
   "ageBand": "a18",
   "look": "dangi",
   "palette": "ruby and blush pink",
-  "magnificUrl": "https://www.magnific.com/app/creation/vQZyjY7a47",
-  "bg": "O6fBcDEynm",
+  "magnificUrl": "https://www.magnific.com/app/creation/P3EmTFA42C",
+  "bg": "gOIez1pSXO",
   "sheet": "N-c21-t8",
   "file": "img/fig-consort-c21-t8-a18.webp",
   "por": "img/por-consort-c21-t8-a18.webp"
@@ -9829,8 +9743,8 @@
   "ageBand": "a26",
   "look": "dangi",
   "palette": "ruby and blush pink",
-  "magnificUrl": "https://www.magnific.com/app/creation/vQZyjY7a47",
-  "bg": "O6fBcDEynm",
+  "magnificUrl": "https://www.magnific.com/app/creation/P3EmTFA42C",
+  "bg": "gOIez1pSXO",
   "sheet": "N-c21-t8",
   "file": "img/fig-consort-c21-t8-a26.webp",
   "por": "img/por-consort-c21-t8-a26.webp"
@@ -9842,8 +9756,8 @@
   "ageBand": "a36",
   "look": "dangi",
   "palette": "ruby and blush pink",
-  "magnificUrl": "https://www.magnific.com/app/creation/vQZyjY7a47",
-  "bg": "O6fBcDEynm",
+  "magnificUrl": "https://www.magnific.com/app/creation/P3EmTFA42C",
+  "bg": "gOIez1pSXO",
   "sheet": "N-c21-t8",
   "file": "img/fig-consort-c21-t8-a36.webp",
   "por": "img/por-consort-c21-t8-a36.webp"
@@ -9855,8 +9769,8 @@
   "ageBand": "a51",
   "look": "dangi",
   "palette": "ruby and blush pink",
-  "magnificUrl": "https://www.magnific.com/app/creation/vQZyjY7a47",
-  "bg": "O6fBcDEynm",
+  "magnificUrl": "https://www.magnific.com/app/creation/P3EmTFA42C",
+  "bg": "gOIez1pSXO",
   "sheet": "N-c21-t8",
   "file": "img/fig-consort-c21-t8-a51.webp",
   "por": "img/por-consort-c21-t8-a51.webp"
@@ -10128,8 +10042,8 @@
   "ageBand": "a18",
   "look": "dangi",
   "palette": "orchid purple and pink",
-  "magnificUrl": "https://www.magnific.com/app/creation/N2Fhlvy6D9",
-  "bg": "Sytpr8PUb8",
+  "magnificUrl": "https://www.magnific.com/app/creation/4Ruhacs9Aa",
+  "bg": "rge0DErxtc",
   "sheet": "N-c22-t5",
   "file": "img/fig-consort-c22-t5-a18.webp",
   "por": "img/por-consort-c22-t5-a18.webp"
@@ -10141,8 +10055,8 @@
   "ageBand": "a26",
   "look": "dangi",
   "palette": "orchid purple and pink",
-  "magnificUrl": "https://www.magnific.com/app/creation/N2Fhlvy6D9",
-  "bg": "Sytpr8PUb8",
+  "magnificUrl": "https://www.magnific.com/app/creation/4Ruhacs9Aa",
+  "bg": "rge0DErxtc",
   "sheet": "N-c22-t5",
   "file": "img/fig-consort-c22-t5-a26.webp",
   "por": "img/por-consort-c22-t5-a26.webp"
@@ -10154,8 +10068,8 @@
   "ageBand": "a36",
   "look": "dangi",
   "palette": "orchid purple and pink",
-  "magnificUrl": "https://www.magnific.com/app/creation/N2Fhlvy6D9",
-  "bg": "Sytpr8PUb8",
+  "magnificUrl": "https://www.magnific.com/app/creation/4Ruhacs9Aa",
+  "bg": "rge0DErxtc",
   "sheet": "N-c22-t5",
   "file": "img/fig-consort-c22-t5-a36.webp",
   "por": "img/por-consort-c22-t5-a36.webp"
@@ -10167,8 +10081,8 @@
   "ageBand": "a51",
   "look": "dangi",
   "palette": "orchid purple and pink",
-  "magnificUrl": "https://www.magnific.com/app/creation/N2Fhlvy6D9",
-  "bg": "Sytpr8PUb8",
+  "magnificUrl": "https://www.magnific.com/app/creation/4Ruhacs9Aa",
+  "bg": "rge0DErxtc",
   "sheet": "N-c22-t5",
   "file": "img/fig-consort-c22-t5-a51.webp",
   "por": "img/por-consort-c22-t5-a51.webp"
@@ -10232,8 +10146,8 @@
   "ageBand": "a18",
   "look": "dangi",
   "palette": "orchid purple and pink",
-  "magnificUrl": "https://www.magnific.com/app/creation/YMLHGkGWeC",
-  "bg": "yiCBJptPW9",
+  "magnificUrl": "https://www.magnific.com/app/creation/P3EmN3l42C",
+  "bg": "6AHf0XuiJO",
   "sheet": "N-c22-t7",
   "file": "img/fig-consort-c22-t7-a18.webp",
   "por": "img/por-consort-c22-t7-a18.webp"
@@ -10245,8 +10159,8 @@
   "ageBand": "a26",
   "look": "dangi",
   "palette": "orchid purple and pink",
-  "magnificUrl": "https://www.magnific.com/app/creation/YMLHGkGWeC",
-  "bg": "yiCBJptPW9",
+  "magnificUrl": "https://www.magnific.com/app/creation/P3EmN3l42C",
+  "bg": "6AHf0XuiJO",
   "sheet": "N-c22-t7",
   "file": "img/fig-consort-c22-t7-a26.webp",
   "por": "img/por-consort-c22-t7-a26.webp"
@@ -10258,8 +10172,8 @@
   "ageBand": "a36",
   "look": "dangi",
   "palette": "orchid purple and pink",
-  "magnificUrl": "https://www.magnific.com/app/creation/YMLHGkGWeC",
-  "bg": "yiCBJptPW9",
+  "magnificUrl": "https://www.magnific.com/app/creation/P3EmN3l42C",
+  "bg": "6AHf0XuiJO",
   "sheet": "N-c22-t7",
   "file": "img/fig-consort-c22-t7-a36.webp",
   "por": "img/por-consort-c22-t7-a36.webp"
@@ -10271,8 +10185,8 @@
   "ageBand": "a51",
   "look": "dangi",
   "palette": "orchid purple and pink",
-  "magnificUrl": "https://www.magnific.com/app/creation/YMLHGkGWeC",
-  "bg": "yiCBJptPW9",
+  "magnificUrl": "https://www.magnific.com/app/creation/P3EmN3l42C",
+  "bg": "6AHf0XuiJO",
   "sheet": "N-c22-t7",
   "file": "img/fig-consort-c22-t7-a51.webp",
   "por": "img/por-consort-c22-t7-a51.webp"
@@ -10284,8 +10198,8 @@
   "ageBand": "a18",
   "look": "dangi",
   "palette": "orchid purple and pink",
-  "magnificUrl": "https://www.magnific.com/app/creation/JNaXYHnOq4",
-  "bg": "9ZQtMBdNYZ",
+  "magnificUrl": "https://www.magnific.com/app/creation/xSdTi8pjfW",
+  "bg": "s7oDAkBl8e",
   "sheet": "N-c22-t8",
   "file": "img/fig-consort-c22-t8-a18.webp",
   "por": "img/por-consort-c22-t8-a18.webp"
@@ -10297,8 +10211,8 @@
   "ageBand": "a26",
   "look": "dangi",
   "palette": "orchid purple and pink",
-  "magnificUrl": "https://www.magnific.com/app/creation/JNaXYHnOq4",
-  "bg": "9ZQtMBdNYZ",
+  "magnificUrl": "https://www.magnific.com/app/creation/xSdTi8pjfW",
+  "bg": "s7oDAkBl8e",
   "sheet": "N-c22-t8",
   "file": "img/fig-consort-c22-t8-a26.webp",
   "por": "img/por-consort-c22-t8-a26.webp"
@@ -10310,13 +10224,11 @@
   "ageBand": "a36",
   "look": "dangi",
   "palette": "orchid purple and pink",
-  "magnificUrl": "https://www.magnific.com/app/creation/JNaXYHnOq4",
-  "bg": "9ZQtMBdNYZ",
+  "magnificUrl": "https://www.magnific.com/app/creation/xSdTi8pjfW",
+  "bg": "s7oDAkBl8e",
   "sheet": "N-c22-t8",
   "file": "img/fig-consort-c22-t8-a36.webp",
-  "por": "img/por-consort-c22-t8-a36.webp",
-  "rematte": "xSdcSVxjfW",
-  "solidSheer": true
+  "por": "img/por-consort-c22-t8-a36.webp"
  },
  {
   "role": "consort",
@@ -10325,8 +10237,8 @@
   "ageBand": "a51",
   "look": "dangi",
   "palette": "orchid purple and pink",
-  "magnificUrl": "https://www.magnific.com/app/creation/JNaXYHnOq4",
-  "bg": "9ZQtMBdNYZ",
+  "magnificUrl": "https://www.magnific.com/app/creation/xSdTi8pjfW",
+  "bg": "s7oDAkBl8e",
   "sheet": "N-c22-t8",
   "file": "img/fig-consort-c22-t8-a51.webp",
   "por": "img/por-consort-c22-t8-a51.webp"
@@ -10598,8 +10510,8 @@
   "ageBand": "a18",
   "look": "thamvong",
   "palette": "crimson and gold",
-  "magnificUrl": "https://www.magnific.com/app/creation/3zbfUuUREY",
-  "bg": "1lpYFMQr4r",
+  "magnificUrl": "https://www.magnific.com/app/creation/nVj5ktmYQD",
+  "bg": "s7oDXqbl8e",
   "sheet": "N-c23-t5",
   "file": "img/fig-consort-c23-t5-a18.webp",
   "por": "img/por-consort-c23-t5-a18.webp"
@@ -10611,8 +10523,8 @@
   "ageBand": "a26",
   "look": "thamvong",
   "palette": "crimson and gold",
-  "magnificUrl": "https://www.magnific.com/app/creation/3zbfUuUREY",
-  "bg": "1lpYFMQr4r",
+  "magnificUrl": "https://www.magnific.com/app/creation/nVj5ktmYQD",
+  "bg": "s7oDXqbl8e",
   "sheet": "N-c23-t5",
   "file": "img/fig-consort-c23-t5-a26.webp",
   "por": "img/por-consort-c23-t5-a26.webp"
@@ -10624,8 +10536,8 @@
   "ageBand": "a36",
   "look": "thamvong",
   "palette": "crimson and gold",
-  "magnificUrl": "https://www.magnific.com/app/creation/3zbfUuUREY",
-  "bg": "1lpYFMQr4r",
+  "magnificUrl": "https://www.magnific.com/app/creation/nVj5ktmYQD",
+  "bg": "s7oDXqbl8e",
   "sheet": "N-c23-t5",
   "file": "img/fig-consort-c23-t5-a36.webp",
   "por": "img/por-consort-c23-t5-a36.webp"
@@ -10637,8 +10549,8 @@
   "ageBand": "a51",
   "look": "thamvong",
   "palette": "crimson and gold",
-  "magnificUrl": "https://www.magnific.com/app/creation/3zbfUuUREY",
-  "bg": "1lpYFMQr4r",
+  "magnificUrl": "https://www.magnific.com/app/creation/nVj5ktmYQD",
+  "bg": "s7oDXqbl8e",
   "sheet": "N-c23-t5",
   "file": "img/fig-consort-c23-t5-a51.webp",
   "por": "img/por-consort-c23-t5-a51.webp"
@@ -10702,8 +10614,8 @@
   "ageBand": "a18",
   "look": "thamvong",
   "palette": "crimson and gold",
-  "magnificUrl": "https://www.magnific.com/app/creation/9ZQIyflNYZ",
-  "bg": "fHAPvJcCDY",
+  "magnificUrl": "https://www.magnific.com/app/creation/yiCt9RYPW9",
+  "bg": "aF2N1UrfSh",
   "sheet": "N-c23-t7",
   "file": "img/fig-consort-c23-t7-a18.webp",
   "por": "img/por-consort-c23-t7-a18.webp"
@@ -10715,8 +10627,8 @@
   "ageBand": "a26",
   "look": "thamvong",
   "palette": "crimson and gold",
-  "magnificUrl": "https://www.magnific.com/app/creation/9ZQIyflNYZ",
-  "bg": "fHAPvJcCDY",
+  "magnificUrl": "https://www.magnific.com/app/creation/yiCt9RYPW9",
+  "bg": "aF2N1UrfSh",
   "sheet": "N-c23-t7",
   "file": "img/fig-consort-c23-t7-a26.webp",
   "por": "img/por-consort-c23-t7-a26.webp"
@@ -10728,8 +10640,8 @@
   "ageBand": "a36",
   "look": "thamvong",
   "palette": "crimson and gold",
-  "magnificUrl": "https://www.magnific.com/app/creation/9ZQIyflNYZ",
-  "bg": "fHAPvJcCDY",
+  "magnificUrl": "https://www.magnific.com/app/creation/yiCt9RYPW9",
+  "bg": "aF2N1UrfSh",
   "sheet": "N-c23-t7",
   "file": "img/fig-consort-c23-t7-a36.webp",
   "por": "img/por-consort-c23-t7-a36.webp"
@@ -10741,8 +10653,8 @@
   "ageBand": "a51",
   "look": "thamvong",
   "palette": "crimson and gold",
-  "magnificUrl": "https://www.magnific.com/app/creation/9ZQIyflNYZ",
-  "bg": "fHAPvJcCDY",
+  "magnificUrl": "https://www.magnific.com/app/creation/yiCt9RYPW9",
+  "bg": "aF2N1UrfSh",
   "sheet": "N-c23-t7",
   "file": "img/fig-consort-c23-t7-a51.webp",
   "por": "img/por-consort-c23-t7-a51.webp"
@@ -10754,12 +10666,11 @@
   "ageBand": "a18",
   "look": "thamvong",
   "palette": "crimson and gold",
-  "magnificUrl": "https://www.magnific.com/app/creation/cpl5aTd0eP",
-  "bg": "aF2PscPfSh",
+  "magnificUrl": "https://www.magnific.com/app/creation/8aNJk2jIrU",
+  "bg": "8aNJrePIrU",
   "sheet": "N-c23-t8",
   "file": "img/fig-consort-c23-t8-a18.webp",
-  "por": "img/por-consort-c23-t8-a18.webp",
-  "solidSheer": true
+  "por": "img/por-consort-c23-t8-a18.webp"
  },
  {
   "role": "consort",
@@ -10768,13 +10679,11 @@
   "ageBand": "a26",
   "look": "thamvong",
   "palette": "crimson and gold",
-  "magnificUrl": "https://www.magnific.com/app/creation/cpl5aTd0eP",
-  "bg": "aF2PscPfSh",
+  "magnificUrl": "https://www.magnific.com/app/creation/8aNJk2jIrU",
+  "bg": "8aNJrePIrU",
   "sheet": "N-c23-t8",
   "file": "img/fig-consort-c23-t8-a26.webp",
-  "por": "img/por-consort-c23-t8-a26.webp",
-  "rematte": "SytpyfsUb8",
-  "solidSheer": true
+  "por": "img/por-consort-c23-t8-a26.webp"
  },
  {
   "role": "consort",
@@ -10783,13 +10692,11 @@
   "ageBand": "a36",
   "look": "thamvong",
   "palette": "crimson and gold",
-  "magnificUrl": "https://www.magnific.com/app/creation/cpl5aTd0eP",
-  "bg": "aF2PscPfSh",
+  "magnificUrl": "https://www.magnific.com/app/creation/8aNJk2jIrU",
+  "bg": "8aNJrePIrU",
   "sheet": "N-c23-t8",
   "file": "img/fig-consort-c23-t8-a36.webp",
-  "por": "img/por-consort-c23-t8-a36.webp",
-  "rematte": "mE3OEzihJQ",
-  "solidSheer": true
+  "por": "img/por-consort-c23-t8-a36.webp"
  },
  {
   "role": "consort",
@@ -10798,13 +10705,11 @@
   "ageBand": "a51",
   "look": "thamvong",
   "palette": "crimson and gold",
-  "magnificUrl": "https://www.magnific.com/app/creation/cpl5aTd0eP",
-  "bg": "aF2PscPfSh",
+  "magnificUrl": "https://www.magnific.com/app/creation/8aNJk2jIrU",
+  "bg": "8aNJrePIrU",
   "sheet": "N-c23-t8",
   "file": "img/fig-consort-c23-t8-a51.webp",
-  "por": "img/por-consort-c23-t8-a51.webp",
-  "rematte": "ov9Uv2g829",
-  "solidSheer": true
+  "por": "img/por-consort-c23-t8-a51.webp"
  },
  {
   "role": "consort",
@@ -11073,8 +10978,8 @@
   "ageBand": "a18",
   "look": "thamvong",
   "palette": "scarlet and ivory",
-  "magnificUrl": "https://www.magnific.com/app/creation/gOIDrdeSXO",
-  "bg": "5jVGQ9rKxe",
+  "magnificUrl": "https://www.magnific.com/app/creation/eIOgUHjdqL",
+  "bg": "huR4ieVvqL",
   "sheet": "N-c24-t5",
   "file": "img/fig-consort-c24-t5-a18.webp",
   "por": "img/por-consort-c24-t5-a18.webp"
@@ -11086,8 +10991,8 @@
   "ageBand": "a26",
   "look": "thamvong",
   "palette": "scarlet and ivory",
-  "magnificUrl": "https://www.magnific.com/app/creation/gOIDrdeSXO",
-  "bg": "5jVGQ9rKxe",
+  "magnificUrl": "https://www.magnific.com/app/creation/eIOgUHjdqL",
+  "bg": "huR4ieVvqL",
   "sheet": "N-c24-t5",
   "file": "img/fig-consort-c24-t5-a26.webp",
   "por": "img/por-consort-c24-t5-a26.webp"
@@ -11099,8 +11004,8 @@
   "ageBand": "a36",
   "look": "thamvong",
   "palette": "scarlet and ivory",
-  "magnificUrl": "https://www.magnific.com/app/creation/gOIDrdeSXO",
-  "bg": "5jVGQ9rKxe",
+  "magnificUrl": "https://www.magnific.com/app/creation/eIOgUHjdqL",
+  "bg": "huR4ieVvqL",
   "sheet": "N-c24-t5",
   "file": "img/fig-consort-c24-t5-a36.webp",
   "por": "img/por-consort-c24-t5-a36.webp"
@@ -11112,8 +11017,8 @@
   "ageBand": "a51",
   "look": "thamvong",
   "palette": "scarlet and ivory",
-  "magnificUrl": "https://www.magnific.com/app/creation/gOIDrdeSXO",
-  "bg": "5jVGQ9rKxe",
+  "magnificUrl": "https://www.magnific.com/app/creation/eIOgUHjdqL",
+  "bg": "huR4ieVvqL",
   "sheet": "N-c24-t5",
   "file": "img/fig-consort-c24-t5-a51.webp",
   "por": "img/por-consort-c24-t5-a51.webp"
@@ -11177,8 +11082,8 @@
   "ageBand": "a18",
   "look": "thamvong",
   "palette": "scarlet and ivory",
-  "magnificUrl": "https://www.magnific.com/app/creation/yiCBx2oPW9",
-  "bg": "dtyLnkfXSL",
+  "magnificUrl": "https://www.magnific.com/app/creation/O6fI4RHynm",
+  "bg": "P3EmnpJ42C",
   "sheet": "N-c24-t7",
   "file": "img/fig-consort-c24-t7-a18.webp",
   "por": "img/por-consort-c24-t7-a18.webp"
@@ -11190,8 +11095,8 @@
   "ageBand": "a26",
   "look": "thamvong",
   "palette": "scarlet and ivory",
-  "magnificUrl": "https://www.magnific.com/app/creation/yiCBx2oPW9",
-  "bg": "dtyLnkfXSL",
+  "magnificUrl": "https://www.magnific.com/app/creation/O6fI4RHynm",
+  "bg": "P3EmnpJ42C",
   "sheet": "N-c24-t7",
   "file": "img/fig-consort-c24-t7-a26.webp",
   "por": "img/por-consort-c24-t7-a26.webp"
@@ -11203,8 +11108,8 @@
   "ageBand": "a36",
   "look": "thamvong",
   "palette": "scarlet and ivory",
-  "magnificUrl": "https://www.magnific.com/app/creation/yiCBx2oPW9",
-  "bg": "dtyLnkfXSL",
+  "magnificUrl": "https://www.magnific.com/app/creation/O6fI4RHynm",
+  "bg": "P3EmnpJ42C",
   "sheet": "N-c24-t7",
   "file": "img/fig-consort-c24-t7-a36.webp",
   "por": "img/por-consort-c24-t7-a36.webp"
@@ -11216,8 +11121,8 @@
   "ageBand": "a51",
   "look": "thamvong",
   "palette": "scarlet and ivory",
-  "magnificUrl": "https://www.magnific.com/app/creation/yiCBx2oPW9",
-  "bg": "dtyLnkfXSL",
+  "magnificUrl": "https://www.magnific.com/app/creation/O6fI4RHynm",
+  "bg": "P3EmnpJ42C",
   "sheet": "N-c24-t7",
   "file": "img/fig-consort-c24-t7-a51.webp",
   "por": "img/por-consort-c24-t7-a51.webp"
@@ -11229,8 +11134,8 @@
   "ageBand": "a18",
   "look": "thamvong",
   "palette": "scarlet and ivory",
-  "magnificUrl": "https://www.magnific.com/app/creation/tCi7rS1mZJ",
-  "bg": "9ZQtDARNYZ",
+  "magnificUrl": "https://www.magnific.com/app/creation/SytdGErUb8",
+  "bg": "Ebz3wvIuuO",
   "sheet": "N-c24-t8",
   "file": "img/fig-consort-c24-t8-a18.webp",
   "por": "img/por-consort-c24-t8-a18.webp"
@@ -11242,8 +11147,8 @@
   "ageBand": "a26",
   "look": "thamvong",
   "palette": "scarlet and ivory",
-  "magnificUrl": "https://www.magnific.com/app/creation/tCi7rS1mZJ",
-  "bg": "9ZQtDARNYZ",
+  "magnificUrl": "https://www.magnific.com/app/creation/SytdGErUb8",
+  "bg": "Ebz3wvIuuO",
   "sheet": "N-c24-t8",
   "file": "img/fig-consort-c24-t8-a26.webp",
   "por": "img/por-consort-c24-t8-a26.webp"
@@ -11255,8 +11160,8 @@
   "ageBand": "a36",
   "look": "thamvong",
   "palette": "scarlet and ivory",
-  "magnificUrl": "https://www.magnific.com/app/creation/tCi7rS1mZJ",
-  "bg": "9ZQtDARNYZ",
+  "magnificUrl": "https://www.magnific.com/app/creation/SytdGErUb8",
+  "bg": "Ebz3wvIuuO",
   "sheet": "N-c24-t8",
   "file": "img/fig-consort-c24-t8-a36.webp",
   "por": "img/por-consort-c24-t8-a36.webp"
@@ -11268,8 +11173,8 @@
   "ageBand": "a51",
   "look": "thamvong",
   "palette": "scarlet and ivory",
-  "magnificUrl": "https://www.magnific.com/app/creation/tCi7rS1mZJ",
-  "bg": "9ZQtDARNYZ",
+  "magnificUrl": "https://www.magnific.com/app/creation/SytdGErUb8",
+  "bg": "Ebz3wvIuuO",
   "sheet": "N-c24-t8",
   "file": "img/fig-consort-c24-t8-a51.webp",
   "por": "img/por-consort-c24-t8-a51.webp"
@@ -11541,8 +11446,8 @@
   "ageBand": "a18",
   "look": "thamvong",
   "palette": "deep cherry red and black-gold",
-  "magnificUrl": "https://www.magnific.com/app/creation/1lpYfM5r4r",
-  "bg": "LwBT5BXswO",
+  "magnificUrl": "https://www.magnific.com/app/creation/ksDW0Df16B",
+  "bg": "XmPUOd8Bfo",
   "sheet": "N-c25-t5",
   "file": "img/fig-consort-c25-t5-a18.webp",
   "por": "img/por-consort-c25-t5-a18.webp"
@@ -11554,8 +11459,8 @@
   "ageBand": "a26",
   "look": "thamvong",
   "palette": "deep cherry red and black-gold",
-  "magnificUrl": "https://www.magnific.com/app/creation/1lpYfM5r4r",
-  "bg": "LwBT5BXswO",
+  "magnificUrl": "https://www.magnific.com/app/creation/ksDW0Df16B",
+  "bg": "XmPUOd8Bfo",
   "sheet": "N-c25-t5",
   "file": "img/fig-consort-c25-t5-a26.webp",
   "por": "img/por-consort-c25-t5-a26.webp"
@@ -11567,8 +11472,8 @@
   "ageBand": "a36",
   "look": "thamvong",
   "palette": "deep cherry red and black-gold",
-  "magnificUrl": "https://www.magnific.com/app/creation/1lpYfM5r4r",
-  "bg": "LwBT5BXswO",
+  "magnificUrl": "https://www.magnific.com/app/creation/ksDW0Df16B",
+  "bg": "XmPUOd8Bfo",
   "sheet": "N-c25-t5",
   "file": "img/fig-consort-c25-t5-a36.webp",
   "por": "img/por-consort-c25-t5-a36.webp"
@@ -11580,8 +11485,8 @@
   "ageBand": "a51",
   "look": "thamvong",
   "palette": "deep cherry red and black-gold",
-  "magnificUrl": "https://www.magnific.com/app/creation/1lpYfM5r4r",
-  "bg": "LwBT5BXswO",
+  "magnificUrl": "https://www.magnific.com/app/creation/ksDW0Df16B",
+  "bg": "XmPUOd8Bfo",
   "sheet": "N-c25-t5",
   "file": "img/fig-consort-c25-t5-a51.webp",
   "por": "img/por-consort-c25-t5-a51.webp"
@@ -11645,8 +11550,8 @@
   "ageBand": "a18",
   "look": "thamvong",
   "palette": "deep cherry red and black-gold",
-  "magnificUrl": "https://www.magnific.com/app/creation/mE378NNhJQ",
-  "bg": "N2Ft4856D9",
+  "magnificUrl": "https://www.magnific.com/app/creation/tCiyb00mZJ",
+  "bg": "CqGiLZyEEy",
   "sheet": "N-c25-t7",
   "file": "img/fig-consort-c25-t7-a18.webp",
   "por": "img/por-consort-c25-t7-a18.webp"
@@ -11658,8 +11563,8 @@
   "ageBand": "a26",
   "look": "thamvong",
   "palette": "deep cherry red and black-gold",
-  "magnificUrl": "https://www.magnific.com/app/creation/mE378NNhJQ",
-  "bg": "N2Ft4856D9",
+  "magnificUrl": "https://www.magnific.com/app/creation/tCiyb00mZJ",
+  "bg": "CqGiLZyEEy",
   "sheet": "N-c25-t7",
   "file": "img/fig-consort-c25-t7-a26.webp",
   "por": "img/por-consort-c25-t7-a26.webp"
@@ -11671,8 +11576,8 @@
   "ageBand": "a36",
   "look": "thamvong",
   "palette": "deep cherry red and black-gold",
-  "magnificUrl": "https://www.magnific.com/app/creation/mE378NNhJQ",
-  "bg": "N2Ft4856D9",
+  "magnificUrl": "https://www.magnific.com/app/creation/tCiyb00mZJ",
+  "bg": "CqGiLZyEEy",
   "sheet": "N-c25-t7",
   "file": "img/fig-consort-c25-t7-a36.webp",
   "por": "img/por-consort-c25-t7-a36.webp"
@@ -11684,8 +11589,8 @@
   "ageBand": "a51",
   "look": "thamvong",
   "palette": "deep cherry red and black-gold",
-  "magnificUrl": "https://www.magnific.com/app/creation/mE378NNhJQ",
-  "bg": "N2Ft4856D9",
+  "magnificUrl": "https://www.magnific.com/app/creation/tCiyb00mZJ",
+  "bg": "CqGiLZyEEy",
   "sheet": "N-c25-t7",
   "file": "img/fig-consort-c25-t7-a51.webp",
   "por": "img/por-consort-c25-t7-a51.webp"
@@ -11697,12 +11602,11 @@
   "ageBand": "a18",
   "look": "thamvong",
   "palette": "deep cherry red and black-gold",
-  "magnificUrl": "https://www.magnific.com/app/creation/4RuIVon9Aa",
-  "bg": "w4heYNh7EI",
+  "magnificUrl": "https://www.magnific.com/app/creation/4RuhMZ79Aa",
+  "bg": "cpl1E3z0eP",
   "sheet": "N-c25-t8",
   "file": "img/fig-consort-c25-t8-a18.webp",
-  "por": "img/por-consort-c25-t8-a18.webp",
-  "solidSheer": true
+  "por": "img/por-consort-c25-t8-a18.webp"
  },
  {
   "role": "consort",
@@ -11711,8 +11615,8 @@
   "ageBand": "a26",
   "look": "thamvong",
   "palette": "deep cherry red and black-gold",
-  "magnificUrl": "https://www.magnific.com/app/creation/4RuIVon9Aa",
-  "bg": "w4heYNh7EI",
+  "magnificUrl": "https://www.magnific.com/app/creation/4RuhMZ79Aa",
+  "bg": "cpl1E3z0eP",
   "sheet": "N-c25-t8",
   "file": "img/fig-consort-c25-t8-a26.webp",
   "por": "img/por-consort-c25-t8-a26.webp"
@@ -11724,8 +11628,8 @@
   "ageBand": "a36",
   "look": "thamvong",
   "palette": "deep cherry red and black-gold",
-  "magnificUrl": "https://www.magnific.com/app/creation/4RuIVon9Aa",
-  "bg": "w4heYNh7EI",
+  "magnificUrl": "https://www.magnific.com/app/creation/4RuhMZ79Aa",
+  "bg": "cpl1E3z0eP",
   "sheet": "N-c25-t8",
   "file": "img/fig-consort-c25-t8-a36.webp",
   "por": "img/por-consort-c25-t8-a36.webp"
@@ -11737,8 +11641,8 @@
   "ageBand": "a51",
   "look": "thamvong",
   "palette": "deep cherry red and black-gold",
-  "magnificUrl": "https://www.magnific.com/app/creation/4RuIVon9Aa",
-  "bg": "w4heYNh7EI",
+  "magnificUrl": "https://www.magnific.com/app/creation/4RuhMZ79Aa",
+  "bg": "cpl1E3z0eP",
   "sheet": "N-c25-t8",
   "file": "img/fig-consort-c25-t8-a51.webp",
   "por": "img/por-consort-c25-t8-a51.webp"
@@ -12010,8 +11914,8 @@
   "ageBand": "a18",
   "look": "thamvong",
   "palette": "burgundy and gold",
-  "magnificUrl": "https://www.magnific.com/app/creation/xSdcEq8jfW",
-  "bg": "eIOscykdqL",
+  "magnificUrl": "https://www.magnific.com/app/creation/0egrjUkTfW",
+  "bg": "bxTzcqE5Y2",
   "sheet": "N-c26-t5",
   "file": "img/fig-consort-c26-t5-a18.webp",
   "por": "img/por-consort-c26-t5-a18.webp"
@@ -12023,8 +11927,8 @@
   "ageBand": "a26",
   "look": "thamvong",
   "palette": "burgundy and gold",
-  "magnificUrl": "https://www.magnific.com/app/creation/xSdcEq8jfW",
-  "bg": "eIOscykdqL",
+  "magnificUrl": "https://www.magnific.com/app/creation/0egrjUkTfW",
+  "bg": "bxTzcqE5Y2",
   "sheet": "N-c26-t5",
   "file": "img/fig-consort-c26-t5-a26.webp",
   "por": "img/por-consort-c26-t5-a26.webp"
@@ -12036,8 +11940,8 @@
   "ageBand": "a36",
   "look": "thamvong",
   "palette": "burgundy and gold",
-  "magnificUrl": "https://www.magnific.com/app/creation/xSdcEq8jfW",
-  "bg": "eIOscykdqL",
+  "magnificUrl": "https://www.magnific.com/app/creation/0egrjUkTfW",
+  "bg": "bxTzcqE5Y2",
   "sheet": "N-c26-t5",
   "file": "img/fig-consort-c26-t5-a36.webp",
   "por": "img/por-consort-c26-t5-a36.webp"
@@ -12049,8 +11953,8 @@
   "ageBand": "a51",
   "look": "thamvong",
   "palette": "burgundy and gold",
-  "magnificUrl": "https://www.magnific.com/app/creation/xSdcEq8jfW",
-  "bg": "eIOscykdqL",
+  "magnificUrl": "https://www.magnific.com/app/creation/0egrjUkTfW",
+  "bg": "bxTzcqE5Y2",
   "sheet": "N-c26-t5",
   "file": "img/fig-consort-c26-t5-a51.webp",
   "por": "img/por-consort-c26-t5-a51.webp"
@@ -12114,8 +12018,8 @@
   "ageBand": "a18",
   "look": "thamvong",
   "palette": "burgundy and gold",
-  "magnificUrl": "https://www.magnific.com/app/creation/8aNSX4JIrU",
-  "bg": "1lpzKGer4r",
+  "magnificUrl": "https://www.magnific.com/app/creation/ksDWJfR16B",
+  "bg": "ov97qPu829",
   "sheet": "N-c26-t7",
   "file": "img/fig-consort-c26-t7-a18.webp",
   "por": "img/por-consort-c26-t7-a18.webp"
@@ -12127,8 +12031,8 @@
   "ageBand": "a26",
   "look": "thamvong",
   "palette": "burgundy and gold",
-  "magnificUrl": "https://www.magnific.com/app/creation/8aNSX4JIrU",
-  "bg": "1lpzKGer4r",
+  "magnificUrl": "https://www.magnific.com/app/creation/ksDWJfR16B",
+  "bg": "ov97qPu829",
   "sheet": "N-c26-t7",
   "file": "img/fig-consort-c26-t7-a26.webp",
   "por": "img/por-consort-c26-t7-a26.webp"
@@ -12140,8 +12044,8 @@
   "ageBand": "a36",
   "look": "thamvong",
   "palette": "burgundy and gold",
-  "magnificUrl": "https://www.magnific.com/app/creation/8aNSX4JIrU",
-  "bg": "1lpzKGer4r",
+  "magnificUrl": "https://www.magnific.com/app/creation/ksDWJfR16B",
+  "bg": "ov97qPu829",
   "sheet": "N-c26-t7",
   "file": "img/fig-consort-c26-t7-a36.webp",
   "por": "img/por-consort-c26-t7-a36.webp"
@@ -12153,8 +12057,8 @@
   "ageBand": "a51",
   "look": "thamvong",
   "palette": "burgundy and gold",
-  "magnificUrl": "https://www.magnific.com/app/creation/8aNSX4JIrU",
-  "bg": "1lpzKGer4r",
+  "magnificUrl": "https://www.magnific.com/app/creation/ksDWJfR16B",
+  "bg": "ov97qPu829",
   "sheet": "N-c26-t7",
   "file": "img/fig-consort-c26-t7-a51.webp",
   "por": "img/por-consort-c26-t7-a51.webp"
@@ -12166,8 +12070,8 @@
   "ageBand": "a18",
   "look": "thamvong",
   "palette": "burgundy and gold",
-  "magnificUrl": "https://www.magnific.com/app/creation/s7oTGM7l8e",
-  "bg": "KLMG65nkqp",
+  "magnificUrl": "https://www.magnific.com/app/creation/3zbEXYNREY",
+  "bg": "huR4ldavqL",
   "sheet": "N-c26-t8",
   "file": "img/fig-consort-c26-t8-a18.webp",
   "por": "img/por-consort-c26-t8-a18.webp"
@@ -12179,8 +12083,8 @@
   "ageBand": "a26",
   "look": "thamvong",
   "palette": "burgundy and gold",
-  "magnificUrl": "https://www.magnific.com/app/creation/s7oTGM7l8e",
-  "bg": "KLMG65nkqp",
+  "magnificUrl": "https://www.magnific.com/app/creation/3zbEXYNREY",
+  "bg": "huR4ldavqL",
   "sheet": "N-c26-t8",
   "file": "img/fig-consort-c26-t8-a26.webp",
   "por": "img/por-consort-c26-t8-a26.webp"
@@ -12192,8 +12096,8 @@
   "ageBand": "a36",
   "look": "thamvong",
   "palette": "burgundy and gold",
-  "magnificUrl": "https://www.magnific.com/app/creation/s7oTGM7l8e",
-  "bg": "KLMG65nkqp",
+  "magnificUrl": "https://www.magnific.com/app/creation/3zbEXYNREY",
+  "bg": "huR4ldavqL",
   "sheet": "N-c26-t8",
   "file": "img/fig-consort-c26-t8-a36.webp",
   "por": "img/por-consort-c26-t8-a36.webp"
@@ -12205,8 +12109,8 @@
   "ageBand": "a51",
   "look": "thamvong",
   "palette": "burgundy and gold",
-  "magnificUrl": "https://www.magnific.com/app/creation/s7oTGM7l8e",
-  "bg": "KLMG65nkqp",
+  "magnificUrl": "https://www.magnific.com/app/creation/3zbEXYNREY",
+  "bg": "huR4ldavqL",
   "sheet": "N-c26-t8",
   "file": "img/fig-consort-c26-t8-a51.webp",
   "por": "img/por-consort-c26-t8-a51.webp"
@@ -12478,8 +12382,8 @@
   "ageBand": "a18",
   "look": "thamvong",
   "palette": "cinnabar and cream",
-  "magnificUrl": "https://www.magnific.com/app/creation/9ZQmsJBNYZ",
-  "bg": "s7oVKIZl8e",
+  "magnificUrl": "https://www.magnific.com/app/creation/LwBMpIEswO",
+  "bg": "cpl1LcZ0eP",
   "sheet": "N-c27-t5",
   "file": "img/fig-consort-c27-t5-a18.webp",
   "por": "img/por-consort-c27-t5-a18.webp"
@@ -12491,8 +12395,8 @@
   "ageBand": "a26",
   "look": "thamvong",
   "palette": "cinnabar and cream",
-  "magnificUrl": "https://www.magnific.com/app/creation/9ZQmsJBNYZ",
-  "bg": "s7oVKIZl8e",
+  "magnificUrl": "https://www.magnific.com/app/creation/LwBMpIEswO",
+  "bg": "cpl1LcZ0eP",
   "sheet": "N-c27-t5",
   "file": "img/fig-consort-c27-t5-a26.webp",
   "por": "img/por-consort-c27-t5-a26.webp"
@@ -12504,8 +12408,8 @@
   "ageBand": "a36",
   "look": "thamvong",
   "palette": "cinnabar and cream",
-  "magnificUrl": "https://www.magnific.com/app/creation/9ZQmsJBNYZ",
-  "bg": "s7oVKIZl8e",
+  "magnificUrl": "https://www.magnific.com/app/creation/LwBMpIEswO",
+  "bg": "cpl1LcZ0eP",
   "sheet": "N-c27-t5",
   "file": "img/fig-consort-c27-t5-a36.webp",
   "por": "img/por-consort-c27-t5-a36.webp"
@@ -12517,8 +12421,8 @@
   "ageBand": "a51",
   "look": "thamvong",
   "palette": "cinnabar and cream",
-  "magnificUrl": "https://www.magnific.com/app/creation/9ZQmsJBNYZ",
-  "bg": "s7oVKIZl8e",
+  "magnificUrl": "https://www.magnific.com/app/creation/LwBMpIEswO",
+  "bg": "cpl1LcZ0eP",
   "sheet": "N-c27-t5",
   "file": "img/fig-consort-c27-t5-a51.webp",
   "por": "img/por-consort-c27-t5-a51.webp"
@@ -12582,8 +12486,8 @@
   "ageBand": "a18",
   "look": "thamvong",
   "palette": "cinnabar and cream",
-  "magnificUrl": "https://www.magnific.com/app/creation/O6fXwaZynm",
-  "bg": "KLMAbA4kqp",
+  "magnificUrl": "https://www.magnific.com/app/creation/huR4KeHvqL",
+  "bg": "ksDWyV516B",
   "sheet": "N-c27-t7",
   "file": "img/fig-consort-c27-t7-a18.webp",
   "por": "img/por-consort-c27-t7-a18.webp"
@@ -12595,8 +12499,8 @@
   "ageBand": "a26",
   "look": "thamvong",
   "palette": "cinnabar and cream",
-  "magnificUrl": "https://www.magnific.com/app/creation/O6fXwaZynm",
-  "bg": "KLMAbA4kqp",
+  "magnificUrl": "https://www.magnific.com/app/creation/huR4KeHvqL",
+  "bg": "ksDWyV516B",
   "sheet": "N-c27-t7",
   "file": "img/fig-consort-c27-t7-a26.webp",
   "por": "img/por-consort-c27-t7-a26.webp"
@@ -12608,8 +12512,8 @@
   "ageBand": "a36",
   "look": "thamvong",
   "palette": "cinnabar and cream",
-  "magnificUrl": "https://www.magnific.com/app/creation/O6fXwaZynm",
-  "bg": "KLMAbA4kqp",
+  "magnificUrl": "https://www.magnific.com/app/creation/huR4KeHvqL",
+  "bg": "ksDWyV516B",
   "sheet": "N-c27-t7",
   "file": "img/fig-consort-c27-t7-a36.webp",
   "por": "img/por-consort-c27-t7-a36.webp"
@@ -12621,8 +12525,8 @@
   "ageBand": "a51",
   "look": "thamvong",
   "palette": "cinnabar and cream",
-  "magnificUrl": "https://www.magnific.com/app/creation/O6fXwaZynm",
-  "bg": "KLMAbA4kqp",
+  "magnificUrl": "https://www.magnific.com/app/creation/huR4KeHvqL",
+  "bg": "ksDWyV516B",
   "sheet": "N-c27-t7",
   "file": "img/fig-consort-c27-t7-a51.webp",
   "por": "img/por-consort-c27-t7-a51.webp"
@@ -12634,8 +12538,8 @@
   "ageBand": "a18",
   "look": "thamvong",
   "palette": "cinnabar and cream",
-  "magnificUrl": "https://www.magnific.com/app/creation/P3E8Tkn42C",
-  "bg": "vQZys95a47",
+  "magnificUrl": "https://www.magnific.com/app/creation/s7oD2P0l8e",
+  "bg": "s7oDGKOl8e",
   "sheet": "N-c27-t8",
   "file": "img/fig-consort-c27-t8-a18.webp",
   "por": "img/por-consort-c27-t8-a18.webp"
@@ -12647,12 +12551,11 @@
   "ageBand": "a26",
   "look": "thamvong",
   "palette": "cinnabar and cream",
-  "magnificUrl": "https://www.magnific.com/app/creation/P3E8Tkn42C",
-  "bg": "vQZys95a47",
+  "magnificUrl": "https://www.magnific.com/app/creation/s7oD2P0l8e",
+  "bg": "s7oDGKOl8e",
   "sheet": "N-c27-t8",
   "file": "img/fig-consort-c27-t8-a26.webp",
-  "por": "img/por-consort-c27-t8-a26.webp",
-  "solidSheer": true
+  "por": "img/por-consort-c27-t8-a26.webp"
  },
  {
   "role": "consort",
@@ -12661,12 +12564,11 @@
   "ageBand": "a36",
   "look": "thamvong",
   "palette": "cinnabar and cream",
-  "magnificUrl": "https://www.magnific.com/app/creation/P3E8Tkn42C",
-  "bg": "vQZys95a47",
+  "magnificUrl": "https://www.magnific.com/app/creation/s7oD2P0l8e",
+  "bg": "s7oDGKOl8e",
   "sheet": "N-c27-t8",
   "file": "img/fig-consort-c27-t8-a36.webp",
-  "por": "img/por-consort-c27-t8-a36.webp",
-  "solidSheer": true
+  "por": "img/por-consort-c27-t8-a36.webp"
  },
  {
   "role": "consort",
@@ -12675,12 +12577,11 @@
   "ageBand": "a51",
   "look": "thamvong",
   "palette": "cinnabar and cream",
-  "magnificUrl": "https://www.magnific.com/app/creation/P3E8Tkn42C",
-  "bg": "vQZys95a47",
+  "magnificUrl": "https://www.magnific.com/app/creation/s7oD2P0l8e",
+  "bg": "s7oDGKOl8e",
   "sheet": "N-c27-t8",
   "file": "img/fig-consort-c27-t8-a51.webp",
-  "por": "img/por-consort-c27-t8-a51.webp",
-  "solidSheer": true
+  "por": "img/por-consort-c27-t8-a51.webp"
  },
  {
   "role": "consort",
@@ -12949,8 +12850,8 @@
   "ageBand": "a18",
   "look": "thanhnha",
   "palette": "celadon and white",
-  "magnificUrl": "https://www.magnific.com/app/creation/MBwxZVcDCm",
-  "bg": "O6foluTynm",
+  "magnificUrl": "https://www.magnific.com/app/creation/eIOgUNzdqL",
+  "bg": "w4hBmOn7EI",
   "sheet": "N-c28-t5",
   "file": "img/fig-consort-c28-t5-a18.webp",
   "por": "img/por-consort-c28-t5-a18.webp"
@@ -12962,8 +12863,8 @@
   "ageBand": "a26",
   "look": "thanhnha",
   "palette": "celadon and white",
-  "magnificUrl": "https://www.magnific.com/app/creation/MBwxZVcDCm",
-  "bg": "O6foluTynm",
+  "magnificUrl": "https://www.magnific.com/app/creation/eIOgUNzdqL",
+  "bg": "w4hBmOn7EI",
   "sheet": "N-c28-t5",
   "file": "img/fig-consort-c28-t5-a26.webp",
   "por": "img/por-consort-c28-t5-a26.webp"
@@ -12975,8 +12876,8 @@
   "ageBand": "a36",
   "look": "thanhnha",
   "palette": "celadon and white",
-  "magnificUrl": "https://www.magnific.com/app/creation/MBwxZVcDCm",
-  "bg": "O6foluTynm",
+  "magnificUrl": "https://www.magnific.com/app/creation/eIOgUNzdqL",
+  "bg": "w4hBmOn7EI",
   "sheet": "N-c28-t5",
   "file": "img/fig-consort-c28-t5-a36.webp",
   "por": "img/por-consort-c28-t5-a36.webp"
@@ -12988,8 +12889,8 @@
   "ageBand": "a51",
   "look": "thanhnha",
   "palette": "celadon and white",
-  "magnificUrl": "https://www.magnific.com/app/creation/MBwxZVcDCm",
-  "bg": "O6foluTynm",
+  "magnificUrl": "https://www.magnific.com/app/creation/eIOgUNzdqL",
+  "bg": "w4hBmOn7EI",
   "sheet": "N-c28-t5",
   "file": "img/fig-consort-c28-t5-a51.webp",
   "por": "img/por-consort-c28-t5-a51.webp"
@@ -13053,8 +12954,8 @@
   "ageBand": "a18",
   "look": "thanhnha",
   "palette": "celadon and white",
-  "magnificUrl": "https://www.magnific.com/app/creation/Bh4lePDoQR",
-  "bg": "UPmDgpmwny",
+  "magnificUrl": "https://www.magnific.com/app/creation/dtySE0rXSL",
+  "bg": "cpl1ms90eP",
   "sheet": "N-c28-t7",
   "file": "img/fig-consort-c28-t7-a18.webp",
   "por": "img/por-consort-c28-t7-a18.webp"
@@ -13066,8 +12967,8 @@
   "ageBand": "a26",
   "look": "thanhnha",
   "palette": "celadon and white",
-  "magnificUrl": "https://www.magnific.com/app/creation/Bh4lePDoQR",
-  "bg": "UPmDgpmwny",
+  "magnificUrl": "https://www.magnific.com/app/creation/dtySE0rXSL",
+  "bg": "cpl1ms90eP",
   "sheet": "N-c28-t7",
   "file": "img/fig-consort-c28-t7-a26.webp",
   "por": "img/por-consort-c28-t7-a26.webp"
@@ -13079,8 +12980,8 @@
   "ageBand": "a36",
   "look": "thanhnha",
   "palette": "celadon and white",
-  "magnificUrl": "https://www.magnific.com/app/creation/Bh4lePDoQR",
-  "bg": "UPmDgpmwny",
+  "magnificUrl": "https://www.magnific.com/app/creation/dtySE0rXSL",
+  "bg": "cpl1ms90eP",
   "sheet": "N-c28-t7",
   "file": "img/fig-consort-c28-t7-a36.webp",
   "por": "img/por-consort-c28-t7-a36.webp"
@@ -13092,8 +12993,8 @@
   "ageBand": "a51",
   "look": "thanhnha",
   "palette": "celadon and white",
-  "magnificUrl": "https://www.magnific.com/app/creation/Bh4lePDoQR",
-  "bg": "UPmDgpmwny",
+  "magnificUrl": "https://www.magnific.com/app/creation/dtySE0rXSL",
+  "bg": "cpl1ms90eP",
   "sheet": "N-c28-t7",
   "file": "img/fig-consort-c28-t7-a51.webp",
   "por": "img/por-consort-c28-t7-a51.webp"
@@ -13105,8 +13006,8 @@
   "ageBand": "a18",
   "look": "thanhnha",
   "palette": "celadon and white",
-  "magnificUrl": "https://www.magnific.com/app/creation/LwB0ZO0swO",
-  "bg": "P3E8VgM42C",
+  "magnificUrl": "https://www.magnific.com/app/creation/xSdT3ygjfW",
+  "bg": "YMLKfRYWeC",
   "sheet": "N-c28-t8",
   "file": "img/fig-consort-c28-t8-a18.webp",
   "por": "img/por-consort-c28-t8-a18.webp"
@@ -13118,13 +13019,11 @@
   "ageBand": "a26",
   "look": "thanhnha",
   "palette": "celadon and white",
-  "magnificUrl": "https://www.magnific.com/app/creation/LwB0ZO0swO",
-  "bg": "P3E8VgM42C",
+  "magnificUrl": "https://www.magnific.com/app/creation/xSdT3ygjfW",
+  "bg": "YMLKfRYWeC",
   "sheet": "N-c28-t8",
   "file": "img/fig-consort-c28-t8-a26.webp",
-  "por": "img/por-consort-c28-t8-a26.webp",
-  "rematte": "KLMzLtWkqp",
-  "solidSheer": true
+  "por": "img/por-consort-c28-t8-a26.webp"
  },
  {
   "role": "consort",
@@ -13133,13 +13032,11 @@
   "ageBand": "a36",
   "look": "thanhnha",
   "palette": "celadon and white",
-  "magnificUrl": "https://www.magnific.com/app/creation/LwB0ZO0swO",
-  "bg": "P3E8VgM42C",
+  "magnificUrl": "https://www.magnific.com/app/creation/xSdT3ygjfW",
+  "bg": "YMLKfRYWeC",
   "sheet": "N-c28-t8",
   "file": "img/fig-consort-c28-t8-a36.webp",
-  "por": "img/por-consort-c28-t8-a36.webp",
-  "rematte": "TdS1d65VNR",
-  "solidSheer": true
+  "por": "img/por-consort-c28-t8-a36.webp"
  },
  {
   "role": "consort",
@@ -13148,8 +13045,8 @@
   "ageBand": "a51",
   "look": "thanhnha",
   "palette": "celadon and white",
-  "magnificUrl": "https://www.magnific.com/app/creation/LwB0ZO0swO",
-  "bg": "P3E8VgM42C",
+  "magnificUrl": "https://www.magnific.com/app/creation/xSdT3ygjfW",
+  "bg": "YMLKfRYWeC",
   "sheet": "N-c28-t8",
   "file": "img/fig-consort-c28-t8-a51.webp",
   "por": "img/por-consort-c28-t8-a51.webp"
@@ -13217,8 +13114,7 @@
   "bg": "ksDYAOG16B",
   "sheet": "N-c29-t1",
   "file": "img/fig-consort-c29-t1-a18.webp",
-  "por": "img/por-consort-c29-t1-a18.webp",
-  "solidSheer": true
+  "por": "img/por-consort-c29-t1-a18.webp"
  },
  {
   "role": "consort",
@@ -13231,8 +13127,7 @@
   "bg": "ksDYAOG16B",
   "sheet": "N-c29-t1",
   "file": "img/fig-consort-c29-t1-a26.webp",
-  "por": "img/por-consort-c29-t1-a26.webp",
-  "solidSheer": true
+  "por": "img/por-consort-c29-t1-a26.webp"
  },
  {
   "role": "consort",
@@ -13245,8 +13140,7 @@
   "bg": "ksDYAOG16B",
   "sheet": "N-c29-t1",
   "file": "img/fig-consort-c29-t1-a36.webp",
-  "por": "img/por-consort-c29-t1-a36.webp",
-  "solidSheer": true
+  "por": "img/por-consort-c29-t1-a36.webp"
  },
  {
   "role": "consort",
@@ -13259,8 +13153,7 @@
   "bg": "ksDYAOG16B",
   "sheet": "N-c29-t1",
   "file": "img/fig-consort-c29-t1-a51.webp",
-  "por": "img/por-consort-c29-t1-a51.webp",
-  "solidSheer": true
+  "por": "img/por-consort-c29-t1-a51.webp"
  },
  {
   "role": "consort",
@@ -13425,8 +13318,8 @@
   "ageBand": "a18",
   "look": "thanhnha",
   "palette": "ink blue and pale grey",
-  "magnificUrl": "https://www.magnific.com/app/creation/CqGNXulEEy",
-  "bg": "If67pZ7tvE",
+  "magnificUrl": "https://www.magnific.com/app/creation/ksDW08q16B",
+  "bg": "O6fIaN6ynm",
   "sheet": "N-c29-t5",
   "file": "img/fig-consort-c29-t5-a18.webp",
   "por": "img/por-consort-c29-t5-a18.webp"
@@ -13438,8 +13331,8 @@
   "ageBand": "a26",
   "look": "thanhnha",
   "palette": "ink blue and pale grey",
-  "magnificUrl": "https://www.magnific.com/app/creation/CqGNXulEEy",
-  "bg": "If67pZ7tvE",
+  "magnificUrl": "https://www.magnific.com/app/creation/ksDW08q16B",
+  "bg": "O6fIaN6ynm",
   "sheet": "N-c29-t5",
   "file": "img/fig-consort-c29-t5-a26.webp",
   "por": "img/por-consort-c29-t5-a26.webp"
@@ -13451,8 +13344,8 @@
   "ageBand": "a36",
   "look": "thanhnha",
   "palette": "ink blue and pale grey",
-  "magnificUrl": "https://www.magnific.com/app/creation/CqGNXulEEy",
-  "bg": "If67pZ7tvE",
+  "magnificUrl": "https://www.magnific.com/app/creation/ksDW08q16B",
+  "bg": "O6fIaN6ynm",
   "sheet": "N-c29-t5",
   "file": "img/fig-consort-c29-t5-a36.webp",
   "por": "img/por-consort-c29-t5-a36.webp"
@@ -13464,8 +13357,8 @@
   "ageBand": "a51",
   "look": "thanhnha",
   "palette": "ink blue and pale grey",
-  "magnificUrl": "https://www.magnific.com/app/creation/CqGNXulEEy",
-  "bg": "If67pZ7tvE",
+  "magnificUrl": "https://www.magnific.com/app/creation/ksDW08q16B",
+  "bg": "O6fIaN6ynm",
   "sheet": "N-c29-t5",
   "file": "img/fig-consort-c29-t5-a51.webp",
   "por": "img/por-consort-c29-t5-a51.webp"
@@ -13529,8 +13422,8 @@
   "ageBand": "a18",
   "look": "thanhnha",
   "palette": "ink blue and pale grey",
-  "magnificUrl": "https://www.magnific.com/app/creation/cpl5psZ0eP",
-  "bg": "MBwr8uYDCm",
+  "magnificUrl": "https://www.magnific.com/app/creation/bxTzUuS5Y2",
+  "bg": "0egrhgPTfW",
   "sheet": "N-c29-t7",
   "file": "img/fig-consort-c29-t7-a18.webp",
   "por": "img/por-consort-c29-t7-a18.webp"
@@ -13542,8 +13435,8 @@
   "ageBand": "a26",
   "look": "thanhnha",
   "palette": "ink blue and pale grey",
-  "magnificUrl": "https://www.magnific.com/app/creation/cpl5psZ0eP",
-  "bg": "MBwr8uYDCm",
+  "magnificUrl": "https://www.magnific.com/app/creation/bxTzUuS5Y2",
+  "bg": "0egrhgPTfW",
   "sheet": "N-c29-t7",
   "file": "img/fig-consort-c29-t7-a26.webp",
   "por": "img/por-consort-c29-t7-a26.webp"
@@ -13555,8 +13448,8 @@
   "ageBand": "a36",
   "look": "thanhnha",
   "palette": "ink blue and pale grey",
-  "magnificUrl": "https://www.magnific.com/app/creation/cpl5psZ0eP",
-  "bg": "MBwr8uYDCm",
+  "magnificUrl": "https://www.magnific.com/app/creation/bxTzUuS5Y2",
+  "bg": "0egrhgPTfW",
   "sheet": "N-c29-t7",
   "file": "img/fig-consort-c29-t7-a36.webp",
   "por": "img/por-consort-c29-t7-a36.webp"
@@ -13568,8 +13461,8 @@
   "ageBand": "a51",
   "look": "thanhnha",
   "palette": "ink blue and pale grey",
-  "magnificUrl": "https://www.magnific.com/app/creation/cpl5psZ0eP",
-  "bg": "MBwr8uYDCm",
+  "magnificUrl": "https://www.magnific.com/app/creation/bxTzUuS5Y2",
+  "bg": "0egrhgPTfW",
   "sheet": "N-c29-t7",
   "file": "img/fig-consort-c29-t7-a51.webp",
   "por": "img/por-consort-c29-t7-a51.webp"
@@ -13581,8 +13474,8 @@
   "ageBand": "a18",
   "look": "thanhnha",
   "palette": "ink blue and pale grey",
-  "magnificUrl": "https://www.magnific.com/app/creation/jUXcRO8LD0",
-  "bg": "Bh4gKTToQR",
+  "magnificUrl": "https://www.magnific.com/app/creation/1lpc6Pwr4r",
+  "bg": "Ebz37mBuuO",
   "sheet": "N-c29-t8",
   "file": "img/fig-consort-c29-t8-a18.webp",
   "por": "img/por-consort-c29-t8-a18.webp"
@@ -13594,8 +13487,8 @@
   "ageBand": "a26",
   "look": "thanhnha",
   "palette": "ink blue and pale grey",
-  "magnificUrl": "https://www.magnific.com/app/creation/jUXcRO8LD0",
-  "bg": "Bh4gKTToQR",
+  "magnificUrl": "https://www.magnific.com/app/creation/1lpc6Pwr4r",
+  "bg": "Ebz37mBuuO",
   "sheet": "N-c29-t8",
   "file": "img/fig-consort-c29-t8-a26.webp",
   "por": "img/por-consort-c29-t8-a26.webp"
@@ -13607,8 +13500,8 @@
   "ageBand": "a36",
   "look": "thanhnha",
   "palette": "ink blue and pale grey",
-  "magnificUrl": "https://www.magnific.com/app/creation/jUXcRO8LD0",
-  "bg": "Bh4gKTToQR",
+  "magnificUrl": "https://www.magnific.com/app/creation/1lpc6Pwr4r",
+  "bg": "Ebz37mBuuO",
   "sheet": "N-c29-t8",
   "file": "img/fig-consort-c29-t8-a36.webp",
   "por": "img/por-consort-c29-t8-a36.webp"
@@ -13620,8 +13513,8 @@
   "ageBand": "a51",
   "look": "thanhnha",
   "palette": "ink blue and pale grey",
-  "magnificUrl": "https://www.magnific.com/app/creation/jUXcRO8LD0",
-  "bg": "Bh4gKTToQR",
+  "magnificUrl": "https://www.magnific.com/app/creation/1lpc6Pwr4r",
+  "bg": "Ebz37mBuuO",
   "sheet": "N-c29-t8",
   "file": "img/fig-consort-c29-t8-a51.webp",
   "por": "img/por-consort-c29-t8-a51.webp"
@@ -13845,8 +13738,7 @@
   "bg": "yiCIOE1PW9",
   "sheet": "N-c30-t4",
   "file": "img/fig-consort-c30-t4-a18.webp",
-  "por": "img/por-consort-c30-t4-a18.webp",
-  "solidSheer": true
+  "por": "img/por-consort-c30-t4-a18.webp"
  },
  {
   "role": "consort",
@@ -13894,8 +13786,8 @@
   "ageBand": "a18",
   "look": "thanhnha",
   "palette": "moonlight blue and white",
-  "magnificUrl": "https://www.magnific.com/app/creation/UPmeKPMwny",
-  "bg": "XmPgTixBfo",
+  "magnificUrl": "https://www.magnific.com/app/creation/u5nR2pDQLD",
+  "bg": "xSdTeSwjfW",
   "sheet": "N-c30-t5",
   "file": "img/fig-consort-c30-t5-a18.webp",
   "por": "img/por-consort-c30-t5-a18.webp"
@@ -13907,8 +13799,8 @@
   "ageBand": "a26",
   "look": "thanhnha",
   "palette": "moonlight blue and white",
-  "magnificUrl": "https://www.magnific.com/app/creation/UPmeKPMwny",
-  "bg": "XmPgTixBfo",
+  "magnificUrl": "https://www.magnific.com/app/creation/u5nR2pDQLD",
+  "bg": "xSdTeSwjfW",
   "sheet": "N-c30-t5",
   "file": "img/fig-consort-c30-t5-a26.webp",
   "por": "img/por-consort-c30-t5-a26.webp"
@@ -13920,8 +13812,8 @@
   "ageBand": "a36",
   "look": "thanhnha",
   "palette": "moonlight blue and white",
-  "magnificUrl": "https://www.magnific.com/app/creation/UPmeKPMwny",
-  "bg": "XmPgTixBfo",
+  "magnificUrl": "https://www.magnific.com/app/creation/u5nR2pDQLD",
+  "bg": "xSdTeSwjfW",
   "sheet": "N-c30-t5",
   "file": "img/fig-consort-c30-t5-a36.webp",
   "por": "img/por-consort-c30-t5-a36.webp"
@@ -13933,8 +13825,8 @@
   "ageBand": "a51",
   "look": "thanhnha",
   "palette": "moonlight blue and white",
-  "magnificUrl": "https://www.magnific.com/app/creation/UPmeKPMwny",
-  "bg": "XmPgTixBfo",
+  "magnificUrl": "https://www.magnific.com/app/creation/u5nR2pDQLD",
+  "bg": "xSdTeSwjfW",
   "sheet": "N-c30-t5",
   "file": "img/fig-consort-c30-t5-a51.webp",
   "por": "img/por-consort-c30-t5-a51.webp"
@@ -13998,8 +13890,8 @@
   "ageBand": "a18",
   "look": "thanhnha",
   "palette": "moonlight blue and white",
-  "magnificUrl": "https://www.magnific.com/app/creation/nVjFRSIYQD",
-  "bg": "O6fXU9Qynm",
+  "magnificUrl": "https://www.magnific.com/app/creation/yiCtzwgPW9",
+  "bg": "s7oDi8xl8e",
   "sheet": "N-c30-t7",
   "file": "img/fig-consort-c30-t7-a18.webp",
   "por": "img/por-consort-c30-t7-a18.webp"
@@ -14011,8 +13903,8 @@
   "ageBand": "a26",
   "look": "thanhnha",
   "palette": "moonlight blue and white",
-  "magnificUrl": "https://www.magnific.com/app/creation/nVjFRSIYQD",
-  "bg": "O6fXU9Qynm",
+  "magnificUrl": "https://www.magnific.com/app/creation/yiCtzwgPW9",
+  "bg": "s7oDi8xl8e",
   "sheet": "N-c30-t7",
   "file": "img/fig-consort-c30-t7-a26.webp",
   "por": "img/por-consort-c30-t7-a26.webp"
@@ -14024,8 +13916,8 @@
   "ageBand": "a36",
   "look": "thanhnha",
   "palette": "moonlight blue and white",
-  "magnificUrl": "https://www.magnific.com/app/creation/nVjFRSIYQD",
-  "bg": "O6fXU9Qynm",
+  "magnificUrl": "https://www.magnific.com/app/creation/yiCtzwgPW9",
+  "bg": "s7oDi8xl8e",
   "sheet": "N-c30-t7",
   "file": "img/fig-consort-c30-t7-a36.webp",
   "por": "img/por-consort-c30-t7-a36.webp"
@@ -14037,8 +13929,8 @@
   "ageBand": "a51",
   "look": "thanhnha",
   "palette": "moonlight blue and white",
-  "magnificUrl": "https://www.magnific.com/app/creation/nVjFRSIYQD",
-  "bg": "O6fXU9Qynm",
+  "magnificUrl": "https://www.magnific.com/app/creation/yiCtzwgPW9",
+  "bg": "s7oDi8xl8e",
   "sheet": "N-c30-t7",
   "file": "img/fig-consort-c30-t7-a51.webp",
   "por": "img/por-consort-c30-t7-a51.webp"
@@ -14050,8 +13942,8 @@
   "ageBand": "a18",
   "look": "thanhnha",
   "palette": "moonlight blue and white",
-  "magnificUrl": "https://www.magnific.com/app/creation/w4heYBS7EI",
-  "bg": "4RuIDdZ9Aa",
+  "magnificUrl": "https://www.magnific.com/app/creation/CqGiSsQEEy",
+  "bg": "s7oDG1Bl8e",
   "sheet": "N-c30-t8",
   "file": "img/fig-consort-c30-t8-a18.webp",
   "por": "img/por-consort-c30-t8-a18.webp"
@@ -14063,8 +13955,8 @@
   "ageBand": "a26",
   "look": "thanhnha",
   "palette": "moonlight blue and white",
-  "magnificUrl": "https://www.magnific.com/app/creation/w4heYBS7EI",
-  "bg": "4RuIDdZ9Aa",
+  "magnificUrl": "https://www.magnific.com/app/creation/CqGiSsQEEy",
+  "bg": "s7oDG1Bl8e",
   "sheet": "N-c30-t8",
   "file": "img/fig-consort-c30-t8-a26.webp",
   "por": "img/por-consort-c30-t8-a26.webp"
@@ -14076,8 +13968,8 @@
   "ageBand": "a36",
   "look": "thanhnha",
   "palette": "moonlight blue and white",
-  "magnificUrl": "https://www.magnific.com/app/creation/w4heYBS7EI",
-  "bg": "4RuIDdZ9Aa",
+  "magnificUrl": "https://www.magnific.com/app/creation/CqGiSsQEEy",
+  "bg": "s7oDG1Bl8e",
   "sheet": "N-c30-t8",
   "file": "img/fig-consort-c30-t8-a36.webp",
   "por": "img/por-consort-c30-t8-a36.webp"
@@ -14089,8 +13981,8 @@
   "ageBand": "a51",
   "look": "thanhnha",
   "palette": "moonlight blue and white",
-  "magnificUrl": "https://www.magnific.com/app/creation/w4heYBS7EI",
-  "bg": "4RuIDdZ9Aa",
+  "magnificUrl": "https://www.magnific.com/app/creation/CqGiSsQEEy",
+  "bg": "s7oDG1Bl8e",
   "sheet": "N-c30-t8",
   "file": "img/fig-consort-c30-t8-a51.webp",
   "por": "img/por-consort-c30-t8-a51.webp"
@@ -14362,8 +14254,8 @@
   "ageBand": "a18",
   "look": "thanhnha",
   "palette": "pale jade and silver",
-  "magnificUrl": "https://www.magnific.com/app/creation/aF24eqUfSh",
-  "bg": "UPmexCswny",
+  "magnificUrl": "https://www.magnific.com/app/creation/1lpcTvYr4r",
+  "bg": "eIOgJtCdqL",
   "sheet": "N-c31-t5",
   "file": "img/fig-consort-c31-t5-a18.webp",
   "por": "img/por-consort-c31-t5-a18.webp"
@@ -14375,8 +14267,8 @@
   "ageBand": "a26",
   "look": "thanhnha",
   "palette": "pale jade and silver",
-  "magnificUrl": "https://www.magnific.com/app/creation/aF24eqUfSh",
-  "bg": "UPmexCswny",
+  "magnificUrl": "https://www.magnific.com/app/creation/1lpcTvYr4r",
+  "bg": "eIOgJtCdqL",
   "sheet": "N-c31-t5",
   "file": "img/fig-consort-c31-t5-a26.webp",
   "por": "img/por-consort-c31-t5-a26.webp"
@@ -14388,8 +14280,8 @@
   "ageBand": "a36",
   "look": "thanhnha",
   "palette": "pale jade and silver",
-  "magnificUrl": "https://www.magnific.com/app/creation/aF24eqUfSh",
-  "bg": "UPmexCswny",
+  "magnificUrl": "https://www.magnific.com/app/creation/1lpcTvYr4r",
+  "bg": "eIOgJtCdqL",
   "sheet": "N-c31-t5",
   "file": "img/fig-consort-c31-t5-a36.webp",
   "por": "img/por-consort-c31-t5-a36.webp"
@@ -14401,8 +14293,8 @@
   "ageBand": "a51",
   "look": "thanhnha",
   "palette": "pale jade and silver",
-  "magnificUrl": "https://www.magnific.com/app/creation/aF24eqUfSh",
-  "bg": "UPmexCswny",
+  "magnificUrl": "https://www.magnific.com/app/creation/1lpcTvYr4r",
+  "bg": "eIOgJtCdqL",
   "sheet": "N-c31-t5",
   "file": "img/fig-consort-c31-t5-a51.webp",
   "por": "img/por-consort-c31-t5-a51.webp"
@@ -14466,8 +14358,8 @@
   "ageBand": "a18",
   "look": "thanhnha",
   "palette": "pale jade and silver",
-  "magnificUrl": "https://www.magnific.com/app/creation/6AHm4H6iJO",
-  "bg": "vQZOmPPa47",
+  "magnificUrl": "https://www.magnific.com/app/creation/ov97FXN829",
+  "bg": "eIOgu48dqL",
   "sheet": "N-c31-t7",
   "file": "img/fig-consort-c31-t7-a18.webp",
   "por": "img/por-consort-c31-t7-a18.webp"
@@ -14479,8 +14371,8 @@
   "ageBand": "a26",
   "look": "thanhnha",
   "palette": "pale jade and silver",
-  "magnificUrl": "https://www.magnific.com/app/creation/6AHm4H6iJO",
-  "bg": "vQZOmPPa47",
+  "magnificUrl": "https://www.magnific.com/app/creation/ov97FXN829",
+  "bg": "eIOgu48dqL",
   "sheet": "N-c31-t7",
   "file": "img/fig-consort-c31-t7-a26.webp",
   "por": "img/por-consort-c31-t7-a26.webp"
@@ -14492,8 +14384,8 @@
   "ageBand": "a36",
   "look": "thanhnha",
   "palette": "pale jade and silver",
-  "magnificUrl": "https://www.magnific.com/app/creation/6AHm4H6iJO",
-  "bg": "vQZOmPPa47",
+  "magnificUrl": "https://www.magnific.com/app/creation/ov97FXN829",
+  "bg": "eIOgu48dqL",
   "sheet": "N-c31-t7",
   "file": "img/fig-consort-c31-t7-a36.webp",
   "por": "img/por-consort-c31-t7-a36.webp"
@@ -14505,8 +14397,8 @@
   "ageBand": "a51",
   "look": "thanhnha",
   "palette": "pale jade and silver",
-  "magnificUrl": "https://www.magnific.com/app/creation/6AHm4H6iJO",
-  "bg": "vQZOmPPa47",
+  "magnificUrl": "https://www.magnific.com/app/creation/ov97FXN829",
+  "bg": "eIOgu48dqL",
   "sheet": "N-c31-t7",
   "file": "img/fig-consort-c31-t7-a51.webp",
   "por": "img/por-consort-c31-t7-a51.webp"
@@ -14518,13 +14410,11 @@
   "ageBand": "a18",
   "look": "thanhnha",
   "palette": "pale jade and silver",
-  "magnificUrl": "https://www.magnific.com/app/creation/79vd0oyJAL",
-  "bg": "s7oTGs9l8e",
+  "magnificUrl": "https://www.magnific.com/app/creation/ksDWN4p16B",
+  "bg": "gOIenjdSXO",
   "sheet": "N-c31-t8",
   "file": "img/fig-consort-c31-t8-a18.webp",
-  "por": "img/por-consort-c31-t8-a18.webp",
-  "rematte": "VXUrX3pMMU",
-  "solidSheer": true
+  "por": "img/por-consort-c31-t8-a18.webp"
  },
  {
   "role": "consort",
@@ -14533,8 +14423,8 @@
   "ageBand": "a26",
   "look": "thanhnha",
   "palette": "pale jade and silver",
-  "magnificUrl": "https://www.magnific.com/app/creation/79vd0oyJAL",
-  "bg": "s7oTGs9l8e",
+  "magnificUrl": "https://www.magnific.com/app/creation/ksDWN4p16B",
+  "bg": "gOIenjdSXO",
   "sheet": "N-c31-t8",
   "file": "img/fig-consort-c31-t8-a26.webp",
   "por": "img/por-consort-c31-t8-a26.webp"
@@ -14546,8 +14436,8 @@
   "ageBand": "a36",
   "look": "thanhnha",
   "palette": "pale jade and silver",
-  "magnificUrl": "https://www.magnific.com/app/creation/79vd0oyJAL",
-  "bg": "s7oTGs9l8e",
+  "magnificUrl": "https://www.magnific.com/app/creation/ksDWN4p16B",
+  "bg": "gOIenjdSXO",
   "sheet": "N-c31-t8",
   "file": "img/fig-consort-c31-t8-a36.webp",
   "por": "img/por-consort-c31-t8-a36.webp"
@@ -14559,8 +14449,8 @@
   "ageBand": "a51",
   "look": "thanhnha",
   "palette": "pale jade and silver",
-  "magnificUrl": "https://www.magnific.com/app/creation/79vd0oyJAL",
-  "bg": "s7oTGs9l8e",
+  "magnificUrl": "https://www.magnific.com/app/creation/ksDWN4p16B",
+  "bg": "gOIenjdSXO",
   "sheet": "N-c31-t8",
   "file": "img/fig-consort-c31-t8-a51.webp",
   "por": "img/por-consort-c31-t8-a51.webp"
@@ -14832,8 +14722,8 @@
   "ageBand": "a18",
   "look": "thanhnha",
   "palette": "ivory and soft grey-blue",
-  "magnificUrl": "https://www.magnific.com/app/creation/ksDnfUj16B",
-  "bg": "s7oVKvul8e",
+  "magnificUrl": "https://www.magnific.com/app/creation/p8JlSAqehw",
+  "bg": "P3EmCZp42C",
   "sheet": "N-c32-t5",
   "file": "img/fig-consort-c32-t5-a18.webp",
   "por": "img/por-consort-c32-t5-a18.webp"
@@ -14845,8 +14735,8 @@
   "ageBand": "a26",
   "look": "thanhnha",
   "palette": "ivory and soft grey-blue",
-  "magnificUrl": "https://www.magnific.com/app/creation/ksDnfUj16B",
-  "bg": "s7oVKvul8e",
+  "magnificUrl": "https://www.magnific.com/app/creation/p8JlSAqehw",
+  "bg": "P3EmCZp42C",
   "sheet": "N-c32-t5",
   "file": "img/fig-consort-c32-t5-a26.webp",
   "por": "img/por-consort-c32-t5-a26.webp"
@@ -14858,8 +14748,8 @@
   "ageBand": "a36",
   "look": "thanhnha",
   "palette": "ivory and soft grey-blue",
-  "magnificUrl": "https://www.magnific.com/app/creation/ksDnfUj16B",
-  "bg": "s7oVKvul8e",
+  "magnificUrl": "https://www.magnific.com/app/creation/p8JlSAqehw",
+  "bg": "P3EmCZp42C",
   "sheet": "N-c32-t5",
   "file": "img/fig-consort-c32-t5-a36.webp",
   "por": "img/por-consort-c32-t5-a36.webp"
@@ -14871,8 +14761,8 @@
   "ageBand": "a51",
   "look": "thanhnha",
   "palette": "ivory and soft grey-blue",
-  "magnificUrl": "https://www.magnific.com/app/creation/ksDnfUj16B",
-  "bg": "s7oVKvul8e",
+  "magnificUrl": "https://www.magnific.com/app/creation/p8JlSAqehw",
+  "bg": "P3EmCZp42C",
   "sheet": "N-c32-t5",
   "file": "img/fig-consort-c32-t5-a51.webp",
   "por": "img/por-consort-c32-t5-a51.webp"
@@ -14936,8 +14826,8 @@
   "ageBand": "a18",
   "look": "thanhnha",
   "palette": "ivory and soft grey-blue",
-  "magnificUrl": "https://www.magnific.com/app/creation/fHAPhGmCDY",
-  "bg": "5jV2qzlKxe",
+  "magnificUrl": "https://www.magnific.com/app/creation/ksDWJkT16B",
+  "bg": "SytdZv1Ub8",
   "sheet": "N-c32-t7",
   "file": "img/fig-consort-c32-t7-a18.webp",
   "por": "img/por-consort-c32-t7-a18.webp"
@@ -14949,8 +14839,8 @@
   "ageBand": "a26",
   "look": "thanhnha",
   "palette": "ivory and soft grey-blue",
-  "magnificUrl": "https://www.magnific.com/app/creation/fHAPhGmCDY",
-  "bg": "5jV2qzlKxe",
+  "magnificUrl": "https://www.magnific.com/app/creation/ksDWJkT16B",
+  "bg": "SytdZv1Ub8",
   "sheet": "N-c32-t7",
   "file": "img/fig-consort-c32-t7-a26.webp",
   "por": "img/por-consort-c32-t7-a26.webp"
@@ -14962,8 +14852,8 @@
   "ageBand": "a36",
   "look": "thanhnha",
   "palette": "ivory and soft grey-blue",
-  "magnificUrl": "https://www.magnific.com/app/creation/fHAPhGmCDY",
-  "bg": "5jV2qzlKxe",
+  "magnificUrl": "https://www.magnific.com/app/creation/ksDWJkT16B",
+  "bg": "SytdZv1Ub8",
   "sheet": "N-c32-t7",
   "file": "img/fig-consort-c32-t7-a36.webp",
   "por": "img/por-consort-c32-t7-a36.webp"
@@ -14975,8 +14865,8 @@
   "ageBand": "a51",
   "look": "thanhnha",
   "palette": "ivory and soft grey-blue",
-  "magnificUrl": "https://www.magnific.com/app/creation/fHAPhGmCDY",
-  "bg": "5jV2qzlKxe",
+  "magnificUrl": "https://www.magnific.com/app/creation/ksDWJkT16B",
+  "bg": "SytdZv1Ub8",
   "sheet": "N-c32-t7",
   "file": "img/fig-consort-c32-t7-a51.webp",
   "por": "img/por-consort-c32-t7-a51.webp"
@@ -14988,13 +14878,11 @@
   "ageBand": "a18",
   "look": "thanhnha",
   "palette": "ivory and soft grey-blue",
-  "magnificUrl": "https://www.magnific.com/app/creation/UPmpn80wny",
-  "bg": "EbzNwyguuO",
+  "magnificUrl": "https://www.magnific.com/app/creation/79voWYlJAL",
+  "bg": "TdSxQWqVNR",
   "sheet": "N-c32-t8",
   "file": "img/fig-consort-c32-t8-a18.webp",
-  "por": "img/por-consort-c32-t8-a18.webp",
-  "rematte": "4RutRjx9Aa",
-  "solidSheer": true
+  "por": "img/por-consort-c32-t8-a18.webp"
  },
  {
   "role": "consort",
@@ -15003,12 +14891,11 @@
   "ageBand": "a26",
   "look": "thanhnha",
   "palette": "ivory and soft grey-blue",
-  "magnificUrl": "https://www.magnific.com/app/creation/UPmpn80wny",
-  "bg": "EbzNwyguuO",
+  "magnificUrl": "https://www.magnific.com/app/creation/79voWYlJAL",
+  "bg": "TdSxQWqVNR",
   "sheet": "N-c32-t8",
   "file": "img/fig-consort-c32-t8-a26.webp",
-  "por": "img/por-consort-c32-t8-a26.webp",
-  "solidSheer": true
+  "por": "img/por-consort-c32-t8-a26.webp"
  },
  {
   "role": "consort",
@@ -15017,13 +14904,11 @@
   "ageBand": "a36",
   "look": "thanhnha",
   "palette": "ivory and soft grey-blue",
-  "magnificUrl": "https://www.magnific.com/app/creation/UPmpn80wny",
-  "bg": "EbzNwyguuO",
+  "magnificUrl": "https://www.magnific.com/app/creation/79voWYlJAL",
+  "bg": "TdSxQWqVNR",
   "sheet": "N-c32-t8",
   "file": "img/fig-consort-c32-t8-a36.webp",
-  "por": "img/por-consort-c32-t8-a36.webp",
-  "rematte": "ksDnsfi16B",
-  "solidSheer": true
+  "por": "img/por-consort-c32-t8-a36.webp"
  },
  {
   "role": "consort",
@@ -15032,13 +14917,11 @@
   "ageBand": "a51",
   "look": "thanhnha",
   "palette": "ivory and soft grey-blue",
-  "magnificUrl": "https://www.magnific.com/app/creation/UPmpn80wny",
-  "bg": "EbzNwyguuO",
+  "magnificUrl": "https://www.magnific.com/app/creation/79voWYlJAL",
+  "bg": "TdSxQWqVNR",
   "sheet": "N-c32-t8",
   "file": "img/fig-consort-c32-t8-a51.webp",
-  "por": "img/por-consort-c32-t8-a51.webp",
-  "rematte": "XmPgmWkBfo",
-  "solidSheer": true
+  "por": "img/por-consort-c32-t8-a51.webp"
  },
  {
   "role": "consort",
