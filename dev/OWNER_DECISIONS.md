@@ -87,3 +87,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (19:25Z) Owner frustrated huadian keeps being redone. Decision: stop all huadian changes; keep the approved marks (t1 small flower per identity motif, NOT a dot); only finish a51 ageing. Huadian is closed — don't reopen.
 - (19:30Z) Owner: items are never free/automatic — must be obtained by crafting, buying or gifts (e.g. the face veil after hủy dung: craft, buy, or be gifted; until then scars show). Same for NPCs. Audit all free grants (review/items-earned).
 - (19:40Z) Owner (c19 sheet): t6–t8 huadian too big, look like scars/birthmarks → shrink t6–t8 marks to ~t4–t5 size on all consorts (grander by material, never larger); fix missing marks. Pilot first.
+- (19:50Z) Owner: redo t8 huadian; pilot first — she approves before it's applied to everyone. (General: any art change = pilot → owner approval → roll out.)
