@@ -65,6 +65,7 @@ Mẻ A19 (thợ m01–m26): t8 m03–m10. 8 lineup + 2 sửa (m05 bỏ dây treo
 Mẻ A20 (thợ m01–m26): t8 m11–m18 (m13 xoá nốt ruồi bằng code). 8 lineup + 8 tách nền: 8×273 = 2184.
 Mẻ A21 (thợ m01–m26): t8 m19–m26 + lãnh cung m01–m08 (16 lineup đã vẽ trước = 4320) + 12 sửa hoa điền/tóc (t8 m19, m23, m24, m25, m11, m12, m17 bỏ dây/chuỗi ngọc/dải trán; m03-t8 thu nhỏ; t7 m06, m08, m16 bỏ dây; lãnh cung m01 tóc bạc tuổi 48) + 23 tách nền: 16×270 + 12×270 + 23×3 = 7629. m26 xoá nốt ruồi bằng code.
 Mẻ A22 (thợ m01–m26): lãnh cung m09–m16 — vẽ 8 tờ gpt-2-6 4k (2160) + tách nền 8 (24), tẩy nốt ruồi m13 bằng mã; tóc tuổi 48 đen, trán trống = 2184 tín dụng
+Mẻ A23 (thợ m01–m26): lãnh cung m17–m26 — vẽ 10 tờ gpt-2-6 4k (2700) + sửa tóc xám tuổi 48 m24 (270) + tách nền 11 (33), tẩy nốt ruồi m26 bằng mã; trán trống = 3003 tín dụng. Xong lãnh cung m01–m26
 
 ## C-B (thợ m27–m52): mẻ và tín dụng
 Mẻ B1: t2 m27–m34 (vẽ lại m27–m33, đạo cụ khác loại mỗi tuổi). 8 lineup, tín dụng 8×273 = 2184.
