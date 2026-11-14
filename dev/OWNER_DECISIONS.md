@@ -166,3 +166,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (05:10Z) Owner: Tư trang Y phục slot must show the garment (existing wardrobe art img/wd512), not the fabric roll.
 - (05:20Z) Owner: equipped slots must show the item's info inline (Được/Mất/công dụng), not only after tapping; header warning chip must not be cut.
 - (05:25Z) Owner: stage name labels = rank on top line, name below, text coloured by rank (kit rule, all stages).
+- (05:40Z) Owner: no 'Gánh hàng rong' inside the palace — renamed to 'Nhờ thái giám mua đồ' (Nội vụ phủ eunuch buys from outside).
