@@ -5,7 +5,7 @@ Chủ kit chuyển động, nhánh `review/kit-motion`. Thành phần dùng chun
 ## Đã làm (đã gắn vào game)
 1. Lật thẻ thị tẩm: 5 thẻ bài xanh, thẻ giữa nhấc lên và lật 3D, mặt thẻ có phẩm và tên. Thẻ của nàng thì có ánh vàng.
 2. Quẻ tuần: ống xăm lắc, một que nhảy ra, chữ quẻ bật lên (xanh tốt, đỏ xấu). Chạy trong bảng tuần mới, khi gieo lại và khi xin xăm ở Phật đường.
-3. Kết quả hành động: dấu son 成 (Thành) hoặc 敗 (Bại) đóng lên thẻ kết quả, số được/mất bay lên (xanh cộng, đỏ trừ), thanh chỉ số chạy từ số cũ tới số mới.
+3. Kết quả hành động: dấu son chữ Việt "THÀNH" hoặc "BẠI" đóng lên thẻ kết quả, số được/mất bay lên (xanh cộng, đỏ trừ), thanh chỉ số chạy từ số cũ tới số mới.
 4. Thăng phẩm: thánh chỉ mở ra, khung chân dung đổi sang khung bậc mới dưới vệt sáng, chip phẩm mới bật lên. Cung nữ được phong Đáp ứng cũng có. Giáng phẩm và vào lãnh cung: màn tối dần, lá khô rơi.
 5. Qua buổi: dải trời đổi màu (sáng, chiều, tối) và nén nhang cháy cạnh chữ buổi. Qua tuần: tờ lịch lật sang tuần mới rồi bảng tuần hiện lên.
 6. Có thai, sinh con: hoa mẫu đơn nở, cánh hoa bay. Chết: mực loang khắp màn, rồi mở bảng Kiếp này / Sổ luân hồi.

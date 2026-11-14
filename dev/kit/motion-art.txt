@@ -3,8 +3,8 @@ tablet-back YMLqz52WeC lJ8VsDQgv9
 tablet-front huROmy8vqL gOIDwAPSXO (image ref tablet-back)
 xam-tube cpl5Y1G0eP LwB0jMzswO
 xam-stick N2Fm4fs6D9 8aNUoOSIrU
-seal-thanh N2Fm4Cl6D9 (keyed locally from white)
-seal-bai fHA4vRoCDY (keyed locally)
+seal-thanh huRy4uCvqL (Vietnamese THÀNH, keyed locally; old 成 N2Fm4Cl6D9 dropped)
+seal-bai ov9U7fS829 (Vietnamese BẠI, keyed locally; old 敗 fHA4vRoCDY dropped)
 edict-open SytDl8sUb8 MBwrVluDCm
 edict-closed rgeYkvcxtc Bh4gXJ0oQR
 leaves/petals sheet p8JjMZAehw p8JjDUwehw (2x2: leaf-dry, leaf-maple, petal-peach, petal-plum)
