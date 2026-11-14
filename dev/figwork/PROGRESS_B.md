@@ -47,6 +47,7 @@
 - B_b17: c26 m3–m4, c27 m0–m4, c28 m0 (136 lineups total). Clean.
 - B_b18: c28 m1–m4, c29 m0–m3 (144 lineups total). Clean.
 - B_b19: c29 m4, c30 m0–m4, c31 m0–m1 (152 lineups total). Clean.
+- B_b20: c31 m2–m4, c32 m0–m4 → c25–c32 COMPLETE (160 lineups total = all 32 faces × m0–m4). c32-m4 had a red forehead dot (from the t1 ref's huadian); two edits only faded it, so the last two dots were removed by local pixel inpainting (cv2) on the cutout bg/B-c32-m4-3zbarwMREY.png before mproc.
 
 ## NEXT (exact)
 - (B_b16 done) c26 m3 ... c32 m4, in order (8 per batch → sheets B_b16.jpg .. B_b20.jpg). Same per-batch steps as below.
