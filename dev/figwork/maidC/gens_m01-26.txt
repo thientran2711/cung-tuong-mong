@@ -16,3 +16,25 @@ C-m01-t3 3zbf8sCREY hands
 C-m02-t3 yiC8DxfPW9 hands
 C-m03-t3 SytpW5KUb8 hands
 C-m04-t3 rgeWZQVxtc hands
+C-m23-t2 xSdczl9jfW redo flat persimmon huadian
+C-m25-t2 yiC8d6xPW9 redo heavy opaque satin
+C-m26-t2 SytpTPOUb8 redo strong nomole
+C-m02-t3 1lpYASqr4r redo jet-black hair a48
+C-m26-t2 gOIDTVrSXO edit remove mole from SytpTPOUb8
+C-m05-t3 cplKbCa0eP hands
+C-m06-t3 bxTAZ9N5Y2 hands
+C-m07-t3 79vXeT1JAL hands
+C-m08-t3 VXUrk5QMMU hands
+C-m09-t3 ov9UglW829 hands
+C-m10-t3 aF24yPufSh hands (a24 letter->lantern)
+C-m11-t3 SytpMppUb8 hands
+C-m12-t3 JNaBdosOq4 hands
+C-m26-t2 SytpTPOUb8 use this (edit failed; mole removed by demole.py retouch)
+C-m13-t3 JNaBodkOq4 hands nomole
+C-m14-t3 vQZP4yma47 hands
+C-m15-t3 fHA9NNgCDY hands
+C-m16-t3 XmPgSU4Bfo hands
+C-m17-t3 lJ8MDdXgv9 hands
+C-m18-t3 ksDnYVo16B hands
+C-m19-t3 SytpetoUb8 hands
+C-m20-t3 Ebz6iYOuuO hands
