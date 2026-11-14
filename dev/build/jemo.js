@@ -188,6 +188,7 @@ span.md.kfc.xs .kin>img.kemo{width:38%!important;left:2%!important;top:14%!impor
 /* measurement hook */
 window.emoStat=function(){const c={};for(const p of emoPeople()){const e=emoGet(p);c[e.k]=(c[e.k]||0)+1}return Object.assign({now:c},EMO_N)};
 /* one source: the Trong cung block's mood words (jcmood kitCourtMood) read the same state and the same fog as the seals */
-Object.defineProperty(window,"kitCourtMood",{configurable:true,get(){try{if(!S)return null;const one=p=>{const m=window.kitEmotion(p)||{k:"an",known:false};const kn=!!m.known;
-  return{mood:kn?m.name:null,lv:kn?emoLv(m.k):null,why:kn?(m.why||null):null,known:kn}};const q=typeof queenP==="function"?queenP():null;
- return{th:S.thDead?null:one(emoTH()),hh:q&&q!==S?one(q):null}}catch(e){return null}}});
+/* jk2b kitCourtRows calls window.kitCourtMood(who) -> [text, cls] | null ("chưa rõ"); jcmood's object getter never matched that hook */
+Object.defineProperty(window,"kitCourtMood",{configurable:true,writable:true,value:function(w){try{if(!S)return null;const q=typeof queenP==="function"?queenP():null;
+ const p=w==="emp"?S.emp:w==="th"?emoTH():w==="hh"?q:null;if(!p||p===S)return null;const m=window.kitEmotion(p);if(!m||!m.known)return null;
+ return[m.name,m.k==="vui"?"g":["gian","buon","dau","so","lo","ghen"].includes(m.k)?"r":""]}catch(e){return null}}});
