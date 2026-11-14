@@ -338,3 +338,12 @@ function kitPcFix(pc){try{if(!pc||pc.dataset.k2==="1")return;const L=pc.querySel
  .kpstrip .kpsb{display:flex;flex-wrap:wrap;gap:0 10px;font-size:.72rem;color:var(--dim);flex:1;min-width:0}.kpstrip .kpsb>*{display:inline-flex;flex-wrap:wrap;align-items:center;gap:2px}
 }
 `;document.head.appendChild(st)})();
+
+/* ---------- 11. DELTA CHIPS take the whole short clause (owner 11/14: "nhà Hộ bộ thế lực −2", not "bộ thế lực −2") ----------
+   Up to 6 words before the number, stopping at punctuation; linking words at the front (và, được, mất, khiến, nên…) stay outside the chip. ---------- */
+const KP_DELTA2=/((?:[A-Za-zÀ-ỹĐđ]+ ){0,5}[A-Za-zÀ-ỹĐđ]+) ([+\-−])(\d+(?:[.,]\d+)?)(?![\d.,]*\d)(?!\s*[–-]\s*\d)/g;
+const KP_LEAD=/^((?:(?:và|được|mất|còn|thì|là|nhưng|vì|nên|khiến|làm|cho|với|bị|có|kèm|thêm|tốn|giảm|tăng|hao|đắc|thất)\s+)+)/i;
+kpChipify=function(html){return kpMapText(html,s=>s.replace(KP_DELTA2,(m,l,sg,n)=>{if(/^(năm|tháng|tuần|ngày|tuổi|lần|khắc|hồi)$/i.test(l.split(" ").pop()))return m;let pre="";const lm=KP_LEAD.exec(l);if(lm&&lm[1].length<l.length){pre=lm[1];l=l.slice(pre.length)}
+ const v=(sg==="+"?1:-1)*parseFloat(n.replace(",","."));return pre+kitChip(l,v)}))};
+/* wording: the contest table is "Bảng định thứ" (VANPHONG), whatever case the old text used */
+try{if(window.VP&&VP.rules){VP.rules.unshift(["BẢNG ĐIỂM","Bảng định thứ"],["Bảng điểm","Bảng định thứ"],["Bảng Điểm","Bảng định thứ"]);if(VP.full){VP.full["BẢNG ĐIỂM"]="Bảng định thứ";VP.full["Bảng điểm"]="Bảng định thứ"}}}catch(e){}

@@ -557,3 +557,7 @@ so stage blocks may stand beside a head or between figures, never over the paint
 - Tall frame and small frame: `.kfxc` (clip = photo window) > `.kfx` (box of the por picture, same 1.14x cut as the portrait); stage figures:
   `.kfxf` box laid over the figure image (idle animation off on that figure).
 - Scar only when the player knows (`KIT_SCAR.on`: herself or j70 `knows(p)`, or `p.scar.known`); a veil is public; never on the grey silhouette.
+### 26.9 DELTA CHIPS + WORDING
+- `kpChipify` (jk2b): a delta chip takes the whole short clause before the number (up to 6 words, stops at punctuation): "nhà Hộ bộ thế lực −2";
+  linking words in front (và, được, mất, khiến, nên…) stay outside the chip.
+- Contest tables are titled "Bảng định thứ" (any old "BẢNG ĐIỂM / Bảng điểm" is rewritten on screen by VP).
