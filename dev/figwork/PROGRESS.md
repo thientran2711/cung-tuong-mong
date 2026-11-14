@@ -33,7 +33,9 @@
   mm_fa applied again on sheer lineups (c04/c11 t5, c16/c25 t5, c30 t6). Sheets scratchpad/sheets/heads_t5_after.jpg, heads_t6_after.jpg.
 - NEXT: step 5 = t1-t3 calm redraw (96 lineups). Prompts READY: spec7.py now also rewrites N-cXX-t1/t2/t3 poses (a19 keeps her signature
   prop, a24/a32/a48 rotate the pool skipping props that clash with the signature). Identity ref stays the frozen t1 (idfix.json); draw a
-  pilot (e.g. c01 t1) and compare side by side with the old t1 before pinning anything; old t1-t3 lineups have no huadian and some moles.
+  PILOT DONE: c01 t1 mE3yQeWhJQ (not published) vs frozen p8Jr7Q4ehw -> dev/figwork/sheets/pilot_c01_t1.jpg + _heads.jpg: same face and
+  outfit, calm, 4 different props, a48 dark hair (old t1 a55 was grey), pink t1 huadian, no mole. Wording used = pj.py prompt with "keep EXACTLY
+  her face" (t1 keeps the outfit too). Owner/coordinator to OK the pilot, then run all 96 (do not pin new t1 in idfix.json); old t1-t3 lineups have no huadian and some moles.
   Also open: t4 c02 c03 c05 c06 c08-c18 (+c25 c30) are the older calm lineups without huadian; t7/t8 lineups predate huadian too.
 - Credits used by art8: ~25.4k by my own count (6 huadian edits 1.05k, 30 lineups 8.1k, 58 lineup edits 15.7k, ~185 bg cuts 0.56k). Account balance 1.944M (shared with other workers).
 
