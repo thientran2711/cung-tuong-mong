@@ -39,6 +39,9 @@ function kitCurl(o){o=o||{};const host=o.host,w=Math.max(40,o.w|0),h=Math.max(40
   for(let i=0;i<A.length;i++){const a=A[i],b=B[i];if(!b)break;if(!(keepId&&i===0))b.removeAttribute("id");
    if(a.scrollTop||a.scrollLeft)sc.push([b,a.scrollTop,a.scrollLeft]);
    if(i&&getComputedStyle(a).position==="sticky")b.style.position="relative"}
+  /* the copy leaves its parent, so rules like ".game>#panel" stop matching: carry the root's own box layout inline */
+  const cs=getComputedStyle(src);for(const k of["display","flexDirection","flexWrap","alignItems","alignContent","justifyContent","gap","gridTemplateRows","gridTemplateColumns","gridAutoRows","paddingTop","paddingRight","paddingBottom","paddingLeft","boxSizing","overflowX","overflowY","backgroundColor","backgroundImage","borderTopWidth","borderRightWidth","borderBottomWidth","borderLeftWidth","borderTopStyle","borderRightStyle","borderBottomStyle","borderLeftStyle","borderTopColor","borderRightColor","borderBottomColor","borderLeftColor","borderRadius","fontSize"])try{m.style[k]=cs[k]}catch(e){}
+  if(m.style.display==="none"||m.style.display==="contents")m.style.display="block";
   m.setAttribute("aria-hidden","true");m.inert=true;return{m,sc}};
  const face=(src,cls,keepId)=>{const f=document.createElement("div");f.className="kcl-face "+cls;f.style.width=w+"px";f.style.height=h+"px";
   const p=prep(src,keepId);if(p)f.appendChild(p.m);else if(typeof src==="string"&&src)f.innerHTML=src;else f.innerHTML=`<div class="kpaper kcl-blank"></div>`;return{f,sc:p?p.sc:[]}};
@@ -190,7 +193,7 @@ function kitBookPic(o){o=o||{};const ax=o.ax!=null?o.ax:.5,feet=o.feet!=null?o.f
 .kcl-gnd{position:absolute;inset:0;overflow:hidden}
 .kcl-hp{position:absolute;left:0;top:0;overflow:hidden;transform-origin:0 0;will-change:transform}
 .kcl-face{position:absolute;left:0;top:0;overflow:hidden;transform-origin:0 0;will-change:transform}
-.kcl .kcl-face>*:not(.kcl-sh){position:absolute!important;inset:0!important;width:auto!important;height:auto!important;max-height:none!important;margin:0!important;visibility:visible!important;transform:none!important;display:block}
+.kcl .kcl-face>*:not(.kcl-sh){position:absolute!important;inset:0!important;width:auto!important;height:auto!important;max-height:none!important;margin:0!important;visibility:visible!important;transform:none!important}
 .kcl-fr{box-shadow:0 0 0 1px #8a5a2418}
 /* the flap: its own soft shadow falls on the page below it */
 .kcl-bk{box-shadow:0 0 16px 2px #2a14064d,0 0 3px #2a140640;background:#f3e7cc}
