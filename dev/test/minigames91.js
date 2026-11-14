@@ -21,7 +21,7 @@ const ALL='dan,hat,co,dauho,ban,tho,doi,doden,ve,hoa,theu,kim,mua,banh,huong';co
   /* 1) one real touch action */
   let real=null;const t0=Date.now();
   while(Date.now()-t0<15000){const pk=await p.evaluate(()=>{const k=KG82.peek();return k?JSON.parse(JSON.stringify(k)):null});
-   if(pk){if(pk.drag){const D=pk.drag;await touch('touchStart',D[0][0],D[0][1]);for(let i=1;i<D.length;i++){const [x0,y0]=D[i-1],[x1,y1]=D[i];for(let s=1;s<=4;s++)await touch('touchMove',x0+(x1-x0)*s/4,y0+(y1-y0)*s/4)}await touch('touchEnd');real='drag'}
+   if(pk){if(pk.drag){const D=pk.drag;await touch('touchStart',D[0][0],D[0][1]);for(let i=1;i<D.length;i++){const [x0,y0]=D[i-1],[x1,y1]=D[i];const n=Math.max(1,Math.ceil(Math.hypot(x1-x0,y1-y0)/14));for(let s=1;s<=n;s++)await touch('touchMove',x0+(x1-x0)*s/n,y0+(y1-y0)*s/n)}await touch('touchEnd');real='drag'}
     else if('hold' in pk){let x=pk.x,y=pk.y;if(pk.hsel){const r=await p.locator(pk.hsel).boundingBox();x=r.x+r.width/2;y=r.y+r.height/2}await touch('touchStart',x,y);await p.waitForTimeout(400);await touch('touchEnd');real='hold'}
     else if(pk.sel){await p.locator(pk.sel).tap();real='button'}
     else{await touch('touchStart',pk.x,pk.y);await touch('touchEnd');real='tap'}break}
@@ -32,7 +32,7 @@ const ALL='dan,hat,co,dauho,ban,tho,doi,doden,ve,hoa,theu,kim,mua,banh,huong';co
    const tick=()=>{if(KG82.phase!=='play'){if(hold){pe(hold.el,'pointerup',hold.x,hold.y,7);hold=null}return}const pk=KG82.peek();const now=performance.now();
     if(pk){if('hold' in pk){const el=pk.hsel?document.querySelector(pk.hsel):document.elementFromPoint(pk.x,pk.y);let x=pk.x,y=pk.y;if(pk.hsel&&el){const r=el.getBoundingClientRect();x=r.left+r.width/2;y=r.top+r.height/2}
        if(pk.hold&&!hold&&el){pe(el,'pointerdown',x,y,7);hold={el,x,y}}else if(!pk.hold&&hold){pe(hold.el,'pointerup',hold.x,hold.y,7);hold=null}}
-     if(pk.drag&&!busy&&now>nx){busy=true;const D=pk.drag;const el=document.elementFromPoint(D[0][0],D[0][1]);const pts=[];for(let i=1;i<D.length;i++)for(let s=1;s<=6;s++)pts.push([D[i-1][0]+(D[i][0]-D[i-1][0])*s/6,D[i-1][1]+(D[i][1]-D[i-1][1])*s/6]);
+     if(pk.drag&&!busy&&now>nx){busy=true;const D=pk.drag;const el=document.elementFromPoint(D[0][0],D[0][1]);const pts=[];for(let i=1;i<D.length;i++){const n=Math.max(1,Math.ceil(Math.hypot(D[i][0]-D[i-1][0],D[i][1]-D[i-1][1])/12));for(let s=1;s<=n;s++)pts.push([D[i-1][0]+(D[i][0]-D[i-1][0])*s/n,D[i-1][1]+(D[i][1]-D[i-1][1])*s/n])}
        pe(el,'pointerdown',D[0][0],D[0][1],3);let k=0;const mv=()=>{if(k<pts.length){pe(el,'pointermove',pts[k][0],pts[k][1],3);k++;setTimeout(mv,10)}else{const l=pts[pts.length-1]||D[0];pe(el,'pointerup',l[0],l[1],3);busy=false;nx=performance.now()+260}};mv()}
      else if(pk.sel&&now>nx&&!busy){const el=document.querySelector(pk.sel);if(el)el.click();nx=now+300}
      else if(pk.x!=null&&!('hold' in pk)&&!pk.drag&&now>nx&&!busy){const el=document.elementFromPoint(pk.x,pk.y);if(el){pe(el,'pointerdown',pk.x,pk.y,5);pe(el,'pointerup',pk.x,pk.y,5)}nx=now+120}}
