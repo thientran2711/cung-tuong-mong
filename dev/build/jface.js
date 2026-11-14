@@ -53,7 +53,7 @@ const FXILL=[null,{sat:.70,br:1.06,tint:"rgba(242,240,238,.22)",eye:"rgba(122,96
  {sat:.50,br:1.08,tint:"rgba(232,232,228,.32)",eye:"rgba(104,84,116,.34)",lip:"rgba(232,214,208,.70)"}];
 /* the matching face (KIT_EXPR mix): tired / pained, under-eye shadow and dry pale lips on the landmarks */
 const FXILLX=[null,{buon:.5,eye:"150,120,150,.20",lip:"236,212,206,.45,n"},{buon:.55,dau:.25,eye:"134,108,140,.24",lip:"234,213,207,.55,n"},{buon:.6,dau:.5,eye:"120,96,130,.26",lip:"232,214,208,.62,n"}];
-KIT_FACEFX.add({id:"ill",z:10,ready:false,
+KIT_FACEFX.add({id:"ill",z:10,ready:true,                  /* owner approved (pilot 2) */
  state:p=>{if(!p||p===S&&S.dead)return null;const i=typeof illOf==="function"?illOf(p):null;if(i&&i.k!=="docman"&&i.k!=="longthe")return{lvl:cl(i.st|0,1,3),ill:i};
   if((p.sick||0)>0)return{lvl:2};if(typeof p.suc==="number"&&p.suc<FX.weakSuc&&!(p.pz&&p.pz.until>wk()))return{lvl:1,weak:true};return null},
  seen:(p,st)=>p===S||(st.ill?(typeof illKnown!=="function"||illKnown(p))&&fxSeen(p):fxSeen(p)),
@@ -70,7 +70,7 @@ function pzGive(p,sev,how,by,weeks){if(!p||(p!==S&&(!p.alive||p.out)))return;sev
  p.pz={sev,until:u,how:how||"",by:by?key(by):null,at:wk(),dx:0,nt:0}}
 function pzOf(p){if(!p)return null;if(p.pz&&p.pz.until>wk())return p.pz;const i=typeof illOf==="function"?illOf(p):null;if(i&&i.k==="docman")return{sev:i.st>=2?2:1,ill:1};return null}
 function fxObservant(){try{return (S.mat||0)>=3||((S.arts&&S.arts.y)||0)>=2||!!S.doctor}catch(e){return false}}
-KIT_FACEFX.add({id:"doc",z:12,ready:false,
+KIT_FACEFX.add({id:"doc",z:12,ready:true,                  /* owner approved (pilot 2) */
  state:p=>pzOf(p),
  seen:(p,st)=>fxSeen(p),                                /* the face itself shows to anyone who sees her; what it MEANS needs an eye (chip) */
  sac:(p,st)=>FX.doc[st.sev],

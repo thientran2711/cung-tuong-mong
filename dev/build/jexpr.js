@@ -19,16 +19,18 @@ window.KIT_EXPR={K:["mL","mR","uL","lL","bLi","bLm","bLo","bRi","bRm","bRo","eLo
   const add=(p,dx,dy,r,w)=>{if(w>0)U.push([p[0],p[1],dx*F*w,dy*F*w,r*F])};
   const inL=P.bLi[0]<cx?1:-1;                                   /* direction from the left brow toward the face centre */
   const b=Math.min(1,mix.buon||0)+Math.min(1,mix.khoc||0)*.9,g=Math.min(1,mix.gian||0),d=Math.min(1,mix.dau||0);
-  /* buồn */
-  add(P.mL,.010,.055,.085,b);add(P.mR,-.010,.055,.085,b);add(P.uL,0,.010,.06,b);add(P.lL,0,-.006,.06,b);
-  add(P.bLi,.004*inL,-.035,.07,b);add(P.bRi,-.004*inL,-.035,.07,b);add(P.bLo,0,.008,.06,b);add(P.bRo,0,.008,.06,b);
-  add(P.eLt,0,.012,.04,b);add(P.eRt,0,.012,.04,b);
-  /* giận */
-  add(P.bLi,.022*inL,.038,.07,g);add(P.bRi,-.022*inL,.038,.07,g);add(P.bLm,.006*inL,.016,.08,g);add(P.bRm,-.006*inL,.016,.08,g);
-  add(P.mL,.018,.035,.08,g);add(P.mR,-.018,.035,.08,g);add(P.lL,0,-.012,.06,g);add(P.eLt,0,.010,.04,g);add(P.eRt,0,.010,.04,g);
-  /* đau */
-  add(P.eLt,0,.018,.04,d);add(P.eRt,0,.018,.04,d);add(P.eLb,0,-.012,.035,d);add(P.eRb,0,-.012,.035,d);
-  add(P.bLi,.016*inL,.020,.065,d);add(P.bRi,-.016*inL,.020,.065,d);add(P.bLm,0,-.010,.06,d);add(P.bRm,0,-.010,.06,d);add(P.mL,.008,.040,.08,d);add(P.mR,-.008,.040,.08,d);
+  /* buồn: mouth line bent into a soft frown (corners well down, centre a touch up), inner brows lifted and slanted, upper lids lowered */
+  add(P.mL,.012,.075,.12,b);add(P.mR,-.012,.075,.12,b);add(P.mUL,0,.028,.065,b);add(P.mUR,0,.028,.065,b);add(P.uL,0,-.006,.05,b);
+  add(P.bLi,.006*inL,-.055,.075,b);add(P.bRi,-.006*inL,-.055,.075,b);add(P.bLo,0,.018,.07,b);add(P.bRo,0,.018,.07,b);
+  add(P.eLt,0,.020,.045,b);add(P.eRt,0,.020,.045,b);
+  /* giận: brows pulled down and in (a clear V), lids narrowed, lips pressed and the mouth narrowed */
+  add(P.bLi,.034*inL,.055,.08,g);add(P.bRi,-.034*inL,.055,.08,g);add(P.bLm,.010*inL,.026,.08,g);add(P.bRm,-.010*inL,.026,.08,g);add(P.bLo,0,-.010,.06,g);add(P.bRo,0,-.010,.06,g);
+  add(P.eLt,0,.014,.045,g);add(P.eRt,0,.014,.045,g);add(P.eLb,0,-.008,.035,g);add(P.eRb,0,-.008,.035,g);
+  add(P.mL,.030,.030,.10,g);add(P.mR,-.030,.030,.10,g);add(P.lL,0,-.020,.065,g);add(P.uL,0,.012,.05,g);
+  /* đau: eyes squeezed, inner brows knit and lifted, mouth corners pulled down */
+  add(P.eLt,0,.028,.045,d);add(P.eRt,0,.028,.045,d);add(P.eLb,0,-.020,.04,d);add(P.eRb,0,-.020,.04,d);
+  add(P.bLi,.026*inL,-.012,.07,d);add(P.bRi,-.026*inL,-.012,.07,d);add(P.bLo,0,.012,.06,d);add(P.bRo,0,.012,.06,d);
+  add(P.mL,.012,.055,.11,d);add(P.mR,-.012,.055,.11,d);add(P.lL,0,-.012,.06,d);
   return{U,F}},
  make:function(img,file,mix){const W=img.naturalWidth,H=img.naturalHeight;const P=this.pts(file,W,H);if(!P||!W)return null;const {U,F}=this.pulls(P,mix);
   const xs=[P.fL[0],P.fR[0],P.mL[0],P.mR[0]],ys=[P.fh[1],P.chin[1]];
@@ -60,11 +62,12 @@ window.KIT_EXPR={K:["mL","mR","uL","lL","bLi","bLm","bLo","bRi","bRm","bRo","eLo
    if(!nrm){c.globalCompositeOperation="source-atop";c.globalAlpha=a*.35;c.fillStyle="rgb(238,232,232)";c.fill()}c.restore()}},
  /* khóc: a faint wet shine along each lower lid and one small tear on the cheek facing the viewer */
  tear:function(c,P,x0,y0,S,F,k){const T=(p)=>[(p[0]-x0)*S,(p[1]-y0)*S];c.save();
-  for(const [o,i,b] of [[P.eLo,P.eLi,P.eLb],[P.eRo,P.eRi,P.eRb]]){const a0=T(o),z0=T(i),m=T(b),a=[a0[0]*.8+z0[0]*.2,a0[1]*.8+z0[1]*.2],z=[z0[0]*.85+a0[0]*.15,z0[1]*.85+a0[1]*.15];const g=c.createLinearGradient(a[0],a[1],z[0],z[1]);g.addColorStop(0,"rgba(255,255,255,0)");g.addColorStop(.5,`rgba(255,255,255,${.42*k})`);g.addColorStop(1,"rgba(255,255,255,0)");
-   c.strokeStyle=g;c.lineWidth=Math.max(1,.012*F*S);c.lineCap="round";c.beginPath();c.moveTo(a[0],a[1]+.004*F*S);c.quadraticCurveTo(m[0],m[1]+.006*F*S,z[0],z[1]+.004*F*S);c.stroke()}
-  const e=T(P.eLb),i=T(P.eLi),L=.11*F*S,x=e[0]*.6+i[0]*.4,y=e[1]+.010*F*S;c.filter=`blur(${(.002*F*S).toFixed(1)}px)`;
-  const tg=c.createLinearGradient(x,y,x,y+L);tg.addColorStop(0,`rgba(255,255,255,${.30*k})`);tg.addColorStop(1,`rgba(255,255,255,0)`);
-  c.strokeStyle=tg;c.lineCap="round";c.lineWidth=Math.max(1,.006*F*S);c.beginPath();c.moveTo(x,y);c.bezierCurveTo(x-.004*F*S,y+L*.4,x-.012*F*S,y+L*.7,x-.010*F*S,y+L);c.stroke();
+  for(const [o,i,b] of [[P.eLo,P.eLi,P.eLb],[P.eRo,P.eRi,P.eRb]]){const a0=T(o),z0=T(i),m=T(b),a=[a0[0]*.8+z0[0]*.2,a0[1]*.8+z0[1]*.2],z=[z0[0]*.85+a0[0]*.15,z0[1]*.85+a0[1]*.15];const g=c.createLinearGradient(a[0],a[1],z[0],z[1]);g.addColorStop(0,"rgba(255,255,255,0)");g.addColorStop(.5,`rgba(255,255,255,${.70*k})`);g.addColorStop(1,"rgba(255,255,255,0)");
+   c.strokeStyle=g;c.lineWidth=Math.max(1.5,.016*F*S);c.lineCap="round";c.beginPath();c.moveTo(a[0],a[1]+.004*F*S);c.quadraticCurveTo(m[0],m[1]+.006*F*S,z[0],z[1]+.004*F*S);c.stroke()}
+  const e=T(P.eLb),i=T(P.eLi),L=.16*F*S,x=e[0]*.6+i[0]*.4,y=e[1]+.010*F*S;c.filter=`blur(${(.002*F*S).toFixed(1)}px)`;
+  const tg=c.createLinearGradient(x,y,x,y+L);tg.addColorStop(0,`rgba(255,255,255,${.62*k})`);tg.addColorStop(1,`rgba(255,255,255,${.25*k})`);
+  c.strokeStyle=`rgba(150,105,105,${.14*k})`;c.lineCap="round";c.lineWidth=Math.max(1.5,.012*F*S);c.beginPath();c.moveTo(x+.004*F*S,y);c.bezierCurveTo(x,y+L*.4,x-.008*F*S,y+L*.7,x-.006*F*S,y+L);c.stroke();
+  c.strokeStyle=tg;c.lineWidth=Math.max(1.2,.009*F*S);c.beginPath();c.moveTo(x,y);c.bezierCurveTo(x-.004*F*S,y+L*.4,x-.012*F*S,y+L*.7,x-.010*F*S,y+L);c.stroke();
   /* the drop: long teardrop, light from the top-left, a soft shadow under it */
   const r=.016*F*S,dx=x-.011*F*S,dy=y+L*.62;const drop=(ox,oy,sc)=>{c.beginPath();c.moveTo(dx+ox,dy+oy-r*2.1*sc);c.bezierCurveTo(dx+ox+r*.9*sc,dy+oy-r*.6*sc,dx+ox+r*1.0*sc,dy+oy+r*.9*sc,dx+ox,dy+oy+r*sc);c.bezierCurveTo(dx+ox-r*1.0*sc,dy+oy+r*.9*sc,dx+ox-r*.9*sc,dy+oy-r*.6*sc,dx+ox,dy+oy-r*2.1*sc);c.closePath()};
   c.fillStyle=`rgba(140,100,100,${.16*k})`;drop(r*.25,r*.3,1);c.fill();
