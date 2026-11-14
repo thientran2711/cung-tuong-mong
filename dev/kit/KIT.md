@@ -926,6 +926,38 @@ to `#rtoast .ksen` (result card), `.pc .pcn` (person-card result note), kit pane
 - Dialog options (26.6 event rule hides outcomes): an option with `showOdds:true` keeps its odds word; `showOut:true` shows the full act card.
 - Stage veil / scar overlay (`kitFigFx`): laid over the DRAWN figure (object-fit + object-position + the image transform), not the img box.
 
+### 31.16 OPTION GROUPS — layout per screen ('rows' | 'grid') + DIALOG HEADER PICTURE (jk3 §13, owner 11/14)
+Component: every dialog option group (`#modal .opts`, `.kpscopts`) gets `.k3rows` (full-width cards, one per row) or `.k3grid` (equal cells,
+2 columns; 3 on ≥ 1000 px when 3+ short options). Chosen PER SCREEN: a Q / kitModal item sets `optLayout:'rows'|'grid'`; without it the
+layout is read from the options' content — LONG option = Cần / Được / Mất / Kèm rows, an odds word, or a title over 2 lines; SHORT = title +
+cost line. All long → rows · all short → grid · mixed → long ones span the full row, short ones share the grid.
+A dialog may carry `headArt:"img/…webp"` or `{src,label}` → wide kitSceneArt band on top (height clamp 90–220 px).
+
+| screen | layout | reason |
+|---|---|---|
+| Weekly events (j68), side events, dilemmas (j70) — event rule shows cost only | grid | short: title + Tốn |
+| Mệnh truyện chapters (j67) | grid | short (cost only, outcomes hidden) |
+| Succession card "Tiên đế băng hà" | rows (`optLayout:'rows'`) + headArt | long, consequential choices |
+| Big story events | rows + headArt | long texts |
+| Night / thị tẩm choices | auto → grid when cost-only, rows when they carry odds | content |
+| Result cards (#rtoast) | n/a | no options (bullet list 31.14) |
+| Reward chests, minigame start, confirm Yes/No | grid | 2–4 quick picks |
+| Chải chuốt, Tư trang actions | auto (grid for quick picks, rows for act cards with Cần/Được) | content |
+| Identity card | approved pinned pair (unchanged) | owner approved |
+| Sổ luân hồi / Chọn sổ | grid | slot picks |
+| Act lists in Hành sự, servant Phận sự, person-card acts | rows (act cards, `.cards`, not dialogs) | long: Cần/Tốn/Được/Mất rows + odds |
+| Act-like options inside a dialog (`showOdds` / `showOut`) | auto → rows | they show odds / outcomes |
+
+### 31.17 ONE PERSON CARD · CATEGORY FRAMES · ALIGNED TOP BAR (jk3 §14, owner 11/14 — "iPad landscape = two phone panels side by side")
+- Person card: the iPad two-column card on EVERY screen ≥ 600 px (`kitPcWide`), Fold included — no separate Fold card. Left column top-aligned:
+  name → rank → rank frame at full column width (the frame picture's empty headroom is trimmed per frame) → chips (wrap, never clipped) →
+  one short dim helper line "Mới biết tên ⓘ" (full text in the tooltip) → Biết tên / Nơi ở. Column `--kpcw` 29 vw (170–240 px) on 600–999 px.
+- A consort card ALWAYS shows the relation row Ghen · Oán · Thiện cảm · Nàng với ngươi ("?" when unknown) — kitPersonChips.
+- kitSceneArt with a category (`kcat-<cat>` + `--kcc`): rich double border in the category colour, four corner ornaments whose shape differs
+  per category (square / round / diamond …), inner hairline style per category, label plaque at the bottom; never a tassel.
+- Top bar ≥ 1000 px: the four Tư chất cells are drawn like Bạc / Sức / Sủng / Danh (icon + small label above, number below in the same font,
+  size and weight, read from the live stat cell), one row, equal gaps, shared baseline.
+
 ## OWNER POINTS 14/11 (fold-layout) — checklist (✔ = verified in screenshots dev/shots/fold-layout/ at 686x880@2.2 + 1180x820@2)
 | time | point | component | status |
 |---|---|---|---|

@@ -376,3 +376,115 @@ small.kblf{display:block;margin-top:3px;font-size:.72rem;color:var(--dim,#7a6a58
 #me-a.k3age{display:inline-flex;flex:0 0 auto;align-items:center;vertical-align:middle;margin-left:5px;padding:0 7px;border:1px solid var(--line);border-radius:999px;
  font-size:.72rem;font-weight:600;line-height:1.5;color:var(--ink);background:var(--k3pl,#fffaf0);white-space:nowrap}
 `;document.head.appendChild(st)})();
+
+/* ---------- 13. DIALOG OPTIONS ONE PER ROW + DIALOG HEADER PICTURE (KIT 31.16, owner 11/14 succession card) ----------
+   Every dialog / event / chapter / choice panel: option act-cards are FULL WIDTH, one per row, stacked (no 2-column grid with empty gaps).
+   On wide screens (≥ 1000 px) two columns are kept only when the cards are of similar height (max/min ≤ 1.2); measured after each dialog opens.
+   The identity card (.kpid) keeps its approved two pinned choices.
+   Header picture: a Q / kitModal item may carry headArt:"img/…webp" or {src,label} → a wide 16:9 kitSceneArt band at the top of the dialog
+   (height capped so the choices stay on screen). Succession and big story events use it. ---------- */
+/* option-group layout (KIT 31.16 table): 'rows' = full-width cards one per row · 'grid' = equal cells, 2 columns (3 on ≥ 1000 px with 3+ options).
+   Per screen: a Q / kitModal item may set optLayout:'rows'|'grid'; otherwise it is read from the options' CONTENT: an option is LONG when it
+   shows Cần / Được / Mất / Kèm rows, an odds word, or a text over 2 lines; SHORT = title + cost line. All short → grid, all long → rows,
+   mixed → long ones full width, short ones in the grid. The identity card keeps its approved pinned pair. */
+function k3IsLong(b){if(b.querySelector(".kr-can,.kr-duoc,.kr-mat,.kr-kem,.kr-why,.kodds:not(:empty),.oc"))return true;const lh=parseFloat(getComputedStyle(b).lineHeight)||20;
+ const t=b.querySelector(".kan");return !!(t&&t.getBoundingClientRect().height>lh*2.3)}
+function k3OptCols(){try{const W=innerWidth;const m=typeof Q!=="undefined"?Q[0]:null;const want=m&&(m.optLayout||(m.kit&&m.kit.optLayout));
+ document.querySelectorAll("#modal .opts:has(> button.ka), #modal .kpscopts").forEach(g=>{const dl=g.closest(".dlg");if(dl&&dl.querySelector(".kpid"))return;
+  const B=[...g.querySelectorAll(":scope > button.ka")];g.classList.remove("k3rows","k3grid","k3g3");B.forEach(x=>x.classList.remove("k3long"));
+  if(want==="rows"){g.classList.add("k3rows");return}if(want==="grid"){g.classList.add("k3grid");if(W>=1000&&B.length>=3)g.classList.add("k3g3");return}
+  g.classList.add("k3rows");const L=B.map(k3IsLong);if(L.every(Boolean))return;g.classList.remove("k3rows");g.classList.add("k3grid");if(W>=1000&&B.filter((x,i)=>!L[i]).length>=3)g.classList.add("k3g3");
+  B.forEach((x,i)=>{if(L[i])x.classList.add("k3long")})})}catch(e){}}
+(function(){if(typeof showModal!=="function")return;const s0=showModal;showModal=function(){const m=typeof Q!=="undefined"?Q[0]:null;const r=s0.apply(this,arguments);
+ try{const mb=document.getElementById("mb");const ha=m&&(m.headArt||(m.kit&&m.kit.headArt));if(mb&&ha&&!mb.querySelector(":scope > .kdlgart")){const src=typeof ha==="string"?ha:ha.src,lab=typeof ha==="string"?"":(ha.label||"");
+  const d=document.createElement("div");d.className="kdlgart";d.innerHTML=kitSceneArt(src,lab,{shape:"wide",cap:!!lab});mb.prepend(d)}}catch(e){}
+ requestAnimationFrame(k3OptCols);setTimeout(k3OptCols,300);return r}
+ addEventListener("resize",()=>setTimeout(k3OptCols,60));
+ const st=document.createElement("style");st.id="k3-opts";st.textContent=`
+html body #modal .opts.k3rows:has(> button.ka),html body #modal .kpscopts.k3rows{display:grid!important;grid-template-columns:minmax(0,1fr)!important;grid-auto-rows:auto!important}
+html body #modal .opts.k3rows>button.ka,html body #modal .kpscopts.k3rows>button.ka{min-height:0!important}
+html body #modal .opts.k3grid:has(> button.ka),html body #modal .kpscopts.k3grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;grid-auto-rows:auto!important;align-items:stretch!important}
+html body #modal .opts.k3grid.k3g3:has(> button.ka),html body #modal .kpscopts.k3grid.k3g3{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+html body #modal .k3grid>button.ka.k3long{grid-column:1/-1}
+#mb>.kdlgart{margin:0 0 8px}#mb>.kdlgart>.ksart{aspect-ratio:auto;height:clamp(90px,22dvh,220px)}#mb>.kdlgart>.ksart>img{object-position:center 45%}
+`;document.head.appendChild(st)})();
+
+/* ---------- 14. ONE PERSON CARD + CATEGORY PICTURE FRAMES + ALIGNED TOP BAR (owner 11/14, kit owner #2) ----------
+   (a) Person card: the iPad two-column card on every screen ≥ 600 px (kitPcWide, jk2b). Left column, top-aligned: name → rank → the rank frame
+       at the FULL column width (its empty canvas headroom above the ornament is trimmed per frame picture, measured once) → chips (wrap inside
+       the column, never clipped) → one short dim helper line ("Mới biết tên ⓘ", full text in the tooltip) → Biết tên / Nơi ở chips.
+   (b) kitSceneArt category frame (act cards; events by type): the category colour as a rich double border with four corner ornaments whose
+       shape differs per category (KIT_CATFR), label plaque at the bottom; no tassel.
+   (c) Top bar on iPad (≥ 1000 px): the four Tư chất cells use the SAME cell as Bạc / Sức / Sủng / Danh (icon + small label on top, number
+       below), one row, equal spacing, shared baselines. ---------- */
+(function(){
+ /* (a) trim the frame's empty headroom: first opaque row of the frame picture, cached per src */
+ const TOP={};function topOf(src,cb){if(TOP[src]!=null)return cb(TOP[src]);const im=new Image();im.onload=()=>{try{const w=64,h=Math.round(64*im.naturalHeight/im.naturalWidth);const c=document.createElement("canvas");c.width=w;c.height=h;
+   const x=c.getContext("2d");x.drawImage(im,0,0,w,h);const d=x.getImageData(0,0,w,h).data;let y=0;outer:for(;y<h;y++){for(let i=0;i<w;i++)if(d[(y*w+i)*4+3]>40)break outer}TOP[src]=y/h}catch(e){TOP[src]=0}cb(TOP[src])};im.onerror=()=>{TOP[src]=0;cb(0)};im.src=src}
+ function fit(){document.querySelectorAll(".pc.kpwide[data-k2]>.pcl>.pcp.kit").forEach(pp=>{const fr=pp.querySelector("img.kfr");if(!fr)return;const src=fr.getAttribute("src");
+   topOf(src,t=>{const kin=pp.querySelector(".kin");const H=kin?kin.getBoundingClientRect().height:0;const cut=Math.max(0,t*H-4);pp.style.marginTop=(-cut)+"px";pp.style.setProperty("--kptrim",cut+"px")})});
+  document.querySelectorAll(".pc[data-k2] .kpfacts .pcinfo>*,.pc[data-k2]>.pcl>p").forEach(e=>{const t=e.textContent.trim();if(!/^Mới biết tên/.test(t)||e.classList.contains("kphelp"))return;
+   e.classList.add("kphelp");e.title=t;e.innerHTML=`Mới biết tên <i aria-hidden="true">ⓘ</i>`})}
+ let tt=0;try{new MutationObserver(()=>{clearTimeout(tt);tt=setTimeout(fit,40)}).observe(document.body,{childList:true,subtree:true})}catch(e){}addEventListener("resize",()=>setTimeout(fit,80));
+ const st=document.createElement("style");st.id="k3-card1";st.textContent=`
+html body .pc.kpwide[data-k2]{align-items:start!important}
+html body .pc.kpwide[data-k2]>.pcl{align-self:start!important;justify-content:flex-start!important;padding:0 3px 6px!important;overflow-x:hidden!important}
+html body .pc.kpwide[data-k2]>.pcl>.pcp.kit{width:100%!important;float:none!important;margin-left:0!important;margin-right:0!important;margin-bottom:4px!important;position:relative;z-index:0}
+html body .pc.kpwide[data-k2]>.pcl>.pcname,html body .pc.kpwide[data-k2]>.pcl>.pcrk{position:relative;z-index:1}
+html body .pc.kpwide .kpgrid,html body .pc.kpwide .kpgr{min-width:0;max-width:100%;flex-wrap:wrap!important}
+html body .pc.kpwide .kpq{max-width:100%;min-width:0;flex-wrap:wrap}
+.pc .kphelp{display:block;font-size:.72rem!important;color:var(--dim,#8a7a68)!important;line-height:1.3;cursor:help}
+.pc .kphelp i{font-style:normal}
+`;document.head.appendChild(st);
+ /* (b) category frames */
+ const sh=document.createElement("style");sh.id="k3-catfr";sh.textContent=`
+.ksart.ksart-cat{border:3px double var(--kcc)!important;box-shadow:inset 0 0 0 2px #fffaf0,inset 0 0 0 3px var(--kcc),0 1px 4px #3a201030!important;border-radius:6px;--kco:10px;--kcr:2px;--kcrot:45deg}
+.ksart.ksart-cat::after{content:"";position:absolute;inset:-1px;pointer-events:none;z-index:3;
+ background:
+  linear-gradient(var(--kcc),var(--kcc)) top left/var(--kco) var(--kco) no-repeat,
+  linear-gradient(var(--kcc),var(--kcc)) top right/var(--kco) var(--kco) no-repeat,
+  linear-gradient(var(--kcc),var(--kcc)) bottom left/var(--kco) var(--kco) no-repeat,
+  linear-gradient(var(--kcc),var(--kcc)) bottom right/var(--kco) var(--kco) no-repeat;
+ -webkit-mask:var(--kcm,none);mask:var(--kcm,none)}
+.ksart.ksart-cat::before{content:"";position:absolute;inset:5px;border:1px solid color-mix(in srgb,var(--kcc) 55%,#fff);border-radius:var(--kcr);pointer-events:none;z-index:3}
+/* corner motif per category: square (Lễ nghi), round (Giao thiệp), diamond (Mưu kế), notched (Hại người), cloud-round (Nghỉ ngơi),
+   wide bar (Học tập), heart-round (Tranh sủng), coin (Buôn bán), arrow (Đi lại), small square (Hầu hạ), cross (Trừng phạt), soft (Con cái) */
+.ksart.kcat-le-nghi{--kco:12px}
+.ksart.kcat-giao-thiep::after,.ksart.kcat-nghi-ngoi::after,.ksart.kcat-cham-con::after,.ksart.kcat-sung-ai::after,.ksart.kcat-buon-ban::after{
+ background:radial-gradient(circle,var(--kcc) 0 5px,transparent 5.5px) top left/12px 12px no-repeat,radial-gradient(circle,var(--kcc) 0 5px,transparent 5.5px) top right/12px 12px no-repeat,
+  radial-gradient(circle,var(--kcc) 0 5px,transparent 5.5px) bottom left/12px 12px no-repeat,radial-gradient(circle,var(--kcc) 0 5px,transparent 5.5px) bottom right/12px 12px no-repeat}
+.ksart.kcat-sung-ai::before{border-style:dashed;border-radius:10px}
+.ksart.kcat-buon-ban::before{border-style:double;border-width:3px}
+.ksart.kcat-nghi-ngoi::before{border-radius:14px}
+.ksart.kcat-cham-con::before{border-radius:8px;border-style:dotted;border-width:2px}
+.ksart.kcat-muu-ke::after,.ksart.kcat-hai-nguoi::after,.ksart.kcat-trung-phat::after{
+ background:conic-gradient(from 45deg,var(--kcc) 0 25%,transparent 0 50%,var(--kcc) 0 75%,transparent 0) top left/12px 12px no-repeat,
+  conic-gradient(from 45deg,var(--kcc) 0 25%,transparent 0 50%,var(--kcc) 0 75%,transparent 0) top right/12px 12px no-repeat,
+  conic-gradient(from 45deg,var(--kcc) 0 25%,transparent 0 50%,var(--kcc) 0 75%,transparent 0) bottom left/12px 12px no-repeat,
+  conic-gradient(from 45deg,var(--kcc) 0 25%,transparent 0 50%,var(--kcc) 0 75%,transparent 0) bottom right/12px 12px no-repeat}
+.ksart.kcat-hai-nguoi::before{border-style:solid;border-width:2px;border-radius:0}
+.ksart.kcat-trung-phat::before{border-style:dashed;border-radius:0}
+.ksart.kcat-hoc-tap{--kco:16px}.ksart.kcat-hoc-tap::before{border-style:double;border-width:3px;border-radius:0}
+.ksart.kcat-di-lai::before{border-style:dashed}
+.ksart.kcat-hau-ha{--kco:7px}
+.ksart.kcat-trieu-chinh{--kco:14px}.ksart.kcat-trieu-chinh::before{border-width:2px}
+`;document.head.appendChild(sh);
+ /* (c) aligned top bar */
+ const tb=document.createElement("style");tb.id="k3-bar";tb.textContent=`
+@media (min-width:1000px){
+ html body .k3tc .k3ts{display:grid!important;grid-template-columns:repeat(4,minmax(48px,auto))!important;gap:0 10px!important;align-items:end!important;border-left:1px solid var(--k-hair,#e6d3ac);padding-left:12px}
+ html body .k3tc .k3tcv{position:relative;display:grid!important;grid-template-columns:auto auto;grid-template-areas:"i l" "b b";justify-content:center;justify-items:center;align-items:center;column-gap:3px;row-gap:0;line-height:1.15}
+ html body .k3tc .k3tcv>img.ic{grid-area:i;width:var(--k3icw,14px)!important;height:var(--k3icw,14px)!important}
+ html body .k3tc .k3tcv>small{grid-area:l;display:inline!important;font-size:var(--k3lab,.64rem)!important;color:var(--k-lab,#8a7350)}
+ html body .k3tc .k3tcv>b{grid-area:b;font-size:var(--k3num,1.15rem)!important;font-family:var(--k3numf,inherit);font-weight:var(--k3numw,600);line-height:1.1}
+ html body .k3tc .k3tcv>.k3warn{position:absolute;right:-9px;bottom:2px}
+ html body header.hud>#k3tc{align-self:end!important}
+ html body .k3tc .k3tt{align-self:center}
+}
+`;document.head.appendChild(tb);
+ /* copy the money/stat cell's real type sizes to the Tư chất cells, so both groups share font + baseline */
+ function bar(){try{const st=document.querySelector(".stats .st");if(!st)return;const b=st.querySelector(":scope>span,b"),sm=st.querySelector("small");const R=document.documentElement.style;
+  if(b){const c=getComputedStyle(b);R.setProperty("--k3num",c.fontSize);R.setProperty("--k3numf",c.fontFamily);R.setProperty("--k3numw",c.fontWeight)}
+  if(sm){const c=getComputedStyle(sm);R.setProperty("--k3lab",c.fontSize);const im=sm.querySelector("img");if(im)R.setProperty("--k3icw",im.getBoundingClientRect().width+"px")}}catch(e){}}
+ setTimeout(bar,400);addEventListener("resize",()=>setTimeout(bar,100));
+})();
