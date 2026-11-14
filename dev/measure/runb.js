@@ -8,7 +8,7 @@ const M=__dirname,GAME=process.env.GAME||path.join(M,'..','index.html');
  await page.goto('file://'+GAME);await page.waitForTimeout(500);
  await page.evaluate(()=>localStorage.clear());await page.reload();await page.waitForTimeout(500);
  await page.click('#slots button[data-new="1"]');
- await page.evaluate(`window.__servPolicy='${process.env.SERV||''}';window.__aff=${process.env.AFF?1:0};window.__balO=${process.env.BALJ||'null'}`);
+ await page.evaluate(`window.__servPolicy='${process.env.SERV||''}';window.__aff=${process.env.AFF?1:0};window.__hhStop=${process.env.HHSTOP?1:0};window.__balO=${process.env.BALJ||'null'}`);
  await page.evaluate(fs.readFileSync(path.join(M,process.env.INP||'inpage5.js'),'utf8'));
  const t0=Date.now();let n=0;
  while(true){n=await page.evaluate(([m])=>window.__bot.step(m,300),[mode]);

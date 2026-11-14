@@ -43,7 +43,7 @@ function randomStep(){
   if(S.bac>=60&&!S.master)cand.push(()=>{note("master");hireMaster()});
   talkCands().forEach(t=>cand.push(()=>{note("talk",t.a.n);popIdx=t.pi;talk(t.oi)}));
   if(!cand.length||window.__turnActs>=40){window.__buoi++;if(!cand.length&&used<=1)window.__idle++;window.__turnActs=0;nextBuoi();return}
-  window.__turnActs++;rpick(cand)()}
+  window.__turnActs++;{const tk=S.turn+'_'+S.tuan+'_'+(S.buoi||0)+'_'+used;if(window.__rtk!==tk){window.__rtk=tk;window.__rn=0}if(++window.__rn>30){window.__rn=0;window.__buoi++;nextBuoi();return}}rpick(cand)()}
 // ---- SENSIBLE
 function needs(){const nx=S.rank<7?RANKS[S.rank+1]:{s:70,d:70};return{ws:1+Math.max(0,nx.s-S.sung)/12,wd:1+Math.max(0,nx.d-S.danh)/8}}
 const BAD=/Giả mang thai|Gửi mật thư|Theo cha mưu đại sự|Diệt khẩu|Trung với cố quốc|Khiêu khích|Trút giận|Cài đồ|giấu|xạ hương|độc/i;
@@ -84,8 +84,8 @@ function sensibleStep(){
     if(accs.length&&accs[0].o>=60){note("accuse");doAct(accs[0].i,"accuse");return}}
   const opts=[];
   if(qOn()&&S.rank>=5&&can(2)&&S.bac>=20&&rvBtns(0).includes("spy")){const o=ACT.spy.o?ACT.spy.o(S,rivals[0]):50;if(o>=40)opts.push({s:3.6,f:()=>{note("spyQueen");doAct(0,"spy")}})}
-  deck.forEach((a,i)=>{if(!cardOK(a))return;const c=cardCost(a);opts.push({s:scoreAct(a,N,c),f:()=>{note("card",a.n);act(i)}})});
-  talkCands().forEach(t=>{const s=talkScore(t,N);opts.push({s,f:()=>{note("talk",t.a.n);popIdx=t.pi;talk(t.oi)}})});
+  deck.forEach((a,i)=>{if(!cardOK(a))return;const c=cardCost(a);opts.push({L:"c"+a.n,s:scoreAct(a,N,c),f:()=>{note("card",a.n);act(i)}})});
+  talkCands().forEach(t=>{const s=talkScore(t,N);opts.push({L:"t"+t.pi+t.a.n,s,f:()=>{note("talk",t.a.n);popIdx=t.pi;talk(t.oi)}})});
   const L=lessonCands().filter(a=>S.suc>=45&&S.bac>=5+S.arts[a.k]*5+20).sort((a,b)=>S.arts[a.k]-S.arts[b.k]);
   if(L.length){const x=L[0];opts.push({s:2.0+(S.sung>=40?.5:0)-(S.suc<55?1.5:0),f:()=>{note("lesson");if(S.bac>=150&&!S.master)hireMaster();lesson(x.k)}})}
   const sea=SEASON[S.month-1];const W=S.where||{};
@@ -99,15 +99,17 @@ function sensibleStep(){
   if(!S.preg&&S.sung<35)place("ksp",.8);
   if(S.arts.y<2)place("tyv",.6);
   if(window.__aff)for(const id in (S.menW||{})){place(S.menW[id],2.5)}
-  pls.forEach(p=>opts.push({s:p.s,f:()=>{note("go",p.k);goTo(p.k)}}));
-  opts.sort((a,b)=>b.s-a.s);
-  if(opts.length&&opts[0].s>0.35){opts[0].f();return}
+  pls.forEach(p=>opts.push({L:"g"+p.k,s:p.s,f:()=>{note("go",p.k);goTo(p.k)}}));
+  const tk=S.turn+'_'+S.tuan+'_'+(S.buoi||0)+'_'+used+'_'+S.place;if(window.__btk!==tk){window.__btk=tk;window.__ban={}}
+  const op2=opts.filter(o=>!o.L||(window.__ban[o.L]||0)<3);op2.sort((a,b)=>b.s-a.s);
+  if(op2.length&&op2[0].s>0.35){if(op2[0].L)window.__ban[op2[0].L]=(window.__ban[op2[0].L]||0)+1;op2[0].f();return}
   window.__buoi++;if(used<=1)window.__idle++;nextBuoi()}
 window.__bot={step:(mode,n)=>{
   for(let i=0;i<n;i++){window.__iter++;window.__lifeIter++;
     if(S&&!S.dead){window.__maxRank=Math.max(window.__maxRank,S.rank);if(S.rank>=7&&window.__hhTurn==null){window.__hhTurn=S.turn;window.__hhWk=S.turn*3+S.tuan;window.__hhB=window.__lifeB}const t=S.turn+"_"+S.tuan;if(window.__lastT!==t){window.__lastT=t;window.__sucTrace.push(S.suc)}}
     {const tk=S?S.turn+'_'+S.tuan+'_'+(S.buoi||0)+'_'+used:'';if(tk!==window.__stk){window.__stk=tk;window.__stn=0}else window.__stn++}
     if(window.__lifeIter>60000||window.__stn>400){window.__res.push({origin:S.origin.k,rank:S.rank,maxRank:window.__maxRank,turns:S.turn,years:+(S.turn/12).toFixed(2),title:"TIMEOUT",fate:"TIMEOUT",stuck:window.__stn>400,ring:(window.__ring||[]).slice(),acts:window.__acts,state:JSON.stringify({used,Q:Q.length,mg:!!S.mg,buoi:S.buoi,place:S.place,out:S.out,q0:Q[0]&&{t:strip(Q[0].t||Q[0].title||"").slice(0,160),opts:(Q[0].opts||[]).map(o=>o.n+"|"+JSON.stringify(o.fx||{}))},modalHidden:q("#modal").hidden,ov:q("#ov").hidden?"":strip(q("#ov").innerHTML).slice(0,200),logs:(S.logs||[]).slice(0,3).map(strip)})});window.__maxRank=0;window.__lifeIter=0;window.__stn=0;window.__acts={};start();continue}
+    if(window.__hhStop&&S&&!S.dead&&S.rank>=7){window.__res.push({origin:S.origin.k,rank:S.rank,maxRank:7,turns:S.turn,years:+(S.turn/12).toFixed(2),title:"HH",fate:"HH-STOP",hhTurn:window.__hhTurn,hhWk:window.__hhWk,hhB:window.__hhB,wk:S.turn*3+S.tuan,kids:S.kids.length,fired:S.firedN||0,trysts:(S.men||[]).reduce((a,m)=>a+(m.trysts||0),0),acts:window.__acts});window.__maxRank=0;window.__lifeIter=0;window.__hhTurn=null;window.__hhWk=null;window.__acts={};Q=[];start();continue}
     if(S&&S.dead&&!Q.length){start();continue}
     if(S&&!S.dead){for(const k of ['sung','danh','bac','suc','duc','sac','tai','tamco','th','hh','mat','an'])if(typeof S[k]!=='number'||isNaN(S[k])||(k!=='th'&&k!=='hh'&&S[k]<0)||S[k]>(k==='bac'?1e6:100))window.__bad.push(k+'='+S[k]+' '+S.origin.k);
       if(window.__iter%400===0&&!Q.length&&!S.mg){try{const d=JSON.parse(JSON.stringify(ser()));quiet=true;deser(d);quiet=false;deal()}catch(e){window.__saveFail.push(String(e.message).slice(0,80))}}}
