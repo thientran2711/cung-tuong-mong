@@ -25,3 +25,4 @@ Mẻ 3: t1 vẽ lại tay linh động m18–m25 (8 lineup). Tín dụng 8×273 
 Mẻ 4: t1 vẽ lại tay linh động m26–m29, m31–m34 (8 lineup). Tín dụng 8×273 = 2184.
 Mẻ 5: t1 vẽ lại tay linh động m35–m42 (8 lineup). Tín dụng 8×273 = 2184.
 Mẻ 6: t1 vẽ lại tay linh động m43–m50 (8 lineup). Tín dụng 8×273 = 2184.
+Mẻ 7: t1 m51–m52 → t1 XONG cả 52 người (tay linh động); t2 m01–m06 (hoa điền nấc 2). 8 lineup, tín dụng 8×273 = 2184.
