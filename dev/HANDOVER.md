@@ -12,6 +12,7 @@ Owner: Victoria ("sếp"). Reply to her in Vietnamese only, as "em", short, no q
   - dev/measure/: bot balance harness (inpage4.js, run*.js, an6.py, m43/ for NPC-mind sims).
 - Images: img/fig-*.webp (full-body, transparent) + img/por-*.webp (round portraits) listed in img/FIGURES.json (consorts, player looks, emperor, eunuchs), img/FIGURES-servants.json (maids, mamas), img/FIGURES-others.json (thái hậu, officials, physicians, men). Code merges all FIGURES*.json; old faces img/face-*.webp are the fallback. Map: img/map-<season>-<buổi>.webp, img/map-fest-*.webp, img/map-hotspots.json (+festivals table).
 - Testing: serve over http with a <meta charset=utf-8> wrapper; Playwright (require('playwright')); sizes 1510x2000, 904x2316, 1024x768, 390x844; no page errors, no horizontal overflow, no truncated text, equal act-card sizes, old save (localStorage hclh-slot / hclh-save-v2-<n>) must still load.
+- Art QA (cutout fix): run `python3 dev/figwork/cutcheck.py img/fig-*.webp` on new art (score >=8 or por >=20 = re-cut: crop ONE figure from the raw generation and run Magnific remove-background on it alone, see dev/figwork/rematte.py); make portraits with `python3 dev/figwork/porcrop.py img/fig-X.webp` (384x506, face-centred; needs opencv-python-headless==4.10.0.84).
 
 ## Workers still running in the OLD session at handover (they finish there, then stop)
 - Code integrator: balance final pass (targets below), publishes green builds; will sync scratchpad build → dev/ and push; final commit message contains "HANDOFF COMPLETE".
@@ -71,3 +72,12 @@ The owner plays mostly on TWO devices; fix and test these FIRST, others after:
 1. Samsung Galaxy Z Fold, PORTRAIT: 755x1000 @2
 2. iPad, LANDSCAPE: 1180x820 @2 (iPad Air/10th gen) and 1366x1024 @2 (iPad Pro 12.9)
 Secondary: Fold cover 412x1058 @2, phone 390x844 @3, 1024x768 @2.
+
+## OWNER RULES ADDED 11/14 (phiên chính 2, binding)
+- Think WITH the owner: for every idea she gives, weigh it and propose how (or whether) to do it; don't just obey blindly.
+- Hidden outcomes: in EVENT choices (weekly events j68, Mệnh truyện chapters j67, side events, dilemmas) show ONLY costs (Sức, khắc, bạc) — no long-term gains/losses (Sủng, Danh, Đức, favour…) and no odds word. The result card still shows the true numbers afterwards. Normal act buttons/cards keep full price + gain/loss + odds.
+- Wardrobe: 2 slots (Trâm cài, Y phục) beside the portrait for everyone; item grades Thường/Tinh phẩm/Trân phẩm/Tuyệt phẩm/Ngự tứ; whether an outfit is Đúng phẩm/Vượt phẩm/Quá giản dị is HIDDEN until someone remarks on it (same for NPCs); "Tự chọn đồ" = fast but risky; dressing minigame decides the outcome; Ngự tứ can't be sold; frame-ups (planted items).
+- Huadian (forehead ornament): consorts only (incl. maids promoted to consort), never maids/servants/cold palace; size like c03 t1 (small, visible); 8 DISTINCT tiers (t7 Hoàng quý phi, t8 Hoàng hậu clearly grander via material/detail, never larger). No facial moles on anyone.
+- Poses: calm standing (no flying sleeves/sashes, no swirling hems) for ALL figure art incl. Part C.
+- Contests: each subject its own real minigame, never multiple-choice quizzes. Results: podium screen first (full-body figures, glow, confetti), then the score table.
+- Never ship code-drawn art where a painting is expected; if something looks crude, redraw it without waiting to be asked.
