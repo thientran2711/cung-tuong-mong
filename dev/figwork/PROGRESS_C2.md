@@ -7,4 +7,4 @@
 - Sheets: dev/figwork/sheets/C_mNN_tK.jpg (một lineup/tấm).
 
 ## Status
-- Bắt đầu: t1 m27–m52.
+- Mẻ 1 (t1 m27–m34, 8 lineup): xong, sheets C_m27_t1..C_m34_t1. Tín dụng: 8×270 + 8×3 = 2184; thêm 2160 cho 8 bản nháp đầu bị bỏ (hoa điền trùng kiểu c01–c32, đổi bảng HUADIAN_C.md).
