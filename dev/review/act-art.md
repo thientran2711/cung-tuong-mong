@@ -22,3 +22,8 @@ Người kiểm: kiểm duyệt kit (phiên chính 2), 2026-11-14.
 4. Gộp lại origin/main trước khi gửi duyệt lại (nhánh đang chậm 31 commit), dựng `python3 dev/build/assemble.py` không lỗi, rồi chụp thẻ việc ở 755x1000@2 và 1180x820@2 cho thấy tranh hiện trong ô tranh thẻ việc.
 
 img/INFO.json `{"have":[...]}`: chưa có module nào đọc; để kit-2 (KIT_INFO) quyết định, không chặn.
+
+## Bổ sung (chủ chê)
+5. **Mạng che mặt img/veil.png, veil-por.png, veil-fig.png: KHÔNG ĐẠT** — vẽ bằng code (hình phẳng), chủ chê thô. Đang được vẽ lại
+   trên nhánh review/wardrobe; bỏ ba tệp này khỏi act-art (hoặc để wardrobe thay) trước khi gửi duyệt lại. Từ nay ảnh vẽ bằng code ở
+   chỗ cần tranh = FAIL.
