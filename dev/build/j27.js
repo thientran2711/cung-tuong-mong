@@ -8,8 +8,8 @@ function spreadTraits(){const A=[...TRAITS,...TRAITS].sort(()=>Math.random()-.5)
  rivals.forEach((v,i)=>{const t=A[i%A.length];v.trait=t[0];v.malice=cl(t[1]+R(20)-10,0,100);v.trait2=B[i%B.length]})}
 function ensureT2(v){if(v&&!v.trait2)v.trait2=pick(TRAIT2);return v}
 (function(){const n0=newRival;newRival=function(){return ensureT2(n0.apply(this,arguments))}})();
-/* a palace head: Phi and above, not the queen (she holds Càn Ninh), not fallen */
-function palHeadOK(p){return !!p&&(p===S?!S.out&&!S.dead:p.alive&&!p.out)&&!p.queen&&rkOf(p)>=4}
+/* a palace head: Tần and above (PAL_HEAD), not the queen (she holds Càn Ninh), not fallen */
+function palHeadOK(p){return !!p&&(p===S?!S.out&&!S.dead:p.alive&&!p.out)&&!p.queen&&rkOf(p)>=PAL_HEAD}
 function palFix(){if(!S||!rivals)return;rivals.forEach(ensureT2);const occ={};const heads=[S].concat(rivals).filter(palHeadOK);
  if(S.pal!=null&&!palHeadOK(S)){log(`Ngươi dời khỏi ${PALN[S.pal]}.`);S.pal=null}
  for(const v of rivals)if(v.pal!=null&&!palHeadOK(v))v.pal=null;
@@ -17,7 +17,7 @@ function palFix(){if(!S||!rivals)return;rivals.forEach(ensureT2);const occ={};co
  for(const p of heads)if(p.pal==null){const f=PALN.findIndex((_,i)=>occ[i]==null);if(f<0)continue;p.pal=f;occ[f]=key(p);if(p===S){S.palCer=1}}
  /* lower ranks live in a head's side hall (thiên điện); never left without a palace when a head exists */
  const hs=[S].concat(rivals).filter(p=>palHeadOK(p)||(p!==S&&p.queen&&p.alive&&!p.out));
- for(const p of [S].concat(rivals)){if(p!==S&&(!p.alive||p.out))continue;if(rkOf(p)>=4){p.resHead=null;continue}
+ for(const p of [S].concat(rivals)){if(p!==S&&(!p.alive||p.out))continue;if(rkOf(p)>=PAL_HEAD){p.resHead=null;continue}
   const h=p.resHead!=null&&byKey(p.resHead);const ok=h&&h!==p&&hs.includes(h)&&(h!==S||palHeadOK(S));
   if(p===S){if(!ok)S.resHead=null;continue} /* she keeps Ngọc Thanh các until she is a head herself */
   if(!ok){const L=hs.filter(x=>x!==p&&x!==S);const c=L.filter(x=>[S].concat(rivals).filter(y=>y.resHead===key(x)).length<3);p.resHead=(c.length?pick(c):L.length?pick(L):null);p.resHead=p.resHead?key(p.resHead):null}}}
@@ -35,7 +35,7 @@ function houseName(p){const k=palaceOf(p);const hd=byKey(houseOf(p));return k===
 /* places carry the plan names; one entry per house */
 (function(){const p0=places;places=function(){const L=p0.apply(this,arguments).filter(x=>!(x.k[0]==="r"));for(const x of L)if(PLNAME[x.k]){x.n=PLNAME[x.k][0];x.fn=PLNAME[x.k][1]}
  const seen={};for(const v of rivals){if(!v.alive||v.out||v.queen)continue;const k=palaceOf(v);if(k==="home"||k==="kn"||seen[k])continue;seen[k]=1;const hd=RV(+k.slice(1));const R2=residents(k);
-  L.splice(L.length-3,0,{k,n:palName(k),fn:palFn(k),d:`${hd&&rkOf(hd)>=4?"Chủ vị "+RANKS[hd.rank].n+" "+hd.name:"Ở thiên điện"}${R2.length>1?" · thiên điện: "+R2.filter(x=>x!==hd).map(x=>x.name).join(", "):""}.`,sc:"rv",v:hd}) }
+  L.splice(L.length-3,0,{k,n:palName(k),fn:palFn(k),d:`${hd&&rkOf(hd)>=PAL_HEAD?"Chủ vị "+RANKS[hd.rank].n+" "+hd.name:"Ở thiên điện"}${R2.length>1?" · thiên điện: "+R2.filter(x=>x!==hd).map(x=>x.name).join(", "):""}.`,sc:"rv",v:hd}) }
  return L}})();
 (function(){const p0=placeOf;placeOf=function(k){if(k==="home"){const R2=residents("home").filter(x=>x!==S);return{k,n:palName("home"),fn:"tẩm cung của ngươi",d:`Cung nữ và các con ở đây.${R2.length?" Thiên điện: "+R2.map(x=>x.name).join(", ")+".":""}`,sc:"home"}}return p0.apply(this,arguments)}})();
 /* the ceremony card when she first heads a palace: the Emperor grants the best empty one; she may ask for another */

@@ -50,7 +50,7 @@ function kitBook(spec){spec=spec||{};const rm=()=>{try{return reducedMotion()}ca
  const textTop=(p,cont)=>`<div class="kbk-th"><h3 class="kbk-t">${p.title||""}${cont?` <small class="kbk-cont">tiếp theo</small>`:""}</h3>${p.sub&&!cont?`<small class="kbk-ts">${p.sub}</small>`:""}</div>`;
  const personTop=(p,cont)=>cont?`<div class="kbk-th kbk-pc">${kitFaceH(p.who,"sm")}<h3 class="kbk-t">${kitName(p.who,{cap:true,named:p.who===S})} <small class="kbk-cont">tiếp theo</small></h3></div>`
    :`<div class="kbk-pname">${kitName(p.who,{cap:true,named:p.who===S})}${p.sub?`<small class="kbk-ts">${p.sub}</small>`:""}</div>${p.chips&&p.chips.length?`<div class="kbk-pchips">${kitChips(p.chips)}</div>`:""}${p.rows&&p.rows.length&&PW>=440?kitRows(p.rows):""}`;
- const personBody=(p,cont)=>cont?`${personTop(p,true)}<div class="kbk-flow"></div>`:`<div class="kbk-person"><div class="kbk-por">${pframe(kitFace(p.who))}</div><div class="kbk-phead">${personTop(p,false)}</div><div class="kbk-flow"></div></div>`;
+ const personBody=(p,cont)=>cont?`${personTop(p,true)}<div class="kbk-flow"></div>`:`<div class="kbk-person"><div class="kbk-por">${typeof kitStageFig==="function"&&kitStageFig(p.who,{cap:false})||pframe(kitFace(p.who))}</div><div class="kbk-phead">${personTop(p,false)}</div><div class="kbk-flow"></div></div>`;
 
  /* ---- pagination: fill each page until it overflows, continue on the next ---- */
  function paginate(){const L=[];meas.style.width=PW+"px";meas.style.height=PH+"px";
