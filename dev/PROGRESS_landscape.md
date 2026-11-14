@@ -13,3 +13,8 @@ Nhiệm vụ: sếp 16:05Z — mọi nền toàn màn phải có tranh dọc VÀ
 ## Còn lại / ghi chú
 - Nền minigame (review/minigames, chưa vào main) là ô vuông trong khung trò chơi; khi nhánh đó vào main, cái nào hiện toàn màn phải thêm vào KIT_BD với hai hướng.
 - Cảnh sân khấu (SCIMG 1280x720) thuộc thợ bố cục sân khấu (review/fold-layout) — không đụng.
+
+## Sửa sau kiểm duyệt FAIL (dev/review/landscape-art.md)
+1. Nền luân hồi ngang vẽ lại (bg-reborn-l.webp 2100x1400, lượt p8JSZ7Wehw; bỏ EbzZez5uuO; tham chiếu rgeVacCxtc): hai nửa đều có cảnh.
+2. Bậc 4:3 trong bộ nền (`m`, ≤ 7:5): tranh tựa 4:3 riêng title-key-m.webp (lượt jUXDC8aLD0; bỏ 3zbQg12REY) — sáu người nằm nửa trái, bảng menu không che ai.
+3. Đêm thị tẩm: pushFront (j8) và deserQ (j3) giữ `cls` của thẻ → night2 mở với .modal.night trong chơi thật (đã thử: night1 → chọn → night2).
