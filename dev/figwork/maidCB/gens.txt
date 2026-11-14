@@ -333,3 +333,5 @@ C-m39-t8 nVjbjWGYQD handsB
 C-m40-t8 xSd0dlojfW handsB
 C-m41-t8 w4hXh4Y7EI handsB
 C-m42-t8 9ZQhQ2sNYZ handsB
+C-m37-t8 gOIpmipSXO handsB-redo(a48 grey temples)
+C-m39-t8 xSd0B9PjfW handsB-redo(cheek mole; MOLE+=m39)

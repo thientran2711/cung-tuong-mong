@@ -41,7 +41,7 @@ CPROP1=["her "+p.split(" ",1)[1] for p in PROP1]
 HUA1=['a small four-petal cross flower', 'a tiny bat (auspicious fu bat)', 'a tiny longevity peach', 'three tiny dots in a vertical line', 'two tiny cherries on one stem', 'a tiny upright narrow jade-tablet shape (a small slim rounded vertical bar)', 'a tiny jade-rabbit silhouette', 'a tiny round coin with a square hole', 'a tiny vase silhouette', 'a tiny daisy of eight thin petals', 'a tiny arc of five dots (a gentle upward curve)', 'a tiny star of five dots', 'a tiny lily', 'a small single spiral coil', 'a tiny mountain of three small peaks', 'a tiny square window-lattice', 'a tiny fern sprig', 'a tiny inverted triangle', 'a tiny sun disc with short rays', 'two tiny dots side by side', 'a tiny crane in flight', 'a small hexagon (tortoise-shell)', 'a tiny persimmon', 'a tiny jade bi disc (a ring with a hole)', 'a tiny eight-point star anise', 'a small half-moon fan shape']
 COL1=["soft rose","pale coral","cinnabar red","soft pink","rose red","vermilion","peach pink","soft coral","rose pink","coral red","soft orange-red","pale pink","rose red",
      "soft rose","pale coral","cinnabar red","soft sage green (cuidian)","vermilion","peach pink","soft coral","rose pink","coral red","soft orange-red","pale pink","rose red","cinnabar red"]
-MOLE={"m13","m26"}
+MOLE={"m13","m26","m39"}  # C-B: m39 t8 grew a cheek mole
 def hmat(t,i):
     c=HCOL[i%8]
     if t<=2: return f"painted in {c}, simple fine lines"
