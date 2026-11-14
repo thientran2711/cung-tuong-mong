@@ -45,9 +45,9 @@ const EMO_W={vui:{harm:.75,kind:1.5,idle:.9},gian:{harm:1.6,kind:.6,provoke:1.3,
  so:{harm:.6,kind:.9,apologise:1.8,idle:1.3},ghen:{harm:1.3,steal:1.6,block:1.6,trip:1.4,rumor:1.4,kind:.8},lo:{spy:1.6,check:1.6,test:1.4,harm:.9},
  dau:{harm:.7,kind:.6,idle:2},muu:{frame:1.5,plant:1.5,ally:1.5,bribe:1.5,bribeksp:1.5,feign:1.6,provoke:.7}};
 /* odds of any act by the doer's mood (points at v=100; "a little") */
-const EMO_OD={vui:2,binh:0,buon:-1,gian:-2,so:-2,ghen:-1,lo:-1,dau:-2,muu:1};
+const EMO_OD={vui:1,binh:0,buon:-1,gian:-2,so:-2,ghen:-1,lo:-1,dau:-2,muu:1};
 /* the Emperor's tablet chance by her mood */
-const EMO_NIGHT={vui:1.06,binh:1,buon:.94,gian:.92,so:.95,ghen:.96,lo:.97,dau:.92,muu:1};
+const EMO_NIGHT={vui:1,binh:1,buon:1,gian:1,so:1,ghen:1,lo:1,dau:1,muu:1};/* v3: her own mood no longer moves the tablet (it fed a happy → more nights loop); only the Emperor's feelings do */
 /* servants' Lòng per month by their own mood */
 const EMO_LOY={vui:2,binh:0,buon:-1,gian:-2,so:-1,ghen:-1,lo:-1,dau:0,muu:-1};
 const EMO_N={set:0,ev:{},motive:0,motiveGate:0,odds:0,kinds:{}};
@@ -140,7 +140,7 @@ function emoMul(p,act){const e=emoGet(p);if(e.k==="binh")return 1;const T=EMO_W[
 (function(){const n0=nightCh;nightCh=function(p){const c=n0.apply(this,arguments);try{p=p||S;if(emoOn()&&c){const e=emoGet(p);let m=EMO_NIGHT[e.k]||1;if((e.k==="buon"||e.k==="dau")&&(S.emp.traits||[]).includes("nhantu"))m=1.05;let x=1+(m-1)*e.v/100;
   /* his own mood: who he is angry with / fond of, and in grief or worry he seeks the gentle ones */
   const E=S.emp.emo,k=emoKey(p);if(E&&E.v>=15){if(E.k==="gian"&&E.t===k)x*=1-.5*E.v/100;else if(["buon","dau","lo"].includes(E.k)&&emoTraits(p).some(t=>t==="Hiền lành"||t==="Nhu mì"))x*=1.08}
-  const fd=S.emp.emoFond;if(fd&&fd.k===k&&emoW()-fd.w<=3)x*=1.08;
+  
   if(x!==1)return Math.max(1,Math.round(c*x))}}catch(e){}return c}})();
 function emoMonth(){if(!emoOn())return;for(const p of emoPeople())for(const s of p.staff||[]){const e=emoGet(s);const d=Math.round((EMO_LOY[e.k]||0)*e.v/60);if(d)s.loyal=cl((s.loyal||0)+d,0,100)}}
 (function(){const m0=monthTick;monthTick=function(){const r=m0.apply(this,arguments);try{emoMonth()}catch(e){}return r}})();
