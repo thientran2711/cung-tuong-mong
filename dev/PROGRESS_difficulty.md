@@ -21,8 +21,10 @@ Base: origin/review/balance (merge newer review/balance as it moves). Module: `d
 | starting bạc (hers) | ×1.5 | – | ×0.7 | her |
 | Phúc duyên earned | ×1 | – | ×1.5 | her |
 
-- UI: kit section `.kpsec.kdiff` = h4.kpst "Độ khó kiếp này" + kit segmented control `.ksub/.ksubb` + `.kpnote` one-line description;
-  chip `kitChip("Kiếp này: Khó","n")` under the name (.kpidn). End card row "Độ khó"; Sổ luân hồi line "· Kiếp này: Khó"; in-game Sổ luân hồi
+- UI: kit section `.kpsec.kdiff` = h4.kpst kitGloss("Độ khó") + kit segmented control `.ksub/.ksubb` on one row + `.kpnote` one-line
+  description; placed INSIDE the choice block (.kpopts), right above "Nhận thân phận" (with review/identity-card's pinned choices it stays on
+  screen while the body scrolls; tested on a local merge). No chip on the identity card itself (the control shows it: one fact, one place);
+  chip `kitChip("Kiếp này: Khó","n")` on her own card in the game (pcard of S). End card row "Độ khó"; Sổ luân hồi line "· Kiếp này: Khó"; in-game Sổ luân hồi
   Phúc duyên line starts with "Kiếp này: <b>Khó</b>".
 
 ## Measure
@@ -31,5 +33,8 @@ then `python3 dev/measure/anx.py label out*.json`.
 
 ## Status
 - [x] jdiff.js + assemble
-- [ ] UI check 686x880@2.2, 755x1000@2, 1180x820@2 (dui.js in scratchpad)
+- [x] UI check 686x880@2.2, 755x1000@2, 1180x820@2: switch/accept/reload/old save OK, no page errors, no overflow.
+  Note: on review/balance alone the identity card (with j86 face picker) already overflows at 686/755/390/1024 (buttons cut) — pre-existing;
+  fixed by review/identity-card 360f138a (body scrolls, choices pinned). Local merge test: buttons + Độ khó visible at all 7 sizes.
+- [x] Khó Phúc duyên probe: promo +5 → +8, ending +5 → +5 +3 ("kiếp khó: +3"), end card row "Độ khó", Sổ luân hồi "· Kiếp này: Khó".
 - [ ] Dễ 30 lives, Khó 30 lives; report table
