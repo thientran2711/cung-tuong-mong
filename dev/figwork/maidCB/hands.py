@@ -1,7 +1,7 @@
 # hands.py — OWNER 11/14: still standing, but LIVELY HANDS: every age a different hand gesture AND a different held object.
 OBJ=["a round silk fan","a sprig of blossoms","a small celadon teacup on its saucer","a small brocade box","a rolled painting scroll","an embroidered incense sachet with tassels",
      "a small round palace lantern","a jade flute","an embroidered handkerchief","a small flower basket","a string of sandalwood prayer beads","a folding fan","a thread-bound book",
-     "a small hand mirror","a single peony","a small porcelain vase with a flower branch","a sealed letter","a small gilt birdcage"]
+     "a small polished bronze hand mirror with a shiny reflective face","a single peony","a small porcelain vase with a flower branch","a sealed letter","a small gilt birdcage"]
 H19=["raising {o} up near her cheek with one hand, head tilted slightly, the other hand resting at her waist",
      "one hand touching a hairpin in her hair, the other hand holding {o} lowered at her side",
      "holding {o} up before her chest with both hands, looking down at it with a gentle smile",
@@ -27,7 +27,7 @@ def pose_for(tr,i,t,prop,g=0):
     k=(g*5+t*7)
     KEY=("fan","sachet","pouch","lantern","flute","scroll","book","songbook","mirror","peony","teacup","basket","beads","box","handkerchief","letter","cage","birdcage","vase","blossom","orchid","magnolia","wisteria","lotus","plum","osmanthus","peach","comb","ball","pendant")
     FL=("peony","blossom","orchid","magnolia","wisteria","lotus","plum","osmanthus","peach","flower")
-    def keys(o): return {w for w in KEY if w in o}|({"FLOWER"} if any(f in o for f in FL) or "basket" in o or "vase" in o else set())|({"PAPER"} if any(p in o for p in ("letter","scroll","book")) else set())  # C-B: basket/vase count as floral, letter/scroll/book as paper
+    def keys(o): return {w for w in KEY if w in o}|({"FLOWER"} if any(f in o for f in FL) or "basket" in o or "vase" in o else set())|({"PAPER"} if any(p in o for p in ("letter","scroll","book")) else set())|({"ROUND"} if ("round silk fan" in o or "mirror" in o or "round fan" in o) else set())  # C-B: basket/vase count as floral, letter/scroll/book as paper
     objs=[sig]+[o for o in OBJ if not (keys(o)&keys(sig)) and not ("blossom" in o and any(f in sig for f in ("peony","orchid","magnolia","wisteria","lotus","plum","osmanthus","peach")))]
     pick=[]; j=k
     while len(pick)<3:

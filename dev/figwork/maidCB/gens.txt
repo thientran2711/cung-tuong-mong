@@ -227,3 +227,11 @@ C-m51-t4 8aNw0mEIrU handsB
 C-m52-t4 fHA9dH2CDY handsB
 C-m27-t5 yiC8jRBPW9 handsB
 C-m28-t5 KLMzaSwkqp handsB
+C-m29-t5 P3EIlTn42C handsB (a48 birdcage)
+C-m30-t5 VXUrAuRMMU handsB
+C-m31-t5 WDs53COcXe handsB
+C-m32-t5 If67MsqtvE handsB
+C-m33-t5 Sytpk0xUb8 handsB
+C-m34-t5 vQZPdP2a47 handsB
+C-m35-t5 fHA9BNmCDY handsB
+C-m36-t5 s7oVbpNl8e handsB
