@@ -7,6 +7,6 @@ L=['# Hoa điền Part C (cung nữ lên phi tần) — m01–m26 (thợ C1)',''
 'Lãnh cung (tcold): KHÔNG hoa điền. Không nốt ruồi, không beauty mark.',
 '84 kiểu không trùng: 26 kiểu dưới đây đã đối chiếu, khác hết 32 kiểu c01–c32. Thợ m27–m52 (C2) ghi bảng của mình bên dưới, tránh trùng các kiểu này.','',
 '| ID | Hoạ tiết | màu t1–t6 | màu áo chủ đạo |','|---|---|---|---|']
-L+=[f'| m{i+1:02d} | {HUA[i]} | {COL[i%13]} | {PAL["m%02d"%(i+1)]} |' for i in range(26)]
+L+=[f'| m{i+1:02d} | {HUA[i]} | {COL[i]} | {PAL["m%02d"%(i+1)]} |' for i in range(26)]
 L+=['','## m27–m52 (thợ C2)','','(thợ C2 điền)']
 open('HUADIAN_C.md','w').write("\n".join(L)+"\n")

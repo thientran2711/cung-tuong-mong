@@ -24,3 +24,16 @@ C-m15-t1 vQZyiqRa47
 C-m16-t1 SytDo67Ub8
 C-m17-t1 EbzN2rouuO
 C-m06-t1 MBwrgs9DCm edit-smaller
+C-m13-t1 KLMGTuSkqp edit-mole
+C-m06-t1 1lpnMHzr4r edit-huadian2
+C-m18-t1 P3E8CLP42C
+C-m19-t1 O6fBajrynm
+C-m20-t1 6AHhFw5iJO
+C-m21-t1 MBwrUneDCm
+C-m22-t1 yiCofSBPW9
+C-m23-t1 ksDzMqb16B
+C-m24-t1 s7oTBjGl8e
+C-m25-t1 p8Jj7D1ehw
+C-m26-t1 aF2PZaPfSh
+C-m13-t1 Bh4gOh0oQR revert-to-original(mole edit failed; moles fixed locally)
+C-m22-t1 rgeYdb3xtc retry-503

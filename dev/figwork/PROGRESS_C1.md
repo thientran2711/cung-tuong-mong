@@ -10,6 +10,11 @@
 - Xem trước: dev/figwork/sheets/C_mNN_tK.jpg (một lineup/tấm, cột trái = cung nữ gốc).
 
 ## Trạng thái
-- Mẻ 1 (t1): m01–m05, m07–m09 xong (8 lineup, 32 hình). m02–m09 vẽ trước bảng hoa điền 84 kiểu nên đã sửa riêng hoa điền bằng gpt-2-6 edit
-  (giữ nguyên mọi thứ khác); m06 hoa điền ra to quá -> đang sửa nhỏ lại. Tín dụng mẻ 1 ≈ 9×270 (vẽ) + 9×270 (sửa hoa điền) + 3/bg ≈ 4.9k.
-- Đang vẽ: m06 (sửa), m10–m17 t1.
+- t1 XONG cả m01–m26 (26 lineup, 104 hình + por). Tấm xem trước: dev/figwork/sheets/C_mNN_t1.jpg.
+  - m02–m09 vẽ trước khi có bảng 84 kiểu hoa điền -> sửa riêng hoa điền bằng gpt-2-6 edit (8 lần).
+  - Edit gpt-2-6 KHÔNG ăn với việc thu nhỏ hoa điền / xoá nốt ruồi (m06, m13 thử 3 lần không đổi) -> sửa tại chỗ bằng script (free):
+    spot.py (xoá nốt ruồi: m13, m26 — mặt cung nữ gốc của hai người này có nốt ruồi; prompt từ t2 dặn bỏ), huafix.py (m06: thay hoa điền
+    thành thanh ngọc dọc nhỏ son đỏ). Ảnh gốc giữ ở scratchpad (bg/orig-*).
+  - por: crop lấy mặt làm tâm (khối tóc, giới hạn chiều cao đầu để tóc xoã dài không kéo lệch).
+  - Tín dụng t1: 27 lineup vẽ (1 lần 503 phải vẽ lại) + 12 edit = 39×270 ≈ 10.5k + tách nền ~0.1k ≈ 10.6k.
+- Tiếp: t2 m01–m26, rồi t3…t8, rồi cold.

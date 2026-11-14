@@ -11,7 +11,7 @@ LINE=(" Age lineup: the SAME person drawn four times side by side in one row, ev
 BEAU="a very beautiful woman: luminous porcelain skin, soft rosy blush, large soft bright eyes, delicate small nose, small rosy lips, gentle faint smile"
 IDK=(" From the identity reference lineup keep ONLY her face, facial features and hair colour; do NOT copy the reference's ages, poses, maid outfit, hair ornaments or accessories; use the NEW ages, the NEW consort outfit and the NEW poses below.")
 AGES=(" Left to right: about 19, a fresh youthful young woman; about 24, still young and lively, youthful face, no sign of ageing; about 32, a young mature woman in her prime, smooth skin, NO grey or silver hair, NO wrinkles; about 48, a graceful elegant lady whose hair is still FULLY DARK black-brown, the same dark colour as at 32 (at most two barely visible fine silver hairs; NO grey streaks, NO grey or silver at the temples or sides, NOT salt-and-pepper, NOT white, no grey sheen), minimal faint lines, still clearly beautiful, not elderly.")
-END=(" Eyes soft, warm and round-almond, never slanted or upturned, never teary; serene gentle face, faint smile at most, no open-mouth laugh; no moles, no beauty marks on the face. Everyone beautiful at every age. No text, no labels.")
+END=(" Eyes soft, warm and round-almond, never slanted or upturned, never teary; serene gentle face, faint smile at most, no open-mouth laugh; no moles, no beauty marks, no dark spots anywhere on the face or cheeks. Everyone beautiful at every age. No text, no labels.")
 # her own colour family (from her approved maid lineup), kept as MAIN robe colour on every rank
 PAL={"m01":"sage green and cream","m02":"moss green and silver","m03":"slate blue and silver","m04":"warm apricot and gold","m05":"coral red and gold",
 "m06":"pale blue-grey and silver","m07":"pale jade green and white","m08":"peach-salmon and gold","m09":"rose pink and gold","m10":"sage green and gold",
@@ -24,11 +24,13 @@ PROP=["a round silk fan","a folding fan","a sprig of plum blossoms","a thread-bo
 "a thread-bound book","a single peony","a small embroidered silk ball","a small rolled poem scroll","a jade flute","a small lotus flower","a painted paper fan",
 "a string of prayer beads","a small porcelain vase with a flower","a thread-bound songbook","a rolled poem scroll","a small embroidered pouch","a sprig of orchids",
 "a round fan painted with a moon","a branch of peach blossoms","a small painted scroll","a jade hair comb","a small bird cage","a white magnolia","a sprig of wisteria"]
-HUA=["a small four-petal cross flower","a small ruyi-head scroll","a tiny goldfish","three tiny dots in a vertical line","a tiny pomegranate flower","a small pair of cicada wings",
+HUA=["a small four-petal cross flower","a small ruyi-head scroll","a tiny goldfish","three tiny dots in a vertical line","a tiny pomegranate flower","a tiny upright narrow jade-tablet shape (a small slim rounded vertical bar)",
 "a tiny dragonfly","a tiny magnolia bud","a tiny calabash gourd","a tiny hibiscus flower","four tiny dots in a rhombus","a tiny star of five dots","a tiny lily",
 "a small single spiral coil","a tiny lily-of-the-valley bell","a tiny endless knot","a tiny fern sprig","a tiny wisteria cluster of three hanging dots","a tiny sun disc with short rays",
 "two tiny dots side by side","a tiny crane in flight","a small hexagon (tortoise-shell)","a tiny maple leaf","a tiny pine-needle cluster","a tiny morning-glory bloom","a small half-moon fan shape"]
-COL=["soft rose","pale coral","cinnabar red","soft pink","rose red","vermilion","peach pink","soft coral","rose pink","coral red","soft orange-red","pale pink","rose red"]
+COL=["soft rose","pale coral","cinnabar red","soft pink","rose red","vermilion","peach pink","soft coral","rose pink","coral red","soft orange-red","pale pink","rose red",
+     "soft rose","pale coral","cinnabar red","soft sage green (cuidian)","vermilion","peach pink","soft coral","rose pink","coral red","soft orange-red","pale pink","rose red","cinnabar red"]
+MOLE={"m13","m26"}   # their maid lineup shows a cheek mole: tell the model to drop it (owner: no moles)
 FAM=["hienlanh","dangi","numi","thanhnha","kieungao","thamvong"]
 RANK={1:"rank-1 consort (Dap ung)",2:"rank-2 consort (Thuong tai)",3:"rank-3 consort (Quy nhan)",4:"rank-4 consort (Tan)",5:"rank-5 consort (Phi)",6:"rank-6 noble consort (Quy phi)",7:"rank-7 imperial noble consort (Hoang quy phi)",8:"the Empress (Hoang hau)"}
 LAD={1:"a fine silk robe with delicate embroidered {mot} at the collar, sleeves and hem and a soft silk sash (elegant, never poor, little gold), hair in a neat bun with pretty silver hairpins and a fresh flower",
@@ -45,7 +47,7 @@ def outfit(t,who,i):
     rich=" a little richer than the rank below" if t<=3 else " clearly much richer and more splendid than the lower ranks"
     return (f" Outfit for all four ({RANK[t]},{rich}): a NEW outfit, {LAD[t].format(mot=MOT[i%13])}; her signature colour family {pal} stays the MAIN robe colour ({main}{neg}).")
 def hua(t,i):
-    c=COL[i%13]
+    c=COL[i]
     m={1:f"painted in {c}, simple fine lines",2:f"painted in {c}, simple fine lines",3:f"painted in {c}, finer detailed lines",4:f"painted in {c}, finer detailed lines",
        5:f"painted in {c} with a fine thin gold outline",6:f"painted in {c} with a fine thin gold outline",7:"in gold leaf and cinnabar red with one tiny pearl, the finest detail",8:"in gold leaf and cinnabar red with one tiny pearl, the finest detail"}[t]
     return (f" Forehead: a small, delicate, refined huadian forehead ornament between the brows just above the bridge of the nose, elegant, not large (about the size of a fingertip): her signature motif {HUA[i]}, {m}; the SAME small size on all four figures and at every rank; it never covers the forehead and never spreads to the brows or cheeks.")
@@ -60,7 +62,9 @@ def job(jid):
         f=" Forehead: bare, NO huadian."
     else:
         t=int(tt[1:]); o=outfit(t,who,i); f=hua(t,i); po=" "+pose_for(FAM[i%6],i,t,prop,i)+"."
-    return STY[i%4],MREF[who],PRE+LINE+desc+IDK+AGES+o+f+po+END
+    idk=IDK
+    if who in MOLE: idk=idk.replace("keep ONLY her face, facial features and hair colour;","keep ONLY her face, facial features and hair colour, but WITHOUT the small dark mole on her cheek (her skin is clear and flawless);")
+    return STY[i%4],MREF[who],PRE+LINE+desc+idk+AGES+o+f+po+END
 if __name__=="__main__":
     for j in sys.argv[1:]:
         s,r,p=job(j); print(j,s,r); print(p); print()

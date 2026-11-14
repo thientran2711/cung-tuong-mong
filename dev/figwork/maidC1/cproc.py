@@ -20,7 +20,7 @@ def facepor(im,name):
     dk=(A[:top,:,3]>200)&(A[:top,:,:3].max(axis=2)<85)
     ys,xs=np.nonzero(dk); side=int(h*0.20)
     if len(ys)>80:
-        y0,y1=np.percentile(ys,2),np.percentile(ys,97); sel=ys>y0+(y1-y0)*.45
+        y0,y1=np.percentile(ys,2),np.percentile(ys,97); y1=min(y1,y0+h*.115); sel=(ys>y0+(y1-y0)*.45)&(ys<y1)
         cx=int(np.median(xs[sel])); cy=int(y0+(y1-y0)*.74)
     else: cx,cy=w//2,int(h*.08)
     x0=cx-side//2; yy=max(0,cy-side//2)
