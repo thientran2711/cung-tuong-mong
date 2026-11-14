@@ -103,3 +103,16 @@ Khi hạn mức mở lại, gửi SendMessage cho từng thợ để làm tiếp
 - Part C-A acb72ee291fbd2861: Part C (maid-art-c) vẽ đủ 52 nàng; đang sửa lỗi lãnh cung (áo trơn, không trang sức, mặt 48), hoa điền t6, m06-t7, m26-t8; rồi soát C-B, ghi SẴN SÀNG KIỂM LẠI.
 - maid-art (scratchpad/wmA 89dd550, 7b3f527) và maid-art-b (scratchpad/wfixB 212db69): lệnh đẩy của thợ bị bộ kiểm quyền chặn; CHỜ SẾP cho phép. Sau đó sửa a51 còn lại (A: 164 tờ, todo ở scratchpad/cwM; B: ~47 lineup).
 - wardrobe 66d1bd9 và kit-j95 đi qua review/balance.
+
+### Cập nhật 15:50Z — chuyển phiên chính sang tài khoản khác
+Việc dở của các thợ đã đẩy lên nhánh wip/* (không đè nhánh nào):
+- wip/balance-fix1: review/balance + jpal bỏ đoạn viết lại palaceOf (fix1). Cần đo 24 đời; đạt thì đưa vào review/balance.
+- wip/schedules2: bản sửa j95 dở (6 lỗi kiểm độc lập), đã gộp balance 4516bec. Cần làm tiếp, gộp wip/balance-fix1, chạy cả 2 bộ kiểm (bộ độc lập dùng dev/measure/inpage6.js), rồi kiểm độc lập lại.
+- wip/maid-art-fix: sửa review/maid-art (10 nốt ruồi, 44/208 mặt a51). Hàng đợi a51 còn lại: dev/handover/maidA-a51-todo.txt.
+- wip/maid-art-b-fix: sửa review/maid-art-b (trả 640 ảnh phần A, vá 20 nốt ruồi). Còn khoảng 47 lineup a51 trông trẻ (danh sách trong PROGRESS_B).
+  Hai nhánh này chưa đẩy vào review/* vì bộ kiểm quyền chặn và chưa có lệnh của sếp: hỏi sếp trước.
+- review/maid-art-c (97a3a9e): Part C đủ 52 nàng; còn sửa: lãnh cung phải áo trơn, không trang sức (m11 m12 m15 m16 m19 m20 m24, hoa tai), mặt 48 ở lãnh cung còn trẻ, hoa điền t6 như dây rủ (m08 m14 m17 m18 m19), m06-t7 còn một nét, m26-t8 rộng; soát C-B tương tự.
+- review/minigames fe63a6f: chờ duyệt lại.
+- review/consort-art: thợ #9 dừng giữa lúc sửa "hoa điền đúng nấc + xóa nốt ruồi"; xem PROGRESS của nhánh.
+Phiên mới không có scratchpad cũ và không gọi được các thợ cũ: mở thợ mới từ các nhánh trên.
+Trigger 9:15 PT cũ đã xóa; phiên mới tự kiểm bản live trước 10 giờ sáng giờ Los Angeles nếu kịp.
