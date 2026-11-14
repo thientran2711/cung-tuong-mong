@@ -89,7 +89,7 @@ function kitIntel(list,o){o=o||{};if(!list||!list.length)return `<div class="kfa
  return `<div class="kintel">${list.map(x=>`<div class="kint">${x.about?kitFaceH(x.about,"sm"):`<span class="kfdot"></span>`}<span class="kft">${x.about?kitName(x.about,{cap:true})+": ":""}${kpChipify(x.fact||"")}<small class="kisrc">Nguồn: ${x.src&&typeof x.src==="object"?kitName(x.src,{cap:true}):(x.src||"tai mắt")}${x.week?` · ${x.week}`:""}</small></span></div>`).join("")}</div>`}
 /* kitEvidence({what, against:person, how, when, strength:n, acts:[{n, odds, ton, duoc, mat, kem}]}) */
 function kitEvidence(e){return `<div class="kcardp kev"><div class="kcph">${e.against?kitFaceH(e.against,"sm"):""}<span class="kcpt"><b>${e.what}</b>${e.against?`<small>chống lại ${kitName(e.against)}</small>`:""}</span>${e.strength!=null?kitChip(`Sức nặng ${e.strength}`,"n"):""}</div>`+
- kitRows([["Chứng minh",e.proves||e.what,"t"],["Có được",[e.how,e.when].filter(Boolean).join(" · "),"n"]])+(e.acts&&e.acts.length?`<div class="kpacts">${e.acts.map(kitActMini).join("")}</div>`:"")+`</div>`}
+ kitRows([["Chứng minh",e.proves&&e.proves!==e.what?e.proves:"","t"],["Có được",[e.how,e.when].filter(Boolean).join(" · "),"n"]])+(e.acts&&e.acts.length?`<div class="kpacts">${e.acts.map(kitActMini).join("")}</div>`:"")+`</div>`}
 /* kitThreat({who:person, how, sure:"Khá chắc", when, defs:[{n, odds, ton, duoc, mat, kem}]}) */
 function kitThreat(t){return `<div class="kcardp kth"><div class="kcph">${t.who?kitFaceH(t.who,"sm"):`<span class="kfdot"></span>`}<span class="kcpt"><b>${t.who?kitName(t.who,{cap:true}):"Kẻ chưa rõ mặt"}</b><small>${t.how}</small></span>${t.sure?kitOdds(t.sure,{label:"Tin này"}):""}</div>`+
  kitRows([["Khi nào",t.when,"t"]])+(t.defs&&t.defs.length?`<h4 class="kpst">Cách đỡ</h4><div class="kpacts">${t.defs.map(kitActMini).join("")}</div>`:"")+`</div>`}
@@ -520,3 +520,24 @@ if(typeof LACK==="object"){const bac=n=>S.bac<n?`Bạc ${n} (có ${S.bac})`:"";c
  expose:t=>!hasScandal(t)?"nàng có chuyện tư tình (ngươi biết)":evG(S,t)<2?`2 chứng cứ về nàng (có ${evG(S,t)})`:"",
  xinhh:t=>{const q=queenP();return bac(30)||(!q||q===S?"có Hoàng hậu (không phải ngươi)":q===t?"nàng không phải Hoàng hậu":aff(q,S)<40?`Hoàng hậu quý ngươi ≥40 (có ${aff(q,S)})`:rkOf(t)<1?"nàng từ Thường tại trở lên":"")},
  pushp:t=>whereOf(S)!=="vuon"?"ngươi đang ở Ngự hoa viên":!together(S,t)?"nàng ở cùng chỗ với ngươi":"",trip:t=>together(S,t)?"":"nàng ở cùng chỗ với ngươi"})}
+
+/* ================= wiring j78 (intel + evidence data) to the kit ================= */
+if(typeof j78when==="function"){j78when=function(){return kitDate(S.month,S.year,S.tuan)}}
+function kitEvidencePanel(v){if(!v||typeof evidenceOf!=="function")return;const E=evidenceOf(v);if(!E)return;
+ const items=E.items.length?E.items.map(e=>kitEvidence({what:e.proves,how:e.how,when:e.when})).join(""):`<div class="kpnote">Ngươi chưa giữ chứng cứ nào về nàng.</div>`;
+ const acts=(E.acts||[]).map(a=>`<button class="opt" data-kev="${v.id}" data-kevact="${a.k}"${a.why?" disabled":""}>${a.n||(ACT[a.k]?ACT[a.k].n:a.k)}<small>${a.why?`<span class="kwhy">${a.why}</span> `:""}${kitParse(a.line||"")}</small></button>`).join("");
+ const m=kitPanel({kind:"evidence",title:`Chứng cứ về ${kpPlain(kitName(v))}`,sub:`Đang giữ: ${E.count}`,subject:v,sections:[{h:`Chứng cứ đang giữ (${E.count})`,html:`<div class="kevs">${items}</div>`},acts?{h:"Dùng chứng cứ",html:`<div class="opts">${acts}</div>`}:null]},true);m.evd=1;showModal()}
+function kitIntelPanel(v){if(!v)return;const L=typeof intelOf==="function"?intelOf(v):[];const old=(S.notes&&S.notes[v.id])||[];
+ const list=L.map(x=>({about:null,fact:x.fact+(x.current===false?` <span class="kchip n">nay đã khác</span>`:""),src:x.by?(typeof x.by==="object"?x.by:String(x.by)):"tai mắt",week:[x.how,x.when].filter(Boolean).join(" · ")}));
+ old.forEach(t=>{if(!L.some(x=>kpPlain(x.fact).includes(kpPlain(t))))list.push({fact:t,src:"nghe được",week:""})});
+ const m=kitPanel({kind:"intel",title:`Đã biết về ${kpPlain(kitName(v))}`,sub:`${list.length} tin`,subject:v,sections:[{html:kitIntel(list,{empty:"Ngươi chưa biết gì thêm về nàng. Dò la để biết."})}]},true);showModal()}
+/* person card: the evidence chip and the "Đã biết" line open the kit panels */
+(function(){if(typeof rvCard!=="function")return;const r0=rvCard;rvCard=function(v,i){let h=r0.apply(this,arguments);try{
+  h=h.replace(/<span class="chip hot">((?:<img[^>]*>)?Chứng cứ \d+)<\/span>/,`<button class="chip hot kchipb" data-kev="${v.id}" title="Xem chứng cứ">$1 ›</button>`);
+  h=h.replace(/<span class="past">Đã biết: [\s\S]*?<\/span>/,"");
+  const n=(typeof intelOf==="function"?intelOf(v).length:0)||((S.notes&&S.notes[v.id])||[]).length;
+  if(n)h=h.replace('<div class="pcinfo">',`<div class="pcinfo"><button class="chip kchipb" data-kintel="${v.id}">Đã biết: ${n} tin ›</button>`)}catch(e){}return h}})();
+document.addEventListener("click",e=>{const a=e.target.closest("[data-kevact]");if(a){e.stopPropagation();if(a.disabled)return;evidenceDo(+a.dataset.kev||a.dataset.kev,a.dataset.kevact);return}
+ const c=e.target.closest(".kchipb[data-kev]");if(c){e.stopPropagation();const v=RV(+c.dataset.kev||c.dataset.kev);if(v){if(Q.length&&/pcm/.test(Q[0].cls||""))Q.shift();kitEvidencePanel(v)}return}
+ const t=e.target.closest(".kchipb[data-kintel]");if(t){e.stopPropagation();const v=RV(+t.dataset.kintel||t.dataset.kintel);if(v){if(Q.length&&/pcm/.test(Q[0].cls||""))Q.shift();kitIntelPanel(v)}}},true);
+(function(){const st=document.createElement("style");st.id="kp-ev-css";st.textContent=`.kchipb{cursor:pointer;font-family:inherit;background:#fff;font-size:.75rem}.kchipb:hover{border-color:var(--gold)}.kevs{display:flex;flex-direction:column;gap:6px}`;document.head.appendChild(st)})();
