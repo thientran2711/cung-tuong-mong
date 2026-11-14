@@ -76,4 +76,10 @@ function j95cNext(){const P=J95B.next;if(!P||!P.length)return;J95B.next=[];if(!j
   let kh=used[x.id]||0;/* the first khắc of the coming buổi (endTurn resets the khắc count only after planning) */while(kh<4&&(e[kh][1]==="tryst"||e[kh][1]==="meet"))kh++;if(kh>=4){J95C.later.push(x.why);continue}used[x.id]=kh+1;
   e[kh]=[x.k,x.act||"here",x.k==="home"?"me":null,x.why];J95B.bind.push({id:x.id,k:x.k,kh,key:R.key,wk:R.wk,b:R.b,past:1,next:1,src:x.src,why:x.why});if(J95B.bind.length>400)J95B.bind.splice(0,100);n++}
  if(n){J95C.stat.next+=n;j95sync()}}
+/* a second turn-of-buổi act for her, decided after the new buổi was planned (the month report after the week report): the first act
+   already holds this khắc and was told ("Tai mắt kể: X dâng canh sâm …"); the second would move her away from what was just told,
+   so its line is not told (the khắc keeps one place each, and only the current khắc may change in the present buổi) */
+(function(){if(typeof j95bPutPast!=="function")return;const o=j95bPutPast;j95bPutPast=function(id,k){try{const R=S&&S.roster;
+  if(j95cCur()&&R.P[id]){const kh=j95kh();if(R.P[id][kh][0]!==k&&J95B.bind.some(b=>b.next&&b.id===id&&b.key===R.key&&b.kh===kh&&b.k!==k)){J95C.stat.next2Drop=(J95C.stat.next2Drop||0)+1;return"seen"}}}catch(e){j95cErr("putPast2",e)}
+  return o.apply(this,arguments)}})();
 window.__j95c=()=>({stat:J95C.stat,errs:J95C.errs,j95fix:J95.stat.fix||0});

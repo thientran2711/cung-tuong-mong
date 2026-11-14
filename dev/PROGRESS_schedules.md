@@ -24,6 +24,15 @@ Kit (review/kit-j95): `j95habitsMine()` có `told` (tai mắt đã báo kẻ th�
 trả [{id,name,role}] người đang theo hầu p ở khắc hiện tại.
 Kiểm: bất biến mới (j)–(q) trong `dev/test/roster_audit_c.js`; kết quả trong dev/test/ROSTER_AUDIT.md.
 
+### Vòng cuối (thợ j95 tiếp nhận từ WIP eae4f96)
+- Gộp `origin/wip/balance-fix1` (ce8979c: jpal không viết lại palaceOf nữa). `origin/review/balance` chưa có bản mới (vẫn 4516bec): khi thợ cân bằng đẩy,
+  gộp vào và chạy lại cả hai bộ kiểm.
+- j95b: tách câu cả khi dấu chấm nằm trong ngoặc ("(Chứng cứ X +1.) Tai mắt kể: Y …" không còn đặt X vào nơi của Y); nơi đang RỜI
+  ("được tha khỏi lãnh cung", "rời ngự hoa viên") không đặt ai vào đó (`j95bLexNow`).
+- Bộ kiểm: (h) của roster_audit.js dùng cùng luật câu; kiểm độc lập: người lạ j61 ("Người lạ ???") nhận theo `data-p`, không lưu/nạp giữa
+  `goTo` (goTo tiêu khắc đi đường trước khi đặt S.place, game không bao giờ lưu lúc đó), Tân Giả khố `tgk` (j42) là nơi thật.
+- Kết quả: dev/test/ROSTER_AUDIT.md.
+
 ## Đã làm
 
 ### 1. Sổ vị trí (một bản ghi duy nhất, `S.roster`)
