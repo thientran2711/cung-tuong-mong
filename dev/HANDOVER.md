@@ -12,6 +12,7 @@ Owner: Victoria ("sếp"). Reply to her in Vietnamese only, as "em", short, no q
   - dev/measure/: bot balance harness (inpage4.js, run*.js, an6.py, m43/ for NPC-mind sims).
 - Images: img/fig-*.webp (full-body, transparent) + img/por-*.webp (round portraits) listed in img/FIGURES.json (consorts, player looks, emperor, eunuchs), img/FIGURES-servants.json (maids, mamas), img/FIGURES-others.json (thái hậu, officials, physicians, men). Code merges all FIGURES*.json; old faces img/face-*.webp are the fallback. Map: img/map-<season>-<buổi>.webp, img/map-fest-*.webp, img/map-hotspots.json (+festivals table).
 - Testing: serve over http with a <meta charset=utf-8> wrapper; Playwright (require('playwright')); sizes 1510x2000, 904x2316, 1024x768, 390x844; no page errors, no horizontal overflow, no truncated text, equal act-card sizes, old save (localStorage hclh-slot / hclh-save-v2-<n>) must still load.
+- Art QA (cutout fix): run `python3 dev/figwork/cutcheck.py img/fig-*.webp` on new art (score >=8 or por >=20 = re-cut: crop ONE figure from the raw generation and run Magnific remove-background on it alone, see dev/figwork/rematte.py); make portraits with `python3 dev/figwork/porcrop.py img/fig-X.webp` (384x506, face-centred; needs opencv-python-headless==4.10.0.84).
 
 ## Workers still running in the OLD session at handover (they finish there, then stop)
 - Code integrator: balance final pass (targets below), publishes green builds; will sync scratchpad build → dev/ and push; final commit message contains "HANDOFF COMPLETE".
