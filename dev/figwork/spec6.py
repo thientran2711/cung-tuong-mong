@@ -27,7 +27,7 @@ def hstyle(t,col):
     elif t<=6: r=f"painted in {col} finely outlined in thin gold, more intricate detail"
     else: r="precious materials: fine gold leaf and cinnabar red with one tiny seed pearl, the most intricate fine detail"
     return r+"; the SAME small size at every rank (richer only in material and detail, NEVER larger), never covering the forehead, never spreading onto the brows or cheeks"
-NOMOLE="No moles, no beauty marks, no spots on the face (even if the identity reference shows one), smooth clear skin."
+NOMOLE="Her face has NO mole and NO beauty mark: any small dark dot on the identity reference face must NOT be drawn; flawless smooth clear skin on every figure."
 for k,v in list(F.items()):
     for a,b in REPL: v=v.replace(a,b)
     F[k]=v
@@ -35,7 +35,7 @@ json.dump(F,open("consorts_feat.json","w"),indent=0)
 for k,j in J.items():
     p=j['prompt']
     for a,b in REPL: p=p.replace(a,b)
-    p=re.sub(r' HUADIAN: [^.]*\.','',p); p=p.replace(' '+NOMOLE,'')
+    p=re.sub(r' HUADIAN: [^.]*\.','',p); p=p.replace(' '+NOMOLE,'').replace(' No moles, no beauty marks, no spots on the face (even if the identity reference shows one), smooth clear skin.','')
     m=re.match(r'N-(c\d\d)-t(\w+)$',k)
     if m and m.group(1) in HD:
         mot,col=HD[m.group(1)]; t=m.group(2)
@@ -51,7 +51,7 @@ for j in J.values():
             for a,b in REPL: j[kk]=j[kk].replace(a,b)
 json.dump(J,open("jobs.json","w"),indent=0)
 # HUADIAN.md
-L=["# Hoa điền (huadian) — bảng kiểu cho phi tần c01–c32 (art7, luật sếp 11/14)","",
+L=["# Hoa điền (huadian) — bảng kiểu cho phi tần c01–c32 (art7, luật sếp 11/14)","","Xem thêm dev/figwork/HUADIAN_C.md: kiểu của 52 cung nữ lên phi tần (thợ Part C), phải khác hết 32 kiểu dưới đây.","",
 "Mỗi người một kiểu riêng, giữ suốt đời (mọi bậc, mọi tuổi). Bậc t1–t2: rất nhỏ, vẽ màu nhạt thanh nhã; t3–t4: nhỏ, nét kỹ hơn; t5–t6: viền vàng mảnh;",
 "t7–t8: cùng hoạ tiết bằng vàng lá + son đỏ, điểm một hạt ngọc trai nhỏ, nét kỹ nhất. LUẬT: luôn NHỎ, sang, tinh tế; bậc cao sang hơn bằng chất liệu và nét, KHÔNG to hơn;",
 "không bao giờ che trán, không lan xuống mày/má. Chỉ phi tần có hoa điền (không cung nữ, ma ma...). Lãnh cung (tcold): KHÔNG hoa điền.",

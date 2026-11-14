@@ -1,5 +1,7 @@
 # Hoa điền (huadian) — bảng kiểu cho phi tần c01–c32 (art7, luật sếp 11/14)
 
+Xem thêm dev/figwork/HUADIAN_C.md: kiểu của 52 cung nữ lên phi tần (thợ Part C), phải khác hết 32 kiểu dưới đây.
+
 Mỗi người một kiểu riêng, giữ suốt đời (mọi bậc, mọi tuổi). Bậc t1–t2: rất nhỏ, vẽ màu nhạt thanh nhã; t3–t4: nhỏ, nét kỹ hơn; t5–t6: viền vàng mảnh;
 t7–t8: cùng hoạ tiết bằng vàng lá + son đỏ, điểm một hạt ngọc trai nhỏ, nét kỹ nhất. LUẬT: luôn NHỎ, sang, tinh tế; bậc cao sang hơn bằng chất liệu và nét, KHÔNG to hơn;
 không bao giờ che trán, không lan xuống mày/má. Chỉ phi tần có hoa điền (không cung nữ, ma ma...). Lãnh cung (tcold): KHÔNG hoa điền.
