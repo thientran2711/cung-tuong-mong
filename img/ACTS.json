@@ -149,6 +149,100 @@
    "bribe"
   ]
  },
+ "nghi-ngoi": {
+  "file": "img/act-nghi-ngoi.webp",
+  "cat": "nghi-ngoi",
+  "names": [
+   "Nghỉ ngơi dưỡng sức",
+   "Nghỉ lấy sức",
+   "Ngủ sớm",
+   "Ở yên trong cung nghỉ ngơi",
+   "Tĩnh dưỡng"
+  ]
+ },
+ "theu-khan-ban": {
+  "file": "img/act-theu-khan-ban.webp",
+  "cat": "buon-ban",
+  "names": [
+   "Thêu khăn bán ra ngoài",
+   "Thêu khăn bán"
+  ]
+ },
+ "lam-tho": {
+  "file": "img/act-lam-tho.webp",
+  "cat": "tai-nghe",
+  "names": [
+   "Làm thơ dâng lên",
+   "Gửi bài thơ cũ"
+  ]
+ },
+ "cau-tu": {
+  "file": "img/act-cau-tu.webp",
+  "cat": "le-nghi",
+  "names": [
+   "Cầu tự ở Phụng Tiên điện"
+  ]
+ },
+ "phat-chan": {
+  "file": "img/act-phat-chan.webp",
+  "cat": "ban-thuong",
+  "names": [
+   "Phát chẩn cho cung nhân",
+   "Đưa cơm áo",
+   "Lì xì cung nhân",
+   "Tự tay nấu cháo phát cho cung nhân"
+  ]
+ },
+ "duong-nhan": {
+  "file": "img/act-duong-nhan.webp",
+  "cat": "trang-diem",
+  "names": [
+   "Dưỡng nhan",
+   "Chải chuốt, giữ nhan sắc"
+  ]
+ },
+ "luyen-cam-ky": {
+  "file": "img/act-luyen-cam-ky.webp",
+  "cat": "hoc-tap",
+  "names": [
+   "Luyện cầm kỳ thi họa",
+   "Tự học",
+   "Luyện tập"
+  ]
+ },
+ "doc-binh-thu": {
+  "file": "img/act-doc-binh-thu.webp",
+  "cat": "hoc-tap",
+  "names": [
+   "Đọc binh thư, sử sách"
+  ]
+ },
+ "tung-kinh": {
+  "file": "img/act-tung-kinh.webp",
+  "cat": "le-nghi",
+  "names": [
+   "Tụng kinh, làm việc thiện",
+   "Thỉnh an, chép kinh",
+   "Chép kinh, giữ đức"
+  ]
+ },
+ "thuong": {
+  "file": "img/act-thuong.webp",
+  "cat": "ban-thuong",
+  "names": [
+   "Thưởng cung nữ",
+   "Ban thưởng",
+   "Giúp đỡ nàng",
+   "Giúp nàng"
+  ]
+ },
+ "danh-co": {
+  "file": "img/act-danh-co.webp",
+  "cat": "tai-nghe",
+  "names": [
+   "Đánh cờ với Hoàng thượng"
+  ]
+ },
  "lat-the": {
   "file": "img/act-lat-the.webp",
   "cat": "sung-ai",
@@ -163,6 +257,175 @@
    "block"
   ]
  },
+ "chan-ngu-gia": {
+  "file": "img/act-chan-ngu-gia.webp",
+  "cat": "sung-ai",
+  "names": [
+   "Chặn ngự giá"
+  ],
+  "ids": [
+   "road"
+  ]
+ },
+ "dan-con-thinh-an": {
+  "file": "img/act-dan-con-thinh-an.webp",
+  "cat": "cham-con",
+  "names": [
+   "Đưa con đến thỉnh an Hoàng thượng",
+   "Dẫn đi thỉnh an Hoàng thượng"
+  ]
+ },
+ "an-thai": {
+  "file": "img/act-an-thai.webp",
+  "cat": "y-duoc",
+  "names": [
+   "Tự bào chế thuốc an thai",
+   "An thai"
+  ]
+ },
+ "tro-chuyen-hoang-thuong": {
+  "file": "img/act-tro-chuyen-hoang-thuong.webp",
+  "cat": "giao-thiep",
+  "names": [
+   "Tâng bốc",
+   "Nói thật lòng",
+   "Khen tài nghệ nàng",
+   "Trò chuyện",
+   "Hỏi chuyện"
+  ]
+ },
+ "xin-an-dien": {
+  "file": "img/act-xin-an-dien.webp",
+  "cat": "giao-thiep",
+  "names": [
+   "Xin ân điển",
+   "Khất bổng lộc",
+   "Cầu xin Hoàng thượng",
+   "Xin Hoàng thượng ân xá"
+  ]
+ },
+ "ban-trieu-chinh": {
+  "file": "img/act-ban-trieu-chinh.webp",
+  "cat": "trieu-chinh",
+  "names": [
+   "Bàn chuyện triều chính"
+  ]
+ },
+ "xin-xam": {
+  "file": "img/act-xin-xam.webp",
+  "cat": "le-nghi",
+  "names": [
+   "Xin xăm ở Phật đường"
+  ]
+ },
+ "thinh-an": {
+  "file": "img/act-thinh-an.webp",
+  "cat": "le-nghi",
+  "names": [
+   "Thỉnh an",
+   "Xin bái kiến",
+   "Xin yết kiến",
+   "Chào hỏi đúng lễ"
+  ]
+ },
+ "xin-che-cho": {
+  "file": "img/act-xin-che-cho.webp",
+  "cat": "giao-thiep",
+  "names": [
+   "Xin Thái hậu đỡ lời",
+   "Xin Hoàng hậu che chở",
+   "Nhờ giúp đỡ",
+   "Cầu xin",
+   "Nhờ người bên ngoài",
+   "Cầu xin quản sự",
+   "Che chở (đang bị bắt tội)",
+   "Nhờ * cầu xin",
+   "Nhờ con vào cung nói giúp"
+  ],
+  "ids": [
+   "xinhh"
+  ]
+ },
+ "tang-qua": {
+  "file": "img/act-tang-qua.webp",
+  "cat": "giao-thiep",
+  "names": [
+   "Tặng quà",
+   "Biếu quà",
+   "Biếu"
+  ],
+  "ids": [
+   "gift"
+  ]
+ },
+ "nghe-len": {
+  "file": "img/act-nghe-len.webp",
+  "cat": "muu-ke",
+  "names": [
+   "Nghe lén câu chuyện",
+   "Dò la",
+   "Sai đi dò la",
+   "Nhờ dò tin",
+   "Sai tai mắt dò nơi ở",
+   "Mượn dịp dò tin"
+  ],
+  "ids": [
+   "spy"
+  ]
+ },
+ "cai-do": {
+  "file": "img/act-cai-do.webp",
+  "cat": "muu-ke",
+  "names": [
+   "Cài đồ vào rương nàng",
+   "Cài đồ vào rương",
+   "Vu oan"
+  ],
+  "ids": [
+   "plant",
+   "frame"
+  ]
+ },
+ "luc-ruong": {
+  "file": "img/act-luc-ruong.webp",
+  "cat": "muu-ke",
+  "names": [
+   "Lục rương tìm chứng cứ",
+   "Tìm chứng cứ cha trung thành",
+   "Điều tra án cũ",
+   "Tìm chứng cứ minh oan",
+   "Hỏi chuyện cũ"
+  ]
+ },
+ "thai-y": {
+  "file": "img/act-thai-y.webp",
+  "cat": "y-duoc",
+  "names": [
+   "Xin chữa bệnh",
+   "Truyền thái y",
+   "Mời làm thái y tâm phúc",
+   "Bài thuốc dễ thụ thai"
+  ]
+ },
+ "mua-hang": {
+  "file": "img/act-mua-hang.webp",
+  "cat": "buon-ban",
+  "names": [
+   "Mua *",
+   "Mua thuốc bổ",
+   "Mua"
+  ]
+ },
+ "thi-tham": {
+  "file": "img/act-thi-tham.webp",
+  "cat": "giao-thiep",
+  "names": [
+   "Tâm sự",
+   "Chia sẻ bí mật",
+   "Bàn tán về *",
+   "Cảnh báo nàng"
+  ]
+ },
  "ha-doc": {
   "file": "img/act-ha-doc.webp",
   "cat": "hai-nguoi",
@@ -175,6 +438,22 @@
    "poison",
    "slowpoison",
    "kpoison"
+  ]
+ },
+ "giat-do": {
+  "file": "img/act-giat-do.webp",
+  "cat": "hau-ha",
+  "names": [
+   "Giặt đồ"
+  ]
+ },
+ "dang-tra": {
+  "file": "img/act-dang-tra.webp",
+  "cat": "hau-ha",
+  "names": [
+   "Dâng trà, hầu điểm tâm",
+   "Hầu trà khi ngự giá",
+   "Rót rượu gần ngự tọa"
   ]
  }
 }
