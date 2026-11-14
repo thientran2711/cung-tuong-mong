@@ -102,3 +102,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (22:20Z) Owner set GitHub secrets CLOUDFLARE_API_TOKEN + CLOUDFLARE_ACCOUNT_ID; co-op and single-player live in the same app/link (title: Chơi một mình / Chơi cùng bạn).
 - (22:30Z) Coordinator decision: the succession choice card (Hoàng thái hậu/Nhiếp chính/Nữ đế) shows full outcomes + odds like a normal act (it's a deliberate decision, not a hidden event); epilogue chapter choices stay costs-only.
 - (22:45Z) Owner: add allergy (dị ứng) — painted rash overlay on the face (like scars), veil can be used for it too. Two-way; causes incl. rival schemes; heals over weeks / Thái y. Pilot overlay art first.
+- (22:55Z) Owner: item rivalry — people who see/learn you own a fine item may demand/extort it; servants bribed to steal items, then keep or plant them to frame you (or frame others with your item). Two-way, motive-gated. (review/item-conflict)
