@@ -25,4 +25,4 @@ Nhánh từ origin/review/balance (619e35b). Không gộp main. Quyết định 
 - 30 đời, trung bình 9 hồi cao trào mỗi đời (270), đủ điều kiện 49 lần (18 %), hiện cơ duyên 10 lần, 9/30 đời gặp ít nhất 1 kết hiếm (30 %; một đời gặp 2).
 - Kỳ vọng tính từ tỉ lệ đủ điều kiện: 1-(1-0,18×0,147)^9 ≈ 21 %; mẫu 30 đời trúng nhiều hơn kỳ vọng. Đặt núm `R97CFG.p=0,9` (xác suất thật 9–13,5 %) → kỳ vọng ≈ 19 %, trong khoảng mục tiêu 15–25 %. s_tinh dễ đủ điều kiện với bot "sạch" (3 lần): nâng Đức 45 → 50.
 - Kết hiếm đã gặp trong đo: s_tinh ×3, s_hoa ×2, dtq_vu, s_dich, cn_ban, td_song, cn_than.
-- Lưu ý: bot xoay xuất thân theo thứ tự cố định, mẫu chưa có cnv; tc ch/thd ít.
+- Lưu ý: bot xoay xuất thân theo thứ tự cố định, mẫu chưa có cnv, ch/thd ít.
