@@ -29,3 +29,5 @@ Owner 15/11 00:25Z: theft/framing approved as PURE GAME RULES (fresh worker). Bu
 ## Open
 - The modal draws each <p> as a bullet row (kit), so the item picture sits on a bullet line like the veil notices (jveil does the same).
 - A returned item that was originally a rival's gift keeps its .from, so j93 may show the "Hộp gấm" animation again when it comes back (cosmetic).
+
+SẴN SÀNG KIỂM
