@@ -165,3 +165,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (04:30Z) Owner: on walks she can meet men; zones forbidden to men (inner hậu cung) / women (outer court); seeing a man where he shouldn't be → report to guards / Cung Chính ti, ignore, hide him, hide & eavesdrop, later leverage. Same rules for NPCs. Worker on review/men (existing male art only).
 - (05:10Z) Owner: Tư trang Y phục slot must show the garment (existing wardrobe art img/wd512), not the fabric roll.
 - (05:20Z) Owner: equipped slots must show the item's info inline (Được/Mất/công dụng), not only after tapping; header warning chip must not be cut.
+- (05:25Z) Owner: stage name labels = rank on top line, name below, text coloured by rank (kit rule, all stages).
