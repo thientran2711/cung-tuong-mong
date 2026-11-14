@@ -45,4 +45,6 @@ then `python3 dev/measure/anx.py label out*.json`.
 | v1 (hz .7/1.3, poisonX ×1.33 Khó) | 32% / 32% (n=28, 7 childbirth) | 23% / 17% | Khó: few births (0.5/life), poison lands 3.3×/life but never kills her |
 | v2 (Dễ stronger; Khó + poisonNow) | 57% / 10% | 3% / 97% (24 poison deaths) | found: j8 poison kills an NPC at Sức 0 at once (dieIf) but her only at tuần end after +4 rest |
 | v3 (Dễ birth −2/−3; Khó no poisonX, seeMaxP −5, hz ×1.2, mot ×1.4) | **50% / 20%** ✔ (childbirth 9.6%/labour, HH median 7.0 y) | 3% / 80% (20 poison) | Dễ final |
-| v4a/v4b Khó (runk.sh: hz 1.1/1.2, seeMaxP 0, poisonX .8/.67, mot 1.2/1.4) | – | running | |
+| v4a Khó (hz 1.1, seeMaxP 0, poisonX .8, mot 1.2) | – | 15% / 70% (n=20, 10 poison; tabs crashed: memory) | |
+| v4b Khó (hz 1.2, seeMaxP 0, poisonX .67, mot 1.4) | – | 0% / 88% (n=8) | dropped |
+| v5 Khó = v4a + seeMaxP +5 (shipped in code) | – | running (runkf.sh) | |
