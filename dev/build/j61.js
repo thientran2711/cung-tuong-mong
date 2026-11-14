@@ -25,11 +25,15 @@ function k61All(){const L=[];if(!S)return L;const add=e=>{if(e&&typeof e==="obje
  for(const c in (S.court||{}))add(S.court[c]);(S.men||[]).forEach(add);try{const T=S.trieu;if(T&&T.H)for(const c in T.H)add(T.H[c])}catch(e){}return L}
 function k61St(e){if(!e||!S||e===S)return 3;const K=k61S();if(!K)return 3;return +K[kOf61(e)]||0}
 function isKnown61(e){return k61St(e)>=1}
-function k61Named(e){return k61St(e)>=2}
+/* public figures (kit review): Hoàng thượng, Thái hậu and the reigning Hoàng hậu are known by name and title (stage 2) from the first
+   day; their face (grey silhouette until then) shows after the first meeting / thỉnh an */
+function k61Pub(e){if(!e||!S)return false;if(e===S.emp)return true;if(S.thO&&e===S.thO)return true;return !!((rivals||[]).includes(e)&&e.queen&&!e.out&&e.alive!==false)}
+function k61Named(e){return k61St(e)>=2||k61Pub(e)}
 function kitKnown(p){try{const e=k61PortEnt(p);return e?isKnown61(e):true}catch(e){return true}}
 function kitKnownName(p){try{const e=k61PortEnt(p);return e?k61Named(e):true}catch(e){return true}}
 const K61STN=["Người lạ","Thấy mặt","Biết tên","Quen biết"];
-function k61PortEnt(p){if(!p)return null;if(p.kk)return k61Ent(p.kk);if(p.src&&K61SRC[p.src])return k61Ent(K61SRC[p.src]);return null}
+function k61PortEnt(p){if(!p)return null;if(p.kk)return k61Ent(p.kk);if(p.src&&K61SRC[p.src])return k61Ent(K61SRC[p.src]);if(p.__kp&&typeof p.__kp==="object")return p.__kp===S?null:p.__kp;
+ if(S&&(p===S.emp||p===S.thO||(rivals||[]).includes(p)))return p;return null}
 /* what she can see: the dress tells rank and role, nothing more */
 function k61Kind(e){if(!S||!e)return"";if((rivals||[]).includes(e))return"consort";if(e===S.emp)return"emp";if(S.thO&&e===S.thO)return"th";
  for(const c in (S.court||{}))if(S.court[c]===e)return c==="ty"?"phys":c==="tq"?"tq":"eun";
@@ -50,9 +54,9 @@ function k61Title(e){const k=k61Kind(e);if(k==="consort")return`${rkName(e)} ${e
  if(k==="off")return`${(typeof TDOFF!=="undefined"&&TDOFF[e.c])||"quan"} ${e.name}`;return e.name||"người ấy"}
 /* becoming known (logged once); the other side learns her too when they meet */
 function k61Know(list,how,quiet,st){st=st||2;if(!S||!k61S())return[];const L=(Array.isArray(list)?list:[list]).filter(e=>e&&e!==S&&k61St(e)<st);if(!L.length)return[];
- const nm=L.filter(e=>!k61Named(e)&&st>=2);const desc=L.filter(e=>!isKnown61(e)&&st===1).map(k61Desc);
- L.forEach(e=>{S.known[kOf61(e)]=st});K61VER++;
- if(!quiet){if(nm.length)log(`<span class="g">Ngươi đã biết: đó là ${nm.map(k61Title).join(", ")}.</span>${how?" "+how:""}`);else if(desc.length)log(`Ngươi đã thấy mặt ${desc.join(", ")}; chưa biết tên.${how?" "+how:""}`);else if(st===3)log(`<span class="g">Ngươi đã quen biết ${L.map(k61Title).join(", ")}.</span>${how?" "+how:""}`)}return L}
+ const nm=L.filter(e=>!k61Named(e)&&st>=2);const pubSeen=L.filter(e=>k61Pub(e)&&!isKnown61(e));const desc=L.filter(e=>!isKnown61(e)&&st===1).map(k61Desc);
+ L.forEach(e=>{S.known[kOf61(e)]=st<2&&k61Pub(e)?2:st});K61VER++;
+ if(!quiet){if(nm.length)log(`<span class="g">Ngươi đã biết: đó là ${nm.map(k61Title).join(", ")}.</span>${how?" "+how:""}`);else if(pubSeen.length&&st<3)log(`Ngươi đã được thấy mặt ${pubSeen.map(k61Title).join(", ")}.${how?" "+how:""}`);else if(desc.length)log(`Ngươi đã thấy mặt ${desc.join(", ")}; chưa biết tên.${how?" "+how:""}`);else if(st===3)log(`<span class="g">Ngươi đã quen biết ${L.map(k61Title).join(", ")}.</span>${how?" "+how:""}`)}return L}
 function k61Meet(e,how,st){k61Know(e,how,false,st);if((rivals||[]).includes(e))npcLearn(e,S)}
 /* ---- NPCs and newcomers (light): S.nkn[target] = {npcKey:1}; a missing entry means everyone knows the target ---- */
 function npcKnows(a,b){if(!S||!S.nkn||!a||!b||a===b)return true;const T=S.nkn[b===S?"me":"r"+b.id];if(!T)return true;return !!T[a===S?"me":"r"+a.id]}
@@ -97,13 +101,13 @@ function k61Dis(b){if(!b||!/^<button/.test(b)||/data-(see|scout|visit|k61|pct|pg
 function k61AskBtn(e){const k=kOf61(e);const o=od(45+(S.mat||0)*8+((S.maid&&S.maid.loyal)||40)/5);
  return pbtn(`data-k61="ask" data-kk="${k}"`,"Hỏi người hầu: đó là ai?",`${word(o)} · tốn: 1 khắc · thành: biết người này là ai (lời thật) · hỏng: người hầu cũng không biết`,whyTime(1))}
 function k61StChip(st){return chip(`${K61STN[st]} · ${st}/3`,st>=3?"ok":"")}
-(function(){const c0=pcard;pcard=function(o){try{const e=o&&k61PortEnt(o.f);const st=e?k61St(e):3;if(e&&st<2){const pop=!!o.close;
+(function(){const c0=pcard;pcard=function(o){try{const e=o&&k61PortEnt(o.f);const st=e?k61St(e):3;if(e&&!k61Named(e)){const pop=!!o.close;
   const G=(o.groups||[]).filter(g=>g&&g[1]).map(([hd,B])=>[hd,B.filter(b=>b&&/^<button/.test(String(b))).map(b=>pop?b:k61Dis(String(b)))]).filter(g=>g[1].length);
   if(!pop)G.unshift(["Làm quen",[k61AskBtn(e)]]);
   const chips=[k61StChip(st)].concat((o.chips||[]).filter(c=>c&&/class="chip loc/.test(c)));
   const how=st===0?"Chào hỏi khi gặp mặt, hỏi người hầu, hoặc sai tai mắt dò la thì mới biết.":"Đã thấy mặt, chưa biết tên: hỏi danh tính khi gặp, hỏi người hầu hoặc dò la.";
   return c0.call(this,Object.assign({},o,{name:"???",rank:k61Cap(k61Desc(e)),ghen:null,lines:[`<span class="past">${K61WHY}. ${how}</span>`],chips,groups:G,note:o.note&&pop?o.note:"",empty:o.empty}))}
- if(e&&st===2&&e!==S)return c0.call(this,Object.assign({},o,{ghen:null,lines:[`<span class="past">Mới biết tên: tính nết, sủng ái, quan hệ chưa rõ. Trò chuyện thêm hoặc dò la để quen biết.</span>`],chips:[k61StChip(2)].concat((o.chips||[]).filter(c=>c&&/class="chip loc/.test(c)))}));
+ if(e&&st<=2&&e!==S)return c0.call(this,Object.assign({},o,{ghen:null,lines:[`<span class="past">Mới biết tên: tính nết, sủng ái, quan hệ chưa rõ. Trò chuyện thêm hoặc dò la để quen biết.</span>`],chips:[k61StChip(2)].concat((o.chips||[]).filter(c=>c&&/class="chip loc/.test(c)))}));
  if(e&&e!==S&&S&&S.known&&e!==S.maid&&!(S.staff||[]).includes(e)&&!(S.kids||[]).includes(e))return c0.call(this,Object.assign({},o,{chips:[k61StChip(3)].concat(o.chips||[])}))}catch(x){console.error(x)}return c0.apply(this,arguments)}})();
 /* face strips: the label is the descriptor */
 (function(){const p0=pager;pager=function(key,items,mk){try{items=items.map(t=>{const e=t&&k61PortEnt(t.f);return e&&!k61Named(e)?Object.assign({},t,{name:"???"}):t})}catch(x){}return p0.call(this,key,items,mk)}})();
@@ -168,13 +172,27 @@ function k61Table(){if(!S||!S.known)return null;const now=Date.now();if(K61RX&&K
  for(const v of prot)M[v]=null;const keys=Object.keys(M).filter(v=>M[v]||prot.has(v));if(!keys.some(v=>M[v])){K61RX=false;return false}
  keys.sort((a,b)=>b.length-a.length);K61MAP=M;const esc=s=>s.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
  K61RX=new RegExp(`(?<![\\p{L}\\p{M}])${K61T}(${keys.map(esc).join("|")})(?![\\p{L}\\p{M}])`,"gu");return K61RX}
-function k61Scrub(s,lead){const rx=k61Table();if(!rx||!s)return s;rx.lastIndex=0;if(!rx.test(s))return s;rx.lastIndex=0;
- return s.replace(rx,(m,ti,nm,off,str)=>{const k=K61MAP[nm];if(!k)return m;const e=k61Ent(k);if(!e||k61Named(e))return m;const isC=k61Kind(e)==="consort";
-  let d=isC&&ti&&e.queen&&ti==="Hoàng hậu"?"Hoàng hậu":k61Desc(e);if(ti&&!isC)d=ti+" "+d;
-  const before=str.slice(0,off);const capit=/^\s*$/.test(before)?lead:/[.!?:(“"]\s*$/.test(before);return capit?k61Cap(d):d})}
+/* the mask for a name she does not know: "<title> ???" (title = what the dress shows), never a descriptor sentence */
+function k61MaskT(e){const k=k61Kind(e);if(k==="consort")return e.out?"Phế phi":e.queen?"Hoàng hậu":RANKS[cl(e.rank||0,0,7)].n;if(k==="emp")return"Hoàng thượng";if(k==="th")return"Thái hậu";
+ if(k==="tq")return"Tổng quản thái giám";if(k==="eun")return"thái giám";if(k==="phys")return"thái y";if(k==="maid")return"cung nữ";if(k==="mama")return"ma ma";
+ if(k==="off")return(typeof TDOFF!=="undefined"&&TDOFF[e.c])||"quan";if(k==="kid")return e.sex==="m"?"Hoàng tử":"Công chúa";
+ if(k==="man"){const r=e.role;return r&&!/^(Công tử|Nam nhân)$/i.test(r)?r:"công tử"}return"người"}
+function k61Mask(e,before){const t=k61MaskT(e);const b=String(before||"").replace(/\s+$/,"").toLowerCase();return b.endsWith(t.toLowerCase())?"???":`${t} ???`}
+/* public announcements (thẻ bài lật, sớ hặc tội at court, thánh chỉ, tấn phong / giáng / phế, births): everyone named in them
+   becomes known by name and title (stage 2) the moment it is announced */
+const K61ANN=/thẻ bài của|sớ hặc tội|thánh chỉ|sắc phong|tấn phong|được phong|lập .{1,60}? làm (Hoàng hậu|Thái tử|Hoàng quý phi)|bị giáng|giáng xuống|bị phế|xướng tên|hạ sinh|băng hà/i;
+function k61Announce(text){try{if(!S||!S.known||!text)return false;const t=String(text).replace(/<[^>]+>/g," ");if(!K61ANN.test(t))return false;const L=[];
+ for(const e of k61All()){if(k61Named(e))continue;if(k61Vars(e).some(v=>t.includes(v)))L.push(e)}if(L.length){k61Know(L,"",true,2);K61RX=null}return L.length>0}catch(e){return false}}
+(function(){const l0=log;log=function(h){try{k61Announce(h)}catch(e){}return l0.apply(this,arguments)}})();
+function k61Scrub(s,lead,prev,ann){const rx=k61Table();if(!rx||!s)return s;rx.lastIndex=0;if(!rx.test(s))return s;rx.lastIndex=0;
+ return s.replace(rx,(m,ti,nm,off,str)=>{const k=K61MAP[nm];if(!k)return m;const e=k61Ent(k);if(!e||k61Named(e))return m;
+  if(ann&&k61Announce(ann))return m;
+  const before=(ti?"":(prev||""))+str.slice(0,off);let d=k61Mask(e,before);
+  const capit=/^\s*$/.test(str.slice(0,off))?lead:/[.!?:(“"]\s*$/.test(str.slice(0,off));return capit?k61Cap(d):d})}
 function k61PrevText(n){let x=n;for(let i=0;i<6&&x;i++){let p=x.previousSibling;while(p){const t=p.textContent;if(t&&t.trim())return t;p=p.previousSibling}x=x.parentNode;if(!x||/^(DIV|P|LI|BUTTON|H\d|FIGCAPTION|SECTION|TD)$/.test(x.nodeName))return""}return""}
 function k61Node(n){if(n.nodeType===3){const t=n.nodeValue;if(!t||t.length<4)return;const p=n.parentNode;if(!p||/^(SCRIPT|STYLE|TEXTAREA|INPUT)$/.test(p.nodeName))return;
-  const pv=k61PrevText(n);const lead=!pv.trim()||/[.!?:]\s*$/.test(pv);const s=k61Scrub(t,lead);if(s!==t)n.nodeValue=s;return}
+  const pv=k61PrevText(n);const lead=!pv.trim()||/[.!?:]\s*$/.test(pv);const blk=p.closest&&p.closest(".kft,.kitem,.logs > div,p,li,.rt,.spkt,.krv,.tag,figcaption");
+  const s=k61Scrub(t,lead,pv,blk?blk.textContent:t);if(s!==t)n.nodeValue=s;return}
  if(n.nodeType!==1||/^(SCRIPT|STYLE|TEXTAREA|INPUT)$/.test(n.nodeName))return;
  for(const a of ["title","aria-label"]){const v=n.getAttribute&&n.getAttribute(a);if(v){const s=k61Scrub(v,true);if(s!==v)n.setAttribute(a,s)}}
  const w=document.createTreeWalker(n,NodeFilter.SHOW_TEXT|NodeFilter.SHOW_ELEMENT);let c;const L=[];while((c=w.nextNode()))L.push(c);for(const x of L){if(x.nodeType===3)k61Node(x);else for(const a of ["title","aria-label"]){const v=x.getAttribute(a);if(v){const s=k61Scrub(v,true);if(s!==v)x.setAttribute(a,s)}}}}
@@ -190,3 +208,7 @@ function k61SilChip(k,n){const L=k61SexAt(k);while(L.length<n)L.push("f");const 
  return `<span class="msil" aria-label="${n} bóng người">${L.slice(0,Math.min(n,3)).map(im).join("")}${n>1?`<b>${n}</b>`:""}</span>`}
 (function(){const m0=mapHTML;mapHTML=function(){let h=m0.apply(this,arguments);try{if(S&&typeof SILH==="string"&&(K61U["fig-f"]||K61U["fig-m"]||K61U["fig-k"]))
  h=h.replace(/(<(?:button|div) class="mspot[^"]*" data-(?:go|ak)="([^"]+)"[^>]*>(?:(?!class="mspot)[\s\S])*?)<span class="msil" aria-label="(\d+) bóng người">[\s\S]*?<\/span>/g,(all,open,k,n)=>open+k61SilChip(k,+n))}catch(e){}return h}})();
+
+/* kit names for strangers: j79's kitName/kitPersonLine draw "<title> ???" (rank colour kept: the dress shows the rank) */
+setTimeout(()=>{try{if(typeof kitName!=="function")return;const n0=kitName;kitName=function(p,o){try{if(p&&p!==S&&S&&S.known){const e=k61PortEnt(p)||p;
+  if(e&&k61All().includes(e)&&!k61Named(e)){const t=o&&o.noTitle?"":k61MaskT(e);return `<b class="kname" style="--rc:${typeof kitPersonCol==="function"?kitPersonCol(e):"#8a7350"}">${t?`<span class="kti">${k61Cap(t)}</span> `:""}???</b>`}}}catch(x){}return n0.apply(this,arguments)}}catch(e){}},0);
