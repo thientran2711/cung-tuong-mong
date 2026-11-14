@@ -2,7 +2,7 @@
 
 Owner rule 11/14: every image, frame, button, bar, card, tab, backdrop and other visual element comes from this kit.
 No worker hand-draws a new style, a one-off frame, a custom button or a private CSS look. Reviewers check every
-`review/<topic>` branch against this file with screenshots at 1510x2000, 904x2316, 1024x768, 390x844.
+`review/<topic>` branch against this file with screenshots at the owner's devices (CSS px @ device scale): Fold portrait 755x1000@2 and iPad landscape 1180x820@2 + 1366x1024@2 FIRST, then 412x1058@2, 390x844@3, 1024x768@2.
 Anything not listed here, or listed but drawn differently, is a FAIL.
 
 Code lives in `dev/build/` (modules concatenated by `assemble.py`; later modules wrap earlier ones).
@@ -139,8 +139,10 @@ The old rank grounds `.rk-*`, the gold border and the `rank-*.webp` corner icon 
 | maid-0..4 / mama-0..4 | plain jade bead → jade flower → silver flower → silver plum blossom → gold plum blossom with pearl | MRCOL `#9aa3a8` `#5fa39a` `#4f74a8` `#a0584a` `#6a5a8e` |
 Men's pendants and tassels are never pink or purple. Small round avatars (`mdH`) have no tassel.
 
-### 4.2 Round avatar = `mdH(face,"xs|sm|big")` → `.md.kit`
-Simplified frame: brocade ground of the same role/rank, ring = rank/role colour (`--kc`), outer rim = role metal (`--km`).
+### 4.2 Small avatar = `mdH(face,"xs|sm|big")` → `.md.kit.kmini` (kit 2: NO round avatars anywhere)
+The SAME role/rank frame as the tall portrait, cropped to its body (canvas x 37–513, y 140–770, ratio 476:630): `.kmb` brocade at the opening,
+the portrait, `.kmf` frame on top (`--kfr`). Widths: xs 22 px, sm 32 px, default 52 px, big 72–84 px; height follows the ratio. Every caller
+(header, Hoàng thượng box, fact rows, pager, act-card titles, summaries) gets it through `mdH`; nobody draws a circle.
 
 ### 4.3 Roles, frames, grounds, badges
 | role (`personRoleRank(p).role`) | who | frame | ground | badge |
@@ -340,15 +342,15 @@ Tranh ghế, Tuyển tú, Thế lực, Công lao, Kính sự phòng, Nội vụ 
 ## 13. MINI-GAME FRAME (j79) — for j82 and the lesson games
 ```js
 box.innerHTML = kitGameFrame({art:"Cầm", title:"Tấu khúc", how:"Chạm đúng dây khi nốt chạm vạch đỏ.",
-                              hud:[["score","Điểm",0],["time","Thời gian","30 giây"]], id:"kgbox"});
+                              hud:[["score","Phần",0],["time","Thời gian","30 giây"]], id:"kgbox"});
 kitGameSet("score", 12);                       // update a HUD cell
 document.getElementById("kgbox-res").hidden=false;
 document.getElementById("kgbox-res").innerHTML = kitGameResult({
-  parts:[["Điểm chơi 7/10","+21"],["Cầm bậc 3","+27"],["Tài 62","+19"],["Chuẩn bị","+8"]], total:75, place:"Nhì", of:4,
+  parts:[["Phần chơi 7/10","+21"],["Cầm bậc 3","+27"],["Tài 62","+19"],["Chuẩn bị","+8"]], total:75, place:"Nhì", of:4,
   rivals:[{who:v, score:80, sub:"tài nghệ 45 + chuẩn bị 8 + màn thi 27"},{who:S, score:75}],
   gains:[["Sủng",3]], losses:[["Sức",-10]]});
 ```
-Header seal TÀI NGHỆ; "Cách chơi" line; HUD cells (`.kgc`); game box `.kgbox`; result rows (true numbers), standings with face + rank title, Được/Mất chips.
+Header seal TÀI NGHỆ; "Cách chơi" line; HUD cells (`.kgc`); game box `.kgbox`; result rows (true numbers; "Phần chơi", never "điểm"), standings "Bảng định thứ" with face + rank title (the score `.kgrow>b` never wraps), Được/Mất chips.
 In-game pieces keep the existing lesson-game classes (`.lanes`, `.lbtns`, `.simon`, `.memo`, `.goban`, `.mgopts`, p1.html) which are part of the kit;
 game buttons use `.kgbtn` (or `.btn` inside `.kgbox`), `.on` = selected. The lesson overlay `#ov .mg` wears the same frame.
 
@@ -359,9 +361,28 @@ game buttons use `.kgbtn` (or `.btn` inside `.kgbox`), `.on` = selected. The les
   (4 per row); one note line; the two choices side by side (ACT CARD frame). Header sub line: Phúc duyên.
 - Any panel can ask for it with `kitPanel({scene:true, …})`.
 
-## 6.1 ACT ART SLOT (j79)
-Every act card (`button.ka.kcard`) has a square illustration on the LEFT, rows on the right: `--kas` 88 px (≥1200), 76 px (600–1199), 64 px (<600),
-rank-neutral gold ring frame over the neutral brocade. Image = `img/act-<key>.webp` where `img/ACTS.json` `acts` maps the card title (or its slug)
+## 6.1 ACT ART SLOT (j79, kit 2)
+Every act card (`button.ka.kcard`) has its illustration on the LEFT in the SAME rectangular portrait frame and size as the consort card
+(`kitArtFrame(src,label,cls,col)` → `.pcp.kit.kartf`, her own rank frame + brocade; box `--kaw`×`--kah` = 150×226 px, 120×177 px under 600 px);
+art is 3:4, 384x506 (the frame's photo window). Rows on the right. Cards: one column on the Fold (min 440 px per card), 2–3 on wide screens.
+Category colour (owner 11/14): the brocade is tinted, the photo window gets a coloured ring, a ribbon under the window names the category
+(also `title` on hover), and the card has a 4 px left edge in the same colour. Legend (`KIT_CAT`):
+| key | name | colour |
+|---|---|---|
+| giao-thiep | Giao thiệp | `#c4607a` |
+| hau-ha | Hầu hạ | `#3f8f8c` |
+| le-nghi | Lễ nghi | `#b8901c` |
+| hoc-tap | Học tập · Tài nghệ | `#3f62a8` |
+| ban-thuong | Ban thưởng | `#d98a1c` |
+| trung-phat | Trừng phạt | `#5a3a2a` |
+| muu-ke | Mưu kế | `#5a3f8f` |
+| hai-nguoi | Hại người | `#7a0f14` (blood red) |
+| nghi-ngoi | Nghỉ ngơi | `#5f9a5f` |
+| buon-ban | Buôn bán | `#a8692a` |
+| di-lai | Đi lại | `#7d8456` |
+| cham-con | Chăm con | `#e08a6a` |
+| trieu-chinh | Triều chính | `#22405f` |
+Older text below (square slot) is replaced by this. Image = `img/act-<key>.webp` where `img/ACTS.json` `acts` maps the card title (or its slug)
 to `<key>`; otherwise `img/act-cat-<category>.webp` when listed in `ACTS.json` `have`; otherwise the brocade tile with the category word.
 Categories (`kitActCat(name)`): hau-ha Hầu hạ · hoc-tap Học tập · giao-thiep Giao thiệp · muu-ke Mưu kế · hai-nguoi Hại người · nghi-ngoi Nghỉ ngơi ·
 buon-ban Buôn bán · le-nghi Lễ nghi · di-lai Đi lại. Art: square, painterly, same style anchor as portraits, ≤ 60 KB webp.
@@ -395,7 +416,67 @@ Kit-owner additions on top (j79): act art slot (6.1); per-row equal heights fitt
 "; " in a price line splits two values; Sức rule in Cần follows `SUC_FLOOR` (j80); scheme ok() conditions all have words (`LACK`); death risks as
 ladder words from the real formulas; "có thể gặp người" → real words.
 
-## 19. WEEK REPORT FLIP-BOOK (j87) — `kitBook({pages,onClose})`
+
+## 19. KIT 2 (kit owner #2, owner feedback 11/14)
+- INFO ART: every rule / info / help panel (`data-kind` rule|info) shows a representative picture in the same frame (`.kpsubj.kpiart`) left of the
+  structured body. `img/info-<key>.webp` (384x506) when listed in `img/INFO.json {"have":[keys]}`; else act-category art; else tinted brocade + topic word.
+  Keys (`KIT_INFO`, title regex → key): nguy-hiem, ra-vao, que, bong-loc, an-thuong, sac, tai, tam-co, duc, tai-mat, thai-hau, hoang-hau, long, an-tinh,
+  khac, lich, thai, lat-the, lanh-cung, cam-tuc, tranh-ghe, tuyen-tu, noi-vu, tan-gia-kho, phe-phai, chung-cu, suc, bac, phuc-duyen, tin.
+  HUD help panels use the rule layout: "Là gì" row + "Ngươi đang có" (the live chip / meter).
+- IDENTITY CARD ("Thân phận kiếp này"): her FULL-BODY figure (`figFor(S)`, `img.kidfig2`) stands on the origin background; the panel sits beside her
+  (landscape and wide portrait: figure left, panel right, ≤54–58 vw) or under her (portrait < 600 px: figure above, height = space above the panel).
+  Panel: name with rank title, origin · age, story line, tiles 2 per row, note, the two choices. Hooks kept for j86: `.kpid` (gets `.kpidf` when the
+  figure shows; its portrait is hidden then) and `.kpnote`. A stale result toast is dismissed on every scene panel.
+- STATUS (`#hud2`): expanded = columns by purpose (`.khg > .khc`): Tư chất (Sắc, Tài, Tâm cơ, Đức, Tai mắt) · Nhân tâm (Thái hậu, Hoàng hậu, Lòng) ·
+  Ân sủng (Thai, Lật thẻ, Ân tình, Ân thưởng) · Thời gian (buổi/khắc, Quẻ, Bổng lộc) · Tình trạng (anything else); 4 columns, 2 under 600 px.
+  Collapsed = Buổi/khắc + Quẻ in the header, and a Tư chất block (`#kstat`) on the stage top-left (or top-right) ONLY when it covers no figure —
+  measured against `kitFigRects()` (her `#mefig`, every `#tokens .tok img.figimg`, using the opaque art box from j59 when known) on every render.
+- STAGE NAME TAGS: one line, never cut (`white-space:nowrap`, no max-width), smaller under 600 px, so they never stack over a child's figure.
+- SELECTION OUTLINE: `.ksel` = 3 px `--k-sel-ring #a8740c` outline + 7 px `--k-sel #fff3c4` halo + soft glow (face picker, picked options).
+- WORDING: no "có thể" in previews/results — every chance is a ladder word from the real formula (`word(n)`), every effect its true delta
+  (AOUT death/miscarriage/heir lines are computed for the card's target: `kitTgt()`).
+
+- STATUS SHEET (kit 2): the expanded status is a SHEET laid over the lower panel (`#hud2 .khg`, fixed, placed from `#panel`'s box, header "Tư chất ·
+  trạng thái" + "Thu lại"); the stage never shrinks or gets covered when it opens. Collapsed by default.
+
+## 20. TAB GROUPS + SUB-TABS (kit 2, owner 11/14: 8 bottom tabs)
+- Bar: Hành sự · Dư đồ · **Hậu cung** (Phi tần · Giao tình · Phe phái) · Cung nhân · Hoàng tự · Tư trang · Tài nghệ · **Mệnh truyện** (Mệnh truyện ·
+  Việc nhờ · Sổ ghi). The game's tab keys stay (`rv rel fac story nho|quest|req log`); hidden member buttons stay in the DOM so `[data-tab="log"]`
+  links keep working. Group table `KG`; a module adding a tab to a group adds its key there.
+- SUB-TABS = the ONE segmented control `.ksub > .ksubb(.on)` (sticky at the panel top); labels are read from the live tab buttons (j84 wording).
+  The last sub-tab per group is remembered (`localStorage hclh-kg-<group>`). Servant mode keeps its own tabs (no grouping). `tabsFit` (j57) stays
+  the bar rule: one font size, 8 columns (2 rows of 4 under 700 px).
+- Person-card group tabs show "làm được / tổng": `Hại nặng 2/5` (title: "làm được 2 trên 5 việc").
+
+## 21. SKILL CARD (kit 2) — Tài nghệ and Tứ đức
+`kitSkillCard({kind:"art"|"vir", k, name, level, max, prog:[cur,need], desc, levels:[text per level], acts:[pbtn…], note})`:
+picture LEFT in the shared portrait frame (`img/art-<k>.webp` / `img/vir-<k>.webp` when listed in `img/INFO.json` have as "art-cam", "vir-cong"…;
+else act-category art), info RIGHT (name, "Bậc l/max", progress bar with numbers, one row per level: ✓ đã có · bậc kế · chưa mở), act buttons BELOW
+(act-card frame). Every art and every Tứ đức course uses it; the arts tab (`artTabHTML`) is built with it. Keys: art cam ky thi hoa vu y theu nau ·
+vir cong dung ngon hanh. No ranges: lesson progress is "the parts scored in the lesson game" (self-study 6 in 10).
+
+## 22. PERSON STATS (kit 2)
+Every consort card shows the player's stat set as kit tiles under the portrait (`kitPersonStats(v)`): Sủng · Đức · Danh · Sắc · Tài · Tâm cơ; unknown
+values read "chưa rõ". Reveal hook: `window.kitStatKnown(v,key) -> true|false|null` (j61/j85 Đức stages, intel); `kitStatReveal(v,key)` records a
+reveal in `S.kstat`. Defaults: Sủng from the Kính sự phòng book (`S.kf`), Danh public, Sắc once met, Đức via `ducKnown(v)` when present.
+
+## 23. PORTRAIT PICKER (kit 2)
+`kitPicker({id, title, items:[{k, face, label}], cur, filters:[[key,label]], filter, rows:2, note, onPick(k), onFilter(key)})`: small rectangular
+kit frames (no tassels), whole rows only in pages (‹ ›, "trang 2/4 · 32 dung mạo"; no inner scroll, no half row), selection = gold ring +
+✓ badge on a pale-gold tile (`.ksel`), radio semantics, arrow keys + Enter/Space. Filter tabs = sub-tab look. j86 (face pick on the identity
+card) uses it with `facePool(filter)` (84 faces, filters Phi tần / Cung nữ) when present, else the 32 consort faces; the standing figure follows.
+
+## 24. VEIL OVERLAY (kit 2, for j70 scars)
+`scarOf(p).veil` → the veil is drawn over the face in every tall portrait (`.kin > img.kveil`, over the portrait image box), every small frame
+(`.kmini > img.kveil`) and on the stage figure (`.tok > img.kveilf`, at the head of the figure's opaque box from j59: 4–15 % of body height,
+middle 40 % of its width). Assets: `window.KIT_VEIL = {por, fig}` (empty until review/wardrobe delivers the pearl-string veil; the old
+img/veil*.png is rejected). Status chips such as "Hủy dung (vừa) · còn N tuần" use `kitChip(text,"no")` / `chip(text,"hot")` only.
+
+## 25. DILEMMA OPTIONS WITHOUT RISK DATA (kit 2)
+`dilLine` derives the rows from the option's own outcome code: each `roll(N)`-guarded `apply/ap(S,…)/die` → "<effect>: <ladder word>"
+(gain → Được, loss → Kèm), unguarded `apply` → certain; a `roll(expr)` that can be evaluated gives the main odds word. "Khó lường" is gone.
+
+## 27. WEEK REPORT FLIP-BOOK (j87) — `kitBook({pages,onClose})`
 The week summary (dawn) is an old ledger she turns page by page. j87 replaces the j79 week panel; "Vào ngày mới" on the closing page
 (button id `dawn-go`) closes the book and the day goes on as before. "Lui" in the bar closes it at any page.
 
