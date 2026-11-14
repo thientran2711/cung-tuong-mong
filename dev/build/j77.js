@@ -159,7 +159,7 @@ function accEtqGo(k,h,greet,then){if(!S||S.dead||Q.length)return;const sh=h.name
 /* the two person-card buttons, one rule: a lock is not a dead button: tapping opens the card with its reason and ways in */
 function accGuestLine(k,tc,tail){const who=accEtq(S,k);return `Chắc chắn · tốn: ${tc+(who?ACC_ETQ.khac:0)} khắc · thành: ${tail}${who?` · (gồm ${ACC_ETQ.khac} khắc bái kiến ${accRkName(who)} ${who.name.split(" ").pop()})`:""}`}
 function accGuestWhy(k,tc){if(S.confined)return"đang cấm túc";if(S.out)return"đang ở lãnh cung";const a=accessOf(S,k);if(!a.ok)return"";return j77Kh(tc)?"":`đi tốn ${tc} khắc, còn ${Math.max(0,4-used)}`}
-function accLockTag(k){const a=accessOf(S,k);return a.ok?"":` · ${a.why} (chạm để xem cách vào)`}
+function accLockTag(k){const a=accessOf(S,k);return a.ok?"":` · (${a.why}: chạm để xem cách vào)`}
 visitBtn=function(v){if(!v||!v.alive||v.out||sameHouse(S,v))return"";const k=palaceOf(v);if(S.place===k)return"";const tc=travel(S.place,k);
  return pbtn(`data-visit="${v.id}"`,`Đến cung nàng thăm`,accGuestLine(k,tc,"nếu nàng ở nhà thì gặp mặt · có khi nàng đi vắng")+accLockTag(k),accGuestWhy(k,tc))};
 seeBtn=function(v){if(!v||v===S||!v.alive||v.out||together(S,v)||!locKnown(v))return"";const k=whereOf(v),tc=travel(S.place,k);
