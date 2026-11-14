@@ -49,7 +49,32 @@
 - B_b19: c29 m4, c30 m0–m4, c31 m0–m1 (152 lineups total). Clean.
 - B_b20: c31 m2–m4, c32 m0–m4 → c25–c32 COMPLETE (160 lineups total = all 32 faces × m0–m4). c32-m4 had a red forehead dot (from the t1 ref's huadian); two edits only faded it, so the last two dots were removed by local pixel inpainting (cv2) on the cutout bg/B-c32-m4-3zbarwMREY.png before mproc.
 
+## Part B worker #3 (2026-11-14 evening) — cleanup pass (hair 48, moles, huadian, cutouts, portraits)
+- Worktree scratchpad(ed00be27…)/wt-maidB (branch maidB3), work copy scratchpad/maidB. URLs of all gens/bg ids were re-fetched with
+  creations_get (transcripts were lost in the reboot) into scratchpad/urls_all.json (copied to maidB/urls.json for mproc).
+- Checked every lineup c01–c24 with heads.py (4 head crops per lineup, raw gen). Found: grey 48yo hair c01–c08 (all), c09, c10-m0/m3,
+  c11-m0/m2, c12, c13-m0..m3, c14, c15, c16-m0/m3/m4, c20-m3/m4; moles c01, c04, c07, c09, c12-m4, c15, c17, c20-m2, c23;
+  huadian c03-m1, c11 (all), c19 (all), c06-m2/c04-m2 forehead dots. c18, c21, c22, c24 clean; c25–c32 were clean already.
+- EDITED 94 lineups (376 figures) with one gpt-2-6 edit each (ref = last gen, 2:1, 4k, high): hair solid dark like the 19yo,
+  paint out moles, remove any forehead ornament, "keep everything else exactly the same". c14-m1 and c13-m2 needed a 2nd hair-only
+  edit, c01-m2 a 2nd mole edit. New gen ids = last entries of gens.txt / bg.txt.
+  Edited: c01–c09 (all), c10-m0/m3, c11 (all), c12 (all), c13-m0..m3, c14 (all), c15 (all), c16-m0/m3/m4, c17 (all), c19 (all),
+  c20 (all), c23 (all).
+- gpt-2-6 does NOT reliably remove moles/huadian. So: (1) mole.py (scratchpad/tools, copy in maidB/) detects small dark dots on the face
+  skin of the raw gen (haar face box, nostril/mouth excluded, PK=60 TD=30, blob area <= 40 px at 3840 — bigger blobs are eyes/brows,
+  an earlier run with area<=220 smeared eyes and chins and was redone) and inpaints them on the full painting, copying the result into
+  the cut-out before mproc; (2) what was left was fixed by hand with spot2.py (numbered candidate dots on a 4x face crop -> inpaint the
+  chosen ones in the 900px fig, R=3..7, then porcrop): c01-m3 (3), c01-m4 (2), c03-m1 (4, huadian), c04-m0/m1/m2/m4 (5), c06-m2,
+  c07-m2, c07-m4, c15-m2, c15-m4, c17-m4, c19-m1 (4, huadian), c23-m3, c23-m4. Final face strips: no moles, no forehead marks seen.
+- Pipeline used: maidB/proc.sh B LIST(jid gen bg) = download (verified) -> mole fix -> append ledgers -> mproc -> afix -> porcrop.
+- CUTOUT: cutcheck (all 640 maid-tier figures) flagged 32 >= 8 (108 >= 3) before. Cause = pale/sheer skirts left half-transparent.
+  A Magnific re-matte of a single-figure crop made it worse, so afix.py (alpha>40 and >=3px inside the silhouette -> opaque, rim kept)
+  was applied to the 144 untouched figures scoring >=1 and to every re-processed figure. After: 0 >= 8, 3 between 3 and 3.8.
+- PORTRAITS: all 640 por-consort-cNN-tmK-aXX re-cut with dev/figwork/porcrop.py -> 384x506 face-centred (was 256x256).
+- Credits: ~97 edits x 270 + ~96 bg x 3.
+
 ## NEXT (exact)
+- Part B maid ladder is COMPLETE and cleaned (see worker #3 above). Nothing left except an optional owner review.
 - (B_b16 done) c26 m3 ... c32 m4, in order (8 per batch → sheets B_b16.jpg .. B_b20.jpg). Same per-batch steps as below.
   After each batch check every 48yo head (`python3 hc.py OUT.jpg JIDs`, zoom suspicious ones); grey temples → hair-only edit (below).
 - Then the hair-edit pass on the too-grey ~48 figures: c01–c08 (all ranks, check each with hc.py first), c12-m4, c14-m2/m3/m4,
