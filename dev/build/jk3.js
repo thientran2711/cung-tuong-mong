@@ -20,6 +20,8 @@ const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",
 function k3Date(){try{const mo=(typeof KP_MON!=="undefined"&&KP_MON[(S.month-1)%12])||S.month;const yr=typeof kpYear==="function"?kpYear(S.year):"năm thứ "+S.year;
  return `Tháng ${mo} · ${TUAN[S.tuan]} · ${yr}`}catch(e){return""}}
 window.k3Date=k3Date;
+/* the status sheet always starts closed (it is opened from a stage plaque) */
+try{localStorage.setItem("hclh-h2c","1")}catch(e){}window.__h2c=true;
 function k3Hud(){try{if(!S)return;const d=$$("me-d");if(d){const t=k3Date();if(d.textContent!==t)d.textContent=t}}catch(e){}}
 if(typeof renderHUD==="function"){const r0=renderHUD;renderHUD=function(){const r=r0.apply(this,arguments);k3Hud();return r}}
 
@@ -29,14 +31,14 @@ const K3_RIGHT=["srk","tin","nt","chu","wage","merit"];
 function k3hc(k){const h=$$("hud2");return h&&h.querySelector(`.hc[data-hx="${k}"]`)}
 function k3val(b){const x=b&&b.querySelector("b");return x?T(x.textContent):""}
 function k3lab(b){if(!b)return"";const c=b.cloneNode(true);c.querySelectorAll("b,i,img,.kodm").forEach(e=>e.remove());return T(c.textContent)}
-function k3row(k,lab,val,cls,ico){return `<button type="button" class="k3r ${cls||""}" data-k3="${k}">${ico||""}<span class="k3l">${lab}</span>${val!==""&&val!=null?`<b>${val}</b>`:""}</button>`}
+function k3row(k,lab,val,cls,ico){return `<button type="button" class="k3r ${cls||""}" data-k3="${k}" title="${lab}${val!==""&&val!=null?" "+val:""}">${ico||""}<span class="k3l">${lab}</span>${val!==""&&val!=null?`<b>${val}</b>`:""}</button>`}
 function k3court(){let R=[];try{R=typeof kitCourtRows==="function"?kitCourtRows():[]}catch(e){}
  return R.map(r=>{const m=r.mood;const moodTxt=m&&!/chưa rõ/.test(m[0])?`<span class="ef ${m[1]==="g"?"g":m[1]==="r"?"r":"n"}">${esc(m[0])}</span>`:"";
   let att="";if(r.k==="th"||r.k==="hh"){const n=r.k==="th"?(S.th|0):(S.hh|0);const known=typeof window.kitCourtKnown!=="function"||window.kitCourtKnown(r.k)!==false;
    if(known)att=`<span class="k3v"><small>với ngươi</small> <span class="ef ${n>0?"g":n<0?"r":"n"}">${n>0?"+":""}${n}</span></span>`}
   return `<button type="button" class="k3c kcrow" data-kc="${r.k}" title="${r.who} · chạm để xem thẻ">${mdH(r.f,"xs")}<span class="k3ct"><b>${r.who}</b>${moodTxt}${att}</span></button>`}).join("")}
 function k3maid(){const b=k3hc("maid");if(!b||!S.maid||(typeof isSrv==="function"&&isSrv()))return"";let f="";try{f=mdH(pMaid(),"xs")}catch(e){}
- const v=k3val(b),n=+v;return `<button type="button" class="k3c" data-k3go="staff" title="Cung nữ thân tín · chạm để xem">${f}<span class="k3ct"><b>${esc(S.maid.name.split(" ").pop())}</b><span class="k3v"><small>Lòng</small> <span class="ef ${n>=60?"g":n<45?"r":"n"}">${esc(v)}</span></span></span></button>`}
+ const v=k3val(b),n=+v;return `<button type="button" class="k3c" data-k3go="staff" title="Cung nữ thân tín · chạm để xem">${f}<span class="k3ct"><b>${esc(S.maid.name)}</b><span class="k3v"><small>Lòng</small> <span class="ef ${n>=60?"g":n<45?"r":"n"}">${esc(v)}</span></span></span></button>`}
 function k3Stage(){try{const st=$$("stage");if(!st)return;const stop=st.querySelector(".stop");const gm=document.querySelector(".game");
  let L=$$("kshL"),R=$$("kshR");const off=!S||S.dead||!stop||(gm&&gm.classList.contains("maptab"));
  if(off){if(L)L.hidden=true;if(R)R.hidden=true;st.classList.remove("k3g");return}
@@ -46,7 +48,7 @@ function k3Stage(){try{const st=$$("stage");if(!st)return;const stop=st.querySel
  /* left: time · tư chất · tình trạng */
  const bu=k3hc("buoi"),lot=k3hc("lot"),wx=$$("hud2")&&$$("hud2").querySelector(".kmwx");
  let t="";if(bu){const w=String(BUOI[S.buoi||0]);t+=`<button type="button" class="k3r k3time" data-k3="buoi"><span class="k3l">${esc(w)}</span><b>còn ${typeof used!=="undefined"?Math.max(0,4-used):""} khắc</b></button>`}
- if(wx){const c=wx.cloneNode(true);c.className="k3r k3wx kmwx";t+=c.outerHTML}
+ if(wx){const c=wx.cloneNode(true);c.className="k3r k3wx kmwx";window.__k3wx=c.outerHTML}if(window.__k3wx&&S.wx)t+=window.__k3wx
  if(lot){const lt=k3lab(lot)||T(lot.textContent);t+=`<button type="button" class="k3r k3lot ${lot.classList.contains("ok")?"ok":lot.classList.contains("hot")?"hot":""}" data-k3="lot"><span class="k3l">${esc(lt)}</span></button>`}
  let s="";K3_STAT.forEach(k=>{const b=k3hc(k);if(!b)return;const im=b.querySelector("img.ic");s+=k3row(k,esc(k3lab(b)),esc(k3val(b)),b.classList.contains("hot")?"hot":"",im?im.outerHTML:"")});
  let x="";K3_STATE.forEach(k=>{const b=k3hc(k);if(!b)return;x+=k3row(k,esc(k3lab(b)),esc(k3val(b)),b.classList.contains("hot")?"hot":b.classList.contains("ok")?"ok":"")});
@@ -60,7 +62,7 @@ function k3Stage(){try{const st=$$("stage");if(!st)return;const stop=st.querySel
 window.k3Stage=k3Stage;
 /* gutter widths: from the stage width, then grown to the plaques' real width; j59 keeps the figures between them */
 function k3Gut(){const st=$$("stage");if(!st)return;const W=st.clientWidth;if(!W)return;
- const g=Math.round(Math.max(W<520?82:110,Math.min(190,W*.2)));const L=$$("kshL"),R=$$("kshR");
+ const g=Math.round(Math.max(W<520?96:116,Math.min(190,W*.2)));st.classList.toggle("k3n",g<116);const L=$$("kshL"),R=$$("kshR");
  st.style.setProperty("--kgw",g+"px");
  const need=el=>el&&!el.hidden?Math.ceil(el.getBoundingClientRect().width)+10:0;
  const gl=Math.max(need(L),0),gr=Math.max(need(R),0);const ol=st.style.getPropertyValue("--kgl"),or=st.style.getPropertyValue("--kgr");
@@ -101,7 +103,7 @@ html body header.hud>.stats{grid-area:stats;margin:0!important;display:flex!impo
 html body header.hud>.stats .st{min-width:54px;max-width:none!important}
 html body header.hud>#emp,html body header.hud>.kcbox,html body header.hud .kcchips,#hud2>.kcchips{display:none!important}
 html body header.hud>#hud2,html body #hud2.khud{position:fixed!important;left:0!important;top:0!important;width:0!important;height:0!important;min-height:0!important;padding:0!important;margin:0!important;border:0!important;overflow:visible!important;background:none!important;box-shadow:none!important;z-index:60}
-html body #hud2>:not(.khg){display:none!important}
+html body #hud2.hud2>:not(.khg):not(#k3x){display:none!important}
 @media (max-width:599px){
  html body header.hud{grid-template-columns:auto minmax(0,1fr)!important;grid-template-areas:"menu me" "stats stats"!important;gap:2px 8px!important;padding:4px 6px!important}
  html body header.hud>.stats{justify-content:space-around}
@@ -112,11 +114,21 @@ html body #hud2:not(.col)::before{content:"";position:fixed;inset:0;background:#
 html body #hud2 .khg{position:fixed!important;z-index:1!important;left:50%!important;top:50%!important;transform:translate(-50%,-50%);width:min(760px,calc(100vw - 24px))!important;max-height:calc(100dvh - 32px)!important;overflow:auto!important;overscroll-behavior:contain;box-sizing:border-box}
 html body #hud2 .khg .khsh{position:sticky;top:-8px;z-index:2;background:var(--k-card,#fffaf0);margin:-8px -8px 0;padding:8px}
 html body #hud2 .khg .khc .hc{white-space:normal!important}
+/* one fact, one place: Thái hậu / Hoàng hậu attitude is in the Trong cung column of the sheet (and on their stage chips) */
+html body #hud2 .khg .khc .hc[data-hx="th"],html body #hud2 .khg .khc .hc[data-hx="hh"]{display:none!important}
 @media (max-width:599px){html body #hud2 .khg{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+/* 4 · STICKY HEADERS in the panel (sub-tabs .ksub and any later sticky bar): opaque, and the panel's 8 px top padding band above them is
+   covered too, so rows scrolling up never show above the bar */
+html body #panel .ksub{top:0!important;z-index:7!important;box-shadow:0 -9px 0 0 var(--panel),0 3px 6px -4px #5a3a2040;overflow:visible!important}
+html body #panel .ksub .ksubb:first-child{border-radius:8px 0 0 8px}html body #panel .ksub .ksubb:last-child{border-radius:0 8px 8px 0}
+/* 5 · CHIP LISTS / SELECTORS wrap, never clip (the panel scrolls) */
+html body #panel .relsel,html body #panel .pctabs,html body #panel .chips,html body #panel .kchips{flex-wrap:wrap!important;overflow:visible!important;max-height:none!important}
 /* 2 · STAGE HUD plaques */
 html body .stage.k3g .stop{right:auto!important;width:var(--kgw,150px)!important;max-width:var(--kgw,150px)!important;flex-direction:column!important;align-items:stretch!important;gap:5px!important;max-height:calc(100% - 16px)!important;pointer-events:none}
 html body .stage.k3g .stop .scene-t{max-width:none!important;width:auto;flex:0 0 auto!important;font-size:.95rem}
 html body .stage.k3g .stop .scene-t *{white-space:normal!important}
+html body .stage.k3g #sc-t h2{display:block!important;font-size:1.05rem;line-height:1.15;margin:0}html body .stage.k3g #sc-t h2>*{display:inline!important;min-width:0!important}
+html body .stage.k3g.k3n #sc-t h2{font-size:.86rem}
 .ksh{display:flex;flex-direction:column;gap:5px;pointer-events:none;min-width:0}
 .ksh[hidden]{display:none!important}
 .kshR{position:absolute;top:8px;right:8px;width:var(--kgw,150px);z-index:2;align-items:stretch}
@@ -129,7 +141,7 @@ html body .stage.k3g .stop .scene-t *{white-space:normal!important}
 .ksh .k3r img.ic{width:14px;height:14px;flex:0 0 auto}
 .ksh .k3r.hot,.ksh .k3r.hot b{color:var(--bad)}.ksh .k3r.ok,.ksh .k3r.ok b{color:var(--good)}
 .ksh .k3lot .k3l{font-weight:600}
-.ksh .k3time .k3l{font-weight:700;color:var(--gold)}
+.ksh .k3time{flex-wrap:wrap;column-gap:4px}.ksh .k3time .k3l{font-weight:700;color:var(--gold);flex:0 1 auto}.ksh .k3time>b{margin-left:0}
 .ksh .k3wx{padding-left:0!important;font-size:.75rem!important;background:none!important;border:0!important;box-shadow:none!important;min-height:0!important}
 .ksh .k3wx img{width:18px!important;height:18px!important;border-radius:50%}
 .ksh .k3cs{display:flex;flex-direction:column;gap:4px}
@@ -139,6 +151,11 @@ html body .stage.k3g .stop .scene-t *{white-space:normal!important}
 .ksh .k3c .k3ct>b{font-size:.75rem;color:var(--gold);font-weight:700;white-space:normal}
 .ksh .k3c .k3ct>.ef,.ksh .k3c .k3v{font-size:.72rem;font-weight:600}
 .ksh .k3c .k3v small{font-weight:400;color:var(--dim);font-size:.68rem}
-@media (max-width:599px){.ksh .k3r,.ksh .k3c .k3ct>b{font-size:.68rem}.ksh .k3c .k3ct>.ef,.ksh .k3c .k3v{font-size:.66rem}html body .stage.k3g .stop .scene-t{font-size:.8rem}}
+/* narrow stage (phones): smaller type, Tư chất as icon + number (label in the tooltip), chips keep title + value */
+.stage.k3n .ksh .k3r,.stage.k3n .ksh .k3c .k3ct>b{font-size:.64rem}.stage.k3n .ksh .k3c .k3ct>.ef,.stage.k3n .ksh .k3c .k3v{font-size:.62rem}
+.stage.k3n .ksh .k3c{padding:2px 4px 2px 2px;gap:3px}.stage.k3n .ksh .k3c .md{width:20px!important}
+.stage.k3n .ksh .k3ps{display:grid;grid-template-columns:1fr 1fr;column-gap:6px}.stage.k3n .ksh .k3ps .k3h{grid-column:1/-1}
+.stage.k3n .ksh .k3ps .k3r .k3l{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.stage.k3n .ksh .k3c .k3v small{font-size:.58rem}
 `;document.head.appendChild(css);
 })();
