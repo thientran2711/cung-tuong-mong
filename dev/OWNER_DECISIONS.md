@@ -157,3 +157,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (03:20Z) Owner: like Phượng Lệnh, palace detail art is chosen by the RANK of the palace's chủ vị (PL's per-rank courtyards); our 8 palace names are just labels. Empty palace → spare-cung.
 - (03:30Z) Owner on Tư trang: act cards (Gánh hàng rong / Soát đồ) lost their bottom border (clipped) — fix in kit for all card rows. Item slots must use per-grade backgrounds, stronger than the pale tints: REUSE the existing consort portrait frame/background art per grade (no new drawing).
 - (03:35Z) Owner: Tư trang has empty space below the bag → add equipment slots (ô trang bị, what she wears) like RPG games, filling the page.
+- (03:40Z) Owner: room interiors use OUR own residence paintings (Phượng Lệnh interiors are drawn differently) → continue the 25-room × 16-variant rollout. PL art only for the palace map / detail courtyards.
