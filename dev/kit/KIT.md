@@ -832,7 +832,7 @@ Not done here (other owners): kitRoulette (thân phận, review/kit-2b) and the 
 
 ## 31. EMOTION SEAL · dấu tâm trạng (review/emotion, `dev/build/jemo.js`, owner 11/14) — one layer of `pcPort`
 - Every frame drawn by `pcPort` (so every size: tall frame, person card cell, `mdH` xs/sm/default/big strips) carries `img.kemo.kemo-<k>`:
-  `img/kit/emo-<k>.webp` (160 px, transparent; gpt-2-6 ink-brush emoji faces on a solid colour, thin gold rim; sheet Magnific VXUSjSlMMU).
+  `img/kit/emo-<k>.webp` (160 px, transparent; owner-approved set: a simple palace lady — soft oval face, wide two-bun chignon, pink flower, gold bộ diêu — with a bold ink expression on a solid colour ground per feeling, thin gold rim; gpt-2-6, Magnific VXUSWLpMMU; pilot sheet dev/shots/emotion/pilot-emo-lady.jpg).
   Keys: vui · binh · buon · gian · so · ghen · lo · dau · muu · an (chưa rõ "?").
 - Place: top-left corner of the photo window, over the frame edge (left 8.5 %, top 17.5 %, width 22 % of the canvas); sm 30 %, xs 38 % so it stays ≥ 11 px.
   z-index 4 (above frame and crest), drop shadow. Giận and Đau khổ pulse softly (off with reduced motion).

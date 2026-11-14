@@ -5,19 +5,20 @@ personality; it feeds back into decisions (two-way, same rule for her), through 
 Owner addition: anger/jealousy only raise the WISH to harm. Đức and traits are the brake.
 
 ## 1. States
+Seals: owner-approved palace-lady set (gpt-2-6, Magnific VXUSWLpMMU), `img/kit/emo-<k>.webp`; earlier symbol / portrait / plain-emoji / topknot sets were rejected and removed.
 One record per person `p.emo = {k, v 0–100, t (target key), why (true cause), w (tuần)}`; v < 15 = Bình thường.
 | key | name | seal (img/kit/emo-*.webp) |
 |---|---|---|
-| vui | Vui | yellow, smiling arcs |
-| binh | Bình thường | pale jade, level face |
-| buon | Buồn | blue, drooping |
-| gian | Giận | red, V brows |
-| so | Sợ | violet, round eyes + sweat |
-| ghen | Ghen | green, side glance |
-| lo | Lo âu | orange, wavy mouth + sweat |
-| dau | Đau khổ | indigo, closed eyes + tear |
-| muu | Toan tính | teal, sly half-smile |
-| an | Chưa rõ | grey "?" (fog) |
+| vui | Vui | yellow ground, smiling eyes and red smile |
+| binh | Bình thường | pale jade ground, calm |
+| buon | Buồn | blue ground, drooping brows, frown |
+| gian | Giận | red ground, V brows |
+| so | Sợ | violet ground, round eyes, sweat drop |
+| ghen | Ghen | green ground, side glance, pursed lips |
+| lo | Lo âu | orange ground, wavy mouth, sweat drop |
+| dau | Đau khổ | indigo ground, closed eyes, tear |
+| muu | Toan tính | teal ground, sly half-smile |
+| an | Chưa rõ | grey ground, white "?" over a faint hairstyle silhouette (fog) |
 
 Who: her, the 12+ consorts (incl. Hoàng hậu), servants (staff + thân tín), Hoàng thượng (`S.emp.emo`, kept in step with the old `S.emp.mood` 0–3
 both ways at strength ≥ 40), Thái hậu (`S.thO.emo`, in step with jcmood `S.cm.th`), officials (`S.court`), men, children.
