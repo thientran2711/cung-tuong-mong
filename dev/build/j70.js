@@ -317,7 +317,7 @@ function traitor70(s){return !!(s&&s.spyFor&&s.spyFor!=="me")}
 /* the protection an order really gives (zero if that servant secretly serves someone else) */
 function canhB70(o){const s=sv70(o.sid);if(!s||traitor70(s))return 0;return cl(Math.round(4+(s.loyal||0)/10),4,14)}
 function ordFor70(k,a){return ords70().filter(o=>{const O=ORD70[o.k];if(!O)return false;if(o.k==="theodoi")return a&&o.tgt===a.id;return O.acts&&O.acts.includes(k)})}
-function title70(p){if(!p||p===S)return"ngươi";try{return `${rkName(p)} ${p.name}`}catch(e){return p.name}}
+function title70(p){if(!p||p===S)return"ngươi";try{const t=(typeof kitTitle==="function"&&kitTitle(p))||rkName(p);return `${t} ${p.name}`}catch(e){return p.name}}
 /* her detection: the head maid's old built-in +10 now comes only from an explicit guard order */
 (function(){const o0=oSee;oSee=function(t,p){let r=o0.apply(this,arguments);try{if((t||S)===S&&S&&!window.__j70off){if(S.maid&&S.maid.loyal>=70)r-=10;
   for(const o of ords70()){if(o.k==="canh")r+=canhB70(o);if(o.k==="thudoc"&&p&&!traitor70(sv70(o.sid)))r+=20;if(o.k==="theodoi"&&window.__j70A&&o.tgt===window.__j70A.id&&!traitor70(sv70(o.sid)))r+=12}
@@ -376,7 +376,8 @@ function note70(o){const z=j70();const a=o.a,A=ACT[o.k];const who=o.known?title7
  if(!o.ok&&o.by.length)rows.push(`Phòng bị đã chặn: ${o.by.join(", ")}.`);else if(!o.ok&&!(o.self||[]).length)rows.push("Không có lệnh phòng bị nào của ngươi dính vào; kẻ ấy tự hỏng việc.");
  if(o.gain>0)rows.push(G70(`Ngươi được: ${o.gain} chứng cứ về ${who} (chứng minh nàng ${what}); nay có ${ev}${ev>=need?", đủ để tố giác":`, cần ${need} để tố giác`}.`));
  if(lost.length)rows.push(R70(`Ngươi mất: ${lost.join(", ")}.`));
- const h=rows.join("<br>");
+ /* one notice = one fact for the kit (it splits facts at sentence ends): inner sentence ends become semicolons */
+ const h=rows.map(r=>r.replace(/\.(?=\s*(<\/span>)?\s*$)/,"").replace(/\.(<\/span>)?(\s)/g,";$1$2").trim()).filter(Boolean).join("; ")+".";
  return h.trim()+" "}
 (function(){const r0=runAct;runAct=function(a,t,k){const r=r0.apply(this,arguments);try{if(r&&a&&a!==S&&t!==S)return String(r).replace(/\(sai ([^)]+) đi\)/,`(${a.name} sai $1 đi)`)}catch(e){}return r}})();
 /* ---------- data for the kit ---------- */
@@ -453,11 +454,11 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 function pfacts70(h){return String(h||"").replace(/<br>/g,"\n").replace(/<\/p>/g,"\n").replace(/<(?!\/?(b|span)\b)[^>]+>/g,"").split(/\n+/).map(x=>x.trim()).filter(Boolean)}
 function stage70(p){const M=pm70(p);return p.st==="prep"?`đang chuẩn bị (${Math.min(p.pg,p.need)}/${p.need} bước)${p.dig?`; sẽ chờ ${M.opp.map(k=>OPP70[k].n).slice(0,2).join(" hoặc ")}`:""}`:p.st==="wait"?`đã chuẩn bị xong, đang chờ thời cơ`:"đã ra tay"}
 (function(){const b0=PEND.j70;PEND.j70=function(pp){const d=b0.apply(this,arguments);try{if(!d||typeof kitThreat!=="function")return d;const p=P70(pp.id);if(!p)return d;const a=pa70(p),t=pt70(p),M=pm70(p);const st=pp.s;const tl=p.kt.length?p.kt[p.kt.length-1]:tellOf70(p,0);
-  if(st==="seen"||st==="warn"){d.kit={kind:"threat",title:T70[st],subject:st==="warn"&&RV(p.ally)?RV(p.ally):null,sections:[{html:kitThreat({who:a,how:`${M.n}: người của nàng ${tl}${where70(p)?` (ở ${where70(p)})`:""}`,when:stage70(p)})},{facts:[st==="warn"?pfacts70(intro70(p,st))[0]:(p.forced&&S.maid?`${S.maid.name} tận mắt thấy và báo cho ngươi.`:"Tai mắt của ngươi tận mắt thấy.")].concat([`Vì ${mot70(p)}.`,`Chứng cứ ngươi có về ${title70(a)}: ${evG(S,a)} (cần ${accNeed(a)} để tố giác).`])}]}}
-  else if(st==="npc")d.kit={kind:"intel",title:T70[st],sections:[{html:kitThreat({who:a,how:`${M.n} nhắm vào ${title70(t)}: người của nàng ${tl}`,when:stage70(p)})}]};
+  if(st==="seen"||st==="warn"){d.kit={kind:"threat",title:T70[st],subject:st==="warn"&&RV(p.ally)?RV(p.ally):null,sections:[{html:kitThreat({who:a,how:`${M.n}: người của nàng ${tl}${where70(p)?` (ở ${where70(p)})`:""}`,when:stage70(p)})},{facts:[st==="warn"?pfacts70(intro70(p,st))[0]:(p.forced&&S.maid?`${S.maid.name} tận mắt thấy và báo cho ngươi.`:"Tai mắt của ngươi tận mắt thấy.")].concat([`Vì ${mot70(p)}.`,`Chứng cứ ngươi có về ${a.name}: ${evG(S,a)} (cần ${accNeed(a)} để tố giác).`])}]}}
+  else if(st==="npc")d.kit={kind:"intel",title:T70[st],sections:[{html:kitThreat({who:a,how:`${M.n} nhắm vào ${t.name}: người của nàng ${tl}`,when:stage70(p)})}]};
   else if(st==="aft"||st==="ownres"||st==="ownfail"||st==="when"||st==="serv")d.kit={kind:st==="when"?"choice":"result",title:T70[st],subject:st==="aft"&&p.kn?a:(st==="serv"?null:t),facts:pfacts70(d.t)}}catch(e){console.error(e)}return d}})();
 (function(){const b0=PEND.j70thr;PEND.j70thr=function(pp){const d=b0.apply(this,arguments);try{if(!d||typeof kitThreat!=="function")return d;const v=RV(pp.v);const b=bandOf(danger(v,S));
-  d.kit={kind:"threat",title:"Lời cảnh báo",subject:pp.m&&S.maid?null:null,sections:[{html:kitThreat({who:v,how:b?`có thể hại ngươi mức ${BANDS[b][1]} (vì ${motNow70(v).t})`:`chưa tới mức ra tay (vì ${motNow70(v).t})`,when:"chưa rõ lúc nào"})},{facts:pfacts70(pp.h||"").concat([`Chứng cứ ngươi có về ${title70(v)}: ${evG(S,v)} (cần ${accNeed(v)} để tố giác).`])}]}}catch(e){console.error(e)}return d}})();
+  d.kit={kind:"threat",title:"Lời cảnh báo",subject:pp.m&&S.maid?null:null,sections:[{html:kitThreat({who:v,how:b?`có thể hại ngươi mức ${BANDS[b][1]} (vì ${motNow70(v).t})`:`chưa tới mức ra tay (vì ${motNow70(v).t})`,when:"chưa rõ lúc nào"})},{facts:pfacts70(pp.h||"").concat([`Chứng cứ ngươi có về ${v.name}: ${evG(S,v)} (cần ${accNeed(v)} để tố giác).`])}]}}catch(e){console.error(e)}return d}})();
 
 /* ================= j70 HỦY DUNG: disfiguring a rival, one rule for everyone =================
    Act "huydung" (band hại nặng). Routes in the chain: phấn trộn độc (nặng hơn, dễ lần ra), canh nóng "lỡ tay" (vừa, khó buộc tội), dụ mèo/ong (nhẹ),
