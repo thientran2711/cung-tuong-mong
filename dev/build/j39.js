@@ -16,7 +16,7 @@ function loadFigs(){try{Promise.all(FIGF.map(u=>fetch(u,{cache:"no-cache"}).then
  const all=a.concat(b,c);const sig=all.length+"|"+all.map(f=>f.file||f.src).join(",").length;if(sig===FIGSIG)return;FIGSIG=sig;FIGS=all;FIGIX=figIndex(all);try{if(S&&!S.dead)render()}catch(e){}}).catch(()=>{})}catch(e){}}
 loadFigs();setInterval(loadFigs,300000);
 /* which art group a person belongs to, preferred first */
-const MANSUB={"thị vệ":["guard","thive","thi ve","vesi"],"thái y":["physician","doctor","thaiy"],"vương gia":["prince","royal","vuonggia","wang"],"nhạc sư":["musician","nhacsu","music"],"sứ thần":["envoy","suthan","ambassador"]};
+const MANSUB={"thị vệ":["guard","thive","thi ve","vesi"],"thái y":["physician","doctor","thaiy"],"vương gia":["prince","royal","vuonggia","wang"],"nhạc sư":["musician","nhacsu","music"],"sứ thần":["envoy","suthan","ambassador"],"họa sư":["painter","hoasu"]};
 function figWho(p){if(!p)return null;if(p===S)return S;const k=p.kind;if(k==="emp")return S.emp;if(k==="th"){S.thO=S.thO||{};return S.thO}if(k==="maid"&&!p.ref)return S.maid;if(k==="ty"&&!p.ref)return S.court&&S.court.ty;if(k==="ksp"&&!p.ref)return S.court&&S.court.ksp;return p.ref||p}
 function figRoles(who){if(!who)return[];if(who===S)return["player","heroine"];if(who===S.emp)return["emperor"];if(who===S.thO)return["thaihau"];
  const C=S.court||{};if(who===C.ty)return["physician"];if(who===C.tq||who===C.ksp||who===C.ped)return["eunuch"];

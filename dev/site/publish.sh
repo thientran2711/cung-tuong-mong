@@ -9,8 +9,10 @@ cp $S/cung-dau/avatars.js $D/build/avatars.js
 python3 - "$S/build/assemble.py" "$D/build/assemble.py" <<'P'
 import sys,re
 src=open(sys.argv[1]).read();dst=open(sys.argv[2]).read()
-L=re.search(r"for f in (\[[^\]]*\])",src).group(1)
-dst=re.sub(r"for f in \[[^\]]*\]","for f in "+L,dst,count=1);open(sys.argv[2],'w').write(dst)
+import ast
+L=ast.literal_eval(re.search(r"for f in (\[[^\]]*\])",src).group(1));old=ast.literal_eval(re.search(r"for f in (\[[^\]]*\])",dst).group(1))
+L=L+[x for x in old if x not in L]  # keep modules that live only in dev/ (j50+), in their order, at the end
+dst=re.sub(r"for f in \[[^\]]*\]","for f in "+repr(L),dst,count=1);open(sys.argv[2],'w').write(dst)
 P
 python3 $D/build/assemble.py
 mkdir -p $R/img $R/audio $R/icons
