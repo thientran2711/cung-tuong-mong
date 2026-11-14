@@ -64,7 +64,7 @@ Read it live: `RCOL[rank]`, or `KIT_RANK_COL[rank]` / `KIT_RANK_COL.cold` / `kit
 - body font `--body` "Be Vietnam Pro"; display/titles `--display` "Noto Serif".
 - act card text `--kfs`: `.76rem` (phone) / `.8rem` / `.875rem` (wide); `.kl` labels `.66rem` uppercase; chips `.75rem` (`.68rem` phone);
   buttons `.8rem`; frame label `.pfrw` `.7rem` gold 600; "Người lạ" label `.klab` `.72rem`.
-- Never shrink text to fit: text wraps; no truncation (`…`) on names, labels, prices. The only clamp is the act card body, whose ⓘ opens the full card (jkit).
+- Never shrink text to fit: text wraps; no truncation (`…`, line-clamp) anywhere, act cards included (see 6: cards grow, rows of cards share one height, the panel scrolls).
 
 ---
 
@@ -74,18 +74,24 @@ Read it live: `RCOL[rank]`, or `KIT_RANK_COL[rank]` / `KIT_RANK_COL.cold` / `kit
 |---|---|---|
 | effect token | `eff(t)`, `effList(tokens,def)` → `.ef g/r/n` | colours of 1.2 |
 | odds chip | `oddsChip(word)` → `.oc .oc0..oc7` | ladder Liều/Khó/Năm ăn năm thua/Khá chắc/Chắc/Rất chắc/Nắm chắc; never %, never "Chắc chắn" (sure acts show no word) |
-| any price line | `kitParse('word · tốn: … · thành: … · hỏng: … · kèm: …')` | used by `optLine`, `dilLine`, `actLine`, `kitFix` |
-| act card | `cardH(a,i)` → `button.card.kcard` | title, khắc pips, text, odds chip, rows Tốn / Thành / Kèm / Hỏng; ONE height `--kh` (232/250/268 px) for every card (jkit); ⓘ opens full card; disabled says why (`.kwhy`, `cardWhy`) |
-| option (dialogs) | `button.opt` + `<small>` through `kitParse` | `--panel2`, `1px --line`, radius 6, min-height 42 |
-| button with price | `pbtn(attrs,name,line,why)` | name + `<small>` price/gain/loss; disabled reason first |
+| any price line | `kitParse('word · tốn: … · thành: … · hỏng: … · kèm: …')` | used by `optLine`, `dilLine`, `actLine`, `kitFix`; returns the labelled rows of section 6 (j63) |
+| act card | `cardH(a,i)` → `button.card.kcard.ka` | the ACT CARD frame of section 6 (j63): title + odds chip, description, rows Cần / Tốn / Được / Mất / Kèm / Ghi chú |
+| option (dialogs) | `button.opt` + `<small>` through `kitParse` → `.ka` | same ACT CARD frame (section 6) |
+| button with price | `pbtn(attrs,name,line,why)` → `.ka` | same ACT CARD frame (section 6); conditions = Cần row |
 | plain button | `.btn` | `#fffaf0`, `1px --line`, radius 6, min-height 40 |
 | tabs inside a person card | `pcard({groups})` → `.pctabs .pct` (+ count `<i>`), active `.pct.on` = gold fill | groups for rivals come from `RVGRP` (Giao thiệp / Hại nhỏ / Hại nặng / Sát hại) |
 | main tabs | `#tabs [data-tab]` (Hành động, Bản đồ, Phi tần, Quan hệ, Phe phái, Kẻ hầu, Con cái, Rương đồ, Tài nghệ, Tuyến truyện, Nhật ký) | servant-start uses `SRVTABS` |
 | person card | `pcard({f,name,rank,status,ghen,lines,chips,note,groups,empty,close})` → `.pc` | portrait (kit frame) left, info under it, actions right; one card at a time with `pager(key,items,mk)` face strip |
 | labelled bar | `ghenBar(n)`, `fbar(v,lo,hi,good)`, `sbar(label,v,cls)` | always label + number beside the bar |
 | chip | `chip(text,cls)` → `.chip` (`.hot` red, `.ok` green) | |
-| modal / dialog | `Q.unshift({t,h,opts}); showModal()` → `.modal .dlg`; speaker = `pframe(face)` or `pframeArt(placeArt)` | `.modal.pcm` for person cards, `.modal.night` for nights |
-| result card | `resultShow(title,before,ok)` → `#rtoast` seal THÀNH/HỎNG + coloured deltas + why | after every act/choice (`wrapR`) |
+| modal / dialog / panel | `kitPanel(spec)` / `kitModal(spec)` (j79) → `.dlg.kpanel` | section 8. Legacy `Q.push({t,h,opts,who})` is converted automatically; `pframeArt(placeArt)` / random room art is never shown |
+| facts | `kitFacts(facts)` (j79) | section 9: one fact per row, never a joined string |
+| intel / evidence / threat | `kitIntel(list)` `kitEvidence(e)` `kitThreat(t)` (j79) | section 10 |
+| odds meter | `kitOdds(word|number)`; `oddsChip(w)` now draws it (j79) | section 11: the ONE 7-step scale (acts, HUD chances, risks) |
+| glossary | `kitGloss(term)`, `KIT_GLOSS` (j79) | section 12 |
+| mini-game frame | `kitGameFrame` `kitGameSet` `kitGameResult` (j79) | section 13 |
+| scene panel | `kitPanel({scene:true,…})`, `kitTiles(list)` (j79) | section 14 (identity card, opening story, title screen) |
+| result card | `resultShow(title,before,ok)` → `#rtoast.karesult` | section 7 (j63) |
 | status row | `renderHud2()` → `#hud2 .hc` | collapsible; every number labelled |
 
 ---
@@ -179,3 +185,212 @@ Stage strangers: full-body grey silhouettes `img/kit/unknown-fig-f|m|k.webp` (90
 ## 5. Layout rules (all screens)
 - No horizontal page scroll at any of the four sizes; no truncated text; act cards one size; the scene is not covered (slim ribbon, collapsible status); map full screen.
 - Every name has its face (portrait kit); every bar labelled; disabled buttons say why.
+
+---
+
+## 6. ACT CARD (j63) — one frame for every act, option and priced button
+
+Applies to: act cards (Hành động, servant road), person-card act groups (`.pcb`: consort, child, servant, court houses…),
+dialog options (`.opt` / `.opts`), priced buttons (`pbtn`, `.btn`, `.rbtn`: court, festival, shop…). Built ONLY through
+`kitParse()` (string → rows) and the frame `kaNorm()` (j63), which rebuilds every such button into the markup below
+(a MutationObserver runs it after any render; `kitFix()` also calls it). Nobody writes this markup by hand.
+
+```
+button.ka [.kdis when disabled]
+  span.kat                      title row
+    span.kan                    action name (+ inline round avatar .md.xs, never on its own line, never over the title)
+    span.kodds                  odds chip .oc (ladder colour) on the right; "Quẻ: dễ/khó hơn…" under it (green/red)
+  span.klead                    act description (act cards only), dim, wraps, never clamped
+  small.kb                      grid: label column (fixed 3.4rem; 3.3rem under 600px) | values
+    span.kr.kr-why  > .krl "Cần"     .krv > .kwhy ✗ unmet (red) … .kwhy.kok ✓ met (green)   (first row)
+    span.kr.kr-ton  > .krl "Tốn"     .krv > .ef.t time "2 khắc" (dark ink) · .ef.r resources (red)
+    span.kr.kr-duoc > .krl "Được"    .krv > .ef.g (green)
+    span.kr.kr-mat  > .krl "Mất"     .krv > .ef.r (red; outcome if it fails; old "hỏng" maps here)
+    span.kr.kr-kem  > .krl "Kèm"     .krv > .ef.r (red; side risks: jealousy, exposure, Đức warning, "có thể bị phát giác")
+    span.kr.kr-note > .krl "Ghi chú" .krv > .ef.n (dim, small; "(mỗi mùa dạy một lần)", "(chỉ buổi tối)", conditions)
+  values in one row are separated by .ksep "·"
+```
+
+Rules
+- Rows always in this order; an empty row is left out. Labels are Vietnamese title case `Cần / Tốn / Được / Mất / Kèm / Ghi chú`,
+  shown small-caps in `#8a7350`. The old inline `TỐN / THÀNH / HỎNG / KÈM` labels are gone.
+- A value goes to its row by meaning (`kaRows`): a gain is always green and in Được; a cost/loss is always red (Tốn, Mất, Kèm).
+  Sentiment uses `kcls` (j19 + j25): `+N` is a gain unless it is hostile (`ghen +`, `oán ngươi +`); harm to a rival ("nàng … -N") is a gain.
+  Exceptions: a failure that still gives something ("đêm nhạt, Sủng +3") stays in Mất but its `+N` is green; "không mất gì" is neutral.
+  Time (`N khắc`, `1-2 khắc`) is in Tốn in dark ink, never red. "không" disappears when a row has a real value.
+  Sign wins: a value whose only number is negative (`lòng -5`, `kẻ hầu khác dễ lơ là (lòng -1)`) is a loss → red, never in Được
+  (except harm to a rival, "nàng … -N", and less hostility, "oán -N"). Losses that come with a SURE act or option go to Tốn when they
+  are her resources (Bạc, Sức, Sủng, Danh, Đức…) and to Mất otherwise (e.g. option "Phạt vì làm vỡ chén ngọc" → Được: kẻ hầu khác giữ
+  kỷ cương (lòng +1) · Mất: lòng -5); a ROLLED act's side loss on success goes to Kèm (Mất is kept for the failure outcome).
+  Trailing "(…)" notes split off into Ghi chú.
+- Odds: ladder word only (Liều/Khó/Năm ăn năm thua/Khá chắc/Chắc/Rất chắc/Nắm chắc), never %; sure acts show no chip.
+- Cần row: every condition with its live status, unmet first (✗ red, saying what is missing), then met (✓ green):
+  khắc `2 khắc (còn N)` (used+c ≤ 4), `Sức ≥20 (có N)` for acts over 1 khắc (`can`), `Bạc N (có M)`, buổi `Buổi tối (đang buổi sáng)`,
+  "chưa làm trong buổi này", lãnh cung / còn sống / cấm túc (CRIME), and the act's own requirement from `ok()` + `ACT[k].x` / `LACK[k]`
+  with evidence counts `(có N)` from `evG`. Producers: `cardH` and `rvGroups` wrappers put the list on the button as `data-kneed`;
+  any other disabled button turns its reason (`.kwhy`/`guessWhy`) into a ✗ item. A requirement that `ok()` checks but no text names
+  shows "điều kiện riêng của việc này chưa có" (to be named by the act owner).
+- Disabled (`.kdis`): grey ground `#eee7da`, grey title, chip greyed; the Cần row (from `.kwhy` / `cardWhy` / `guessWhy` / `data-kneed`) replaces
+  the rows that cannot apply (Mất and Kèm hidden; Tốn and Được stay so she sees what it would give). Never opacity below 1 on the text.
+- Frame: `#fffaf0`, `1px var(--line)`, radius 8, title row with a `#e6d3ac` hairline under it; hover border `--gold`.
+- Size: cards sit in CSS grids with `grid-auto-rows:1fr` → every card in a grid has the same height (the tallest one's), the
+  same width; text wraps inside its row; nothing is clamped or cut (no `…`, no line-clamp, no ⓘ needed); the panel scrolls.
+  Columns — act cards `.cards`: 3 at ≥1200px, 2 at 600–1199px, 1 under 600px. `.pcb` / `.rbtn`: auto-fill min 230/260px, 1 under 600px.
+  Dialog `.opts`: auto-fill min 250px (1 column in the dialog), 1 under 600px.
+- CSS is scoped to `button.ka`, `.kb`, `.kr*`, and to `.cards/.pcb/.opts/.rbtn:has(> button.ka)`; other kit parts are untouched.
+- A gain that rounds to 0 is never shown as a gain: "Sắc +0" becomes "Sắc không đổi" in Ghi chú.
+- Not converted on purpose: the tiny map hotspot chips (`.mspot .acb`, j41) stay chips so the map is not covered; their odds use `oddsChip`.
+
+---
+
+## 7. RESULT CARD (j63) — after every act and choice
+
+`resultShow(title, before, ok)` (called by `wrapR`, options, servant/child/court acts) → `#rtoast.rtoast.karesult`:
+
+```
+[seal THÀNH (green) | HỎNG (red)]  act name                  title row, hairline under it
+One short sentence of what happened, from the log of this act, rival names with their rank title ("Hoàng hậu Liễu Họa Mi").
+Được  Sủng 8→17 (+9) · Ân tình 0→5 (+5) · Thái hậu: quý ngươi hơn (0→8, +8)                 green
+Mất   Đức 30→26 (−4) · Hoàng hậu Liễu Họa Mi: ghét ngươi hơn (thiện cảm −15), ghen +25, oán +20   red, person name in ink
+                                                     Xem đầy đủ ở Nhật ký   (link: opens the Nhật ký tab)
+```
+- Seal follows the outcome FOR HER, not the branch that fired: THÀNH (green) when things went her way; HỎNG (red) when the act
+  failed; BẤT LỢI (red) when the net result is a loss (no gain and a real loss beyond Sức/Bạc, or the log says she was blamed/
+  punished/exposed), e.g. petition "Trình lên Hoàng thượng… trách ngươi gây chuyện", Danh 52→44 → BẤT LỢI. Never THÀNH on a loss.
+- Values are the REAL changes (snapshot before → now), never the option preview: no ranges, no "có thể", no repeated price line.
+- One group per person; the two-way relation is ONE plain phrase (her feeling toward you; yours only if hers did not move);
+  "Hoàng hậu với ngươi" merges into the queen's group. Lines with "→" lists, "thành:/kèm:" previews are never used as the sentence;
+  a sentence that only repeats the act name is dropped.
+- Rows are arrays: one fact per line (`.kitem`), never joined sentences; also exposed as `window.kaLastResult {title, ok, sentence, rows:[{k,label,items[]}]}`.
+- Same `.kb` row grid and colours as the act card; no change at all → Ghi chú "không đổi chỉ số". Stays 9 s; tap closes.
+
+
+
+---
+
+## 8. PANEL KIT (j79) — ONE frame for every modal, panel and pop-up
+
+Applies to EVERY `#modal` item (rules/help ⓘ, HUD help, "Tin trong cung", "Tai mắt báo tin", dilemmas/event choices, rewards,
+Bổng lộc / Ân thưởng / Quẻ, Tranh ghế rounds, results, night, pregnancy, death/ending, Lãnh cung, Nội vụ phủ, Tuyển tú…),
+the week summary (dawn) and the lesson overlay (`#ov .mg`). The person card modal (`.modal.pcm`) keeps `pcard` (section 3).
+
+```
+.dlg.kpanel[data-kind]
+  .kph            sticky header: brocade band (img/kit/bg-default) + seal + title (+ sub line: date/when)
+    b.kpseal.kp-<kind>   LUẬT rule · ĐIỀU info · TIN news · BÁO notice · VIỆC choice · KẾT QUẢ result · ĐÊM night · KIẾP end
+                         MẬT BÁO intel · CẢNH GIÁC threat · CHỨNG CỨ evidence · BAN THƯỞNG reward · TUẦN week · TÀI NGHỆ game
+    .kptitle / small.kpsub
+  #mb > .kpb[.kphas]
+    .kpsubj       ONLY when the panel is about a person: pframe (3:4 kit portrait) + rank-titled name. Never a room/place picture.
+    .kpmain       blocks: .kpsec (h4.kpst label + content) · .kfacts · .kb rows · .ktiers · .kchips · .kpnote
+  .opts.kpopts    options = ACT CARD frame (section 6)
+  #mr > .kbtn     the ONE button (lacquer red, gold ring); `.kbtn.alt` = quiet secondary
+```
+
+API (data only, never markup):
+```js
+kitModal({kind:"news", title:"Tin trong cung", sub:when(),
+  facts:[{who:v, text:"được lật thẻ bài đêm qua", chips:[["Sủng",3]]}, "Tháng này: Được mùa khắp nơi. Kho lúa +12."],
+  sections:[{h:"Thang 4 mức", tiers:[{k:"30–59", n:"hại nhỏ", d:"Tung tin đồn, Dò la", c:"r"}]},
+            {h:"Cách tính", rows:[["Nguy hiểm","Ghen, Oán hoặc ghét: lấy số cao nhất","t"]]}],
+  opts:[{n:"…", fx:{…}, x:"Khá chắc · thành: … · hỏng: …"}],   // same option objects as Q items
+  subject:person, btn:"Đã rõ", onClose:fn})                     // kitPanel(spec) queues without showing
+```
+Rules
+- Header always: seal + title; the date/when goes to the sub line, never into the body.
+- Picture only if it depicts the subject (the person speaking/affected via `subject`/`who`, or a specific item). `evArt()` room art,
+  `--dart` backdrops and `pframeArt` are not drawn in panels.
+- Body is structured: facts, rows, tiers, chips. No paragraph with several facts (section 9). Legacy `h` HTML is converted:
+  first short `p.past` → sub line; prose → one fact per sentence; `p.past` with " · " lists → neutral chips; tables/rows keep the kit look.
+- Deltas inside text become chips: green = gain for her, red = loss (sentiment via `kcls`: ghen +, oán + are red).
+- One button style (`.kbtn`). Width 560 px (620 ≥1200 px), full width under 600 px; scrolls inside, header stays.
+- Night (`.modal.night`) and end (`.modal.end`) keep their mood colours, same structure.
+
+## 9. FACTS, ROWS, CHIPS, PEOPLE (j79)
+- `kitFacts(facts,{group})`: `facts` = array of strings (split into sentences) or objects `{who, text, chips:[[label,n]], why, when, kind:"me"|"person"|"world"}`.
+  Row = small face (or a gold dot for court/world facts) + the fact, the first mention of each person drawn as **rank title + name in rank colour**
+  (`kitName`; the title is never doubled). With 4+ facts of 2+ kinds rows are grouped: **Ngươi / Người trong cung / Triều đình · thiên hạ**
+  ("Tháng này: …" lines go to the last group, prefix dropped). Never pass a joined string of several facts from new code.
+- `kitName(p)` · `kitTitle(p)` · `kitPersonLine(p,{sub,chips})` · `kitFaceH(p,size)`.
+- `kitChip(label, n)` delta chip (sign + colour by meaning) · `kitChip(text,"ok"|"no"|"g"|"r"|"n")` status chip (✓ / ✗) · `kitChips(list)`.
+- `kitRows([[label, value|[values], cls]])` = the act-card `.kb` grid (labels small caps `--k-lab`). `kitTiers([...])` ladders (rule panels).
+- `kitTiles([[label,value]])` small stat tiles, 4 per row (scene panels).
+- Tokens (j79 `:root`): `--k-hair #e6d3ac` hairlines · `--k-lab #8a7350` labels · `--k-card #fffaf0` · `--k-card2 #f6ead6` · `--k-seal #9a2c1c` · `--k-rad 8px`. The act card (j63) uses the same values.
+
+## 10. INTEL LIST · EVIDENCE CARD · THREAT CARD (j79)
+- `kitIntel([{about:person, fact:"html", src:person|"tai mắt", week:"Tháng 3 · Năm 1 · Thượng tuần"}])`: face + name + fact, small "Nguồn: … · when" line.
+- `kitEvidence({what, against:person, proves, how, when, strength, acts:[{n, odds, ton, duoc, mat, kem}]})`: header (face, what, against whom),
+  rows Chứng minh / Có được, then the actions it enables as ACT CARDS (gain/cost rows, odds meter).
+- `kitThreat({who, how, sure:"Khá chắc", when, defs:[{n, odds, ton, duoc, mat, kem}]})`: red-tinted card; who (face + rank title, or "Kẻ chưa rõ mặt"),
+  how, how sure (odds meter), when, then "Cách đỡ" defence options as ACT CARDS.
+
+## 11. ODDS METER (j79) — the ONE chance scale
+`kitOdds(word|percent)` → `.kodm`: 7 segments filled to the level, coloured red → amber → green, plus the word.
+Ladder: Liều < Khó < Năm ăn năm thua < Khá chắc < Chắc < Rất chắc < Nắm chắc (`word()` thresholds 31/46/56/66/81/91). Tap → popover with the whole
+ladder, current step highlighted (never a modal). `oddsChip()` draws it, so every act card / option uses it; the HUD chances (Có thai, Lật thẻ) use it;
+`chanceLvl()` (old Rất thấp…Rất cao) now returns the ladder word. Never %, never "Chắc chắn" (sure acts show nothing). 0 → "Không có".
+Death risks on scheme buttons are computed from the real formula (poison / kpoison / pond) and shown as "nàng chết: <word>".
+
+## 12. GLOSSARY (j79)
+`KIT_GLOSS` holds the plain meaning of every game term; `kitGloss(term)` draws it with a dotted underline, tap = popover. Delta chips and tiles
+apply it automatically; HUD help (`HX`) reads the same text. Terms: Sủng, Danh, Đức, Sắc, Tài, Tâm cơ, Tai mắt, Ân tình, Sức, Bạc, Chủ tin, Lòng,
+Ghen, Oán, Thù, Thiện cảm, Chứng cứ, Nguy hiểm, Quẻ / Quẻ tuần, Phục vị, khắc, Thị tẩm, Lật thẻ, Lãnh cung, Cấm túc, Bổng lộc, Ân thưởng,
+Tranh ghế, Tuyển tú, Thế lực, Công lao, Kính sự phòng, Nội vụ phủ, Tân Giả khố, Thai, Cơ hội, Phúc duyên. A new term gets an entry here first.
+
+## 13. MINI-GAME FRAME (j79) — for j82 and the lesson games
+```js
+box.innerHTML = kitGameFrame({art:"Cầm", title:"Tấu khúc", how:"Chạm đúng dây khi nốt chạm vạch đỏ.",
+                              hud:[["score","Điểm",0],["time","Thời gian","30 giây"]], id:"kgbox"});
+kitGameSet("score", 12);                       // update a HUD cell
+document.getElementById("kgbox-res").hidden=false;
+document.getElementById("kgbox-res").innerHTML = kitGameResult({
+  parts:[["Điểm chơi 7/10","+21"],["Cầm bậc 3","+27"],["Tài 62","+19"],["Chuẩn bị","+8"]], total:75, place:"Nhì", of:4,
+  rivals:[{who:v, score:80, sub:"tài nghệ 45 + chuẩn bị 8 + màn thi 27"},{who:S, score:75}],
+  gains:[["Sủng",3]], losses:[["Sức",-10]]});
+```
+Header seal TÀI NGHỆ; "Cách chơi" line; HUD cells (`.kgc`); game box `.kgbox`; result rows (true numbers), standings with face + rank title, Được/Mất chips.
+In-game pieces keep the existing lesson-game classes (`.lanes`, `.lbtns`, `.simon`, `.memo`, `.goban`, `.mgopts`, p1.html) which are part of the kit;
+game buttons use `.kgbtn` (or `.btn` inside `.kgbox`), `.on` = selected. The lesson overlay `#ov .mg` wears the same frame.
+
+## 14. SCENE PANEL (j79) — identity card, opening story, title screen
+- Compact translucent kit frame (`rgba(255,250,240,.90)` + blur) to one side in landscape (max 440 px / 44vw, vertically centred, right) and in the
+  lower part in portrait; the background art stays visible. Fits ONE screen, no scrolling, buttons always visible (tested at the 4 sizes).
+- Identity card ("Thân phận kiếp này"): portrait beside the text; name with rank title once; origin and age once; story sentence; stats as `kitTiles`
+  (4 per row); one note line; the two choices side by side (ACT CARD frame). Header sub line: Phúc duyên.
+- Any panel can ask for it with `kitPanel({scene:true, …})`.
+
+## 6.1 ACT ART SLOT (j79)
+Every act card (`button.ka.kcard`) has a square illustration on the LEFT, rows on the right: `--kas` 88 px (≥1200), 76 px (600–1199), 64 px (<600),
+rank-neutral gold ring frame over the neutral brocade. Image = `img/act-<key>.webp` where `img/ACTS.json` `acts` maps the card title (or its slug)
+to `<key>`; otherwise `img/act-cat-<category>.webp` when listed in `ACTS.json` `have`; otherwise the brocade tile with the category word.
+Categories (`kitActCat(name)`): hau-ha Hầu hạ · hoc-tap Học tập · giao-thiep Giao thiệp · muu-ke Mưu kế · hai-nguoi Hại người · nghi-ngoi Nghỉ ngơi ·
+buon-ban Buôn bán · le-nghi Lễ nghi · di-lai Đi lại. Art: square, painterly, same style anchor as portraits, ≤ 60 KB webp.
+Grid rows: every card in a row has the row's height (fitted to content, `grid-auto-rows:auto` + stretch), no empty space from a taller row.
+
+## 15. STAGE OVERLAYS (j79) — nothing on the stage covers a figure
+- The status chips (`#hud2`) live in the header as its second row (`.hud2.khud`): collapsed = Buổi/khắc + Quẻ; expanded (▾) = every chip wraps
+  in the header, which grows while the stage shrinks. Never an overlay on the stage.
+- The date shows ONCE (header line), in the wording guide's words; the duplicate date chip is hidden. Every "T3/1" text anywhere (logs, news,
+  intel, summaries, old saves) is rewritten on screen to "Tháng ba · thượng tuần · năm thứ nhất" (`kitDate(m,y,tuan,buoi,full)`; uses `VP.date`
+  from j84 when present).
+- The place title on the stage is the NAME only; the place description line is dropped for every place (a visit message stays, wrapped).
+- No truncation: header name/date, Hoàng thượng box, stage name tags, face labels wrap (no ellipsis, no line-clamp).
+- Test: Pixi figure bounds vs every `.stop` overlay rectangle must not intersect (stage.js in the kit owner's scratchpad; numbers in the report).
+
+## 16. INTEL + EVIDENCE PANELS (j79 over j78 data)
+- Person card: "Chứng cứ N ›" chip → `kitEvidencePanel(v)`: subject portrait, every piece as an evidence card (what it proves, how, when), then
+  "Dùng chứng cứ" acts (`evidenceActs(v)`) as ACT CARDS (closed ones show the reason in Cần); tap runs `evidenceDo`.
+- "Đã biết: N tin ›" chip → `kitIntelPanel(v)`: `kitIntel` rows from `intelOf(v)` (+ old `S.notes`), one fact per row with source and when;
+  a fact that is no longer true carries a "nay đã khác" chip. The old one-line "Đã biết: a · b" is gone.
+
+## 17. WORDING
+Player-visible text follows dev/kit/VANPHONG.md (j84): the single confirm button reads "Đã hiểu", close reads "Lui"; dates as in section 15;
+no %, no "điểm/chỉ số", no English. Kit row labels (Cần / Tốn / Được / Mất / Kèm / Ghi chú) and tab names are read from the live UI; the kit never
+hard-codes tab labels.
+
+## 18. KIT REVIEW: review/act-cards (j63) — ADOPTED
+j63 (act card + result card, final head 1388289) is part of the kit: same tokens as the panels (`--k-hair`, `--k-lab`, `--k-card`), Cần row first
+(drawn by j79 as ✓/✗ status chips), rows Cần / Tốn / Được / Mất / Kèm / Ghi chú, the odds chip is the 7-step meter, no clamping.
+Kit-owner additions on top (j79): act art slot (6.1); per-row equal heights fitted to content; columns follow the real grid width (max 3, min 280 px);
+"; " in a price line splits two values; Sức rule in Cần follows `SUC_FLOOR` (j80); scheme ok() conditions all have words (`LACK`); death risks as
+ladder words from the real formulas; "có thể gặp người" → real words.
