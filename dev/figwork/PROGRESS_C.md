@@ -48,6 +48,7 @@ Mẻ A3 (thợ m01–m26): t3 m05–m12 (8 lineup + 1 vẽ lại m05 lụa mỏn
 Mẻ A4 (thợ m01–m26): t3 m13–m20. 13 lần vẽ/sửa + 8 tách nền: 13×270 + 8×3 = 3534.
 Mẻ A5 (thợ m01–m26): t3 m21–m26 → t3 XONG m01–m26; t4 m01–m02. 12 lần vẽ/sửa (vẽ lại m21, m24, m25 + sửa tóc m24) + 8 tách nền: 12×270 + 8×3 = 3264; m26 xoá nốt ruồi chấm vá.
 Mẻ A6 (thợ m01–m26): t4 m03–m10. 10 lần vẽ/sửa (sửa m04 thêm hoa điền tuổi 19, m05 thu nhỏ hoa điền) + 8 tách nền: 10×270 + 8×3 = 2724.
+Mẻ A7 (thợ m01–m26): t4 m11–m18. 8 lineup + 8 tách nền: 8×273 = 2184; m13 xoá nốt ruồi chấm vá (tóc tuổi 48 m13 sẽ sửa ở mẻ sau).
 
 ## C-B (thợ m27–m52): mẻ và tín dụng
 Mẻ B1: t2 m27–m34 (vẽ lại m27–m33, đạo cụ khác loại mỗi tuổi). 8 lineup, tín dụng 8×273 = 2184.

@@ -74,3 +74,11 @@ C-m15-t4 XmPgnkvBfo hands
 C-m16-t4 1lpYfRBr4r hands
 C-m17-t4 huRyMUfvqL hands (a32 book->birdcage)
 C-m18-t4 aF24pJzfSh hands (a24 sachet->lantern)
+C-m19-t4 9ZQmg48NYZ hands (a32 scroll->mirror)
+C-m20-t4 rgeWQjyxtc hands
+C-m21-t4 u5niIHTQLD hands
+C-m22-t4 iGqa7Ac3uK hands
+C-m23-t4 rgeWQS6xtc hands
+C-m24-t4 MBwxGIeDCm hands
+C-m25-t4 jUX0HOwLD0 hands (a32 scroll->box)
+C-m26-t4 ksDnE7j16B hands nomole
