@@ -3,6 +3,7 @@
 import json,sys,os
 H=os.path.dirname(os.path.abspath(__file__))
 exec(open(H+"/poses.py").read())
+exec(open(H+"/calm.py").read())  # OWNER REVERSAL: calm standing pose_for overrides the motion one
 STY=["8aNsy0CIrU","3zbtQNvREY","YMLuxraWeC","4RuXEXL9Aa"]
 MREF=json.load(open(H+"/mref.json"))
 PRE=("Semi-realistic painterly guofeng portrait style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference portraits; full-body standing figure head to feet, centered, plain light parchment background, soft even light; fair porcelain skin; serene gentle neutral expression, soft eyes, closed lips or faint smile; elegant, slim, clearly adult; beautiful/handsome romantic-lead looks for everyone; face clearly visible, 3/4 or frontal view.")
@@ -31,13 +32,13 @@ def hmat(t,i):
     return "in gold leaf and cinnabar red with one tiny pearl dot, the finest detail"
 def huadian(t,i):
     if t=="cold": return " No huadian on the forehead."
-    return (f" Forehead: a small, delicate, refined huadian between the brows, elegant, not large: her signature motif {HD[i]}, {hmat(t,i)}; "
+    return (f" Forehead: a small, delicate, refined huadian between the brows, elegant, not large, about the size of a fingertip and clearly visible (like the small red flower between the brows in a classic portrait): her signature motif {HD[i]}, {hmat(t,i)}; "
             "same small size at every rank, never covering the forehead or spreading to the brows; the same huadian on all four figures.")
 SHORT=("Semi-realistic painterly guofeng portrait style, near-3D realistic rendering, soft natural light, fine detail, exactly matching the rendering of the reference portraits; plain light parchment background, soft even light. "
  "Age lineup: the SAME woman drawn four times side by side in one row, clear empty space between the figures, each complete head to feet, realistic adult proportions (head one seventh of body height, never chibi). "
  "A former palace maid now raised to imperial consort, very beautiful: fair flawless porcelain skin (no moles, no beauty marks), soft rosy blush, large soft warm round-almond eyes (never slanted, never teary), delicate nose, small rosy lips, serene gentle face, faint smile at most. "
  "From the identity reference keep ONLY her face, facial features, hair colour and colour family; NOT its ages, poses, maid's outfit or ornaments. "
- "Left to right: about 19, fresh and youthful; about 24, young and lively, no sign of ageing; about 32, in her prime, smooth skin, no grey hair, no wrinkles; about 48, a graceful elegant lady, hair still FULLY DARK black-brown like at 32 (no grey or silver at the temples or sides, no streaks, no grey sheen), minimal faint lines, still clearly beautiful, not elderly.")
+ "Left to right: about 19, fresh and youthful; about 24, young and lively, no sign of ageing; about 32, in her prime, smooth skin, no grey hair, no wrinkles; about 48, a graceful elegant lady, her hair still fully DARK black-brown like the younger figures, at most two or three single fine silver hairs barely visible, NO grey streak, NO grey or silver temples, NOT grey-haired, minimal faint lines, still clearly beautiful, not elderly.")
 MOTION="dynamic graceful motion in every figure, caught mid-movement, skirt hems swirling, long sleeves, sash and stole floating in a soft breeze, flowing fabric, hair tassels swaying (the older figures move more calmly but still gracefully); each figure complete head to feet inside the frame, compact, extra empty space between the four figures so the swirling fabric never overlaps"
 MOTS="graceful motion, skirts, sleeves and sash floating in a soft breeze (older figures calmer); each figure complete head to feet, extra space between figures so fabric never overlaps"
 def job(jid):
@@ -46,14 +47,14 @@ def job(jid):
     pal=PAL[who]; main=pal.split(" and ")[0]; neg="" if any(g in pal for g in GREEN) else ", NOT green"
     if t=="cold":
         o=("Outfit for all four (the cold palace, plain but still neat, clean and beautiful, never poor or ragged): a NEW outfit, a simple but well-made plain robe in muted "+main.replace("soft ","").replace("pale ","")+" and pale grey-white linen, clean and neatly tied with a plain sash, hair in a tidy low bun with one plain wooden hairpin, no gold, no jewellery; she looks graceful and dignified")
-        ps=pose_for(TRS[i%6],i,1,"a plain wooden comb",n).replace("gold hairpin","wooden hairpin").replace("dynamic graceful motion","gentle graceful motion")
+        ps=pose_for(TRS[i%6],i,1,"a plain wooden comb",n).replace("gold hairpin","wooden hairpin")
     else:
         rich="" if t==1 else (", a little richer than the rank below" if t<=3 else ", clearly much richer and more splendid than the lower ranks")
         o=(f"Outfit for all four ({CRANK[t]}{rich}): a NEW outfit, {CT[t].format(mot=MOT[i%13])}; her signature colour family {pal} stays the MAIN robe colour ({main}{neg})")
         ps=pose_for(TRS[i%6],i,t,CPROP[i%13],n)
     desc=f" A former palace maid now raised to imperial consort, {BEAU}."
     if os.environ.get("LONG"): p=PRE+LINE+desc+IDK+AGES+" "+o+"."+huadian(t,i)+" "+ps+END
-    else: p=SHORT+" "+o+"."+huadian(t,i)+" "+ps.replace(MOTION,MOTS)+". No text, no labels."
+    else: p=SHORT+" "+o+"."+huadian(t,i)+" "+ps+". No text, no labels."
     return STY[n%4],MREF[who],p
 if __name__=="__main__":
     for j in sys.argv[1:]:

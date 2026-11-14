@@ -11,3 +11,8 @@
 - Mẻ 2 (t1 m35–m42, 8 lineup): xong, sheets C_m35_t1..C_m42_t1. Tín dụng 2184.
 - Mẻ 3 (t1 m43–m50, 8 lineup): xong, sheets C_m43_t1..C_m50_t1. Tín dụng 2184.
 - Mẻ 4 (t1 m51–m52 → t1 XONG m27–m52; t2 m27–m32): xong. Tín dụng 2187 (1 lần tách nền lỗi, làm lại).
+
+## OWNER REVERSAL (11/14): dáng ĐỨNG YÊN (G19/G24/G32/G48 + STILL + "opaque silk, no sheer gauze, no floating stole", ~7.5 đầu) — calm.py lấy từ spec5.py nhánh review/consort-art.
+- Mọi lineup đã vẽ theo dáng động (t1 m27–m52, t2 m27–m32) phải VẼ LẠI. Bỏ 16 bản t2 m33–m48 dáng động chưa xử lý (4320 tín dụng phí).
+- Hoa điền: cỡ chuẩn = hoa son c03 t1 ("about the size of a fingertip and clearly visible"). t2+ chờ HUADIAN.md 8 nấc mới.
+- Vẽ lại dáng yên: C-m38-t1 (tấm thử đầu tiên, sheet C_m38_t1.jpg). 273 tín dụng.

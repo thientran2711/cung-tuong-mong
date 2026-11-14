@@ -35,6 +35,33 @@ Lãnh cung (tcold): KHÔNG hoa điền. Không nốt ruồi, không beauty mark.
 | m25 | a tiny morning-glory bloom | rose red | lavender violet and silver |
 | m26 | a small half-moon fan shape | cinnabar red | blush pink and gold |
 
-## m27–m52 (thợ C2)
+## m27–m52 (thợ Part C2; prompt: dev/figwork/maidC2/mjobs.py, hàm huadian)
 
-(thợ C2 điền)
+| ID | Hoạ tiết | Màu t1–t6 |
+|---|---|---|
+| m27 | a tiny lily-of-the-valley bell | soft rose pink |
+| m28 | a small pomegranate flower | pale coral |
+| m29 | a small water-caltrop leaf | rose red |
+| m30 | a tiny magnolia bud | soft peach-pink |
+| m31 | a tiny gourd | cinnabar red |
+| m32 | a small lingzhi cloud-mushroom | vermilion |
+| m33 | a tiny ruyi head | coral red |
+| m34 | a tiny endless knot | pale pink |
+| m35 | a small wisteria cluster | soft rose pink |
+| m36 | a tiny hibiscus | pale coral |
+| m37 | a tiny koi fish | rose red |
+| m38 | a small apricot blossom | soft peach-pink |
+| m39 | a tiny dragonfly | cinnabar red |
+| m40 | a small rose | vermilion |
+| m41 | a tiny pine sprig | coral red |
+| m42 | a small pear blossom | pale pink |
+| m43 | a tiny iris | soft rose pink |
+| m44 | a small azalea | pale coral |
+| m45 | a tiny jasmine flower | rose red |
+| m46 | a small maple leaf | soft peach-pink |
+| m47 | four tiny dots in a square | cinnabar red |
+| m48 | a tiny palace-lantern shape | vermilion |
+| m49 | a tiny conch shell | coral red |
+| m50 | a small morning-glory | pale pink |
+| m51 | a tiny honeysuckle sprig | soft rose pink |
+| m52 | a small gardenia | pale coral |
