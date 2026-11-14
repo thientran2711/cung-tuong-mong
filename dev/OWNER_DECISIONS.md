@@ -72,3 +72,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (19:25Z) Owner rejected the portrait room pilot (phi-tan-cung -p): 'xấu quá, vẽ lại'. Redo master faithful to the approved landscape room (palette, furniture, soft painterly near-3D), muted natural colours, depth, modest rug; seasons via outside view/flowers/light only; show master before variants.
 - (19:35Z) Owner: act/event pictures must show the act (e.g. Chặn ngự giá shows only a lantern); symbolic people allowed in act pictures. → audit all 108 act-*.webp, redraw unclear ones (review/act-art2).
 - (19:40Z) Owner: don't redraw room backgrounds — keep the old landscape room art; it's fine in the full-screen room view. Portrait -p room set cancelled.
+- (19:55Z) Owner: Chặn ngự giá picture composition OK, but too bright — act is evening-only → night version. Rule: act pictures match the act's time of day.
