@@ -14,7 +14,7 @@ function heartLoop(on){try{if(on&&auOk()){if(!AU.hb){AU.hb=mkAudio("sfx-heartbea
 function sfx(n){if(!auOk())return;try{let a=AU.cache[n];if(!a){a=AU.cache[n]=mkAudio(n,false)}if(!a||a.dead)return;const b=a.cloneNode();b.volume=OPT.sfx;const p=b.play();if(p&&p.catch)p.catch(()=>{});
  AU.duck=.45;if(AU.cur)AU.cur.volume=musVol();clearTimeout(AU.dt);AU.dt=setTimeout(()=>{AU.duck=1;if(AU.cur)AU.cur.volume=musVol()},650)}catch(e){}}
 function musicCtx(){if(!S)return"bgm-day";if(S.dead)return"bgm-sorrow";if(S.place==="lc")return"bgm-cold";const m=Q[0];if(m&&(m.pid&&m.pid!=="ksp"&&m.pid!=="prep"&&m.pid!=="night1"&&m.pid!=="night2"&&m.pid!=="shop"))return"bgm-tension";
- if(m&&(m.pid==="night1"||m.pid==="night2"||m.cls==="night"))return"bgm-night";if((S.month===1||S.month===7)&&S.tuan===0)return"bgm-festival";return (S.buoi||0)===2?"bgm-night":"bgm-day"}
+ if(m&&(m.pid==="night1"||m.pid==="night2"||m.cls==="night"))return"bgm-night";if((S.month===1||S.month===7)&&S.tuan===0)return"bgm-festival";return (S.buoi||0)===B4L?"bgm-night":"bgm-day"}
 function auTick(){if(!AU.unlocked)return;const m0=Q[0];if(!(m0&&m0.pid&&musicCtx()==="bgm-tension"))heartLoop(false);if(!OPT.snd||OPT.mute){if(AU.cur)try{AU.cur.volume=0}catch(e){}return}setMusic(musicCtx());if(AU.cur){try{AU.cur.volume=musVol();if(AU.cur.paused&&!document.hidden){const p=AU.cur.play();if(p&&p.catch)p.catch(()=>{})}}catch(e){}}}
 document.addEventListener("pointerdown",()=>{if(!AU.unlocked){AU.unlocked=true;auTick()}},{capture:true});
 document.addEventListener("visibilitychange",()=>{try{if(document.hidden){if(AU.cur)AU.cur.pause()}else auTick()}catch(e){}if(PX.app){try{document.hidden?PX.app.ticker.stop():PX.app.ticker.start()}catch(e){}}});
@@ -73,7 +73,7 @@ function pxLoad(){if(PX.loading||PX.app||PX.failed||RM)return;PX.loading=true;co
   const g=new PIXI.Graphics();g.circle(8,8,8).fill(0xffffff);PX.tex.dot=app.renderer.generateTexture(g);const e=new PIXI.Graphics();e.ellipse(10,5,10,5).fill(0xffffff);PX.tex.petal=app.renderer.generateTexture(e);
   app.ticker.add(pxTick);PX.loading=false;PX.key="";pxScene()}catch(err){PX.failed=true;PX.loading=false}};document.head.appendChild(s)}
 function pxCap(){return innerWidth<700?60:120}
-function pxKind(){const P=placeOf(S.place),night=(S.buoi||0)===2,out=["vuon","lc","home"].includes(P.sc),w=S.wx?S.wx.k:"dust";
+function pxKind(){const P=placeOf(S.place),night=(S.buoi||0)===B4L,out=["vuon","lc","home"].includes(P.sc),w=S.wx?S.wx.k:"dust";
  if(out){const m={petal:"petal",rain:"rain",mist:"smoke",dust:night?"fly":"dust",sun:"dust",storm:"rain",leaf:"leaf",wind:"leaf",snow:"snow",snowh:"snow",frost:"snow",snowp:"snow"}[w]||"dust";return m}
  if(P.sc==="tn")return"smoke";if(P.sc==="thu")return"dust";if(night)return"fly";return w==="rain"||w==="storm"?"rain":"dust"}
 async function pxScene(){if(!S||RM||!OPT.fxon){if(PX.app)PX.app.canvas.style.display="none";return}if(!PX.app){pxLoad();return}PX.app.canvas.style.display="";
@@ -82,7 +82,7 @@ async function pxScene(){if(!S||RM||!OPT.fxon){if(PX.app)PX.app.canvas.style.dis
  const src=SCIMG[P.sc]?`img/${SCIMG[P.sc]}.webp`:null;if(src){try{const t=await PIXI.Assets.load(src);if(PX.key!==k)return;const sp=new PIXI.Sprite(t);sp.anchor.set(.5);PX.bg=sp;PX.layer.addChildAt(sp,0);$("scimg").style.opacity="0"}catch(e){$("scimg").style.opacity="1"}}else $("scimg").style.opacity="1";
  const kind=pxKind(),wk2=S.wx?S.wx.k:"",heavy=wk2==="snowh"||wk2==="storm",n=Math.round(pxCap()*(kind==="smoke"?.3:heavy?1:kind==="rain"?.6:.45));for(let i=0;i<n;i++)PX.parts.push(mkPart(kind,true));
  if(wk2==="snowp")for(let i=0;i<Math.round(n/4);i++)PX.parts.push(mkPart("petal",true));
- if((S.buoi||0)===2){const pts=[[.12,.3],[.88,.3],[.3,.18],[.7,.18]];pts.forEach(([x,y],i)=>{const g=mkPart("dust",true);g.v.kind="lamp";g.v.vx=0;g.v.vy=0;g.tint=0xffb050;g.scale.set(2.2);g.blendMode="add";g.alpha=0;g.v.on=i*40;g.v.fx=x;g.v.fy=y;PX.parts.push(g)});if(["vuon","lc","home"].includes(P.sc))for(let i=0;i<14;i++){const s=mkPart("dust",true);s.v.kind="star";s.v.vx=0;s.v.vy=0;s.tint=0xffffff;s.scale.set(.12);s.v.fy=Math.random()*.25;PX.parts.push(s)}}}
+ if((S.buoi||0)===B4L){const pts=[[.12,.3],[.88,.3],[.3,.18],[.7,.18]];pts.forEach(([x,y],i)=>{const g=mkPart("dust",true);g.v.kind="lamp";g.v.vx=0;g.v.vy=0;g.tint=0xffb050;g.scale.set(2.2);g.blendMode="add";g.alpha=0;g.v.on=i*40;g.v.fx=x;g.v.fy=y;PX.parts.push(g)});if(["vuon","lc","home"].includes(P.sc))for(let i=0;i<14;i++){const s=mkPart("dust",true);s.v.kind="star";s.v.vx=0;s.v.vy=0;s.tint=0xffffff;s.scale.set(.12);s.v.fy=Math.random()*.25;PX.parts.push(s)}}}
 const PCOL={petal:[0xf4b6c8,0xf9d3dc,0xffffff],snow:[0xffffff],leaf:[0x9a9a8a,0x7a7a6a],dust:[0xfff2c0],fly:[0xfff07a],smoke:[0xcfc6bc],rain:[0xbcd0e0],gold:[0xf0d070,0xd9b25f],red:[0xc02a2a],ash:[0x6a6a6a,0x9a9a9a]};
 function mkPart(kind,scatter,x0,y0){const W=PX.app.screen.width,H=PX.app.screen.height;const sp=new PIXI.Sprite(kind==="petal"||kind==="leaf"||kind==="gold"?PX.tex.petal:PX.tex.dot);
  const c=PCOL[kind]||[0xffffff];sp.tint=c[R(c.length)];sp.anchor.set(.5);const s={petal:.5,snow:.3,leaf:.6,dust:.15,fly:.25,smoke:2.2,rain:.12,gold:.6,red:.5,ash:.3}[kind]||.3;sp.scale.set(s*(.6+Math.random()*.8));

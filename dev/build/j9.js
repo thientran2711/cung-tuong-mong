@@ -19,9 +19,9 @@ function houseName(p){const h=byKey(houseOf(p));return h===S?"tẩm cung của n
 /* where everyone is this tuần: by role, trait, season and time of month */
 function palaceOf(p){if(p===S)return"home";if(p.queen)return"kn";const h=byKey(houseOf(p));return h===S?"home":"r"+h.id}
 function placeWhere(){const W={},sea=SEASON[S.month-1],spring=sea==="Xuân"||sea==="Thu";
- const b=S.buoi||0;const e=b===2?pick(["dtd","dtd","dtd",has("datinh")?"vuon":"dtd"]):has("chamchinh")?pick(["thu","thu","thu",spring?"vuon":"thu"]):b===0?pick(["thu","thu","dtd"]):pick([spring?"vuon":"dtd","thu","vuon"]);W.emp=wet()&&e==="vuon"?"thu":e;W.th=S.thDead?null:"tn";
+ const b=S.buoi||0;const e=b===1?b4EmpNoon():b===B4L?pick(["dtd","dtd","dtd",has("datinh")?"vuon":"dtd"]):has("chamchinh")?pick(["thu","thu","thu",spring?"vuon":"thu"]):b===0?pick(["thu","thu","dtd"]):pick([spring?"vuon":"dtd","thu","vuon"]);W.emp=wet()&&e==="vuon"?"thu":e;W.th=S.thDead?null:"tn";
  for(const v of rivals){if(!v.alive){continue}if(v.out){W[v.id]="lc";continue}if(v.confined){W[v.id]=palaceOf(v);continue}
-  const L=[[palaceOf(v),b===2?80:35],["vuon",(b===1?(spring?40:20):b===0?8:3)*(wet()?.25:1)],["tn",S.thDead?0:10],["tyv",v.preg||v.suc<50?15:3]];
+  const L=[[palaceOf(v),b===B4L?80:b===1?60:35],["vuon",(b===2?(spring?40:20):b===1?b4NoonGarden():b===0?8:3)*(wet()?.25:1)],["tn",S.thDead?0:10],["tyv",v.preg||v.suc<50?15:3]];
   if(qOn()&&!v.queen)L.push(["kn",b===0?55:5]);if(v.queen)L[0][1]+=30;
   const w=L.map(x=>x[1]);let r=Math.random()*w.reduce((a,b)=>a+b),i=0;while(r>w[i]&&i<w.length-1){r-=w[i];i++}W[v.id]=L[i][0]}
  S.where=W;npcEncounters()}
@@ -104,8 +104,8 @@ function travel(a,b){if(a===b)return 0;const [r1,c1]=mapPos(a||"home"),[r2,c2]=m
 function rivalsBuoi(){let ev="";for(const v of liveRivals(true)){if(!v.alive||v.out)continue;const t=pickTarget(v);if(!t)continue;
   let want=((v.malice/100)*(rel(v,t)<0?1:.25)+hostility(v,t)/200)*(rkOf(t)>=rkOf(v)-1||(t===S&&v.ghen>=60)?1:.4);if(t.shield)want*=.5;
   if(t===S&&S.lot&&S.lot.dom==="Hung")want*=1.5;if(Math.random()<want*.04){ev+=seenNPC(v,t,npcAct(v,t));if(S.dead)return ev}}return ev}
-function nextBuoi(){if(!S||S.dead||Q.length||S.mg)return;if((S.buoi||0)>=2){S.buoi=0;endTurn();return}
- S.buoi=(S.buoi||0)+1;used=0;const ev=rivalsBuoi();if(S.dead){render();return}placeWhere();popIdx=null;popMsg="";
+function nextBuoi(){if(!S||S.dead||Q.length||S.mg)return;if((S.buoi||0)>=B4L){S.buoi=0;endTurn();return}
+ S.buoi=(S.buoi||0)+1;used=0;const ev=b4NpcActs()?rivalsBuoi():"";if(S.dead){render();return}placeWhere();popIdx=null;popMsg="";
  if(S.out)coldVisit();else if(S.place!=="home"){const k=S.place;S.place="home";const u=used;goTo(k);used=u}else S.visit={k:"home",people:homePeople(),talked:false,tk:{}};
  if(ev)Q.push({t:"Tin trong cung",h:`<p class="past">${when()} · ${BUOI[S.buoi]}</p><p>${ev}</p>`});curtain();render()}
 A("pushp","Đẩy xuống hồ sen",{c:{duc:-12},ok:(a,t)=>whereOf(a)==="vuon"&&together(a,t),o:a=>odA(a,40+a.tamco/4),f:(a,t)=>pushPond(a,t)});
