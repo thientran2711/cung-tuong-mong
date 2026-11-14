@@ -125,9 +125,9 @@ const LEX95B=[[/ngự hoa viên|vườn ngự|hòn non bộ|thái dịch trì|th
 const NOW95B=/lời đồn|đồn |đồn:|rỉ tai|nghe nói|bóng gió|\bhay |thường|từng |hôm nọ|hôm qua|đêm qua|năm xưa|trước đây|\bsẽ |ngày mai|tối mai|đêm nay|tối nay|\bsắp |\bmuốn |\bđịnh |\bnếu |\(sai |sai người|\bhứa|mơ thấy|vọng sang|có thể|nghi |\bmời .* ra |ngày rằm/;
 const AGENT95B=/(người của|người bên|cung nữ của|cung nữ bên|thái giám của|thái giám bên|kẻ hầu của|người hầu của|con của|cung|tặng|cho|của|về|nhắm vào|hại|vu|bắt|thăm|giúp|tố|với)\s*$/;
 function j95bStrip(h){return String(h||"").replace(/<br\s*\/?>/gi,". ").replace(/<\/p>/gi,". ").replace(/<[^>]+>/g," ").replace(/&nbsp;/g," ").replace(/\s+/g," ")}
-function j95bScan(h){/* → [{id,k,why}] who the words place where, now */const out=[];const txt=j95bStrip(h);const sents=txt.split(/(?<=[.!?…])\s+|\s*;\s*/);
+function j95bScan(h){/* → [{id,k,why}] who the words place where, now */const out=[];const txt=j95bStrip(h);const sents=txt.split(/(?<=[.!?…][)"”']?)\s+|\s*;\s*/);
  const L=liveRivals(true).concat(rivals.filter(v=>v.alive&&v.out)).map(v=>[v,v.name]).filter(x=>x[1]).sort((a,b)=>b[1].length-a[1].length);
- for(const s0 of sents){const s=s0.trim();if(!s)continue;const lo=s.toLowerCase().replace(/phe (càn ninh|đức thọ|từ ninh|dưỡng hòa|cần chính)\S*/g,"").replace(/sổ (sách )?kính sự phòng/g,"sổ");if(NOW95B.test(lo))continue;let k=null;for(const [re,c] of LEX95B)if(re.test(lo)){k=c;break}if(!k)continue;
+ for(const s0 of sents){const s=s0.trim();if(!s)continue;const lo=s.toLowerCase().replace(/phe (càn ninh|đức thọ|từ ninh|dưỡng hòa|cần chính)\S*/g,"").replace(/sổ (sách )?kính sự phòng/g,"sổ");if(NOW95B.test(lo))continue;const k=j95bLexNow(lo);if(!k)continue;
   const used=[];for(const [v,nm] of L){let i=s.indexOf(nm);while(i>=0){if(!used.some(u=>i>=u[0]&&i<u[1])){used.push([i,i+nm.length]);const pre=s.slice(Math.max(0,i-18),i).toLowerCase();
      if(!AGENT95B.test(pre)&&!j95bPastHas("v"+v.id,k))out.push({id:"v"+v.id,k,why:s.slice(0,90)})}i=s.indexOf(nm,i+1)}}
   if(/^(hoàng thượng|ngài)\b/i.test(s))out.push({id:"emp",k,why:s.slice(0,90)});if(/^thái hậu\b/i.test(s)&&!S.thDead)out.push({id:"th",k,why:s.slice(0,90)})}
@@ -161,10 +161,12 @@ function j95bPutPast(id,k,act,why,src){const R=S.roster;if(!R||!R.P)return"norec
  const P=J95B.next=J95B.next||[];if(P.some(x=>x.id===id&&x.k!==k)){J95B.stat.pastDrop=(J95B.stat.pastDrop||0)+1;return"seen"}/* one place per person at the first khắc of the coming buổi; a second place for her is not told */
  if(!P.some(x=>x.id===id&&x.k===k))P.push({id,k,act,why,src});J95B.stat.pastNext=(J95B.stat.pastNext||0)+1;return"ok"}
 function j95bPastHas(id,k){for(let i=J95B.bind.length-1;i>=0;i--){const b=J95B.bind[i];if(b.past&&b.id===id&&b.k===k&&wk()-b.wk<=1)return b}return null}
+/* the place the words put someone AT (table order, as before); a place being left ("được tha khỏi lãnh cung", "rời ngự hoa viên") puts nobody there */
+function j95bLexNow(lo){for(const [re,c] of LEX95B){const g=new RegExp(re.source,"g");let m;while((m=g.exec(lo))){if(!/(khỏi|rời|dời từ|từ)\s*$/.test(lo.slice(Math.max(0,m.index-10),m.index)))return c}}return null}
 function j95bLexOf(t){const lo=String(t||"").toLowerCase();for(const [re,c] of LEX95B)if(re.test(lo))return c;return null}
 
 function j95bPastText(r,src){/* bind every "X ... at <place>" sentence of a turn report to the buổi just ended; drop false ones */
- const parts=String(r).split(/(?<=[.!?])\s+/);const keep=[];
+ const parts=String(r).split(/(?<=[.!?][)"”']?)\s+/);const keep=[];
  for(const sen of parts){const L=j95bScan(sen);let drop=false;for(const x of L){if(x.id[0]!=="v")continue;const v=RV(+x.id.slice(1));if(!v)continue;
    if((v.out&&x.k!=="lc")||(v.confined&&x.k!==palaceOf(v))){drop=true;break}if(j95bPutPast(x.id,x.k,"here",x.why,src)==="seen"){drop=true;break}}if(!drop)keep.push(sen)}
  return keep.join(" ")}

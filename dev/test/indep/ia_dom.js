@@ -39,7 +39,7 @@ const HOOK=fs.readFileSync(path.join(__dirname,'ia_hook.js'),'utf8');
   await p.evaluate(()=>{tab="act";render()});await p.waitForTimeout(500);
   const T=await p.evaluate(()=>{const R=S.roster,kh=j95kh();if(!R||R.key!==j95key())return{skip:1};const here=S.place;const out=[];
    const byName={};for(const id in R.P){const w=R.who[id];if(w)(byName[w[0]]=byName[w[0]]||[]).push(id)}
-   const TK=[...document.querySelectorAll('#tokens .tok')].map(t=>{const n=t.querySelector('.j59n')||t.querySelector('.j59only'),r=t.querySelector('.j59t');/* j95c pass: Thái hậu / Hoàng thượng carry only a title tag (.j59only) */const i=+t.dataset.p;const pp=S.visit&&S.visit.people?S.visit.people[i]:null;return{nm:n?n.textContent.trim():'',rl:r?r.textContent.trim():'',p:pp}}).filter(x=>x.nm);
+   const TK=[...document.querySelectorAll('#tokens .tok')].map(t=>{const n=t.querySelector('.j59n')||t.querySelector('.j59only'),r=t.querySelector('.j59t');/* j95c pass: Thái hậu / Hoàng thượng carry only a title tag (.j59only) */const i=+t.dataset.p;const pp=S.visit&&S.visit.people?S.visit.people[i]:null;/* j61: a person not yet known is drawn as "Người lạ ???"; the token's data-p names who it is */const nt=n?n.textContent.trim():'';return{nm:nt==='???'&&pp&&pp.name?pp.name:nt,rl:r?r.textContent.trim():'',p:pp}}).filter(x=>x.nm);
    const toks=TK.map(x=>x.nm);
    for(const x of TK){const nm=x.nm;if(x.p&&(x.p.kind==="obj"||x.p.kind==="chest"||/^Rương/.test(nm)))continue;let n2=nm.replace(/^Hoàng hậu /,"");let ids=byName[n2]||byName[nm]||(nm==="Hoàng thượng"?["emp"]:nm==="Thái hậu"?["th"]:null);
     if(!ids&&x.p&&x.p.ref&&x.p.ref.id!=null){const rid=x.p.kind==="man"?x.p.ref.id:x.p.ref.rel!=null?"v"+x.p.ref.id:null;if(rid&&R.P[rid])ids=[rid]}

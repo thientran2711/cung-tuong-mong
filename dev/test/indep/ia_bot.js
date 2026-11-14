@@ -15,8 +15,10 @@ const MEAS=process.env.MEAS||path.join(__dirname,'..','..','measure');const HOOK
  await p.evaluate(HOOK);
  await p.evaluate(()=>{const IA=window.__IA;IA.lives=[];
   const w=(n)=>{const o=window[n];window[n]=function(){const r=o.apply(this,arguments);try{IA.check(n);if(Math.random()<.04)IA.roundTrip(n)}catch(e){IA.bad("X",n+": "+e.message)}return r}};
-  {const o=spend;spend=function(){const r=o.apply(this,arguments);try{IA.check("spend");if(Math.random()<.04)IA.roundTrip("spend")}catch(e){IA.bad("X","spend: "+e.message)}return r}}
-  {const o=goTo;goTo=function(){const r=o.apply(this,arguments);try{IA.check("goTo")}catch(e){IA.bad("X","goTo: "+e.message)}return r}}
+  /* no save inside goTo: goTo spends the walk before it sets S.place (j2), a moment the real game never saves at */
+  let inGo=0;
+  {const o=spend;spend=function(){const r=o.apply(this,arguments);try{IA.check("spend");if(!inGo&&Math.random()<.04)IA.roundTrip("spend")}catch(e){IA.bad("X","spend: "+e.message)}return r}}
+  {const o=goTo;goTo=function(){inGo++;let r;try{r=o.apply(this,arguments)}finally{inGo--}try{IA.check("goTo")}catch(e){IA.bad("X","goTo: "+e.message)}return r}}
   {const o=nextBuoi;nextBuoi=function(){const r=o.apply(this,arguments);try{IA.check("nextBuoi");if(Math.random()<.04)IA.roundTrip("nextBuoi")}catch(e){IA.bad("X","nextBuoi: "+e.message)}return r}}
   const st0=window.__bot.step;let dead=0;window.__iaStep=function(m,n){for(let i=0;i<n;i++){
     try{if(S&&!S.dead&&(Q.length||S.mg)&&Math.random()<.15)IA.roundTrip(S.mg?"minigame":"thẻ")}catch(e){IA.bad("X","rt: "+e.message)}
