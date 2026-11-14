@@ -11,6 +11,9 @@
 - Then tiers 5, 6, 7, 8 for all 32 (prompts already in jobs.json after spec5.py; `python3 cv.py 5 c01..`), then REDRAW consort t1–t3 with the new
   ages/poses/motion (same faces, frozen identity refs), then player looks t2–t8 + lãnh cung (spec5 has prompts; add the motion/age rules — player
   prompts still use the old "Pose for all four" line, so extend pose_for to looks before drawing), then REPORT to coordinator before maids/eunuchs/men.
+- REVIEW GATE (owner rule, dev/HANDOVER.md 'ONE KIT, REVIEW GATE'): push art batches to branch review/consort-art (pub2.sh does this now),
+  NOT main; list each batch's contact sheet path here. Keep transparent backgrounds clean (figures go on brocade backgrounds in rank frames).
+  Sheets so far: scratchpad/sheets/tier4.jpg (all 32 t4), t4_a/t4_c/t4_d.jpg, poses_trial.jpg, ladder_c01.jpg (t1–t4 only).
 - PUBLISHING: the shared checkout had an autostash conflict (other workers' sw.js / dev/build/assemble.py, stash@{0} left by
   `git pull --autostash`; NOT touched by the art worker). Use `bash pub2.sh "msg"` (commits from a clean worktree in scratchpad/wt and pushes
   origin main; never touches the shared checkout's index or stash).
