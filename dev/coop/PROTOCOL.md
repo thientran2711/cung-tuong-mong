@@ -106,3 +106,27 @@ tiểu thư later) and sends `me` with it. The world does not wait; the other pl
 ## 8. Limits
 - Room state ≤ 8 MB (chunked in DO storage, 100 KB per key). WebSocket frame ≤ 1 MB → gzip above 200 KB.
 - Max 2 players per room. Max 1 socket per seat (a new socket for the same pid closes the older one).
+
+## 9. Phase 2: same buổi, same place (server LIVE since 14/11; client = C)
+Goal (owner): both players are always in the same buổi; NPC whereabouts are identical on both clients; each sees the other at her
+real place in real time; acts between the two go through the server and the receiver answers.
+
+| t (client → server) | fields | server does |
+|---|---|---|
+| `bend` | `week, buoi` (0 or 1) | I finished buổi `buoi`. Error `badbuoi` if it is not the room's current buổi. When both seats sent it (or the other seat is empty): `buoi+1`, broadcast `buoi`. Otherwise broadcast `bended`. Buổi tối (2) still ends with `end` (week merge, section 5), which resets the buổi to 0. |
+| `unbend` | – | take back my `bend` while the other has not sent hers. |
+| `where` | `week, buoi, W` | **seat a only.** W = the host's `S.where` for that buổi (NPC id → place, `emp`, `th`, + whatever placeWhere wrappers add, e.g. `menW`). Stored (last one) and relayed to b. The guest replaces the NPC part of her `S.where` with it, so NPC places are the host's, identical by construction (no seeding). |
+| `pos` | `place, khac, week, buoi, x?` | my live location (send on every move / khắc spent). Stored per seat, relayed as `pos {from,…}`. The friend's `whereOf()` = her last `pos.place`. |
+| `act` | `id, k, …` (free fields) | relayed as-is to the other seat with `from`. Use for player-to-player acts: the receiver applies the effect to her own S (after a kit option card Nhận / Từ chối where the rules need consent) and answers with `actr`. |
+| `actr` | `id, ok, …` | relayed to the other seat with `from`. |
+
+| t (server → client) | fields |
+|---|---|
+| `buoi` | `week, buoi, bended` — advance to this buổi now (run the local nextBuoi). |
+| `bended` | `week, buoi, bended:{a,b}` — who has finished the current buổi (drives "Đợi bạn xong buổi"). |
+| `where`, `pos`, `act`, `actr` | relays, plus `from` |
+| `room` / `presence` | now also carry `buoi`, `bended`; `room` also `where` (last) and `pos:{a,b}` (last known) for reconnects. |
+
+Order per buổi: both play → both `bend` → server `buoi` → each client runs nextBuoi(); the host's placeWhere() result goes out as
+`where`, and the guest waits for the `where` with the same (week,buoi) before showing people (keep #next locked until then).
+`end` is still accepted at any buổi (phase-1 clients that do not send `bend` keep working).

@@ -39,10 +39,18 @@ for (let w = 0; w < 3; w++) {
   assert(wa.week === w + 1 && wb.week === w + 1, "week " + (w + 1) + " broadcast to both");
   if (w === 0) assert(wa.state.W.R[0].suc === 48 && wa.state.P.b.S.bac === 5 && wa.state.W.S.pad === undefined, "merged values");
 }
+// per-buổi sync (phase 2)
+A.send({ t: "bend", week: 3, buoi: 0 }); let bd = await B.wait("bended"); assert(bd.bended.a && !bd.bended.b, "bend a seen");
+A.send({ t: "where", week: 3, buoi: 1, W: { emp: "vuon", 3: "vuon" } });
+B.send({ t: "bend", week: 3, buoi: 0 }); const ba = await A.wait("buoi"), bb = await B.wait("buoi"); assert(ba.buoi === 1 && bb.buoi === 1, "both bend → buổi 1");
+const wh = await B.wait("where"); assert(wh.W.emp === "vuon", "guest gets host where");
+B.send({ t: "pos", place: "vuon", khac: 2, week: 3, buoi: 1 }); const ps = await A.wait("pos"); assert(ps.from === "b" && ps.place === "vuon", "pos relayed");
+A.send({ t: "act", id: 7, k: "talk" }); const ac = await B.wait("act"); assert(ac.from === "a" && ac.k === "talk", "act relayed");
+B.send({ t: "actr", id: 7, ok: true }); const ar = await A.wait("actr"); assert(ar.ok && ar.from === "b", "actr relayed");
 B.ws.close(); p = await A.wait("presence", m => m.seats.b && !m.seats.b.online); assert(p, "host sees guest offline (freeze)");
 const info = await (await fetch(BASE + "/api/room/" + code)).json(); assert(info.week === 3 && !info.seats.b.online, "info after leave");
 const B2 = client(code, B.ws.url.match(/pid=([^&]+)/)[1], "Bạn"); await B2.open(); r = await B2.wait("room");
-assert(r.you === "b" && r.week === 3 && r.state.week === 3, "guest reconnects to same seat, same week");
+assert(r.you === "b" && r.week === 3 && r.state.week === 3 && r.buoi === 1 && r.pos.b.place === "vuon" && r.where.W.emp === "vuon", "guest reconnects to same seat, week, buổi, pos, where");
 await A.wait("presence", m => m.seats.b && m.seats.b.online);
 const C3 = client(code, "pidC" + Date.now(), "Người thứ ba"); await C3.open(); r = await C3.wait("error"); assert(r.code === "full", "third player refused");
 A.ws.close(); B2.ws.close(); console.log("ALL OK"); process.exit(0);

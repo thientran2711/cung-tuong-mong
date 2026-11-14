@@ -93,7 +93,9 @@ export class Room {
   }
   async bcast(obj, exceptWs) { const s = JSON.stringify(obj); let z = null; if (s.length > BIG) z = await gzipText(s);
     for (const ws of this.socks()) { if (ws === exceptWs) continue; try { ws.send(z || s); } catch (e) {} } }
-  async presence() { await this.bcast({ t: "presence", seats: this.seatsView(), ended: this.endedView(), week: this.meta.week }); }
+  async presence() { await this.bcast({ t: "presence", seats: this.seatsView(), ended: this.endedView(), week: this.meta.week, buoi: this.meta.buoi || 0, bended: this.bendedView() }); }
+  bendedView() { const e = this.meta.bended || {}; return { a: !!e.a, b: !!e.b }; }
+  buoiView() { const m = this.meta; return { buoi: m.buoi || 0, bended: this.bendedView(), where: m.where || null, pos: m.pos || {} }; }
   endedView() { const e = this.meta.ended || {}; return { a: !!e.a, b: !!e.b }; }
 
   async fetch(req) {
@@ -127,7 +129,7 @@ export class Room {
       this.ctx.acceptWebSocket(s2, ["seat-" + seat]);
       s2.serializeAttachment({ seat, last: Date.now() });
       const C = await this.loadC();
-      await this.send(s2, { t: "room", code: m.code, you: seat, seats: this.seatsView(), week: m.week, ended: this.endedView(), state: C });
+      await this.send(s2, { t: "room", code: m.code, you: seat, seats: this.seatsView(), week: m.week, ended: this.endedView(), state: C, ...this.buoiView() });
       await this.presence();
       await this.ctx.storage.setAlarm(Date.now() + 20000);
       return new Response(null, { status: 101, webSocket: c2 });
@@ -142,12 +144,31 @@ export class Room {
     const m = await this.loadMeta(); if (!m) return;
     const t = msg.t;
     if (t === "ping") return this.send(ws, { t: "pong" });
+    if (t === "bend") {
+      if (msg.week !== m.week || msg.buoi !== (m.buoi || 0)) return this.send(ws, { t: "error", code: "badbuoi", msg: "tuần " + m.week + " buổi " + (m.buoi || 0) });
+      if ((m.buoi || 0) >= 2) return this.send(ws, { t: "error", code: "badbuoi", msg: "buổi tối kết thúc bằng end" });
+      m.bended = m.bended || {}; m.bended[seat] = true;
+      const other = seat === "a" ? "b" : "a";
+      if (m.bended[other] || !m.seats[other]) { m.buoi = (m.buoi || 0) + 1; m.bended = {}; await this.saveMeta(); return this.bcast({ t: "buoi", week: m.week, buoi: m.buoi, bended: { a: false, b: false } }); }
+      await this.saveMeta(); return this.bcast({ t: "bended", week: m.week, buoi: m.buoi || 0, bended: this.bendedView() });
+    }
+    if (t === "unbend") { if (m.bended && m.bended[seat]) { delete m.bended[seat]; await this.saveMeta(); await this.bcast({ t: "bended", week: m.week, buoi: m.buoi || 0, bended: this.bendedView() }); } return; }
+    if (t === "where") {
+      if (seat !== "a") return this.send(ws, { t: "error", code: "notyours", msg: "chỉ chủ phòng" });
+      m.where = { week: msg.week, buoi: msg.buoi, W: msg.W }; await this.saveMeta();
+      return this.bcast({ t: "where", week: msg.week, buoi: msg.buoi, W: msg.W }, ws);
+    }
+    if (t === "pos") {
+      m.pos = m.pos || {}; m.pos[seat] = { place: msg.place, khac: msg.khac, week: msg.week, buoi: msg.buoi, x: msg.x };
+      await this.saveMeta(); return this.bcast({ t: "pos", from: seat, ...m.pos[seat] }, ws);
+    }
+    if (t === "act" || t === "actr") { const o = { ...msg, from: seat }; return this.bcast(o, ws); }
     if (t === "say") { const text = String(msg.text || "").slice(0, 200); return this.bcast({ t: "said", from: seat, text }, ws); }
     if (t === "init") {
       if (seat !== "a") return this.send(ws, { t: "error", code: "notyours", msg: "chỉ chủ phòng" });
       if (await this.loadC()) return this.send(ws, { t: "error", code: "hasstate", msg: "phòng đã có thế giới" });
       const C = msg.state; if (!C || typeof C !== "object") return;
-      C.week = m.week = 0; m.ended = {};
+      C.week = m.week = 0; m.ended = {}; m.buoi = 0; m.bended = {};
       await this.saveC(C); await this.saveMeta();
       return this.bcast({ t: "state", state: C, week: m.week, by: seat });
     }
@@ -198,7 +219,7 @@ export class Room {
     const A = await this.getBig("sub-a"), B = await this.getBig("sub-b");
     let F;
     if (!base) F = A || B; else if (A && B) F = merge3(base, A, B); else F = A || B || base;
-    m.week = (m.week || 0) + 1; F.week = m.week; m.ended = {};
+    m.week = (m.week || 0) + 1; F.week = m.week; m.ended = {}; m.buoi = 0; m.bended = {};
     await this.saveC(F); await this.delBig("sub-a"); await this.delBig("sub-b"); await this.saveMeta();
     await this.bcast({ t: "week", week: m.week, state: F });
     await this.presence();
