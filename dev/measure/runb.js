@@ -3,11 +3,11 @@ const {chromium}=require('playwright');const fs=require('fs');const path=require
 const mode=process.argv[2],target=+process.argv[3]||40,out=process.argv[4];
 const M=__dirname,GAME=process.env.GAME||path.join(M,'..','index.html');
 (async()=>{
- const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:390,height:844}});const page=await ctx.newPage();
+ const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:390,height:844}});const page=await ctx.newPage();await page.route(u=>!/^file:/.test(String(u)),r=>r.abort());
  page.on('pageerror',e=>{console.log('PAGEERR',mode,e.message.slice(0,200))});
- await page.goto('file://'+GAME);await page.waitForTimeout(500);
- await page.evaluate(()=>localStorage.clear());await page.reload();await page.waitForTimeout(500);
- await page.click('#slots button[data-new="1"]');
+ await page.goto('file://'+GAME,{waitUntil:'domcontentloaded'});await page.waitForTimeout(500);
+ await page.evaluate(()=>localStorage.clear());await page.reload({waitUntil:'domcontentloaded'});await page.waitForTimeout(500);
+ await page.evaluate(()=>document.querySelector('#slots button[data-new="1"]').click());await page.waitForTimeout(800);
  await page.evaluate(`window.__servPolicy='${process.env.SERV||''}';window.__aff=${process.env.AFF?1:0};window.__balO=${process.env.BALJ||'null'}`);
  await page.evaluate(fs.readFileSync(path.join(M,process.env.INP||'inpage5.js'),'utf8'));
  const t0=Date.now();let n=0;

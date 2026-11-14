@@ -105,7 +105,7 @@ function sensibleStep(){
 window.__bot={step:(mode,n)=>{
   for(let i=0;i<n;i++){window.__iter++;window.__lifeIter++;
     if(S&&!S.dead){window.__maxRank=Math.max(window.__maxRank,S.rank);if(S.rank>=7&&window.__hhTurn==null){window.__hhTurn=S.turn;window.__hhWk=S.turn*3+S.tuan;window.__hhB=window.__lifeB}const t=S.turn+"_"+S.tuan;if(window.__lastT!==t){window.__lastT=t;window.__sucTrace.push(S.suc)}}
-    if(window.__lifeIter>9000){window.__res.push({origin:S.origin.k,rank:S.rank,maxRank:window.__maxRank,turns:S.turn,years:+(S.turn/12).toFixed(2),title:"TIMEOUT",fate:"TIMEOUT",state:JSON.stringify({used,Q:Q.length,mg:!!S.mg,buoi:S.buoi,place:S.place,out:S.out})});window.__maxRank=0;window.__lifeIter=0;start();continue}
+    if(window.__lifeIter>25000){window.__res.push({origin:S.origin.k,rank:S.rank,maxRank:window.__maxRank,turns:S.turn,years:+(S.turn/12).toFixed(2),title:"TIMEOUT",fate:"TIMEOUT",state:JSON.stringify({used,Q:Q.length,mg:!!S.mg,buoi:S.buoi,place:S.place,out:S.out})});window.__maxRank=0;window.__lifeIter=0;start();continue}
     if(S&&S.dead&&!Q.length){start();continue}
     if(S&&!S.dead){for(const k of ['sung','danh','bac','suc','duc','sac','tai','tamco','th','hh','mat','an'])if(typeof S[k]!=='number'||isNaN(S[k])||(k!=='th'&&k!=='hh'&&S[k]<0)||S[k]>(k==='bac'?1e6:100))window.__bad.push(k+'='+S[k]+' '+S.origin.k);
       if(window.__iter%400===0&&!Q.length&&!S.mg){try{const d=JSON.parse(JSON.stringify(ser()));quiet=true;deser(d);quiet=false;deal()}catch(e){window.__saveFail.push(String(e.message).slice(0,80))}}}
