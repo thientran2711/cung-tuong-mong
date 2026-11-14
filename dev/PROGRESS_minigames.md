@@ -24,4 +24,17 @@ Không có CSS mới ở j91; nút ở hàng `.kg82act` sẵn có của j82.
 
 ## Còn lại / gợi ý
 - j71 (review/merit) có thể gọi `window.kg82NpcRaw(p, kind)` thay may rủi đều 0–30 để đối thủ thi theo bậc tài nghệ như j82.
-- Art: các trò vẽ bằng canvas (không ảnh, không mặt người). Nếu muốn, art worker vẽ nền riêng mỗi môn (img/mg-<môn>.webp) để thay nền lụa.
+
+## 11/14 — sửa theo kiểm duyệt (FAIL: đồ vật vẽ bằng canvas)
+- Vẽ 11 lượt gpt-2-6 (1 ref phong cách: cảnh ngu-hoa-vien cho nền, item-dan-co cho mảnh rời; thư mục Magnific ba4aecfe-…), mỗi lượt một lưới; 5 lưới mảnh rời được tách nền (Magnific, cả tờ) rồi cắt từng mảnh.
+  Kết quả: 24 nền (15 nền thi `mg-<k>-bg`, 8 nền học `mg-<k>-bg-hoc`, 1 nền Chải chuốt `mg-chai-bg`) + 73 mảnh rời trong `img/kit/`. Bảng ở KIT.md 13.1.
+- j82: `kg82Bg` / `kg82Spr` / `kg82Lbl` / `kg82Preload`; `KG82.ctx` thi/học; 5 trò j82 (đàn, cờ, bắn cung, thêu, múa) và 10 trò j91 đặt tranh; canvas chỉ còn nét động nhỏ.
+  Nền được thu nhỏ một lần vào canvas phụ, bỏ bóng đổ thường trực (máy yếu vẫn mượt; bộ thử tự chơi nhanh như cũ). Cơ chế, cách chấm, oracle `KG82.peek` giữ nguyên
+  (riêng Đầu hồ: vùng "tai bình" theo đúng tai trong tranh, ±1,6 miệng bình thay vì ±2,2).
+- Chữ: HUD mọi trò "Hồi x/y" (bỏ Lần/Bình/Bước/Đèn/Nốt/Câu/Phát/Mối/Lư/Bức); bảng xếp hạng "Bảng định thứ"; j34 Tranh ghế bỏ "điểm" → "phần".
+- Bộ thử: `minigames91.js` thêm bước qua bục vinh danh j90; `dev/test/mgshots91.js` chụp mỗi môn lúc đang chơi (đồng hồ trang dừng để ảnh đúng một khung), cả nền học (`hoc`).
+- Thử (bản cuối): minigames91 755x1000@2 15/15, 1180x820@2 15/15, 390x844@3 15/15 (Nấu ăn: ô nguyên liệu nay luôn nằm trong bàn ở máy hẹp); lessons91 8/8 ở 755 và 1180;
+  không lỗi trang, không tràn ngang, không chữ cắt. Ảnh: `dev/shots/minigames/<môn>-<cỡ>-play.jpg` (755, 1180, 390), `hoc-<môn>-755x1000@2-play.jpg` (nền học), `lesson-<tài nghệ>-<cỡ>.jpg`.
+
+KIT READY: minigame art
+

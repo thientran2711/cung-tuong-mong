@@ -40,6 +40,8 @@ const ALL='dan,hat,co,dauho,ban,tho,doi,doden,ve,hoa,theu,kim,mua,banh,huong';co
   let shotDone=false;const t1=Date.now();
   while(Date.now()-t1<150000){const ph=await p.evaluate(()=>KG82.phase);if(ph!=='play')break;if(!shotDone&&Date.now()-t1>2600){await shot(`${kind}-${SZ}-2play`);shotDone=true}await p.waitForTimeout(400)}
   await p.waitForTimeout(500);
+  /* j90 (main): the honour podium shows first; go on to the score table */
+  for(let i=0;i<10&&await p.locator('.kpod-next').count();i++){await p.waitForTimeout(300);try{await p.locator('.kpod-next').tap({timeout:3000})}catch(e){}await p.waitForTimeout(300)}
   const info=await p.evaluate(()=>{const d=document.getElementById('kg82');const trunc=[...d.querySelectorAll('*')].filter(e=>e.children.length===0&&/…/.test(e.textContent)).length;
    const cut=[...d.querySelectorAll('button,.kgc b,.kgc small')].filter(e=>e.scrollWidth>e.clientWidth+1).length;
    return{last:KG82.last,overflowX:document.documentElement.scrollWidth>innerWidth,inner:d.scrollWidth>d.clientWidth+1,trunc,cut,coThe:(d.innerText||'').includes('có thể')}});

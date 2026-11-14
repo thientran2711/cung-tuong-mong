@@ -41,3 +41,8 @@ Phần thi = **tài nghệ** (chỉ số + bậc tài nghệ theo công thức t
 ## Giao diện
 Chỉ bộ kit: `kitGameFrame` (ấn TÀI NGHỆ, Cách chơi, ô HUD Phần / Hồi / Còn), trò vẽ trong `.kgbox` (canvas), nút `.kgbtn` trong hàng `.kg82act`,
 kết quả `kitGameResult`. Không thêm CSS mới ở j91.
+
+## Tranh (sửa theo kiểm duyệt 11/14)
+Nền bàn chơi và mọi đồ vật là tranh gpt-2-6 (`img/kit/mg-*.webp`, 24 nền + 73 mảnh rời); canvas chỉ vẽ vạch nhịp, vệt ngắm, dải giai điệu, nét mực, sợi chỉ, vòng đích, thước lửa, màu khói và chữ.
+Thi dùng nền sân hội (khán đài, rèm, đèn lồng); học, tự luyện, tác phẩm dùng nền phòng học riêng. Bảng đủ các trò và tranh: `dev/kit/KIT.md` mục 13.1.
+
