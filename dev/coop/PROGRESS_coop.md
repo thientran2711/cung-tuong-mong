@@ -36,3 +36,24 @@ Lead/backend: coop/worker/** + dev/coop/PROTOCOL.md. Worker B: dev/build/jcoop.j
 - Tested two Playwright browsers 686x880@2.2 + 1180x820@2 against the live Worker (scratchpad two.js): create, join by typing,
   both start, B closes tab → A frozen, B back via link → same seat b, A unfrozen, third browser → "Phòng này đã đủ hai người",
   ZZZZ → "Không thấy phòng". No page errors, no horizontal overflow. coop-e2e.js passes up to "A unfrozen when B is in"; the rest needs jcoopworld.
+
+## C · thế giới chung (worker C, dev/build/jcoopworld.js)
+- Registered in assemble.py after jcooplobby.js (before j84). Every hook checks `COOPW.on` (set by the lobby's COOP "start", cleared on "stop"): single-player untouched.
+- Canonical C: `W.S` = WORLD keys of S (`W_KEYS`: year/month/tuan/turn, emp minus emp.known, thDead/thAge/thO/thF, court, wx, vacSince, trieu, storms,
+  festDone, usedFaces/fidUsed/kidUsed) + `cnews` (host's world news of the week, for the guest). `W.R` = NPC rivals; viewer fields per pid:
+  rel→rl[pid], oan→ro[pid], ghen→gp[pid], ev→ep[pid], evm.me→evm[pid]; key "me"→String(pid), "me" values of resHead/spyFor/lover/mid/… → pid.
+  `P[seat]` = {pid, ok, name, rank, dead, srv, life, S:<all other keys of S>, S.empKnown}.
+- Friend = rival entry `{id:901|902, coop:true}` built from her P (Thiện cảm/Oán toward me from her rl/ro[myPid]); while she serves (cnv, not risen)
+  she is a servant `{sid:pid, coop:true}` in her mistress's staff. My acts on her entry (STAT rows, Thiện cảm, Oán, proof, death, lãnh cung, rank)
+  are written back into P[friend].S so the merge adds them to hers; on her side a death → die(), lãnh cung → cold().
+- Week: endTurn runs locally with the friend entry pulled out; guest mutes rivalsTurn/rivalsMonth/festival; emperorDies muted in co-op (both) for now;
+  guest's rivalsBuoi only lands NPC acts aimed at her. After endTurn the client waits until her dialogs are closed, then sends `end` (event-driven:
+  after render/closeModal/status; no timers touching the DOM). #next disabled while pending/waiting/frozen (only written when it changes).
+  `week` → rebuild from C (dialogs kept), "Tuần mới" dialog lists stat changes from the friend/world + host's world news (sentences about "ngươi" dropped).
+- Death: over() snapshots the world; the normal rebirth flow runs (Đầu thai → Luân hồi card). nlRun is hooked: the new life is put into the SAME world
+  (`attach`), links to the throwaway world dropped; cung nữ (cnv) re-picks a mistress in the real world. nlAccept → `me`. Hook for later routes
+  (tiểu thư): call `COOPW.attach()` after building a fresh S, then the route's accept sends `me` (or call nlAccept path).
+- Save: in co-op save() does not touch the slots (the room DO is the save).
+- Test: `node dev/test/coop-world.js [outdir]` (live Worker, two browsers 686x880@2.2 + 1180x820@2). Debug helper: dev/test/coop-dbg.js.
+- Known MVP limits: emperor death off in co-op; friend's kids/items not shown on her entry; NPC AI never targets the friend entry (lead rule);
+  guest is not hit by NPC month/turn schemes (muted), only by buổi acts.

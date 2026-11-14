@@ -173,6 +173,8 @@ function begin(d){CW.on=true;CW.seat=d.you||COOP.state.you;const C=d.state||COOP
  if(!C&&!host()){CW.waitWorld=true;pushModal({t:"Đợi bạn",h:`<p>Bạn đang chọn thân phận. Khi hậu cung đã dựng xong, ngươi sẽ chọn thân phận của mình.</p>`});showModal();return}
  newLife()}
 COOP.on("start",begin);
+/* leaving the shared game: back to single-player rules (slots untouched; the room keeps the world) */
+COOP.on("stop",()=>{CW.on=false;CW.base=null;CW.pend=false;CW.sent=-1;CW.inLife=false;CW.dying=null;try{const L=pullFriend();void L;lockNext()}catch(e){}});
 COOP.on("week",onWeek);
 COOP.on("state",onState);
 COOP.on("room",m=>{if(!CW.on||!m.state)return;const C=m.state;
