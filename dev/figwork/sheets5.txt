@@ -188,3 +188,12 @@ N-c15-t4 MBw1pzSDCm v4
 N-c16-t4 5jV2kEzKxe v4
 N-c17-t4 LwBclKvswO v4
 N-c18-t4 w4hpJsf7EI v4
+# v5: + dynamic motion clause
+N-c20-t4 1lpzsiAr4r v5
+N-c21-t4 huRJElnvqL v5
+N-c22-t4 rgenlZNxtc v5
+N-c23-t4 eIOj8KcdqL v5
+N-c24-t4 lJ8T7Yugv9 v5
+N-c25-t4 1lpzs2Yr4r v5
+N-c26-t4 CqG4Hy7EEy v5
+N-c27-t4 TdSKe5DVNR v5
