@@ -35,12 +35,12 @@ window.KIT_EXPR={K:["mL","mR","uL","lL","bLi","bLm","bLo","bRi","bRm","bRo","eLo
  make:function(img,file,mix){const W=img.naturalWidth,H=img.naturalHeight;const P=this.pts(file,W,H);if(!P||!W)return null;const {U,F}=this.pulls(P,mix);
   const xs=[P.fL[0],P.fR[0],P.mL[0],P.mR[0]],ys=[P.fh[1],P.chin[1]];
   let x0=Math.max(0,Math.floor(Math.min(...xs)-.12*F)),x1=Math.min(W,Math.ceil(Math.max(...xs)+.12*F)),y0=Math.max(0,Math.floor(Math.min(...ys)-.04*F)),y1=Math.min(H,Math.ceil(Math.max(...ys)+.06*F));
-  const S=4,w=x1-x0,h=y1-y0;if(w<4||h<4)return null;                                  /* supersample: the patch is drawn S x larger so it stays crisp when the picture is enlarged */
+  const S=2,w=x1-x0,h=y1-y0;if(w<4||h<4)return null;                                  /* supersample 2x: crisp when the picture is shown larger than native; 4x cost too much memory with many faces */
   const src=document.createElement("canvas");src.width=w*S;src.height=h*S;const sx=src.getContext("2d");sx.imageSmoothingQuality="high";sx.drawImage(img,x0,y0,w,h,0,0,w*S,h*S);
   let D;try{D=sx.getImageData(0,0,w*S,h*S)}catch(e){return null}
   const out=sx.createImageData(w*S,h*S),A=D.data,O=out.data,WW=w*S,HH=h*S,fe=Math.max(2,Math.round(Math.min(w,h)*.12*S));
   const V=U.map(u=>[(u[0]-x0)*S,(u[1]-y0)*S,u[2]*S,u[3]*S,1/(u[4]*S*u[4]*S)]);
-  for(let y=0;y<HH;y++)for(let x=0;x<WW;x++){let dx=0,dy=0;for(const v of V){const ex=x-v[0],ey=y-v[1];const q=Math.exp(-(ex*ex+ey*ey)*v[4]);dx+=v[2]*q;dy+=v[3]*q}
+  for(let y=0;y<HH;y++)for(let x=0;x<WW;x++){let dx=0,dy=0;for(const v of V){const ex=x-v[0],ey=y-v[1];const t=(ex*ex+ey*ey)*v[4];if(t<9){const q=Math.exp(-t);dx+=v[2]*q;dy+=v[3]*q}}
    let fx=x-dx,fy=y-dy;fx=Math.max(0,Math.min(WW-1.001,fx));fy=Math.max(0,Math.min(HH-1.001,fy));const ix=fx|0,iy=fy|0,ax=fx-ix,ay=fy-iy;const i00=(iy*WW+ix)*4,i10=i00+4,i01=i00+WW*4,i11=i01+4;const o=(y*WW+x)*4;
    for(let c=0;c<4;c++)O[o+c]=(A[i00+c]*(1-ax)+A[i10+c]*ax)*(1-ay)+(A[i01+c]*(1-ax)+A[i11+c]*ax)*ay;
    const e=Math.min(x,y,WW-1-x,HH-1-y);if(e<fe)O[o+3]=O[o+3]*(e/fe)*(e/fe)}
@@ -76,6 +76,8 @@ window.KIT_EXPR={K:["mL","mR","uL","lL","bLi","bLm","bLo","bRi","bRm","bRo","eLo
  /* async: returns a cached {url,rect} or null now and calls done() when ready */
  get:function(src,file,mix,done){const k=String(file).split("/").pop()+"|"+this.key(mix);const c=this.cache[k];if(c)return c;if(c===0)return null;
   if(this.wait[k]){if(done)this.wait[k].push(done);return null}this.wait[k]=done?[done]:[];
-  const im=new Image();im.decoding="async";im.onload=()=>{let r=null;try{const m=KIT_EXPR.make(im,file,mix);if(m){r={url:m.cv.toDataURL("image/png"),rect:m.rect}}}catch(e){r=null}
-   KIT_EXPR.cache[k]=r||0;const L=KIT_EXPR.wait[k]||[];delete KIT_EXPR.wait[k];if(r)L.forEach(f=>{try{f(r)}catch(e){}})};im.onerror=()=>{KIT_EXPR.cache[k]=0;delete KIT_EXPR.wait[k]};im.src=src;return null}};
+  const im=new Image();im.decoding="async";im.onload=()=>{const fin=r=>{KIT_EXPR.cache[k]=r||0;const L=KIT_EXPR.wait[k]||[];delete KIT_EXPR.wait[k];if(r)L.forEach(f=>{try{f(r)}catch(e){}})};
+   let m=null;try{m=KIT_EXPR.make(im,file,mix)}catch(e){m=null}if(!m){fin(null);return}
+   /* blob URL, not a data: string — keeps the JS heap small when many faces are on screen */
+   try{m.cv.toBlob(b=>{fin(b?{url:URL.createObjectURL(b),rect:m.rect}:null);m.cv.width=m.cv.height=0},"image/png")}catch(e){fin(null)}};im.onerror=()=>{KIT_EXPR.cache[k]=0;delete KIT_EXPR.wait[k]};im.src=src;return null}};
 try{KIT_EXPR.load()}catch(e){}

@@ -26,7 +26,14 @@ they plug into the shared registry later. Owner then asked for EXPRESSIONS in co
   Tools: scratchpad app/pilot (p2.html, shot2.js, sheet2.py, fx2.css), served over http (canvas needs same origin).
 
 ## Open
-- Owner approval of pilot 2 → set ready=true for ill, doc, expr in jface.js.
+- ill + doc APPROVED → ready=true (be27e8ac). Expressions: pilot 3 sheets (pilot3-*.jpg, with a real in-game-size row) await approval → then set expr ready=true in jface.js.
 - Event stage / identity card full-body figures: not on this branch; when they land they must call kitFxLayers(p,file) into a .kfx/.kfxf box.
 - Safari: backdrop-filter pallor inside a stacking context may degrade to tint only (tints/lips/eyes still show). Not testable here.
 - Postponed entries (glow, grey strands, smallpox marks) — add with KIT_FACEFX.add when the owner wants them.
+
+## Tests (scratchpad ap/t1.js, t3.js; server ap/srv.py on 47211 serves dev/index.html as /t.html, items/old_index.html as /old.html)
+- 686x880@2.2 and 1180x820@2: old save (old build) loads and plays; new game; ill/doc/tat Sắc effects, poison card options, Tát act, pen travel +1;
+  layers in DOM (kexpr, kff, kslap); stage figure layer aligned after the transform fix; no page errors, no horizontal overflow.
+- Pre-existing (not this branch's code): two 404 requests for "[object Object]" when Hậu cung opens (happens with every face fx off too).
+- The machine is short of memory when other workers run browsers: Playwright pages can crash; rerun with --disable-dev-shm-usage.
+- jexpr patch: 2x supersample + blob URLs (4x/data: URLs used too much memory).
