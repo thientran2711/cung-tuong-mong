@@ -872,3 +872,31 @@ addEventListener("resize",()=>{clearTimeout(window.__ksfT);window.__ksfT=setTime
 .pstrip .pface span{white-space:nowrap!important;overflow:visible!important;text-overflow:clip!important;max-width:none!important}
 .pstrip .pgrp{min-width:0}
 `;document.head.appendChild(st)})();
+/* ---- dilemma options without risk data: the rows come from the option's own outcome branches (go/fail source): every `roll(N)`-guarded
+   apply/ap/die becomes "<effect>: <ladder word>" (gain → Được, loss → Kèm), unguarded apply → certain; never "Khó lường" or "xem ở bước sau" ---- */
+function kitBranchFx(src){const out={sure:[],gain:[],risk:[]};const fxOf=t=>{const o={};String(t).replace(/(\w+):(-?\d+)/g,(m,k,v)=>{o[k]=+v;return m});return fmt(o)};
+ const re=/if\s*\(\s*roll\(\s*(\d+)\s*\)\s*\)\s*\{?\s*([^;{}]*?)(apply\(\{([^}]*)\}\)|ap\(S,\{([^}]*)\}\)|die\()/g;let m;const seen=new Set();
+ while((m=re.exec(src))){const n=+m[1];if(m[3]==="die("){out.risk.push(`chết: ${word(n)}`);continue}const t=fxOf(m[4]||m[5]);if(!t||seen.has(t+n))continue;seen.add(t+n);
+  (/-\d/.test(t)&&!/\+\d/.test(t)?out.risk:out.gain).push(`${t}: ${word(n)}`)}
+ const flat=src.replace(re,"");String(flat).replace(/(?:^|[;{}]\s*)apply\(\{([^}]*)\}\)/g,(x,b)=>{const t=fxOf(b);if(t)out.sure.push(t);return x});return out}
+(function(){const d0=dilLine;dilLine=function(c){try{const x=c.x||"";const src=String(c.go||"")+String(c.fail||"");if(!ODDW.test(x)&&/roll\(/.test(src)){const B=kitBranchFx(src);
+  if(!B.gain.length&&!B.risk.length&&!B.sure.length){const m=src.match(/roll\(((?:[^()]|\((?:[^()]|\([^()]*\))*\))*)\)/);if(m){let n=null;try{n=Function("return ("+m[1]+")")()}catch(e){n=null}
+   if(typeof n==="number"&&isFinite(n))return d0.call(this,Object.assign({},c,{x:`${word(cl(Math.round(n),0,100))}${x?" · thành: "+x:""}`}))}}
+  if(B.gain.length||B.risk.length||B.sure.length){const fx=fmt(c.fx||{});return kitParse(["Chắc chắn",fx?"tốn: "+fx:"",[x,...B.sure,...B.gain].filter(Boolean).length?"thành: "+[x,...B.sure,...B.gain].filter(Boolean).join(", "):"",B.risk.length?"kèm: "+B.risk.join(", "):""].filter(Boolean).join(" · "))}}}catch(e){}return d0.apply(this,arguments)}})();
+/* ---- VEIL (j70 scars): a person whose scarOf(p).veil is set wears the veil over the face in EVERY portrait (tall frame, small frame) and on
+   the stage figure. Assets KIT_VEIL.por (covers the portrait image box) and KIT_VEIL.fig
+   (placed at the head of the figure's opaque box from j59: top 4–15 % of the visible body height). Missing asset -> nothing drawn. ---- */
+/* asset names: set when review/wardrobe lands its pearl-string veil (the old img/veil*.png was rejected by the owner); empty = nothing drawn */
+window.KIT_VEIL=window.KIT_VEIL||{por:"",fig:""};
+function kitVeiled(p){if(!(window.KIT_VEIL&&(KIT_VEIL.por||KIT_VEIL.fig)))return false;try{if(!p||typeof scarOf!=="function")return false;const s=scarOf(p);return !!(s&&s.veil)}catch(e){return false}}
+(function(){const p0=pcPort;pcPort=function(f,col,status){let h=p0.apply(this,arguments);try{if(f&&f.__kp&&kitVeiled(f.__kp))h=h.replace(/(<img class="kfr")/,`${KIT_VEIL.por?`<img class="kveil" src="${KIT_VEIL.por}" alt="" aria-hidden="true" onerror="this.remove()">`:""}$1`)}catch(e){}return h}})();
+(function(){const m0=mdH;mdH=function(p,cls){let h=m0.apply(this,arguments);try{if(p&&p.__kp&&kitVeiled(p.__kp))h=h.replace(/<i class="kmf"/,`${KIT_VEIL.por?`<img class="kveil" src="${KIT_VEIL.por}" alt="" aria-hidden="true" onerror="this.remove()">`:""}<i class="kmf"`)}catch(e){}return h}})();
+(function(){if(typeof renderStage!=="function")return;const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);try{const ppl=curPeople();document.querySelectorAll("#tokens .tok").forEach(b=>{const p=ppl[+b.dataset.p];const who=p&&(p.ref||null);const old=b.querySelector(".kveilf");
+  if(!who||!kitVeiled(who)){if(old)old.remove();return}const fi=b.querySelector("img.figimg");if(!fi||old||!KIT_VEIL.fig)return;const v=document.createElement("img");v.className="kveilf";v.alt="";v.src=KIT_VEIL.fig;v.onerror=()=>v.remove();b.appendChild(v);
+  const place=()=>{try{const bb=(window.J59BB&&J59BB[fi.currentSrc||fi.src])||{t:0,b:1,l:0,r:1};const R=fi.getBoundingClientRect(),B=b.getBoundingClientRect();const H=R.height*(bb.b-bb.t),W=R.width*(bb.r-bb.l);
+   v.style.cssText=`position:absolute;pointer-events:none;z-index:2;left:${R.left-B.left+R.width*bb.l+W*.3}px;width:${W*.4}px;top:${R.top-B.top+R.height*bb.t+H*.04}px;height:${H*.11}px;object-fit:contain`}catch(e){}};
+  if(fi.complete)place();else fi.addEventListener("load",place,{once:true})})}catch(e){}return r}})();
+(function(){const st=document.createElement("style");st.id="kit2-veil";st.textContent=`
+.pcp.kit .kin>img.kveil{position:absolute!important;inset:auto!important;left:14.655%!important;top:20.289%!important;width:70.691%!important;height:49.373%!important;object-fit:fill!important;z-index:1;pointer-events:none;border-radius:0!important}
+span.md.kmini.kmini>img.kveil{left:9.66%!important;top:11.75%!important;width:80.67%!important;height:80.3%!important;object-fit:fill!important;z-index:1}
+`;document.head.appendChild(st)})();
