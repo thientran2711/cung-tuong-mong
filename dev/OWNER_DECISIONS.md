@@ -42,3 +42,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - Wardrobe items REDO: outfit icons must be drawn from the game's own character outfits per tier (owner rejected the first set). Per tier 20 items = 10 hairpins + 10 outfits, for 8 consort ranks + 5 maid ranks (260 total). Collection count per life → Sổ luân hồi titles at milestones (no carry-over of items). Sample tier (Tần) first for approval.
 - Collection milestones (20/50/100/200 items in a life) also grant Phúc duyên (~+5/+10/+20/+35, once per life; lost if kiếp dở dang).
 - Every item (incl. crafted works from lessons, 4 quality tiers drawn differently: crude → exquisite) gets painted art (gpt-2-6). Items shown in a simple shared kit frame (kitItem) with background colour by grade (Thường/Tinh phẩm/Trân phẩm/Tuyệt phẩm/Ngự tứ).
+- Owner (night of 11/14): art may proceed without waiting for approval; workers self-check and redo bad images; previews saved for later viewing.
