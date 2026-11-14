@@ -271,3 +271,31 @@ N-c13-t6 rgen2idxtc v6
 N-c14-t6 SytMcnWUb8 v6
 N-c15-t6 N2FtBdW6D9 v6
 N-c16-t6 9ZQIXdcNYZ v6
+N-c17-t6 SytMMcAUb8 v6
+N-c18-t6 VXUkkbCMMU v6
+N-c19-t6 huRJJwwvqL v6
+N-c20-t6 lJ8TT03gv9 v6
+N-c21-t6 fHAPPY6CDY v6
+N-c22-t6 3zbvvxBREY v6
+N-c23-t6 w4hppQJ7EI v6
+N-c24-t6 5jV22BuKxe v6
+N-c17-t6 SytMMcAUb8 REJECT cream/gold, pink lost
+N-c20-t6 lJ8TT03gv9 REJECT cream/gold, pink lost
+N-c17-t6 Do7rjrjpcl v6c (strong colour clause)
+N-c20-t6 9ZQImtcNYZ v6c (strong colour clause)
+N-c25-t6 VXUkrrQMMU v6
+N-c26-t6 LwBcTVqswO v6
+N-c27-t6 iGqhaC93uK v6
+N-c28-t6 TdSK1jNVNR v6c (strong colour clause)
+N-c29-t6 0eg5kiwTfW v6
+N-c30-t6 lJ8TMqIgv9 v6c (strong colour clause)
+N-c31-t6 1lpzYEnr4r v6c (strong colour clause)
+N-c32-t6 lJ8TM55gv9 v6c (strong colour clause)
+N-c01-t7 4Ru8aMs9Aa v7
+N-c02-t7 gOIVXzsSXO v7
+N-c03-t7 lJ8Tdn7gv9 v7
+N-c04-t7 SytMBcZUb8 v7
+N-c05-t7 LwBcp8hswO v7
+N-c06-t7 lJ8TdmYgv9 v7
+N-c07-t7 u5nN20zQLD v7
+N-c08-t7 rgenV8Extc v7

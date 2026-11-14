@@ -1,5 +1,17 @@
 # Art progress (art worker, 11/14/2026)
 
+## CURRENT STATE (art worker #4, newest first — read this first)
+- WORKTREE/PUBLISH: work copy = scratchpad/figwork; scripts now write into scratchpad/wt-art4/img (branch art4); `bash pub3.sh "msg"` commits there,
+  rebases on origin/review/consort-art and fast-forward pushes to it (never main, never force).
+- COLOUR RULE t6–t8 (art4): t6 first tries of pale palettes (c17 blush pink, c20 lotus pink) washed to cream/gold. spec5.py now writes for t>=6
+  "robe of SATURATED <main> silk ... COLOUR RULE: robe, skirt, sleeves, cape and train are all clearly <main> silk ... large areas of plain <main> silk
+  visible; <accent> only as a small accent; gold only as thin accents ...; NOT cream, NOT beige, NOT ivory, NOT an all-gold robe". t7/t8 LAD rewritten
+  the same way (no more "golden phoenixes all over / bright gold and red"). `python3 cv3.py <tier> cXX..` prints the variable parts.
+- LÃNH CUNG prompts added: jobs N-cXX-tcold (spec5.py end: COLDO shared outfit, IDC identity = face/features/hair colour only, cold_pose(g) rotates
+  broom / bowl / lamp / hands-folded so the four figures hold different things). figs files fig-consort-cNN-tcold-aAA, tier "cold".
+- DONE: t6 all 32 (c17–c32 this session; c17 c20 c28 c30 c31 c32 with the strong colour clause). Sheet: scratchpad/sheets/tier6.jpg.
+- IN PROGRESS: t7.
+
 ## CURRENT STATE (art worker #3, newest first — read this before anything below)
 - WORKTREE/PUBLISH: work copy = scratchpad/figwork (scripts write figures into scratchpad/wt-art3/img = branch art3, NOT the shared
   checkout); `bash pub3.sh "msg"` commits there and pushes to review/consort-art (rebases on it first). pub2.sh (shared checkout) is retired.

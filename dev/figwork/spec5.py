@@ -6,16 +6,25 @@ GREEN=("green","celadon","jade","teal","mint","sage")
 RANK={4:"rank-4 consort (Tần)",5:"rank-5 consort (Phi)",6:"rank-6 noble consort (Quý phi)",7:"rank-7 imperial noble consort (Hoàng quý phi)",8:"the Empress (Hoàng hậu)"}
 LAD={4:"a layered silk robe of two or three visible layers with WIDE gold-thread embroidered borders of {mot} at collar, sleeves and hem, an embroidered cloud collar (yunjian) over the shoulders and an embroidered silk sash; elegant high chignon with gold and jade hairpins and small dangling gold bu yao tassel hairpins",
 5:"a silk brocade robe richly embroidered in gold with phoenixes and peonies, long trailing wide sleeves, a gold-embroidered waistband with hanging jade belt pendants and tassels, a sheer silk shawl; high ornate chignon with a LARGER gold headdress with dangling gold tassels and jade pins, gold earrings",
-6:"a HEAVY silk brocade robe densely embroidered in gold with phoenixes and {mot}, an embroidered pearl-edged cape/stole over the shoulders, gold-and-jade necklace, earrings and bracelets; tall chignon crowned by a BIG ornate gold headdress with pearls, gold flowers and many gold tassels",
-7:"a near-empress ceremonial robe heavily embroidered with golden phoenixes and clouds, with crimson and bright gold accents, a layered gold collar, strands of pearls across the chest, a long flowing train behind her; grand chignon with a SMALL gold phoenix crown with pearl strands and kingfisher-blue accents",
-8:"the Empress's imperial phoenix ceremonial robe, large golden phoenixes and clouds embroidered all over with bright gold and red, a jewelled layered gold collar, pearl strands, a VERY long trailing train; a FULL gold phoenix crown with pearls and kingfisher-blue inlay and pearl strands hanging at the sides; the most splendid outfit of all"}
+6:"a HEAVY silk brocade robe in SATURATED {main} silk, embroidered with phoenixes and {mot} in {main} and gold thread along the borders, an embroidered {main} pearl-edged cape/stole over the shoulders, gold-and-jade necklace, earrings and bracelets; tall chignon crowned by a BIG ornate gold headdress with pearls, gold flowers and many gold tassels",
+7:"a near-empress ceremonial robe of SATURATED {main} silk, embroidered with phoenixes and auspicious clouds in gold thread on the chest and along the borders, a layered gold collar with small crimson accents, strands of pearls across the chest, a long flowing {main} train behind her; grand chignon with a SMALL gold phoenix crown with pearl strands and kingfisher-blue accents",
+8:"the Empress's imperial phoenix ceremonial robe of SATURATED {main} silk with large phoenixes and clouds embroidered in gold thread, a jewelled layered gold collar, pearl strands, a VERY long {main} trailing train; a FULL gold phoenix crown with pearls and kingfisher-blue inlay and pearl strands hanging at the sides; the most splendid outfit of all"}
 ACC={"cherry-blossom pink and pale green":"pale green","lotus pink and celadon":"celadon"}
+WHITE=("ivory","white","moonlight")
 def outfit(t,pal,mot):
-    main=pal.split(" and ")[0]
+    main=pal.split(" and ")[0]; acc=pal.split(" and ")[1] if " and " in pal else "gold"
     neg="" if any(g in pal for g in GREEN) else ", NOT green"
     col=f"her signature colour family {pal} stays the MAIN robe colour ({main}{neg}); the robe itself is clearly {main} silk, gold only as embroidery accents, NOT a cream, beige or all-gold robe"
     if pal in ACC: col=f"her signature colour family {pal}: {main} is the MAIN robe colour (the robe is clearly {main}, NOT a green robe; {ACC[pal]} only as a small accent), gold only as embroidery accents, NOT a cream or all-gold robe"
-    return f"Outfit for all four ({RANK[t]}, clearly much richer and more splendid than the lower ranks): a NEW outfit, {LAD[t].format(mot=mot)}; {col}"
+    if t>=6:  # art4: strong colour rule (t6 first tries washed pale palettes into cream/gold; this wording fixed c17 c20 c28 c30 c31 c32)
+        m=main if not any(w in main for w in ("ivory","white")) else "luminous cool "+main+"-white"
+        notiv="" if any(w in main for w in ("ivory","white")) else ", NOT ivory"
+        if pal in ACC: neg=", NOT a green robe"
+        col=(f"COLOUR RULE: robe, skirt, sleeves, cape and train are all clearly {m} silk (her signature colour family {pal}), with large areas of plain {main} silk visible; "+
+             ("" if "gold" in acc and pal not in ACC else f"{acc if pal not in ACC else ACC[pal]} only as a small accent; ")+f"gold only as thin accents on the borders; NOT cream, NOT beige{notiv}, NOT an all-gold robe{neg}")
+        if any(w in main for w in ("ivory","white")): col=col.replace("NOT cream, NOT beige","NOT yellow, NOT beige")
+    m2=("luminous cool "+main) if any(w in main for w in ("ivory","white")) else main
+    return f"Outfit for all four ({RANK[t]}, clearly much richer and more splendid than the lower ranks): a NEW outfit, {LAD[t].format(mot=mot,main=m2).replace("SATURATED luminous","luminous")}; {col}"
 IDK=" From the identity reference lineup keep ONLY her face, facial features, hairstyle colour, signature colour family and the same four ages; do NOT copy the outfit, hair ornaments or accessories of the reference, dress her in the NEW richer outfit below."
 def rew(p,t,pal,mot):
     p=re.sub(r" Keep her exact face[^.]*lineup\.",IDK,p)
@@ -148,4 +157,38 @@ NEWAG=" Left to right: about 19, a fresh youthful young woman; about 24, still y
 for key,j in J.items():
     if key.startswith("N-") and OLDAG in j["prompt"] and (re.match(r"N-c\d\d-t",key) or key.startswith("N-look")):
         j["prompt"]=j["prompt"].replace(OLDAG,NEWAG)
+# ---- LÃNH CUNG (cold palace) tier "cold": ONE shared plain outfit for every consort (owner 11/14) ----
+COLDO=("Outfit for all four (the cold palace, ONE plain outfit identical for everyone): a plain UNDYED pale grey-white coarse linen robe with a simple "
+ "cross collar and a plain linen sash, NO embroidery, NO pattern, NO colour, NO jewellery, NO gold; hair in a simple neat low bun held by ONE plain wooden hairpin, "
+ "no flowers, no ornaments; clean, neat and tidy, never ragged, torn, dirty or poor-looking; she is still very beautiful, graceful and dignified")
+IDC=(" From the identity reference lineup keep ONLY her face, facial features and hair colour; do NOT copy the reference's ages, poses, outfit, colours, "
+ "hair ornaments or accessories; use the NEW ages, the NEW plain outfit and the NEW poses below.")
+# each list ordered [broom, bowl, lamp, other]; rotation g,g+1,g+2,g+3 gives four different props per lineup
+C19=["holding the long wooden handle of a bamboo broom upright at her side with one hand, the other hand resting at her waist, head tilted slightly",
+ "holding a plain wooden bowl before her chest with both hands, looking down at it with a gentle face",
+ "holding a small plain clay oil lamp before her with both hands, its tiny flame lit",
+ "one hand lightly touching the plain wooden pin in her bun, the other hand at her side"]
+C24=["body turned three-quarters to the right, holding the long wooden handle of a broom upright beside her",
+ "holding a plain wooden bowl before her with both hands, a slight turn of the body",
+ "holding a small plain clay oil lamp in one hand, the other hand shielding the flame",
+ "holding a folded plain linen cloth over one forearm, hands together"]
+C32=["holding the long wooden handle of a broom upright at her side, the other hand at her waist",
+ "holding a plain wooden bowl in one hand, the other hand lightly beneath it",
+ "holding a small plain clay oil lamp before her with both hands",
+ "hands folded calmly before her waist"]
+C48=["holding the long wooden handle of a broom upright at her side with one hand",
+ "holding a plain wooden bowl before her with both hands",
+ "holding a small plain clay oil lamp in one hand, the other hand beneath it",
+ "hands loosely folded inside her plain sleeves before her, serene"]
+def cold_pose(g):
+    ps=[C19[g%4],C24[(g+1)%4],C32[(g+2)%4],C48[(g+3)%4]]
+    return ("Poses (NEW, NOT the reference's poses; calm standing poses; a different simple hand gesture for each figure, same person), left to right: "
+            f"about 19, youthful, a gentle quiet gesture: {ps[0]}; about 24, composed: {ps[1]}; about 32, poised: {ps[2]}; about 48, serene and calm: {ps[3]}; "+STILL)
+for cid,tr,mi in CONS:
+    g=int(cid[1:])-1; b=J[f"N-{cid}-t5"]; p=b["prompt"]
+    p=p.replace(IDP,IDC)
+    i=p.index(" Outfit for all four"); k=p.index(". Poses (NEW"); p=p[:i]+" "+COLDO+". "+p[k+2:]
+    a=p.index("Poses (NEW"); e=p.index(". Eyes soft"); p=p[:a]+cold_pose(g)+p[e:]
+    figs=[dict(f,file=f["file"].replace("-t5-","-tcold-"),tier="cold",palette="undyed grey-white linen") for f in b["figs"]]
+    J[f"N-{cid}-tcold"]={"prompt":p,"ref":b["ref"],"style":b["style"],"figs":figs,"pal":"undyed grey-white linen","pose":cold_pose(g)}
 json.dump(J,open("jobs.json","w"),indent=0)
