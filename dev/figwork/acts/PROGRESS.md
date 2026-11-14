@@ -11,7 +11,7 @@
 
 - Session 2 (11/14): info redo nguy-hiem + tai-mat (dark), thai-hau (no characters) and the 14 remaining info panels -> all 30 keys in img/INFO.json.
   Arts/virtues: img/art-{cam,ky,thi,hoa,vu,y,theu,nau}.webp, img/vir-{cong,dung,ngon,hanh}.webp (bright, no people).
-  Book textures: img/book-{cover,left,right,end}.webp (384x506, whole image resized, NOT cropped, so the red borders stay;
+  Book textures: img/book-{cover,left,right,end}.webp (768x1024, the whole original image, NOT cropped, so the red borders stay; republished at full size 11/14 for @2);
   left page has the stitching on its right edge, right/end pages on the left; end page has an empty seal box lower right).
   Ids in dev/figwork/arts/gens.txt (key = output basename, run fetch.py with PFX= GENS=../arts/gens.txt).
 

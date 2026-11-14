@@ -4,7 +4,7 @@ set -e
 R=$(cd "$(dirname "$0")/../.." && pwd); D=$R/dev
 python3 $D/build/assemble.py
 V=$(date +%s)
-FILES=$(cd $R && ls img/*.webp audio/*.mp3 icons/*.png | grep -v -E "img/(fig-|por-|map-fest-|_)" | sed 's/.*/"&"/' | paste -sd,)
+FILES=$(cd $R && ls img/*.webp img/item512/*.webp audio/*.mp3 icons/*.png 2>/dev/null | grep -v -E "img/(fig-|por-|map-fest-|_)" | sed 's/.*/"&"/' | paste -sd,)
 cat > $R/sw.js <<W
 /* Offline cache for Cung Tường Mộng; version bumps on every build. */
 const C='ctm-$V';

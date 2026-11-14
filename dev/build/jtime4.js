@@ -14,7 +14,7 @@ function b4NoonGarden(){const sea=SEASON[S.month-1];return sea==="Hạ"?3:sea===
 /* NPC scheming pass: twice a day as before (not on entering trưa) */
 function b4NpcActs(){return (S.buoi||0)!==1}
 /* light overlay: one colour per buổi, shifting a little with each khắc spent (t = used/4). Also window.B4LIGHT for the kit / scene layer. */
-function b4Light(b,u){const t=Math.max(0,Math.min(4,u||0))/4,L=(a,z)=>+(a+(z-a)*t).toFixed(3),C=(x,y)=>Math.round(x+(y-x)*t);
+function b4Light(b,u,k){k=k==null?1:k;const t=Math.max(0,Math.min(4,u||0))/4,L=(a,z)=>+((a+(z-a)*t)*k).toFixed(3),C=(x,y)=>Math.round(x+(y-x)*t);
  if(b===0)return `rgba(${C(160,200)},${C(195,215)},255,${L(.2,.1)})`;           /* sáng: bình minh xanh nhạt dần */
  if(b===1)return `rgba(255,${C(248,236)},${C(225,200)},${L(.05,.1)})`;          /* trưa: nắng gắt, gần như trắng */
  if(b===2)return `rgba(255,${C(210,125)},${C(120,50)},${L(.13,.25)})`;           /* chiều: vàng → hoàng hôn cam */
