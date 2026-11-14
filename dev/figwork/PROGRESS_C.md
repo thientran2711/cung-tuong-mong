@@ -130,3 +130,7 @@ vào fig: chỉ RGB trong mặt nạ elip (giữ alpha gốc), căn bằng phase
 - Nốt ruồi còn sót trên fig gốc: m13-t1 a18/a26, m13-t2 a18/a26, m26-t1 a18 → vá bằng cw/mole.py --fix.
 - Lưu ý: m08-t6, m14-t3, m29-t7, m49-t2 a36/a51 đi qua 2 lần làm tuổi (lưới thử test1 rồi lưới Mxx) — đã xem, vẫn ~48.
 - Tín dụng: 53 lưới tuổi + 27 lưới tóc + 6 lưới trán = 86 × 175 ≈ 15.0k (+ tải lên miễn phí).
+- Đã gộp origin/main (8062e0da): FIGURES-servants.json 2944 mục (2112 nhánh + 832 mới của main), 16 mục cung nữ thường m13/m26/m39/m52 lấy bản main, đủ tệp, không trùng.
+- Tấm xem: dev/figwork/sheets/C_age1114_A.jpg, C_age1114_B.jpg (por 19/24/32/48), C_fh1114.jpg (trán t7/t6 sau sửa). cutcheck: không tăng so với bản trước (t8 cao sẵn do tua ngọc).
+- Còn lại: không có việc chặn. (Ghi chú: m45-t1 a36 hoa điền mờ từ bản gốc — chưa sửa.)
+SẴN SÀNG KIỂM LẠI.
