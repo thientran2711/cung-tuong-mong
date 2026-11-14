@@ -98,6 +98,25 @@
   `python3 mjobs.py JID`. `bash addbg.sh "jid..." "bg..."` appends "jid gen bg" lines to bg.txt (gen looked up in gens.txt, same order).
   mproc.py takes ~2 min per batch (urls.py scans transcripts): run it in the background.
 
+### STATUS (maid-art part A, end of session 5)
+- DONE part A: ALL m01–m52 x m0/m2/m3/m4 (208 lineups). Session 5 added m45–m52 (32 lineups), sheets dev/figwork/sheets/A_b22.jpg (m45,m46),
+  A_b23 (m47,m48), A_b24 (m49,m50), A_b25 (m51,m52). mjobs AGES now ends "All four figures have the same solid dark black-brown hair
+  colour." (from m49 on). New gens whose a51 still came out grey were fixed at once with the hair-only edit: m48-m2/m3/m4, m49-m0/m2.
+- AGE-48 HAIR FIXES DONE (hair-only edit, exact prompt in the session-4 block; check = hz.py head crops + ck.py layout diff vs the
+  original gen, values ~1–3.5 = unchanged composition): m01–m16 and m18–m20 all four tiers (m16-m2 left as is: brown, no grey),
+  m09-m3, m07-m4, m25-m0, m25-m3, m30-m0/m2/m3, m32-m2, m32-m3. Stubborn ones needed a 2nd/3rd pass (m48-m2, m14-m3, m16-m0, m16-m3)
+  with the stronger prompt: "...Only recolour the hair of the RIGHTMOST oldest lady: her hair at the temples and the sides of her
+  head is still grey-silver; paint those grey locks and the whole hairdo solid DARK black-brown, exactly the same dark colour as the
+  hair of the leftmost young woman, so that no grey or silver hair remains at all. Also make sure the other three figures have the
+  same dark hair. No other changes. No text." m14-m3 final edit also asked for "richer, deeper dark slate-blue" robes (3rd edit had
+  faded them). Sheets A_fix48b (m01–m04), A_fix48c (m05–m08), A_fix48d (m09–m12), A_fix48e (m13–m16), A_fix48f (m18–m20),
+  A_fix48g (m25, m30, m32). m29-m0 checked: light brown, left as is.
+- Known nit (old, not touched): m01-m4 cap is a tall black cap without visible wings.
+- No cutcheck.py exists on main (checked), so none was run; bg removal + por crops redone by mproc for every edited lineup.
+- NEXT: part A is complete. A final zoom.py sweep of m21–m44 a51 for leftover grey temples would be the only optional follow-up.
+- Session-5 tools: ck.py old:new... (mean abs layout diff between original gen and its edit). Credits this session: 123 gens x 270
+  + 116 bg x 3 = ~33.6k.
+
 ### STATUS (maid-art part A, end of session 4)
 - DONE part A: m01–m44 x m0/m2/m3/m4 (176 lineups). Session 4 added m33–m44 (48 lineups), sheets dev/figwork/sheets/A_b16.jpg (m33,m34)
   .. A_b21.jpg (m43,m44). Checked: ~1:7, faces match m1, m0 embroidered + silver tram, m3 dark non-red, m4 red + crane + winged cap.
