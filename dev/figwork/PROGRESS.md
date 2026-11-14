@@ -1,5 +1,21 @@
 # Art progress (art worker, 11/14/2026)
 
+## KIT REVIEW FAIL 11/14 (dev/review/consort-art.md) — art10 round 2, STATUS + TODO (read first)
+- DONE: (1) merged origin/main (65a75ed): every non-consort fig/por = main (no-moles versions), consort fig/por = branch,
+  FIGURES.json hand-merged (dev: scratch mergefig.py: main records + branch consort records). Non-consort diff vs main = 0.
+  (2) a51 ageing + distinct huadian t1: c01-c17 t1 edited (gens11.txt / bg11.txt), processed with run10.py + fapick.py + porcrop.
+  Sheet dev/figwork/sheets/art10/age_t1_c01-c17_done.jpg (pairs a18|a51): a51 now ~48 (smile lines, nasolabial, dark hair), t1 = plain dot.
+- TODO (same method, one gpt-2-6 edit per lineup, prompt = `python3 -I mk11.py <tier> [cids]` (prints "jid srcgen | prompt";
+  t1-t3 also repaint the huadian, t4-t8 keep it):
+  * t1 c18-c32; t2 all 32; t3 all 32  (HU in mk11.py: t1 plain round dot / t2 flat one-colour motif silhouette / t3 motif with
+    darker outline + pale centre + two flanking dots -> t1-t3 now clearly distinct; t4+ unchanged).
+  * a51 ageing on t4-t8: per age sheet (`python3 -I agesheet.py out.jpg <tier>`) almost every a51 looks 18-25; already aged enough:
+    t5 c28 c29 c30, t8 c06 c32. Edit the rest.
+  * Prompt notes: v1 "two or three silver strands" made hair grey -> v2 (mk11) says hair stays fully DARK, NOT greying: works (pilot c05/c12 t1).
+  * Pipeline per batch: gens -> creations_wait -> images_remove_background -> write "jid gen bg" (bgNN.txt) + "bg url" lines,
+    add urls to urls.json, curl bg/<bg>.png, `python3 -I run10.py bgNN.txt`, then fapick.py on cutcheck>=4, porcrop.py, agesheet check.
+  * After all: re-check cutcheck, PROGRESS, push, report SẴN SÀNG KIỂM LẠI. Remaining cost ~ 223 edits x 270 = ~60k credits.
+
 ## CURRENT STATE (art worker #10, 11/14 — newest, read this first)
 - Took over #9's uncommitted output (origin/wip/consort-art, 1642 files) and checked EVERY changed image: per-identity face sheets
   (rows = 4 ages, cols = t1..t8, `python3 -I idsheet2.py out.jpg cXX`), full-figure tier sheets on dark green (`tierfull.py`),
