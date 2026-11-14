@@ -70,8 +70,8 @@ function j95cCap(){const live=p=>p===S?!!S&&!S.out&&!S.dead:!!p&&p.alive&&!p.out
 /* a turn-of-buổi act placed at the start of the buổi, then overtaken before the news was read (she is confined / banished right
    after): the news line is withdrawn so nothing on screen says she is where the record no longer has her */
 function j95cUnsay(id,key,kh){try{for(let i=J95B.bind.length-1;i>=0;i--){const b=J95B.bind[i];if(!b.next||b.id!==id||b.key!==key||b.kh!==kh)continue;J95B.bind.splice(i,1);j95cStrip(b.why)}}catch(e){j95cErr("unsay",e)}}
-function j95cStrip(why){const w=String(why||"").slice(0,60);if(!w)return 0;let n=0;
- for(const m of Q){if(!m||typeof m.h!=="string")continue;const j=m.h.indexOf(w);if(j<0)continue;const re=/[.!?…](\s|<|$)/g;re.lastIndex=j+w.length-1;const mm=re.exec(m.h);const e=mm?mm.index+1:m.h.length;m.h=m.h.slice(0,j)+m.h.slice(e).replace(/^\s+/,"");n++;J95C.stat.unsay=(J95C.stat.unsay||0)+1}return n}
+function j95cStrip(why,list){const w=String(why||"").slice(0,60);if(!w)return 0;let n=0;
+ for(const m of list||Q){if(!m||typeof m.h!=="string")continue;const j=m.h.indexOf(w);if(j<0)continue;const re=/[.!?…](\s|<|$)/g;re.lastIndex=j+w.length-1;const mm=re.exec(m.h);const e=mm?mm.index+1:m.h.length;m.h=m.h.slice(0,j)+m.h.slice(e).replace(/^\s+/,"");n++;J95C.stat.unsay=(J95C.stat.unsay||0)+1}return n}
 function j95cNext(){const P=J95B.next;if(!P||!P.length)return;J95B.next=[];if(!j95cCur())return;const R=S.roster;const used={};let n=0;
  for(const x of P){const e=R.P[x.id];if(!e){J95C.later.push(x.why);continue}if(x.id[0]==="v"){const v=RV(+x.id.slice(1));if(!v||!v.alive||v.out||v.confined){J95C.later.push(x.why);continue}}
   let kh=used[x.id]||0;/* the first khắc of the coming buổi (endTurn resets the khắc count only after planning) */while(kh<4&&(e[kh][1]==="tryst"||e[kh][1]==="meet"))kh++;if(kh>=4){J95C.later.push(x.why);continue}used[x.id]=kh+1;
@@ -84,4 +84,11 @@ function j95cNext(){const P=J95B.next;if(!P||!P.length)return;J95B.next=[];if(!j
   /* (any khắc of the bind: endTurn resets the khắc count only after this report is written) */
   if(j95cCur()&&R.P[id]){if(J95B.bind.some(b=>b.next&&b.id===id&&b.key===R.key&&b.k!==k&&R.P[id][b.kh]&&R.P[id][b.kh][0]===b.k)){J95C.stat.next2Drop=(J95C.stat.next2Drop||0)+1;return"seen"}}}catch(e){j95cErr("putPast2",e)}
   return o.apply(this,arguments)}})();
+/* a news card about to be shown that would put her, at this very khắc, somewhere else than the turn-of-buổi act already told for it
+   ("Tai mắt kể: X đứng đợi ngự giá ở ngự hoa viên" then "X đút lót Kính sự phòng"): that sentence is not told */
+function j95cClash(m){if(!m||m.pid||m.__c95||typeof m.h!=="string"||!j95cCur())return 0;m.__c95=1;const R=S.roster,kh=j95kh();let n=0;
+ try{for(const x of j95bScan(m.h)){const b=J95B.bind.find(b=>b.next&&b.id===x.id&&b.key===R.key&&b.kh===kh&&b.k!==x.k);if(!b||!R.P[x.id]||R.P[x.id][kh][0]!==b.k)continue;
+   n+=j95cStrip(x.why,[m])}}catch(e){j95cErr("clash",e)}if(n)J95C.stat.clash=(J95C.stat.clash||0)+n;return n}
+(function(){const bp=j95bPresent;j95bPresent=function(m){try{j95cClash(m)}catch(e){}return bp.apply(this,arguments)};
+ const sm=showModal;showModal=function(){try{while(Q.length&&j95cClash(Q[0])&&!j95bStrip(Q[0].h).replace(/[\s.,;:!?…()]/g,"")&&!(Q[0].opts&&Q[0].opts.length))Q.shift()}catch(e){}return sm.apply(this,arguments)}})();
 window.__j95c=()=>({stat:J95C.stat,errs:J95C.errs,j95fix:J95.stat.fix||0});
