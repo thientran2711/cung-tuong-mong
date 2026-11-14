@@ -87,10 +87,10 @@ function k61InitNew(){if(!S)return;S.known={me:3};S.nkn={me:{}};S.kRids=rivals.m
 const K61U={};["f","m","k","fig-f","fig-m","fig-k"].forEach(g=>{try{const im=new Image();im.onload=()=>{K61U[g]=1;try{if(S)render()}catch(e){}};im.src=`img/kit/unknown-${g}.webp`}catch(e){}});
 function k61G(e){const k=k61Kind(e);return k==="kid"?"k":["emp","man","eun","tq","phys","off"].includes(k)?"m":"f"}
 function k61Sil(p){const e=k61PortEnt(p);if(!e||isKnown61(e))return p;const g=k61G(e);
- return Object.assign({},p,{src:K61U[g]?`img/kit/unknown-${g}.webp`:"",ini:"?",col:"#8a8a8a",rw:p.rw?k61Short(e):p.rw,stranger:1})}
+ return Object.assign({},p,{src:K61U[g]?`img/kit/unknown-${g}.webp`:"",ini:"?",col:"#8a8a8a",rw:p.rw?(k61Named(e)?k61Lab(e):k61Short(e)):p.rw,stranger:1})}
 (function(){const c0=pcPort;pcPort=function(f,col,status){const g=k61Sil(f||{});return c0.call(this,g,g.stranger?g.col:col,status)}})();
 (function(){const m0=mdH;mdH=function(p,cls){return m0.call(this,k61Sil(p||{}),cls)}})();
-(function(){const p0=pframe;pframe=function(f,col){const g=k61Sil(f||{});return p0.call(this,g,g.stranger?g.col:col)}})();
+(function(){const p0=pframe;pframe=function(f,col){const g=k61Sil(f||{});return k61Pass(g,()=>p0.call(this,g,g.stranger?g.col:col))}})();
 /* full-body figures on place screens: none for strangers (the silhouette token stays) */
 (function(){if(typeof figFor!=="function")return;const f0=figFor;figFor=function(p,kind){try{if(kind!=="por"&&p&&S){const f=p===S?null:p.kind?pFaceOf(p):null;const e=p===S?null:f?k61PortEnt(f):(typeof p==="object"&&!p.ref?p:null);if(e&&!isKnown61(e)){const g="fig-"+k61G(e);return K61U[g]?`img/kit/unknown-${g}.webp`:""}}}catch(e){}return f0.apply(this,arguments)}})();
 /* ---- the person card: a stranger shows only what is visible, and meeting acts ---- */
@@ -107,13 +107,13 @@ function k61StChip(st){return chip(`${K61STN[st]} · ${st}/3`,st>=3?"ok":"")}
   const chips=[k61StChip(st)].concat((o.chips||[]).filter(c=>c&&/class="chip loc/.test(c)));
   const how=st===0?"Chào hỏi khi gặp mặt, hỏi người hầu, hoặc sai tai mắt dò la thì mới biết.":"Đã thấy mặt, chưa biết tên: hỏi danh tính khi gặp, hỏi người hầu hoặc dò la.";
   return c0.call(this,Object.assign({},o,{name:"???",rank:k61Cap(k61Desc(e)),ghen:null,lines:[`<span class="past">${K61WHY}. ${how}</span>`],chips,groups:G,note:o.note&&pop?o.note:"",empty:o.empty}))}
- if(e&&st<=2&&e!==S)return c0.call(this,Object.assign({},o,{ghen:null,lines:[`<span class="past">Mới biết tên: tính nết, sủng ái, quan hệ chưa rõ. Trò chuyện thêm hoặc dò la để quen biết.</span>`],chips:[k61StChip(2)].concat((o.chips||[]).filter(c=>c&&/class="chip loc/.test(c)))}));
+ if(e&&st<=2&&e!==S)return k61Pass(o.f,()=>c0.call(this,Object.assign({},o,{ghen:null,lines:[`<span class="past">Mới biết tên: tính nết, sủng ái, quan hệ chưa rõ. Trò chuyện thêm hoặc dò la để quen biết.</span>`],chips:[k61StChip(2)].concat((o.chips||[]).filter(c=>c&&/class="chip loc/.test(c)))})));
  if(e&&e!==S&&S&&S.known&&e!==S.maid&&!(S.staff||[]).includes(e)&&!(S.kids||[]).includes(e))return c0.call(this,Object.assign({},o,{chips:[k61StChip(3)].concat(o.chips||[])}))}catch(x){console.error(x)}return c0.apply(this,arguments)}})();
 /* face strips: the label is the descriptor */
-(function(){const p0=pager;pager=function(key,items,mk){try{items=items.map(t=>{const e=t&&k61PortEnt(t.f);return e&&!k61Named(e)?Object.assign({},t,{name:"???"}):t})}catch(x){}return p0.call(this,key,items,mk)}})();
+(function(){const p0=pager;pager=function(key,items,mk){try{items=items.map(t=>{const e=t&&k61PortEnt(t.f);return e&&!k61Named(e)?Object.assign({},t,{name:isKnown61(e)?"???":"Người lạ"}):t})}catch(x){}return p0.call(this,key,items,mk)}})();
 /* place screen tags */
 function k61VisEnt(p){if(!p||p.kind==="chest")return null;try{return k61PortEnt(pFaceOf(p))}catch(e){return null}}
-(function(){const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);try{const ppl=curPeople();document.querySelectorAll("#tokens .tok").forEach(b=>{const p=ppl[+b.dataset.p];const e=k61VisEnt(p);if(e&&!k61Named(e)){const t=b.querySelector(".tag");if(t)t.textContent="???"}})}catch(e){}return r}})();
+(function(){const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);try{const ppl=curPeople();document.querySelectorAll("#tokens .tok").forEach(b=>{const p=ppl[+b.dataset.p];const e=k61VisEnt(p);if(e&&!k61Named(e)){const t=b.querySelector(".tag");if(t)t.textContent=isKnown61(e)?"???":"Người lạ"}else if(e&&k61NoFace(e)){const t=b.querySelector(".tag");if(t&&t.textContent==="Người lạ"&&p.name)t.textContent=p.name}})}catch(e){}return r}})();
 /* talking face to face: a stranger first; greeting (1 khắc, sure) reveals both ways and leaves the talk open */
 let K61RAW=false;(function(){const d0=directActs;directActs=function(){K61RAW=true;try{return d0.apply(this,arguments)}finally{K61RAW=false}}})();
 (function(){const t0=talkOpts;talkOpts=function(p){const A=t0.apply(this,arguments);if(K61RAW)return A;try{const e=k61VisEnt(p);const st=e?k61St(e):3;if(e&&st<2){const k=k61Kind(e);const big=k==="emp"||k==="th";const riv=(rivals||[]).includes(e);
@@ -212,3 +212,15 @@ function k61SilChip(k,n){const L=k61SexAt(k);while(L.length<n)L.push("f");const 
 /* kit names for strangers: j79's kitName/kitPersonLine draw "<title> ???" (rank colour kept: the dress shows the rank) */
 setTimeout(()=>{try{if(typeof kitName!=="function")return;const n0=kitName;kitName=function(p,o){try{if(p&&p!==S&&S&&S.known){const e=k61PortEnt(p)||p;
   if(e&&k61All().includes(e)&&!k61Named(e)){const t=o&&o.noTitle?"":k61MaskT(e);return `<b class="kname" style="--rc:${typeof kitPersonCol==="function"?kitPersonCol(e):"#8a7350"}">${t?`<span class="kti">${k61Cap(t)}</span> `:""}???</b>`}}}catch(x){}return n0.apply(this,arguments)}}catch(e){}},0);
+/* ---- kit review (FAIL 11/14): a NAME she knows is never hidden. Stage 2 "Biết tên" and the public figures (Hoàng thượng, Thái hậu,
+   Hoàng hậu) whose face she has not seen yet: grey silhouette in the grey stone frame (j60), but the name stays (card name, strip,
+   stage tag, kitName, podium) and the frame label is the title (tước) instead of "Người lạ". Only stage 0 reads "Người lạ" (j60) or
+   "<tước> ???" (kitName above). j60 is not edited: its "Người lạ" checks (pcard, pframe) are passed once for these people. ---- */
+function k61NoFace(e){try{return !!e&&!!S&&e!==S&&!!S.known&&k61Named(e)&&!isKnown61(e)}catch(x){return false}}
+function k61Lab(e){const k=k61Kind(e);return k==="tq"?"Tổng quản":k61Cap(k61MaskT(e))}
+let K61PASS=null;
+function k61Pass(f,fn){const kp=f&&f.__kp;const e=f&&(k61PortEnt(f)||kp);if(!kp||!k61NoFace(e))return fn();K61PASS=kp;try{return fn()}finally{K61PASS=null}}
+(function(){const i0=kitIsKnown;kitIsKnown=function(p){if(K61PASS&&p===K61PASS){K61PASS=null;return true}return i0.apply(this,arguments)}})();
+(function(){const d0=kitDecor;kitDecor=function(f){const d=d0.apply(this,arguments);try{if(d&&!d.known&&f){const e=k61PortEnt(f)||f.__kp;if(k61NoFace(e))d.label=k61Lab(e)}}catch(x){}return d}})();
+/* podium (j90): a stranger by name stands as a silhouette but is called by name */
+setTimeout(()=>{try{if(typeof kpodName!=="function")return;const k0=kpodName;kpodName=function(p){try{if(p&&p!==S&&k61NoFace(k61PortEnt(p)||p))return kitName(p)}catch(x){}return k0.apply(this,arguments)}}catch(e){}},0);
