@@ -48,3 +48,4 @@ Mẻ A2 (thợ m01–m26): t2 m23–m26 (t2 m01–m26 XONG) + t3 m01–m04. 13 l
 ## C-B (thợ m27–m52): mẻ và tín dụng
 Mẻ B1: t2 m27–m34 (vẽ lại m27–m33, đạo cụ khác loại mỗi tuổi). 8 lineup, tín dụng 8×273 = 2184.
 Mẻ B2: t2 m35–m42 (8 lineup + 1 vẽ lại m40 vì hoa điền to). Tín dụng 9×273 = 2457.
+Mẻ B3: t2 m43–m50 (8 lineup + 1 vẽ lại m47 vì tay áo hơi trong). Tín dụng 9×273 = 2457.
