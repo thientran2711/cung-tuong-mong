@@ -58,9 +58,9 @@ function kitRoleOfFace(f){const rk=String(f.rk||""),rw=String(f.rw||"");let m;
 function kitDecor(f){f=f||{};let r=f.__kr||(f.__kp?personRoleRank(f.__kp):null);if(!r){const x=kitRoleOfFace(f);r=Object.assign({origin:null,sex:(KIT_ROLES[x.role]||KIT_ROLES.other).sex,kid:false},x)}
  const known=f.__kp?kitIsKnown(f.__kp):true;const role=known?r.role:"unknown";let frame,bg,badge=null,emb=null,col,tint=null;
  const rank=r.rank;
- if(role==="player"||role==="consort"){frame=`frame-${role}-${rank}`;bg=`bg-consort-${rank}`;badge=`gem-${rank}`;col=kitRankCol(rank);if(role==="player"&&r.origin)emb=`origin-${r.origin}`}
- else if(role==="eunuch"){const r=cl(rank||0,0,3);frame=r>=3?"frame-eunuch-3":"frame-eunuch";bg=r>=3?"bg-eunuch-3":"bg-eunuch";badge=`tok-e${r}`;col=tint=kitServCol("eunuch",r)}
- else if(role==="maid"||role==="mama"){const r=cl(rank||0,0,4);frame=`frame-${role}`;bg=`bg-${role}`;badge=`tok-m${r}`;col=tint=kitServCol("maid",r)}
+ if(role==="player"||role==="consort"){frame=`frame-consort-${rank}`;/* her frame = the consort frame of her rank (owner 11/14); the stage marks her */bg=`bg-consort-${rank}`;badge=`gem-${rank}`;col=kitRankCol(rank);if(role==="player"&&r.origin)emb=`origin-${r.origin}`}
+ else if(role==="eunuch"){const r=cl(rank||0,0,3);frame=`frame-eunuch-${r}`;bg=r>=3?"bg-eunuch-3":"bg-eunuch";badge=`tok-e${r}`;col=tint=kitServCol("eunuch",r)}
+ else if(role==="maid"||role==="mama"){const r=cl(rank||0,0,4);frame=`frame-${role}-${r}`;bg=`bg-${role}`;badge=`tok-m${r}`;col=tint=kitServCol("maid",r)}
  else if(role==="cold"){frame="frame-cold";bg="bg-cold";col=KIT_COLD_COL}
  else if(role==="unknown"){frame="frame-unknown";bg="bg-unknown";badge="tok-unknown";col="#9aa0a6"}
  else if(role==="other"){frame="frame-man";bg="bg-default";col=f.col||"#c9a24a"}
@@ -68,7 +68,7 @@ function kitDecor(f){f=f||{};let r=f.__kr||(f.__kp?personRoleRank(f.__kp):null);
  const metal=(KIT_ROLES[role]||{}).metal||(rank>=4?"#d9b25f":rank>=2?"#c9ccd2":"#b08a5a");
  const sex=r.kid?"k":r.sex==="m"?"m":"f";
  return{role,realRole:r.role,rank,origin:r.origin,known,frame:KIT_DIR+frame+".webp",bg:KIT_DIR+bg+".webp",badge:badge&&KIT_DIR+badge+".webp",emb:emb&&KIT_DIR+emb+".webp",col,metal,
-  tint,unknownSrc:KIT_DIR+`unknown-${sex}.webp`,label:known?"":"Người lạ"}}
+  tint,embName:r.origin&&typeof ORIGINS!=="undefined"?((ORIGINS.find(o=>o.k===r.origin)||{}).n||""):"",unknownSrc:KIT_DIR+`unknown-${sex}.webp`,label:known?"":"Người lạ"}}
 /* attach the person to every face object the constructors build */
 (function(){const W=(name,who,hint)=>{const f0=window[name];if(typeof f0!=="function")return;window[name]=function(){const r=f0.apply(this,arguments);try{if(r&&typeof r==="object"){const p=who.apply(this,arguments);if(p&&!r.__kp)r.__kp=p;if(!r.__kr)r.__kr=personRoleRank(p,hint)}}catch(e){}return r}};
  W("pv",v=>v);W("pMe",()=>S);W("pEmp",()=>S.emp,"emp");W("pTH",()=>S.thO||{kind:"th"},"thaihau");W("pMaid",()=>S.maid,"maid");W("pDoc",()=>(S.court&&S.court.ty)||null,"physician");
@@ -82,7 +82,7 @@ function kitFace(p){try{if(!p)return{src:"",ini:"?"};if(p===S)return pMe();if(p=
  const f={src:"",ini:String(p.name||"?").split(" ").pop()[0]||"?",col:"#8a7a6a"};f.__kp=p;f.__kr=personRoleRank(p);return f}
 /* ONE helper: size "lg" = the tall 3:4 frame (pframe), "big"/"sm"/"xs"/"" = round avatar */
 function kitPortrait(p,o){o=o||{};const f=kitFace(p);return o.size==="lg"||o.size==="frame"?pframe(f):mdH(f,o.size||"")}
-/* the tall frame: the decorated 3:4 stage (.kin) sits centred inside the existing box, so a box clamped by max-height never squashes the frame */
+/* the tall frame: one picture per frame (550x1037: every frame has the SAME portrait opening 384x506 at (83,214); crests, side dragons and the pendant + tassel stay inside the shared canvas); crests, side dragons and the pendant + tassel stay inside the shared canvas); crests, side dragons and the pendant + tassel stay inside the shared canvas); crests, side dragons and the pendant + tassel stay inside the shared canvas); crests, side dragons and the pendant + tassel stay inside the shared canvas); the box is 480 canvas units wide and as tall as the canvas, the stage (.kin) is scaled by the opening (box width / 480) and centred, so every opening is identical; side ornaments may reach past the box edges, crest and tassel are inside its height */
 (function(){const p0=pcPort;pcPort=function(f,col,status){f=f||{};let d;try{d=kitDecor(f)}catch(e){return p0.apply(this,arguments)}
  const g=d.known?f:Object.assign({},f,{src:d.unknownSrc,ini:"",rk:"",w:null});let h=p0.call(this,g,d.known?col:"#9aa0a6",status);
  h=h.replace(/<img class="pcb2"[^>]*>/,"").replace('class="pcp',`class="pcp kit kr-${d.role}`).replace(/style="--c:([^"]*)"/,`style="--c:$1;--kc:${d.col};--km:${d.metal}"`);
@@ -90,7 +90,7 @@ function kitPortrait(p,o){o=o||{};const f=kitFace(p);return o.size==="lg"||o.siz
  /* portrait crop = the live por framing the owner chose (11/14): whole head, face large, cut below the chest; the por sits 9 % lower than the
     opening top so frame crests never cover the hair (brocade shows as headroom) */
  inner=inner.replace(/<img src=/,'<img class="kpor" src=');
- const deco=`<img class="kfr" src="${d.frame}" alt="" aria-hidden="true" onerror="this.remove()">`+(d.badge?`<img class="kgem" src="${d.badge}" alt="" aria-hidden="true" onerror="this.remove()">`:"")+(d.emb?`<img class="kemb" src="${d.emb}" alt="" aria-hidden="true" onerror="this.remove()">`:"")+(d.label?`<em class="klab">${d.label}</em>`:"");
+ const deco=`<img class="kfr" src="${d.frame}" alt="" aria-hidden="true" onerror="this.remove()">`+(d.badge?`<img class="kgem" src="${d.badge}" alt="" aria-hidden="true" onerror="this.remove()">`:"")+(d.emb?`<img class="kemb" src="${d.emb}" alt="${d.embName}" title="Xuất thân: ${d.embName}" onerror="this.remove()">`:"")+(d.label?`<em class="klab">${d.label}</em>`:"");
  return h.slice(0,i+1)+`<span class="kin"><span class="kbg" style="background-image:${d.tint?`linear-gradient(${d.tint}38,${d.tint}38),`:""}url(${d.bg})"></span>${inner}${deco}</span>${pcs}</div>`}})();
 /* pframe shows the label under the frame: unknown people are "Người lạ" */
 (function(){const f0=pframe;pframe=function(f,col){try{if(f&&f.__kp&&!kitIsKnown(f.__kp))f=Object.assign({},f,{rw:"Người lạ"})}catch(e){}return f0.call(this,f,col)}})();
@@ -104,18 +104,18 @@ function kitPortrait(p,o){o=o||{};const f=kitFace(p);return o.size==="lg"||o.siz
 (function(){if(typeof renderStage!=="function")return;const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);try{const ppl=curPeople();document.querySelectorAll("#tokens .tok").forEach(b=>{const p=ppl[+b.dataset.p];if(!p)return;const who=p.ref||(p.kind==="emp"?S.emp:p.kind==="th"?S.thO:p.kind==="maid"?S.maid:null);if(who&&!kitIsKnown(who)){const t=b.querySelector(".tag");if(t)t.textContent="Người lạ";const r=personRoleRank(who);const fi=b.querySelector("img.figimg");if(fi)fi.src=KIT_DIR+`unknown-fig-${r.kid?"k":r.sex==="m"?"m":"f"}.webp`}})}catch(e){}return r}})();
 /* kit CSS: portrait pieces only; nothing else changes */
 (function(){const st=document.createElement("style");st.id="kit60";st.textContent=`
-.pcp.kit{border:0!important;box-shadow:none!important;background:transparent!important;border-radius:0!important;overflow:visible!important;container-type:size}
-.pcp.kit>.kin{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(100cqw,75cqh);height:min(100cqh,133.34cqw);display:grid;place-items:center;isolation:isolate}
-.pcp.kit .kin>.kbg{position:absolute;left:9.5%;top:8.5%;width:81%;height:80%;background:#5a1e16 center/cover no-repeat;z-index:-1;border-radius:3px}
-.pcp.kit .kin>img:not(.kfr):not(.kgem):not(.kemb){position:absolute;inset:auto!important;left:9.5%!important;top:15.7%!important;right:auto!important;bottom:auto!important;width:81%!important;height:72.8%!important;border-radius:0 0 3px 3px!important}
+.pcp.kit{border:0!important;box-shadow:none!important;background:transparent!important;border-radius:0!important;overflow:visible!important;container-type:size;aspect-ratio:480/1037!important}
+.pcp.kit>.kin{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:calc(min(100cqw / 480,100cqh / 1037) * 550);height:calc(min(100cqw / 480,100cqh / 1037) * 1037);display:grid;place-items:center;isolation:isolate}
+.pcp.kit .kin>.kbg{position:absolute;left:14.655%;top:20.289%;width:70.691%;height:49.373%;background:#5a1e16 center/cover no-repeat;z-index:-1;border-radius:3px}
+.pcp.kit .kin>img:not(.kfr):not(.kgem):not(.kemb){position:absolute;inset:auto!important;left:14.655%!important;top:24.733%!important;right:auto!important;bottom:auto!important;width:70.691%!important;height:44.930%!important;border-radius:0 0 3px 3px!important}
 .pcp.kit .kin>img.kpor{object-fit:cover!important;object-position:50% 0!important}
-.pcp.kit .kin>img.kpor[src*="face-"]{top:8.5%!important;height:80%!important;-webkit-mask-image:radial-gradient(ellipse 58% 56% at 50% 46%,#000 62%,transparent 100%);mask-image:radial-gradient(ellipse 58% 56% at 50% 46%,#000 62%,transparent 100%)}
+.pcp.kit .kin>img.kpor[src*="face-"]{top:20.289%!important;height:49.373%!important;-webkit-mask-image:radial-gradient(ellipse 58% 56% at 50% 46%,#000 62%,transparent 100%);mask-image:radial-gradient(ellipse 58% 56% at 50% 46%,#000 62%,transparent 100%)}
 .pcp.kit .kin>img.kfr{position:absolute;inset:0!important;width:100%!important;height:100%!important;border-radius:0!important;object-fit:fill!important;z-index:2;pointer-events:none}
-.pcp.kit .kin>img.kgem{position:absolute;inset:auto!important;right:2%!important;bottom:4%!important;left:auto!important;top:auto!important;width:21%!important;height:auto!important;aspect-ratio:1;border-radius:0!important;object-fit:contain!important;z-index:3;opacity:1;filter:drop-shadow(0 1px 2px #0007)}
-.pcp.kit .kin>img.kemb{position:absolute;inset:auto!important;right:5%!important;bottom:calc(4% + 19%)!important;left:auto!important;top:auto!important;width:14%!important;height:auto!important;aspect-ratio:1;border-radius:0!important;object-fit:contain!important;z-index:3;filter:drop-shadow(0 1px 2px #0007)}
+.pcp.kit .kin>img.kgem{position:absolute;inset:auto!important;left:73.564%!important;top:64.609%!important;right:auto!important;bottom:auto!important;width:18.327%!important;height:auto!important;aspect-ratio:1;border-radius:0!important;object-fit:contain!important;z-index:3;opacity:1;filter:drop-shadow(0 1px 2px #0007)}
+.pcp.kit .kin>img.kemb{position:absolute;inset:auto!important;left:62.218%!important;top:65.718%!important;right:auto!important;bottom:auto!important;width:13.964%!important;height:auto!important;aspect-ratio:1;border-radius:0!important;object-fit:contain!important;z-index:3;filter:drop-shadow(0 1px 2px #0007)}
 .pcp.kit>.pcs{z-index:4}
 .pfwrap>.pcp.kit{max-height:none!important}
-.pcp.kit .kin>.klab{position:absolute;left:50%;bottom:13%;transform:translateX(-50%);z-index:3;font-style:normal;font-size:.72rem;color:#f4f4f4;background:#4a4e54cc;padding:1px 8px;border-radius:8px;white-space:nowrap}
+.pcp.kit .kin>.klab{position:absolute;left:50%;top:68.737%;transform:translate(-50%,-100%);z-index:3;font-style:normal;font-size:.72rem;color:#f4f4f4;background:#4a4e54cc;padding:1px 8px;border-radius:8px;white-space:nowrap}
 .pcp.kit.noimg .kin{color:#fff8e8;text-shadow:0 1px 3px #000a}
 .md.kit{background:var(--kbg) center/cover no-repeat!important;border-color:var(--kc)!important;box-shadow:0 0 0 1.5px var(--km),0 2px 6px #5a3a2044!important}
 .md.kit.xs{box-shadow:0 0 0 1px var(--km)!important}

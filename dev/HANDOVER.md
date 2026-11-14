@@ -1,4 +1,16 @@
-# Cung Tường Mộng — handover (from MAIN 493, 11/14/2026 ~01:00 UTC)
+# Cung Tường Mộng — handover
+
+## ⚠ PRIORITY RULES — READ FIRST, EVERY TIME (owner, binding)
+The owner must NEVER have to repeat herself. Every main session and every worker:
+1. ON TAKING OVER (new session, restart, new worker): read this whole file, dev/OWNER_DECISIONS.md (the log of every owner decision), dev/kit/KIT.md, dev/kit/VANPHONG.md, and the PROGRESS file of your branch BEFORE doing or saying anything.
+2. BEFORE REPORTING OR PROPOSING ANYTHING to the owner ("chưa có", "nên thêm", "đề xuất…"): grep the code (dev/build/*.js) and the docs (dev/**/*.md, OWNER_DECISIONS.md) to check whether it already exists or was already decided. Never present an existing or already-discussed feature as new, and never re-open a settled decision.
+3. EVERY owner decision, preference, approval or rejection goes into dev/OWNER_DECISIONS.md the same turn (date, topic, decision). Main session owns that file.
+4. WORKER BRIEFS must quote every owner rule that applies to the task (art rules, kit rules, wording, devices). A worker brief that omits a relevant rule is the coordinator's fault.
+5. Apply common game conventions proactively (rewards, level-ups, warnings, animations, feedback); never wait for the owner to teach them. If something looks crude or wrong, fix it before showing her.
+6. Think with the owner: weigh each idea, give an honest recommendation; numbers/balance are decided by us, not asked.
+7. Self-check every image/screen before sending it to her; send single readable images (whole face for face details, never extreme zooms).
+
+## (original handover from MAIN 493, 11/14/2026 ~01:00 UTC)
 
 Owner: Victoria ("sếp"). Reply to her in Vietnamese only, as "em", short, no questions unless truly needed; she reads on a Samsung Galaxy Z Fold (inner ~1510x2000 portrait, cover ~904x2316). This is her standalone game, NOT Đại Hy (Đại Hy has its own main session; send any Đại Hy word of hers to MAIN 495 session_01Rc5AsLpa5TYV5oV2gBycQy via send_message).
 
@@ -12,6 +24,7 @@ Owner: Victoria ("sếp"). Reply to her in Vietnamese only, as "em", short, no q
   - dev/measure/: bot balance harness (inpage4.js, run*.js, an6.py, m43/ for NPC-mind sims).
 - Images: img/fig-*.webp (full-body, transparent) + img/por-*.webp (round portraits) listed in img/FIGURES.json (consorts, player looks, emperor, eunuchs), img/FIGURES-servants.json (maids, mamas), img/FIGURES-others.json (thái hậu, officials, physicians, men). Code merges all FIGURES*.json; old faces img/face-*.webp are the fallback. Map: img/map-<season>-<buổi>.webp, img/map-fest-*.webp, img/map-hotspots.json (+festivals table).
 - Testing: serve over http with a <meta charset=utf-8> wrapper; Playwright (require('playwright')); sizes 1510x2000, 904x2316, 1024x768, 390x844; no page errors, no horizontal overflow, no truncated text, equal act-card sizes, old save (localStorage hclh-slot / hclh-save-v2-<n>) must still load.
+- Art QA (cutout fix): run `python3 dev/figwork/cutcheck.py img/fig-*.webp` on new art (score >=8 or por >=20 = re-cut: crop ONE figure from the raw generation and run Magnific remove-background on it alone, see dev/figwork/rematte.py); make portraits with `python3 dev/figwork/porcrop.py img/fig-X.webp` (384x506, face-centred; needs opencv-python-headless==4.10.0.84).
 
 ## Workers still running in the OLD session at handover (they finish there, then stop)
 - Code integrator: balance final pass (targets below), publishes green builds; will sync scratchpad build → dev/ and push; final commit message contains "HANDOFF COMPLETE".
@@ -57,3 +70,26 @@ All old-session workers are STOPPED. The new main (Cung Tường Mộng · chín
 2. UI work goes to the KIT OWNER first. The kit owner builds the shared component in dev/kit (KIT.md + kit functions/CSS), tests it at the 4 sizes, and posts a "KIT READY: <component>" confirmation to the main session.
 3. Only after that confirmation may other workers use that component. Workers never style UI themselves; they only fill kit components with data/logic.
 4. Review rejects any UI not built from a confirmed kit component.
+
+## TEST VIEWPORTS (owner device, binding — 2026-11-14)
+The owner plays on a Samsung Galaxy Z Fold, PORTRAIT. Her screenshots are 1510x2000 *device pixels*, i.e. a CSS viewport of about 755x1000 at deviceScaleFactor 2. Testing at a 1510x2000 CSS viewport shows a desktop layout she never sees.
+Test sizes from now on (CSS px, Playwright viewport + deviceScaleFactor):
+- Fold inner, portrait: 755x1000 @2  (PRIMARY)
+- Fold cover: 412x1058 @2
+- 390x844 @3 (phone), 1024x768 @2 (landscape tablet)
+Owner previews: send single readable screenshots (one image per file), not tiny grids.
+
+## PRIORITY DEVICES (owner, binding — 2026-11-14, supersedes the list above)
+The owner plays mostly on TWO devices; fix and test these FIRST, others after:
+1. Samsung Galaxy Z Fold, PORTRAIT: 755x1000 @2
+2. iPad, LANDSCAPE: 1180x820 @2 (iPad Air/10th gen) and 1366x1024 @2 (iPad Pro 12.9)
+Secondary: Fold cover 412x1058 @2, phone 390x844 @3, 1024x768 @2.
+
+## OWNER RULES ADDED 11/14 (phiên chính 2, binding)
+- Think WITH the owner: for every idea she gives, weigh it and propose how (or whether) to do it; don't just obey blindly.
+- Hidden outcomes: in EVENT choices (weekly events j68, Mệnh truyện chapters j67, side events, dilemmas) show ONLY costs (Sức, khắc, bạc) — no long-term gains/losses (Sủng, Danh, Đức, favour…) and no odds word. The result card still shows the true numbers afterwards. Normal act buttons/cards keep full price + gain/loss + odds.
+- Wardrobe: 2 slots (Trâm cài, Y phục) beside the portrait for everyone; item grades Thường/Tinh phẩm/Trân phẩm/Tuyệt phẩm/Ngự tứ; whether an outfit is Đúng phẩm/Vượt phẩm/Quá giản dị is HIDDEN until someone remarks on it (same for NPCs); "Tự chọn đồ" = fast but risky; dressing minigame decides the outcome; Ngự tứ can't be sold; frame-ups (planted items).
+- Huadian (forehead ornament): consorts only (incl. maids promoted to consort), never maids/servants/cold palace; size like c03 t1 (small, visible); 8 DISTINCT tiers (t7 Hoàng quý phi, t8 Hoàng hậu clearly grander via material/detail, never larger). No facial moles on anyone.
+- Poses: calm standing (no flying sleeves/sashes, no swirling hems) for ALL figure art incl. Part C.
+- Contests: each subject its own real minigame, never multiple-choice quizzes. Results: podium screen first (full-body figures, glow, confetti), then the score table.
+- Never ship code-drawn art where a painting is expected; if something looks crude, redraw it without waiting to be asked.
