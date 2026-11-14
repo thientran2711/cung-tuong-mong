@@ -5220,6 +5220,49 @@ document.addEventListener("click",e=>{const v=e.target.closest("[data-tdv]");if(
 window.tdForceSo=function(k){const T=trS();if(k==="praise"&&!T.praise)T.praise="Đại tướng quân";const r=tdSoMonth(k||true);if(r)log(r);try{render()}catch(e){}return r};
 /* j54's hòa thân choices now name their real border effect */
 (function(){for(const id of ["foreignwed","h54hoa","h54ban"]){const f0=PEND[id];if(typeof f0!=="function")continue;PEND[id]=function(){const d=f0.apply(this,arguments);try{if(d&&d.o)d.o.forEach(c=>{if((/h54Hoa/.test(String(c.go||""))||/hòa thân/i.test(c.n||""))&&!/Biên cương/.test(c.x||"")){const add="con sang Bắc Địch thì Biên cương +20, ba năm ít giặc";const x=String(c.x||"");const i=/ · hỏng:/.test(x)?-1:x.search(/ · kèm:/);c.x=!x?add:i>=0?x.slice(0,i)+" · "+add+x.slice(i):x+" · "+add}})}catch(e){}return d}}})();
+
+/* ---- j56: nhóm việc trên thẻ người thành thẻ (tab), như thẻ Phi tần ----
+   Mọi thẻ người (pcard) mà các mô-đun sau chèn thêm mục "<h5>Tên</h5><div class=pcb>" xếp dọc
+   (thẻ con: Học hành, Chăm con, Hôn sự, Tài nghệ...) được gom thành hàng tab .pctabs/.pct + .pcg,
+   dùng đúng kiểu và trình bấm tab của pcard (j15/j25). Nhớ tab đã chọn theo từng thẻ (tên người) khi trang còn mở. */
+(function(){
+ window.__pcTab=window.__pcTab||{};
+ /* thẻ không đặt tabKey: nhớ tab riêng cho từng người thay vì chung một khóa "p" */
+ if(typeof pcard==="function"){const p0=pcard;pcard=function(o){if(o&&!o.tabKey&&o.name)o=Object.assign({},o,{tabKey:"p:"+String(o.name).replace(/<[^>]*>/g,"")});return p0.call(this,o)}}
+ const live=b=>b.tagName==="BUTTON"&&!b.disabled;
+ const nLive=el=>Array.from(el.querySelectorAll("button")).filter(live).length;
+ const esc=s=>String(s).replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;");
+ function bareName(pcb){if(pcb.querySelector('[data-go="home"]'))return "Thăm con";return "Việc khác"}
+ function tabify(pcr){
+  const kids=Array.from(pcr.children);if(!kids.some(c=>c.tagName==="H5"))return;
+  const card=pcr.closest(".pc");const nm=card&&card.querySelector(".pcname");
+  const oldTabs=kids.find(c=>c.classList.contains("pctabs"));
+  let role=oldTabs&&oldTabs.querySelector(".pct")?oldTabs.querySelector(".pct").dataset.role:"";
+  if(!role)role="p:"+(nm?nm.textContent.trim():"");
+  const G=[];let anchor=null;
+  for(let i=0;i<kids.length;i++){const c=kids[i];
+   if(c.tagName==="H5"&&kids[i+1]&&kids[i+1].classList.contains("pcb")){G.push({t:c.textContent.trim(),h5:c,el:kids[i+1]});if(!anchor)anchor=c;i++;continue}
+   if(c.classList.contains("pcg")){G.push({t:c.dataset.g||"",el:c,g:1});if(!anchor)anchor=c;continue}
+   if(c.classList.contains("pcb")){G.push({t:"",el:c});if(!anchor)anchor=c;continue}}
+  if(G.length<2)return;
+  /* tên trùng thì gộp; tên trống đặt tên rõ */
+  const used={};G.forEach(s=>{if(!s.t)s.t=s.g?"Việc":bareName(s.el);let t=s.t,n=2;while(used[t])t=s.t+" "+(n++);used[t]=1;s.t=t});
+  let act=window.__pcTab[role];
+  if(!G.some(s=>s.t===act))act=(G.find(s=>nLive(s.el)>0)||G[0]).t;
+  const bar=document.createElement("div");bar.className="pctabs";
+  bar.innerHTML=G.map(s=>`<button class="pct${s.t===act?" on":""}" data-pct="${esc(s.t)}" data-role="${esc(role)}">${esc(s.t)} <i>${nLive(s.el)}</i></button>`).join("");
+  pcr.insertBefore(bar,oldTabs&&oldTabs.compareDocumentPosition(anchor)&Node.DOCUMENT_POSITION_FOLLOWING?oldTabs:anchor);
+  if(oldTabs)oldTabs.remove();
+  G.forEach(s=>{let g=s.el;
+   if(!s.g){g=document.createElement("div");g.className="pcg";s.el.parentNode.insertBefore(g,s.el);g.appendChild(s.el);if(s.h5)s.h5.remove()}
+   g.dataset.g=s.t;g.classList.toggle("on",s.t===act)});
+ }
+ function scan(root){(root.querySelectorAll?root:document).querySelectorAll(".pcr").forEach(p=>{try{tabify(p)}catch(e){}})}
+ window.pcTabify=scan;
+ const mo=new MutationObserver(R=>{let hit=false;for(const r of R)if(r.addedNodes.length){hit=true;break}if(hit)scan(document)});
+ const go=()=>{mo.observe(document.body,{childList:true,subtree:true});scan(document)};
+ if(document.body)go();else document.addEventListener("DOMContentLoaded",go);
+})();
 /* ================= j57: ONE subject frame in dialogs (owner 11/14: "Thân phận kiếp này" showed a small cropped face) =================
    Root cause 1 (size): the kit's .pcp carries max-height:58% (meant for the person-card column). Inside a dialog's .faces
    <figure> that percentage resolves against the figure's own height, so the 3:4 frame was cut to 180x139 and the figure kept
@@ -5245,8 +5288,116 @@ if(typeof porOf==="function")(function(){const p0=porOf;porOf=function(who,fb){c
 (function(){const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);por57Swap();return r}})();
 /* audit j54: the round face in the princess / suitor rows is a block (display:grid) and sat on a line of its own; inline like j53's rows */
 (function(){const st=document.createElement("style");st.textContent=".h54r>span>.md,.h54box .h54r .md{display:inline-grid;vertical-align:middle}.h54r>span{line-height:1.5}";document.head.appendChild(st)})();
-/* no truncated text: on phones / tablets the short tab labels ("Quan hệ", "Tài nghệ") were clipped (nowrap + overflow hidden); let them wrap */
-(function(){const st=document.createElement("style");st.textContent="@media (max-width:999px){.tabs button{white-space:normal!important;overflow:visible!important;line-height:1.1;overflow-wrap:normal;word-break:keep-all}.tabs button::after{white-space:normal}}";document.head.appendChild(st)})();
+/* bottom tabs, no truncated text and one treatment for all: every label on ONE line at every width. Below 1280px every tab shows
+   its short label (data-s: Việc, Bản đồ, Phi tần, Quan hệ, Phe, Kẻ hầu, Con, Rương, Tài nghệ, Truyện, Nhật ký; servant mode sets
+   its own), at full width the long label. One font size for the whole bar: shrunk together (never per tab) until the widest label
+   fits its column (columns = number of visible tabs, two rows on phones), re-measured on resize and whenever the labels change. */
+(function(){const X="html body #tabs.tabs button";const st=document.createElement("style");st.textContent=
+ X+"{white-space:nowrap!important;overflow:hidden!important;text-overflow:clip!important;font-size:var(--tfs,.85rem)!important;padding-left:1px!important;padding-right:1px!important}"+
+ "@media (max-width:1279px){"+X+"{font-size:0!important}"+X+"::after{content:attr(data-s)!important;font-size:var(--tfs,.8rem)!important;white-space:nowrap!important}}"+
+ "@media (max-width:700px){"+X+"::after{font-size:var(--tfs,.72rem)!important}}";document.head.appendChild(st)})();
+let TFS_CV=null;
+function tabsFit(){try{const T=$("tabs");if(!T)return;const short=matchMedia("(max-width:1279px)").matches;const base=short?(matchMedia("(max-width:700px)").matches?.72:.8):.85;
+ T.style.setProperty("--tfs",base+"rem");const B=[...T.querySelectorAll("button")].filter(b=>b.offsetParent);if(!B.length)return;
+ const n=B.length,cols=matchMedia("(max-width:700px)").matches&&n>6?Math.ceil(n/2):n;T.style.setProperty("grid-template-columns",`repeat(${cols},minmax(0,1fr))`,"important");
+ TFS_CV=TFS_CV||document.createElement("canvas").getContext("2d");let k=1;
+ B.forEach(b=>{const cs=getComputedStyle(b,short?"::after":null);TFS_CV.font=`${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`;const txt=short?(b.dataset.s||b.textContent):b.textContent;
+  const w=TFS_CV.measureText(txt.trim()).width+1;const room=b.clientWidth-parseFloat(getComputedStyle(b).paddingLeft)-parseFloat(getComputedStyle(b).paddingRight);if(w>room&&room>0)k=Math.min(k,room/w)});
+ if(k<1)T.style.setProperty("--tfs",(base*k).toFixed(3)+"rem")}catch(e){}}
+addEventListener("resize",()=>{clearTimeout(window.__tfsT);window.__tfsT=setTimeout(tabsFit,80)});
+(function(){const r0=render;render=function(){const r=r0.apply(this,arguments);tabsFit();return r}})();
+try{if(document.fonts&&document.fonts.ready)document.fonts.ready.then(tabsFit)}catch(e){}
+setTimeout(tabsFit,0);
+/* status panel toggle (owner, Fold): the ▾ was display:none from 1200px up (and a 22px box below), so on a wide screen it could
+   not be tapped and "col" never changed anything there. Now one toggle at every width: a 36px kit button with icon + word as the
+   panel's first item; collapsed keeps only the key chips, at every width. A wide screen with no saved choice starts open. */
+(function(){const H="html body #hud2.hud2";const st=document.createElement("style");st.textContent=
+ H+" .h2t{display:inline-flex!important;position:static!important;order:-1;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;width:auto!important;min-width:36px;height:36px!important;min-height:36px;padding:0 10px!important;border:1px solid var(--trim,var(--line));border-radius:8px;background:#fffaf0;color:var(--gold);font-family:var(--body,inherit);font-size:.78rem!important;font-weight:600;white-space:nowrap;cursor:pointer;touch-action:manipulation;z-index:2}"+
+ H+" .h2t i{font-style:normal;font-size:.9rem;line-height:1}"+
+ H+"{padding-right:5px!important}"+H+".col .hc:not(.keep){display:none!important}"+
+ "@media (min-width:1200px){"+H+" .h2t{align-self:stretch;width:100%!important}}";document.head.appendChild(st)})();
+(function(){const r0=renderHud2;renderHud2=function(){try{if(window.__h2c==null&&matchMedia("(min-width:1200px)").matches){let v=null;try{v=localStorage.getItem("hclh-h2c")}catch(e){}if(v==null)window.__h2c=false}}catch(e){}
+ const r=r0.apply(this,arguments);try{const el=$("hud2"),b=el&&el.querySelector(".h2t");if(b){const col=el.classList.contains("col");b.innerHTML=col?"<i>▾</i>Chỉ số":"<i>▴</i>Thu gọn";b.setAttribute("aria-label",col?"Mở rộng bảng chỉ số":"Thu gọn bảng chỉ số");b.setAttribute("aria-expanded",String(!col));b.type="button"}}catch(e){}return r}})();
+/* the real tap bug below 1200px: the toggle re-renders #hud2 (innerHTML) inside its own click, so the button is detached by the
+   time the click bubbles to j24's "click outside the panel collapses it" listener; closest("#hud2") on the detached node is null,
+   so that listener collapsed the panel straight back. Remember the hit before anything runs and stop that click at the panel. */
+(function(){document.addEventListener("click",e=>{try{e.__h2in=!!(e.target&&e.target.closest&&e.target.closest("#hud2"))}catch(x){}},true);
+ const el=$("hud2");if(el)el.addEventListener("click",e=>{if(e.__h2in)e.stopPropagation()})})();
+/* ================= j58: TRANH NỀN THÂN PHẬN (owner 11/14) =================
+   While the "Thân phận kiếp này" card (j52) or the life's opening card ("Nhập cung…") is up, the full-screen modal
+   backdrop shows img/bg-origin-<origin.k>.webp (like the title key art) under a soft gradient. Every other modal keeps
+   the normal dim backdrop. A missing picture leaves the gradient over the usual dark colour. Loads last; only touches
+   the #modal element's own background, so card frames from other modules (j57) are untouched. */
+(function(){
+ const OBG_BAD={},OBG_OK={};
+ function obgKey(){try{return S&&S.origin&&S.origin.k?String(S.origin.k):""}catch(e){return ""}}
+ function obgWanted(m){if(!m)return false;
+  return !!(m.nl||/\bnlcard\b/.test(m.cls||"")||m.t==="Thân phận kiếp này"||/^Nhập cung/.test(String(m.t||"")))}
+ function obgClear(M){if(M.dataset.obg){delete M.dataset.obg;M.style.removeProperty("background")}}
+ function obgSet(M,k){const grad="linear-gradient(rgba(30,14,8,.30),rgba(30,14,8,.12) 38%,rgba(30,14,8,.18) 62%,rgba(30,14,8,.55))";
+  const url=OBG_BAD[k]?"":`url(img/bg-origin-${k}.webp) center 30%/cover no-repeat,`;
+  M.dataset.obg=k;M.style.setProperty("background",`${grad},${url}#2a1a12`,"important")}
+ function obgApply(){try{const M=$("modal");if(!M)return;const m=Q&&Q[0];const k=obgKey();
+  if(M.hidden||!k||!obgWanted(m)){obgClear(M);return}
+  if(M.dataset.obg===k)return;
+  obgSet(M,k);
+  if(!OBG_OK[k]&&!OBG_BAD[k]){const im=new Image();im.onload=()=>{OBG_OK[k]=1};
+   im.onerror=()=>{OBG_BAD[k]=1;if(M.dataset.obg===k){delete M.dataset.obg;obgApply()}};im.src=`img/bg-origin-${k}.webp`}
+ }catch(e){}}
+ if(typeof showModal==="function"){const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);obgApply();return r}}
+ /* anything that hides/shows the modal without showModal */
+ try{const M=$("modal");if(M&&typeof MutationObserver==="function")new MutationObserver(obgApply).observe(M,{attributes:true,attributeFilter:["hidden","class"]})}catch(e){}
+ obgApply();
+})();
+/* j62: kid card shows age once (in the header "Hoàng tử · 11 tuổi"); the adult age band (18–25…) is shown only for adults (owner 11/14) */
+(function(){const t0=tuoi;tuoi=function(n){return n>=18?t0(n):(n>0?`Tuổi <b>${n}</b>`:"")};
+ const k0=kidCard;kidCard=function(k){const t1=tuoi;tuoi=()=>"";try{return k0.apply(this,arguments)}finally{tuoi=t1}}})();
+
+/* ================= j66: SHE IS ONE OF THE CONSORT IDENTITIES (owner 11/14) =================
+   No separate "player looks" any more. Each new life rolls one consort identity (img/FIGURES.json, role consort,
+   c01..c32) for her as part of the stored roll in localStorage "ctm-nextlife" (d.pid): a reload shows the same one,
+   "Đổi thân phận" rolls another. The identity is reserved for the whole game (S.pid sits in S.fidUsed), so no NPC
+   consort, tuyển tú intake included, ever gets it or any of its tiers / ages. Her art then follows the consort picker:
+   dress tier = rank (Đáp ứng t1 ... Hoàng hậu t8), age band = her age (18–25, 26–35, 36–50, 51+), same identity for life.
+   While she is a palace maid (cnv) she wears the identity's tier 1. In lãnh cung she (and any NPC consort there) asks for
+   the identity's tier "cold" (fig-consort-cNN-tcold-aAA.webp); while that art is missing the nearest file is tier 1. If a file is missing the nearest
+   tier/age of the identity is used; with no art at all she keeps the old face. Old saves (no S.pid) are left as they are,
+   look-* faces included. */
+const PID_N=32;
+function pidKeys(){try{const M=typeof FIGIX!=="undefined"&&FIGIX.consort;const k=M?Object.keys(M).filter(x=>/^consort:c\d+$/.test(x)):[];if(k.length)return k.sort()}catch(e){}
+ const L=[];for(let i=1;i<=PID_N;i++)L.push("consort:c"+String(i).padStart(2,"0"));return L}
+/* deterministic from the roll's seed, so the same roll always gives the same identity even before it is stored */
+let PID_AVOID=null;
+function pidRoll(d){const K=pidKeys();const r=nlRng((d.seed^0x2c1b3c6d)>>>0);r();let i=Math.floor(r()*K.length)%K.length;
+ if(PID_AVOID&&K[i]===PID_AVOID&&K.length>1)i=(i+1+Math.floor(r()*(K.length-1)))%K.length;return K[i]}
+/* "Đổi thân phận" always gives another identity than the one on the card */
+(function(){const r0=nlReroll;nlReroll=function(){PID_AVOID=S&&S.pid||null;try{return r0.apply(this,arguments)}finally{PID_AVOID=null}}})();
+function pidOn(){return !!(S&&S.pid)}
+/* 8 ranks = 8 dress tiers; 4 age bands as the standing rule draws them */
+function pidBand(a){return a==null?null:a<26?0:a<36?1:a<51?2:3}
+(function(){const t0=figTierOf;figTierOf=function(who){try{
+  if(who===S&&S){if(S.pid)return (typeof isSrv==="function"&&isSrv())?1:S.out?-1:Math.min(7,S.rank||0)+1;return t0.apply(this,arguments)}
+  if((rivals||[]).includes(who))return who.out?-1:who.queen?8:Math.min(7,who.rank||0)+1}catch(e){}return t0.apply(this,arguments)}})();
+figDist=function(f,tier,age){const ft=figTier(f.tier),fa=figAge(f.ageBand);const ab=pidBand(age),fb=pidBand(fa);
+ return (tier!=null&&ft!=null?Math.abs(ft-tier)*2:0)+(ab!=null&&fb!=null?Math.abs(fb-ab)*1.2+Math.abs(fa-age)/400:0)};
+/* the reserved identity is always "used": every NPC pick skips it */
+(function(){const u0=figUsed;figUsed=function(){const U=u0.apply(this,arguments);try{if(S&&S.pid&&!U.includes(S.pid))U.push(S.pid)}catch(e){}return U}})();
+/* her own pick: the reserved identity, or nothing (the old face) when its art is not there */
+(function(){const p0=figPick;figPick=function(who){if(who===S&&S&&S.pid){figUsed();const M=typeof FIGIX!=="undefined"&&FIGIX.consort;if(M&&M[S.pid]){S.fid=S.pid;return S.pid}return null}
+  if(who&&who!==S&&S&&S.pid&&who.fid===S.pid)who.fid=null;return p0.apply(this,arguments)}})();
+/* a new life: attach the stored identity, then clear any NPC that already took it */
+function pidEnforce(){if(!S||!S.pid)return false;let ch=false;S.fid=S.pid;const U=figUsed();
+ for(const o of nlHolders()){if(o&&o!==S&&o.fid===S.pid){o.fid=null;ch=true}}
+ const n=U.filter(x=>x===S.pid).length;if(n>1){S.fidUsed=U.filter(x=>x!==S.pid);S.fidUsed.push(S.pid);ch=true}return ch}
+(function(){const r0=nlRun;nlRun=function(d){if(d&&!d.pid){d.pid=pidRoll(d);try{const c=store.get(NL_KEY);if(c&&c.seed===d.seed){c.pid=d.pid;store.set(NL_KEY,c)}}catch(e){}}
+  const res=r0.apply(this,arguments);try{if(S&&d&&d.pid){S.pid=d.pid;pidEnforce()}}catch(e){console.error(e)}return res}})();
+/* the face snapshot (j52) may hold a pre-j66 player look or an NPC with her identity: correct it and re-record */
+(function(){const f0=nlFaces;nlFaces=function(d){const r=f0.apply(this,arguments);try{if(S&&S.pid&&d&&d.faces){const H=nlHolders();const F=d.faces;let ch=pidEnforce();
+  H.forEach((o,i)=>{if(!o)return;const rec=F.h[i]=F.h[i]||{};if(o===S){if(rec.fid!==S.pid){rec.fid=S.pid;ch=true}}else if(rec.fid===S.pid){delete rec.fid;ch=true}});
+  if(Array.isArray(F.fidUsed)&&!F.fidUsed.includes(S.pid)){F.fidUsed.push(S.pid);ch=true}
+  if(ch&&NLP&&NLP.seed===d.seed)store.set(NL_KEY,d)}}catch(e){console.error(e)}return r}})();
+/* the identity card: show her portrait as soon as it has loaded (the card is a modal, render() alone does not redraw it) */
+(function(){const c0=nlCard;nlCard=function(){const r=c0.apply(this,arguments);try{const src=figFor(S,"por");if(src&&PORK[src]!==1){const im=new Image();im.onload=()=>{PORK[src]=1;try{const m=Q[0];if(NLP&&m&&m.nl){m.faces=[[pMe(),S.name]];showModal()}}catch(e){}};im.src=src}}catch(e){}return r}})();
 
 </script>
 
