@@ -140,3 +140,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (23:55Z) Owner: the wide sweeping skirt pose is OK — do not raise pose issues she didn't complain about; only answer exactly what she asks (here: is the Quý phi outfit right for her rank).
 - (00:00Z) Owner rejected the seasons redraw pilot (Ngự hoa viên v2): KEEP the old place backdrops. No seasons rollout; review/seasons not merged.
 - (00:05Z) Owner: emotion icons don't look cổ trang — same simple drawing style but faces with ancient hairstyle + hairpins (cài trâm) like consorts; must stay readable small.
+- (00:10Z) Owner angry: I sent emotion shots taken on an OLD base (rejected layout: Bảng phẩm vị button, Tư chất dropdown, small room strip). RULE: every screenshot sent to the owner must be on the approved current layout (review/fold-layout / page-curl base). Workers must base UI work on it; coordinator checks shots before sending.
