@@ -82,3 +82,13 @@ C-m23-t4 rgeWQS6xtc hands
 C-m24-t4 MBwxGIeDCm hands
 C-m25-t4 jUX0HOwLD0 hands (a32 scroll->box)
 C-m26-t4 ksDnE7j16B hands nomole
+C-m13-t4 fHA9otwCDY edit fHA9esDCDY: a48 hair dark + no mole
+C-m23-t4 w4hdLPS7EI edit rgeWQS6xtc: flat persimmon
+C-m01-t5 1lpYqExr4r hands (a48 letter->teacup)
+C-m02-t5 lJ8Mr5Tgv9 hands
+C-m03-t5 w4hdsxH7EI hands
+C-m04-t5 lJ8Mr1Zgv9 hands (a32 scroll->vase)
+C-m05-t5 MBwxWWiDCm hands (a48 letter->lantern)
+C-m06-t5 ov9Upe0829 hands
+C-m07-t5 SytpjgdUb8 hands
+C-m08-t5 9ZQmO6XNYZ hands
