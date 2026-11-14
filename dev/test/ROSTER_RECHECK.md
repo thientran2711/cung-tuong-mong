@@ -1,9 +1,11 @@
-# KIỂM LẠI ĐỘC LẬP sổ vị trí j95 (review/schedules2 @ 7517021)
+# KIỂM LẠI ĐỘC LẬP sổ vị trí j95 (review/schedules2 @ 7517021, vòng 2 @ 93fbdd4)
 
 Người kiểm lại (không viết code này), 2026-11-14. Không sửa code game. Bản dựng: `python3 dev/build/assemble.py` trên 7517021, phục vụ
 `(printf '<meta charset=utf-8>'; cat dev/index.html) > t.html` + `img/`. Máy tải nặng (load 15–35 trên 4 nhân) nên quy mô nhỏ hơn bản của thợ.
 
-**Kết luận: FAIL (nhỏ).** Cả 6 lỗi chính của kiểm độc lập trước đã sửa thật, mọi bộ kiểm sạch, 3 thay đổi bộ kiểm là chính đáng.
+**Kết luận cuối (vòng 2, 93fbdd4): PASS.** N1 đã sửa và kiểm lại (mục 7); 3 chỗ thợ sửa trong rc_adv.js là chính đáng (một chỗ tôi làm chặt thêm).
+
+Vòng 1 (7517021): FAIL (nhỏ). Cả 6 lỗi chính của kiểm độc lập trước đã sửa thật, mọi bộ kiểm sạch, 3 thay đổi bộ kiểm là chính đáng.
 Nhưng tìm thêm **1 lỗi mới**: nam nhân chưa có trong sổ buổi này được ghi vào cả các khắc ĐÃ QUA (cùng loại lỗi 4 "ghi lùi").
 Sửa xong mục N1 thì coi là PASS.
 
@@ -75,6 +77,28 @@ Trong bot không thấy phi tần thiện cảm ≥80 ngầm hại ngươi; cổ
   `roster.js` / "Chép sổ" sẽ trả lời "hắn ở vườn" cho một khắc ngươi tận mắt thấy hắn không ở đó.
 - Sửa gợi ý: chỉ ghi khắc ≥ khắc hiện tại; các khắc trước để một mã "ngoài cung" (không đếm trên bản đồ) hoặc cho phép dòng chưa có mặt.
   Thêm kiểm: sau mỗi lần thêm dòng giữa buổi, các khắc < hiện tại của dòng mới không được ở chỗ người chơi đã đứng.
+
+## 7. Vòng 2 (93fbdd4): N1 và 3 chỗ thợ sửa rc_adv.js
+
+**N1 sửa:** `rosterWhere` (j95c) và `j95bPut` (j95b) chỉ ghi từ khắc hiện tại; các khắc đã hiện là `ngoai` ("ngoài cung", việc `away`, không có ô
+bản đồ, không có trên sân khấu, `roster.js` gọi "Ngoài cung (chưa vào)"). Tái hiện cũ chạy lại: ngươi đứng ở vườn khắc 2, rồi `rosterWhere` →
+dòng hắn ở khắc 2 = `ngoai / chưa vào cung` (trước là "vuon / lặng lẽ đến"). `R.m` các khắc đã qua không đổi. **PASS.**
+
+| chỗ sửa trong rc_adv.js | xét | kết luận |
+|---|---|---|
+| (1) `ngoai` không tính là ghi lùi | Mã `ngoai` không phải nơi ngươi có thể đứng hay nhìn thấy (không có trong `places()`, không có ô). Ghi "ngoài cung" cho khắc đã qua là đúng sự thật | Chính đáng |
+| (2) Chỉ người chết mới phải rời sổ | Đúng luật game: j8.js:67 `deathSentence` với ân "nhân từ" 30% đày vào lãnh cung (`p.out=true`) chứ không chết. Nhưng bản thợ bỏ hết kiểm cho người được tha → tôi thêm: được tha thì phải `out`, dòng ở `lc`, cung nữ không "theo hầu" ở nơi khác. Lần chạy này có 1 người được tha (Bạch Mộng Điệp): đạt | Chính đáng, đã làm chặt thêm |
+| (3) ally / gift / tieuhuy là việc thân thiện; bỏ tên trong `<b>` trước khi dò chữ hại | Ba loại này nằm trong F95 (việc thân thiện của cổng), giống ia_hook H. "Bạch Tố Tâm" chứa "Tố" là trùng chữ. Bỏ `<b>…</b>` chỉ bỏ tên; tên ACT vẫn được dò | Chính đáng |
+
+Chạy lại trên 93fbdd4 (máy tải nặng, quy mô ngắn):
+
+| | kết quả |
+|---|---|
+| `rc_adv.js` (9 mục) | fails 0, lỗi trang 0 (truyện tình: 0 khắc ghi lùi, 3 xuất thân) |
+| `ia_bot.js` khôn 4 đời (4 đủ 2 năm) + ngẫu nhiên 5 đời | 6 935 lần kiểm, 692 lưu/nạp (373 giữa thẻ, 123 giữa minigame), A–H, P, S = 0; J95.errs 0; 547 hành động thù địch, 0 lần thiện cảm ≥40; 381 việc chuyển buổi, 0 trái mắt thấy; 9 đời gồm ch, cn, nc, td, cnv, dtq, thd, tt |
+| `ia_scen.js` | 10/10, mọi `__IA.check` 0 |
+| `ia_dom.js` 755x1000@2, 20 thời điểm | lệch bản đồ 0, lệch sân khấu 0, tràn 0, lỗi trang 0 |
+| `ia_rostertool.js` cn 6 tuần | 41/41 dòng hiện tại, 32 khắc đã qua, 0 lệch |
 
 ## 6. Lệnh chạy lại
 ```
