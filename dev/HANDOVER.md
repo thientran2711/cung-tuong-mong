@@ -93,3 +93,28 @@ Secondary: Fold cover 412x1058 @2, phone 390x844 @3, 1024x768 @2.
 - Poses: calm standing (no flying sleeves/sashes, no swirling hems) for ALL figure art incl. Part C.
 - Contests: each subject its own real minigame, never multiple-choice quizzes. Results: podium screen first (full-body figures, glow, confetti), then the score table.
 - Never ship code-drawn art where a painting is expected; if something looks crude, redraw it without waiting to be asked.
+
+## TRẠNG THÁI 14/11 15:40Z — mọi thợ dừng vì hết hạn mức tuần (mở lại 18/11 17:00Z)
+Khi hạn mức mở lại, gửi SendMessage cho từng thợ để làm tiếp (đừng mở thợ mới):
+- Cân bằng ad2c1bd409d320efa: đã tìm ra lỗi jpal viết lại palaceOf (trả "home" cho kẻ hầu) → bỏ đoạn đó (fix1), CHƯA ĐẨY; đang đo 24 đời. Đầu origin/review/balance còn cũ.
+- Sửa j95 a729f798f8caea14b (review/schedules2): đang dở; phải gộp balance mới (palaceOf gốc) trước kiểm cuối; dùng bot inpage6 cho bộ kiểm độc lập. Sau đó mở lại người kiểm độc lập a5c2d5a7218acd7d7.
+- Người duyệt kit a4b1ef66e8fa6f413: đang kiểm lại minigames fe63a6f.
+- consort-art #9 a7b31f0e1c489c55f: đang làm hoa điền đúng nấc + xóa nốt ruồi.
+- Part C-A acb72ee291fbd2861: Part C (maid-art-c) vẽ đủ 52 nàng; đang sửa lỗi lãnh cung (áo trơn, không trang sức, mặt 48), hoa điền t6, m06-t7, m26-t8; rồi soát C-B, ghi SẴN SÀNG KIỂM LẠI.
+- maid-art (scratchpad/wmA 89dd550, 7b3f527) và maid-art-b (scratchpad/wfixB 212db69): lệnh đẩy của thợ bị bộ kiểm quyền chặn; CHỜ SẾP cho phép. Sau đó sửa a51 còn lại (A: 164 tờ, todo ở scratchpad/cwM; B: ~47 lineup).
+- wardrobe 66d1bd9 và kit-j95 đi qua review/balance.
+
+### Cập nhật 15:50Z — chuyển phiên chính sang tài khoản khác
+Việc dở của các thợ đã đẩy lên nhánh wip/* (không đè nhánh nào):
+- wip/balance-fix1: review/balance + jpal bỏ đoạn viết lại palaceOf (fix1). Cần đo 24 đời; đạt thì đưa vào review/balance.
+- wip/schedules2: bản sửa j95 dở (6 lỗi kiểm độc lập), đã gộp balance 4516bec. Cần làm tiếp, gộp wip/balance-fix1, chạy cả 2 bộ kiểm (bộ độc lập dùng dev/measure/inpage6.js), rồi kiểm độc lập lại.
+- wip/maid-art-fix: sửa review/maid-art (10 nốt ruồi, 44/208 mặt a51). Hàng đợi a51 còn lại: dev/handover/maidA-a51-todo.txt.
+- wip/maid-art-b-fix: sửa review/maid-art-b (trả 640 ảnh phần A, vá 20 nốt ruồi). Còn khoảng 47 lineup a51 trông trẻ (danh sách trong PROGRESS_B).
+  Hai nhánh này chưa đẩy vào review/* vì bộ kiểm quyền chặn và chưa có lệnh của sếp: hỏi sếp trước.
+- review/maid-art-c (97a3a9e): Part C đủ 52 nàng; còn sửa: lãnh cung phải áo trơn, không trang sức (m11 m12 m15 m16 m19 m20 m24, hoa tai), mặt 48 ở lãnh cung còn trẻ, hoa điền t6 như dây rủ (m08 m14 m17 m18 m19), m06-t7 còn một nét, m26-t8 rộng; soát C-B tương tự.
+- review/minigames fe63a6f: chờ duyệt lại.
+- review/consort-art: thợ #9 dừng giữa lúc sửa "hoa điền đúng nấc + xóa nốt ruồi"; xem PROGRESS của nhánh.
+Phiên mới không có scratchpad cũ và không gọi được các thợ cũ: mở thợ mới từ các nhánh trên.
+Trigger 9:15 PT cũ đã xóa; phiên mới tự kiểm bản live trước 10 giờ sáng giờ Los Angeles nếu kịp.
+- wip/consort-art: 1642 ảnh fig/por phi tần thợ #9 đã sửa nhưng chưa commit lúc dừng (hoa điền đúng nấc / xóa nốt ruồi / cắt lại chân dung). CHƯA KIỂM: so với origin/review/consort-art, xem từng ảnh, rồi mới đưa vào review/consort-art.
+- Tranh đã vẽ trên Magnific mà chưa tải về vẫn còn trong thư mục Magnific ba4aecfe; mã từng lượt vẽ ghi trong gens.txt / PROGRESS của từng nhánh, tải lại được, không phải vẽ lại.
