@@ -37,7 +37,7 @@ for i in range(1,n):
     if ((rr>185)&(gg>150)&(bb>130)).mean()<0.97 or ll.std()>14: continue
     pre.append((i,x,y,w,h,(ya,yb,xa,xb),big))
 for i,x,y,w,h,(ya,yb,xa,xb),big in pre:
-    if min(w,h)<2*s or (w>=1.2*h and w>=6*s) or max(w,h)>7*s or max(w,h)>2*min(w,h)+1: continue          # hair strand / nostril shape
+    if min(w,h)<2*s or (w>=1.2*h and w>=6*s) or max(w,h)>6*s or max(w,h)>2*min(w,h)+1: continue          # hair strand / nostril shape
     if any(j!=i and abs(x2-x)<32*s and abs(y2-y)<9*s for j,x2,y2,*_ in pre): continue   # nostril pair
     hits.append((int(x),int(y),int(w),int(h))); mask[ya:yb,xa:xb]|=big
 for arg in sys.argv:   # manual spots: spot=x,y (full-res coords): darkest small blob within 8px is inpainted

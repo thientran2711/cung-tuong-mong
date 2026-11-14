@@ -457,3 +457,10 @@ HD8-c03-t4 aF2P0ZofSh (redo: thin gold hairline)
 HD8-c03-t5 Bh4g29uoQR (redo: gold dominant)
 HD8-c03-t7 LwB0a8DswO (redo: compact filigree)
 HD8-c03-t8 s7oTftTl8e (redo: compact phoenix ~1.4x)
+HD8v2-c03 painterly redo t1..t8: WDsbPVrcXe xSdWagqjfW SytDFPEUb8 XmPlAvpBfo LwB0COLswO LwB0C4gswO rgeYvyWxtc rgeYvPcxtc; t3 redo YMLqyZrWeC, t8 redo Do7x3c4pcl
+N-c28-tcold rgeYa26xtc hair-edit of 6AHh1fWiJO art7
+HD8 FINAL c03 t1..t8: WDsbPVrcXe xSdWagqjfW SytDFPEUb8 XmPlAvpBfo LwB0COLswO LwB0C4gswO rgeYvyWxtc Do7x3c4pcl
+HD8v3 c03: t2 lines xSdWELCjfW, t5 gold+dark edge jUXcugyLD0, t7 red enamel+deep gold 3zbaUG8REY
+HD8v4 c03: t7 ksDzaEm16B, t8 p8JjA0Iehw
+HD8v5 c03 t8 tiny Do7xA3xpcl
+HD8 FINAL v6 c03 t1..t8: WDsbPVrcXe xSdWELCjfW SytDFPEUb8 XmPlAvpBfo jUXcugyLD0 LwB0C4gswO ksDzaEm16B 8aNUV51IrU (all gpt-2-6 edits of uploaded c03 t1 head 1lpnpLXr4r)
