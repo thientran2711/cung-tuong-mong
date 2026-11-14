@@ -700,12 +700,21 @@ so stage blocks may stand beside a head or between figures, never over the paint
   frame left, facts right; portrait/Fold: frame on top, facts below. Her full-body figure still stands on the background.
 - One shared background for every reincarnation screen: `img/bg-reborn-p.webp` (portrait 1200x1602) / `img/bg-reborn-l.webp` (landscape 1920x1080),
   gpt-2-6, no people (moon with the wheel of rebirth, jade bridge, lotus lanterns).
-### 28.12 kitRoulette (owner item 6b) — origin wheel at a new game and at rebirth
-`kitRoulette({items:[{k,src,name,rare}], target, toEl, done})`: overlay on the reincarnation background; grid of origin tiles (art frame, name,
-rarity chip from j69 weights: Rất hiếm / Hiếm / Thường gặp); a gold light runs tile to tile with ease-out timing and a soft `sfx-tap` tick, stops on the
-pre-rolled origin (j52 seed + j69 weights; the wheel never decides), the tile flashes gold, flies to the card's art frame while the card slides in
-(landscape from the right, portrait from below). ≈4.5 s, tap skips, prefers-reduced-motion = card at once. Hooked on `nlCard` (start() → nlBegin →
-nlCard, used by "Bắt đầu kiếp mới" and the rebirth after death), once per rolled life. Test hook: `window.__kroulHold` / `__kroulGo()`.
+### 28.12 kitRoulette — LUÂN HỒI, face-down pick (owner 11/14 item 6b approved; owner 11/15 04:00Z face-down idea + exact flow) — KIT READY
+`kitRoulette({items:[{k,src,wide,name,rare}], target, toEl, done})` on the reincarnation background (`kitBackdrop(ov,"roulette")`), at a new game
+AND at rebirth (hooked on `nlCard`, once per rolled life). The origin is pre-rolled (j52 seed + j69 weights): the cards only SHOW it, odds unchanged.
+1. All origins FACE-UP: `kitOriginFace(it)` = kitSceneArt wide band + name + rarity chip (Rất hiếm / Hiếm / Thường gặp). Buttons `Tiếp` (`.kbtn`) · `Bỏ qua` (`.kbtn.alt`).
+2. `Tiếp` → every card flips face-down (painted back `img/kit/card-back.webp`, gpt-2-6: crimson brocade, gold wheel of rebirth on a lotus) and the
+   deck is SHUFFLED in view (cards gather to the centre and deal back to new places, twice; FLIP transforms only).
+3. "Chạm một lá để nhận thân phận kiếp này": the tapped card glows gold, moves to the centre enlarged (≤ 2.3×, ≤ 62 % width / 50 % height) and flips
+   over = the rolled origin; the other cards stay face-down, dimmed. Its name becomes the sub line; `Tiếp` returns.
+4. `Tiếp` → the revealed picture flies into the identity card's art frame (`#modal .kpidart .ksart`) while the card slides in (landscape from the
+   right, portrait from below). `Bỏ qua` at any step ends at once.
+- Card = outer `.krt` (moves) › `.krc` (flips, preserve-3d) › `.krf` front (in flow, gives the size) + `.krb` back (laid over, rotateY 180).
+- **Chip baseline rule (owner 11/15, kit-wide)**: any card tile with a chip/label under a wrapping title is a flex column with the chip pinned to
+  the bottom (`margin-top:auto`) and the tiles of a grid row stretched to one height, so the chips of a row share ONE line. Measured 0 px spread per row.
+- Reduced motion (`prefers-reduced-motion` or Cảnh động off): same steps, no motion (instant flips, no shuffle travel, no fly).
+- Test: `node dev/test/inv-origin.js <url> WxH@dpr <out> <tag>` (`window.__kroulStep` 0 face-up · 1 shuffling · 2 pick · 3 revealed). Shots `dev/shots/inv-origin/`.
 ### 28.13 kitItem — ONE item tile (KIT READY)
 `kitItem({src, name, grade:0..4, qty, label:[text,"ok"|"no"|"n"], on, empty, size:"sm"|"md"|"lg", data, tip})` → `.kitem` (52 / 72 / 104 px).
 Simple frame (not the portrait frame): square box, 2 px border + radial ground in the grade colour (`KIT_GRADE`): Thường `#9a8a78` · Tinh phẩm
@@ -713,6 +722,19 @@ Simple frame (not the portrait frame): square box, 2 px border + radial ground i
 name (wraps, never cut), grade word, optional status chip; `qty>1` → "×N" badge; `on` → "Đang mặc" band; `empty` → dashed empty slot.
 Picture: `kitItemSrc(k, fallback)` = `itemArt(k)` (j98, review/item-art) → `WD_ITEMS[k].icon` (wd-*) → fallback. Use it for every item anywhere:
 chest, Tư trang, wardrobe slots, reward chests, peddler, works, reward panels. Nobody draws another item box.
+- (11/15) `size:"slot"` = a bag slot for kitInvGrid (square only, fills its grid cell; name + grade in the tooltip / aria-label; empty = a recessed
+  square, no stripes). `onText` = worn band text ("Đang đeo"); `mark:[text,"r"|"g"|"n"]` = small corner tag ("đã tẩm"). `kitItemSrc` returns the src string.
+### 28.13b kitInvGrid — THE BAG (owner 11/15 04:00Z, shot 1115-49c7629b) — `dev/build/jinv.js` (after jk3) — KIT READY
+`kitInvGrid({key, tabs:[{k,label}], items:[{cat,src,name,grade,qty,on,onText,mark,tip}], minRows:4, onPick:fn(item)})` → `.kinv`:
+- Tab row = the ONE category tab row of k3CatTabs (`.pctabs.kcattabs`, buttons from `kitTabRowHTML(list,cur,attr)` in jk3; "Tất cả" first, count `<i>` = items);
+  sticky, one sideways row under 1000 px; choice remembered per key (`hclh-kinv-<key>`).
+- Grid `.kinvg` = recessed tray of SQUARE SLOTS (`repeat(auto-fill,minmax(60px,1fr))`, 54 px under 600 px). Items fill the first slots (kitItem "slot":
+  painted icon on the grade ground, ×N count, worn band, corner tag); the rest are EMPTY squares; `kitInvFit()` pads to whole rows (≥ minRows rows).
+- Tap / Enter on a slot → `onPick(item)`. Tư trang: item panel = `kitModal` kind info (title = item, sub = kind · grade) with the 512 px painting in a
+  kitItem lg, kitFacts (use, count, worn, own taint, rank, giver) and act cards (pbtn: Đeo/Tháo · May áo · Dùng · Tặng · Bán · Tẩm · Nghiệm độc) that run j8 `itemAct`.
+- Tư trang tabs (real j8 `IT.kd`): Trang sức · Vải vóc · Thuốc men (Thuốc bổ, Thuốc, Độc dược) · Hương liệu · Lễ vật (Lễ vật, Kỷ vật) · Thư từ ·
+  Tạp vật (only when such an item exists). The bag starts EMPTY: items are only earned (peddler, gifts, bestowals). When j92 (wardrobe) lands its
+  Trâm cài / Y phục chest uses the same kitInvGrid.
 ### 28.14 WARDROBE K1 + K2 (review/wardrobe j92)
 - K1 `kitWearSlots(p,{size})`: two kitItem tiles (Trâm cài · Y phục, empty = "Chưa cài" / "Thường phục") right under the portrait on EVERY person
   card (player, consorts, maids, ma ma, Thái hậu…), and on Tư trang. The outfit status chip (Đúng phẩm / Vượt phẩm / Quá giản dị / Phạm tang) shows
