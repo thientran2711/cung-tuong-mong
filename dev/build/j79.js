@@ -326,10 +326,10 @@ KP_SEAL.week="TUẦN";
  const secs=[];
  if(S.lot){const bad=LVB[S.lot.lv]<0||(S.lot.dom==="Hung"&&S.lot.lv>=3),good=LVB[S.lot.lv]>0;secs.push(`<div class="kpsec"><h4 class="kpst">${kitGloss("Quẻ tuần")}</h4>${kitRows([["Quẻ",`<span class="ef t">${LV[S.lot.lv]} · ${S.lot.dom}</span>`],["Lời quẻ",(LOTS[S.lot.i]||[])[2]||"","n"],["Tuần này",lotEffect(S.lot),bad?"r":good?"g":"n"]])}</div>`)}
  const me=[];if(sum.rank)me.push({text:`<b class="g">${sum.rank}</b>`,who:S});if(sum.kids>0)me.push({text:`Thêm ${sum.kids} con.`,who:S});
- secs.push(`<div class="kpsec"><h4 class="kpst">Tuần qua</h4>${dl.length?kitChips(dl):`<span class="kchip n">Chỉ số không đổi</span>`}${me.length?kitFacts(me,{group:false}):""}</div>`);
+ secs.push(`<div class="kpsec"><h4 class="kpst">Tuần qua</h4>${dl.length?kitChips(dl):`<span class="kchip n">Không đổi gì</span>`}${me.length?kitFacts(me,{group:false}):""}</div>`);
  const G=sum.groups.filter(g=>g[1].length);for(const [h,L] of G)secs.push(`<div class="kpsec"><h4 class="kpst">${h}</h4>${kitFacts(L,{group:false})}</div>`);
  if(!G.length&&!me.length)secs.push(`<div class="kpsec">${kitFacts([{text:"Một tuần yên ả.",kind:"world",auto:false}])}</div>`);
- w.innerHTML=`<div class="dsky"><i class="lan l1"></i><i class="lan l2"></i><i class="lan l3"></i><i class="sun"></i></div><div class="dbox kpanel kpdawn">${kpHeader("week",`Năm ${S.year} · Tháng ${S.month} · ${TUAN[S.tuan][0].toUpperCase()+TUAN[S.tuan].slice(1)}`,`${SEASON[S.month-1]}${S.wx?" · "+S.wx.n:""}`)}<div class="kpb"><div class="kpmain">${secs.join("")}</div></div><div class="kpfoot"><button class="kbtn" id="dawn-go">Vào ngày mới</button></div></div>`;
+ w.innerHTML=`<div class="dsky"><i class="lan l1"></i><i class="lan l2"></i><i class="lan l3"></i><i class="sun"></i></div><div class="dbox kpanel kpdawn">${kpHeader("week",kitDate(S.month,S.year,S.tuan),`${SEASON[S.month-1]}${S.wx?" · "+S.wx.n:""}`)}<div class="kpb"><div class="kpmain">${secs.join("")}</div></div><div class="kpfoot"><button class="kbtn" id="dawn-go">Vào ngày mới</button></div></div>`;
  w.hidden=false;w.classList.toggle("rm",reducedMotion());void w.offsetWidth;w.classList.add("on");setTimeout(bell,reducedMotion()?0:1400);
  const close=()=>{w.classList.remove("on");setTimeout(()=>{w.hidden=true},reducedMotion()?0:350);w.onclick=null};w.onclick=e=>{if(e.target.closest(".kodm,.kgl"))return;close()};const b=$("dawn-go");if(b)b.focus({preventScroll:true})}})();
 (function(){const st=document.createElement("style");st.id="kp-dawn-css";st.textContent=`
@@ -541,3 +541,7 @@ document.addEventListener("click",e=>{const a=e.target.closest("[data-kevact]");
  const c=e.target.closest(".kchipb[data-kev]");if(c){e.stopPropagation();const v=RV(+c.dataset.kev||c.dataset.kev);if(v){if(Q.length&&/pcm/.test(Q[0].cls||""))Q.shift();kitEvidencePanel(v)}return}
  const t=e.target.closest(".kchipb[data-kintel]");if(t){e.stopPropagation();const v=RV(+t.dataset.kintel||t.dataset.kintel);if(v){if(Q.length&&/pcm/.test(Q[0].cls||""))Q.shift();kitIntelPanel(v)}}},true);
 (function(){const st=document.createElement("style");st.id="kp-ev-css";st.textContent=`.kchipb{cursor:pointer;font-family:inherit;background:#fff;font-size:.75rem}.kchipb:hover{border-color:var(--gold)}.kevs{display:flex;flex-direction:column;gap:6px}`;document.head.appendChild(st)})();
+
+/* when(): the full date in the wording guide's words, season kept */
+if(typeof when==="function"){when=function(){return `${kitDate(S.month,S.year,S.tuan,null,true)} (${SEASON[S.month-1]})`}}
+(function(){const st=document.createElement("style");st.id="kp-kat-css";st.textContent=`button.ka .kat{flex-wrap:wrap}button.ka .kat>.kan{min-width:min(9em,100%)}button.ka .kat>.kodds{margin-left:auto}`;document.head.appendChild(st)})();
