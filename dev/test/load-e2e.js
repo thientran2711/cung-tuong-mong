@@ -42,9 +42,16 @@ async function midShot(p,name){for(let i=0;i<600;i++){const s=await state(p);if(
  if(PHASE==='ipad'){for(const [W,H] of [[1180,820],[1366,1024]]){const ctx=await ctxFor(b,W,H,2);const p=await ctx.newPage();const errs=[];watch(p,errs);
    const cdp=await ctx.newCDPSession(p);await cdp.send('Network.enable');await cdp.send('Network.emulateNetworkConditions',NET);
    await p.goto(BASE,{waitUntil:'domcontentloaded'});R['mid'+W]=await midShot(p,`1-loading-mid-ipad-${W}x${H}`);R['errs'+W]=errs;await ctx.close()}
-  for(const [W,H,D] of [[412,1058,2],[390,844,3],[1024,768,2]]){const ctx=await ctxFor(b,W,H,D);const p=await ctx.newPage();const errs=[];watch(p,errs);
+  for(const [W,H,D] of [[686,880,2.2],[412,1058,2],[390,844,3],[1024,768,2]]){const ctx=await ctxFor(b,W,H,D);const p=await ctx.newPage();const errs=[];watch(p,errs);
    const cdp=await ctx.newCDPSession(p);await cdp.send('Network.enable');await cdp.send('Network.emulateNetworkConditions',NET);
    await p.goto(BASE,{waitUntil:'domcontentloaded'});R['mid'+W]=await midShot(p,`5-loading-mid-${W}x${H}`);R['errs'+W]=errs;await ctx.close()}}
+ if(PHASE==='chip'){for(const [W,H,D] of [[755,1000,2],[686,880,2.2],[1180,820,2]]){const ctx=await ctxFor(b,W,H,D);const p=await ctx.newPage();const errs=[];watch(p,errs);
+   await p.goto(BASE,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>window.KLOAD&&KLOAD.phase==='done'&&!document.getElementById('kload'),null,{timeout:300000});
+   await sleep(4000);await p.screenshot({path:`${OUT}/2-title-chip-${W}x${H}.png`});if(process.env.PAUSE)await p.evaluate(()=>{KLOAD.paused=true});
+   await p.evaluate(()=>{SLOT=3;document.getElementById('title').hidden=true;start();Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;setTimeout(()=>{Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true},50);render()});
+   await sleep(3500);await p.screenshot({path:`${OUT}/2-game-chip-${W}x${H}.png`,animations:'disabled',timeout:90000});
+   R['chip'+W]=await p.evaluate(()=>{const c=document.querySelector('.kloadchip .kchip');if(!c)return null;const r=c.getBoundingClientRect(),hit=[];
+    document.querySelectorAll('button,.kbtn,[data-tab]').forEach(e=>{if(c.contains(e)||e.closest('.kloadchip'))return;const q=e.getBoundingClientRect();if(q.width&&q.left<r.right&&q.right>r.left&&q.top<r.bottom&&q.bottom>r.top)hit.push(e.textContent.trim().slice(0,20))});return{hit,overflowX:document.documentElement.scrollWidth>innerWidth}});R['errs'+W]=errs;await ctx.close()}}
  if(PHASE==='update'){const ctx=await ctxFor(b,755,1000,2,(process.env.PROF||OUT+'/prof'));const p=ctx.pages()[0]||await ctx.newPage();const errs=[];watch(p,errs);
   const got=[];p.on('request',q=>{if(q.headers()['x-ctm-load'])got.push(q.url().replace(BASE,''))});
   const sw=[];ctx.on('request',q=>{if(/\/img\/|\/audio\//.test(q.url())&&!q.headers()['x-ctm-load'])sw.push(q.url().replace(BASE,''))});

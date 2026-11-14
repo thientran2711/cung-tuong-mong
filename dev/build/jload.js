@@ -1,4 +1,4 @@
-/* ================= jload: NHẬP CUNG LẦN ĐẦU — thỉnh tranh vẽ, tiếng nhạc về máy (owner 11/14) — KIT.md section 31 =================
+/* ================= jload: NHẬP CUNG LẦN ĐẦU — thỉnh tranh vẽ, tiếng nhạc về máy (owner 11/14) — KIT.md section 33 =================
    assets.json (dev/site/assets.py, built by build_site.sh) lists every image + sound as [path, sha256/16, bytes, group].
    The long-lived cache 'ctm-assets' holds them keyed by content ('<path>?h=<hash>'); sw.js serves it and never wipes it on a build.
    This module fills it:
@@ -10,7 +10,7 @@
       kit chip at the bottom-left (tap = tạm ngưng / thỉnh tiếp, remembered). Save-Data or too little room = skipped (the worker still
       caches each picture the game actually shows).
    navigator.storage.persist() is asked once downloading starts; navigator.storage.estimate() is checked before the background sets.
-   Requests carry 'x-ctm-load' so sw.js lets them through and this module writes the cache itself (one write, real byte progress).
+   Requests carry 'x-ctm-load' so sw.js lets them through and this module writes the cache itself (one write, no copy through page script).
    Test hook: window.KLOAD {phase, core:{have,total,files,left}, fig:{…}, paused, err}. */
 (function(){
 const KLOAD=window.KLOAD={phase:"idle",core:{have:0,total:0,files:0,left:0},fig:{have:0,total:0,files:0,left:0},paused:false,err:""};
@@ -21,7 +21,7 @@ const keyOf=f=>new URL(f[0]+"?h="+f[1],location.href).href;
 let el=null,chip=null,shown=false,speed=[],enterCb=[];
 try{KLOAD.paused=localStorage.getItem(LS)==="1"}catch(e){}
 
-/* ---------- kit CSS (section 31) ---------- */
+/* ---------- kit CSS (section 33) ---------- */
 (function(){const st=document.createElement("style");st.id="kit-load";st.textContent=`
 .modal.kload{z-index:9600;transition:opacity .45s ease}
 .modal.kload.out{opacity:0;pointer-events:none}
@@ -44,14 +44,14 @@ try{KLOAD.paused=localStorage.getItem(LS)==="1"}catch(e){}
 @keyframes kloadFade{to{opacity:0;visibility:hidden}}
 `;document.head.appendChild(st)})();
 
-/* ---------- the bar (kit 31): label above, track + "a / b MB" beside, sub line under ---------- */
+/* ---------- the bar (kit 33): label above, track + "a / b MB" beside, sub line under ---------- */
 function kitProgress(o){const v=o.total?Math.min(100,o.have/o.total*100):0;
  return `<div class="kprog">${o.label?`<h4 class="kpst">${o.label}</h4>`:""}<div class="kprog-r"><span class="kprog-t" role="progressbar" aria-valuemin="0" aria-valuemax="${Math.round(o.total/1e6)}" aria-valuenow="${Math.round(o.have/1e6)}"><u style="--v:${v.toFixed(1)}%"></u></span><b class="kprog-n">${mb(o.have)} / ${mb(o.total)} MB</b></div><small class="kprog-s">${o.sub||""}</small></div>`}
 window.kitProgress=kitProgress;
 
 const IOS=/iP(ad|hone|od)/.test(navigator.userAgent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
 const STANDALONE=(window.matchMedia&&matchMedia("(display-mode: standalone)").matches)||navigator.standalone===true;
-function eta(left){const now=Date.now();speed=speed.filter(s=>now-s[0]<8000);if(speed.length<2)return"";
+function eta(left){const now=Date.now();speed=speed.filter(s=>now-s[0]<10000);if(speed.length<8)return"";
  const bps=(speed[speed.length-1][1]-speed[0][1])/Math.max(1,(speed[speed.length-1][0]-speed[0][0])/1000);if(bps<=0)return"";
  const s=left/bps;return s<20?"sắp xong":s<45?"còn chừng nửa phút":s<90?"còn chừng một phút":`còn chừng ${Math.round(s/60)} phút`}
 function screen(){if(el)return el;el=document.createElement("div");el.id="kload";el.className="modal kpscene kload";
@@ -70,21 +70,17 @@ function close(){if(!el)return;const e=el;el=null;e.classList.add("out");setTime
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-kl]");if(!b)return;e.stopPropagation();
  if(b.dataset.kl==="go"){KLOAD.phase="skipped";close();startBg()}else if(b.dataset.kl==="retry"){KLOAD.err="";paint();runCore()}},true);
 
-/* ---------- one file: stream it (real byte progress), then write it under its content key ---------- */
+/* ---------- one file: straight into the cache under its content key; progress counts whole files ---------- */
 async function getOne(c,f,grp){const g=KLOAD[grp];let got=0;
  for(let t=0;t<4;t++){try{
    const r=await fetch(keyOf(f),{headers:{"x-ctm-load":"1"},cache:"no-cache"});if(!r.ok)throw new Error("http "+r.status);
-   const parts=[];if(r.body&&r.body.getReader){const rd=r.body.getReader();for(;;){const {done,value}=await rd.read();if(done)break;parts.push(value);got+=value.length;g.have+=value.length;tick(grp)}}
-   else{const b=await r.arrayBuffer();parts.push(new Uint8Array(b));got+=b.byteLength;g.have+=b.byteLength}
-   const blob=new Blob(parts,{type:r.headers.get("content-type")||""});
-   await c.put(keyOf(f),new Response(blob,{headers:{"Content-Type":blob.type||"application/octet-stream","Content-Length":String(blob.size)}}));
+   await c.put(keyOf(f),r);  /* the browser streams it into the cache; no page script per chunk (keeps the game smooth) */
    g.have+=f[2]-got;g.left--;g.files++;tick(grp);return true}
   catch(e){g.have-=got;got=0;if(e&&e.name==="QuotaExceededError"){KLOAD.err="quota";throw e}
    if(navigator.onLine===false){KLOAD.err="offline";throw e}
    await new Promise(ok=>setTimeout(ok,600*(t+1)))}}
  KLOAD.err="net";throw new Error("net")}
-let tickT=0;function tick(grp){speed.push([Date.now(),KLOAD[grp].have]);if(speed.length>200)speed.splice(0,100);
- if(tickT)return;tickT=setTimeout(()=>{tickT=0;if(grp==="core")paint();else paintChip()},250)}
+let tickT=0;function tick(grp){if(tickT)return;tickT=setTimeout(()=>{tickT=0;speed.push([Date.now(),KLOAD[grp].have]);if(grp==="core")paint();else paintChip()},250)}
 async function pool(list,n,grp,stop){const c=await caches.open(AC);let i=0,dead=false;
  const w=async()=>{while(i<list.length&&!dead){if(stop&&stop())return;const f=list[i++];
    if(grp!=="core"&&await c.match(keyOf(f))){const g=KLOAD[grp];g.have+=f[2];g.left--;g.files++;continue}  /* the game showed it meanwhile (sw.js cached it) */
@@ -127,8 +123,14 @@ let bgOn=false,bgRun=false;
 function paintChip(){const g=KLOAD.fig;if(!bgOn||!g.total)return;
  if(!chip){chip=document.createElement("div");chip.className="kloadchip";document.body.appendChild(chip)}
  const done=!g.left,v=g.total?g.have/g.total*100:100;
- chip.classList.toggle("done",done);
+ chip.classList.toggle("done",done);placeChip();
  chip.innerHTML=`<button class="kchip" data-klc="1" aria-label="Thỉnh tranh nhân vật">${done?"Đã thỉnh đủ tranh nhân vật":KLOAD.paused?"Tạm ngưng thỉnh tranh · chạm để thỉnh tiếp":KLOAD.err==="quota"?"Máy hết chỗ cất tranh":KLOAD.err?"Mạng đứt · tranh thỉnh tiếp khi có mạng":"Thỉnh tranh nhân vật"}<span class="kprog-t"><u style="--v:${v.toFixed(1)}%"></u></span><b class="kprog-n" style="font-size:.72rem">${mb(g.have)} / ${mb(g.total)} MB</b></button>`}
+/* sits at the bottom-left, lifted above whatever kit bar/panel is docked at the bottom there (tab bar, title menu) so it covers no button */
+function placeChip(){if(!chip)return;const H=innerHeight;let lift=0;
+ document.querySelectorAll("#tabs,#modal:not([hidden]) .dlg,#kload .dlg,.kpopts").forEach(e=>{const r=e.getBoundingClientRect();
+  if(!r.width||r.left>300||r.bottom<H-60||r.top<H*.35)return;lift=Math.max(lift,H-r.top)});
+ chip.style.bottom=`calc(env(safe-area-inset-bottom,0px) + ${Math.round(lift)+8}px)`}
+addEventListener("resize",placeChip);setInterval(placeChip,1500);
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-klc]");if(!b)return;e.stopPropagation();if(!KLOAD.fig.left)return;
  KLOAD.paused=!KLOAD.paused;try{localStorage.setItem(LS,KLOAD.paused?"1":"0")}catch(x){}paintChip();if(!KLOAD.paused)runBg()},true);
 async function startBg(){if(bgOn||!MAN)return;if(!figList.length){KLOAD.phase="all";return}
