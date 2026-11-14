@@ -24,8 +24,8 @@ Support counted from live state:
 | | Cần | Tốn | Odds (clamped, ladder word) | Được | Mất (hỏng) / Kèm |
 |---|---|---|---|---|---|
 | (a) Con làm vua | — | — | sure (no word) | Hoàng thái hậu, an hưởng ở Từ Ninh cung | — |
-| (b) Nhiếp chính | tân đế < 16 tuổi; Danh ≥ 50; Tâm cơ ≥ 35; ≥ 1 nhà quyền thần; không ở lãnh cung | Bạc −100, Sức −10 | 35 + supPow/5 + (Danh−50)/2 + (Tâm cơ−35)/3 + 3·allies ± Thái hậu (+8/−10) ± vương gia (+5/−8), 15–92 | buông rèm đến khi tân đế 16 tuổi, Danh +8 | hỏng: đại thần không phục, Danh −10, chỉ làm Hoàng thái hậu · kèm: tân đế lớn lên có thể oán |
-| (c) Tự làm vua | phẩm Phi trở lên; Danh ≥ 70; Tâm cơ ≥ 60; ≥ 2 nhà quyền thần; binh quyền; Thái hậu không phản đối; Bạc ≥ 300; không ở lãnh cung | Bạc −300, Sức −20 | 20 + supPow/6 + (Danh−70)/2 + (Tâm cơ−60)/2 + 2·allies + 8 (cả hai binh quyền) ± vương gia (+8/−12) − 10 (tân đế đã 16), 5–80 | lên ngôi Nữ đế, đổi niên hiệu | hỏng: binh biến bại lộ, bị phế, ban chết · kèm: vương gia, đại thần khởi binh; thích khách |
+| (b) Nhiếp chính | tân đế < 16 tuổi; Danh ≥ 50; Tâm cơ ≥ 35; ≥ 1 nhà quyền thần; không ở lãnh cung | Bạc −100, Sức −10 | 35 + supPow/5 + (Danh−50)/2 + (Tâm cơ−35)/3 + 3·allies ± Thái hậu (+8/−10) ± vương gia (+5/−8), 15–92 | buông rèm đến khi tân đế 16 tuổi, Danh +8 | hỏng: đại thần không phục, Danh −10, chỉ làm Hoàng thái hậu · kèm: tân đế lớn lên sinh oán vì ngươi giữ quyền |
+| (c) Tự làm vua | phẩm Phi trở lên; Danh ≥ 70; Tâm cơ ≥ 60; ≥ 2 nhà quyền thần; binh quyền; Thái hậu không phản đối; Bạc ≥ 300; không ở lãnh cung | Bạc −300, Sức −20 | 20 + supPow/6 + (Danh−70)/2 + (Tâm cơ−60)/2 + 2·allies + 8 (cả hai binh quyền) ± vương gia (+8/−12) − 10 (tân đế đã 16), 5–80 | lên ngôi Nữ đế, đổi niên hiệu | hỏng: binh biến bại lộ, bị phế, ban chết · kèm: vương gia, đại thần dễ khởi binh, thích khách rình rập |
 
 ## 3. Epilogue (3 chapters each; chapter choices are EVENT choices → only costs shown, result card shows numbers)
 Hidden epilogue meters on `S.succ`: quyền `q`, nguy `an`, lòng người `tam`, mẫu tử `hoa`. Each chapter: +3 years (her age, son, year).
