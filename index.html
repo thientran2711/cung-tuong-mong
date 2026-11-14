@@ -729,7 +729,7 @@ function deal(){
  if(sick&&S.arts.y>=4)X.push({n:"Chữa bệnh cho con",t:`${sick.name} đang yếu, ngươi tự bốc thuốc.`,c:{suc:-10},o:100,w:{},x:`Sức khỏe ${sick.name} +30`,go:()=>{sick.hp=Math.min(100,sick.hp+30)}});
  if(S.preg&&!S.fake)X.push(S.arts.y>=4?{n:"Tự bào chế thuốc an thai",t:"Ngươi tự sắc thuốc, không ai nhúng tay được.",c:{suc:-5},o:100,w:{},x:"tháng này nguy cơ sảy thai giảm một nửa",go:()=>S.anthai=1}
    :{n:"An thai",t:"Nằm nghỉ, uống thuốc an thai.",c:{bac:-20},o:100,w:{suc:10},x:"tháng này nguy cơ sảy thai giảm một nửa",go:()=>S.anthai=1});
- if(S.preg&&S.hidden&&S.preg<=3)X.push({n:"Báo tin có thai",t:"Đang giấu thai. Báo tin thì được sủng ái, nhưng kẻ ác cũng biết.",c:{},o:100,w:{sung:6,th:5},x:"phi tần có thể nhắm vào thai",go:()=>{S.hidden=false;ghenAll(6)}});
+ if(S.preg&&S.hidden&&S.preg<=3)X.push({n:"Báo tin có thai",t:"Đang giấu thai. Báo tin thì được sủng ái, nhưng kẻ ác cũng biết.",c:{},o:100,w:{sung:6,th:5},x:"kèm: mọi phi tần ghen +6, ai cũng biết ngươi mang thai",go:()=>{S.hidden=false;ghenAll(6)}});
  const s=STORY[S.origin.k];if(!S.st.done&&s.acts)X.push(...s.acts());
  X.push(...directActs());X.push(...illCards());
  X.forEach(a=>{if(!a.dom)a.dom=/Dạy dỗ|con đến|Chữa bệnh/.test(a.n)?"Con cái":/an thai|Báo tin/i.test(a.n)?"Sức khỏe":/Tranh sủng|Chặn ngự giá/.test(a.n)?"Sủng":/Thỉnh an|Hối lộ/.test(a.n)?"Giao thiệp":"Tài nghệ"});
@@ -784,7 +784,7 @@ function curPeople(){return S.visit?S.visit.people:[]}
 function talkOpts(p){const E=S.emp,K=E.known,L=E.likes,b=bestArt(),v=p.ref;
  if(p.kind==="emp"){const A=[
    {n:"Tâng bốc",o:od(55+S.sung/5+mm()),w:{sung:3},l:{sung:-1},go:()=>{if(roll(25))discover()}},
-   {n:"Nói thật lòng",o:od(45+S.duc/3+mm()+(has("nhantu")?10:0)),w:{sung:2,danh:2},l:{sung:-2},x:"có thể biết ngài thích gì",go:()=>{if(roll(50))discover()}},
+   {n:"Nói thật lòng",o:od(45+S.duc/3+mm()+(has("nhantu")?10:0)),w:{sung:2,danh:2},l:{sung:-2},x:`biết thêm một sở thích của ngài: ${word(50)}`,go:()=>{if(roll(50))discover()}},
    {n:`Phô tài: ${b.n}`,c:{suc:-5},o:od(30+b.w*10+mm()),w:{sung:4+b.l,danh:1},l:{danh:-2}},
    {n:K.flower?`Dâng ${L.flower}`:"Dâng một cành hoa",c:{bac:-5},o:K.flower?100:od(50),w:{sung:K.flower?6:2},l:{}}];
   if(S.sung>=30)A.push({n:"Xin ân điển",o:od(35+S.sung/3+mm()),w:{bac:60},l:{sung:-4},fail:()=>{if(E.mood===3&&roll(40))punish("làm phiền lúc thánh thượng nổi giận",1)}});
@@ -986,7 +986,7 @@ tt:{t:"Quân cờ của Tể tướng",n:3,goal:"Cha ngươi dùng ngươi làm 
   return""}},
 dtq:{t:"Trung thần nơi biên ải",n:3,goal:"Cha ngươi trấn giữ biên cương; thắng bại ngoài ải là vinh nhục của ngươi. Khi có kẻ vu cha mưu phản, phải tìm đủ chứng cứ trong hạn.",
  init(){S.st.proof=0;S.st.acc=0},
- hint:()=>S.st.acc?`Còn ${Math.max(0,S.st.acc-S.turn)} tháng, chứng cứ ${S.st.proof}/2`:"Tháng 4 hằng năm có tin biên ải; từ năm thứ 3 có thể có kẻ vu cha",
+ hint:()=>S.st.acc?`Còn ${Math.max(0,S.st.acc-S.turn)} tháng, chứng cứ ${S.st.proof}/2`:`Tháng 4 hằng năm có tin biên ải (thắng: ${word(55)}); từ năm thứ 3, mỗi tháng có kẻ vu cha: ${word(15)}`,
  month(){const st=S.st;let ev="";
   if(S.month===4&&S.turn>1){if(roll(55)){apply({danh:4,sung:3});S.emp.mood=0;ev+=`<span class="g">Tin thắng trận từ biên ải: cha ngươi phá tan quân giặc.</span> Danh +4 · Sủng +3. `}else{apply({danh:-4,sung:-3});S.emp.mood=2;ev+=`<span class="r">Cha ngươi thua một trận ở Nhạn Môn quan.</span> Danh -4 · Sủng -3. `}}
   if(!st.acc&&S.year>=3&&roll(15)){const p=liveRivals(false);if(p.length){const v=p.slice().sort((a,b)=>a.rel-b.rel)[0];st.acc=S.turn+8;st.accuser=v;st.step=1;v.rel-=10;ev+=`<span class="r">${v.name} xúi cha nàng dâng sớ: Đại tướng quân giữ binh không về, có lòng phản.</span> Hoàng thượng cho 8 tháng tra xét. `}}
@@ -1003,7 +1003,7 @@ muoi:{t:"Từ muối lên tước",n:3,goal:"Nhà buôn muối bị coi khinh. D
   if(st.don<2)A.push({n:"Dâng bạc vào quốc khố",t:"Lấy danh nghĩa cha, giúp triều đình cứu đói.",c:{bac:-100},o:100,w:{danh:3,th:3},x:`lần dâng ${st.don+1}/2`,go:()=>{st.don++;st.step=st.don}});
   else A.push({n:"Xin phong tước cho cha",t:S.th>=30?"Nhờ Thái hậu nói giúp trước mặt Hoàng thượng.":`Cần Thái hậu ủng hộ 30 (nay ${S.th}).`,c:{suc:-5},o:od(45+S.danh/4+S.th/5),w:{danh:10},l:{th:-8},lock:S.th<30,x:"cha được phong tước",go:()=>{st.step=3;stEnd(1,"Nhà được phong tước")}});
   return A}},
-cn:{t:"Từ nô tỳ thành chủ tử",n:3,goal:"Chủ cũ khinh ngươi, một mối tình cũ có thể hủy ngươi. Lên tới bậc Phi để rửa sạch thân phận.",
+cn:{t:"Từ nô tỳ thành chủ tử",n:3,goal:"Chủ cũ khinh ngươi, một mối tình cũ đe dọa hủy ngươi. Lên tới bậc Phi để rửa sạch thân phận.",
  init(){const v=rivals[1+R(4)];v.oldmis=true;v.rel=-25;S.st.mis=v;S.st.guard="thị vệ "+pick(SURN)+" "+pick(MALEN);S.st.secret=0},
  hint:()=>["Chủ cũ sắp làm khó ngươi","Chuyện cũ sắp bị khơi lại",`Lên bậc Phi (nay ${RANKS[S.rank].n})`][S.st.step]||"",
  month(){const st=S.st,m=st.mis;
@@ -1014,7 +1014,7 @@ cn:{t:"Từ nô tỳ thành chủ tử",n:3,goal:"Chủ cũ khinh ngươi, một
   return""}},
 nc:{t:"Hòa thân",n:3,goal:"Phụ vương Nam Chiếu muốn ngươi làm tai mắt. Chọn cố quốc hay triều đình; chiến tranh sẽ phân xử.",
  init(){S.st.m=0},
- hint:()=>S.st.step===0?"Mật sứ cố quốc sắp đến":S.year<4?"Chiến tranh có thể nổ ra từ tháng 9 năm thứ 4":"Chiến tranh có thể nổ ra tháng 9",
+ hint:()=>S.st.step===0?"Mật sứ cố quốc sắp đến":S.year<4?"Chiến tranh nổ ra tháng 9 năm thứ 4":"Chiến tranh nổ ra tháng 9",
  month(){const st=S.st;
   if(st.step===0&&S.turn>=2&&roll(35))return setDil(mkP("nc1"));
   if(st.step>=1&&S.year>=4&&S.month===9){st.step=3;S.emp.mood=3;
@@ -1053,7 +1053,7 @@ ch:{t:"Quân cờ của Thái hậu",n:3,goal:"Thái hậu đưa ngươi vào cu
   if(st.step===0&&S.turn>=2&&qOn()&&roll(30))return setDil(mkP("ch1"));
   if(st.step===1&&qOn()&&roll(25)){const o=od(40+S.mat*5+S.tamco/4+S.th/5-(DG()?6:0));return setDil(mkP("ch2",{o}))}
   return""}},
-thd:{t:"Tài nữ nhà nho",n:3,goal:"Thơ ngươi có thể làm rạng danh cha. Được phong Tài nữ, rồi xin khắc in sách của cha. Coi chừng kẻ vu ngươi đạo thơ.",
+thd:{t:"Tài nữ nhà nho",n:3,goal:"Thơ ngươi sẽ làm rạng danh cha. Được phong Tài nữ, rồi xin khắc in sách của cha. Coi chừng kẻ vu ngươi đạo thơ.",
  init(){S.st.stu="Hàn lâm "+pick(SURN)+" "+pick(MALEN);S.st.frames=0;S.st.title=0},
  hint:()=>["Luyện Thi tới bậc 2 hoặc Tài 60","Dự thi Tài nữ (Thi bậc 3 hoặc Tài 70)","Xin khắc in sách của cha (Danh 40)"][S.st.step]||"",
  month(){const st=S.st;
@@ -1630,14 +1630,14 @@ function bestow(p,why){if(!p||p.dead||(p!==S&&!p.alive))return;let L=BEST[why]||
 /* ================= NIGHTS ================= */
 function nightScene(){S.tonight="me";pushFront(mkP("prep"),"Chuẩn bị thị tẩm")}
 function pushFront(d,title){if(!d)return;Q.unshift({t:title||"Việc khó xử",h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp})}
-function night(p=S){if(p.preg)return;if(roll(conceiveCh(p))){p.preg=1;p.pregWk=wk();if(p===S){S.hidden=true;log(`<span class="g">Thái y bắt mạch: ngươi đã có thai.</span> Ngươi có thể giấu thai đến hết tháng thứ 3, hoặc báo tin để được sủng ái.`)}else{p.hidden=p.tamco>=40;if(!p.hidden)ap(p,{sung:6,th:5})}}}
+function night(p=S){if(p.preg)return;if(roll(conceiveCh(p))){p.preg=1;p.pregWk=wk();if(p===S){S.hidden=true;log(`<span class="g">Thái y bắt mạch: ngươi đã có thai.</span> Ngươi được giấu thai đến hết tháng thứ 3, hoặc báo tin để được sủng ái.`)}else{p.hidden=p.tamco>=40;if(!p.hidden)ap(p,{sung:6,th:5})}}}
 function giuBlocked(p){return rkOf(p)<=1&&(p.th<0||(has("hieuthao")&&p.th<10))&&roll(30)}
 PEND.ksp=()=>({who:pEmp(),t:"<p>Tối nay Hoàng thượng lật thẻ bài của ngươi.</p>",o:[{n:"Tắm gội chờ giá",fx:{},x:"chuẩn bị thị tẩm",go:nightScene},
- {n:`Tiến cử ${S.maid.name} hầu thay`,fx:{},x:"nàng có thể được sủng, thành người của ngươi hoặc phản",go:()=>{log(sendMaid(S))}},
+ {n:`Tiến cử ${S.maid.name} hầu thay`,fx:{},x:`${roomFor("consort")?`nàng được phong ${RANKS[0].n}: ${word(30)}, rồi ${S.maid.loyal>=60?"vẫn là người của ngươi":"trở mặt với ngươi"}`:"không còn ghế để phong: nàng hầu một đêm rồi ra cung"} · kèm: mất ${S.maid.name}, cung nữ mới lòng 45`,go:()=>{log(sendMaid(S))}},
  {n:"Cáo bệnh",fx:{sung:-2},x:"nhường đêm; Ân tình -2",go:()=>{S.an=cl(S.an-2,0,100);S.tonight=null}}]});
 PEND.prep=()=>{const wb=wearBonus(S),vp=vpItems(S).length>0,b=bestArt();return{who:pMe(),t:"<p>Kính sự phòng đã báo tin. Còn hai canh giờ trước khi kiệu đến.</p>",o:[
  {n:"Tắm cánh hoa, xông hương",fx:{bac:-10},x:"đêm nay được ưa hơn",go:()=>pushFront(mkP("night1",{q:2,vp:0}),"Đêm thị tẩm")},
- {n:"Điểm trang lộng lẫy",fx:{},x:`trang sức đang đeo: Sắc +${wb.sac}${vp?" · vượt phẩm, Hoàng thượng có thể thấy":""}`,go:()=>pushFront(mkP("night1",{q:1+Math.round(wb.sac/3),vp:vp?1:0}),"Đêm thị tẩm")},
+ {n:"Điểm trang lộng lẫy",fx:{},x:`trang sức đang đeo: Sắc +${wb.sac}${vp?` · kèm: đồ vượt phẩm bị Hoàng thượng thu, Danh -4: ${word(40)}`:""}`,go:()=>pushFront(mkP("night1",{q:1+Math.round(wb.sac/3),vp:vp?1:0}),"Đêm thị tẩm")},
  {n:`Tập trước ${b.n}`,fx:{suc:-5},x:`bậc ${b.l}`,go:()=>pushFront(mkP("night1",{q:1+b.l,vp:0}),"Đêm thị tẩm")},
  {n:"Để mộc, tự nhiên",fx:{},go:()=>pushFront(mkP("night1",{q:1,vp:0}),"Đêm thị tẩm")}]}};
 PEND.night1=p=>{const E=S.emp,mood=[1,0,-1,-2][E.mood],go=b=>()=>{let s=p.q+b+mood+R(3),ex="";
@@ -1649,7 +1649,7 @@ PEND.night1=p=>{const E=S.emp,mood=[1,0,-1,-2][E.mood],go=b=>()=>{let s=p.q+b+mo
  {n:"Rót rượu, nũng nịu",fx:{},x:nx(has("datinh")||has("mesac")?3:has("lanhlung")?-1:0,has("datinh")||has("mesac")?"ngài đa tình, rất hợp":has("lanhlung")?"ngài lạnh lùng, dễ chán":""),go:go(has("datinh")||has("mesac")?3:has("lanhlung")?-1:0)},
  {n:"Lặng lẽ xoa vai, nghe ngài kể",fx:{},x:nx(E.mood>=2?2:1,E.mood>=2?"ngài đang phiền, rất hợp":"an toàn"),go:go(E.mood>=2?2:1)}]}};
 /* the night talk's line: how well it suits him -> ladder word; the night is graded, never empty */
-function nx(b,note){const m=[1,0,-1,-2][S.emp.mood];const v=b+m;const w=v>=3?"Rất chắc":v>=2?"Chắc":v>=1?"Khá chắc":v>=0?"Năm ăn năm thua":"Khó";return `${w} · thành: đêm vui, Sủng +5, Ân tình +5 · hỏng: đêm nhạt, Sủng +3, Ân tình +2${note?" · "+note:""}${vpItems(S).length?" · đồ vượt phẩm có thể bị thu, Danh -4":""}`}
+function nx(b,note){const m=[1,0,-1,-2][S.emp.mood];const v=b+m;const w=v>=3?"Rất chắc":v>=2?"Chắc":v>=1?"Khá chắc":v>=0?"Năm ăn năm thua":"Khó";return `${w} · thành: đêm vui, Sủng +5, Ân tình +5 · hỏng: đêm nhạt, Sủng +3, Ân tình +2${note?" · "+note:""}${vpItems(S).length?` · kèm: đồ vượt phẩm bị thu, Danh -4 (nếu đang đeo): ${word(40)}`:""}`}
 function nightFx(s){S.tablet=0;S.nights++;S.nightLog.push(wk());const g=3+Math.max(0,Math.round(s/2));apply({sung:g});S.an=cl(S.an+2+Math.max(0,s),0,100);ghenAll(8);
  if(giuBlocked(S))pushFront(mkP("giu"),"Giữ hay không giữ");else night(S);
  if(roll(10+s*4))bestow(S,"night");log(`Thị tẩm. Sủng +${g} · Ân tình +${2+Math.max(0,s)}.`)}
@@ -2117,7 +2117,7 @@ function renderStage(){const P=placeOf(S.place);$("stage").className="stage sc-"
  $("popw").innerHTML=pw;kitFix($("popw"))}
 function rvButtons(v,i){const dis=!can(2)||!v.alive||v.out||S.dead;const b=(k,extra)=>{const a=ACT[k];if(!a||(a.kid&&!a.ok(S,v)))return"";const ok=a.ok(S,v),o=a.o?a.o(S,v):null;
   return `<button data-r="${i}" data-a="${k}" ${dis||!ok?"disabled":""}>${k==="poison"||k==="kpoison"?ic("doc",14):""}${a.n}<small>${[o!=null&&ok?word(cl(o+lotB(S,ACTDOM[k]),5,95))+lotTag(ACTDOM[k]):"",fmt(a.c),!ok&&a.x?a.x:ok&&a.x?a.x:""].filter(Boolean).join(" · ")||"không tốn"}</small></button>`};
- if(sameHouse(S,v))return `<p class="past">Cùng ${houseName(v)} với ngươi: không thể lấy lòng hay ra tay.</p>`;let h=`<p class="past" style="margin:2px 0">${together(S,v)?"Đang cùng chỗ với nàng":"Không cùng chỗ: phải sai người đi (khó hơn, kẻ đi có thể bị bắt)"}</p><div class="rbtn">${["spy","ally","gift","rumor","bribe","block","frame","poison","accuse","vp","plant","musk","catswap","ksab","kpoison","pond","kframe","takeaway"].map(k=>b(k)).join("")}</div>`;
+ if(sameHouse(S,v))return `<p class="past">Cùng ${houseName(v)} với ngươi: không thể lấy lòng hay ra tay.</p>`;let h=`<p class="past" style="margin:2px 0">${together(S,v)?"Đang cùng chỗ với nàng":`Không cùng chỗ: phải sai người đi (khó hơn; việc hại: kẻ đi bị bắt, khai ra ngươi: ${word(confessRisk(bestSent(S)))})`}</p><div class="rbtn">${["spy","ally","gift","rumor","bribe","block","frame","poison","accuse","vp","plant","musk","catswap","ksab","kpoison","pond","kframe","takeaway"].map(k=>b(k)).join("")}</div>`;
  if(S.rank>=7)h+=`<div class="rbtn"><button data-e="${i}" data-k="judge" ${dis||evG(S,v)<2?"disabled":""}>Xử tội<small>${evG(S,v)>=2?"theo chứng cứ":"cần 2 chứng cứ"}</small></button><button data-e="${i}" data-k="conf" ${dis?"disabled":""}>Tịch thu trang sức<small>nàng thù -20</small></button><button data-e="${i}" data-k="reward" ${dis||S.bac<30?"disabled":""}>Ban thưởng<small>Bạc -30 · thân +20</small></button>${v.confined?`<button data-e="${i}" data-k="pardon" ${dis?"disabled":""}>Ân xá<small>hết cấm túc</small></button>`:""}</div>`;
  return h}
 function renderPanel(){try{renderPanel0()}catch(e){console.error(e);const el=$("panel");el.innerHTML=`<p class="past">Mục này đang lỗi, ngươi chọn mục khác.</p>`}}
@@ -2343,15 +2343,16 @@ function illMonth(){let ev="";for(const p of consorts())ev+=illMonthP(p);ev+=epi
  return ev}
 /* the Emperor avoids the sick; quarantine blocks nights */
 function illNightF(p){const i=illOf(p);if(p.fakeIll)return 1.2;return !i?1:ILL[i.k].cont?0:i.st>=2?.3:.7}
+function treatO(p,way){return cl(lotB(p,"Sức khỏe")+(way==="ty"?55+careOdds(p):way==="self"?30+p.arts.y*8:20+careOdds(p)),5,95)}
 function treat(p,way){const i=illOf(p);if(!i)return"";let o=lotB(p,"Sức khỏe")+(way==="ty"?55+careOdds(p):way==="self"?30+p.arts.y*8:20+careOdds(p));
  const bribed=liveRivals(true).find(v=>v!==p&&S.court&&(S.court.ty.af[v.id]||0)>=30&&hostility(v,p)>=40);
  if(way==="ty"&&bribed&&roll(25)){i.st=Math.min(3,i.st+1);return `<span class="r">Thang thuốc của thái y làm bệnh nặng thêm.</span> (Có kẻ đã mua chuộc thái y?) `}
  if(roll(cl(o,5,95))){p.ill=null;return `${NMc(p)} khỏi bệnh. `}if(i.st>1&&roll(50)){i.st--;return `Bệnh đỡ, còn ${STG[i.st]}. `}return "Bệnh chưa thuyên giảm. "}
 function illCards(){const A=[];const i=illOf(S);
- if(i){A.push({n:"Truyền thái y",t:`Mời thái y đến chữa ${ILL[i.k].n.toLowerCase()}.`,c:{bac:-40},o:100,k:2,w:{},x:"có thể khỏi bệnh",go:()=>log(treat(S,"ty"))});
-  if(S.arts.y>=3)A.push({n:"Tự bốc thuốc",t:"Dùng y thuật của mình.",c:{suc:-5},o:100,k:2,w:{},x:`Y thuật bậc ${S.arts.y}`,go:()=>log(treat(S,"self"))});
-  A.push({n:"Tĩnh dưỡng",t:"Đóng cửa nằm nghỉ cả buổi.",c:{},o:100,k:4,w:{suc:15},x:"có thể khỏi bệnh",go:()=>log(treat(S,"rest"))})}
- else if(!S.fakeIll)A.push({n:"Giả bệnh",t:"Cáo bệnh để Hoàng thượng thương xót, tránh việc khó.",c:{duc:-3},o:100,k:1,w:{sung:3},x:"dễ được thăm; thái y ngay thẳng có thể lật tẩy",go:()=>{S.fakeIll=2}});
+ if(i){A.push({n:"Truyền thái y",t:`Mời thái y đến chữa ${ILL[i.k].n.toLowerCase()}.`,c:{bac:-40},o:100,k:2,w:{},x:`khỏi bệnh: ${word(treatO(S,"ty"))} · chưa khỏi thì bệnh đỡ một bậc: ${word(50)}`,go:()=>log(treat(S,"ty"))});
+  if(S.arts.y>=3)A.push({n:"Tự bốc thuốc",t:"Dùng y thuật của mình.",c:{suc:-5},o:100,k:2,w:{},x:`khỏi bệnh: ${word(treatO(S,"self"))} (Y thuật bậc ${S.arts.y})`,go:()=>log(treat(S,"self"))});
+  A.push({n:"Tĩnh dưỡng",t:"Đóng cửa nằm nghỉ cả buổi.",c:{},o:100,k:4,w:{suc:15},x:`khỏi bệnh: ${word(treatO(S,"rest"))} · chưa khỏi thì bệnh đỡ một bậc: ${word(50)}`,go:()=>log(treat(S,"rest"))})}
+ else if(!S.fakeIll)A.push({n:"Giả bệnh",t:"Cáo bệnh để Hoàng thượng thương xót, tránh việc khó.",c:{duc:-3},o:100,k:1,w:{sung:3},x:`2 tháng: dễ được lật thẻ hơn · kèm: thái y bắt mạch ra, Danh -6, bị phạt: ${word(28)}`,go:()=>{S.fakeIll=2}});
  return A}
 
 /* ================= THE TUẦN'S FORTUNE: xin xăm ================= */
@@ -2471,7 +2472,7 @@ function kidCard(k){const lines=k.alive?[tuoi(k.age),`Sức khỏe <b>${k.hp}</b
  const home=S.place==="home";
  return pcard({f:kidFace(k),name:k.name,rank:`${ic("con",16)}${k.sex==="m"?"Hoàng tử":"Công chúa"} · ${k.alive?k.age+" tuổi":"đã mất"}`,status:k.alive?"":"Đã mất",out:!k.alive,lines,chips,
   groups:k.alive?[["",[pbtn(`data-go="home"`,"Về tẩm cung thăm con","Chắc chắn · tốn: 1-2 khắc · thành: gặp các con, chăm con tại tẩm cung",home?"đang ở tẩm cung":S.out?"đang ở lãnh cung":S.confined?"đang cấm túc":"")]]]:[],empty:"Con đã mất."})}
-function kidTabHTML(hl){return `<div class="pgwrap"><div class="ph"><span>${hl}</span><span>${ic("con",14)}${mySons().length} hoàng tử · ${myDaus().length} công chúa</span></div>`+(S.kids.length?pager("kid",S.kids.map(k=>({f:kidFace(k),name:shortN(k.name),dim:!k.alive})),i=>kidCard(S.kids[i])):`<p class="past">Chưa có con. Được thị tẩm mới có thể mang thai.</p>`)+`</div>`}
+function kidTabHTML(hl){return `<div class="pgwrap"><div class="ph"><span>${hl}</span><span>${ic("con",14)}${mySons().length} hoàng tử · ${myDaus().length} công chúa</span></div>`+(S.kids.length?pager("kid",S.kids.map(k=>({f:kidFace(k),name:shortN(k.name),dim:!k.alive})),i=>kidCard(S.kids[i])):`<p class="past">Chưa có con. Chỉ được thị tẩm mới mang thai.</p>`)+`</div>`}
 
 /* ---- servants and palace people (Kẻ hầu tab) ---- */
 function staffTabHTML(){const [cm,ce]=capOf(S),nm=S.staff.filter(s=>s.role==="maid").length+1,ne=S.staff.filter(s=>s.role==="eunuch").length;
@@ -2485,7 +2486,7 @@ function staffTabHTML(){const [cm,ce]=capOf(S),nm=S.staff.filter(s=>s.role==="ma
  const mk=i=>{const e=L[i];
   if(e.t==="maid")return pcard({f:e.f,name:S.maid.name,rank:"Cung nữ thân tín",lines:[tuoi(S.maid.age),typeof bondBars==="function"?bondBars(S.maid):`Lòng <b>${S.maid.loyal}</b>`,`Kẻ hầu: ${nm}/${cm} cung nữ · ${ne}/${ce} thái giám`,`Sai đi: ${bestSent(S)?bestSent(S).name:"không có ai"}`],chips:[S.maid.loyal<45?chip("lòng lung lay","hot"):""],
    note:"Gặp nàng ở tẩm cung để tâm sự hay sai đi dò la.",groups:[["Quản kẻ hầu",[pbtn(`data-hire="maid"`,"Thêm cung nữ","Nội vụ phủ · Bạc -20",nm>=cm?"đủ số theo phẩm":!roomFor("maid")?"hậu cung hết cung nữ":S.bac<20?"cần 20 bạc":""),pbtn(`data-hire="eunuch"`,"Thêm thái giám","Bạc -20",ne>=ce?"đủ số theo phẩm":!roomFor("eunuch")?"hết thái giám":S.bac<20?"cần 20 bạc":""),pbtn(`data-plantsv="1"`,"Cài người vào cung khác","Bạc -40 · 2 khắc",t2||(S.bac<40?"cần 40 bạc":!bestSent(S)?"không có ai để sai":"")),S.staff.some(s=>s.role==="maid"&&srk(s)>=3)?pbtn(`data-smaid="1"`,"Chưởng sự tra xét cung nữ","2 khắc · tìm tai mắt, đối thực",t2):""]]]});
-  if(e.t==="own"){const s=e.s;return pcard({f:e.f,name:s.name,rank:s.role==="maid"?"Cung nữ":"Thái giám",lines:sinfo(s),chips:schip(s),groups:[["Thưởng phạt",servJudgeBtns(s).concat(s.kn?[]:[pbtn(`data-svlook="${s.sid}"`,"Xem người","Bạc -15 · 1 khắc",S.bac<15?"cần 15 bạc":!can(1)?"hết khắc":"")])],["Sai bảo",[pbtn(`data-sv="hoi" data-sid="${s.sid}"`,"Hỏi chuyện",`${word(s.tr==="chuyen"?70:40)} · 2 khắc · thành: chứng cứ +1 nếu quen người cung khác · hỏng: không biết gì mới`,t2),pbtn(`data-rec="${s.sid}"`,"Tiến cử","Bạc -30 · Danh -2",S.bac<30?"cần 30 bạc":""),pbtn(`data-sv="doi" data-sid="${s.sid}"`,"Đổi người",`Chắc · tốn: Bạc -20, Danh -1 (đuổi 2 người trong nửa năm: Danh -3) · thành: trả ${s.name.split(" ").pop()} về, người thay ngẫu nhiên, nết chưa rõ · hắn biết chuyện của ngươi, có thể bán cho kẻ thù`,S.bac<20?"thiếu bạc (cần 20)":"")]]]})}
+  if(e.t==="own"){const s=e.s;return pcard({f:e.f,name:s.name,rank:s.role==="maid"?"Cung nữ":"Thái giám",lines:sinfo(s),chips:schip(s),groups:[["Thưởng phạt",servJudgeBtns(s).concat(s.kn?[]:[pbtn(`data-svlook="${s.sid}"`,"Xem người","Bạc -15 · 1 khắc",S.bac<15?"cần 15 bạc":!can(1)?"hết khắc":"")])],["Sai bảo",[pbtn(`data-sv="hoi" data-sid="${s.sid}"`,"Hỏi chuyện",`${word(s.tr==="chuyen"?70:40)} · 2 khắc · thành: chứng cứ +1 nếu quen người cung khác · hỏng: không biết gì mới`,t2),pbtn(`data-rec="${s.sid}"`,"Tiến cử","Bạc -30 · Danh -2",S.bac<30?"cần 30 bạc":""),pbtn(`data-sv="doi" data-sid="${s.sid}"`,"Đổi người",`Chắc · tốn: Bạc -20, Danh -1 (đuổi 2 người trong nửa năm: Danh -3) · thành: trả ${s.name.split(" ").pop()} về, người thay ngẫu nhiên, nết chưa rõ ${servSellO(S,s)>0?` · kèm: hắn đem chuyện của ngươi bán cho kẻ thù (kẻ ấy nắm thêm chứng cứ): ${word(servSellO(S,s))}`:""}`,S.bac<20?"thiếu bạc (cần 20)":"")]]]})}
   if(e.t==="court"){const c=e.c,k=e.k;return pcard({f:e.f,name:c.name,rank:c.n,lines:[tuoi(c.age),`Thiện cảm <b>${c.af.me||0}</b>`],groups:[["Giao thiệp",[pbtn(`data-cv="thuong" data-ck="${k}"`,"Biếu","Bạc -20 · thiện cảm +10",S.bac<20?"cần 20 bạc":""),pbtn(`data-cv="hoi" data-ck="${k}"`,"Hỏi chuyện",k==="tq"?`${word(cl(40+(c.af.me||0)/2,5,95))} · 2 khắc · thành: biết một sở thích của Hoàng thượng · hỏng: ông chỉ cười`:k==="ksp"?"Chắc chắn · 2 khắc · thành: xem sổ thị tẩm":"Chắc chắn · 2 khắc · thiện cảm +1",t2)]]]})}
   const s=e.s,v=e.v;const known=s.lover&&(S.knowDT||[]).includes(s.sid);
   return pcard({f:e.f,name:s.name,rank:`${s.role==="maid"?"Cung nữ":"Thái giám"} · cung ${v.name}`,lines:sinfo(s),chips:schip(s),note:s.spyFor==="me"?"Người này đã là tai mắt của ngươi.":"",
@@ -2753,7 +2754,7 @@ function stipend(p){const r=rkOf(p),me=p===S,staff=(p.staff||[]).length;let base
 function payCuts(){const q=queenP();if(!q)return;for(const p of consorts()){if(p===q||p.out)continue;if(q!==S&&rel(q,p)<-30&&roll(20)){p.cutPay=Math.max(p.cutPay||0,1);p.cutBy=q.name;if(p===S)log(`<span class="r">Hoàng hậu ${q.name} sai Nội vụ phủ khất bổng lộc của ngươi tháng tới.</span>`)}}}
 /* the NPC Empress rewards her closest ally a little each season (two-way: she, as Empress, has 'Ban thưởng') */
 function queenRewards(){const q=queenP();if(!q||q===S||S.month%3)return;const L=consorts().filter(p=>p!==q&&!p.out).sort((a,b)=>rel(q,b)-rel(q,a));const w=L[0];if(!w||rel(q,w)<20)return;ap(w,{bac:20});w.ghen=cl((w.ghen||0)-5,0,100);if(w===S)log(`Hoàng hậu ${q.name} ban thưởng ngươi 20 bạc vì hiền thục. Bạc +20.`)}
-function blCard(){return `<p>Bổng lộc phát ngày đầu mỗi tháng, theo phẩm vị (mọi phi tần như nhau). Mỗi kẻ hầu ăn công ${WAGE} bạc/tháng.</p><div class="pcb rows">${BL.map((b,i)=>`<div class="pcrow"><span>${i>=7?"Hoàng hậu":RANKS[i].n}</span><b>${b} bạc</b></div><div class="pcrow"><span class="past">${BLG[i]}</span><span></span></div>`).join("")}</div><p class="past">Lãnh cung: chỉ 5 bạc. Cấm túc: nửa bổng. Hoàng hậu ghét có thể sai Nội vụ phủ khất bổng (bớt 3 phần 10). Sinh con, được ân thưởng: cộng thêm một lần.</p>`}
+function blCard(){return `<p>Bổng lộc phát ngày đầu mỗi tháng, theo phẩm vị (mọi phi tần như nhau). Mỗi kẻ hầu ăn công ${WAGE} bạc/tháng.</p><div class="pcb rows">${BL.map((b,i)=>`<div class="pcrow"><span>${i>=7?"Hoàng hậu":RANKS[i].n}</span><b>${b} bạc</b></div><div class="pcrow"><span class="past">${BLG[i]}</span><span></span></div>`).join("")}</div><p class="past">Lãnh cung: chỉ 5 bạc. Cấm túc: nửa bổng. Hoàng hậu ghét ngươi (thiện cảm dưới -30): mỗi tháng sai Nội vụ phủ khất bổng (bớt 3 phần 10): ${word(20)}. Sinh con, được ân thưởng: cộng thêm một lần.</p>`}
 /* ân thưởng: every reward has silver + item + jealousy; recorded */
 const BBAC={night:0,contest:20,son:30,dau:15,promo:20,accuse:10,story:10,birthday:15,sinhthan:20,nurse:15};
 BEST.dau=["tuithom","sonphan","luahang"];BEST.sinhthan=["tramngoc","vongngoc","gamto"];BEST.nurse=["nhansam","yensao","agiao"];
@@ -2763,14 +2764,14 @@ BWHY.dau="mừng công chúa ra đời";BWHY.sinhthan="nhân sinh thần của n
   const m=Q[Q.length-1];if(Q.length>q0&&m&&m.t==="Thánh thượng ban thưởng")m.h+=`<p>${kitParse(`Chắc chắn · thành: ${IT[k].n}${bac?`, Bạc +${bac}`:""} · phi tần ghen +3`)}</p>`;log(`Ân thưởng ${BWHY[why]||""}: ${IT[k].n}${bac?`, Bạc +${bac}`:""}; phi tần ghen +3.`)}
  else{S.pg=0;p.pg=cl((p.pg||0)+3,0,100)}}})();
 const AREASON=[["Đêm thị tẩm vui","night"],["Thắng ở yến tiệc, thi tài","contest"],["Sinh hoàng tử","son"],["Sinh công chúa","dau"],["Được tấn phong","promo"],["Tố giác kẻ gian thành","accuse"],["Tuyến truyện thành","story"],["Tiết Vạn thọ (tháng 8, người được sủng nhất)","birthday"],["Sinh thần của ngươi (Sủng từ 50)","sinhthan"],["Hầu thuốc Hoàng thượng khi ngài bệnh","nurse"]];
-function awCard(){return `<p>Việc được ban thưởng và có thể nhận gì (mỗi lần: phi tần khác ghen +3):</p><div class="pcb rows">${AREASON.map(([n,k])=>`<div class="pcrow"><span>${n}</span><b>${(BEST[k]||[]).map(x=>IT[x]?IT[x].n:x).slice(0,3).join(", ")}${BBAC[k]?` · +${BBAC[k]} bạc`:""}</b></div>`).join("")}</div><p class="past">Sinh con, tấn phong, thi tài còn có thể được ban hiệu (Danh +5). Hoàng hậu ban thưởng người thân cận mỗi mùa.</p>`+
+function awCard(){return `<p>Việc được ban thưởng và món được ban (một trong các món; mỗi lần: phi tần khác ghen +3):</p><div class="pcb rows">${AREASON.map(([n,k])=>`<div class="pcrow"><span>${n}</span><b>${(BEST[k]||[]).map(x=>IT[x]?IT[x].n:x).slice(0,3).join(", ")}${BBAC[k]?` · +${BBAC[k]} bạc`:""}</b></div>`).join("")}</div><p class="past">Sinh con, tấn phong, thi tài: được ban hiệu (Danh +5) nếu chưa có hiệu: ${word(30)}. Hoàng hậu ban thưởng người thân cận mỗi mùa.</p>`+
  `<h3>Sổ ân thưởng</h3>${(S.awards||[]).length?`<div class="pcb rows">${S.awards.map(a=>`<div class="pcrow"><span>${a.d} · ${a.why}</span><b>${a.it}${a.bac?` · +${a.bac} bạc`:""}</b></div>`).join("")}</div>`:`<p class="past">Chưa được ban thưởng lần nào.</p>`}`}
 /* hook the month: stipends for everyone, cuts, seasonal and calendar rewards */
 function monthPay(){let ev="";payCuts();const l=stipend(S);if(l)log(l);for(const v of liveRivals(true))stipend(v);queenRewards();
  if(S.month===8){const top=consorts().filter(p=>!p.out).sort((a,b)=>b.sung-a.sung)[0];if(top&&top.sung>=40)bestow(top,"birthday")}
  if(S.bmonth==null)S.bmonth=1+R(12);if(S.month===S.bmonth&&S.sung>=50&&!S.out)bestow(S,"sinhthan");return ev}
 /* nursing the Emperor through illness: a card while he is ill */
-(function(){const d0=deal;deal=function(){d0.apply(this,arguments);if(S&&S.emp&&S.emp.ill&&!S.out&&!S.confined)deck.unshift({n:"Hầu thuốc Hoàng thượng",t:"Long thể bất an. Ngươi sang Dưỡng Hòa điện sắc thuốc, hầu bên giường.",c:{suc:-10},o:od(65+S.arts.y*5),w:{sung:4,an:2},l:{suc:-5},x:"có thể được ban thưởng",dom:"Sủng",go:()=>{if(roll(40))bestow(S,"nurse")}})}})();
+(function(){const d0=deal;deal=function(){d0.apply(this,arguments);if(S&&S.emp&&S.emp.ill&&!S.out&&!S.confined)deck.unshift({n:"Hầu thuốc Hoàng thượng",t:"Long thể bất an. Ngươi sang Dưỡng Hòa điện sắc thuốc, hầu bên giường.",c:{suc:-10},o:od(65+S.arts.y*5),w:{sung:4,an:2},l:{suc:-5},x:`được ban thưởng: ${word(40)}`,dom:"Sủng",go:()=>{if(roll(40))bestow(S,"nurse")}})}})();
 /* ================= WHAT SHE KNOWS: info acts show the facts, keep them, relation view in words ================= */
 function kn(){S.kf=S.kf||{};S.notes=S.notes||{};S.met=S.met||{};return S}
 function noteAdd(id,t){kn();const L=S.notes[id]=S.notes[id]||[];L.unshift(`T${S.month}/${S.year} ${TUAN[S.tuan]}: ${t}`);if(L.length>6)L.length=6}
@@ -2872,17 +2873,17 @@ function affairExposed(m,how){/* full weight: the man dies; she faces death (fir
  A.push({n:"Chào hỏi đúng lễ",o:100,w:{danh:1},x:"hắn thiện cảm +5",go:()=>{m.af+=5}});
  A.push({n:"Liếc mắt đưa tình",o:od(55+S.sac/5),x:`tình ý của hắn +12 · có người thấy: ${word(100-Math.round(risk/3))} giữ kín`,l:{},go:()=>{m.tinh+=12+(m.trait==="đa tình"?6:0);if(roll(risk/3)){const v=pick(liveRivals(true));if(v){evA(v,S,1);log(`Có kẻ thấy ngươi liếc mắt với ${m.name}.`)}}}});
  if(m.tinh>=30)A.push({n:"Trao khăn tay",o:od(60+S.tamco/5),x:`hắn giữ khăn tay của ngươi (là tang vật nếu bị lục) · tình ý +15`,go:()=>{m.tinh+=15;m.letters++;S.aff=S.aff||{};S.aff[m.id]=(S.aff[m.id]||0)+1}});
- if(m.tinh>=50){const w=watcher();A.push({n:"Hẹn gặp riêng",o:w?cl(100-risk,5,95):0,lock:!w,t:"cần một người hầu trung thành (lòng 60+) canh cửa",act:1,x:`đêm ấy kín đáo: Sức +12, hắn thành người che chở · có thể mang thai · hỏng: bị bắt gặp, tội chết`,run:()=>tryst(m,risk)})}
+ if(m.tinh>=50){const w=watcher();A.push({n:"Hẹn gặp riêng",o:w?cl(100-risk,5,95):0,lock:!w,t:"cần một người hầu trung thành (lòng 60+) canh cửa",act:1,x:`đêm ấy kín đáo: Sức +12, hắn thành người che chở · có thai: ${word(conceiveCh(S))} · hỏng: bị bắt gặp, tội chết`,run:()=>tryst(m,risk)})}
  if(m.tinh>=30)A.push({n:"Cắt đứt",o:100,x:"hắn thôi tơ tưởng; giảm hẳn rủi ro",go:()=>{m.tinh=0}});
  return A}})();
 function tryst(m,risk){if(roll(risk)){affairExposed(m,`Đêm ${S.name} hẹn ${m.name} bị bắt gặp.`);return "Bị bắt gặp."}
- m.trysts++;m.tinh+=10;S.lastTryst=wk();apply({suc:12});S.protector=m.id;S.an=S.an||0;let r=`Đêm ấy trôi qua kín đáo. Sức +12. ${m.name} nguyện che chở ngươi. Có thể biết chuyện: ${whoMayKnow()}.`;
+ m.trysts++;m.tinh+=10;S.lastTryst=wk();apply({suc:12});S.protector=m.id;S.an=S.an||0;let r=`Đêm ấy trôi qua kín đáo. Sức +12. ${m.name} nguyện che chở ngươi. Người dễ biết chuyện: ${whoMayKnow()}.`;
  if(!S.preg&&roll(15)){S.preg=1;S.hidden=true;S.pregWk=wk();S.trueFather=m.id;const ok=(S.nightLog||[]).some(w=>Math.abs(w-wk())<=1);S.pregMismatch=!ok;r+=ok?" Mấy hôm sau ngươi biết mình có thai; ngày tháng trùng đêm thị tẩm.":` <b class="r">Ngươi có thai, mà sổ Kính sự phòng không có đêm thị tẩm nào khớp ngày.</b>`}
  return r}
 /* pregnancy that the book cannot cover: her roads, each with its odds and cost */
 (function(){const d0=deal;deal=function(){d0.apply(this,arguments);if(!S||!S.preg||!S.pregMismatch||S.out)return;
  deck.unshift({n:"Hối lộ Kính sự phòng sửa sổ",t:"Nhờ Tổng quản ghi thêm một đêm thị tẩm cho khớp ngày.",c:{bac:-80},o:od(55+((S.court&&S.court.ksp&&S.court.ksp.af.me)||0)/2),w:{},l:{danh:-5},x:"sổ khớp ngày, hết bị nghi · hỏng: Tổng quản biết chuyện của ngươi",dom:"Mưu kế",go:()=>{S.pregMismatch=false},fail:()=>{S.ksKnows=1}});
- deck.unshift({n:"Uống thuốc phá thai",t:"Bài thuốc mạnh, có thể hại thân.",c:{bac:-30},o:od(70+S.arts.y*5),w:{},l:{suc:-30},x:"mất đứa bé, Sức -20; hỏng: băng huyết, Sức -30, có thể chết",dom:"Sức khỏe",go:()=>{S.preg=0;S.hidden=false;S.pregMismatch=false;S.trueFather=null;apply({suc:-20})},fail:()=>{S.preg=0;S.hidden=false;S.pregMismatch=false;S.trueFather=null;if(roll(25))die("Uống thuốc phá thai, băng huyết mà chết")}});
+ deck.unshift({n:"Uống thuốc phá thai",t:"Bài thuốc mạnh, hại thân.",c:{bac:-30},o:od(70+S.arts.y*5),w:{},l:{suc:-30},x:`mất đứa bé, Sức -20; hỏng: băng huyết, Sức -30 · kèm khi hỏng: băng huyết mà chết: ${word(25)}`,dom:"Sức khỏe",go:()=>{S.preg=0;S.hidden=false;S.pregMismatch=false;S.trueFather=null;apply({suc:-20})},fail:()=>{S.preg=0;S.hidden=false;S.pregMismatch=false;S.trueFather=null;if(roll(25))die("Uống thuốc phá thai, băng huyết mà chết")}});
  deck.unshift({n:"Thú tội với Hoàng thượng",t:"Quỳ trước Dưỡng Hòa điện, nhận hết tội.",c:{},o:100,w:{},x:"giữ được mạng (vào lãnh cung), hắn bị xử trảm",dom:"Sủng",go:()=>{const m=manById(S.trueFather);if(m){m.alive=false;log(`${m.name} bị xử trảm.`)}S.pregMismatch=false;cold("Thú tội tư thông")}})}})();
 /* each month: the book may be checked; rivals carry on affairs too and can be found out */
 function affairMonth(){if(!S||!S.men)return"";let ev="";
@@ -2897,7 +2898,7 @@ function affairMonth(){if(!S||!S.men)return"";let ev="";
 /* the man's dossier: only known facts */
 function manCard(m){const f=pMan(m);const known=m.seen===bkey();
  const lines=[tuoi(m.age),`Ngươi với hắn: <span class="ef ${m.af>10?"g":"n"}">${affW(m.af)} · ${m.af}</span>`,m.tinh>=10||m.letters?`Hắn với ngươi: <span class="ef ${m.tinh>=50?"r":"g"}">${tinhW(m.tinh)}</span>`:`Hắn với ngươi: <span class="ef n">chưa rõ</span>`,known?`Thấy ở ${placeName(S.menW[m.id]||"")} (buổi này)`:"Nơi ở: không rõ"];
- const tt=[m.letters?`${m.letters} lần trao khăn, thư (tang vật nếu bị lục)`:"",m.trysts?`${m.trysts} lần hẹn riêng · có thể biết: ${whoMayKnow()}`:"",S.trueFather===m.id&&S.preg?"Cha thật của đứa bé trong bụng ngươi":""].filter(Boolean);
+ const tt=[m.letters?`${m.letters} lần trao khăn, thư (tang vật nếu bị lục)`:"",m.trysts?`${m.trysts} lần hẹn riêng · người dễ biết chuyện: ${whoMayKnow()}`:"",S.trueFather===m.id&&S.preg?"Cha thật của đứa bé trong bụng ngươi":""].filter(Boolean);
  return pcard({f,col:"#6a8aa0",name:m.name,rank:`${m.role} · ${m.trait}`,lines,chips:[m.trysts?chip("Tư tình","hot"):""],note:tt.length?`<b>Tư tình</b> (chỉ ngươi biết): ${tt.join(" · ")}`:"Gặp hắn ở nơi hắn hay lui tới để trò chuyện.",groups:[["Gặp mặt",[known&&S.place!==S.menW[m.id]?pbtn(`data-go="${S.menW[m.id]}"`,"Đến chỗ hắn",`Chắc chắn · tốn: ${travel(S.place,S.menW[m.id])} khắc`,!can(travel(S.place,S.menW[m.id])+1)?"đến nơi sẽ hết khắc":""):""]]],empty:"Hắn hay ở: "+m.haunts.map(placeName).join(", ")+"."})}
 /* the dossier tab lists the men after the consorts */
 (function(){const r0=rvTabHTML;rvTabHTML=function(){menInit();const M=(S.men||[]).filter(m=>m.alive);if(!M.length)return r0();const n=rivals.length;
@@ -2956,7 +2957,7 @@ function rivalsBuoi(){let ev="";for(const v of liveRivals(true)){if(!v.alive||v.
   const lo=BANDS[b][0],hi=b<3?BANDS[b+1][0]:100;let c=[0,.03,.04,.05][b]+[0,.03,.04,.05][b]*cl((d-lo)/(hi-lo),0,1);if(t.shield)c*=.5;if(t===S&&S.lot&&S.lot.dom==="Hung")c*=1.5;if(t===S&&S.guardWarn){c*=.5}if(t===S)c*=BAL.hz;
   if(Math.random()<c){ev+=seenNPC(v,t,npcAct(v,t));if(S.dead)return ev}}return ev}
 function dangerWord(v){kn();S.dKnown=S.dKnown||{};const k=S.dKnown[v.id];if(!k&&!knows(v))return `Có thể hại ngươi: <span class="ef n">chưa rõ</span>`;const b=bandOf(danger(v,S));if(k||knows(v)){if(!S.dKnown[v.id])S.dKnown[v.id]=wk()}return `Có thể hại ngươi: <span class="ef ${b>=2?"r":b===1?"r":"g"}">${BANDS[b][1]}</span>`}
-function bandCard(){return `<p>Mỗi người với một người khác có mức <b>Nguy hiểm</b> = Ghen hoặc Oán hoặc ghét (lấy cao nhất), cộng tính nết (Hiểm độc +10, Hiền lành -15, Nhu mì -10). Ai cũng theo cùng thang:</p><div class="pcb rows">${BANDS.map((b,i)=>`<div class="pcrow"><span>${i<3?`${b[0]}-${BANDS[i+1][0]-1}`:"80 trở lên"}</span><b>${i?`hại ${b[1]}`:"không ra tay"}</b></div>${i?`<div class="pcrow"><span class="past">${b[2].map(k=>ACT[k]?ACT[k].n:k).join(", ")}</span><span></span></div>`:""}`).join("")}</div><p class="past">Trong mỗi mức, càng gần mức trên càng hay ra tay. Ngươi hại ai thì Oán của họ tăng, có thể leo lên mức trên.</p>`}
+function bandCard(){return `<p>Mỗi người với một người khác có mức <b>Nguy hiểm</b> = Ghen hoặc Oán hoặc ghét (lấy cao nhất), cộng tính nết (Hiểm độc +10, Hiền lành -15, Nhu mì -10). Ai cũng theo cùng thang:</p><div class="pcb rows">${BANDS.map((b,i)=>`<div class="pcrow"><span>${i<3?`${b[0]}-${BANDS[i+1][0]-1}`:"80 trở lên"}</span><b>${i?`hại ${b[1]}`:"không ra tay"}</b></div>${i?`<div class="pcrow"><span class="past">${b[2].map(k=>ACT[k]?ACT[k].n:k).join(", ")}</span><span></span></div>`:""}`).join("")}</div><p class="past">Trong mỗi mức, càng gần mức trên càng hay ra tay. Ngươi hại ai thì Oán của họ tăng; Oán đủ cao thì họ lên mức trên.</p>`}
 document.addEventListener("click",e=>{const b=e.target.closest("[data-ladder]");if(b){e.stopPropagation();if(!Q.length){Q.unshift({t:"Thang nguy hiểm",h:bandCard()});showModal()}}},true);
 (function(){const rc=rvCard;rvCard=function(v,i){let h=rc(v,i);if(v.alive&&!v.out)h=h.replace('<div class="pcinfo">',`<div class="pcinfo"><span>${dangerWord(v)} <button class="lnk ladi" data-ladder="1" title="Thang nguy hiểm" aria-label="Xem thang nguy hiểm">ⓘ</button></span>`);return h}})();
 /* B. people come to her: approaches each week by their traits and bonds; counted against what she starts herself */
@@ -2966,14 +2967,14 @@ function approachOne(){const T=[];const fr=liveRivals(true).filter(v=>aff(v,S)>=
  if(fr.length)T.push(()=>{const v=pick(fr);const kind=pick(["gossip","ally","borrow","gift"]);
   if(kind==="gossip")return{t:"Có người đến",who:pv(v),h:`<p>${v.name} sang chơi, kể chuyện trong cung.</p>${favorBook(false)}`};
   if(kind==="ally")return{t:"Có người đến",who:pv(v),h:`<p>${v.name} sang thăm, ngỏ ý kết làm chị em, cùng nhau đứng vững.</p>`,opts:[{n:"Nhận lời",fx:{},x:`nàng thân +20 · các phi tần khác ghen +3`,go:()=>{relAdd(S,v,20);ghenAll(3)}},{n:"Khéo từ chối",fx:{},x:"nàng thân -5",go:()=>relAdd(S,v,-5)}]};
-  if(kind==="borrow")return{t:"Có người đến",who:pv(v),h:`<p>${v.name} ngượng ngùng hỏi mượn 20 lượng bạc.</p>`,opts:[{n:"Cho mượn",fx:{bac:-20},x:`nàng thân +12 · có thể trả lại`,go:()=>{relAdd(S,v,12);S.loans=(S.loans||[]).concat([{id:v.id,t:S.turn}])}},{n:"Từ chối",fx:{},x:"nàng thân -6",go:()=>relAdd(S,v,-6)}]};
+  if(kind==="borrow")return{t:"Có người đến",who:pv(v),h:`<p>${v.name} ngượng ngùng hỏi mượn 20 lượng bạc.</p>`,opts:[{n:"Cho mượn",fx:{bac:-20},x:`nàng thân +12 · mỗi tháng nàng trả lại 20 lượng: ${word(40)}`,go:()=>{relAdd(S,v,12);S.loans=(S.loans||[]).concat([{id:v.id,t:S.turn}])}},{n:"Từ chối",fx:{},x:"nàng thân -6",go:()=>relAdd(S,v,-6)}]};
   const k=pick(["tuithom","sonphan","luahang","huongtram"]);S.inv.push({k,from:v.id});relAdd(S,v,3);return{t:"Có người đến",who:pv(v),h:`<p>${v.name} mang sang tặng ngươi <b>${IT[k].n}</b>.</p><p>${kitParse(`Chắc chắn · thành: ${IT[k].n}, nàng thân +3 · đồ người khác tặng nên xét nghiệm trước khi dùng`)}</p>`}});
  if(hos.length)T.push(()=>{const v=pick(hos);return{t:"Có người đến",who:pv(v),h:`<p>${v.name} đến tận cửa cung, buông lời mỉa mai ngươi trước mặt cung nhân.</p>`,opts:[{n:"Nhịn",fx:{duc:2},x:"giữ lễ; nàng ghen +3",go:()=>{v.ghen=cl(v.ghen+3,0,100)}},{n:"Đáp trả sắc sảo",fx:{danh:1},x:"nàng oán +10, ngươi được tiếng cứng cỏi",go:()=>relAdd(S,v,-10)}]}});
  const sorry=liveRivals(true).filter(v=>oan(v,S)>=20&&v.trait!=="Hiểm độc");if(sorry.length)T.push(()=>{const v=pick(sorry);return{t:"Có người đến",who:pv(v),h:`<p>${v.name} sang xin lỗi chuyện cũ.</p>`,opts:[{n:"Nhận lời xin lỗi",fx:{},x:"nàng bớt oán 15, thân +5",go:()=>{oanAdd(v,S,-15);relAdd(S,v,5)}},{n:"Lạnh lùng",fx:{},x:"nàng thân -3",go:()=>relAdd(S,v,-3)}]}});
  if(S.sung>=60&&!S.out&&roll(50))T.push(()=>{apply({sung:2});S.an=cl((S.an||0)+2,0,100);return{t:"Hoàng thượng đến",who:pEmp(),h:`<p>Không báo trước, Hoàng thượng ghé cung ngươi uống chén trà.</p><p>${kitParse("Chắc chắn · thành: Sủng +2, Ân tình +2")}</p>`}});
  if(!S.thDead&&S.th>=10)T.push(()=>({t:"Thái hậu triệu",who:pTH(),h:"<p>Đức Thọ cung cho người sang mời ngươi qua hầu chuyện.</p>",opts:[{n:"Đến ngay",fx:{th:3,suc:-5},x:"Thái hậu vui lòng"},{n:"Cáo bệnh",fx:{th:-5}}]}));
  const sv=(S.staff||[]).length?pick(S.staff):null;if(sv)T.push(()=>({t:"Kẻ hầu xin",who:pServ(sv),h:`<p>${sv.name} quỳ xin: mẹ ở quê ốm nặng, xin chút bạc thuốc thang.</p>`,opts:[{n:"Cho 10 lượng",fx:{bac:-10},x:"lòng +15",go:()=>{sv.loyal=cl(sv.loyal+15,0,100)}},{n:"Từ chối",fx:{},x:"lòng -10",go:()=>{sv.loyal=cl(sv.loyal-10,0,100)}}]}));
- const bad=liveRivals(true).filter(v=>bandOf(danger(v,S))>=2);if(bad.length&&S.maid&&S.maid.loyal>=55)T.push(()=>{const v=pick(bad);kn();S.dKnown=S.dKnown||{};S.dKnown[v.id]=wk();noteAdd(v.id,`${S.maid.name} báo: nàng có thể hại ngươi (${BANDS[bandOf(danger(v,S))][1]})`);return{t:"Lời cảnh báo",who:pMaid(),h:`<p>${S.maid.name} thì thầm: “Người bên cung ${v.name} dò hỏi giờ giấc của nương nương. E là có ý không lành.”</p><p>${kitParse(`Chắc chắn · thành: biết ${v.name} có thể hại ngươi mức ${BANDS[bandOf(danger(v,S))][1]}`)}</p>`}});
+ const bad=liveRivals(true).filter(v=>bandOf(danger(v,S))>=2);if(bad.length&&S.maid&&S.maid.loyal>=55)T.push(()=>{const v=pick(bad);kn();S.dKnown=S.dKnown||{};S.dKnown[v.id]=wk();noteAdd(v.id,`${S.maid.name} báo: nàng có ý hại ngươi (mức ${BANDS[bandOf(danger(v,S))][1]})`);return{t:"Lời cảnh báo",who:pMaid(),h:`<p>${S.maid.name} thì thầm: “Người bên cung ${v.name} dò hỏi giờ giấc của nương nương. E là có ý không lành.”</p><p>${kitParse(`Chắc chắn · thành: biết ${v.name} có ý hại ngươi, mức ${BANDS[bandOf(danger(v,S))][1]}`)}</p>`}});
  const M=(S.men||[]).filter(m=>m.alive);if(M.length&&roll(40))T.push(()=>{const m=pick(M);return{t:"Một ánh mắt",who:pMan(m),h:`<p>${m.name} lén gửi qua cung nữ một bài thơ chép tay.</p>`,opts:[{n:"Giữ bài thơ, đáp lại",fx:{},x:`hắn tình ý +10 · bài thơ là tang vật nếu bị lục`,go:()=>{m.tinh+=10;m.letters++}},{n:"Đốt đi, làm ngơ",fx:{},x:"an toàn",go:()=>{m.tinh=Math.max(0,m.tinh-5)}}]}});
  const def=[];for(const v of liveRivals(true))for(const s of (v.staff||[]))if(s.role==="maid"&&s.loyal<35&&s.spyFor!=="me")def.push([v,s]);if(def.length)T.push(()=>{const [v,s]=pick(def);return{t:"Có người đến",who:pServ(s),h:`<p>${s.name}, cung nữ bên cung ${v.name}, lén tìm đến xin theo ngươi.</p>`,opts:[{n:"Thu làm tai mắt",fx:{bac:-20},x:"có tai mắt trong cung nàng",go:()=>{s.spyFor="me"}},{n:"Đuổi về",fx:{},x:"không dính líu"}]}});
  if(!T.length)return null;return pick(T)()}
@@ -2989,7 +2990,7 @@ function blocked(){return S.out||S.confined||S.sung<25||has("lanhlung")||(S.emp&
 /* the Emperor's hidden vigour shapes conception for every consort */
 (function(){const c0=conceiveCh;conceiveCh=function(p){const v=S&&S.emp?(S.emp.fert||(S.emp.fert=.5+Math.random()*.7)):1;return Math.round(c0.apply(this,arguments)*v)}})();
 /* from lãnh cung, a man who loves her can carry her plea out */
-(function(){const c0=coldActs;coldActs=function(){const A=c0.apply(this,arguments);const m=(S.men||[]).find(x=>x.alive&&x.tinh>=50);if(m)A.push({n:`Nhờ ${m.role} đưa thư kêu oan`,t:`${m.name} lén mang thư ra khỏi lãnh cung.`,c:{suc:-5},o:od(35+m.tinh/3),w:{},l:{},x:"có thể được minh oan, rời lãnh cung · hỏng: thư bị chặn, hắn bị nghi",dom:"Mưu kế",go:()=>restore(false,`${m.name} đưa thư kêu oan`),fail:()=>{if(roll(30)){m.alive=false;log(`${m.name} bị bắt vì mang thư lãnh cung, bị xử trảm.`)}}});return A}})();
+(function(){const c0=coldActs;coldActs=function(){const A=c0.apply(this,arguments);const m=(S.men||[]).find(x=>x.alive&&x.tinh>=50);if(m)A.push({n:`Nhờ ${m.role} đưa thư kêu oan`,t:`${m.name} lén mang thư ra khỏi lãnh cung.`,c:{suc:-5},o:od(35+m.tinh/3),w:{},l:{},x:"được minh oan, rời lãnh cung (phục vị thấp hơn một bậc) · hỏng: thư bị chặn, hắn bị nghi",dom:"Mưu kế",go:()=>restore(false,`${m.name} đưa thư kêu oan`),fail:()=>{if(roll(30)){m.alive=false;log(`${m.name} bị bắt vì mang thư lãnh cung, bị xử trảm.`)}}});return A}})();
 /* if the Emperor dies, a vương gia who loves her can shelter her */
 (function(){const e0=emperorDies;emperorDies=function(ev){const m=S.vgAlly&&manById(S.vgAlly);if(m&&m.tinh>=60&&!(S.heir&&S.heir.k.alive&&!S.heir.v)&&S.rank<7){if(ev)log(ev);return over("Được Vương gia che chở",`Năm ${S.year}, ${empName()} băng hà. ${m.name} đứng ra giữ triều chính, đưa ngươi ra khỏi cung, sống nốt đời dưới sự che chở của hắn.`,"Vương gia che chở")}return e0.apply(this,arguments)}})();
 /* attacks on her name the act, the odds the doer faced, the outcome, the defences that worked; the doer only if she could know */
@@ -3004,13 +3005,13 @@ function servCauses(){for(const s of (S.staff||[])){if(s.cause&&wk()-s.cause.w>3
  /* every consort's servants drift by how their mistress treats them: a cruel mistress's servants defect more easily */
  for(const v of liveRivals(true))for(const s of (v.staff||[])){const d=v.trait==="Hiểm độc"||v.trait==="Kiêu ngạo"?-2:v.trait==="Hiền lành"||v.trait==="Nhu mì"?1:0;s.loyal=cl(s.loyal+d,0,100)}}
 function otherServ(s){return (S.staff||[]).filter(x=>x!==s)}
-function judgeServ(s,how,paid){const c=s.cause;if(how==="phat"){if(c&&c.fault){s.loyal=cl(s.loyal-5,0,100);otherServ(s).forEach(x=>x.loyal=cl(x.loyal+1,0,100));log(`Phạt ${s.name} vì ${c.txt}: lòng -5; kẻ hầu khác giữ kỷ cương.`)}else{s.loyal=cl(s.loyal-25,0,100);apply({duc:-3});otherServ(s).forEach(x=>x.loyal=cl(x.loyal-5,0,100));s.grudge=1;log(`<span class="r">Phạt ${s.name} vô cớ: lòng -25, Đức -3; kẻ hầu khác sợ hãi (lòng -5); hắn/nàng có thể phản ngươi.</span>`)}}
+function judgeServ(s,how,paid){const c=s.cause;if(how==="phat"){if(c&&c.fault){s.loyal=cl(s.loyal-5,0,100);otherServ(s).forEach(x=>x.loyal=cl(x.loyal+1,0,100));log(`Phạt ${s.name} vì ${c.txt}: lòng -5; kẻ hầu khác giữ kỷ cương.`)}else{s.loyal=cl(s.loyal-25,0,100);apply({duc:-3});otherServ(s).forEach(x=>x.loyal=cl(x.loyal-5,0,100));s.grudge=1;log(`<span class="r">Phạt ${s.name} vô cớ: lòng -25, Đức -3; kẻ hầu khác sợ hãi (lòng -5); hắn/nàng mang hận: lòng còn dưới 30 thì mỗi tuần bán mình cho phi tần khác: ${word(15)}.</span>`)}}
  else if(how==="tha"){s.loyal=cl(s.loyal+5,0,100);otherServ(s).forEach(x=>x.loyal=cl(x.loyal-1,0,100));log(`Tha lỗi cho ${s.name}: lòng +5.`)}
  else if(how==="thuong"){if(!paid){if(S.bac<10)return;apply({bac:-10})}if(c&&!c.fault){s.loyal=cl(s.loyal+15,0,100);otherServ(s).forEach(x=>x.loyal=cl(x.loyal+2,0,100));log(`Thưởng ${s.name} vì ${c.txt}: lòng +15; kẻ hầu khác gắng sức.`)}else{s.loyal=cl(s.loyal+6,0,100);log(`Thưởng ${s.name} vô cớ: lòng +6.`)}}
  s.cause=null;render()}
 function servJudgeBtns(s){const c=s.cause;const fault=c&&c.fault,merit=c&&!c.fault;const tr=s.trouble!=null&&wk()-s.trouble<=4;
  return [pbtn(`data-sj="thuong" data-sid="${s.sid}"`,merit?`Thưởng vì ${c.txt}`:"Thưởng vô cớ",merit?"Chắc chắn · tốn: Bạc -10 · thành: lòng +15, kẻ hầu khác lòng +2":"Chắc chắn · tốn: Bạc -10 · thành: lòng +6 (ít hơn thưởng có cớ)",S.bac<10?"thiếu bạc (cần 10)":""),
-  s.spyFor&&s.spyFor!=="me"?pbtn(`data-sv="phat" data-sid="${s.sid}"`,"Tra khảo","Chắc chắn · thành: khai là tai mắt của ai · lòng -15",""):pbtn(`data-sj="phat" data-sid="${s.sid}"`,fault?`Phạt vì ${c.txt}`:"Phạt vô cớ",fault?"Chắc chắn · thành: kỷ cương, kẻ hầu khác lòng +1 · tốn: lòng -5":"Chắc chắn · tốn: lòng -25, Đức -3, kẻ hầu khác lòng -5 · hắn/nàng có thể phản ngươi",""),
+  s.spyFor&&s.spyFor!=="me"?pbtn(`data-sv="phat" data-sid="${s.sid}"`,"Tra khảo","Chắc chắn · thành: khai là tai mắt của ai · lòng -15",""):pbtn(`data-sj="phat" data-sid="${s.sid}"`,fault?`Phạt vì ${c.txt}`:"Phạt vô cớ",fault?"Chắc chắn · thành: kỷ cương, kẻ hầu khác lòng +1 · tốn: lòng -5":"Chắc chắn · tốn: lòng -25, Đức -3, kẻ hầu khác lòng -5 · kèm: hắn/nàng mang hận; lòng dưới 30 thì mỗi tuần bán mình cho phi tần khác: "+word(15),""),
   fault?pbtn(`data-sj="tha" data-sid="${s.sid}"`,"Tha lỗi","Chắc chắn · thành: lòng +5 · tốn: kẻ hầu khác lòng -1",""):"",
   tr?pbtn(`data-sv="che" data-sid="${s.sid}"`,"Che chở (đang bị bắt tội)","Chắc chắn · thành: lòng +20 · tốn: Danh -2",""):""]}
 document.addEventListener("click",e=>{const b=e.target.closest("[data-sj]");if(b&&!b.disabled){e.stopPropagation();const s=servById(+b.dataset.sid);if(s&&!S.dead&&!Q.length){const bf=rsnap();judgeServ(s,b.dataset.sj);resultShow(b.firstChild.textContent,bf,true)}}},true);
@@ -3044,13 +3045,13 @@ document.addEventListener("click",e=>{const el=$("hud2");if(!el||el.classList.co
 /* talk options: tag place harms with their act key so they share the dossier's builder */
 const HARMK={"Dò la":"spy","Tung tin đồn":"rumor","Bỏ độc vào trà nàng":"poison","Bỏ xạ hương vào thuốc nàng":"musk","Đẩy con nàng xuống hồ":"pond","Vu oan":"frame","Tố vượt phẩm":"vp","Đẩy nàng xuống hồ sen":"pushp","Ngáng chân nàng":"trip"};
 AOUT.trip=["nàng vấp ngã: Danh nàng -3 (có thai: có thể động thai)","bị thấy: nàng oán ngươi"];AOUT.pushp=["nàng rơi xuống hồ sen, Sức nàng giảm mạnh","bị lộ: bị phạt, nàng oán"];
-const RISKRE=/(lộ:|có thể (mách|nắm|bị|lật)|phật ý|bị khám|tội|ban chết|sẽ)/;
+const RISKRE=/(lộ:|mách lại|nắm thóp|có thể (mách|nắm|bị|lật)|phật ý|bị khám|tội|ban chết|sẽ)/;
 (function(){const t0=talkOpts;talkOpts=function(p){const A=t0.apply(this,arguments);const v=p&&p.ref;return A.map(a=>{a=Object.assign({},a);if(HARMK[a.n])a.k=HARMK[a.n];
   if(a.n==="Nhờ giúp đỡ"&&v&&aff(v,S)<30){a.lock=true;a.t=`cần thiện cảm 30 (đang ${aff(v,S)})`}
   if(a.n==="Cảnh báo nàng"&&/không có căn cứ/.test(a.x||"")){a.lock=true;a.t="chưa biết ai đang hại nàng"}
   if(a.open&&!S.inv.some(e=>!e.h)){a.lock=true;a.t="rương trống"}
-  if(/^Bàn tán về/.test(a.n)&&/mách lại/.test(a.x||"")){a.x="";a.risk="nàng có thể mách lại: người ấy oán ngươi +10"}
-  if(a.n==="Chia sẻ bí mật"&&/nắm thóp/.test(a.x||"")){a.x=a.x.replace(/ · nàng có thể nắm thóp ngươi/,"");a.risk="nàng có thể nắm thóp ngươi: nàng có 1 chứng cứ"}
+  if(/^Bàn tán về/.test(a.n)&&/mách lại/.test(a.x||"")){a.x="";a.x="thiện cảm -3";a.risk=`nàng mách lại, ${a.n.replace(/^Bàn tán về /,"")} oán ngươi +10: ${word(50)}`}
+  if(a.n==="Chia sẻ bí mật"&&/nắm thóp/.test(a.x||"")){a.x=a.x.replace(/ · nàng có thể nắm thóp ngươi/,"");a.risk=`nàng nắm 1 chứng cứ của ngươi: ${word(50)}`}
   if(a.n==="Khiêu khích"){a.risk=a.x;a.x=""}
   return a})}})();
 /* the talk line: cost in khắc, gains green, risks and failure red, needs as disabled reasons */
@@ -3323,7 +3324,7 @@ function oanMonth(){for(const v of rivals){const f=2*persF(v,"forgive",1);v.oan=
 const SOC={
  help:{w:1,ok:(v,t)=>aff(v,t)>=10,run:(v,t)=>{relAdd(v,t,6);return `${v.name} sang giúp ${NM(t)} việc trong cung`}},
  visit:{w:0.8,ok:(v,t)=>t!==S?(t.suc<50||t.preg):(S.suc<50||S.preg),run:(v,t)=>{relAdd(v,t,5);if(t===S)apply({suc:3});return `${v.name} sang thăm ${NM(t)} lúc ốm mệt`}},
- warn:{w:0.8,ok:(v,t)=>aff(v,t)>=20&&liveRivals(true).some(x=>x!==v&&x!==t&&bandOf(danger(x,t))>=2),run:(v,t)=>{const x=liveRivals(true).find(x=>x!==v&&x!==t&&bandOf(danger(x,t))>=2);if(t===S){if(traitsOf(S).length){}S.dKnown=S.dKnown||{};S.dKnown[x.id]=wk();noteAdd(x.id,`${v.name} báo: nàng có thể hại ngươi`)}else{t.shield=Math.max(t.shield||0,1)}relAdd(v,t,4);return `${v.name} lén báo ${NM(t)} đề phòng ${x.name}`}},
+ warn:{w:0.8,ok:(v,t)=>aff(v,t)>=20&&liveRivals(true).some(x=>x!==v&&x!==t&&bandOf(danger(x,t))>=2),run:(v,t)=>{const x=liveRivals(true).find(x=>x!==v&&x!==t&&bandOf(danger(x,t))>=2);if(t===S){if(traitsOf(S).length){}S.dKnown=S.dKnown||{};S.dKnown[x.id]=wk();noteAdd(x.id,`${v.name} báo: nàng có ý hại ngươi`)}else{t.shield=Math.max(t.shield||0,1)}relAdd(v,t,4);return `${v.name} lén báo ${NM(t)} đề phòng ${x.name}`}},
  mediate:{w:0.8,ok:(v,t)=>t!==S&&oan(t,S)>=20,run:(v,t)=>{oanAdd(t,S,-10);return `${v.name} đứng ra hòa giải giữa ${t.name} và ngươi`}},
  provoke:{w:0.6,ok:(v,t)=>danger(v,t)>=10,run:(v,t)=>{oanAdd(t,v,6);if(t===S)apply({duc:0});else t.ghen=cl(t.ghen+3,0,100);ap(v,{danh:-1});return `${v.name} buông lời khiêu khích ${NM(t)}`}},
  humiliate:{w:0.5,ok:(v,t)=>danger(v,t)>=18&&rkOf(v)>=rkOf(t),run:(v,t)=>{oanAdd(t,v,10);ap(t,{danh:-2});ap(v,{danh:-1});return `${v.name} hạ nhục ${NM(t)} trước mặt cung nhân`}},
@@ -3399,6 +3400,7 @@ document.addEventListener("click",e=>{const b=e.target.closest("[data-hire]");if
 /* 'Xem người': a costly look (Bạc -15, 1 khắc) reveals the trait */
 document.addEventListener("click",e=>{const b=e.target.closest("[data-svlook]");if(!b||b.disabled)return;e.stopPropagation();const s=servById(+b.dataset.svlook);if(!s||S.bac<15||!can(1)||Q.length)return;apply({bac:-15});spend(1);servLearn(s,"Cho người dò xét lai lịch");render()},true);
 /* FIRING: Nội vụ phủ must agree (Chắc), Bạc -20, Danh -1 (more if she fires often), a random replacement from the pool; he knows her secrets */
+function servSellO(p,s,harsh){if(harsh==null)harsh=((p.fired||[]).filter(w=>wk()-w<18).length+1)>=2;return cl(({tham:55,chuyen:40,lanh:30,nhat:12,trung:4})[s.tr]+(harsh?15:0)-Math.round(s.loyal/3)+((p.schemes||0)>0?10:0),0,90)}
 function fireServ(p,s,quietly){const me=p===S;const cost=20;if(p.bac<cost)return"";ap(p,{bac:-cost});p.fired=(p.fired||[]).filter(w=>wk()-w<18);p.fired.push(wk());const harsh=p.fired.length>=2;ap(p,{danh:harsh?-3:-1});
  if(!roll(80)){return me?`Nội vụ phủ chưa duyệt việc trả ${s.name} về. Bạc -${cost}. `:""}
  p.staff.splice(p.staff.indexOf(s),1);const n=takeFromPool(s.role);if(n)p.staff.push(n);
@@ -3506,7 +3508,7 @@ function birthRisk(p){const me=p===S;const ag=p.age||20;let r=9+(p.suc<40?4:0)+M
 (function(){const p0=pregMonth;pregMonth=function(){try{for(const p of consorts()){const pr=p===S?S.preg:p.preg;if(pr>=8&&!p.midChk){p.midChk=1;const f=others(p).filter(x=>x!==p&&bandOf(danger(x,p))>=3&&(x===S?false:x.bac>=40));if(f.length&&roll(25)){const x=pick(f);ap(x,{bac:-40});p.midBribe=key(x);persCount(x,"midwife")}}if(!pr){p.midChk=0;p.midBribe=null}}}catch(e){}return p0.apply(this,arguments)}})();
 /* every death card names the cause and the chain: who, what, how it could have been prevented */
 function deathChain(fate){const L=[];const f=String(fate||"");
- if(/Khó sinh/.test(f)){const w=S.birthWhy||[];L.push(`Mỗi lần sinh nở đều có thể chết. Lần này: ${w.length?w.join(", "):"vận rủi"}.`);if(S.midBribe){const x=byKey(S.midBribe);L.push(`Bà đỡ đã nhận bạc của ${x?x.name:"kẻ giấu mặt"}.`)}L.push("Phòng được: thái y tâm phúc, học Y thuật bậc 2, giữ Sức trên 40, cung nữ trung thành đỡ đẻ.")}
+ if(/Khó sinh/.test(f)){const w=S.birthWhy||[];L.push(`Mỗi lần sinh nở đều nguy đến tính mạng. Lần này: ${w.length?w.join(", "):"vận rủi"}.`);if(S.midBribe){const x=byKey(S.midBribe);L.push(`Bà đỡ đã nhận bạc của ${x?x.name:"kẻ giấu mặt"}.`)}L.push("Phòng được: thái y tâm phúc, học Y thuật bậc 2, giữ Sức trên 40, cung nữ trung thành đỡ đẻ.")}
  else if(/độc/.test(f)){const by=S.framedBy&&byKey(S.framedBy);L.push(by?`Kẻ ra tay: ${by.name}.`:"Kẻ ra tay chưa rõ.");L.push("Phòng được: người thử món, thuốc giải trong rương, thái y tâm phúc, cung nữ trung thành canh bếp.")}
  else if(/lãnh cung|Chết rét/.test(f)){L.push(`Vào lãnh cung vì: ${S.coldWhy||"bị phế"}.`);L.push("Phòng được: giữ chứng cứ gỡ tội, nhờ người đưa thư kêu oan, giữ Sức trước mùa đông.")}
  else if(/Ban chết/.test(f)){L.push("Mưu kế bại lộ trước Hoàng thượng.");L.push("Phòng được: sai người tin cẩn, bớt dấu vết, đợi thêm chứng cứ.")}
@@ -3560,7 +3562,7 @@ function sabotage(a,t){const c=ct();const o=cl(40+(a.tamco||0)/4-(t===S&&S.maid&
  if(roll(o)){c.sab[key(t)]=(c.sab[key(t)]||0)+1;const m=t===S?`Đàn của ngươi bị cắt dây trước buổi diễn (vòng sau -2).`:`${a===S?"Ngươi":a.name} phá ${t.name}: vòng sau nàng -2.`;if(t===S||a===S)log(m);return m}
  if(roll(50)){c.dq.push(key(a));ap(a,{danh:-6,sung:-8});const m=`${a===S?"Ngươi":a.name} ra tay với ${NM(t)} bị bắt quả tang: bị loại khỏi cuộc tranh ghế, Danh -6, Sủng -8.`;log(m);return m}return `${a===S?"Ngươi":a.name} định ra tay nhưng không thành.`}
 function myBetween(){if(quiet)return;const c=ct();const R2=c.c.map(byKey).filter(x=>x&&x!==S&&!c.dq.includes(key(x)));const top=R2.sort((a,b)=>(b.sung||0)-(a.sung||0))[0];
- Q.push({t:"Tranh ghế: giữa các vòng",who:pMe(),h:`<p>Còn ${3-c.round} vòng. Ngươi dùng mấy ngày này thế nào?</p>${scoreTable()}`,opts:[{n:"Luyện tập",fx:{suc:-10},x:"vòng Tài nghệ +1,5",go:()=>{c.pr.me=(c.pr.me||0)+1}},{n:"Vận động người đỡ đầu",fx:{bac:-30},x:`${word(55)} · thành: thêm một người đứng sau (Thế lực +2)`,go:()=>{if(roll(55))(c.bk.me=c.bk.me||[]).push(pick(["một vị thượng thư","Tổng quản thái giám","một vị vương phi"]))}},top?{n:`Ra tay với ${top.name}`,fx:{},x:`${word(cl(40+S.tamco/4,5,90))} · thành: nàng -2 điểm · hỏng: có thể bị loại, Danh -6, Sủng -8`,go:()=>sabotage(S,top)}:null].filter(Boolean)})}
+ Q.push({t:"Tranh ghế: giữa các vòng",who:pMe(),h:`<p>Còn ${3-c.round} vòng. Ngươi dùng mấy ngày này thế nào?</p>${scoreTable()}`,opts:[{n:"Luyện tập",fx:{suc:-10},x:"vòng Tài nghệ +1,5",go:()=>{c.pr.me=(c.pr.me||0)+1}},{n:"Vận động người đỡ đầu",fx:{bac:-30},x:`${word(55)} · thành: thêm một người đứng sau (Thế lực +2)`,go:()=>{if(roll(55))(c.bk.me=c.bk.me||[]).push(pick(["một vị thượng thư","Tổng quản thái giám","một vị vương phi"]))}},top?{n:`Ra tay với ${top.name}`,fx:{},x:`${word(cl(40+S.tamco/4,5,90))} · thành: nàng -2 điểm · hỏng: bị bắt quả tang, loại khỏi cuộc tranh ghế, Danh -6, Sủng -8: ${word(50)}`,go:()=>sabotage(S,top)}:null].filter(Boolean)})}
 /* talking to the Emperor or the Thái hậu during a contest shows which answer they prize */
 (function(){const t1=talk;talk=function(oi){const p=S&&curPeople()[popIdx];const r=t1.apply(this,arguments);try{if(ct()&&p&&(p.kind==="emp"||p.kind==="th")&&!ct().hint){ct().hint=1;log(`Qua chuyện trò, ngươi đoán được ${p.kind==="emp"?"Hoàng thượng":"Thái hậu"} trọng ${({nhan:"lòng nhân",le:"lễ phép",tri:"sự sáng suốt"})[judgeVirtue()]}.`)}}catch(e){}return r}})();
 function scoreTable(){const c=ct();if(!c)return"";return `<div class="pcb rows">${c.c.map(byKey).filter(Boolean).map(p=>{const s=c.sc[key(p)]||[];const tot=s.reduce((a,b,i)=>a+b*crW(i),0);return `<div class="pcrow"><span>${mdH(p===S?pMe():pv(p),"xs")} ${p===S?"Ngươi":p.name}${c.dq.includes(key(p))?' <span class="ef r">bị loại</span>':""}</span><b>${s.map((x,i)=>`${CR[i][0]}${x}`).join(" · ")||"-"}${s.length?` = ${Math.round(tot*10)/10}`:""}</b></div>`}).join("")}</div>`}
@@ -3923,7 +3925,7 @@ function accSpot(all,cls,k,attrs,inner){const st=accState(k);if(st.here||!st.why
 /* TRA CỨU: Ra vào cung cấm */
 function accInfo(){if(!S||Q.length)return;const R=n=>`<b>${n}</b>`;
  Q.push({t:"Ra vào cung cấm",h:`<div class="acinfo"><p>Một luật cho mọi người trong cung, cả phi tần khác.</p>
- <p>${R("Dưỡng Hòa điện, Cần Chính điện")}: khi được triệu. Từ Phi: xin yết kiến (ngài có thể từ chối).</p>
+ <p>${R("Dưỡng Hòa điện, Cần Chính điện")}: khi được triệu. Từ Phi: xin yết kiến (được cho vào: ${word(accAskO("dtd"))}).</p>
  <p>${R("Càn Ninh cung")}: sáng thỉnh an, ai cũng vào. Lúc khác: được mời, hoặc từ Quý phi.</p>
  <p>${R("Đức Thọ cung")}: sáng thỉnh an, từ Quý nhân. Thấp hơn: khi Thái hậu triệu.</p>
  <p>${R("Cung phi tần khác")}: phẩm ngươi không thấp hơn chủ cung quá một bậc, hoặc được mời.</p>
@@ -4030,7 +4032,7 @@ witOf=function(v){return cl(Math.round(1.6*(v===S?S.tamco||0:v.tamco||0)),0,100)
 ORIGINS.push({k:"cnv",n:"Cung nữ tuyển vào cung",r:0,o:{},hh:0,th:0,t:"Con nhà thường dân, qua kỳ tuyển cung nữ của Nội vụ phủ. Ngươi vào cung làm kẻ hầu, dưới cả Đáp ứng."});
 NAMES.tin="Chủ tin";NAMES.nt="Hoàng thượng để ý";
 RKEYS.push(["tin","Chủ tin"],["nt","Hoàng thượng để ý"]);
-Object.assign(HX,{tin:"Chủ tin: lòng tin của chủ nhân với ngươi (0-100). Cao thì được thưởng, tiến cử; dưới 10 dễ bị đày Tân Giả khố.",nt:"Hoàng thượng để ý: ngài có nhớ mặt ngươi không. Từ 45 trở lên, ngài có thể hỏi tên và phong Đáp ứng.",srk:"Bậc cung nữ: Cung nữ → Đại cung nữ → Chưởng sự cô cô. Bậc cao nhất tùy phẩm của chủ.",merit:"Công lao: làm việc, được chủ tiến cử. Đủ thì cuối tháng Nội vụ phủ thăng bậc (cần Chủ tin 35).",wage:"Lương tháng theo bậc cung nữ.",age:"Cung nữ được xuất cung năm 25 tuổi. Chưởng sự có thể ở lại làm ma ma.",lau:"Tân Giả khố: giặt đồ chịu phạt. Hết hạn thì Nội vụ phủ chia về hầu chủ mới.",sec:"Số chuyện mờ ám của chủ mà ngươi biết. Có thể mật báo để lấy thưởng, nhưng chủ biết thì nguy.",spy:"Ngươi nhận bạc làm tai mắt cho người khác."});
+Object.assign(HX,{tin:"Chủ tin: lòng tin của chủ nhân với ngươi (0-100). Cao thì được thưởng, tiến cử; dưới 10 dễ bị đày Tân Giả khố.",nt:"Hoàng thượng để ý: ngài có nhớ mặt ngươi không. Từ 45 trở lên, mỗi lần để ý ngươi ngài hỏi tên và phong Đáp ứng (càng cao càng dễ).",srk:"Bậc cung nữ: Cung nữ → Đại cung nữ → Chưởng sự cô cô. Bậc cao nhất tùy phẩm của chủ.",merit:"Công lao: làm việc, được chủ tiến cử. Đủ thì cuối tháng Nội vụ phủ thăng bậc (cần Chủ tin 35).",wage:"Lương tháng theo bậc cung nữ.",age:"Cung nữ được xuất cung năm 25 tuổi. Chưởng sự được ở lại làm ma ma.",lau:"Tân Giả khố: giặt đồ chịu phạt. Hết hạn thì Nội vụ phủ chia về hầu chủ mới.",sec:"Số chuyện mờ ám của chủ mà ngươi biết. Có thể mật báo để lấy thưởng, nhưng chủ biết thì nguy.",spy:"Ngươi nhận bạc làm tai mắt cho người khác."});
 Object.assign(HXN,{tin:"Chủ tin",nt:"Để ý"});
 STORY.cnv={t:"Từ cung nữ lên phi tần",n:3,goal:"Ngươi vào cung làm cung nữ. Được Hoàng thượng để mắt mà phong Đáp ứng, rồi leo lên Tần.",init(){},
  hint:()=>["Được Hoàng thượng để mắt, phong Đáp ứng","Lên Thường tại","Lên Tần"][S.st.step]||"",
@@ -4131,11 +4133,11 @@ function srvTalk(p){const m=srvM();const A=[];if(!m)return A;
   const iv=(S.srv.intel||[]).map(RV).filter(v=>v&&v.alive&&v!==m)[0];
   T("Bẩm tin dò được",100,{tin:5},{},iv?`chủ nắm 1 chứng cứ của ${iv.name}`:"",()=>{if(iv){evA(m,iv,1);S.srv.intel.splice(S.srv.intel.indexOf(iv.id),1)}},{lock:!iv,t:"Chưa dò được tin gì"});
   T("Xin chủ tiến cử lên Nội vụ phủ",od(30+S.tin/2),{},{tin:-3},"công lao +3",ok=>{if(ok)srvMerit(3)},{lock:S.tin<50||S.srv.rk>=srvMax(),t:S.srv.rk>=srvMax()?"Đã ở bậc cao nhất cung này cho phép":"Cần Chủ tin 50"})}
- if(p.sk==="emp"){T("Quỳ dâng trà",od(25+S.sac/2.5+S.tai/10+mm()),{},{tin:-1},"Hoàng thượng để ý +8 · chủ có thể ghen",ok=>{if(ok)srvNotice("meet",8);return ok?"Ngài nhận chén trà, liếc nhìn ngươi.":"Tay run, trà sóng ra khay."});
+ if(p.sk==="emp"){T("Quỳ dâng trà",od(25+S.sac/2.5+S.tai/10+mm()),{},{tin:-1},`Hoàng thượng để ý +8 · kèm: chủ ghen, Chủ tin -${m.trait==="Hiểm độc"||m.trait==="Kiêu ngạo"?8:4}: ${word(cl(30+(m.malice||40)/3,0,100))}`,ok=>{if(ok)srvNotice("meet",8);return ok?"Ngài nhận chén trà, liếc nhìn ngươi.":"Tay run, trà sóng ra khay."});
   T("Cúi đầu lui tránh",100,{duc:1},{},"giữ phận",null)}
  if(p.sk==="rv"||p.sk==="hh"){const v=p.ref&&RV(p.ref.id);if(v&&v!==m){T("Hành lễ thỉnh an",100,{danh:1},{},`${v.name} thiện cảm +2`,()=>{affAdd(v,S,2)});
    const hostile=p.sk==="hh"||hostility(v,m)>=20;
-   T(`Mật báo chuyện của ${m.name}`,100,{bac:15,danh:1},{},`${v.name} nắm 2 chứng cứ của ${m.name} · chủ có thể phát hiện`,()=>{evA(v,m,2);S.srv.sec=Math.max(0,S.srv.sec-1);S.srv.betray={by:v.id};return `${v.name} lặng nghe, dúi vào tay ngươi một túi bạc.`},{lock:!(S.srv.sec>0&&hostile),t:S.srv.sec>0?"Nàng không thù chủ ngươi":"Chưa biết chuyện gì của chủ"});
+   T(`Mật báo chuyện của ${m.name}`,100,{bac:15,danh:1},{},`${v.name} nắm 2 chứng cứ của ${m.name} · kèm: mỗi tháng chủ phát hiện: ${word(m.trait==="Đa nghi"?25:10)}; khi ấy bị giết: ${word(30)}, không thì Tân Giả khố 12 tuần`,()=>{evA(v,m,2);S.srv.sec=Math.max(0,S.srv.sec-1);S.srv.betray={by:v.id};return `${v.name} lặng nghe, dúi vào tay ngươi một túi bạc.`},{lock:!(S.srv.sec>0&&hostile),t:S.srv.sec>0?"Nàng không thù chủ ngươi":"Chưa biết chuyện gì của chủ"});
    if(p.sk==="hh")T(`Tố cáo ${m.name} trước Hoàng hậu`,od(30+S.srv.sec*15+S.danh/5),{danh:3,bac:30},{suc:-20},`${m.name} bị xét tội · ngươi về hầu Hoàng hậu`,ok=>{if(ok){S.srv.sec=0;const a0=ACTX.a;ACTX.a=v;try{fall(m,"bị cung nữ tố giác, chứng cứ rành rành")}finally{ACTX.a=a0}srvReassign("Hoàng hậu giữ ngươi lại làm chứng.",v);return `${m.name} bị xét tội.`}S.srv.betray={by:v.id};return "Hoàng hậu không tin lời một cung nữ."},{lock:S.srv.sec<2,t:"Cần biết ít nhất 2 chuyện của chủ",act:1})}
   else if(v===m)T("Hầu bên cạnh chủ",od(55+misAdj(m)),{tin:2},{tin:-1},"",null)}
  if(p.sk==="sv"){const s=servById(p.sid);if(s){T("Trò chuyện",od(55+S.duc/5+S.sac/10),{},{},"thiện cảm +10",ok=>{srvAf(s,ok?10:-3);if(roll(35))S.srv.know[s.sid]=1;return ok?`${s.name} cười nói vui vẻ.`:`${s.name} lạnh nhạt.`});
@@ -4181,7 +4183,7 @@ function srvCards(){const m=srvM();const X=[];if(!m)return X;const B=bid();const
  if(!S.srv.err||S.srv.err.b!==B)S.srv.err=roll(45)?Object.assign({b:B},srvErrPick()):{b:B,none:1};
  const er=S.srv.err;if(!er.none&&!er.acc)X.push({n:"Việc chủ sai",t:er.n+".",k:1,c:{},o:100,w:{},x:"được vào nơi ấy buổi này · đến nơi chạm “Việc chủ sai”",go:()=>{er.acc=1;S.srv.sent={k:er.k,n:er.n,until:B,done:0,v:er.v||null};srvGoTo(er.k)}});
  if(S.tonight&&S.tonight!=="me"&&S.tonight.id===m.id&&!srvOnce("tea")){
-  X.push({n:"Hầu trà khi ngự giá",t:`Tối nay Hoàng thượng ngự giá đến cung ${m.name}. Ngươi bưng khay trà vào điện.`,b:2,k:1,c:{},o:od(25+S.sac/2.5+S.tai/10+S.nt/5),w:{},l:{tin:-1},x:"Hoàng thượng để ý +8 · chủ có thể ghen",once:"tea",go:()=>srvNotice("tea",8)});
+  X.push({n:"Hầu trà khi ngự giá",t:`Tối nay Hoàng thượng ngự giá đến cung ${m.name}. Ngươi bưng khay trà vào điện.`,b:2,k:1,c:{},o:od(25+S.sac/2.5+S.tai/10+S.nt/5),w:{},l:{tin:-1},x:`Hoàng thượng để ý +8 · kèm: chủ ghen, Chủ tin -${m.trait==="Hiểm độc"||m.trait==="Kiêu ngạo"?8:4}: ${word(cl(30+(m.malice||40)/3,0,100))}`,once:"tea",go:()=>srvNotice("tea",8)});
   X.push({n:"Lui sau bình phong",t:"Để chủ nhân một mình hầu ngài.",b:2,k:1,c:{},o:100,w:{tin:2},once:"tea"})}
  if(S.srv.spyFor!=null&&!srvOnce("spy")){const v=RV(S.srv.spyFor);if(v&&v.alive)X.push({n:`Lén báo tin cho ${v.name}`,t:"Kể chuyện trong cung chủ cho người đã mua chuộc ngươi.",k:1,c:{},o:od(70+S.tamco/5),w:{bac:8},l:{tin:-15},x:`${v.name} nắm 1 chứng cứ của ${m.name}`,once:"spy",go:()=>evA(v,m,1),fail:()=>{if(roll(40))srvLaundry(`${m.name} bắt gặp ngươi lén lút với người của ${v.name}.`,8)}})}
  X.forEach(a=>a.dom="");return X}
@@ -4242,7 +4244,7 @@ function srvReassign(why,to){const old=S.srv.mid;const L=liveRivals(true).filter
  if(!quiet)Q.push({t:"Đổi chủ",who:pv(n),h:`<p>${why}</p><p>Từ nay ngươi là <b>${srvTitle()}</b>. Tính nàng: ${n.trait}${n.trait2?", "+n.trait2:""}.</p>`})}
 function srvLaundry(why,weeks){if(!isSrv())return;if(S.srv.lau<=0)S.srv.rk0=Math.max(1,S.srv.rk);S.srv.rk=0;S.srv.lau=weeks;S.srv.lw=0;S.place="tgk";S.visit=srvVisitOf("tgk");S.srv.sent=null;S.srv.spyFor=null;
  log(`<span class="r">${why} Ngươi bị đày xuống Tân Giả khố ${weeks} tuần.</span>`);
- Q.push({t:"Tân Giả khố",cls:"end",who:pMe(),h:`<p>${why}</p><p>Ngươi bị đày xuống <b>Tân Giả khố</b> giặt đồ ${weeks} tuần. Việc nặng, cơm hẩm; Sức cạn thì có thể chết.</p>`,btn:"Cúi đầu"});if(!quiet)deal()}
+ Q.push({t:"Tân Giả khố",cls:"end",who:pMe(),h:`<p>${why}</p><p>Ngươi bị đày xuống <b>Tân Giả khố</b> giặt đồ ${weeks} tuần. Việc nặng, cơm hẩm; Sức cạn thì nguy đến tính mạng.</p>`,btn:"Cúi đầu"});if(!quiet)deal()}
 function srvFromLaundry(){S.srv.lau=0;S.srv.rk=Math.max(1,(S.srv.rk0||1)-1);srvReassign("Hết hạn phạt ở Tân Giả khố.")}
 function srvMoodEvent(){const m=srvM();const tr=m.trait;const good=(S.tin-20)/100+(tr==="Hiền lành"||tr==="Nhu mì"?.2:0)-(tr==="Hiểm độc"||tr==="Kiêu ngạo"?.12:0);
  if(Math.random()<good){const g=3+rkOf(m);apply({bac:g,tin:1});log(`${m.name} vui lòng, thưởng ngươi ${g} lạng bạc.`);Q.push({t:"Chủ thưởng",who:pv(m),h:`<p>${m.name} vui lòng, thưởng ngươi ${g} lạng bạc.</p><p class="g">Bạc +${g} · Chủ tin +1</p>`});return}
@@ -4272,28 +4274,28 @@ PEND.cnvScold=()=>{const m=srvM();if(!isSrv()||!m)return null;const o=od(40+S.sa
  return{t:`<p>${m.name} ${m.trait==="Kiêu ngạo"?"chê trà nguội, hắt cả chén vào người ngươi":m.trait==="Đa nghi"?"nghi ngươi lén lút ra ngoài, gọi vào tra hỏi":"trách ngươi làm việc chậm chạp"}.</p>`,who:pv(m),o:[
   {n:"Cúi đầu nhận lỗi",fx:{tin:1,duc:1},x:""},
   {n:"Khóc lóc xin tha",fx:{},x:`${word(o)} · thành: Chủ tin +3 · hỏng: Chủ tin -3`,go:()=>{if(roll(o)){apply({tin:3});log("Chủ mềm lòng.")}else{apply({tin:-3});log("Chủ càng bực.")}}},
-  {n:"Cãi lại",fx:{danh:2,tin:-8},x:"đám cung nhân nể · có thể bị phạt quỳ: Sức -15",go:()=>{if(roll(40)){apply({suc:-15});log("Bị phạt quỳ giữa sân. Sức -15.")}}}]}};
+  {n:"Cãi lại",fx:{danh:2,tin:-8},x:`đám cung nhân nể · kèm: bị phạt quỳ, Sức -15: ${word(40)}`,go:()=>{if(roll(40)){apply({suc:-15});log("Bị phạt quỳ giữa sân. Sức -15.")}}}]}};
 PEND.cnvOrd=pp=>{const m=srvM(),t=RV(pp.t);if(!isSrv()||!m||!t||!t.alive||t.out)return null;const k=pp.k,o=ordOdds(k),mal=m.malice||40;
  const desc={spy:`dò la cung ${t.name}, xem nàng gặp ai, nói gì`,plant:`lén giấu hình nhân bùa ngải vào tẩm cung ${t.name}`,poison:`bỏ thuốc độc vào bát canh dâng ${t.name}`}[k];
- const gain={spy:`Chủ tin +4 · Bạc +3 · chủ nắm 1 chứng cứ của ${t.name}`,plant:`Chủ tin +8 · Bạc +10 · ${t.name} bị vu, mất Danh`,poison:`Chủ tin +12 · Bạc +20 · ${t.name} trúng độc, có thể chết`}[k];
+ const gain={spy:`Chủ tin +4 · Bạc +3 · chủ nắm 1 chứng cứ của ${t.name}`,plant:`Chủ tin +8 · Bạc +10 · ${t.name} bị vu, mất Danh`,poison:`Chủ tin +12 · Bạc +20 · ${t.name} trúng độc · ${kpDeathWord(kpDeathP("poison",t),"nàng")}`}[k];
  const q=queenP();const who=q&&q!==m&&q!==t&&q!==S?q:t;
  return{t:`<p>${m.name} gọi ngươi vào phòng trong, đóng cửa: “Ngươi đi ${desc}.”</p><p class="past">Kẻ hầu nào làm cũng một luật: hỏng thì nửa phần bị bắt; bị bắt thì 3 phần bị đánh chết ở Thận Hình ti, hoặc phải khai ra chủ.</p>`,who:pv(m),o:[
   {n:"Vâng lệnh",fx:{},x:`${word(o)} · thành: ${gain} · hỏng: Chủ tin -2, nửa phần bị bắt`,go:()=>srvDoOrder(k,t)},
-  {n:"Từ chối",fx:{tin:mal>=60?-15:-10},x:"có thể bị phạt: Sức -20",go:()=>{if(roll(mal/2)){apply({suc:-20});log(`${m.name} sai người phạt ngươi quỳ trên đá vụn. Sức -20.`);if(S.suc<=0)die("Quỳ phạt đến kiệt sức mà chết")}}},
+  {n:"Từ chối",fx:{tin:mal>=60?-15:-10},x:`kèm: bị phạt quỳ đá vụn, Sức -20: ${word(mal/2)}`,go:()=>{if(roll(mal/2)){apply({suc:-20});log(`${m.name} sai người phạt ngươi quỳ trên đá vụn. Sức -20.`);if(S.suc<=0)die("Quỳ phạt đến kiệt sức mà chết")}}},
   {n:`Mật báo cho ${who.queen?"Hoàng hậu":who.name}`,fx:{bac:20,danh:2},x:`${who.name} nắm 2 chứng cứ của ${m.name} · chủ biết thì ngươi bị đánh chết hoặc đày Tân Giả khố`,go:()=>{evA(who,m,2);S.srv.betray={by:who.id};log(`Ngươi lén báo cho ${who.name} mưu của ${m.name}.`)}}]}};
 PEND.cnvBribe=pp=>{const m=srvM(),v=RV(pp.r);if(!isSrv()||!m||!v||!v.alive)return null;
  return{t:`<p>Một thái giám của ${v.name} chặn ngươi ở hành lang, dúi vào tay ngươi một túi bạc: “Chủ tử nhà ta muốn biết chuyện trong cung ${m.name}.”</p>`,who:pv(v),o:[
-  {n:"Nhận bạc, làm tai mắt",fx:{bac:20},x:"mỗi tháng Bạc +8 · chủ có thể phát hiện: bị đánh chết hoặc đày",go:()=>{ap(v,{bac:-20});S.srv.spyFor=v.id}},
+  {n:"Nhận bạc, làm tai mắt",fx:{bac:20},x:`mỗi tháng Bạc +8 · kèm: mỗi tháng chủ phát hiện: ${word(m.trait==="Đa nghi"?25:8)}; khi ấy bị đánh chết: ${word(30)}, không thì Tân Giả khố 10 tuần`,go:()=>{ap(v,{bac:-20});S.srv.spyFor=v.id}},
   {n:"Từ chối, bẩm chủ",fx:{tin:5},x:`${m.name} nắm 1 chứng cứ của ${v.name}`,go:()=>{evA(m,v,1);relAdd(m,v,-5)}},
   {n:"Từ chối, im lặng",fx:{},x:""}]}};
 PEND.cnvFrame=pp=>{const s=servById(pp.sid),m=srvM();if(!isSrv()||!s||!m)return null;const fr=srvFriendList().length;const o=od(30+S.tamco/2+S.duc/5+fr*8);const item=pick(["cây trâm vàng","chiếc vòng ngọc","hộp phấn ngự ban","túi hương thêu chỉ vàng"]);
- return{t:`<p>${s.name} (${srkName(s)}) tố với ${m.name} rằng ngươi lấy trộm ${item}.</p>${fr?`<p class="past">${fr} người bạn có thể làm chứng cho ngươi.</p>`:""}`,who:pServ(s),o:[
+ return{t:`<p>${s.name} (${srkName(s)}) tố với ${m.name} rằng ngươi lấy trộm ${item}.</p>${fr?`<p class="past">${fr} người bạn sẽ làm chứng cho ngươi.</p>`:""}`,who:pServ(s),o:[
   {n:"Thanh minh",fx:{},x:`${word(o)} · thành: ${s.name} bị phạt, Chủ tin +2 · hỏng: Chủ tin -12, bị đánh đòn Sức -15`,go:()=>{if(roll(o)){s.loyal=cl(s.loyal-15,0,100);s.trouble=wk();srvAf(s,-20);apply({tin:2});log(`Ngươi thanh minh được; ${s.name} bị phạt vì vu cáo.`)}else{apply({tin:-12,suc:-15});log(`${m.name} không tin ngươi, sai đánh đòn.`);if(S.suc<=0)die("Bị đánh đòn vì tội trộm cắp, không qua khỏi");else if(S.tin<8)srvLaundry(`${m.name} cho rằng ngươi là kẻ cắp.`,6)}}},
   {n:"Nhận tội, xin tha",fx:{tin:-6,suc:-8},x:""},
   {n:`Đút bạc cho ${s.name} rút lời`,fx:{bac:-10},x:`${s.name} thôi tố, thiện cảm +10`,go:()=>srvAf(s,10)}]}};
 PEND.cnvName=pp=>{if(!isSrv()||(S.age||0)<18)return null;const m=srvM();const o=od(40+S.nt/2+S.sac/5);const risky=!!m&&(m.malice||0)>=60&&S.tin<40;
- return{t:`<p>${pp.src==="month"?"Tổng quản Càn Thanh cung đến hỏi: Hoàng thượng còn nhớ cung nữ dâng trà hôm nọ.":"Hoàng thượng đặt chén trà xuống, hỏi: “Ngươi tên gì? Hầu ở cung nào?”"}</p>${risky?`<p class="r">${m.name} hiểm độc lại chẳng ưa ngươi: nàng có thể ra tay trước ngày sắc phong.</p>`:""}`,who:pEmp(),o:[
-  {n:"Cúi đầu thưa tên",fx:{},x:`${word(o)} · thành: được phong ${RANKS[0].n}${risky?", nhưng chủ có thể hại ngươi trước":""} · hỏng: Chủ tin -15`,go:()=>{if(roll(o)){if(risky&&roll(25)){die(`Trước ngày sắc phong, ${m.name} sai người đẩy ngươi xuống giếng`);return}srvRise(pp.src==="month"?"Hoàng thượng nhớ đến ngươi":"Hoàng thượng để mắt đến cung nữ dâng trà")}else{apply({tin:-15});if(m)log(`${m.name} biết chuyện, giận ngươi lả lơi. Chủ tin -15.`)}}},
+ return{t:`<p>${pp.src==="month"?"Tổng quản Càn Thanh cung đến hỏi: Hoàng thượng còn nhớ cung nữ dâng trà hôm nọ.":"Hoàng thượng đặt chén trà xuống, hỏi: “Ngươi tên gì? Hầu ở cung nào?”"}</p>${risky?`<p class="r">${m.name} hiểm độc lại chẳng ưa ngươi: nàng ra tay trước ngày sắc phong: ${word(25)}.</p>`:""}`,who:pEmp(),o:[
+  {n:"Cúi đầu thưa tên",fx:{},x:`${word(o)} · thành: được phong ${RANKS[0].n}${risky?`, nhưng chủ giết ngươi trước ngày sắc phong: ${word(25)}`:""} · hỏng: Chủ tin -15`,go:()=>{if(roll(o)){if(risky&&roll(25)){die(`Trước ngày sắc phong, ${m.name} sai người đẩy ngươi xuống giếng`);return}srvRise(pp.src==="month"?"Hoàng thượng nhớ đến ngươi":"Hoàng thượng để mắt đến cung nữ dâng trà")}else{apply({tin:-15});if(m)log(`${m.name} biết chuyện, giận ngươi lả lơi. Chủ tin -15.`)}}},
   {n:"Lui về sau chủ",fx:{tin:5},x:"Hoàng thượng để ý -10",go:()=>{S.nt=Math.max(0,S.nt-10)}}]}};
 PEND.cnvWed=pp=>{if(!isSrv()||(S.age||0)<18)return null;const w=WEDW[pp.w||0];
  return{t:`<p>${w} dâng sớ xin Hoàng thượng ban gả một cung nữ hiền thục. Nội vụ phủ dâng tên ngươi.</p>`,who:pEmp(),o:[
@@ -4351,13 +4353,13 @@ function srvHead(){const m=srvM();if(!m)return"";const w=srvWhere(m),mk=palaceOf
  return `<div class="srvhead">${mdH(pv(m),"sm")}<span><b>${srvTitle()}</b> · chủ ${m.trait}${m.trait2?", "+m.trait2:""} · ${w===mk?"đang ở cung":"đang ở "+placeOf(w).n} · Chủ tin <b class="${S.tin<30?"r":S.tin>=60?"g":""}">${S.tin}</b>${sn?` · <b class="g">Việc chủ sai: ${sn.n} (đến ${placeOf(sn.k).n})</b>`:""}${S.srv.lau>0?` · <b class="r">Tân Giả khố còn ${S.srv.lau} tuần</b>`:""}</span></div>`}
 function srvRows(){const m=srvM();const need=(S.srv.rk+1)*5,mx=srvMax();const row=(a,b)=>`<div class="pcrow"><span>${a}</span><b>${b}</b></div>`;
  return [row("Thân phận",srvTitle()),row("Công lao",`${Math.floor(S.srv.mp)}/${need}${S.srv.rk>=mx?` · bậc cao nhất cung ${m?m.name:""} cho phép`:` · đủ thì lên ${SRK.maid[S.srv.rk+1]||""}`}`),row("Lương tháng",`${CNV_WAGE[S.srv.rk]} bạc · đang có ${S.bac}`),
-  row("Hoàng thượng để ý",`${S.nt}/100 · từ 45 ngài có thể hỏi tên, phong ${RANKS[0].n}`),row("Ban gả",S.srv.rk>=2?`Danh ${S.danh}/20 · đủ thì có người xin cưới`:"cần Đại cung nữ, Danh 20"),
+  row("Hoàng thượng để ý",`${S.nt}/100 · từ 45, mỗi lần để ý ngươi ngài hỏi tên, phong ${RANKS[0].n}: ${word(Math.max(0,S.nt/2-10))}`),row("Ban gả",S.srv.rk>=2?`Danh ${S.danh}/20 · đủ thì có người xin cưới`:"cần Đại cung nữ, Danh 20"),
   row("Xuất cung",S.srv.mama?"ma ma: ở đến 45 tuổi":`${S.age}/25 tuổi${S.srv.rk>=3?" · chưởng sự được ở lại làm ma ma":""}`),
   row("Đường xuống",`Chủ tin ${S.tin}: dưới 10 dễ bị đày Tân Giả khố`),row("Biết chuyện của chủ",`${S.srv.sec}${S.srv.betray?" · đã mật báo, chủ biết thì nguy":""}`),
   row("Bạn trong cung",`${srvFriendList().length} người (thiện cảm 30+)`)].concat(S.srv.spyFor!=null&&RV(S.srv.spyFor)?[row("Tai mắt cho",RV(S.srv.spyFor).name)]:[])}
 function srvRoadHTML(){const m=srvM();return `<div class="story"><h3>Thân phận cung nữ</h3><p style="margin:0 0 4px">Ngươi là ${srvTitle()}${m?` (${rkName(m)}, tính ${m.trait})`:""}. Leo lên bằng công lao và lòng tin của chủ; được Hoàng thượng để mắt thì thành phi tần.</p></div><div class="pcb rows">${srvRows().join("")}</div>`}
 function srvStaffHTML(){const L=srvColleagues();const m=srvM();const oc=od(55+S.duc/5+S.sac/10),of=od(30+S.tamco/3);
- return `<h3>Đồng liêu</h3><p class="past">Kẻ hầu cùng cung và người ngươi đã quen. Bạn (thiện cảm 30+) làm chứng khi ngươi bị vu, mách tin; kẻ ghét ngươi (dưới 0) có thể vu cáo.</p>`+(L.map(s=>{const a=S.srv.af[s.sid]||0;const o=ownerOf(s);const kn=S.srv.know[s.sid];const t1=!can(1)?"Hết khắc buổi này":"";
+ return `<h3>Đồng liêu</h3><p class="past">Kẻ hầu cùng cung và người ngươi đã quen. Bạn (thiện cảm 30+) làm chứng khi ngươi bị vu, mách tin; kẻ ghét ngươi (dưới 0) tìm dịp vu cáo.</p>`+(L.map(s=>{const a=S.srv.af[s.sid]||0;const o=ownerOf(s);const kn=S.srv.know[s.sid];const t1=!can(1)?"Hết khắc buổi này":"";
   return `<div class="srvrow">${mdH(pServ(s),"sm")}<div class="srvi"><b>${s.name}</b><span class="past">${srkName(s)} · ${o?(o===m?"cùng cung":"người của "+o.name):"Nội vụ phủ"} · ${kn?"tính "+STR[s.tr]:"chưa rõ tính"}</span><span>Thiện cảm <b class="${a>=30?"g":a<0?"r":""}">${a}</b></span></div><div class="srvb">`
    +pbtn(`class="opt" data-cnv="chat" data-sid="${s.sid}"`,"Trò chuyện",`${word(oc)} · tốn: 1 khắc · thành: thiện cảm +10 · hỏng: thiện cảm -3`,t1)
    +pbtn(`class="opt" data-cnv="gift" data-sid="${s.sid}"`,"Biếu quà",`Chắc chắn · tốn: Bạc -5, 1 khắc · thành: thiện cảm +12`,S.bac<5?"Thiếu bạc (cần 5)":t1)
@@ -4412,12 +4414,12 @@ function srvAffairCaught(m,how){if(!isSrv())return;const mis=srvM();const scheme
   T("Chào hỏi đúng lễ",100,"hắn thiện cảm +5",()=>{m.af+=5;return `${m.name} gật đầu đáp lễ.`});
   T("Liếc mắt đưa tình",od(55+S.sac/5),`tình ý của hắn +12 · có người thấy: ${word(100-Math.round(risk/3))} giữ kín`,ok=>{if(ok)m.tinh+=12+(m.trait==="đa tình"?6:0);if(roll(risk/3))srvSeen(m,1);return ok?`${m.name} khẽ cười.`:"Hắn không để ý."});
   if(m.tinh>=30)T("Trao khăn tay, thư",od(60+S.tamco/5),"tình ý +15 · khăn thư là tang vật nếu bị lục",ok=>{if(ok){m.tinh+=15;m.letters++}if(roll(risk/4))srvSeen(m,1);return ok?"Hắn giấu vội vào tay áo.":"Hắn chần chừ không nhận."});
-  if(m.tinh>=50){const fr=srvFriendList();T("Hẹn gặp riêng",fr.length?cl(100-risk,5,95):0,`cần bạn canh cửa · đêm kín đáo: Sức +8, tình ý +10 · có thể mang thai · hỏng: bị bắt, roi vọt, Tân Giả khố hoặc bị đuổi`,ok=>{if(!ok){srvAffairCaught(m,`Đêm ngươi hẹn ${m.name} bị bắt gặp.`);return "Bị bắt gặp."}
+  if(m.tinh>=50){const fr=srvFriendList();T("Hẹn gặp riêng",fr.length?cl(100-risk,5,95):0,`cần bạn canh cửa · đêm kín đáo: Sức +8, tình ý +10 · có thai: ${word(10)} · hỏng: bị bắt, roi vọt, Tân Giả khố hoặc bị đuổi`,ok=>{if(!ok){srvAffairCaught(m,`Đêm ngươi hẹn ${m.name} bị bắt gặp.`);return "Bị bắt gặp."}
     m.trysts++;m.tinh+=10;apply({suc:8});S.srv.lover=m.id;let r=`Đêm ấy rèm buông, đèn tắt; ${fr[0].name} canh ngoài hiên. Trời chưa sáng ngươi đã lẻn về.`;if(!S.srv.preg&&roll(10)){S.srv.preg=1;S.srv.pregM=0;r+=` <b class="r">Mấy hôm sau ngươi biết mình có thai.</b>`}return r},{lock:!fr.length,t:"cần một người bạn (thiện cảm 30+) canh cửa",act:1});
    if(m.rw!=="vương gia"&&S.srv.vow!==m.id)T("Hẹn ước trăm năm",od(45+m.tinh/3),"hắn hứa chờ ngươi xuất cung · mở đường thành thân",ok=>{if(ok){S.srv.vow=m.id;return `${m.name} thề sẽ chờ ngươi.`}return "Hắn ngập ngừng, chưa dám hứa."})}
   if(m.tinh>=30)T("Cắt đứt",100,"hắn thôi tơ tưởng; bớt hẳn rủi ro",()=>{m.tinh=0;if(S.srv.lover===m.id)S.srv.lover=null;if(S.srv.vow===m.id)S.srv.vow=null;return "Ngươi trả lại khăn tay."})}
  if((p.sk==="rv"||p.sk==="hh")&&p.ref){const v=RV(p.ref.id);if(v&&v!==mis&&(S.srv.knowAff||[]).includes(v.id)&&v.affair){const lm=manById(v.affair);
-  T(`Dọa tố chuyện tư tình`,od(45+S.tamco/3),`Bạc +30 · nàng phải che chở ngươi · hỏng: nàng oán, có thể hại ngươi`,ok=>{S.srv.knowAff=S.srv.knowAff.filter(x=>x!==v.id);if(ok){apply({bac:30});affAdd(v,S,15);S.srv.hold=v.id;return `${v.name} tái mặt, dúi bạc vào tay ngươi: “Câm miệng.”`}oanAdd(v,S,40);if(roll(35))srvLaundry(`${v.name} ra tay trước, vu cho ngươi ăn cắp.`,8);return `${v.name} cười lạnh.`},{act:1});
+  T(`Dọa tố chuyện tư tình`,od(45+S.tamco/3),`Bạc +30 · nàng phải che chở ngươi · hỏng: nàng oán ngươi, tìm cách hại ngươi`,ok=>{S.srv.knowAff=S.srv.knowAff.filter(x=>x!==v.id);if(ok){apply({bac:30});affAdd(v,S,15);S.srv.hold=v.id;return `${v.name} tái mặt, dúi bạc vào tay ngươi: “Câm miệng.”`}oanAdd(v,S,40);if(roll(35))srvLaundry(`${v.name} ra tay trước, vu cho ngươi ăn cắp.`,8);return `${v.name} cười lạnh.`},{act:1});
   if(mis)T(`Bẩm chủ chuyện của ${v.name}`,100,`Chủ tin +6 · ${mis.name} nắm 2 chứng cứ của ${v.name}`,()=>{S.srv.knowAff=S.srv.knowAff.filter(x=>x!==v.id);evA(mis,v,2);apply({tin:6});return `${mis.name} ghi nhớ.${lm?" Chuyện "+v.name+" với "+lm.name+" thành thanh gươm trong tay chủ.":""}`})}}}catch(e){console.error(e)}return A}})();
 /* the week: talk spreads, rivals use it; a token may be found */
 (function(){const w0=srvWeek;srvWeek=function(){w0.apply(this,arguments);try{if(!isSrv()||S.dead||Q.length)return;const mis=srvM();const lover=S.srv.lover&&manById(S.srv.lover);
@@ -4446,7 +4448,7 @@ function maidLoveMonth(){let ev="";try{const M=srvMen();if(!M.length)return"";co
 /* the choice cards */
 PEND.cnvBlack=pp=>{const v=RV(pp.r),mis=srvM();if(!isSrv()||!v||!v.alive)return null;
  return{t:`<p>Thái giám của ${v.name} chặn ngươi sau hòn non bộ: “Chuyện ngươi với nam nhân bên ngoài, chủ tử nhà ta biết cả. Muốn giữ mạng thì nghe lời.”</p>`,who:pv(v),o:[
-  {n:"Nghe lời, làm tai mắt",fx:{},x:`thành tai mắt của ${v.name} (không bạc) · chủ ngươi có thể phát hiện`,go:()=>{S.srv.spyFor=v.id;S.srv.leak=null}},
+  {n:"Nghe lời, làm tai mắt",fx:{},x:`thành tai mắt của ${v.name} (không bạc) · kèm: mỗi tháng chủ phát hiện: ${word((srvM()||{}).trait==="Đa nghi"?25:8)}; khi ấy bị đánh chết: ${word(30)}, không thì Tân Giả khố 10 tuần`,go:()=>{S.srv.spyFor=v.id;S.srv.leak=null}},
   {n:"Đút bạc bịt miệng",fx:{bac:-20},x:"lần này thôi; tin đồn bớt",go:()=>{S.srv.leak=null;S.srv.rumor=0}},
   {n:"Mặc kệ",fx:{},x:`${word(40)} · thành: nàng không nói · hỏng: nàng mách ${mis?mis.name:"quản sự"}, bị lục rương`,go:()=>{if(!roll(40)){const m=manById(S.srv.lover)||srvMen().filter(x=>x.tinh>=30)[0];if(m)srvAffairCaught(m,`${v.name} sai người mách chuyện tư tình của ngươi.`)}else S.srv.leak=null}}]}};
 PEND.cnvGrant=pp=>{if(!isSrv()||(S.age||0)<18)return null;const m=pp.m&&manById(pp.m);const w=m?m.name:WEDW[pp.w||0];const by=pp.by==="th"&&!S.thDead?"Thái hậu":(srvM()?srvM().name:"Chủ nhân");
@@ -4464,10 +4466,10 @@ PEND.cnvPrince=pp=>{const m=manById(pp.m);if(!isSrv()||!m||!srvAdult(m))return n
 (function(){const r0=srvRows;srvRows=function(){const L=r0.apply(this,arguments);try{const row=(a,b)=>`<div class="pcrow"><span>${a}</span><b>${b}</b></div>`;const H=srvMen().filter(m=>m.tinh>=10||m.af>=10);
  L.push(row("Nam nhân",H.length?H.map(m=>`${m.role} ${m.name.split(" ").slice(-2).join(" ")}: ${tinhW(m.tinh)}${S.srv.vow===m.id?" · đã hẹn ước":""}${S.srv.lover===m.id?" · tư tình":""}`).join("; "):"chưa quen ai (gặp ở vườn, điện, Thái y viện)"));
  if(S.srv.rumor||S.srv.leak)L.push(row("Lời đồn",`${S.srv.rumor||0}${S.srv.leak&&RV(S.srv.leak)?" · "+RV(S.srv.leak).name+" biết chuyện":""}`));
- if(S.srv.preg)L.push(row("Mang thai",`tháng ${S.srv.preg?S.srv.pregM+1:0}/3 · lộ thì có thể chết`));
+ if(S.srv.preg)L.push(row("Mang thai",`tháng ${S.srv.preg?S.srv.pregM+1:0}/3 · tháng thứ 3 thì lộ: bị đánh chết: ${word(50)}, không thì bị đuổi khỏi cung`));
  if((S.srv.knowAff||[]).length)L.push(row("Biết tư tình của",S.srv.knowAff.map(RV).filter(Boolean).map(v=>v.name).join(", ")))}catch(e){}return L}})();
 /* a pregnancy she cannot show: the same hard road, priced */
-(function(){const c0=srvCards;srvCards=function(){const X=c0.apply(this,arguments);try{if(isSrv()&&S.srv.preg&&!srvOnce("abort"))X.unshift({n:"Uống thuốc phá thai",t:"Mua thuốc của tiểu thái giám, uống lén trong đêm.",k:1,c:{bac:-20},o:od(60),w:{},l:{suc:-30},x:"hết thai, Sức -15 · hỏng: băng huyết Sức -30, có thể chết",once:"abort",dom:"",go:()=>{S.srv.preg=0;apply({suc:-15})},fail:()=>{S.srv.preg=0;if(roll(20))die("Uống thuốc phá thai, băng huyết mà chết")}})}catch(e){}return X}})();
+(function(){const c0=srvCards;srvCards=function(){const X=c0.apply(this,arguments);try{if(isSrv()&&S.srv.preg&&!srvOnce("abort"))X.unshift({n:"Uống thuốc phá thai",t:"Mua thuốc của tiểu thái giám, uống lén trong đêm.",k:1,c:{bac:-20},o:od(60),w:{},l:{suc:-30},x:`hết thai, Sức -15 · hỏng: băng huyết Sức -30 · kèm khi hỏng: băng huyết mà chết: ${word(20)}`,once:"abort",dom:"",go:()=>{S.srv.preg=0;apply({suc:-15})},fail:()=>{S.srv.preg=0;if(roll(20))die("Uống thuốc phá thai, băng huyết mà chết")}})}catch(e){}return X}})();
 /* a friend's tip may be a consort's affair */
 (function(){const f0=srvFriendTip;srvFriendTip=function(){const v=liveRivals(true).find(x=>x.affair&&x!==srvM()&&!(S.srv.knowAff||[]).includes(x.id));if(v&&srvFriendList().length&&roll(30)){S.srv.knowAff=(S.srv.knowAff||[]).concat([v.id]);log(`${srvFriendList()[0].name} thì thầm: ${v.name} lén gặp ${manById(v.affair)?manById(v.affair).name:"một nam nhân"}.`);return}return f0.apply(this,arguments)}})();
 /* j50: title key art (owner 11/14): game's own poster as the title background instead of the palace map; panel sits low so faces show. */
@@ -4954,7 +4956,7 @@ function h54Month(){let ev="";if(!S||S.dead)return ev;h54PoolUp();if(S.month===1
  allKids().forEach(([k,v])=>{if(!k.alive&&k.hB&&!k.hBx){k.hBx=1;const p=v||S;p.hon=Math.max(0,(p.hon||0)-(k.hB.b||0));const s=h54Son(k.hB.s);if(s)s.taken=null}});
  ev+=h54Titles();ev+=h54Envoy();
  /* she is told once when a daughter comes of age for marriage talks */
- S.kids.forEach(k=>{if(h54Home(k)&&k.age>=16&&!k.h16){k.h16=1;ev+=`${h54Name(k)} tròn 16 tuổi: có thể bàn hôn sự ở thẻ con (cưới khi tròn 18). `}});
+ S.kids.forEach(k=>{if(h54Home(k)&&k.age>=16&&!k.h16){k.h16=1;ev+=`${h54Name(k)} tròn 16 tuổi: từ nay bàn được hôn sự ở thẻ con (cưới khi tròn 18). `}});
  return ev}
 (function(){const m0=monthTick;monthTick=function(){let ev=m0.apply(this,arguments)||"";try{if(S&&!S.dead)ev+=h54Month()}catch(e){console.error(e)}return ev}})();
 /* ---- NPC marriage talks: same candidates, same costs, choice by temper ---- */
@@ -4985,7 +4987,7 @@ PEND.h54hoa=pp=>{const k=S.kids.find(x=>x.name===pp.k&&h54Home(x));if(!k)return 
 /* ---- she meets someone ---- */
 PEND.h54met=pp=>{const k=S.kids.find(x=>x.name===pp.k&&h54Home(x));const s=h54Son(pp.s);if(!k||!s||s.taken)return null;h54Init(k);
  return{who:kidFace(k),t:`${h54Name(k)} gặp ${s.name} ở hội đạp thanh ngoài vườn ngự uyển, từ đó hay hỏi chuyện về chàng.<div class="h54c">${mdH(h54Face(s),"sm")}<span>${h54SonLine(s)}</span></div>`,o:[
- {n:"Để con qua lại thư từ",fx:{danh:-1},x:`Mẫu tử +6 · con có người thương: khi bàn hôn sự có thể xin cho con lấy chàng · kèm: lời ra tiếng vào`,go:()=>{k.hMet=s.id;k.hM=cl(k.hM+6,0,100);log(`Ngươi để ${h54Name(k)} thư từ với ${s.name}. Mẫu tử +6.`)}},
+ {n:"Để con qua lại thư từ",fx:{danh:-1},x:`Mẫu tử +6 · con có người thương: khi bàn hôn sự được xin cho con lấy chàng · kèm: lời ra tiếng vào`,go:()=>{k.hMet=s.id;k.hM=cl(k.hM+6,0,100);log(`Ngươi để ${h54Name(k)} thư từ với ${s.name}. Mẫu tử +6.`)}},
  {n:"Cấm con gặp lại",fx:{danh:1},x:`giữ lễ giáo cho con · kèm: Mẫu tử -10, con mất người thương`,go:()=>{k.hM=cl(k.hM-10,0,100);log(`Ngươi cấm ${h54Name(k)} gặp lại ${s.name}. Mẫu tử -10.`)}}]}};
 /* ---- an unhappy political match ---- */
 PEND.h54sad=pp=>{const k=S.kids.find(x=>x.name===pp.k&&x.alive&&x.hW);if(!k)return null;const W=k.hW;const o=od(40+k.fond/2);
@@ -4997,10 +4999,10 @@ PEND.h54ban=pp=>{const k=S.kids.find(x=>x.name===pp.k&&h54Home(x));if(!k||k.hB)r
  const love=k.hMet&&h54Son(k.hMet)&&!h54Son(k.hMet).taken?h54Son(k.hMet):null;const R2=h54Rivals(S,k);const O=[];
  const rows=C.map(s=>`<div class="h54c">${mdH(h54Face(s),"sm")}<span>${h54SonLine(s)}${s===love?' · <b class="g">người con thương</b>':""}</span></div>`).join("");
  for(const s of C){const d=h54Dow(k,s),b=h54Back(k,s),isL=s===love;
-  O.push({n:`Hứa gả cho ${s.name}${S.bac<d?` (thiếu bạc: cần ${d})`:""}`,fx:{danh:2+(k.hT||0),bac:-d},x:[`nhà ${s.off} chống lưng ngươi +${b} (cộng vào thế lực phe và tranh ghế)`,`các phi tần phe ${s.house} thân +${H54.clanRel}`,isL?"con lấy người con thương: Mẫu tử +10, con sống vui":"",isL?"":"kèm: con không chọn người này: Mẫu tử -6 · con có thể không vui · ít về thăm · về sau có thể sinh chuyện",s.tier<=1&&R2.length?`kèm: ${R2.length} phi tần có con gái cùng tuổi ghen (thân ${H54.envy})`:""].filter(Boolean).join(" · "),go:()=>{log(h54Betroth(k,S,s,"nha",1))}})}
+  O.push({n:`Hứa gả cho ${s.name}${S.bac<d?` (thiếu bạc: cần ${d})`:""}`,fx:{danh:2+(k.hT||0),bac:-d},x:[`nhà ${s.off} chống lưng ngươi +${b} (cộng vào thế lực phe và tranh ghế)`,`các phi tần phe ${s.house} thân +${H54.clanRel}`,isL?"con lấy người con thương: Mẫu tử +10, con sống vui":"",isL?"":`kèm: con không chọn người này: Mẫu tử -6 · con không vui với nhà chồng: ${word(38)} (khi ấy con về khóc, ít về thăm)`,s.tier<=1&&R2.length?`kèm: ${R2.length} phi tần có con gái cùng tuổi ghen (thân ${H54.envy})`:""].filter(Boolean).join(" · "),go:()=>{log(h54Betroth(k,S,s,"nha",1))}})}
  if(love&&!C.includes(love)){const o=od(h54LoveO(S,k));O.push({n:`Xin Hoàng thượng cho con lấy người con thương (${love.name})`,fx:{sung:-5},x:`${word(o)} · thành: con được hứa gả cho ${love.name}: Mẫu tử +15, Đức +3, Danh +2, nhà chàng biết ơn chống lưng ngươi +${H54.love}, con sống vui, không sinh chuyện về sau · hỏng: ngài không chuẩn (con biết ngươi đã xin: Mẫu tử +5)`,go:()=>{if(roll(o))log(h54Betroth(k,S,love,"tinh")+" Mẫu tử +15.");else{k.hM=cl(k.hM+5,0,100);log(`Hoàng thượng không chuẩn cho ${h54Name(k)} lấy ${love.name}. Con biết ngươi đã xin: Mẫu tử +5.`)}}})}
  if(S.hEnv&&k.age>=18)O.push({n:"Dâng con đi hòa thân Bắc Địch",fx:Object.assign({},H54.hoa),x:`Hoàng thượng cảm kích, ban thưởng · kèm: con sang Bắc Địch, không về thăm và không nói giúp được nữa`,go:()=>log(h54Hoa(k,S,1))});
- O.push({n:"Chưa bàn vội",fx:{},x:`con được ở cạnh ngươi thêm: Mẫu tử +3 · kèm: các mối này có thể bị phi tần khác hỏi trước`,go:()=>{k.hM=cl(k.hM+3,0,100);log(`Ngươi chưa vội bàn hôn sự cho ${h54Name(k)}. Mẫu tử +3.`)}});
+ O.push({n:"Chưa bàn vội",fx:{},x:`con được ở cạnh ngươi thêm: Mẫu tử +3 · kèm: mỗi tháng phi tần khác hỏi trước một mối: ${word(8)}`,go:()=>{k.hM=cl(k.hM+3,0,100);log(`Ngươi chưa vội bàn hôn sự cho ${h54Name(k)}. Mẫu tử +3.`)}});
  return{who:kidFace(k),t:`Bàn hôn sự cho ${h54Name(k)}, ${k.age} tuổi${k.age<18?" (hứa hôn trước, cưới khi tròn 18)":""}. Các mối hỏi được (tùy tước hiệu con, phẩm vị ngươi, lòng thương của Hoàng thượng, tài nghệ và Đức của con):<div class="h54cl">${rows||'<p class="past">Chưa có mối nào.</p>'}</div>${love&&!C.includes(love)?`<div class="h54c">${mdH(h54Face(love),"sm")}<span>${h54SonLine(love)} · <b class="g">người con thương</b> (nhà chàng thấp hơn các mối trên: phải xin Hoàng thượng)</span></div>`:""}`,o:O}};
 /* ---- tutor choice ---- */
 PEND.h54tut=pp=>{const k=S.kids.find(x=>x.name===pp.k&&h54Home(x));if(!k)return null;h54Init(k);const yr=Math.round(12*H54.tut);
@@ -5034,7 +5036,7 @@ function h54Run(f,title,mine){const P=h54Perf();const byMom=new Map();P.forEach(
  return line}
 PEND.h54show=pp=>{const P=h54Perf().filter(([,p])=>p===S).map(([k])=>k);if(!P.length)return null;const f=pp.f,title=pp.t||"Yến tiệc";
  const O=P.slice(0,3).map(k=>{const a=h54BestArt(k,f),b=h54Base(k,a),g=h54PGood(b),pr=h54PPoor(b);
-  return{n:`Cho ${h54Gn(k)} dâng ${H54N[a]}${S.bac<10?" (thiếu bạc: cần 10)":""}`,fx:{bac:-10},x:`${word(cl(g,5,95))} · thành: ${h54GainTxt()} · hỏng: ${pr?`có thể vụng: thương con ${H54G.poor.fond}, Danh ${H54G.poor.danh}`:"không được khen, mất tiền y phục"}`,go:()=>{h54Run(f,title,{k:k.name,a})}}});
+  return{n:`Cho ${h54Gn(k)} dâng ${H54N[a]}${S.bac<10?" (thiếu bạc: cần 10)":""}`,fx:{bac:-10},x:`${word(cl(g,5,95))} · thành: ${h54GainTxt()} · hỏng: không được khen, mất tiền y phục${pr?` · kèm: vụng, thương con ${H54G.poor.fond}, Danh ${H54G.poor.danh}: ${word(pr)}`:""}`,go:()=>{h54Run(f,title,{k:k.name,a})}}});
  O.push({n:"Cáo bệnh cho con ở nhà",fx:{},x:`con được nghỉ, không sợ vụng: Mẫu tử +2 · kèm: Hoàng thượng thương con ${H54G.skip.fond}`,go:()=>{h54Run(f,title,{skip:true,k:P[0].name})}});
  const rows=h54Perf().map(([k,p])=>`<div class="h54r"><span>${mdH(kidFace(k),"xs")} ${h54Name(k)} · ${k.age} tuổi · ${p===S?'<b class="g">con ngươi</b>':"con "+p.name}</span><b>${H54A.filter(([a])=>h54Arts(f).includes(a)).map(([a,n])=>`${n} ${h54Lv(k,a)}`).join(" · ")}</b></div>`).join("");
  return{who:pEmp(),t:`${title}: Hoàng thượng cho các công chúa dâng nghệ trước yến (${f==="sac"?"múa, đàn":"đàn, thơ, họa"}).<div class="h54list">${rows}</div><p class="past">Bậc tài nghệ của từng công chúa (cả cung đều thấy). Kết quả: bậc nghệ, tuổi, chữ nghĩa và may rủi${has("trongtai")?"; Hoàng thượng trọng tài: đàn, thơ, họa nặng hơn":""}${has("mesac")?"; Hoàng thượng mê sắc: múa nặng hơn":""}.</p>`,o:O}};
@@ -5267,7 +5269,7 @@ function tdHTML(){const T=trS();const myC=tdHouse(S),myH=tdHead(myC);const busy=
  const askWhy=!myC?"nhà ngươi không có người ở triều":busy||(S.turn-(S.askT==null?-99:S.askT)<3?"mới nhờ, đợi 3 tháng":"");
  const prT=liveRivals(true).filter(v=>tdHouse(v)&&!sameHouse(S,v));const lkT=consorts().filter(v=>v!==S&&deG(S,v)>=1);
  h+=`<div class="rbtn tdacts">`+tdActBtn(`data-td="ask"`,"Nhờ cha dâng sớ",myC?`${word(askO(S))} · tốn: nhà ${myC} thế lực -3 · thành: Danh +4 · Sủng +2 · hỏng: Danh -2 · kèm: ${ccLine(S)}`:"cần nhà mẹ đẻ có người ở triều",askWhy)
-  +tdActBtn(`data-td="probe"`,"Dò la nhà ngoại phi tần",`tốn: Bạc -30 · thành: biết thật cha nàng có tham ô không; có thì Chứng cứ tham ô +1 · kèm: nàng có thể biết, thiện cảm -8 · kèm: ${ccLine(S)}`,busy||(S.bac<30?"thiếu bạc (cần 30)":!prT.length?"không có phi tần nhà khác":""))
+  +tdActBtn(`data-td="probe"`,"Dò la nhà ngoại phi tần",`tốn: Bạc -30 · thành: biết thật cha nàng có tham ô không; có thì Chứng cứ tham ô +1 · kèm: nàng biết chuyện, thiện cảm hai bên -8: ${word(25)} · kèm: ${ccLine(S)}`,busy||(S.bac<30?"thiếu bạc (cần 30)":!prT.length?"không có phi tần nhà khác":""))
   +tdActBtn(`data-td="leak"`,"Tung chứng cứ tham ô",`tốn: Bạc -20 (lót tay ngự sử) · thành: nhà nàng thế lực -6 · nàng mất chỗ dựa, Danh -4 · hỏng: Chứng cứ -1 · kèm: tra ra ngươi thì nàng oán +25 · kèm: ${ccLine(S)}`,busy||(S.bac<20?"thiếu bạc (cần 20)":!lkT.length?"chưa có chứng cứ tham ô của ai (dò la trước)":""))+tdMarryBtn()+`</div>`;
  h+=CLANS.map(c=>{const hd=T.H[c];const f=pMin(hd);const M=tdMembers(c);const af=hd.af.me||0;const gw=busy||(S.bac<40?"thiếu bạc (cần 40)":c===myC&&hd.dadOf==="me"?"là cha ngươi":"");
   const rel=CLANS.filter(x=>x!==c).map(x=>[x,tdRel(c,x)]).filter(z=>Math.abs(z[1])>=25);
@@ -5296,7 +5298,7 @@ function tdAct(a,d){if(!S||S.dead||Q.length||!can(2)||S.out||S.confined)return;c
  else if(a==="gift"){const h=T.H[d.tc];if(!h||S.bac<40||h.dadOf==="me")return;spend(2);ttl=`Biếu quà ${h.name}`;r=tdGift(S,h)}
  else if(a==="probe"||a==="leak"){const L=a==="probe"?liveRivals(true).filter(v=>tdHouse(v)&&!sameHouse(S,v)):consorts().filter(v=>v!==S&&deG(S,v)>=1);if(!L.length)return;
   Q.push({t:a==="probe"?"Dò la nhà ngoại ai?":"Tung chứng cứ tham ô của ai?",h:`<p>${a==="probe"?"Sai người ngoài cung dò sổ sách nhà cha nàng. Tin dò được là tin thật.":"Lót tay một ngự sử dâng chứng cứ cha nàng tham ô lên Hoàng thượng."}</p>`,
-   opts:L.slice(0,8).map(v=>({n:`${v.name} (nhà ${tdHouse(v)})`,fx:{},x:a==="probe"?`${word(probeO(S))} · tốn: Bạc -30 · thành: biết thật cha nàng có tham ô không · hỏng: mất bạc · kèm: nàng có thể biết, thiện cảm -8 · kèm: ${ccLine(S)}`:`${word(leakO(S,v))} · tốn: Bạc -20 · thành: nhà ${tdHouse(v)} thế lực -6, nàng nhà mẹ đẻ -15, Danh -4 · hỏng: Chứng cứ -1 · kèm: tra ra ngươi: nàng oán +25 · kèm: ${ccLine(S)}`,
+   opts:L.slice(0,8).map(v=>({n:`${v.name} (nhà ${tdHouse(v)})`,fx:{},x:a==="probe"?`${word(probeO(S))} · tốn: Bạc -30 · thành: biết thật cha nàng có tham ô không · hỏng: mất bạc · kèm: nàng biết chuyện, thiện cảm hai bên -8: ${word(25)} · kèm: ${ccLine(S)}`:`${word(leakO(S,v))} · tốn: Bạc -20 · thành: nhà ${tdHouse(v)} thế lực -6, nàng nhà mẹ đẻ -15, Danh -4 · hỏng: Chứng cứ -1 · kèm: tra ra ngươi: nàng oán +25 · kèm: ${ccLine(S)}`,
     go:()=>{spend(2);const b2=rsnap();const r2=a==="probe"?tdProbe(S,v):tdLeak(S,v);if(r2)log(r2);const ok=!!window.__tdOk;setTimeout(()=>{try{resultShow(a==="probe"?`Dò la nhà ngoại ${v.name}`:`Tung chứng cứ: cha ${v.name}`,b2,ok)}catch(e){}},0)}})).concat([{n:"Thôi",fx:{}}])});showModal();return}
  if(r)log(r);resultShow(ttl,b,!!window.__tdOk);render()}
 document.addEventListener("click",e=>{const v=e.target.closest("[data-tdv]");if(v){e.stopPropagation();window.__tdV=v.dataset.tdv;try{render()}catch(x){}return}
@@ -6104,7 +6106,7 @@ function evidenceActs(p){if(!S||!p||p===S)return[];const n=evG(S,p);const i=riva
  add("expose",ok=>({odds:odds("expose",odT(S,45+n*8)),why:busy()||(!hasScandal(p)?"nàng không có chuyện tư tình bị lộ":n<2?nf(2):""),cost:["2 khắc",`Chứng cứ -${n} (dùng hết)`],gain:[`${W} bị ban chết hoặc vào lãnh cung`],fail:["ngươi bị tội vu khống: vào lãnh cung hoặc giáng 2 bậc"]}));
  add("trinhth",ok=>({odds:odds("trinhth",odA(S,40+n*10+S.th/5)),why:busy()||(n<1?nf(1):S.thDead?"Thái hậu đã băng hà":rkOf(p)>=7?"Thái hậu không xét tội Hoàng hậu":""),cost:["2 khắc","Đức -2","Chứng cứ -1"],gain:[`${W} Sủng -10`,"Thái hậu với ngươi +2"],fail:["Thái hậu với ngươi -4"],risk:[`${W} thiện cảm -15`]}));
  add("trinhhh",ok=>{const q=queenP();return{odds:q&&q!==S&&q!==p?odds("trinhhh",cl(35+aff(q,S)/2+n*8,5,95)):"",why:busy()||(!q?"chưa có Hoàng hậu":q===S?"ngươi là Hoàng hậu: dùng Xử tội":q===p?"không trình Hoàng hậu tội của chính nàng":n<2?nf(2):""),cost:["2 khắc","Chứng cứ -2"],gain:[`${W} bị cấm túc ${m} tháng`],fail:["Hoàng hậu thân -5"],risk:[`${W} thiện cảm -10`]}});
- add("uyhiep",ok=>{const g=j78pay(p);return{odds:odds("uyhiep",odA(S,45+n*8-witOf(p)/5)),why:busy()||(n<1?nf(1):g<10?"nàng không còn đủ 10 lượng":""),cost:["2 khắc","Chứng cứ -1 (trả lại khi nàng chịu chi)"],gain:[`Bạc +${g}`],fail:["Danh -3",`${W} oán ngươi +15`],risk:[`${W} oán ngươi +10`].concat(together(S,p)?[]:[`sai người đi: kẻ đi có thể bị bắt, khai ra ngươi (${W} nắm 1 chứng cứ)`])}});
+ add("uyhiep",ok=>{const g=j78pay(p);return{odds:odds("uyhiep",odA(S,45+n*8-witOf(p)/5)),why:busy()||(n<1?nf(1):g<10?"nàng không còn đủ 10 lượng":""),cost:["2 khắc","Chứng cứ -1 (trả lại khi nàng chịu chi)"],gain:[`Bạc +${g}`],fail:["Danh -3",`${W} oán ngươi +15`],risk:[`${W} oán ngươi +10`].concat(together(S,p)?[]:[`sai người đi: kẻ đi bị bắt, khai ra ngươi (${W} nắm 1 chứng cứ): ${word(confessRisk(bestSent(S)))}`])}});
  add("banphe",ok=>{const b=j78buyer(S,p);return{why:busy()||(n<1?nf(1):!b?"không ai đủ ghét nàng để mua":""),cost:["2 khắc",`Chứng cứ -${n} (dùng hết)`],gain:[`Bạc +${15*n}`].concat(b?[`${j78who(b)} thân +8`,`${j78who(b)} nắm ${n} chứng cứ về ${W}`]:[]),risk:[`${W} oán ngươi +5`],buyer:b?j78Ref(b):null}});
  add("tieuhuy",ok=>({why:busy()||(n<1?nf(1):""),cost:["2 khắc",`Chứng cứ -${n} (dùng hết)`],gain:[`${W} thiện cảm +${Math.min(30,8*n)}`,`${W} oán ngươi -${Math.min(30,10*n)}`,"Đức +2"]}));
  if(S.rank>=7)R0.push({k:"judge",n:"Xử tội",odds:"",why:busy()||(n<2?nf(2):""),cost:["2 khắc",`Chứng cứ -${n} (dùng hết)`],gain:[n>=3?`${W} bị giáng một bậc hoặc cấm túc ${m} tháng`:`${W} bị cấm túc ${m} tháng`],fail:[],risk:[`${W} thiện cảm -10`,`${W} oán ngươi +6`],go:()=>evidenceDo(p.id,"judge")});
@@ -6239,7 +6241,7 @@ const KIT_GLOSS={
  "Tâm cơ":"Mưu trí, sự khôn khéo. Giúp dò la, bày mưu, nhìn thấu mưu của người khác.",
  "Tai mắt":"Số người ngầm báo tin cho ngươi khắp cung. Nhiều thì biết trước mưu hại, dễ có chứng cứ.",
  "Ân tình":"Tình nghĩa riêng giữa Hoàng thượng và ngươi, tích qua những đêm hầu hạ. Giữ sủng lâu, khó bị bỏ rơi.",
- "Sức":"Sức khỏe. Dưới 20 thì không làm được việc nặng; về 0 là bệnh nặng có thể chết.",
+ "Sức":"Sức khỏe. Dưới 20 thì không làm được việc nặng; về 0 là bệnh nặng, nguy đến tính mạng.",
  "Bạc":"Tiền riêng của ngươi: bổng lộc hằng tháng, ban thưởng. Dùng để mua đồ, đút lót, thưởng kẻ hầu.",
  "Chủ tin":"Chủ nhân tin ngươi bao nhiêu (0–100). Cao thì được thưởng, tiến cử; dưới 10 dễ bị đày Tân Giả khố.",
  "Lòng":"Kẻ hầu trung thành với ngươi bao nhiêu (0–100). Dưới 45 dễ bị người khác mua chuộc.",
@@ -6255,7 +6257,7 @@ const KIT_GLOSS={
  "khắc":"Đơn vị thời gian: mỗi buổi có 4 khắc. Mỗi việc tốn khắc; hết khắc thì sang buổi sau.",
  "Thị tẩm":"Được gọi hầu Hoàng thượng qua đêm. Có thể có thai, tăng Sủng và Ân tình.",
  "Lật thẻ":"Mỗi tối Hoàng thượng lật thẻ bài để chọn người hầu đêm. Khả năng ngươi được chọn mỗi tuần.",
- "Lãnh cung":"Cung lạnh: nơi giam phi tần bị phế. Mất phẩm vị, chỉ có thể xin phục vị.",
+ "Lãnh cung":"Cung lạnh: nơi giam phi tần bị phế. Mất phẩm vị, chỉ còn đường xin phục vị.",
  "Cấm túc":"Bị giữ trong cung của mình một thời gian, không được ra ngoài, không được lật thẻ.",
  "Bổng lộc":"Bạc phát đầu mỗi tháng theo phẩm vị (30–320 bạc).",
  "Ân thưởng":"Những lần ngươi được Hoàng thượng, Thái hậu ban thưởng và vật đã nhận.",
@@ -6437,7 +6439,7 @@ button.ka .kr-why .ksep{display:none}
 
 /* ---------- converted panels: the rule ladder (Thang nguy hiểm) as kit tiers ---------- */
 (function(){if(typeof bandCard!=="function")return;bandCard=function(){const T=BANDS.map((b,i)=>({k:i<BANDS.length-1?`${b[0]}–${BANDS[i+1][0]-1}`:`${b[0]} trở lên`,n:i?`hại ${b[1]}`:"không ra tay",c:i?"r":"g",d:i?b[2].map(k=>ACT[k]?ACT[k].n:k).join(", "):""}));
- return `<div class="kpsec"><h4 class="kpst">Cách tính</h4>${kitRows([["Nguy hiểm",`${kitGloss("Ghen")}, ${kitGloss("Oán")} hoặc ghét: lấy số cao nhất`,"t"],["Cộng",[kitChip("Hiểm độc",10,"r"),kitChip("Hiền lành",-15,"g"),kitChip("Nhu mì",-10,"g")]],["Áp cho","mọi người, cùng một thang","n"]])}</div><div class="kpsec"><h4 class="kpst">Thang 4 mức</h4>${kitTiers(T)}</div><div class="kpsec"><h4 class="kpst">Ghi nhớ</h4><div class="kfacts">${["Trong mỗi mức, càng gần mức trên càng hay ra tay.","Ngươi hại ai thì Oán của người đó tăng và có thể leo lên mức trên."].map(t=>kpFactRow({text:t,kind:"world",auto:false},[])).join("")}</div></div>`}})();
+ return `<div class="kpsec"><h4 class="kpst">Cách tính</h4>${kitRows([["Nguy hiểm",`${kitGloss("Ghen")}, ${kitGloss("Oán")} hoặc ghét: lấy số cao nhất`,"t"],["Cộng",[kitChip("Hiểm độc",10,"r"),kitChip("Hiền lành",-15,"g"),kitChip("Nhu mì",-10,"g")]],["Áp cho","mọi người, cùng một thang","n"]])}</div><div class="kpsec"><h4 class="kpst">Thang 4 mức</h4>${kitTiers(T)}</div><div class="kpsec"><h4 class="kpst">Ghi nhớ</h4><div class="kfacts">${["Trong mỗi mức, càng gần mức trên càng hay ra tay.","Ngươi hại ai thì Oán của người đó tăng; Oán đủ cao thì người đó lên mức trên."].map(t=>kpFactRow({text:t,kind:"world",auto:false},[])).join("")}</div></div>`}})();
 
 /* ---------- week summary (dawn): same kit panel on the dawn sky; facts untruncated, deltas as chips ---------- */
 KP_SEAL.week="TUẦN";
@@ -6473,10 +6475,10 @@ function kitGameSet(k,v){document.querySelectorAll(`[data-kg="${k}"]`).forEach(e
    -> result block: score rows (true numbers), standings with face + rank title, Được / Mất chips. */
 function kitGameResult(r){r=r||{};const rows=[];
  (r.parts||[]).forEach(([l,v])=>{const n=parseFloat(String(v).replace("−","-"));rows.push([l,isNaN(n)?`<span class="ef t">${v}</span>`:`<span class="ef ${n>0?"g":n<0?"r":"t"}"><b>${String(v)}</b></span>`])});
- if(r.raw!=null)rows.push(["Điểm chơi",`<span class="ef t">${r.raw}</span>`]);if(r.talent!=null)rows.push(["Tài nghệ",kitChip("cộng",r.talent,"g")]);if(r.prep!=null)rows.push(["Chuẩn bị",kitChip("cộng",r.prep,"g")]);
+ if(r.raw!=null)rows.push(["Phần chơi",`<span class="ef t">${r.raw}</span>`]);if(r.talent!=null)rows.push(["Tài nghệ",kitChip("cộng",r.talent,"g")]);if(r.prep!=null)rows.push(["Chuẩn bị",kitChip("cộng",r.prep,"g")]);
  if(r.total!=null)rows.push(["Tổng",`<span class="ef t"><b>${r.total}</b></span>`]);if(r.place)rows.push(["Hạng",`<span class="ef t">${r.place}${r.of?` / ${r.of}`:""}</span>`]);
  const st=(r.rivals||[]).slice().sort((a,b)=>b.score-a.score);
- return `<div class="kgr">${kitRows(rows)}`+(st.length?`<h4 class="kpst">Bảng điểm</h4><div class="kfacts">${st.map((x,i)=>`<div class="kfact${x.who===S?" kfme":""}">${kitFaceH(x.who,"sm")}<span class="kft kgrow"><span><b class="kgpl">${i+1}.</b> ${kitName(x.who,{cap:true})}${x.sub?`<small class="kfwhy">${x.sub}</small>`:""}</span><b>${x.score}</b></span></div>`).join("")}</div>`:"")+
+ return `<div class="kgr">${kitRows(rows)}`+(st.length?`<h4 class="kpst">Bảng định thứ</h4><div class="kfacts">${st.map((x,i)=>`<div class="kfact${x.who===S?" kfme":""}">${kitFaceH(x.who,"sm")}<span class="kft kgrow"><span><b class="kgpl">${i+1}.</b> ${kitName(x.who,{cap:true})}${x.sub?`<small class="kfwhy">${x.sub}</small>`:""}</span><b>${x.score}</b></span></div>`).join("")}</div>`:"")+
  ((r.gains||[]).length||(r.losses||[]).length?`<h4 class="kpst">Kết quả</h4>`+kitRows([["Được",(r.gains||[]).map(x=>kitChip(x[0],x[1],"g"))],["Mất",(r.losses||[]).map(x=>kitChip(x[0],x[1],"r"))]]):"")+
  (r.note?`<div class="kpnote">${r.note}</div>`:"")+`</div>`}
 /* the lesson overlay (#ov .mg) wears the same frame */
@@ -6490,7 +6492,7 @@ function kitGameResult(r){r=r||{};const rows=[];
 .kghud{display:flex;gap:6px;padding:6px 14px 0;flex-wrap:wrap}.kgc{flex:1 1 0;min-width:80px;display:flex;flex-direction:column;align-items:center;border:1px solid var(--k-hair);border-radius:var(--k-rad);background:#fffdf8;padding:3px 6px}
 .kgc small{font-size:.66rem;color:var(--k-lab);text-transform:uppercase;font-weight:700}.kgc b{font-family:var(--display);font-size:1.05rem;color:var(--ink)}
 .kgbox{margin:8px 14px;min-height:120px}.kgres{padding:0 14px 10px}
-.kgrow{display:flex;justify-content:space-between;gap:8px;align-items:center}.kgr .kpkb .krl{white-space:normal;max-width:9rem}
+.kgrow{display:flex;justify-content:space-between;gap:8px;align-items:center}.kgrow>b{flex:none;white-space:nowrap}.kgr .kpkb .krl{white-space:normal;max-width:9rem}
 .kgbox .btn,.kgbtn{font-family:inherit;font-weight:600;background:var(--k-card);color:var(--ink);border:1px solid var(--line);border-radius:var(--k-rad);min-height:40px;padding:6px 12px;cursor:pointer}.kgbox .btn:hover,.kgbtn:hover{border-color:var(--gold)}.kgbtn.on,.kgbox .btn.on{background:#f0d07055;border-color:var(--gold)}.kgpl{color:var(--k-lab)}
 #ov .mg.kpanel{padding:0;max-width:560px;background:var(--k-card);box-shadow:0 0 0 3px #f6ead6,0 0 0 4px #c9a46a,0 14px 40px #2a1a1260}
 #ov .mg.kpanel .kph{position:sticky;top:0;z-index:2;display:flex;align-items:center;gap:10px;padding:10px 14px 9px;background:linear-gradient(#f6ead6e6,#fffaf0f0),url(img/kit/bg-default.webp) center/240px repeat;border-bottom:1px solid var(--line)}
@@ -6671,6 +6673,173 @@ if(typeof stealX==="function"){stealX=function(v,road){let c=0;try{c=conceiveCh(
 (function(){const fix=root=>{try{root.querySelectorAll&&root.querySelectorAll(".kalog").forEach(e=>{if(/Nhật ký/.test(e.textContent))e.textContent="Xem đầy đủ trong Sổ ghi"})}catch(e){}};new MutationObserver(ms=>{for(const m of ms)m.addedNodes.forEach(n=>{if(n.nodeType===1){if(n.classList&&n.classList.contains("kalog"))fix(n.parentNode);else fix(n)}})}).observe(document.documentElement,{childList:true,subtree:true})})();
 /* Tài nghệ rows "Bậc 3: Mở «…»": wrap, never cut */
 (function(){const st=document.createElement("style");st.id="kp-art-wrap";st.textContent=`.art .pcb button,.art .ams,.art .ams span,.art .lv,.art .pcrow span,.art .pcrow b{white-space:normal!important;overflow:visible!important;text-overflow:clip!important;-webkit-line-clamp:unset!important}`;document.head.appendChild(st)})();
+
+/* =====================================================================================================================
+   KIT 2 (kit owner #2, owner feedback 11/14 on the Fold 755x1000@2):
+   1. ONE frame: act art and info-panel art sit in the SAME rectangular portrait frame and size as the consort card (pcPort .pcp.kit).
+   2. Info / rule / help panels: a representative image (img/info-<key>.webp, manifest img/INFO.json {have:[keys]}; fallback act-category art,
+      then brocade + topic word) in that frame beside the structured body.
+   3. Identity card: one well-composed larger panel (portrait large, tiles beside it, choices under), no scroll, background visible.
+   4. Status: grouped by purpose into columns (Tư chất · Nhân tâm · Ân sủng · Thời gian); while collapsed, a Tư chất block sits on the stage
+      top-left only when it covers no figure (measured every render).
+   5. No round avatars: mdH draws the small rectangular kit frame (the consort frame cropped to its body) everywhere.
+   ===================================================================================================================== */
+/* ---- 5. small rectangular frame for every mdH avatar ---- */
+(function(){if(typeof mdH!=="function"||typeof kitDecor!=="function")return;const m0=mdH;mdH=function(p,cls){let h=m0.apply(this,arguments);try{p=p||{};const d=kitDecor(p);
+ h=h.replace('class="md',`class="md kmini`).replace(/style="/,`style="--kfr:url(${d.frame});`);
+ const i=h.indexOf(">");return h.slice(0,i+1)+`<i class="kmb" aria-hidden="true"></i>`+h.slice(i+1).replace(/<\/span>\s*$/,`<i class="kmf" aria-hidden="true"></i></span>`)}catch(e){return h}}})();
+/* ---- 1. the ONE portrait frame for pictures that are not people (act art, info art): same markup/classes as pcPort, her rank frame ---- */
+/* act categories: one colour each (tinted brocade + ring + ribbon with the category name); legend in KIT.md 6.1 */
+const KIT_CAT={"giao-thiep":["Giao thiệp","#c4607a"],"hau-ha":["Hầu hạ","#3f8f8c"],"le-nghi":["Lễ nghi","#b8901c"],"hoc-tap":["Học tập · Tài nghệ","#3f62a8"],
+ "ban-thuong":["Ban thưởng","#d98a1c"],"trung-phat":["Trừng phạt","#5a3a2a"],"muu-ke":["Mưu kế","#5a3f8f"],"hai-nguoi":["Hại người","#7a0f14"],"nghi-ngoi":["Nghỉ ngơi","#5f9a5f"],
+ "buon-ban":["Buôn bán","#a8692a"],"di-lai":["Đi lại","#7d8456"],"cham-con":["Chăm con","#e08a6a"],"trieu-chinh":["Triều chính","#22405f"]};
+try{KIT_ACT_CATS.splice(1,0,["trung-phat",/phạt|trách phạt|quở|đánh đòn|quỳ|tịch thu|giáng|cấm túc|đuổi|đổi người/i],["ban-thuong",/thưởng|ban cho|ban ơn|ân thưởng/i],
+ ["cham-con",/(^|\s)con(\s|$)|hoàng tử|công chúa|bế |dạy dỗ|nuôi/i],["trieu-chinh",/triều|tấu|sớ|quan |nhà ngoại|tham ô|thế lực|phe/i])}catch(e){}
+(function(){const k0=kitActArt;kitActArt=function(name){const r=k0.apply(this,arguments);if(KIT_CAT[r.cat])r.label=KIT_CAT[r.cat][0];r.col=(KIT_CAT[r.cat]||[])[1]||"";return r}})();
+function kitArtFrame(src,label,cls,col){let d={frame:KIT_DIR+"frame-consort-0.webp",bg:KIT_DIR+"bg-default.webp"};try{d=kitDecor(pMe())}catch(e){}
+ const tint=col?`linear-gradient(${col}66,${col}66),`:"";
+ return `<span class="pcp kit kartf ${cls||""}"${col?` style="--kcc:${col}" title="${label}"`:""}><span class="kin"><span class="kbg" style="background-image:${tint}url(${d.bg})"></span>`+
+  `<span class="kaph">${label||""}</span>`+(src?`<img class="kpor kact" src="${src}" alt="" loading="lazy" onerror="this.remove()">`:"")+(col?`<span class="kring" aria-hidden="true"></span>`:"")+
+  `<img class="kfr" src="${d.frame}" alt="" aria-hidden="true" onerror="this.remove()">`+(col?`<em class="kcatr">${label}</em>`:"")+`</span></span>`}
+kpActArt=function(b){if(b.dataset.kart)return;const kan=b.querySelector(":scope > .kat > .kan");if(!kan)return;const name=kpPlain(kan.textContent);const a=kitActArt(name);b.dataset.kart=a.cat;
+ let body=b.querySelector(":scope > .kabody");if(!body){body=document.createElement("span");body.className="kabody";[...b.childNodes].forEach(n=>{if(!(n.nodeType===1&&n.classList.contains("kaart")))body.appendChild(n)});b.appendChild(body)}
+ let art=b.querySelector(":scope > .kaart");if(!art){art=document.createElement("span");art.className="kaart";b.prepend(art)}
+ art.innerHTML=kitArtFrame(a.src,a.label,"kcat-"+a.cat,a.col);art.title=a.label;if(a.col)b.style.setProperty("--kcc0",a.col);b.classList.add("kart")};
+/* ---- 2. info art: title -> key; manifest img/INFO.json {have:[...]} ---- */
+const KIT_INFO=[["nguy-hiem",/nguy hiểm/i],["ra-vao",/ra vào/i],["que",/^qu[eẻ]|gieo quẻ/i],["bong-loc",/bổng lộc/i],["an-thuong",/ân thưởng|ban thưởng/i],
+ ["sac",/^sắc\b/i],["tai",/^tài\b(?! nghệ)/i],["tam-co",/tâm cơ/i],["duc",/^đức\b/i],["tai-mat",/tai mắt/i],["thai-hau",/thái hậu/i],["hoang-hau",/hoàng hậu|mẫu nghi/i],
+ ["long",/lòng|chủ tin/i],["an-tinh",/ân tình/i],["khac",/khắc|^(sáng|chiều|tối)\b|buổi/i],["lich",/tháng|tuần/i],["thai",/thai/i],["lat-the",/lật thẻ|kính sự phòng/i],
+ ["lanh-cung",/lãnh cung/i],["cam-tuc",/cấm túc/i],["tranh-ghe",/tranh ghế/i],["tuyen-tu",/tuyển tú/i],["noi-vu",/nội vụ/i],["tan-gia-kho",/tân giả/i],["phe-phai",/phe/i],
+ ["chung-cu",/chứng cứ/i],["suc",/^sức\b/i],["bac",/^bạc\b/i],["phuc-duyen",/phúc duyên|thân phận/i],["tin",/^tin |tin trong cung/i]];
+const KIT_INFO_CAT={"nguy-hiem":"hai-nguoi","tai-mat":"muu-ke","chung-cu":"muu-ke","que":"le-nghi","an-thuong":"le-nghi","thai-hau":"le-nghi","hoang-hau":"le-nghi","sac":"nghi-ngoi","tai":"hoc-tap","tam-co":"muu-ke","duc":"le-nghi","bac":"buon-ban","bong-loc":"buon-ban","long":"hau-ha","an-tinh":"hau-ha","lat-the":"hau-ha","ra-vao":"di-lai"};
+let KIT_INFOM={have:[]};try{fetch("img/INFO.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{if(j)KIT_INFOM=j}).catch(()=>{})}catch(e){}
+function kitInfoKey(title){const t=kpPlain(String(title||"")).trim();for(const [k,re] of KIT_INFO)if(re.test(t))return k;return""}
+function kitInfoArt(title){const k=kitInfoKey(title);const have=KIT_INFOM.have||[];const cat=KIT_INFO_CAT[k]||kitActCat(kpPlain(String(title||"")));const ah=(KIT_ACTS.have||[]);
+ const src=k&&have.includes(k)?`img/info-${k}.webp`:ah.includes("act-cat-"+cat)?`img/act-cat-${cat}.webp`:"";return{key:k,src,label:kpPlain(String(title||"")).replace(/\s*[·:].*$/,"")}}
+(function(){const b0=kpBuild;kpBuild=function(M,m){b0.apply(this,arguments);try{const dlg=M.querySelector(".dlg");if(!dlg||!/^(rule|info)$/.test(dlg.dataset.kind||""))return;
+ const body=M.querySelector("#mb > .kpb");if(!body||body.querySelector(":scope > .kpsubj"))return;const a=kitInfoArt(m.t);
+ body.classList.add("kphas","kpinfo");body.insertAdjacentHTML("afterbegin",`<div class="kpsubj kpiart" data-info="${a.key}">${kitArtFrame(a.src,a.label)}</div>`)}catch(e){console.error("kpInfo",e)}}})();
+/* the HUD help panels use the same structured layout as the rule panel: what it is · what you have now */
+(function(){const s0=showModal;showModal=function(){try{const m=Q[0];if(m&&!m.kit&&!m.opts&&typeof m.h==="string"&&/^<p>[^<]*<\/p>$/.test(m.h)&&typeof HX==="object"){
+  const txt=m.h.replace(/<\/?p>/g,"");const k=Object.keys(HX).find(x=>HX[x]===txt);if(k){const lab=kpPlain(m.t);const gl=txt.replace(/^[^:]{1,24}:\s*/,"");const cur=(m.t.match(/(-?\d+)\s*$/)||[])[1];
+   const now=document.querySelector(`#hud2 .hc[data-hx="${k}"] b, #hud2 .hc[data-hx="${k}"] .kodm`);m.kit={kind:"rule",title:lab,sections:[{h:"Là gì",rows:[[lab.replace(/\s*\d+$/,""),gl.charAt(0).toUpperCase()+gl.slice(1),"t"]]}].concat(now?[{h:"Ngươi đang có",html:`<div class="kpnow">${now.outerHTML}</div>`}]:[])};m.t=lab.replace(/\s*-?\d+$/,"")}}}catch(e){}return s0.apply(this,arguments)}})();
+/* ---- 3. identity card: larger, balanced; tiles beside the portrait; no stale result toast over the buttons ---- */
+(function(){const k0=kpIdentity;kpIdentity=function(M,m){k0.apply(this,arguments);try{const mb=$("mb");const id=mb.querySelector(".kpid"),tl=mb.querySelector(":scope > .ktiles"),main=id&&id.querySelector(".kpmain");if(main&&tl)main.appendChild(tl);
+  const t=$("rtoast");if(t){t.classList.remove("on");t.hidden=true;setTimeout(()=>{t.hidden=false},50)}}catch(e){}try{kpIdFig(M)}catch(e){console.error("kpIdFig",e)}}})();
+/* identity: her FULL-BODY figure stands on the origin background, the panel beside her (landscape and wide portrait) or under her (narrow portrait);
+   the figure follows her current look, so a face picked in the panel (j86) shows on the standing figure at the next build */
+function kpIdFig(M,tries){let src="";try{src=typeof figFor==="function"?figFor(S):""}catch(e){}let im=M.querySelector(":scope > img.kidfig2");
+ if(!src){if(im)im.remove();M.classList.remove("kpfig");if((tries||0)<6)setTimeout(()=>{if(!M.hidden&&M.classList.contains("kpscene")&&$("mb").querySelector(".kpid"))kpIdFig(M,(tries||0)+1)},400);return}
+ if(!im){im=document.createElement("img");im.className="kidfig2";im.alt="";M.prepend(im)}if(im.getAttribute("src")!==src)im.src=src;M.classList.add("kpfig");
+ const id=$("mb").querySelector(".kpid");if(id)id.classList.add("kpidf");
+ const fit=()=>{try{const d=M.querySelector(".dlg");if(!d)return;const r=d.getBoundingClientRect();if(innerWidth<600&&innerHeight>innerWidth){M.style.setProperty("--kidh",Math.max(120,Math.round(r.top-10))+"px")}else M.style.removeProperty("--kidh")}catch(e){}};
+ requestAnimationFrame(fit);setTimeout(fit,300)}
+(function(){const c0=closeModal;if(typeof c0!=="function")return;closeModal=function(){const r=c0.apply(this,arguments);try{const M=$("modal");if(M&&!M.classList.contains("kpscene")){const im=M.querySelector(":scope > img.kidfig2");if(im)im.remove();M.classList.remove("kpfig")}}catch(e){}return r}})();
+(function(){const b0=kpBuild;kpBuild=function(M,m){b0.apply(this,arguments);try{if(!(m&&m.nl)){const im=M.querySelector(":scope > img.kidfig2");if(im)im.remove();M.classList.remove("kpfig")}}catch(e){}}})();
+(function(){const b0=kpBuild;kpBuild=function(M,m){b0.apply(this,arguments);try{if(kpIsScene(m)){const t=$("rtoast");if(t)t.classList.remove("on")}}catch(e){}}})();
+/* ---- 4. status grouped by purpose ---- */
+const KH_GRP=[["Tư chất",["sac","tai","tamco","duc","mat","srk","merit"]],["Nhân tâm",["th","hh","maid","tin","chu"]],["Ân sủng",["con","dem","an","aw","nt"]],["Thời gian",["buoi","lot","bl","wage","date"]]];
+function khGroup(el){const hcs=[...el.querySelectorAll(":scope > .hc")];if(!hcs.length)return;const used=new Set();const cols=[];
+ for(const [h,keys] of KH_GRP){const L=hcs.filter(b=>keys.includes(b.dataset.hx));L.forEach(b=>used.add(b));if(L.length)cols.push([h,L])}
+ const rest=hcs.filter(b=>!used.has(b));if(rest.length)cols.push(["Tình trạng",rest]);
+ const wrap=document.createElement("div");wrap.className="khg";for(const [h,L] of cols){const c=document.createElement("div");c.className="khc";c.innerHTML=`<b class="khh">${h}</b>`;L.forEach(b=>c.appendChild(b));wrap.appendChild(c)}
+ const pulse=el.querySelector(":scope > .h2pulse");el.insertBefore(wrap,pulse||null)}
+function khStage(){try{let o=document.getElementById("kstat");const st=$("stage"),el=$("hud2");if(!st||!el)return;const col=el.classList.contains("col");
+ if(!col||!S||S.dead||(typeof isSrv==="function"&&isSrv())){if(o)o.remove();return}
+ const keys=[["sac","Sắc",S.sac],["tai","Tài",S.tai],["tamco","Tâm cơ",S.tamco],["duc","Đức",S.duc],["mat","Tai mắt",S.mat]];
+ if(!o){o=document.createElement("div");o.id="kstat";o.className="kstat";st.appendChild(o)}
+ o.innerHTML=`<b class="khh">Tư chất</b>`+keys.map(([k,l,v])=>`<button class="kst" data-hx="${k}">${kitGloss?kitGloss(l):l}<b>${v}</b></button>`).join("");
+ o.onclick=e=>{const b=e.target.closest(".kst");if(!b)return;e.stopPropagation();const hb=el.querySelector(`.hc[data-hx="${b.dataset.hx}"]`);if(hb){el.classList.remove("col");hb.click();el.classList.add("col")}};
+ o.style.visibility="hidden";o.classList.remove("kright");try{const t=st.querySelector(".stop");const tr=t&&t.getBoundingClientRect(),sr=st.getBoundingClientRect();o.style.setProperty("--kstt",Math.max(8,Math.round((tr?tr.bottom:sr.top+44)-sr.top+6))+"px")}catch(e){}
+ requestAnimationFrame(()=>{try{const figs=kitFigRects();const fits=()=>{const r=o.getBoundingClientRect(),s=st.getBoundingClientRect();if(r.bottom>s.bottom-8||r.right>s.right)return false;return !figs.some(f=>Math.min(f.right,r.right)-Math.max(f.left,r.left)>0&&Math.min(f.bottom,r.bottom)-Math.max(f.top,r.top)>0)};
+  if(fits()){o.style.visibility="";return}o.classList.add("kright");if(fits()){o.style.visibility="";return}o.style.visibility="hidden";o.classList.remove("kright")}catch(e){}})}catch(e){}}
+/* the visible body of every figure on the stage (opaque box of fig art when known by j59, else the element box) */
+function kitFigRects(){const st=$("stage");if(!st)return[];const out=[];st.querySelectorAll("#mefig, #tokens .tok img.figimg, #tokens .tok:not(.fig) .md").forEach(e=>{if(!e.offsetParent&&e.id!=="mefig")return;const r=e.getBoundingClientRect();if(r.width<8||r.height<8)return;
+  let bb=null;try{bb=window.J59BB&&J59BB[e.currentSrc||e.src]}catch(x){}out.push(bb?{left:r.left+r.width*bb.l,right:r.left+r.width*bb.r,top:r.top+r.height*bb.t,bottom:r.top+r.height*bb.b}:{left:r.left,right:r.right,top:r.top,bottom:r.bottom})});return out}
+(function(){const r0=renderHud2;renderHud2=function(){const r=r0.apply(this,arguments);try{const el=$("hud2");if(el&&!el.classList.contains("col"))khGroup(el);el&&el.classList.toggle("kgrp",!el.classList.contains("col"))}catch(e){}try{khStage()}catch(e){}return r}})();
+(function(){if(typeof renderStage!=="function")return;const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);try{setTimeout(khStage,60)}catch(e){}return r}})();
+addEventListener("resize",()=>{clearTimeout(window.__khT);window.__khT=setTimeout(khStage,120)});
+(function(){const st=document.createElement("style");st.id="kit2-css";st.textContent=`
+/* selection outline (any picked item: face picker, chosen option): gold ring + pale-gold halo, readable on the cream panel */
+:root{--k-sel:#fff3c4;--k-sel-ring:#a8740c}
+.ksel,[aria-pressed="true"].kselable{outline:3px solid var(--k-sel-ring)!important;outline-offset:1px;box-shadow:0 0 0 7px var(--k-sel),0 0 14px 4px #a8740c66!important;border-radius:6px}
+/* 5 · small rectangular kit frame (consort frame cropped to its body: canvas x 37–513, y 140–770) */
+span.md.kmini.kmini{border:0!important;border-radius:2px!important;box-shadow:none!important;background:none!important;overflow:visible!important;position:relative!important;aspect-ratio:476/630;height:auto!important;max-height:none!important;display:inline-grid;place-items:center;animation:none!important;transform:none!important;flex:0 0 auto}
+span.md.kmini.kmini.xs{width:22px!important}span.md.kmini.kmini.sm{width:32px!important}
+span.md.kmini.kmini>.kmb{position:absolute;left:9.66%;top:11.75%;width:80.67%;height:80.3%;background:var(--kbg,#5a1e16) center/cover;border-radius:1px}
+span.md.kmini.kmini>img{position:absolute!important;inset:auto!important;left:9.66%!important;top:18.5%!important;width:80.67%!important;height:73.9%!important;object-fit:cover!important;object-position:50% 0!important;border-radius:0!important}
+span.md.kmini.kmini>img[src*="face-"]{top:11.75%!important;height:80.3%!important}
+span.md.kmini.kmini>.kmf{position:absolute;inset:0;background:var(--kfr) 50% 34.4%/115.55% 164.6% no-repeat;pointer-events:none;z-index:1}
+/* 1 · act art in the consort-card frame, same size as the Phi tần card portrait */
+:root{--kaw:150px;--kah:226px}@media (max-width:599px){:root{--kaw:120px;--kah:177px}}
+.kaart{flex:0 0 var(--kaw)!important;width:var(--kaw)!important;height:var(--kah)!important;border-radius:0!important;overflow:visible!important;background:none!important;box-shadow:none!important;margin:0!important}
+.pcp.kit.kartf{width:100%!important;height:100%!important;max-height:none!important;min-height:0!important;aspect-ratio:auto!important;display:block}
+.pcp.kit .kin>img.kact{top:20.289%!important;height:49.373%!important;object-fit:cover!important;object-position:50% 50%!important}
+.pcp.kit.kartf .kaph{position:absolute;left:14.655%;top:20.289%;width:70.691%;height:49.373%;display:grid;place-items:center;text-align:center;font-family:var(--display);font-size:.8rem;font-weight:700;color:#fff3d8;text-shadow:0 1px 3px #000a;padding:4px;line-height:1.2;z-index:0}
+.cards:has(> button.ka.kart){grid-template-columns:repeat(auto-fill,minmax(max(440px,31%),1fr))!important}
+@media (max-width:599px){.cards:has(> button.ka.kart){grid-template-columns:1fr!important}}
+button.ka.kcard.kart{gap:10px!important;min-height:calc(var(--kah) + 12px)}
+.pcp.kit.kartf .kring{position:absolute;left:14.655%;top:20.289%;width:70.691%;height:49.373%;box-shadow:inset 0 0 0 3px var(--kcc),inset 0 0 14px var(--kcc);z-index:1;pointer-events:none;border-radius:3px}
+.pcp.kit.kartf .kcatr{position:absolute;left:50%;top:69.6%;transform:translate(-50%,-50%);z-index:3;font-style:normal;font-size:.66rem;font-weight:700;color:#fff;background:var(--kcc);padding:1px 8px;border-radius:9px;white-space:nowrap;box-shadow:0 0 0 1px #fff8,0 1px 3px #0006;letter-spacing:.02em}
+.pcp.kit.kartf .kaph{display:none}.pcp.kit.kartf:not(:has(img.kact)) .kaph{display:grid}
+.kpiart .pcp.kit.kartf .kaph{display:grid}.kartf[style*="--kcc"] .kaph{display:none!important}
+button.ka.kcard.kart{border-left:4px solid var(--kcc0,var(--line))!important}
+/* 2 · info art beside the body */
+.dlg.kpanel .kpb.kpinfo{grid-template-columns:var(--kaw) minmax(0,1fr)!important}
+.kpiart{height:var(--kah);align-self:start}
+@media (max-width:599px){.dlg.kpanel .kpb.kpinfo{grid-template-columns:96px minmax(0,1fr)!important}.kpiart{height:142px}}
+.kpnow{display:flex;gap:6px;align-items:center;font-size:1rem}.kpnow .kodm{font-size:.9rem}
+/* 3 · identity card */
+.dlg.kpsc .kpb.kpid{grid-template-columns:clamp(104px,22%,156px) minmax(0,1fr)!important;gap:16px!important;align-items:center}
+.dlg.kpsc .kpid .kpsubj .pcp{width:100%!important;max-height:none!important}
+.dlg.kpsc .kpid .kpidn{font-size:1.2rem}.dlg.kpsc .kpid .kpidn small{font-size:.86rem}.dlg.kpsc .kpid .kpidt{font-size:.92rem;margin:2px 0 4px}
+.dlg.kpsc .kpid .ktiles{grid-template-columns:repeat(2,minmax(0,1fr));gap:5px;margin:4px 0 0}
+.dlg.kpsc .kpid .ktile{flex-direction:row;justify-content:space-between;align-items:baseline;gap:6px;padding:4px 9px}.dlg.kpsc .kpid .ktile b{font-size:.95rem;text-align:right}
+.dlg.kpsc .kpid .ktile:nth-child(8){grid-column:auto}
+@media (orientation:portrait){.modal.kpscene{align-items:flex-end!important;padding:12px 4vw 16px!important}.modal.kpscene .dlg.kpsc{max-width:min(680px,100%)!important}}
+@media (max-width:599px){.dlg.kpsc .kpb.kpid{grid-template-columns:104px minmax(0,1fr)!important;gap:10px!important}.dlg.kpsc .kpid .kpidn{font-size:1.02rem}.dlg.kpsc .kpid .kpidt{font-size:.84rem}.dlg.kpsc .kpid .ktiles{grid-template-columns:1fr 1fr}.dlg.kpsc .kpid .ktile{padding:2px 6px}.dlg.kpsc .kpid .ktile b{font-size:.84rem}}
+/* 3b · identity with her standing figure */
+.modal.kpscene.kpfig>img.kidfig2{position:fixed;z-index:0;pointer-events:none;object-fit:contain;object-position:50% 100%;bottom:0;left:2vw;width:42vw;height:94dvh;filter:drop-shadow(0 6px 18px #0006)}
+.modal.kpscene.kpfig>.dlg{position:relative;z-index:1}
+.modal.kpscene.kpfig{justify-content:flex-end!important;align-items:center!important;padding:12px 2.5vw!important}
+.modal.kpscene.kpfig .dlg.kpsc{max-width:min(560px,54vw)!important}
+.dlg.kpsc .kpid.kpidf{grid-template-columns:1fr!important}.dlg.kpsc .kpid.kpidf>.kpsubj{display:none}
+@media (orientation:portrait) and (min-width:600px){.modal.kpscene.kpfig{align-items:flex-end!important;padding:12px 3vw 18px!important}.modal.kpscene.kpfig .dlg.kpsc{max-width:58vw!important}.modal.kpscene.kpfig>img.kidfig2{width:40vw;height:86dvh;left:0}}
+@media (orientation:portrait) and (max-width:599px){.modal.kpscene.kpfig{justify-content:center!important;align-items:flex-end!important;padding:8px!important}.modal.kpscene.kpfig .dlg.kpsc{max-width:100%!important}
+ .modal.kpscene.kpfig>img.kidfig2{top:6px;bottom:auto;left:0;width:100vw;height:var(--kidh,40dvh)}
+ .dlg.kpsc .kpid.kpidf .ktiles{grid-template-columns:repeat(4,minmax(0,1fr))}.dlg.kpsc .kpid.kpidf .ktile{flex-direction:column;align-items:flex-start;gap:0}.dlg.kpsc .kpid.kpidf .ktile b{text-align:left}}
+/* 4 · status grouped by purpose */
+#hud2.kgrp{flex-wrap:wrap}
+#hud2 .khg{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px 10px;width:100%;flex:1 1 100%}
+#hud2 .khc{display:flex;flex-direction:column;gap:2px;min-width:0;padding:4px 6px;border:1px solid var(--k-hair);border-radius:8px;background:#fffdf8}
+#hud2 .khc .hc[data-hx="date"]{display:none!important}
+#hud2 .khc .hc{display:grid!important;grid-template-columns:auto minmax(0,1fr) auto;justify-items:start;align-items:center;column-gap:5px;border:0!important;background:none!important;padding:1px 0!important;min-height:0!important;border-radius:0!important;text-align:left;white-space:normal;font-size:.76rem}
+#hud2 .khc .hc+.hc{border-top:1px dotted var(--k-hair)!important}
+#hud2 .khc .hc>b,#hud2 .khc .hc>.kodm{grid-column:3;justify-self:end}#hud2 .khc .hc>img{grid-column:1}
+/* stage name tags: one line, never cut, never three lines over a child figure (reviewer 11/14) */
+#tokens .tok .tag{white-space:nowrap!important;text-overflow:clip!important;max-width:none!important;width:max-content!important;overflow:visible!important}
+@media (max-width:599px){#tokens .tok .tag{font-size:.66rem!important;padding:0 5px!important}}
+.khh{font-family:var(--display);font-size:.72rem;color:var(--k-lab);letter-spacing:.04em;text-transform:uppercase;padding-bottom:2px;border-bottom:1px solid var(--k-hair)}
+@media (max-width:599px){#hud2 .khg{grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 6px}#hud2 .khc .hc{font-size:.7rem}}
+/* Tư chất block on the stage (only where it covers no figure) */
+.kstat{position:absolute;left:8px;top:calc(var(--kstt,52px));z-index:3;display:flex;flex-direction:column;gap:1px;padding:5px 8px;min-width:118px;border-radius:8px;background:rgba(255,250,240,.86);border:1px solid var(--k-hair);box-shadow:0 2px 8px #5a3a2030;backdrop-filter:blur(2px)}
+.kstat.kright{left:auto;right:8px}
+.kstat .kst{display:flex;justify-content:space-between;gap:10px;border:0;background:none;padding:1px 0;font:inherit;font-size:.76rem;color:var(--ink);cursor:pointer;text-align:left}
+.kstat .kst b{font-weight:700}
+@media (max-width:599px){.kstat{min-width:96px;padding:3px 6px}.kstat .kst{font-size:.68rem}}
+`;document.head.appendChild(st)})();
+/* ---- true outcome words for harm acts (AOUT): death / miscarriage / heir loss computed for the card's target (J78.cardV, or the person being talked to) ---- */
+function kitTgt(){try{if(typeof J78==="object"&&J78.cardV)return J78.cardV}catch(e){}try{if(typeof popIdx!=="undefined"&&popIdx!=null){const p=curPeople()[popIdx];return p&&(p.ref||null)}}catch(e){}return null}
+(function(){if(typeof AOUT!=="object")return;const base={};const D=(k,f)=>{base[k]=AOUT[k];try{Object.defineProperty(AOUT,k,{configurable:true,enumerable:true,get(){try{const v=kitTgt();const r=f(v);if(r)return r}catch(e){}return base[k]}})}catch(e){}};
+ const fail=k=>(base[k]||["",""])[1];
+ D("poison",v=>v?[`nàng trúng độc · ${kpDeathWord(kpDeathP("poison",v),"nàng")}`,fail("poison")]:null);
+ D("kpoison",v=>{const p=v&&kpDeathP("kpoison",v);return p==null?null:[`con nàng trúng độc · ${kpDeathWord(p,"con nàng")}`,fail("kpoison")]});
+ D("pond",v=>v?[`con nàng rơi xuống hồ · ${kpDeathWord(kpDeathP("pond",v),"con nàng")}`,fail("pond")]:null);
+ D("kframe",v=>{if(!v||typeof sonsOf!=="function")return null;const k=sonsOf(v).filter(k=>k.age>=6).sort((x,y)=>(+y.heir)-(+x.heir))[0];if(!k)return null;
+  return[`Hoàng thượng thương ${k.name} -35, Danh nàng -10, nàng bị phạt${k.heir?`, ${k.name} bị phế ngôi Thái tử`:""}`,fail("kframe")]});
+ D("trip",v=>[`nàng vấp ngã: Danh nàng -3${v&&v.preg&&!v.hidden?` · nàng động thai: ${word(25)}`:""}`,fail("trip")]);
+ D("pushp",v=>[`nàng rơi xuống hồ sen: Sức nàng -25${v&&v.preg&&!v.hidden?` · nàng sảy thai: ${word(60)}`:""}`,fail("pushp")]);
+ if(typeof actLineRaw==="function"){const a0=actLineRaw;actLineRaw=function(k,w,c){let r=a0.apply(this,arguments);try{if(typeof CAUGHT==="string"&&String(r).includes(CAUGHT)){const v=kitTgt();const t=v&&kaCaughtTxt(v,k);r=String(r).split(CAUGHT).join(t||"kèm: bị người của nàng phát giác, nàng nắm 2 chứng cứ")}}catch(e){}return r}}})();
 
 </script>
 
