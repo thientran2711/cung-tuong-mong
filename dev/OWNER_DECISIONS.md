@@ -161,3 +161,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (03:55Z) Owner (repeated, angry): people on stages too small. RULE: ONE kit figure-scale standard for every place figures appear (stage, event, book page, rooms, co-op, podium…): figure ≈85–90% of picture height, same scale for all in a scene, never shrink to fit — extra people via +N; names never cut. Any reused picture must follow it.
 - (04:00Z) Owner: in co-op the friend is 'Người lạ' until met, same knowledge rules as NPCs (no name/face until met); reborn friend = unknown again.
 - (04:10Z) Owner: palace detail courtyards use only Phượng Lệnh grade 'nhat' (most luxurious); no nhi/tam mixing.
+- (04:15Z) Owner: in the kit figure scale, men are a bit taller than women (≈1.08×); children by age.
