@@ -23,6 +23,13 @@ Object.assign(BAL,{illAdd:1,illDie:1});
 Object.assign(BAL,{accTire:10});
 (function(){try{const A=ACT.accuse,f0=A.f;A.f=function(a,t){try{a.accL=(a.accL||[]).filter(w=>wk()-w<36);a.accL.push(wk())}catch(e){}return f0.apply(this,arguments)}}catch(e){}
  const o0=oAccuse;oAccuse=function(a,t){const o=o0.apply(this,arguments);if(!BAL.accTire||!a)return o;const n=(a.accL||[]).filter(w=>wk()-w<36).length;return n?cl(o-BAL.accTire*n,5,95):o}})();
+/* one charge at a time (balance 11/14, measured: without it an angry palace brought ~40-60 charges a life against her, ~30 stuck, each a fall of two ranks
+   or the cold palace): a person just accused, whether the charge stuck or not, cannot be accused again by anyone for BAL.accCdT tuần.
+   Same rule for every target, her included; she cannot bring a charge against someone inside the window either. */
+Object.assign(BAL,{accCdT:36});
+(function(){try{const A=ACT.accuse,ok0=A.ok,f0=A.f;const cd=t=>!!(BAL.accCdT&&t&&t.accT!=null&&wk()-t.accT<BAL.accCdT);
+ A.ok=function(a,t){if(cd(t))return false;return ok0.apply(this,arguments)};
+ A.f=function(a,t){if(a!==S&&cd(t))return "";try{if(t)t.accT=wk()}catch(e){}return f0.apply(this,arguments)}}catch(e){}})();
 /* measured knobs of other modules (balance pass 11/14, see dev/measure/BALANCE_REPORT.md): scheme motive x3 and a prepared blow +10 (j70),
    the Emperor's satiety with one favourite (j75 FAIRN.sat/satO). Same for every consort. */
 try{Object.assign(J70CFG,{mot:3,prep:10})}catch(e){}

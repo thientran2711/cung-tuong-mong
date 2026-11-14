@@ -26,6 +26,10 @@ if IX:
     D=collections.Counter()
     for i in IX: D.update(i['dem'])
     print('  her demotions/confinements per life:',[(k,round(v/len(IX),1)) for k,v in D.most_common(6)])
+    ON=collections.defaultdict(lambda:[0,0])
+    for i in IX:
+        for k,v in (i.get('on') or {}).items(): ON[k][0]+=v[0];ON[k][1]+=v[1]
+    if ON: print('  NPC acts on her per life (tried/landed):',{k:f"{v[0]/len(IX):.1f}/{v[1]/len(IX):.1f}" for k,v in sorted(ON.items(),key=lambda x:-x[1][0])[:14]})
     W=collections.Counter()
     for i in IX: W.update({int(k):v for k,v in i['rkW'].items()})
     tw=sum(W.values()) or 1;print('  share of tuần at each rank:',{k:f"{100*v/tw:.0f}%" for k,v in sorted(W.items())})

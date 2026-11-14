@@ -15,7 +15,7 @@ const {chromium}=require('playwright');const [,,BASE,NEW,OLD,OUT]=process.argv;
   const q=await c.newPage();const pe=[];q.on('pageerror',e=>pe.push(e.message));
   await q.goto(BASE+NEW);await q.waitForTimeout(2500);await q.screenshot({path:`${OUT}/title-${w}.png`});
   const loadBtn=await q.$('#slots button[data-load]');let loaded=false,turn='';
-  if(loadBtn){await loadBtn.click();await q.waitForTimeout(1500);loaded=await q.evaluate(()=>!!S&&!S.dead);turn=await q.evaluate(()=>S.turn+'/'+S.tuan+'/'+S.buoi+' '+S.name)}
+  if(loadBtn){await q.evaluate(()=>document.querySelector("#slots button[data-load]").click());await q.waitForTimeout(1500);loaded=await q.evaluate(()=>!!S&&!S.dead);turn=await q.evaluate(()=>S.turn+'/'+S.tuan+'/'+S.buoi+' '+S.name)}
   await q.screenshot({path:`${OUT}/loaded-${w}.png`});
   for(let i=0;i<12;i++){await q.evaluate(()=>{for(let k=0;k<5&&Q.length;k++){const m=Q[0];if(m.opts&&m.opts.length)chooseM(m.opts.length-1);else closeModal()}});
    const nx=await q.$('#next:not([disabled])');if(nx){await nx.click().catch(()=>{})}await q.waitForTimeout(300)}
