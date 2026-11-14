@@ -11,7 +11,6 @@
    ===================================================================================================================== */
 const EMO={vui:"Vui",binh:"Bình thường",buon:"Buồn",gian:"Giận",so:"Sợ",ghen:"Ghen",lo:"Lo âu",dau:"Đau khổ",muu:"Toan tính"};
 const EMO_COL={vui:"#f2c230",binh:"#9cc9a8",buon:"#3f7fd0",gian:"#d8322a",so:"#8a5cc8",ghen:"#3fa04a",lo:"#f08a24",dau:"#2e3a8c",muu:"#1f6f6a"};
-const EMO_EXPR={vui:"vui",buon:"buon",gian:"gian",dau:"khoc",so:"dau",lo:"buon",ghen:"gian"};/* hook for kitFaceExpr (review/appearance) */
 /* default reaction of an event: [emotion, strength]; null = no feeling */
 const EMO_EV={selfUp:["vui",60],selfDown:["buon",55],rivalUp:["ghen",30],friendUp:["vui",20],foeDown:["vui",20],gift:["vui",25],slight:["gian",35],
  kidBorn:["vui",70],kidDie:["dau",95],otherKid:["ghen",25],punished:["so",50],cold:["dau",85],night:["vui",35],neglect:["buon",30],ill:["lo",35],
@@ -165,9 +164,10 @@ function emoKnown(p){p=emoRes(p);if(!p)return false;if(p===S)return true;try{if(
  try{if(p===S.thO&&typeof cmKnown==="function")return cmKnown("th");const q=typeof queenP==="function"?queenP():null;if(p===q&&typeof cmKnown==="function"&&cmKnown("hh"))return true}catch(e){}
  if((S.mat||0)>=3&&(rivals||[]).includes(p))return true;
  if(p===S.emp&&(S.nightLog||[]).some(w=>W-w<=2))return true;return false}
-/* public API (also for kitFaceExpr): null = no badge (stranger); known false = "chưa rõ" */
+/* public API — the ONE source of emotion display (owner 22:50Z: no code-drawn face expressions): null = no badge (stranger); known false = "chưa rõ" */
 window.kitEmotion=function(p){try{if(!S)return null;const q=emoRes(p);if(!q)return null;try{if(q!==S&&typeof kitIsKnown==="function"&&!kitIsKnown(q))return null}catch(e){}
- const kn=emoKnown(q);if(!kn)return{k:"an",name:"Chưa rõ",known:false};const e=emoGet(q);return{k:e.k,name:EMO[e.k],v:e.v||0,why:e.why||"",known:true,expr:e.v>=40?EMO_EXPR[e.k]||null:null}}catch(e){return null}};
+ const kn=q===S.emp||emoKnown(q);if(!kn)return{k:"an",name:"Chưa rõ",known:false};let e=emoGet(q);
+ if(q===S.emp&&!(e.v>=40)){const k=["vui","binh","buon","gian"][S.emp.mood]||"binh";e={k,v:k==="binh"?0:50,why:k===e.k?e.why:""}}return{k:e.k,name:EMO[e.k],v:e.v||0,why:e.why||"",known:true}}catch(e){return null}};
 /* ---------- the badge (KIT.md 31): one layer in pcPort → every frame size ---------- */
 function emoBadge(p){const m=window.kitEmotion(p);if(!m)return"";const t=m.known?`Tâm trạng: ${m.name}${m.why&&m.k!=="binh"?" ("+m.why+")":""}`:"Tâm trạng: chưa rõ";
  return `<img class="kemo kemo-${m.k}" src="img/kit/emo-${m.k}.webp" alt="${t}" title="${t}" onerror="this.remove()">`}
@@ -175,15 +175,19 @@ function emoBadge(p){const m=window.kitEmotion(p);if(!m)return"";const t=m.known
   const i=h.indexOf('<span class="kin">');if(i<0)return h;const j=h.indexOf('<img class="kfr"',i);if(j<0)return h;
   let depth=0,end=-1;const re=/<\/?span\b[^>]*>/g;re.lastIndex=i;let mm;while((mm=re.exec(h))){if(mm[0][1]==="/"){depth--;if(depth===0){end=mm.index;break}}else depth++}
   if(end<0)return h;let o=h.slice(0,end)+b+h.slice(end);const m=window.kitEmotion(f.__kp);
-  if(m&&m.known&&m.k!=="binh"&&EMO_COL[m.k])o=o.slice(0,i)+`<span class="kin kemo-r" style="--emoc:${EMO_COL[m.k]}">`+o.slice(i+'<span class="kin">'.length);return o}catch(e){return h}}})();
+  if(m&&m.known&&m.k!=="binh"&&EMO_COL[m.k])o=o.replace(/(<img class="kfr" src="[^"]*")/,`$1 data-emo="${m.k}" style="--emoc:${EMO_COL[m.k]}"`);return o}catch(e){return h}}})();
 (function(){const st=document.createElement("style");st.id="kemo-css";st.textContent=`
 .kin>img.kemo,.pcp.kit .kin>img.kemo:not(.kfr):not(.kgem):not(.kemb):not(.kpor),span.md.kfc .kin>img.kemo{position:absolute!important;inset:auto!important;left:8.5%!important;top:17.5%!important;right:auto!important;bottom:auto!important;width:22%!important;height:auto!important;aspect-ratio:1;max-width:none!important;max-height:none!important;object-fit:contain!important;border-radius:50%!important;clip-path:none!important;z-index:4!important;pointer-events:auto;filter:drop-shadow(0 1px 1.5px #000a);animation:none!important;transform:none!important;box-shadow:none!important;opacity:1!important}
 span.md.kfc.sm .kin>img.kemo{width:30%!important;left:5%!important;top:16%!important}
 span.md.kfc.xs .kin>img.kemo{width:38%!important;left:2%!important;top:14%!important}
 .kin>img.kemo.kemo-an{opacity:.85!important}
-.kin.kemo-r>img.kfr,span.md.kfc .kin.kemo-r>img.kfr{filter:drop-shadow(0 0 1.5px var(--emoc)) drop-shadow(0 0 4px var(--emoc)) drop-shadow(0 0 7px var(--emoc))!important}
+.kin>img.kfr[data-emo],span.md.kfc .kin>img.kfr[data-emo]{filter:drop-shadow(0 0 1.5px var(--emoc)) drop-shadow(0 0 4px var(--emoc)) drop-shadow(0 0 7px var(--emoc))!important}
 @media (prefers-reduced-motion:no-preference){.kin>img.kemo.kemo-gian,.kin>img.kemo.kemo-dau{animation:kemoPulse 2.4s ease-in-out infinite!important}}
 @keyframes kemoPulse{0%,100%{filter:drop-shadow(0 1px 1.5px #000a)}50%{filter:drop-shadow(0 0 4px #ffcf8a) drop-shadow(0 1px 1.5px #000a)}}
 `;document.head.appendChild(st)})();
 /* measurement hook */
 window.emoStat=function(){const c={};for(const p of emoPeople()){const e=emoGet(p);c[e.k]=(c[e.k]||0)+1}return Object.assign({now:c},EMO_N)};
+/* one source: the Trong cung block's mood words (jcmood kitCourtMood) read the same state and the same fog as the seals */
+Object.defineProperty(window,"kitCourtMood",{configurable:true,get(){try{if(!S)return null;const one=p=>{const m=window.kitEmotion(p)||{k:"an",known:false};const kn=!!m.known;
+  return{mood:kn?m.name:null,lv:kn?emoLv(m.k):null,why:kn?(m.why||null):null,known:kn}};const q=typeof queenP==="function"?queenP():null;
+ return{th:S.thDead?null:one(emoTH()),hh:q&&q!==S?one(q):null}}catch(e){return null}}});
