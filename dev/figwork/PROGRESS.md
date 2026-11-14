@@ -170,3 +170,16 @@
 - Session-3 tool notes: work copy scratchpad/maidA, worktree scratchpad/wt-maidA (WT in mjobs/mproc/msheet/pubm). mproc curl now retries
   (connection resets crashed it before writing manifests). Run only ONE mproc at a time (shared RAM is tight; OOM kills happened).
   zoom.py out.jpg mNN.. = a51 head crops per tier (hair check).
+
+### STATUS (maid-art part A, sửa sau kiểm duyệt FAIL d97e28e — thợ sửa #2, 2026-11-14 tối) — SẴN SÀNG KIỂM LẠI
+- a51 (51+): ĐỦ 208/208 hình a51 đã làm già lên ~48–50 (mặt), tóc giữ đen. Cách làm: images_crop cột a51 của gen cuối (1080x1920 từ 3840x1920,
+  cropX trong agefix/todo.txt, kẹp ≤2760) -> gpt-2-6 edit 9:16 1k (ref = crop) với prompt "about 48 to 50 ... crow's-feet, nasolabial folds,
+  softer jawline ... NOT elderly ... hair solid dark ... remove any mole" -> remove bg -> tools/apply.py (giữ mảng chính, spfuncs.finish 900px,
+  afix, porcrop 384x506, cutcheck). Sổ: agefix/ages.txt (jid crop edit bg; dòng sau ghi đè dòng trước), agefix/redo.txt (làm lại).
+- Làm lại vì còn trẻ / tóc xám (chuỗi edit lần 2 "she still looks too young ... about 50"): m01-tm2, m01-tm4, m02-tm4, m03-tm4, m04-tm3, m04-tm4,
+  m05-tm3, m09-tm0, m09-tm4, m33-tm2, m33-tm4, m34-tm0, m36-tm4, m29-tm4, m47-tm4; tóc đen lại: m27-tm3, m38-tm2, m38-tm3.
+- Nốt ruồi / hoa điền: gen gốc của m13, m26, m39, m52 vẫn còn nốt ruồi nên edit a51 mang lại -> vá tại chỗ (tools/spot2.py, tools/spotpor.py
+  theo toạ độ por): m13-tm2/tm3, m19-tm3/tm4, m26-tm4 (cả hoa điền), m38-tm3, m39 tm0/tm2/tm3/tm4, m52 tm0/tm2/tm3/tm4 (a51).
+  Quét tự động cả 832 por (tools/molescan.py) + soi top 64: chỉ còn hoa tai/tóc, không thấy nốt ruồi.
+- cutcheck cả 832 fig phần A: max 2.23, 0 hình ≥3.
+- Không có mạng che mặt trong thiết kế phần A (không thêm).
