@@ -1,5 +1,28 @@
 # Art progress (art worker, 11/14/2026)
 
+## CURRENT STATE (art worker #10, 11/14 — newest, read this first)
+- Took over #9's uncommitted output (origin/wip/consort-art, 1642 files) and checked EVERY changed image: per-identity face sheets
+  (rows = 4 ages, cols = t1..t8, `python3 -I idsheet2.py out.jpg cXX`), full-figure tier sheets on dark green (`tierfull.py`),
+  cutcheck on all 1024 consort t1-t8 figures.
+- Findings in wip: (1) all wip portraits were the OLD 256x256 square crop (sheetproc.finish still writes that) -> every por re-made with
+  porcrop.py (all 1152 consort por now 384x506); (2) #9's re-runs dropped the solidSheer/fa fix on sheer lineups (c04 t1-t5, c02-t4,
+  c11-t1/t4, c14-t2, c29-t1, c30-t4/t6 ...: cutcheck 15-94) -> `fapick.py` re-applied mm_fa where it lowers cutcheck (132 figs);
+  (3) huadian wrong/missing/too big on 33 lineups; (4) a few moles left.
+- FIXES (gpt-2-6 edit of the current lineup, prompt from `mk10.py` = mkedit wording + a per-lineup note; ids in gens10.txt,
+  "jid gen bg" in bg10.txt; `python3 -I run10.py bg10.txt jid..` = darkfix + demole + sheetproc, then porcrop):
+  faint/missing -> c01-t4 c04-t4 c09-t5 c16-t1 c20-t1 c25-t1 c27-t5 c28-t1; too big -> c10-t4 c10-t5 c21-t5 c29-t5 c30-t5;
+  wrong material/shape -> c01-t5 (no gold) c03-t5 c05-t5 (dark crescent) c04-t6 (violet gem) c17-t3 (flower, must be heart);
+  t8 phoenix wrong/too big/round -> c06 c09 c11 c12 c14 c19 c20 c21 c23 c24 c25 c26 c29 c32 (c12/c14/c32 needed 2-3 passes:
+  "ERASE the current ornament, then paint a tiny phoenix..."; c32-t8 last pass also re-aged the a48 figure).
+  Moles removed by inpaint (`python3 -I moles.py fix fig.webp x,y[,r]` in por coords; `moles.py detect` + `gridv.py` to locate):
+  c01-t2 c01-t5 c07-t1 c07-t3 c09-t2 c09-t5 c15-t4 c15-t7 c17-t3 c17-t4 c23-t7 c23-t8(x4) c28-t3 c28-t4.
+- KNOWN / ACCEPTED: c24-t5 ginkgo stays wide (3 edits could not shrink it; same width as her t3/t4 ginkgo); c04-t6 is a small
+  pink-violet drop (reads as gem, small); c30-t5 wave crest is wide but flat. cutcheck >=8 left on 18 t8 figures (c04 c07 c08 c09
+  c11 c14 c19 c20 c28): all pearl-curtain crowns, look clean on dark bg (dev/figwork/sheets/art10 + scratch cut18.jpg) - rematte
+  single figures (mm.py) only if the kit reviewer flags a halo. c11-t2 is lilac like her t1 (HANDOVER OPEN item closed).
+- Sheets: dev/figwork/sheets/art10/huadian8_c03.jpg, huadian8_c19.jpg, huadian8_c26.jpg (8 tiers x 4 ages), full_t8_c17-c32.jpg.
+- Credits art10: 39 edits x 270 + ~40 bg cuts = ~10.7k.
+
 ## CURRENT STATE (art worker #9, newest first — read this first)
 - Same worktree/scripts as art8 (scratchpad/wt-art8, branch art8 -> review/consort-art). DISK: the volume fills up (0 MB free once);
   delete figwork/raw/*.png and figwork/bg/*.png after each published batch (all re-downloadable from urls.json).
