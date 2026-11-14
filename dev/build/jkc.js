@@ -14,7 +14,7 @@
    Co-op hooks (§13): kcHook(kind,payload) stubs, single-player uses them with family senders. Old saves: no S.kc, nothing changes. */
 const KC={ok:["tt","dtq","muoi","thd","ch","td"],ty:3,tm:2,
  /* balance knobs (bot-measured, dev/PROGRESS_outside.md) */
- cut:[60,76,88],      /* Điện tuyển score: below [0] = trả thẻ bài, [1] Thường tại, [2] Quý nhân, else Đáp ứng */
+ cut:[50,80,100],      /* Điện tuyển score: below [0] = trả thẻ bài, [1] Thường tại, [2] Quý nhân, else Đáp ứng */
  so:{sac:30,suc:25,ld:70,gt:15},ev:38,apM:2,sch:22,ill:1.2,dowry:.6};
 const KCDAD={tt:["Tể tướng","phủ Tể tướng"],dtq:["Đại tướng quân","phủ Tướng quân"],muoi:["Đại thương muối","Diêm thương phủ"],thd:["Thầy đồ","nhà thầy đồ"],ch:["Quốc cữu","phủ Quốc cữu"],td:["Thị lang bộ Lễ","phủ Thị lang"]};
 const KCCLAN={tt:"Tể tướng",dtq:"Đại tướng quân",muoi:"Hộ bộ",thd:"Hàn lâm",td:"Lễ bộ"};
@@ -232,12 +232,13 @@ function kcWeek(){if(Q.length>2)return;const E=[];const add=(e,w)=>{if(w>0)E.pus
  const tot=E.reduce((a,x)=>a+x[1],0);if(!tot||!roll(KC.ev))return;let r=Math.random()*tot;for(const [e,w] of E){r-=w;if(r<0){const d=mkP("kcE",{e});if(d)pushDil(d,KCE[e].t);return}}}
 function kcMonth(){S.turn++;const k=S.origin.k;
  apply({bac:5+Math.round(S.kgtu/6)});
- S.kap+=KC.apM+(S.age>=19?1:0)+(S.kgtu<40?1:0)+(S.kc.suit.length?1:0);S.kld=Math.max(0,S.kld-2);
+ if(!S.kc.ev.chieu||S.kc.mien)S.kap+=KC.apM+(S.age>=19?1:0)+(S.kgtu<40?1:0)+(S.kc.suit.length?1:0);/* registered for tuyển tú: no match may be made */S.kld=Math.max(0,S.kld-2);
  for(const m of S.kc.fam){if(!m.alive)continue;m.oan=Math.max(0,(m.oan||0)-1);if(/^ban|muoi/.test(m.r)){m.tai=Math.min(95,(m.tai||40)+R(2));m.sac=m.sac||50}}
  /* the palace runs on: same monthly world calls as the servant road (j42), with her outside */
  kcW(()=>{for(const v of liveRivals(true))stipend(v);rivalsMonth();servRanks();servMonth();oanMonth();restock();heirMonth();moodMonth();try{tdMonth()}catch(e){}return""});if(S.dead)return;
  /* suitors and the forced match */
- if(S.kap>=40&&S.kc.suit.length<2&&roll(30+S.kap/3)){const s=kcSuitor();S.kc.suit.push(s);pushDil(mkP("kcE",{e:"moi"}),"Bà mối đến nhà")}
+ if(S.kc.ev.chieu&&!S.kc.mien){}
+ else if(S.kap>=40&&S.kc.suit.length<2&&roll(30+S.kap/3)){const s=kcSuitor();S.kc.suit.push(s);pushDil(mkP("kcE",{e:"moi"}),"Bà mối đến nhà")}
  else if(S.kap>=90&&S.kc.suit.length&&!S.kc.forced){S.kc.forced=1;pushDil(mkP("kcE",{e:"dinhhon"}),"Cha định hôn")}
  /* chapters: the origin chapter (3 beats), on a fixed calendar */
  const beat={4:0,10:1,16:2}[S.turn];if(beat!=null&&!S.dead)pushDil(mkP("kcE",{e:"o"+beat}),KCO[k]?KCO[k].t:"Chuyện nhà");
@@ -331,7 +332,7 @@ const KCE={
   ].concat(r?[kcO("✦ Xin cha gả cho người ấy, nay đã đỗ đạt",{},()=>kcEnd("kcR2"),{r97:1,j67:"tốn: không · (Cơ duyên hiếm)"})]:[])}}},
  dinhhon2:{t:"Cha định hôn",b:()=>{const s=S.kc.suit[0];return{who:kcFace(kcR("cha")),t:`<p>Sính lễ của ${s.n} đã bày đầy chính sảnh. Không còn đường lùi.</p>`,o:[kcO("Lên kiệu hoa",{},()=>kcMarry(s)),kcO("Cắt tóc xin đi tu",{},()=>kcEnd("tu")),kcO("Thắt cổ tự vẫn",{},()=>kcDie("Tự vẫn trước ngày bị ép gả"))]}}},
  chieu:{t:"Chiếu tuyển tú",b:()=>({who:pEmp(),t:`<p>Chiếu tuyển tú ban xuống: mùa xuân năm tới, con gái các nhà quan và lương gia từ mười tám tới hai mươi tuổi đều phải ghi tên. ${kcR("muoi")?"Thứ muội cũng có tên.":""}</p>`,o:[
-  kcO("Ghi tên",{},()=>kcDo("Chiếu tuyển tú",()=>{S.kap=Math.max(0,S.kap-20);return"Nhà thôi bàn chuyện gả ngươi đi."})),
+  kcO("Ghi tên",{},()=>kcDo("Chiếu tuyển tú",()=>{S.kap=Math.max(0,S.kap-30);S.kc.suit=[];S.kc.forced=0;return"Tú nữ đã ghi tên thì không nhà nào được dạm hỏi. Nhà thôi bàn chuyện gả ngươi đi."})),
   kcO("Xin cha lo cho được miễn tuyển",{bac:-40},()=>kcDo("Chiếu tuyển tú",()=>{S.kc.mien=1;return"Cha gật đầu. Ngươi sẽ không phải đi tuyển; nhà sẽ lo chuyện gả chồng."}),{dis:S.kap<50||S.bac<40})]})},
  o0:{t:"",b:()=>kcOrigin(0)},o1:{t:"",b:()=>kcOrigin(1)},o2:{t:"",b:()=>kcOrigin(2)},
  so:{t:"Sơ tuyển",b:()=>kcSoD()},phuc:{t:"Phúc tuyển",b:()=>kcPhucD()},dien:{t:"Điện tuyển",b:()=>kcDienD()},trave:{t:"Trả thẻ bài",b:()=>kcTraveD()}};
