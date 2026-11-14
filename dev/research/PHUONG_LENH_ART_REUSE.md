@@ -101,3 +101,46 @@ Không vẽ mới bản đồ chi tiết. Đưa ngay vào game:
 2. Thêm hotspot Chính điện / Đông phối / Tây phối trên mỗi tranh L2.
 3. Phòng trong: giữ tranh residence mới của ta làm cảnh nhân vật. Lấy thêm L3 `m` khi cần cảnh "xem phòng" hoặc "thị tẩm" (own-bed).
 4. Chỉ re-skin bằng Magnific nếu cần phân biệt 4 cung dùng chung mẫu Phi cung.
+
+## 9. Soát lại (14/11/2026, theo ý chủ)
+
+**Kết luận:** Bản kiểm kê ở mục 4 và 7 đúng về cách PL đặt tên thư mục, nhưng sai khi nói "chỉ có 4 mẫu". PL **không** vẽ riêng 14 cung theo tên. Theo `places/palace/CENSUS.md` ("compounds of one FORM share one picture per grade") và bảng phẩm trong `_plan/hoangcung_site_plan_v3c.py`, PL chọn tranh theo **phẩm của chủ vị**, còn tên cung chỉ là nhãn. Có điều mỗi bậc `nhat`/`nhi`/`tam` là **một bản vẽ khác hẳn** của cùng dạng cung, không phải chép lại: khác số nhà phụ, khác mái phối điện (tam mái xám), khác cây và đồ trong sân (xem sheet). Vì vậy mỗi dạng có 3 tranh sân khác nhau. Tính cả Đông cung và hậu viện của 8 phủ đệ thì có tổng cộng hơn 30 sân khác nhau.
+
+Sheet: `dev/shots/pl-all-palaces.jpg` gồm 48 sân L2 (`xuan_trua`): 12 nơi × 3 bậc, 4 sân Đông cung và 8 hậu viện phủ đệ. `dev/shots/pl-all-rooms.jpg` gồm 41 phòng L3 (`m`, `xuan_trua`).
+
+### 9.1 Các cây thư mục khác là gì
+
+- `places/palace/<bậc>/x/L2`: 32 sân của Hậu cung (Nữ đế/Hoàng đế). Nơi ở của phi tần: `can-ninh`, `vinh-hoa`, `quy-cung`, `phi-cung`, `cac`, `spare-cung`, `bac-uyen`. Hoàng tộc: `duc-tho` (Mẫu hậu, cùng đường Tư Từ), `tho-khang` (các cha, Thái thượng), `duong-hoa` (tẩm của vua), `duc-anh` (nhà trẻ), `truong-mon` (lãnh cung). Nghi lễ và công vụ: `giao-thai` (điện lễ), `quynh-yen` (yến điện, hí đài Thiều Hoa), `trai-cung`, `phung-tien`, `can-chinh`, `garden`, `noi-vu`, `noi-thi`, `dich-dinh`, `ngu-thien`, `phong-may`, `gieng`, `thu-duong`, `hoc-duong`, `thuong-tac`, `thuong-tu`, `cam-ve`, `dien-vo`, `khach-quan`, `ngoai-vien`.
+- `palace/<bậc>/{m,f}/L2b`: mặt tiền hậu điện. `side-hall` là phối điện của người ở kèm (Quý nhân, Tài nhân), `rear-room` là hậu phòng của Lương nhân.
+- `palace/<bậc>/{m,f}/L3`: phòng chủ và phòng người ở kèm (xem 9.2). `x/L3`: phòng của hoàng tộc và công vụ.
+- `dongcung/<bậc>/{m,f}/L2`: Đông cung. `chinh` là chính viện của Thái tử, `thanhba` là Thanh Ba điện (Thái tử phi), `trac` là viện trắc phi, `vanlang` là Văn Lãng (sân phụ). Còn `x/L2`: giaduong, haudich, tinhthat, yensanh…, và `x/L3/cungnu` (phòng cung nữ), `thosu`, `thaigiam`.
+- `hac ho lan mai maudon sen truc tung`: 8 phủ đệ của 8 nhà quyền quý, theo biểu tượng hạc, hổ, lan, mai, mẫu đơn, sen, trúc, tùng. Mỗi phủ vẽ riêng, có `L2/hauvien` (hậu viện của các bà vợ) và `L2b/q-chinh|q-trac|q-thi`. Đây **không** phải cung phi. Nhìn sheet thì khác hẳn: tường trắng, mái xám, nhà dân.
+- `capital`: kinh thành. `fief`: thái ấp. `far`: ngoại quốc. `realm`: thiên hạ. `_fest`, `_l3`, `_fix`: kit và sổ ghi các đợt vẽ.
+
+### 9.2 Bảng phẩm → thư mục (cách PL làm; CTM nên làm y như vậy)
+
+| Phẩm chủ vị (PL) | L2 sân (`<bậc>/x/L2`) | L2b mặt tiền (`<bậc>/m/L2b`) | L3 phòng (`<bậc>/m/L3`) |
+|---|---|---|---|
+| Hoàng hậu (`house.q.top.1`) | `can-ninh` | `can-ninh` | `can-ninh-hall` (chính điện, bảo tọa 3 bậc), `can-ninh-bed` |
+| Hoàng quý phi (`q.top.2`) | `vinh-hoa` | `vinh-hoa` | `vinh-hoa-bed` |
+| Quý phi ×2 (`q.cung.1-2`) | `quy-cung` (hậu điện 5 gian) | `quy-cung` | `quy-bed` |
+| Phi ×4 (`q.cung.3-6`) | `phi-cung` (hậu điện 3 gian) | `phi-cung` | `phi-bed` |
+| Tần ×6 (`q.cac.1-6`, lầu 2 tầng, ngói xanh) | `cac` | `cac` | `cac-bed` (tầng trệt: ghế ngồi, tẩm, thư phòng) |
+| Quý nhân (phối điện Đông của cung, hoặc sương phòng các 1-2) | sân của chủ cung | `side-hall` | `quynhan-room` |
+| Tài nhân (phối điện Tây, hoặc sương phòng các 3-6) | sân của chủ cung | `side-hall` | `tainhan-room` |
+| Lương nhân / Thường tại (hậu phòng, gian Nam dãy sau phía Tây) | sân của chủ cung | `rear-room` | `luongnhan-room` |
+| Thị tòng / Đáp ứng (Bắc Uyển, 3 người một phòng) | `bac-uyen` | `bac-uyen` | `bac-room` |
+| Cung trống (Trường Xuân, Hàm Phúc) | `spare-cung` (đóng cửa, chỉ người quét) | — | — |
+| Hoàng đế | `duong-hoa` | `x/L2b/duong-hoa` | `own-bed`, `own-study`, `own-music`; `x/L3/hien-dai-chieu`, `bep-rieng`; Cần Chính: `x/L2/can-chinh` và `x/L3/can-chinh` |
+| Thái hậu | `duc-tho` | `x/L2b/duc-tho` | `x/L3/duc-tho-bed`, `x/L3/tu-tu` |
+| Thái thượng / các cha | `tho-khang` | `x/L2b/tho-khang` | `x/L3/tho-khang-bed` |
+| Lãnh cung | `truong-mon` | `x/L2b/truong-mon` | `x/L3/truong-mon` |
+
+Nữ đế thì dùng `f` thay cho `m`. Trong PL, tên cung chỉ là nhãn: Vĩnh Hòa = Hoàng quý phi; Thừa Minh, Diên Huy = Quý phi; Cảnh Phúc, Khải Tường, Chung Tú, Hàm An = Phi; Tịnh Tâm, Ngọc Thanh, Thư Hương, Họa Ý, Thúy Vi, Di Thần = các của Tần; Trường Xuân, Hàm Phúc = dự phòng.
+
+### 9.3 Đề xuất cho CTM
+
+- **Theo luật của chủ:** cung nào cũng lấy tranh theo phẩm của chủ vị hiện tại. Đổi chủ vị hoặc thăng giáng phẩm thì đổi tranh. Cung không có chủ vị thì dùng `spare-cung`.
+- **Cách phân biệt các cung cùng phẩm:** dùng 3 bậc vẽ khác nhau. Ví dụ Phi: Cảnh Phúc dùng `nhat/phi-cung`, Khải Tường dùng `nhi/phi-cung`, Chung Tú dùng `tam/phi-cung`, Hàm An dùng `nhat/quy-cung`. Thừa Minh và Diên Huy (Quý phi) dùng `nhat` và `nhi/quy-cung`. Bậc `tam` nhỏ và giản dị hơn, nên hợp với cung của phẩm thấp. Nhược điểm: với cùng một nơi, mùa và lễ chỉ đủ khi cả 3 bậc đều có (có, xem mục 3; L2 nơi chính có đủ 16 trạng thái thường và 12 lễ ở mỗi bậc).
+- Ngọc Thanh các dùng `cac` (Tần). Càn Ninh dùng `can-ninh`. Đức Thọ dùng `duc-tho`. Dưỡng Hòa dùng `duong-hoa`. Trường Môn dùng `truong-mon`. Đông cung dùng `dongcung/nhat/m/L2/chinh`, phi của Thái tử dùng `thanhba` và `trac`. Phòng cung nhân dùng `palace/x/L3/dich-dinh-room`, `dongcung/x/L3/cungnu` hoặc `bac-room`.
+- Không dùng hậu viện phủ đệ cho cung phi, vì sai kiểu kiến trúc.
