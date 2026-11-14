@@ -16,3 +16,4 @@
 - Mọi lineup đã vẽ theo dáng động (t1 m27–m52, t2 m27–m32) phải VẼ LẠI. Bỏ 16 bản t2 m33–m48 dáng động chưa xử lý (4320 tín dụng phí).
 - Hoa điền: cỡ chuẩn = hoa son c03 t1 ("about the size of a fingertip and clearly visible"). t2+ chờ HUADIAN.md 8 nấc mới.
 - Vẽ lại dáng yên: C-m38-t1 (tấm thử đầu tiên, sheet C_m38_t1.jpg). 273 tín dụng.
+- Vẽ lại dáng yên t1 m27–m34 (8 lineup, đè file cũ). Tín dụng 2184.
