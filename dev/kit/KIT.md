@@ -829,3 +829,14 @@ Grade colours (items, rewards): Thường `#9aa3a8`, Tinh phẩm `#5fa58c`, Trâ
 
 Art list (`img/kit/`): mo-tablet-back, mo-tablet-front, mo-xam-tube, mo-xam-stick, mo-seal-thanh, mo-seal-bai, mo-edict-closed, mo-edict-open, mo-leaf-dry, mo-leaf-maple, mo-petal-peach, mo-petal-plum, mo-peony, mo-ink, mo-incense, mo-calendar, mo-tray(-open), mo-chest(-open), mo-chestg(-open), mo-giftbox(-open), mo-ingot-silver, mo-ingot-gold, mo-coin-silver, mo-coin-gold, mo-wx-{hoadao,muaphun,suongsom,troiquang,nanggat,vekeu,giong,domdom,laphong,nangvang,gioheomay,trangram,tuyetnhe,tuyetday,suonggia,maino}.
 Not done here (other owners): kitRoulette (thân phận, review/kit-2b) and the honour podium (j90, section 26); the motion queue waits for them (`#kpodov`, roulette).
+
+## 31. EMOTION SEAL · dấu tâm trạng (review/emotion, `dev/build/jemo.js`, owner 11/14) — one layer of `pcPort`
+- Every frame drawn by `pcPort` (so every size: tall frame, person card cell, `mdH` xs/sm/default/big strips) carries `img.kemo.kemo-<k>`:
+  `img/kit/emo-<k>.webp` (160 px, transparent; gpt-2-6 ink-brush emoji faces on a solid colour, thin gold rim; sheet Magnific VXUSjSlMMU).
+  Keys: vui · binh · buon · gian · so · ghen · lo · dau · muu · an (chưa rõ "?").
+- Place: top-left corner of the photo window, over the frame edge (left 8.5 %, top 17.5 %, width 22 % of the canvas); sm 30 %, xs 38 % so it stays ≥ 11 px.
+  z-index 4 (above frame and crest), drop shadow. Giận and Đau khổ pulse softly (off with reduced motion).
+- Ring: when the feeling is known and not Bình thường, the frame picture gets a glow in the emotion colour (`.kin.kemo-r`, `--emoc`):
+  vui #f2c230 · buon #3f7fd0 · gian #d8322a · so #8a5cc8 · ghen #3fa04a · lo #f08a24 · dau #2e3a8c · muu #1f6f6a.
+- Fog: stranger → nothing; known person, no fresh news → grey "?" seal; her own → always.
+- Data only through `window.kitEmotion(p)` → `{k,name,v,why,known,expr}`; tooltip/alt "Tâm trạng: <tên> (<cause>)". Nobody draws another mood icon.

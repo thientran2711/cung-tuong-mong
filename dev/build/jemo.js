@@ -10,6 +10,7 @@
    Badge: the painted seal img/kit/emo-<k>.webp drawn by pcPort on every frame size (KIT.md 31). Off switch for measuring: window.__emoOff=1.
    ===================================================================================================================== */
 const EMO={vui:"Vui",binh:"Bình thường",buon:"Buồn",gian:"Giận",so:"Sợ",ghen:"Ghen",lo:"Lo âu",dau:"Đau khổ",muu:"Toan tính"};
+const EMO_COL={vui:"#f2c230",binh:"#9cc9a8",buon:"#3f7fd0",gian:"#d8322a",so:"#8a5cc8",ghen:"#3fa04a",lo:"#f08a24",dau:"#2e3a8c",muu:"#1f6f6a"};
 const EMO_EXPR={vui:"vui",buon:"buon",gian:"gian",dau:"khoc",so:"dau",lo:"buon",ghen:"gian"};/* hook for kitFaceExpr (review/appearance) */
 /* default reaction of an event: [emotion, strength]; null = no feeling */
 const EMO_EV={selfUp:["vui",60],selfDown:["buon",55],rivalUp:["ghen",30],friendUp:["vui",20],foeDown:["vui",20],gift:["vui",25],slight:["gian",35],
@@ -98,7 +99,7 @@ function emoWeek(){if(!emoOn())return;const W=emoW();S.emoSnap=S.emoSnap||{};con
   if(n.conf&&!o.conf)emoEv(p,"punished","bị cấm túc");
   if(n.kidsAll>o.kidsAll){emoEv(p,"kidBorn","mẹ tròn con vuông");for(const x of others(p))if(aff(x,p)<25)emoEv(x,"otherKid",`${nm} sinh hạ hoàng tự`,emoKey(p))}
   if(n.kids<o.kids-(n.kidsAll-o.kidsAll)||(n.kids<o.kids&&n.kidsAll===o.kidsAll))emoEv(p,"kidDie","mất con");
-  if(n.n>o.n&&!(n.kidsAll>o.kidsAll)){emoEv(p,"night","được Hoàng thượng lật thẻ");for(const x of others(p))if(aff(x,p)<10&&emoTraits(x).includes("Ghen tuông"))emoEv(x,"rivalUp",`${nm} được thị tẩm`,emoKey(p),.6)}
+  if(n.n>o.n&&!(n.kidsAll>o.kidsAll)){emoEv(p,"night","được Hoàng thượng lật thẻ");if(S.emp&&((p===S?S.lastNightS:p.lastNightS)||0)>=6)S.emp.emoFond={k:emoKey(p),w:W};for(const x of others(p))if(aff(x,p)<10&&emoTraits(x).includes("Ghen tuông"))emoEv(x,"rivalUp",`${nm} được thị tẩm`,emoKey(p),.6)}
   if(n.sung<=o.sung-6)emoEv(p,"neglect","Hoàng thượng lạnh nhạt");
   if(n.suc<30&&o.suc>=30)emoEv(p,"ill","sức khỏe sa sút")}
  /* servants: by their mistress and by their own Lòng */
@@ -119,16 +120,30 @@ function emoWeek(){if(!emoOn())return;const W=emoW();S.emoSnap=S.emoSnap||{};con
 (function(){const o0=oanAdd;oanAdd=function(x,y,n){const r=o0.apply(this,arguments);try{if(emoOn()&&n>=5&&x&&y&&x!==y)emoEv(x,"slight",`bị ${emoName(y)} làm nhục`,emoKey(y),cl(n/10,.6,1.6))}catch(e){}return r}})();
 (function(){const a0=affAdd;affAdd=function(x,y,n){const r=a0.apply(this,arguments);try{if(emoOn()&&n>=6&&x&&y&&x!==y&&x!==S.emp)emoEv(x,"gift",`được ${emoName(y)} đối đãi tử tế`,null,cl(n/10,.6,1.6))}catch(e){}return r}})();
 (function(){const k0=kidDie;kidDie=function(k,why,mine){const r=k0.apply(this,arguments);try{if(emoOn()){let mo=mine?S:null;if(!mo)for(const v of rivals||[])if((v.kids||[]).includes(k))mo=v;if(mo)emoEv(mo,"kidDie",`mất ${k.name||"con"}`)}}catch(e){}return r}})();
-(function(){const p0=punish;punish=function(p,why,sev){const r=p0.apply(this,arguments);try{const q=typeof p==="string"?S:p;if(emoOn()&&q)emoEv(q,"punished",`bị phạt vì ${typeof p==="string"?p:why}`)}catch(e){}return r}})();
+(function(){const p0=punish;punish=function(p,why,sev){const r=p0.apply(this,arguments);try{const q=typeof p==="string"?S:p;if(emoOn()&&q)emoEv(q,"punished",`bị phạt vì ${typeof p==="string"?p:why}`);if(emoOn()&&q&&S.emp)emoSet(S.emp,"gian",35,`phật ý ${emoName(q)}`,emoKey(q))}catch(e){}return r}})();
 (function(){const e0=endTurn;endTurn=function(){const r=e0.apply(this,arguments);try{if(S&&!S.dead)emoWeek()}catch(e){console.error(e)}return r}})();
 /* ---------- effects ---------- */
-function emoMul(p,act){const e=emoGet(p);if(e.k==="binh")return 1;const T=EMO_W[e.k];if(!T)return 1;let m=T[act];if(m==null)m=EMO_HARM.includes(act)?T.harm:EMO_KIND.includes(act)?T.kind:null;if(m==null)return 1;return 1+(m-1)*e.v/100}
+/* Đức + personality brake (owner 11/14): anger/jealousy only raise the WISH to harm; how much of it becomes harm depends on Đức and traits.
+   f = share of the emotional harm boost that turns into harm acts. High Đức: 0 (anger turns into withdrawing / confronting words), mid: ½, low: 1,
+   low Đức + Hiểm độc / Tham vọng: 1.5. A severe grudge (oán ≥ 60 toward the target) keeps at least ½ even at high Đức. Same rule for everyone. */
+const EMO_BRAKE={hi:70,mid:40,fHi:0,fMid:.5,fLo:1,fBad:1.5,soft:{"Hiền lành":15,"Nhu mì":8,"Trọng nghĩa":8,"Hiếu thảo":5,"Hiểm độc":-10,"Tham vọng":-5,"Thù dai":-5}};
+function emoDuc(p){if(!p)return 50;if(p===S)return S.duc||0;let d=p.duc;if(d==null)d=p.tr==="trung"?60:p.tr==="tham"?30:45;for(const t of emoTraits(p))d+=EMO_BRAKE.soft[t]||0;return d}
+function emoBrake(p,t){const d=emoDuc(p),B=EMO_BRAKE;let f=d>=B.hi?B.fHi:d>=B.mid?B.fMid:B.fLo;const T=emoTraits(p);if(d<B.mid&&(T.includes("Hiểm độc")||T.includes("Tham vọng")))f=B.fBad;
+ if(t&&f<.5){try{if(oan(p,t)>=60)f=.5}catch(e){}}return f}
+function emoMul(p,act){const e=emoGet(p);if(e.k==="binh")return 1;const T=EMO_W[e.k];if(!T)return 1;const harm=EMO_HARM.includes(act);let m=T[act];if(m==null)m=harm?T.harm:EMO_KIND.includes(act)?T.kind:null;if(m==null)return 1;
+ if(harm&&m>1){const f=emoBrake(p);m=f>0?1+(m-1)*f:.9}
+ if(act==="idle"&&(e.k==="gian"||e.k==="ghen")&&emoBrake(p)===0)m=1.4;/* high Đức: anger makes her withdraw instead */
+ return 1+(m-1)*e.v/100}
 (function(){const w0=persW;persW=function(p,act){const w=w0.apply(this,arguments);try{if(emoOn()&&p&&p!==S)return w*emoMul(p,act)}catch(e){}return w}})();
 /* anger and jealousy aimed at someone raise the danger toward that person (capped: +12) */
-(function(){const d0=danger;danger=function(v,t){const d=d0.apply(this,arguments);try{if(emoOn()&&v&&t){const e=emoGet(v);if((e.k==="gian"||e.k==="ghen"||e.k==="muu")&&e.t!=null&&e.t===emoKey(t))return d+Math.min(12,Math.round(e.v/6))}}catch(e){}return d}})();
+(function(){const d0=danger;danger=function(v,t){const d=d0.apply(this,arguments);try{if(emoOn()&&v&&t){const e=emoGet(v);if((e.k==="gian"||e.k==="ghen"||e.k==="muu")&&e.t!=null&&e.t===emoKey(t)){const f=emoBrake(v,t);if(f>0)return d+Math.min(12,Math.round(e.v/6*f))}}}catch(e){}return d}})();
 (function(){const o0=odA;odA=function(a,b){const r=o0.apply(this,arguments);try{if(emoOn()&&a){const e=emoGet(a);const m=Math.round((EMO_OD[e.k]||0)*e.v/100);if(m){EMO_N.odds++;return cl(r+m,5,95)}}}catch(e){}return r}})();
 (function(){const t0=odT;odT=function(a,b){const r=t0.apply(this,arguments);try{if(emoOn()&&a){const e=emoGet(a);const m=Math.round((EMO_OD[e.k]||0)*e.v/100);if(m)return cl(r+m,5,95)}}catch(e){}return r}})();
-(function(){const n0=nightCh;nightCh=function(p){const c=n0.apply(this,arguments);try{p=p||S;if(emoOn()&&c){const e=emoGet(p);let m=EMO_NIGHT[e.k]||1;if((e.k==="buon"||e.k==="dau")&&(S.emp.traits||[]).includes("nhantu"))m=1.05;if(m!==1)return Math.max(1,Math.round(c*(1+(m-1)*e.v/100)))}}catch(e){}return c}})();
+(function(){const n0=nightCh;nightCh=function(p){const c=n0.apply(this,arguments);try{p=p||S;if(emoOn()&&c){const e=emoGet(p);let m=EMO_NIGHT[e.k]||1;if((e.k==="buon"||e.k==="dau")&&(S.emp.traits||[]).includes("nhantu"))m=1.05;let x=1+(m-1)*e.v/100;
+  /* his own mood: who he is angry with / fond of, and in grief or worry he seeks the gentle ones */
+  const E=S.emp.emo,k=emoKey(p);if(E&&E.v>=15){if(E.k==="gian"&&E.t===k)x*=1-.5*E.v/100;else if(["buon","dau","lo"].includes(E.k)&&emoTraits(p).some(t=>t==="Hiền lành"||t==="Nhu mì"))x*=1.15}
+  const fd=S.emp.emoFond;if(fd&&fd.k===k&&emoW()-fd.w<=3)x*=1.15;
+  if(x!==1)return Math.max(1,Math.round(c*x))}}catch(e){}return c}})();
 function emoMonth(){if(!emoOn())return;for(const p of emoPeople())for(const s of p.staff||[]){const e=emoGet(s);const d=Math.round((EMO_LOY[e.k]||0)*e.v/60);if(d)s.loyal=cl((s.loyal||0)+d,0,100)}}
 (function(){const m0=monthTick;monthTick=function(){const r=m0.apply(this,arguments);try{emoMonth()}catch(e){}return r}})();
 /* motive gate (j95): feelings are a recorded motive. Wrapped lazily so it works whatever the load order. */
@@ -136,7 +151,7 @@ function emoGateWrap(){if(window.__emoGate||typeof motiveOK!=="function")return;
  motiveOK=function(a,t,kind){const g=g0.apply(this,arguments);try{if(!emoOn()||!a||!t||a===S||a===t||typeof a!=="object")return g;const e=emoGet(a);if(e.k==="binh")return g;
   const at=e.t!=null&&e.t===emoKey(t);const H=typeof H95!=="undefined"&&H95.has(kind),F=typeof F95!=="undefined"&&F95.has(kind);
   if(H&&at&&(e.k==="gian"||e.k==="ghen"||e.k==="muu")){const w=`vì đang ${e.k==="gian"?"giận":e.k==="ghen"?"ghen với":"toan tính hạ"} ${emoName(t)} (${e.why})`;
-   if(!g.ok&&/động cơ yếu/.test(g.why||"")&&e.v>=50){EMO_N.motive++;return{ok:true,why:w,emo:1}}if(g.ok){EMO_N.motive++;return Object.assign({},g,{why:(g.why?g.why+", ":"")+w})}}
+   if(!g.ok&&/động cơ yếu/.test(g.why||"")&&e.v>=50&&emoBrake(a,t)>=1){EMO_N.motive++;return{ok:true,why:w,emo:1}}if(g.ok){EMO_N.motive++;return Object.assign({},g,{why:(g.why?g.why+", ":"")+w})}}
   if(H&&g.ok&&(e.k==="so"||e.k==="dau")&&e.v>=60){EMO_N.motiveGate++;return{ok:false,why:`đang ${EMO[e.k].toLowerCase()} (${e.why}), không còn lòng dạ nào`}}
   if(F&&!g.ok&&e.k==="vui"&&e.v>=60&&aff(a,t)>-30){EMO_N.motive++;return{ok:true,why:`vì đang vui (${e.why})`,emo:1}}
   if(F&&g.ok&&(e.k==="buon"||e.k==="dau")&&e.v>=60&&roll(50)){EMO_N.motiveGate++;return{ok:false,why:`đang ${EMO[e.k].toLowerCase()}, muốn ở một mình`}}}catch(x){}return g}}
@@ -159,12 +174,14 @@ function emoBadge(p){const m=window.kitEmotion(p);if(!m)return"";const t=m.known
 (function(){const p0=pcPort;pcPort=function(f){let h=p0.apply(this,arguments);try{if(!emoOn()||!f||!f.__kp||/class="kemo/.test(h))return h;const b=emoBadge(f.__kp);if(!b)return h;
   const i=h.indexOf('<span class="kin">');if(i<0)return h;const j=h.indexOf('<img class="kfr"',i);if(j<0)return h;
   let depth=0,end=-1;const re=/<\/?span\b[^>]*>/g;re.lastIndex=i;let mm;while((mm=re.exec(h))){if(mm[0][1]==="/"){depth--;if(depth===0){end=mm.index;break}}else depth++}
-  if(end<0)return h;return h.slice(0,end)+b+h.slice(end)}catch(e){return h}}})();
+  if(end<0)return h;let o=h.slice(0,end)+b+h.slice(end);const m=window.kitEmotion(f.__kp);
+  if(m&&m.known&&m.k!=="binh"&&EMO_COL[m.k])o=o.slice(0,i)+`<span class="kin kemo-r" style="--emoc:${EMO_COL[m.k]}">`+o.slice(i+'<span class="kin">'.length);return o}catch(e){return h}}})();
 (function(){const st=document.createElement("style");st.id="kemo-css";st.textContent=`
 .kin>img.kemo,.pcp.kit .kin>img.kemo:not(.kfr):not(.kgem):not(.kemb):not(.kpor),span.md.kfc .kin>img.kemo{position:absolute!important;inset:auto!important;left:8.5%!important;top:17.5%!important;right:auto!important;bottom:auto!important;width:22%!important;height:auto!important;aspect-ratio:1;max-width:none!important;max-height:none!important;object-fit:contain!important;border-radius:50%!important;clip-path:none!important;z-index:4!important;pointer-events:auto;filter:drop-shadow(0 1px 1.5px #000a);animation:none!important;transform:none!important;box-shadow:none!important;opacity:1!important}
 span.md.kfc.sm .kin>img.kemo{width:30%!important;left:5%!important;top:16%!important}
 span.md.kfc.xs .kin>img.kemo{width:38%!important;left:2%!important;top:14%!important}
 .kin>img.kemo.kemo-an{opacity:.85!important}
+.kin.kemo-r>img.kfr,span.md.kfc .kin.kemo-r>img.kfr{filter:drop-shadow(0 0 1.5px var(--emoc)) drop-shadow(0 0 4px var(--emoc)) drop-shadow(0 0 7px var(--emoc))!important}
 @media (prefers-reduced-motion:no-preference){.kin>img.kemo.kemo-gian,.kin>img.kemo.kemo-dau{animation:kemoPulse 2.4s ease-in-out infinite!important}}
 @keyframes kemoPulse{0%,100%{filter:drop-shadow(0 1px 1.5px #000a)}50%{filter:drop-shadow(0 0 4px #ffcf8a) drop-shadow(0 1px 1.5px #000a)}}
 `;document.head.appendChild(st)})();
