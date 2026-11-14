@@ -322,10 +322,11 @@ html body .dlg.kpanel>.mr{position:sticky;bottom:0;z-index:4;background:linear-g
 
 /* ---------- 10. NAME TAGS NEVER OVERLAP (KIT 31.12): name tags under figures stay one line; when two tags would touch, the later one
    steps one line down (or up when there is no room under it). Runs after every stage render and on resize. ---------- */
-function k3Tags(){try{const st=$$("stage");if(!st)return;const SR=st.getBoundingClientRect();
+function k3Tags(){try{const st=document.getElementById("stage");if(!st)return;const SR=st.getBoundingClientRect();
  const G=[...st.querySelectorAll(".tok .tag")].filter(g=>{const t=g.closest(".tok");return t&&getComputedStyle(t).visibility!=="hidden"&&getComputedStyle(g).display!=="none"&&g.getBoundingClientRect().width>0})
-  .map(g=>getComputedStyle(g).position==="static"?g.closest(".tok"):g);/* a static tag moves with its own holder (#j59metag) */
- G.forEach(g=>g.style.translate="");const R=G.map(g=>({g,r:g.getBoundingClientRect()})).sort((a,b)=>a.r.left-b.r.left);const placed=[];
+  .map(g=>({g,m:getComputedStyle(g).position==="static"?g.closest(".tok"):g}));/* a static tag moves with its own holder (#j59metag) */
+ G.forEach(o=>o.m.style.translate="");/* measure the TEXT itself (the tag box can be narrower than its one-line text) */
+ const R=G.map(o=>{const rg=document.createRange();rg.selectNodeContents(o.g);return {g:o.m,r:rg.getBoundingClientRect()}}).sort((a,b)=>a.r.left-b.r.left);const placed=[];
  R.forEach(o=>{const h=o.r.height+2;let dy=0;const hit=d=>placed.some(p=>o.r.left<p.r.right+4&&o.r.right>p.r.left-4&&o.r.top+d<p.r.bottom+p.dy&&o.r.bottom+d>p.r.top+p.dy);
   for(const d of [0,h,-h,2*h,-2*h]){if(o.r.bottom+d>SR.bottom-2||o.r.top+d<SR.top+2)continue;if(!hit(d)){dy=d;break}}
   if(dy)o.g.style.translate=`0 ${dy}px`;placed.push({r:o.r,dy})})}catch(e){}}
@@ -368,8 +369,8 @@ small.kblf{display:block;margin-top:3px;font-size:.72rem;color:var(--dim,#7a6a58
 
 /* ---------- 12. HER AGE in the top bar (owner 11/14, KIT 31.1): "N tuổi" as a small chip right after her rank chip, every device and road;
    shown only here (one fact, one place). ---------- */
-(function(){if(typeof renderHUD!=="function")return;const r0=renderHUD;renderHUD=function(){const r=r0.apply(this,arguments);try{const m=$("me-r");
- if(m&&S&&typeof S.age==="number"){let a=$("me-a");if(!a){a=document.createElement("span");a.id="me-a";a.className="k3age"}let w=m.parentNode;if(!w.classList.contains("k3rr")){w=document.createElement("span");w.className="k3rr";m.before(w);w.appendChild(m)}if(m.nextSibling!==a)m.after(a);const t=`${Math.floor(S.age)} tuổi`;if(a.textContent!==t)a.textContent=t}}catch(e){}return r}
+(function(){if(typeof renderHUD!=="function")return;const r0=renderHUD;renderHUD=function(){const r=r0.apply(this,arguments);try{const m=document.getElementById("me-r");
+ if(m&&S&&typeof S.age==="number"){let a=document.getElementById("me-a");if(!a){a=document.createElement("span");a.id="me-a";a.className="k3age"}let w=m.parentNode;if(!w.classList.contains("k3rr")){w=document.createElement("span");w.className="k3rr";m.before(w);w.appendChild(m)}if(m.nextSibling!==a)m.after(a);const t=`${Math.floor(S.age)} tuổi`;if(a.textContent!==t)a.textContent=t}}catch(e){}return r}
  const st=document.createElement("style");st.id="k3-age";st.textContent=`
 #me .k3rr{display:flex;align-items:center;flex-wrap:nowrap;gap:0;min-width:0}
 #me-a.k3age{display:inline-flex;flex:0 0 auto;align-items:center;vertical-align:middle;margin-left:5px;padding:0 7px;border:1px solid var(--line);border-radius:999px;
