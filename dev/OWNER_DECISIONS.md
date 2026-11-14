@@ -69,3 +69,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (19:05Z) Owner: iPad top bar has empty middle → move info up. Decided: Tư chất (and buổi/khắc/weather/quẻ if it fits) in the top bar on ALL devices (one component); stage keeps only place name + court chips + figures.
 - (19:10Z) Owner: Oán next to Ghen in person info. Reminder: everything via one shared kit component; fix once = fixed everywhere. → kit owner keeps a checklist of all today's owner points in KIT.md.
 - (19:20Z) Owner: iPad top bar middle split into 2 columns: (1) buổi/khắc/weather/quẻ, (2) Tư chất. Removed from stage.
+- (19:25Z) Owner rejected the portrait room pilot (phi-tan-cung -p): 'xấu quá, vẽ lại'. Redo master faithful to the approved landscape room (palette, furniture, soft painterly near-3D), muted natural colours, depth, modest rug; seasons via outside view/flowers/light only; show master before variants.
