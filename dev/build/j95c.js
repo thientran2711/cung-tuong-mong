@@ -9,7 +9,7 @@
    4) The stage is reconciled with the record whenever it is rebuilt (reload, coldVisit, homePeople, goTo).
    5) Loading a save never creates servants; servant names are unique (no two "Lão Quế Tử").
    ===================================================================================================================== */
-const J95C={stat:{frameGate:0,framePass:0,poisonGate:0,repal:0,next:0,dedupe:0,loadNoFill:0},errs:[],raG:null,loading:0,lastV:null,sig:""};
+const J95C={later:[],stat:{frameGate:0,framePass:0,poisonGate:0,repal:0,next:0,dedupe:0,loadNoFill:0},errs:[],raG:null,loading:0,lastV:null,sig:""};
 function j95cErr(w,e){try{if(J95C.errs.length<20)J95C.errs.push(w+": "+(e&&e.message||e))}catch(x){}}
 function j95cCur(){return j95on()&&S&&!S.dead&&S.roster&&S.roster.key===j95key()}
 function j95cSig(){try{return rivals.map(v=>v.alive?(v.out?"o":palaceOf(v)):"x").join(",")+"|"+(S.out?1:0)}catch(e){return""}}
@@ -48,7 +48,7 @@ function j95cDedupe(){let n=0;try{const seen=new Set([S&&S.maid&&S.maid.name].co
     if(S.visit&&S.visit!==J95C.lastV&&S.visit.k===S.place){J95C.lastV=S.visit;j95stage(S.roster,j95kh())}}}catch(e){j95cErr("render",e)}return r0.apply(this,arguments)};
 
  /* she stands where her stage is: a failed re-entry at the new buổi leaves her home with the old stage; in lãnh cung she is in lãnh cung */
- for(const n of ["nextBuoi","endTurn"]){if(typeof window[n]!=="function")continue;const o=window[n];window[n]=function(){const r=o.apply(this,arguments);try{if(j95cCur()&&j95cVisitFix())j95sync()}catch(e){j95cErr(n,e)}return r}}
+ for(const n of ["nextBuoi","endTurn"]){if(typeof window[n]!=="function")continue;const o=window[n];window[n]=function(){const r=o.apply(this,arguments);try{if(J95C.later.length){const L=J95C.later;J95C.later=[];for(const w of L)j95cStrip(w)}if(j95cCur()&&j95cVisitFix())j95sync()}catch(e){j95cErr(n,e)}return r}}
  /* ---- 5. loading creates nobody; names unique ---- */
  if(typeof staffInit==="function"){const si0=staffInit;staffInit=function(){if(!J95C.loading)return si0.apply(this,arguments);
    try{sidN=Math.max(sidN,...allServ().map(s=>s.sid),0);for(const p of consorts()){if(!p.staff){p.staff=[];fillStaff(p,true)}else J95C.stat.loadNoFill++}}catch(e){j95cErr("staffInit",e)}}}
@@ -66,9 +66,14 @@ function j95cCap(){const live=p=>p===S?!!S&&!S.out&&!S.dead:!!p&&p.alive&&!p.out
  for(const h of [S].concat(rivals)){if(!live(h))continue;const k=key(h);const L=rivals.filter(y=>y!==h&&live(y)&&y.resHead===k&&!(rkOf(y)>=3&&y.pal!=null));const me=S!==h&&live(S)&&S.resHead===k&&!(rkOf(S)>=3&&S.pal!=null)?1:0;
   const over=L.length+me-3;if(over>0)for(const y of L.slice(-over)){y.resHead=null;n++}}
  if(n)J95C.stat.cap=(J95C.stat.cap||0)+n;return n}
+/* a turn-of-buổi act placed at the start of the buổi, then overtaken before the news was read (she is confined / banished right
+   after): the news line is withdrawn so nothing on screen says she is where the record no longer has her */
+function j95cUnsay(id,key,kh){try{for(let i=J95B.bind.length-1;i>=0;i--){const b=J95B.bind[i];if(!b.next||b.id!==id||b.key!==key||b.kh!==kh)continue;J95B.bind.splice(i,1);j95cStrip(b.why)}}catch(e){j95cErr("unsay",e)}}
+function j95cStrip(why){const w=String(why||"").slice(0,60);if(!w)return 0;let n=0;
+ for(const m of Q){if(!m||typeof m.h!=="string")continue;const j=m.h.indexOf(w);if(j<0)continue;const re=/[.!?…](\s|<|$)/g;re.lastIndex=j+w.length-1;const mm=re.exec(m.h);const e=mm?mm.index+1:m.h.length;m.h=m.h.slice(0,j)+m.h.slice(e).replace(/^\s+/,"");n++;J95C.stat.unsay=(J95C.stat.unsay||0)+1}return n}
 function j95cNext(){const P=J95B.next;if(!P||!P.length)return;J95B.next=[];if(!j95cCur())return;const R=S.roster;const used={};let n=0;
- for(const x of P){const e=R.P[x.id];if(!e)continue;if(x.id[0]==="v"){const v=RV(+x.id.slice(1));if(!v||!v.alive||v.out||v.confined)continue}
-  let kh=Math.max(j95kh(),used[x.id]||0);while(kh<4&&(e[kh][1]==="tryst"||e[kh][1]==="meet"))kh++;if(kh>=4)continue;used[x.id]=kh+1;
+ for(const x of P){const e=R.P[x.id];if(!e){J95C.later.push(x.why);continue}if(x.id[0]==="v"){const v=RV(+x.id.slice(1));if(!v||!v.alive||v.out||v.confined){J95C.later.push(x.why);continue}}
+  let kh=used[x.id]||0;/* the first khắc of the coming buổi (endTurn resets the khắc count only after planning) */while(kh<4&&(e[kh][1]==="tryst"||e[kh][1]==="meet"))kh++;if(kh>=4){J95C.later.push(x.why);continue}used[x.id]=kh+1;
   e[kh]=[x.k,x.act||"here",x.k==="home"?"me":null,x.why];J95B.bind.push({id:x.id,k:x.k,kh,key:R.key,wk:R.wk,b:R.b,past:1,next:1,src:x.src,why:x.why});if(J95B.bind.length>400)J95B.bind.splice(0,100);n++}
  if(n){J95C.stat.next+=n;j95sync()}}
 window.__j95c=()=>({stat:J95C.stat,errs:J95C.errs,j95fix:J95.stat.fix||0});
