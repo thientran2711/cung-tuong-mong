@@ -46,6 +46,7 @@
 - B_b16: c25 m0–m4, c26 m0–m2 (128 lineups total). Clean: dark 48yo hair, no moles, no huadian.
 - B_b17: c26 m3–m4, c27 m0–m4, c28 m0 (136 lineups total). Clean.
 - B_b18: c28 m1–m4, c29 m0–m3 (144 lineups total). Clean.
+- B_b19: c29 m4, c30 m0–m4, c31 m0–m1 (152 lineups total). Clean.
 
 ## NEXT (exact)
 - (B_b16 done) c26 m3 ... c32 m4, in order (8 per batch → sheets B_b16.jpg .. B_b20.jpg). Same per-batch steps as below.
