@@ -56,6 +56,7 @@ function scoreAct(a,N,cost){
   if(BAD.test(a.n))return -1e9;
   if(S.suc+((a.c&&a.c.suc)||0)<20&&a.n!=="Nghỉ ngơi dưỡng sức")return -1e9;
   if(a.c&&a.c.duc<0&&S.duc<50)return -1e9;
+  if(a.j67&&!window.__noStory)return 6; /* a sensible player opens the next Mệnh truyện beat when it is ready */
   const lb=(typeof lotB==="function"?lotB(S,a.dom):0);const o=a.o==null?1:cl((a.o==null?100:a.o)+lb,5,100)/100;
   let v=o*valW(a.w,N)+(1-o)*valW(a.l,N)-costW(a.c);
   if(a.x){if(/chứng cứ/.test(a.x))v+=1.5;if(/Hoàng thượng thương/.test(a.x))v+=1;if(/dễ có thai/.test(a.x))v+=(S.preg?0:1.5);if(/thị tẩm/.test(a.x))v+=3*o;if(/nguy cơ sảy thai/.test(a.x))v+=3}
