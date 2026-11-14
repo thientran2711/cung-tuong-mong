@@ -14,6 +14,7 @@ def outfit(t,pal,mot):
     main=pal.split(" and ")[0]; acc=pal.split(" and ")[1] if " and " in pal else "gold"
     neg="" if any(g in pal for g in GREEN) else ", NOT green"
     col=f"her signature colour family {pal} stays the MAIN robe colour ({main}{neg}); the robe itself is clearly {main} silk, gold only as embroidery accents, NOT a cream, beige or all-gold robe"
+    if any(w in main for w in ("cream","ivory","beige")): col=f"her signature colour family {pal} stays the MAIN robe colour ({main}{neg}); the robe itself is clearly {main} silk with rich gold embroidery accents, NOT an all-gold robe"  # C-B: no contradiction for cream palettes
     if pal in ACC: col=f"her signature colour family {pal}: {main} is the MAIN robe colour (the robe is clearly {main}, NOT a green robe; {ACC[pal]} only as a small accent), gold only as embroidery accents, NOT a cream or all-gold robe"
     if t>=6:  # art4: strong colour rule (t6 first tries washed pale palettes into cream/gold; this wording fixed c17 c20 c28 c30 c31 c32)
         m=main if not any(w in main for w in ("ivory","white")) else "luminous cool "+main+"-white"

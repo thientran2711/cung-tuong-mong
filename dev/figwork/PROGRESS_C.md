@@ -56,3 +56,4 @@ Mẻ B4: t2 m51–m52 (t2 m27–m52 XONG) + t3 m27–m32 (hoa điền nấc 3). 
 Mẻ B5: t3 m33–m40. 8 lineup, tín dụng 8×273 = 2184.
 Mẻ B6: t3 m41–m48. 8 lineup, tín dụng 8×273 = 2184.
 Mẻ B7: t3 m49–m52 (t3 m27–m52 XONG) + t4 m27–m30 (hoa điền nấc 4 viền vàng). 8 lineup, tín dụng 8×273 = 2184.
+Mẻ B8: t4 m31–m38. 8 lineup, tín dụng 8×273 = 2184.
