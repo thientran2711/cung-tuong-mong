@@ -18,6 +18,19 @@ Lịch sử trước 11/14 sáng: xem PROGRESS_C1.md (m01–m26) và PROGRESS_C2
   và tuổi 48 hay chắp tay -> trái luật "mỗi tuổi một kiểu tay + một đạo cụ khác". Quyết định: VẼ LẠI cả 52 lineup t1 và t2 bằng hands.py.
   Bỏ 6 bản t2 m01–m06 của C1 (dáng cũ, chưa xử lý) và 2 bản t1 m25/m26 tĩnh của C1 (cùng lỗi tay).
 
+## Trạng thái hiện tại / việc tiếp (đọc trước khi làm tiếp)
+- t1: XONG 52/52 (vẽ lại, tay linh động). t2: m01–m14 XONG (bản mới). t2 m27–m33 trên nhánh vẫn là bản CŨ của C2 (đạo cụ lặp) -> sẽ bị đè khi vẽ t2 m27–m33.
+- Còn lại: t2 m15–m52 (38), t3–t8 (6×52 = 312), lãnh cung (52) ≈ 402 lineup ≈ 110k tín dụng.
+- Cách làm 1 mẻ 8 lineup (scratchpad cw/ = bản sao dev/figwork/maidC/ + cf/cutcheck,porcrop,fixalpha,rematte + haar/yunet.onnx):
+  1) `bash mid.sh C-mNN-tK ...` in style ref, ref danh tính và phần giữa prompt; phần đầu/đuôi cố định = PRE.txt/POST.txt (m13, m26 có câu bỏ nốt ruồi).
+     Có thể chỉnh tay một đạo cụ nếu hai tuổi trùng loại (ghi chú trong gens.txt).
+  2) images_generate gpt-2-6, 2:1, 4k, extraSettings quality high, references [style STY, image MREF], folder ba4aecfe…; ghi `jid gen hands` vào gens.txt.
+  3) `python3 rv.py rvN.jpg GEN...` -> xem tấm duyệt; xấu thì vẽ lại.
+  4) images_remove_background từng gen, creations_wait cho xong (URL phải nằm trong transcript để urls.py bắt), rồi
+     `bash batch.sh "jids" "bgids" "dòng tiến độ"` (addbg -> pproc -> cutcheck/fixalpha -> porcrop 384x506 -> sheet -> PROGRESS -> pub.sh). batch.sh tự dừng nếu thiếu URL.
+  pub.sh luôn fetch + đặt lại theo origin/review/maid-art-c trước khi chép file và gộp bản ghi (merge.py chỉ thay bản ghi cùng "file").
+- rematte.py chưa cần: cutcheck sau fixalpha đều < 1.
+
 ## Mẻ (tín dụng)
 Mẻ 1: t1 vẽ lại tay linh động m01–m09 + m30 (10 lineup). Tín dụng 10×273 = 2730.
 Mẻ 2: t1 vẽ lại tay linh động m10–m17 (8 lineup). Tín dụng 8×273 = 2184.
@@ -26,3 +39,4 @@ Mẻ 4: t1 vẽ lại tay linh động m26–m29, m31–m34 (8 lineup). Tín d�
 Mẻ 5: t1 vẽ lại tay linh động m35–m42 (8 lineup). Tín dụng 8×273 = 2184.
 Mẻ 6: t1 vẽ lại tay linh động m43–m50 (8 lineup). Tín dụng 8×273 = 2184.
 Mẻ 7: t1 m51–m52 → t1 XONG cả 52 người (tay linh động); t2 m01–m06 (hoa điền nấc 2). 8 lineup, tín dụng 8×273 = 2184.
+Mẻ 8: t2 m07–m14 (8 lineup). Tín dụng 8×273 = 2184. Cộng dồn phiên này: 66 lineup ≈ 18.0k (gồm 2 lineup thử).
