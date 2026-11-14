@@ -61,10 +61,9 @@ function succOpen(h){const k=h.k;S.succ={on:1,st:0,son:k.name,dm:h.v?1:0,y0:S.ye
 PEND.succ0=function(){const E=S.succ,son=succSon();if(!E||!son)return null;const U=succSup();const sn=succSN(son);
  const pb=succOdds("b",son,U),pc=succOdds("c",son,U);const nb=succNeeds("b",son,U),nc=succNeeds("c",son,U);
  const hs=U.houses.length?U.houses.map(x=>`nhà ${x.n} (thế lực ${x.pow})`).join(", "):"chưa nhà quyền thần nào";
- const t=`<p>${E.era?`Hoàng thượng niên hiệu ${E.era}`:"Hoàng thượng"} băng hà${E.age0?`, thọ ${E.age0} tuổi`:""}. Linh cữu còn quàn ở Càn Thanh cung; di chiếu truyền ngôi cho ${son.name}, ${son.age} tuổi, ${E.dm?"ngươi là đích mẫu":"con ngươi"}.</p>
-<p>Ngọc tỷ đặt trên án. Triều thần quỳ ngoài điện, chờ ý ngươi.</p>
-<p>Đứng sau ngươi: ${hs}.</p>
-<p>Binh quyền: ${U.mil?[U.milArmy?"nhà Đại tướng quân":"",U.milGuard?"cấm quân":""].filter(Boolean).join(", ")+" theo ngươi":"chưa có"}. Phe trong hậu cung: ${U.allies} người.</p>
+ const t=`<p>${E.era?`Hoàng thượng niên hiệu ${E.era}`:"Hoàng thượng"} băng hà${E.age0?`, thọ ${E.age0} tuổi`:""}; di chiếu truyền ngôi cho ${son.name}, ${son.age} tuổi, ${E.dm?"ngươi là đích mẫu":"con ngươi"}.</p>
+<p>Ngọc tỷ đặt trên án, triều thần quỳ ngoài điện chờ ý ngươi.</p>
+<p>Đứng sau ngươi: ${hs}; binh quyền: ${U.mil?[U.milArmy?"nhà Đại tướng quân":"",U.milGuard?"cấm quân":""].filter(Boolean).join(", ")+" theo ngươi":"chưa có"}; phe trong hậu cung: ${U.allies} người.</p>
 <p>${S.thDead?"Thái hậu đã băng hà.":`Thái hậu (sắp thành Thái hoàng thái hậu) với ngươi: ${S.th||0}.`} ${U.vg?(U.vgAlly?`${U.vg.name} đứng về phía ngươi.`:`${U.vg.name} đang dòm ngó ngôi báu.`):""}</p>`;
  const o=[
   {n:`Để ${sn} lên ngôi, làm ${E.dm?"Mẫu hậu Hoàng thái hậu":"Hoàng thái hậu"}`,fx:{},x:`Chắc chắn · thành: ${E.dm?"Mẫu hậu Hoàng thái hậu":"Hoàng thái hậu"}, an hưởng ở Từ Ninh cung`,need:[],go:()=>succBegin("a")},
@@ -84,7 +83,7 @@ function succBegin(p,failB){const E=S.succ;const U=succSup();E.p=p;E.st=1;E.ch=0
  E.tam+=U.allies>=3?1:0;E.an+=U.vg&&!U.vgAlly?1:0;E.an-=U.mil?1:0;
  if(p==="c"){E.nh=pick(SUCC_ERA);if(S.rank<7)S.rank=7}
  const en=succEnemy();E.foe=en?en.id:null;succNext()}
-function succNext(){const E=S.succ;Q=Q.filter(m=>!/^succ/.test(m.pid||""));const d=mkP("succC",{});if(d)Q.unshift({t:d.title,h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp,cls:d.cls});try{save()}catch(e){}showModal();render()}
+function succNext(){const E=S.succ;Q=Q.filter(m=>!/^succ/.test(m.pid||""));const d=mkP("succC",{});if(d)Q.unshift({t:d.title,h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp,cls:d.cls});try{save()}catch(e){}}/* chooseM shows and renders after go() */
 function succAge(){const son=succSon();S.age=(S.age||30)+SUCC.yrs;S.year=(S.year||1)+SUCC.yrs;if(son)son.age=(son.age||0)+SUCC.yrs}
 function succRareOK(){const E=S.succ;if(E.p==="a")return (S.duc||0)>=60&&E.hoa>=3&&E.an<=1;if(E.p==="b")return E.hoa>=3&&E.tam>=3&&(S.duc||0)>=50&&(S.tamco||0)>=55;return E.tam>=4&&E.an<=2&&(S.danh||0)>=80&&(S.duc||0)>=50}
 function succPick(c){const E=S.succ;if(!E||!c)return;if(c.c)apply(c.c);if(c.s)apply(c.s);for(const k of ["q","an","tam","hoa"])if(c.e&&c.e[k])E[k]=(E[k]||0)+c.e[k];
@@ -189,5 +188,5 @@ window.succDebug=function(p){if(!S)return"no life";Q.length=0;let son=mySons()[0
  if(p==="b")son.age=Math.min(son.age,10);setHeir(son,null);
  if(p==="b"||p==="c"){S.danh=p==="c"?85:62;S.tamco=p==="c"?70:50;S.bac=Math.max(S.bac,500);S.duc=Math.max(S.duc,55);S.rank=Math.max(S.rank,p==="c"?5:3);S.th=70;
   try{const T=trS();const ks=Object.keys(T.H);ks.slice(0,p==="c"?3:1).forEach(c=>{T.H[c].af.me=60});if(p==="c")T.H["Đại tướng quân"].af.me=60}catch(e){}}
- emperorDies("");return S.succ}
+ emperorDies("");return S.succ};
 (function(){const st=document.createElement("style");st.textContent=".succbk{margin:4px 0 0}";document.head.appendChild(st)})();
