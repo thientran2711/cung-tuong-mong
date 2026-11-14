@@ -27,7 +27,8 @@ if(typeof renderHUD==="function"){const r0=renderHUD;renderHUD=function(){const 
 
 /* ---------- stage HUD ---------- */
 const K3_TIME=["buoi","lot"],K3_STAT=["sac","tai","tamco","duc"],K3_STATE=["preg","ill","fake","out","block","doc","conf","shield","birth"];
-const K3_RIGHT=["srk","tin","nt","chu","wage","merit"];
+const K3_RIGHT=["srk","nt","chu","wage","merit"];/* "tin" (Chủ tin) is in the top bar on the servant road */
+const K3_ICO={sac:"sac",tai:"tai",tamco:"tam-co",duc:"duc"};
 function k3hc(k){const h=$$("hud2");return h&&h.querySelector(`.hc[data-hx="${k}"]`)}
 function k3val(b){const x=b&&b.querySelector("b");return x?T(x.textContent):""}
 function k3lab(b){if(!b)return"";const c=b.cloneNode(true);c.querySelectorAll("b,i,img,.kodm").forEach(e=>e.remove());return T(c.textContent)}
@@ -50,7 +51,7 @@ function k3Stage(){try{const st=$$("stage");if(!st)return;const stop=st.querySel
  let t="";if(bu){const w=String(BUOI[S.buoi||0]);t+=`<button type="button" class="k3r k3time" data-k3="buoi"><span class="k3l">${esc(w)}</span><b>còn ${typeof used!=="undefined"?Math.max(0,4-used):""} khắc</b></button>`}
  if(wx){const c=wx.cloneNode(true);c.className="k3r k3wx kmwx";window.__k3wx=c.outerHTML}if(window.__k3wx&&S.wx)t+=window.__k3wx
  if(lot){const lt=k3lab(lot)||T(lot.textContent);t+=`<button type="button" class="k3r k3lot ${lot.classList.contains("ok")?"ok":lot.classList.contains("hot")?"hot":""}" data-k3="lot"><span class="k3l">${esc(lt)}</span></button>`}
- let s="";K3_STAT.forEach(k=>{const b=k3hc(k);if(!b)return;const im=b.querySelector("img.ic");s+=k3row(k,esc(k3lab(b)),esc(k3val(b)),b.classList.contains("hot")?"hot":"",im?im.outerHTML:"")});
+ let s="";K3_STAT.forEach(k=>{const b=k3hc(k);if(!b)return;const im=b.querySelector("img.ic");s+=k3row(k,esc(k3lab(b)),esc(k3val(b)),b.classList.contains("hot")?"hot":"",im?im.outerHTML:(typeof ic==="function"&&K3_ICO[k]?ic(K3_ICO[k],14):""))});
  let x="";K3_STATE.forEach(k=>{const b=k3hc(k);if(!b)return;x+=k3row(k,esc(k3lab(b)),esc(k3val(b)),b.classList.contains("hot")?"hot":b.classList.contains("ok")?"ok":"")});
  const hL=(t?`<div class="k3p k3pt">${t}</div>`:"")+(s?`<div class="k3p k3ps" data-k3sheet="1"><b class="k3h">Tư chất</b>${s}</div>`:"")+(x?`<div class="k3p k3px">${x}</div>`:"");
  if(L.dataset.h!==hL){L.innerHTML=hL;L.dataset.h=hL}
