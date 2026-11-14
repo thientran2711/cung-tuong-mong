@@ -86,3 +86,11 @@ Khó: ch 3/0/3 cn 3/0/1 cnv 4/0/3 dtq 4/0/1 muoi 4/2/2 nc 3/0/0 td 3/1/2 thd 3/0
 Khó HH sits under the 15–20 band; next step if wanted: Khó hhTh +0 (then re-measure). cnv in Khó: 0/7 over v6+v7 ("possible" not shown in 7 lives).
 - Merged origin/review/page-curl (fold-layout + book) 7623ff49: assemble + jbook, jk3, jk4 (j80 stays out, as balance). On that build:
   no page errors, no horizontal overflow, Khó accept/reload OK, old save = Vừa (686/755/1180). Shots dev/shots/difficulty/*-kho.jpg (cnv + tt).
+
+## v8 (Khó hhTh +0, other Khó knobs unchanged) — shipped
+Measured on the merged page-curl/fold-layout build, Khó only, 44 lives (4 shards x 11, 2 bots at a time):
+HH **20%** (9), early death **50%** (poison 12, childbirth 8, illness 2), survived w/o HH 30%; childbirth death 21.6%/labour (0.84 labours/life);
+median time to HH 7.7 y (278 tuần). Per origin (n/HH/died): ch 4/0/2 cn 5/1/1 cnv 4/1/2 dtq 6/1/4 muoi 5/1/3 nc 4/2/0 td 5/2/3 thd 7/1/3 tt 4/0/4.
+cnv reached HH in Khó (1/4). Dễ unchanged from v7 (53% / 20%).
+Bot harness note: each shard logs 6 PAGEERR "Cannot read properties of null (reading 'classList')" on this merged build (constant per shard, not per life;
+the UI check via dui.js on the same build showed none) — likely a bot-path hook into an element the fold/book layout removed.
