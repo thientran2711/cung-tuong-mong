@@ -1,5 +1,7 @@
 (function(){
 try{if(window.__balO)Object.assign(BAL,window.__balO)}catch(e){}
+try{if(window.__j70O)Object.assign(J70CFG,window.__j70O)}catch(e){}
+try{if(window.__fairO)Object.assign(window.FAIRN,window.__fairO)}catch(e){}
 const q=s=>document.querySelector(s),qa=s=>[...document.querySelectorAll(s)];
 window.__res=[];window.__lifeB=0;{const nb0=nextBuoi;nextBuoi=function(){window.__lifeB++;return nb0.apply(this,arguments)}}window.__logc={};window.__bad=[];window.__saveFail=[];window.__idle=0;window.__buoi=0;const ORIG=['tt','dtq','muoi','cn','nc','td','ch','thd'];const _start=start;start=function(){window.__oi=(window.__oi||0)+1;window.__forceOrigin=ORIG[window.__oi%8];return _start()};window.__iter=0;window.__lifeIter=0;window.__maxRank=0;window.__hhTurn=null;window.__turnActs=0;window.__sucTrace=[];window.__lastT="";window.__acts={};
 popNum=()=>{};curtain=()=>{};fx=()=>{};save=()=>{};
