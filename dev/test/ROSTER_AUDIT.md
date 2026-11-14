@@ -100,3 +100,19 @@ không lưu/nạp giữa `goTo` (goTo tiêu khắc đi đường trước khi đ
 - `qLost` của kiểm độc lập (387 thẻ qua 3 254 lần lưu giữa thẻ): là các thẻ lựa chọn không có `pid` (hàm trong lựa chọn không lưu được). Game vẫn như thế từ trước j95:
   `serQ` bỏ những thẻ này. Thẻ có `pid` (sự kiện j68, truyện, việc nhờ…) giữ đủ: đo riêng 600 lần lưu/nạp giữa thẻ, 387 thẻ pid, mất 0, đổi người 0. Việc này thuộc phần lưu ván chung, không thuộc sổ.
 - Bot ngẫu nhiên chết sớm (chơi bừa), như các lần đo trước.
+
+## 7. Sau kiểm độc lập lần hai (ROSTER_RECHECK.md, 37d87a8): lỗi N1 đã sửa
+
+N1: nam nhân không ở cung (vương gia, nhạc sư, họa sư, sứ thần, người tình j96) vào sổ giữa buổi (`rosterWhere` của j96, `j95bPut` theo câu chữ)
+được ghi cả vào các khắc đã hiện. Sửa: chỉ ghi từ khắc hiện tại; các khắc trước mang mã `ngoai` ("Ngoài cung", việc "ở ngoài cung"), mã này không
+có trên bản đồ, không lên sân khấu, roster.js in "Ngoài cung (chưa vào)". Thêm bất biến (r) vào roster_audit_c.js: một dòng mới giữa buổi không bao
+giờ được đặt, ở khắc đã hiện, vào chỗ ngươi đứng.
+
+Kiểm lại trên e39e28a (bản có N1):
+- `rc_adv.js` (bộ tình huống của người kiểm lần hai): **0 lỗi**, lỗi trang 0. Đã sửa ba chỗ bắt nhầm của script (ghi rõ trong mã): mã `ngoai` không phải nơi ngươi
+  thấy được; `deathSentence` tha vào lãnh cung 30% khi Hoàng thượng "nhân từ" (j8), nên chỉ người đã chết mới phải rời sổ; việc thân thiện (ally / gift /
+  tieuhuy "trả chứng cứ lấy lòng") không tính là hại, như H của ia_hook; tên người ("Bạch Tố Tâm") không làm việc thành "tố".
+- Bộ của thợ, ngắn: 12 đời (6 khôn, 6 ngẫu nhiên), 8 618 lần kiểm, (a)–(r) = 0 (13 dòng mới giữa buổi, 3 lần j96 hỏi rosterWhere).
+- Bộ độc lập, ngắn: 12 đời (6 khôn, 6 ngẫu nhiên), 10 418 lần kiểm, 880 lưu/nạp, A–H, P, S = 0.
+- `ia_scen` 5/5 lần __IA.check sạch; `ia_rostertool`: 38/38 dòng hiện tại, 32 khắc đã qua khớp.
+- j70: câu "(vì vì lợi riêng)" thành "(vì lợi riêng)".
