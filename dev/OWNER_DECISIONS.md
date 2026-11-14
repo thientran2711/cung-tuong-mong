@@ -96,3 +96,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (21:10Z) Owner gave Cloudflare Account ID (dev/coop/CLOUDFLARE.md). Co-op backend = Cloudflare Workers + Durable Objects. Token later via secure form.
 - (21:20Z) Owner: Part C a51 hair jet-black and colour off vs a18–a36. Rule for all ageing: keep her warm dark-brown hair with painted highlights (subtle silver OK, never jet-black), colour-match a51 to the same tier's other ages.
 - (21:35Z) Owner: t6 marks (and t7, t8) too big on Part C too. Rule: t6–t8 marks ≈ t1–t4 size, inside the gap between the inner brow ends; tiers differ by material only. Applies to consorts + Part C. Pilot → approval → roll out.
+- (21:40Z) Owner final: huadian t6 stays as is; only t7 and t8 smaller (consorts + Part C).
