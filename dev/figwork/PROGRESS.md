@@ -97,3 +97,16 @@
   `python3 vs.py JID...` prints a compact line per job (style ref | colour/flower | 4 poses) — the rest of the prompt is the fixed template from
   `python3 mjobs.py JID`. `bash addbg.sh "jid..." "bg..."` appends "jid gen bg" lines to bg.txt (gen looked up in gens.txt, same order).
   mproc.py takes ~2 min per batch (urls.py scans transcripts): run it in the background.
+
+### STATUS (maid-art part A, end of session 3)
+- DONE part A: m01–m32 x m0/m2/m3/m4 (128 lineups, 512 figures). Session 3 added m21–m32 (48 lineups + 1 redo of m22-m3 = 49 gens,
+  13 230 credits gen + 147 bg), sheets dev/figwork/sheets/A_b10.jpg (m21,m22) .. A_b15.jpg (m31,m32). Checked: ~1:7, faces match m1,
+  no green drift, m0 embroidered silk + silver trâm, m3 dark non-red, m4 red + crane square + winged cap.
+- AGE-48 HAIR: from A-m25 on (and the m22-m3 redo) mjobs AGES says "hair still mostly dark ... (NOT grey-haired, NOT salt-and-pepper)";
+  it clearly reduces grey. m21–m24 (except m22-m3) and the older m01–m20 a51 figures still show salt-and-pepper hair where the m1 lineup
+  is grey (e.g. m17, m22, m23, m24, m28-m3) — optional redraw if the owner wants it subtler. Identities whose m1 a51 is grey still lean grey.
+- NEXT (exact): part A m33–m52 (80 lineups; next batch A-m33-m0 A-m33-m2 A-m33-m3 A-m33-m4 A-m34-m0 ... -> sheet A_b16.jpg).
+  Part B (consort faces as maids) is done by another worker on a separate branch; then part C.
+- Session-3 tool notes: work copy scratchpad/maidA, worktree scratchpad/wt-maidA (WT in mjobs/mproc/msheet/pubm). mproc curl now retries
+  (connection resets crashed it before writing manifests). Run only ONE mproc at a time (shared RAM is tight; OOM kills happened).
+  zoom.py out.jpg mNN.. = a51 head crops per tier (hair check).
