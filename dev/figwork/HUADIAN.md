@@ -12,6 +12,12 @@ Ghi chú: các lineup t1 cũ c03, c11, c19, c32 đã có chấm son đỏ giữa
 
 Kích thước gốc (t1): cỡ hoa son giữa mày của c03 t1 (img/por-consort-c03-t1-a18.webp), rõ trên chân dung; các bậc trên to dần ~5%/bậc tới ≈1.4 lần ở t8; không lan sang chân mày, không phủ quá nửa trán. Áp dụng cho cả HUADIAN_C.md (thợ Part C).
 
+CẬP NHẬT 14/11 (sếp, art13 — thay mọi luật cỡ t7/t8 ở trên): t6 giữ nguyên. t7 và t8 NHỎ như t1–t4, nằm gọn trong khe giữa hai đầu mày
+(cỡ hạt đậu lăng, cao ~nửa chiều dài mắt), hai bậc khác nhau bằng chất liệu/chi tiết chứ không bằng cỡ (mẫu duyệt: phần C
+sheets/C_t78_pilot_m08.jpg, m33.jpg). t7 = hoạ tiết riêng bằng vàng lá dát phẳng + men son, chỉ vàng filigree, hai cuộn vàng tí xíu, một
+điểm hồng ngọc tí xíu. t8 = phượng vàng lá nhỏ, đối xứng, đứng thẳng kiểu c26 (bản thử art12), ôm hoạ tiết riêng tí xíu màu son của
+người đó ở đỉnh; toàn vàng, KHÔNG xanh thuý lam trên da. Prompt: dev/figwork/art13/mk13.py t78 cXX.
+
 ## 8 nấc theo bậc (mỗi bậc một nấc riêng, KHÔNG gộp; cỡ to dần nhẹ, t8 ≈ 1.2 lần t1)
 - t1: một chấm hoặc nét son đơn gợi hình hoạ tiết, không chi tiết.
 - t2: hoạ tiết vẽ son, hình rõ ràng, không viền, không vàng.

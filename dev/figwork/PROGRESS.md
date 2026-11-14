@@ -15,6 +15,17 @@
   BASE=cur pastes onto the current fig (ageing passes after the marks); default base = figbak/ (original before art13).
 - t7+t8: one 4x2 grid per consort (row t7 a18..a51, row t8 a18..a51), gpt-2-6 2:1 4k, prompt `mk13.py t78 cXX` (c06 c32: no t8 ageing).
 - Ageing: 2x2 grids of four different a51 faces, gpt-2-6 1:1 4k, prompt `mk13.py age`, pasted with mode a, BASE=cur.
+- DONE art13 (11/14 ~23:30Z): t7 + t8 new SMALL marks on all 32 x 4 ages (32 4x2 grids qcXX, gens13.txt) + a51 ageing pasted on
+  t1(32) t3(32) t4(32) t5(29, not c28 c29 c30) t6(32) t7(32, in the t78 grid) t8(30, not c06 c32; c03 c05 c09 c11 c12 c13 aged by an
+  extra 2x2 ageing grid). Ageing grids a01..a41 (agequeue.txt). Redo grids r09t7 / r21t8 (a51 tile had lost the mark).
+  413 figs changed (RGB only, alpha identical: verify.py ALPHA 0), 413 por re-cropped 384x506, cutcheck: only the known t8 pearl-curtain
+  crowns >=8 (c11 c08 c20 c07 c28 t8, pre-existing, alpha untouched). t2 and t6 marks untouched; non-consort files untouched.
+  Sheets (whole portraits, native por 384x506): dev/figwork/sheets/art13/t78_c01-c08.jpg .. t78_c25-c32.jpg and a51_c01-c08.jpg .. a51_c25-c32.jpg.
+- KNOWN / possible follow-up: a few a51 read only ~40 (e.g. c03-t8-a51; c01-t8-a51 came out a bit younger than its art10 version);
+  moles.py detect is too noisy on aged faces (wrinkles) - checked by eye on the sheets instead. Credits art13 ~ 79 edits x 270 ~ 21k.
+- Quy phi check (coordinator 11/14): rank index 5 (Quy phi) -> dress tier t6 (j66 figTierOf rank+1). main / review/residence-art hold
+  ONLY consort t1-t4 art, so figPick falls back to the nearest tier = t4 (Tan dress, c03-t4-a18 for Chu Van Thuong). Fig and portrait are
+  consistent (same file). Every rank >= Phi (t5-t8) shows t4 dress until review/consort-art (t5-t8) is merged. No redraw needed.
 
 ## art12 (worker #12) — STATUS (read first; resumes art11 below)
 - Work dir: scratchpad/fw12 (copy of fw11, paths sed'ed to worktree agent-a36359ad81f20b98e; fw11/bg pngs deleted for disk).

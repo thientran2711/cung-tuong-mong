@@ -18,4 +18,4 @@ for i,c in enumerate(cs):
         try: p=Image.open(R+f'por-consort-{c}-{t}-{a}.webp').convert('RGBA')
         except Exception: continue
         bg=Image.new('RGBA',p.size,(232,222,204,255)); bg.alpha_composite(p); O.paste(bg.convert('RGB').resize((W,H)),(L+j*W,TOP+i*H))
-O.save(out,quality=90); print(out,O.size)
+O.save(out,quality=84); print(out,O.size)

@@ -17,7 +17,7 @@ def faces(rgb,sc):
     d=cv2.FaceDetectorYN.create('yunet.onnx','',sm.size,0.5); n,f=d.detect(cv2.cvtColor(np.asarray(sm),cv2.COLOR_RGB2BGR))
     return [[float(v)/sc for v in x[:14]]+[float(x[14])] for x in (f if f is not None else [])]
 def figface(fr):
-    fs=faces(fr,3.0); good=[x for x in fs if x[14]>0.6] or fs
+    fs=faces(fr,3.0); good=[x for x in fs if x[14]>0.6] or fs; mw=max(x[2] for x in good); good=[x for x in good if x[2]>0.6*mw]
     return min(good,key=lambda x:x[1])
 def eyes(F): return (F[4]+F[6])/2,(F[5]+F[7])/2,float(np.hypot(F[6]-F[4],F[7]-F[5]))
 def figpath(sp): c,t,a=sp.split('-'); return I+f'fig-consort-{c}-{t}-{a}.webp'
@@ -29,10 +29,17 @@ def aligned(rgb,F,s=160):
     ex,ey,d=eyes(F); k=s*0.4/d; M=np.float32([[k,0,s/2-ex*k],[0,k,s*0.4-ey*k]])
     g=cv2.cvtColor(np.asarray(rgb),cv2.COLOR_RGB2GRAY); return cv2.warpAffine(g,M,(s,s)).astype(np.float32)
 def ncc(a,b): a=a-a.mean(); b=b-b.mean(); return float((a*b).sum()/np.sqrt((a*a).sum()*(b*b).sum()+1e-6))
+def lminit(g1,g2):
+    try:
+        f1=max(faces(Image.fromarray(np.clip(g1,0,255).astype(np.uint8)).convert('RGB'),0.5),key=lambda x:x[2]*x[3])
+        f2=max(faces(Image.fromarray(np.clip(g2,0,255).astype(np.uint8)).convert('RGB'),0.5),key=lambda x:x[2]*x[3])
+        p1=np.float32(f1[4:14]).reshape(5,2); p2=np.float32(f2[4:14]).reshape(5,2)
+        M,_=cv2.estimateAffinePartial2D(p1,p2); return [M.astype(np.float32)] if M is not None else []
+    except Exception: return []
 def align(g1,g2,em):
     crit=(cv2.TERM_CRITERIA_EPS|cv2.TERM_CRITERIA_COUNT,300,1e-6); best=(-1,np.eye(2,3,dtype=np.float32))
     (px,py),_=cv2.phaseCorrelate(g1,g2)
-    for init in (np.eye(2,3,dtype=np.float32),np.float32([[1,0,px],[0,1,py]])):
+    for init in [np.eye(2,3,dtype=np.float32),np.float32([[1,0,px],[0,1,py]])]+lminit(g1,g2):
         W=init.copy(); ok=True
         for sc,sig in ((0.25,2),(0.5,3)):
             a=cv2.resize(g1,None,fx=sc,fy=sc,interpolation=cv2.INTER_AREA); b=cv2.resize(g2,None,fx=sc,fy=sc,interpolation=cv2.INTER_AREA)
