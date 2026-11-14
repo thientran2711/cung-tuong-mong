@@ -7,3 +7,7 @@ Model gpt-2-6, 3:4, 1k (40 credits each), 1 style ref (bright: Ngự hoa viên c
 - Mẻ 0 (thử): trieu-chinh, hoang-de-vui, le-xuan nhận; dau-doc chưa đủ tối -> vẽ lại với khuôn tối mạnh hơn.
 - Mẻ 1: trieu-chinh-2, tham-quan, duoc-mua, lu-lut, han-han, bien-ai, bien-ai-2, thang-tran: nhận cả 8.
 - Mẻ 2: su-than, su-than-2, hoa-than, hoang-de-vui-2, hoang-de-gian, hoang-de-dem, vi-hanh, vi-hanh-2: nhận cả 8.
+- Mẻ 3: di-san, quoc-tang, le-xuan-2, le-ha, le-thu(-2,-3), le-dong: nhận cả 8.
+- Mẻ 4: le-dong-2, te-le, yen-tiec, sinh-no, con-tre, tang-le, tan-phong nhận; con-tre-2 (thú bông hổ trông hiện đại) -> vẽ lại.
+- Mẻ 5: tuyen-tu, thinh-an, khach-den(-2), tranh-sung, cung-nhan, thu-nha, tai-nghe: nhận cả 8.
+- Coordinator 11/14: review/events f5b203a = 72 mẫu, khớp danh sách; thêm nhóm chừa sẵn hh-viec (việc Hoàng hậu giao), cung-nu (đời cung nữ), tu-tinh (tư tình), lanh-cung thêm 2 biến thể (đời sống lãnh cung); ánh xạ thêm j3/j24/j54/j55/j22.
