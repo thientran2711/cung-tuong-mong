@@ -3792,7 +3792,7 @@ function mindTell(v,t,k){mindLog(v,"_tell");const tc=witOf(v);let c=12+(S.mat||0
 /* someone with a plan in hand waits for it instead of starting another */
 (function(){const n0=npcAct;npcAct=function(v,t){if(v&&v.plan)return"";return n0.apply(this,arguments)}})();
 /* ================= BALANCE KNOBS (measured with the sensible / random bots; see the report) ================= */
-const BAL={outQ:85,hz:1.4,conc:.3/.7,later:6,hhTh:60};
+const BAL={outQ:85,hz:2.0,conc:.3/.7,later:6,hhTh:55};
 /* an empty Hoàng hậu seat: the Thái hậu may bring in a girl of a great house instead of holding a contest (same for every candidate) */
 (function(){const c0=contestOpen;contestOpen=function(r){if(r===7&&!ct()&&!queenP()&&S.outQv!==S.vacSince&&consorts().some(p=>candOK(p,7))&&(S.outQv=S.vacSince,true)&&roomFor("consort")&&roll(BAL.outQ)){const n=newRival(7,true);Object.assign(n,drawFace());n.rank=6;n.queen=true;n.dad=80;rivals.unshift(n);S.vacSince=null;
   const t=`<b>Thánh chỉ: Thái hậu chọn ${n.name}, con gái danh môn, vào cung lập làm Hoàng hậu.</b> Ghế trống không mở tranh. `;log(t);return t}return c0.apply(this,arguments)}})();
@@ -4478,6 +4478,92 @@ document.head.appendChild(st);
 var t=document.getElementById("title");
 if(t)t.style.setProperty("background","linear-gradient(rgba(40,18,10,0) 55%,rgba(40,18,10,.35)),url(img/title-key.webp) center 15%/cover no-repeat,#f3e6d6","important");
 }catch(e){}})();
+
+/* ================= j51 KẾ VỊ: lập đích, lập trưởng, lập hiền; tranh ngôi Đông cung (cùng một luật cho mọi người mẹ) ================= */
+const KV={c:.007,base:22,deb:4,debGap:12};
+/* hệ số theo tính nết: người mẹ có con trai đứng sau mưu dọn đường cho con */
+const KVT={"Hiểm độc":2,"Tham vọng":1.7,"Kiêu ngạo":1.2,"Đa nghi":1,"Nhu mì":.4,"Hiền lành":.08};
+const KVACT=[["kframe",3],["kpoison",2],["pond",1.5],["ksab",3],["spy",2.5],["frame",1.5]];
+/* thứ tự sinh: mỗi con một mốc (tháng sinh), con cũ được gán một lần theo tuổi */
+function kvStamp(){allKids().forEach(([k])=>{if(k.bt==null)k.bt=S.turn-(k.age||0)*12})}
+function kvQueenMom(v){return v?!!(v.alive&&!v.out&&v.queen):S.rank>=7}
+function kvMomName(v){return v?v.name:"ngươi"}
+/* trọng số chọn Thái tử (dùng cho cả xét lập lẫn thứ tự hiển thị) */
+function kvW(k,v,dich,truong){return 5+momRank(v)*10+k.tal/2+k.fond/2+Math.max(0,(v?v.th:S.th)||0)/2+(dich?60:0)+(truong?25:0)}
+function kvOrder(){if(!S)return[];kvStamp();const L=allKids().filter(([k])=>k.alive&&k.sex==="m");if(!L.length)return[];
+ const eld=L.slice().sort((a,b)=>a[0].bt-b[0].bt)[0][0];
+ return L.map(([k,v])=>{const dich=kvQueenMom(v),truong=k===eld;return{k,v,dich,truong,w:kvW(k,v,dich,truong)}})
+  .sort((a,b)=>((+b.k.heir)-(+a.k.heir))||((+b.dich)-(+a.dich))||(b.w-a.w)||(a.k.bt-b.k.bt))}
+function kvPos(o,k){return o.findIndex(x=>x.k===k)}
+function kvWhy(x){if(x.k.heir)return x.dich?"Thái tử · Đích tử":x.truong?"Thái tử · Trưởng tử":"Thái tử";
+ if(x.dich)return x.truong?"Đích tử · Trưởng tử":"Đích tử (con Hoàng hậu)";if(x.truong)return "Trưởng tử (lớn nhất)";
+ return `Tài ${x.k.tal} · được thương ${x.k.fond}`}
+/* động cơ: v có con trai, con của t là Thái tử hoặc đứng trước con v */
+function kvMotive(v,t,o){if(!v||v===S||!v.alive||v.out||!t||t===v)return 0;o=o||kvOrder();
+ const mine=o.map((x,i)=>[x,i]).filter(([x])=>x.v===v);if(!mine.length)return 0;const pv=Math.min(...mine.map(z=>z[1]));
+ const th=o.map((x,i)=>[x,i]).filter(([x,i])=>(t===S?x.v===null:x.v===t)&&i<pv);if(!th.length)return 0;
+ if(t!==S&&(!t.alive||t.out))return 0;
+ let m=KV.base;for(const tr of traitsOf(v))if(KVT[tr]!=null)m*=KVT[tr];
+ if(th.some(([x])=>x.k.heir))m*=1.3;if(aff(v,t)>=40)m*=.5;return Math.round(m)}
+function kvTargets(v,o){const L=[];for(const t of others(v)){if(t===S&&(S.dead||(typeof isSrv==="function"&&isSrv())))continue;const m=kvMotive(v,t,o);if(m>0)L.push([t,m])}return L}
+function kvSonOf(v,o){const x=(o||kvOrder()).find(x=>x.v===v);return x?x.k:null}
+window.__kvS=null;window.__kvDue={};
+/* thực đơn khi mưu vì ngôi Đông cung: chỉ các mưu nhắm vào con nàng (và dò la, vu cáo chính nàng) */
+(function(){const m0=mindMenu;mindMenu=function(v,t){const K=window.__kvS;if(!K||K.v!==v||K.t!==t)return m0.apply(this,arguments);
+ try{const b=bandOf(danger(v,t)+K.m);const allow=BANDS.slice(1,b+1).flatMap(x=>x[2]);const tc=witOf(v);const O=[];v.fails=v.fails||{};
+  for(const [k,w0] of KVACT){const a=ACT[k];if(!a||!allow.includes(k))continue;let ok=false;try{ok=a.ok(v,t)}catch(e){}if(!ok)continue;
+   let w=w0*persW(v,k)*(1+K.m/40);let od=null;try{od=a.o?a.o(v,t):null}catch(e){}if(od!=null&&tc>=30)w*=Math.pow(cl(od,5,95)/50,(tc-30)/35);
+   const f=v.fails[k]||0;if(f)w*=tc<35?1+.6*f:Math.pow(.5,f);if(w>0)O.push([k,w])}
+  return O}catch(e){return[]}}})();
+/* con bị nhắm: con trai đứng cao nhất trong thứ tự kế vị */
+(function(){const t0=tKid;tKid=function(t){const K=window.__kvS;if(K&&K.t===t){const o=kvOrder();const L=o.filter(x=>(t===S?x.v===null:x.v===t)&&(x.k.age>=3||x.k.heir));if(L.length)return L[0].k}return t0.apply(this,arguments)}})();
+(function(){const a=ACT.pond;if(!a)return;const f0=a.f;a.f=function(x,t){const K=window.__kvS;if(K&&K.t===t){const son=kvOrder().find(z=>(t===S?z.v===null:z.v===t)&&z.k.age>=2);if(son){const k0=kidsOf;kidsOf=function(p){if(p===t){kidsOf=k0;return [son.k]}return k0.apply(this,arguments)};try{return f0.apply(this,arguments)}finally{kidsOf=k0}}}return f0.apply(this,arguments)}})();
+/* mưu bị lộ: tra ra cả động cơ (chỉ khi đã lần ra người làm) */
+(function(){const r0=mindRun;mindRun=function(v,t,k,err){const D=window.__kvDue[v&&v.id];let set=false;
+ if(!window.__kvS&&D&&D.k===k&&D.t===key(t)){window.__kvS={v,t,m:D.m};set=true;delete window.__kvDue[v.id]}
+ const K=window.__kvS;const son=K&&K.v===v?kvSonOf(v):null;let r;try{r=r0.apply(this,arguments)}finally{if(set)window.__kvS=null}
+ if(son&&r&&FAILRX.test(r)&&r.includes(v.name))r+=`Tra ra ${v.name} muốn dọn đường cho con mình là ${son.name} lên ngôi Đông cung. `;return r}})();
+/* tin công khai: hoàng tự chết hay Thái tử bị phế thì cả cung đều biết; kẻ ra tay vẫn không rõ nếu không ai thấy */
+(function(){const s0=seenNPC;seenNPC=function(v,t,txt){const r=s0.apply(this,arguments);if(r||!txt||t===S||v===S)return r;
+ if(/mà chết|chết đuối|bị phế ngôi Thái tử/.test(txt)&&!txt.includes(v.name))return txt.replace(/\(Để lại dấu vết[^)]*\)/,"")+"Chưa rõ kẻ ra tay. ";return r}})();
+/* mỗi buổi: người mẹ có động cơ có thể mưu (qua đúng đường nghĩ của NPC: do dự, sai sót, chuẩn bị, để lộ dấu) */
+(function(){const r0=rivalsBuoi;rivalsBuoi=function(){
+ try{const nb=(S.bqN||0)+1;for(const v of liveRivals(true)){const P=v.plan;if(P&&P.kv&&P.due<=nb)window.__kvDue[v.id]={k:P.k,t:P.t,m:P.kv}}}catch(e){}
+ let ev=r0.apply(this,arguments)||"";
+ try{if(!S||S.dead)return ev;const run=()=>{let e="";const o=kvOrder();if(o.length<2)return e;
+   for(const v of liveRivals(true)){if(!v.alive||v.out||v.plan)continue;const T=kvTargets(v,o);if(!T.length)continue;
+    let r=Math.random()*T.reduce((a,b)=>a+b[1],0),i=0;while(r>T[i][1]&&i<T.length-1){r-=T[i][1];i++}const [t,m]=T[i];
+    let c=KV.c*m/KV.base;if(t.shield)c*=.5;if(t===S&&S.guardWarn)c*=.5;if(Math.random()>=c)continue;
+    window.__kvS={v,t,m};let res="";try{res=npcAct(v,t)}finally{window.__kvS=null}
+    if(v.plan&&v.plan.t===key(t)&&KVACT.some(z=>z[0]===v.plan.k))v.plan.kv=m;
+    e+=seenNPC(v,t,res);if(S.dead)return e}return e};
+  ev+=(typeof srvW==="function"?srvW(run):run())||""}catch(e){}return ev}})();
+/* ---- lập Thái tử: lập đích, lập trưởng, lập hiền ---- */
+function kvDebate(){const H=S.heir;if(!H||!H.k||!H.k.alive||kvQueenMom(H.v))return"";if(S.turn-(S.kvDeb==null?-99:S.kvDeb)<KV.debGap)return"";
+ const o=kvOrder();const d=o.find(x=>x.dich&&!x.k.heir&&x.k.age>=6);if(!d||!roll(KV.deb))return"";S.kvDeb=S.turn;const h=H.k;
+ const p=cl(Math.round(30+(d.k.tal-h.tal)/2+(d.k.fond-h.fond)/2-(h.age>=16?10:0)),10,85);
+ const pre=`<b>Triều đình bàn lệ lập đích:</b> đại thần dâng sớ xin lập ${d.k.name}, đích tử của ${d.v?"Hoàng hậu "+d.v.name:"ngươi (Hoàng hậu)"}, thay Thái tử ${h.name} (con ${kvMomName(H.v)}). `;
+ if(roll(p)){setHeir(d.k,d.v);fx("gold");return pre+`<span class="${d.v?(H.v?"":"r"):"g"}">Hoàng thượng phế ${h.name}, lập ${d.k.name} làm Thái tử</span> (cơ may đổi ngôi: ${word(p)}).${d.v?"":" Danh +10."} `}
+ return pre+`Hoàng thượng giữ ${h.name} ở ngôi Thái tử (cơ may đổi ngôi: ${word(p)}). `}
+heirMonth=function(){if(S.heir&&S.heir.k&&S.heir.k.alive)return kvDebate();S.heir=null;
+ const o=kvOrder();const c=o.filter(x=>x.k.age>=6);if(!c.length)return"";
+ const wait=!c.some(x=>x.dich)&&o.some(x=>x.dich);/* đích tử còn nhỏ: triều đình chờ */
+ if(!roll(wait?5:15))return"";
+ let r=Math.random()*c.reduce((a,b)=>a+b.w,0),i=0;while(r>c[i].w&&i<c.length-1){r-=c[i].w;i++}const x=c[i];setHeir(x.k,x.v);fx("gold");
+ const why=x.dich?"theo lệ lập đích: con của Hoàng hậu":x.truong?"theo lệ lập trưởng: hoàng tử lớn nhất":`theo lệ lập hiền: Tài ${x.k.tal}, được ngài thương ${x.k.fond}`;
+ return x.v?`Hoàng thượng lập ${x.k.name}, con của ${x.v.name}, làm Thái tử (${why}). `:`<b class="g">Hoàng thượng lập ${x.k.name}, con của ngươi, làm Thái tử</b> (${why}). Danh +10. `};
+/* băng hà khi chưa lập Thái tử: đích tử trước, không có thì trưởng tử */
+(function(){const e0=emperorDies;emperorDies=function(){try{if(!(S.heir&&S.heir.k&&S.heir.k.alive)){const o=kvOrder().sort((a,b)=>a.k.bt-b.k.bt);const x=o.find(z=>z.dich)||o[0];if(x)S.heir={k:x.k,v:x.v}}}catch(e){}return e0.apply(this,arguments)}})();
+/* ---- hiển thị: nhãn trên thẻ con, chip con của phi tần, bảng thứ tự kế vị ---- */
+function kvLabels(k,o){o=o||kvOrder();const i=kvPos(o,k);if(i<0)return[];const x=o[i];const L=[];if(x.dich)L.push("Đích tử");if(x.truong)L.push("Trưởng tử");L.push(`Kế vị thứ ${i+1}`);return L}
+(function(){const p0=pcard;pcard=function(o){const k=window.__kvKid;if(k&&o){window.__kvKid=null;try{const L=kvLabels(k);o=Object.assign({},o,{chips:(o.chips||[]).concat(L.map(t=>chip(t,/Đích|Trưởng/.test(t)?"ok":"")))})}catch(e){}}return p0.call(this,o)}})();
+(function(){const kc=kidCard;kidCard=function(k){window.__kvKid=k&&k.alive&&k.sex==="m"?k:null;try{return kc.apply(this,arguments)}finally{window.__kvKid=null}}})();
+(function(){const rc=rvCard;rvCard=function(v){let h=rc.apply(this,arguments);try{const o=kvOrder();for(const k of (v.kids||[]).filter(k=>k.alive&&k.sex==="m")){const L=kvLabels(k,o).filter(t=>!/^Kế vị/.test(t));if(L.length)h=h.split(`${k.name} · ${k.age} tuổi`).join(`${k.name} · ${k.age} tuổi · ${L.join(" · ")}`)}}catch(e){}return h}})();
+function kvBoxHTML(){const o=kvOrder();if(!o.length)return `<div class="kvbox"><h5>Thứ tự kế vị</h5><p class="past">Trong cung chưa có hoàng tử.</p></div>`;
+ const rows=o.slice(0,3).map((x,i)=>`<div class="pcrow"><span>${mdH(kidFace(x.k),"xs")}<span>${i+1}. ${x.k.name} · ${x.k.age} tuổi · con ${x.v?x.v.name:"<b class=\"g\">ngươi</b>"}${x.v&&(!x.v.alive||x.v.out)?(x.v.alive?" (lãnh cung)":" (đã mất)"):""}</span></span><b>${kvWhy(x)}${x.k.age<6?" · chưa đủ 6 tuổi":""}</b></div>`).join("");
+ return `<div class="kvbox"><h5>Thứ tự kế vị</h5><div class="pcb rows">${rows}</div><p class="past">Lập đích, lập trưởng, lập hiền: con Hoàng hậu đứng đầu, rồi hoàng tử lớn nhất; tài và lòng thương của Hoàng thượng, phẩm vị mẹ và Thái hậu cũng tính. Băng hà khi chưa lập Thái tử: đích tử lên ngôi, không có thì trưởng tử.${o.length>3?` Còn ${o.length-3} hoàng tử khác.`:""}</p></div>`}
+(function(){const k0=kidTabHTML;kidTabHTML=function(hl){let h=k0.apply(this,arguments);try{const i=h.indexOf("</span></div>");if(i>=0){const j=i+"</span></div>".length;h=h.slice(0,j)+kvBoxHTML()+h.slice(j)}}catch(e){}return h}})();
+(function(){const st=document.createElement("style");st.textContent=".kvbox{margin:0 0 6px}.kvbox .pcrow{align-items:center}.kvbox .pcrow>span{min-width:0;overflow-wrap:anywhere;display:flex;align-items:center;gap:5px}.kvbox .pcrow>span .md{flex-shrink:0;margin:0}.kvbox .pcrow b{text-align:right;flex-shrink:0;max-width:48%}.kvbox .past{margin:2px 0 0;font-size:.72rem}";document.head.appendChild(st)})();
 /* ================= j52: PHÚC DUYÊN + THÂN PHẬN ĐỊNH SẴN (owner 11/14) =================
    The next life is rolled ONCE and kept in localStorage "ctm-nextlife" (global, not per slot): a seed that drives
    Math.random for the whole of start() (faces drawn from a second stream of the same seed, so late-loading art does not
@@ -5221,6 +5307,212 @@ window.tdForceSo=function(k){const T=trS();if(k==="praise"&&!T.praise)T.praise="
 /* j54's hòa thân choices now name their real border effect */
 (function(){for(const id of ["foreignwed","h54hoa","h54ban"]){const f0=PEND[id];if(typeof f0!=="function")continue;PEND[id]=function(){const d=f0.apply(this,arguments);try{if(d&&d.o)d.o.forEach(c=>{if((/h54Hoa/.test(String(c.go||""))||/hòa thân/i.test(c.n||""))&&!/Biên cương/.test(c.x||"")){const add="con sang Bắc Địch thì Biên cương +20, ba năm ít giặc";const x=String(c.x||"");const i=/ · hỏng:/.test(x)?-1:x.search(/ · kèm:/);c.x=!x?add:i>=0?x.slice(0,i)+" · "+add+x.slice(i):x+" · "+add}})}catch(e){}return d}}})();
 
+/* ---- j56: nhóm việc trên thẻ người thành thẻ (tab), như thẻ Phi tần ----
+   Mọi thẻ người (pcard) mà các mô-đun sau chèn thêm mục "<h5>Tên</h5><div class=pcb>" xếp dọc
+   (thẻ con: Học hành, Chăm con, Hôn sự, Tài nghệ...) được gom thành hàng tab .pctabs/.pct + .pcg,
+   dùng đúng kiểu và trình bấm tab của pcard (j15/j25). Nhớ tab đã chọn theo từng thẻ (tên người) khi trang còn mở. */
+(function(){
+ window.__pcTab=window.__pcTab||{};
+ /* thẻ không đặt tabKey: nhớ tab riêng cho từng người thay vì chung một khóa "p" */
+ if(typeof pcard==="function"){const p0=pcard;pcard=function(o){if(o&&!o.tabKey&&o.name)o=Object.assign({},o,{tabKey:"p:"+String(o.name).replace(/<[^>]*>/g,"")});return p0.call(this,o)}}
+ const live=b=>b.tagName==="BUTTON"&&!b.disabled;
+ const nLive=el=>Array.from(el.querySelectorAll("button")).filter(live).length;
+ const esc=s=>String(s).replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;");
+ function bareName(pcb){if(pcb.querySelector('[data-go="home"]'))return "Thăm con";return "Việc khác"}
+ function tabify(pcr){
+  const kids=Array.from(pcr.children);if(!kids.some(c=>c.tagName==="H5"))return;
+  const card=pcr.closest(".pc");const nm=card&&card.querySelector(".pcname");
+  const oldTabs=kids.find(c=>c.classList.contains("pctabs"));
+  let role=oldTabs&&oldTabs.querySelector(".pct")?oldTabs.querySelector(".pct").dataset.role:"";
+  if(!role)role="p:"+(nm?nm.textContent.trim():"");
+  const G=[];let anchor=null;
+  for(let i=0;i<kids.length;i++){const c=kids[i];
+   if(c.tagName==="H5"&&kids[i+1]&&kids[i+1].classList.contains("pcb")){G.push({t:c.textContent.trim(),h5:c,el:kids[i+1]});if(!anchor)anchor=c;i++;continue}
+   if(c.classList.contains("pcg")){G.push({t:c.dataset.g||"",el:c,g:1});if(!anchor)anchor=c;continue}
+   if(c.classList.contains("pcb")){G.push({t:"",el:c});if(!anchor)anchor=c;continue}}
+  if(G.length<2)return;
+  /* tên trùng thì gộp; tên trống đặt tên rõ */
+  const used={};G.forEach(s=>{if(!s.t)s.t=s.g?"Việc":bareName(s.el);let t=s.t,n=2;while(used[t])t=s.t+" "+(n++);used[t]=1;s.t=t});
+  let act=window.__pcTab[role];
+  if(!G.some(s=>s.t===act))act=(G.find(s=>nLive(s.el)>0)||G[0]).t;
+  const bar=document.createElement("div");bar.className="pctabs";
+  bar.innerHTML=G.map(s=>`<button class="pct${s.t===act?" on":""}" data-pct="${esc(s.t)}" data-role="${esc(role)}">${esc(s.t)} <i>${nLive(s.el)}</i></button>`).join("");
+  pcr.insertBefore(bar,oldTabs&&oldTabs.compareDocumentPosition(anchor)&Node.DOCUMENT_POSITION_FOLLOWING?oldTabs:anchor);
+  if(oldTabs)oldTabs.remove();
+  G.forEach(s=>{let g=s.el;
+   if(!s.g){g=document.createElement("div");g.className="pcg";s.el.parentNode.insertBefore(g,s.el);g.appendChild(s.el);if(s.h5)s.h5.remove()}
+   g.dataset.g=s.t;g.classList.toggle("on",s.t===act)});
+ }
+ function scan(root){(root.querySelectorAll?root:document).querySelectorAll(".pcr").forEach(p=>{try{tabify(p)}catch(e){}})}
+ window.pcTabify=scan;
+ const mo=new MutationObserver(R=>{let hit=false;for(const r of R)if(r.addedNodes.length){hit=true;break}if(hit)scan(document)});
+ const go=()=>{mo.observe(document.body,{childList:true,subtree:true});scan(document)};
+ if(document.body)go();else document.addEventListener("DOMContentLoaded",go);
+})();
+/* ================= j57: ONE subject frame in dialogs (owner 11/14: "Thân phận kiếp này" showed a small cropped face) =================
+   Root cause 1 (size): the kit's .pcp carries max-height:58% (meant for the person-card column). Inside a dialog's .faces
+   <figure> that percentage resolves against the figure's own height, so the 3:4 frame was cut to 180x139 and the figure kept
+   the full 3:4 height underneath: a short landscape box over an empty gap. .dlg .spk>.pfr had the override, .faces did not.
+   Root cause 2 (picture): pMe()/pv()/... ask porOf() for the identity's tall portrait (por-*.webp, the same art the consort and
+   prince cards show); until that file has loaded porOf returns the old square face and only re-renders the main screen, never
+   an open dialog. The identity card opens right after start(), so it always showed the square fallback.
+   Fix: .faces frames keep their 3:4 size per breakpoint (var(--pfw)), captions use the person-card name/rank style, and any
+   open dialog swaps the fallback for the portrait as soon as it has loaded. */
+(function(){const st=document.createElement("style");st.textContent=
+ ".faces .pfr,.faces .pcp.pfr{max-height:none!important;height:auto;aspect-ratio:3/4;width:100%}"+
+ ".faces figure{flex:0 1 var(--pfw);max-width:var(--pfw);min-width:0}.faces .pfwrap{width:100%}"+
+ ".modal .faces figcaption{margin-top:4px;text-align:center;max-width:100%}"+
+ ".modal .faces figcaption b{font-family:var(--display);font-size:1rem;line-height:1.2;color:var(--ink);overflow-wrap:anywhere}"+
+ ".modal .faces figcaption small{font-size:.76rem;font-weight:600;color:var(--gold);overflow-wrap:anywhere}";
+ document.head.appendChild(st)})();
+/* fallback face -> portrait, swapped into the open dialog once loaded */
+const POR57={};
+function por57Swap(){try{const M=$("modal");if(!M||M.hidden)return;M.querySelectorAll(".pcp img:not(.pcb2)").forEach(im=>{const s=im.getAttribute("src");const to=POR57[s];if(to&&PORK[to]===1)im.setAttribute("src",to)})}catch(e){}}
+if(typeof porOf==="function")(function(){const p0=porOf;porOf=function(who,fb){const r=p0.apply(this,arguments);try{if(r===fb&&fb&&who&&FIGS.length){
+  const src=figFor(who===S?S:who===S.emp?{kind:"emp"}:who===S.thO?{kind:"th"}:{ref:who},"por");
+  if(src&&src!==fb&&PORK[src]!==0){POR57[fb]=src;if(PORK[src]===1)return src;let n=0;const t=setInterval(()=>{if(PORK[src]===1||PORK[src]===0||++n>40){clearInterval(t);por57Swap()}},150)}}}catch(e){}return r}})();
+(function(){const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);por57Swap();return r}})();
+/* audit j54: the round face in the princess / suitor rows is a block (display:grid) and sat on a line of its own; inline like j53's rows */
+(function(){const st=document.createElement("style");st.textContent=".h54r>span>.md,.h54box .h54r .md{display:inline-grid;vertical-align:middle}.h54r>span{line-height:1.5}";document.head.appendChild(st)})();
+/* bottom tabs, no truncated text and one treatment for all: every label on ONE line at every width. Below 1280px every tab shows
+   its short label (data-s: Việc, Bản đồ, Phi tần, Quan hệ, Phe, Kẻ hầu, Con, Rương, Tài nghệ, Truyện, Nhật ký; servant mode sets
+   its own), at full width the long label. One font size for the whole bar: shrunk together (never per tab) until the widest label
+   fits its column (columns = number of visible tabs, two rows on phones), re-measured on resize and whenever the labels change. */
+(function(){const X="html body #tabs.tabs button";const st=document.createElement("style");st.textContent=
+ X+"{white-space:nowrap!important;overflow:hidden!important;text-overflow:clip!important;font-size:var(--tfs,.85rem)!important;padding-left:1px!important;padding-right:1px!important}"+
+ "@media (max-width:1279px){"+X+"{font-size:0!important}"+X+"::after{content:attr(data-s)!important;font-size:var(--tfs,.8rem)!important;white-space:nowrap!important}}"+
+ "@media (max-width:700px){"+X+"::after{font-size:var(--tfs,.72rem)!important}}";document.head.appendChild(st)})();
+let TFS_CV=null;
+function tabsFit(){try{const T=$("tabs");if(!T)return;const short=matchMedia("(max-width:1279px)").matches;const base=short?(matchMedia("(max-width:700px)").matches?.72:.8):.85;
+ T.style.setProperty("--tfs",base+"rem");const B=[...T.querySelectorAll("button")].filter(b=>b.offsetParent);if(!B.length)return;
+ const n=B.length,cols=matchMedia("(max-width:700px)").matches&&n>6?Math.ceil(n/2):n;T.style.setProperty("grid-template-columns",`repeat(${cols},minmax(0,1fr))`,"important");
+ TFS_CV=TFS_CV||document.createElement("canvas").getContext("2d");let k=1;
+ B.forEach(b=>{const cs=getComputedStyle(b,short?"::after":null);TFS_CV.font=`${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`;const txt=short?(b.dataset.s||b.textContent):b.textContent;
+  const w=TFS_CV.measureText(txt.trim()).width+1;const room=b.clientWidth-parseFloat(getComputedStyle(b).paddingLeft)-parseFloat(getComputedStyle(b).paddingRight);if(w>room&&room>0)k=Math.min(k,room/w)});
+ if(k<1)T.style.setProperty("--tfs",(base*k).toFixed(3)+"rem")}catch(e){}}
+addEventListener("resize",()=>{clearTimeout(window.__tfsT);window.__tfsT=setTimeout(tabsFit,80)});
+(function(){const r0=render;render=function(){const r=r0.apply(this,arguments);tabsFit();return r}})();
+try{if(document.fonts&&document.fonts.ready)document.fonts.ready.then(tabsFit)}catch(e){}
+setTimeout(tabsFit,0);
+/* status panel toggle (owner, Fold): the ▾ was display:none from 1200px up (and a 22px box below), so on a wide screen it could
+   not be tapped and "col" never changed anything there. Now one toggle at every width: a 36px kit button with icon + word as the
+   panel's first item; collapsed keeps only the key chips, at every width. A wide screen with no saved choice starts open. */
+(function(){const H="html body #hud2.hud2";const st=document.createElement("style");st.textContent=
+ H+" .h2t{display:inline-flex!important;position:static!important;order:-1;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;width:auto!important;min-width:36px;height:36px!important;min-height:36px;padding:0 10px!important;border:1px solid var(--trim,var(--line));border-radius:8px;background:#fffaf0;color:var(--gold);font-family:var(--body,inherit);font-size:.78rem!important;font-weight:600;white-space:nowrap;cursor:pointer;touch-action:manipulation;z-index:2}"+
+ H+" .h2t i{font-style:normal;font-size:.9rem;line-height:1}"+
+ H+"{padding-right:5px!important}"+H+".col .hc:not(.keep){display:none!important}"+
+ "@media (min-width:1200px){"+H+" .h2t{align-self:stretch;width:100%!important}}";document.head.appendChild(st)})();
+(function(){const r0=renderHud2;renderHud2=function(){try{if(window.__h2c==null&&matchMedia("(min-width:1200px)").matches){let v=null;try{v=localStorage.getItem("hclh-h2c")}catch(e){}if(v==null)window.__h2c=false}}catch(e){}
+ const r=r0.apply(this,arguments);try{const el=$("hud2"),b=el&&el.querySelector(".h2t");if(b){const col=el.classList.contains("col");b.innerHTML=col?"<i>▾</i>Chỉ số":"<i>▴</i>Thu gọn";b.setAttribute("aria-label",col?"Mở rộng bảng chỉ số":"Thu gọn bảng chỉ số");b.setAttribute("aria-expanded",String(!col));b.type="button"}}catch(e){}return r}})();
+/* the real tap bug below 1200px: the toggle re-renders #hud2 (innerHTML) inside its own click, so the button is detached by the
+   time the click bubbles to j24's "click outside the panel collapses it" listener; closest("#hud2") on the detached node is null,
+   so that listener collapsed the panel straight back. Remember the hit before anything runs and stop that click at the panel. */
+(function(){document.addEventListener("click",e=>{try{e.__h2in=!!(e.target&&e.target.closest&&e.target.closest("#hud2"))}catch(x){}},true);
+ const el=$("hud2");if(el)el.addEventListener("click",e=>{if(e.__h2in)e.stopPropagation()})})();
+/* ================= j58: TRANH NỀN THÂN PHẬN (owner 11/14) =================
+   While the "Thân phận kiếp này" card (j52) or the life's opening card ("Nhập cung…") is up, the full-screen modal
+   backdrop shows img/bg-origin-<origin.k>.webp (like the title key art) under a soft gradient. Every other modal keeps
+   the normal dim backdrop. A missing picture leaves the gradient over the usual dark colour. Loads last; only touches
+   the #modal element's own background, so card frames from other modules (j57) are untouched. */
+(function(){
+ const OBG_BAD={},OBG_OK={};
+ function obgKey(){try{return S&&S.origin&&S.origin.k?String(S.origin.k):""}catch(e){return ""}}
+ function obgWanted(m){if(!m)return false;
+  return !!(m.nl||/\bnlcard\b/.test(m.cls||"")||m.t==="Thân phận kiếp này"||/^Nhập cung/.test(String(m.t||"")))}
+ function obgClear(M){if(M.dataset.obg){delete M.dataset.obg;M.style.removeProperty("background")}}
+ function obgSet(M,k){const grad="linear-gradient(rgba(30,14,8,.30),rgba(30,14,8,.12) 38%,rgba(30,14,8,.18) 62%,rgba(30,14,8,.55))";
+  const url=OBG_BAD[k]?"":`url(img/bg-origin-${k}.webp) center 30%/cover no-repeat,`;
+  M.dataset.obg=k;M.style.setProperty("background",`${grad},${url}#2a1a12`,"important")}
+ function obgApply(){try{const M=$("modal");if(!M)return;const m=Q&&Q[0];const k=obgKey();
+  if(M.hidden||!k||!obgWanted(m)){obgClear(M);return}
+  if(M.dataset.obg===k)return;
+  obgSet(M,k);
+  if(!OBG_OK[k]&&!OBG_BAD[k]){const im=new Image();im.onload=()=>{OBG_OK[k]=1};
+   im.onerror=()=>{OBG_BAD[k]=1;if(M.dataset.obg===k){delete M.dataset.obg;obgApply()}};im.src=`img/bg-origin-${k}.webp`}
+ }catch(e){}}
+ if(typeof showModal==="function"){const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);obgApply();return r}}
+ /* anything that hides/shows the modal without showModal */
+ try{const M=$("modal");if(M&&typeof MutationObserver==="function")new MutationObserver(obgApply).observe(M,{attributes:true,attributeFilter:["hidden","class"]})}catch(e){}
+ obgApply();
+})();
+/* j62: kid card shows age once (in the header "Hoàng tử · 11 tuổi"); the adult age band (18–25…) is shown only for adults (owner 11/14) */
+(function(){const t0=tuoi;tuoi=function(n){return n>=18?t0(n):(n>0?`Tuổi <b>${n}</b>`:"")};
+ const k0=kidCard;kidCard=function(k){const t1=tuoi;tuoi=()=>"";try{return k0.apply(this,arguments)}finally{tuoi=t1}}})();
+/* j64: status panel chances in plain words (owner 11/14): the odds ladder (Liều, Khó…) is for acts only; a standing chance reads as a level */
+function chanceLvl(n){return n<=0?"Không có":n<8?"Rất thấp":n<18?"Thấp":n<35?"Vừa":n<60?"Cao":"Rất cao"}
+(function(){if(typeof HX==="object"){HX.con="Mỗi lần được thị tẩm, khả năng có thai cao hay thấp. Tăng nhờ Sủng, Sắc, cầu tự, thuốc bổ; giảm theo tuổi.";HX.dem="Mỗi tuần, khả năng Hoàng thượng lật thẻ bài của ngươi. Tăng nhờ Sủng, Sắc; bằng 0 khi đang mang thai, bị cấm túc, bị chặn thẻ hay ở lãnh cung."}
+ const r0=renderHud2;renderHud2=function(){r0.apply(this,arguments);const el=$("hud2");if(!el||!S)return;
+  const set=(k,lab,v)=>{const b=el.querySelector(`.hc[data-hx="${k}"]`);if(!b)return;const i=b.querySelector("i");b.innerHTML=`${lab} <b>${v}</b>`+(i?i.outerHTML:"")};
+  try{set("con","Có thai:",chanceLvl(conceiveCh()))}catch(e){}try{set("dem","Lật thẻ:",chanceLvl(nightCh()))}catch(e){}}})();
+
+/* ================= j66: SHE IS ONE OF THE CONSORT IDENTITIES (owner 11/14) =================
+   No separate "player looks" any more. Each new life rolls one consort identity (img/FIGURES.json, role consort,
+   c01..c32) for her as part of the stored roll in localStorage "ctm-nextlife" (d.pid): a reload shows the same one,
+   "Đổi thân phận" rolls another. The identity is reserved for the whole game (S.pid sits in S.fidUsed), so no NPC
+   consort, tuyển tú intake included, ever gets it or any of its tiers / ages. Her art then follows the consort picker:
+   dress tier = rank (Đáp ứng t1 ... Hoàng hậu t8), age band = her age (18–25, 26–35, 36–50, 51+), same identity for life.
+   While she is a palace maid (cnv) she wears the identity's tier 1. In lãnh cung she (and any NPC consort there) asks for
+   the identity's tier "cold" (fig-consort-cNN-tcold-aAA.webp); while that art is missing the nearest file is tier 1. If a file is missing the nearest
+   tier/age of the identity is used; with no art at all she keeps the old face. Old saves (no S.pid) are left as they are,
+   look-* faces included. */
+const PID_N=32;
+function pidKeys(){try{const M=typeof FIGIX!=="undefined"&&FIGIX.consort;const k=M?Object.keys(M).filter(x=>/^consort:c\d+$/.test(x)):[];if(k.length)return k.sort()}catch(e){}
+ const L=[];for(let i=1;i<=PID_N;i++)L.push("consort:c"+String(i).padStart(2,"0"));return L}
+/* deterministic from the roll's seed, so the same roll always gives the same identity even before it is stored */
+let PID_AVOID=null;
+function pidRoll(d){const K=pidKeys();const r=nlRng((d.seed^0x2c1b3c6d)>>>0);r();let i=Math.floor(r()*K.length)%K.length;
+ if(PID_AVOID&&K[i]===PID_AVOID&&K.length>1)i=(i+1+Math.floor(r()*(K.length-1)))%K.length;return K[i]}
+/* "Đổi thân phận" always gives another identity than the one on the card */
+(function(){const r0=nlReroll;nlReroll=function(){PID_AVOID=S&&S.pid||null;try{return r0.apply(this,arguments)}finally{PID_AVOID=null}}})();
+function pidOn(){return !!(S&&S.pid)}
+/* 8 ranks = 8 dress tiers; 4 age bands as the standing rule draws them */
+function pidBand(a){return a==null?null:a<26?0:a<36?1:a<51?2:3}
+(function(){const t0=figTierOf;figTierOf=function(who){try{
+  if(who===S&&S){if(S.pid)return (typeof isSrv==="function"&&isSrv())?1:S.out?-1:Math.min(7,S.rank||0)+1;return t0.apply(this,arguments)}
+  if((rivals||[]).includes(who))return who.out?-1:who.queen?8:Math.min(7,who.rank||0)+1}catch(e){}return t0.apply(this,arguments)}})();
+figDist=function(f,tier,age){const ft=figTier(f.tier),fa=figAge(f.ageBand);const ab=pidBand(age),fb=pidBand(fa);
+ return (tier!=null&&ft!=null?Math.abs(ft-tier)*2:0)+(ab!=null&&fb!=null?Math.abs(fb-ab)*1.2+Math.abs(fa-age)/400:0)};
+/* the reserved identity is always "used": every NPC pick skips it */
+(function(){const u0=figUsed;figUsed=function(){const U=u0.apply(this,arguments);try{if(S&&S.pid&&!U.includes(S.pid))U.push(S.pid)}catch(e){}return U}})();
+/* her own pick: the reserved identity, or nothing (the old face) when its art is not there */
+(function(){const p0=figPick;figPick=function(who){if(who===S&&S&&S.pid){figUsed();const M=typeof FIGIX!=="undefined"&&FIGIX.consort;if(M&&M[S.pid]){S.fid=S.pid;return S.pid}return null}
+  if(who&&who!==S&&S&&S.pid&&who.fid===S.pid)who.fid=null;return p0.apply(this,arguments)}})();
+/* a new life: attach the stored identity, then clear any NPC that already took it */
+function pidEnforce(){if(!S||!S.pid)return false;let ch=false;S.fid=S.pid;const U=figUsed();
+ for(const o of nlHolders()){if(o&&o!==S&&o.fid===S.pid){o.fid=null;ch=true}}
+ const n=U.filter(x=>x===S.pid).length;if(n>1){S.fidUsed=U.filter(x=>x!==S.pid);S.fidUsed.push(S.pid);ch=true}return ch}
+(function(){const r0=nlRun;nlRun=function(d){if(d&&!d.pid){d.pid=pidRoll(d);try{const c=store.get(NL_KEY);if(c&&c.seed===d.seed){c.pid=d.pid;store.set(NL_KEY,c)}}catch(e){}}
+  const res=r0.apply(this,arguments);try{if(S&&d&&d.pid){S.pid=d.pid;pidEnforce()}}catch(e){console.error(e)}return res}})();
+/* the face snapshot (j52) may hold a pre-j66 player look or an NPC with her identity: correct it and re-record */
+(function(){const f0=nlFaces;nlFaces=function(d){const r=f0.apply(this,arguments);try{if(S&&S.pid&&d&&d.faces){const H=nlHolders();const F=d.faces;let ch=pidEnforce();
+  H.forEach((o,i)=>{if(!o)return;const rec=F.h[i]=F.h[i]||{};if(o===S){if(rec.fid!==S.pid){rec.fid=S.pid;ch=true}}else if(rec.fid===S.pid){delete rec.fid;ch=true}});
+  if(Array.isArray(F.fidUsed)&&!F.fidUsed.includes(S.pid)){F.fidUsed.push(S.pid);ch=true}
+  if(ch&&NLP&&NLP.seed===d.seed)store.set(NL_KEY,d)}}catch(e){console.error(e)}return r}})();
+/* the identity card: show her portrait as soon as it has loaded (the card is a modal, render() alone does not redraw it) */
+(function(){const c0=nlCard;nlCard=function(){const r=c0.apply(this,arguments);try{const src=figFor(S,"por");if(src&&PORK[src]!==1){const im=new Image();im.onload=()=>{PORK[src]=1;try{const m=Q[0];if(NLP&&m&&m.nl){m.faces=[[pMe(),S.name]];showModal()}}catch(e){}};im.src=src}}catch(e){}return r}})();
+/* j80 — Sức hotfix. Before: +4 Sức per tuần (+1 in harsh weather) while most acts cost 5–20, and every 2-khắc act,
+   including "Nghỉ ngơi dưỡng sức" itself, was locked below Sức 20: players got stuck with khắc left and no way to recover.
+   Now: (1) a night's sleep restores a real amount, same rule for every consort; (2) acts that restore Sức and cost none
+   are never locked by the Sức floor; (3) the morning log states the recovery as a true delta. */
+var __restAct=0,__cardSuc=0;
+/* the old floor "Sức ≥ 20 for any 2-khắc act" also blocked walking on the map and resting; now the floor is Sức 5
+   (exhausted), and a card that costs Sức needs enough Sức to pay it and stay above 0 */
+const SUC_FLOOR=5;
+function isRestCard(a){return !!(a&&a.w&&a.w.suc>0&&!(a.c&&a.c.suc<0))}
+can=function(c){if(!S||S.dead||used+c>4)return false;if(__restAct||c<=1)return true;if(__cardSuc)return S.suc+__cardSuc>0&&S.suc>=SUC_FLOOR;return S.suc>=SUC_FLOOR};
+function cardSuc(a){return a&&a.c&&a.c.suc<0?a.c.suc:0}
+(function(){const a0=act;act=function(i){__restAct=isRestCard(deck[i])?1:0;__cardSuc=cardSuc(deck[i]);try{return a0.apply(this,arguments)}finally{__restAct=0;__cardSuc=0}}})();
+(function(){const h0=cardH;cardH=function(a){__restAct=isRestCard(a)?1:0;__cardSuc=cardSuc(a);try{return h0.apply(this,arguments)}finally{__restAct=0;__cardSuc=0}}})();
+(function(){if(typeof whyTime!=="function")return;const w0=whyTime;whyTime=function(c){if(!S||S.dead)return"";if(used+c>4)return"hết khắc buổi này";if(__restAct||c<=1)return"";if(__cardSuc&&S.suc+__cardSuc<=0)return `cần Sức trên ${-__cardSuc} (có ${S.suc})`;return S.suc<SUC_FLOOR?`kiệt sức (Sức ${S.suc}, cần ${SUC_FLOOR}) — nghỉ ngơi trước`:""}})();
+function sleepRegen(p){const base=(typeof harsh==="function"&&harsh())?8:14;return base+(p.suc<30?6:0)}
+(function(){const e0=endTurn;endTurn=function(){
+  if(!S||S.dead||Q.length||S.mg||(typeof isSrv==="function"&&isSrv()))return e0.apply(this,arguments);
+  const g=Math.min(sleepRegen(S),100-S.suc);S.suc=cl(S.suc+g,0,100);
+  try{liveRivals(true).forEach(v=>v.suc=cl(v.suc+sleepRegen(v),0,100))}catch(e){}
+  const r=e0.apply(this,arguments);
+  try{if(!S.dead&&g>0)log(`<span class="g">Ngủ đêm hồi sức: Sức +${g}</span>`)}catch(e){}
+  return r}})();
+
 /* ================= j60 PORTRAIT KIT (owner 11/14, dev/kit/KIT.md): every portrait = role/rank FRAME (rectangular 3:4, img/kit/frame-*.webp)
    + BROCADE ground (img/kit/bg-*.webp) + rank gem / servant token / origin emblem badge; small round avatars (mdH) get the
    simplified version (brocade ground + rank-colour ring + metal rim). Unknown people (kitKnown(p)===false) show the grey
@@ -5304,7 +5596,7 @@ function kitFace(p){try{if(!p)return{src:"",ini:"?"};if(p===S)return pMe();if(p=
  const f={src:"",ini:String(p.name||"?").split(" ").pop()[0]||"?",col:"#8a7a6a"};f.__kp=p;f.__kr=personRoleRank(p);return f}
 /* ONE helper: size "lg" = the tall 3:4 frame (pframe), "big"/"sm"/"xs"/"" = round avatar */
 function kitPortrait(p,o){o=o||{};const f=kitFace(p);return o.size==="lg"||o.size==="frame"?pframe(f):mdH(f,o.size||"")}
-/* the tall frame: one picture per frame (550x1031: every frame has the SAME portrait opening 384x506 at (83,208); crests, side dragons and the pendant + tassel stay inside the shared canvas); crests, side dragons and the pendant + tassel stay inside the shared canvas); crests, side dragons and the pendant + tassel stay inside the shared canvas); crests, side dragons and the pendant + tassel stay inside the shared canvas); the box is 480 canvas units wide and as tall as the canvas, the stage (.kin) is scaled by the opening (box width / 480) and centred, so every opening is identical; side ornaments may reach past the box edges, crest and tassel are inside its height */
+/* the tall frame: one picture per frame (550x1037: every frame has the SAME portrait opening 384x506 at (83,214); crests, side dragons and the pendant + tassel stay inside the shared canvas); crests, side dragons and the pendant + tassel stay inside the shared canvas); crests, side dragons and the pendant + tassel stay inside the shared canvas); crests, side dragons and the pendant + tassel stay inside the shared canvas); crests, side dragons and the pendant + tassel stay inside the shared canvas); the box is 480 canvas units wide and as tall as the canvas, the stage (.kin) is scaled by the opening (box width / 480) and centred, so every opening is identical; side ornaments may reach past the box edges, crest and tassel are inside its height */
 (function(){const p0=pcPort;pcPort=function(f,col,status){f=f||{};let d;try{d=kitDecor(f)}catch(e){return p0.apply(this,arguments)}
  const g=d.known?f:Object.assign({},f,{src:d.unknownSrc,ini:"",rk:"",w:null});let h=p0.call(this,g,d.known?col:"#9aa0a6",status);
  h=h.replace(/<img class="pcb2"[^>]*>/,"").replace('class="pcp',`class="pcp kit kr-${d.role}`).replace(/style="--c:([^"]*)"/,`style="--c:$1;--kc:${d.col};--km:${d.metal}"`);
@@ -5326,18 +5618,18 @@ function kitPortrait(p,o){o=o||{};const f=kitFace(p);return o.size==="lg"||o.siz
 (function(){if(typeof renderStage!=="function")return;const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);try{const ppl=curPeople();document.querySelectorAll("#tokens .tok").forEach(b=>{const p=ppl[+b.dataset.p];if(!p)return;const who=p.ref||(p.kind==="emp"?S.emp:p.kind==="th"?S.thO:p.kind==="maid"?S.maid:null);if(who&&!kitIsKnown(who)){const t=b.querySelector(".tag");if(t)t.textContent="Người lạ";const r=personRoleRank(who);const fi=b.querySelector("img.figimg");if(fi)fi.src=KIT_DIR+`unknown-fig-${r.kid?"k":r.sex==="m"?"m":"f"}.webp`}})}catch(e){}return r}})();
 /* kit CSS: portrait pieces only; nothing else changes */
 (function(){const st=document.createElement("style");st.id="kit60";st.textContent=`
-.pcp.kit{border:0!important;box-shadow:none!important;background:transparent!important;border-radius:0!important;overflow:visible!important;container-type:size;aspect-ratio:480/1031!important}
-.pcp.kit>.kin{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:calc(min(100cqw / 480,100cqh / 1031) * 550);height:calc(min(100cqw / 480,100cqh / 1031) * 1031);display:grid;place-items:center;isolation:isolate}
-.pcp.kit .kin>.kbg{position:absolute;left:14.655%;top:19.825%;width:70.691%;height:49.661%;background:#5a1e16 center/cover no-repeat;z-index:-1;border-radius:3px}
-.pcp.kit .kin>img:not(.kfr):not(.kgem):not(.kemb){position:absolute;inset:auto!important;left:14.655%!important;top:24.295%!important;right:auto!important;bottom:auto!important;width:70.691%!important;height:45.191%!important;border-radius:0 0 3px 3px!important}
+.pcp.kit{border:0!important;box-shadow:none!important;background:transparent!important;border-radius:0!important;overflow:visible!important;container-type:size;aspect-ratio:480/1037!important}
+.pcp.kit>.kin{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:calc(min(100cqw / 480,100cqh / 1037) * 550);height:calc(min(100cqw / 480,100cqh / 1037) * 1037);display:grid;place-items:center;isolation:isolate}
+.pcp.kit .kin>.kbg{position:absolute;left:14.655%;top:20.289%;width:70.691%;height:49.373%;background:#5a1e16 center/cover no-repeat;z-index:-1;border-radius:3px}
+.pcp.kit .kin>img:not(.kfr):not(.kgem):not(.kemb){position:absolute;inset:auto!important;left:14.655%!important;top:24.733%!important;right:auto!important;bottom:auto!important;width:70.691%!important;height:44.930%!important;border-radius:0 0 3px 3px!important}
 .pcp.kit .kin>img.kpor{object-fit:cover!important;object-position:50% 0!important}
-.pcp.kit .kin>img.kpor[src*="face-"]{top:19.825%!important;height:49.661%!important;-webkit-mask-image:radial-gradient(ellipse 58% 56% at 50% 46%,#000 62%,transparent 100%);mask-image:radial-gradient(ellipse 58% 56% at 50% 46%,#000 62%,transparent 100%)}
+.pcp.kit .kin>img.kpor[src*="face-"]{top:20.289%!important;height:49.373%!important;-webkit-mask-image:radial-gradient(ellipse 58% 56% at 50% 46%,#000 62%,transparent 100%);mask-image:radial-gradient(ellipse 58% 56% at 50% 46%,#000 62%,transparent 100%)}
 .pcp.kit .kin>img.kfr{position:absolute;inset:0!important;width:100%!important;height:100%!important;border-radius:0!important;object-fit:fill!important;z-index:2;pointer-events:none}
-.pcp.kit .kin>img.kgem{position:absolute;inset:auto!important;left:73.564%!important;top:64.403%!important;right:auto!important;bottom:auto!important;width:18.327%!important;height:auto!important;aspect-ratio:1;border-radius:0!important;object-fit:contain!important;z-index:3;opacity:1;filter:drop-shadow(0 1px 2px #0007)}
-.pcp.kit .kin>img.kemb{position:absolute;inset:auto!important;left:62.218%!important;top:65.519%!important;right:auto!important;bottom:auto!important;width:13.964%!important;height:auto!important;aspect-ratio:1;border-radius:0!important;object-fit:contain!important;z-index:3;filter:drop-shadow(0 1px 2px #0007)}
+.pcp.kit .kin>img.kgem{position:absolute;inset:auto!important;left:73.564%!important;top:64.609%!important;right:auto!important;bottom:auto!important;width:18.327%!important;height:auto!important;aspect-ratio:1;border-radius:0!important;object-fit:contain!important;z-index:3;opacity:1;filter:drop-shadow(0 1px 2px #0007)}
+.pcp.kit .kin>img.kemb{position:absolute;inset:auto!important;left:62.218%!important;top:65.718%!important;right:auto!important;bottom:auto!important;width:13.964%!important;height:auto!important;aspect-ratio:1;border-radius:0!important;object-fit:contain!important;z-index:3;filter:drop-shadow(0 1px 2px #0007)}
 .pcp.kit>.pcs{z-index:4}
 .pfwrap>.pcp.kit{max-height:none!important}
-.pcp.kit .kin>.klab{position:absolute;left:50%;top:68.555%;transform:translate(-50%,-100%);z-index:3;font-style:normal;font-size:.72rem;color:#f4f4f4;background:#4a4e54cc;padding:1px 8px;border-radius:8px;white-space:nowrap}
+.pcp.kit .kin>.klab{position:absolute;left:50%;top:68.737%;transform:translate(-50%,-100%);z-index:3;font-style:normal;font-size:.72rem;color:#f4f4f4;background:#4a4e54cc;padding:1px 8px;border-radius:8px;white-space:nowrap}
 .pcp.kit.noimg .kin{color:#fff8e8;text-shadow:0 1px 3px #000a}
 .md.kit{background:var(--kbg) center/cover no-repeat!important;border-color:var(--kc)!important;box-shadow:0 0 0 1.5px var(--km),0 2px 6px #5a3a2044!important}
 .md.kit.xs{box-shadow:0 0 0 1px var(--km)!important}
