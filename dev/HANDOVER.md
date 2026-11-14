@@ -1,4 +1,16 @@
-# Cung Tường Mộng — handover (from MAIN 493, 11/14/2026 ~01:00 UTC)
+# Cung Tường Mộng — handover
+
+## ⚠ PRIORITY RULES — READ FIRST, EVERY TIME (owner, binding)
+The owner must NEVER have to repeat herself. Every main session and every worker:
+1. ON TAKING OVER (new session, restart, new worker): read this whole file, dev/OWNER_DECISIONS.md (the log of every owner decision), dev/kit/KIT.md, dev/kit/VANPHONG.md, and the PROGRESS file of your branch BEFORE doing or saying anything.
+2. BEFORE REPORTING OR PROPOSING ANYTHING to the owner ("chưa có", "nên thêm", "đề xuất…"): grep the code (dev/build/*.js) and the docs (dev/**/*.md, OWNER_DECISIONS.md) to check whether it already exists or was already decided. Never present an existing or already-discussed feature as new, and never re-open a settled decision.
+3. EVERY owner decision, preference, approval or rejection goes into dev/OWNER_DECISIONS.md the same turn (date, topic, decision). Main session owns that file.
+4. WORKER BRIEFS must quote every owner rule that applies to the task (art rules, kit rules, wording, devices). A worker brief that omits a relevant rule is the coordinator's fault.
+5. Apply common game conventions proactively (rewards, level-ups, warnings, animations, feedback); never wait for the owner to teach them. If something looks crude or wrong, fix it before showing her.
+6. Think with the owner: weigh each idea, give an honest recommendation; numbers/balance are decided by us, not asked.
+7. Self-check every image/screen before sending it to her; send single readable images (whole face for face details, never extreme zooms).
+
+## (original handover from MAIN 493, 11/14/2026 ~01:00 UTC)
 
 Owner: Victoria ("sếp"). Reply to her in Vietnamese only, as "em", short, no questions unless truly needed; she reads on a Samsung Galaxy Z Fold (inner ~1510x2000 portrait, cover ~904x2316). This is her standalone game, NOT Đại Hy (Đại Hy has its own main session; send any Đại Hy word of hers to MAIN 495 session_01Rc5AsLpa5TYV5oV2gBycQy via send_message).
 

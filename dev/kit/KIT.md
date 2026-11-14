@@ -476,8 +476,48 @@ img/veil*.png is rejected). Status chips such as "Hủy dung (vừa) · còn N t
 `dilLine` derives the rows from the option's own outcome code: each `roll(N)`-guarded `apply/ap(S,…)/die` → "<effect>: <ladder word>"
 (gain → Được, loss → Kèm), unguarded `apply` → certain; a `roll(expr)` that can be evaluated gives the main odds word. "Khó lường" is gone.
 
-## 26. KIT 2b (kit owner #3, owner feedback 11/14) — `dev/build/jk2b.js`, loaded last
-### 26.1 PERSON CARD PORTRAIT CELL (one cell for everyone)
+## 26. HONOUR PODIUM · BỤC VINH DANH (j90, kit owner, owner 11/14) — screen 1 of every ranking result
+Applies to EVERY ranking board of the game ("một lời phàn nàn là cả nhóm"): every contest that plays the j82 mini-game (`startContest`: j71 hội thi,
+festivals, tranh tài…), Tranh ghế result (j34), hoàng tự khảo thí (j53 `.ktlist`), công chúa dâng nghệ (j54 `.h54list`), and any new ranking
+(tuyển tú with a ranking, thi tài…) through the API below. Two screens: **screen 1 = the podium alone**, full screen, only the winners;
+"Tiếp" → **screen 2 = the existing score board / result panel, unchanged** (`kitGameResult`, kit panel). The podium is never mixed into the board.
+
+```
+#kpodov (fixed, z 9000) > .kpod[.kpod-win when she is Nhất]
+  .kpod-hd > .kph   seal VINH DANH (gold) + contest title + sub
+  .kpod-stage       backdrop img/kit/podium-bg.webp (red drapes, gold clouds, no people). NO rays / halo behind anyone (owner 11/14: "giống hào quang")
+    .kpod-col.kpod-p2 | .kpod-p1 | .kpod-p3      DOM order Nhì (left) · Nhất (centre, highest) · Tam (right)
+      .kpod-fig     FULL-BODY figure (fig-*.webp for her dress tier and age via figFor; kids via kidFigSrc); stranger = img/kit/unknown-fig-f|m|k
+                    (kitKnown false → name "Người lạ"); no figure art → the kit's tall 3:4 frame (`kitPortrait(p,{size:"lg"})`). Never a round avatar.
+                    Per place a soft STAGE LIGHT (`--kl` colour): .kpod-beam = soft spotlight falling from above onto the person (in front, screen blend, faint),
+                    .kpod-pool = oval pool of light at the feet on the step, .kpod-motes = a few small floating motes. Nhất warm gold, Nhì soft silver-white,
+                    Tam pale copper-rose; higher place = a little brighter; all subtle. Her own column: a little brighter + "Ngươi" tag ("Con ngươi" for her child).
+      .kpod-step    lacquered dais block (img/kit/podium-step.webp, border-image), Nhất step highest, Nhì middle, Tam lowest (heights fitted to content)
+        .kpod-medal img/kit/medal-1|2|3.webp (gold / silver / bronze cloud medallion with tassels) + word Nhất / Nhì / Tam
+        .kpod-plq   cream kit plaque: rank title + name (kitName, rank colour), sub (e.g. "Xuất sắc"), score "N phần", prize (kitChip or text, green)
+  .kpod-ft          her place when she is not in the top three ("Ngươi đứng thứ 5 trong 5 người · 18 phần") + the ONE kit button "Tiếp" (.kbtn)
+  .kpod-fx          confetti layer
+```
+Motion (CSS + Web Animations, transform/opacity only): Tam rises at 0.3 s, Nhì 1.0 s, Nhất 1.8 s (step grows, figure drops in, its light fades in).
+The celebration FOLLOWS HER, whatever her place: paper + petals in her place colours (Nhất red-gold + plum petals, Nhì silver-white, Tam copper-pink) burst
+from HER figure when her column appears and fall over HER step, then a light petal fall over her step; at Nhất a little stronger (second burst, longer fall).
+Outside the top three: only the place lights, no confetti. Tap anywhere (not the button) = skip to the final state; Enter/Esc = skip, then Tiếp.
+`prefers-reduced-motion: reduce` → final state at once, no motes, no confetti.
+Layout: figures sized by the free height (`--kfh`, Nhất 100 %, others 84 %), never cover the plaques; plaques wrap text (no truncation), no horizontal
+scroll; tested 755x1000@2, 1180x820@2, 1366x1024@2, 412x1058@2, 390x844@3, 1024x768@2 (shots dev/shots/podium/).
+
+API (data only):
+```js
+kitPodiumShow([{who:person, score:75 /* or "8.5 phần" */, place:1, prize:[["Sủng",8],["Danh",3]] /* or "Phong Tần" */, sub:"Xuất sắc"}, …],
+              {title:"Hội Thượng nguyên", sub:"Môn Thơ", next:"Tiếp", onNext:fn});   // ≥ 2 entrants, else nothing shown
+kitPodium(list,o)            // HTML only (no overlay)
+kitPodiumTag(qItem,list,o)   // a Q item shows the podium first, then its panel (non-enumerable: never saved)
+kitFigOf(person)             // full-body src (figure, kid figure, or stranger silhouette)
+```
+Art: Magnific gpt-2-6, 1 style ref (face-consort-01), folder ba4aecfe…; no faces. medal-1..3 (240 px, keyed), podium-step (512x384), podium-bg (1344x752).
+
+## 28. KIT 2b (kit owner #3, owner feedback 11/14) — `dev/build/jk2b.js`, loaded just before j84
+### 28.1 PERSON CARD PORTRAIT CELL (one cell for everyone)
 - Every `.pc` (consort, servant, child, court, men…) draws its portrait in ONE cell: the whole frame canvas from its top edge down to the end of
   the band (canvas x 0–550, y 0–795, aspect 550:795). The crest room above the photo window is always kept (Hoàng hậu's phoenix, the Emperor's
   dragon, Thái hậu's phoenix show whole; low ranks simply show brocade-free headroom). The pendant/tassel is not drawn in the card.
@@ -485,7 +525,7 @@ img/veil*.png is rejected). Status chips such as "Hủy dung (vừa) · còn N t
   (384x506 canvas units) has the same size for every rank and role. Nobody sets another size.
 - Layout: portrait floats left; name, rank title, ghen line, stat tiles and the info rows sit beside it; act groups run full width below.
   The Fold (755x1000) shows portrait + name + rank + the first info rows without scrolling; the card scrolls as one block (`.pc` overflow).
-### 26.0 ONE FRAME FUNCTION (owner 11/14 B) — `pcPort(face)` everywhere
+### 28.0 ONE FRAME FUNCTION (owner 11/14 B) — `pcPort(face)` everywhere
 - Every portrait frame — person card, dialog subject, act-art frame, small frames in face strips (Bảng phẩm vị, pager), header, Hoàng thượng
   box, chips, facts, podium, week book, strips — is the SAME `pcPort` cell (j60 layers on the 550x1037 canvas). `mdH(face,size)` calls pcPort
   and shows the same cell at a smaller width (`span.md.kit.kfc`, xs 26 px · sm 38 · default 60 · big 84; aspect 550:795). No other frame
@@ -504,7 +544,7 @@ img/veil*.png is rejected). Status chips such as "Hủy dung (vừa) · còn N t
   bows on the cartouche; eunuch 0..2: jade ring above the whisk. Width grows with rank (300→432 canvas units for consorts), base on the top bar (y 172).
   Data: `KIT_CREST` {ar, base, w, key(frameUrl), html(frameUrl)}; a new role adds its crest here.
 
-### 26.2 STAGE SCALE (one scale, one floor)
+### 28.2 STAGE SCALE (one scale, one floor)
 - `kitStageScale()` after every `renderStage` + resize: every adult figure (her `#mefig`, every `#tokens .tok.fig img.figimg`) gets the SAME height
   `--kfig` (all fig-*.webp are cut head-to-hem on 900 px); children keep their j73 age ratio of that height. Feet on the floor line `--kfb` (26.3).
 - Height (owner A): the figures fill the stage — feet on the floor band near the bottom (KIT_FLOOR feet line 90 % of the way from the floor
@@ -514,10 +554,10 @@ img/veil*.png is rejected). Status chips such as "Hủy dung (vừa) · còn N t
   When she is on stage with others she stands at the left and the row takes the rest of the width.
 - Name tags hang under the feet (absolute, one line, never cut). When neighbours would touch, tags drop to 2 or 3 staggered lines and the
   floor band grows to fit them.
-### 26.3 STAGE FLOOR
+### 28.3 STAGE FLOOR
 `KIT_FLOOR[picture] = floorTop` (fraction of the room picture where the floor starts); the crop keeps the floor; `--kfb` feet bottom, `--kfh` room
 for the figure. Phone portrait: stage 40 % of the screen on scene tabs, 24 % on card tabs (Hậu cung, Cung nhân, Hoàng tự) so the card has room.
-### 26.4 TRONG CUNG BLOCK (Hoàng thượng · Thái hậu · Hoàng hậu)
+### 28.4 TRONG CUNG BLOCK (Hoàng thượng · Thái hậu · Hoàng hậu)
 - `kitCourtHTML(cls)` → `.kcourt`: per person a row = small kit frame (`mdH xs`) + name + "Tâm trạng <word>" + "Với ngươi <word>" (green/red/neutral
   `.ef`), "chưa rõ" when unknown. Tap a row = that person's card (Hoàng thượng `showEmp`, Thái hậu → Giao tình on her, Hoàng hậu → Hậu cung on her).
 - Header chips (owner E): Thái hậu and Hoàng hậu chips (`#kcchips .kcchip`: mini frame, title, mood) beside the Hoàng thượng box on wide screens
@@ -526,10 +566,10 @@ for the figure. Phone portrait: stage 40 % of the screen on scene tabs, 24 % on 
   stage (it is in the sheet: "▾ Tư chất").
 - Hooks (data only): `window.kitCourtMood(who)` → text|[text,"g"|"r"]|null, `window.kitCourtKnown(who)` → bool (who = emp|th|hh). Default: the
   Emperor's mood is public (MOODS), Thái hậu / Hoàng hậu moods "chưa rõ" until a module says; attitudes from Sủng / `S.th` / `S.hh` (`affW`).
-### 26.5 "COVERS NO FIGURE" = the painted silhouette
+### 28.5 "COVERS NO FIGURE" = the painted silhouette
 `kitFigRects()` (j79, replaced in jk2b) returns per figure 24 horizontal bands with the opaque extent of the art (alpha mask read once per picture),
 so stage blocks may stand beside a head or between figures, never over the painted body. Used by #kstat, #kcourt and every later stage overlay.
-### 26.6 OPTION MODE "cost" (hidden outcomes for EVENT choices)
+### 28.6 OPTION MODE "cost" (hidden outcomes for EVENT choices)
 - Event choices (weekly events j68, Mệnh truyện chapters j67, side events, dilemmas) show ONLY the cost: the Tốn row with Sức / khắc / Bạc
   (`.ka.khideout`); no Được / Mất / Kèm / Ghi chú rows and no odds meter. No cost → "Tốn: không". Conditions (Cần row) stay.
 - The result card (section 7) is unchanged and shows the true numbers after the choice.
@@ -539,7 +579,7 @@ so stage blocks may stand beside a head or between figures, never over the paint
 - Use (data only): `Q.push({…, hideOut:true, opts:[…]})` / `kitModal({…, hideOut:true})` hides every option; `{n, fx, x, hideOut:true}` one option;
   any other priced button: `data-khide="1"`. Normal act cards, person-card acts and shop buttons never use it.
 
-### 26.7 PERSON CARD: portrait and bars always in view (owner D)
+### 28.7 PERSON CARD: portrait and bars always in view (owner D)
 - Left column = portrait cell, name, rank title, the BARS (`.kpbars`: Ghen, Ngươi với nàng · thiện cảm, Oán, Nàng với ngươi, Sủng).
   Right column (`.pcr`) = facts (`.kpfacts`: stat tiles, age, nature, chips) → act-group tabs (`.pctabs`) → act cards (`.pcb`).
 - Screens ≥600 px (Fold, iPad): two columns; the left column is sticky (own scroll if taller than the card) while the right one scrolls, so the
@@ -550,43 +590,43 @@ so stage blocks may stand beside a head or between figures, never over the paint
 - After an act the bars run from the old value to the new one (0.6 s, `KIT_BARW` remembers the last width per person and bar; none with
   prefers-reduced-motion). j93 kit-motion may replace the easing, not the markup.
 
-### 26.8 VEIL + SCAR LAYERS (review/wardrobe j92)
+### 28.8 VEIL + SCAR LAYERS (review/wardrobe j92)
 - Layer order everywhere: portrait < scar strokes (`img.kscar`) < veil (`img.kveil2`) < frame. Placed per picture from `KIT_SCAR.fit` /
   `KIT_VEIL.fit` (`style(file,tier)`); the por-* boxes were re-derived from the fig-* boxes through the porcrop geometry (the por pictures were
   re-cut after the fit was measured). No fit data → nothing drawn (never a guessed place).
 - Tall frame and small frame: `.kfxc` (clip = photo window) > `.kfx` (box of the por picture, same 1.14x cut as the portrait); stage figures:
   `.kfxf` box laid over the figure image (idle animation off on that figure).
 - Scar only when the player knows (`KIT_SCAR.on`: herself or j70 `knows(p)`, or `p.scar.known`); a veil is public; never on the grey silhouette.
-### 26.9 DELTA CHIPS + WORDING
+### 28.9 DELTA CHIPS + WORDING
 - `kpChipify` (jk2b): a delta chip takes the whole short clause before the number (up to 6 words, stops at punctuation): "nhà Hộ bộ thế lực −2";
   linking words in front (và, được, mất, khiến, nên…) stay outside the chip.
 - Contest tables are titled "Bảng định thứ" (any old "BẢNG ĐIỂM / Bảng điểm" is rewritten on screen by VP).
-### 26.10 EVENT + STORY ART (j89 evArtOf / stArtOf)
+### 28.10 EVENT + STORY ART (j89 evArtOf / stArtOf)
 - Event choices, news panels ("Tin trong cung"), story/chapter cards: the picture goes in the kit art frame (`kitArtFrame`, `.kpsubj.kpiart.kpev`)
   left of the body, unless the panel is about a person (then the person's portrait, section 8).
 - Picture (data only, first match): `item.art` · `item.stArt:[arc,beat,ending]` → stArtOf · `item.evId` → evArtOf(id, week) · `item.pid` (+`pp.id`)
   → evArtOf("<pid>:<id>") · news → evArtOf("news:<title>") · default category. Label = `evArtTitle`.
 - The result card right after an event choice shows the same picture small on its left (`#rtoast.kevres > .kpevr`).
 - Merged review/event-art dd2f253 (96 st-* story pictures, EVENTS.json stories, j89 stArtOf).
-### 26.11 IDENTITY CARD + REINCARNATION BACKGROUND (owner item 6)
+### 28.11 IDENTITY CARD + REINCARNATION BACKGROUND (owner item 6)
 - The origin picture (`img/bg-origin-<k>.webp`) is no longer the backdrop: it sits in the kit art frame `.kpidart` (kitArtFrame) — landscape:
   frame left, facts right; portrait/Fold: frame on top, facts below. Her full-body figure still stands on the background.
 - One shared background for every reincarnation screen: `img/bg-reborn-p.webp` (portrait 1200x1602) / `img/bg-reborn-l.webp` (landscape 1920x1080),
   gpt-2-6, no people (moon with the wheel of rebirth, jade bridge, lotus lanterns).
-### 26.12 kitRoulette (owner item 6b) — origin wheel at a new game and at rebirth
+### 28.12 kitRoulette (owner item 6b) — origin wheel at a new game and at rebirth
 `kitRoulette({items:[{k,src,name,rare}], target, toEl, done})`: overlay on the reincarnation background; grid of origin tiles (art frame, name,
 rarity chip from j69 weights: Rất hiếm / Hiếm / Thường gặp); a gold light runs tile to tile with ease-out timing and a soft `sfx-tap` tick, stops on the
 pre-rolled origin (j52 seed + j69 weights; the wheel never decides), the tile flashes gold, flies to the card's art frame while the card slides in
 (landscape from the right, portrait from below). ≈4.5 s, tap skips, prefers-reduced-motion = card at once. Hooked on `nlCard` (start() → nlBegin →
 nlCard, used by "Bắt đầu kiếp mới" and the rebirth after death), once per rolled life. Test hook: `window.__kroulHold` / `__kroulGo()`.
-### 26.13 kitItem — ONE item tile (KIT READY)
+### 28.13 kitItem — ONE item tile (KIT READY)
 `kitItem({src, name, grade:0..4, qty, label:[text,"ok"|"no"|"n"], on, empty, size:"sm"|"md"|"lg", data, tip})` → `.kitem` (52 / 72 / 104 px).
 Simple frame (not the portrait frame): square box, 2 px border + radial ground in the grade colour (`KIT_GRADE`): Thường `#9a8a78` · Tinh phẩm
 `#3f8f6a` · Trân phẩm `#3f62a8` · Tuyệt phẩm `#7a4fa0` · Ngự tứ `#b8901c` gold with a red inner ring and a small red "御" seal. Under the box:
 name (wraps, never cut), grade word, optional status chip; `qty>1` → "×N" badge; `on` → "Đang mặc" band; `empty` → dashed empty slot.
 Picture: `kitItemSrc(k, fallback)` = `itemArt(k)` (j98, review/item-art) → `WD_ITEMS[k].icon` (wd-*) → fallback. Use it for every item anywhere:
 chest, Tư trang, wardrobe slots, reward chests, peddler, works, reward panels. Nobody draws another item box.
-### 26.14 WARDROBE K1 + K2 (review/wardrobe j92)
+### 28.14 WARDROBE K1 + K2 (review/wardrobe j92)
 - K1 `kitWearSlots(p,{size})`: two kitItem tiles (Trâm cài · Y phục, empty = "Chưa cài" / "Thường phục") right under the portrait on EVERY person
   card (player, consorts, maids, ma ma, Thái hậu…), and on Tư trang. The outfit status chip (Đúng phẩm / Vượt phẩm / Quá giản dị / Phạm tang) shows
   only when the player knows it (`wdSlots().label`). Tap: her own → Tư trang on that slot; someone else → item panel (name, grade, giver, status if
