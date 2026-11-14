@@ -588,6 +588,7 @@ kpActArt=function(b){if(b.dataset.kart)return;const kan=b.querySelector(":scope 
 /* act art lookup fix (owner 11/14: every act with its own picture shows it). The card title (.kan) can hold the target's mini portrait
    (its name text was glued to the act name: "Hoàng hậuThỉnh an Hoàng hậu") or run-time words after the act name ("Thỉnh an Hoàng hậu", "Phô tài: Đàn").
    Name = .kan text without portraits; key = exact, slug, ACTS.json "prefix", names with "*", then the longest act name the title starts with.
+   Re-run after ACTS.json arrives: the title then sits inside .kabody (was missed, the card kept its first, pre-manifest picture).
    New category sung-ai "Tranh sủng" (Chặn ngự giá, Tranh sủng, lật thẻ…): winning the Emperor's night is not "Hại người". */
 try{KIT_CAT["sung-ai"]=["Tranh sủng","#b03a7a"];KIT_ACT_CATS.unshift(["sung-ai",/chặn ngự giá|tranh sủng|lật thẻ|rút thẻ|giữ thẻ|liếc mắt đưa tình/i])}catch(e){}
 function kpActName(kan){const c=kan.cloneNode(true);c.querySelectorAll(".md,.kit,.pcp,.kodds,img,svg").forEach(e=>e.remove());return kpPlain(c.textContent)}
@@ -601,7 +602,7 @@ function kitActKey(name){const A=KIT_ACTS.acts||{},P=KIT_ACTS.prefix||{};name=kp
  if(name.length>=6)for(const n in A)if(!n.includes("*")&&n.startsWith(name+" "))return A[n];
  return""}
 (function(){const k0=kitActArt;kitActArt=function(name){const r=k0.apply(this,arguments);try{const key=kitActKey(name);if(key)r.src=`img/act-${key}.webp`}catch(e){}return r}})();
-kpActArt=function(b){if(b.dataset.kart)return;const kan=b.querySelector(":scope > .kat > .kan");if(!kan)return;const name=kpActName(kan);const a=kitActArt(name);b.dataset.kart=a.cat;
+kpActArt=function(b){if(b.dataset.kart)return;const kan=b.querySelector(":scope > .kat > .kan, :scope > .kabody > .kat > .kan");if(!kan)return;const name=kpActName(kan);const a=kitActArt(name);b.dataset.kart=a.cat;
  let body=b.querySelector(":scope > .kabody");if(!body){body=document.createElement("span");body.className="kabody";[...b.childNodes].forEach(n=>{if(!(n.nodeType===1&&n.classList.contains("kaart")))body.appendChild(n)});b.appendChild(body)}
  let art=b.querySelector(":scope > .kaart");if(!art){art=document.createElement("span");art.className="kaart";b.prepend(art)}
  art.innerHTML=kitArtFrame(a.src,a.label,"kcat-"+a.cat,a.col);art.title=a.label;if(a.col)b.style.setProperty("--kcc0",a.col);b.classList.add("kart")};
