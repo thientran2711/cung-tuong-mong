@@ -32,9 +32,22 @@
 - B_b14: c21 m4, c22 m0–m4, c23 m0–m1 (112 lineups total). c22-m3/m4 had grey temples: fixed with the hair-only edit (gens.txt last entry = edit gen).
 - AGES now also says "no grey sheen".
 
+- B_b15: c23 m2–m4, c24 m0–m4 → c17–c24 COMPLETE (120 lineups total, 480 figures).
+
 ## NEXT (exact)
-- c17–c32 × m0..m4 (80 lineups), in order B-c17-m0 B-c17-m1 ... (8 per batch → sheets B_b11.jpg ...).
-- Per batch: `python3 bv.py JID...` (compact variable parts; full prompt = `python3 mjobs.py JID`) → images_generate (gpt-2-6, 2:1, 4k,
+- c25–c32 × m0..m4 (40 lineups), in order B-c25-m0 ... (8 per batch → sheets B_b16.jpg .. B_b20.jpg). Same per-batch steps as below.
+  After each batch check every 48yo head (`python3 hc.py OUT.jpg JIDs`, zoom suspicious ones); grey temples → hair-only edit (below).
+- Then the hair-edit pass on the too-grey ~48 figures: c01–c08 (all ranks, check each with hc.py first), c12-m4, c14-m2/m3/m4,
+  c15-m2/m3, c16-m3, plus c20-m3/m4 (faint grey sheen). No cutcheck.py exists on main or any branch (checked), so cutouts are checked by eye on the sheets.
+  HAIR-ONLY EDIT (proven on c22-m3/m4): images_generate gpt-2-6, 2:1, 4k, quality high, ONE image ref = that lineup's current gen
+  (last gens.txt entry), NO style ref, prompt:
+  "Edit this image. Keep everything exactly the same (all four figures, faces, outfits, poses, props, ornaments, background,
+  composition). Only recolour the hair of every figure, especially the RIGHTMOST oldest lady: the whole hairdo, including the temples,
+  the sides and the bun, must be solid DARK black-brown, exactly the same dark colour as the hair of the leftmost young woman. No grey,
+  no silver, no white streaks anywhere in the hair. No other changes. No text."
+  → append "jid newgen" to gens.txt → pv.py/hc.py check → remove bg → addbg.sh → creations_wait on bg → mproc.py bg.txt JIDs (rewrites
+  files + FIGURES.json) → sheet B_fix48a.jpg (msheet) → pubm.sh.
+- Per new batch: `python3 bv.py JID...` (compact variable parts; full prompt = `python3 mjobs.py JID`) → images_generate (gpt-2-6, 2:1, 4k,
   quality high, refs [style STY, image idfix N-cNN-t1] as printed, folder ba4aecfe-...) → append "jid gen" to gens.txt → creations_wait
   (last gen is enough before bg) → images_remove_background ×8 → `bash addbg.sh "jids" "bgs"` → creations_wait on the 8 bg ids (urls.py needs
   the wait output in the transcript) → `python3 mproc.py bg.txt JIDs` (~3 min; curl now retries) →
