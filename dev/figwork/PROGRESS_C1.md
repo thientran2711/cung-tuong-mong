@@ -22,4 +22,10 @@
   từ spec5 consort-art (lad2.py). C1 VẼ LẠI t1 m01–m26 theo dáng tĩnh (đang chạy). Thợ C2 tự vẽ lại phần m27–m52 của mình (t1 + t2 m27–m32 đang là dáng động).
 - HUADIAN_C.md: pub.sh của C1 trước đây ghi đè mất bảng C2 (lỗi, đã sửa: giờ chỉ thay phần m01–m26, giữ nguyên phần C2). Bảng C2 khôi phục từ 33f778f.
   C1 đổi 14 kiểu bị trùng với C2 (m02 m03 m05 m07 m08 m09 m10 m11 m15 m16 m18 m23 m24 m25). Kích thước theo bậc: theo bảng 8 nấc HUADIAN.md (consort-art).
-- Tiếp: t1 tĩnh m01–m26 -> t2…t8 -> cold.
+- t1 TĨNH: m01–m24 xong và đã đẩy (m25, m26 đang vẽ). Tín dụng vẽ lại t1 tĩnh: 28 lineup (gồm 2 lần làm lại m02/m03 vì đổi hoa điền) ≈ 7.6k.
+- QUY TRÌNH SAU TÁCH NỀN (luật mới, cho cả C1 và C2 — thợ C2 lưu ý): cutcheck.py -> fixalpha.py cho hình bị cờ (vá vải mỏng trong suốt) ->
+  porcrop.py (por 384x506 canh giữa mặt, cần pip install "opencv-python-headless==4.10.0.84") -> sheet. Công cụ gốc ở origin/review/cutout-fix (955f51c);
+  bản C1 gói trong dev/figwork/maidC1/post.sh. rematte.py (tách nền từng người) chưa cần: cutcheck chỉ báo "ghost" nhẹ (vải mỏng), fixalpha xử lý.
+- Hoa điền t2+: theo 8 nấc HL/HS của spec6.py (consort-art): t2 son rõ hình, t3 thêm nhụy/gân, t4 viền vàng, t5 vàng lá, t6 + 1 ngọc trai, t7 filigree + đá đỏ,
+  t8 phượng filigree + thuý lam; cỡ to dần ~5%/bậc, t8 ≈ 1.4× t1.
+- Tiếp: t2 (m01–m06 đang vẽ) … t8 -> cold.

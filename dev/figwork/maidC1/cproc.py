@@ -45,7 +45,6 @@ for jid in sys.argv[1:]:
         rec={"role":"maid","identity":who,"tier":tier,"ageBand":ag,"look":None,"magnificUrl":"https://www.magnific.com/app/creation/"+gen,"bg":bid,"sheet":jid}
         sp.byfile={}
         sp.finish(im.crop((max(0,x0-4),0,min(im.width,x1+4),im.height)),name,rec)
-        fig=Image.open(f"{OUT}/{name}.webp").convert("RGBA"); facepor(fig,name)
         recs.update(sp.byfile)
     print(jid,"ok",[x1-x0 for x0,x1 in cols])
 json.dump(sorted(recs.values(),key=lambda r:r["file"]),open(RF,"w"),indent=1,ensure_ascii=False)

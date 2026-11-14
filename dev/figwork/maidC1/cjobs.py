@@ -53,11 +53,24 @@ def outfit(t,who,i):
     pal=PAL[who]; main=pal.split(" and ")[0]; neg="" if any(g in pal for g in GREEN) else ", NOT green"
     rich=" a little richer than the rank below" if t<=3 else " clearly much richer and more splendid than the lower ranks"
     return (f" Outfit for all four ({RANK[t]},{rich}): a NEW outfit, {LAD[t].format(mot=MOT[i%13])}; her signature colour family {pal} stays the MAIN robe colour ({main}{neg}).")
+HL={1:"the simplest form: a single plain {col} dot or one simple painted stroke hinting at {mot}, flat paint, no detail",
+2:"{mot} painted in {col} with a clear recognisable shape, flat paint, no outline, no gold",
+3:"{mot} finely painted in {col} with added detail: a tiny contrasting centre (stamen) and fine petal veins or inner lines, still no gold",
+4:"{mot} painted in {col} with every edge outlined in a thin line of shimmering gold, the first touch of gold",
+5:"{mot} cut from thin gold leaf, layered with {col} paint inside the gold shape, gold and colour together",
+6:"{mot} of gold leaf with {col} inlay and ONE tiny seed pearl at its centre",
+7:"Imperial Noble Consort level: {mot} as an exquisite symmetrical gold FILIGREE ornament (fine openwork gold wire), set with tiny seed pearls and ONE small red gemstone at its centre, splendid and jewel-like yet small",
+8:"Empress level, the most beautiful of all: a tiny gold FILIGREE phoenix with spread wings (or a peony) cradling {mot} at its heart, inlaid with brilliant kingfisher-blue enamel and tiny seed pearls, unmistakably the Mother of the realm, yet still small"}
+HS={1:"tiny, fingertip-sized (like a classic small red flower mark between the brows)",2:"tiny, fingertip-sized",
+3:"small, fingertip-sized, a hair larger than the lowest ranks",4:"small, a touch larger than the lowest ranks",
+5:"small, slightly larger than the lowest ranks",6:"small, slightly larger than the lowest ranks",
+7:"compact, a little larger than the lower ranks (about one third larger than the smallest)",
+8:"the largest of all ranks yet still compact (about two fifths larger than the smallest), sitting neatly between the brows"}
 def hua(t,i):
-    c=COL[i]
-    m={1:f"painted in {c}, simple fine lines",2:f"painted in {c}, simple fine lines",3:f"painted in {c}, finer detailed lines",4:f"painted in {c}, finer detailed lines",
-       5:f"painted in {c} with a fine thin gold outline",6:f"painted in {c} with a fine thin gold outline",7:"in gold leaf and cinnabar red with one tiny pearl, the finest detail",8:"in gold leaf and cinnabar red with one tiny pearl, the finest detail"}[t]
-    return (f" Forehead: a small, delicate, refined huadian forehead ornament between the brows just above the bridge of the nose, elegant, not large (about the size of a fingertip and clearly visible, like the small red flower between the brows in a classic portrait): her signature motif {HUA[i]}, {m}; the SAME small size on all four figures and at every rank; it never covers the forehead and never spreads to the brows or cheeks.")
+    if t==1:   # t1 lineups were drawn with this wording (kept for reproducibility)
+        return (f" Forehead: a small, delicate, refined huadian forehead ornament between the brows just above the bridge of the nose, elegant, not large (about the size of a fingertip and clearly visible, like the small red flower between the brows in a classic portrait): her signature motif {HUA[i]}, painted in {COL[i]}, simple fine lines; the SAME small size on all four figures and at every rank; it never covers the forehead and never spreads to the brows or cheeks.")
+    d=HL[t].format(mot=HUA[i],col=COL[i])+"; size: "+HS[t]+"; it grows only a little with rank, NEVER big, never covering more than a small part of the forehead, never touching or spreading onto the brows or cheeks"
+    return f" HUADIAN: on her forehead between the brows a small, delicate, refined huadian ornament, elegant, not large: {d}; the SAME huadian on all four figures."
 def job(jid):
     _,who,tt=jid.split("-"); i=int(who[1:])-1; prop=PROP[i%len(PROP)]
     desc=f" A former palace maid now raised to imperial consort, {BEAU}."
