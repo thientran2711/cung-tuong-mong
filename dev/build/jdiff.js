@@ -10,10 +10,10 @@
 const DIFF_KEY="ctm-diff";
 const DIFF={
  de:{n:"Dễ",d:"Hậu cung ôn hòa, ít kẻ ra tay; vào cung bạc dày hơn.",
-  bal:{hz:[.55,0],birthAdd:[1,-2],birthMin:[1,-3],illDie:[.5,0],seeMaxP:[1,15],poisonX:[.67,0],poisonNow:[0,0],accCdT:[1.5,0],hhTh:[1,-10],outQ:[1,-20]},j70:{mot:[.6,0]},bac:1.5,pd:1},
+  bal:{hz:[.55,0],birthAdd:[1,-2],birthMin:[1,-3],illDie:[.5,0],seeMaxP:[1,15],poisonX:[.67,0],poisonNow:[0,0],accCdT:[1.5,0],hhTh:[1,-5]},j70:{mot:[.6,0]},bac:1.5,pd:1},
  vua:{n:"Vừa",d:"Hậu cung như vốn có, phúc họa chia đều.",bal:{},j70:{},bac:1,pd:1},
  kho:{n:"Khó",d:"Hậu cung hiểm ác, sinh nở hiểm nghèo; Phúc duyên gấp rưỡi.",
-  bal:{hz:[1.1,0],birthAdd:[1,3],birthMin:[1,4],illDie:[1.5,0],illAdd:[2,0],poisonX:[1.2,0],accCdT:[.67,0],hhTh:[1,10],outQ:[1,25]},j70:{mot:[1.2,0]},bac:.7,pd:1.5}};
+  bal:{hz:[1.1,0],birthAdd:[1,3],birthMin:[1,4],illDie:[1.5,0],illAdd:[2,0],poisonX:[1.2,0],accCdT:[.67,0],hhTh:[1,5],outQ:[1,25]},j70:{mot:[1.2,0]},bac:.7,pd:1.5}};
 const DIFF_K=["de","vua","kho"];
 function diffOf(s){s=s||(typeof S!=="undefined"?S:null);const k=s&&s.diff;return DIFF[k]?k:"vua"}
 function diffName(s){return DIFF[diffOf(s)].n}
