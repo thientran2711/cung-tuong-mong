@@ -31,8 +31,15 @@ def hmat(t,i):
     return "in gold leaf and cinnabar red with one tiny pearl dot, the finest detail"
 def huadian(t,i):
     if t=="cold": return " No huadian on the forehead."
-    return (f" Forehead: a small, delicate, refined huadian ornament between the brows, elegant, not large: her signature motif {HD[i]}, {hmat(t,i)}; "
-            "the SAME small size at every rank (about the size of a little fingertip, just above the bridge of the nose), never covering the forehead, not spreading to the brows or cheeks; the same huadian on all four figures.")
+    return (f" Forehead: a small, delicate, refined huadian between the brows, elegant, not large: her signature motif {HD[i]}, {hmat(t,i)}; "
+            "same small size at every rank, never covering the forehead or spreading to the brows; the same huadian on all four figures.")
+SHORT=("Semi-realistic painterly guofeng portrait style, near-3D realistic rendering, soft natural light, fine detail, exactly matching the rendering of the reference portraits; plain light parchment background, soft even light. "
+ "Age lineup: the SAME woman drawn four times side by side in one row, clear empty space between the figures, each complete head to feet, realistic adult proportions (head one seventh of body height, never chibi). "
+ "A former palace maid now raised to imperial consort, very beautiful: fair flawless porcelain skin (no moles, no beauty marks), soft rosy blush, large soft warm round-almond eyes (never slanted, never teary), delicate nose, small rosy lips, serene gentle face, faint smile at most. "
+ "From the identity reference keep ONLY her face, facial features, hair colour and colour family; NOT its ages, poses, maid's outfit or ornaments. "
+ "Left to right: about 19, fresh and youthful; about 24, young and lively, no sign of ageing; about 32, in her prime, smooth skin, no grey hair, no wrinkles; about 48, a graceful elegant lady, hair still FULLY DARK black-brown like at 32 (no grey or silver at the temples or sides, no streaks, no grey sheen), minimal faint lines, still clearly beautiful, not elderly.")
+MOTION="dynamic graceful motion in every figure, caught mid-movement, skirt hems swirling, long sleeves, sash and stole floating in a soft breeze, flowing fabric, hair tassels swaying (the older figures move more calmly but still gracefully); each figure complete head to feet inside the frame, compact, extra empty space between the four figures so the swirling fabric never overlaps"
+MOTS="graceful motion, skirts, sleeves and sash floating in a soft breeze (older figures calmer); each figure complete head to feet, extra space between figures so fabric never overlaps"
 def job(jid):
     a,who,tt=jid.split("-"); n=int(who[1:])-1; i=n-26
     t="cold" if tt=="tcold" else int(tt[1:])
@@ -45,7 +52,8 @@ def job(jid):
         o=(f"Outfit for all four ({CRANK[t]}{rich}): a NEW outfit, {CT[t].format(mot=MOT[i%13])}; her signature colour family {pal} stays the MAIN robe colour ({main}{neg})")
         ps=pose_for(TRS[i%6],i,t,CPROP[i%13],n)
     desc=f" A former palace maid now raised to imperial consort, {BEAU}."
-    p=PRE+LINE+desc+IDK+AGES+" "+o+"."+huadian(t,i)+" "+ps+END
+    if os.environ.get("LONG"): p=PRE+LINE+desc+IDK+AGES+" "+o+"."+huadian(t,i)+" "+ps+END
+    else: p=SHORT+" "+o+"."+huadian(t,i)+" "+ps.replace(MOTION,MOTS)+". No text, no labels."
     return STY[n%4],MREF[who],p
 if __name__=="__main__":
     for j in sys.argv[1:]:

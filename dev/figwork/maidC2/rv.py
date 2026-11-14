@@ -6,7 +6,7 @@ subprocess.run(["python3",H+"/urls.py"],capture_output=True)
 db=json.load(open(H+"/urls.json")); g={}
 for l in open(H+"/gens.txt"):
     a=l.split(); g[a[0]]=a[1]
-out=sys.argv[1]; js=sys.argv[2:]; RH=420
+out=sys.argv[1]; js=sys.argv[2:]; RH=int(os.environ.get("RH",420))
 rows=[]
 for j in js:
     u=db[g[j]]; u=u+("&" if "?" in u else "?")+"w=2048&preview=1"

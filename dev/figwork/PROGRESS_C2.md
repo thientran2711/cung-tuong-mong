@@ -8,3 +8,4 @@
 
 ## Status
 - Mẻ 1 (t1 m27–m34, 8 lineup): xong, sheets C_m27_t1..C_m34_t1. Tín dụng: 8×270 + 8×3 = 2184; thêm 2160 cho 8 bản nháp đầu bị bỏ (hoa điền trùng kiểu c01–c32, đổi bảng HUADIAN_C.md).
+- Mẻ 2 (t1 m35–m42, 8 lineup): xong, sheets C_m35_t1..C_m42_t1. Tín dụng 2184.
