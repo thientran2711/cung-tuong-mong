@@ -1,0 +1,90 @@
+# cjobs.py: PART C prompts = maid identities m01..m26 in the CONSORT dress ladder t1..t8 + cold.
+# Job id C-mNN-tK (K=1..8) / C-mNN-tcold -> img/fig-maid-mNN-tK-aAA.webp (FIGURES-servants.json role maid, tier "tK"/"cold", sheet C-mNN-tK)
+# python3 cjobs.py JID... -> "JID style idref" + full prompt
+import json,sys,os
+H=os.path.dirname(os.path.abspath(__file__))
+SERV=json.load(open("/home/user/cung-tuong-mong/img/FIGURES-servants.json"))
+MREF={r["identity"]:r["magnificUrl"].split("/")[-1] for r in SERV if r["role"]=="maid" and r.get("tier") in (None,"m1") and r["ageBand"]=="a18"}
+STY=["8aNsy0CIrU","3zbtQNvREY","YMLuxraWeC","4RuXEXL9Aa"]   # consort-01/05/12/18
+PRE=("Semi-realistic painterly guofeng portrait style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference portraits; full-body standing figure head to feet, centered, plain light parchment background, soft even light; fair porcelain skin; serene gentle neutral expression, soft eyes, closed lips or faint smile; elegant, slim, clearly adult; beautiful/handsome romantic-lead looks for everyone; face clearly visible, 3/4 or frontal view.")
+LINE=(" Age lineup: the SAME person drawn four times side by side in one row, evenly spaced with clear empty space between the figures, each complete from top of head to feet, realistic adult proportions (head about one seventh of body height, long legs, never big-headed or chibi).")
+BEAU="a very beautiful woman: luminous porcelain skin, soft rosy blush, large soft bright eyes, delicate small nose, small rosy lips, gentle faint smile"
+IDK=(" From the identity reference lineup keep ONLY her face, facial features and hair colour; do NOT copy the reference's ages, poses, maid outfit, hair ornaments or accessories; use the NEW ages, the NEW consort outfit and the NEW poses below.")
+AGES=(" Left to right: about 19, a fresh youthful young woman; about 24, still young and lively, youthful face, no sign of ageing; about 32, a young mature woman in her prime, smooth skin, NO grey or silver hair, NO wrinkles; about 48, a graceful elegant lady whose hair is still FULLY DARK black-brown, the same dark colour as at 32 (at most two barely visible fine silver hairs; NO grey streaks, NO grey or silver at the temples or sides, NOT salt-and-pepper, NOT white, no grey sheen), minimal faint lines, still clearly beautiful, not elderly.")
+END=(" Eyes soft, warm and round-almond, never slanted or upturned, never teary; serene gentle face, faint smile at most, no open-mouth laugh; no moles, no beauty marks, no dark spots anywhere on the face or cheeks. Everyone beautiful at every age. No text, no labels.")
+# her own colour family (from her approved maid lineup), kept as MAIN robe colour on every rank
+PAL={"m01":"sage green and cream","m02":"moss green and silver","m03":"slate blue and silver","m04":"warm apricot and gold","m05":"coral red and gold",
+"m06":"pale blue-grey and silver","m07":"pale jade green and white","m08":"peach-salmon and gold","m09":"rose pink and gold","m10":"sage green and gold",
+"m11":"sky blue and silver","m12":"pale golden yellow and ivory","m13":"lilac and silver","m14":"ivory white and celadon","m15":"blush pink and pearl white",
+"m16":"lavender purple and gold","m17":"olive green and gold","m18":"powder blue and pearl white","m19":"caramel apricot and gold","m20":"slate blue and gold",
+"m21":"aqua celadon and silver","m22":"dusty rose and taupe","m23":"butter yellow and gold","m24":"jade green and gold","m25":"lavender violet and silver","m26":"blush pink and gold"}
+GREEN=("green","celadon","jade","aqua")
+MOT=["peonies","plum blossoms","lotus flowers","orchids","chrysanthemums","butterflies","cranes","auspicious clouds","magnolias","begonias","camellias","osmanthus","wisteria"]
+PROP=["a round silk fan","a folding fan","a sprig of plum blossoms","a thread-bound poetry book","an embroidered handkerchief","a small incense sachet",
+"a thread-bound book","a single peony","a small embroidered silk ball","a small rolled poem scroll","a jade flute","a small lotus flower","a painted paper fan",
+"a string of prayer beads","a small porcelain vase with a flower","a thread-bound songbook","a rolled poem scroll","a small embroidered pouch","a sprig of orchids",
+"a round fan painted with a moon","a branch of peach blossoms","a small painted scroll","a jade hair comb","a small bird cage","a white magnolia","a sprig of wisteria"]
+HUA=['a small four-petal cross flower', 'a tiny bat (auspicious fu bat)', 'a tiny longevity peach', 'three tiny dots in a vertical line', 'two tiny cherries on one stem', 'a tiny upright narrow jade-tablet shape (a small slim rounded vertical bar)', 'a tiny jade-rabbit silhouette', 'a tiny round coin with a square hole', 'a tiny vase silhouette', 'a tiny daisy of eight thin petals', 'a tiny arc of five dots (a gentle upward curve)', 'a tiny star of five dots', 'a tiny lily', 'a small single spiral coil', 'a tiny mountain of three small peaks', 'a tiny square window-lattice', 'a tiny fern sprig', 'a tiny inverted triangle', 'a tiny sun disc with short rays', 'two tiny dots side by side', 'a tiny crane in flight', 'a small hexagon (tortoise-shell)', 'a tiny persimmon', 'a tiny jade bi disc (a ring with a hole)', 'a tiny eight-point star anise', 'a small half-moon fan shape']
+COL=["soft rose","pale coral","cinnabar red","soft pink","rose red","vermilion","peach pink","soft coral","rose pink","coral red","soft orange-red","pale pink","rose red",
+     "soft rose","pale coral","cinnabar red","soft sage green (cuidian)","vermilion","peach pink","soft coral","rose pink","coral red","soft orange-red","pale pink","rose red","cinnabar red"]
+MOLE={"m13","m26"}   # their maid lineup shows a cheek mole: tell the model to drop it (owner: no moles)
+FAM=["hienlanh","dangi","numi","thanhnha","kieungao","thamvong"]
+RANK={1:"rank-1 consort (Dap ung)",2:"rank-2 consort (Thuong tai)",3:"rank-3 consort (Quy nhan)",4:"rank-4 consort (Tan)",5:"rank-5 consort (Phi)",6:"rank-6 noble consort (Quy phi)",7:"rank-7 imperial noble consort (Hoang quy phi)",8:"the Empress (Hoang hau)"}
+LAD={1:"a fine silk robe with delicate embroidered {mot} at the collar, sleeves and hem and a soft silk sash (elegant, never poor, little gold), hair in a neat bun with pretty silver hairpins and a fresh flower",
+2:"a fine silk robe with embroidered borders and a small woven {mot} pattern, a silk sash with a small jade pendant (a little more ornate than the lowest consort rank, little gold); neat chignon with silver and pearl hairpins and a fresh flower",
+3:"a patterned silk robe with small woven {mot}, a woven brocade sash and fuller layered sleeves; layered chignon with a few small gold-and-pearl hairpins and small silk flowers",
+4:"a layered silk robe of two or three visible layers with WIDE gold-thread embroidered borders of {mot} at collar, sleeves and hem, an embroidered cloud collar (yunjian) over the shoulders and an embroidered silk sash; elegant high chignon with gold and jade hairpins and small dangling gold bu yao tassel hairpins",
+5:"a silk brocade robe richly embroidered in gold with phoenixes and peonies, long trailing wide sleeves, a gold-embroidered waistband with hanging jade belt pendants and tassels, a sheer silk shawl; high ornate chignon with a LARGER gold headdress with dangling gold tassels and jade pins, gold earrings",
+6:"a HEAVY gold brocade robe densely embroidered in gold with phoenixes and {mot}, an embroidered pearl-edged cape/stole over the shoulders, gold-and-jade necklace, earrings and bracelets; tall chignon crowned by a BIG ornate gold headdress with pearls, gold flowers and many gold tassels",
+7:"a near-empress ceremonial robe heavily embroidered with golden phoenixes and clouds, with crimson and bright gold accents, a layered gold collar, strands of pearls across the chest, a long flowing train behind her; grand chignon with a SMALL gold phoenix crown with pearl strands and kingfisher-blue accents",
+8:"the Empress's imperial phoenix ceremonial robe, large golden phoenixes and clouds embroidered all over with bright gold and red, a jewelled layered gold collar, pearl strands, a VERY long trailing train; a FULL gold phoenix crown with pearls and kingfisher-blue inlay and pearl strands hanging at the sides; the most splendid outfit of all"}
+exec(open(H+"/lad2.py").read()); exec(open(H+"/poses2.py").read())   # CALM pose system (owner reversal): G19/G24/G32/G48 + STILL from consort-art spec5
+STILL=STILL.replace("NO swirling and NO flying fabric; ","NO swirling and NO flying fabric; all fabrics opaque silk, NO sheer see-through gauze, NO floating stole; ")
+def pose_for(i,t,prop):
+    g=i; a=G19[(g+t)%6]; b=G24[(g*2+t)%5]; c=G32[(g*3+t)%8]; d=G48[(g+2*t)%6]
+    ps=[x.format(prop=prop) for x in (a,b,c,d)]
+    if t==8 and g%3==0: ps[2]=ps[3]="standing in stately stillness, hands hidden in her long wide sleeves before her, the long train trailing straight behind her"
+    suf=", with regal stately grace" if t>=7 else (", stately poised posture" if t>=5 else "")
+    ps=[p+suf if "stately stillness" not in p else p for p in ps]
+    return ("Poses (NEW, NOT the reference's poses; calm standing poses; a different hand gesture for each figure, same person), left to right: "
+            f"about 19, youthful, a gently lively gesture: {ps[0]}; about 24, confident and graceful: {ps[1]}; about 32, poised, in her prime: {ps[2]}; about 48, serene and calm: {ps[3]}; "+STILL)
+def outfit(t,who,i):
+    if t>=4: return " "+ca_outfit(t,PAL[who],MOT[i%13])+"."
+    pal=PAL[who]; main=pal.split(" and ")[0]; neg="" if any(g in pal for g in GREEN) else ", NOT green"
+    rich=" a little richer than the rank below" if t<=3 else " clearly much richer and more splendid than the lower ranks"
+    return (f" Outfit for all four ({RANK[t]},{rich}): a NEW outfit, {LAD[t].format(mot=MOT[i%13])}; her signature colour family {pal} stays the MAIN robe colour ({main}{neg}).")
+HL={1:"the simplest form: a single plain {col} dot or one simple painted stroke hinting at {mot}, flat paint, no detail",
+2:"{mot} painted in {col} with a clear recognisable shape, flat paint, no outline, no gold",
+3:"{mot} finely painted in {col} with added detail: a tiny contrasting centre (stamen) and fine petal veins or inner lines, still no gold",
+4:"{mot} painted in {col} with every edge outlined in a thin line of shimmering gold, the first touch of gold",
+5:"{mot} cut from thin gold leaf, layered with {col} paint inside the gold shape, gold and colour together",
+6:"{mot} of gold leaf with {col} inlay and ONE tiny seed pearl at its centre",
+7:"Imperial Noble Consort level: {mot} as an exquisite symmetrical gold FILIGREE ornament (fine openwork gold wire), set with tiny seed pearls and ONE small red gemstone at its centre, splendid and jewel-like yet small",
+8:"Empress level, the most beautiful of all: a tiny gold FILIGREE phoenix with spread wings (or a peony) cradling {mot} at its heart, inlaid with brilliant kingfisher-blue enamel and tiny seed pearls, unmistakably the Mother of the realm, yet still small"}
+HS={1:"tiny, fingertip-sized (like a classic small red flower mark between the brows)",2:"tiny, fingertip-sized",
+3:"small, fingertip-sized, a hair larger than the lowest ranks",4:"small, a touch larger than the lowest ranks",
+5:"small, slightly larger than the lowest ranks",6:"small, slightly larger than the lowest ranks",
+7:"compact, a little larger than the lower ranks (about one third larger than the smallest)",
+8:"the largest of all ranks yet still compact (about two fifths larger than the smallest), sitting neatly between the brows"}
+def hua(t,i):
+    if t==1:   # t1 lineups were drawn with this wording (kept for reproducibility)
+        return (f" Forehead: a small, delicate, refined huadian forehead ornament between the brows just above the bridge of the nose, elegant, not large (about the size of a fingertip and clearly visible, like the small red flower between the brows in a classic portrait): her signature motif {HUA[i]}, painted in {COL[i]}, simple fine lines; the SAME small size on all four figures and at every rank; it never covers the forehead and never spreads to the brows or cheeks.")
+    d=HL[t].format(mot=HUA[i],col=COL[i])+"; size: "+HS[t]+"; it grows only a little with rank, NEVER big, never covering more than a small part of the forehead, never touching or spreading onto the brows or cheeks"
+    return f" HUADIAN: on her forehead between the brows a small, delicate, refined huadian ornament, elegant, not large: {d}; the SAME huadian on all four figures."
+def job(jid):
+    _,who,tt=jid.split("-"); i=int(who[1:])-1; prop=PROP[i%len(PROP)]
+    desc=f" A former palace maid now raised to imperial consort, {BEAU}."
+    if tt=="tcold":
+        o=(f" Outfit for all four (the cold palace, plain but still neat, clean and beautiful, never poor or ragged): a simple but well-made plain robe in muted {PAL[who].split(' and ')[0]} and pale grey, clean and neatly tied with a plain sash, hair in a tidy low bun with one plain wooden hairpin, no gold, no jewellery; she looks graceful and dignified.")
+        pl=["holding a plain wooden comb","hands folded quietly in her sleeves","holding a small clay teacup","holding a simple folded letter","hands lightly together","holding a plain round fan"]
+        p=[pl[(i+j*2)%6] for j in range(4)]
+        po=(" Poses (NEW, quiet, standing), left to right: about 19: "+p[0]+", body slightly turned to the left; about 24: "+p[1]+", three-quarter view; about 32: "+p[2]+", slight turn to the right; about 48: "+p[3]+", gently frontal. "+STILL+".")
+        f=" Forehead: bare, NO huadian."
+    else:
+        t=int(tt[1:]); o=outfit(t,who,i); f=hua(t,i); po=" "+pose_for(i,t,prop)+"."
+    idk=IDK
+    if who in MOLE: idk=idk.replace("keep ONLY her face, facial features and hair colour;","keep ONLY her face, facial features and hair colour, but WITHOUT the small dark mole on her cheek (her skin is clear and flawless);")
+    return STY[i%4],MREF[who],PRE+LINE+desc+idk+AGES+o+f+po+END
+if __name__=="__main__":
+    for j in sys.argv[1:]:
+        s,r,p=job(j); print(j,s,r); print(p); print()
