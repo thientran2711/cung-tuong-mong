@@ -18,3 +18,11 @@ Owner rule 11/14 19:30Z: items are never free/automatic — craft, buy or be giv
 - The modal option renderer shows only costs on every dialog option (hidden-outcome rule); odds for Xin ban / Mua lén are written in the dialog text instead.
 
 SẴN SÀNG KIỂM
+
+## Nổi mẩn (dị ứng) — jrash.js (coordinator request after the veil)
+- p.rash {sev 1–3, until tuần, how, by, tr} for everyone. Causes: j68f springAllergy event choices (15/30/55% by choice), monthly spring pollen roll (4%), bad luck (1%), Son phấn Dương Châu (5%; tainted "pha chì" always), hostile act "Bỏ phấn lạ" (Hại nhỏ, band ≥1 motive gate, Bạc 15, Đức −4, caught()/evidence like other schemes; NPC mindMenu weight 1.2, ×1.5 if target prettier).
+- Effects: effSac − 5/10/16 while it lasts (nights/contests follow from Sắc); heals 1/2/3–4 tuần; one tuần faster per tuần under Thái y medicine (Bạc 15, 2 tuần) or self-brewed herbs (odds by Y thuật) or Y thuật ≥2; NPCs 30%/tuần or Y ≥2.
+- Veil works for rash (jveil vlNeed = scar or rash): same grade cover, same Vượt phẩm rule; healed → veil back to chest.
+- Her card "Nổi mẩn" (every 3 tuần while it lasts): thái y / thảo mộc / đeo-tháo-tìm mạng / để tự khỏi. Person-card chip "Nổi mẩn (vừa) · còn N tuần" when known.
+- Overlay art PILOT (gpt-2-6, Magnific folder ba4aecfe; red-on-white paintings turned transparent, edge fade): img/rash-1..3.png; placed from veil-fit boxes (KIT_RASH.style); layer portrait < rash < scar < veil < frame. Pilot sheets: dev/shots/rash-pilot/pilot-c05.jpg, pilot-c18.jpg (lành / nhẹ / vừa / nặng / nặng + mạng). KIT_RASH.ready=false until approved → logic live, picture hidden. To ship: set ready true.
+- Tests 686x880@2.2 + 1180x820@2: act (caught path), card, veil cover 16→8, heal → veil to chest, NPC rash → obtains veil; no errors/overflow.
