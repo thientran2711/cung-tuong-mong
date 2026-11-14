@@ -43,5 +43,5 @@ if(!log){/* the current record against the people in the save */
  for(const m of S.men||[])if(!m.alive&&ids.has(m.id))err.push('nam nhân đã chết còn trong sổ: '+m.name)}
 console.log(`\nTổng: ${rows.length} người · ${Object.keys(C).length} nơi${map?'':' · (không có số bản đồ cho khắc này)'}`);
 console.log(err.length?'TỰ KIỂM: LỖI\n - '+err.join('\n - '):'TỰ KIỂM: sạch (không trùng, không thiếu, khớp bản đồ)');
-const acts=(log?log.acts:R&&R.acts)||[];if(acts.length){console.log('\nHành động nhắm vào người khác trong buổi (qua cổng động cơ):');for(const a of acts){const nm=id=>id?(((log?S.rlog.who:R.who)[id]||[id])[0]):'';console.log(` khắc ${a.kh+1}: ${nm(a.id)} → ${nm(a.t)} · ${a.k} · ${a.ok?'cho làm':'CHẶN'} · ${a.why}`)}}
+const acts=(log?log.acts:R&&R.acts)||[];if(acts.length){console.log('\nHành động nhắm vào người khác trong buổi (qua cổng động cơ):');for(const a of acts){const nm=id=>id?(((log?S.rlog.who:R.who)[id]||[id])[0]):'';console.log(` khắc ${a.kh+1}: ${nm(a.id)} → ${nm(a.t)} · ${a.k} · ${a.ok?'cho làm':'CHẶN'} · ${a.why}${a.src?` · nguồn: ${a.src}`:''}`)}}
 process.exit(err.length?3:0);

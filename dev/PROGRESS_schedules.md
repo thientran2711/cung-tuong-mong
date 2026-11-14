@@ -66,8 +66,48 @@ không sửa file cũ. Chưa gộp main: chờ thợ cân bằng gộp vào revi
 - Đã bọc: `runAct` (mọi hành động NPC: j9/j24/j28 npcAct, j40 mindRun, j70 thực thi, j78), `newPlot70` (mưu j70 mới),
   ý định j95 (thăm / gây sự / rình), j24 người tìm đến (mỉa mai / thăm). Mỗi lần kiểm ghi vào sổ: ai, khắc, việc, đối tượng,
   cho làm hay CHẶN, lý do.
-- CHƯA bọc: sự kiện tuần j68 (chọn người bằng `rv6` ngẫu nhiên, không khai báo sự kiện nào là thù địch). Cần thêm cờ
-  `hostile` cho từng sự kiện j68 rồi cho `evPickActor` đi qua `motiveOK`; ghi lại ở đây cho người làm j68.
+- Sự kiện có diễn viên (j68, j7, thẻ truyện/quest/quà...): xem mục 6 (module j95b).
+
+### 6. Module j95b (bản vá 3 chỗ hở, nối sau j95): `dev/build/j95b.js`
+Chỉ bọc hàm, không sửa file cũ. Tắt riêng: `window.__j95boff=1`.
+
+**(1) Sự kiện đi qua cổng động cơ.** Bảng vai `E95B` cho đủ 72 mẫu j68 (theo từng ô diễn viên: `h` = ra tay với ngươi hoặc với
+một diễn viên khác, `f` = tử tế với ngươi, `n` = trung lập có lý do, `tgt` = là đối tượng của diễn viên kia) và bảng `P95B` cho các thẻ
+khác có phi tần trong tham số: 16 sự kiện j7 (hình nhân, vu oan, xạ hương, mua chuộc Kính sự phòng, kết minh, bắt giữ cung nữ...), thẻ
+có sẵn (thư lãnh cung, thư tình), truyện xuất thân j4 (thd1), đường cung nữ j42 (cnvBribe, cnvBlack, cnvOrd), quà tặng (giftin),
+cảnh báo mưu j70 (j70thr), hội j71 (j71f, j71m), việc nhờ j72 (q72o).
+- Khi mẫu j68 chọn người (`rv6`), chỉ những người qua `motiveOK` theo vai của ô đó mới được chọn. Các thẻ khác: nếu người được chọn
+  không qua cổng thì chọn lại một người qua cổng (hình nhân: người ghen nhất trong số qua cổng; nếm thử độc: người hiểm nhất...), không
+  có ai thì sự kiện không xảy ra. Kết minh (pact) cần cả lý do với ngươi lẫn lý do chống Hoàng hậu.
+- Khi thẻ hiện lên (hoặc khi bot chọn / đóng), mỗi diễn viên được ghi vào sổ: `S.roster.acts` một dòng `{id, khắc, việc, đối tượng,
+  lý do, cho làm, ngoại lệ, src = mã sự kiện}`; `dev/tools/roster.js` in thêm "nguồn: <mã sự kiện>".
+- Trong lượt "người tìm đến" j24, mẫu j68 đã xét giữ đúng phán quyết của mình (cổng chữ của j95 không chặn nhầm sự kiện thù địch là "thăm").
+
+**(2) Câu chữ có nơi chốn dời người trong sổ.** Bảng nơi theo từng biến thể cho mẫu j68 và thẻ j7 (ví dụ "hẹn ngươi ở đình nghỉ vắng"
+→ Ngự hoa viên, "ghé cung ngươi" → cung ngươi, "chặn ngươi giữa đường" → chỗ ngươi đang đứng, "khóc với Hoàng hậu" → Càn Ninh, Hoàng
+thượng "chọi dế ở ngự hoa viên", "cho gọi ngươi sang Dưỡng Tâm điện", thái y / họa sư / nhạc sư đến cung ngươi, hoàng tự "trốn học ra
+ngự hoa viên"...). Thẻ khác: quét câu chữ (từ điển nơi + loại câu đồn / thói quen / quá khứ / tương lai / "vọng sang" / người được sai đi).
+- Đặt cho khắc lúc thẻ hiện. Lượt "người tìm đến" j24 cũng chỉ ghi khách vào cung ngươi lúc thẻ hiện (trước đây ghi lúc tạo thẻ, nên thẻ
+  hiện trước đó có thể bị đè).
+- Việc quyết lúc chuyển buổi / tuần / tháng (tin tuần j75 "Tai mắt kể: X đứng đợi ngự giá ở ngự hoa viên", "dâng canh sâm lên Dưỡng Hòa
+  điện", báo cáo tháng, việc NPC trong buổi) được ghi vào buổi vừa qua (khắc cuối còn trống), nên nằm trong nhật ký `S.rlog`; tin nào đặt
+  phế phi / người đang cấm túc ra ngoài là tin sai nên bị bỏ.
+- Không dời người đang hẹn kín ở khắc đó, phế phi (trừ lãnh cung), người cấm túc; ghi lý do bỏ qua.
+
+**(3) Hiểu lầm do tin đồn.** `S.j95b.rum` (lưu trong save) + `v.j95rum` (j95 đã đọc làm lý do ngoại lệ).
+- Nguồn: hành động "tung tin đồn" của NPC về ngươi (j9/j28, kể cả mưu j70 loại tin đồn), mưu j70 thành công với phi tần khác mà kẻ chủ
+  mưu đổ cho ngươi, người nắm chứng cứ thật về việc ngươi đã hại ai (kiểu j78) kể cho nạn nhân, và tin bịa hằng tuần của người có động cơ
+  (Nhiều chuyện / Hiểm độc / Ghen tuông / Đa nghi). Người tung phải qua cổng `motiveOK(x, ngươi, "rumor")`.
+- Thật hay giả: thật nếu ngươi đã thực sự ra tay với người đó trong 12 tuần (sổ hành động của chính ngươi), không thì là lời bịa của kẻ tung.
+  Người nghe tin theo độ tin (thân với kẻ tung, Đa nghi, tin thật dễ tin hơn): Oán với ngươi +18..30, thiện cảm −12.
+- Sổ: dòng `misbelief` "tin đồn: ngươi …, nguồn: X (chuyện có thật / bịa đặt; qua act / j70 / j78 / tick)" và dòng `rumor` của kẻ tung.
+  Mọi hành động của người hiểu lầm nhắm vào ngươi trong 8 tuần mang lý do "tin đồn: …, nguồn: …" (kể cả khi thiện cảm còn ≥40: ngoại lệ có ghi).
+  Người hiểu lầm có thể trả đũa (30%/tuần, qua cổng).
+- Thông tin thật: ngươi chỉ biết qua thẻ "Nghe đồn" (theo Mắt / tai mắt) với nhãn "(Lời đồn…)", sổ tay người ghi "Nghe đồn: …". Lựa chọn
+  chỉ hiện chi phí: "Sang gặp X giải bày" (1 khắc), "Cho người tra xem ai tung tin" (1 khắc, 10 bạc; tra ra là tin thật: chứng cứ về kẻ
+  tung +1), "Mặc kệ". Gặp mặt: thẻ người có thêm "Giải bày hiểu lầm" (có từ chỉ độ chắc). Tin bịa được giải: hết hiểu lầm, oán quay sang
+  kẻ tung (nếu đã tra ra). Tin thật: khó giải, chỉ nguôi một nửa.
+- Dữ liệu cho kit: `j95bRumours()` (những hiểu lầm ngươi đã nghe đồn, chưa giải).
 
 ## Kiểm
 
