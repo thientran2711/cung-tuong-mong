@@ -26,3 +26,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - All art: Magnific gpt-2-6 only. Event art: just draw, no previews needed. Story (Mệnh truyện) art: ~468 images pending owner's OK ("duyệt vẽ tiếp").
 - Scenes: also vary by time of day (each buổi: morning/afternoon/evening(+noon if exists)) × 4 seasons.
 - Time: 4 buổi per week (Sáng, Trưa, Chiều, Tối) × 4 khắc = 16 khắc (owner agreed to recommendation). Sức remains the main limit; rebalance. Light shifts gently by khắc within a buổi.
+- Who-is-where: habits (hidden, per person, drift over time) + weekly intentions (seek Emperor, allies, avoid foes, scheme, seek player) + 15–25% surprises; Emperor too. Player learns habits via spies/servants/observation; NPCs learn the player's habits and may lie in wait. Target predictability 35–55%. (review/schedules, j95)
