@@ -21,5 +21,8 @@ for l in open('_b.txt'):
     a=np.asarray(Image.open(raw).convert('RGBA').resize((960,480))).astype(int)
     op=a[...,3]>200; dk=(op&(a[...,:3].max(axis=2)<25)).sum()/max(1,op.sum())
     if dk>0.03: print("darkfix",jid,round(dk,2)); subprocess.run(["python3","fixrgb.py",jid,gen,bg])
+    # art7: owner rule no moles -> retouch small dark spots on faces (original kept as .orig.png)
+    if os.environ.get("NODEMOLE")!="1" and not os.path.exists(raw[:-4]+".orig.png"):
+        os.replace(raw,raw[:-4]+".orig.png"); subprocess.run(["python3","-I","demole.py",raw[:-4]+".orig.png",raw,"-v"])
 P
 python3 sheetproc.py _b.txt $(cut -d' ' -f1 _b.txt) | tail -n 40

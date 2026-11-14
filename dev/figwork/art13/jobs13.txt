@@ -1,0 +1,123 @@
+a01 ed/a01.jpg a,a,a,a cur
+a02 ed/a02.jpg a,a,a,a cur
+a03 ed/a03.jpg a,a,a,a cur
+a04 ed/a04.jpg a,a,a,a cur
+a05 ed/a05.jpg a,a,a,a cur
+a06 ed/a06.jpg a,a,a,a cur
+a07 ed/a07.jpg a,a,a,a cur
+a08 ed/a08.jpg a,a,a,a cur
+r09t7 ed/r09t7.jpg -,-,-,ma
+r21t8 ed/r21t8.jpg -,-,-,ma
+a02 ed/a02.jpg a,a,a,a cur
+a03 ed/a03.jpg a,a,a,a cur
+a04 ed/a04.jpg a,a,a,a cur
+a05 ed/a05.jpg a,a,a,a cur
+a01 ed/a01.jpg -,a,-,a cur
+a09 ed/a09.jpg a,a,a,a cur
+a10 ed/a10.jpg a,a,a,a cur
+a11 ed/a11.jpg a,a,a,a cur
+a12 ed/a12.jpg a,a,a,a cur
+a13 ed/a13.jpg a,a,a,a cur
+a14 ed/a14.jpg a,a,a,a cur
+a15 ed/a15.jpg a,a,a,a cur
+a16 ed/a16.jpg a,a,a,a cur
+a06 ed/a06.jpg -,-,-,a cur
+qc02 ed/qc02.jpg m,-,-,-,-,-,-,-
+qc04 ed/qc04.jpg -,-,-,ma,m,-,m,-
+qc05 ed/qc05.jpg -,m,-,-,-,-,-,-
+qc06 ed/qc06.jpg -,-,-,ma,m,m,-,-
+qc07 ed/qc07.jpg -,-,-,ma,-,-,-,-
+qc08 ed/qc08.jpg m,-,-,-,-,-,-,-
+qc09 ed/qc09.jpg -,-,-,-,m,-,-,-
+qc10 ed/qc10.jpg m,-,-,ma,m,-,-,-
+qc12 ed/qc12.jpg -,-,m,-,-,-,-,-
+qc13 ed/qc13.jpg -,-,-,-,-,m,-,m
+qc14 ed/qc14.jpg m,-,-,-,-,-,-,-
+qc17 ed/qc17.jpg -,-,-,-,m,-,-,-
+qc20 ed/qc20.jpg -,-,-,-,-,-,m,-
+qc21 ed/qc21.jpg -,-,-,-,-,-,m,-
+qc22 ed/qc22.jpg m,-,m,-,-,-,-,-
+qc23 ed/qc23.jpg -,-,m,-,-,-,-,-
+qc24 ed/qc24.jpg -,-,-,-,m,m,-,-
+qc25 ed/qc25.jpg -,-,-,-,-,-,-,ma
+qc26 ed/qc26.jpg -,-,-,-,-,-,m,-
+qc27 ed/qc27.jpg -,-,m,-,-,-,-,-
+qc29 ed/qc29.jpg -,m,-,ma,m,-,-,ma
+qc32 ed/qc32.jpg -,-,-,-,-,m,-,m
+a08 ed/a08.jpg -,-,-,a cur
+a17 ed/a17.jpg a,a,a,a cur
+a18 ed/a18.jpg a,a,a,a cur
+a19 ed/a19.jpg a,a,a,a cur
+a20 ed/a20.jpg a,a,a,a cur
+a21 ed/a21.jpg a,a,a,a cur
+a22 ed/a22.jpg a,a,a,a cur
+a23 ed/a23.jpg a,a,a,a cur
+a24 ed/a24.jpg a,a,a,a cur
+a25 ed/a25.jpg a,a,a,a cur
+a26 ed/a26.jpg a,a,a,a cur
+a27 ed/a27.jpg a,a,a,a cur
+a28 ed/a28.jpg a,a,a,a cur
+a29 ed/a29.jpg a,a,a,a cur
+a30 ed/a30.jpg a,a,a,a cur
+a31 ed/a31.jpg a,a,a,a cur
+a32 ed/a32.jpg a,a,a,a cur
+a33 ed/a33.jpg a,a,a,a cur
+a34 ed/a34.jpg a,a,a,a cur
+a35 ed/a35.jpg a,a,a,a cur
+a36 ed/a36.jpg a,a,a,a cur
+a37 ed/a37.jpg a,a,a,a cur
+a38 ed/a38.jpg a,a,a,a cur
+a39 ed/a39.jpg a,a,a,a cur
+a40 ed/a40.jpg a,a,a,a cur
+a41 ed/a41.jpg a,a,a,- cur
+a06 ed/a06.jpg -,-,-,a cur
+a08 ed/a08.jpg a,-,-,- cur
+a10 ed/a10.jpg a,-,-,- cur
+a11 ed/a11.jpg a,-,-,- cur
+a13 ed/a13.jpg -,-,a,- cur
+a14 ed/a14.jpg -,-,a,- cur
+a17 ed/a17.jpg -,a,-,- cur
+a19 ed/a19.jpg a,-,-,a cur
+a23 ed/a23.jpg -,-,-,a cur
+a24 ed/a24.jpg a,-,-,a cur
+a25 ed/a25.jpg a,-,-,- cur
+a27 ed/a27.jpg a,-,a,- cur
+a29 ed/a29.jpg a,-,-,- cur
+a30 ed/a30.jpg a,-,-,- cur
+a31 ed/a31.jpg -,-,a,- cur
+qc02 ed/qc02.jpg m,-,-,-,-,-,-,-
+qc04 ed/qc04.jpg -,-,-,ma,-,-,m,-
+qc06 ed/qc06.jpg -,-,-,ma,-,m,-,-
+qc09 ed/qc09.jpg -,-,-,-,m,-,-,-
+qc10 ed/qc10.jpg m,-,-,-,m,-,-,-
+qc12 ed/qc12.jpg -,-,m,-,-,-,-,-
+qc17 ed/qc17.jpg -,-,-,-,m,-,-,-
+qc22 ed/qc22.jpg m,-,m,-,-,-,-,-
+qc24 ed/qc24.jpg -,-,-,-,m,m,-,-
+qc25 ed/qc25.jpg -,-,-,-,-,-,-,ma
+qc26 ed/qc26.jpg -,-,-,-,-,-,m,-
+qc29 ed/qc29.jpg -,m,-,ma,m,-,-,ma
+qc32 ed/qc32.jpg -,-,-,-,-,m,-,m
+qc02 ed/qc02.jpg m,-,-,-,-,-,-,-
+qc04 ed/qc04.jpg -,-,-,ma,m,-,m,-
+a10 ed/a10.jpg a,-,-,- cur
+qc05 ed/qc05.jpg -,m,-,-,-,-,-,-
+qc06 ed/qc06.jpg -,-,-,ma,m,m,-,-
+qc07 ed/qc07.jpg -,-,-,ma,-,-,-,-
+qc08 ed/qc08.jpg m,-,-,-,-,-,-,-
+a11 ed/a11.jpg a,-,-,- cur
+qc09 ed/qc09.jpg -,-,-,-,m,-,-,-
+qc10 ed/qc10.jpg m,-,-,ma,m,-,-,-
+qc12 ed/qc12.jpg -,-,m,-,-,-,-,-
+qc17 ed/qc17.jpg -,-,-,-,m,-,-,-
+a13 ed/a13.jpg -,-,a,- cur
+qc22 ed/qc22.jpg m,-,m,-,-,-,-,-
+a14 ed/a14.jpg -,-,a,- cur
+a06 ed/a06.jpg -,-,-,a cur
+qc24 ed/qc24.jpg -,-,-,-,m,m,-,-
+qc25 ed/qc25.jpg -,-,-,-,-,-,-,ma
+qc26 ed/qc26.jpg -,-,-,-,-,-,m,-
+qc29 ed/qc29.jpg -,m,-,ma,m,-,-,ma
+qc30 ed/qc30.jpg -,m,-,-,-,-,-,-
+qc32 ed/qc32.jpg -,-,-,-,-,m,-,m
+a08 ed/a08.jpg a,-,-,- cur
