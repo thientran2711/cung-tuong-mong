@@ -1,5 +1,31 @@
 # Art progress (art worker, 11/14/2026)
 
+## CURRENT STATE (art worker #3, newest first — read this before anything below)
+- WORKTREE/PUBLISH: work copy = scratchpad/figwork (scripts write figures into scratchpad/wt-art3/img = branch art3, NOT the shared
+  checkout); `bash pub3.sh "msg"` commits there and pushes to review/consort-art (rebases on it first). pub2.sh (shared checkout) is retired.
+- OWNER REVERSAL (binding, replaces the MOTION rule below): calm STANDING poses like the early t1 lineups (upright, composed, still):
+  NO swirling hems, NO flying sleeves/sashes, NO dance steps, NO mid-stride; c19-t4 is NO LONGER the reference — the early t1 lineups'
+  stillness is. Variety only from ARMS/HANDS/PROPS + slight 3/4 turns and head tilts; younger livelier gestures, older calmer.
+  Implemented in spec5.py (G19/G24/G32/G48 + STILL clause incl. "about seven and a half heads tall ... never crouching, bending or leaning").
+  Old motion version kept as _spec5_motion.bak (not published).
+- PROPORTIONS (owner complaint: c07-t4-a36, c23-t4-a36, c24-t4-a26 squat): pipeline is uniform-scale (sheetproc only crops + scales
+  w*900/h x 900) — not the cause. Cause = wide swirling fabric (opaque-bbox H/W 1.7–1.9 vs 2.2–2.7 for calm figures) so the figure renders
+  smaller/shorter in fixed frames, plus "compact" in the old prompt. `python3 propchk.py "<glob>"` flags H/W<2.0 (WIDE) or head-to-neck
+  ratio too low (NECK<5.5, <5.1 at t5+ because of tall headdresses). Run on every new batch before accepting.
+  Scan of t1–t4: t1–t3 all pass; t4 flagged = c01 c07 c19 c20–c32 (the motion lineups, all WIDE) + c04-a18, c16-a18 (NECK, check by eye).
+- COLOUR at t5+: gold brocade washes pale palettes into cream/gold (c28 celadon, c30 moonlight blue redone). spec5 now adds "the robe itself
+  is clearly <main> silk, gold only as embroidery accents, NOT a cream, beige or all-gold robe"; t6 = "HEAVY silk brocade" (not "gold brocade");
+  pink+green palettes (c08, c20) get "NOT a green robe; <green> only as a small accent".
+- PLAYER LOOKS: owner decision — NOT drawn at all (the player takes one of the 32 consort identities). Removed from the plan.
+- LÃNH CUNG: every consort identity gets a tier "cold" lineup (fig-consort-cNN-tcold-aAA.webp, FIGURES tier "cold"), ONE common outfit:
+  plain undyed pale grey-white coarse linen robe, no embroidery, no jewellery, simple low bun with a plain wooden pin, clean, neat, beautiful,
+  calm standing, simple hand variety (broom handle, bowl, lamp, hands folded...). Code: j39 figTier maps "cold" -> -1 and figTierOf already
+  maps the player (S.out) and rivals (who.out) to -1, so NPCs in lãnh cung already pick "cold".
+- ORDER NOW: t5 DONE (calm) -> t6, t7, t8 (calm) -> tcold for all 32 -> redraw t4 motion lineups (c01 c07 c19 c20–c32, incl. the 3 squat
+  ones) calm -> t1–t3 redraw (new ages + calm varied hands; t1 redraw must keep the frozen-t1 face, pin new t1 in idfix.json only after cmp).
+- Sheets (scratchpad/sheets/): tier5.jpg (all 32 t5, calm, v6). Gen ids: sheets5.txt (v6 = calm), bg ids: sheets4_bg.txt.
+
+
 ## Done (published in img/ + img/FIGURES.json, 560 records)
 - Consort tier 2: all 32 (c10–c32 added; c11 = lilac redo KLM2dYekqp; c19 = plum redo xSdnIuIjfW; c28–c32 new).
 - Consort tier 3: all 32 (c27 redone in cinnabar red: eIOxnvTdqL; first try came out green).
@@ -25,7 +51,7 @@
   3 (a36) "about 32, a young mature woman in her prime, smooth skin, NO grey or silver hair, NO wrinkles";
   4 (a51) "about 48, a graceful elegant lady, only a few faint silver strands at the temples at most, minimal faint lines, still clearly beautiful, not elderly".
   (old wording 22/30/42/55 made a36 look grey/old — never use it again.)
-- MOTION (owner's quality bar, example = c19 tier 4, the walking mid-step with fan raised, skirts and sleeves swirling): every figure caught
+- [SUPERSEDED by OWNER REVERSAL above — do not use] MOTION (owner's quality bar, example = c19 tier 4, the walking mid-step with fan raised, skirts and sleeves swirling): every figure caught
   mid-movement, skirt hems swirling, sleeves/sash/stole floating in a soft breeze, tassels swaying; extra spacing between figures (spec5 adds it).
 - Poses: varied and lively, NOT the stiff frontal hands-at-waist pose. Each consort has her own signature prop; pose differs per age figure
   (19 lively: mid-step/glance back/raising fan...; 24 lively & confident; 32 poised, in her prime; 48 graceful & calm) and per tier

@@ -1,7 +1,7 @@
 # tiersheet.py out.jpg role tier ids... : contact sheet of a finished tier (4 ages per id, 2 ids per row)
 import sys
 from PIL import Image, ImageDraw
-O="/home/user/cung-tuong-mong/img"; out,role,t=sys.argv[1:4]; ids=sys.argv[4:]
+O="/tmp/claude-0/-home-user-cung-tuong-mong/84f333ce-ebd1-5e4a-9b0c-43035da11b67/scratchpad/wt-art3/img"; out,role,t=sys.argv[1:4]; ids=sys.argv[4:]
 TW,TH=130,260; AG=["a18","a26","a36","a51"]; per=2
 rows=(len(ids)+per-1)//per
 sh=Image.new("RGB",(per*4*TW,rows*(TH+16)),(240,230,210)); d=ImageDraw.Draw(sh)
