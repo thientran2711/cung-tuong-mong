@@ -690,6 +690,16 @@ chest, Tư trang, wardrobe slots, reward chests, peddler, works, reward panels. 
 - Screens 600–999 px portrait (Fold) on card tabs: stage 22 % of the screen. Left sticky column order: name, rank, BARS, portrait, wear slots, facts;
   right column: act tabs + act cards. Fold 755x1000 without scrolling: name y≈585, bars 630–733, first act card 679–793 (measured).
 - `.kpstrip` (small frame, name, rank, bars) turns on below 1000 px whenever the bars are out of view.
+### 28.17 ONE STICKY CARD HEADER (hotfix-card, owner Fold shot 1114-fold-card-dup) — replaces 28.7 left-column bars + 28.15 `.kpstrip`
+- Every person card `.pc` (consort, servant, child, Emperor, Thái hậu, court, officials, strangers; panel, pop and modal) has ONE header
+  `.kpstrip.kphead` at its top: small kit frame (`mdH sm` cell, 44 px; 34 px on phones), name (`.pcname`), rank title (`.pcrk`) and the BARS
+  (`.kpbars`: Ghen · Ngươi với nàng · Oán · Nàng với ngươi · Sủng). The real nodes are MOVED into it: no second copy anywhere in the card.
+- Opaque (`--panel2`), sticky at the card's top edge (`top:0`, card `padding-top:0`), in the flow: content scrolls UNDER it, nothing shows above it.
+- Below: big portrait + wear slots + stat tiles + facts (left column, not sticky), act tabs + act cards (right; one column under 600 px).
+- One fact, one place: the Sủng stat tile is hidden when the header's Sủng bar shows the same fact (or the tile is "chưa rõ").
+- Size: the card is its own scroller, `max-height` = the rest of the panel under the pager (or the whole panel height when that rest is
+  < 320 px); a newly opened person is scrolled fully into view (`kitPcSize`, jk2b §18).
+- Tested 755x1000@2, 1180x820@2, 1366x1024@2, 412x1058@2, 686x880@2.2 (dev/shots/hotfix-card/).
 ### 28.16 kitName: no doubled title
 `kitTitle` returns no title when the name already starts with it or with any role word (`KIT_ROLEPRE`: Thái y, thái giám, tổng quản, quan, thị vệ, vương gia, nhạc sư, công tử, ma ma, cô cô…).
 
