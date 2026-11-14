@@ -74,3 +74,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (19:40Z) Owner: don't redraw room backgrounds — keep the old landscape room art; it's fine in the full-screen room view. Portrait -p room set cancelled.
 - (19:55Z) Owner: Chặn ngự giá picture composition OK, but too bright — act is evening-only → night version. Rule: act pictures match the act's time of day.
 - (20:10Z) Owner APPROVED the identity card (wide origin picture, simple frame, pinned choice buttons) — review/identity-card 360f138a; ships with the fold-layout build.
+- (20:15Z) Owner: selected state in face picker ugly (yellow box behind frame + check over crest). Kit: one selected style everywhere — glow following frame outline, slight enlarge, unselected dimmed, small check at bottom-right inside frame; no box.
