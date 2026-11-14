@@ -66,3 +66,4 @@ Mẻ B10: t4 m47–m52 (t4 m27–m52 XONG) + t5 m27–m28 (hoa điền nấc 5 v
 Mẻ B11: t5 m29–m36 (8 lineup + vẽ lại m33, m36 vì quạt tròn và gương giống nhau). Tín dụng 10×273 = 2730.
 Mẻ B12: t5 m37–m44. 8 lineup, tín dụng 8×273 = 2184.
 Mẻ B13: t5 m45–m52 (t5 m27–m52 XONG). 8 lineup, tín dụng 8×273 = 2184.
+Mẻ B14: t6 m27–m32 (hoa điền nấc 6, 1 hạt trai; 6 lineup + vẽ lại m29, m30 vì đuôi váy hơi trong). Tín dụng 8×273 = 2184.
