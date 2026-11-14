@@ -95,15 +95,43 @@ Read it live: `RCOL[rank]`, or `KIT_RANK_COL[rank]` / `KIT_RANK_COL.cold` / `kit
 Every person shown anywhere (cards, dialogs, lists, chips, scene tags, identity card, small avatars) is drawn by
 `pcPort` (tall) or `mdH` (round). j60 wraps both, so every caller gets the kit automatically.
 
-### 4.1 Tall portrait (3:4) = `pcPort(f,col,status)` / `pframe(f)`
-Layers inside the existing `.pcp` box (now `.pcp.kit`), inside a centred 3:4 stage `.kin` (container units keep it 3:4 even when the box is clamped):
-1. `.kbg` brocade ground `img/kit/bg-<role>[-<rank>].webp` (servants: + palette tint), at x 9.5–90.5 %, y 8.5–88.5 %;
-2. the portrait image `.kpor` (`por-*`, or initials when missing): the live por framing the owner chose (whole head, face large, cut below the chest), `object-fit:cover` anchored at the top, placed 9 % of the opening lower (x 9.5–90.5 %, y 15.7–88.5 %) so frame crests never cover hair ornaments and the brocade shows as headroom. Old opaque `face-*` art (children) fills the whole opening with a soft oval vignette into the brocade;
-3. `.kfr` frame `img/kit/frame-<role>[-<rank>].webp` (480x640, transparent; the opening is always x 10–90 %, y 9–88 %);
-4. `.kgem` badge bottom-right (rank gem / servant token / unknown token), 21 % of width;
-5. `.kemb` origin emblem above the gem (player only), 14 %;
-6. `.klab` "Người lạ" (unknown only); `.pcs` status stays on top.
+### 4.1 Tall portrait = `pcPort(f,col,status)` / `pframe(f)`
+**Frame canvas (every frame, one single picture): 480 x 990 px** = 140 px headroom for crests (phoenix, dragons, qilin) + the 480x640 block that holds the portrait opening (x 10–90 %, y 9–88 % of that block) + 210 px for the frame's own hanging pendant and tassel (ngọc bội + tua rua). Nothing of a frame may leave this canvas; the whole picture will later be animated as one (the tassel is the part that moves).
+The `.pcp.kit` box takes the canvas ratio (480/990) so the crest and the tassel are never clipped; the stage `.kin` keeps that ratio centred in the box with container units, so a box clamped by `max-height` shrinks the frame instead of cutting it. Layers, in % of the canvas:
+1. `.kbg` brocade ground `img/kit/bg-<role>[-<rank>].webp` (servants: + palette tint), x 9.5–90.5 %, y 19.64 % + 51.72 %;
+2. the portrait `.kpor` (`por-*`, or initials when missing): the live por framing the owner chose (whole head, face large, cut below the chest), `object-fit:cover` anchored at the top, starting 9 % of the opening lower (y 24.29 % + 47.06 %) so crests never cover hair ornaments and the brocade shows as headroom. Old opaque `face-*` art (children) fills the opening with a soft oval vignette;
+3. `.kfr` the frame picture, full canvas;
+4. `.kgem` rank gem / servant token / unknown token at the band's bottom-right corner: width 21 %, top 66.06 %, right 2 %;
+5. `.kemb` (player only) her origin (thân phận) as a small gold-and-white-jade medallion in the same style as the gem, beside it on the left: width 16 %, top 67.22 %, right 20 %; tooltip and alt text = "Xuất thân: <origin name>";
+6. `.klab` "Người lạ" (unknown only), bottom 29.62 %; `.pcs` status stays on top.
 The old rank grounds `.rk-*`, the gold border and the `rank-*.webp` corner icon are not drawn under the kit.
+
+### 4.1b Pendants and tassels (part of each frame picture)
+| frame | pendant (ngọc bội) | tassel |
+|---|---|---|
+| consort-0 Đáp ứng | small carved wooden bead | brown-grey silk |
+| consort-1 Thường tại | small round green jade bead | soft green |
+| consort-2 Quý nhân | silver-capped aquamarine bead | light blue |
+| consort-3 Tần | rose-quartz flower | powder pink |
+| consort-4 Phi | amethyst in silver filigree | lavender |
+| consort-5 Quý phi | ruby and gold peony | crimson |
+| consort-6 Hoàng quý phi | amber and gold phoenix wing, pearls | orange-gold |
+| consort-7 Hoàng hậu | large white jade bi disc with gold phoenix, pearl strings | long golden yellow |
+| emp | imperial yellow dragon jade, gold caps | imperial yellow |
+| thaihau | white jade shou medallion with gold | deep plum |
+| heir | gold-capped jade with small dragon | apricot yellow |
+| prince | green jade qilin | deep blue |
+| princess | pale pink jade peach blossom, pearl | soft pink |
+| official | square dark-green jade seal | teal |
+| physician | lacquered medicine gourd, jade bead | sage green |
+| man | round white jade disc | charcoal black |
+| royal | navy-and-gold python jade | navy and gold |
+| guard | bronze tiger tally | dark crimson |
+| cold | cracked pale grey jade | faded grey |
+| unknown | grey stone disc with mist | soft grey |
+| eunuch-0..3 | jade bead → silver cap → silver + knot → gold-capped jade pendant | ERCOL `#8f9a8a` `#5f8a6a` `#3f6a8a` `#7a4a3a` |
+| maid-0..4 / mama-0..4 | plain jade bead → jade flower → silver flower → silver plum blossom → gold plum blossom with pearl | MRCOL `#9aa3a8` `#5fa39a` `#4f74a8` `#a0584a` `#6a5a8e` |
+Men's pendants and tassels are never pink or purple. Small round avatars (`mdH`) have no tassel.
 
 ### 4.2 Round avatar = `mdH(face,"xs|sm|big")` → `.md.kit`
 Simplified frame: brocade ground of the same role/rank, ring = rank/role colour (`--kc`), outer rim = role metal (`--km`).
@@ -111,16 +139,16 @@ Simplified frame: brocade ground of the same role/rank, ring = rank/role colour 
 ### 4.3 Roles, frames, grounds, badges
 | role (`personRoleRank(p).role`) | who | frame | ground | badge |
 |---|---|---|---|---|
-| `player` | her (consort road), by rank 0–7 | `frame-player-N` (consort ladder + red plum sprig & crimson ribbon, top-left) | `bg-consort-N` | `gem-N` + `origin-<k>` emblem (tt dtq muoi cn nc td ch thd) |
+| `player` | her (consort road), by rank 0–7 | the SAME `frame-consort-N` as any consort of her rank (on the stage she is marked by her rank-colour halo) | `bg-consort-N` | `gem-N` + origin medallion `origin-<k>` beside it (tt dtq muoi cn nc td ch thd) |
 | `consort` | the 12+ phi tần, by rank (Hoàng hậu = 7) | `frame-consort-N` | `bg-consort-N` | `gem-N` |
 | `cold` | anyone in lãnh cung (her too) | `frame-cold` | `bg-cold` | – |
 | `emp` | Hoàng thượng | `frame-emp` (two dragons, imperial yellow) | `bg-emp` | – |
 | `thaihau` | Thái hậu | `frame-thaihau` (phoenix + shou, plum enamel) | `bg-thaihau` | – |
 | `heir` | Thái tử (`k.heir`) | `frame-heir` | `bg-heir` | – |
 | `prince` / `princess` | Hoàng tử / Công chúa | `frame-prince` (qilin) / `frame-princess` (peach blossom) | `bg-prince` / `bg-princess` | – |
-| `maid` | cung nữ (and her, servant start), rank 0–4 | `frame-maid` | `bg-maid` + MRCOL tint | `tok-mN` |
-| `mama` | maid aged 36+ or `old` | `frame-mama` | `bg-mama` + MRCOL tint | `tok-mN` |
-| `eunuch` | thái giám, rank 0–3 (court eunuchs: tq = 3, others 2) | `frame-eunuch`, rank 3 `frame-eunuch-3` | `bg-eunuch` / `bg-eunuch-3` + ERCOL tint | `tok-eN` |
+| `maid` | cung nữ (and her, servant start), rank 0–4 | `frame-maid-N` (same frame, rank tassel) | `bg-maid` + MRCOL tint | `tok-mN` |
+| `mama` | maid aged 36+ or `old` | `frame-mama-N` | `bg-mama` + MRCOL tint | `tok-mN` |
+| `eunuch` | thái giám, rank 0–3 (court eunuchs: tq = 3, others 2) | `frame-eunuch-0..2`, rank 3 `frame-eunuch-3` (gold head-eunuch frame) | `bg-eunuch` / `bg-eunuch-3` + ERCOL tint | `tok-eN` |
 | `official` | quyền thần / quan (j55 clans) | `frame-official` (crane) | `bg-official` | – |
 | `physician` | thái y | `frame-physician` (bamboo, gourd) | `bg-physician` | – |
 | `man` | nhạc sư, họa sư, sứ thần, công tử | `frame-man` (walnut + charcoal enamel, jade disc) | `bg-man` charcoal ink, silver clouds | – |
@@ -141,7 +169,7 @@ Stage strangers: full-body grey silhouettes `img/kit/unknown-fig-f|m|k.webp` (90
 
 ### 4.5 Art rules for kit assets
 - Magnific `gpt-2-6` only, at most 1 style reference (face-consort-01), folder ba4aecfe-efce-47e2-b53f-30d292091886; painterly semi-realistic guofeng, soft light.
-- Frames: rectangular 3:4, transparent centre, ornaments close to the band; drawn on chroma green and keyed locally; normalised to 480x640 with the fixed opening; < 150 KB each.
+- Frames: rectangular 3:4, transparent centre, ornaments close to the band; drawn on chroma green and keyed locally; normalised to the 480x990 canvas (crest headroom, fixed opening, own pendant + tassel inside); < 150 KB each.
 - Brocade: tone-on-tone, low contrast, soft centre glow, 360x480 webp.
 - Men's frames/grounds: never pink or purple; man / royal / guard must stay distinguishable at a glance (charcoal / navy-gold / bronze).
 - Never reuse a frame of another role; a new role gets its own frame + ground pair added to this table first.
