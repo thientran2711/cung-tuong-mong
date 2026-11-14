@@ -87,7 +87,11 @@ try{const st=$$("stage");if(st&&window.ResizeObserver)new ResizeObserver(()=>{cl
 
 /* ---------- CSS: the one layout ---------- */
 const css=document.createElement("style");css.id="k3-layout";css.textContent=`
-:root{--kstH:42dvh;--k3pl:rgba(255,250,240,.88)}
+:root{--k3pl:rgba(255,250,240,.88)}
+/* stage frame (KIT 31.3): portrait screens get a FIXED aspect — Fold/tablets 600–999 px wide: 2:1 (width:height); phones < 600 px: 3:2.
+   The panel below takes the rest and scrolls. Landscape: the left column (unchanged). */
+:root{--kstH:calc((100vw - 16px) / 2)}
+@media (max-width:599px){:root{--kstH:calc((100vw - 12px) / 1.5)}}
 /* 3 · ONE STAGE SIZE (portrait): same on every tab; the panel scrolls */
 @media (max-aspect-ratio:1/1){
  html body .game#game:not(.maptab),html body .game#game.cardtab:not(.maptab){grid-template-rows:auto var(--kstH) minmax(0,1fr) auto!important}
