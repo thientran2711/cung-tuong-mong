@@ -32,6 +32,33 @@ Gates the ONE modal queue at `showModal`, so it covers every source, also module
 - Consequences write back to state: relations (relAdd), servant loyalty/causes, child health/talent/fondness, evidence (evA), guard (guardWarn), Kho lúa/Biên cương (j55), Ân tình.
 - Promotions (j68i): every decree (her and NPCs) appends "Lý do:" with the conditions that held and their numbers, the Emperor's pick among N qualified, the Tranh ghế win, or a son's birth. Week summary: each sentence under one heading only, reasons kept with their decree, split so no line is cut.
 
+## Audit of the existing event sources (origin/main d3c1c1b; rates from the sensible bot, 95 lives, about 8 years each)
+| source | how many | cadence | repeats |
+|---|---|---|---|
+| j7 `ev()` events | 32 (framing, rumours, alliances, Emperor, flood, festivals...) | only through makeDil: 22% a tuần and only when nothing else was queued, so in practice about 1 a year in total | 12-month cooldown each; mostly unseen |
+| j3 makeDil fixed dilemmas | 6 (vase, coldletter, embezzle, tuyen, thbenh, loveletter) | same draw as above | no cooldown |
+| j24 approaches ("people come to her") | ~10 kinds | 1 to 3 every tuần: Có người đến 22/yr, Kẻ hầu xin 13/yr (always the sick-mother text), Thái hậu triệu 10/yr, Hoàng thượng đến 5/yr, Một ánh mắt 4/yr | no cooldown; same text again within days |
+| j24 servant causes (Việc của kẻ hầu) | 2 per trait | 12% per servant per tuần: 10/yr | one servant's trait gives the same mishap ("làm vỡ chén ngọc") again and again |
+| info notices | Tin trong cung 42/yr, Thánh thượng ban thưởng 12/yr, Tai mắt báo tin 3/yr | weekly | — |
+| j31 festivals + j7 festival events | 7 + 5 | once a year each | — |
+| moodMonth (j3, replaced by j55 Quốc sự) | 8 (j55: 7 weighted) | monthly line in the news | — |
+| j5 art mini-games | 15 couplets, 12 medicine questions, painting, dance | per lesson | couplets repeat soon |
+| j53 children tests / j54 princess / j55 court | tests every 2 months; 7 princess events monthly; 3 court pop-up kinds | monthly | — |
+| total | — | about 5.0 modals per tuần (day), about 2.1 of them optional; often 3 or more at day start | the same visit or mishap within 5 days was common |
+
+## Measurement (sensible bot, inpage5 + counters; base = origin/main, new = this branch)
+| | base (107 lives) | new (83 lives) |
+|---|---|---|
+| Hoàng hậu reached | 32% | 30% |
+| early death | 53% | 36% |
+| died in first 2 tuần | 0 | 0 |
+| childbirth deaths per birth | 13.1% | 5.2% |
+| modals per day (tuần), all kinds | 5.07 | 3.53 |
+| optional event modals per day | 2.46 (45% of days had 3 or more; up to 7 in one buổi; 91% shown at day start) | 1.02 (never more than 2 a day, never 2 in one buổi; 29% at day start, and then alone) |
+| same event again within 5 days (per 100 days) | 106 | 0.1 |
+| j68 events per year | 0 | 9 |
+Note: fewer stacked optional events means fewer small Sức costs, which the childbirth formula feels (Sức under 40 adds risk). Childbirth is now under the 8–12% target band; the main session may retune (jbal) if wanted.
+
 ## Status
 - [x] engine, cadence hook, anti-repetition, shared helpers
 - [x] content: 72 templates, 316 text variants (x real actors x context)
