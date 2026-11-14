@@ -146,7 +146,8 @@
   "con-tre": {
    "title": "Chuyện các con",
    "files": [
-    "img/ev-con-tre.webp"
+    "img/ev-con-tre.webp",
+    "img/ev-con-tre-2.webp"
    ]
   },
   "tang-le": {
@@ -204,32 +205,168 @@
     "img/ev-tai-nghe.webp"
    ]
   },
+  "thoi-tiet": {
+   "title": "Thời tiết, bốn mùa",
+   "files": [
+    "img/ev-thoi-tiet.webp",
+    "img/ev-thoi-tiet-2.webp",
+    "img/ev-thoi-tiet-3.webp"
+   ]
+  },
+  "dieu-troi": {
+   "title": "Điềm trời",
+   "files": [
+    "img/ev-dieu-troi.webp"
+   ]
+  },
+  "dieu-lanh": {
+   "title": "Điềm lành",
+   "files": [
+    "img/ev-dieu-lanh.webp"
+   ]
+  },
+  "benh-tat": {
+   "title": "Ốm đau, thái y",
+   "files": [
+    "img/ev-benh-tat.webp"
+   ]
+  },
+  "dich-benh": {
+   "title": "Dịch bệnh",
+   "files": [
+    "img/ev-dich-benh.webp"
+   ]
+  },
+  "hoa-hoan": {
+   "title": "Hỏa hoạn",
+   "files": [
+    "img/ev-hoa-hoan.webp"
+   ]
+  },
+  "tin-don": {
+   "title": "Tin đồn, bê bối",
+   "files": [
+    "img/ev-tin-don.webp"
+   ]
+  },
+  "tai-mat": {
+   "title": "Tai mắt, kẻ khả nghi",
+   "files": [
+    "img/ev-tai-mat.webp"
+   ]
+  },
+  "chuyen-la": {
+   "title": "Chuyện lạ, ma quái",
+   "files": [
+    "img/ev-chuyen-la.webp"
+   ]
+  },
   "dau-doc": {
    "title": "Đầu độc",
    "files": [
     "img/ev-dau-doc.webp"
    ]
+  },
+  "vu-oan": {
+   "title": "Vu oan, bùa ngải",
+   "files": [
+    "img/ev-vu-oan.webp"
+   ]
+  },
+  "hai-thai": {
+   "title": "Hại thai, xạ hương",
+   "files": [
+    "img/ev-hai-thai.webp"
+   ]
+  },
+  "hoi-lo": {
+   "title": "Hối lộ, uy hiếp",
+   "files": [
+    "img/ev-hoi-lo.webp"
+   ]
+  },
+  "mat-uoc": {
+   "title": "Mật ước, liên thủ",
+   "files": [
+    "img/ev-mat-uoc.webp"
+   ]
+  },
+  "hinh-phat": {
+   "title": "Trừng phạt",
+   "files": [
+    "img/ev-hinh-phat.webp"
+   ]
+  },
+  "lanh-cung": {
+   "title": "Lãnh cung",
+   "files": [
+    "img/ev-lanh-cung.webp",
+    "img/ev-lanh-cung-2.webp",
+    "img/ev-lanh-cung-3.webp"
+   ]
+  },
+  "dai-xa": {
+   "title": "Đại xá, ân điển",
+   "files": [
+    "img/ev-dai-xa.webp"
+   ]
+  },
+  "hh-viec": {
+   "title": "Việc Hoàng hậu giao",
+   "files": [
+    "img/ev-hh-viec.webp",
+    "img/ev-hh-viec-2.webp"
+   ]
+  },
+  "cung-nu": {
+   "title": "Đời cung nữ",
+   "files": [
+    "img/ev-cung-nu.webp",
+    "img/ev-cung-nu-2.webp"
+   ]
+  },
+  "tu-tinh": {
+   "title": "Tư tình, ánh mắt",
+   "files": [
+    "img/ev-tu-tinh.webp"
+   ]
   }
  },
  "events": {
+  "arc:ch_benh": "benh-tat",
+  "arc:ch_bi": "tai-mat",
+  "arc:ch_co": "mat-uoc",
   "arc:ch_ho": "tranh-sung",
+  "arc:cn_ban": "vu-oan",
   "arc:cn_chu": "tranh-sung",
   "arc:cn_than": "thu-nha",
+  "arc:cn_tinh": "tu-tinh",
+  "arc:cnv_ban": "vu-oan",
+  "arc:cnv_chu": "tai-mat",
   "arc:cnv_ma": "cung-nhan",
   "arc:cnv_mat": "hoang-de-dem",
   "arc:dtq_bien": "bien-ai",
   "arc:dtq_binh": "bien-ai",
   "arc:dtq_huynh": "bien-ai",
+  "arc:dtq_vu": "vu-oan",
   "arc:muoi_doi": "lu-lut",
   "arc:muoi_lau": "tham-quan",
   "arc:muoi_no": "tham-quan",
   "arc:muoi_tuoc": "thu-nha",
+  "arc:nc_gian": "mat-uoc",
   "arc:nc_su": "su-than",
   "arc:nc_tuc": "thinh-an",
   "arc:nc_vuong": "su-than",
+  "arc:s_ban": "mat-uoc",
+  "arc:s_dich": "dich-benh",
+  "arc:s_hoa": "hoa-hoan",
   "arc:s_su": "su-than",
   "arc:s_than": "thu-nha",
   "arc:s_thay": "cung-nhan",
+  "arc:s_thu": "tai-mat",
+  "arc:s_tinh": "tu-tinh",
+  "arc:td_an": "vu-oan",
+  "arc:td_ke": "vu-oan",
   "arc:td_song": "thu-nha",
   "arc:td_tha": "tranh-sung",
   "arc:thd_hoc": "tai-nghe",
@@ -237,19 +374,25 @@
   "arc:thd_tho": "tai-nghe",
   "arc:thd_tro": "tham-quan",
   "arc:tt_co": "thu-nha",
+  "arc:tt_mat": "mat-uoc",
   "arc:tt_oan": "tham-quan",
   "arc:tt_tranh": "thu-nha",
+  "cnv:*": "cung-nu",
+  "e68:allyOffer": "mat-uoc",
   "e68:autumnMoon": "le-thu",
   "e68:borderNews": "bien-ai",
   "e68:borrowDress": "khach-den",
+  "e68:bribedServ": "hoi-lo",
   "e68:brokenHeirloom": "cung-nhan",
   "e68:clanFather": "tham-quan",
+  "e68:docCheck": "benh-tat",
   "e68:doubtVisit": "tranh-sung",
   "e68:droughtPrayer": "han-han",
   "e68:embroidery": "tai-nghe",
   "e68:empAsksAbout": "hoang-de-vui",
   "e68:empChess": "hoang-de-vui",
   "e68:empDish": "hoang-de-vui",
+  "e68:empDream": "dieu-troi",
   "e68:empGiftOdd": "hoang-de-vui",
   "e68:empIncognito": "vi-hanh",
   "e68:empOldFlame": "hoang-de-gian",
@@ -259,10 +402,14 @@
   "e68:empWager": "vi-hanh",
   "e68:envoyGift": "su-than",
   "e68:eunRequest": "khach-den",
+  "e68:eunuchSqueeze": "hoi-lo",
   "e68:famineDonate": "lu-lut",
+  "e68:flowerBloom": "dieu-lanh",
   "e68:fortuneNun": "te-le",
   "e68:giftArrive": "khach-den",
   "e68:gossipTea": "khach-den",
+  "e68:hairpinThief": "chuyen-la",
+  "e68:heatStroke": "thoi-tiet",
   "e68:hhSummons": "thinh-an",
   "e68:kidFight": "con-tre",
   "e68:kidGift": "con-tre",
@@ -270,19 +417,36 @@
   "e68:kidSick": "con-tre",
   "e68:kidTutor": "con-tre",
   "e68:kindVisit": "khach-den",
+  "e68:leakRoof": "thoi-tiet",
   "e68:letterHome": "thu-nha",
+  "e68:lostItem": "chuyen-la",
+  "e68:lotusSeason": "thoi-tiet",
   "e68:maidQuarrel": "cung-nhan",
   "e68:musician": "tai-nghe",
   "e68:newGirlAdvice": "khach-den",
+  "e68:newServSus": "tai-mat",
+  "e68:nightSteps": "chuyen-la",
   "e68:officialWife": "khach-den",
   "e68:painter": "tai-nghe",
+  "e68:poisonedFish": "chuyen-la",
   "e68:proudVisit": "tranh-sung",
   "e68:rumorEmpLove": "tan-phong",
+  "e68:rumorEvidence": "tin-don",
+  "e68:rumorFavor": "tin-don",
+  "e68:rumorPreg": "tin-don",
+  "e68:rumorSpy": "tai-mat",
+  "e68:rumorTH": "tin-don",
   "e68:servGamble": "cung-nhan",
+  "e68:servHero": "hoa-hoan",
   "e68:servLeave": "cung-nhan",
+  "e68:servRomance": "tu-tinh",
   "e68:sickServant": "cung-nhan",
   "e68:silkAllot": "tranh-sung",
+  "e68:slyVisit": "tai-mat",
+  "e68:snowDay": "thoi-tiet",
   "e68:spoiledFood": "dau-doc",
+  "e68:springAllergy": "benh-tat",
+  "e68:stormNight": "thoi-tiet",
   "e68:strayCat": "cung-nhan",
   "e68:templeRite": "te-le",
   "e68:thMama": "thinh-an",
@@ -296,42 +460,79 @@
   "fest:thattich": "le-thu",
   "fest:trungcuu": "le-thu",
   "fest:trungthu": "le-thu",
+  "hh:*": "hh-viec",
+  "j22:affair": "tu-tinh",
   "j24:co-nguoi-den": "khach-den",
   "j24:hoang-thuong-den": "hoang-de-dem",
   "j24:ke-hau-xin": "cung-nhan",
+  "j24:mot-anh-mat": "tu-tinh",
   "j24:thai-hau-trieu": "thinh-an",
   "j24:viec-ke-hau": "cung-nhan",
+  "j3:coldletter": "lanh-cung",
   "j3:embezzle": "tham-quan",
+  "j3:loveletter": "tin-don",
+  "j3:thbenh": "benh-tat",
   "j3:tuyen": "tuyen-tu",
   "j3:vase": "cung-nhan",
+  "j42:*": "cung-nu",
   "j54:h54met": "con-tre",
   "j54:h54sad": "con-tre",
   "j54:h54show": "con-tre",
   "j54:h54tut": "con-tre",
   "j55:tdPop": "trieu-chinh",
+  "j7:caning": "hinh-phat",
+  "j7:coldvisit": "lanh-cung",
+  "j7:comet": "dieu-troi",
+  "j7:condemnedmaid": "hinh-phat",
   "j7:doanngo": "le-ha",
+  "j7:doctorblack": "hoi-lo",
+  "j7:doll": "vu-oan",
   "j7:dongchi": "le-dong",
   "j7:empnight": "hoang-de-dem",
+  "j7:eunuch": "tai-mat",
+  "j7:fire": "hoa-hoan",
   "j7:flood": "lu-lut",
   "j7:foreignwed": "hoa-than",
+  "j7:ghost": "chuyen-la",
+  "j7:guardrumour": "tin-don",
   "j7:jealousprince": "hoang-de-gian",
   "j7:letterhome": "thu-nha",
+  "j7:maidhostage": "hoi-lo",
   "j7:minister": "trieu-chinh",
   "j7:newgirl": "tuyen-tu",
+  "j7:pact": "mat-uoc",
+  "j7:phoenix": "dieu-lanh",
   "j7:poisongift": "dau-doc",
   "j7:princefever": "con-tre",
+  "j7:rvbribe": "hoi-lo",
+  "j7:rvframe": "vu-oan",
+  "j7:rvmusk": "hai-thai",
   "j7:rvquarrel": "tranh-sung",
   "j7:taster": "dau-doc",
   "j7:thbirthday": "yen-tiec",
   "j7:trungcuu": "le-thu",
   "j7:vulan": "le-thu",
+  "lc:*": "lanh-cung",
   "news:hoa-than": "hoa-than",
   "news:nam-chieu": "bien-ai",
   "news:thang-tran": "thang-tran",
   "news:thua-tran": "bien-ai",
+  "plot:accuse": "vu-oan",
+  "plot:block": "hoi-lo",
+  "plot:bribe": "hoi-lo",
+  "plot:catswap": "hai-thai",
+  "plot:frame": "vu-oan",
+  "plot:huydung": "hinh-phat",
+  "plot:joint": "vu-oan",
+  "plot:kframe": "vu-oan",
   "plot:kpoison": "dau-doc",
   "plot:ksab": "con-tre",
+  "plot:musk": "hai-thai",
+  "plot:plant": "vu-oan",
   "plot:poison": "dau-doc",
+  "plot:pond": "chuyen-la",
+  "plot:pushp": "chuyen-la",
+  "plot:rumor": "tin-don",
   "qs:cong": "su-than",
   "qs:giac-thang": "thang-tran",
   "qs:giac-thua": "bien-ai",
@@ -341,16 +542,21 @@
   "qs:mua": "duoc-mua",
   "qs:tham": "tham-quan",
   "qs:yen": "trieu-chinh",
+  "sys:an-xa": "dai-xa",
   "sys:bang-ha": "quoc-tang",
   "sys:chet-con": "tang-le",
   "sys:chet-npc": "tang-le",
   "sys:co-thai": "sinh-no",
+  "sys:dai-xa": "dai-xa",
+  "sys:giang-chuc": "hinh-phat",
+  "sys:lanh-cung": "lanh-cung",
   "sys:lap-hau": "tan-phong",
   "sys:lap-thai-tu": "tan-phong",
   "sys:mood-binh": "trieu-chinh",
   "sys:mood-gian": "hoang-de-gian",
   "sys:mood-phien": "hoang-de-gian",
   "sys:mood-vui": "hoang-de-vui",
+  "sys:om": "benh-tat",
   "sys:qua-doi": "tang-le",
   "sys:sinh-con": "sinh-no",
   "sys:sinh-npc": "sinh-no",

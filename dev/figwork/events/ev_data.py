@@ -66,7 +66,7 @@ cat('sinh-no', 'Sinh nở, có thai', 0,
     'a carved rosewood cradle with red silk quilts, tiny embroidered tiger shoes and a gold longevity lock, soft morning light through gauze curtains')
 cat('con-tre', 'Chuyện các con', 0,
     'a palace schoolroom for young princes: small desks with brush, ink, a wooden toy horse and a kite, a child seen from behind practising calligraphy',
-    'a sick child\'s small bed with gauze curtains, a bowl of medicine and a tiger plush on the side table, lamp light')
+    'a sick child\'s small empty bed with gauze curtains, a bowl of medicine and a traditional embroidered cloth tiger toy on the side table, lamp light')
 cat('tang-le', 'Tang lễ, qua đời', 1,
     'a mourning hall with white curtains, a spirit tablet without writing, white chrysanthemums and tall white candles, incense smoke')
 cat('tan-phong', 'Tấn phong', 0,

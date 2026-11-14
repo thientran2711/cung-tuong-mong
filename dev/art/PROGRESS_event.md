@@ -11,3 +11,8 @@ Model gpt-2-6, 3:4, 1k (40 credits each), 1 style ref (bright: Ngự hoa viên c
 - Mẻ 4: le-dong-2, te-le, yen-tiec, sinh-no, con-tre, tang-le, tan-phong nhận; con-tre-2 (thú bông hổ trông hiện đại) -> vẽ lại.
 - Mẻ 5: tuyen-tu, thinh-an, khach-den(-2), tranh-sung, cung-nhan, thu-nha, tai-nghe: nhận cả 8.
 - Coordinator 11/14: review/events f5b203a = 72 mẫu, khớp danh sách; thêm nhóm chừa sẵn hh-viec (việc Hoàng hậu giao), cung-nu (đời cung nữ), tu-tinh (tư tình), lanh-cung thêm 2 biến thể (đời sống lãnh cung); ánh xạ thêm j3/j24/j54/j55/j22.
+- Mẻ 6: thoi-tiet(-2,-3), dieu-troi, dieu-lanh, benh-tat, dich-benh, hoa-hoan: nhận cả 8.
+- Mẻ 7 (khuôn tối): tin-don, tai-mat, chuyen-la, dau-doc (vẽ lại, tối hơn), vu-oan (búp bê không mặt), hai-thai, hoi-lo, mat-uoc: nhận cả 8.
+- Mẻ 8: hinh-phat, lanh-cung(-2,-3), dai-xa, hh-viec(-2), cung-nu: nhận cả 8.
+- Mẻ 9: cung-nu-2, tu-tinh, con-tre-2 (vẽ lại: hổ vải truyền thống): nhận.
+## Xong: 52 nhóm, 69 tranh, 232 mã sự kiện. 73 lượt vẽ (69 + 4 vẽ lại/thử) x 40 = 2920 tín dụng.
