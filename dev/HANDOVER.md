@@ -116,3 +116,5 @@ Việc dở của các thợ đã đẩy lên nhánh wip/* (không đè nhánh n
 - review/consort-art: thợ #9 dừng giữa lúc sửa "hoa điền đúng nấc + xóa nốt ruồi"; xem PROGRESS của nhánh.
 Phiên mới không có scratchpad cũ và không gọi được các thợ cũ: mở thợ mới từ các nhánh trên.
 Trigger 9:15 PT cũ đã xóa; phiên mới tự kiểm bản live trước 10 giờ sáng giờ Los Angeles nếu kịp.
+- wip/consort-art: 1642 ảnh fig/por phi tần thợ #9 đã sửa nhưng chưa commit lúc dừng (hoa điền đúng nấc / xóa nốt ruồi / cắt lại chân dung). CHƯA KIỂM: so với origin/review/consort-art, xem từng ảnh, rồi mới đưa vào review/consort-art.
+- Tranh đã vẽ trên Magnific mà chưa tải về vẫn còn trong thư mục Magnific ba4aecfe; mã từng lượt vẽ ghi trong gens.txt / PROGRESS của từng nhánh, tải lại được, không phải vẽ lại.
