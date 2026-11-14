@@ -1,3 +1,14 @@
+# Kiểm duyệt bộ giao diện: review/minigames @ fe63a6f (lần 3) — PASS
+
+Ngày 2026-11-14. Gộp origin/main 2bed83a (xung đột assemble.py; thứ tự … j82, j91, j90, j93, j94, jk2b, j98, j84), dựng không lỗi.
+Bộ thử của nhánh (dev/test/minigames91.js, chạm thật qua CDP + tự chơi): 686x880@2.2 sáu trò (Điều hương, Cắm hoa, Thơ, Câu đối, Vẽ, Nấu ăn),
+1180x820@2 ba trò (Điều hương, Câu đối, Cắm hoa); 755x1000@2 xem ảnh Điều hương, Cắm hoa, Thơ, Câu đối.
+- HUD không vượt trần: hudOver = 0 ở mọi trò (Điều hương "Phần 7/10" hồi 2/3).
+- Không chữ đè chữ: textOverText và domOverlap rỗng; "Khớp hương mẫu!" nay nằm đúng chỗ dòng gợi ý.
+- Không lỗi trang, không tràn ngang, không cắt chữ, không "có thể"; save cũ nạp được ở 6 cỡ. Ảnh: dev/shots/review/minigames/lan3-686-1180.jpg.
+
+---
+
 # Kiểm duyệt bộ giao diện: review/minigames @ 6e859ae (lần 2) — FAIL
 
 Ngày 2026-11-14. Gộp với origin/main 7a18690 (j94 cảnh mùa): xung đột assemble.py, thứ tự đúng `… 'j82.js', 'j91.js', 'j90.js', 'j94.js', 'j84.js'`; dựng không lỗi.
