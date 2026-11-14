@@ -681,7 +681,7 @@ kitPcFix=function(pc){try{if(!pc||pc.dataset.k2==="1")return;const L=pc.querySel
  try{const p=kitPersonByName(name);pc.querySelectorAll(".chip").forEach(c=>{if(/^(Trâm|Y phục):/.test(c.textContent.trim())||(p&&typeof wdSlots==="function"&&/^(Đúng phẩm|Vượt phẩm|Quá giản dị|Phạm tang)$/.test(c.textContent.trim())))c.remove()});
   if(p&&typeof wdSlots==="function"&&!pc.querySelector(".kwear")){const h=kitWearSlots(p,{size:"sm"});if(h&&pcp)pcp.insertAdjacentHTML("afterend",h)}}catch(e){}
  /* one fact, one place: Sủng is in the info block, so its stat tile goes */
- if(/Sủng/.test(bars.textContent)){const bs=[...bars.children].find(c=>/Sủng/.test(c.textContent));const barKnown=bs&&!/chưa rõ/.test(bs.textContent);pc.querySelectorAll(".ktile").forEach(t=>{const l=t.querySelector("span,small,i,em");if(/^\s*Sủng\b/i.test((l||t).textContent)&&(barKnown||/chưa rõ/.test(t.textContent)))t.hidden=true})}
+ if(/Sủng/.test(bars.textContent)){const bs=[...bars.children].find(c=>/Sủng/.test(c.textContent));const barKnown=bs&&!/chưa rõ/.test(bs.textContent);pc.querySelectorAll(".kst-tile").forEach(t=>{const l=t.querySelector("span,small,i,em");if(/^\s*Sủng\b/i.test((l||t).textContent)&&(barKnown||/chưa rõ/.test(t.textContent)))t.hidden=true})}
  kitPcSize()}catch(e){console.error("kitPcFix",e)}};
 document.addEventListener("click",e=>{const pp=e.target.closest&&e.target.closest(".pc.kpnar .pcl > .pcp.kpsheet");if(!pp)return;e.stopPropagation();
  try{const pc=pp.closest(".pc");const nm=(pc.querySelector(".pcname")||{}).textContent||"";const parts=[...pc.querySelectorAll(":scope > .pcl > .kwear, :scope > .pcl > .kpfacts")].map(x=>x.outerHTML).join("");
@@ -788,8 +788,8 @@ html body #panel .ksub{top:0!important;z-index:7!important;box-shadow:0 -9px 0 0
    Unknown = "?" (dim); the long wording ("chưa rõ (xem sổ thị tẩm)", "Bình thường") lives in the chip's tooltip (tap = kpPop). ---------- */
 function kitPcGrid(pc){try{if(!pc||pc.querySelector(".kpgrid"))return;const L=pc.querySelector(":scope > .pcl");if(!L)return;
  const T=e=>String(e||"").replace(/\s+/g," ").trim();const unk=v=>/^(chưa rõ|\?|không rõ)/i.test(v);
- const chip=(lab,val,full,extra)=>{lab=String(lab||"");lab=lab.charAt(0).toUpperCase()+lab.slice(1);const u=unk(val);const c=document.createElement("span");c.className="kpq"+(u?" kpu":"");c.title=full||(lab+": "+val);
-  c.innerHTML=`<small>${lab}</small><b>${u?"?":val}</b>`;if(extra)extra.forEach(x=>x&&c.appendChild(x));return c};
+ const chip=(lab,val,full,extra)=>{lab=String(lab||"");lab=lab.charAt(0).toUpperCase()+lab.slice(1);const u=unk(val);const w=document.createElement("span");
+  w.innerHTML=kitStatCell(null,lab,u?"?":val,{tag:"span",cls:"kst-chip"+(u?" kst-unk":""),title:full||(lab+": "+val),nobar:true});const c=w.firstElementChild;if(extra)extra.forEach(x=>x&&c.appendChild(x));return c};
  const rowA=[],rowB=[],rowC=[];
  const bars=pc.querySelector(".kpbars");
  if(bars)[...bars.children].forEach(r=>{const t=T(r.textContent);
@@ -802,10 +802,10 @@ function kitPcGrid(pc){try{if(!pc||pc.querySelector(".kpgrid"))return;const L=pc
   if(/^Nàng với ngươi/.test(t)){const v=T(t.replace(/^Nàng với ngươi:?/,""));const n=v.match(/·\s*(-?\d+)/);rowA.push(chip("Nàng với ngươi",n?n[1]:v,t,[...r.querySelectorAll(".fbar")]));return}
   if(/^Sủng/.test(t)){const v=T(t.replace(/^Sủng:?/,""));rowB.push(chip("Sủng",unk(v)?"?":v.replace(/\s*\(.*\)$/,""),t));return}
   if(/^(Lòng|Chủ tin|Thương)/.test(t)){const m=t.match(/^([^:\d]+):?\s*(.*)$/);rowA.push(chip(T(m[1]),T(m[2]).replace(/\s*\(.*\)$/,""),t,[...r.querySelectorAll(".fbar,.mini")]));return}
-  const m=t.match(/^([^:]{1,24}):\s*(.*)$/);if(m)rowA.push(chip(T(m[1]),T(m[2]),t,[...r.querySelectorAll(".fbar,.mini")]));else{const c=document.createElement("span");c.className="kpq";c.appendChild(r);rowA.push(c)}});
- pc.querySelectorAll(".ktile").forEach(k=>{if(k.hidden&&!/Sủng/.test(k.textContent))return;const l=T((k.querySelector("small")||{}).textContent),v=T((k.querySelector("b")||{}).textContent);
+  const m=t.match(/^([^:]{1,24}):\s*(.*)$/);if(m)rowA.push(chip(T(m[1]),T(m[2]),t,[...r.querySelectorAll(".fbar,.mini")]));else{const c=document.createElement("span");c.className="kst kst-chip";c.appendChild(r);rowA.push(c)}});
+ pc.querySelectorAll(".kst-tile").forEach(k=>{if(k.hidden&&!/Sủng/.test(k.textContent))return;const l=T((k.querySelector(".kstl")||{}).textContent),v=T((k.querySelector(".kstv")||{}).textContent);
   if(/^Sủng$/i.test(l)&&rowB.some(c=>/Sủng/.test(c.textContent)))return;rowB.push(chip(l.charAt(0)+l.slice(1).toLowerCase(),v,l+": "+v))});
- const tiles=pc.querySelector(".ktiles");
+ const tiles=pc.querySelector(".kstgrid");
  const info=pc.querySelector(".kpfacts .pcinfo");if(info)[...info.children].forEach(sp=>{const t=T(sp.textContent).replace(/\s*ⓘ$/,"");const btn=sp.querySelector("button");
   const m=t.match(/^(Tuổi)\s+(\d+)/)||t.match(/^([^:]{1,24}):\s*(.*)$/)||t.match(/^([^\d:·]{2,20}?)\s+(-?\d+)$/);if(m&&T(m[2]).length<=28){rowC.push(chip(T(m[1]),T(m[2]),t,btn?[btn]:null));sp.remove()}});
  try{const nmx=(pc.querySelector(".pcname")||{}).textContent||"";const px=typeof kitPersonByName==="function"?kitPersonByName(nmx):null;
@@ -823,21 +823,21 @@ function kitPcGrid(pc){try{if(!pc||pc.querySelector(".kpgrid"))return;const L=pc
 /* the ONE person-info component: every person card / sheet on every device goes through kitPcFix → kitPersonChips */
 window.kitPersonChips=kitPcGrid;
 (function(){const f0=kitPcFix;kitPcFix=function(pc){const r=f0.apply(this,arguments);try{kitPcGrid(pc)}catch(e){}try{kitPcSize()}catch(e){}return r}})();
-document.addEventListener("click",e=>{const c=e.target.closest&&e.target.closest(".kpgrid .kpq");if(!c||e.target.closest("button"))return;try{if(typeof kpPop==="function"){kpPop(c,`<div class="kpopt">${c.title}</div>`);e.stopPropagation()}}catch(x){}},true);
+document.addEventListener("click",e=>{const c=e.target.closest&&e.target.closest(".kpgrid .kst-chip");if(!c||e.target.closest("button"))return;try{if(typeof kpPop==="function"){kpPop(c,`<div class="kpopt">${c.title}</div>`);e.stopPropagation()}}catch(x){}},true);
 (function(){const st=document.createElement("style");st.id="k2b-pcgrid";st.textContent=`
 .kpgrid{display:flex;flex-direction:column;gap:4px;margin:4px 0 6px}
 .kpgr{display:flex;flex-wrap:wrap;gap:4px}
-.kpq{display:inline-flex;align-items:center;gap:4px;padding:2px 7px;border:1px solid var(--k-hair,#e6d3ac);border-radius:7px;background:var(--k-card,#fffaf0);font-size:.76rem;line-height:1.25;white-space:nowrap;cursor:help}
-.kpq>small{color:var(--k-lab,#8a7350);font-size:.68rem;font-weight:600}
-.kpq>b{color:var(--ink);font-weight:700}
-.kpq.kpu>b{color:var(--dim);font-weight:500}
-.kpq .fbar{display:inline-block!important;width:34px!important;margin:0!important;vertical-align:middle}
-.kpq button.lnk{padding:0 2px;min-height:0;font-size:.8rem}
-.kpgr0 .kpq{background:color-mix(in srgb,var(--k-card,#fffaf0) 80%,#f3dfc0)}
+.kst-chip{display:inline-flex;align-items:center;gap:4px;padding:2px 7px;border:1px solid var(--k-hair,#e6d3ac);border-radius:7px;background:var(--k-card,#fffaf0);font-size:.76rem;line-height:1.25;white-space:nowrap;cursor:help}
+.kst-chip>.kstl{color:var(--k-lab,#8a7350);font-size:.68rem;font-weight:600}
+.kst-chip>.kstv{color:var(--ink);font-weight:700}
+.kst-chip.kst-unk>.kstv{color:var(--dim);font-weight:500}
+.kst-chip .fbar{display:inline-block!important;width:34px!important;margin:0!important;vertical-align:middle}
+.kst-chip button.lnk{padding:0 2px;min-height:0;font-size:.8rem}
+.kpgr0 .kst-chip{background:color-mix(in srgb,var(--k-card,#fffaf0) 80%,#f3dfc0)}
 .pc[data-k2]>.pcl>.kpgrid{order:0}
 .pc.kpnar[data-k2]>.pcl>.kpgrid{grid-area:bars;margin:2px 0 0}
 .pc.kpnar[data-k2]>.pcl>.kpfacts{display:flex!important;grid-area:fx;margin:4px 0 0;flex-direction:column;gap:4px}
 .pc.kpnar[data-k2]>.pcl>.kpfacts .chips{gap:4px}
-.pc.kpwide .kpgrid{gap:3px}.pc.kpwide .kpgr{gap:3px}.pc.kpwide .kpq{font-size:.7rem;padding:1px 5px;gap:3px}.pc.kpwide .kpq>small{font-size:.62rem}.pc.kpwide .kpq .fbar{width:22px!important}
-@media (max-width:599px){.kpq{font-size:.7rem;padding:1px 5px}.kpq>small{font-size:.62rem}.kpq .fbar{width:24px!important}}
+.pc.kpwide .kpgrid{gap:3px}.pc.kpwide .kpgr{gap:3px}.pc.kpwide .kst-chip{font-size:.7rem;padding:1px 5px;gap:3px}.pc.kpwide .kst-chip>.kstl{font-size:.62rem}.pc.kpwide .kst-chip .fbar{width:22px!important}
+@media (max-width:599px){.kst-chip{font-size:.7rem;padding:1px 5px}.kst-chip>.kstl{font-size:.62rem}.kst-chip .fbar{width:24px!important}}
 `;document.head.appendChild(st)})();
