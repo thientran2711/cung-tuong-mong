@@ -1135,6 +1135,13 @@ kpmRoomImg(k, part)// "res/<cung>-cung[-dong-phoi|-tay-phoi]-<mùa>-<buổi>" (i
   8 names are labels) — lookup `rankDir` in hotspots.json: Hoàng hậu → can-ninh · Hoàng quý phi → vinh-hoa · Quý phi → quy-cung · Phi → phi-cung
   · Tần → cac · no chủ vị → spare-cung. It changes as soon as the head is promoted, demoted or replaced; same-rank palaces share a picture
   (accepted). An empty palace opens its (empty) courtyard too; a hall tap there = the "Cung trống" card. Rooms = OUR residence paintings only.
+- Other places (owner 11/15): Ngọc Thanh các (her home before she heads a palace) → cac, Dưỡng Hòa điện → duong-hoa, Đức Thọ cung → duc-tho,
+  Trường Môn viện → truong-mon, Ngự hoa viên → garden, Kính sự phòng → noi-thi (`places` in hotspots.json, slot `"p:<key>"`). They open the same
+  courtyard view with ONE hotspot (the place's main building, chip = countAt) that enters the place as before: its existing room painting and
+  everyone present. (Đông cung is not a place in the game yet; Cần Chính điện / Thái y viện keep the direct tap.)
+- Fit: the courtyard picture takes the height the hall rows leave (container units, aspect kept, hotspots stay on the picture): nothing clipped
+  at 686x880, 755x1000, 1180x820, 1366x1024.
+- Room header: in a hall the visit line reads only "Ở đây có N người. Người ở: <this hall's residents>." (not the whole palace).
 - Hotspots: one set per picture in `img/pl2/hotspots.json` (fractions of the picture), inlined into jpm.js by `python3 dev/tools/pl2_sync.py [rawdir]`
   (also converts new PL files to 1792 px webp and rebuilds the state lists). Each hall = the map's own spot skin (`.mspot` + `.mlab` + `.msil`
   silhouettes): name + chip "N bóng người" (0 → "vắng"). Under the picture: one kit `.btn` row per hall (name · N bóng người · ở: residents —

@@ -20,9 +20,9 @@ const MT={html:'text/html; charset=utf-8',js:'text/javascript',json:'application
   const side=L.filter(v=>v!==hd&&rkOf(v)<PAL_HEAD).slice(0,3);side.forEach(v=>v.resHead=hd.id);S.rank=4;palFix();
   const k=palaceOf(hd);const W=S.where||(S.where={});W[hd.id]=k;side.forEach(v=>W[v.id]=k);const guest=L.find(v=>v!==hd&&!side.includes(v));if(guest)W[guest.id]=k;
   used=0;S.place='home';tab='go';window.__mapZ=1;render();setTimeout(()=>{Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true},50);
-  return {k,hd:hd.name,side:side.map(v=>v.name+'→'+kpmHallOf(v,k)),guest:guest&&guest.name,count:countAt(k),slot:palSlot(k)}});
+  return {k,name:PALN[palSlot(k)].replace(/ cung$/,''),hd:hd.name,side:side.map(v=>v.name+'→'+kpmHallOf(v,k)),guest:guest&&guest.name,count:countAt(k),slot:palSlot(k)}});
  await shot('1-map');
- await p.evaluate(()=>{const b=[...document.querySelectorAll('#panel .mspot')].find(x=>/Cảnh Phúc/.test(x.textContent));b.click()});
+ await p.evaluate(nm=>{const b=[...document.querySelectorAll('#panel .mspot')].find(x=>x.textContent.includes(nm));b.click()},setup.name);
  await shot('2-detail');
  const det=await p.evaluate(k=>{const sp=[...document.querySelectorAll('#panel .kpm-spot')].map(x=>x.textContent.trim());const sp2=kpmSplit(k);
   return {open:!!document.querySelector('#panel .kpmv'),spots:sp,sum:sp2.chinh.n+sp2.dong.n+sp2.tay.n,countAt:countAt(k),img:(document.querySelector('#panel .kpmv .mapimg')||{}).src,
