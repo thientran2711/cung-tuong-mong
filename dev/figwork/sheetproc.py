@@ -3,7 +3,7 @@ import sys, json, os, io, subprocess
 from PIL import Image
 import numpy as np
 W=os.path.dirname(os.path.abspath(__file__))
-OUT="/tmp/claude-0/-home-user-cung-tuong-mong/84f333ce-ebd1-5e4a-9b0c-43035da11b67/scratchpad/wt-art5/img"
+OUT="/tmp/claude-0/-home-user-cung-tuong-mong/84f333ce-ebd1-5e4a-9b0c-43035da11b67/scratchpad/wt-art6/img"
 J=json.load(open(W+"/jobs.json")); db=json.load(open(W+"/urls.json"))
 FP=OUT+"/FIGURES.json"; figs=json.load(open(FP)) if os.path.exists(FP) else []
 byfile={f["file"]:f for f in figs}

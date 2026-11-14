@@ -1,7 +1,7 @@
 # usage: sheet.py out.jpg name1 name2 ...  (or --all start end)
 import sys, json
 from PIL import Image, ImageDraw
-OUT="/tmp/claude-0/-home-user-cung-tuong-mong/84f333ce-ebd1-5e4a-9b0c-43035da11b67/scratchpad/wt-art5/img"
+OUT="/tmp/claude-0/-home-user-cung-tuong-mong/84f333ce-ebd1-5e4a-9b0c-43035da11b67/scratchpad/wt-art6/img"
 names=sys.argv[2:]
 TW,TH=200,330; cols=min(8,len(names)); rows=(len(names)+cols-1)//cols
 sh=Image.new("RGB",(cols*TW,rows*(TH+60)),(240,230,210)); d=ImageDraw.Draw(sh)
