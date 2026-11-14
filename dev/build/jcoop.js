@@ -15,7 +15,8 @@
      COOP.on(t, fn) / COOP.off(t, fn)   server messages by their t: room presence state week said error pong;
                                         local events: "status" (COOP.state changed), "both" (both seats online, first time
                                         per connection), "start" (lobby hands over to the game), "peer" (friend online flag
-                                        changed: fn(online)), "lost" (my socket dropped, will retry)
+                                        changed: fn(online)), "lost" (my socket dropped, will retry), "stop" (left a running co-op game:
+                                        jcoopworld must turn itself off so single-player saves/plays normally again)
      COOP.emit(t, data)                 fire a local event (used by the lobby and the world module)
      COOP.other()                       the other seat letter ("a"/"b")
    Flat live fields (kept current on every change; read-only): COOP.code, COOP.seat "a"|"b"|null, COOP.week,
@@ -87,7 +88,9 @@ function resume(){const c=LS.get("ctm-coop-room");if(!c)return null;return wait(
 function leave(keep){want=false;clearTimeout(tmr);clearInterval(pinger);if(!keep)LS.del("ctm-coop-room");
  if(pend){pend.rej({code:"left"});pend=null}
  if(ws){try{ws.onclose=null;ws.close(1000,"leave")}catch(e){}ws=null}
- both=false;set({status:"off",room:"",you:"",seats:null,week:0,ended:{a:false,b:false},C:null,playing:false})}
+ const was=st.playing;both=false;set({status:"off",room:"",you:"",seats:null,week:0,ended:{a:false,b:false},C:null,playing:false});
+ /* the co-op game is over on this device (Về màn đầu / ‹ Lui): the world module must hand save() etc. back to single-player */
+ if(was)emit("stop",{})}
 async function send(t,f){const o=typeof t==="string"?Object.assign({t},f||{}):t;if(!ws||ws.readyState!==1)return false;
  const s=JSON.stringify(o);try{if(s.length>BIG&&typeof CompressionStream!=="undefined")ws.send(await gz(s));else ws.send(s);return true}catch(e){return false}}
 /* coming back to the tab (phone woke up): reconnect at once instead of waiting out the backoff */
