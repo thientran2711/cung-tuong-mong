@@ -1,3 +1,25 @@
+# Kiểm duyệt bộ giao diện: review/minigames @ 6e859ae (lần 2) — FAIL
+
+Ngày 2026-11-14. Gộp với origin/main 7a18690 (j94 cảnh mùa): xung đột assemble.py, thứ tự đúng `… 'j82.js', 'j91.js', 'j90.js', 'j94.js', 'j84.js'`; dựng không lỗi.
+Bộ thử của nhánh (dev/test/minigames91.js, 755x1000@2, cả 15 trò): 15/15 xong, chạm thật tới trò, 0 lỗi trang, 0 tràn ngang, 0 "có thể".
+
+## Đạt
+- Đồ vật bàn chơi nay là tranh gpt-2-6 (nền thi, nền học, mảnh rời): bia, bình đầu hồ, bàn cờ, đèn đố, nồi canh, khung thêu, lư hương… hết hình khối canvas thô.
+- "Hồi x/y", "Bảng định thứ"; ảnh tổng 15 trò: dev/shots/review/minigames/755x1000-15-tro.jpg.
+
+## Lỗi chặn
+1. **Điều hương: ô PHẦN hiện "20/10"** (vượt trần) ở hồi 2/3 — số phần cộng dồn qua các lư mà mẫu số vẫn 10. Sửa: mẫu số = tổng tối đa của cả trò
+   (vd 30 cho 3 lư) hoặc quy về thang 10 như các trò khác; kiểm cả 15 trò không trò nào vượt trần.
+2. **Điều hương: chữ đè chữ** — lời báo "Khớp hương mẫu!" nằm chồng lên dòng gợi ý "Mẫu nặng về Đàn hương · độ khớp: khớp", không đọc được.
+   Đặt lời báo ở chỗ riêng (hoặc ẩn dòng gợi ý khi lời báo hiện). Soát các trò có lời báo nổi (Cờ "Ăn 3 quân!", Đố đèn…) cùng luật: không đè chữ khác.
+   Ảnh: dev/shots/review/minigames/755x1000-huong-20tren10-chu-de.jpg.
+
+## Ghi chú (không chặn)
+- Khói hai lư hương là đốm màu mờ vẽ bằng mã (phần động: màu thay theo pha) — chấp nhận, nhưng nếu được nên dùng sprite khói vẽ sẵn tô màu.
+- Hát: chữ lời ca trôi ra mép phải bị cắt ("Xươ…") là chữ đang trôi vào khung — chấp nhận.
+
+---
+
 # Kiểm duyệt bộ giao diện: review/minigames @ 4f5e8e6 — FAIL
 
 Ngày 2026-11-14. Người kiểm duyệt bộ giao diện (phiên chính 2). Đã gộp với origin/main (a4fbec0), dựng không lỗi.
