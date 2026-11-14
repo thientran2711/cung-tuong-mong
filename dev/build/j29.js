@@ -38,6 +38,7 @@ document.addEventListener("click",e=>{const b=e.target.closest("[data-hire]");if
 /* 'Xem người': a costly look (Bạc -15, 1 khắc) reveals the trait */
 document.addEventListener("click",e=>{const b=e.target.closest("[data-svlook]");if(!b||b.disabled)return;e.stopPropagation();const s=servById(+b.dataset.svlook);if(!s||S.bac<15||!can(1)||Q.length)return;apply({bac:-15});spend(1);servLearn(s,"Cho người dò xét lai lịch");render()},true);
 /* FIRING: Nội vụ phủ must agree (Chắc), Bạc -20, Danh -1 (more if she fires often), a random replacement from the pool; he knows her secrets */
+function servSellO(p,s,harsh){if(harsh==null)harsh=((p.fired||[]).filter(w=>wk()-w<18).length+1)>=2;return cl(({tham:55,chuyen:40,lanh:30,nhat:12,trung:4})[s.tr]+(harsh?15:0)-Math.round(s.loyal/3)+((p.schemes||0)>0?10:0),0,90)}
 function fireServ(p,s,quietly){const me=p===S;const cost=20;if(p.bac<cost)return"";ap(p,{bac:-cost});p.fired=(p.fired||[]).filter(w=>wk()-w<18);p.fired.push(wk());const harsh=p.fired.length>=2;ap(p,{danh:harsh?-3:-1});
  if(!roll(80)){return me?`Nội vụ phủ chưa duyệt việc trả ${s.name} về. Bạc -${cost}. `:""}
  p.staff.splice(p.staff.indexOf(s),1);const n=takeFromPool(s.role);if(n)p.staff.push(n);

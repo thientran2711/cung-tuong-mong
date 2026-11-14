@@ -1,0 +1,1924 @@
+[
+ {
+  "role": "princess",
+  "identity": "f01",
+  "ageBand": "14",
+  "magnificUrl": "https://www.magnific.com/app/creation/79veXYQJAL",
+  "bg": "bxTZGNy5Y2",
+  "sheet": "f01",
+  "file": "img/fig-kid-f01-a14.webp",
+  "por": "img/por-kid-f01-a14.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f01",
+  "ageBand": "20",
+  "magnificUrl": "https://www.magnific.com/app/creation/79veXYQJAL",
+  "bg": "bxTZGNy5Y2",
+  "sheet": "f01",
+  "file": "img/fig-kid-f01-a20.webp",
+  "por": "img/por-kid-f01-a20.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f01",
+  "ageBand": "4",
+  "magnificUrl": "https://www.magnific.com/app/creation/79veXYQJAL",
+  "bg": "bxTZGNy5Y2",
+  "sheet": "f01",
+  "file": "img/fig-kid-f01-a4.webp",
+  "por": "img/por-kid-f01-a4.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f01",
+  "ageBand": "9",
+  "magnificUrl": "https://www.magnific.com/app/creation/79veXYQJAL",
+  "bg": "bxTZGNy5Y2",
+  "sheet": "f01",
+  "file": "img/fig-kid-f01-a9.webp",
+  "por": "img/por-kid-f01-a9.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f02",
+  "ageBand": "14",
+  "magnificUrl": "https://www.magnific.com/app/creation/79veB2vJAL",
+  "bg": "iGqhCVK3uK",
+  "sheet": "f02",
+  "file": "img/fig-kid-f02-a14.webp",
+  "por": "img/por-kid-f02-a14.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f02",
+  "ageBand": "20",
+  "magnificUrl": "https://www.magnific.com/app/creation/79veB2vJAL",
+  "bg": "iGqhCVK3uK",
+  "sheet": "f02",
+  "file": "img/fig-kid-f02-a20.webp",
+  "por": "img/por-kid-f02-a20.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f02",
+  "ageBand": "4",
+  "magnificUrl": "https://www.magnific.com/app/creation/79veB2vJAL",
+  "bg": "CqGNKjKEEy",
+  "sheet": "f02",
+  "file": "img/fig-kid-f02-a4.webp",
+  "por": "img/por-kid-f02-a4.webp",
+  "rematte": true
+ },
+ {
+  "role": "princess",
+  "identity": "f02",
+  "ageBand": "9",
+  "magnificUrl": "https://www.magnific.com/app/creation/79veB2vJAL",
+  "bg": "iGqhCVK3uK",
+  "sheet": "f02",
+  "file": "img/fig-kid-f02-a9.webp",
+  "por": "img/por-kid-f02-a9.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f03",
+  "ageBand": "14",
+  "magnificUrl": "https://www.magnific.com/app/creation/79veBGfJAL",
+  "bg": "LwBcMiGswO",
+  "sheet": "f03",
+  "file": "img/fig-kid-f03-a14.webp",
+  "por": "img/por-kid-f03-a14.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f03",
+  "ageBand": "20",
+  "magnificUrl": "https://www.magnific.com/app/creation/79veBGfJAL",
+  "bg": "LwBcMiGswO",
+  "sheet": "f03",
+  "file": "img/fig-kid-f03-a20.webp",
+  "por": "img/por-kid-f03-a20.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f03",
+  "ageBand": "4",
+  "magnificUrl": "https://www.magnific.com/app/creation/79veBGfJAL",
+  "bg": "LwBcMiGswO",
+  "sheet": "f03",
+  "file": "img/fig-kid-f03-a4.webp",
+  "por": "img/por-kid-f03-a4.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f03",
+  "ageBand": "9",
+  "magnificUrl": "https://www.magnific.com/app/creation/79veBGfJAL",
+  "bg": "LwBcMiGswO",
+  "sheet": "f03",
+  "file": "img/fig-kid-f03-a9.webp",
+  "por": "img/por-kid-f03-a9.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f04",
+  "ageBand": "14",
+  "magnificUrl": "https://www.magnific.com/app/creation/yiCBIcgPW9",
+  "bg": "SytMdnRUb8",
+  "sheet": "f04",
+  "file": "img/fig-kid-f04-a14.webp",
+  "por": "img/por-kid-f04-a14.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f04",
+  "ageBand": "20",
+  "magnificUrl": "https://www.magnific.com/app/creation/yiCBIcgPW9",
+  "bg": "SytMdnRUb8",
+  "sheet": "f04",
+  "file": "img/fig-kid-f04-a20.webp",
+  "por": "img/por-kid-f04-a20.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f04",
+  "ageBand": "4",
+  "magnificUrl": "https://www.magnific.com/app/creation/yiCBIcgPW9",
+  "bg": "SytMdnRUb8",
+  "sheet": "f04",
+  "file": "img/fig-kid-f04-a4.webp",
+  "por": "img/por-kid-f04-a4.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f04",
+  "ageBand": "9",
+  "magnificUrl": "https://www.magnific.com/app/creation/yiCBIcgPW9",
+  "bg": "SytMdnRUb8",
+  "sheet": "f04",
+  "file": "img/fig-kid-f04-a9.webp",
+  "por": "img/por-kid-f04-a9.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f05",
+  "ageBand": "14",
+  "magnificUrl": "https://www.magnific.com/app/creation/jUXWMvwLD0",
+  "bg": "Ebz9ZVOuuO",
+  "sheet": "f05",
+  "file": "img/fig-kid-f05-a14.webp",
+  "por": "img/por-kid-f05-a14.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f05",
+  "ageBand": "20",
+  "magnificUrl": "https://www.magnific.com/app/creation/jUXWMvwLD0",
+  "bg": "Ebz9ZVOuuO",
+  "sheet": "f05",
+  "file": "img/fig-kid-f05-a20.webp",
+  "por": "img/por-kid-f05-a20.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f05",
+  "ageBand": "4",
+  "magnificUrl": "https://www.magnific.com/app/creation/jUXWMvwLD0",
+  "bg": "Ebz9ZVOuuO",
+  "sheet": "f05",
+  "file": "img/fig-kid-f05-a4.webp",
+  "por": "img/por-kid-f05-a4.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f05",
+  "ageBand": "9",
+  "magnificUrl": "https://www.magnific.com/app/creation/jUXWMvwLD0",
+  "bg": "Ebz9ZVOuuO",
+  "sheet": "f05",
+  "file": "img/fig-kid-f05-a9.webp",
+  "por": "img/por-kid-f05-a9.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f06",
+  "ageBand": "14",
+  "magnificUrl": "https://www.magnific.com/app/creation/s7o0puul8e",
+  "bg": "VXUks9LMMU",
+  "sheet": "f06",
+  "file": "img/fig-kid-f06-a14.webp",
+  "por": "img/por-kid-f06-a14.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f06",
+  "ageBand": "20",
+  "magnificUrl": "https://www.magnific.com/app/creation/s7o0puul8e",
+  "bg": "VXUks9LMMU",
+  "sheet": "f06",
+  "file": "img/fig-kid-f06-a20.webp",
+  "por": "img/por-kid-f06-a20.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f06",
+  "ageBand": "4",
+  "magnificUrl": "https://www.magnific.com/app/creation/s7o0puul8e",
+  "bg": "VXUks9LMMU",
+  "sheet": "f06",
+  "file": "img/fig-kid-f06-a4.webp",
+  "por": "img/por-kid-f06-a4.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f06",
+  "ageBand": "9",
+  "magnificUrl": "https://www.magnific.com/app/creation/s7o0puul8e",
+  "bg": "VXUks9LMMU",
+  "sheet": "f06",
+  "file": "img/fig-kid-f06-a9.webp",
+  "por": "img/por-kid-f06-a9.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f07",
+  "ageBand": "14",
+  "magnificUrl": "https://www.magnific.com/app/creation/cplbr6w0eP",
+  "bg": "iGqhulW3uK",
+  "sheet": "f07",
+  "file": "img/fig-kid-f07-a14.webp",
+  "por": "img/por-kid-f07-a14.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f07",
+  "ageBand": "20",
+  "magnificUrl": "https://www.magnific.com/app/creation/cplbr6w0eP",
+  "bg": "iGqhulW3uK",
+  "sheet": "f07",
+  "file": "img/fig-kid-f07-a20.webp",
+  "por": "img/por-kid-f07-a20.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f07",
+  "ageBand": "4",
+  "magnificUrl": "https://www.magnific.com/app/creation/cplbr6w0eP",
+  "bg": "iGqhulW3uK",
+  "sheet": "f07",
+  "file": "img/fig-kid-f07-a4.webp",
+  "por": "img/por-kid-f07-a4.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f07",
+  "ageBand": "9",
+  "magnificUrl": "https://www.magnific.com/app/creation/cplbr6w0eP",
+  "bg": "iGqhulW3uK",
+  "sheet": "f07",
+  "file": "img/fig-kid-f07-a9.webp",
+  "por": "img/por-kid-f07-a9.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f08",
+  "ageBand": "14",
+  "magnificUrl": "https://www.magnific.com/app/creation/ksDGcux16B",
+  "bg": "jUXWDEOLD0",
+  "sheet": "f08",
+  "file": "img/fig-kid-f08-a14.webp",
+  "por": "img/por-kid-f08-a14.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f08",
+  "ageBand": "20",
+  "magnificUrl": "https://www.magnific.com/app/creation/ksDGcux16B",
+  "bg": "jUXWDEOLD0",
+  "sheet": "f08",
+  "file": "img/fig-kid-f08-a20.webp",
+  "por": "img/por-kid-f08-a20.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f08",
+  "ageBand": "4",
+  "magnificUrl": "https://www.magnific.com/app/creation/ksDGcux16B",
+  "bg": "jUXWDEOLD0",
+  "sheet": "f08",
+  "file": "img/fig-kid-f08-a4.webp",
+  "por": "img/por-kid-f08-a4.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f08",
+  "ageBand": "9",
+  "magnificUrl": "https://www.magnific.com/app/creation/ksDGcux16B",
+  "bg": "jUXWDEOLD0",
+  "sheet": "f08",
+  "file": "img/fig-kid-f08-a9.webp",
+  "por": "img/por-kid-f08-a9.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f09",
+  "ageBand": "14",
+  "magnificUrl": "https://www.magnific.com/app/creation/6AHmuKviJO",
+  "bg": "1lpzDsBr4r",
+  "sheet": "f09",
+  "file": "img/fig-kid-f09-a14.webp",
+  "por": "img/por-kid-f09-a14.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f09",
+  "ageBand": "20",
+  "magnificUrl": "https://www.magnific.com/app/creation/6AHmuKviJO",
+  "bg": "1lpzDsBr4r",
+  "sheet": "f09",
+  "file": "img/fig-kid-f09-a20.webp",
+  "por": "img/por-kid-f09-a20.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f09",
+  "ageBand": "4",
+  "magnificUrl": "https://www.magnific.com/app/creation/6AHmuKviJO",
+  "bg": "1lpzDsBr4r",
+  "sheet": "f09",
+  "file": "img/fig-kid-f09-a4.webp",
+  "por": "img/por-kid-f09-a4.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f09",
+  "ageBand": "9",
+  "magnificUrl": "https://www.magnific.com/app/creation/6AHmuKviJO",
+  "bg": "1lpzDsBr4r",
+  "sheet": "f09",
+  "file": "img/fig-kid-f09-a9.webp",
+  "por": "img/por-kid-f09-a9.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f10",
+  "ageBand": "14",
+  "magnificUrl": "https://www.magnific.com/app/creation/s7o0dvwl8e",
+  "bg": "LwBcX7JswO",
+  "sheet": "f10",
+  "file": "img/fig-kid-f10-a14.webp",
+  "por": "img/por-kid-f10-a14.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f10",
+  "ageBand": "20",
+  "magnificUrl": "https://www.magnific.com/app/creation/s7o0dvwl8e",
+  "bg": "LwBcX7JswO",
+  "sheet": "f10",
+  "file": "img/fig-kid-f10-a20.webp",
+  "por": "img/por-kid-f10-a20.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f10",
+  "ageBand": "4",
+  "magnificUrl": "https://www.magnific.com/app/creation/s7o0dvwl8e",
+  "bg": "LwBcX7JswO",
+  "sheet": "f10",
+  "file": "img/fig-kid-f10-a4.webp",
+  "por": "img/por-kid-f10-a4.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f10",
+  "ageBand": "9",
+  "magnificUrl": "https://www.magnific.com/app/creation/s7o0dvwl8e",
+  "bg": "LwBcX7JswO",
+  "sheet": "f10",
+  "file": "img/fig-kid-f10-a9.webp",
+  "por": "img/por-kid-f10-a9.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f11",
+  "ageBand": "14",
+  "magnificUrl": "https://www.magnific.com/app/creation/SytMouIUb8",
+  "bg": "YMLHjpAWeC",
+  "sheet": "f11",
+  "file": "img/fig-kid-f11-a14.webp",
+  "por": "img/por-kid-f11-a14.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f11",
+  "ageBand": "20",
+  "magnificUrl": "https://www.magnific.com/app/creation/SytMouIUb8",
+  "bg": "YMLHjpAWeC",
+  "sheet": "f11",
+  "file": "img/fig-kid-f11-a20.webp",
+  "por": "img/por-kid-f11-a20.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f11",
+  "ageBand": "4",
+  "magnificUrl": "https://www.magnific.com/app/creation/SytMouIUb8",
+  "bg": "YMLHjpAWeC",
+  "sheet": "f11",
+  "file": "img/fig-kid-f11-a4.webp",
+  "por": "img/por-kid-f11-a4.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f11",
+  "ageBand": "9",
+  "magnificUrl": "https://www.magnific.com/app/creation/79vd7mdJAL",
+  "bg": "xSdcsKcjfW",
+  "sheet": "f11",
+  "file": "img/fig-kid-f11-a9.webp",
+  "por": "img/por-kid-f11-a9.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f12",
+  "ageBand": "14",
+  "magnificUrl": "https://www.magnific.com/app/creation/WDsqxPHcXe",
+  "bg": "5jV2TgwKxe",
+  "sheet": "f12",
+  "file": "img/fig-kid-f12-a14.webp",
+  "por": "img/por-kid-f12-a14.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f12",
+  "ageBand": "20",
+  "magnificUrl": "https://www.magnific.com/app/creation/WDsqxPHcXe",
+  "bg": "5jV2TgwKxe",
+  "sheet": "f12",
+  "file": "img/fig-kid-f12-a20.webp",
+  "por": "img/por-kid-f12-a20.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f12",
+  "ageBand": "4",
+  "magnificUrl": "https://www.magnific.com/app/creation/WDsqxPHcXe",
+  "bg": "5jV2TgwKxe",
+  "sheet": "f12",
+  "file": "img/fig-kid-f12-a4.webp",
+  "por": "img/por-kid-f12-a4.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f12",
+  "ageBand": "9",
+  "magnificUrl": "https://www.magnific.com/app/creation/WDsqxPHcXe",
+  "bg": "5jV2TgwKxe",
+  "sheet": "f12",
+  "file": "img/fig-kid-f12-a9.webp",
+  "por": "img/por-kid-f12-a9.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f13",
+  "ageBand": "14",
+  "magnificUrl": "https://www.magnific.com/app/creation/Do7xDSXpcl",
+  "bg": "jUX0lKuLD0",
+  "sheet": "f13",
+  "file": "img/fig-kid-f13-a14.webp",
+  "por": "img/por-kid-f13-a14.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f13",
+  "ageBand": "20",
+  "magnificUrl": "https://www.magnific.com/app/creation/Do7xDSXpcl",
+  "bg": "jUX0lKuLD0",
+  "sheet": "f13",
+  "file": "img/fig-kid-f13-a20.webp",
+  "por": "img/por-kid-f13-a20.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f13",
+  "ageBand": "4",
+  "magnificUrl": "https://www.magnific.com/app/creation/Do7xDSXpcl",
+  "bg": "jUX0lKuLD0",
+  "sheet": "f13",
+  "file": "img/fig-kid-f13-a4.webp",
+  "por": "img/por-kid-f13-a4.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f13",
+  "ageBand": "9",
+  "magnificUrl": "https://www.magnific.com/app/creation/Do7xDSXpcl",
+  "bg": "jUX0lKuLD0",
+  "sheet": "f13",
+  "file": "img/fig-kid-f13-a9.webp",
+  "por": "img/por-kid-f13-a9.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f14",
+  "ageBand": "14",
+  "magnificUrl": "https://www.magnific.com/app/creation/6AHmQUbiJO",
+  "bg": "rgene9oxtc",
+  "sheet": "f14",
+  "file": "img/fig-kid-f14-a14.webp",
+  "por": "img/por-kid-f14-a14.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f14",
+  "ageBand": "20",
+  "magnificUrl": "https://www.magnific.com/app/creation/6AHmQUbiJO",
+  "bg": "rgene9oxtc",
+  "sheet": "f14",
+  "file": "img/fig-kid-f14-a20.webp",
+  "por": "img/por-kid-f14-a20.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f14",
+  "ageBand": "4",
+  "magnificUrl": "https://www.magnific.com/app/creation/6AHmQUbiJO",
+  "bg": "rgene9oxtc",
+  "sheet": "f14",
+  "file": "img/fig-kid-f14-a4.webp",
+  "por": "img/por-kid-f14-a4.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f14",
+  "ageBand": "9",
+  "magnificUrl": "https://www.magnific.com/app/creation/6AHmQUbiJO",
+  "bg": "rgene9oxtc",
+  "sheet": "f14",
+  "file": "img/fig-kid-f14-a9.webp",
+  "por": "img/por-kid-f14-a9.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f15",
+  "ageBand": "14",
+  "magnificUrl": "https://www.magnific.com/app/creation/eIOj7Y0dqL",
+  "bg": "u5nNnU1QLD",
+  "sheet": "f15",
+  "file": "img/fig-kid-f15-a14.webp",
+  "por": "img/por-kid-f15-a14.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f15",
+  "ageBand": "20",
+  "magnificUrl": "https://www.magnific.com/app/creation/eIOj7Y0dqL",
+  "bg": "u5nNnU1QLD",
+  "sheet": "f15",
+  "file": "img/fig-kid-f15-a20.webp",
+  "por": "img/por-kid-f15-a20.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f15",
+  "ageBand": "4",
+  "magnificUrl": "https://www.magnific.com/app/creation/eIOj7Y0dqL",
+  "bg": "u5nNnU1QLD",
+  "sheet": "f15",
+  "file": "img/fig-kid-f15-a4.webp",
+  "por": "img/por-kid-f15-a4.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f15",
+  "ageBand": "9",
+  "magnificUrl": "https://www.magnific.com/app/creation/eIOj7Y0dqL",
+  "bg": "u5nNnU1QLD",
+  "sheet": "f15",
+  "file": "img/fig-kid-f15-a9.webp",
+  "por": "img/por-kid-f15-a9.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f16",
+  "ageBand": "14",
+  "magnificUrl": "https://www.magnific.com/app/creation/Bh4lyV9oQR",
+  "bg": "8aNSN1NIrU",
+  "sheet": "f16",
+  "file": "img/fig-kid-f16-a14.webp",
+  "por": "img/por-kid-f16-a14.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f16",
+  "ageBand": "20",
+  "magnificUrl": "https://www.magnific.com/app/creation/Bh4lyV9oQR",
+  "bg": "8aNSN1NIrU",
+  "sheet": "f16",
+  "file": "img/fig-kid-f16-a20.webp",
+  "por": "img/por-kid-f16-a20.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f16",
+  "ageBand": "4",
+  "magnificUrl": "https://www.magnific.com/app/creation/Bh4lyV9oQR",
+  "bg": "8aNSN1NIrU",
+  "sheet": "f16",
+  "file": "img/fig-kid-f16-a4.webp",
+  "por": "img/por-kid-f16-a4.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f16",
+  "ageBand": "9",
+  "magnificUrl": "https://www.magnific.com/app/creation/Bh4lyV9oQR",
+  "bg": "8aNSN1NIrU",
+  "sheet": "f16",
+  "file": "img/fig-kid-f16-a9.webp",
+  "por": "img/por-kid-f16-a9.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f17",
+  "ageBand": "14",
+  "magnificUrl": "https://www.magnific.com/app/creation/Bh4lPZsoQR",
+  "bg": "YMLHsq8WeC",
+  "sheet": "f17",
+  "file": "img/fig-kid-f17-a14.webp",
+  "por": "img/por-kid-f17-a14.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f17",
+  "ageBand": "20",
+  "magnificUrl": "https://www.magnific.com/app/creation/Bh4lPZsoQR",
+  "bg": "YMLHsq8WeC",
+  "sheet": "f17",
+  "file": "img/fig-kid-f17-a20.webp",
+  "por": "img/por-kid-f17-a20.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f17",
+  "ageBand": "4",
+  "magnificUrl": "https://www.magnific.com/app/creation/Bh4lPZsoQR",
+  "bg": "YMLHsq8WeC",
+  "sheet": "f17",
+  "file": "img/fig-kid-f17-a4.webp",
+  "por": "img/por-kid-f17-a4.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f17",
+  "ageBand": "9",
+  "magnificUrl": "https://www.magnific.com/app/creation/Bh4lPZsoQR",
+  "bg": "YMLHsq8WeC",
+  "sheet": "f17",
+  "file": "img/fig-kid-f17-a9.webp",
+  "por": "img/por-kid-f17-a9.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f18",
+  "ageBand": "14",
+  "magnificUrl": "https://www.magnific.com/app/creation/LwBcXfLswO",
+  "bg": "VXUkwxmMMU",
+  "sheet": "f18",
+  "file": "img/fig-kid-f18-a14.webp",
+  "por": "img/por-kid-f18-a14.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f18",
+  "ageBand": "20",
+  "magnificUrl": "https://www.magnific.com/app/creation/LwBcXfLswO",
+  "bg": "VXUkwxmMMU",
+  "sheet": "f18",
+  "file": "img/fig-kid-f18-a20.webp",
+  "por": "img/por-kid-f18-a20.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f18",
+  "ageBand": "4",
+  "magnificUrl": "https://www.magnific.com/app/creation/LwBcXfLswO",
+  "bg": "VXUkwxmMMU",
+  "sheet": "f18",
+  "file": "img/fig-kid-f18-a4.webp",
+  "por": "img/por-kid-f18-a4.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f18",
+  "ageBand": "9",
+  "magnificUrl": "https://www.magnific.com/app/creation/LwBcXfLswO",
+  "bg": "VXUkwxmMMU",
+  "sheet": "f18",
+  "file": "img/fig-kid-f18-a9.webp",
+  "por": "img/por-kid-f18-a9.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f19",
+  "ageBand": "14",
+  "magnificUrl": "https://www.magnific.com/app/creation/vQZORM5a47",
+  "bg": "TdSKUxSVNR",
+  "sheet": "f19",
+  "file": "img/fig-kid-f19-a14.webp",
+  "por": "img/por-kid-f19-a14.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f19",
+  "ageBand": "20",
+  "magnificUrl": "https://www.magnific.com/app/creation/vQZORM5a47",
+  "bg": "TdSKUxSVNR",
+  "sheet": "f19",
+  "file": "img/fig-kid-f19-a20.webp",
+  "por": "img/por-kid-f19-a20.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f19",
+  "ageBand": "4",
+  "magnificUrl": "https://www.magnific.com/app/creation/vQZORM5a47",
+  "bg": "TdSKUxSVNR",
+  "sheet": "f19",
+  "file": "img/fig-kid-f19-a4.webp",
+  "por": "img/por-kid-f19-a4.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f19",
+  "ageBand": "9",
+  "magnificUrl": "https://www.magnific.com/app/creation/vQZORM5a47",
+  "bg": "TdSKUxSVNR",
+  "sheet": "f19",
+  "file": "img/fig-kid-f19-a9.webp",
+  "por": "img/por-kid-f19-a9.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f20",
+  "ageBand": "14",
+  "magnificUrl": "https://www.magnific.com/app/creation/dtyLOzcXSL",
+  "bg": "4Ru8Qay9Aa",
+  "sheet": "f20",
+  "file": "img/fig-kid-f20-a14.webp",
+  "por": "img/por-kid-f20-a14.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f20",
+  "ageBand": "20",
+  "magnificUrl": "https://www.magnific.com/app/creation/dtyLOzcXSL",
+  "bg": "4Ru8Qay9Aa",
+  "sheet": "f20",
+  "file": "img/fig-kid-f20-a20.webp",
+  "por": "img/por-kid-f20-a20.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f20",
+  "ageBand": "4",
+  "magnificUrl": "https://www.magnific.com/app/creation/dtyLOzcXSL",
+  "bg": "4Ru8Qay9Aa",
+  "sheet": "f20",
+  "file": "img/fig-kid-f20-a4.webp",
+  "por": "img/por-kid-f20-a4.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f20",
+  "ageBand": "9",
+  "magnificUrl": "https://www.magnific.com/app/creation/dtyLOzcXSL",
+  "bg": "4Ru8Qay9Aa",
+  "sheet": "f20",
+  "file": "img/fig-kid-f20-a9.webp",
+  "por": "img/por-kid-f20-a9.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f21",
+  "ageBand": "14",
+  "magnificUrl": "https://www.magnific.com/app/creation/0eg5gWJTfW",
+  "bg": "nVjFsoTYQD",
+  "sheet": "f21",
+  "file": "img/fig-kid-f21-a14.webp",
+  "por": "img/por-kid-f21-a14.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f21",
+  "ageBand": "20",
+  "magnificUrl": "https://www.magnific.com/app/creation/0eg5gWJTfW",
+  "bg": "nVjFsoTYQD",
+  "sheet": "f21",
+  "file": "img/fig-kid-f21-a20.webp",
+  "por": "img/por-kid-f21-a20.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f21",
+  "ageBand": "4",
+  "magnificUrl": "https://www.magnific.com/app/creation/0eg5gWJTfW",
+  "bg": "nVjFsoTYQD",
+  "sheet": "f21",
+  "file": "img/fig-kid-f21-a4.webp",
+  "por": "img/por-kid-f21-a4.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f21",
+  "ageBand": "9",
+  "magnificUrl": "https://www.magnific.com/app/creation/0eg5gWJTfW",
+  "bg": "nVjFsoTYQD",
+  "sheet": "f21",
+  "file": "img/fig-kid-f21-a9.webp",
+  "por": "img/por-kid-f21-a9.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f22",
+  "ageBand": "14",
+  "magnificUrl": "https://www.magnific.com/app/creation/YMLHsc9WeC",
+  "bg": "6AHmbV9iJO",
+  "sheet": "f22",
+  "file": "img/fig-kid-f22-a14.webp",
+  "por": "img/por-kid-f22-a14.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f22",
+  "ageBand": "20",
+  "magnificUrl": "https://www.magnific.com/app/creation/YMLHsc9WeC",
+  "bg": "6AHmbV9iJO",
+  "sheet": "f22",
+  "file": "img/fig-kid-f22-a20.webp",
+  "por": "img/por-kid-f22-a20.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f22",
+  "ageBand": "4",
+  "magnificUrl": "https://www.magnific.com/app/creation/YMLHsc9WeC",
+  "bg": "6AHmbV9iJO",
+  "sheet": "f22",
+  "file": "img/fig-kid-f22-a4.webp",
+  "por": "img/por-kid-f22-a4.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f22",
+  "ageBand": "9",
+  "magnificUrl": "https://www.magnific.com/app/creation/YMLHsc9WeC",
+  "bg": "6AHmbV9iJO",
+  "sheet": "f22",
+  "file": "img/fig-kid-f22-a9.webp",
+  "por": "img/por-kid-f22-a9.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f23",
+  "ageBand": "14",
+  "magnificUrl": "https://www.magnific.com/app/creation/nVjFL02YQD",
+  "bg": "79vefn8JAL",
+  "sheet": "f23",
+  "file": "img/fig-kid-f23-a14.webp",
+  "por": "img/por-kid-f23-a14.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f23",
+  "ageBand": "20",
+  "magnificUrl": "https://www.magnific.com/app/creation/nVjFL02YQD",
+  "bg": "79vefn8JAL",
+  "sheet": "f23",
+  "file": "img/fig-kid-f23-a20.webp",
+  "por": "img/por-kid-f23-a20.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f23",
+  "ageBand": "4",
+  "magnificUrl": "https://www.magnific.com/app/creation/nVjFL02YQD",
+  "bg": "79vefn8JAL",
+  "sheet": "f23",
+  "file": "img/fig-kid-f23-a4.webp",
+  "por": "img/por-kid-f23-a4.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f23",
+  "ageBand": "9",
+  "magnificUrl": "https://www.magnific.com/app/creation/nVjFL02YQD",
+  "bg": "79vefn8JAL",
+  "sheet": "f23",
+  "file": "img/fig-kid-f23-a9.webp",
+  "por": "img/por-kid-f23-a9.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f24",
+  "ageBand": "14",
+  "magnificUrl": "https://www.magnific.com/app/creation/YMLHsDRWeC",
+  "bg": "SytMhGSUb8",
+  "sheet": "f24",
+  "file": "img/fig-kid-f24-a14.webp",
+  "por": "img/por-kid-f24-a14.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f24",
+  "ageBand": "20",
+  "magnificUrl": "https://www.magnific.com/app/creation/TdSkTgEVNR",
+  "bg": "gOIDwLySXO",
+  "sheet": "f24",
+  "file": "img/fig-kid-f24-a20.webp",
+  "por": "img/por-kid-f24-a20.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f24",
+  "ageBand": "4",
+  "magnificUrl": "https://www.magnific.com/app/creation/YMLHsDRWeC",
+  "bg": "SytMhGSUb8",
+  "sheet": "f24",
+  "file": "img/fig-kid-f24-a4.webp",
+  "por": "img/por-kid-f24-a4.webp"
+ },
+ {
+  "role": "princess",
+  "identity": "f24",
+  "ageBand": "9",
+  "magnificUrl": "https://www.magnific.com/app/creation/YMLHsDRWeC",
+  "bg": "SytMhGSUb8",
+  "sheet": "f24",
+  "file": "img/fig-kid-f24-a9.webp",
+  "por": "img/por-kid-f24-a9.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p01",
+  "ageBand": "14",
+  "magnificUrl": "https://www.magnific.com/app/creation/jUXW0idLD0",
+  "bg": "5jV2zNzKxe",
+  "sheet": "p01",
+  "file": "img/fig-kid-p01-a14.webp",
+  "por": "img/por-kid-p01-a14.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p01",
+  "ageBand": "20",
+  "magnificUrl": "https://www.magnific.com/app/creation/jUXW0idLD0",
+  "bg": "5jV2zNzKxe",
+  "sheet": "p01",
+  "file": "img/fig-kid-p01-a20.webp",
+  "por": "img/por-kid-p01-a20.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p01",
+  "ageBand": "4",
+  "magnificUrl": "https://www.magnific.com/app/creation/jUXW0idLD0",
+  "bg": "5jV2zNzKxe",
+  "sheet": "p01",
+  "file": "img/fig-kid-p01-a4.webp",
+  "por": "img/por-kid-p01-a4.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p01",
+  "ageBand": "9",
+  "magnificUrl": "https://www.magnific.com/app/creation/jUXW0idLD0",
+  "bg": "5jV2zNzKxe",
+  "sheet": "p01",
+  "file": "img/fig-kid-p01-a9.webp",
+  "por": "img/por-kid-p01-a9.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p02",
+  "ageBand": "14",
+  "magnificUrl": "https://www.magnific.com/app/creation/ksDGY7916B",
+  "bg": "Bh4lwQBoQR",
+  "sheet": "p02",
+  "file": "img/fig-kid-p02-a14.webp",
+  "por": "img/por-kid-p02-a14.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p02",
+  "ageBand": "20",
+  "magnificUrl": "https://www.magnific.com/app/creation/ksDGY7916B",
+  "bg": "Bh4lwQBoQR",
+  "sheet": "p02",
+  "file": "img/fig-kid-p02-a20.webp",
+  "por": "img/por-kid-p02-a20.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p02",
+  "ageBand": "4",
+  "magnificUrl": "https://www.magnific.com/app/creation/ksDGY7916B",
+  "bg": "Bh4lwQBoQR",
+  "sheet": "p02",
+  "file": "img/fig-kid-p02-a4.webp",
+  "por": "img/por-kid-p02-a4.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p02",
+  "ageBand": "9",
+  "magnificUrl": "https://www.magnific.com/app/creation/ksDGY7916B",
+  "bg": "Bh4lwQBoQR",
+  "sheet": "p02",
+  "file": "img/fig-kid-p02-a9.webp",
+  "por": "img/por-kid-p02-a9.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p03",
+  "ageBand": "14",
+  "magnificUrl": "https://www.magnific.com/app/creation/MBw1jaxDCm",
+  "bg": "s7o0Di3l8e",
+  "sheet": "p03",
+  "file": "img/fig-kid-p03-a14.webp",
+  "por": "img/por-kid-p03-a14.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p03",
+  "ageBand": "20",
+  "magnificUrl": "https://www.magnific.com/app/creation/MBw1jaxDCm",
+  "bg": "s7o0Di3l8e",
+  "sheet": "p03",
+  "file": "img/fig-kid-p03-a20.webp",
+  "por": "img/por-kid-p03-a20.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p03",
+  "ageBand": "4",
+  "magnificUrl": "https://www.magnific.com/app/creation/MBw1jaxDCm",
+  "bg": "s7o0Di3l8e",
+  "sheet": "p03",
+  "file": "img/fig-kid-p03-a4.webp",
+  "por": "img/por-kid-p03-a4.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p03",
+  "ageBand": "9",
+  "magnificUrl": "https://www.magnific.com/app/creation/MBw1jaxDCm",
+  "bg": "s7o0Di3l8e",
+  "sheet": "p03",
+  "file": "img/fig-kid-p03-a9.webp",
+  "por": "img/por-kid-p03-a9.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p04",
+  "ageBand": "14",
+  "magnificUrl": "https://www.magnific.com/app/creation/CqG46sdEEy",
+  "bg": "lJ8TpAZgv9",
+  "sheet": "p04",
+  "file": "img/fig-kid-p04-a14.webp",
+  "por": "img/por-kid-p04-a14.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p04",
+  "ageBand": "20",
+  "magnificUrl": "https://www.magnific.com/app/creation/CqG46sdEEy",
+  "bg": "lJ8TpAZgv9",
+  "sheet": "p04",
+  "file": "img/fig-kid-p04-a20.webp",
+  "por": "img/por-kid-p04-a20.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p04",
+  "ageBand": "4",
+  "magnificUrl": "https://www.magnific.com/app/creation/CqG46sdEEy",
+  "bg": "lJ8TpAZgv9",
+  "sheet": "p04",
+  "file": "img/fig-kid-p04-a4.webp",
+  "por": "img/por-kid-p04-a4.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p04",
+  "ageBand": "9",
+  "magnificUrl": "https://www.magnific.com/app/creation/CqG46sdEEy",
+  "bg": "lJ8TpAZgv9",
+  "sheet": "p04",
+  "file": "img/fig-kid-p04-a9.webp",
+  "por": "img/por-kid-p04-a9.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p05",
+  "ageBand": "14",
+  "magnificUrl": "https://www.magnific.com/app/creation/mE374nFhJQ",
+  "bg": "gOIVXCUSXO",
+  "sheet": "p05",
+  "file": "img/fig-kid-p05-a14.webp",
+  "por": "img/por-kid-p05-a14.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p05",
+  "ageBand": "20",
+  "magnificUrl": "https://www.magnific.com/app/creation/mE374nFhJQ",
+  "bg": "gOIVXCUSXO",
+  "sheet": "p05",
+  "file": "img/fig-kid-p05-a20.webp",
+  "por": "img/por-kid-p05-a20.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p05",
+  "ageBand": "4",
+  "magnificUrl": "https://www.magnific.com/app/creation/mE374nFhJQ",
+  "bg": "gOIVXCUSXO",
+  "sheet": "p05",
+  "file": "img/fig-kid-p05-a4.webp",
+  "por": "img/por-kid-p05-a4.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p05",
+  "ageBand": "9",
+  "magnificUrl": "https://www.magnific.com/app/creation/mE374nFhJQ",
+  "bg": "gOIVXCUSXO",
+  "sheet": "p05",
+  "file": "img/fig-kid-p05-a9.webp",
+  "por": "img/por-kid-p05-a9.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p06",
+  "ageBand": "14",
+  "magnificUrl": "https://www.magnific.com/app/creation/0eg5x4jTfW",
+  "bg": "vQZO6cba47",
+  "sheet": "p06",
+  "file": "img/fig-kid-p06-a14.webp",
+  "por": "img/por-kid-p06-a14.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p06",
+  "ageBand": "20",
+  "magnificUrl": "https://www.magnific.com/app/creation/0eg5x4jTfW",
+  "bg": "vQZO6cba47",
+  "sheet": "p06",
+  "file": "img/fig-kid-p06-a20.webp",
+  "por": "img/por-kid-p06-a20.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p06",
+  "ageBand": "4",
+  "magnificUrl": "https://www.magnific.com/app/creation/0eg5x4jTfW",
+  "bg": "vQZO6cba47",
+  "sheet": "p06",
+  "file": "img/fig-kid-p06-a4.webp",
+  "por": "img/por-kid-p06-a4.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p06",
+  "ageBand": "9",
+  "magnificUrl": "https://www.magnific.com/app/creation/0eg5x4jTfW",
+  "bg": "vQZO6cba47",
+  "sheet": "p06",
+  "file": "img/fig-kid-p06-a9.webp",
+  "por": "img/por-kid-p06-a9.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p07",
+  "ageBand": "14",
+  "magnificUrl": "https://www.magnific.com/app/creation/dtyLUGVXSL",
+  "bg": "tCiw4WlmZJ",
+  "sheet": "p07",
+  "file": "img/fig-kid-p07-a14.webp",
+  "por": "img/por-kid-p07-a14.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p07",
+  "ageBand": "20",
+  "magnificUrl": "https://www.magnific.com/app/creation/dtyLUGVXSL",
+  "bg": "tCiw4WlmZJ",
+  "sheet": "p07",
+  "file": "img/fig-kid-p07-a20.webp",
+  "por": "img/por-kid-p07-a20.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p07",
+  "ageBand": "4",
+  "magnificUrl": "https://www.magnific.com/app/creation/dtyLUGVXSL",
+  "bg": "tCiw4WlmZJ",
+  "sheet": "p07",
+  "file": "img/fig-kid-p07-a4.webp",
+  "por": "img/por-kid-p07-a4.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p07",
+  "ageBand": "9",
+  "magnificUrl": "https://www.magnific.com/app/creation/dtyLUGVXSL",
+  "bg": "tCiw4WlmZJ",
+  "sheet": "p07",
+  "file": "img/fig-kid-p07-a9.webp",
+  "por": "img/por-kid-p07-a9.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p08",
+  "ageBand": "14",
+  "magnificUrl": "https://www.magnific.com/app/creation/MBw1sGdDCm",
+  "bg": "Do7rgRipcl",
+  "sheet": "p08",
+  "file": "img/fig-kid-p08-a14.webp",
+  "por": "img/por-kid-p08-a14.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p08",
+  "ageBand": "20",
+  "magnificUrl": "https://www.magnific.com/app/creation/MBw1sGdDCm",
+  "bg": "Do7rgRipcl",
+  "sheet": "p08",
+  "file": "img/fig-kid-p08-a20.webp",
+  "por": "img/por-kid-p08-a20.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p08",
+  "ageBand": "4",
+  "magnificUrl": "https://www.magnific.com/app/creation/MBw1sGdDCm",
+  "bg": "Do7rgRipcl",
+  "sheet": "p08",
+  "file": "img/fig-kid-p08-a4.webp",
+  "por": "img/por-kid-p08-a4.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p08",
+  "ageBand": "9",
+  "magnificUrl": "https://www.magnific.com/app/creation/MBw1sGdDCm",
+  "bg": "Do7rgRipcl",
+  "sheet": "p08",
+  "file": "img/fig-kid-p08-a9.webp",
+  "por": "img/por-kid-p08-a9.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p09",
+  "ageBand": "14",
+  "magnificUrl": "https://www.magnific.com/app/creation/YMLHrg5WeC",
+  "bg": "4Ru8E6v9Aa",
+  "sheet": "p09",
+  "file": "img/fig-kid-p09-a14.webp",
+  "por": "img/por-kid-p09-a14.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p09",
+  "ageBand": "20",
+  "magnificUrl": "https://www.magnific.com/app/creation/YMLHrg5WeC",
+  "bg": "4Ru8E6v9Aa",
+  "sheet": "p09",
+  "file": "img/fig-kid-p09-a20.webp",
+  "por": "img/por-kid-p09-a20.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p09",
+  "ageBand": "4",
+  "magnificUrl": "https://www.magnific.com/app/creation/YMLHrg5WeC",
+  "bg": "4Ru8E6v9Aa",
+  "sheet": "p09",
+  "file": "img/fig-kid-p09-a4.webp",
+  "por": "img/por-kid-p09-a4.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p09",
+  "ageBand": "9",
+  "magnificUrl": "https://www.magnific.com/app/creation/YMLHrg5WeC",
+  "bg": "4Ru8E6v9Aa",
+  "sheet": "p09",
+  "file": "img/fig-kid-p09-a9.webp",
+  "por": "img/por-kid-p09-a9.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p10",
+  "ageBand": "14",
+  "magnificUrl": "https://www.magnific.com/app/creation/gOIVBaGSXO",
+  "bg": "4Ru8ERC9Aa",
+  "sheet": "p10",
+  "file": "img/fig-kid-p10-a14.webp",
+  "por": "img/por-kid-p10-a14.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p10",
+  "ageBand": "20",
+  "magnificUrl": "https://www.magnific.com/app/creation/gOIVBaGSXO",
+  "bg": "4Ru8ERC9Aa",
+  "sheet": "p10",
+  "file": "img/fig-kid-p10-a20.webp",
+  "por": "img/por-kid-p10-a20.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p10",
+  "ageBand": "4",
+  "magnificUrl": "https://www.magnific.com/app/creation/gOIVBaGSXO",
+  "bg": "4Ru8ERC9Aa",
+  "sheet": "p10",
+  "file": "img/fig-kid-p10-a4.webp",
+  "por": "img/por-kid-p10-a4.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p10",
+  "ageBand": "9",
+  "magnificUrl": "https://www.magnific.com/app/creation/gOIVBaGSXO",
+  "bg": "cplKXIK0eP",
+  "sheet": "p10",
+  "file": "img/fig-kid-p10-a9.webp",
+  "por": "img/por-kid-p10-a9.webp",
+  "rematte": true
+ },
+ {
+  "role": "prince",
+  "identity": "p11",
+  "ageBand": "14",
+  "magnificUrl": "https://www.magnific.com/app/creation/TdSKsy2VNR",
+  "bg": "5jV2TsSKxe",
+  "sheet": "p11",
+  "file": "img/fig-kid-p11-a14.webp",
+  "por": "img/por-kid-p11-a14.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p11",
+  "ageBand": "20",
+  "magnificUrl": "https://www.magnific.com/app/creation/TdSKsy2VNR",
+  "bg": "5jV2TsSKxe",
+  "sheet": "p11",
+  "file": "img/fig-kid-p11-a20.webp",
+  "por": "img/por-kid-p11-a20.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p11",
+  "ageBand": "4",
+  "magnificUrl": "https://www.magnific.com/app/creation/TdSKsy2VNR",
+  "bg": "5jV2TsSKxe",
+  "sheet": "p11",
+  "file": "img/fig-kid-p11-a4.webp",
+  "por": "img/por-kid-p11-a4.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p11",
+  "ageBand": "9",
+  "magnificUrl": "https://www.magnific.com/app/creation/TdSKsy2VNR",
+  "bg": "5jV2TsSKxe",
+  "sheet": "p11",
+  "file": "img/fig-kid-p11-a9.webp",
+  "por": "img/por-kid-p11-a9.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p12",
+  "ageBand": "14",
+  "magnificUrl": "https://www.magnific.com/app/creation/Bh4lOAUoQR",
+  "bg": "4Ru8EAQ9Aa",
+  "sheet": "p12",
+  "file": "img/fig-kid-p12-a14.webp",
+  "por": "img/por-kid-p12-a14.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p12",
+  "ageBand": "20",
+  "magnificUrl": "https://www.magnific.com/app/creation/Bh4lOAUoQR",
+  "bg": "4Ru8EAQ9Aa",
+  "sheet": "p12",
+  "file": "img/fig-kid-p12-a20.webp",
+  "por": "img/por-kid-p12-a20.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p12",
+  "ageBand": "4",
+  "magnificUrl": "https://www.magnific.com/app/creation/Bh4lOAUoQR",
+  "bg": "4Ru8EAQ9Aa",
+  "sheet": "p12",
+  "file": "img/fig-kid-p12-a4.webp",
+  "por": "img/por-kid-p12-a4.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p12",
+  "ageBand": "9",
+  "magnificUrl": "https://www.magnific.com/app/creation/Bh4lOAUoQR",
+  "bg": "4Ru8EAQ9Aa",
+  "sheet": "p12",
+  "file": "img/fig-kid-p12-a9.webp",
+  "por": "img/por-kid-p12-a9.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p13",
+  "ageBand": "14",
+  "magnificUrl": "https://www.magnific.com/app/creation/5jV20mfKxe",
+  "bg": "4Ru8uYq9Aa",
+  "sheet": "p13",
+  "file": "img/fig-kid-p13-a14.webp",
+  "por": "img/por-kid-p13-a14.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p13",
+  "ageBand": "20",
+  "magnificUrl": "https://www.magnific.com/app/creation/5jV20mfKxe",
+  "bg": "4Ru8uYq9Aa",
+  "sheet": "p13",
+  "file": "img/fig-kid-p13-a20.webp",
+  "por": "img/por-kid-p13-a20.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p13",
+  "ageBand": "4",
+  "magnificUrl": "https://www.magnific.com/app/creation/5jV20mfKxe",
+  "bg": "4Ru8uYq9Aa",
+  "sheet": "p13",
+  "file": "img/fig-kid-p13-a4.webp",
+  "por": "img/por-kid-p13-a4.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p13",
+  "ageBand": "9",
+  "magnificUrl": "https://www.magnific.com/app/creation/5jV20mfKxe",
+  "bg": "4Ru8uYq9Aa",
+  "sheet": "p13",
+  "file": "img/fig-kid-p13-a9.webp",
+  "por": "img/por-kid-p13-a9.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p14",
+  "ageBand": "14",
+  "magnificUrl": "https://www.magnific.com/app/creation/TdSKlRcVNR",
+  "bg": "1lpzpPfr4r",
+  "sheet": "p14",
+  "file": "img/fig-kid-p14-a14.webp",
+  "por": "img/por-kid-p14-a14.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p14",
+  "ageBand": "20",
+  "magnificUrl": "https://www.magnific.com/app/creation/TdSKlRcVNR",
+  "bg": "1lpzpPfr4r",
+  "sheet": "p14",
+  "file": "img/fig-kid-p14-a20.webp",
+  "por": "img/por-kid-p14-a20.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p14",
+  "ageBand": "4",
+  "magnificUrl": "https://www.magnific.com/app/creation/TdSKlRcVNR",
+  "bg": "1lpzpPfr4r",
+  "sheet": "p14",
+  "file": "img/fig-kid-p14-a4.webp",
+  "por": "img/por-kid-p14-a4.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p14",
+  "ageBand": "9",
+  "magnificUrl": "https://www.magnific.com/app/creation/TdSKlRcVNR",
+  "bg": "1lpzpPfr4r",
+  "sheet": "p14",
+  "file": "img/fig-kid-p14-a9.webp",
+  "por": "img/por-kid-p14-a9.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p15",
+  "ageBand": "14",
+  "magnificUrl": "https://www.magnific.com/app/creation/aF2yRXlfSh",
+  "bg": "8aNSNK4IrU",
+  "sheet": "p15",
+  "file": "img/fig-kid-p15-a14.webp",
+  "por": "img/por-kid-p15-a14.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p15",
+  "ageBand": "20",
+  "magnificUrl": "https://www.magnific.com/app/creation/aF2yRXlfSh",
+  "bg": "8aNSNK4IrU",
+  "sheet": "p15",
+  "file": "img/fig-kid-p15-a20.webp",
+  "por": "img/por-kid-p15-a20.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p15",
+  "ageBand": "4",
+  "magnificUrl": "https://www.magnific.com/app/creation/aF2yRXlfSh",
+  "bg": "8aNSNK4IrU",
+  "sheet": "p15",
+  "file": "img/fig-kid-p15-a4.webp",
+  "por": "img/por-kid-p15-a4.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p15",
+  "ageBand": "9",
+  "magnificUrl": "https://www.magnific.com/app/creation/aF2yRXlfSh",
+  "bg": "8aNSNK4IrU",
+  "sheet": "p15",
+  "file": "img/fig-kid-p15-a9.webp",
+  "por": "img/por-kid-p15-a9.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p16",
+  "ageBand": "14",
+  "magnificUrl": "https://www.magnific.com/app/creation/dtyLJcDXSL",
+  "bg": "rgene6Ixtc",
+  "sheet": "p16",
+  "file": "img/fig-kid-p16-a14.webp",
+  "por": "img/por-kid-p16-a14.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p16",
+  "ageBand": "20",
+  "magnificUrl": "https://www.magnific.com/app/creation/dtyLJcDXSL",
+  "bg": "rgene6Ixtc",
+  "sheet": "p16",
+  "file": "img/fig-kid-p16-a20.webp",
+  "por": "img/por-kid-p16-a20.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p16",
+  "ageBand": "4",
+  "magnificUrl": "https://www.magnific.com/app/creation/dtyLJcDXSL",
+  "bg": "rgene6Ixtc",
+  "sheet": "p16",
+  "file": "img/fig-kid-p16-a4.webp",
+  "por": "img/por-kid-p16-a4.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p16",
+  "ageBand": "9",
+  "magnificUrl": "https://www.magnific.com/app/creation/dtyLJcDXSL",
+  "bg": "rgene6Ixtc",
+  "sheet": "p16",
+  "file": "img/fig-kid-p16-a9.webp",
+  "por": "img/por-kid-p16-a9.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p17",
+  "ageBand": "14",
+  "magnificUrl": "https://www.magnific.com/app/creation/s7o0Bhgl8e",
+  "bg": "ov9gNgN829",
+  "sheet": "p17",
+  "file": "img/fig-kid-p17-a14.webp",
+  "por": "img/por-kid-p17-a14.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p17",
+  "ageBand": "20",
+  "magnificUrl": "https://www.magnific.com/app/creation/s7o0Bhgl8e",
+  "bg": "ov9gNgN829",
+  "sheet": "p17",
+  "file": "img/fig-kid-p17-a20.webp",
+  "por": "img/por-kid-p17-a20.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p17",
+  "ageBand": "4",
+  "magnificUrl": "https://www.magnific.com/app/creation/s7o0Bhgl8e",
+  "bg": "ov9gNgN829",
+  "sheet": "p17",
+  "file": "img/fig-kid-p17-a4.webp",
+  "por": "img/por-kid-p17-a4.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p17",
+  "ageBand": "9",
+  "magnificUrl": "https://www.magnific.com/app/creation/s7o0Bhgl8e",
+  "bg": "ov9gNgN829",
+  "sheet": "p17",
+  "file": "img/fig-kid-p17-a9.webp",
+  "por": "img/por-kid-p17-a9.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p18",
+  "ageBand": "14",
+  "magnificUrl": "https://www.magnific.com/app/creation/8aNS9zmIrU",
+  "bg": "iGqhbvs3uK",
+  "sheet": "p18",
+  "file": "img/fig-kid-p18-a14.webp",
+  "por": "img/por-kid-p18-a14.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p18",
+  "ageBand": "20",
+  "magnificUrl": "https://www.magnific.com/app/creation/8aNS9zmIrU",
+  "bg": "iGqhbvs3uK",
+  "sheet": "p18",
+  "file": "img/fig-kid-p18-a20.webp",
+  "por": "img/por-kid-p18-a20.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p18",
+  "ageBand": "4",
+  "magnificUrl": "https://www.magnific.com/app/creation/8aNS9zmIrU",
+  "bg": "iGqhbvs3uK",
+  "sheet": "p18",
+  "file": "img/fig-kid-p18-a4.webp",
+  "por": "img/por-kid-p18-a4.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p18",
+  "ageBand": "9",
+  "magnificUrl": "https://www.magnific.com/app/creation/8aNS9zmIrU",
+  "bg": "iGqhbvs3uK",
+  "sheet": "p18",
+  "file": "img/fig-kid-p18-a9.webp",
+  "por": "img/por-kid-p18-a9.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p19",
+  "ageBand": "14",
+  "magnificUrl": "https://www.magnific.com/app/creation/P3EoC1w42C",
+  "bg": "gOIVte7SXO",
+  "sheet": "p19",
+  "file": "img/fig-kid-p19-a14.webp",
+  "por": "img/por-kid-p19-a14.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p19",
+  "ageBand": "20",
+  "magnificUrl": "https://www.magnific.com/app/creation/P3EoC1w42C",
+  "bg": "gOIVte7SXO",
+  "sheet": "p19",
+  "file": "img/fig-kid-p19-a20.webp",
+  "por": "img/por-kid-p19-a20.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p19",
+  "ageBand": "4",
+  "magnificUrl": "https://www.magnific.com/app/creation/P3EoC1w42C",
+  "bg": "gOIVte7SXO",
+  "sheet": "p19",
+  "file": "img/fig-kid-p19-a4.webp",
+  "por": "img/por-kid-p19-a4.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p19",
+  "ageBand": "9",
+  "magnificUrl": "https://www.magnific.com/app/creation/P3EoC1w42C",
+  "bg": "gOIVte7SXO",
+  "sheet": "p19",
+  "file": "img/fig-kid-p19-a9.webp",
+  "por": "img/por-kid-p19-a9.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p20",
+  "ageBand": "14",
+  "magnificUrl": "https://www.magnific.com/app/creation/jUXWdExLD0",
+  "bg": "SytMmXzUb8",
+  "sheet": "p20",
+  "file": "img/fig-kid-p20-a14.webp",
+  "por": "img/por-kid-p20-a14.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p20",
+  "ageBand": "20",
+  "magnificUrl": "https://www.magnific.com/app/creation/jUXWdExLD0",
+  "bg": "SytMmXzUb8",
+  "sheet": "p20",
+  "file": "img/fig-kid-p20-a20.webp",
+  "por": "img/por-kid-p20-a20.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p20",
+  "ageBand": "4",
+  "magnificUrl": "https://www.magnific.com/app/creation/jUXWdExLD0",
+  "bg": "SytMmXzUb8",
+  "sheet": "p20",
+  "file": "img/fig-kid-p20-a4.webp",
+  "por": "img/por-kid-p20-a4.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p20",
+  "ageBand": "9",
+  "magnificUrl": "https://www.magnific.com/app/creation/jUXWdExLD0",
+  "bg": "SytMmXzUb8",
+  "sheet": "p20",
+  "file": "img/fig-kid-p20-a9.webp",
+  "por": "img/por-kid-p20-a9.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p21",
+  "ageBand": "14",
+  "magnificUrl": "https://www.magnific.com/app/creation/SytMtsCUb8",
+  "bg": "ksDGeJU16B",
+  "sheet": "p21",
+  "file": "img/fig-kid-p21-a14.webp",
+  "por": "img/por-kid-p21-a14.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p21",
+  "ageBand": "20",
+  "magnificUrl": "https://www.magnific.com/app/creation/SytMtsCUb8",
+  "bg": "ksDGeJU16B",
+  "sheet": "p21",
+  "file": "img/fig-kid-p21-a20.webp",
+  "por": "img/por-kid-p21-a20.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p21",
+  "ageBand": "4",
+  "magnificUrl": "https://www.magnific.com/app/creation/SytMtsCUb8",
+  "bg": "ksDGeJU16B",
+  "sheet": "p21",
+  "file": "img/fig-kid-p21-a4.webp",
+  "por": "img/por-kid-p21-a4.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p21",
+  "ageBand": "9",
+  "magnificUrl": "https://www.magnific.com/app/creation/SytMtsCUb8",
+  "bg": "ksDGeJU16B",
+  "sheet": "p21",
+  "file": "img/fig-kid-p21-a9.webp",
+  "por": "img/por-kid-p21-a9.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p22",
+  "ageBand": "14",
+  "magnificUrl": "https://www.magnific.com/app/creation/rgenerGxtc",
+  "bg": "VXUk7vYMMU",
+  "sheet": "p22",
+  "file": "img/fig-kid-p22-a14.webp",
+  "por": "img/por-kid-p22-a14.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p22",
+  "ageBand": "20",
+  "magnificUrl": "https://www.magnific.com/app/creation/rgenerGxtc",
+  "bg": "VXUk7vYMMU",
+  "sheet": "p22",
+  "file": "img/fig-kid-p22-a20.webp",
+  "por": "img/por-kid-p22-a20.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p22",
+  "ageBand": "4",
+  "magnificUrl": "https://www.magnific.com/app/creation/rgenerGxtc",
+  "bg": "VXUk7vYMMU",
+  "sheet": "p22",
+  "file": "img/fig-kid-p22-a4.webp",
+  "por": "img/por-kid-p22-a4.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p22",
+  "ageBand": "9",
+  "magnificUrl": "https://www.magnific.com/app/creation/rgenerGxtc",
+  "bg": "VXUk7vYMMU",
+  "sheet": "p22",
+  "file": "img/fig-kid-p22-a9.webp",
+  "por": "img/por-kid-p22-a9.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p23",
+  "ageBand": "14",
+  "magnificUrl": "https://www.magnific.com/app/creation/fHAPGu0CDY",
+  "bg": "YMLHlmcWeC",
+  "sheet": "p23",
+  "file": "img/fig-kid-p23-a14.webp",
+  "por": "img/por-kid-p23-a14.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p23",
+  "ageBand": "20",
+  "magnificUrl": "https://www.magnific.com/app/creation/fHAPGu0CDY",
+  "bg": "YMLHlmcWeC",
+  "sheet": "p23",
+  "file": "img/fig-kid-p23-a20.webp",
+  "por": "img/por-kid-p23-a20.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p23",
+  "ageBand": "4",
+  "magnificUrl": "https://www.magnific.com/app/creation/fHAPGu0CDY",
+  "bg": "YMLHlmcWeC",
+  "sheet": "p23",
+  "file": "img/fig-kid-p23-a4.webp",
+  "por": "img/por-kid-p23-a4.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p23",
+  "ageBand": "9",
+  "magnificUrl": "https://www.magnific.com/app/creation/fHAPGu0CDY",
+  "bg": "YMLHlmcWeC",
+  "sheet": "p23",
+  "file": "img/fig-kid-p23-a9.webp",
+  "por": "img/por-kid-p23-a9.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p24",
+  "ageBand": "14",
+  "magnificUrl": "https://www.magnific.com/app/creation/79vea9TJAL",
+  "bg": "iGqh5eH3uK",
+  "sheet": "p24",
+  "file": "img/fig-kid-p24-a14.webp",
+  "por": "img/por-kid-p24-a14.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p24",
+  "ageBand": "20",
+  "magnificUrl": "https://www.magnific.com/app/creation/79vea9TJAL",
+  "bg": "iGqh5eH3uK",
+  "sheet": "p24",
+  "file": "img/fig-kid-p24-a20.webp",
+  "por": "img/por-kid-p24-a20.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p24",
+  "ageBand": "4",
+  "magnificUrl": "https://www.magnific.com/app/creation/79vea9TJAL",
+  "bg": "iGqh5eH3uK",
+  "sheet": "p24",
+  "file": "img/fig-kid-p24-a4.webp",
+  "por": "img/por-kid-p24-a4.webp"
+ },
+ {
+  "role": "prince",
+  "identity": "p24",
+  "ageBand": "9",
+  "magnificUrl": "https://www.magnific.com/app/creation/79vea9TJAL",
+  "bg": "iGqh5eH3uK",
+  "sheet": "p24",
+  "file": "img/fig-kid-p24-a9.webp",
+  "por": "img/por-kid-p24-a9.webp"
+ }
+]
