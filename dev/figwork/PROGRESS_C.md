@@ -114,3 +114,19 @@ Công cụ: dev/figwork/maidC/fix1114/ (p.py điều phối theo pc_st.txt/st.tx
 - Tín dụng ước: lãnh cung 52×270 + 56×175 (lưới) + 15×270 (sửa thêm/thử) + 150×3; t6 30×270; t7/t8 25×270 ≈ 45k.
 Còn lại/ghi chú cho người kiểm: một số t6 vẫn có chấm nhỏ dưới hoa điền (m08 m14 m29 m41 m49 m50) nhưng là hoa văn phẳng, không thành dây; t8 m33/m34 vẫn rộng xấp xỉ khoảng giữa hai mày.
 SẴN SÀNG KIỂM LẠI.
+
+## Sửa 11/14 khuya (thợ C mới, sau FAIL f6ca3d67): tuổi a36/a51 bậc t1–t8 + nét lên chân tóc + phụ
+Công cụ: dev/figwork/maidC/age1114/ (ag.py = lưới đầu + dán lại; tx.py = PUT/tải theo transcript; run.sh; pub.sh; fh.py = tấm soi trán; log.txt = tên lưới, id ảnh tải lên, id bản sửa gpt-2-6).
+Cách làm (không vẽ lại thân, không tách nền lại): cắt đầu từ chính fig-maid-*.webp (900 cao) → lưới 4 cột ô 512 (2048², 2k) → images_generate gpt-2-6 2k high, ref = lưới → dán ngược
+vào fig: chỉ RGB trong mặt nạ elip (giữ alpha gốc), căn bằng phaseCorrelate. MODE: mặc định = mặt (từ mày xuống cằm, giữ hoa điền), hair = vùng tóc trừ mặt
+(chỉ dán khi bản sửa tối hơn rõ), fh = trán + chân tóc. por làm lại bằng maidC/porcrop.py cho mọi fig đổi.
+- TUỔI: 52 lưới M01–M52, mỗi lưới = 1 nàng × 8 bậc × (a36, a51) = 16 đầu; cột 1/3 → ~33 (mặt đầy, chín chắn hơn), cột 2/4 → ~48 (nếp nhăn mảnh khoé mắt, rãnh cười nhẹ,
+  mặt đầy, vẫn đẹp). Dán vùng mặt. 832 hình. Tấm so sánh từng nàng: scratchpad agC/c/Mxx.jpg (18 | 26 | 32 cũ/mới | 48 cũ/mới).
+- TÓC: nhiều a51 gốc tóc ngả xám (m15-t7, m26-t6, m27-t8, m33 nhiều bậc, m34-t5, m37-t4, m43-t5, m49…) → 27 lưới H01–H27 (416 a51 + m33-t8 a18/a26/a36) sửa 'tóc đen nâu đậm, bỏ sợi xám/tím',
+  dán vùng tóc (403/419 ô tối hơn → dán). m33-t8 hết ánh xám-tím mọi tuổi.
+- t7 bỏ vạch/dây dọc lên chân tóc: m03 m05 m08 m12 m17 m21 m24 (đủ 4 tuổi; soát hết t7 m01–m26 bằng fh.py, các nàng khác sạch). t6 a51 bỏ nét lên tóc: m13 m15 m24 (+ m05 cuống anh đào).
+  Soát t6 a51 cả 52 nàng: chỉ 4 nàng trên có nét.
+- t6 m01 m02 m11 m21 (4 tuổi): hoa điền vẽ lại phẳng (không ngọc/hạt nổi). m48-t3: đèn lồng thu nhỏ ~1/3, bỏ móc (lưới 2×2 ô 1024: lưới 2:1 bị gpt xê dịch, đã bỏ).
+- Nốt ruồi còn sót trên fig gốc: m13-t1 a18/a26, m13-t2 a18/a26, m26-t1 a18 → vá bằng cw/mole.py --fix.
+- Lưu ý: m08-t6, m14-t3, m29-t7, m49-t2 a36/a51 đi qua 2 lần làm tuổi (lưới thử test1 rồi lưới Mxx) — đã xem, vẫn ~48.
+- Tín dụng: 53 lưới tuổi + 27 lưới tóc + 6 lưới trán = 86 × 175 ≈ 15.0k (+ tải lên miễn phí).

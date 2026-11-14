@@ -7,7 +7,7 @@ import sys,os,json,io,numpy as np,cv2
 from PIL import Image,ImageDraw,ImageFont
 H=os.path.dirname(os.path.abspath(__file__)); Y=H+"/yunet.onnx"
 W="/home/user/cung-tuong-mong/.claude/worktrees/agent-a7a7268489937d5f2/img/"
-T=512; BG=(236,231,224)
+T=int(os.environ.get("T","512")); NC=int(os.environ.get("NC","4")); BG=(236,231,224)
 def src(name, orig=False):
     p=f"{H}/out/{name}"
     return p if (not orig and os.path.exists(p)) else W+name
@@ -29,18 +29,19 @@ def save_webp(im,path,maxkb=250):
 AGES=os.environ.get("AGES","a36 a51").split()
 c=sys.argv[1]
 if c=="make":
-    name=sys.argv[2]; sets=sys.argv[3:]; nr=(len(sets)*len(AGES)+3)//4; G=Image.new("RGB",(4*T,nr*T),BG); meta=[]
+    name=sys.argv[2]; sets=sys.argv[3:]; nt=sum(1 if x.count("-")==2 else len(AGES) for x in sets); nr=max(int(os.environ.get("MINROWS","1")),(nt+NC-1)//NC); G=Image.new("RGB",(NC*T,nr*T),BG); meta=[]
     k=0
     for si,s in enumerate(sets):
-        for a in AGES:
+        sa=[s[-3:]] if s.count("-")==2 else AGES; s=s[:6] if s.count("-")==2 else s
+        for a in sa:
             fn=f"fig-maid-{s}-{a}.webp"; im=Image.open(src(fn)).convert("RGBA"); f=face(im); b=tilebox(f)
-            col=k%4; row=k//4; k+=1
+            col=k%NC; row=k//NC; k+=1
             G.paste(comp(im).crop(b).resize((T,T),Image.LANCZOS),(col*T,row*T))
             meta.append({"file":fn,"box":b,"face":f,"col":col,"row":row})
     G.save(f"{H}/g/{name}.png"); json.dump(meta,open(f"{H}/g/{name}.json","w")); print("grid",name,len(meta))
 elif c=="paste":
     name=sys.argv[2]; skip=set(sys.argv[3:]); meta=json.load(open(f"{H}/g/{name}.json"))
-    nr=max(m["row"] for m in meta)+1; E=Image.open(f"{H}/e/{name}.png").convert("RGB").resize((4*T,nr*T),Image.LANCZOS)
+    nr=max(m["row"] for m in meta)+1; E=Image.open(f"{H}/e/{name}.png").convert("RGB").resize((NC*T,nr*T),Image.LANCZOS)
     for m in meta:
         key=m["file"][9:-5]
         if key in skip: print("skip",key); continue
@@ -48,13 +49,25 @@ elif c=="paste":
         e=E.crop((m["col"]*T,m["row"]*T,m["col"]*T+T,m["row"]*T+T)).resize((s,s),Image.LANCZOS)
         o=np.asarray(comp(im).crop(b)).astype(np.float32); ea=np.asarray(e).astype(np.float32)
         (dx,dy),r=cv2.phaseCorrelate(cv2.cvtColor(o,cv2.COLOR_RGB2GRAY),cv2.cvtColor(ea,cv2.COLOR_RGB2GRAY))
-        if abs(dx)>s*0.06 or abs(dy)>s*0.06: dx=dy=0
+        lim=float(os.environ.get("LIM","0.06"))
+        if abs(dx)>s*lim or abs(dy)>s*lim: dx=dy=0
         ea=cv2.warpAffine(ea,np.float32([[1,0,-dx],[0,1,-dy]]),(s,s),borderMode=cv2.BORDER_REFLECT)
         fx=x-b[0]; fy=y-b[1]
         mk=np.zeros((s,s),np.float32)
         if os.environ.get("MODE")=="head": cv2.ellipse(mk,(int(fx+w/2),int(fy+h*0.55)),(int(w*0.62),int(h*0.62)),0,0,360,1,-1)
+        elif os.environ.get("MODE")=="hair":
+            cv2.ellipse(mk,(int(fx+w/2),int(fy+h*0.25)),(int(w*1.15),int(h*1.05)),0,0,360,1,-1)
+            cv2.ellipse(mk,(int(fx+w/2),int(fy+h*0.62)),(int(w*0.52),int(h*0.60)),0,0,360,0,-1)
+        elif os.environ.get("MODE")=="fh":
+            cv2.ellipse(mk,(int(fx+w/2),int(fy+h*0.02)),(int(w*0.30),int(h*0.42)),0,0,360,1,-1)
         else: cv2.ellipse(mk,(int(fx+w/2),int(fy+h*0.70)),(int(w*0.58),int(h*0.44)),0,0,360,1,-1)
         mk=cv2.GaussianBlur(mk,(0,0),max(1,w*0.06))
+        if os.environ.get("MODE")=="hair":   # only where the edit made the hair clearly darker
+            al=(np.asarray(im.crop(b))[...,3]>200).astype(np.float32)
+            wgt=mk*al; lo=(o@[0.3,0.59,0.11]); le=(ea@[0.3,0.59,0.11])
+            d=float(((lo-le)*wgt).sum()/max(1,wgt.sum()))
+            if d<float(os.environ.get("HMIN","4")): print(key,"hair-skip",round(d,1)); continue
+            print(key,"hair-dark",round(d,1))
         A=np.asarray(im)[b[1]:b[3],b[0]:b[2],3] if b[0]>=0 and b[1]>=0 and b[2]<=im.size[0] and b[3]<=im.size[1] else None
         arr=np.asarray(im).astype(np.float32).copy()
         x0,y0=max(0,b[0]),max(0,b[1]); x1,y1=min(im.size[0],b[2]),min(im.size[1],b[3])
