@@ -10,4 +10,5 @@ assert.deepEqual(F.W.R[0].rl, { 901: 5, 902: 7 });
 assert.equal(F.W.R.length, 3);        // guest-only new NPC dropped
 assert.equal(F.P.a.S.bac, 30);
 assert.equal(F.P.b.S.bac, 5); assert.equal(F.P.b.S.sung, -1);
+assert.equal(merge3({emp:{mood:1}},{emp:{mood:3}},{emp:{mood:0}}).emp.mood,3); // enum: host wins, never 3+(0-1)
 console.log("merge ok");

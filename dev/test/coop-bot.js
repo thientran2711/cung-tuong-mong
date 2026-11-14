@@ -14,17 +14,17 @@ async function mk(b,name,vp){const ctx=await b.newContext({viewport:{width:vp[0]
     window.__co=()=>{const c=window.COOP;if(!c)return{};const s=c.state||{};const you=c.seat||s.you||null;const ended=c.ended||s.ended||{};
       const on=typeof c.on==='boolean'?c.on:!!(s.playing||(s.status&&s.status!=='off'));
       return{code:c.code||s.room||'',seat:you,week:c.week!=null?c.week:(s.week||0),ended,on,
-        frozen:c.frozen!=null?!!c.frozen:!!(on&&!s.bothIn),waiting:c.waiting!=null?!!c.waiting:!!(you&&ended[you])}}},WURL);
+        frozen:!!(on&&(s.status!=='open'||!s.peerOnline)),waiting:!!(window.COOPW&&COOPW.on&&(COOPW.sent===(s.week||0)||(you&&ended[you]))),world:typeof S!=='undefined'&&!!S&&!!(window.COOPW&&COOPW.base)}}},WURL);
   const p=await ctx.newPage();p.setDefaultTimeout(30000);const o={name,ctx,p,errs:[],acts:0,deaths:0,names:[]};
   p.on('pageerror',e=>o.errs.push(e.message));p.on('console',m=>{if(m.type()==='error'&&!/Failed to load resource|favicon/.test(m.text()))o.errs.push('console: '+m.text())});return o}
 const tapText=async(o,re,ms=8000)=>{const t0=Date.now();while(Date.now()-t0<ms){const r=await o.p.evaluate(src=>{const R=new RegExp(src);
   const b=[...document.querySelectorAll('button')].find(b=>b.offsetParent!==null&&!b.disabled&&R.test(b.textContent.trim()));if(b){b.click();return true}return false},re.source);if(r)return true;await sleep(250)}return false};
 const until=async(o,fn,arg,ms=30000)=>{try{await o.p.waitForFunction(fn,arg,{timeout:ms});return true}catch(e){return false}};
 /* one step of the bot inside the page: returns what it did */
-const STEP=()=>{const c=__co();if(c.frozen||c.waiting)return'coop';if(S&&S.mg){try{S.mg=null;render()}catch(e){}return'mg'}
+const STEP=()=>{const c=__co();if(c.frozen||c.waiting)return'coop';if(typeof S==='undefined'||!S)return'nos';if(S.mg){try{S.mg=null;render()}catch(e){}return'mg'}
   if(S&&S.dead){const b=[...document.querySelectorAll('button')].filter(x=>x.offsetParent!==null&&!x.disabled);const k=b.find(x=>/Đầu thai|Luân hồi|Nhận thân phận|Tiến cung|Vào cung|Ở nhà|Nhập cung/.test(x.textContent))||b.find(x=>x.closest('#modal'));if(k){k.click();return'reborn:'+k.textContent.trim().slice(0,20)}return'dead'}
   const T=document.getElementById('title');if(T&&!T.hidden){const b=[...T.querySelectorAll('button')].filter(x=>x.offsetParent!==null&&!x.disabled);const k=b.find(x=>/Nhận thân phận|Tiến cung|Vào cung|Ở nhà|Lật|Chọn/.test(x.textContent))||b[0];if(k){k.click();return'title'}}
-  const m=document.getElementById('modal');if(m&&!m.hidden){const o=[...m.querySelectorAll('.opts button:not([disabled])')];const b=o.length?o[Math.floor(Math.random()*o.length)]:m.querySelector('#mr button:not([disabled])');if(b){b.click();return'modal'}return'stuck'}
+  const m=document.getElementById('modal');if(m&&!m.hidden){const acc=[...m.querySelectorAll('button:not([disabled])')].find(x=>x.offsetParent!==null&&/Nhận thân phận|Nhập cung|Tiến cung|Vào cung/.test(x.textContent));if(acc){acc.click();return'accept'}const o=[...m.querySelectorAll('.opts button:not([disabled])')];const b=o.length?o[Math.floor(Math.random()*o.length)]:m.querySelector('#mr button:not([disabled])');if(b){b.click();return'modal'}return'stuck'}
   if(window.__actsThis==null)window.__actsThis=0;
   if(window.__actsThis<3&&Math.random()<.8){const cards=[...document.querySelectorAll('#panel button.card:not([disabled]),#panel button.kcard:not([disabled])')].filter(x=>x.offsetParent!==null);
     if(cards.length){window.__actsThis++;cards[Math.floor(Math.random()*cards.length)].click();return'act'}}

@@ -18,10 +18,11 @@ async function mk(b,name,vp){const ctx=await b.newContext({viewport:{width:vp[0]
       const online=c.online||(s.seats?{a:!!(s.seats.a&&s.seats.a.online),b:!!(s.seats.b&&s.seats.b.online)}:{});
       const on=typeof c.on==='boolean'?c.on:(c.active!=null?!!c.active:!!(s.playing||(s.status&&s.status!=='off')));
       return{code:c.code||s.room||'',seat:you,week:c.week!=null?c.week:(s.week||0),online,ended,on,
-        frozen:c.frozen!=null?!!c.frozen:!!(on&&!s.bothIn),waiting:c.waiting!=null?!!c.waiting:!!(you&&ended[you])}}},WURL);
+        frozen:!!(on&&(s.status!=='open'||!s.peerOnline)),waiting:!!(window.COOPW&&COOPW.on&&(COOPW.sent===(s.week||0)||(you&&ended[you]))),world:typeof S!=='undefined'&&!!S&&!!(window.COOPW&&COOPW.base)}}},WURL);
   const o={ctx,name,errs:[]};o.page=async()=>{const p=await ctx.newPage();p.setDefaultTimeout(30000);
     p.on('pageerror',e=>o.errs.push(e.message));p.on('console',m=>{if(m.type()==='error'&&!/Failed to load resource|favicon/.test(m.text()))o.errs.push('console: '+m.text())});o.p=p;return p};return o}
-const shot=async(o,n)=>{await o.p.waitForTimeout(400);await o.p.screenshot({path:`${OUT}/${n}-${o.name}.png`});
+const shot=async(o,n)=>{await o.p.waitForTimeout(400);const t0=Date.now();const alive=await Promise.race([o.p.evaluate(()=>1),sleep(10000).then(()=>0)]);if(!alive){ok(false,`${n} ${o.name}: page responsive`);return}
+  try{await o.p.screenshot({path:`${OUT}/${n}-${o.name}.png`,timeout:20000})}catch(e){ok(false,`${n} ${o.name}: screenshot (${e.message.split('\n')[0]})`);return}
   const ov=await o.p.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1);ok(!ov,`${n} ${o.name}: no horizontal overflow`)};
 const C=o=>o.p.evaluate(()=>__co());
 async function until(o,fn,arg,ms=30000){try{await o.p.waitForFunction(fn,arg,{timeout:ms});return true}catch(e){return false}}
@@ -30,7 +31,7 @@ async function tapText(o,re,ms=8000){const t0=Date.now();while(Date.now()-t0<ms)
   const el=h.asElement();if(el){await el.click();return true}await sleep(250)}return false}
 /* close story/news modals of the normal game (never the co-op waiting/freeze panel) */
 async function clear(o,n=25){for(let i=0;i<n;i++){const st=await o.p.evaluate(()=>{const c=__co();if(c.frozen||c.waiting)return'coop';
-   const m=document.getElementById('modal');if(!m||m.hidden)return S&&S.mg?'mg':'';const b=m.querySelector('#mr button:not([disabled])')||m.querySelector('.opts button:not([disabled])');if(b){b.click();return'x'}return'stuck'});
+   const m=document.getElementById('modal');if(!m||m.hidden)return typeof S!=='undefined'&&S&&S.mg?'mg':'';const all=[...m.querySelectorAll('button:not([disabled])')].filter(x=>x.offsetParent!==null);const b=all.find(x=>/Nhận thân phận|Nhập cung|Tiến cung|Vào cung/.test(x.textContent))||m.querySelector('#mr button:not([disabled])')||m.querySelector('.opts button:not([disabled])');if(b){b.click();return'x'}return'stuck'});
   if(st==='mg'){await o.p.evaluate(()=>{try{S.mg=null;render()}catch(e){}});continue}
   if(st!=='x')return st;await sleep(200)}return'many'}
 async function playWeek(o){/* three buổi: Qua buổi, Qua buổi, Qua đêm */for(let k=0;k<3;k++){await clear(o);
@@ -52,8 +53,9 @@ async function playWeek(o){/* three buổi: Qua buổi, Qua buổi, Qua đêm */
  await B.page();await B.p.goto(BASE+'?room='+code);await B.p.waitForTimeout(3000);await shot(B,'04-join');
  await tapText(B,/^Vào phòng/,4000);
  ok(await until(B,()=>__co().seat==='b'&&__co().online&&__co().online.a&&__co().online.b&&!__co().frozen,null,40000),'B joined seat b, both online');
- ok(await until(A,()=>window.COOP&&!__co().frozen,null,20000),'A unfrozen when B is in');
- await clear(A);await clear(B);
+ ok(await until(A,()=>!__co().frozen,null,20000),'A unfrozen when B is in');
+ {const t0=Date.now();while(Date.now()-t0<60000){await clear(A);await clear(B);const a=await A.p.evaluate(()=>__co().world),c=await B.p.evaluate(()=>__co().world);if(a&&c)break;await sleep(500)}}
+ ok(await A.p.evaluate(()=>__co().world)&&await B.p.evaluate(()=>__co().world),'both players are in the shared world');await clear(A);await clear(B);
  const same=async tag=>{const a=await A.p.evaluate(()=>({era:S.emp.era,d:[S.year,S.month,S.tuan],me:S.name,fr:(rivals.find(v=>v.coop)||{}).name,R:rivals.filter(v=>!v.coop).map(v=>v.id+v.name).join()}));
    const c=await B.p.evaluate(()=>({era:S.emp.era,d:[S.year,S.month,S.tuan],me:S.name,fr:(rivals.find(v=>v.coop)||{}).name,R:rivals.filter(v=>!v.coop).map(v=>v.id+v.name).join()}));
    ok(a.era===c.era&&a.R===c.R,tag+': same Emperor and same consorts',[a.era,c.era]);ok(String(a.d)===String(c.d),tag+': same date',[a.d,c.d]);
