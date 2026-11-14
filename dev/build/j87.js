@@ -26,7 +26,8 @@ function kbkSfx(){try{if(typeof auOk!=="function"||!auOk())return;const C=window
 /* one block → HTML. string | {h} | {facts} | {rows} | {chips} | {html} ; facts expand into one block per fact so pages can split */
 function kbkExpand(blocks,skip){const out=[];for(const b of (blocks||[])){if(!b)continue;if(typeof b==="string"){out.push({html:b});continue}
   if(b.h){out.push({html:`<h4 class="kpst kbk-h">${b.h}</h4>`,head:true});continue}
-  if(b.facts){const prev=window.__kpSkip;window.__kpSkip=skip||prev;try{for(const f of b.facts)out.push({html:kitFacts([f],{group:false})})}finally{window.__kpSkip=prev}continue}
+  if(b.facts){const prev=window.__kpSkip;window.__kpSkip=skip||prev;try{for(const f of b.facts){const h=kitFacts([f],{group:false});
+    out.push({html:f&&f.art?`<div class="kbk-ev">${h}<img class="kbk-evart" src="${f.art}" alt="${f.artT||""}" title="${f.artT||""}" decoding="async" onerror="this.remove()"></div>`:h})}}finally{window.__kpSkip=prev}continue}
   if(b.rows){out.push({html:kitRows(b.rows)});continue}
   if(b.chips){out.push({html:b.chips.length?kitChips(b.chips):`<span class="kchips"><span class="kchip n">${b.none||"Không đổi gì"}</span></span>`});continue}
   if(b.html)out.push({html:b.html,head:!!b.head})}
@@ -48,7 +49,7 @@ function kitBook(spec){spec=spec||{};const rm=()=>{try{return reducedMotion()}ca
  const blankH=()=>`<div class="kbk-blank"><span class="kbk-orn"></span></div>`;
  const textTop=(p,cont)=>`<div class="kbk-th"><h3 class="kbk-t">${p.title||""}${cont?` <small class="kbk-cont">tiếp theo</small>`:""}</h3>${p.sub&&!cont?`<small class="kbk-ts">${p.sub}</small>`:""}</div>`;
  const personTop=(p,cont)=>cont?`<div class="kbk-th kbk-pc">${kitFaceH(p.who,"sm")}<h3 class="kbk-t">${kitName(p.who,{cap:true,named:p.who===S})} <small class="kbk-cont">tiếp theo</small></h3></div>`
-   :`<div class="kbk-pname">${kitName(p.who,{cap:true,named:p.who===S})}${p.sub?`<small class="kbk-ts">${p.sub}</small>`:""}</div>${p.chips&&p.chips.length?`<div class="kbk-pchips">${kitChips(p.chips)}</div>`:""}${p.rows&&p.rows.length?kitRows(p.rows):""}`;
+   :`<div class="kbk-pname">${kitName(p.who,{cap:true,named:p.who===S})}${p.sub?`<small class="kbk-ts">${p.sub}</small>`:""}</div>${p.chips&&p.chips.length?`<div class="kbk-pchips">${kitChips(p.chips)}</div>`:""}${p.rows&&p.rows.length&&PW>=440?kitRows(p.rows):""}`;
  const personBody=(p,cont)=>cont?`${personTop(p,true)}<div class="kbk-flow"></div>`:`<div class="kbk-person"><div class="kbk-por">${pframe(kitFace(p.who))}</div><div class="kbk-phead">${personTop(p,false)}</div><div class="kbk-flow"></div></div>`;
 
  /* ---- pagination: fill each page until it overflows, continue on the next ---- */
@@ -57,6 +58,7 @@ function kitBook(spec){spec=spec||{};const rm=()=>{try{return reducedMotion()}ca
    if(p.kind==="cover"){L.push({cls:"k-cover",html:coverH(p),kind:"cover"});continue}
    if(p.kind==="end"){L.push({cls:"k-end",html:endH(p),kind:"end",folio:true});continue}
    const isP=p.kind==="person"&&p.who;const blocks=kbkExpand(p.blocks,isP?p.who:null);let i=0,first=true;
+   if(isP&&PW<440&&p.rows&&p.rows.length)blocks.unshift({html:kitRows(p.rows)});
    do{meas.innerHTML=shell(isP?"k-person r":"k-text r",isP?personBody(p,!first):`${textTop(p,!first)}<div class="kbk-flow"></div>`,"0");
     const flow=meas.querySelector(".kbk-flow");const over=()=>flow.scrollHeight>flow.clientHeight+1;let n=0;
     while(i<blocks.length){flow.insertAdjacentHTML("beforeend",blocks[i].html);if(over()&&n>0){flow.lastElementChild.remove();break}i++;n++}
@@ -152,6 +154,8 @@ function kitBook(spec){spec=spec||{};const rm=()=>{try{return reducedMotion()}ca
  let rt=0;const onR=()=>{clearTimeout(rt);rt=setTimeout(()=>{if(!closed&&!busy)layout(logical)},120)};addEventListener("resize",onR);
  function close(){if(closed)return;closed=true;document.removeEventListener("keydown",key);removeEventListener("resize",onR);try{spec.onClose&&spec.onClose()}catch(e){console.error(e)}}
  layout(null);
+ /* web fonts that arrive after the first measure change line heights: measure again (keeps the page) */
+ try{if(document.fonts&&document.fonts.status!=="loaded")document.fonts.ready.then(()=>{if(!closed&&!busy)layout(logical)})}catch(e){}
  root.__kbk={relayout:()=>{if(!closed&&!busy)layout(logical)}};
  return {root,next,prev,go,close,get cur(){return cur},get max(){return maxCur},get mode(){return mode},relayout:()=>layout(logical)}}
 
@@ -184,13 +188,35 @@ function wkBookData(){const s=S.wkSnap||wkSnap();const n=Math.max(0,Math.min(S.l
  const persons=[...by.values()].map(x=>{const p=x.who;const chips=[],rows=[];
   if(typeof rivals!=="undefined"&&rivals.includes(p)){const o=s.pp&&s.pp[p.id];
    if(o){[["Thiện cảm",(p.rel||0)-o[0]],["Ghen",(p.ghen||0)-o[1]],["Oán",(p.oan||0)-o[2]]].forEach(([l,v])=>{if(v)chips.push([l,v])})}
-   rows.push(["Hiện nay",[`<span class="ef n">${kitGloss("Thiện cảm")} ${p.rel||0}</span>`,`<span class="ef n">${kitGloss("Ghen")} ${p.ghen||0}</span>`,`<span class="ef n">${kitGloss("Oán")} ${p.oan||0}</span>`]])}
+   rows.push(["Hiện nay",[`<span class="ef n kbk-pair">${kitGloss("Thiện cảm")} ${p.rel||0}</span>`,`<span class="ef n kbk-pair">${kitGloss("Ghen")} ${p.ghen||0}</span>`,`<span class="ef n kbk-pair">${kitGloss("Oán")} ${p.oan||0}</span>`]])}
   else if(S.emp&&p===S.emp){if(S.sung-s.sung)chips.push(["Sủng",S.sung-s.sung])}
   else if(S.thO&&p===S.thO&&s.th!=null&&S.th-s.th)chips.push(["Thái hậu",S.th-s.th]);
   return {kind:"person",who:p,chips,rows,blocks:[{facts:dedup(x.F)}],n:x.F.length}});
  const rk=p=>S.emp&&p.who===S.emp?0:(S.thO&&p.who===S.thO)||p.who.kind==="th"?1:2;
  persons.sort((a,b)=>rk(a)-rk(b)||b.n-a.n);
  return {D,rank,kids,pay,me:dedup(me),world:dedup(world),persons}}
+
+/* event art (j89 evArtOf) for each fact of the week: the sentence picks an event id, else the page's context */
+const KBK_EVRE=[[/thị tẩm|lật thẻ|ngự giá|ngủ lại/i,"sys:thi-tam"],[/có thai|mang thai|hoài thai|có hỷ|hỉ mạch/i,"sys:co-thai"],
+ [/hạ sinh|sinh hạ|sinh được|chào đời/i,"sys:sinh-con"],[/băng hà/i,"sys:bang-ha"],[/qua đời|tạ thế|đã chết|bị giết|hoăng|mất mạng/i,"sys:qua-doi"],
+ [/sẩy thai|xạ hương|hại thai/i,"plot:musk"],[/đầu độc|trúng độc|thuốc độc|bỏ độc/i,"plot:poison"],[/vu oan|vu cáo|bùa|hình nhân|cáo giác|tố giác/i,"plot:frame"],
+ [/hối lộ|đút lót|uy hiếp|tống tiền/i,"plot:bribe"],[/tin đồn|đồn đại|lời đồn|đồn rằng|bàn tán/i,"plot:rumor"],[/lãnh cung/i,"sys:lanh-cung"],
+ [/giáng|trượng|cấm túc|bị phạt|trừng phạt|quỳ/i,"sys:giang-chuc"],[/tấn phong|được thăng|thăng làm|phong làm|sắc phong|lập hậu|tranh ghế/i,"sys:tan-phong"],
+ [/tuyển tú|tú nữ/i,"sys:tuyen-tu"],[/dịch bệnh|ôn dịch/i,"arc:s_dich"],[/ốm|bệnh|thái y|cảm hàn|phát sốt|thuốc/i,"sys:om"],[/cháy|hỏa hoạn/i,"j7:fire"],
+ [/được mùa|kho lúa/i,"qs:mua"],[/lũ|lụt/i,"qs:lut"],[/hạn hán|cầu mưa/i,"qs:han"],[/tham ô|tham quan|tham nhũng/i,"qs:tham"],
+ [/thắng trận|đại thắng|khải hoàn/i,"news:thang-tran"],[/giặc|biên ải|thua trận|binh đao|chiến sự/i,"qs:giac-thua"],[/sứ thần|triều cống|ngoại bang|cống phẩm/i,"qs:cong"],
+ [/hòa thân/i,"news:hoa-than"],[/yến|tiệc|mừng thọ/i,"qs:hoi"],[/thỉnh an|vấn an/i,"j24:thai-hau-trieu"],[/thư nhà|gia thư|nhà gửi|người nhà/i,"j7:letterhome"],
+ [/hoàng tử|công chúa|hoàng tự|(^|\s)con(\s|$|[,.])/i,"e68:kidGift"],[/liên thủ|kết minh|mật ước|đồng minh|kết giao/i,"j7:pact"],
+ [/dò la|tai mắt|rình|nghe lén|khả nghi|mật báo/i,"j7:eunuch"],[/cung nữ|thái giám|kẻ hầu|nô tỳ|ma ma|cung nhân/i,"j24:viec-ke-hau"],
+ [/tài nghệ|luyện|học|tấu đàn|gảy đàn|ngâm thơ|vẽ tranh|thêu|múa/i,"e68:musician"],[/lễ phật|chùa|cầu phúc|dâng hương|tế lễ/i,"e68:templeRite"],
+ [/ban thưởng|được thưởng|ân điển|đại xá|ân xá/i,"sys:dai-xa"],[/ghen|tranh chấp|cãi|khiêu khích|mỉa|chèn ép|lườm/i,"j7:rvquarrel"],
+ [/đến thăm|ghé thăm|tới chơi|trò chuyện|uống trà|tặng|biếu|quà/i,"j24:co-nguoi-den"],[/tuyết|mưa|nắng|gió|bão|sen nở/i,"e68:snowDay"]];
+function kbkEvId(text,ctx){const t=String(text||"");for(const [re,id] of KBK_EVRE)if(re.test(t))return id;
+ if(ctx==="world")return "qs:yen";if(ctx==="emp")return /giận|phiền|trách/i.test(t)?"sys:mood-gian":"sys:mood-vui";if(ctx==="th")return "j24:thai-hau-trieu";
+ return "j24:co-nguoi-den"}
+function kbkArt(facts,ctx){if(typeof evArtOf!=="function")return facts;let w=0;try{w=wk()}catch(e){}
+ return (facts||[]).map((f,i)=>{if(!f||typeof f!=="object")return f;try{const id=kbkEvId(kpPlain(f.text||""),ctx);const a=evArtOf(id,w+":"+i);
+  if(a){f.art=a;f.artT=(typeof evArtTitle==="function"&&evArtTitle(id))||""}}catch(e){}return f})}
 
 function wkBookPages(){const d=wkBookData();const date=kitDate(S.month,S.year,S.tuan);const sea=`${SEASON[S.month-1]}${S.wx?" · "+S.wx.n:""}`;
  const P=[{kind:"cover",title:"Sổ tuần",sub:date,note:sea}];
@@ -200,11 +226,12 @@ function wkBookPages(){const d=wkBookData();const date=kitDate(S.month,S.year,S.
  const mine=[];if(d.rank)mine.push({text:`<b class="g">${d.rank}</b>`,who:S});if(d.kids>0)mine.push({text:`Thêm ${d.kids} con.`,who:S});if(mine.length)b.push({facts:mine});
  b.push({h:kitGloss("Bổng lộc")});b.push(d.pay?{rows:[["Đã lĩnh",kpChipify(d.pay),"t"]]}:{rows:[["Kỳ tới",`còn ${3-(S.tuan||0)} tuần`,"n"]]});
  if(d.persons.length){b.push({h:"Sổ này ghi"});b.push(`<div class="kbk-toc">${d.persons.map(p=>`<span class="kbk-tc">${kitFaceH(p.who,"xs")}${kitName(p.who,{cap:true})}</span>`).join("")}</div>`)}
- if(d.me.length){b.push({h:"Việc của ngươi"});b.push({facts:d.me.map(f=>Object.assign(f,{who:S}))})}
+ if(d.me.length){b.push({h:"Việc của ngươi"});b.push({facts:kbkArt(d.me.map(f=>Object.assign(f,{who:S})),"me")})}
  if(!d.me.length&&!d.persons.length&&!d.world.length&&!mine.length)b.push({facts:[{text:"Một tuần yên ả.",kind:"world",auto:false}]});
  P.push({kind:"text",title:"Tổng lược",sub:"Những điều chính của tuần qua",blocks:b});
+ d.persons.forEach(p=>{const ctx=S.emp&&p.who===S.emp?"emp":(S.thO&&p.who===S.thO)||(p.who&&p.who.kind==="th")?"th":"p";(p.blocks||[]).forEach(b=>{if(b.facts)b.facts=kbkArt(b.facts,ctx)})});
  P.push(...d.persons);
- if(d.world.length)P.push({kind:"text",title:"Triều đình · thiên hạ",blocks:[{facts:d.world.map(f=>Object.assign(f,{kind:"world"}))}]});
+ if(d.world.length)P.push({kind:"text",title:"Triều đình · thiên hạ",blocks:[{facts:kbkArt(d.world.map(f=>Object.assign(f,{kind:"world"})),"world")}]});
  const nf=d.me.length+d.world.length+d.persons.reduce((a,p)=>a+p.n,0);
  P.push({kind:"end",title:"Tuần này đến đây là hết.",seal:["HẾT","TUẦN"],note:nf?`Sổ ghi ${nf} việc${d.persons.length?`, ${d.persons.length} người`:""}.`:"Một tuần yên ả.",btn:"Vào ngày mới",btnId:"dawn-go"});
  return {pages:P,head:`Sổ tuần · ${date}`}}
@@ -212,10 +239,10 @@ function wkBookPages(){const d=wkBookData();const date=kitDate(S.month,S.year,S.
 /* ---------- the dawn: the book replaces the week panel; "Vào ngày mới" closes it and the day goes on ---------- */
 (function(){if(typeof dawn!=="function")return;const old=dawn;
  dawn=function(){let built;try{built=wkBookPages()}catch(e){console.error(e);return old.apply(this,arguments)}
-  S.wkSnap=wkSnap();let w=$("dawn");if(!w){w=document.createElement("div");w.id="dawn";w.className="dawn";document.body.appendChild(w)}
+  S.wkSnap=wkSnap();try{const rt=$("rtoast");if(rt){rt.classList.remove("on");clearTimeout(window.__rtT)}document.body.classList.add("kbk-open")}catch(e){}let w=$("dawn");if(!w){w=document.createElement("div");w.id="dawn";w.className="dawn";document.body.appendChild(w)}
   w.classList.add("kbkdawn");w.onclick=null;w.innerHTML=`<div class="dsky"><i class="lan l1"></i><i class="lan l2"></i><i class="lan l3"></i><i class="sun"></i></div>`;
   w.hidden=false;w.classList.toggle("rm",reducedMotion());void w.offsetWidth;w.classList.add("on");
-  const tok=w.__kbkTok={};const bk=kitBook({pages:built.pages,head:built.head,host:w,label:"Sổ tuần",onClose:()=>{if(w.__kbkTok!==tok)return;w.classList.remove("on");setTimeout(()=>{if(w.__kbkTok!==tok)return;w.hidden=true;w.innerHTML=""},reducedMotion()?0:350)}});
+  const tok=w.__kbkTok={};const bk=kitBook({pages:built.pages,head:built.head,host:w,label:"Sổ tuần",onClose:()=>{if(w.__kbkTok!==tok)return;document.body.classList.remove("kbk-open");w.classList.remove("on");setTimeout(()=>{if(w.__kbkTok!==tok)return;w.hidden=true;w.innerHTML=""},reducedMotion()?0:350)}});
   window.__kbk=bk;setTimeout(bell,reducedMotion()?0:1400);try{w.querySelector(".kbk-next").focus({preventScroll:true})}catch(e){}}})();
 
 (function(){const st=document.createElement("style");st.id="kbk-css";st.textContent=`
@@ -318,6 +345,15 @@ function wkBookPages(){const d=wkBookData();const date=kitDate(S.month,S.year,S.
 .kbk-pname{font-family:var(--display);font-size:1.4em;line-height:1.25;margin:.1em 0 .25em;padding-bottom:.25em;border-bottom:2px solid #9a2c1c55}
 .kbk-pname .kname{font-weight:700}
 .kbk-pchips .kchips{margin:.1em 0 .35em}
+/* "Hiện nay": a label never parts from its number */
+.kbk-pg .krv>.kbk-pair{white-space:nowrap}
+.kbk.narrow .kbk-flow>.kb:first-child{margin:0 0 .35em;padding-bottom:.3em;border-bottom:1px dashed #9a2c1c33}
+/* event art beside each fact (j89 evArtOf): a small print pasted in the ledger */
+.kbk-ev{display:grid;grid-template-columns:minmax(0,1fr) 3em;gap:.55em;align-items:start;border-bottom:1px dashed #9a2c1c33}
+.kbk-ev>.kfacts .kfact{border-bottom:0}
+.kbk-evart{display:block;width:3em;height:4em;object-fit:cover;margin:.3em 0;padding:2px;background:#fffaf0;border:1px solid #9a2c1c88;box-shadow:0 1px 3px #3a210f55;transform:rotate(1.2deg)}
+.kbk-ev:nth-child(even) .kbk-evart{transform:rotate(-1deg)}
+body.kbk-open #rtoast,body:has(#dawn.kbkdawn:not([hidden])) #rtoast{opacity:0!important;visibility:hidden!important;pointer-events:none!important}
 /* cover: indigo cloth, thread binding, title label */
 .kbk-pg.k-cover{background:repeating-linear-gradient(45deg,#ffffff08 0 2px,transparent 2px 5px),repeating-linear-gradient(-45deg,#00000014 0 2px,transparent 2px 5px),radial-gradient(ellipse at 40% 30%,#34405f,var(--cloth2));box-shadow:inset 0 0 50px #0008;border-radius:0 5px 5px 0}
 .kbk.art-cover .kbk-pg.k-cover{background:url(${KBK_ART.cover}) center/100% 100% no-repeat}
