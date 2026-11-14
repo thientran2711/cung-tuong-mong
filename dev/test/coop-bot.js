@@ -28,21 +28,22 @@ const STEP=()=>{const c=__co();if(c.frozen||c.waiting)return'coop';if(typeof S==
   const m=document.getElementById('modal');if(m&&!m.hidden){const acc=[...m.querySelectorAll('button:not([disabled])')].find(x=>x.offsetParent!==null&&/Nhận thân phận|Nhập cung|Tiến cung|Vào cung/.test(x.textContent));if(acc){acc.click();return'accept'}const o=[...m.querySelectorAll('.opts button:not([disabled])')];const b=o.length?o[Math.floor(Math.random()*o.length)]:m.querySelector('#mr button:not([disabled])');if(b){b.click();return'modal'}return'stuck'}
   if(window.__actsThis==null)window.__actsThis=0;
   if(window.__actsThis<3&&Math.random()<.8){const cards=[...document.querySelectorAll('#panel button.card:not([disabled]),#panel button.kcard:not([disabled])')].filter(x=>x.offsetParent!==null);
-    if(cards.length){window.__actsThis++;cards[Math.floor(Math.random()*cards.length)].click();return'act'}}
-  const n=document.getElementById('next');if(n&&!n.disabled){window.__actsThis=0;n.click();return'next'}return'idle'};
+    if(cards.length){window.__actsThis++;cards[Math.floor(Math.random()*cards.length)].click();return'act'}
+    const t=[...document.querySelectorAll('[data-tab="act"]')].find(x=>x.offsetParent!==null);if(t&&!window.__tabTried){window.__tabTried=1;t.click();return'tab'}}
+  const n=document.getElementById('next');if(n&&!n.disabled){window.__actsThis=0;window.__tabTried=0;n.click();return'next'}return'idle'};
 /* the world as this client sees it (only shared truth, no personal data) */
 const WORLD=()=>{const kidsOf=v=>(v.kids||[]).map(k=>k.name+(k.alive?'':'†')).join('/');
   return{date:[S.year,S.month,S.tuan],emp:[S.emp.era,S.emp.age,(S.emp.traits||[]).join('+'),!!S.emp.dead],th:!!S.thDead,
    R:rivals.filter(v=>!v.coop).map(v=>[v.id,v.name,v.queen?7:v.rank,v.alive?1:0,v.out?1:0,kidsOf(v)].join(':')).sort(),
    friend:(rivals.find(v=>v.coop)||null)&&(({name,rank,alive,queen})=>({name,rank:queen?7:rank,alive}))(rivals.find(v=>v.coop)),
-   me:{name:S.name,rank:S.rank,dead:!!S.dead,srv:!!S.srv}}};
+   me:{name:S.name,rank:S.rank,dead:!!S.dead,srv:!!S.srv},where:Object.entries(S.where||{}).filter(([k])=>!(+k>=900)).map(([k,v])=>k+'@'+v).sort().join(),buoi:S.buoi||0}};
 
 (async()=>{const b=await chromium.launch();const A=await mk(b,'A',[755,1000]),B=await mk(b,'B',[1180,820]);
  await A.p.goto(BASE);await A.p.waitForTimeout(3000);await tapText(A,/^Chơi cùng bạn/);await A.p.waitForTimeout(500);await tapText(A,/^Mời bạn/);
  await until(A,()=>__co().code&&__co().seat==='a');const code=(await A.p.evaluate(()=>__co())).code;L('room '+code);
  await B.p.goto(BASE+'?room='+code);await B.p.waitForTimeout(3000);await tapText(B,/^Vào phòng/,4000);
  if(!await until(B,()=>__co().seat==='b'&&!__co().frozen,null,40000))L('FAIL B could not join');
- const div=[];let weeks=0;const t0=Date.now();
+ const div=[];let weeks=0,whereDiff=0;const t0=Date.now();
  for(let w=0;w<WEEKS;w++){const wk=(await A.p.evaluate(()=>__co().week));
   const done={A:false,B:false};const t=Date.now();
   while(Date.now()-t<120000){for(const o of [A,B]){const r=await o.p.evaluate(STEP).catch(e=>'err:'+e.message);if(r==='act')o.acts++;if(/^reborn/.test(r)){o.deaths++;L(`week ${w}: ${o.name} died → ${r}`)}}
@@ -55,10 +56,11 @@ const WORLD=()=>{const kidsOf=v=>(v.kids||[]).map(k=>k.name+(k.alive?'':'†')).
   const ra=new Set(a.R),rc=new Set(c.R);const onlyA=a.R.filter(x=>!rc.has(x)),onlyB=c.R.filter(x=>!ra.has(x));if(onlyA.length||onlyB.length)d.push(`consorts A-only [${onlyA}] B-only [${onlyB}]`);
   if(!a.friend||a.friend.name!==c.me.name)d.push(`A sees friend ${a.friend&&a.friend.name}, B is ${c.me.name}`);if(!c.friend||c.friend.name!==a.me.name)d.push(`B sees friend ${c.friend&&c.friend.name}, A is ${a.me.name}`);
   if(a.friend&&a.friend.rank!==c.me.rank)d.push(`A sees B rank ${a.friend.rank}, B has ${c.me.rank}`);if(c.friend&&c.friend.rank!==a.me.rank)d.push(`B sees A rank ${c.friend.rank}, A has ${a.me.rank}`);
+  if(a.where!==c.where)whereDiff++;
   if(d.length){div.push([w+1,d]);L(`week ${w+1} DIVERGE: ${d.join(' | ')}`)}
   if(w%4===3)L(`week ${w+1} ok-ish · date ${a.date} · A ${a.me.name} r${a.me.rank} · B ${c.me.name} r${c.me.rank} · consorts ${a.R.length}`);
   if(w===0||w===25||w===WEEKS-1){await A.p.screenshot({path:`${OUT}/w${w+1}-A-fold.png`});await B.p.screenshot({path:`${OUT}/w${w+1}-B-ipad.png`})}}
  const mins=((Date.now()-t0)/60000).toFixed(1);
- L(`\nweeks played ${weeks}/${WEEKS} in ${mins} min · acts A ${A.acts} B ${B.acts} · deaths A ${A.deaths} B ${B.deaths} · weeks with divergence ${div.length}`);
+ L(`\nweeks played ${weeks}/${WEEKS} in ${mins} min · acts A ${A.acts} B ${B.acts} · deaths A ${A.deaths} B ${B.deaths} · weeks with divergence ${div.length} · weeks where NPC places differ ${whereDiff} (phase 2: per-buổi sync makes this 0)`);
  L(`page errors A ${A.errs.length} B ${B.errs.length}`);[...new Set([...A.errs,...B.errs])].slice(0,10).forEach(e=>L('  err: '+e.slice(0,200)));
  fs.writeFileSync(OUT+'/bot-log.txt',log.join('\n')+'\n');await b.close();process.exit(div.length||weeks<WEEKS?1:0)})().catch(e=>{console.error(e);process.exit(2)});
