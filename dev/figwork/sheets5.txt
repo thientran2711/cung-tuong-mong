@@ -155,3 +155,8 @@ N-c05-t4 dtyjYyrXSL
 N-c06-t4 s7ocq8Rl8e
 N-c07-t4 5jVZapZKxe
 N-c08-t4 If6SVZ7tvE
+# spec5 ladder+poses (aF2OosJfSh = c01 t4 ladder test, old pose, unused)
+N-c01-t4 WDsH2flcXe pose
+N-c07-t4 aF2O8SyfSh pose
+N-c19-t4 gOITrYASXO pose
+N-c28-t4 jUXY5G9LD0 pose

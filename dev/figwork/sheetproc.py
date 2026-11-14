@@ -12,7 +12,29 @@ def save_webp(im,path,maxkb=250):
         b=io.BytesIO(); im.save(b,"WEBP",quality=q,method=4)
         if b.tell()<=maxkb*1024: break
     open(path,"wb").write(b.getvalue()); return b.tell()
+def clean(im):
+    # drop small alpha islands (e.g. a neighbour's fan tip after a min-cut split)
+    from collections import deque
+    a=np.asarray(im.split()[3]); h,w=a.shape; f=4
+    m=(a[:h//f*f,:w//f*f].reshape(h//f,f,w//f,f).max(axis=(1,3))>40)
+    lab=np.zeros(m.shape,int); sizes=[0]; H,Wd=m.shape
+    for y0,x0 in zip(*np.nonzero(m)):
+        if lab[y0,x0]: continue
+        k=len(sizes); lab[y0,x0]=k; q=deque([(y0,x0)]); n=0
+        while q:
+            y,x=q.popleft(); n+=1
+            for dy in (-1,0,1):
+                for dx in (-1,0,1):
+                    yy,xx=y+dy,x+dx
+                    if 0<=yy<H and 0<=xx<Wd and m[yy,xx] and not lab[yy,xx]: lab[yy,xx]=k; q.append((yy,xx))
+        sizes.append(n)
+    if len(sizes)<=2: return im
+    big=max(sizes); drop=[k for k in range(1,len(sizes)) if sizes[k]<big*0.02]
+    if not drop: return im
+    dm=np.isin(lab,drop).repeat(f,0).repeat(f,1); A=np.array(im); A[:dm.shape[0],:dm.shape[1],3][dm]=0
+    return Image.fromarray(A)
 def finish(im,name,rec):
+    im=clean(im)
     a=im.split()[3].point(lambda v:255 if v>12 else 0); bb=a.getbbox(); im=im.crop(bb); w,h=im.size
     A=np.asarray(im.split()[3]); xs=n=0
     for y in range(int(h*0.03),int(h*0.13),2):
@@ -36,7 +58,14 @@ def split(im,n):
     while len(runs)>n:
         gaps=[runs[i+1][0]-runs[i][1] for i in range(len(runs)-1)]; i=gaps.index(min(gaps))
         runs[i]=[runs[i][0],runs[i+1][1]]; del runs[i+1]
-    if len(runs)<n: return None
+    if len(runs)<n:
+        # fallback: cut at the emptiest column near each expected boundary
+        c=np.array(col,dtype=float); cuts=[]
+        for k in range(1,n):
+            e=int(sw*k/n); r=int(sw*0.08); lo,hi=max(1,e-r),min(sw-1,e+r)
+            cuts.append(lo+int(np.argmin(c[lo:hi])))
+        b=[0]+cuts+[sw]; print("mincut",cuts,[int(c[x]) for x in cuts])
+        return [(b[i]*4,b[i+1]*4) for i in range(n)]
     return [(r[0]*4,r[1]*4) for r in runs]
 only=set(sys.argv[2:]); bad=[]
 for line in open(sys.argv[1]):
