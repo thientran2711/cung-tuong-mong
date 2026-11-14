@@ -13,3 +13,8 @@ Kit owner (podium). Branch from origin/main + origin/review/minigames (j82). Mod
   1 reveal · 2 confetti (animation paused mid-burst) · 3 final · 4 screen 2 board · 5 she is 5th, stranger as Nhất · 6/7 Tranh ghế + screen 2 · 8 kid exam.
 
 KIT READY: podium
+- 11/14 owner: rays "giống hào quang Quan Âm" → removed. Now per-place soft stage light (beam from above, oval pool on the step, motes): gold / silver / copper-rose,
+  brighter by place; confetti + petals follow HER place in that place's colours (none when she is outside the top three); medal drawn above the light.
+  Tests: dev/test/podium-place.js (her place 1/2/3/5) + dev/test/podium.js at 755x1000@2 and 1180x820@2: PASS (pieces centred over her column, no rays,
+  no overflow/clipping, no errors, old save loads). Shots: dev/shots/podium/place-{1,2,3,5}-{755x1000_2,1180x820_2}.jpg
+KIT READY: podium (v2 lights)
