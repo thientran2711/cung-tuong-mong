@@ -1,7 +1,7 @@
 # cmp.py out.jpg cid tierA tierB ...  -> rows per (cid), cols = tiers x ages
 import sys
 from PIL import Image, ImageDraw
-O="/tmp/claude-0/-home-user-cung-tuong-mong/ed00be27-1e8d-5500-9afe-ce233b508a61/scratchpad/wt-art7/img"
+O="/tmp/claude-0/-home-user-cung-tuong-mong/ed00be27-1e8d-5500-9afe-ce233b508a61/scratchpad/wt-art8/img"
 out=sys.argv[1]; spec=sys.argv[2:]  # items like consort-c10:1,2  or player-look1:1,2
 import os
 TW,TH=int(os.environ.get("TW",150)),int(os.environ.get("TH",300)); AG=["a18","a26","a36","a51"]

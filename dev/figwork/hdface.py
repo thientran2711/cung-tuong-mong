@@ -1,7 +1,7 @@
 # hdface.py g1..g8 : full-face previews (top of head to chin) huadian_c03_face_t1..t8.jpg + a 4x2 overview
 import sys,json,subprocess,os
 from PIL import Image,ImageDraw
-db=json.load(open('urls.json')); S="../wt-art7/dev/figwork/sheets"; ims=[]
+db=json.load(open('urls.json')); S="../wt-art8/dev/figwork/sheets"; ims=[]
 for n,g in enumerate(sys.argv[1:],1):
     f=f"raw/{g}.png"
     if not os.path.exists(f): subprocess.run(["curl","-sS","-o",f,db[g]],check=True)

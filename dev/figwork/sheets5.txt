@@ -465,3 +465,21 @@ HD8v4 c03: t7 ksDzaEm16B, t8 p8JjA0Iehw
 HD8v5 c03 t8 tiny Do7xA3xpcl
 HD8 FINAL v6 c03 t1..t8: WDsbPVrcXe xSdWELCjfW SytDFPEUb8 XmPlAvpBfo jUXcugyLD0 LwB0C4gswO ksDzaEm16B 8aNUV51IrU (all gpt-2-6 edits of uploaded c03 t1 head 1lpnpLXr4r)
 HD8 FINAL (owner kept t1-t7 of 84a0b5e) t8 slender flat phoenix jUXcb0VLD0 (alt rgeYHWextc); rejected flat-big fHA4ocqCDY huROdnxvqL; v5 t5-t7 redo eIOLWykdqL 1lpnQdbr4r EbzNIWCuuO cancelled
+HD9 c03 owner 11/14: t8 85% Bh4gdXkoQR (edit of jUXcb0VLD0), t7 flat u5n6CuRQLD (edit of ksDzaEm16B), t6 compact ksDzKrd16B (edit of LwB0C4gswO)
+HD9 FINAL c03 t1..t8 (owner 11/14 later: t8 85%, t7 flat redo, t6 compact pearl): WDsbPVrcXe xSdWELCjfW SytDFPEUb8 XmPlAvpBfo jUXcugyLD0 ksDzKrd16B lJ8MSRegv9 Bh4gdXkoQR
+N-c01-t4 rgeWPCdxtc art8 calm+props
+N-c07-t4 Bh4SFWDoQR art8 calm+props
+N-c19-t4 dtyluWbXSL art8 calm+props
+N-c20-t4 1lpYyQhr4r art8 calm+props
+N-c21-t4 P3EIcW142C art8 calm+props
+N-c22-t4 O6foYWaynm art8 calm+props
+N-c23-t4 rgeW9ivxtc art8 calm+props
+N-c24-t4 fHA9LUJCDY art8 calm+props
+N-c26-t4 Bh4SqrsoQR art8 calm+props
+N-c27-t4 LwBTiK3swO art8 calm+props
+N-c28-t4 CqGNsmVEEy art8 calm+props
+N-c29-t4 cplKhnp0eP art8 calm+props (guqin cradled)
+N-c31-t4 If67KogtvE art8 calm+props
+N-c32-t4 79vXzwfJAL art8 calm+props
+HAIR-EDIT t4 art8: N-c20-t4 vQZPSEWa47 hair-edit of 1lpYyQhr4r; N-c07-t4 ksDn3sn16B hair-edit of Bh4SFWDoQR; N-c32-t4 TdS1FXxVNR hair-edit of 79vXzwfJAL; N-c23-t4 vQZPSHVa47 mole-edit of rgeW9ivxtc
+EDIT t4 art8: N-c16-t4 Do7jbjypcl eyes-open edit of 5jV2kEzKxe; N-c04-t4 1lpYRc4r4r mole/hair edit of Ebz4Cc8uuO

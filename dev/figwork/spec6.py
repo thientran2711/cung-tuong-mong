@@ -27,15 +27,16 @@ HL={1:"the simplest form: a single plain {col} dot or one simple painted stroke 
 3:"{mot} finely painted in {col} with added detail: a tiny contrasting centre (stamen) and fine petal veins or inner lines, still no gold",
 4:"{mot} painted in {col} with every edge outlined in a thin line of shimmering gold, the first touch of gold",
 5:"{mot} cut from thin gold leaf, layered with {col} paint inside the gold shape, gold and colour together",
-6:"{mot} of gold leaf with {col} inlay and ONE tiny seed pearl at its centre",
-7:"Imperial Noble Consort level: {mot} with petals of vivid glossy cinnabar-red enamel framed in intricate deep rich gold filigree with dark outlines, tiny seed pearls around the edge and ONE small ruby at its centre, clearly richer than the lower ranks yet small",
+6:"{mot} of paper-thin gold leaf pressed flat on the skin with {col} paint inside, and ONE TINY flat pearly dot at its centre (flush with the skin, not a raised bead); compact",
+7:"Imperial Noble Consort level: {mot} of paper-thin gold leaf laid FLAT on the skin like make-up, filled with vivid glossy cinnabar-red enamel paint, intricate fine gold filigree tracery inside it and two tiny flat gold curls hugging it, ONE very tiny ruby-red glint at its centre; completely flat, NO raised gems, NO pearls, NO beads, NO metal setting, compact",
 8:"Empress level, the most splendid of all: a slender stylised phoenix of paper-thin gold leaf laid flat on the skin, body and tail curving in a compact S-shape around a small vivid cinnabar-red {mot}, feathers inlaid with brilliant kingfisher blue, fine gold outlines; flat and delicate, no round frame, no ring of pearls, nothing dangling"}
+# owner 11/14 (latest, art8): raised/jewelled styles must stay SMALL, flat painted gold-leaf styles (t7, t8) may be a touch larger; t8 = 85% of the aeb6c1b sample; t7 flat redo
 # owner 11/14 (later): size grows a LITTLE per rank, ~+5% each: t1 = c03 t1 cinnabar flower size, t8 ~1.4x t1; never big
 HS={1:"tiny, fingertip-sized (like a classic small red flower mark between the brows)",2:"tiny, fingertip-sized",
 3:"small, fingertip-sized, a hair larger than the lowest ranks",4:"small, a touch larger than the lowest ranks",
 5:"small, slightly larger than the lowest ranks",6:"small, slightly larger than the lowest ranks",
-7:"compact, a little larger than the lower ranks (about one third larger than the smallest)",
-8:"the largest of all ranks yet still compact (about two fifths larger than the smallest), sitting neatly between the brows"}
+7:"compact, a little larger than the lower ranks (about one quarter larger than the smallest), slightly smaller than the Empress mark",
+8:"the largest of all ranks yet still compact (about one fifth to one quarter larger than the smallest; a flat painted mark may be a touch larger than a jewelled one), sitting neatly between the brows"}
 def hdesc(t,mot,col):
     return HL[t].format(mot=mot,col=col)+"; size: "+HS[t]+"; it grows only a little with rank, NEVER big, never covering more than a small part of the forehead, never touching or spreading onto the brows or cheeks"
 NOMOLE="Her face has NO mole and NO beauty mark: any small dark dot on the identity reference face must NOT be drawn; flawless smooth clear skin on every figure."
@@ -67,19 +68,20 @@ L=["# Hoa điền (huadian) — bảng kiểu cho phi tần c01–c32 (art7, lu�
 "LUẬT CỠ (sếp nới, 11/14): t1 = cỡ hoa son c03 t1; mỗi bậc to thêm khoảng 5%; t8 (phượng/mẫu đơn Hoàng hậu) to nhất ≈ 1.4 lần t1. Không bao giờ to đùng; nằm gọn giữa hai mày; bậc cao sang hơn chủ yếu nhờ chất liệu, độ cầu kỳ, số chi tiết;",
 "không bao giờ che trán, không lan xuống mày/má. Chỉ phi tần có hoa điền (không cung nữ, ma ma...). Lãnh cung (tcold): KHÔNG hoa điền.",
 "Prompt: spec6.py HL[t] (chất liệu, 8 câu) + HS[t] (cỡ, 8 câu).",
+"LUẬT CỠ MỚI NHẤT (sếp, 11/14 art8): kiểu ĐÍNH NGỌC NỔI KHỐI thì phải NHỎ GỌN (sếp chê t7 cũ có hạt ngọc nổi là \"xấu, ghê, to quá\"); kiểu VẼ/DÁT PHẲNG trên da như t8 thì được to hơn một chút. t8 = 85% cỡ mẫu aeb6c1b (≈1.2 lần t1); t7 dát phẳng, nhỏ hơn t8 một chút. Không dùng hạt ngọc nổi ở bất kỳ bậc nào; ngọc trai t6 và hồng ngọc t7 chỉ là một điểm nhỏ xíu phẳng sát da.",
 "Không nốt ruồi, không beauty mark trên mặt (mọi spec). Prompt: spec6.py (khối 'HUADIAN:'), chạy sau spec5.py.",
 "Ghi chú: các lineup t1 cũ c03, c11, c19, c32 đã có chấm son đỏ giữa mày (giữ màu son đỏ cho bốn người này).","",
 "Kích thước gốc (t1): cỡ hoa son giữa mày của c03 t1 (img/por-consort-c03-t1-a18.webp), rõ trên chân dung; các bậc trên to dần ~5%/bậc tới ≈1.4 lần ở t8; không lan sang chân mày, không phủ quá nửa trán. Áp dụng cho cả HUADIAN_C.md (thợ Part C).","",
-"## 8 nấc theo bậc (mỗi bậc một nấc riêng, KHÔNG gộp; cỡ to dần ~5%/bậc, t8 ≈ 1.4 lần t1)",
+"## 8 nấc theo bậc (mỗi bậc một nấc riêng, KHÔNG gộp; cỡ to dần nhẹ, t8 ≈ 1.2 lần t1)",
 "- t1: một chấm hoặc nét son đơn gợi hình hoạ tiết, không chi tiết.",
 "- t2: hoạ tiết vẽ son, hình rõ ràng, không viền, không vàng.",
 "- t3: son nét kỹ, thêm nhụy (tâm khác màu) và gân/nét trong; chưa có vàng.",
 "- t4: son viền nhũ vàng mảnh (lần đầu có vàng).",
 "- t5: hoạ tiết cắt bằng vàng lá, lồng son bên trong.",
-"- t6: vàng lá + son, điểm MỘT hạt ngọc trai nhỏ ở giữa.",
-"- t7 (Hoàng quý phi): vàng chạm filigree tinh xảo, đối xứng, ngọc trai nhỏ + MỘT điểm đá đỏ; lộng lẫy mà vẫn nhỏ.",
-"- t8 (Hoàng hậu): phượng cách điệu MẢNH bằng vàng lá mỏng sát da, thân và đuôi uốn chữ S ôm hoa son nhỏ (hoạ tiết riêng), khảm thuý lam; không khung tròn, không vòng trai; cỡ ≈1.4 lần t1. Mọi hoa điền là son VẼ trên da / vàng lá dát mỏng, không phải trâm cài hay huy hiệu.",
-"Mẫu (sếp duyệt t1–t7, t8 làm lại): dev/figwork/sheets/huadian_c03_face_t1..t8.jpg (toàn mặt), huadian_c03_face_all.jpg, huadian_c03_t1..t8.jpg (cận). Tất cả là gpt-2-6 edit, không ghép bằng code.","",
+"- t6: vàng lá dát phẳng + son, gọn hơn; giữa có MỘT điểm ngọc trai NHỎ XÍU phẳng sát da (không phải hạt nổi).",
+"- t7 (Hoàng quý phi): DÁT PHẲNG như t8: vàng lá mỏng + men son đỏ tươi, hoa (hoạ tiết riêng) có nét filigree vàng mảnh trên cánh, hai cuộn vàng nhỏ ôm hai bên, MỘT điểm hồng ngọc nhỏ xíu ở tâm; KHÔNG hạt ngọc nổi, không vòng trai; cỡ hơi nhỏ hơn t8.",
+"- t8 (Hoàng hậu): phượng cách điệu MẢNH bằng vàng lá mỏng sát da, thân và đuôi uốn chữ S ôm hoa son nhỏ (hoạ tiết riêng), khảm thuý lam; không khung tròn, không vòng trai; cỡ ≈1.2 lần t1 (85% mẫu cũ). Mọi hoa điền là son VẼ trên da / vàng lá dát mỏng, không phải trâm cài hay huy hiệu.",
+"Mẫu (sếp duyệt t1–t5; t6 thu gọn, t7 dát phẳng làm lại, t8 thu 85% — art8, chờ sếp xem): dev/figwork/sheets/huadian_c03_face_t1..t8.jpg (toàn mặt), huadian_c03_face_all.jpg, huadian_c03_t1..t8.jpg (cận). Tất cả là gpt-2-6 edit, không ghép bằng code.","",
 "| ID | Hoạ tiết riêng (giữ suốt đời) | Màu son bậc thấp | Tranh t1 hiện có |","|---|---|---|---|"]
 T1={"c03":"có: chấm son đỏ dạng hoa nhỏ","c11":"có: chấm son đỏ dạng hoa nhỏ","c19":"có: chấm son đỏ dạng hoa nhỏ","c32":"có: chấm son đỏ dạng hoa nhỏ"}
 for c in sorted(HD):

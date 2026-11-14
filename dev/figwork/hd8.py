@@ -1,7 +1,7 @@
 # hd8.py gen1..gen8 : save huadian_c03_t1..t8.jpg (close-up 1200px) + side-by-side zoom of the brow area (2 rows x 4)
 import sys,json,subprocess,os
 from PIL import Image,ImageDraw
-db=json.load(open('urls.json')); G=sys.argv[1:]; S="../wt-art7/dev/figwork/sheets"
+db=json.load(open('urls.json')); G=sys.argv[1:]; S="../wt-art8/dev/figwork/sheets"
 ims=[]
 for n,g in enumerate(G,1):
     f=f"raw/{g}.png"

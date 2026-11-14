@@ -1,5 +1,33 @@
 # Art progress (art worker, 11/14/2026)
 
+## CURRENT STATE (art worker #8, newest first — read this first)
+- WORKTREE/PUBLISH: scratchpad/figwork (work copy, copied from dev/figwork) + worktree scratchpad/wt-art8 (branch art8). Scripts sed'ed
+  wt-art7 -> wt-art8. Next worker: `sed -i 's/wt-art8/wt-art9/g; s/origin art8:/origin art9:/'` on bigsheet.py cmp.py fixalpha.py idsheet.py
+  sheet.py sheetproc.py tiersheet.py heads.py porsheet.py pub3.sh (and recreate the worktree). Local cv2.py shadows OpenCV: always run
+  porcrop/cutcheck/demole with `python3 -I`. pip install "opencv-python-headless==4.10.0.84".
+- CUTOUT FIX (batch 1): cutcheck found 99 consort figs >= 8. Two causes: (a) sheer gauze rendered semi-transparent (t1-t6 lilac/sheer
+  lineups) -> `mm_fa.py` (= fixalpha core: partial alpha inside the silhouette composited over parchment, made opaque) brings them to ~0-2;
+  (b) t8 crown pearl curtains / train with ghost halos -> single-figure re-matte: `mm.py crop _mm_t1.txt` crops each figure from the raw
+  generation, uploaded in ONE batch (creations_request_upload count=99 + curl PUT + creations_finalize_upload batch), images_remove_background
+  per crop (3 cr), `mm_harvest.py` pairs source->bg ids from the transcript, `mm.py fin name bg ...` pastes back into raw-size canvas,
+  runs demole, writes mm/rm/. Per figure the lowest cutcheck of {orig, fa, rematte, fa(rematte)} was taken (mm_pick_art8.txt:
+  47 fa(rematte), 47 fa, 3 rematte, 2 orig). FIGURES records got "rematte": bgId and/or "solidSheer": true. Single-cut alone is WORSE on
+  sheer figures (it keeps the gauze transparent) - always compare.
+- PORCROP: ALL 1633 por-*.webp on the branch re-cut to 384x506 with porcrop.py (face-centred). Run it again on every new fig.
+- HUADIAN (owner 11/14 latest): t8 phoenix shrunk to 85% (Bh4gdXkoQR), t7 redone FLAT like t8 (gold leaf + red enamel plum, filigree,
+  two tiny gold curls, tiny ruby glint, no raised pearls; lJ8MSRegv9), t6 compact with a tiny flat pearl dot (ksDzKrd16B); t5 kept (flat,
+  no gems). Rule: raised/jewelled = SMALL; flat painted = may be a touch larger. spec6.py HL[6..8]/HS[7,8] + HUADIAN.md updated (only
+  t6-t8 jobs changed). Previews: dev/figwork/sheets/huadian_c03_face_t1..t8.jpg, huadian_c03_face_all.jpg, huadian_c03_8nac.jpg.
+- T4 CALM REDRAW DONE (c01 c07 c19 c20-c24 c26-c29 c31 c32): spec7.py (run after spec6) gives every figure a DIFFERENT prop + hand gesture
+  (a19 keeps her signature prop; a24/a32/a48 from a pool: scroll, lantern, teacup, brocade box, plum sprig, flute, handkerchief, round fan,
+  prayer beads, closed fan, touching a hairpin) + "EACH figure holds a DIFFERENT object". All 14 looked at: calm, distinct props, huadian
+  t4 visible. Hair-edits (dark hair, no moles) on c07 c20 c32; mole edit c23 (GPT kept the moles; demole removed most - c23 a19 still has a
+  faint cheek dot, fix with demole spot= if owner minds). c16-t4 edit: a19 eyes OPEN now (was eyes closed); c04-t4 edit: moles removed +
+  mm_fa (sheer sleeves). Gen ids: sheets5.txt / sheets4_bg.txt. Sheet: scratchpad/sheets/por_t4.jpg.
+- FOUND (step 4 of the plan): heads.py on t5 and t6 a51 -> almost ALL grey-haired (t5 c02-c32, t6 c01-c32) and many have cheek moles
+  and no huadian (drawn before those rules). Needs hair+mole(+huadian) edits on t5 all 32 and t6 c17-c32 (t6 c01-c16 get redrawn anyway).
+- Credits used by art8 so far: ~6.6k (balance 2.012M).
+
 ## CURRENT STATE (art worker #6, newest first — read this first)
 - WORKTREE/PUBLISH: same as art5 but wt-art6 / branch art6 (scripts in scratchpad/figwork already sed'ed to wt-art6; next worker:
   `sed -i 's/wt-art6/wt-art7/g; s/origin art6:/origin art7:/'` on bigsheet.py cmp.py fixalpha.py idsheet.py sheet.py sheetproc.py tiersheet.py heads.py pub3.sh).

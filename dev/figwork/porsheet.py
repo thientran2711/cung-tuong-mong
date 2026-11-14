@@ -1,7 +1,7 @@
 # porsheet.py out.jpg tier age cid... : 256px portraits grid with labels
 import sys
 from PIL import Image,ImageDraw
-O="/tmp/claude-0/-home-user-cung-tuong-mong/ed00be27-1e8d-5500-9afe-ce233b508a61/scratchpad/wt-art7/img"
+O="/tmp/claude-0/-home-user-cung-tuong-mong/ed00be27-1e8d-5500-9afe-ce233b508a61/scratchpad/wt-art8/img"
 out,t,a=sys.argv[1:4]; cs=sys.argv[4:]; cols=8; W=256
 s=Image.new('RGB',(cols*W,((len(cs)+cols-1)//cols)*(W+20)),'white'); d=ImageDraw.Draw(s)
 for k,c in enumerate(cs):
