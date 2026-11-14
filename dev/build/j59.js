@@ -68,8 +68,18 @@ function j59sel(st,tk,me){let pi=null;try{pi=typeof popIdx==="number"?popIdx:nul
  if(me){me.classList.toggle("j59sel",J59ME);if(!me.dataset.j59c){me.dataset.j59c=1;me.setAttribute("role","button");me.setAttribute("aria-label","Chọn chính mình");
   me.addEventListener("click",e=>{e.stopPropagation();J59ME=!J59ME;try{if(J59ME&&typeof popIdx!=="undefined"&&popIdx!=null){popIdx=null;popMsg="";renderStage();return}}catch(x){}j59sel(st,document.getElementById("tokens"),me)})}}
  else J59ME=false}
-function j59edge(tk){if(!tk)return;const m=tk.scrollWidth-tk.clientWidth;tk.classList.toggle("j59sl",tk.scrollLeft>4);tk.classList.toggle("j59se",tk.scrollLeft>=m-4)}
-function j59clear(tk){if(tk){tk.classList.remove("j59st","j59strip");["left","right","bottom","justifyContent","paddingLeft","paddingRight","paddingBottom"].forEach(k=>tk.style[k]="")}}
+const J59CUE=34;
+function j59edge(tk){if(!tk)return;const m=tk.scrollWidth-tk.clientWidth;tk.classList.toggle("j59sl",tk.scrollLeft>4);tk.classList.toggle("j59se",tk.scrollLeft>=m-4);j59cue(tk)}
+/* "more people" cue: count chips (kit .kchip) at the strip's two ends, in their own columns; tap scrolls the strip */
+function j59cue(tk){const st=document.getElementById("stage");if(!st)return;const on=tk.classList.contains("j59strip");const R=tk.getBoundingClientRect(),SR=st.getBoundingClientRect();
+ let nl=0,nr=0;if(on)tk.querySelectorAll(".tok").forEach(t=>{const q=t.getBoundingClientRect();const c=(q.left+q.right)/2;if(c<R.left)nl++;else if(c>R.right)nr++});
+ for(const [side,n] of [["l",nl],["r",nr]]){let c=st.querySelector(".j59more.j59m"+side);
+  if(!on||!n){if(c)c.remove();continue}
+  if(!c){c=document.createElement("button");c.type="button";c.className="kchip n j59more j59m"+side;st.appendChild(c);
+   c.addEventListener("click",e=>{e.stopPropagation();const t=document.getElementById("tokens");if(t)t.scrollBy({left:(side==="r"?1:-1)*t.clientWidth*.8,behavior:"smooth"})})}
+  const txt=side==="r"?`› ${n}`:`${n} ‹`;if(c.textContent!==txt)c.textContent=txt;c.setAttribute("aria-label",`Còn ${n} người ${side==="r"?"bên phải":"bên trái"}`);c.title=`Còn ${n} người nữa`;
+  c.style.top=(R.top-SR.top+R.height*.45).toFixed(0)+"px";c.style[side==="r"?"right":"left"]=(side==="r"?SR.right-R.right-J59CUE:R.left-SR.left-J59CUE).toFixed(0)+"px"}}
+function j59clear(tk){if(tk){tk.classList.remove("j59st","j59strip");j59cue(tk);["left","right","bottom","justifyContent","paddingLeft","paddingRight","paddingBottom"].forEach(k=>tk.style[k]="")}}
 function j59lay(force){const st=document.getElementById("stage");if(!st||!S)return;const tk=document.getElementById("tokens");const me=document.getElementById("mefig");
  st.classList.add("j59");st.classList.toggle("j59fx",!!(typeof OPT!=="undefined"&&OPT&&OPT.fxon));st.style.setProperty("--halo",haloColor());
  {const au=document.getElementById("j59aura");if(au)au.remove()}j59sel(st,tk,me);
@@ -85,10 +95,12 @@ function j59lay(force){const st=document.getElementById("stage");if(!st||!S)retu
  const boxW=(x,h)=>h*x.f/(x.b.b-x.b.t)*x.ar;const gap=6;
  /* compact stage (phones / narrow): one-line name chips tinted by the title colour */
  const cmp=sH<420||sW<520;st.classList.toggle("j59c",cmp);
+ /* strip figure size: full size on short (phone) stages; tall narrow stages (tablet landscape) at 70 % so more people show at once */
+ const SF=sH<480?1:.7;
  let fixed=0;if(tk)tk.querySelectorAll(".tok:not(.fig)").forEach(t=>fixed+=t.offsetWidth+gap);
  /* keep clear of the scene ribbon (top) and of the status column (right) when it reaches down into the figures */
  let topR=40,rightR=8;try{const t=document.getElementById("sc-t");if(t&&t.offsetHeight){const q=t.getBoundingClientRect();if(q.bottom>R.top)topR=Math.max(topR,q.bottom-R.top+6)}
-  const h2=document.getElementById("hud2");if(h2&&h2.offsetHeight){const q=h2.getBoundingClientRect();if(q.width>sW*.45)topR=Math.max(topR,q.bottom-R.top+6);else if(q.bottom-R.top>topR+20)rightR=Math.max(rightR,R.right-q.left+6)}}catch(e){}
+  const h2=document.getElementById("hud2");if(h2&&h2.offsetHeight&&!h2.classList.contains("khud")){const q=h2.getBoundingClientRect();if(q.bottom>R.top&&q.top<R.bottom){if(q.width>sW*.45)topR=Math.max(topR,q.bottom-R.top+6);else if(q.bottom-R.top>topR+20)rightR=Math.max(rightR,R.right-q.left+6)}}}catch(e){}
  topR=Math.min(topR,sH*.42);
  const meU=me?boxW({f:1,b:mb,ar:mar},1):0;const avail=sW-8-rightR;
  const total=(h,ov)=>fixed+it.reduce((a,x)=>a+boxW(x,h)+4+gap,0)+(me?meU*h*(1-ov)+gap:0);
@@ -97,14 +109,15 @@ function j59lay(force){const st=document.getElementById("stage");if(!st||!S)retu
     Too many people for the width: a horizontal strip that scrolls, so nobody shrinks to a doll or hides */
  const place=(rows)=>{const fo=Math.max(sH*.03,rows*(tagH+3)+6);const Hb=Math.min(sH*.66,(sH-fo-topR)/MANF);let H=Hb,ov=0,strip=false;
   if(total(H,0)>avail){ov=me?.3:0;let lo=sH*.1,hi=H;for(let k=0;k<22;k++){const m=(lo+hi)/2;if(total(m,ov)>avail)hi=m;else lo=m}H=lo;
-   if(H<Hb*.66&&it.length>1){strip=true;ov=0;H=Hb*.72}}return{fo,H,ov,strip}};
- let P=place(1);const tw=it.map(x=>x.tag?x.tag.offsetWidth:0);let crowd=!!force;for(let i=1;i<it.length;i++){if((tw[i]+tw[i-1])/2+4>(boxW(it[i],P.H)+boxW(it[i-1],P.H))/2+4+gap)crowd=true}
- if(crowd)P=place(2);const {fo,H,ov,strip}=P;
+   if(H<Hb*.66&&it.length>1){strip=true;ov=0;H=Hb*SF}}return{fo,H,ov,strip}};
+ let P=place(1);const tw=it.map(x=>x.tag?x.tag.offsetWidth:0);let crowd=!!force;
+ if(!P.strip){for(let i=1;i<it.length;i++){if((tw[i]+tw[i-1])/2+4>(boxW(it[i],P.H)+boxW(it[i-1],P.H))/2+4+gap)crowd=true}if(crowd){const P2=place(2);if(P2.strip){crowd=false;P=Object.assign(place(1),{strip:true,ov:0});P.H=Math.min(sH*.66,(sH-P.fo-topR)/MANF)*SF}else P=P2}}
+ const {fo,H,ov,strip}=P;it.forEach((x,i)=>{x.tok.style.minWidth=strip?(tw[i]+6)+"px":""});
  for(const x of it){x.im.style.setProperty("height",(H*x.f/(x.b.b-x.b.t)).toFixed(1)+"px","important");x.im.style.setProperty("width","auto","important");x.im.classList.add("j59sz");x.im.style.translate="";if(x.tag)x.tag.style.translate=""}
  let meH=0,meW=0;if(me){meH=H/(mb.b-mb.t);meW=meH*mar;me.style.setProperty("height",meH.toFixed(1)+"px","important");me.classList.add("j59sz")}
  const pad=strip?Math.ceil(Math.max(0,...tw)/2):0;
  if(tk){tk.classList.toggle("j59st",crowd);tk.classList.toggle("j59strip",strip);tk.style.setProperty("--j59m1",(tagH+6)+"px");
-  if(strip){const x0=8;if(me)me.style.left=(x0+meW/2).toFixed(1)+"px";tk.style.left=(me?x0+meW+gap:x0).toFixed(1)+"px";tk.style.right=rightR+"px";tk.style.bottom="0px";tk.style.paddingBottom=fo.toFixed(1)+"px";tk.style.paddingLeft=tk.style.paddingRight=pad+"px";tk.style.justifyContent="flex-start"}
+  if(strip){const x0=8;if(me)me.style.left=(x0+meW/2).toFixed(1)+"px";tk.style.left=((me?x0+meW+gap:x0)+J59CUE).toFixed(1)+"px";tk.style.right=(rightR+J59CUE)+"px";tk.style.bottom="0px";tk.style.paddingBottom=fo.toFixed(1)+"px";tk.style.paddingLeft=tk.style.paddingRight=pad+"px";tk.style.justifyContent="flex-start"}
   else{tk.style.bottom=fo.toFixed(1)+"px";tk.style.paddingBottom="";const x0=8+Math.max(0,(avail-total(H,ov))/2);
    if(me){me.style.left=(x0+meW/2).toFixed(1)+"px";tk.style.left=(x0+meW*(1-ov)+gap).toFixed(1)+"px"}else tk.style.left=x0.toFixed(1)+"px";
    tk.style.right="auto";tk.style.justifyContent="flex-start";tk.style.paddingLeft=tk.style.paddingRight="0px"}}
@@ -117,7 +130,7 @@ function j59lay(force){const st=document.getElementById("stage");if(!st||!S)retu
  if(me){me.style.bottom=(R.bottom-floorY-(1-mb.b)*meH).toFixed(1)+"px";
   const cx=parseFloat(me.style.left)||sW/2;
   if(mt){const g=mt.firstChild;mt.style.left=cx.toFixed(1)+"px";mt.style.top=(floorY-R.top+(crowd&&!strip?tagH+6:3)).toFixed(1)+"px";g.style.translate="";const t=g.getBoundingClientRect();const sh=t.left<R.left+4?R.left+4-t.left:t.right>R.right-4?R.right-4-t.right:0;if(sh)g.style.translate=sh.toFixed(1)+"px 0";mt.style.visibility=""}}
- if(!crowd){const tr=(mt&&me&&!strip?[mt.firstChild]:[]).concat(it.map(x=>x.tag)).filter(Boolean).map(g=>g.getBoundingClientRect());for(let i=1;i<tr.length;i++)if(tr[i].left<tr[i-1].right+4){j59lay(true);return}}}
+ if(!crowd&&!strip&&!force){const tr=(mt&&me&&!strip?[mt.firstChild]:[]).concat(it.map(x=>x.tag)).filter(Boolean).map(g=>g.getBoundingClientRect());for(let i=1;i<tr.length;i++)if(tr[i].left<tr[i-1].right+4){j59lay(true);return}}}
 /* KIT element "rank outline": thin edge glow in --halo (her rank colour) along her own figure only; never an aura; pulse only with Hiệu ứng hình and no reduced motion.
    KIT element "selection outline" (.j59sel): brighter warm-white edge glow #fff3c4 on the one person she has selected (popIdx) or on herself (tap her figure); replaces her rank outline while she is selected */
 const SG=(a,o)=>`drop-shadow(0 6px 6px #0005) drop-shadow(0 0 1.5px #fff3c4) drop-shadow(0 0 3px #fff3c4) drop-shadow(0 0 ${a}px rgba(255,236,170,${o}))`;
@@ -134,20 +147,16 @@ const css=document.createElement("style");css.textContent=`
 .game.maptab #popw.j59dock{display:none}
 .stage.j59 .tok.fig{max-width:none!important;flex:0 0 auto!important;min-width:0!important;position:relative;padding:0 2px}
 .stage.j59 .tok.fig .figimg.j59sz{max-height:none!important;max-width:none!important}
-.stage.j59 .tok.fig .tag{position:absolute;top:100%;left:50%;margin:3px 0 0 0;transform:translateX(-50%);width:max-content;max-width:9.5em;white-space:normal!important;display:block!important;-webkit-line-clamp:unset!important;overflow:visible!important;text-overflow:clip!important;text-align:center;z-index:2}
+.stage.j59 .tok.fig .tag{position:absolute;top:100%;left:50%;margin:3px 0 0 0;transform:translateX(-50%);width:max-content;text-align:center;z-index:2}
+.stage.j59 .j59more{position:absolute;z-index:3;transform:translateY(-50%);width:30px;min-height:40px;padding:4px 0;justify-content:center;cursor:pointer;font-weight:700;white-space:nowrap}
 .stage.j59 .tok.fig .tag{margin-top:3px!important}
 .stage.j59 .tokens.j59st .tok.fig:nth-child(even) .tag{margin-top:var(--j59m1,26px)!important}
-.stage.j59 .tok .tag{white-space:normal!important;display:block!important;-webkit-line-clamp:unset!important;overflow:visible!important;text-overflow:clip!important;max-width:9.5em;text-align:center}
 .stage.j59.j59c .tok .tag{font-size:.72rem;line-height:1.2;max-width:8em;padding:1px 6px;background:color-mix(in srgb,var(--tc,#5a6878) 20%,#fffaf0)!important;border-color:color-mix(in srgb,var(--tc,#5a6878) 70%,#fff)!important;color:var(--ink)}
 .stage.j59.j59c .tok .tag .j59t{display:none}
 .stage.j59.j59c .tok .tag .j59t.j59only,.stage.j59.j59c .tok .tag.j59u .j59t{display:inline;background:none;padding:0;margin:0;font-size:.72rem}
 .stage.j59.j59c .tok .tag.j59u .j59n{display:inline;margin-left:.3em}
 .stage.j59 .tokens.j59strip{overflow-x:auto;overflow-y:hidden;scrollbar-width:thin;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch}
 .stage.j59 .tokens.j59strip>.tok{flex:0 0 auto}
-.stage.j59 .tokens.j59strip{-webkit-mask-image:linear-gradient(90deg,#000 0,#000 calc(100% - 28px),transparent);mask-image:linear-gradient(90deg,#000 0,#000 calc(100% - 28px),transparent)}
-.stage.j59 .tokens.j59strip.j59sl{-webkit-mask-image:linear-gradient(90deg,transparent,#000 28px,#000 calc(100% - 28px),transparent);mask-image:linear-gradient(90deg,transparent,#000 28px,#000 calc(100% - 28px),transparent)}
-.stage.j59 .tokens.j59strip.j59sl.j59se{-webkit-mask-image:linear-gradient(90deg,transparent,#000 28px);mask-image:linear-gradient(90deg,transparent,#000 28px)}
-.stage.j59 .tokens.j59strip.j59se:not(.j59sl){-webkit-mask-image:none;mask-image:none}
 @media (max-aspect-ratio:1/1){.game:not(.maptab){grid-template-rows:auto minmax(40dvh,1fr) minmax(0,1fr) auto!important}}
 /* the stage's bottom wash (::after, #fff6e866) must sit under the people, not over her figure */
 .stage.j59::after{z-index:0}
@@ -157,13 +166,13 @@ const css=document.createElement("style");css.textContent=`
 .stage.j59 #mefig{filter:${HG(5,45)};pointer-events:auto;cursor:pointer}
 .stage.j59 #mefig.j59sel,.stage.j59 .tok.fig.j59sel .figimg{filter:${SG(9,.95)}}
 .stage.j59 .tok.j59sel:not(.fig) .md{box-shadow:0 0 0 2px #fff3c4,0 0 10px 2px rgba(255,243,196,.9)!important}
-.stage.j59 .tok .tag .j59t{display:block;font-size:.66rem;line-height:1.15;font-weight:600;letter-spacing:.01em;color:color-mix(in srgb,var(--tc,#5a6878) 80%,#000);background:color-mix(in srgb,var(--tc,#5a6878) 16%,transparent);border-radius:6px;padding:0 4px;margin:0 -2px 1px}
+.stage.j59 .tok .tag .j59t{display:block;font-size:.66rem;line-height:1.15;font-weight:600;letter-spacing:.01em;color:var(--ink);background:color-mix(in srgb,var(--tc,#5a6878) 22%,#fffaf0);box-shadow:inset 3px 0 0 var(--tc,#5a6878);border-radius:6px;padding:0 4px 0 7px;margin:0 -2px 1px}
 .stage.j59 .tok.fig.j59unk .figimg{filter:grayscale(1) brightness(1.08) contrast(.55) blur(2px) drop-shadow(0 6px 6px #0004)!important}
 .stage.j59 .tok.fig.j59unk.j59sel .figimg{filter:grayscale(1) brightness(1.08) contrast(.55) blur(2px) drop-shadow(0 0 2px #fff3c4) drop-shadow(0 0 7px rgba(255,243,196,.9))!important;animation:figidle 5s ease-in-out infinite!important}
 .stage.j59 .tok .tag .j59t.j59only{font-size:.76rem}
 .stage.j59 .tok .tag .j59n{display:block;line-height:1.2}
 .stage.j59 .tok.j59me{position:absolute;z-index:2;min-width:0;padding:0;transform:translateX(-50%);pointer-events:none;cursor:default}
-.stage.j59 .tok.j59me .tag{display:block!important;width:max-content;max-width:9.5em;white-space:normal!important;-webkit-line-clamp:unset!important;overflow:visible!important;text-overflow:clip!important;text-align:center}
+.stage.j59 .tok.j59me .tag{width:max-content;text-align:center}
 @media (prefers-reduced-motion:no-preference){
 .stage.j59.j59fx #mefig{animation:meidle 4.6s ease-in-out infinite,j59halo 3.8s ease-in-out infinite}
 .stage.j59.j59fx #mefig.j59sel{animation:meidle 4.6s ease-in-out infinite,j59selp 2.6s ease-in-out infinite}
