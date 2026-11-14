@@ -40,3 +40,6 @@ Mẻ 5: t1 vẽ lại tay linh động m35–m42 (8 lineup). Tín dụng 8×273 
 Mẻ 6: t1 vẽ lại tay linh động m43–m50 (8 lineup). Tín dụng 8×273 = 2184.
 Mẻ 7: t1 m51–m52 → t1 XONG cả 52 người (tay linh động); t2 m01–m06 (hoa điền nấc 2). 8 lineup, tín dụng 8×273 = 2184.
 Mẻ 8: t2 m07–m14 (8 lineup). Tín dụng 8×273 = 2184. Cộng dồn phiên này: 66 lineup ≈ 18.0k (gồm 2 lineup thử).
+
+## C-B (thợ m27–m52): mẻ và tín dụng
+Mẻ B1: t2 m27–m34 (vẽ lại m27–m33, đạo cụ khác loại mỗi tuổi). 8 lineup, tín dụng 8×273 = 2184.
