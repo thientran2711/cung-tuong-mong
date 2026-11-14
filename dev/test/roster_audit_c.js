@@ -10,7 +10,7 @@
        labelled "Tổng quản"; after save -> load the stage still has every consort the record puts here
    (o) servant names unique; loading a save creates no servant
    (p) the dead leave the record at once (right after deathSentence)
-   (r) a row added mid-buổi (a man who comes in) is never put, in a khắc already shown, where she stood (re-check N1)
+   (r) a row added mid-buổi (a man who comes in) is never put, in a khắc already shown (before the previous check), where she stood (re-check N1)
    (q) j95habitsMine: a row is told only with a watcher she was told of; watchers never count untold ones */
 window.__AUDC=function(){const A=window.__aud;for(const k of "jklmnopqr")if(A.err[k]==null){A.err[k]=0;A.ex[k]=[]}A.c={frames:0,framesRan:0,past:0,pastNext:0,deaths:0,loads:0,lcStage:0,follow:0};
  const bad=(k,m)=>{A.err[k]++;if(A.ex[k].length<12)A.ex[k].push((S&&S.origin?S.origin.k:"")+" T"+(S?S.turn:"")+" w"+wk()+" b"+(S?S.buoi:"")+" k"+used+" "+m)};
@@ -34,9 +34,9 @@ window.__AUDC=function(){const A=window.__aud;for(const k of "jklmnopqr")if(A.er
     for(const v of rivals)if(v.alive&&v.out&&R.P["v"+v.id]&&R.P["v"+v.id][kh][0]==="lc"&&!V.people.some(p=>p.ref===v))bad("n",`${where}: sổ có phế phi ${v.name} ở lãnh cung mà sân khấu không vẽ (${V.people.length} người)`)}
    for(const p of V.people)if(p.kind==="ksp"&&S.court&&S.court.ksp&&/Tổng quản/.test(p.name))bad("n",`${where}: thái giám Kính sự phòng mang nhãn "${p.name}"`)}
   /* (o) */const nm={};for(const s of allServ()){if(!s||!s.name)continue;if(nm[s.name])bad("o",`${where}: hai kẻ hầu cùng tên ${s.name} (s${nm[s.name]} và s${s.sid})`);nm[s.name]=s.sid}
-  /* (r) */{const S0=A.c.ids;const ids=Object.keys(R.P);if(S0&&S0.key===R.key&&kh>0){for(const id of ids){if(S0.set.has(id))continue;A.c.newRows=(A.c.newRows||0)+1;const e=R.P[id];
-     for(let i=0;i<kh;i++){const me=R.P.me?R.P.me[i][0]:null;if(e[i][0]&&e[i][0]===me&&e[i][0]!=="ngoai")bad("r",`${where}: ${(R.who[id]||[id])[0]} vào sổ giữa buổi mà khắc ${i} (đã hiện) ghi ở ${e[i][0]}, chỗ ngươi đứng`)}}}
-   A.c.ids={key:R.key,set:new Set(ids)}}
+  /* (r) */{const S0=A.c.ids;const ids=Object.keys(R.P);if(S0&&S0.key===R.key&&S0.kh>0){for(const id of ids){if(S0.set.has(id))continue;A.c.newRows=(A.c.newRows||0)+1;const e=R.P[id];
+     for(let i=0;i<S0.kh;i++){const me=R.P.me?R.P.me[i][0]:null;if(e[i][0]&&e[i][0]===me&&e[i][0]!=="ngoai")bad("r",`${where}: ${(R.who[id]||[id])[0]} vào sổ giữa buổi mà khắc ${i} (đã hiện) ghi ở ${e[i][0]}, chỗ ngươi đứng`)}}}
+   A.c.ids={key:R.key,kh,set:new Set(ids)}}
   /* (q) */for(const h of j95habitsMine()){const z=j95z();const told=Object.values(z.meK).filter(m=>m.k===h.place&&J95.B4[m.c]===h.buoi&&m.told).length;if(h.told!==(told>0)||h.watchers!==told)bad("q",`${where}: thói quen ${h.place} told=${h.told} watchers=${h.watchers} mà tai mắt đã báo ${told}`)}}
  window.__audCheckC=check;
  {const o=spend;spend=function(){const r=o.apply(this,arguments);try{check("spend")}catch(e){bad("k","lỗi kiểm: "+e.message)}return r}}

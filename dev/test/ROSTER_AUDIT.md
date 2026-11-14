@@ -116,3 +116,25 @@ Kiểm lại trên e39e28a (bản có N1):
 - Bộ độc lập, ngắn: 12 đời (6 khôn, 6 ngẫu nhiên), 10 418 lần kiểm, 880 lưu/nạp, A–H, P, S = 0.
 - `ia_scen` 5/5 lần __IA.check sạch; `ia_rostertool`: 38/38 dòng hiện tại, 32 khắc đã qua khớp.
 - j70: câu "(vì vì lợi riêng)" thành "(vì lợi riêng)".
+
+## 8. Thẻ đang chờ khi lưu / nạp (jqsave.js, lỗi cũ có từ trước j95)
+
+`serQ` (j3) chỉ lưu thẻ có `pid` và thẻ báo tin; thẻ lựa chọn không có `pid` bị bỏ khi lưu. Đo trong bot: 343 thẻ lựa chọn không pid, 39 thẻ chỉ có dữ liệu,
+304 thẻ có mã chạy (`opt.go`: người tìm đến, ngày lễ, nghe đồn, bắt gặp…) không thể ghi thành dữ liệu. Sửa bằng module mới `dev/build/jqsave.js` (nối sau j95c;
+chỉ bọc serQ, deserQ, save, render):
+1. Thẻ chỉ có dữ liệu được lưu nguyên vẹn (`$full`) và trở lại như cũ khi nạp.
+2. Khi đang chờ một thẻ có mã, lần tự lưu bị hoãn: ô lưu giữ lúc gần nhất không có thẻ như thế; trả lời xong thẻ thì lưu ngay. Tải lại trang
+   vì thế rơi vào trước hoặc sau thẻ, không bao giờ vào giữa một thẻ đã mất nửa.
+3. Save cũ nạp như trước (mục không có `$full` đi đường cũ).
+
+`dev/test/save_stress.js` (đường lưu thật: save → localStorage → deser, 6% bước bot, cả giữa thẻ và giữa minigame):
+| | đời | lần lưu | ghi | hoãn | thẻ giữ lại | mất | sai thứ tự | ô lưu đổi khi hoãn | nạp lệch khóa/khắc/nơi | lỗi trang |
+|---|---|---|---|---|---|---|---|---|---|---|
+| bot khôn | 9 | 748 | 717 | 31 | 198 | **0** | **0** | **0** | **0** | 0 |
+| bot ngẫu nhiên | 9 | 243 | 237 | 6 | 48 | **0** | **0** | **0** | **0** | 0 |
+| bot trộn | 9 | 521 | 508 | 13 | 127 | **0** | **0** | **0** | **0** | 0 |
+| so sánh: tắt jqsave (`JQOFF=1`), bot khôn | 3 | 270 | 258 | (12) | 69 | **1** | 0 | **12** lần ghi một thẻ dở | 0 | 0 |
+
+Trong trang thật (không bot): thẻ có mã đang chờ → `render` không đổi ô lưu; chọn xong → ô lưu ghi trạng thái sau thẻ; thẻ chỉ dữ liệu lưu rồi nạp lại đủ.
+Bộ kiểm sau sửa: của thợ 4 đời khôn + 4 ngẫu nhiên, 8 418 lần kiểm, (a)–(r) = 0; độc lập 4 đời khôn, 4 264 lần kiểm, 420 lưu/nạp, 0 lỗi.
+(Bất biến (r) chỉ xét các khắc trước lần kiểm trước đó: dòng mới thêm ở khắc k thì khắc ≥ k chưa hiện.)
