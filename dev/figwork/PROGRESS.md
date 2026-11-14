@@ -8,6 +8,28 @@
 ## Next item
 - Consort tier 4 c09–c32, then tiers 5–8 for all 32, then player looks t2–t8 + lãnh cung (4 looks), check look1 t1 plainness.
 
+## OWNER RULES (binding, 11/14 late) — use for EVERY new lineup
+- Ages (bands 18–25 / 26–35 / 36–50 / 51+), figure wording left to right:
+  1 (a18) "about 19, a fresh youthful young woman";
+  2 (a26) "about 24, still young and lively, youthful face, no sign of ageing";
+  3 (a36) "about 32, a young mature woman in her prime, smooth skin, NO grey or silver hair, NO wrinkles";
+  4 (a51) "about 48, a graceful elegant lady, only a few faint silver strands at the temples at most, minimal faint lines, still clearly beautiful, not elderly".
+  (old wording 22/30/42/55 made a36 look grey/old — never use it again.)
+- Poses: varied and lively, NOT the stiff frontal hands-at-waist pose. Each consort has her own signature prop; pose differs per age figure
+  (19 lively: mid-step/glance back/raising fan...; 24 lively & confident; 32 poised, in her prime; 48 graceful & calm) and per tier
+  (grander at t5+, "with stately grace" t7+, regal frontal hands-in-sleeves only for a few at t8). Library + assignment in spec5.py (POSES/L30/L42/L55).
+- Identity wording: "From the identity reference lineup keep ONLY her face, facial features, hairstyle colour and signature colour family; do NOT copy
+  the reference's ages, poses, outfit, hair ornaments or accessories; use the NEW (younger) ages, the NEW outfit and the NEW poses below."
+  Identity ref is always her FROZEN tier-1 lineup (idfix.json), not a redrawn one.
+- Dress ladder t4–t8 (LAD in spec5.py): t4 layered silk + wide gold-thread borders + cloud collar + bu yao; t5 gold phoenix-peony brocade, larger gold
+  headdress, jade belt pendants, trailing sleeves; t6 heavy gold brocade, big pearl headdress, pearl-edged cape; t7 near-empress, crimson/gold accents,
+  small phoenix crown, pearl strands, train; t8 full phoenix crown with pearls + kingfisher blue, imperial phoenix robe, very long train.
+  Her colour family stays the MAIN robe colour; "NOT green" added for non-green palettes.
+- Pipeline: `python3 spec2.py; python3 spec3.py; python3 spec4.py; python3 spec5.py` rebuilds jobs.json. `python3 pj.py JID` = full prompt + style + ref;
+  `python3 cv.py <tier> cXX..` = compact variable parts. `CW=700 python3 rv.py out.jpg genA:genB ...` = raw review sheet.
+  sheetproc.py now min-cuts touching figures and drops small stray islands.
+- Order after t4–t8: redraw consort t1–t3 with new ages/poses (same faces), then player looks; then report before maids/eunuchs/men/others.
+
 ## How (all scripts here; work copy can live in scratchpad/figwork)
 - jobs.json is rebuilt by `python3 spec2.py; python3 spec3.py; python3 spec4.py` (already present).
 - `python3 vars.py <tier> c09 c10 ...` prints per consort: style ref | identity ref (t1 lineup gen id) | features | outfit | pose.

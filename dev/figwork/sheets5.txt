@@ -160,3 +160,15 @@ N-c01-t4 WDsH2flcXe pose
 N-c07-t4 aF2O8SyfSh pose
 N-c19-t4 gOITrYASXO pose
 N-c28-t4 jUXY5G9LD0 pose
+# unused (single pose for all ages, superseded by per-age poses): c02 jUXYkeMLD0 c03 3zbh9qxREY c04 vQZJIZ2a47 c05 8aNgdi4IrU c06 MBwkcOkDCm c08 ov9le37829 c09 ksDAqBA16B c10 xSdnKtijfW
+# per-age poses (spec5 v3)
+N-c01-t4 jUXY1NlLD0 agepose
+N-c07-t4 8aNgX5QIrU agepose
+N-c19-t4 jUXY1i4LD0 agepose
+N-c28-t4 gOITLANSXO agepose
+# unused (old ages): c01 jUXY1NlLD0 c07 8aNgX5QIrU c19 jUXY1i4LD0 c28 gOITLANSXO
+# spec5 v4: new ages 19/24/32/48 + per-age poses
+N-c01-t4 Do71VtPpcl v4
+N-c07-t4 JNaewR7Oq4 v4
+N-c19-t4 ov9lXuB829 v4
+N-c28-t4 nVjQGXUYQD v4

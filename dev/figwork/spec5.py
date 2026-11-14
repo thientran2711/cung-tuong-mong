@@ -42,7 +42,6 @@ for key,j in J.items():
             p=p[:i]+f" Outfit for all four (a little richer than the rank below): a NEW outfit, {lad}; her signature colour {LCOL[lk]} is the MAIN robe colour{neg}"+p[k:]
         if t=="lc": p=p.replace("NEW richer outfit","NEW plain outfit")
         j["prompt"]=p
-json.dump(J,open("jobs.json","w"),indent=0)
 # ---- pose system (owner: varied lively poses, own signature per consort, grander at high tiers) ----
 POSES={"kieungao":["raising {prop} beside her cheek with one hand, chin slightly lifted, the other hand lightly holding her sleeve",
  "walking forward mid-step, long sleeves flowing behind her, {prop} held at her side",
@@ -77,7 +76,7 @@ POSES={"kieungao":["raising {prop} beside her cheek with one hand, chin slightly
 "thanhnha":["playing a jade flute held to her lips",
  "holding a pipa upright and plucking its strings",
  "reading an unrolled scroll held open in both hands",
- "holding {prop} close to her chest, gazing sideways",
+ "walking slowly while reading {prop} held open in one hand",
  "holding a raised writing brush, a sheet of paper in the other hand",
  "holding a small teacup in both hands, about to sip"]}
 def propnoun(p):
@@ -87,15 +86,31 @@ def propnoun(p):
     if s.startswith("hands folded at her waist, "): s=s.replace("hands folded at her waist, ","")
     return "her "+s.split(" ",1)[1] if s.split(" ",1)[0] in ("a","an") else s
 CONS=json.load(open("consorts_ids.json"))
-IDP=" From the identity reference lineup keep ONLY her face, facial features, hairstyle colour, signature colour family and the same four ages; do NOT copy the reference's pose, outfit, hair ornaments or accessories; use the NEW outfit and the NEW pose below."
-def pose_for(tr,i,t,prop):
-    ps=POSES[tr]; pz=ps[(i+t-1)%len(ps)].format(prop=prop)
-    if t==8 and i%3==0: pz="a regal frontal stance, hands hidden in her long wide sleeves before her, the train spread behind her"
-    elif t>=7: pz+=", with stately grace and regal dignity"
-    elif t>=5: pz+=", poised and graceful"
-    return f"Pose for all four (a NEW lively pose, NOT the reference's pose): {pz}; the same pose for all four ages, compact so each figure stays complete head to feet inside the frame and the four figures stay well apart, never overlapping"
+IDP=" From the identity reference lineup keep ONLY her face, facial features, hairstyle colour and signature colour family; do NOT copy the reference's ages, poses, outfit, hair ornaments or accessories; use the NEW (younger) ages, the NEW outfit and the NEW poses below."
+L30=["a graceful half-turn toward the viewer, {prop} held elegantly before her",
+ "holding a small teacup in one hand and {prop} in the other, confident and poised",
+ "holding a half-unrolled scroll in both hands, glancing up from it",
+ "one hand lightly raised to her collar, {prop} in the other hand",
+ "stepping gently sideways in a graceful turn, {prop} held at her waist"]
+L42=["a measured upright stance with a slight turn, hands resting together at her sleeves, {prop} held low",
+ "standing composed, one hand at the edge of her other sleeve, {prop} held at her side",
+ "a slight three-quarter turn, holding {prop} in both hands at her waist, composed",
+ "standing calmly, one hand resting lightly on the sash at her waist, the other holding {prop}"]
+L55=["a relaxed graceful stance, shoulders relaxed, holding a small sprig of flowers in both hands",
+ "a serene stately stance, holding a small teacup in both hands",
+ "standing gently, {prop} held loosely in both hands before her, shoulders relaxed",
+ "a slow graceful stance, one hand resting over the other at her waist"]
+def pose_for(tr,i,t,prop,g=0):
+    a=POSES[tr][(i+t-1)%6]; b=L30[(g+2*t)%5]; c=L42[(g+t)%4]; d=L55[(g*3+t+g//4)%4]
+    ps=[x.format(prop=prop) for x in (a,b,c,d)]
+    if t==8 and i%3==0: ps[2]=ps[3]="a regal frontal stance, hands hidden in her long wide sleeves before her, the train spread behind her"
+    suf=", with stately grace" if t>=7 else (", poised" if t>=5 else "")
+    ps=[p+suf if "regal frontal" not in p else p for p in ps]
+    return ("Poses (NEW, NOT the reference's poses; a different age-appropriate pose for each figure, same person and same signature prop), left to right: "
+            f"about 19, lively and youthful: {ps[0]}; about 24, lively and confident: {ps[1]}; about 32, poised, in her prime: {ps[2]}; about 48, graceful and calm: {ps[3]}; "
+            "each figure complete head to feet inside the frame, compact poses, the four figures well apart and never overlapping")
 for cid,tr,mi in CONS:
-    i=mi-1
+    i=mi-1; g=int(cid[1:])-1
     for t in range(1,9):
         j=J[f"N-{cid}-t{t}"]; j.setdefault("prompt0",j["prompt"]); p=j["prompt"] if t>=4 else j["prompt0"]
         prop="her small sprig of white jasmine" if cid=="c10" else propnoun(j["prompt0"])
@@ -103,7 +118,13 @@ for cid,tr,mi in CONS:
         if t>1: p=re.sub(r" Keep her exact face[^.]*lineup\.",IDP,p)
         else:
             if IDP not in p: p=p.replace(" Left to right:",IDP+" Left to right:",1)
-        a=p.index("Pose for all four"); b=p.index(". Eyes soft")
-        p=p[:a]+pose_for(tr,i,t,prop)+p[b:].replace("never teary.","never teary; serene gentle face, faint smile at most, no open-mouth laugh.")
-        j["prompt"]=p; j["ref"]="SHEET:N-"+cid+"-t1"; j["pose"]=pose_for(tr,i,t,prop)
+        a=p.index("Pose for all four") if "Pose for all four" in p else p.index("Poses (NEW"); b=p.index(". Eyes soft")
+        p=p[:a]+pose_for(tr,i,t,prop,g)+p[b:].replace("never teary.","never teary; serene gentle face, faint smile at most, no open-mouth laugh.")
+        j["prompt"]=p; j["ref"]="SHEET:N-"+cid+"-t1"; j["pose"]=pose_for(tr,i,t,prop,g)
+
+OLDAG=" Left to right: about 22, youthful adult; about 30, mature and poised; about 42, dignified and still beautiful, only subtle fine lines at the eyes; about 55, graceful beautiful older lady, only soft faint lines, silver-streaked hair, still lovely."
+NEWAG=" Left to right: about 19, a fresh youthful young woman; about 24, still young and lively, youthful face, no sign of ageing; about 32, a young mature woman in her prime, smooth skin, NO grey or silver hair, NO wrinkles; about 48, a graceful elegant lady, only a few faint silver strands at the temples at most, minimal faint lines, still clearly beautiful, not elderly."
+for key,j in J.items():
+    if key.startswith("N-") and OLDAG in j["prompt"] and (re.match(r"N-c\d\d-t",key) or key.startswith("N-look")):
+        j["prompt"]=j["prompt"].replace(OLDAG,NEWAG)
 json.dump(J,open("jobs.json","w"),indent=0)
