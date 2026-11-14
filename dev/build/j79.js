@@ -55,9 +55,11 @@ function kpMapText(html,fn){return String(html).split(/(<[^>]+>)/).map(s=>s&&s[0
 const KP_DELTA=/((?:[A-Za-zÀ-ỹĐđ]+ ){0,2}[A-Za-zÀ-ỹĐđ]+) ([+\-−])(\d+(?:[.,]\d+)?)(?![\d.,]*\d)(?!\s*[–-]\s*\d)/g;
 function kpChipify(html){return kpMapText(html,s=>s.replace(KP_DELTA,(m,l,sg,n)=>{if(/^(năm|tháng|tuần|ngày|tuổi|lần|khắc)$/i.test(l.split(" ").pop()))return m;const v=(sg==="+"?1:-1)*parseFloat(n.replace(",","."));return kitChip(l,v)}))}
 /* decorate the first mention of each person: rank title + name in rank colour (title not doubled) */
+/* the text already names a (different) title right before the name, e.g. "Thái tử" + a Hoàng tử: keep the text's title, never "Thái tử Hoàng tử X" */
+const KP_TITLE_RX=/(Thái tử|Hoàng tử|Công chúa|Hoàng hậu|Hoàng quý phi|Quý phi|Phi|Tần|Quý nhân|Thường tại|Đáp ứng|Thái hậu|Hoàng thượng|Phế phi|Thái y|Thị vệ|Ma ma|Cô cô) $/;
 function kpPeopleIn(html,people){const who=[];let h=html;const plain=kpPlain(html);
  for(const [n,p] of people){if(!plain.includes(n)||who.includes(p))continue;who.push(p);let done=false;
-  h=kpMapText(h,s=>{if(done)return s;const i=s.indexOf(n);if(i<0)return s;done=true;const t=kitTitle(p);let pre=s.slice(0,i);if(t&&pre.endsWith(t+" "))pre=pre.slice(0,-(t.length+1));return pre+kitName(p,{named:p===S})+s.slice(i+n.length)})}
+  h=kpMapText(h,s=>{if(done)return s;const i=s.indexOf(n);if(i<0)return s;done=true;const t=kitTitle(p);let pre=s.slice(0,i);if(t&&pre.endsWith(t+" "))pre=pre.slice(0,-(t.length+1));const own=t&&KP_TITLE_RX.test(pre);return pre+kitName(p,{named:p===S,noTitle:own})+s.slice(i+n.length)})}
  const lead=plain.replace(/^[^A-Za-zÀ-ỹĐđ]+/,"");
  if(/^(Hoàng thượng|Thánh thượng)/.test(lead)&&S&&S.emp&&!who.length)who.push(S.emp);
  if(/^Thái hậu/.test(lead)&&S&&!who.length)who.push(S.thO||{kind:"th"});
