@@ -34,7 +34,7 @@ CFACES = ["oval face, almond eyes","soft round face, gentle doe eyes","heart-sha
  "oval face, clear bright eyes","delicate face, willow-leaf brows","soft face, gently curved brows","refined face, large calm eyes"]
 LCOL = {"look1":"soft lavender","look2":"rose pink","look3":"pale celadon green","look4":"warm peach"}
 LOOKS = {
- "look1":"elegant oval face with defined cheekbones, almond eyes of natural size, straight dark brows, small straight nose, a tiny beauty mark under her left eye, long black hair",
+ "look1":"elegant oval face with defined cheekbones, almond eyes of natural size, straight dark brows, small straight nose, long soft lashes, long black hair",
  "look2":"heart-shaped face, round gentle eyes, softly arched brows, full rosy lips, a soft side-swept fringe on the right",
  "look3":"slender long face, slightly upturned phoenix eyes, high cheekbones, fine thin brows, hair parted in the centre",
  "look4":"graceful softly rounded oval face with a defined chin, clear bright eyes of natural size, gentle straight brows, a light wispy fringe across the forehead, a small red mark (huadian) between her brows",
