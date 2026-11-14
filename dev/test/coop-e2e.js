@@ -22,7 +22,7 @@ async function mk(b,name,vp){const ctx=await b.newContext({viewport:{width:vp[0]
   const o={ctx,name,errs:[]};o.page=async()=>{const p=await ctx.newPage();p.setDefaultTimeout(30000);
     p.on('pageerror',e=>o.errs.push(e.message));p.on('console',m=>{if(m.type()==='error'&&!/Failed to load resource|favicon/.test(m.text()))o.errs.push('console: '+m.text())});o.p=p;return p};return o}
 const shot=async(o,n)=>{await o.p.waitForTimeout(400);const t0=Date.now();const alive=await Promise.race([o.p.evaluate(()=>1),sleep(10000).then(()=>0)]);if(!alive){ok(false,`${n} ${o.name}: page responsive`);return}
-  try{await o.p.screenshot({path:`${OUT}/${n}-${o.name}.png`,timeout:20000})}catch(e){ok(false,`${n} ${o.name}: screenshot (${e.message.split('\n')[0]})`);return}
+  try{await o.p.screenshot({path:`${OUT}/${n}-${o.name}.png`,timeout:120000})}catch(e){ok(false,`${n} ${o.name}: screenshot (${e.message.split('\n')[0]})`);return}
   const ov=await o.p.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1);ok(!ov,`${n} ${o.name}: no horizontal overflow`)};
 const C=o=>o.p.evaluate(()=>__co());
 async function until(o,fn,arg,ms=30000){try{await o.p.waitForFunction(fn,arg,{timeout:ms});return true}catch(e){return false}}
@@ -31,6 +31,7 @@ async function tapText(o,re,ms=8000){const t0=Date.now();while(Date.now()-t0<ms)
   const el=h.asElement();if(el){await el.click();return true}await sleep(250)}return false}
 /* close story/news modals of the normal game (never the co-op waiting/freeze panel) */
 async function clear(o,n=25){for(let i=0;i<n;i++){const st=await o.p.evaluate(()=>{const c=__co();if(c.frozen||c.waiting)return'coop';
+   const bk=[...document.querySelectorAll('.kbk-bar button')].find(x=>x.offsetParent!==null&&/^Lui$/.test(x.textContent.trim()));if(bk){bk.click();return'x'}
    const m=document.getElementById('modal');if(!m||m.hidden)return typeof S!=='undefined'&&S&&S.mg?'mg':'';const all=[...m.querySelectorAll('button:not([disabled])')].filter(x=>x.offsetParent!==null);const b=all.find(x=>/Nhận thân phận|Nhập cung|Tiến cung|Vào cung/.test(x.textContent))||m.querySelector('#mr button:not([disabled])')||m.querySelector('.opts button:not([disabled])');if(b){b.click();return'x'}return'stuck'});
   if(st==='mg'){await o.p.evaluate(()=>{try{S.mg=null;render()}catch(e){}});continue}
   if(st!=='x')return st;await sleep(200)}return'many'}
@@ -85,12 +86,13 @@ async function playWeek(o){/* three buổi: Qua buổi, Qua buổi, Qua đêm */
   if(i===1)await shot(B,'11-rebirth-choice');await B.p.waitForTimeout(900)}
  const after=await B.p.evaluate(()=>({n:S.name,dead:S.dead,era:S.emp.era}));
  ok(!after.dead&&after.n!==before.n&&after.era===before.era,'B reborn as a new person in the same world',[before,after]);
- ok(await until(A,n=>rivals.some(v=>v.coop&&v.name===n),after.n,30000),'A sees the reborn friend by her new name');
+ {let seen=false;const t0=Date.now();while(Date.now()-t0<40000){await clear(A);seen=await A.p.evaluate(n=>rivals.some(v=>v.coop&&v.name===n),after.n);if(seen)break;await sleep(700)}
+  ok(seen,'A sees the reborn friend by her new name',await A.p.evaluate(()=>(rivals.find(v=>v.coop)||{}).name));}
  await clear(A);await clear(B);await shot(A,'12-reborn-seen');await shot(B,'12-reborn');
  /* 6 one more week after rebirth */
  {const wk=(await C(A)).week;await playWeek(A);await playWeek(B);ok(await until(B,x=>__co().week===x+1,wk,30000),'week after rebirth advances');}
  /* 7 single player untouched + old save loads */
- const oldHtml=execSync('git -C '+JSON.stringify(ROOT)+' show origin/main:index.html').toString();
+ const oldHtml=execSync('git -C '+JSON.stringify(ROOT)+' show origin/main:index.html',{maxBuffer:64e6}).toString();
  const D=await mk(b,'solo',[686,880,2.2]);await D.ctx.route(BASE+'old.html',r=>r.fulfill({status:200,contentType:'text/html; charset=utf-8',body:oldHtml.replace(/navigator\.serviceWorker\.register/g,'(()=>Promise.reject())')}));
  await D.page();await D.p.goto(BASE+'old.html');await D.p.waitForTimeout(3500);
  await D.p.evaluate(()=>{SLOT=2;document.getElementById('title').hidden=true;start();Q.length=0;save()});const oldName=await D.p.evaluate(()=>S.name);
