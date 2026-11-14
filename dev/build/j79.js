@@ -224,19 +224,9 @@ function kpBuild(M,m){const dlg=M.querySelector(".dlg"),mb=$("mb"),mt=$("mt");if
  const mr=$("mr");const cb=mr&&mr.querySelector("#mclose");if(cb)cb.classList.add("kbtn");}
 (function(){const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);try{const M=$("modal");if(M&&!M.hidden&&Q[0]){const d=M.querySelector(".dlg");d.classList.remove("kpanel","kp-person");delete d.dataset.kind;const ph=d.querySelector(":scope > .kph");if(ph)ph.remove();kpBuild(M,Q[0])}}catch(e){console.error("kpBuild",e)}return r}})();
 
-/* ---------- Cần row on the act card (owner 11/14): every requirement as a chip, met ✓ green / unmet ✗ red; row order Cần / Tốn / Được / Mất / Kèm / Ghi chú ---------- */
-/* a card/option may carry data-need='[{"n":"Sức","op":"≥","v":20,"have":19}, {"t":"Chỉ buổi tối","ok":false}]' (workers set it via kitNeedAttr(list)); otherwise the kit reads the price and the closed reason */
-function kitNeedAttr(list){return `data-need='${JSON.stringify(list||[]).replace(/'/g,"&#39;")}'`}
-function kitNeedChip(x){if(x.t)return kitChip(x.t,x.ok?"ok":"no");const ok=x.ok!=null?x.ok:(x.op==="≤"?x.have<=x.v:x.have>=x.v);return kitChip(`${x.n} ${x.op||"≥"}${x.v} (có ${x.have})`,ok?"ok":"no")}
-function kpNeedAuto(b){const L=[];const t=b.textContent||"";if(!S||S.dead)return L;
- const bm=t.match(/Bạc\s*[-−]\s*(\d+)/);if(bm)L.push({n:"Bạc",op:"≥",v:+bm[1],have:S.bac});
- const km=t.match(/(\d+)\s*khắc/);if(km){const k=+km[1];if(k>1)L.push({n:"Sức",op:"≥",v:20,have:S.suc});if(used+k>4)L.push({t:`Còn ${4-used} khắc, cần ${k}`,ok:false})}
- return L}
-(function(){if(typeof kaNorm1!=="function")return;const n0=kaNorm1;kaNorm1=function(b){const fresh=b.dataset.ka!=="1";n0.apply(this,arguments);if(!fresh||!b.classList.contains("ka")||b.querySelector(".kr-need"))return;
- let L=[];try{L=b.dataset.need?JSON.parse(b.dataset.need):kpNeedAuto(b)}catch(e){L=[]}
- const why=b.querySelector(".kr-why");if(why){const w=kpPlain(why.querySelector(".krv").innerHTML);if(w&&!L.some(x=>x.ok===false||(x.have!=null&&(x.op==="≤"?x.have>x.v:x.have<x.v))))L.push({t:w.charAt(0).toUpperCase()+w.slice(1),ok:false});why.remove()}
- if(!L.length)return;const kb=b.querySelector(".kb");if(!kb)return;kb.insertAdjacentHTML("afterbegin",`<span class="kr kr-need"><span class="krl">Cần</span><span class="krv">${L.map(kitNeedChip).join("")}</span></span>`)}})();
-
+/* ---------- Cần row (j63 supplies it as .kr-why with ✓/✗ items): drawn as kit status chips here ---------- */
+/* the second chance scale (Rất thấp…Rất cao) is retired: every standing chance or risk reads on the ONE 7-step ladder */
+if(typeof chanceLvl==="function"){chanceLvl=function(n){return n<=0?"Không có":KIT_ODDS[kitOddsLv(n)]}}
 /* ---------- the look ---------- */
 (function(){const st=document.createElement("style");st.id="kp-css";st.textContent=`
 :root{--k-hair:#e6d3ac;--k-lab:#8a7350;--k-card:#fffaf0;--k-card2:#f6ead6;--k-seal:#9a2c1c;--k-rad:8px}
@@ -316,9 +306,11 @@ button.ka .kodds .kodm{flex-direction:row}
 .kpopx{line-height:1.4}
 .kpopr{display:grid;grid-template-columns:auto auto minmax(0,1fr);gap:6px;align-items:center;padding:3px 4px;border-radius:5px}.kpopr.on{background:#f0d07055;box-shadow:inset 0 0 0 1px var(--gold)}.kpopr b{font-size:.78rem;white-space:nowrap}.kpopr small{color:var(--dim);font-size:.72rem}
 .kgl{text-decoration:underline dotted #b9a27a;text-underline-offset:2px;cursor:help}
-/* Cần row (act card) */
-button.ka .kr-need .krl{color:var(--k-lab)}button.ka .kr-need .krv{display:flex;flex-wrap:wrap;gap:3px}button.ka .kr-need .kchip{font-size:.7rem;margin:0;padding:0 6px;font-weight:600}
-button.ka.kdis .kr-need .kchip.g{opacity:.8}
+/* Cần row (act card, j63 .kr-why): status chips */
+button.ka .kr-why .krv{display:flex;flex-wrap:wrap;gap:3px;align-items:flex-start}
+button.ka .kr-why .kwhy{display:inline-block!important;font-size:.7rem;line-height:1.3;font-weight:600;padding:0 6px;border-radius:10px;border:1px solid #e3a497;background:#fcefeb;color:var(--bad)!important;white-space:normal;overflow-wrap:anywhere}
+button.ka .kr-why .kwhy.kok{border-color:#8fbf9f;background:#eef7f0;color:var(--good)!important;font-weight:600}
+button.ka .kr-why .ksep{display:none}
 @media (max-width:599px){.dlg.kpanel{max-width:100%}.kpb.kphas{grid-template-columns:84px minmax(0,1fr);gap:9px}.dlg.kpanel .kph{padding:8px 10px}.dlg.kpanel #mb{padding:8px 10px 2px}.dlg.kpanel #mr{padding:4px 10px 10px}.kft{font-size:.84rem}.kpacts{grid-template-columns:1fr}.ktier{grid-template-columns:4.4rem minmax(0,1fr) auto}}
 @media (min-width:1200px){.dlg.kpanel{max-width:620px}}
 `;document.head.appendChild(st)})();
