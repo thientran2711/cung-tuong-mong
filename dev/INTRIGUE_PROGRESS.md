@@ -19,3 +19,13 @@ Nhánh: `review/intrigue`. Module: `dev/build/j70.js`, nạp cuối cùng trong 
 | `resolveNotices()` | 20 tin gần nhất: `{wk,id,who,rank,act,actName,ok,why,whyK,whyV,self[],by[],gainEv,evNow,evNeed,lost[],body,sentBy}` |
 | `openDefence()` | mở hộp thoại giao lệnh |
 Kiểm thử: `j70Force(method,route,actorId|'me',targetId|'me')`, `j70Tick()`.
+
+## Hủy dung
+Hành động `huydung` (mức hại nặng) cho mọi người; 4 đường mưu (phấn độc, canh nóng lỡ tay, mèo dữ/ong, son phấn hỏng). Sẹo nhẹ/vừa/nặng: Sắc thực (effSac) -10/-25/-45 khi còn sẹo, Sủng -4/-8/-14, Danh -1/-3/-5; lành sau 4/8/14 bước tuần (thái y tâm phúc, Y ≥2, đang chữa mỗi thứ +1 bước/tuần); vừa để lại Sắc -3, nặng -15 nếu không có Ngọc dung cao / Tuyết liên. Che mạng: phần Sắc mất còn 2/3. `scarOf(p)` → `{sev,name,sacLost,weeksLeft,veil,treated,permanent,chip}`.
+Mạng che trên chân dung/hình (img/veil*.png trên review/act-art) là việc của bộ giao diện: đọc `scarOf(p).veil` / `p.scar`.
+
+## Cân bằng (bot hợp lý, dừng đời khi lên Hoàng hậu)
+- main + j68 (không j70): n=91, Hoàng hậu 32%, chết sớm 41%.
+- kit-panels + j68 (không j70): n=73, Hoàng hậu 52%, chết sớm 22%.
+- kit-panels + j68 + j70 (bản cuối): n=124, Hoàng hậu 58%, chết sớm 14%; chết trong 6 tuần đầu: 0.
+Núm chỉnh: `J70CFG.mot` (tần suất mưu do động cơ), `J70CFG.prep` (lợi thế khi chuẩn bị), `J70CFG.cap`/`capMe`.
