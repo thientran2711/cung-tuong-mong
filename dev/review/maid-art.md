@@ -44,3 +44,15 @@ Tấm xem: dev/shots/review/maid-art/ (A_0..A_2 tuổi, mole.jpg, cutA.jpg cỡ 
   Nhánh đặt tier 'm1' cho bộ bậc thường (main: null) — phần C để null; người gộp chọn một cách thống nhất.
 - XUNG ĐỘT VỚI PHẦN B: nhánh wip/maid-art-b-fix vẫn mang 160 ảnh a51 cung nữ phần A bản CŨ (trước khi làm già) + dev/figwork/PROGRESS.md cũ
   → gộp B sau A sẽ báo add/add hoặc đè bản già. B phải bỏ hẳn mọi img/*maid-m*-tm* và dev/figwork/maid*, PROGRESS.md của A khỏi nhánh.
+
+---
+
+# Kiểm lại lần 3: review/maid-art @ 6a842cd9 — PASS
+
+- m13-tm0-a51 và m13-tm4-a51: hết nốt ruồi, da liền, không nhòe (dev/shots/review/maid-art/m13fix.jpg).
+- __pycache__ đã gỡ (0 tệp). FIGURES-servants.json: 1072 mục, 240 mục của main giữ nguyên y hệt (tier null), 832 mục bậc m0/m2/m3/m4 mới.
+- 32 hình bậc thường m13/m26/m39/m52 (fig + por) trả về đúng blob của main (diff rỗng) — sạch nốt ruồi (đã qua no-moles), por 384x506.
+- Thử gộp main + nhánh (cục bộ, không đẩy): chỉ xung đột FIGURES-servants.json (lấy bản nhánh, là tập cha của main) và LOG.md (ghép); không đè tệp nào khác của main.
+- Bậc thường (m1) so với thang mới: a51 bậc thường của CẢ 52 nàng trên main là tranh cũ — tóc bạc trắng, mặt trẻ — nên 4 nàng trả về khớp 48 nàng còn lại của bậc thường,
+  nhưng cả hàng bậc thường a51 lệch thang tm0/tm2–tm4 (tóc đen, mặt ~48) và lệch luật tuổi. KHÔNG chặn nhánh này (nhánh không đụng bậc thường),
+  nhưng cần MỘT VIỆC TIẾP: làm già mặt + tóc đen cho 52 hình fig/por-maid-mNN-a51 bậc thường theo cách của phần A (xem base.jpg, cột 2 so với cột 3–6).
