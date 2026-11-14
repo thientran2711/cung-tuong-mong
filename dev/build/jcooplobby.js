@@ -20,7 +20,9 @@ st.textContent=`
 .kcol-act .kbtn.k1{grid-column:1/-1}
 .kcol-act .kbtn small{display:block;font-family:var(--body);font-weight:400;font-size:.74rem;opacity:.9}
 #coopfz{z-index:9500}
-#coopfz .dlg #mbz{padding:8px 12px 4px}
+/* same spacing as the kit panel's #mb / #mr (j79), which this overlay cannot use by id */
+#coopfz .dlg #mbz{padding:8px 12px 2px}
+#coopfz .dlg #mrz{padding:4px 14px 12px;margin:0;display:flex;justify-content:flex-end;gap:8px}
 `;
 document.head.appendChild(st);
 const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -71,7 +73,11 @@ $("modal").addEventListener("click",e=>{const b=e.target.closest("button[data-co
 $("modal").addEventListener("keydown",e=>{if(e.key==="Enter"&&e.target&&e.target.id==="coop-code"){e.preventDefault();join(e.target.value)}});
 /* title home: add the co-op button under the single-player menu */
 function addBtn(){const m=document.querySelector("#modal.kpthome .kpmenu");if(!m||m.querySelector(".kco"))return;
- const b=document.createElement("button");b.className="kbtn alt kco";b.dataset.coop="co";b.innerHTML="Chơi cùng bạn<small>Mời bạn · Nhập mã</small>";m.appendChild(b)}
+ /* owner 14/11: the title offers "Chơi một mình" / "Chơi cùng bạn". The single-player button keeps its action (Tiếp tục = last sổ,
+    Bắt đầu = Chọn sổ), only its words say which way of playing it is; "Kiếp mới" stays beside it. */
+ const k=m.querySelector(".kbtn.k1");if(k&&!k.dataset.solo){k.dataset.solo="1";const sm=k.querySelector("small");const was=k.firstChild&&k.firstChild.nodeType===3?k.firstChild.textContent.trim():"";
+  const info=sm?sm.textContent:"";k.innerHTML=`Chơi một mình<small>${was==="Tiếp tục"?"Tiếp tục: "+esc(info):esc(info)}</small>`}
+ const b=document.createElement("button");b.className="kbtn alt kco";b.dataset.coop="co";b.innerHTML="Chơi cùng bạn<small>Mời bạn · Nhập mã</small>";const k1=m.querySelector(".kbtn.k1");if(k1)k1.after(b);else m.appendChild(b)}
 new MutationObserver(addBtn).observe($("modal"),{childList:true,subtree:true});
 /* live updates while a lobby screen is up */
 COOP.on("status",s=>{if(!LM||Q[0]!==LM||T.hidden)return;if(PG==="wait"){const a=document.activeElement;open("wait");if(a&&a.dataset&&a.dataset.coop){const n=document.querySelector(`#modal [data-coop="${a.dataset.coop}"]`);if(n)n.focus({preventScroll:true})}}});
@@ -87,14 +93,15 @@ function fz(on,why){if(!on){if(FZ){FZ.remove();FZ=null}return}
  if(!FZ){FZ=document.createElement("div");FZ.id="coopfz";FZ.className="modal kpscene";FZ.setAttribute("role","alertdialog");document.body.appendChild(FZ)}
  FZ.innerHTML=`<div class="dlg kpanel kpsc" data-kind="notice">${kpHeader("notice",ttl,sub)}<div class="body" id="mbz">${kitRows([["Mã phòng",esc(COOP.state.room||""),"t"],["Bạn",why==="week"?"chưa xong tuần":pw[0],why==="week"?"n":pw[1]],["Ngươi",COOP.state.status==="open"?"đang ở trong cuộc":"đang nối lại",COOP.state.status==="open"?"g":"r"]])}</div><div class="row" id="mrz"><button class="kbtn alt" data-cfz="leave">Về màn đầu</button></div></div>`;
  const s=FZ.querySelector(".kpseal");if(s)s.remove()}
-document.addEventListener("click",e=>{const b=e.target.closest("[data-cfz]");if(!b)return;e.stopPropagation();COOP.leave(true);COOP.state.playing=false;fz(false);try{showTitle()}catch(x){}},true);
+document.addEventListener("click",e=>{const b=e.target.closest("[data-cfz]");if(!b)return;e.stopPropagation();COOP.state.playing=false;COOP.leave(true);fz(false);try{showTitle()}catch(x){}},true);
 function check(){const s=COOP.state;if(!s.playing){fz(false);return}
  const x=COOP.other(),e=s.ended||{};
  if(s.status!=="open")fz(true,"me");else if(!s.peerOnline)fz(true,"peer");else if(e[s.you]&&!e[x])fz(true,"week");else fz(false)}
 COOP.on("status",check);
-COOP.on("start",()=>{COOP.state.playing=true;check()});
+COOP.on("start",()=>{COOP.state.playing=true;COOP.live();check()});
 COOP.on("week",()=>setTimeout(check,0));
 /* a ?room=XXXX link: open "Nhập mã" with the code and join at once */
-setTimeout(()=>{try{const q=new URLSearchParams(location.search).get("room");if(q&&!T.hidden){CODE=q.toUpperCase();join(CODE)}}catch(e){console.error(e)}},60);
+setTimeout(()=>{try{const q=new URLSearchParams(location.search).get("room");if(q){try{const u=new URL(location.href);u.searchParams.delete("room");history.replaceState(null,"",u.toString())}catch(x){}}
+ if(q&&!T.hidden){CODE=q.toUpperCase();join(CODE)}}catch(e){console.error(e)}},60);
 window.COOP_LOBBY={open,fz,check};
 }catch(e){console.error(e)}})();

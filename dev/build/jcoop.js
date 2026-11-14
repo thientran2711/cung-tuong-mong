@@ -17,7 +17,10 @@
                                         per connection), "start" (lobby hands over to the game), "peer" (friend online flag
                                         changed: fn(online)), "lost" (my socket dropped, will retry)
      COOP.emit(t, data)                 fire a local event (used by the lobby and the world module)
-     COOP.other()                       the other seat letter ("a"/"b") */
+     COOP.other()                       the other seat letter ("a"/"b")
+   Flat live fields (kept current on every change; read-only): COOP.code, COOP.seat "a"|"b"|null, COOP.week,
+     COOP.online {a,b}, COOP.ended {a,b}, COOP.frozen (a co-op game runs and someone is offline),
+     COOP.waiting false | "room" (the other seat is still empty) | "week" (I ended the week, the friend has not). */
 (function(){try{
 const LS={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}},del(k){try{localStorage.removeItem(k)}catch(e){}}};
 const DEF_URL="https://ctm-coop.victoria-tntt.workers.dev";
@@ -32,8 +35,13 @@ function off(t,f){const L=H[t];if(!L)return;const i=L.indexOf(f);if(i>=0)L.splic
 function other(){return st.you==="a"?"b":st.you==="b"?"a":""}
 function set(o){Object.assign(st,o);const s=st.seats,x=other();const po=!!(s&&x&&s[x]&&s[x].online);
  const was=st.peerOnline;st.peerOnline=po;st.bothIn=!!(st.status==="open"&&po);
- emit("status",st);if(was!==po)emit("peer",po);
+ live();emit("status",st);if(was!==po)emit("peer",po);
  if(st.bothIn&&!both){both=true;emit("both",st)}}
+/* flat live view for the world module and dev/test/coop-e2e.js: COOP.code seat week online ended frozen waiting */
+function live(){const C=window.COOP;if(!C)return;const s=st.seats||{},x=other(),e=st.ended||{};
+ C.code=st.room||"";C.seat=st.you||null;C.week=st.week||0;C.online={a:!!(s.a&&s.a.online),b:!!(s.b&&s.b.online)};C.ended={a:!!e.a,b:!!e.b};
+ C.frozen=!!(st.playing&&(st.status!=="open"||!st.peerOnline));
+ C.waiting=!st.you||st.status==="off"?false:!(s[x])?"room":(e[st.you]&&!e[x])?"week":false}
 function base(){return String(COOP.url||DEF_URL).replace(/\/+$/,"")}
 function wsURL(code){return base().replace(/^http/,"ws")+`/api/room/${code}/ws?pid=${encodeURIComponent(pid())}&name=${encodeURIComponent(COOP.name||"")}`}
 async function gz(s){const cs=new CompressionStream("gzip");const w=cs.writable.getWriter();w.write(new TextEncoder().encode(s));w.close();return new Uint8Array(await new Response(cs.readable).arrayBuffer())}
@@ -85,5 +93,6 @@ async function send(t,f){const o=typeof t==="string"?Object.assign({t},f||{}):t;
 /* coming back to the tab (phone woke up): reconnect at once instead of waiting out the backoff */
 document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible"&&want&&(!ws||ws.readyState>1)){tries=0;connect(st.room)}});
 addEventListener("online",()=>{if(want&&(!ws||ws.readyState>1)){tries=0;connect(st.room)}});
-window.COOP={url:window.COOP_URL||DEF_URL,name:"",get pid(){return pid()},state:st,create,join,resume,leave,send,on,off,emit,other};
+window.COOP={url:window.COOP_URL||DEF_URL,name:"",get pid(){return pid()},state:st,create,join,resume,leave,send,on,off,emit,other,
+ code:"",seat:null,week:0,online:{a:false,b:false},ended:{a:false,b:false},frozen:false,waiting:false,live};
 }catch(e){console.error(e)}})();
