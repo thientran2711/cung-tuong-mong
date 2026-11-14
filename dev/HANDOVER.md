@@ -93,3 +93,13 @@ Secondary: Fold cover 412x1058 @2, phone 390x844 @3, 1024x768 @2.
 - Poses: calm standing (no flying sleeves/sashes, no swirling hems) for ALL figure art incl. Part C.
 - Contests: each subject its own real minigame, never multiple-choice quizzes. Results: podium screen first (full-body figures, glow, confetti), then the score table.
 - Never ship code-drawn art where a painting is expected; if something looks crude, redraw it without waiting to be asked.
+
+## TRẠNG THÁI 14/11 15:40Z — mọi thợ dừng vì hết hạn mức tuần (mở lại 18/11 17:00Z)
+Khi hạn mức mở lại, gửi SendMessage cho từng thợ để làm tiếp (đừng mở thợ mới):
+- Cân bằng ad2c1bd409d320efa: đã tìm ra lỗi jpal viết lại palaceOf (trả "home" cho kẻ hầu) → bỏ đoạn đó (fix1), CHƯA ĐẨY; đang đo 24 đời. Đầu origin/review/balance còn cũ.
+- Sửa j95 a729f798f8caea14b (review/schedules2): đang dở; phải gộp balance mới (palaceOf gốc) trước kiểm cuối; dùng bot inpage6 cho bộ kiểm độc lập. Sau đó mở lại người kiểm độc lập a5c2d5a7218acd7d7.
+- Người duyệt kit a4b1ef66e8fa6f413: đang kiểm lại minigames fe63a6f.
+- consort-art #9 a7b31f0e1c489c55f: đang làm hoa điền đúng nấc + xóa nốt ruồi.
+- Part C-A acb72ee291fbd2861: Part C (maid-art-c) vẽ đủ 52 nàng; đang sửa lỗi lãnh cung (áo trơn, không trang sức, mặt 48), hoa điền t6, m06-t7, m26-t8; rồi soát C-B, ghi SẴN SÀNG KIỂM LẠI.
+- maid-art (scratchpad/wmA 89dd550, 7b3f527) và maid-art-b (scratchpad/wfixB 212db69): lệnh đẩy của thợ bị bộ kiểm quyền chặn; CHỜ SẾP cho phép. Sau đó sửa a51 còn lại (A: 164 tờ, todo ở scratchpad/cwM; B: ~47 lineup).
+- wardrobe 66d1bd9 và kit-j95 đi qua review/balance.
