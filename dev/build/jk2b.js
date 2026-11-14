@@ -10,13 +10,25 @@
    7. Veil + scar overlays placed on the face from review/wardrobe fit data (KIT_VEIL.style / KIT_SCAR.style).
    =================================================================================================================== */
 
-/* ---------- 1. PERSON CARD: big 3:4 portrait ---------- */
+/* ---------- 1. PERSON CARD: ONE portrait cell for every person (owner 11/14, kit 2b) ----------
+   The cell is the whole frame canvas from its top (crest room kept: Hoàng hậu's phoenix, the Emperor's dragon, Thái hậu's crest show whole)
+   down to the bottom of the band (canvas x 0–550, y 0–795, aspect 550:795); the pendant/tassel below is not drawn here. Every card on a screen
+   uses the SAME cell width (--kpcw), so the photo window (384x506 canvas units) is the same size for every rank and role.
+   Layout: portrait left, name / rank / info beside it (float), act groups full width below: the Fold shows portrait + name + rank +
+   the first info lines without scrolling. */
 (function(){const st=document.createElement("style");st.id="k2b-pcard";st.textContent=`
-.pc{grid-template-columns:clamp(160px,34%,300px) minmax(0,1fr)!important;gap:10px!important}
-.pc>.pcl>.pcp.kit{width:100%!important;height:auto!important;max-height:none!important;min-height:0!important;aspect-ratio:476/630!important;overflow:hidden!important;flex:0 0 auto;container-type:normal!important;margin:0 0 2px!important}
-.pc>.pcl>.pcp.kit>.kin{position:absolute!important;left:-7.775%!important;top:-22.22%!important;width:115.55%!important;height:164.6%!important;transform:none!important}
-.pc>.pcl>.pcn,.pc>.pcl>b:first-of-type{font-size:1.12rem}
-@media (max-width:599px){.pc{grid-template-columns:clamp(120px,38%,180px) minmax(0,1fr)!important;gap:8px!important}}
+:root{--kpcw:clamp(150px,34vw,230px)}
+@media (min-width:1000px){:root{--kpcw:clamp(170px,17vw,230px)}}
+.pc{display:block!important;overflow:auto;overscroll-behavior:contain}
+.pc>.pcl,.pc>.pcr{overflow:visible!important;min-height:auto!important}
+.pc>.pcl{display:block!important;width:auto!important;max-width:none!important}
+.pc>.pcl::after{content:"";display:block;clear:both}
+.pc>.pcl>.pcp.kit{float:left;width:var(--kpcw)!important;height:auto!important;max-height:none!important;min-height:0!important;aspect-ratio:550/795!important;overflow:hidden!important;container-type:normal!important;margin:0 12px 6px 0!important}
+.pc>.pcl>.pcp.kit>.kin{position:absolute!important;left:0!important;top:0!important;width:100%!important;height:130.44%!important;transform:none!important}
+.pc>.pcl>b,.pc>.pcl>.pcname,.pc>.pcl>p{display:flow-root}
+.pc>.pcl>.pcinfo{font-size:.8rem}
+.pc>.pcl>.pcname,.pc>.pcl>b:first-of-type{font-size:1.12rem}
+.pc>.pcr{margin-top:8px;width:auto!important}
 `;document.head.appendChild(st)})();
 
 /* ---------- 2. STAGE FLOOR: crop each room picture to keep the floor; figures stand on the floor line ----------
@@ -33,7 +45,7 @@ function kitFloorFit(){try{const st=$("stage"),im=$("scimg");if(!st||!im)return;
  const s=Math.max(W/S0.w,H/S0.h),dh=S0.h*s;let y0=0,py=50;
  if(dh>H+1){y0=Math.min(0,Math.max(H-dh,.40*H-ft*dh));py=(y0/(H-dh))*100}
  im.style.backgroundPosition=`50% ${py.toFixed(1)}%`;
- const fs=ft+.75*(1-ft);let feet=Math.min(H*.97,y0+fs*dh);const kfb=Math.max(H*.03,H-feet);st.style.setProperty("--kfb",kfb.toFixed(0)+"px");st.style.setProperty("--kfh",Math.max(H*.45,H-kfb-H*.03).toFixed(0)+"px");st.dataset.kfloor=name}catch(e){}}
+ const fs=ft+.75*(1-ft);let feet=Math.min(H*.97,y0+fs*dh);const kfb=Math.max(H*.03,24,H-feet);st.style.setProperty("--kfb",kfb.toFixed(0)+"px");st.style.setProperty("--kfh",Math.max(H*.45,H-kfb-H*.03).toFixed(0)+"px");st.dataset.kfloor=name}catch(e){}}
 (function(){if(typeof renderStage!=="function")return;const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);kitFloorFit();return r};
  try{let ro=null;const hook=()=>{const st=$("stage");if(!st||ro)return;ro=new ResizeObserver(()=>kitFloorFit());ro.observe(st)};if(document.readyState!=="loading")hook();else addEventListener("DOMContentLoaded",hook)}catch(e){}
  const st=document.createElement("style");st.id="k2b-floor";st.textContent=`
@@ -43,10 +55,50 @@ function kitFloorFit(){try{const st=$("stage"),im=$("scimg");if(!st||!im)return;
 .stage[data-kfloor] .scimg{transition:background-position .2s}
 `;document.head.appendChild(st)})();
 
+/* ---------- 2b. ONE SCALE ON THE STAGE (owner 11/14): every adult figure on one stage has the same height and stands on the same
+   floor line. All fig-*.webp are cut head-to-hem on a 900 px canvas, so equal element height = equal body height. Children keep their
+   age ratio (j73 KIDH) of the same adult height. When the row is too wide, EVERY figure (her included) shrinks by one common factor.
+   Name tags hang under the feet (absolute), so a token's feet sit on the floor line like hers. ---------- */
+function kitStageScale(){try{const st=$("stage");if(!st)return;const H=st.clientHeight,W=st.clientWidth;if(!H||!W)return;
+ const kfb=parseFloat(st.style.getPropertyValue("--kfb"))||Math.max(H*.04,26);const kfh=parseFloat(st.style.getPropertyValue("--kfh"))||H*.8;
+ let base=Math.min(H*.80,kfh,H-kfb-H*.03);const me=$("mefig");const toks=[...st.querySelectorAll("#tokens .tok.fig img.figimg")].filter(e=>e.offsetParent);
+ const ar=e=>{if(e.naturalWidth&&e.naturalHeight)return e.naturalWidth/e.naturalHeight;if(!e.dataset.kwait){e.dataset.kwait=1;e.addEventListener("load",()=>kitStageScale(),{once:true})}return .36};
+ const ks=e=>{if(e.dataset.ks)return+e.dataset.ks;let k=1;if(e.classList.contains("kidfig")){const m=/\*\s*([\d.]+)/.exec(e.style.height||"");if(m)k=+m[1]}e.dataset.ks=k;return k};
+ const tokRow=$("tokens");let avail=W-16;if(me&&tokRow){const r=tokRow.getBoundingClientRect(),sr=st.getBoundingClientRect();avail=Math.max(60,sr.right-Math.max(r.left,sr.left)-12)}
+ const gap=8;let need=toks.reduce((a,e)=>a+base*ks(e)*ar(e)+gap+6,0);let f=need>avail?avail/need:1;
+ let wide=false;if(me&&f<1&&tokRow){/* crowded: she steps to the left edge and the row takes the rest of the stage, one scale for all */
+  const meW=base*ar(me);const f2=Math.min(1,(W-24)/(meW+gap+need));if(f2>f){f=f2;wide=true}}
+ if(tokRow){if(wide){const mw=base*f*ar(me);me.style.setProperty("left",(8+mw/2).toFixed(0)+"px","important");tokRow.style.setProperty("left",(16+mw).toFixed(0)+"px","important");tokRow.style.setProperty("right","8px","important");tokRow.style.setProperty("justify-content","space-evenly","important");tokRow.style.setProperty("padding","0","important")}
+  else{if(me)me.style.removeProperty("left");["left","right","justify-content","padding"].forEach(k=>tokRow.style.removeProperty(k))}}
+ const h=base*f;st.style.setProperty("--kfig",h.toFixed(1)+"px");
+ const set=(e,v)=>{e.style.setProperty("height",v.toFixed(1)+"px","important");e.style.setProperty("max-height","none","important");e.style.setProperty("max-width","none","important");e.style.setProperty("width","auto","important")};
+ if(me)set(me,h);toks.forEach(e=>{set(e,h*ks(e));const b=e.closest(".tok");if(b)b.style.setProperty("max-width","none","important")});
+ st.classList.add("kscale");
+ if(tokRow&&toks.length){const sr=st.getBoundingClientRect();let mx=0,mn=1e9;tokRow.querySelectorAll(".tok").forEach(b=>{const r=b.getBoundingClientRect();if(r.width){mx=Math.max(mx,r.right);mn=Math.min(mn,r.left)}});
+  const lim=sr.right-6,lo=wide?mn:Math.max(mn,sr.left+6);if(mx>lim&&mx>mn){const k=Math.max(.5,(lim-lo)/(mx-mn))*.98;const h2=h*k;if(me)set(me,h2);toks.forEach(e=>set(e,h2*ks(e)));st.style.setProperty("--kfig",h2.toFixed(1)+"px");
+   if(wide&&me){const mw=h2*ar(me);me.style.setProperty("left",(8+mw/2).toFixed(0)+"px","important");tokRow.style.setProperty("left",(16+mw).toFixed(0)+"px","important")}}}
+  /* name tags never overlap: when two neighbours touch, every other tag drops one line (the floor band keeps room for two lines) */
+  const tags=[...tokRow.querySelectorAll(".tok.fig>.tag")].filter(t=>t.offsetParent);const clr=()=>tags.forEach(t=>{t.classList.remove("ktlo","ktlo2");t.style.removeProperty("margin-left")});clr();
+  const ov=n=>{for(let i=n;i<tags.length;i++){const a=tags[i-n].getBoundingClientRect(),b=tags[i].getBoundingClientRect();if(a.right+3>b.left)return true}return false};
+  let lv=1;if(ov(1)){lv=2;tags.forEach((t,i)=>{if(i%2)t.classList.add("ktlo")});if(ov(2)){lv=3;clr();tags.forEach((t,i)=>{if(i%3==1)t.classList.add("ktlo");if(i%3==2)t.classList.add("ktlo2")})}}
+  if(lv>1){const need2=tags[0].offsetHeight*lv+6+3*lv;const kfb=parseFloat(st.style.getPropertyValue("--kfb"))||0;if(kfb<need2&&!st.dataset.kfb2){st.dataset.kfb2=1;st.style.setProperty("--kfb",need2+"px");kitStageScale();delete st.dataset.kfb2;return}}
+  const sr2=st.getBoundingClientRect();tags.forEach(t=>{t.style.removeProperty("margin-left");const r=t.getBoundingClientRect();if(r.right>sr2.right-4)t.style.setProperty("margin-left",(sr2.right-4-r.right)+"px");else if(r.left<sr2.left+4)t.style.setProperty("margin-left",(sr2.left+4-r.left)+"px")});
+ }catch(e){}}
+(function(){if(typeof renderStage!=="function")return;const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);kitStageScale();clearTimeout(window.__kssT);window.__kssT=setTimeout(kitStageScale,520);return r};
+ try{let ro=null;const hook=()=>{const st=$("stage");if(!st||ro)return;ro=new ResizeObserver(()=>{kitFloorFit();kitStageScale()});ro.observe(st)};if(document.readyState!=="loading")hook();else addEventListener("DOMContentLoaded",hook)}catch(e){}
+ const st=document.createElement("style");st.id="k2b-scale";st.textContent=`
+.stage.kscale .tokens{bottom:var(--kfb,10px)!important}
+.stage.kscale .tok.fig{position:relative;padding-bottom:0!important;flex:0 0 auto!important;max-width:none!important}
+.stage.kscale .tok.fig>.tag{position:absolute;top:calc(100% - 2px);left:50%;transform:translateX(-50%);z-index:2;white-space:nowrap!important;max-width:none!important;overflow:visible!important;text-overflow:clip!important;display:block!important;-webkit-line-clamp:none!important}
+.stage.kscale .tok.fig>.tag.ktlo{top:calc(100% + 1.45em)}
+.stage.kscale .tok.fig>.tag.ktlo2{top:calc(100% + 2.9em)}
+`;document.head.appendChild(st)})();
+
 /* ---------- 3. PHONE PORTRAIT: the stage takes ~40 % of the screen (was 27 %); the panel keeps the rest ---------- */
 (function(){const st=document.createElement("style");st.id="k2b-phone";st.textContent=`
 @media (max-width:599px) and (orientation:portrait){
- .game:not(.maptab),.game.cardtab{grid-template-rows:auto minmax(0,40dvh) minmax(0,1fr) auto!important}
+ .game:not(.maptab):not(.cardtab){grid-template-rows:auto minmax(0,40dvh) minmax(0,1fr) auto!important}
+ .game.cardtab{grid-template-rows:auto minmax(0,24dvh) minmax(0,1fr) auto!important}
  header.hud>.me .dt{font-size:.66rem!important;line-height:1.2}
  header.hud>.hud2.khud.col{flex-wrap:nowrap!important;gap:3px!important}
  header.hud>.hud2.khud>.h2t{min-height:26px!important;height:26px;padding:0 6px!important;font-size:.7rem!important}
