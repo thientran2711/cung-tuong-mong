@@ -15,7 +15,8 @@ for j in js:
         try: big=Image.open(io.BytesIO(b)).convert("RGB"); break
         except Exception: pass
     W,Hh=big.size; who=j.split("-")[1]
-    o=Image.open(f"{H}/../wtc2/img/fig-maid-{who}-a18.webp").convert("RGBA"); o=o.resize((int(o.width*RH/o.height),RH))
+    t1=f"{H}/out/fig-maid-{who}-t1-a18.webp"
+    o=Image.open(t1 if j.split("-")[2]!="t1" and os.path.exists(t1) else f"{H}/../wtc2/img/fig-maid-{who}-a18.webp").convert("RGBA"); o=o.resize((int(o.width*RH/o.height),RH))
     lin=big.resize((RH*2,RH))
     hs=[]
     for k in (0,3):
