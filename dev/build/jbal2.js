@@ -1,5 +1,5 @@
 /* ================= jbal2: late balance knobs for the merged logic modules (review/balance). Same rule for every consort; numbers only. ================= */
-Object.assign(BAL,{illAdd:0,illDie:0});
+Object.assign(BAL,{illAdd:1,illDie:1});
 /* sickness in the palace: each month a healthy consort may also fall ill (illAdd %), and a critical illness kills a little more often (illDie × the illness' own death weight) */
 (function(){const i0=illMonthP;illMonthP=function(p){let ev=i0.apply(this,arguments);
  try{if(!p||p.dead||p.alive===false||(p===S&&S.dead))return ev;const i=illOf(p);
@@ -20,6 +20,10 @@ Object.assign(BAL,{illAdd:0,illDie:0});
 })();
 /* the Emperor tires of accusations: every accusation an accuser brought in the last 36 tuần (a year) lowers the odds of her/his next one by accTire points
    (same rule for every accuser; the odds word shown is the real one) */
-Object.assign(BAL,{accTire:0});
+Object.assign(BAL,{accTire:10});
 (function(){try{const A=ACT.accuse,f0=A.f;A.f=function(a,t){try{a.accL=(a.accL||[]).filter(w=>wk()-w<36);a.accL.push(wk())}catch(e){}return f0.apply(this,arguments)}}catch(e){}
  const o0=oAccuse;oAccuse=function(a,t){const o=o0.apply(this,arguments);if(!BAL.accTire||!a)return o;const n=(a.accL||[]).filter(w=>wk()-w<36).length;return n?cl(o-BAL.accTire*n,5,95):o}})();
+/* measured knobs of other modules (balance pass 11/14, see dev/measure/BALANCE_REPORT.md): scheme motive x3 and a prepared blow +10 (j70),
+   the Emperor's satiety with one favourite (j75 FAIRN.sat/satO). Same for every consort. */
+try{Object.assign(J70CFG,{mot:3,prep:10})}catch(e){}
+try{Object.assign(FAIRN,{sat:.2,satO:8})}catch(e){}
