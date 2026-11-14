@@ -12,7 +12,7 @@ Chủ kit chuyển động. Nhánh `review/kit-motion` (từ origin/main a4fbec0
 - Con dấu kết quả đổi sang chữ Việt "THÀNH" / "BẠI" (vẽ lại gpt-2-6); đã rà mọi ảnh của bộ: không còn chữ Hán cần đọc (thánh chỉ, lịch, thẻ bài, ống xăm, rương đều trơn hoặc chỉ hoa văn).
 - Phối hợp review/scene-seasons (j94): j12 lightTick nay chỉ phủ 1/4 (tối ~12%) khi cảnh đã có bản vẽ theo buổi (-sang/-trua/-chieu/-toi), phủ đầy khi rơi về ảnh gốc; hiểu thang 4 buổi. Thử gộp tạm hai nhánh (không đẩy): ảnh 50–51 `*-cung-scene-seasons.webp`. Khi gộp main: assemble.py thứ tự `j86, j93, j94, j84`.
 - `dev/MOTION.md`: danh sách đã làm + đề xuất thêm (A/B/C) để bàn với sếp.
-- Ảnh thử: `dev/shots/motion/` (755x1000@2 và 1180x820@2, mỗi khoảnh khắc một tệp, chụp giữa hiệu ứng bằng cách dừng hoạt ảnh): 01–02 lật thẻ, 03 lật lịch, 04 ống xăm, 05–06 kết quả Thành/Bại, 07–08 thánh chỉ, 09 giáng phẩm, 10 lãnh cung, 11 qua buổi, 12 có thai, 13 sinh con, 14 mực loang, 15–17 rương bảo vật, 18–19b rương ngự tứ, 20–21 mâm thưởng, 22–23 hộp gấm, 24 chip thời tiết, 25 bảng mở, 26 cảnh báo, 27 save cũ, 30–37 hạt thời tiết, 41–42 giảm chuyển động.
+- Ảnh thử: `dev/shots/motion/` (755x1000@2 và 1180x820@2, mỗi khoảnh khắc một tệp, chụp giữa hiệu ứng bằng cách dừng hoạt ảnh): 03 lật lịch, 04 ống xăm, 05–06 kết quả Thành/Bại, 07–08 thánh chỉ, 09 giáng phẩm, 10 lãnh cung, 11 qua buổi, 12 có thai, 13 sinh con, 14 mực loang, 24 chip thời tiết, 25 bảng mở, 26 cảnh báo, 27 save cũ, 30–37 hạt thời tiết. (Ảnh cũ 01–02, 15–23, 41–42 có tia nan quạt / lật thẻ người khác chiếm màn đã xoá; thay bằng `*-fix-*`.)
 - Máy thử quá tải (load ~70) nên vài ảnh "giữa" chụp trễ một nhịp (16 và 19 còn đóng nắp; 17 và 19b là lúc đã mở).
 
 ## Kiểm thử
@@ -21,4 +21,12 @@ Chủ kit chuyển động. Nhánh `review/kit-motion` (từ origin/main a4fbec0
 
 ## Còn lại / ghi chú
 - Cung nữ thăng bậc cung nữ chưa có thánh chỉ (đề xuất trong MOTION.md).
-- Lật thẻ hiện mỗi tuần có người được lật; nếu sếp thấy nhiều thì chỉ hiện khi là thẻ của nàng.
+- (đã sửa theo kiểm duyệt) Lật thẻ: trọn hiệu ứng chỉ khi là thẻ của nàng; thẻ người khác = một dòng báo ngắn.
+
+## Sửa theo kiểm duyệt (FAIL @57f340c, dev/review/kit-motion.md)
+- Bỏ hẳn tia nan quạt `.kmrays` (repeating-conic-gradient + kmSpin) ở mọi hộp thưởng (rương, rương ngự tứ, mâm, hộp gấm); j93 không còn conic/tia nào (thăng phẩm chỉ có vệt sáng quét qua khung, không tia). Thay bằng `.kmlight`: ánh sáng ấm radial tỏa từ trong lòng hộp, cân giữa miệng từng loại (`--gx/--gy`), một lớp sau hộp và một lớp mềm trên miệng (screen), "thở" nhẹ bằng opacity/scale; căn giữa bằng thuộc tính `translate` riêng nên hoạt ảnh không làm trôi tâm.
+- Lật thẻ: `flip()` chỉ gọi `kitFlipTablet` khi thẻ là của nàng; người khác → `kitFlipNote(p)` = một dòng `.kmnote` (kit chip có mặt) dưới thanh trên, không nền tối, không bắt chạm, tự mờ ~2.8 s.
+- Tiêu đề "Hoàng thượng lật thẻ bài": `.kmtabs` có khoảng trên bằng tầm nhấc thẻ, `.kmcap` lớp trên (z-index 3); máy thử đo không chồng.
+- Món bay ra hạ thấp (`.kmitems` top 3%) để không che dòng "ai ban" dưới tiêu đề hộp.
+- Gộp origin/main (j59, j77, j82, j90); thứ tự `… j86, j82, j90, j93, j84` (scene-seasons/j94 chưa vào main: khi vào đặt j94 sau j93, trước j84).
+- Ảnh mới `dev/shots/motion/fix-*`: rương / mâm / hộp gấm / ngự tứ (đóng, mở, nhận), lật thẻ của nàng, dòng báo lật thẻ người khác, giảm chuyển động; 755x1000@2, 1180x820@2 (+ kiểm 1366x1024@2, 412x1058@2, 390x844@3, 1024x768@2). Save cũ (bản main) mở được.

@@ -3,13 +3,13 @@
 Chủ kit chuyển động, nhánh `review/kit-motion`. Thành phần dùng chung mô tả ở `dev/kit/KIT.md`, mục "CHUYỂN ĐỘNG". Mã: `dev/build/j93.js`.
 
 ## Đã làm (đã gắn vào game)
-1. Lật thẻ thị tẩm: 5 thẻ bài xanh, thẻ giữa nhấc lên và lật 3D, mặt thẻ có phẩm và tên. Thẻ của nàng thì có ánh vàng.
+1. Lật thẻ thị tẩm: 5 thẻ bài xanh, thẻ giữa nhấc lên và lật 3D, mặt thẻ có phẩm và tên. Chỉ hiện trọn khi thẻ của nàng được lật (có ánh vàng); thẻ người khác chỉ hiện một dòng báo ngắn dưới thanh trên, không chặn màn.
 2. Quẻ tuần: ống xăm lắc, một que nhảy ra, chữ quẻ bật lên (xanh tốt, đỏ xấu). Chạy trong bảng tuần mới, khi gieo lại và khi xin xăm ở Phật đường.
 3. Kết quả hành động: dấu son chữ Việt "THÀNH" hoặc "BẠI" đóng lên thẻ kết quả, số được/mất bay lên (xanh cộng, đỏ trừ), thanh chỉ số chạy từ số cũ tới số mới.
 4. Thăng phẩm: thánh chỉ mở ra, khung chân dung đổi sang khung bậc mới dưới vệt sáng, chip phẩm mới bật lên. Cung nữ được phong Đáp ứng cũng có. Giáng phẩm và vào lãnh cung: màn tối dần, lá khô rơi.
 5. Qua buổi: dải trời đổi màu (sáng, chiều, tối) và nén nhang cháy cạnh chữ buổi. Qua tuần: tờ lịch lật sang tuần mới rồi bảng tuần hiện lên.
 6. Có thai, sinh con: hoa mẫu đơn nở, cánh hoa bay. Chết: mực loang khắp màn, rồi mở bảng Kiếp này / Sổ luân hồi.
-7. Ban thưởng và quà: mâm sơn son phủ khăn gấm (thưởng nhỏ), rương gỗ chạm vàng (thưởng lớn), rương rồng phượng vàng (ngự tứ), hộp gấm (quà người khác tặng). Chạm để mở, rương rung, nắp bật, tia sáng, từng món nhảy ra theo vòng cung với viền màu theo phẩm cấp (món hiếm ra sau cùng), đồng bạc nảy ra. Bên dưới là tên, công dụng, nút Nhận. Đồ tự mua thì bay vào tab Tư trang.
+7. Ban thưởng và quà: mâm sơn son phủ khăn gấm (thưởng nhỏ), rương gỗ chạm vàng (thưởng lớn), rương rồng phượng vàng (ngự tứ), hộp gấm (quà người khác tặng). Chạm để mở, rương rung, nắp bật, ánh sáng ấm mềm tỏa từ trong lòng rương (không tia, không hào quang), từng món nhảy ra theo vòng cung với viền màu theo phẩm cấp (món hiếm ra sau cùng), đồng bạc nảy ra. Bên dưới là tên, công dụng, nút Nhận. Đồ tự mua thì bay vào tab Tư trang.
 8. Bảng, thẻ mở ra cùng một kiểu (trồi lên nhẹ); mọi nút, lựa chọn, thẻ việc lún xuống khi chạm.
 9. Thời tiết: chip có biểu tượng vẽ ở dải trạng thái; chạm xem tác động thật của thời tiết (lấy đúng từ mã). Hạt mưa, tuyết, lá, hoa trên sân khấu to và đậm hơn để thấy rõ; trong cung của nàng thì nhạt hơn (như nhìn qua cửa sổ).
 Thêm theo quy ước game: viền đỏ nhói khi có việc nguy hiểm tìm đến.
@@ -49,5 +49,5 @@ Mức ưu tiên: A nên làm ngay, B làm sau, C tùy sếp.
 - B. Bản đồ: lớp mưa/tuyết mỏng phủ lên ảnh bản đồ theo thời tiết đang có.
 
 ## Cần sếp quyết
-- Lật thẻ thị tẩm hiện mỗi tuần (90 phần trăm số tuần). Nếu sếp thấy nhiều, em cho chỉ hiện khi thẻ của nàng được lật, còn người khác thì chỉ hiện dòng chữ nhỏ.
+- (Đã làm theo kiểm duyệt) Lật thẻ: trọn hiệu ứng chỉ khi thẻ của nàng; người khác chỉ một dòng báo ngắn.
 - Cung nữ được thăng bậc cung nữ (đại cung nữ, chưởng sự…) hiện chưa có thánh chỉ; đề xuất dùng bản nhỏ của thánh chỉ với lệnh bài cung nữ.

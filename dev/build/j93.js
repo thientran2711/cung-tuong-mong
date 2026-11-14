@@ -61,6 +61,15 @@ function kitFlipTablet(p,o){o=o||{};if(!p)return;const me=p===S||o.me;const nm=p
  kmPush(done=>{const st=kmStage("km-tablet"+(me?"":" km-soft"),html,{dur:1900,hold:me?1800:1100,onEnd:done,onFinal:()=>{}});
   if(me)st.later(1250,()=>{const c=st.ov.querySelector(".kmtab-c");if(c){const r=c.getBoundingClientRect();kmSpark(st.ov,r.left+r.width/2,r.top+r.height*.4,26,["#f0d070","#fff3c4","#e0a526"],170)}})})}
 
+/* someone else's tablet: one short line under the top bar (kit chip), no backdrop, never takes a tap, fades by itself */
+function kitFlipNote(p){if(!p||p===S)return;const nm=p.name||"";const rk=kmRankName(typeof rkOf==="function"?rkOf(p):0);
+ kmPush(done=>{document.querySelectorAll(".kmnote").forEach(e=>e.remove());const n=document.createElement("div");n.className="kmnote";n.setAttribute("role","status");
+  let face="";try{face=mdH(pv(p),"xs")}catch(e){}
+  n.innerHTML=`<span class="kchip n">${face}<span>Tối nay Hoàng thượng lật thẻ <b>${kmEsc(rk)} ${kmEsc(nm)}</b></span></span>`;
+  const hb=document.getElementById("hud2")||document.querySelector(".hud,header");const hr=hb&&hb.getBoundingClientRect();if(hr&&hr.bottom>0&&hr.bottom<innerHeight*.4)n.style.top=Math.round(hr.bottom+6)+"px";
+  document.body.appendChild(n);setTimeout(()=>{n.classList.add("km-out");setTimeout(()=>n.remove(),300)},kmReduced()?3200:2800);done()})}
+window.kitFlipNote=kitFlipNote;
+
 /* ================= 2 QUẺ TUẦN ================= */
 function kitXamHTML(lot){const w=LV[lot.lv]||"",good=LVB[lot.lv]>0,bad=LVB[lot.lv]<0||(lot.dom==="Hung"&&lot.lv>=3);
  return `<div class="kmxam${kmReduced()?" km-skip":""}" aria-label="Gieo quẻ"><div class="kmxt"><img class="kmtube" src="${KM_DIR}mo-xam-tube.webp" alt="" draggable="false"><img class="kmstick" src="${KM_DIR}mo-xam-stick.webp" alt="" draggable="false"></div><div class="kmlot ${bad?"r":good?"g":"n"}"><small>Quẻ</small><b>${kmEsc(w)}</b><small>${kmEsc(lot.dom||"")}</small></div></div>`}
@@ -122,7 +131,7 @@ function kitReward(o){o=o||{};const kind=KM_BOX[o.kind]?o.kind:"chest";const B=K
  const ct=coins?`<div class="kmit kmcoin t0" style="--tc:#c9a46a;--i:${items.length}"><img src="${KM_DIR}mo-ingot-silver.webp" alt=""></div>`:"";
  const rows=items.map(x=>{const T=KM_TIER[x.tier]||KM_TIER[0];return `<div class="kmrow" style="--tc:${T[1]}"><span class="kmtier">${T[0]}</span><b>${kmEsc(x.n)}</b>${x.d?`<small>${kmEsc(x.d)}</small>`:""}</div>`}).join("")+(coins?`<div class="kmrow" style="--tc:#c9a46a"><span class="kmtier">Bạc</span><b class="g">Bạc +${coins}</b></div>`:"");
  const html=`<div class="kmrew kmrew-${kind}"><div class="kmrew-h"><b>${kmEsc(o.title||B[2])}</b>${o.from?`<small>${kmEsc(o.from)}</small>`:""}</div>
-  <div class="kmbox"><i class="kmrays km-loop"></i><img class="kmbox-c km-loop" src="${KM_DIR}${B[0]}.webp" alt="" draggable="false"><img class="kmbox-o" src="${KM_DIR}${B[1]}.webp" alt="" draggable="false"><div class="kmitems">${items.map(it).join("")}${ct}</div><div class="kmcoins">${coins?Array.from({length:Math.min(9,3+Math.round(coins/10))},(_,i)=>`<img src="${KM_DIR}mo-coin-silver.webp" alt="" style="--i:${i}">`).join(""):""}</div></div>
+  <div class="kmbox"><i class="kmlight km-loop"></i><img class="kmbox-c km-loop" src="${KM_DIR}${B[0]}.webp" alt="" draggable="false"><img class="kmbox-o" src="${KM_DIR}${B[1]}.webp" alt="" draggable="false"><i class="kmlight kmlight-f km-loop"></i><div class="kmitems">${items.map(it).join("")}${ct}</div><div class="kmcoins">${coins?Array.from({length:Math.min(9,3+Math.round(coins/10))},(_,i)=>`<img src="${KM_DIR}mo-coin-silver.webp" alt="" style="--i:${i}">`).join(""):""}</div></div>
   <div class="kmtap km-loop">Chạm để mở</div><div class="kmlist">${rows}<button class="kbtn kmtake" data-km-close>Nhận</button></div></div>`;
  kmPush(done=>{const st=kmStage("km-reward",html,{manual:true,dur:60000,onEnd:done});const root=st.ov.querySelector(".kmrew");st.ov.id="kmrew";let step=0;
   const open=()=>{if(step)return;step=1;root.classList.add("km-shake");const t=kmReduced()?0:380;setTimeout(()=>{root.classList.remove("km-shake");root.classList.add("km-open");
@@ -188,7 +197,7 @@ function kmDiff(){if(!kmOn()){return}if(KMS!==S||!KMSNAP){KMS=S;KMSNAP=kmSnap();
    const royal=why==="son"||why==="sinhthan";const kind=royal?"royal":why==="night"?"tray":"chest";KMSNAP&&KMSNAP.inv.push(x);
    kitReward({kind,title:royal?"Ngự tứ":why==="night"?"Mâm thưởng":"Rương bảo vật",from:`Hoàng thượng ban · ${(typeof BWHY==="object"&&BWHY[why])||""}`.replace(/ · $/,""),items:[{n:IT[x.k].n,d:IT[x.k].d,img:kmItemImg(x.k),tier:kmTierOf(x.k,royal)}],bac:Math.max(0,(S.bac||0)-(b0||0))})}}catch(e){console.error(e)}return r});
  /* thị tẩm: the week's tablet (after the week panel closes) */
- W("flip",o=>function(){const r=o.apply(this,arguments);try{if(kmOn()&&!S.dead&&S.tonight){const t=S.tonight==="me"?S:S.tonight;kitFlipTablet(t,{me:t===S})}}catch(e){console.error(e)}return r});
+ W("flip",o=>function(){const r=o.apply(this,arguments);try{if(kmOn()&&!S.dead&&S.tonight){const t=S.tonight==="me"?S:S.tonight;if(t===S)kitFlipTablet(t,{me:true});else kitFlipNote(t)}}catch(e){console.error(e)}return r});
  /* result card */
  W("resultShow",o=>function(){const r=o.apply(this,arguments);try{const t=document.getElementById("rtoast");if(t&&t.classList.contains("on")&&kmOn())kitResultFx(t)}catch(e){console.error(e)}return r});
  /* buổi: incense + sky on the curtain */
@@ -232,8 +241,8 @@ window.kitReward=kitReward;window.kitFlyItem=kitFlyItem;window.kitAlarm=kitAlarm
 /* 1 tablet */
 .km-tablet.km-soft{background:#1a0f0a99}
 .kmflip{display:flex;flex-direction:column;align-items:center;gap:14px;width:100%}
-.kmcap{font-family:var(--display);font-weight:700;color:#f6e3b4;font-size:1.05rem;letter-spacing:.05em;text-shadow:0 2px 6px #000a;animation:kmFade .4s ease both}
-.kmtabs{display:flex;align-items:flex-end;justify-content:center;gap:clamp(6px,2vw,16px);height:min(52vh,420px);perspective:1100px}
+.kmcap{position:relative;z-index:3;font-family:var(--display);font-weight:700;color:#f6e3b4;font-size:1.05rem;letter-spacing:.05em;text-shadow:0 2px 6px #000a;animation:kmFade .4s ease both}
+.kmtabs{display:flex;align-items:flex-end;justify-content:center;gap:clamp(6px,2vw,16px);height:min(52vh,420px);perspective:1100px;box-sizing:content-box;padding-top:clamp(28px,7%,40px)}
 .kmtab{height:82%;aspect-ratio:116/520;position:relative;filter:drop-shadow(0 8px 10px #0008)}
 .kmtab img{display:block;width:100%;height:100%}
 .kmtab-s{opacity:.85;animation:kmTabIn .5s var(--km-out) calc(.06s * (var(--i) + 3)) both}
@@ -333,6 +342,12 @@ window.kitReward=kitReward;window.kitFlyItem=kitFlyItem;window.kitAlarm=kitAlarm
 .kmblot.b2{left:38%;top:58%;animation-delay:.25s;width:50vmax}
 .kmicap{position:relative;display:flex;flex-direction:column;align-items:center;gap:4px;animation:kmFade .6s ease 1.1s both}
 @keyframes kmInk{0%{opacity:0;transform:translate(-50%,-50%) scale(.05)}25%{opacity:.95}100%{opacity:.97;transform:translate(-50%,-50%) scale(3.2)}}
+/* someone else's tablet: a short line, not an overlay */
+.kmnote{position:fixed;left:50%;top:calc(env(safe-area-inset-top,0px) + 58px);translate:-50% 0;z-index:8800;pointer-events:none;max-width:calc(100vw - 32px);animation:kmNote .3s var(--km-out) both}
+.kmnote .kchip{display:inline-flex;align-items:center;gap:7px;max-width:100%;margin:0;font-size:.82rem;line-height:1.3;padding:3px 12px 3px 4px;border-radius:14px;border-color:var(--gold);background:#fffaf0f4;box-shadow:0 4px 14px #0004}
+.kmnote .kchip>.md{flex:none}
+.kmnote.km-out{animation:kmFadeOut .3s ease forwards}
+@keyframes kmNote{from{opacity:0;translate:-50% -8px}to{opacity:1;translate:-50% 0}}
 /* 7 reward */
 .km-reward{background:radial-gradient(ellipse at 50% 42%,#4a2a14e0,#140a06f2 70%)}
 .kmrew{display:flex;flex-direction:column;align-items:center;gap:8px;width:100%;max-width:560px}
@@ -344,10 +359,16 @@ window.kitReward=kitReward;window.kitFlyItem=kitFlyItem;window.kitAlarm=kitAlarm
 .kmbox-o{opacity:0}
 .km-shake .kmbox-c{animation:kmRattle .38s linear both}
 .km-open .kmbox-c{opacity:0;transition:opacity .12s}.km-open .kmbox-o{opacity:1;animation:kmPop .3s var(--km-ease) both}
-.kmrays{position:absolute;left:50%;top:40%;width:170%;aspect-ratio:1;transform:translate(-50%,-50%) scale(.3);border-radius:50%;opacity:0;pointer-events:none;
- background:repeating-conic-gradient(#fff3c400 0 9deg,#fff3c455 9deg 14deg),radial-gradient(#fff3c4aa,transparent 60%);-webkit-mask-image:radial-gradient(#000 25%,transparent 68%);mask-image:radial-gradient(#000 25%,transparent 68%)}
-.km-open .kmrays{animation:kmRays .6s ease-out forwards,kmSpin 9s linear infinite}
-.kmitems{position:absolute;left:0;right:0;top:-6%;height:60%;display:flex;justify-content:center;align-items:center;gap:8px;pointer-events:none;z-index:4}
+.kmrew-chest .kmbox{--gx:50%;--gy:45%}.kmrew-royal .kmbox{--gx:50%;--gy:54%}.kmrew-tray .kmbox{--gx:50%;--gy:51%}.kmrew-gift .kmbox{--gx:55%;--gy:37%}
+/* soft light from INSIDE the opened box (owner: no fan rays / halo anywhere): warm radial glow centred on the mouth, breathing gently.
+   centring uses the separate translate property, so the scale/opacity animation never moves it */
+.kmlight{position:absolute;left:var(--gx,50%);top:calc(var(--gy,45%) - 10%);width:165%;aspect-ratio:1.2;translate:-50% -50%;scale:.5;opacity:0;border-radius:50%;pointer-events:none;
+ background:radial-gradient(closest-side,#fff3c8f2,#ffd98acc 22%,#f6b55a70 48%,#f0a04a26 72%,#f0a04a00 100%)}
+.kmlight-f{top:calc(var(--gy,45%) - 4%);width:78%;aspect-ratio:1.55;z-index:2;mix-blend-mode:screen;background:radial-gradient(closest-side,#fff8e0f0,#ffe4a8a0 34%,#ffd27a40 64%,#ffd27a00 100%)}
+.kmrew-royal .kmlight{background:radial-gradient(closest-side,#fff8dcff,#ffe08ad8 22%,#f6c45a78 48%,#f0b44a2a 72%,#f0b44a00 100%)}
+.kmrew-royal .kmlight-f,.kmrew-tray .kmlight-f,.kmrew-gift .kmlight-f{background:radial-gradient(closest-side,#fff8e0f0,#ffe4a8a0 34%,#ffd27a40 64%,#ffd27a00 100%)}
+.km-open .kmlight{animation:kmLightIn .6s ease-out forwards,kmBreathe 2.8s ease-in-out .6s infinite}
+.kmitems{position:absolute;left:0;right:0;top:3%;height:60%;display:flex;justify-content:center;align-items:center;gap:8px;pointer-events:none;z-index:4}
 .kmit{width:clamp(52px,13vw,72px);aspect-ratio:1;border-radius:10px;display:flex;align-items:center;justify-content:center;background:radial-gradient(#fffaf0,#f6ead6);border:2px solid var(--tc);box-shadow:0 0 0 2px #fffaf0,0 0 14px 2px color-mix(in srgb,var(--tc) 70%,transparent),0 6px 10px #0007;opacity:0}
 .kmit img{width:82%;height:82%;object-fit:contain}.kmini0{font-family:var(--display);color:var(--gold);font-size:1.4rem}
 .kmit.t3{box-shadow:0 0 0 2px #fffaf0,0 0 20px 5px color-mix(in srgb,var(--tc) 80%,transparent),0 6px 10px #0007}
@@ -370,8 +391,8 @@ window.kitReward=kitReward;window.kitFlyItem=kitFlyItem;window.kitAlarm=kitAlarm
 [data-tab].km-pulse{animation:kmPulse .6s ease}
 @keyframes kmBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 @keyframes kmRattle{0%,100%{transform:rotate(0)}20%{transform:rotate(-5deg) translateY(-3px)}40%{transform:rotate(5deg)}60%{transform:rotate(-4deg) translateY(-2px)}80%{transform:rotate(3deg)}}
-@keyframes kmRays{to{opacity:1;transform:translate(-50%,-50%) scale(1)}}
-@keyframes kmSpin{to{rotate:360deg}}
+@keyframes kmLightIn{from{opacity:0;scale:.5}to{opacity:1;scale:1}}
+@keyframes kmBreathe{0%,100%{opacity:1;scale:1}50%{opacity:.78;scale:1.05}}
 @keyframes kmArc{0%{opacity:0;transform:translate(0,120px) scale(.3)}55%{opacity:1;transform:translate(0,-40px) scale(1.15)}100%{opacity:1;transform:none}}
 @keyframes kmCoin{0%{opacity:0;transform:translate(0,0) scale(.4)}40%{opacity:1;transform:translate(calc(var(--cx) * (20px + var(--i) * 9px)),-90px) rotate(160deg)}100%{opacity:0;transform:translate(calc(var(--cx) * (40px + var(--i) * 14px)),30px) rotate(400deg)}}
 @keyframes kmBlink{0%,100%{opacity:.55}50%{opacity:1}}
@@ -386,7 +407,7 @@ window.kitReward=kitReward;window.kitFlyItem=kitFlyItem;window.kitAlarm=kitAlarm
 /* reduced motion: final frames, no travel */
 /* reduced motion (global rule in p1 removes every animation): pin each piece to its final frame */
 @media (prefers-reduced-motion:reduce){.kmcard{transform:rotateY(180deg)}.kmtab-c{transform:translateY(-4%) scale(1.06)}.kmsc-c,.kmfr-old,.kmsweep{display:none}.kmsc-o{clip-path:none}
- .kmit{opacity:1}.km-open .kmrays{opacity:1;transform:translate(-50%,-50%) scale(1)}.kmblot{opacity:.97;transform:translate(-50%,-50%) scale(3.2)}.kmstick{transform:translate(10px,6px) rotate(64deg)}.kmdark{opacity:1}}
+ .kmit{opacity:1}.km-open .kmlight{opacity:1;scale:1}.kmblot{opacity:.97;transform:translate(-50%,-50%) scale(3.2)}.kmstick{transform:translate(10px,6px) rotate(64deg)}.kmdark{opacity:1}}
 @media (prefers-reduced-motion:reduce){.kmov *,.kmseal,.kmxam *,.kmcal,.kmfl,.kmalarm,.dlg,#kpop,.rtoast.karesult.on{animation-duration:.01s!important;animation-delay:0s!important;animation-iteration-count:1!important}.kmfls,.kmalarm,.kmcal{display:none}}
 @media (max-width:599px){.kmtabs{height:min(46vh,360px)}.kmcap{font-size:.95rem}}
 @media (orientation:landscape) and (max-height:860px){.kmtabs{height:min(50vh,380px)}.kmbloom{height:min(74vh,520px)}.kmbox{width:min(40vw,320px)}}
