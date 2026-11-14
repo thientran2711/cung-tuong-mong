@@ -133,3 +133,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (22:35Z) Owner: the 8 palace paintings are for the 8 palace heads (chủ vị); lower consorts living in the same palace get their own different side-room paintings (phối điện/thiên điện), varied so co-residents don't share.
 - (22:40Z) Owner: residence paintings get the full sáng/trưa/chiều/tối × 4 seasons set (16 painted variants each), not season-by-tint.
 - (22:45Z) Owner: speed up co-op with several workers (target: play with a friend tonight). Split: lead/backend (Worker+DO+PROTOCOL), B client+lobby, C shared-world gameplay; MVP first (reborn as cung nữ; tiểu thư later).
+- (22:50Z) Owner: no more code-reshaped facial expressions — feelings are shown by the small mood icons (jexpr/face-lm removed from review/appearance; illness/poison/slap/rash overlays stay). Owner asked to redraw place backdrops' 4 seasons × sáng/trưa/chiều/tối more beautifully — pilot Ngự hoa viên first.
