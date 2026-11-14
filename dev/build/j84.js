@@ -83,7 +83,7 @@ function patchTabs(){document.querySelectorAll("#tabs button[data-tab]").forEach
   if(b.dataset.l0!=null){b.dataset.l0=T[0];b.dataset.s0=T[1]}if(!(typeof isSrv==="function"&&isSrv())){b.textContent=T[0];b.dataset.s=T[1]}})}
 try{if(typeof SRVTABS==="object"&&SRVTABS){if(SRVTABS.act==="Việc")SRVTABS.act="Phận sự";if(SRVTABS.story==="Thân phận")SRVTABS.story="Thân phận"}}catch(e){}
 try{if(typeof HX==="object"){HX.hh="Lòng Hoàng hậu đối với ngươi. Càng cao càng được che chở; thấp quá sẽ bị làm khó, chặn đường thăng phẩm.";
-  HX.date="Ngày tháng trong cung. Mỗi tháng ba tuần (thượng, trung, hạ tuần), mỗi tuần ba buổi.";
+  HX.date="Ngày tháng trong cung. Mỗi tháng ba tuần (thượng, trung, hạ tuần), mỗi tuần bốn buổi.";
   for(const k in HX)HX[k]=fix(HX[k])}}catch(e){}
 patchTabs();
 const mo=new MutationObserver(ms=>{if(busy)return;busy=true;try{for(const m of ms){if(m.type==="characterData")fixText(m.target);else if(m.type==="attributes")fixAttr(m.target,m.attributeName);else m.addedNodes.forEach(fixEl)}}finally{busy=false}});

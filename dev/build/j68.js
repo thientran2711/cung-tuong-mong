@@ -135,7 +135,7 @@ function evActorKey(m){const w=m.who;if(w){if(w.w)return w.w.join(":");if(w.nm)r
 function evNames(t){let x=t;try{(rivals||[]).forEach(r=>{x=x.split(r.name).join("X")});(S.staff||[]).concat(S.maid?[S.maid]:[]).forEach(s=>{if(s.name)x=x.split(s.name).join("X")})}catch(e){}return x}
 function evKeys(m){const t=evTxt(m);const tpl=m.pid?"p:"+m.pid.replace(/^e68/,"e:"):"t:"+(m.t||"")+"|"+evNames(t).slice(0,26);return{tpl,key:tpl+"|"+evActorKey(m)+"|"+t.slice(0,40)}}
 function evS(){const e=e68();e.sch=e.sch||{tpl:{},key:{},last:"",bk:"",day:-1,dn:0};return e.sch}
-function bk6(){return wk()*3+(S.buoi||0)}
+function bk6(){return wk()*B4N+(S.buoi||0)}
 let EVHOLD=[],EVLAST=null;
 function evDropInfo(m){if(!m.opts&&m.h){try{log(evTxt(m).slice(0,200))}catch(e){}}}
 function evGate(){if(!S||S.dead||window.__e68off||!Q.length)return;const sc=evS();const b=bk6(),day=wk();if(sc.day!==day){sc.day=day;sc.dn=0}

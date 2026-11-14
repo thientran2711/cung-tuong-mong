@@ -19,7 +19,7 @@ function accessOf(p,k){p=p||S;if(!k)return{ok:false,why:"cung trống",kind:"rul
  if(k==="kn"){if(!qOn()||r>=7)return{ok:true};if(b===0||r>=5)return{ok:true};return{ok:false,why:"chỉ sáng thỉnh an",kind:"rule",ask:"bk"}}
  if(k==="tn"){if(S.thDead)return{ok:true};if(r<2)return{ok:false,why:"cần phẩm Quý nhân",kind:"rule"};if(b===0)return{ok:true};return{ok:false,why:"chỉ sáng thỉnh an",kind:"rule"}}
  if(k[0]==="r"){const h=ctx.host;if(!h||!h.alive||h.out)return{ok:true};const hr=rkOf(h);if(r>=hr-1)return{ok:true};return{ok:false,why:`cần phẩm ${RANKS[Math.max(0,hr-1)].n}`,kind:"rule",ask:"bk"}}
- if(ACC_DAY[k]){if(b<=1)return{ok:true};return{ok:false,why:"đóng cửa tối",kind:"hour"}}
+ if(ACC_DAY[k]){if(b<B4L)return{ok:true};return{ok:false,why:"đóng cửa tối",kind:"hour"}}
  return{ok:true}}
 /* the odds and prices (her side; an NPC module may call the same) */
 function accSneakO(k,a){a=a||S;const base=k==="dtd"?25:k==="thu"?30:k==="tn"||k==="kn"?35:k[0]==="r"?45:55;return odA(a,base+(a.tamco||0)/5+(a.mat||0)*3)}
@@ -105,7 +105,7 @@ function accInfo(){if(!S||Q.length)return;const R=n=>`<b>${n}</b>`;
  <p>${R("Càn Ninh cung")}: sáng thỉnh an, ai cũng vào. Lúc khác: được mời, hoặc từ Quý phi.</p>
  <p>${R("Đức Thọ cung")}: sáng thỉnh an, từ Quý nhân. Thấp hơn: khi Thái hậu triệu.</p>
  <p>${R("Cung phi tần khác")}: phẩm ngươi không thấp hơn chủ cung quá một bậc, hoặc được mời.</p>
- <p>${R("Thái y viện, Ngự hoa viên")}: sáng, chiều. Tối đóng cửa.</p>
+ <p>${R("Thái y viện, Ngự hoa viên")}: sáng, trưa, chiều. Tối đóng cửa.</p>
  <p>${R("Kính sự phòng")}: phi tần nào cũng vào. ${R("Trường Môn viện")}: ai cũng vào, bị thấy: Danh -2.</p>
  <p>${R("Cung của ngươi")}: luôn vào được.</p>
  <p>Chỗ xám: không vào được lúc này. <b>Lẻn vào</b>: tốn khắc, bị bắt Danh -8 và bị phạt.</p></div>`,btn:"Đã rõ"});showModal()}

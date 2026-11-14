@@ -11,10 +11,10 @@
    Travel: a trip longer than the khắc left first finishes this buổi (clock turns), then she arrives in the new
    buổi with the rest of the trip already spent, meeting whoever is there in that buổi.
    NPCs never use can/spend, so they are untouched. */
-function j76left(){return !S?0:(4-used)+4*(2-(S.buoi||0))}
-function j76nextName(){const b=Math.min(2,(S.buoi||0)+1);return BUOI[b].replace("Buổi ","buổi ")}
+function j76left(){return !S?0:(4-used)+4*(B4L-(S.buoi||0))}
+function j76nextName(){const b=Math.min(B4L,(S.buoi||0)+1);return BUOI[b].replace("Buổi ","buổi ")}
 /* would an act of c khắc started now spill into the next buổi? (only when it is allowed) */
-function j76spills(c){return !!S&&!S.dead&&c>0&&used<4&&used+c>4&&!S.j76carry&&!window.__j76win&&(S.buoi||0)<2&&c<=j76left()}
+function j76spills(c){return !!S&&!S.dead&&c>0&&used<4&&used+c>4&&!S.j76carry&&!window.__j76win&&(S.buoi||0)<B4L&&c<=j76left()}
 /* ===== ONE Sức FLOOR (folds the j80 hotfix in) =====
    Sức under 5 = kiệt sức: acts of 2+ khắc wait until she rests. A card that costs Sức needs more Sức than it costs.
    Exempt: 1-khắc acts, acts that restore Sức and cost none (rest), and walking (map, visits). */
@@ -26,7 +26,7 @@ can=function(c){if(window.__j76paid)c=Math.max(0,c-window.__j76paid);if(!S||S.de
  if(used+c<=4)return true;return j76spills(c)};
 
 (function(){const s0=spend;spend=function(c){if(window.__j76paid){window.__j76paid=0;return}const before=used;const r=s0.apply(this,arguments);
- try{if(S&&!S.dead&&used>4&&before<4&&(S.buoi||0)<2&&!window.__j76win){S.j76carry=(S.j76carry||0)+(used-4);used=4}}catch(e){}return r}})();
+ try{if(S&&!S.dead&&used>4&&before<4&&(S.buoi||0)<B4L&&!window.__j76win){S.j76carry=(S.j76carry||0)+(used-4);used=4}}catch(e){}return r}})();
 /* the clock turns: carry the spilled khắc into the new buổi; a new day drops nothing because tối never spills */
 (function(){const n0=nextBuoi;nextBuoi=function(){if(!S)return n0.apply(this,arguments);const b0=S.buoi||0,c=S.j76carry||0;const r=n0.apply(this,arguments);
  try{if(c&&S&&(S.buoi||0)!==b0){if(!S.dead&&(S.buoi||0)>b0){used=Math.min(4,c);S.j76carry=c>4?c-4:0}else S.j76carry=0;if(!S.dead){save();render()}}}catch(e){}return r}})();
@@ -71,7 +71,7 @@ function j76win(a,f){const w=window.__j76win,r0=window.__j76rest,c0=window.__j76
    const q=Q.splice(0);window.__j76paid=tc;let r;try{r=g0.apply(this,arguments)}finally{window.__j76paid=0;Q.unshift(...q)}render();return r}}}catch(e){window.__j76paid=0}
  return g0.apply(this,arguments)}})();
 /* the help line for the buổi chip */
-try{HX.buoi="Mỗi buổi có 4 khắc, ngày có 3 buổi. Việc cần nhiều khắc hơn số còn lại thì kéo sang buổi sau (đường xa thì đến nơi vào buổi sau); việc chỉ làm trong một buổi phải xong trong buổi ấy, và buổi tối không kéo qua đêm."}catch(e){}
+try{HX.buoi="Mỗi buổi có 4 khắc, ngày có 4 buổi (sáng, trưa, chiều, tối). Việc cần nhiều khắc hơn số còn lại thì kéo sang buổi sau (đường xa thì đến nơi vào buổi sau); việc chỉ làm trong một buổi phải xong trong buổi ấy, và buổi tối không kéo qua đêm."}catch(e){}
 /* ===== NO DEAD ENDS (owner 11/14): with any khắc left there is always something worth doing =====
    The deck is dealt once a day and each card is done once that day, the Sức floor locks 2-khắc acts, and
    bạc can run dry: so after a few acts every card went grey with khắc still left. Three standing 1-khắc acts are

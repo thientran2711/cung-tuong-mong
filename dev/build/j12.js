@@ -14,7 +14,7 @@ function harsh(){return S&&S.wx&&(S.wx.f===2||S.wx.f===4)}
 function wxName(){return S&&S.wx?`${SEASON[S.month-1]} · ${S.wx.n}`:SEASON[S.month-1]}
 /* light by buổi, smooth CSS overlay (works without the scene layer) */
 function lightTick(){const st=$("stage");if(!st||!S)return;let L=st.querySelector(".light");if(!L){L=document.createElement("div");L.className="light";st.insertBefore(L,$("sc-t"))}
- const b=S.buoi||0,late=used>=2;const c=b===0?"rgba(170,200,255,.16)":b===1?(late?"rgba(255,130,50,.22)":"rgba(255,210,120,.14)"):"rgba(14,24,70,.5)";
- const w=wet()?(b===2?",rgba(40,50,80,.25)":",rgba(90,100,120,.18)"):S.wx&&(S.wx.k==="frost"||S.wx.k.startsWith("snow"))?",rgba(200,225,255,.16)":"";
+ const b=S.buoi||0;const c=b4Light(b,used);
+ const w=wet()?(b===B4L?",rgba(40,50,80,.25)":",rgba(90,100,120,.18)"):S.wx&&(S.wx.k==="frost"||S.wx.k.startsWith("snow"))?",rgba(200,225,255,.16)":"";
  L.style.background=`linear-gradient(${c},${c})${w?`,linear-gradient(${w.slice(1)},${w.slice(1)})`:""}`;document.body.dataset.buoi=b;
  st.classList.toggle("frost",!!(S.wx&&S.wx.k==="frost"))}
