@@ -195,3 +195,11 @@ C-m45-t3 iGqakOc3uK handsB (a48 book)
 C-m46-t3 N2Fh5Ja6D9 handsB
 C-m47-t3 s7oVmril8e handsB
 C-m48-t3 79vXEwAJAL handsB
+C-m49-t3 79vXQl6JAL handsB
+C-m50-t3 w4hdugO7EI handsB
+C-m51-t3 rgeWIkixtc handsB
+C-m52-t3 SytpCSQUb8 handsB
+C-m27-t4 rgeWtL2xtc handsB
+C-m28-t4 N2Fh1RH6D9 handsB
+C-m29-t4 ov9U2vF829 handsB
+C-m30-t4 gOIDCytSXO handsB (a48 teacup)

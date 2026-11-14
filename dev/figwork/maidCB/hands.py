@@ -27,7 +27,7 @@ def pose_for(tr,i,t,prop,g=0):
     k=(g*5+t*7)
     KEY=("fan","sachet","pouch","lantern","flute","scroll","book","songbook","mirror","peony","teacup","basket","beads","box","handkerchief","letter","cage","birdcage","vase","blossom","orchid","magnolia","wisteria","lotus","plum","osmanthus","peach","comb","ball","pendant")
     FL=("peony","blossom","orchid","magnolia","wisteria","lotus","plum","osmanthus","peach","flower")
-    def keys(o): return {w for w in KEY if w in o}|({"FLOWER"} if any(f in o for f in FL) and "basket" not in o else set())
+    def keys(o): return {w for w in KEY if w in o}|({"FLOWER"} if any(f in o for f in FL) or "basket" in o or "vase" in o else set())|({"PAPER"} if any(p in o for p in ("letter","scroll","book")) else set())  # C-B: basket/vase count as floral, letter/scroll/book as paper
     objs=[sig]+[o for o in OBJ if not (keys(o)&keys(sig)) and not ("blossom" in o and any(f in sig for f in ("peony","orchid","magnolia","wisteria","lotus","plum","osmanthus","peach")))]
     pick=[]; j=k
     while len(pick)<3:

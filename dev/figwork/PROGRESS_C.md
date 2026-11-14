@@ -53,3 +53,4 @@ Mẻ B2: t2 m35–m42 (8 lineup + 1 vẽ lại m40 vì hoa điền to). Tín d�
 Mẻ B3: t2 m43–m50 (8 lineup + 1 vẽ lại m47 vì tay áo hơi trong). Tín dụng 9×273 = 2457.
 Mẻ B4: t2 m51–m52 (t2 m27–m52 XONG) + t3 m27–m32 (hoa điền nấc 3). 8 lineup, tín dụng 8×273 = 2184.
 Mẻ B5: t3 m33–m40. 8 lineup, tín dụng 8×273 = 2184.
+Mẻ B6: t3 m41–m48. 8 lineup, tín dụng 8×273 = 2184.
