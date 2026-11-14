@@ -79,8 +79,8 @@ function kitResultFx(card){if(!card)return;const red=kmReduced();const ok=card.c
   bar.innerHTML=`<b style="width:${red?b:a}%"></b>`;it.appendChild(bar);if(!red)requestAnimationFrame(()=>requestAnimationFrame(()=>{const f=bar.firstElementChild;if(f)f.style.width=b+"%"}))});
  /* floating numbers (green +, red −) rise from the card */
  if(red)return;const r=card.getBoundingClientRect();const L=[];card.querySelectorAll(".kr-duoc .ef.g,.kr-mat .ef.r").forEach(s=>{const t=s.textContent;const m=t.match(/^(.*?)\s+(-?\d+)→(-?\d+)/);if(m){const d=+m[3]-+m[2];if(d)L.push([m[1].trim(),d])}});
- L.slice(0,6).forEach(([n,d],i)=>{const f=document.createElement("span");f.className="kmfl "+(d>0?"g":"r");f.textContent=`${n} ${d>0?"+":"−"}${Math.abs(d)}`;
-  f.style.left=Math.round(r.left+r.width*(.18+.64*((i+.5)/Math.max(1,Math.min(6,L.length)))))+"px";f.style.top=Math.round(r.top+6)+"px";f.style.animationDelay=(.25+i*.12)+"s";document.body.appendChild(f);setTimeout(()=>f.remove(),2300)})}
+ if(!L.length)return;document.querySelectorAll(".kmfls").forEach(e=>e.remove());const box=document.createElement("div");box.className="kmfls";box.style.left=Math.round(r.left+r.width/2)+"px";box.style.top=Math.round(r.top-34)+"px";box.style.maxWidth=Math.round(Math.min(innerWidth-16,Math.max(r.width,260)))+"px";
+ L.slice(0,6).forEach(([n,d],i)=>{const f=document.createElement("span");f.className="kmfl "+(d>0?"g":"r");f.textContent=`${n} ${d>0?"+":"−"}${Math.abs(d)}`;f.style.animationDelay=(.25+i*.12)+"s";box.appendChild(f)});document.body.appendChild(box);setTimeout(()=>box.remove(),2400)}
 
 /* ================= 4 THĂNG PHẨM / GIÁNG PHẨM ================= */
 function kmFrameSwap(p,from,to){let h=kmFace(p,"big");const re=/(frame|bg)-consort-(\d)/g;const old=from<0?h.replace(/frame-consort-\d/g,"frame-maid-1").replace(/bg-consort-\d/g,"bg-maid"):h.replace(re,(m,a)=>`${a}-consort-${Math.max(0,Math.min(7,from))}`);
@@ -97,7 +97,8 @@ function kitGloom(o){o=o||{};const leaves=Array.from({length:14},(_,i)=>`<img cl
 
 /* ================= 5 QUA BUỔI / QUA TUẦN ================= */
 function kitDayShift(){const c=document.getElementById("curtain");if(!c||kmReduced())return;if(c.querySelector(".kminc"))return;
- const d=document.createElement("div");d.className="kminc";d.innerHTML=`<img src="${KM_DIR}mo-incense.webp" alt="" draggable="false"><i class="kmember"></i><i class="kmsmoke s1"></i><i class="kmsmoke s2"></i>`;c.appendChild(d)}
+ const d=document.createElement("i");d.className="kminc";d.innerHTML=`<img src="${KM_DIR}mo-incense.webp" alt="" draggable="false"><i class="kmember"></i><i class="kmsmoke s1"></i><i class="kmsmoke s2"></i>`;
+ const sp=c.querySelector("span");(sp||c).prepend(d);const sky=document.createElement("i");sky.className="kmsky b"+((S&&S.buoi)||0);c.prepend(sky)}
 function kitCalendar(el,o){if(!el)return null;o=o||{};const d=document.createElement("div");d.className="kmcal"+(kmReduced()?" km-skip":"");
  d.innerHTML=`<div class="kmcal-b"><img src="${KM_DIR}mo-calendar.webp" alt="" draggable="false"><div class="kmcal-p kmcal-new"><b>${kmEsc(o.to||"")}</b><small>${kmEsc(o.toSub||"")}</small></div><div class="kmcal-p kmcal-old"><b>${kmEsc(o.from||"")}</b><small>${kmEsc(o.fromSub||"")}</small></div></div>`;
  el.appendChild(d);return d}
@@ -204,7 +205,7 @@ function kmDiff(){if(!kmOn()){return}if(KMS!==S||!KMSNAP){KMS=S;KMSNAP=kmSnap();
  /* the week panel: calendar page flips, then the lot is drawn from the tube */
  W("dawn",o=>function(){const pre=S?{m:S.month,y:S.year,t:S.tuan}:null;const r=o.apply(this,arguments);try{const w=document.getElementById("dawn");if(!w||!S)return r;const box=w.querySelector(".dbox");
    if(box&&S.lot){const sec=[...box.querySelectorAll(".kpsec")].find(s=>/Quẻ/.test(s.textContent));if(sec){sec.classList.add("kmlotsec");kitXamPlay(sec,S.lot)}}
-   const sky=w.querySelector(".dsky");if(sky&&!kmReduced()){const T=TUAN[S.tuan]||"";kitCalendar(sky,{to:T?T[0].toUpperCase()+T.slice(1):"",toSub:`Tháng ${S.month} · năm ${S.year}`,from:"Tuần qua",fromSub:SEASON[S.month-1]||""});w.classList.add("kmcal-on");setTimeout(()=>w.classList.remove("kmcal-on"),1500)}}catch(e){console.error(e)}return r})})();
+   const sky=w;w.querySelectorAll(":scope > .kmcal").forEach(e=>e.remove());w.classList.toggle("km-nocal",kmReduced());if(!kmReduced()){const T=TUAN[S.tuan]||"";kitCalendar(sky,{to:T?T[0].toUpperCase()+T.slice(1):"",toSub:`Tháng ${S.month} · năm ${S.year}`,from:(()=>{const P=TUAN[(S.tuan+TUAN.length-1)%TUAN.length]||"";return P?P[0].toUpperCase()+P.slice(1):"Tuần qua"})(),fromSub:"đã qua"});w.classList.add("kmcal-on");sky.lastElementChild.addEventListener("click",e=>{e.stopPropagation();w.classList.remove("kmcal-on")},{once:true});setTimeout(()=>w.classList.remove("kmcal-on"),1350)}}catch(e){console.error(e)}return r})})();
 window.kitFlipTablet=kitFlipTablet;window.kitXamPlay=kitXamPlay;window.kitResultFx=kitResultFx;window.kitEdict=kitEdict;window.kitGloom=kitGloom;window.kitBloom=kitBloom;window.kitInk=kitInk;
 window.kitReward=kitReward;window.kitFlyItem=kitFlyItem;window.kitAlarm=kitAlarm;window.kitDayShift=kitDayShift;window.kitCalendar=kitCalendar;window.kitWxEffects=kitWxEffects;window.kmPush=kmPush;window.kmStage=kmStage;
 
@@ -251,24 +252,25 @@ window.kitReward=kitReward;window.kitFlyItem=kitFlyItem;window.kitAlarm=kitAlarm
 /* 2 lot tube */
 .kmxam{display:flex;align-items:center;justify-content:center;gap:14px;padding:4px 0 2px;cursor:pointer}
 .kmxt{position:relative;height:96px;width:70px;display:flex;justify-content:center;align-items:flex-end}
-.kmtube{height:96px;width:auto;transform-origin:50% 90%;animation:kmShake .9s ease-in-out both;position:relative;z-index:1}
-.kmstick{position:absolute;height:84px;width:auto;left:50%;bottom:18px;z-index:2;transform-origin:50% 100%;animation:kmStick .7s var(--km-out) .85s both}
-.kmlot{display:flex;flex-direction:column;align-items:center;min-width:5.5rem;padding:4px 10px;border:1px solid var(--line);border-radius:var(--k-rad,8px);background:#fffaf0;animation:kmPop .4s var(--km-ease) 1.45s both}
+.kmtube{height:96px;width:auto;transform-origin:50% 90%;animation:kmShake .9s ease-in-out var(--kd,0s) both;position:relative;z-index:1}
+.kmstick{position:absolute;height:84px;width:auto;left:50%;bottom:18px;z-index:2;transform-origin:50% 100%;animation:kmStick .7s var(--km-out) calc(var(--kd,0s) + .85s) both}
+.kmlot{display:flex;flex-direction:column;align-items:center;min-width:5.5rem;padding:4px 10px;border:1px solid var(--line);border-radius:var(--k-rad,8px);background:#fffaf0;animation:kmPop .4s var(--km-ease) calc(var(--kd,0s) + 1.45s) both}
 .kmlot b{font-family:var(--display);font-size:1.15rem;color:var(--gold)}.kmlot small{font-size:.68rem;color:var(--dim)}.kmlot.g b{color:var(--good)}.kmlot.r b{color:var(--bad)}
-.kmlotsec .krows,.kmlotsec .kfacts{animation:kmFade .35s ease 1.6s both}
+.kmlotsec{--kd:0s}.dawn .kmlotsec{--kd:1.3s}.dawn.km-nocal .kmlotsec{--kd:0s}.kmlotsec .krows,.kmlotsec .kfacts{animation:kmFade .35s ease calc(var(--kd,0s) + 1.6s) both}
 @keyframes kmShake{0%,100%{transform:rotate(0)}10%{transform:rotate(-9deg)}22%{transform:rotate(8deg)}34%{transform:rotate(-8deg)}46%{transform:rotate(7deg)}58%{transform:rotate(-6deg)}70%{transform:rotate(5deg)}82%{transform:rotate(-3deg)}}
 @keyframes kmStick{0%{opacity:0;transform:translate(-50%,30px) rotate(0)}45%{opacity:1;transform:translate(-50%,-46px) rotate(8deg)}100%{opacity:1;transform:translate(10px,6px) rotate(64deg)}}
 /* 3 result card: seal, floating numbers, bars */
 .rtoast.karesult{overflow:visible}
 .kmseal{position:absolute;right:8px;top:-14px;width:58px;height:auto;z-index:3;pointer-events:none;transform:rotate(-12deg);mix-blend-mode:multiply;animation:kmStamp .5s cubic-bezier(.3,1.4,.5,1) .1s both}
 .km-thump{animation:kmThump .35s ease .45s both!important}
-.kmfl{position:fixed;z-index:9050;pointer-events:none;transform:translate(-50%,0);font-weight:800;font-size:.95rem;white-space:nowrap;text-shadow:0 1px 0 #fff,0 0 6px #fffaf0;animation:kmFloat 1.5s var(--km-out) both}
+.kmfls{position:fixed;z-index:9050;pointer-events:none;transform:translateX(-50%);display:flex;flex-wrap:wrap;justify-content:center;gap:6px;width:max-content}
+.kmfl{position:relative;font-weight:800;font-size:1rem;white-space:nowrap;background:#fffaf0;border:1.5px solid currentColor;border-radius:12px;padding:1px 9px;box-shadow:0 4px 12px #5a3a2050;animation:kmFloat 1.5s var(--km-out) both}
 .kmfl.g{color:var(--good)}.kmfl.r{color:var(--bad)}
 .kmbar{display:block;height:4px;margin:2px 0 3px;border-radius:2px;background:#e6d3ac;overflow:hidden;max-width:220px}.kmbar b{display:block;height:100%;border-radius:2px;transition:width .9s var(--km-out) .35s}
 .kmbar.up b{background:var(--good)}.kmbar.down b{background:var(--bad)}
 @keyframes kmStamp{0%{opacity:0;transform:rotate(-22deg) scale(2.6)}60%{opacity:1;transform:rotate(-12deg) scale(.92)}100%{opacity:.95;transform:rotate(-12deg) scale(1)}}
 @keyframes kmThump{0%,100%{translate:0 0}30%{translate:0 3px}60%{translate:0 -1px}}
-@keyframes kmFloat{0%{opacity:0;transform:translate(-50%,8px) scale(.8)}20%{opacity:1;transform:translate(-50%,-6px) scale(1.1)}100%{opacity:0;transform:translate(-50%,-56px) scale(1)}}
+@keyframes kmFloat{0%{opacity:0;transform:translateY(10px) scale(.8)}20%{opacity:1;transform:translateY(-4px) scale(1.1)}75%{opacity:1}100%{opacity:0;transform:translateY(-48px) scale(1)}}
 /* 4 edict + frame change */
 .kmedict{display:flex;flex-direction:column;align-items:center;gap:10px;width:100%}
 .kmscroll{position:relative;width:min(92vw,640px);aspect-ratio:1000/448}
@@ -297,18 +299,23 @@ window.kitReward=kitReward;window.kitFlyItem=kitFlyItem;window.kitAlarm=kitAlarm
 .kmgcap b{font-family:var(--display);font-size:1.3rem;color:#d8d2cc;letter-spacing:.06em}.kmgcap small{color:#b8b0aa;font-size:.82rem;max-width:30rem}
 @keyframes kmLeaf{from{transform:translate(0,0) rotate(var(--r))}50%{transform:translate(var(--w),50vh) rotate(calc(var(--r) + 140deg))}to{transform:translate(calc(var(--w) * -1),105vh) rotate(calc(var(--r) + 300deg))}}
 /* 5 buổi incense, week calendar */
-.curtain.shift .kminc{position:absolute;left:50%;top:50%;transform:translate(-50%,-112%);height:min(34vh,240px);aspect-ratio:200/419;pointer-events:none;opacity:.95}
+.curtain.shift span:has(.kminc){display:flex;align-items:center;gap:12px;padding:8px 22px 8px 14px;position:relative;z-index:1}
+.kminc{position:relative;display:block;height:78px;aspect-ratio:200/419;pointer-events:none;flex:none}
 .kminc img{width:100%;height:100%;display:block}
+.kmsky{position:absolute;inset:0;pointer-events:none;animation:kmSky 1s ease both}
+.kmsky.b0{background:linear-gradient(#ffe9b8aa,#fff6e000 60%)}.kmsky.b1{background:linear-gradient(#f2a35a99,#f6c98a00 65%)}.kmsky.b2{background:linear-gradient(#1c1840d0,#2a205080 55%,#5a3a6020)}
+@keyframes kmSky{from{transform:translateY(-100%)}to{transform:none}}
 .kmember{position:absolute;left:50%;width:6px;height:6px;margin-left:-3px;border-radius:50%;background:#ff7a2a;box-shadow:0 0 8px 3px #ffb060;top:2%;animation:kmBurn .95s linear both}
 .kmsmoke{position:absolute;left:50%;top:0;width:10px;height:40px;margin-left:-5px;border-radius:50%;background:radial-gradient(#ffffffa0,transparent 70%);filter:blur(3px);animation:kmSmoke 1s ease-out both}.kmsmoke.s2{animation-delay:.3s}
-@keyframes kmBurn{from{top:2%}to{top:22%}}
+@keyframes kmBurn{from{top:1%}to{top:20%}}
 @keyframes kmSmoke{from{opacity:0;transform:translateY(0) scale(.6)}40%{opacity:.8}to{opacity:0;transform:translate(8px,-50px) scale(1.4)}}
-.kmcal{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:3;pointer-events:none;animation:kmCalOut .35s ease 1.15s forwards}
-.kmcal-b{position:relative;width:min(44vw,220px);aspect-ratio:290/420;perspective:700px}.kmcal-b>img{width:100%;height:100%;display:block}
+.kmcal{position:fixed;left:50%;top:46%;transform:translate(-50%,-50%);z-index:5;pointer-events:auto;animation:kmCalOut .35s ease 1.15s forwards}
+.dawn:not(.kmcal-on) .kmcal{pointer-events:none}
+.kmcal-b{position:relative;width:min(48vw,240px);aspect-ratio:290/420;perspective:700px}.kmcal-b>img{width:100%;height:100%;display:block}
 .kmcal-p{position:absolute;left:9%;right:9%;top:16%;bottom:6%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;text-align:center;font-family:var(--display);color:#8a2a1e;background:#fbf4e4;border:1px solid #d9b98a;border-radius:2px}
 .kmcal-p b{font-size:clamp(1.2rem,4.4vw,1.8rem)}.kmcal-p small{font-size:.72rem;color:#7a5a30}
 .kmcal-old{transform-origin:50% 0;animation:kmPage .7s ease-in .3s forwards;backface-visibility:hidden}
-.dawn.kmcal-on .dbox{animation-delay:1.15s!important}
+.dawn .dbox{transition:opacity .35s ease,transform .35s var(--km-ease)}.dawn.kmcal-on .dbox{opacity:0!important;transform:translateY(24px) scale(.97)!important}
 @keyframes kmPage{to{transform:rotateX(-110deg) translateY(-6px);opacity:0}}
 @keyframes kmCalOut{to{opacity:0;transform:translate(-50%,-60%) scale(.8)}}
 /* 6 bloom, ink */
@@ -372,12 +379,12 @@ window.kitReward=kitReward;window.kitFlyItem=kitFlyItem;window.kitAlarm=kitAlarm
 @keyframes kmPulse{0%,100%{filter:none}40%{filter:brightness(1.25) drop-shadow(0 0 8px #f0d070)}}
 /* danger edge, weather chip */
 .kmalarm{position:fixed;inset:0;z-index:8900;pointer-events:none;box-shadow:inset 0 0 0 0 #c23b2200;animation:kmAlarm .8s ease-in-out 2}
-@keyframes kmAlarm{0%,100%{box-shadow:inset 0 0 0 0 #c23b2200}50%{box-shadow:inset 0 0 60px 14px #c23b2270}}
+@keyframes kmAlarm{0%,100%{box-shadow:inset 0 0 0 0 #c23b2200}50%{box-shadow:inset 0 0 80px 22px #c23b22a0}}
 .hud2 .hc.kmwx{display:inline-flex!important;align-items:center;gap:4px;padding-left:3px}.hud2 .hc.kmwx img{width:20px;height:20px;border-radius:50%}
 .kmwxh{display:flex;align-items:center;gap:8px}.kmwxh img{border-radius:50%;flex:none}.kmwxh small{display:block;font-family:var(--body);font-weight:400;font-size:.72rem;color:var(--dim)}
 .kmwxl p{margin:3px 0;font-size:.8rem;line-height:1.35}.kmwxl .ef.n{color:var(--ink)}
 /* reduced motion: final frames, no travel */
-@media (prefers-reduced-motion:reduce){.kmov *,.kmseal,.kmxam *,.kmcal,.kmfl,.kmalarm,.dlg,#kpop,.rtoast.karesult.on{animation-duration:.01s!important;animation-delay:0s!important;animation-iteration-count:1!important}.kmfl,.kmalarm,.kmcal{display:none}}
+@media (prefers-reduced-motion:reduce){.kmov *,.kmseal,.kmxam *,.kmcal,.kmfl,.kmalarm,.dlg,#kpop,.rtoast.karesult.on{animation-duration:.01s!important;animation-delay:0s!important;animation-iteration-count:1!important}.kmfls,.kmalarm,.kmcal{display:none}}
 @media (max-width:599px){.kmtabs{height:min(46vh,360px)}.kmcap{font-size:.95rem}}
 @media (orientation:landscape) and (max-height:860px){.kmtabs{height:min(50vh,380px)}.kmbloom{height:min(74vh,520px)}.kmbox{width:min(40vw,320px)}}
 `;document.head.appendChild(st)})();
