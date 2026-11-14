@@ -151,3 +151,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (01:35Z) Co-op release plan: ship week-sync MVP first (after bug fixes + bot year), then per-buổi same-place sync (see each other live, same NPCs via host 'where', player-to-player acts with Nhận/Từ chối) as the next update (~4–5 h more).
 - (01:40Z) Owner approved the residence xuân-sáng sheet (25 rooms) → rollout all 16 variants per room + wire into game.
 - (01:55Z) Owner approved the emotion icon set 'palace lady' (pilot-emo-lady: oval face, red lips, two-bun chignon, flower, bộ diêu).
+- (02:00Z) Owner: co-op players have the FULL interaction set with each other like with NPCs, incl. harm/scheme/sát hại, depending on place/rank/conditions; not a simple Nhận/Từ chối card — only invitation-type acts ask the target; harm resolves with normal odds/detection.
