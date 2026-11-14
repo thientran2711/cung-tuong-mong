@@ -13,7 +13,7 @@ Thiết kế + núm: mục "Luật trang phục" dưới đây (thay cho dev/WAR
 ## BỘ VẬT PHẨM MỚI (11/14, phiên 2): 13 bậc × 20 món = 260 món (thay 43 món cũ)
 Sếp chê bộ cũ (y phục không giống trang phục thật của nhân vật, ít món). Làm lại theo yêu cầu:
 - **13 bậc**: 5 bậc cung nữ m0 Cung nữ thô sử, m1 Cung nữ, m2 Đại cung nữ, m3 Chưởng sự cô cô, m4 Nữ quan + 8 bậc phi tần Đáp ứng → Hoàng hậu. Mỗi bậc **10 trâm cài + 10 y phục**; trong mỗi loại **4 Thường, 3 Tinh phẩm, 2 Trân phẩm, 1 Tuyệt phẩm**. **Ngự tứ** vẫn là món hiếm riêng (9 món độc nhất mỗi kiếp: 3 trâm cũ giữ lại + 6 y phục vẽ mới) và 2 áo tang (vải trắng, vải gai).
-- Dữ liệu: `dev/build/j92cat.js` (sinh bằng scratchpad `w2/tools/mkcat.py`; đứng ngay trước j92 trong assemble.py): `WD_TIERS`, `WD_LIST` hàng `[khóa, ô, tên, P, phẩm cấp, họ màu, tác dụng, ghi chú, icon, xa hoa 1–10, giá, bậc]`, `WD_OLDKEY` (quy đổi save cũ).
+- Dữ liệu: `dev/build/j92cat.js` (sinh bằng `dev/figwork/wardrobe/mkcat.py`; đứng ngay trước j92 trong assemble.py): `WD_TIERS`, `WD_LIST` hàng `[khóa, ô, tên, P, phẩm cấp, họ màu, tác dụng, ghi chú, icon, xa hoa 1–10, giá, bậc]`, `WD_OLDKEY` (quy đổi save cũ).
 - **Luật phẩm theo bậc**: P của món = bậc của món. Phi tần 1..8 như cũ; **cung nữ có thang riêng** m0..m4 = −2, −1.5, −1, −0.5, 0 (ma ma 0, lãnh cung −1), nên cung nữ thô sử mặc áo Nữ quan là vượt phẩm, Nữ quan mặc áo thô sử là quá giản dị, cùng ngưỡng `WD.over`/`WD.under`. Phẩm cấp trong bậc cộng thêm `WD.gBump`=0,15 bậc mỗi nấc (Tuyệt phẩm đúng bậc vẫn đúng phẩm; Tuyệt phẩm bậc trên là vượt phẩm). Ngự tứ của chính mình không bao giờ vượt phẩm.
 - **Phẩm phục được cấp** (from "base") tự đổi theo bậc hiện tại (thăng, giáng, cung nữ thăng bậc); ưu tiên món Thường/Tinh phẩm.
 - Giá: theo bậc (cung nữ 8–22, Đáp ứng 25 … Hoàng hậu 320) × phẩm cấp (×1 / 1,4 / 2 / 3). Xa hoa 1–10 theo bậc + phẩm cấp, hiện trong mô tả món ("Xa hoa n/10"). Tác dụng Sắc/Danh theo bậc + phẩm cấp.
@@ -22,9 +22,16 @@ Sếp chê bộ cũ (y phục không giống trang phục thật của nhân v�
 - **Ảnh**: `img/wd-<bậc>-<y|tram>-<nn>.webp` 256×256 nền trong suốt + `img/wd512/…` 512×512 xem chi tiết; `img/wd-nt-tram-01..03`, `wd-nt-y-01..06`, `wd-tang-y-01..02`. `WD_ITEMS[k].icon` / `.big`. 43 ảnh cũ `img/wd-<khóa cũ>.webp` đã xóa.
   - Y phục vẽ THEO HÌNH MẪU: mỗi bậc ghép 10 tranh nhân vật đúng bậc thành 1 ảnh tham chiếu (phi tần `fig-consort-cXX-tN-a26`, cung nữ `fig-maid-mXX-tmK-a26` từ nhánh review/maid-art, m1 = tranh gốc), gpt-2-6 vẽ đúng bộ áo của nhân vật ở ô tương ứng, treo trên giá áo gỗ hình chữ T (bậc thấp gỗ trơn, Tần–Phi gỗ chạm mây, Quý phi trở lên chạm thếp vàng đầu phượng), không người; mỗi món đổi màu, hoa văn, lớp khoác theo thang áo LAD (spec5.py) của bậc.
   - Trâm cài sang dần theo bậc: gỗ/xương/đồng (m0) → bạc, lưu ly, trai (m1–m2, Đáp ứng, Thường tại) → mạ vàng, ngọc, san hô (m3–m4, Quý nhân) → vàng, bộ diêu (Tần, Phi) → kim phượng (Quý phi) → phượng điểm thúy (Hoàng quý phi, Hoàng hậu). Mỗi bậc phi tần và m0 giữ 2 trâm cũ đẹp (cắt lại 512 từ tấm gốc), vẽ thêm 8.
-  - Gom lưới 5×2 (trâm phi tần 4×2) mỗi lượt, 4k; cắt bằng `w2/tools/cutgrid.py` (loang nền giấy từ mép + nền kẹt trong khung, nền theo vùng, bỏ bóng đổ ở trâm, gán mảnh vào ô theo tâm để món lấn ô vẫn nguyên).
+  - Gom lưới 5×2 (trâm phi tần 4×2) mỗi lượt, 4k; cắt bằng `dev/figwork/wardrobe/cutgrid.py` (loang nền giấy từ mép + nền kẹt trong khung, nền theo vùng, bỏ bóng đổ ở trâm, gán mảnh vào ô theo tâm để món lấn ô vẫn nguyên).
+  - Trâm cài (và tấm y phục Hoàng hậu): tách nền bằng Magnific remove-background trên cả tấm (bỏ sạch bóng đổ, không thủng bạc/ngọc trai), rồi `cutgrid.py` cắt từng món theo tâm (GAP nhỏ cho tấm có tua dài: phi, quyphi).
   - Ảnh lưới xem trước từng bậc: `dev/shots/wardrobe/tier-<bậc>-yphuc.jpg`, `tier-<bậc>-tram.jpg`, `tier-ngutu-tang.jpg`.
-- Tín dụng: toàn bộ ảnh vẽ bằng Magnific **gpt-2-6** (thư mục ba4aecfe-…), style ref face-consort-01 (y phục), tấm trâm cũ (trâm), ref nhân vật = tranh nhân vật trong game; mã lượt vẽ: scratchpad `w2/gens.txt`.
+- Tín dụng: toàn bộ ảnh vẽ bằng Magnific **gpt-2-6** (thư mục ba4aecfe-…), style ref face-consort-01 (y phục), tấm trâm cũ (trâm), ref nhân vật = tranh nhân vật trong game; mã lượt vẽ: `dev/figwork/wardrobe/gens.txt`.
+
+### Thử bộ mới (11/14, Playwright 755x1000@2, 412x1058@2)
+- Save tạo ở bản 8c2171b (43 món, có y_haiduong, y_cungnu, y_minhhoang trên NPC) mở ở bản mới: quy đổi đúng (w_tan_y08, w_m1_y01, w_hh_y09), điều đã biết chuyển theo, không lỗi trang, không tràn ngang.
+- 271 món (260 theo bậc + 9 ngự tứ + 2 áo tang), đủ 542 ảnh (256 + 512). Thang cung nữ −2..0, wdPickAt theo bậc gần nhất.
+- Sưu tập: cho 60 món → đạt mốc 20 và 50, Phúc duyên 0 → 15, danh hiệu «Cẩm tú doanh rương». Ảnh Tư trang: dev/shots/wardrobe/wd2-tutrang-755.jpg, wd2-tutrang-412.jpg.
+- Ô vật phẩm trong Tư trang vẫn là nối tạm (chờ chủ kit K1/K2 dùng `WD_ITEMS[k].icon` / `.big`).
 
 ## NHU CẦU THÀNH PHẦN KIT (cho chủ kit, review/kit-2b)
 

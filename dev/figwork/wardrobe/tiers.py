@@ -1,0 +1,270 @@
+# tiers.py: spec of the 13 wardrobe tiers (8 consort ranks + 5 maid ranks) for the gpt-2-6 sheets.
+# python3 tiers.py ref TIER   -> builds ref-<tier>-y.jpg (the 10 figures whose outfits are copied)
+# python3 tiers.py y TIER     -> prints the outfit-sheet prompt
+# python3 tiers.py tram TIER  -> prints the hairpin-sheet prompt
+import sys
+FIG = "figs"
+PRE = ("Semi-realistic painterly guofeng illustration, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering "
+       "and the costume design of the figures in the reference image. ")
+STAND_LO = "a simple polished wooden T-shaped clothes stand (one slim central post on a small wooden base, a long straight crossbar at the top)"
+STAND_MID = "a carved dark rosewood T-shaped clothes stand (one central post on a small carved base, a long crossbar with carved cloud ends at the top)"
+STAND_HI = "a carved dark rosewood T-shaped clothes stand with small gilded details (one central post on a small carved base, a long crossbar with gilded carved phoenix-head ends)"
+TAIL = ("Colours clearly distinct from each other, fine visible embroidery stitches, silk sheen, soft folds. Plain flat light parchment background, soft even light, "
+        "no people, no mannequin, no body, no head, no hands, no text, no labels, no numbers, no cell borders.")
+
+# each tier: name, figure files (10, order = item 1..10), stand, base description, items (10 descriptions; 1-4 Thường, 5-7 Tinh phẩm, 8-9 Trân phẩm, 10 Tuyệt phẩm)
+T = {
+ "dapung": dict(rank="lowest-rank consort (Đáp ứng)", src=[f"fig-consort-{c}-t1-a26.webp" for c in "c09 c14 c08 c31 c11 c15 c12 c10 c07 c01".split()], stand=STAND_LO,
+   base="a light flowing hanfu: crossed-collar silk robe over a long high-waisted pleated skirt, wide soft sleeves, a sheer gauze outer layer, small embroidered flowers on collar and sleeves, a plain silk sash",
+   items=["pale sky-blue robe with a few small white flowers on the collar, plain white sash",
+          "pale butter-yellow robe with small wisteria sprigs on the cuffs",
+          "soft peach robe with tiny plum blossoms on collar and hem",
+          "mint-green robe with small white orchids, a sheer mint gauze overlayer",
+          "lavender robe with small lilac flowers along the borders and a lilac sash with a small jade disc",
+          "rose-pink robe with peach blossom sprigs on the sleeves and a pink ribbon sash",
+          "sage-green robe over cream with small lotus sprigs and a woven sash",
+          "apricot robe with delicate chrysanthemum borders and a sheer apricot gauze shawl draped over the crossbar",
+          "lilac robe with embroidered cranes small on the sleeves and a silver-thread border",
+          "coral-red robe with pale peony sprigs, the richest of the ten: silver-thread borders, a sheer layered gauze over-robe and a small jade pendant"]),
+ "thuongtai": dict(rank="rank-2 consort (Thường tại)", src=[f"fig-consort-{c}-t2-a26.webp" for c in "c30 c32 c17 c16 c13 c22 c03 c18 c02 c06".split()], stand=STAND_LO,
+   base="a fine silk hanfu with embroidered borders and a small woven pattern, crossed collar, long pleated skirt, a silk sash with a small jade pendant",
+   items=["pale ice-blue robe with small bamboo leaves on the borders",
+          "ivory-cream robe with pale pink plum blossom borders",
+          "blush-pink robe with small peony sprigs and a pink sash",
+          "olive-green robe over cream with small lotus borders",
+          "peach-coral robe with small butterflies and flowers on the sleeves",
+          "soft lavender robe with woven cloud pattern and a long lavender gauze over-robe",
+          "fresh green robe over cream with orchid borders and a woven sash with a jade pendant",
+          "mauve-purple robe with silver-thread wisteria borders and a jade pendant with tassel",
+          "sapphire-blue robe over a pale skirt with silver-thread cloud borders and a sheer blue gauze shawl",
+          "rust-orange robe with gold-thread pomegranate flowers, the richest of the ten: wide embroidered borders, a woven brocade sash and a jade pendant with silk tassels"]),
+ "quynhan": dict(rank="rank-3 consort (Quý nhân)", src=[f"fig-consort-{c}-t3-a26.webp" for c in "c29 c20 c28 c19 c10 c11 c05 c21 c04 c24".split()], stand=STAND_LO,
+   base="a patterned silk hanfu with woven motifs, a woven brocade sash and fuller layered sleeves, crossed collar, long pleated skirt in two layers",
+   items=["lavender-grey robe with woven small flowers",
+          "cream-pink robe with woven peach blossoms and a pink brocade sash",
+          "celadon-green robe with woven lotus and a sheer celadon overlayer",
+          "dusty-rose robe with woven peonies on the sleeves",
+          "apricot robe with gold-thread chrysanthemum borders and a brocade sash",
+          "lilac robe with woven orchids and a long open lilac gauze over-robe",
+          "teal robe over cream with gold-thread lotus borders and a jade pendant",
+          "coral robe with layered sleeves, gold-thread plum blossom borders and a brocade sash with long ribbons",
+          "royal-purple robe with gold-thread peony borders and a jade belt pendant",
+          "deep crimson robe with gold-thread peonies, the richest of the ten: three visible layers, wide gold borders, a brocade sash and jade pendants"]),
+ "tan": dict(rank="rank-4 consort (Tần)", src=[f"fig-consort-{c}-t4-a26.webp" for c in "c09 c12 c17 c07 c02 c10 c03 c04 c05 c23".split()], stand=STAND_MID,
+   base="a high-waisted layered silk robe of two or three visible layers and a long pleated skirt, wide trailing sleeves, WIDE gold-thread embroidered borders at collar, sleeves and hem, an embroidered silk sash with a small jade pendant",
+   items=["pale sky-blue robe with light silver bamboo embroidery on the borders, a plain white sash, a sheer white gauze shawl draped over the crossbar, no cloud collar",
+          "sage-green robe with pink plum blossom borders and a short sleeveless gold-edged green vest over it",
+          "blush-pink robe with peony sprigs under a long open sheer pink gauze over-jacket",
+          "soft lilac crossed-collar robe with orchid embroidery and a wide embroidered waist sash with long ribbons",
+          "deep sapphire-blue robe with an ivory gauze overlayer, gold cloud embroidery and an embroidered cloud collar (yunjian)",
+          "apricot-orange robe with gold chrysanthemums, wide gold borders and a cloud collar with tiny tassels",
+          "olive-green robe over a cream skirt with a long open over-robe bordered in gold-thread lotus and a jade belt pendant",
+          "royal-purple three-layer robe densely embroidered with gold peonies, a pearl-trimmed cloud collar, jade and gold pendants",
+          "deep teal-green robe with gold phoenix-tail and lotus embroidery and an embroidered teal stole edged in gold",
+          "deep saturated crimson-red three-layer robe, the most splendid of the ten: dense gold phoenixes and peonies, a jewelled pearl-edged cloud collar, gold-and-jade belt with long tassels"]),
+ "phi": dict(rank="rank-5 consort (Phi)", src=[f"fig-consort-{c}-t5-a26.webp" for c in "c09 c14 c12 c07 c13 c16 c06 c02 c04 c01".split()], stand=STAND_MID,
+   base="a silk brocade hanfu richly embroidered in gold with phoenixes and peonies, long trailing wide sleeves, a gold-embroidered waistband with hanging jade belt pendants and tassels, a sheer silk shawl draped over the crossbar",
+   items=["pale blue brocade robe with gold peony borders",
+          "pale gold-yellow brocade robe with wisteria and gold clouds",
+          "sage-green brocade robe with gold lotus and a celadon shawl",
+          "lilac brocade robe with gold orchids and a lilac shawl",
+          "peach-coral brocade robe with gold phoenix tails on the sleeves",
+          "olive-green brocade robe with gold chrysanthemums and jade pendants",
+          "rust-orange brocade robe with gold phoenixes and pomegranates",
+          "sapphire-blue brocade robe densely embroidered in gold with phoenixes and clouds",
+          "royal-purple brocade robe densely embroidered in gold with phoenixes and peonies",
+          "coral-red brocade robe, the most splendid of the ten: dense gold phoenixes and peonies over the whole robe, a pearl-trimmed collar, gold-and-jade belt with long tassels"]),
+ "quyphi": dict(rank="rank-6 noble consort (Quý phi)", src=[f"fig-consort-{c}-t6-a26.webp" for c in "c11 c10 c08 c03 c15 c05 c02 c06 c04 c01".split()], stand=STAND_HI,
+   base="a HEAVY silk brocade hanfu in SATURATED colour, embroidered with phoenixes along the borders in colour and gold thread, an embroidered pearl-edged cape/stole over the shoulders, gold-and-jade necklace hanging on the stand",
+   items=["saturated lavender brocade robe with phoenix borders and a pearl-edged lavender stole",
+          "saturated apricot-gold brocade robe with chrysanthemum phoenix borders",
+          "saturated peach-pink brocade robe with peony phoenix borders and a pearl-edged stole",
+          "saturated jade-green brocade robe with lotus phoenix borders and a gold necklace",
+          "saturated rose-pink brocade robe with peach blossom phoenix borders",
+          "saturated teal brocade robe with gold phoenixes and lotus, pearl-edged teal cape",
+          "saturated sapphire-blue brocade robe with gold phoenixes and clouds, pearl-edged blue cape",
+          "saturated vermilion-orange brocade robe densely embroidered with gold phoenixes, pearl cape",
+          "saturated royal-purple brocade robe densely embroidered with gold phoenixes and peonies, jewelled pearl cape",
+          "saturated crimson-red brocade robe, the most splendid of the ten: dense gold phoenixes and peonies, a jewelled pearl-and-gold cape, gold-and-jade necklace"]),
+ "hqp": dict(rank="rank-7 imperial noble consort (Hoàng quý phi)", src=[f"fig-consort-{c}-t7-a26.webp" for c in "c07 c09 c14 c12 c13 c08 c03 c05 c04 c02".split()], stand=STAND_HI,
+   base="a near-empress ceremonial hanfu of SATURATED silk, phoenixes and auspicious clouds embroidered in gold thread on the chest and along the borders, a jewelled cloud-collar cape edged with pearls and gold, strands of pearls across the chest, a jade-and-gold belt with long tassels, a long trailing train spread on the floor",
+   items=["saturated lilac ceremonial robe with gold phoenixes and clouds",
+          "saturated ice-blue ceremonial robe with silver-and-gold phoenixes",
+          "saturated golden-yellow ceremonial robe with phoenixes and peonies (not imperial bright yellow)",
+          "saturated jade-green ceremonial robe with gold phoenixes and lotus",
+          "saturated coral ceremonial robe with gold phoenixes and peach blossoms",
+          "saturated rose-pink ceremonial robe with gold phoenixes, pearl cloud collar",
+          "saturated emerald-green ceremonial robe with gold phoenixes, jewelled cloud collar",
+          "saturated teal ceremonial robe densely embroidered with gold phoenixes, kingfisher-blue jewelled collar",
+          "saturated royal-purple ceremonial robe densely embroidered with gold phoenixes and clouds, jewelled pearl cape, very long train",
+          "saturated deep sapphire-blue ceremonial robe, the most splendid of the ten: gold phoenixes over the whole robe, jewelled gold-and-pearl cloud collar, many pearl strands, very long train"]),
+ "hh": dict(rank="the Empress (Hoàng hậu)", src=[f"fig-consort-{c}-t8-a26.webp" for c in "c11 c10 c16 c08 c06 c03 c05 c02 c14 c01".split()], stand=STAND_HI,
+   base="the Empress's imperial phoenix ceremonial hanfu of SATURATED silk with large phoenixes and clouds embroidered in gold thread, a jewelled layered gold-and-pearl cloud-collar cape, many pearl strands, a jade-and-gold belt with long tassels, a VERY long trailing train spread on the floor; the grandest robes of all",
+   items=["saturated lavender phoenix robe",
+          "saturated apricot-gold phoenix robe",
+          "saturated olive-green phoenix robe with gold lotus",
+          "saturated rose-pink phoenix robe with gold peonies",
+          "saturated vermilion phoenix robe with gold clouds",
+          "saturated emerald-green phoenix robe with jewelled collar",
+          "saturated teal phoenix robe with kingfisher-blue jewelled collar",
+          "saturated deep sapphire-blue phoenix robe with nine gold phoenixes",
+          "imperial bright yellow (minghuang) phoenix robe with large gold phoenixes and a pearl cape",
+          "deep imperial crimson-red phoenix robe, the most splendid of all: large gold phoenixes over the whole robe, jewelled gold-and-pearl cloud-collar cape, many pearl strands, the longest train"]),
+ "m0": dict(rank="palace maid of the lowest grade (tiểu cung nữ)", src=[f"fig-maid-{m}-tm0-a26.webp" for m in "m01 m02 m03 m04 m07 m08 m09 m12 m39 m44".split()], stand=STAND_LO, maid=1,
+   base="a palace maid's outfit in fine silk (never poor): a short crossed-collar embroidered jacket (ru) over a long pleated skirt, narrow-to-medium sleeves, small embroidered flowers on the collar, cuffs and skirt hem, a thin sash",
+   items=["pale blue jacket over an ivory skirt with tiny flower hem",
+          "soft peach jacket over a cream skirt",
+          "pale lilac jacket over an ivory skirt with small plum sprigs",
+          "apricot jacket over a cream skirt with a narrow embroidered band",
+          "light blue jacket with a pink sash over a pale skirt",
+          "blush-pink jacket over a rose-tinted skirt with flower hem",
+          "lilac jacket over a lilac skirt with small orchids",
+          "coral jacket over a peach skirt with embroidered borders",
+          "cream jacket over a lavender skirt with small lilac flowers",
+          "rose jacket over a pink skirt with an embroidered apron panel, the finest of the ten"]),
+ "m1": dict(rank="palace maid (cung nữ)", src=[f"fig-maid-{m}-a26.webp" for m in "m01 m02 m03 m04 m05 m06 m09 m12 m13 m14".split()], stand=STAND_LO, maid=1,
+   base="a palace maid's outfit in fine silk: a crossed-collar robe with a long embroidered sleeveless vest (bijia) or apron panel over a long pleated skirt, embroidered borders, a sash with a small tassel",
+   items=["pale green robe with a cream embroidered vest",
+          "sage-green robe and skirt with a green sash",
+          "slate-blue robe with an embroidered blue vest",
+          "apricot robe with a peach embroidered apron panel",
+          "coral robe with a rose embroidered vest",
+          "pale blue robe with a long blue vest and tassel",
+          "rose robe with a pink embroidered vest and skirt",
+          "butter-yellow robe with an embroidered cream vest",
+          "lilac robe with a lilac embroidered vest and tassel",
+          "cream-and-green robe with a long embroidered vest and woven sash, the finest of the ten"]),
+ "m2": dict(rank="senior palace maid (đại cung nữ)", src=[f"fig-maid-{m}-tm2-a26.webp" for m in "m01 m02 m03 m04 m05 m06 m07 m09 m10 m13".split()], stand=STAND_LO, maid=1,
+   base="a senior palace maid's outfit in embroidered silk: a layered short jacket over a long jacket and a two-tier pleated skirt, wider sleeves, embroidered flower borders, a sash with a jade pendant",
+   items=["layered pink jacket set over a pink skirt with peony borders",
+          "layered pale blue jacket set with silver-thread borders",
+          "layered apricot jacket set with plum blossom borders",
+          "layered lilac jacket set over a lilac skirt",
+          "layered coral jacket set with flower borders",
+          "layered sky-blue jacket set with an embroidered tray-cloth sash",
+          "layered rose jacket set with a tasselled sash",
+          "layered orange jacket set with a peach skirt and a draped shawl",
+          "layered lavender jacket set with silver borders",
+          "layered rose-pink jacket set with dense flower borders and a jade pendant, the finest of the ten"]),
+ "m3": dict(rank="palace maid supervisor (chưởng sự cung nữ)", src=[f"fig-maid-{m}-tm3-a26.webp" for m in "m01 m02 m03 m04 m05 m06 m07 m08 m10 m14".split()], stand=STAND_MID, maid=1,
+   base="a palace maid supervisor's outfit in DEEP muted embroidered silk: a long crossed-collar robe with wide sleeves over a pleated skirt, dense embroidered borders, a sash hung with a ring of brass keys and a small embroidered purse",
+   items=["plum-purple robe with rose borders",
+          "slate-grey robe with blue borders",
+          "wine-red robe with gold flower borders",
+          "slate-blue robe with silver borders",
+          "bronze-brown robe with gold borders",
+          "steel-blue robe with flower borders",
+          "maroon robe with gold flower borders",
+          "navy robe with dense flower borders",
+          "teal-grey robe with gold borders and keys",
+          "deep navy-blue robe with dense gold-thread borders, the finest of the ten"]),
+ "m4": dict(rank="chief palace maid steward (quản sự cung nữ)", src=[f"fig-maid-{m}-tm4-a26.webp" for m in "m01 m03 m05 m07 m09 m12 m13 m22 m28 m36".split()], stand=STAND_MID, maid=1,
+   base="a chief palace steward's official outfit: a crimson round-collar robe with an embroidered square crane badge on the chest, wide sleeves with brocade borders, worn over a pleated skirt, a belt with a jade plaque and tassel",
+   items=["rose-crimson round-collar robe with a small crane badge",
+          "brick-red round-collar robe with flower borders",
+          "dusty-red round-collar robe with crane badge and belt tassel",
+          "deep crimson round-collar robe with brocade borders",
+          "cherry-red round-collar robe with flower-patterned body",
+          "red-orange round-collar robe with crane badge",
+          "wine-crimson round-collar robe with dense borders",
+          "scarlet round-collar robe with gold-thread crane badge",
+          "deep red round-collar robe with gold borders and jade belt",
+          "rich crimson round-collar robe, the finest of the ten: gold-thread crane badge, dense brocade borders, jade belt plaque"]),
+}
+
+TRAM = {
+ "dapung": ("lowest-rank consort (Đáp ứng): silver, pearls, pale jade, glass, silk flowers; simple and delicate", 8,
+   ["a silver hairpin with a single pearl and a small silver leaf", "a pair of silver two-pronged hairpins with small engraved plum heads",
+    "a small silver comb with a row of seed pearls", "a silver hairpin with a pale blue glass flower",
+    "a silver hairpin with a carved pale jade bud", "a silver hairpin with a cluster of small pink silk flowers and a pearl",
+    "a short silver bu yao with one strand of small pearls", "a silver hairpin with a small enamel bird and a pearl drop"]),
+ "thuongtai": ("rank-2 consort (Thường tại): engraved silver, pearls, pale jade, pink glass, fresh-flower hairpins", 8,
+   ["an engraved silver hairpin with a pearl orchid", "a silver hairpin with a pale green jade leaf and a pearl",
+    "a silver hairpin with a pink glass peach blossom", "a pair of silver hairpins with small pearl clusters",
+    "a silver comb with pale jade inlay", "a silver bu yao with two short strands of pearls and pink glass beads",
+    "a silver hairpin with a lilac enamel wisteria spray", "a silver hairpin with a small pearl moon and silver clouds"]),
+ "quynhan": ("rank-3 consort (Quý nhân): gilded silver, pearls, jade, coral, small gold accents", 8,
+   ["a gilded silver hairpin with a coral bead flower", "a gilded silver comb with jade leaves",
+    "a gilded silver hairpin with a white jade plum blossom", "a gilded silver bu yao with three pearl strands",
+    "a gilded silver hairpin with an enamel kingfisher-blue flower", "a pair of gilded hairpins with pearl peonies",
+    "a gilded silver hairpin with a pink tourmaline lotus", "a gilded silver hairpin with a small jade butterfly and gold drop"]),
+ "tan": ("rank-4 consort (Tần)", 8, []),
+ "phi": ("rank-5 consort (Phi): gold, red and green gems, pearls, larger gold bu yao with tassels", 8,
+   ["a large gold bu yao with a gold peony and five strands of pearls and gold leaves", "a gold hairpin with a ruby peony and gold leaves",
+    "a gold comb with a row of small gold flowers and pearls", "a pair of gold hairpins with kingfisher-blue enamel flowers",
+    "a gold hairpin with a gold crane and a jade drop", "a gold hairpin with an emerald-green jade lotus and gold tassel",
+    "a gold bu yao with a gold butterfly pair and long pearl tassels", "a gold flower crown pin with pearls and pink gems"]),
+ "quyphi": ("rank-6 noble consort (Quý phi): heavy gold, small gold phoenixes, big pearls, rubies, emeralds, many tassels", 8,
+   ["a gold phoenix hairpin holding a pearl string in its beak, with long gold tassels", "a large gold comb crowned with gold peonies and rubies",
+    "a pair of gold hairpins with gold phoenix heads and ruby eyes", "a gold bu yao with layered gold flowers and long pearl-and-gold tassels",
+    "a gold hairpin with a large emerald and big pearls", "a gold hairpin with a kingfisher-blue phoenix tail fan",
+    "a gold hairpin with a gold peony of red gems and gold leaf tassels", "a gold ornament of three flying gold cranes with pearls"]),
+ "hqp": ("rank-7 imperial noble consort (Hoàng quý phi): gold phoenixes with kingfisher-blue inlay (diancui), pearls, rubies, long tassels", 8,
+   ["a gold hairpin with a spreading-wing gold phoenix inlaid with kingfisher blue, pearl strands", "a gold-and-kingfisher-blue diancui flower crown piece with pearls",
+    "a large gold bu yao with a phoenix and many long pearl-and-ruby tassels", "a pair of gold phoenix hairpins with kingfisher-blue wings",
+    "a gold comb with kingfisher-blue enamel clouds and big pearls", "a gold hairpin with a ruby peony and a kingfisher-blue butterfly",
+    "a gold hairpin with a coiled gold phoenix holding a big pearl", "a gold diancui ornament of five kingfisher-blue flowers with rubies"]),
+ "hh": ("the Empress (Hoàng hậu): the grandest: gold nine-tailed phoenixes, kingfisher-blue diancui, big pearls, rubies, phoenix crown pieces", 8,
+   ["a gold nine-tailed phoenix hairpin with kingfisher-blue inlay and long pearl strands", "a small gold phoenix crown back-piece with pearls and rubies",
+    "a gold hairpin with a pair of facing gold phoenixes and a ruby sun", "a gold diancui comb with kingfisher-blue phoenixes and big pearls",
+    "a large gold bu yao with a gold phoenix and cascading pearl-and-ruby tassels", "a gold hairpin with a big pearl held by a gold dragon-phoenix pair",
+    "a pair of gold phoenix hairpins with kingfisher-blue tails and ruby eyes", "a gold diancui flower crown piece of peonies and phoenixes with pearls"]),
+ "m0": ("lowest palace maid: wood, bone, bronze, plain silver, silk flowers; neat and pretty, never poor", 8,
+   ["a small silk pink flower hair clip", "a plain bone hairpin with a carved plum head",
+    "a polished sandalwood comb", "a bronze hairpin with a small engraved flower",
+    "a silk ribbon hair tie with small silk flowers", "a pair of plain silver hairpins",
+    "a wooden hairpin with a small painted magnolia", "a small silver hairpin with a glass bead"]),
+ "m1": ("palace maid: silver, glass beads, silk flowers, small pearls", 10,
+   ["a silver hairpin with a blue glass bead", "a pair of small silver flower hairpins", "a small pink silk peony with a silver pin",
+    "a silver hairpin with a seed pearl spray", "a silver comb with an engraved vine", "a silk ribbon with small silver bells",
+    "a silver hairpin with a green glass leaf", "a silver hairpin with a small lilac silk flower and a bead drop",
+    "a pair of silver hairpins with tiny pearls", "a silver hairpin with an enamel plum blossom"]),
+ "m2": ("senior palace maid: silver, small pearls, pale jade, enamel, short bead tassels", 10,
+   ["a silver hairpin with a pearl flower", "a silver hairpin with a pale jade bead and a silver tassel", "a silver comb with seed pearls",
+    "a pair of silver hairpins with pink enamel blossoms", "a silver hairpin with a small blue enamel butterfly", "a short silver bu yao with two bead strands",
+    "a silver hairpin with a jade leaf", "a silver hairpin with a cluster of silk flowers and pearls",
+    "a silver hairpin with a coral bead", "a silver hairpin with a small pearl lotus and a jade drop"]),
+ "m3": ("palace maid supervisor: gilded silver, jade, coral, dignified designs", 10,
+   ["a gilded silver hairpin with a jade disc", "a gilded silver comb", "a pair of gilded hairpins with coral beads",
+    "a gilded silver hairpin with an engraved cloud head", "a gilded silver hairpin with a small pearl drop", "a gilded hairpin with a dark jade bead",
+    "a gilded silver hairpin with an amber bead", "a gilded silver hairpin with a small enamel peony",
+    "a gilded silver hairpin with a jade leaf and a short tassel", "a gilded silver hairpin with a coral flower and pearls"]),
+ "m4": ("chief palace steward: gilded silver and small gold, jade, coral, a black gauze-crown hairpin, dignified", 10,
+   ["a gilded hairpin with a carved jade plaque", "a small gold-edged black lacquer comb", "a gilded hairpin with a coral bead cluster",
+    "a pair of gilded hairpins with jade heads", "a gilded hairpin with an engraved crane", "a gold hairpin with a small pearl",
+    "a gilded hairpin with a carnelian bead and gold leaf", "a gilded hairpin with a jade ruyi head",
+    "a gilded comb with jade inlay", "a gold hairpin with a small coral peony and jade drop"]),
+}
+
+def ref(t):
+    from PIL import Image
+    src = T[t]["src"]; C = 600
+    sh = Image.new("RGB", (C*5, C*2), (244, 236, 220))
+    for i, f in enumerate(src):
+        im = Image.open(f"{FIG}/{f}").convert("RGBA"); im.thumbnail((C-20, C-20))
+        sh.paste(im, ((i % 5)*C+(C-im.width)//2, (i//5)*C+(C-im.height)//2), im)
+    sh.save(f"ref-{t}-y.jpg", quality=90); print(f"ref-{t}-y.jpg")
+
+def py(t):
+    d = T[t]; it = d["items"]
+    rows = "Top row: " + "; ".join(f"{i+1} {it[i]}" for i in range(5)) + ". Bottom row: " + "; ".join(f"{i+1} {it[i]}" for i in range(5, 10)) + "."
+    who = "palace maid" if d.get("maid") else "imperial consort"
+    return (PRE + f"A catalogue sheet of 10 ancient Chinese {who} garments in a neat grid of 5 columns and 2 rows, each centred in its own cell with wide empty margins, nothing touching or overlapping. "
+            f"Each cell shows the outfit of the figure in the SAME grid position of the reference image (same costume type and cut, same colour family, same kind of embroidery), "
+            f"but with NO person: the outfit is displayed hanging on {d['stand']}, the garment filling most of the cell, sleeves spread out along the crossbar, the skirt hanging down, front view, the whole garment and stand visible. "
+            f"All are {d['rank']} outfits in the same costume style as the reference figures: {d['base']}; but EACH ONE A DIFFERENT DESIGN (colour, motif, outer layer), the richness growing from 1 to 10. "
+            + rows + " " + TAIL)
+
+def ptram(t):
+    desc, n, items = TRAM[t]; c = 4 if n == 8 else 5
+    rows = "Top row: " + "; ".join(f"{i+1} {items[i]}" for i in range(c)) + ". Bottom row: " + "; ".join(f"{i+1} {items[i]}" for i in range(c, n)) + "."
+    return ("Semi-realistic painterly product illustration, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the hairpins in the style reference. "
+            f"A catalogue sheet of {n} ancient Chinese hair ornaments for a {desc}, arranged in a neat grid of {c} columns and 2 rows, each ornament centred in its own cell with wide empty margins, "
+            "nothing touching or overlapping, each shown whole, laid diagonally like the reference. " + rows +
+            " Fine metal engraving, gem sparkle, soft shadows. Plain flat light parchment background, soft even light, no hands, no head, no text, no labels, no numbers, no borders between cells.")
+
+if __name__ == "__main__":
+    k, t = sys.argv[1], sys.argv[2]
+    if k == "ref": ref(t)
+    elif k == "y": print(py(t))
+    else: print(ptram(t))
