@@ -1,0 +1,51 @@
+N-c18-t1 9ZQCvG9NYZ
+N-c19-t1 gOIBeFoSXO
+N-c20-t1 8aNPJc1IrU
+N-c21-t1 JNam8xnOq4
+N-c22-t1 Bh4Ow0GoQR
+N-c23-t1 dty7STaXSL
+N-c24-t1 u5nARvEQLD
+N-c25-t1 tCi9yozmZJ
+N-c26-t1 gOIBdWbSXO
+N-c27-t1 YMLrkQuWeC
+N-c28-t1 rgeMTWhxtc
+N-c29-t1 WDsx1kacXe
+N-c30-t1 w4hIoox7EI
+N-c31-t1 rgeMTMwxtc
+N-c32-t1 6AHuCQCiJO
+N-c01-t2 XmPJOqxBfo
+N-c02-t2 5jVc04zKxe
+N-c03-t2 lJ8XBzPgv9
+N-c04-t2 79vtmT5JAL
+N-c05-t2 rgeMDA5xtc
+N-c06-t2 1lpVMzLr4r
+N-c07-t2 1lpVMYlr4r
+N-c08-t2 s7odXMdl8e
+N-c09-t2 0egLlCBTfW
+N-c10-t2 gOIB8zCSXO
+N-c11-t2 SytoIWRUb8
+N-c12-t2 xSdDeGsjfW
+N-c13-t2 KLM0VZtkqp
+N-c14-t2 huR63O7vqL
+N-c15-t2 8aNP9wDIrU
+N-c16-t2 9ZQCuvVNYZ
+N-c17-t2 xSdDdAYjfW
+N-c18-t2 jUXpXnQLD0
+N-c19-t2 xSdDdWSjfW
+N-c20-t2 eIOwOlydqL
+N-c21-t2 ksDTDcI16B
+N-c22-t2 1lpVpVUr4r
+N-c23-t2 fHARA27CDY
+N-c24-t2 CqGZGzkEEy
+N-c25-t2 lJ8X8Eegv9
+N-c26-t2 6AHuHs5iJO
+N-c27-t2 N2FEFgu6D9
+N-c28-t2 tCi9iDPmZJ
+N-c29-t2 YMLrL3PWeC
+N-c30-t2 TdSsSzBVNR
+N-c31-t2 aF232t4fSh
+N-c32-t2 YMLrLGiWeC
+N-c01-t1 3zbFj0kREY dot-only
+N-c02-t1 MBwg9vHDCm dot-only
+N-c04-t1 4RufKWb9Aa dot-only
+N-c05-t1 UPm8uAqwny dot-only

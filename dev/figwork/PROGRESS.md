@@ -1,5 +1,41 @@
 # Art progress (art worker, 11/14/2026)
 
+## art11 (worker #11) — STATUS (read first; resumes art10 TODO below)
+- Work dir: scratchpad/fw11 (copy of dev/figwork, paths sed'ed to worktree agent-a4b0765092fc7d9e0; local cv2.py renamed cv2_jobs.py
+  there so it no longer shadows OpenCV). New helpers (copied into dev/figwork): au.py ("id prodnum hmac" -> urls.json, saves context vs
+  pasting full URLs), dl.sh (curl bg pngs of a bgNN.txt), post.sh (tier cids: fapick if cutcheck>=4 + porcrop + list cutcheck>=4),
+  pairs.py / fh.py (sheets: 4 ages per lineup face crops / forehead zoom), hdmark.py (abandoned automatic mark detector, unreliable).
+- Cheaper loop: images_remove_background can be called on a gen id without creations_wait (it errors "still processing" if not ready).
+- Gen ids: gens12.txt ("jid gen" = a51 ageing + tier huadian edit via mk11.py; "jid gen dot-only" = huadian-only re-edit),
+  bg ids: bg12*.txt bg13*.txt bg14*.txt bg15.txt (jid gen bg).
+- DONE (edited, processed, porcrop): t1 c18-c32 and t2 c01-c32 a51 ageing (+ huadian edit). AGEING WORKS: a51 now reads ~48
+  (smile/nasolabial lines, dark hair) on the t1 sheet.
+- PROBLEM FOUND: the combined "age + ERASE mark + paint new mark" edit does NOT reliably replace the forehead mark. Forehead zoom
+  (fh.py) of t1 c01-c32 (incl. art10's c01-c17): only c08 c17 c20 c21 c25 c28 are plain dots; the rest keep petals/drops/stems/leaves.
+  => t1 needs a huadian-only re-edit (prompt below), pilot on c01 c02 c04 c05 (gens12 "dot-only").
+  t1 dot-only prompt: "Edit this image. Keep everything else exactly identical: the four women's faces, ages, expressions, hair,
+  headdresses, outfits, poses, props, colours, background and framing. The ONLY change is the small ornament painted on the forehead
+  between the eyebrows of each of the four women: remove the current ornament completely (no petals, no flower, no drop, no stem, no
+  leaf may remain) and paint in its place one single small solid round <col> dot, a perfect little circle about the size of a lentil,
+  flat paint, nothing else. No moles. No text."  (<col> = HD colour from spec6.py, see mk11.py)
+- c28 t2 motif "single round pearl dot" changed to "vertical teardrop pearl" (else identical to the t1 dot).
+- RESULTS art11: t2 all 32 GOOD (sheets/art11/age_t2_all.jpg): a51 reads ~48, every t2 mark is a clear flat one-colour motif
+  silhouette, clearly unlike a dot. Watch: c24 ginkgo / c26 crescent+dot / c13 cloud are wide-ish; faint cheek dots on c09-a18,
+  c23-a18 (check with moles.py detect). t1 c18-c32 a51 ageing GOOD (sheets/art11/age_t1_c18-c32.jpg).
+- t1 HUADIAN STILL FAILS: sheets/art11/forehead_t1_all.jpg. Even the huadian-ONLY "dot-only" pilot (c01 c02 c04 c05 t1, now
+  published, ageing kept) left flowers/double drops: GPT on the 4-figure 4k lineup does not change a tiny existing mark into a dot.
+  t2 worked because the new motif is a different, bigger shape. Ideas for next worker: (a) edit face close-ups (crop each head from
+  bg/<jid>-<bg>.png, upload, gpt-2-6 edit "replace forehead ornament with one plain round dot", paste back with alpha), or (b) paint
+  the dot in code after inpainting the old mark (hdmark.py detector was NOT reliable: brows/hairline/pale marks; would need manual
+  centres per figure). Ask coordinator which is allowed (owner rule: no code-drawn art where a painting is expected).
+- REMAINING (exact):
+  * t1 huadian -> plain dot on c01 c02 c03 c04 c05 c06 c07 c09 c10 c11 c12 c13 c14 c15 c16 c18 c19 c22 c23 c24 c26 c27 c29 c30
+    c31 c32 (OK already: c08 c17 c20 c21 c25 c28). a51 ageing on t1 is DONE for all 32.
+  * t3 all 32: a51 ageing + t3 huadian (`python3 -I mk11.py 3`), not started. Expect the same "keeps old mark" risk; t3 shape is
+    different from the current marks, so it may work like t2 - pilot 4 first and check with fh.py.
+  * t4-t8 a51 ageing (keep marks): not started; skip t5 c28 c29 c30, t8 c06 c32. `python3 -I mk11.py 4` etc.
+- Credits art11: 43 gpt-2-6 edits x 270 + 43 bg cuts x 3 = ~11.7k. Balance at start 1.749M.
+
 ## KIT REVIEW FAIL 11/14 (dev/review/consort-art.md) — art10 round 2, STATUS + TODO (read first)
 - DONE: (1) merged origin/main (65a75ed): every non-consort fig/por = main (no-moles versions), consort fig/por = branch,
   FIGURES.json hand-merged (dev: scratch mergefig.py: main records + branch consort records). Non-consort diff vs main = 0.
