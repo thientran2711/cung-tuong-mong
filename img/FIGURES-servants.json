@@ -4,7 +4,7 @@
   "por": "img/por-maid-m01-a18.webp",
   "role": "maid",
   "identity": "m01",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a18",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/nVjQEJ9YQD"
@@ -14,7 +14,7 @@
   "por": "img/por-maid-m01-a26.webp",
   "role": "maid",
   "identity": "m01",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a26",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/nVjQEJ9YQD"
@@ -24,7 +24,7 @@
   "por": "img/por-maid-m01-a36.webp",
   "role": "maid",
   "identity": "m01",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a36",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/nVjQEJ9YQD"
@@ -34,7 +34,7 @@
   "por": "img/por-maid-m01-a51.webp",
   "role": "maid",
   "identity": "m01",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a51",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/nVjQEJ9YQD"
@@ -240,7 +240,7 @@
   "por": "img/por-maid-m02-a18.webp",
   "role": "maid",
   "identity": "m02",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a18",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/SytV0FFUb8"
@@ -250,7 +250,7 @@
   "por": "img/por-maid-m02-a26.webp",
   "role": "maid",
   "identity": "m02",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a26",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/SytV0FFUb8"
@@ -260,7 +260,7 @@
   "por": "img/por-maid-m02-a36.webp",
   "role": "maid",
   "identity": "m02",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a36",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/SytV0FFUb8"
@@ -270,7 +270,7 @@
   "por": "img/por-maid-m02-a51.webp",
   "role": "maid",
   "identity": "m02",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a51",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/SytV0FFUb8"
@@ -476,7 +476,7 @@
   "por": "img/por-maid-m03-a18.webp",
   "role": "maid",
   "identity": "m03",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a18",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/fHAyOYiCDY"
@@ -486,7 +486,7 @@
   "por": "img/por-maid-m03-a26.webp",
   "role": "maid",
   "identity": "m03",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a26",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/fHAyOYiCDY"
@@ -496,7 +496,7 @@
   "por": "img/por-maid-m03-a36.webp",
   "role": "maid",
   "identity": "m03",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a36",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/fHAyOYiCDY"
@@ -506,7 +506,7 @@
   "por": "img/por-maid-m03-a51.webp",
   "role": "maid",
   "identity": "m03",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a51",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/fHAyOYiCDY"
@@ -712,7 +712,7 @@
   "por": "img/por-maid-m04-a18.webp",
   "role": "maid",
   "identity": "m04",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a18",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/gOIT0aVSXO"
@@ -722,7 +722,7 @@
   "por": "img/por-maid-m04-a26.webp",
   "role": "maid",
   "identity": "m04",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a26",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/gOIT0aVSXO"
@@ -732,7 +732,7 @@
   "por": "img/por-maid-m04-a36.webp",
   "role": "maid",
   "identity": "m04",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a36",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/gOIT0aVSXO"
@@ -742,7 +742,7 @@
   "por": "img/por-maid-m04-a51.webp",
   "role": "maid",
   "identity": "m04",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a51",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/gOIT0aVSXO"
@@ -948,7 +948,7 @@
   "por": "img/por-maid-m05-a18.webp",
   "role": "maid",
   "identity": "m05",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a18",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/gOITTYOSXO"
@@ -958,7 +958,7 @@
   "por": "img/por-maid-m05-a26.webp",
   "role": "maid",
   "identity": "m05",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a26",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/gOITTYOSXO"
@@ -968,7 +968,7 @@
   "por": "img/por-maid-m05-a36.webp",
   "role": "maid",
   "identity": "m05",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a36",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/gOITTYOSXO"
@@ -978,7 +978,7 @@
   "por": "img/por-maid-m05-a51.webp",
   "role": "maid",
   "identity": "m05",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a51",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/gOITTYOSXO"
@@ -1184,7 +1184,7 @@
   "por": "img/por-maid-m06-a18.webp",
   "role": "maid",
   "identity": "m06",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a18",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/gOITTWySXO"
@@ -1194,7 +1194,7 @@
   "por": "img/por-maid-m06-a26.webp",
   "role": "maid",
   "identity": "m06",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a26",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/gOITTWySXO"
@@ -1204,7 +1204,7 @@
   "por": "img/por-maid-m06-a36.webp",
   "role": "maid",
   "identity": "m06",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a36",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/gOITTWySXO"
@@ -1214,7 +1214,7 @@
   "por": "img/por-maid-m06-a51.webp",
   "role": "maid",
   "identity": "m06",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a51",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/gOITTWySXO"
@@ -1420,7 +1420,7 @@
   "por": "img/por-maid-m07-a18.webp",
   "role": "maid",
   "identity": "m07",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a18",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/eIOxjXfdqL"
@@ -1430,7 +1430,7 @@
   "por": "img/por-maid-m07-a26.webp",
   "role": "maid",
   "identity": "m07",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a26",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/eIOxjXfdqL"
@@ -1440,7 +1440,7 @@
   "por": "img/por-maid-m07-a36.webp",
   "role": "maid",
   "identity": "m07",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a36",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/eIOxjXfdqL"
@@ -1450,7 +1450,7 @@
   "por": "img/por-maid-m07-a51.webp",
   "role": "maid",
   "identity": "m07",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a51",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/eIOxjXfdqL"
@@ -1656,7 +1656,7 @@
   "por": "img/por-maid-m08-a18.webp",
   "role": "maid",
   "identity": "m08",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a18",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/gOITVwMSXO"
@@ -1666,7 +1666,7 @@
   "por": "img/por-maid-m08-a26.webp",
   "role": "maid",
   "identity": "m08",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a26",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/gOITVwMSXO"
@@ -1676,7 +1676,7 @@
   "por": "img/por-maid-m08-a36.webp",
   "role": "maid",
   "identity": "m08",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a36",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/gOITVwMSXO"
@@ -1686,7 +1686,7 @@
   "por": "img/por-maid-m08-a51.webp",
   "role": "maid",
   "identity": "m08",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a51",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/gOITVwMSXO"
@@ -1892,7 +1892,7 @@
   "por": "img/por-maid-m09-a18.webp",
   "role": "maid",
   "identity": "m09",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a18",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/KLM2ApKkqp"
@@ -1902,7 +1902,7 @@
   "por": "img/por-maid-m09-a26.webp",
   "role": "maid",
   "identity": "m09",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a26",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/KLM2ApKkqp"
@@ -1912,7 +1912,7 @@
   "por": "img/por-maid-m09-a36.webp",
   "role": "maid",
   "identity": "m09",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a36",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/KLM2ApKkqp"
@@ -1922,7 +1922,7 @@
   "por": "img/por-maid-m09-a51.webp",
   "role": "maid",
   "identity": "m09",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a51",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/KLM2ApKkqp"
@@ -2128,7 +2128,7 @@
   "por": "img/por-maid-m10-a18.webp",
   "role": "maid",
   "identity": "m10",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a18",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/LwBWcIuswO"
@@ -2138,7 +2138,7 @@
   "por": "img/por-maid-m10-a26.webp",
   "role": "maid",
   "identity": "m10",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a26",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/LwBWcIuswO"
@@ -2148,7 +2148,7 @@
   "por": "img/por-maid-m10-a36.webp",
   "role": "maid",
   "identity": "m10",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a36",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/LwBWcIuswO"
@@ -2158,7 +2158,7 @@
   "por": "img/por-maid-m10-a51.webp",
   "role": "maid",
   "identity": "m10",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a51",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/LwBWcIuswO"
@@ -2364,7 +2364,7 @@
   "por": "img/por-maid-m11-a18.webp",
   "role": "maid",
   "identity": "m11",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a18",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/ksDAGXv16B"
@@ -2374,7 +2374,7 @@
   "por": "img/por-maid-m11-a26.webp",
   "role": "maid",
   "identity": "m11",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a26",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/ksDAGXv16B"
@@ -2384,7 +2384,7 @@
   "por": "img/por-maid-m11-a36.webp",
   "role": "maid",
   "identity": "m11",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a36",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/ksDAGXv16B"
@@ -2394,7 +2394,7 @@
   "por": "img/por-maid-m11-a51.webp",
   "role": "maid",
   "identity": "m11",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a51",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/ksDAGXv16B"
@@ -2600,7 +2600,7 @@
   "por": "img/por-maid-m12-a18.webp",
   "role": "maid",
   "identity": "m12",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a18",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/s7oc0aul8e"
@@ -2610,7 +2610,7 @@
   "por": "img/por-maid-m12-a26.webp",
   "role": "maid",
   "identity": "m12",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a26",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/s7oc0aul8e"
@@ -2620,7 +2620,7 @@
   "por": "img/por-maid-m12-a36.webp",
   "role": "maid",
   "identity": "m12",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a36",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/s7oc0aul8e"
@@ -2630,7 +2630,7 @@
   "por": "img/por-maid-m12-a51.webp",
   "role": "maid",
   "identity": "m12",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a51",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/s7oc0aul8e"
@@ -2836,40 +2836,44 @@
   "por": "img/por-maid-m13-a18.webp",
   "role": "maid",
   "identity": "m13",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a18",
   "look": null,
-  "magnificUrl": "https://www.magnific.com/app/creation/lJ80VAAgv9"
+  "magnificUrl": "https://www.magnific.com/app/creation/w4hewe27EI",
+  "bg": "vQZPCXpa47"
  },
  {
   "file": "img/fig-maid-m13-a26.webp",
   "por": "img/por-maid-m13-a26.webp",
   "role": "maid",
   "identity": "m13",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a26",
   "look": null,
-  "magnificUrl": "https://www.magnific.com/app/creation/lJ80VAAgv9"
+  "magnificUrl": "https://www.magnific.com/app/creation/w4hewe27EI",
+  "bg": "vQZPCXpa47"
  },
  {
   "file": "img/fig-maid-m13-a36.webp",
   "por": "img/por-maid-m13-a36.webp",
   "role": "maid",
   "identity": "m13",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a36",
   "look": null,
-  "magnificUrl": "https://www.magnific.com/app/creation/lJ80VAAgv9"
+  "magnificUrl": "https://www.magnific.com/app/creation/w4hewe27EI",
+  "bg": "vQZPCXpa47"
  },
  {
   "file": "img/fig-maid-m13-a51.webp",
   "por": "img/por-maid-m13-a51.webp",
   "role": "maid",
   "identity": "m13",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a51",
   "look": null,
-  "magnificUrl": "https://www.magnific.com/app/creation/lJ80VAAgv9"
+  "magnificUrl": "https://www.magnific.com/app/creation/w4hewe27EI",
+  "bg": "vQZPCXpa47"
  },
  {
   "role": "maid",
@@ -3072,7 +3076,7 @@
   "por": "img/por-maid-m14-a18.webp",
   "role": "maid",
   "identity": "m14",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a18",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/yiCXoTwPW9"
@@ -3082,7 +3086,7 @@
   "por": "img/por-maid-m14-a26.webp",
   "role": "maid",
   "identity": "m14",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a26",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/yiCXoTwPW9"
@@ -3092,7 +3096,7 @@
   "por": "img/por-maid-m14-a36.webp",
   "role": "maid",
   "identity": "m14",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a36",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/yiCXoTwPW9"
@@ -3102,7 +3106,7 @@
   "por": "img/por-maid-m14-a51.webp",
   "role": "maid",
   "identity": "m14",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a51",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/yiCXoTwPW9"
@@ -3308,7 +3312,7 @@
   "por": "img/por-maid-m15-a18.webp",
   "role": "maid",
   "identity": "m15",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a18",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/ksDAziV16B"
@@ -3318,7 +3322,7 @@
   "por": "img/por-maid-m15-a26.webp",
   "role": "maid",
   "identity": "m15",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a26",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/ksDAziV16B"
@@ -3328,7 +3332,7 @@
   "por": "img/por-maid-m15-a36.webp",
   "role": "maid",
   "identity": "m15",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a36",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/ksDAziV16B"
@@ -3338,7 +3342,7 @@
   "por": "img/por-maid-m15-a51.webp",
   "role": "maid",
   "identity": "m15",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a51",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/ksDAziV16B"
@@ -3544,7 +3548,7 @@
   "por": "img/por-maid-m16-a18.webp",
   "role": "maid",
   "identity": "m16",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a18",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/N2FImoz6D9"
@@ -3554,7 +3558,7 @@
   "por": "img/por-maid-m16-a26.webp",
   "role": "maid",
   "identity": "m16",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a26",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/N2FImoz6D9"
@@ -3564,7 +3568,7 @@
   "por": "img/por-maid-m16-a36.webp",
   "role": "maid",
   "identity": "m16",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a36",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/N2FImoz6D9"
@@ -3574,7 +3578,7 @@
   "por": "img/por-maid-m16-a51.webp",
   "role": "maid",
   "identity": "m16",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a51",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/N2FImoz6D9"
@@ -3780,7 +3784,7 @@
   "por": "img/por-maid-m17-a18.webp",
   "role": "maid",
   "identity": "m17",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a18",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/jUXYcjWLD0"
@@ -3790,7 +3794,7 @@
   "por": "img/por-maid-m17-a26.webp",
   "role": "maid",
   "identity": "m17",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a26",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/jUXYcjWLD0"
@@ -3800,7 +3804,7 @@
   "por": "img/por-maid-m17-a36.webp",
   "role": "maid",
   "identity": "m17",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a36",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/jUXYcjWLD0"
@@ -3810,7 +3814,7 @@
   "por": "img/por-maid-m17-a51.webp",
   "role": "maid",
   "identity": "m17",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a51",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/jUXYcjWLD0"
@@ -4016,7 +4020,7 @@
   "por": "img/por-maid-m18-a18.webp",
   "role": "maid",
   "identity": "m18",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a18",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/If6S7hbtvE"
@@ -4026,7 +4030,7 @@
   "por": "img/por-maid-m18-a26.webp",
   "role": "maid",
   "identity": "m18",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a26",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/If6S7hbtvE"
@@ -4036,7 +4040,7 @@
   "por": "img/por-maid-m18-a36.webp",
   "role": "maid",
   "identity": "m18",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a36",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/If6S7hbtvE"
@@ -4046,7 +4050,7 @@
   "por": "img/por-maid-m18-a51.webp",
   "role": "maid",
   "identity": "m18",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a51",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/If6S7hbtvE"
@@ -4252,7 +4256,7 @@
   "por": "img/por-maid-m19-a18.webp",
   "role": "maid",
   "identity": "m19",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a18",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/8aNg7gcIrU"
@@ -4262,7 +4266,7 @@
   "por": "img/por-maid-m19-a26.webp",
   "role": "maid",
   "identity": "m19",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a26",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/8aNg7gcIrU"
@@ -4272,7 +4276,7 @@
   "por": "img/por-maid-m19-a36.webp",
   "role": "maid",
   "identity": "m19",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a36",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/8aNg7gcIrU"
@@ -4282,7 +4286,7 @@
   "por": "img/por-maid-m19-a51.webp",
   "role": "maid",
   "identity": "m19",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a51",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/8aNg7gcIrU"
@@ -4488,7 +4492,7 @@
   "por": "img/por-maid-m20-a18.webp",
   "role": "maid",
   "identity": "m20",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a18",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/YMLFbTzWeC"
@@ -4498,7 +4502,7 @@
   "por": "img/por-maid-m20-a26.webp",
   "role": "maid",
   "identity": "m20",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a26",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/YMLFbTzWeC"
@@ -4508,7 +4512,7 @@
   "por": "img/por-maid-m20-a36.webp",
   "role": "maid",
   "identity": "m20",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a36",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/YMLFbTzWeC"
@@ -4518,7 +4522,7 @@
   "por": "img/por-maid-m20-a51.webp",
   "role": "maid",
   "identity": "m20",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a51",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/YMLFbTzWeC"
@@ -4724,7 +4728,7 @@
   "por": "img/por-maid-m21-a18.webp",
   "role": "maid",
   "identity": "m21",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a18",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/8aNgwZvIrU"
@@ -4734,7 +4738,7 @@
   "por": "img/por-maid-m21-a26.webp",
   "role": "maid",
   "identity": "m21",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a26",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/8aNgwZvIrU"
@@ -4744,7 +4748,7 @@
   "por": "img/por-maid-m21-a36.webp",
   "role": "maid",
   "identity": "m21",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a36",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/8aNgwZvIrU"
@@ -4754,7 +4758,7 @@
   "por": "img/por-maid-m21-a51.webp",
   "role": "maid",
   "identity": "m21",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a51",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/8aNgwZvIrU"
@@ -4960,7 +4964,7 @@
   "por": "img/por-maid-m22-a18.webp",
   "role": "maid",
   "identity": "m22",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a18",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/Do71j49pcl"
@@ -4970,7 +4974,7 @@
   "por": "img/por-maid-m22-a26.webp",
   "role": "maid",
   "identity": "m22",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a26",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/Do71j49pcl"
@@ -4980,7 +4984,7 @@
   "por": "img/por-maid-m22-a36.webp",
   "role": "maid",
   "identity": "m22",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a36",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/Do71j49pcl"
@@ -4990,7 +4994,7 @@
   "por": "img/por-maid-m22-a51.webp",
   "role": "maid",
   "identity": "m22",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a51",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/Do71j49pcl"
@@ -5196,7 +5200,7 @@
   "por": "img/por-maid-m23-a18.webp",
   "role": "maid",
   "identity": "m23",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a18",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/s7ocVvfl8e"
@@ -5206,7 +5210,7 @@
   "por": "img/por-maid-m23-a26.webp",
   "role": "maid",
   "identity": "m23",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a26",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/s7ocVvfl8e"
@@ -5216,7 +5220,7 @@
   "por": "img/por-maid-m23-a36.webp",
   "role": "maid",
   "identity": "m23",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a36",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/s7ocVvfl8e"
@@ -5226,7 +5230,7 @@
   "por": "img/por-maid-m23-a51.webp",
   "role": "maid",
   "identity": "m23",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a51",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/s7ocVvfl8e"
@@ -5432,7 +5436,7 @@
   "por": "img/por-maid-m24-a18.webp",
   "role": "maid",
   "identity": "m24",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a18",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/xSdncmfjfW"
@@ -5442,7 +5446,7 @@
   "por": "img/por-maid-m24-a26.webp",
   "role": "maid",
   "identity": "m24",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a26",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/xSdncmfjfW"
@@ -5452,7 +5456,7 @@
   "por": "img/por-maid-m24-a36.webp",
   "role": "maid",
   "identity": "m24",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a36",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/xSdncmfjfW"
@@ -5462,7 +5466,7 @@
   "por": "img/por-maid-m24-a51.webp",
   "role": "maid",
   "identity": "m24",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a51",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/xSdncmfjfW"
@@ -5668,7 +5672,7 @@
   "por": "img/por-maid-m25-a18.webp",
   "role": "maid",
   "identity": "m25",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a18",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/xSdn02zjfW"
@@ -5678,7 +5682,7 @@
   "por": "img/por-maid-m25-a26.webp",
   "role": "maid",
   "identity": "m25",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a26",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/xSdn02zjfW"
@@ -5688,7 +5692,7 @@
   "por": "img/por-maid-m25-a36.webp",
   "role": "maid",
   "identity": "m25",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a36",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/xSdn02zjfW"
@@ -5698,7 +5702,7 @@
   "por": "img/por-maid-m25-a51.webp",
   "role": "maid",
   "identity": "m25",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a51",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/xSdn02zjfW"
@@ -5904,40 +5908,44 @@
   "por": "img/por-maid-m26-a18.webp",
   "role": "maid",
   "identity": "m26",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a18",
   "look": null,
-  "magnificUrl": "https://www.magnific.com/app/creation/eIOxlkldqL"
+  "magnificUrl": "https://www.magnific.com/app/creation/LwB0LVwswO",
+  "bg": "jUX0lb8LD0"
  },
  {
   "file": "img/fig-maid-m26-a26.webp",
   "por": "img/por-maid-m26-a26.webp",
   "role": "maid",
   "identity": "m26",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a26",
   "look": null,
-  "magnificUrl": "https://www.magnific.com/app/creation/eIOxlkldqL"
+  "magnificUrl": "https://www.magnific.com/app/creation/LwB0LVwswO",
+  "bg": "jUX0lb8LD0"
  },
  {
   "file": "img/fig-maid-m26-a36.webp",
   "por": "img/por-maid-m26-a36.webp",
   "role": "maid",
   "identity": "m26",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a36",
   "look": null,
-  "magnificUrl": "https://www.magnific.com/app/creation/eIOxlkldqL"
+  "magnificUrl": "https://www.magnific.com/app/creation/LwB0LVwswO",
+  "bg": "jUX0lb8LD0"
  },
  {
   "file": "img/fig-maid-m26-a51.webp",
   "por": "img/por-maid-m26-a51.webp",
   "role": "maid",
   "identity": "m26",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a51",
   "look": null,
-  "magnificUrl": "https://www.magnific.com/app/creation/eIOxlkldqL"
+  "magnificUrl": "https://www.magnific.com/app/creation/LwB0LVwswO",
+  "bg": "jUX0lb8LD0"
  },
  {
   "role": "maid",
@@ -6140,7 +6148,7 @@
   "por": "img/por-maid-m27-a18.webp",
   "role": "maid",
   "identity": "m27",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a18",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/79vpBD5JAL"
@@ -6150,7 +6158,7 @@
   "por": "img/por-maid-m27-a26.webp",
   "role": "maid",
   "identity": "m27",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a26",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/79vpBD5JAL"
@@ -6160,7 +6168,7 @@
   "por": "img/por-maid-m27-a36.webp",
   "role": "maid",
   "identity": "m27",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a36",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/79vpBD5JAL"
@@ -6170,7 +6178,7 @@
   "por": "img/por-maid-m27-a51.webp",
   "role": "maid",
   "identity": "m27",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a51",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/79vpBD5JAL"
@@ -6376,7 +6384,7 @@
   "por": "img/por-maid-m28-a18.webp",
   "role": "maid",
   "identity": "m28",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a18",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/N2FIv916D9"
@@ -6386,7 +6394,7 @@
   "por": "img/por-maid-m28-a26.webp",
   "role": "maid",
   "identity": "m28",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a26",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/N2FIv916D9"
@@ -6396,7 +6404,7 @@
   "por": "img/por-maid-m28-a36.webp",
   "role": "maid",
   "identity": "m28",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a36",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/N2FIv916D9"
@@ -6406,7 +6414,7 @@
   "por": "img/por-maid-m28-a51.webp",
   "role": "maid",
   "identity": "m28",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a51",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/N2FIv916D9"
@@ -6612,7 +6620,7 @@
   "por": "img/por-maid-m29-a18.webp",
   "role": "maid",
   "identity": "m29",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a18",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/xSdn0xBjfW"
@@ -6622,7 +6630,7 @@
   "por": "img/por-maid-m29-a26.webp",
   "role": "maid",
   "identity": "m29",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a26",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/xSdn0xBjfW"
@@ -6632,7 +6640,7 @@
   "por": "img/por-maid-m29-a36.webp",
   "role": "maid",
   "identity": "m29",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a36",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/xSdn0xBjfW"
@@ -6642,7 +6650,7 @@
   "por": "img/por-maid-m29-a51.webp",
   "role": "maid",
   "identity": "m29",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a51",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/xSdn0xBjfW"
@@ -6848,7 +6856,7 @@
   "por": "img/por-maid-m30-a18.webp",
   "role": "maid",
   "identity": "m30",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a18",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/6AHtf37iJO"
@@ -6858,7 +6866,7 @@
   "por": "img/por-maid-m30-a26.webp",
   "role": "maid",
   "identity": "m30",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a26",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/6AHtf37iJO"
@@ -6868,7 +6876,7 @@
   "por": "img/por-maid-m30-a36.webp",
   "role": "maid",
   "identity": "m30",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a36",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/6AHtf37iJO"
@@ -6878,7 +6886,7 @@
   "por": "img/por-maid-m30-a51.webp",
   "role": "maid",
   "identity": "m30",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a51",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/6AHtf37iJO"
@@ -7084,7 +7092,7 @@
   "por": "img/por-maid-m31-a18.webp",
   "role": "maid",
   "identity": "m31",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a18",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/lJ80pUlgv9"
@@ -7094,7 +7102,7 @@
   "por": "img/por-maid-m31-a26.webp",
   "role": "maid",
   "identity": "m31",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a26",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/lJ80pUlgv9"
@@ -7104,7 +7112,7 @@
   "por": "img/por-maid-m31-a36.webp",
   "role": "maid",
   "identity": "m31",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a36",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/lJ80pUlgv9"
@@ -7114,7 +7122,7 @@
   "por": "img/por-maid-m31-a51.webp",
   "role": "maid",
   "identity": "m31",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a51",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/lJ80pUlgv9"
@@ -7320,7 +7328,7 @@
   "por": "img/por-maid-m32-a18.webp",
   "role": "maid",
   "identity": "m32",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a18",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/ksDAWea16B"
@@ -7330,7 +7338,7 @@
   "por": "img/por-maid-m32-a26.webp",
   "role": "maid",
   "identity": "m32",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a26",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/ksDAWea16B"
@@ -7340,7 +7348,7 @@
   "por": "img/por-maid-m32-a36.webp",
   "role": "maid",
   "identity": "m32",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a36",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/ksDAWea16B"
@@ -7350,7 +7358,7 @@
   "por": "img/por-maid-m32-a51.webp",
   "role": "maid",
   "identity": "m32",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a51",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/ksDAWea16B"
@@ -7556,7 +7564,7 @@
   "por": "img/por-maid-m33-a18.webp",
   "role": "maid",
   "identity": "m33",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a18",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/ksDAWd816B"
@@ -7566,7 +7574,7 @@
   "por": "img/por-maid-m33-a26.webp",
   "role": "maid",
   "identity": "m33",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a26",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/ksDAWd816B"
@@ -7576,7 +7584,7 @@
   "por": "img/por-maid-m33-a36.webp",
   "role": "maid",
   "identity": "m33",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a36",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/ksDAWd816B"
@@ -7586,7 +7594,7 @@
   "por": "img/por-maid-m33-a51.webp",
   "role": "maid",
   "identity": "m33",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a51",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/ksDAWd816B"
@@ -7792,7 +7800,7 @@
   "por": "img/por-maid-m34-a18.webp",
   "role": "maid",
   "identity": "m34",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a18",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/8aNgJZmIrU"
@@ -7802,7 +7810,7 @@
   "por": "img/por-maid-m34-a26.webp",
   "role": "maid",
   "identity": "m34",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a26",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/8aNgJZmIrU"
@@ -7812,7 +7820,7 @@
   "por": "img/por-maid-m34-a36.webp",
   "role": "maid",
   "identity": "m34",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a36",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/8aNgJZmIrU"
@@ -7822,7 +7830,7 @@
   "por": "img/por-maid-m34-a51.webp",
   "role": "maid",
   "identity": "m34",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a51",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/8aNgJZmIrU"
@@ -8028,7 +8036,7 @@
   "por": "img/por-maid-m35-a18.webp",
   "role": "maid",
   "identity": "m35",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a18",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/gOITefUSXO"
@@ -8038,7 +8046,7 @@
   "por": "img/por-maid-m35-a26.webp",
   "role": "maid",
   "identity": "m35",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a26",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/gOITefUSXO"
@@ -8048,7 +8056,7 @@
   "por": "img/por-maid-m35-a36.webp",
   "role": "maid",
   "identity": "m35",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a36",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/gOITefUSXO"
@@ -8058,7 +8066,7 @@
   "por": "img/por-maid-m35-a51.webp",
   "role": "maid",
   "identity": "m35",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a51",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/gOITefUSXO"
@@ -8264,7 +8272,7 @@
   "por": "img/por-maid-m36-a18.webp",
   "role": "maid",
   "identity": "m36",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a18",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/TdS5jQjVNR"
@@ -8274,7 +8282,7 @@
   "por": "img/por-maid-m36-a26.webp",
   "role": "maid",
   "identity": "m36",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a26",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/TdS5jQjVNR"
@@ -8284,7 +8292,7 @@
   "por": "img/por-maid-m36-a36.webp",
   "role": "maid",
   "identity": "m36",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a36",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/TdS5jQjVNR"
@@ -8294,7 +8302,7 @@
   "por": "img/por-maid-m36-a51.webp",
   "role": "maid",
   "identity": "m36",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a51",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/TdS5jQjVNR"
@@ -8500,7 +8508,7 @@
   "por": "img/por-maid-m37-a18.webp",
   "role": "maid",
   "identity": "m37",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a18",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/LwBWDGtswO"
@@ -8510,7 +8518,7 @@
   "por": "img/por-maid-m37-a26.webp",
   "role": "maid",
   "identity": "m37",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a26",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/LwBWDGtswO"
@@ -8520,7 +8528,7 @@
   "por": "img/por-maid-m37-a36.webp",
   "role": "maid",
   "identity": "m37",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a36",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/LwBWDGtswO"
@@ -8530,7 +8538,7 @@
   "por": "img/por-maid-m37-a51.webp",
   "role": "maid",
   "identity": "m37",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a51",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/LwBWDGtswO"
@@ -8736,7 +8744,7 @@
   "por": "img/por-maid-m38-a18.webp",
   "role": "maid",
   "identity": "m38",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a18",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/s7ocpnul8e"
@@ -8746,7 +8754,7 @@
   "por": "img/por-maid-m38-a26.webp",
   "role": "maid",
   "identity": "m38",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a26",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/s7ocpnul8e"
@@ -8756,7 +8764,7 @@
   "por": "img/por-maid-m38-a36.webp",
   "role": "maid",
   "identity": "m38",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a36",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/s7ocpnul8e"
@@ -8766,7 +8774,7 @@
   "por": "img/por-maid-m38-a51.webp",
   "role": "maid",
   "identity": "m38",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a51",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/s7ocpnul8e"
@@ -8972,40 +8980,44 @@
   "por": "img/por-maid-m39-a18.webp",
   "role": "maid",
   "identity": "m39",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a18",
   "look": null,
-  "magnificUrl": "https://www.magnific.com/app/creation/mE3w4SVhJQ"
+  "magnificUrl": "https://www.magnific.com/app/creation/xSdWxTojfW",
+  "bg": "Sytp7xRUb8"
  },
  {
   "file": "img/fig-maid-m39-a26.webp",
   "por": "img/por-maid-m39-a26.webp",
   "role": "maid",
   "identity": "m39",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a26",
   "look": null,
-  "magnificUrl": "https://www.magnific.com/app/creation/mE3w4SVhJQ"
+  "magnificUrl": "https://www.magnific.com/app/creation/xSdWxTojfW",
+  "bg": "Sytp7xRUb8"
  },
  {
   "file": "img/fig-maid-m39-a36.webp",
   "por": "img/por-maid-m39-a36.webp",
   "role": "maid",
   "identity": "m39",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a36",
   "look": null,
-  "magnificUrl": "https://www.magnific.com/app/creation/mE3w4SVhJQ"
+  "magnificUrl": "https://www.magnific.com/app/creation/xSdWxTojfW",
+  "bg": "Sytp7xRUb8"
  },
  {
   "file": "img/fig-maid-m39-a51.webp",
   "por": "img/por-maid-m39-a51.webp",
   "role": "maid",
   "identity": "m39",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a51",
   "look": null,
-  "magnificUrl": "https://www.magnific.com/app/creation/mE3w4SVhJQ"
+  "magnificUrl": "https://www.magnific.com/app/creation/xSdWxTojfW",
+  "bg": "Sytp7xRUb8"
  },
  {
   "role": "maid",
@@ -9208,7 +9220,7 @@
   "por": "img/por-maid-m40-a18.webp",
   "role": "maid",
   "identity": "m40",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a18",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/w4hDow27EI"
@@ -9218,7 +9230,7 @@
   "por": "img/por-maid-m40-a26.webp",
   "role": "maid",
   "identity": "m40",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a26",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/w4hDow27EI"
@@ -9228,7 +9240,7 @@
   "por": "img/por-maid-m40-a36.webp",
   "role": "maid",
   "identity": "m40",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a36",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/w4hDow27EI"
@@ -9238,7 +9250,7 @@
   "por": "img/por-maid-m40-a51.webp",
   "role": "maid",
   "identity": "m40",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a51",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/w4hDow27EI"
@@ -9444,7 +9456,7 @@
   "por": "img/por-maid-m41-a18.webp",
   "role": "maid",
   "identity": "m41",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a18",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/rgezVj7xtc"
@@ -9454,7 +9466,7 @@
   "por": "img/por-maid-m41-a26.webp",
   "role": "maid",
   "identity": "m41",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a26",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/rgezVj7xtc"
@@ -9464,7 +9476,7 @@
   "por": "img/por-maid-m41-a36.webp",
   "role": "maid",
   "identity": "m41",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a36",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/rgezVj7xtc"
@@ -9474,7 +9486,7 @@
   "por": "img/por-maid-m41-a51.webp",
   "role": "maid",
   "identity": "m41",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a51",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/rgezVj7xtc"
@@ -9680,7 +9692,7 @@
   "por": "img/por-maid-m42-a18.webp",
   "role": "maid",
   "identity": "m42",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a18",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/P3EBvNW42C"
@@ -9690,7 +9702,7 @@
   "por": "img/por-maid-m42-a26.webp",
   "role": "maid",
   "identity": "m42",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a26",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/P3EBvNW42C"
@@ -9700,7 +9712,7 @@
   "por": "img/por-maid-m42-a36.webp",
   "role": "maid",
   "identity": "m42",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a36",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/P3EBvNW42C"
@@ -9710,7 +9722,7 @@
   "por": "img/por-maid-m42-a51.webp",
   "role": "maid",
   "identity": "m42",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a51",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/P3EBvNW42C"
@@ -9916,7 +9928,7 @@
   "por": "img/por-maid-m43-a18.webp",
   "role": "maid",
   "identity": "m43",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a18",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/lJ80dULgv9"
@@ -9926,7 +9938,7 @@
   "por": "img/por-maid-m43-a26.webp",
   "role": "maid",
   "identity": "m43",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a26",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/lJ80dULgv9"
@@ -9936,7 +9948,7 @@
   "por": "img/por-maid-m43-a36.webp",
   "role": "maid",
   "identity": "m43",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a36",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/lJ80dULgv9"
@@ -9946,7 +9958,7 @@
   "por": "img/por-maid-m43-a51.webp",
   "role": "maid",
   "identity": "m43",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a51",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/lJ80dULgv9"
@@ -10152,7 +10164,7 @@
   "por": "img/por-maid-m44-a18.webp",
   "role": "maid",
   "identity": "m44",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a18",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/JNaetajOq4"
@@ -10162,7 +10174,7 @@
   "por": "img/por-maid-m44-a26.webp",
   "role": "maid",
   "identity": "m44",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a26",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/JNaetajOq4"
@@ -10172,7 +10184,7 @@
   "por": "img/por-maid-m44-a36.webp",
   "role": "maid",
   "identity": "m44",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a36",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/JNaetajOq4"
@@ -10182,7 +10194,7 @@
   "por": "img/por-maid-m44-a51.webp",
   "role": "maid",
   "identity": "m44",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a51",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/JNaetajOq4"
@@ -10388,7 +10400,7 @@
   "por": "img/por-maid-m45-a18.webp",
   "role": "maid",
   "identity": "m45",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a18",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/MBwkl7RDCm"
@@ -10398,7 +10410,7 @@
   "por": "img/por-maid-m45-a26.webp",
   "role": "maid",
   "identity": "m45",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a26",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/MBwkl7RDCm"
@@ -10408,7 +10420,7 @@
   "por": "img/por-maid-m45-a36.webp",
   "role": "maid",
   "identity": "m45",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a36",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/MBwkl7RDCm"
@@ -10418,7 +10430,7 @@
   "por": "img/por-maid-m45-a51.webp",
   "role": "maid",
   "identity": "m45",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a51",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/MBwkl7RDCm"
@@ -10624,7 +10636,7 @@
   "por": "img/por-maid-m46-a18.webp",
   "role": "maid",
   "identity": "m46",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a18",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/cplqxS50eP"
@@ -10634,7 +10646,7 @@
   "por": "img/por-maid-m46-a26.webp",
   "role": "maid",
   "identity": "m46",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a26",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/cplqxS50eP"
@@ -10644,7 +10656,7 @@
   "por": "img/por-maid-m46-a36.webp",
   "role": "maid",
   "identity": "m46",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a36",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/cplqxS50eP"
@@ -10654,7 +10666,7 @@
   "por": "img/por-maid-m46-a51.webp",
   "role": "maid",
   "identity": "m46",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a51",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/cplqxS50eP"
@@ -10860,7 +10872,7 @@
   "por": "img/por-maid-m47-a18.webp",
   "role": "maid",
   "identity": "m47",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a18",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/xSdnMo4jfW"
@@ -10870,7 +10882,7 @@
   "por": "img/por-maid-m47-a26.webp",
   "role": "maid",
   "identity": "m47",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a26",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/xSdnMo4jfW"
@@ -10880,7 +10892,7 @@
   "por": "img/por-maid-m47-a36.webp",
   "role": "maid",
   "identity": "m47",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a36",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/xSdnMo4jfW"
@@ -10890,7 +10902,7 @@
   "por": "img/por-maid-m47-a51.webp",
   "role": "maid",
   "identity": "m47",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a51",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/xSdnMo4jfW"
@@ -11096,7 +11108,7 @@
   "por": "img/por-maid-m48-a18.webp",
   "role": "maid",
   "identity": "m48",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a18",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/huR761QvqL"
@@ -11106,7 +11118,7 @@
   "por": "img/por-maid-m48-a26.webp",
   "role": "maid",
   "identity": "m48",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a26",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/huR761QvqL"
@@ -11116,7 +11128,7 @@
   "por": "img/por-maid-m48-a36.webp",
   "role": "maid",
   "identity": "m48",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a36",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/huR761QvqL"
@@ -11126,7 +11138,7 @@
   "por": "img/por-maid-m48-a51.webp",
   "role": "maid",
   "identity": "m48",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a51",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/huR761QvqL"
@@ -11332,7 +11344,7 @@
   "por": "img/por-maid-m49-a18.webp",
   "role": "maid",
   "identity": "m49",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a18",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/79vptzmJAL"
@@ -11342,7 +11354,7 @@
   "por": "img/por-maid-m49-a26.webp",
   "role": "maid",
   "identity": "m49",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a26",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/79vptzmJAL"
@@ -11352,7 +11364,7 @@
   "por": "img/por-maid-m49-a36.webp",
   "role": "maid",
   "identity": "m49",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a36",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/79vptzmJAL"
@@ -11362,7 +11374,7 @@
   "por": "img/por-maid-m49-a51.webp",
   "role": "maid",
   "identity": "m49",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a51",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/79vptzmJAL"
@@ -11568,7 +11580,7 @@
   "por": "img/por-maid-m50-a18.webp",
   "role": "maid",
   "identity": "m50",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a18",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/gOITB2oSXO"
@@ -11578,7 +11590,7 @@
   "por": "img/por-maid-m50-a26.webp",
   "role": "maid",
   "identity": "m50",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a26",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/gOITB2oSXO"
@@ -11588,7 +11600,7 @@
   "por": "img/por-maid-m50-a36.webp",
   "role": "maid",
   "identity": "m50",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a36",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/gOITB2oSXO"
@@ -11598,7 +11610,7 @@
   "por": "img/por-maid-m50-a51.webp",
   "role": "maid",
   "identity": "m50",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a51",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/gOITB2oSXO"
@@ -11804,7 +11816,7 @@
   "por": "img/por-maid-m51-a18.webp",
   "role": "maid",
   "identity": "m51",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a18",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/mE3wNxGhJQ"
@@ -11814,7 +11826,7 @@
   "por": "img/por-maid-m51-a26.webp",
   "role": "maid",
   "identity": "m51",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a26",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/mE3wNxGhJQ"
@@ -11824,7 +11836,7 @@
   "por": "img/por-maid-m51-a36.webp",
   "role": "maid",
   "identity": "m51",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a36",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/mE3wNxGhJQ"
@@ -11834,7 +11846,7 @@
   "por": "img/por-maid-m51-a51.webp",
   "role": "maid",
   "identity": "m51",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a51",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/mE3wNxGhJQ"
@@ -12040,40 +12052,44 @@
   "por": "img/por-maid-m52-a18.webp",
   "role": "maid",
   "identity": "m52",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a18",
   "look": null,
-  "magnificUrl": "https://www.magnific.com/app/creation/rgezMAExtc"
+  "magnificUrl": "https://www.magnific.com/app/creation/cpl5crA0eP",
+  "bg": "xSdcs5LjfW"
  },
  {
   "file": "img/fig-maid-m52-a26.webp",
   "por": "img/por-maid-m52-a26.webp",
   "role": "maid",
   "identity": "m52",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a26",
   "look": null,
-  "magnificUrl": "https://www.magnific.com/app/creation/rgezMAExtc"
+  "magnificUrl": "https://www.magnific.com/app/creation/cpl5crA0eP",
+  "bg": "xSdcs5LjfW"
  },
  {
   "file": "img/fig-maid-m52-a36.webp",
   "por": "img/por-maid-m52-a36.webp",
   "role": "maid",
   "identity": "m52",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a36",
   "look": null,
-  "magnificUrl": "https://www.magnific.com/app/creation/rgezMAExtc"
+  "magnificUrl": "https://www.magnific.com/app/creation/cpl5crA0eP",
+  "bg": "xSdcs5LjfW"
  },
  {
   "file": "img/fig-maid-m52-a51.webp",
   "por": "img/por-maid-m52-a51.webp",
   "role": "maid",
   "identity": "m52",
-  "tier": "m1",
+  "tier": null,
   "ageBand": "a51",
   "look": null,
-  "magnificUrl": "https://www.magnific.com/app/creation/rgezMAExtc"
+  "magnificUrl": "https://www.magnific.com/app/creation/cpl5crA0eP",
+  "bg": "xSdcs5LjfW"
  },
  {
   "role": "maid",
