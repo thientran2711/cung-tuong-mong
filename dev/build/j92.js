@@ -12,7 +12,7 @@
    so the band always sits on the nose bridge under the eyes and the strands end a little past the chin.
    Kit use: <img src="${KIT_VEIL.src(KIT_VEIL.tierOf(p))}" style="position:absolute;${KIT_VEIL.style(file,tier)}"> above the portrait,
    above KIT_SCAR, below the frame. */
-window.KIT_VEIL={tiers:["t1","t2","t3","t4","t5","t6","t7","t8","gauze"],band:{t1:.18,t2:.139,t3:.112,t4:.124,t5:.169,t6:.144,t7:.128,t8:.11,gauze:.144},B0:.165,
+window.KIT_VEIL={tiers:["t1","t2","t3","t4","t5","t6","t7","t8","gauze"],band:{t1:.16,t2:.139,t3:.112,t4:.124,t5:.169,t6:.144,t7:.128,t8:.11,gauze:.153},B0:.165,
  por:"img/veil-por.png",fig:"img/veil-fig.png",fitUrl:"img/veil-fit.json",fit:null,
  src:function(t){t=this.band[t]!=null?t:"t5";return `img/veil-${t}.png`},
  on:function(p){try{return !!(p&&p.scar&&p.scar.veil)}catch(e){return false}},
