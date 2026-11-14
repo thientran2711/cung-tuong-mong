@@ -20,7 +20,8 @@ const [,,BASE,SZ,OUT,TAG,OLD]=process.argv;const [WH,DPR]=SZ.split('@');const [W
  await p.evaluate(()=>{SLOT=3;document.getElementById('title').hidden=true;try{store.set(NL_KEY,null)}catch(e){}window.__kroulKey=null;start()});
  await p.waitForFunction(()=>document.querySelector('#kroul'),null,{timeout:20000});await p.waitForTimeout(1500);
  await shot('r1-faceup');A.push(await audit('faceup'));
- await p.click('#kroul .krgo');await p.waitForTimeout(1250);await shot('r2-shuffle');
+ await p.evaluate(()=>{window.__kroulFreeze=1});await p.click('#kroul .krgo');await p.waitForFunction(()=>window.__kroulGo);await p.waitForTimeout(700);await shot('r2-shuffle');
+ await p.evaluate(()=>{window.__kroulFreeze=0;window.__kroulGo()});
  await p.waitForFunction(()=>window.__kroulStep===2);await p.waitForTimeout(500);await shot('r3-facedown');A.push(await audit('facedown'));
  const tiles=await p.$$('#kroul .krt');await tiles[4].click();await p.waitForTimeout(650);await shot('r4-picked');
  await p.waitForFunction(()=>window.__kroulStep===3);await p.waitForTimeout(900);await shot('r5-revealed');A.push(await audit('revealed'));

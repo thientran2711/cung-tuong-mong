@@ -17,4 +17,6 @@ Quyết định chủ: OWNER_DECISIONS 11/15 04:00Z + lệnh điều phối (lu�
 - Thử: dev/test/inv-origin.js (+ bt.sh dựng + chạy; mk-oldsave.js tạo sổ cũ từ bản root). Ảnh: dev/shots/inv-origin/.
 
 ## Kiểm thử
-Xem báo cáo cuối trong commit / phần dưới.
+- 686x880@2.2 (+ sổ cũ từ bản root: nạp được, 4 món hiện đúng trong túi), 755x1000@2, 1180x820@2, 1366x1024@2: 0 lỗi trang, 0 tràn ngang,
+  0 chữ cắt; chip độ hiếm lệch 0 px mỗi hàng; lá chọn luôn = thân phận đã gieo; túi lấp đủ hàng (9/10/8/9 cột); Đeo/Tháo từ bảng món đồ chạy đúng.
+- Máy thử tải ~70: trình duyệt thử đôi khi sập giữa chừng (thiếu bộ nhớ), chạy lại thì qua.

@@ -515,15 +515,18 @@ function kitRoulette(o){const done=()=>{try{o.done&&o.done()}catch(e){}};if(!o||
    tiles.forEach(t=>{t.style.transition="none";const a=first.get(t),b=(t.style.transform="",t.getBoundingClientRect());t.style.transform=`translate(${a.left-b.left}px,${a.top-b.top}px)`});
    void grid.offsetWidth;tiles.forEach((t,i)=>{t.style.transition="";t.style.transitionDelay=(i*35)+"ms";t.style.transform="";t.style.zIndex=""});snd("sfx-tap")};
   if(rm){const order=tiles.slice().sort(()=>Math.random()-.5);order.forEach(t=>grid.appendChild(t));tiles=order;pickReady();return}
-  T(gather,520);T(deal,1080);T(gather,1700);T(deal,2260);T(()=>{tiles.forEach(t=>t.style.transitionDelay="");pickReady()},2900)};
+  const rest=()=>{T(deal,40);T(gather,660);T(deal,1220);T(()=>{tiles.forEach(t=>t.style.transitionDelay="");pickReady()},1860)};
+  /* test hook: window.__kroulFreeze holds the deck gathered mid-shuffle until window.__kroulGo() */
+  T(gather,520);T(()=>{if(window.__kroulFreeze){window.__kroulGo=()=>{window.__kroulGo=null;rest()};return}rest()},1040)};
  const pickReady=()=>{setStep(2);sub.textContent="Chạm một lá để nhận thân phận kiếp này";ov.classList.add("krpick");tiles.forEach(t=>{t.setAttribute("role","button");t.tabIndex=0})};
  /* step 3: the tapped card shows the rolled origin; the other cards hold the rest (face-down, dimmed) */
  const pick=t=>{if(step!==2||picked)return;picked=t;ov.classList.remove("krpick");
   const ti=items.findIndex(x=>x.k===o.target);const rest=items.filter((x,i)=>i!==ti).sort(()=>Math.random()-.5);
   tiles.forEach(e=>{const it=e===t?items[Math.max(0,ti)]:rest.shift();if(!it)return;e.dataset.k=it.k;e.querySelector(".krf").innerHTML=kitOriginFace(it)});
   t.classList.add("pick");tiles.forEach(e=>{if(e!==t)e.classList.add("krdim")});snd("sfx-tap");
-  T(()=>{const r=t.getBoundingClientRect();const s=Math.max(1,Math.min(2.3,innerWidth*.62/r.width,innerHeight*.5/r.height));
-   t.style.zIndex=50;t.style.transform=`translate(${innerWidth/2-(r.left+r.width/2)}px,${innerHeight*.47-(r.top+r.height/2)}px) scale(${s})`;t.classList.add("win")},420);
+  /* centre of the card area (never over the title or the buttons) */
+  T(()=>{const r=t.getBoundingClientRect(),g=grid.getBoundingClientRect();const s=Math.max(1,Math.min(2.3,innerWidth*.62/r.width,g.height*.94/r.height));
+   t.style.zIndex=50;t.style.transform=`translate(${g.left+g.width/2-(r.left+r.width/2)}px,${g.top+g.height/2-(r.top+r.height/2)}px) scale(${s})`;t.classList.add("win")},420);
   T(()=>{t.classList.remove("down");snd("sfx-promote")},780);
   T(()=>{setStep(3);sub.textContent=items[Math.max(0,ti)].name;go.hidden=false;go.focus&&go.focus({preventScroll:true})},1500)};
  grid.addEventListener("click",e=>{const t=e.target.closest(".krt");if(t)pick(t)});
