@@ -1,4 +1,69 @@
-# Balance report: review/balance (v9, 11/14)
+# Balance report: review/balance (v12 current, 11/14 night; v9–v10 history below)
+
+## v12 (balance worker 2, 11/14 night) — CURRENT
+Includes review/items-earned (98a3dae9, merged). Same harness as before; runs with `dev/measure/run5b.sh <game> <label>` (one shard: `run1b.sh`; `OUT` = output dir)
+(5 shards x 6 lives, 9-origin rotation, `INP2=inx.js,inpz.js`, knobs tried with `XJS` `Object.assign(BAL,{...})`).
+
+### Why a landed poison never killed her (found and fixed)
+`inpz.js` logs every poison aimed at her. In 9 lives, 25 poisons landed, and 12 of them took her Sức to 0. None killed her.
+- A poison that lands in the day (a j70 scheme, a j83 poisoned dish) took her Sức to 0. Her Sức is only checked at the end of the tuần,
+  after the new tuần's +4 rest, so she always lived. An NPC dies on the spot (`dieIf`, j8).
+- **Fix (jbal2):** when a poison takes her Sức to 0, she dies on the spot ("Trúng độc, không qua khỏi"). This is now one rule for everyone.
+  `probe_poison.js` checks it: at Sức 30 both she and an NPC die, and at Sức 90–95 both live.
+- The "chết: …" odds word on her own Hạ độc button (j79 `kpDeathP`) now follows `BAL.poisonX`, so the word she sees is true.
+
+### Other changes
+| knob | value | why |
+|---|---|---|
+| poisonX | 1.5 → **1** | Once poison could kill, 1.5 gave 57% early death (11 of 30 by poison). |
+| **poisonBac** (new) | 20 bạc | Owner rule: items are never free (ITEMS_EARNED.md #15). A Hạ độc without Hạc đỉnh hồng in the chest means buying thạch tín: 20 bạc, for her and for every NPC. Without the silver nobody can try it. |
+| seeMaxP | 65 → **70** | Cap on spotting poison. |
+| outQ (jbal) | 85 → **60** | Share of the time an empty Hoàng hậu seat goes to an outsider girl. With 85, Hoàng hậu stayed at 20–25% once deaths were real. |
+| **srvSpyHit** (new) | 25 | Servant start (j42): a maid caught eavesdropping on her mistress's orders is flogged (Sức −25), not beaten to death. Caught poisoning or planting a charm can still kill her. Before this, the cnv start had 0 Hoàng hậu in 15 lives; 3 of 12 lives ended this way in the first two years. |
+| hz 3.2, birthMin 8, birthAdd 4, illDie 2, accCdT 36 | unchanged | |
+
+### Trials (n=30 unless noted; a share has about ±17 points of noise at n=30)
+| config | Hoàng hậu | early death | poison deaths | childbirth / labour (shown) |
+|---|---|---|---|---|
+| fix, poisonX 1, seeMaxP 65 | 17% | 57% | 11 | 14% (12.2) |
+| + seeMaxP 80 | 27% | 53% | 8 | 17% (11.7) |
+| + seeMaxP 80, hz 3.0 | 23% | 57% | 11 | 16% (11.2) |
+| + seeMaxP 88 | 20% | 40% | 8 | 6.7% (11.4) |
+| + seeMaxP 92 | 23% | 43% | 7 | 8.5% (11.5) |
+| + seeMaxP 88, hz 2.9 (n=28) | 32% | 54% | 6 | 23% (11.4) |
+| + seeMaxP 88, hz 2.6 (n=26) | 15% | 50% | 4 | 17% (11.0) |
+| items-earned + poisonBac 20, seeMaxP 88, outQ 65 (n=20) | 40% | 30% | 3 | 11% (12.6) |
+| same, outQ 50 (n=24) | 54% | 21% | 2 | 8.1% (12.8) |
+| same, seeMaxP 75, outQ 65 | 33% | 47% | 10 | 8.3% (10.8) |
+| **same, seeMaxP 70, outQ 60 (v12j)** | **37%** | **40%** | 7 | 10% (11.1) |
+| **v12 build baked in (v13)** | **33%** | **43%** | 9 | 14% (12.4) |
+Within this range hz moves nothing that the noise does not swamp. outQ is the clean lever for Hoàng hậu.
+
+### FINAL v12: BAL = {outQ 60, hz 3.2, conc .25, later 6, hhTh 55, birthAdd 4, illAdd 1, illDie 2, accTire 10, accCdT 36, birthMin 8, seeMaxP 70, poisonX 1, poisonBac 20, srvSpyHit 25}
+Pooled v12j + v13 (n=60). The cnv row is a separate servant-only run on the final build (v14cnv, 12 cnv lives).
+
+| target | measured | verdict |
+|---|---|---|
+| Hoàng hậu ~30–40% | **35%** (21/60) | ✔ |
+| early death ~35–40%, ≤45% | **42%** (25/60): poison 16, childbirth 5, own schemes caught 4 | ✔ |
+| childbirth death 8–12% per labour | **11.4%** (5/44; mean risk shown 11.5) | ✔ |
+| cnv winnable, aim 10–25% | **2/12 = 17%** (final build) | ✔ |
+| no death in the first 2 tuần | 0 | ✔ |
+| early suicide never pays (`probe_kiep.js`) | net Phúc duyên 0 or −30 for every origin incl. cnv; origin locked | ✔ |
+| birth path exact (`probe_birth.js`) | risk 13 / 8 / 8 → deaths 12.35 / 7.7 / 7.75% | ✔ |
+| old save loads (`uismoke.js`, save made on 093a869a) | loads at 755x1000@2 and 1180x820@2, 12 buổi played, no overflow | ✔ |
+| page errors | none (a few shards lost to "Target crashed" / "Invalid InterceptionId" under machine load; those shards were rerun) | ✔ |
+Per origin (n/HH/died, pooled): ch 6/4/1, cn 8/5/0, dtq 9/2/5, muoi 4/2/1, nc 8/2/4, td 5/0/3, thd 6/1/2, tt 9/5/4.
+NPC acts on her per life: poison 15 tried / 0.9 landed; musk 4.5 / 1.3; accusations 5.9 (4.4 stick).
+
+### Time to Hoàng hậu (lives that made it, n=20, final pooled)
+| | p25 | median | p75 |
+|---|---|---|---|
+| game years | 3.8 | **5.8** | 6.8 |
+| tuần | 138 | **208** | 243 |
+| real minutes at 10 s per tuần | 23 | **35** | 41 |
+| real minutes at 20 s per tuần | 46 | **69** | 81 |
+In short: **about 4–7 game years, roughly 140–240 tuần. That is 25–40 minutes at 10 s per tuần, or 45–80 minutes at 20 s per tuần.**
 
 Sensible bot (`inpage6.js` + `inx.js` counters), every origin including the servant start (cnv). Each life stops when she becomes
 Hoàng hậu (HHSTOP), so the Hoàng hậu % and the early-death % come from the same lives.

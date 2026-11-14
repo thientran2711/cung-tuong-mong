@@ -37,4 +37,7 @@ Chạy: `GAME=<bản dựng có meta charset> INP=inpage6.js node dev/measure/ru
 - Nguyên nhân độc trúng mà không chết: độc trúng ban ngày (j70 mưu, j83 món ăn) đưa Sức nàng về 0, nhưng nàng chỉ bị xét chết ở cuối tuần, sau +4 hồi sức → không bao giờ chết. NPC thì chết ngay (dieIf). Sửa (jbal2): độc làm cạn Sức nàng thì chết ngay "Trúng độc, không qua khỏi" — một luật cho mọi người. inpz.js đo: 25 lần trúng/9 đời, nhiều lần về 0 mà sống.
 - Sau sửa: poisonX 1.5 quá chết (57%) → poisonX 1. Gộp review/items-earned (98a3dae9). Hạ độc không có Hạc đỉnh hồng: mua thạch tín BAL.poisonBac 20 bạc (mọi người).
 - Núm cuối: seeMaxP 70, outQ 60 (ghế HH trống về người ngoài 60%, trước 85), hz 3.2, birthMin 8, poisonX 1, poisonBac 20.
-- Chạy: bash <scratch>/b2w/run5.sh <game> <nhãn> (5 mảnh × 6 đời, xoay 9 thân phận, INP2=inx.js,inpz.js, EXTRA='Object.assign(BAL,{...})' để thử núm). probe_poison.js kiểm luật độc.
+- Chạy: bash dev/measure/run5b.sh (OUT=dir) <game> <nhãn> (5 mảnh × 6 đời, xoay 9 thân phận, INP2=inx.js,inpz.js, EXTRA='Object.assign(BAL,{...})' để thử núm). probe_poison.js kiểm luật độc.
+- Cung nữ (j42) bị bắt khi dò la theo lệnh chủ: đánh trượng Sức -25 (BAL.srvSpyHit), không chết; bỏ độc/cài bùa vẫn có thể chết. cnv: 2/12 HH.
+- KẾT QUẢ v12 (gộp n=60): HH 35%, chết sớm 42%, khó sinh 11,4%/lần, cnv 17%, HH sau 5,8 năm (208 tuần; 35 phút @10s, 69 phút @20s). probe_kiep, probe_birth, uismoke (save 093a869a) đạt; không lỗi trang.
+- Còn mở: số theo từng thân phận vẫn nhỏ (n 4–9); td 0/5 HH trong lần gộp.
