@@ -28,7 +28,7 @@
   let act=window.__pcTab[role];
   if(!G.some(s=>s.t===act))act=(G.find(s=>nLive(s.el)>0)||G[0]).t;
   const bar=document.createElement("div");bar.className="pctabs";
-  bar.innerHTML=G.map(s=>`<button class="pct${s.t===act?" on":""}" data-pct="${esc(s.t)}" data-role="${esc(role)}">${esc(s.t)} <i>${nLive(s.el)}</i></button>`).join("");
+  bar.innerHTML=G.map(s=>`<button class="pct${s.t===act?" on":""}" data-pct="${esc(s.t)}" data-role="${esc(role)}">${esc(s.t)} <i title="làm được ${nLive(s.el)} trên ${s.el.querySelectorAll("button").length} việc">${nLive(s.el)}/${s.el.querySelectorAll("button").length}</i></button>`).join("");
   pcr.insertBefore(bar,oldTabs&&oldTabs.compareDocumentPosition(anchor)&Node.DOCUMENT_POSITION_FOLLOWING?oldTabs:anchor);
   if(oldTabs)oldTabs.remove();
   G.forEach(s=>{let g=s.el;
