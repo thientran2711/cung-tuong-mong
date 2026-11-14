@@ -135,8 +135,8 @@ PEND.q72o=pp=>{try{const x=pp.x;const X=q72X(x);if(!X)return null;const T=X.T;co
   const pre=pp.how==="ask"?`<p class="past">Ngươi hỏi han, ${X.A.n} ngỏ lời.</p>`:pp.how==="fu"?`<p class="past">Lại là ${X.A.n}: chuyện lần trước còn tiếp.</p>`:"";
   const tr=T.tr?`<p class="past">${q72Txt(T.tr,X)}</p>`:"";
   const h=`${pre}<p>${q72Txt(T.h,X)}</p>${tr}<p class="past"><b>${KIND72[T.kind]}</b> · hạn ${T.dl||6} tuần · ${T.s.length} bước:<br>${q72Steps(X)}</p>${owe?`<p class="r">Ngươi đang nợ ${q72Short(X.A)} một ân: từ chối lần này mếch lòng gấp đôi.</p>`:""}`;
-  const accX=`${est>=95?"Chắc chắn":word(est)} · thành: ${ok.join(", ")||"êm chuyện"} · hỏng: ${no.join(", ")}${bad.length?` · kèm: nếu bại lộ: ${bad.join(", ")}`:""}`;
-  const decX=`Chắc chắn · tốn: ${[q72Tok(X.A,dec)||R72(`${X.A.n} phật ý`)].concat(owe?[R72("nợ ân vẫn còn")]:[]).join(", ")}`;
+  const accX=`${est>=95?"":word(est)+" · "}thành: ${ok.join(", ")||"êm chuyện"} · hỏng: ${no.join(", ")}${bad.length?` · kèm: nếu bại lộ: ${bad.join(", ")}`:""}`;
+  const decX=`tốn: ${[q72Tok(X.A,dec)||R72(`${X.A.n} phật ý`)].concat(owe?[R72("nợ ân vẫn còn")]:[]).join(", ")}`;
   const o=[{n:"Nhận lời",fx:{},x:accX,go:()=>{const q=q72();if(q.a.length>=Q72CFG.max){log("Ngươi đang bận quá nhiều việc, đành khất.");return}x.t0=wk();x.dl=wk()+(T.dl||6);q.a.push(x);q.n.acc++;if(T.acc)try{T.acc(X)}catch(e){}q72Enter(x,X);log(`Ngươi nhận lời ${X.A.n}: ${q72Title(X)}. Hạn ${T.dl||6} tuần. ${T.acc?q72Txt(T.accX||"",X):""}`)}},
    {n:"Khéo từ chối",fx:{},x:decX,go:()=>{const q=q72();q.n.dec++;q72Rel(X.A,dec);log(`Ngươi khéo khước từ ${X.A.n} (${q72Title(X)}). ${plain(q72Tok(X.A,dec))}.`)}}];
   return{who:X.A.f,t:h,o}}catch(e){console.error(e);return null}};
@@ -238,7 +238,7 @@ function q72Tick(){const q=q72();if(!q)return;
 
 /* ---------- the Việc nhờ tab (kit only: .ph header, pbtn, pager + pcard, chips, pcrow rows, logs) ---------- */
 (function(){const t=$("tabs");if(!t||t.querySelector('[data-tab="q72"]'))return;const b=document.createElement("button");b.dataset.tab="q72";b.dataset.s="Nhờ";b.setAttribute("role","tab");b.setAttribute("aria-selected","false");b.textContent="Việc nhờ";t.insertBefore(b,t.querySelector('[data-tab="log"]'));
- const st=document.createElement("style");st.textContent="@media (min-width:701px){#tabs.tabs{grid-template-columns:repeat(12,minmax(0,1fr))!important}}@media (min-width:1000px) and (max-width:1399px){#tabs.tabs button{font-size:0!important}#tabs.tabs button::after{content:attr(data-s);font-size:.8rem}}";document.head.appendChild(st)})();
+})();
 function q72Pass(k){try{const q=q72();for(const x of q.a){const X=q72X(x);if(X&&q72Host(k,X)&&X.T.s.some(st=>q72StepPl(st,X)===k)){accGrant(S,k);return true}}}catch(e){}return false}
 function q72PgN(a){return a.k==="emp"?"Bệ hạ":a.k==="th"?"Thái hậu":a.k==="fam"?"Thư nhà":a.k==="off"?a.o.name.split(" ").slice(-2).join(" "):shortN(a.n)}
 function q72Role(a){return a.f&&a.f.rw?a.f.rw:a.k==="emp"?"Hoàng thượng":a.k==="th"?"Thái hậu":""}

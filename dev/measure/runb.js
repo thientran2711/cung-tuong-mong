@@ -3,7 +3,7 @@ const {chromium}=require('playwright');const fs=require('fs');const path=require
 const mode=process.argv[2],target=+process.argv[3]||40,out=process.argv[4];
 const M=__dirname,GAME=process.env.GAME||path.join(M,'..','index.html');
 (async()=>{
- const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:390,height:844}});const page=await ctx.newPage();
+ const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:390,height:844}});if(process.env.FAST!=='0')await ctx.addInitScript(()=>{/* bot speed: visual-only DOM observers and focus off (rules untouched) */window.MutationObserver=class{observe(){}disconnect(){}takeRecords(){return[]}};HTMLElement.prototype.focus=function(){};});const page=await ctx.newPage();await page.route(/\.(webp|png|jpg|mp3|ogg)$/,r=>r.abort());
  page.on('pageerror',e=>{console.log('PAGEERR',mode,e.message.slice(0,200))});
  await page.goto('file://'+GAME);await page.waitForTimeout(500);
  await page.evaluate(()=>localStorage.clear());await page.reload();await page.waitForTimeout(500);
