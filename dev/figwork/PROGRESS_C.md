@@ -50,6 +50,7 @@ Mẻ A5 (thợ m01–m26): t3 m21–m26 → t3 XONG m01–m26; t4 m01–m02. 12 
 Mẻ A6 (thợ m01–m26): t4 m03–m10. 10 lần vẽ/sửa (sửa m04 thêm hoa điền tuổi 19, m05 thu nhỏ hoa điền) + 8 tách nền: 10×270 + 8×3 = 2724.
 Mẻ A7 (thợ m01–m26): t4 m11–m18. 8 lineup + 8 tách nền: 8×273 = 2184; m13 xoá nốt ruồi chấm vá (tóc tuổi 48 m13 sẽ sửa ở mẻ sau).
 Mẻ A8 (thợ m01–m26): t4 m19–m26 → t4 XONG m01–m26; thay m13 t4 (sửa tóc tuổi 48). 10 lần vẽ/sửa (sửa m23 hoa điền phẳng, m13 tóc) + 9 tách nền: 10×270 + 9×3 = 2727; m13 m26 xoá nốt ruồi chấm vá.
+Mẻ A9 (thợ m01–m26): t5 m01–m08 (hoa điền nấc 5 vàng lá + son). 8 lineup + 8 tách nền: 8×273 = 2184.
 
 ## C-B (thợ m27–m52): mẻ và tín dụng
 Mẻ B1: t2 m27–m34 (vẽ lại m27–m33, đạo cụ khác loại mỗi tuổi). 8 lineup, tín dụng 8×273 = 2184.
