@@ -5263,9 +5263,6 @@ window.tdForceSo=function(k){const T=trS();if(k==="praise"&&!T.praise)T.praise="
  const go=()=>{mo.observe(document.body,{childList:true,subtree:true});scan(document)};
  if(document.body)go();else document.addEventListener("DOMContentLoaded",go);
 })();
-/* j62: kid card shows age once (in the header "Hoàng tử · 11 tuổi"); the adult age band (18–25…) is shown only for adults (owner 11/14) */
-(function(){const t0=tuoi;tuoi=function(n){return n>=18?t0(n):(n>0?`Tuổi <b>${n}</b>`:"")};
- const k0=kidCard;kidCard=function(k){const t1=tuoi;tuoi=()=>"";try{return k0.apply(this,arguments)}finally{tuoi=t1}}})();
 /* ================= j58: TRANH NỀN THÂN PHẬN (owner 11/14) =================
    While the "Thân phận kiếp này" card (j52) or the life's opening card ("Nhập cung…") is up, the full-screen modal
    backdrop shows img/bg-origin-<origin.k>.webp (like the title key art) under a soft gradient. Every other modal keeps
@@ -5292,6 +5289,9 @@ window.tdForceSo=function(k){const T=trS();if(k==="praise"&&!T.praise)T.praise="
  try{const M=$("modal");if(M&&typeof MutationObserver==="function")new MutationObserver(obgApply).observe(M,{attributes:true,attributeFilter:["hidden","class"]})}catch(e){}
  obgApply();
 })();
+/* j62: kid card shows age once (in the header "Hoàng tử · 11 tuổi"); the adult age band (18–25…) is shown only for adults (owner 11/14) */
+(function(){const t0=tuoi;tuoi=function(n){return n>=18?t0(n):(n>0?`Tuổi <b>${n}</b>`:"")};
+ const k0=kidCard;kidCard=function(k){const t1=tuoi;tuoi=()=>"";try{return k0.apply(this,arguments)}finally{tuoi=t1}}})();
 
 </script>
 
