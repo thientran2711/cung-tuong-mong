@@ -22,7 +22,6 @@ function rashOf(p){p=p||S;const r=p&&p.rash;if(!r)return null;const left=Math.ma
  const lost=Math.round(RASH.d[r.sev]*(vg>=0?VL.cover[vg]:1));return{sev:r.sev,name:RASH_N[r.sev],lost,weeksLeft:left,veiled:vg>=0,chip:`Nổi mẩn (${RASH_N[r.sev]}) · còn ${left} tuần`}}
 window.rashOf=rashOf;
 function rashNote(p){const r=rashOf(p);return r?[`Mặt nổi mẩn (${r.name}) · ${r.veiled?"đang che":"chưa che"}, Sắc mất ${r.lost}`,r.veiled?"n":"no"]:["Mặt lành, chưa cần đeo","ok"]}
-(function(){const e0=effSac;effSac=function(p){let r=e0.apply(this,arguments);try{const x=p&&p.rash?rashOf(p):null;if(x)r=cl(r-x.lost,0,130)}catch(e){}return r}})();
 /* weekly healing, the same rule for everyone */
 function rashHeal(p){const r=p&&p.rash;if(!r)return;const me=p===S;let fast=false;
  if(r.tr>0){r.tr--;fast=true}else if(me?(S.arts&&S.arts.y>=2):((p.arts&&p.arts.y>=2)||roll(RASH.npcMed)))fast=true;
@@ -39,10 +38,6 @@ PEND.rashcard=pp=>{const r=S&&S.rash;if(!r)return null;const x=rashOf(S);const o
   else o.push({n:"Tìm mạng che mặt",fx:{},x:"chưa có mạng: tự tay kết, đặt mua hay xin ban",j67:"tốn: không tốn gì · thành: tự tay kết, đặt mua hay xin ban",go:()=>pushDil(mkP("vlget"),"Mạng che mặt")})}
  o.push(ch70("Để tự khỏi",{wt:[G70("không tốn gì")],k:[R70(`còn ${x.weeksLeft} tuần`)],ok:()=>"Ngươi để mẩn tự lặn."}));
  return{who:pMe(),t:`<p>Mặt ngươi nổi mẩn đỏ (${x.name}${r.how?", vì "+r.how:""}): Sắc đang mất ${x.lost}; còn chừng ${x.weeksLeft} tuần mới lặn.</p>`,o}};
-/* chip on person cards (kit chip), only when she knows */
-(function(){const p0=pcard;pcard=function(o){try{if(S&&o&&o.name){const nm=String(o.name).replace(/<[^>]*>/g,"");const p=nm===S.name?S:rivals.find(v=>v.name===nm);const x=p&&rashOf(p);
-  if(x&&(p===S||typeof knows!=="function"||knows(p)))o=Object.assign({},o,{chips:(o.chips||[]).concat([chip(x.chip,"hot")])})}}catch(e){}return p0.call(this,o)}})();
-
 /* ---------- causes ---------- */
 /* spring pollen event (j68f): each choice keeps its text; afterwards the face may break out (less with the physician) */
 (function(){try{const E=E68I.springAllergy;if(!E)return;const o0=E.o;E.o=function(X){const O=o0.apply(this,arguments);const P=[15,30,55];
@@ -72,7 +67,7 @@ window.KIT_RASH={ready:true,RB:.47,WX:1.08,src:function(sev){return `img/rash-${
  style:function(file){try{const n=String(file||"").split("/").pop();const r=KIT_VEIL.fit&&KIT_VEIL.fit[n];if(!r)return "";
   const W=r[2]*this.WX,H=W*(r[3]*480)/(r[2]*445),bandY=r[1]+KIT_VEIL.B0*r[3],L=r[0]+r[2]/2-W/2,T=bandY-this.RB*H;
   return `left:${L.toFixed(2)}%;top:${T.toFixed(2)}%;width:${W.toFixed(2)}%;height:${H.toFixed(2)}%;transform:rotate(${r[4]}deg);transform-origin:50% ${(this.RB*100).toFixed(1)}%`}catch(e){return ""}}};
-(function(){if(typeof kitFxLayers!=="function")return;const f0=kitFxLayers;kitFxLayers=function(p,file){let h=f0.apply(this,arguments);try{if(KIT_RASH.ready&&p&&file&&KIT_RASH.on(p)){const st=KIT_RASH.style(file);
-  if(st)h=`<img class="krash" src="${KIT_RASH.src(p.rash.sev)}" alt="" aria-hidden="true" style="${kitFxVars(st)}" onerror="this.remove()">`+h}}catch(e){}return h}})();
-/* kitFxLayers returns "" (no wrapper) when a face has no scar/veil: jk2b's callers only add the layer box when it is non-empty, so this is enough */
+/* one entry in the shared face-fx registry (jface KIT_FACEFX): picture layer, Sắc and the person-card chip */
+KIT_FACEFX.add({id:"rash",z:20,ready:KIT_RASH.ready,state:p=>p&&p.rash?rashOf(p):null,seen:p=>KIT_RASH.on(p),sac:(p,x)=>x.lost,chip:(p,x)=>[x.chip,"hot"],
+ html:(p,file,x)=>{const st=KIT_RASH.style(file);return st?`<img class="krash" src="${KIT_RASH.src(p.rash.sev)}" alt="" aria-hidden="true" style="${kitFxVars(st)}" onerror="this.remove()">`:""}});
 window.rashGive=rashGive;window.RASH=RASH;
