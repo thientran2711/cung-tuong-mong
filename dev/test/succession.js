@@ -9,7 +9,7 @@ const [,,BASE,SZ,OUT,ONLY]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]
  const res=[];
  const check=name=>p.evaluate(name=>{const M=document.getElementById('modal');const vw=innerWidth;const bad=[];
   if(!M||M.hidden)return{name,modal:false};
-  M.querySelectorAll('.kptitle,.ka,.ka *,.kpb p,.kfacts *').forEach(e=>{const q=e.getBoundingClientRect();if(!q.width)return;if(q.left<-1||q.right>vw+1)bad.push('out:'+(e.className||e.tagName)+':'+e.textContent.slice(0,24));
+  M.querySelectorAll('.kptitle,.ka,.ka *,.kpb p,.kfacts *').forEach(e=>{const q=e.getBoundingClientRect();if(!q.width)return;if(q.left<-1||q.right>vw+1)bad.push('out:'+(e.className||e.tagName)+':'+e.textContent.slice(0,24)+':'+Math.round(q.left)+'-'+Math.round(q.right)+'/'+vw);
    const cs=getComputedStyle(e);if(e.scrollWidth>e.clientWidth+1&&cs.overflow!=='visible'&&cs.overflowX!=='visible')bad.push('clip:'+(e.className||e.tagName)+':'+e.textContent.slice(0,24))});
   const opts=[...M.querySelectorAll('.opts .opt')].map(o=>({t:(o.querySelector('.kan')||o).textContent.trim().slice(0,50),dis:o.disabled,rows:[...o.querySelectorAll('.kr .krl')].map(x=>x.textContent.trim()),odds:(o.querySelector('.kodds')||{}).textContent||'',why:[...o.querySelectorAll('.kr-why .kwhy')].map(x=>x.textContent.trim()).slice(0,8)}));
   const txt=M.innerText;return{name,modal:true,title:(M.querySelector('.kptitle')||document.getElementById('mt')).textContent,overflowX:document.documentElement.scrollWidth>vw,bad,opts,
@@ -21,8 +21,8 @@ const [,,BASE,SZ,OUT,ONLY]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]
  const paths=ONLY&&ONLY!=='all'?[ONLY]:['a','b','c','none'];
  for(const P of paths){await fresh();
   await p.evaluate(P=>succDebug(P==='none'?'':P,1),P);await p.waitForTimeout(1500);await p.evaluate(()=>document.querySelectorAll('.kmedict').forEach(e=>e.click()));await p.waitForTimeout(1200);await p.evaluate(()=>document.querySelectorAll('.kmedict').forEach(e=>e.remove()));
-  await p.evaluate(P=>succDebug(P==='none'?'':P),P);await p.waitForTimeout(900);
-  const c=await check('card-'+P);res.push(c);await p.screenshot({path:`${OUT}/card-${P}-${tag}.png`});
+  await p.evaluate(P=>succDebug(P==='none'?'':P),P);await p.waitForTimeout(2000);
+  await p.screenshot({path:`${OUT}/card-${P}-${tag}.png`});const c=await check('card-'+P);res.push(c);
   if(P==='none')continue;
   /* pick the path; for b/c force the roll to succeed */
   const idx={a:0,b:1,c:2}[P];await p.evaluate(()=>{window.__r0=Math.random;Math.random=()=>0.01});await choose(idx);await p.evaluate(()=>{Math.random=window.__r0});
