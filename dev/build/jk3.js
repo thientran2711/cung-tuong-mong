@@ -313,7 +313,7 @@ html body .ksel:not(.kpki),html body [aria-pressed="true"].kselable{outline:none
 (function(){const st=document.createElement("style");st.id="k3-pcx";st.textContent=`
 html body .pc:has(>.pcr>.pcx){position:relative}
 /* a card opened from the room (#popw) lies over the panel: above the panel's sticky rows (sub-tabs, category tabs) */
-html body #popw{z-index:12}
+html body #popw{z-index:12!important}
 html body .pc>.pcr>.pcx{position:absolute!important;top:6px;right:6px;margin:0!important;z-index:8}
 html body .pc:has(>.pcr>.pcx)>.pcl>.kpnm{padding-right:78px}
 /* kit panels (report / story / info dialogs): the close row "Đã hiểu" is pinned at the dialog's bottom, the body scrolls under it */
