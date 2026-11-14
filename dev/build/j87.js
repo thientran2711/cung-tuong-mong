@@ -104,7 +104,7 @@ function kitBook(spec){spec=spec||{};const rm=()=>{try{return reducedMotion()}ca
   logical=(sheets[cur]&&(sheets[cur].front.src||sheets[cur].front.kind))||null}
 
  /* ---- the turn: p = 0 (flat, right) … 1 (turned, left) ---- */
- /* the turn is a CURL (kitCurl, jbook / KIT §32): the sheet bends in strips, both sides shaded, cast shadow moves with it */
+ /* the turn is a CURL (kitCurl v2, jbook / KIT §32.1): the corner lifts, the sheet folds on a diagonal, its back shows, shadow along the fold */
  function setTurn(el,p){const c=el&&el.__curl;if(c)c.set(p)}
  function beginTurn(i,dir){const els=sheetEls();const el=els[i];if(!el)return null;
   for(let k=i-2;k<=i+2;k++)if(els[k])els[k].style.visibility="visible";if(mode==="single"&&els[i+1]&&i===cur)els[i+1].style.visibility="visible";
@@ -118,8 +118,8 @@ function kitBook(spec){spec=spec||{};const rm=()=>{try{return reducedMotion()}ca
  function animate(i,from,to,dur,fn,done){const el=beginTurn(i,to>=from?1:-1);if(!el){done&&done();return}busy=true;const t0=performance.now(),id=++animId;
   const step=now=>{if(id!==animId)return;const t=Math.min(1,(now-t0)/dur);el.__curl&&el.__curl.set(from+(to-from)*fn(t),el.__dir||1);if(t<1)requestAnimationFrame(step);else{busy=false;done&&done()}};requestAnimationFrame(step)}
  function fade(nc){busy=true;book.classList.add("fade");setTimeout(()=>{cur=nc;paint();book.classList.remove("fade");setTimeout(()=>{busy=false},160)},160)}
- function next(){if(busy||cur>=maxCur)return;kbkSfx();if(rm()){fade(cur+1);return}const i=cur;animate(i,0,1,560,ease,()=>{cur=i+1;paint()})}
- function prev(){if(busy||cur<=0)return;kbkSfx();if(rm()){fade(cur-1);return}const i=cur-1;animate(i,1,0,560,ease,()=>{cur=i;paint()})}
+ function next(){if(busy||cur>=maxCur)return;kbkSfx();if(rm()){fade(cur+1);return}const i=cur;animate(i,0,1,680,ease,()=>{cur=i+1;paint()})}
+ function prev(){if(busy||cur<=0)return;kbkSfx();if(rm()){fade(cur-1);return}const i=cur-1;animate(i,1,0,680,ease,()=>{cur=i;paint()})}
  function go(n){animId++;busy=false;drag=null;n=Math.max(0,Math.min(maxCur,n));cur=n;paint()}
 
  /* ---- drag / swipe / tap ---- */

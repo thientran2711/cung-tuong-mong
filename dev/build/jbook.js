@@ -5,7 +5,7 @@
    is a page turn on both devices, and every page turn CURLS like real paper.
    KIT.md §32. Loaded before j87 (the week book uses kitCurl for its turn).
 
-   kitCurl({host, front, back, w, h, x, y, dir, n, persp, po, shadeL, shadeR}) → {set(p,dir), destroy(), el}
+   kitCurl({host, front, back, w, h, x, y, dir, shadeR, mirror, vanish, keepId}) → {set(p,dir), destroy(), el}  (v2: corner fold, below)
      host  : positioned element; the turning sheet's SPINE is at (x,y) in host px, the sheet is w × h and lies to the right of it.
      front : Element (deep-cloned per strip) | HTML string | null (plain paper) — what is seen while the sheet lies on the right.
      back  : the same for the reverse side (seen once the sheet lies on the left of the spine).
@@ -16,60 +16,106 @@
 */
 function kitCurlOff(){try{return typeof reducedMotion==="function"?reducedMotion():matchMedia("(prefers-reduced-motion: reduce)").matches}catch(e){return false}}
 function kitCurlEase(t){return t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2}
-function kitCurlFade(el,mid,done,ms){ms=ms||170;if(!el){mid&&mid();done&&done();return}el.classList.add("kpc-fade");
- setTimeout(()=>{try{mid&&mid()}catch(e){console.error(e)}el.classList.remove("kpc-fade");setTimeout(()=>done&&done(),ms)},ms)}
+function kitCurlFade(el,mid,done,ms){ms=ms||170;if(!el){mid&&mid();done&&done();return}el.classList.add("kcl-fade");
+ setTimeout(()=>{try{mid&&mid()}catch(e){console.error(e)}el.classList.remove("kcl-fade");setTimeout(()=>done&&done(),ms)},ms)}
 function kitCurlSfx(){try{if(typeof kbkSfx==="function")kbkSfx()}catch(e){}}
 
+/* kitCurl v2 (owner 11/15 03:30Z, refs dev/owner-shots/1115-curl-ref-*.jpg): the CORNER lifts first and leads the turn; the sheet folds
+   along a DIAGONAL line, the lifted flap shows the BACK of the page, tilted, with a soft curved shading (dark in the bend, a sheen, a
+   darker rim), a soft shadow cast by the flap, and a shadow along the fold on the page being uncovered. Not a vertical cylinder roll.
+   Geometry: the corner A=(w,h) travels to C(p) = (w−2wp, h−lift·sin πp); the fold is the perpendicular bisector of A–C (the corner is
+   clamped so the spine is never folded). Visible = old page on the far side of the fold + the flap (the folded part reflected across the
+   fold line, carrying the back face). Each half-plane is an overflow-hidden box aligned to the fold, so a frame changes only transforms
+   and opacity (compositor work; no clip-path / layout / repaint per frame). */
+function kclMul(A,B){return[A[0]*B[0]+A[2]*B[1],A[1]*B[0]+A[3]*B[1],A[0]*B[2]+A[2]*B[3],A[1]*B[2]+A[3]*B[3],A[0]*B[4]+A[2]*B[5]+A[4],A[1]*B[4]+A[3]*B[5]+A[5]]}
+function kclInv(A){const d=A[0]*A[3]-A[1]*A[2]||1e-9,a=A[3]/d,b=-A[1]/d,c=-A[2]/d,e=A[0]/d;return[a,b,c,e,-(a*A[4]+c*A[5]),-(b*A[4]+e*A[5])]}
+function kclM(A){return`matrix(${A.map(v=>(+v).toFixed(4)).join(",")})`}
 function kitCurl(o){o=o||{};const host=o.host,w=Math.max(40,o.w|0),h=Math.max(40,o.h|0);
- const n=o.n||Math.max(10,Math.min(18,Math.round(w/34))),ws=w/n,fw=ws+1.5,P=o.persp||Math.round(Math.max(1600,w*6)),po=o.po!=null?o.po:0;
- const D=o.bend!=null?o.bend:92,G=1.4,M=1/(G+1);
- const root=document.createElement("div");root.className="kpc";
- root.style.cssText=`left:${o.x||0}px;top:${o.y||0}px;width:${w}px;height:${h}px;perspective:${P}px;perspective-origin:${po}px 50%`;
- const gR=document.createElement("i"),gL=document.createElement("i");gR.className="kpc-g kpc-gr";gL.className="kpc-g kpc-gl";root.append(gL,gR);
- /* one master copy per face: sticky → static (a strip is its own scroll box, sticky would shift per strip), ids dropped,
-    scroll offsets remembered and re-applied in every strip copy */
- const prep=src=>{if(!(src&&src.nodeType===1))return{src};const m=src.cloneNode(true),A=[src,...src.querySelectorAll("*")],B=[m,...m.querySelectorAll("*")],sc=[];
-  for(let i=0;i<A.length;i++){const a=A[i],b=B[i];if(!b)break;b.removeAttribute("id");
-   if(a.scrollTop||a.scrollLeft)sc.push([i,a.scrollTop,a.scrollLeft]);
-   if(getComputedStyle(a).position==="sticky")b.style.position="relative"}
-  return{src:m,sc}};
- const PF=prep(o.front),PB=prep(o.back),SC=[];
- const strip=(pp,k,back)=>{const src=pp.src;const f=document.createElement("div");f.className="kpc-f"+(back?" kpc-b":"");f.style.width=fw+"px";
-  const wr=document.createElement("div");wr.className="kpc-w";wr.style.width=w+"px";wr.style.height=h+"px";
-  wr.style.left=(back?-(w-k*ws-fw):-k*ws)+"px";
-  if(src&&src.nodeType===1){const c=src.cloneNode(true);wr.appendChild(c);if(pp.sc&&pp.sc.length)SC.push([c,pp.sc])}
-  else if(typeof src==="string"&&src)wr.innerHTML=src;else wr.innerHTML=`<div class="kpaper kpc-blank"></div>`;
-  const s=document.createElement("i");s.className="kpc-s";f.append(wr,s);return f};
- const S=[],F=[],B=[];let par=root;
- for(let k=0;k<n;k++){const s=document.createElement("div");s.className="kpc-k";s.style.width=ws+"px";s.style.left=(k?ws:0)+"px";
-  const ff=strip(PF,k,false),bb=strip(PB,k,true);s.append(ff,bb);par.appendChild(s);par=s;S.push(s);F.push(ff.lastChild);B.push(bb.lastChild)}
- host.appendChild(root);
- for(const [c,L] of SC){const E=[c,...c.querySelectorAll("*")];for(const [i,t,l] of L){const e=E[i];if(e){e.style.scrollBehavior="auto";e.style.scrollSnapType="none";e.scrollTop=t;e.scrollLeft=l}}}
- let dir0=o.dir||1;
- const L=[-.35/1.087,-.25/1.087,1/1.087],Hh=[-.17,-.12,.978],base=Math.pow(.978,60);
- const lightF=a=>{const sn=Math.sin(a),cs=Math.cos(a);const dif=-sn*L[0]+cs*L[2],nh=-sn*Hh[0]+cs*Hh[2];
-   return [Math.max(0,Math.min(.55,(.92-dif)*.55)),Math.max(0,(Math.pow(Math.max(0,nh),60)-base)*.5)]};
- const lightB=a=>{const sn=Math.sin(a),cs=Math.cos(a);const dif=sn*L[0]-cs*L[2],nh=sn*Hh[0]-cs*Hh[2];
-   return [Math.max(0,Math.min(.6,(.92-dif)*.55)),Math.max(0,(Math.pow(Math.max(0,nh),60)-base)*.5)]};
- const gr=(l,r)=>`linear-gradient(90deg,rgba(255,247,226,${l[1].toFixed(3)}),rgba(255,247,226,${r[1].toFixed(3)})),linear-gradient(90deg,rgba(46,26,10,${l[0].toFixed(3)}),rgba(46,26,10,${r[0].toFixed(3)}))`;
- function set(p,dir){if(dir)dir0=dir;p=Math.max(0,Math.min(1,p));const ph=180*p,dl=dir0*D*Math.sin(Math.PI*p);
-  const ang=u=>Math.max(0,Math.min(180,ph+dl*(Math.pow(u,G)-M)))*Math.PI/180;
-  let prev=0,x=0,z=0,xmax=0,xmin=0,zmax=0;const sx=(X,Z)=>po+(X-po)*P/Math.max(P*.25,P-Z);
-  for(let k=0;k<n;k++){const a=ang((k+.5)/n),a0=ang(k/n),a1=ang((k+1)/n);
-   S[k].style.transform=`rotateY(${(-(a-prev)*180/Math.PI).toFixed(3)}deg)`;prev=a;
-   F[k].style.background=gr(lightF(a0),lightF(a1));B[k].style.background=gr(lightB(a1),lightB(a0));
-   x+=ws*Math.cos(a);z+=ws*Math.sin(a);const X=sx(x,z);if(X>xmax)xmax=X;if(X<xmin)xmin=X;if(z>zmax)zmax=z}
-  /* cast shadows: on the ground the sheet is uncovering (right) and on the one it is landing on (left) */
-  const el=Math.sin(Math.PI*p),lift=Math.min(1,zmax/(w*.55));
-  if(o.shadeR!==false&&xmax<w-1&&p<.98){const sw=Math.max(10,Math.min(w*.32,24+zmax*.38));gR.style.left=xmax+"px";gR.style.width=sw+"px";gR.style.opacity=(Math.min(1,.25+lift)*(p<.5?1:Math.max(0,1-(p-.5)*2.2))).toFixed(3)}else gR.style.opacity="0";
-  if(o.shadeL&&xmin<-1&&p>.02){const sw=Math.max(10,Math.min(w*.32,24+zmax*.38));gL.style.left=(xmin-sw)+"px";gL.style.width=sw+"px";gL.style.opacity=(Math.min(1,.25+lift)*(p>.5?1:Math.max(0,1-(.5-p)*2.2))).toFixed(3)}else gL.style.opacity="0";
-  root.style.setProperty("--kpc-e",el.toFixed(3))}
+ const mir=!!o.mirror,BIG=Math.ceil(Math.hypot(w,h)*3)+200,lift=Math.min(h*.3,w*.62);
+ const root=document.createElement("div");root.className="kcl"+(o.cls?" "+o.cls:"");
+ root.style.cssText=`left:${o.x||0}px;top:${o.y||0}px;width:${w}px;height:${h}px`+(mir?";transform:scaleX(-1)":"");
+ /* a face copy: sticky → relative (one static picture), ids dropped (keepId keeps the root's, so #id styles still apply), scroll kept */
+ const prep=(src,keepId)=>{if(!(src&&src.nodeType===1))return null;const m=src.cloneNode(true),A=[src,...src.querySelectorAll("*")],B=[m,...m.querySelectorAll("*")],sc=[];
+  for(let i=0;i<A.length;i++){const a=A[i],b=B[i];if(!b)break;if(!(keepId&&i===0))b.removeAttribute("id");
+   if(a.scrollTop||a.scrollLeft)sc.push([b,a.scrollTop,a.scrollLeft]);
+   if(i&&getComputedStyle(a).position==="sticky")b.style.position="relative"}
+  m.setAttribute("aria-hidden","true");m.inert=true;return{m,sc}};
+ const face=(src,cls,keepId)=>{const f=document.createElement("div");f.className="kcl-face "+cls;f.style.width=w+"px";f.style.height=h+"px";
+  const p=prep(src,keepId);if(p)f.appendChild(p.m);else if(typeof src==="string"&&src)f.innerHTML=src;else f.innerHTML=`<div class="kpaper kcl-blank"></div>`;return{f,sc:p?p.sc:[]}};
+ const hp=cls=>{const b=document.createElement("div");b.className="kcl-hp "+cls;b.style.width=b.style.height=BIG+"px";return b};
+ /* ground: shadow along the fold on the page being uncovered (page-clipped) */
+ const gnd=document.createElement("div");gnd.className="kcl-gnd";const gs=document.createElement("i");gs.className="kcl-gs";gs.style.height=BIG+"px";gnd.appendChild(gs);
+ /* old page (front) inside the far-side half-plane */
+ const hF=hp("kcl-hf"),FR=face(o.front,"kcl-fr",o.keepId);hF.appendChild(FR.f);
+ /* the flap: back face in the same half-plane (drawn over the old page), with the bend shading inside it */
+ const hB=hp("kcl-hb"),BK=face(o.back,"kcl-bk",false);const sh=document.createElement("i");sh.className="kcl-sh";sh.style.height=BIG+"px";BK.f.appendChild(sh);hB.appendChild(BK.f);
+ root.append(gnd,hF,hB);host.appendChild(root);
+ const rescroll=()=>{for(const [e,t,l] of FR.sc.concat(BK.sc)){e.style.scrollBehavior="auto";e.style.scrollSnapType="none";e.scrollTop=t;e.scrollLeft=l}};rescroll();
+ const MX=[-1,0,0,1,w,0];let dir0=o.dir||1;
+ function set(p,dir){if(dir)dir0=dir;p=Math.max(0,Math.min(1,p));
+  let cx=w-2*w*p,cy=h-lift*Math.sin(Math.PI*p);
+  /* never fold the spine: |C−(0,h)| ≤ w */
+  const dd=Math.hypot(cx,cy-h);if(dd>w){cx=cx*w/dd;cy=h+(cy-h)*w/dd}
+  let nx=w-cx,ny=h-cy;const L=Math.hypot(nx,ny);
+  if(L<.5){nx=1;ny=0}else{nx/=L;ny/=L}
+  const Mx=(w+cx)/2,My=(h+cy)/2,dx=-ny,dy=nx,nm=nx*Mx+ny*My;
+  /* the half-plane on the far side of the fold (old page + the flap lying over it): local u along n, v along d, ends at the fold (u=BIG) */
+  const BF=[nx,ny,dx,dy,Mx-BIG*nx-BIG/2*dx,My-BIG*ny-BIG/2*dy];
+  const R=[1-2*nx*nx,-2*nx*ny,-2*nx*ny,1-2*ny*ny,2*nx*nm,2*ny*nm];        /* reflection across the fold */
+  /* flap content: the back face lies (when turned) on [−w,0]; now = reflect(spine-mirror(it)) = R·S·translate(−w) */
+  let G=kclMul(R,[-1,0,0,1,0,0]);G=kclMul(G,[1,0,0,1,-w,0]);
+  hF.style.transform=kclM(BF);const iB=kclInv(BF);FR.f.style.transform=kclM(mir?kclMul(iB,MX):iB);
+  hB.style.transform=kclM(BF);BK.f.style.transform=kclM(kclMul(iB,mir?kclMul(G,MX):G));
+  /* how far the folded part reaches beyond the fold */
+  let dm=0;for(const [X,Y] of [[0,0],[w,0],[0,h],[w,h]]){const s=(X-Mx)*nx+(Y-My)*ny;if(s>dm)dm=s}
+  const el=Math.sin(Math.PI*p);
+  /* bend shading in the flap's own coordinates: fold at (w−Mx, My), pointing into the flap along (−nx, ny) */
+  const ang=Math.atan2(ny,-nx)*180/Math.PI;
+  sh.style.transform=`translate(${(w-Mx).toFixed(2)}px,${My.toFixed(2)}px) rotate(${ang.toFixed(3)}deg) translate(0,${-BIG/2}px) scaleX(${(Math.max(1,dm)/100).toFixed(4)})`;
+  sh.style.opacity=(.55+.45*el).toFixed(3);
+  /* ground shadow along the fold, on the uncovered side (+n) */
+  const ga=Math.atan2(ny,nx)*180/Math.PI,gw=Math.max(14,Math.min(w*.3,18+dm*.32));
+  gs.style.transform=`translate(${Mx.toFixed(2)}px,${My.toFixed(2)}px) rotate(${ga.toFixed(3)}deg) translate(0,${-BIG/2}px) scaleX(${(gw/100).toFixed(4)})`;
+  gs.style.opacity=o.shadeR===false?"0":(Math.min(1,.35+el)*(p>.85?Math.max(0,(1-p)/.15):1)).toFixed(3);
+  root.style.setProperty("--kcl-e",el.toFixed(3));
+  if(o.vanish)root.style.opacity=p>.72?Math.max(0,1-(p-.72)/.28).toFixed(3):"1"}
  set(o.p||0);
- return {el:root,set,destroy(){root.remove()},get n(){return n}}}
+ return {el:root,set,rescroll,destroy(){root.remove()},n:1}}
 
 function kitCurlRun(c,from,to,dur,done,ease){ease=ease||kitCurlEase;const t0=performance.now();let alive=true;const dir=to>=from?1:-1;
  const step=now=>{if(!alive)return;const t=Math.min(1,(now-t0)/Math.max(1,dur));c.set(from+(to-from)*ease(t),dir);if(t<1)requestAnimationFrame(step);else{alive=false;done&&done()}};
- c.set(from,dir);requestAnimationFrame(step);return()=>{alive=false}}
+ c.set(from,dir);requestAnimationFrame(step);const cancel=()=>{alive=false};cancel.t0=t0;return cancel}
+
+/* ---------- kitCurlSwap: turn a live page (tab switch) ----------
+   kitCurlSwap(el, fn, {dir, ms}) : copies el as it is now, runs fn() (the game re-renders el in place), then the copy curls away
+   from the corner over the new content (dir 1: bottom-right corner → left; dir −1: bottom-left corner → right) and fades as it leaves.
+   The copy keeps el's id (so #id styles apply) and sits after el inside the same parent (the live el stays first for getElementById).
+   No turn when el is not shown, when its box changed (another layout, e.g. the map), or with reduced motion (cross-fade instead). */
+let kclLive=null;
+function kitCurlSwap(el,fn,opt){opt=opt||{};const run=()=>{try{fn&&fn()}catch(e){console.error(e)}};
+ if(kclLive){try{kclLive()}catch(e){}kclLive=null}
+ const r0=el&&el.getBoundingClientRect();
+ if(!el||!r0||r0.width<60||r0.height<60||!el.getClientRects().length){run();return false}
+ if(kitCurlOff()){el.classList.add("kcl-fade");run();requestAnimationFrame(()=>requestAnimationFrame(()=>el.classList.remove("kcl-fade")));return false}
+ const host=document.createElement("div");host.className="kcl-host";host.style.cssText=`left:${r0.left}px;top:${r0.top}px;width:${r0.width}px;height:${r0.height}px`;
+ let c=null;try{c=kitCurl({host,front:el,back:null,w:r0.width,h:r0.height,x:0,y:0,keepId:true,mirror:(opt.dir||1)<0,vanish:true,cls:"kcl-tab"})}catch(e){console.error(e)}
+ run();
+ const r1=el.getBoundingClientRect();
+ if(!c||Math.abs(r1.left-r0.left)>2||Math.abs(r1.top-r0.top)>2||Math.abs(r1.width-r0.width)>2||Math.abs(r1.height-r0.height)>2||!el.getClientRects().length){host.remove();return false}
+ el.parentNode.insertBefore(host,el.nextSibling);c.rescroll();kitCurlSfx();
+ const stop=kitCurlRun(c,0,1,opt.ms||720,()=>{host.remove();if(kclLive===end)kclLive=null},kitCurlEase);
+ const end=()=>{stop();host.remove()};kclLive=end;kitCurlSwap.t0=stop.t0;return true}
+
+/* ---------- kitLeather: the unrolled leather map (Dư đồ) — NOT a book page (owner 11/15 04:00Z) ----------
+   kitLeather(el) adds the hide surface around el's map painting: tanned leather with grain and burnt edges, an uneven hide outline,
+   a stitched border and the two rolled ends of the unrolled map; the painting gets a faint leather tone. CSS only, no new art.
+   kitUnroll(el): the map unrolls from its middle (reduced motion: none). */
+function kitLeather(el){if(!el)return el;el.classList.add("kleather");
+ if(!el.querySelector(":scope>.kl-roll")){for(const s of["l","r"]){const i=document.createElement("i");i.className="kl-roll kl-"+s;i.setAttribute("aria-hidden","true");el.appendChild(i)}
+  const t=document.createElement("i");t.className="kl-tone";t.setAttribute("aria-hidden","true");el.appendChild(t)}
+ return el}
+function kitUnroll(el){if(!el||kitCurlOff())return;el.classList.remove("kl-unroll");void el.offsetWidth;el.classList.add("kl-unroll");
+ setTimeout(()=>el.classList.remove("kl-unroll"),700)}
 
 /* ---------- kitBookSpread: the two-page book container ----------
    kitBookSpread(host, {pic, text, double, mode:"auto"|"spread"|"single"})
@@ -87,7 +133,7 @@ function kitBookSpread(host,spec){spec=spec||{};const root=document.createElemen
  const book=root.firstChild,L=book.children[0],R=book.children[1],picEl=L.firstChild,textEl=R.firstChild,dbl=book.querySelector(".kbs-dbl");
  let mode="spread",side="text",busy=false,dblC=null;
  function place(){const sp=mode==="spread";root.classList.toggle("has-dbl",!!dblC);
-  if(dblC){if(sp){if(dbl.firstChild!==dblC.el)kbsFill(dbl,dblC.el)}else if(textEl.firstChild!==dblC.el)kbsFill(textEl,dblC.el)}}
+  if(dblC&&dbl.firstChild!==dblC.el){kbsFill(dbl,dblC.el);kitLeather(dbl)}}
  function layout(){const W=host.clientWidth||innerWidth,H=host.clientHeight||innerHeight;const sp=spec.mode==="spread"||spec.mode!=="single"&&W>=900&&W/H>=1.15;
   mode=sp?"spread":"single";root.classList.toggle("spread",sp);root.classList.toggle("single",!sp);paint();place()}
  function paint(){root.classList.toggle("on-text",true)}
@@ -96,24 +142,27 @@ function kitBookSpread(host,spec){spec=spec||{};const root=document.createElemen
  /* tab switch = page turn: the old pages curl away, the new ones are underneath */
  function swap(c,opt){opt=opt||{};if(busy){set(c);return}const dir=opt.dir||1;kitCurlSfx();
   if(kitCurlOff()){busy=true;kitCurlFade(book,()=>set(c),()=>{busy=false});return}
+  /* the map is not a page: going to it unrolls the leather, leaving it the book comes back with a fade */
+  if(dblC){busy=true;kitCurlFade(book,()=>set(c),()=>{busy=false});return}
+  const toMap=()=>{if(!dblC)return false;busy=false;kitUnroll(dbl);return true};
   const r=book.getBoundingClientRect();busy=true;
   if(mode==="spread"){const pw=r.width/2,h=r.height;
    /* a page-sized picture of what each half shows now (a page, or one half of the double-page layer) */
    const half=(right)=>{if(!root.classList.contains("has-dbl"))return (right?R:L).cloneNode(true);
      const d=document.createElement("div");d.className="kbs-pg kpaper";const m=dbl.cloneNode(true);m.style.cssText=`display:block;position:absolute;top:0;left:${right?-pw:0}px;width:${pw*2}px;height:${h}px`;d.appendChild(m);return d};
-   const oL=half(false),oR=half(true);set(c);const nL=half(false),nR=half(true);
+   const oL=half(false),oR=half(true);set(c);if(toMap())return;const nL=half(false),nR=half(true);
    const under=document.createElement("div");under.className="kbs-under";const u=dir>0?oL:oR;
    u.style.cssText+=`;position:absolute;top:0;left:${dir>0?0:pw}px;width:${pw}px;height:${h}px`;under.appendChild(u);book.appendChild(under);
    const cu=dir>0?kitCurl({host:book,front:oR,back:nL,w:pw,h,x:pw,y:0,po:0,shadeL:true})
                  :kitCurl({host:book,front:nR,back:oL,w:pw,h,x:pw,y:0,po:0,shadeL:true,p:1,dir:-1});
-   kitCurlRun(cu,dir>0?0:1,dir>0?1:0,600,()=>{cu.destroy();under.remove();busy=false});
+   kitCurlRun(cu,dir>0?0:1,dir>0?1:0,700,()=>{cu.destroy();under.remove();busy=false});
    return}
   /* one page (text only): forward = the old page curls away over the new one; back = the new page curls back in over the old */
-  if(dir>0){const old=R.cloneNode(true);set(c);const cu=kitCurl({host:book,front:old,back:null,w:r.width,h:r.height,x:0,y:0,po:r.width*.5,shadeL:false});
-   kitCurlRun(cu,0,1,560,()=>{cu.destroy();busy=false})}
+  if(dir>0){const old=R.cloneNode(true);set(c);if(toMap())return;const cu=kitCurl({host:book,front:old,back:null,w:r.width,h:r.height,x:0,y:0,po:r.width*.5,shadeL:false});
+   kitCurlRun(cu,0,1,700,()=>{cu.destroy();busy=false})}
   else{const old=R.cloneNode(true);old.style.cssText+=";position:absolute;inset:0";const under=document.createElement("div");under.className="kbs-under kbs-under1";under.appendChild(old);
-   set(c);book.appendChild(under);const cu=kitCurl({host:book,front:R,back:null,w:r.width,h:r.height,x:0,y:0,po:r.width*.5,shadeL:false,p:1,dir:-1});
-   kitCurlRun(cu,1,0,560,()=>{cu.destroy();under.remove();busy=false})}}
+   set(c);if(toMap())return;book.appendChild(under);const cu=kitCurl({host:book,front:R,back:null,w:r.width,h:r.height,x:0,y:0,po:r.width*.5,shadeL:false,p:1,dir:-1});
+   kitCurlRun(cu,1,0,700,()=>{cu.destroy();under.remove();busy=false})}}
  const ro=typeof ResizeObserver==="function"?new ResizeObserver(()=>{if(!busy)layout()}):null;ro&&ro.observe(host);
  set(spec);layout();
  return {el:root,picEl,textEl,get mode(){return mode},swap,set,relayout:layout,destroy(){ro&&ro.disconnect();root.remove()}}}
@@ -135,20 +184,23 @@ function kitBookPic(o){o=o||{};const ax=o.ax!=null?o.ax:.5,feet=o.feet!=null?o.f
  radial-gradient(ellipse 70% 50% at 25% 18%,#fbf3dd 0,transparent 70%),radial-gradient(ellipse 60% 45% at 85% 92%,#e8d3a6 0,transparent 70%),
  url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .3 0 0 0 0 .12 0 0 0 .08 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E"),
  linear-gradient(#f6ecd6,#efe0bf);box-shadow:inset 0 0 34px #8a5a2433}
-.kpc-blank{background:linear-gradient(#f3e7cc,#ead9b4)}
-/* curl */
-.kpc{position:absolute;z-index:9999;pointer-events:none;transform-style:flat}
-.kpc-k{position:absolute;top:0;height:100%;transform-origin:0 50%;transform-style:preserve-3d;-webkit-transform-style:preserve-3d;will-change:transform}
-.kpc>.kpc-k{left:0}
-.kpc-f{position:absolute;left:0;top:0;height:100%;overflow:hidden;backface-visibility:hidden;-webkit-backface-visibility:hidden}
-.kpc-f.kpc-b{transform:rotateY(180deg)}
-.kpc-w{position:absolute;top:0}
-.kpc .kpc-w>*{position:absolute!important;inset:0!important;width:auto!important;height:auto!important;margin:0!important;visibility:visible!important;transform:none!important}
-.kpc-s{position:absolute;inset:0;pointer-events:none;z-index:50}
-.kpc-g{position:absolute;top:0;bottom:0;opacity:0;pointer-events:none}
-.kpc-gr{background:linear-gradient(90deg,#1e0f0566,#1e0f0522 40%,transparent)}
-.kpc-gl{background:linear-gradient(270deg,#1e0f0566,#1e0f0522 40%,transparent)}
-.kpc-fade{transition:opacity .17s!important;opacity:0!important}
+.kcl-blank{background:linear-gradient(100deg,#efe2c4,#f7eedb 55%,#eadab6)}
+/* curl v2: half-plane boxes aligned to the fold; only transforms/opacity change per frame */
+.kcl{position:absolute;z-index:9999;pointer-events:none;transform-origin:50% 50%}
+.kcl-gnd{position:absolute;inset:0;overflow:hidden}
+.kcl-hp{position:absolute;left:0;top:0;overflow:hidden;transform-origin:0 0;will-change:transform}
+.kcl-face{position:absolute;left:0;top:0;overflow:hidden;transform-origin:0 0;will-change:transform}
+.kcl .kcl-face>*:not(.kcl-sh){position:absolute!important;inset:0!important;width:auto!important;height:auto!important;max-height:none!important;margin:0!important;visibility:visible!important;transform:none!important;display:block}
+.kcl-fr{box-shadow:0 0 0 1px #8a5a2418}
+/* the flap: its own soft shadow falls on the page below it */
+.kcl-bk{box-shadow:0 0 16px 2px #2a14064d,0 0 3px #2a140640;background:#f3e7cc}
+/* bend shading across the flap, from the fold: dark in the bend, a sheen where it curves toward the light, darker rim */
+.kcl-sh{position:absolute;left:0;top:0;width:100px;transform-origin:0 0;z-index:60;pointer-events:none;will-change:transform,opacity;
+ background:linear-gradient(90deg,#2a1406a8 0,#2a140655 7%,#2a140614 20%,#fff8e600 30%,#fff8e652 44%,#fff8e61a 58%,#2a140600 72%,#2a14061f 92%,#2a140638 100%)}
+/* shadow the lifted page casts along the fold on the page being uncovered */
+.kcl-gs{position:absolute;left:0;top:0;width:100px;transform-origin:0 0;will-change:transform,opacity;
+ background:linear-gradient(90deg,#1e0f058c,#1e0f053a 30%,#1e0f0510 65%,transparent)}
+.kcl-fade{transition:opacity .17s!important;opacity:0!important}
 /* two-page book */
 .kbs{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;box-sizing:border-box;padding:var(--kbs-pad,10px 14px 12px)}
 .kbs-book{position:relative;width:100%;height:100%;display:grid;grid-template-columns:1fr 1fr;transition:opacity .17s}
@@ -166,8 +218,9 @@ function kitBookPic(o){o=o||{};const ax=o.ax!=null?o.ax:.5,feet=o.feet!=null?o.f
 .kbs-in{position:absolute;inset:14px 14px 14px 12px;overflow:auto;overscroll-behavior:contain;border-radius:2px}
 .kbs-r .kbs-in{inset:12px 12px 12px 18px}.kbs-l .kbs-in{inset:12px 18px 12px 12px;overflow:hidden}
 .kbs-dbl{display:none}
-.kbs.spread.has-dbl .kbs-dbl{display:block;position:absolute;inset:10px 12px;z-index:5;overflow:hidden;border-radius:2px}
-.kbs.spread.has-dbl .kbs-gut{z-index:8;width:30px;left:calc(50% - 15px);background:linear-gradient(90deg,transparent,#2a160830 35%,#1a0d0570 50%,#2a160830 65%,transparent)}
+/* Dư đồ: not a book page — the leather map covers the whole book area (no pages, no gutter, no cover board) */
+.kbs.has-dbl .kbs-dbl{display:block;position:absolute;inset:0;z-index:5}
+.kbs.has-dbl .kbs-pg,.kbs.has-dbl .kbs-gut{visibility:hidden}.kbs.has-dbl .kbs-book::before{display:none}
 .kbs-under{position:absolute;inset:0;z-index:9990;pointer-events:none}
 .kbs-under>.kbs-pg{position:absolute!important;left:0;top:0;width:50%;height:100%}
 /* one page = the text page only */
@@ -195,4 +248,52 @@ function kitBookPic(o){o=o||{};const ax=o.ax!=null?o.ax:.5,feet=o.feet!=null?o.f
 .kbp-slot small{font-size:.7rem;color:var(--dim,#7a6a5a);line-height:1.15}
 .kbp-slot.empty .kbp-sim{opacity:.7}
 @media (prefers-reduced-motion:reduce){.kbs-book{transition:opacity .17s}}
+/* ===== Dư đồ: the unrolled LEATHER map (kitLeather) — not a book page ===== */
+.kleather{position:relative;box-sizing:border-box;padding:22px 34px;border-radius:12px;isolation:isolate;
+ clip-path:polygon(0.4% 0.36%,6.44% 0.72%,13.43% 0.59%,21.16% 0.06%,28.59% 0.04%,35.58% 0.08%,42.04% 0.47%,50.65% 0.14%,56.59% 0.69%,65.18% 0.63%,71.22% 1.07%,77.66% 0.94%,85.29% 0.16%,92.09% 0.34%,99.35% 0.5%,99.86% 7.31%,99.49% 14.03%,99.56% 20.55%,99.95% 27.98%,99.46% 35.57%,99.75% 43.03%,99.64% 49.6%,99.36% 57.54%,99.8% 64.43%,99.58% 72.18%,99.42% 78.15%,99.22% 84.95%,99.67% 93.37%,99.6% 99.83%,92.84% 99.96%,86.05% 99.16%,78.72% 99.04%,71.06% 99.24%,64.47% 99.36%,57.06% 99.08%,50.89% 99.48%,43.19% 99.93%,36.12% 99.29%,29.56% 99.1%,21.0% 99.58%,14.62% 99.98%,7.07% 99.82%,0.09% 99.5%,0.05% 93.39%,0.1% 85.21%,0.31% 79.31%,0.06% 71.33%,0.44% 65.05%,0.66% 57.87%,0.22% 49.83%,0.29% 43.63%,0.77% 35.02%,0.14% 28.04%,0.19% 21.4%,0.47% 13.81%,0% 6.98%);
+ background:
+  radial-gradient(ellipse 60% 45% at 28% 22%,#a8754555,transparent 70%),radial-gradient(ellipse 55% 50% at 78% 78%,#2e180a66,transparent 70%),
+  radial-gradient(ellipse 30% 22% at 62% 30%,#8a5a3244,transparent 70%),
+  url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .16 0 0 0 0 .08 0 0 0 0 .03 0 0 0 .32 0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E"),
+  linear-gradient(135deg,#7d5130,#603b1f 48%,#734828);
+ box-shadow:inset 0 0 0 1px #2a14088a,inset 0 0 26px 8px #1c0c04d0,inset 0 0 70px #2a14066b}
+/* stitched border */
+.kleather::before{content:"";position:absolute;inset:9px 24px;border:2px dashed #e2c38c8c;border-radius:10px;pointer-events:none;z-index:1}
+/* the painting sits on the hide: soft burnt edge + leather tone over it (no blend, cheap while panning) */
+.kleather>.mapsc{position:relative;z-index:2;border-radius:6px!important;box-shadow:0 0 0 1px #2a140899,0 2px 10px #1c0c0499}
+.kleather>.kl-tone{position:absolute;inset:22px 34px;z-index:3;pointer-events:none;border-radius:6px;
+ background:radial-gradient(ellipse 75% 70% at 50% 50%,transparent 62%,#3a1e0a3d 88%,#2a14066b);box-shadow:inset 0 0 14px 2px #3a1e0a73}
+/* the two rolled ends of the unrolled map */
+.kl-roll{position:absolute;top:.6%;bottom:.6%;width:21px;z-index:4;pointer-events:none;border-radius:8px;
+ background:linear-gradient(90deg,#2a1608,#6a4223 22%,#b07a48 46%,#d39a62 52%,#8a5a32 70%,#3b2210);box-shadow:0 0 6px #1c0c0499}
+.kl-roll::before{content:"";position:absolute;inset:0;border-radius:inherit;background:repeating-linear-gradient(0deg,transparent 0 9px,#2a14082e 9px 10px)}
+.kl-l{left:2px}.kl-r{right:2px}
+/* the map's tools float on the painting; the info strip above the map is gone (owner 11/15) */
+html .game .kleather>.maptools{inset:22px 34px}
+html .game .kleather>.maptools>.past,html .game .kleather>.maptools>.fest{display:none!important}
+.panel:has(>.kleather){background:transparent!important;border-color:transparent!important;box-shadow:none!important;padding:0!important}
+@media (max-width:760px){.kleather{padding:15px 23px}.kleather::before{inset:6px 17px}.kleather>.kl-tone,html .game .kleather>.maptools{inset:15px 23px}.kl-roll{width:15px}}
+/* unrolling (going to the map) */
+.kleather.kl-unroll{animation:kl-un .62s cubic-bezier(.25,.7,.25,1)}
+.kl-unroll>.kl-l{animation:kl-rl .62s cubic-bezier(.25,.7,.25,1)}.kl-unroll>.kl-r{animation:kl-rr .62s cubic-bezier(.25,.7,.25,1)}
+@keyframes kl-un{from{clip-path:polygon(48.51% 0.36%,48.69% 0.72%,48.9% 0.59%,49.13% 0.06%,49.36% 0.04%,49.57% 0.08%,49.76% 0.47%,50.02% 0.14%,50.2% 0.69%,50.46% 0.63%,50.64% 1.07%,50.83% 0.94%,51.06% 0.16%,51.26% 0.34%,51.48% 0.5%,51.5% 7.31%,51.48% 14.03%,51.49% 20.55%,51.5% 27.98%,51.48% 35.57%,51.49% 43.03%,51.49% 49.6%,51.48% 57.54%,51.49% 64.43%,51.49% 72.18%,51.48% 78.15%,51.48% 84.95%,51.49% 93.37%,51.49% 99.83%,51.29% 99.96%,51.08% 99.16%,50.86% 99.04%,50.63% 99.24%,50.43% 99.36%,50.21% 99.08%,50.03% 99.48%,49.8% 99.93%,49.58% 99.29%,49.39% 99.1%,49.13% 99.58%,48.94% 99.98%,48.71% 99.82%,48.5% 99.5%,48.5% 93.39%,48.5% 85.21%,48.51% 79.31%,48.5% 71.33%,48.51% 65.05%,48.52% 57.87%,48.51% 49.83%,48.51% 43.63%,48.52% 35.02%,48.5% 28.04%,48.51% 21.4%,48.51% 13.81%,48.5% 6.98%)}to{clip-path:polygon(0.4% 0.36%,6.44% 0.72%,13.43% 0.59%,21.16% 0.06%,28.59% 0.04%,35.58% 0.08%,42.04% 0.47%,50.65% 0.14%,56.59% 0.69%,65.18% 0.63%,71.22% 1.07%,77.66% 0.94%,85.29% 0.16%,92.09% 0.34%,99.35% 0.5%,99.86% 7.31%,99.49% 14.03%,99.56% 20.55%,99.95% 27.98%,99.46% 35.57%,99.75% 43.03%,99.64% 49.6%,99.36% 57.54%,99.8% 64.43%,99.58% 72.18%,99.42% 78.15%,99.22% 84.95%,99.67% 93.37%,99.6% 99.83%,92.84% 99.96%,86.05% 99.16%,78.72% 99.04%,71.06% 99.24%,64.47% 99.36%,57.06% 99.08%,50.89% 99.48%,43.19% 99.93%,36.12% 99.29%,29.56% 99.1%,21.0% 99.58%,14.62% 99.98%,7.07% 99.82%,0.09% 99.5%,0.05% 93.39%,0.1% 85.21%,0.31% 79.31%,0.06% 71.33%,0.44% 65.05%,0.66% 57.87%,0.22% 49.83%,0.29% 43.63%,0.77% 35.02%,0.14% 28.04%,0.19% 21.4%,0.47% 13.81%,0% 6.98%)}}
+@keyframes kl-rl{from{left:calc(50% - 16px)}to{left:2px}}@keyframes kl-rr{from{right:calc(50% - 16px)}to{right:2px}}
+.kcl-host{position:fixed;z-index:40;pointer-events:none}
+.kcl-in{animation:kcl-in .3s ease-out}@keyframes kcl-in{from{opacity:0}to{opacity:1}}
+@media (prefers-reduced-motion:reduce){.kleather.kl-unroll,.kl-unroll>.kl-roll,.kcl-in{animation:none}}
 `;document.head.appendChild(st)})();
+
+/* ---------- live game: a tab switch turns #panel with the curl; Dư đồ is the leather map ---------- */
+(function(){if(typeof render!=="function")return;
+ /* installed after every module has wrapped render(), so the old page is copied before any of them re-renders it */
+ setTimeout(()=>{const r0=render;let last=null;
+  const order=t=>{const B=[...document.querySelectorAll("#tabs [data-tab]")].map(b=>b.dataset.tab);const i=B.indexOf(t);return i<0?99:i};
+  render=function(){const self=this,args=arguments;let out,done=false;const t1=typeof tab!=="undefined"?tab:null,t0=last;
+   const pn=document.getElementById("panel");const call=()=>{done=true;out=r0.apply(self,args)};
+   try{if(pn&&t0!=null&&t1!==t0&&t0!=="go"&&t1!=="go"&&typeof S!=="undefined"&&S&&!S.dead)kitCurlSwap(pn,call,{dir:order(t1)>=order(t0)?1:-1});else call()}
+   catch(e){if(done)throw e;console.error(e);call()}
+   try{last=t1;const mv=document.querySelector(".game.maptab #panel .mapv");
+    if(mv){kitLeather(mv);if(t0!=null&&t0!=="go"&&t1==="go")kitUnroll(mv)}
+    else if(t0==="go"&&t1!=="go"&&pn&&!kitCurlOff()){pn.classList.remove("kcl-in");void pn.offsetWidth;pn.classList.add("kcl-in");setTimeout(()=>pn.classList.remove("kcl-in"),340)}}catch(e){console.error(e)}
+   return out};
+  window.render=render},0)})();

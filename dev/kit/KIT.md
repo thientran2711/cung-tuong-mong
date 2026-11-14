@@ -583,7 +583,7 @@ kitBook({head:"Sổ tuần · Tháng tư · thượng tuần · năm thứ nhấ
 - Layout: two-page spread when the viewport is ≥ 900 px wide and landscape (iPad 1180x820, 1366x1024), the closed cover centred; one page at a
   time otherwise (Fold 755x1000, phones). Person page: portrait column `--por` beside name/chips/facts; under 440 px page width facts run full
   width below the portrait. Font scales with the page (`--fs` 13–17 px).
-- Turning (page-curl kit, §32): drag/swipe follows the finger with a paper CURL (`kitCurl`: the sheet bends in strips, both faces shaded, moving cast shadow; 560 ms);
+- Turning (page-curl kit, §32): drag/swipe follows the finger with a paper CURL (`kitCurl` v2: the corner lifts and folds on a diagonal, the back of the page shows with a curved shading, shadow along the fold; 680 ms);
   release past ~40 % or a flick completes, else it falls back. Tap the right/left page edge, the ‹ › buttons, ←/→/PageUp/PageDown, Esc = Lui.
   `prefers-reduced-motion` (or Cảnh động off): cross-fade instead of the turn. Soft paper sound with the Tiếng động slider.
 - Art: `img/book-cover.webp` (indigo thread-bound cover, title label strip: the title is written in it, word per line), `book-right.webp`
@@ -965,21 +965,36 @@ RIGHT = the text page exactly as already approved (Hậu cung card with its own 
 page only** (no illustration page on phones, accepted loss; no "Mở trang" button). **A tab switch is a page turn on both devices**, and
 every page turn CURLS like real paper. Mockups (not wired yet; the fold-layout kit owner wires it): `dev/shots/book/`.
 
-### 32.1 kitCurl — the one page-turn engine (week book, tab switch, any future book)
+### 32.1 kitCurl — the one page-turn engine (week book, tab switch, any future book) — v2 (owner 11/15 03:30Z)
+Owner refs `dev/owner-shots/1115-curl-ref-1.jpg`, `-2.jpg`: the CORNER lifts first and leads, the sheet folds on a DIAGONAL, tilts as it
+turns, shows the BACK of the page with a soft curved shading and a dark gradient along the fold — never a vertical cylinder roll.
 ```js
-const c=kitCurl({host, front, back, w, h, x, y, dir:1, shadeL:true, shadeR:true, po, persp, n});  // spine at (x,y) of host, sheet w×h to its right
-c.set(p, dir);      // p 0 = flat on the right … 1 = flat on the left; dir 1 forward (right→left), -1 back
+const c=kitCurl({host, front, back, w, h, x, y, dir:1, shadeR:true, mirror:false, vanish:false, keepId:false});  // spine at (x,y), sheet w×h to its right
+c.set(p, dir);      // p 0 = flat on the right … 1 = flat on the left (lands on the left page); dir 1 forward, -1 back
 kitCurlRun(c, from, to, ms, done, ease);   // rAF tween (default ease in-out cubic); returns cancel()
 c.destroy();
-kitCurlOff();       // true when "Cảnh động" is off (OPT.fxon=false) or prefers-reduced-motion → use kitCurlFade(el, mid, done) (cross-fade)
+kitCurlSwap(el, fn, {dir, ms});  // LIVE page turn: copy el, fn() re-renders it, the copy curls away over the new content (tab switch)
+kitCurlOff();       // true when "Cảnh động" is off (OPT.fxon=false) or prefers-reduced-motion → cross-fade (kitCurlFade / .kcl-fade)
 ```
-- front/back: an Element (copied once, then per strip), HTML, or null (plain paper). Copies drop ids, sticky → relative, keep scroll offsets.
-- Look: the sheet is split into n vertical strips (10–18, ~34 px) chained with `rotateY` (preserve-3d), so it BENDS: the tangent angle runs
-  from the spine to the edge (`φ + Δ·(u^1.4 − m)`, chord φ = 180·p, bend Δ = 92°·sin(πp) leading in the turn direction). Each strip face
-  has a gradient overlay from a light model (soft diffuse from upper-left + a moving sheen); the back side is visible as it lifts; a cast
-  shadow moves on the page being uncovered (right) and the page it lands on (left, spread only). Perspective 6×w, origin at the spine
-  (spread) or page centre (single page). Duration 560 ms (week book) / 600 ms (spread tab switch).
-- Only transform + background of small strips change per frame (no layout); no canvas/WebGL needed.
+- Geometry: the bottom-outer corner A=(w,h) travels to C(p)=(w−2wp, h−lift·sin πp) (lift = min(0.3h, 0.62w)); the fold is the perpendicular
+  bisector of A–C, clamped so the spine is never folded. Visible: the old page on the far side of the fold + the FLAP (the folded part,
+  reflected across the fold) carrying the BACK face (`back`: an Element/HTML, or plain paper); the uncovered side shows what lies under the curl.
+- Look: bend shading across the flap from the fold (dark in the bend → sheen → darker rim), the flap's soft shadow on the page below, a shadow
+  along the fold on the page being uncovered. `mirror` = the bottom-LEFT corner leads (turn back on a single page). `vanish` fades the
+  sheet over the last 28 % (a live page leaving the screen). `keepId` keeps the root id on the copy so `#id` styles still apply.
+- Cheap per frame: the old page and the flap sit in overflow-hidden half-plane boxes aligned to the fold; a frame changes only
+  `transform`/`opacity` (compositor), no clip-path, no layout, no repaint. One copy per face (no strips).
+- Durations: week book 680 ms, book swap 700 ms, live tab switch 720 ms (owner range 600–800 ms).
+- Live wiring (jbook, end): a tab switch in the game (tab bar, Hậu cung/Mệnh truyện sub-tabs) = `kitCurlSwap(#panel)`; forward when the new
+  tab is right of the old one in the tab bar, else mirrored. Phone (one page): the right-edge corner lifts. No curl when the panel box changes
+  (to/from Dư đồ: the map unrolls instead, leaving it fades) or the panel is hidden (phone home).
+
+### 32.1b kitLeather — Dư đồ is an unrolled LEATHER MAP, not a book page (owner 11/15 04:00Z)
+`kitLeather(el)` (CSS only, no new art): tanned hide with grain + burnt edges, uneven hide outline, stitched border, two rolled ends, the
+painting inset with a soft burnt edge and leather tone. Full panel, no gutter, no spine, no paper. The info strip that used to sit over the
+map (season · khắc left · travel cost legend · festival chip) is removed; the map tools (− + ⓘ Ra vào, Danh sách) float on the painting.
+`kitUnroll(el)`: going to the map, it unrolls from the middle (the two rolls slide out), 620 ms; reduced motion: none.
+Live: `.game.maptab #panel .mapv` gets it on every render. kitBookSpread `double` = the leather map over the whole book area.
 
 ### 32.2 kitBookSpread — the book container
 ```js
@@ -994,8 +1009,8 @@ kitBookSpread.wantsPic(host)              // false on phones: skip building the 
   curls back in from the left over the old spread.
 - Single: only the text page (`.kbs-r`). Forward swap: the old page curls away to the left revealing the new one; dir −1: the new page curls
   back in. Swipes are left to the caller (tab bar / gestures of the live layout).
-- `double`: an Element spanning BOTH pages of a spread (Dư đồ: the map is one double-page illustration across the gutter; the gutter shadow
-  lies over it). On one page it goes on the text page.
+- `double`: the Dư đồ map — shown as the leather map (kitLeather) over the whole book area in both modes; pages, gutter and cover
+  board are hidden. Turning to it unrolls the map; leaving it fades (the map is not a page, it never curls).
 - Paper skin `.kpaper` (warm paper, faint fibres, edge tint) is reusable on its own for any page-like surface.
 
 ### 32.3 kitBookPic — the picture page (illustration only)
