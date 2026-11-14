@@ -313,3 +313,11 @@ C-m49-t7 P3EtBU042C handsB
 C-m50-t7 bxTGRuH5Y2 handsB
 C-m51-t7 P3EtBJM42C handsB
 C-m52-t7 CqG6PanEEy handsB
+C-m27-t8 LwBVTISswO handsB
+C-m28-t8 O6f8oQkynm handsB
+C-m29-t8 p8JsLNuehw handsB
+C-m30-t8 xSd0cmnjfW handsB
+C-m31-t8 TdSr19MVNR handsB
+C-m32-t8 1lpWYhGr4r handsB
+C-m33-t8 gOIpDH3SXO handsB
+C-m34-t8 xSd0cEKjfW handsB
