@@ -43,10 +43,11 @@ const KIT_BGSZ={};
    (same composition in every season and buổi). People never stand on furniture: the group is centred on this spot. */
 /* portrait room paintings (3:4, 1536x2048, same room, people-free): scene → true when img/<scene>-<season>-<buoi>-p.webp exist for every
    season × buổi; their own floor anchor goes in KIT_FANCHOR["<scene>-p"]. Empty until the art lands: nothing changes. */
-window.KIT_STAGE_P=window.KIT_STAGE_P||{};
+window.KIT_STAGE_P=Object.assign({"phi-tan-cung":true},window.KIT_STAGE_P||{});
 window.KIT_FANCHOR=Object.assign({"duong-tam-dien":{x:.5,feet:.93},"khon-ninh-cung":{x:.55,feet:.92},"kinh-su-phong":{x:.45,feet:.92},"lanh-cung":{x:.36,feet:.93},
  "ngu-hoa-vien":{x:.3,feet:.9},"ngu-thu-phong":{x:.5,feet:.92},"phi-tan-cung":{x:.5,feet:.9},"tam-cung-dem":{x:.68,feet:.94},"thai-y-vien":{x:.45,feet:.9},
- "tu-ninh-cung":{x:.5,feet:.9},_default:{x:.5,feet:null}},window.KIT_FANCHOR||{});
+ "tu-ninh-cung":{x:.5,feet:.9},
+ "phi-tan-cung-p":{x:.5,feet:.86},_default:{x:.5,feet:null}},window.KIT_FANCHOR||{});
 function kitFloorFit(){try{const st=$("stage"),im=$("scimg");if(!st||!im)return;const m=/url\(["']?([^"')]+)["']?\)/.exec(im.style.backgroundImage||"");if(!m){st.style.removeProperty("--kfb");st.style.removeProperty("--kfh");im.style.backgroundPosition="";return}
  let url=m[1];
  /* portrait tier (KIT 31.4): a room view taller than wide (phone shell, iPad column) uses the scene's portrait painting
@@ -68,8 +69,13 @@ function kitFloorFit(){try{const st=$("stage"),im=$("scimg");if(!st||!im)return;
  const ftA=KIT_FLOOR[scene]!=null?KIT_FLOOR[scene]:ft;const fs=A.feet!=null?A.feet:ftA+.9*(1-ftA);let feet=Math.min(H*.97,y0+fs*dh);
  const old=st.__kfa;st.__kfa={feet:Math.round(feet),ax:Math.round(x0+A.x*dw),scene};
  if(!old||old.feet!==st.__kfa.feet||old.ax!==st.__kfa.ax){clearTimeout(st.__kfaT);st.__kfaT=setTimeout(()=>{try{window.j59lay&&window.j59lay()}catch(e){}},0)}const kfb=Math.max(H*.03,24,H-feet);st.style.setProperty("--kfb",kfb.toFixed(0)+"px");st.style.setProperty("--kfh",Math.max(H*.45,H-kfb-H*.03).toFixed(0)+"px");st.dataset.kfloor=name}catch(e){}}
-(function(){if(typeof renderStage!=="function")return;const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);kitFloorFit();return r};
- try{let ro=null;const hook=()=>{const st=$("stage");if(!st||ro)return;ro=new ResizeObserver(()=>kitFloorFit());ro.observe(st)};if(document.readyState!=="loading")hook();else addEventListener("DOMContentLoaded",hook)}catch(e){}
+/* PIXI (j11) paints its own copy of the landscape picture, centred, over #scimg. While the portrait -p painting is in use (scene-phone,
+   KIT 31.4), the PIXI picture is hidden and #scimg (cropped on the floor anchor above) shows; PIXI particles keep running. */
+function kitPxBg(){try{if(typeof PX!=="object"||!PX.bg)return;const im=$("scimg");if(!im)return;const p=/-p\.\w+["']?\)/.test(im.style.backgroundImage||"");
+ PX.bg.visible=!p;im.style.opacity=p?"1":"0"}catch(e){}}
+(function(){if(typeof pxScene!=="function")return;const p0=pxScene;pxScene=function(){const r=p0.apply(this,arguments);Promise.resolve(r).then(kitPxBg,kitPxBg);return r}})();
+(function(){if(typeof renderStage!=="function")return;const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);kitFloorFit();kitPxBg();return r};
+ try{let ro=null;const hook=()=>{const st=$("stage");if(!st||ro)return;ro=new ResizeObserver(()=>{kitFloorFit();kitPxBg()});ro.observe(st)};if(document.readyState!=="loading")hook();else addEventListener("DOMContentLoaded",hook)}catch(e){}
  const st=document.createElement("style");st.id="k2b-floor";st.textContent=`
 .stage[data-kfloor] .scimg{transition:background-position .2s}
 `;document.head.appendChild(st)})();
