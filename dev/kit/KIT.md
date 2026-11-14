@@ -75,9 +75,9 @@ Read it live: `RCOL[rank]`, or `KIT_RANK_COL[rank]` / `KIT_RANK_COL.cold` / `kit
 | effect token | `eff(t)`, `effList(tokens,def)` → `.ef g/r/n` | colours of 1.2 |
 | odds chip | `oddsChip(word)` → `.oc .oc0..oc7` | ladder Liều/Khó/Năm ăn năm thua/Khá chắc/Chắc/Rất chắc/Nắm chắc; never %, never "Chắc chắn" (sure acts show no word) |
 | any price line | `kitParse('word · tốn: … · thành: … · hỏng: … · kèm: …')` | used by `optLine`, `dilLine`, `actLine`, `kitFix`; returns the labelled rows of section 6 (j63) |
-| act card | `cardH(a,i)` → `button.card.kcard.ka` | the ACT CARD frame of section 6 (j63): title + odds chip, description, rows Vì sao / Tốn / Được / Mất / Kèm / Ghi chú |
+| act card | `cardH(a,i)` → `button.card.kcard.ka` | the ACT CARD frame of section 6 (j63): title + odds chip, description, rows Cần / Tốn / Được / Mất / Kèm / Ghi chú |
 | option (dialogs) | `button.opt` + `<small>` through `kitParse` → `.ka` | same ACT CARD frame (section 6) |
-| button with price | `pbtn(attrs,name,line,why)` → `.ka` | same ACT CARD frame (section 6); disabled reason = Vì sao row |
+| button with price | `pbtn(attrs,name,line,why)` → `.ka` | same ACT CARD frame (section 6); conditions = Cần row |
 | plain button | `.btn` | `#fffaf0`, `1px --line`, radius 6, min-height 40 |
 | tabs inside a person card | `pcard({groups})` → `.pctabs .pct` (+ count `<i>`), active `.pct.on` = gold fill | groups for rivals come from `RVGRP` (Giao thiệp / Hại nhỏ / Hại nặng / Sát hại) |
 | main tabs | `#tabs [data-tab]` (Hành động, Bản đồ, Phi tần, Quan hệ, Phe phái, Kẻ hầu, Con cái, Rương đồ, Tài nghệ, Tuyến truyện, Nhật ký) | servant-start uses `SRVTABS` |
@@ -168,7 +168,7 @@ button.ka [.kdis when disabled]
     span.kodds                  odds chip .oc (ladder colour) on the right; "Quẻ: dễ/khó hơn…" under it (green/red)
   span.klead                    act description (act cards only), dim, wraps, never clamped
   small.kb                      grid: label column (fixed 3.4rem; 3.3rem under 600px) | values
-    span.kr.kr-why  > .krl "Vì sao"  .krv > .kwhy   (disabled only, first)
+    span.kr.kr-why  > .krl "Cần"     .krv > .kwhy ✗ unmet (red) … .kwhy.kok ✓ met (green)   (first row)
     span.kr.kr-ton  > .krl "Tốn"     .krv > .ef.t time "2 khắc" (dark ink) · .ef.r resources (red)
     span.kr.kr-duoc > .krl "Được"    .krv > .ef.g (green)
     span.kr.kr-mat  > .krl "Mất"     .krv > .ef.r (red; outcome if it fails; old "hỏng" maps here)
@@ -178,8 +178,8 @@ button.ka [.kdis when disabled]
 ```
 
 Rules
-- Rows always in this order; an empty row is left out. Labels are Vietnamese title case `Vì sao / Tốn / Được / Mất / Kèm / Ghi chú`,
-  shown small-caps in `#8a7350` (Vì sao label red). The old inline `TỐN / THÀNH / HỎNG / KÈM` labels are gone.
+- Rows always in this order; an empty row is left out. Labels are Vietnamese title case `Cần / Tốn / Được / Mất / Kèm / Ghi chú`,
+  shown small-caps in `#8a7350`. The old inline `TỐN / THÀNH / HỎNG / KÈM` labels are gone.
 - A value goes to its row by meaning (`kaRows`): a gain is always green and in Được; a cost/loss is always red (Tốn, Mất, Kèm).
   Sentiment uses `kcls` (j19 + j25): `+N` is a gain unless it is hostile (`ghen +`, `oán ngươi +`); harm to a rival ("nàng … -N") is a gain.
   Exceptions: a failure that still gives something ("đêm nhạt, Sủng +3") stays in Mất but its `+N` is green; "không mất gì" is neutral.
@@ -190,7 +190,13 @@ Rules
   kỷ cương (lòng +1) · Mất: lòng -5); a ROLLED act's side loss on success goes to Kèm (Mất is kept for the failure outcome).
   Trailing "(…)" notes split off into Ghi chú.
 - Odds: ladder word only (Liều/Khó/Năm ăn năm thua/Khá chắc/Chắc/Rất chắc/Nắm chắc), never %; sure acts show no chip.
-- Disabled (`.kdis`): grey ground `#eee7da`, grey title, chip greyed; a "Vì sao" row (from `.kwhy` / `cardWhy` / `guessWhy`) replaces
+- Cần row: every condition with its live status, unmet first (✗ red, saying what is missing), then met (✓ green):
+  khắc `2 khắc (còn N)` (used+c ≤ 4), `Sức ≥20 (có N)` for acts over 1 khắc (`can`), `Bạc N (có M)`, buổi `Buổi tối (đang buổi sáng)`,
+  "chưa làm trong buổi này", lãnh cung / còn sống / cấm túc (CRIME), and the act's own requirement from `ok()` + `ACT[k].x` / `LACK[k]`
+  with evidence counts `(có N)` from `evG`. Producers: `cardH` and `rvGroups` wrappers put the list on the button as `data-kneed`;
+  any other disabled button turns its reason (`.kwhy`/`guessWhy`) into a ✗ item. A requirement that `ok()` checks but no text names
+  shows "điều kiện riêng của việc này chưa có" (to be named by the act owner).
+- Disabled (`.kdis`): grey ground `#eee7da`, grey title, chip greyed; the Cần row (from `.kwhy` / `cardWhy` / `guessWhy` / `data-kneed`) replaces
   the rows that cannot apply (Mất and Kèm hidden; Tốn and Được stay so she sees what it would give). Never opacity below 1 on the text.
 - Frame: `#fffaf0`, `1px var(--line)`, radius 8, title row with a `#e6d3ac` hairline under it; hover border `--gold`.
 - Size: cards sit in CSS grids with `grid-auto-rows:1fr` → every card in a grid has the same height (the tallest one's), the
@@ -214,9 +220,13 @@ One short sentence of what happened, from the log of this act, rival names with 
 Mất   Đức 30→26 (−4) · Hoàng hậu Liễu Họa Mi: ghét ngươi hơn (thiện cảm −15), ghen +25, oán +20   red, person name in ink
                                                      Xem đầy đủ ở Nhật ký   (link: opens the Nhật ký tab)
 ```
+- Seal follows the outcome FOR HER, not the branch that fired: THÀNH (green) when things went her way; HỎNG (red) when the act
+  failed; BẤT LỢI (red) when the net result is a loss (no gain and a real loss beyond Sức/Bạc, or the log says she was blamed/
+  punished/exposed), e.g. petition "Trình lên Hoàng thượng… trách ngươi gây chuyện", Danh 52→44 → BẤT LỢI. Never THÀNH on a loss.
 - Values are the REAL changes (snapshot before → now), never the option preview: no ranges, no "có thể", no repeated price line.
 - One group per person; the two-way relation is ONE plain phrase (her feeling toward you; yours only if hers did not move);
   "Hoàng hậu với ngươi" merges into the queen's group. Lines with "→" lists, "thành:/kèm:" previews are never used as the sentence;
   a sentence that only repeats the act name is dropped.
+- Rows are arrays: one fact per line (`.kitem`), never joined sentences; also exposed as `window.kaLastResult {title, ok, sentence, rows:[{k,label,items[]}]}`.
 - Same `.kb` row grid and colours as the act card; no change at all → Ghi chú "không đổi chỉ số". Stays 9 s; tap closes.
 
