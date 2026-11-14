@@ -80,7 +80,8 @@ if(typeof renderStage==="function"){const r1=renderStage;renderStage=function(){
 function k3Gut(){const st=$$("stage");if(!st)return;const W=st.clientWidth;if(!W)return;
  const g=Math.round(Math.max(W<520?96:116,Math.min(190,W*.2)));st.classList.toggle("k3n",g<116);const L=$$("kshL"),R=$$("kshR");
  st.style.setProperty("--kgw",g+"px");st.style.setProperty("--k3stw",W+"px");
- const need=el=>el&&!el.hidden?Math.ceil(el.getBoundingClientRect().width)+10:0;
+ /* KIT 33: an EMPTY plaque column (no plaques, zero height) reserves no gutter — the floor belongs to the people */
+ const need=el=>{if(!el||el.hidden)return 0;const q=el.getBoundingClientRect();return q.height>2?Math.ceil(q.width)+10:0};
  const gl=Math.max(need(L),0),gr=Math.max(need(R),0);const ol=st.style.getPropertyValue("--kgl"),or=st.style.getPropertyValue("--kgr");
  st.style.setProperty("--kgl",gl+"px");st.style.setProperty("--kgr",gr+"px");
  if((ol!==gl+"px"||or!==gr+"px")&&typeof window.j59lay==="function"){try{window.j59lay()}catch(e){}}}

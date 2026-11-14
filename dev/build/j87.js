@@ -104,7 +104,7 @@ function kitBook(spec){spec=spec||{};const rm=()=>{try{return reducedMotion()}ca
   logical=(sheets[cur]&&(sheets[cur].front.src||sheets[cur].front.kind))||null}
 
  /* ---- the turn: p = 0 (flat, right) … 1 (turned, left) ---- */
- /* the turn is a CURL (kitCurl v2, jbook / KIT §32.1): the corner lifts, the sheet folds on a diagonal, its back shows, shadow along the fold */
+ /* the turn is a CURL (kitCurl v2, jbook / KIT §34.1): the corner lifts, the sheet folds on a diagonal, its back shows, shadow along the fold */
  function setTurn(el,p){const c=el&&el.__curl;if(c)c.set(p)}
  function beginTurn(i,dir){const els=sheetEls();const el=els[i];if(!el)return null;
   for(let k=i-2;k<=i+2;k++)if(els[k])els[k].style.visibility="visible";if(mode==="single"&&els[i+1]&&i===cur)els[i+1].style.visibility="visible";

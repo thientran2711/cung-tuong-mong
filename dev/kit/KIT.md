@@ -583,7 +583,7 @@ kitBook({head:"Sổ tuần · Tháng tư · thượng tuần · năm thứ nhấ
 - Layout: two-page spread when the viewport is ≥ 900 px wide and landscape (iPad 1180x820, 1366x1024), the closed cover centred; one page at a
   time otherwise (Fold 755x1000, phones). Person page: portrait column `--por` beside name/chips/facts; under 440 px page width facts run full
   width below the portrait. Font scales with the page (`--fs` 13–17 px).
-- Turning (page-curl kit, §32): drag/swipe follows the finger with a paper CURL (`kitCurl` v2: the corner lifts and folds on a diagonal, the back of the page shows with a curved shading, shadow along the fold; 680 ms);
+- Turning (page-curl kit, §34): drag/swipe follows the finger with a paper CURL (`kitCurl` v2: the corner lifts and folds on a diagonal, the back of the page shows with a curved shading, shadow along the fold; 680 ms);
   release past ~40 % or a flick completes, else it falls back. Tap the right/left page edge, the ‹ › buttons, ←/→/PageUp/PageDown, Esc = Lui.
   `prefers-reduced-motion` (or Cảnh động off): cross-fade instead of the turn. Soft paper sound with the Tiếng động slider.
 - Art: `img/book-cover.webp` (indigo thread-bound cover, title label strip: the title is written in it, word per line), `book-right.webp`
@@ -1031,14 +1031,14 @@ card fell back to the generic Học tập picture).
 | name tags under figures | j59 `.tag` (one builder, j59tagHTML) | — | single path ✔ |
 | headers / panels | kitPanel (`.dlg.kpanel`) · old `.dlg` dialogs | kitPanel | mostly migrated (26.x); old `.dlg` left in minigames |
 
-## 32. BOOK UI · kitCurl (page curl) + kitBookSpread (two-page book) — `dev/build/jbook.js` (before j87) — KIT READY: page-curl
+## 34. BOOK UI · kitCurl (page curl) + kitBookSpread (two-page book) — `dev/build/jbook.js` (before j87) — KIT READY: page-curl
 Owner 11/14 (00:15Z, 00:45Z approval + later change): the UI is an open book. **iPad landscape = two-page spread**: LEFT = picture page
 (illustration only: the big full-body figure / scene that goes with the right page; it never takes info away from the right page),
 RIGHT = the text page exactly as already approved (Hậu cung card with its own frame, chips, tabs, acts…). **Phone / portrait = the RIGHT
 page only** (no illustration page on phones, accepted loss; no "Mở trang" button). **A tab switch is a page turn on both devices**, and
 every page turn CURLS like real paper. Mockups (not wired yet; the fold-layout kit owner wires it): `dev/shots/book/`.
 
-### 32.1 kitCurl — the one page-turn engine (week book, tab switch, any future book) — v2 (owner 11/15 03:30Z)
+### 34.1 kitCurl — the one page-turn engine (week book, tab switch, any future book) — v2 (owner 11/15 03:30Z)
 Owner refs `dev/owner-shots/1115-curl-ref-1.jpg`, `-2.jpg`: the CORNER lifts first and leads, the sheet folds on a DIAGONAL, tilts as it
 turns, shows the BACK of the page with a soft curved shading and a dark gradient along the fold — never a vertical cylinder roll.
 ```js
@@ -1062,25 +1062,25 @@ kitCurlOff();       // true when "Cảnh động" is off (OPT.fxon=false) or pre
   tab is right of the old one in the tab bar, else mirrored. Phone (one page): the right-edge corner lifts. No curl when the panel box changes
   (to/from Dư đồ: the map unrolls instead, leaving it fades) or the panel is hidden (phone home).
 
-### 32.1b kitLeather — Dư đồ is an unrolled LEATHER MAP, not a book page (owner 11/15 04:00Z)
+### 34.1b kitLeather — Dư đồ is an unrolled LEATHER MAP, not a book page (owner 11/15 04:00Z)
 `kitLeather(el)` (CSS only, no new art): tanned hide with grain + burnt edges, uneven hide outline, stitched border, two rolled ends, the
 painting inset with a soft burnt edge and leather tone. Full panel, no gutter, no spine, no paper. The info strip that used to sit over the
 map (season · khắc left · travel cost legend · festival chip) is removed; the map tools (− + ⓘ Ra vào, Danh sách) float on the painting.
 `kitUnroll(el)`: going to the map, it unrolls from the middle (the two rolls slide out), 620 ms; reduced motion: none.
 Live: `.game.maptab #panel .mapv` gets it on every render. kitBookSpread `double` = the leather map over the whole book area.
 
-### 32.1c kitBookLive — the LIVE game is the open book (every tab, both roads; owner 11/15 priority)
+### 34.1c kitBookLive — the LIVE game is the open book (every tab, both roads; owner 11/15 priority)
 `kitBookLive()` runs after every render (jbook, end): `.game.kbook` + a cover board (`.kbk-board`, grid child behind the page row).
 - iPad landscape (≥ 900 px, landscape): the room stage = LEFT picture page (room painting printed on the page: paper margin, thin red rule,
   stacked leaves outside, gutter shadow inside), the tab panel = RIGHT text page (paper, crease + gutter shadow on its inner edge, stacked
   leaves outside), no gap between them, indigo cover board behind both. Phone / portrait: ONE paper page (the panel) on the board.
 - Every tab of both roads (Hành sự … Mệnh truyện; cung nữ: Phận sự, Đồng liêu, Thân phận, Sổ ghi) uses it; a tab switch curls the right page
-  (§32.1). Not a book: Dư đồ (leather map, §32.1b), title, end screen.
+  (§34.1). Not a book: Dư đồ (leather map, §34.1b), title, end screen.
 - Room stage = ONE backdrop: the Pixi room copy (j11) is drawn only when it is the very picture + crop #scimg shows (incl. the portrait
   painting kitFloorFit swaps in) and covers the stage; otherwise it is hidden and the CSS backdrop alone shows (owner shot
   `dev/owner-shots/1115-two-backdrops.jpg`: two backdrops stacked in the cung nữ room on iPad).
 
-### 32.2 kitBookSpread — the book container
+### 34.2 kitBookSpread — the book container
 ```js
 const bs=kitBookSpread(host,{pic, text, double, mode:"auto"});   // host = the area between the top bar and the tab bar
 bs.set({pic, text, double});              // replace content (no turn). text: an Element is MOVED in (stays live, e.g. #panel)
@@ -1097,13 +1097,13 @@ kitBookSpread.wantsPic(host)              // false on phones: skip building the 
   board are hidden. Turning to it unrolls the map; leaving it fades (the map is not a page, it never curls).
 - Paper skin `.kpaper` (warm paper, faint fibres, edge tint) is reusable on its own for any page-like surface.
 
-### 32.3 kitBookPic — the picture page (illustration only)
+### 34.3 kitBookPic — the picture page (illustration only)
 `kitBookPic({scene, ax, feet, figs:[{src,h,x,dim}], cap, slots:[{label,n,img}], plate})` → HTML: a printed plate inside a thin red double
 rule: the room picture cover-cropped on its floor anchor (`ax` = KIT_FANCHOR x, 31.4), full-body figures (`kitFigOf(p)`) standing on the
-`feet` line, `h` = height fraction; `dim` = anonymous silhouettes (`img/kit/unknown-fig-*.webp`); `cap` = small caption plaque (place name /
+`feet` line, `h` = height fraction (default KIT_FIG.h, §33 — never a private size); `dim` = anonymous silhouettes (`img/kit/unknown-fig-*.webp`); `cap` = small caption plaque (place name /
 "Thử y phục" — a caption, never the right page's facts); `slots` = try-on slots beside her figure (Tư trang).
 
-### 32.4 Page mapping (owner-approved; iPad left page · right page)
+### 34.4 Page mapping (owner-approved; iPad left page · right page)
 | tab | LEFT (picture, iPad only) | RIGHT (text, iPad + phone) |
 |---|---|---|
 | Hành sự / home | her room with her figure | act categories + acts |
@@ -1116,7 +1116,7 @@ rule: the room picture cover-cropped on its floor anchor (`ax` = KIT_FANCHOR x, 
 | Mệnh truyện / events / Sổ tuần | chapter or scene picture / full-body figure | text + choices |
 | Sổ ghi | calendar | entries |
 
-### 32.5 Tests · shots
+### 34.5 Tests · shots
 `node dev/test/page-curl.js <url> WxH@dpr <out>` (week book: frozen mid-curl frames, back turn, finger drag, reduced motion = fade, no
 page errors) · `node dev/test/book-mock.js <url> WxH@dpr <out> <tag>` (mockups). Shots: `dev/shots/book/`.
 
@@ -1168,6 +1168,8 @@ page errors) · `node dev/test/book-mock.js <url> WxH@dpr <out> <tag>` (mockups)
 | review | picker: "1/18" counter cut the last column | kitStripFit drops faces until nothing is cut | ✔ 686 |
 | review | old court chips .kcchips in the DOM | removed (kitCourtChips = cleanup only) | ✔ guarded by kit_dupes |
 | review | lãnh cung rank chip said "Đáp ứng" | k3Hud: "Phế phi · lãnh cung" | ✔ code; not shot |
+| 11/15 | two backdrops stacked on the stage (iPad, cung nữ room) | j11 pxTick: the PIXI picture always covers the whole stage box (stale crop / resize) | ✔ 1180 + 1366 servant road, home + 4 places: one canvas layer, full box |
+| decision 38 | Tần, Phi, Quý phi are palace heads | PAL_HEAD=3 (j1) in palHeadOK / palFix / houseOf / assignHouses | ✔ she gets her own palace at Tần; old saves re-house on load |
 
 ### 31.6 INVENTORY (group → member → status; screenshots dev/shots/fold-layout/)
 | group | members | status |
@@ -1219,3 +1221,48 @@ Grade colours (items, rewards): Thường `#9aa3a8`, Tinh phẩm `#5fa58c`, Trâ
 
 Art list (`img/kit/`): mo-tablet-back, mo-tablet-front, mo-xam-tube, mo-xam-stick, mo-seal-thanh, mo-seal-bai, mo-edict-closed, mo-edict-open, mo-leaf-dry, mo-leaf-maple, mo-petal-peach, mo-petal-plum, mo-peony, mo-ink, mo-incense, mo-calendar, mo-tray(-open), mo-chest(-open), mo-chestg(-open), mo-giftbox(-open), mo-ingot-silver, mo-ingot-gold, mo-coin-silver, mo-coin-gold, mo-wx-{hoadao,muaphun,suongsom,troiquang,nanggat,vekeu,giong,domdom,laphong,nangvang,gioheomay,trangram,tuyetnhe,tuyetday,suonggia,maino}.
 Not done here (other owners): kitRoulette (thân phận, review/kit-2b) and the honour podium (j90, section 26); the motion queue waits for them (`#kpodov`, roulette).
+
+## 33. ONE FIGURE SCALE · KIT_FIG (owner 11/15 "người trên sân khấu quá nhỏ"; review fold-layout r3 FAIL 1366) — `dev/build/jkit.js` (top) + j59 + jk4
+
+**Single source of truth** for how big full-body people are drawn: `KIT_FIG` (jkit.js, also `window.KIT_FIG`, CSS `--kfig`).
+
+| who | factor (× adult woman) | ≈ share of the stage / picture height |
+|---|---|---|
+| adult woman | 1 | **KIT_FIG.h = .86** |
+| adult man / eunuch / official / physician (`fig-emperor/eunuch/official/physician/man-*`) | **KIT_FIG.man = 1.08** | ≈ .93 |
+| child, age a < 18 | `.55 + .03·a` (5 → .70, 10 → .85, 15 → 1) | by age |
+
+`KIT_FIG.fac(src, age)` = the factor of one figure file for one person. No other file may keep its own height factor
+(the old j59 `MANF`/`MEN`/child formula and the `.7` "tall stage" strip factor are gone; j59 reads KIT_FIG).
+
+Stage rule (j59 — every room / place / servant road / lãnh cung stage):
+1. Everybody in one scene has ONE scale: woman body height = .86 × stage height (feet on the floor line — the painted floor
+   anchor is honoured only while the kit height still fits — heads under the place ribbon). Men ×1.08, children by age.
+2. People stand in the open floor between the plaque gutters. An EMPTY plaque column (no plaques) reserves no gutter (jk3 k3Gut).
+3. Widths count the visible body (bbox l..r), not transparent margins.
+4. The size never shrinks to fit more people: if all do not fit, the others stand in a strip of **equal whole-person slots**
+   (slot = widest figure or widest name chip), the strip is exactly N slots wide, scrolls with scroll-snap per person, and the
+   count chips "› N" / "N ‹" count the rest. When the right plaque column ends high, both chips stand in the empty gutter
+   under it (› above, ‹ below) so the strip keeps its width for people.
+5. Only exception: a stage too narrow for her + ONE whole other person at .86 scales down just enough for exactly that pair
+   (measured: 1366x1024 → .62–.69, 1024x768 → .60, 1180x820 → .66 when the other is a wide-robed consort). Never smaller than that pair fit.
+6. Name chips are never cut: in the strip each slot is at least chip width + 8 px.
+
+Event stage (jk4 kitStageFig / kitEventStage, week-book person pages): each figure carries `--kfr = KIT_FIG.fac/KIT_FIG.man`,
+so a man fills the figure box and a woman / child stand at their kit ratio; feet share the bottom line (`.kesf` justify-end).
+
+Measured (dev/shots/review/fold-layout/k33-*.jpg; figure image height / stage height; 0 page errors, 0 horizontal overflow, 0 cut chips):
+
+| viewport | consort room (her + 1) | cung nữ, master away (her + 1) | cung nữ, 3 people | cung nữ, 6 people |
+|---|---|---|---|---|
+| 686x880@2.2 | .86 / .86 (no strip) | .83 / .90 man (no strip) | .78 + "› 1" | .78 + "› 1"/"4 ‹" |
+| 1180x820@2 | .86 / .86 | .66 (Hoàng hậu, wide) + "› 4" | .66 | .66 + counts |
+| 1366x1024@2 | .83 / .83 | .75 / .81 man | .62 + "› 1" (was .30, cut) | .62 + counts |
+| 1024x768@2 | .78 / .84 man | .60 + "› 1" | .60 | .60 + counts |
+
+**KIT 33.4 · kitImgErr(img, {sel, cls, text, swap})** (jkit.js): the ONE null-safe fallback for inline `<img onerror>`;
+does nothing when a re-render already detached the picture (fixes "Cannot read properties of null (reading 'classList')"
+from j15 pcPort). Used by j15, j3, j90 (podium), jk4 (event stage). New inline onerror handlers that touch a parent must use it.
+
+Open (next kit pass): podium (j90), identity card, co-op friend figure, minigame podium still size their single figure by
+their own box (one person per box, no scene) — move them onto `--kfig`/`KIT_FIG.fac` when they show two people together.
