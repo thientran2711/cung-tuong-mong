@@ -29,29 +29,3 @@ Tấm xem: dev/shots/review/maid-art-c/ (age_0, age_1 = tuổi; fh_2 = hoa đi�
 
 ## Việc cho thợ
 Làm tuổi a36/a51 cho t1–t8 (52 nàng); bỏ vạch dọc t7 m03 m12 (xem m05); bỏ nét lên tóc t6 m24 m15; rồi soát lại toàn bộ t6/t7 cả 52 nàng ở 4 tuổi (không chỉ C-B); cập nhật FIGURES-servants.json theo main cho 16 mục trên.
-
----
-
-# Kiểm lại: review/maid-art-c @ 917568a7 — PASS
-
-Cùng mẫu 22 nàng như lần trước (cùng bậc ngẫu nhiên, để so trước/sau) + soát t6 a51, t7 a26, t8 a36 của cả 52 nàng; hình mới ở dev/shots/review/maid-art-c/*2*, *v2*, seam.jpg.
-
-## Lỗi chặn lần trước — đã sửa
-1. Tuổi bậc t1–t8: a51 nay ra ~45–50 ở cả 19 bộ mẫu (m08-t6, m14-t3, m29-t7, m41-t1, m49-t2, m50-t2, m33-t6, m34-t1, m39-t4, m19-t1, m32-t2, m48-t7, m45-t7, m44-t2, m38-t4, m31-t2…):
-   nếp khoé mắt, rãnh cười nhẹ, mặt đầy, tóc đen, vẫn đẹp. a36 (32) chín chắn hơn a26 một chút — nhẹ nhưng đủ, cùng chuẩn phần A đã PASS.
-   Dán mặt không lộ vết nối ở cỡ thật fig 383x900 và por 384x506 (seam.jpg). m33-t8 hết ánh tóc xám-tím.
-2. t7 hết vạch dọc lên chân tóc: m03, m12 (cả 4 tuổi), m05 sạch; cả 52 t7 a26 không còn dây.
-3. t6: m24 vòng tròn hết nét lên tóc, m15 sạch.
-- Phụ lần trước: m48-t3 đèn lồng thu nhỏ, bỏ móc — đạt; t6 m01/m02/m11/m21 phẳng hơn (m01 vẫn ánh vàng lá, chấp nhận).
-- FIGURES-servants.json: 2944 mục; 1072 mục của main y nguyên (gồm 16 mục thường m13/m26/m39/m52), đủ tệp, không trùng. Nhánh chỉ sửa LOG.md và JSON so với main.
-
-## Ghi chú (không chặn)
-- Lãnh cung a51 m45, m38 tóc còn ánh xám nhẹ (đã đạt từ lần trước) — nếu làm lượt tóc a51 bậc thường thì nhuộm luôn.
-- m45-t1 a36 hoa điền mờ (thợ đã ghi).
-
-## Câu hỏi của chủ: hoa điền t6–t8 "to như sẹo" — phần C có cùng lỗi không?
-- t6: KHÔNG — nhỏ, gọn giữa hai mày (cỡ đầu ngón tay), không lan.
-- t7: phần lớn vừa; rộng gần bằng/khít khoảng giữa hai mày: m02, m09, m11, m17, m21 (m21 phượng đỏ dáng răng cưa, ở cỡ nhỏ dễ đọc như vết cào).
-- t8: CÓ, rõ nhất. Phượng vàng lá + thuý lam rộng bằng hoặc hơn khoảng giữa hai đầu mày và cao gần nửa trán; màu lam/xanh trên da đọc như hình xăm/vết bầm.
-  Rộng nhất: m05, m07, m20, m22, m29, m34, m36, m40, m42, m44 (và đa số còn lại). Đặc biệt m06-t8 có vạch đỏ dọc chạy xuống sống mũi (như vết cắt), m04-t8 chuỗi hạt đỏ dọc.
-  Nếu chủ cho thu nhỏ t6–t8 phi tần, nên áp cùng chuẩn cho phần C t8 (và t7 các nàng kể trên): còn ~60% bề ngang, bỏ màu lam đậm, giữ trong khoảng giữa hai mày.
