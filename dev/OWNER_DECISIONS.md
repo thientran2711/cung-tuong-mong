@@ -119,3 +119,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (01:25Z) Owner: save credits until the game runs. Do now only illness, poisoning, slap/punishment. Postpone pregnancy art, nun, glow, grey strands, smallpox (and other non-essential art).
 - (01:30Z) Owner change: on phone portrait tabs open the right (info) page directly; no left illustration page on phone (accepted). iPad keeps the two-page spread.
 - (01:35Z) Owner: rash light level OK (all rash overlays approved). Tiên đế băng hà muted version lost the imperial gold (looks like wood) → redo between vivid and muted: soft antique gold must read as gold.
+- (01:55Z) Owner LOVES the Mệnh truyện st-* style (watercolour-painterly, harmonious colour, back-view figures). Rule: event/ceremony art follows the st-* style (fresh gens with st-* refs), not edits of the 3D scenes. Redo Tiên đế băng hà that way.
