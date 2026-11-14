@@ -12,18 +12,24 @@ const ROOT=path.resolve(__dirname,'../..');
 const res=[];const ok=(c,m,x)=>{res.push([!!c,m]);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 async function mk(b,name,vp){const ctx=await b.newContext({viewport:{width:vp[0],height:vp[1]},deviceScaleFactor:vp[2],hasTouch:true,isMobile:vp[0]<1100});
-  await serve(ctx);await ctx.addInitScript(u=>{window.COOP_URL=u},WURL);
+  await serve(ctx);await ctx.addInitScript(u=>{window.COOP_URL=u;
+    /* one view of the co-op hooks, whatever the client module names them */
+    window.__co=()=>{const c=window.COOP;if(!c)return{};const s=c.state||{};const you=c.seat||s.you||null;const ended=c.ended||s.ended||{};
+      const online=c.online||(s.seats?{a:!!(s.seats.a&&s.seats.a.online),b:!!(s.seats.b&&s.seats.b.online)}:{});
+      const on=typeof c.on==='boolean'?c.on:(c.active!=null?!!c.active:!!(s.playing||(s.status&&s.status!=='off')));
+      return{code:c.code||s.room||'',seat:you,week:c.week!=null?c.week:(s.week||0),online,ended,on,
+        frozen:c.frozen!=null?!!c.frozen:!!(on&&!s.bothIn),waiting:c.waiting!=null?!!c.waiting:!!(you&&ended[you])}}},WURL);
   const o={ctx,name,errs:[]};o.page=async()=>{const p=await ctx.newPage();p.setDefaultTimeout(30000);
     p.on('pageerror',e=>o.errs.push(e.message));p.on('console',m=>{if(m.type()==='error'&&!/Failed to load resource|favicon/.test(m.text()))o.errs.push('console: '+m.text())});o.p=p;return p};return o}
 const shot=async(o,n)=>{await o.p.waitForTimeout(400);await o.p.screenshot({path:`${OUT}/${n}-${o.name}.png`});
   const ov=await o.p.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1);ok(!ov,`${n} ${o.name}: no horizontal overflow`)};
-const C=o=>o.p.evaluate(()=>window.COOP?JSON.parse(JSON.stringify({code:COOP.code,seat:COOP.seat,week:COOP.week,online:COOP.online,frozen:COOP.frozen,waiting:COOP.waiting,on:COOP.on})):null);
+const C=o=>o.p.evaluate(()=>__co());
 async function until(o,fn,arg,ms=30000){try{await o.p.waitForFunction(fn,arg,{timeout:ms});return true}catch(e){return false}}
 async function tapText(o,re,ms=8000){const t0=Date.now();while(Date.now()-t0<ms){const h=await o.p.evaluateHandle(src=>{const R=new RegExp(src);
   return [...document.querySelectorAll('button,a,[role=button]')].find(b=>b.offsetParent!==null&&!b.disabled&&R.test(b.textContent.trim()))||null},re.source);
   const el=h.asElement();if(el){await el.click();return true}await sleep(250)}return false}
 /* close story/news modals of the normal game (never the co-op waiting/freeze panel) */
-async function clear(o,n=25){for(let i=0;i<n;i++){const st=await o.p.evaluate(()=>{const c=window.COOP||{};if(c.frozen||c.waiting)return'coop';
+async function clear(o,n=25){for(let i=0;i<n;i++){const st=await o.p.evaluate(()=>{const c=__co();if(c.frozen||c.waiting)return'coop';
    const m=document.getElementById('modal');if(!m||m.hidden)return S&&S.mg?'mg':'';const b=m.querySelector('#mr button:not([disabled])')||m.querySelector('.opts button:not([disabled])');if(b){b.click();return'x'}return'stuck'});
   if(st==='mg'){await o.p.evaluate(()=>{try{S.mg=null;render()}catch(e){}});continue}
   if(st!=='x')return st;await sleep(200)}return'many'}
@@ -39,14 +45,14 @@ async function playWeek(o){/* three buổi: Qua buổi, Qua buổi, Qua đêm */
  await A.page();await A.p.goto(BASE);await A.p.waitForTimeout(3000);await shot(A,'01-title');
  ok(await tapText(A,/^Chơi cùng bạn/),'A taps Chơi cùng bạn');await A.p.waitForTimeout(600);await shot(A,'02-coop-menu');
  ok(await tapText(A,/^Mời bạn/),'A taps Mời bạn');
- ok(await until(A,()=>window.COOP&&COOP.code&&COOP.seat==='a'),'A has a room code, seat a');
+ ok(await until(A,()=>__co().code&&__co().seat==='a'),'A has a room code, seat a');
  const code=(await C(A)).code;console.log('room',code);await clear(A);await shot(A,'03-invite-waiting');
- const w0=await A.p.evaluate(()=>!!(window.COOP&&COOP.frozen));ok(w0,'A waits for the friend (frozen before join)');
+ const w0=await A.p.evaluate(()=>!!(__co().frozen));ok(w0,'A waits for the friend (frozen before join)');
  /* 2 guest joins by link */
  await B.page();await B.p.goto(BASE+'?room='+code);await B.p.waitForTimeout(3000);await shot(B,'04-join');
  await tapText(B,/^Vào phòng/,4000);
- ok(await until(B,()=>window.COOP&&COOP.seat==='b'&&COOP.online&&COOP.online.a&&COOP.online.b&&!COOP.frozen,null,40000),'B joined seat b, both online');
- ok(await until(A,()=>window.COOP&&!COOP.frozen,null,20000),'A unfrozen when B is in');
+ ok(await until(B,()=>__co().seat==='b'&&__co().online&&__co().online.a&&__co().online.b&&!__co().frozen,null,40000),'B joined seat b, both online');
+ ok(await until(A,()=>window.COOP&&!__co().frozen,null,20000),'A unfrozen when B is in');
  await clear(A);await clear(B);
  const same=async tag=>{const a=await A.p.evaluate(()=>({era:S.emp.era,d:[S.year,S.month,S.tuan],me:S.name,fr:(rivals.find(v=>v.coop)||{}).name,R:rivals.filter(v=>!v.coop).map(v=>v.id+v.name).join()}));
    const c=await B.p.evaluate(()=>({era:S.emp.era,d:[S.year,S.month,S.tuan],me:S.name,fr:(rivals.find(v=>v.coop)||{}).name,R:rivals.filter(v=>!v.coop).map(v=>v.id+v.name).join()}));
@@ -55,19 +61,19 @@ async function playWeek(o){/* three buổi: Qua buổi, Qua buổi, Qua đêm */
  await same('start');await shot(A,'05-world');await shot(B,'05-world');
  /* 3 three weeks */
  for(let w=0;w<3;w++){const wk=(await C(A)).week;
-  await playWeek(A);ok(await until(A,x=>COOP.waiting||COOP.week>x,wk,8000),`week ${w+1}: A ended, waits for B`);if(w===0)await shot(A,'06-waiting-friend');
+  await playWeek(A);ok(await until(A,x=>__co().waiting||__co().week>x,wk,8000),`week ${w+1}: A ended, waits for B`);if(w===0)await shot(A,'06-waiting-friend');
   await playWeek(B);
-  ok(await until(A,x=>COOP.week===x+1&&!COOP.waiting,wk,30000),`week ${w+1}: A advanced`);ok(await until(B,x=>COOP.week===x+1&&!COOP.waiting,wk,30000),`week ${w+1}: B advanced`);
+  ok(await until(A,x=>__co().week===x+1&&!__co().waiting,wk,30000),`week ${w+1}: A advanced`);ok(await until(B,x=>__co().week===x+1&&!__co().waiting,wk,30000),`week ${w+1}: B advanced`);
   await clear(A);await clear(B);await same('after week '+(w+1))}
  await shot(A,'07-after3');await shot(B,'07-after3');
  /* 4 B leaves → A freezes; B returns */
  await B.p.close();
- ok(await until(A,()=>COOP.frozen,null,60000),'A frozen when B left');await shot(A,'08-frozen');
- ok(await A.p.evaluate(()=>document.getElementById('next').disabled||!!COOP.frozen),'A cannot advance while frozen');
+ ok(await until(A,()=>__co().frozen,null,60000),'A frozen when B left');await shot(A,'08-frozen');
+ ok(await A.p.evaluate(()=>document.getElementById('next').disabled||!!__co().frozen),'A cannot advance while frozen');
  const wkF=(await C(A)).week;
  await B.page();await B.p.goto(BASE+'?room='+code);await B.p.waitForTimeout(3000);await tapText(B,/^Vào phòng|^Tiếp tục/,3000);
- ok(await until(B,x=>COOP.seat==='b'&&COOP.week===x&&!COOP.frozen,wkF,40000),'B back in same seat and week');
- ok(await until(A,()=>!COOP.frozen,null,20000),'A resumes');await clear(A);await clear(B);await same('after rejoin');await shot(B,'09-rejoined');
+ ok(await until(B,x=>__co().seat==='b'&&__co().week===x&&!__co().frozen,wkF,40000),'B back in same seat and week');
+ ok(await until(A,()=>!__co().frozen,null,20000),'A resumes');await clear(A);await clear(B);await same('after rejoin');await shot(B,'09-rejoined');
  /* 5 B dies → normal rebirth choice → new person in the same world */
  const before=await B.p.evaluate(()=>({n:S.name,era:S.emp.era}));
  await B.p.evaluate(()=>die('Thử: trúng gió'));await B.p.waitForTimeout(600);await shot(B,'10-death');
@@ -80,7 +86,7 @@ async function playWeek(o){/* three buổi: Qua buổi, Qua buổi, Qua đêm */
  ok(await until(A,n=>rivals.some(v=>v.coop&&v.name===n),after.n,30000),'A sees the reborn friend by her new name');
  await clear(A);await clear(B);await shot(A,'12-reborn-seen');await shot(B,'12-reborn');
  /* 6 one more week after rebirth */
- {const wk=(await C(A)).week;await playWeek(A);await playWeek(B);ok(await until(B,x=>COOP.week===x+1,wk,30000),'week after rebirth advances');}
+ {const wk=(await C(A)).week;await playWeek(A);await playWeek(B);ok(await until(B,x=>__co().week===x+1,wk,30000),'week after rebirth advances');}
  /* 7 single player untouched + old save loads */
  const oldHtml=execSync('git -C '+JSON.stringify(ROOT)+' show origin/main:index.html').toString();
  const D=await mk(b,'solo',[686,880,2.2]);await D.ctx.route(BASE+'old.html',r=>r.fulfill({status:200,contentType:'text/html; charset=utf-8',body:oldHtml.replace(/navigator\.serviceWorker\.register/g,'(()=>Promise.reject())')}));
@@ -89,7 +95,7 @@ async function playWeek(o){/* three buổi: Qua buổi, Qua buổi, Qua đêm */
  await D.p.goto(BASE);await D.p.waitForTimeout(3500);await shot(D,'13-title-solo');
  ok(await tapText(D,/^Chơi một mình/),'solo: Chơi một mình');await D.p.waitForTimeout(800);
  ok(await tapText(D,/^Tiếp tục kiếp này/),'solo: old save listed');await D.p.waitForTimeout(1500);
- const ld=await D.p.evaluate(()=>({n:S&&S.name,coop:!!(window.COOP&&COOP.on),fr:rivals.some(v=>v.coop)}));ok(ld.n===oldName&&!ld.coop&&!ld.fr,'solo: old save loads, no co-op',ld);
+ const ld=await D.p.evaluate(()=>({n:S&&S.name,coop:!!__co().on,fr:rivals.some(v=>v.coop)}));ok(ld.n===oldName&&!ld.coop&&!ld.fr,'solo: old save loads, no co-op',ld);
  await clear(D);await shot(D,'14-solo-game');
  for(const o of [A,B,D])ok(!o.errs.length,o.name+': no page errors',o.errs.slice(0,5));
  const bad=res.filter(r=>!r[0]);console.log(`\n${res.length-bad.length}/${res.length} passed`);fs.writeFileSync(OUT+'/result.txt',res.map(r=>(r[0]?'ok  ':'FAIL')+' '+r[1]).join('\n')+'\n');
