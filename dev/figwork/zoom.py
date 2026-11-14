@@ -4,7 +4,7 @@ from PIL import Image
 out=sys.argv[1]; rows=[]
 for j in sys.argv[2:]:
     p=[x for x in glob.glob(f"bg/{j}-*.png") if x.count('.')==1][0]; M=json.load(open(f"hgrid/{j}.json"))
-    for src in (p+".prehd.png",p):
+    for src in ((p,) if __import__("os").environ.get("AFTER") else (p+".prehd.png",p)):
         im=Image.open(src).convert("RGBA"); b=Image.new("RGBA",im.size,(235,225,205,255)); b.alpha_composite(im); im=b.convert("RGB")
         row=Image.new("RGB",(4*240,180))
         for k,m in enumerate(M):

@@ -43,26 +43,25 @@ else:
         win=np.zeros((T,T),np.uint8); cv2.ellipse(win,(int(cx),int(cy+0.05*D)),(int(float(os.environ.get("WX","0.32"))*D),int(0.35*D)),0,0,360,1,-1)
         eu=np.clip(e,0,255).astype(np.uint8); kz=int(0.35*D)|1
         dev=np.abs(e-cv2.medianBlur(eu,kz).astype(np.float32)).max(axis=2)*win
-        dev=cv2.GaussianBlur(dev,(0,0),2); th=dev.max()*0.35
-        n,lab,st,cen=cv2.connectedComponentsWithStats((dev>th).astype(np.uint8))
-        best=None
-        for i in range(1,n):
-            w_,h_=st[i,2]/D,st[i,3]/D
-            if not(0.04<w_<0.3 and 0.04<h_<0.3 and 0.6<w_/h_<1.6): continue
-            sc_=dev[lab==i].max()*min(1,st[i,4]/(0.6*st[i,2]*st[i,3]))
-            if best is None or sc_>best[0]: best=(sc_,i)
-        if best is None: p=[None,None,0,0]
-        else: bi=best[1]; p=[(cen[bi][0]-cx)/D,(cen[bi][1]-cy)/D,st[bi,2]/D,st[bi,3]/D]
+        dev=cv2.GaussianBlur(dev,(0,0),2); best=None
+        for fr in (0.5,0.35,0.22):
+            n,lab,st,cen=cv2.connectedComponentsWithStats((dev>dev.max()*fr).astype(np.uint8))
+            for i in range(1,n):
+                w_,h_=st[i,2]/D,st[i,3]/D; fill=st[i,4]/(st[i,2]*st[i,3])
+                if not(0.07<w_<0.25 and 0.07<h_<0.25 and 0.7<w_/h_<1.4 and fill>0.6): continue
+                sc_=dev[lab==i].max()*(1-min(0.9,abs((w_+h_)/2-0.15)/0.15))
+                if best is None or sc_>best[0]: best=(sc_,[(cen[i][0]-cx)/D,(cen[i][1]-cy)/D,w_,h_])
+        p=[None,None,0,0] if best is None else best[1]
         TL.append(dict(b=b,s=s,o=o,e=e,cx=cx,cy=cy,D=D,p=p,sh=(dx,dy,r)))
     good=[t["p"] for t in TL if t["p"][0] is not None]
     mxm=float(np.median([p[0] for p in good])) if good else 0.0; mym=float(np.median([p[1] for p in good])) if good else 0.1; szm=float(np.median([p[2]+p[3] for p in good])) if good else 0.3
     for k,t in enumerate(TL):
         p=t["p"]; tag=""
         if k in OV: p=OV[k]+p[2:]; tag="OVERRIDE"
-        elif p[0] is None or ((abs(p[0]-mxm)>0.12 or abs(p[1]-mym)>0.12) and abs(p[2]+p[3]-szm)>0.12*szm): p=[mxm,mym]+p[2:]; tag="OUTLIER->median"
+        elif p[0] is None: p=[mxm,mym]+p[2:]; tag="OUTLIER->median"
         print(jid,k,"dot",round(p[0],2),round(p[1],2),"size/d",round(p[2],2),round(p[3],2),tag,"shift",round(t["sh"][0],1),round(t["sh"][1],1),"resp",round(t["sh"][2],2))
         meta[k]["dot"]=[float(v) for v in p]
-        if str(k) not in which: continue
+        if str(k) not in which or os.environ.get("DRY"): continue
         D=t["D"]; o,e,b,s=t["o"],t["e"],t["b"],t["s"]
         mk=np.zeros((T,T),np.float32); cv2.ellipse(mk,(int(t["cx"]+p[0]*D),int(t["cy"]+p[1]*D)),(int(RX*D),int(RY*D)),0,0,360,1,-1); mk=cv2.GaussianBlur(mk,(0,0),D*0.04)
         blend=o*(1-mk[...,None])+e*mk[...,None]
@@ -70,4 +69,4 @@ else:
         ms=cv2.resize(mk,(s,s))[...,None]
         y0,x0=b[1],b[0]; reg=A[y0:y0+s,x0:x0+s,:3].astype(np.float32)
         A[y0:y0+s,x0:x0+s,:3]=np.clip(reg*(1-ms)+tile*ms,0,255).astype(np.uint8)
-    Image.fromarray(A).save(P); json.dump(meta,open(M,"w"))
+    if not os.environ.get("DRY"): Image.fromarray(A).save(P); json.dump(meta,open(M,"w"))
