@@ -312,6 +312,8 @@ html body .ksel:not(.kpki),html body [aria-pressed="true"].kselable{outline:none
    top-right corner beside the name row instead of taking a row of its own above the acts. ---------- */
 (function(){const st=document.createElement("style");st.id="k3-pcx";st.textContent=`
 html body .pc:has(>.pcr>.pcx){position:relative}
+/* a card opened from the room (#popw) lies over the panel: above the panel's sticky rows (sub-tabs, category tabs) */
+html body #popw{z-index:12}
 html body .pc>.pcr>.pcx{position:absolute!important;top:6px;right:6px;margin:0!important;z-index:8}
 html body .pc:has(>.pcr>.pcx)>.pcl>.kpnm{padding-right:78px}
 /* kit panels (report / story / info dialogs): the close row "Đã hiểu" is pinned at the dialog's bottom, the body scrolls under it */
@@ -321,14 +323,15 @@ html body .dlg.kpanel>.mr{position:sticky;bottom:0;z-index:4;background:linear-g
 /* ---------- 10. NAME TAGS NEVER OVERLAP (KIT 31.12): name tags under figures stay one line; when two tags would touch, the later one
    steps one line down (or up when there is no room under it). Runs after every stage render and on resize. ---------- */
 function k3Tags(){try{const st=$$("stage");if(!st)return;const SR=st.getBoundingClientRect();
- const G=[...st.querySelectorAll(".tok .tag")].filter(g=>{const t=g.closest(".tok");return t&&t.style.visibility!=="hidden"&&g.getBoundingClientRect().width>0});
+ const G=[...st.querySelectorAll(".tok .tag")].filter(g=>{const t=g.closest(".tok");return t&&getComputedStyle(t).visibility!=="hidden"&&getComputedStyle(g).display!=="none"&&g.getBoundingClientRect().width>0})
+  .map(g=>getComputedStyle(g).position==="static"?g.closest(".tok"):g);/* a static tag moves with its own holder (#j59metag) */
  G.forEach(g=>g.style.translate="");const R=G.map(g=>({g,r:g.getBoundingClientRect()})).sort((a,b)=>a.r.left-b.r.left);const placed=[];
  R.forEach(o=>{const h=o.r.height+2;let dy=0;const hit=d=>placed.some(p=>o.r.left<p.r.right+4&&o.r.right>p.r.left-4&&o.r.top+d<p.r.bottom+p.dy&&o.r.bottom+d>p.r.top+p.dy);
   for(const d of [0,h,-h,2*h,-2*h]){if(o.r.bottom+d>SR.bottom-2||o.r.top+d<SR.top+2)continue;if(!hit(d)){dy=d;break}}
   if(dy)o.g.style.translate=`0 ${dy}px`;placed.push({r:o.r,dy})})}catch(e){}}
 (function(){let tt=0;const go=()=>{clearTimeout(tt);tt=setTimeout(k3Tags,80);setTimeout(k3Tags,700)};
  if(typeof renderStage==="function"){const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);go();return r}}
- addEventListener("resize",go)})();
+ addEventListener("resize",go);setInterval(()=>{if(!document.hidden)k3Tags()},700)})();
 
 /* ---------- 11. kitBullets (KIT 31.14, owner 11/14): a long result / report / spy / news paragraph is shown as a BULLET LIST, one fact per
    line. Split on the text's own sentence ends (". ", "! ", "? ") and on a "Label:" that starts a new fact after a colon; a sentence that is
@@ -356,4 +359,13 @@ ul.kbl{margin:2px 0;padding:0;list-style:none;display:flex;flex-direction:column
 ul.kbl>li{position:relative;padding-left:14px;line-height:1.35}
 ul.kbl>li::before{content:"";position:absolute;left:3px;top:.55em;width:5px;height:5px;border-radius:50%;background:var(--gold,#8f5f0c)}
 small.kblf{display:block;margin-top:3px;font-size:.72rem;color:var(--dim,#7a6a58);font-style:italic}
+`;document.head.appendChild(st)})();
+
+/* ---------- 12. HER AGE in the top bar (owner 11/14, KIT 31.1): "N tuổi" as a small chip right after her rank chip, every device and road;
+   shown only here (one fact, one place). ---------- */
+(function(){if(typeof renderHUD!=="function")return;const r0=renderHUD;renderHUD=function(){const r=r0.apply(this,arguments);try{const m=$("me-r");
+ if(m&&S&&typeof S.age==="number"){let a=$("me-a");if(!a){a=document.createElement("span");a.id="me-a";a.className="k3age"}if(m.nextSibling!==a)m.after(a);const t=`${Math.floor(S.age)} tuổi`;if(a.textContent!==t)a.textContent=t}}catch(e){}return r}
+ const st=document.createElement("style");st.id="k3-age";st.textContent=`
+#me-a.k3age{display:inline-flex;align-items:center;vertical-align:middle;margin-left:5px;padding:0 7px;border:1px solid var(--line);border-radius:999px;
+ font-size:.72rem;font-weight:600;line-height:1.5;color:var(--ink);background:var(--k3pl,#fffaf0);white-space:nowrap}
 `;document.head.appendChild(st)})();
