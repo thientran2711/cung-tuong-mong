@@ -121,7 +121,7 @@ KIT_FACEFX.add({id:"phat",z:90,ready:true,                 /* no picture: chip a
 function fxAuth(a,t){try{return !!a&&!!t&&a!==t&&(a.queen||(a===S&&S.rank>=7)||rkOf(a)>=rkOf(t)+3)}catch(e){return false}}
 A("tat","Tát",{c:{duc:FX.tatDuc},ok:(a,t)=>together(a,t)&&rkOf(a)>rkOf(t)&&!(t.slap&&t.slap.until>wk()),o:()=>100,x:"nàng in dấu tay trên má, Sắc giảm vài tuần · nàng oán ngươi",f:(a,t)=>{
  if(typeof ducAdd==="function")ducAdd(a,FX.tatDuc,"tát người");else ap(a,{duc:FX.tatDuc});relAdd(t,a,FX.tatRel);slapGive(t,a,"");let r=`${NMc(a)} giáng một cái tát lên má ${NM(t)}. `;
- if((t.sung||0)>=60&&roll(30)){ap(a,{sung:-4});r+=`Hoàng thượng nghe chuyện, không vui (Sủng ${t===S?"nàng":"người tát"} -4). `}return `<span class="${t===S?"r":"g"}">${r}</span>`}});
+ if((t.sung||0)>=60&&roll(30)){ap(a,{sung:-4});r+=`Hoàng thượng nghe chuyện, không vui (Sủng ${a===S?"ngươi":NM(a)} -4). `}return `<span class="${t===S?"r":"g"}">${r}</span>`}});
 A("phatquy","Phạt quỳ",{c:{duc:FX.phatDuc},ok:(a,t)=>fxAuth(a,t)&&!(t.pen&&t.pen.until>wk()),o:()=>100,x:"nàng quỳ nửa ngày ngoài sân: Sức -8, đi lại chậm một tuần · nàng oán ngươi",f:(a,t)=>{
  if(typeof ducAdd==="function")ducAdd(a,FX.phatDuc,"phạt quỳ");else ap(a,{duc:FX.phatDuc});relAdd(t,a,FX.phatRel);if(t===S)apply({suc:FX.penQuy});else ap(t,{suc:FX.penQuy});penGive(t,"quy","bị phạt",a);
  if(t.schemes>0)ap(a,{danh:1});return `<span class="${t===S?"r":"g"}">${NMc(a)} phạt ${NM(t)} quỳ nửa ngày ngoài sân: Sức -${-FX.penQuy}, gối đau, đi lại chậm.</span> `}});
@@ -154,6 +154,9 @@ KIT_EXPR.onload=function(){try{if(typeof S!=="undefined"&&S&&!S.dead&&typeof ren
 (function(){if(typeof kidDie!=="function")return;const k0=kidDie;kidDie=function(k,why,mine){const r=k0.apply(this,arguments);try{if(mine&&S&&!S.dead)faceExpr(S,"khoc",3)}catch(e){}return r}})();
 (function(){for(const a of ["tat","phatquy"]){const f0=ACT[a].f;ACT[a].f=function(x,t){const r=f0.apply(this,arguments);try{if(x)faceExpr(x,"gian",1,.8)}catch(e){}return r}}})();
 
+/* stage figures: jk2b's .kfxf box copies the figure's offset box but not its transform (figures are centred with translateX(-50%)),
+   so every face layer (veil, scar, rash, slap, expression) sat half a figure to the right. Copy the transform onto the box. */
+(function(){if(typeof kitFigFx!=="function")return;const k0=kitFigFx;kitFigFx=function(){const r=k0.apply(this,arguments);try{const st=$("stage");if(st)st.querySelectorAll(".kfxf").forEach(s=>{const img=s.parentElement&&s.parentElement.querySelector("img.kfxon");if(!img)return;const cs=getComputedStyle(img);s.style.transform=cs.transform==="none"?"":cs.transform;s.style.transformOrigin=cs.transformOrigin})}catch(e){}return r}})();
 /* ---------- weekly pass, the same for everyone ---------- */
 (function(){const e0=endTurn;endTurn=function(){const w0=S&&!S.dead?wk():null;const r=e0.apply(this,arguments);try{if(S&&!S.dead&&w0!=null&&wk()!==w0){
   for(const p of [S].concat(rivals||[])){if(!p)continue;if(p.pz)pzWeek(p);if(p.slap&&p.slap.until<=wk()){p.slap=null;if(p===S)log("Dấu tay trên má ngươi đã lặn.")}if(p.pen&&p.pen.until<=wk())p.pen=null;if(p.expr&&p.expr.until<=wk())p.expr=null}
