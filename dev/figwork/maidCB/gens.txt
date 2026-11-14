@@ -335,3 +335,19 @@ C-m41-t8 w4hXh4Y7EI handsB
 C-m42-t8 9ZQhQ2sNYZ handsB
 C-m37-t8 gOIpmipSXO handsB-redo(a48 grey temples)
 C-m39-t8 xSd0B9PjfW handsB-redo(cheek mole; MOLE+=m39)
+C-m43-t8 yiCIxcEPW9 handsB
+C-m44-t8 rgecCiPxtc handsB
+C-m45-t8 cplk6Cz0eP handsB
+C-m46-t8 aF29pUAfSh handsB
+C-m47-t8 jUXTuznLD0 handsB (huadian wording: four tiny cinnabar dots)
+C-m48-t8 6AHagI6iJO handsB
+C-m49-t8 jUXTuc0LD0 handsB
+C-m50-t8 s7oMFpRl8e handsB
+C-m51-t8 rgecFw3xtc handsB
+C-m52-t8 TdSrAIpVNR handsB
+C-m27-tcold huRPd5MvqL coldB(silk)
+C-m28-tcold 4RumSWI9Aa coldB(silk)
+C-m29-tcold p8JsYurehw coldB(silk)
+C-m30-tcold 0eg12fNTfW coldB(silk)
+C-m31-tcold 3zbCOBHREY coldB(silk)
+C-m32-tcold 4RumSeE9Aa coldB(silk)

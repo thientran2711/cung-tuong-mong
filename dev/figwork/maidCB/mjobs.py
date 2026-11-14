@@ -77,7 +77,7 @@ def job(jid):
     t="cold" if tt=="tcold" else int(tt[1:])
     pal=PAL[who]; main=pal.split(" and ")[0]; neg="" if any(g in pal for g in GREEN) else ", NOT green"
     if t=="cold":
-        o=("Outfit for all four (the cold palace, plain but still neat, clean and beautiful, never poor or ragged): a NEW outfit, a simple but well-made plain robe in muted "+main.replace("soft ","").replace("pale ","")+" and pale grey-white linen, clean and neatly tied with a plain sash, hair in a tidy low bun with one plain wooden hairpin, no gold, no jewellery; she looks graceful and dignified")
+        o=("Outfit for all four (the cold palace, plain but still neat, clean and beautiful, never poor or ragged): a NEW outfit, a simple but well-made plain robe in muted "+main.replace("soft ","").replace("pale ","")+" and pale grey-white thick plain opaque silk (no embroidery, nothing sheer), clean and neatly tied with a plain sash, hair in a tidy low bun with one plain wooden hairpin, no gold, no jewellery; she looks graceful and dignified")
         ps=cold_pose(n)
     else:
         rich="" if t==1 else (", a little richer than the rank below" if t<=3 else ", clearly much richer and more splendid than the lower ranks")

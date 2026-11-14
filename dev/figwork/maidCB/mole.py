@@ -32,7 +32,7 @@ for f in args:
         outer=nb[(dd>1.8*rad+1)]
         if al.min()<250 or np.median(outer)<150 or outer.min()<np.median(outer)-50 or outer.std()>22: continue
         found.append((int(px+x0),int(py+y0),max(3,int(rad*1.4)),round(rx,2),round(ry,2),int(d[int(py),int(px)])))
-    found=[c for c in found if -0.52<=c[3]<=-0.12 and 0.0<=c[4]<=0.6 and c[5]>=22]
+    found=[c for c in found if -0.52<=abs(c[3])*-1<=-0.12 and 0.0<=c[4]<=0.6 and c[5]>=22]
     found=sorted(found,key=lambda c:-c[5])[:1]
     print(os.path.basename(f),how,int(fw),found)
     if fix and found:
