@@ -444,3 +444,84 @@ function kitRoulette(o){const done=()=>{try{o.done&&o.done()}catch(e){}};if(!o||
 @keyframes krinL{from{transform:translateX(40vw);opacity:0}}@keyframes krinP{from{transform:translateY(30vh);opacity:0}}
 @media (prefers-reduced-motion:reduce){.kroul{display:none}.dlg.krin{animation:none!important}}
 `;document.head.appendChild(st)})();
+
+/* ---------- 15. kitItem — ONE item tile for every item anywhere (chest, Tư trang, wardrobe slots K1/K2, reward chests, peddler, works,
+   reward panels). A simple frame (not the portrait frame): border + ground coloured by grade. Sizes sm (44 px) · md (64) · lg (96).
+   kitItem({src, name, grade(0..4), qty, label:[text,"ok"|"no"|"n"], on, empty, size, data:"attrs", tip}) → HTML.
+   Grades (KIT_GRADE): Thường grey-taupe · Tinh phẩm jade green · Trân phẩm sapphire blue · Tuyệt phẩm amethyst purple · Ngự tứ imperial gold-red.
+   Picture: itemArt(k) (j98, review/item-art) when present, else wd-* icons, else the item's own icon; kitItemSrc(k, fallback). ---------- */
+window.KIT_GRADE=[{n:"Thường",c:"#9a8a78",g:"#f3ede4"},{n:"Tinh phẩm",c:"#3f8f6a",g:"#e6f3ec"},{n:"Trân phẩm",c:"#3f62a8",g:"#e7edf8"},{n:"Tuyệt phẩm",c:"#7a4fa0",g:"#f1e9f7"},{n:"Ngự tứ",c:"#b8901c",g:"#fff1c8",r:"#a8261c"}];
+function kitItemSrc(k,fb){try{if(typeof itemArt==="function"){const s=itemArt(k);if(s)return s}}catch(e){}try{if(window.WD_ITEMS&&WD_ITEMS[k]&&WD_ITEMS[k].icon)return WD_ITEMS[k].icon}catch(e){}return fb||""}
+function kitItem(o){o=o||{};const g=KIT_GRADE[Math.max(0,Math.min(4,o.grade|0))]||KIT_GRADE[0];const sz=o.size||"md";
+ const lab=o.label?`<span class="kitl kitl-${o.label[1]||"n"}">${o.label[0]}</span>`:"";
+ return `<span class="kitem kitem-${sz}${o.empty?" kitem-empty":""}${o.on?" kitem-on":""}${(o.grade|0)===4?" kitem-nt":""}" style="--ig:${g.g};--ic:${g.c}${g.r?";--ir:"+g.r:""}" ${o.data||""} title="${(o.tip||o.name||"").replace(/"/g,"&quot;")}">`+
+  `<span class="kitb">${o.src&&!o.empty?`<img src="${o.src}" alt="" onerror="this.remove()">`:""}${o.qty>1?`<b class="kitq">×${o.qty}</b>`:""}${(o.grade|0)===4?`<i class="kits" aria-hidden="true">御</i>`:""}${o.on?`<i class="kiton">Đang mặc</i>`:""}</span>`+
+  `<span class="kitn">${o.name||""}</span>${o.empty?"":`<span class="kitg">${g.n}</span>`}${lab}</span>`}
+/* K1: the two worn slots beside the portrait (everyone: player, consorts, maids, ma ma, Thái hậu…); the outfit status only when known */
+function kitWearSlots(p,opts){try{if(!p||typeof wdSlots!=="function")return"";const L=wdSlots(p);const me=p===S;const lab=L[0]&&L[0].label?[L[0].label,L[0].labelKey==="ok"?"ok":L[0].labelKey==="under"?"n":"no"]:null;
+ return `<div class="kwear${opts&&opts.cls?" "+opts.cls:""}">`+L.map((x,i)=>kitItem({src:x.empty?"":kitItemSrc(x.k,x.icon),name:x.empty?x.name:x.name,grade:x.grade,empty:x.empty,size:(opts&&opts.size)||"sm",
+  data:`data-kwear="${x.slot}" data-kwho="${me?"me":(p.id!=null?p.id:"")}" role="button" tabindex="0"`,tip:`${x.slot==="tram"?"Trâm cài":"Y phục"}: ${x.name}${x.empty?"":" · "+x.gradeName}${x.giver?" · "+x.giver+" ban":""}`})).join("")+(lab?`<span class="kwearl">${kitItem({}).slice(0,0)}<span class="kitl kitl-${lab[1]}">${lab[0]}</span></span>`:"")+`</div>`}catch(e){return""}}
+function kitPersonByName(nm){nm=String(nm||"").replace(/<[^>]*>/g,"").trim();if(!nm||typeof S==="undefined"||!S)return null;if(nm===S.name)return S;
+ const pools=[typeof rivals!=="undefined"?rivals:[],[S.maid],S.staff||[],S.servants||[],S.srv||[]];for(const P of pools)for(const v of (P||[]))if(v&&v.name===nm)return v;
+ try{if(S.thO&&S.thO.name===nm)return S.thO}catch(e){}return null}
+document.addEventListener("click",ev=>{const t=ev.target.closest&&ev.target.closest("[data-kwear]");if(!t)return;ev.stopPropagation();const sl=t.dataset.kwear,who=t.dataset.kwho;
+ if(who==="me"){window.__kwdTab=sl;const b=document.querySelector('[data-tab="inv"]');if(b)b.click();return}
+ const v=(typeof rivals!=="undefined"&&rivals.find(r=>String(r.id)===who))||null;if(!v)return;const x=wdSlots(v).find(s=>s.slot===sl);if(!x)return;
+ kitModal({kind:"info",title:`${sl==="tram"?"Trâm cài":"Y phục"} của ${v.name}`,facts:[{who:v,text:x.empty?x.name:`${x.name} · ${x.gradeName}${x.giver?" · "+x.giver+" ban":""}`},
+  x.label?`Ngươi đã biết: ${x.label}.`:"Đúng phẩm hay không: chưa rõ (chưa ai nhận xét).","Hặc ăn mặc sai phẩm: thẻ người của nàng, nhóm Hại nặng."],btn:"Đã hiểu"})},true);
+/* K1 on every person card: replace j92's temporary "Trâm: … / Y phục: …" chips with the slots under the portrait */
+(function(){const k0=kitPcFix;kitPcFix=function(pc){const r=k0.apply(this,arguments);try{if(!pc||pc.querySelector(".kwear"))return r;const nm=(pc.querySelector(".pcname")||{}).textContent;const p=kitPersonByName(nm);
+  pc.querySelectorAll(".chip").forEach(c=>{if(/^(Trâm|Y phục):/.test(c.textContent.trim())||(p&&wdSlots&&/^(Đúng phẩm|Vượt phẩm|Quá giản dị|Phạm tang)$/.test(c.textContent.trim())))c.remove()});
+  if(!p)return r;const h=kitWearSlots(p,{size:"sm"});const pcp=pc.querySelector(".pcl > .pcp");if(h&&pcp)pcp.insertAdjacentHTML("afterend",h)}catch(e){console.error("K1",e)}return r}})();
+/* K2: Rương đồ — the wardrobe block of Tư trang built from kit parts: sub-tabs Trâm cài · Y phục, item grid (kitItem lg) with Mặc / Tặng /
+   Bán lén / Cầm cố act cards under the picked item, Tự chọn đồ + Chải chuốt act cards, pawned items with Chuộc lại. Data and acts: j92. */
+if(typeof wdInvHTML==="function")wdInvHTML=function(){const w=wdOf(S);const lab=wdKnownStatus(S);const self=S.wdSelf&&S.wdSelf.it===wdCur(S)?S.wdSelf:null;const ag=wdAgent(S);
+ const tab=window.__kwdTab==="y"?"y":"tram";const pick=window.__kwdPick;const ci=wdColInfo();
+ const head=lab?[`Đã biết: ${WD_LABEL[lab]}`,lab==="ok"?"ok":"no"]:self?[`Lời ${self.by}: ${WD_LABEL[self.st]} (chưa chắc)`,"n"]:["Chưa ai nhận xét bộ đang mặc","n"];
+ let h=`<div class="kwd"><div class="kpsec"><h4 class="kpst">Đang mặc</h4><div class="kwdnow">${kitWearSlots(S,{size:"md",cls:"kwbig"})}<div class="kwdnote">${kitChip(head[0],head[1])}<span class="past">Sưu tập kiếp này: ${ci.n} món${ci.title?` · «${ci.title}»`:""}${ci.next?` · mốc sau ${ci.next[0]} món (Phúc duyên +${ci.next[1]})`:""}</span></div></div>`;
+ const B0=[];for(const sl of ["tram","y"]){const e=w[sl],it=wdItem(e);if(it&&!(sl==="y"&&e.from==="base"))B0.push(pbtn(`data-wd="off" data-sl="${sl}"`,`Tháo ${sl==="tram"?"trâm":"y phục"}`,`thành: ${sl==="y"?"thay về phẩm phục được cấp":"để tóc trơn"}`,""))}
+ B0.push(pbtn(`data-wd="auto"`,"Tự chọn đồ",`${word(wdAutoOdds())} · tốn: 0 khắc · thành: thay ngay bộ ngươi cho là hợp phẩm · kèm: có thể trúng bộ sai phẩm (${wdUnknownN()} món chưa rõ phẩm)`,""));
+ B0.push(pbtn(`data-wd="groom"`,"Chải chuốt",`tốn: 1 khắc · thành: trò chải chuốt ${WD.groomSec} giây, kim dừng giữa là đúng phẩm · kèm: cao quá thành vượt phẩm, thấp quá thành quá giản dị`,whyTime(1)));
+ h+=`<div class="rbtn">${B0.join("")}</div></div>`;
+ const L=wdChest(tab),nT=wdChest("tram").length,nY=wdChest("y").length;
+ h+=`<div class="kpsec"><h4 class="kpst">Rương đồ</h4><div class="ksub kwdtabs"><button class="ksubb${tab==="tram"?" on":""}" data-kwdtab="tram">Trâm cài ${nT}</button><button class="ksubb${tab==="y"?" on":""}" data-kwdtab="y">Y phục ${nY}</button></div>`;
+ if(!L.length)h+=`<p class="past">Chưa có ${tab==="tram"?"trâm cài":"y phục"} nào trong rương.</p>`;
+ else{h+=`<div class="kwdgrid">`+L.map(x=>kitItem({src:kitItemSrc(x.k,x.icon),name:x.name,grade:x.grade,size:"lg",on:false,label:x.knownP?["đồ phẩm "+x.knownP,"n"]:null,data:`data-kwdpick="${x.ix}" role="button" tabindex="0"`,tip:`${x.name} · ${x.gradeName} · ${x.fx}`})).join("")+`</div>`;
+  const x=L.find(y=>y.ix===pick)||null;if(x){const e=S.inv[x.ix];const B=[];const ntWhy=x.nt?"đồ ngự tứ: bán, cầm là bất kính":"";const agWhy=ag?"":"chưa có ma ma hay thái giám tin cẩn";
+   const lo=Math.round(x.price*WD.sellLo/100),hi=Math.round(x.price*WD.sellHi/100),pct=ag?wdSellPct(S,ag):0;
+   B.push(pbtn(`data-wd="wear" data-ix="${x.ix}"`,"Mặc",`tốn: 1 khắc · thành: thay vào ô ${x.slot==="tram"?"Trâm cài":"Y phục"}`,whyTime(1)));
+   B.push(pbtn(`data-it="gift" data-ix="${x.ix}"`,"Tặng",`tốn: 2 khắc · thành: chọn người nhận`,x.nt?"đồ ngự tứ: không được đem tặng":whyTime(2)));
+   B.push(pbtn(`data-wd="sell" data-ix="${x.ix}"`,"Bán lén",`${word(100-wdLeak(S,ag))} · tốn: 1 khắc · thành: Bạc +${ag?Math.round(x.price*pct/100):lo+"–"+hi} · kèm: lộ ra thì mang tiếng túng thiếu, Danh -${WD.sellDanh}`,ntWhy||agWhy||whyTime(1)));
+   B.push(pbtn(`data-wd="pawn" data-ix="${x.ix}"`,"Cầm cố",`${word(100-wdLeak(S,ag,true))} · tốn: 1 khắc · thành: Bạc +${Math.round(x.price*WD.pawnPct/100)}, chuộc lại ${Math.round(x.price*WD.redeemPct/100)} bạc trong ${WD.pawnWeeks} tuần · kèm: lộ ra thì Danh -${WD.sellDanh}`,ntWhy||agWhy||whyTime(1)));
+   h+=`<div class="kwdsel">${kitItem({src:kitItemSrc(x.k,x.icon),name:x.name,grade:x.grade,size:"md"})}<div>${kitFacts([`${x.slot==="tram"?"Trâm cài":"Y phục"} · ${x.gradeName} · ${x.fx}`,`${wdSrcTxt(e)}`,x.knownP?`Đồ phẩm ${x.knownP}`:"Chưa rõ phẩm"])}</div></div><div class="rbtn">${B.join("")}</div>`}
+  else h+=`<p class="past">Chạm một món để mặc, tặng, bán lén hay cầm cố.</p>`}
+ h+=`</div>`;const PW=S.wdPawn||[];if(PW.length){h+=`<div class="kpsec"><h4 class="kpst">Đang cầm cố (${PW.length})</h4><div class="kwdgrid">`+PW.map((P,i)=>{const it=wdItem(P.e);return `<div class="kwdpw">${kitItem({src:kitItemSrc(it.k,it.icon),name:it.n,grade:it.g,size:"md",label:[`còn ${Math.max(0,P.due-wk())} tuần`,"no"]})}${pbtn(`data-wd="redeem" data-i="${i}"`,"Chuộc lại",`tốn: 1 khắc, Bạc -${P.back} · thành: món đồ về lại rương`,S.bac<P.back?`thiếu bạc (cần ${P.back})`:whyTime(1))}</div>`}).join("")+`</div></div>`}
+ return h+`</div>`};
+document.addEventListener("click",ev=>{const a=ev.target.closest&&ev.target.closest("[data-kwdtab],[data-kwdpick]");if(!a)return;ev.stopPropagation();
+ if(a.dataset.kwdtab){window.__kwdTab=a.dataset.kwdtab;window.__kwdPick=null}else window.__kwdPick=+a.dataset.kwdpick;try{render()}catch(e){}},true);
+(function(){const st=document.createElement("style");st.id="k2b-item";st.textContent=`
+.kitem{display:inline-flex;flex-direction:column;align-items:center;gap:2px;vertical-align:top;width:var(--isz);cursor:default;text-align:center}
+.kitem[role=button]{cursor:pointer}
+.kitem-sm{--isz:52px}.kitem-md{--isz:72px}.kitem-lg{--isz:104px}
+.kitem>.kitb{position:relative;width:var(--isz);aspect-ratio:1;border-radius:8px;background:radial-gradient(circle at 50% 40%,#fff 0,var(--ig) 70%);border:2px solid var(--ic);box-shadow:inset 0 0 0 2px #fff8,0 1px 3px #5a3a2033;display:grid;place-items:center;overflow:hidden}
+.kitem.kitem-nt>.kitb{border-color:var(--ic);box-shadow:inset 0 0 0 2px var(--ir),inset 0 0 0 4px #fff6,0 0 8px #f0d070aa}
+.kitem>.kitb>img{width:86%;height:86%;object-fit:contain;filter:drop-shadow(0 1px 2px #0003)}
+.kitem.kitem-empty>.kitb{background:repeating-linear-gradient(45deg,#f6efe4 0 6px,#efe6d7 6px 12px);border-style:dashed;border-color:#c8b89c}
+.kitem .kitq{position:absolute;right:3px;bottom:2px;font-size:.66rem;background:#fffaf0e6;border-radius:6px;padding:0 4px;color:var(--ink)}
+.kitem .kits{position:absolute;left:3px;top:2px;font-style:normal;font-size:.6rem;color:#fff;background:var(--ir);border-radius:3px;padding:0 3px;font-family:var(--display)}
+.kitem .kiton{position:absolute;left:0;right:0;bottom:0;font-style:normal;font-size:.6rem;color:#fff;background:#2d7a52d9}
+.kitem.kitem-on>.kitb{outline:2px solid #2d7a52;outline-offset:1px}
+.kitem>.kitn{font-size:.7rem;line-height:1.15;color:var(--ink);font-weight:600;overflow-wrap:anywhere}
+.kitem-lg>.kitn{font-size:.78rem}.kitem-sm>.kitn{font-size:.62rem}
+.kitem>.kitg{font-size:.6rem;color:var(--ic);font-weight:700;text-transform:uppercase;letter-spacing:.02em}
+.kitl{font-size:.62rem;border-radius:6px;padding:0 5px;border:1px solid}.kitl-ok{color:#2d7a52;border-color:#2d7a5266;background:#eaf5ee}.kitl-no{color:#c23b22;border-color:#c23b2266;background:#fbecea}.kitl-n{color:#8a7350;border-color:#d2b07188;background:#fbf4e6}
+.kwear{display:flex;gap:6px;justify-content:center;align-items:flex-start;flex-wrap:wrap;margin:2px 0 4px}
+.pc .pcl>.kwear{float:left;clear:left;width:var(--kpcw);margin:0 12px 6px 0}
+@media (min-width:600px){.pc[data-k2] .pcl>.kwear{float:none;width:auto;margin:0 0 6px}}
+.kwear .kwearl{flex-basis:100%;text-align:center}
+.kwd .kwdnow{display:flex;gap:12px;align-items:center;flex-wrap:wrap}.kwd .kwdnote{display:flex;flex-direction:column;gap:4px;min-width:0}
+.kwd .kwdgrid{display:flex;flex-wrap:wrap;gap:10px;margin:8px 0}
+.kwd .kwdsel{display:flex;gap:10px;align-items:flex-start;margin:6px 0;padding:8px;border:1px solid var(--k-hair);border-radius:8px;background:#fffdf8}
+.kwd .kwdpw{display:flex;flex-direction:column;gap:4px;align-items:center;max-width:260px}
+.kwd .kpsec{margin:0 0 10px}
+`;document.head.appendChild(st)})();

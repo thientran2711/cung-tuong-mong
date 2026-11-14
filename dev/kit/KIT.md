@@ -579,3 +579,18 @@ rarity chip from j69 weights: Rất hiếm / Hiếm / Thường gặp); a gold l
 pre-rolled origin (j52 seed + j69 weights; the wheel never decides), the tile flashes gold, flies to the card's art frame while the card slides in
 (landscape from the right, portrait from below). ≈4.5 s, tap skips, prefers-reduced-motion = card at once. Hooked on `nlCard` (start() → nlBegin →
 nlCard, used by "Bắt đầu kiếp mới" and the rebirth after death), once per rolled life. Test hook: `window.__kroulHold` / `__kroulGo()`.
+### 26.13 kitItem — ONE item tile (KIT READY)
+`kitItem({src, name, grade:0..4, qty, label:[text,"ok"|"no"|"n"], on, empty, size:"sm"|"md"|"lg", data, tip})` → `.kitem` (52 / 72 / 104 px).
+Simple frame (not the portrait frame): square box, 2 px border + radial ground in the grade colour (`KIT_GRADE`): Thường `#9a8a78` · Tinh phẩm
+`#3f8f6a` · Trân phẩm `#3f62a8` · Tuyệt phẩm `#7a4fa0` · Ngự tứ `#b8901c` gold with a red inner ring and a small red "御" seal. Under the box:
+name (wraps, never cut), grade word, optional status chip; `qty>1` → "×N" badge; `on` → "Đang mặc" band; `empty` → dashed empty slot.
+Picture: `kitItemSrc(k, fallback)` = `itemArt(k)` (j98, review/item-art) → `WD_ITEMS[k].icon` (wd-*) → fallback. Use it for every item anywhere:
+chest, Tư trang, wardrobe slots, reward chests, peddler, works, reward panels. Nobody draws another item box.
+### 26.14 WARDROBE K1 + K2 (review/wardrobe j92)
+- K1 `kitWearSlots(p,{size})`: two kitItem tiles (Trâm cài · Y phục, empty = "Chưa cài" / "Thường phục") right under the portrait on EVERY person
+  card (player, consorts, maids, ma ma, Thái hậu…), and on Tư trang. The outfit status chip (Đúng phẩm / Vượt phẩm / Quá giản dị / Phạm tang) shows
+  only when the player knows it (`wdSlots().label`). Tap: her own → Tư trang on that slot; someone else → item panel (name, grade, giver, status if
+  known, where the "Hặc ăn mặc sai phẩm" act is). Replaces j92's temporary "Trâm: … / Y phục: …" chips.
+- K2 Rương đồ (Tư trang, `wdInvHTML` rebuilt with kit parts): "Đang mặc" (K1 md + status chip + collection line) with act cards Tháo / Tự chọn đồ /
+  Chải chuốt; "Rương đồ" with sub-tabs Trâm cài N · Y phục N (`.ksub`), a grid of kitItem lg; tap an item → its facts + act cards Mặc / Tặng /
+  Bán lén / Cầm cố (Ngự tứ: disabled with the reason); "Đang cầm cố" tiles with Chuộc lại. All acts are j92's (`data-wd`), priced as act cards.
