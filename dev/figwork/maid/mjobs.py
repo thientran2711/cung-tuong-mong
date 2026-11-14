@@ -6,7 +6,7 @@
 import json,sys,os,re
 H=os.path.dirname(os.path.abspath(__file__))
 FW="/home/user/cung-tuong-mong/dev/figwork"
-WT="/tmp/claude-0/-home-user-cung-tuong-mong/84f333ce-ebd1-5e4a-9b0c-43035da11b67/scratchpad/wt-maid2"
+WT="/tmp/claude-0/-home-user-cung-tuong-mong/ed00be27-1e8d-5500-9afe-ce233b508a61/scratchpad/wt-maidA"
 STY=["8aNsy0CIrU","3zbtQNvREY","YMLuxraWeC","4RuXEXL9Aa"]
 IDF=json.load(open(FW+"/idfix.json")); FEAT=json.load(open(FW+"/consorts_feat.json"))
 SERV=json.load(open(WT+"/img/FIGURES-servants.json"))
@@ -15,7 +15,7 @@ PRE=("Semi-realistic painterly guofeng portrait style, near-3D realistic renderi
 LINE=(" Age lineup: the SAME person drawn four times side by side in one row, evenly spaced with clear empty space between the figures, each complete from top of head to feet, realistic adult proportions (head about one seventh of body height, long legs, never big-headed or chibi).")
 BEAU="a very beautiful woman: luminous porcelain skin, soft rosy blush, large soft bright eyes, delicate small nose, small rosy lips, gentle faint smile"
 IDK=(" From the identity reference lineup keep ONLY her face, facial features and hair colour; do NOT copy the reference's ages, poses, outfit, colours, hair ornaments or accessories; use the NEW ages, the NEW outfit and the NEW poses below.")
-AGES=(" Left to right: about 19, a fresh youthful young woman; about 24, still young and lively, youthful face, no sign of ageing; about 32, a young mature woman in her prime, smooth skin, NO grey or silver hair, NO wrinkles; about 48, a graceful elegant lady, only a few faint silver strands at the temples at most, minimal faint lines, still clearly beautiful, not elderly.")
+AGES=(" Left to right: about 19, a fresh youthful young woman; about 24, still young and lively, youthful face, no sign of ageing; about 32, a young mature woman in her prime, smooth skin, NO grey or silver hair, NO wrinkles; about 48, a graceful elegant lady with DARK hair, as dark as at 32 (at most two or three single thin silver strands, barely visible; NOT grey temples, NOT grey streaks, NOT salt-and-pepper, NOT grey-haired, even if the identity reference shows grey or white hair), minimal faint lines, still clearly beautiful, not elderly. All four figures have the same solid dark black-brown hair colour.")
 END=(" Eyes soft, warm and round-almond, never slanted or upturned, never teary; serene gentle face, faint smile at most, no open-mouth laugh. Everyone beautiful at every age. No text, no labels.")
 CALM=(" All four stand calmly and gracefully (NO dancing, NO walking stride, NO swirling or flying fabric, robes hang naturally), each with a slight body turn and a different gentle hand position; each figure complete head to feet inside the frame, clear empty space between the four figures.")
 MRANK={0:"the lowest palace maid rank (cung nu tho su), yet neat, pretty and never poor",

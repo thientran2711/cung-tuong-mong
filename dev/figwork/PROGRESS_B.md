@@ -93,3 +93,15 @@
   the wait output in the transcript) → `python3 mproc.py bg.txt JIDs` (~3 min; curl now retries) →
   `TH=150 python3 msheet.py ../sheets/B_bN.jpg consort t1,tm0,tm1,tm2,tm3,tm4 cXX cYY` → `bash pubm.sh "msg" ../sheets/B_bN.jpg`.
 - Work copy: scratchpad/maidB (copy of dev/figwork/maidB); worktree scratchpad/wt-maidB (branch maidB → pushes review/maid-art-b).
+
+## Sửa sau kiểm duyệt FAIL (2026-11-14, thợ C-B) — SẴN SÀNG KIỂM LẠI
+- Lỗi 1 (640 ảnh cung nữ phần A): 640 tệp img/*maid-m*-tm* trả về ĐÚNG Y như origin/review/maid-art (d97e28e) — `git diff origin/review/maid-art -- <640 tệp>` rỗng;
+  dev/figwork/maid/ và dev/figwork/PROGRESS.md cũng y như review/maid-art; img/FIGURES-servants.json trả về như origin/main (nhánh B không đụng bản ghi cung nữ).
+  Nhánh này giờ chỉ thay đổi ảnh consort-cNN-tmK + FIGURES.json + công cụ/sheet phần B.
+- Lỗi 2 (nốt ruồi): quét tự động cả 640 fig consort-*-tm* (dev/figwork/maidB/mole_scan.py: đốm tối nhỏ tròn trên má hai bên + trán, lọc mũi/miệng/mép mặt),
+  duyệt bằng mắt từng ứng viên (tiles.py) rồi vá tại chỗ (spotfix.py, đĩa màu da trung vị) 20 fig: c07-tm4-a18 (trán), c07-tm4-a26/a36, c20-tm2-a26,
+  c22-tm0-a18/a26, c22-tm1-a26, c23-tm4-a36, c24-tm0-a36, c24-tm4-a26, c27-tm1-a36, c28-tm0-a26, c28-tm1-a26, c28-tm2-a26/a36/a51, c28-tm3-a26/a51,
+  c28-tm4-a18/a26; soi lại bằng lưới phóng to: sạch. Cắt lại 20 por 384x506 (porcrop). cutcheck < 1.2.
+- Đã gộp origin/main mới.
+- Ghi chú a51 (không chặn theo bản kiểm): soát 160 por a51 — c01–c16 phần lớn ra ~45–50; nhóm trông trẻ (~32–38): c17, c19, c23, c25, c27, c31, c32 (gần như mọi bậc),
+  c18-tm0/tm1/tm3, c20-tm0/tm1/tm4, c04-tm2, c11-tm4, c26-tm0/tm1. Nếu cần, làm một lượt sửa gpt-2-6 (ref = gen cuối, chỉ thêm nếp nhẹ cho người ngoài cùng phải).

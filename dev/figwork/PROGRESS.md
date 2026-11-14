@@ -97,3 +97,76 @@
   `python3 vs.py JID...` prints a compact line per job (style ref | colour/flower | 4 poses) — the rest of the prompt is the fixed template from
   `python3 mjobs.py JID`. `bash addbg.sh "jid..." "bg..."` appends "jid gen bg" lines to bg.txt (gen looked up in gens.txt, same order).
   mproc.py takes ~2 min per batch (urls.py scans transcripts): run it in the background.
+
+### STATUS (maid-art part A, session 6 — 2026-11-14, cleanup pass)
+- OWNER RULES 11/14: no moles; maids (m0–m4) never wear a huadian; the ~48 figure has hair as dark as at 32 (2–3 silver hairs at most).
+- Checked: one head strip per identity (m2 tier, all 52) for moles/huadian; a51 heads of m21–m44 (all tiers) for grey temples.
+  Moles found: m13, m26, m39 (all 4 tiers). No huadian anywhere in part A.
+  Grey temples still found: m22-m2, m25-m2, m27-m0, m27-m4, m31-m3, m33-m2, m37-m0, m42-m2, m43-m2.
+- Fixed 21 lineups (84 figures) with ONE gpt-2-6 edit each (ref = current gen, 2:1, 4k, high): hair -> solid dark, paint out moles,
+  remove any forehead mark, "no other changes". gpt-2-6 does NOT reliably remove moles, so after bg removal every edited lineup goes
+  through mole.py: detects small dark round dots on the face skin of the raw gen (haar face box, nostril/mouth zones excluded,
+  PK=60 TD=30) and inpaints those spots (cv2 TELEA) in the cut-out + gen copy before mproc. Spots logged in scratchpad spots_fixed.json.
+  One-shot pipeline: maid/proc.sh A LIST (mole fix -> ledgers -> mproc -> afix -> porcrop). New gens/bg ids are the last entries of maid/gens.txt / bg.txt.
+- Follow-up: the first mole.py run accepted blobs up to 220 px (at 3840) and smeared eyes/chins on m13-m0, m13-m4, m26-m4, m22-m2,
+  m37-m0; those 5 lineups were re-cut from fresh downloads with the area cap 40 (inpaint now done on the full painting). Leftover
+  forehead marks fixed by hand with maid/spot2.py (numbered dots on a 4x face crop -> inpaint in the 900px fig -> porcrop):
+  m26-m4-a36, m26-m4-a51 (R=6), m39-m3-a18.
+- CUTOUT: cutcheck flagged 86 figures >= 8 (120 >= 3, 335 >= 1). Cause = the cutter left pale/sheer skirts half-transparent (green
+  shows through). Magnific re-matte of a single-figure crop (rematte.py idea) made it WORSE (score 44 -> 124), so the fix is local:
+  maid/afix.py makes every pixel with alpha>40 that lies >=3px inside the silhouette opaque (rim kept anti-aliased, true gaps untouched).
+  Applied to all 335 figures scoring >=1 + all re-processed ones. After: max cutcheck score 2.2, 0 figures >= 3.
+- PORTRAITS: every por-maid-mNN-tmK-aXX (832) re-cut with dev/figwork/porcrop.py -> 384x506 face-centred (was 256x256).
+  (m1 maid figures/portraits are unchanged on this branch = identical to main, which already has the 384x506 crops.)
+
+### STATUS (maid-art part A, end of session 5)
+- DONE part A: ALL m01–m52 x m0/m2/m3/m4 (208 lineups). Session 5 added m45–m52 (32 lineups), sheets dev/figwork/sheets/A_b22.jpg (m45,m46),
+  A_b23 (m47,m48), A_b24 (m49,m50), A_b25 (m51,m52). mjobs AGES now ends "All four figures have the same solid dark black-brown hair
+  colour." (from m49 on). New gens whose a51 still came out grey were fixed at once with the hair-only edit: m48-m2/m3/m4, m49-m0/m2.
+- AGE-48 HAIR FIXES DONE (hair-only edit, exact prompt in the session-4 block; check = hz.py head crops + ck.py layout diff vs the
+  original gen, values ~1–3.5 = unchanged composition): m01–m16 and m18–m20 all four tiers (m16-m2 left as is: brown, no grey),
+  m09-m3, m07-m4, m25-m0, m25-m3, m30-m0/m2/m3, m32-m2, m32-m3. Stubborn ones needed a 2nd/3rd pass (m48-m2, m14-m3, m16-m0, m16-m3)
+  with the stronger prompt: "...Only recolour the hair of the RIGHTMOST oldest lady: her hair at the temples and the sides of her
+  head is still grey-silver; paint those grey locks and the whole hairdo solid DARK black-brown, exactly the same dark colour as the
+  hair of the leftmost young woman, so that no grey or silver hair remains at all. Also make sure the other three figures have the
+  same dark hair. No other changes. No text." m14-m3 final edit also asked for "richer, deeper dark slate-blue" robes (3rd edit had
+  faded them). Sheets A_fix48b (m01–m04), A_fix48c (m05–m08), A_fix48d (m09–m12), A_fix48e (m13–m16), A_fix48f (m18–m20),
+  A_fix48g (m25, m30, m32). m29-m0 checked: light brown, left as is.
+- Known nit (old, not touched): m01-m4 cap is a tall black cap without visible wings.
+- No cutcheck.py exists on main (checked), so none was run; bg removal + por crops redone by mproc for every edited lineup.
+- NEXT: part A is complete. A final zoom.py sweep of m21–m44 a51 for leftover grey temples would be the only optional follow-up.
+- Session-5 tools: ck.py old:new... (mean abs layout diff between original gen and its edit). Credits this session: 123 gens x 270
+  + 116 bg x 3 = ~33.6k.
+
+### STATUS (maid-art part A, end of session 4)
+- DONE part A: m01–m44 x m0/m2/m3/m4 (176 lineups). Session 4 added m33–m44 (48 lineups), sheets dev/figwork/sheets/A_b16.jpg (m33,m34)
+  .. A_b21.jpg (m43,m44). Checked: ~1:7, faces match m1, m0 embroidered + silver tram, m3 dark non-red, m4 red + crane + winged cap.
+- AGE-48 HAIR (binding: dark, at most 2-3 thin silver strands): mjobs AGES now says "with DARK hair, as dark as at 32 ... NOT grey temples,
+  NOT grey streaks ... even if the identity reference shows grey or white hair" (from A-m37 on) -> new lineups come out dark.
+  FIX METHOD for an existing grey lineup = hair-only edit (gpt-2-6, 2:1, 4k, quality high, ONE image ref = that lineup's gen, no style ref):
+  "Edit this image. Keep everything exactly the same (all four figures, faces, outfits, poses, props, ornaments, background,
+  composition). Only recolour the hair of every figure, especially the RIGHTMOST oldest lady: the whole hairdo, including the temples,
+  the sides and the bun, must be solid DARK black-brown, exactly the same dark colour as the hair of the leftmost young woman. No grey,
+  no silver, no white streaks anywhere in the hair. No other changes. No text." -> append "jid newgen" to gens.txt, remove bg, addbg, mproc.
+  Check with `python3 hz.py out.jpg GEN...` (full-res head crops of the 4 figures from the raw gen) before bg removal.
+- Fixed this session (edit method): m34-m2/m3, m35-m0/m3, m36-m0/m2/m3, m17 (all 4), m21 (all 4), m22 (all 4), m23 (all 4), m24 (all 4),
+  m28-m3, m28-m4, m31-m0, m31-m2 -> sheet A_fix48a.jpg.
+- STILL GREY at a51 (found with zoom.py, to fix with the edit method): m01–m16, m18, m19, m20 (all four tiers each, ~76 lineups),
+  plus lighter grey temples at m30-m0/m2/m3 and m32-m2 (maybe m25-m3, m29-m0).
+- NEXT (exact): part A m45–m52 (32 lineups; next batch A-m45-m0 A-m45-m2 A-m45-m3 A-m45-m4 A-m46-m0 ... -> sheet A_b22.jpg), then the
+  grey fixes above (sheet A_fix48b.jpg ...).
+- Session-4 tool notes: same worktree scratchpad/wt-maidA, work copy scratchpad/maidA. view.py (W=820 python3 view.py out.jpg GEN..)
+  stacks gen previews for checking; hz.py crops heads at full res. One mproc at a time.
+
+### STATUS (maid-art part A, end of session 3)
+- DONE part A: m01–m32 x m0/m2/m3/m4 (128 lineups, 512 figures). Session 3 added m21–m32 (48 lineups + 1 redo of m22-m3 = 49 gens,
+  13 230 credits gen + 147 bg), sheets dev/figwork/sheets/A_b10.jpg (m21,m22) .. A_b15.jpg (m31,m32). Checked: ~1:7, faces match m1,
+  no green drift, m0 embroidered silk + silver trâm, m3 dark non-red, m4 red + crane square + winged cap.
+- AGE-48 HAIR: from A-m25 on (and the m22-m3 redo) mjobs AGES says "hair still mostly dark ... (NOT grey-haired, NOT salt-and-pepper)";
+  it clearly reduces grey. m21–m24 (except m22-m3) and the older m01–m20 a51 figures still show salt-and-pepper hair where the m1 lineup
+  is grey (e.g. m17, m22, m23, m24, m28-m3) — optional redraw if the owner wants it subtler. Identities whose m1 a51 is grey still lean grey.
+- NEXT (exact): part A m33–m52 (80 lineups; next batch A-m33-m0 A-m33-m2 A-m33-m3 A-m33-m4 A-m34-m0 ... -> sheet A_b16.jpg).
+  Part B (consort faces as maids) is done by another worker on a separate branch; then part C.
+- Session-3 tool notes: work copy scratchpad/maidA, worktree scratchpad/wt-maidA (WT in mjobs/mproc/msheet/pubm). mproc curl now retries
+  (connection resets crashed it before writing manifests). Run only ONE mproc at a time (shared RAM is tight; OOM kills happened).
+  zoom.py out.jpg mNN.. = a51 head crops per tier (hair check).
