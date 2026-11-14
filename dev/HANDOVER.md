@@ -65,3 +65,9 @@ Test sizes from now on (CSS px, Playwright viewport + deviceScaleFactor):
 - Fold cover: 412x1058 @2
 - 390x844 @3 (phone), 1024x768 @2 (landscape tablet)
 Owner previews: send single readable screenshots (one image per file), not tiny grids.
+
+## PRIORITY DEVICES (owner, binding — 2026-11-14, supersedes the list above)
+The owner plays mostly on TWO devices; fix and test these FIRST, others after:
+1. Samsung Galaxy Z Fold, PORTRAIT: 755x1000 @2
+2. iPad, LANDSCAPE: 1180x820 @2 (iPad Air/10th gen) and 1366x1024 @2 (iPad Pro 12.9)
+Secondary: Fold cover 412x1058 @2, phone 390x844 @3, 1024x768 @2.
