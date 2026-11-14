@@ -37,3 +37,7 @@ C-m25-t1 p8Jj7D1ehw
 C-m26-t1 aF2PZaPfSh
 C-m13-t1 Bh4gOh0oQR revert-to-original(mole edit failed; moles fixed locally)
 C-m22-t1 rgeYdb3xtc retry-503
+C-m01-t1 iGqvx6T3uK calm
+C-m02-t1 N2Fm1NC6D9 calm
+C-m03-t1 MBwrNedDCm calm
+C-m04-t1 w4heFPN7EI calm

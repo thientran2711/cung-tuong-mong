@@ -24,10 +24,7 @@ PROP=["a round silk fan","a folding fan","a sprig of plum blossoms","a thread-bo
 "a thread-bound book","a single peony","a small embroidered silk ball","a small rolled poem scroll","a jade flute","a small lotus flower","a painted paper fan",
 "a string of prayer beads","a small porcelain vase with a flower","a thread-bound songbook","a rolled poem scroll","a small embroidered pouch","a sprig of orchids",
 "a round fan painted with a moon","a branch of peach blossoms","a small painted scroll","a jade hair comb","a small bird cage","a white magnolia","a sprig of wisteria"]
-HUA=["a small four-petal cross flower","a small ruyi-head scroll","a tiny goldfish","three tiny dots in a vertical line","a tiny pomegranate flower","a tiny upright narrow jade-tablet shape (a small slim rounded vertical bar)",
-"a tiny dragonfly","a tiny magnolia bud","a tiny calabash gourd","a tiny hibiscus flower","four tiny dots in a rhombus","a tiny star of five dots","a tiny lily",
-"a small single spiral coil","a tiny lily-of-the-valley bell","a tiny endless knot","a tiny fern sprig","a tiny wisteria cluster of three hanging dots","a tiny sun disc with short rays",
-"two tiny dots side by side","a tiny crane in flight","a small hexagon (tortoise-shell)","a tiny maple leaf","a tiny pine-needle cluster","a tiny morning-glory bloom","a small half-moon fan shape"]
+HUA=['a small four-petal cross flower', 'a tiny bat (auspicious fu bat)', 'a tiny longevity peach', 'three tiny dots in a vertical line', 'two tiny cherries on one stem', 'a tiny upright narrow jade-tablet shape (a small slim rounded vertical bar)', 'a tiny jade-rabbit silhouette', 'a tiny round coin with a square hole', 'a tiny vase silhouette', 'a tiny daisy of eight thin petals', 'a tiny arc of five dots (a gentle upward curve)', 'a tiny star of five dots', 'a tiny lily', 'a small single spiral coil', 'a tiny mountain of three small peaks', 'a tiny square window-lattice', 'a tiny fern sprig', 'a tiny inverted triangle', 'a tiny sun disc with short rays', 'two tiny dots side by side', 'a tiny crane in flight', 'a small hexagon (tortoise-shell)', 'a tiny persimmon', 'a tiny jade bi disc (a ring with a hole)', 'a tiny eight-point star anise', 'a small half-moon fan shape']
 COL=["soft rose","pale coral","cinnabar red","soft pink","rose red","vermilion","peach pink","soft coral","rose pink","coral red","soft orange-red","pale pink","rose red",
      "soft rose","pale coral","cinnabar red","soft sage green (cuidian)","vermilion","peach pink","soft coral","rose pink","coral red","soft orange-red","pale pink","rose red","cinnabar red"]
 MOLE={"m13","m26"}   # their maid lineup shows a cheek mole: tell the model to drop it (owner: no moles)
@@ -41,8 +38,18 @@ LAD={1:"a fine silk robe with delicate embroidered {mot} at the collar, sleeves 
 6:"a HEAVY gold brocade robe densely embroidered in gold with phoenixes and {mot}, an embroidered pearl-edged cape/stole over the shoulders, gold-and-jade necklace, earrings and bracelets; tall chignon crowned by a BIG ornate gold headdress with pearls, gold flowers and many gold tassels",
 7:"a near-empress ceremonial robe heavily embroidered with golden phoenixes and clouds, with crimson and bright gold accents, a layered gold collar, strands of pearls across the chest, a long flowing train behind her; grand chignon with a SMALL gold phoenix crown with pearl strands and kingfisher-blue accents",
 8:"the Empress's imperial phoenix ceremonial robe, large golden phoenixes and clouds embroidered all over with bright gold and red, a jewelled layered gold collar, pearl strands, a VERY long trailing train; a FULL gold phoenix crown with pearls and kingfisher-blue inlay and pearl strands hanging at the sides; the most splendid outfit of all"}
-exec(open(H+"/poses.py").read())
+exec(open(H+"/lad2.py").read()); exec(open(H+"/poses2.py").read())   # CALM pose system (owner reversal): G19/G24/G32/G48 + STILL from consort-art spec5
+STILL=STILL.replace("NO swirling and NO flying fabric; ","NO swirling and NO flying fabric; all fabrics opaque silk, NO sheer see-through gauze, NO floating stole; ")
+def pose_for(i,t,prop):
+    g=i; a=G19[(g+t)%6]; b=G24[(g*2+t)%5]; c=G32[(g*3+t)%8]; d=G48[(g+2*t)%6]
+    ps=[x.format(prop=prop) for x in (a,b,c,d)]
+    if t==8 and g%3==0: ps[2]=ps[3]="standing in stately stillness, hands hidden in her long wide sleeves before her, the long train trailing straight behind her"
+    suf=", with regal stately grace" if t>=7 else (", stately poised posture" if t>=5 else "")
+    ps=[p+suf if "stately stillness" not in p else p for p in ps]
+    return ("Poses (NEW, NOT the reference's poses; calm standing poses; a different hand gesture for each figure, same person), left to right: "
+            f"about 19, youthful, a gently lively gesture: {ps[0]}; about 24, confident and graceful: {ps[1]}; about 32, poised, in her prime: {ps[2]}; about 48, serene and calm: {ps[3]}; "+STILL)
 def outfit(t,who,i):
+    if t>=4: return " "+ca_outfit(t,PAL[who],MOT[i%13])+"."
     pal=PAL[who]; main=pal.split(" and ")[0]; neg="" if any(g in pal for g in GREEN) else ", NOT green"
     rich=" a little richer than the rank below" if t<=3 else " clearly much richer and more splendid than the lower ranks"
     return (f" Outfit for all four ({RANK[t]},{rich}): a NEW outfit, {LAD[t].format(mot=MOT[i%13])}; her signature colour family {pal} stays the MAIN robe colour ({main}{neg}).")
@@ -50,7 +57,7 @@ def hua(t,i):
     c=COL[i]
     m={1:f"painted in {c}, simple fine lines",2:f"painted in {c}, simple fine lines",3:f"painted in {c}, finer detailed lines",4:f"painted in {c}, finer detailed lines",
        5:f"painted in {c} with a fine thin gold outline",6:f"painted in {c} with a fine thin gold outline",7:"in gold leaf and cinnabar red with one tiny pearl, the finest detail",8:"in gold leaf and cinnabar red with one tiny pearl, the finest detail"}[t]
-    return (f" Forehead: a small, delicate, refined huadian forehead ornament between the brows just above the bridge of the nose, elegant, not large (about the size of a fingertip): her signature motif {HUA[i]}, {m}; the SAME small size on all four figures and at every rank; it never covers the forehead and never spreads to the brows or cheeks.")
+    return (f" Forehead: a small, delicate, refined huadian forehead ornament between the brows just above the bridge of the nose, elegant, not large (about the size of a fingertip and clearly visible, like the small red flower between the brows in a classic portrait): her signature motif {HUA[i]}, {m}; the SAME small size on all four figures and at every rank; it never covers the forehead and never spreads to the brows or cheeks.")
 def job(jid):
     _,who,tt=jid.split("-"); i=int(who[1:])-1; prop=PROP[i%len(PROP)]
     desc=f" A former palace maid now raised to imperial consort, {BEAU}."
@@ -58,10 +65,10 @@ def job(jid):
         o=(f" Outfit for all four (the cold palace, plain but still neat, clean and beautiful, never poor or ragged): a simple but well-made plain robe in muted {PAL[who].split(' and ')[0]} and pale grey, clean and neatly tied with a plain sash, hair in a tidy low bun with one plain wooden hairpin, no gold, no jewellery; she looks graceful and dignified.")
         pl=["holding a plain wooden comb","hands folded quietly in her sleeves","holding a small clay teacup","holding a simple folded letter","hands lightly together","holding a plain round fan"]
         p=[pl[(i+j*2)%6] for j in range(4)]
-        po=(" Poses (NEW, quiet, standing), left to right: about 19: "+p[0]+", body slightly turned to the left; about 24: "+p[1]+", three-quarter view; about 32: "+p[2]+", slight turn to the right; about 48: "+p[3]+", gently frontal. All four stand calmly and gracefully, a slight breeze in the sleeves; each figure complete head to feet inside the frame, clear empty space between the four figures.")
+        po=(" Poses (NEW, quiet, standing), left to right: about 19: "+p[0]+", body slightly turned to the left; about 24: "+p[1]+", three-quarter view; about 32: "+p[2]+", slight turn to the right; about 48: "+p[3]+", gently frontal. "+STILL+".")
         f=" Forehead: bare, NO huadian."
     else:
-        t=int(tt[1:]); o=outfit(t,who,i); f=hua(t,i); po=" "+pose_for(FAM[i%6],i,t,prop,i)+"."
+        t=int(tt[1:]); o=outfit(t,who,i); f=hua(t,i); po=" "+pose_for(i,t,prop)+"."
     idk=IDK
     if who in MOLE: idk=idk.replace("keep ONLY her face, facial features and hair colour;","keep ONLY her face, facial features and hair colour, but WITHOUT the small dark mole on her cheek (her skin is clear and flawless);")
     return STY[i%4],MREF[who],PRE+LINE+desc+idk+AGES+o+f+po+END

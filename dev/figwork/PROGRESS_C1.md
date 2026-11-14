@@ -17,4 +17,9 @@
     thành thanh ngọc dọc nhỏ son đỏ). Ảnh gốc giữ ở scratchpad (bg/orig-*).
   - por: crop lấy mặt làm tâm (khối tóc, giới hạn chiều cao đầu để tóc xoã dài không kéo lệch).
   - Tín dụng t1: 27 lineup vẽ (1 lần 503 phải vẽ lại) + 12 edit = 39×270 ≈ 10.5k + tách nền ~0.1k ≈ 10.6k.
-- Tiếp: t2 m01–m26, rồi t3…t8, rồi cold.
+- 11/14 SẾP BỎ LUẬT ĐỘNG (OWNER REVERSAL ở origin/review/consort-art PROGRESS.md): Part C chuyển sang dáng ĐỨNG YÊN (khối STILL + G19/G24/G32/G48
+  của spec5 consort-art, câu opaque "all fabrics opaque silk, NO sheer see-through gauze, NO floating stole", ~7.5 đầu). LAD t4–t8 + luật màu lấy
+  từ spec5 consort-art (lad2.py). C1 VẼ LẠI t1 m01–m26 theo dáng tĩnh (đang chạy). Thợ C2 tự vẽ lại phần m27–m52 của mình (t1 + t2 m27–m32 đang là dáng động).
+- HUADIAN_C.md: pub.sh của C1 trước đây ghi đè mất bảng C2 (lỗi, đã sửa: giờ chỉ thay phần m01–m26, giữ nguyên phần C2). Bảng C2 khôi phục từ 33f778f.
+  C1 đổi 14 kiểu bị trùng với C2 (m02 m03 m05 m07 m08 m09 m10 m11 m15 m16 m18 m23 m24 m25). Kích thước theo bậc: theo bảng 8 nấc HUADIAN.md (consort-art).
+- Tiếp: t1 tĩnh m01–m26 -> t2…t8 -> cold.

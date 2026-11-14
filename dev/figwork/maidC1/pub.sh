@@ -7,7 +7,16 @@ for try in 1 2 3 4 5; do
   git reset -q --hard $base
   cp $T/out/img/*.webp img/
   mkdir -p dev/figwork/maidC1 dev/figwork/sheets
-  cp $T/*.py $T/*.sh $T/gens.txt $T/bg.txt dev/figwork/maidC1/; cp $T/sheets/*.jpg dev/figwork/sheets/ 2>/dev/null; cp $T/PROGRESS_C1.md $T/HUADIAN_C.md dev/figwork/
+  cp $T/*.py $T/*.sh $T/gens.txt $T/bg.txt dev/figwork/maidC1/; cp $T/sheets/*.jpg dev/figwork/sheets/ 2>/dev/null; cp $T/PROGRESS_C1.md dev/figwork/
+  python3 - <<'PY2'
+import os
+T='/tmp/claude-0/-home-user-cung-tuong-mong/ed00be27-1e8d-5500-9afe-ce233b508a61/scratchpad/tc'
+mine=open(T+'/HUADIAN_C.md').read().split('## m27')[0]
+f='dev/figwork/HUADIAN_C.md'
+theirs=open(f).read() if os.path.exists(f) else ''
+rest=('## m27'+theirs.split('## m27',1)[1]) if '## m27' in theirs else '## m27–m52 (thợ C2)\n\n(thợ C2 điền)\n'
+open(f,'w').write(mine+rest)
+PY2
   python3 - <<'PY' || exit 1
 import json
 F="img/FIGURES-servants.json"; S=json.load(open(F)); mine=json.load(open("/tmp/claude-0/-home-user-cung-tuong-mong/ed00be27-1e8d-5500-9afe-ce233b508a61/scratchpad/tc/out/recs.json"))
