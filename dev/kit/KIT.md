@@ -640,3 +640,14 @@ chest, Tư trang, wardrobe slots, reward chests, peddler, works, reward panels. 
 - `.kpstrip` (small frame, name, rank, bars) turns on below 1000 px whenever the bars are out of view.
 ### 28.16 kitName: no doubled title
 `kitTitle` returns no title when the name already starts with it or with any role word (`KIT_ROLEPRE`: Thái y, thái giám, tổng quản, quan, thị vệ, vương gia, nhạc sư, công tử, ma ma, cô cô…).
+
+## 29. KIT FOR j95 SCHEDULES (`dev/build/jk95.js`, branch review/kit-j95; every part guarded by typeof — runs with or without j95)
+- Person card "Thói quen" (`kitHabitsHTML(p)` from `habitsKnown(p)`): a `.kpsec` in the card's facts, kit rows: buổi | place · "đã lâu, có thể đã đổi"
+  · source (Chính ngươi thấy / Tai mắt kể / Nghe nói, N lần). Nothing shown when nothing is known.
+- Her own card "Nơi ngươi hay đến" (`kitHabitsMineHTML()` from `j95habitsMine()`): buổi | place + red chip "N kẻ đang rình chỗ này" (or "chưa thấy
+  ai rình") + one advice line. j95 decides what she knows (entries with `told:false` are hidden).
+- Map secret meeting (`j95mapSigns()`): a small dark badge with TWO grey silhouettes at the place's top-right corner, tooltip = j95's sentence.
+  Hữu duyên rule: never a face, never a name.
+- Map crowd (`silChip(n)`, countAt counts followers too): ONE chip per place = up to 3 silhouettes + the number; 6+ adds "đông", 12+ "rất đông".
+- Stage followers: servants following a mistress are not drawn as full figures (the room stays clear); her name tag gets "· N người theo hầu"
+  (`kitFollowers(p)`: `j95followers(p)` when j95 provides it, else roster entries with `with===p.id`).

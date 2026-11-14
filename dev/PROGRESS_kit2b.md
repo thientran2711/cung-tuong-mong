@@ -29,3 +29,7 @@ GỬI NGƯỜI KIỂM DUYỆT: review/kit-2b sẵn sàng kiểm lại (sửa đ�
 KIT READY: kitItem (28.13), kitWearSlots/Rương đồ K1-K2 (28.14), kitRoulette (28.12), chế độ lựa chọn 'cost' (28.6), kitCourtHTML (28.4), một hàm khung pcPort + KIT_CREST (28.0).
 
 KIT READY (bản sạch): một hàm khung pcPort + KIT_CREST (28.0), thẻ người dính (28.7), kitCourtHTML + chip (28.4), chế độ 'cost' (28.6), mạng che/dấu cào (28.8), chip số (28.9), tranh sự kiện (28.10), thẻ thân phận + nền chuyển kiếp (28.11), kitRoulette (28.12), kitItem (28.13), kitWearSlots/Rương đồ (28.14, hiện khi có j92), kitName (28.16).
+
+## review/kit-j95 (tách từ kit-2b 927a8dc)
+- jk95.js (nạp sau jk2b, trước j84), KIT.md §29: Thói quen trên thẻ người, Nơi ngươi hay đến, dấu hai bóng người trên bản đồ, chip đông người gom nhóm, nhãn "N người theo hầu" trên sân khấu. Kiểm typeof, không phụ thuộc j95; thử bằng dữ liệu giả lập theo API j95 ở 755x1000@2 và 1180x820@2: không lỗi, không tràn. Ảnh dev/shots/kit2b/j95-*.
+- KIT READY: kitHabitsHTML, kitHabitsMineHTML, dấu kpair, silChip gom nhóm (§29). Cần j95 đặt `told` trong j95habitsMine và (nếu muốn) `j95followers(p)`.
