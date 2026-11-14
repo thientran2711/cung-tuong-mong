@@ -126,3 +126,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (02:50Z) Owner: emotion icons must be human faces showing the emotion (not symbolic objects); readable at small size.
 - (03:00Z) Owner: illness (light/heavy) + poisoning looks approved; code expressions approach OK but emotions must be clearer (stronger).
 - (03:15Z) Owner APPROVED Tiên đế băng hà picture (review/succession2 816d0976).
+- (03:30Z) Owner page-curl reference (dev/owner-shots/1115-curl-ref-*.jpg): the turning page lifts diagonally from the corner, rotates/tilts as it turns (corner leads), with a soft curved bend and a dark gradient shadow along the fold — not a vertical cylinder roll.
