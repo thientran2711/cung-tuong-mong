@@ -306,7 +306,7 @@ function j95caught(s){const v=RV(+s.a.slice(1));if(!v||!v.alive)return;const m=s
  if(s.kind==="tryst"){v.scandal=1;try{intelAdd(v,{k:"affair",kind:"secret",txt:`${v.name} ${what}.`},{by:"Chính ngươi",how:`Bắt gặp ở ${W}`})}catch(e){}}
  j95ctx({how:`Ngươi tận mắt bắt gặp ở ${W}`,proves:s.kind==="tryst"?`${v.name} ${what}`:undefined},()=>evA(S,v,1));
  if(out==="rev"){z.wit[v.id]={w:wk(),k:s.kind};const g=motiveOK(v,S,"harm");
-  if(g.ok&&(v.malice||0)>=55){oanAdd(v,S,25);affAdd(v,S,-15);noteAdd(v.id,"biết ngươi đã thấy chuyện kín của nàng; có thể tìm cách diệt khẩu")}
+  if(g.ok&&(v.malice||0)>=55){oanAdd(v,S,25);affAdd(v,S,-15);noteAdd(v.id,"biết ngươi đã thấy chuyện kín của nàng; phải đề phòng nàng diệt khẩu")}
   else{v.j95bribe=wk()}}
  Q.push({t:out==="rev"?"Bắt gặp, và bị thấy":"Bắt gặp",who:pv(v),h:`<p>Ở ${W}, ngươi thấy rõ ${v.name} ${what}.</p>${out==="rev"?`<p class="r">Nàng ngẩng lên, bắt gặp ánh mắt ngươi. Nàng biết ngươi đã thấy.</p>`:""}`,opts:j95catchOpts(v,m,s,out)});
  if(out==="rev"&&v.j95bribe===wk()){const g=Math.min(60,Math.max(10,Math.floor((v.bac||0)/3)));Q.push({t:"Lời nhờ cậy",who:pv(v),h:`<p>Tối ấy cung nữ của ${v.name} lén mang sang một hộp gấm, trong có ${g} lượng bạc: “Nương nương nhà nô tỳ xin người coi như chưa thấy gì.”</p>`,
@@ -342,7 +342,7 @@ function j95npcCatch(m){const R=S.roster;if(!R)return;const kh=j95kh();const k=S
 /* ---------------- 8. DATA FOR THE KIT: habits she knows ---------------- */
 function habitsKnown(p){if(!S||!p||p===S)return[];const z=j95z();const O=z.obs[p.id]||{};const R=[];
  for(const key in O){const o=O[key];if(o.n<2&&!o.told)continue;const [c,k]=key.split(":");const old=wk()-o.w>8;
-  R.push({buoi:J95.B4[+c],slot:+c,place:k,placeName:j95pn(k),seen:o.n,by:o.by,week:o.w,old,txt:`${o.told?"Nghe nói":"Thường thấy"} nàng ở ${j95pn(k)} ${j95bl(+c)}${old?" (đã lâu, có thể đã đổi)":""}`})}
+  R.push({buoi:J95.B4[+c],slot:+c,place:k,placeName:j95pn(k),seen:o.n,by:o.by,week:o.w,old,txt:`${o.told?"Nghe nói":"Thường thấy"} nàng ở ${j95pn(k)} ${j95bl(+c)}${old?` (tin cũ, lần cuối ${wk()-o.w} tuần trước)`:""}`})}
  return R.sort((a,b)=>b.seen-a.seen).slice(0,4)}
 function j95mapSigns(){const R=S&&S.roster;if(!R)return{};const kh=j95kh(),z=j95z(),out={};for(const s of z.sec){if(s.key===R.key&&s.kh.includes(kh))out[s.k]="hai bóng người đứng sát nhau trong chỗ khuất"}return out}
 /* her own habits. told = her tai mắt have told her that an enemy knows this spot (j78 fact "stalk"); watchers = how many such enemies she

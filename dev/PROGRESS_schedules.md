@@ -66,7 +66,7 @@ Kiểm: bất biến mới (j)–(q) trong `dev/test/roster_audit_c.js`; kết q
 
 ### 3. Thông tin thật, hai chiều
 - Người chơi học thói quen: thấy ai ở đâu (cùng chỗ) hoặc tai mắt dò nơi ở → ghi; tai mắt có thêm tin "nàng hay ... ở ... buổi ..."
-  (thói quen thật). `habitsKnown(p)` trả dữ liệu cho thẻ người (đã thấy ≥2 lần hoặc nghe kể; đánh dấu "đã lâu, có thể đã đổi").
+  (thói quen thật). `habitsKnown(p)` trả dữ liệu cho thẻ người (đã thấy ≥2 lần hoặc nghe kể; đánh dấu "tin cũ, lần cuối N tuần trước").
 - NPC học thói quen người chơi: nơi nàng hay đến theo buổi (phai 25% mỗi tuần); kẻ thù (hostility ≥45) dò ra (theo Mắt, tai mắt cài
   trong cung nàng) → đến rình đúng chỗ, gặp thì 35% ra tay (qua cổng động cơ). Tai mắt của nàng có thể báo "X đã dò ra ngươi hay
   đến ... cho người rình" (tin thật). `j95habitsMine()` cho giao diện.
@@ -158,7 +158,7 @@ cung. j95 nằm giữa mục tiêu 35–55%. Hoàng thượng hơi dễ đoán b
 - Màn hình thật (Playwright, Fold 755x1000@2 và iPad 1180x820@2): xem ROSTER_AUDIT.md.
 
 ## Nhu cầu giao diện (chủ kit làm; j95 chỉ trả dữ liệu)
-1. Thẻ người, mục "Thói quen": `habitsKnown(p)` → dòng "Thường thấy nàng ở X buổi chiều" (+ "đã lâu, có thể đã đổi"), nguồn
+1. Thẻ người, mục "Thói quen": `habitsKnown(p)` → dòng "Thường thấy nàng ở X buổi chiều" (+ "tin cũ, lần cuối N tuần trước"), nguồn
    (Chính ngươi thấy / Tai mắt).
 2. Bản đồ: dấu "hai bóng đứng sát nhau" cho chỗ có hẹn kín (`j95mapSigns()`); hiện mới chỉ có dòng chữ trong mô tả nơi.
 3. Thẻ của chính người chơi: "Nơi ngươi hay đến" + số kẻ đang rình (`j95habitsMine()`), chỉ hiện khi tai mắt đã báo.
