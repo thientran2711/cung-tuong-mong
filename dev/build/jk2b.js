@@ -347,3 +347,26 @@ kpChipify=function(html){return kpMapText(html,s=>s.replace(KP_DELTA2,(m,l,sg,n)
  const v=(sg==="+"?1:-1)*parseFloat(n.replace(",","."));return pre+kitChip(l,v)}))};
 /* wording: the contest table is "Bảng định thứ" (VANPHONG), whatever case the old text used */
 try{if(window.VP&&VP.rules){VP.rules.unshift(["BẢNG ĐIỂM","Bảng định thứ"],["Bảng điểm","Bảng định thứ"],["Bảng Điểm","Bảng định thứ"]);if(VP.full){VP.full["BẢNG ĐIỂM"]="Bảng định thứ";VP.full["Bảng điểm"]="Bảng định thứ"}}}catch(e){}
+
+/* ---------- 12. EVENT + STORY ART in the kit art frame (j89 evArtOf / stArtOf) ----------
+   Panels: event choices (26.6), news ("Tin trong cung", kind news), chapter / story cards, and the result card after an event choice.
+   Which picture (data only, first match): item.art (a path) · item.stArt [arc, beat, ending] → stArtOf · item.evId → evArtOf(id, salt) ·
+   item.pid (+ pp.id / pp.k) → evArtOf("<pid>:<id>") · news → evArtOf("news:<title>") · else the j89 default category. A panel about a person
+   (who / subject) keeps the person's portrait (section 8). The frame is kitArtFrame (same frame as act art); the label = the category title. ---------- */
+function kitEvArt(m){try{if(!m||typeof evArtOf!=="function")return null;let src="",lab="";const pp=m.pp||{};const salt=(typeof S!=="undefined"&&S)?(S.year*100+S.month*3+(S.tuan||0)):0;
+ if(m.art)src=m.art;else if(m.stArt&&typeof stArtOf==="function")src=stArtOf.apply(null,m.stArt);
+ if(!src){const id=m.evId||(m.pid?(m.pid+(pp&&(pp.id||pp.k)?":"+(pp.id||pp.k):"")):"")||(m.kind==="news"||/Tin trong cung/.test(m.t||"")?"news:"+(m.t||""):"");if(id){src=evArtOf(id,salt);lab=typeof evArtTitle==="function"?evArtTitle(id):""}}
+ if(!src&&kitIsEventChoice(m)){src=evArtOf("default",salt)}return src?{src,lab:lab||""}:null}catch(e){return null}}
+(function(){const s0=showModal;showModal=function(){const m=Q[0];const r=s0.apply(this,arguments);try{const M=$("modal"),dlg=M&&M.querySelector(".dlg.kpanel");const body=M&&M.querySelector("#mb > .kpb");if(!m||!dlg||!body)return r;
+  const kind=dlg.dataset.kind||"";const want=kitIsEventChoice(m)||kind==="news"||m.art||m.stArt||m.evId;if(!want||body.querySelector(":scope > .kpsubj"))return r;
+  const a=kitEvArt(Object.assign({kind},m));if(!a)return r;window.__kitLastEvArt=a;body.classList.add("kphas","kpinfo");body.insertAdjacentHTML("afterbegin",`<div class="kpsubj kpiart kpev">${kitArtFrame(a.src,a.lab)}</div>`)}catch(e){console.error("kitEvArt",e)}return r}})();
+/* the result card right after an event choice shows the same picture, small, left of the rows */
+(function(){if(typeof runOpt!=="function"&&typeof resultShow!=="function")return;const r0=resultShow;resultShow=function(){const r=r0.apply(this,arguments);try{const a=window.__kitLastEvArt;window.__kitLastEvArt=null;const t=$("rtoast");if(a&&t&&!t.querySelector(".kpev")){t.classList.add("kevres");t.insertAdjacentHTML("afterbegin",`<div class="kpev kpevr">${kitArtFrame(a.src,a.lab)}</div>`)}else if(t&&!a){t.classList.remove("kevres");const o=t.querySelector(".kpevr");if(o)o.remove()}}catch(e){}return r}})();
+(function(){const c0=closeModal;closeModal=function(){const m=Q[0];const r=c0.apply(this,arguments);try{if(!(m&&kitIsEventChoice(m)))window.__kitLastEvArt=null}catch(e){}return r}})();
+(function(){const st=document.createElement("style");st.id="k2b-evart";st.textContent=`
+#rtoast.kevres{display:grid!important;grid-template-columns:84px minmax(0,1fr);column-gap:10px;align-items:start}
+#rtoast.kevres>:not(.kpevr){grid-column:2}
+#rtoast.kevres>.kpevr{grid-column:1;grid-row:1/span 9;width:84px;height:124px}
+#rtoast.kevres>.kpevr .pcp.kit.kartf{width:100%!important;height:100%!important}
+@media (max-width:599px){#rtoast.kevres{grid-template-columns:64px minmax(0,1fr)}#rtoast.kevres>.kpevr{width:64px;height:95px}}
+`;document.head.appendChild(st)})();

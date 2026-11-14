@@ -561,3 +561,10 @@ so stage blocks may stand beside a head or between figures, never over the paint
 - `kpChipify` (jk2b): a delta chip takes the whole short clause before the number (up to 6 words, stops at punctuation): "nhà Hộ bộ thế lực −2";
   linking words in front (và, được, mất, khiến, nên…) stay outside the chip.
 - Contest tables are titled "Bảng định thứ" (any old "BẢNG ĐIỂM / Bảng điểm" is rewritten on screen by VP).
+### 26.10 EVENT + STORY ART (j89 evArtOf / stArtOf)
+- Event choices, news panels ("Tin trong cung"), story/chapter cards: the picture goes in the kit art frame (`kitArtFrame`, `.kpsubj.kpiart.kpev`)
+  left of the body, unless the panel is about a person (then the person's portrait, section 8).
+- Picture (data only, first match): `item.art` · `item.stArt:[arc,beat,ending]` → stArtOf · `item.evId` → evArtOf(id, week) · `item.pid` (+`pp.id`)
+  → evArtOf("<pid>:<id>") · news → evArtOf("news:<title>") · default category. Label = `evArtTitle`.
+- The result card right after an event choice shows the same picture small on its left (`#rtoast.kevres > .kpevr`).
+- Merged review/event-art dd2f253 (96 st-* story pictures, EVENTS.json stories, j89 stArtOf).
