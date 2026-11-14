@@ -36,13 +36,13 @@ function diffSet(k){if(!DIFF[k]||!S||typeof NLP==="undefined"||!NLP||window.__di
 (function(){if(typeof deser!=="function")return;const d0=deser;deser=function(){const r=d0.apply(this,arguments);try{diffApply()}catch(e){}return r}})();
 (function(){const r0=render;render=function(){try{if(S)diffApply()}catch(e){}return r0.apply(this,arguments)}})();
 (function(){const e0=endTurn;endTurn=function(){try{if(S)diffApply()}catch(e){}return e0.apply(this,arguments)}})();
-/* identity card: the choice (kit segmented control .ksub, the same as the picker filters) + a one-line description + a chip by the name */
+/* identity card: the choice (kit segmented control .ksub, the same as the picker filters) + a one-line description.
+   No extra chip on this card: the control already shows the choice (one fact, one place). Her own card in the game carries the chip. */
 function diffHTML(){const k=diffOf();const lock=!!window.__diffO;
  return `<div class="kpsec kdiff"><h4 class="kpst">Độ khó kiếp này</h4><nav class="ksub" role="tablist" aria-label="Độ khó kiếp này">${DIFF_K.map(x=>`<button type="button" class="ksubb${x===k?" on":""}" data-diff="${x}" role="tab" aria-selected="${x===k}"${lock?" disabled":""}>${DIFF[x].n}</button>`).join("")}</nav><div class="kpnote">${DIFF[k].d} Đã nhận thân phận thì không đổi được.</div></div>`}
 (function(){if(typeof kpBuild!=="function")return;const b0=kpBuild;kpBuild=function(M,m){b0.apply(this,arguments);try{if(!(m&&m.nl)||!S||typeof NLP==="undefined"||!NLP)return;const mb=$("mb");if(!mb||mb.querySelector(".kdiff"))return;
   const w=document.createElement("div");w.innerHTML=diffHTML();const sec=w.firstElementChild;
   const anchor=mb.querySelector(":scope > .kpnote")||mb.querySelector(":scope > .kpopts");if(anchor)mb.insertBefore(sec,anchor);else mb.appendChild(sec);
-  const box=mb.querySelector(".kpidn");if(box&&typeof kitChips==="function"){const d=document.createElement("span");d.className="kdiffc";d.innerHTML=kitChips([kitChip(`Kiếp này: ${diffName()}`,"n")]);box.appendChild(d)}
  }catch(e){console.error("jdiff card",e)}}})();
 /* older card (no kit scene panel): the same choice inside nlCardHTML */
 if(typeof kpBuild!=="function"&&typeof nlCardHTML==="function")(function(){const c0=nlCardHTML;nlCardHTML=function(){const h=c0.apply(this,arguments);try{return h.replace(/(<div class="opts nlopts">)/,diffHTML()+"$1")}catch(e){return h}}})();
@@ -57,9 +57,11 @@ if(typeof pdAdd==="function")(function(){const a0=pdAdd;pdAdd=function(n,why,k){
     if(ex)M.h=M.h.replace(/(<p class="pdend">Kiếp này được <b class="g">)\+\d+( Phúc duyên<\/b> \(kết cục [^)]*)\)( · Tổng: <b>)\d+(<\/b>)/,(_,p1,p2,p3,p4)=>`${p1}+${S.pdLife}${p2}; kiếp ${diffName().toLowerCase()}: +${ex})${p3}${pdGet()}${p4}`);
     if(Q[0]===M)showModal()}}catch(e){console.error(e)}}
  return r}})();
+/* her own card in the game (showSelf / any pcard of hers): chip "Kiếp này: Khó" */
+(function(){if(typeof pcard!=="function")return;const p0=pcard;pcard=function(o){try{if(S&&o&&!(typeof NLP!=="undefined"&&NLP)&&String(o.name||"").replace(/<[^>]*>/g,"").trim()===S.name){const c=typeof kitChip==="function"?kitChip(`Kiếp này: ${diffName()}`,"n"):chip(`Kiếp này: ${diffName()}`);o=Object.assign({},o,{chips:(o.chips||[]).concat([c])})}}catch(e){}return p0.apply(this,arguments)}})();
 /* Sổ luân hồi: each life's line says its difficulty; the in-game Sổ luân hồi line says this life's */
 if(typeof lifeSave==="function")(function(){const l0=lifeSave;lifeSave=function(f){const r=l0.apply(this,arguments);try{const p=lifeLog();if(p[0]&&S&&p[0].n===S.name&&!p[0].dif){p[0].dif=diffOf();p[0].f=(p[0].f||"")+` · Kiếp này: ${diffName()}`;store.set("cung-luanhoi",p)}}catch(e){}return r}})();
 if(typeof pastHTML==="function")(function(){const p0=pastHTML;pastHTML=function(){const h=p0.apply(this,arguments);try{if(S&&!S.dead&&(typeof NLP==="undefined"||!NLP))return h.replace(/(<p class="past pdpast">)/,`$1Kiếp này: <b>${diffName()}</b> · `)}catch(e){}return h}})();
 try{if(typeof KIT_GLOSS==="object")KIT_GLOSS["Độ khó"]="Chọn khi nhận thân phận, giữ suốt kiếp. Dễ: hậu cung ôn hòa. Vừa: như vốn có. Khó: hiểm ác hơn, Phúc duyên gấp rưỡi."}catch(e){}
-(function(){const st=document.createElement("style");st.id="jdiff-css";st.textContent=`.kdiff .ksub{position:static;margin:2px 0 4px}.kdiff .kpnote{margin-top:2px}.kpidn .kdiffc{display:block;margin-top:2px}`;document.head.appendChild(st)})();
+(function(){const st=document.createElement("style");st.id="jdiff-css";st.textContent=`.kdiff .ksub{position:static;margin:2px 0 4px}.kdiff .kpnote{margin-top:2px}`;document.head.appendChild(st)})();
 try{if(S)diffApply()}catch(e){}
