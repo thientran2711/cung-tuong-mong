@@ -252,7 +252,8 @@ function j95bWeek(){if(!j95bOn()||S.dead||(typeof isSrv==="function"&&isSrv()))r
  const rv0=rv6;rv6=function(f,wf){const C=J95B.cur;if(!C||!j95bOn())return rv0.apply(this,arguments);const slot=C.slots[C.rvN];if(slot==null)return rv0.apply(this,arguments);
   const f2=v=>(!f||f(v))&&j95bRvOK(C.T,C.s,slot,v);const id=rv0.call(this,f2,wf);if(id!=null){C.picks[slot]=id;C.rvN++}return id};
  /* every saveable card: judge its actors (re-pick or drop), keep the verdict until it is shown */
- const mk0=mkP;mkP=function(id,pp){if(!j95bOn()||!S||!id)return mk0.apply(this,arguments);pp=pp||{};let chk=null;
+ /* loading a save rebuilds the pending cards with mkP: they passed the gate when made, so they come back as they were (no re-pick, none dropped) */
+ const mk0=mkP;mkP=function(id,pp){if(!j95bOn()||!S||!id||(typeof J95C!=="undefined"&&J95C.loading))return mk0.apply(this,arguments);pp=pp||{};let chk=null;
   try{if(id.indexOf("e68")===0||P95B[id]){chk=j95bCheck(id,pp);if(chk&&!chk.ok){J95B.stat.evBlock++;for(const r of chk.bad){const rid=r.o&&r.o.id!=null&&r.o.rel!=null?"v"+r.o.id:null;if(rid)j95bAct(rid,r.role.h||r.role.f,r.t&&r.t!==S?"v"+r.t.id:"me",r.g,id)}return null}}}catch(e){j95bErr("mkP",e)}
   const d=mk0.call(this,id,pp);try{if(d&&chk)J95B.pend.set(d.pp||pp,chk);if(d&&chk&&J95B.inAp){const h=chk.list.find(r=>(r.role.h||r.role.f)&&!r.t&&r.o&&r.o.rel!=null);if(h)J95B.apG={a:h.o,g:h.g}}}catch(e){}return d};
  if(typeof approachOne==="function"){const ao=approachOne;approachOne=function(){J95B.inAp=1;J95B.apG=null;const R=S&&S.roster;const kh=j95kh();const snap={};

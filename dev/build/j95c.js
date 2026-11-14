@@ -12,7 +12,8 @@
 const J95C={later:[],stat:{frameGate:0,framePass:0,poisonGate:0,repal:0,next:0,dedupe:0,loadNoFill:0},errs:[],raG:null,loading:0,lastV:null,sig:""};
 function j95cErr(w,e){try{if(J95C.errs.length<20)J95C.errs.push(w+": "+(e&&e.message||e))}catch(x){}}
 function j95cCur(){return j95on()&&S&&!S.dead&&S.roster&&S.roster.key===j95key()}
-function j95cSig(){try{return rivals.map(v=>v.alive?(v.out?"o":palaceOf(v)):"x").join(",")+"|"+(S.out?1:0)}catch(e){return""}}
+/* ranks are in the signature too: a promotion / demotion (a card choice mid-week) re-houses at once, as loading the save would (jpal palFix in deser) */
+function j95cSig(){try{return rivals.map(v=>v.alive?(v.out?"o":palaceOf(v)+":"+v.rank+(v.queen?"q":"")):"x").join(",")+"|"+(S.out?1:0)+":"+S.rank}catch(e){return""}}
 /* servant names: unique among every servant and every cung nữ thân tín */
 function j95cDedupe(){let n=0;try{const seen=new Set([S&&S.maid&&S.maid.name].concat((rivals||[]).map(v=>v&&v.maid&&v.maid.name)).filter(Boolean));
  for(const s of allServ()){if(!s||!s.name)continue;if(seen.has(s.name)){const base=s.name.replace(/ \d+$/,"");let i=2;while(seen.has(base+" "+i))i++;s.name=base+" "+i;n++}seen.add(s.name)}}catch(e){j95cErr("dedupe",e)}
@@ -80,6 +81,7 @@ function j95cNext(){const P=J95B.next;if(!P||!P.length)return;J95B.next=[];if(!j
    already holds this khắc and was told ("Tai mắt kể: X dâng canh sâm …"); the second would move her away from what was just told,
    so its line is not told (the khắc keeps one place each, and only the current khắc may change in the present buổi) */
 (function(){if(typeof j95bPutPast!=="function")return;const o=j95bPutPast;j95bPutPast=function(id,k){try{const R=S&&S.roster;
-  if(j95cCur()&&R.P[id]){const kh=j95kh();if(R.P[id][kh][0]!==k&&J95B.bind.some(b=>b.next&&b.id===id&&b.key===R.key&&b.kh===kh&&b.k!==k)){J95C.stat.next2Drop=(J95C.stat.next2Drop||0)+1;return"seen"}}}catch(e){j95cErr("putPast2",e)}
+  /* (any khắc of the bind: endTurn resets the khắc count only after this report is written) */
+  if(j95cCur()&&R.P[id]){if(J95B.bind.some(b=>b.next&&b.id===id&&b.key===R.key&&b.k!==k&&R.P[id][b.kh]&&R.P[id][b.kh][0]===b.k)){J95C.stat.next2Drop=(J95C.stat.next2Drop||0)+1;return"seen"}}}catch(e){j95cErr("putPast2",e)}
   return o.apply(this,arguments)}})();
 window.__j95c=()=>({stat:J95C.stat,errs:J95C.errs,j95fix:J95.stat.fix||0});
