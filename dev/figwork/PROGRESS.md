@@ -25,7 +25,29 @@
   (mk11.py <tier> for t4-t8 prints it; for t3 use the same text - do NOT use mk11 t1-t3 HU repaint). Whole-lineup gpt-2-6 edit 2:1 4k,
   ref = current lineup gen (FIGURES magnificUrl), then images_remove_background -> bg_tN.txt "jid gen bg" -> urladd.py ids ->
   prep.py bg_tN.txt -> sheetproc.py bg_tN.txt jids -> post.sh N cids -> pairs.py / fh.py check (marks must be unchanged).
-  t4 pilot c01-c04 generated (bg_t4.txt) - not processed yet.
+  t4 pilot c01-c04 generated (bg_t4.txt, gens12 "art12 a51 keep marks") - NOT processed yet (prep.py bg_t4.txt; sheetproc; post.sh 4).
+- OWNER 11/14 ~19:30Z "Vẽ lại bậc 8": t8 marks too big, read as scars. NEW t8 mark = tiny refined gold-leaf phoenix, S-curved body
+  wrapping a tiny <col> <motif>, few kingfisher-blue accents, fingertip size, no wider than the gap between the inner brow ends.
+  PILOT DONE on c03 c12 c19 c26 t8 (all 4 ages) with hdf.py (head grid made from the 4 FIGS, not the lineup, so rematte/fa
+  alpha is untouched; paste = convex hull of changed pixels (old+new mark) in a forehead window, RGB only; backups
+  scratchpad/fw12/hgrid/figbak/). Grid uploads / edits: c03 mE36lbBhJQ->rgeDZ6hxtc, c12 9ZQEdWcNYZ->u5nGO7AQLD,
+  c19 Syt8W30Ub8->gOIoYnsSXO, c26 dtyJkE4XSL->ov9Pxje829. Prompt: see hdf8 prompt in this file's art12 notes below.
+  Sheets: dev/figwork/sheets/art12/t8_pilot_truoc_sau.jpg (before|after), t8_pilot_forehead.jpg.
+  WAITING for owner OK before the other 28 consorts. t6/t7 ON HOLD.
+  t8 prompt: "Edit this image. It is a 2x2 grid of four close-up portraits of the same woman at different ages. Keep everything exactly
+  identical: faces, ages, expressions, eyes, eyebrows, hair, crown and hair ornaments, skin, colours, lighting, framing and the grid
+  layout. The ONLY change, on each of the four faces: completely remove the current ornament on the forehead (restore clean smooth skin
+  there) and paint a new one in its place: a tiny, refined stylised phoenix in thin gold leaf painted flat on the skin, its slender
+  S-curved body and tail wrapping a tiny <col> <motif>, with a few tiny kingfisher-blue accents. Small and delicate, about the size of
+  a fingertip, no wider than the gap between the inner ends of the eyebrows, centred just above the brows; crisp, elegant and
+  jewel-like, clearly a painted ornament, never a scar or birthmark; no frame, no pearls, nothing raised. Identical on all four faces.
+  No moles. No text."   (<motif>,<col> from HUADIAN.md / spec6 HD)
+  WARNING ORDER: t8 a51 ageing = whole-lineup edit + sheetproc, which REWRITES the figs (loses hdf marks AND rematte). So for t8 do
+  the ageing first (then re-apply fapick/rematte as before), then hdf.py marks; or age the a51 via hdf-style head edit on the fig.
+- REMAINING (exact): (1) owner OK on t8 pilot -> hdf.py t8 for the other 28 (skip none); (2) a51 ageing, marks untouched:
+  t3 all 32, t4 all 32 (pilot gens c01-c04 waiting), t5 except c28 c29 c30, t6 all, t7 all, t8 except c06 c32 (mind WARNING);
+  (3) t1 a51 ageing was reverted with the t1 marks -> ask coordinator whether to redo it (keep-marks prompt);
+  (4) t6/t7 mark redo only if owner asks.
 
 ## art11 (worker #11) — STATUS (read first; resumes art10 TODO below)
 - Work dir: scratchpad/fw11 (copy of dev/figwork, paths sed'ed to worktree agent-a4b0765092fc7d9e0; local cv2.py renamed cv2_jobs.py
