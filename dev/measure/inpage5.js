@@ -71,7 +71,7 @@ function talkScore(t,N){const{p,a}=t;
   if(a.x){if(/chứng cứ/.test(a.x))v+=o*2.5;if(/biết thêm|biết ngài thích|có thể biết/.test(a.x))v+=1.2;if(/dễ phát hiện/.test(a.x))v+=1;if(/dễ có thai/.test(a.x))v+=1.5;if(/che chở/.test(a.x))v+=1}
   if(a.run&&!a.w)v+=0.4;
   if(p.kind==="emp")v+=1;
-  if(window.__aff&&p.kind==="man"){if(/Liếc mắt|Trao khăn|Hẹn gặp riêng/.test(a.n))v+=6;if(/Cắt đứt/.test(a.n))v=-1e9}
+  if(window.__aff&&p.kind==="man"){if(/Liếc mắt|Trao khăn/.test(a.n))v+=6;if(/Hẹn gặp riêng/.test(a.n))v+=40;if(/Cắt đứt/.test(a.n))v=-1e9}
   return v/Math.sqrt(a.act?2:1)}
 function sensibleStep(){
   /* affair road: assume she has already earned the trust (Chủ tin 60) of any servant whose Lòng is 60+, so a tryst can be guarded; everything else as in the game */
