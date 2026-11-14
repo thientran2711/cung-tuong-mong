@@ -162,7 +162,7 @@ export class Room {
       m.pos = m.pos || {}; m.pos[seat] = { place: msg.place, khac: msg.khac, week: msg.week, buoi: msg.buoi, x: msg.x };
       await this.saveMeta(); return this.bcast({ t: "pos", from: seat, ...m.pos[seat] }, ws);
     }
-    if (t === "act" || t === "actr") { const o = { ...msg, from: seat }; return this.bcast(o, ws); }
+    if (t === "act" || t === "actr" || t === "res" || t === "note") { const o = { ...msg, from: seat }; return this.bcast(o, ws); }
     if (t === "say") { const text = String(msg.text || "").slice(0, 200); return this.bcast({ t: "said", from: seat, text }, ws); }
     if (t === "init") {
       if (seat !== "a") return this.send(ws, { t: "error", code: "notyours", msg: "chỉ chủ phòng" });

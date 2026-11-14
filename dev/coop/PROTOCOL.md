@@ -130,3 +130,19 @@ real place in real time; acts between the two go through the server and the rece
 Order per buổi: both play → both `bend` → server `buoi` → each client runs nextBuoi(); the host's placeWhere() result goes out as
 `where`, and the guest waits for the `where` with the same (week,buoi) before showing people (keep #next locked until then).
 `end` is still accepted at any buổi (phase-1 clients that do not send `bend` keep working).
+
+### 9.1 Player-to-player acts (owner 14/11: the full NPC act set, place-dependent)
+- Every act a player can do to an NPC she can do to her friend when the rules allow it (same place, rank, khắc…), with the same costs,
+  odds and detection. Only INVITATION-type acts (mời, xin gặp, kết nghĩa, cùng đi…) give the target a choice card.
+- `act {id, k, mode:"invite"|"do", place, week, buoi, …}`:
+  - `invite`: the target's client shows the kit option card. She answers `actr {id, ok}`. Then the actor resolves as usual.
+  - `do` (gift, talk, harm, scheme, sát hại …): the ACTOR's client resolves odds and detection with the normal rules (target = the friend
+    entry). It then sends `res {id, k, fx:{stat:delta…}, flags:{…}, seen:bool}`: the effects on the target plus what she would learn.
+    The target's client applies fx/flags to her own S (death included, which starts her rebirth). It shows only what an NPC victim
+    would learn: `note {id, text}` when `seen`, otherwise just the stat change in the week news. Then it answers `actr {id, ok:true}`.
+- Ids are unique per sender (seat + counter). The receiver ignores a repeated id (reconnect replays).
+- The server relays `act`, `actr`, `res`, `note` unchanged with `from`. Week merge (section 4) still reconciles numbers, so the
+  receiver must NOT also get the same delta through the friend entry: the actor's client applies `do` effects only through `res`
+  and leaves its local friend entry for display.
+- Bot check: bots try harm acts on each other when in the same place. After each buổi both clients' views must agree:
+  the victim's own S vs the actor's friend entry (sung, danh, suc, rank, alive).
