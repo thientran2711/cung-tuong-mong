@@ -1,5 +1,24 @@
 # Art progress (art worker, 11/14/2026)
 
+## CURRENT STATE (art worker #6, newest first — read this first)
+- WORKTREE/PUBLISH: same as art5 but wt-art6 / branch art6 (scripts in scratchpad/figwork already sed'ed to wt-art6; next worker:
+  `sed -i 's/wt-art6/wt-art7/g; s/origin art6:/origin art7:/'` on bigsheet.py cmp.py fixalpha.py idsheet.py sheet.py sheetproc.py tiersheet.py heads.py pub3.sh).
+- DONE: t8 all 32 (c05–c32 this session, prompt = pj.py N-cXX-t8). Where spec5 gave the same object to 2–4 figures, I swapped ONE or TWO
+  figure props in the prompt only (spec5 untouched): c06 a24 one-hand fan, a32 ruyi, a48 jade beads; c07 a32 plum sprig; c10 a32 celadon
+  vase; c12 a48 ruyi; c13 a32 gilt hand-warmer; c14 a32 teacup; c16 a32 book; c18 a48 book; c19 a32 white jade ruyi; c20 "embroidered
+  silk folding fan" (not gauze), a32 celadon vase+lotus bud; c22 a32 orchids; c24 a48 coral beads; c25 a32 parasol; c28 a32 teacup;
+  c29 a19 guqin cradled in both arms; c30 a32 teacup, a48 book; c31 a32 white plum. Every result looked at; heads.py on all 32 a51:
+  grey on c09 c13 c17 c18 c19 c26 c31 -> hair-only GPT edit (sheets5.txt "hair-edit of"), all 32 now dark. propchk t8: NECK 4.4–5.1
+  (tall crown) and a51 WIDE 1.8–1.97 (train) = known t7/t8 pattern, slim by eye. Sheet scratchpad/sheets/tier8.jpg. Pushed 3fcdc8b.
+- COLD PALACE (tcold) STARTED: c01–c06 done (sheet scratchpad/sheets/cold_partial.jpg). Prompt = pj.py N-cXX-tcold but I replace
+  "robe and skirt hanging straight ... all fabrics opaque silk" with "robe hanging straight and calm, sleeves and sash falling naturally
+  with NO swirling and NO flying fabric; all fabrics opaque" (linen, not silk). Poses rotate in 4 sets by cid mod 4 (spec5 cold_pose);
+  style ref rotates with it. c05 tcold came out with a HIGH top bun instead of a low bun — redo if owner minds.
+  FIGURES records: tier "cold", palette "undyed grey-white linen". cutcheck.py is NOT on main yet (not run).
+- NEXT (in order): tcold c07–c32, then t4 calm redraws (c01 c07 c19 c20–c24 c26–c29 c31 c32 + c04/c16 a18 eye check), t6 c01–c16
+  saturated redraw, t5/t6 a51 hair check with heads.py, t1–t3 calm redraw (pin new t1 only after side-by-side).
+  Credits used by art6: ~19k (balance ~2.24M).
+
 ## CURRENT STATE (art worker #5, newest first — read this first)
 - WORKTREE/PUBLISH: work copy = scratchpad/figwork; scripts write into scratchpad/wt-art5/img (branch art5). Next worker: create your own
   worktree (wt-art6, branch art6) and `sed -i 's/wt-art5/wt-art6/g; s/origin art5:/origin art6:/'` on bigsheet.py cmp.py fixalpha.py idsheet.py
