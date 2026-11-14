@@ -638,3 +638,5 @@ chest, Tư trang, wardrobe slots, reward chests, peddler, works, reward panels. 
 - Screens 600–999 px portrait (Fold) on card tabs: stage 22 % of the screen. Left sticky column order: name, rank, BARS, portrait, wear slots, facts;
   right column: act tabs + act cards. Fold 755x1000 without scrolling: name y≈585, bars 630–733, first act card 679–793 (measured).
 - `.kpstrip` (small frame, name, rank, bars) turns on below 1000 px whenever the bars are out of view.
+### 28.16 kitName: no doubled title
+`kitTitle` returns no title when the name already starts with it or with any role word (`KIT_ROLEPRE`: Thái y, thái giám, tổng quản, quan, thị vệ, vương gia, nhạc sư, công tử, ma ma, cô cô…).
