@@ -16,7 +16,7 @@ const [,,URL='http://127.0.0.1:8971/t.html',OUT='rc_adv.json']=process.argv;cons
  res.deathOut=[];for(const o of ['tt','cn','ch']){await fresh(o);res.deathOut.push(await p.evaluate(()=>{const bad=[];for(let t=0;t<8;t++){nextBuoi();__clr();const kh=j95kh();const R=S.roster;
    const v=liveRivals(true).find(x=>!x.queen&&R.P["mm:"+x.id]&&R.P["v"+x.id][kh][0]!==palaceOf(x)&&R.P["v"+x.id][kh][0]!=="home");if(!v)continue;
    const mmRow=R.P["mm:"+v.id][kh].slice();const vRow=R.P["v"+v.id][kh].slice();v.mercy=1;deathSentence(v,"thử");__clr();spend(1);__clr();
-   const R2=S.roster;for(const id in R2.P){if(id==="v"+v.id||id==="mm:"+v.id)bad.push("still in record: "+id);const e=R2.P[id][j95kh()];if(e&&e[2]==="v"+v.id&&/hầu/.test(e[3]||""))bad.push("serving the dead: "+id+" "+e.join("|"))}
+   const R2=S.roster;for(const id in R2.P){/* deathSentence spares her into lãnh cung 30% of the time when the Emperor is "nhân từ" (j8): only the dead must leave */if(!v.alive&&(id==="v"+v.id||id==="mm:"+v.id))bad.push("still in record: "+id);const e=R2.P[id][j95kh()];if(!v.alive&&e&&e[2]==="v"+v.id&&/hầu/.test(e[3]||""))bad.push("serving the dead: "+id+" "+e.join("|"))}
    bad.push(...__ia("deathOut"));return{v:v.name,vRow,mmRow,bad}}return{skip:"no consort out with maid in 8 buổi",bad}}))}
 
  /* 2. the player to lãnh cung, a few buổi there, then pardoned (restore) mid-buổi; then reload */
@@ -44,7 +44,7 @@ const [,,URL='http://127.0.0.1:8971/t.html',OUT='rc_adv.json']=process.argv;cons
    for(const m of (S.men||[]).filter(m=>m.alive)){const had=!!R.P[m.id];const w=rosterWhere(m);const e=S.roster.P[m.id];if(!w){out.push([m.name,"null"]);continue}
     if(!e)bad.push(m.name+": rosterWhere="+w+" but no row");else if(e[kh][0]!==w)bad.push(m.name+": rosterWhere "+w+" row "+e[kh][0]);
     if((S.menW||{})[m.id]&&S.menW[m.id]!==w)bad.push(m.name+": menW "+S.menW[m.id]+" vs "+w);
-    if(!had&&e){for(let c=0;c<kh;c++)if(e[c]&&e[c][0])out.push([m.name,"backfilled khắc "+c+" at "+e[c][0]+" (player was at "+(R.P.me[c]||[])[0]+")"])}}
+    if(!had&&e){for(let c=0;c<kh;c++)if(e[c]&&e[c][0]&&e[c][0]!=="ngoai"/* off-map "ngoài cung" (N1 fix): not a place she could have seen */)out.push([m.name,"backfilled khắc "+c+" at "+e[c][0]+" (player was at "+(R.P.me[c]||[])[0]+")"])}}
    {const m0=JSON.parse(shown)||[],m1=S.roster.m||[];for(let c=0;c<kh;c++)if(JSON.stringify(m0[c]||null)!==JSON.stringify(m1[c]||null))bad.push("R.m (shown map numbers) of past khắc "+c+" rewritten")}
    for(const x of out)if(/backfilled/.test(x[1]))bad.push("N1 past-khắc backfill: "+x.join(" "));
    try{if(typeof loc96==="function"&&man96()){const l=loc96();const m=man96();const e=S.roster.P[m.id];if(e&&e[kh][0]!==l)bad.push("loc96 "+l+" vs row "+e[kh][0])}}catch(e){bad.push("loc96 "+e.message)}
@@ -67,8 +67,8 @@ const [,,URL='http://127.0.0.1:8971/t.html',OUT='rc_adv.json']=process.argv;cons
  res.gate=[];for(const o of ['tt','dtq','cnv']){await fresh(o);res.gate.push(await p.evaluate(()=>{const bad=[];const ran=[];Q.length=0;const H=Object.keys(ACT);
    const tryAct=(v,k)=>{const n0=(S.roster.acts||[]).length;let r;try{r=runAct(v,S,k)}catch(e){r=null}__clr();const L=(S.roster.acts||[]).slice(n0);return{r,L}};
    for(const v of liveRivals(true).filter(x=>!x.queen).slice(0,4)){for(const k of H){v.rel=90;v.oan=0;v.ghen=0;v.bac=900;v.malice=60;if(v.oanT)v.oanT={};const a=aff(v,S);if(a<80)continue;
-     const g=motiveOK(v,S,k);let r;try{r=tryAct(v,k)}catch(e){continue}const hostile=/hại|độc|vu|tố|giá họa|hãm|bẫy|đẩy|trộm|cáo|xàm|đồn|rình|ám|phá/i.test(String(r.r||"")+(ACT[k].n||""));
-     if(r.r&&hostile&&!g.ex&&g.ok)bad.push(`${k} (${ACT[k].n}) ran at affection ${a}, gate ok without exception: ${String(r.r).slice(0,90)}`);
+     const g=motiveOK(v,S,k);let r;try{r=tryAct(v,k)}catch(e){continue}/* names stripped first: "Bạch Tố Tâm" is not "tố" */const rr=String(r.r||"").replace(/<b>[^<]*<\/b>/g,"");const hostile=/hại|độc|vu|tố|giá họa|hãm|bẫy|đẩy|trộm|cáo|xàm|đồn|rình|ám|phá/i.test(rr+(ACT[k].n||""));
+     /* friendly kinds, as ia_hook H: ally / gift / tieuhuy (handing her evidence back) */if(["ally","gift","tieuhuy"].includes(k))continue;if(r.r&&hostile&&!g.ex&&g.ok)bad.push(`${k} (${ACT[k].n}) ran at affection ${a}, gate ok without exception: ${String(r.r).slice(0,90)}`);
      if(r.r&&hostile)ran.push(k+(g.ex?"(ex:"+g.why+")":""))}}
    /* hostile ACT kinds the gate does not know at all (pass with no reason) */const unk=H.filter(k=>{const n=(ACT[k].n||"").toLowerCase();return /hại|độc|vu |vu cáo|tố|giá họa|hãm|bẫy|đẩy|trộm|cáo|đồn|ám|phá|xúi/.test(n)&&motiveOK(liveRivals(true)[0],S,k).why===""}).map(k=>k+":"+ACT[k].n);
    return{acts:H.length,ran:ran.slice(0,10),ungatedHostileKinds:unk,bad}}))}

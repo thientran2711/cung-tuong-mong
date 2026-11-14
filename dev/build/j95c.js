@@ -10,6 +10,9 @@
    5) Loading a save never creates servants; servant names are unique (no two "Lão Quế Tử").
    ===================================================================================================================== */
 const J95C={later:[],stat:{frameGate:0,framePass:0,poisonGate:0,repal:0,next:0,dedupe:0,loadNoFill:0},errs:[],raG:null,loading:0,lastV:null,sig:""};
+/* off-map code: a man who comes in mid-buổi was outside the palace in the khắc already shown (never on the map, never on a stage) */
+const J95OUT="ngoai";
+(function(){const pn0=placeOf;placeOf=function(k){if(k===J95OUT)return{k,n:"Ngoài cung",d:"Chưa vào cung.",sc:"lc"};return pn0.apply(this,arguments)}})();
 function j95cErr(w,e){try{if(J95C.errs.length<20)J95C.errs.push(w+": "+(e&&e.message||e))}catch(x){}}
 function j95cCur(){return j95on()&&S&&!S.dead&&S.roster&&S.roster.key===j95key()}
 /* ranks are in the signature too: a promotion / demotion (a card choice mid-week) re-houses at once, as loading the save would (jpal palFix in deser) */
@@ -94,5 +97,5 @@ function j95cClash(m){if(!m||m.pid||m.__c95||typeof m.h!=="string"||!j95cCur())r
 /* j96 (love story) asks the ledger where her man is (rosterWhere); without an answer it wrote S.menW by itself, a place the record did not
    have. The record answers, and a man it has nowhere this buổi comes to his first haunt IN the record (the rest of the buổi) */
 function rosterWhere(m){try{if(!m||!j95cCur())return null;const R=S.roster,kh=j95kh();let e=R.P[m.id];if(e&&e[kh]&&e[kh][0])return e[kh][0];
-  if(!m.alive)return null;const k=(m.haunts&&m.haunts[0])||"vuon";R.who[m.id]=[m.name,m.role];R.P[m.id]=[0,1,2,3].map(()=>[k,"go",null,"lặng lẽ đến"]);/* as j95bPut writes a man who comes in */J95C.stat.man96=(J95C.stat.man96||0)+1;j95sync();return k}catch(e){j95cErr("rosterWhere",e);return null}}
+  if(!m.alive)return null;const k=(m.haunts&&m.haunts[0])||"vuon";R.who[m.id]=[m.name,m.role];R.P[m.id]=[0,1,2,3].map(i=>i<kh?[J95OUT,"away",null,"chưa vào cung"]:[k,"go",null,"lặng lẽ đến"]);/* he comes in now: the khắc already shown keep him outside the palace (N1) */J95C.stat.man96=(J95C.stat.man96||0)+1;j95sync();return k}catch(e){j95cErr("rosterWhere",e);return null}}
 window.__j95c=()=>({stat:J95C.stat,errs:J95C.errs,j95fix:J95.stat.fix||0});

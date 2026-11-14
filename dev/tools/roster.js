@@ -12,7 +12,7 @@ const fs=require('fs'),path=require('path'),zlib=require('zlib');
 const JSONOUT=process.argv.includes('--json');const [,,FILE,T,B,K]=process.argv.filter(x=>x!=='--json');if(!FILE){console.log(fs.readFileSync(__filename,'utf8').split('\n').slice(1,9).join('\n'));process.exit(1)}
 const j95=fs.readFileSync(path.join(__dirname,'..','build','j95.js'),'utf8');
 const ACT=Function('return '+j95.match(/const ACT95=(\{[\s\S]*?\});/)[1])();
-const PLN={home:"Tẩm cung của ngươi",kn:"Càn Ninh cung (Hoàng hậu)",tn:"Đức Thọ cung (Thái hậu)",dtd:"Dưỡng Hòa điện",thu:"Cần Chính điện",lc:"Trường Môn viện (lãnh cung)",vuon:"Ngự hoa viên",tyv:"Thái y viện",ksp:"Kính sự phòng",tgk:"Tân Giả khố"};
+const PLN={home:"Tẩm cung của ngươi",kn:"Càn Ninh cung (Hoàng hậu)",tn:"Đức Thọ cung (Thái hậu)",dtd:"Dưỡng Hòa điện",thu:"Cần Chính điện",lc:"Trường Môn viện (lãnh cung)",vuon:"Ngự hoa viên",tyv:"Thái y viện",ksp:"Kính sự phòng",tgk:"Tân Giả khố",ngoai:"Ngoài cung (chưa vào)"};
 function readSave(txt){txt=txt.trim();let d=null;
  const m=/^CTM([12]):([A-Za-z0-9+/=\s]+)$/.exec(txt);if(m){let u=Buffer.from(m[2].replace(/\s+/g,''),'base64');if(m[1]==='2')u=zlib.inflateRawSync(u);d=JSON.parse(u.toString('utf8'))}
  else{d=JSON.parse(txt);if(!d.S){const slot=d['hclh-slot']||Object.keys(d).find(k=>/^hclh-save-v2-/.test(k)).split('-').pop();const v=d['hclh-save-v2-'+slot];d=typeof v==='string'?JSON.parse(v):v}}

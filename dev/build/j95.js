@@ -21,7 +21,7 @@ const ACT95={read:"đọc sách",eat:"dùng bữa",rest:"nghỉ trong cung",slee
  seekemp:"chờ gặp Hoàng thượng",ambush:"rình chờ",provoke:"tìm đến gây sự",tryst:"hẹn hò lén",meet:"gặp tay chân",scheme:"chuẩn bị mưu",heal:"bắt mạch, uống thuốc",
  court:"thượng triều",memo:"phê tấu chương",dine:"ngự thiện",stroll:"ngự du",bed:"ngự tẩm",attend:"hầu Hoàng thượng",book:"giữ sổ thị tẩm",brew:"sắc thuốc",
  sell:"bán hàng rong",guard:"canh gác",serve:"hầu hạ chủ",clean:"quét dọn",follow:"theo hầu chủ",errand:"đi việc vặt",study:"học chữ",play:"chơi đùa",nap:"ngủ trưa",
- nurse:"được nhũ mẫu trông",cold:"sống lay lắt",confined:"bị cấm túc",called:"bị gọi đi",back:"quay về cung",changed:"đổi ý",go:"đi lại",here:"ở đây",work:"làm việc",
+ nurse:"được nhũ mẫu trông",cold:"sống lay lắt",confined:"bị cấm túc",called:"bị gọi đi",back:"quay về cung",changed:"đổi ý",go:"đi lại",away:"ở ngoài cung",here:"ở đây",work:"làm việc",
  audience:"chầu vua",watch:"đứng hầu",escort:"đi theo hộ giá"};
 const SPOT95=[["vuon","sau hòn non bộ trong Ngự hoa viên"],["lc","bức tường đổ gần Trường Môn viện"],["ksp","dãy kho sau Kính sự phòng"]];
 const TRACE95=["một chiếc khăn tay thêu hoa","một miếng ngọc bội buộc dây đỏ","một chiếc trâm bạc gãy","một túi thơm thêu chữ"];

@@ -139,7 +139,7 @@ function j95bPut(id,k,act,why,src){const R=S.roster;if(!R||R.key!==j95key())retu
  else if(k==="own"){k=id==="th"?"tn":id==="emp"?"dtd":null;if(!k)return"noown"}
 
  if(e&&(e[kh][1]==="tryst"||e[kh][1]==="meet"))return"busy";
- if(!e){const m=(S.men||[]).find(x=>x.id===id&&x.alive);if(!m)return"norec";R.who[id]=[m.name,m.role];e=R.P[id]=[0,1,2,3].map(()=>[k,"go",null,"lặng lẽ đến"])}
+ if(!e){const m=(S.men||[]).find(x=>x.id===id&&x.alive);if(!m)return"norec";R.who[id]=[m.name,m.role];e=R.P[id]=[0,1,2,3].map(i=>i<kh?[J95OUT,"away",null,"chưa vào cung"]:[k,"go",null,"lặng lẽ đến"])/* khắc already shown: he was not in the palace (j95c N1) */}
  const tgt=k==="home"?"me":null;e[kh]=[k,act||"here",tgt,why];J95B.bind.push({id,k,kh,key:R.key,src,why});if(J95B.bind.length>400)J95B.bind.splice(0,100);J95B.stat.bind++;return"ok"}
 function j95bPlaceCard(m){/* table-driven for template cards, lexicon for the rest */const out=[];const id=m.pid,pp=m.pp||{};
  if(id&&id.indexOf("e68")===0){const T=E95B[id.slice(3)],s=E68I[id.slice(3)];if(T&&T.at&&s){const vi=(pp.vi||0)%((s.v||[""]).length||1);const at=T.at==="*"||typeof T.at==="string"?T.at:T.at[vi];
