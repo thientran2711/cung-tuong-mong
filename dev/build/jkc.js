@@ -15,7 +15,7 @@
 const KC={ok:["tt","dtq","muoi","thd","ch","td"],ty:3,tm:2,
  /* balance knobs (bot-measured, dev/PROGRESS_outside.md) */
  cut:[50,80,100],      /* Điện tuyển score: below [0] = trả thẻ bài, [1] Thường tại, [2] Quý nhân, else Đáp ứng */
- so:{sac:30,suc:25,ld:70,gt:15},ev:38,apM:2,sch:22,ill:1.2,dowry:.6};
+ so:{sac:30,suc:25,ld:70,gt:15},ev:38,apM:2,sch:22,ill:3,dowry:.6};
 const KCDAD={tt:["Tể tướng","phủ Tể tướng"],dtq:["Đại tướng quân","phủ Tướng quân"],muoi:["Đại thương muối","Diêm thương phủ"],thd:["Thầy đồ","nhà thầy đồ"],ch:["Quốc cữu","phủ Quốc cữu"],td:["Thị lang bộ Lễ","phủ Thị lang"]};
 const KCCLAN={tt:"Tể tướng",dtq:"Đại tướng quân",muoi:"Hộ bộ",thd:"Hàn lâm",td:"Lễ bộ"};
 const KCMN=["Đức Minh","Hữu Chính","Kính Đường","Bác Văn","Thế Khanh","Trọng Lễ","Hoài An","Tư Viễn","Thừa Tông","Bảo Thành","Gia Mậu","Duy Nhạc"];
@@ -220,7 +220,7 @@ function kcEndTurn(){if(S.dead||Q.length||S.mg)return;S.buoi=0;let ev="";
  try{curtain()}catch(e){}deal();render();if(Q.length&&$("modal").hidden)showModal()}
 function kcWeek(){if(Q.length>2)return;const E=[];const add=(e,w)=>{if(w>0)E.push([e,w])};const di=kcR("di"),mu=kcR("muoi"),cha=kcR("cha"),to=kcR("to"),hu=kcR("huynh");
  const mal=m=>m?({"Hiểm độc":3,"Tham vọng":2,"Kiêu ngạo":1.4,"Đa nghi":1,"Nhu mì":.4,"Hiền lành":.2}[m.tr]||1)*(1+(m.oan||0)/40)*(m.af<10?1.4:.7):0;
- if(di&&!(S.kc.diBan>S.turn)){add("phan",mal(di)*1.2);add("trom",mal(di));add("tudg",S.year>=2?mal(di)*.6:0)}
+ if(di&&!(S.kc.diBan>S.turn)){add("phan",mal(di)*1.2);add("doc",S.turn>=6&&!S.kc.ev.doc&&di.oan+(30-di.af)>40?mal(di)*.5:0);add("trom",mal(di));add("tudg",S.year>=2?mal(di)*.6:0)}
  if(mu){add("ao",mal(mu));add("tranhmoi",S.kc.suit.length?mal(mu):0)}
  if(cha)add("say",.8);if(hu)add("bac",hu.tr==="phong lưu"?1.2:.5);if(to)add("tobenh",S.kc.ev.tobenh?0:.4);
  if(di&&di.r==="di"&&!S.kc.ev.dithai)add("dithai",.35);
@@ -257,6 +257,10 @@ function kcRes(t,b,txt){if(txt)log(txt);kcFix();try{resultShow(t,b,true)}catch(e
 function kcDo(t,f){const b=rsnap();const r=f();kcRes(t,b,r)}
 const KCO={tt:{t:"Quân cờ đầu tiên"},dtq:{t:"Tin dữ Nhạn Môn"},muoi:{t:"Sổ muối"},thd:{t:"Tài nữ kinh thành"},ch:{t:"Thư của cô tổ"},td:{t:"Đêm trước tịch biên"}};
 const KCE={
+ doc:{t:"Chén canh lạ",b:()=>{const d=kcR("di");S.kc.ev.doc=1;const real=roll(d.tr==="Hiểm độc"?75:45);const mz=S.maid?S.maid.name:"tỳ nữ";return{who:kcFace(d),t:`<p>Đêm khuya, người của ${d.t.toLowerCase()} mang sang một chén canh sâm, nói ${d.t.toLowerCase()} thương ngươi học khuya. ${mz} đứng sau lưng, khẽ lắc đầu.</p>`,o:[
+  kcO("Lấy trâm bạc thử",{},()=>kcDo("Chén canh lạ",()=>{if(real&&roll(80)){S.kc.proof[d.id]=(S.kc.proof[d.id]||0)+2;d.oan+=5;return"Trâm bạc đen lại. Ngươi giữ chén canh làm chứng."}return"Trâm bạc không đổi màu. Ngươi vẫn đổ chén canh đi."})),
+  kcO("Đổ đi, cảm ơn qua loa",{},()=>kcDo("Chén canh lạ",()=>{kcAf(d,-3);return"Ngươi đổ canh vào chậu hoa. Mấy hôm sau cây hoa héo."})),
+  kcO("Uống, không muốn mất lòng",{},()=>{if(real){if(roll(45)){kcDie("Trúng độc chén canh sâm của "+d.t.toLowerCase());return}kcDo("Chén canh lạ",()=>{apply({suc:-40,sac:-5});return"Ngươi đau quặn cả đêm, thầy thuốc cứu kịp."});return}kcDo("Chén canh lạ",()=>{kcAf(d,4);apply({suc:5});return"Canh sâm thật. Ngươi thấy mình đa nghi."})})]}}},
  phan:{t:"Hộp phấn lạ",b:()=>{const d=kcR("di");return{who:kcFace(d),t:`<p>${d.t} ${d.name} sai người mang sang một hộp phấn Tô Châu, nói là quà cho ngày ngươi đi tuyển. Mùi phấn hơi hắc.</p>`,o:[
   kcO("Cảm tạ rồi cất đi, không dùng",{},()=>kcDo("Hộp phấn lạ",()=>{kcAf(d,-2);return"Ngươi cất hộp phấn vào đáy rương."})),
   kcO("Nhờ đại phu xem thử",{bac:-10},()=>kcDo("Hộp phấn lạ",()=>{if(roll(55)){S.kc.proof[d.id]=(S.kc.proof[d.id]||0)+1;return"Đại phu nói trong phấn có bột làm da nổi mẩn. Ngươi giữ lại làm chứng."}return"Đại phu không thấy gì lạ."})),
@@ -406,7 +410,7 @@ function kcSoTuyen(){if(S.kc.so||S.dead)return;S.kc.so=1;if(S.kc.mien){S.kc.mien
  pushDil(mkP("kcE",{e:"so"}),"Sơ tuyển")}
 function kcSoOk(bribe){const C=KC.so;const sc=(S.sac>=C.sac?1:0)+(S.suc>=C.suc?1:0)+(S.kld<C.ld?1:0)+(S.kgt>=C.gt?1:0)+(bribe?1:0);return sc>=3}
 function kcSoD(){return{who:pMe(),t:`<p>Ma ma Nội vụ phủ đến khám tuyển: xem dung mạo, khí sắc, hỏi gia thế, nghe ngóng tiếng tăm. ${S.kc.ldSeen&&S.kld>=40?"Ngươi biết lời đồn về mình đã đến tai họ.":""}</p>`,o:[
- kcO("Ra mắt ma ma",{},()=>kcSoGo(false)),kcO("Dúi bạc cho ma ma khám tuyển",{bac:-60},()=>kcSoGo(true),{dis:S.bac<60}),kcO("Cáo bệnh xin miễn",{},()=>kcDo("Sơ tuyển",()=>{S.kc.mien=2;S.kc.so=1;S.kap=90;if(!S.kc.suit.length)S.kc.suit.push(kcSuitor());S.kc.forced=1;pushDil(mkP("kcE",{e:"dinhhon"}),"Cha định hôn");return"Tên ngươi bị gạch khỏi danh sách."}))]}}
+ kcO("Ra mắt ma ma",{},()=>kcSoGo(false)),kcO("Dúi bạc cho ma ma khám tuyển",{bac:-60},()=>kcSoGo(true),{dis:S.bac<60})]}}
 function kcPd(n,why){try{if(typeof pdAdd==="function")pdAdd(n,why,"kc")}catch(e){}}
 function kcSoGo(bribe){const b=rsnap();if(kcSoOk(bribe)){S.kpTron=1;S.kc.soOk=1;kcPd(5,"qua Sơ tuyển");kcRes("Sơ tuyển",b,"Ngươi qua Sơ tuyển. Tên ngươi được ghi vào sổ tú nữ.")}else{S.kc.soOk=0;kcRes("Sơ tuyển",b,"Ma ma lắc đầu: ngươi bị trả về.");pushDil(mkP("kcE",{e:"trave"}),"Trả thẻ bài")}}
 function kcTuyen(early){if(S.kc.tt||S.dead)return;if(!early&&!S.kc.soOk)return;S.kc.tt={early:!!early,raw:5};if(early){S.kpTron=1}
