@@ -426,6 +426,58 @@ body[data-sea] .panel{background-image:radial-gradient(circle at calc(100% - 9px
 body[data-sea] .tabs button[aria-selected=true]{background:var(--sa);border-color:var(--sa);transition:background-color 1.2s}
 body[data-sea] .btn:hover:not(:disabled),body[data-sea] .opt:hover:not(:disabled){border-color:var(--sa)}
 body[data-sea] .curtain{background:linear-gradient(var(--sa2),#f5ecdc)}body[data-sea] .curtain.shift{background:transparent}
+
+/* full-screen map tab */
+.game.maptab{grid-template-columns:minmax(0,1fr)!important;grid-template-rows:auto minmax(0,1fr) auto!important;grid-template-areas:"hud" "panel" "bar"!important}
+.game.maptab .stage{display:none}
+.game.maptab .panel{padding:0;position:relative;overflow:hidden;background-image:none}
+.game.maptab .mapv{position:relative;height:100%;gap:0}
+.game.maptab .mapsc{border:0;border-radius:10px;height:100%}
+.game.maptab .maptools{position:absolute;inset:0;z-index:5;pointer-events:none;display:block}
+.game.maptab .maptools>*{pointer-events:auto;position:absolute}
+.game.maptab .maptools>span:last-child{top:6px;right:6px;display:flex;gap:4px}
+.game.maptab .maptools>.fest{top:8px;left:8px}
+.game.maptab .maptools>.past{left:8px;bottom:8px;background:#1a0e08a8;color:#f6ead2;border-radius:12px;padding:2px 9px;font-size:.68rem;line-height:1.5;max-width:calc(100% - 16px);backdrop-filter:blur(2px)}
+.game.maptab .maptools>.past .mleg{color:#e8d6b4}
+.game.maptab .maptools .mz{min-height:34px;min-width:34px;margin:0;padding:2px 8px;font-size:.78rem;background:#fff8ecdd;box-shadow:0 2px 6px #0004}
+.game.maptab .maptools .fest{font-size:.66rem}
+.msil{display:inline-flex;align-items:flex-end;gap:1px;background:#1a0e08b8;border-radius:8px;padding:1px 4px;margin-top:2px;pointer-events:none;order:3}
+.msil svg{width:8px;height:11px;fill:#f3e6cf}.msil b{color:#f3e6cf;font-size:.58rem;margin-left:2px;font-weight:600}
+@media (min-width:700px){.mspot .msil svg{width:10px;height:14px}.msil b{font-size:.7rem}}
+.tomap{position:absolute;left:8px;bottom:8px;z-index:6;background:#1a0e08c0;color:#ffe7b0;border:1px solid #c9a46a;border-radius:14px;padding:6px 12px;min-height:36px;font-family:var(--display);font-size:.82rem;cursor:pointer;box-shadow:0 2px 8px #0005}
+
+/* full-body figures */
+.stage{container-type:size}
+.tok.fig{min-width:0}
+.tok.fig .figimg{display:block;height:58cqh;max-height:420px;width:auto;object-fit:contain;filter:drop-shadow(0 6px 6px #0006);transform-origin:50% 100%;animation:figidle 5s ease-in-out infinite}
+.tok.fig:hover .figimg{transform:translateY(-3px)}
+#mefig{position:absolute;left:50%;bottom:4cqh;height:80cqh;max-height:640px;width:auto;transform:translateX(-50%);transform-origin:50% 100%;z-index:0;filter:drop-shadow(0 8px 8px #0006);animation:meidle 4.6s ease-in-out infinite;pointer-events:none}
+.stage.hasme .tokens{justify-content:flex-end}
+@keyframes figidle{0%,100%{scale:1 1}50%{scale:1 1.012}}
+@keyframes meidle{0%,100%{transform:translateX(-50%) scale(1,1)}50%{transform:translateX(-50%) translateY(-2px) scale(1,1.012)}}
+@media (prefers-reduced-motion:reduce){.tok.fig .figimg,#mefig{animation:none}}
+
+@media (max-width:600px){.hud2 .hc[data-hx="date"]{display:none!important}.hud2.col{flex-wrap:wrap!important;overflow:visible}}
+
+/* no truncated text: header, ribbon, status chips; pager groups labelled horizontally */
+.pgrp{display:flex;flex-direction:column;flex:0 0 auto;border-left:1px solid var(--line);padding-left:3px;min-width:0}.pgrp:first-child{border-left:0;padding-left:0}
+.pgf{display:flex;gap:3px;align-items:center}
+.pfaces .psep{writing-mode:horizontal-tb!important;transform:none!important;border:0!important;max-height:none!important;overflow:visible!important;white-space:nowrap;font-size:.6rem;line-height:1.25;padding:0 3px!important;color:var(--gold);font-family:var(--display)}
+.hud{flex-wrap:wrap!important;row-gap:3px}
+.me{flex:1 1 230px!important;max-width:none!important;min-width:0}
+.mi{min-width:0}
+#me-d,.me .dt{white-space:normal!important;overflow:visible!important;text-overflow:clip!important;line-height:1.2}
+.me #me-n,.me .mi b{white-space:normal;overflow:visible;text-overflow:clip}
+.stats{flex:2 1 260px!important;min-width:0}
+.st{flex:1 0 54px!important;min-width:54px;max-width:96px!important}
+.st span{white-space:nowrap}
+.emp{flex:0 1 auto!important;max-width:none!important}
+.emp b,.emp span{white-space:normal}
+.stop .scene-t h2{white-space:normal!important;flex-wrap:wrap;overflow:visible!important;row-gap:0}
+.stop .scene-t .rmsg{white-space:normal!important;overflow:visible!important;text-overflow:clip!important}
+.hud2{padding-right:28px!important}
+.hud2 .hc{white-space:normal!important;text-align:left}
+@media (min-width:1200px){.hud2,.hud2.col{width:190px!important;max-width:190px!important}}
 </style>
 
 <div class="game" id="game">
@@ -638,8 +690,8 @@ function artActs(){const A=[],r=S.arts;
  return A}
 function deal(){
  const X=[];const v=S.tonight&&S.tonight!=="me"?S.tonight:null;
- if(v){X.push({n:"Tranh sủng",t:`Tối nay thẻ bài của ${v.name} được lật. Sai cung nữ giả cớ ngươi đau tim, mời Hoàng thượng sang.`,c:{duc:-4},o:oSteal(S),w:{},l:{sung:-3},b:2,x:`đoạt đêm nay; ${v.name} ghen +25, thù -15`,go:()=>{log(stealWin(S,v,"feign"))}});
-  X.push({n:"Chặn ngự giá",t:`Chờ ở hành lang ngự giá đi qua, múa một khúc dưới đèn lồng, mong ngài dừng bước.`,c:{suc:-5},o:oSteal(S,"road"),w:{},l:{sung:-3},b:2,x:`đoạt đêm của ${v.name}`,go:()=>{log(stealWin(S,v,"road"))}})}
+ if(v){X.push({n:"Tranh sủng",t:`Tối nay thẻ bài của ${v.name} được lật. Sai cung nữ giả cớ ngươi đau tim, mời Hoàng thượng sang.`,c:{duc:-4},o:oSteal(S),w:{},l:{sung:-3},b:2,x:stealX(v),go:()=>{log(stealWin(S,v,"feign"))}});
+  X.push({n:"Chặn ngự giá",t:`Chờ ở hành lang ngự giá đi qua, múa một khúc dưới đèn lồng, mong ngài dừng bước.`,c:{suc:-5},o:oSteal(S,"road"),w:{},l:{sung:-3},b:2,x:stealX(v,1),go:()=>{log(stealWin(S,v,"road"))}})}
  const ua=artActs();if(ua.length)X.push(pick(ua));
  const live=S.kids.filter(k=>k.alive);
  const ed=live.filter(k=>k.age>=3).sort((a,b)=>a.tal-b.tal);
@@ -756,6 +808,9 @@ function lesson(k){const l=S.arts[k],cost=5+l*5;if(!can(2)||l>=5||S.bac<cost||S.
  S.mg={k,l};save();resumeMG()}
 function resumeMG(){const m=S.mg;if(!m)return;const a=ARTS.find(x=>x.k===m.k);openMG(m.k,m.l,g=>{S.mg=null;log(`Học ${a.n}. Tiến bộ +${g}.`);addArt(m.k,g);render()})}
 function hireMaster(){if(S.bac<60||S.master||S.dead)return;apply({bac:-60});S.master=3;log("Mời danh sư vào cung dạy: 3 tháng tiến bộ gấp đôi.");render()}
+
+/* what a won night is worth, in numbers: a full thị tẩm (Sủng, Ân tình, a chance of a child and of a gift); the cost to the rival on a red 'kèm' line */
+function stealX(v,road){let c=0;try{c=conceiveCh(S)}catch(e){}return `đêm thị tẩm trọn vẹn: Sủng +3..+8, Ân tình +2..+7${S.preg?"":` · có thai: ${word(c)}`} · có thể được ban thưởng · kèm: ${v.name} ghen +25, thù -15${road?"":", Đức -4 (giả bệnh)"}`}
 
 /* portraits */
 const AV=window.AVATARS||{women:[],emperor:[],maids:[]};
@@ -1351,7 +1406,8 @@ function accNeed(t){return rkOf(t)>=7?4:2}
 function accOK(a,t){return evG(a,t)>=accNeed(t)&&(rkOf(t)<7||rkOf(a)>=3)}
 function oAccuse(a,t){return odA(a,40-(rkOf(t)>=7?30:0)+evG(a,t)*15+a.danh/10+a.tai/10+(DG()?5:0)+5*(facN(a)-1))}
 function oBribe(a,t){return odA(a,40+a.tamco/3-t.maid.loyal/3)}
-function oSteal(a,m){return m==="road"?odA(a,25+effSac(a)/5+a.arts.vu*5+mm()):odA(a,30+a.sung/3+effSac(a)/10+mm())}
+function stealFit(a){const st=a===S?(S.staff||[]):(a.staff||[]);return (has("mesac")?effSac(a)/10:0)+(has("trongtai")?(a.tai||0)/10:0)+(has("datinh")?4:0)-(has("lanhlung")?4:0)+(st.some(s=>s.tr==="lanh")?6:0)+((a===S?S.maid:a.maid)&&(a===S?S.maid:a.maid).loyal>=70?3:0)}
+function oSteal(a,m){return m==="road"?odA(a,30+effSac(a)/5+((a.arts&&a.arts.vu)||0)*5+stealFit(a)+mm()):odA(a,34+a.sung/3+effSac(a)/10+stealFit(a)+mm())}
 function oRumor(a){return odA(a,50+a.tamco/4+a.mat*3)}
 function oBlock(a){return odA(a,50+a.tamco/5+a.mat*3)}
 function oPlant(a,t){return odA(a,40+a.tamco/3+a.mat*3-t.maid.loyal/4)}
@@ -1865,10 +1921,10 @@ function overhear(k){const here=liveRivals(true).filter(v=>whereOf(v)===k);if(he
 /* the palace map */
 const MAPL=[["thu","dtd","tn"],["kn","vuon","ksp"],["tyv","lc","home"]];
 function mapHTMLgrid(){const W=S.where||{};const dis=k=>!can(travel(S.place,k)+1)||S.confined||S.dead||S.place===k;
- const tile=(k,n,sc,sub)=>`<button class="mtile" data-go="${k}" ${k==="home"?(S.place==="home"?"disabled":""):(dis(k)?"disabled":"")} style="${(SCIMG[sc]||k==="home")?`background-image:url(img/${k==="home"?"tam-cung-dem":SCIMG[sc]}.webp)`:""}"><span class="mband">${k!=="home"&&S.place!==k&&!can(travel(S.place,k)+1)?`<span class="mchip">hết khắc</span>`:""}${seenFaces(k)}<b>${k[0]==="r"&&RV(+k.slice(1))?mdH(pv(RV(+k.slice(1))),"xs"):""}${n}</b><span>${countAt(k)} bóng người · ${k==="home"?"không tốn khắc":travel(S.place,k)+" khắc"}</span>${sub&&k!=="home"?`<small>${sub}</small>`:""}</span></button>`;
+ const tile=(k,n,sc,sub)=>`<button class="mtile" data-go="${k}" ${k==="home"?(S.place==="home"?"disabled":""):(dis(k)?"disabled":"")} style="${(SCIMG[sc]||k==="home")?`background-image:url(img/${k==="home"?"tam-cung-dem":SCIMG[sc]}.webp)`:""}"><span class="mband">${k!=="home"&&S.place!==k&&!can(travel(S.place,k)+1)?`<span class="mchip">hết khắc</span>`:""}<b>${n}</b><span>${countAt(k)?silChip(countAt(k)):"vắng"} · ${k==="home"?"không tốn khắc":travel(S.place,k)+" khắc"}</span>${sub&&k!=="home"?`<small>${sub}</small>`:""}</span></button>`;
  let h=`<div class="ph"><span>Đi gần 1 khắc, xa 2 khắc · còn <b>${4-used}</b> ${pips(4-used)}. Đến nơi phải còn ít nhất 1 khắc để gặp người.</span>${S.confined?`<span class="r">Cấm túc ${S.confined} tháng</span>`:""}</div><div class="pmap">`;
  for(const row of MAPL)for(const k of row){if(k==="kn"&&!qOn()){h+=`<div class="mtile off"><b>Càn Ninh cung</b><span>bỏ trống</span></div>`;continue}const P=placeOf(k);h+=tile(k,k==="home"?"Tẩm cung":P.n,P.sc,k==="home"?"không tốn việc":"")}
- h+=`</div><div class="pmap two">`+liveRivals(false).filter(v=>palaceOf(v)!=="home").map(v=>{const k="r"+v.id;return tile(k,`Cung ${v.name}`,"rv",houseName(v)==="cung riêng"?RANKS[v.rank].n:"ở "+houseName(v))}).filter((x,i,a)=>a.indexOf(x)===i).join("")+`</div>`;
+ h+=`</div><div class="pmap two">`+liveRivals(false).filter(v=>palaceOf(v)!=="home").map(v=>{const k="r"+v.id;return tile(k,typeof palName==="function"?palName(k):"Cung phi tần","rv","")}).filter((x,i,a)=>a.indexOf(x)===i).join("")+`</div>`;
  return h}
 /* the 'Quan hệ' tab: the selected person's ties to everyone */
 let relSel="me";
@@ -2357,7 +2413,7 @@ function pbtn(at,n,sm,why){const k=/class="oc/.test(sm||"")?sm:kitParse(sm||"");
 function whyTime(c){return !S||S.dead?"":used+c>4?"hết khắc buổi này":c>1&&S.suc<20?"Sức dưới 20":""}
 /* pager: items [{f,name,dim,sep}] + index key; returns strip + the chosen card (built lazily by mk(i)) */
 function pager(key,items,mk){const n=items.length;if(!n)return"";let i=PG[key];if(i==null||i<0||i>=n)i=0;PG[key]=i;
- const strip=`<div class="pstrip"><button class="parr" data-pg="${key}" data-pi="${(i-1+n)%n}" aria-label="Người trước">‹</button><div class="pfaces">${items.map((t,j)=>(t.sep?`<span class="psep">${t.sep}</span>`:"")+`<button class="pface${j===i?" on":""}${t.dim?" dim":""}" data-pg="${key}" data-pi="${j}" aria-pressed="${j===i}">${mdH(t.f,"sm")}<span>${t.name}</span></button>`).join("")}</div><span class="pcount">${i+1}/${n}</span><button class="parr" data-pg="${key}" data-pi="${(i+1)%n}" aria-label="Người sau">›</button></div>`;
+ const strip=`<div class="pstrip"><button class="parr" data-pg="${key}" data-pi="${(i-1+n)%n}" aria-label="Người trước">‹</button><div class="pfaces">${(()=>{let h="",open=false;items.forEach((t,j)=>{if(t.sep||!open){if(open)h+="</div></div>";h+=`<div class="pgrp">${t.sep?`<span class="psep">${t.sep}</span>`:items.some(x=>x.sep)?`<span class="psep">&nbsp;</span>`:""}<div class="pgf">`;open=true}h+=`<button class="pface${j===i?" on":""}${t.dim?" dim":""}" data-pg="${key}" data-pi="${j}" aria-pressed="${j===i}">${mdH(t.f,"sm")}<span>${t.name}</span></button>`});return h+(open?"</div></div>":"")})()}</div><span class="pcount">${i+1}/${n}</span><button class="parr" data-pg="${key}" data-pi="${(i+1)%n}" aria-label="Người sau">›</button></div>`;
  return strip+mk(i)}
 function shortN(nm){const a=String(nm).split(" ");return a.length>2?a.slice(-2).join(" "):a.slice(-1)[0]}
 
@@ -2532,7 +2588,7 @@ const AOUT={spy:["chứng cứ +1, Tâm cơ +2","bị lộ, nàng thù -8"],ally
  bribe:["moi được mưu kế (chứng cứ +2) hoặc trộm bạc của nàng","cung nữ báo chủ: nàng nắm 1 chứng cứ"],block:["2 tuần nàng không được lật thẻ","tổng quản kể lại: nàng nắm 1 chứng cứ"],
  musk:["nàng sảy thai","—"],catswap:["tráo hài nhi khi nàng sinh","—"],ksab:["con nàng Tài -15; Tâm cơ +2","bị lộ: Danh -10, thù -20, bị phạt"],kpoison:["con nàng trúng độc, có thể chết","bị tra ra: ban chết"],
  pond:["con nàng rơi xuống hồ, có thể chết đuối","bị bắt: Danh -10, bị phạt"],kframe:["con nàng mất sủng, có thể bị phế Thái tử","bị lần ra: ban chết"],takeaway:["bế con nàng về nuôi; nàng thù -30","chưa được chuẩn; nàng thù -10"],
- vp:["đồ của nàng bị tịch thu, Danh nàng -8, nàng bị phạt","Danh -3, nàng thù -10"],plant:["món đồ nằm trong rương nàng","kẻ cài bị bắt: nàng nắm 2 chứng cứ, thù -20"],steal:["đoạt đêm nay; nàng ghen +25, thù -15","Sủng -3"],road:["đoạt đêm nay; nàng ghen +25, thù -15","Sủng -3"],gift:["thân thêm theo món quà",""]};
+ vp:["đồ của nàng bị tịch thu, Danh nàng -8, nàng bị phạt","Danh -3, nàng thù -10"],plant:["món đồ nằm trong rương nàng","kẻ cài bị bắt: nàng nắm 2 chứng cứ, thù -20"],steal:["đoạt đêm nay · kèm: nàng ghen +25, thù -15","Sủng -3"],road:["đoạt đêm nay · kèm: nàng ghen +25, thù -15","Sủng -3"],gift:["thân thêm theo món quà",""]};
 const ACAUGHT=["rumor","frame","poison","block","musk","ksab","kpoison","pond","kframe"];
 /* the small line of a scheme button */
 function actLine(k,oddsWord,costHtml){const w=AOUT[k]||["",""];const rolled=oddsWord!=="Chắc chắn";const L=[oddsWord,costHtml?"tốn: "+costHtml:"",w[0]?"thành: "+w[0]:"",rolled?"hỏng: "+(w[1]&&w[1]!=="—"?w[1]:"không mất gì"):"",ACAUGHT.includes(k)?CAUGHT:""];return L.filter(Boolean).join(" · ")}
@@ -2594,9 +2650,9 @@ function kitParse(str){str=String(str||"").trim();if(!str)return oddsChip("Chắ
  for(let s of segs){const plain=s.replace(/<[^>]+>/g,"").trim();const mo=plain.match(/^(Chắc chắn|Nắm chắc|Rất chắc|Khá chắc|Năm ăn năm thua|Chắc|Khó|Liều)(?=$|\s|·)/);
   if(!odds&&mo&&plain.length<=mo[1].length+2){odds=mo[1];continue}
   if(/^Quẻ: /.test(plain)&&odds){odds+=" · "+plain;continue}
-  const ml=s.match(/^\s*(?:<[^>]+>)*\s*(tốn|thành|hỏng|ngay|Tốn|Thành|Hỏng)\s*:\s*/);if(ml){cur={l:ml[1].toLowerCase(),v:[s.slice(ml[0].length)]};out.push(cur);continue}
+  const ml=s.match(/^\s*(?:<[^>]+>)*\s*(tốn|thành|hỏng|ngay|kèm|Tốn|Thành|Hỏng|Kèm)\s*:\s*/);if(ml){cur={l:ml[1].toLowerCase(),v:[s.slice(ml[0].length)]};out.push(cur);continue}
   if(cur&&cur.l!=="tốn"&&!/^(<b|<br)/.test(s)){cur.v.push(s);continue}out.push({l:"",v:[s]})}
- return (odds?oddsChip(odds):oddsChip("Chắc chắn"))+out.map(o=>(o.l?`<span class="kl">${o.l}</span>`:"")+effList(o.v,o.l==="thành"?"g":o.l==="hỏng"||o.l==="tốn"?"r":"")).join(" ")}
+ return (odds?oddsChip(odds):oddsChip("Chắc chắn"))+out.map(o=>(o.l?`<span class="kl">${o.l}</span>`:"")+(o.l==="kèm"?effList(o.v,"r").replace(/class="ef [gn]"/g,'class="ef r"'):effList(o.v,o.l==="thành"?"g":o.l==="hỏng"||o.l==="tốn"?"r":""))).join(" ")}
 /* the act card */
 function cardH(a,i){const poor=a.c&&a.c.bac&&S.bac+a.c.bac<0,o=a.o==null?100:a.o;const dis=!can(cardCost(a))||a.done||poor||a.lock||S.dead||(a.b!=null&&(S.buoi||0)!==a.b);const rolled=o<100&&!a.lock;
  const ow=rolled?word(cl(o+lotB(S,a.dom),5,95))+lotTag(a.dom,o):"Chắc chắn";
@@ -2818,6 +2874,13 @@ function manCard(m){const f=pMan(m);const known=m.seen===bkey();
 /* the dossier tab lists the men after the consorts */
 (function(){const r0=rvTabHTML;rvTabHTML=function(){menInit();const M=(S.men||[]).filter(m=>m.alive);if(!M.length)return r0();const n=rivals.length;
  return `<div class="pgwrap">`+pager("rv",rivals.map(v=>({f:pv(v),name:shortN(v.name),dim:!v.alive||v.out})).concat(M.map((m,j)=>({f:pMan(m),name:m.name.split(" ").pop(),sep:j?"":"Nam nhân"}))),i=>i<n?rvCard(rivals[i],i):manCard(M[i-n]))+`</div>`}})();
+/* two-way: a consort with a lover may conceive by him; the Kính sự phòng book can expose her the same way it exposes the player */
+(function(){const a0=affairMonth;affairMonth=function(){let ev=a0.apply(this,arguments);try{if(!S||S.dead)return ev;
+ for(const v of liveRivals(false)){const m=v.affair&&manById(v.affair);
+  if(m&&!v.preg&&!(v.lastBirth!=null&&S.turn-v.lastBirth<6)&&roll(5)){v.preg=1;v.hidden=true;v.pregWk=wk();v.trueFather=m.id;v.pregMismatch=!(v.nightLog||[]).some(w=>Math.abs(w-wk())<=1)&&roll(70)}
+  if(v.preg&&v.pregMismatch){const foes=others(v).filter(x=>x!==S&&x.alive&&rel(x,v)<-20);if(foes.length&&roll(10)){const x=pick(foes);evA(x,v,3)}
+   if(roll(8+(S.mat||0)*5)){evA(S,v,2);v.pregMismatch=false;noteAdd(v.id,`Tai mắt: ngày ${v.name} có thai không khớp đêm thị tẩm nào trong sổ Kính sự phòng (chứng cứ +2)`);ev+=`Tai mắt báo: ngày ${v.name} có thai không khớp sổ Kính sự phòng. `}}
+  if(!v.preg){v.pregMismatch=false;v.trueFather=null}}}catch(e){}return ev}})();
 /* ================= LEARNING: three roads, a milestone at every grade, gains shown on the button ================= */
 const ARTDO={cam:"Tài: thơ, đàn, thi tài; dễ được Hoàng thượng để ý",ky:"Tài và Tâm cơ: đánh cờ, đoán ý người",thi:"Tài: làm thơ, bàn chuyện với Hoàng thượng",hoa:"Tài: vẽ tranh dâng tặng, Thái hậu quý",vu:"Sắc: múa ở yến tiệc, được chú ý",y:"Sắc: điều hương, nhận ra độc, chữa bệnh"};
 const ARTMS={
@@ -2860,7 +2923,7 @@ function npcAct(v,t){const b=bandOf(danger(v,t));if(!b)return"";const allow=BAND
  if(k==="plant")return runAct(v,t,"plant",v.inv.findIndex(e=>e.t||IT[e.k].il));return runAct(v,t,k)}
 /* chance per buổi rises within a band */
 function rivalsBuoi(){let ev="";for(const v of liveRivals(true)){if(!v.alive||v.out)continue;const t=pickTarget(v);if(!t)continue;const d=danger(v,t),b=bandOf(d);if(!b)continue;
-  const lo=BANDS[b][0],hi=b<3?BANDS[b+1][0]:100;let c=[0,.03,.04,.05][b]+[0,.03,.04,.05][b]*cl((d-lo)/(hi-lo),0,1);if(t.shield)c*=.5;if(t===S&&S.lot&&S.lot.dom==="Hung")c*=1.5;if(t===S&&S.guardWarn){c*=.5}
+  const lo=BANDS[b][0],hi=b<3?BANDS[b+1][0]:100;let c=[0,.03,.04,.05][b]+[0,.03,.04,.05][b]*cl((d-lo)/(hi-lo),0,1);if(t.shield)c*=.5;if(t===S&&S.lot&&S.lot.dom==="Hung")c*=1.5;if(t===S&&S.guardWarn){c*=.5}if(t===S)c*=BAL.hz;
   if(Math.random()<c){ev+=seenNPC(v,t,npcAct(v,t));if(S.dead)return ev}}return ev}
 function dangerWord(v){kn();S.dKnown=S.dKnown||{};const k=S.dKnown[v.id];if(!k&&!knows(v))return `Có thể hại ngươi: <span class="ef n">chưa rõ</span>`;const b=bandOf(danger(v,S));if(k||knows(v)){if(!S.dKnown[v.id])S.dKnown[v.id]=wk()}return `Có thể hại ngươi: <span class="ef ${b>=2?"r":b===1?"r":"g"}">${BANDS[b][1]}</span>`}
 function bandCard(){return `<p>Mỗi người với một người khác có mức <b>Nguy hiểm</b> = Ghen hoặc Oán hoặc ghét (lấy cao nhất), cộng tính nết (Hiểm độc +10, Hiền lành -15, Nhu mì -10). Ai cũng theo cùng thang:</p><div class="pcb rows">${BANDS.map((b,i)=>`<div class="pcrow"><span>${i<3?`${b[0]}-${BANDS[i+1][0]-1}`:"80 trở lên"}</span><b>${i?`hại ${b[1]}`:"không ra tay"}</b></div>${i?`<div class="pcrow"><span class="past">${b[2].map(k=>ACT[k]?ACT[k].n:k).join(", ")}</span><span></span></div>`:""}`).join("")}</div><p class="past">Trong mỗi mức, càng gần mức trên càng hay ra tay. Ngươi hại ai thì Oán của họ tăng, có thể leo lên mức trên.</p>`}
@@ -3135,7 +3198,7 @@ function mapSpots(){palFix();const L=[];
 function mapHTML(){const W=S.where||{};const disR=k=>S.out?"đang ở lãnh cung":S.confined?`đang cấm túc (${S.confined} tháng)`:S.place===k?"đang ở đây":k!=="home"&&!can(travel(S.place,k)+1)?"hết khắc":"";
  if(window.__mapList){return `<div class="ph"><button class="btn" data-maplist="0">Xem bản đồ hoàng cung<small>toàn cảnh</small></button></div>`+mapHTMLgrid()}
  const z=window.__mapZ||(innerWidth<600?2.5:1);
- return `<div class="mapv"><div class="maptools"><span class="past">${SEASON[S.month-1]} · ${BUOI[S.buoi||0]} · còn ${4-used} khắc · <span class="mleg">đi gần 1 khắc, xa 2 · mặt nhỏ: người ở cung · bóng: người đang có mặt</span></span><span><button class="btn mz" data-mapz="-1" aria-label="Thu nhỏ">−</button><button class="btn mz" data-mapz="1" aria-label="Phóng to">+</button><button class="btn mz" data-maplist="1">Danh sách</button></span></div>
+ return `<div class="mapv"><div class="maptools"><span class="past">${SEASON[S.month-1]} · ${BUOI[S.buoi||0]} · còn ${4-used} khắc<span class="mleg"> · đi gần 1 khắc, xa 2 · mặt nhỏ: người ở cung · bóng: người đang có mặt</span></span><span><button class="btn mz" data-mapz="-1" aria-label="Thu nhỏ">−</button><button class="btn mz" data-mapz="1" aria-label="Phóng to">+</button><button class="btn mz" data-maplist="1">Danh sách</button></span></div>
  <div class="mapsc"><div class="mapw" style="width:${z*100}%"><img class="mapimg" src="${mapImg()}" alt="Toàn cảnh hoàng cung Đại Hy" onerror="this.src='img/map-${BUK[S.buoi||0]}.webp'">
  ${mapSpots().map(s=>{const b=s.box;const pos=`left:${b.x*100}%;top:${b.y*100}%;width:${b.w*100}%;height:${b.h*100}%`;
   if(s.empty)return `<div class="mspot sm off empty" title="${s.n}: ${s.fn}" style="${pos}"><span class="mlab">${s.n.replace(/ cung$/,"")}</span></div>`;
@@ -3527,7 +3590,8 @@ const VOK=["f-laugh","f-softlaugh","f-cry","f-angry","f-gasp","f-sigh","old-hmph
 let VOX={};/* key -> [files]; from audio/VOICES.json when present, else audio/vo-<key>-1.mp3 / -2.mp3 */
 (function(){try{fetch("audio/VOICES.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{if(!j)return;const L=Array.isArray(j)?j:j.voices||j.files||null;
  if(L){for(const x of L){const f=x.file||x.src;const k=x.key||x.id||x.name;if(f&&k)(VOX[k]=VOX[k]||[]).push(f)}}else for(const k in j){const v=j[k];if(Array.isArray(v))VOX[k]=v.map(x=>typeof x==="string"?x:x.file||x.src).filter(Boolean);else if(v&&(v.files||v.variants))VOX[k]=(v.files||v.variants)}}).catch(()=>{})}catch(e){}})();
-function voFiles(k){const L=VOX[k];if(L&&L.length)return L.map(f=>/^audio\//.test(f)?f:"audio/"+f);return [1,2].map(n=>`audio/vo-${k}-${n}.mp3`)}
+const VOALIAS={"f-softlaugh":"f-laugh-soft","old-hmph":"old-f-hmph","m-chuckle":"m-laugh","m-grunt":"m-angry","child-giggle":"child-laugh","gossip":"crowd-gossip"};
+function voFiles(k){k=VOX[k]?k:(VOALIAS[k]||k);const L=VOX[k];if(L&&L.length)return L.map(f=>/^audio\//.test(f)?f:"audio/"+f);return [1,2].map(n=>`audio/vo-${k}-${n}.mp3`)}
 const VO={cur:null,last:{}};
 function voice(k,force){try{if(!auOk()&&!force)return;if(!force&&Date.now()-(VO.last[k]||0)<6000)return;VO.last[k]=Date.now();const vol=OPT.vo==null?.7:OPT.vo;if(!vol)return;
  if(VO.cur){try{VO.cur.pause()}catch(e){}}const a=new Audio(pick(voFiles(k)));a.volume=vol;VO.cur=a;a.addEventListener("error",()=>{if(VO.cur===a)VO.cur=null});
@@ -3539,7 +3603,7 @@ function voKind(m){const w=m.who||{};const k=(w.w||[])[0];const txt=String((m.t|
  if(/các con|hoàng tử nhỏ|công chúa nhỏ/.test(txt)&&/chơi|sang|vui/.test(txt))return"child-giggle";
  if(/băng hà|ban chết|bại lộ|có độc|trúng độc|sảy|chết/.test(txt))return/trước mặt|cả hậu cung|yến/.test(txt)?"crowd-gasp":"f-gasp";
  if(/tin đồn|đồn rằng|rỉ tai|buôn chuyện/.test(txt))return"gossip";
- if(emp){if(/phật ý|cau mày|nổi giận|quở|trách|đuổi/.test(txt))return"m-grunt";if(/vui|cười|ban thưởng|hài lòng|khen/.test(txt))return"m-chuckle";return null}
+ if(emp){if(/phật ý|cau mày|nổi giận|quở|trách|đuổi/.test(txt))return"m-grunt";if(/vui|cười|ban thưởng|hài lòng|khen/.test(txt))return"m-chuckle";if(/thở dài|buồn|lo/.test(txt))return"m-sigh";return null}
  if(th){if(/không vui|phật ý|trách|chau mày|lạnh lùng/.test(txt))return"old-hmph";return null}
  if(/bị phạt|giáng|quỳ|đánh|trách phạt|lãnh cung|khóc/.test(txt))return"f-cry";
  if(/mỉa mai|khiêu khích|hạ nhục|giận/.test(txt))return"f-angry";
@@ -3547,8 +3611,366 @@ function voKind(m){const w=m.who||{};const k=(w.w||[])[0];const txt=String((m.t|
  if(/thở dài|buồn|ốm/.test(txt))return"f-sigh";return null}
 (function(){const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);try{const m=Q[0];if(m&&m!==VO.lastCard){VO.lastCard=m;const k=voKind(m);if(k)voice(k)}}catch(e){}return r}})();
 
+(function(){try{var m=new Date().getMonth();var se=["xuan","xuan","xuan","ha","ha","ha","thu","thu","thu","dong","dong","dong"][m];var h=new Date().getHours();var b=h<11?"sang":h<18?"chieu":"toi";var t=document.getElementById("title");if(t)t.style.setProperty("background","linear-gradient(rgba(40,18,10,.15),rgba(40,18,10,.35)),url(img/map-"+se+"-"+b+".webp) center/cover no-repeat","important")}catch(e){}})();
+/* ================= THE MAP TAB, FULL SCREEN: the plan fills all between the top bar and the tab bar ================= */
+/* people present show as anonymous silhouettes with a count (hữu duyên: who is there is learned only by going); residents are named inside the palace screen */
+const SILH=`<svg viewBox="0 0 10 14" aria-hidden="true"><circle cx="5" cy="3" r="2.4"/><path d="M1 14c0-4.4 1.6-7.2 4-7.2s4 2.8 4 7.2z"/></svg>`;
+function silChip(n){if(!n)return"";const k=Math.min(n,3);return `<span class="msil" aria-label="${n} bóng người">${SILH.repeat(k)}${n>1?`<b>${n}</b>`:""}</span>`}
+(function(){const m0=mapHTML;mapHTML=function(){let h=m0.apply(this,arguments);if(window.__mapList)return h;
+ try{/* drop the faces of residents and the names in the hover title; add the silhouettes */
+  h=h.replace(/<span class="mfaces">[\s\S]*?<\/span><\/button>/g,"</button>");
+  h=h.replace(/ · ở: [^"]*"/g,'"');
+  h=h.replace(/(<button class="mspot[^"]*" data-go="([^"]+)"[^>]*>)/g,(all,open,k)=>{const n=countAt(k);return open+(n?silChip(n):"")});
+  h=h.replace(/<span class="mleg">[^<]*<\/span>/,'<span class="mleg">đi gần 1 khắc, xa 2 · bóng: người đang có mặt</span>');}catch(e){}
+ return h}})();
+/* the layout switch */
+(function(){const r0=renderPanel0;renderPanel0=function(){const r=r0.apply(this,arguments);try{const gm=document.querySelector(".game");if(gm)gm.classList.toggle("maptab",tab==="go"&&!window.__mapList)}catch(e){}return r}})();
+/* the plan always covers the screen: the smallest zoom fills the height as well as the width */
+function mapFit(){try{const sc=document.querySelector(".game.maptab .mapsc");if(!sc)return;const w=sc.querySelector(".mapw"),img=sc.querySelector(".mapimg");if(!w)return;
+ const asp=img&&img.naturalWidth?img.naturalWidth/img.naturalHeight:1.792;const fit=Math.max(1,(sc.clientHeight/Math.max(1,sc.clientWidth))*asp);
+ const z=Math.max(fit,window.__mapZ||fit);w.style.width=(z*100)+"%";window.__mapFit=fit;
+ const key=S.place+"|"+z.toFixed(2)+"|"+sc.clientWidth;if(window.__mapKey2===key&&window.__mapPos2){sc.scrollLeft=window.__mapPos2[0];sc.scrollTop=window.__mapPos2[1]}
+ else{const h=sc.querySelector(".mspot.here")||sc.querySelector('[data-go="home"]')||sc.querySelector('[data-go="'+(S.pal!=null?palaceOf(S):"home")+'"]');if(h){sc.scrollLeft=h.offsetLeft+h.offsetWidth/2-sc.clientWidth/2;sc.scrollTop=h.offsetTop+h.offsetHeight/2-sc.clientHeight/2}window.__mapKey2=key}
+ if(!sc.dataset.sv){sc.dataset.sv=1;sc.addEventListener("scroll",()=>{window.__mapPos2=[sc.scrollLeft,sc.scrollTop]},{passive:true})}}catch(e){}}
+(function(){const r0=render;render=function(){const r=r0.apply(this,arguments);try{if(tab==="go"&&!window.__mapList){mapFit();const img=document.querySelector(".mapsc .mapimg");if(img&&!img.complete)img.addEventListener("load",mapFit,{once:true})}}catch(e){}return r}})();
+addEventListener("resize",()=>{try{if(S&&tab==="go")mapFit()}catch(e){}});
+/* zoom buttons: the floor is the fitted size, not 1 */
+document.addEventListener("click",e=>{const z=e.target.closest(".game.maptab [data-mapz]");if(!z)return;e.stopImmediatePropagation();e.preventDefault();const f=window.__mapFit||1;window.__mapZ=cl((window.__mapZ||f)+(+z.dataset.mapz)*.5,f,f+2.5);render()},true);
+/* tapping a place opens the place screen; the floating 'Bản đồ' button there goes back to the full map */
+(function(){const g=goTo;goTo=function(k){const wasMap=typeof tab!=="undefined"&&tab==="go";const r=g.apply(this,arguments);try{if(wasMap&&S&&!S.dead&&S.place===k){window.__fromMap=1;tab="act";render()}}catch(e){}return r}})();
+(function(){const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);try{const st=$("stage");let b=document.getElementById("tomap");const show=window.__fromMap&&tab!=="go"&&!S.out;if(!show){if(b)b.remove();return r}
+ if(!b){b=document.createElement("button");b.id="tomap";b.className="tomap";b.innerHTML="‹ Bản đồ";b.setAttribute("aria-label","Về bản đồ hoàng cung");b.addEventListener("click",ev=>{ev.stopPropagation();tab="go";window.__fromMap=0;render()})}
+ if(b.parentNode!==st)st.appendChild(b)}catch(e){}return r}})();
+document.addEventListener("click",e=>{const t=e.target.closest("[data-tab]");if(t&&t.dataset.tab!=="act")window.__fromMap=0},true);
+
+/* ================= FIGURES v2: every manifest merged; one identity per person for life, never reused in a game ================= */
+/* img/FIGURES.json (consorts, player, emperor, eunuchs), img/FIGURES-servants.json (maid, mama, eunuch), img/FIGURES-others.json
+   (thaihau, official, physician, man+sub). A missing file is skipped. When FIGURES-others.json holds official / physician
+   entries, the old single-age ones of FIGURES.json are ignored. Re-read every 5 minutes so new art lands without a reload. */
+const FIGF=["img/FIGURES.json","img/FIGURES-servants.json","img/FIGURES-others.json"];
+let FIGIX={},FIGSIG="";
+function figList(j){return (Array.isArray(j)?j:j&&(j.figures||j.files||j.items)||[]).filter(f=>f&&(f.file||f.src))}
+function figAge(t){const s=String(t==null?"":t).toLowerCase();const m=s.match(/\d+/g);if(m){const a=+m[0],b=m[1]?+m[1]:a;return (a+b)/2}return /old|lao|gia/.test(s)?56:/mid|trung/.test(s)?32:/young|tre/.test(s)?20:null}
+function figTier(t){if(t==null||t==="")return null;if(/cold|lanh/i.test(String(t)))return -1;const n=parseInt(String(t).replace(/[^\d-]/g,""),10);return isNaN(n)?null:n}
+function figPath(s){return !s?"":/^img\//.test(s)?s:"img/"+s}
+function figKey(f){const r=norm(f.role);if(f.identity!=null&&f.identity!=="")return r+":"+f.identity;if(f.variant!=null)return r+":v"+f.variant;return r+":"+String(f.file||f.src)}
+function figIndex(all){const ix={};for(const f of all){if(/(^|\/)por-/.test(f.file||f.src))continue;const r=norm(f.role);const k=figKey(f);(ix[r]=ix[r]||{});(ix[r][k]=ix[r][k]||[]).push(f)}return ix}
+function loadFigs(){try{Promise.all(FIGF.map(u=>fetch(u,{cache:"no-cache"}).then(r=>r.ok?r.json():[]).catch(()=>[]))).then(([a,b,c])=>{a=figList(a);b=figList(b);c=figList(c);
+ const old=f=>/(^|\/)_old\//.test(String(f.file||f.src))||(f.por&&/(^|\/)_old\//.test(String(f.por)));a=a.filter(f=>!["thaihau","official","physician"].includes(norm(f.role)));a=a.filter(f=>!old(f));b=b.filter(f=>!old(f));c=c.filter(f=>!old(f));
+ const all=a.concat(b,c);const sig=all.length+"|"+all.map(f=>f.file||f.src).join(",").length;if(sig===FIGSIG)return;FIGSIG=sig;FIGS=all;FIGIX=figIndex(all);try{if(S&&!S.dead)render()}catch(e){}}).catch(()=>{})}catch(e){}}
+loadFigs();setInterval(loadFigs,300000);
+/* which art group a person belongs to, preferred first */
+const MANSUB={"thị vệ":["guard","thive","thi ve","vesi"],"thái y":["physician","doctor","thaiy"],"vương gia":["prince","royal","vuonggia","wang"],"nhạc sư":["musician","nhacsu","music"],"sứ thần":["envoy","suthan","ambassador"]};
+function figWho(p){if(!p)return null;if(p===S)return S;const k=p.kind;if(k==="emp")return S.emp;if(k==="th"){S.thO=S.thO||{};return S.thO}if(k==="maid"&&!p.ref)return S.maid;if(k==="ty"&&!p.ref)return S.court&&S.court.ty;if(k==="ksp"&&!p.ref)return S.court&&S.court.ksp;return p.ref||p}
+function figRoles(who){if(!who)return[];if(who===S)return["player","heroine"];if(who===S.emp)return["emperor"];if(who===S.thO)return["thaihau"];
+ const C=S.court||{};if(who===C.ty)return["physician"];if(who===C.tq||who===C.ksp||who===C.ped)return["eunuch"];
+ if((S.men||[]).includes(who))return who.rw==="thái y"?["man","physician"]:["man"];
+ if(who===S.maid||who.role==="maid")return (who.age||18)>=36||who.old?["mama","maid"]:["maid"];
+ if(who.role==="eunuch"||who.role==="eun")return["eunuch"];
+ if((rivals||[]).includes(who))return["consort"];return[]}
+function figAgeOf(who){return who===S?S.age||18:who===S.thO?S.thAge||55:who.age||20}
+function figTierOf(who){if(who===S)return S.out?-1:S.rank;if((rivals||[]).includes(who))return who.out?-1:who.queen?7:who.rank||0;return null}
+/* the closest file inside one identity: nearest tier, then nearest age */
+function figDist(f,tier,age){const ft=figTier(f.tier),fa=figAge(f.ageBand);return (tier!=null&&ft!=null?Math.abs(ft-tier)*2:0)+(fa!=null?Math.abs(fa-age)/8:0)}
+function figBest(L,tier,age){let b=null,bd=1e9;for(const f of L){const d=figDist(f,tier,age);if(d<bd){bd=d;b=f}}return b}
+function figSubOk(who,f){const want=MANSUB[who.rw]||[];if(!want.length||f.sub==null)return 0;const s=norm(f.sub);return want.some(w=>norm(w)===s||s.includes(norm(w)))?1:-1}
+function figLook(who,f){const want=(typeof LOOKFOR!=="undefined"&&LOOKFOR[who.trait])||[];if(!want.length||f.look==null)return 0;return want.includes(norm(f.look))?1:0}
+function figUsed(){S.fidUsed=S.fidUsed||[];return S.fidUsed}
+function figPick(who){const roles=figRoles(who);if(!roles.length)return null;const used=new Set(figUsed());
+ if(who.fid){const r=who.fid.split(":")[0];if(FIGIX[r]&&FIGIX[r][who.fid])return who.fid}
+ const tier=figTierOf(who),age=figAgeOf(who);
+ for(const r of roles){const M=FIGIX[norm(r)];if(!M)continue;const free=Object.keys(M).filter(k=>!used.has(k));if(!free.length)continue;
+  const sc=k=>{const L=M[k];const b=figBest(L,tier,age);let s=-figDist(b,tier,age);if((S.men||[]).includes(who))s+=4*Math.max(...L.map(f=>figSubOk(who,f)));s+=3*Math.max(...L.map(f=>figLook(who,f)));return s};
+  let best=-1e9;for(const k of free)best=Math.max(best,sc(k));const top=free.filter(k=>sc(k)>=best-.5);const k=pick(top);who.fid=k;figUsed().push(k);return k}
+ return null}
+figFor=function(p,kind){try{if(!FIGS.length||!p||!S)return"";const who=figWho(p);if(!who)return"";const k=figPick(who);if(!k)return"";const r=k.split(":")[0];const L=(FIGIX[r]||{})[k];if(!L||!L.length)return"";
+ const f=figBest(L,figTierOf(who),figAgeOf(who));if(!f)return"";if(kind==="por")return figPath(f.por);return figPath(f.file||f.src)}catch(e){return""}};
+/* round portraits: the identity's por-*.webp once it has loaded; the old face until then (or if it fails) */
+const PORK={};
+function porOf(who,fb){try{if(!who||!FIGS.length)return fb;const src=figFor(who===S?S:who===S.emp?{kind:"emp"}:who===S.thO?{kind:"th"}:{ref:who},"por");if(!src)return fb;
+ if(PORK[src]===1)return src;if(PORK[src]===0)return fb;if(PORK[src]==null){PORK[src]=2;const im=new Image();im.onload=()=>{PORK[src]=1;clearTimeout(window.__porT);window.__porT=setTimeout(()=>{try{if(S)render()}catch(e){}},250)};im.onerror=()=>{PORK[src]=0};im.src=src}return fb}catch(e){return fb}}
+(function(){const W=(name,get)=>{const f0=window[name];if(typeof f0!=="function")return;window[name]=function(){const r=f0.apply(this,arguments);try{const who=get.apply(this,arguments);if(r&&typeof r==="object"&&who)r.src=porOf(who,r.src);else if(typeof r==="string"&&who)return porOf(who,r)}catch(e){}return r}};
+ W("pv",v=>v);W("pMe",()=>S);W("pEmp",()=>S.emp);W("pTH",()=>{S.thO=S.thO||{};return S.thO});W("pDoc",()=>S.court&&S.court.ty);W("pServ0",s=>s);W("maidSrc",m=>m);W("courtSrc",(k,c)=>c);W("pMan",m=>m)})();
+/* place screens: every person present stands full-body when art exists (servants, physician and eunuchs too) */
+(function(){const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);try{if(!FIGS.length)return r;const ppl=curPeople();document.querySelectorAll("#tokens .tok:not(.fig)").forEach(b=>{const p=ppl[+b.dataset.p];if(!p||p.kind==="kid"||p.kind==="chest")return;const src=figFor(p);if(!src)return;
+  const md=b.querySelector(".md");if(md){const im=document.createElement("img");im.className="figimg";im.alt="";im.src=src;im.onerror=()=>{im.remove();md.style.display="";b.classList.remove("fig")};md.style.display="none";b.insertBefore(im,md);b.classList.add("fig")}})}catch(e){}return r}})();
+(function(){const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);try{$("stage").classList.toggle("hasme",!!document.getElementById("mefig"))}catch(e){}return r}})();
+
+/* ================= NPC MINDS: human and beatable. Weighted choice by traits (never a best-move search), limited knowledge,
+   wit from Tâm cơ, trait biases and mood, mistakes, and tells before big schemes. One rule for every head. ================= */
+/* counters for the personality table */
+function mindLog(v,k){try{persCount(v,k);S.mind=S.mind||{};S.mind[k]=(S.mind[k]||0)+1}catch(e){}}
+function witOf(v){return cl(v===S?S.tamco||0:v.tamco||0,0,100)}
+function bq(){return S.bqN||0}
+/* a slight or a blow makes the next days rash (mood); every consort alike */
+(function(){const o0=oanAdd;oanAdd=function(x,y,n){if(n>0&&x&&x!==S)x.slightAt=bq();return o0.apply(this,arguments)}})();
+function rashOf(v){const recent=v.slightAt!=null&&bq()-v.slightAt<=3;if(!recent)return 0;if(traitsOf(v).includes("Kiêu ngạo"))return 1;return roll(30)?1:0}
+/* a blunder: the act is done badly (lower odds); read inside odA for that doer only */
+(function(){const o0=odA;odA=function(a,b){const r=o0.apply(this,arguments);return a&&a.__err?cl(r-a.__err,5,95):r}})();
+const BIG=["poison","kpoison","pond","pushp","musk","catswap","kframe","frame","plant"];
+const TELLS={musk:"lén mua xạ hương ở chợ ngoài cung",poison:"vào Thái y viện hỏi mua thạch tín, nói là để trừ chuột",kpoison:"hỏi mua thạch tín, nói là để trừ chuột",pond:"hay dẫn người ra hồ sen dò lối, hỏi giờ các hoàng tự đi chơi",
+ pushp:"dò giờ người ta đi qua bậc đá trơn sau mưa",catswap:"cho một bà đỡ lạ ra vào cung mình",kframe:"mua vải vàng và kim bạc, đóng cửa may vá ban đêm",frame:"mua vải vàng và kim bạc, đóng cửa may vá ban đêm",plant:"lảng vảng quanh cung người khác lúc vắng người"};
+/* the choice: the band's menu weighted by traits; Tâm cơ tilts toward what works and away from what failed; low Tâm cơ repeats failed tricks */
+function mindMenu(v,t){const b=bandOf(danger(v,t));if(!b)return[];const allow=BANDS.slice(1,b+1).flatMap(x=>x[2]);const O=[];const tc=witOf(v);v.fails=v.fails||{};
+ const add=(k,w)=>{const a=ACT[k];if(!a||!allow.includes(k))return;let ok=false;try{ok=a.ok(v,t)}catch(e){}if(!ok)return;w*=persW(v,k);if(w<=0)return;
+  let o=null;try{o=a.o?a.o(v,t):null}catch(e){}if(o!=null&&tc>=30)w*=Math.pow(cl(o,5,95)/50,(tc-30)/35);/* wit: weigh the odds, more so the cleverer */
+  const f=v.fails[k]||0;if(f)w*=tc<35?1+.6*f:Math.pow(.5,f);/* the foolish repeat, the clever learn */
+  O.push([k,w])};
+ add("accuse",6);add("vp",3);add("musk",4);add("catswap",2);for(const k of ["kpoison","pond","kframe","ksab"])add(k,2);add("takeaway",2);add("pushp",1);add("trip",3);add("frame",2);add("poison",2);add("rumor",3);add("spy",3);add("bribe",2);add("block",t.nightLog&&t.nightLog.length?2:0);
+ if(allow.includes("plant")&&v.inv.some(e=>e.t||(IT[e.k]&&IT[e.k].il)))O.push(["plant",3*persW(v,"plant")]);return O}
+function wpick(O){let r=Math.random()*O.reduce((a,b)=>a+b[1],0),i=0;while(r>O[i][1]&&i<O.length-1){r-=O[i][1];i++}return O[i][0]}
+const FAILRX=/bị lộ|bị bắt|phát giác|bị phát hiện|không thành|không ai tin|từ chối|chưa chuẩn|bị thử ra|lần ra|tra ra|báo cho chủ|đem chuyện kể/;
+function mindRun(v,t,k,err){v.__err=err||0;let r="";try{r=k==="plant"?runAct(v,t,"plant",v.inv.findIndex(e=>e.t||(IT[e.k]&&IT[e.k].il))):runAct(v,t,k)}finally{v.__err=0}
+ v.fails=v.fails||{};const failed=FAILRX.test(r);if(failed)v.fails[k]=(v.fails[k]||0)+1;else if(r)v.fails[k]=0;
+ if(r&&!failed&&k!=="spy"&&k!=="accuse"&&k!=="vp")mindBelief(t,v,k);
+ /* Hiểm độc over-plots: a success may leave a clue behind */
+ if(r&&!failed&&traitsOf(v).includes("Hiểm độc")&&BIG.includes(k)&&roll(20)){evA(t,v,1);mindLog(v,"_clue");if(t===S)r+=`(Để lại dấu vết: ngươi nắm thêm 1 chứng cứ về ${v.name}.) `}
+ return r}
+/* knowledge: a victim of a hidden blow only guesses who did it; wit and evidence help; a wrong guess turns her hatred on someone else (the player too) */
+function mindBelief(t,v,k){if(!t||t===S||!t.alive)return;const ev=(t.evm&&t.evm[key(v)])||0;const p=cl(35+witOf(t)/2+(ev>0?25:0)-witOf(v)/4,10,90);mindLog(t,"_belief");
+ if(roll(p)){oanAdd(t,v,8);return}
+ const L=others(t).filter(x=>x!==v&&(x===S||x.alive&&!x.out));if(!L.length)return;const w=L.map(x=>[x,1+oan(t,x)+Math.max(0,-aff(t,x))]);let r=Math.random()*w.reduce((a,b)=>a+b[1],0),i=0;while(r>w[i][1]&&i<w.length-1){r-=w[i][1];i++}
+ const s=w[i][0];oanAdd(t,s,8);mindLog(t,"_wrongBelief");t.blamed=t.blamed||{};t.blamed[key(s)]=(t.blamed[key(s)]||0)+1;
+ if(s===S&&roll(30+(S.mat||0)*8))noteAdd(t.id,`Nghe nói ${t.name} ngờ ngươi đứng sau chuyện ${ACT[k]?ACT[k].n.toLowerCase():"vừa rồi"}, dù không phải ngươi`)}
+/* the mind's turn: replaces the plain weighted pick */
+npcAct=function(v,t){try{if(!v||!t)return"";const T=traitsOf(v);const tc=witOf(v);mindLog(v,"_decide");
+  /* Nhu mì hesitates */
+  if(T.includes("Nhu mì")&&roll(35)){mindLog(v,"_hesitate");return""}
+  /* Đa nghi wastes effort on a false suspicion */
+  if(T.includes("Đa nghi")&&roll(22)){const L=others(v).filter(x=>x!==t&&(x===S||x.alive&&!x.out)&&danger(x,v)<30);if(L.length){const u=pick(L);mindLog(v,"_wrongBelief");mindLog(v,"_mistake");evA(v,u,0);newsAdd(v,"spy",`Người của ${v.name} dò xét ${NM(u)} vì một mối ngờ không có thật`,u===S);return""}}
+  /* Tham vọng overreaches: aims at the highest seat */
+  let err=0;if(T.includes("Tham vọng")&&roll(20)){const L=others(v).filter(x=>(x===S||x.alive&&!x.out));const hi=L.sort((a,b)=>rkOf(b)-rkOf(a))[0];if(hi&&hi!==t&&bandOf(danger(v,hi))>=1){t=hi;err+=10;mindLog(v,"_overreach");mindLog(v,"_mistake")}}
+  /* rash: slighted Kiêu ngạo, or a bad week for anyone */
+  const rash=rashOf(v);if(rash){err+=10;mindLog(v,"_rash");mindLog(v,"_mistake")}
+  /* low wit: clumsy */
+  if(!rash&&tc<30&&roll(15)){err+=10;mindLog(v,"_mistake")}
+  const O=mindMenu(v,t);if(!O.length)return"";let k;if(rash){const ov=O.filter(x=>["accuse","rumor","trip","vp","frame"].includes(x[0]));k=wpick(ov.length?ov:O)}else k=wpick(O);persCount(v,k);
+  /* a big scheme is prepared first: it leaves a tell her people may catch */
+  if(BIG.includes(k)&&!v.plan){const pat=tc>=60?2:tc>=35?1:0;v.plan={k,t:key(t),due:bq()+1+R(2)+pat,err};mindTell(v,t,k);return""}
+  return mindRun(v,t,k,err)}catch(e){return""}};
+function mindTell(v,t,k){mindLog(v,"_tell");const tc=witOf(v);let c=12+(S.mat||0)*7+(S.staff||[]).filter(s=>s.tr==="lanh"||s.tr==="chuyen").length*8+(tc<35?15:0)-(tc>=70?8:0)+(t===S&&S.maid&&S.maid.loyal>=70?10:0);
+ if(!roll(cl(c,5,80)))return;mindLog(v,"_tellSeen");const txt=`Người của ${v.name} ${TELLS[k]||"có động tĩnh lạ"}`;S.tells=S.tells||{};S.tells[v.id]={k,t:key(t),bq:bq()};
+ try{newsAdd(v,k,txt,true)}catch(e){}noteAdd(v.id,`Tai mắt báo: ${TELLS[k]||"có động tĩnh lạ"}${t===S?" (có lẽ nhắm vào ngươi)":` (có lẽ nhắm vào ${NM(t)})`}`);
+ if(t===S){S.onGuard=S.onGuard||{};S.onGuard[v.id]=k;if(!S.dead)Q.push({t:"Tai mắt báo tin",h:`<p>${txt}.</p><p>Có lẽ nàng đang nhắm vào ngươi. Ngươi đã đề phòng: vài buổi tới mưu của nàng khó thành hơn; dò la hoặc tố giác nàng thì càng chắc.</p>`,who:{w:["r",v.id]}})}
+ else log(`Tai mắt báo: ${txt}.`)}
+/* plans fall due a few buổi later; her guard (from a caught tell) makes them fail more and leaves evidence */
+(function(){const r0=rivalsBuoi;rivalsBuoi=function(){S.bqN=(S.bqN||0)+1;let ev="";try{for(const v of liveRivals(true)){const P=v.plan;if(!P||!v.alive||v.out)continue;if(P.due>bq())continue;v.plan=null;const t=byKey(P.t);if(!t||(t!==S&&(!t.alive||t.out))||(t===S&&S.dead))continue;
+   let err=P.err||0;const guard=t===S&&S.onGuard&&S.onGuard[v.id];if(guard){err+=25;delete S.onGuard[v.id]}
+   let ok=false;try{ok=ACT[P.k].ok(v,t)}catch(e){}if(!ok){mindLog(v,"_abandon");continue}
+   const r=mindRun(v,t,P.k,err);if(guard&&FAILRX.test(r))evA(S,v,1);ev+=seenNPC(v,t,r);if(S.dead)return ev}}catch(e){}
+  return ev+r0.apply(this,arguments)}})();
+/* someone with a plan in hand waits for it instead of starting another */
+(function(){const n0=npcAct;npcAct=function(v,t){if(v&&v.plan)return"";return n0.apply(this,arguments)}})();
+/* ================= BALANCE KNOBS (measured with the sensible / random bots; see the report) ================= */
+const BAL={outQ:35,hz:1.35,conc:.45/.7,later:4};
+/* an empty Hoàng hậu seat: the Thái hậu may bring in a girl of a great house instead of holding a contest (same for every candidate) */
+(function(){const c0=contestOpen;contestOpen=function(r){if(r===7&&!ct()&&!queenP()&&S.outQv!==S.vacSince&&consorts().some(p=>candOK(p,7))&&(S.outQv=S.vacSince,true)&&roomFor("consort")&&roll(BAL.outQ)){const n=newRival(7,true);Object.assign(n,drawFace());n.rank=6;n.queen=true;n.dad=80;rivals.unshift(n);S.vacSince=null;
+  const t=`<b>Thánh chỉ: Thái hậu chọn ${n.name}, con gái danh môn, vào cung lập làm Hoàng hậu.</b> Ghế trống không mở tranh. `;log(t);return t}return c0.apply(this,arguments)}})();
+/* fewer births per life: conception (after the ×0.7) scaled; a woman who has borne before is a little safer in labour (everyone alike) */
+(function(){const c0=conceiveCh;conceiveCh=function(p){return Math.round(c0.apply(this,arguments)*BAL.conc)}})();
+(function(){const b0=birthRisk;birthRisk=function(p){const r=b0.apply(this,arguments);const n=p===S?(S.kids||[]).length:(p.kids||[]).length;if(n>0&&p===S&&S.birthWhy)S.birthWhy=S.birthWhy.concat([]);return n>0?cl(r-BAL.later,1.5,60):r}})();
+/* ================= RA VÀO CUNG CẤM: who may enter which place, when; one rule for every character (her and every NPC) =================
+   accessOf(p,k) -> {ok:true} | {ok:false,why,kind,ask}   kind: "rule" (rank / summons) | "hour" (closed) ; ask: "yk" xin yết kiến | "bk" xin bái kiến
+   accRole(fn): a role hook, fn(p,k,ctx) returns a verdict object to decide, or null to fall through (a servant-player module plugs in here)
+   accGrant(p,k): a pass for this buổi (summons, accepted request, successful sneak). */
+const ACC_ROLE=[];
+function accRole(fn){if(typeof fn==="function")ACC_ROLE.push(fn)}
+function accGrant(p,k){p=p||S;p.acPass=p.acPass||{};p.acPass[k]=bkey()}
+function accHas(p,k){const a=(p||S).acPass;return !!(a&&a[k]===bkey())}
+function accHost(k){if(k==="kn")return rivals.find(v=>v.queen&&v.alive&&!v.out)||null;if(k&&k[0]==="r")return RV(+k.slice(1))||null;return null}
+function accOwn(p,k){if(p===S)return k==="home"||(S.pal!=null&&palaceOf(S)===k);try{return palaceOf(p)===k}catch(e){return false}}
+const ACC_DAY={tyv:1,vuon:1};
+function accessOf(p,k){p=p||S;if(!k)return{ok:false,why:"cung trống",kind:"rule"};
+ if(accOwn(p,k))return{ok:true};
+ const ctx={b:S.buoi||0,r:rkOf(p),host:accHost(k)};
+ for(const fn of ACC_ROLE){try{const v=fn(p,k,ctx);if(v)return v}catch(e){}}
+ if(accHas(p,k))return{ok:true,pass:1};
+ const b=ctx.b,r=ctx.r;
+ if(k==="dtd"||k==="thu"){if(r>=4)return{ok:false,why:"cần xin yết kiến",kind:"rule",ask:"yk"};return{ok:false,why:"chỉ khi được triệu",kind:"rule"}}
+ if(k==="kn"){if(!qOn()||r>=7)return{ok:true};if(b===0||r>=5)return{ok:true};return{ok:false,why:"chỉ sáng thỉnh an",kind:"rule",ask:"bk"}}
+ if(k==="tn"){if(S.thDead)return{ok:true};if(r<2)return{ok:false,why:"cần phẩm Quý nhân",kind:"rule"};if(b===0)return{ok:true};return{ok:false,why:"chỉ sáng thỉnh an",kind:"rule"}}
+ if(k[0]==="r"){const h=ctx.host;if(!h||!h.alive||h.out)return{ok:true};const hr=rkOf(h);if(r>=hr-1)return{ok:true};return{ok:false,why:`cần phẩm ${RANKS[Math.max(0,hr-1)].n}`,kind:"rule",ask:"bk"}}
+ if(ACC_DAY[k]){if(b<=1)return{ok:true};return{ok:false,why:"đóng cửa tối",kind:"hour"}}
+ return{ok:true}}
+/* the odds and prices (her side; an NPC module may call the same) */
+function accSneakO(k,a){a=a||S;const base=k==="dtd"?25:k==="thu"?30:k==="tn"||k==="kn"?35:k[0]==="r"?45:55;return odA(a,base+(a.tamco||0)/5+(a.mat||0)*3)}
+function accAskO(k,a){a=a||S;if(k==="dtd"||k==="thu"){let o=45+(rkOf(a)-4)*8+mm()+(a.sung||0)/5;if(has("chamchinh")&&k==="thu")o-=10;if(has("datinh")&&k==="dtd")o+=8;return odA(a,o)}
+ const h=accHost(k);return odA(a,40+(h?aff(h,a)/2+(rkOf(a)-rkOf(h))*8:0))}
+function accName(k){try{return k==="home"?palName("home"):(typeof palName==="function"&&(PLNAME[k]||k[0]==="r")?palName(k):placeOf(k).n)}catch(e){return placeOf(k).n}}
+/* the full state of a map place for her right now: grey reason (access first, then khắc / confinement) */
+function accState(k){if(!S||!k)return{why:""};if(S.place===k)return{why:"",here:1};
+ if(S.out)return{why:"đang ở lãnh cung"};if(S.confined)return{why:`cấm túc ${S.confined} tháng`};
+ const a=accessOf(S,k);const tc=k==="home"?0:travel(S.place,k);
+ if(!a.ok){const st={why:a.why,kind:a.kind,ask:a.ask,tc};st.sneakOk=can(tc+2);if(a.ask==="yk")st.empAway=(S.where||{}).emp!==k;st.askOk=can(1)&&!st.empAway;return st}
+ if(k!=="home"&&!can(tc+1))return{why:"hết khắc"};
+ return{why:"",tc}}
+function accSneakLine(k,tc){return `${word(accSneakO(k))} · tốn: ${tc+1} khắc · thành: vào được buổi này · hỏng: Danh -8, bị phạt`}
+function accAskLine(k){return `${word(accAskO(k))} · tốn: 1 khắc · thành: được vào buổi này · hỏng: không mất gì thêm`}
+/* small kit buttons for the map hotspot: name + odds chip + price */
+function accMini(k,st,risk){const L=[];
+ if(st.ask&&st.ask==="yk")L.push(`<button class="acb" data-acask="${k}" ${st.askOk?"":"disabled"}>Xin yết kiến ${st.empAway?'<i>ngài vắng</i>':oddsChip(word(accAskO(k)))+'<i>1 khắc</i>'}</button>`);
+ if(st.ask==="bk")L.push(`<button class="acb" data-acask="${k}" ${st.askOk?"":"disabled"}>Xin bái kiến ${oddsChip(word(accAskO(k)))}<i>1 khắc</i></button>`);
+ if(st.kind)L.push(`<button class="acb" data-acsneak="${k}" ${st.sneakOk?"":"disabled"}>Lẻn vào ${oddsChip(word(accSneakO(k)))}<i>${st.tc+1} khắc${risk?" · bắt: Danh -8":""}</i></button>`);
+ return L.length?`<span class="macts">${L.join("")}</span>`:""}
+/* full kit buttons (Danh sách, cards) */
+function accBtns(k,st){const L=[];
+ if(st.ask==="yk")L.push(pbtn(`class="btn" data-acask="${k}"`,"Xin yết kiến",accAskLine(k),st.empAway?"Hoàng thượng không có ở đây":!can(1)?"hết khắc":""));
+ if(st.ask==="bk")L.push(pbtn(`class="btn" data-acask="${k}"`,"Xin bái kiến",accAskLine(k),!can(1)?"hết khắc":""));
+ if(st.kind)L.push(pbtn(`class="btn" data-acsneak="${k}"`,"Lẻn vào",accSneakLine(k,st.tc),st.sneakOk?"":"không đủ khắc"));
+ return L.join("")}
+/* acts */
+function accSneak(k){if(!S||S.dead||Q.length||S.out||S.confined)return;const tc=travel(S.place,k);if(!can(tc+2))return;const nm=accName(k);const o=accSneakO(k);spend(1);
+ if(roll(o)){accGrant(S,k);log(`Lẻn vào ${nm} trót lọt.`);window.__accSilent=0;goTo(k);if(S.place!==k)render();return}
+ spend(tc);apply({danh:-8});log(`<span class="r">Lẻn vào ${nm}, bị thị vệ bắt được: Danh -8.</span>`);punish(S,`tự tiện lẻn vào ${nm}`,1);
+ Q.push({t:"Bị bắt",h:`<p>Thị vệ ${nm} bắt được ngươi ở cửa hông. Chuyện truyền khắp lục cung.</p><p class="r">Danh -8 · ${S.confined?`cấm túc ${S.confined} tháng`:"bị phạt"}</p>`});showModal();render()}
+function accAsk(k){if(!S||S.dead||Q.length||!can(1))return;const st=accState(k);if(!st.ask||st.empAway)return;const nm=accName(k);const o=accAskO(k);spend(1);
+ if(roll(o)){accGrant(S,k);log(`Xin vào ${nm}: được cho vào buổi này.`);Q.push({t:st.ask==="yk"?"Được yết kiến":"Được mời vào",h:`<p>${st.ask==="yk"?"Thái giám truyền khẩu dụ: Hoàng thượng cho ngươi vào.":"Cung nữ ra cửa mời ngươi vào."}</p><p class="g">Được vào ${nm} buổi này.</p>`});}
+ else{log(`Xin vào ${nm}: bị từ chối.`);Q.push({t:"Bị từ chối",h:`<p>${st.ask==="yk"?`Thái giám ra cửa: “Hoàng thượng đang ${S.emp.mood>=2?"không vui":"bận"}, nương nương xin hồi cung.”`:"Cung nữ ra cửa: “Chủ tử nhà nô tỳ không tiện tiếp.”"}</p>`})}
+ showModal();render()}
+document.addEventListener("click",e=>{const s=e.target.closest("[data-acsneak]");if(s){e.preventDefault();e.stopImmediatePropagation();if(!s.disabled)accSneak(s.dataset.acsneak);return}
+ const a=e.target.closest("[data-acask]");if(a){e.preventDefault();e.stopImmediatePropagation();if(!a.disabled)accAsk(a.dataset.acask);return}
+ const i=e.target.closest("[data-acinfo]");if(i){e.preventDefault();e.stopImmediatePropagation();accInfo();return}
+ const g=e.target.closest(".agrey");if(g){e.preventDefault();e.stopImmediatePropagation()}},true);
+/* the gate on goTo: barred places are never entered silently; a tap from elsewhere shows the card with the ways in */
+(function(){const g0=goTo;goTo=function(k){if(!S||k===S.place||k==="home")return g0.apply(this,arguments);
+ const a=accessOf(S,k);if(!a.ok){if(S.place==="home"&&(!S.visit||S.visit.k!=="home"))S.visit={k:"home",people:homePeople(),talked:false,tk:{}};
+  if(!window.__accSilent&&!S.dead&&!Q.length&&!S.out&&!S.confined){const st=accState(k);const opts=[];
+   if(st.ask&&!st.empAway)opts.push({n:st.ask==="yk"?"Xin yết kiến":"Xin bái kiến",fx:{},x:accAskLine(k),go:()=>setTimeout(()=>accAsk(k),0)});
+   if(st.kind&&st.sneakOk)opts.push({n:"Lẻn vào",fx:{},x:accSneakLine(k,st.tc),go:()=>setTimeout(()=>accSneak(k),0)});
+   opts.push({n:"Thôi",fx:{},x:""});Q.push({t:accName(k),h:`<p>Không vào được lúc này: <b>${a.why}</b>.</p>${st.kind&&!st.sneakOk?`<p class="past">Lẻn vào: không đủ khắc (cần ${st.tc+2}, còn ${4-used}).</p>`:""}`,opts});showModal()}
+  return}
+ const prev=S.place;const r=g0.apply(this,arguments);
+ try{if(k==="lc"&&S.place==="lc"&&prev!=="lc"&&!S.out){apply({danh:-2});log("Bị thấy lui tới Trường Môn viện: Danh -2.");if(S.visit)S.visit.msg=(S.visit.msg?S.visit.msg+" ":"")+"Có người thấy ngươi ở lãnh cung: Danh -2."}}catch(e){}
+ return r}})();
+/* the new buổi re-enters her place quietly (a closed place sends her home without a card) */
+(function(){const n0=nextBuoi;nextBuoi=function(){window.__accSilent=1;try{return n0.apply(this,arguments)}finally{window.__accSilent=0}}})();
+/* a summons from the Thái hậu is a pass to Đức Thọ cung this buổi */
+(function(){const c0=chooseM;chooseM=function(i){try{const m=Q[0];if(m&&/triệu/i.test(m.t||"")&&m.opts&&m.opts[i]&&/^Đến/.test(m.opts[i].n)){if(/Thái hậu/.test(m.t))accGrant(S,"tn");if(/Hoàng thượng/.test(m.t)){accGrant(S,"dtd");accGrant(S,"thu")}if(/Hoàng hậu/.test(m.t))accGrant(S,"kn")}}catch(e){}return c0.apply(this,arguments)}})();
+/* NPC movement keeps the same rule: a consort barred from a place stays in her own palace */
+(function(){const pw=placeWhere;placeWhere=function(){const r=pw.apply(this,arguments);try{const W=S.where||{};for(const v of rivals){if(!v.alive||v.out)continue;const k=W[v.id];if(!k||k==="home"||k[0]==="r")continue;if(!accessOf(v,k).ok)W[v.id]=palaceOf(v)}}catch(e){}return r}})();
+/* person-card buttons that would walk into a barred place carry the reason, disabled */
+function accDis(html,k){if(!html||!k||!S||S.place===k)return html;const a=accessOf(S,k);if(a.ok||/<button[^>]* disabled/.test(html))return html;return html.replace("<button ","<button disabled ").replace("<small>",`<small><span class="kwhy">${a.why}</span> `)}
+(function(){if(typeof seeBtn==="function"){const s0=seeBtn;seeBtn=function(v){const h=s0.apply(this,arguments);try{return accDis(h,whereOf(v))}catch(e){return h}}}
+ if(typeof visitBtn==="function"){const v0=visitBtn;visitBtn=function(v){const h=v0.apply(this,arguments);try{return accDis(h,palaceOf(v))}catch(e){return h}}}})();
+/* THE MAP: grey as a whole when she cannot enter now; reason in grey; the ways in as kit buttons */
+function accSpot(all,cls,k,attrs,inner){const st=accState(k);if(st.here||!st.why)return all;
+ attrs=attrs.replace(/\sdisabled/g,"").replace(/title="([^"]*)"/,(m,t)=>`title="${t.replace(/ · (hết khắc|đang cấm túc[^·"]*|đang ở lãnh cung)/,"")} · ${st.why}"`);
+ inner=inner.replace(/<span class="mmeta">[\s\S]*?<\/span>(?=<|$)/,"");
+ return `<div class="mspot${cls.replace(/\soff/g,"")} off agrey" data-ak="${k}"${attrs}>${inner}<span class="mwhy">${st.why}</span>${accMini(k,st)}</div>`}
+(function(){const m0=mapHTML;mapHTML=function(){let h=m0.apply(this,arguments);if(window.__mapList)return h;
+ try{h=h.replace(/<button class="mspot([^"]*)" data-go="([^"]+)"([^>]*)>([\s\S]*?)<\/button>/g,(all,cls,k,attrs,inner)=>accSpot(all,cls,k,attrs,inner));
+  h=h.replace('<button class="btn mz" data-maplist="1">','<button class="btn mz" data-acinfo="1" aria-label="Ra vào cung cấm">ⓘ Ra vào</button><button class="btn mz" data-maplist="1">')}catch(e){}
+ return h}})();
+/* THE LIST: the same grey tiles */
+(function(){const g0=mapHTMLgrid;mapHTMLgrid=function(){let h=g0.apply(this,arguments);
+ try{h=h.replace(/<button class="mtile" data-go="([^"]+)"([^>]*)>([\s\S]*?)<\/button>/g,(all,k,attrs,inner)=>{const st=accState(k);if(st.here)return all.replace('class="mtile"','class="mtile ahere"');if(!st.why)return all;
+   inner=inner.replace(/<span class="mchip">[^<]*<\/span>/g,"");inner=inner.replace('<span class="mband">',`<span class="mband"><span class="mchip agw">${st.why}</span>`);
+   const acts=st.kind?`<span class="tacts">${accMini(k,st,1).replace(/<\/?span class="macts">/g,"")}</span>`:"";
+   return `<div class="mtile agrey" data-ak="${k}"${attrs.replace(/\sdisabled/g,"")}>${inner}${acts}</div>`});
+  h=h.replace('<div class="pmap">',`<div class="ph"><button class="btn" data-acinfo="1">ⓘ Ra vào cung cấm<small>ai được vào đâu, lúc nào</small></button></div><div class="pmap">`)}catch(e){}
+ return h}})();
+/* TRA CỨU: Ra vào cung cấm */
+function accInfo(){if(!S||Q.length)return;const R=n=>`<b>${n}</b>`;
+ Q.push({t:"Ra vào cung cấm",h:`<div class="acinfo"><p>Một luật cho mọi người trong cung, cả phi tần khác.</p>
+ <p>${R("Dưỡng Hòa điện, Cần Chính điện")}: khi được triệu. Từ Phi: xin yết kiến (ngài có thể từ chối).</p>
+ <p>${R("Càn Ninh cung")}: sáng thỉnh an, ai cũng vào. Lúc khác: được mời, hoặc từ Quý phi.</p>
+ <p>${R("Đức Thọ cung")}: sáng thỉnh an, từ Quý nhân. Thấp hơn: khi Thái hậu triệu.</p>
+ <p>${R("Cung phi tần khác")}: phẩm ngươi không thấp hơn chủ cung quá một bậc, hoặc được mời.</p>
+ <p>${R("Thái y viện, Ngự hoa viên")}: sáng, chiều. Tối đóng cửa.</p>
+ <p>${R("Kính sự phòng")}: phi tần nào cũng vào. ${R("Trường Môn viện")}: ai cũng vào, bị thấy: Danh -2.</p>
+ <p>${R("Cung của ngươi")}: luôn vào được.</p>
+ <p>Chỗ xám: không vào được lúc này. <b>Lẻn vào</b>: tốn khắc, bị bắt Danh -8 và bị phạt.</p></div>`,btn:"Đã rõ"});showModal()}
+/* look: grey as a whole */
+(function(){const st=document.createElement("style");st.textContent=`
+.mspot.agrey{cursor:default;background:#20201c66;border-color:#9a9a9255;-webkit-backdrop-filter:grayscale(1) brightness(.72);backdrop-filter:grayscale(1) brightness(.72);pointer-events:auto}
+.mspot.agrey:hover{border-color:#9a9a9255;background:#20201c66}
+.mspot.agrey .mlab{opacity:1!important;background:#2b2b28d9;color:#bdbdb4;text-shadow:none}
+.mspot.agrey .msil{filter:grayscale(1);opacity:.6}
+.mspot .mwhy{display:block;background:#2b2b28d9;color:#c9c9c0;font-size:.55rem;line-height:1.2;border-radius:6px;padding:0 5px;margin-top:1px;white-space:nowrap;pointer-events:none}
+.mspot.sm .mwhy{font-size:.5rem;padding:0 3px}
+.mspot .macts{display:flex;flex-direction:column;gap:2px;margin-top:2px;align-items:center;z-index:3}
+.mspot .acb,.mtile .acb{font:600 .55rem/1.2 var(--body);background:#3a2a1ee6;color:#ffe7b0;border:1px solid #c9a35a;border-radius:8px;padding:1px 5px;white-space:nowrap;cursor:pointer;display:inline-flex;align-items:center;gap:3px;min-height:20px}
+.mspot .acb .oc,.mtile .acb .oc{font-size:.5rem;padding:0 4px;line-height:1.2}
+.mspot .acb i,.mtile .acb i{font-style:normal;color:#f3e6cf;font-weight:400}
+.mspot .acb:disabled,.mtile .acb:disabled{opacity:.5;cursor:default;filter:grayscale(1)}
+@media (max-width:600px){.mspot .mwhy{font-size:.5rem}.mspot .acb,.mtile .acb{font-size:.5rem;min-height:18px}}
+.mtile.agrey{background-color:#6d6d68!important;background-blend-mode:luminosity;cursor:default;border-color:#77776f}
+.mtile.agrey .mband{filter:grayscale(1);opacity:.8}
+.mtile .mchip.agw{background:#3a3a36;color:#d8d8cf;border:1px solid #77776f}
+.mtile:disabled:not(.ahere){filter:grayscale(1)}
+.mtile.ahere:disabled{opacity:1}
+.mtile .tacts{display:flex;flex-wrap:wrap;gap:3px;padding:3px 4px 4px;width:100%;background:#1a0e08ee}
+.mtile .tacts{flex-direction:column;align-items:stretch}.mtile .tacts .acb{white-space:normal;justify-content:flex-start;flex-wrap:wrap;font-size:.6rem;min-height:26px;text-align:left}
+.acinfo p{margin:.2em 0;font-size:.85rem;line-height:1.35}
+`;document.head.appendChild(st)})();
+/* ================= NPC MINDS II: fills over j40 (never edits it). One rule for every head.
+   1. the push-down roads (j30) come back into the mind's menu (j40 replaced npcAct whole and dropped them), with tells;
+   2. knowledge: each victim keeps a belief book (bel) of who she thinks hurt her, built only from what she could know
+      (seen with her own eyes, her spy in the doer's palace, evidence in hand); she may stay in the dark or blame the wrong head,
+      planted evidence pulls her guess; the player's hidden blows are guessed the same way;
+   3. wit: every head may slip (low Tâm cơ most, high ~12%); the clever wait for better odds;
+   4. a bad week (punished, demoted, fallen) makes anyone rash for about three weeks;
+   5. tells reach her through a named servant of hers, by Tai mắt and servant traits; a servant who spies for the schemer keeps silent (withholds, never lies). ================= */
+const PUSHK=["lygian","tocao","xinhh","slowpoison","expose"];
+const PUSHW={slowpoison:"poison",lygian:"rumor",xinhh:"ally",tocao:"accuse",expose:"accuse"};
+PUSHK.forEach(k=>{if(!BIG.includes(k))BIG.push(k)});
+Object.assign(TELLS,{lygian:"đem bạc lén biếu thái giám hầu cận Hoàng thượng, dò lúc ngài vui buồn",tocao:"sai người gom lời cung nhân, chép lại sổ sách cũ",
+ xinhh:"năng sang cung Hoàng hậu, ngồi rất lâu, cho người hầu lui ra",slowpoison:"ngày ngày sắc một thứ thuốc bổ lạ mà chẳng dùng cho mình",expose:"cho người canh cửa sau, ghi giờ ai ra vào"});
+function m43odds(v,t,k){try{const a=ACT[k];return a&&a.o?a.o(v,t):null}catch(e){return null}}
+/* the menu: push-down roads against the holder of the seat she wants next (about the old 45% share); the clever drop poor odds and wait */
+(function(){const m0=mindMenu;mindMenu=function(v,t){let O=m0.apply(this,arguments);try{
+  const nx=rkOf(v)+1;const want=rkOf(t)===nx&&SEATCAP[nx]!=null&&!seatFree(nx);
+  if(want){const b=bandOf(danger(v,t));const allow=BANDS.slice(1,b+1).flatMap(x=>x[2]);const L=PUSHK.filter(k=>{if(!allow.includes(k)||!ACT[k])return false;try{return ACT[k].ok(v,t)}catch(e){return false}});
+   if(L.length){const W=O.reduce((a,b)=>a+b[1],0);const pw=L.map(k=>Math.max(.05,persW(v,PUSHW[k])));const ps=pw.reduce((a,b)=>a+b,0);const tot=W>0?W*.45/.55:1;L.forEach((k,i)=>O.push([k,tot*pw[i]/ps]))}}
+  if(witOf(v)>=60&&O.length){let drop=0;const keep=O.filter(x=>{const o=m43odds(v,t,x[0]);if(o!=null&&o<45&&roll(60)){drop++;return false}return true});
+   if(drop){mindLog(v,"_wait");if(!keep.length){const sp=O.find(x=>x[0]==="spy");return sp?[sp]:[]}}O=keep}/* the clever wait out poor odds and dig for evidence meanwhile */
+ }catch(e){}return O}})();
+/* the push-down roads read Tâm cơ through odT: a blunder lowers them too */
+(function(){const o0=odT;odT=function(a,b){const r=o0.apply(this,arguments);return a&&a.__err?cl(r-a.__err,5,95):r}})();
+/* belief book */
+function m43sev(k){for(let i=1;i<BANDS.length;i++)if(BANDS[i][2].includes(k))return [0,6,12,20][i];return 6}
+function belOf(t,x){t.bel=t.bel||{};const k=key(x);return t.bel[k]=t.bel[k]||{r:0,w:0}}
+mindBelief=function(t,v,k){if(!t||t===S||!t.alive||t.out||!v)return;const kv=key(v);const ev=(t.evm&&t.evm[kv])||0;
+ let p=35+witOf(t)/2+(ev>0?25:0)-witOf(v)/4;let seen=false;try{seen=together(v,t)}catch(e){}if(seen)p+=40;
+ const spy=((v===S?S.staff:v.staff)||[]).some(s=>s&&s.spyFor===key(t));if(spy)p+=30;p=cl(p,10,95);mindLog(t,"_belief");
+ const n=m43sev(k);if(roll(p)){oanAdd(t,v,n);belOf(t,v).r+=n;return}
+ const L=others(t).filter(x=>x!==v&&(x===S||x.alive&&!x.out));
+ if(!L.length||roll(30)){mindLog(t,"_dark");return}/* kept in the dark: she knows a blow fell, not whose */
+ const w=L.map(x=>[x,1+oan(t,x)+Math.max(0,-aff(t,x))+15*((t.evm&&t.evm[key(x)])||0)]);let r=Math.random()*w.reduce((a,b)=>a+b[1],0),i=0;while(r>w[i][1]&&i<w.length-1){r-=w[i][1];i++}
+ const s=w[i][0];oanAdd(t,s,n);belOf(t,s).w+=n;mindLog(t,"_wrongBelief");t.blamed=t.blamed||{};t.blamed[key(s)]=(t.blamed[key(s)]||0)+1;
+ if(s===S&&roll(30+(S.mat||0)*8))noteAdd(t.id,`Nghe nói ${t.name} ngờ ngươi đứng sau chuyện ${ACT[k]?ACT[k].n.toLowerCase():"vừa rồi"}, dù không phải ngươi`)};
+/* the belief book fades with the grudges, month by month */
+(function(){const o0=oanMonth;oanMonth=function(){const r=o0.apply(this,arguments);try{for(const v of rivals){if(!v.bel)continue;for(const k in v.bel){const b=v.bel[k];b.r=Math.floor(b.r*.8);b.w=Math.floor(b.w*.8);if(!b.r&&!b.w)delete v.bel[k]}}}catch(e){}return r}})();
+/* her own hidden blows are guessed by the victim the same way */
+const M43HARM=new Set(BANDS.slice(1).flatMap(x=>x[2]).concat(PUSHK));
+(function(){const r0=runAct;runAct=function(a,t,k){const r=r0.apply(this,arguments);try{if(a===S&&t&&t!==S&&t.alive&&M43HARM.has(k)&&k!=="accuse"&&k!=="vp"&&k!=="tocao"&&r&&!FAILRX.test(r))mindBelief(t,S,k)}catch(e){}return r}})();
+/* wit: every head can slip; acts on a belief she holds wrongly are counted */
+(function(){const r0=mindRun;mindRun=function(v,t,k,err){err=err||0;try{const tc=witOf(v);if(!err&&roll(tc>=60?12:tc>=30?18:20)){err=10;mindLog(v,"_mistake");mindLog(v,"_slip")}
+  mindLog(v,"_act");const b=v.bel&&t&&v.bel[key(t)];if(b&&(b.w||b.r))mindLog(v,"_actBelief");if(b&&b.w>0&&b.w>=b.r)mindLog(v,"_actWrong")}catch(e){}
+ const r=r0.call(this,v,t,k,err);try{if(r&&FAILRX.test(r))mindLog(v,"_fail")}catch(e){}return r}})();
+/* a bad week: punished, demoted or fallen makes a head rash for about three weeks */
+function m43bad(p){if(p&&typeof p==="object"&&p!==S)p.badWk=bq()}
+(function(){const p0=punish;punish=function(p){m43bad(p);return p0.apply(this,arguments)}})();
+(function(){const d0=demote;demote=function(p){m43bad(p);return d0.apply(this,arguments)}})();
+(function(){const f0=fall;fall=function(p){m43bad(p);return f0.apply(this,arguments)}})();
+(function(){const r0=rashOf;rashOf=function(v){const r=r0.apply(this,arguments);if(r)return r;if(v&&v.badWk!=null&&bq()-v.badWk<=9&&roll(25)){mindLog(v,"_badWeek");return 1}return 0}})();
+/* tells: the same chance as before, now carried by a named servant of hers; a servant who spies for the schemer keeps it back */
+function m43reporter(){const L=[];const seen=new Set();for(const s of [S.maid].concat(S.staff||[])){if(!s||seen.has(s))continue;seen.add(s);L.push(s)}if(!L.length)return null;
+ const w=L.map(s=>(s.tr==="lanh"||s.tr==="chuyen"?3:s.tr==="trung"?2:1)*(s.loyal>=60?1.5:1));let r=Math.random()*w.reduce((a,b)=>a+b,0),i=0;while(r>w[i]&&i<w.length-1){r-=w[i];i++}return L[i]}
+mindTell=function(v,t,k){mindLog(v,"_tell");try{if(v.plan&&v.plan.due>bq()+3)v.plan.due=bq()+3}catch(e){}/* a tell comes 1-3 buổi before the blow */const tc=witOf(v);let c=12+(S.mat||0)*7+(S.staff||[]).filter(s=>s.tr==="lanh"||s.tr==="chuyen").length*8+(tc<35?15:0)-(tc>=70?8:0)+(t===S&&S.maid&&S.maid.loyal>=70?10:0);
+ if(!roll(cl(c,5,80)))return;const s=m43reporter();
+ if(s&&s.spyFor&&s.spyFor!=="me"&&(s.spyFor===key(v)||roll(50))){mindLog(v,"_tellWithheld");return}
+ mindLog(v,"_tellSeen");const what=TELLS[k]||"có động tĩnh lạ";const txt=`${s?s.name+" về báo: n":"N"}gười của ${v.name} ${what}`;S.tells=S.tells||{};S.tells[v.id]={k,t:key(t),bq:bq()};
+ try{newsAdd(v,k,txt,true)}catch(e){}noteAdd(v.id,`${s?s.name:"Tai mắt"} báo: ${what}${t===S?" (có lẽ nhắm vào ngươi)":` (có lẽ nhắm vào ${NM(t)})`}`);
+ if(t===S){S.onGuard=S.onGuard||{};S.onGuard[v.id]=k;if(!S.dead)Q.push({t:"Tai mắt báo tin",h:`<p>${txt}.</p><p>Có lẽ nàng đang nhắm vào ngươi. Ngươi đã đề phòng: vài buổi tới mưu của nàng khó thành hơn; dò la hoặc tố giác nàng thì càng chắc.</p>`,who:{w:["r",v.id]}})}
+ else log(`${txt}.`)};
+/* the wit scale: rivals' Tâm cơ runs about 5-55, so j40's marks (30 / 35 / 60 / 70) read on a stretched scale (x1.6), every head alike; without it no rival ever reached "patient" */
+witOf=function(v){return cl(Math.round(1.6*(v===S?S.tamco||0:v.tamco||0)),0,100)};
+/* a slight is a real blow (Oán +5 or more at once), not every small rub; smaller rubs leave the mood as it was */
+(function(){const o0=oanAdd;oanAdd=function(x,y,n){const had=x&&x!==S?x.slightAt:undefined;const r=o0.apply(this,arguments);try{if(x&&x!==S&&n>0&&n<5){if(had===undefined)delete x.slightAt;else x.slightAt=had}}catch(e){}return r}})();
+
 </script>
-<script>(function(){try{var m=new Date().getMonth();var se=["xuan","xuan","xuan","ha","ha","ha","thu","thu","thu","dong","dong","dong"][m];var h=new Date().getHours();var b=h<11?"sang":h<18?"chieu":"toi";var t=document.getElementById("title");if(t)t.style.setProperty("background","linear-gradient(rgba(40,18,10,.15),rgba(40,18,10,.35)),url(img/map-"+se+"-"+b+".webp) center/cover no-repeat","important")}catch(e){}})();</script>
+
 <script>if("serviceWorker" in navigator){let had=!!navigator.serviceWorker.controller;navigator.serviceWorker.addEventListener("controllerchange",()=>{if(had)location.reload();had=true});addEventListener("load",()=>navigator.serviceWorker.register("sw.js").then(r=>r.update()).catch(()=>{}))}</script>
 </body>
 </html>
