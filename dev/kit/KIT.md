@@ -85,7 +85,7 @@ Read it live: `RCOL[rank]`, or `KIT_RANK_COL[rank]` / `KIT_RANK_COL.cold` / `kit
 | labelled bar | `ghenBar(n)`, `fbar(v,lo,hi,good)`, `sbar(label,v,cls)` | always label + number beside the bar |
 | chip | `chip(text,cls)` → `.chip` (`.hot` red, `.ok` green) | |
 | modal / dialog | `Q.unshift({t,h,opts}); showModal()` → `.modal .dlg`; speaker = `pframe(face)` or `pframeArt(placeArt)` | `.modal.pcm` for person cards, `.modal.night` for nights |
-| result card | `resultShow(title,before,ok)` → `#rtoast` seal THÀNH/HỎNG + coloured deltas + why | after every act/choice (`wrapR`) |
+| result card | `resultShow(title,before,ok)` → `#rtoast.karesult` | section 7 (j63) |
 | status row | `renderHud2()` → `#hud2 .hc` | collapsible; every number labelled |
 
 ---
@@ -198,5 +198,25 @@ Rules
   Columns — act cards `.cards`: 3 at ≥1200px, 2 at 600–1199px, 1 under 600px. `.pcb` / `.rbtn`: auto-fill min 230/260px, 1 under 600px.
   Dialog `.opts`: auto-fill min 250px (1 column in the dialog), 1 under 600px.
 - CSS is scoped to `button.ka`, `.kb`, `.kr*`, and to `.cards/.pcb/.opts/.rbtn:has(> button.ka)`; other kit parts are untouched.
+- A gain that rounds to 0 is never shown as a gain: "Sắc +0" becomes "Sắc không đổi" in Ghi chú.
 - Not converted on purpose: the tiny map hotspot chips (`.mspot .acb`, j41) stay chips so the map is not covered; their odds use `oddsChip`.
+
+---
+
+## 7. RESULT CARD (j63) — after every act and choice
+
+`resultShow(title, before, ok)` (called by `wrapR`, options, servant/child/court acts) → `#rtoast.rtoast.karesult`:
+
+```
+[seal THÀNH (green) | HỎNG (red)]  act name                  title row, hairline under it
+One short sentence of what happened, from the log of this act, rival names with their rank title ("Hoàng hậu Liễu Họa Mi").
+Được  Sủng 8→17 (+9) · Ân tình 0→5 (+5) · Thái hậu: quý ngươi hơn (0→8, +8)                 green
+Mất   Đức 30→26 (−4) · Hoàng hậu Liễu Họa Mi: ghét ngươi hơn (thiện cảm −15), ghen +25, oán +20   red, person name in ink
+                                                     Xem đầy đủ ở Nhật ký   (link: opens the Nhật ký tab)
+```
+- Values are the REAL changes (snapshot before → now), never the option preview: no ranges, no "có thể", no repeated price line.
+- One group per person; the two-way relation is ONE plain phrase (her feeling toward you; yours only if hers did not move);
+  "Hoàng hậu với ngươi" merges into the queen's group. Lines with "→" lists, "thành:/kèm:" previews are never used as the sentence;
+  a sentence that only repeats the act name is dropped.
+- Same `.kb` row grid and colours as the act card; no change at all → Ghi chú "không đổi chỉ số". Stays 9 s; tap closes.
 
