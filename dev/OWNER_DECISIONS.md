@@ -85,3 +85,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (22:00Z) Owner: Nữ đế is NOT a rare ending. At the succession point the player CHOOSES: (a) son becomes emperor (she = Hoàng thái hậu), (b) she rules as regent (nhiếp chính, buông rèm), (c) she takes the throne herself (Nữ đế). Each path needs conditions and has its own consequences/epilogue chapter.
 - (19:20Z) Owner: show her own age in the top bar next to name/rank.
 - (19:25Z) Owner frustrated huadian keeps being redone. Decision: stop all huadian changes; keep the approved marks (t1 small flower per identity motif, NOT a dot); only finish a51 ageing. Huadian is closed — don't reopen.
+- (19:30Z) Owner: items are never free/automatic — must be obtained by crafting, buying or gifts (e.g. the face veil after hủy dung: craft, buy, or be gifted; until then scars show). Same for NPCs. Audit all free grants (review/items-earned).
