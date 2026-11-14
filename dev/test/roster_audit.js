@@ -62,6 +62,8 @@ const HOOK=`(function(){const A=window.__aud={checks:0,lives:0,khac:0,err:{a:0,b
 const HOOK2=`(function(){const A=window.__aud;const bad=(k,m)=>{A.err[k]++;if(A.ex[k].length<12)A.ex[k].push((S&&S.origin?S.origin.k:"")+" T"+(S?S.turn:"")+" "+m)};
  const KEYS=["v","a","b","f","r","t","a0","a1","a2","a3"];
  const PL=()=>{const L=[["vuon",/ngự hoa viên|hòn non bộ/i],["thu",/cần chính điện/i],["dtd",/dưỡng hòa điện/i],["tn",/đức thọ cung/i],["kn",/càn ninh cung/i],["tyv",/thái y viện/i],["ksp",/kính sự phòng/i],["lc",/trường môn viện|lãnh cung/i]];return L};
+ /* a place named as the one being LEFT ("được tha khỏi lãnh cung", "rời ngự hoa viên") puts nobody there */
+ const AT=(s,re)=>{const g=new RegExp(re.source,"gi");let m;while((m=g.exec(s))){if(!/(khỏi|rời|dời từ|từ)\\s*$/i.test(s.slice(Math.max(0,m.index-10),m.index)))return true}return false};
  const HEAR=/đồn|rỉ tai|nghe nói|bóng gió|\\bhay |thường|từng |hôm nọ|hôm qua|đêm qua|năm xưa|trước đây|\\bsẽ |ngày mai|tối mai|đêm nay|tối nay|\\bsắp |\\bmuốn |\\bđịnh |\\bnếu |\\(sai |sai người|\\bhứa|mơ thấy|vọng sang|có thể|nghi |\\bmời .* ra |ngày rằm/i;
  const OWNER=/(của|bên|cung|con của|tặng|cho|về|nhắm vào|hại|vu|bắt|thăm|giúp|tố|với)\\s*$/i;
  function strip(h){return String(h||"").replace(/<br\\s*\\/?>/gi,". ").replace(/<\\/p>/gi,". ").replace(/<[^>]+>/g," ").replace(/\\s+/g," ")}
@@ -85,8 +87,8 @@ const HOOK2=`(function(){const A=window.__aud;const bad=(k,m)=>{A.err[k]++;if(A.
   if(ent)for(const p of ent.places){if(p.res!=="ok"){A.placeSkip++;continue}A.placeChk++;const rid=p.id;const e=R.P[rid];let k=p.k;if(k==="here")k=S.place;if(k==="own"){const v=rid[0]==="v"?RV(+rid.slice(1)):null;k=v?(v.out?"lc":palaceOf(v)):rid==="th"?"tn":"dtd"}
    if(!e||e[kh][0]!==k)bad("h","câu chữ đặt "+rid+" ở "+k+" mà sổ ghi "+(e?e[kh][0]:"không có")+" ("+pid+") ent="+ent.key+"/"+ent.kh+" now="+j95key()+"/"+kh+" rec="+JSON.stringify(e&&e[kh]));if(rid[0]==="v"&&kh===j95kh()){const v=RV(+rid.slice(1));if(v&&v.alive&&whereOf(v)!==k)bad("h","whereOf lệch sau khi dời: "+v.name);if(countAt(k)<1)bad("h","bản đồ không đếm người được dời tới "+k)}}
   if(pid&&(pid.indexOf("e68")===0||P95B[pid]))return;
-  const txt=strip(m.h||"");const sents=txt.split(/(?<=[.!?…])\\s+|\\s*;\\s*/);const RVL=rivals.filter(v=>v.alive).sort((a,b)=>b.name.length-a.name.length);
-  for(const s0 of sents){const s=s0.trim().replace(/sổ (sách )?kính sự phòng/gi,"sổ");if(!s||HEAR.test(s))continue;for(const [code,re] of PL()){if(!re.test(s))continue;
+  const txt=strip(m.h||"");const sents=txt.split(/(?<=[.!?…][)"”']?)\\s+|\\s*;\\s*/);const RVL=rivals.filter(v=>v.alive).sort((a,b)=>b.name.length-a.name.length);
+  for(const s0 of sents){const s=s0.trim().replace(/sổ (sách )?kính sự phòng/gi,"sổ");if(!s||HEAR.test(s))continue;for(const [code,re] of PL()){if(!AT(s,re))continue;
     const taken=[];for(const v of RVL){const i=s.indexOf(v.name);if(i<0||taken.some(t=>i>=t[0]&&i<t[1]))continue;taken.push([i,i+v.name.length]);if(OWNER.test(s.slice(Math.max(0,i-18),i)))continue;
      const e=R.P["v"+v.id];const pl=ent&&ent.places.find(p=>p.id==="v"+v.id);if(pl&&pl.res!=="ok"){A.placeSkip++;continue}A.placeChk++;
      if(!e||e[kh][0]!==code){/* another place word in the same sentence may be the one meant */const alt=PL().some(([c2,r2])=>c2!==code&&r2.test(s)&&e&&e[kh][0]===c2);

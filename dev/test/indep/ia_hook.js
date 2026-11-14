@@ -28,7 +28,7 @@
   for(const m of S.men||[]){if(!m.alive)continue;if(m.rw==="thái y"||m.rw==="thị vệ")put(m.id,"nam nhân trực trong cung "+m.name)}
   for(const [k,mo] of allKids()){if(!k||!k.alive)continue;const arr=mo?mo.kids:S.kids;put("k:"+(mo?mo.id:"me")+":"+arr.indexOf(k),"hoàng tự "+k.name)}
   return M}
- function knownPlaces(){const K=new Set(["home","lc","kn","tn","dtd","thu","vuon","tyv","ksp"]);try{for(const x of places())K.add(x.k)}catch(e){}return K}
+ function knownPlaces(){/* tgk: Tân Giả khố (j42), where a cung nữ-origin player is sent to wash as punishment: a real place, off the map */const K=new Set(["home","lc","kn","tn","dtd","thu","vuon","tyv","ksp","tgk"]);try{for(const x of places())K.add(x.k)}catch(e){}return K}
  function ownerOf(id){if(id.startsWith("mm:")){const k=id.slice(3);return k==="me"?S:RV(+k)}if(id[0]==="s"){const sid=+id.slice(1);for(const o of [S].concat(rivals))for(const s of o.staff||[])if(s&&s.sid===sid)return o}return null}
  function homeOf(o){return o===S?(S.out?"lc":"home"):(o.out?"lc":palaceOf(o))}
  IA.check=function(where){if(!S||S.dead||window.__j95off)return;const R=S.roster;if(!R)return bad("B",where+": không có sổ");if(R.key!==j95key())return;
