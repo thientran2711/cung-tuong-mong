@@ -31,6 +31,15 @@ Thi hành: `dev/build/j84.js` (module cuối trong assemble.py) sửa dữ liệ
 | Tab quan hệ | Giao tình | Quan hệ |
 | Tab truyện riêng của thân phận | Mệnh truyện | Tuyến truyện, storyline |
 | Tab sổ việc đã qua | Sổ ghi | Nhật ký, log |
+| Tab kẻ hầu | Cung nhân | Kẻ hầu (tên tab; trong câu vẫn dùng "kẻ hầu") |
+| Tab con cái | Hoàng tự | Con cái (tên tab) |
+| Tab rương | Tư trang (chữ ngắn cũng "Tư trang") | Rương đồ, Rương |
+| Tab phe | Phe phái (chữ ngắn "Phe") | — |
+| Tab ở chế độ cung nữ | Phận sự · Dư đồ · Đồng liêu · Thân phận · Sổ ghi; lời dặn "Mục Phận sự" | Việc |
+| Nút thu bảng trên cùng | Tư chất | Chỉ số |
+| Chữ ngắn của tab (màn dưới 1280 px) | Hành sự, Dư đồ, Phi tần, Giao tình, Phe, Cung nhân, Hoàng tự, Tư trang, Tài nghệ, Mệnh, Sổ ghi | Việc, Bản đồ, Quan hệ, Kẻ hầu, Con, Rương, Truyện, Nhật ký |
+| Mưu người khác nhắm vào ngươi (sổ ghi) | «Hạ độc» nhắm vào ngươi (việc khó): không thành. | [Hạ độc · Khó · hỏng] |
+| Bảng thi tài | bảng định thứ; "nàng mất 2 phần" | bảng điểm, điểm |
 | Bậc tài nghệ | Bậc 1: … | B1: … |
 | Soát đồ | Soát đồ, soát rương | Kiểm tra |
 | Thái y xem đồ | nghiệm độc | xét nghiệm |
