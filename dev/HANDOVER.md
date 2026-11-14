@@ -51,3 +51,9 @@ All old-session workers are STOPPED. The new main (Cung Tường Mộng · chín
 - Every image, frame, button, bar, card, tab, backdrop and any other visual/UI element must come from the ONE shared kit (dev/kit/KIT.md + the kit functions pframe/pcard/act-card/option/tabs/bars in j19/jkit and their successors). No worker may hand-draw a new style, a one-off frame, a custom button or a private CSS look.
 - Review gate: no visual change goes to main unreviewed. Workers push visual/UI work to a branch `review/<topic>`; the main session runs an independent kit reviewer (it checks against dev/kit/KIT.md with screenshots at 1510x2000, 904x2316, 1024x768, 390x844). Only after PASS is it merged to main. Anything that deviates from the kit = FAIL, regardless of how nice it looks.
 - Portraits: rectangular (3:4) rank/role frames from the kit (modelled on Đại Hy's round rank frames, refs in dev/kit/ref-daihy/), a brocade (gấm) patterned background per rank/role instead of cream/white, and a grey silhouette "unknown person" portrait for anyone the player has not yet met.
+
+## KIT-FIRST PROCESS (owner rule, binding — 2026-11-14)
+1. Any UI issue covers its whole GROUP. Example: a complaint about the "Thang nguy hiểm" panel means EVERY info/rule/help/notice/news/result panel in the game gets fixed the same way, not just that one.
+2. UI work goes to the KIT OWNER first. The kit owner builds the shared component in dev/kit (KIT.md + kit functions/CSS), tests it at the 4 sizes, and posts a "KIT READY: <component>" confirmation to the main session.
+3. Only after that confirmation may other workers use that component. Workers never style UI themselves; they only fill kit components with data/logic.
+4. Review rejects any UI not built from a confirmed kit component.
