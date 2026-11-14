@@ -6,7 +6,7 @@
    ghi Sổ luân hồi (danh hiệu) và Phúc duyên (j52 PD_END). Hai chiều: mẹ ruột tân đế là phi tần khác cũng buông rèm được.
    Mọi thẻ là PEND (succ0 / succC) nên ghi sổ, nạp sổ, tải lại vẫn còn; khi đang ở vĩ thanh thế gian dừng (S.succ.on). */
 const SUCC={b:{min:15,max:92},c:{min:5,max:80},yrs:3};
-const SUCC_ART={};/* tranh chờ duyệt (dev/SUCCESSION_PLAN.md §7): key → img/succ-*.webp khi đã vẽ */
+const SUCC_ART={"succ-card":"img/ev-tien-de-bang-ha.webp"};/* tranh (dev/SUCCESSION_PLAN.md §7): key → img; thẻ chọn đã có tranh (pilot gpt-2-6), các tranh khác chờ duyệt */
 const SUCC_END={
  a_ok:{h:"Hoàng thái hậu",pd:40},a_dm:{h:"Mẫu hậu Hoàng thái hậu",pd:30},a_bad:{h:"Thái hậu bị giam lỏng",pd:20},a_rare:{h:"Thái hoàng thái hậu",pd:80,rare:1},
  b_ok:{h:"Nhiếp chính Thái hậu",pd:55},b_keep:{h:"Thái hậu chấp chính",pd:45},b_bad:{h:"Bị ép trả rèm",pd:20},b_rare:{h:"Nhị thánh lâm triều",pd:90,rare:1},
@@ -178,9 +178,12 @@ function succPatch(m){const M=$("modal");if(!M)return;m.opts.forEach((c,i)=>{con
  if(c.need&&c.need.length){b.setAttribute("data-kneed",encodeURIComponent(JSON.stringify(c.need)));if(c.need.some(n=>!n.ok))b.disabled=true}
  if(c.rare){b.classList.add("ksel","k97");b.setAttribute("aria-label","Cơ duyên hiếm: "+String(c.n).replace(/<[^>]+>/g,""))}})}
 (function(){const s0=showModal;showModal=function(){const m=Q[0];if(!m||!/^succ/.test(m.pid||""))return s0.apply(this,arguments);
- if(m.pid==="succ0")m.showOut=true;if(SUCC_ART[m.pid==="succ0"?"succ-card":""])m.art=SUCC_ART["succ-card"];
+ if(m.pid==="succ0"){m.showOut=true;m.sceneArt=SUCC_ART["succ-card"]}
  const kf=kitFix;kitFix=function(){kitFix=kf;try{succPatch(m)}catch(e){console.error(e)}return kf.apply(this,arguments)};
- try{return s0.apply(this,arguments)}finally{kitFix=kf}}})();
+ try{return s0.apply(this,arguments)}finally{kitFix=kf;try{succBand(m)}catch(e){console.error(e)}}}})();
+/* the wide picture band at the top of the card: kit PICTURE FRAME kitSceneArt (KIT 28.17); without that kit piece nothing is drawn */
+function succBand(m){const src=m&&m.sceneArt;if(!src||typeof kitSceneArt!=="function")return;const M=$("modal");const body=M&&M.querySelector("#mb > .kpb, #mb");if(!body||body.querySelector(".ksuccart"))return;
+ const d=document.createElement("div");d.className="kpidart ksuccart";d.innerHTML=kitSceneArt(src,"Tiên đế băng hà",{shape:"wide",cls:"kidart",cap:false});body.prepend(d)}
 /* chooseM refuses a locked option even if it is reached another way */
 (function(){const c0=chooseM;chooseM=function(i){const m=Q[0];if(m&&/^succ/.test(m.pid||"")){const c=m.opts&&m.opts[i];if(!c||(c.need&&c.need.some(n=>!n.ok)))return}return c0.apply(this,arguments)}})();
 /* ---------- debug jump: succDebug("a"|"b"|"c"|"") ---------- */
