@@ -24,3 +24,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - Weather: already implemented (affects who appears where, emperor mood, Sức, contests; particle effects in j11). Only make it clearly visible + weather chip. Don't re-propose.
 - Scenes: every location background in 4 seasons.
 - All art: Magnific gpt-2-6 only. Event art: just draw, no previews needed. Story (Mệnh truyện) art: ~468 images pending owner's OK ("duyệt vẽ tiếp").
+- Scenes: also vary by time of day (each buổi: morning/afternoon/evening(+noon if exists)) × 4 seasons.
