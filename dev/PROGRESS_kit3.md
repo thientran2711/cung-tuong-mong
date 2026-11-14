@@ -20,3 +20,4 @@ allergy rash overlay art (KIT_RASH hook ready); index.html/sw.js not rebuilt on 
 - kitImgErr (jkit.js): null-safe inline onerror for j15 pcPort, j3, j90 podium, jk4 event stage (fixes "reading 'classList' of null").
 - Measured 686/1180/1366/1024 (KIT.md §33 table), consort + cung nữ 1/3/5/6 people: all whole, chips uncut, 0 errors, 0 overflow.
   Shots dev/shots/review/fold-layout/k33-*.jpg. Harness: scratchpad k3/st.js + h2.js (route-served files, no server).
+- 11/15 KIT 33.5 two-line stage name chips (rank small on top, name below, rank-tinted) — jk3 + jk4 + j59 (--tc on name). Shots k335-*.jpg.
