@@ -1,5 +1,32 @@
 # Art progress (art worker, 11/14/2026)
 
+## art12 (worker #12) — STATUS (read first; resumes art11 below)
+- Work dir: scratchpad/fw12 (copy of fw11, paths sed'ed to worktree agent-a36359ad81f20b98e; fw11/bg pngs deleted for disk).
+  DISK is tight (~4 GB free): delete bg/<10-char-id>.png raw downloads and *.orig.png / *.prehd.png after publishing.
+- New tools (copied to dev/figwork): hd.py (HEAD-GRID forehead fix, coordinator method (a)): `hd.py make JID BG grid.png` = 2x2 grid of
+  the 4 faces (YuNet, 1024/tile) from bg/<JID>-<BG>.png; upload, gpt-2-6 edit at 2k 1:1; `hd.py paste JID BG edit.png` finds the new
+  mark in each edited tile (compact round blob near the brow midline), aligns (phaseCorrelate) and pastes back ONLY a feathered
+  ellipse (0.34 x 0.36 eye-distance) around it into the 4k cut-out (RGB only, alpha kept, backup *.prehd.png); `DRY=1` prints only,
+  `DOT="k:x,y"` overrides a tile. Then sheetproc.py + post.sh as usual. zoom.py (before/after forehead strips, AFTER=1),
+  urladd.py (ids -> urls.json from this transcript), prep.py (download bg + darkfix + demole without sheetproc), put.py/dl.py
+  (upload PUT / download from transcript; edit the jsonl path for a new agent).
+- t1 dot prompt (2x2 grid): "...completely remove the current ornament painted on the forehead between the eyebrows (no petal, no flower,
+  no drop, no stem, no leaf may remain; restore clean smooth skin there) and paint in its place one single small plain solid round <col>
+  dot, a perfect little circle about one third the width of an eye, flat paint on the skin, centred just above the eyebrows..."
+- !!! COORDINATOR STOP (11/14 ~19:20Z): the "t1 = plain dot" rule was NOT the owner's; she had approved t1-t6 + t8 huadian
+  (t1 = c03-t1-style small flower in each identity's motif). NO MORE HUADIAN CHANGES. t2 stays as is (done, approved look).
+  => REVERTED: all consort t1 fig/por (128 files) + their FIGURES.json records to 65a75ed7 (= state before workers #10/#11 t1 edits,
+  moles already removed there). This also drops the #10/#11 a51 ageing on t1 (it was combined with the mark edit) - ask coordinator
+  whether to redo t1 a51 ageing with the keep-marks prompt. My t3 mark edits (gens12 "art12 a51+t3") were NEVER published (discarded).
+  The hd.py head-grid dot work (hdfix12.txt, sheets/art12/forehead_t1_all.jpg) is obsolete - kept only as a tool.
+- KEPT: c09-t2-a18 cheek mole removed (moles.py fix por 159,224,5 on the fig, then porcrop). c23-t2-a18 checked: no mole.
+  t2 wide marks c13/c24/c26: left as is (coordinator: t2 done).
+- NOW: a51 ageing only, marks untouched, prompt = mk11.py AGE text + " Keep every forehead mark exactly as it is. No moles. No text."
+  (mk11.py <tier> for t4-t8 prints it; for t3 use the same text - do NOT use mk11 t1-t3 HU repaint). Whole-lineup gpt-2-6 edit 2:1 4k,
+  ref = current lineup gen (FIGURES magnificUrl), then images_remove_background -> bg_tN.txt "jid gen bg" -> urladd.py ids ->
+  prep.py bg_tN.txt -> sheetproc.py bg_tN.txt jids -> post.sh N cids -> pairs.py / fh.py check (marks must be unchanged).
+  t4 pilot c01-c04 generated (bg_t4.txt) - not processed yet.
+
 ## art11 (worker #11) — STATUS (read first; resumes art10 TODO below)
 - Work dir: scratchpad/fw11 (copy of dev/figwork, paths sed'ed to worktree agent-a4b0765092fc7d9e0; local cv2.py renamed cv2_jobs.py
   there so it no longer shadows OpenCV). New helpers (copied into dev/figwork): au.py ("id prodnum hmac" -> urls.json, saves context vs
