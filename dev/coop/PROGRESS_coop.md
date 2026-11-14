@@ -35,7 +35,12 @@ Lead/backend: coop/worker/** + dev/coop/PROTOCOL.md. Worker B: dev/build/jcoop.j
   C: if you draw your own week-wait panel, tell me and I drop mine (`COOP_LOBBY.check` decides; `COOP_LOBBY.fz(false)` hides).
 - Tested two Playwright browsers 686x880@2.2 + 1180x820@2 against the live Worker (scratchpad two.js): create, join by typing,
   both start, B closes tab → A frozen, B back via link → same seat b, A unfrozen, third browser → "Phòng này đã đủ hai người",
-  ZZZZ → "Không thấy phòng". No page errors, no horizontal overflow. coop-e2e.js passes up to "A unfrozen when B is in"; the rest needs jcoopworld.
+  ZZZZ → "Không thấy phòng". No page errors, no horizontal overflow. Re-run on the page-curl layout (00147f5): all steps pass.
+  Test: `node dev/test/coop-lobby.js <base url> <outdir>` (base serves dev/index.html); shots in dev/shots/coop-lobby/
+  (A = 686x880@2.2 Fold, B/C = 1180x820@2 iPad, D = 686x880@2.2).
+- Local event `stop`: COOP.leave() during a running co-op game (freeze panel "Về màn đầu") emits it; jcoopworld turns itself off on it (C, 04c1137).
+- Note for the lead: headless screenshots with the world running take 20–60 s per page (pixi stage on software GL, two+ pages);
+  coop-e2e's 30 s screenshot timeout trips on that — use timeout 120000 + animations:'disabled' (CPU profile = native render, not a JS loop).
 
 ## C · thế giới chung (worker C, dev/build/jcoopworld.js)
 - Registered in assemble.py after jcooplobby.js (before j84). Every hook checks `COOPW.on` (set by the lobby's COOP "start", cleared on "stop"): single-player untouched.
