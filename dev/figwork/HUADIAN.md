@@ -5,11 +5,11 @@ Xem thêm dev/figwork/HUADIAN_C.md: kiểu của 52 cung nữ lên phi tần (th
 Mỗi người một kiểu riêng, giữ suốt đời (mọi bậc, mọi tuổi). Bậc t1–t2: rất nhỏ, vẽ màu nhạt thanh nhã; t3–t4: nhỏ, nét kỹ hơn; t5–t6: viền vàng mảnh;
 t7–t8: cùng hoạ tiết bằng vàng lá + son đỏ, điểm một hạt ngọc trai nhỏ, nét kỹ nhất. LUẬT: luôn NHỎ, sang, tinh tế; bậc cao sang hơn bằng chất liệu và nét, KHÔNG to hơn;
 không bao giờ che trán, không lan xuống mày/má. Chỉ phi tần có hoa điền (không cung nữ, ma ma...). Lãnh cung (tcold): KHÔNG hoa điền.
-Prompt mẫu: "a small, delicate, refined huadian ornament, elegant, not large: her signature motif <hoạ tiết>, <màu/chất liệu theo bậc>; the SAME small size at every rank".
+Prompt mẫu: "a small, delicate, refined huadian ornament, elegant, not large, about the size of a fingertip and clearly visible (like the small red flower between the brows in a classic portrait): her signature motif <hoạ tiết>, <màu/chất liệu theo bậc>; the SAME small size at every rank".
 Không nốt ruồi, không beauty mark trên mặt (mọi spec). Prompt: spec6.py (khối 'HUADIAN:'), chạy sau spec5.py.
 Ghi chú: các lineup t1 cũ c03, c11, c19, c32 đã có chấm son đỏ giữa mày (giữ màu son đỏ cho bốn người này).
 
-Kích thước: luôn nhỏ (khoảng bằng đầu ngón tay út, cao ≈ 1/4 khoảng giữa hai mày), đặt giữa hai mày ngay trên sống mũi.
+Kích thước CHUẨN (mọi bậc): cỡ như hoa son giữa mày của c03 t1 (img/por-consort-c03-t1-a18.webp), rõ ràng thấy được trên chân dung, nhưng không lan ra trán hay mày; đặt giữa hai mày, ngay trên sống mũi.
 
 | ID | Hoạ tiết (hình) | t1–t2 | t3–t4 | t5–t6 | t7–t8 | Tranh t1 hiện có |
 |---|---|---|---|---|---|---|
