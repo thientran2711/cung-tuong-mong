@@ -13,6 +13,11 @@
 - T3 CALM REDRAW DONE (32/32): p7.py wording; where the pool gave both a round fan and a closed folding fan (c12 c16 c27 t3) the
   a48 prop was swapped to the teacup. Note: a few t1/t2 lineups keep round fan + closed folding fan (c12 t1, c23 t1, c14 t2,
   c25 t2) - different objects, left as is. mm_fa on c04 t3. => t1-t3 calm redraw COMPLETE (96 lineups incl. pilot).
+- HUADIAN EDITS (step 2): `python3 mkedit.py` -> _edits9.json [jid, current lineup gen, prompt] = one gpt-2-6 edit per lineup
+  (2:1 4k): tier huadian from spec6 HL/HS + remove moles + keep hair dark. T4 DONE (c02 c03 c05 c06 c08-c18 c25 c30): c16 needed a
+  2nd edit (first pass left it invisible), c12 needed 3 passes (GPT kept skipping the a48 figure). T7 c01-c13 DONE (flat gold leaf +
+  cinnabar enamel + tiny ruby glint). Remaining moles in edits are removed by demole in run.sh. mm_fa (fa_apply.py) on sheer stoles
+  of c02/c09/c11/c30 t4 and c01/c04/c06 t7 (only where cutcheck dropped; c11/c07 t7 kept un-fa'd: fa raised resid there).
 - Credits art9: see bottom line.
 
 ## CURRENT STATE (art worker #8, newest first — read this first)
