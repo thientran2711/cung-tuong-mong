@@ -13,5 +13,5 @@ python3 -m json.tool img/FIGURES.json >/dev/null || { echo INVALID JSON; exit 1;
 git add img/ dev/figwork/ && git commit -q -m "$1
 
 Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
-Claude-Session: https://claude.ai/code/session_01Rc5AsMxVMCFH4VbUPpPfpt" && git push -q origin HEAD:$B
+Claude-Session: https://claude.ai/code/session_01Rc5AsMxVMCFH4VbUPpPfpt" && git push -q origin HEAD:refs/heads/$B
 git log --oneline -1
