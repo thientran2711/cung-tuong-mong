@@ -40,6 +40,10 @@ for i,x,y,w,h,(ya,yb,xa,xb),big in pre:
     if min(w,h)<2*s or (w>=1.2*h and w>=6*s) or max(w,h)>7*s or max(w,h)>2*min(w,h)+1: continue          # hair strand / nostril shape
     if any(j!=i and abs(x2-x)<32*s and abs(y2-y)<9*s for j,x2,y2,*_ in pre): continue   # nostril pair
     hits.append((int(x),int(y),int(w),int(h))); mask[ya:yb,xa:xb]|=big
+for arg in sys.argv:   # manual spots: spot=x,y (full-res coords): darkest small blob within 8px is inpainted
+    if arg.startswith('spot='):
+        x,y=map(int,arg[5:].split(',')); r=int(8*s)+2; win=L[y-r:y+r,x-r:x+r]; yy,xx=np.unravel_index(win.argmin(),win.shape)
+        cv2.circle(mask,(x-r+xx,y-r+yy),max(3,int(4*s)),1,-1); hits.append(('manual',x-r+int(xx),y-r+int(yy)))
 out=cv2.inpaint(bgr,mask,max(3,int(5*s)),cv2.INPAINT_TELEA)
 if a is not None: out=np.dstack([out,a])
 cv2.imwrite(dst,out); print(src.split('/')[-1],"spots",len(hits),hits if V else "")

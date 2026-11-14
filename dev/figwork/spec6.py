@@ -21,12 +21,23 @@ HD={"c01":("a five-petal plum blossom","soft rose pink"),"c02":("a single slim t
 "c24":("a small ginkgo leaf","coral red"),"c25":("a tiny swallow","rose pink"),"c26":("a crescent with a dot above it","rose red"),
 "c27":("a small flaming pearl","vermilion"),"c28":("a single round pearl dot","soft pink"),"c29":("a tiny phoenix tail-feather","rose red"),
 "c30":("a small wave crest","coral red"),"c31":("a tiny narcissus flower","soft coral"),"c32":("a small peony blossom","cinnabar red")}
-def hstyle(t,col):
-    if t<=2: r=f"simply painted in {col}, understated"
-    elif t<=4: r=f"finely painted in {col} with delicate detail"
-    elif t<=6: r=f"painted in {col} finely outlined in thin gold, more intricate detail"
-    else: r="precious materials: fine gold leaf and cinnabar red with one tiny seed pearl, the most intricate fine detail"
-    return r+"; the SAME small size at every rank (richer only in material and detail, NEVER larger), never covering the forehead, never spreading onto the brows or cheeks"
+# 8 ranks = 8 distinct huadian levels (owner 11/14: never merge levels). Same SMALL size at every rank (like c03 t1's cinnabar flower).
+HL={1:"the simplest form: a single plain {col} dot or one simple painted stroke hinting at {mot}, flat paint, no detail",
+2:"{mot} painted in {col} with a clear recognisable shape, flat paint, no outline, no gold",
+3:"{mot} finely painted in {col} with added detail: a tiny contrasting centre (stamen) and fine petal veins or inner lines, still no gold",
+4:"{mot} painted in {col} with every edge outlined in a thin line of shimmering gold, the first touch of gold",
+5:"{mot} cut from thin gold leaf, layered with {col} paint inside the gold shape, gold and colour together",
+6:"{mot} of gold leaf with {col} inlay and ONE tiny seed pearl at its centre",
+7:"Imperial Noble Consort level: {mot} as an exquisite symmetrical gold FILIGREE ornament (fine openwork gold wire), set with tiny seed pearls and ONE small red gemstone at its centre, splendid and jewel-like yet small",
+8:"Empress level, the most beautiful of all: a tiny gold FILIGREE phoenix with spread wings (or a peony) cradling {mot} at its heart, inlaid with brilliant kingfisher-blue enamel and tiny seed pearls, unmistakably the Mother of the realm, yet still small"}
+# owner 11/14 (later): size grows a LITTLE per rank, ~+5% each: t1 = c03 t1 cinnabar flower size, t8 ~1.4x t1; never big
+HS={1:"tiny, fingertip-sized (like a classic small red flower mark between the brows)",2:"tiny, fingertip-sized",
+3:"small, fingertip-sized, a hair larger than the lowest ranks",4:"small, a touch larger than the lowest ranks",
+5:"small, slightly larger than the lowest ranks",6:"small, slightly larger than the lowest ranks",
+7:"compact, a little larger than the lower ranks (about one third larger than the smallest)",
+8:"the largest of all ranks yet still compact (about two fifths larger than the smallest), sitting neatly between the brows"}
+def hdesc(t,mot,col):
+    return HL[t].format(mot=mot,col=col)+"; size: "+HS[t]+"; it grows only a little with rank, NEVER big, never covering more than a small part of the forehead, never touching or spreading onto the brows or cheeks"
 NOMOLE="Her face has NO mole and NO beauty mark: any small dark dot on the identity reference face must NOT be drawn; flawless smooth clear skin on every figure."
 for k,v in list(F.items()):
     for a,b in REPL: v=v.replace(a,b)
@@ -40,7 +51,7 @@ for k,j in J.items():
     if m and m.group(1) in HD:
         mot,col=HD[m.group(1)]; t=m.group(2)
         if t=='cold': hd=" HUADIAN: NO huadian forehead ornament in the cold palace, bare clean forehead."
-        else: hd=f" HUADIAN: on her forehead between the brows a small, delicate, refined huadian ornament, elegant, not large, about the size of a fingertip and clearly visible (like the small red flower between the brows in a classic portrait): her signature motif {mot}, {hstyle(int(t),col)}; the SAME huadian on all four figures."
+        else: hd=f" HUADIAN: on her forehead between the brows a small, delicate, refined huadian ornament, elegant, not large: {hdesc(int(t),mot,col)}; the SAME huadian on all four figures."
         p=p.replace(" Eyes soft, warm",hd+" Eyes soft, warm",1) if " Eyes soft, warm" in p else p.replace(" No text",hd+" No text",1)
     if "Everyone beautiful at every age." in p: p=p.replace("Everyone beautiful at every age.","Everyone beautiful at every age. "+NOMOLE,1)
     else: p=p.replace(" No text"," "+NOMOLE+" No text",1)
@@ -52,17 +63,27 @@ for j in J.values():
 json.dump(J,open("jobs.json","w"),indent=0)
 # HUADIAN.md
 L=["# Hoa điền (huadian) — bảng kiểu cho phi tần c01–c32 (art7, luật sếp 11/14)","","Xem thêm dev/figwork/HUADIAN_C.md: kiểu của 52 cung nữ lên phi tần (thợ Part C), phải khác hết 32 kiểu dưới đây.","",
-"Mỗi người một kiểu riêng, giữ suốt đời (mọi bậc, mọi tuổi). Bậc t1–t2: rất nhỏ, vẽ màu nhạt thanh nhã; t3–t4: nhỏ, nét kỹ hơn; t5–t6: viền vàng mảnh;",
-"t7–t8: cùng hoạ tiết bằng vàng lá + son đỏ, điểm một hạt ngọc trai nhỏ, nét kỹ nhất. LUẬT: luôn NHỎ, sang, tinh tế; bậc cao sang hơn bằng chất liệu và nét, KHÔNG to hơn;",
+"Mỗi người một hoạ tiết riêng, giữ suốt đời (mọi bậc, mọi tuổi); bậc càng cao càng sang nhờ chất liệu, độ cầu kỳ, số chi tiết (8 nấc dưới đây).",
+"LUẬT CỠ (sếp nới, 11/14): t1 = cỡ hoa son c03 t1; mỗi bậc to thêm khoảng 5%; t8 (phượng/mẫu đơn Hoàng hậu) to nhất ≈ 1.4 lần t1. Không bao giờ to đùng; nằm gọn giữa hai mày; bậc cao sang hơn chủ yếu nhờ chất liệu, độ cầu kỳ, số chi tiết;",
 "không bao giờ che trán, không lan xuống mày/má. Chỉ phi tần có hoa điền (không cung nữ, ma ma...). Lãnh cung (tcold): KHÔNG hoa điền.",
-"Prompt mẫu: \"a small, delicate, refined huadian ornament, elegant, not large, about the size of a fingertip and clearly visible (like the small red flower between the brows in a classic portrait): her signature motif <hoạ tiết>, <màu/chất liệu theo bậc>; the SAME small size at every rank\".",
+"Prompt: spec6.py HL[t] (chất liệu, 8 câu) + HS[t] (cỡ, 8 câu).",
 "Không nốt ruồi, không beauty mark trên mặt (mọi spec). Prompt: spec6.py (khối 'HUADIAN:'), chạy sau spec5.py.",
 "Ghi chú: các lineup t1 cũ c03, c11, c19, c32 đã có chấm son đỏ giữa mày (giữ màu son đỏ cho bốn người này).","",
-"Kích thước CHUẨN (mọi bậc): cỡ như hoa son giữa mày của c03 t1 (img/por-consort-c03-t1-a18.webp), rõ ràng thấy được trên chân dung, nhưng không lan ra trán hay mày; đặt giữa hai mày, ngay trên sống mũi.","",
-"| ID | Hoạ tiết (hình) | t1–t2 | t3–t4 | t5–t6 | t7–t8 | Tranh t1 hiện có |","|---|---|---|---|---|---|---|"]
+"Kích thước gốc (t1): cỡ hoa son giữa mày của c03 t1 (img/por-consort-c03-t1-a18.webp), rõ trên chân dung; các bậc trên to dần ~5%/bậc tới ≈1.4 lần ở t8; không lan sang chân mày, không phủ quá nửa trán. Áp dụng cho cả HUADIAN_C.md (thợ Part C).","",
+"## 8 nấc theo bậc (mỗi bậc một nấc riêng, KHÔNG gộp; cỡ to dần ~5%/bậc, t8 ≈ 1.4 lần t1)",
+"- t1: một chấm hoặc nét son đơn gợi hình hoạ tiết, không chi tiết.",
+"- t2: hoạ tiết vẽ son, hình rõ ràng, không viền, không vàng.",
+"- t3: son nét kỹ, thêm nhụy (tâm khác màu) và gân/nét trong; chưa có vàng.",
+"- t4: son viền nhũ vàng mảnh (lần đầu có vàng).",
+"- t5: hoạ tiết cắt bằng vàng lá, lồng son bên trong.",
+"- t6: vàng lá + son, điểm MỘT hạt ngọc trai nhỏ ở giữa.",
+"- t7 (Hoàng quý phi): vàng chạm filigree tinh xảo, đối xứng, ngọc trai nhỏ + MỘT điểm đá đỏ; lộng lẫy mà vẫn nhỏ.",
+"- t8 (Hoàng hậu): phượng (hoặc mẫu đơn) vàng filigree ôm hoạ tiết riêng ở giữa, khảm thuý lam (kingfisher blue), ngọc trai nhỏ; đẹp nhất, nhìn là biết mẫu nghi.",
+"Mẫu trên mặt c03 tuổi 19: dev/figwork/sheets/huadian_c03_t1.jpg … t8.jpg (+ huadian_c03_8nac.jpg cạnh nhau).","",
+"| ID | Hoạ tiết riêng (giữ suốt đời) | Màu son bậc thấp | Tranh t1 hiện có |","|---|---|---|---|"]
 T1={"c03":"có: chấm son đỏ dạng hoa nhỏ","c11":"có: chấm son đỏ dạng hoa nhỏ","c19":"có: chấm son đỏ dạng hoa nhỏ","c32":"có: chấm son đỏ dạng hoa nhỏ"}
 for c in sorted(HD):
     m,col=HD[c]
-    L.append(f"| {c} | {m} | vẽ màu {col}, nét đơn giản | màu {col}, nét kỹ | màu {col} viền vàng mảnh, hoa văn kỹ hơn | vàng lá + son đỏ, 1 hạt ngọc trai nhỏ, nét kỹ nhất | {T1.get(c,'chưa có (thêm khi sửa)')} |")
+    L.append(f"| {c} | {m} | {col} | {T1.get(c,'chưa có (thêm khi sửa)')} |")
 open("HUADIAN.md","w").write("\n".join(L)+"\n")
 print("ok")

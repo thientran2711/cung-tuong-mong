@@ -422,3 +422,38 @@ HD-c03-n1 rgeYeyixtc huadian sample t1-t2 (edit of uploaded c03 t1 a18 head 1lpn
 HD-c03-n2 If6w6brtvE huadian sample t3-t4
 HD-c03-n3 LwB0B6iswO huadian sample t5-t6
 HD-c03-n4 cpl5lhV0eP huadian sample t7-t8
+N-c15-tcold nVjHLJsYQD vcold art7
+N-c16-tcold p8JjOZhehw vcold art7
+N-c17-tcold Do7xJZ9pcl vcold art7
+N-c18-tcold vQZy2pKa47 vcold art7
+N-c19-tcold LwB0oHHswO vcold art7
+N-c20-tcold w4hevjO7EI vcold art7
+N-c03-tcold SytDh0PUb8 huadian-removal edit of P3E8XC742C art7
+N-c21-tcold rgeYoMqxtc vcold art7
+N-c22-tcold 0egK7lhTfW vcold art7
+N-c23-tcold O6fBQf8ynm vcold art7
+N-c24-tcold 3zba1K2REY vcold art7
+N-c25-tcold 4RuIqH69Aa vcold art7
+N-c26-tcold gOIMvv6SXO vcold art7
+N-c27-tcold fHA4cNFCDY vcold art7
+N-c28-tcold 6AHh1fWiJO vcold art7
+N-c29-tcold YMLqwk8WeC vcold art7
+N-c30-tcold 6AHh1E0iJO vcold art7
+N-c31-tcold YMLqwrtWeC vcold art7
+N-c32-tcold LwB0hdaswO vcold art7
+N-c22-tcold rgeYIk6xtc hair-edit of 0egK7lhTfW art7
+N-c18-tcold MBwr4VpDCm hair-edit of vQZy2pKa47 art7
+N-c26-tcold w4heuwP7EI hair-edit of gOIMvv6SXO art7
+N-c16-tcold 1lpnIj0r4r hair-edit of p8JjOZhehw art7
+HD8-c03-t1 JNaXHE5Oq4
+HD8-c03-t2 dtys3NPXSL
+HD8-c03-t3 w4heQEH7EI
+HD8-c03-t4 jUXchm5LD0
+HD8-c03-t5 Bh4gZ2koQR
+HD8-c03-t6 lJ8VfEAgv9
+HD8-c03-t7 lJ8VfuGgv9
+HD8-c03-t8 9ZQtkjpNYZ
+HD8-c03-t4 aF2P0ZofSh (redo: thin gold hairline)
+HD8-c03-t5 Bh4g29uoQR (redo: gold dominant)
+HD8-c03-t7 LwB0a8DswO (redo: compact filigree)
+HD8-c03-t8 s7oTftTl8e (redo: compact phoenix ~1.4x)
