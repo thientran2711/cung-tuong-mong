@@ -89,3 +89,19 @@ C-m06-t1 yiCoyfqPW9 hands (a32 lantern instead of sprig)
 C-m07-t1 eIOLeyudqL hands
 C-m08-t1 If6wIRxtvE hands
 C-m09-t1 p8Jjp44ehw hands
+C-m10-t1 tCiJvPZmZJ hands
+C-m11-t1 P3EINa042C hands
+C-m12-t1 P3EINfT42C hands (a48 lantern instead of sprig)
+C-m13-t1 w4hdOmW7EI hands
+C-m14-t1 ksDnxpw16B hands
+C-m15-t1 JNaBPCeOq4 hands
+C-m16-t1 1lpYjXIr4r hands
+C-m17-t1 4Rut6q59Aa hands
+C-m18-t1 huRyEF9vqL hands
+C-m19-t1 dtylIvZXSL hands
+C-m20-t1 P3EIiAl42C hands
+C-m21-t1 p8JLoatehw hands
+C-m22-t1 6AHv20CiJO hands
+C-m23-t1 P3EIiYw42C hands
+C-m24-t1 CqGNHsLEEy hands (a32 brocade box)
+C-m25-t1 6AHv2DFiJO hands (a24 handkerchief)
