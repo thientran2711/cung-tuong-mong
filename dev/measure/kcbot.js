@@ -21,7 +21,7 @@ const N=+process.argv[2]||10,POL=process.argv[3]||'sens',ORIG=(process.argv[4]||
  await p.evaluate(fs.readFileSync(path.join(__dirname,'inkc.js'),'utf8'));
  return p}
  const res=[];
- const OUTF=path.join(__dirname,`kcbot-${POL}-${DIFF}.json`);
+ const OUTF=path.join(__dirname,`kcbot-${POL}-${DIFF}-${ORIG.join("")}.json`);
  for(const o of ORIG)for(let i=0;i<N;i++){const t1=Date.now();let p;try{p=await mkPage()}catch(e){errs.push('page '+e);continue}
   let r;try{r=await p.evaluate(o=>{try{
    window.__forceOrigin=o;Q=[];S=null;start();Q=[];if(!S.kc)kcInit();Q=[];window.__forceOrigin=undefined;try{$("modal").hidden=true;$("ov").hidden=true}catch(e){}
@@ -39,4 +39,4 @@ const N=+process.argv[2]||10,POL=process.argv[3]||'sens',ORIG=(process.argv[4]||
  const avg=k=>Math.round(res.filter(r=>r[k]!=null).reduce((a,r)=>a+r[k],0)/Math.max(1,res.filter(r=>r[k]!=null).length));
  console.log(JSON.stringify({pol:POL,diff:DIFF,n:res.length,total:pct(tot),byOrigin:Object.fromEntries(Object.entries(by).map(([k,v])=>[k,pct(v)])),entryRanks:ranks,ends,
   avg:{sc:avg('sc'),sac:avg('sac'),tai:avg('tai'),danh:avg('danh'),bac:avg('bac'),arts:avg('arts'),le:avg('le'),intel:avg('intel'),turn:avg('turn')},errs:errs.slice(0,5),rErr:res.filter(r=>r.err).slice(0,3),stuck:res.filter(r=>r.ring).map(r=>r.ring).slice(0,3)},null,1));
- fs.writeFileSync(path.join(__dirname,`kcbot-${POL}-${DIFF}.json`),JSON.stringify(res));await b.close()})().catch(e=>{console.error(e);process.exit(1)});
+await b.close()})().catch(e=>{console.error(e);process.exit(1)});
