@@ -13,4 +13,6 @@ HS={1:"tiny, fingertip-sized (like a classic small red flower mark between the b
 7:"compact, a little larger than the lower ranks (about one quarter larger than the smallest)",
 8:"the largest of all ranks yet still compact (about one quarter to one third larger than the smallest), sitting neatly between the brows"}
 def hdesc(t,mot,col):
+    import re as _re
+    if t==8: mot=_re.sub(r"^(a|an)\s+((tiny|small|single)\s+)?","",mot)
     return HL[t].format(mot=mot,col=col)+"; size: "+HS[t]+"; it sits LOW between the brows just above the bridge of the nose (not mid-forehead); it grows only a little with rank, NEVER big, never covering more than a small part of the forehead, never touching or spreading onto the brows or cheeks; it is painted directly ON the skin like makeup (soft, flat, part of the skin, never a sticker, badge or pinned jewel)"
