@@ -22,3 +22,4 @@ Lịch sử trước 11/14 sáng: xem PROGRESS_C1.md (m01–m26) và PROGRESS_C2
 Mẻ 1: t1 vẽ lại tay linh động m01–m09 + m30 (10 lineup). Tín dụng 10×273 = 2730.
 Mẻ 2: t1 vẽ lại tay linh động m10–m17 (8 lineup). Tín dụng 8×273 = 2184.
 Mẻ 3: t1 vẽ lại tay linh động m18–m25 (8 lineup). Tín dụng 8×273 = 2184.
+Mẻ 4: t1 vẽ lại tay linh động m26–m29, m31–m34 (8 lineup). Tín dụng 8×273 = 2184.
