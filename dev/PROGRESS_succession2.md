@@ -8,5 +8,7 @@ Test: node dev/test/succession.js <url> 686x880@2.2 <outdir>  (serve repo root o
   NPC dowager regency (two-way), world frozen during epilogue, save/reload mid-epilogue verified, old save loads.
 - Logic checks: rare a/b/c, c failure (ban chết), b failure → path a, NPC regency text.
 ## Open
+- Test 686x880@2.2 + 1180x820@2: 0 errors, no overflow, no %, no "Chắc chắn", no "…"; reload mid-epilogue OK; old save OK. Shots dev/review/succession2/.
 - Art (SUCCESSION_PLAN §7) awaits coordinator approval; SUCC_ART empty.
 - End card label "Chết vì" (j79/j52 end card, not this module) reads oddly for living endings — kit owner.
+## Status: SẴN SÀNG KIỂM
