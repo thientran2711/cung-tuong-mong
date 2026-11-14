@@ -58,7 +58,11 @@ L=["# Hoa điền (huadian) — bảng kiểu cho phi tần c01–c32 (art7, lu�
 "Prompt mẫu: \"a small, delicate, refined huadian ornament, elegant, not large: her signature motif <hoạ tiết>, <màu/chất liệu theo bậc>; the SAME small size at every rank\".",
 "Không nốt ruồi, không beauty mark trên mặt (mọi spec). Prompt: spec6.py (khối 'HUADIAN:'), chạy sau spec5.py.",
 "Ghi chú: các lineup t1 cũ c03, c11, c19, c32 đã có chấm son đỏ giữa mày (giữ màu son đỏ cho bốn người này).","",
-"| ID | Hoạ tiết | Màu bậc thấp |","|---|---|---|"]
-for c in sorted(HD): L.append(f"| {c} | {HD[c][0]} | {HD[c][1]} |")
+"Kích thước: luôn nhỏ (khoảng bằng đầu ngón tay út, cao ≈ 1/4 khoảng giữa hai mày), đặt giữa hai mày ngay trên sống mũi.","",
+"| ID | Hoạ tiết (hình) | t1–t2 | t3–t4 | t5–t6 | t7–t8 | Tranh t1 hiện có |","|---|---|---|---|---|---|---|"]
+T1={"c03":"có: chấm son đỏ dạng hoa nhỏ","c11":"có: chấm son đỏ dạng hoa nhỏ","c19":"có: chấm son đỏ dạng hoa nhỏ","c32":"có: chấm son đỏ dạng hoa nhỏ"}
+for c in sorted(HD):
+    m,col=HD[c]
+    L.append(f"| {c} | {m} | vẽ màu {col}, nét đơn giản | màu {col}, nét kỹ | màu {col} viền vàng mảnh, hoa văn kỹ hơn | vàng lá + son đỏ, 1 hạt ngọc trai nhỏ, nét kỹ nhất | {T1.get(c,'chưa có (thêm khi sửa)')} |")
 open("HUADIAN.md","w").write("\n".join(L)+"\n")
 print("ok")
