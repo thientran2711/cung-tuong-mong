@@ -14,5 +14,9 @@ const nb0=nextBuoi;nextBuoi=function(){try{if(S&&!S.dead){window.__bc++;if(S.ran
 const o0=over;over=function(){let st=null;try{const vals=Object.values(window.__nn);const npc=vals.reduce((a,b)=>a+b,0);const me=(S.nightLog||[]).length;
   st={nMe:me,nNpc:npc,nTopNpc:vals.length?Math.max(...vals):0,nNpcCount:vals.length,consorts:consorts().length,meHH:window.__meHH}}catch(e){st={nerr:String(e)}}
  window.__nn={};window.__meHH=null;window.__bc=0;const r=o0.apply(this,arguments);try{const L=window.__res[window.__res.length-1];if(L)Object.assign(L,st)}catch(e){}return r};
-const x0=window.__bot.extra;window.__bot.extra=function(){const o=x0();o.hist=window.__hist;return o};
+/* watchdog: a buổi that takes >300 bot iterations is stuck (a free act repeated, a modal loop): record why once per kind, then move the day on */
+window.__stuck=[];window.__stuckN=0;let sk="",si=0,lastN=[];
+const st0=window.__bot.step;window.__bot.step=function(mode,n){let r=0;for(let i=0;i<n;i++){try{if(S&&!S.dead){const k=S.turn+"_"+S.tuan+"_"+S.buoi;if(k!==sk){sk=k;si=0}else si++;
+   if(si>300){window.__stuckN++;if(window.__stuck.length<8)window.__stuck.push({k,used,Q:Q.length,q0:Q[0]&&(Q[0].t||Q[0].pid),ov:!document.querySelector('#ov').hidden,modal:!$("modal").hidden,acts:JSON.stringify(window.__acts).slice(0,200),deck:deck.filter(a=>!a.done&&!a.lock).map(a=>a.n+":"+cardCost(a)).slice(0,10).join("|")});si=0;Q.length=0;try{closeModal()}catch(e){}nextBuoi();continue}}}catch(e){}r=st0(mode,1)}return r||window.__res.length};
+const x0=window.__bot.extra;window.__bot.extra=function(){const o=x0();o.hist=window.__hist;o.stuck=window.__stuck;o.stuckN=window.__stuckN;return o};
 })();
