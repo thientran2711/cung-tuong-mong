@@ -87,3 +87,9 @@ Mã không có tiền tố được dò qua mọi tiền tố; mã lạ rơi v�
   sáng = cảnh Ngự hoa viên (cplQijT0eP), tối = tẩm cung đêm (iGq8UJy3uK), giống tranh thẻ việc.
 - Khung lời: `dev/figwork/events/prompt.py <khóa>`. Không mặt người: người chỉ ở xa, bóng dáng hoặc sau lưng; nhóm mưu hại/tang/lãnh cung theo khuôn tối (70% khung hình trong bóng, một nguồn sáng).
 - Thêm nhóm hay biến thể: sửa `ev_data.py` (cat/m), vẽ, ghi `khóa id` vào `gens.txt`, chạy `fetch.py <khóa>` rồi `make_json.py`.
+
+## Mệnh truyện (j67): img/st-<tuyến>-<khóa>.webp
+- Khóa: `s1 s2 c1 c2 c3 t1 x1` (các hồi), `bia` (bìa tuyến), `ket-<kết>` (win, win2, mid, lose…), `ket` (khép lại, khi tuyến chỉ có 3 kết). Tên tuyến đổi `_` thành `-` (tt_co -> st-tt-co-s1.webp).
+- `EVENTS.json` thêm `stories:{arcId:{title,o,fb,efb,files:{khóa:đường dẫn}}}`; `j89.js` thêm `stArtOf(arcId, beat, ending)`: hồi chung "G.x" dùng tranh ev-*; thiếu tệp thì lùi về bìa tuyến, rồi về nhóm ev-* (fb theo thân phận, efb theo kết tốt/xấu).
+- Mỗi thân phận có mô-típ riêng trong lời vẽ (dev/figwork/stories/st_prompt.py, MOT): Tể tướng (thư từ chàm-vàng), Đại tướng quân (giáp, cờ, hổ phù), buôn muối (bao muối, thuyền, bạc), cung nữ thăng phi tần, công chúa Nam Chiếu (trang sức bạc, lông công), con nhà tội thần (hồ sơ án, dải tang), cháu Thái hậu (Đức Thọ cung, phượng, chuỗi hạt), con nhà thư hương nghèo (sách, thơ, mai), cung nữ hầu chủ.
+- Vẽ bằng lưới 2x2 (4 tranh/lượt, 2k, 65 tín dụng), cắt tự động bằng st_fetch.py; xem dev/art/PROGRESS_event.md để biết tuyến nào đã xong.
