@@ -123,3 +123,11 @@ C-m02-t6 lJ8DN7Ngv9 edit KLMnSRLkqp: a48 hair dark
 C-m05-t6 ov9wQPF829 edit gOIp9MdSXO: flat huadian, no pendant
 C-m06-t6 lJ8DNoagv9 edit MBwjtjBDCm: flat huadian, no pendant
 C-m04-t6 JNao2FVOq4 edit 8aN7uSHIrU: flat huadian, no pendant
+C-m07-t6 4RumYHa9Aa hands (a24 scroll->birdcage, a48 letter->teacup)
+C-m08-t6 xSd0PIljfW hands
+C-m09-t6 gOIpifCSXO hands
+C-m10-t6 bxTGUXH5Y2 hands
+C-m11-t6 yiCIzKHPW9 hands
+C-m12-t6 nVjbByVYQD hands
+C-m13-t6 N2FvcsU6D9 hands nomole
+C-m14-t6 jUXT4QeLD0 hands
