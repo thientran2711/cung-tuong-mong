@@ -62,3 +62,13 @@ Lead/backend: coop/worker/** + dev/coop/PROTOCOL.md. Worker B: dev/build/jcoop.j
 - Test: `node dev/test/coop-world.js [outdir]` (live Worker, two browsers 686x880@2.2 + 1180x820@2). Debug helper: dev/test/coop-dbg.js.
 - Known MVP limits: emperor death off in co-op; friend's kids/items not shown on her entry; NPC AI never targets the friend entry (lead rule);
   guest is not hit by NPC month/turn schemes (muted), only by buổi acts.
+- Phase 2 (§9/§9.1, C): #next in co-op routes through the wrapped nextBuoi (j6 had bound the bare one). Buổi sáng/chiều end with `bend`;
+  the server's `buoi` runs the step (deferred until open dialogs close). Host sends `where` after each step/week/rebirth; the guest keeps the
+  last `where` (even before she is in) and replaces NPC places with it (#next shows "Đợi bạn" until it arrives). `pos` on every move / khắc;
+  friend's place mapped (her "home" = her palace, my palace in her eyes = my "home"); people at my place refreshed without travel side effects.
+  Acts on the friend = every NPC act tab (same conditions). Kết giao / Tặng quà = `act` invite → her Nhận/Từ chối card → `actr` → I run it.
+  Other acts resolve on my side, `res` carries the effect + flags (Thiện cảm, Oán, proof, cấm túc, death, lãnh cung) + seen ("named" for open
+  acts or caught schemes, "effect" for hidden harm); she applies to her S, acks; her entry's write-back baseline moves (no double count).
+  Friend is fully known in j61 knowledge (name/face shown, not "Người lạ").
+- Screenshots: headless Chromium is kept busy by the Pixi scene ticker (single-player too) → tests use reducedMotion:'reduce'.
+- coop-world.js: 30/30 (world, where, pos, invite card, 2 weeks of buổi sync, rebirth, week after rebirth, no errors/overflow).

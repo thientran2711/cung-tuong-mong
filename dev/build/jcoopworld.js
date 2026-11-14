@@ -59,10 +59,12 @@ function pullFriend(){const out=[];for(let i=rivals.length-1;i>=0;i--)if(isF(riv
 function pushFriend(L){for(const [i,v,m] of L.reverse()){if(i<0){if(m&&m.staff&&!m.staff.includes(v))m.staff.push(v)}else if(!rivals.includes(v))rivals.splice(Math.min(i,rivals.length),0,v)}}
 function withoutFriend(f){if(!CW.on||!S||CW.pulled)return f();const L=pullFriend();CW.pulled=L;try{return f()}finally{CW.pulled=null;pushFriend(L)}}
 function friendEntry(){return rivals.find(isF)||null}
+/* she is my friend: I know her name and face from the start (j61 knowledge would show "Người lạ / ???") */
+function knowFriend(){try{const f=friendEntry();if(f&&typeof k61Know==="function"&&typeof k61St==="function"&&k61St(f)<3)k61Know(f,"bạn",true,3)}catch(e){}}
 function placeFriend(P){pullFriend();if(!P)return;
  if(friendSrv(P)){const m=RV(P.S.srv.mid);if(m){m.staff=m.staff||[];m.staff.push(buildFriendSrv(P))}return}
  const v=buildFriend(P);if(!v)return;try{rstats(v)}catch(e){}
- if(v.queen&&!qOn()){rivals.unshift(v)}else{if(v.queen)v.queen=false,v.rank=Math.min(v.rank,6);rivals.push(v)}}
+ if(v.queen&&!qOn()){rivals.unshift(v)}else{if(v.queen)v.queen=false,v.rank=Math.min(v.rank,6);rivals.push(v)}knowFriend()}
 
 /* ---------- local game → canonical ---------- */
 function myBlob(sS){const P={pid:me(),ok:S.origin&&S.origin.k,name:S.name,rank:S.rank,dead:!!S.dead,srv:!!(S.srv&&!S.srv.risen),life:CW.life,S:{}};
@@ -104,7 +106,7 @@ function fromCanon(C,opt){opt=opt||{};const mp=me(),Pm=C.P&&C.P[CW.seat];if(!Pm)
  const ci=(v,a,b)=>typeof v==="number"?Math.max(a,Math.min(b,Math.round(v))):v;
  if(S.emp)S.emp.mood=ci(S.emp.mood,0,3);S.rank=ci(S.rank,0,7);S.tuan=ci(S.tuan,0,2);S.month=ci(S.month,1,12);S.buoi=ci(S.buoi||0,0,2);
  for(const v of rivals){v.rank=ci(v.rank,0,7);try{ap(v,{})}catch(e){}}
- if(friendSrv(fP))placeFriend(fP);CW.life=Pm.life||0;return true}
+ if(friendSrv(fP))placeFriend(fP);else knowFriend();CW.life=Pm.life||0;return true}
 
 /* put a freshly built life (S + throwaway world from start()) into the shared world W of C */
 function attach(C){if(!C||!C.W)return;const mp=me();
