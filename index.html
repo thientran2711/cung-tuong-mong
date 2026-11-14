@@ -4478,6 +4478,92 @@ document.head.appendChild(st);
 var t=document.getElementById("title");
 if(t)t.style.setProperty("background","linear-gradient(rgba(40,18,10,0) 55%,rgba(40,18,10,.35)),url(img/title-key.webp) center 15%/cover no-repeat,#f3e6d6","important");
 }catch(e){}})();
+
+/* ================= j51 KẾ VỊ: lập đích, lập trưởng, lập hiền; tranh ngôi Đông cung (cùng một luật cho mọi người mẹ) ================= */
+const KV={c:.007,base:22,deb:4,debGap:12};
+/* hệ số theo tính nết: người mẹ có con trai đứng sau mưu dọn đường cho con */
+const KVT={"Hiểm độc":2,"Tham vọng":1.7,"Kiêu ngạo":1.2,"Đa nghi":1,"Nhu mì":.4,"Hiền lành":.08};
+const KVACT=[["kframe",3],["kpoison",2],["pond",1.5],["ksab",3],["spy",2.5],["frame",1.5]];
+/* thứ tự sinh: mỗi con một mốc (tháng sinh), con cũ được gán một lần theo tuổi */
+function kvStamp(){allKids().forEach(([k])=>{if(k.bt==null)k.bt=S.turn-(k.age||0)*12})}
+function kvQueenMom(v){return v?!!(v.alive&&!v.out&&v.queen):S.rank>=7}
+function kvMomName(v){return v?v.name:"ngươi"}
+/* trọng số chọn Thái tử (dùng cho cả xét lập lẫn thứ tự hiển thị) */
+function kvW(k,v,dich,truong){return 5+momRank(v)*10+k.tal/2+k.fond/2+Math.max(0,(v?v.th:S.th)||0)/2+(dich?60:0)+(truong?25:0)}
+function kvOrder(){if(!S)return[];kvStamp();const L=allKids().filter(([k])=>k.alive&&k.sex==="m");if(!L.length)return[];
+ const eld=L.slice().sort((a,b)=>a[0].bt-b[0].bt)[0][0];
+ return L.map(([k,v])=>{const dich=kvQueenMom(v),truong=k===eld;return{k,v,dich,truong,w:kvW(k,v,dich,truong)}})
+  .sort((a,b)=>((+b.k.heir)-(+a.k.heir))||((+b.dich)-(+a.dich))||(b.w-a.w)||(a.k.bt-b.k.bt))}
+function kvPos(o,k){return o.findIndex(x=>x.k===k)}
+function kvWhy(x){if(x.k.heir)return x.dich?"Thái tử · Đích tử":x.truong?"Thái tử · Trưởng tử":"Thái tử";
+ if(x.dich)return x.truong?"Đích tử · Trưởng tử":"Đích tử (con Hoàng hậu)";if(x.truong)return "Trưởng tử (lớn nhất)";
+ return `Tài ${x.k.tal} · được thương ${x.k.fond}`}
+/* động cơ: v có con trai, con của t là Thái tử hoặc đứng trước con v */
+function kvMotive(v,t,o){if(!v||v===S||!v.alive||v.out||!t||t===v)return 0;o=o||kvOrder();
+ const mine=o.map((x,i)=>[x,i]).filter(([x])=>x.v===v);if(!mine.length)return 0;const pv=Math.min(...mine.map(z=>z[1]));
+ const th=o.map((x,i)=>[x,i]).filter(([x,i])=>(t===S?x.v===null:x.v===t)&&i<pv);if(!th.length)return 0;
+ if(t!==S&&(!t.alive||t.out))return 0;
+ let m=KV.base;for(const tr of traitsOf(v))if(KVT[tr]!=null)m*=KVT[tr];
+ if(th.some(([x])=>x.k.heir))m*=1.3;if(aff(v,t)>=40)m*=.5;return Math.round(m)}
+function kvTargets(v,o){const L=[];for(const t of others(v)){if(t===S&&(S.dead||(typeof isSrv==="function"&&isSrv())))continue;const m=kvMotive(v,t,o);if(m>0)L.push([t,m])}return L}
+function kvSonOf(v,o){const x=(o||kvOrder()).find(x=>x.v===v);return x?x.k:null}
+window.__kvS=null;window.__kvDue={};
+/* thực đơn khi mưu vì ngôi Đông cung: chỉ các mưu nhắm vào con nàng (và dò la, vu cáo chính nàng) */
+(function(){const m0=mindMenu;mindMenu=function(v,t){const K=window.__kvS;if(!K||K.v!==v||K.t!==t)return m0.apply(this,arguments);
+ try{const b=bandOf(danger(v,t)+K.m);const allow=BANDS.slice(1,b+1).flatMap(x=>x[2]);const tc=witOf(v);const O=[];v.fails=v.fails||{};
+  for(const [k,w0] of KVACT){const a=ACT[k];if(!a||!allow.includes(k))continue;let ok=false;try{ok=a.ok(v,t)}catch(e){}if(!ok)continue;
+   let w=w0*persW(v,k)*(1+K.m/40);let od=null;try{od=a.o?a.o(v,t):null}catch(e){}if(od!=null&&tc>=30)w*=Math.pow(cl(od,5,95)/50,(tc-30)/35);
+   const f=v.fails[k]||0;if(f)w*=tc<35?1+.6*f:Math.pow(.5,f);if(w>0)O.push([k,w])}
+  return O}catch(e){return[]}}})();
+/* con bị nhắm: con trai đứng cao nhất trong thứ tự kế vị */
+(function(){const t0=tKid;tKid=function(t){const K=window.__kvS;if(K&&K.t===t){const o=kvOrder();const L=o.filter(x=>(t===S?x.v===null:x.v===t)&&(x.k.age>=3||x.k.heir));if(L.length)return L[0].k}return t0.apply(this,arguments)}})();
+(function(){const a=ACT.pond;if(!a)return;const f0=a.f;a.f=function(x,t){const K=window.__kvS;if(K&&K.t===t){const son=kvOrder().find(z=>(t===S?z.v===null:z.v===t)&&z.k.age>=2);if(son){const k0=kidsOf;kidsOf=function(p){if(p===t){kidsOf=k0;return [son.k]}return k0.apply(this,arguments)};try{return f0.apply(this,arguments)}finally{kidsOf=k0}}}return f0.apply(this,arguments)}})();
+/* mưu bị lộ: tra ra cả động cơ (chỉ khi đã lần ra người làm) */
+(function(){const r0=mindRun;mindRun=function(v,t,k,err){const D=window.__kvDue[v&&v.id];let set=false;
+ if(!window.__kvS&&D&&D.k===k&&D.t===key(t)){window.__kvS={v,t,m:D.m};set=true;delete window.__kvDue[v.id]}
+ const K=window.__kvS;const son=K&&K.v===v?kvSonOf(v):null;let r;try{r=r0.apply(this,arguments)}finally{if(set)window.__kvS=null}
+ if(son&&r&&FAILRX.test(r)&&r.includes(v.name))r+=`Tra ra ${v.name} muốn dọn đường cho con mình là ${son.name} lên ngôi Đông cung. `;return r}})();
+/* tin công khai: hoàng tự chết hay Thái tử bị phế thì cả cung đều biết; kẻ ra tay vẫn không rõ nếu không ai thấy */
+(function(){const s0=seenNPC;seenNPC=function(v,t,txt){const r=s0.apply(this,arguments);if(r||!txt||t===S||v===S)return r;
+ if(/mà chết|chết đuối|bị phế ngôi Thái tử/.test(txt)&&!txt.includes(v.name))return txt.replace(/\(Để lại dấu vết[^)]*\)/,"")+"Chưa rõ kẻ ra tay. ";return r}})();
+/* mỗi buổi: người mẹ có động cơ có thể mưu (qua đúng đường nghĩ của NPC: do dự, sai sót, chuẩn bị, để lộ dấu) */
+(function(){const r0=rivalsBuoi;rivalsBuoi=function(){
+ try{const nb=(S.bqN||0)+1;for(const v of liveRivals(true)){const P=v.plan;if(P&&P.kv&&P.due<=nb)window.__kvDue[v.id]={k:P.k,t:P.t,m:P.kv}}}catch(e){}
+ let ev=r0.apply(this,arguments)||"";
+ try{if(!S||S.dead)return ev;const run=()=>{let e="";const o=kvOrder();if(o.length<2)return e;
+   for(const v of liveRivals(true)){if(!v.alive||v.out||v.plan)continue;const T=kvTargets(v,o);if(!T.length)continue;
+    let r=Math.random()*T.reduce((a,b)=>a+b[1],0),i=0;while(r>T[i][1]&&i<T.length-1){r-=T[i][1];i++}const [t,m]=T[i];
+    let c=KV.c*m/KV.base;if(t.shield)c*=.5;if(t===S&&S.guardWarn)c*=.5;if(Math.random()>=c)continue;
+    window.__kvS={v,t,m};let res="";try{res=npcAct(v,t)}finally{window.__kvS=null}
+    if(v.plan&&v.plan.t===key(t)&&KVACT.some(z=>z[0]===v.plan.k))v.plan.kv=m;
+    e+=seenNPC(v,t,res);if(S.dead)return e}return e};
+  ev+=(typeof srvW==="function"?srvW(run):run())||""}catch(e){}return ev}})();
+/* ---- lập Thái tử: lập đích, lập trưởng, lập hiền ---- */
+function kvDebate(){const H=S.heir;if(!H||!H.k||!H.k.alive||kvQueenMom(H.v))return"";if(S.turn-(S.kvDeb==null?-99:S.kvDeb)<KV.debGap)return"";
+ const o=kvOrder();const d=o.find(x=>x.dich&&!x.k.heir&&x.k.age>=6);if(!d||!roll(KV.deb))return"";S.kvDeb=S.turn;const h=H.k;
+ const p=cl(Math.round(30+(d.k.tal-h.tal)/2+(d.k.fond-h.fond)/2-(h.age>=16?10:0)),10,85);
+ const pre=`<b>Triều đình bàn lệ lập đích:</b> đại thần dâng sớ xin lập ${d.k.name}, đích tử của ${d.v?"Hoàng hậu "+d.v.name:"ngươi (Hoàng hậu)"}, thay Thái tử ${h.name} (con ${kvMomName(H.v)}). `;
+ if(roll(p)){setHeir(d.k,d.v);fx("gold");return pre+`<span class="${d.v?(H.v?"":"r"):"g"}">Hoàng thượng phế ${h.name}, lập ${d.k.name} làm Thái tử</span> (cơ may đổi ngôi: ${word(p)}).${d.v?"":" Danh +10."} `}
+ return pre+`Hoàng thượng giữ ${h.name} ở ngôi Thái tử (cơ may đổi ngôi: ${word(p)}). `}
+heirMonth=function(){if(S.heir&&S.heir.k&&S.heir.k.alive)return kvDebate();S.heir=null;
+ const o=kvOrder();const c=o.filter(x=>x.k.age>=6);if(!c.length)return"";
+ const wait=!c.some(x=>x.dich)&&o.some(x=>x.dich);/* đích tử còn nhỏ: triều đình chờ */
+ if(!roll(wait?5:15))return"";
+ let r=Math.random()*c.reduce((a,b)=>a+b.w,0),i=0;while(r>c[i].w&&i<c.length-1){r-=c[i].w;i++}const x=c[i];setHeir(x.k,x.v);fx("gold");
+ const why=x.dich?"theo lệ lập đích: con của Hoàng hậu":x.truong?"theo lệ lập trưởng: hoàng tử lớn nhất":`theo lệ lập hiền: Tài ${x.k.tal}, được ngài thương ${x.k.fond}`;
+ return x.v?`Hoàng thượng lập ${x.k.name}, con của ${x.v.name}, làm Thái tử (${why}). `:`<b class="g">Hoàng thượng lập ${x.k.name}, con của ngươi, làm Thái tử</b> (${why}). Danh +10. `};
+/* băng hà khi chưa lập Thái tử: đích tử trước, không có thì trưởng tử */
+(function(){const e0=emperorDies;emperorDies=function(){try{if(!(S.heir&&S.heir.k&&S.heir.k.alive)){const o=kvOrder().sort((a,b)=>a.k.bt-b.k.bt);const x=o.find(z=>z.dich)||o[0];if(x)S.heir={k:x.k,v:x.v}}}catch(e){}return e0.apply(this,arguments)}})();
+/* ---- hiển thị: nhãn trên thẻ con, chip con của phi tần, bảng thứ tự kế vị ---- */
+function kvLabels(k,o){o=o||kvOrder();const i=kvPos(o,k);if(i<0)return[];const x=o[i];const L=[];if(x.dich)L.push("Đích tử");if(x.truong)L.push("Trưởng tử");L.push(`Kế vị thứ ${i+1}`);return L}
+(function(){const p0=pcard;pcard=function(o){const k=window.__kvKid;if(k&&o){window.__kvKid=null;try{const L=kvLabels(k);o=Object.assign({},o,{chips:(o.chips||[]).concat(L.map(t=>chip(t,/Đích|Trưởng/.test(t)?"ok":"")))})}catch(e){}}return p0.call(this,o)}})();
+(function(){const kc=kidCard;kidCard=function(k){window.__kvKid=k&&k.alive&&k.sex==="m"?k:null;try{return kc.apply(this,arguments)}finally{window.__kvKid=null}}})();
+(function(){const rc=rvCard;rvCard=function(v){let h=rc.apply(this,arguments);try{const o=kvOrder();for(const k of (v.kids||[]).filter(k=>k.alive&&k.sex==="m")){const L=kvLabels(k,o).filter(t=>!/^Kế vị/.test(t));if(L.length)h=h.split(`${k.name} · ${k.age} tuổi`).join(`${k.name} · ${k.age} tuổi · ${L.join(" · ")}`)}}catch(e){}return h}})();
+function kvBoxHTML(){const o=kvOrder();if(!o.length)return `<div class="kvbox"><h5>Thứ tự kế vị</h5><p class="past">Trong cung chưa có hoàng tử.</p></div>`;
+ const rows=o.slice(0,3).map((x,i)=>`<div class="pcrow"><span>${mdH(kidFace(x.k),"xs")}<span>${i+1}. ${x.k.name} · ${x.k.age} tuổi · con ${x.v?x.v.name:"<b class=\"g\">ngươi</b>"}${x.v&&(!x.v.alive||x.v.out)?(x.v.alive?" (lãnh cung)":" (đã mất)"):""}</span></span><b>${kvWhy(x)}${x.k.age<6?" · chưa đủ 6 tuổi":""}</b></div>`).join("");
+ return `<div class="kvbox"><h5>Thứ tự kế vị</h5><div class="pcb rows">${rows}</div><p class="past">Lập đích, lập trưởng, lập hiền: con Hoàng hậu đứng đầu, rồi hoàng tử lớn nhất; tài và lòng thương của Hoàng thượng, phẩm vị mẹ và Thái hậu cũng tính. Băng hà khi chưa lập Thái tử: đích tử lên ngôi, không có thì trưởng tử.${o.length>3?` Còn ${o.length-3} hoàng tử khác.`:""}</p></div>`}
+(function(){const k0=kidTabHTML;kidTabHTML=function(hl){let h=k0.apply(this,arguments);try{const i=h.indexOf("</span></div>");if(i>=0){const j=i+"</span></div>".length;h=h.slice(0,j)+kvBoxHTML()+h.slice(j)}}catch(e){}return h}})();
+(function(){const st=document.createElement("style");st.textContent=".kvbox{margin:0 0 6px}.kvbox .pcrow{align-items:center}.kvbox .pcrow>span{min-width:0;overflow-wrap:anywhere;display:flex;align-items:center;gap:5px}.kvbox .pcrow>span .md{flex-shrink:0;margin:0}.kvbox .pcrow b{text-align:right;flex-shrink:0;max-width:48%}.kvbox .past{margin:2px 0 0;font-size:.72rem}";document.head.appendChild(st)})();
 /* ================= j52: PHÚC DUYÊN + THÂN PHẬN ĐỊNH SẴN (owner 11/14) =================
    The next life is rolled ONCE and kept in localStorage "ctm-nextlife" (global, not per slot): a seed that drives
    Math.random for the whole of start() (faces drawn from a second stream of the same seed, so late-loading art does not
@@ -5263,6 +5349,66 @@ window.tdForceSo=function(k){const T=trS();if(k==="praise"&&!T.praise)T.praise="
  const go=()=>{mo.observe(document.body,{childList:true,subtree:true});scan(document)};
  if(document.body)go();else document.addEventListener("DOMContentLoaded",go);
 })();
+/* ================= j57: ONE subject frame in dialogs (owner 11/14: "Thân phận kiếp này" showed a small cropped face) =================
+   Root cause 1 (size): the kit's .pcp carries max-height:58% (meant for the person-card column). Inside a dialog's .faces
+   <figure> that percentage resolves against the figure's own height, so the 3:4 frame was cut to 180x139 and the figure kept
+   the full 3:4 height underneath: a short landscape box over an empty gap. .dlg .spk>.pfr had the override, .faces did not.
+   Root cause 2 (picture): pMe()/pv()/... ask porOf() for the identity's tall portrait (por-*.webp, the same art the consort and
+   prince cards show); until that file has loaded porOf returns the old square face and only re-renders the main screen, never
+   an open dialog. The identity card opens right after start(), so it always showed the square fallback.
+   Fix: .faces frames keep their 3:4 size per breakpoint (var(--pfw)), captions use the person-card name/rank style, and any
+   open dialog swaps the fallback for the portrait as soon as it has loaded. */
+(function(){const st=document.createElement("style");st.textContent=
+ ".faces .pfr,.faces .pcp.pfr{max-height:none!important;height:auto;aspect-ratio:3/4;width:100%}"+
+ ".faces figure{flex:0 1 var(--pfw);max-width:var(--pfw);min-width:0}.faces .pfwrap{width:100%}"+
+ ".modal .faces figcaption{margin-top:4px;text-align:center;max-width:100%}"+
+ ".modal .faces figcaption b{font-family:var(--display);font-size:1rem;line-height:1.2;color:var(--ink);overflow-wrap:anywhere}"+
+ ".modal .faces figcaption small{font-size:.76rem;font-weight:600;color:var(--gold);overflow-wrap:anywhere}";
+ document.head.appendChild(st)})();
+/* fallback face -> portrait, swapped into the open dialog once loaded */
+const POR57={};
+function por57Swap(){try{const M=$("modal");if(!M||M.hidden)return;M.querySelectorAll(".pcp img:not(.pcb2)").forEach(im=>{const s=im.getAttribute("src");const to=POR57[s];if(to&&PORK[to]===1)im.setAttribute("src",to)})}catch(e){}}
+if(typeof porOf==="function")(function(){const p0=porOf;porOf=function(who,fb){const r=p0.apply(this,arguments);try{if(r===fb&&fb&&who&&FIGS.length){
+  const src=figFor(who===S?S:who===S.emp?{kind:"emp"}:who===S.thO?{kind:"th"}:{ref:who},"por");
+  if(src&&src!==fb&&PORK[src]!==0){POR57[fb]=src;if(PORK[src]===1)return src;let n=0;const t=setInterval(()=>{if(PORK[src]===1||PORK[src]===0||++n>40){clearInterval(t);por57Swap()}},150)}}}catch(e){}return r}})();
+(function(){const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);por57Swap();return r}})();
+/* audit j54: the round face in the princess / suitor rows is a block (display:grid) and sat on a line of its own; inline like j53's rows */
+(function(){const st=document.createElement("style");st.textContent=".h54r>span>.md,.h54box .h54r .md{display:inline-grid;vertical-align:middle}.h54r>span{line-height:1.5}";document.head.appendChild(st)})();
+/* bottom tabs, no truncated text and one treatment for all: every label on ONE line at every width. Below 1280px every tab shows
+   its short label (data-s: Việc, Bản đồ, Phi tần, Quan hệ, Phe, Kẻ hầu, Con, Rương, Tài nghệ, Truyện, Nhật ký; servant mode sets
+   its own), at full width the long label. One font size for the whole bar: shrunk together (never per tab) until the widest label
+   fits its column (columns = number of visible tabs, two rows on phones), re-measured on resize and whenever the labels change. */
+(function(){const X="html body #tabs.tabs button";const st=document.createElement("style");st.textContent=
+ X+"{white-space:nowrap!important;overflow:hidden!important;text-overflow:clip!important;font-size:var(--tfs,.85rem)!important;padding-left:1px!important;padding-right:1px!important}"+
+ "@media (max-width:1279px){"+X+"{font-size:0!important}"+X+"::after{content:attr(data-s)!important;font-size:var(--tfs,.8rem)!important;white-space:nowrap!important}}"+
+ "@media (max-width:700px){"+X+"::after{font-size:var(--tfs,.72rem)!important}}";document.head.appendChild(st)})();
+let TFS_CV=null;
+function tabsFit(){try{const T=$("tabs");if(!T)return;const short=matchMedia("(max-width:1279px)").matches;const base=short?(matchMedia("(max-width:700px)").matches?.72:.8):.85;
+ T.style.setProperty("--tfs",base+"rem");const B=[...T.querySelectorAll("button")].filter(b=>b.offsetParent);if(!B.length)return;
+ const n=B.length,cols=matchMedia("(max-width:700px)").matches&&n>6?Math.ceil(n/2):n;T.style.setProperty("grid-template-columns",`repeat(${cols},minmax(0,1fr))`,"important");
+ TFS_CV=TFS_CV||document.createElement("canvas").getContext("2d");let k=1;
+ B.forEach(b=>{const cs=getComputedStyle(b,short?"::after":null);TFS_CV.font=`${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`;const txt=short?(b.dataset.s||b.textContent):b.textContent;
+  const w=TFS_CV.measureText(txt.trim()).width+1;const room=b.clientWidth-parseFloat(getComputedStyle(b).paddingLeft)-parseFloat(getComputedStyle(b).paddingRight);if(w>room&&room>0)k=Math.min(k,room/w)});
+ if(k<1)T.style.setProperty("--tfs",(base*k).toFixed(3)+"rem")}catch(e){}}
+addEventListener("resize",()=>{clearTimeout(window.__tfsT);window.__tfsT=setTimeout(tabsFit,80)});
+(function(){const r0=render;render=function(){const r=r0.apply(this,arguments);tabsFit();return r}})();
+try{if(document.fonts&&document.fonts.ready)document.fonts.ready.then(tabsFit)}catch(e){}
+setTimeout(tabsFit,0);
+/* status panel toggle (owner, Fold): the ▾ was display:none from 1200px up (and a 22px box below), so on a wide screen it could
+   not be tapped and "col" never changed anything there. Now one toggle at every width: a 36px kit button with icon + word as the
+   panel's first item; collapsed keeps only the key chips, at every width. A wide screen with no saved choice starts open. */
+(function(){const H="html body #hud2.hud2";const st=document.createElement("style");st.textContent=
+ H+" .h2t{display:inline-flex!important;position:static!important;order:-1;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;width:auto!important;min-width:36px;height:36px!important;min-height:36px;padding:0 10px!important;border:1px solid var(--trim,var(--line));border-radius:8px;background:#fffaf0;color:var(--gold);font-family:var(--body,inherit);font-size:.78rem!important;font-weight:600;white-space:nowrap;cursor:pointer;touch-action:manipulation;z-index:2}"+
+ H+" .h2t i{font-style:normal;font-size:.9rem;line-height:1}"+
+ H+"{padding-right:5px!important}"+H+".col .hc:not(.keep){display:none!important}"+
+ "@media (min-width:1200px){"+H+" .h2t{align-self:stretch;width:100%!important}}";document.head.appendChild(st)})();
+(function(){const r0=renderHud2;renderHud2=function(){try{if(window.__h2c==null&&matchMedia("(min-width:1200px)").matches){let v=null;try{v=localStorage.getItem("hclh-h2c")}catch(e){}if(v==null)window.__h2c=false}}catch(e){}
+ const r=r0.apply(this,arguments);try{const el=$("hud2"),b=el&&el.querySelector(".h2t");if(b){const col=el.classList.contains("col");b.innerHTML=col?"<i>▾</i>Chỉ số":"<i>▴</i>Thu gọn";b.setAttribute("aria-label",col?"Mở rộng bảng chỉ số":"Thu gọn bảng chỉ số");b.setAttribute("aria-expanded",String(!col));b.type="button"}}catch(e){}return r}})();
+/* the real tap bug below 1200px: the toggle re-renders #hud2 (innerHTML) inside its own click, so the button is detached by the
+   time the click bubbles to j24's "click outside the panel collapses it" listener; closest("#hud2") on the detached node is null,
+   so that listener collapsed the panel straight back. Remember the hit before anything runs and stop that click at the panel. */
+(function(){document.addEventListener("click",e=>{try{e.__h2in=!!(e.target&&e.target.closest&&e.target.closest("#hud2"))}catch(x){}},true);
+ const el=$("hud2");if(el)el.addEventListener("click",e=>{if(e.__h2in)e.stopPropagation()})})();
 /* ================= j58: TRANH NỀN THÂN PHẬN (owner 11/14) =================
    While the "Thân phận kiếp này" card (j52) or the life's opening card ("Nhập cung…") is up, the full-screen modal
    backdrop shows img/bg-origin-<origin.k>.webp (like the title key art) under a soft gradient. Every other modal keeps
@@ -5351,15 +5497,16 @@ function pidEnforce(){if(!S||!S.pid)return false;let ch=false;S.fid=S.pid;const 
    - a grey place (.agrey) had its click swallowed by j41's capture listener; its tiny buttons were the only way in;
    - "hết khắc" was shown while 4 khắc were left: the walk needed can(tc+1), and can() asks Sức 20 for anything over
      1 khắc, so with Sức under 20 every place read "hết khắc", and an accepted 'Xin bái kiến' still could not walk in.
-   Now: walking (and asking / sneaking in) costs only its khắc, no Sức (Sức still gates the acts there); the reason says
+   Now: walking (and asking / sneaking in) costs only its khắc (j80 has since dropped the Sức-20 floor); the reason says
    what is really missing; a tap on a reachable place goes there; on where she stands, opens the scene; on a closed
    place, a card with the reason and the ways in (Xin bái kiến / yết kiến, Lẻn vào with odds and risk, wait for the
    next buổi). The whole place is the tap target (labels and chips let the tap through), at least 36px. */
 (function(){
- /* the walk: goTo's own check can(tc+1) reads as "tc khắc left" while she walks */
- const c0=can;can=function(c){if(window.__j77walk!=null&&c===window.__j77walk+1)return j77Kh(window.__j77walk);return c0(c)};
+ /* the walk: goTo's own check can(tc+1) reads as "tc khắc left" while she walks (can() is looked up now, so a later
+    module that replaces it, e.g. j80's Sức floor, is still the one asked for everything else) */
  const g0=goTo;goTo=function(k){if(!S||!k||k==="home"||k===S.place)return g0.apply(this,arguments);
-  let tc=1;try{tc=travel(S.place,k)}catch(e){}window.__j77walk=tc;try{return g0.apply(this,arguments)}finally{window.__j77walk=null}};
+  let tc=1;try{tc=travel(S.place,k)}catch(e){}const c0=can;can=function(c){return c===tc+1?j77Kh(tc):c0(c)};
+  try{return g0.apply(this,arguments)}finally{can=c0}};
 })();
 /* what stops the walk itself, in words */
 function j77Kh(n){return !!S&&!S.dead&&used+n<=4}
@@ -5371,16 +5518,18 @@ accState=function(k){if(!S||!k)return{why:""};if(S.place===k)return{why:"",here:
  if(!a.ok){const st={why:a.why,kind:a.kind,ask:a.ask,tc};st.sneakOk=j77Kh(tc+1);if(a.ask==="yk")st.empAway=(S.where||{}).emp!==k;st.askOk=j77Kh(tc+1)&&!st.empAway;return st}
  if(k!=="home"&&!j77Kh(tc))return{why:j77WalkWhy(tc),tc,walk:1};
  return{why:"",tc}};
-/* sneaking: 1 khắc at the side gate, then the walk */
+/* sneaking: 1 khắc at the side gate, then the walk; the Emperor's halls are a serious offence */
+function accSneakPen(k){return typeof ACC_ETQ!=="undefined"&&ACC_ETQ.sneakHeavy[k]?{danh:-15,sev:2,txt:"Danh -15, tội nặng (có thể bị giáng phẩm)"}:{danh:-8,sev:1,txt:"Danh -8, bị phạt"}}
+accSneakLine=function(k,tc){return `${word(accSneakO(k))} · tốn: ${tc+1} khắc · thành: vào được buổi này · hỏng: ${accSneakPen(k).txt}`};
 accSneak=function(k){if(!S||S.dead||Q.length||S.out||S.confined)return;const tc=travel(S.place,k);if(!j77Kh(tc+1))return;const nm=accName(k);const o=accSneakO(k);spend(1);
  if(roll(o)){accGrant(S,k);log(`Lẻn vào ${nm} trót lọt.`);window.__accSilent=0;goTo(k);if(S.place!==k)render();return}
- spend(tc);apply({danh:-8});log(`<span class="r">Lẻn vào ${nm}, bị thị vệ bắt được: Danh -8.</span>`);punish(S,`tự tiện lẻn vào ${nm}`,1);
- Q.push({t:"Bị bắt",h:`<p>Thị vệ ${nm} bắt được ngươi ở cửa hông. Chuyện truyền khắp lục cung.</p><p class="r">Danh -8 · ${S.confined?`cấm túc ${S.confined} tháng`:"bị phạt"}</p>`});showModal();render()};
+ const P=accSneakPen(k);const r0=S.rank;spend(tc);apply({danh:P.danh});log(`<span class="r">Lẻn vào ${nm}, bị thị vệ bắt được: Danh ${P.danh}.</span>`);punish(S,`tự tiện lẻn vào ${nm}`,P.sev);
+ Q.push({t:"Bị bắt",h:`<p>Thị vệ ${nm} bắt được ngươi ở cửa hông. Chuyện truyền khắp lục cung.</p><p class="r">Danh ${P.danh} · ${S.rank<r0?`bị giáng xuống ${RANKS[S.rank].n}`:S.confined?`cấm túc ${S.confined} tháng`:"bị phạt"}</p>`});showModal();render()};
 /* an accepted request walks her in at once */
 (function(){const a0=accAsk;accAsk=function(k){const r=a0.apply(this,arguments);try{if(accHas(S,k)&&S.place!==k&&Q.length&&/Được/.test(Q[0].t||"")){const m=Q[0];m.btn="Vào";m.onClose=()=>{setTimeout(()=>{if(!Q.length&&S&&S.place!==k)goTo(k)},0)};showModal()}}catch(e){}return r}})();
 /* the card for a place she cannot enter now */
 function j77Card(k,empty){if(!S||S.dead||Q.length)return;
- if(empty){Q.push({t:empty,h:`<p>Cung trống, chưa có ai ở.</p>`,btn:"Đã rõ"});showModal();return}
+ if(empty){Q.push({t:empty,h:`<p>Cung trống, chưa có ai ở.</p>`,btn:"Đã hiểu"});showModal();return}
  const st=accState(k);const nm=accName(k);let n=0;try{n=countAt(k)}catch(e){}
  const left=Math.max(0,4-used);const L=[`<p>Không vào được lúc này: <b>${st.why}</b>.</p>`];
  if(st.kind==="hour")L.push(`<p class="past">Mở cửa buổi sáng và buổi chiều.</p>`);
@@ -5392,9 +5541,9 @@ function j77Card(k,empty){if(!S||S.dead||Q.length)return;
   else opts.push({n:nmA,fx:{},x:`${word(accAskO(k))} · tốn: 1 khắc, thêm ${st.tc} khắc đi · thành: được vào buổi này · hỏng: không mất gì thêm`,go:()=>setTimeout(()=>accAsk(k),0)})}
  if(st.kind){if(st.sneakOk)opts.push({n:"Lẻn vào",fx:{},x:accSneakLine(k,st.tc),go:()=>setTimeout(()=>accSneak(k),0)});
   else L.push(`<p class="past">Lẻn vào: cần ${st.tc+1} khắc, còn ${left}.</p>`)}
- const waitHelps=st.kind==="hour"||st.walk||/sáng/.test(st.why||"")||(st.ask&&!st.empAway&&!st.askOk)||(st.kind&&!st.sneakOk);
- if(waitHelps&&!S.out&&!S.confined&&!S.mg){const night=(S.buoi||0)>=2;opts.push({n:night?"Đợi sáng mai (Qua đêm)":"Đợi buổi sau (Qua buổi)",fx:{},x:st.kind==="hour"||/sáng/.test(st.why||"")?"sáng mai mở cửa, thử lại":night?"sáng mai đủ khắc, thử lại":"sang buổi sau đủ khắc, thử lại",go:()=>setTimeout(()=>{try{nextBuoi()}catch(e){}},0)})}
- if(opts.length){opts.push({n:"Thôi",fx:{},x:""});Q.push({t:nm,h:L.join(""),opts})}else Q.push({t:nm,h:L.join(""),btn:"Đã rõ"});
+ const waitHelps=st.kind==="hour"||st.walk||/sáng|thỉnh an/.test(st.why||"")||(st.ask&&!st.empAway&&!st.askOk)||(st.kind&&!st.sneakOk);
+ if(waitHelps&&!S.out&&!S.confined&&!S.mg){const night=(S.buoi||0)>=2;opts.push({n:night?"Đợi sáng mai (Qua đêm)":"Đợi buổi sau (Qua buổi)",fx:{},x:st.kind==="hour"||/sáng|thỉnh an/.test(st.why||"")?"sáng mai mở cửa, thử lại":night?"sáng mai đủ khắc, thử lại":"sang buổi sau đủ khắc, thử lại",go:()=>setTimeout(()=>{try{nextBuoi()}catch(e){}},0)})}
+ if(opts.length){opts.push({n:"Thôi",fx:{},x:""});Q.push({t:nm,h:L.join(""),opts})}else Q.push({t:nm,h:L.join(""),btn:"Đã hiểu"});
  showModal()}
 /* one tap rule for the map and the list */
 function j77Tap(k,empty){if(!S||S.dead||Q.length)return;if(empty||!k)return j77Card(k,empty||"Cung trống");
@@ -5417,7 +5566,148 @@ window.addEventListener("click",e=>{try{if(typeof tab==="undefined"||tab!=="go"|
 .mspot.agrey,.mspot.off,.mspot.empty{cursor:pointer}
 .mspot>*,.mspot .acb,.mspot .macts{pointer-events:none!important}
 .mtile .tacts .acb{min-height:36px}
+.mspot.empty{z-index:1}
 `;document.head.appendChild(st)})();
+/* ================= LỄ NGHI THAY KHÓA PHẨM (j77, owner 11/14; values set from the historian's findings) =================
+   One rule for everyone (her and every NPC):
+   - a consort's palace: anyone may come as a guest (visiting a side-hall resident is allowed; no rank lock).
+     Greeting the chủ vị first is expected courtesy, never a lock: an optional 1-khắc bái kiến (chủ vị thiện cảm +2),
+     or walk in without it (chủ vị thiện cảm −, more the wider the rank gap and the prouder her nature). An invitation
+     (a pass for the buổi) needs no greeting.
+   - Dưỡng Hòa điện / Cần Chính điện (the Emperor's quarters): summons only; xin yết kiến, or wait to be summoned;
+     sneaking in is a serious offence (Danh -15, heavy punishment).
+   - Càn Ninh cung (the Empress) and Đức Thọ cung (the Thái hậu): the morning thỉnh an, or by invitation / summons;
+     otherwise xin bái kiến.  - Gardens / Thái y viện: closed at night. */
+/* THE KNOBS (values pending the historian's findings; change here only, every rule below reads them):
+   mode: "optional" = guests just walk in (greeting not asked, no card);
+         "expected" = card: greet (cost, ±thiện cảm) or walk in without greeting (penalty below);
+         "required" = card: greet or turn back (no walking in without greeting). */
+const ACC_ETQ={mode:"expected",
+ khac:1,            /* khắc the greeting takes */
+ okAff:2,           /* chủ vị thiện cảm for the greeting (a sure act) */
+ skipBase:1,skipGap:.5,skipMax:6, /* walking in without greeting: −(base + gap×rank gap), capped, × her nature */
+ skipTrait:{"Kiêu ngạo":1.5,"Hiểm độc":1.25,"Đa nghi":1.25,"Tham vọng":1,"Nhu mì":.75,"Hiền lành":.5},
+ skipDanh:0,        /* no Danh loss: it is discourtesy, not an offence */
+ npcGreet:70,       /* % an NPC guest greets the chủ vị (same costs and effects apply to her) */
+ lead:false,        /* 'nhờ thái giám dẫn vào' for the Emperor's halls: off (summons only) */
+ sneakHeavy:{dtd:1,thu:1}, /* sneaking into these: Danh -15 and heavy punishment */
+ invite:true,       /* an invitation / accepted request / pass for the buổi skips the greeting */
+ hostHome:true,     /* only when the chủ vị is at home */
+ rankGap:1,         /* greeting asked when chủ vị's rank exceeds the guest's by at least this */
+ knMorningFree:true /* Càn Ninh at morning thỉnh an: the thỉnh an is the greeting */};
+function accRkName(p){return p.queen?"Hoàng hậu":RANKS[rkOf(p)].n}
+accessOf=function(p,k){p=p||S;if(!k)return{ok:false,why:"cung trống",kind:"rule"};
+ if(accOwn(p,k))return{ok:true};
+ const ctx={b:S.buoi||0,r:rkOf(p),host:accHost(k)};
+ for(const fn of ACC_ROLE){try{const v=fn(p,k,ctx);if(v)return v}catch(e){}}
+ if(accHas(p,k))return{ok:true,pass:1};
+ const b=ctx.b;
+ if(k==="dtd"||k==="thu")return{ok:false,why:k==="dtd"?"tẩm điện Hoàng thượng: chỉ vào khi được triệu":"nơi Hoàng thượng phê tấu: chỉ vào khi được triệu",kind:"rule",ask:"yk",lead:1,heavy:1};
+ if(k==="kn"){if(!qOn()||b===0||ctx.r>=7)return{ok:true};return{ok:false,why:"cung Hoàng hậu: ngoài giờ thỉnh an phải được mời",kind:"rule",ask:"bk"}}
+ if(k==="tn"){if(S.thDead||b===0)return{ok:true};return{ok:false,why:"Thái hậu chỉ tiếp lúc sáng thỉnh an",kind:"rule",ask:"bk"}}
+ if(ACC_DAY[k]){if(b<=1)return{ok:true};return{ok:false,why:"đóng cửa tối",kind:"hour"}}
+ return{ok:true}};
+/* the chủ vị a guest must greet before entering k now, or null */
+function accEtq(p,k){p=p||S;const C=ACC_ETQ;if(C.mode==="optional")return null;if(!k||k==="home"||accOwn(p,k)||(C.invite&&accHas(p,k)))return null;if(k!=="kn"&&k[0]!=="r")return null;
+ const h=accHost(k);if(!h||h===p||!h.alive||h.out)return null;if(C.hostHome&&whereOf(h)!==k)return null;if(rkOf(h)-rkOf(p)<C.rankGap)return null;
+ if(k==="kn"&&C.knMorningFree&&(S.buoi||0)===0)return null; /* morning thỉnh an is the greeting */
+ return h}
+function accSkipAff(h,g){const C=ACC_ETQ;const gap=Math.max(1,rkOf(h)-rkOf(g));const m=C.skipTrait[h.trait]||1;return -Math.max(1,Math.round(Math.min(C.skipMax,C.skipBase+C.skipGap*gap)*m))}
+/* the card: greet, or walk in without greeting, or not go; then carry on with what she meant to do */
+function accEtqCard(k,then){const h=accEtq(S,k);if(!h){then();return}if(!S||S.dead||Q.length)return;
+ const tc=travel(S.place,k);const nm=accName(k);const hn=`${accRkName(h)} ${h.name}`;const left=Math.max(0,4-used);const opts=[];
+ const C=ACC_ETQ,sh=h.name.split(" ").pop(),sg=n=>(n>0?"+":"")+n,skA=accSkipAff(h,S);
+ const L=[`<p>${hn} là chủ vị ${nm}, đang ở cung. Khách phẩm thấp hơn ${C.mode==="required"?"phải":"theo lệ nên"} vào chào chủ vị trước${C.invite?" (đến theo lời mời thì khỏi)":""}${C.mode==="required"?"":"; ngươi vẫn có thể đi thẳng đến chỗ người ngươi thăm"}.</p>`];
+ if(j77Kh(tc+C.khac))opts.push({n:`Bái kiến ${accRkName(h)} rồi vào`,fx:{},x:`Chắc chắn · tốn: ${C.khac} khắc, thêm ${tc} khắc đi · thành: thiện cảm ${sh} ${sg(C.okAff)}`,go:()=>setTimeout(()=>accEtqGo(k,h,1,then),0)});
+ else L.push(`<p class="past">Bái kiến: cần ${tc+C.khac} khắc, còn ${left}.</p>`);
+ if(C.mode!=="required"&&j77Kh(tc))opts.push({n:"Vào thẳng, không bái kiến",fx:{},x:`Chắc chắn · tốn: ${tc} khắc · thành: vào cung · kèm: thiếu lễ, thiện cảm ${sh} ${sg(skA)}${C.skipDanh?`, Danh ${sg(C.skipDanh)}`:""}`,go:()=>setTimeout(()=>accEtqGo(k,h,0,then),0)});
+ if(C.invite)L.push(`<p class="past">Đến theo lời mời thì không cần bái kiến: mời nàng sang cung ngươi, hoặc chờ được mời.</p>`);
+ opts.push({n:"Thôi",fx:{},x:""});Q.push({t:nm,h:L.join(""),opts});showModal()}
+function accEtqGo(k,h,greet,then){if(!S||S.dead||Q.length)return;const sh=h.name.split(" ").pop();
+ const C=ACC_ETQ,sg=n=>(n>0?"+":"")+n;
+ if(greet){if(!j77Kh(travel(S.place,k)+C.khac))return;spend(C.khac);relAdd(S,h,C.okAff);log(`Ngươi cúi chào, bái kiến ${accRkName(h)} ${h.name} ở ${accName(k)}: thiện cảm ${sg(C.okAff)}.`)}
+ else{if(C.mode==="required")return;const a=accSkipAff(h,S);relAdd(S,h,a);if(C.skipDanh)apply({danh:C.skipDanh});log(`<span class="r">Vào ${accName(k)} không chào chủ vị ${h.name}: thiếu lễ, thiện cảm ${sg(a)}${C.skipDanh?`, Danh ${sg(C.skipDanh)}`:""}.</span>`)}
+ accGrant(S,k);then()}
+/* the gate: every way in (map, person card, follow) passes the greeting first */
+(function(){const g0=goTo;goTo=function(k){if(!S||!k||k===S.place||k==="home"||window.__accSilent||window.__j77etq)return g0.apply(this,arguments);
+ const h=accEtq(S,k);if(!h||S.dead||Q.length||S.out||S.confined||!accessOf(S,k).ok)return g0.apply(this,arguments);
+ accEtqCard(k,()=>{window.__j77etq=1;try{goTo(k)}finally{window.__j77etq=0}});return}})();
+/* person-card acts: the visit and 'Đến gặp' carry the greeting in their price, and run it before opening her card */
+(function(){const v0=visitPal;visitPal=function(id){const v=rivals.find(x=>x.id===id);if(!v||!S||S.dead||Q.length)return;const k=palaceOf(v);
+  if(S.place!==k&&!S.confined&&!S.out&&!accessOf(S,k).ok)return j77Card(k);
+  if(S.place!==k&&accEtq(S,k)&&!S.confined&&!S.out)return accEtqCard(k,()=>visitPal(id));
+  if(S.place!==k&&!j77Kh(travel(S.place,k)))return;const c0=can,tc=travel(S.place,k);can=function(c){return c===tc+1?j77Kh(tc):c0(c)};try{return v0.apply(this,arguments)}finally{can=c0}};
+ const s0=goSee;goSee=function(id){const v=rivals.find(x=>x.id===id);if(!v||!S||S.dead||Q.length)return;const k=whereOf(v);
+  if(S.place!==k&&!S.confined&&!S.out&&!accessOf(S,k).ok)return j77Card(k);
+  if(S.place!==k&&accEtq(S,k)&&!S.confined&&!S.out)return accEtqCard(k,()=>goSee(id));
+  if(S.place===k)return s0.apply(this,arguments);if(!j77Kh(travel(S.place,k)))return;const c0=can,tc=travel(S.place,k);can=function(c){return c===tc+1?j77Kh(tc):c0(c)};try{return s0.apply(this,arguments)}finally{can=c0}}})();
+/* the two person-card buttons, one rule: a lock is not a dead button: tapping opens the card with its reason and ways in */
+function accGuestLine(k,tc,tail){const who=accEtq(S,k);return `Chắc chắn · tốn: ${tc} khắc${who?` + ${ACC_ETQ.khac} khắc bái kiến ${accRkName(who)} ${who.name.split(" ").pop()}`:""} · thành: ${tail}`}
+function accGuestWhy(k,tc){if(S.confined)return"đang cấm túc";if(S.out)return"đang ở lãnh cung";const a=accessOf(S,k);if(!a.ok)return"";return j77Kh(tc)?"":`đi tốn ${tc} khắc, còn ${Math.max(0,4-used)}`}
+function accLockTag(k){const a=accessOf(S,k);return a.ok?"":` · ${a.why} (chạm để xem cách vào)`}
+visitBtn=function(v){if(!v||!v.alive||v.out||sameHouse(S,v))return"";const k=palaceOf(v);if(S.place===k)return"";const tc=travel(S.place,k);
+ return pbtn(`data-visit="${v.id}"`,`Đến cung nàng thăm`,accGuestLine(k,tc,"nếu nàng ở nhà thì gặp mặt · có khi nàng đi vắng")+accLockTag(k),accGuestWhy(k,tc))};
+seeBtn=function(v){if(!v||v===S||!v.alive||v.out||together(S,v)||!locKnown(v))return"";const k=whereOf(v),tc=travel(S.place,k);
+ return pbtn(`data-see="${v.id}" class="seeb"`,`Đến gặp ${v.name.split(" ").pop()}`,accGuestLine(k,tc,"gặp mặt, mọi việc làm tại chỗ, dễ hơn sai người")+accLockTag(k),accGuestWhy(k,tc))};
+/* hard-lock extra way in: ask a eunuch to lead her in (bạc), for the Emperor's halls */
+function accLeadO(k){return od(35+(S.danh||0)/8+(typeof mm==="function"?mm():0))}
+function accLeadCost(){return 15}
+function accLead(k){if(!S||S.dead||Q.length||S.out||S.confined)return;const tc=travel(S.place,k);if(!j77Kh(tc+1)||S.bac<accLeadCost())return;const nm=accName(k);
+ spend(1);apply({bac:-accLeadCost()});if(roll(accLeadO(k))){accGrant(S,k);log(`Nhờ thái giám dẫn vào ${nm}: được dẫn vào (Bạc -${accLeadCost()}).`);goTo(k);if(S.place!==k)render();return}
+ log(`Nhờ thái giám dẫn vào ${nm}: hắn nhận bạc rồi từ chối (Bạc -${accLeadCost()}).`);Q.push({t:"Không được dẫn vào",h:`<p>Thái giám nhận bạc, rồi lắc đầu: “Không có khẩu dụ, nô tài không dám.”</p><p class="r">Bạc -${accLeadCost()}</p>`});showModal();render()}
+/* the closed-place card gains the eunuch and the 'chờ được triệu' line */
+(function(){const c0=j77Card;j77Card=function(k,empty){const n0=Q.length;c0.apply(this,arguments);try{if(empty||Q.length===n0)return;const m=Q[Q.length-1];const a=accessOf(S,k);if(!a.lead)return;
+  const tc=travel(S.place,k);const left=Math.max(0,4-used);
+  if(!ACC_ETQ.lead){m.h+=`<p class="past">Tự ý vào là tội nặng. Hoặc chờ được triệu.</p>`;showModal();return}
+  if(!m.opts)m.opts=[{n:"Thôi",fx:{},x:""}],m.btn=undefined;
+  const ok=j77Kh(tc+1)&&S.bac>=accLeadCost();
+  if(ok)m.opts.splice(Math.max(0,m.opts.length-1),0,{n:"Nhờ thái giám dẫn vào",fx:{},x:`${word(accLeadO(k))} · tốn: ${accLeadCost()} bạc, 1 khắc, thêm ${tc} khắc đi · thành: được vào buổi này · hỏng: mất bạc`,go:()=>setTimeout(()=>accLead(k),0)});
+  else m.h+=`<p class="past">Nhờ thái giám dẫn vào: cần ${accLeadCost()} bạc và ${tc+1} khắc (có ${S.bac} bạc, còn ${left} khắc).</p>`;
+  m.h+=`<p class="past">Hoặc chờ được triệu.</p>`;showModal()}catch(e){}}})();
+/* map tiles: a palace whose chủ vị outranks her shows the greeting in its price */
+(function(){const m0=mapHTML;mapHTML=function(){let h=m0.apply(this,arguments);if(window.__mapList)return h;
+ try{h=h.replace(/(<button class="mspot[^"]*" data-go="([^"]+)"[^>]*>)([\s\S]*?)(<\/button>)/g,(all,open,k,inner,close)=>{const who=accEtq(S,k);if(!who)return all;
+   const tc=travel(S.place,k);inner=inner.replace(/<em class="ok">\d+ khắc<\/em>/,`<em class="ok">${tc+ACC_ETQ.khac} khắc · bái kiến</em>`);
+   open=open.replace(/title="([^"]*)"/,(m,t)=>`title="${t} · bái kiến ${accRkName(who)} ${who.name} (+${ACC_ETQ.khac} khắc)"`);return open+inner+close})}catch(e){}return h}})();
+/* TRA CỨU: the rules as they now stand */
+accInfo=function(){if(!S||Q.length)return;const R=n=>`<b>${n}</b>`;
+ Q.push({t:"Ra vào cung cấm",h:`<div class="acinfo"><p>Một luật cho mọi người trong cung, cả phi tần khác.</p>
+ <p>${R("Cung phi tần")}: ai cũng đến làm khách được.${(()=>{const C=ACC_ETQ,sg=n=>(n>0?"+":"")+n;if(C.mode==="optional")return"";return ` Chủ vị phẩm cao hơn ngươi đang ở cung: theo lệ ${C.mode==="required"?"phải":"nên"} ${R("bái kiến")} trước (${C.khac} khắc, chủ vị thiện cảm ${sg(C.okAff)})${C.invite?"; đến theo lời mời thì khỏi":""}.${C.mode==="expected"?` Không chào: chủ vị phật ý, thiện cảm giảm (phẩm cách càng xa, tính càng kiêu thì càng giảm).`:""}`})()}</p>
+ <p>${R("Càn Ninh cung, Đức Thọ cung")}: sáng thỉnh an, hoặc khi được mời, được triệu. Lúc khác: xin bái kiến.</p>
+ <p>${R("Dưỡng Hòa điện, Cần Chính điện")}: chỉ khi được triệu. Cách khác: xin yết kiến, hoặc chờ được triệu. Tự ý vào là tội nặng.</p>
+ <p>Phẩm thấp gặp phẩm cao thì cúi chào trước.</p>
+ <p>${R("Thái y viện, Ngự hoa viên")}: sáng, chiều. Tối đóng cửa.</p>
+ <p>${R("Kính sự phòng")}: phi tần nào cũng vào. ${R("Trường Môn viện")}: ai cũng vào, bị thấy: Danh -2.</p>
+ <p>${R("Cung của ngươi")}: luôn vào được.</p>
+ <p>Chỗ xám: không vào được lúc này; chạm để xem lý do và cách vào. <b>Lẻn vào</b>: tốn khắc, bị bắt Danh -8 và bị phạt.</p></div>`,btn:"Đã hiểu"});showModal()};
+/* NPC guests keep the same courtesy: when a consort spends the buổi in a palace whose chủ vị outranks her, she greets
+   (chủ vị thiện cảm +okAff toward her) or does not (the same scaled loss) */
+(function(){const pw=placeWhere;placeWhere=function(){const r=pw.apply(this,arguments);try{const C=ACC_ETQ;if(C.mode==="optional")return r;const W=S.where||{};
+ for(const v of rivals){if(!v.alive||v.out)continue;const k=W[v.id];if(!k||k==="home"||k[0]!=="r"||palaceOf(v)===k)continue;const h=accHost(k);
+  if(!h||h===v||!h.alive||h.out||whereOf(h)!==k||rkOf(h)-rkOf(v)<C.rankGap)continue;
+  if(roll(C.npcGreet))relAdd(v,h,C.okAff);else relAdd(v,h,accSkipAff(h,v))}}catch(e){}return r}})();
+/* j80 — Sức hotfix. Before: +4 Sức per tuần (+1 in harsh weather) while most acts cost 5–20, and every 2-khắc act,
+   including "Nghỉ ngơi dưỡng sức" itself, was locked below Sức 20: players got stuck with khắc left and no way to recover.
+   Now: (1) a night's sleep restores a real amount, same rule for every consort; (2) acts that restore Sức and cost none
+   are never locked by the Sức floor; (3) the morning log states the recovery as a true delta. */
+var __restAct=0,__cardSuc=0;
+/* the old floor "Sức ≥ 20 for any 2-khắc act" also blocked walking on the map and resting; now the floor is Sức 5
+   (exhausted), and a card that costs Sức needs enough Sức to pay it and stay above 0 */
+const SUC_FLOOR=5;
+function isRestCard(a){return !!(a&&a.w&&a.w.suc>0&&!(a.c&&a.c.suc<0))}
+can=function(c){if(!S||S.dead||used+c>4)return false;if(__restAct||c<=1)return true;if(__cardSuc)return S.suc+__cardSuc>0&&S.suc>=SUC_FLOOR;return S.suc>=SUC_FLOOR};
+function cardSuc(a){return a&&a.c&&a.c.suc<0?a.c.suc:0}
+(function(){const a0=act;act=function(i){__restAct=isRestCard(deck[i])?1:0;__cardSuc=cardSuc(deck[i]);try{return a0.apply(this,arguments)}finally{__restAct=0;__cardSuc=0}}})();
+(function(){const h0=cardH;cardH=function(a){__restAct=isRestCard(a)?1:0;__cardSuc=cardSuc(a);try{return h0.apply(this,arguments)}finally{__restAct=0;__cardSuc=0}}})();
+(function(){if(typeof whyTime!=="function")return;const w0=whyTime;whyTime=function(c){if(!S||S.dead)return"";if(used+c>4)return"hết khắc buổi này";if(__restAct||c<=1)return"";if(__cardSuc&&S.suc+__cardSuc<=0)return `cần Sức trên ${-__cardSuc} (có ${S.suc})`;return S.suc<SUC_FLOOR?`kiệt sức (Sức ${S.suc}, cần ${SUC_FLOOR}) — nghỉ ngơi trước`:""}})();
+function sleepRegen(p){const base=(typeof harsh==="function"&&harsh())?8:14;return base+(p.suc<30?6:0)}
+(function(){const e0=endTurn;endTurn=function(){
+  if(!S||S.dead||Q.length||S.mg||(typeof isSrv==="function"&&isSrv()))return e0.apply(this,arguments);
+  const g=Math.min(sleepRegen(S),100-S.suc);S.suc=cl(S.suc+g,0,100);
+  try{liveRivals(true).forEach(v=>v.suc=cl(v.suc+sleepRegen(v),0,100))}catch(e){}
+  const r=e0.apply(this,arguments);
+  try{if(!S.dead&&g>0)log(`<span class="g">Ngủ đêm hồi sức: Sức +${g}</span>`)}catch(e){}
+  return r}})();
 
 </script>
 
