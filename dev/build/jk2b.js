@@ -441,11 +441,11 @@ function kitEvArt(m){try{if(!m||typeof evArtOf!=="function")return null;let src=
 /* ---------- 13. IDENTITY CARD (owner 11/14 item 6): the origin picture is no longer the backdrop; it sits in an art frame like the event art
    (landscape: frame left, facts right; portrait / Fold: frame on top, facts below). The whole screen wears ONE shared reincarnation
    background, img/bg-reborn-p.webp (portrait) / bg-reborn-l.webp (landscape), gpt-2-6, no people. Her full-body figure still stands on it. ---------- */
-function kitRebornBg(){try{const M=$("modal");if(!M||!M.dataset.obg)return;const land=innerWidth>innerHeight;const grad="linear-gradient(rgba(40,20,12,.10),rgba(40,20,12,.04) 40%,rgba(40,20,12,.18))";
- M.style.setProperty("background",`${grad},url(img/bg-reborn-${land?"l":"p"}.webp) center/cover no-repeat,#e9dcc8`,"important");M.dataset.kreborn="1"}catch(e){}}
+function kitRebornBg(){try{const M=$("modal");if(!M)return;if(!M.dataset.obg){if(M.dataset.kbd==="reborn")kitBackdrop(M,null);return}
+ M.style.removeProperty("background");kitBackdrop(M,"reborn");M.dataset.kreborn="1"}catch(e){}}  /* art: jbd KIT_BD.reborn */
 (function(){const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);try{kitRebornBg()}catch(e){}return r}})();
 addEventListener("resize",()=>{clearTimeout(window.__krbT);window.__krbT=setTimeout(kitRebornBg,120)});
-try{const M0=$("modal");if(M0)new MutationObserver(()=>{if(M0.dataset.obg&&!/bg-reborn/.test(M0.style.background||""))kitRebornBg()}).observe(M0,{attributes:true,attributeFilter:["style","data-obg"]})}catch(e){}
+try{const M0=$("modal");if(M0)new MutationObserver(()=>{if(M0.dataset.obg?(M0.dataset.kbd!=="reborn"||M0.style.background):M0.dataset.kbd==="reborn")kitRebornBg()}).observe(M0,{attributes:true,attributeFilter:["style","data-obg"]})}catch(e){}
 function kitOriginArt(k){return `img/bg-origin-${k}.webp`}
 (function(){if(typeof kpIdentity!=="function")return;const k0=kpIdentity;kpIdentity=function(M,m){const r=k0.apply(this,arguments);try{const id=$("mb").querySelector(".kpid");const o=S&&S.origin;if(id&&o&&!id.querySelector(":scope > .kpidart")){
   const d=document.createElement("div");d.className="kpidart";d.innerHTML=kitArtFrame(kitOriginArt(o.k),o.n,"kidart");id.prepend(d)}}catch(e){console.error("kpidart",e)}return r}})();
@@ -472,7 +472,7 @@ function kitRare(k){try{if(typeof ow69Rare==="function")return ow69Rare(k)}catch
 function kitRoulette(o){const done=()=>{try{o.done&&o.done()}catch(e){}};if(!o||!o.items||!o.items.length||matchMedia("(prefers-reduced-motion: reduce)").matches){done();return}
  const old=$("kroul");if(old)old.remove();const ov=document.createElement("div");ov.id="kroul";ov.className="kroul";const land=innerWidth>innerHeight;
  ov.innerHTML=`<div class="krbox"><div class="krhead"><b>Luân hồi</b><small>Thân phận kiếp này</small></div><div class="krgrid">${o.items.map(it=>`<div class="krt" data-k="${it.k}"><div class="kra">${kitArtFrame(it.src,"")}</div><span class="krn">${it.name}</span><span class="krr">${typeof kitChip==="function"?kitChip(it.rare,"n"):it.rare}</span></div>`).join("")}</div><div class="krskip">Chạm để bỏ qua</div></div>`;
- ov.style.backgroundImage=`linear-gradient(rgba(40,20,12,.12),rgba(40,20,12,.22)),url(img/bg-reborn-${land?"l":"p"}.webp)`;document.body.appendChild(ov);
+ kitBackdrop(ov,"roulette");document.body.appendChild(ov);
  const tiles=[...ov.querySelectorAll(".krt")];const ti=Math.max(0,tiles.findIndex(t=>t.dataset.k===o.target));let fin=false,timers=[];const T=(f,ms)=>timers.push(setTimeout(f,ms));
  const end=()=>{if(fin)return;fin=true;timers.forEach(clearTimeout);ov.classList.add("krout");setTimeout(()=>ov.remove(),360);done()};
  ov.addEventListener("click",end);

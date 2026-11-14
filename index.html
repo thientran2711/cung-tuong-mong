@@ -138,7 +138,7 @@ button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 .dlg h2{font-family:var(--display);color:var(--gold);font-size:1.15rem;margin:0 0 8px}
 .dlg .body{line-height:1.55}
 .dlg .row{display:flex;justify-content:flex-end;margin-top:12px}
-.modal.night{background:#000 url(img/tam-cung-dem.webp) center/cover no-repeat}
+/* .modal.night backdrop: jbd KIT_BD.night (tam-cung-dem-p / tam-cung-dem) */
 .scimg{position:absolute;inset:0;background-size:cover;background-position:center;pointer-events:none}
 .ic{vertical-align:-3px;margin-right:3px;object-fit:contain}
 .st small .ic{vertical-align:-2px}
@@ -867,7 +867,7 @@ function mkP(id,pp){pp=pp||{};const d=PEND[id]&&PEND[id](pp);if(!d)return null;d
 function pushDil(d,title){if(!d)return"";pushModal({t:title||"Việc khó xử",h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp});return""}
 function WHO(w){if(!w)return null;const v=w[0]==="r"?RV(w[1]):null;return w[0]==="r"?(v?pv(v):null):w[0]==="e"?pEmp():w[0]==="t"?pTH():w[0]==="m"?pMaid():w[0]==="me"?pMe():w[0]==="d"?pDoc():null}
 function serQ(){return Q.map(m=>m.pid?{pid:m.pid,pp:m.pp,t:m.t}:m.opts?null:{t:m.t,h:m.h,cls:m.cls,btn:m.btn,w:m.who&&m.who.w}).filter(Boolean)}
-function deserQ(L){const out=[];for(const e of L||[]){try{if(e.pid){const d=mkP(e.pid,e.pp);if(d)out.push({t:e.t||"Việc khó xử",h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp})}else out.push({t:e.t,h:e.h,cls:e.cls,btn:e.btn,who:WHO(e.w)})}catch(x){}}return out}
+function deserQ(L){const out=[];for(const e of L||[]){try{if(e.pid){const d=mkP(e.pid,e.pp);if(d)out.push({t:e.t||"Việc khó xử",h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp,cls:d.cls})}else out.push({t:e.t,h:e.h,cls:e.cls,btn:e.btn,who:WHO(e.w)})}catch(x){}}return out}
 function showModal(){const M=$("modal");if(!Q.length){M.hidden=true;return}const m=Q[0];
   M.className="modal "+(m.cls||"");$("mt").textContent=/pcm/.test(m.cls||"")?"":m.t;$("mt").hidden=/pcm/.test(m.cls||"");try{const ar=evArt();M.querySelector(".dlg").style.setProperty("--dart",ar&&(m.who||/pcm/.test(m.cls||""))?`url(${ar})`:"none")}catch(e){}
   const wh=m.who||null;const art=!m.who&&m.opts&&!m.faces?evArt():"";$("mb").innerHTML=(m.faces?`<div class="faces">${m.faces.map(f=>`<figure>${pframe(Object.assign({},f[0],{rw:""}))}<figcaption><b>${f[1]}</b>${f[0].rw?`<small>${f[0].rw}</small>`:""}</figcaption></figure>`).join("")}</div>`:"")+(m.faces||/pcm/.test(m.cls||"")?m.h:`<div class="spk">${wh?pframe(wh):pframeArt(art||evArt())}<div class="spkt">${m.h}</div></div>`)+(m.opts?`<div class="opts">${m.opts.map((c,i)=>{const poor=c.fx&&c.fx.bac&&S.bac+c.fx.bac<0;return `<button class="opt" data-m="${i}" ${poor?"disabled":""}>${c.n}<small>${dilLine(c)}</small></button>`}).join("")}</div>`:"");
@@ -1629,7 +1629,7 @@ function bestow(p,why){if(!p||p.dead||(p!==S&&!p.alive))return;let L=BEST[why]||
 
 /* ================= NIGHTS ================= */
 function nightScene(){S.tonight="me";pushFront(mkP("prep"),"Chuẩn bị thị tẩm")}
-function pushFront(d,title){if(!d)return;Q.unshift({t:title||"Việc khó xử",h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp})}
+function pushFront(d,title){if(!d)return;Q.unshift({t:title||"Việc khó xử",h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp,cls:d.cls})}
 function night(p=S){if(p.preg)return;if(roll(conceiveCh(p))){p.preg=1;p.pregWk=wk();if(p===S){S.hidden=true;log(`<span class="g">Thái y bắt mạch: ngươi đã có thai.</span> Ngươi được giấu thai đến hết tháng thứ 3, hoặc báo tin để được sủng ái.`)}else{p.hidden=p.tamco>=40;if(!p.hidden)ap(p,{sung:6,th:5})}}}
 function giuBlocked(p){return rkOf(p)<=1&&(p.th<0||(has("hieuthao")&&p.th<10))&&roll(30)}
 PEND.ksp=()=>({who:pEmp(),t:"<p>Tối nay Hoàng thượng lật thẻ bài của ngươi.</p>",o:[{n:"Tắm gội chờ giá",fx:{},x:"chuẩn bị thị tẩm",go:nightScene},
@@ -6154,6 +6154,58 @@ document.addEventListener("change",e=>{const t=e.target;if(!t||!t.classList||!t.
 .kinput:focus{outline:none;border-color:var(--k-sel-ring,#a8740c);box-shadow:0 0 0 3px var(--k-sel,#fff3c4)}
 .kinput[readonly]{background:var(--k-card2,#f6ead6)}
 `;document.head.appendChild(st)})();
+/* ================= jbd: ONE BACKDROP KIT (owner 11/14 16:05Z) — KIT.md section 30 =================
+   Every full-screen / large backdrop exists TWICE: a portrait painting and its own painted landscape composition (gpt-2-6),
+   never a stretched / faded copy or an empty panel. ONE registry (KIT_BD) and ONE rule pick the art by the shape of the box:
+   - by default the viewport orientation (CSS media query, works before any script runs);
+   - a box that is not the whole screen (podium panel, …) is measured by kitBackdrop(el,key,{box:true}) (ResizeObserver → data-kbdo="l|p").
+   Elements wear a backdrop by class `kbd kbd-<key>` (kitBackdrop) or by the entry's `sel` selector (static screens such as #title).
+   Three shapes: portrait (taller than wide) · landscape 4:3 tier "m" (wider than tall, up to 7:5 — iPad 1366x1024, 1024x768) · wide landscape
+   "l" (wider than 7:5 — 1180x820, 16:10, 16:9). Box-measured elements get data-kbdo="p|m|l" by the same thresholds.
+   Entry: p / l = portrait / wide-landscape art; m = 4:3 art (optional, else l); pos / posl = background-position; grad / gradl = soft veil over the art (optional); col = ground colour.
+   posm / gradm = the 4:3 tier's own position / veil (else those of l). Nobody else writes `background:url(...)` for a backdrop: add an entry here. */
+const KIT_BD={
+ title:{sel:"#title.title",p:"img/title-key.webp",l:"img/title-key-l.webp",m:"img/title-key-m.webp",pos:"center top",posl:"left 25%",posm:"left center",col:"#f3e6d6",
+  grad:"linear-gradient(rgba(245,236,220,0) 56%,rgba(245,236,220,.72))",gradl:"linear-gradient(90deg,rgba(245,236,220,0) 58%,rgba(245,236,220,.18))"},
+ reborn:{p:"img/bg-reborn-p.webp",l:"img/bg-reborn-l.webp",col:"#e9dcc8",
+  grad:"linear-gradient(rgba(40,20,12,.10),rgba(40,20,12,.04) 40%,rgba(40,20,12,.18))"},
+ roulette:{p:"img/bg-reborn-p.webp",l:"img/bg-reborn-l.webp",col:"#e9dcc8",grad:"linear-gradient(rgba(40,20,12,.12),rgba(40,20,12,.22))"},
+ podium:{sel:".kpod",box:true,p:"img/kit/podium-bg-p.webp",l:"img/kit/podium-bg.webp",pos:"center top",col:"var(--bg)",
+  grad:"linear-gradient(#fffaf022,#f5ecdc55 70%,#f5ecdcd0)"},
+ night:{sel:".modal.night",p:"img/tam-cung-dem-p.webp",l:"img/tam-cung-dem.webp",col:"#000"}
+};
+function kitBdCss(){const T="linear-gradient(transparent,transparent)";
+ const BP=`background:var(--kbd-grad,${T}),var(--kbd-p) var(--kbd-pos,center)/cover no-repeat,var(--kbd-col,#e9dcc8)!important`;
+ const BL=`background:var(--kbd-gradl,var(--kbd-grad,${T})),var(--kbd-l) var(--kbd-posl,var(--kbd-pos,center))/cover no-repeat,var(--kbd-col,#e9dcc8)!important`;
+ const BM=`background:var(--kbd-gradm,var(--kbd-gradl,var(--kbd-grad,${T}))),var(--kbd-m,var(--kbd-l)) var(--kbd-posm,var(--kbd-posl,var(--kbd-pos,center)))/cover no-repeat,var(--kbd-col,#e9dcc8)!important`;
+ const rules=sel=>{const sl=sel.split(","),q=t=>sl.map(x=>x+t).join(",");
+  return `${sel}{${BP}}
+@media (orientation:landscape){${q(":not([data-kbdo=p])")}{${BL}}}
+@media (orientation:landscape) and (max-aspect-ratio:7/5){${q(":not([data-kbdo=p]):not([data-kbdo=l])")}{${BM}}}
+${q("[data-kbdo=l]")}{${BL}}
+${q("[data-kbdo=m]")}{${BM}}
+`};
+ let s=rules(".kbd");
+ for(const k in KIT_BD){const d=KIT_BD[k];const v=[`--kbd-p:url(${d.p})`,`--kbd-l:url(${d.l||d.p})`];if(d.m)v.push(`--kbd-m:url(${d.m})`);
+  for(const p of ["pos","posl","posm","grad","gradl","gradm","col"])if(d[p])v.push(`--kbd-${p}:${d[p]}`);
+  s+=`.kbd-${k}${d.sel?","+d.sel:""}{${v.join(";")}}\n`;
+  if(d.sel)s+=rules(d.sel)}
+ return s}
+(function(){try{const st=document.createElement("style");st.id="kit-bd";st.textContent=kitBdCss();document.head.appendChild(st)}catch(e){console.error("kit-bd",e)}})();
+function kitBdShape(w,h){return w<h?"p":w/h<=1.4?"m":"l"}
+/* box-measured backdrops: data-kbdo follows the element's own shape */
+const KBD_RO=(typeof ResizeObserver==="function")?new ResizeObserver(es=>{for(const e of es){const r=e.contentRect;if(r.width&&r.height)e.target.dataset.kbdo=kitBdShape(r.width,r.height)}}):null;
+function kitBdBox(el){try{if(!el||el.__kbdBox)return;el.__kbdBox=1;const r=el.getBoundingClientRect();if(r.width&&r.height)el.dataset.kbdo=kitBdShape(r.width,r.height);KBD_RO&&KBD_RO.observe(el)}catch(e){}}
+/* kitBackdrop(el, key|null, {box}) — put a registry backdrop on an element (null = take it off). Returns el. */
+function kitBackdrop(el,key,o){if(!el)return el;o=o||{};
+ [...el.classList].forEach(c=>{if(/^kbd-/.test(c))el.classList.remove(c)});
+ if(!key||!KIT_BD[key]){el.classList.remove("kbd");delete el.dataset.kbd;if(el.__kbdBox){try{KBD_RO&&KBD_RO.unobserve(el)}catch(e){}el.__kbdBox=0;delete el.dataset.kbdo}return el}
+ el.classList.add("kbd","kbd-"+key);el.dataset.kbd=key;
+ if(o.box||KIT_BD[key].box)kitBdBox(el);return el}
+/* static `sel` entries that are boxes (e.g. .kpod) are measured when they appear */
+(function(){try{const boxSel=Object.values(KIT_BD).filter(d=>d.sel&&d.box).map(d=>d.sel).join(",");if(!boxSel||typeof MutationObserver!=="function")return;
+ const scan=()=>document.querySelectorAll(boxSel).forEach(kitBdBox);
+ new MutationObserver(()=>{clearTimeout(window.__kbdT);window.__kbdT=setTimeout(scan,0)}).observe(document.body||document.documentElement,{childList:true,subtree:true});scan()}catch(e){}})();
 /* j74: title screen like most games (owner 11/14). Entering shows the whole key art (img/title-key.webp) with the
    game's name and a few big kit buttons at the bottom (landscape: art on the left, menu in the column beside it),
    so no face is covered. Every screen is ONE kit scene panel (KIT.md 8 + 14: kitModal({scene:true}), header .kph,
@@ -6171,8 +6223,7 @@ const T=$("title");if(!T)return;const BOX=T.querySelector(".tbox");if(!BOX)retur
 let PG="home";
 const st=document.createElement("style");
 st.textContent=`
-#title.title{background:linear-gradient(rgba(245,236,220,0) 56%,rgba(245,236,220,.72)),url(img/title-key.webp) center top/cover no-repeat,#f3e6d6!important}
-@media (orientation:landscape){#title.title{background:linear-gradient(90deg,rgba(245,236,220,0) calc(75vh - 90px),rgba(245,236,220,.6) 75vh),url(img/title-key.webp) left top/auto 100% no-repeat,linear-gradient(rgba(245,236,220,.74),rgba(245,236,220,.74)),url(img/title-key.webp) center/cover no-repeat,#f3e6d6!important}}
+/* #title backdrop: jbd KIT_BD.title (portrait title-key / landscape title-key-l) */
 #title .tbox{display:none!important}
 .modal.kptitle{z-index:55;background:none}
 .modal.kpthome .dlg #mr{display:none!important}
@@ -9125,7 +9176,7 @@ function kpodFromItem(m){if(!m||typeof m.h!=="string"||!/class="(ktlist|h54list)
 (function(){const st=document.createElement("style");st.id="kit90";st.textContent=`
 #kpodov{position:fixed;inset:0;z-index:9000;display:flex;align-items:stretch;justify-content:center;background:#2a1a12b8}
 .kpod{position:relative;width:100%;max-width:1100px;height:100%;display:grid;grid-template-rows:auto minmax(0,1fr) auto;overflow:hidden;
- background:linear-gradient(#fffaf022,#f5ecdc55 70%,#f5ecdcd0),url(img/kit/podium-bg.webp) center top/cover no-repeat,var(--bg);box-shadow:0 0 0 1px #c9a46a,0 14px 40px #2a1a1270;
+ box-shadow:0 0 0 1px #c9a46a,0 14px 40px #2a1a1270;
  padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom);user-select:none;-webkit-user-select:none;cursor:pointer}
 .kpod-hd{display:flex;justify-content:center;padding:12px 12px 0}.kpod-hd .kph{display:inline-flex;align-items:center;gap:10px;max-width:100%;padding:8px 16px;border:1px solid var(--line);border-radius:var(--k-rad);
  background:linear-gradient(#f6ead6ee,#fffaf0f2),url(img/kit/bg-default.webp) center/240px repeat;box-shadow:0 2px 10px #5a3a2030}
@@ -10045,11 +10096,11 @@ function kitEvArt(m){try{if(!m||typeof evArtOf!=="function")return null;let src=
 /* ---------- 13. IDENTITY CARD (owner 11/14 item 6): the origin picture is no longer the backdrop; it sits in an art frame like the event art
    (landscape: frame left, facts right; portrait / Fold: frame on top, facts below). The whole screen wears ONE shared reincarnation
    background, img/bg-reborn-p.webp (portrait) / bg-reborn-l.webp (landscape), gpt-2-6, no people. Her full-body figure still stands on it. ---------- */
-function kitRebornBg(){try{const M=$("modal");if(!M||!M.dataset.obg)return;const land=innerWidth>innerHeight;const grad="linear-gradient(rgba(40,20,12,.10),rgba(40,20,12,.04) 40%,rgba(40,20,12,.18))";
- M.style.setProperty("background",`${grad},url(img/bg-reborn-${land?"l":"p"}.webp) center/cover no-repeat,#e9dcc8`,"important");M.dataset.kreborn="1"}catch(e){}}
+function kitRebornBg(){try{const M=$("modal");if(!M)return;if(!M.dataset.obg){if(M.dataset.kbd==="reborn")kitBackdrop(M,null);return}
+ M.style.removeProperty("background");kitBackdrop(M,"reborn");M.dataset.kreborn="1"}catch(e){}}  /* art: jbd KIT_BD.reborn */
 (function(){const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);try{kitRebornBg()}catch(e){}return r}})();
 addEventListener("resize",()=>{clearTimeout(window.__krbT);window.__krbT=setTimeout(kitRebornBg,120)});
-try{const M0=$("modal");if(M0)new MutationObserver(()=>{if(M0.dataset.obg&&!/bg-reborn/.test(M0.style.background||""))kitRebornBg()}).observe(M0,{attributes:true,attributeFilter:["style","data-obg"]})}catch(e){}
+try{const M0=$("modal");if(M0)new MutationObserver(()=>{if(M0.dataset.obg?(M0.dataset.kbd!=="reborn"||M0.style.background):M0.dataset.kbd==="reborn")kitRebornBg()}).observe(M0,{attributes:true,attributeFilter:["style","data-obg"]})}catch(e){}
 function kitOriginArt(k){return `img/bg-origin-${k}.webp`}
 (function(){if(typeof kpIdentity!=="function")return;const k0=kpIdentity;kpIdentity=function(M,m){const r=k0.apply(this,arguments);try{const id=$("mb").querySelector(".kpid");const o=S&&S.origin;if(id&&o&&!id.querySelector(":scope > .kpidart")){
   const d=document.createElement("div");d.className="kpidart";d.innerHTML=kitArtFrame(kitOriginArt(o.k),o.n,"kidart");id.prepend(d)}}catch(e){console.error("kpidart",e)}return r}})();
@@ -10076,7 +10127,7 @@ function kitRare(k){try{if(typeof ow69Rare==="function")return ow69Rare(k)}catch
 function kitRoulette(o){const done=()=>{try{o.done&&o.done()}catch(e){}};if(!o||!o.items||!o.items.length||matchMedia("(prefers-reduced-motion: reduce)").matches){done();return}
  const old=$("kroul");if(old)old.remove();const ov=document.createElement("div");ov.id="kroul";ov.className="kroul";const land=innerWidth>innerHeight;
  ov.innerHTML=`<div class="krbox"><div class="krhead"><b>Luân hồi</b><small>Thân phận kiếp này</small></div><div class="krgrid">${o.items.map(it=>`<div class="krt" data-k="${it.k}"><div class="kra">${kitArtFrame(it.src,"")}</div><span class="krn">${it.name}</span><span class="krr">${typeof kitChip==="function"?kitChip(it.rare,"n"):it.rare}</span></div>`).join("")}</div><div class="krskip">Chạm để bỏ qua</div></div>`;
- ov.style.backgroundImage=`linear-gradient(rgba(40,20,12,.12),rgba(40,20,12,.22)),url(img/bg-reborn-${land?"l":"p"}.webp)`;document.body.appendChild(ov);
+ kitBackdrop(ov,"roulette");document.body.appendChild(ov);
  const tiles=[...ov.querySelectorAll(".krt")];const ti=Math.max(0,tiles.findIndex(t=>t.dataset.k===o.target));let fin=false,timers=[];const T=(f,ms)=>timers.push(setTimeout(f,ms));
  const end=()=>{if(fin)return;fin=true;timers.forEach(clearTimeout);ov.classList.add("krout");setTimeout(()=>ov.remove(),360);done()};
  ov.addEventListener("click",end);
