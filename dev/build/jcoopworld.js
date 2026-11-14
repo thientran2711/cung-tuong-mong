@@ -100,6 +100,10 @@ function fromCanon(C,opt){opt=opt||{};const mp=me(),Pm=C.P&&C.P[CW.seat];if(!Pm)
  const keepTab=tab,keepUsed=used;quiet=true;
  try{deser({v:6,buoi:sS.buoi||0,ok:Pm.ok||"tt",S:sS,R,rid:C.W.rid||rid,tab:keepTab,used:keepUsed,P:qs})}finally{quiet=false}
  if(!opt.keepUsed)used=0;else used=keepUsed;
+ /* guard enums/levels that a numeric merge could push out of range */
+ const ci=(v,a,b)=>typeof v==="number"?Math.max(a,Math.min(b,Math.round(v))):v;
+ if(S.emp)S.emp.mood=ci(S.emp.mood,0,3);S.rank=ci(S.rank,0,7);S.tuan=ci(S.tuan,0,2);S.month=ci(S.month,1,12);S.buoi=ci(S.buoi||0,0,2);
+ for(const v of rivals){v.rank=ci(v.rank,0,7);try{ap(v,{})}catch(e){}}
  if(friendSrv(fP))placeFriend(fP);CW.life=Pm.life||0;return true}
 
 /* put a freshly built life (S + throwaway world from start()) into the shared world W of C */
@@ -132,8 +136,12 @@ function sendMe(){if(!CW.on||!S||S.dead)return;const C=toCanon();CW.dying=null;
 function snapStats(){const o={};for(const k of ["sung","danh","bac","suc","sac","tai","tamco","duc","th","hh","rank"])o[k]=S[k];return o}
 function waiting(){const s=COOP.state;return CW.on&&(CW.sent===wk()||!!(s.ended&&s.ended[CW.seat]))}
 function frozen(){const s=COOP.state;return CW.on&&(s.status!=="open"||!s.peerOnline)}
-function lockNext(){const n=$("next");if(n&&CW.on&&(waiting()||frozen()||CW.pend||!CW.base)){n.disabled=true;n.dataset.coopWait="1"}else if(n&&n.dataset.coopWait){delete n.dataset.coopWait;n.disabled=false}}
-setInterval(()=>{if(!CW.on||!S)return;if(CW.pend&&!Q.length&&!S.mg&&!S.dead&&!frozen())sendEnd();lockNext()},400);
+/* touch #next only when its state really changes (j63 observes every "disabled" write) */
+function lockNext(){const n=$("next");if(!n)return;const lock=CW.on&&(waiting()||frozen()||CW.pend||!CW.base);
+ if(lock){if(!n.disabled)n.disabled=true;if(n.dataset.coopWait!=="1")n.dataset.coopWait="1"}else if(n.dataset.coopWait){delete n.dataset.coopWait;n.disabled=false}}
+/* the week's end goes out once her dialogs are read: checked after each render / presence change (event-driven) */
+let tryT=0;function tryEnd(){tryT=0;if(CW.on&&S&&CW.pend&&!Q.length&&!S.mg&&!S.dead&&!frozen())sendEnd()}
+function soonEnd(){if(CW.on&&CW.pend&&!tryT)tryT=setTimeout(tryEnd,0)}
 
 /* ---------- receiving ---------- */
 function newsHTML(){const P=CW.base&&CW.base.P&&CW.base.P[CW.seat];if(!CW.mine||!S)return"";
@@ -187,7 +195,9 @@ const mute=n=>{const f=window[n];if(typeof f!=="function")return;window[n]=funct
 (function(){const f=save;save=function(){if(!CW.on)return f.apply(this,arguments);try{if(S&&!S.dead&&CW.base)localStorage.setItem("ctm-coop-last",JSON.stringify({room:COOP.state.room,at:Date.now()}))}catch(e){}}})();
 (function(){const f=over;over=function(){if(CW.on&&S&&!S.dead){/* keep the world as it stands at her death; the new life is put into it */
   try{S.dead=true;CW.dying=toCanon();S.dead=false}catch(e){console.error(e)}}return f.apply(this,arguments)}})();
-(function(){const f=render;render=function(){const r=f.apply(this,arguments);try{lockNext()}catch(e){}return r}})();
+(function(){const f=render;render=function(){const r=f.apply(this,arguments);if(CW.on)try{lockNext();soonEnd()}catch(e){}return r}})();
+(function(){const f=closeModal;closeModal=function(){const r=f.apply(this,arguments);if(CW.on)soonEnd();return r}})();
+COOP.on("status",()=>{if(CW.on){lockNext();soonEnd()}});
 /* the rebirth / first-life flow: Luân hồi builds the life (nlRun), she accepts it (nlAccept) */
 if(typeof nlRun==="function"){const f=nlRun;nlRun=function(){const r=f.apply(this,arguments);try{if(CW.on){const C=CW.dying||CW.base;if(C)attach(C);CW.inLife=true}}catch(e){console.error(e)}return r};}
 if(typeof nlAccept==="function"){const f=nlAccept;nlAccept=function(){const r=f.apply(this,arguments);try{if(CW.on&&CW.inLife&&S&&!S.dead){CW.inLife=false;sendMe()}}catch(e){console.error(e)}return r};}
