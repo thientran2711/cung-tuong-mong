@@ -68,3 +68,15 @@ n=30: one life = 3 points; 95% band ±17 points. Tab crashes ("Target crashed") 
 | v4a Khó (hz 1.1, seeMaxP 0, poisonX .8, mot 1.2) | – | 15% / 70% (n=20, 10 poison; tabs crashed: memory) | |
 | v4b Khó (hz 1.2, seeMaxP 0, poisonX .67, mot 1.4) | – | 0% / 88% (n=8) | dropped |
 | **v5 Khó = v4a + seeMaxP +5 (shipped)** | – | **30% / 53%** (n=30) | pooled v4a+v5 n=50: HH 24%, death 60% |
+
+## After review/balance v12 (dcb23148: Vừa HH 35%, early death 42%, poisonNow=1 in Vừa)
+- Merged; jdiff no longer has its own poison rule (jbal2 owns BAL.poisonNow). Dễ sets poisonNow 0 (a landed poison hurts but does not kill her
+  outright: the softer rule, her side only — NPCs already died at Sức 0), Khó keeps it.
+- Owner fixes (11/14 late): Độ khó row back in normal flow under the face picker (it sat in the pinned choice block and covered the picker);
+  new module jrolefig.js: while she serves as cung nữ she wears the maid tier of her servant rank (m + S.srv.rk; start = tm1), figure + portrait +
+  picker thumbs (all through j88 f88Best). Checked all 9 origins: consorts wear consort tier = rank+1 (j66 rule), cnv tm1.
+  Overlap check on a local merge with review/identity-card at 686x880@2.2, 755x1000@2, 1180x820@2, 390x844@3: no overlap, choices visible.
+| run | Dễ HH / early death | Khó HH / early death | notes |
+|---|---|---|---|
+| v6 (Dễ hz .55, birth −2/−3, poisonNow 0, hhTh −10, outQ −20; Khó hz 1.1, mot 1.2, poisonX 1.2, hhTh +10, outQ +25) | 67% / 20% (n=30) | 9% / 58% (n=33) | cnv Dễ: 1/4 + cnv-only run 2/7 |
+| v7 (Dễ: no outQ change, hhTh −5; Khó hhTh +5) | running | running | |
