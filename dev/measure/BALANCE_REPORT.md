@@ -21,6 +21,7 @@ Includes review/items-earned (98a3dae9, merged). Same harness as before; runs wi
 | outQ (jbal) | 85 → **60** | Share of the time an empty Hoàng hậu seat goes to an outsider girl. With 85, Hoàng hậu stayed at 20–25% once deaths were real. |
 | **srvSpyHit** (new) | 25 | Servant start (j42): a maid caught eavesdropping on her mistress's orders is flogged (Sức −25), not beaten to death. Caught poisoning or planting a charm can still kill her. Before this, the cnv start had 0 Hoàng hậu in 15 lives; 3 of 12 lives ended this way in the first two years. |
 | hz 3.2, birthMin 8, birthAdd 4, illDie 2, accCdT 36 | unchanged | |
+| **poisonNow** | 1 (Vừa) | The fix above sits behind `BAL.poisonNow`, the knob that review/difficulty jdiff reads. Here it is 1 by default, so the rule is the same for everyone at Vừa. A difficulty can still change it. |
 
 ### Trials (n=30 unless noted; a share has about ±17 points of noise at n=30)
 | config | Hoàng hậu | early death | poison deaths | childbirth / labour (shown) |
