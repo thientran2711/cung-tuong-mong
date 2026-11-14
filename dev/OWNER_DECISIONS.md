@@ -84,3 +84,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (21:50Z) Owner asked where princes/princesses live. Decided: babies with nhũ mẫu in mother's palace; princes 6+ move to A ca sở (study at Thượng thư phòng); crown prince in Đông cung; princesses with mother until married; orphans to Thái hậu/Hoàng hậu (as j95). Added to places plan.
 - (22:00Z) Owner: Nữ đế is NOT a rare ending. At the succession point the player CHOOSES: (a) son becomes emperor (she = Hoàng thái hậu), (b) she rules as regent (nhiếp chính, buông rèm), (c) she takes the throne herself (Nữ đế). Each path needs conditions and has its own consequences/epilogue chapter.
 - (19:20Z) Owner: show her own age in the top bar next to name/rank.
+- (19:25Z) Owner frustrated huadian keeps being redone. Decision: stop all huadian changes; keep the approved marks (t1 small flower per identity motif, NOT a dot); only finish a51 ageing. Huadian is closed — don't reopen.
