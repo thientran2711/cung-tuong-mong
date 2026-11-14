@@ -31,10 +31,10 @@ L8O=re.compile(r"the Empress's imperial phoenix ceremonial robe of (SATURATED |)
 def L8N(m):
     sat,c=m.group(1),m.group(2)
     return (f"the Empress's imperial phoenix ceremonial robe of {sat}{c} silk, richly embroidered on the chest, shoulders and wide sleeves with large phoenixes, peonies "
-     f"and clouds in gold and kingfisher-blue silk thread (far denser and richer embroidery than any other rank), over it a long ceremonial {c} silk mantle "
+     f"and clouds in gold and kingfisher-blue silk thread (far denser and richer embroidery than any other rank), over it a long ceremonial heavy opaque {c} brocade mantle "
      f"falling from the shoulders to the floor, edged with a broad band of gold brocade and pearls, a wide jewelled gold-and-pearl cloud collar with layered "
      f"pearl fringes over the shoulders, many long strands of pearls and jade across the chest, a jade-and-gold belt with long tassels and jade pendants, "
-     f"a VERY long {c} train spread on the ground behind her; the GRANDEST headdress of all: a FULL tall imperial nine-phoenix crown, clearly taller and "
+     f"a VERY long heavy opaque {c} brocade train spread on the ground behind her; the GRANDEST headdress of all: a FULL tall imperial nine-phoenix crown, clearly taller and "
      f"wider than a noble consort's crown, with a large central gold phoenix holding a pearl string in its beak, jewelled wings spreading wide on both sides, "
      f"kingfisher-blue inlay, rubies and pearls, and long curtains of pearl tassels hanging at both sides down to the shoulders; the most splendid outfit of all, "
      f"clearly grander than every other rank")

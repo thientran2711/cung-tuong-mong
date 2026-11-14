@@ -321,3 +321,15 @@ C-m31-t8 TdSr19MVNR handsB
 C-m32-t8 1lpWYhGr4r handsB
 C-m33-t8 gOIpDH3SXO handsB
 C-m34-t8 xSd0cEKjfW handsB
+C-m28-t8 UPmd8Puwny handsB-redo(huadian too wide; folded-wing phoenix)
+C-m31-t8 mE3yNQihJQ handsB-redo(huadian too wide)
+C-m32-t8 s7oMdP4l8e handsB-redo(huadian too wide)
+C-m31-t8 s7oMXexl8e handsB-redo2(sheer mantle; +opaque brocade mantle in lad3)
+C-m35-t8 O6f8assynm handsB
+C-m36-t8 EbziGmAuuO handsB
+C-m37-t8 MBwjUc8DCm handsB
+C-m38-t8 1lpWDkTr4r handsB
+C-m39-t8 nVjbjWGYQD handsB
+C-m40-t8 xSd0dlojfW handsB
+C-m41-t8 w4hXh4Y7EI handsB
+C-m42-t8 9ZQhQ2sNYZ handsB
