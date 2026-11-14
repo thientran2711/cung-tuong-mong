@@ -1,5 +1,21 @@
 # Art progress (art worker, 11/14/2026)
 
+## art13 (worker #13) — STATUS (read first; resumes art12 below)
+- Work dir: scratchpad/fw13 (tools copied to dev/figwork/art13/). Logs there: gens13.txt (grid upload id -> edit id), up13.txt,
+  agequeue.txt (163 a51 specs, grouped 4 per ageing grid a01..a41), agelist.txt (t8 a51 whose t78 edit did not age), redo.txt, jobs13.txt/runq.log.
+- OWNER (11/14, binding): t6 stays. t7 + t8 marks SMALL like the approved Part C pilot (review/maid-art-c sheets/C_t78_pilot_m08/m33):
+  t7 = her motif in flat gold leaf + cinnabar enamel, filigree, two minute gold curls, tiny ruby glint, lentil size inside the brow gap;
+  t8 = tiny symmetric upright c26-style gold-leaf phoenix holding her tiny <col> <motif>, all gold, NO blue, narrower than the brow gap.
+  a51 ageing (~48, smile/nasolabial lines, hair = her own warm dark brown, colour-matched) on t1 t3 t4 t5(-c28 c29 c30) t6 t7 t8(-c06 c32).
+- METHOD hdg.py (new, replaces hdf.py): grid tiles come from the 4k LINEUP (FIGURES magnificUrl gen, raw/<gen>.png via need.py), box =
+  2.4 x face width (whole face + crown); paste back into the published fig (RGB only, alpha untouched) after ECC alignment
+  (coarse-to-fine affine, tile skipped if cc<0.9 -> "BAD ALIGN"), global + ring colour match. Modes per tile: m = forehead only
+  (diff hull + forehead ellipse 0.95D x 0.4D), a = face ellipse below the brows (mark/crown/hair/cut-out untouched), ma = both.
+  Fig face = topmost confident YuNet face (figface; the old "largest face" picked a painted fan on c05-t7-a26 etc).
+  BASE=cur pastes onto the current fig (ageing passes after the marks); default base = figbak/ (original before art13).
+- t7+t8: one 4x2 grid per consort (row t7 a18..a51, row t8 a18..a51), gpt-2-6 2:1 4k, prompt `mk13.py t78 cXX` (c06 c32: no t8 ageing).
+- Ageing: 2x2 grids of four different a51 faces, gpt-2-6 1:1 4k, prompt `mk13.py age`, pasted with mode a, BASE=cur.
+
 ## art12 (worker #12) — STATUS (read first; resumes art11 below)
 - Work dir: scratchpad/fw12 (copy of fw11, paths sed'ed to worktree agent-a36359ad81f20b98e; fw11/bg pngs deleted for disk).
   DISK is tight (~4 GB free): delete bg/<10-char-id>.png raw downloads and *.orig.png / *.prehd.png after publishing.
