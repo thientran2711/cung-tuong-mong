@@ -1,3 +1,36 @@
+# Kiểm duyệt bộ giao diện: review/kit-j95 @ 6ecba9ec (lần 2) — FAIL
+
+Ngày 2026-11-14 (người kiểm #3). Dựng lại all.js từ nhánh (thứ tự `… jk2b, jk95, j98, j84`), dữ liệu giả lập API j95
+(habitsKnown, j95habitsMine có `told:false`, j95followers, j95mapSigns, countAt tăng 7/14). Thử 686x880@2.2 và 1180x820@2 (đã đủ để FAIL; chưa chạy 4 cỡ còn lại).
+Không lỗi trang, không tràn ngang. Ảnh: dev/shots/review/kit-j95/lan2-*.jpg.
+
+## Đã sửa (đạt)
+- "N người theo hầu" hiện trên nhãn j59 (dòng thứ hai `.kfol`, cả nhãn của ngươi `#j59metag`); trình theo dõi không chạy vòng (2 lần gọi / 4 giây khi đứng yên).
+- Không còn "có thể": chip trung tính "tin cũ · N tuần trước" / "tin cũ".
+- Kẻ rình = chip đỏ `kitChip(…,"r")`, không ✗.
+- "Thói quen" và "Nơi ngươi hay đến" nằm trong `.pc > .pcr`, trong viền, trước nhóm tab (đo ở cả 2 cỡ); mục `told:false` bị ẩn.
+- KIT §31; đã gộp main e9e2248 (main nay chỉ hơn 2 commit dựng site/maid-art-c, không xung đột mã).
+
+## Lỗi chặn
+1. **Bản đồ vẫn đếm người HAI chỗ** (KIT §31 tự ghi "ONE chip per place"; chủ 16:25Z "một việc, một chỗ"): nhãn nơi vẫn có chữ "7 bóng · 3 khắc"
+   (j26/j27 `<i>${n} bóng</i>`) và ngay dưới là chip bóng người "7 đông" của jk95 → cùng một con số hai lần ở mọi nơi có người
+   (Đức Thọ cung, Càn Ninh cung, Dưỡng Hòa điện "14 rất đông", Ngự hoa viên "1 bóng" + 1 bóng). Sửa cả nhóm: số người chỉ ở chip kit; nhãn chỉ còn "3 khắc".
+   Chữ trong chip đọc "7 đông" — nên "7 · đông" hoặc chỉ "đông/rất đông" kèm số trong tooltip.
+2. **Hàng kit có chip lệch đường chân chữ**: trong `.kpkb` (kitRows), hàng nào có chip thì nhãn buổi cao hơn chữ nơi chốn ~2 px CSS
+   (686: Chiều 690.7 vs 692.8, Tối 713.9 vs 716; 1180: Tối 476.1 vs 478.2; thẻ của ngươi Sáng 176.2 vs 177.3); hàng không chip thì khớp (±0.1).
+   Hàng CẦN/TỐN của thẻ hành sự (chip trong hàng) thì khớp — tức `.kpkb` thiếu canh theo baseline. Sửa ở kit (`.kpkb` align-items: baseline hoặc
+   canh nhãn như hàng thẻ hành sự) để mọi bảng kpkb có chip đều đúng, không vá riêng `.khab`.
+3. **1180x820: chip "tin cũ · 3 tuần trước" rớt xuống một dòng riêng** dưới "Phật đường · Chính ngươi thấy", thụt lề như một hàng mồ côi
+   (cột phải thẻ 354 px). Chữ chip dài; rút gọn ("cũ 3 tuần") hoặc cho chip nằm cùng hàng bằng cách thu dòng nguồn — không để hàng 2 dòng lệch.
+
+## Ghi chú
+- **Cho người gộp**: KIT.md §31 cũng được review/fold-layout dùng — khi gộp phải đánh lại số một bên.
+- Lời khuyên "Đi đâu quen một giờ…": "giờ" nên đổi lối cổ trang (vd "Đi đâu thành lệ thì kẻ thù dễ đón đường…") theo VANPHONG.
+- Chưa thử chế độ chip gọn j59c / dải người cuộn (sân khấu thử chỉ có 2–6 người); lần sau thợ chụp cả hai.
+- Không phải lỗi nhánh này (main): Fold ngươi đứng trên giường ở Ngọc Thanh các/Phòng cung nữ, hình nhỏ (đã có trong danh sách fold-layout).
+
+---
+
 # Kiểm duyệt bộ giao diện: review/kit-j95 @ 5b787e1 — FAIL
 
 Ngày 2026-11-14. Dựng jk95.js trên origin/main 2bed83a (nạp sau jk2b, trước j98/j84), dữ liệu giả lập theo API j95
