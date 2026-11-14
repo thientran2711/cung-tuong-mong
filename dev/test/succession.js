@@ -20,6 +20,7 @@ const [,,BASE,SZ,OUT,ONLY]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]
  const choose=async i=>{await p.evaluate(i=>chooseM(i),i);await p.waitForTimeout(350)};
  const paths=ONLY&&ONLY!=='all'?[ONLY]:['a','b','c','none'];
  for(const P of paths){await fresh();
+  await p.evaluate(P=>succDebug(P==='none'?'':P,1),P);await p.waitForTimeout(1500);await p.evaluate(()=>document.querySelectorAll('.kmedict').forEach(e=>e.click()));await p.waitForTimeout(1200);await p.evaluate(()=>document.querySelectorAll('.kmedict').forEach(e=>e.remove()));
   await p.evaluate(P=>succDebug(P==='none'?'':P),P);await p.waitForTimeout(900);
   const c=await check('card-'+P);res.push(c);await p.screenshot({path:`${OUT}/card-${P}-${tag}.png`});
   if(P==='none')continue;

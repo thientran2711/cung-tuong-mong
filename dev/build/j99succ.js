@@ -77,11 +77,11 @@ function succTry(p){if(!succCanPick(p))return succResume();
  apply({bac:-300,suc:-20});if(roll(o)){log(`<b class="g">Ngươi tự lên ngôi Nữ đế (${word(o)}): thành.</b>`);return succBegin("c")}
  log(`<span class="r">Ngươi mưu lên ngôi (${word(o)}): binh biến bại lộ.</span>`);succEnd("c_fail")}
 /* ---------- the epilogue: 3 chapters per path ---------- */
-function succEnemy(){try{const L=liveRivals(true).filter(v=>v.alive&&!v.out);if(!L.length)return null;return L.slice().sort((a,b)=>(a.rel||0)-(b.rel||0))[0]}catch(e){return null}}
+function succEnemy(){try{const L=liveRivals(false).filter(v=>v.alive&&!v.out&&!v.queen);if(!L.length)return null;return L.slice().sort((a,b)=>(a.rel||0)-(b.rel||0))[0]}catch(e){return null}}
 function succBegin(p,failB){const E=S.succ;const U=succSup();E.p=p;E.st=1;E.ch=0;
  Object.assign(E,p==="a"?{q:1,an:failB?1:0,tam:1,hoa:failB?1:2}:p==="b"?{q:3,an:1,tam:1,hoa:1}:{q:5,an:3,tam:0,hoa:0});
  E.tam+=U.allies>=3?1:0;E.an+=U.vg&&!U.vgAlly?1:0;E.an-=U.mil?1:0;
- if(p==="c"){E.nh=pick(SUCC_ERA);if(S.rank<7)S.rank=7}
+ if(p==="c")E.nh=pick(SUCC_ERA);
  const en=succEnemy();E.foe=en?en.id:null;succNext()}
 function succNext(){const E=S.succ;Q=Q.filter(m=>!/^succ/.test(m.pid||""));const d=mkP("succC",{});if(d)Q.unshift({t:d.title,h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp,cls:d.cls});try{save()}catch(e){}}/* chooseM shows and renders after go() */
 function succAge(){const son=succSon();S.age=(S.age||30)+SUCC.yrs;S.year=(S.year||1)+SUCC.yrs;if(son)son.age=(son.age||0)+SUCC.yrs}
@@ -184,9 +184,9 @@ function succPatch(m){const M=$("modal");if(!M)return;m.opts.forEach((c,i)=>{con
 /* chooseM refuses a locked option even if it is reached another way */
 (function(){const c0=chooseM;chooseM=function(i){const m=Q[0];if(m&&/^succ/.test(m.pid||"")){const c=m.opts&&m.opts[i];if(!c||(c.need&&c.need.some(n=>!n.ok)))return}return c0.apply(this,arguments)}})();
 /* ---------- debug jump: succDebug("a"|"b"|"c"|"") ---------- */
-window.succDebug=function(p){if(!S)return"no life";Q.length=0;let son=mySons()[0];if(!son){son=mkKid("m",p==="c"?17:9);son.bt=S.turn-son.age*12;S.kids.push(son)}
+window.succDebug=function(p,prepOnly){if(!S)return"no life";Q.length=0;let son=mySons()[0];if(!son){son=mkKid("m",p==="c"?17:9);son.bt=S.turn-son.age*12;S.kids.push(son)}
  if(p==="b")son.age=Math.min(son.age,10);setHeir(son,null);
  if(p==="b"||p==="c"){S.danh=p==="c"?85:62;S.tamco=p==="c"?70:50;S.bac=Math.max(S.bac,500);S.duc=Math.max(S.duc,55);S.rank=Math.max(S.rank,p==="c"?5:3);S.th=70;
   try{const T=trS();const ks=Object.keys(T.H);ks.slice(0,p==="c"?3:1).forEach(c=>{T.H[c].af.me=60});if(p==="c")T.H["Đại tướng quân"].af.me=60}catch(e){}}
- emperorDies("");return S.succ};
+ if(prepOnly){render();return "prep"}emperorDies("");return S.succ};
 (function(){const st=document.createElement("style");st.textContent=".succbk{margin:4px 0 0}";document.head.appendChild(st)})();
