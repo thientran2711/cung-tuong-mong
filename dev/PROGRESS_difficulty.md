@@ -38,3 +38,10 @@ then `python3 dev/measure/anx.py label out*.json`.
   fixed by review/identity-card 360f138a (body scrolls, choices pinned). Local merge test: buttons + Độ khó visible at all 7 sizes.
 - [x] Khó Phúc duyên probe: promo +5 → +8, ending +5 → +5 +3 ("kiếp khó: +3"), end card row "Độ khó", Sổ luân hồi "· Kiếp này: Khó".
 - [ ] Dễ 30 lives, Khó 30 lives; report table
+
+## Measured (sensible bot, HHSTOP, 9 origins, 3 shards × 10 lives; scratchpad runall.sh)
+| run | Dễ HH / early death | Khó HH / early death | notes |
+|---|---|---|---|
+| v1 (hz .7/1.3, poisonX ×1.33 Khó) | 32% / 32% (n=28, 7 childbirth) | 23% / 17% | Khó: few births (0.5/life), poison lands 3.3×/life but never kills her |
+| v2 (Dễ stronger; Khó + poisonNow) | 57% / 10% | 3% / 97% (24 poison deaths) | found: j8 poison kills an NPC at Sức 0 at once (dieIf) but her only at tuần end after +4 rest |
+| v3 (Dễ birth −2/−3; Khó no poisonX, seeMaxP −5, hz ×1.2, mot ×1.4) | running | running | |
