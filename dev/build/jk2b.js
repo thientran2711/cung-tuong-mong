@@ -17,9 +17,12 @@
    Layout: portrait left, name / rank / info beside it (float), act groups full width below: the Fold shows portrait + name + rank +
    the first info lines without scrolling. */
 (function(){const st=document.createElement("style");st.id="k2b-pcard";st.textContent=`
+/* KIT 31.18 PANELS SIZED BY THEIR OWN CONTAINER (owner: "iPad landscape = two phone panels side by side"): the person card and the act
+   lists read the width of the box they sit in (#panel, the stage, a dialog) — never the screen: kitPcWide(pc) measures the card's container
+   and sets .kpwide / .kpnar and --kpcw on the card (no CSS containment, so fixed sheets inside panels keep working). So the iPad right panel, the Fold full-screen
+   tab and a phone panel of the same width render the same. Two-column card from a 440 px wide container. */
 :root{--kpcw:clamp(150px,34vw,230px)}
-@media (min-width:600px) and (max-width:999px){:root{--kpcw:clamp(170px,29vw,240px)}}
-@media (min-width:1000px){:root{--kpcw:clamp(150px,14vw,210px)}}
+
 .pc{display:block!important;overflow:auto;overscroll-behavior:contain}
 .pc>.pcl,.pc>.pcr{overflow:visible!important;min-height:auto!important}
 .pc>.pcl{display:block!important;width:auto!important;max-width:none!important}
@@ -297,28 +300,9 @@ img.figimg.kfxon,#mefig.kfxon{animation:none!important}
    (mini kit frame, title, mood; tap = card). The full Trong cung table stays in the status sheet (26.4). ---------- */
 kitCourtStage=function(){const o=$("kcourt");if(o)o.remove()};
 (function(){const k0=khStage;khStage=function(){const o=$("kstat");if(o)o.remove();try{kitCourtStage()}catch(e){}}})();
-function kitCourtChips(){try{const emp=$("emp");if(!emp||!S||S.dead){const b=$("kcchips");if(b)b.remove();return}let box=$("kcbox");
- const wide=innerWidth>=1000;let c=$("kcchips");if(!c){c=document.createElement("div");c.id="kcchips";c.className="kcchips"}
- if(wide){if(!box){box=document.createElement("div");box.id="kcbox";box.className="kcbox";emp.parentNode.insertBefore(box,emp);box.appendChild(emp)}if(c.parentNode!==box)box.appendChild(c);c.classList.remove("kcrowh")}
- else{if(box){box.parentNode.insertBefore(emp,box);box.remove()}const h2=$("hud2");if(h2&&c.parentNode!==h2)h2.appendChild(c);c.classList.add("kcrowh")}
- const R=kitCourtRows().filter(r=>r.k!=="emp");c.hidden=!R.length;
- c.innerHTML=R.map(r=>{const m=r.mood,a=r.att;const w=m?m:a?["chưa rõ tâm trạng",""]:null;return `<button class="kcchip kcrow" data-kc="${r.k}" title="${r.who} · chạm để xem thẻ">${mdH(r.f,"xs")}<span class="kcct"><b>${r.who}</b><span class="ef ${m&&m[1]==="g"?"g":m&&m[1]==="r"?"r":"n"}">${m?m[0]:"chưa rõ"}</span></span></button>`}).join("")}catch(e){console.error("kitCourtChips",e)}}
-(function(){const r0=render;render=function(){const r=r0.apply(this,arguments);try{kitCourtChips()}catch(e){}return r}})();
-(function(){const r0=renderHud2;renderHud2=function(){const r=r0.apply(this,arguments);try{kitCourtChips()}catch(e){}return r}})();
-addEventListener("resize",()=>{clearTimeout(window.__kccT);window.__kccT=setTimeout(kitCourtChips,150)});
-(function(){const st=document.createElement("style");st.id="k2b-cchips";st.textContent=`
-header.hud>.kcbox{grid-area:emp;display:flex;align-items:stretch;gap:4px;min-width:0;justify-self:end}
-header.hud>.kcbox>.emp{grid-area:auto!important;margin:0!important}
-.kcchips{display:flex;flex-direction:column;gap:2px;justify-content:center}
-.kcchips .kcchip{display:flex!important;align-items:center;gap:4px;padding:1px 6px 1px 3px!important;border:1px solid var(--line);border-radius:8px;background:#fffaf0;min-height:0;cursor:pointer;font:inherit;text-align:left;grid-template-columns:none}
-.kcchips.kcrowh{flex-direction:row;margin-left:auto;gap:3px;order:99}
-#hud2.col>.kcchips.kcrowh{display:flex}
-.kcchips .kcchip .kcct{display:flex;flex-direction:column;line-height:1.1}
-.kcchips .kcchip b{font-size:.7rem;color:var(--gold);font-weight:600;white-space:nowrap}
-.kcchips .kcchip .ef{font-size:.64rem;font-weight:600;white-space:nowrap}
-.kcchips .kcchip .ef.n{color:var(--dim)}
-@media (max-width:599px){header.hud>.hud2.khud.col{flex-wrap:wrap!important}.kcchips.kcrowh{flex-basis:100%;justify-content:flex-end}.kcchips .kcchip{padding:0 4px 0 2px!important}.kcchips .kcchip b{font-size:.62rem}.kcchips .kcchip .ef{font-size:.58rem}}
-`;document.head.appendChild(st)})();
+/* old header court chips (.kcchips/.kcbox) RETIRED (review fold-layout FAIL 4): the court chips are ONE component, the stage plaques .k3c
+   (jk3 k3court). kitCourtChips only cleans up a leftover box from an older build. */
+function kitCourtChips(){try{const c=$("kcchips");if(c)c.remove();const box=$("kcbox"),emp=$("emp");if(box){if(emp)box.parentNode.insertBefore(emp,box);box.remove()}}catch(e){}}
 
 /* ---------- 9. ONE FRAME (owner 11/14 B + C): every portrait frame in the game — big card, dialog, small frames in strips, HUD, podium, week
    book, chips — is built by ONE function, pcPort (j60 layers on the 550x1037 canvas); mdH(face,size) now calls the same pcPort and shows the
@@ -396,16 +380,15 @@ function kitPcFix(pc){try{if(!pc||pc.dataset.k2==="1")return;const L=pc.querySel
 .pc>.pcr>.kpfacts{display:flex;flex-direction:column;gap:4px;margin:0 0 8px}
 .pc>.pcr>.kpfacts>.pcinfo{font-size:.8rem}
 .pc>.kpstrip{display:none}
-@container (min-width:600px){}
-@media (min-width:600px){
- .pc[data-k2]{display:grid!important;grid-template-columns:var(--kpcw) minmax(0,1fr);gap:0 12px;align-items:start}
- .pc[data-k2]>.pcl{position:sticky;top:0;z-index:2;background:var(--panel2);padding-bottom:4px;max-height:var(--kpch,none);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}
- .pc[data-k2]>.pcl>.pcp.kit{float:none;margin:0 0 4px!important}
- .pc[data-k2]>.pcl{display:flex!important;flex-direction:column}
- .pc[data-k2]>.pcl>.pcname,.pc[data-k2]>.pcl>b:first-of-type{order:-3}.pc[data-k2]>.pcl>.pcrk{order:-2}.pc[data-k2]>.pcl>.kpbars{order:-1;margin:0 0 4px}
- .pc[data-k2]>.pcr{margin-top:0}
- .pc[data-k2]>.kpstrip{grid-column:1/-1}
-}
+
+ .pc.kpwide[data-k2]{display:grid!important;grid-template-columns:var(--kpcw) minmax(0,1fr);gap:0 12px;align-items:start}
+ .pc.kpwide[data-k2]>.pcl{position:sticky;top:0;z-index:2;background:var(--panel2);padding-bottom:4px;max-height:var(--kpch,none);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}
+ .pc.kpwide[data-k2]>.pcl>.pcp.kit{float:none;margin:0 0 4px!important}
+ .pc.kpwide[data-k2]>.pcl{display:flex!important;flex-direction:column}
+ .pc.kpwide[data-k2]>.pcl>.pcname,.pc.kpwide[data-k2]>.pcl>b:first-of-type{order:-3}.pc.kpwide[data-k2]>.pcl>.pcrk{order:-2}.pc.kpwide[data-k2]>.pcl>.kpbars{order:-1;margin:0 0 4px}
+ .pc.kpwide[data-k2]>.pcr{margin-top:0}
+ .pc.kpwide[data-k2]>.kpstrip{grid-column:1/-1}
+
 @media (max-width:999px){
  .pc[data-k2]>.kpstrip{display:flex;position:sticky;top:-8px;z-index:5;margin:-8px -8px 0;padding:4px 8px;gap:8px;align-items:center;background:var(--panel2);border-bottom:1px solid var(--k-hair);box-shadow:0 2px 6px #5a3a2022;visibility:hidden;height:0;overflow:hidden;opacity:0;transition:opacity .15s}
  .pc[data-k2]>.kpstrip.on{visibility:visible;height:auto;opacity:1}
@@ -621,7 +604,7 @@ document.addEventListener("click",ev=>{const a=ev.target.closest&&ev.target.clos
 .kitl{font-size:.62rem;border-radius:6px;padding:0 5px;border:1px solid}.kitl-ok{color:#2d7a52;border-color:#2d7a5266;background:#eaf5ee}.kitl-no{color:#c23b22;border-color:#c23b2266;background:#fbecea}.kitl-n{color:#8a7350;border-color:#d2b07188;background:#fbf4e6}
 .kwear{display:flex;gap:6px;justify-content:center;align-items:flex-start;flex-wrap:wrap;margin:2px 0 4px}
 .pc .pcl>.kwear{float:left;clear:left;width:var(--kpcw);margin:0 12px 6px 0}
-@media (min-width:600px){.pc[data-k2] .pcl>.kwear{float:none;width:auto;margin:0 0 6px}}
+.pc.kpwide[data-k2] .pcl>.kwear{float:none;width:auto;margin:0 0 6px}
 .kwear .kwearl{flex-basis:100%;text-align:center}
 .kwd .kwdnow{display:flex;gap:12px;align-items:center;flex-wrap:wrap}.kwd .kwdnote{display:flex;flex-direction:column;gap:4px;min-width:0}
 .kwd .kwdgrid{display:flex;flex-wrap:wrap;gap:10px;margin:8px 0}
@@ -663,7 +646,7 @@ kitPcFix=function(pc){try{if(!pc||pc.dataset.k2==="1")return;const L=pc.querySel
  const pcp=L.querySelector(":scope > .pcp");if(pcp){if(rkEl)L.insertBefore(rkEl,pcp);if(nmEl)L.insertBefore(nmEl,rkEl||pcp)}
  /* wide / landscape (iPad): ALL the info sits in the left column under the portrait (relation block, then tiles and facts); the right column
     keeps only the act-group tabs (sticky) and the acts. Fold portrait / phones: the relation block heads the right column with the tabs. */
- const wide=kitPcWide();pc.classList.toggle("kpwide",wide);pc.classList.toggle("kpnar",!wide);
+ const wide=kitPcWide(pc);pc.classList.toggle("kpwide",wide);pc.classList.toggle("kpnar",!wide);
  if(wide&&bars.children.length){if(facts.parentNode===L)L.insertBefore(bars,facts);else L.appendChild(bars)}
  /* Fold portrait / phones (owner 11/14 "lủng củng"): header row = medium portrait left, name + rank + relation lines right; the stat tiles,
     age, nature, chips and wear slots open in a kit sheet from the portrait; helper sentences go to the act-group tabs' tooltip */
@@ -686,7 +669,7 @@ kitPcFix=function(pc){try{if(!pc||pc.dataset.k2==="1")return;const L=pc.querySel
 document.addEventListener("click",e=>{const pp=e.target.closest&&e.target.closest(".pc.kpnar .pcl > .pcp.kpsheet");if(!pp)return;e.stopPropagation();
  try{const pc=pp.closest(".pc");const nm=(pc.querySelector(".pcname")||{}).textContent||"";const parts=[...pc.querySelectorAll(":scope > .pcl > .kwear, :scope > .pcl > .kpfacts")].map(x=>x.outerHTML).join("");
   Q.unshift({t:nm,h:`<div class="kpsheetb">${parts}</div>`});showModal()}catch(x){console.error(x)}},true);
-function kitPcWide(){return innerWidth>=600||innerWidth>innerHeight*1.05}/* owner 11/14: Fold uses EXACTLY the iPad card (one component) */
+function kitPcWide(pc){const c=(pc&&pc.closest&&pc.closest("#panel,#stage,#modal .dlg"))||document.getElementById("panel");const w=c&&c.clientWidth;if(pc&&w)pc.style.setProperty("--kpcw",Math.round(Math.max(150,Math.min(240,w*.36)))+"px");return w?w>=440:innerWidth>=600}/* owner 11/14: Fold uses EXACTLY the iPad card (one component) */
 addEventListener("resize",()=>{const w=kitPcWide();if(window.__kpcW!==undefined&&window.__kpcW!==w){try{render()}catch(e){}}window.__kpcW=w});window.__kpcW=kitPcWide();
 /* the card is at most the panel's height (one scroller inside the panel); a newly opened person is scrolled fully into view */
 function kitPcSize(){try{const P=$("panel");if(!P)return;const cs=getComputedStyle(P);const pb=parseFloat(cs.paddingBottom||0),pt=parseFloat(cs.paddingTop||0);
@@ -728,10 +711,10 @@ addEventListener("resize",()=>{clearTimeout(window.__kpcS);window.__kpcS=setTime
 .pc[data-k2]>.pcl>.kpbars{display:flex;flex-direction:column;gap:1px;font-size:.8rem;line-height:1.35;color:var(--dim);margin:4px 0 6px;padding:5px 0 0;border-top:1px solid var(--k-hair,#e6d3ac)}
 .pc[data-k2]>.pcl>.kpbars>*{display:block!important}.pc[data-k2]>.pcl>.kpbars .rlab{display:inline!important}
 .pc[data-k2]>.pcl>.kpbars .fbar{display:inline-block!important;vertical-align:middle;width:56px;margin:0 8px 0 4px}
-@media (min-width:600px){
- .pc[data-k2]{display:grid!important;grid-template-columns:var(--kpcw) minmax(0,1fr)!important;gap:0 12px!important;align-items:start!important}
- .pc[data-k2]>.pcl{position:sticky!important;top:0!important;z-index:2;display:flex!important;flex-direction:column;background:var(--panel2,#f6ead6)!important;max-height:calc(var(--kpcmax,100dvh) - 2px)!important;overflow-y:auto!important;overscroll-behavior:contain;scrollbar-width:thin}
-}
+
+ .pc.kpwide[data-k2]{display:grid!important;grid-template-columns:var(--kpcw) minmax(0,1fr)!important;gap:0 12px!important;align-items:start!important}
+ .pc.kpwide[data-k2]>.pcl{position:sticky!important;top:0!important;z-index:2;display:flex!important;flex-direction:column;background:var(--panel2,#f6ead6)!important;max-height:calc(var(--kpcmax,100dvh) - 2px)!important;overflow-y:auto!important;overscroll-behavior:contain;scrollbar-width:thin}
+
 /* narrow person card (Fold portrait, phones) */
 .pc.kpnar[data-k2]{display:block!important}
 .pc.kpnar[data-k2]>.pcl{position:static!important;display:grid!important;grid-template-columns:min(36%,230px) minmax(0,1fr);grid-template-areas:"por nm" "por bars" "por fx";grid-template-rows:auto auto 1fr;align-items:start;column-gap:10px;max-height:none!important;overflow:visible!important;background:none!important;padding-bottom:6px}
@@ -752,13 +735,13 @@ addEventListener("resize",()=>{clearTimeout(window.__kpcS);window.__kpcS=setTime
  #panel .pstrip .psep{font-size:.6rem!important;line-height:1.1!important;margin:0 0 1px!important}#panel .pstrip .pgrp{border-left:1px solid var(--k-hair,#e6d3ac);padding-left:2px}#panel .pstrip .pgrp:first-child{border-left:0}
  #panel .pstrip>button,#panel .pstrip .pnav{min-height:40px!important;min-width:32px!important}
 }
-@media (max-width:599px){
- .pc[data-k2]{display:block!important}
- .pc[data-k2]>.pcl{position:static!important;max-height:none!important;overflow:visible!important}
- .pc[data-k2]:not(.kpnar)>.pcl>.pcp.kit{width:min(46vw,190px)!important;float:none;margin:0 auto 4px!important}
- .pc[data-k2] .kpstick{margin:6px -7px 6px}
- .pc[data-k2] .kpstick .kpbars{font-size:.74rem}.pc[data-k2] .kpstick .kpbars .fbar{width:40px}
-}
+
+ .pc.kpnar[data-k2]{display:block!important}
+ .pc.kpnar[data-k2]>.pcl{position:static!important;max-height:none!important;overflow:visible!important}
+ .pc.kpnar[data-k2]:not(.kpnar)>.pcl>.pcp.kit{width:min(46vw,190px)!important;float:none;margin:0 auto 4px!important}
+ .pc.kpnar[data-k2] .kpstick{margin:6px -7px 6px}
+ .pc.kpnar[data-k2] .kpstick .kpbars{font-size:.74rem}.pc.kpnar[data-k2] .kpstick .kpbars .fbar{width:40px}
+
 `;document.head.appendChild(st)})();
 (function(){const r0=renderPanel;renderPanel=function(){const r=r0.apply(this,arguments);try{requestAnimationFrame(kitPcSize)}catch(e){}return r}})();
 

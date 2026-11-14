@@ -877,7 +877,9 @@ addEventListener("resize",()=>{clearTimeout(window.__kpkT);window.__kpkT=setTime
 function kitStripFit(){document.querySelectorAll(".pstrip .pfaces").forEach(P=>{try{const F=[...P.querySelectorAll(".pface")];if(!F.length)return;F.forEach(f=>f.classList.remove("kpfh"));P.querySelectorAll(".pgrp").forEach(g=>g.classList.remove("kpfh"));
   P.scrollLeft=0;const W=P.clientWidth;const w=F.map(f=>f.getBoundingClientRect().width+8);let on=F.findIndex(f=>f.classList.contains("on"));if(on<0)on=0;
   let s=on,e=on,sum=w[on];let turn=0;while(true){const canL=s>0&&sum+w[s-1]<=W,canR=e<F.length-1&&sum+w[e+1]<=W;if(!canL&&!canR)break;if((turn++%2===0&&canR)||!canL){e++;sum+=w[e]}else{s--;sum+=w[s]}}
-  F.forEach((f,i)=>{if(i<s||i>e)f.classList.add("kpfh")});P.querySelectorAll(".pgrp").forEach(g=>{if(!g.querySelector(".pface:not(.kpfh)"))g.classList.add("kpfh")})}catch(x){}})}
+  F.forEach((f,i)=>{if(i<s||i>e)f.classList.add("kpfh")});const gh=()=>P.querySelectorAll(".pgrp").forEach(g=>g.classList.toggle("kpfh",!g.querySelector(".pface:not(.kpfh)")));gh();
+  /* group labels ("Thừa Minh cung") can be wider than their faces: drop the face farthest from the chosen one until nothing is cut (review fold-layout FAIL 3) */
+  for(let k=0;k<F.length&&P.scrollWidth>P.clientWidth+1&&e>s;k++){if(e-on>=on-s){F[e].classList.add("kpfh");e--}else{F[s].classList.add("kpfh");s++}gh()}}catch(x){}})}
 (function(){const r0=renderPanel;renderPanel=function(){const r=r0.apply(this,arguments);try{requestAnimationFrame(kitStripFit)}catch(e){}return r}})();
 addEventListener("resize",()=>{clearTimeout(window.__ksfT);window.__ksfT=setTimeout(kitStripFit,120)});
 (function(){const st=document.createElement("style");st.id="kit2-strip";st.textContent=`

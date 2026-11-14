@@ -104,7 +104,7 @@ function j59lay(force){const st=document.getElementById("stage");if(!st||!S)retu
  topR=Math.min(topR,sH*.42);
  /* KIT 3 stage HUD (jk3): plaques live in two side gutters (--kgl / --kgr); the people stand between them, heads near the top */
  const gL=parseFloat(st.style.getPropertyValue("--kgl"))||0,gR=parseFloat(st.style.getPropertyValue("--kgr"))||0;if(gL||gR){topR=10;rightR=Math.max(8,gR)}
- const meU=me?boxW({f:1,b:mb,ar:mar},1):0;const avail=sW-8-rightR-gL;
+ const meU=me?boxW({f:1,b:mb,ar:mar},1):0;let avail=sW-8-rightR-gL;
  const total=(h,ov)=>fixed+it.reduce((a,x)=>a+boxW(x,h)+4+gap,0)+(me?meU*h*(1-ov)+gap:0);
  const tagH=Math.max(14,mt?mt.firstChild.offsetHeight:0,...it.map(x=>x.tag?x.tag.offsetHeight:0));
  /* name tags sit under the feet, never over a figure; crowded neighbours alternate between two rows.
@@ -113,9 +113,22 @@ function j59lay(force){const st=document.getElementById("stage");if(!st||!S)retu
  const place=(rows)=>{const fo=Math.max(sH*.03,rows*(tagH+3)+6,KA&&KA.feet?Math.min(sH*.3,sH-KA.feet):0);const Hb=Math.min(sH*.9,(sH-fo-topR)/MANF);let H=Hb,ov=0,strip=false;
   if(total(H,0)>avail){ov=me?.3:0;let lo=sH*.1,hi=H;for(let k=0;k<22;k++){const m=(lo+hi)/2;if(total(m,ov)>avail)hi=m;else lo=m}H=lo;
    if(H<Hb*.66&&it.length>1){strip=true;ov=0;H=Hb*SF}}return{fo,H,ov,strip}};
- let P=place(1);const tw=it.map(x=>x.tag?x.tag.offsetWidth:0);let crowd=!!force;
+ const tw=it.map(x=>x.tag?x.tag.offsetWidth:0);
+ const decide=()=>{let P=place(1);let crowd=!!force;
  if(!P.strip){for(let i=1;i<it.length;i++){if((tw[i]+tw[i-1])/2+4>(boxW(it[i],P.H)+boxW(it[i-1],P.H))/2+4+gap)crowd=true}if(crowd){const P2=place(2);if(P2.strip){crowd=false;P=Object.assign(place(1),{strip:true,ov:0});P.H=Math.min(sH*.9,(sH-P.fo-topR)/MANF)*SF}else P=P2}}
- const {fo,H,ov,strip}=P;it.forEach((x,i)=>{x.tok.style.minWidth=strip?(tw[i]+6)+"px":""});
+  return {P,crowd}};let DC=decide();
+ /* KIT 31.3 (review fold-layout FAIL 2): the right plaque column only covers the top of the stage. When it ends above the figures, people may
+    use the full width under it (heads stay below the column) — try that and keep it when the figures come out bigger or no longer need a strip */
+ {const kR=document.getElementById("kshR");if(gR&&kR&&!kR.hidden&&kR.offsetHeight){const pb=kR.getBoundingClientRect().bottom-R.top+6;
+  if(pb<sH*.62){const sv=[topR,rightR,avail];topR=Math.max(topR,pb);rightR=8;avail=sW-8-rightR-gL;const D2=decide();
+   if((DC.P.strip&&!D2.P.strip)||(D2.P.strip===DC.P.strip&&D2.P.H>DC.P.H*1.05))DC=D2;else[topR,rightR,avail]=sv}}}
+ let P=DC.P,crowd=DC.crowd;
+ let {fo,H,ov,strip}=P;
+ /* KIT 31.3 (review fold-layout FAIL 2): a scrolling strip must show at least ONE whole person — never a figure cut at the strip edge.
+    Inner strip width = stage − her column − both count cues − right gutter − the tag padding at both ends; cap H so the widest box fits. */
+ if(strip&&it.length){const pd=Math.ceil(Math.max(0,...tw)/2),mxU=Math.max(...it.map(x=>boxW(x,1))),mU=me?boxW({f:1,b:mb,ar:mar},1):0;
+  const free=sW-(8+gL)-(me?gap:0)-2*J59CUE-rightR-2*pd-4;if(free>0&&(mxU+mU)*H>free)H=Math.max(sH*.25,free/(mxU+mU))}
+ it.forEach((x,i)=>{x.tok.style.minWidth=strip?(tw[i]+6)+"px":""});
  for(const x of it){x.im.style.setProperty("height",(H*x.f/(x.b.b-x.b.t)).toFixed(1)+"px","important");x.im.style.setProperty("width","auto","important");x.im.classList.add("j59sz");x.im.style.translate="";if(x.tag)x.tag.style.translate=""}
  let meH=0,meW=0;if(me){meH=H/(mb.b-mb.t);meW=meH*mar;me.style.setProperty("height",meH.toFixed(1)+"px","important");me.classList.add("j59sz")}
  const pad=strip?Math.ceil(Math.max(0,...tw)/2):0;

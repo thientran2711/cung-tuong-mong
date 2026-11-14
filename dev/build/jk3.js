@@ -23,6 +23,8 @@ window.k3Date=k3Date;
 /* the status sheet always starts closed (it is opened from a stage plaque) */
 try{localStorage.setItem("hclh-h2c","1")}catch(e){}window.__h2c=true;
 function k3Hud(){try{if(!S)return;const d=$$("me-d");if(d){const t=k3Date();if(d.textContent!==t)d.textContent=t}
+ /* lãnh cung: the rank chip says what the figure label says (rkOfFace "Phế phi · lãnh cung"), not her old rank (review fold-layout) */
+ if(S.out){const r=$$("me-r"),w="Phế phi · lãnh cung";if(r&&r.textContent.trim()!==w)r.textContent=w}
  /* her Tư chất: the kit stat cells in the top bar's kitStatRow (jk4) */
  k3TopRow();if(typeof kitStatSet!=="function")return;const hq=S.rank<7&&S.duc<50;
  [["sac","Sắc"],["tai","Tài"],["tamco","Tâm cơ"],["duc","Đức"]].forEach(([k,l])=>{const c=$$("hud-"+k);if(c)kitStatSet(c,S[k],{title:`${l} ${S[k]}${k==="duc"&&hq?" · Cần Đức 50 mới được lập Hoàng hậu":""} · chạm để xem đủ`,warn:k==="duc"&&hq?"Cần Đức 50 mới được lập Hoàng hậu":""})})}catch(e){}}
@@ -77,7 +79,7 @@ if(typeof renderStage==="function"){const r1=renderStage;renderStage=function(){
 /* gutter widths: from the stage width, then grown to the plaques' real width; j59 keeps the figures between them */
 function k3Gut(){const st=$$("stage");if(!st)return;const W=st.clientWidth;if(!W)return;
  const g=Math.round(Math.max(W<520?96:116,Math.min(190,W*.2)));st.classList.toggle("k3n",g<116);const L=$$("kshL"),R=$$("kshR");
- st.style.setProperty("--kgw",g+"px");
+ st.style.setProperty("--kgw",g+"px");st.style.setProperty("--k3stw",W+"px");
  const need=el=>el&&!el.hidden?Math.ceil(el.getBoundingClientRect().width)+10:0;
  const gl=Math.max(need(L),0),gr=Math.max(need(R),0);const ol=st.style.getPropertyValue("--kgl"),or=st.style.getPropertyValue("--kgr");
  st.style.setProperty("--kgl",gl+"px");st.style.setProperty("--kgr",gr+"px");
@@ -117,7 +119,7 @@ html body header.hud>.me .mi{display:flex!important;flex-direction:column;min-wi
 html body header.hud>.me .mi>b{font-size:1.02rem!important;line-height:1.15}
 html body header.hud>.me .rk{align-self:flex-start;font-size:.74rem!important}
 html body header.hud>.me .dt,html body header.hud #me-d{font-size:.74rem!important;line-height:1.25!important;white-space:normal!important;display:block!important;color:var(--dim)}
-html body header.hud>#emp,html body header.hud>.kcbox,html body header.hud .kcchips,#hud2>.kcchips{display:none!important}
+html body header.hud>#emp{display:none!important}
 html body header.hud>#hud2,html body #hud2.khud{position:fixed!important;left:0!important;top:0!important;width:0!important;height:0!important;min-height:0!important;padding:0!important;margin:0!important;border:0!important;overflow:visible!important;background:none!important;box-shadow:none!important;z-index:60}
 html body #hud2.hud2>:not(.khg):not(#k3x){display:none!important}
 /* the full status sheet: a centred kit sheet over a dim backdrop, scrolls inside */
@@ -221,11 +223,15 @@ html body #hud2 .khg .hc.hot[data-hx]{color:inherit}
 /* 3 + 4 · scene words straight on the painting (no plaque, no pill), one line each, soft light halo for readability */
 html body .stage #sc-t{background:none!important;border:0!important;box-shadow:none!important;backdrop-filter:none!important;padding:0 2px!important}
 html body .stage #sc-t h2,html body .stage #sc-t h2 *{white-space:nowrap!important;color:#3a1d10;text-shadow:0 0 2px #fff8ee,0 0 6px #fff8ee,0 0 10px #fff8eecc}
+/* the place line never runs under the court chips (review fold-layout): it ends before the right plaque column; the place NAME stays one
+   line, the trailing note ("… đi vắng, đang ở …") wraps under it */
+html body .stage.k3g #sc-t{width:max-content!important;max-width:calc(var(--k3stw,100vw) - var(--kgr,0px) - 24px)!important}
+html body .stage.k3g #sc-t h2{white-space:normal!important}html body .stage.k3g #sc-t h2>*:not(:first-child),html body .stage.k3g #sc-t h2>*:not(:first-child) *{white-space:normal!important}
 html body .stage .tok .tag,html body .stage #j59metag .tag{background:none!important;border:0!important;box-shadow:none!important;padding:0!important;white-space:nowrap!important;color:#2a1a12!important;font-weight:600;text-shadow:0 0 2px #fff8ee,0 0 5px #fff8ee,0 0 9px #fff8eecc}
 html body .stage .tok .tag .j59t,html body .stage #j59metag .tag .j59t{display:inline!important;background:none!important;box-shadow:none!important;padding:0!important;margin:0 .35em 0 0!important;color:#7a5530!important;font-size:inherit!important;font-weight:500}
 html body .stage .tok .tag .j59n,html body .stage #j59metag .tag .j59n{display:inline!important}
 /* NON-PERSON PICTURES: kitArtFrame = kitSceneArt (jk2b; simple gold line, no tassel, KIT 31.10); act slot 170 px wide (128 px on phones), 3:4 */
-:root{--kaw:170px}@media (max-width:599px){:root{--kaw:128px}}
+:root{--kaw:170px}#panel.k3pn .cards{--kaw:128px}
 html body button.ka.kcard.kart{min-height:0!important}
 /* floating notes (kmnote: "Tối nay Hoàng thượng lật thẻ…") sit just above the bottom tab bar: never over the top bar, the date or the sub-tabs */
 html body .kmnote{top:auto!important;bottom:calc(var(--k3nb,60px) + 10px)!important}
@@ -254,7 +260,7 @@ const cssC=document.createElement("style");cssC.id="k3-cattabs";cssC.textContent
 #panel .ksub~* .kcattabs,#panel .ksub~.kcattabs{top:var(--ksubh,44px)}
 #panel .kcattabs .pct{white-space:nowrap}
 #panel .cards>button.ka[hidden]{display:none!important}
-@media (max-width:999px){html body #panel .kcattabs{display:flex!important;flex-wrap:nowrap!important;overflow-x:auto!important;scrollbar-width:thin}#panel .kcattabs .pct{flex:0 0 auto}}
+html body #panel .kcattabs{display:flex!important;flex-wrap:nowrap!important;overflow-x:auto!important;scrollbar-width:thin}#panel .kcattabs .pct{flex:0 0 auto}
 `;document.head.appendChild(cssC);
 })();
 
@@ -328,7 +334,7 @@ function kitBullets(el){try{if(!el||el.dataset.kbl===el.innerHTML.length+"")retu
  if(r){el.innerHTML=r;el.classList.add("kblw")}el.dataset.kbl=el.innerHTML.length+""}catch(e){}}
 (function(){const SEL="#rtoast .ksen, .pc .pcn, .dlg.kpanel .kfacts .kfx, .dlg.kpanel .kfacts p";let t=0;
  const run=()=>{document.querySelectorAll(SEL).forEach(e=>{if(e.closest(".kpid"))return;kitBullets(e)})};
- try{new MutationObserver(()=>{clearTimeout(t);t=setTimeout(run,20)}).observe(document.body,{childList:true,subtree:true})}catch(e){}
+ try{new MutationObserver(()=>{if(!t)t=setTimeout(()=>{t=0;run()},20)}).observe(document.body,{childList:true,subtree:true})}catch(e){}
  const st=document.createElement("style");st.id="k3-bl";st.textContent=`
 ul.kbl{margin:2px 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:3px;text-align:left}
 ul.kbl>li{position:relative;padding-left:14px;line-height:1.35}
@@ -364,7 +370,9 @@ function k3OptCols(){try{const W=innerWidth;const m=typeof Q!=="undefined"?Q[0]:
   const B=[...g.querySelectorAll(":scope > button.ka")];g.classList.remove("k3rows","k3grid","k3g3");B.forEach(x=>x.classList.remove("k3long"));
   if(want==="rows"){g.classList.add("k3rows");return}if(want==="grid"){g.classList.add("k3grid");if(W>=1000&&B.length>=3)g.classList.add("k3g3");return}
   g.classList.add("k3rows");const L=B.map(k3IsLong);if(L.every(Boolean))return;g.classList.remove("k3rows");g.classList.add("k3grid");if(W>=1000&&B.filter((x,i)=>!L[i]).length>=3)g.classList.add("k3g3");
-  B.forEach((x,i)=>{if(L[i])x.classList.add("k3long")})})}catch(e){}}
+  B.forEach((x,i)=>{if(L[i])x.classList.add("k3long")});
+  /* mixed groups (review fold-layout): the short ones sit together first, the long ones under them, and an odd last short cell takes the whole row — no holes */
+  const sh=B.filter((x,i)=>!L[i]);const cols=g.classList.contains("k3g3")?3:2;B.forEach(x=>x.classList.remove("k3odd"));if(sh.length%cols)sh[sh.length-1].classList.add("k3odd")})}catch(e){}}
 (function(){if(typeof showModal!=="function")return;const s0=showModal;showModal=function(){const m=typeof Q!=="undefined"?Q[0]:null;const r=s0.apply(this,arguments);
  try{const mb=document.getElementById("mb");const ha=m&&(m.headArt||(m.kit&&m.kit.headArt));if(mb&&ha&&!mb.querySelector(":scope > .kdlgart")){const src=typeof ha==="string"?ha:ha.src,lab=typeof ha==="string"?"":(ha.label||"");
   const d=document.createElement("div");d.className="kdlgart";d.innerHTML=kitSceneArt(src,lab,{shape:"wide",cap:!!lab});mb.prepend(d)}}catch(e){}
@@ -375,7 +383,7 @@ html body #modal .opts.k3rows:has(> button.ka),html body #modal .kpscopts.k3rows
 html body #modal .opts.k3rows>button.ka,html body #modal .kpscopts.k3rows>button.ka{min-height:0!important}
 html body #modal .opts.k3grid:has(> button.ka),html body #modal .kpscopts.k3grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;grid-auto-rows:auto!important;align-items:stretch!important}
 html body #modal .opts.k3grid.k3g3:has(> button.ka),html body #modal .kpscopts.k3grid.k3g3{grid-template-columns:repeat(3,minmax(0,1fr))!important}
-html body #modal .k3grid>button.ka.k3long{grid-column:1/-1}
+html body #modal .k3grid>button.ka.k3long{grid-column:1/-1;order:1}html body #modal .k3grid>button.ka.k3odd{grid-column:1/-1}
 #mb>.kdlgart{margin:0 0 8px}#mb>.kdlgart>.ksart{aspect-ratio:auto;height:clamp(90px,22dvh,220px)}#mb>.kdlgart>.ksart>img{object-position:center 45%}
 `;document.head.appendChild(st)})();
 
@@ -393,9 +401,9 @@ html body #modal .k3grid>button.ka.k3long{grid-column:1/-1}
    const x=c.getContext("2d");x.drawImage(im,0,0,w,h);const d=x.getImageData(0,0,w,h).data;let y=0;outer:for(;y<h;y++){for(let i=0;i<w;i++)if(d[(y*w+i)*4+3]>40)break outer}TOP[src]=y/h}catch(e){TOP[src]=0}cb(TOP[src])};im.onerror=()=>{TOP[src]=0;cb(0)};im.src=src}
  function fit(){document.querySelectorAll(".pc.kpwide[data-k2]>.pcl>.pcp.kit").forEach(pp=>{const fr=pp.querySelector("img.kfr");if(!fr)return;const src=fr.getAttribute("src");
    topOf(src,t=>{const cr=pp.querySelector("img.kcrest");const ct=cr?parseFloat(cr.style.getPropertyValue("--ct"))/100:NaN;if(ct>=0)t=Math.min(t,ct);const kin=pp.querySelector(".kin");const H=kin?kin.getBoundingClientRect().height:0;const cut=Math.max(0,t*H-4);pp.style.setProperty("margin-top",(-cut)+"px","important");pp.style.setProperty("--kptrim",cut+"px")})});
-  document.querySelectorAll(".pc[data-k2] .kpfacts .pcinfo>*,.pc[data-k2]>.pcl>p").forEach(e=>{const t=e.textContent.trim();if(!/^Mới biết tên/.test(t)||e.classList.contains("kphelp"))return;
-   e.classList.add("kphelp");e.title=t;e.innerHTML=`Mới biết tên <i aria-hidden="true">ⓘ</i>`})}
- let tt=0;try{new MutationObserver(()=>{clearTimeout(tt);tt=setTimeout(fit,40)}).observe(document.body,{childList:true,subtree:true})}catch(e){}addEventListener("resize",()=>setTimeout(fit,80));
+  document.querySelectorAll(".pc[data-k2] .kpfacts .pcinfo>*,.pc[data-k2]>.pcl>p").forEach(e=>{const t=e.textContent.trim();if(e.classList.contains("kphelp")||!/^(Mới biết tên|Chưa biết)/.test(t)&&!(t.length>60&&e.tagName==="P"))return;
+   const lab=/^Mới biết tên/.test(t)?"Mới biết tên":/^Chưa biết/.test(t)?"Chưa biết là ai":"Ghi chú";e.classList.add("kphelp");e.title=t;e.innerHTML=`${lab} <i aria-hidden="true">ⓘ</i>`})}
+ let tt=0;try{new MutationObserver(()=>{if(!tt)tt=setTimeout(()=>{tt=0;fit()},40)}).observe(document.body,{childList:true,subtree:true})}catch(e){}addEventListener("resize",()=>setTimeout(fit,80));
  const st=document.createElement("style");st.id="k3-card1";st.textContent=`
 html body .pc.kpwide[data-k2]{align-items:start!important}
 html body .pc.kpwide[data-k2]>.pcl{align-self:start!important;justify-content:flex-start!important;padding:0 3px 6px!important;overflow-x:hidden!important}
@@ -441,3 +449,7 @@ html body .pc.kpwide .kst-chip{max-width:100%;min-width:0;flex-wrap:wrap}
 `;document.head.appendChild(sh);
  /* (c) aligned top bar: moved to the ONE stat cell kitStatCell / kitStatRow (jk4, KIT 32) */
 })();
+
+/* KIT 31.18: the act lists read their PANEL's width (k3pn = panel under 440 px), not the screen */
+(function(){function pw(){const p=document.getElementById("panel");if(p&&p.clientWidth)p.classList.toggle("k3pn",p.clientWidth<440)}
+ try{const p=document.getElementById("panel");if(p&&typeof ResizeObserver==="function")new ResizeObserver(pw).observe(p)}catch(e){}addEventListener("resize",pw);setTimeout(pw,0)})();
