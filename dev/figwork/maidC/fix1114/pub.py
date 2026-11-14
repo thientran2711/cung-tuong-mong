@@ -17,7 +17,7 @@ for j in js:
     shutil.copy(f"{C}/sheets/C_{who}_{t}.jpg",f"{W}/dev/figwork/sheets/C_{who}_{t}.jpg")
 json.dump(d,open(F,"w"),indent=1,ensure_ascii=False); open(F,"a").write("\n")
 T=W+"/dev/figwork/maidC/fix1114"; os.makedirs(T,exist_ok=True)
-for f in ["p.py","hg.py","dl.py","put.py","rawfaces.py","faces.py","heads.py","grv.py","bodies.py","thumbs.py","PA.txt","pc_st.txt","pub.py"]:
+for f in ["p.py","hg.py","pc_dl.py","put.py","rawfaces.py","faces.py","heads.py","grv.py","bodies.py","thumbs.py","PA.txt","pc_st.txt","pub.py"]:
     if os.path.exists(f"{S}/{f}"): shutil.copy(f"{S}/{f}",T)
 for f in ["proc.sh","cold2.py","gens.txt","bg.txt","myrecs.json","cur.sh"]:
     if os.path.exists(f"{C}/{f}"): shutil.copy(f"{C}/{f}",T)

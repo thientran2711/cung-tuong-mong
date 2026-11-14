@@ -14,7 +14,7 @@ def st():
         if len(p)==3: d[(p[0],p[1])]=p[2]
     return d
 def dl(pairs):
-    r=subprocess.run(["python3","dl.py"]+[f"{a}={b}" for a,b in pairs],capture_output=True,text=True)
+    r=subprocess.run(["python3","pc_dl.py"]+[f"{a}={b}" for a,b in pairs],capture_output=True,text=True)
     if r.returncode: print(r.stdout); sys.exit(1)
 c=sys.argv[1]; a=sys.argv[2:]
 if c=="set":
