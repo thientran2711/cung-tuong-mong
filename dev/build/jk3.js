@@ -229,8 +229,12 @@ html body .stage #sc-t h2,html body .stage #sc-t h2 *{white-space:nowrap!importa
 html body .stage.k3g #sc-t{width:max-content!important;max-width:calc(var(--k3stw,100vw) - var(--kgr,0px) - 24px)!important}
 html body .stage.k3g #sc-t h2{white-space:normal!important}html body .stage.k3g #sc-t h2>*:not(:first-child),html body .stage.k3g #sc-t h2>*:not(:first-child) *{white-space:normal!important}
 html body .stage .tok .tag,html body .stage #j59metag .tag{background:none!important;border:0!important;box-shadow:none!important;padding:0!important;white-space:nowrap!important;color:#2a1a12!important;font-weight:600;text-shadow:0 0 2px #fff8ee,0 0 5px #fff8ee,0 0 9px #fff8eecc}
-html body .stage .tok .tag .j59t,html body .stage #j59metag .tag .j59t{display:inline!important;background:none!important;box-shadow:none!important;padding:0!important;margin:0 .35em 0 0!important;color:#7a5530!important;font-size:inherit!important;font-weight:500}
-html body .stage .tok .tag .j59n,html body .stage #j59metag .tag .j59n{display:inline!important}
+/* KIT 33.5 STAGE NAME CHIP (owner 11/15 iPad): TWO lines — rank / role on top (small), name below (bigger); both tinted by the person's
+   rank colour (--tc from j59col = the kit rank palette RCOL / maid MRCOL / eunuch ERCOL / Emperor gold / Thái hậu amber), darkened for legibility */
+html body .stage .tok .tag,html body .stage #j59metag .tag{text-align:center!important}
+html body .stage .tok .tag .j59t,html body .stage #j59metag .tag .j59t{display:block!important;background:none!important;box-shadow:none!important;padding:0!important;margin:0 0 1px!important;font-size:.74rem!important;line-height:1.1!important;font-weight:600;letter-spacing:.02em;color:color-mix(in srgb,var(--tc,#7a5530) 75%,#2a1a12)!important}
+html body .stage .tok .tag .j59n,html body .stage #j59metag .tag .j59n{display:block!important;margin:0!important;font-size:1rem!important;line-height:1.2!important;font-weight:700;color:color-mix(in srgb,var(--tc,#2a1a12) 45%,#2a1a12)!important}
+html body .stage .tok .tag .j59t.j59only,html body .stage #j59metag .tag .j59t.j59only{font-size:1rem!important;font-weight:700}
 /* NON-PERSON PICTURES: kitArtFrame = kitSceneArt (jk2b; simple gold line, no tassel, KIT 31.10); act slot 170 px wide (128 px on phones), 3:4 */
 :root{--kaw:170px}#panel.k3pn .cards{--kaw:128px}
 html body button.ka.kcard.kart{min-height:0!important}

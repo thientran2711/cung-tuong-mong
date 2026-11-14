@@ -1177,3 +1177,11 @@ from j15 pcPort). Used by j15, j3, j90 (podium), jk4 (event stage). New inline o
 
 Open (next kit pass): podium (j90), identity card, co-op friend figure, minigame podium still size their single figure by
 their own box (one person per box, no scene) — move them onto `--kfig`/`KIT_FIG.fac` when they show two people together.
+
+**KIT 33.5 · STAGE NAME CHIP (owner 11/15 iPad shot 1115-stage-name.jpg)** — every name chip under a full-body figure is TWO lines:
+rank / role on the top line (small, .74rem, 600), name on the line below (bigger, 1rem, 700). Both lines are tinted by the person's colour
+from the ONE rank → colour lookup (j59col: kit rank palette RCOL for consorts / Hoàng hậu, MRCOL maids, ERCOL eunuchs, Emperor gold
+#c9a227, Thái hậu amber #b06f1c, lãnh cung grey), darkened with ink (top 75 %, name 45 %) so pale ranks stay legible. A title-only chip
+("Hoàng thượng") is one big line. Rules live in jk3 (stage, incl. her own #j59metag) and jk4 (.kesf .kpsn — event stage and week-book
+person pages, same two lines from kitName's .kti + name). Chips stay inside: strip slots are ≥ chip width + 8 px; in a single row
+neighbours whose chips would touch go to two staggered rows (j59 crowd), and the final overlap check re-lays out.
