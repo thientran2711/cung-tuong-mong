@@ -9308,6 +9308,58 @@
   "por": "img/por-maid-m26-t5-a51.webp"
  },
  {
+  "role": "maid",
+  "identity": "m26",
+  "tier": "t6",
+  "ageBand": "a18",
+  "look": null,
+  "palette": "blush pink and gold",
+  "magnificUrl": "https://www.magnific.com/app/creation/WDsKK2wcXe",
+  "bg": "mE3y97XhJQ",
+  "sheet": "C-m26-t6",
+  "file": "img/fig-maid-m26-t6-a18.webp",
+  "por": "img/por-maid-m26-t6-a18.webp"
+ },
+ {
+  "role": "maid",
+  "identity": "m26",
+  "tier": "t6",
+  "ageBand": "a26",
+  "look": null,
+  "palette": "blush pink and gold",
+  "magnificUrl": "https://www.magnific.com/app/creation/WDsKK2wcXe",
+  "bg": "mE3y97XhJQ",
+  "sheet": "C-m26-t6",
+  "file": "img/fig-maid-m26-t6-a26.webp",
+  "por": "img/por-maid-m26-t6-a26.webp"
+ },
+ {
+  "role": "maid",
+  "identity": "m26",
+  "tier": "t6",
+  "ageBand": "a36",
+  "look": null,
+  "palette": "blush pink and gold",
+  "magnificUrl": "https://www.magnific.com/app/creation/WDsKK2wcXe",
+  "bg": "mE3y97XhJQ",
+  "sheet": "C-m26-t6",
+  "file": "img/fig-maid-m26-t6-a36.webp",
+  "por": "img/por-maid-m26-t6-a36.webp"
+ },
+ {
+  "role": "maid",
+  "identity": "m26",
+  "tier": "t6",
+  "ageBand": "a51",
+  "look": null,
+  "palette": "blush pink and gold",
+  "magnificUrl": "https://www.magnific.com/app/creation/WDsKK2wcXe",
+  "bg": "mE3y97XhJQ",
+  "sheet": "C-m26-t6",
+  "file": "img/fig-maid-m26-t6-a51.webp",
+  "por": "img/por-maid-m26-t6-a51.webp"
+ },
+ {
   "file": "img/fig-maid-m27-a18.webp",
   "por": "img/por-maid-m27-a18.webp",
   "role": "maid",

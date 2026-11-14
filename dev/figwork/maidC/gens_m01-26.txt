@@ -158,3 +158,13 @@ C-m09-t7 TdSrjh1VNR gp
 C-m10-t7 tCiOPKXmZJ gp
 C-m11-t7 cplkrvo0eP gp
 C-m12-t7 dtygUqlXSL gp
+C-m05-t7 xSd0MzcjfW edit remove chain
+C-m12-t7 4RumaoP9Aa edit remove chain
+C-m13-t7 VXUxl4sMMU gp
+C-m14-t7 aF293TjfSh gp
+C-m15-t7 rgecMv5xtc gp
+C-m16-t7 lJ8DXFXgv9 gp
+C-m17-t7 TdSrsRMVNR gp (a32 letter->teacup)
+C-m18-t7 0eg1LRwTfW gp
+C-m19-t7 jUXTpb3LD0 gp
+C-m20-t7 dtyg7V8XSL gp

@@ -57,6 +57,7 @@ Mẻ A12 (thợ m01–m26): t5 m25–m26 → t5 XONG m01–m26; t6 m01–m06 (ho
 Mẻ A13 (thợ m01–m26): t6 m07–m14. 8 lineup + 8 tách nền: 8×273 = 2184; m13 xoá nốt ruồi chấm vá.
 Mẻ A14 (thợ m01–m26): t6 m15–m22. 8 lineup + 8 tách nền: 8×273 = 2184.
 Mẻ A15 (thợ m01–m26): t6 m23–m25, t7 m01–m04. 7 lineup + 1 sửa (m02-t7 tóc bạc) + 7 tách nền: 8×270 + 7×3 = 2181.
+Mẻ A16a (thợ m01–m26): t6 m26 (vẽ 1 + sửa hỏng 1 + vẽ lại 1, bỏ dây trán; xoá nốt ruồi bằng code) + 1 tách nền: 3×270 + 3 = 813.
 
 ## C-B (thợ m27–m52): mẻ và tín dụng
 Mẻ B1: t2 m27–m34 (vẽ lại m27–m33, đạo cụ khác loại mỗi tuổi). 8 lineup, tín dụng 8×273 = 2184.
