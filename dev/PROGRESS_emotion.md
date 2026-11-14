@@ -9,3 +9,7 @@
 - Đo: dev/measure/run5b.sh, off (window.__emoOff=1) và onA, 5×6 đời mỗi bên, ra ở scratchpad/emobal (máy rất tải: load ~60).
 - Ảnh chụp: scratchpad/emoshot.js (route thay server; 686x880@2.2, 1180x820@2).
 CÒN: kết quả đo, ảnh chụp vào dev/shots/emotion, nối kitFaceExpr khi review/appearance có (API window.kitEmotion(p).expr).
+- 23:10Z chủ nhân: dấu kiểu cổ trang (búi tóc cài trâm) — tờ thử dev/shots/emotion/pilot-emo-hairpin.jpg, tệp ở dev/art/emo-hairpin/ (gpt-2-6 rgepFSAxtc). CHƯA thay img/kit/emo-* (đang là bộ mặt nét mực) — chờ duyệt rồi chép sang img/kit.
+- Bỏ vầng màu quanh khung (chủ nhân). Bỏ móc nét mặt (chủ nhân 22:50Z). Gỡ ảnh chụp bố cục cũ.
+- KHÔNG gộp review/page-curl lúc này (điều phối: chờ sách hai trang chốt). Ghi chú khi gộp: page-curl dựa trên main, thiếu cả nhánh balance; assemble phải hợp hai danh sách (scratchpad mergeasm.py), bỏ j80.js (balance đã gộp vào j76).
+- Đo: off n=31 HH 35% chết sớm 35%; on v1 n=30 HH 47% / 43% (vòng vui→thị tẩm tự khuếch) → hãm v2 (EMOTION_PLAN mục 4). Đang chạy onC (v2) và offC (thêm mẫu gốc) ở scratchpad/emobal; phân tích: python3 dev/measure/anemo.py "off=.../off*_*.json" "on=.../onC_*.json".
