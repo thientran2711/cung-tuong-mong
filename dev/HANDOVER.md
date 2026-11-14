@@ -57,3 +57,11 @@ All old-session workers are STOPPED. The new main (Cung Tường Mộng · chín
 2. UI work goes to the KIT OWNER first. The kit owner builds the shared component in dev/kit (KIT.md + kit functions/CSS), tests it at the 4 sizes, and posts a "KIT READY: <component>" confirmation to the main session.
 3. Only after that confirmation may other workers use that component. Workers never style UI themselves; they only fill kit components with data/logic.
 4. Review rejects any UI not built from a confirmed kit component.
+
+## TEST VIEWPORTS (owner device, binding — 2026-11-14)
+The owner plays on a Samsung Galaxy Z Fold, PORTRAIT. Her screenshots are 1510x2000 *device pixels*, i.e. a CSS viewport of about 755x1000 at deviceScaleFactor 2. Testing at a 1510x2000 CSS viewport shows a desktop layout she never sees.
+Test sizes from now on (CSS px, Playwright viewport + deviceScaleFactor):
+- Fold inner, portrait: 755x1000 @2  (PRIMARY)
+- Fold cover: 412x1058 @2
+- 390x844 @3 (phone), 1024x768 @2 (landscape tablet)
+Owner previews: send single readable screenshots (one image per file), not tiny grids.
