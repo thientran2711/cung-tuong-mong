@@ -123,3 +123,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (02:05Z) Owner: slap handprint approved; illness/poison stronger (ốm nhẹ ≈ old ốm nặng). Temporary EXPRESSIONS (buồn/giận/khóc/đau) allowed as states, done in code (landmark mesh warp + tiny tear overlay), no redraws; base art stays serene.
 - (02:20Z) Owner: emotion system — mood per person shown as painted emotion icons on avatar frames; events change moods by personality; moods feed back into decisions (two-way, motive gate). Tiên đế băng hà approved but one side officials, other side harem. Research trungsinhgame.com by bot (respect site rules).
 - (02:45Z) Owner: Độ khó row overlaps the face picker on the identity card (fix). Servant-start (cung nữ) must be shown in maid outfit, not consort dress — figure always matches current role/rank (all origins).
+- (02:50Z) Owner: emotion icons must be human faces showing the emotion (not symbolic objects); readable at small size.
