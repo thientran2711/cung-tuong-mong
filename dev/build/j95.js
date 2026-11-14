@@ -232,7 +232,7 @@ function j95sync(watch,plan){if(!j95on())return;let R=S.roster;if(!R||R.key!==j9
  for(const id in R.P)if(!ids[id]){delete R.P[id]}
  /* her own line: past khắc keep where she was, now and later = where she stands */
  const me=j95mePlace();for(let i=kh;i<4;i++)R.P.me[i]=[me,me==="home"?"rest":"here",null,"ngươi tự chọn"];
- if(R.P["mm:me"])for(let i=kh;i<4;i++)R.P["mm:me"][i]=me==="home"||S.out?[S.out?me:"home",S.out?"serve":"serve","me","phận sự trong cung"]:[me,"follow","me","theo hầu ngươi"];
+ if(R.P["mm:me"])for(let i=kh;i<4;i++)R.P["mm:me"][i]=S.out?["lc","serve","me","hầu chủ ở lãnh cung"]:me==="home"?["home","serve","me","phận sự trong cung"]:[me,"follow","me","theo hầu ngươi"];
  /* staff whose owner fell / rose: follow the owner's new home */
  for(const p of ppl)if((p.kind==="st"||p.kind==="mm")&&p.ref!==S){const e=R.P[p.id];for(let i=kh;i<4;i++){if(e[i][1]!=="follow"&&e[i][1]!=="errand"&&e[i][0]!==p.home)e[i]=[p.home,"serve","v"+p.ref.id,"phận sự trong cung"]}}
  for(const p of ppl)if(p.kind==="rv"){const v=p.ref,e=R.P[p.id];for(let i=kh;i<4;i++){if(v.out){if(e[i][0]!=="lc")e[i]=["lc","cold",null,"bị đày vào lãnh cung"]}else if(v.confined&&e[i][0]!==palaceOf(v)&&e[i][1]!=="tryst")e[i]=[palaceOf(v),"confined",null,`bị cấm túc ${v.confined} tháng`]}}

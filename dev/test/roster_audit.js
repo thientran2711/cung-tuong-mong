@@ -86,12 +86,12 @@ const HOOK2=`(function(){const A=window.__aud;const bad=(k,m)=>{A.err[k]++;if(A.
    if(!e||e[kh][0]!==k)bad("h","câu chữ đặt "+rid+" ở "+k+" mà sổ ghi "+(e?e[kh][0]:"không có")+" ("+pid+") ent="+ent.key+"/"+ent.kh+" now="+j95key()+"/"+kh+" rec="+JSON.stringify(e&&e[kh]));if(rid[0]==="v"&&kh===j95kh()){const v=RV(+rid.slice(1));if(v&&v.alive&&whereOf(v)!==k)bad("h","whereOf lệch sau khi dời: "+v.name);if(countAt(k)<1)bad("h","bản đồ không đếm người được dời tới "+k)}}
   if(pid&&(pid.indexOf("e68")===0||P95B[pid]))return;
   const txt=strip(m.h||"");const sents=txt.split(/(?<=[.!?…])\\s+|\\s*;\\s*/);const RVL=rivals.filter(v=>v.alive).sort((a,b)=>b.name.length-a.name.length);
-  for(const s0 of sents){const s=s0.trim();if(!s||HEAR.test(s))continue;for(const [code,re] of PL()){if(!re.test(s))continue;
+  for(const s0 of sents){const s=s0.trim().replace(/sổ (sách )?kính sự phòng/gi,"sổ");if(!s||HEAR.test(s))continue;for(const [code,re] of PL()){if(!re.test(s))continue;
     const taken=[];for(const v of RVL){const i=s.indexOf(v.name);if(i<0||taken.some(t=>i>=t[0]&&i<t[1]))continue;taken.push([i,i+v.name.length]);if(OWNER.test(s.slice(Math.max(0,i-18),i)))continue;
      const e=R.P["v"+v.id];const pl=ent&&ent.places.find(p=>p.id==="v"+v.id);if(pl&&pl.res!=="ok"){A.placeSkip++;continue}A.placeChk++;
      if(!e||e[kh][0]!==code){/* another place word in the same sentence may be the one meant */const alt=PL().some(([c2,r2])=>c2!==code&&r2.test(s)&&e&&e[kh][0]===c2);
       /* or it happened in the buổi just ended (an act at the turn of the week): the logged record must show it */
-      const pb=J95B.bind.slice().reverse().find(b=>b.past&&b.id==="v"+v.id&&b.k===code&&wk()-b.wk<=1&&wk()>=b.wk);let pok=false;if(pb){const tb=j95table(pb.wk,pb.b,pb.kh);const row=tb&&tb.rows&&tb.rows.find(x=>x.id==="v"+v.id);pok=!!(row&&row.place===code);A.placePast=(A.placePast||0)+1;if(!pok)bad("h","việc đã qua không có trong sổ đã ghi: "+v.name+" "+code+" "+pb.key+"/"+pb.kh)}
+      const pb=J95B.bind.slice().reverse().find(b=>b.past&&b.id==="v"+v.id&&b.k===code&&wk()-b.wk<=1&&wk()>=b.wk);let pok=false;if(pb){const tb=j95table(pb.wk,pb.b,pb.kh);const row=tb&&tb.rows&&tb.rows.find(x=>x.id==="v"+v.id);pok=!!(row&&row.place===code);A.placePast=(A.placePast||0)+1;if(!pok)bad("h","việc đã qua không có trong sổ đã ghi: "+v.name+" "+code+" "+pb.key+"/"+pb.kh+" bind="+JSON.stringify(pb).slice(0,160)+" row="+JSON.stringify(row||tb&&tb.error))}
       if(!alt&&!pb)bad("h","câu chữ: "+s.slice(0,70)+" | sổ: "+v.name+" ở "+(e?e[kh][0]:"—"))}}
     break}}}
  window.__audCard=checkCard;

@@ -127,7 +127,7 @@ const AGENT95B=/(người của|người bên|cung nữ của|cung nữ bên|th�
 function j95bStrip(h){return String(h||"").replace(/<br\s*\/?>/gi,". ").replace(/<\/p>/gi,". ").replace(/<[^>]+>/g," ").replace(/&nbsp;/g," ").replace(/\s+/g," ")}
 function j95bScan(h){/* → [{id,k,why}] who the words place where, now */const out=[];const txt=j95bStrip(h);const sents=txt.split(/(?<=[.!?…])\s+|\s*;\s*/);
  const L=liveRivals(true).concat(rivals.filter(v=>v.alive&&v.out)).map(v=>[v,v.name]).filter(x=>x[1]).sort((a,b)=>b[1].length-a[1].length);
- for(const s0 of sents){const s=s0.trim();if(!s)continue;const lo=s.toLowerCase().replace(/phe (càn ninh|đức thọ|từ ninh|dưỡng hòa|cần chính)\S*/g,"");if(NOW95B.test(lo))continue;let k=null;for(const [re,c] of LEX95B)if(re.test(lo)){k=c;break}if(!k)continue;
+ for(const s0 of sents){const s=s0.trim();if(!s)continue;const lo=s.toLowerCase().replace(/phe (càn ninh|đức thọ|từ ninh|dưỡng hòa|cần chính)\S*/g,"").replace(/sổ (sách )?kính sự phòng/g,"sổ");if(NOW95B.test(lo))continue;let k=null;for(const [re,c] of LEX95B)if(re.test(lo)){k=c;break}if(!k)continue;
   const used=[];for(const [v,nm] of L){let i=s.indexOf(nm);while(i>=0){if(!used.some(u=>i>=u[0]&&i<u[1])){used.push([i,i+nm.length]);const pre=s.slice(Math.max(0,i-18),i).toLowerCase();
      if(!AGENT95B.test(pre)&&!j95bPastHas("v"+v.id,k))out.push({id:"v"+v.id,k,why:s.slice(0,90)})}i=s.indexOf(nm,i+1)}}
   if(/^(hoàng thượng|ngài)\b/i.test(s))out.push({id:"emp",k,why:s.slice(0,90)});if(/^thái hậu\b/i.test(s)&&!S.thDead)out.push({id:"th",k,why:s.slice(0,90)})}
@@ -158,7 +158,8 @@ function j95bPutPast(id,k,act,why,src){const R=S.roster;if(!R||!R.P)return"norec
  const e=R.P[id];
  if(R.key===j95key()){if(!e)return"norec";const kh=j95kh();if(e[kh][0]===k)return"ok";const me=R.P.me?R.P.me[kh][0]:S.place;if(e[kh][0]===me||k===me){J95B.stat.pastSeen=(J95B.stat.pastSeen||0)+1;return"seen"}return j95bPut(id,k,act,why,src)}
  if(e)for(let i=3;i>=0;i--)if(e[i]&&e[i][0]===k){J95B.bind.push({id,k,kh:i,key:R.key,wk:R.wk,b:R.b,past:1,src,why,had:1});if(J95B.bind.length>400)J95B.bind.splice(0,100);J95B.stat.bind++;return"ok"}
- const P=J95B.next=J95B.next||[];if(!P.some(x=>x.id===id&&x.k===k))P.push({id,k,act,why,src});J95B.stat.pastNext=(J95B.stat.pastNext||0)+1;return"ok"}
+ const P=J95B.next=J95B.next||[];if(P.some(x=>x.id===id&&x.k!==k)){J95B.stat.pastDrop=(J95B.stat.pastDrop||0)+1;return"seen"}/* one place per person at the first khắc of the coming buổi; a second place for her is not told */
+ if(!P.some(x=>x.id===id&&x.k===k))P.push({id,k,act,why,src});J95B.stat.pastNext=(J95B.stat.pastNext||0)+1;return"ok"}
 function j95bPastHas(id,k){for(let i=J95B.bind.length-1;i>=0;i--){const b=J95B.bind[i];if(b.past&&b.id===id&&b.k===k&&wk()-b.wk<=1)return b}return null}
 function j95bLexOf(t){const lo=String(t||"").toLowerCase();for(const [re,c] of LEX95B)if(re.test(lo))return c;return null}
 

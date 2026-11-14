@@ -1,6 +1,6 @@
 /* j95c invariants (one per bug of the independent audit, dev/test/ROSTER_AUDIT_INDEPENDENT.md), injected by roster_audit.js after HOOK/HOOK2.
    (j) giá họa: every NPC wdFrame that ran has a passing gate line "giahoa" for that actor; none at affection >= 40 without a recorded exception
-   (k) housing: from the current khắc on, home acts / "ở cung mình" sit in her CURRENT palace; no row in a palace whose head is gone or is not
+   (k) housing: at most 3 in side halls; she never stands in a palace whose head moved out; from the current khắc on, home acts / "ở cung mình" sit in her CURRENT palace; no row in a palace whose head is gone or is not
        head of house; children in their mother's current home
    (l) followers: "theo hầu" sits where the person followed is; "phận sự" in the owner's current home (lãnh cung when she is there); a cung nữ thân
        tín whose mistress is out is with her; j95followers(p) == the record
@@ -22,6 +22,8 @@ window.__AUDC=function(){const A=window.__aud;for(const k of "jklmnopq")if(A.err
    for(let i=kh;i<4;i++){const x=e[i];if((HOME.has(x[1])||x[3]==="ở cung mình")&&x[0]!==own)bad("k",`${where}: ${v.name} khắc ${i} ${x[1]} '${x[3]}' ở ${x[0]} mà cung nàng là ${own}`)}}
   for(const id in R.P){const e=R.P[id];for(let i=kh;i<4;i++)if(!rnOK(e[i][0]))bad("k",`${where}: ${(R.who[id]||[id])[0]} khắc ${i} ở ${e[i][0]}: chủ cung không còn / không làm chủ cung`);
    if(id.startsWith("k:")){const mid=id.split(":")[1];const mo=mid==="me"?null:RV(+mid);const h=!mo?(S.out?(qOn()?"kn":"tn"):"home"):(mo.alive&&!mo.out?palaceOf(mo):(qOn()?"kn":"tn"));for(let i=kh;i<4;i++)if(e[i][0]!==h)bad("k",`${where}: hoàng tự ${(R.who[id]||[id])[0]} ở ${e[i][0]} mà nhà là ${h}`)}}
+  {const live=rivals.filter(v=>v.alive&&!v.out);for(const hd of [S].concat(live)){const n=live.filter(x=>x!==hd&&houseOf(x)===key(hd)).length;if(n>3)bad("k",`${where}: ${hd===S?"ngươi":hd.name} có ${n} người ở thiên điện (>3)`)}
+   if(!S.out&&/^r\d+$/.test(S.place||"")&&!rnOK(S.place))bad("k",`${where}: ngươi đứng ở ${S.place} mà chủ cung đã dời đi`)}
   /* (l) */for(const id in R.P){if(!(id.startsWith("mm:")||/^s\d/.test(id)))continue;const o=ownerOf(id);if(!o)continue;const oid=o===S?"me":"v"+o.id;const oe=R.P[oid];const e=R.P[id];
    for(let i=kh;i<4;i++){const x=e[i];if(x[1]==="follow"){A.c.follow++;if(oe&&oe[i][0]!==x[0])bad("l",`${where}: ${(R.who[id]||[id])[0]} theo hầu ở ${x[0]} mà chủ ở ${oe[i][0]} (khắc ${i})`)}
     else if(x[1]==="serve"||x[1]==="clean"){if(x[0]!==homeOf(o))bad("l",`${where}: ${(R.who[id]||[id])[0]} phận sự ở ${x[0]} mà cung chủ là ${homeOf(o)} (khắc ${i})`)}

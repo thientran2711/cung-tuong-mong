@@ -32,12 +32,14 @@ function j95cDedupe(){let n=0;try{const seen=new Set([S&&S.maid&&S.maid.name].co
  if(typeof wkPoison==="function"){const wp0=wkPoison;wkPoison=function(a,t){if(j95on()&&a&&a!==S&&a.rel!=null&&t&&a!==t){const g=motiveOK(a,t,"poison");j95actLog(a,t,"poison",g);if(!g.ok){J95C.stat.poisonGate++;return ""}}return wp0.apply(this,arguments)}}
 
  /* ---- 2. housing changes → the record follows at once ---- */
- if(typeof palFix==="function"){const pf0=palFix;palFix=function(){const s0=j95cSig();const r=pf0.apply(this,arguments);try{const s1=j95cSig();if(j95cCur()&&(s1!==s0||s1!==J95C.sig)){J95C.sig=s1;J95C.stat.repal++;j95sync()}}catch(e){j95cErr("palFix",e)}return r}}
+ if(typeof palFix==="function"){const pf0=palFix;palFix=function(){const s0=j95cSig();try{j95cCap()}catch(e){j95cErr("cap",e)}const r=pf0.apply(this,arguments);try{const s1=j95cSig();if(j95cCur()&&(s1!==s0||s1!==J95C.sig)){J95C.sig=s1;J95C.stat.repal++;j95sync()}}catch(e){j95cErr("palFix",e)}return r}}
  for(const n of ["deathSentence","fall","cold","restore","fireServ"]){if(typeof window[n]!=="function")continue;const o=window[n];window[n]=function(){const r=o.apply(this,arguments);
    try{if(j95cCur()){if(n!=="fireServ")try{palFix()}catch(e){}if(j95cCur())j95sync()}}catch(e){j95cErr(n,e)}return r}}
 
  /* any resync first re-houses if someone's home changed since the last look (the game only re-houses at the map / end of week) */
- const sy0=j95sync;j95sync=function(){try{if(!J95C.inSync&&j95cCur()){j95cDedupe();const sg=j95cSig();if(sg!==J95C.sig){J95C.sig=sg;J95C.inSync=1;try{palFix()}finally{J95C.inSync=0}J95C.sig=j95cSig()}}}catch(e){j95cErr("sync",e)}return sy0.apply(this,arguments)};
+ const sy0=j95sync;j95sync=function(){try{if(!J95C.inSync&&j95cCur()){j95cDedupe();const sg=j95cSig();if(sg!==J95C.sig){J95C.sig=sg;J95C.inSync=1;try{palFix()}finally{J95C.inSync=0}J95C.sig=j95cSig()}
+   /* she stood in a palace whose head has moved out (fallen, died, raised, re-housed): that palace is no more; she goes home */
+   if(!S.out&&!(typeof isSrv==="function"&&isSrv())&&/^r\d+$/.test(S.place||"")&&!j95rnOK(S.place)){const h=RV(+S.place.slice(1));S.place="home";S.visit={k:"home",people:homePeople(),talked:false,tk:{}};J95C.stat.sentHome=(J95C.stat.sentHome||0)+1;try{log(`${h?h.name+" đã dời cung":"Chủ cung đã dời đi"}, ngươi trở về cung mình.`)}catch(e){}}}}catch(e){j95cErr("sync",e)}return sy0.apply(this,arguments)};
  /* ---- 3. turn-of-buổi acts that land at the start of the new buổi ---- */
  const pw0=placeWhere;placeWhere=function(){const r=pw0.apply(this,arguments);try{j95cNext()}catch(e){j95cErr("next",e)}return r};
 
@@ -56,8 +58,14 @@ function j95cDedupe(){let n=0;try{const seen=new Set([S&&S.maid&&S.maid.name].co
  if(typeof ageInit==="function"){const a0=ageInit;ageInit=function(){const r=a0.apply(this,arguments);if(!J95C.loading)j95cDedupe();return r}}
  if(typeof start==="function"){const st0=start;start=function(){J95C.lastV=null;J95C.sig="";const r=st0.apply(this,arguments);try{j95cDedupe();if(j95cCur())j95sync()}catch(e){j95cErr("start",e)}return r}}
 })();
-function j95cVisitFix(){if(!S||S.dead||S.mg||(typeof isSrv==="function"&&isSrv()))return false;if(S.out&&S.place!=="lc"){coldVisit();return true}
+function j95cVisitFix(){if(!S||S.dead||(typeof isSrv==="function"&&isSrv()))return false;if(S.out&&S.place!=="lc"){coldVisit();return true}if(S.mg)return false;
  if(S.visit&&S.visit.k!==S.place&&S.place==="home"){S.visit={k:"home",people:homePeople(),talked:false,tk:{}};return true}return false}
+/* jpal keeps a resident whose head is still valid even when the house is over its 3 side halls (a girl of the tuyển tú or a promotion
+   placed there before palFix ran): the newest extras leave so palFix finds them another house (the cap the owner set, ≤3) */
+function j95cCap(){const live=p=>p===S?!!S&&!S.out&&!S.dead:!!p&&p.alive&&!p.out;let n=0;
+ for(const h of [S].concat(rivals)){if(!live(h))continue;const k=key(h);const L=rivals.filter(y=>y!==h&&live(y)&&y.resHead===k&&!(rkOf(y)>=3&&y.pal!=null));const me=S!==h&&live(S)&&S.resHead===k&&!(rkOf(S)>=3&&S.pal!=null)?1:0;
+  const over=L.length+me-3;if(over>0)for(const y of L.slice(-over)){y.resHead=null;n++}}
+ if(n)J95C.stat.cap=(J95C.stat.cap||0)+n;return n}
 function j95cNext(){const P=J95B.next;if(!P||!P.length)return;J95B.next=[];if(!j95cCur())return;const R=S.roster;const used={};let n=0;
  for(const x of P){const e=R.P[x.id];if(!e)continue;if(x.id[0]==="v"){const v=RV(+x.id.slice(1));if(!v||!v.alive||v.out||v.confined)continue}
   let kh=Math.max(j95kh(),used[x.id]||0);while(kh<4&&(e[kh][1]==="tryst"||e[kh][1]==="meet"))kh++;if(kh>=4)continue;used[x.id]=kh+1;
