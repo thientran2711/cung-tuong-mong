@@ -21,3 +21,12 @@ function sceneImg(base){try{if(!base||!S)return base;const se=SCN_SEAS[SEASON[(S
  if(typeof evArt==="function"){const e0=evArt;evArt=function(){sync();return e0.apply(this,arguments)}}
  if(typeof pxScene==="function"){const p0=pxScene;let last="";pxScene=function(){sync();try{const P=placeOf(S.place),n=SCIMG[P.sc]||"";if(n!==last){last=n;if(typeof PX==="object")PX.key=""}}catch(e){}return p0.apply(this,arguments)}}
  sync()})();
+/* ---- Dư đồ (bản đồ) theo MÙA × BUỔI: img/map-<mùa>-<buổi>.webp có đủ 4 mùa × 4 buổi (trưa thêm 14/11, review/place-seasons).
+   j26 mapImg dùng BUK=["sang","chieu","toi"] theo S.buoi; khi game có 4 buổi (BUOI.length>=4) chèn "trua" vào BUK để chỉ số khớp
+   (một lần, không chèn trùng nếu chỗ khác đã chèn). Ngày hội không có tranh trưa → lấy tranh hội buổi sáng/chiều thay vì mất cảnh hội. */
+(function(){if(typeof mapImg!=="function"||typeof BUK==="undefined")return;
+ function fix(){try{if(typeof BUOI!=="undefined"&&BUOI.length>=4&&BUK.length===3&&BUK.indexOf("trua")<0)BUK.splice(1,0,"trua")}catch(e){}}
+ const m0=mapImg;mapImg=function(){fix();try{if(BUK[S.buoi||0]==="trua"&&typeof festToday==="function"){const f=festToday();
+   if(f&&f.files&&!f.files.trua){const x=f.files.sang||f.files.chieu;if(x)return x}}}catch(e){}return m0.apply(this,arguments)};
+ if(typeof mapHTML==="function"){const h0=mapHTML;mapHTML=function(){fix();return h0.apply(this,arguments)}}
+ fix()})();
