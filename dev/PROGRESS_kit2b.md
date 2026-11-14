@@ -33,3 +33,14 @@ KIT READY (bản sạch): một hàm khung pcPort + KIT_CREST (28.0), thẻ ngư
 ## review/kit-j95 (tách từ kit-2b 927a8dc)
 - jk95.js (nạp sau jk2b, trước j84), KIT.md §29: Thói quen trên thẻ người, Nơi ngươi hay đến, dấu hai bóng người trên bản đồ, chip đông người gom nhóm, nhãn "N người theo hầu" trên sân khấu. Kiểm typeof, không phụ thuộc j95; thử bằng dữ liệu giả lập theo API j95 ở 755x1000@2 và 1180x820@2: không lỗi, không tràn. Ảnh dev/shots/kit2b/j95-*.
 - KIT READY: kitHabitsHTML, kitHabitsMineHTML, dấu kpair, silChip gom nhóm (§29). Cần j95 đặt `told` trong j95habitsMine và (nếu muốn) `j95followers(p)`.
+
+## review/kit-j95: sửa theo kiểm duyệt FAIL 59360ed (thợ j95, 2026-11-14)
+- Gộp origin/main (e9e2248); thứ tự `… jk2b, jk95, j98, j84`. KIT.md mục j95 đánh lại số **§31** (main có §29 jkitctl, §30 jbd).
+- "N người theo hầu": j59 là module đóng (IIFE), nhãn tên do j59 viết; jk95 thêm dòng thứ hai `.kfol` vào nhãn j59 (dải người, chip gọn, nhãn của ngươi)
+  qua một MutationObserver trên #stage (j59 chỉ viết lại nhãn khi chữ của nó đổi, nên dòng thêm được giữ). Đo: 6/6 cỡ, `.kfol` hiện.
+- "đã lâu, có thể đã đổi" → chip trung tính kit "tin cũ · N tuần trước" (`kitChip(text,"n")`); không còn "có thể".
+- Kẻ rình: `kitChip(text,"r")` (chip đỏ cảnh báo, không có ✗).
+- "Nơi ngươi hay đến" vào cột phải của thẻ (trong khung), trước nhóm tab; "Thói quen" của người khác cùng chỗ. Đo: trong `.pc`, trong viền, 6/6 cỡ.
+- Thử (dữ liệu giả lập API j95, như người kiểm): 755x1000@2, 1180x820@2, 1366x1024@2, 412x1058@2, 390x844@3, 1024x768@2: 0 lỗi trang, 0 tràn ngang,
+  dấu hai bóng người có. Ảnh: dev/shots/kit2b/j95-{theohau,thoiquen,noihayden,banDo}-{755x1000,1180x820}.jpg.
+- Các mảnh j95 là thành phần kit cắm vào thẻ / sân khấu đang có (không bố cục riêng), hợp với bản dựng lại HUD/sân khấu/thẻ người của review/fold-layout.
