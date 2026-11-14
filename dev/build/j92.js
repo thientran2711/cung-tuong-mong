@@ -14,3 +14,9 @@ window.KIT_VEIL={src:"img/veil.png",por:"img/veil-por.png",fig:"img/veil-fig.png
  style:function(file){const r=this.rect(file);if(!r)return "";return `left:${r[0]}%;top:${r[1]}%;width:${r[2]}%;height:${r[3]}%;transform:rotate(${r[4]}deg);transform-origin:${this.origin}`},
  load:function(){if(this.fit||this._ld)return;this._ld=1;try{fetch(this.fitUrl).then(r=>r.ok?r.json():null).then(j=>{if(j)KIT_VEIL.fit=j}).catch(()=>{})}catch(e){}}};
 try{KIT_VEIL.load()}catch(e){}
+/* ---- KIT_SCAR: hủy dung mark on the portrait frame (the veil alone does not tell whether a face is scarred) ----
+   img/kit/scar-1|2|3.webp (160x160, transparent): cracked white-jade plum medallion, nhẹ / vừa / nặng (j70 SCAR70 sev 1..3).
+   Shown only when the player KNOWS (true information): herself, or j70's knows(p) as on the scar chip.
+   Suggested place: top-left corner inside the 3:4 opening, ~16% of the opening wide (canvas %: left 16.2, top 21.1, width 15.3). */
+window.KIT_SCAR={src:s=>`img/kit/scar-${Math.max(1,Math.min(3,s|0))}.webp`,names:["","nhẹ","vừa","nặng"],pos:{left:16.2,top:21.1,width:15.3},
+ of:function(p){try{if(!p||!p.scar)return null;const known=(typeof S!=="undefined"&&p===S)||(typeof knows==="function"&&knows(p));if(!known)return null;const sev=p.scar.sev|0;return{sev,src:this.src(sev),label:`Hủy dung (${this.names[sev]||""})`}}catch(e){return null}}};
