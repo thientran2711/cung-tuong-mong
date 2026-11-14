@@ -795,14 +795,17 @@ Tested 755x1000@2, 1180x820@2, 1366x1024@2, 412x1058@2, 390x844@3, 1024x768@2 (d
 ## 31. KIT FOR j95 SCHEDULES (`dev/build/jk95.js`, loaded after jk2b; every part guarded by typeof — runs with or without j95)
 Every piece slots into the person card / stage that exists (no private layout); data comes from j95 only.
 - Person card "Thói quen" (`kitHabitsHTML(p)` from `habitsKnown(p)`): a `.kpsec` in the card's facts column (`.pcr > .kpfacts`), kit rows:
-  buổi | place · source (Chính ngươi thấy / Tai mắt kể / Nghe nói, N lần); a stale entry adds the neutral chip "tin cũ · N tuần trước"
-  (`kitChip(text,"n")`). Never "có thể". Nothing shown when nothing is known.
+  buổi | place · source (Chính ngươi thấy / Tai mắt kể / Nghe nói, N lần); a stale entry adds the short neutral chip "cũ N tuần"
+  (`kitChip(text,"n")`, no wrap inside the chip, on the same line). Never "có thể". Nothing shown when nothing is known.
 - Her own card "Nơi ngươi hay đến" (`kitHabitsMineHTML()` from `j95habitsMine()`): same `.kpsec` in HER card's facts column (inside the frame):
   buổi | place + red warning chip "N kẻ đang rình chỗ này" (`kitChip(text,"r")`, no ✗: ✗ is only the "Cần" condition chip) or "chưa thấy ai rình",
-  + one `.kpnote` advice line. j95 decides what she knows (entries with `told:false` are hidden).
+  + one `.kpnote` advice line ("Đi đâu thành lệ thì kẻ thù dễ đón đường…"). j95 decides what she knows (entries with `told:false` are hidden).
 - Map secret meeting (`j95mapSigns()`): a small dark badge with TWO grey silhouettes at the place's top-right corner, tooltip = j95's sentence.
   Hữu duyên rule: never a face, never a name.
-- Map crowd (`silChip(n)`, countAt counts followers too): ONE chip per place = up to 3 silhouettes + the number; 6+ adds "đông", 12+ "rất đông".
+- Map head count in ONE place only (`kitMapCount` on mapHTML): the silhouette chip (`.msil`, up to 3 silhouettes) reads "N bóng người";
+  the place label (`.mmeta`) keeps only the walk ("3 khắc") or why the place is closed — never the count a second time.
+- Kit row tables (`kitRows` → `.kpkb`, every table in the game): label and value sit on one text baseline (`align-items:baseline`), with or
+  without a chip in the row.
 - Stage followers: the scene name tag (`j59tagHTML`, used by the figure strip, the compact name chips and her own tag) gets a small second line
   "N người theo hầu" (`j95followers(p)`); inline in the compact chip mode.
 

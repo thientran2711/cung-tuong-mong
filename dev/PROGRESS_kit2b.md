@@ -44,3 +44,12 @@ KIT READY (bản sạch): một hàm khung pcPort + KIT_CREST (28.0), thẻ ngư
 - Thử (dữ liệu giả lập API j95, như người kiểm): 755x1000@2, 1180x820@2, 1366x1024@2, 412x1058@2, 390x844@3, 1024x768@2: 0 lỗi trang, 0 tràn ngang,
   dấu hai bóng người có. Ảnh: dev/shots/kit2b/j95-{theohau,thoiquen,noihayden,banDo}-{755x1000,1180x820}.jpg.
 - Các mảnh j95 là thành phần kit cắm vào thẻ / sân khấu đang có (không bố cục riêng), hợp với bản dựng lại HUD/sân khấu/thẻ người của review/fold-layout.
+
+## review/kit-j95 lần 3: sửa theo kiểm duyệt FAIL 4df2286 (thợ j95)
+- Bản đồ đếm người một chỗ: `kitMapCount` (bọc mapHTML, ngoài cùng) bỏ "N bóng" khỏi nhãn nơi (`.mmeta` chỉ còn "3 khắc" / lý do đóng), chip bóng người
+  đọc "N bóng người" (bỏ "đông / rất đông"). Đo 6 cỡ, Thanh minh + countAt giả lập 7/14: 0 nơi có chữ "bóng" hai lần.
+- Bảng kit `.kpkb` (mọi bảng kitRows, sửa trong j79 — kit): `align-items:baseline`, nhãn bỏ padding-top → hàng có chip và không chip cùng đường chân chữ
+  (đo bằng mốc 0px ở đầu nhãn và đầu giá trị: lệch 0.0 px ở mọi hàng, 6 cỡ).
+- Chip tin cũ ngắn "cũ N tuần", không xuống dòng trong chip; ở 1180 nằm cùng hàng.
+- "Đi đâu quen một giờ…" → "Đi đâu thành lệ thì kẻ thù dễ đón đường…".
+- 6 cỡ: 0 lỗi trang, 0 tràn ngang. Ảnh mới: dev/shots/kit2b/j95-*.jpg.

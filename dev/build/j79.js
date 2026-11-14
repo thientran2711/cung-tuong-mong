@@ -267,7 +267,7 @@ if(typeof chanceLvl==="function"){chanceLvl=function(n){return n<=0?"Không có"
 .kintel{display:flex;flex-direction:column}.kint{display:grid;grid-template-columns:34px minmax(0,1fr);gap:8px;padding:5px 0;border-bottom:1px dotted var(--k-hair)}.kint>.md{width:34px!important;height:34px!important;margin:0!important}
 .kisrc{display:block;color:var(--dim);font-size:.72rem}
 /* rows inside panels: same grid as the act card */
-.kpkb{font-size:.84rem}.kpkb .krl{padding-top:.18rem}
+.kpkb{font-size:.84rem;align-items:baseline}.kpkb .krl{padding-top:0}/* every kit row table: label and value share the text baseline, with or without a chip in the row */
 /* tiers */
 .ktiers{display:flex;flex-direction:column;gap:4px}
 .ktier{display:grid;grid-template-columns:5.2rem minmax(0,1fr) auto;gap:8px;align-items:center;padding:5px 8px;border:1px solid var(--k-hair);border-radius:var(--k-rad);background:linear-gradient(90deg,rgba(194,59,34,calc(var(--lv)*.16)),transparent 70%),var(--k-card)}
