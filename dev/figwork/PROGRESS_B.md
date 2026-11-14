@@ -20,6 +20,7 @@
   (lineups + a strip of the 48yo heads); rejected gens are re-run and the new line appended to gens.txt (last entry wins).
 - B_b6: c09 m0–m4, c10 m0–m2 (48 lineups total).
 - B_b7: c10 m3–m4, c11 m0–m4, c12 m0 (56 lineups total).
+- B_b8: c12 m1–m4, c13 m0–m3 (64 lineups total).
 
 ## NEXT (exact)
 - c09–c32 × m0..m4 (120 lineups), in order B-c09-m0 B-c09-m1 ... (8 per batch → sheets B_b6.jpg ...).
