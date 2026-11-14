@@ -64,7 +64,7 @@ function kitFloorFit(){try{const st=$("stage"),im=$("scimg");if(!st||!im)return;
  const ph=/-p$/.test(name);const scene=name.replace(/-p$/,"").replace(/-(xuan|ha|thu|dong)(-(sang|trua|chieu|toi))?$/,"");const A=(ph&&KIT_FANCHOR[scene+"-p"])||KIT_FANCHOR[scene]||KIT_FANCHOR._default;
  const dw=S0.w*s;let x0=(W-dw)/2,px=50;if(dw>W+1){const gl=parseFloat(st.style.getPropertyValue("--kgl"))||0,gr=parseFloat(st.style.getPropertyValue("--kgr"))||0;
   const cx=(gl+(W-gr))/2;x0=Math.max(W-dw,Math.min(0,cx-A.x*dw));px=(x0/(W-dw))*100}
- im.style.backgroundPosition=`${px.toFixed(1)}% ${py.toFixed(1)}%`;
+ im.style.backgroundPosition=`${px.toFixed(1)}% ${py.toFixed(1)}%`;window.KIT_PXBG={x0,y0,dw,dh};
  const ftA=KIT_FLOOR[scene]!=null?KIT_FLOOR[scene]:ft;const fs=A.feet!=null?A.feet:ftA+.9*(1-ftA);let feet=Math.min(H*.97,y0+fs*dh);
  const old=st.__kfa;st.__kfa={feet:Math.round(feet),ax:Math.round(x0+A.x*dw),scene};
  if(!old||old.feet!==st.__kfa.feet||old.ax!==st.__kfa.ax){clearTimeout(st.__kfaT);st.__kfaT=setTimeout(()=>{try{window.j59lay&&window.j59lay()}catch(e){}},0)}const kfb=Math.max(H*.03,24,H-feet);st.style.setProperty("--kfb",kfb.toFixed(0)+"px");st.style.setProperty("--kfh",Math.max(H*.45,H-kfb-H*.03).toFixed(0)+"px");st.dataset.kfloor=name}catch(e){}}
