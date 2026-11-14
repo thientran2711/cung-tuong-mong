@@ -1,0 +1,5 @@
+import json,sys
+J=json.load(open('jobs.json'))
+for k in sys.argv[1:]:
+    p=J[k]['prompt'].replace(' drawn four times, drawn in one row',' drawn four times in one row').replace('Plain light parchment background, nothing else, no text, no labels. Soft even light. Refined Chinese court illustration, gufeng watercolour style, soft ink lines, delicate washes, warm palette. Every figure: fair porcelain skin, slim and elegant, serene gentle neutral expression, soft calm eyes, lips closed, face clearly visible, clearly adult.','[T]')
+    print(k,J[k]['ref'],'|',p.split('Left to right')[0][-120:] if False else p.replace("Age lineup of the SAME woman as in the reference image (keep her exact face and features: ","[H:").replace("), an imperial consort, drawn four times in one row as complete full-body standing figures, evenly spaced with clear empty space between them, each from top of head to feet with margin, three-quarter view. Left to right: (1) about 22, youthful adult; (2) about 30, mature and poised; (3) about 42, dignified, subtle fine lines at the eyes; (4) about 55, graceful older lady with gentle lines and some silver in her hair.","]"))
