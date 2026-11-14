@@ -22,9 +22,12 @@
 - B_b7: c10 m3–m4, c11 m0–m4, c12 m0 (56 lineups total).
 - B_b8: c12 m1–m4, c13 m0–m3 (64 lineups total).
 - B_b9: c13 m4, c14 m0–m4, c15 m0–m1 (72 lineups total). From c17 the 48yo hair line also says "almost as dark as at 32".
+- B_b10: c15 m2–m4, c16 m0–m4 → c01–c16 COMPLETE (80 lineups, 320 figures). Known soft spot: some ~48 figures
+  (c12-m4, c14-m2/m3/m4, c15-m2/m3, c16-m3) still show more silver at the temples than "two or three strands"; one retry
+  (c12-m4) did not fix it, so they were kept.
 
 ## NEXT (exact)
-- c09–c32 × m0..m4 (120 lineups), in order B-c09-m0 B-c09-m1 ... (8 per batch → sheets B_b6.jpg ...).
+- c17–c32 × m0..m4 (80 lineups), in order B-c17-m0 B-c17-m1 ... (8 per batch → sheets B_b11.jpg ...).
 - Per batch: `python3 bv.py JID...` (compact variable parts; full prompt = `python3 mjobs.py JID`) → images_generate (gpt-2-6, 2:1, 4k,
   quality high, refs [style STY, image idfix N-cNN-t1] as printed, folder ba4aecfe-...) → append "jid gen" to gens.txt → creations_wait
   (last gen is enough before bg) → images_remove_background ×8 → `bash addbg.sh "jids" "bgs"` → creations_wait on the 8 bg ids (urls.py needs
