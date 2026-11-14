@@ -4,6 +4,7 @@ import json,sys,os
 H=os.path.dirname(os.path.abspath(__file__))
 exec(open(H+"/poses.py").read())
 exec(open(H+"/calm.py").read())  # OWNER REVERSAL: calm standing pose_for overrides the motion one
+exec(open(H+"/hands.py").read())  # OWNER: lively hands, different object per age
 STY=["8aNsy0CIrU","3zbtQNvREY","YMLuxraWeC","4RuXEXL9Aa"]
 MREF=json.load(open(H+"/mref.json"))
 PRE=("Semi-realistic painterly guofeng portrait style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference portraits; full-body standing figure head to feet, centered, plain light parchment background, soft even light; fair porcelain skin; serene gentle neutral expression, soft eyes, closed lips or faint smile; elegant, slim, clearly adult; beautiful/handsome romantic-lead looks for everyone; face clearly visible, 3/4 or frontal view.")

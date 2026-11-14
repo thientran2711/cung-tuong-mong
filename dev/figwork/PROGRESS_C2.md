@@ -19,3 +19,4 @@
 - Vẽ lại dáng yên t1 m27–m34 (8 lineup, đè file cũ). Tín dụng 2184.
 - Vẽ lại dáng yên t1 m35–m43 (trừ m38 đã xong), 8 lineup; por mới 384x506 bằng porcrop.py, cutcheck sạch. Tín dụng 2184.
 - Vẽ lại dáng yên t1 m44–m51 (8 lineup). Tín dụng 2184.
+- t1 m52 dáng yên → t1 m27–m52 XONG (dáng yên). t2 m27–m33 (dáng yên, hoa điền 8 nấc nấc 2) — m27–m32 đè bản động cũ. Tín dụng 2184.
