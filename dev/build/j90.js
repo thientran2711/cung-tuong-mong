@@ -114,7 +114,7 @@ function kpodFromItem(m){if(!m||typeof m.h!=="string"||!/class="(ktlist|h54list)
 (function(){const st=document.createElement("style");st.id="kit90";st.textContent=`
 #kpodov{position:fixed;inset:0;z-index:9000;display:flex;align-items:stretch;justify-content:center;background:#2a1a12b8}
 .kpod{position:relative;width:100%;max-width:1100px;height:100%;display:grid;grid-template-rows:auto minmax(0,1fr) auto;overflow:hidden;
- background:linear-gradient(#fffaf022,#f5ecdc55 70%,#f5ecdcd0),url(img/kit/podium-bg.webp) center top/cover no-repeat,var(--bg);box-shadow:0 0 0 1px #c9a46a,0 14px 40px #2a1a1270;
+ box-shadow:0 0 0 1px #c9a46a,0 14px 40px #2a1a1270;
  padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom);user-select:none;-webkit-user-select:none;cursor:pointer}
 .kpod-hd{display:flex;justify-content:center;padding:12px 12px 0}.kpod-hd .kph{display:inline-flex;align-items:center;gap:10px;max-width:100%;padding:8px 16px;border:1px solid var(--line);border-radius:var(--k-rad);
  background:linear-gradient(#f6ead6ee,#fffaf0f2),url(img/kit/bg-default.webp) center/240px repeat;box-shadow:0 2px 10px #5a3a2030}
