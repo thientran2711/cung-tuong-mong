@@ -58,6 +58,8 @@ elif c=="paste":
         elif os.environ.get("MODE")=="hair":
             cv2.ellipse(mk,(int(fx+w/2),int(fy+h*0.25)),(int(w*1.15),int(h*1.05)),0,0,360,1,-1)
             cv2.ellipse(mk,(int(fx+w/2),int(fy+h*0.62)),(int(w*0.52),int(h*0.60)),0,0,360,0,-1)
+        elif os.environ.get("MODE")=="fh8":
+            cv2.ellipse(mk,(int(fx+w/2),int(fy+h*0.10)),(int(w*0.42),int(h*0.46)),0,0,360,1,-1)
         elif os.environ.get("MODE")=="fh":
             cv2.ellipse(mk,(int(fx+w/2),int(fy+h*0.02)),(int(w*0.30),int(h*0.42)),0,0,360,1,-1)
         else: cv2.ellipse(mk,(int(fx+w/2),int(fy+h*0.70)),(int(w*0.58),int(h*0.44)),0,0,360,1,-1)
