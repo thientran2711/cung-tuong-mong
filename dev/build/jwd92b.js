@@ -19,7 +19,8 @@
 Object.assign(WD,{vpCdA:24,vpCdT:12,frCdA:72,frCdT:36});
 (function(){const cd=(o,k,n)=>o&&o[k]!=null&&wk()-o[k]<n;
  const V=ACT.vp,v0=V.ok,vf=V.f;V.ok=function(a,t){if(cd(a,"vpA92",WD.vpCdA)||cd(t,"vpT92",WD.vpCdT))return false;return v0.apply(this,arguments)};
- V.f=function(a,t){try{a.vpA92=wk();t.vpT92=wk()}catch(e){}return vf.apply(this,arguments)};
+ V.f=function(a,t){if(cd(a,"vpA92",WD.vpCdA)||cd(t,"vpT92",WD.vpCdT))return "";return vf.apply(this,arguments)};
  const G=ACT.giahoa,g0=G.ok,gf=G.f;G.ok=function(a,t){if(cd(a,"frA92",WD.frCdA)||cd(t,"frT92",WD.frCdT))return false;return g0.apply(this,arguments)};
- G.f=function(a,t){try{a.frA92=wk();t.frT92=wk()}catch(e){}return gf.apply(this,arguments)};
- const w0=wdFrame;wdFrame=function(a,t){try{a.frA92=wk();t.frT92=wk()}catch(e){}return w0.apply(this,arguments)}})();
+ G.f=function(a,t){if(cd(a,"frA92",WD.frCdA)||cd(t,"frT92",WD.frCdT))return "";return gf.apply(this,arguments)};
+ const w0=wdFrame;wdFrame=function(a,t){if(a!==S&&(cd(a,"frA92",WD.frCdA)||cd(t,"frT92",WD.frCdT)))return "";try{a.frA92=wk();t.frT92=wk()}catch(e){}return w0.apply(this,arguments)};
+ const a0=wdAccuse;wdAccuse=function(a,t){if(a!==S&&(cd(a,"vpA92",WD.vpCdA)||cd(t,"vpT92",WD.vpCdT)))return "";try{a.vpA92=wk();t.vpT92=wk()}catch(e){}return a0.apply(this,arguments)}})();

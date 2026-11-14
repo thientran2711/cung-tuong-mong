@@ -27,3 +27,5 @@ Object.assign(BAL,{accTire:10});
    the Emperor's satiety with one favourite (j75 FAIRN.sat/satO). Same for every consort. */
 try{Object.assign(J70CFG,{mot:3,prep:10})}catch(e){}
 try{Object.assign(FAIRN,{sat:.2,satO:8})}catch(e){}
+/* 8 bottom tabs (owner's choice): j72's "Việc nhờ" tab (data-tab q72) is a sub-tab of Mệnh truyện, not a 9th tab */
+try{if(typeof KG==="object"&&KG.mt&&!KG.mt.keys.includes("q72"))KG.mt.keys.splice(1,0,"q72");if(typeof kgBar==="function")kgBar()}catch(e){}
