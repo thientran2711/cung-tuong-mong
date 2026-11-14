@@ -36,3 +36,13 @@ Ngày 2026-11-14. Soi mẫu rộng 80 por (48 ngẫu nhiên + 32 a51 phi tần m
 
 ## Việc cho thợ
 1) Trả 200 tệp bậc thường maid-mNN-aXX về blob main; 2) vá c17-tm0-a51 (fig + por), làm mịn c30-tm3-a51; 3) báo lại — phần còn lại đạt.
+
+---
+
+# Kiểm lại lần 3: review/maid-art-b @ 9540f3a6 — PASS
+
+- 200 tệp bậc thường fig/por-maid-mNN-aXX: diff với origin/main RỖNG.
+- Thử gộp vào origin/main hiện tại (1eeacf58, đã có phần A), cục bộ không đẩy: chỉ xung đột dev/review/LOG.md (ghép hai bên);
+  lượt gộp chỉ THÊM 1374 tệp (ảnh consort-cNN-tm*, công cụ/sheet phần B) + đổi img/FIGURES.json; không đụng tệp phần A hay tệp nào khác của main.
+- img/FIGURES.json sau gộp: 1296 mục, 656 mục của main giữ nguyên y hệt, không trùng, đủ tệp. FIGURES-servants.json không đổi (1072).
+- c17-tm0-a51 hết chấm sẫm má trái; c30-tm3-a51 da mịn, hết đốm (dev/shots/review/maid-art-b/fixB.jpg). Tranh còn lại đã đạt ở lần trước (a51 ~48, không hoa điền, tách nền sạch).
