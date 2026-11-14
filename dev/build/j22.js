@@ -21,17 +21,17 @@ function affairExposed(m,how){/* full weight: the man dies; she faces death (fir
  A.push({n:"Chào hỏi đúng lễ",o:100,w:{danh:1},x:"hắn thiện cảm +5",go:()=>{m.af+=5}});
  A.push({n:"Liếc mắt đưa tình",o:od(55+S.sac/5),x:`tình ý của hắn +12 · có người thấy: ${word(100-Math.round(risk/3))} giữ kín`,l:{},go:()=>{m.tinh+=12+(m.trait==="đa tình"?6:0);if(roll(risk/3)){const v=pick(liveRivals(true));if(v){evA(v,S,1);log(`Có kẻ thấy ngươi liếc mắt với ${m.name}.`)}}}});
  if(m.tinh>=30)A.push({n:"Trao khăn tay",o:od(60+S.tamco/5),x:`hắn giữ khăn tay của ngươi (là tang vật nếu bị lục) · tình ý +15`,go:()=>{m.tinh+=15;m.letters++;S.aff=S.aff||{};S.aff[m.id]=(S.aff[m.id]||0)+1}});
- if(m.tinh>=50){const w=watcher();A.push({n:"Hẹn gặp riêng",o:w?cl(100-risk,5,95):0,lock:!w,t:"cần một người hầu trung thành (lòng 60+) canh cửa",act:1,x:`đêm ấy kín đáo: Sức +12, hắn thành người che chở · có thể mang thai · hỏng: bị bắt gặp, tội chết`,run:()=>tryst(m,risk)})}
+ if(m.tinh>=50){const w=watcher();A.push({n:"Hẹn gặp riêng",o:w?cl(100-risk,5,95):0,lock:!w,t:"cần một người hầu trung thành (lòng 60+) canh cửa",act:1,x:`đêm ấy kín đáo: Sức +12, hắn thành người che chở · có thai: ${word(conceiveCh(S))} · hỏng: bị bắt gặp, tội chết`,run:()=>tryst(m,risk)})}
  if(m.tinh>=30)A.push({n:"Cắt đứt",o:100,x:"hắn thôi tơ tưởng; giảm hẳn rủi ro",go:()=>{m.tinh=0}});
  return A}})();
 function tryst(m,risk){if(roll(risk)){affairExposed(m,`Đêm ${S.name} hẹn ${m.name} bị bắt gặp.`);return "Bị bắt gặp."}
- m.trysts++;m.tinh+=10;S.lastTryst=wk();apply({suc:12});S.protector=m.id;S.an=S.an||0;let r=`Đêm ấy trôi qua kín đáo. Sức +12. ${m.name} nguyện che chở ngươi. Có thể biết chuyện: ${whoMayKnow()}.`;
+ m.trysts++;m.tinh+=10;S.lastTryst=wk();apply({suc:12});S.protector=m.id;S.an=S.an||0;let r=`Đêm ấy trôi qua kín đáo. Sức +12. ${m.name} nguyện che chở ngươi. Người dễ biết chuyện: ${whoMayKnow()}.`;
  if(!S.preg&&roll(15)){S.preg=1;S.hidden=true;S.pregWk=wk();S.trueFather=m.id;const ok=(S.nightLog||[]).some(w=>Math.abs(w-wk())<=1);S.pregMismatch=!ok;r+=ok?" Mấy hôm sau ngươi biết mình có thai; ngày tháng trùng đêm thị tẩm.":` <b class="r">Ngươi có thai, mà sổ Kính sự phòng không có đêm thị tẩm nào khớp ngày.</b>`}
  return r}
 /* pregnancy that the book cannot cover: her roads, each with its odds and cost */
 (function(){const d0=deal;deal=function(){d0.apply(this,arguments);if(!S||!S.preg||!S.pregMismatch||S.out)return;
  deck.unshift({n:"Hối lộ Kính sự phòng sửa sổ",t:"Nhờ Tổng quản ghi thêm một đêm thị tẩm cho khớp ngày.",c:{bac:-80},o:od(55+((S.court&&S.court.ksp&&S.court.ksp.af.me)||0)/2),w:{},l:{danh:-5},x:"sổ khớp ngày, hết bị nghi · hỏng: Tổng quản biết chuyện của ngươi",dom:"Mưu kế",go:()=>{S.pregMismatch=false},fail:()=>{S.ksKnows=1}});
- deck.unshift({n:"Uống thuốc phá thai",t:"Bài thuốc mạnh, có thể hại thân.",c:{bac:-30},o:od(70+S.arts.y*5),w:{},l:{suc:-30},x:"mất đứa bé, Sức -20; hỏng: băng huyết, Sức -30, có thể chết",dom:"Sức khỏe",go:()=>{S.preg=0;S.hidden=false;S.pregMismatch=false;S.trueFather=null;apply({suc:-20})},fail:()=>{S.preg=0;S.hidden=false;S.pregMismatch=false;S.trueFather=null;if(roll(25))die("Uống thuốc phá thai, băng huyết mà chết")}});
+ deck.unshift({n:"Uống thuốc phá thai",t:"Bài thuốc mạnh, hại thân.",c:{bac:-30},o:od(70+S.arts.y*5),w:{},l:{suc:-30},x:`mất đứa bé, Sức -20; hỏng: băng huyết, Sức -30 · kèm khi hỏng: băng huyết mà chết: ${word(25)}`,dom:"Sức khỏe",go:()=>{S.preg=0;S.hidden=false;S.pregMismatch=false;S.trueFather=null;apply({suc:-20})},fail:()=>{S.preg=0;S.hidden=false;S.pregMismatch=false;S.trueFather=null;if(roll(25))die("Uống thuốc phá thai, băng huyết mà chết")}});
  deck.unshift({n:"Thú tội với Hoàng thượng",t:"Quỳ trước Dưỡng Hòa điện, nhận hết tội.",c:{},o:100,w:{},x:"giữ được mạng (vào lãnh cung), hắn bị xử trảm",dom:"Sủng",go:()=>{const m=manById(S.trueFather);if(m){m.alive=false;log(`${m.name} bị xử trảm.`)}S.pregMismatch=false;cold("Thú tội tư thông")}})}})();
 /* each month: the book may be checked; rivals carry on affairs too and can be found out */
 function affairMonth(){if(!S||!S.men)return"";let ev="";
@@ -46,7 +46,7 @@ function affairMonth(){if(!S||!S.men)return"";let ev="";
 /* the man's dossier: only known facts */
 function manCard(m){const f=pMan(m);const known=m.seen===bkey();
  const lines=[tuoi(m.age),`Ngươi với hắn: <span class="ef ${m.af>10?"g":"n"}">${affW(m.af)} · ${m.af}</span>`,m.tinh>=10||m.letters?`Hắn với ngươi: <span class="ef ${m.tinh>=50?"r":"g"}">${tinhW(m.tinh)}</span>`:`Hắn với ngươi: <span class="ef n">chưa rõ</span>`,known?`Thấy ở ${placeName(S.menW[m.id]||"")} (buổi này)`:"Nơi ở: không rõ"];
- const tt=[m.letters?`${m.letters} lần trao khăn, thư (tang vật nếu bị lục)`:"",m.trysts?`${m.trysts} lần hẹn riêng · có thể biết: ${whoMayKnow()}`:"",S.trueFather===m.id&&S.preg?"Cha thật của đứa bé trong bụng ngươi":""].filter(Boolean);
+ const tt=[m.letters?`${m.letters} lần trao khăn, thư (tang vật nếu bị lục)`:"",m.trysts?`${m.trysts} lần hẹn riêng · người dễ biết chuyện: ${whoMayKnow()}`:"",S.trueFather===m.id&&S.preg?"Cha thật của đứa bé trong bụng ngươi":""].filter(Boolean);
  return pcard({f,col:"#6a8aa0",name:m.name,rank:`${m.role} · ${m.trait}`,lines,chips:[m.trysts?chip("Tư tình","hot"):""],note:tt.length?`<b>Tư tình</b> (chỉ ngươi biết): ${tt.join(" · ")}`:"Gặp hắn ở nơi hắn hay lui tới để trò chuyện.",groups:[["Gặp mặt",[known&&S.place!==S.menW[m.id]?pbtn(`data-go="${S.menW[m.id]}"`,"Đến chỗ hắn",`Chắc chắn · tốn: ${travel(S.place,S.menW[m.id])} khắc`,!can(travel(S.place,S.menW[m.id])+1)?"đến nơi sẽ hết khắc":""):""]]],empty:"Hắn hay ở: "+m.haunts.map(placeName).join(", ")+"."})}
 /* the dossier tab lists the men after the consorts */
 (function(){const r0=rvTabHTML;rvTabHTML=function(){menInit();const M=(S.men||[]).filter(m=>m.alive);if(!M.length)return r0();const n=rivals.length;
