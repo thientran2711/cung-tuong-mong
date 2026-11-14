@@ -5220,6 +5220,9 @@ document.addEventListener("click",e=>{const v=e.target.closest("[data-tdv]");if(
 window.tdForceSo=function(k){const T=trS();if(k==="praise"&&!T.praise)T.praise="Đại tướng quân";const r=tdSoMonth(k||true);if(r)log(r);try{render()}catch(e){}return r};
 /* j54's hòa thân choices now name their real border effect */
 (function(){for(const id of ["foreignwed","h54hoa","h54ban"]){const f0=PEND[id];if(typeof f0!=="function")continue;PEND[id]=function(){const d=f0.apply(this,arguments);try{if(d&&d.o)d.o.forEach(c=>{if((/h54Hoa/.test(String(c.go||""))||/hòa thân/i.test(c.n||""))&&!/Biên cương/.test(c.x||"")){const add="con sang Bắc Địch thì Biên cương +20, ba năm ít giặc";const x=String(c.x||"");const i=/ · hỏng:/.test(x)?-1:x.search(/ · kèm:/);c.x=!x?add:i>=0?x.slice(0,i)+" · "+add+x.slice(i):x+" · "+add}})}catch(e){}return d}}})();
+/* j62: kid card shows age once (in the header "Hoàng tử · 11 tuổi"); the adult age band (18–25…) is shown only for adults (owner 11/14) */
+(function(){const t0=tuoi;tuoi=function(n){return n>=18?t0(n):(n>0?`Tuổi <b>${n}</b>`:"")};
+ const k0=kidCard;kidCard=function(k){const t1=tuoi;tuoi=()=>"";try{return k0.apply(this,arguments)}finally{tuoi=t1}}})();
 
 </script>
 
