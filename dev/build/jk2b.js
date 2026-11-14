@@ -370,3 +370,77 @@ function kitEvArt(m){try{if(!m||typeof evArtOf!=="function")return null;let src=
 #rtoast.kevres>.kpevr .pcp.kit.kartf{width:100%!important;height:100%!important}
 @media (max-width:599px){#rtoast.kevres{grid-template-columns:64px minmax(0,1fr)}#rtoast.kevres>.kpevr{width:64px;height:95px}}
 `;document.head.appendChild(st)})();
+
+/* ---------- 13. IDENTITY CARD (owner 11/14 item 6): the origin picture is no longer the backdrop; it sits in an art frame like the event art
+   (landscape: frame left, facts right; portrait / Fold: frame on top, facts below). The whole screen wears ONE shared reincarnation
+   background, img/bg-reborn-p.webp (portrait) / bg-reborn-l.webp (landscape), gpt-2-6, no people. Her full-body figure still stands on it. ---------- */
+function kitRebornBg(){try{const M=$("modal");if(!M||!M.dataset.obg)return;const land=innerWidth>innerHeight;const grad="linear-gradient(rgba(40,20,12,.10),rgba(40,20,12,.04) 40%,rgba(40,20,12,.18))";
+ M.style.setProperty("background",`${grad},url(img/bg-reborn-${land?"l":"p"}.webp) center/cover no-repeat,#e9dcc8`,"important");M.dataset.kreborn="1"}catch(e){}}
+(function(){const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);try{kitRebornBg()}catch(e){}return r}})();
+addEventListener("resize",()=>{clearTimeout(window.__krbT);window.__krbT=setTimeout(kitRebornBg,120)});
+try{const M0=$("modal");if(M0)new MutationObserver(()=>{if(M0.dataset.obg&&!/bg-reborn/.test(M0.style.background||""))kitRebornBg()}).observe(M0,{attributes:true,attributeFilter:["style","data-obg"]})}catch(e){}
+function kitOriginArt(k){return `img/bg-origin-${k}.webp`}
+(function(){if(typeof kpIdentity!=="function")return;const k0=kpIdentity;kpIdentity=function(M,m){const r=k0.apply(this,arguments);try{const id=$("mb").querySelector(".kpid");const o=S&&S.origin;if(id&&o&&!id.querySelector(":scope > .kpidart")){
+  const d=document.createElement("div");d.className="kpidart";d.innerHTML=kitArtFrame(kitOriginArt(o.k),o.n,"kidart");id.prepend(d)}}catch(e){console.error("kpidart",e)}return r}})();
+(function(){const st=document.createElement("style");st.id="k2b-identity";st.textContent=`
+.dlg.kpsc .kpb.kpid{display:grid!important;grid-template-columns:clamp(110px,30%,160px) minmax(0,1fr)!important;gap:12px!important;align-items:start}
+.dlg.kpsc .kpb.kpid>.kpsubj{display:none!important}
+.dlg.kpsc .kpid>.kpidart{width:100%;aspect-ratio:150/226;position:relative}
+.dlg.kpsc .kpid>.kpidart .pcp.kit.kartf{width:100%!important;height:100%!important}
+.dlg.kpsc .kpid>.kpidart img{object-fit:cover}
+@media (orientation:portrait){
+ .dlg.kpsc .kpb.kpid{grid-template-columns:1fr!important;gap:8px!important}
+ .dlg.kpsc .kpid>.kpidart{width:auto;height:clamp(120px,17dvh,180px);aspect-ratio:150/226;justify-self:center}
+}
+`;document.head.appendChild(st)})();
+
+/* ---------- 14. kitRoulette (owner 11/14 item 6b): the origin wheel, card-game style, at a new game AND at rebirth after death.
+   The origin is already rolled (j52 seed + j69 weights); the wheel only shows it. On the shared reincarnation background: a grid of origin tiles
+   (origin picture in the kit art frame, name, honest rarity chip); a light runs tile to tile "tạch tạch", fast then slower (ease-out), with a
+   soft tick (sfx-tap) when sound is on, and stops on the rolled origin, which flashes with a gold ring; that tile grows and flies to the
+   identity card's art frame while the card slides in (landscape: from the right; portrait: from below). ~4.5 s; tap anywhere skips;
+   prefers-reduced-motion shows the card at once. API: kitRoulette({items:[{k,src,name,rare}], target:k, toEl:()=>element, done:fn}). ---------- */
+const KIT_OW=(typeof OW69!=="undefined")?OW69:{nc:6,thd:9,cn:13,dtq:17,muoi:17,ch:13,td:9,tt:8,cnv:8};
+function kitRare(k){try{if(typeof ow69Rare==="function")return ow69Rare(k)}catch(e){}const w=KIT_OW[k]||10;return w<=6?"Rất hiếm":w<=9?"Hiếm":"Thường gặp"}
+function kitRoulette(o){const done=()=>{try{o.done&&o.done()}catch(e){}};if(!o||!o.items||!o.items.length||matchMedia("(prefers-reduced-motion: reduce)").matches){done();return}
+ const old=$("kroul");if(old)old.remove();const ov=document.createElement("div");ov.id="kroul";ov.className="kroul";const land=innerWidth>innerHeight;
+ ov.innerHTML=`<div class="krbox"><div class="krhead"><b>Luân hồi</b><small>Thân phận kiếp này</small></div><div class="krgrid">${o.items.map(it=>`<div class="krt" data-k="${it.k}"><div class="kra">${kitArtFrame(it.src,"")}</div><span class="krn">${it.name}</span><span class="krr">${typeof kitChip==="function"?kitChip(it.rare,"n"):it.rare}</span></div>`).join("")}</div><div class="krskip">Chạm để bỏ qua</div></div>`;
+ ov.style.backgroundImage=`linear-gradient(rgba(40,20,12,.12),rgba(40,20,12,.22)),url(img/bg-reborn-${land?"l":"p"}.webp)`;document.body.appendChild(ov);
+ const tiles=[...ov.querySelectorAll(".krt")];const ti=Math.max(0,tiles.findIndex(t=>t.dataset.k===o.target));let fin=false,timers=[];const T=(f,ms)=>timers.push(setTimeout(f,ms));
+ const end=()=>{if(fin)return;fin=true;timers.forEach(clearTimeout);ov.classList.add("krout");setTimeout(()=>ov.remove(),360);done()};
+ ov.addEventListener("click",end);
+ const N=tiles.length*2+ti;let t=120;const sound=typeof sfx==="function";
+ for(let i=0;i<=N;i++){const idx=i%tiles.length;const x=i/N;T(()=>{tiles.forEach(e=>e.classList.remove("on"));tiles[idx].classList.add("on");if(sound&&i%1===0)try{sfx("sfx-tap")}catch(e){}},t);t+=45+330*Math.pow(x,2.4)}
+ T(()=>{tiles[ti].classList.add("win");ov.classList.add("krwin");try{sound&&sfx("sfx-promote")}catch(e){}},t+60);
+ const fly=()=>{if(fin)return;try{const src=tiles[ti].querySelector(".pcp");const to=o.toEl&&o.toEl();const a=src.getBoundingClientRect();const b=to?to.getBoundingClientRect():null;
+   const fl=src.cloneNode(true);fl.classList.add("krfly");fl.style.cssText=`position:fixed;left:${a.left}px;top:${a.top}px;width:${a.width}px;height:${a.height}px;z-index:2147483001;transition:transform .65s cubic-bezier(.2,.8,.2,1),opacity .2s .6s`;document.body.appendChild(fl);
+   ov.classList.add("krfade");const dlg=document.querySelector("#modal .dlg");if(dlg){dlg.classList.remove("krin");void dlg.offsetWidth;dlg.classList.add("krin",land?"krinL":"krinP")}
+   requestAnimationFrame(()=>{const s=b?Math.min(b.width/a.width,b.height/a.height):1.6;const dx=b?(b.left+b.width/2)-(a.left+a.width/2):0,dy=b?(b.top+b.height/2)-(a.top+a.height/2):0;fl.style.transform=`translate(${dx}px,${dy}px) scale(${s})`;fl.style.opacity="0"});
+   setTimeout(()=>fl.remove(),900)}catch(e){}};
+ /* test hook: window.__kroulHold freezes the wheel on the stopped tile until window.__kroulGo() */
+ const rest=()=>{T(fly,0);T(end,740)};T(()=>{if(window.__kroulHold){window.__kroulGo=()=>{window.__kroulGo=null;rest()};return}rest()},t+760)}
+(function(){if(typeof nlCard!=="function")return;const c0=nlCard;nlCard=function(){const r=c0.apply(this,arguments);try{const o=S&&S.origin;if(!o)return r;const key=(S.name||"")+"|"+o.k+"|"+(typeof NLP!=="undefined"&&NLP?NLP.seed:"");
+  if(window.__kroulKey===key)return r;window.__kroulKey=key;
+  const items=ORIGINS.filter(x=>KIT_OW[x.k]!=null||x.k===o.k).map(x=>({k:x.k,src:kitOriginArt(x.k),name:x.n,rare:kitRare(x.k)}));
+  kitRoulette({items,target:o.k,toEl:()=>document.querySelector("#modal .kpidart .pcp")||document.querySelector("#modal .kpidart")})}catch(e){console.error("kitRoulette",e)}return r}})();
+(function(){const st=document.createElement("style");st.id="k2b-roulette";st.textContent=`
+.kroul{position:fixed;inset:0;z-index:2147483000;display:flex;align-items:center;justify-content:center;background:#e9dcc8 center/cover no-repeat;transition:opacity .35s;cursor:pointer}
+.kroul.krfade .krt:not(.win),.kroul.krfade .krhead,.kroul.krfade .krskip{opacity:0;transition:opacity .4s}
+.kroul.krout{opacity:0}
+.kroul .krbox{display:flex;flex-direction:column;align-items:center;gap:10px;padding:14px;max-width:min(96vw,760px)}
+.kroul .krhead{display:flex;flex-direction:column;align-items:center;color:#5a2e12;text-shadow:0 1px 6px #fff8}
+.kroul .krhead b{font-family:var(--display);font-size:1.5rem;color:var(--gold)}.kroul .krhead small{font-size:.9rem}
+.kroul .krgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px 14px}
+@media (min-aspect-ratio:1/1){.kroul .krgrid{grid-template-columns:repeat(5,minmax(0,1fr))}}
+.kroul .krt{display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 6px 8px;border-radius:10px;background:rgba(255,250,240,.82);border:1px solid var(--k-hair,#e6d3ac);box-shadow:0 2px 8px #5a3a2022;transition:transform .12s,box-shadow .12s,background .12s;width:clamp(96px,min(26vw,17dvh),150px)}
+.kroul .krt .kra{width:100%;aspect-ratio:150/226;position:relative}.kroul .krt .kra .pcp.kit.kartf{width:100%!important;height:100%!important}
+.kroul .krt .krn{font-size:.78rem;font-weight:600;color:var(--ink);text-align:center;line-height:1.2}
+.kroul .krt.on{transform:scale(1.06);background:#fff3c4;box-shadow:0 0 0 3px var(--k-sel-ring,#a8740c),0 0 18px 6px #f0d070aa}
+.kroul .krt.win{transform:scale(1.1);background:#fff3c4;box-shadow:0 0 0 4px #c9a227,0 0 28px 12px #f0d070;animation:krflash .5s ease-out 2}
+@keyframes krflash{50%{box-shadow:0 0 0 4px #fff,0 0 40px 18px #fff3c4}}
+.kroul .krskip{font-size:.78rem;color:#5a2e12cc;background:rgba(255,250,240,.7);padding:2px 10px;border-radius:10px}
+.krfly{pointer-events:none}
+.dlg.krin.krinL{animation:krinL .55s cubic-bezier(.2,.8,.2,1)}.dlg.krin.krinP{animation:krinP .55s cubic-bezier(.2,.8,.2,1)}
+@keyframes krinL{from{transform:translateX(40vw);opacity:0}}@keyframes krinP{from{transform:translateY(30vh);opacity:0}}
+@media (prefers-reduced-motion:reduce){.kroul{display:none}.dlg.krin{animation:none!important}}
+`;document.head.appendChild(st)})();
