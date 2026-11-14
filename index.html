@@ -6021,6 +6021,14 @@ const SC7={
  ban:{n:"bắn cung",by:"Sức, Vũ",f:p=>(p.suc||0)*.4+aw7(p,"vu")*4},
  dauho:{n:"đầu hồ",by:"Tâm cơ, Sức, Kỳ",f:p=>(p.tamco||0)*.3+(p.suc||0)*.2+aw7(p,"ky")*3},
  huong:{n:"điều hương",by:"Y thuật & điều hương, Tài",f:p=>(p.tai||0)*.2+aw7(p,"y")*8+help7(p)*.5}};
+/* j85 arts (Thêu, Nấu nướng), when present: same breakdown as the j82 mini-games; old formulas until j85 lands */
+function has85(){return typeof artLv==="function"}
+function al7(p,k){try{return has85()?(+artLv(p,k)||0):0}catch(e){return 0}}
+(function(){const O={theu:SC7.theu,kim:SC7.kim,banh:SC7.banh};const N={
+ theu:{by:"Tài, Thêu, Họa, người hầu",f:p=>(p.tai||0)*.3+al7(p,"theu")*7+aw7(p,"hoa")*2+help7(p)},
+ kim:{by:"Tâm cơ, Tài, Thêu, Họa, người hầu",f:p=>(p.tamco||0)*.3+(p.tai||0)*.2+al7(p,"theu")*4+aw7(p,"hoa")*2+help7(p)*.5},
+ banh:{by:"người hầu, Nấu nướng, Y thuật, Tài",f:p=>help7(p)*1.5+al7(p,"nau")*6+aw7(p,"y")*2+(p.tai||0)*.2}};
+ for(const k in N){const o0={f:O[k].f,by:O[k].by};SC7[k]={n:O[k].n,get by(){return has85()?N[k].by:o0.by},f:p=>has85()?N[k].f(p):o0.f(p)}}})();
 /* ---------- the festival pools: [kind, sub, text]; C contest (sub = SC7 key), W wager (sub = theme), G game with a consort, B banquet, P gifts (sub emp|th), R rite ---------- */
 const FV7={
 newyear:[["C","doi","Sáng mồng một, Hoàng thượng ra vế đối Tết, các cung đối lại; vế hay nhất được treo ở Càn Thanh cung."],["C","tho","Yến xuân ở Bảo Hòa điện: mỗi cung dâng một bài thơ chúc xuân, Hoàng thượng tự chấm."],["C","mua","Yến đầu xuân, các phi tần múa chúc thọ Thái hậu; ai múa đẹp nhất được thưởng gấm Tô Châu."],["C","dan","Tiệc Tết bên lò sưởi Dưỡng Tâm điện, Hoàng thượng muốn nghe đàn; mỗi cung đàn một khúc."],["C","ve","Hoàng thượng ra đề “Xuân mãn càn khôn”, các cung vẽ tranh Tết; tranh đẹp nhất treo ở chính điện."],["C","banh","Cung yến Tết: mỗi cung tự làm một mâm bánh mứt dâng lên, Thái hậu nếm và chọn."],["C","co","Mồng ba Tết, Hoàng thượng bày cờ ở noãn các, mời các phi tần đấu cờ lấy may."],["G","","Đêm mồng hai, cung nhân bày chiếu đánh bài lá lấy hên; {A} mời ngươi một ván."],["W","ngua","Mồng năm, sân ngự mã có đua ngựa mừng xuân; các cung đặt cược con ngựa mình thích."],["B","","Tết đến, ngươi có thể mở tiệc trà đầu xuân mời các phi tần sang cung chúc Tết."],["P","emp","Lễ chúc Tết Hoàng thượng: các cung dâng lễ vật đầu năm; lễ được ngài khen sẽ được nhắc cả năm."],["R","","Mồng một, Thái hậu dẫn lục cung lên Phụng Tiên điện dâng hương tổ miếu."],["C","kim","Mồng bảy (ngày Nhân nhật), các cung thi cắt hoa giấy, kết hoa thắng; Thái hậu chấm."],["C","hoa","Ngự hoa viên mang vào trăm chậu mai đào; các cung thi cắm hoa bày điện Giao Thái."]],
@@ -6055,7 +6063,7 @@ function ents7(p){return (p.e||[]).map(id=>RV(id)).filter(v=>v&&present7(v))}
 /* P(she places first) under the shared formula, by deterministic sampling */
 function cOdds7(kind,E,prep,meB,seed){const f=SC7[kind].f;const base=E.map(p=>f(p)+(prep.includes(p.id)?J71.prep:0));const mi=E.indexOf(S);if(mi<0)return 0;base[mi]+=meB;const r=rng7(seed);let w=0;const N=500;
  for(let t=0;t<N;t++){let b=-1,bi=-1;for(let i=0;i<E.length;i++){const s=base[i]+r()*J71.luck;if(s>b){b=s;bi=i}}if(bi===mi)w++}return cl(Math.round(100*w/N),3,97)}
-const ST7={"Tài":p=>p.tai||0,"Tâm cơ":p=>p.tamco||0,"Thi":p=>aw7(p,"thi"),"Cầm":p=>aw7(p,"cam"),"Kỳ":p=>aw7(p,"ky"),"Họa":p=>aw7(p,"hoa"),"Vũ":p=>aw7(p,"vu"),"Sắc":p=>sac7(p),"Sức":p=>p.suc||0,"Y thuật & điều hương":p=>aw7(p,"y"),"Y thuật":p=>aw7(p,"y"),"người hầu":p=>help7(p)};
+const ST7={"Tài":p=>p.tai||0,"Tâm cơ":p=>p.tamco||0,"Thi":p=>aw7(p,"thi"),"Cầm":p=>aw7(p,"cam"),"Kỳ":p=>aw7(p,"ky"),"Họa":p=>aw7(p,"hoa"),"Vũ":p=>aw7(p,"vu"),"Sắc":p=>sac7(p),"Sức":p=>p.suc||0,"Y thuật & điều hương":p=>aw7(p,"y"),"Y thuật":p=>aw7(p,"y"),"người hầu":p=>help7(p),"Thêu":p=>al7(p,"theu"),"Nấu nướng":p=>al7(p,"nau")};
 function det7(kind,p){return SC7[kind].by.split(", ").map(n=>ST7[n]?`${n} ${Math.round(ST7[n](p))}`:"").filter(Boolean).join(", ")}
 /* run one contest under the shared formula; L rows carry the true parts of each score */
 function cScore7(E,kindOf,prep,meB,her){return E.map(p=>{const kind=kindOf(p);if(p===S&&her&&her.score!=null)return{p,kind,t:Math.round(her.score),pr:0,lk:0,s:Math.round(her.score),mg:1};const t=Math.round(SC7[kind].f(p));let pr=0;if(p===S)pr=meB;else if(prep.includes(p.id)&&(p.bac||0)>=20){ap(p,{bac:-20});pr=J71.prep}const lk=Math.round(Math.random()*J71.luck);return{p,kind,t,pr,lk,s:t+pr+lk}}).sort((a,b)=>b.s-a.s)}
