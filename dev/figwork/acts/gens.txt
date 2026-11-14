@@ -135,3 +135,39 @@ xa-huong u5n6ytCQLD
 bua-chu LwB0zKOswO
 pha-viec-hoc cpl5QAG0eP
 huy-dung ksDzRq416B
+# act-art2 (review/act-art2): owner 14/11 kept only the night chan-ngu-gia; the other test redraws are commented out (not used)
+#unused chan-ngu-gia VXUlnIPMMU
+chan-ngu-gia TdSsziPVNR
+#unused an-thai TdSsYFvVNR
+#unused bong-con aF23tJ2fSh
+#unused buon-ban-len iGqQ4hu3uK
+#unused chon-nguoi 1lpVbYtr4r
+#unused danh-co tCi9BOTmZJ
+#unused day-con-hoc N2FEyfO6D9
+#unused gia-benh 6AHuPQAiJO
+#unused hoc-le rgeM5eYxtc
+#unused lam-tho SytoLFAUb8
+#unused liec-mat iGqQ4lJ3uK
+#unused nghi-tay N2FEyg06D9
+#unused thi-tham jUXpkFELD0
+#unused thinh-an JNamSLjOq4
+#unused thu-toi jUXpk5HLD0
+#unused ve-tranh LwBe11vswO
+#unused tranh-sung Bh4OpdloQR
+#unused hau-tra-dem LwBerwqswO
+#unused cai-do lJ8XjPBgv9
+#unused cai-tai-mat vQZit5sa47
+#unused day-ho 79vtSAzJAL
+#unused gia-mang-thai lJ8Xj3Kgv9
+#unused hen-gap 1lpV5iXr4r
+#unused len-vao JNamUV0Oq4
+#unused mua-chuoc-ba-do 79vtSeXJAL
+#unused ngang-chan 3zbFNfxREY
+#unused to-giac yiCv7tkPW9
+#unused tung-tin 5jVcHcNKxe
+#unused xa-huong xSdDkpFjfW
+#unused binh-phong fHARhcbCDY
+#unused ha-doc 6AHuNMjiJO
+#unused ve-tranh KLM05Xpkqp
+#unused ngang-chan MBwgV9SDCm
+#unused ha-doc mE36v7yhJQ

@@ -401,7 +401,7 @@ No text over text: a pop (`kg82Pop`) replaces any live pop it would land on; a r
 
 ## 6.1 ACT ART SLOT (j79, kit 2)
 Every act card (`button.ka.kcard`) has its illustration on the LEFT in the SAME rectangular portrait frame and size as the consort card
-(`kitArtFrame(src,label,cls,col)` → `.pcp.kit.kartf`, her own rank frame + brocade; box `--kaw`×`--kah` = 150×226 px, 120×177 px under 600 px);
+(`kitArtFrame(src,label,cls,col)` → since 11/14 the simple PICTURE FRAME of 28.19 (`figure.ksart.ksart-tall.kartf2`, category line + chip); box `--kaw`×`--kah`, `--kah` = `--kaw`×4/3 (170×227 px, 128×171 px under 600 px; jk3);
 art is 3:4, 384x506 (the frame's photo window). Rows on the right. Cards: one column on the Fold (min 440 px per card), 2–3 on wide screens.
 Category colour (owner 11/14): the brocade is tinted, the photo window gets a coloured ring, a ribbon under the window names the category
 (also `title` on hover), and the card has a 4 px left edge in the same colour. Legend (`KIT_CAT`):
@@ -415,13 +415,14 @@ Category colour (owner 11/14): the brocade is tinted, the photo window gets a co
 | trung-phat | Trừng phạt | `#5a3a2a` |
 | muu-ke | Mưu kế | `#5a3f8f` |
 | hai-nguoi | Hại người | `#7a0f14` (blood red) |
+| sung-ai | Tranh sủng | `#b03a7a` (Chặn ngự giá, Tranh sủng, lật/rút/giữ thẻ, Liếc mắt đưa tình: winning the Emperor's night, checked first) |
 | nghi-ngoi | Nghỉ ngơi | `#5f9a5f` |
 | buon-ban | Buôn bán | `#a8692a` |
 | di-lai | Đi lại | `#7d8456` |
 | cham-con | Chăm con | `#e08a6a` |
 | trieu-chinh | Triều chính | `#22405f` |
 Older text below (square slot) is replaced by this. Image = `img/act-<key>.webp` where `img/ACTS.json` `acts` maps the card title (or its slug)
-to `<key>`; otherwise `img/act-cat-<category>.webp` when listed in `ACTS.json` `have`; otherwise the brocade tile with the category word.
+to `<key>` (title read WITHOUT the target's mini portrait; then ACTS.json `prefix`, names with `*`, longest act name the title starts with: j79 `kitActKey`); otherwise `img/act-cat-<category>.webp` when listed in `ACTS.json` `have`; otherwise the brocade tile with the category word.
 Categories (`kitActCat(name)`): hau-ha Hầu hạ · hoc-tap Học tập · giao-thiep Giao thiệp · muu-ke Mưu kế · hai-nguoi Hại người · nghi-ngoi Nghỉ ngơi ·
 buon-ban Buôn bán · le-nghi Lễ nghi · di-lai Đi lại. Art: square, painterly, same style anchor as portraits, ≤ 60 KB webp.
 Grid rows: every card in a row has the row's height (fitted to content, `grid-auto-rows:auto` + stretch), no empty space from a taller row.
@@ -687,13 +688,14 @@ so stage blocks may stand beside a head or between figures, never over the paint
   linking words in front (và, được, mất, khiến, nên…) stay outside the chip.
 - Contest tables are titled "Bảng định thứ" (any old "BẢNG ĐIỂM / Bảng điểm" is rewritten on screen by VP).
 ### 28.10 EVENT + STORY ART (j89 evArtOf / stArtOf)
-- Event choices, news panels ("Tin trong cung"), story/chapter cards: the picture goes in the kit art frame (`kitArtFrame`, `.kpsubj.kpiart.kpev`)
+- Event choices, news panels ("Tin trong cung"), story/chapter cards: the picture goes in the PICTURE FRAME (28.19, `kitSceneArt(src,label,{shape:"tall"})`, `.kpsubj.kpiart.kpev`)
   left of the body, unless the panel is about a person (then the person's portrait, section 8).
 - Picture (data only, first match): `item.art` · `item.stArt:[arc,beat,ending]` → stArtOf · `item.evId` → evArtOf(id, week) · `item.pid` (+`pp.id`)
   → evArtOf("<pid>:<id>") · news → evArtOf("news:<title>") · default category. Label = `evArtTitle`.
 - The result card right after an event choice shows the same picture small on its left (`#rtoast.kevres > .kpevr`).
 - Merged review/event-art dd2f253 (96 st-* story pictures, EVENTS.json stories, j89 stArtOf).
 ### 28.11 IDENTITY CARD + REINCARNATION BACKGROUND (owner item 6)
+- (11/14 19:10Z, replaces the frame part below) The origin picture is a WIDE band across the top of the card: `img/origin-wide-<k>.webp` (1280x720, gpt-2-6, one per origin) in the PICTURE FRAME (28.17, shape wide, no caption), height `clamp(84px,19dvh,190px)`; name, origin · age, tiles below it. The two choices are sticky at the bottom of the card (the body scrolls under them), choice titles wrap (never cut).
 - The origin picture (`img/bg-origin-<k>.webp`) is no longer the backdrop: it sits in the kit art frame `.kpidart` (kitArtFrame) — landscape:
   frame left, facts right; portrait/Fold: frame on top, facts below. Her full-body figure still stands on the background.
 - One shared background for every reincarnation screen: `img/bg-reborn-p.webp` (portrait 1200x1602) / `img/bg-reborn-l.webp` (landscape 1920x1080),
@@ -723,8 +725,41 @@ chest, Tư trang, wardrobe slots, reward chests, peddler, works, reward panels. 
 - Screens 600–999 px portrait (Fold) on card tabs: stage 22 % of the screen. Left sticky column order: name, rank, BARS, portrait, wear slots, facts;
   right column: act tabs + act cards. Fold 755x1000 without scrolling: name y≈585, bars 630–733, first act card 679–793 (measured).
 - `.kpstrip` (small frame, name, rank, bars) turns on below 1000 px whenever the bars are out of view.
+### 28.17 PERSON CARD LAYOUT (owner 11/14, iPad shots 1114-ipad-card-layout-1/-2; replaces 28.7, 28.15 and the round-1 full-width header)
+Every person card `.pc` (consort, servant, child, Emperor, Thái hậu, court, officials, strangers; panel, pop, modal), jk2b §18:
+- iPad / landscape (`kitPcWide()`: width ≥ 1000 px or landscape): LEFT column (sticky, own scroll if taller) = name + rank, the BIG kit portrait
+  (pcPort, rank ornament whole), wear slots, then ALL the info: relation block `.kpbars` (Ghen · Ngươi với nàng + bar · Oán + bar · Nàng với ngươi ·
+  Sủng), stat tiles, Tuổi, Tính nết, chips. RIGHT column = an opaque sticky block `.kpstick` (note + act-group tabs `Gặp mặt 3/3 · Giao thiệp …`),
+  then the act cards scrolling under it.
+- Fold portrait (600–999 px): LEFT = name + rank + big portrait + tiles/facts (sticky); RIGHT = sticky `.kpstick` with the relation block on top,
+  note and act-group tabs, then the acts. Phones (< 600 px): one column in the same order.
+- Each fact once: real nodes are moved, nothing copied; no small duplicate portrait/name; the Sủng stat tile is hidden when the relation block shows Sủng.
+- Sticky blocks are opaque (`--panel2`) with an 8 px cover upward; nothing peeks above them (measured 0 px at every size).
+- Size: portrait screens < 1000 px: the card fills the panel exactly under the sticky sub-tabs (`.kpcfull`) and the face strip scrolls away when a
+  person is opened (no strip band left between bar and card); after an act the card re-fits unless she scrolled the panel herself. Wide screens:
+  strip + card, card = rest of the panel.
+- Tested 686x880@2.2, 755x1000@2, 1180x820@2, 1366x1024@2, 412x1058@2 (dev/shots/hotfix-card/after3-*).
+### 28.18 NO LONE BUTTON ROWS (owner 11/14, Fold) — jk2b §19
+- A single button never takes a whole row; it folds into an existing control (chip, sub-tab, menu). First case: the "Bảng phẩm vị" row above the
+  Phi tần face strip is gone at every size; the rank table opens from her rank chip in the top bar (`#me-r`, dotted underline, title "Chạm để xem Bảng phẩm vị") from ANY tab or sub-tab (sets `tab="rv"` directly; closes an open person-card modal).
+  Inside the table the way back is "Về hồ sơ từng người" (sub-tab look). Leaving the tab/sub-tab closes the table.
+- Sticky sub-tabs `.ksub` in the panel: opaque and the panel's 8 px top padding band above them is covered (box-shadow in `--panel`), so nothing peeks above.
 ### 28.16 kitName: no doubled title
 `kitTitle` returns no title when the name already starts with it or with any role word (`KIT_ROLEPRE`: Thái y, thái giám, tổng quản, quan, thị vệ, vương gia, nhạc sư, công tử, ma ma, cô cô…).
+
+### 28.19 PICTURE FRAME — `kitSceneArt` = `kitArtFrame` (owner 11/14 18:55Z + 19:10Z + 19:30Z) — THE ONE non-person picture component
+Owner: "khung màu mè quá"; tassels (tua rua) and rank crests only on PEOPLE portraits. Every NON-PERSON picture uses ONE simple frame:
+identity origin band, roulette tiles, event / news / Mệnh truyện chapter pictures, the result card's small picture, act-card art (6.1), info / rule art
+(19), skill art (21). `kitArtFrame` (j79) is a one-line wrapper of it (shape tall); the old ornate consort-frame art (`.pcp.kit.kartf`) is deleted. People keep `pcPort` / `pframe` (28.0).
+```js
+kitSceneArt(src, label, {shape:"wide"|"tall", fb:"fallback src", col:"#category colour", cap:true|false, cls})
+// → figure.ksart.ksart-wide|ksart-tall[.ksart-cat]  > span.ksart-ph (label, shown only while the picture is missing) + img + figcaption | em.ksart-chip
+```
+- Frame: 1 px `--gold` line + 2 px cream inner line + 1 px `#e6d3ac` hairline, radius 4, ground `#efe4cf`; picture `object-fit:cover` inside a 3 px mat.
+- Shapes: wide 16:9 (a card's top band; the band may be capped in height, the picture then crops top/bottom) · tall 3:4 (ev-* / st-* / act-* / info-*).
+  Inside a fixed slot (`.kaart`, `.kpiart`, `.kskart`, `.kpev`) the frame fills the slot.
+- Caption: plain label = dark strip bottom-left (`figcaption`); with `col` = category colour on the frame line + small centred chip (act cards).
+- Never add a crest, tassel, brocade or rank frame to a picture of a place / thing / scene.
 
 ## 29. SETTING CONTROLS · SLIDER / TOGGLE / TEXT BOX (jkitctl, kit review 11/14) — KIT READY: slider/toggle/input
 Every setting control of the game uses these three (no browser-default range, checkbox or monospace text box anywhere). First user: Thiết lập
@@ -789,6 +824,137 @@ Not backdrops (checked 11/14 at 755x1000@2, 1180x820@2, 1366x1024@2): the map (`
 over the game), origin pictures (now in the identity art frame, 28.11). Mini-game backgrounds (`img/kit/mg-*-bg*.webp`, 1024 square, review/minigames,
 not on main yet) sit inside the game box; when that branch merges, any of them shown full screen must get a KIT_BD entry with both shapes.
 Tested 755x1000@2, 1180x820@2, 1366x1024@2, 412x1058@2, 390x844@3, 1024x768@2 (dev/shots/landscape-art/).
+
+## 31. KIT 3 · FOLD LAYOUT (kit owner, owner Fold/iPad shots 11/14) — `dev/build/jk3.js` (before j84) + j59 gutters + jk2b §2/§18/§19
+Supersedes 15 (status in the header), 19 STATUS/STATUS SHEET, 28.3 stage heights, 28.4 header chips. One rule set for every screen and mode
+(consort road, cung nữ road, lãnh cung).
+
+### 31.1 TOP BAR = ONE slim row
+`☰ · her kit frame + name + rank chip (#me-r, tap = Bảng phẩm vị) + short date · Bạc / Sức / Sủng / Danh` (servant road: Chủ tin in place of Sủng).
+Date = VANPHONG short form `Tháng ba · trung tuần · năm thứ nhất` (`k3Date()`), shown ONLY here. Phones < 600 px: the four stats drop to a
+second row. Nothing else lives in the top bar: the Hoàng thượng box, Thái hậu / Hoàng hậu chips and the status chip row moved to the stage (31.2);
+`#hud2` stays in the DOM only as the host of the status sheet. The old "▾ Tư chất" toggle is gone.
+
+### 31.2 STAGE HUD — kit plaques at the stage edges (`#kshL` in `.stop`, `#kshR`)
+Plaques: `--k3pl` = `rgba(255,250,240,.88)`, `1px --line`, radius 8, text ≥ .75rem (.64rem on narrow stages `.k3n`), never truncated.
+- LEFT column (`--kgw` wide): place name (`#sc-t`) · time plaque (Buổi …, còn N khắc, weather chip with its painted icon, Quẻ tuần) ·
+  Tư chất (Sắc, Tài, Tâm cơ, Đức with icons; icon + number in 2 columns on narrow stages, label in the tooltip) · Tình trạng chips (Giả bệnh,
+  Mang thai, Lãnh cung, Cấm túc …).
+- RIGHT column: Hoàng thượng (mood) · Thái hậu · Hoàng hậu (`với ngươi ±N` green/red, mood only when known: no "chưa rõ" filler) · her servant
+  (`Lòng N`) — tap = that person's card. Servant road: + Hoàng thượng để ý, Lương tháng, Công lao.
+- The figures stand BETWEEN the two columns: j59 reads `--kgl/--kgr` (the plaques' real widths) as gutters; measured 0 plaque/figure overlaps.
+- Tap a plaque = the full status SHEET: a centred kit sheet (`#hud2 .khg`, max 760 px, dim backdrop, sticky "Thu lại" header, scrolls inside,
+  tap outside / Esc closes). Never inside the bottom panel, never hides other chips.
+- One fact, one place: date (top bar), khắc + weather + Quẻ (time plaque; the old dots ●●●● are gone), Thái hậu/Hoàng hậu attitude (their chip;
+  rows hidden in the sheet's Nhân tâm), Sủng (top bar), Chủ tin (top bar on the servant road).
+
+### 31.3 ONE STAGE SIZE
+Portrait split (only when the phone shell 31.7 is off): fixed aspect 2:1 (600–999 px) / 3:2 (< 600 px) on EVERY tab (no more 22/24 dvh "card tab" squeeze); the panel below scrolls. Landscape: the left column.
+Figures (j59): one height for all adults, 80–85 % of the stage at Fold/iPad (measured), feet on one floor line.
+
+### 31.4 SCENE CROP + FLOOR ANCHOR (`KIT_FANCHOR`, jk2b §2)
+Per room (same composition in every season × buổi): `{x, feet}` fractions of the picture = centre of the open floor and the feet line.
+The picture is cover-cropped keeping the floor; on tall stages it slides sideways so the open floor sits in the middle of the free zone between
+the plaques; feet stand on the painted floor, the group is centred on `x` (never on the bed / furniture). Rooms: duong-tam-dien .5/.93,
+khon-ninh-cung .55/.92, kinh-su-phong .45/.92, lanh-cung .36/.93, ngu-hoa-vien .3/.9, ngu-thu-phong .5/.92, phi-tan-cung .5/.9,
+tam-cung-dem .68/.94, thai-y-vien .45/.9, tu-ninh-cung .5/.9. A new room adds its line here.
+
+### 31.5 STICKY BARS · CHIP LISTS · PANEL SCROLL
+- Every sticky bar in the panel (`.ksub` sub-tabs, card blocks 28.17) is opaque and covers the panel's top padding band; nothing peeks above it.
+- Chip lists / selectors (`.relsel` "Xem quan hệ của", `.pctabs`, `.chips`, `.kchips`) wrap, never clip; the panel scrolls.
+- No lone button rows (28.18).
+
+### 31.7 kitPhoneShell (jk3 §6) — portrait screens under 1000 px wide (Fold, phones)
+Two views instead of the split: HOME = the room full screen between the slim top bar and the tab bar (stage HUD plaques on it; figures big on the
+floor; tap a person = card) · PANEL = a bottom tab opens full screen in place of the room (sub-tabs, compact picker strip, person card get the
+whole height). Back to the room: tap the active tab again, or "‹ Phòng" (kit `.btn`, top bar, only shown in PANEL view); "Qua buổi" always lands
+in the room; any code that switches tab opens the PANEL view. A card opened from the room (`#popw`) shows full screen and returns to the room.
+Result cards / events overlay as before. Classes on `.game`: `k3ph` (shell on) · `k3home` · `k3pop`. Room view measured: 686x880 670x720 (0.93) ·
+755x1000 739x867 (0.85) · 412x1058 400x860 (0.47) · 390x844 378x646 (0.59). Landscape / ≥ 1000 px keep the split (31.3).
+
+### 31.8 Portrait room paintings (stage tier "p", jk2b §2) — CANCELLED by owner 11/14 (landscape room art is used full screen; hook KIT_STAGE_P kept, unused)
+`img/<scene>-<season>-<buoi>-p.webp` (3:4, 1536x2048, people-free, open floor lower 45 %, details in the middle 60 % of the width). Used whenever
+the room view is taller than wide (phone shell, iPad left column) and `KIT_STAGE_P[scene]` is true; floor anchor `KIT_FANCHOR["<scene>-p"]={x,feet}`.
+No other code change; until then the 16:9 art + its anchors are used.
+
+### 31.9 PERSON CARD INFO GRID (jk2b §20) — every person card
+Facts as short labelled value chips `.kpgrid > .kpgr > .kpq` (relation row: Ghen · Thiện cảm N ▮ · Oán N ▮ · Nàng với ngươi · Lòng/Chủ tin;
+stats row: Sủng · Đức · Danh · Sắc · Tài · Tâm cơ; small row: Muốn hại ngươi ⓘ · Tuổi · Tính nết; status chips after). Unknown = "?" (dim), the
+long wording is the chip's tooltip (tap = kpPop). Fold/phones: next to the portrait (name + rank on one line above); iPad: under the portrait.
+Act-group tabs: one sticky row (sideways scroll on narrow). The helper sentence ("Không gặp mặt: phải sai người…") is a Ghi chú row on the acts it
+explains, never a body line. Compact picker strip always visible above the card (palace labels dropped under 1000 px portrait).
+
+### 31.10 NON-PERSON PICTURES — ONE component: `kitSceneArt` / `kitArtFrame` (28.19; review/identity-card merged 11/14)
+Act cards, events, news, story, info, skills, works, places, identity origin band, origin wheel: simple gold-line frame, NO pendant/tassel
+(tassels are for people only); act/info slot `--kaw` 170 px (128 px on phones) × 4/3.
+
+### 31.11 CATEGORY TABS — `k3CatTabs` (jk3 §7): any `.cards` grid of 6+ act cards in 2+ categories (Hành sự, servant Phận sự, Cung nhân, Tài nghệ…)
+gets the kit tab row `.pctabs.kcattabs` ("Tất cả" + one tab per act category from `KIT_CAT`, count làm được/tổng), sticky, one sideways-scrolling row
+under 1000 px; the choice is remembered per tab (`hclh-kcat-<tab>-<n>`).
+
+### 31.12 TOP BAR ROW 2 — `k3TopRow` (jk3): time (Buổi + 4 khắc dots, filled = left; weather chip; Quẻ) + status chips | Tư chất (Sắc · Tài · Tâm cơ ·
+Đức, icon + number; Đức < 50 shows a small gold "!" whose tooltip says "Cần Đức 50 mới được lập Hoàng hậu" — stats are never red, red = cost/risk only).
+Fold/phones: a compact row under the name/stats; iPad (≥ 1000 px): the empty middle of the bar, two columns. The stage keeps only the place name
+(text on the painting, one line, light halo), the court chips and the figures; name tags under figures are text on the painting too (rank + name, one line).
+Floating notes (`.kmnote`) sit just above the bottom tab bar.
+
+### 31.13 SELECTED STATE — ONE look for every picker (jk3 §8, owner 11/14 approved; kit owner #2)
+Dung mạo faces (`kitPicker .kpki`), consort / servant / kid picker strips (`.pface`), origin wheel tiles (`.krt`), pressed kit toggles (`.ksel`):
+NO box / background block and NO check badge (`.kpkck` removed from the markup and hidden). Selected = soft gold glow following the frame's own
+outline (`--k-glow`: `drop-shadow(0 0 5px #ffd66e) drop-shadow(0 0 2px #be8c1ee6)`), the frame ×1.06–1.07, full colour; unselected opacity .7–.75.
+`aria-checked` / `aria-pressed` stay. Buttons (`.ksel` on `.kbtn`) get the same glow as a 2 px ring + soft halo.
+### 31.14 RESULT TEXT AS BULLETS — `kitBullets(el)` / `kitBulletsHTML(html)` (jk3 §11, owner 11/14)
+A long result / report / spy / news paragraph (≥ 70 letters, 2+ facts) becomes `ul.kbl` (one fact per line, small gold dot). Split on the
+text's own sentence ends and on a "Label:" after a long header ("X nghe lén chuyện của Y: Nết: Đa nghi" → 2 lines); a sentence that is only
+"( … )" filler becomes a dim footnote `small.kblf`; "(Bạc +60)" / "(thiện cảm -3)" get kit gain/cost colours. Applied automatically (MutationObserver)
+to `#rtoast .ksen` (result card), `.pc .pcn` (person-card result note), kit panel facts (`.dlg.kpanel .kfacts`); never the identity card.
+### 31.15 SMALL GROUP RULES (kit owner #2)
+- Name tags under figures never overlap: a tag that would touch another steps one line down (up when no room) — `k3Tags()` (jk3 §10).
+- Court chips (Hoàng thượng / Thái hậu / Hoàng hậu / her servant): title one line (`nowrap`); the right plaque column is `max-content` (min
+  `--kgw`, max 46 % of the stage) and j59 reads its real width as the gutter.
+- A card opened from the room (`#popw`) lies above the panel's sticky rows (z 12); its "✕ Lui" sits in the card's top-right corner (no lone row, 28.18).
+- Kit panel close row (`.dlg.kpanel>.mr`, "Đã hiểu") is pinned at the dialog bottom; the body scrolls under it.
+- Category tabs (31.11) stay ONE sideways row under 1000 px (the chip-list wrap rule 31.5 excludes `.kcattabs`).
+- Person info chip labels start with a capital ("Lòng 70", not "lòng").
+
+## OWNER POINTS 14/11 (fold-layout) — checklist (✔ = verified in screenshots dev/shots/fold-layout/ at 686x880@2.2 + 1180x820@2)
+| time | point | component | status |
+|---|---|---|---|
+| 16:00 | top bar too tall, date wraps, chips on own rows | 31.1 slim bar + 31.12 row 2 | ✔ |
+| 16:00 | stage changes size per panel; figures tiny | 31.3 / 31.7 shell, j59 gutters | ✔ (room 83–87 % height) |
+| 16:00 | sticky person header overlaps text | 28.17 card layout | ✔ |
+| 16:00 | Giao tình chip rows cut | 31.5 chip lists wrap | ✔ |
+| 16:05 | portrait + landscape backdrops | jbd (main) + 31.8 portrait room tier | ✔ mechanism; room "-p" art pending (art worker) |
+| 16:10 | fix whole groups via kit | 31.6 inventory | ✔ |
+| 16:15 | rows show above sticky tab bar; Tư chất toggle dumps into panel | 31.5 opaque sticky bars; toggle removed, sheet centred | ✔ |
+| 16:20 | info on the room scene, slim bar, duplicates dropped | 31.2 + 31.12 (later moved to bar by owner 19:05) | ✔ |
+| 16:25 | one fact one place (court chips vs Nhân tâm) | court chips; sheet rows hidden | ✔ |
+| 16:30 | card header duplicate (hotfix) | 28.17 | ✔ |
+| 17:10 | no "Bảng phẩm vị" row (rank chip); scene moved up | 28.18, 31.1 | ✔ |
+| 17:20 | room over-zoomed, figures on furniture | 31.4 KIT_FANCHOR | ✔ (10 rooms measured at 686) |
+| 17:45/17:40/18:05 | person card layout (iPad left info / right tabs; Fold portrait + info, tabs, acts) | 28.17 + 31.9 | ✔ |
+| 18:00 | picker always visible; one combined build | 28.17 kitPcSize, compact strip | ✔ |
+| 18:15 | info as short chips, stats visible, "?" for unknown | 31.9 kitPersonChips | ✔ |
+| 18:20 | Tư chất always visible (top bar) | 31.12 | ✔ |
+| 18:30/18:45 | phone room = full-screen home; tabs full screen | 31.7 kitPhoneShell | ✔ |
+| 18:40 | Đức not red; khắc dots; place name / name tags as text, one line | 31.12 | ✔ |
+| 18:45 | palace names on picker at all sizes | compact strip keeps `.psep` | ✔ |
+| 18:55 | no tassels on non-person pictures; bigger act pictures; bigger card portrait | 31.10, 31.9 (portrait col 36 %) | ✔ |
+| 19:00 | Hành sự category tabs (and other long act lists) | 31.11 k3CatTabs | ✔ Hành sự; other lists use the same component (auto) |
+| 19:05/later | iPad bar middle: time | Tư chất columns; stage keeps place + court + figures | 31.12 | ✔ |
+| 19:10 | Oán next to Ghen; one shared component | 31.9 order Ghen · Oán · Thiện cảm · Nàng với ngươi | ✔ |
+| 19:10 | identity card wide simple picture frame; "Đổi thân phận (-100" cut at 686 | 28.19 kitSceneArt (review/identity-card merged) | see sweep |
+
+### 31.6 INVENTORY (group → member → status; screenshots dev/shots/fold-layout/)
+| group | members | status |
+|---|---|---|
+| (a) top bars / status | consort HUD, servant HUD (j42 srvHud2), lãnh cung, status sheet | one slim row + stage plaques + centred sheet: DONE all modes |
+| (b) stages | every tab (act, map excluded: full-screen map, rv, rel, fac, staff, kid, inv, art, story, log), 10 rooms × seasons × buổi | one size, floor anchors: DONE |
+| (c) person cards | consort, servant, kid, Emperor (modal), court/officials, strangers | 28.17 layout: DONE (review/hotfix-card) |
+| (d) chip lists / selectors | Giao tình relsel, act-group tabs, chips, sub-tabs, pager | wrap / opaque sticky: DONE |
+| (e) panel scroll / clipping | all tabs | audit: 0 ellipsis, 0 clipped text, 0 horizontal overflow at 7 sizes |
+| (f) sticky tab bars | Hậu cung / Mệnh truyện sub-tabs, card blocks | opaque, padding band covered: DONE |
+| (g) collapse/expand toggles | "Tư chất" (removed; plaque tap → centred sheet), status "Thu lại" | DONE; other toggles in game: none found besides j57/j19 status toggle (same sheet) |
 
 ---
 

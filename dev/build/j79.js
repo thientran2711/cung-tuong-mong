@@ -576,12 +576,30 @@ const KIT_CAT={"giao-thiep":["Giao thiệp","#c4607a"],"hau-ha":["Hầu hạ","#
 try{KIT_ACT_CATS.splice(1,0,["trung-phat",/phạt|trách phạt|quở|đánh đòn|quỳ|tịch thu|giáng|cấm túc|đuổi|đổi người/i],["ban-thuong",/thưởng|ban cho|ban ơn|ân thưởng/i],
  ["cham-con",/(^|\s)con(\s|$)|hoàng tử|công chúa|bế |dạy dỗ|nuôi/i],["trieu-chinh",/triều|tấu|sớ|quan |nhà ngoại|tham ô|thế lực|phe/i])}catch(e){}
 (function(){const k0=kitActArt;kitActArt=function(name){const r=k0.apply(this,arguments);if(KIT_CAT[r.cat])r.label=KIT_CAT[r.cat][0];r.col=(KIT_CAT[r.cat]||[])[1]||"";return r}})();
-function kitArtFrame(src,label,cls,col){let d={frame:KIT_DIR+"frame-consort-0.webp",bg:KIT_DIR+"bg-default.webp"};try{d=kitDecor(pMe())}catch(e){}
- const tint=col?`linear-gradient(${col}66,${col}66),`:"";
- return `<span class="pcp kit kartf ${cls||""}"${col?` style="--kcc:${col}" title="${label}"`:""}><span class="kin"><span class="kbg" style="background-image:${tint}url(${d.bg})"></span>`+
-  `<span class="kaph">${label||""}</span>`+(src?`<img class="kpor kact" src="${src}" alt="" loading="lazy" onerror="this.remove()">`:"")+(col?`<span class="kring" aria-hidden="true"></span>`:"")+
-  `<img class="kfr" src="${d.frame}" alt="" aria-hidden="true" onerror="this.remove()">`+(col?`<em class="kcatr">${label}</em>`:"")+`</span></span>`}
+/* kitArtFrame = kitSceneArt (jk2b, KIT 31.10): ONE simple picture frame for every non-person picture, no tassel */
+function kitArtFrame(src,label,cls,col){return kitSceneArt(src,label,{shape:"tall",cls:"kartf2"+(cls?" "+cls:""),col:col||"",cap:!!col})}
 kpActArt=function(b){if(b.dataset.kart)return;const kan=b.querySelector(":scope > .kat > .kan");if(!kan)return;const name=kpPlain(kan.textContent);const a=kitActArt(name);b.dataset.kart=a.cat;
+ let body=b.querySelector(":scope > .kabody");if(!body){body=document.createElement("span");body.className="kabody";[...b.childNodes].forEach(n=>{if(!(n.nodeType===1&&n.classList.contains("kaart")))body.appendChild(n)});b.appendChild(body)}
+ let art=b.querySelector(":scope > .kaart");if(!art){art=document.createElement("span");art.className="kaart";b.prepend(art)}
+ art.innerHTML=kitArtFrame(a.src,a.label,"kcat-"+a.cat,a.col);art.title=a.label;if(a.col)b.style.setProperty("--kcc0",a.col);b.classList.add("kart")};
+/* act art lookup fix (owner 11/14: every act with its own picture shows it). The card title (.kan) can hold the target's mini portrait
+   (its name text was glued to the act name: "Hoàng hậuThỉnh an Hoàng hậu") or run-time words after the act name ("Thỉnh an Hoàng hậu", "Phô tài: Đàn").
+   Name = .kan text without portraits; key = exact, slug, ACTS.json "prefix", names with "*", then the longest act name the title starts with.
+   Re-run after ACTS.json arrives: the title then sits inside .kabody (was missed, the card kept its first, pre-manifest picture).
+   New category sung-ai "Tranh sủng" (Chặn ngự giá, Tranh sủng, lật thẻ…): winning the Emperor's night is not "Hại người". */
+try{KIT_CAT["sung-ai"]=["Tranh sủng","#b03a7a"];KIT_ACT_CATS.unshift(["sung-ai",/chặn ngự giá|tranh sủng|lật thẻ|rút thẻ|giữ thẻ|liếc mắt đưa tình/i])}catch(e){}
+function kpActName(kan){const c=kan.cloneNode(true);c.querySelectorAll(".md,.kit,.pcp,.kodds,img,svg").forEach(e=>e.remove());return kpPlain(c.textContent)}
+const kpReEsc=s=>s.replace(/[.+?^$|()[\]{}\\]/g,"\\$&");
+function kitActKey(name){const A=KIT_ACTS.acts||{},P=KIT_ACTS.prefix||{};name=kpPlain(name);if(!name)return"";if(A[name])return A[name];const sl=kpSlug(name);if(A[sl])return A[sl];
+ let best="",key="";const take=(n,k)=>{if(n.length>best.length){best=n;key=k}};
+ for(const p in P)if(name.startsWith(p))take(p,P[p]);
+ for(const n in A){if(n.includes("*")){if(new RegExp("^"+n.split("*").map(kpReEsc).join(".+")+"$").test(name))take(n,A[n])}
+  else if(n!==kpSlug(n)&&(name.startsWith(n+" ")||name.startsWith(n+":")||name.startsWith(n+",")))take(n,A[n])}
+ if(key)return key;
+ if(name.length>=6)for(const n in A)if(!n.includes("*")&&n.startsWith(name+" "))return A[n];
+ return""}
+(function(){const k0=kitActArt;kitActArt=function(name){const r=k0.apply(this,arguments);try{const key=kitActKey(name);if(key)r.src=`img/act-${key}.webp`}catch(e){}return r}})();
+kpActArt=function(b){if(b.dataset.kart)return;const kan=b.querySelector(":scope > .kat > .kan, :scope > .kabody > .kat > .kan");if(!kan)return;const name=kpActName(kan);const a=kitActArt(name);b.dataset.kart=a.cat;
  let body=b.querySelector(":scope > .kabody");if(!body){body=document.createElement("span");body.className="kabody";[...b.childNodes].forEach(n=>{if(!(n.nodeType===1&&n.classList.contains("kaart")))body.appendChild(n)});b.appendChild(body)}
  let art=b.querySelector(":scope > .kaart");if(!art){art=document.createElement("span");art.className="kaart";b.prepend(art)}
  art.innerHTML=kitArtFrame(a.src,a.label,"kcat-"+a.cat,a.col);art.title=a.label;if(a.col)b.style.setProperty("--kcc0",a.col);b.classList.add("kart")};
@@ -657,16 +675,9 @@ span.md.kmini.kmini>.kmf{position:absolute;inset:0;background:var(--kfr) 50% 34.
 /* 1 · act art in the consort-card frame, same size as the Phi tần card portrait */
 :root{--kaw:150px;--kah:226px}@media (max-width:599px){:root{--kaw:120px;--kah:177px}}
 .kaart{flex:0 0 var(--kaw)!important;width:var(--kaw)!important;height:var(--kah)!important;border-radius:0!important;overflow:visible!important;background:none!important;box-shadow:none!important;margin:0!important}
-.pcp.kit.kartf{width:100%!important;height:100%!important;max-height:none!important;min-height:0!important;aspect-ratio:auto!important;display:block}
-.pcp.kit .kin>img.kact{top:20.289%!important;height:49.373%!important;object-fit:cover!important;object-position:50% 50%!important}
-.pcp.kit.kartf .kaph{position:absolute;left:14.655%;top:20.289%;width:70.691%;height:49.373%;display:grid;place-items:center;text-align:center;font-family:var(--display);font-size:.8rem;font-weight:700;color:#fff3d8;text-shadow:0 1px 3px #000a;padding:4px;line-height:1.2;z-index:0}
 .cards:has(> button.ka.kart){grid-template-columns:repeat(auto-fill,minmax(max(440px,31%),1fr))!important}
 @media (max-width:599px){.cards:has(> button.ka.kart){grid-template-columns:1fr!important}}
 button.ka.kcard.kart{gap:10px!important;min-height:calc(var(--kah) + 12px)}
-.pcp.kit.kartf .kring{position:absolute;left:14.655%;top:20.289%;width:70.691%;height:49.373%;box-shadow:inset 0 0 0 3px var(--kcc),inset 0 0 14px var(--kcc);z-index:1;pointer-events:none;border-radius:3px}
-.pcp.kit.kartf .kcatr{position:absolute;left:50%;top:69.6%;transform:translate(-50%,-50%);z-index:3;font-style:normal;font-size:.66rem;font-weight:700;color:#fff;background:var(--kcc);padding:1px 8px;border-radius:9px;white-space:nowrap;box-shadow:0 0 0 1px #fff8,0 1px 3px #0006;letter-spacing:.02em}
-.pcp.kit.kartf .kaph{display:none}.pcp.kit.kartf:not(:has(img.kact)) .kaph{display:grid}
-.kpiart .pcp.kit.kartf .kaph{display:grid}.kartf[style*="--kcc"] .kaph{display:none!important}
 button.ka.kcard.kart{border-left:4px solid var(--kcc0,var(--line))!important}
 /* 2 · info art beside the body */
 .dlg.kpanel .kpb.kpinfo{grid-template-columns:var(--kaw) minmax(0,1fr)!important}
@@ -815,7 +826,7 @@ function kitPersonStats(v){const val=k=>{if(!kitStatKnown0(v,k))return["chưa r�
 const KIT_PICK={};
 function kitPicker(o){o=o||{};KIT_PICK[o.id]=o;const items=o.items||[];
  const flt=o.filters&&o.filters.length>1?`<nav class="ksub kpkf" role="tablist">${o.filters.map(([k,l])=>`<button type="button" class="ksubb${k===o.filter?" on":""}" data-pkf="${k}" role="tab" aria-selected="${k===o.filter}">${l}</button>`).join("")}</nav>`:"";
- const it=items.map(x=>{const on=x.k===o.cur;return `<button type="button" class="kpki${on?" on ksel":""}" role="radio" aria-checked="${on}" tabindex="${on?0:-1}" data-pk="${x.k}" aria-label="${x.label||x.k}">${mdH(x.face||{},"")}<i class="kpkck" aria-hidden="true">✓</i></button>`}).join("");
+ const it=items.map(x=>{const on=x.k===o.cur;return `<button type="button" class="kpki${on?" on ksel":""}" role="radio" aria-checked="${on}" tabindex="${on?0:-1}" data-pk="${x.k}" aria-label="${x.label||x.k}">${mdH(x.face||{},"")}</button>`}).join("");
  return `<div class="kpsec kpick" data-pick="${o.id}" data-rows="${o.rows||2}">${o.title?`<h4 class="kpst">${o.title}</h4>`:""}${flt}<div class="kpkwrap"><button type="button" class="kpkpg" data-pkpg="-1" aria-label="Trang trước">‹</button><div class="kpkgrid" role="radiogroup" aria-label="${o.title||"Chọn"}">${it}</div><button type="button" class="kpkpg" data-pkpg="1" aria-label="Trang sau">›</button></div><div class="kpkpn"></div>${o.note?`<div class="kpnote">${o.note}</div>`:""}</div>`}
 function kitPickerLayout(root,keepPage){try{const g=root.querySelector(".kpkgrid");const B=[...g.querySelectorAll(".kpki")];if(!B.length)return;B.forEach(b=>b.hidden=false);
  const cs=getComputedStyle(g);const gap=parseFloat(cs.columnGap)||6;const iw=B[0].getBoundingClientRect().width||58;const cols=Math.max(3,Math.floor((g.clientWidth+gap)/(iw+gap)));const rows=+root.dataset.rows||2;const per=cols*rows;
