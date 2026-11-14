@@ -6,7 +6,7 @@
    Anti-repetition: per-life cooldown per template and per variant; cross-life history in localStorage 'ctm-e68h' (last 6 lives) lowers the weight of what was seen.
    Hook for other storyline modules: e68Busy() is true if j68 fired a big beat this month; j68 honours storyBusy() if defined. */
 const E68=[],E68I={},Q68=[],Q68I={};
-const E68CFG={p:.26,swap:.30,cd:54};
+const E68CFG={p:.18,swap:.15,cd:54};
 const G6=t=>`<span class="g">${t}</span>`,R6=t=>`<span class="r">${t}</span>`;
 function e68(){if(!S)return null;const e=S.e68=S.e68||{};e.cd=e.cd||{};e.vu=e.vu||{};e.fu=e.fu||[];e.q=e.q||[];e.qcd=e.qcd||{};e.ch=e.ch||{};e.n=e.n||0;e.qn=e.qn||0;e.cong=e.cong||0;e.qdone=e.qdone||0;e.qfail=e.qfail||0;e.npcq=e.npcq||[];
  if(!e.lid){e.lid=Date.now().toString(36)+R(1000);try{const H=JSON.parse(localStorage.getItem("ctm-e68h")||"{}");H.L=[[]].concat(H.L||[]).slice(0,6);H.cur=e.lid;localStorage.setItem("ctm-e68h",JSON.stringify(H))}catch(x){}}return e}
@@ -56,7 +56,7 @@ function c6(n,s){s=s||{};const wt=fx6(s.w).concat((s.r||[]).map(([a,v])=>relTok(
  if(p!=null)x=`${word(p)} · thành: ${wt.join(", ")||G6("êm chuyện")} · hỏng: ${lt.join(", ")||"không mất gì"}`;else x=wt.join(", ");
  if(s.k&&s.k.length)x+=(x?" · ":"")+"kèm: "+s.k.join(", ");
  const c={n,fx:s.c||{},x,go:()=>{let ok=true;if(p!=null)ok=Math.random()*100<p;
-   if(ok){ap6(s.w);(s.r||[]).forEach(([a,v])=>relDo(a,v));let t="";try{t=s.ok?s.ok():""}catch(e){}log(t||s.wl||`${n}: êm xuôi.`)}
+   if(ok){ap6(s.w);(s.r||[]).forEach(([a,v])=>relDo(a,v));let t="";try{t=s.ok?s.ok():""}catch(e){}log(t||s.wl||"Mọi việc êm xuôi.")}
    else{ap6(s.l);(s.lr||[]).forEach(([a,v])=>relDo(a,v));let t="";try{t=s.no?s.no():""}catch(e){}log(`<span class="r">Không thành:</span> ${t||s.ll||n+"."}`)}}};
  if(s.c&&s.c.suc&&S.suc+s.c.suc<5)c.n+=" (mệt)";return c}
 /* ---------- events ---------- */
@@ -65,7 +65,7 @@ const FAM6={day:"Chuyện trong cung",visit:"Có người đến",emp:"Hoàng th
 function EV6(id,fam,s){s.id=id;s.fam=fam;E68.push(s);E68I[id]=s;PEND["e68"+id]=p=>{try{return e68Build(s,p)}catch(x){console.error(x);return null}}}
 function e68X(s,p){const X={p,vi:p.vi||0};const sl=s.a||[];for(let i=0;i<sl.length;i++){const kind=sl[i];const a=A6(kind,p["a"+i]);if(!a)return null;X["a"+i]=a}X.A=X.a0;X.B=X.a1;X.C=X.a2;return X}
 function e68Fill(t,X){const sea=SEASON[S.month-1];return String(t).replace(/\{A\}/g,X.A?X.A.n:"").replace(/\{B\}/g,X.B?X.B.n:"").replace(/\{C\}/g,X.C?X.C.n:"").replace(/\{M\}/g,S.maid?S.maid.name:"cung nữ").replace(/\{S\}/g,sea.toLowerCase()).replace(/\{W\}/g,S.wx?S.wx.n:sea.toLowerCase()).replace(/\{P\}/g,(()=>{try{return placeOf(S.place).n}catch(e){return"trong cung"}})()).replace(/\{E\}/g,"Hoàng thượng")}
-function e68Build(s,p){const X=e68X(s,p);if(!X)return null;const V=s.v||[""];const tx=e68Fill(V[(p.vi||0)%V.length],X);const o=s.o(X);if(!o||!o.length)return null;
+function e68Build(s,p){const X=e68X(s,p);if(!X)return null;const V=s.v||[""];let tx=e68Fill(V[(p.vi||0)%V.length],X)+(p.f?"<br>"+p.f:"");tx=tx.replace(/\{it\}/g,s.items&&p.it!=null?s.items[p.it%s.items.length]:"");const o=s.o(X);if(!o||!o.length)return null;
  return{who:s.who?s.who(X):(X.A?X.A.f:null),t:tx,o}}
 function e68Ctx(){return{sea:SEASON[S.month-1],m:S.month,rank:S.rank,place:S.place,wx:S.wx||{},fest:(()=>{try{return festToday()}catch(e){return null}})(),wk:wk()}}
 function e68Cands(fams,big){const e=e68(),C=e68Ctx(),now=wk(),out=[];const story=e68Story();
@@ -75,7 +75,7 @@ function e68Cands(fams,big){const e=e68(),C=e68Ctx(),now=wk(),out=[];const story
 function e68Pick(L){const t=L.reduce((a,x)=>a+x[1],0);let r=Math.random()*t,i=0;while(i<L.length-1&&r>L[i][1]){r-=L[i][1];i++}return L[i]}
 /* params + a variant she has not seen lately (this life first, then the last five lives) */
 function e68Make(s){const e=e68();let p=null;try{p=s.pp?s.pp():{}}catch(x){p=null}if(!p)return null;const V=s.v||[""];
- const used=e.vu[s.id]||[];let pool=[...V.keys()].filter(i=>!used.includes(i));if(!pool.length){pool=[...V.keys()];e.vu[s.id]=[]}
+ let all=[...V.keys()];if(s.vf){let ok=null;try{ok=s.vf(p)}catch(x){}if(ok&&ok.length)all=all.filter(i=>ok.includes(i));else if(ok)return null}const used=e.vu[s.id]||[];let pool=all.filter(i=>!used.includes(i));if(!pool.length){pool=all.slice();e.vu[s.id]=(e.vu[s.id]||[]).filter(i=>!all.includes(i))}
  const fresh=pool.filter(i=>!e68Past(s.id+":"+i));p.vi=pick(fresh.length?fresh:pool);
  const d=mkP("e68"+s.id,p);if(!d)return null;e.cd[s.id]=wk();(e.vu[s.id]=e.vu[s.id]||[]).push(p.vi);e.n++;if(s.big)e.bigM=S.turn;e68Mark(s.id+":"+p.vi);return d}
 function e68Fire(fams){const L=e68Cands(fams);for(let t=0;t<4&&L.length;t++){const x=e68Pick(L);L.splice(L.indexOf(x),1);const d=e68Make(x[0]);if(d)return [d,x[0]]}return null}
@@ -117,3 +117,43 @@ function evHistMark(key){if(S)e68();e68Mark(key)}
 function evBusyMark(){const e=e68();if(e)e.busyWk=wk()}
 function evBusy(){const e=S&&S.e68;return !!(e&&e.busyWk===wk())||e68Story()}
 function evBusyMonth(){return e68Busy()}
+/* ================= GLOBAL EVENT SCHEDULER (owner 11/14): applies to every event source by gating the one modal queue =================
+   - Optional events (j7 ev events and the stock dilemmas, j24 'Có người đến' visits, servant causes, court pop-ups j55, princess moments j54,
+     servant-road events j42, j68 events, and anything a module tags {opt:1}) show at most ONE per buổi and at most E68S.day per day;
+     at day start they are spread to later buổi; overflow waits in a short holding list and is dropped when stale (an info-only one goes to the Nhật ký).
+   - Mandatory ones (endings, news digest, pregnancy/birth, Thánh chỉ, festivals, story beats, tests, anything the player opened, anything tagged {must:1}) are never held.
+   - Cooldowns: the same template not within E68S.tpl tuần; the same exact event (same actor + same text) not within E68S.key tuần (servant mishaps ~ once a season);
+     the same actor is not featured in two optional events in a row. */
+const E68S={day:2,tpl:5,key:10,stale:6,hold:4};
+const OPTPID=new Set(["vase","coldletter","embezzle","tuyen","thbenh","loveletter","h54met","h54sad","h54tut","h54show","cnvScold","cnvBribe","cnvFrame","cnvBlack","cnvFest","cnvWed"]);
+const OPTT=/^(Có người đến|Kẻ hầu xin|Hoàng thượng đến|Thái hậu triệu|Một ánh mắt|Việc của kẻ hầu|Việc khó xử|Hàng chợ đen|Thánh thượng ban thưởng|Thái hậu ban thưởng)$/;
+function evOptional(m){if(!m||m.must||m.nl||/end|pcm|nlcard/.test(m.cls||""))return false;if(m.opt)return true;
+ if(m.pid){if(/^e68/.test(m.pid)||OPTPID.has(m.pid))return true;try{if(EVI[m.pid]&&!/^(doanngo|trungcuu|vulan|dongchi|thbirthday|phoenix)$/.test(m.pid))return true}catch(e){}return false}
+ return OPTT.test(m.t||"")}
+function evTxt(m){return String(m.h||"").replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim()}
+function evActorKey(m){const w=m.who;if(w){if(w.w)return w.w.join(":");if(w.nm)return "n:"+w.nm}const t=evTxt(m);const v=(rivals||[]).find(r=>t.includes(r.name));if(v)return "r:"+v.id;const s=(S.staff||[]).find(x=>x.name&&t.includes(x.name));return s?"s:"+s.sid:""}
+function evNames(t){let x=t;try{(rivals||[]).forEach(r=>{x=x.split(r.name).join("X")});(S.staff||[]).concat(S.maid?[S.maid]:[]).forEach(s=>{if(s.name)x=x.split(s.name).join("X")})}catch(e){}return x}
+function evKeys(m){const t=evTxt(m);const tpl=m.pid?"p:"+m.pid.replace(/^e68/,"e:"):"t:"+(m.t||"")+"|"+evNames(t).slice(0,26);return{tpl,key:tpl+"|"+evActorKey(m)+"|"+t.slice(0,40)}}
+function evS(){const e=e68();e.sch=e.sch||{tpl:{},key:{},last:"",bk:"",day:-1,dn:0};return e.sch}
+function bk6(){return wk()*3+(S.buoi||0)}
+let EVHOLD=[],EVLAST=null;
+function evDropInfo(m){if(!m.opts&&m.h){try{log(evTxt(m).slice(0,200))}catch(e){}}}
+function evGate(){if(!S||S.dead||window.__e68off||!Q.length)return;const sc=evS();const b=bk6(),day=wk();if(sc.day!==day){sc.day=day;sc.dn=0}
+ const now=wk();let keepOpt=Q[0]&&Q[0]===EVLAST&&evOptional(Q[0]);const hasMust=Q.some(m=>!evOptional(m)&&!m.__seen);
+ for(let i=0;i<Q.length;i++){const m=Q[i];if(m===EVLAST&&i===0)continue;if(!evOptional(m))continue;
+  const K=evKeys(m);const tl=sc.tpl[K.tpl],kl=sc.key[K.key];
+  if((tl!=null&&now-tl<E68S.tpl)||(kl!=null&&now-kl<E68S.key)){Q.splice(i,1);i--;evDropInfo(m);continue}
+  const ak=evActorKey(m);
+  const atDayStart=(S.buoi||0)===0&&!m.__held&&(hasMust||roll(50));
+  const block=keepOpt||sc.bk===b||sc.dn>=E68S.day||(ak&&ak===sc.last)||atDayStart;
+  if(block){Q.splice(i,1);i--;if(EVHOLD.length<E68S.hold&&sc.dn<E68S.day+1)EVHOLD.push({m,at:now,K});else evDropInfo(m);continue}
+  keepOpt=true}
+ const m=Q[0];if(m&&m!==EVLAST&&evOptional(m)){const K=evKeys(m);sc.tpl[K.tpl]=now;sc.key[K.key]=now;sc.last=evActorKey(m);sc.bk=b;sc.dn++;try{evHistMark(K.tpl)}catch(e){}}
+ if(m)m.__seen=1;EVLAST=m||null}
+/* release one held event at a later buổi, at random, if nothing else is up */
+function evRelease(){if(!S||S.dead||Q.length||S.mg||!EVHOLD.length)return;const sc=evS();const now=wk();EVHOLD=EVHOLD.filter(h=>{if(now-h.at>E68S.stale){evDropInfo(h.m);return false}return true});
+ if(!EVHOLD.length||sc.bk===bk6()||(sc.day===now&&sc.dn>=E68S.day)||!roll(65))return;const h=EVHOLD.shift();h.m.__held=1;Q.push(h.m);showModal()}
+(function(){const s0=showModal;showModal=function(){try{evGate()}catch(x){console.error(x)}return s0.apply(this,arguments)}})();
+(function(){const n0=nextBuoi;nextBuoi=function(){const r=n0.apply(this,arguments);try{evRelease()}catch(x){console.error(x)}return r}})();
+(function(){const t0=typeof tdPop==="function"?tdPop:null;if(!t0)return;tdPop=function(){const n=Q.length;const r=t0.apply(this,arguments);if(Q.length>n)Q[Q.length-1].opt=1;return r}})();
+(function(){const s0=start;start=function(){EVHOLD=[];EVLAST=null;return s0.apply(this,arguments)}})();
