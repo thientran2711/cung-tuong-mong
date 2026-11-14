@@ -21,9 +21,12 @@
   plain undyed pale grey-white coarse linen robe, no embroidery, no jewellery, simple low bun with a plain wooden pin, clean, neat, beautiful,
   calm standing, simple hand variety (broom handle, bowl, lamp, hands folded...). Code: j39 figTier maps "cold" -> -1 and figTierOf already
   maps the player (S.out) and rivals (who.out) to -1, so NPCs in lãnh cung already pick "cold".
+- DONE so far (calm, v6): t5 all 32; t6 c01–c16. NEXT: t6 c17–c32 (`python3 cv2.py 6 c17 ..` prints the variable parts;
+  template = t5 prompt with the rank-6 outfit), then t7, t8.
 - ORDER NOW: t5 DONE (calm) -> t6, t7, t8 (calm) -> tcold for all 32 -> redraw t4 motion lineups (c01 c07 c19 c20–c32, incl. the 3 squat
   ones) calm -> t1–t3 redraw (new ages + calm varied hands; t1 redraw must keep the frozen-t1 face, pin new t1 in idfix.json only after cmp).
-- Sheets (scratchpad/sheets/): tier5.jpg (all 32 t5, calm, v6). Gen ids: sheets5.txt (v6 = calm), bg ids: sheets4_bg.txt.
+- Sheets (scratchpad/sheets/): tier5.jpg (all 32 t5, calm, v6); tier6_partial.jpg (t6 c01–c16); ladder_c01.jpg (c01 t1–t6;
+  t4 is still the old motion lineup until the t4 redraw). Gen ids: sheets5.txt (v6 = calm), bg ids: sheets4_bg.txt.
 
 
 ## Done (published in img/ + img/FIGURES.json, 560 records)
