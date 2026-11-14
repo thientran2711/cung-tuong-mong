@@ -1,0 +1,2 @@
+# vp.sh JID... : print "JID style ref" + variable part (Outfit ... Poses ...;) of the short prompt
+cd "$(dirname "$0")"; for j in "$@"; do python3 mjobs.py $j > /tmp/claude-0/-home-user-cung-tuong-mong/ed00be27-1e8d-5500-9afe-ce233b508a61/scratchpad/c2/p.txt; head -1 p.txt; sed -n 2p p.txt | python3 -c "import sys;p=sys.stdin.read();print(p[p.index('Outfit for all'):p.index(' graceful motion, skirts')].replace('Poses (NEW, NOT the reference\'s poses; a different age-appropriate pose for each figure, same person and same signature prop), left to right: ','POSES: '))"; done
