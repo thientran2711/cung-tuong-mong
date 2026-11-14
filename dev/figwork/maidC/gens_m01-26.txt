@@ -66,3 +66,11 @@ C-m10-t4 xSdcmWRjfW hands
 C-m24-t3 lJ8MC75gv9 edit lJ8MtGNgv9: a48 hair dark
 C-m04-t4 gOIDuhHSXO edit SytpEzlUb8: add huadian a19
 C-m05-t4 Bh4SA3qoQR edit dtyl3KbXSL: smaller flat cherries
+C-m11-t4 N2Fhl0K6D9 hands (a48 scroll->teacup)
+C-m12-t4 P3EIjcY42C hands
+C-m13-t4 fHA9esDCDY hands nomole
+C-m14-t4 Sytpbz1Ub8 hands
+C-m15-t4 XmPgnkvBfo hands
+C-m16-t4 1lpYfRBr4r hands
+C-m17-t4 huRyMUfvqL hands (a32 book->birdcage)
+C-m18-t4 aF24pJzfSh hands (a24 sachet->lantern)
