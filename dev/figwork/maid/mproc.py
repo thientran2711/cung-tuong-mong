@@ -15,10 +15,11 @@ man={k:json.load(open(v)) for k,v in MF.items()}
 by={k:{r["file"]:r for r in v} for k,v in man.items()}
 AG=["a18","a26","a36","a51"]
 only=set(sys.argv[2:])
+LAST={}
 for line in open(sys.argv[1]):
     p=line.split()
-    if len(p)<3: continue
-    jid,gen,bid=p[:3]
+    if len(p)>=3: LAST[p[0]]=p[:3]
+for jid,gen,bid in LAST.values():
     if only and jid not in only: continue
     part,who,tt=jid.split("-")
     role="consort" if part=="B" else "maid"
