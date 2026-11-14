@@ -1,0 +1,10 @@
+# Cảnh nền vẽ lại 11/14 (sàn trống 35–40% dưới cho người đứng). GPT 2.6 (gpt-2-6), 16:9 2k, style ref = phi-tan-cung (Magnific mE376HNhJQ)
+# Magnific folder ba4aecfe-efce-47e2-b53f-30d292091886; xuất 1280x720 webp q74
+kinh-su-phong eIOj7PNdqL (alt MBw1SJRDCm)
+ngu-thu-phong XmPsONNBfo (alt 5jV20pBKxe)
+thai-y-vien   ksDGVXv16B (alt jUXWeIqLD0)
+tu-ninh-cung  ov9gPRD829 (alt p8JxwNIehw)
+tam-cung-dem  TdSKlyZVNR (alt iGqhFx23uK)
+ngu-hoa-vien  s7o0Xf7l8e (alt aF2yR0KfSh)
+# Giữ nguyên (đạt): duong-tam-dien, khon-ninh-cung, lanh-cung, phi-tan-cung
+# Luật: mọi cảnh nền mới phải chừa sàn trống ở giữa/dưới, đồ đạc chỉ ở hai bên và phía sau, tầm mắt người đứng (đường chân trời ~45%).
