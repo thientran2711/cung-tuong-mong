@@ -159,7 +159,7 @@ export class Room {
       return this.bcast({ t: "where", week: msg.week, buoi: msg.buoi, W: msg.W }, ws);
     }
     if (t === "pos") {
-      m.pos = m.pos || {}; m.pos[seat] = { place: msg.place, khac: msg.khac, week: msg.week, buoi: msg.buoi, x: msg.x };
+      { const o = { ...msg }; delete o.t; delete o.from; if (JSON.stringify(o).length > 4000) return; m.pos = m.pos || {}; m.pos[seat] = o; }
       await this.saveMeta(); return this.bcast({ t: "pos", from: seat, ...m.pos[seat] }, ws);
     }
     if (t === "act" || t === "actr" || t === "res" || t === "note") { const o = { ...msg, from: seat }; return this.bcast(o, ws); }

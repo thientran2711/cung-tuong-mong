@@ -65,7 +65,7 @@ const WORLD=()=>{const kidsOf=v=>(v.kids||[]).map(k=>k.name+(k.alive?'':'†')).
      if(same||Date.now()-pend.t>5000){lastKey=pa.key;buoiN++;
        if(pa.where!==pb.where){whereDiff++;if(whereDiff<=5)L(`buổi ${pa.key} NPC places differ: A-only [${pa.where.split(',').filter(x=>!pb.where.split(',').includes(x)).slice(0,6)}] B-only [${pb.where.split(',').filter(x=>!pa.where.split(',').includes(x)).slice(0,6)}]`)}
        pd.forEach(x=>posDiff.push(pa.key+' '+x));
-       if(pa.fst!==pb.mst||pb.fst!==pa.mst)statLag++;
+       if(pa.fst!==pb.mst||pb.fst!==pa.mst){statLag++;if(statLag<=4)L(`buổi ${pa.key} stats: A sees B ${pa.fst} (B ${pb.mst}) · B sees A ${pb.fst} (A ${pa.mst})`)}
        if(buoiN===1)L(`first buổi: friend known-state A ${pa.fk} B ${pb.fk} (0 = Người lạ)`);knownLog[pa.fk+'/'+pb.fk]=(knownLog[pa.fk+'/'+pb.fk]||0)+1;}}
    for(const o of [A,B]){const r=await o.p.evaluate(STEP).catch(e=>'err:'+e.message);if(r==='act')o.acts++;if(/^meet/.test(r))o.meets++;if(/^harm:/.test(r)){o.harms++;o.hk[r.slice(5)]=(o.hk[r.slice(5)]||0)+1}if(/^harmerr/.test(r))L(o.name+' '+r);if(/^reborn/.test(r)){o.deaths++;L(`week ${w}: ${o.name} died → ${r}`)}}
    const wa=await A.p.evaluate(()=>__co().week),wb=await B.p.evaluate(()=>__co().week);if(wa>wk&&wb>wk)break;await sleep(60)}
