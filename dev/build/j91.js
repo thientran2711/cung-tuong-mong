@@ -20,6 +20,8 @@ let K91SK="tho-slip";
 function k91Slip(g,n,x,y,w,h){const im=kg82Img(n);if(!(im.complete&&im.naturalWidth))return false;const iw=im.naturalWidth,ih=im.naturalHeight,cs=ih*.45,cd=Math.min(w/2,cs*h/ih);
  g.drawImage(im,0,0,cs,ih,x,y,cd,h);g.drawImage(im,cs,0,iw-2*cs,ih,x+cd,y,Math.max(0,w-2*cd),h);g.drawImage(im,iw-cs,0,cs,ih,x+w-cd,y,cd,h);return true}
 /* a word tile: st n | on | ok | bad | blank */
+/* a round's verdict ("Khớp hương mẫu!", "Đối chỉnh!"…): drawn IN PLACE of the hint/heading line it would cover, never floating over other text */
+function k91Say(g,t,col,x,y,maxW,align){g.save();g.fillStyle=col;g.font=`700 16px ${kg82Col("--display","serif")||"serif"}`;g.textAlign=align||"center";g.textBaseline="alphabetic";kg82Lbl(g,t,x,y,maxW);g.restore()}
 function k91Tile(g,x,y,w,h,txt,st,fs,skin){skin=skin||K91SK;const red=skin==="doi-slip";
  if(st!=="blank"){g.save();if(st==="on"){g.shadowColor="#2a1a1266";g.shadowBlur=10;g.shadowOffsetY=3}const ok=k91Slip(g,skin,x,y,w,h);g.restore();
   if(ok){g.save();if(st!=="n"){k91RR(g,x-1.5,y-1.5,w+3,h+3,6);g.lineWidth=3;g.strokeStyle=st==="ok"?K91C.good():st==="bad"?K91C.red():"#e0a526";g.stroke()}
@@ -51,8 +53,8 @@ function k91Hold(box,env){const C=kg82Canvas(box,.9,430),{g,W,H}=C;const lv=env.
   kg82Bg(g,W,H,"hat",.06,.75);
   /* ribbon */const ta=t-MX/SPD,tb=t+(W-MX)/SPD;g.save();g.beginPath();for(let tt=ta;tt<=tb;tt+=40){const x=MX+(tt-t)*SPD;g.lineTo(x,cy(tt)-band)}for(let tt=tb;tt>=ta;tt-=40){const x=MX+(tt-t)*SPD;g.lineTo(x,cy(tt)+band)}g.closePath();
   g.fillStyle="rgba(255,226,140,.38)";g.fill();g.setLineDash([4,6]);g.strokeStyle=K91C.gold();g.lineWidth=1.4;g.beginPath();for(let tt=ta;tt<=tb;tt+=40){const x=MX+(tt-t)*SPD;g.lineTo(x,cy(tt))}g.stroke();g.restore();
-  /* lyric words on the ribbon */g.font=k91F(600,Math.max(12,Math.min(16,W/30)));g.textAlign="center";g.textBaseline="alphabetic";
-  for(const w of words){if(w.t<ta-500||w.t>tb+500||w.t>DUR)continue;const x=MX+(w.t-t)*SPD;g.fillStyle=Math.abs(w.t-t)<350?K91C.red():"#3a2a1e";kg82Lbl(g,w.x,x,cy(w.t)-band-6)}
+  /* lyric words on the ribbon (from the start: the countdown and its hint own the board before) */g.font=k91F(600,Math.max(12,Math.min(16,W/30)));g.textAlign="center";g.textBaseline="alphabetic";
+  if(t>=0)for(const w of words){if(w.t<ta-500||w.t>tb+500||w.t>DUR)continue;const x=MX+(w.t-t)*SPD;g.fillStyle=Math.abs(w.t-t)<350?K91C.red():"#3a2a1e";kg82Lbl(g,w.x,x,cy(w.t)-band-6)}
   g.fillStyle="#c23b2233";g.fillRect(MX-1,0,2,H);
   {const lr=Math.min(24,W*.05);if(!kg82Spr(g,"hat-lotus",MX,y,lr*2,null,{alpha:ok?1:.6,glow:ok?"#fff2b0":null,blur:16}))kg82Blossom(g,MX,y,lr*.7,ok?K91C.pk():"#b9a58a",ok)}
   if(t<0){g.fillStyle=K91C.ink;g.font=k91F(700,24);kg82Lbl(g,String(Math.ceil(-t/1000)),W/2,H*.2);g.font=k91F(700,13,1);g.fillStyle="#3a2a1e";kg82Lbl(g,"Giữ ngón tay: lên giọng · buông: xuống giọng",W/2,H*.2+22,W-16)}
@@ -123,11 +125,11 @@ function k91Verse(box,env){const C=kg82Canvas(box,1,470),{g,W,H}=C;const lv=env.
   if(P.blanks.every(b=>P.fill[b]))setTimeout(()=>{if(phase==="play")judge()},350)}
  function back(t){if(t.at!=null)delete P.fill[t.at];t.at=null;t.x=t.hx;t.y=t.hy}
  function judge(){phase="judge";let ok=0;P.blanks.forEach(i=>{const t=P.fill[i];if(t&&t.w===P.words[i])ok++});pts+=ok;tot+=P.blanks.length;
-  kg82Pop(pops,W/2,H*.3,ok===P.blanks.length?"Đúng vần, đúng luật!":`Đúng ${ok}/${P.blanks.length} chữ`,ok===P.blanks.length?K91C.good():K91C.gold());setTimeout(next,1600)}
+  P.say=[ok===P.blanks.length?"Đúng vần, đúng luật!":`Đúng ${ok}/${P.blanks.length} chữ`,ok===P.blanks.length?K91C.good():K91C.gold()];setTimeout(next,1600)}
  const stop=k91Loop(now=>{if(!P)return;K91SK="tho-slip";kg82Bg(g,W,H,"tho",.12,1);const left=LIM-(now-t0);if(phase==="play"&&left<=0)judge();
   g.textAlign="center";g.textBaseline="alphabetic";g.fillStyle="#5a3a0c";g.font=k91F(700,12,1);kg82Lbl(g,"CÂU LỤC (6 CHỮ)",W/2,H*.07);
   g.font=k91F(600,P.fs+3);{let px=P.fs+3;while(px>10&&g.measureText(P.a).width>W-16){px--;g.font=k91F(600,px)}}const aw=P.a.split(" ");const full=g.measureText(P.a).width;let x=W/2-full/2;g.textAlign="left";aw.forEach((w,i)=>{g.fillStyle=i===5?K91C.red():K91C.ink;kg82Lbl(g,w,x,H*.15);if(i===5){const ww=g.measureText(w).width;g.fillRect(x,H*.15+5,ww,2)}x+=g.measureText(w+" ").width});
-  g.textAlign="center";g.fillStyle="#5a3a0c";g.font=k91F(700,12,1);kg82Lbl(g,"CÂU BÁT (8 CHỮ) · CHỮ THỨ 6 HIỆP VẦN",W/2,H*.3-4,W-16);
+  g.textAlign="center";if(phase==="judge"&&P.say)k91Say(g,P.say[0],P.say[1],W/2,H*.3-4,W-16);else{g.fillStyle="#5a3a0c";g.font=k91F(700,12,1);kg82Lbl(g,"CÂU BÁT (8 CHỮ) · CHỮ THỨ 6 HIỆP VẦN",W/2,H*.3-4,W-16)}
   P.slots.forEach((s,i)=>{const isB=P.blanks.includes(i);if(!isB){k91Tile(g,s.x,s.y,s.w,s.h,P.words[i],"n",P.fs);return}
    const t=P.fill[i];const st=phase==="judge"?(t&&t.w===P.words[i]?"ok":"bad"):"blank";if(!t||phase==="judge")k91Tile(g,s.x,s.y,s.w,s.h,phase==="judge"?P.words[i]:"",st==="blank"?"blank":st,P.fs);
    if(i===5){g.fillStyle=K91C.red();g.font=k91F(700,11,1);g.textAlign="center";g.textBaseline="alphabetic";kg82Lbl(g,"vần",s.x+s.w/2,s.y+s.h+12)}});
@@ -149,11 +151,11 @@ function k91Pair(box,env){const C=kg82Canvas(box,1.05,480),{g,W,H}=C;const lv=en
  const pickN=n=>kg82Shuf(D.filter(([a])=>a.length===n)).concat(kg82Shuf(D))[0];const sizes=[4,5,lv>=3?6:7];
  let r=-1,pts=0,tot=0,P=null,phase="",t0=0,LIM=0,drag=null,selL=-1,done=false;const pops=[];
  function next(){r++;if(r>=sizes.length){done=true;return setTimeout(()=>env.end(Math.round(10*pts/Math.max(1,tot))),300)}const [a,b]=pickN(sizes[r]);const n=a.length;
-  const ord=kg82Shuf([...Array(n).keys()]);const top=H*.11,rh=Math.min(54,(H*.8)/n),th=Math.min(42,rh-8),tw=Math.min(W*.36,150);
+  const ord=kg82Shuf([...Array(n).keys()]);const top=H*.11,rh=Math.min(54,(H-62-top)/n),th=Math.min(42,rh-8),tw=Math.min(W*.36,150);
   P={a,b,n,ord,link:Array(n).fill(-1),L:a.map((w,i)=>({x:W*.06,y:top+i*rh,w:tw,h:th})),R:ord.map((j,i)=>({x:W*.94-tw,y:top+i*rh,w:tw,h:th,j}))};LIM=22000+n*3000+lv*2000;phase="play";t0=performance.now();drag=null;selL=-1}
  const hit=(arr,x,y)=>arr.findIndex(t=>x>=t.x-6&&x<=t.x+t.w+6&&y>=t.y-6&&y<=t.y+t.h+6);
  function link(i,k){P.link.forEach((v,j)=>{if(v===k)P.link[j]=-1});P.link[i]=k;kg82Pluck(i,true);if(P.link.every(v=>v>=0))setTimeout(()=>{if(phase==="play")judge()},400)}
- function judge(){phase="judge";let ok=0;P.link.forEach((k,i)=>{if(k>=0&&P.R[k].j===i)ok++});pts+=ok;tot+=P.n;kg82Pop(pops,W/2,H*.95-10,ok===P.n?"Đối chỉnh!":`Đúng ${ok}/${P.n} cặp`,ok===P.n?K91C.good():K91C.gold());setTimeout(next,1900)}
+ function judge(){phase="judge";let ok=0;P.link.forEach((k,i)=>{if(k>=0&&P.R[k].j===i)ok++});pts+=ok;tot+=P.n;P.say=[ok===P.n?"Đối chỉnh!":`Đúng ${ok}/${P.n} cặp`,ok===P.n?K91C.good():K91C.gold()];setTimeout(next,1900)}
  const stop=k91Loop(now=>{if(!P)return;K91SK="doi-slip";kg82Bg(g,W,H,"doi",.05,.5);const left=LIM-(now-t0);if(phase==="play"&&left<=0)judge();
   g.fillStyle="#5a1a0c";g.font=k91F(700,12,1);g.textAlign="center";g.textBaseline="alphabetic";kg82Lbl(g,"VẾ RA",P.L[0].x+P.L[0].w/2,H*.07);kg82Lbl(g,"VẾ ĐỐI",P.R[0].x+P.R[0].w/2,H*.07);
   const fs=W<420?14:16;
@@ -161,7 +163,7 @@ function k91Pair(box,env){const C=kg82Canvas(box,1.05,480),{g,W,H}=C;const lv=en
   if(drag){g.strokeStyle=K91C.red();g.setLineDash([5,4]);g.lineWidth=2.5;g.beginPath();g.moveTo(drag.sx,drag.sy);g.lineTo(drag.x,drag.y);g.stroke();g.setLineDash([])}
   P.L.forEach((t,i)=>k91Tile(g,t.x,t.y,t.w,t.h,P.a[i],phase==="judge"?(P.link[i]>=0&&P.R[P.link[i]].j===i?"ok":"bad"):(selL===i||(drag&&drag.side==="L"&&drag.i===i))?"on":"n",fs));
   P.R.forEach((t,k)=>k91Tile(g,t.x,t.y,t.w,t.h,P.b[t.j],drag&&drag.side==="R"&&drag.i===k?"on":"n",fs));
-  if(phase==="judge"){g.fillStyle=K91C.ink;g.font=k91F(700,fs);g.textAlign="center";kg82Lbl(g,`Vế đối: ${P.b.join(" ")}`,W/2,H*.95-34,W-16)}
+  if(phase==="judge"){g.fillStyle=K91C.ink;g.font=k91F(700,fs);g.textAlign="center";kg82Lbl(g,`Vế đối: ${P.b.join(" ")}`,W/2,H-30,W-16);if(P.say)k91Say(g,P.say[0],P.say[1],W/2,H-8,W-16)}
   kg82DrawPops(g,pops,now);env.hud({score:`${Math.round(10*pts/Math.max(1,tot))}/10`,round:`Hồi ${Math.min(r+1,sizes.length)}/${sizes.length}`,time:phase==="play"?`${Math.max(0,Math.ceil(left/1000))} giây`:"–"})});
  let dn=null;k91Pointer(C,{down:(x,y)=>{if(phase!=="play")return;const i=hit(P.L,x,y),k=hit(P.R,x,y);if(i>=0){const t=P.L[i];drag={side:"L",i,sx:t.x+t.w,sy:t.y+t.h/2,x,y}}else if(k>=0){const t=P.R[k];drag={side:"R",i:k,sx:t.x,sy:t.y+t.h/2,x,y}}dn={x,y}},
   move:(x,y)=>{if(drag){drag.x=x;drag.y=y}},
@@ -230,17 +232,17 @@ function k91Trace(box,env){const C=kg82Canvas(box,1,460),{g,W,H}=C;const lv=env.
  function scoreStroke(G,U){if(U.length<2)return 0;let cov=0;for(const p of G){let m=1e9;for(const q of U){const d=(p[0]-q[0])**2+(p[1]-q[1])**2;if(d<m)m=d}if(m<tol*tol)cov++}
   let acc=0;for(const q of U){let m=1e9;for(const p of G){const d=(p[0]-q[0])**2+(p[1]-q[1])**2;if(d<m)m=d}if(m<tol*tol)acc++}return(cov/G.length)*(.5+.5*acc/U.length)}
  function endFig(){phase="judge";while(sc.length<F.S.length)sc.push(0);const s=sc.reduce((a,b)=>a+b,0)/F.S.length;sum+=s;const w=s>=.85?"Nét thần!":s>=.65?"Nét vững":s>=.4?"Tạm được":"Nét run";
-  kg82Pop(pops,W/2,oy+18,`${F.n}: ${w}`,s>=.65?K91C.good():s>=.4?K91C.gold():K91C.red());setTimeout(next,1300)}
+  F.say=[`${F.n}: ${w}`,s>=.65?K91C.good():s>=.4?K91C.gold():K91C.red()];setTimeout(next,1300)}
  const stop=k91Loop(now=>{if(!F)return;const left=LIM-(now-t0);if(phase==="play"&&left<=0)endFig();kg82Bg(g,W,H,"ve",0,.7);
   g.fillStyle="rgba(255,252,242,.62)";k91RR(g,ox-6,oy-6,S0+12,S0+12,8);g.fill();
   kg82Spr(g,"ve-inkstone",ox+S0-S0*.07,oy+S0-S0*.05,S0*.16,null,{alpha:.95});
-  g.fillStyle="#3a2a1e";g.font=k91F(700,12,1);g.textAlign="left";g.textBaseline="alphabetic";kg82Lbl(g,F.n.toUpperCase(),ox,oy-12);
+  if(phase==="judge"&&F.say)k91Say(g,F.say[0],F.say[1],ox,oy-12,W-ox-8,"left");else{g.fillStyle="#3a2a1e";g.font=k91F(700,12,1);g.textAlign="left";g.textBaseline="alphabetic";kg82Lbl(g,F.n.toUpperCase(),ox,oy-12)}
   F.S.forEach((P,k)=>{g.save();g.lineCap="round";g.lineJoin="round";g.strokeStyle=k<si?"#8a735022":k===si?"#8a735040":"#8a735020";g.lineWidth=tol*2;g.beginPath();P.forEach(p=>g.lineTo(p[0],p[1]));g.stroke();
    g.strokeStyle=k===si?"#8a7350aa":"#8a735055";g.lineWidth=1.2;g.setLineDash([3,5]);g.beginPath();P.forEach(p=>g.lineTo(p[0],p[1]));g.stroke();g.restore();
    if(k===si&&phase==="play"){g.fillStyle=K91C.good();g.beginPath();g.arc(P[0][0],P[0][1],7,0,Math.PI*2);g.fill();g.fillStyle="#fff";g.font=k91F(700,10,1);g.textAlign="center";g.textBaseline="middle";g.fillText(String(k+1),P[0][0],P[0][1]+.5)}});
   inks.concat(ink?[ink]:[]).forEach(U=>{g.save();g.lineCap="round";g.lineJoin="round";g.strokeStyle="#1e140e";for(let i=1;i<U.length;i++){const sp=k91Dist(U[i][0],U[i][1],U[i-1][0],U[i-1][1]);g.lineWidth=Math.max(2.5,Math.min(9,9-sp*.35));g.beginPath();g.moveTo(U[i-1][0],U[i-1][1]);g.lineTo(U[i][0],U[i][1]);g.stroke()}g.restore()});
   {const tip=ink&&ink.length?ink[ink.length-1]:null;if(tip)kg82Spr(g,"ve-brush",tip[0],tip[1],S0*.2,null,{ax:.06,ay:.95,alpha:.95})}
-  kg82DrawPops(g,pops,now);env.hud({score:`${Math.round(10*Math.min(1,sum/Math.max(1,r)/.85))}/10`,round:`Hồi ${Math.min(r+1,NR)}/${NR}`,time:phase==="play"?`${Math.max(0,Math.ceil(left/1000))} giây`:"–"})});
+  kg82DrawPops(g,pops,now);env.hud({score:`${Math.round(10*Math.min(1,sum/NR/.85))}/10`,round:`Hồi ${Math.min(r+1,NR)}/${NR}`,time:phase==="play"?`${Math.max(0,Math.ceil(left/1000))} giây`:"–"})});
  k91Pointer(C,{down:(x,y)=>{if(phase!=="play")return;ink=[[x,y]]},move:(x,y)=>{if(ink&&phase==="play"){const l=ink[ink.length-1];if(k91Dist(x,y,l[0],l[1])>=2)ink.push([x,y])}},
   up:()=>{if(!ink||phase!=="play"){ink=null;return}const U=ink;ink=null;if(U.length<4)return;inks.push(U);sc.push(scoreStroke(F.S[si],U));kg82Pluck(si,sc[si]>.5);si++;if(si>=F.S.length)setTimeout(()=>{if(phase==="play")endFig()},250)}});
  KG82.peek=()=>{if(phase!=="play"||!F||ink||si>=F.S.length)return null;return{drag:F.S[si].filter((p,i,a)=>i%2===0||i===a.length-1).map(p=>{const c=C.client(p[0],p[1]);return[c.x,c.y]})}};
@@ -266,7 +268,7 @@ function k91Arrange(box,env){const C=kg82Canvas(box,1.08,480),{g,W,H}=C;const lv
   /* best assignment flower→target (≤5! permutations) */const perm=(a)=>a.length<=1?[a]:a.flatMap((x,i)=>perm(a.slice(0,i).concat(a.slice(i+1))).map(p=>[x].concat(p)));
   for(const p of perm([...T.keys()])){let s=0;F.forEach((f,i)=>{if(!f.placed)return;const t=T[p[i]];const e=k91Dist(f.x,f.y,t.x,t.y)/U;s+=Math.max(0,1-e/(.32*(1+.08*lv)))});if(s>best)best=s}
   const mx=placed.length?placed.reduce((a,f)=>a+f.x,0)/placed.length:MXv,tx=T.reduce((a,t)=>a+t.x,0)/T.length;const bal=Math.max(0,1-Math.abs(mx-tx)/(U*.35));
-  const s=.85*best/T.length+.15*bal*(placed.length/T.length);sum+=s;kg82Pop(pops,W/2,H*.08+10,s>=.8?"Thế hoa cân đối!":s>=.55?"Khá đẹp":"Còn lệch",s>=.8?K91C.good():s>=.55?K91C.gold():K91C.red());setTimeout(next,1700)}
+  const s=.85*best/T.length+.15*bal*(placed.length/T.length);sum+=s;P.say=[s>=.8?"Thế hoa cân đối!":s>=.55?"Khá đẹp":"Còn lệch",s>=.8?K91C.good():s>=.55?K91C.gold():K91C.red()];setTimeout(next,1700)}
  function stemDraw(f,hl){if(branch(f,MXv,MYv+U*.02,f.L+U*.02,Math.atan2(f.x-MXv,MYv-f.y),hl))return;g.save();g.strokeStyle="#4f7f4a";g.lineWidth=3;g.beginPath();g.moveTo(MXv,MYv);g.quadraticCurveTo((MXv+f.x)/2+(f.x-MXv)*.08,(MYv+f.y)/2,f.x,f.y);g.stroke();
   g.fillStyle="#5fa58c";const mx=(MXv*.4+f.x*.6),my=(MYv*.4+f.y*.6);g.beginPath();g.ellipse(mx+8,my,10,4,.6,0,Math.PI*2);g.fill();kg82Blossom(g,f.x,f.y,U*.085,f.c,hl);g.restore()}
  const stop=k91Loop(now=>{if(!P)return;const left=LIM-(now-t0);if(phase==="play"&&left<=0)judge();kg82Bg(g,W,H,"hoa",0,.6);
@@ -280,11 +282,12 @@ function k91Arrange(box,env){const C=kg82Canvas(box,1.08,480),{g,W,H}=C;const lv
   /* tray: the branches lie ready on the cloth (light wash for legibility) */g.fillStyle="rgba(255,250,236,.5)";g.fillRect(0,H*.8,W,H*.2);
   P.F.forEach(f=>{if(f.placed||(drag&&drag.f===f))return;g.save();const by=H*.955,bh=H*.09+f.L/U*H*.06;
    if(!branch(f,f.hx,by,bh*.9,0,false)){g.strokeStyle="#4f7f4a";g.lineWidth=2.5;g.beginPath();g.moveTo(f.hx,by);g.lineTo(f.hx,by-bh*.6);g.stroke();kg82Blossom(g,f.hx,by-bh*.6,Math.min(U*.07,P.tw*.22),f.c,false)}
-   g.fillStyle=K91C.ink;g.font=k91F(700,Math.min(12,P.tw*.14),1);g.textAlign="center";g.textBaseline="alphabetic";kg82Lbl(g,lenWord(f.L),f.hx,H*.99,P.tw-4);g.restore()});
+   if(phase!=="judge"){g.fillStyle=K91C.ink;g.font=k91F(700,Math.min(12,P.tw*.14),1);g.textAlign="center";g.textBaseline="alphabetic";kg82Lbl(g,lenWord(f.L),f.hx,H*.99,P.tw-4)}g.restore()});
+  /* the verdict sits on the tray (its slip names are hidden meanwhile), clear of the Thiên/Nhân/Địa marks */if(phase==="judge"&&P.say)k91Say(g,P.say[0],P.say[1],W/2,H*.92,W-16);
   if(drag&&!drag.f.placed){g.save();if(!branch(drag.f,drag.x,drag.y+drag.f.L*.5,drag.f.L*.6,0,true))kg82Blossom(g,drag.x,drag.y,U*.08,drag.f.c,true);g.restore()}
   /* balance scale */const pl=P.F.filter(f=>f.placed);if(pl.length){const mx=pl.reduce((a,f)=>a+f.x,0)/pl.length;const tx=P.tg.reduce((a,t)=>a+t.x,0)/P.tg.length;g.fillStyle="#3a2a1e";g.font=k91F(700,11,1);g.textAlign="left";g.textBaseline="top";kg82Lbl(g,"Cân thế hoa",8,8);
    g.strokeStyle=K91C.hair;g.lineWidth=2;g.beginPath();g.moveTo(8,30);g.lineTo(90,30);g.stroke();g.fillStyle=K91C.good();g.fillRect(49-2,24,4,12);g.fillStyle=Math.abs(mx-tx)<U*.1?K91C.good():K91C.red();g.beginPath();g.arc(49+cl((mx-tx)/U*80,-40,40),30,5,0,Math.PI*2);g.fill()}
-  kg82DrawPops(g,pops,now);env.hud({score:`${Math.round(10*Math.min(1,sum/Math.max(1,r)/.88))}/10`,round:`Hồi ${Math.min(r+1,NR)}/${NR}`,time:phase==="play"?`${Math.max(0,Math.ceil(left/1000))} giây`:"–"})});
+  kg82DrawPops(g,pops,now);env.hud({score:`${Math.round(10*Math.min(1,sum/NR/.88))}/10`,round:`Hồi ${Math.min(r+1,NR)}/${NR}`,time:phase==="play"?`${Math.max(0,Math.ceil(left/1000))} giây`:"–"})});
  k91Pointer(C,{down:(x,y)=>{if(phase!=="play")return;let f=P.F.find(f=>f.placed&&k91Dist(x,y,f.x,f.y)<Math.max(26,U*.1));
    if(!f)f=P.F.find(f=>!f.placed&&Math.abs(x-f.hx)<P.tw/2&&y>H*.78);if(f)drag={f,x,y}},
   move:(x,y)=>{if(!drag)return;drag.x=x;drag.y=y;if(y<MYv+U*.05){drag.f.placed=true;aimAt(drag.f,x,y)}else if(!drag.f.placed||y>H*.8){drag.f.placed=false}},
@@ -363,7 +366,7 @@ function k91Cook(box,env){const C=kg82Canvas(box,(box.clientWidth||300)<420?1.25
    g.fillStyle="#fff";g.font=k91F(600,11,1);g.textAlign="center";g.textBaseline="middle";g.fillText("đang ninh",PX,PY+PR*.45)}
   g.save();g.globalAlpha=.35;g.fillStyle="#fff";for(let k=0;k<3;k++){const sx=PX-PR*.4+k*PR*.4,sy=PY-PR*.3-((now/12+k*40)%(PR*.8));g.beginPath();g.arc(sx+Math.sin(now/300+k)*6,sy,PR*.12,0,Math.PI*2);g.fill()}g.restore();
   /* counter: the painted ingredients on paper slips */tiles.forEach(t=>{if(t.used||(drag&&drag.t===t))return;k91Ing(g,t,t.x,t.y,t.w,t.h,"n",W<420?13:15)});if(drag)k91Ing(g,drag.t,drag.x-drag.t.w/2,drag.y-drag.t.h/2,drag.t.w,drag.t.h,"on",W<420?13:15);
-  if(t<0){g.fillStyle=K91C.ink;g.font=k91F(700,15,1);g.textAlign="center";g.textBaseline="middle";kg82Lbl(g,"Giữ nút Quạt lửa · kéo nguyên liệu vào nồi theo thứ tự",W/2,H*.68,W-16)}
+  if(t<0){g.fillStyle=K91C.ink;g.font=k91F(700,15,1);g.textAlign="center";g.textBaseline="middle";/* right of the heat gauge, never over its "Lửa" label */const ix=GX+GW+16;kg82Lbl(g,"Giữ nút Quạt lửa · kéo nguyên liệu vào nồi theo thứ tự",(ix+W-8)/2,H*.68,W-8-ix)}
   kg82DrawPops(g,pops,now);env.hud({score:`${Math.round(10*score())}/10`,round:`Hồi ${Math.min(si+1,steps.length)}/${steps.length}`,time:`${Math.max(0,Math.ceil((DUR-Math.max(0,t))/1000))} giây`})});
  let dn=null;k91Pointer(C,{down:(x,y)=>{if(done)return;const t=tiles.find(t=>!t.used&&x>=t.x&&x<=t.x+t.w&&y>=t.y&&y<=t.y+t.h);if(t){drag={t,x,y};dn={x,y}}},move:(x,y)=>{if(drag){drag.x=x;drag.y=y}},
   up:(x,y)=>{if(!drag)return;const t=drag.t;drag=null;const moved=dn&&k91Dist(x,y,dn.x,dn.y)>8;dn=null;if(!moved||k91Dist(x,y,PX,PY+PR*.3)<PR*1.4)add(t)}});
@@ -381,18 +384,18 @@ function k91Blend(box,env){const C=kg82Canvas(box,1,460),{g,W,H}=C;const lv=env.
  function next(){r++;if(r>=NR){done=true;bd.disabled=true;return setTimeout(()=>env.end(Math.round(10*sum/NR)),300)}const E=pick3();let tv;do tv=[0,1,2].map(()=>1+Math.floor(Math.random()*6));while(Math.max(...tv)-Math.min(...tv)<2);
   P={E,tv,v:[.5,.5,.5]};phase="play";t0=performance.now();bd.disabled=false}
  const SL=()=>{const top=H*.47,bot=H*.93,cw=W/3;return[0,1,2].map(i=>({x:cw*(i+.5),top,bot}))};
- function judge(){phase="judge";bd.disabled=true;const d=dist(P.v,P.tv);const s=cl(1-d/.32,0,1);sum+=s;kg82Pop(pops,W/2,H*.4,s>.85?"Khớp hương mẫu!":s>.55?"Gần giống":"Lệch hương",s>.85?K91C.good():s>.55?K91C.gold():K91C.red());setTimeout(next,1500)}
+ function judge(){phase="judge";bd.disabled=true;const d=dist(P.v,P.tv);const s=cl(1-d/.32,0,1);sum+=s;/* the verdict takes the hint line's place (never drawn over it) */P.verdict=[s>.85?"Khớp hương mẫu!":s>.55?"Gần giống":"Lệch hương",s>.85?K91C.good():s>.55?K91C.gold():K91C.red()];setTimeout(next,1500)}
  function smoke(x,y,R,c,lab){/* the painted censer under its live smoke */kg82Spr(g,"huong-censer",x,y+R*.42,R*1.35,null,{ay:0});g.save();const gr=g.createRadialGradient(x,y,R*.1,x,y,R);gr.addColorStop(0,`rgba(${c},1)`);gr.addColorStop(.7,`rgba(${c},.85)`);gr.addColorStop(1,`rgba(${c},0)`);g.fillStyle=gr;g.beginPath();g.arc(x,y,R,0,Math.PI*2);g.fill();
   g.fillStyle=K91C.ink;g.font=k91F(700,12,1);g.textAlign="center";g.textBaseline="alphabetic";kg82Lbl(g,lab,x,y+R*1.85+12);g.restore()}
  const stop=k91Loop(now=>{if(!P)return;const left=LIM-(now-t0);if(phase==="play"&&left<=0)judge();kg82Bg(g,W,H,"huong",.08,.8);
   const R=Math.min(W*.14,H*.095);const tc=mix(P.E,P.tv),mc=mix(P.E,P.v);smoke(W*.27,H*.12,R,tc.join(","),"Hương mẫu");smoke(W*.73,H*.12,R,mc.join(","),"Hương ngươi pha");
   const d=dist(P.v,P.tv);const word=d>.22?"còn xa":d>.12?"đã gần":d>.05?"rất gần":"khớp";g.fillStyle=d<=.05?K91C.good():d<=.12?K91C.gold():"#6b5643";g.font=k91F(700,13,1);g.textAlign="center";
-  const dom=P.E[P.tv.indexOf(Math.max(...P.tv))][0];kg82Lbl(g,`Mẫu nặng về ${dom} · độ khớp: ${word}`,W/2,H*.4,W-16);
+  const dom=P.E[P.tv.indexOf(Math.max(...P.tv))][0];if(phase==="judge"&&P.verdict)k91Say(g,P.verdict[0],P.verdict[1],W/2,H*.4,W-16);else kg82Lbl(g,`Mẫu nặng về ${dom} · độ khớp: ${word}`,W/2,H*.4,W-16);
   SL().forEach((s,i)=>{const e=P.E[i];g.strokeStyle=K91C.hair;g.lineWidth=6;g.lineCap="round";g.beginPath();g.moveTo(s.x,s.top);g.lineTo(s.x,s.bot-22);g.stroke();
    const y=s.bot-22-(s.bot-22-s.top)*P.v[i];g.strokeStyle=`rgb(${e[1].join(",")})`;g.beginPath();g.moveTo(s.x,s.bot-22);g.lineTo(s.x,y);g.stroke();
    /* knob = the painted jar of that scent */if(!kg82Spr(g,"huong-"+e[2],s.x,y,56,null,{})){g.fillStyle=`rgb(${e[1].join(",")})`;g.strokeStyle="#6e4d0e";g.lineWidth=2;g.beginPath();g.arc(s.x,y,13,0,Math.PI*2);g.fill();g.stroke()}
    g.fillStyle=K91C.ink;g.font=k91F(700,12,1);g.textBaseline="alphabetic";kg82Lbl(g,e[0],s.x,s.bot)});
-  kg82DrawPops(g,pops,now);env.hud({score:`${Math.round(10*sum/Math.max(1,r))}/10`,round:`Hồi ${Math.min(r+1,NR)}/${NR}`,time:phase==="play"?`${Math.max(0,Math.ceil(left/1000))} giây`:"–"})});
+  kg82DrawPops(g,pops,now);env.hud({score:`${Math.round(10*sum/NR)}/10`,round:`Hồi ${Math.min(r+1,NR)}/${NR}`,time:phase==="play"?`${Math.max(0,Math.ceil(left/1000))} giây`:"–"})});
  const setV=(i,y)=>{const s=SL()[i];P.v[i]=cl((s.bot-22-y)/(s.bot-22-s.top),0,1)};
  k91Pointer(C,{down:(x,y)=>{if(phase!=="play")return;if(y<H*.43)return;drag=cl(Math.floor(x/(W/3)),0,2);setV(drag,y)},move:(x,y)=>{if(drag>=0&&phase==="play")setV(drag,y)},up:()=>{drag=-1}});
  bd.onclick=()=>{if(phase==="play")judge()};

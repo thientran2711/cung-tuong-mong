@@ -109,6 +109,8 @@ function kg82Frame(o){const hud=[["score","Phần","0/10"],["round","Hồi","–
  if(kg82Kit())return kitGameFrame({art:o.art,title:o.title,how:o.how,hud,id:"kg82box"});
  return `<div class="kgame"><div class="kph"><b class="kpseal">TÀI NGHỆ</b><span class="kpht"><span class="kptitle">${o.art}: ${o.title}</span></span></div><div class="kghow"><span class="krl">Cách chơi</span><span>${o.how}</span></div>`+
   `<div class="kghud">${hud.map(([k,l,v])=>`<span class="kgc"><small>${l}</small><b data-kg="${k}">${v}</b></span>`).join("")}</div><div class="kgbox" id="kg82box"></div><div class="kgres" id="kg82box-res" hidden></div></div>`}
+/* a HUD count "a/b" (Phần 7/10, Hồi 2/3) never shows above its ceiling; KG82.over counts any engine that tried (tests fail on it) */
+function kg82Cap(v){if(typeof v!=="string")return v;return v.replace(/(\d+)\/(\d+)/,(m,a,b)=>{if(+a>+b){KG82.over=(KG82.over||0)+1;return b+"/"+b}return m})}
 function kg82Set(k,v){if(typeof kitGameSet==="function")kitGameSet(k,v);else document.querySelectorAll(`[data-kg="${k}"]`).forEach(e=>e.innerHTML=v)}
 function kg82Open(o){kg82Close(true);const ov=$("ov");if(!ov)return null;[...ov.children].forEach(c=>{if(c.id!=="kg82"){c.dataset.kg82h=c.hidden?"1":"0";c.hidden=true}});
  const d=document.createElement("div");d.id="kg82";d.className="mg kpanel kgame kg82";d.setAttribute("role","dialog");d.setAttribute("aria-modal","true");d.innerHTML=kg82Frame(o);ov.appendChild(d);ov.hidden=false;d.scrollTop=0;return d}
@@ -169,9 +171,10 @@ const KG82_SPR={dan:["dan-blossom","dan-bridge"],hat:["hat-lotus"],co:["co-board
  huong:["huong-censer"].concat("tram nhai que hong bacha dan moclan".split(" ").map(x=>"huong-"+x))};
 function kg82Preload(kind){const L=[kg82BgName(kind)].concat(KG82_SPR[kind]||[]);return Promise.race([Promise.all(L.map(n=>{const i=kg82Img(n);return i.complete?Promise.resolve():new Promise(r=>{i.addEventListener("load",r,{once:true});i.addEventListener("error",r,{once:true})})})),new Promise(r=>setTimeout(r,2500))])}
 window.kg82Img=kg82Img;window.kg82Bg=kg82Bg;window.kg82Spr=kg82Spr;
-function kg82Pop(list,x,y,t,col){list.push({x,y,t,col,a:performance.now()})}
+/* a new pop replaces any live pop it would land on (two pops never stack: "Trượt" + "Tuyệt!" on one string) */
+function kg82Pop(list,x,y,t,col){const now=performance.now(),w=String(t).length*9;for(let i=list.length-1;i>=0;i--){const q=list[i];const dy=Math.abs((q.y-(now-q.a)/700*26)-y);if(Math.abs(q.x-x)<(w+String(q.t).length*9)/2+6&&dy<30)list.splice(i,1)}list.push({x,y,t,col,a:now})}
 function kg82DrawPops(g,list,now){for(let i=list.length-1;i>=0;i--){const p=list[i],k=(now-p.a)/700;if(k>=1){list.splice(i,1);continue}
- g.save();g.globalAlpha=1-k;g.fillStyle=p.col;g.font=`700 ${16}px ${kg82Col("--display","serif")||"serif"}`;g.textAlign="center";g.textBaseline="alphabetic";kg82Lbl(g,p.t,p.x,p.y-k*26);g.restore()}}
+ KG82.inPop=1;g.save();g.globalAlpha=1-k;g.fillStyle=p.col;g.font=`700 ${16}px ${kg82Col("--display","serif")||"serif"}`;g.textAlign="center";g.textBaseline="alphabetic";kg82Lbl(g,p.t,p.x,p.y-k*26);g.restore();KG82.inPop=0}}
 
 /* =============== ENGINES: eng(box, env) -> stop(); env.end(raw0to10) once; env.hud({score,round,time}); KG82.peek for tests =============== */
 /* 1. RHYTHM (đàn, hát): plum blossoms fall along four strings, tap the string at the vermilion line */
@@ -342,7 +345,7 @@ const KG82_ENG={rhythm:kg82Rhythm,go:kg82Go,quiz:kg82Quiz,pattern:kg82Pattern,st
 
 /* ---------- running one game inside the frame ---------- */
 function kg82Play(kind,onEnd){const box=kg82Box();if(!box)return;box.innerHTML="";box.hidden=false;const res=$("kg82box-res");if(res){res.hidden=true;res.innerHTML=""}KG82.phase="play";
- let done=false,dead=false,stop=null;const env={kind,lv:KG82.lv||0,hud:o=>{for(const k in o)kg82Set(k,o[k])},end:raw=>{if(done)return;done=true;clearTimeout(guard);const st=KG82.run&&KG82.run.stop;KG82.peek=()=>null;if(st)try{st()}catch(e){}KG82.run=null;onEnd(cl(Math.round(raw),0,10))}};
+ let done=false,dead=false,stop=null;const env={kind,lv:KG82.lv||0,hud:o=>{for(const k in o)kg82Set(k,kg82Cap(o[k]))},end:raw=>{if(done)return;done=true;clearTimeout(guard);const st=KG82.run&&KG82.run.stop;KG82.peek=()=>null;if(st)try{st()}catch(e){}KG82.run=null;onEnd(cl(Math.round(raw),0,10))}};
  const guard=setTimeout(()=>env.end(0),97500);KG82.run={stop:()=>{dead=true;clearTimeout(guard);if(stop)stop()}};
  /* the board paintings load first (≤2.5 s), then the game starts */
  kg82Preload(kind).then(()=>{if(dead||done)return;try{stop=KG82_ENG[KG82_KIND[kind].e](box,env)}catch(e){console.error(e);env.end(5)}})}
