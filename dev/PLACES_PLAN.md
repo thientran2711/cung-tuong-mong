@@ -5,7 +5,7 @@ Dựa trên danh sách nơi của review/schedules2 (j95 @7517021): mã j77 hi�
 **Không thêm "Hoán y cục"**: dùng lại `tgk` Tân Giả khố (đã có trong j42/j95, chỉ thiếu ô bản đồ và tranh riêng; hiện mượn tranh lãnh cung `sc:"lc"`).
 Không sửa mã sổ j95 ở đây; mục "Móc vào sổ" là đề nghị cho thợ j95.
 
-Ảnh vị trí: `dev/shots/places/map-new-places.jpg` (khung xanh = ô đề nghị, trên map-ha-sang).
+Ảnh vị trí: `dev/shots/places/map-new-places.jpg` (khung xanh = 6 nơi mới, khung cam = A ca sở / Đông cung, mục 5; trên map-ha-sang).
 
 ## 1. Vị trí trên bản đồ (toạ độ chuẩn 0..1 như map-hotspots.json)
 Mọi nơi đều có sẵn nhà trên tranh bản đồ (chưa ai dùng) → **không cần sửa tranh bản đồ**.
@@ -50,11 +50,32 @@ Mọi nơi đều có sẵn nhà trên tranh bản đồ (chưa ai dùng) → **
 - `pd`: "Xin xăm ở Phật đường" (j13 `reLot(true)`, hiện bị tắt `if(false)` trong thẻ Thái hậu j2 → đặt ở đây); "Tụng kinh, làm việc thiện" (j2); "Chép kinh, giữ đức" (j14).
 - `ttp`: "Học với thầy" (j23 Tài nghệ) và "Khảo bài ở Thượng thư phòng" (j53/j65); các trò học vẫn dùng nền phòng riêng từng môn `mg-<k>-bg-hoc` (KIT 13.1), không đổi. Tên **Thượng thư phòng** lấy theo chữ đã có trong j53/j65 (không dùng "học đường").
 
-## 5. Tranh cảnh (phần 2)
-- Mỗi nơi: 1 ảnh gốc gpt-2-6 (2 tranh mẫu ngu-hoa-vien + kinh-su-phong làm tham chiếu phong cách) rồi 15 lượt EDIT thẳng từ ảnh gốc (giữ bố cục/đường sàn) → `img/<tên>-<mùa>-<buổi>.webp` 1280x720 đủ 4 mùa × 4 buổi (sáng/trưa/chiều/tối, như 160 ảnh mùa); `img/<tên>.webp` = bản xuân-sáng làm dự phòng.
+## 5. Chỗ ở của hoàng tự (chủ hỏi 14/11; kế hoạch, tranh vẽ sau khi phong cách được duyệt)
+Hiện nay (j95) con nào cũng ở cung mẹ; mẹ mất / vào lãnh cung thì con về Thái hậu hoặc Hoàng hậu (j95 `j95fixHouse`, giữ nguyên).
+| Mã | Tên (PLNAME) | Nhà trên tranh | box x,y,w,h | anchor |
+|---|---|---|---|---|
+| `acs` | A ca sở · "nơi các hoàng tử ở" (Hoàng tử sở) | bốn sân nhỏ mái ngói xanh lục phía tây, ngay trên Tẩm cung (mái xanh = nhà hoàng tử) | .30,.235,.115,.215 | .355,.33 |
+| `dc` | Đông cung · "nơi Thái tử ở" | điện lớn mái vàng hai tầng ở phía đông, giữa Phật đường và Thượng thư phòng | .795,.425,.075,.185 | .83,.47 |
+Quy tắc nơi ở của trẻ (cho sổ j95 — đề nghị, không sửa mã ở đây):
+- 0–2 tuổi: ở cung mẹ với nhũ mẫu (như nay).
+- Hoàng tử từ 6 tuổi: dọn sang `acs`; buổi sáng học ở `ttp` Thượng thư phòng, trưa/chiều/tối ở `acs` (đôi khi luyện cưỡi bắn — vẫn ghi `acs`).
+- Hoàng tử được lập Thái tử: dọn sang `dc` (cả lúc dưới 6 tuổi thì vẫn ở cung mẹ đến 6 tuổi).
+- Công chúa: ở cung mẹ đến khi xuất giá; 6 tuổi trở lên buổi sáng học ở `ttp` rồi về.
+- 3–5 tuổi: ở cung mẹ. Mẹ mất / lãnh cung: con dưới 6 về Thái hậu (Từ Ninh) hoặc Hoàng hậu như j95 đang làm; hoàng tử từ 6 tuổi vẫn ở `acs`.
+- Sổ j95: nơi ở mặc định của trẻ = hàm theo (tuổi, giới, tước Thái tử, mẹ còn/không); mỗi trẻ có đúng 1 chỗ mỗi khắc như mọi người.
+Quyền vào: mẹ ruột luôn vào `acs` ban ngày (con mình); phi tần khác Tần trở lên hoặc có lý do; tối đóng (Lẻn vào: Khó, bắt Danh -8). `dc`: mẹ Thái tử, Hoàng hậu, Thái hậu; người khác Xin bái kiến.
+Móc lối chơi:
+- Hoàng tử dọn ra thì ít gặp tình cờ ở nhà: muốn gặp phải đi (tốn khắc như đi mọi nơi) — việc "Thăm con" ở `acs`/`dc`, hoặc "Cho gọi con về" (1 khắc, con đến cung mẹ một buổi).
+- Xa cách làm giảm thân thiết mẹ–con mỗi tháng không thăm (gợi ý −3/tháng), thăm hoặc gọi về thì không giảm; hai chiều: Hoàng hậu / mẹ nuôi thăm nhiều thì thân hơn.
+- Con được lập Thái tử dọn vào Đông cung: mẹ được Danh (gợi ý +10 một lần, rồi uy thế giữ khi còn là Thái tử); kẻ thù của mẹ có thêm động cơ nhắm vào Đông cung.
+- Tranh: `a-ca-so` (sân nhỏ trước nhà mái xanh, bàn học, giá cung tên nhỏ, chậu cảnh) và `dong-cung` (sân điện lớn trang trọng, không phô trương); cùng cách vẽ ở mục 6.
+
+## 6. Tranh cảnh (phần 2)
+- **Cách vẽ (sửa sau khi chủ chê bản thí điểm đầu "nhìn AI quá"):** ảnh gốc mỗi nơi là EDIT gpt-2-6 từ một cảnh đã duyệt của game (kế thừa nét cọ, bảng màu, ánh sáng), 2 cảnh game khác làm tham chiếu phong cách; nét cọ mềm, màu dịu tự nhiên, góc 3/4 lệch, sàn đá mờ (không bóng loáng), chi tiết sinh hoạt nhỏ. Làm 2–3 ảnh gốc, đặt cạnh cảnh game trên một bảng so, chọn ảnh hoà nhất, CHỜ DUYỆT rồi mới làm 15 bản mùa/buổi.
+- Sau khi ảnh gốc được duyệt: 15 lượt EDIT thẳng từ ảnh gốc (giữ bố cục/đường sàn) → `img/<tên>-<mùa>-<buổi>.webp` 1280x720 đủ 4 mùa × 4 buổi (sáng/trưa/chiều/tối, như 160 ảnh mùa); `img/<tên>.webp` = bản xuân-sáng làm dự phòng.
 - Tên tệp: `day-nha-cung-nhan`, `noi-vu-phu`, `tan-gia-kho`, `ngu-thien-phong`, `phat-duong`, `thuong-thu-phong`.
 - Khi nối mã: thêm vào SCIMG (j6) `cnh/nvp/tgk/nth/pd/ttp`, SC trong `dev/art/gen_scene_seasons.py` rồi chạy nó để viết lại SCN_VAR (j94); đặt KIT_FLOOR cho tên mới (sàn mở từ ~55% chiều cao trở xuống).
 - Phật đường phải khác cảnh Từ Ninh cung (tranh Từ Ninh đã có tượng Phật bàn thờ trong điện): Phật đường vẽ ngoài sân trước điện lễ, lư hương lớn, ao sen.
 - Tân Giả khố: sân giặt sạch sẽ, chậu gỗ, sào phơi, giếng; khắc khổ nhưng không nghèo nàn bẩn thỉu.
-- Tín dụng: 16–17 lượt × 40 = ~680 mỗi nơi; 6 nơi ≈ 4.100, dự trù vẽ lại 20% → **~5.000 tín dụng**.
-- **Đã làm (thí điểm):** Dãy nhà cung nhân 16/16 — xem `dev/art/PROGRESS_places.md`.
+- Tín dụng: ~18 lượt × 40 = ~720 mỗi nơi; 8 nơi (6 + A ca sở + Đông cung) ≈ 5.800, dự trù vẽ lại 20% → **~7.000 tín dụng**.
+- Tiến độ: `dev/art/PROGRESS_places.md`.
