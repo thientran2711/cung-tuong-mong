@@ -38,9 +38,9 @@ const STEP=()=>{const c=__co();if(c.frozen||c.waiting)return'coop';if(typeof S==
     const t=[...document.querySelectorAll('[data-tab="act"]')].find(x=>x.offsetParent!==null);if(t&&!window.__tabTried){window.__tabTried=1;t.click();return'tab'}}
   const n=document.getElementById('next');if(n&&!n.disabled){window.__actsThis=0;window.__tabTried=0;window.__metThis=0;window.__hitThis=0;n.click();return'next'}return'idle'};
 /* per-buổi view: NPC whereabouts (from the shared state) + where each sees the other */
-const BUOI=()=>{if(typeof S==='undefined'||!S||S.dead)return null;const c=__co();const f=rivals.find(v=>v.coop);
+const BUOI=()=>{const hm=x=>x==='home'?'r'+(COOPW.seat==='a'?901:902):x;if(typeof S==='undefined'||!S||S.dead)return null;const c=__co();const f=rivals.find(v=>v.coop);
   return{key:c.week+'.'+(S.buoi||0),ready:!c.waiting&&!c.frozen&&!document.querySelector('#coopfz'),where:Object.entries(S.where||{}).filter(([k,v])=>!(+k>=900)&&typeof v==='string').map(([k,v])=>k+'@'+v).sort().join(),
-   fpl:f?whereOf(f):null,me:S.place||'home'}};
+   fpl:f?hm(whereOf(f)):null,me:hm(S.place||'home'),fst:f?[f.sung,f.danh,f.suc].join('/'):null,fk:f?(kitKnown(f)?1:0)+(kitKnownName(f)?2:0):-1,mst:[S.sung,S.danh,S.suc].join('/')}};
 /* the world as this client sees it (only shared truth, no personal data) */
 const WORLD=()=>{const kidsOf=v=>(v.kids||[]).map(k=>k.name+(k.alive?'':'†')).join('/');
   return{date:[S.year,S.month,S.tuan],emp:[S.emp.era,S.emp.age,(S.emp.traits||[]).join('+'),!!S.emp.dead],th:!!S.thDead,
@@ -53,14 +53,20 @@ const WORLD=()=>{const kidsOf=v=>(v.kids||[]).map(k=>k.name+(k.alive?'':'†')).
  await until(A,()=>__co().code&&__co().seat==='a');const code=(await A.p.evaluate(()=>__co())).code;L('room '+code);
  await B.p.goto(BASE+'?room='+code);await B.p.waitForTimeout(3000);await tapText(B,/^Vào phòng/,4000);
  if(!await until(B,()=>__co().seat==='b'&&!__co().frozen,null,40000))L('FAIL B could not join');
- const div=[];let weeks=0,whereDiff=0,lastKey='',buoiN=0;const posDiff=[];const t0=Date.now();
+ const div=[];let weeks=0,whereDiff=0,lastKey='',buoiN=0,statLag=0,pend={};const knownLog={};const posDiff=[];const t0=Date.now();
  for(let w=0;w<WEEKS;w++){const wk=(await A.p.evaluate(()=>__co().week));
   const done={A:false,B:false};const t=Date.now();
   while(Date.now()-t<120000){
    const [pa,pb]=[await A.p.evaluate(BUOI).catch(()=>null),await B.p.evaluate(BUOI).catch(()=>null)];
-   if(pa&&pb&&pa.key===pb.key&&pa.key!==lastKey&&pa.ready&&pb.ready){lastKey=pa.key;buoiN++;
-     if(pa.where!==pb.where){whereDiff++;if(whereDiff<=5)L(`buổi ${pa.key} NPC places differ: A-only [${pa.where.split(',').filter(x=>!pb.where.split(',').includes(x)).slice(0,6)}] B-only [${pb.where.split(',').filter(x=>!pa.where.split(',').includes(x)).slice(0,6)}]`)}
-     if(pa.fpl&&pb.me&&pa.fpl!==pb.me)posDiff.push(`${pa.key} A sees B at ${pa.fpl}, B is at ${pb.me}`);if(pb.fpl&&pa.me&&pb.fpl!==pa.me)posDiff.push(`${pa.key} B sees A at ${pb.fpl}, A is at ${pa.me}`);}
+   if(pa&&pb&&pa.key===pb.key&&pa.ready&&pb.ready&&pa.key!==lastKey){
+     const pd=[];if(pa.fpl&&pb.me&&pa.fpl!==pb.me)pd.push(`A sees B at ${pa.fpl}, B is at ${pb.me}`);if(pb.fpl&&pa.me&&pb.fpl!==pa.me)pd.push(`B sees A at ${pb.fpl}, A is at ${pa.me}`);
+     const same=pa.where===pb.where&&!pd.length;
+     if(pend.key!==pa.key)pend={key:pa.key,t:Date.now()};
+     if(same||Date.now()-pend.t>5000){lastKey=pa.key;buoiN++;
+       if(pa.where!==pb.where){whereDiff++;if(whereDiff<=5)L(`buổi ${pa.key} NPC places differ: A-only [${pa.where.split(',').filter(x=>!pb.where.split(',').includes(x)).slice(0,6)}] B-only [${pb.where.split(',').filter(x=>!pa.where.split(',').includes(x)).slice(0,6)}]`)}
+       pd.forEach(x=>posDiff.push(pa.key+' '+x));
+       if(pa.fst!==pb.mst||pb.fst!==pa.mst)statLag++;
+       if(buoiN===1)L(`first buổi: friend known-state A ${pa.fk} B ${pb.fk} (0 = Người lạ)`);knownLog[pa.fk+'/'+pb.fk]=(knownLog[pa.fk+'/'+pb.fk]||0)+1;}}
    for(const o of [A,B]){const r=await o.p.evaluate(STEP).catch(e=>'err:'+e.message);if(r==='act')o.acts++;if(/^meet/.test(r))o.meets++;if(/^harm:/.test(r)){o.harms++;o.hk[r.slice(5)]=(o.hk[r.slice(5)]||0)+1}if(/^harmerr/.test(r))L(o.name+' '+r);if(/^reborn/.test(r)){o.deaths++;L(`week ${w}: ${o.name} died → ${r}`)}}
    const wa=await A.p.evaluate(()=>__co().week),wb=await B.p.evaluate(()=>__co().week);if(wa>wk&&wb>wk)break;await sleep(60)}
   const wa=await A.p.evaluate(()=>__co().week),wb=await B.p.evaluate(()=>__co().week);if(!(wa>wk&&wb>wk)){L(`FAIL week ${w}: stuck (A week ${wa}, B week ${wb})`);
@@ -77,6 +83,6 @@ const WORLD=()=>{const kidsOf=v=>(v.kids||[]).map(k=>k.name+(k.alive?'':'†')).
   if(w===0||w===25||w===WEEKS-1){await A.p.screenshot({path:`${OUT}/w${w+1}-A-fold.png`});await B.p.screenshot({path:`${OUT}/w${w+1}-B-ipad.png`})}}
  const mins=((Date.now()-t0)/60000).toFixed(1);
  L(`\nweeks played ${weeks}/${WEEKS} in ${mins} min · acts A ${A.acts} B ${B.acts} · deaths A ${A.deaths} B ${B.deaths} · weeks with divergence ${div.length}`);
- L(`buổi compared ${buoiN} · buổi with NPC places differing ${whereDiff} · friend-position mismatches ${posDiff.length} · meets A ${A.meets} B ${B.meets} · acts on the friend A ${A.harms} ${JSON.stringify(A.hk)} B ${B.harms} ${JSON.stringify(B.hk)}`);posDiff.slice(0,8).forEach(x=>L('  pos: '+x));
+ L(`buổi compared ${buoiN} · buổi with NPC places differing ${whereDiff} · friend-position mismatches ${posDiff.length} · buổi where the friend's Sủng/Danh/Sức shown ≠ her own ${statLag} · meets A ${A.meets} B ${B.meets} · acts on the friend A ${A.harms} ${JSON.stringify(A.hk)} B ${B.harms} ${JSON.stringify(B.hk)}`);L('friend known-state A/B per buổi (0 stranger,1 face,3 face+name): '+JSON.stringify(knownLog));posDiff.slice(0,8).forEach(x=>L('  pos: '+x));
  L(`page errors A ${A.errs.length} B ${B.errs.length}`);[...new Set([...A.errs,...B.errs])].slice(0,10).forEach(e=>L('  err: '+e.slice(0,200)));
  fs.writeFileSync(OUT+'/bot-log.txt',log.join('\n')+'\n');await b.close();process.exit(div.length||weeks<WEEKS||whereDiff||posDiff.length?1:0)})().catch(e=>{console.error(e);process.exit(2)});

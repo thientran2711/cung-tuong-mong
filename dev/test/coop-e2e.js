@@ -61,7 +61,8 @@ async function playWeek(o){/* three buổi: Qua buổi, Qua buổi, Qua đêm */
    const c=await B.p.evaluate(()=>({era:S.emp.era,d:[S.year,S.month,S.tuan],me:S.name,fr:(rivals.find(v=>v.coop)||{}).name,R:rivals.filter(v=>!v.coop).map(v=>v.id+v.name).join()}));
    ok(a.era===c.era&&a.R===c.R,tag+': same Emperor and same consorts',[a.era,c.era]);ok(String(a.d)===String(c.d),tag+': same date',[a.d,c.d]);
    ok(a.fr===c.me&&c.fr===a.me,tag+': each sees the other as a person',[a.me,a.fr,c.me,c.fr]);return[a,c]};
- await same('start');await shot(A,'05-world');await shot(B,'05-world');
+ await same('start');
+ for(const o of [A,B])ok(await o.p.evaluate(()=>{const f=rivals.find(v=>v.coop);return f&&typeof kitKnown==='function'&&!kitKnown(f)&&!kitKnownName(f)}),o.name+': friend starts as Người lạ (unknown, like any NPC)');await shot(A,'05-world');await shot(B,'05-world');
  /* 3 three weeks */
  for(let w=0;w<3;w++){const wk=(await C(A)).week;
   await playWeek(A);ok(await until(A,x=>__co().waiting||__co().week>x,wk,8000),`week ${w+1}: A ended, waits for B`);if(w===0)await shot(A,'06-waiting-friend');
@@ -88,6 +89,7 @@ async function playWeek(o){/* three buổi: Qua buổi, Qua buổi, Qua đêm */
  ok(!after.dead&&after.n!==before.n&&after.era===before.era,'B reborn as a new person in the same world',[before,after]);
  {let seen=false;const t0=Date.now();while(Date.now()-t0<40000){await clear(A);seen=await A.p.evaluate(n=>rivals.some(v=>v.coop&&v.name===n),after.n);if(seen)break;await sleep(700)}
   ok(seen,'A sees the reborn friend by her new name',await A.p.evaluate(()=>(rivals.find(v=>v.coop)||{}).name));}
+ ok(await A.p.evaluate(()=>{const f=rivals.find(v=>v.coop);return f&&!kitKnown(f)&&!kitKnownName(f)}),'reborn friend is a stranger again (Người lạ)');
  await clear(A);await clear(B);await shot(A,'12-reborn-seen');await shot(B,'12-reborn');
  /* 6 one more week after rebirth */
  {const wk=(await C(A)).week;await playWeek(A);await playWeek(B);ok(await until(B,x=>__co().week===x+1,wk,30000),'week after rebirth advances');}
