@@ -9,10 +9,10 @@
    Knob table DIFF[k].bal: name -> [multiplier, add]  (value = base × m + a, rounded like the base where it is a whole number). */
 const DIFF_KEY="ctm-diff";
 const DIFF={
- de:{n:"Dễ",d:"Hậu cung ôn hòa, ít kẻ ra tay; sinh nở, bệnh tật bớt hiểm; vào cung mang bạc dày hơn.",
+ de:{n:"Dễ",d:"Hậu cung ôn hòa, ít kẻ ra tay; vào cung bạc dày hơn.",
   bal:{hz:[.7,0],birthAdd:[1,-2],birthMin:[1,-3],illDie:[.5,0],seeMaxP:[1,10],poisonX:[.67,0],accCdT:[1.33,0],hhTh:[1,-5]},j70:{mot:[.7,0]},bac:1.5,pd:1},
- vua:{n:"Vừa",d:"Hậu cung như vốn có: phúc họa chia đều, mưu kế có người thành người bại.",bal:{},j70:{},bac:1,pd:1},
- kho:{n:"Khó",d:"Hậu cung hiểm ác, sinh nở hiểm nghèo, bạc vào cung mỏng; Phúc duyên được gấp rưỡi.",
+ vua:{n:"Vừa",d:"Hậu cung như vốn có, phúc họa chia đều.",bal:{},j70:{},bac:1,pd:1},
+ kho:{n:"Khó",d:"Hậu cung hiểm ác, sinh nở hiểm nghèo; Phúc duyên gấp rưỡi.",
   bal:{hz:[1.3,0],birthAdd:[1,3],birthMin:[1,4],illDie:[1.5,0],illAdd:[2,0],seeMaxP:[1,-15],poisonX:[1.33,0],accCdT:[.67,0],hhTh:[1,5]},j70:{mot:[1.5,0]},bac:.7,pd:1.5}};
 const DIFF_K=["de","vua","kho"];
 function diffOf(s){s=s||(typeof S!=="undefined"?S:null);const k=s&&s.diff;return DIFF[k]?k:"vua"}
@@ -39,7 +39,7 @@ function diffSet(k){if(!DIFF[k]||!S||typeof NLP==="undefined"||!NLP||window.__di
 /* identity card: the choice (kit segmented control .ksub, the same as the picker filters) + a one-line description.
    No extra chip on this card: the control already shows the choice (one fact, one place). Her own card in the game carries the chip. */
 function diffHTML(){const k=diffOf();const lock=!!window.__diffO;
- return `<div class="kpsec kdiff"><h4 class="kpst">Độ khó kiếp này</h4><nav class="ksub" role="tablist" aria-label="Độ khó kiếp này">${DIFF_K.map(x=>`<button type="button" class="ksubb${x===k?" on":""}" data-diff="${x}" role="tab" aria-selected="${x===k}"${lock?" disabled":""}>${DIFF[x].n}</button>`).join("")}</nav><div class="kpnote">${DIFF[k].d} Đã nhận thân phận thì không đổi được.</div></div>`}
+ return `<div class="kpsec kdiff"><h4 class="kpst">${typeof kitGloss==="function"?kitGloss("Độ khó"):"Độ khó"}</h4><nav class="ksub" role="tablist" aria-label="Độ khó kiếp này">${DIFF_K.map(x=>`<button type="button" class="ksubb${x===k?" on":""}" data-diff="${x}" role="tab" aria-selected="${x===k}"${lock?" disabled":""}>${DIFF[x].n}</button>`).join("")}</nav><div class="kpnote">${DIFF[k].d}</div></div>`}
 (function(){if(typeof kpBuild!=="function")return;const b0=kpBuild;kpBuild=function(M,m){b0.apply(this,arguments);try{if(!(m&&m.nl)||!S||typeof NLP==="undefined"||!NLP)return;const mb=$("mb");if(!mb||mb.querySelector(".kdiff"))return;
   const w=document.createElement("div");w.innerHTML=diffHTML();const sec=w.firstElementChild;
   const anchor=mb.querySelector(":scope > .kpnote")||mb.querySelector(":scope > .kpopts");if(anchor)mb.insertBefore(sec,anchor);else mb.appendChild(sec);
@@ -62,6 +62,6 @@ if(typeof pdAdd==="function")(function(){const a0=pdAdd;pdAdd=function(n,why,k){
 /* Sổ luân hồi: each life's line says its difficulty; the in-game Sổ luân hồi line says this life's */
 if(typeof lifeSave==="function")(function(){const l0=lifeSave;lifeSave=function(f){const r=l0.apply(this,arguments);try{const p=lifeLog();if(p[0]&&S&&p[0].n===S.name&&!p[0].dif){p[0].dif=diffOf();p[0].f=(p[0].f||"")+` · Kiếp này: ${diffName()}`;store.set("cung-luanhoi",p)}}catch(e){}return r}})();
 if(typeof pastHTML==="function")(function(){const p0=pastHTML;pastHTML=function(){const h=p0.apply(this,arguments);try{if(S&&!S.dead&&(typeof NLP==="undefined"||!NLP))return h.replace(/(<p class="past pdpast">)/,`$1Kiếp này: <b>${diffName()}</b> · `)}catch(e){}return h}})();
-try{if(typeof KIT_GLOSS==="object")KIT_GLOSS["Độ khó"]="Chọn khi nhận thân phận, giữ suốt kiếp. Dễ: hậu cung ôn hòa. Vừa: như vốn có. Khó: hiểm ác hơn, Phúc duyên gấp rưỡi."}catch(e){}
-(function(){const st=document.createElement("style");st.id="jdiff-css";st.textContent=`.kdiff .ksub{position:static;margin:2px 0 4px}.kdiff .kpnote{margin-top:2px}`;document.head.appendChild(st)})();
+try{if(typeof KIT_GLOSS==="object")KIT_GLOSS["Độ khó"]="Chọn trước khi nhận thân phận; đã nhận thì giữ suốt kiếp, không đổi được. Dễ: hậu cung ôn hòa, ít kẻ ra tay, bạc vào cung dày hơn. Vừa: như vốn có. Khó: hậu cung hiểm ác, sinh nở và bệnh tật hiểm nghèo hơn, bạc mỏng; Phúc duyên gấp rưỡi."}catch(e){}
+(function(){const st=document.createElement("style");st.id="jdiff-css";st.textContent=`.kdiff{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:4px 10px}.kdiff>.kpst{margin:0;border:0;padding:0}.kdiff .ksub{position:static;margin:0}.kdiff>.kpnote{grid-column:1/-1;margin:0}`;document.head.appendChild(st)})();
 try{if(S)diffApply()}catch(e){}
