@@ -86,6 +86,8 @@ def job(jid):
         ps=pose_for(None,i,t,prop,n)
     p=SHORT+" "+o+"."+huadian(t,i,hm,hc)+" "+ps+". No text, no labels."
     if who in MOLE: p=p.replace("From the identity reference keep ONLY her face,","From the identity reference keep ONLY her face (but WITHOUT the small dark mole on her cheek, her skin clear and flawless),")
+    if any(w in main for w in ("cream","ivory","beige")):  # C-B: cream palettes must not be told "NOT cream"
+        p=p.replace("NOT cream, NOT beige, NOT ivory, ","").replace("NOT a cream, beige or all-gold robe","NOT an all-gold robe").replace("NOT a cream or all-gold robe","NOT an all-gold robe")
     return STY[n%4],MREF[who],p
 if __name__=="__main__":
     for j in sys.argv[1:]:
