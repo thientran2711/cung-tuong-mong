@@ -18,6 +18,7 @@
    the first info lines without scrolling. */
 (function(){const st=document.createElement("style");st.id="k2b-pcard";st.textContent=`
 :root{--kpcw:clamp(150px,34vw,230px)}
+@media (min-width:600px) and (max-width:999px){:root{--kpcw:clamp(150px,26vw,200px)}}
 @media (min-width:1000px){:root{--kpcw:clamp(150px,14vw,210px)}}
 .pc{display:block!important;overflow:auto;overscroll-behavior:contain}
 .pc>.pcl,.pc>.pcr{overflow:visible!important;min-height:auto!important}
@@ -61,7 +62,8 @@ function kitFloorFit(){try{const st=$("stage"),im=$("scimg");if(!st||!im)return;
    Name tags hang under the feet (absolute), so a token's feet sit on the floor line like hers. ---------- */
 function kitStageScale(){try{const st=$("stage");if(!st)return;const H=st.clientHeight,W=st.clientWidth;if(!H||!W)return;
  const kfb=parseFloat(st.style.getPropertyValue("--kfb"))||Math.max(H*.04,26);const kfh=parseFloat(st.style.getPropertyValue("--kfh"))||H*.8;
- let base=Math.max(H*.4,H-kfb-H*.025);const me=$("mefig");const toks=[...st.querySelectorAll("#tokens .tok.fig img.figimg")].filter(e=>e.offsetParent);
+ const sig=String(st.querySelectorAll('#tokens .tok').length)+(document.getElementById('mefig')?'m':'')+W+'x'+H;if(st.__ksig!==sig){st.__ksig=sig;st.__kk=1}
+ let base=Math.max(H*.4,H-kfb-H*.025)*(st.__kk||1);const me=$("mefig");const toks=[...st.querySelectorAll("#tokens .tok.fig img.figimg")].filter(e=>e.offsetParent);
  const ar=e=>{if(e.naturalWidth&&e.naturalHeight)return e.naturalWidth/e.naturalHeight;if(!e.dataset.kwait){e.dataset.kwait=1;e.addEventListener("load",()=>kitStageScale(),{once:true})}return .36};
  const ks=e=>{if(e.dataset.ks)return+e.dataset.ks;let k=1;if(e.classList.contains("kidfig")){const m=/\*\s*([\d.]+)/.exec(e.style.height||"");if(m)k=+m[1]}e.dataset.ks=k;return k};
  const tokRow=$("tokens");const OV=.2;/* neighbours may overlap by 20 % of a figure's width (sleeves), like people standing in a group */
@@ -86,7 +88,12 @@ function kitStageScale(){try{const st=$("stage");if(!st)return;const H=st.client
   if(lv>1){const need2=tags[0].offsetHeight*lv+6+3*lv;const kfb=parseFloat(st.style.getPropertyValue("--kfb"))||0;if(kfb<need2&&!st.dataset.kfb2){st.dataset.kfb2=1;st.style.setProperty("--kfb",need2+"px");kitStageScale();delete st.dataset.kfb2;return}}
   const sr2=st.getBoundingClientRect();tags.forEach(t=>{t.style.removeProperty("margin-left");const r=t.getBoundingClientRect();if(r.right>sr2.right-4)t.style.setProperty("margin-left",(sr2.right-4-r.right)+"px");else if(r.left<sr2.left+4)t.style.setProperty("margin-left",(sr2.left+4-r.left)+"px")});
  }catch(e){}}
-(function(){if(typeof renderStage!=="function")return;const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);kitStageScale();clearTimeout(window.__kssT);window.__kssT=setTimeout(kitStageScale,520);return r};
+/* last check: nobody is cut at the stage edges (her idle sway included): shift inside, else one more common shrink */
+function kitStageEdge(){try{const st=$("stage");if(!st)return;const sr=st.getBoundingClientRect();const els=[...st.querySelectorAll("#mefig, #tokens .tok.fig img.figimg")].filter(e=>e.offsetParent||e.id==="mefig");if(!els.length)return;
+ let L=1e9,R=-1e9;els.forEach(e=>{const r=e.getBoundingClientRect();L=Math.min(L,r.left);R=Math.max(R,r.right)});const lo=sr.left+6,hi=sr.right-6;
+ if(R-L>hi-lo+1){st.__kk=(st.__kk||1)*(hi-lo)/(R-L)*.98;kitStageScale();return}
+ let dx=0;if(L<lo)dx=lo-L;else if(R>hi)dx=hi-R;if(Math.abs(dx)>.5){const me=$("mefig"),row=$("tokens");[me,row].forEach(e=>{if(!e)return;const cs=getComputedStyle(e);const l=parseFloat(cs.left)||0;if(e===me&&!e.style.getPropertyValue("left"))e.style.setProperty("left",`calc(50% + ${dx.toFixed(0)}px)`,"important");else e.style.setProperty("left",(l+dx).toFixed(0)+"px","important")})}}catch(e){}}
+(function(){if(typeof renderStage!=="function")return;const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);kitStageScale();clearTimeout(window.__kssT);window.__kssT=setTimeout(()=>{kitStageScale();setTimeout(kitStageEdge,60)},520);return r};
  try{let ro=null;const hook=()=>{const st=$("stage");if(!st||ro)return;ro=new ResizeObserver(()=>{kitFloorFit();kitStageScale()});ro.observe(st)};if(document.readyState!=="loading")hook();else addEventListener("DOMContentLoaded",hook)}catch(e){}
  const st=document.createElement("style");st.id="k2b-scale";st.textContent=`
 .stage.kscale .tokens{bottom:var(--kfb,10px)!important}
@@ -173,7 +180,11 @@ function kitHideOut(b){try{if(!b||!b.classList.contains("ka")||b.dataset.khid===
  else if(kb){kb.insertAdjacentHTML("beforeend",`<span class="kr kr-ton"><span class="krl">Tốn</span><span class="krv"><span class="ef n">không</span></span></span>`)}
  else b.insertAdjacentHTML("beforeend",`<small class="kb"><span class="kr kr-ton"><span class="krl">Tốn</span><span class="krv"><span class="ef n">không</span></span></span></small>`)}catch(e){console.error("kitHideOut",e)}}
 (function(){const n0=kaNorm1;kaNorm1=function(b){const r=n0.apply(this,arguments);try{if(b&&b.dataset&&(b.dataset.khide==="1"||b.closest("[data-khide-all]")))kitHideOut(b)}catch(e){}return r}})();
-(function(){const s0=showModal;showModal=function(){const m=Q[0];const r=s0.apply(this,arguments);try{if(m&&m.opts&&(m.hideOut||m.opts.some(o=>o&&o.hideOut))){
+/* ON BY DEFAULT for every event choice, found at the shared builders: an item made by pushDil / pushFront / mkP (it carries pid / pp: weekly
+   events j68, Mệnh truyện chapters j67, side events, dilemmas j70, story lines j96/j97 and any later module using them) or a kit choice panel
+   (kit.kind "choice"). An item may opt out with showOut:true (never for events). */
+function kitIsEventChoice(m){return !!(m&&m.opts&&m.opts.length&&!m.showOut&&(m.hideOut||("pid" in m)||("pp" in m)||(m.kit&&(m.kit.kind==="choice"||m.kit.hideOut))))}
+(function(){const s0=showModal;showModal=function(){const m=Q[0];if(kitIsEventChoice(m))m.hideOut=true;const r=s0.apply(this,arguments);try{if(m&&m.opts&&(m.hideOut||m.opts.some(o=>o&&o.hideOut))){
   document.querySelectorAll("#modal .opts > button[data-m], #modal .opts button.opt").forEach(b=>{const o=m.opts[+b.dataset.m];if(m.hideOut||(o&&o.hideOut)){b.dataset.khide="1";if(b.classList.contains("ka"))kitHideOut(b)}})}}catch(e){console.error("hideOut",e)}return r}})();
 
 /* ---------- 7. VEIL + SCAR OVERLAYS (review/wardrobe j92: KIT_VEIL / KIT_SCAR, placed per picture from img/veil-fit.json / scar-fit.json) ----------
@@ -245,11 +256,13 @@ header.hud>.kcbox>.emp{grid-area:auto!important;margin:0!important}
    C: (1) the portrait is cut tighter: the por picture is 1.14x the window, raised 5 % of its height, clipped to the window (head near the top
    edge, person larger); (2) every rank/role has its own crest on the top bar (img/kit/crest-<key>.webp, gpt-2-6, one style reference: the
    approved Hoàng hậu frame), smaller for low ranks; Hoàng hậu, Hoàng thượng, Thái hậu and Thái tử keep the crest painted in their frame. ---------- */
-window.KIT_CREST={ar:{"cold":.337,"consort-0":.329,"consort-1":.337,"consort-2":.538,"consort-3":.506,"consort-4":.569,"consort-5":.554,"consort-6":.423,"eunuch-3":.373,"eunuch":.283,"guard":.456,"maid-0":.263,"maid-1":.283,"maid-2":.317,"maid-3":.423,"maid-4":.419,"man":.404,"official":.462,"physician":.433,"prince":.454,"princess":.392,"royal":.506,"unknown":.254},
- base:{"cold":.97,"consort-0":.95,"consort-1":.95,"consort-2":.66,"consort-3":.72,"consort-4":.62,"consort-5":.62,"consort-6":.8,"eunuch-3":.85,"eunuch":.9,"guard":.66,"maid-0":.89,"maid-1":.9,"maid-2":.81,"maid-3":.8,"maid-4":.75,"man":.71,"official":.73,"physician":.69,"prince":.69,"princess":.74,"royal":.6,"unknown":.97},
- w:{"consort-0":300,"consort-1":320,"consort-2":344,"consort-3":366,"consort-4":388,"consort-5":410,"consort-6":432,"maid-0":250,"maid-1":266,"maid-2":282,"maid-3":298,"maid-4":314,"eunuch":280,"eunuch-3":330,"cold":330,"unknown":300},W:380,BAR:172,
- key:function(frame){const m=/frame-([a-z0-9-]+)\.webp/.exec(frame||"");if(!m)return null;let k=m[1];if(/^mama-\d$/.test(k))k=k.replace("mama","maid");if(/^eunuch-[012]$/.test(k))k="eunuch";return this.ar[k]?k:null},
- html:function(frame){const k=this.key(frame);if(!k)return"";const w=this.w[k]||this.W,h=w*this.ar[k],top=this.BAR-this.base[k]*h;
+window.KIT_CREST={ar:{"consort-0":.329,"consort-1":.337,"consort-2":.538,"consort-3":.506,"consort-4":.569,"consort-5":.554,"maid-0":.483,"maid-1":.467,"maid-2":.521,"maid-3":.481,"maid-4":.479,"mama-0":.263,"mama-1":.283,"mama-2":.317,"mama-3":.423,"mama-4":.419,"eunuch":.283,"unknown":.254},
+ base:{"consort-0":.95,"consort-1":.95,"consort-2":.66,"consort-3":.72,"consort-4":.62,"consort-5":.62,"maid-0":.96,"maid-1":.96,"maid-2":.86,"maid-3":.93,"maid-4":.72,"mama-0":.89,"mama-1":.9,"mama-2":.81,"mama-3":.8,"mama-4":.75,"eunuch":.9,"unknown":.97},
+ w:{"consort-0":300,"consort-1":320,"consort-2":344,"consort-3":366,"consort-4":388,"consort-5":410,"maid-0":190,"maid-1":205,"maid-2":220,"maid-3":235,"maid-4":250,"mama-0":250,"mama-1":266,"mama-2":282,"mama-3":298,"mama-4":314,"eunuch":280,"unknown":300},W:380,
+ /* y of the line the crest stands on (canvas units): the frame's top bar; maids: the top of the silk bow painted on their frame */
+ bar:{"consort-0":191,"consort-1":189,"consort-2":187,"consort-3":186,"consort-4":182,"consort-5":175,"maid":150,"mama":150,"eunuch":172,"unknown":171},BAR:172,
+ key:function(frame){const m=/frame-([a-z0-9-]+)\.webp/.exec(frame||"");if(!m)return null;let k=m[1];if(/^eunuch-[012]$/.test(k))k="eunuch";return this.ar[k]?k:null},
+ html:function(frame){const k=this.key(frame);if(!k)return"";const w=this.w[k]||this.W,h=w*this.ar[k],by=this.bar[k]!=null?this.bar[k]:this.bar[k.replace(/-\d$/,"")]!=null?this.bar[k.replace(/-\d$/,"")]:this.BAR,top=by-this.base[k]*h;
   return `<img class="kcrest" src="img/kit/crest-${k}.webp" alt="" aria-hidden="true" style="--cl:${((550-w)/2/550*100).toFixed(3)}%;--ct:${(top/1037*100).toFixed(3)}%;--cw:${(w/550*100).toFixed(3)}%;--ch:${(h/1037*100).toFixed(3)}%" onerror="this.remove()">`}};
 (function(){const p0=pcPort;pcPort=function(f){let h=p0.apply(this,arguments);try{const m=/<img class="kfr" src="([^"]+)"/.exec(h);if(m&&!/kcrest/.test(h)){const c=KIT_CREST.html(m[1]);if(c)h=h.replace(/(<img class="kfr"[^>]*>)/,`$1${c}`)}}catch(e){}return h}})();
 /* the small frame = the same pcPort cell, smaller */
@@ -284,7 +297,7 @@ span.md.kfc.xs .kin>img.kgem,span.md.kfc.sm .kin>img.kgem{display:none!important
 /* ---------- 10. PERSON CARD: portrait + bars always in view (owner 11/14 D) ----------
    Left column (sticky while the card scrolls): portrait cell, name, rank, the relation/stat BARS (Ghen, Ngươi với nàng · thiện cảm, Oán,
    Nàng với ngươi, Sủng). Right column: the other facts (stat tiles, age, nature, chips), then the act-group tabs and act cards.
-   Narrow screens (< 1000 px: Fold, phones): portrait left with name/rank/bars beside it, facts and acts below; once the portrait scrolls
+   Phones (< 600 px): portrait left with name/rank/bars beside it, facts and acts below; once the portrait scrolls
    out, a slim sticky strip (small frame, name, rank, the bars) stays at the top of the card. After an act the bars run from the old value
    to the new one (0.6 s; none with prefers-reduced-motion). ---------- */
 const KIT_BARW={};
@@ -293,14 +306,14 @@ function kitPcFix(pc){try{if(!pc||pc.dataset.k2==="1")return;const L=pc.querySel
  if(info)[...info.children].forEach(c=>{if(c.querySelector('.fbar,.rlab,.mini,[class*="bar"]')||/^\s*(Sủng|Ghen)\b/.test(c.textContent))bars.appendChild(c)});
  const nm=L.querySelector(":scope > .pcrk")||L.querySelector(":scope > .pcname");if(nm)nm.after(bars);else L.appendChild(bars);
  const facts=document.createElement("div");facts.className="kpfacts";if(info&&info.children.length)facts.appendChild(info);const ch=L.querySelector(":scope > .chips");if(ch)facts.appendChild(ch);
- if(facts.children.length){if(innerWidth>=1000)Rr.prepend(facts);else L.appendChild(facts)}
+ if(facts.children.length){if(innerWidth>=600)Rr.prepend(facts);else L.appendChild(facts)}
  const name=(L.querySelector(".pcname")||{}).textContent||"";bars.querySelectorAll(".fbar>u,.mini>u").forEach((u,i)=>{const k=name+"|"+i;const nw=u.style.width;const ow=KIT_BARW[k];KIT_BARW[k]=nw;
   if(ow!=null&&ow!==nw&&!matchMedia("(prefers-reduced-motion: reduce)").matches){u.style.width=ow;u.style.transition="width .6s ease-out";requestAnimationFrame(()=>requestAnimationFrame(()=>{u.style.width=nw}))}});
  /* the slim strip for narrow cards */
  const pcp=L.querySelector(":scope > .pcp");const strip=document.createElement("div");strip.className="kpstrip";strip.setAttribute("aria-hidden","true");
  const face=pcp&&pcp.querySelector("img.kpor");strip.innerHTML=`<span class="kpsn"><b>${name}</b>${nm&&nm.classList.contains("pcrk")?`<small>${nm.innerHTML}</small>`:""}</span><span class="kpsb">${bars.innerHTML}</span>`;
  if(pcp){const mini=document.createElement("span");mini.className="kpsf";const kin=pcp.querySelector(".kin");if(kin){mini.innerHTML=`<span class="md kit kfc sm">${kin.outerHTML}</span>`}strip.prepend(mini)}
- pc.prepend(strip);const upd=()=>{const narrow=innerWidth<1000;const r=pcp?pcp.getBoundingClientRect():null,pr=pc.getBoundingClientRect();strip.classList.toggle("on",narrow&&!!r&&r.bottom<pr.top+30)};
+ pc.prepend(strip);const upd=()=>{const narrow=innerWidth<600;pc.style.setProperty('--kpch',pc.clientHeight+'px');const r=pcp?pcp.getBoundingClientRect():null,pr=pc.getBoundingClientRect();strip.classList.toggle("on",narrow&&!!r&&r.bottom<pr.top+30)};
  pc.addEventListener("scroll",upd,{passive:true});upd()}catch(e){console.error("kitPcFix",e)}}
 (function(){const run=()=>document.querySelectorAll(".pc:not([data-k2])").forEach(kitPcFix);const mo=new MutationObserver(()=>run());
  const go=()=>{mo.observe(document.body,{childList:true,subtree:true});run()};if(document.readyState!=="loading")go();else addEventListener("DOMContentLoaded",go)})();
@@ -312,13 +325,13 @@ function kitPcFix(pc){try{if(!pc||pc.dataset.k2==="1")return;const L=pc.querySel
 .pc>.pcr>.kpfacts>.pcinfo{font-size:.8rem}
 .pc>.kpstrip{display:none}
 @container (min-width:600px){}
-@media (min-width:1000px){
+@media (min-width:600px){
  .pc[data-k2]{display:grid!important;grid-template-columns:var(--kpcw) minmax(0,1fr);gap:0 12px;align-items:start}
- .pc[data-k2]>.pcl{position:sticky;top:0;z-index:2;background:var(--panel2);padding-bottom:4px}
+ .pc[data-k2]>.pcl{position:sticky;top:0;z-index:2;background:var(--panel2);padding-bottom:4px;max-height:var(--kpch,none);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}
  .pc[data-k2]>.pcl>.pcp.kit{float:none;margin:0 0 4px!important}
  .pc[data-k2]>.pcr{margin-top:0}
 }
-@media (max-width:999px){
+@media (max-width:599px){
  .pc[data-k2]>.kpstrip{display:flex;position:sticky;top:-8px;z-index:5;margin:-8px -8px 0;padding:4px 8px;gap:8px;align-items:center;background:var(--panel2);border-bottom:1px solid var(--k-hair);box-shadow:0 2px 6px #5a3a2022;visibility:hidden;height:0;overflow:hidden;opacity:0;transition:opacity .15s}
  .pc[data-k2]>.kpstrip.on{visibility:visible;height:auto;opacity:1}
  .kpstrip .kpsn{display:flex;flex-direction:column;line-height:1.15}.kpstrip .kpsn b{font-family:var(--display);font-size:.95rem}.kpstrip .kpsn small{font-size:.72rem;color:var(--gold);display:flex;align-items:center;gap:3px}

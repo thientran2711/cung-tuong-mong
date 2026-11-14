@@ -496,10 +496,12 @@ img/veil*.png is rejected). Status chips such as "Hủy dung (vừa) · còn N t
 - Crests (C2): every rank and role has its own crest on the top bar, `img/kit/crest-<key>.webp` (gpt-2-6, one style reference = the approved
   Hoàng hậu frame; sheets in Magnific folder ba4aecfe…): consort-0 plum sprig (wood) · consort-1 orchid (green lacquer) · consort-2 silver lotus
   · consort-3 clouds + pink lotus · consort-4 small luan + chrysanthemums · consort-5 luan + red peony · consort-6 small phoenix + amber ·
-  Hoàng hậu / Hoàng thượng / Thái hậu / Thái tử keep the crest painted in their frame · maid-0..4 (and ma ma of the same rank) silk bow →
-  bow + jade flower → bow + silver bell → silver plum + jade bells → gold plum + pearl bells · eunuch jade ring · eunuch-3 gold ruyi cloud ·
-  prince qilin · princess peach blossom · official crane · physician bamboo + gourd · man jade disc · royal python · guard tiger + halberds ·
-  cold withered plum · unknown grey stone cloud. Width grows with rank (300→432 canvas units for consorts), base on the top bar (y 172).
+  ONE top ornament per frame, never two: the small motif painted at the top centre of consort-0..5 and unknown frames was removed from the
+  frame picture (corners kept) and the crest stands on the bar; frames whose painted top is already a full crest keep it and get no extra crest
+  (Hoàng hậu phoenix, Hoàng thượng dragon, Thái hậu, Thái tử, HQP twin phoenixes, guard tiger, prince qilin, princess phoenix + peach, royal python,
+  official crane, physician bamboo, man jade disc, cold plum, head eunuch cloud). maid-0..4: a flower/bell spray standing ON the silk bow painted on
+  the maid frame (jasmine + jade bead → jade plum → silver plum + silver bell → silver plum + jade bells → gold plum + pearls); ma ma 0..4: silk
+  bows on the cartouche; eunuch 0..2: jade ring above the whisk. Width grows with rank (300→432 canvas units for consorts), base on the top bar (y 172).
   Data: `KIT_CREST` {ar, base, w, key(frameUrl), html(frameUrl)}; a new role adds its crest here.
 
 ### 26.2 STAGE SCALE (one scale, one floor)
@@ -507,7 +509,8 @@ img/veil*.png is rejected). Status chips such as "Hủy dung (vừa) · còn N t
   `--kfig` (all fig-*.webp are cut head-to-hem on 900 px); children keep their j73 age ratio of that height. Feet on the floor line `--kfb` (26.3).
 - Height (owner A): the figures fill the stage — feet on the floor band near the bottom (KIT_FLOOR feet line 90 % of the way from the floor
   top to the picture bottom), head ~2.5 % under the top edge; room under the feet for the name tags.
-- Crowded row: neighbours may overlap by 20 % of a figure's width (a group, sleeves overlap); beyond that everyone shrinks by ONE common factor.
+- Nobody is cut at the stage edges: a last check (`kitStageEdge`) shifts the group inside a 6 px margin, else shrinks everyone once more.
+- Crowded row: neighbours may overlap by 20 % (36 % for a crowd) of a figure's width (a group, sleeves overlap); beyond that everyone shrinks by ONE common factor.
   When she is on stage with others she stands at the left and the row takes the rest of the width.
 - Name tags hang under the feet (absolute, one line, never cut). When neighbours would touch, tags drop to 2 or 3 staggered lines and the
   floor band grows to fit them.
@@ -530,14 +533,19 @@ so stage blocks may stand beside a head or between figures, never over the paint
 - Event choices (weekly events j68, Mệnh truyện chapters j67, side events, dilemmas) show ONLY the cost: the Tốn row with Sức / khắc / Bạc
   (`.ka.khideout`); no Được / Mất / Kèm / Ghi chú rows and no odds meter. No cost → "Tốn: không". Conditions (Cần row) stay.
 - The result card (section 7) is unchanged and shows the true numbers after the choice.
+- ON BY DEFAULT for event choices at the shared builders (`kitIsEventChoice`): every item made by `pushDil` / `pushFront` / `mkP` (it carries
+  `pid`/`pp`: j68 weekly events, j67 chapters, side events, j70 dilemmas, j96/j97 story lines, any later module) and every kit choice panel
+  (`kit.kind:"choice"`). Opt-out `showOut:true` is for non-event panels only.
 - Use (data only): `Q.push({…, hideOut:true, opts:[…]})` / `kitModal({…, hideOut:true})` hides every option; `{n, fx, x, hideOut:true}` one option;
   any other priced button: `data-khide="1"`. Normal act cards, person-card acts and shop buttons never use it.
 
 ### 26.7 PERSON CARD: portrait and bars always in view (owner D)
 - Left column = portrait cell, name, rank title, the BARS (`.kpbars`: Ghen, Ngươi với nàng · thiện cảm, Oán, Nàng với ngươi, Sủng).
   Right column (`.pcr`) = facts (`.kpfacts`: stat tiles, age, nature, chips) → act-group tabs (`.pctabs`) → act cards (`.pcb`).
-- Wide screens (≥1000 px, iPad): two columns; the left column is sticky while the right one scrolls, so the bars stay visible next to the buttons.
-- Fold and phones: portrait left with name, rank and bars beside it; facts, tabs and act cards below. When the portrait scrolls out, a slim
+- Screens ≥600 px (Fold, iPad): two columns; the left column is sticky (own scroll if taller than the card) while the right one scrolls, so the
+  bars stay visible next to the buttons; facts, act tabs and act cards sit in the right column beside the portrait for EVERY card (consort,
+  servant, child, court).
+- Phones (<600 px): portrait left with name, rank and bars beside it; facts, tabs and act cards below. When the portrait scrolls out, a slim
   sticky strip (`.kpstrip`: small frame, name, rank, the same bars) stays at the top of the card.
 - After an act the bars run from the old value to the new one (0.6 s, `KIT_BARW` remembers the last width per person and bar; none with
   prefers-reduced-motion). j93 kit-motion may replace the easing, not the markup.
