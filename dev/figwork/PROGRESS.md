@@ -62,7 +62,12 @@
   Calm STANDING poses only (no swirl/dance), props vary by rank; ages 19/24/32/48 as above.
 - Files: A) maid identities img/fig-maid-mNN-tmK-aAA.webp (+por), FIGURES-servants.json role "maid" tier "mK";
   B) consort identities as maids img/fig-consort-cNN-tmK-aAA.webp, FIGURES.json role "consort" tier "mK";
-  C) maid identities raised to consort: img/fig-maid-mNN-tT-aAA.webp (T=1..8) and -tcold- (lãnh cung), FIGURES-servants.json role "maid" tier T / "cold".
+  C) maid identities raised to consort (owner: ALL consort tiers 1–8 + lãnh cung, same ladder wording as spec4/spec5, calm standing):
+     img/fig-maid-mNN-tT-aAA.webp (T=1..8) and fig-maid-mNN-tcold-aAA.webp, FIGURES-servants.json role "maid" tier T / "cold".
+     Lãnh cung = plain grey-white linen robe, no jewellery, low bun with wooden pin, still clean and beautiful. Order: A, then B, then C (t1→t8, cold).
+- m0 wording (owner correction): even m0 wears embroidered silk (small embroidered flowers) + proper silver trâm with a flower — one step below m1, never coarse.
+  All m0 drawn so far already use this wording (no redraw needed).
+- m3 colours never red (plum/indigo/aubergine/slate/bronze/navy); m4 always a red family + crane square + black winged gauze cap, so ranks read at a glance.
 - Tools: dev/figwork/maid/ (mjobs.py prompts: job ids A-mNN-mK / B-cNN-mK / C-mNN-tT|tcold; vp.sh prints variable parts; mproc.py bg.txt [jid..]
   splits + writes img + manifests; msheet.py contact sheets; pubm.sh publishes to review/maid-art). Ledgers gens.txt (jid gen) and bg.txt (jid gen bg).
 
@@ -72,3 +77,12 @@
   A rank change only switches tier (same identity → same face). Fallback if a tier is missing: nearest lower mK, then "m1"/null.
 - A maid promoted to consort (Đáp ứng..Hoàng hậu) uses role "maid", same identity, tier = consort rank 1..8; in lãnh cung tier "cold".
   Consort identities keep their own tiers 1..8. Keep the identity fixed for life.
+
+### STATUS (maid-art, end of session 1)
+- DONE part A: m01–m10 × m0/m2/m3/m4 (40 lineups, 160 figures), checked on sheets dev/figwork/sheets/maid_ladder_trial.jpg, A_b1..A_b4.jpg
+  (proportions ok, faces match their m1 lineup, no green drift, nobody poor). m1 = old files, tier set to "m1".
+- NEXT: part A m11–m52 (168 lineups) → part B c01–c32 × m0..m4 (160; ref = idfix N-cNN-t1; mjobs adds her consorts_feat features)
+  → part C m01–m52 × t1..t8 + tcold (468). Workflow per batch of 2 identities: `bash vp.sh A-m11-m0 ...` → images_generate (gpt-2-6, 2:1, 4k, quality high,
+  refs [style STY, image ref] as printed) → append "jid gen" to gens.txt → creations_wait → images_remove_background → append "jid gen bg" to bg.txt
+  → `python3 mproc.py bg.txt <jids>` → `TH=180 python3 msheet.py ../sheets/X.jpg maid tm0,m1,tm2,tm3,tm4 mNN mMM` → `bash pubm.sh "msg" sheet.jpg`.
+  Work copy lives in scratchpad/maid (copy of dev/figwork/maid); worktree scratchpad/wt-maid on branch review/maid-art.
