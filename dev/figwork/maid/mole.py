@@ -7,7 +7,11 @@ S="/tmp/claude-0/-home-user-cung-tuong-mong/ed00be27-1e8d-5500-9afe-ce233b508a61
 db=json.load(open(S+"/urls_all.json"))
 def full(cid):
     p=f"{S}/cache/full-{cid}.png"
-    if not os.path.exists(p): subprocess.run(["curl","-sS","--retry","5","--retry-all-errors","-o",p,db[cid]],check=True)
+    for t in range(5):
+        if os.path.exists(p):
+            try: Image.open(p).load(); return p
+            except Exception: os.remove(p)
+        subprocess.run(["curl","-sS","--retry","5","--retry-all-errors","-o",p,db[cid]])
     return p
 def heads(A):
     H,W=A.shape[:2]; bgc=np.median(A[:6].reshape(-1,3),axis=0); m=np.linalg.norm(A.astype(np.float32)-bgc,axis=-1)>30
@@ -39,7 +43,7 @@ def detect(A, TD=None, TR=None):
         fx,fy,fw,fh=max(fs,key=lambda f:f[2])
         dark=cv2.medianBlur(L.astype(np.uint8),k).astype(np.float32)-L
         red=a-cv2.medianBlur(a.astype(np.uint8),k).astype(np.float32)
-        for kind,M,lo,hi in (("dark",dark>TD,5,220),("red",red>TR,6,side*side/250)):
+        for kind,M,lo,hi in (("dark",dark>TD,5,40),("red",red>TR,6,side*side/250)):
             n,lb,st,cen=cv2.connectedComponentsWithStats(M.astype(np.uint8),8)
             for i in range(1,n):
                 area=st[i,4]; w,h=st[i,2],st[i,3]
@@ -88,9 +92,13 @@ if __name__=="__main__":
 def cmd_fix(jid, gid, paths):
     # detect on the raw gen, inpaint the same spots in every given full-res image (cutout and gen copy)
     A=np.asarray(Image.open(full(gid)).convert("RGB")); sp=detect(A)
+    mask=np.zeros(A.shape[:2],np.uint8)
+    for s in sp: cv2.circle(mask,(s["x"],s["y"]),s["r"]+2,255,-1)
+    fixed=cv2.inpaint(np.ascontiguousarray(A),mask,7,cv2.INPAINT_TELEA)   # inpaint on the full painting (no black transparent pixels)
     for p in paths:
-        im=Image.open(p); mode=im.mode; im=im.convert("RGBA"); out=inpaint(im,sp)
-        (out if mode=="RGBA" else out.convert("RGB")).save(p)
+        im=Image.open(p); mode=im.mode; B=np.array(im.convert("RGBA"))
+        B[mask>0,:3]=fixed[mask>0]
+        out=Image.fromarray(B); (out if mode=="RGBA" else out.convert("RGB")).save(p)
     jf=S+"/spots_fixed.json"; old=json.load(open(jf)) if os.path.exists(jf) else {}
     old[jid]=dict(gen=gid,spots=sp); json.dump(old,open(jf,"w"),indent=0)
     print(jid,len(sp),"spots")

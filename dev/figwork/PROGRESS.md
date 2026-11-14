@@ -108,6 +108,10 @@
   through mole.py: detects small dark round dots on the face skin of the raw gen (haar face box, nostril/mouth zones excluded,
   PK=60 TD=30) and inpaints those spots (cv2 TELEA) in the cut-out + gen copy before mproc. Spots logged in scratchpad spots_fixed.json.
   One-shot pipeline: maid/proc.sh A LIST (mole fix -> ledgers -> mproc -> afix -> porcrop). New gens/bg ids are the last entries of maid/gens.txt / bg.txt.
+- Follow-up: the first mole.py run accepted blobs up to 220 px (at 3840) and smeared eyes/chins on m13-m0, m13-m4, m26-m4, m22-m2,
+  m37-m0; those 5 lineups were re-cut from fresh downloads with the area cap 40 (inpaint now done on the full painting). Leftover
+  forehead marks fixed by hand with maid/spot2.py (numbered dots on a 4x face crop -> inpaint in the 900px fig -> porcrop):
+  m26-m4-a36, m26-m4-a51 (R=6), m39-m3-a18.
 - CUTOUT: cutcheck flagged 86 figures >= 8 (120 >= 3, 335 >= 1). Cause = the cutter left pale/sheer skirts half-transparent (green
   shows through). Magnific re-matte of a single-figure crop (rematte.py idea) made it WORSE (score 44 -> 124), so the fix is local:
   maid/afix.py makes every pixel with alpha>40 that lies >=3px inside the silhouette opaque (rim kept anti-aliased, true gaps untouched).

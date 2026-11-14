@@ -8,11 +8,20 @@ python3 - "$L" "$M" <<'PY'
 import sys,json,subprocess,os
 S="/tmp/claude-0/-home-user-cung-tuong-mong/ed00be27-1e8d-5500-9afe-ce233b508a61/scratchpad"
 db=json.load(open(S+"/urls_all.json")); L,M=sys.argv[1:3]
+done=json.load(open(S+"/spots_fixed.json")) if os.path.exists(S+"/spots_fixed.json") else {}
 for l in open(L):
     jid,gen,bid=l.split()
     raw=f"{M}/bg/{jid}-{bid}.png"; g=f"{M}/bg/gen-{gen}.png"
     for p,c in ((raw,bid),(g,gen)):
-        if not os.path.exists(p): subprocess.run(["curl","-sS","--retry","6","--retry-all-errors","-o",p,db[c]],check=True)
+        for t in range(5):
+            ok=False
+            if os.path.exists(p):
+                try:
+                    from PIL import Image; Image.open(p).load(); ok=True
+                except Exception: os.remove(p)
+            if ok: break
+            subprocess.run(["curl","-sS","--retry","6","--retry-all-errors","-o",p,db[c]])
+    if jid in done: continue
     subprocess.run(["python3",S+"/tools/mole.py","fix",jid,gen,raw,g],check=True)
 PY
 while read j g b; do echo "$j $g" >> $M/gens.txt; echo "$j $g $b" >> $M/bg.txt; done < $L
