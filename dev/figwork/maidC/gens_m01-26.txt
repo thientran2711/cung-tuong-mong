@@ -131,3 +131,11 @@ C-m11-t6 yiCIzKHPW9 hands
 C-m12-t6 nVjbByVYQD hands
 C-m13-t6 N2FvcsU6D9 hands nomole
 C-m14-t6 jUXT4QeLD0 hands
+C-m15-t6 XmPSb9pBfo hands
+C-m16-t6 tCiOr2NmZJ hands (a24 letter->lantern)
+C-m17-t6 ov9wKZq829 hands
+C-m18-t6 N2FvDr16D9 hands
+C-m19-t6 UPmdzHvwny hands
+C-m20-t6 yiCI0rQPW9 hands
+C-m21-t6 79vBY1dJAL hands
+C-m22-t6 MBwjuGHDCm hands (a24 book->teacup)
