@@ -10,14 +10,18 @@
 const DIFF_KEY="ctm-diff";
 const DIFF={
  de:{n:"Dễ",d:"Hậu cung ôn hòa, ít kẻ ra tay; vào cung bạc dày hơn.",
-  bal:{hz:[.7,0],birthAdd:[1,-2],birthMin:[1,-3],illDie:[.5,0],seeMaxP:[1,10],poisonX:[.67,0],accCdT:[1.33,0],hhTh:[1,-5]},j70:{mot:[.7,0]},bac:1.5,pd:1},
+  bal:{hz:[.55,0],birthAdd:[1,-4],birthMin:[1,-4],illDie:[.5,0],seeMaxP:[1,15],poisonX:[.67,0],accCdT:[1.5,0],hhTh:[1,-10],outQ:[1,-20]},j70:{mot:[.6,0]},bac:1.5,pd:1},
  vua:{n:"Vừa",d:"Hậu cung như vốn có, phúc họa chia đều.",bal:{},j70:{},bac:1,pd:1},
  kho:{n:"Khó",d:"Hậu cung hiểm ác, sinh nở hiểm nghèo; Phúc duyên gấp rưỡi.",
-  bal:{hz:[1.3,0],birthAdd:[1,3],birthMin:[1,4],illDie:[1.5,0],illAdd:[2,0],seeMaxP:[1,-15],poisonX:[1.33,0],accCdT:[.67,0],hhTh:[1,5]},j70:{mot:[1.5,0]},bac:.7,pd:1.5}};
+  bal:{hz:[1.3,0],birthAdd:[1,3],birthMin:[1,4],illDie:[1.5,0],illAdd:[2,0],seeMaxP:[1,-10],poisonX:[1.33,0],accCdT:[.67,0],hhTh:[1,5],poisonNow:[0,1]},j70:{mot:[1.5,0]},bac:.7,pd:1.5}};
 const DIFF_K=["de","vua","kho"];
 function diffOf(s){s=s||(typeof S!=="undefined"?S:null);const k=s&&s.diff;return DIFF[k]?k:"vua"}
 function diffName(s){return DIFF[diffOf(s)].n}
 function diffPref(){if(window.__diffO&&DIFF[window.__diffO])return window.__diffO;try{const k=localStorage.getItem(DIFF_KEY);if(DIFF[k])return k}catch(e){}return "vua"}
+/* BAL.poisonNow (Khó: 1): a poison that takes her Sức to 0 kills her at once, as it already does an NPC (j8 poison: dieIf for an NPC;
+   for her the death check came only at the end of the tuần, after the +4 rest, so a landed poison almost never killed her). Same rule both ways. */
+if(typeof BAL==="object"&&BAL.poisonNow==null)BAL.poisonNow=0;
+(function(){try{const P=ACT.poison,f0=P.f;P.f=function(a,t){const r=f0.apply(this,arguments);try{if(BAL.poisonNow&&t===S&&S&&!S.dead&&S.suc<=0){die("Trúng độc, nôn ra máu mà chết");return r}}catch(e){}return r}}catch(e){}})();
 /* the knobs: base = the values in force when the game last left Vừa (so Vừa is never touched and a later balance pass is followed) */
 let DIFF_CUR="vua",DIFF_B=null;
 function diffApply(){const k=diffOf();if(k===DIFF_CUR)return;
