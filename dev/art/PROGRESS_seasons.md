@@ -17,3 +17,4 @@
 
 ## Tiến độ
 - [x] SÁNG: 40/40 (10 cảnh × 4 mùa), đã xem từng ảnh: bố cục, phối cảnh, sàn giữ nguyên; không có người. 40 lượt × 40 = 1.600 tín dụng (thêm 0 lượt vẽ lại).
+- [x] TỐI: 40/40, đã xem từng ảnh: trăng, đèn lồng, nến; bố cục và sàn giữ nguyên. 41 lượt (1 lượt bị bộ lọc tự động chặn, gửi lại với lời nhắc dịu hơn) = 1.640 tín dụng.
