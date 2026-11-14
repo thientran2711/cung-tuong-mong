@@ -21,14 +21,14 @@ const [,,BASE,SZ,OUT,TAG]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=
   document.body.appendChild(ov);
   const panel=document.getElementById('panel');panel.style.cssText+=';position:static;width:auto;height:auto;max-height:none;margin:0;border:0;box-shadow:none;background:transparent;display:block;visibility:visible';
   const sc=n=>`img/${SCIMG[n]||n}.webp`;
-  const known=rivals.filter(v=>v.alive!==false&&!v.out&&kitIsKnown(v));const v=known.find(x=>!kitFigOf(x).includes('unknown'))||known[0];
+  const known=rivals.filter(v=>v.alive!==false&&!v.out&&kitIsKnown(v));let v=known.find(x=>!kitFigOf(x).includes('unknown'));if(!v){v=rivals.find(x=>x.alive!==false&&!x.out);const k0=window.kitKnown;window.kitKnown=x=>x===v?true:k0(x);render()}
   window.__mock={tab,v,panel,ov,sc};
   const pal=v?palName(palaceOf(v)):'';
   window.__pics={
    rv:()=>kitBookPic({scene:sc('rv'),ax:.5,feet:.9,figs:[{src:kitFigOf(v),h:.84,x:.5}],cap:pal||'Cung phi tần'}),
    inv:()=>kitBookPic({scene:sc('home'),ax:.62,feet:.94,figs:[{src:kitFigOf(S),h:.84,x:.42}],cap:'Thử y phục',
      slots:[{label:'Trâm cài',n:'Chưa cài'},{label:'Y phục',n:'Áo đang mặc'},{label:'Ngọc bội',n:'Chưa đeo'}]}),
-   staff:()=>{const hd=[...__mock.panel.querySelectorAll('h1,h2,h3,.kname,b,strong')].map(e=>e.textContent.trim());const m=(S.staff||[]).find(x=>hd.some(t=>t&&x.name&&t.includes(x.name)))||(S.staff||[])[0];return kitBookPic({scene:sc('home'),ax:.68,feet:.94,figs:[{src:kitFigOf(m),h:.82,x:.5}],cap:placeOf('home').n})},
+   staff:()=>{const L=[S.maid].concat(S.staff||[]).filter(Boolean);let m=null;for(const e of __mock.panel.querySelectorAll('*')){if(e.children.length)continue;const t=e.textContent.trim();m=L.find(x=>x.name===t);if(m)break}m=m||L[0];return kitBookPic({scene:sc('home'),ax:.68,feet:.94,figs:[{src:kitFigOf(m),h:.82,x:.5}],cap:placeOf('home').n})},
    go:()=>kitBookPic({scene:sc('vuon'),ax:.3,feet:.9,figs:[{src:'img/kit/unknown-fig-f.webp',h:.6,x:.3,dim:true},{src:'img/kit/unknown-fig-f.webp',h:.62,x:.62,dim:true},{src:'img/kit/unknown-fig-m.webp',h:.66,x:.8,dim:true}],cap:'Ngự hoa viên · 3 bóng người'})};
   /* select the consort in the Phi tần picker */
   const cell=[...panel.querySelectorAll('button,[data-i],.kpk,.pk,div')].find(e=>e.children.length<4&&e.textContent.trim()===String(v.name).split(' ').slice(-2).join(' '));
