@@ -13,7 +13,7 @@
    · Nhận ra: a missing item worn in public may be recognised by people who know it (owner, her friends, her if she heard of it).
    Case: S.lost[] {id,k,e,own,cause,by,sv,w,due,st:"lost"|"held"|"found"|"done",at,open,cev,kn{},hear,acc,tip,ret,heard,end,how}
    Knobs: LO below. ================= */
-const LO={rate:8,cd:6,minPr:30,findW:[2,7],
+const LO={rate:6,cd:6,minPr:30,findW:[2,7],
  home:{mis:55,srv:15,riv:0},away:{mis:20,srv:65,riv:75},   /* % back home / turns up in another palace; the rest: never found */
  rivP:40,srvP:[20,45],                                       /* cause: a rival (when one's motive allows), a servant (careless servant) */
  tipW:[1,3],hearW:[1,2],recog:{own:15,fr:4,me:8},keepWear:25,expire:54,
