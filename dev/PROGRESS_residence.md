@@ -1,4 +1,15 @@
-# PROGRESS: tranh nơi ở (review/residence-art) — THỬ NGHIỆM, chờ chủ duyệt
+# PROGRESS: tranh nơi ở (review/residence-art)
+
+## TRẠNG THÁI
+- Chủ duyệt thử nghiệm ("Nền ok"), chọn phương án A, đủ 16 bản (4 mùa × sáng/trưa/chiều/tối) cho MỌI phòng (chính điện, phối điện, cung nhân).
+- BƯỚC 1 XONG: xuân-sáng đủ 25 phòng (8 chính điện + 16 phối điện Đông/Tây + dãy nhà cung nhân); dãy nhà thái giám tạm bỏ.
+  Bảng ghép có nhãn: `dev/shots/residence/sheet-xuan-sang.jpg` (3396x7563; dựng lại: `python3 dev/art/residence_sheet.py xuan-sang`).
+  Mã Magnific từng ảnh: `dev/shots/residence/gens.txt`. Đã tự xem từng ảnh: không người, đúng nét vẽ, mỗi cung một bản sắc, phối điện nhỏ/giản hơn mà không nghèo, hai phối điện của một cung khác bố cục.
+  Tín dụng bước 1: 23 × 80 = 1.840 (cộng thử nghiệm 240 → 2.080).
+- BƯỚC 2 (CHỜ chủ duyệt bảng ghép): 15 bản còn lại mỗi phòng = SỬA từ bản xuân-sáng (1 tham chiếu ảnh = chính nó), 2k (65/ảnh): 25 × 15 = 375 ảnh ≈ 24.400 (+20% ≈ 29.000). Thứ tự: tối → chiều → trưa, rồi Hạ/Thu/Đông.
+  Bố cục phối điện (để giữ khác nhau): CP Đ phòng ngủ+bàn trang điểm, T sập cửa sổ+đàn; KT Đ giường trong vòm trăng, T phòng trà; CT Đ phòng nhạc, T phòng ngủ+khung thêu; HA Đ thư phòng nhỏ, T phòng ngủ+bình phong; TM Đ phòng cắm hoa, T phòng ngủ+bàn cờ; DH Đ phòng ngủ+bàn trang điểm, T phòng vẽ; VH Đ phòng trà mở ra rừng trúc, T phòng ngủ sau vách vòm; TX Đ phòng thêu nhìn cầu, T phòng ngủ+góc đọc sách.
+
+# (thử nghiệm ban đầu)
 
 Nhánh `review/residence-art` từ origin/review/page-curl. CHƯA gắn vào game (chỉ mockup trang tranh bên trái của sách, KIT §32.4 Hậu cung › Phi tần).
 
