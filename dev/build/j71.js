@@ -61,7 +61,7 @@ const WT7={ngua:["ngựa Xích Thố","ngựa Ô Truy","ngựa Bạch Long","ng�
  thuyen:["đội Thanh Long","đội Bạch Hổ","đội Chu Tước","đội Huyền Vũ"],thuyen2:["thuyền Ngự thiện phòng","thuyền Nội vụ phủ","thuyền Kính sự phòng","thuyền Ngự mã giám"],thuyen3:["thuyền đèn sen","thuyền đèn cá chép","thuyền đèn rồng","thuyền đèn thỏ ngọc"],
  xa:["thị vệ họ Lý","thị vệ họ Mạnh","thị vệ họ Đoàn","thị vệ họ Tô"],bang:["đội Kiện Duệ","đội Hộ Quân","đội Tiền Phong","đội Cấm Vệ"],phao:["pháo Càn Thanh cung","pháo Ngự thiện phòng","pháo Nội vụ phủ","pháo Ngự hoa viên"]};
 function form7(s){return s>=65?"phong độ rất tốt":s>=50?"phong độ tốt":s>=35?"phong độ thường":"phong độ kém"}
-function prize7(k){return FBIG7.includes(k)?{sung:5,danh:4}:{sung:3,danh:3}}
+function prize7(k){return FBIG7.includes(k)?{sung:3,danh:3}:{sung:2,danh:2}}
 function pz7(o){return Object.entries(o).map(([k,v])=>`${NAMES[k]} +${v}`).join(", ")}
 /* pick a variant: unused this life first, then least seen in the last five lives */
 function fvPick(k,noC){const j=j7s(),L=FV7[k]||[];const ok=i=>{const t=L[i][0];if(noC&&t==="C")return false;if(S.thDead&&(L[i][1]==="th"||/Thái hậu/.test(L[i][2])))return false;if(t==="G"&&!liveRivals(true).some(v=>present7(v)&&(v.bac||0)>=25))return false;return true};
@@ -117,7 +117,7 @@ PEND.j71f=pp=>{if(!S)return null;const k=pp.k,V=(FV7[k]||[])[pp.vi];if(!V)return
  else if(t==="P"){const th=sub==="th"&&!S.thDead;who=th?pTH():pEmp();const R2=ents7(pp);const gift=v=>(v.bac||0)>=100?55:Math.max(15,(v.tai||0)*.3+aw7(v,"hoa")*8+help7(v)*.8);
   const mine=[55,Math.round((S.tai||0)*.3+aw7(S,"hoa")*8+help7(S)*.8),15];const rv=R2.map(gift);
   const odds=mv=>{const r=rng7(pp.sd);let w=0;for(let t=0;t<500;t++){const m=mv+r()*25;if(rv.every(x=>x+r()*25<m))w++}return cl(Math.round(w/5),3,97)};
-  const praise=th?{th:6,danh:2}:{sung:5,danh:2},small=th?{th:1}:{sung:1};const tg=th?"Thái hậu":"Hoàng thượng";
+  const praise=th?{th:4,danh:1}:{sung:3,danh:1},small=th?{th:1}:{sung:1};const tg=th?"Thái hậu":"Hoàng thượng";
   const run=(i)=>()=>{const L=R2.map((v,ix)=>({p:v,s:rv[ix]+Math.random()*25}));L.push({p:S,s:mine[i]+Math.random()*25});L.sort((a,b)=>b.s-a.s);R2.forEach(v=>{if((v.bac||0)>=100)ap(v,{bac:-60})});const w=L[0].p;
    if(w===S){apply(praise);ghenAll(3);log(`${fn}: ${tg} khen lễ của ngươi nhất: ${pz7(praise)}.`)}else{ap(w,praise);if(i<2)apply(small);log(`${R7("Không thành:")} ${fn}: ${tg} khen lễ của ${w.name} nhất (${pz7(praise)}).${i<2?` Lễ của ngươi cũng được nhận: ${pz7(small)}.`:""}`)}};
   h+=`<p>${R2.length} phi tần khác cũng dâng lễ.</p>`;
