@@ -10,6 +10,9 @@
   faces (c07 c09 c15 c17 c23) removed by demole in run.sh. mm_fa (fa_apply.py, solidSheer) on c04 c11 c29 t1. idfix.json NOT changed.
 - T2 CALM REDRAW DONE (32/32): same p7.py wording (NEW outfit kept), all looked at; mm_fa on c04 c14 t2. c17 a19 'spool of
   silk thread' (needle case dropped), c29 a19 guqin 'cradled in both arms' (prompt tweaks, rest = p7.py).
+- T3 CALM REDRAW DONE (32/32): p7.py wording; where the pool gave both a round fan and a closed folding fan (c12 c16 c27 t3) the
+  a48 prop was swapped to the teacup. Note: a few t1/t2 lineups keep round fan + closed folding fan (c12 t1, c23 t1, c14 t2,
+  c25 t2) - different objects, left as is. mm_fa on c04 t3. => t1-t3 calm redraw COMPLETE (96 lineups incl. pilot).
 - Credits art9: see bottom line.
 
 ## CURRENT STATE (art worker #8, newest first — read this first)
