@@ -15,20 +15,31 @@ function j76left(){return !S?0:(4-used)+4*(2-(S.buoi||0))}
 function j76nextName(){const b=Math.min(2,(S.buoi||0)+1);return BUOI[b].replace("Buổi ","buổi ")}
 /* would an act of c khắc started now spill into the next buổi? (only when it is allowed) */
 function j76spills(c){return !!S&&!S.dead&&c>0&&used<4&&used+c>4&&!S.j76carry&&!window.__j76win&&(S.buoi||0)<2&&c<=j76left()}
-(function(){const c0=can;can=function(c){if(window.__j76paid)c=Math.max(0,c-window.__j76paid);if(c0.call(this,c))return true;
- if(!S||S.dead||(c>1&&S.suc<20))return false;return j76spills(c)}})();
+/* ===== ONE Sức FLOOR (folds the j80 hotfix in) =====
+   Sức under 5 = kiệt sức: acts of 2+ khắc wait until she rests. A card that costs Sức needs more Sức than it costs.
+   Exempt: 1-khắc acts, acts that restore Sức and cost none (rest), and walking (map, visits). */
+const SUC_FLOOR=5;
+function j76isRest(a){return !!(a&&a.w&&a.w.suc>0&&!(a.c&&a.c.suc<0))}
+function j76sucWhy(c){if(!S||S.dead||c<=1||window.__j76rest||window.__j76trip)return"";const cs=window.__j76cs||0;
+ if(cs&&S.suc+cs<=0)return `cần Sức trên ${-cs} (có ${S.suc})`;return S.suc<SUC_FLOOR?`kiệt sức (Sức ${S.suc}, cần ${SUC_FLOOR}) — nghỉ ngơi trước`:""}
+can=function(c){if(window.__j76paid)c=Math.max(0,c-window.__j76paid);if(!S||S.dead)return false;if(j76sucWhy(c))return false;
+ if(used+c<=4)return true;return j76spills(c)};
+
 (function(){const s0=spend;spend=function(c){if(window.__j76paid){window.__j76paid=0;return}const before=used;const r=s0.apply(this,arguments);
  try{if(S&&!S.dead&&used>4&&before<4&&(S.buoi||0)<2&&!window.__j76win){S.j76carry=(S.j76carry||0)+(used-4);used=4}}catch(e){}return r}})();
 /* the clock turns: carry the spilled khắc into the new buổi; a new day drops nothing because tối never spills */
 (function(){const n0=nextBuoi;nextBuoi=function(){if(!S)return n0.apply(this,arguments);const b0=S.buoi||0,c=S.j76carry||0;const r=n0.apply(this,arguments);
  try{if(c&&S&&(S.buoi||0)!==b0){if(!S.dead&&(S.buoi||0)>b0){used=Math.min(4,c);S.j76carry=c>4?c-4:0}else S.j76carry=0;if(!S.dead){save();render()}}}catch(e){}return r}})();
 /* why an act cannot be done now, in words */
-(function(){const w0=whyTime;whyTime=function(c){if(!S||S.dead)return"";if(can(c))return"";if(c>1&&S.suc<20)return"Sức dưới 20";
+(function(){const w0=whyTime;whyTime=function(c){if(!S||S.dead)return"";if(can(c))return"";const sw=j76sucWhy(c);if(sw)return sw;
  if(S.j76carry||used>=4)return w0.call(this,c)||"hết khắc buổi này";if(used+c>4&&window.__j76win)return `không kịp xong trong ${BUOI[S.buoi||0].toLowerCase()}`;
  if(used+c>4)return "hết khắc trong ngày";return w0.call(this,c)}})();
 function j76cap(s){return s?s[0].toUpperCase()+s.slice(1):s}
 /* deck cards: a card bound to a buổi may not spill */
-function j76win(a,f){const w=window.__j76win;window.__j76win=a&&a.b!=null?1:w;try{return f()}finally{window.__j76win=w}}
+function j76win(a,f){const w=window.__j76win,r0=window.__j76rest,c0=window.__j76cs;window.__j76win=a&&a.b!=null?1:w;window.__j76rest=j76isRest(a)?1:0;window.__j76cs=a&&a.c&&a.c.suc<0?a.c.suc:0;
+ try{return f()}finally{window.__j76win=w;window.__j76rest=r0;window.__j76cs=c0}}
+/* walking is never locked by the Sức floor */
+["goTo","mapHTML","seeBtn","visitBtn","goSee","visitPal"].forEach(f=>{try{const o=window[f];if(typeof o!=="function")return;window[f]=function(){const t=window.__j76trip;window.__j76trip=1;try{return o.apply(this,arguments)}finally{window.__j76trip=t}}}catch(e){}});
 (function(){const cw=cardWhy;cardWhy=function(a){return j76win(a,()=>{const r=cw.apply(this,arguments);if(/^Hết khắc buổi này — chờ buổi sau$/.test(r||"")){const w=whyTime(cardCost(a));return j76cap(w)||r}return /^(không kịp xong|hết khắc trong ngày)/.test(r||"")?j76cap(r):r})}})();
 (function(){const ch=cardH;cardH=function(a,i){return j76win(a,()=>{let h=ch.apply(this,arguments);
  try{const c=cardCost(a);if(!/\sdisabled>/.test(h.slice(0,h.indexOf(">")+1))&&j76spills(c))h=h.replace(/<\/span>(\s*)(<span class="kinfo"|<\/button>\s*$)/,`<span class="kl">Ghi chú</span><span>${eff("kéo sang "+j76nextName())}</span></span>$1$2`)}catch(e){}return h})}})();
@@ -49,7 +60,7 @@ function j76win(a,f){const w=window.__j76win;window.__j76win=a&&a.b!=null?1:w;tr
 ["visitBtn","seeBtn"].forEach(f=>{try{const o=window[f];if(typeof o!=="function")return;window[f]=function(){const h=o.apply(this,arguments);return /^<button[^>]*\sdisabled/.test(h||"")?h.replace(/<span class="kl">ghi chú<\/span><span class="ef n">[^<]*<\/span>/,""):h}}catch(e){}});
 (function(){const w0=whyTime;whyTime=function(c){window.__j76lastC=c;return w0.apply(this,arguments)}})();
 (function(){const r0=renderPanel;renderPanel=function(){window.__j76lastC=0;return r0.apply(this,arguments)}})();
-(function(){const g0=guessWhy;guessWhy=function(b){const r=g0.apply(this,arguments);if(r==="Sức dưới 20"&&S&&S.suc>=20)return whyTime(2)||r;return r}})();
+(function(){const g0=guessWhy;guessWhy=function(b){const r=g0.apply(this,arguments);if(r==="Sức dưới 20")return whyTime(2)||(S&&S.suc<SUC_FLOOR?j76sucWhy(2):"")||r;return r}})();
 /* travel: finish this buổi on the road, the clock turns, then arrive in the new buổi */
 (function(){const g0=goTo;goTo=function(k){
  try{if(S&&!S.dead&&!Q.length&&!S.mg&&!S.out&&!S.confined&&k&&k!=="home"&&k!==S.place&&!S.j76carry&&!(typeof isSrv==="function"&&isSrv())){
@@ -62,7 +73,7 @@ function j76win(a,f){const w=window.__j76win;window.__j76win=a&&a.b!=null?1:w;tr
 /* the help line for the buổi chip */
 try{HX.buoi="Mỗi buổi có 4 khắc, ngày có 3 buổi. Việc cần nhiều khắc hơn số còn lại thì kéo sang buổi sau (đường xa thì đến nơi vào buổi sau); việc chỉ làm trong một buổi phải xong trong buổi ấy, và buổi tối không kéo qua đêm."}catch(e){}
 /* ===== NO DEAD ENDS (owner 11/14): with any khắc left there is always something worth doing =====
-   The deck is dealt once a day and each card is done once that day, Sức under 20 locks every 2-khắc act, and
+   The deck is dealt once a day and each card is done once that day, the Sức floor locks 2-khắc acts, and
    bạc can run dry: so after a few acts every card went grey with khắc still left. Three standing 1-khắc acts are
    now in every day's deck, free of bạc and Sức, and come back each buổi (rest may be repeated): rest, talk with the trusted maid, read.
    A card already done shows the true reason ("Đã làm hôm nay — mai chia bài mới"); it is a per-day deck. */
@@ -78,15 +89,15 @@ function j76stand(){if(!S||S.dead)return[];const A=[{n:"Nghỉ ngơi một lát"
 (function(){const cw=cardWhy;cardWhy=function(a){const r=cw.apply(this,arguments);return r==="Đã làm trong buổi này"&&!(a&&a.j76)?"Đã làm hôm nay — mai chia bài mới":r}})();
 /* a loaded game gets them too (the deck is not saved) */
 (function(){const r0=render;let t=0;render=function(){try{if(S&&!S.dead&&Array.isArray(deck)&&deck.length&&!deck.some(a=>a.j76)&&!(typeof isSrv==="function"&&isSrv()))deck.unshift(...j76stand())}catch(e){}return r0.apply(this,arguments)}})();
-/* ===== A NIGHT'S SLEEP RESTORES SỨC (owner 11/14) =====
-   endTurn gave everyone only +4 Sức a night (+1 in harsh weather) while most acts cost Sức 5–20, so Sức sat pinned
-   low. Now a night restores 12 (harsh weather 6), +4 with a trusted physician (S.doctor), halved while ill; the same
-   base for every consort (rivals too). The morning news shows it as a green Sức gain. */
-function j76sleep(p){const h=typeof harsh==="function"&&harsh();let n=h?6:12;if(p===S&&S.doctor)n+=4;try{if(typeof illOf==="function"&&illOf(p))n=Math.round(n/2)}catch(e){}return n}
+/* ===== ONE NIGHT-RECOVERY RULE (owner 11/14; folds the j80 hotfix in) =====
+   endTurn's old +4 (+1 in harsh weather) stays; on top of it a night's sleep gives +14 (harsh weather +8), +6 more
+   when Sức was under 30, +4 with a trusted physician (S.doctor, hers only). Same base rule for every consort.
+   Applied before the night is resolved; the morning news shows the whole night's gain in green. */
+function j76sleep(p){let n=(typeof harsh==="function"&&harsh())?8:14;if(p.suc<30)n+=6;if(p===S&&S.doctor)n+=4;return n}
 (function(){const e0=endTurn;endTurn=function(){if(!S||S.dead||Q.length||S.mg||(typeof isSrv==="function"&&isSrv()))return e0.apply(this,arguments);
- const t0=S.turn,tu=S.tuan,base=(typeof harsh==="function"&&harsh())?1:4;const mine=j76sleep(S),theirs=liveRivals(true).map(v=>[v,j76sleep(v)]);const q0=Q.length;
+ const t0=S.turn,tu=S.tuan,s0=S.suc;S.suc=cl(S.suc+j76sleep(S),0,100);try{liveRivals(true).forEach(v=>v.suc=cl(v.suc+j76sleep(v),0,100))}catch(e){}const mid=S.suc;
  const r=e0.apply(this,arguments);
- try{if(S&&!S.dead&&(S.turn!==t0||S.tuan!==tu)){const ex=Math.max(0,mine-base);const s0=S.suc;S.suc=cl(S.suc+ex,0,100);theirs.forEach(([v,n])=>{if(v.alive)v.suc=cl(v.suc+Math.max(0,n-base),0,100)});
-  const line=`<p>Ngủ một đêm: <span class="g">Sức +${mine}</span>${S.doctor?" (có thái y tâm phúc)":""} · nay Sức ${S.suc}</p>`;log(`Ngủ một đêm: <span class="g">Sức +${mine}</span>.`);
-  const m=Q.find(x=>x&&x.t==="Tin trong cung"&&typeof x.h==="string");if(m)m.h+=line;else{try{popNum&&popNum("suc",mine)}catch(e){}}
+ try{if(S&&!S.dead&&(S.turn!==t0||S.tuan!==tu)){const g=Math.min(100,mid+((typeof harsh==="function"&&harsh())?1:4))-s0;if(g>0){
+  log(`<span class="g">Ngủ một đêm: Sức +${g}</span>`);const line=`<p>Ngủ một đêm: <span class="g">Sức +${g}</span>${S.doctor?" (có thái y tâm phúc)":""}</p>`;
+  const m=Q.find(x=>x&&x.t==="Tin trong cung"&&typeof x.h==="string");if(m)m.h+=line;else{try{popNum&&popNum("suc",g)}catch(e){}}}
   if(Q.length&&$("modal").hidden)showModal();render()}}catch(e){}return r}})();
