@@ -76,3 +76,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (20:10Z) Owner APPROVED the identity card (wide origin picture, simple frame, pinned choice buttons) — review/identity-card 360f138a; ships with the fold-layout build.
 - (20:15Z) Owner: selected state in face picker ugly (yellow box behind frame + check over crest). Kit: one selected style everywhere — glow following frame outline, slight enlarge, unselected dimmed, small check at bottom-right inside frame; no box.
 - (20:30Z) Owner: selected state = gold glow around the frame is OK; NO check badge.
+- (20:50Z) Owner: map lacks servants' quarters, kitchen, physicians, study rooms etc. Decided to add: Dãy nhà cung nhân, Ngự thiện phòng, Nội vụ phủ, Hoán y cục, Phật đường, học đường/Thượng thư phòng; check Thái y viện + Ngự thư phòng reachable. Plan + pilot scene first (review/places).
