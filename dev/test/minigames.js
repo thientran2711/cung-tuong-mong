@@ -1,9 +1,9 @@
 /* j82 mini-games: Playwright plays every mini-game by touch (test oracle KG82.peek) at one viewport.
-   usage: node dev/test/minigames.js <baseURL> <W>x<H> <outdir> [kinds,comma]   (serve the built site with charset wrapper first) */
+   usage: node dev/test/minigames.js <baseURL> <W>x<H>[@dpr] <outdir> [kinds,comma]   (serve the built site with charset wrapper first) */
 const {chromium}=require('playwright');
-const [,,BASE,SZ,OUT,KL]=process.argv;const [W,H]=SZ.split('x').map(Number);
+const [,,BASE,SZ,OUT,KL]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=WH.split('x').map(Number);
 const KINDS=(KL||'dan,co,tho,ve,mua,ban').split(',');
-(async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,deviceScaleFactor:1});
+(async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,deviceScaleFactor:+(DPR||1)});
  const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));
  await p.goto(BASE,{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);
  await p.evaluate(()=>{SLOT=3;document.getElementById('title').hidden=true;start();Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;
@@ -43,4 +43,10 @@ const KINDS=(KL||'dan,co,tho,ve,mua,ban').split(',');
  for(let i=0;i<200;i++){const ph=await p.evaluate(()=>KG82.phase);if(ph!=='play')break;await p.evaluate(()=>{const pk=KG82.peek();if(pk&&pk.sel)document.querySelector(pk.sel).click()});await p.waitForTimeout(300)}
  await p.locator('#kg82').screenshot({path:`${OUT}/playArt-${SZ}.png`,timeout:120000});await p.locator('#kg82ok').tap();
  const pa=await p.evaluate(()=>window.__pa);
- console.log(JSON.stringify({size:SZ,res,playArt:pa,errors:errs},null,0));await b.close()})();
+ /* lesson games for the j85 arts (Thêu, Nấu nướng) inside the Tài nghệ lesson overlay */
+ const lessons={};
+ for(const k of ['theu','nau']){await p.evaluate(k=>{window.__lp=null;openMG(k,2,g=>window.__lp=g)},k);await p.waitForTimeout(300);
+  await p.evaluate(()=>{const tick=()=>{if(window.__lp!=null||mgDone)return;const pk=KG82.peek();if(pk){if(pk.sel){const el=document.querySelector(pk.sel);if(el)el.click()}else{const el=document.elementFromPoint(pk.x,pk.y);if(el)el.dispatchEvent(new PointerEvent('pointerdown',{clientX:pk.x,clientY:pk.y,pointerType:'touch',bubbles:true,cancelable:true}))}}setTimeout(tick,150)};tick()});
+  for(let i=0;i<150;i++){if(await p.evaluate(()=>mgDone))break;if(i===6)await p.locator('#ov .mg').screenshot({path:`${OUT}/lesson-${k}-${SZ}.png`,timeout:120000});await p.waitForTimeout(400)}
+  await p.evaluate(()=>{const b=document.getElementById('mgok');if(b)b.click()});await p.waitForTimeout(200);lessons[k]=await p.evaluate(()=>window.__lp)}
+ console.log(JSON.stringify({size:SZ,res,playArt:pa,lessons,errors:errs},null,0));await b.close()})();

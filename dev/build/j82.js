@@ -210,7 +210,7 @@ function kg82Quiz(box,env){const Qs=kg82Bank(KG82_KIND[env.kind].b);let r=0,pts=
   wrap.querySelectorAll("button[data-i]").forEach(b=>{const k=+b.dataset.i;b.disabled=true;if(cur[k]===q.a)b.innerHTML=kg82Chip(`✓ ${cur[k]}`,"g");else if(k===i)b.innerHTML=kg82Chip(`✗ ${cur[k]}`,"r")});
   if(i<0)wrap.insertAdjacentHTML("beforeend",kg82Rows([["Hết giờ",`Lời đúng: ${q.a}`,"r"]]));r++;setTimeout(show,1000)}
  tm=setInterval(()=>{if(stop)return;const left=LIM-(performance.now()-t0);env.hud({score:`${pts}/10`,round:`Câu ${Math.min(r+1,5)}/5`,time:`${Math.max(0,Math.ceil(left/1000))} giây`});if(left<=0&&!lock)pickA(-1)},150);
- KG82.peek=()=>{if(lock||stop||!cur)return null;const i=cur.indexOf(Qs[r].a);return{sel:`#kg82box button[data-i="${i}"]`}};
+ KG82.peek=()=>{if(lock||stop||!cur)return null;const i=cur.indexOf(Qs[r].a);return{sel:`#${box.id||"kg82box"} button[data-i="${i}"]`}};
  show();return()=>{stop=true;clearInterval(tm)}}
 
 /* 4. PATTERN (vẽ, cắm hoa, thêu, khéo tay): remember which cells were painted */
@@ -355,3 +355,9 @@ window.startContest=startContest;window.playArt=playArt;
 .kg82opts{display:grid;grid-template-columns:1fr;gap:8px;margin-top:10px}.kg82opts button{min-height:48px;text-align:center;justify-content:center}
 .kg82quiz .kb{font-size:1rem}.kg82 .kfact small{display:block}.kg82 .kgrow>b{flex:none;white-space:nowrap;padding-left:6px}
 `;document.head.appendChild(st)})();
+
+/* lesson games (Tài nghệ tab, openMG) for the j85 arts: Thêu = the stitch-pattern game, Nấu nướng = the cooking quiz; same engines, 1–3 lesson points */
+const KG82_MGL={theu:["Thêu: nhớ mẫu thêu","theu"],nau:["Nấu nướng: chọn món","banh"]};
+function kg82Lesson(k){const [t,kind]=KG82_MGL[k];return[t,KG82_KIND[kind].how,(b,lv,end)=>{b.innerHTML="";let stop=null;const env={kind,lv,hud:()=>{},end:raw=>{KG82.peek=()=>null;end(raw>=8?3:raw>=5?2:1)}};
+ try{stop=KG82_ENG[KG82_KIND[kind].e](b,env)}catch(e){console.error(e);end(1)}return()=>{if(stop)stop()}}]}
+(function(){if(typeof openMG!=="function"||typeof MG==="undefined")return;const o0=openMG;openMG=function(k){try{if(KG82_MGL[k])MG[k]=kg82Lesson(k)}catch(e){}return o0.apply(this,arguments)}})();
