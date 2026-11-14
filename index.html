@@ -3792,7 +3792,7 @@ function mindTell(v,t,k){mindLog(v,"_tell");const tc=witOf(v);let c=12+(S.mat||0
 /* someone with a plan in hand waits for it instead of starting another */
 (function(){const n0=npcAct;npcAct=function(v,t){if(v&&v.plan)return"";return n0.apply(this,arguments)}})();
 /* ================= BALANCE KNOBS (measured with the sensible / random bots; see the report) ================= */
-const BAL={outQ:85,hz:1.4,conc:.3/.7,later:6,hhTh:60};
+const BAL={outQ:85,hz:2.0,conc:.3/.7,later:6,hhTh:55};
 /* an empty Hoàng hậu seat: the Thái hậu may bring in a girl of a great house instead of holding a contest (same for every candidate) */
 (function(){const c0=contestOpen;contestOpen=function(r){if(r===7&&!ct()&&!queenP()&&S.outQv!==S.vacSince&&consorts().some(p=>candOK(p,7))&&(S.outQv=S.vacSince,true)&&roomFor("consort")&&roll(BAL.outQ)){const n=newRival(7,true);Object.assign(n,drawFace());n.rank=6;n.queen=true;n.dad=80;rivals.unshift(n);S.vacSince=null;
   const t=`<b>Thánh chỉ: Thái hậu chọn ${n.name}, con gái danh môn, vào cung lập làm Hoàng hậu.</b> Ghế trống không mở tranh. `;log(t);return t}return c0.apply(this,arguments)}})();
@@ -5352,6 +5352,12 @@ setTimeout(tabsFit,0);
 /* j62: kid card shows age once (in the header "Hoàng tử · 11 tuổi"); the adult age band (18–25…) is shown only for adults (owner 11/14) */
 (function(){const t0=tuoi;tuoi=function(n){return n>=18?t0(n):(n>0?`Tuổi <b>${n}</b>`:"")};
  const k0=kidCard;kidCard=function(k){const t1=tuoi;tuoi=()=>"";try{return k0.apply(this,arguments)}finally{tuoi=t1}}})();
+/* j64: status panel chances in plain words (owner 11/14): the odds ladder (Liều, Khó…) is for acts only; a standing chance reads as a level */
+function chanceLvl(n){return n<=0?"Không có":n<8?"Rất thấp":n<18?"Thấp":n<35?"Vừa":n<60?"Cao":"Rất cao"}
+(function(){if(typeof HX==="object"){HX.con="Mỗi lần được thị tẩm, khả năng có thai cao hay thấp. Tăng nhờ Sủng, Sắc, cầu tự, thuốc bổ; giảm theo tuổi.";HX.dem="Mỗi tuần, khả năng Hoàng thượng lật thẻ bài của ngươi. Tăng nhờ Sủng, Sắc; bằng 0 khi đang mang thai, bị cấm túc, bị chặn thẻ hay ở lãnh cung."}
+ const r0=renderHud2;renderHud2=function(){r0.apply(this,arguments);const el=$("hud2");if(!el||!S)return;
+  const set=(k,lab,v)=>{const b=el.querySelector(`.hc[data-hx="${k}"]`);if(!b)return;const i=b.querySelector("i");b.innerHTML=`${lab} <b>${v}</b>`+(i?i.outerHTML:"")};
+  try{set("con","Có thai:",chanceLvl(conceiveCh()))}catch(e){}try{set("dem","Lật thẻ:",chanceLvl(nightCh()))}catch(e){}}})();
 
 /* ================= j66: SHE IS ONE OF THE CONSORT IDENTITIES (owner 11/14) =================
    No separate "player looks" any more. Each new life rolls one consort identity (img/FIGURES.json, role consort,
