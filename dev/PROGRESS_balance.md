@@ -32,3 +32,9 @@ Chạy: `GAME=<bản dựng có meta charset> INP=inpage6.js node dev/measure/ru
 - jbal2: BAL.birthMin 8 (sàn rủi ro khó sinh), seeMaxP 65 (nhận ra độc tối đa), poisonX 1.5. Đo n=30: HH 33%, chết sớm 20%, khó sinh 6,4%/lần.
 - Đã thử seeMaxP 75 + poisonX 2: HH 50%, chết 13% → bỏ.
 - VIỆC TIẾP (để chết sớm ~35–40%): độc trúng 1–2 lần/đời mà gần như không chết. Kiểm đường đi: j70 runAct (dev/build/j70.js ~dòng 352) có thể chạy độc qua chuỗi riêng, không qua ACT.poison.f; Sức của nàng chỉ xét chết ở tuần sau. Dùng inx.js (đếm "on") + log để xem Sức sau khi trúng độc.
+
+## v12 (thợ cân bằng 2, đêm 11/14) — xem BALANCE_REPORT.md mục v12
+- Nguyên nhân độc trúng mà không chết: độc trúng ban ngày (j70 mưu, j83 món ăn) đưa Sức nàng về 0, nhưng nàng chỉ bị xét chết ở cuối tuần, sau +4 hồi sức → không bao giờ chết. NPC thì chết ngay (dieIf). Sửa (jbal2): độc làm cạn Sức nàng thì chết ngay "Trúng độc, không qua khỏi" — một luật cho mọi người. inpz.js đo: 25 lần trúng/9 đời, nhiều lần về 0 mà sống.
+- Sau sửa: poisonX 1.5 quá chết (57%) → poisonX 1. Gộp review/items-earned (98a3dae9). Hạ độc không có Hạc đỉnh hồng: mua thạch tín BAL.poisonBac 20 bạc (mọi người).
+- Núm cuối: seeMaxP 70, outQ 60 (ghế HH trống về người ngoài 60%, trước 85), hz 3.2, birthMin 8, poisonX 1, poisonBac 20.
+- Chạy: bash <scratch>/b2w/run5.sh <game> <nhãn> (5 mảnh × 6 đời, xoay 9 thân phận, INP2=inx.js,inpz.js, EXTRA='Object.assign(BAL,{...})' để thử núm). probe_poison.js kiểm luật độc.
