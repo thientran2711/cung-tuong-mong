@@ -1,0 +1,5 @@
+# vv.py JID... : variable part of each prompt (between "not elderly." and " Eyes soft")
+import os,sys; js=sys.argv[1:]; sys.argv=["x"]; __file__=os.path.abspath("cjobs.py")
+exec(open("cjobs.py").read().split('if __name__')[0])
+for j in js:
+    s,r,p=job(j); print(j,s,r); print(p[p.index("not elderly.")+12:p.index(" Eyes soft")].replace(" dynamic graceful motion in every figure, caught mid-movement, skirt hems swirling, long sleeves, sash and stole floating in a soft breeze, flowing fabric, hair tassels swaying (the older figures move more calmly but still gracefully); each figure complete head to feet inside the frame, compact, extra empty space between the four figures so the swirling fabric never overlaps."," [MOTION]").replace(" Poses (NEW, NOT the reference's poses; a different age-appropriate pose for each figure, same person and same signature prop), left to right:"," [POSEHEAD]").replace(" Forehead: a small, delicate, refined huadian forehead ornament between the brows, elegant, not large: a "," [HUA] ").replace(", the same design on all four figures; it does not cover the forehead and never spreads onto the cheeks."," [/HUA]"))
