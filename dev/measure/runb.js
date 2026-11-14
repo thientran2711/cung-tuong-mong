@@ -7,7 +7,7 @@ const M=__dirname,GAME=process.env.GAME||path.join(M,'..','index.html');
  page.on('pageerror',e=>{console.log('PAGEERR',mode,e.message.slice(0,200))});
  await page.goto('file://'+GAME);await page.waitForTimeout(500);
  await page.evaluate(()=>localStorage.clear());await page.reload();await page.waitForTimeout(500);
- await page.click('#slots button[data-new="1"]');
+ await page.evaluate(()=>document.querySelector('#slots button[data-new="1"]').click());await page.waitForTimeout(800);
  await page.evaluate(`window.__servPolicy='${process.env.SERV||''}';window.__aff=${process.env.AFF?1:0};window.__hhStop=${process.env.HHSTOP?1:0};window.__balO=${process.env.BALJ||'null'};window.__fairO=${process.env.FAIRJ||'null'};window.__j70O=${process.env.J70J||'null'};window.__origO=${process.env.ORIG?JSON.stringify(process.env.ORIG):'null'}`);
  await page.evaluate(fs.readFileSync(path.join(M,process.env.INP||'inpage5.js'),'utf8'));
  const t0=Date.now();let n=0;
