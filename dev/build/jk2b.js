@@ -585,3 +585,55 @@ kitStageScale=function(){try{kitFigFx()}catch(e){}};kitStageEdge=function(){};
 const KIT_ROLEPRE=/^(Hoàng thượng|Thái hậu|Hoàng hậu|Hoàng quý phi|Quý phi|Phi|Tần|Quý nhân|Thường tại|Đáp ứng|Phế phi|Thái tử|Hoàng tử|Công chúa|Thái y|Ngự y|Thái giám|Tổng quản|Thủ lĩnh|Tiểu thái giám|Thị vệ|Thống lĩnh|Vương gia|Thân vương|Quận vương|Tể tướng|Đại tướng quân|Thượng thư|Thị lang|Tướng quân|Quan|Đại nhân|Nhạc sư|Họa sư|Sứ thần|Công tử|Ma ma|Cô cô|Cung nữ|Nữ quan|Chưởng sự)(?=\s|$)/i;
 (function(){const t0=kitTitle;kitTitle=function(p){const t=t0.apply(this,arguments);try{if(!t||!p||!p.name)return t;const nm=String(p.name).replace(/<[^>]*>/g,"").trim();
   if(nm.toLowerCase().startsWith(String(t).toLowerCase())||KIT_ROLEPRE.test(nm))return""}catch(e){}return t}})();
+
+/* ---------- 18. ONE STICKY CARD HEADER (owner 11/14, Fold shot 1114-fold-card-dup): replaces the left-column copy + the slim strip of section 10.
+   Every person card (.pc: consort, servant, child, Emperor, Thái hậu, court, officials, strangers) has ONE header at its top: small kit frame,
+   name, rank title and the relation/stat BARS (Ghen · Ngươi với nàng · Oán · Nàng với ngươi · Sủng). It is the only copy of those facts:
+   the real nodes are moved into it (nothing is duplicated), it is opaque, sticky at the top of the card and in the flow, so the content
+   scrolls UNDER it and is never covered. Below it: big portrait + wear slots + facts (left), act tabs + act cards (right; one column on
+   phones). The card scrolls as one block inside the panel and is at most the panel's height; when a new person is opened the panel
+   scrolls so the whole card is in view. ---------- */
+kitPcFix=function(pc){try{if(!pc||pc.dataset.k2==="1")return;const L=pc.querySelector(":scope > .pcl"),Rr=pc.querySelector(":scope > .pcr");if(!L||!Rr)return;pc.dataset.k2="1";
+ const info=L.querySelector(":scope > .pcinfo");const bars=document.createElement("div");bars.className="kpbars";const pgh=L.querySelector(":scope > .pgh");if(pgh)bars.appendChild(pgh);
+ if(info)[...info.children].forEach(c=>{if(c.querySelector('.fbar,.rlab,.mini,[class*="bar"]')||/^\s*(Sủng|Ghen)\b/.test(c.textContent))bars.appendChild(c)});
+ const facts=document.createElement("div");facts.className="kpfacts";if(info&&info.children.length)facts.appendChild(info);const ch=L.querySelector(":scope > .chips");if(ch)facts.appendChild(ch);
+ if(facts.children.length)L.appendChild(facts);
+ const nmEl=L.querySelector(":scope > .pcname")||L.querySelector(":scope > b");const rkEl=L.querySelector(":scope > .pcrk");const name=(nmEl||{}).textContent||"";
+ bars.querySelectorAll(".fbar>u,.mini>u").forEach((u,i)=>{const k=name+"|"+i;const nw=u.style.width;const ow=KIT_BARW[k];KIT_BARW[k]=nw;
+  if(ow!=null&&ow!==nw&&!matchMedia("(prefers-reduced-motion: reduce)").matches){u.style.width=ow;u.style.transition="width .6s ease-out";requestAnimationFrame(()=>requestAnimationFrame(()=>{u.style.width=nw}))}});
+ const hd=document.createElement("div");hd.className="kpstrip kphead on";
+ const pcp=L.querySelector(":scope > .pcp");if(pcp){const kin=pcp.querySelector(".kin");if(kin){const mini=document.createElement("span");mini.className="kpsf";mini.innerHTML=`<span class="md kit kfc sm">${kin.outerHTML}</span>`;hd.appendChild(mini)}}
+ const sn=document.createElement("span");sn.className="kpsn";if(nmEl)sn.appendChild(nmEl);if(rkEl)sn.appendChild(rkEl);hd.appendChild(sn);
+ if(bars.children.length){const sb=document.createElement("span");sb.className="kpsb";sb.appendChild(bars);hd.appendChild(sb)}
+ pc.prepend(hd);
+ /* one fact, one place: Sủng is in the header bars, so its stat tile goes */
+ if(/Sủng/.test(bars.textContent)){const bs=[...bars.children].find(c=>/Sủng/.test(c.textContent));const barKnown=bs&&!/chưa rõ/.test(bs.textContent);pc.querySelectorAll(".ktile").forEach(t=>{const l=t.querySelector("span,small,i,em");if(/^\s*Sủng\b/i.test((l||t).textContent)&&(barKnown||/chưa rõ/.test(t.textContent)))t.hidden=true})}
+ kitPcSize()}catch(e){console.error("kitPcFix",e)}};
+/* the card is at most the panel's height (one scroller inside the panel); a newly opened person is scrolled fully into view */
+function kitPcSize(){try{const P=$("panel");if(!P)return;const cs=getComputedStyle(P);const pb=parseFloat(cs.paddingBottom||0),pt=parseFloat(cs.paddingTop||0);
+ P.querySelectorAll(".pc[data-k2]").forEach(pc=>{const pr=P.getBoundingClientRect();const full=P.clientHeight-pt-pb-4;
+  /* the card takes the rest of the panel under the pager (its own scroll); if that is too short it takes the whole panel height */
+  const top0=pc.getBoundingClientRect().top+P.scrollTop-pr.top;const rest=P.clientHeight-pb-top0-4;const h=rest>=Math.min(320,full)?rest:full;
+  pc.style.setProperty("--kpcmax",Math.max(200,Math.round(h))+"px");
+  const nm=(pc.querySelector(".kphead .kpsn")||{}).textContent||"";if(P.__kpcN!==nm){P.__kpcN=nm;requestAnimationFrame(()=>{try{const a=P.getBoundingClientRect(),c=pc.getBoundingClientRect();
+   if(c.bottom>a.bottom-pb+1)P.scrollTop+=Math.min(c.bottom-(a.bottom-pb)+2,c.top-a.top-pt);else if(c.top<a.top+pt)P.scrollTop+=c.top-a.top-pt}catch(e){}})}})}catch(e){}}
+addEventListener("resize",()=>{clearTimeout(window.__kpcS);window.__kpcS=setTimeout(kitPcSize,80)});
+(function(){const st=document.createElement("style");st.id="k2b-pchead";st.textContent=`
+.pc[data-k2]{max-height:var(--kpcmax,none)!important;overflow-y:auto!important;overscroll-behavior:contain;padding-top:0!important}
+.pc[data-k2]>.kphead,.pc[data-k2]>.kphead.on{display:flex!important;visibility:visible!important;height:auto!important;opacity:1!important;overflow:visible!important;
+ position:sticky!important;top:0!important;z-index:6;grid-column:1/-1;margin:0 -7px 6px!important;padding:6px 8px!important;gap:8px;align-items:center;flex-wrap:wrap;
+ background:var(--panel2,#f6ead6)!important;border-bottom:1px solid var(--k-hair,#e6d3ac);border-radius:8px 8px 0 0;box-shadow:0 3px 6px -3px #5a3a2033}
+.pc[data-k2]>.kphead .kpsf{flex:0 0 auto}.pc[data-k2]>.kphead .kpsf .md.kfc{width:44px!important}
+.pc[data-k2]>.kphead .kpsn{display:flex;flex-direction:column;line-height:1.15;min-width:0;flex:0 1 auto}
+.pc[data-k2]>.kphead .kpsn>.pcname,.pc[data-k2]>.kphead .kpsn>b{font-family:var(--display);font-size:1.15rem;margin:0;white-space:normal}
+.pc[data-k2]>.kphead .kpsn>.pcrk{font-size:.8rem;color:var(--gold);display:flex;align-items:center;gap:3px;margin:0}
+.pc[data-k2]>.kphead .kpsb{flex:1 1 260px;min-width:0;display:block}
+.pc[data-k2]>.kphead .kpbars{display:flex;flex-wrap:wrap;gap:1px 14px;font-size:.78rem;line-height:1.3;color:var(--dim);margin:0}
+.pc[data-k2]>.kphead .kpbars>*{display:inline-flex;flex-wrap:wrap;align-items:center;gap:2px 4px}
+.pc[data-k2]>.kphead .kpbars>*{display:block!important}.pc[data-k2]>.kphead .kpbars>*>*{white-space:nowrap}.pc[data-k2]>.kphead .kpbars .rlab{display:inline!important}.pc[data-k2]>.kphead .kpbars .fbar{display:inline-block!important;vertical-align:middle;margin:0 8px 0 4px}
+.pc[data-k2]>.kphead .kpbars .fbar{width:44px}
+.pc[data-k2]>.pcl{position:static!important;max-height:none!important;overflow:visible!important;background:none!important}
+@media (max-width:599px){.pc[data-k2]>.kphead{gap:2px 8px;padding:4px 6px!important}.pc[data-k2]>.kphead .kpsb{flex-basis:100%}.pc[data-k2]>.kphead .kpsf .md.kfc{width:34px!important}.pc[data-k2]>.kphead .kpsn>.pcname,.pc[data-k2]>.kphead .kpsn>b{font-size:1rem}
+ .pc[data-k2]>.kphead .kpbars{font-size:.7rem;gap:0 10px;line-height:1.25}.pc[data-k2]>.kphead .kpbars .fbar{width:32px}.pc[data-k2]>.kphead .kpbars>*{flex-wrap:nowrap;white-space:nowrap}}
+`;document.head.appendChild(st)})();
+(function(){const r0=renderPanel;renderPanel=function(){const r=r0.apply(this,arguments);try{requestAnimationFrame(kitPcSize)}catch(e){}return r}})();
