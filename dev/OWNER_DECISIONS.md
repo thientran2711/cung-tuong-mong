@@ -162,3 +162,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (04:00Z) Owner: in co-op the friend is 'Người lạ' until met, same knowledge rules as NPCs (no name/face until met); reborn friend = unknown again.
 - (04:10Z) Owner: palace detail courtyards use only Phượng Lệnh grade 'nhat' (most luxurious); no nhi/tam mixing.
 - (04:15Z) Owner: in the kit figure scale, men are a bit taller than women (≈1.08×); children by age.
+- (04:30Z) Owner: on walks she can meet men; zones forbidden to men (inner hậu cung) / women (outer court); seeing a man where he shouldn't be → report to guards / Cung Chính ti, ignore, hide him, hide & eavesdrop, later leverage. Same rules for NPCs. Worker on review/men (existing male art only).
