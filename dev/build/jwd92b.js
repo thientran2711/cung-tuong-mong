@@ -16,7 +16,7 @@
 /* pacing (measured: without it an angry palace impeached her ~140 times a life). Same for every accuser and every target:
    an accuser waits WD.vpCdA tuần between impeachments and WD.frCdA between frame-ups; a target is not impeached again within
    WD.vpCdT tuần nor framed again within WD.frCdT. */
-Object.assign(WD,{vpCdA:24,vpCdT:12,frCdA:72,frCdT:36});
+Object.assign(WD,{vpCdA:48,vpCdT:72,frCdA:108,frCdT:108});
 (function(){const cd=(o,k,n)=>o&&o[k]!=null&&wk()-o[k]<n;
  const V=ACT.vp,v0=V.ok,vf=V.f;V.ok=function(a,t){if(cd(a,"vpA92",WD.vpCdA)||cd(t,"vpT92",WD.vpCdT))return false;return v0.apply(this,arguments)};
  V.f=function(a,t){if(cd(a,"vpA92",WD.vpCdA)||cd(t,"vpT92",WD.vpCdT))return "";return vf.apply(this,arguments)};
