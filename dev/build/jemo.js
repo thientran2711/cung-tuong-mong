@@ -11,7 +11,7 @@
    ===================================================================================================================== */
 const EMO={vui:"Vui",binh:"Bình thường",buon:"Buồn",gian:"Giận",so:"Sợ",ghen:"Ghen",lo:"Lo âu",dau:"Đau khổ",muu:"Toan tính"};
 /* default reaction of an event: [emotion, strength]; null = no feeling */
-const EMO_EV={selfUp:["vui",60],selfDown:["buon",55],rivalUp:["ghen",30],friendUp:["vui",20],foeDown:["vui",20],gift:["vui",25],slight:["gian",35],
+const EMO_EV={selfUp:["vui",60],selfDown:["buon",55],rivalUp:["ghen",30],friendUp:["vui",20],foeDown:["vui",20],gift:["vui",18],slight:["gian",35],
  kidBorn:["vui",70],kidDie:["dau",95],otherKid:["ghen",25],punished:["so",50],cold:["dau",85],night:["vui",35],neglect:["buon",30],ill:["lo",35],
  friendDie:["buon",55],foeDie:["vui",15],mistressUp:["vui",30],mistressDown:["lo",40],loyalUp:["vui",25],loyalDown:["buon",30],motherDie:["dau",90],
  motherCold:["buon",50],clanUp:["vui",35],clanDown:["lo",40]};
@@ -45,9 +45,9 @@ const EMO_W={vui:{harm:.75,kind:1.5,idle:.9},gian:{harm:1.6,kind:.6,provoke:1.3,
  so:{harm:.6,kind:.9,apologise:1.8,idle:1.3},ghen:{harm:1.3,steal:1.6,block:1.6,trip:1.4,rumor:1.4,kind:.8},lo:{spy:1.6,check:1.6,test:1.4,harm:.9},
  dau:{harm:.7,kind:.6,idle:2},muu:{frame:1.5,plant:1.5,ally:1.5,bribe:1.5,bribeksp:1.5,feign:1.6,provoke:.7}};
 /* odds of any act by the doer's mood (points at v=100; "a little") */
-const EMO_OD={vui:3,binh:0,buon:-2,gian:-3,so:-3,ghen:-1,lo:-2,dau:-4,muu:2};
+const EMO_OD={vui:2,binh:0,buon:-1,gian:-2,so:-2,ghen:-1,lo:-1,dau:-2,muu:1};
 /* the Emperor's tablet chance by her mood */
-const EMO_NIGHT={vui:1.15,binh:1,buon:.88,gian:.85,so:.9,ghen:.92,lo:.95,dau:.85,muu:1};
+const EMO_NIGHT={vui:1.06,binh:1,buon:.94,gian:.92,so:.95,ghen:.96,lo:.97,dau:.92,muu:1};
 /* servants' Lòng per month by their own mood */
 const EMO_LOY={vui:2,binh:0,buon:-1,gian:-2,so:-1,ghen:-1,lo:-1,dau:0,muu:-1};
 const EMO_N={set:0,ev:{},motive:0,motiveGate:0,odds:0,kinds:{}};
@@ -116,7 +116,7 @@ function emoWeek(){if(!emoOn())return;const W=emoW();S.emoSnap=S.emoSnap||{};con
  try{let n=0,a=0;for(const [k] of allKids()){a++;if(k.alive)n++}const o=S.emoSnap.empK;S.emoSnap.empK={n,a};if(o){if(a>o.a)emoSet(S.emp,"vui",55,"mừng có hoàng tự");if(n<o.n-(a-o.a))emoSet(S.emp,"dau",60,"thương xót hoàng tự yểu mệnh")}}catch(e){}}
 /* ---------- direct hooks: a slight (oán) and a kindness (thiện cảm) land at once ---------- */
 (function(){const o0=oanAdd;oanAdd=function(x,y,n){const r=o0.apply(this,arguments);try{if(emoOn()&&n>=5&&x&&y&&x!==y)emoEv(x,"slight",`bị ${emoName(y)} làm nhục`,emoKey(y),cl(n/10,.6,1.6))}catch(e){}return r}})();
-(function(){const a0=affAdd;affAdd=function(x,y,n){const r=a0.apply(this,arguments);try{if(emoOn()&&n>=6&&x&&y&&x!==y&&x!==S.emp)emoEv(x,"gift",`được ${emoName(y)} đối đãi tử tế`,null,cl(n/10,.6,1.6))}catch(e){}return r}})();
+(function(){const a0=affAdd;affAdd=function(x,y,n){const r=a0.apply(this,arguments);try{if(emoOn()&&n>=8&&x&&y&&x!==y&&x!==S.emp)emoEv(x,"gift",`được ${emoName(y)} đối đãi tử tế`,null,cl(n/10,.6,1.6))}catch(e){}return r}})();
 (function(){const k0=kidDie;kidDie=function(k,why,mine){const r=k0.apply(this,arguments);try{if(emoOn()){let mo=mine?S:null;if(!mo)for(const v of rivals||[])if((v.kids||[]).includes(k))mo=v;if(mo)emoEv(mo,"kidDie",`mất ${k.name||"con"}`)}}catch(e){}return r}})();
 (function(){const p0=punish;punish=function(p,why,sev){const r=p0.apply(this,arguments);try{const q=typeof p==="string"?S:p;if(emoOn()&&q)emoEv(q,"punished",`bị phạt vì ${typeof p==="string"?p:why}`);if(emoOn()&&q&&S.emp)emoSet(S.emp,"gian",35,`phật ý ${emoName(q)}`,emoKey(q))}catch(e){}return r}})();
 (function(){const e0=endTurn;endTurn=function(){const r=e0.apply(this,arguments);try{if(S&&!S.dead)emoWeek()}catch(e){console.error(e)}return r}})();
@@ -134,13 +134,13 @@ function emoMul(p,act){const e=emoGet(p);if(e.k==="binh")return 1;const T=EMO_W[
  return 1+(m-1)*e.v/100}
 (function(){const w0=persW;persW=function(p,act){const w=w0.apply(this,arguments);try{if(emoOn()&&p&&p!==S)return w*emoMul(p,act)}catch(e){}return w}})();
 /* anger and jealousy aimed at someone raise the danger toward that person (capped: +12) */
-(function(){const d0=danger;danger=function(v,t){const d=d0.apply(this,arguments);try{if(emoOn()&&v&&t){const e=emoGet(v);if((e.k==="gian"||e.k==="ghen"||e.k==="muu")&&e.t!=null&&e.t===emoKey(t)){const f=emoBrake(v,t);if(f>0)return d+Math.min(12,Math.round(e.v/6*f))}}}catch(e){}return d}})();
+(function(){const d0=danger;danger=function(v,t){const d=d0.apply(this,arguments);try{if(emoOn()&&v&&t){const e=emoGet(v);if((e.k==="gian"||e.k==="ghen"||e.k==="muu")&&e.t!=null&&e.t===emoKey(t)){const f=emoBrake(v,t);if(f>0)return d+Math.min(8,Math.round(e.v/8*f))}}}catch(e){}return d}})();
 (function(){const o0=odA;odA=function(a,b){const r=o0.apply(this,arguments);try{if(emoOn()&&a){const e=emoGet(a);const m=Math.round((EMO_OD[e.k]||0)*e.v/100);if(m){EMO_N.odds++;return cl(r+m,5,95)}}}catch(e){}return r}})();
 (function(){const t0=odT;odT=function(a,b){const r=t0.apply(this,arguments);try{if(emoOn()&&a){const e=emoGet(a);const m=Math.round((EMO_OD[e.k]||0)*e.v/100);if(m)return cl(r+m,5,95)}}catch(e){}return r}})();
 (function(){const n0=nightCh;nightCh=function(p){const c=n0.apply(this,arguments);try{p=p||S;if(emoOn()&&c){const e=emoGet(p);let m=EMO_NIGHT[e.k]||1;if((e.k==="buon"||e.k==="dau")&&(S.emp.traits||[]).includes("nhantu"))m=1.05;let x=1+(m-1)*e.v/100;
   /* his own mood: who he is angry with / fond of, and in grief or worry he seeks the gentle ones */
-  const E=S.emp.emo,k=emoKey(p);if(E&&E.v>=15){if(E.k==="gian"&&E.t===k)x*=1-.5*E.v/100;else if(["buon","dau","lo"].includes(E.k)&&emoTraits(p).some(t=>t==="Hiền lành"||t==="Nhu mì"))x*=1.15}
-  const fd=S.emp.emoFond;if(fd&&fd.k===k&&emoW()-fd.w<=3)x*=1.15;
+  const E=S.emp.emo,k=emoKey(p);if(E&&E.v>=15){if(E.k==="gian"&&E.t===k)x*=1-.5*E.v/100;else if(["buon","dau","lo"].includes(E.k)&&emoTraits(p).some(t=>t==="Hiền lành"||t==="Nhu mì"))x*=1.08}
+  const fd=S.emp.emoFond;if(fd&&fd.k===k&&emoW()-fd.w<=3)x*=1.08;
   if(x!==1)return Math.max(1,Math.round(c*x))}}catch(e){}return c}})();
 function emoMonth(){if(!emoOn())return;for(const p of emoPeople())for(const s of p.staff||[]){const e=emoGet(s);const d=Math.round((EMO_LOY[e.k]||0)*e.v/60);if(d)s.loyal=cl((s.loyal||0)+d,0,100)}}
 (function(){const m0=monthTick;monthTick=function(){const r=m0.apply(this,arguments);try{emoMonth()}catch(e){}return r}})();
