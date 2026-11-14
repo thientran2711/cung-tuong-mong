@@ -68,10 +68,11 @@ function kcFreeFid(role,pref){const U=new Set(figUsed());const keys=Object.keys(
 
 /* ---------- start: the identity card choice, then the home life ---------- */
 function kcPick(){return (S&&S.kcPick)||"cung"}
-function kcPathHTML(){const k=kcPick();const lock=!!window.__kcO;
- return `<div class="kpsec kkcp"><h4 class="kpst">${typeof kitGloss==="function"?kitGloss("Con đường"):"Con đường"}</h4><nav class="ksub" role="tablist" aria-label="Con đường kiếp này">`+
-  [["cung","Vào cung ngay"],["nha","Ở nhà chờ tuyển tú"]].map(([x,n])=>`<button type="button" class="ksubb${x===k?" on":""}" data-kcp="${x}" role="tab" aria-selected="${x===k}"${lock?" disabled":""}>${n}</button>`).join("")+
-  `</nav><div class="kpnote">${k==="nha"?`Ngươi ở nhà cha đến kỳ tuyển tú mùa xuân năm thứ ba (khoảng hai năm), rồi vào cung theo kỳ tuyển, mang theo những gì gom được.`:`Vào cung ngay như mọi kiếp.`}</div></div>`}
+function kcPathHTML(){const k=kcPick();const lock=!!window.__kcO;const r0=RANKS[(S.origin&&S.origin.r)||0].n;
+ const O=[["cung","Vào cung ngay",`thành: vào cung ngay, phong ${r0} theo thân phận; thêm khoảng hai năm trong cung để leo · hỏng: không hồi môn, không biết trước gì về các phi tần, không có cơ duyên ngoài cung`],
+  ["nha","Ở nhà chờ tuyển tú",`thành: hai năm học tài nghệ, nâng Tư chất; hồi môn và tỳ nữ hồi môn một lòng; thế lực nhà cha; tin về các phi tần trong cung; qua tuyển tú có thể phong tới Quý nhân; Thanh mai trúc mã, kết hiếm ngoài cung; Phúc duyên khi qua tuyển tú · hỏng: vào cung muộn hai năm, lúc hai mươi tuổi · kèm: có thể bị trả thẻ bài hay bị ép gả; kế mẫu, thứ muội ngáng chân; có thể chết ở nhà`]];
+ return `<div class="kpsec kkcp"><h4 class="kpst">${typeof kitGloss==="function"?kitGloss("Con đường"):"Con đường"}</h4><div class="opts kcpo">`+
+  O.map(([x,n,l])=>`<button type="button" class="opt${x===k?" ksel":""}" data-kcp="${x}" aria-pressed="${x===k}"${lock?" disabled":""}>${n}<small>${l}</small></button>`).join("")+`</div></div>`}
 try{KIT_GLOSS["Con đường"]="Vào cung ngay: kiếp bắt đầu trong cung. Ở nhà chờ tuyển tú: sống ở nhà cha khoảng hai năm (học tài nghệ, lo chuyện gia đình, hôn sự, tình riêng), rồi qua ba vòng tuyển tú mới vào cung; có thể không vào cung mà xuất giá. Chỉ con nhà quan, nhà buôn, nhà thầy đồ, cháu Thái hậu, con nhà Thị lang mới có đường này."}catch(e){}
 (function(){if(typeof kpBuild!=="function")return;const b0=kpBuild;kpBuild=function(M,m){b0.apply(this,arguments);try{if(!(m&&m.nl)||!S||typeof NLP==="undefined"||!NLP||!kcOk(S.origin.k))return;const mb=$("mb");if(!mb||mb.querySelector(".kkcp"))return;
  const w=document.createElement("div");w.innerHTML=kcPathHTML();const sec=w.firstElementChild;const at=mb.querySelector(":scope > .kpick")||mb.querySelector(":scope > .kpopts");if(at)mb.insertBefore(sec,at);else mb.appendChild(sec)}catch(e){console.error("jkc card",e)}}})();
@@ -322,16 +323,16 @@ const KCE={
  moi:{t:"Bà mối đến nhà",b:()=>{const s=S.kc.suit[S.kc.suit.length-1]||S.kc.suit[0];const c=kcR("cha");return{who:kcFace(c),t:`<p>Bà mối đến nói chuyện ${s.n} muốn cầu thân. Cha hỏi ý ngươi.</p>`,o:[
   kcO("Xin cha cho xem mặt trước",{},()=>kcDo("Bà mối",()=>{S.kap+=4;return"Nhà trai hẹn ngày đến."})),
   kcO("Thưa: con đợi kỳ tuyển tú",{},()=>kcDo("Bà mối",()=>{if(roll(40+(c?c.af/3:0))){S.kap-=8;return"Cha gật đầu: cũng được."}if(c)kcAf(c,-5);return"Cha nhíu mày."})),
-  kcO(`Nhận lời nhà ${s.n}`,{},()=>kcMarry(s))]}}},
+  kcO(`Nhận lời nhà ${s.n}`,{},()=>kcMarry(s),{dis:S.kap<60})]}}},
  dinhhon:{t:"Cha định hôn",b:()=>{const s=S.kc.suit[0];const c=kcR("cha");const r=S.tm96&&S.tm96.rise&&c&&c.af>=60&&S.tm96.h>=75&&kcRare("kcR2",.8);
   return{who:kcFace(c),t:`<p>Cha đã nhận sính lễ của ${s.n}. Ngày cưới định vào tháng sau.</p>`,o:[
   kcO("Vâng lời cha",{},()=>kcMarry(s)),
-  kcO("Quỳ xin cha cho đi tuyển tú",{suc:-10},()=>kcDo("Định hôn",()=>{if(roll(30+(c?c.af/2:0)+(S.kc.want?15:0))){S.kc.suit=[];S.kap=40;S.kc.forced=0;return"Cha trả sính lễ, nói: vậy thì vào cung cho xứng."}S.kc.forced=2;pushDil(mkP("kcE",{e:"dinhhon2"}),"Cha định hôn");return"Cha không đổi ý."})),
+  kcO("Quỳ xin cha cho đi tuyển tú",{suc:-10},()=>kcDo("Định hôn",()=>{if(roll(45+(c?c.af/2:0)+(S.kc.want?15:0))){S.kc.suit=[];S.kap=40;S.kc.forced=0;return"Cha trả sính lễ, nói: vậy thì vào cung cho xứng."}S.kc.forced=2;pushDil(mkP("kcE",{e:"dinhhon2"}),"Cha định hôn");return"Cha không đổi ý."})),
   kcO("Cắt tóc xin đi tu",{},()=>kcEnd("tu"))].concat(r?[kcO("✦ Xin cha gả cho người ấy, nay đã đỗ đạt",{},()=>kcEnd("kcR2"),{r97:1,j67:"tốn: không · (Cơ duyên hiếm)"})]:[])}}},
  dinhhon2:{t:"Cha định hôn",b:()=>{const s=S.kc.suit[0];return{who:kcFace(kcR("cha")),t:`<p>Sính lễ của ${s.n} đã bày đầy chính sảnh. Không còn đường lùi.</p>`,o:[kcO("Lên kiệu hoa",{},()=>kcMarry(s)),kcO("Cắt tóc xin đi tu",{},()=>kcEnd("tu")),kcO("Thắt cổ tự vẫn",{},()=>kcDie("Tự vẫn trước ngày bị ép gả"))]}}},
  chieu:{t:"Chiếu tuyển tú",b:()=>({who:pEmp(),t:`<p>Chiếu tuyển tú ban xuống: mùa xuân năm tới, con gái các nhà quan và lương gia từ mười tám tới hai mươi tuổi đều phải ghi tên. ${kcR("muoi")?"Thứ muội cũng có tên.":""}</p>`,o:[
   kcO("Ghi tên",{},()=>kcDo("Chiếu tuyển tú",()=>{S.kap=Math.max(0,S.kap-20);return"Nhà thôi bàn chuyện gả ngươi đi."})),
-  kcO("Xin cha lo cho được miễn tuyển",{bac:-40},()=>kcDo("Chiếu tuyển tú",()=>{S.kc.mien=1;return"Cha gật đầu. Ngươi sẽ không phải đi tuyển; nhà sẽ lo chuyện gả chồng."}))]})},
+  kcO("Xin cha lo cho được miễn tuyển",{bac:-40},()=>kcDo("Chiếu tuyển tú",()=>{S.kc.mien=1;return"Cha gật đầu. Ngươi sẽ không phải đi tuyển; nhà sẽ lo chuyện gả chồng."}),{dis:S.kap<50||S.bac<40})]})},
  o0:{t:"",b:()=>kcOrigin(0)},o1:{t:"",b:()=>kcOrigin(1)},o2:{t:"",b:()=>kcOrigin(2)},
  so:{t:"Sơ tuyển",b:()=>kcSoD()},phuc:{t:"Phúc tuyển",b:()=>kcPhucD()},dien:{t:"Điện tuyển",b:()=>kcDienD()},trave:{t:"Trả thẻ bài",b:()=>kcTraveD()}};
 PEND.kcE=pp=>{if(!S||!S.kc||S.dead)return null;if(!isKc()&&!/^(dien)$/.test(pp.e))return null;const E=KCE[pp.e];if(!E)return null;const d=E.b(pp);if(!d)return null;
@@ -402,10 +403,11 @@ function kcDie(why){if(S.dead)return;S.kc.end="chết";die(why)}
 /* ---------- tuyển tú: Sơ tuyển → Phúc tuyển (minigame) → Điện tuyển → entry / trả thẻ bài ---------- */
 function kcSoTuyen(){if(S.kc.so||S.dead)return;S.kc.so=1;if(S.kc.mien){S.kc.mien=2;S.kap=Math.max(S.kap,85);const s=S.kc.suit[0]||kcSuitor();if(!S.kc.suit.length)S.kc.suit.push(s);S.kc.forced=1;pushDil(mkP("kcE",{e:"dinhhon"}),"Cha định hôn");return}
  pushDil(mkP("kcE",{e:"so"}),"Sơ tuyển")}
-function kcSoOk(bribe){const C=KC.so;const sc=(S.sac>=C.sac?1:0)+(S.suc>=C.suc?1:0)+(S.kld<C.ld?1:0)+(S.kgt>=C.gt?1:0)+(bribe?1:0);return sc>=4}
+function kcSoOk(bribe){const C=KC.so;const sc=(S.sac>=C.sac?1:0)+(S.suc>=C.suc?1:0)+(S.kld<C.ld?1:0)+(S.kgt>=C.gt?1:0)+(bribe?1:0);return sc>=3}
 function kcSoD(){return{who:pMe(),t:`<p>Ma ma Nội vụ phủ đến khám tuyển: xem dung mạo, khí sắc, hỏi gia thế, nghe ngóng tiếng tăm. ${S.kc.ldSeen&&S.kld>=40?"Ngươi biết lời đồn về mình đã đến tai họ.":""}</p>`,o:[
  kcO("Ra mắt ma ma",{},()=>kcSoGo(false)),kcO("Dúi bạc cho ma ma khám tuyển",{bac:-60},()=>kcSoGo(true),{dis:S.bac<60}),kcO("Cáo bệnh xin miễn",{},()=>kcDo("Sơ tuyển",()=>{S.kc.mien=2;S.kc.so=1;S.kap=90;if(!S.kc.suit.length)S.kc.suit.push(kcSuitor());S.kc.forced=1;pushDil(mkP("kcE",{e:"dinhhon"}),"Cha định hôn");return"Tên ngươi bị gạch khỏi danh sách."}))]}}
-function kcSoGo(bribe){const b=rsnap();if(kcSoOk(bribe)){S.kpTron=1;S.kc.soOk=1;kcRes("Sơ tuyển",b,"Ngươi qua Sơ tuyển. Tên ngươi được ghi vào sổ tú nữ.")}else{S.kc.soOk=0;kcRes("Sơ tuyển",b,"Ma ma lắc đầu: ngươi bị trả về.");pushDil(mkP("kcE",{e:"trave"}),"Trả thẻ bài")}}
+function kcPd(n,why){try{if(typeof pdAdd==="function")pdAdd(n,why,"kc")}catch(e){}}
+function kcSoGo(bribe){const b=rsnap();if(kcSoOk(bribe)){S.kpTron=1;S.kc.soOk=1;kcPd(5,"qua Sơ tuyển");kcRes("Sơ tuyển",b,"Ngươi qua Sơ tuyển. Tên ngươi được ghi vào sổ tú nữ.")}else{S.kc.soOk=0;kcRes("Sơ tuyển",b,"Ma ma lắc đầu: ngươi bị trả về.");pushDil(mkP("kcE",{e:"trave"}),"Trả thẻ bài")}}
 function kcTuyen(early){if(S.kc.tt||S.dead)return;if(!early&&!S.kc.soOk)return;S.kc.tt={early:!!early,raw:5};if(early){S.kpTron=1}
  if(early){pushDil(mkP("kcE",{e:"dien"}),"Điện tuyển");return}pushDil(mkP("kcE",{e:"phuc"}),"Phúc tuyển")}
 function kcBestArt(){let b="cam",v=-1;for(const a of ARTS){if(a.k==="y")continue;const l=(S.arts||{})[a.k]||0;if(l>v){v=l;b=a.k}}return b}
@@ -429,7 +431,7 @@ function kcTraveD(){const tm=kcTmMan();const r=!!(S.tm96&&S.tm96.h>=80&&S.tm96.r
 /* entry: she becomes a consort; the carry-over table of OUTSIDE_PLAN §9 */
 function kcEnter(rank){const b=rsnap();const K=S.kc;K.inPal=1;K.r=rank;K.yIn=S.year;S.kpTron=1;
  S.rank=rank;S.sung=8+rank*5;S.lastPromo=S.turn;S.danh=Math.min(30,Math.round(S.danh*.6));S.bac=Math.min(400,S.bac+Math.round(S.khm*KC.dowry));
- S.staff=K.staff0||[];S.place="home";S.out=0;S.pal=null;
+ S.staff=K.staff0||[];S.place="home";if(S.maid)S.maid.loyal=cl(S.maid.loyal+15,0,100);kcPd(rank>=2?10:5,`vào cung, phong ${RANKS[rank].n}`);S.out=0;S.pal=null;
  if(S.kc.tdFall){S.kc.hidden=1}
  /* the sister and friends who also passed enter as consorts (same score rule) */
  const L=[];for(const m of S.kc.fam.filter(x=>x.alive&&(x.r==="muoi"||/^ban/.test(x.r)))){const sc=kcScore({sac:m.sac,tai:m.tai,duc:30+R(30),danh:m.danh,raw:3+R(6),pow:40+R(30)})+R(9)-4;
