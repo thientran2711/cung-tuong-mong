@@ -140,7 +140,7 @@ function loActs(c){const B=[];const me=c.own==="me",h=c.at?loP(c.at):null,atMe=c
  if(me&&!known&&c.st!=="done"){tra();return B}
  if(known){const x=loEntry(c);const o=x?cl(WD.clearBase+(h.mat||0)*WD.clearMat+wdFrameEv(h,S,x.e)*10,5,95):50;
   B.push(loBtn(c,"askback","Đòi lại êm thấm",`${word(loAskOdds(h,S))} · tốn: 1 khắc · thành: nàng trả lại món đồ · hỏng: nàng chối, thân -4`,c.hear?"đã báo Cung Chính ti":whyTime(1)));
-  B.push(loBtn(c,"raise","Báo Cung Chính ti thu hồi",`tốn: 1 khắc · thành: Cung Chính ti xét trong 1–2 tuần; món đồ về lại rương · kèm: nàng minh oan được (${word(o)}) thì kẻ giấu đồ, nếu có, bị phạt; không minh oan được thì nàng bị phạt, Danh -10`,c.hear?"đã báo, đang chờ xét":whyTime(1)));
+  B.push(loBtn(c,"raise","Báo Cung Chính ti thu hồi",`tốn: 1 khắc · thành: Cung Chính ti xét trong 1–2 tuần; món đồ về lại rương · kèm: nàng minh oan được (${word(o)}) thì không ai mắc tội nhầm; không minh oan được thì nàng bị phạt, Danh -10`,c.hear?"đã báo, đang chờ xét":whyTime(1)));
   tra();return B}
  if(atMe&&(c.open||c.hear)){const ownK=c.kn["ome"]||c.hear;
   if(c.hear)tra();
