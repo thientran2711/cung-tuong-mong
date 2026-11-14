@@ -79,4 +79,10 @@ n=30: one life = 3 points; 95% band ±17 points. Tab crashes ("Target crashed") 
 | run | Dễ HH / early death | Khó HH / early death | notes |
 |---|---|---|---|
 | v6 (Dễ hz .55, birth −2/−3, poisonNow 0, hhTh −10, outQ −20; Khó hz 1.1, mot 1.2, poisonX 1.2, hhTh +10, outQ +25) | 67% / 20% (n=30) | 9% / 58% (n=33) | cnv Dễ: 1/4 + cnv-only run 2/7 |
-| v7 (Dễ: no outQ change, hhTh −5; Khó hhTh +5) | running | running | |
+| **v7 shipped** (Dễ: no outQ change, hhTh −5; Khó hhTh +5) | **53% / 20%** (n=30; childbirth 6.2%/labour; cnv 2/3) | **10% / 50%** (n=30; poison 9, childbirth 4, cnv xuất cung 2; cnv 0/4) | Khó pooled v6+v7 n=63: HH 10%, death 54% |
+
+Per origin v7 (n/HH/died) — Dễ: ch 5/4/1 cn 3/1/0 cnv 3/2/1 dtq 4/1/2 muoi 3/1/1 nc 3/3/0 td 3/2/0 thd 3/2/0 tt 3/0/1;
+Khó: ch 3/0/3 cn 3/0/1 cnv 4/0/3 dtq 4/0/1 muoi 4/2/2 nc 3/0/0 td 3/1/2 thd 3/0/2 tt 3/0/1. Time to HH median: Dễ 6.2 y (222 tuần), Khó 12.3 y (n=3).
+Khó HH sits under the 15–20 band; next step if wanted: Khó hhTh +0 (then re-measure). cnv in Khó: 0/7 over v6+v7 ("possible" not shown in 7 lives).
+- Merged origin/review/page-curl (fold-layout + book) 7623ff49: assemble + jbook, jk3, jk4 (j80 stays out, as balance). On that build:
+  no page errors, no horizontal overflow, Khó accept/reload OK, old save = Vừa (686/755/1180). Shots dev/shots/difficulty/*-kho.jpg (cnv + tt).
