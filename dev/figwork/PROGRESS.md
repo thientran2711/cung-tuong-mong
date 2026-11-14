@@ -24,9 +24,11 @@
   t4 visible. Hair-edits (dark hair, no moles) on c07 c20 c32; mole edit c23 (GPT kept the moles; demole removed most - c23 a19 still has a
   faint cheek dot, fix with demole spot= if owner minds). c16-t4 edit: a19 eyes OPEN now (was eyes closed); c04-t4 edit: moles removed +
   mm_fa (sheer sleeves). Gen ids: sheets5.txt / sheets4_bg.txt. Sheet: scratchpad/sheets/por_t4.jpg.
+- T6 c01-c16 REDRAWN (saturated, calm, distinct props via spec7.py P6, t6 flat huadian with tiny pearl dot): all 16 looked at,
+  colours clearly their palette, a51 hair dark, moles mostly removed by demole. Sheet scratchpad/sheets/por_t6a.jpg.
 - FOUND (step 4 of the plan): heads.py on t5 and t6 a51 -> almost ALL grey-haired (t5 c02-c32, t6 c01-c32) and many have cheek moles
   and no huadian (drawn before those rules). Needs hair+mole(+huadian) edits on t5 all 32 and t6 c17-c32 (t6 c01-c16 get redrawn anyway).
-- Credits used by art8 so far: ~6.6k (balance 2.012M).
+- Credits used by art8 so far: ~11.0k (balance ~2.007M).
 
 ## CURRENT STATE (art worker #6, newest first — read this first)
 - WORKTREE/PUBLISH: same as art5 but wt-art6 / branch art6 (scripts in scratchpad/figwork already sed'ed to wt-art6; next worker:

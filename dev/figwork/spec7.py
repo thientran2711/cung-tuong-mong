@@ -16,15 +16,19 @@ G={"A":"one hand raised lightly touching a gold hairpin in her chignon, the othe
 "L":"holding a closed folding fan pointing down at her side in one hand, the other hand at her waist"}
 P4={"c01":"EFC","c07":"IDK","c19":"BGD","c20":"FCE","c21":"HAD","c22":"GEC","c23":"IFK","c24":"BLC","c26":"DIE","c27":"GBC",
 "c28":"FIK","c29":"HBD","c31":"AEK","c32":"IFC"}
-SIGFIX={"c20":("lace-like gauze folding fan","embroidered silk folding fan")}
-for c,codes in P4.items():
-    k=f"N-{c}-t4"; p=J[k]["prompt"]
+# t6 c01-c16 saturated redraw (art8)
+P6={"c01":"DGK","c02":"BEC","c03":"FBK","c04":"CDE","c05":"GBD","c06":"EKC","c07":"FEC","c08":"IGC","c09":"DFK","c10":"IED",
+"c11":"BFC","c12":"IEC","c13":"BDC","c14":"GIK","c15":"IDC","c16":"FEK"}
+SIGFIX={"c20":("lace-like gauze folding fan","embroidered silk folding fan"),"c04":("round gauze fan","round silk fan")}
+JOBS=[(f"N-{c}-t4",c,v,"") for c,v in P4.items()]+[(f"N-{c}-t6",c,v,", stately poised posture") for c,v in P6.items()]
+for k,c,codes,suf in JOBS:
+    p=J[k]["prompt"]
     if c in SIGFIX: p=p.replace(*SIGFIX[c])
     m=re.search(r"(left to right: about 19.*?); (about 24.*?); (about 32.*?); (about 48.*?); all four standing",p)
     if not m: print("NOMATCH",k); continue
-    a24=f"about 24, confident and graceful, a slight three-quarter turn: {G[codes[0]]}"
-    a32=f"about 32, poised, in her prime: {G[codes[1]]}"
-    a48=f"about 48, serene and calm: {G[codes[2]]}"
+    a24=f"about 24, confident and graceful, a slight three-quarter turn: {G[codes[0]]}{suf}"
+    a32=f"about 32, poised, in her prime: {G[codes[1]]}{suf}"
+    a48=f"about 48, serene and calm: {G[codes[2]]}{suf}"
     p=p[:m.start(2)]+a24+"; "+a32+"; "+a48+p[m.end(4):]
     if "EACH figure holds a DIFFERENT object" not in p:
         p=p.replace("; all four standing still","; EACH figure holds a DIFFERENT object with a DIFFERENT hand gesture, no two alike; all four standing still",1)
