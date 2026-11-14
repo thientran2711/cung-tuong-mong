@@ -157,6 +157,10 @@ export class Room {
       // her new character starts fresh in this week; drop a pending end of hers
       if (m.ended) delete m.ended[seat];
       await this.delBig("sub-" + seat);
+      // the other seat may already have ended with a view of my OLD character: make her view of me the new blob,
+      // so the merge sees "no change by her" there and keeps my new character as it is
+      const other = seat === "a" ? "b" : "a"; const os = await this.getBig("sub-" + other);
+      if (os && typeof os === "object") { os.P = os.P || {}; os.P[seat] = msg.P; await this.putBig("sub-" + other, os); }
       await this.saveC(C); await this.saveMeta();
       return this.bcast({ t: "state", state: C, week: m.week, by: seat });
     }

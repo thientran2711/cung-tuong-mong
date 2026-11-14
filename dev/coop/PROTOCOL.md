@@ -34,7 +34,7 @@ as binary gzip when the JSON is over 200 KB (client must handle binary: `Decompr
 | t | fields | meaning |
 |---|---|---|
 | `init` | `state` (C) | seat a only, only while the room has no state: the first world (host made it with `start()`). |
-| `me` | `P` (personal blob) | set **my** `C.P[seat]` now (guest's first character after joining, or her reborn character). Server stores, broadcasts `state`. |
+| `me` | `P` (personal blob) | set **my** `C.P[seat]` now (guest's first character after joining, or her reborn character). Server stores, broadcasts `state`; also drops my pending `end` and rewrites the OTHER seat's pending `end` so its view of me = the new blob (her old view of my dead character cannot overwrite the new one). Clients must rebuild local on `state`. |
 | `end` | `week`, `state` (C) | I finished week `week` (already ran my `endTurn()`); `state` = my canonical after it. Ignored if `week` ≠ room week. |
 | `unend` | `week` | take back my `end` (only while the other seat has not ended). Optional. |
 | `ping` | – | keep-alive; server answers `pong`. Send every 20 s. |
