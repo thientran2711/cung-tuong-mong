@@ -9,7 +9,7 @@ H19=["raising {o} up near her cheek with one hand, head tilted slightly, the oth
      "holding {o} out a little in one hand as if offering it, the other hand lightly lifting her sleeve"]
 H24=["holding {o} half-raised beside her shoulder, chin slightly lowered",
      "body turned three-quarters to the right, {o} lowered in one hand, the other hand lifting her sleeve slightly",
-     "holding {o} in the crook of one arm, the other hand resting on it",
+     "holding {o} raised at chest height in one hand, the other hand lightly supporting her elbow",
      "one hand holding {o} before her, the other hand resting lightly on her sash",
      "holding {o} with both hands at waist height, a slight turn of the body"]
 H32=["holding {o} before her with both hands",
@@ -25,9 +25,16 @@ H48=["holding {o} lightly in one hand, the other hand beneath it",
 def pose_for(tr,i,t,prop,g=0):
     sig=prop
     k=(g*5+t*7)
-    objs=[sig]+[o for o in OBJ if o.split(" ",1)[1] not in sig and o.split()[-1] not in sig.split()[-1:]]
-    o2=objs[1+(k)%(len(objs)-1)]; o3=objs[1+(k+5)%(len(objs)-1)]; o4=objs[1+(k+11)%(len(objs)-1)]
-    if len({o2,o3,o4})<3: o4=objs[1+(k+3)%(len(objs)-1)]
+    KEY=("fan","sachet","pouch","lantern","flute","scroll","book","songbook","mirror","peony","teacup","basket","beads","box","handkerchief","letter","cage","birdcage","vase","blossom","orchid","magnolia","wisteria","lotus","plum","osmanthus","peach","comb","ball","pendant")
+    FL=("peony","blossom","orchid","magnolia","wisteria","lotus","plum","osmanthus","peach","flower")
+    def keys(o): return {w for w in KEY if w in o}|({"FLOWER"} if any(f in o for f in FL) and "basket" not in o else set())
+    objs=[sig]+[o for o in OBJ if not (keys(o)&keys(sig)) and not ("blossom" in o and any(f in sig for f in ("peony","orchid","magnolia","wisteria","lotus","plum","osmanthus","peach")))]
+    pick=[]; j=k
+    while len(pick)<3:
+        o=objs[1+j%(len(objs)-1)]; j+=5 if len(pick)==0 else 6
+        if all(not (keys(o)&keys(p)) for p in pick): pick.append(o)
+        else: j+=1
+    o2,o3,o4=pick
     ps=[H19[(g+t)%5].format(o=sig),H24[(g*2+t)%5].format(o=o2),H32[(g*3+t)%5].format(o=o3),H48[(g+2*t)%5].format(o=o4)]
     if t==8 and g%3==0: ps[3]="standing in stately stillness, hands hidden in her long wide sleeves before her, the long train spread on the ground behind her"
     suf=", with regal stately grace" if t>=7 else (", stately poised posture" if t>=5 else "")
