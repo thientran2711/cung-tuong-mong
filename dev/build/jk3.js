@@ -23,15 +23,15 @@ window.k3Date=k3Date;
 /* the status sheet always starts closed (it is opened from a stage plaque) */
 try{localStorage.setItem("hclh-h2c","1")}catch(e){}window.__h2c=true;
 function k3Hud(){try{if(!S)return;const d=$$("me-d");if(d){const t=k3Date();if(d.textContent!==t)d.textContent=t}
- /* her Tư chất, always visible in the top bar (owner 11/14: one place, every screen): icon + number, tap = status sheet */
- const hd=document.querySelector("header.hud");if(!hd)return;let tc=k3TopRow();
- const L=[["sac","Sắc",S.sac,"sac"],["tai","Tài",S.tai,"tai"],["tamco","Tâm cơ",S.tamco,"tam-co"],["duc","Đức",S.duc,"duc"]];
- const h=L.map(([k,l,v,i])=>`<span class="k3tcv" title="${l} ${v}${k==="duc"&&S.rank<7&&S.duc<50?" · Cần Đức 50 mới được lập Hoàng hậu":""}">${typeof ic==="function"?ic(i,14):""}<small>${l}</small><b>${v}</b>${k==="duc"&&S.rank<7&&S.duc<50?`<i class="k3warn" aria-label="Cần Đức 50 mới được lập Hoàng hậu">!</i>`:""}</span>`).join("");
- const ts=tc.querySelector("#k3ts");if(ts.dataset.h!==h){ts.innerHTML=h;ts.dataset.h=h}}catch(e){}}
+ /* lãnh cung: the rank chip says what the figure label says (rkOfFace "Phế phi · lãnh cung"), not her old rank (review fold-layout) */
+ if(S.out){const r=$$("me-r"),w="Phế phi · lãnh cung";if(r&&r.textContent.trim()!==w)r.textContent=w}
+ /* her Tư chất: the kit stat cells in the top bar's kitStatRow (jk4) */
+ k3TopRow();if(typeof kitStatSet!=="function")return;const hq=S.rank<7&&S.duc<50;
+ [["sac","Sắc"],["tai","Tài"],["tamco","Tâm cơ"],["duc","Đức"]].forEach(([k,l])=>{const c=$$("hud-"+k);if(c)kitStatSet(c,S[k],{title:`${l} ${S[k]}${k==="duc"&&hq?" · Cần Đức 50 mới được lập Hoàng hậu":""} · chạm để xem đủ`,warn:k==="duc"&&hq?"Cần Đức 50 mới được lập Hoàng hậu":""})})}catch(e){}}
 /* the top bar's second row (KIT 31.1): time (buổi, khắc dots, weather, Quẻ tuần) + status chips | her Tư chất. ONE component, every device */
 function k3TopRow(){const hd=document.querySelector("header.hud");let tc=$$("k3tc");if(!tc&&hd){tc=document.createElement("div");tc.id="k3tc";tc.className="k3tc";
- tc.innerHTML=`<span id="k3tt" class="k3tt"></span><button type="button" id="k3ts" class="k3ts" title="Tư chất · chạm để xem đủ"></button>`;hd.appendChild(tc);
- tc.querySelector("#k3ts").addEventListener("click",e=>{e.stopPropagation();k3Sheet(true)})}return tc}
+ tc.innerHTML=`<span id="k3tt" class="k3tt"></span>`;hd.appendChild(tc);
+ const g=$$("kstg-tc");if(g){const o=e=>{e.stopPropagation();k3Sheet(true)};g.addEventListener("click",o);g.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" ")o(e)})}}return tc}
 if(typeof renderHUD==="function"){const r0=renderHUD;renderHUD=function(){const r=r0.apply(this,arguments);k3Hud();return r}}
 
 /* ---------- stage HUD ---------- */
@@ -58,11 +58,12 @@ function k3Stage(){try{const st=$$("stage");if(!st)return;const stop=st.querySel
  /* left: time · tư chất · tình trạng */
  const bu=k3hc("buoi"),lot=k3hc("lot"),wx=$$("hud2")&&$$("hud2").querySelector(".kmwx");
  let t="";if(bu){const w=String(BUOI[S.buoi||0]);{const left=typeof used!=="undefined"?Math.max(0,4-used):4;t+=`<button type="button" class="k3r k3time" data-k3="buoi" title="Còn ${left} khắc trong buổi" aria-label="${esc(w)}, còn ${left} khắc"><span class="k3l">${esc(w)}</span><span class="k3dots">${[0,1,2,3].map(i=>`<i class="${i<left?"on":""}"></i>`).join("")}</span></button>`}}
+ const t1=t;t="";/* line 1 = buổi + khắc (+ states); line 2 = weather + Quẻ (kitStatCell lines, KIT 32) */
  if(wx){const c=wx.cloneNode(true);c.className="k3r k3wx kmwx";window.__k3wx=c.outerHTML}if(window.__k3wx&&S.wx)t+=window.__k3wx
  if(lot){const lt=(k3lab(lot)||T(lot.textContent)).replace(/^Quẻ tuần:\s*/,"Quẻ ");t+=`<button type="button" class="k3r k3lot ${lot.classList.contains("ok")?"ok":lot.classList.contains("hot")?"hot":""}" data-k3="lot"><span class="k3l">${esc(lt)}</span></button>`}
  let s="";K3_STAT.forEach(k=>{const b=k3hc(k);if(!b)return;const im=b.querySelector("img.ic");s+=k3row(k,esc(k3lab(b)),esc(k3val(b)),b.classList.contains("hot")?"hot":"",im?im.outerHTML:(typeof ic==="function"&&K3_ICO[k]?ic(K3_ICO[k],14):""))});
  let x="";K3_STATE.forEach(k=>{const b=k3hc(k);if(!b)return;x+=k3row(k,esc(k3lab(b)),esc(k3val(b)),b.classList.contains("hot")?"hot":b.classList.contains("ok")?"ok":"")});
- const hL="";{const tr=k3TopRow();const tt=tr&&tr.querySelector("#k3tt");const ht=t+x;if(tt&&tt.dataset.h!==ht){tt.innerHTML=ht;tt.dataset.h=ht}}
+ const hL="";{const tr=k3TopRow();const tt=tr&&tr.querySelector("#k3tt");const ht=`<span class="kstl k3l1">${t1}${x}</span><span class="kstv k3l2">${t}</span>`;if(tt&&tt.dataset.h!==ht){tt.innerHTML=ht;tt.dataset.h=ht}}
  if(L.dataset.h!==hL){L.innerHTML=hL;L.dataset.h=hL}
  /* right: court chips · servant · servant-road facts */
  let y="";K3_RIGHT.forEach(k=>{const b=k3hc(k);if(!b)return;y+=k3row(k,esc(k3lab(b)),esc(k3val(b)),b.classList.contains("hot")?"hot":b.classList.contains("ok")?"ok":"")});
@@ -78,7 +79,7 @@ if(typeof renderStage==="function"){const r1=renderStage;renderStage=function(){
 /* gutter widths: from the stage width, then grown to the plaques' real width; j59 keeps the figures between them */
 function k3Gut(){const st=$$("stage");if(!st)return;const W=st.clientWidth;if(!W)return;
  const g=Math.round(Math.max(W<520?96:116,Math.min(190,W*.2)));st.classList.toggle("k3n",g<116);const L=$$("kshL"),R=$$("kshR");
- st.style.setProperty("--kgw",g+"px");
+ st.style.setProperty("--kgw",g+"px");st.style.setProperty("--k3stw",W+"px");
  const need=el=>el&&!el.hidden?Math.ceil(el.getBoundingClientRect().width)+10:0;
  const gl=Math.max(need(L),0),gr=Math.max(need(R),0);const ol=st.style.getPropertyValue("--kgl"),or=st.style.getPropertyValue("--kgr");
  st.style.setProperty("--kgl",gl+"px");st.style.setProperty("--kgr",gr+"px");
@@ -118,16 +119,9 @@ html body header.hud>.me .mi{display:flex!important;flex-direction:column;min-wi
 html body header.hud>.me .mi>b{font-size:1.02rem!important;line-height:1.15}
 html body header.hud>.me .rk{align-self:flex-start;font-size:.74rem!important}
 html body header.hud>.me .dt,html body header.hud #me-d{font-size:.74rem!important;line-height:1.25!important;white-space:normal!important;display:block!important;color:var(--dim)}
-html body header.hud>.stats{grid-area:stats;margin:0!important;display:flex!important;gap:6px!important;flex-wrap:nowrap!important;justify-content:flex-end;order:0!important;flex-basis:auto!important}
-html body header.hud>.stats .st{min-width:54px;max-width:none!important}
-html body header.hud>#emp,html body header.hud>.kcbox,html body header.hud .kcchips,#hud2>.kcchips{display:none!important}
+html body header.hud>#emp{display:none!important}
 html body header.hud>#hud2,html body #hud2.khud{position:fixed!important;left:0!important;top:0!important;width:0!important;height:0!important;min-height:0!important;padding:0!important;margin:0!important;border:0!important;overflow:visible!important;background:none!important;box-shadow:none!important;z-index:60}
 html body #hud2.hud2>:not(.khg):not(#k3x){display:none!important}
-@media (max-width:599px){
- html body header.hud{grid-template-columns:auto minmax(0,1fr)!important;grid-template-areas:"menu me" "stats stats"!important;gap:2px 8px!important;padding:4px 6px!important}
- html body header.hud>.stats{justify-content:space-around}
- html body header.hud>.stats .st{min-width:0}
-}
 /* the full status sheet: a centred kit sheet over a dim backdrop, scrolls inside */
 html body #hud2:not(.col)::before{content:"";position:fixed;inset:0;background:#2a1a1266;z-index:0}
 html body #hud2 .khg{position:fixed!important;z-index:1!important;left:50%!important;top:50%!important;transform:translate(-50%,-50%);width:min(760px,calc(100vw - 24px))!important;max-height:calc(100dvh - 32px)!important;overflow:auto!important;overscroll-behavior:contain;box-sizing:border-box}
@@ -215,35 +209,13 @@ html body .game#game.k3ph.k3pop>#panel{display:none!important}
 html body .game#game.k3ph:not(.k3pop)>#popw{display:none!important}
 html body header.hud>#k3room{grid-area:stats;justify-self:start;min-height:40px;padding:0 12px;font-weight:600;color:var(--gold);white-space:nowrap}
 html body header.hud>#k3room[hidden]{display:none!important}
-html body .game#game.k3ph header.hud:has(#k3room:not([hidden])){grid-template-columns:auto minmax(0,1fr) auto auto!important;grid-template-areas:"menu me room stats"!important}
 html body .game#game.k3ph header.hud>#k3room:not([hidden]){grid-area:room}
-@media (max-width:599px){html body .game#game.k3ph header.hud:has(#k3room:not([hidden])){grid-template-columns:auto minmax(0,1fr) auto!important;grid-template-areas:"menu me room" "stats stats stats"!important}}
-/* top bar Tư chất line (31.1) */
-html body header.hud{grid-template-areas:"menu me stats" "menu tc tc"!important}
-html body header.hud>#k3tc{grid-area:tc;display:flex;flex-wrap:wrap;gap:4px 14px;align-items:center;justify-content:space-between;padding:2px 0 0;border-top:1px solid var(--k-hair,#e6d3ac);min-height:0}
-.k3tc .k3tt{display:flex;flex-wrap:wrap;align-items:center;gap:2px 12px}
+/* top bar time block (31.1): the bar grid, the stat cells and the two-line time block are kitStatRow / kitStatCell (jk4, KIT 32) */
 .k3tc .k3tt .k3r{display:inline-flex;align-items:center;gap:4px;border:0;background:none;padding:0;font:inherit;font-size:.74rem;color:var(--ink);cursor:pointer;min-height:24px;white-space:nowrap}
 .k3tc .k3tt .k3r .k3l{white-space:nowrap}.k3tc .k3tt .k3r.hot{color:var(--bad)}.k3tc .k3tt .k3r.ok{color:var(--good)}
 .k3tc .k3tt .k3time .k3l{font-weight:700;color:var(--gold)}
 .k3tc .k3tt .k3wx{background:none!important;border:0!important;box-shadow:none!important;padding:0!important;font-size:.74rem!important;min-height:24px!important}.k3tc .k3tt .k3wx img{width:18px!important;height:18px!important;border-radius:50%}
 .k3tc .k3dots{display:inline-flex;gap:3px}.k3tc .k3dots i{width:9px;height:9px;border-radius:50%;border:1.5px solid var(--gold);background:transparent}.k3tc .k3dots i.on{background:var(--gold)}
-/* wide screens (iPad, ≥ 1000 px): the row sits in the top bar's empty middle as two columns — time | Tư chất (2×2) */
-@media (min-width:1000px){
- html body header.hud{grid-template-columns:auto auto minmax(0,1fr) auto!important;grid-template-areas:"menu me tc stats"!important}
- html body header.hud>#k3tc{display:grid!important;grid-template-columns:minmax(0,1fr) auto;gap:0 18px;border-top:0;padding:0 6px;align-self:center;justify-self:stretch}
- .k3tc .k3tt{flex-direction:row;flex-wrap:wrap;align-items:center;gap:0 12px;max-width:340px}
- .k3tc .k3ts{display:grid!important;grid-template-columns:auto auto;gap:0 14px;margin:0;border-left:1px solid var(--k-hair,#e6d3ac);padding-left:14px}
-}
-@media (max-width:820px){.k3tc .k3ts .k3tcv small{display:none}.k3tc{gap:2px 10px!important}.k3tc .k3tt{gap:2px 9px}.k3tc .k3tt .k3r,.k3tc .k3tcv{font-size:.7rem}}
-.k3tc .k3ts{display:flex;gap:10px;align-items:center;border:0;background:none;padding:0;font:inherit;cursor:pointer;min-height:24px;margin-left:auto}
-.k3tc .k3tcv{display:inline-flex;align-items:center;gap:3px;font-size:.74rem;color:var(--ink);white-space:nowrap}
-.k3tc .k3tcv small{color:var(--k-lab,#8a7350);font-size:.66rem}.k3tc .k3tcv b{font-weight:700}.k3tc .k3tcv.hot b{color:var(--bad)}
-.k3tc .k3tcv img.ic{width:14px;height:14px}
-html body .game#game.k3ph header.hud:has(#k3room:not([hidden])){grid-template-areas:"menu me room stats" "menu tc tc tc"!important}
-@media (max-width:599px){html body header.hud{grid-template-areas:"menu me" "stats stats" "tc tc"!important}html body header.hud>#k3tc{justify-self:stretch}.k3tc .k3ts{margin-left:0}
- .k3tc .k3tcv small{display:none}
- html body .game#game.k3ph header.hud:has(#k3room:not([hidden])){grid-template-areas:"menu me room" "stats stats stats" "tc tc tc"!important}}
-.k3tc .k3warn{font-style:normal;font-weight:800;font-size:.62rem;color:#fff;background:var(--gold);border-radius:50%;width:13px;height:13px;display:inline-grid;place-items:center;margin-left:1px}
 .ksh .k3dots{display:inline-flex;gap:3px;margin-left:auto}.ksh .k3dots i{width:9px;height:9px;border-radius:50%;border:1.5px solid var(--gold);background:transparent}.ksh .k3dots i.on{background:var(--gold)}
 /* one fact, one place: buổi / khắc are on the time plaque; Tư chất in the top bar (the sheet keeps the rest) */
 html body #hud2 .khg .khc .hc[data-hx="buoi"],html body #hud2 .khg .khc .hc[data-hx="sac"],html body #hud2 .khg .khc .hc[data-hx="tai"],html body #hud2 .khg .khc .hc[data-hx="tamco"],html body #hud2 .khg .khc .hc[data-hx="duc"]{display:none!important}
@@ -251,11 +223,15 @@ html body #hud2 .khg .hc.hot[data-hx]{color:inherit}
 /* 3 + 4 · scene words straight on the painting (no plaque, no pill), one line each, soft light halo for readability */
 html body .stage #sc-t{background:none!important;border:0!important;box-shadow:none!important;backdrop-filter:none!important;padding:0 2px!important}
 html body .stage #sc-t h2,html body .stage #sc-t h2 *{white-space:nowrap!important;color:#3a1d10;text-shadow:0 0 2px #fff8ee,0 0 6px #fff8ee,0 0 10px #fff8eecc}
+/* the place line never runs under the court chips (review fold-layout): it ends before the right plaque column; the place NAME stays one
+   line, the trailing note ("… đi vắng, đang ở …") wraps under it */
+html body .stage.k3g #sc-t{width:max-content!important;max-width:calc(var(--k3stw,100vw) - var(--kgr,0px) - 24px)!important}
+html body .stage.k3g #sc-t h2{white-space:normal!important}html body .stage.k3g #sc-t h2>*:not(:first-child),html body .stage.k3g #sc-t h2>*:not(:first-child) *{white-space:normal!important}
 html body .stage .tok .tag,html body .stage #j59metag .tag{background:none!important;border:0!important;box-shadow:none!important;padding:0!important;white-space:nowrap!important;color:#2a1a12!important;font-weight:600;text-shadow:0 0 2px #fff8ee,0 0 5px #fff8ee,0 0 9px #fff8eecc}
 html body .stage .tok .tag .j59t,html body .stage #j59metag .tag .j59t{display:inline!important;background:none!important;box-shadow:none!important;padding:0!important;margin:0 .35em 0 0!important;color:#7a5530!important;font-size:inherit!important;font-weight:500}
 html body .stage .tok .tag .j59n,html body .stage #j59metag .tag .j59n{display:inline!important}
 /* NON-PERSON PICTURES: kitArtFrame = kitSceneArt (jk2b; simple gold line, no tassel, KIT 31.10); act slot 170 px wide (128 px on phones), 3:4 */
-:root{--kaw:170px}@media (max-width:599px){:root{--kaw:128px}}
+:root{--kaw:170px}#panel.k3pn .cards{--kaw:128px}
 html body button.ka.kcard.kart{min-height:0!important}
 /* floating notes (kmnote: "Tối nay Hoàng thượng lật thẻ…") sit just above the bottom tab bar: never over the top bar, the date or the sub-tabs */
 html body .kmnote{top:auto!important;bottom:calc(var(--k3nb,60px) + 10px)!important}
@@ -284,7 +260,7 @@ const cssC=document.createElement("style");cssC.id="k3-cattabs";cssC.textContent
 #panel .ksub~* .kcattabs,#panel .ksub~.kcattabs{top:var(--ksubh,44px)}
 #panel .kcattabs .pct{white-space:nowrap}
 #panel .cards>button.ka[hidden]{display:none!important}
-@media (max-width:999px){html body #panel .kcattabs{display:flex!important;flex-wrap:nowrap!important;overflow-x:auto!important;scrollbar-width:thin}#panel .kcattabs .pct{flex:0 0 auto}}
+html body #panel .kcattabs{display:flex!important;flex-wrap:nowrap!important;overflow-x:auto!important;scrollbar-width:thin}#panel .kcattabs .pct{flex:0 0 auto}
 `;document.head.appendChild(cssC);
 })();
 
@@ -313,7 +289,7 @@ html body .ksel:not(.kpki),html body [aria-pressed="true"].kselable{outline:none
 (function(){const st=document.createElement("style");st.id="k3-pcx";st.textContent=`
 html body .pc:has(>.pcr>.pcx){position:relative}
 /* a card opened from the room (#popw) lies over the panel: above the panel's sticky rows (sub-tabs, category tabs) */
-html body #popw{z-index:12}
+html body #popw{z-index:12!important}
 html body .pc>.pcr>.pcx{position:absolute!important;top:6px;right:6px;margin:0!important;z-index:8}
 html body .pc:has(>.pcr>.pcx)>.pcl>.kpnm{padding-right:78px}
 /* kit panels (report / story / info dialogs): the close row "Đã hiểu" is pinned at the dialog's bottom, the body scrolls under it */
@@ -322,10 +298,11 @@ html body .dlg.kpanel>.mr{position:sticky;bottom:0;z-index:4;background:linear-g
 
 /* ---------- 10. NAME TAGS NEVER OVERLAP (KIT 31.12): name tags under figures stay one line; when two tags would touch, the later one
    steps one line down (or up when there is no room under it). Runs after every stage render and on resize. ---------- */
-function k3Tags(){try{const st=$$("stage");if(!st)return;const SR=st.getBoundingClientRect();
+function k3Tags(){try{const st=document.getElementById("stage");if(!st)return;const SR=st.getBoundingClientRect();
  const G=[...st.querySelectorAll(".tok .tag")].filter(g=>{const t=g.closest(".tok");return t&&getComputedStyle(t).visibility!=="hidden"&&getComputedStyle(g).display!=="none"&&g.getBoundingClientRect().width>0})
-  .map(g=>getComputedStyle(g).position==="static"?g.closest(".tok"):g);/* a static tag moves with its own holder (#j59metag) */
- G.forEach(g=>g.style.translate="");const R=G.map(g=>({g,r:g.getBoundingClientRect()})).sort((a,b)=>a.r.left-b.r.left);const placed=[];
+  .map(g=>({g,m:getComputedStyle(g).position==="static"?g.closest(".tok"):g}));/* a static tag moves with its own holder (#j59metag) */
+ G.forEach(o=>o.m.style.translate="");/* measure the TEXT itself (the tag box can be narrower than its one-line text) */
+ const R=G.map(o=>{const rg=document.createRange();rg.selectNodeContents(o.g);return {g:o.m,r:rg.getBoundingClientRect()}}).sort((a,b)=>a.r.left-b.r.left);const placed=[];
  R.forEach(o=>{const h=o.r.height+2;let dy=0;const hit=d=>placed.some(p=>o.r.left<p.r.right+4&&o.r.right>p.r.left-4&&o.r.top+d<p.r.bottom+p.dy&&o.r.bottom+d>p.r.top+p.dy);
   for(const d of [0,h,-h,2*h,-2*h]){if(o.r.bottom+d>SR.bottom-2||o.r.top+d<SR.top+2)continue;if(!hit(d)){dy=d;break}}
   if(dy)o.g.style.translate=`0 ${dy}px`;placed.push({r:o.r,dy})})}catch(e){}}
@@ -357,7 +334,7 @@ function kitBullets(el){try{if(!el||el.dataset.kbl===el.innerHTML.length+"")retu
  if(r){el.innerHTML=r;el.classList.add("kblw")}el.dataset.kbl=el.innerHTML.length+""}catch(e){}}
 (function(){const SEL="#rtoast .ksen, .pc .pcn, .dlg.kpanel .kfacts .kfx, .dlg.kpanel .kfacts p";let t=0;
  const run=()=>{document.querySelectorAll(SEL).forEach(e=>{if(e.closest(".kpid"))return;kitBullets(e)})};
- try{new MutationObserver(()=>{clearTimeout(t);t=setTimeout(run,20)}).observe(document.body,{childList:true,subtree:true})}catch(e){}
+ try{new MutationObserver(()=>{if(!t)t=setTimeout(()=>{t=0;run()},20)}).observe(document.body,{childList:true,subtree:true})}catch(e){}
  const st=document.createElement("style");st.id="k3-bl";st.textContent=`
 ul.kbl{margin:2px 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:3px;text-align:left}
 ul.kbl>li{position:relative;padding-left:14px;line-height:1.35}
@@ -368,10 +345,111 @@ small.kblf{display:block;margin-top:3px;font-size:.72rem;color:var(--dim,#7a6a58
 
 /* ---------- 12. HER AGE in the top bar (owner 11/14, KIT 31.1): "N tuổi" as a small chip right after her rank chip, every device and road;
    shown only here (one fact, one place). ---------- */
-(function(){if(typeof renderHUD!=="function")return;const r0=renderHUD;renderHUD=function(){const r=r0.apply(this,arguments);try{const m=$("me-r");
- if(m&&S&&typeof S.age==="number"){let a=$("me-a");if(!a){a=document.createElement("span");a.id="me-a";a.className="k3age"}let w=m.parentNode;if(!w.classList.contains("k3rr")){w=document.createElement("span");w.className="k3rr";m.before(w);w.appendChild(m)}if(m.nextSibling!==a)m.after(a);const t=`${Math.floor(S.age)} tuổi`;if(a.textContent!==t)a.textContent=t}}catch(e){}return r}
+(function(){if(typeof renderHUD!=="function")return;const r0=renderHUD;renderHUD=function(){const r=r0.apply(this,arguments);try{const m=document.getElementById("me-r");
+ if(m&&S&&typeof S.age==="number"){let a=document.getElementById("me-a");if(!a){a=document.createElement("span");a.id="me-a";a.className="k3age"}let w=m.parentNode;if(!w.classList.contains("k3rr")){w=document.createElement("span");w.className="k3rr";m.before(w);w.appendChild(m)}if(m.nextSibling!==a)m.after(a);const t=`${Math.floor(S.age)} tuổi`;if(a.textContent!==t)a.textContent=t}}catch(e){}return r}
  const st=document.createElement("style");st.id="k3-age";st.textContent=`
 #me .k3rr{display:flex;align-items:center;flex-wrap:nowrap;gap:0;min-width:0}
 #me-a.k3age{display:inline-flex;flex:0 0 auto;align-items:center;vertical-align:middle;margin-left:5px;padding:0 7px;border:1px solid var(--line);border-radius:999px;
  font-size:.72rem;font-weight:600;line-height:1.5;color:var(--ink);background:var(--k3pl,#fffaf0);white-space:nowrap}
 `;document.head.appendChild(st)})();
+
+/* ---------- 13. DIALOG OPTIONS ONE PER ROW + DIALOG HEADER PICTURE (KIT 31.16, owner 11/14 succession card) ----------
+   Every dialog / event / chapter / choice panel: option act-cards are FULL WIDTH, one per row, stacked (no 2-column grid with empty gaps).
+   On wide screens (≥ 1000 px) two columns are kept only when the cards are of similar height (max/min ≤ 1.2); measured after each dialog opens.
+   The identity card (.kpid) keeps its approved two pinned choices.
+   Header picture: a Q / kitModal item may carry headArt:"img/…webp" or {src,label} → a wide 16:9 kitSceneArt band at the top of the dialog
+   (height capped so the choices stay on screen). Succession and big story events use it. ---------- */
+/* option-group layout (KIT 31.16 table): 'rows' = full-width cards one per row · 'grid' = equal cells, 2 columns (3 on ≥ 1000 px with 3+ options).
+   Per screen: a Q / kitModal item may set optLayout:'rows'|'grid'; otherwise it is read from the options' CONTENT: an option is LONG when it
+   shows Cần / Được / Mất / Kèm rows, an odds word, or a text over 2 lines; SHORT = title + cost line. All short → grid, all long → rows,
+   mixed → long ones full width, short ones in the grid. The identity card keeps its approved pinned pair. */
+function k3IsLong(b){if(b.querySelector(".kr-can,.kr-duoc,.kr-mat,.kr-kem,.kr-why,.kodds:not(:empty),.oc"))return true;const lh=parseFloat(getComputedStyle(b).lineHeight)||20;
+ const t=b.querySelector(".kan");return !!(t&&t.getBoundingClientRect().height>lh*2.3)}
+function k3OptCols(){try{const W=innerWidth;const m=typeof Q!=="undefined"?Q[0]:null;const want=m&&(m.optLayout||(m.kit&&m.kit.optLayout));
+ document.querySelectorAll("#modal .opts:has(> button.ka), #modal .kpscopts").forEach(g=>{const dl=g.closest(".dlg");if(dl&&dl.querySelector(".kpid"))return;
+  const B=[...g.querySelectorAll(":scope > button.ka")];g.classList.remove("k3rows","k3grid","k3g3");B.forEach(x=>x.classList.remove("k3long"));
+  if(want==="rows"){g.classList.add("k3rows");return}if(want==="grid"){g.classList.add("k3grid");if(W>=1000&&B.length>=3)g.classList.add("k3g3");return}
+  g.classList.add("k3rows");const L=B.map(k3IsLong);if(L.every(Boolean))return;g.classList.remove("k3rows");g.classList.add("k3grid");if(W>=1000&&B.filter((x,i)=>!L[i]).length>=3)g.classList.add("k3g3");
+  B.forEach((x,i)=>{if(L[i])x.classList.add("k3long")});
+  /* mixed groups (review fold-layout): the short ones sit together first, the long ones under them, and an odd last short cell takes the whole row — no holes */
+  const sh=B.filter((x,i)=>!L[i]);const cols=g.classList.contains("k3g3")?3:2;B.forEach(x=>x.classList.remove("k3odd"));if(sh.length%cols)sh[sh.length-1].classList.add("k3odd")})}catch(e){}}
+(function(){if(typeof showModal!=="function")return;const s0=showModal;showModal=function(){const m=typeof Q!=="undefined"?Q[0]:null;const r=s0.apply(this,arguments);
+ try{const mb=document.getElementById("mb");const ha=m&&(m.headArt||(m.kit&&m.kit.headArt));if(mb&&ha&&!mb.querySelector(":scope > .kdlgart")){const src=typeof ha==="string"?ha:ha.src,lab=typeof ha==="string"?"":(ha.label||"");
+  const d=document.createElement("div");d.className="kdlgart";d.innerHTML=kitSceneArt(src,lab,{shape:"wide",cap:!!lab});mb.prepend(d)}}catch(e){}
+ requestAnimationFrame(k3OptCols);setTimeout(k3OptCols,300);return r}
+ addEventListener("resize",()=>setTimeout(k3OptCols,60));
+ const st=document.createElement("style");st.id="k3-opts";st.textContent=`
+html body #modal .opts.k3rows:has(> button.ka),html body #modal .kpscopts.k3rows{display:grid!important;grid-template-columns:minmax(0,1fr)!important;grid-auto-rows:auto!important}
+html body #modal .opts.k3rows>button.ka,html body #modal .kpscopts.k3rows>button.ka{min-height:0!important}
+html body #modal .opts.k3grid:has(> button.ka),html body #modal .kpscopts.k3grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;grid-auto-rows:auto!important;align-items:stretch!important}
+html body #modal .opts.k3grid.k3g3:has(> button.ka),html body #modal .kpscopts.k3grid.k3g3{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+html body #modal .k3grid>button.ka.k3long{grid-column:1/-1;order:1}html body #modal .k3grid>button.ka.k3odd{grid-column:1/-1}
+#mb>.kdlgart{margin:0 0 8px}#mb>.kdlgart>.ksart{aspect-ratio:auto;height:clamp(90px,22dvh,220px)}#mb>.kdlgart>.ksart>img{object-position:center 45%}
+`;document.head.appendChild(st)})();
+
+/* ---------- 14. ONE PERSON CARD + CATEGORY PICTURE FRAMES + ALIGNED TOP BAR (owner 11/14, kit owner #2) ----------
+   (a) Person card: the iPad two-column card on every screen ≥ 600 px (kitPcWide, jk2b). Left column, top-aligned: name → rank → the rank frame
+       at the FULL column width (its empty canvas headroom above the ornament is trimmed per frame picture, measured once) → chips (wrap inside
+       the column, never clipped) → one short dim helper line ("Mới biết tên ⓘ", full text in the tooltip) → Biết tên / Nơi ở chips.
+   (b) kitSceneArt category frame (act cards; events by type): the category colour as a rich double border with four corner ornaments whose
+       shape differs per category (KIT_CATFR), label plaque at the bottom; no tassel.
+   (c) Top bar on iPad (≥ 1000 px): the four Tư chất cells use the SAME cell as Bạc / Sức / Sủng / Danh (icon + small label on top, number
+       below), one row, equal spacing, shared baselines. ---------- */
+(function(){
+ /* (a) trim the frame's empty headroom: first opaque row of the frame picture, cached per src */
+ const TOP={};function topOf(src,cb){if(TOP[src]!=null)return cb(TOP[src]);const im=new Image();im.onload=()=>{try{const w=64,h=Math.round(64*im.naturalHeight/im.naturalWidth);const c=document.createElement("canvas");c.width=w;c.height=h;
+   const x=c.getContext("2d");x.drawImage(im,0,0,w,h);const d=x.getImageData(0,0,w,h).data;let y=0;outer:for(;y<h;y++){for(let i=0;i<w;i++)if(d[(y*w+i)*4+3]>40)break outer}TOP[src]=y/h}catch(e){TOP[src]=0}cb(TOP[src])};im.onerror=()=>{TOP[src]=0;cb(0)};im.src=src}
+ function fit(){document.querySelectorAll(".pc.kpwide[data-k2]>.pcl>.pcp.kit").forEach(pp=>{const fr=pp.querySelector("img.kfr");if(!fr)return;const src=fr.getAttribute("src");
+   topOf(src,t=>{const cr=pp.querySelector("img.kcrest");const ct=cr?parseFloat(cr.style.getPropertyValue("--ct"))/100:NaN;if(ct>=0)t=Math.min(t,ct);const kin=pp.querySelector(".kin");const H=kin?kin.getBoundingClientRect().height:0;const cut=Math.max(0,t*H-4);pp.style.setProperty("margin-top",(-cut)+"px","important");pp.style.setProperty("--kptrim",cut+"px")})});
+  document.querySelectorAll(".pc[data-k2] .kpfacts .pcinfo>*,.pc[data-k2]>.pcl>p").forEach(e=>{const t=e.textContent.trim();if(e.classList.contains("kphelp")||!/^(Mới biết tên|Chưa biết)/.test(t)&&!(t.length>60&&e.tagName==="P"))return;
+   const lab=/^Mới biết tên/.test(t)?"Mới biết tên":/^Chưa biết/.test(t)?"Chưa biết là ai":"Ghi chú";e.classList.add("kphelp");e.title=t;e.innerHTML=`${lab} <i aria-hidden="true">ⓘ</i>`})}
+ let tt=0;try{new MutationObserver(()=>{if(!tt)tt=setTimeout(()=>{tt=0;fit()},40)}).observe(document.body,{childList:true,subtree:true})}catch(e){}addEventListener("resize",()=>setTimeout(fit,80));
+ const st=document.createElement("style");st.id="k3-card1";st.textContent=`
+html body .pc.kpwide[data-k2]{align-items:start!important}
+html body .pc.kpwide[data-k2]>.pcl{align-self:start!important;justify-content:flex-start!important;padding:0 3px 6px!important;overflow-x:hidden!important}
+html body .pc.kpwide[data-k2]>.pcl>.pcp.kit{width:100%!important;float:none!important;margin-left:0!important;margin-right:0!important;margin-bottom:4px!important;position:relative;z-index:0}
+html body .pc.kpwide[data-k2]>.pcl>.pcname,html body .pc.kpwide[data-k2]>.pcl>.pcrk{position:relative;z-index:1}
+html body .pc.kpwide .kpgrid,html body .pc.kpwide .kpgr{min-width:0;max-width:100%;flex-wrap:wrap!important}
+html body .pc.kpwide .kst-chip{max-width:100%;min-width:0;flex-wrap:wrap}
+.pc .kphelp{display:block;font-size:.72rem!important;color:var(--dim,#8a7a68)!important;line-height:1.3;cursor:help}
+.pc .kphelp i{font-style:normal}
+`;document.head.appendChild(st);
+ /* (b) category frames */
+ const sh=document.createElement("style");sh.id="k3-catfr";sh.textContent=`
+.ksart.ksart-cat{border:3px double var(--kcc)!important;box-shadow:inset 0 0 0 2px #fffaf0,inset 0 0 0 3px var(--kcc),0 1px 4px #3a201030!important;border-radius:6px;--kco:10px;--kcr:2px;--kcrot:45deg}
+.ksart.ksart-cat::after{content:"";position:absolute;inset:-1px;pointer-events:none;z-index:3;
+ background:
+  linear-gradient(var(--kcc),var(--kcc)) top left/var(--kco) var(--kco) no-repeat,
+  linear-gradient(var(--kcc),var(--kcc)) top right/var(--kco) var(--kco) no-repeat,
+  linear-gradient(var(--kcc),var(--kcc)) bottom left/var(--kco) var(--kco) no-repeat,
+  linear-gradient(var(--kcc),var(--kcc)) bottom right/var(--kco) var(--kco) no-repeat;
+ -webkit-mask:var(--kcm,none);mask:var(--kcm,none)}
+.ksart.ksart-cat::before{content:"";position:absolute;inset:5px;border:1px solid color-mix(in srgb,var(--kcc) 55%,#fff);border-radius:var(--kcr);pointer-events:none;z-index:3}
+/* corner motif per category: square (Lễ nghi), round (Giao thiệp), diamond (Mưu kế), notched (Hại người), cloud-round (Nghỉ ngơi),
+   wide bar (Học tập), heart-round (Tranh sủng), coin (Buôn bán), arrow (Đi lại), small square (Hầu hạ), cross (Trừng phạt), soft (Con cái) */
+.ksart.kcat-le-nghi{--kco:12px}
+.ksart.kcat-giao-thiep::after,.ksart.kcat-nghi-ngoi::after,.ksart.kcat-cham-con::after,.ksart.kcat-sung-ai::after,.ksart.kcat-buon-ban::after{
+ background:radial-gradient(circle,var(--kcc) 0 5px,transparent 5.5px) top left/12px 12px no-repeat,radial-gradient(circle,var(--kcc) 0 5px,transparent 5.5px) top right/12px 12px no-repeat,
+  radial-gradient(circle,var(--kcc) 0 5px,transparent 5.5px) bottom left/12px 12px no-repeat,radial-gradient(circle,var(--kcc) 0 5px,transparent 5.5px) bottom right/12px 12px no-repeat}
+.ksart.kcat-sung-ai::before{border-style:dashed;border-radius:10px}
+.ksart.kcat-buon-ban::before{border-style:double;border-width:3px}
+.ksart.kcat-nghi-ngoi::before{border-radius:14px}
+.ksart.kcat-cham-con::before{border-radius:8px;border-style:dotted;border-width:2px}
+.ksart.kcat-muu-ke::after,.ksart.kcat-hai-nguoi::after,.ksart.kcat-trung-phat::after{
+ background:conic-gradient(from 45deg,var(--kcc) 0 25%,transparent 0 50%,var(--kcc) 0 75%,transparent 0) top left/12px 12px no-repeat,
+  conic-gradient(from 45deg,var(--kcc) 0 25%,transparent 0 50%,var(--kcc) 0 75%,transparent 0) top right/12px 12px no-repeat,
+  conic-gradient(from 45deg,var(--kcc) 0 25%,transparent 0 50%,var(--kcc) 0 75%,transparent 0) bottom left/12px 12px no-repeat,
+  conic-gradient(from 45deg,var(--kcc) 0 25%,transparent 0 50%,var(--kcc) 0 75%,transparent 0) bottom right/12px 12px no-repeat}
+.ksart.kcat-hai-nguoi::before{border-style:solid;border-width:2px;border-radius:0}
+.ksart.kcat-trung-phat::before{border-style:dashed;border-radius:0}
+.ksart.kcat-hoc-tap{--kco:16px}.ksart.kcat-hoc-tap::before{border-style:double;border-width:3px;border-radius:0}
+.ksart.kcat-di-lai::before{border-style:dashed}
+.ksart.kcat-hau-ha{--kco:7px}
+.ksart.kcat-trieu-chinh{--kco:14px}.ksart.kcat-trieu-chinh::before{border-width:2px}
+`;document.head.appendChild(sh);
+ /* (c) aligned top bar: moved to the ONE stat cell kitStatCell / kitStatRow (jk4, KIT 32) */
+})();
+
+/* KIT 31.18: the act lists read their PANEL's width (k3pn = panel under 440 px), not the screen */
+(function(){function pw(){const p=document.getElementById("panel");if(p&&p.clientWidth)p.classList.toggle("k3pn",p.clientWidth<440)}
+ try{const p=document.getElementById("panel");if(p&&typeof ResizeObserver==="function")new ResizeObserver(pw).observe(p)}catch(e){}addEventListener("resize",pw);setTimeout(pw,0)})();

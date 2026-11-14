@@ -71,7 +71,8 @@ function kaRows(M){const R={why:[],ton:[],duoc:[],mat:[],kem:[],note:[]};const a
   if(c==="g"){add("duoc",h,"g");continue}
   if(c==="r"){add(KA_STAT.test(p)?"ton":"kem",h,"r");continue}
   add("note",h,"n")}
- if(R.mat.length>1)R.mat=R.mat.filter(x=>!/^không mất gì$/i.test(kaPlain(x.h)));
+ /* an empty Mất row ("không mất gì") is never shown (kit owner #2): sure acts and safe failures simply have no Mất row */
+ R.mat=R.mat.filter(x=>!/^(hỏng:\s*)?không mất gì( thêm)?\.?$/i.test(kaPlain(x.h).trim()));
  if(R.ton.length>1)R.ton=R.ton.filter(x=>!/^không(\s|$)/i.test(kaPlain(x.h)));
  R.why=R.why.map(x=>({h:kaWhyCut(x.h),c:"r"}));const wt=R.why.map(x=>kaPlain(x.h).toLowerCase());R.note=R.note.filter(x=>!wt.some(w=>w.includes(kaPlain(x.h).toLowerCase())));
  return R}

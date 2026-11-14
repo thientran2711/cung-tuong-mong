@@ -583,7 +583,7 @@ kitBook({head:"Sổ tuần · Tháng tư · thượng tuần · năm thứ nhấ
 - Layout: two-page spread when the viewport is ≥ 900 px wide and landscape (iPad 1180x820, 1366x1024), the closed cover centred; one page at a
   time otherwise (Fold 755x1000, phones). Person page: portrait column `--por` beside name/chips/facts; under 440 px page width facts run full
   width below the portrait. Font scales with the page (`--fs` 13–17 px).
-- Turning: drag/swipe follows the finger with a 3D turn (`perspective() rotateY`, shading on both faces, cast shadow on the page beneath);
+- Turning (page-curl kit, §32): drag/swipe follows the finger with a paper CURL (`kitCurl`: the sheet bends in strips, both faces shaded, moving cast shadow; 560 ms);
   release past ~40 % or a flick completes, else it falls back. Tap the right/left page edge, the ‹ › buttons, ←/→/PageUp/PageDown, Esc = Lui.
   `prefers-reduced-motion` (or Cảnh động off): cross-fade instead of the turn. Soft paper sound with the Tiếng động slider.
 - Art: `img/book-cover.webp` (indigo thread-bound cover, title label strip: the title is written in it, word per line), `book-right.webp`
@@ -916,6 +916,110 @@ to `#rtoast .ksen` (result card), `.pc .pcn` (person-card result note), kit pane
 - Kit panel close row (`.dlg.kpanel>.mr`, "Đã hiểu") is pinned at the dialog bottom; the body scrolls under it.
 - Category tabs (31.11) stay ONE sideways row under 1000 px (the chip-list wrap rule 31.5 excludes `.kcattabs`).
 - Person info chip labels start with a capital ("Lòng 70", not "lòng").
+- A row holding several bars (servant "Lòng ▮ 78 · Chủ tin ▮ 52", `.sbar`) gives one chip per bar.
+- An act RESULT on a person card (`popMsg` → `.pcn`, e.g. "Sai đi dò la: thành …") stays on the card as `.pcn.kpres` under the sticky tabs, listed by
+  kitBullets; only a helper sentence ("Không gặp mặt: phải sai người…") moves into the acts' Ghi chú (31.9). Before this fix the result vanished.
+- Her own age: chip "N tuổi" (`#me-a.k3age`) right after the rank chip in the top bar, every device and road; nowhere else in the bar.
+- Act cards never show an empty Mất row ("không mất gì") — j63 kaRows.
+- End card (j32 `over(h,t,fate[,alive])`): "Chết vì" only when she died; a living ending (thoái vị, xuất cung, xuất gia, về quê…) reads "Kết cục"
+  and "Kiếp này khép lại." Callers may pass alive=true/false.
+- Dialog options (26.6 event rule hides outcomes): an option with `showOdds:true` keeps its odds word; `showOut:true` shows the full act card.
+- Stage veil / scar overlay (`kitFigFx`): laid over the DRAWN figure (object-fit + object-position + the image transform), not the img box.
+
+### 31.16 OPTION GROUPS — layout per screen ('rows' | 'grid') + DIALOG HEADER PICTURE (jk3 §13, owner 11/14)
+Component: every dialog option group (`#modal .opts`, `.kpscopts`) gets `.k3rows` (full-width cards, one per row) or `.k3grid` (equal cells,
+2 columns; 3 on ≥ 1000 px when 3+ short options). Chosen PER SCREEN: a Q / kitModal item sets `optLayout:'rows'|'grid'`; without it the
+layout is read from the options' content — LONG option = Cần / Được / Mất / Kèm rows, an odds word, or a title over 2 lines; SHORT = title +
+cost line. All long → rows · all short → grid · mixed → long ones span the full row, short ones share the grid.
+A dialog may carry `headArt:"img/…webp"` or `{src,label}` → wide kitSceneArt band on top (height clamp 90–220 px).
+
+| screen | layout | reason |
+|---|---|---|
+| Weekly events (j68), side events, dilemmas (j70) — event rule shows cost only | grid | short: title + Tốn |
+| Mệnh truyện chapters (j67) | grid | short (cost only, outcomes hidden) |
+| Succession card "Tiên đế băng hà" | rows (`optLayout:'rows'`) + headArt | long, consequential choices |
+| Big story events | rows + headArt | long texts |
+| Night / thị tẩm choices | auto → grid when cost-only, rows when they carry odds | content |
+| Result cards (#rtoast) | n/a | no options (bullet list 31.14) |
+| Reward chests, minigame start, confirm Yes/No | grid | 2–4 quick picks |
+| Chải chuốt, Tư trang actions | auto (grid for quick picks, rows for act cards with Cần/Được) | content |
+| Identity card | approved pinned pair (unchanged) | owner approved |
+| Sổ luân hồi / Chọn sổ | grid | slot picks |
+| Act lists in Hành sự, servant Phận sự, person-card acts | rows (act cards, `.cards`, not dialogs) | long: Cần/Tốn/Được/Mất rows + odds |
+| Act-like options inside a dialog (`showOdds` / `showOut`) | auto → rows | they show odds / outcomes |
+
+### 31.17 ONE PERSON CARD · CATEGORY FRAMES · ALIGNED TOP BAR (jk3 §14, owner 11/14 — "iPad landscape = two phone panels side by side")
+- Person card: the iPad two-column card on EVERY screen ≥ 600 px (`kitPcWide`), Fold included — no separate Fold card. Left column top-aligned:
+  name → rank → rank frame at full column width (the frame picture's empty headroom is trimmed per frame) → chips (wrap, never clipped) →
+  one short dim helper line "Mới biết tên ⓘ" (full text in the tooltip) → Biết tên / Nơi ở. Column `--kpcw` 29 vw (170–240 px) on 600–999 px.
+- A consort card ALWAYS shows the relation row Ghen · Oán · Thiện cảm · Nàng với ngươi ("?" when unknown) — kitPersonChips.
+- kitSceneArt with a category (`kcat-<cat>` + `--kcc`): rich double border in the category colour, four corner ornaments whose shape differs
+  per category (square / round / diamond …), inner hairline style per category, label plaque at the bottom; never a tassel.
+- Top bar ≥ 1000 px: the four Tư chất cells are drawn like Bạc / Sức / Sủng / Danh (icon + small label above, number below in the same font,
+  size and weight, read from the live stat cell), one row, equal gaps, shared baseline.
+
+## 32. BOOK UI · kitCurl (page curl) + kitBookSpread (two-page book) — `dev/build/jbook.js` (before j87) — KIT READY: page-curl
+Owner 11/14 (00:15Z, 00:45Z approval + later change): the UI is an open book. **iPad landscape = two-page spread**: LEFT = picture page
+(illustration only: the big full-body figure / scene that goes with the right page; it never takes info away from the right page),
+RIGHT = the text page exactly as already approved (Hậu cung card with its own frame, chips, tabs, acts…). **Phone / portrait = the RIGHT
+page only** (no illustration page on phones, accepted loss; no "Mở trang" button). **A tab switch is a page turn on both devices**, and
+every page turn CURLS like real paper. Mockups (not wired yet; the fold-layout kit owner wires it): `dev/shots/book/`.
+
+### 32.1 kitCurl — the one page-turn engine (week book, tab switch, any future book)
+```js
+const c=kitCurl({host, front, back, w, h, x, y, dir:1, shadeL:true, shadeR:true, po, persp, n});  // spine at (x,y) of host, sheet w×h to its right
+c.set(p, dir);      // p 0 = flat on the right … 1 = flat on the left; dir 1 forward (right→left), -1 back
+kitCurlRun(c, from, to, ms, done, ease);   // rAF tween (default ease in-out cubic); returns cancel()
+c.destroy();
+kitCurlOff();       // true when "Cảnh động" is off (OPT.fxon=false) or prefers-reduced-motion → use kitCurlFade(el, mid, done) (cross-fade)
+```
+- front/back: an Element (copied once, then per strip), HTML, or null (plain paper). Copies drop ids, sticky → relative, keep scroll offsets.
+- Look: the sheet is split into n vertical strips (10–18, ~34 px) chained with `rotateY` (preserve-3d), so it BENDS: the tangent angle runs
+  from the spine to the edge (`φ + Δ·(u^1.4 − m)`, chord φ = 180·p, bend Δ = 92°·sin(πp) leading in the turn direction). Each strip face
+  has a gradient overlay from a light model (soft diffuse from upper-left + a moving sheen); the back side is visible as it lifts; a cast
+  shadow moves on the page being uncovered (right) and the page it lands on (left, spread only). Perspective 6×w, origin at the spine
+  (spread) or page centre (single page). Duration 560 ms (week book) / 600 ms (spread tab switch).
+- Only transform + background of small strips change per frame (no layout); no canvas/WebGL needed.
+
+### 32.2 kitBookSpread — the book container
+```js
+const bs=kitBookSpread(host,{pic, text, double, mode:"auto"});   // host = the area between the top bar and the tab bar
+bs.set({pic, text, double});              // replace content (no turn). text: an Element is MOVED in (stays live, e.g. #panel)
+bs.swap(()=>{ /* switch tab: the game re-renders #panel */ bs.set({pic:kitBookPic({...})}) }, {dir:1});  // tab switch = curl
+bs.mode   // "spread" (host ≥ 900 px wide and landscape, same rule as kitBook) | "single"
+kitBookSpread.wantsPic(host)              // false on phones: skip building the picture page there
+```
+- Spread: two `.kpaper` pages, outer page edges (stacked leaves), soft gutter shadow + crease, cover board behind. Forward swap: the old right
+  page curls over to the left, its back already showing the NEW left picture; the new right page lies underneath. dir −1: the new right page
+  curls back in from the left over the old spread.
+- Single: only the text page (`.kbs-r`). Forward swap: the old page curls away to the left revealing the new one; dir −1: the new page curls
+  back in. Swipes are left to the caller (tab bar / gestures of the live layout).
+- `double`: an Element spanning BOTH pages of a spread (Dư đồ: the map is one double-page illustration across the gutter; the gutter shadow
+  lies over it). On one page it goes on the text page.
+- Paper skin `.kpaper` (warm paper, faint fibres, edge tint) is reusable on its own for any page-like surface.
+
+### 32.3 kitBookPic — the picture page (illustration only)
+`kitBookPic({scene, ax, feet, figs:[{src,h,x,dim}], cap, slots:[{label,n,img}], plate})` → HTML: a printed plate inside a thin red double
+rule: the room picture cover-cropped on its floor anchor (`ax` = KIT_FANCHOR x, 31.4), full-body figures (`kitFigOf(p)`) standing on the
+`feet` line, `h` = height fraction; `dim` = anonymous silhouettes (`img/kit/unknown-fig-*.webp`); `cap` = small caption plaque (place name /
+"Thử y phục" — a caption, never the right page's facts); `slots` = try-on slots beside her figure (Tư trang).
+
+### 32.4 Page mapping (owner-approved; iPad left page · right page)
+| tab | LEFT (picture, iPad only) | RIGHT (text, iPad + phone) |
+|---|---|---|
+| Hành sự / home | her room with her figure | act categories + acts |
+| Dư đồ | the map spans BOTH pages (`double`); a tapped place → left = place scene with silhouettes | map · place info + acts |
+| Hậu cung › Phi tần | the selected consort full-body in her palace (caption = palace) | picker strip + card + action tabs + acts (as approved) |
+| Giao tình / Phe phái | relation web / faction emblems picture | lists |
+| Cung nhân, Hoàng tự, Hoàng thượng / Thái hậu cards | the selected person full-body in their place | card + chips + acts |
+| Tư trang | her full body in the current outfit + Trâm / Y phục / Ngọc bội slots | chest grid |
+| Tài nghệ | the art picture (`img/art-*.webp`) with her practising | levels + lessons |
+| Mệnh truyện / events / Sổ tuần | chapter or scene picture / full-body figure | text + choices |
+| Sổ ghi | calendar | entries |
+
+### 32.5 Tests · shots
+`node dev/test/page-curl.js <url> WxH@dpr <out>` (week book: frozen mid-curl frames, back turn, finger drag, reduced motion = fade, no
+page errors) · `node dev/test/book-mock.js <url> WxH@dpr <out> <tag>` (mockups). Shots: `dev/shots/book/`.
 
 ## OWNER POINTS 14/11 (fold-layout) — checklist (✔ = verified in screenshots dev/shots/fold-layout/ at 686x880@2.2 + 1180x820@2)
 | time | point | component | status |
@@ -943,7 +1047,13 @@ to `#rtoast .ksen` (result card), `.pc .pcn` (person-card result note), kit pane
 | 19:00 | Hành sự category tabs (and other long act lists) | 31.11 k3CatTabs | ✔ Hành sự; other lists use the same component (auto) |
 | 19:05/later | iPad bar middle: time | Tư chất columns; stage keeps place + court + figures | 31.12 | ✔ |
 | 19:10 | Oán next to Ghen; one shared component | 31.9 order Ghen · Oán · Thiện cảm · Nàng với ngươi | ✔ |
-| 19:10 | identity card wide simple picture frame; "Đổi thân phận (-100" cut at 686 | 28.19 kitSceneArt (review/identity-card merged) | see sweep |
+| 19:10 | identity card wide simple picture frame; "Đổi thân phận (-100" cut at 686 | 28.19 kitSceneArt (review/identity-card merged) | ✔ (kit2-*-1ident) |
+| later | selected state: gold glow, no box, no check badge, others dimmed | 31.13 | ✔ ident picker + Phi tần strip |
+| later | court chips "Hoàng / thượng" wrap at 1180 | 31.15 nowrap + max-content column | ✔ |
+| later | servant "Lòng 70" as a chip | 31.9 / 31.15 one chip per bar | ✔ |
+| later | long results as bullet lists | 31.14 kitBullets | ✔ (servant "Sai đi dò la" card) |
+| later | her age in the top bar | 31.15 `#me-a` | ✔ |
+| later | PIXI room crop = #scimg crop (j11), figures big on the floor | 31.4 | ✔ 686 + 1180, 6 rooms × seasons × buổi, canvas drawing (scimg opacity 0) |
 
 ### 31.6 INVENTORY (group → member → status; screenshots dev/shots/fold-layout/)
 | group | members | status |
