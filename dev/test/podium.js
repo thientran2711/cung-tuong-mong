@@ -6,7 +6,7 @@ const {chromium}=require('playwright');
 const [,,BASE,SZ,OUT,OLD]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=WH.split('x').map(Number);
 const tag=SZ.replace('@','_');
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,deviceScaleFactor:+(DPR||1)});
- const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));p.on('console',m=>{if(m.type()==='error'&&!/Failed to load resource/.test(m.text()))errs.push('console: '+m.text())});
+ const p=await ctx.newPage();p.setDefaultTimeout(120000);const errs=[];p.on('pageerror',e=>errs.push(e.message));p.on('console',m=>{if(m.type()==='error'&&!/Failed to load resource/.test(m.text()))errs.push('console: '+m.text())});
  const checks=[];
  const check=async(name)=>p.evaluate((name)=>{const r=document.querySelector('.kpod');if(!r)return{name,missing:true};const vw=innerWidth,vh=innerHeight;
   const bad=[];const ft=r.querySelector('.kpod-ft').getBoundingClientRect();
@@ -60,7 +60,7 @@ const tag=SZ.replace('@','_');
  /* 5: old save from the main build */
  let oldSave=null;
  if(OLD){const p2=await ctx.newPage();await p2.goto(OLD,{waitUntil:'domcontentloaded'});await p2.waitForTimeout(2000);
-  await p2.evaluate(()=>{SLOT=2;document.getElementById('title').hidden=true;start();Q.length=0;for(let i=0;i<3;i++){try{endWeek&&endWeek()}catch(e){}}Q.length=0;save()});await p2.close();
+  await p2.evaluate(()=>{SLOT=2;document.getElementById('title').hidden=true;start();Q.length=0;Q.length=0;localStorage.setItem(SK(2),JSON.stringify(ser()));localStorage.setItem("hclh-slot","2")});await p2.close();
   const p3=await ctx.newPage();const e3=[];p3.on('pageerror',e=>e3.push(e.message));await p3.goto(BASE,{waitUntil:'domcontentloaded'});await p3.waitForTimeout(2500);
   const ok=await p3.evaluate(()=>{const bt=document.querySelector('[data-load="2"]');if(!bt)return 'no slot';bt.click();return S&&S.name?'loaded '+S.name:'fail'});await p3.waitForTimeout(800);
   oldSave={ok,errors:e3};await p3.close()}

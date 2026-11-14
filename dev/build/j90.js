@@ -27,8 +27,8 @@ function kpodCol(x){const p=x.who,i=x.place-1,known=kitIsKnown(p),src=kitFigOf(p
  const fig=src?`<img class="kpod-img${known?"":" kpod-unk"}" src="${src}" alt="" draggable="false" onerror="this.closest('.kpod-fig').classList.add('kpod-nofig')">`:"";
  const fb=`<span class="kpod-fb">${kitPortrait(p,{size:"lg"})}</span>`;
  const sc=x.score==null||x.score===""?"":typeof x.score==="number"?`${x.score} phần`:x.score;
- return `<div class="kpod-col kpod-p${i+1}${p===S?" kpod-me":""}" style="--d:${[1.8,1.0,.3][i]}s">`+
-  `<div class="kpod-fig${src?"":" kpod-nofig"}">${fig}${fb}${p===S?`<span class="kpod-you">Ngươi</span>`:""}</div>`+
+ return `<div class="kpod-col kpod-p${i+1}${p===S||x.mine?" kpod-me":""}" style="--d:${[1.8,1.0,.3][i]}s">`+
+  `<div class="kpod-fig${src?"":" kpod-nofig"}">${fig}${fb}${p===S||x.mine?`<span class="kpod-you">${p===S?"Ngươi":"Con ngươi"}</span>`:""}</div>`+
   `<div class="kpod-step"><span class="kpod-medal"><img src="${KIT_DIR}medal-${i+1}.webp" alt="" onerror="this.remove()"><b>${KPOD_WORD[i]}</b></span>`+
   `<span class="kpod-plq">${kpodName(p)}${x.sub?`<small class="kpod-sub">${x.sub}</small>`:""}${sc?`<small class="kpod-sc">${sc}</small>`:""}${kpodPrize(x.prize)}</span></div></div>`}
 function kitPodium(list,o){o=o||{};const L=kpodNorm(list);const top=L.slice(0,3);const me=L.find(x=>x.who===S);
@@ -41,9 +41,9 @@ function kitPodium(list,o){o=o||{};const L=kpodNorm(list);const top=L.slice(0,3)
 function kpodReduced(){try{return matchMedia("(prefers-reduced-motion: reduce)").matches}catch(e){return false}}
 /* layout: step heights from content (Nhất highest), figure height from the space left */
 function kpodFit(root){try{const st=root.querySelector(".kpod-stage");if(!st)return;const cols=[...st.querySelectorAll(".kpod-col")];
- const steps=cols.map(c=>c.querySelector(".kpod-step"));steps.forEach(s=>s.style.height="auto");
+ const steps=cols.map(c=>c.querySelector(".kpod-step"));steps.forEach(s=>s.style.minHeight="0px");
  const H=st.clientHeight,lift=Math.round(Math.min(56,Math.max(22,H*.06)));const by=k=>{const c=st.querySelector(".kpod-p"+k);return c?c.querySelector(".kpod-step"):null};
- let prev=0,m=0;[3,2,1].forEach(k=>{const s=by(k);if(!s)return;const h=Math.max(s.offsetHeight,prev?prev+lift/2:0);s.style.height=h+"px";prev=h;m=Math.max(m,h)});
+ let prev=0,m=0;[3,2,1].forEach(k=>{const s=by(k);if(!s)return;const h=Math.max(s.offsetHeight,prev?prev+lift/2:0);s.style.minHeight=h+"px";prev=h;m=Math.max(m,h)});
  const p1=st.querySelector(".kpod-p1");if(p1){const sr=st.getBoundingClientRect(),fr=p1.querySelector(".kpod-fig").getBoundingClientRect();root.style.setProperty("--krx",(fr.left-sr.left+fr.width/2)+"px")}
  const fh=Math.max(120,H-m-26);root.style.setProperty("--kfh",fh+"px");root.style.setProperty("--kstep",m+"px")}catch(e){}}
 /* confetti: red/gold paper and plum petals, transform-only (Web Animations), cancelled on close/skip */
@@ -64,7 +64,7 @@ function kpodRain(root,ms){const fx=root.querySelector(".kpod-fx");if(!fx)return
 function kitPodiumShow(list,o){o=o||{};const L=kpodNorm(list);if(L.length<2)return null;kitPodiumClose(true);
  const ov=document.createElement("div");ov.id="kpodov";ov.innerHTML=kitPodium(L,o);document.body.appendChild(ov);const root=ov.firstElementChild;
  const red=kpodReduced();if(red)root.classList.add("kpod-skip","kpod-red");const fit=()=>kpodFit(root);fit();
- [...root.querySelectorAll(".kpod-img")].forEach(im=>{if(!im.complete)im.addEventListener("load",fit,{once:true})});
+ [...root.querySelectorAll("img")].forEach(im=>{if(!im.complete)im.addEventListener("load",fit,{once:true})});try{document.fonts.ready.then(fit)}catch(e){}setTimeout(fit,400);
  const onR=()=>fit();addEventListener("resize",onR);ov.__off=()=>removeEventListener("resize",onR);
  const timers=[];const win=root.classList.contains("kpod-win");
  if(!red){timers.push(setTimeout(()=>kpodBurst(root,win?110:64,win),2050));if(win){timers.push(setTimeout(()=>kpodBurst(root,70,true),2900));timers.push(setTimeout(()=>kpodRain(root,7000),2300))}else timers.push(setTimeout(()=>kpodRain(root,3800),2600))}
@@ -99,13 +99,13 @@ function kpodFromItem(m){if(!m||typeof m.h!=="string"||!/class="(ktlist|h54list)
  const d=document.createElement("div");d.innerHTML=m.h;const rows=[...d.querySelectorAll(".ktr,.h54r")];const K=allKids().map(([k])=>k).sort((a,b)=>String(b.name||"").length-String(a.name||"").length);
  const list=[];for(const row of rows){const sp=row.querySelector(":scope > span");const st=row.querySelector(":scope > b");const txt=(sp&&sp.textContent||"");const sw=st?st.textContent.trim():"";
   if(/Ở nhà/.test(sw))continue;const k=K.find(x=>x.name&&txt.includes(x.name)&&!list.some(y=>y.who===x));if(!k)continue;const sm=row.querySelector(":scope > small");
-  list.push({who:k,place:list.length+1,sub:sw.replace(/^Đứng đầu · /,""),prize:sm&&sm.innerHTML.trim()?`<span class="kpod-fx2">${sm.innerHTML}</span>`:null})}
+  list.push({who:k,place:list.length+1,mine:/con ngươi/.test(txt),sub:sw.replace(/^Đứng đầu · /,""),prize:sm&&sm.innerHTML.trim()?`<span class="kpod-fx2">${sm.innerHTML}</span>`:null})}
  if(list.length>=2)kitPodiumTag(m,list,{sub:"Bảng vinh danh"})}
 /* Tranh ghế (j34): the seat goes to Nhất; scores = the three weighted rounds */
 (function(){if(typeof contestEnd!=="function")return;const e0=contestEnd;contestEnd=function(){const c=S&&S.contest;let L=null;try{if(c&&c.c.includes("me")&&!quiet){
   const C=c.c.map(byKey).filter(p=>p&&(p===S||p.alive)&&!p.out&&!c.dq.includes(key(p))&&rkOf(p)===c.r-1);const tot=p=>(c.sc[key(p)]||[]).reduce((a,b,i)=>a+(b||0)*crW(i),0);
-  C.sort((a,b)=>tot(b)-tot(a)||(b.sung||0)-(a.sung||0));L=C.map((p,i)=>({who:p,place:i+1,score:`${Math.round(tot(p)*10)/10} phần`,prize:i===0?(c.r===7?"Lập làm Hoàng hậu":`Phong ${RANKS[c.r].n}`):null}))}}catch(e){L=null}
- const r=e0.apply(this,arguments);try{if(L&&L.length>=2){const m=Q.slice().reverse().find(x=>x&&x.t==="Kết quả tranh ghế"&&!x.__pod);if(m)kitPodiumTag(m,L,{sub:"Tranh ghế"})}}catch(e){}return r}})();
+  C.sort((a,b)=>tot(b)-tot(a)||(b.sung||0)-(a.sung||0));L=C.map((p,i)=>({who:p,place:i+1,score:`${String(Math.round(tot(p)*10)/10).replace(".",",")} phần`,prize:i===0?(c.r===7?"Lập làm Hoàng hậu":`Phong ${RANKS[c.r].n}`):null}))}}catch(e){L=null}
+ const r=e0.apply(this,arguments);try{if(L&&L.length>=2){const m=Q.slice().reverse().find(x=>x&&x.t==="Kết quả tranh ghế"&&!x.__pod);if(m)kitPodiumTag(m,L,{sub:c.r===7?"Ghế Hoàng hậu":`Ghế ${RANKS[c.r].n}`})}}catch(e){}return r}})();
 
 /* ---------- kit CSS (tokens of j79; art img/kit/podium-bg, podium-step, medal-1..3) ---------- */
 (function(){const st=document.createElement("style");st.id="kit90";st.textContent=`
@@ -136,8 +136,8 @@ function kpodFromItem(m){if(!m||typeof m.h!=="string"||!/class="(ktlist|h54list)
 .kpod-medal{position:relative;width:clamp(48px,9vw,84px);margin-top:calc(clamp(48px,9vw,84px) * -.55);flex:none;filter:drop-shadow(0 3px 4px #3a1a1070)}
 .kpod-p1 .kpod-medal{width:clamp(56px,11vw,100px);margin-top:calc(clamp(56px,11vw,100px) * -.55)}
 .kpod-medal img{display:block;width:100%;height:auto}
-.kpod-medal b{position:absolute;left:0;right:0;top:39.6%;transform:translateY(-50%);text-align:center;font-family:var(--display);font-weight:800;font-size:clamp(.82rem,1.9vw,1.25rem);line-height:1;color:#5a3010;text-shadow:0 1px 0 #fff8e0a0}
-.kpod-p1 .kpod-medal b{font-size:clamp(.95rem,2.3vw,1.5rem)}
+.kpod-medal b{position:absolute;left:0;right:0;top:39.6%;transform:translateY(-50%);text-align:center;font-family:var(--display);font-weight:800;font-size:clamp(.78rem,1.8vw,1.1rem);line-height:1;color:#5a3010;text-shadow:0 1px 0 #fff8e0a0}
+.kpod-p1 .kpod-medal b{font-size:clamp(.9rem,2.1vw,1.3rem)}
 .kpod-plq{display:flex;flex-direction:column;align-items:center;gap:2px;width:100%;box-sizing:border-box;text-align:center;background:#fffaf0f2;border:1px solid #c9a46a;border-radius:6px;
  padding:5px 6px;box-shadow:inset 0 0 0 1px #ffffff80;overflow-wrap:anywhere}
 .kpod-plq .kname{font-size:clamp(.74rem,1.6vw,.92rem);line-height:1.25}.kpod-plq .kti{display:block;font-size:.86em;font-weight:600}

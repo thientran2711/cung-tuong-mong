@@ -5,3 +5,11 @@ Kit owner (podium). Branch from origin/main + origin/review/minigames (j82). Mod
 - j90: kitPodium / kitPodiumShow / kitPodiumTag / kitFigOf; wired to j82 startContest (all contests incl. j71), Tranh ghế (j34), hoàng tự exams (j53), công chúa dâng nghệ (j54).
 - Art (Magnific gpt-2-6, 1 style ref): img/kit/medal-1..3.webp, podium-step.webp, podium-bg.webp.
 - Test: dev/test/podium.js (win + confetti + screen 2, 5th place with a stranger as Nhất, Tranh ghế, kid exam, old save from the main build).
+- Fixes: rays behind all three figures (stage level), step heights as min-height + refit on image/font load (no plaque pushed off screen at 1024x768),
+  Tranh ghế scores with decimal comma, her child on a kid board tagged "Con ngươi".
+- Playwright (dev/test/podium.js) PASS at 755x1000@2, 1180x820@2, 1366x1024@2, 412x1058@2, 390x844@3, 1024x768@2: no page errors, no horizontal
+  overflow, no text outside the viewport or clipped, no "…", no "có thể", Nhất step highest, every figure loaded, screen 2 (score board / panel)
+  shown after Tiếp, old save written by the main build loads. Shots (one per file, JPEG): dev/shots/podium/<n>-<scene>-<size>.jpg
+  1 reveal · 2 confetti (animation paused mid-burst) · 3 final · 4 screen 2 board · 5 she is 5th, stranger as Nhất · 6/7 Tranh ghế + screen 2 · 8 kid exam.
+
+KIT READY: podium
