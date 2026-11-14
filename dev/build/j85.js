@@ -39,7 +39,7 @@ const VIRFX={
 /* ---- data on every person ---- */
 function vNorm(p){if(!p)return p;p.arts=p.arts||{};p.artp=p.artp||{};for(const a of ARTS){if(p.arts[a.k]==null)p.arts[a.k]=0;if(p.artp[a.k]==null)p.artp[a.k]=0}
  p.vir=p.vir||{};p.virp=p.virp||{};for(const v of VIR){if(p.vir[v.k]==null)p.vir[v.k]=0;if(p.virp[v.k]==null)p.virp[v.k]=0}
- if(p.duc==null)p.duc=50;p.deeds=p.deeds||[];return p}
+ if(p.duc==null)p.duc=50;p.dlog=p.dlog||[];return p}
 function vNormAll(){try{if(!S)return;vNorm(S);(rivals||[]).forEach(vNorm)}catch(e){}}
 (function(){const n0=normAll;normAll=function(){const r=n0.apply(this,arguments);vNormAll();return r}})();
 (function(){const r0=rstats;rstats=function(v){const r=r0.apply(this,arguments);vNorm(v);return r}})();
@@ -65,10 +65,10 @@ function ducBetray(t){return Math.round((50-ducOf(t))/4)}         /* added to bu
 /* deed context: the act being done, so every Đức change carries its cause */
 let DEED85=null;
 function withDeed(n,f){const o=DEED85;DEED85=n;try{return f()}finally{DEED85=o}}
-function deedRec(p,d,why){if(!p||!d)return;vNorm(p);p.deeds.push({w:(typeof wk==="function"?wk():0),n:why||"",d});if(p.deeds.length>16)p.deeds.shift()}
+function deedRec(p,d,why){if(!p||!d)return;vNorm(p);p.dlog.push({w:(typeof wk==="function"?wk():0),n:why||"",d});if(p.dlog.length>16)p.dlog.shift()}
 function ducLow(s){return String(s||"").replace(/<[^>]+>/g,"").replace(/^./,c=>c.toLowerCase())}
 (function(){const a0=apply;apply=function(o){const d=o&&o.duc,b=S?S.duc:0;const r=a0.apply(this,arguments);try{if(d&&S){const dd=S.duc-b;if(dd&&DEED85){deedRec(S,dd,DEED85);if(!quiet)log(`<span class="${dd>0?"g":"r"}">Đức ${dd>0?"+":""}${dd} vì ${ducLow(DEED85)}.</span>`)}}}catch(e){}return r}})();
-(function(){const a0=ap;ap=function(p,o){const d=o&&o.duc;if(p===S||!d||!p)return a0.apply(this,arguments);const b=p.duc||0;const r=a0.apply(this,arguments);try{const dd=(p.duc||0)-b;if(dd)deedRec(p,dd,DEED85||"")}catch(e){}return r}})();
+(function(){const a0=ap;ap=function(p,o){const d=o&&o.duc;if(p===S||!d||!p)return a0.apply(this,arguments);const b=p.duc||0;const r=a0.apply(this,arguments);try{const dd=(p.duc||0)-b;if(dd)deedRec(p,dd,DEED85||"việc khuất tất")}catch(e){}return r}})();
 function ducAdd(p,n,why){if(!p||!n)return 0;return withDeed(why||"việc vừa làm",()=>{if(p===S){apply({duc:n})}else ap(p,{duc:n});return n})}
 /* every rulebook act (also when another module calls ACT[k].f directly) names itself */
 (function(){for(const k in ACT){const A2=ACT[k];if(!A2||A2.__j85||typeof A2.f!=="function")continue;const f0=A2.f;A2.f=function(a,t){return withDeed(A2.n,()=>f0.apply(this,arguments))};A2.__j85=1}})();
@@ -78,7 +78,7 @@ function ducAdd(p,n,why){if(!p||!n)return 0;return withDeed(why||"việc vừa l
 function ducKnown(v){if(!v||v===S)return true;try{S.kduc=S.kduc||{};return !!S.kduc[v.id]||trKnown(v).length>0||(v.ev||0)>0||(typeof evG==="function"&&evG(v,S)>0)}catch(e){return false}}
 function ducWord(d){return d>=80?"hiền đức":d>=60?"tử tế":d>=40?"thường":d>=20?"bạc đức":"thất đức"}
 function ducLine(v){vNorm(v);if(!ducKnown(v))return `Đức: <span class="ef n">chưa rõ</span> · Danh <b>${v.danh||0}</b> <span class="past">(tiếng ngoài)</span>`;
- const bad=v.deeds.filter(x=>x.d<0),good=v.deeds.filter(x=>x.d>0);const cnt=L=>{const m={};L.forEach(x=>{if(x.n)m[x.n]=(m[x.n]||0)+1});return Object.entries(m).map(([n,c])=>`${ducLow(n)}${c>1?` ×${c}`:""}`).join(", ")};
+ const bad=v.dlog.filter(x=>x.d<0),good=v.dlog.filter(x=>x.d>0);const cnt=L=>{const m={};L.forEach(x=>{if(x.n)m[x.n]=(m[x.n]||0)+1});return Object.entries(m).map(([n,c])=>`${ducLow(n)}${c>1?` ×${c}`:""}`).join(", ")};
  return `Đức <b class="${v.duc<40?"r":v.duc>=60?"g":""}">${v.duc}</b> (${ducWord(v.duc)}) · Danh <b>${v.danh||0}</b>${bad.length&&cnt(bad)?`<br><span class="ef r">Đã làm: ${cnt(bad)}</span>`:""}${good.length&&cnt(good)?`<br><span class="ef g">Việc thiện: ${cnt(good)}</span>`:""}`}
 (function(){const rc=rvCard;rvCard=function(v,i){let h=rc(v,i);try{if(v.alive)h=h.replace('<div class="pcinfo">',`<div class="pcinfo"><span>${ducLine(v)}</span>`)}catch(e){}return h}})();
 /* ---- Đức in the rules everyone shares ---- */
@@ -142,14 +142,14 @@ function v85Month(){if(!S||S.dead)return"";let ev="";const season=S.turn%3===0;
   const lf=d>=70?1:d<25?-1:0;if(lf){(p.staff||[]).forEach(s=>{if(s.loyal!=null)s.loyal=cl(s.loyal+lf,0,100)});if(p.maid&&p.maid.loyal!=null)p.maid.loyal=cl(p.maid.loyal+lf,0,100)}
   if(me&&tf)ev+=tf>0?`Đức ${d}: Thái hậu${q&&q!==S?", Hoàng hậu":""} quý ngươi hơn (+1). `:`Đức ${d}: Thái hậu${q&&q!==S?", Hoàng hậu":""} coi nhẹ ngươi (-1). `;
   if(me&&lf)ev+=lf>0?`Đức ${d}: kẻ hầu thêm Lòng (+1). `:`Đức ${d}: kẻ hầu bớt Lòng (-1). `;
-  if(!me){npcStudy(p);if(d>=60&&(p.bac||0)>=60&&roll(20))withDeed("phát bạc cứu giúp cung nhân nghèo",()=>ap(p,{bac:-20,duc:3,danh:1}))}}
+  if(!me){npcStudy(p);if(d>=60&&d<85&&(p.bac||0)>=60&&roll(5))withDeed("phát bạc cứu giúp cung nhân nghèo",()=>ap(p,{bac:-20,duc:3,danh:1}))}}
  return ev}
 (function(){const m0=monthTick;monthTick=function(){const ev=m0.apply(this,arguments);let e2="";try{if(!S.dead)e2=v85Month()}catch(e){}return typeof ev==="string"?ev+e2:ev}})();
 /* ---- the danger ladder card names the Đức term ---- */
 (function(){if(typeof bandCard!=="function")return;const b0=bandCard;bandCard=function(){return b0.apply(this,arguments)+`<p>Đức của người ra tay cũng tính: cộng (50 − Đức) ÷ 5. Đức 10 thì +8, Đức 90 thì −8. Ngươi: Đức ${S.duc}, ${ducDanger(S)>=0?"+":""}${ducDanger(S)}.</p>`}})();
 /* ---- the Tài nghệ tab: what each level gives, what the next one opens ---- */
 function fxItems(s,cls){return String(s).split(" · ").map(x=>`<span class="ef ${cls}">${x}</span>`)}
-function lvRows(fx,l,nm){const rows=[];if(l>0)rows.push(["Đang có",fx.slice(0,l).map((s,i)=>`<span class="ef g">Bậc ${i+1}: ${s}</span>`),"g"]);if(l<5)rows.push([`Bậc ${l+1} mở`,fxItems(fx[l],"n"),"n"]);return kitRows(rows)}
+function lvRows(fx,l,nm){const rows=[];fx.slice(0,l).forEach((s,i)=>rows.push([`Bậc ${i+1}`,fxItems(s,"g"),"g"]));if(l<5)rows.push([`Bậc ${l+1} mở`,fxItems(fx[l],"n"),"n"]);return kitRows(rows)}
 function v85Table(k){const V=VIR.find(x=>x.k===k),A=ARTS.find(x=>x.k===k);
  if(k==="duc")return v85DucPanel();const fx=V?VIRFX[k]:ARTFX[k],l=V?virLv(S,k):artLv(S,k);if(!fx)return;
  kitModal({kind:"rule",title:V?`${V.n} · ${V.full}`:`${A.n}`,sub:V?V.d:(ARTDO[k]||""),sections:[{h:"Năm bậc",tiers:fx.map((s,i)=>({k:`Bậc ${i+1}`,n:s,c:i<l?"g":"",on:i+1===l}))}].concat(V?[]:[{h:"Ghi chú",rows:[["Lên bậc",`${A.st==="sac"?"Sắc":"Tài"} +2 mỗi bậc; bậc 3 Danh +3, bậc 5 Danh +6`,"t"]].concat(["cam","ky","thi","hoa"].includes(k)?[["Hoàng thượng trọng tài","thi tài, phô tài tính bậc này gấp đôi","t"]]:k==="vu"?[["Hoàng thượng mê sắc","múa, lật thẻ tính bậc này gấp đôi","t"]]:[])}]),btn:"Đã hiểu"})}
@@ -181,3 +181,5 @@ artTabHTML=function(){vNormAll();const t2=whyTime(2);
 bestArt=function(){let b={k:null,n:"giọng hát",l:0,w:0};for(const a of ARTS){if(a.k==="theu"||a.k==="nau")continue;const l=S.arts[a.k]||0,w=artW(a.k,l);if(w>b.w)b={k:a.k,n:a.n,l,w}}return b};
 /* ---- a hidden villain keeps her Danh until a scheme is caught: then Danh -5 and the victim sees her true Đức ---- */
 (function(){const c0=caught;caught=function(a,t){const r=c0.apply(this,arguments);try{if(r&&a&&a!==S){ap(a,{danh:-5});if(t===S||evG(S,a)>0){S.kduc=S.kduc||{};S.kduc[a.id]=1}}else if(r&&a===S)apply({danh:-5})}catch(e){}return r?r.replace(/\. $/,`; Danh ${a===S?"ngươi":a.name} -5. `):r}})();
+/* taintItem (j8) is called straight from the NPC minds: name it */
+(function(){if(typeof taintItem!=="function")return;const t0=taintItem;taintItem=function(p,ix,tk){return withDeed("lén bỏ thứ hại người vào đồ",()=>t0.apply(this,arguments))}})();
