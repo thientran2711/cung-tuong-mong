@@ -739,6 +739,18 @@
    ]
   },
   {
+   "key": "huy-dung",
+   "cat": "hai-nguoi",
+   "pri": 3,
+   "scene": "a slender hand opening a small jeweled powder box beside an ointment jar on a dressing table, a bronze mirror turned away, night",
+   "names": [
+    "Hủy dung"
+   ],
+   "ids": [
+    "huydung"
+   ]
+  },
+  {
    "key": "buon-ban-len",
    "cat": "buon-ban",
    "pri": 3,
@@ -852,7 +864,7 @@
    "ids": []
   },
   {
-   "key": "cat-dut",
+   "key": "dut-tinh",
    "cat": "tu-tinh",
    "pri": 4,
    "scene": "golden scissors cutting a red silk thread tied between two jade pendants",

@@ -3,7 +3,7 @@
 # Batch 1 used the long template T1 (bright); from batch 2 the shorter T2 / dark TD (owner 11/14: mưu kế, hại người = night palette).
 import json,sys,os
 H=os.path.dirname(os.path.abspath(__file__)); D=json.load(open(os.path.join(H,'acts_list.json')))
-HEAD="Square game card illustration: {s}. One clear centred focal subject, softly blurred palace background, readable at thumbnail size. Gufeng watercolour court illustration like the reference: soft ink lines, delicate washes, "
+HEAD="Portrait 3:4 game card illustration: {s}. One clear centred focal subject, softly blurred palace background, readable at thumbnail size. Gufeng watercolour court illustration like the reference: soft ink lines, delicate washes, "
 BR="warm vermilion, gold, jade and soft pink, gentle light, rich luxurious detail."
 DK="night scene with deep indigo and plum shadows, low warm lantern or candle glow, muted jewel tones, ominous yet beautiful, rich luxurious detail."
 TAIL=" Only hands, sleeves or figures from behind, no faces. No skulls. No text, letters, seals, border or signature."

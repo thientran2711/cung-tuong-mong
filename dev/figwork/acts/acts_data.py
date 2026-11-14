@@ -134,6 +134,8 @@ act("bua-chu","hai-nguoi",4,"a small cloth doll pierced with needles hidden bene
     ["Vu con nàng trù ẻo"],["kframe"])
 act("pha-viec-hoc","hai-nguoi",4,"a child's copybook with spilled ink across it and a broken brush on a small desk",
     ["Phá việc học"],["ksab"])
+act("huy-dung","hai-nguoi",3,"a slender hand opening a small jeweled powder box beside an ointment jar on a dressing table, a bronze mirror turned away, night",
+    ["Hủy dung"],["huydung"])
 # ---- origin story cards (j4) ----
 act("buon-ban-len","buon-ban",3,"bolts of silk, an abacus and a pouch of coins on a cloth spread in a quiet palace alley",
     ["Buôn bán lén trong cung"])
@@ -150,7 +152,7 @@ act("khac-sach","hoc-tap",4,"carved woodblocks for printing and a stack of fresh
 act("liec-mat","tu-tinh",4,"a round silk fan lowered slightly in a garden, a man's dark blue sleeve passing in the background",["Liếc mắt đưa tình"])
 act("trao-khan","tu-tinh",4,"a hand offering an embroidered handkerchief to another hand beside a rockery at dusk",["Trao khăn tay"])
 act("hen-gap","tu-tinh",4,"a quiet moonlit rock garden corner with a single lantern on a stone bench",["Hẹn gặp riêng"])
-act("cat-dut","tu-tinh",4,"golden scissors cutting a red silk thread tied between two jade pendants",["Cắt đứt"])
+act("dut-tinh","tu-tinh",4,"golden scissors cutting a red silk thread tied between two jade pendants",["Cắt đứt"])
 act("pha-thai","y-duoc",5,"a dark bowl of bitter medicine on a table at night, single guttering candle",["Uống thuốc phá thai"])
 act("thu-toi","le-nghi",4,"gold hairpins and jewels removed and laid on the stone floor before a palace hall, a hem kneeling",["Thú tội với Hoàng thượng","Quỳ xin tha"])
 act("hau-thuoc","hau-ha",3,"a medicine bowl on a tray beside a bed with yellow dragon brocade curtains",["Hầu thuốc Hoàng thượng"])
