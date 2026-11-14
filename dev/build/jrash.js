@@ -8,7 +8,7 @@
    A veil (jveil) works for a rash too: Sắc lost while veiled = d × VL.cover[grade]; same Vượt phẩm rule.
    Picture: KIT_RASH overlay (img/rash-1..3.png, gpt-2-6), placed from the veil fit boxes (nose bridge = band line);
    layer order portrait < rash < scar < veil < frame. Shown only when the player knows (herself, or knows(p)).
-   KIT_RASH.ready stays false until the overlay pilot is approved (art files present): the logic runs without the picture. ================= */
+   KIT_RASH.ready=true: owner approved the overlays (15/11; nấc 1 redrawn, nấc 2–3 as drawn). ================= */
 const RASH={d:[0,5,10,16],wk:[0,1,2,3],spring:4,luck:1,cos:5,actBac:15,actDuc:-4,sevW:[.5,.35,.15],medBac:15,npcMed:30,cd:3};
 const RASH_N=["","nhẹ","vừa","nặng"];
 function rashPick(W){const x=Math.random();return x<W[0]?1:x<W[0]+W[1]?2:3}
@@ -67,7 +67,7 @@ try{if(!BANDS[1][2].includes("rash"))BANDS[1][2].push("rash");const g=RVGRP.find
 (function(){if(typeof mindMenu!=="function")return;const m0=mindMenu;mindMenu=function(v,t){const O=m0.apply(this,arguments);try{const b=bandOf(danger(v,t));if(b>=1&&ACT.rash.ok(v,t)){let w=1.2*persW(v,"rash");if((t.sac||0)>(v.sac||0)+8)w*=1.5;if(w>0)O.push(["rash",w])}}catch(e){}return O}})();
 
 /* ---------- picture: KIT_RASH, placed from the veil fit boxes (rash art: nose bridge at RB of a square image) ---------- */
-window.KIT_RASH={ready:false,RB:.47,WX:1.08,src:function(sev){return `img/rash-${cl(sev|0,1,3)}.png`},
+window.KIT_RASH={ready:true,RB:.47,WX:1.08,src:function(sev){return `img/rash-${cl(sev|0,1,3)}.png`},
  on:function(p){try{return !!(p&&p.rash)&&(p===S||typeof knows!=="function"||!!knows(p))}catch(e){return false}},
  style:function(file){try{const n=String(file||"").split("/").pop();const r=KIT_VEIL.fit&&KIT_VEIL.fit[n];if(!r)return "";
   const W=r[2]*this.WX,H=W*(r[3]*480)/(r[2]*445),bandY=r[1]+KIT_VEIL.B0*r[3],L=r[0]+r[2]/2-W/2,T=bandY-this.RB*H;
