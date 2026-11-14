@@ -1,3 +1,15 @@
+# Kiểm duyệt bộ giao diện: review/landscape-art @ 26f260f (lần 2) — PASS
+
+Ngày 2026-11-14. 7 cỡ: 1180x820@2, 1366x1024@2, 1024x768@2, 686x880@2.2, 755x1000@2, 412x1058@2, 390x844@3.
+- Nền luân hồi ngang vẽ lại (bg-reborn-l 2100x1400): cảnh hai bên, không nửa trống; vòng xuất thân và thẻ thân phận ngang đạt (lan2-1180x820-5roulette.jpg).
+- Bậc 4:3 (KIT_BD m, title-key-m 1920x1438): 1024x768 và 1366x1024 tựa đề + Chọn sổ: bảng nằm trên mặt hồ, không che ai (1024 chỉ chạm mép tay áo nàng áo xanh).
+  1180 vẫn dùng tranh ngang rộng, đạt.
+- Đêm thị tẩm: pushFront/deserQ giữ cls → đường thật pushFront(mkP("night2")) ra .modal.night; tranh dọc ở 686/755/412/390, tranh ngang ở màn ngang.
+- Bục vinh danh đo theo khung (m/l ngang, p dọc). 686x880 dọc: tựa đề, Chọn sổ, thẻ thân phận, thị tẩm đạt (686x880-4man.jpg).
+- 7 cỡ không lỗi trang, không tràn ngang; save cũ (làm từ bản main) nạp được ở cả 7 cỡ.
+
+---
+
 # Kiểm duyệt bộ giao diện: review/landscape-art @ f10f96d — FAIL
 
 Ngày 2026-11-14. Dựng nhánh (main 2bed83a + jbd), 6 cỡ, ngang trước: 1180x820@2, 1366x1024@2, 1024x768@2, rồi 755x1000@2, 412x1058@2, 390x844@3.
