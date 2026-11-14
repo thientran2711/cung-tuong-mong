@@ -43,7 +43,7 @@ const KIT_BGSZ={};
    (same composition in every season and buổi). People never stand on furniture: the group is centred on this spot. */
 /* portrait room paintings (3:4, 1536x2048, same room, people-free): scene → true when img/<scene>-<season>-<buoi>-p.webp exist for every
    season × buổi; their own floor anchor goes in KIT_FANCHOR["<scene>-p"]. Empty until the art lands: nothing changes. */
-window.KIT_STAGE_P=Object.assign({"phi-tan-cung":true},window.KIT_STAGE_P||{});
+window.KIT_STAGE_P=window.KIT_STAGE_P||{};
 window.KIT_FANCHOR=Object.assign({"duong-tam-dien":{x:.5,feet:.93},"khon-ninh-cung":{x:.55,feet:.92},"kinh-su-phong":{x:.45,feet:.92},"lanh-cung":{x:.36,feet:.93},
  "ngu-hoa-vien":{x:.3,feet:.9},"ngu-thu-phong":{x:.5,feet:.92},"phi-tan-cung":{x:.5,feet:.9},"tam-cung-dem":{x:.68,feet:.94},"thai-y-vien":{x:.45,feet:.9},
  "tu-ninh-cung":{x:.5,feet:.9},

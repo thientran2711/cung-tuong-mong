@@ -1,5 +1,17 @@
 # Cảnh nền bản DỌC (-p) cho vỏ điện thoại / Fold / cột iPad — nhánh review/scene-phone
 
+## ĐÃ HUỶ (chủ, 14/11): "Vẽ lại làm gì, lấy ảnh cũ xài, ảnh cũ ok nếu để full screen rồi"
+- Giữ tranh phòng NGANG hiện có (cắt cover trong màn phòng toàn màn hình). Không vẽ bộ dọc. Nhánh này KHÔNG gộp.
+- Thí điểm Phi tần cung 16 ảnh -p bị chủ chê ("Phòng nền xấu quá"): hồng kẹo/cam đậm, sàn bóng trơn + thảm to. Đã gỡ khỏi img/
+  (còn trong lịch sử commit 3b9c93f3 và trên Magnific, id bên dưới). KIT_STAGE_P để trống; neo "phi-tan-cung-p" còn trong jk2b nhưng vô hại.
+- Vẽ lại ảnh chủ (3 bản, gpt-2-6, tham chiếu ảnh ngang xuân-sáng): Bh4OYA1oQR (sàn gỗ, thảm nhỏ phía sau), nVj14PxYQD (sàn đá xám,
+  có ghế đôn trước; bỏ), lJ8XHbIgv9 (TỐT NHẤT: đối xứng, sâu, gỗ trầm, màu dịu, thảm tròn nhỏ phía sau; chưa đưa vào game) — dừng theo lệnh.
+- Tín dụng tổng: 21 lượt × 65 = 1.365.
+- GIỮ cho kit owner: phát hiện PIXI (mục "Mã" dưới, kitPxBg). Khi PIXI chạy (j11), nó vẽ bản tranh ngang CĂN GIỮA phủ lên #scimg,
+  bỏ qua cả cách cắt theo neo sàn KIT_FANCHOR của kitFloorFit → trên màn phòng toàn màn hình người chơi thấy khung PIXI chứ không
+  phải khung đã căn neo. kitPxBg chỉ ẩn PX.bg khi dùng tranh -p; nếu phòng toàn màn dùng ảnh ngang cover-crop, cần cùng cách xử lý
+  (ẩn PX.bg hoặc cho PIXI dùng cùng vị trí/tỉ lệ với #scimg).
+
 ## Đặc tả (điều phối 14/11, thay đặc tả 3:2 "-ph" cũ — không vẽ tệp -ph nào)
 - img/<cảnh>-<mùa>-<buổi>-p.webp, 1536x2048 (3:4), gpt-2-6 (thư mục ba4aecfe-…), không người, cùng phòng/phong cách/màu/ánh sáng
   với ảnh ngang cùng cảnh-mùa-buổi; dựng lại theo chiều dọc.
