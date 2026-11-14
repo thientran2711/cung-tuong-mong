@@ -340,16 +340,20 @@ function k3Tags(){try{const st=$$("stage");if(!st)return;const SR=st.getBounding
    news / intel / result kit panels (.kfacts paragraphs) — every generator benefits without changing its text. ---------- */
 function kitBulletsHTML(h){h=String(h||"").trim();if(!h)return h;const txt=h.replace(/<[^>]+>/g,"");if(txt.length<70)return null;
  /* split outside tags only */
- const parts=[];let cur="",depth=0,tag=false;for(let i=0;i<h.length;i++){const c=h[i];cur+=c;if(c==="<")tag=true;else if(c===">")tag=false;if(tag)continue;
+ const parts=[];let cur="",depth=0,tag=false;for(let i=0;i<h.length;i++){const c=h[i];cur+=c;if(c==="<")tag=true;else if(c===">"){tag=false;
+  /* a lone gain/cost chip ("<span class=r>Lòng -5</span> Ngọc Lan …") is its own fact */
+  if(/^<span class="(ef )?[rg]">[^<]*<\/span>$/.test(cur.trim())&&/^\s+\S/.test(h.slice(i+1))){const f=h.slice(i+1).trim().charAt(0);if(f===f.toUpperCase()&&f!==f.toLowerCase()){parts.push(cur);cur="";continue}}}if(tag)continue;
   if(c==="(")depth++;else if(c===")")depth=Math.max(0,depth-1);
-  if(depth===0&&/[.!?…]/.test(c)&&/^\s+/.test(h.slice(i+1))){const rest=h.slice(i+1).replace(/^\s+/,"");if(/^(<[^>]+>)*[A-ZÀ-ỸĐ("“]/.test(rest)){parts.push(cur);cur=""}}
-  else if(depth===0&&c===":"&&cur.replace(/<[^>]+>/g,"").length>30&&/^\s+(<[^>]+>)*[A-ZÀ-ỸĐ][^:.<()]{0,24}:\s/.test(h.slice(i+1))){parts.push(cur.slice(0,-1));cur=""}}
+  const endP=depth===0&&((/[.!…]/.test(c)||(c==="?"&&h[i-1]!=="?"&&h[i+1]!=="?"))||(c===")"&&cur.trim().replace(/^(<[^>]+>)+/,"").startsWith("(")));
+  if(endP&&/^\s+/.test(h.slice(i+1))){const rest=h.slice(i+1).replace(/^\s+/,"").replace(/^(<[^>]+>)+/,"");const f=rest.charAt(0);if(/[("“]/.test(f)||(f&&f===f.toUpperCase()&&f!==f.toLowerCase())){parts.push(cur);cur=""}}
+  else if(depth===0&&c===":"&&cur.replace(/<[^>]+>/g,"").length>30&&/^\s+(<[^>]+>)*[A-ZĐÀÁẢÃẠÂẦẤẨẪẬĂẰẮẲẴẶÈÉẺẼẸÊỀẾỂỄỆÌÍỈĨỊÒÓỎÕỌÔỒỐỔỖỘƠỜỚỞỠỢÙÚỦŨỤƯỪỨỬỮỰỲÝỶỸỴ][^:.<()]{0,24}:\s/.test(h.slice(i+1))){parts.push(cur.slice(0,-1));cur=""}}
  if(cur.trim())parts.push(cur);const P=parts.map(s=>s.trim().replace(/^(<\/[^>]+>)+/,"").trim()).filter(s=>s.replace(/<[^>]+>/g,"").trim());
  if(P.length<2)return null;const foot=[],li=[];
  P.forEach(s=>{const t=s.replace(/<[^>]+>/g,"").trim();if(/^\(.*\)\.?$/.test(t)){foot.push(t.replace(/^\(|\)\.?$/g,""));return}
   s=s.replace(/\.\s*$/,"").replace(/\(([^()<>]*?)([+−-]\s?\d+)\)/g,(m,a,n)=>`(<span class="ef ${/^\+/.test(n)?"g":"r"}">${a}${n}</span>)`);li.push(s)});
  return `<ul class="kbl">${li.map(s=>`<li>${s}</li>`).join("")}</ul>`+(foot.length?`<small class="kblf">${foot.join(" ")}</small>`:"")}
-function kitBullets(el){try{if(!el||el.dataset.kbl===el.innerHTML.length+"")return;if(el.querySelector(".kbl"))return;const r=kitBulletsHTML(el.innerHTML);
+function kitBullets(el){try{if(!el||el.dataset.kbl===el.innerHTML.length+"")return;if(el.querySelector(".kbl"))return;
+ el.querySelectorAll("br").forEach(x=>x.replaceWith(" "));el.querySelectorAll("span.past").forEach(x=>x.replaceWith(...x.childNodes));const r=kitBulletsHTML(el.innerHTML);
  if(r){el.innerHTML=r;el.classList.add("kblw")}el.dataset.kbl=el.innerHTML.length+""}catch(e){}}
 (function(){const SEL="#rtoast .ksen, .pc .pcn, .dlg.kpanel .kfacts .kfx, .dlg.kpanel .kfacts p";let t=0;
  const run=()=>{document.querySelectorAll(SEL).forEach(e=>{if(e.closest(".kpid"))return;kitBullets(e)})};
@@ -358,14 +362,16 @@ function kitBullets(el){try{if(!el||el.dataset.kbl===el.innerHTML.length+"")retu
 ul.kbl{margin:2px 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:3px;text-align:left}
 ul.kbl>li{position:relative;padding-left:14px;line-height:1.35}
 ul.kbl>li::before{content:"";position:absolute;left:3px;top:.55em;width:5px;height:5px;border-radius:50%;background:var(--gold,#8f5f0c)}
+.pc .pcn.kpres{margin:4px 0 8px;padding:8px 10px;background:var(--k-card,#fffaf0);border:1px solid var(--line);border-left:3px solid var(--gold,#8f5f0c);border-radius:8px;font-size:.84rem}
 small.kblf{display:block;margin-top:3px;font-size:.72rem;color:var(--dim,#7a6a58);font-style:italic}
 `;document.head.appendChild(st)})();
 
 /* ---------- 12. HER AGE in the top bar (owner 11/14, KIT 31.1): "N tuổi" as a small chip right after her rank chip, every device and road;
    shown only here (one fact, one place). ---------- */
 (function(){if(typeof renderHUD!=="function")return;const r0=renderHUD;renderHUD=function(){const r=r0.apply(this,arguments);try{const m=$("me-r");
- if(m&&S&&typeof S.age==="number"){let a=$("me-a");if(!a){a=document.createElement("span");a.id="me-a";a.className="k3age"}if(m.nextSibling!==a)m.after(a);const t=`${Math.floor(S.age)} tuổi`;if(a.textContent!==t)a.textContent=t}}catch(e){}return r}
+ if(m&&S&&typeof S.age==="number"){let a=$("me-a");if(!a){a=document.createElement("span");a.id="me-a";a.className="k3age"}let w=m.parentNode;if(!w.classList.contains("k3rr")){w=document.createElement("span");w.className="k3rr";m.before(w);w.appendChild(m)}if(m.nextSibling!==a)m.after(a);const t=`${Math.floor(S.age)} tuổi`;if(a.textContent!==t)a.textContent=t}}catch(e){}return r}
  const st=document.createElement("style");st.id="k3-age";st.textContent=`
-#me-a.k3age{display:inline-flex;align-items:center;vertical-align:middle;margin-left:5px;padding:0 7px;border:1px solid var(--line);border-radius:999px;
+#me .k3rr{display:flex;align-items:center;flex-wrap:nowrap;gap:0;min-width:0}
+#me-a.k3age{display:inline-flex;flex:0 0 auto;align-items:center;vertical-align:middle;margin-left:5px;padding:0 7px;border:1px solid var(--line);border-radius:999px;
  font-size:.72rem;font-weight:600;line-height:1.5;color:var(--ink);background:var(--k3pl,#fffaf0);white-space:nowrap}
 `;document.head.appendChild(st)})();

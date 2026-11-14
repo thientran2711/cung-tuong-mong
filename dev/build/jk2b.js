@@ -661,13 +661,14 @@ kitPcFix=function(pc){try{if(!pc||pc.dataset.k2==="1")return;const L=pc.querySel
     age, nature, chips and wear slots open in a kit sheet from the portrait; helper sentences go to the act-group tabs' tooltip */
  if(!wide){if(bars.children.length)L.appendChild(bars);{const nl=document.createElement("div");nl.className="kpnm";const n1=L.querySelector(":scope > .pcname"),r1=L.querySelector(":scope > .pcrk");if(n1)nl.appendChild(n1);if(r1)nl.appendChild(r1);L.prepend(nl)}const pp=L.querySelector(":scope > .pcp");if(pp){pp.setAttribute("role","button");pp.title="Chạm để xem tư chất, tuổi, tính nết";pp.classList.add("kpsheet")}
   }
- {const nt=Rr.querySelector(":scope > .pcn");if(nt){const tb=Rr.querySelector(":scope > .pctabs");const tx=nt.textContent.trim();if(tb)tb.title=tx;
+ {const nt=Rr.querySelector(":scope > .pcn");/* an act RESULT (popMsg: "Sai đi dò la: thành. …") stays as the card note (kitBullets lists it); only a helper sentence moves */
+  if(nt&&(nt.querySelector(".g,.r,.past,b,.ef")||/:\s*(thành|hỏng)/i.test(nt.textContent)||nt.textContent.length>140))nt.classList.add("kpres");else if(nt){const tb=Rr.querySelector(":scope > .pctabs");const tx=nt.textContent.trim();if(tb)tb.title=tx;
   /* the helper sentence ("Không gặp mặt: phải sai người…") becomes a Ghi chú on the act cards it explains, not a line in the card body */
   Rr.querySelectorAll(".pcb button.ka").forEach(b=>{if(b.querySelector(".kr-note"))return;const kb=b.querySelector(".kb");if(kb&&/sai|nhờ|gửi/i.test(b.textContent))kb.insertAdjacentHTML("beforeend",`<span class="kr kr-note"><span class="krl">Ghi chú</span><span class="krv"><span class="ef n">${tx}</span></span></span>`)});nt.remove()}}
  /* right: one opaque sticky block = (info) + note + act-group tabs */
  const stick=document.createElement("div");stick.className="kpstick";
- const note=Rr.querySelector(":scope > .pcn");if(note)stick.appendChild(note);const tabs=Rr.querySelector(":scope > .pctabs");if(tabs)stick.appendChild(tabs);
- if(stick.children.length)Rr.prepend(stick);
+ const note=Rr.querySelector(":scope > .pcn");if(note&&!note.classList.contains("kpres"))stick.appendChild(note);const tabs=Rr.querySelector(":scope > .pctabs");if(tabs)stick.appendChild(tabs);
+ if(stick.children.length)Rr.prepend(stick);if(note&&note.classList.contains("kpres")){if(stick.parentNode)stick.after(note);else Rr.prepend(note)}
  /* wear slots (K1) under the portrait */
  try{const p=kitPersonByName(name);pc.querySelectorAll(".chip").forEach(c=>{if(/^(Trâm|Y phục):/.test(c.textContent.trim())||(p&&typeof wdSlots==="function"&&/^(Đúng phẩm|Vượt phẩm|Quá giản dị|Phạm tang)$/.test(c.textContent.trim())))c.remove()});
   if(p&&typeof wdSlots==="function"&&!pc.querySelector(".kwear")){const h=kitWearSlots(p,{size:"sm"});if(h&&pcp)pcp.insertAdjacentHTML("afterend",h)}}catch(e){}
