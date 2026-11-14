@@ -27,3 +27,8 @@ Chạy: `GAME=<bản dựng có meta charset> INP=inpage6.js node dev/measure/ru
   XJS xoay 9 thân phận: `const s9=start;start=function(){window.__origO=["tt","dtq","muoi","cn","nc","td","ch","thd","cnv"][(window.__oj=(window.__oj==null?2:window.__oj+1))%9];return s9.apply(this,arguments)}`
 - probe_srv.js (palaceOf của chủ cung nữ), probe_kiep.js (chết sớm không lợi), uismoke.js (save cũ, 755/1180) đều đạt.
 - Việc còn mở: chết sớm ~20% với bot khôn; muốn ~40% phải chỉnh độ mạnh lệnh Phòng bị (ords70) hoặc tỉ lệ đầu độc/đẩy xuống hồ.
+
+## v10 (đêm 11/14) — đang ở review/balance
+- jbal2: BAL.birthMin 8 (sàn rủi ro khó sinh), seeMaxP 65 (nhận ra độc tối đa), poisonX 1.5. Đo n=30: HH 33%, chết sớm 20%, khó sinh 6,4%/lần.
+- Đã thử seeMaxP 75 + poisonX 2: HH 50%, chết 13% → bỏ.
+- VIỆC TIẾP (để chết sớm ~35–40%): độc trúng 1–2 lần/đời mà gần như không chết. Kiểm đường đi: j70 runAct (dev/build/j70.js ~dòng 352) có thể chạy độc qua chuỗi riêng, không qua ACT.poison.f; Sức của nàng chỉ xét chết ở tuần sau. Dùng inx.js (đếm "on") + log để xem Sức sau khi trúng độc.

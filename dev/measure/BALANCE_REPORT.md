@@ -78,6 +78,30 @@ The next lever, not taken here: how strong the defence orders (ords70) are, or t
 I did not lower the HH seat gate: HH is on target.
 
 
+
+## v10 (late 11/14, coordinator: childbirth 8–12% per labour, early death 35–40%) — CURRENT on review/balance
+New jbal2 knobs. Same rule for every woman, her and every NPC:
+- `BAL.birthMin` = 8: safety measures (thái y, Y thuật, an thai, a loyal maid) never take the childbirth risk below 8%.
+  `probe_birth.js` checks the death path itself: 2000 labours per setting with die() stubbed. Measured deaths match birthRisk exactly
+  (no safety 13.8%, thái y 7.35%, everything 7.75%). So birthAdd/illDie were working all along. The careful bot was simply reaching the 1.5% floor.
+- `BAL.seeMaxP` = 65: spotting a poison or a tampered medicine (the "ps" path of oSee/caught) is capped at 65%.
+  Before, the careful bot sat at ~95% (physician +25, Y +20, maid +10).
+- `BAL.poisonX` = 1.5: a poison that lands takes 1.5x the Sức.
+
+| config | n | Hoàng hậu | early death | childbirth / labour | poison tried/landed per life | time to HH median (years / tuần / min @10s / @20s) |
+|---|---|---|---|---|---|---|
+| v9b (hz 3.2, bA 4, illDie 2) | 30 | 33% | 20% | 4.5% (shown risk 8.2) | 20 / 0.3 | 5.3 / 192 / 32 / 64 |
+| **v10: + birthMin 8, seeMaxP 65, poisonX 1.5 (shipped)** | 30 | **33%** | **20%** | 6.4% (shown 10.7) | 25.5 / 1.7 | 11.3 / 408 / 68 / 136 (p25 9.0, p75 11.6) |
+| v10b: seeMaxP 75, poisonX 2 (reverted) | 30 | 50% | 13% | 6.7% (shown 10.4) | 26.7 / 1.1 | 7.7 / 278 / 46 / 93 |
+
+v10 per origin (n / HH / died): ch 4/1/0, cn 3/3/0, cnv 3/0/3, dtq 4/1/0, muoi 3/2/0, nc 4/1/0, td 4/0/1, thd 3/1/1, tt 2/1/1.
+No page errors, no deaths in the first 2 tuần.
+
+**Still open: early death stays ~20%.** Poison now lands 1–2 times a life, but it almost never kills her, even at 2x Sức (0 poison deaths in v10b).
+The next step is to find why. Her Sức is clamped at 0 and only checked at the next tuần ("Bệnh nặng"); something between the landing and that check
+seems to heal her. Possibly j70's chain runs the poison through its own path rather than ACT.poison.f. Check that before raising any odds.
+Childbirth per labour (6.4–6.7%) sits under the shown risk (~10.5). That is within noise for ~45 labours: probe_birth shows the path is exact.
+
 ## Other checks
 - **Servants' palaceOf** (`probe_srv.js`, cnv start): 189 checks over 3 servant lives. Her mistress's palace was always a real palace,
   never "home": Cảnh Phúc, Diên Huy, Khải Tường, Thừa Minh, a thiên điện, and Càn Ninh when the mistress is Hoàng hậu. Her own was always "home" (the maids' room). No page errors.
