@@ -9,7 +9,7 @@ import sys,os,subprocess,shutil
 S="/tmp/claude-0/-home-user-cung-tuong-mong/a5fd33d3-7f41-5bff-b6da-0b51bb3f7f98/scratchpad"; os.chdir(S)
 def st():
     d={}
-    for l in open("st.txt"):
+    for l in open("pc_st.txt"):
         p=l.split()
         if len(p)==3: d[(p[0],p[1])]=p[2]
     return d
@@ -19,7 +19,7 @@ def dl(pairs):
 c=sys.argv[1]; a=sys.argv[2:]
 if c=="set":
     k=a[0]
-    with open("st.txt","a") as f:
+    with open("pc_st.txt","a") as f:
         for x in a[1:]: j,i=x.split("="); f.write(f"{j} {k} {i}\n")
 elif c=="get":
     d=st(); print(" ".join(d.get((j,a[0]),"?") for j in a[1:]))

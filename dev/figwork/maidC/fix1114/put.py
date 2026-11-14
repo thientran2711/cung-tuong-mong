@@ -1,6 +1,6 @@
 # put.py FILE... : PUT files (in order) to the upload targets of the LATEST creations_request_upload result in this transcript; prints paths JSON for finalize
 import sys,re,json,glob,subprocess
-fs=glob.glob("/root/.claude/projects/-home-user-cung-tuong-mong/a5fd33d3-7f41-5bff-b6da-0b51bb3f7f98/subagents/*.jsonl")
+fs=glob.glob("/root/.claude/projects/-home-user-cung-tuong-mong/a5fd33d3-7f41-5bff-b6da-0b51bb3f7f98/subagents/agent-ade4e7b6002d975ea.jsonl")
 last=None
 def strings(o):
     if isinstance(o,str): yield o
