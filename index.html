@@ -5293,6 +5293,676 @@ window.tdForceSo=function(k){const T=trS();if(k==="praise"&&!T.praise)T.praise="
 (function(){const t0=tuoi;tuoi=function(n){return n>=18?t0(n):(n>0?`Tuổi <b>${n}</b>`:"")};
  const k0=kidCard;kidCard=function(k){const t1=tuoi;tuoi=()=>"";try{return k0.apply(this,arguments)}finally{tuoi=t1}}})();
 
+/* ================= j68 ĐỜI SỐNG TRONG CUNG: common daily/situational events as composable templates =================
+   Engine + shared helpers here; content in j68e. Wraps only; edits no other module. (Chains = j70, merit/festivals = j71, quests = j72.)
+   Template = family x actor (real NPC picked by traits/relations) x context weight x text variants; outcomes truthful.
+   Cadence: at most one j68 modal per tuần, only when the queue is short; some of the stock 'Có người đến' visits are swapped for a j68 event (no extra modals).
+   Anti-repetition: per-life cooldown per template and per variant; cross-life history in localStorage 'ctm-e68h' (last 6 lives) lowers the weight of what was seen.
+   Hook for other storyline modules: e68Busy() is true if j68 fired a big beat this month; j68 honours storyBusy() if defined. */
+const E68=[],E68I={},Q68=[],Q68I={};
+const E68CFG={p:.25,swap:.15,cd:54};
+const G6=t=>`<span class="g">${t}</span>`,R6=t=>`<span class="r">${t}</span>`;
+function e68(){if(!S)return null;const e=S.e68=S.e68||{};e.cd=e.cd||{};e.vu=e.vu||{};e.fu=e.fu||[];e.q=e.q||[];e.qcd=e.qcd||{};e.ch=e.ch||{};e.n=e.n||0;e.qn=e.qn||0;e.cong=e.cong||0;e.qdone=e.qdone||0;e.qfail=e.qfail||0;e.npcq=e.npcq||[];
+ if(!e.lid){e.lid=Date.now().toString(36)+R(1000);try{const H=JSON.parse(localStorage.getItem("ctm-e68h")||"{}");H.L=[[]].concat(H.L||[]).slice(0,6);H.cur=e.lid;localStorage.setItem("ctm-e68h",JSON.stringify(H))}catch(x){}}return e}
+function e68H(){try{const H=JSON.parse(localStorage.getItem("ctm-e68h")||"{}");return H.L||[]}catch(x){return[]}}
+function e68Mark(key){try{const H=JSON.parse(localStorage.getItem("ctm-e68h")||"{}");H.L=H.L||[[]];if(H.cur!==S.e68.lid){H.L=[[]].concat(H.L).slice(0,6);H.cur=S.e68.lid}if(!H.L[0].includes(key))H.L[0].push(key);if(H.L[0].length>400)H.L[0]=H.L[0].slice(-400);localStorage.setItem("ctm-e68h",JSON.stringify(H))}catch(x){}}
+/* how many of the previous lives (not this one) saw this key */
+function e68Past(key,pre){const L=e68H().slice(1,6);let n=0;for(const l of L)if(l.some(k=>pre?k.indexOf(key+":")===0||k===key:k===key))n++;return n}
+function e68Busy(){const e=S&&S.e68;return !!(e&&e.bigM===S.turn)}
+function e68Story(){try{return typeof storyBusy==="function"&&!!storyBusy()}catch(x){return false}}
+function e68On(){return !!(S&&!S.dead&&!S.out&&!(typeof isSrv==="function"&&isSrv()))}
+/* ---------- actors ---------- */
+const NM6=p=>p?p.name:"";
+function tr6(v){try{return traitsOf(v)}catch(x){return[v&&v.trait]}}
+function rv6(f,wf){const L=liveRivals(true).filter(v=>!v.confined&&(!f||f(v)));if(!L.length)return null;if(!wf)return pick(L).id;const w=L.map(v=>Math.max(.01,wf(v)));let r=Math.random()*w.reduce((a,b)=>a+b),i=0;while(r>w[i]&&i<L.length-1){r-=w[i];i++}return L[i].id}
+function sv6(f){const L=(S.staff||[]).filter(s=>s&&s.sid!=null&&(!f||f(s)));return L.length?pick(L).sid:null}
+function kid6(f){const L=(S.kids||[]).filter(k=>k.alive&&(!f||f(k)));return L.length?pick(L).name:null}
+function man6(rw){const L=(S.men||[]).filter(m=>m.alive!==false&&(!rw||m.rw===rw));return L.length?pick(L).id:null}
+function A6(kind,id){try{
+ if(kind==="rv"){const v=RV(id);if(!v||!v.alive)return null;return{o:v,n:v.name,f:pv(v),k:"rv"}}
+ if(kind==="sv"){const s=servById(id);if(!s)return null;return{o:s,n:s.name,f:pServ(s),k:"sv"}}
+ if(kind==="maid"){if(!S.maid)return null;return{o:S.maid,n:S.maid.name,f:pMaid(),k:"maid"}}
+ if(kind==="emp")return{o:S.emp,n:"Hoàng thượng",f:pEmp(),k:"emp"};
+ if(kind==="th"){if(S.thDead)return null;return{o:"th",n:"Thái hậu",f:pTH(),k:"th"}}
+ if(kind==="doc"){const c=S.court&&S.court.ty;return{o:c,n:c&&c.name?c.name:"thái y",f:pDoc(),k:"doc"}}
+ if(kind==="eun"){const c=S.court&&S.court.tq;return{o:c,n:c&&c.name?c.name:"Tổng quản",f:pEunCourt("tq"),k:"eun"}}
+ if(kind==="ksp"){const c=S.court&&S.court.ksp;return{o:c,n:c&&c.name?c.name:"thái giám Kính sự phòng",f:pEunCourt("ksp"),k:"eun"}}
+ if(kind==="kid"){const k=(S.kids||[]).find(x=>x.name===id&&x.alive);if(!k)return null;return{o:k,n:k.name,f:kidFace(k),k:"kid"}}
+ if(kind==="man"){const m=(S.men||[]).find(x=>x.id===id);if(!m)return null;return{o:m,n:m.name,f:pMan(m),k:"man"}}
+}catch(x){}return null}
+/* relation tokens and effects, coloured explicitly (never through the 'nàng' heuristic) */
+function relTok(a,n){if(!a||!n)return"";const nm=a.k==="th"?"Thái hậu với ngươi":a.k==="emp"?"Sủng":a.n;
+ if(a.k==="rv")return n>0?G6(`${nm} thân +${n}`):R6(`${nm} mất thiện cảm ${n}`);
+ if(a.k==="sv"||a.k==="maid")return (n>0?G6:R6)(`Lòng ${nm} ${n>0?"+":""}${n}`);
+ if(a.k==="kid")return (n>0?G6:R6)(`${nm} quyến luyến ${n>0?"+":""}${n}`);
+ if(a.k==="man")return (n>0?G6:R6)(`${nm} cảm kích ${n>0?"+":""}${n}`);
+ if(a.k==="th")return (n>0?G6:R6)(`Thái hậu với ngươi ${n>0?"+":""}${n}`);
+ if(a.k==="emp")return (n>0?G6:R6)(`Sủng ${n>0?"+":""}${n}`);
+ if(a.k==="doc"||a.k==="eun")return (n>0?G6:R6)(`${nm} ${n>0?"nể ngươi":"mếch lòng"} ${n>0?"+":""}${n}`);return""}
+function relDo(a,n){if(!a||!n)return;try{
+ if(a.k==="rv")relAdd(S,a.o,n);else if(a.k==="sv"||a.k==="maid")a.o.loyal=cl((a.o.loyal||0)+n,0,100);else if(a.k==="kid")a.o.fond=cl((a.o.fond||0)+n,0,100);
+ else if(a.k==="man")a.o.af=(a.o.af||0)+Math.round(n/2);else if(a.k==="th")apply({th:n});else if(a.k==="emp")apply({sung:n});else if((a.k==="doc"||a.k==="eun")&&a.o){a.o.af=a.o.af||{};if(typeof a.o.af==="object")a.o.af.me=(a.o.af.me||0)+n}}catch(x){}}
+function fx6(o){return Object.entries(o||{}).filter(([k,v])=>v&&(NAMES[k]||k==="an")).map(([k,v])=>{const n=k==="an"?"Ân tình":NAMES[k];const vv=k==="sung"?sg(v):v;return (vv>0?G6:R6)(`${n} ${vv>0?"+":""}${vv}`)})}
+function ap6(o){o=Object.assign({},o||{});if(o.an){S.an=cl((S.an||0)+o.an,0,100);delete o.an}apply(o)}
+/* one choice. s: {c immediate fx, p odds, w/l fx on success/fail, r/lr [[actor,n]] relation on success/fail, wt/lt/k extra tokens, ok/no callbacks, wl/ll log lines} */
+function c6(n,s){s=s||{};const wt=fx6(s.w).concat((s.r||[]).map(([a,v])=>relTok(a,v)),s.wt||[]).filter(Boolean),lt=fx6(s.l).concat((s.lr||[]).map(([a,v])=>relTok(a,v)),s.lt||[]).filter(Boolean);
+ const p=s.p==null?null:cl(Math.round(s.p),5,95);let x;
+ if(p!=null)x=`${word(p)} · thành: ${wt.join(", ")||G6("êm chuyện")} · hỏng: ${lt.join(", ")||"không mất gì"}`;else x=wt.join(", ");
+ if(s.k&&s.k.length)x+=(x?" · ":"")+"kèm: "+s.k.join(", ");
+ const c={n,fx:s.c||{},x,go:()=>{let ok=true;if(p!=null)ok=Math.random()*100<p;
+   if(ok){ap6(s.w);(s.r||[]).forEach(([a,v])=>relDo(a,v));let t="";try{t=s.ok?s.ok():""}catch(e){}log(t||s.wl||"Mọi việc êm xuôi.")}
+   else{ap6(s.l);(s.lr||[]).forEach(([a,v])=>relDo(a,v));let t="";try{t=s.no?s.no():""}catch(e){}log(`<span class="r">Không thành:</span> ${t||s.ll||n+"."}`)}}};
+ if(s.c&&s.c.suc&&S.suc+s.c.suc<5)c.n+=" (mệt)";return c}
+/* ---------- events ---------- */
+/* EV6(id, fam, spec): spec = {big, w(ctx)->weight, pp()->params|null (actor ids), v:[texts with {A} {B} {M} {S} {W} {P}], o(X)->choices, t title} */
+const FAM6={day:"Chuyện trong cung",visit:"Có người đến",emp:"Hoàng thượng",sea:"Thời tiết",fest:"Ngày hội",merit:"Lập công",court:"Tin triều đình",kid:"Chuyện các con",serv:"Kẻ hầu",rumor:"Tin đồn",myst:"Chuyện lạ cần tra",plot:"Mưu hại",quest:"Việc nhờ"};
+function EV6(id,fam,s){s.id=id;s.fam=fam;E68.push(s);E68I[id]=s;PEND["e68"+id]=p=>{try{return e68Build(s,p)}catch(x){console.error(x);return null}}}
+function e68X(s,p){const X={p,vi:p.vi||0};const sl=s.a||[];for(let i=0;i<sl.length;i++){const kind=sl[i];const a=A6(kind,p["a"+i]);if(!a)return null;X["a"+i]=a}X.A=X.a0;X.B=X.a1;X.C=X.a2;return X}
+function e68Fill(t,X){const sea=SEASON[S.month-1];return String(t).replace(/\{A\}/g,X.A?X.A.n:"").replace(/\{B\}/g,X.B?X.B.n:"").replace(/\{C\}/g,X.C?X.C.n:"").replace(/\{M\}/g,S.maid?S.maid.name:"cung nữ").replace(/\{S\}/g,sea.toLowerCase()).replace(/\{W\}/g,S.wx?S.wx.n:sea.toLowerCase()).replace(/\{P\}/g,(()=>{try{return placeOf(S.place).n}catch(e){return"trong cung"}})()).replace(/\{E\}/g,"Hoàng thượng")}
+function e68Build(s,p){const X=e68X(s,p);if(!X)return null;const V=s.v||[""];let tx=e68Fill(V[(p.vi||0)%V.length],X)+(p.f?"<br>"+p.f:"");tx=tx.replace(/\{it\}/g,s.items&&p.it!=null?s.items[p.it%s.items.length]:"");const o=s.o(X);if(!o||!o.length)return null;
+ return{who:s.who?s.who(X):(X.A?X.A.f:null),t:tx,o}}
+function e68Ctx(){return{sea:SEASON[S.month-1],m:S.month,rank:S.rank,place:S.place,wx:S.wx||{},fest:(()=>{try{return festToday()}catch(e){return null}})(),wk:wk()}}
+function e68Cands(fams,big){const e=e68(),C=e68Ctx(),now=wk(),out=[];const story=e68Story();
+ for(const s of E68){if(fams&&!fams.includes(s.fam))continue;if(s.fam==="plot"||s.fu)continue;if(big===false&&s.big)continue;if(s.big&&story)continue;
+  const last=e.cd[s.id];if(last!=null&&now-last<(s.cd||E68CFG.cd))continue;let w=0;try{w=s.w?s.w(C):1}catch(x){w=0}if(!(w>0))continue;
+  w*=Math.pow(.5,e68Past(s.id,true));out.push([s,w])}return out}
+function e68Pick(L){const t=L.reduce((a,x)=>a+x[1],0);let r=Math.random()*t,i=0;while(i<L.length-1&&r>L[i][1]){r-=L[i][1];i++}return L[i]}
+/* params + a variant she has not seen lately (this life first, then the last five lives) */
+function e68Make(s){const e=e68();let p=null;try{p=s.pp?s.pp():{}}catch(x){p=null}if(!p)return null;const V=s.v||[""];
+ let all=[...V.keys()];if(s.vf){let ok=null;try{ok=s.vf(p)}catch(x){}if(ok&&ok.length)all=all.filter(i=>ok.includes(i));else if(ok)return null}const used=e.vu[s.id]||[];let pool=all.filter(i=>!used.includes(i));if(!pool.length){pool=all.slice();e.vu[s.id]=(e.vu[s.id]||[]).filter(i=>!all.includes(i))}
+ const fresh=pool.filter(i=>!e68Past(s.id+":"+i));p.vi=pick(fresh.length?fresh:pool);
+ const d=mkP("e68"+s.id,p);if(!d)return null;e.cd[s.id]=wk();(e.vu[s.id]=e.vu[s.id]||[]).push(p.vi);e.n++;if(s.big)e.bigM=S.turn;e68Mark(s.id+":"+p.vi);return d}
+function e68Fire(fams){const L=e68Cands(fams);for(let t=0;t<4&&L.length;t++){const x=e68Pick(L);L.splice(L.indexOf(x),1);const d=e68Make(x[0]);if(d)return [d,x[0]]}return null}
+function e68Push(d,s,front){const m={t:s.t||FAM6[s.fam]||"Chuyện trong cung",h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp};if(front)Q.unshift(m);else Q.push(m);return m}
+/* follow-ups: a template flagged fu fires on its due tuần (params carried) */
+function fu6(id,dt,p){const e=e68();e.fu.push({id,at:wk()+dt,p:p||{}})}
+function e68FuTick(){const e=e68(),now=wk();for(const f of e.fu.slice()){if(f.at>now)continue;e.fu.splice(e.fu.indexOf(f),1);const s=E68I[f.id];if(!s)continue;const p=Object.assign({},f.p);if(p.vi==null)p.vi=R((s.v||[""]).length);const d=mkP("e68"+s.id,p);if(d){e68Push(d,s);return true}}return false}
+/* the stock visit is sometimes swapped for a j68 event (same number of modals) */
+(function(){const a0=approachOne;approachOne=function(){try{if(e68On()&&!window.__e68off&&roll(E68CFG.swap*100)){const r=e68Fire(["visit","day","serv","rumor","kid","emp"]);if(r){const[d,s]=r;return{t:s.t||FAM6[s.fam],h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp}}}}catch(x){console.error(x)}return a0.apply(this,arguments)}})();
+/* the tuần tick */
+function e68Tick(){const e=e68();if(!e)return;e.tick=(e.tick||0)+1;let added=0;
+ if(Q.length>2)return;
+ try{if(e68FuTick()){evBusyMark();return}}catch(x){console.error(x)}
+ if(evBusy()||!roll(E68CFG.p*100))return;const r=e68Fire(null);if(r){e68Push(r[0],r[1]);if(r[1].big)evBusyMark()}}
+(function(){const e0=endTurn;endTurn=function(){const w0=S&&!S.dead?wk():null;const r=e0.apply(this,arguments);try{if(e68On()&&!window.__e68off&&w0!=null&&wk()!==w0){e68Tick();if(Q.length&&$("modal").hidden)showModal()}}catch(x){console.error(x)}return r}})();
+/* ---------- debugging / testing helpers (in-page) ---------- */
+window.e68Test=function(id,p){const s=E68I[id];if(!s)return null;const d=e68Make(s);if(d){e68Push(d,s,true).must=1;showModal()}return !!d};
+window.e68Count=function(){let v=0;for(const s of E68)if(s.fam!=="plot")v+=(s.v||[""]).length;return{templates:E68.length,variants:v,quests:Q68.length,questVariants:Q68.reduce((a,q)=>a+(q.v||[""]).length,0)}};
+
+/* ================= SHARED HELPERS for the other content modules (j67 stories, j70 chains, j71 merit, j72 quests) =================
+   evPickActor(spec) -> actor {o,n,f,k,id} | null. spec = {kind:"rv"|"sv"|"maid"|"emp"|"th"|"doc"|"eun"|"ksp"|"kid"|"man", f:filter(obj), w:weight(obj), rw:"thái y"|... (men only)}
+      o = the live object, n = display name, f = portrait face for pframe/who, k = kind, id = what to store in saved params (rival id, servant sid, kid name, man id)
+   evActor(kind,id) -> the same object from saved params (null if gone).  evRelTok(actor,n) / evRelDo(actor,n): coloured relation token + the real change.
+   evChoice(name,spec) -> a dilemma option with gain AND cost/risk line (see c6 above: c,p,w,l,r,lr,wt,lt,k,ok,no,wl,ll).
+   evCooldown(key,weeks) -> true and marks key used now if it was not used in the last `weeks` tuần (per life); evCooldownLeft(key,weeks) -> tuần left (0 = ready), no mark.
+   evHistSeen(key) -> how many of the previous 5 lives saw key (localStorage 'ctm-e68h'); evHistMark(key) marks it for this life.
+   evBusy() -> true if a big beat already fired this tuần (by j68 or anyone calling evBusyMark()), or storyBusy() says so; evBusyMark() claims the tuần.
+   evBusyMonth() -> true if a big beat fired this month (e68Busy, for once-a-month beats). */
+function evPickActor(sp){sp=sp||{};const k=sp.kind||"rv";let id=null;
+ if(k==="rv")id=rv6(sp.f,sp.w);else if(k==="sv")id=sv6(sp.f);else if(k==="kid")id=kid6(sp.f);else if(k==="man"){const L=(S.men||[]).filter(m=>m.alive!==false&&(!sp.rw||m.rw===sp.rw)&&(!sp.f||sp.f(m)));id=L.length?pick(L).id:null}
+ else{const a=A6(k);return a&&(!sp.f||sp.f(a.o))?Object.assign(a,{id:null}):null}
+ if(id==null)return null;const a=A6(k,id);return a?Object.assign(a,{id}):null}
+function evActor(kind,id){const a=A6(kind,id);return a?Object.assign(a,{id}):null}
+const evRelTok=relTok,evRelDo=relDo,evChoice=c6;
+function evCooldownLeft(key,weeks){const e=e68();if(!e)return 0;e.kc=e.kc||{};const t=e.kc[key];return t==null?0:Math.max(0,weeks-(wk()-t))}
+function evCooldown(key,weeks){const e=e68();if(!e)return false;if(evCooldownLeft(key,weeks)>0)return false;e.kc[key]=wk();return true}
+function evHistSeen(key){return e68Past(key)}
+function evHistMark(key){if(S)e68();e68Mark(key)}
+function evBusyMark(){const e=e68();if(e)e.busyWk=wk()}
+function evBusy(){const e=S&&S.e68;return !!(e&&e.busyWk===wk())||e68Story()}
+function evBusyMonth(){return e68Busy()}
+/* ================= GLOBAL EVENT SCHEDULER (owner 11/14): applies to every event source by gating the one modal queue =================
+   - Optional events (j7 ev events and the stock dilemmas, j24 'Có người đến' visits, servant causes, court pop-ups j55, princess moments j54,
+     servant-road events j42, j68 events, and anything a module tags {opt:1}) show at most ONE per buổi and at most E68S.day per day;
+     at day start they are spread to later buổi; overflow waits in a short holding list and is dropped when stale (an info-only one goes to the Nhật ký).
+   - Mandatory ones (endings, news digest, pregnancy/birth, Thánh chỉ, festivals, story beats, tests, anything the player opened, anything tagged {must:1}) are never held.
+   - Cooldowns: the same template not within E68S.tpl tuần; the same exact event (same actor + same text) not within E68S.key tuần (servant mishaps ~ once a season);
+     the same actor is not featured in two optional events in a row. */
+const E68S={day:2,tpl:5,key:10,stale:6,hold:4};
+const OPTPID=new Set(["vase","coldletter","embezzle","tuyen","thbenh","loveletter","h54met","h54sad","h54tut","h54show","cnvScold","cnvBribe","cnvFrame","cnvBlack","cnvFest","cnvWed"]);
+const OPTT=/^(Có người đến|Kẻ hầu xin|Hoàng thượng đến|Thái hậu triệu|Một ánh mắt|Việc của kẻ hầu|Việc khó xử|Hàng chợ đen|Thánh thượng ban thưởng|Thái hậu ban thưởng)$/;
+function evOptional(m){if(!m||m.must||m.nl||/end|pcm|nlcard/.test(m.cls||""))return false;if(m.opt)return true;
+ if(m.pid){if(/^e68/.test(m.pid)||OPTPID.has(m.pid))return true;try{if(EVI[m.pid]&&!/^(doanngo|trungcuu|vulan|dongchi|thbirthday|phoenix)$/.test(m.pid))return true}catch(e){}return false}
+ return OPTT.test(m.t||"")}
+function evTxt(m){return String(m.h||"").replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim()}
+function evActorKey(m){const w=m.who;if(w){if(w.w)return w.w.join(":");if(w.nm)return "n:"+w.nm}const t=evTxt(m);const v=(rivals||[]).find(r=>t.includes(r.name));if(v)return "r:"+v.id;const s=(S.staff||[]).find(x=>x.name&&t.includes(x.name));return s?"s:"+s.sid:""}
+function evNames(t){let x=t;try{(rivals||[]).forEach(r=>{x=x.split(r.name).join("X")});(S.staff||[]).concat(S.maid?[S.maid]:[]).forEach(s=>{if(s.name)x=x.split(s.name).join("X")})}catch(e){}return x}
+function evKeys(m){const t=evTxt(m);const tpl=m.pid?"p:"+m.pid.replace(/^e68/,"e:"):"t:"+(m.t||"")+"|"+evNames(t).slice(0,26);return{tpl,key:tpl+"|"+evActorKey(m)+"|"+t.slice(0,40)}}
+function evS(){const e=e68();e.sch=e.sch||{tpl:{},key:{},last:"",bk:"",day:-1,dn:0};return e.sch}
+function bk6(){return wk()*3+(S.buoi||0)}
+let EVHOLD=[],EVLAST=null;
+function evDropInfo(m){if(!m.opts&&m.h){try{log(evTxt(m).slice(0,200))}catch(e){}}}
+function evGate(){if(!S||S.dead||window.__e68off||!Q.length)return;const sc=evS();const b=bk6(),day=wk();if(sc.day!==day){sc.day=day;sc.dn=0}
+ const now=wk();let keepOpt=Q[0]&&Q[0]===EVLAST&&evOptional(Q[0]);const hasMust=Q.some(m=>!evOptional(m)&&!m.__seen);
+ for(let i=0;i<Q.length;i++){const m=Q[i];if(m===EVLAST&&i===0)continue;if(!evOptional(m))continue;
+  const K=evKeys(m);const tl=sc.tpl[K.tpl],kl=sc.key[K.key];
+  if((tl!=null&&now-tl<E68S.tpl)||(kl!=null&&now-kl<E68S.key)){Q.splice(i,1);i--;evDropInfo(m);continue}
+  const ak=evActorKey(m);
+  const atDayStart=(S.buoi||0)===0&&!m.__held&&(hasMust||roll(50));
+  const block=keepOpt||sc.bk===b||sc.dn>=E68S.day||(ak&&ak===sc.last)||atDayStart;
+  if(block){Q.splice(i,1);i--;if(EVHOLD.length<E68S.hold&&sc.dn<E68S.day+1)EVHOLD.push({m,at:now,K});else evDropInfo(m);continue}
+  keepOpt=true}
+ const m=Q[0];if(m&&m!==EVLAST&&evOptional(m)){const K=evKeys(m);sc.tpl[K.tpl]=now;sc.key[K.key]=now;sc.last=evActorKey(m);sc.bk=b;sc.dn++;try{evHistMark(K.tpl)}catch(e){}}
+ if(m)m.__seen=1;EVLAST=m||null}
+/* release one held event at a later buổi, at random, if nothing else is up */
+function evRelease(){if(!S||S.dead||Q.length||S.mg||!EVHOLD.length)return;const sc=evS();const now=wk();EVHOLD=EVHOLD.filter(h=>{if(now-h.at>E68S.stale){evDropInfo(h.m);return false}return true});
+ if(!EVHOLD.length||sc.bk===bk6()||(sc.day===now&&sc.dn>=E68S.day)||!roll(65))return;const h=EVHOLD.shift();h.m.__held=1;Q.push(h.m);showModal()}
+(function(){const s0=showModal;showModal=function(){try{evGate()}catch(x){console.error(x)}return s0.apply(this,arguments)}})();
+(function(){const n0=nextBuoi;nextBuoi=function(){const r=n0.apply(this,arguments);try{evRelease()}catch(x){console.error(x)}return r}})();
+(function(){const t0=typeof tdPop==="function"?tdPop:null;if(!t0)return;tdPop=function(){const n=Q.length;const r=t0.apply(this,arguments);if(Q.length>n)Q[Q.length-1].opt=1;return r}})();
+(function(){const s0=start;start=function(){EVHOLD=[];EVLAST=null;return s0.apply(this,arguments)}})();
+/* ================= j68e: common event content, part 1 (đời thường, khách đến, Hoàng thượng) =================
+   Every option: a real gain and a real cost or risk; odds by the ladder; outcomes and reports are true (NPCs may believe wrong things, the game never lies). */
+const T6=(v,t)=>tr6(v).includes(t);
+const fr6=v=>aff(v,S)>=10,fo6=v=>{try{return bandOf(danger(v,S))>=1}catch(e){return aff(v,S)<-10}};
+const sea6=s=>SEASON[S.month-1]===s;
+const hasStaff6=n=>(S.staff||[]).length>=(n||1);
+
+/* ---------- ĐỜI THƯỜNG ---------- */
+EV6("gossipTea","day",{a:["rv"],pp:()=>{const a=rv6(fr6,v=>5+aff(v,S)/5);return a==null?null:{a0:a}},w:C=>2,
+ v:["{A} ghé uống trà, kể nhỏ chuyện cung nọ cung kia, rồi hỏi ngươi nghĩ gì về Hoàng hậu.","Chiều {S}, {A} mang hộp mứt sang, ngồi bên hiên than thở chuyện bị cung nhân khinh nhờn, muốn nghe ngươi khuyên.","{A} sang chơi cờ, giữa ván buột miệng kể một chuyện cũ của phi tần đã khuất.","{A} rủ ngươi ngồi bên cửa sổ thêu hoa, vừa thêu vừa dò xem ngươi có định tranh ghế trống không.","Trời {W}, {A} đội áo tơi sang cung ngươi tránh mưa, nán lại kể chuyện vặt đến tối."],
+ o:X=>[c6("Nghe và giữ kín",{c:{suc:-3},r:[[X.A,6]],k:[R6("mất nửa buổi chiều")]}),
+  c6("Gợi chuyện để dò tin",{p:od(40+S.tamco/3),w:{mat:1},r:[[X.A,2]],lr:[[X.A,-6]],lt:[R6("nàng thấy ngươi tò mò quá")],ok:()=>`${X.A.n} buột miệng kể vài chuyện có ích. Tai mắt +1.`}),
+  c6("Khéo cáo mệt",{w:{suc:4},r:[[X.A,-3]]})]});
+EV6("giftArrive","day",{a:["rv"],pp:()=>{const a=rv6(v=>aff(v,S)>-20);return a==null?null:{a0:a}},w:C=>1.6,
+ v:["Cung nữ của {A} mang sang một hộp gỗ đàn hương, trong có hai lọ hương liệu, nói là quà đáp lễ.","{A} sai người gửi tặng một xấp lụa Tô Châu, kèm lời nhắn 'chút lòng thành'.","Một hộp điểm tâm hoa quế đề tên {A} được đưa tới, còn ấm.","{A} gửi sang một chậu lan quý, nói hoa nở đúng lúc nhớ đến ngươi."],
+ o:X=>[c6("Nhận, đáp lễ hậu hĩnh",{c:{bac:-20},r:[[X.A,8]],w:{danh:1}}),
+  c6("Nhận, cho người thử trước",{c:{suc:-2},w:{tamco:1},r:[[X.A,2]],k:[R6(`nếu ${X.A.n} biết, có thể phật ý`)],ok:()=>`Đồ của ${X.A.n} sạch sẽ, không có gì lạ.`}),
+  c6("Khéo trả lại",{w:{duc:1},r:[[X.A,-6]]})]});
+EV6("lostItem","day",{a:["maid"],pp:()=>S.maid?{a0:0,it:R(4)}:null,w:C=>1.4,
+ v:["Sáng ra {M} tái mặt: chiếc trâm bạc ngươi hay cài không thấy đâu, hộp trang sức vẫn khóa.","{M} báo: chuỗi hạt trầm Thái hậu ban đêm qua đứt dây, lạc mất mấy hạt dưới gầm sập.","Chiếc quạt lụa ngươi đề thơ để quên ở đình nghỉ, cung nhân đi tìm về tay không.","Đôi hoa tai ngọc trai mất một chiếc sau buổi tắm hoa ở hậu viện."],
+ o:X=>[c6("Lục soát kỹ cả cung",{c:{suc:-6},p:od(55+S.mat*4),w:{tamco:1},wt:[G6("tìm lại được")],lr:[[X.A,-4]],l:{danh:-1},lt:[R6("cung nhân bất bình vì bị nghi")],ok:()=>"Món đồ rơi trong kẽ ván sàn; tìm lại được."}),
+  c6("Thưởng ai tìm được",{c:{bac:-10},p:80,w:{danh:1},wt:[G6("tìm lại được")],l:{bac:-5},lt:[R6("món đồ mất hẳn")],ok:()=>"Một tiểu thái giám nhặt được, mang trả lấy thưởng."}),
+  c6("Thôi, bỏ qua",{w:{duc:1},wt:[G6("cung nhân yên lòng")],k:[R6("mất món đồ")]})]});
+EV6("sickServant","serv",{a:["sv"],pp:()=>{const a=sv6();return a==null?null:{a0:a}},w:C=>(C.sea==="Đông"||C.sea==="Hạ"?2:1),
+ v:["{A} sốt cao từ đêm, nằm mê man ở dãy nhà hầu phía sau.","{A} ho ra máu, các cung nhân sợ lây, không ai dám lại gần.","{A} trượt chân ngã ở bậc đá, sưng cả cổ chân, vẫn cố đứng dậy làm việc.","{A} bị trúng nắng khi đi lấy nước, ngất ngay ở giếng."],
+ o:X=>[c6("Mời thái y chữa",{c:{bac:-25},r:[[X.A,15]],w:{duc:2}}),
+  c6("Tự sắc thuốc cho",{c:{suc:-8},p:od(35+(S.arts.y||0)*15),r:[[X.A,12]],w:{duc:1},lr:[[X.A,-2]],lt:[R6("bệnh kéo dài thêm")],ok:()=>`Thuốc ngươi sắc có hiệu nghiệm; ${X.A.n} đỡ hẳn.`}),
+  c6("Cho nghỉ, giảm việc",{w:{duc:1},r:[[X.A,5]],k:[R6("cung thiếu người hầu vài hôm")]}),
+  c6("Bắt làm tiếp",{w:{suc:2},r:[[X.A,-12]],k:[R6("Đức -1")],ok:()=>{apply({duc:-1});return `${X.A.n} gượng làm, trong lòng oán.`}})]});
+EV6("maidQuarrel","serv",{a:["sv","sv"],pp:()=>{const L=(S.staff||[]).filter(s=>s.sid!=null);if(L.length<2)return null;const a=pick(L),b=pick(L.filter(x=>x!==a));return{a0:a.sid,a1:b.sid}},w:C=>1.5,
+ v:["{A} và {B} cãi nhau to ở sân sau, chỉ vì một tấm khăn tay ai cũng nhận là của mình.","{B} tố {A} ăn vụng điểm tâm dâng ngươi; {A} khóc lóc kêu oan.","{A} và {B} giành nhau phần trực đêm gần lò sưởi, suýt xô xát.","Lời qua tiếng lại giữa {A} và {B} về chuyện ai được ngươi thưởng nhiều hơn đã lan ra ngoài cung."],
+ o:X=>[c6(`Xử nghiêng về ${X.A.n}`,{r:[[X.A,8],[X.B,-10]]}),c6(`Xử nghiêng về ${X.B.n}`,{r:[[X.B,8],[X.A,-10]]}),
+  c6("Phạt cả hai, giữ phép",{w:{danh:1},r:[[X.A,-4],[X.B,-4]]}),
+  c6("Hòa giải, mỗi người một phần",{c:{bac:-8},p:od(45+S.duc/3),r:[[X.A,4],[X.B,4]],lr:[[X.A,-3],[X.B,-3]],lt:[R6("cả hai vẫn ấm ức")]})]});
+EV6("strayCat","day",{a:[],pp:()=>({}),w:C=>C.sea==="Đông"?1.6:1,
+ v:["Một con mèo mướp lạc vào cung, nằm cuộn tròn trên gối tựa của ngươi, không chịu đi.","Đêm {S}, tiếng mèo con kêu dưới gầm hiên; {M} bế lên một con mèo trắng gầy trơ xương.","Con mèo vàng của ai đó cắp mất con cá Hoàng thượng ban, chạy vào bụi trúc.","Có con mèo đen hay trèo lên mái cung ngươi; cung nhân thì thầm là điềm gở."],
+ o:X=>[c6("Giữ lại nuôi",{c:{bac:-5},w:{duc:1,suc:3},k:[R6("nuôi mèo dễ làm kinh thai nếu có mang (cung nhân bảo vậy)")]}),
+  c6("Cho người mang đi xa",{w:{tamco:1},k:[R6("cung nhân bảo ngươi nhẫn tâm: Đức -1")],ok:()=>{apply({duc:-1});return "Con mèo được đưa ra ngoài cửa Tây Hoa."}}),
+  c6("Dò xem mèo của ai",{c:{suc:-3},p:60,w:{danh:1},wt:[G6("trả đúng chủ, được tiếng tử tế")],lt:[R6("mất công vô ích")],l:{suc:-2}})]});
+EV6("brokenHeirloom","day",{a:["sv"],pp:()=>{const a=sv6();return a==null?null:{a0:a,it:R(4)}},w:C=>1.2,
+ v:["{A} lau dọn sơ ý làm vỡ chiếc bình men lam của mẹ ngươi để lại.","Tiếng choang vang lên: {A} đánh rơi đôi chén ngọc Hoàng thượng ban hôm sinh thần ngươi.","{A} làm nứt chiếc gương đồng hồi môn của ngươi khi bưng nước.","Bức họa Thái hậu ban bị {A} làm đổ mực loang một góc."],
+ o:X=>[c6("Tha, cho người sửa",{c:{bac:-20},r:[[X.A,12]],w:{duc:2}}),
+  c6("Phạt quỳ nửa ngày",{w:{danh:1},r:[[X.A,-10]]}),
+  c6("Giấu chuyện, tự chắp lại",{c:{suc:-5},p:od(40+(S.arts.hoa||0)*10),w:{tai:1},r:[[X.A,6]],lt:[R6("vết nứt lộ rõ; nếu người ban hỏi đến thì khó ăn nói")],l:{danh:-1}})]});
+EV6("spoiledFood","day",{a:["sv"],pp:()=>{const a=sv6();return a==null?null:{a0:a}},w:C=>C.sea==="Hạ"?2:.8,
+ v:["Ngự thiện phòng gửi sang mâm cơm đã ôi; {A} ngửi thấy mùi chua, không dám dọn lên.","Phần yến sào tháng này của cung ngươi bị bớt mất một nửa; {A} nói thái giám Ngự thiện phòng ăn chặn.","Canh gà đưa sang nguội ngắt, váng mỡ đông lại; {A} bất bình thay ngươi.","Nội vụ phủ cấp than {S} toàn than ẩm khói mù, {A} ho sặc sụa."],
+ o:X=>[c6("Sai người đi hỏi tội",{p:od(30+S.rank*8+S.danh/4),w:{danh:2},wt:[G6("từ nay phần của cung ngươi đủ")],l:{danh:-2},lt:[R6("bị đồn là khó tính")],r:[[X.A,4]]}),
+  c6("Bỏ tiền mua bù",{c:{bac:-15},w:{suc:3},r:[[X.A,3]]}),
+  c6("Nhịn cho êm",{w:{duc:1},k:[R6("Sức -3"),R6("bên dưới dễ lấn lướt")],ok:()=>{apply({suc:-3});return "Ngươi nhịn, ăn tạm cho qua."}})]});
+EV6("leakRoof","sea",{a:[],pp:()=>({}),w:C=>(C.wx.f===1||C.wx.f===3||C.wx.f===4)?3:0,
+ v:["Mưa {W} suốt đêm, mái ngói tẩm cung dột, nước nhỏ tong tong xuống án thư.","Tuyết dày đè gãy một cành mai cổ trước sân, mái hiên phía tây sụt một góc.","Gió giông thổi bật cánh cửa sổ, tranh chữ trên vách ướt nhòe.","Sân sau ngập nước, hũ gạo và than trong kho ẩm hết."],
+ o:X=>[c6("Xin Nội vụ phủ sửa gấp",{p:od(35+S.rank*9),w:{suc:3},wt:[G6("sửa xong trong tuần")],l:{suc:-4},lt:[R6("bị hẹn lần lữa")]}),
+  c6("Bỏ bạc thuê thợ ngay",{c:{bac:-30},w:{suc:4,danh:1}}),
+  c6("Cùng cung nhân tự che chắn",{c:{suc:-6},w:{maid:5,duc:1}})]});
+EV6("letterHome","day",{a:[],pp:()=>({}),w:C=>1,
+ v:["Thư nhà gửi vào: mẹ ngươi ốm, cha xin ngươi đừng lo, nhưng chữ run run.","Người nhà nhắn vào: em trai ngươi thi hỏng, muốn ngươi xin cho một chân thư lại.","Thư nhà kể ruộng vườn mất mùa, cả nhà thắt lưng buộc bụng.","Cha ngươi gửi thư dặn dò: trong cung giữ mình, chớ kết bè kết phái."],
+ o:X=>[c6("Gửi bạc về nhà",{c:{bac:-30},w:{duc:3},wt:[G6("nhà yên lòng")]}),
+  c6("Viết thư an ủi",{c:{suc:-2},w:{duc:1,tai:1}}),
+  c6("Xin Hoàng thượng ân điển",{p:od(25+S.sung/2),w:{an:2,danh:1},wt:[G6("ngài ban thuốc quý về nhà")],l:{sung:-3},lt:[R6("ngài cho là ngươi cậy sủng")]})]});
+EV6("eunuchSqueeze","day",{a:["eun"],pp:()=>({a0:0}),w:C=>C.rank<=3?2:.4,
+ v:["Thái giám phát bổng lộc tháng này đưa thiếu, cười nhạt: 'Lệ ở đây phải có chút trà nước.'","Người của {A} úp mở: muốn thẻ tên ngươi nằm trên cùng mâm thẻ bài thì nên biết điều.","Thái giám coi kho cố tình đưa vải cũ thay vải mới, chờ ngươi nhét bạc.","Tiểu thái giám truyền chỉ đứng mãi không đi, rõ ràng chờ tiền thưởng."],
+ o:X=>[c6("Đưa bạc cho xong",{c:{bac:-15},w:{suc:2},wt:[G6("được việc, hắn nể mặt")]}),
+  c6("Mắng thẳng mặt",{p:od(35+S.rank*8+S.danh/3),w:{danh:2},l:{danh:-1,sung:-1},lt:[R6("hắn thù, rỉ tai bên trên")]}),
+  c6("Ghi lại, mách Tổng quản",{c:{suc:-2},p:od(40+S.mat*5),w:{mat:1},wt:[G6("hắn bị đổi đi")],lt:[R6("Tổng quản bao che")],l:{danh:-1}})]});
+EV6("embroidery","day",{a:["rv"],pp:()=>{const a=rv6();return a==null?null:{a0:a}},w:C=>1,
+ v:["Cục Thượng y nhờ các cung thêu góp một vạt cho bức bình phong mừng thọ; {A} đã thêu xong phần mình, đẹp lạ.","{A} khoe chiếc túi thơm thêu uyên ương, hỏi ngươi có muốn đổi mẫu thêu không.","Cung nữ đồn {A} thêu áo tặng Hoàng thượng; ngươi có nên thêu một chiếc khác?","Ngươi được giao thêu đôi gối mừng một vị thân vương; {A} cùng được giao, ai nhanh hơn sẽ được khen."],
+ o:X=>[c6("Thêu thật kỹ, thức khuya",{c:{suc:-10},p:od(30+S.tai/2+S.sac/4),w:{danh:3,sung:1},l:{danh:-1},lt:[R6("mũi thêu vội, bị chê")]}),
+  c6("Thuê thợ thêu ngoài cung",{c:{bac:-35},w:{danh:2},k:[R6("lộ ra thì mất mặt")]}),
+  c6(`Rủ ${X.A.n} thêu chung`,{c:{suc:-5},r:[[X.A,6]],w:{danh:1},k:[R6("công chia đôi")]})]});
+EV6("flowerBloom","sea",{a:[],pp:()=>({}),w:C=>(C.sea==="Xuân"||C.sea==="Thu")?2:.5,
+ v:["Khóm mẫu đơn trước sân nở cùng lúc chín bông, cung nhân bảo điềm lành.","Hoa quỳnh trong chậu sắp nở đêm nay, chỉ nở một lần rồi tàn.","Rặng cúc vàng sau cung nở rộ, ong bướm kéo về.","Cây mai già tưởng chết bỗng trổ nụ giữa {S}."],
+ o:X=>[c6("Mời Hoàng thượng thưởng hoa",{p:od(30+S.sung/2+mm()),w:{sung:4},l:{danh:-1},lt:[R6("ngài bận, cả cung biết ngươi bị từ chối")]}),
+  c6("Ngắt hoa dâng Thái hậu",{c:{suc:-2},w:{th:4},k:[R6("vườn trơ trụi, cung nhân tiếc")]}),
+  c6("Mời các phi tần ngắm hoa",{c:{bac:-15},w:{danh:2},k:[R6("người ghen thêm: phi tần ghen +2")],ok:()=>{ghenAll(2);return "Buổi thưởng hoa vui vẻ, ai cũng khen cung ngươi."}})]});
+EV6("servGamble","serv",{a:["sv"],pp:()=>{const a=sv6(s=>s.tr==="tham"||R(3)===0);return a==null?null:{a0:a}},w:C=>1,
+ v:["{A} bị bắt quả tang đánh bạc với đám thái giám gác cổng, thua sạch tiền tháng.","Người ta đồn {A} mang đồ cũ của cung ngươi ra ngoài bán lấy tiền tiêu.","{A} nợ tiền một thái giám bên Ngự thiện phòng, hắn đến tận cửa đòi.","{A} lén nhận bạc của người lạ để chuyển thư ra ngoài cung."],
+ o:X=>[c6("Trả nợ, răn đe",{c:{bac:-15},r:[[X.A,10]],k:[R6("dễ quen thói")]}),
+  c6("Phạt theo phép cung",{w:{danh:1},r:[[X.A,-12]]}),
+  c6("Tra hỏi cho ra lẽ",{c:{suc:-3},p:od(45+S.tamco/3),w:{mat:1},wt:[G6("biết được ai đứng sau")],r:[[X.A,-4]],lr:[[X.A,-8]],lt:[R6("hắn sinh lòng oán")]})]});
+
+/* ---------- KHÁCH ĐẾN (people come to her) ---------- */
+EV6("proudVisit","visit",{a:["rv"],pp:()=>{const a=rv6(v=>T6(v,"Kiêu ngạo")||v.rank>S.rank);return a==null?null:{a0:a}},w:C=>1.3,
+ v:["{A} ghé qua, đứng giữa sân chê cây cảnh cung ngươi quê mùa, cười bảo nên học cung nàng.","{A} khoe chiếc trâm Hoàng thượng mới ban, cố ý hỏi ngươi được ban gì gần đây.","{A} đến 'thăm', ngồi ghế chủ vị, sai cung nữ của ngươi pha trà lại vì 'nhạt'.","Kiệu của {A} dừng trước cửa, nàng không xuống, chỉ cho người hỏi sao lâu không sang thỉnh an."],
+ o:X=>[c6("Nhún nhường tiếp đãi",{c:{bac:-10},w:{duc:2},r:[[X.A,5]],k:[R6("cung nhân thấy ngươi yếu thế")]}),
+  c6("Đáp lời sắc sảo",{p:od(35+S.tai/3+S.tamco/4),w:{danh:2},r:[[X.A,-6]],l:{danh:-2},lt:[R6("bị nắm thóp lời nói")],lr:[[X.A,-8]]}),
+  c6("Cáo bệnh không tiếp",{w:{suc:3},r:[[X.A,-4]]})]});
+EV6("kindVisit","visit",{a:["rv"],pp:()=>{const a=rv6(v=>T6(v,"Hiền lành")||T6(v,"Nhu mì")||fr6(v));return a==null?null:{a0:a}},w:C=>1.4,
+ v:["{A} mang canh hạt sen sang, bảo dạo này thấy ngươi gầy đi.","{A} rủ ngươi cùng chép kinh cầu phúc cho Thái hậu.","{A} sang hỏi cách ướp trà hoa nhài, ngồi nán lại rất lâu như có điều muốn nói.","{A} nhờ ngươi xem giúp bài thơ nàng định dâng Hoàng thượng."],
+ o:X=>[c6("Tiếp chuyện cả buổi",{c:{suc:-4},r:[[X.A,8]]}),
+  c6("Nhận lời giúp hết lòng",{c:{suc:-6},p:od(40+S.tai/2),r:[[X.A,12]],w:{danh:1},lr:[[X.A,-2]],lt:[R6("giúp không tới, nàng hơi buồn")]}),
+  c6("Hẹn hôm khác",{w:{suc:2},r:[[X.A,-3]]})]});
+EV6("slyVisit","visit",{a:["rv"],pp:()=>{const a=rv6(v=>T6(v,"Hiểm độc")||T6(v,"Đa nghi")||fo6(v));return a==null?null:{a0:a}},w:C=>1.2,
+ v:["{A} sang chơi, mắt cứ đảo quanh án thư và hộp thuốc của ngươi.","{A} niềm nở lạ thường, rủ ngươi ngày mai cùng đi dạo hồ sen lúc vắng người.","{A} hỏi han tỉ mỉ giờ giấc ngươi dùng bữa, ngủ nghỉ, 'để tiện sang thăm'.","{A} mang quà sang, nhất định đòi tận tay cài trâm cho ngươi."],
+ o:X=>[c6("Tiếp, nhưng cho người canh chừng",{c:{suc:-4},w:{tamco:1},wt:[G6("không lọt chuyện gì ra")],r:[[X.A,2]]}),
+  c6("Dò ngược ý nàng",{p:od(35+S.tamco/2),w:{mat:1},wt:[G6(`ghi nhận ý đồ của ${X.A.n}`)],l:{danh:-1},lt:[R6("nàng biết ngươi đề phòng")],lr:[[X.A,-6]],ok:()=>{try{noteAdd(X.A.o.id,"Sang dò giờ giấc, đồ dùng của ngươi")}catch(e){}return `${X.A.n} dò hỏi quá kỹ; ngươi ghi nhớ.`}}),
+  c6("Lạnh nhạt tiễn khách",{w:{suc:2},r:[[X.A,-6]]})]});
+EV6("thMama","visit",{a:["th"],pp:()=>S.thDead?null:{a0:0},w:C=>1.2,
+ v:["Ma ma thân tín của Thái hậu ghé cung ngươi, đi một vòng nhìn từ bếp đến buồng ngủ.","Ma ma bên Đức Thọ cung mang sang một gói trà, nhắn Thái hậu nhớ đến ngươi.","Ma ma của Thái hậu đến hỏi ngươi có rảnh chép giúp vài trang kinh cho kịp ngày rằm.","Ma ma Đức Thọ cung đến, hỏi nhỏ chuyện các phi tần dạo này có ai hay lui tới Càn Thanh cung."],
+ o:X=>[c6("Biếu ma ma chút quà",{c:{bac:-15},w:{th:4}}),
+  c6("Kể thật những gì mình biết",{w:{th:5},k:[R6("người bị kể có thể biết: một phi tần mất thiện cảm -5")],ok:()=>{const v=pick(liveRivals(false));if(v)relAdd(S,v,-5);return "Ma ma ghi nhớ, về bẩm Thái hậu."}}),
+  c6("Giữ lễ, không nói nhiều",{w:{duc:1},k:[R6("Thái hậu với ngươi -1")],ok:()=>{apply({th:-1});return "Ma ma về tay không, nhưng không bắt bẻ được gì."}})]});
+EV6("docCheck","visit",{a:["doc"],pp:()=>({a0:0}),w:C=>S.suc<60?2:.8,
+ v:["Thái y {A} đến bắt mạch định kỳ, nhíu mày khi chạm cổ tay ngươi.","{A} được Thái y viện cử sang xem bệnh phong hàn mùa {S} trong cung.","{A} tình cờ đi ngang, nghe tiếng ngươi ho liền xin vào bắt mạch.","{A} mang theo đơn thuốc bổ mới, hỏi ngươi có muốn dùng thử."],
+ o:X=>[c6("Để thái y kê thuốc bổ",{c:{bac:-20},w:{suc:10}}),
+  c6("Hỏi thăm dò chuyện các cung",{c:{bac:-10},p:od(35+S.tamco/3),w:{mat:1},wt:[G6("biết cung nào hay gọi thái y")],l:{danh:-1},lt:[R6("thái y kín miệng, còn ngại ngươi")]}),
+  c6("Cảm ơn, không cần",{w:{bac:5},k:[R6("Sức không hồi thêm")],ok:()=>"Ngươi tiễn thái y, giữ lại tiền thuốc."})]});
+EV6("painter","visit",{a:["man"],pp:()=>{const a=man6("họa sư");return a==null?null:{a0:a}},w:C=>1,
+ v:["{A} vâng chỉ vẽ tranh chân dung các phi tần, đến cung ngươi trước.","{A} xin vẽ cảnh {S} trong sân cung ngươi để dâng Hoàng thượng.","{A} mang đến mấy bức họa mẫu, mời ngươi chọn thế ngồi.","{A} được Nội vụ phủ cử đến tô lại bức bình phong cũ trong cung."],
+ o:X=>[c6("Bỏ bạc nhờ vẽ cho đẹp",{c:{bac:-30},w:{sac:1,sung:2},k:[R6("người ta bảo ngươi đút lót họa sư")]}),
+  c6("Ngồi cho vẽ đúng thật",{c:{suc:-4},p:od(40+S.sac/2),w:{sung:3},l:{sung:-1},lt:[R6("bức tranh nhạt, không ai để ý")]}),
+  c6("Hỏi học vài nét bút",{c:{suc:-5},w:{tai:1},k:[R6("tiếp đàn ông lâu, dễ bị đồn")],ok:()=>{addArt("hoa",1);return `${X.A.n} chỉ cho ngươi vài nét. Họa tiến bộ.`}})]});
+EV6("musician","visit",{a:["man"],pp:()=>{const a=man6("nhạc sư");return a==null?null:{a0:a}},w:C=>1,
+ v:["{A} của Giáo phường ty mang đàn đến, nói phụng mệnh dạy một khúc mới cho yến tiệc.","{A} xin ngươi nghe thử khúc nhạc hắn vừa phổ từ bài thơ của ngươi.","{A} đến chỉnh lại dây đàn cầm trong cung ngươi.","{A} được cử sang hỏi ngươi có muốn tập múa cho buổi yến sắp tới."],
+ o:X=>[c6("Học một khúc mới",{c:{suc:-6,bac:-10},w:{tai:1},k:[R6("tốn sức")],ok:()=>{addArt("cam",1);return "Ngươi thuộc thêm một khúc. Cầm tiến bộ."}}),
+  c6("Nhờ phổ nhạc bài thơ dâng Hoàng thượng",{c:{bac:-20},p:od(30+S.tai/2),w:{sung:3,danh:1},l:{danh:-1},lt:[R6("khúc nhạc không hợp ý ngài")]}),
+  c6("Mời về sớm",{w:{duc:1},k:[R6("lỡ dịp học")],ok:()=>"Ngươi giữ lễ, mời nhạc sư về sớm."})]});
+EV6("newGirlAdvice","visit",{a:["rv"],pp:()=>{const a=rv6(v=>v.rank<S.rank&&v.rank<=2);return a==null?null:{a0:a}},w:C=>S.rank>=2?1.4:0,
+ v:["{A} mới vào cung chưa lâu, rụt rè xin ngươi chỉ bảo lễ nghi hầu Thái hậu.","{A} khóc vì bị cung nhân bắt nạt, tìm đến ngươi vì nghe nói ngươi tốt bụng.","{A} xin theo ngươi sang thỉnh an Hoàng hậu cho đỡ sợ.","{A} hỏi ngươi nên mặc gì cho yến tiệc tháng tới."],
+ o:X=>[c6("Tận tình chỉ bảo",{c:{suc:-4},r:[[X.A,12]],w:{duc:2}}),
+  c6("Nhận làm người dưới trướng",{c:{bac:-15},r:[[X.A,15]],w:{danh:1},k:[R6("người khác thấy ngươi kéo bè: phi tần ghen +2")],ok:()=>{ghenAll(2);return `${X.A.n} từ nay đi theo ngươi.`}}),
+  c6("Khuyên vài câu rồi thôi",{w:{suc:1},r:[[X.A,2]],k:[R6("lỡ một đồng minh")]})]});
+EV6("eunRequest","visit",{a:["sv"],pp:()=>{const a=sv6(s=>s.role!=="maid");return a==null?null:{a0:a}},w:C=>1,
+ v:["{A} quỳ xin ngươi nói giúp để cháu hắn được vào làm tiểu thái giám ở Ngự dược phòng.","{A} xin nghỉ ba hôm về quê chịu tang mẹ nuôi.","{A} xin ngươi đứng ra cho hắn nhận một tiểu thái giám làm con nuôi.","{A} xin chút bạc sửa mộ cha mẹ ngoài kinh."],
+ o:X=>[c6("Nhận lời giúp",{c:{bac:-15},r:[[X.A,12]]}),
+  c6("Giúp, đổi lấy tai mắt",{c:{bac:-10},p:od(45+S.tamco/3),w:{mat:1},r:[[X.A,4]],lr:[[X.A,-6]],lt:[R6("hắn thấy bị lợi dụng")]}),
+  c6("Từ chối",{w:{bac:0,suc:1},r:[[X.A,-8]]})]});
+
+/* ---------- HOÀNG THƯỢNG (moods and whims) ---------- */
+EV6("empDish","emp",{a:["emp"],pp:()=>S.sung>=15?{a0:0}:null,w:C=>1+(S.emp.mood===0?1:0),
+ v:["Hoàng thượng sai người mang sang một bát chè tổ yến ngài ăn dở, nhắn 'ngon, nàng thử'.","Ngài muốn ăn món quê ngươi; thái giám Càn Thanh cung đến hỏi cách nấu.","Ngự thiện phòng chế món cá hấp mới, ngài muốn ngươi nếm và nói thật.","Ngài bỗng thèm bánh hoa quế do chính tay phi tần làm, truyền khắp lục cung."],
+ o:X=>[c6("Tự tay vào bếp",{c:{suc:-8},p:od(40+S.tai/4+(S.arts.y||0)*6),w:{sung:4,an:1},l:{sung:-1},lt:[R6("món ăn không vừa miệng ngài")]}),
+  c6("Thuê đầu bếp giỏi làm thay",{c:{bac:-25},w:{sung:2},k:[R6("lộ ra bị chê dối")]}),
+  c6("Nói thật món ăn chưa ngon",{p:od(35+S.duc/2+mm()),w:{sung:3,danh:1},wt:[G6("ngài quý người thật thà")],l:{sung:-3},lt:[R6("ngài phật ý")]})]});
+EV6("empPoem","emp",{a:["emp"],pp:()=>S.sung>=20?{a0:0}:null,w:C=>1,
+ v:["Hoàng thượng sai thái giám mang sang một bài thơ ngài vừa viết, hỏi ngươi nên sửa chữ nào.","Ngài viết được nửa bài thơ vịnh {S}, muốn ngươi nối hai câu cuối.","Ngài đố ngươi đoán bài thơ trên quạt là của danh sĩ nào.","Ngài gửi một câu đối vế trên, chờ vế dưới trước khi lên đèn."],
+ o:X=>[c6("Nghiêm túc góp ý",{c:{suc:-3},p:od(30+S.tai/2+(S.arts.thi||0)*6),w:{sung:4,tai:1},l:{sung:-2},lt:[R6("góp ý vụng, ngài cụt hứng")]}),
+  c6("Khen hết lời",{w:{sung:1},k:[R6("ngài thấy ngươi nịnh: Danh -1")],ok:()=>{apply({danh:-1});return "Ngài cười, không nói gì thêm."}}),
+  c6("Nhờ người chấp bút",{c:{bac:-20},p:65,w:{sung:3},l:{sung:-4,danh:-2},lt:[R6("bị nhận ra nét chữ lạ")]})]});
+EV6("empSulk","emp",{a:["emp"],pp:()=>S.emp.mood>=2&&S.sung>=20?{a0:0}:null,w:C=>S.emp.mood>=2?2.5:0,
+ v:["Bãi triều, Hoàng thượng mặt lạnh như sương, ghé cung ngươi ngồi im không nói.","Ngài ném tấu chương xuống đất, rồi cho gọi ngươi sang Dưỡng Tâm điện mài mực.","Đêm khuya ngài không ngủ, đứng một mình ngoài hiên cung ngươi.","Ngài cáu gắt với cả thái giám thân cận, rồi hỏi ngươi: 'Nàng thấy trẫm có sai không?'"],
+ o:X=>[c6("Lặng lẽ ở bên, pha trà",{c:{suc:-4},p:od(45+S.duc/3+S.sung/5),w:{sung:3,an:2},l:{sung:-2},lt:[R6("ngài muốn yên tĩnh, ngươi làm phiền")]}),
+  c6("Khuyên giải chuyện triều chính",{p:od(25+S.tai/3+S.tamco/4),w:{sung:5,danh:1},l:{sung:-5},lt:[R6("hậu cung bàn chính sự, ngài giận")]}),
+  c6("Kể chuyện vui cho ngài khuây",{c:{suc:-3},p:od(40+S.sac/4+S.tai/4),w:{sung:3},l:{sung:-1},lt:[R6("chuyện không đúng lúc")]})]});
+EV6("empChess","emp",{a:["emp"],pp:()=>S.sung>=25?{a0:0}:null,w:C=>1,
+ v:["Canh hai, thái giám gõ cửa: Hoàng thượng muốn một ván cờ, ngài đang đợi ở thư phòng.","Ngài thua cờ Thân vương, muốn ngươi bày lại thế cờ cho ngài gỡ.","Ngài thách ngươi đánh cờ, cược một chiếc trâm.","Ngài muốn đánh cờ dưới giàn hoa, bảo ngươi đừng nhường."],
+ o:X=>[c6("Đánh hết sức",{c:{suc:-5},p:od(25+(S.arts.ky||0)*14+S.tamco/5),w:{sung:4,tai:1},l:{sung:-1},lt:[R6("thua, ngài cụt hứng")]}),
+  c6("Khéo để ngài thắng sát nút",{c:{suc:-5},p:od(45+S.tamco/3),w:{sung:3},l:{sung:-2},lt:[R6("ngài nhận ra bị nhường")]}),
+  c6("Cáo mệt xin hôm khác",{w:{suc:3},k:[R6("Sủng -2")],ok:()=>{apply({sung:-2});return "Ngài cho lui, hơi tiếc."}})]});
+EV6("empAsksAbout","emp",{a:["emp","rv"],pp:()=>{const b=rv6();return b==null||S.sung<25?null:{a0:0,a1:b}},w:C=>1,
+ v:["Hoàng thượng hỏi bâng quơ: 'Nàng thấy {B} là người thế nào?'","Ngài hỏi ngươi có biết vì sao {B} dạo này hay cáo bệnh.","Ngài muốn ban thưởng cho {B}, hỏi ngươi nên ban gì.","Ngài nhắc {B} múa đẹp, rồi nhìn ngươi chờ xem phản ứng."],
+ o:X=>[c6(`Nói tốt cho ${X.B.n}`,{w:{duc:2},r:[[X.B,8]],k:[R6(`ngài để ý ${X.B.n} hơn`)],ok:()=>{X.B.o.sung=cl((X.B.o.sung||30)+2,0,100);return `Ngài gật gù, nhớ đến ${X.B.n}.`}}),
+  c6("Nói thật, không thêm bớt",{w:{danh:1,duc:1},wt:[G6("ngài tin lời ngươi hơn")],k:[R6("lời thật có khi mất lòng")]}),
+  c6("Khéo nói xấu một câu",{p:od(30+S.tamco/2+S.sung/5),w:{sung:2},wt:[G6(`ngài lạnh với ${X.B.n}`)],l:{sung:-3,duc:-2},lt:[R6("ngài ghét kẻ gièm pha")],ok:()=>{X.B.o.sung=cl((X.B.o.sung||30)-3,0,100);return `Ngài nhíu mày khi nhắc đến ${X.B.n}.`}})]});
+EV6("empGiftOdd","emp",{a:["emp"],pp:()=>S.sung>=30?{a0:0}:null,w:C=>.9,
+ v:["Hoàng thượng ban cho ngươi một con vẹt biết nói 'vạn tuế', nhưng nó chỉ kêu suốt đêm.","Ngài ban một tấm áo lông chồn của nước ngoài cống, cả hậu cung nhìn ngươi khác hẳn.","Ngài ban một bộ cờ ngọc, kèm lời: 'Đánh với trẫm thì phải dùng bộ này.'","Ngài ban cho cung ngươi thêm một đầu bếp giỏi của Ngự thiện phòng."],
+ o:X=>[c6("Tạ ơn, khoe khắp các cung",{w:{danh:3},k:[R6("phi tần ghen +4")],ok:()=>{ghenAll(4);return "Cả lục cung biết ngươi được ban thưởng."}}),
+  c6("Tạ ơn, cất giữ kín đáo",{w:{duc:1,sung:1},k:[R6("không được tiếng")]}),
+  c6("Dâng lại Thái hậu",{w:{th:6},k:[R6("Sủng -1: ngài hơi phật lòng")],ok:()=>{apply({sung:-1});return "Thái hậu khen ngươi hiếu thuận."}})]});
+EV6("empIncognito","emp",{a:["emp"],pp:()=>S.sung>=45&&S.rank>=2?{a0:0}:null,w:C=>.7,big:true,
+ v:["Hoàng thượng thì thầm: đêm nay muốn cải trang ra chợ đêm ngoài cửa Đông Hoa, chỉ dẫn theo ngươi.","Ngài muốn mặc áo thường dân, cùng ngươi ra bến sông xem hội đèn.","Ngài rủ ngươi giả làm vợ chồng lái buôn, ra phố xem dân tình.","Ngài muốn đi chùa ngoài thành cầu phúc, không báo lễ bộ, chỉ ngươi theo hầu."],
+ o:X=>[c6("Theo ngài",{c:{suc:-8},p:od(55+S.tamco/4),w:{sung:6,an:3},l:{danh:-4,th:-5},lt:[R6("bị lộ; Thái hậu trách ngươi xui ngài làm liều")]}),
+  c6("Can ngài vì an nguy",{w:{duc:2,th:3},k:[R6("Sủng -3")],ok:()=>{apply({sung:-3});return "Ngài thở dài nghe lời."}}),
+  c6("Theo, nhưng báo ngầm thị vệ",{c:{bac:-20},p:od(70+S.tamco/5),w:{sung:4,an:2},l:{sung:-3},lt:[R6("ngài thấy thị vệ, mất hứng")]})]});
+EV6("empSleepRead","emp",{a:["emp"],pp:()=>S.sung>=35?{a0:0}:null,w:C=>.9,
+ v:["Ngài đến lúc chiều, bảo ngươi đọc sách cho nghe; mới vài trang ngài đã ngủ gục trên gối ngươi.","Ngài nằm nghe ngươi gảy đàn, rồi thiếp đi, tay vẫn nắm vạt áo ngươi.","Ngài ghé qua, nói chuyện thuở nhỏ, rồi ngủ quên trên trường kỷ đến giờ thượng triều.","Ngài bảo mệt, chỉ muốn ngồi trong cung ngươi uống trà, không ai được làm phiền."],
+ o:X=>[c6("Để ngài ngủ, thức canh",{c:{suc:-8},w:{sung:3,an:2}}),
+  c6("Đánh thức đúng giờ thượng triều",{w:{danh:2,duc:1},k:[R6("Sủng -1: ngài ngái ngủ, cáu")],ok:()=>{apply({sung:-1});return "Ngài kịp giờ thượng triều."}}),
+  c6("Nhân lúc ngài vui, xin ân điển",{p:od(30+S.sung/3),w:{bac:40,an:1},l:{sung:-3},lt:[R6("ngài cho là ngươi tính toán")]})]});
+/* ================= j68f: common event content, part 2 (thời tiết, triều đình, các con, kẻ hầu, tin đồn, chuyện lạ cần tra) ================= */
+/* ---------- THỜI TIẾT, MÙA ---------- */
+EV6("heatStroke","sea",{a:[],pp:()=>({}),w:C=>C.sea==="Hạ"?(C.wx.f===2?3:1.2):0,
+ v:["Nắng gắt như đổ lửa, trong cung oi nồng; ngươi chóng mặt từ sáng.","Ve kêu râm ran, nước giếng cạn dần; cung nhân xin thêm đá lạnh từ hầm băng.","Trời hầm hập, ngự hoa viên vắng tanh, chỉ có Hoàng thượng ngồi câu cá bên hồ.","Đêm hè không gió, các con trằn trọc không ngủ được."],
+ o:X=>[c6("Xin đá lạnh hầm băng",{c:{bac:-20},w:{suc:8}}),
+  c6("Ra hồ hầu Hoàng thượng",{c:{suc:-8},p:od(35+S.sung/3+mm()),w:{sung:4},l:{suc:-4},lt:[R6("say nắng, ngài sai người đưa về")]}),
+  c6("Nằm yên trong cung",{w:{suc:4},k:[R6("bỏ lỡ dịp gặp ngài: Sủng -1")],ok:()=>{apply({sung:-1});return "Ngươi nằm nghỉ, tránh nắng."}})]});
+EV6("snowDay","sea",{a:[],pp:()=>({}),w:C=>C.sea==="Đông"?2:0,
+ v:["Tuyết phủ trắng mái ngói, lò sưởi trong cung không đủ ấm, cung nhân co ro.","Mai nở trong tuyết ở góc vườn, Hoàng thượng truyền các cung làm thơ vịnh mai.","Ao sen đóng băng, các hoàng tử, công chúa đòi ra trượt băng.","Tuyết dày chặn lối sang Đức Thọ cung, lễ thỉnh an sáng nay khó đi."],
+ o:X=>[c6("Phát áo bông cho cung nhân",{c:{bac:-25},w:{maid:8,duc:2}}),
+  c6("Làm thơ vịnh mai dâng ngài",{c:{suc:-3},p:od(30+S.tai/2+(S.arts.thi||0)*6),w:{sung:3,danh:1},l:{danh:-1},lt:[R6("thơ vụng, bị so với người khác")]}),
+  c6("Vẫn lội tuyết đi thỉnh an",{c:{suc:-10},w:{th:5,duc:1}})]});
+EV6("autumnMoon","sea",{a:["rv"],pp:()=>{const a=rv6();return a==null?null:{a0:a}},w:C=>C.sea==="Thu"?2:0,
+ v:["Trăng thu sáng vằng vặc, {A} mời các cung ra đình Thủy Tạ ngâm thơ.","Gió heo may, lá phong đỏ rụng đầy lối; {A} rủ ngươi đi nhặt lá ép vào sách.","Đêm thu nghe tiếng sáo từ cung {A} vọng sang, buồn da diết.","Mùa cua béo, {A} gửi sang một giỏ cua và rượu hoa cúc."],
+ o:X=>[c6("Nhận lời, góp vui",{c:{suc:-4},r:[[X.A,7]],w:{danh:1}}),
+  c6("Mượn dịp dò lòng nàng",{p:od(35+S.tamco/2),w:{mat:1},r:[[X.A,2]],lr:[[X.A,-5]],lt:[R6("nàng thấy bị dò xét")]}),
+  c6("Ở nhà đọc sách",{w:{tai:1},r:[[X.A,-3]]})]});
+EV6("springAllergy","sea",{a:["doc"],pp:()=>({a0:0}),w:C=>C.sea==="Xuân"?1.5:0,
+ v:["Phấn hoa xuân bay khắp nơi, ngươi hắt hơi không dứt, mắt đỏ hoe.","Mưa phùn kéo dài, chăn đệm ẩm mốc, ngươi ngứa ngáy khắp người.","Hoa đào nở rộ, nhưng cung nữ nổi mẩn đỏ từng mảng.","Sương sớm lạnh, ngươi đau họng mất tiếng đúng lúc sắp có yến."],
+ o:X=>[c6(`Mời ${X.A.n} kê thuốc`,{c:{bac:-15},w:{suc:6}}),
+  c6("Tự pha trà cúc kim ngân",{c:{suc:-2},p:od(40+(S.arts.y||0)*15),w:{suc:6,tai:1},l:{suc:-4},lt:[R6("uống sai vị, nặng thêm")]}),
+  c6("Gắng chịu, che mặt the",{w:{bac:5},k:[R6("Sắc -1 vài hôm, ngài thấy ngươi tiều tụy")],ok:()=>{apply({sac:-1});return "Ngươi gắng chịu cho qua."}})]});
+EV6("stormNight","sea",{a:["emp"],pp:()=>({a0:0}),w:C=>C.wx.f===3?3:0,
+ v:["Giông tố nổi lên, sét đánh gãy cây hòe cổ trước điện; cả cung xôn xao điềm gở.","Mưa giông cả đêm, cung nhân đồn Hoàng thượng sợ sấm từ thuở nhỏ.","Gió lớn làm đổ giàn hoa, đè lên một tiểu thái giám.","Sấm chớp đùng đùng, các con khóc thét, không ai dỗ được."],
+ o:X=>[c6("Sang hầu ngài giữa đêm",{c:{suc:-6},p:od(30+S.sung/2),w:{sung:4,an:2},l:{sung:-2},lt:[R6("ngài không muốn ai thấy mình sợ")]}),
+  c6("Thắp hương cầu an cho cung",{c:{bac:-10},w:{duc:2,maid:4}}),
+  c6("Cứu người, cho thuốc men",{c:{bac:-15,suc:-4},w:{duc:3,danh:1}})]});
+/* ---------- TIN TRIỀU ĐÌNH (needs j55 court) ---------- */
+const td6=()=>{try{return tdOn()&&S.trieu&&S.trieu.H?S.trieu:null}catch(e){return null}};
+EV6("famineDonate","court",{a:[],pp:()=>td6()?{}:null,w:C=>{const T=td6();return T?(T.kho<45?2.5:.5):0},
+ v:["Tin dữ từ các tỉnh: dân đói kéo về kinh. Hoàng hậu kêu gọi lục cung giảm chi, quyên góp.","Nội vụ phủ dán cáo thị: cung nào quyên bạc cứu đói sẽ được ghi tên dâng Hoàng thượng.","Thái hậu ăn chay cầu mưa, các phi tần được mời cùng giữ chay một tháng.","Kho lúa vơi, Hộ bộ xin hậu cung bớt yến tiệc."],
+ o:X=>[c6("Quyên nhiều bạc",{c:{bac:-60},w:{danh:4,duc:3},k:[R6("cạn túi")],ok:()=>{const T=td6();if(T)T.kho=cl(T.kho+3,0,100);return "Tên ngươi đứng đầu sổ quyên góp. Kho lúa +3."}}),
+  c6("Giữ chay, giảm chi tiêu",{c:{suc:-6},w:{duc:2,th:3}}),
+  c6("Góp chút ít cho phải lễ",{c:{bac:-10},w:{danh:1},k:[R6("bị so với người quyên nhiều")]})]});
+EV6("borderNews","court",{a:["emp"],pp:()=>td6()?{a0:0}:null,w:C=>{const T=td6();return T?(T.bien<45?2.5:.4):0},
+ v:["Chiến báo từ biên ải: quân ta thua một trận, Hoàng thượng thức trắng ở Dưỡng Tâm điện.","Sứ thần phương bắc đòi thêm cống phẩm; triều đình chia hai phe chủ chiến, chủ hòa.","Tướng giữ ải xin thêm lương thảo; Hoàng thượng hỏi hậu cung có ai thêu được cờ cho quân.","Quân ta thắng trận nhỏ, ngài vui, muốn ban yến khao quân."],
+ o:X=>[c6("Thêu cờ, may áo gửi quân",{c:{suc:-10,bac:-15},w:{danh:3,sung:2},ok:()=>{const T=td6();if(T)T.bien=cl(T.bien+2,0,100);return "Áo cờ hậu cung gửi ra ải, lính tráng phấn chấn. Biên cương +2."}}),
+  c6("Mang canh khuya hầu ngài",{c:{suc:-6},p:od(40+S.sung/3),w:{sung:3,an:1},l:{sung:-1},lt:[R6("ngài bận, không tiếp")]}),
+  c6("Không dính vào việc triều",{w:{duc:1},k:[R6("mất dịp lập tiếng")]})]});
+EV6("clanFather","court",{a:["rv"],pp:()=>{const T=td6();if(!T)return null;const a=rv6();return a==null?null:{a0:a,c:pick(Object.keys(T.H))}},w:C=>td6()?1.2:0,
+ v:["Nghe đồn nhà {A} sắp bị hặc tội ăn hối lộ; nàng sang cung ngươi, mắt đỏ hoe.","{A} nhờ ngươi chuyển lời tới nhà thượng thư quen biết, xin nói đỡ cho cha nàng.","{A} khoe cha nàng vừa được thăng chức, cả nhà mở tiệc ba ngày.","{A} hỏi ngươi có biết ai trong triều đang nhắm vào nhà nàng."],
+ o:X=>[c6("Hứa giúp hết sức",{c:{suc:-4},p:od(35+S.danh/3),r:[[X.A,12]],w:{danh:1},lr:[[X.A,-3]],lt:[R6("không giúp được, nàng thất vọng")],k:[R6("dính vào phe phái")]}),
+  c6("An ủi, khuyên giữ mình",{r:[[X.A,5]],w:{duc:1},k:[R6("mất nửa buổi")]}),
+  c6("Mách lại nhà đối đầu",{p:od(40+S.tamco/3),w:{mat:1,bac:30},lr:[[X.A,-15]],lt:[R6("bị lộ, nàng thù")],r:[[X.A,-2]],k:[R6("Đức -2")],ok:()=>{apply({duc:-2});return "Nhà đối đầu trả công ngươi hậu hĩnh."}})]});
+/* ---------- CÁC CON ---------- */
+EV6("kidSick","kid",{a:["kid","doc"],pp:()=>{const a=kid6(k=>k.age<=12);return a==null?null:{a0:a,a1:0}},w:C=>(C.sea==="Đông"||C.sea==="Xuân")?2:1,
+ v:["{A} sốt nóng từ chiều, quấy khóc không chịu bú mớm.","{A} ho khan cả đêm, nhũ mẫu thức trắng.","{A} ăn phải quả lạ trong vườn, đau bụng quặn.","{A} nổi ban đỏ khắp người; thái y nghi là thủy đậu."],
+ o:X=>[c6(`Mời ${X.B.n} chữa ngay`,{c:{bac:-20},r:[[X.A,5]],ok:()=>{X.A.o.hp=cl((X.A.o.hp||80)+10,0,100);return `${X.A.n} hạ sốt, ngủ yên.`}}),
+  c6("Tự mình thức canh",{c:{suc:-12},r:[[X.A,12]],ok:()=>{X.A.o.hp=cl((X.A.o.hp||80)+6,0,100);return `${X.A.n} khỏe dần trong vòng tay mẹ.`}}),
+  c6("Giao nhũ mẫu lo",{w:{suc:2},r:[[X.A,-4]],k:[R6("con bệnh lâu hơn")],ok:()=>{X.A.o.hp=cl((X.A.o.hp||80)-4,0,100);return "Nhũ mẫu chăm, con lâu khỏi."}})]});
+EV6("kidFight","kid",{a:["kid","rv"],pp:()=>{const a=kid6(k=>k.age>=4&&k.age<=15);const b=rv6(v=>(v.kids||[]).some(k=>k.alive));return a==null||b==null?null:{a0:a,a1:b}},w:C=>1.2,
+ v:["{A} đánh nhau với con của {B} ở thư phòng, cả hai đều bầm mặt.","Con của {B} giật đồ chơi của {A}, {A} cắn tay nó chảy máu.","{A} bị con của {B} chê là đứa ngốc trước mặt thầy dạy.","{A} và con của {B} trốn học ra hồ câu cá, suýt ngã xuống nước."],
+ o:X=>[c6("Dẫn con sang xin lỗi",{c:{suc:-3},r:[[X.B,8],[X.A,-3]],w:{duc:2}}),
+  c6("Bênh con, đòi lẽ phải",{p:od(35+S.rank*7),r:[[X.A,6]],w:{danh:1},lr:[[X.B,-10]],lt:[R6("hai cung xích mích")],l:{danh:-1}}),
+  c6("Phạt con, dạy lễ",{r:[[X.A,-6]],w:{duc:1},ok:()=>{X.A.o.tal=cl((X.A.o.tal||40)+2,0,100);return `${X.A.n} chép phạt trăm chữ, ngoan hơn.`}})]});
+EV6("kidGift","kid",{a:["kid"],pp:()=>{const a=kid6(k=>k.age>=5);return a==null?null:{a0:a}},w:C=>1,
+ v:["{A} chạy sang khoe bức tranh vẽ mẹ, nét non nớt mà giống lạ.","{A} học thuộc bài thơ, muốn đọc cho mẹ nghe trước khi đọc cho phụ hoàng.","{A} nhặt được tổ chim non, xin mẹ cho nuôi.","{A} xin mẹ cho học cưỡi ngựa như các anh."],
+ o:X=>[c6("Dành cả buổi bên con",{c:{suc:-4},r:[[X.A,10]]}),
+  c6("Mời thầy giỏi dạy thêm",{c:{bac:-30},ok:()=>{X.A.o.tal=cl((X.A.o.tal||40)+5,0,100);return `${X.A.n} được thầy giỏi dạy. Tài năng của con +5.`},wt:[G6("con tiến bộ")]}),
+  c6("Dẫn con đến hầu phụ hoàng",{p:od(35+S.sung/3),w:{sung:3},r:[[X.A,4]],l:{sung:-1},lt:[R6("ngài bận, con buồn")]})]});
+/* ---------- KẺ HẦU (loyalty tests) ---------- */
+EV6("bribedServ","serv",{a:["sv","rv"],pp:()=>{const a=sv6();const b=rv6(fo6)??rv6();return a==null||b==null?null:{a0:a,a1:b}},w:C=>1.3,
+ v:["{A} lén báo: người của {B} dúi cho hắn mười lượng, hỏi giờ ngươi đi ngủ.","{A} bị bắt gặp nói chuyện thì thầm với cung nữ bên {B} ở góc tường.","{A} tự khai: {B} hứa cho hắn sang hầu cung nàng, lương gấp đôi.","{A} mang về một gói hương lạ, nói người bên {B} tặng."],
+ o:X=>[c6("Thưởng hắn vì thành thật",{c:{bac:-15},r:[[X.A,12]]}),
+  c6("Bảo hắn giả vờ nhận, làm phản gián",{p:od(40+(X.A.o.loyal||50)/2),w:{mat:1},wt:[G6(`chứng cứ ${X.B.n} +1`)],r:[[X.A,4]],lt:[R6("hắn hai lòng, lộ chuyện")],l:{danh:-1},ok:()=>{evA(S,X.B.o,1);return `${X.A.n} mang về bằng chứng ${X.B.n} mua chuộc người hầu. Chứng cứ +1.`}}),
+  c6("Đuổi hắn đi cho chắc",{w:{tamco:1},r:[[X.A,-30]],k:[R6("mất một người hầu quen việc")]})]});
+EV6("servRomance","serv",{a:["sv"],pp:()=>{const a=sv6(s=>s.role==="maid"&&(s.age||20)>=18);return a==null?null:{a0:a}},w:C=>1,
+ v:["{A} bị bắt gặp đứng nói chuyện với một thị vệ gác cửa lúc chập tối.","{A} giấu trong gối một chiếc khăn thêu tên một thị vệ.","{A} xin ngươi cho phép khi mãn hạn được gả cho người đồng hương làm lính ngự lâm.","Người ta đồn {A} có tình ý với tiểu thái giám bên Ngự thiện phòng."],
+ o:X=>[c6("Che giấu cho nàng",{r:[[X.A,15]],k:[R6("lộ ra ngươi bị trách quản người không nghiêm")]}),
+  c6("Răn dạy, giữ phép cung",{w:{danh:1},r:[[X.A,-6]]}),
+  c6("Hứa xin ân điển khi mãn hạn",{c:{bac:-10},r:[[X.A,12]],w:{duc:1}})]});
+EV6("servLeave","serv",{a:["sv"],pp:()=>{const a=sv6();return a==null?null:{a0:a}},w:C=>1,
+ v:["{A} quỳ khóc: mẹ ở quê ốm nặng, xin về thăm một chuyến, chỉ sợ không kịp.","{A} xin ngươi cho nghỉ để chịu tang cha.","{A} xin ra cung trước hạn để lo cho em nhỏ mồ côi.","{A} xin ngươi chút bạc chuộc em gái bị bán làm nô tì."],
+ o:X=>[c6("Cho về, kèm bạc",{c:{bac:-20},r:[[X.A,18]],w:{duc:2},k:[R6("cung thiếu người một tháng")]}),
+  c6("Xin Nội vụ phủ cho phép",{p:od(30+S.rank*8),r:[[X.A,10]],w:{danh:1},lr:[[X.A,-4]],lt:[R6("bị bác, nàng buồn")]}),
+  c6("Không cho",{w:{suc:1},r:[[X.A,-12]]})]});
+EV6("newServSus","serv",{a:["sv"],pp:()=>{const a=sv6();return a==null?null:{a0:a}},w:C=>1,
+ v:["{A} dạo này hay ra vào cửa sau lúc nửa đêm.","Cung nhân bảo {A} có nhiều bạc lạ, mua cả son phấn đắt tiền.","{A} lật xem thư từ trên án của ngươi khi tưởng không ai thấy.","{A} biết những chuyện trong cung ngươi mà lẽ ra không ai kể."],
+ o:X=>[c6("Cho người theo dõi",{c:{suc:-3},p:od(40+S.mat*6),w:{mat:1},wt:[G6("biết hắn có hai lòng hay không")],l:{danh:-1},lt:[R6("hắn biết bị theo dõi")],ok:()=>{const s=X.A.o;const two=!!(s.spyFor&&s.spyFor!=="me");return two?`${s.name} quả có làm tai mắt cho người khác. Ngươi đã rõ.`:`${s.name} không có hai lòng; chỉ là chuyện riêng.`}}),
+  c6("Hỏi thẳng",{p:od(35+S.danh/3),r:[[X.A,4]],lr:[[X.A,-8]],lt:[R6("hắn tủi thân hoặc giấu kín hơn")],ok:()=>{const s=X.A.o;return s.spyFor&&s.spyFor!=="me"?`${s.name} quỳ xuống khai thật đang bị người khác sai khiến.`:`${s.name} trong sạch, cảm động vì được hỏi thẳng.`}}),
+  c6("Đổi hắn đi việc khác",{w:{tamco:1},r:[[X.A,-6]],k:[R6("mất người quen việc")]})]});
+/* ---------- TIN ĐỒN (true or false; she can check; the game reports only the truth) ---------- */
+EV6("rumorPreg","rumor",{a:["rv"],pp:()=>{const a=rv6(v=>v.rank>=1);return a==null?null:{a0:a}},w:C=>1.2,
+ v:["Cung nhân xì xào: {A} có mang đã hai tháng, đang giấu.","Lời đồn: {A} lén mời bà đỡ ngoài cung vào.","Người ta bảo {A} dạo này hay nôn, chỉ ăn đồ chua.","Có tin {A} xin Thái y viện thuốc an thai."],
+ o:X=>[c6("Cho người dò cho chắc",{c:{bac:-15},p:od(45+S.mat*6),wt:[G6("biết sự thật")],w:{mat:1},l:{danh:-1},lt:[R6("bị lộ là đi dò")],ok:()=>{const v=X.A.o;return v.preg?`Dò ra: ${v.name} quả có mang (tháng ${v.preg}).`:`Dò ra: ${v.name} không có mang; lời đồn sai.`}}),
+  c6("Sang chúc mừng thăm dò",{c:{bac:-10},p:od(40+S.tamco/3),r:[[X.A,3]],wt:[G6("biết sự thật")],lr:[[X.A,-5]],lt:[R6("nàng thấy ngươi tọc mạch")],ok:()=>{const v=X.A.o;return v.preg?`${v.name} ngượng ngùng nhận là có mang.`:`${v.name} bật cười: chẳng có chuyện ấy.`}}),
+  c6("Mặc kệ lời đồn",{w:{duc:1},k:[R6("không biết thật hư")]})]});
+EV6("rumorSpy","rumor",{a:["sv"],pp:()=>{const a=sv6();return a==null?null:{a0:a}},w:C=>1,
+ v:["Có kẻ rỉ tai ngươi: {A} là tai mắt người khác cài vào.","Lời đồn trong các dãy nhà hầu: {A} đem chuyện cung ngươi kể ra ngoài.","Người bên Kính sự phòng nói nhỏ: {A} có lui tới các cung khác.","{M} nghi {A} hai lòng, nhưng không có bằng chứng."],
+ o:X=>[c6("Thử lòng bằng một tin giả",{c:{suc:-3},p:od(50+S.tamco/3),w:{tamco:1},wt:[G6("biết thật hư")],l:{danh:-1},lt:[R6("thử vụng, hắn biết")],ok:()=>{const s=X.A.o;return s.spyFor&&s.spyFor!=="me"?`Tin giả lọt ra ngoài: ${s.name} đúng là tai mắt người khác.`:`Tin giả nằm yên: ${s.name} trung thành, lời đồn sai.`}}),
+  c6("Tin hắn, thưởng an lòng",{c:{bac:-10},r:[[X.A,8]],k:[R6("nếu hắn hai lòng thì vẫn lọt tin")]}),
+  c6("Đuổi đi cho yên",{w:{suc:1},r:[[X.A,-30]],k:[R6("có thể đuổi oan người tốt")]})]});
+EV6("rumorEvidence","rumor",{a:["rv"],pp:()=>{const a=rv6(fo6)??rv6();return a==null?null:{a0:a}},w:C=>1,
+ v:["Nghe đồn {A} đang giữ thứ gì đó có thể làm hại ngươi.","Cung nữ bên {A} khoe chủ mình 'nắm thóp' một người trong lục cung.","Lời đồn: {A} sai người lục lọi đồ ngươi vứt bỏ.","Có kẻ bảo {A} đã ghi chép mọi chuyện về ngươi trong một cuốn sổ."],
+ o:X=>[c6("Mua tin từ cung nữ bên ấy",{c:{bac:-25},p:od(45+S.mat*5),wt:[G6("biết thật hư")],w:{mat:1},lt:[R6("mất bạc, không ra gì")],l:{danh:-1},ok:()=>{const n=evG(X.A.o,S);return n>0?`Thật: ${X.A.n} đang giữ ${n} chứng cứ chống lại ngươi.`:`${X.A.n} chưa có chứng cứ gì về ngươi; lời đồn sai.`}}),
+  c6("Sang làm lành",{c:{bac:-15},r:[[X.A,8]],k:[R6("nếu nàng có ý hại, làm lành chưa chắc đủ")]}),
+  c6("Bỏ ngoài tai",{w:{duc:1},k:[R6("không biết thật hư")]})]});
+EV6("rumorEmpLove","rumor",{a:["rv"],pp:()=>{const a=rv6();return a==null?null:{a0:a}},w:C=>1,
+ v:["Khắp cung đồn Hoàng thượng sắp phong {A} lên một bậc.","Người ta bảo Hoàng thượng đã chán {A}, cả tháng không lật thẻ nàng.","Lời đồn: {A} được Thái hậu chấm làm Hoàng hậu tương lai.","Có tin {A} sắp bị đưa ra lãnh cung vì phạm lỗi."],
+ o:X=>[c6("Hỏi thái giám Kính sự phòng",{c:{bac:-15},p:od(50+S.mat*4),wt:[G6("biết sự thật")],w:{mat:1},lt:[R6("hắn kín miệng")],l:{bac:-5},ok:()=>{const v=X.A.o;return `Sự thật: ${v.name} hiện ${RANKS[v.queen?7:v.rank]?RANKS[v.queen?7:v.rank].n:"phi tần"}, sủng ${v.sung>=55?"cao":v.sung>=30?"vừa":"thấp"}, Thái hậu ${v.th>=40?"quý":"bình thường với"} nàng.`}}),
+  c6("Sang thân thiết với nàng",{c:{bac:-10},r:[[X.A,6]],k:[R6("người ghét nàng sẽ để ý ngươi")]}),
+  c6("Lan thêm lời đồn",{p:od(35+S.tamco/3),wt:[G6(`${X.A.n} bị soi mói`)],w:{tamco:1},l:{danh:-3,duc:-2},lt:[R6("bị lần ra kẻ tung tin")],k:[R6("Đức -1")],ok:()=>{apply({duc:-1});X.A.o.danh=Math.max(0,(X.A.o.danh||20)-3);return `Lời đồn lan rộng; danh tiếng ${X.A.n} giảm.`}})]});
+/* ---------- CHUYỆN LẠ CẦN TRA (small mysteries; the culprit is real and fixed when the event fires) ---------- */
+const MYST6=["cây trâm hồ điệp bằng vàng","ấn tín nhỏ của cung","túi bạc tháng","phong thư nhà gửi","lọ thuốc an thần","chuỗi hạt trầm Thái hậu ban"];
+EV6("hairpinThief","myst",{a:["sv","sv","sv"],big:true,items:MYST6,pp:()=>{const L=(S.staff||[]).filter(s=>s.sid!=null);if(L.length<3)return null;const T=shuf(L.slice()).slice(0,3);const g=T.findIndex(s=>s.tr==="tham");return{a0:T[0].sid,a1:T[1].sid,a2:T[2].sid,g:g>=0&&roll(70)?g:R(3),it:R(MYST6.length)}},w:C=>hasStaff6(3)?1.4:0,
+ v:["Sáng ra, {it} trong tráp của ngươi biến mất. Đêm qua chỉ {A}, {B} và {C} ra vào buồng trong.","{it} mất ngay sau buổi dọn dẹp; ba người có mặt: {A}, {B}, {C}.","Tráp khóa còn nguyên mà {it} không thấy; chìa khóa chỉ {A}, {B} và {C} từng cầm.","Mất {it} giữa ban ngày. {M} nhớ lại chỉ {A}, {B}, {C} lui tới gần đó."],
+ o:X=>{const G=[X.A,X.B,X.C][X.p.g];return[
+  c6("Tra xét kỹ từng manh mối",{c:{suc:-6},p:od(40+S.tamco/3+S.mat*4),w:{tamco:1},wt:[G6("tìm ra kẻ lấy, lấy lại đồ")],r:[[G,-25]],l:{danh:-1},lt:[R6("không ra manh mối, đồ mất")],ok:()=>`Vết sáp nến trên tay áo và lời chứng của tiểu thái giám chỉ đúng ${G.n}; đồ tìm thấy dưới gối ${G.n}.`,no:()=>"Manh mối đứt, không ai bị buộc tội oan."}),
+  c6("Nhờ Cung Chính ti tra",{c:{bac:-25},p:80,wt:[G6("tìm ra kẻ lấy")],r:[[G,-25]],k:[R6("chuyện xấu lan ra ngoài: Danh -1")],l:{danh:-1},lt:[R6("tra không ra")],ok:()=>{apply({danh:-1});return `Cung Chính ti tra ra ${G.n}.`}}),
+  c6("Cho kẻ lấy một đêm tự trả lại",{w:{duc:2},p:55,wt:[G6("đồ được trả, không ai mất mặt")],lt:[R6("không ai trả, đồ mất hẳn")],l:{tamco:-1},ok:()=>{relDo(G,6);return "Sáng hôm sau đồ nằm lại trong tráp; ngươi không truy nữa."}})]}});
+EV6("poisonedFish","myst",{a:["sv"],pp:()=>{const a=sv6();return a==null?null:{a0:a}},w:C=>1,
+ v:["Đàn cá chép trong chậu sứ trước sân chết nổi bụng hết một đêm.","Chú vẹt trong cung bỗng lăn ra chết, mỏ tím tái.","Chậu lan quý héo rũ chỉ sau một đêm, đất có mùi lạ.","Con chó nhỏ cung nữ nuôi ăn thức ăn thừa xong thì nôn mửa."],
+ o:X=>[c6("Cho thái y nghiệm độc",{c:{bac:-20},p:70,wt:[G6("biết có độc hay không")],w:{tamco:1},l:{bac:-5},lt:[R6("xét không ra")],ok:()=>{const bad=liveRivals(true).some(v=>{try{return bandOf(danger(v,S))>=3}catch(e){return false}});return bad?"Thái y nói có dấu độc nhẹ; có kẻ đang thử tay. Ngươi đề phòng hơn.":"Thái y nói là do nước tù và trời trở, không có độc."}}),
+  c6(`Hỏi ${X.A.n}, người coi việc`,{p:od(40+S.tamco/3),r:[[X.A,2]],wt:[G6("biết ai lại gần")],lr:[[X.A,-6]],lt:[R6("hắn sợ bị đổ tội")],ok:()=>`${X.A.n} khai không thấy người lạ; chuyện có lẽ do sơ suất.`}),
+  c6("Thay hết nước, đồ ăn",{c:{bac:-10,suc:-2},w:{suc:2},k:[R6("không biết nguyên do")]})]});
+EV6("nightSteps","myst",{a:["maid"],pp:()=>S.maid?{a0:0}:null,w:C=>1,
+ v:["{M} thề đêm qua nghe tiếng bước chân trên mái ngói buồng ngươi.","Cửa sổ thư phòng sáng ra mở toang, sách vở xô lệch.","Dấu giày lạ in trên nền tuyết ngoài hiên sau.","Có người để lại một nhành hoa khô trước cửa cung ngươi mỗi đêm rằm."],
+ o:X=>[c6("Thức đêm rình bắt",{c:{suc:-10},p:od(40+S.mat*5),w:{mat:1},wt:[G6("biết là ai")],l:{suc:-3},lt:[R6("không bắt được ai")],ok:()=>{const v=liveRivals(true).find(v=>v.plan&&v.plan.t===key(S));return v?`Bóng người chạy về phía cung ${v.name}. Ngươi ghi nhớ.`:"Chỉ là một tiểu thái giám đi tắt lấy nước; không có gì đáng ngại."}}),
+  c6("Thuê thêm người gác",{c:{bac:-25},w:{tamco:1},wt:[G6("tuần tới kẻ hại ngươi khó ra tay hơn")],ok:()=>{S.guardWarn=Math.max(S.guardWarn||0,1);return "Cung ngươi có thêm người canh."}}),
+  c6(`Bảo ${S.maid.name} im lặng`,{w:{suc:1},r:[[X.A,-3]],k:[R6("không biết thật hư")]})]});
+/* ================= j68g: common event content, part 3 (more daily life, visitors, whims, children, rumours) ================= */
+EV6("silkAllot","day",{a:["rv"],pp:()=>{const a=rv6(v=>v.rank<=S.rank);return a==null?null:{a0:a}},w:C=>(C.m===3||C.m===9)?2.5:.6,
+ v:["Nội vụ phủ chia lụa may áo mùa mới; xấp đẹp nhất đến tay ngươi, còn {A} nhận toàn màu cũ.","Lụa mùa {S} về muộn, chỉ đủ cho một nửa lục cung; {A} và ngươi cùng chờ.","{A} để mắt xấp gấm thêu hạc trong phần của ngươi, ướm hỏi có thể nhường không.","Thợ may Thượng y cục bảo áo của ngươi và {A} trùng mẫu, phải sửa một người."],
+ o:X=>[c6(`Nhường ${X.A.n} phần đẹp`,{w:{duc:2},r:[[X.A,10]],k:[R6("Sắc -1 mùa này")],ok:()=>{apply({sac:-1});return `${X.A.n} cảm kích ra mặt.`}}),
+  c6("Giữ phần mình, mặc trước",{w:{sac:1,danh:1},r:[[X.A,-5]]}),
+  c6("Bỏ bạc may thêm cho cả hai",{c:{bac:-30},r:[[X.A,6]],w:{danh:1}})]});
+EV6("templeRite","day",{a:["th"],pp:()=>S.thDead?null:{a0:0},w:C=>1,
+ v:["Rằm tháng này, Thái hậu lên Phật đường trong cung tụng kinh; các phi tần được mời theo hầu.","Sư cô ở am trong cung xin hậu cung góp dầu đèn cho lễ cầu an.","Thái hậu muốn chép trọn bộ kinh Kim Cương trong một tuần để cầu thọ cho Hoàng thượng.","Ngày giỗ Tiên đế, Đức Thọ cung đặt lễ chay, cần người trông coi hương án."],
+ o:X=>[c6("Theo hầu trọn buổi",{c:{suc:-8},w:{th:6,duc:1}}),
+  c6("Cúng dầu đèn hậu hĩnh",{c:{bac:-25},w:{th:4,duc:2}}),
+  c6("Cáo bận việc cung",{w:{suc:2},k:[R6("Thái hậu với ngươi -3")],ok:()=>{apply({th:-3});return "Thái hậu không nói gì, chỉ ghi nhớ."}})]});
+EV6("fortuneNun","day",{a:[],pp:()=>({}),w:C=>.9,
+ v:["Một ni cô xem tướng được Thái hậu cho vào cung, đi qua cửa cung ngươi thì dừng lại nhìn lâu.","Bà đồng ngoài cung được một phi tần mời vào xem số; cả hậu cung đổ xô đi hỏi.","Thầy bói mù được triệu vào xem ngày cho lễ tế, cung nữ rủ ngươi đi hỏi chuyện con cái.","Đạo sĩ dâng bùa trừ tà cho lục cung, nói cung nào không treo sẽ gặp hạn."],
+ o:X=>[c6("Bỏ bạc xin xem một quẻ",{c:{bac:-15},w:{suc:3},wt:[G6("yên lòng")],k:[R6("lời bói chỉ là lời bói, không đổi được gì")]}),
+  c6("Treo bùa cho cung nhân yên tâm",{c:{bac:-10},w:{maid:5}}),
+  c6("Can Thái hậu chớ tin",{p:od(30+S.th/3+S.duc/4),w:{duc:2,danh:1},l:{th:-4},lt:[R6("Thái hậu phật ý")]})]});
+EV6("hhSummons","visit",{a:["rv"],pp:()=>qOn()?{a0:rivals[0].id}:null,w:C=>qOn()?1.3:0,
+ v:["Hoàng hậu {A} cho gọi ngươi sang giúp đối chiếu sổ sách bổng lộc lục cung.","Hoàng hậu {A} giao ngươi trông coi việc chuẩn bị yến mừng thọ Thái hậu.","Hoàng hậu {A} hỏi ngươi có thấy cung nào chi tiêu quá lệ.","Hoàng hậu {A} muốn ngươi dạy lễ nghi cho tú nữ mới."],
+ o:X=>[c6("Tận tâm giúp Hoàng hậu",{c:{suc:-8},w:{hh:8,danh:1}}),
+  c6("Giúp, nhân tiện xem sổ",{c:{suc:-6},p:od(40+S.tamco/3),w:{hh:4,mat:1},wt:[G6("biết đường đi của bạc lục cung")],l:{hh:-6},lt:[R6("Hoàng hậu thấy ngươi tò mò")]}),
+  c6("Cáo bệnh từ chối",{w:{suc:3},k:[R6("Hoàng hậu với ngươi -5")],ok:()=>{apply({hh:-5});return "Hoàng hậu giao việc cho người khác."}})]});
+EV6("allyOffer","visit",{a:["rv","rv"],big:true,pp:()=>{const a=rv6(v=>T6(v,"Tham vọng")||fr6(v));if(a==null)return null;const b=rv6(v=>v.id!==a&&aff(RV(a),v)<0)??rv6(v=>v.id!==a);return b==null?null:{a0:a,a1:b}},w:C=>1,
+ v:["{A} hẹn ngươi ở đình nghỉ vắng: '{B} ngày càng lấn lướt. Hai ta liên thủ, thế nào?'","{A} gửi mật thư: muốn cùng ngươi tố {B} chuyện chi tiêu xa xỉ.","{A} gợi ý: nếu ngươi giúp nàng tranh ghế trống, nàng sẽ không đụng đến ngươi khi {B} ra tay.","{A} kể {B} đã nói xấu ngươi trước mặt Hoàng thượng, rủ ngươi cùng trả đũa."],
+ o:X=>[c6("Bắt tay với nàng",{r:[[X.A,15],[X.B,-6]],k:[R6("nếu nàng trở mặt, nàng biết chuyện của ngươi")]}),
+  c6(`Lặng lẽ báo cho ${X.B.n}`,{r:[[X.B,12],[X.A,-15]],w:{tamco:1},k:[R6("Đức -1")],ok:()=>{apply({duc:-1});return `${X.B.n} nợ ngươi một ân tình.`}}),
+  c6("Khéo từ chối, đứng ngoài",{w:{duc:1},r:[[X.A,-4]]})]});
+EV6("borrowDress","visit",{a:["rv"],pp:()=>{const a=rv6(v=>v.rank<=S.rank+1);return a==null?null:{a0:a}},w:C=>1,
+ v:["{A} ngập ngừng hỏi mượn bộ y phục thêu phượng của ngươi cho yến tiệc tối mai.","{A} xin mượn cây đàn tỳ bà của ngươi, nói đàn mình đứt dây.","{A} mượn ngươi chiếc trâm ngọc, hứa ba hôm sau trả.","{A} hỏi mượn cung nữ khéo tay nhất của ngươi chải tóc cho nàng."],
+ o:X=>[c6("Cho mượn vui vẻ",{r:[[X.A,10]],k:[R6("có khi nàng nổi hơn ngươi ở yến"),R6("đồ có thể bị trả muộn")]}),
+  c6("Cho mượn, đòi đáp lễ",{w:{bac:15},r:[[X.A,3]],k:[R6("nàng thấy ngươi tính toán")]}),
+  c6("Từ chối khéo",{w:{sac:1},r:[[X.A,-6]]})]});
+EV6("doubtVisit","visit",{a:["rv"],pp:()=>{const a=rv6(v=>T6(v,"Đa nghi")||oan(v,S)>=15);return a==null?null:{a0:a}},w:C=>1,
+ v:["{A} sầm sập kéo đến, buộc tội ngươi cài người vào cung nàng.","{A} chặn ngươi giữa đường, hỏi sao cung nữ của ngươi lảng vảng gần cung nàng.","{A} sai người trả lại quà ngươi tặng, nhắn 'không dám nhận'.","{A} khóc với Hoàng hậu rằng ngươi xui Hoàng thượng lạnh nhạt với nàng."],
+ o:X=>[c6("Thề thốt minh oan",{c:{suc:-3},p:od(40+S.duc/3+S.danh/4),r:[[X.A,8]],w:{danh:1},lr:[[X.A,-6]],lt:[R6("nàng càng nghi")]}),
+  c6("Mời nàng tự đến khám xét",{p:od(55+S.duc/4),r:[[X.A,12]],w:{duc:1},l:{danh:-2},lt:[R6("nàng bới ra chuyện khác để nói")]}),
+  c6("Mặc kệ nàng",{w:{suc:1},r:[[X.A,-8]],k:[R6("nàng oán thêm")]})]});
+EV6("empWager","emp",{a:["emp"],pp:()=>S.sung>=25?{a0:0}:null,w:C=>(C.sea==="Thu"||C.sea==="Hạ")?1.4:.5,
+ v:["Hoàng thượng bày trò chọi dế ở ngự hoa viên, rủ ngươi đặt cược.","Ngài cược với ngươi xem con diều của ai bay cao hơn.","Ngài đố ngươi đoán số hạt sen trong bát, đoán đúng thì ban thưởng.","Ngài mở cuộc thi câu cá, ai câu được con lớn nhất được ngài ban rượu."],
+ o:X=>[c6("Cược lớn cho ngài vui",{c:{bac:-30},p:50,w:{bac:70,sung:2},l:{sung:1},lt:[R6("mất bạc cược")]}),
+  c6("Cược nhỏ, giữ chừng mực",{c:{bac:-10},p:50,w:{bac:20,sung:1},lt:[R6("mất bạc cược")],l:{sung:0}}),
+  c6("Đứng xem, khen ngài",{w:{sung:1},k:[R6("ngài chê ngươi nhát: Danh -1")],ok:()=>{apply({danh:-1});return "Ngài cười ngươi nhát gan."}})]});
+EV6("empDream","emp",{a:["emp"],pp:()=>S.sung>=30?{a0:0}:null,w:C=>.8,
+ v:["Hoàng thượng kể đêm qua mơ thấy rồng vàng quấn cột, hỏi ngươi điềm gì.","Ngài mơ thấy Tiên đế nhìn mình không nói, sáng ra buồn bã.","Ngài mơ thấy một đóa sen nở trong cung ngươi, cười hỏi có phải điềm hỷ.","Ngài mơ rụng răng, Khâm Thiên giám bảo điềm xấu, ngài hỏi ngươi nghĩ sao."],
+ o:X=>[c6("Giải mộng theo hướng lành",{p:od(40+S.tai/3+S.tamco/4),w:{sung:3,an:1},l:{sung:-2},lt:[R6("lời giải gượng ép, ngài không tin")]}),
+  c6("Khuyên ngài chớ tin mộng",{w:{duc:2},k:[R6("ngài hơi cụt hứng: Sủng -1")],ok:()=>{apply({sung:-1});return "Ngài gật gù, nghĩ ngợi."}}),
+  c6("Xin lập đàn cầu an cho ngài",{c:{bac:-30},w:{sung:2,th:3}})]});
+EV6("empOldFlame","emp",{a:["emp"],pp:()=>S.sung>=30?{a0:0}:null,w:C=>.7,
+ v:["Ngài ngồi trước bức họa một phi tần đã mất, hỏi ngươi có thấy nàng giống ai không.","Ngài nhắc đến người con gái thuở niên thiếu, rồi lặng im rất lâu.","Ngài bảo khúc đàn ngươi gảy giống hệt khúc của một người cũ.","Ngày giỗ một vị phi đã khuất, ngài không thiết thượng triều."],
+ o:X=>[c6("Lắng nghe, an ủi",{c:{suc:-4},w:{sung:3,an:2}}),
+  c6("Cố giống người cũ",{p:od(35+S.sac/3+S.tai/4),w:{sung:5},l:{sung:-3},lt:[R6("ngài thấy ngươi bắt chước, chạnh lòng")],k:[R6("Đức -1")],ok:()=>{apply({duc:-1});return "Trong mắt ngài thoáng bóng người xưa."}}),
+  c6("Lảng sang chuyện khác",{w:{suc:1},k:[R6("lỡ dịp gần ngài: Sủng -1")],ok:()=>{apply({sung:-1});return "Ngài thở dài, không nói thêm."}})]});
+EV6("kidTutor","kid",{a:["kid"],pp:()=>{const a=kid6(k=>k.age>=6);return a==null?null:{a0:a}},w:C=>1.2,
+ v:["Thầy dạy ở Thượng thư phòng tâu {A} lười học, hay ngủ gật.","Thầy khen {A} thông minh hơn các anh em, muốn cho học thêm binh pháp.","{A} cãi lại thầy dạy, bị phạt đứng ngoài hiên cả buổi.","{A} trốn học ra ngự hoa viên bắt dế, thầy dạy không dám báo lên."],
+ o:X=>[c6("Tự kèm con học",{c:{suc:-8},r:[[X.A,6]],ok:()=>{X.A.o.tal=cl((X.A.o.tal||40)+4,0,100);return `${X.A.n} chịu học hơn. Tài năng của con +4.`},wt:[G6("con tiến bộ")]}),
+  c6("Biếu thầy, nhờ dạy kỹ",{c:{bac:-25},ok:()=>{X.A.o.tal=cl((X.A.o.tal||40)+3,0,100);return "Thầy để tâm hơn. Tài năng của con +3."},wt:[G6("con tiến bộ")]}),
+  c6("Mắng con nghiêm khắc",{r:[[X.A,-8]],ok:()=>{X.A.o.tal=cl((X.A.o.tal||40)+2,0,100);return `${X.A.n} sợ mẹ, ngồi yên học. Tài năng của con +2.`},wt:[G6("con chịu học")]})]});
+EV6("kidLie","kid",{a:["kid","sv"],pp:()=>{const a=kid6(k=>k.age>=5&&k.age<=14);const b=sv6();return a==null||b==null?null:{a0:a,a1:b}},w:C=>1,
+ v:["{A} làm vỡ bình hoa, rồi đổ cho {B}.","{A} lấy trộm bánh dâng Thái hậu, {B} bị nghi.","{A} xé sách của thầy, nói là {B} sơ ý.","{A} thả chim trong lồng của Hoàng thượng ban, rồi bảo {B} quên đóng cửa."],
+ o:X=>[c6("Tra cho rõ, minh oan người hầu",{c:{suc:-3},r:[[X.B,12],[X.A,-5]],w:{duc:2}}),
+  c6("Bênh con, phạt người hầu",{r:[[X.A,4],[X.B,-15]],k:[R6("Đức -2"),R6("con quen thói đổ lỗi")],ok:()=>{apply({duc:-2});return `${X.B.n} chịu phạt oan.`}}),
+  c6("Dạy con tự nhận lỗi",{p:60,r:[[X.B,8],[X.A,2]],w:{duc:1},lr:[[X.A,-4]],lt:[R6("con bướng, khóc lóc")]})]});
+EV6("servHero","serv",{a:["sv"],pp:()=>{const a=sv6();return a==null?null:{a0:a}},w:C=>.9,
+ v:["Đêm qua bếp cung bén lửa; {A} xông vào dập, bỏng cả tay.","{A} phát hiện bậc thềm đá bị bôi dầu trơn, kịp lau trước khi ngươi đi qua.","{A} đuổi được một con rắn độc bò vào buồng các con.","{A} thức trắng chép lại sổ sách cung bị nước làm nhòe."],
+ o:X=>[c6("Thưởng hậu",{c:{bac:-25},r:[[X.A,18]]}),
+  c6("Thăng làm người thân cận",{r:[[X.A,12]],w:{tamco:1},k:[R6("người hầu khác ghen tị")]}),
+  c6("Tra xem có kẻ gây ra không",{c:{suc:-4},p:od(40+S.mat*5),w:{mat:1},wt:[G6("biết đó là tai nạn hay có người")],lt:[R6("không lần ra gì")],l:{suc:-2},r:[[X.A,4]],ok:()=>{const v=liveRivals(true).find(v=>v.plan&&v.plan.t===key(S));return v?`Dấu vết dẫn về người của ${v.name}.`:"Tra kỹ: chỉ là tai nạn, không ai bày ra."}})]});
+EV6("rumorTH","rumor",{a:["th"],pp:()=>S.thDead?null:{a0:0},w:C=>1,
+ v:["Cung nhân đồn Thái hậu dạo này không ưa ngươi, chê ngươi lười thỉnh an.","Lời đồn: Thái hậu định chọn ngươi trông coi việc tế lễ năm nay.","Người ta bảo Thái hậu khen ngươi trước mặt Hoàng thượng.","Có tin Thái hậu nhắc tên ngươi khi bàn chuyện ghế trống."],
+ o:X=>[c6("Hỏi ma ma thân tín của Thái hậu",{c:{bac:-15},p:od(50+S.mat*4),wt:[G6("biết sự thật")],w:{mat:1},lt:[R6("ma ma kín miệng")],l:{bac:-5},ok:()=>`Ma ma nói thật: Thái hậu ${S.th>=50?"rất quý":S.th>=20?"có cảm tình với":S.th>=-10?"không để ý nhiều đến":"không ưa"} ngươi.`}),
+  c6("Sang thỉnh an ngay",{c:{suc:-6},w:{th:3},k:[R6("vẫn chưa rõ thật hư")]}),
+  c6("Bỏ ngoài tai",{w:{duc:1},k:[R6("không biết thật hư")]})]});
+EV6("rumorFavor","rumor",{a:["emp"],pp:()=>({a0:0}),w:C=>1,
+ v:["Lời đồn khắp lục cung: Hoàng thượng đã chán ngươi.","Người ta xì xào: ngươi sắp được tấn phong.","Cung nữ các cung đồn ngài hay hỏi đến ngươi khi uống rượu.","Có kẻ bảo thẻ bài của ngươi bị Kính sự phòng giấu xuống dưới."],
+ o:X=>[c6("Mua tin Kính sự phòng",{c:{bac:-20},p:od(55+S.mat*4),wt:[G6("biết sự thật")],w:{mat:1},lt:[R6("hắn ậm ừ")],l:{bac:-5},ok:()=>`Thái giám Kính sự phòng nói thật: Sủng của ngươi đang ${S.sung>=60?"rất cao":S.sung>=35?"khá":S.sung>=15?"thấp":"rất thấp"}${S.block?"; có người chặn thẻ của ngươi":""}.`}),
+  c6("Làm như không nghe",{w:{duc:1},k:[R6("không biết thật hư")]}),
+  c6("Tìm kẻ tung tin",{c:{suc:-5},p:od(35+S.mat*6),w:{danh:1},wt:[G6("biết ai đứng sau")],l:{suc:-2},lt:[R6("không ra ai")],ok:()=>{const L=liveRivals(true).filter(v=>{try{return bandOf(danger(v,S))>=1}catch(e){return false}});const v=L.length?pick(L):null;if(v){evA(S,v,1);return `Lời đồn bắt nguồn từ người của ${v.name}. Chứng cứ +1.`}return "Chỉ là lời đồn vô hại của đám cung nhân rảnh việc."}})]});
+EV6("lotusSeason","sea",{a:["rv"],pp:()=>{const a=rv6();return a==null?null:{a0:a}},w:C=>C.sea==="Hạ"&&C.wx.f!==3?1.6:0,
+ v:["Sen Thái Dịch trì nở trắng hồ; {A} rủ ngươi chèo thuyền hái sen.","Sương sớm đọng trên lá sen, {A} bày trò hứng sương pha trà dâng Hoàng thượng.","{A} muốn cùng ngươi làm bánh hạt sen mời Thái hậu.","Đêm hè, {A} thả đèn hoa sen trên hồ, cầu duyên con cái."],
+ o:X=>[c6("Đi cùng nàng",{c:{suc:-5},r:[[X.A,7]],w:{sac:1}}),
+  c6("Cùng làm, dâng lên",{c:{suc:-6,bac:-10},w:{th:3,sung:1},r:[[X.A,5]]}),
+  c6("Từ chối, sợ hồ sâu",{w:{suc:2},r:[[X.A,-3]]})]});
+EV6("droughtPrayer","sea",{a:["emp"],pp:()=>({a0:0}),w:C=>(C.sea==="Hạ"&&C.wx.f===2)?1.5:0,
+ v:["Hạn kéo dài, Hoàng thượng giảm thiện, cầu mưa ở Thiên Đàn; hậu cung được lệnh ăn chay.","Giếng cung cạn dần, mỗi cung chỉ được chia nửa phần nước.","Khâm Thiên giám tâu: muốn mưa phải có người trong cung chép kinh cầu đảo bảy ngày.","Lúa ngoài kinh chết khô, Hoàng thượng đứng lặng giữa nắng."],
+ o:X=>[c6("Chép kinh cầu đảo",{c:{suc:-10},w:{duc:3,sung:1}}),
+  c6("Bớt nước cung mình chia cho người hầu",{c:{suc:-4},w:{maid:8,duc:2}}),
+  c6("Lén mua nước sạch ngoài cung",{c:{bac:-20},w:{suc:4},k:[R6("lộ ra bị trách trái lệnh")]})]});
+EV6("officialWife","court",{a:[],pp:()=>{const T=td6();return T?{c:pick(Object.keys(T.H))}:null},w:C=>td6()?1:0,
+ v:["Phu nhân một vị thượng thư vào cung thỉnh an, xin ngươi giới thiệu với Thái hậu.","Một mệnh phụ mang lễ vật đến, nhờ ngươi nói giúp cho con trai bà được vào Hàn lâm viện.","Mệnh phụ phu nhân nhà một vị tướng muốn ngươi làm mối con gái bà với một tông thất.","Phu nhân Lễ bộ thị lang xin ngươi chỉ cách dâng lễ mừng thọ cho phải phép."],
+ o:X=>[c6("Nhận lời giới thiệu",{c:{suc:-4},w:{bac:30,danh:1},k:[R6("nếu người kia làm hỏng việc, ngươi mang tiếng")]}),
+  c6("Chỉ bảo, không nhận quà",{w:{duc:2},k:[R6("mất một mối quan hệ ngoài triều")]}),
+  c6("Nhận quà, hứa hẹn suông",{w:{bac:40},k:[R6("Đức -3, bị đồn là tham")],ok:()=>{apply({duc:-3});return "Phu nhân về, chờ mãi không thấy tin."}})]});
+EV6("envoyGift","court",{a:["emp"],pp:()=>({a0:0}),w:C=>.8,
+ v:["Sứ thần nước ngoài dâng ngọc quý; Hoàng thượng chia cho lục cung mỗi nơi một món.","Cống phẩm phương nam về: vải thiều, long nhãn; ngài sai mang sang cung ngươi trước.","Sứ thần tặng một cây đàn lạ, ngài muốn xem phi tần nào gảy được.","Nước chư hầu dâng hai con công trắng, ngài hỏi cung nào muốn nuôi."],
+ o:X=>[c6("Tạ ơn, chia cho người hầu",{w:{maid:6,duc:1},k:[R6("không giữ được gì cho mình")]}),
+  c6("Thử tài trước sứ thần",{c:{suc:-5},p:od(30+S.tai/2),w:{danh:3,sung:2},l:{danh:-2},lt:[R6("mất mặt trước người ngoài")]}),
+  c6("Xin giữ làm của riêng",{w:{bac:30},k:[R6("phi tần ghen +3")],ok:()=>{ghenAll(3);return "Ngài ban riêng cho ngươi."}})]});
+/* extra variants for existing templates (more distinct situations per template) */
+[["giftArrive","{A} sai tiểu thái giám mang sang một lồng chim họa mi, nói để ngươi đỡ buồn."],
+ ["lostItem","Chiếc khăn tay thêu tên ngươi không thấy đâu; nếu lọt vào tay kẻ xấu thì thành tang vật."],
+ ["sickServant","{A} lên cơn đau bụng quằn quại sau bữa tối, mồ hôi vã ra như tắm."],
+ ["maidQuarrel","{A} tố {B} lén mặc thử áo của ngươi; {B} nói chỉ đem đi phơi."],
+ ["strayCat","Mèo của Thái hậu trốn sang cung ngươi, ma ma Đức Thọ cung đang đi tìm khắp nơi."],
+ ["brokenHeirloom","{A} làm gãy cây sáo trúc ngươi mang từ nhà vào."],
+ ["eunuchSqueeze","Thái giám coi cửa không cho cung nữ của ngươi ra ngoài mua thuốc nếu không có 'lệ phí'."],
+ ["proudVisit","{A} sai người mang sang một đĩa bánh thừa từ yến của nàng, 'ban' cho cung ngươi."],
+ ["kindVisit","{A} mang sang mấy cuộn chỉ thêu quý, nói dư dùng không hết."],
+ ["slyVisit","{A} xin vào xem chỗ ngươi cất thuốc an thần, nói muốn học cách bảo quản."],
+ ["thMama","Ma ma Đức Thọ cung đến nhắc khéo: dạo này ngươi đến thỉnh an muộn."],
+ ["docCheck","{A} nhắc ngươi mùa này dễ nhiễm lạnh, khuyên dùng thang thuốc ôn bổ."],
+ ["empDish","Ngài gửi sang nửa con vịt quay, kèm lời trách ngươi gầy quá."],
+ ["empPoem","Ngài hỏi ngươi có thuộc bài thơ ngài viết năm mười lăm tuổi không."],
+ ["empSulk","Ngài vừa bị Thái hậu trách chuyện con cháu, ghé cung ngươi uống rượu một mình."],
+ ["empChess","Ngài bày cờ tướng ngay giữa sân, gọi ngươi ra đánh giữa trưa nắng."],
+ ["heatStroke","Trưa hè, sân gạch nóng bỏng; cung nữ bê nước ngã quỵ ở hiên."],
+ ["snowDay","Đêm tuyết, có tiếng khóc của cung nữ bị phạt quỳ ngoài sân cung bên cạnh."],
+ ["kidSick","{A} bị ngã trong vườn, trán sưng u, khóc đòi mẹ."],
+ ["kidGift","{A} hái hoa trong ngự hoa viên mang về tặng mẹ, bị thái giám coi vườn mách."],
+ ["bribedServ","{A} kể người của {B} hỏi xem ngươi có giữ thư từ gì của nhà ngoại không."],
+ ["servLeave","{A} xin về quê dự đám cưới em trai, hứa nửa tháng trở lại."],
+ ["rumorPreg","Cung nhân đồn {A} đã giả có mang để giữ sủng."],
+ ["rumorSpy","Người bên Ngự thiện phòng bảo {A} hay hỏi han chuyện cung ngươi ăn uống."],
+ ["envoyGift","Sứ thần mang tặng một tấm thảm Ba Tư; ngài muốn đặt ở cung phi tần nào giữ lễ nhất."],
+ ["leakRoof","Sương giá làm nứt chum nước trong sân, nước đóng băng loang khắp lối đi."],
+ ["painter","{A} đến xin vẽ ngươi cùng các con để dâng Thái hậu."],
+ ["musician","{A} kể Hoàng thượng thích một khúc nhạc cũ, hỏi ngươi có muốn tập."]].forEach(([id,t])=>{const s=E68I[id];if(s)s.v.push(t)});
+/* ================= j68h: GROUNDING (owner rule 11/14): every event comes from the simulated world =================
+   Preconditions read real state and bind real actors/facts; hearsay is labelled with its source and is either a true fact or that NPC's own lie/false belief,
+   and checking it always reports the truth. Also grounds two stock sources that said nothing: the NPC 'rỉ tai' act (j28) and the j24 'kể chuyện trong cung' visit. */
+const band6=v=>{try{return bandOf(danger(v,S))}catch(e){return 0}};
+const spyOther6=s=>!!(s&&s.spyFor&&s.spyFor!=="me");
+const planOnMe6=()=>liveRivals(true).find(v=>v.plan&&v.plan.t===key(S))||null;
+/* a true fact about consort x, as one plain sentence (null if nothing notable) */
+function fact6(x){if(!x)return null;const L=[];const kn=(x.kids||[]).filter(k=>k.alive).length;
+ if(x.preg>0&&!x.hidden)L.push(`${x.name} đang có mang tháng thứ ${x.preg}`);if(x.confined>0)L.push(`${x.name} đang bị cấm túc`);
+ if(x.sung>=60)L.push(`${x.name} đang được Hoàng thượng sủng ái hơn cả`);else if(x.sung<20)L.push(`${x.name} lâu rồi ít được lật thẻ`);
+ if((x.th||0)>=40)L.push(`Thái hậu rất quý ${x.name}`);else if((x.th||0)<=-10)L.push(`Thái hậu không ưa ${x.name}`);
+ if(kn)L.push(`${x.name} có ${kn} người con`);if((x.ghen||0)>=60)L.push(`${x.name} đang ghen tức với ngươi ra mặt`);
+ if((x.bac||0)>=200)L.push(`cung ${x.name} dư dả bạc tiền`);else if((x.bac||0)<20)L.push(`cung ${x.name} đang túng thiếu`);
+ return L.length?pick(L):null}
+function factAny6(not){const L=liveRivals(true).filter(x=>x!==not);for(let i=0;i<6&&L.length;i++){const x=pick(L);const f=fact6(x);if(f)return f}return null}
+const G6set=(id,o)=>{const s=E68I[id];if(s)Object.assign(s,o)};
+/* --- stock sources --- */
+try{if(typeof SOC==="object"&&SOC.gossip)SOC.gossip.run=(v,t)=>{const L=liveRivals(true).filter(y=>y!==v);if(!L.length)return"";const hate=L.filter(y=>aff(v,y)<0);const x=pick(hate.length?hate:L);ap(x,{danh:-1});const f=fact6(x);
+ return f?`${v.name} rỉ tai với cung nhân rằng ${f} (danh tiếng ${x.name} -1)`:`${v.name} nói xấu ${x.name} với cung nhân (danh tiếng ${x.name} -1)`}}catch(e){}
+(function(){const a0=approachOne;approachOne=function(){const r=a0.apply(this,arguments);try{if(r&&/sang chơi, kể chuyện trong cung\./.test(r.h||"")){const v=r.who&&r.who.w&&RV(r.who.w[1]);const f=factAny6(v);
+  r.h=r.h.replace(/sang chơi, kể chuyện trong cung\./,f?`sang chơi, kể: ${f}. (Lời nàng kể; ngươi có thể tự dò cho chắc.)`:"sang chơi, kể chuyện ai đang được sủng.")}}catch(e){}return r}})();
+/* --- daily life: causes in the world --- */
+G6set("gossipTea",{pp:()=>{const a=rv6(fr6,v=>5+aff(v,S)/5);if(a==null)return null;const f=factAny6(RV(a));return f?{a0:a,f:`${RV(a).name} kể nhỏ: ${f}. <i>(Lời kể; ngươi có thể tự dò cho chắc.)</i>`}:null},
+ o:X=>[c6("Nghe và giữ kín",{c:{suc:-3},r:[[X.A,6]],k:[R6("mất nửa buổi chiều")]}),
+  c6("Gợi chuyện để dò thêm",{p:od(40+S.tamco/3),w:{mat:1},r:[[X.A,2]],lr:[[X.A,-6]],lt:[R6("nàng thấy ngươi tò mò quá")],ok:()=>{const f=factAny6(X.A.o);return f?`${X.A.n} kể thêm: ${f}.`:`${X.A.n} không biết gì thêm.`}}),
+  c6("Khéo cáo mệt",{w:{suc:4},r:[[X.A,-3]]})]});
+G6set("lostItem",{a:["maid"],pp:()=>{if(!S.maid)return null;const th=(S.staff||[]).filter(s=>s.tr==="tham"||spyOther6(s));if(th.length)return{a0:0,c:pick(th).sid};if(S.suc<40)return{a0:0,c:null};return null},
+ vf:p=>p.c!=null?[0,3]:[2],
+ o:X=>{const c=X.p.c!=null?servById(X.p.c):null;return[
+  c6("Lục soát kỹ cả cung",{c:{suc:-6},p:od(50+S.mat*4),w:{tamco:1},wt:[G6(c?"tìm ra kẻ lấy":"tìm lại được")],l:{danh:-1},lt:[R6("cung nhân bất bình vì bị nghi")],ok:()=>{if(c){c.loyal=cl(c.loyal-10,0,100);try{c.cause={txt:"ăn cắp đồ của chủ",fault:true,w:wk()}}catch(e){}return `Món đồ nằm trong tay nải của ${c.name}${c.tr==="tham"?" (vốn tham của)":" (đang làm tai mắt cho người khác)"}. Ngươi có cớ để xử.`}return "Món đồ ngươi mệt quá để quên dưới gối; tìm lại được."}}),
+  c6("Thưởng ai tìm được",{c:{bac:-10},p:c?55:85,w:{danh:1},wt:[G6("đồ trở về")],l:{bac:-5},lt:[R6("món đồ mất hẳn")],ok:()=>c?`${c.name} sợ lộ, lén trả lại đồ.`:"Một tiểu thái giám nhặt được, mang trả lấy thưởng."}),
+  c6("Thôi, bỏ qua",{w:{duc:1},wt:[G6("cung nhân yên lòng")],k:[R6("mất món đồ"),R6(c?"kẻ lấy quen tay":"")].filter(x=>!/><\/span>/.test(x))})]}});
+G6set("sickServant",{pp:()=>{const weak=s=>(s.age||20)>=45||(s.loyal||50)<30;const a=sv6(s=>harsh()||wet()?true:weak(s));return a==null?null:{a0:a}},w:C=>(harsh()||wet())?2.2:.6});
+G6set("maidQuarrel",{pp:()=>{const L=(S.staff||[]).filter(s=>s.sid!=null);const hot=L.filter(s=>s.tr==="chuyen"||(s.loyal||50)<40);if(L.length<2||!hot.length)return null;const a=pick(hot),b=pick(L.filter(x=>x!==a));return{a0:a.sid,a1:b.sid}}});
+G6set("brokenHeirloom",{pp:()=>{const a=sv6(s=>s.tr==="nhat"||(s.loyal||50)<35);return a==null?null:{a0:a,it:R(4)}},v:E68I.brokenHeirloom.v.map(t=>t.replace("{A}","{A}, vốn hay run tay sợ sệt,"))});
+G6set("servGamble",{pp:()=>{const a=sv6(s=>s.tr==="tham");return a==null?null:{a0:a}}});
+G6set("spoiledFood",{w:C=>(S.rank<=2||S.sung<20)?(C.sea==="Hạ"?2:1.2):0,v:E68I.spoiledFood.v.map(t=>t+" (Cung ít được sủng thì bên dưới hay khinh nhờn.)")});
+G6set("eunuchSqueeze",{w:C=>C.rank<=2?2:0});
+/* --- visitors with motives --- */
+G6set("slyVisit",{pp:()=>{const a=rv6(v=>band6(v)>=1);return a==null?null:{a0:a}},
+ o:X=>[c6("Tiếp, nhưng cho người canh chừng",{c:{suc:-4},w:{tamco:1},wt:[G6("không lọt chuyện gì ra")],r:[[X.A,2]]}),
+  c6("Dò ngược ý nàng",{p:od(35+S.tamco/2),w:{mat:1},wt:[G6(`biết ${X.A.n} có ý gì`)],l:{danh:-1},lt:[R6("nàng biết ngươi đề phòng")],lr:[[X.A,-6]],ok:()=>{const v=X.A.o,b=band6(v);try{S.dKnown=S.dKnown||{};S.dKnown[v.id]=wk();noteAdd(v.id,`Sang dò giờ giấc của ngươi; mức có thể hại: ${BANDS[b][1]}`)}catch(e){}return `Ngươi đọc được ý ${v.name}: có thể hại ngươi mức ${BANDS[b][1]}${v.plan&&v.plan.t===key(S)?"; nàng đang chuẩn bị ra tay":""}.`}}),
+  c6("Lạnh nhạt tiễn khách",{w:{suc:2},r:[[X.A,-6]]})]});
+G6set("bribedServ",{pp:()=>{const b=rv6(v=>band6(v)>=1&&(v.bac||0)>=10);const a=sv6(s=>(s.loyal||50)>=50&&!spyOther6(s));return a==null||b==null?null:{a0:a,a1:b}},
+ v:["{A} lén báo: người của {B} dúi cho hắn mười lượng, hỏi giờ ngươi đi ngủ.","{A} tự khai: {B} hứa cho hắn sang hầu cung nàng, lương gấp đôi, nếu chịu kể chuyện cung ngươi.","{A} mang về một túi bạc, nói người bên {B} ép nhận để đổi lấy tin tức.","{A} kể người của {B} hỏi xem ngươi có giữ thư từ gì của nhà ngoại không."]});
+G6set("newServSus",{pp:()=>{const a=sv6(s=>spyOther6(s)||s.tr==="chuyen");return a==null?null:{a0:a}}});
+G6set("servHero",{pp:()=>{const a=sv6(s=>s.tr==="trung"||s.tr==="lanh");return a==null?null:{a0:a}}});
+G6set("servRomance",{w:C=>.7});
+/* --- mysteries need a real culprit with a motive --- */
+G6set("hairpinThief",{pp:()=>{const L=(S.staff||[]).filter(s=>s.sid!=null);const bad=L.filter(s=>s.tr==="tham"||spyOther6(s));if(L.length<3||!bad.length)return null;const g0=pick(bad);const T=shuf(L.filter(s=>s!==g0)).slice(0,2).concat([g0]);const o=shuf(T.slice());return{a0:o[0].sid,a1:o[1].sid,a2:o[2].sid,g:o.indexOf(g0),it:R(MYST6.length)}}});
+G6set("nightSteps",{pp:()=>(S.maid&&(planOnMe6()||(S.staff||[]).some(spyOther6)))?{a0:0}:null,
+ o:X=>[c6("Thức đêm rình bắt",{c:{suc:-10},p:od(40+S.mat*5),w:{mat:1},wt:[G6("biết là ai")],l:{suc:-3},lt:[R6("không bắt được ai")],ok:()=>{const v=planOnMe6();if(v){evA(S,v,1);return `Bóng người chạy về cung ${v.name}; nàng đang chuẩn bị mưu với ngươi. Chứng cứ ${v.name} +1.`}const s=(S.staff||[]).find(spyOther6);if(s){return `Là ${s.name}, người trong cung ngươi, lén mang tin ra ngoài.`}return "Không còn ai lảng vảng."}}),
+  c6("Thuê thêm người gác",{c:{bac:-25},w:{tamco:1},wt:[G6("tuần tới kẻ hại ngươi khó ra tay hơn")],ok:()=>{S.guardWarn=Math.max(S.guardWarn||0,1);return "Cung ngươi có thêm người canh."}}),
+  c6(`Bảo ${S.maid?S.maid.name:"cung nữ"} im lặng`,{w:{suc:1},r:[[X.A,-3]],k:[R6("không biết thật hư")]})]});
+/* --- rumours: a named source with a motive; true or that source's lie; checking reveals the truth --- */
+G6set("rumorPreg",{a:["rv","rv"],pp:()=>{const a=rv6(v=>v.rank>=1);if(a==null)return null;const b=rv6(v=>v.id!==a&&(aff(v,RV(a))<0||(v.ghen||0)>=40))??rv6(v=>v.id!==a);return b==null?null:{a0:a,a1:b}},
+ v:["Người bên cung {B} rỉ tai: {A} có mang đã hai tháng, đang giấu. <i>(Lời đồn; thật hư chưa rõ.)</i>","Cung nữ của {B} kể khắp nơi: {A} lén mời bà đỡ ngoài cung vào. <i>(Lời đồn.)</i>","{B} bóng gió với các cung: dạo này {A} hay nôn, chỉ ăn đồ chua. <i>(Lời đồn.)</i>","Người bên {B} bảo {A} xin Thái y viện thuốc an thai. <i>(Lời đồn.)</i>","Người của {B} đồn {A} đã giả có mang để giữ sủng. <i>(Lời đồn.)</i>"]});
+G6set("rumorEvidence",{pp:()=>{const a=rv6(v=>evG(v,S)>0||band6(v)>=1);return a==null?null:{a0:a}},v:E68I.rumorEvidence.v.map(t=>t+" <i>(Lời đồn.)</i>")});
+G6set("rumorEmpLove",{a:["rv","rv"],pp:()=>{const a=rv6();if(a==null)return null;const b=rv6(v=>v.id!==a);return b==null?null:{a0:a,a1:b}},
+ v:["Người bên cung {B} đồn: Hoàng thượng sắp phong {A} lên một bậc. <i>(Lời đồn.)</i>","{B} kể với các cung: Hoàng thượng đã chán {A}, cả tháng không lật thẻ nàng. <i>(Lời đồn.)</i>","Cung nữ của {B} bảo {A} được Thái hậu chấm làm Hoàng hậu tương lai. <i>(Lời đồn.)</i>","Người của {B} rỉ tai: {A} sắp bị đưa ra lãnh cung vì phạm lỗi. <i>(Lời đồn.)</i>"]});
+G6set("rumorSpy",{pp:()=>{const a=sv6(s=>spyOther6(s)||s.tr==="chuyen"||(s.loyal||50)<40);return a==null||!S.maid?null:{a0:a}},v:E68I.rumorSpy.v.map(t=>t+" <i>(Lời đồn; có thể kiểm chứng.)</i>")});
+G6set("rumorFavor",{vf:()=>S.sung<30?[0,3]:S.sung>=55?[1,2]:[0,1,2,3],v:E68I.rumorFavor.v.map(t=>t+" <i>(Lời đồn.)</i>")});
+G6set("rumorTH",{vf:()=>S.th<10?[0]:S.th>=40?[1,2,3]:[0,1,2,3],v:E68I.rumorTH.v.map(t=>t+" <i>(Lời đồn.)</i>")});
+/* --- children: real health and talent --- */
+G6set("kidSick",{pp:()=>{const a=kid6(k=>k.age<=12&&((k.hp||100)<95||harsh()||wet()));return a==null?null:{a0:a,a1:0}}});
+G6set("kidTutor",{vf:p=>{const k=(S.kids||[]).find(x=>x.name===p.a0);const t=k?k.tal||40:40;return t<40?[0,3]:t>=65?[1]:[2,3]}});
+G6set("kidGift",{pp:()=>{const a=kid6(k=>k.age>=5&&(k.fond||0)>=35);return a==null?null:{a0:a}}});
+/* --- court: the real house behind the consort --- */
+G6set("clanFather",{pp:()=>{if(!td6())return null;const a=rv6(v=>{try{return !!tdHeadOf(v)}catch(e){return false}});return a==null?null:{a0:a}},vf:p=>{let h=null;try{h=tdHeadOf(RV(p.a0))}catch(e){}if(!h)return[];return h.corrupt?[0,1]:h.pow>=60?[2]:[1,3]}});
+/* j7 rumours named a random consort as the culprit; now the culprit is a consort who really bears her ill will (or nobody) */
+(function(){try{const h=()=>{const L=liveRivals(false).filter(v=>band6(v)>=1);return L.length?pick(L).id:null};
+ if(EVI.ghost)EVI.ghost.pp=()=>({v:h()});if(EVI.guardrumour){const p0=EVI.guardrumour.pp;EVI.guardrumour.pp=()=>Object.assign(p0?p0():{},{v:h()})}}catch(e){}})();
+/* the theft's options must not name the culprit before she finds out; the reporter is her maid */
+G6set("hairpinThief",{who:()=>S.maid?pMaid():null,o:X=>{const G=[X.A,X.B,X.C][X.p.g];const hit=()=>relDo(G,-25);return[
+ c6("Tra xét kỹ từng manh mối",{c:{suc:-6},p:od(40+S.tamco/3+S.mat*4),w:{tamco:1},wt:[G6("tìm ra kẻ lấy, lấy lại đồ"),R6("kẻ lấy mất lòng -25")],l:{danh:-1},lt:[R6("không ra manh mối, đồ mất")],ok:()=>{hit();try{G.o.cause={txt:"ăn cắp đồ của chủ",fault:true,w:wk()}}catch(e){}return `Vết sáp nến trên tay áo và lời chứng của tiểu thái giám chỉ đúng ${G.n}; đồ tìm thấy dưới gối ${G.n}. Ngươi có cớ để xử.`},no:()=>"Manh mối đứt, không ai bị buộc tội oan."}),
+ c6("Nhờ Cung Chính ti tra",{c:{bac:-25},p:80,wt:[G6("tìm ra kẻ lấy"),R6("kẻ lấy mất lòng -25")],k:[R6("chuyện xấu lan ra ngoài: Danh -1")],l:{danh:-1},lt:[R6("tra không ra")],ok:()=>{hit();apply({danh:-1});try{G.o.cause={txt:"ăn cắp đồ của chủ",fault:true,w:wk()}}catch(e){}return `Cung Chính ti tra ra ${G.n}.`}}),
+ c6("Cho kẻ lấy một đêm tự trả lại",{w:{duc:2},p:55,wt:[G6("đồ được trả, không ai mất mặt")],lt:[R6("không ai trả, đồ mất hẳn")],l:{tamco:-1},ok:()=>{relDo(G,6);return "Sáng hôm sau đồ nằm lại trong tráp; ngươi không truy nữa."}})]}});
+/* ================= j68i: grounded promotions and a clean week summary (owner 11/14) =================
+   Every promotion states the real conditions that triggered it, with numbers (same for her and every NPC):
+   the ordinary decree (Sủng/Danh/gap/Hoàng hậu/Thái hậu rows), the Emperor's pick between several qualified (fillSeats), the Tranh ghế win, a son's birth.
+   Week summary: each sentence goes under exactly one heading (first match wins), reasons stay with their decree; no item is cut. Data only; the renderer is unchanged. */
+function rsn6(rows){return rows.map(r=>String(r[1]).replace(/\s*\(.*\)\s*/,"").replace(/^Cách lần sắc phong trước /,"cách lần trước ").replace(/, vì Hoàng thượng hiếu thảo/,"").replace(/^Hoàng hậu không phản đối.*/,"Hoàng hậu không phản đối hoặc có người đỡ")).join(" · ")}
+(function(){const p0=promoteP;promoteP=function(p){let rows=[];try{rows=promoReqP(p)}catch(e){}const n=window.__fill6||0;const r=p0.apply(this,arguments);
+ try{if(r&&/tấn phong|lập .*Hoàng hậu/.test(r)){const why=window.__seatPick?"thắng cuộc Tranh ghế":n>=2?`Hoàng thượng chọn giữa ${n} người đủ điều kiện`:"";
+  const add=` Lý do: ${[rsn6(rows.filter(x=>x[0])),why].filter(Boolean).join(" · ")}.`;return r.replace(/\s*$/,"")+add+" "}}catch(e){}return r}})();
+(function(){if(typeof fillSeats!=="function")return;const f0=fillSeats;fillSeats=function(){window.__fill6=0;try{for(const r of [6,5,4,3]){if(!seatFree(r))continue;const C=consorts().filter(p=>rkOf(p)===r-1&&!p.out&&!p.confined&&promoReqP(p).every(x=>x[0]));if(C.length>=2){window.__fill6=C.length;break}}}catch(e){}
+ try{return f0.apply(this,arguments)}finally{window.__fill6=0}}})();
+(function(){if(typeof birthP!=="function")return;const b0=birthP;birthP=function(p){const r=b0.apply(this,arguments);try{if(typeof r==="string")return r.replace(/((?:Được|[^.]* được) tấn phong [^.]+)\. /,"$1. Lý do: sinh hạ hoàng tử (mẹ có hoàng tử, dưới bậc Quý phi, được thăng một bậc). ")}catch(e){}return r}})();
+(function(){if(typeof wkSummary!=="function")return;wkSummary=function(){const s=S.wkSnap||wkSnap();const n=Math.max(0,Math.min(S.logs.length,(S.logSeq||0)-(s.seq||0)));
+ const L0=S.logs.slice(0,n).map(plain).filter(x=>x&&!/^Xin xăm|^Gieo lại|^Đến /.test(x));const SEN=[];
+ for(const x of L0)for(const t of x.split(/(?<=[.!?])\s+/)){const u=t.trim();if(!u)continue;if(/^Lý do:/.test(u)&&SEN.length){SEN[SEN.length-1].why=u;continue}if(!SEN.some(o=>o.t===u))SEN.push({t:u})}
+ const H=[["Thăng giáng",/tấn phong|sắc phong|được phong|lập .* Hoàng hậu|bị giáng|bị phế|lãnh cung|cấm túc/i,4],["Sinh tử",/sinh hạ|sinh đôi|băng hà|qua đời|chết|sảy thai|khó sinh/i,3],
+  ["Kẻ nhắm vào ngươi",/ngươi.*(bị|trúng)|định .*(ngươi|của ngươi)|tố giác ngươi|vu .*ngươi|nhắm vào ngươi/i,3],["Ban thưởng, đồ vật",/ban thưởng|ban cho|nhận được|được tặng|mua /i,2]];
+ const groups=H.map(h=>[h[0],[]]);const other=[];
+ for(const o of SEN){const i=H.findIndex(h=>h[1].test(o.t));const tgt=i>=0?groups[i][1]:other;const cap=i>=0?H[i][2]:3;if(tgt.length>=cap*2)continue;tgt.push(o.t);if(o.why){const parts=o.why.replace(/^Lý do:\s*/,"").replace(/\.$/,"").split(" · ");let cur="";const out=[];for(const q of parts){if(cur&&(cur+" · "+q).length>92){out.push(cur);cur=q}else cur=cur?cur+" · "+q:q}if(cur)out.push(cur);out.forEach((q,j)=>tgt.push((j?"Lý do (tiếp): ":"Lý do: ")+q+"."))}}
+ if(other.length)groups.push(["Chuyện khác",other.slice(0,4)]);
+ const D=[["Sủng",S.sung-s.sung],["Danh",S.danh-s.danh],["Sức",S.suc-s.suc],["Bạc",S.bac-s.bac]];
+ return{D,groups,rank:S.rank!==s.rank?(S.rank>s.rank?"Được thăng ":"Bị giáng xuống ")+(S.rank>=7?"Hoàng hậu":RANKS[S.rank].n):"",kids:S.kids.length-s.kids}}})();
+
 </script>
 
 <script>if("serviceWorker" in navigator){let had=!!navigator.serviceWorker.controller;navigator.serviceWorker.addEventListener("controllerchange",()=>{if(had)location.reload();had=true});addEventListener("load",()=>navigator.serviceWorker.register("sw.js").then(r=>r.update()).catch(()=>{}))}</script>
