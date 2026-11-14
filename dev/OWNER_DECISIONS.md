@@ -105,3 +105,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (22:55Z) Owner: item rivalry — people who see/learn you own a fine item may demand/extort it; servants bribed to steal items, then keep or plant them to frame you (or frame others with your item). Two-way, motive-gated. (review/item-conflict)
 - (23:00Z) Owner: dialogs/events use full-width (horizontal) option cards wherever possible, no 2-col gaps (kit group fix). Big events get a painted background/header picture (pilot: Tiên đế băng hà).
 - (23:15Z) Owner: Fold/portrait person card = copy exactly the iPad Hậu cung panel layout (left: name/rank, vertical frame, chips; right: action tabs + acts). One component for both devices.
+- (23:20Z) Owner: act/event pictures must keep a distinct frame per category/type (colour + ornament), no tassel.
