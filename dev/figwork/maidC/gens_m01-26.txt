@@ -139,3 +139,22 @@ C-m19-t6 UPmdzHvwny hands
 C-m20-t6 yiCI0rQPW9 hands
 C-m21-t6 79vBY1dJAL hands
 C-m22-t6 MBwjuGHDCm hands (a24 book->teacup)
+C-m23-t6 4RumIB69Aa gp
+C-m24-t6 XmPSlLyBfo gp
+C-m25-t6 SyteDD0Ub8 gp
+C-m26-t6 s7oMTVsl8e gp
+C-m01-t7 p8Jsjloehw gp
+C-m02-t7 xSd0WV8jfW gp
+C-m03-t7 xSd0WehjfW gp
+C-m04-t7 9ZQhtFtNYZ gp (a48 scroll->lantern)
+C-m02-t7 JNaooi8Oq4 edit grey hair a48
+C-m26-t6 79vBB3vJAL edit remove forehead chain
+C-m26-t6 WDsKK2wcXe redraw no forehead band
+C-m05-t7 0eg1xdYTfW gp
+C-m06-t7 rgecTwZxtc gp
+C-m07-t7 4RumvG19Aa gp
+C-m08-t7 ov9wJQJ829 gp
+C-m09-t7 TdSrjh1VNR gp
+C-m10-t7 tCiOPKXmZJ gp
+C-m11-t7 cplkrvo0eP gp
+C-m12-t7 dtygUqlXSL gp
