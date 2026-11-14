@@ -29,3 +29,14 @@ Tấm xem: dev/shots/review/maid-art-c/ (age_0, age_1 = tuổi; fh_2 = hoa đi�
 
 ## Việc cho thợ
 Làm tuổi a36/a51 cho t1–t8 (52 nàng); bỏ vạch dọc t7 m03 m12 (xem m05); bỏ nét lên tóc t6 m24 m15; rồi soát lại toàn bộ t6/t7 cả 52 nàng ở 4 tuổi (không chỉ C-B); cập nhật FIGURES-servants.json theo main cho 16 mục trên.
+
+---
+
+# Kiểm lại lần 3: review/maid-art-c @ aa021b42 — PASS
+
+- Màu tóc/da a36/a51 (chuyển màu LAB về a26 cùng bậc): tóc nâu đậm có ánh như a18–a26, không còn đen thui, da cùng tông; nếp tuổi giữ nguyên — a51 vẫn ~48, đẹp (mẫu 8 nàng × 8 ô, age3_0.jpg).
+- t7: hoa điền còn ~nửa cỡ, cùng kiểu từng nàng, gọn giữa hai mày (C_t7_1114a/b, 52 nàng × 4 tuổi); m21 phượng đỏ nhỏ lại, không còn như vết cào.
+- t8: phượng vàng nhỏ đối xứng kiểu c26 (chủ đã duyệt), hẹp hơn khoảng giữa hai đầu mày, không lam trên da; m06 hết vạch đỏ xuống sống mũi, m04 hết chuỗi hạt. Dán trán không lộ vết ở cỡ thật (t8v3-seam.jpg).
+- t6 giữ nguyên (chủ quyết). Lãnh cung m45/m38 a51 bớt xám.
+- FIGURES-servants.json: 2944 mục, 1072 mục main y nguyên, đủ tệp. So main chỉ thêm tệp + LOG.md + JSON.
+- Ghi chú: t8 nay gần như cùng một hình phượng cho cả 52 nàng (chỉ khác chấm giữa) — đúng bản chủ duyệt; lưu ý nếu chủ muốn mỗi người một kiểu ở t8.
