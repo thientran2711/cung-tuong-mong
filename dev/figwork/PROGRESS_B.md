@@ -28,6 +28,7 @@
 - From c17 the AGES 48yo line says FULLY DARK, same colour as at 32, at most two barely visible silver hairs (hc.py strip after each batch).
 - B_b11: c17 m0–m4, c18 m0–m2 (88 lineups total).
 - B_b12: c18 m3–m4, c19 m0–m4, c20 m0 (96 lineups total).
+- B_b13: c20 m1–m4, c21 m0–m3 (104 lineups total). c20-m3/m4 48yo hair has a faint grey sheen: recheck in the hair-edit pass.
 
 ## NEXT (exact)
 - c17–c32 × m0..m4 (80 lineups), in order B-c17-m0 B-c17-m1 ... (8 per batch → sheets B_b11.jpg ...).
