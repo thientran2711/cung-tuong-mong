@@ -104,3 +104,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (22:45Z) Owner: add allergy (dị ứng) — painted rash overlay on the face (like scars), veil can be used for it too. Two-way; causes incl. rival schemes; heals over weeks / Thái y. Pilot overlay art first.
 - (22:55Z) Owner: item rivalry — people who see/learn you own a fine item may demand/extort it; servants bribed to steal items, then keep or plant them to frame you (or frame others with your item). Two-way, motive-gated. (review/item-conflict)
 - (23:00Z) Owner: dialogs/events use full-width (horizontal) option cards wherever possible, no 2-col gaps (kit group fix). Big events get a painted background/header picture (pilot: Tiên đế băng hà).
+- (23:15Z) Owner: Fold/portrait person card = copy exactly the iPad Hậu cung panel layout (left: name/rank, vertical frame, chips; right: action tabs + acts). One component for both devices.
