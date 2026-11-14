@@ -6,7 +6,7 @@
 import json,sys,os,re
 H=os.path.dirname(os.path.abspath(__file__))
 FW="/home/user/cung-tuong-mong/dev/figwork"
-WT="/tmp/claude-0/-home-user-cung-tuong-mong/84f333ce-ebd1-5e4a-9b0c-43035da11b67/scratchpad/wt-maidA"
+WT="/tmp/claude-0/-home-user-cung-tuong-mong/ed00be27-1e8d-5500-9afe-ce233b508a61/scratchpad/wt-maidA"
 STY=["8aNsy0CIrU","3zbtQNvREY","YMLuxraWeC","4RuXEXL9Aa"]
 IDF=json.load(open(FW+"/idfix.json")); FEAT=json.load(open(FW+"/consorts_feat.json"))
 SERV=json.load(open(WT+"/img/FIGURES-servants.json"))

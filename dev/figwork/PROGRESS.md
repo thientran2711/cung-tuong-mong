@@ -98,6 +98,23 @@
   `python3 mjobs.py JID`. `bash addbg.sh "jid..." "bg..."` appends "jid gen bg" lines to bg.txt (gen looked up in gens.txt, same order).
   mproc.py takes ~2 min per batch (urls.py scans transcripts): run it in the background.
 
+### STATUS (maid-art part A, session 6 — 2026-11-14, cleanup pass)
+- OWNER RULES 11/14: no moles; maids (m0–m4) never wear a huadian; the ~48 figure has hair as dark as at 32 (2–3 silver hairs at most).
+- Checked: one head strip per identity (m2 tier, all 52) for moles/huadian; a51 heads of m21–m44 (all tiers) for grey temples.
+  Moles found: m13, m26, m39 (all 4 tiers). No huadian anywhere in part A.
+  Grey temples still found: m22-m2, m25-m2, m27-m0, m27-m4, m31-m3, m33-m2, m37-m0, m42-m2, m43-m2.
+- Fixed 21 lineups (84 figures) with ONE gpt-2-6 edit each (ref = current gen, 2:1, 4k, high): hair -> solid dark, paint out moles,
+  remove any forehead mark, "no other changes". gpt-2-6 does NOT reliably remove moles, so after bg removal every edited lineup goes
+  through mole.py: detects small dark round dots on the face skin of the raw gen (haar face box, nostril/mouth zones excluded,
+  PK=60 TD=30) and inpaints those spots (cv2 TELEA) in the cut-out + gen copy before mproc. Spots logged in scratchpad spots_fixed.json.
+  One-shot pipeline: maid/proc.sh A LIST (mole fix -> ledgers -> mproc -> afix -> porcrop). New gens/bg ids are the last entries of maid/gens.txt / bg.txt.
+- CUTOUT: cutcheck flagged 86 figures >= 8 (120 >= 3, 335 >= 1). Cause = the cutter left pale/sheer skirts half-transparent (green
+  shows through). Magnific re-matte of a single-figure crop (rematte.py idea) made it WORSE (score 44 -> 124), so the fix is local:
+  maid/afix.py makes every pixel with alpha>40 that lies >=3px inside the silhouette opaque (rim kept anti-aliased, true gaps untouched).
+  Applied to all 335 figures scoring >=1 + all re-processed ones. After: max cutcheck score 2.2, 0 figures >= 3.
+- PORTRAITS: every por-maid-mNN-tmK-aXX (832) re-cut with dev/figwork/porcrop.py -> 384x506 face-centred (was 256x256).
+  (m1 maid figures/portraits are unchanged on this branch = identical to main, which already has the 384x506 crops.)
+
 ### STATUS (maid-art part A, end of session 5)
 - DONE part A: ALL m01–m52 x m0/m2/m3/m4 (208 lineups). Session 5 added m45–m52 (32 lineups), sheets dev/figwork/sheets/A_b22.jpg (m45,m46),
   A_b23 (m47,m48), A_b24 (m49,m50), A_b25 (m51,m52). mjobs AGES now ends "All four figures have the same solid dark black-brown hair
