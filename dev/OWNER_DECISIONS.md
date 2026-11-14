@@ -159,3 +159,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (03:35Z) Owner: Tư trang has empty space below the bag → add equipment slots (ô trang bị, what she wears) like RPG games, filling the page.
 - (03:40Z) Owner: room interiors use OUR own residence paintings (Phượng Lệnh interiors are drawn differently) → continue the 25-room × 16-variant rollout. PL art only for the palace map / detail courtyards.
 - (03:55Z) Owner (repeated, angry): people on stages too small. RULE: ONE kit figure-scale standard for every place figures appear (stage, event, book page, rooms, co-op, podium…): figure ≈85–90% of picture height, same scale for all in a scene, never shrink to fit — extra people via +N; names never cut. Any reused picture must follow it.
+- (04:00Z) Owner: in co-op the friend is 'Người lạ' until met, same knowledge rules as NPCs (no name/face until met); reborn friend = unknown again.
