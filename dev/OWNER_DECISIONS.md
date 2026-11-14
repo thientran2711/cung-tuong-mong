@@ -147,3 +147,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (00:45Z) Owner: as soon as the book UI is finished, put it live immediately (fast kit review + Fold/iPad play-test, then merge fold-layout+page-curl to main).
 - (01:00Z) Owner: hairpin emotion icons look male — must clearly read as ancient-court women (feminine face, lips, fuller hairstyle with flowers/bộ diêu, no single topknot), still legible small.
 - (01:10Z) Owner approved the t7/t8 small huadian rollout on all consorts ('Hoa điền ok').
+- (01:25Z) Co-op: players must see each other live in the same place (e.g. Ngự hoa viên) and see the same NPCs there → sync per buổi, live presence, shared per-buổi seed for NPC whereabouts (coordinator decision answering owner's question).
