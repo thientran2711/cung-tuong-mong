@@ -17,7 +17,8 @@ const [,,URL='http://127.0.0.1:8971/t.html',OUT='rc_adv.json']=process.argv;cons
    const v=liveRivals(true).find(x=>!x.queen&&R.P["mm:"+x.id]&&R.P["v"+x.id][kh][0]!==palaceOf(x)&&R.P["v"+x.id][kh][0]!=="home");if(!v)continue;
    const mmRow=R.P["mm:"+v.id][kh].slice();const vRow=R.P["v"+v.id][kh].slice();v.mercy=1;deathSentence(v,"thử");__clr();spend(1);__clr();
    const R2=S.roster;for(const id in R2.P){/* deathSentence spares her into lãnh cung 30% of the time when the Emperor is "nhân từ" (j8): only the dead must leave */if(!v.alive&&(id==="v"+v.id||id==="mm:"+v.id))bad.push("still in record: "+id);const e=R2.P[id][j95kh()];if(!v.alive&&e&&e[2]==="v"+v.id&&/hầu/.test(e[3]||""))bad.push("serving the dead: "+id+" "+e.join("|"))}
-   bad.push(...__ia("deathOut"));return{v:v.name,vRow,mmRow,bad}}return{skip:"no consort out with maid in 8 buổi",bad}}))}
+   /* spared (nhân từ): she must be in lãnh cung now, and nobody "theo hầu" her elsewhere (rechecker) */if(v.alive){const e=R2.P["v"+v.id];if(!v.out)bad.push("spared but not out");else if(!e||e[j95kh()][0]!=="lc")bad.push("spared, row not lc: "+(e&&e[j95kh()].join("|")));const mm=R2.P["mm:"+v.id];if(mm&&mm[j95kh()][0]!=="lc"&&/theo hầu/.test(mm[j95kh()][3]||""))bad.push("maid follows spared mistress elsewhere: "+mm[j95kh()].join("|"))}
+   bad.push(...__ia("deathOut"));return{v:v.name,spared:!!v.alive,vRow,mmRow,bad}}return{skip:"no consort out with maid in 8 buổi",bad}}))}
 
  /* 2. the player to lãnh cung, a few buổi there, then pardoned (restore) mid-buổi; then reload */
  await fresh('nc');res.coldPardon=await p.evaluate(()=>{const bad=[];Q.length=0;cold("thử");__clr();for(let i=0;i<3;i++){nextBuoi();__clr()}
