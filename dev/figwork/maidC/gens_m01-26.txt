@@ -195,3 +195,19 @@ C-m15-t8 rgecavtxtc gp
 C-m16-t8 jUXTCC1LD0 gp
 C-m17-t8 WDsK4NvcXe gp (a48 book->birdcage)
 C-m18-t8 lJ8DQqngv9 gp
+C-m19-t8 rgecQ02xtc gp
+C-m20-t8 xSd0FM6jfW gp
+C-m21-t8 CqG6o2eEEy gp
+C-m22-t8 ov9wT94829 gp
+C-m23-t8 cplkRS80eP gp
+C-m24-t8 iGqf7Ks3uK gp
+C-m25-t8 Do7Lz45pcl gp
+C-m26-t8 ov9wTZR829 gp
+C-m01-tcold iGqfOjS3uK cp
+C-m02-tcold vQZ4B0Xa47 cp
+C-m03-tcold VXUxzifMMU cp
+C-m04-tcold ov9wMYG829 cp
+C-m05-tcold CqG6IdCEEy cp
+C-m06-tcold rgecHurxtc cp
+C-m07-tcold VXUxzGHMMU cp
+C-m08-tcold 4RumUwZ9Aa cp
