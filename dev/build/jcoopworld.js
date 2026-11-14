@@ -132,16 +132,98 @@ function sendEnd(){if(!CW.on||!S||S.dead||CW.sent===wk())return;const C=toCanon(
  COOP.send({t:"end",week:wk(),state:C});try{localStorage.setItem("ctm-coop-last",JSON.stringify({room:COOP.state.room,C}))}catch(e){}lockNext()}
 function sendMe(){if(!CW.on||!S||S.dead)return;const C=toCanon();CW.dying=null;
  if(!CW.base){/* host's first world */COOP.send({t:"init",state:C});CW.base=C}else{COOP.send({t:"me",P:C.P[CW.seat]});CW.base.P=CW.base.P||{};CW.base.P[CW.seat]=J(C.P[CW.seat])}
- render()}
+ if(host())sendWhere();else if(CW.lastWhere)applyWhere(CW.lastWhere);CW.posKey="";sendPos();render()}
 function snapStats(){const o={};for(const k of ["sung","danh","bac","suc","sac","tai","tamco","duc","th","hh","rank"])o[k]=S[k];return o}
 function waiting(){const s=COOP.state;return CW.on&&(CW.sent===wk()||!!(s.ended&&s.ended[CW.seat]))}
 function frozen(){const s=COOP.state;return CW.on&&(s.status!=="open"||!s.peerOnline)}
 /* touch #next only when its state really changes (j63 observes every "disabled" write) */
-function lockNext(){const n=$("next");if(!n)return;const lock=CW.on&&(waiting()||frozen()||CW.pend||!CW.base);
- if(lock){if(!n.disabled)n.disabled=true;if(n.dataset.coopWait!=="1")n.dataset.coopWait="1"}else if(n.dataset.coopWait){delete n.dataset.coopWait;n.disabled=false}}
+function lockNext(){const n=$("next");if(!n)return;const wb=CW.on&&(CW.bend||needWhere()||!!CW.pendBuoi);const lock=CW.on&&(waiting()||frozen()||CW.pend||!CW.base||wb);
+ if(lock){if(!n.disabled)n.disabled=true;if(n.dataset.coopWait!=="1")n.dataset.coopWait="1";const t=wb?(CW.bend?"Đợi bạn xong buổi":"Đợi bạn"):null;if(t&&n.textContent!==t)n.textContent=t}
+ else if(n.dataset.coopWait){delete n.dataset.coopWait;n.disabled=!!(S&&(S.dead||Q.length||S.mg));const t=S&&(S.buoi||0)>=2?"Qua đêm":"Qua buổi";if(n.textContent!==t)n.textContent=t}}
+/* ---------- phase 2 (PROTOCOL §9): same buổi, same place, acts between the two ---------- */
+Object.assign(CW,{bend:false,whereKey:"",lastWhere:null,fpos:null,posKey:"",p2:false,allow:false,acts:{}});
+const bkey=()=>wk()+":"+((S&&S.buoi)||0);
+function needWhere(){return CW.on&&CW.p2&&!host()&&CW.whereKey!==bkey()}
+/* her place as I see it: her "home" is her own palace; my palace in her eyes ("r"+my pid) is my "home" */
+function mapPlace(pl){if(!pl)return null;if(pl==="home"){const f=friendEntry();return f?palaceOf(f):null}if(pl==="r"+me())return"home";return pl}
+function sendWhere(){if(!CW.on||!CW.p2||!host()||!S||!S.where)return;const W=mapMe(J(S.where),true,me());delete W[String(fp())];if(S.menW)W.__menW=J(S.menW);
+ COOP.send({t:"where",week:wk(),buoi:S.buoi||0,W})}
+function applyWhere(m){if(!m||!m.W||!S||host())return;CW.lastWhere=m;if(m.week!==wk()||m.buoi!==(S.buoi||0))return;
+ const W=mapMe(J(m.W),false,me());const mw=W.__menW;delete W.__menW;const fpl=S.where&&S.where[fp()];S.where=W;if(fpl)S.where[fp()]=fpl;if(mw)S.menW=mw;
+ CW.whereKey=bkey();refreshHere();render()}
+/* people at my current place, from S.where (no travel, no side effects): NPCs + the Emperor + my friend */
+function refreshHere(){if(!S||!S.visit||S.dead)return;const k=S.place||"home",W=S.where||{};const P=S.visit.people||[];
+ const isR=p=>p&&(p.kind==="rival"||p.kind==="hh")&&p.ref;
+ if(k==="home"){const f=friendEntry();const L=P.filter(p=>!(isR(p)&&isF(p.ref)));if(f&&W[f.id]==="home")L.push(rp(f));S.visit.people=L;return}
+ const here=liveRivals(true).filter(v=>W[v.id]===k);const L=P.filter(p=>!isR(p)||(here.includes(p.ref)&&!isF(p.ref)));
+ for(const v of here)if(!L.some(p=>isR(p)&&p.ref===v))L.push(v.queen&&qOn()?{...rp(v),kind:"hh",name:`Hoàng hậu ${v.name}`,ini:"鳳"}:rp(v));
+ const ei=L.findIndex(p=>p.kind==="emp");if(W.emp!==k&&ei>=0&&["vuon","thu","dtd"].includes(k))L.splice(ei,1);
+ else if(W.emp===k&&ei<0&&["vuon","thu"].includes(k))L.unshift({kind:"emp",name:"Hoàng thượng",ini:"帝",col:"#f0d070",info:`${empName()} · ${MOODS[S.emp.mood][0].toLowerCase()}`});
+ S.visit.people=L}
+function sendPos(){if(!CW.on||!CW.p2||!S||S.dead)return;const k=[wk(),S.buoi||0,S.place||"home",used].join(":");if(k===CW.posKey)return;CW.posKey=k;
+ COOP.send({t:"pos",place:S.place||"home",khac:used,week:wk(),buoi:S.buoi||0})}
+function onPos(m){if(!CW.on||m.from===CW.seat||!S)return;CW.fpos=m;const pl=mapPlace(m.place);const f=friendEntry();if(!f)return;
+ S.where=S.where||{};const was=S.where[f.id];S.where[f.id]=pl||palaceOf(f);if(was!==S.where[f.id]){refreshHere();if(!Q.length)render()}}
+function keepFriendPos(){if(!CW.on||!S||!S.where)return;const f=friendEntry();if(!f)return;const pl=CW.fpos&&CW.fpos.week===wk()&&CW.fpos.buoi===(S.buoi||0)?mapPlace(CW.fpos.place):null;S.where[f.id]=pl||palaceOf(f)}
+function onBuoi(m){if(!CW.on||!S)return;CW.bend=false;
+ /* the room moved on: if a dialog is still open, step as soon as it is closed */
+ if((Q.length||S.mg)&&m.week===wk()&&(S.buoi||0)===m.buoi-1){CW.pendBuoi=m;lockNext();return}CW.pendBuoi=null;
+ if(m.week===wk()&&(S.buoi||0)===m.buoi-1&&!S.dead){CW.allow=true;try{nextBuoi()}finally{CW.allow=false}}
+ if(host())sendWhere();else if(CW.lastWhere)applyWhere(CW.lastWhere);sendPos();lockNext()}
+function bend(){if(CW.bend)return;CW.bend=true;COOP.send({t:"bend",week:wk(),buoi:S.buoi||0});lockNext()}
+COOP.on("buoi",onBuoi);
+COOP.on("bended",m=>{if(CW.on)lockNext()});
+COOP.on("where",m=>{if(CW.on)applyWhere(m)});
+COOP.on("pos",onPos);
+COOP.on("error",m=>{if(CW.on&&m.code==="badbuoi"){CW.bend=false;lockNext()}});
+
+/* acts between the two (PROTOCOL §9.1). Every act tab works on her entry exactly as on an NPC (same place/rank/conditions).
+   mode "do": I resolve it here (odds, detection, my costs, text) and send `res` with the effect on her; she applies it to her own S
+   (death → rebirth, lãnh cung → cold) and sees a note only when she would notice it. The week write-back baseline of her entry is
+   moved so the merge does not count it twice.  mode "invite" (Kết giao, Tặng quà): she gets a choice card first; Nhận → I run it. */
+const ASK=["ally","gift"];
+const PUB=["accuse","vp","gift","ally","steal","road","takeaway","tocao","trinhth","trinhhh","xinhh","uyhiep","judge"];
+const DK=["sung","danh","bac","suc","sac","tai","tamco","duc","th","hh","mat"];
+const newId=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+function fsnap(v){const o={};for(const k of DK.concat(["confined","rel","oan"]))o[k]=v[k]||0;o.alive=v.alive;o.out=!!v.out;o.em=(v.evm&&v.evm.me)||0;return o}
+function sendRes(v,k,b0,txt,id){const b1=fsnap(v);const fx={};for(const x of DK)if(b1[x]!==b0[x])fx[x]=b1[x]-b0[x];
+ const flags={rel:b1.rel-b0.rel,oan:b1.oan-b0.oan,em:b1.em-b0.em,conf:b1.confined-b0.confined,dead:b0.alive&&!b1.alive,cold:!b0.out&&b1.out};
+ const t=String(txt||"").replace(/<[^>]+>/g,"");const caught=/bị lộ|bị bắt|phát giác|khai ra|tố giác/.test(t);
+ const any=Object.keys(fx).length||flags.rel||flags.oan||flags.em||flags.conf||flags.dead||flags.cold;if(!any&&!PUB.includes(k))return;
+ /* she notices what an NPC's act would show her: open acts and caught schemes name me, a hidden harm only shows its effect */
+ const seen=PUB.includes(k)||caught?"named":any?"effect":"";
+ if(v.__b){for(const x of STAT)v.__b[x]=v[x];v.__b.rel=v.rel;v.__b.oan=v.oan;v.__b.em=(v.evm&&v.evm.me)||0;v.__b.out=v.out;v.__b.rank=v.rank}
+ if(flags.dead)v.alive=true;if(flags.cold)v.out=false;   /* her death / lãnh cung happen on her side; her entry follows from her `me` / week */
+ COOP.send({t:"res",id:id||newId(),k,n:(ACT[k]||{}).n||k,who:S.name,fx,flags,seen,txt:t.slice(0,400)})}
+(function(){const f=runAct;runAct=function(a,t,k,extra){if(!CW.on||a!==S||!isF(t))return f.apply(this,arguments);
+ if(ASK.includes(k)&&!CW.inv){if(sameHouse(a,t))return f.apply(this,arguments);const id=newId();CW.acts[id]={k,extra,v:t.id};
+  COOP.send({t:"act",id,k,mode:"invite",n:(ACT[k]||{}).n||k,who:S.name,item:extra!=null&&S.inv&&S.inv[extra]?iname(S.inv[extra]):""});return `Ngươi ngỏ ý ${((ACT[k]||{}).n||k).toLowerCase()} với ${t.name}, đợi nàng trả lời. `}
+ const b0=fsnap(t);const r=f.apply(this,arguments);try{sendRes(t,k,b0,r,CW.inv)}catch(e){console.error(e)}return r}})();
+const seenIds=new Set();
+function onAct(m){if(!CW.on||m.from===CW.seat||!S||S.dead||seenIds.has(m.id))return;seenIds.add(m.id);if(m.mode!=="invite")return;
+ const what=m.k==="gift"?`muốn tặng ngươi ${esc(m.item||"một món quà")}`:`muốn kết giao với ngươi`;
+ pushModal({t:"Bạn tìm đến",h:`<p><b>${esc(m.who)}</b> ${what}.</p>`,opts:[
+  {n:"Nhận",fx:{},x:"bạn tiếp tục việc ấy",go:()=>COOP.send({t:"actr",id:m.id,ok:true,k:m.k})},
+  {n:"Từ chối",fx:{},x:"không nhận",go:()=>COOP.send({t:"actr",id:m.id,ok:false,k:m.k})}]});showModal();render()}
+function onRes(m){if(!CW.on||m.from===CW.seat||!S||seenIds.has("r"+m.id))return;seenIds.add("r"+m.id);COOP.send({t:"actr",id:m.id,ok:true,ack:1});if(S.dead)return;
+ const fx={};for(const k in m.fx||{})if(DK.includes(k)&&typeof m.fx[k]==="number")fx[k]=m.fx[k];const g=m.flags||{},fpid=fp();
+ if(Object.keys(fx).length)apply(fx);S.rl=S.rl||{};S.ro=S.ro||{};S.cev=S.cev||{};
+ if(g.rel)S.rl[fpid]=cl((S.rl[fpid]||0)+g.rel,-100,100);if(g.oan)S.ro[fpid]=cl((S.ro[fpid]||0)+g.oan,0,100);
+ if(g.em)S.cev[fpid]=Math.max(0,(S.cev[fpid]||0)+g.em);if(g.conf)S.confined=Math.max(0,(S.confined||0)+g.conf);
+ const f=friendEntry();if(f&&g.rel){f.rel=cl((f.rel||0)+g.rel,-100,100);if(f.__b)f.__b.rel=f.rel}
+ const who=m.seen==="named"?`<b>${esc(m.who)}</b>: ${esc(m.n)}.`:"Có kẻ ngấm ngầm ra tay với ngươi.";
+ const note=m.seen?`<p>${who}</p>${m.seen==="named"&&m.txt?`<p class="past">${esc(m.txt)}</p>`:""}${Object.keys(fx).length?`<p>${fmt(fx)}</p>`:""}`:"";
+ if(g.dead){if(note)pushModal({t:"Biến cố",h:note});try{die(m.seen==="named"?`Bị ${m.who} hại`:"Bị kẻ gian hãm hại")}catch(e){console.error(e)}return}
+ if(g.cold){try{cold(m.seen==="named"?`Bị ${m.who} hại, đày vào lãnh cung`:"Bị vu hại, đày vào lãnh cung")}catch(e){console.error(e)}}
+ if(note){pushModal({t:m.seen==="named"?"Bạn ra tay":"Biến cố",h:note});showModal()}render()}
+function onActr(m){if(!CW.on||m.from===CW.seat||m.ack)return;const a=CW.acts[m.id];delete CW.acts[m.id];if(!a)return;const v=RV(a.v);
+ if(!m.ok||!v||!v.alive){pushModal({t:"Bạn từ chối",h:`<p><b>${esc(friendName())}</b> không nhận.</p>`});showModal();render();return}
+ CW.inv=m.id;let r="";try{r=runAct(S,v,a.k,a.extra)}finally{CW.inv=false}if(r)log(r);
+ pushModal({t:"Bạn nhận lời",h:`<p>${r||"Bạn đã nhận."}</p>`});showModal();render()}
+COOP.on("act",onAct);COOP.on("res",onRes);COOP.on("actr",onActr);
 /* the week's end goes out once her dialogs are read: checked after each render / presence change (event-driven) */
-let tryT=0;function tryEnd(){tryT=0;if(CW.on&&S&&CW.pend&&!Q.length&&!S.mg&&!S.dead&&!frozen())sendEnd()}
-function soonEnd(){if(CW.on&&CW.pend&&!tryT)tryT=setTimeout(tryEnd,0)}
+let tryT=0;function tryEnd(){tryT=0;if(CW.on&&CW.pendBuoi&&S&&!Q.length&&!S.mg){onBuoi(CW.pendBuoi);return}if(CW.on&&S&&CW.pend&&!Q.length&&!S.mg&&!S.dead&&!frozen())sendEnd()}
+function soonEnd(){if(CW.on&&(CW.pend||CW.pendBuoi)&&!tryT)tryT=setTimeout(tryEnd,0)}
 
 /* ---------- receiving ---------- */
 function newsHTML(){const P=CW.base&&CW.base.P&&CW.base.P[CW.seat];if(!CW.mine||!S)return"";
@@ -158,6 +240,7 @@ function onWeek(m){if(!CW.on||!m.state)return;const C=m.state;CW.base=J(C);CW.pe
  if(S.coopCold){S.coopCold=0;if(!S.out)try{cold("Bị đày vào lãnh cung")}catch(e){console.error(e)}}
  const h=newsHTML()+(worldNews(C)?`<p>${worldNews(C)}</p>`:"");CW.mine=null;
  if(h)pushModal({t:"Tuần mới",h:`<p class="past">${when()}</p>${h}`});
+ CW.bend=false;CW.posKey="";if(host())sendWhere();else if(CW.lastWhere)applyWhere(CW.lastWhere);keepFriendPos();refreshHere();
  showModal();render();lockNext()}
 function onState(m){if(!CW.on||!m.state)return;const C=m.state;
  if(!CW.base){CW.base=J(C);if(CW.waitWorld){CW.waitWorld=false;newLife()}return}
@@ -169,7 +252,7 @@ function onState(m){if(!CW.on||!m.state)return;const C=m.state;
 function newLife(){CW.inLife=true;CW.newLife=true;try{start()}catch(e){console.error(e)}}
 function begin(d){CW.on=true;CW.seat=d.you||COOP.state.you;const C=d.state||COOP.state.C;CW.base=C?J(C):null;CW.sent=-1;CW.pend=false;
  const s=COOP.state;
- if(C&&C.P&&C.P[CW.seat]&&!C.P[CW.seat].dead){fromCanon(C);if(s.ended&&s.ended[CW.seat])CW.sent=wk();try{$("title").hidden=true}catch(e){}showModal();render();lockNext();return}
+ if(C&&C.P&&C.P[CW.seat]&&!C.P[CW.seat].dead){fromCanon(C);if(s.ended&&s.ended[CW.seat])CW.sent=wk();try{$("title").hidden=true}catch(e){}syncRoom(CW.roomMsg);showModal();render();lockNext();return}
  if(!C&&!host()){CW.waitWorld=true;pushModal({t:"Đợi bạn",h:`<p>Bạn đang chọn thân phận. Khi hậu cung đã dựng xong, ngươi sẽ chọn thân phận của mình.</p>`});showModal();return}
  newLife()}
 COOP.on("start",begin);
@@ -177,10 +260,14 @@ COOP.on("start",begin);
 COOP.on("stop",()=>{CW.on=false;CW.base=null;CW.pend=false;CW.sent=-1;CW.inLife=false;CW.dying=null;try{const L=pullFriend();void L;lockNext()}catch(e){}});
 COOP.on("week",onWeek);
 COOP.on("state",onState);
-COOP.on("room",m=>{if(!CW.on||!m.state)return;const C=m.state;
+/* room snapshot (connect / reconnect): buổi, last where, last pos of both */
+function syncRoom(m){if(!m||!CW.on||!S)return;try{const o=COOP.other();if(m.where)CW.lastWhere=m.where;if(m.pos&&m.pos[o])onPos(Object.assign({from:o},m.pos[o]))}catch(e){}
+ if(CW.p2&&!S.dead&&m.week===wk()&&CW.sent!==wk()&&typeof m.buoi==="number")while((S.buoi||0)<m.buoi&&!Q.length&&!S.mg){const b0=S.buoi||0;onBuoi({week:m.week,buoi:b0+1});if((S.buoi||0)===b0)break}
+ if(host())sendWhere();else if(CW.lastWhere)applyWhere(CW.lastWhere);sendPos();lockNext()}
+COOP.on("room",m=>{if(m.buoi!==undefined)CW.p2=true;CW.roomMsg=m;if(!CW.on||!m.state)return;const C=m.state;
  /* reconnect: the merge happened while we were away → rebuild; otherwise keep the local week */
  if(CW.sent>=0&&m.week>CW.sent){onWeek({state:C,week:m.week});return}
- if(!CW.base)CW.base=J(C);else{CW.base.P=J(C.P);CW.base.W=J(C.W)}});
+ if(!CW.base)CW.base=J(C);else{CW.base.P=J(C.P);CW.base.W=J(C.W)}syncRoom(m)});
 
 /* ---------- hooks ---------- */
 const mute=n=>{const f=window[n];if(typeof f!=="function")return;window[n]=function(){if(CW.on&&!host())return "";return f.apply(this,arguments)}};
@@ -193,11 +280,16 @@ const mute=n=>{const f=window[n];if(typeof f!=="function")return;window[n]=funct
 (function(){const f=rivalsBuoi;rivalsBuoi=function(){return withoutFriend(()=>f.apply(this,arguments))}})();
 (function(){const f=endTurn;endTurn=function(){if(CW.on){if(waiting()||frozen()||CW.pend||!CW.base)return;CW.news=""}
  if(!CW.on)return f.apply(this,arguments);const r=withoutFriend(()=>f.apply(this,arguments));if(S){CW.pend=true;try{render()}catch(e){}lockNext()}return r}})();
-(function(){const f=nextBuoi;nextBuoi=function(){if(CW.on&&(waiting()||frozen()||CW.pend||!CW.base))return;return f.apply(this,arguments)}})();
+(function(){const f=nextBuoi;nextBuoi=function(){if(!CW.on)return f.apply(this,arguments);if(waiting()||frozen()||CW.pend||!CW.base)return;
+ /* same buổi for both: buổi sáng / chiều end with `bend`; the server's `buoi` runs the real step (CW.allow); buổi tối ends the week (`end`) */
+ if(CW.p2&&!CW.allow&&(S.buoi||0)<2){if(!S||S.dead||Q.length||S.mg||needWhere())return;bend();return}
+ const r=f.apply(this,arguments);if(!CW.pend){keepFriendPos();refreshHere()}return r}})();
+(function(){const f=placeWhere;placeWhere=function(){const r=f.apply(this,arguments);if(CW.on)try{keepFriendPos()}catch(e){}return r}})();
+(function(){const f=goTo;goTo=function(){const r=f.apply(this,arguments);if(CW.on)try{sendPos()}catch(e){}return r}})();
 (function(){const f=save;save=function(){if(!CW.on)return f.apply(this,arguments);try{if(S&&!S.dead&&CW.base)localStorage.setItem("ctm-coop-last",JSON.stringify({room:COOP.state.room,at:Date.now()}))}catch(e){}}})();
 (function(){const f=over;over=function(){if(CW.on&&S&&!S.dead){/* keep the world as it stands at her death; the new life is put into it */
   try{S.dead=true;CW.dying=toCanon();S.dead=false}catch(e){console.error(e)}}return f.apply(this,arguments)}})();
-(function(){const f=render;render=function(){const r=f.apply(this,arguments);if(CW.on)try{lockNext();soonEnd()}catch(e){}return r}})();
+(function(){const f=render;render=function(){const r=f.apply(this,arguments);if(CW.on)try{lockNext();soonEnd();sendPos()}catch(e){}return r}})();
 (function(){const f=closeModal;closeModal=function(){const r=f.apply(this,arguments);if(CW.on)soonEnd();return r}})();
 COOP.on("status",()=>{if(CW.on){lockNext();soonEnd()}});
 /* the rebirth / first-life flow: Luân hồi builds the life (nlRun), she accepts it (nlAccept) */
