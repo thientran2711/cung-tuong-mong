@@ -91,4 +91,8 @@ function j95cClash(m){if(!m||m.pid||m.__c95||typeof m.h!=="string"||!j95cCur())r
    n+=j95cStrip(x.why,[m])}}catch(e){j95cErr("clash",e)}if(n)J95C.stat.clash=(J95C.stat.clash||0)+n;return n}
 (function(){const bp=j95bPresent;j95bPresent=function(m){try{j95cClash(m)}catch(e){}return bp.apply(this,arguments)};
  const sm=showModal;showModal=function(){try{while(Q.length&&j95cClash(Q[0])&&!j95bStrip(Q[0].h).replace(/[\s.,;:!?…()]/g,"")&&!(Q[0].opts&&Q[0].opts.length))Q.shift()}catch(e){}return sm.apply(this,arguments)}})();
+/* j96 (love story) asks the ledger where her man is (rosterWhere); without an answer it wrote S.menW by itself, a place the record did not
+   have. The record answers, and a man it has nowhere this buổi comes to his first haunt IN the record (the rest of the buổi) */
+function rosterWhere(m){try{if(!m||!j95cCur())return null;const R=S.roster,kh=j95kh();let e=R.P[m.id];if(e&&e[kh]&&e[kh][0])return e[kh][0];
+  if(!m.alive)return null;const k=(m.haunts&&m.haunts[0])||"vuon";R.who[m.id]=[m.name,m.role];R.P[m.id]=[0,1,2,3].map(()=>[k,"go",null,"lặng lẽ đến"]);/* as j95bPut writes a man who comes in */J95C.stat.man96=(J95C.stat.man96||0)+1;j95sync();return k}catch(e){j95cErr("rosterWhere",e);return null}}
 window.__j95c=()=>({stat:J95C.stat,errs:J95C.errs,j95fix:J95.stat.fix||0});
