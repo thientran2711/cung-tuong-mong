@@ -19,7 +19,7 @@
      COOP.emit(t, data)                 fire a local event (used by the lobby and the world module)
      COOP.other()                       the other seat letter ("a"/"b")
    Flat live fields (kept current on every change; read-only): COOP.code, COOP.seat "a"|"b"|null, COOP.week,
-     COOP.online {a,b}, COOP.ended {a,b}, COOP.frozen (a co-op game runs and someone is offline),
+     COOP.online {a,b}, COOP.ended {a,b}, COOP.frozen (in a room and not both seats online: no acts; the lobby's overlay shows it once the game runs),
      COOP.waiting false | "room" (the other seat is still empty) | "week" (I ended the week, the friend has not). */
 (function(){try{
 const LS={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}},del(k){try{localStorage.removeItem(k)}catch(e){}}};
@@ -40,7 +40,7 @@ function set(o){Object.assign(st,o);const s=st.seats,x=other();const po=!!(s&&x&
 /* flat live view for the world module and dev/test/coop-e2e.js: COOP.code seat week online ended frozen waiting */
 function live(){const C=window.COOP;if(!C)return;const s=st.seats||{},x=other(),e=st.ended||{};
  C.code=st.room||"";C.seat=st.you||null;C.week=st.week||0;C.online={a:!!(s.a&&s.a.online),b:!!(s.b&&s.b.online)};C.ended={a:!!e.a,b:!!e.b};
- C.frozen=!!(st.playing&&(st.status!=="open"||!st.peerOnline));
+ C.frozen=!!(st.you&&st.status!=="off"&&!st.bothIn);  /* PROTOCOL 6: the world runs only while both seats are online */
  C.waiting=!st.you||st.status==="off"?false:!(s[x])?"room":(e[st.you]&&!e[x])?"week":false}
 function base(){return String(COOP.url||DEF_URL).replace(/\/+$/,"")}
 function wsURL(code){return base().replace(/^http/,"ws")+`/api/room/${code}/ws?pid=${encodeURIComponent(pid())}&name=${encodeURIComponent(COOP.name||"")}`}
