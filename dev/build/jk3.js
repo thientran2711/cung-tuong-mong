@@ -259,8 +259,11 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 if(typeof renderPanel==="function"){const r0=renderPanel;renderPanel=function(){const r=r0.apply(this,arguments);try{setTimeout(k3CatTabs,0)}catch(e){}return r}}
 try{const P0=$$("panel");if(P0)new MutationObserver(()=>{clearTimeout(window.__k3ct);window.__k3ct=setTimeout(k3CatTabs,30)}).observe(P0,{childList:true,subtree:true,attributes:true,attributeFilter:["data-kart"]})}catch(e){}
 const cssC=document.createElement("style");cssC.id="k3-cattabs";cssC.textContent=`
-#panel .kcattabs{position:sticky;top:0;z-index:6;background:var(--panel);margin:0 -8px 6px;padding:4px 8px 6px;box-shadow:0 -9px 0 0 var(--panel),0 3px 6px -4px #5a3a2040}
-#panel .ksub~* .kcattabs,#panel .ksub~.kcattabs{top:var(--ksubh,44px)}
+/* KIT RULE (owner 11/15, markup 1115-inv-markup): an act-card row is NEVER clipped. The sticky tab row used to paint a 9 px panel-coloured
+   shadow UPWARD (to hide content scrolling through the panel padding), which cut the bottom border off any act cards right above it.
+   Now the row sticks 8 px higher (into the panel padding) and owns that band with its own padding: nothing above it is ever covered. */
+#panel .kcattabs{position:sticky;top:-8px;z-index:6;background:var(--panel);margin:2px -8px 6px;padding:12px 8px 6px;box-shadow:0 3px 6px -4px #5a3a2040}
+#panel .ksub~* .kcattabs,#panel .ksub~.kcattabs{top:var(--ksubh,44px);padding-top:4px}
 #panel .kcattabs .pct{white-space:nowrap}
 #panel .cards>button.ka[hidden]{display:none!important}
 html body #panel .kcattabs{display:flex!important;flex-wrap:nowrap!important;overflow-x:auto!important;scrollbar-width:thin}#panel .kcattabs .pct{flex:0 0 auto}

@@ -724,6 +724,12 @@ Picture: `kitItemSrc(k, fallback)` = `itemArt(k)` (j98, review/item-art) → `WD
 chest, Tư trang, wardrobe slots, reward chests, peddler, works, reward panels. Nobody draws another item box.
 - (11/15) `size:"slot"` = a bag slot for kitInvGrid (square only, fills its grid cell; name + grade in the tooltip / aria-label; empty = a recessed
   square, no stripes). `onText` = worn band text ("Đang đeo"); `mark:[text,"r"|"g"|"n"]` = small corner tag ("đã tẩm"). `kitItemSrc` returns the src string.
+- (11/15 owner markup 1115-inv-markup) GRADE = PORTRAIT ART. Every non-empty kitItem (slot, sm, md, lg, panel picture) sits on the SAME painted
+  ground + frame as the portrait of a matching tier (class `.kigN`, jk2b §15b): ground `img/kit/bg-consort-T.webp` (cover) under a soft light pool,
+  frame = `frame-consort-T` cut to the frame only (no tassel) → `img/kit/islot-frame-N.webp`, drawn as a 9-slice `border-image` (corners crisp at
+  every size). Thường = t0 wood/taupe · Tinh phẩm = t1 jade · Trân phẩm = t2 pearl-silver on blue · Tuyệt phẩm = t4 gold-peony on lavender ·
+  Ngự tứ = t5 red-gold rubies on the t7 imperial gold ground (+ 御 seal). No new art: crops of existing kit frames only. Picture 76 %, tags above the frame.
+  The old pale tint + 2 px border is gone. `ghost:src` (empty only) = faint silhouette = the TYPE outline of an empty equipment slot.
 ### 28.13b kitInvGrid — THE BAG (owner 11/15 04:00Z, shot 1115-49c7629b) — `dev/build/jinv.js` (after jk3) — KIT READY
 `kitInvGrid({key, tabs:[{k,label}], items:[{cat,src,name,grade,qty,on,onText,mark,tip}], minRows:4, onPick:fn(item)})` → `.kinv`:
 - Tab row = the ONE category tab row of k3CatTabs (`.pctabs.kcattabs`, buttons from `kitTabRowHTML(list,cur,attr)` in jk3; "Tất cả" first, count `<i>` = items);
@@ -735,6 +741,20 @@ chest, Tư trang, wardrobe slots, reward chests, peddler, works, reward panels. 
 - Tư trang tabs (real j8 `IT.kd`): Trang sức · Vải vóc · Thuốc men (Thuốc bổ, Thuốc, Độc dược) · Hương liệu · Lễ vật (Lễ vật, Kỷ vật) · Thư từ ·
   Tạp vật (only when such an item exists). The bag starts EMPTY: items are only earned (peddler, gifts, bestowals). When j92 (wardrobe) lands its
   Trâm cài / Y phục chest uses the same kitInvGrid.
+- (11/15) The grid GROWS by whole rows into the panel's free height (no big empty gap at the bottom); what is left (< one row) goes to the
+  equipment slots below (they grow up to 150 px). Refit on grid width / panel height change (ResizeObserver).
+### 28.13c kitEquipSlots — "Đang mang" EQUIPMENT SLOTS (owner 11/15, RPG-style) — `dev/build/jinv.js` — KIT READY
+`kitEquipSlots({key, title, slots:[{k,label,item:{src,name,grade,tip}|null,ghost,note}], sum, onPick:fn(slot)})` → `.keq` under the bag:
+header (kit section title + bonus summary chips) and one column per named slot: kitItem "slot" (same grade ground + frame as the bag; empty =
+recessed square with the slot type as a faint silhouette), slot name, what is in it (or "trống"). Tap → onPick.
+Tư trang uses the slots that EXIST in the rules (j8): Cài tóc (`IT.sl` "hair"), Đeo tay (`IT.sl` "wrist"), Y phục (áo may từ vải, `S.dress`, 3 tháng).
+Summary = `wearBonus` chips (Sắc/Danh) + "vượt phẩm: dễ bị tố" when `vpItems`. It replaces the old line "Đang đeo: Sắc +2 · áo mới: không".
+Filled slot → the item panel (Tháo …); empty slot → kitModal with the bag items that fit (kitItem md + effect chip; tap = Đeo / May áo via j8 itemAct).
+New slot kinds need a real rule first (an `IT.sl` value) — no decorative slots.
+### KIT RULE (11/15): an act-card row is NEVER clipped
+The sticky category tab row (`#panel .kcattabs`, jk3) no longer paints a panel-coloured shadow upward (it cut the bottom border off the act cards
+above it on every tab). It sticks 8 px higher (`top:-8px`) and owns that band with its own top padding. Test: dev/test/inv-grade.js checks, on every
+panel tab, that the bottom edge of each visible act card hits the card itself.
 ### 28.14 WARDROBE K1 + K2 (review/wardrobe j92)
 - K1 `kitWearSlots(p,{size})`: two kitItem tiles (Trâm cài · Y phục, empty = "Chưa cài" / "Thường phục") right under the portrait on EVERY person
   card (player, consorts, maids, ma ma, Thái hậu…), and on Tư trang. The outfit status chip (Đúng phẩm / Vượt phẩm / Quá giản dị / Phạm tang) shows
