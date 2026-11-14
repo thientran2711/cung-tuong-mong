@@ -64,7 +64,7 @@ const HOOK2=`(function(){const A=window.__aud;const bad=(k,m)=>{A.err[k]++;if(A.
  const PL=()=>{const L=[["vuon",/ngự hoa viên|hòn non bộ/i],["thu",/cần chính điện/i],["dtd",/dưỡng hòa điện/i],["tn",/đức thọ cung/i],["kn",/càn ninh cung/i],["tyv",/thái y viện/i],["ksp",/kính sự phòng/i],["lc",/trường môn viện|lãnh cung/i]];return L};
  /* a place named as the one being LEFT ("được tha khỏi lãnh cung", "rời ngự hoa viên") puts nobody there */
  const AT=(s,re)=>{const g=new RegExp(re.source,"gi");let m;while((m=g.exec(s))){if(!/(khỏi|rời|dời từ|từ)\\s*$/i.test(s.slice(Math.max(0,m.index-10),m.index)))return true}return false};
- const HEAR=/đồn|rỉ tai|nghe nói|bóng gió|\\bhay |thường|từng |hôm nọ|hôm qua|đêm qua|năm xưa|trước đây|\\bsẽ |ngày mai|tối mai|đêm nay|tối nay|\\bsắp |\\bmuốn |\\bđịnh |\\bnếu |\\(sai |sai người|\\bhứa|mơ thấy|vọng sang|có thể|nghi |\\bmời .* ra |ngày rằm/i;
+ const HEAR=/đồn|rỉ tai|nghe nói|bóng gió|\\bhay |thường|từng |hôm nọ|hôm qua|đêm qua|năm xưa|trước đây|\\bsẽ |ngày mai|tối mai|đêm nay|tối nay|\\bsắp |\\bmuốn |(?:^|\\s)định |\\bnếu |\\(sai |sai người|\\bhứa|mơ thấy|vọng sang|có thể|nghi |\\bmời .* ra |ngày rằm/i;
  const OWNER=/(của|bên|cung|con của|tặng|cho|về|nhắm vào|hại|vu|bắt|thăm|giúp|tố|với)\\s*$/i;
  function strip(h){return String(h||"").replace(/<br\\s*\\/?>/gi,". ").replace(/<\\/p>/gi,". ").replace(/<[^>]+>/g," ").replace(/\\s+/g," ")}
  function checkCard(m,where){if(!m||m.__aud95)return;m.__aud95=1;try{j95bPresent(m)}catch(e){bad("g","lỗi trình bày: "+e.message)}

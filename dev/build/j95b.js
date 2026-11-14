@@ -122,7 +122,7 @@ function j95bCheck(id,pp){const L=j95bActors(id,pp);if(L==null)return null;if(L.
 const LEX95B=[[/ngự hoa viên|vườn ngự|hòn non bộ|thái dịch trì|thủy tạ|đình thiên thu|đình nghỉ/,"vuon"],[/cần chính điện|ngự thư phòng/,"thu"],[/dưỡng hòa điện|dưỡng tâm điện|tẩm điện hoàng thượng/,"dtd"],
  [/đức thọ cung|từ ninh|phật đường/,"tn"],[/càn ninh/,"kn"],[/thái y viện/,"tyv"],[/kính sự phòng/,"ksp"],[/trường môn viện|lãnh cung/,"lc"]];
 /* a sentence that is hearsay, habit, past, future, a wish, or about sound carrying, does not place anyone now */
-const NOW95B=/lời đồn|đồn |đồn:|rỉ tai|nghe nói|bóng gió|\bhay |thường|từng |hôm nọ|hôm qua|đêm qua|năm xưa|trước đây|\bsẽ |ngày mai|tối mai|đêm nay|tối nay|\bsắp |\bmuốn |\bđịnh |\bnếu |\(sai |sai người|\bhứa|mơ thấy|vọng sang|có thể|nghi |\bmời .* ra |ngày rằm/;
+const NOW95B=/lời đồn|đồn |đồn:|rỉ tai|nghe nói|bóng gió|\bhay |thường|từng |hôm nọ|hôm qua|đêm qua|năm xưa|trước đây|\bsẽ |ngày mai|tối mai|đêm nay|tối nay|\bsắp |\bmuốn |(?:^|\s)định |\bnếu |\(sai |sai người|\bhứa|mơ thấy|vọng sang|có thể|nghi |\bmời .* ra |ngày rằm/;
 const AGENT95B=/(người của|người bên|cung nữ của|cung nữ bên|thái giám của|thái giám bên|kẻ hầu của|người hầu của|con của|cung|tặng|cho|của|về|nhắm vào|hại|vu|bắt|thăm|giúp|tố|với)\s*$/;
 function j95bStrip(h){return String(h||"").replace(/<br\s*\/?>/gi,". ").replace(/<\/p>/gi,". ").replace(/<[^>]+>/g," ").replace(/&nbsp;/g," ").replace(/\s+/g," ")}
 function j95bScan(h){/* → [{id,k,why}] who the words place where, now */const out=[];const txt=j95bStrip(h);const sents=txt.split(/(?<=[.!?…][)"”']?)\s+|\s*;\s*/);
