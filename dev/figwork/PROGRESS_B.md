@@ -11,3 +11,15 @@
 - B_b1: c01 m0–m4, c02 m0–m2 done (8 lineups).
 - B_b2: c02 m3–m4, c03 m0–m4, c04 m0 done (16 lineups total).
 - B_b3: c04 m1–m4, c05 m0–m3 done (24 lineups total).
+- B_b4: c05 m4, c06 m0–m4, c07 m0–m1; B_b5: c07 m2–m4, c08 m0–m4 → c01–c08 COMPLETE (40 lineups, 160 figures).
+  All checked on sheets: proportions ~1:7, faces match the t1 identity, calm standing, varied props, m0 embroidered + silver trâm (never poor),
+  m2 brocade bijia + jade, m3 dark non-red + keys/ledger + gold pin, m4 red + crane square + black winged cap. No green drift.
+
+## NEXT (exact)
+- c09–c32 × m0..m4 (120 lineups), in order B-c09-m0 B-c09-m1 ... (8 per batch → sheets B_b6.jpg ...).
+- Per batch: `python3 bv.py JID...` (compact variable parts; full prompt = `python3 mjobs.py JID`) → images_generate (gpt-2-6, 2:1, 4k,
+  quality high, refs [style STY, image idfix N-cNN-t1] as printed, folder ba4aecfe-...) → append "jid gen" to gens.txt → creations_wait
+  (last gen is enough before bg) → images_remove_background ×8 → `bash addbg.sh "jids" "bgs"` → creations_wait on the 8 bg ids (urls.py needs
+  the wait output in the transcript) → `python3 mproc.py bg.txt JIDs` (~3 min; curl now retries) →
+  `TH=150 python3 msheet.py ../sheets/B_bN.jpg consort t1,tm0,tm1,tm2,tm3,tm4 cXX cYY` → `bash pubm.sh "msg" ../sheets/B_bN.jpg`.
+- Work copy: scratchpad/maidB (copy of dev/figwork/maidB); worktree scratchpad/wt-maidB (branch maidB → pushes review/maid-art-b).

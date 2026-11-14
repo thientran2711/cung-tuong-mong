@@ -29,13 +29,13 @@ for jid,gen,bid in LAST.values():
     raw=f"{H}/bg/{jid}-{bid}.png"
     if not os.path.exists(raw):
         if bid not in db: print("NOURL",jid,bid); continue
-        subprocess.run(["curl","-sS","-o",raw,db[bid]],check=True)
+        subprocess.run(["curl","-sS","--retry","5","--retry-all-errors","-o",raw,db[bid]],check=True)
     im=Image.open(raw).convert("RGBA")
     a=np.asarray(im.resize((960,480))).astype(int); op=a[...,3]>200
     dk=(op&(a[...,:3].max(axis=2)<25)).sum()/max(1,op.sum())
     if dk>0.03:
         g=f"{H}/bg/gen-{gen}.png"
-        if not os.path.exists(g): subprocess.run(["curl","-sS","-o",g,db[gen]],check=True)
+        if not os.path.exists(g): subprocess.run(["curl","-sS","--retry","5","--retry-all-errors","-o",g,db[gen]],check=True)
         o=Image.open(g).convert("RGB").resize(im.size); o.putalpha(im.split()[3]); im=o; print("darkfix",jid)
     cols=sp.split(im,4)
     base={r["identity"]:r for r in man[role] if r["role"]==role and r["identity"]==who}
