@@ -54,3 +54,21 @@
 ## Known notes
 - Tier 4 c01–c08 look only slightly richer than tier 3 (GPT follows the identity lineup's outfit closely). For t5–t8 use strong richness cues (gold brocade, big gold headdress, phoenix crown) and consider lowering reliance on outfit from the ref ("keep only her face from the reference").
 - Watch for colour drift (c19 t2, c27 t3 came out green); add "(X colour, NOT green)" when redoing.
+
+## MAID LADDER (art worker "maid-art", branch review/maid-art) — owner decision 11/14
+- 5 maid ranks = 5 outfits (SRK.maid in j14): m0 Cung nữ thô sử (light silk ruqun, small embroidered flowers, silver trâm + flower — pretty, never poor),
+  m1 Cung nữ (= the 52 original maid lineups, now tier "m1" in FIGURES-servants.json), m2 Đại cung nữ (brocade trim + half-sleeve bijia, jade pendant),
+  m3 Chưởng sự cô cô (dark rich silk, high bun + gold pin, keys/ledger at waist), m4 Nữ quan (red official robe, crane rank square, black winged gauze cap).
+  Calm STANDING poses only (no swirl/dance), props vary by rank; ages 19/24/32/48 as above.
+- Files: A) maid identities img/fig-maid-mNN-tmK-aAA.webp (+por), FIGURES-servants.json role "maid" tier "mK";
+  B) consort identities as maids img/fig-consort-cNN-tmK-aAA.webp, FIGURES.json role "consort" tier "mK";
+  C) maid identities raised to consort: img/fig-maid-mNN-tT-aAA.webp (T=1..8) and -tcold- (lãnh cung), FIGURES-servants.json role "maid" tier T / "cold".
+- Tools: dev/figwork/maid/ (mjobs.py prompts: job ids A-mNN-mK / B-cNN-mK / C-mNN-tT|tcold; vp.sh prints variable parts; mproc.py bg.txt [jid..]
+  splits + writes img + manifests; msheet.py contact sheets; pubm.sh publishes to review/maid-art). Ledgers gens.txt (jid gen) and bg.txt (jid gen bg).
+
+### CODE NOTE for the code worker (picker j17/j28/j35/j39)
+- A maid's figure must follow her CURRENT RANK: rank index r in SRK.maid (0..4) → tier "m"+r. Look up fig by (role, identity, tier, ageBand);
+  for maid identities (role "maid") tier "m1" = old null-tier files; for a consort face used by a maid player/NPC use role "consort" tier "mK".
+  A rank change only switches tier (same identity → same face). Fallback if a tier is missing: nearest lower mK, then "m1"/null.
+- A maid promoted to consort (Đáp ứng..Hoàng hậu) uses role "maid", same identity, tier = consort rank 1..8; in lãnh cung tier "cold".
+  Consort identities keep their own tiers 1..8. Keep the identity fixed for life.
