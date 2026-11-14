@@ -1,3 +1,22 @@
+# Kiểm duyệt bộ giao diện: review/hotfix-card @ d2e3ce1 (lần 2; f02208b chỉ thêm ảnh) — FAIL
+
+Ngày 2026-11-14. Chơi thật bằng save cũ (làm từ bản main), 686x880@2.2 trước, rồi 755x1000@2 (các cỡ còn lại chạy sau, xem LOG).
+
+## Đã sửa
+- Đầu thẻ `top:-1px`, góc vuông: hết khe lộ chữ TRÊN đầu thẻ. Mọi loại thẻ vẫn đúng một đầu thẻ, một tên, 0 chữ lọt vào đầu thẻ, không lỗi trang.
+- 686x880: thẻ cao 319 px (trước 235), thấy trọn đầu thẻ + thẻ việc đầu tiên; 755x1000: 490 px.
+
+## Lỗi chặn
+1. **Dải mặt bị cắt lộ dưới thanh tab con.** Khi mở người ở màn dọc, khung cuộn dải mặt lên dưới thanh tab con (Phi tần | Giao tình | Phe phái)
+   nhưng hàng TÊN của dải mặt ("Vân Thường · Người lạ · Người lạ…", nửa trên chữ bị cắt) vẫn nằm lộ giữa thanh tab con và đầu thẻ — đứng yên và khi cuộn.
+   Đúng lỗi chủ kêu 16:15Z (hàng danh sách cuộn lên lộ dưới thanh tab, chữ bị cắt). Ảnh: lan2-686x880-dai-mat-lo-duoi-tab.jpg, lan2-755x1000-dai-mat-lo-duoi-tab.jpg.
+   Sửa: cuộn hết dải mặt (tính cả hàng tên) vào dưới thanh, hoặc nền thanh tab con + đệm phủ xuống tới mép trên thẻ.
+2. **Chip phẩm (#me-r) không mở Bảng phẩm vị khi đang ở Hậu cung.** Chạm chip từ Hành sự → mở đúng bảng. Từ Giao tình: tab giữ "rel", __rb=true,
+   không thấy bảng. Từ Cung nhân: nhóm Hậu cung mở lại tab con nhớ cuối (Giao tình), không thấy bảng. Đây là lối DUY NHẤT tới Bảng phẩm vị (nút đã bỏ),
+   nên đang hỏng. Ảnh: lan2-686x880-chip-pham-tu-giao-tinh.jpg. Sửa: kitRankBoard đặt thẳng tab con = "rv" (và PG) rồi render, không dựa vào click nút nhóm.
+
+---
+
 # Kiểm duyệt bộ giao diện: review/hotfix-card @ c2790e7 — FAIL (gần đạt)
 
 Ngày 2026-11-14. Dựng nhánh (main 2bed83a + jk2b §18, j65), chơi thật bằng save cũ làm từ bản main (có thêm một hoàng tử).
