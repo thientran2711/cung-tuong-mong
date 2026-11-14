@@ -34,6 +34,7 @@ Lãnh cung (tcold): KHÔNG hoa điền. Không nốt ruồi, không beauty mark.
 | m24 | a tiny jade bi disc (a ring with a hole) | pale pink | jade green and gold |
 | m25 | a tiny eight-point star anise | rose red | lavender violet and silver |
 | m26 | a small half-moon fan shape | cinnabar red | blush pink and gold |
+
 ## m27–m52 (thợ Part C2; prompt: dev/figwork/maidC2/mjobs.py, hàm huadian)
 
 | ID | Hoạ tiết | Màu t1–t6 |
