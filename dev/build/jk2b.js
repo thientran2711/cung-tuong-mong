@@ -50,9 +50,6 @@ function kitFloorFit(){try{const st=$("stage"),im=$("scimg");if(!st||!im)return;
 (function(){if(typeof renderStage!=="function")return;const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);kitFloorFit();return r};
  try{let ro=null;const hook=()=>{const st=$("stage");if(!st||ro)return;ro=new ResizeObserver(()=>kitFloorFit());ro.observe(st)};if(document.readyState!=="loading")hook();else addEventListener("DOMContentLoaded",hook)}catch(e){}
  const st=document.createElement("style");st.id="k2b-floor";st.textContent=`
-.stage[data-kfloor] #mefig{bottom:var(--kfb)!important;height:min(80cqh,var(--kfh))!important}
-.stage[data-kfloor] .tokens{bottom:calc(var(--kfb) - 4px)!important}
-.stage[data-kfloor] .tok.fig .figimg{height:min(58cqh,calc(var(--kfh) * .8))!important}
 .stage[data-kfloor] .scimg{transition:background-position .2s}
 `;document.head.appendChild(st)})();
 
@@ -85,7 +82,7 @@ function kitStageScale(){try{const st=$("stage");if(!st)return;const H=st.client
   const tags=[...tokRow.querySelectorAll(".tok.fig>.tag")].filter(t=>t.offsetParent);const clr=()=>tags.forEach(t=>{t.classList.remove("ktlo","ktlo2");t.style.removeProperty("margin-left")});clr();
   const ov=n=>{for(let i=n;i<tags.length;i++){const a=tags[i-n].getBoundingClientRect(),b=tags[i].getBoundingClientRect();if(a.right+3>b.left)return true}return false};
   let lv=1;if(ov(1)){lv=2;tags.forEach((t,i)=>{if(i%2)t.classList.add("ktlo")});if(ov(2)){lv=3;clr();tags.forEach((t,i)=>{if(i%3==1)t.classList.add("ktlo");if(i%3==2)t.classList.add("ktlo2")})}}
-  if(lv>1){const need2=tags[0].offsetHeight*lv+6+3*lv;const kfb=parseFloat(st.style.getPropertyValue("--kfb"))||0;if(kfb<need2&&!st.dataset.kfb2){st.dataset.kfb2=1;st.style.setProperty("--kfb",need2+"px");kitStageScale();delete st.dataset.kfb2;return}}
+  if(tags.length){const need2=tags[0].offsetHeight*lv+8+3*lv;const kfb=parseFloat(st.style.getPropertyValue("--kfb"))||0;if(kfb<need2&&!st.dataset.kfb2){st.dataset.kfb2=1;st.style.setProperty("--kfb",need2+"px");kitStageScale();delete st.dataset.kfb2;return}}
   const sr2=st.getBoundingClientRect();tags.forEach(t=>{t.style.removeProperty("margin-left");const r=t.getBoundingClientRect();if(r.right>sr2.right-4)t.style.setProperty("margin-left",(sr2.right-4-r.right)+"px");else if(r.left<sr2.left+4)t.style.setProperty("margin-left",(sr2.left+4-r.left)+"px")});
  }catch(e){}}
 /* last check: nobody is cut at the stage edges (her idle sway included): shift inside, else one more common shrink */
@@ -112,6 +109,9 @@ function kitStageEdge(){try{const st=$("stage");if(!st)return;const sr=st.getBou
  header.hud>.hud2.khud.col{flex-wrap:nowrap!important;gap:3px!important}
  header.hud>.hud2.khud>.h2t{min-height:26px!important;height:26px;padding:0 6px!important;font-size:.7rem!important}
  header.hud>.hud2.khud .hc{padding:1px 5px!important;font-size:.66rem!important}
+}
+@media (min-width:600px) and (max-width:999px) and (orientation:portrait){
+ .game.cardtab{grid-template-rows:auto minmax(0,22dvh) minmax(0,1fr) auto!important}
 }`;document.head.appendChild(st)})();
 
 /* ---------- 4. TRONG CUNG block (owner 11/14): Hoàng thượng · Thái hậu · Hoàng hậu — mood + attitude toward her; "chưa rõ" when unknown;
@@ -306,15 +306,16 @@ function kitPcFix(pc){try{if(!pc||pc.dataset.k2==="1")return;const L=pc.querySel
  if(info)[...info.children].forEach(c=>{if(c.querySelector('.fbar,.rlab,.mini,[class*="bar"]')||/^\s*(Sủng|Ghen)\b/.test(c.textContent))bars.appendChild(c)});
  const nm=L.querySelector(":scope > .pcrk")||L.querySelector(":scope > .pcname");if(nm)nm.after(bars);else L.appendChild(bars);
  const facts=document.createElement("div");facts.className="kpfacts";if(info&&info.children.length)facts.appendChild(info);const ch=L.querySelector(":scope > .chips");if(ch)facts.appendChild(ch);
- if(facts.children.length){if(innerWidth>=600)Rr.prepend(facts);else L.appendChild(facts)}
+ if(facts.children.length)L.appendChild(facts)
  const name=(L.querySelector(".pcname")||{}).textContent||"";bars.querySelectorAll(".fbar>u,.mini>u").forEach((u,i)=>{const k=name+"|"+i;const nw=u.style.width;const ow=KIT_BARW[k];KIT_BARW[k]=nw;
   if(ow!=null&&ow!==nw&&!matchMedia("(prefers-reduced-motion: reduce)").matches){u.style.width=ow;u.style.transition="width .6s ease-out";requestAnimationFrame(()=>requestAnimationFrame(()=>{u.style.width=nw}))}});
  /* the slim strip for narrow cards */
  const pcp=L.querySelector(":scope > .pcp");const strip=document.createElement("div");strip.className="kpstrip";strip.setAttribute("aria-hidden","true");
  const face=pcp&&pcp.querySelector("img.kpor");strip.innerHTML=`<span class="kpsn"><b>${name}</b>${nm&&nm.classList.contains("pcrk")?`<small>${nm.innerHTML}</small>`:""}</span><span class="kpsb">${bars.innerHTML}</span>`;
  if(pcp){const mini=document.createElement("span");mini.className="kpsf";const kin=pcp.querySelector(".kin");if(kin){mini.innerHTML=`<span class="md kit kfc sm">${kin.outerHTML}</span>`}strip.prepend(mini)}
- pc.prepend(strip);const upd=()=>{const narrow=innerWidth<600;pc.style.setProperty('--kpch',pc.clientHeight+'px');const r=pcp?pcp.getBoundingClientRect():null,pr=pc.getBoundingClientRect();strip.classList.toggle("on",narrow&&!!r&&r.bottom<pr.top+30)};
- pc.addEventListener("scroll",upd,{passive:true});upd()}catch(e){console.error("kitPcFix",e)}}
+ pc.prepend(strip);const upd=()=>{pc.style.setProperty('--kpch',pc.clientHeight+'px');const pr=pc.getBoundingClientRect();const bb=bars.getBoundingClientRect();const vb=Math.min(pr.bottom,innerHeight);
+  const hidden=bars.offsetParent&&(bb.top<pr.top+4||bb.bottom>vb-2);strip.classList.toggle("on",innerWidth<1000&&!!hidden)};
+ pc.addEventListener("scroll",upd,{passive:true});const L2=pc.querySelector(':scope > .pcl');if(L2)L2.addEventListener("scroll",upd,{passive:true});addEventListener("resize",upd);upd();setTimeout(upd,300)}catch(e){console.error("kitPcFix",e)}}
 (function(){const run=()=>document.querySelectorAll(".pc:not([data-k2])").forEach(kitPcFix);const mo=new MutationObserver(()=>run());
  const go=()=>{mo.observe(document.body,{childList:true,subtree:true});run()};if(document.readyState!=="loading")go();else addEventListener("DOMContentLoaded",go)})();
 (function(){const st=document.createElement("style");st.id="k2b-pcsticky";st.textContent=`
@@ -329,9 +330,12 @@ function kitPcFix(pc){try{if(!pc||pc.dataset.k2==="1")return;const L=pc.querySel
  .pc[data-k2]{display:grid!important;grid-template-columns:var(--kpcw) minmax(0,1fr);gap:0 12px;align-items:start}
  .pc[data-k2]>.pcl{position:sticky;top:0;z-index:2;background:var(--panel2);padding-bottom:4px;max-height:var(--kpch,none);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}
  .pc[data-k2]>.pcl>.pcp.kit{float:none;margin:0 0 4px!important}
+ .pc[data-k2]>.pcl{display:flex!important;flex-direction:column}
+ .pc[data-k2]>.pcl>.pcname,.pc[data-k2]>.pcl>b:first-of-type{order:-3}.pc[data-k2]>.pcl>.pcrk{order:-2}.pc[data-k2]>.pcl>.kpbars{order:-1;margin:0 0 4px}
  .pc[data-k2]>.pcr{margin-top:0}
+ .pc[data-k2]>.kpstrip{grid-column:1/-1}
 }
-@media (max-width:599px){
+@media (max-width:999px){
  .pc[data-k2]>.kpstrip{display:flex;position:sticky;top:-8px;z-index:5;margin:-8px -8px 0;padding:4px 8px;gap:8px;align-items:center;background:var(--panel2);border-bottom:1px solid var(--k-hair);box-shadow:0 2px 6px #5a3a2022;visibility:hidden;height:0;overflow:hidden;opacity:0;transition:opacity .15s}
  .pc[data-k2]>.kpstrip.on{visibility:visible;height:auto;opacity:1}
  .kpstrip .kpsn{display:flex;flex-direction:column;line-height:1.15}.kpstrip .kpsn b{font-family:var(--display);font-size:.95rem}.kpstrip .kpsn small{font-size:.72rem;color:var(--gold);display:flex;align-items:center;gap:3px}
@@ -525,3 +529,11 @@ document.addEventListener("click",ev=>{const a=ev.target.closest&&ev.target.clos
 .kwd .kwdpw{display:flex;flex-direction:column;gap:4px;align-items:center;max-width:260px}
 .kwd .kpsec{margin:0 0 10px}
 `;document.head.appendChild(st)})();
+
+/* ---------- 16. STAGE LAYOUT OWNER = j59 (main): after merging main, j59 lays out the stage (one height for every adult by the visible body,
+   feet on one floor, name tags under the feet in 1–2 rows, a scrolling strip when too many). Kit 2b's own scaler (2b) is retired so the two
+   never fight; owner A (people fill the stage) is applied in j59 itself: the figure height cap is 90 % of the stage (was 66 %). KIT_FLOOR
+   still crops each room picture to keep the floor. Veil/scar layers on stage figures follow j59's sizes (kitFigFx after j59's layout). ---------- */
+kitStageScale=function(){try{kitFigFx()}catch(e){}};kitStageEdge=function(){};
+(function(){if(typeof window.j59lay!=="function")return;const l0=window.j59lay;window.j59lay=function(){const r=l0.apply(this,arguments);try{kitFigFx()}catch(e){}return r}})();
+(function(){const st=$("stage");if(st)st.classList.remove("kscale")})();
