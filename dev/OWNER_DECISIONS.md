@@ -125,3 +125,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (02:45Z) Owner: Độ khó row overlaps the face picker on the identity card (fix). Servant-start (cung nữ) must be shown in maid outfit, not consort dress — figure always matches current role/rank (all origins).
 - (02:50Z) Owner: emotion icons must be human faces showing the emotion (not symbolic objects); readable at small size.
 - (03:00Z) Owner: illness (light/heavy) + poisoning looks approved; code expressions approach OK but emotions must be clearer (stronger).
+- (03:15Z) Owner APPROVED Tiên đế băng hà picture (review/succession2 816d0976).
