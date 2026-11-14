@@ -21,6 +21,7 @@
 - B_b6: c09 m0–m4, c10 m0–m2 (48 lineups total).
 - B_b7: c10 m3–m4, c11 m0–m4, c12 m0 (56 lineups total).
 - B_b8: c12 m1–m4, c13 m0–m3 (64 lineups total).
+- B_b9: c13 m4, c14 m0–m4, c15 m0–m1 (72 lineups total). From c17 the 48yo hair line also says "almost as dark as at 32".
 
 ## NEXT (exact)
 - c09–c32 × m0..m4 (120 lineups), in order B-c09-m0 B-c09-m1 ... (8 per batch → sheets B_b6.jpg ...).
