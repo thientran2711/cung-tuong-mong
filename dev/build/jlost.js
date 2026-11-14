@@ -25,7 +25,7 @@ function lostEvUse(id){const c=loGet(id);if(c&&c.cev>0){c.cev--;return true}retu
 function loNm(k){return typeof wdFrameNm==="function"?wdFrameNm(k):((IT[k]||{}).n||"món đồ")}
 function loP(k){return byKey(k)}
 function loAlive(p){return !!p&&(p===S?!S.dead:p.alive&&!p.out)}
-function loPal(p){if(!p)return"";if(p===S)return"cung ngươi";let k=true;try{k=typeof knows!=="function"||knows(p)}catch(e){}try{const n=palName(palaceOf(p));if(n)return k?`${n} (${wdNm(p)})`:n}catch(e){}return k?`cung ${wdNm(p)}`:"một cung khác"}
+function loPal(p){if(!p)return"";if(p===S)return"cung ngươi";let k=true;try{if(typeof kitKnownName==="function")k=kitKnownName(p)}catch(e){}try{const n=palName(palaceOf(p));if(n)return k?`${n}, chỗ ${p.name}`:n}catch(e){}return k?`cung ${p.name}`:"một cung khác"}
 function loPrice(e){const w=typeof wdItem==="function"?wdItem(e):null;return w?(w.pr||0):((IT[e.k]&&IT[e.k].pr)||0)}
 function loGrade(e){const w=typeof wdItem==="function"?wdItem(e):null;if(w)return w.g|0;const pr=loPrice(e);return (IT[e.k]&&IT[e.k].nt)?4:pr>=200?3:pr>=100?2:pr>=40?1:0}
 function loPic(e,sz){const w=typeof wdItem==="function"?wdItem(e):null;return typeof kitItem==="function"?kitItem({src:kitItemSrc(e.k,w?w.icon:""),name:loNm(e.k),grade:loGrade(e),size:sz||"md"}):""}
@@ -46,7 +46,7 @@ function loLose(p){if(!loAlive(p))return null;const L=(p.inv||[]).filter(loOk);i
  return c}
 function loClean(e){const x=Object.assign({},e);for(const f of ["lo","gh","by","h","w"])delete x[f];return x}
 /* the item goes back to its owner (j92 verdict, a quiet return, a search) */
-function lostReturn(e,how){const c=e&&e.lo?loGet(e.lo):null;if(!c||c.st==="done")return;const o=loP(c.own);if(o&&loAlive(o)){o.inv=o.inv||[];o.inv.push(loClean(e))}
+function lostReturn(e,how){const c=e&&e.lo?loGet(e.lo):null;if(!c||c.st==="done")return;const o=loP(c.own);if(o&&loAlive(o)){o.inv=o.inv||[];o.inv.push(loClean(c.e||e))}
  c.st="done";c.end=wk();c.how=how||"tra";if(o===S)log(`${loNm(c.k)} đã về lại rương ngươi.`)}
 /* take a worn missing item off before a search (wardrobe slot or j8 worn flag) */
 function lostUnwear(t,a){if(!t)return;try{const w=typeof wdOf==="function"?wdOf(t):null;if(w)for(const sl of ["tram","y"]){const e=w[sl];if(e&&e.lo&&(!a||e.gh===key(a))){const k=sl==="y"?wdDefault(t,"y"):null;w[sl]=k?{k,from:"base"}:null;try{wdOf(t)}catch(x){}t.inv=t.inv||[];t.inv.push(e)}}}catch(x){}
@@ -61,7 +61,7 @@ function loFind(c){const r=R(100);const o=loP(c.own);if(!o||!loAlive(o)){c.st="d
  if(r<LO.home[c.cause]){o.inv=o.inv||[];o.inv.push(loClean(c.e));c.st="done";c.end=wk();c.how="nha";
   if(o===S){Q.push({t:"Tìm thấy đồ thất lạc",who:pMe(),h:`<p style="text-align:center">${loPic(c.e,"lg")}</p><p>Cung nhân tìm thấy <b>${loNm(c.k)}</b> ngay trong cung ngươi${c.cause==="srv"&&c.sv?`: ${c.sv} cất nhầm chỗ`:""}.</p>`,btn:"Đã hiểu"});log(`${loNm(c.k)} thất lạc nay tìm thấy trong cung.`)}return}
  if(r>=LO.home[c.cause]+LO.away[c.cause]){c.nf=1;return}
- const h=loHolder(c);if(!h){c.nf=1;return}const e=Object.assign({},c.e,{lo:c.id,gh:c.own});if(c.cause==="riv"){e.h=1;e.by=c.by;c.tip=wk()+LO.tipW[0]+R(LO.tipW[1]-LO.tipW[0]+1)}else c.open=1;
+ const h=loHolder(c);if(!h){c.nf=1;return}const e=Object.assign({},c.e,{lo:c.id,gh:c.own});delete e.from;delete e.giver;if(c.cause==="riv"){e.h=1;e.by=c.by;c.tip=wk()+LO.tipW[0]+R(LO.tipW[1]-LO.tipW[0]+1)}else c.open=1;
  h.inv=h.inv||[];h.inv.push(e);c.st="held";c.at=key(h);
  if(h===S&&c.open){Q.push({t:"Đồ lạ trong rương",who:pMe(),h:`<p style="text-align:center">${loPic(e,"lg")}</p><p>Cung nhân thấy trong rương ngươi có <b>${loNm(c.k)}</b>, không rõ của ai.</p><p class="past">Vào mục Tư trang › Đồ thất lạc: đối chiếu sổ Nội vụ phủ để biết chủ, rồi trả về hay nộp lên.</p>`,btn:"Đã hiểu"});log(`Trong rương có ${loNm(c.k)} không rõ của ai.`)}
  else if(h!==S&&c.open&&loHonest(h))c.ret=wk()+1+R(3)}
