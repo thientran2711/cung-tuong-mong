@@ -141,7 +141,7 @@ html body #hud2 .khg .khc .hc[data-hx="th"],html body #hud2 .khg .khc .hc[data-h
 html body #panel .ksub{top:0!important;z-index:7!important;box-shadow:0 -9px 0 0 var(--panel),0 3px 6px -4px #5a3a2040;overflow:visible!important}
 html body #panel .ksub .ksubb:first-child{border-radius:8px 0 0 8px}html body #panel .ksub .ksubb:last-child{border-radius:0 8px 8px 0}
 /* 5 · CHIP LISTS / SELECTORS wrap, never clip (the panel scrolls) */
-html body #panel .relsel,html body #panel .pctabs,html body #panel .chips,html body #panel .kchips{flex-wrap:wrap!important;overflow:visible!important;max-height:none!important}
+html body #panel .relsel,html body #panel .pctabs:not(.kcattabs),html body #panel .chips,html body #panel .kchips{flex-wrap:wrap!important;overflow:visible!important;max-height:none!important}
 /* 2 · STAGE HUD plaques */
 html body .stage.k3g .stop{right:auto!important;width:var(--kgw,150px)!important;max-width:var(--kgw,150px)!important;flex-direction:column!important;align-items:stretch!important;gap:5px!important;max-height:calc(100% - 16px)!important;pointer-events:none}
 html body .stage.k3g .stop .scene-t{max-width:none!important;width:auto;flex:0 0 auto!important;font-size:.95rem}
@@ -150,7 +150,7 @@ html body .stage.k3g #sc-t h2{display:block!important;font-size:1.05rem;line-hei
 html body .stage.k3g.k3n #sc-t h2{font-size:.86rem}
 .ksh{display:flex;flex-direction:column;gap:5px;pointer-events:none;min-width:0}
 .ksh[hidden]{display:none!important}
-.kshR{position:absolute;top:8px;right:8px;width:var(--kgw,150px);z-index:2;align-items:stretch}
+.kshR{position:absolute;top:8px;right:8px;width:max-content;min-width:var(--kgw,150px);max-width:46%;z-index:2;align-items:stretch}
 .ksh .k3p,.ksh .k3c{pointer-events:auto;background:var(--k3pl);border:1px solid var(--line);border-radius:8px;box-shadow:0 1px 4px #3a20101f;backdrop-filter:blur(2px)}
 .ksh .k3p{display:flex;flex-direction:column;padding:3px 6px;gap:0}
 .ksh .k3h{font-family:var(--display);font-size:.7rem;color:var(--gold);letter-spacing:.03em;border-bottom:1px solid var(--k-hair,#e6d3ac);margin-bottom:1px}
@@ -167,7 +167,7 @@ html body .stage.k3g.k3n #sc-t h2{font-size:.86rem}
 .ksh .k3c{display:flex;align-items:center;gap:5px;padding:2px 6px 2px 3px;font:inherit;text-align:left;cursor:pointer;min-height:0;color:var(--ink);width:100%}
 .ksh .k3c .md{flex:0 0 auto}
 .ksh .k3c .k3ct{display:flex;flex-direction:column;line-height:1.2;min-width:0}
-.ksh .k3c .k3ct>b{font-size:.75rem;color:var(--gold);font-weight:700;white-space:normal}
+.ksh .k3c .k3ct>b{font-size:.75rem;color:var(--gold);font-weight:700;white-space:nowrap}
 .ksh .k3c .k3ct>.ef,.ksh .k3c .k3v{font-size:.72rem;font-weight:600}
 .ksh .k3c .k3v small{font-weight:400;color:var(--dim);font-size:.68rem}
 /* narrow stage (phones): smaller type, Tư chất as icon + number (label in the tooltip), chips keep title + value */
@@ -254,11 +254,7 @@ html body .stage #sc-t h2,html body .stage #sc-t h2 *{white-space:nowrap!importa
 html body .stage .tok .tag,html body .stage #j59metag .tag{background:none!important;border:0!important;box-shadow:none!important;padding:0!important;white-space:nowrap!important;color:#2a1a12!important;font-weight:600;text-shadow:0 0 2px #fff8ee,0 0 5px #fff8ee,0 0 9px #fff8eecc}
 html body .stage .tok .tag .j59t,html body .stage #j59metag .tag .j59t{display:inline!important;background:none!important;box-shadow:none!important;padding:0!important;margin:0 .35em 0 0!important;color:#7a5530!important;font-size:inherit!important;font-weight:500}
 html body .stage .tok .tag .j59n,html body .stage #j59metag .tag .j59n{display:inline!important}
-/* NON-PERSON PICTURES (kitArtFrame: act cards, events, story, info, works, places): no hanging pendant/tassel — tassels belong to people.
-   The frame is cut at the band like the person-card cell (canvas y 0–795) and fills its slot's width (KIT 31.10) */
-html body .pcp.kit.kartf{height:auto!important;aspect-ratio:550/795!important;overflow:hidden!important;max-height:none!important}
-html body .pcp.kit.kartf>.kin{position:absolute!important;left:0!important;top:0!important;width:100%!important;height:130.44%!important;transform:none!important}
-html body .kaart,html body .kpiart{height:auto!important;align-self:center}
+/* NON-PERSON PICTURES: kitArtFrame = kitSceneArt (jk2b; simple gold line, no tassel, KIT 31.10); act slot 170 px wide (128 px on phones), 3:4 */
 :root{--kaw:170px}@media (max-width:599px){:root{--kaw:128px}}
 html body button.ka.kcard.kart{min-height:0!important}
 /* floating notes (kmnote: "Tối nay Hoàng thượng lật thẻ…") sit just above the bottom tab bar: never over the top bar, the date or the sub-tabs */
@@ -288,6 +284,76 @@ const cssC=document.createElement("style");cssC.id="k3-cattabs";cssC.textContent
 #panel .ksub~* .kcattabs,#panel .ksub~.kcattabs{top:var(--ksubh,44px)}
 #panel .kcattabs .pct{white-space:nowrap}
 #panel .cards>button.ka[hidden]{display:none!important}
-@media (max-width:999px){#panel .kcattabs{display:flex!important;flex-wrap:nowrap!important;overflow-x:auto!important;scrollbar-width:thin}#panel .kcattabs .pct{flex:0 0 auto}}
+@media (max-width:999px){html body #panel .kcattabs{display:flex!important;flex-wrap:nowrap!important;overflow-x:auto!important;scrollbar-width:thin}#panel .kcattabs .pct{flex:0 0 auto}}
 `;document.head.appendChild(cssC);
 })();
+
+/* ---------- 8. KIT SELECTED STATE (KIT 31.13, owner 11/14 approved): ONE selected look for every picker — dung mạo faces (kitPicker .kpki),
+   consort / servant / kid picker strips (.pface), origin wheel tiles (.krt), pressed kit toggles (.ksel). No box or background block, no check
+   badge: the chosen frame glows gold along its own outline, is very slightly enlarged and in full colour; the others are dimmed.
+   aria-checked / aria-pressed stay for accessibility. ---------- */
+(function(){const st=document.createElement("style");st.id="k3-sel";st.textContent=`
+:root{--k-glow:drop-shadow(0 0 5px rgba(255,214,110,1)) drop-shadow(0 0 2px rgba(190,140,30,.9))}
+html body .kpki,html body .kpki:hover,html body .kpki.on{background:none!important;box-shadow:none!important;outline:none!important}
+html body .kpki{transition:transform .15s ease,opacity .15s ease}
+html body .kpki:not(.on){opacity:.7}html body .kpki:not(.on):hover{opacity:.9}
+html body .kpki.on{transform:scale(1.07);z-index:2;opacity:1}
+html body .kpki.on span.md{filter:var(--k-glow)}
+html body .kpki:focus-visible{outline:2px dashed var(--gold)!important;outline-offset:1px}
+html body .kpkck{display:none!important}
+html body .pface.on{border-color:transparent!important;background:none!important;box-shadow:none!important}
+html body .pface:not(.on){opacity:.75}html body .pface:not(.on):hover{opacity:.95}
+html body .pface.on>span.md,html body .pface.on>.md{filter:var(--k-glow);transform:scale(1.06)}
+html body .kroul .krt.on{background:var(--k-card,#fffaf0)!important;box-shadow:none!important;filter:var(--k-glow);transform:scale(1.06)}
+html body .ksel:not(.kpki),html body [aria-pressed="true"].kselable{outline:none!important;box-shadow:0 0 0 2px var(--k-sel-ring,#a8740c),0 0 10px 3px rgba(255,214,110,.85)!important}
+`;document.head.appendChild(st)})();
+
+/* ---------- 9. NO LONE BUTTON ROWS in person cards (KIT 28.18): the card's "✕ Lui" (#popx, card opened from the room) sits in the card's
+   top-right corner beside the name row instead of taking a row of its own above the acts. ---------- */
+(function(){const st=document.createElement("style");st.id="k3-pcx";st.textContent=`
+html body .pc:has(>.pcr>.pcx){position:relative}
+html body .pc>.pcr>.pcx{position:absolute!important;top:6px;right:6px;margin:0!important;z-index:8}
+html body .pc:has(>.pcr>.pcx)>.pcl>.kpnm{padding-right:78px}
+/* kit panels (report / story / info dialogs): the close row "Đã hiểu" is pinned at the dialog's bottom, the body scrolls under it */
+html body .dlg.kpanel>.mr{position:sticky;bottom:0;z-index:4;background:linear-gradient(rgba(255,250,240,0),var(--k-card,#fffaf0) 10px);padding-top:8px}
+`;document.head.appendChild(st)})();
+
+/* ---------- 10. NAME TAGS NEVER OVERLAP (KIT 31.12): name tags under figures stay one line; when two tags would touch, the later one
+   steps one line down (or up when there is no room under it). Runs after every stage render and on resize. ---------- */
+function k3Tags(){try{const st=$$("stage");if(!st)return;const SR=st.getBoundingClientRect();
+ const G=[...st.querySelectorAll(".tok .tag")].filter(g=>{const t=g.closest(".tok");return t&&t.style.visibility!=="hidden"&&g.getBoundingClientRect().width>0});
+ G.forEach(g=>g.style.translate="");const R=G.map(g=>({g,r:g.getBoundingClientRect()})).sort((a,b)=>a.r.left-b.r.left);const placed=[];
+ R.forEach(o=>{const h=o.r.height+2;let dy=0;const hit=d=>placed.some(p=>o.r.left<p.r.right+4&&o.r.right>p.r.left-4&&o.r.top+d<p.r.bottom+p.dy&&o.r.bottom+d>p.r.top+p.dy);
+  for(const d of [0,h,-h,2*h,-2*h]){if(o.r.bottom+d>SR.bottom-2||o.r.top+d<SR.top+2)continue;if(!hit(d)){dy=d;break}}
+  if(dy)o.g.style.translate=`0 ${dy}px`;placed.push({r:o.r,dy})})}catch(e){}}
+(function(){let tt=0;const go=()=>{clearTimeout(tt);tt=setTimeout(k3Tags,80);setTimeout(k3Tags,700)};
+ if(typeof renderStage==="function"){const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);go();return r}}
+ addEventListener("resize",go)})();
+
+/* ---------- 11. kitBullets (KIT 31.14, owner 11/14): a long result / report / spy / news paragraph is shown as a BULLET LIST, one fact per
+   line. Split on the text's own sentence ends (". ", "! ", "? ") and on a "Label:" that starts a new fact after a colon; a sentence that is
+   only "( … )" (filler such as "(Đã ghi vào mục Đã biết…)") becomes a small dim footnote. Gains / costs inside "( … +N )" / "( … -N )" get the
+   kit colours (KIT 1.2: green = gain, red = cost). Applied to: result card sentence (#rtoast .ksen), the person-card result note (.pc .pcn),
+   news / intel / result kit panels (.kfacts paragraphs) — every generator benefits without changing its text. ---------- */
+function kitBulletsHTML(h){h=String(h||"").trim();if(!h)return h;const txt=h.replace(/<[^>]+>/g,"");if(txt.length<70)return null;
+ /* split outside tags only */
+ const parts=[];let cur="",depth=0,tag=false;for(let i=0;i<h.length;i++){const c=h[i];cur+=c;if(c==="<")tag=true;else if(c===">")tag=false;if(tag)continue;
+  if(c==="(")depth++;else if(c===")")depth=Math.max(0,depth-1);
+  if(depth===0&&/[.!?…]/.test(c)&&/^\s+/.test(h.slice(i+1))){const rest=h.slice(i+1).replace(/^\s+/,"");if(/^(<[^>]+>)*[A-ZÀ-ỸĐ("“]/.test(rest)){parts.push(cur);cur=""}}
+  else if(depth===0&&c===":"&&cur.replace(/<[^>]+>/g,"").length>30&&/^\s+(<[^>]+>)*[A-ZÀ-ỸĐ][^:.<()]{0,24}:\s/.test(h.slice(i+1))){parts.push(cur.slice(0,-1));cur=""}}
+ if(cur.trim())parts.push(cur);const P=parts.map(s=>s.trim().replace(/^(<\/[^>]+>)+/,"").trim()).filter(s=>s.replace(/<[^>]+>/g,"").trim());
+ if(P.length<2)return null;const foot=[],li=[];
+ P.forEach(s=>{const t=s.replace(/<[^>]+>/g,"").trim();if(/^\(.*\)\.?$/.test(t)){foot.push(t.replace(/^\(|\)\.?$/g,""));return}
+  s=s.replace(/\.\s*$/,"").replace(/\(([^()<>]*?)([+−-]\s?\d+)\)/g,(m,a,n)=>`(<span class="ef ${/^\+/.test(n)?"g":"r"}">${a}${n}</span>)`);li.push(s)});
+ return `<ul class="kbl">${li.map(s=>`<li>${s}</li>`).join("")}</ul>`+(foot.length?`<small class="kblf">${foot.join(" ")}</small>`:"")}
+function kitBullets(el){try{if(!el||el.dataset.kbl===el.innerHTML.length+"")return;if(el.querySelector(".kbl"))return;const r=kitBulletsHTML(el.innerHTML);
+ if(r){el.innerHTML=r;el.classList.add("kblw")}el.dataset.kbl=el.innerHTML.length+""}catch(e){}}
+(function(){const SEL="#rtoast .ksen, .pc .pcn, .dlg.kpanel .kfacts .kfx, .dlg.kpanel .kfacts p";let t=0;
+ const run=()=>{document.querySelectorAll(SEL).forEach(e=>{if(e.closest(".kpid"))return;kitBullets(e)})};
+ try{new MutationObserver(()=>{clearTimeout(t);t=setTimeout(run,20)}).observe(document.body,{childList:true,subtree:true})}catch(e){}
+ const st=document.createElement("style");st.id="k3-bl";st.textContent=`
+ul.kbl{margin:2px 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:3px;text-align:left}
+ul.kbl>li{position:relative;padding-left:14px;line-height:1.35}
+ul.kbl>li::before{content:"";position:absolute;left:3px;top:.55em;width:5px;height:5px;border-radius:50%;background:var(--gold,#8f5f0c)}
+small.kblf{display:block;margin-top:3px;font-size:.72rem;color:var(--dim,#7a6a58);font-style:italic}
+`;document.head.appendChild(st)})();
