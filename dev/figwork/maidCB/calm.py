@@ -25,7 +25,7 @@ G48=["hands calmly clasped inside her long sleeves before her",
  "holding a small sprig of flowers lowered in one hand, the other hand at her waist"]
 STILL=("all four standing still, upright and composed at full height like a formal portrait (NOT walking, NOT dancing, NOT mid-stride, "
  "never crouching, bending or leaning), feet together under the robe, robe and skirt hanging straight and calm, sleeves, sash and ribbons falling "
- "naturally with NO swirling and NO flying fabric; all fabrics thick opaque silk and brocade (nothing translucent, no layer showing through another), NO sheer see-through gauze, NO floating stole; tall slender elegant adult proportions, about seven and a half heads tall, small head, long legs; "
+ "naturally with NO swirling and NO flying fabric; all fabrics thick opaque silk and brocade (nothing translucent, no layer showing through another; skirt and train heavy opaque brocade, no see-through overskirt), NO sheer see-through gauze, NO floating stole; tall slender elegant adult proportions, about seven and a half heads tall, small head, long legs; "
  "each figure complete head to feet inside the frame, slim silhouette, clear empty space between the four figures")
 def pose_for(tr,i,t,prop,g=0):
     a=G19[(g+t)%6]; b=G24[(g*2+t)%5]; c=G32[(g*3+t)%8]; d=G48[(g+2*t)%6]

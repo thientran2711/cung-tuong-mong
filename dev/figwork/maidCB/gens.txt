@@ -251,3 +251,13 @@ C-m47-t5 rgeWbdmxtc handsB
 C-m48-t5 iGqaPK13uK handsB
 C-m49-t5 jUX0KtmLD0 handsB
 C-m50-t5 TdS1nPLVNR handsB
+C-m51-t5 jUX0rpMLD0 handsB
+C-m52-t5 tCiJ8NcmZJ handsB
+C-m27-t6 N2Fh4Qw6D9 handsB
+C-m28-t6 fHA9vAmCDY handsB
+C-m29-t6 O6fo7Ezynm handsB
+C-m30-t6 s7oVjttl8e handsB (a24 birdcage, avoid 2 jade)
+C-m31-t6 SytplfOUb8 handsB (a24 box)
+C-m32-t6 ksDn5oz16B handsB
+C-m29-t6 rgeWrBZxtc handsB-redo(sheer train)
+C-m30-t6 nVjqnSXYQD handsB-redo(sheer train)
