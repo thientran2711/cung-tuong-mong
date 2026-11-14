@@ -9,3 +9,4 @@
 
 ## Status
 - B_b1: c01 m0–m4, c02 m0–m2 done (8 lineups).
+- B_b2: c02 m3–m4, c03 m0–m4, c04 m0 done (16 lineups total).
