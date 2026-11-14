@@ -427,7 +427,7 @@ function kcDienD(){return{who:pEmp(),t:`<p>Điện tuyển. Hoàng thượng và
  kcO("Đáp lời khiêm nhường",{},()=>kcDien("duc")),kcO("Đối đáp lanh lợi",{},()=>kcDien("tai"))]}}
 function kcDien(way){const sc=kcMyScore(way);const C=KC.cut;S.kc.tt.sc=Math.round(sc);
  /* the court keeps only some of the girls: a better score is a better chance, never a sure one */
- const pSel=cl(35+(sc-C[0])*1.2,15,KC.selMax);S.kc.tt.p=Math.round(pSel);
+ const pSel=cl(45+(sc-C[0])*1.2,20,KC.selMax);S.kc.tt.p=Math.round(pSel);
  if(sc<C[0]-15||!roll(pSel)){pushDil(mkP("kcE",{e:"trave"}),"Trả thẻ bài");log("Điện tuyển: Hoàng thượng trả thẻ bài.");return}
  const rank=sc>=C[2]?2:sc>=C[1]?1:0;kcEnter(rank)}
 function kcTraveD(){const tm=kcTmMan();const r=!!(S.tm96&&S.tm96.h>=80&&S.tm96.rise&&kcRare("kcR2",.6));const r5=S.duc>=70&&S.danh>=50&&kcRare("kcR5",.6);
