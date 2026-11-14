@@ -1,5 +1,32 @@
 # Art progress (art worker, 11/14/2026)
 
+## CURRENT STATE (art worker #5, newest first — read this first)
+- WORKTREE/PUBLISH: work copy = scratchpad/figwork; scripts write into scratchpad/wt-art5/img (branch art5). Next worker: create your own
+  worktree (wt-art6, branch art6) and `sed -i 's/wt-art5/wt-art6/g; s/origin art5:/origin art6:/'` on bigsheet.py cmp.py fixalpha.py idsheet.py
+  sheet.py sheetproc.py tiersheet.py heads.py pub3.sh. `bash pub3.sh "msg"` commits, rebases on origin/review/consort-art, pushes art5:review/consort-art.
+- PROMPT CHANGES (all in spec5.py, appended blocks marked "art5"; jobs.json already rebuilt — do NOT rerun spec2-5 blindly, the blocks are
+  idempotent but the older spec scripts are not guaranteed to be):
+  * a48 wording now "her hair still fully DARK black-brown like the younger figures, at most two or three single fine silver hairs barely visible,
+    NO grey streak, NO grey or silver temples, NOT grey-haired ..." (the "few silver strands at the temples" wording still gave grey temple streaks).
+  * opaque clause added to every prompt after "NO flying fabric": "all fabrics opaque silk, NO sheer see-through gauze, NO floating stole".
+    When a consort's prop says "gauze fan" (c04, c20), write "silk fan" instead in the prompt.
+  * LAD[8] (Empress) rewritten: dense gold+kingfisher embroidery, floor-length mantle edged with gold brocade+pearls, wide pearl-fringed cloud
+    collar, taller/wider nine-phoenix crown with pearl curtains; train "trailing straight behind her, NOT spread wide, slim tall silhouette"
+    (first c01 trial with a spread train gave a36/a51 H/W 1.76-1.86).
+- HAIR-EDIT TRICK (cheap, keeps the lineup): images_generate gpt-2-6, 2:1, 4k, quality high, references=[{type:image, identifier:<old gen id>}],
+  prompt "Edit this image. Keep everything exactly the same: the same four figures, same faces, same outfits, same crowns, same poses, same colours,
+  same plain parchment background, same composition and framing. Change ONLY the hair: every woman's hair is fully DARK black-brown, with NO grey
+  streaks and NO grey or silver temples; the rightmost (oldest) lady may have at most two or three single fine silver hairs, barely visible. No text, no labels."
+  Then bg-remove + run.sh as usual. `python3 heads.py out.jpg <tier> c01 ..` = a51 head crops to check greyness. t5/t6 a51 were NOT checked yet
+  (likely grey too — check with heads.py and hair-edit where needed; owner hates grey).
+- IMPORTANT: run.sh needs the bg URL harvested from a creations_wait output in the transcript — always creations_wait on the bg ids before run.sh
+  (otherwise it prints NOURL and silently keeps the old figure).
+- DONE: t7 all 32 (c17–c32 new; 27 lineups hair-edited to dark: c02 c03 c05 c06 c07 c09–c18 c21–c23 c25–c32; c20 redrawn with new wording).
+  Sheet scratchpad/sheets/tier7.jpg. t8 c01–c04 done (sheet scratchpad/sheets/tier8_cmp.jpg = t7 vs t8 side by side; t8 clearly grander).
+- NEXT (in order): t8 c05–c32 (`python3 cv3.py 8 cXX ..`, full prompt via pj.py; t8 a36/a51 propchk WIDE 1.85-1.95 by spread train is the
+  known t7/t8 pattern, check by eye), then tcold all 32, t4 calm redraws (c01 c07 c19 c20–c24 c26–c29 c31 c32 + c04/c16 a18 eye check),
+  t6 c01–c16 redraw with the saturated wording, check t5/t6 a51 hair, t1–t3 redraw. Credits used by art5: ~43k (balance 2.26M).
+
 ## CURRENT STATE (art worker #4, newest first — read this first)
 - WORKTREE/PUBLISH: work copy = scratchpad/figwork; scripts now write into scratchpad/wt-art4/img (branch art4); `bash pub3.sh "msg"` commits there,
   rebases on origin/review/consort-art and fast-forward pushes to it (never main, never force).
