@@ -133,26 +133,8 @@ try{for(const k of ["tat","phatquy"]){if(!BANDS[1][2].includes(k))BANDS[1][2].pu
 (function(){if(typeof mindMenu!=="function")return;const m0=mindMenu;mindMenu=function(v,t){const O=m0.apply(this,arguments);try{if(!O.length)return O;const b=bandOf(danger(v,t));if(b>=1){
   if(ACT.tat.ok(v,t)){const w=.8*persW(v,"trip");if(w>0)O.push(["tat",w])}if(ACT.phatquy.ok(v,t)){const w=.7*persW(v,"trip");if(w>0)O.push(["phatquy",w])}}}catch(e){}return O}})();
 
-/* ---------- 5. EXPRESSIONS (kitFaceExpr, jexpr.js): the face follows the condition — no smiling while ill, poisoned, slapped ----------
-   mix = per-expression max over: trúng độc (đau), ốm (buồn/đau), bị tát (buồn+đau), bị phạt (đau), lãnh cung (buồn), and a short
-   p.expr {k: buon|gian|khoc|dau, w, until} set by events (faceExpr(p,k,tuần,w)): her child dies → khóc; the one who slaps / punishes → giận.
-   Lowest layer (z 5): tints, rash, slap, scar, veil all lie above the reshaped face. */
-function faceExpr(p,k,weeks,w){if(!p)return;p.expr={k,w:w==null?1:w,until:wk()+(weeks||1)}}
-function fxExprMix(p){const m={};const put=o=>{if(!o)return;for(const k in o){if(typeof o[k]==="number")m[k]=Math.max(m[k]||0,o[k]);else if(!m[k])m[k]=o[k]}};
- const z=pzOf(p);if(z)put(FXDOCX[z.sev]);const il=KIT_FACEFX.get("ill").state(p);if(il)put(FXILLX[il.lvl]);
- if(p.slap&&p.slap.until>wk())put({buon:.6,dau:.3});if(p.pen&&p.pen.until>wk())put({dau:.4});if(p===S?S.out:p.out)put({buon:.5});
- if(p.expr&&p.expr.until>wk())put({[p.expr.k]:p.expr.w});return Object.keys(m).some(k=>typeof m[k]==="number"&&m[k]>0)||m.eye||m.lip?m:null}
-function fxExprDone(k,r){try{document.querySelectorAll(`i.kexpr-wait[data-kx="${CSS.escape(k)}"]`).forEach(e=>{e.outerHTML=fxExprImg(r)})}catch(e){}}
-function fxExprImg(r){return `<img class="kexpr" src="${r.url}" alt="" aria-hidden="true" style="${kitFxVars(`left:${r.rect[0].toFixed(2)}%;top:${r.rect[1].toFixed(2)}%;width:${r.rect[2].toFixed(2)}%;height:${r.rect[3].toFixed(2)}%`)}">`}
-KIT_FACEFX.add({id:"expr",z:5,ready:false,
- state:p=>window.KIT_EXPR&&p?fxExprMix(p):null,
- seen:(p,st)=>fxSeen(p),
- html:(p,file,mix)=>{const n=String(file).split("/").pop();if(!KIT_EXPR.has(n))return "";const k=n+"|"+KIT_EXPR.key(mix);
-  const r=KIT_EXPR.get("img/"+n,n,mix,x=>fxExprDone(k,x));return r?fxExprImg(r):`<i class="kexpr-wait" data-kx="${k}" hidden></i>`}});
-/* landmarks arrive after the first paint: redraw once */
-KIT_EXPR.onload=function(){try{if(typeof S!=="undefined"&&S&&!S.dead&&typeof render==="function"&&!Q.length)render()}catch(e){}};
-(function(){if(typeof kidDie!=="function")return;const k0=kidDie;kidDie=function(k,why,mine){const r=k0.apply(this,arguments);try{if(mine&&S&&!S.dead)faceExpr(S,"khoc",3)}catch(e){}return r}})();
-(function(){for(const a of ["tat","phatquy"]){const f0=ACT[a].f;ACT[a].f=function(x,t){const r=f0.apply(this,arguments);try{if(x)faceExpr(x,"gian",1,.8)}catch(e){}return r}}})();
+/* ---------- 5. EXPRESSIONS: removed (owner 11/14 22:50Z — feelings are shown by the small mood icons, not by reshaping faces in code). faceExpr kept as a no-op for old callers. */
+function faceExpr(){}
 
 /* stage figures: jk2b's .kfxf box copies the figure's offset box but not its transform (figures are centred with translateX(-50%)),
    so every face layer (veil, scar, rash, slap, expression) sat half a figure to the right. Copy the transform onto the box. */

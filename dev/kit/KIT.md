@@ -696,14 +696,8 @@ so stage blocks may stand beside a head or between figures, never over the paint
   fallback when the face has no landmarks).
 - Entries: `expr` (z5, kitFaceExpr below), `ill` (ốm / Sức < 25, CSS), `doc` (trúng độc, CSS), `rash` (jrash, img/rash-1..3.png), `tat` (img/fx-slap.png,
   approved), `phat` (phạt quỳ / trượng: chip only). Postponed, plug in the same way: dưỡng nhan glow, tóc bạc sớm, đậu mùa marks.
-### 28.8c FACE EXPRESSIONS — `kitFaceExpr` / `KIT_EXPR` (dev/build/jexpr.js) — no redrawn art
-- `img/face-lm.json`: 27 landmarks per por-/fig- picture (% of the picture), measured once offline (dev/figwork/facelm.py, mediapipe FaceLandmarker;
-  5313/5314 found, fig-thaihau-h2-a51 missing → no expression there). New face art → rerun facelm.py + facelm_pack.py.
-- `KIT_EXPR.get(src,file,mix,done)` → cached `{url,rect}` of a canvas patch around the face, re-sampled through gaussian pulls at the landmarks and
-  feathered at its border (4x supersampled). `mix` = weights 0..1 of `buon` / `gian` / `dau` / `khoc` plus optional `eye` / `lip` tints
-  ("r,g,b,a" — lip `color`-blend keeps the painted shading; add `,n` for a normal-blend lightening). Khóc = buồn + lid shine + one small tear.
-- The `expr` entry picks the mix from the person's conditions (độc → đau, ốm → buồn/đau, tát → buồn+đau, phạt → đau, lãnh cung → buồn) and a
-  short `p.expr` set with `faceExpr(p,k,tuần,w)` (her child dies → khóc; who slaps or punishes → giận). Faces stay beautiful: weights ≤ 1.
+### 28.8c FACE EXPRESSIONS — removed (owner 11/14 22:50Z): no code-reshaped faces; feelings are shown by the small mood icons (emotion kit).
+
 ### 28.9 DELTA CHIPS + WORDING
 - `kpChipify` (jk2b): a delta chip takes the whole short clause before the number (up to 6 words, stops at punctuation): "nhà Hộ bộ thế lực −2";
   linking words in front (và, được, mất, khiến, nên…) stay outside the chip.
