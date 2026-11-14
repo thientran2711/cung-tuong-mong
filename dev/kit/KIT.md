@@ -494,3 +494,13 @@ img/veil*.png is rejected). Status chips such as "Hủy dung (vừa) · còn N t
 ### 26.3 STAGE FLOOR
 `KIT_FLOOR[picture] = floorTop` (fraction of the room picture where the floor starts); the crop keeps the floor; `--kfb` feet bottom, `--kfh` room
 for the figure. Phone portrait: stage 40 % of the screen on scene tabs, 24 % on card tabs (Hậu cung, Cung nhân, Hoàng tự) so the card has room.
+### 26.4 TRONG CUNG BLOCK (Hoàng thượng · Thái hậu · Hoàng hậu)
+- `kitCourtHTML(cls)` → `.kcourt`: per person a row = small kit frame (`mdH xs`) + name + "Tâm trạng <word>" + "Với ngươi <word>" (green/red/neutral
+  `.ef`), "chưa rõ" when unknown. Tap a row = that person's card (Hoàng thượng `showEmp`, Thái hậu → Giao tình on her, Hoàng hậu → Hậu cung on her).
+- Landscape (iPad 1180x820, 1366x1024, 1024x768): `#kcourt` on the stage under the Tư chất block, same side, shown ONLY when it covers no figure.
+- Portrait (Fold, phones) and always in the expanded status sheet: a "Trong cung" column in `#hud2 .khg`.
+- Hooks (data only): `window.kitCourtMood(who)` → text|[text,"g"|"r"]|null, `window.kitCourtKnown(who)` → bool (who = emp|th|hh). Default: the
+  Emperor's mood is public (MOODS), Thái hậu / Hoàng hậu moods "chưa rõ" until a module says; attitudes from Sủng / `S.th` / `S.hh` (`affW`).
+### 26.5 "COVERS NO FIGURE" = the painted silhouette
+`kitFigRects()` (j79, replaced in jk2b) returns per figure 24 horizontal bands with the opaque extent of the art (alpha mask read once per picture),
+so stage blocks may stand beside a head or between figures, never over the painted body. Used by #kstat, #kcourt and every later stage overlay.
