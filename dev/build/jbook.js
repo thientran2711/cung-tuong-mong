@@ -284,7 +284,45 @@ html .game .kleather>.maptools>.past,html .game .kleather>.maptools>.fest{displa
 .kcl-host{position:fixed;z-index:40;pointer-events:none}
 .kcl-in{animation:kcl-in .3s ease-out}@keyframes kcl-in{from{opacity:0}to{opacity:1}}
 @media (prefers-reduced-motion:reduce){.kleather.kl-unroll,.kl-unroll>.kl-roll,.kcl-in{animation:none}}
+/* ===== the live game as an open BOOK (owner 11/14 approval, 11/15 priority) — kitBookLive =====
+   iPad landscape: the room stage = LEFT picture page, the tab panel = RIGHT text page, gutter between, cover board behind.
+   Phone / portrait: ONE page (the panel) on the board. Dư đồ is not a page (leather map, .maptab drops the book). */
+.kbk-board{display:none}
+.game.kbook{isolation:isolate}
+.game.kbook>.kbk-board{display:block;position:relative;z-index:-1;pointer-events:none;grid-row:panel-start/panel-end;grid-column:panel-start/panel-end;
+ margin:-5px -6px -6px -6px;border-radius:8px;
+ background:repeating-linear-gradient(45deg,#ffffff08 0 2px,transparent 2px 5px),linear-gradient(#3a2a52,#241a36);box-shadow:0 12px 30px #0007,inset 0 0 0 1px #ffffff14}
+/* the text page: warm paper, faint fibres, stacked leaves on the outer edge */
+.game.kbook>#panel{border-color:#b89a6a80;
+ background:linear-gradient(270deg,#efe0bf 0 1px,#c4aa7c 1px 2px,#efe0bf 2px 3px,#c4aa7c 3px 4px,#efe0bf 4px 5px,transparent 5px),
+  radial-gradient(ellipse 70% 50% at 25% 18%,#fbf3dd 0,transparent 70%),radial-gradient(ellipse 60% 45% at 85% 92%,#ecd9b0 0,transparent 70%),
+  url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .3 0 0 0 0 .12 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E"),
+  linear-gradient(#f8efdb,#f1e4c6);
+ box-shadow:inset 0 0 30px #8a5a2426}
+@media (min-aspect-ratio:1/1) and (min-width:900px){
+ .game.kbook{column-gap:0!important}
+ .game.kbook>.kbk-board{grid-column:stage-start/panel-end}
+ /* right page: gutter shadow on its inner (left) edge */
+ .game.kbook>#panel{border-radius:0 6px 6px 0;border-left-color:transparent;
+  background:linear-gradient(90deg,#2a160870 0 1.5px,transparent 1.5px),linear-gradient(90deg,#4a2c1270,#4a2c1229 16px,transparent 40px),linear-gradient(270deg,#efe0bf 0 1px,#c4aa7c 1px 2px,#efe0bf 2px 3px,#c4aa7c 3px 4px,#efe0bf 4px 5px,transparent 5px),
+   radial-gradient(ellipse 70% 50% at 25% 18%,#fbf3dd 0,transparent 70%),radial-gradient(ellipse 60% 45% at 85% 92%,#ecd9b0 0,transparent 70%),
+   url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .3 0 0 0 0 .12 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E"),
+   linear-gradient(#f8efdb,#f1e4c6)}
+ /* left page: the room picture printed on the page (paper margin + thin red rule), stacked leaves outside, gutter shadow inside */
+ .game.kbook>#stage{border-radius:6px 0 0 6px;border-color:#b89a6a80;border-right-color:transparent}
+ .game.kbook>#stage::before{content:"";position:absolute;inset:0;z-index:40;pointer-events:none;border-radius:inherit;
+  box-shadow:inset 0 0 0 6px #f3e6c9,inset 0 0 0 7px #9a2c1c80,inset 0 0 0 9px #f3e6c900,inset 3px 0 0 6px #f3e6c9;
+  background:linear-gradient(270deg,#3a1e0a80,#3a1e0a33 18px,transparent 46px),linear-gradient(90deg,#efe0bf 0 1px,#c4aa7c 1px 2px,#efe0bf 2px 3px,#c4aa7c 3px 4px,#efe0bf 4px 5px,transparent 5px)}
+}
 `;document.head.appendChild(st)})();
+
+/* ---------- kitBookLive: the live layout dressed as the open book (every tab, both roads) ----------
+   .game.kbook + a cover board behind the page row; CSS does the rest (spread on landscape ≥ 900 px, one page otherwise).
+   Not on the map (leather), the title or the end screen. */
+function kitBookLive(){const g=document.querySelector(".game");if(!g)return;
+ const on=!g.classList.contains("maptab")&&!(typeof S==="undefined"||!S)&&!S.dead&&!!document.getElementById("panel");
+ g.classList.toggle("kbook",on);let b=g.querySelector(":scope>.kbk-board");
+ if(on&&!b){b=document.createElement("i");b.className="kbk-board";b.setAttribute("aria-hidden","true");g.insertBefore(b,g.firstChild)}}
 
 /* ---------- live game: a tab switch turns #panel with the curl; Dư đồ is the leather map ---------- */
 (function(){if(typeof render!=="function")return;
@@ -295,6 +333,7 @@ html .game .kleather>.maptools>.past,html .game .kleather>.maptools>.fest{displa
    const pn=document.getElementById("panel");const call=()=>{done=true;out=r0.apply(self,args)};
    try{if(pn&&t0!=null&&t1!==t0&&t0!=="go"&&t1!=="go"&&typeof S!=="undefined"&&S&&!S.dead)kitCurlSwap(pn,call,{dir:order(t1)>=order(t0)?1:-1});else call()}
    catch(e){if(done)throw e;console.error(e);call()}
+   try{kitBookLive()}catch(e){console.error(e)}
    try{last=t1;const mv=document.querySelector(".game.maptab #panel .mapv");
     if(mv){kitLeather(mv);if(t0!=null&&t0!=="go"&&t1==="go")kitUnroll(mv)}
     else if(t0==="go"&&t1!=="go"&&pn&&!kitCurlOff()){pn.classList.remove("kcl-in");void pn.offsetWidth;pn.classList.add("kcl-in");setTimeout(()=>pn.classList.remove("kcl-in"),340)}}catch(e){console.error(e)}
