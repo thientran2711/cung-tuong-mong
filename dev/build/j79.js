@@ -13,7 +13,7 @@ function kitTitle(p){try{if(!p)return"";if(p===S)return"";if(S&&p===S.emp)return
  const f=kitFace(p);let rw=String(f&&f.rw||"").split("·")[0].trim();if(/^(Hoàng tử|Công chúa|Thái tử)/.test(p.name||""))return"";return rw}catch(e){return""}}
 function kitPersonCol(p){try{if(typeof rivals!=="undefined"&&rivals.includes(p))return p.out?KIT_COLD_COL:RCOL[p.queen?7:cl(p.rank||0,0,7)];if(p===S)return S.out?KIT_COLD_COL:RCOL[cl(S.rank||0,0,7)];
  const d=kitDecor(kitFace(p));return d.col||"#8a7350"}catch(e){return"#8a7350"}}
-function kitName(p,o){o=o||{};if(!p)return"";if(p===S)return `<b class="kname kme" style="--rc:${kitPersonCol(S)}">${o.cap?"Ngươi":"ngươi"}</b>`;
+function kitName(p,o){o=o||{};if(!p)return"";if(p===S&&o.named){const srv=typeof isSrv==="function"&&isSrv();return `<b class="kname" style="--rc:${kitPersonCol(S)}">${srv?"":`<span class="kti">${S.out?"Phế phi":RANKS[S.rank].n}</span> `}${S.name}</b>`}if(p===S)return `<b class="kname kme" style="--rc:${kitPersonCol(S)}">${o.cap?"Ngươi":"ngươi"}</b>`;
  const t=o.noTitle?"":kitTitle(p);const nm=S&&p===S.emp?"":S&&(p===S.thO||p.kind==="th")?"":(p.name||"");
  return `<b class="kname" style="--rc:${kitPersonCol(p)}">${t?`<span class="kti">${t}</span>${nm?" ":""}`:""}${nm}</b>`}
 function kitFaceH(p,size){try{if(!p)return"";if(p.src!==undefined||p.ini!==undefined)return mdH(p,size||"sm");return mdH(kitFace(p),size||"sm")}catch(e){return""}}
@@ -57,7 +57,7 @@ function kpChipify(html){return kpMapText(html,s=>s.replace(KP_DELTA,(m,l,sg,n)=
 /* decorate the first mention of each person: rank title + name in rank colour (title not doubled) */
 function kpPeopleIn(html,people){const who=[];let h=html;const plain=kpPlain(html);
  for(const [n,p] of people){if(!plain.includes(n)||who.includes(p))continue;who.push(p);let done=false;
-  h=kpMapText(h,s=>{if(done)return s;const i=s.indexOf(n);if(i<0)return s;done=true;const t=kitTitle(p);let pre=s.slice(0,i);if(t&&pre.endsWith(t+" "))pre=pre.slice(0,-(t.length+1));return pre+kitName(p,{noTitle:p===S})+s.slice(i+n.length)})}
+  h=kpMapText(h,s=>{if(done)return s;const i=s.indexOf(n);if(i<0)return s;done=true;const t=kitTitle(p);let pre=s.slice(0,i);if(t&&pre.endsWith(t+" "))pre=pre.slice(0,-(t.length+1));return pre+kitName(p,{named:p===S})+s.slice(i+n.length)})}
  const lead=plain.replace(/^[^A-Za-zÀ-ỹĐđ]+/,"");
  if(/^(Hoàng thượng|Thánh thượng)/.test(lead)&&S&&S.emp&&!who.length)who.push(S.emp);
  if(/^Thái hậu/.test(lead)&&S&&!who.length)who.push(S.thO||{kind:"th"});
@@ -89,7 +89,7 @@ function kitIntel(list,o){o=o||{};if(!list||!list.length)return `<div class="kfa
  return `<div class="kintel">${list.map(x=>`<div class="kint">${x.about?kitFaceH(x.about,"sm"):`<span class="kfdot"></span>`}<span class="kft">${x.about?kitName(x.about,{cap:true})+": ":""}${kpChipify(x.fact||"")}<small class="kisrc">Nguồn: ${x.src&&typeof x.src==="object"?kitName(x.src,{cap:true}):(x.src||"tai mắt")}${x.week?` · ${x.week}`:""}</small></span></div>`).join("")}</div>`}
 /* kitEvidence({what, against:person, how, when, strength:n, acts:[{n, odds, ton, duoc, mat, kem}]}) */
 function kitEvidence(e){return `<div class="kcardp kev"><div class="kcph">${e.against?kitFaceH(e.against,"sm"):""}<span class="kcpt"><b>${e.what}</b>${e.against?`<small>chống lại ${kitName(e.against)}</small>`:""}</span>${e.strength!=null?kitChip(`Sức nặng ${e.strength}`,"n"):""}</div>`+
- kitRows([["Chứng minh",e.proves||e.what,"t"],["Có được",[e.how,e.when].filter(Boolean).join(" · "),"n"]])+(e.acts&&e.acts.length?`<div class="kpacts">${e.acts.map(kitActMini).join("")}</div>`:"")+`</div>`}
+ kitRows([["Chứng minh",e.proves&&e.proves!==e.what?e.proves:"","t"],["Có được",[e.how,e.when].filter(Boolean).join(" · "),"n"]])+(e.acts&&e.acts.length?`<div class="kpacts">${e.acts.map(kitActMini).join("")}</div>`:"")+`</div>`}
 /* kitThreat({who:person, how, sure:"Khá chắc", when, defs:[{n, odds, ton, duoc, mat, kem}]}) */
 function kitThreat(t){return `<div class="kcardp kth"><div class="kcph">${t.who?kitFaceH(t.who,"sm"):`<span class="kfdot"></span>`}<span class="kcpt"><b>${t.who?kitName(t.who,{cap:true}):"Kẻ chưa rõ mặt"}</b><small>${t.how}</small></span>${t.sure?kitOdds(t.sure,{label:"Tin này"}):""}</div>`+
  kitRows([["Khi nào",t.when,"t"]])+(t.defs&&t.defs.length?`<h4 class="kpst">Cách đỡ</h4><div class="kpacts">${t.defs.map(kitActMini).join("")}</div>`:"")+`</div>`}
@@ -221,7 +221,7 @@ function kpBuild(M,m){const dlg=M.querySelector(".dlg"),mb=$("mb"),mt=$("mt");if
  body.appendChild(main);mb.innerHTML="";mb.appendChild(body);
  if(opts){opts.classList.add("kpopts");mb.appendChild(opts)}
  let ph=dlg.querySelector(":scope > .kph");if(ph)ph.remove();mt.hidden=true;dlg.insertAdjacentHTML("afterbegin",head);
- const mr=$("mr");const cb=mr&&mr.querySelector("#mclose");if(cb)cb.classList.add("kbtn");}
+ const mr=$("mr");const cb=mr&&mr.querySelector("#mclose");if(cb){cb.classList.add("kbtn");if(/^\s*(Đã rõ|OK|Xong)\s*$/.test(cb.textContent))cb.textContent="Đã hiểu"}}
 (function(){const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);try{const M=$("modal");if(M&&!M.hidden&&Q[0]){const d=M.querySelector(".dlg");d.classList.remove("kpanel","kp-person");delete d.dataset.kind;const ph=d.querySelector(":scope > .kph");if(ph)ph.remove();kpBuild(M,Q[0])}}catch(e){console.error("kpBuild",e)}return r}})();
 
 /* ---------- Cần row (j63 supplies it as .kr-why with ✓/✗ items): drawn as kit status chips here ---------- */
@@ -326,10 +326,10 @@ KP_SEAL.week="TUẦN";
  const secs=[];
  if(S.lot){const bad=LVB[S.lot.lv]<0||(S.lot.dom==="Hung"&&S.lot.lv>=3),good=LVB[S.lot.lv]>0;secs.push(`<div class="kpsec"><h4 class="kpst">${kitGloss("Quẻ tuần")}</h4>${kitRows([["Quẻ",`<span class="ef t">${LV[S.lot.lv]} · ${S.lot.dom}</span>`],["Lời quẻ",(LOTS[S.lot.i]||[])[2]||"","n"],["Tuần này",lotEffect(S.lot),bad?"r":good?"g":"n"]])}</div>`)}
  const me=[];if(sum.rank)me.push({text:`<b class="g">${sum.rank}</b>`,who:S});if(sum.kids>0)me.push({text:`Thêm ${sum.kids} con.`,who:S});
- secs.push(`<div class="kpsec"><h4 class="kpst">Tuần qua</h4>${dl.length?kitChips(dl):`<span class="kchip n">Chỉ số không đổi</span>`}${me.length?kitFacts(me,{group:false}):""}</div>`);
+ secs.push(`<div class="kpsec"><h4 class="kpst">Tuần qua</h4>${dl.length?kitChips(dl):`<span class="kchip n">Không đổi gì</span>`}${me.length?kitFacts(me,{group:false}):""}</div>`);
  const G=sum.groups.filter(g=>g[1].length);for(const [h,L] of G)secs.push(`<div class="kpsec"><h4 class="kpst">${h}</h4>${kitFacts(L,{group:false})}</div>`);
  if(!G.length&&!me.length)secs.push(`<div class="kpsec">${kitFacts([{text:"Một tuần yên ả.",kind:"world",auto:false}])}</div>`);
- w.innerHTML=`<div class="dsky"><i class="lan l1"></i><i class="lan l2"></i><i class="lan l3"></i><i class="sun"></i></div><div class="dbox kpanel kpdawn">${kpHeader("week",`Năm ${S.year} · Tháng ${S.month} · ${TUAN[S.tuan][0].toUpperCase()+TUAN[S.tuan].slice(1)}`,`${SEASON[S.month-1]}${S.wx?" · "+S.wx.n:""}`)}<div class="kpb"><div class="kpmain">${secs.join("")}</div></div><div class="kpfoot"><button class="kbtn" id="dawn-go">Vào ngày mới</button></div></div>`;
+ w.innerHTML=`<div class="dsky"><i class="lan l1"></i><i class="lan l2"></i><i class="lan l3"></i><i class="sun"></i></div><div class="dbox kpanel kpdawn">${kpHeader("week",kitDate(S.month,S.year,S.tuan),`${SEASON[S.month-1]}${S.wx?" · "+S.wx.n:""}`)}<div class="kpb"><div class="kpmain">${secs.join("")}</div></div><div class="kpfoot"><button class="kbtn" id="dawn-go">Vào ngày mới</button></div></div>`;
  w.hidden=false;w.classList.toggle("rm",reducedMotion());void w.offsetWidth;w.classList.add("on");setTimeout(bell,reducedMotion()?0:1400);
  const close=()=>{w.classList.remove("on");setTimeout(()=>{w.hidden=true},reducedMotion()?0:350);w.onclick=null};w.onclick=e=>{if(e.target.closest(".kodm,.kgl"))return;close()};const b=$("dawn-go");if(b)b.focus({preventScroll:true})}})();
 (function(){const st=document.createElement("style");st.id="kp-dawn-css";st.textContent=`
@@ -417,13 +417,14 @@ KIT_GLOSS["Phúc duyên"]="Điểm tích qua các kiếp. Dùng để đổi th�
 .ktile:last-child:nth-child(4n+1),.ktile:nth-child(8){grid-column:span 1}
 .dlg.kpsc .kpnote{font-size:.72rem;margin:0 0 4px}
 .dlg.kpsc .kpscopts{display:grid!important;grid-template-columns:1fr 1fr!important;grid-auto-rows:1fr;gap:6px;margin:4px 0 8px}
-.dlg.kpsc .kpfaces{display:flex;gap:6px;justify-content:flex-start}.dlg.kpsc .kpfaces figure{flex:0 1 92px;margin:0;max-width:92px}.dlg.kpsc .kpfaces figcaption{font-size:.7rem;text-align:center}
+.dlg.kpsc .kpfaces{display:flex;gap:6px;justify-content:flex-start}.dlg.kpsc .kpfaces figure{flex:0 1 92px;margin:0;max-width:92px}@media (max-width:599px){.dlg.kpsc .kpfaces figure{max-width:66px}}.dlg.kpsc .kpfaces figcaption{font-size:.7rem;text-align:center}
 .dlg.kpsc .kpfaces figcaption small{display:block;color:var(--dim)}
 @media (max-width:599px){.ktiles{grid-template-columns:repeat(4,minmax(0,1fr))}.ktile{padding:2px 5px}.ktile b{font-size:.8rem}.dlg.kpsc .kpb.kphas{grid-template-columns:70px minmax(0,1fr)}}
 `;document.head.appendChild(st)})();
 (function(){const st=document.createElement("style");st.id="kp-title-css";st.textContent=`
 .title{align-items:flex-end!important;justify-content:center!important;padding:10px!important}
 @media (min-aspect-ratio:1/1){.title{align-items:center!important;justify-content:flex-end!important;padding:16px 4vw!important}}
+@media (max-width:599px),(max-height:820px){.title .tbox{padding:12px 14px!important}.title .tbox img{width:56px!important;height:56px!important;border-radius:12px!important}.title .tbox h1{font-size:1.4rem!important;margin:4px 0 0!important}.title .tbox .sub{font-size:.76rem!important;margin:0 0 6px!important}.title .slot{padding:5px 8px!important;margin:0 0 5px!important;gap:3px!important}.title .slot .main,.title .slot .btn{min-height:36px!important;padding:5px 10px!important}.title .past{font-size:.74rem!important}}
 .title .tbox{max-width:min(440px,100%)!important;width:100%;max-height:calc(100dvh - 20px);overflow:auto;border:1px solid var(--gold)!important;border-radius:10px!important;box-shadow:0 0 0 3px #f6ead6cc,0 0 0 4px #c9a46a,0 10px 40px rgba(60,25,10,.35)!important;background:rgba(255,250,240,.90)!important}
 `;document.head.appendChild(st)})();
 /* "có thể chết" on scheme buttons -> the real death chance on the ONE ladder (same formulas as ACT.poison / kpoison / pond, j8) */
@@ -434,3 +435,113 @@ function kpDeathP(k,v){try{const inv=x=>(x.inv||[]).some(e=>e.k===x.__k&&!e.h);c
  if(k==="pond")return .45}catch(e){}return null}
 (function(){if(typeof rvGroups!=="function")return;const g0=rvGroups;rvGroups=function(v){const G=g0.apply(this,arguments);try{for(const g of G)g[1]=g[1].map(h=>{const m=String(h).match(/data-a="(\w+)"/);if(!m)return h;const p=kpDeathP(m[1],v);if(p==null)return h;
   return String(h).replace(/,\s*có thể chết( đuối)?/g,(x,d)=>` · ${kpDeathWord(p,m[1]==="poison"?"nàng":"con nàng")}`)})}catch(e){}return G}})();
+/* Cần: the Sức rule follows the live game rule (j80 SUC_FLOOR; one source, never a hard-coded 20) */
+if(typeof kaTimeNeeds==="function"){kaTimeNeeds=function(c,bacCost,sucCost){const L=[];const left=4-used;L.push({t:`${c} khắc (còn ${left})`,ok:used+c<=4});
+ const fl=typeof SUC_FLOOR!=="undefined"?SUC_FLOOR:20;if(c>1)L.push({t:`Sức ≥${fl} (có ${S.suc})`,ok:S.suc>=fl});if(bacCost>0)L.push({t:`Bạc ${bacCost} (có ${S.bac})`,ok:S.bac>=bacCost});return L}}
+/* "có thể gặp người" (Lĩnh đồ, j42 srvMeet: 25 % bị bắt nạt Sức -5, else quen một người mới if anyone is left) -> real ladder words */
+(function(){if(typeof srvCards!=="function")return;const c0=srvCards;srvCards=function(){const D=c0.apply(this,arguments);try{for(const a of D||[]){if(!a||!/có thể gặp người/.test(a.x||""))continue;
+ let left=0;try{const m=srvM();left=allServ().filter(s=>ownerOf(s)!==m&&!S.srv.met.includes(s.sid)).length}catch(e){}
+ a.x=a.x.replace(/có thể gặp người/,left?`quen một người mới: ${word(75)}`:"không còn ai mới để quen")+` · kèm: bị bắt nạt, Sức -5: ${word(25)}`}}catch(e){}return D}})();
+
+/* ---------- ACT ART SLOT (kit 6.1): square illustration left of every act card, rows right ----------
+   Manifest img/ACTS.json {acts:{"<card title>|<slug>":"<key>"}, have:["act-cat-hoc-tap", ...]} -> img/act-<key>.webp;
+   no specific picture -> img/act-cat-<category>.webp; no file yet -> the neutral brocade tile with the category word. */
+const KIT_ACT_CATS=[["hai-nguoi",/hạ độc|đẩy|vu |vu oan|trù ẻo|ngáng|hại|bỏ xạ|xạ hương|cài đồ|tráo|phá |chặn ngự giá|tố |bóc chuyện|ly gián|rút thẻ|mua chuộc/i],
+ ["muu-ke",/dò la|mưu|tai mắt|tung tin|giấu|hối lộ|đút lót|lẻn|nghe lén|theo dõi|kế /i],["hoc-tap",/học|luyện|đọc|thêu|đàn|thơ|vẽ|họa|múa|cờ|sách|chữ/i],
+ ["hau-ha",/hầu|dâng|chăm|phục dịch|quét|lau|lĩnh đồ|theo hầu|việc chủ|canh|nấu|pha trà/i],["nghi-ngoi",/nghỉ|ngủ|tắm|dưỡng|chải chuốt|giả bệnh|tĩnh dưỡng/i],
+ ["buon-ban",/bán|mua|buôn|chợ|đổi|bạc/i],["le-nghi",/vấn an|thỉnh an|lễ|cầu|chùa|phật|xin xăm|cúng|bái/i],["giao-thiep",/thăm|tặng|kết|trò chuyện|mời|gặp|tâm sự|làm thân|nói/i],["di-lai",/đi |dạo|sang|ra |vào |đến /i]];
+let KIT_ACTS={acts:{},have:[]};try{fetch("img/ACTS.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{if(j){KIT_ACTS=j;try{document.querySelectorAll("button.ka.kcard[data-kart]").forEach(b=>{b.removeAttribute("data-kart");kpActArt(b)})}catch(e){}}}).catch(()=>{})}catch(e){}
+const kpSlug=s=>String(s||"").normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/đ/g,"d").replace(/Đ/g,"D").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
+function kitActCat(name){for(const [c,re] of KIT_ACT_CATS)if(re.test(name))return c;return"giao-thiep"}
+function kitActArt(name){const A=KIT_ACTS.acts||{};const key=A[name]||A[kpSlug(name)];const cat=kitActCat(name);const have=KIT_ACTS.have||[];
+ return{src:key?`img/act-${key}.webp`:have.includes("act-cat-"+cat)?`img/act-cat-${cat}.webp`:"",cat,label:(KIT_ACTS.cats||{})[cat]||{"hau-ha":"Hầu hạ","hoc-tap":"Học tập","giao-thiep":"Giao thiệp","muu-ke":"Mưu kế","hai-nguoi":"Hại người","nghi-ngoi":"Nghỉ ngơi","buon-ban":"Buôn bán","le-nghi":"Lễ nghi","di-lai":"Đi lại"}[cat]}}
+function kpActArt(b){if(b.dataset.kart)return;const kan=b.querySelector(":scope > .kat > .kan");if(!kan)return;const name=kpPlain(kan.textContent);const a=kitActArt(name);b.dataset.kart=a.cat;
+ let body=b.querySelector(":scope > .kabody");if(!body){body=document.createElement("span");body.className="kabody";[...b.childNodes].forEach(n=>{if(!(n.nodeType===1&&n.classList.contains("kaart")))body.appendChild(n)});b.appendChild(body)}
+ let art=b.querySelector(":scope > .kaart");if(!art){art=document.createElement("span");art.className="kaart";b.prepend(art)}
+ art.innerHTML=`<span class="kaph">${a.label}</span>`+(a.src?`<img src="${a.src}" alt="" loading="lazy" onerror="this.remove()">`:"");b.classList.add("kart")}
+(function(){if(typeof kaNorm1!=="function")return;const n0=kaNorm1;kaNorm1=function(b){n0.apply(this,arguments);try{if(b.classList.contains("ka")&&b.classList.contains("kcard"))kpActArt(b)}catch(e){}}})();
+(function(){const st=document.createElement("style");st.id="kp-art-css";st.textContent=`
+:root{--kas:88px}@media (max-width:1199px){:root{--kas:76px}}@media (max-width:599px){:root{--kas:64px}}
+button.ka.kcard.kart{flex-direction:row!important;align-items:flex-start;gap:9px}
+button.ka.kcard.kart>.kabody{display:flex;flex-direction:column;gap:3px;flex:1 1 auto;min-width:0}
+.kaart{position:relative;flex:0 0 var(--kas);width:var(--kas);height:var(--kas);border-radius:6px;overflow:hidden;background:url(img/kit/bg-default.webp) center/cover;box-shadow:0 0 0 1px #8a6a32,0 0 0 3px #e9d29a,0 0 0 4px #b08a4a,inset 0 0 12px #5a3a1a40;margin:4px}
+.kaart img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.kaph{position:absolute;inset:0;display:grid;place-items:center;text-align:center;font-family:var(--display);font-size:.7rem;font-weight:700;color:#7a5a2a;padding:4px;line-height:1.15}
+button.ka.kdis .kaart{filter:grayscale(.7);opacity:.8}
+/* equal height per ROW, fitted to that row's content (no empty space from a tall card elsewhere) */
+.cards:has(> button.ka),.pcb:has(> button.ka),.opts:has(> button.ka),.rbtn:has(> button.ka),.kpacts{grid-auto-rows:auto!important;align-items:stretch!important}
+/* columns follow the space the grid really has (the panel is half the screen in landscape): at most 3, each at least 280px */
+.cards:has(> button.ka){grid-template-columns:repeat(auto-fill,minmax(max(280px,31%),1fr))!important}
+@media (max-width:599px){.cards:has(> button.ka){grid-template-columns:1fr!important}}
+`;document.head.appendChild(st)})();
+
+/* ================= STAGE OVERLAYS (owner 11/14): nothing on the stage covers a figure =================
+   - the status chips (#hud2) leave the stage: they become a slim second row of the header; expanding it grows the header (the stage shrinks), never overlays
+   - the date shows once, in the header line, in plain words ("Tháng 3 · Năm 1 · Thượng tuần · Buổi sáng"); the duplicate date chip is gone
+   - the place title on the stage is the name only (the description line is dropped for every place); a visit message stays as a short line
+   - "T3/1" anywhere in the UI (logs, news, intel, summaries, old saves) reads "Tháng 3 · Năm 1" */
+const KP_MON=["giêng","hai","ba","tư","năm","sáu","bảy","tám","chín","mười","mười một","chạp"];
+const KP_NUM=["nhất","hai","ba","tư","năm","sáu","bảy","tám","chín","mười"];
+const kpYear=y=>`năm thứ ${y>=1&&y<=10?KP_NUM[y-1]:y}`;
+/* dates in the wording guide (dev/kit/VANPHONG.md): full "Tháng ba, năm thứ nhất, thượng tuần, buổi chiều"; short "Tháng ba · thượng tuần · năm thứ nhất" */
+function kitDate(m,y,t,b,full){if(window.VP&&typeof VP.date==="function"){try{return VP.date(m,y,t,b)}catch(e){}}const mo=`Tháng ${KP_MON[(m-1)%12]||m}`,tu=t!=null?TUAN[t]:null,bu=b!=null?String(BUOI[b]).toLowerCase():null;
+ return full?[mo,kpYear(y),tu,bu].filter(Boolean).join(", "):[mo,tu,kpYear(y)].filter(Boolean).join(" · ")}
+const KP_TDATE=/\bT(\d{1,2})\/(\d{1,3})\b(\s*·?\s*(thượng|trung|hạ) tuần)?/g;
+function kpDateText(s){return s.replace(KP_TDATE,(m,mo,y,x,tu)=>`Tháng ${KP_MON[(+mo-1)%12]||mo}`+(tu?` · ${tu} tuần`:"")+` · ${kpYear(+y)}`)}
+function kpDateFix(root){try{const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let n;const L=[];while((n=w.nextNode()))if(/\bT\d{1,2}\/\d/.test(n.nodeValue))L.push(n);L.forEach(n=>{n.nodeValue=kpDateText(n.nodeValue)})}catch(e){}}
+(function(){let q=false;const mo=new MutationObserver(ms=>{if(q)return;q=true;queueMicrotask(()=>{q=false;for(const m of ms){m.addedNodes.forEach(x=>{if(x.nodeType===1)kpDateFix(x);else if(x.nodeType===3&&/\bT\d{1,2}\/\d/.test(x.nodeValue))x.nodeValue=kpDateText(x.nodeValue)});if(m.type==="characterData"&&/\bT\d{1,2}\/\d/.test(m.target.nodeValue))m.target.nodeValue=kpDateText(m.target.nodeValue)}})});
+ mo.observe(document.documentElement,{childList:true,subtree:true,characterData:true})})();
+/* move the status chips into the header (once) */
+function kpHudMove(){const h=$("hud2"),hd=document.querySelector("header.hud");if(h&&hd&&h.parentElement!==hd){hd.appendChild(h);h.classList.add("khud")}}
+(function(){if(typeof renderHud2!=="function")return;const r0=renderHud2;renderHud2=function(){kpHudMove();return r0.apply(this,arguments)}})();
+/* place title: the name only */
+(function(){if(typeof renderStage!=="function")return;const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);try{const t=$("sc-t");const m=t&&t.querySelector(".rmsg");if(m){const vm=S&&S.visit&&S.visit.msg;if(!vm)m.remove()}}catch(e){}return r}})();
+(function(){const st=document.createElement("style");st.id="kp-stage-css";st.textContent=`
+header.hud{flex-wrap:wrap}
+header.hud>.hud2.khud{order:9;flex:1 0 100%;position:static!important;max-width:none!important;width:auto!important;max-height:none!important;box-shadow:none!important;background:transparent!important;border:0!important;border-top:1px solid var(--k-hair)!important;border-radius:0!important;padding:3px 30px 0 0!important;margin:0;display:flex!important;flex-direction:row!important;flex-wrap:wrap!important;gap:3px!important;overflow:visible!important;backdrop-filter:none!important}
+header.hud>.hud2.khud .hc{white-space:nowrap!important;font-size:.68rem}
+header.hud>.hud2.khud .hc[data-hx="date"]{display:none!important}
+header.hud>.hud2.khud .h2t{top:3px;right:0}
+.stop .scene-t{flex:0 1 auto!important;max-width:60%}
+.stop .scene-t .rmsg{font-size:.7rem}
+/* no truncation anywhere: names, date line, stage tags wrap */
+.me b,#me-d,.dt,.emp b,.pface span,.tok .tag,.stop .scene-t .rmsg{white-space:normal!important;overflow:visible!important;text-overflow:clip!important;-webkit-line-clamp:unset!important;display:block}
+.tok .tag{max-width:140px}
+`;document.head.appendChild(st)})();
+/* the real condition text of every scheme whose ok() had no words (j63 Cần row reads LACK[k](v); "" = met) */
+if(typeof LACK==="object"){const bac=n=>S.bac<n?`Bạc ${n} (có ${S.bac})`:"";const P=()=>{try{return(PLACES&&PLACES[whereOf(S)]||{}).n||whereOf(S)}catch(e){return whereOf(S)}};Object.assign(LACK,{
+ spy:t=>bac(15),ally:t=>bac(30),bribe:t=>bac(40),lygian:t=>bac(20)||(rkOf(t)<1?"nàng từ Thường tại trở lên":""),slowpoison:t=>bac(40),
+ accuse:t=>{const n=accNeed(t),h=evG(S,t);return h<n?`${n} chứng cứ về nàng (có ${h})`:rkOf(t)>=7&&rkOf(S)<3?"ngươi từ Tần trở lên mới tố được Hoàng hậu":""},
+ ksab:t=>tKid(t)?"":"nàng có con từ 3 tuổi",kpoison:t=>tKid(t)?"":"nàng có con từ 3 tuổi",pond:t=>kidsOf(t).some(k=>k.age>=2)?"":"nàng có con từ 2 tuổi",
+ kframe:t=>sonsOf(t).some(k=>k.age>=6)?"":"nàng có con trai từ 6 tuổi",
+ takeaway:t=>rkOf(S)<=rkOf(t)?"phẩm ngươi cao hơn nàng":rkOf(t)>=4?"nàng dưới bậc Phi":!kidsOf(t).some(k=>k.age<6)?"nàng có con dưới 6 tuổi":"",
+ steal:t=>tonightOf()===t?"":"tối nay nàng được lật thẻ",road:t=>tonightOf()===t?"":"tối nay nàng được lật thẻ",
+ tocao:t=>!realCrime(t)?"nàng có tội thật (ngươi biết)":evG(S,t)<1?`1 chứng cứ về nàng (có ${evG(S,t)})`:"",
+ expose:t=>!hasScandal(t)?"nàng có chuyện tư tình (ngươi biết)":evG(S,t)<2?`2 chứng cứ về nàng (có ${evG(S,t)})`:"",
+ xinhh:t=>{const q=queenP();return bac(30)||(!q||q===S?"có Hoàng hậu (không phải ngươi)":q===t?"nàng không phải Hoàng hậu":aff(q,S)<40?`Hoàng hậu quý ngươi ≥40 (có ${aff(q,S)})`:rkOf(t)<1?"nàng từ Thường tại trở lên":"")},
+ pushp:t=>whereOf(S)!=="vuon"?"ngươi đang ở Ngự hoa viên":!together(S,t)?"nàng ở cùng chỗ với ngươi":"",trip:t=>together(S,t)?"":"nàng ở cùng chỗ với ngươi"})}
+
+/* ================= wiring j78 (intel + evidence data) to the kit ================= */
+if(typeof j78when==="function"){j78when=function(){return kitDate(S.month,S.year,S.tuan)}}
+function kitEvidencePanel(v){if(!v||typeof evidenceOf!=="function")return;const E=evidenceOf(v);if(!E)return;
+ const items=E.items.length?E.items.map(e=>kitEvidence({what:e.proves,how:e.how,when:e.when})).join(""):`<div class="kpnote">Ngươi chưa giữ chứng cứ nào về nàng.</div>`;
+ const acts=(E.acts||[]).map(a=>`<button class="opt" data-kev="${v.id}" data-kevact="${a.k}"${a.why?" disabled":""}>${a.n||(ACT[a.k]?ACT[a.k].n:a.k)}<small>${a.why?`<span class="kwhy">${a.why}</span> `:""}${kitParse(a.line||"")}</small></button>`).join("");
+ const m=kitPanel({kind:"evidence",title:`Chứng cứ về ${kpPlain(kitName(v))}`,sub:`Đang giữ: ${E.count}`,subject:v,sections:[{h:`Chứng cứ đang giữ (${E.count})`,html:`<div class="kevs">${items}</div>`},acts?{h:"Dùng chứng cứ",html:`<div class="opts">${acts}</div>`}:null]},true);m.evd=1;showModal()}
+function kitIntelPanel(v){if(!v)return;const L=typeof intelOf==="function"?intelOf(v):[];const old=(S.notes&&S.notes[v.id])||[];
+ const list=L.map(x=>({about:null,fact:x.fact+(x.current===false?` <span class="kchip n">nay đã khác</span>`:""),src:x.by?(typeof x.by==="object"?x.by:String(x.by)):"tai mắt",week:[x.how,x.when].filter(Boolean).join(" · ")}));
+ old.forEach(t=>{if(!L.some(x=>kpPlain(x.fact).includes(kpPlain(t))))list.push({fact:t,src:"nghe được",week:""})});
+ const m=kitPanel({kind:"intel",title:`Đã biết về ${kpPlain(kitName(v))}`,sub:`${list.length} tin`,subject:v,sections:[{html:kitIntel(list,{empty:"Ngươi chưa biết gì thêm về nàng. Dò la để biết."})}]},true);showModal()}
+/* person card: the evidence chip and the "Đã biết" line open the kit panels */
+(function(){if(typeof rvCard!=="function")return;const r0=rvCard;rvCard=function(v,i){let h=r0.apply(this,arguments);try{
+  h=h.replace(/<span class="chip hot">((?:<img[^>]*>)?Chứng cứ \d+)<\/span>/,`<button class="chip hot kchipb" data-kev="${v.id}" title="Xem chứng cứ">$1 ›</button>`);
+  h=h.replace(/<span class="past">Đã biết: [\s\S]*?<\/span>/,"");
+  const n=(typeof intelOf==="function"?intelOf(v).length:0)||((S.notes&&S.notes[v.id])||[]).length;
+  if(n)h=h.replace('<div class="pcinfo">',`<div class="pcinfo"><button class="chip kchipb" data-kintel="${v.id}">Đã biết: ${n} tin ›</button>`)}catch(e){}return h}})();
+document.addEventListener("click",e=>{const a=e.target.closest("[data-kevact]");if(a){e.stopPropagation();if(a.disabled)return;evidenceDo(+a.dataset.kev||a.dataset.kev,a.dataset.kevact);return}
+ const c=e.target.closest(".kchipb[data-kev]");if(c){e.stopPropagation();const v=RV(+c.dataset.kev||c.dataset.kev);if(v){if(Q.length&&/pcm/.test(Q[0].cls||""))Q.shift();kitEvidencePanel(v)}return}
+ const t=e.target.closest(".kchipb[data-kintel]");if(t){e.stopPropagation();const v=RV(+t.dataset.kintel||t.dataset.kintel);if(v){if(Q.length&&/pcm/.test(Q[0].cls||""))Q.shift();kitIntelPanel(v)}}},true);
+(function(){const st=document.createElement("style");st.id="kp-ev-css";st.textContent=`.kchipb{cursor:pointer;font-family:inherit;background:#fff;font-size:.75rem}.kchipb:hover{border-color:var(--gold)}.kevs{display:flex;flex-direction:column;gap:6px}`;document.head.appendChild(st)})();
+
+/* when(): the full date in the wording guide's words, season kept */
+if(typeof when==="function"){when=function(){return `${kitDate(S.month,S.year,S.tuan,null,true)} (${SEASON[S.month-1]})`}}
+(function(){const st=document.createElement("style");st.id="kp-kat-css";st.textContent=`button.ka .kat{flex-wrap:wrap}button.ka .kat>.kan{min-width:min(9em,100%)}button.ka .kat>.kodds{margin-left:auto}`;document.head.appendChild(st)})();
