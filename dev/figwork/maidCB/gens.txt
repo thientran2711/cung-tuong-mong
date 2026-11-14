@@ -187,3 +187,11 @@ C-m37-t3 fHA9ZiLCDY handsB
 C-m38-t3 8aNw4yDIrU handsB
 C-m39-t3 yiC8aaRPW9 handsB
 C-m40-t3 gOIDoIRSXO handsB (a32 birdcage)
+C-m41-t3 rgeWof7xtc handsB (a48 lantern)
+C-m42-t3 p8JL4Ahehw handsB
+C-m43-t3 fHA9Yd9CDY handsB
+C-m44-t3 KLMzdCrkqp handsB
+C-m45-t3 iGqakOc3uK handsB (a48 book)
+C-m46-t3 N2Fh5Ja6D9 handsB
+C-m47-t3 s7oVmril8e handsB
+C-m48-t3 79vXEwAJAL handsB
