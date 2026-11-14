@@ -98,6 +98,26 @@
   `python3 mjobs.py JID`. `bash addbg.sh "jid..." "bg..."` appends "jid gen bg" lines to bg.txt (gen looked up in gens.txt, same order).
   mproc.py takes ~2 min per batch (urls.py scans transcripts): run it in the background.
 
+### STATUS (maid-art part A, end of session 4)
+- DONE part A: m01–m44 x m0/m2/m3/m4 (176 lineups). Session 4 added m33–m44 (48 lineups), sheets dev/figwork/sheets/A_b16.jpg (m33,m34)
+  .. A_b21.jpg (m43,m44). Checked: ~1:7, faces match m1, m0 embroidered + silver tram, m3 dark non-red, m4 red + crane + winged cap.
+- AGE-48 HAIR (binding: dark, at most 2-3 thin silver strands): mjobs AGES now says "with DARK hair, as dark as at 32 ... NOT grey temples,
+  NOT grey streaks ... even if the identity reference shows grey or white hair" (from A-m37 on) -> new lineups come out dark.
+  FIX METHOD for an existing grey lineup = hair-only edit (gpt-2-6, 2:1, 4k, quality high, ONE image ref = that lineup's gen, no style ref):
+  "Edit this image. Keep everything exactly the same (all four figures, faces, outfits, poses, props, ornaments, background,
+  composition). Only recolour the hair of every figure, especially the RIGHTMOST oldest lady: the whole hairdo, including the temples,
+  the sides and the bun, must be solid DARK black-brown, exactly the same dark colour as the hair of the leftmost young woman. No grey,
+  no silver, no white streaks anywhere in the hair. No other changes. No text." -> append "jid newgen" to gens.txt, remove bg, addbg, mproc.
+  Check with `python3 hz.py out.jpg GEN...` (full-res head crops of the 4 figures from the raw gen) before bg removal.
+- Fixed this session (edit method): m34-m2/m3, m35-m0/m3, m36-m0/m2/m3, m17 (all 4), m21 (all 4), m22 (all 4), m23 (all 4), m24 (all 4),
+  m28-m3, m28-m4, m31-m0, m31-m2 -> sheet A_fix48a.jpg.
+- STILL GREY at a51 (found with zoom.py, to fix with the edit method): m01–m16, m18, m19, m20 (all four tiers each, ~76 lineups),
+  plus lighter grey temples at m30-m0/m2/m3 and m32-m2 (maybe m25-m3, m29-m0).
+- NEXT (exact): part A m45–m52 (32 lineups; next batch A-m45-m0 A-m45-m2 A-m45-m3 A-m45-m4 A-m46-m0 ... -> sheet A_b22.jpg), then the
+  grey fixes above (sheet A_fix48b.jpg ...).
+- Session-4 tool notes: same worktree scratchpad/wt-maidA, work copy scratchpad/maidA. view.py (W=820 python3 view.py out.jpg GEN..)
+  stacks gen previews for checking; hz.py crops heads at full res. One mproc at a time.
+
 ### STATUS (maid-art part A, end of session 3)
 - DONE part A: m01–m32 x m0/m2/m3/m4 (128 lineups, 512 figures). Session 3 added m21–m32 (48 lineups + 1 redo of m22-m3 = 49 gens,
   13 230 credits gen + 147 bg), sheets dev/figwork/sheets/A_b10.jpg (m21,m22) .. A_b15.jpg (m31,m32). Checked: ~1:7, faces match m1,
