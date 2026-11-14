@@ -16,3 +16,13 @@ Model gpt-2-6, 3:4, 1k (40 credits each), 1 style ref (bright: Ngự hoa viên c
 - Mẻ 8: hinh-phat, lanh-cung(-2,-3), dai-xa, hh-viec(-2), cung-nu: nhận cả 8.
 - Mẻ 9: cung-nu-2, tu-tinh, con-tre-2 (vẽ lại: hổ vải truyền thống): nhận.
 ## Xong: 52 nhóm, 69 tranh, 232 mã sự kiện. 71 lượt vẽ (69 nhận + 2 bỏ: dau-doc bản đầu, con-tre-2 bản đầu) x 40 = 2840 tín dụng; số dư còn ~2.152.102 (quỹ dùng chung với thợ khác).
+
+# Mệnh truyện (j67, review/stories c78669f): tranh st-*
+- Danh mục: dev/figwork/stories/stories.json (47 tuyến, 329 hồi, 167 kết; dump bằng stdump.js). Mỗi tuyến 12 tranh: 7 hồi + bìa + 3–4 kết (+ 'ket' khép lại khi chỉ có 3 kết) = 564 tranh.
+- Cách vẽ: lưới 2x2 (4 tranh/lượt), gpt-2-6, 3:4, 2k (65 tín dụng), 1 style ref (Ngự hoa viên), lời cảnh lấy thẳng từ j67 (tiếng Việt) + mô-típ thân phận (MOT trong st_prompt.py) để mỗi thân phận nhận ra được; st_fetch.py tìm rãnh, cắt 4 tấm 768x1024, tờ duyệt cho từng lưới.
+- Mẻ S1: tt_co (3 lưới), tt_oan (3), tt_tranh g1-g2, tt_mat (3), dtq_bien (3). tt_tranh:g3 bị bộ lọc tự động từ chối 2 lần -> để cuối.
+- Mẻ S2–S4: dtq_vu g1-g2, dtq_binh (3), dtq_huynh g1+g3, muoi_tuoc (3). Đã duyệt từng tờ: không mặt, đúng phong cách, mô-típ thân phận rõ (Tể tướng: chàm-vàng, thư từ; Đại tướng quân: giáp, cờ, hổ phù; buôn muối: bao muối, thuyền, bạc).
+- DỪNG GIỮA CHỪNG (07:50Z): bộ lọc tự động của phiên (auto mode) từ chối lẻ tẻ lệnh vẽ (3/30 lượt: tt_tranh:g3 hai lần, dtq_vu:g3, dtq_huynh:g2) với lý do "hành động không mong muốn". Em dừng để chủ phiên/sếp xác nhận rồi mới vẽ tiếp, không cố lách.
+- Đã có: 24 lưới = 96 tranh st-* (9 tuyến: tt_co, tt_oan, tt_mat, dtq_bien, dtq_binh, muoi_tuoc đủ 12/12; tt_tranh, dtq_vu, dtq_huynh 8/12). Còn: 117 lưới (38 tuyến + 3 lưới bị từ chối) ≈ 468 tranh, ≈ 7.600 tín dụng.
+- Vẽ tiếp: `python3 st_prompt.py --next 6` (bỏ qua denied.txt; RETRY=1 để gồm cả lưới bị từ chối) -> images_generate (gpt-2-6, 3:4, 2k, style ref cplQijT0eP, folder ba4aecfe-...) -> ghi "lưới id" vào gens.txt -> creations_wait -> `python3 st_fetch.py <lưới..>` (đọc URL từ mọi transcript; tờ duyệt ở scratchpad/stsheets) -> `python3 st_json.py`.
+- Thiếu tranh thì stArtOf() lùi về bìa tuyến, rồi về nhóm ev-* hợp chủ đề (EVENTS.json stories[arc].fb/efb), nên mọi tuyến đã có tranh hiển thị.
