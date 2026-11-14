@@ -55,3 +55,14 @@ C-m15-t3 If67iCHtvE edit iGqaQit3uK: add huadian to a48
 C-m21-t3 Bh4SN5XoQR redo solid crane
 C-m24-t3 lJ8MtGNgv9 redo a48 huadian
 C-m25-t3 tCiJRLemZJ redo centred huadian, hair up
+C-m03-t4 CqGNTszEEy hands
+C-m04-t4 SytpEzlUb8 hands
+C-m05-t4 dtyl3KbXSL hands
+C-m06-t4 p8JL654ehw hands
+C-m07-t4 YMLb7uMWeC hands
+C-m08-t4 s7oVaWil8e hands
+C-m09-t4 SytpEMyUb8 hands
+C-m10-t4 xSdcmWRjfW hands
+C-m24-t3 lJ8MC75gv9 edit lJ8MtGNgv9: a48 hair dark
+C-m04-t4 gOIDuhHSXO edit SytpEzlUb8: add huadian a19
+C-m05-t4 Bh4SA3qoQR edit dtyl3KbXSL: smaller flat cherries
