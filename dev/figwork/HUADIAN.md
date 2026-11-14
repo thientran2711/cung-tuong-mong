@@ -19,8 +19,8 @@ Kích thước gốc (t1): cỡ hoa son giữa mày của c03 t1 (img/por-consor
 - t5: hoạ tiết cắt bằng vàng lá, lồng son bên trong.
 - t6: vàng lá + son, điểm MỘT hạt ngọc trai nhỏ ở giữa.
 - t7 (Hoàng quý phi): vàng chạm filigree tinh xảo, đối xứng, ngọc trai nhỏ + MỘT điểm đá đỏ; lộng lẫy mà vẫn nhỏ.
-- t8 (Hoàng hậu): phượng (hoặc mẫu đơn) vàng filigree ôm hoạ tiết riêng ở giữa, khảm thuý lam (kingfisher blue), ngọc trai nhỏ; đẹp nhất, nhìn là biết mẫu nghi.
-Mẫu trên mặt c03 tuổi 19: dev/figwork/sheets/huadian_c03_t1.jpg … t8.jpg (+ huadian_c03_8nac.jpg cạnh nhau).
+- t8 (Hoàng hậu): phượng cách điệu MẢNH bằng vàng lá mỏng sát da, thân và đuôi uốn chữ S ôm hoa son nhỏ (hoạ tiết riêng), khảm thuý lam; không khung tròn, không vòng trai; cỡ ≈1.4 lần t1. Mọi hoa điền là son VẼ trên da / vàng lá dát mỏng, không phải trâm cài hay huy hiệu.
+Mẫu (sếp duyệt t1–t7, t8 làm lại): dev/figwork/sheets/huadian_c03_face_t1..t8.jpg (toàn mặt), huadian_c03_face_all.jpg, huadian_c03_t1..t8.jpg (cận). Tất cả là gpt-2-6 edit, không ghép bằng code.
 
 | ID | Hoạ tiết riêng (giữ suốt đời) | Màu son bậc thấp | Tranh t1 hiện có |
 |---|---|---|---|

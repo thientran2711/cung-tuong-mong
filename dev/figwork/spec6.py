@@ -28,8 +28,8 @@ HL={1:"the simplest form: a single plain {col} dot or one simple painted stroke 
 4:"{mot} painted in {col} with every edge outlined in a thin line of shimmering gold, the first touch of gold",
 5:"{mot} cut from thin gold leaf, layered with {col} paint inside the gold shape, gold and colour together",
 6:"{mot} of gold leaf with {col} inlay and ONE tiny seed pearl at its centre",
-7:"Imperial Noble Consort level: {mot} as an exquisite symmetrical gold FILIGREE ornament (fine openwork gold wire), set with tiny seed pearls and ONE small red gemstone at its centre, splendid and jewel-like yet small",
-8:"Empress level, the most beautiful of all: a tiny gold FILIGREE phoenix with spread wings (or a peony) cradling {mot} at its heart, inlaid with brilliant kingfisher-blue enamel and tiny seed pearls, unmistakably the Mother of the realm, yet still small"}
+7:"Imperial Noble Consort level: {mot} with petals of vivid glossy cinnabar-red enamel framed in intricate deep rich gold filigree with dark outlines, tiny seed pearls around the edge and ONE small ruby at its centre, clearly richer than the lower ranks yet small",
+8:"Empress level, the most splendid of all: a slender stylised phoenix of paper-thin gold leaf laid flat on the skin, body and tail curving in a compact S-shape around a small vivid cinnabar-red {mot}, feathers inlaid with brilliant kingfisher blue, fine gold outlines; flat and delicate, no round frame, no ring of pearls, nothing dangling"}
 # owner 11/14 (later): size grows a LITTLE per rank, ~+5% each: t1 = c03 t1 cinnabar flower size, t8 ~1.4x t1; never big
 HS={1:"tiny, fingertip-sized (like a classic small red flower mark between the brows)",2:"tiny, fingertip-sized",
 3:"small, fingertip-sized, a hair larger than the lowest ranks",4:"small, a touch larger than the lowest ranks",
@@ -78,8 +78,8 @@ L=["# Hoa điền (huadian) — bảng kiểu cho phi tần c01–c32 (art7, lu�
 "- t5: hoạ tiết cắt bằng vàng lá, lồng son bên trong.",
 "- t6: vàng lá + son, điểm MỘT hạt ngọc trai nhỏ ở giữa.",
 "- t7 (Hoàng quý phi): vàng chạm filigree tinh xảo, đối xứng, ngọc trai nhỏ + MỘT điểm đá đỏ; lộng lẫy mà vẫn nhỏ.",
-"- t8 (Hoàng hậu): phượng (hoặc mẫu đơn) vàng filigree ôm hoạ tiết riêng ở giữa, khảm thuý lam (kingfisher blue), ngọc trai nhỏ; đẹp nhất, nhìn là biết mẫu nghi.",
-"Mẫu trên mặt c03 tuổi 19: dev/figwork/sheets/huadian_c03_t1.jpg … t8.jpg (+ huadian_c03_8nac.jpg cạnh nhau).","",
+"- t8 (Hoàng hậu): phượng cách điệu MẢNH bằng vàng lá mỏng sát da, thân và đuôi uốn chữ S ôm hoa son nhỏ (hoạ tiết riêng), khảm thuý lam; không khung tròn, không vòng trai; cỡ ≈1.4 lần t1. Mọi hoa điền là son VẼ trên da / vàng lá dát mỏng, không phải trâm cài hay huy hiệu.",
+"Mẫu (sếp duyệt t1–t7, t8 làm lại): dev/figwork/sheets/huadian_c03_face_t1..t8.jpg (toàn mặt), huadian_c03_face_all.jpg, huadian_c03_t1..t8.jpg (cận). Tất cả là gpt-2-6 edit, không ghép bằng code.","",
 "| ID | Hoạ tiết riêng (giữ suốt đời) | Màu son bậc thấp | Tranh t1 hiện có |","|---|---|---|---|"]
 T1={"c03":"có: chấm son đỏ dạng hoa nhỏ","c11":"có: chấm son đỏ dạng hoa nhỏ","c19":"có: chấm son đỏ dạng hoa nhỏ","c32":"có: chấm son đỏ dạng hoa nhỏ"}
 for c in sorted(HD):

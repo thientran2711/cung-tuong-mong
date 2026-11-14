@@ -464,3 +464,4 @@ HD8v3 c03: t2 lines xSdWELCjfW, t5 gold+dark edge jUXcugyLD0, t7 red enamel+deep
 HD8v4 c03: t7 ksDzaEm16B, t8 p8JjA0Iehw
 HD8v5 c03 t8 tiny Do7xA3xpcl
 HD8 FINAL v6 c03 t1..t8: WDsbPVrcXe xSdWELCjfW SytDFPEUb8 XmPlAvpBfo jUXcugyLD0 LwB0C4gswO ksDzaEm16B 8aNUV51IrU (all gpt-2-6 edits of uploaded c03 t1 head 1lpnpLXr4r)
+HD8 FINAL (owner kept t1-t7 of 84a0b5e) t8 slender flat phoenix jUXcb0VLD0 (alt rgeYHWextc); rejected flat-big fHA4ocqCDY huROdnxvqL; v5 t5-t7 redo eIOLWykdqL 1lpnQdbr4r EbzNIWCuuO cancelled
