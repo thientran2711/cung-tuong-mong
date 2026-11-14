@@ -71,3 +71,12 @@ The owner plays mostly on TWO devices; fix and test these FIRST, others after:
 1. Samsung Galaxy Z Fold, PORTRAIT: 755x1000 @2
 2. iPad, LANDSCAPE: 1180x820 @2 (iPad Air/10th gen) and 1366x1024 @2 (iPad Pro 12.9)
 Secondary: Fold cover 412x1058 @2, phone 390x844 @3, 1024x768 @2.
+
+## OWNER RULES ADDED 11/14 (phiên chính 2, binding)
+- Think WITH the owner: for every idea she gives, weigh it and propose how (or whether) to do it; don't just obey blindly.
+- Hidden outcomes: in EVENT choices (weekly events j68, Mệnh truyện chapters j67, side events, dilemmas) show ONLY costs (Sức, khắc, bạc) — no long-term gains/losses (Sủng, Danh, Đức, favour…) and no odds word. The result card still shows the true numbers afterwards. Normal act buttons/cards keep full price + gain/loss + odds.
+- Wardrobe: 2 slots (Trâm cài, Y phục) beside the portrait for everyone; item grades Thường/Tinh phẩm/Trân phẩm/Tuyệt phẩm/Ngự tứ; whether an outfit is Đúng phẩm/Vượt phẩm/Quá giản dị is HIDDEN until someone remarks on it (same for NPCs); "Tự chọn đồ" = fast but risky; dressing minigame decides the outcome; Ngự tứ can't be sold; frame-ups (planted items).
+- Huadian (forehead ornament): consorts only (incl. maids promoted to consort), never maids/servants/cold palace; size like c03 t1 (small, visible); 8 DISTINCT tiers (t7 Hoàng quý phi, t8 Hoàng hậu clearly grander via material/detail, never larger). No facial moles on anyone.
+- Poses: calm standing (no flying sleeves/sashes, no swirling hems) for ALL figure art incl. Part C.
+- Contests: each subject its own real minigame, never multiple-choice quizzes. Results: podium screen first (full-body figures, glow, confetti), then the score table.
+- Never ship code-drawn art where a painting is expected; if something looks crude, redraw it without waiting to be asked.
