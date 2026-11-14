@@ -4,7 +4,7 @@
      t1 silk cord, clear glass + seed pearls · t2 plain silver, pearls + pale glass · t3 engraved silver, pearls + pink glass · t4 pale gold, carnelian ·
      t5 gold flower band, jade + ruby · t6 gold clouds, big pearls + emerald · t7 gold filigree, peony hooks, 2 layers + ruby + gold tassels ·
      t8 gold filigree + kingfisher blue, phoenix hooks, 3 layers, rubies + large pearls.
-   img/veil-gauze.png (name kept): cotton-string band, light wooden + frosted glass beads, for cung nữ, ma ma and lãnh cung. ALL tiers are bead strands of the same density.   img/veil.png = t5 (old name kept).
+   Consorts t1..t8 are bead strands of the same density. Cung nữ, ma ma, lãnh cung wear a thin SILK veil: img/veil-silk-ivory.png (default) or img/veil-silk-pink.png (embroidered); KIT_VEIL.silk picks which.   img/veil.png = t5 (old name kept).
    img/veil-por.png 384x506 / veil-fig.png 385x900: t5 pre-placed for the median face (fallback only).
    img/veil-fit.json: { "<por-/fig- file>": [left%, top%, width%, height%, rotateDeg] } measured on every women's image
      (por-*: % of the 384x506 portrait OPENING, j60 .kpor geometry; fig-*: % of the figure image box). The box is for t5 (band at 16.5%).
@@ -12,13 +12,13 @@
    so the band always sits on the nose bridge under the eyes and the strands end a little past the chin.
    Kit use: <img src="${KIT_VEIL.src(KIT_VEIL.tierOf(p))}" style="position:absolute;${KIT_VEIL.style(file,tier)}"> above the portrait,
    above KIT_SCAR, below the frame. */
-window.KIT_VEIL={tiers:["t1","t2","t3","t4","t5","t6","t7","t8","gauze"],band:{t1:.171,t2:.166,t3:.155,t4:.18,t5:.169,t6:.144,t7:.128,t8:.11,gauze:.148},B0:.165,
+window.KIT_VEIL={tiers:["t1","t2","t3","t4","t5","t6","t7","t8","silk-ivory","silk-pink"],silk:"silk-ivory",band:{t1:.171,t2:.166,t3:.155,t4:.18,t5:.169,t6:.144,t7:.128,t8:.11,silk:.153,"silk-ivory":.153,"silk-pink":.16},B0:.165,
  por:"img/veil-por.png",fig:"img/veil-fig.png",fitUrl:"img/veil-fit.json",fit:null,
- src:function(t){t=this.band[t]!=null?t:"t5";return `img/veil-${t}.png`},
+ src:function(t){if(t==="silk")t=this.silk;t=this.band[t]!=null?t:"t5";return `img/veil-${t}.png`},
  on:function(p){try{return !!(p&&p.scar&&p.scar.veil)}catch(e){return false}},
  tierOf:function(p){try{if(!p)return "t5";const rr=typeof personRoleRank==="function"?personRoleRank(p):null;
-   if(rr){if(rr.role==="maid"||rr.role==="mama"||rr.role==="cold")return "gauze";if(rr.role==="player"||rr.role==="consort")return "t"+(Math.max(0,Math.min(7,rr.rank|0))+1);if(rr.role==="thaihau")return "t8"}
-   if(p.cold||p.lanh)return "gauze";const r=typeof rkOf==="function"?rkOf(p):p.rank;return r!=null?"t"+(Math.max(0,Math.min(7,r|0))+1):"t5"}catch(e){return "t5"}},
+   if(rr){if(rr.role==="maid"||rr.role==="mama"||rr.role==="cold")return KIT_VEIL.silk;if(rr.role==="player"||rr.role==="consort")return "t"+(Math.max(0,Math.min(7,rr.rank|0))+1);if(rr.role==="thaihau")return "t8"}
+   if(p.cold||p.lanh)return KIT_VEIL.silk;const r=typeof rkOf==="function"?rkOf(p):p.rank;return r!=null?"t"+(Math.max(0,Math.min(7,r|0))+1):"t5"}catch(e){return "t5"}},
  rect:function(file,tier){const n=String(file||"").split("/").pop();const r=this.fit&&this.fit[n];if(!r)return null;const b=this.band[tier]!=null?this.band[tier]:this.band.t5;
    const bandY=r[1]+this.B0*r[3],h=r[3]*(1-this.B0)/(1-b);return [r[0],+(bandY-b*h).toFixed(2),r[2],+h.toFixed(2),r[4],b]},
  style:function(file,tier){const r=this.rect(file,tier||"t5");if(!r)return "";return `left:${r[0]}%;top:${r[1]}%;width:${r[2]}%;height:${r[3]}%;transform:rotate(${r[4]}deg);transform-origin:50% ${(r[5]*100).toFixed(1)}%`},
