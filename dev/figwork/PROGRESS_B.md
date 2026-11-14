@@ -34,8 +34,19 @@
 
 - B_b15: c23 m2–m4, c24 m0–m4 → c17–c24 COMPLETE (120 lineups total, 480 figures).
 
+## Part B worker #2 (from 2026-11-14 afternoon)
+- New worktree: scratchpad(ed00be27…)/wt-maidB (branch maidB2), work copy scratchpad/maidB; paths in mjobs/mproc/msheet/pubm repointed;
+  pubm.sh now does fetch + rebase before push. urls.py finds URLs in this session's transcripts (creations_wait output).
+- OWNER RULES (binding): NO moles / beauty marks on the face; NO huadian (forehead ornament) for maids at ANY tier m0–m4.
+  mjobs.py feat() drops "beauty mark"/"mole"/"huadian" clauses from consorts_feat.json and every prompt ends with
+  "No moles, no beauty marks ... No forehead ornament, no huadian ...". Applies from B_b16 (c25) on.
+- Per-lineup readable previews: `python3 lv.py ../wt-maidB/dev/figwork/maidB/preview JIDs` → dev/figwork/maidB/preview/B-cNN-mK.jpg (one lineup per file).
+- OLD images that may carry a mole (feature list said so; edit away when touched): c01, c04, c07, c09, c12, c15, c17, c20, c23 (m0–m4).
+  OLD images that may carry a huadian (c03, c11, c19 m0–m4): remove in the same edit as any hair/mole fix. Status of each is logged below.
+- B_b16: c25 m0–m4, c26 m0–m2 (128 lineups total). Clean: dark 48yo hair, no moles, no huadian.
+
 ## NEXT (exact)
-- c25–c32 × m0..m4 (40 lineups), in order B-c25-m0 ... (8 per batch → sheets B_b16.jpg .. B_b20.jpg). Same per-batch steps as below.
+- (B_b16 done) c26 m3 ... c32 m4, in order (8 per batch → sheets B_b16.jpg .. B_b20.jpg). Same per-batch steps as below.
   After each batch check every 48yo head (`python3 hc.py OUT.jpg JIDs`, zoom suspicious ones); grey temples → hair-only edit (below).
 - Then the hair-edit pass on the too-grey ~48 figures: c01–c08 (all ranks, check each with hc.py first), c12-m4, c14-m2/m3/m4,
   c15-m2/m3, c16-m3, plus c20-m3/m4 (faint grey sheen). No cutcheck.py exists on main or any branch (checked), so cutouts are checked by eye on the sheets.

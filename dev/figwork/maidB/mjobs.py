@@ -5,8 +5,8 @@
 # python3 mjobs.py JID...  -> prints "JID style ref" + prompt
 import json,sys,os,re
 H=os.path.dirname(os.path.abspath(__file__))
-FW="/home/user/cung-tuong-mong/dev/figwork"
-WT="/tmp/claude-0/-home-user-cung-tuong-mong/84f333ce-ebd1-5e4a-9b0c-43035da11b67/scratchpad/wt-maidB"
+FW="/tmp/claude-0/-home-user-cung-tuong-mong/ed00be27-1e8d-5500-9afe-ce233b508a61/scratchpad/wt-maidB/dev/figwork"
+WT="/tmp/claude-0/-home-user-cung-tuong-mong/ed00be27-1e8d-5500-9afe-ce233b508a61/scratchpad/wt-maidB"
 STY=["8aNsy0CIrU","3zbtQNvREY","YMLuxraWeC","4RuXEXL9Aa"]
 IDF=json.load(open(FW+"/idfix.json")); FEAT=json.load(open(FW+"/consorts_feat.json"))
 SERV=json.load(open(WT+"/img/FIGURES-servants.json"))
@@ -63,13 +63,24 @@ def cout(t,i):
 def poses(lst,i,extra=""):
     p=[lst[(i+j*3)%len(lst)] for j in range(4)]
     return (" Poses (NEW, calm and standing), left to right: about 19: "+p[0]+", body slightly turned to the left; about 24: "+p[1]+", three-quarter view; about 32: "+p[2]+", slight turn to the right; about 48: "+p[3]+", gently frontal."+extra)
+import re as _re
+def feat(who,k):
+    parts=[x.strip() for x in FEAT[who].split(",")]
+    out=[]
+    for x in parts:
+        if _re.search(r"mole|beauty mark",x): continue
+        if "huadian" in x: continue
+        out.append(x)
+    return ", ".join(out)
+NOMOLE=" No moles, no beauty marks, no spots anywhere on the face; clear flawless skin."
+NOHD=" No forehead ornament, no huadian: no forehead flower mark, no dot or painted mark between the brows."
 def job(jid):
     a,who,tt=jid.split("-"); n=int(who[1:])-1
     if a in "AB":
         k=int(tt[1:])
         desc=f" A palace maid of the imperial court, {MRANK[k]}, {BEAU}."
-        if a=="B": desc+=f" Her own features: {FEAT[who]}."
-        p=PRE+LINE+desc+IDK+AGES+" Outfit for all four: a NEW outfit, "+mout(k,n+(3 if a=='B' else 0))+"."+poses(PROPS[k],n)+CALM+END
+        if a=="B": desc+=f" Her own features: {feat(who,k)}."
+        p=PRE+LINE+desc+IDK+AGES+" Outfit for all four: a NEW outfit, "+mout(k,n+(3 if a=='B' else 0))+"."+poses(PROPS[k],n)+CALM+END+NOMOLE+NOHD
         ref=MREF[who] if a=="A" else IDF[f"N-{who}-t1"]
     else:
         t="cold" if tt=="tcold" else int(tt[1:])
