@@ -17,7 +17,7 @@
   FIGURES records: tier "cold", palette "undyed grey-white linen". cutcheck.py is NOT on main yet (not run).
 - NEXT (in order): tcold c07–c32, then t4 calm redraws (c01 c07 c19 c20–c24 c26–c29 c31 c32 + c04/c16 a18 eye check), t6 c01–c16
   saturated redraw, t5/t6 a51 hair check with heads.py, t1–t3 calm redraw (pin new t1 only after side-by-side).
-  Credits used by art6: ~19k (balance ~2.24M).
+  Credits used by art6: ~41k (balance 2.216M).
 
 ## CURRENT STATE (art worker #5, newest first — read this first)
 - WORKTREE/PUBLISH: work copy = scratchpad/figwork; scripts write into scratchpad/wt-art5/img (branch art5). Next worker: create your own
