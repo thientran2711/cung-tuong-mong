@@ -168,3 +168,11 @@ C-m17-t7 TdSrsRMVNR gp (a32 letter->teacup)
 C-m18-t7 0eg1LRwTfW gp
 C-m19-t7 jUXTpb3LD0 gp
 C-m20-t7 dtyg7V8XSL gp
+C-m21-t7 eIOlODXdqL gp
+C-m22-t7 lJ8D8s1gv9 gp
+C-m23-t7 9ZQhF6kNYZ gp
+C-m24-t7 tCiO3aZmZJ gp
+C-m25-t7 jUXTBUWLD0 gp
+C-m26-t7 5jVzMsUKxe gp (bare forehead)
+C-m01-t8 EbzinkeuuO gp
+C-m02-t8 tCiO3FYmZJ gp
