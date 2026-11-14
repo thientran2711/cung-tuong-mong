@@ -185,3 +185,13 @@ C-m07-t8 s7oMvQml8e gp
 C-m08-t8 1lpW8C3r4r gp
 C-m09-t8 aF29WXrfSh gp
 C-m10-t8 jUXTmbJLD0 gp
+C-m05-t8 aF29Vx3fSh edit remove chain
+C-m08-t8 5jVzIyUKxe edit remove forehead band
+C-m11-t8 jUXTCouLD0 gp (a48 letter->vase)
+C-m12-t8 SyteHaYUb8 gp
+C-m13-t8 WDsK47BcXe gp
+C-m14-t8 Do7LRilpcl gp
+C-m15-t8 rgecavtxtc gp
+C-m16-t8 jUXTCC1LD0 gp
+C-m17-t8 WDsK4NvcXe gp (a48 book->birdcage)
+C-m18-t8 lJ8DQqngv9 gp
