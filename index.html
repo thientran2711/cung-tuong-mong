@@ -5467,7 +5467,7 @@ function evBusyMonth(){return e68Busy()}
    detection; execution reuses the existing acts (ACT/runAct/mindRun), evidence (evA/evG), caught/punish/accuse.
    Wraps only (mindTell, jointScheme, doAct, goTo, endTurn); edits no other module. Off switch: window.__j70off=1.
    True information only reaches her: what she is told is what really happens (NPCs may still blame the wrong person). */
-const J70CFG={cap:4,capMe:2,capOwn:2,mot:2.5,prep:0,npcSeen:.55,cool:2,waitMax:3};
+const J70CFG={cap:4,capMe:2,capOwn:2,mot:1.5,prep:0,npcSeen:.55,cool:2,waitMax:3};
 const G70=t=>`<span class="g">${t}</span>`,R70=t=>`<span class="r">${t}</span>`;
 function j70(){if(!S)return null;const z=S.j70=S.j70||{};z.pl=z.pl||[];z.n=z.n||0;z.sh=z.sh||[];z.done=z.done||0;z.types=z.types||{};return z}
 function j70On(){return !!(S&&!S.dead&&!S.out&&!window.__j70off&&!(typeof isSrv==="function"&&isSrv()))}
@@ -5610,6 +5610,9 @@ function motiveTick70(){const z=j70();for(const v of liveRivals(true)){if(v.conf
   const p=newPlot70(v,t,m,null,mo);if(p&&!p.end){v.plan={k:M70[m].k,t:key(t),due:1e9,err:0,j70:p.id};try{mindLog(v,"_tell")}catch(e){}}}}
 /* j40's big-scheme plan becomes a chain (the plan stays as the 'one scheme at a time' lock) */
 (function(){if(typeof mindTell!=="function")return;const m0=mindTell;mindTell=function(v,t,k){try{if(j70On()&&v&&v.plan&&t&&!v.plan.j70&&canNew70(v.id,key(t))){const m=methFor70(k);if(m){const mo=t===S&&(v.ghen||0)>=Math.max(oan(v,S),-aff(v,S))?"ghen":"band";const p=newPlot70(v,t,m,null,mo,{err:v.plan.err||0});if(p){if(p.end)v.plan=null;else{v.plan.due=1e9;v.plan.j70=p.id}try{mindLog(v,"_tell")}catch(e){}return}}}}catch(e){console.error(e)}return m0.apply(this,arguments)}})();
+/* a consort preparing a chain still lives her normal life: small acts (rumour, spying, tripping, accusing) go on; only a second big scheme waits */
+(function(){const n0=npcAct;npcAct=function(v,t){if(!v||!v.plan||!v.plan.j70||window.__j70off)return n0.apply(this,arguments);const P=v.plan;v.plan=null;let r="";
+  try{r=n0.apply(this,arguments)}finally{if(v.plan&&v.plan!==P){v.plan=P;r=""}else v.plan=P}return r}})();
 /* faction orders: a joint scheme against her is prepared as a chain too */
 let jointScheme0=null;
 (function(){if(typeof jointScheme!=="function")return;jointScheme0=jointScheme;jointScheme=function(f,t){try{if(j70On()&&t===S&&!window.__j70exec){const l=facLeader(f);if(l&&l!==S&&!l.plan&&canNew70(l.id,"me")){const p=newPlot70(l,S,"joint",null,"fac",{fac:1});if(p&&!p.end){l.plan={k:"joint",t:"me",due:1e9,err:0,j70:p.id};return ""}}}}catch(e){console.error(e)}return jointScheme0.apply(this,arguments)}})();
@@ -5795,7 +5798,7 @@ function ordMonth70(){const L=ords70();for(const o of L.slice()){const O=ORD70[o
    if(roll(12)){oanAdd(v,S,6);s.loyal=cl((s.loyal||0)-5,0,100);log(`${R70("Bị lộ:")} ${s.name} bám theo ${title70(v)} bị người bên ấy bắt gặp. ${v.name} oán ngươi +6, lòng ${s.name} -5.`)}
    else if(roll(30)){evA(S,v,1);noteAdd(v.id,`${s.name} theo dõi, lấy được 1 chứng cứ (nay ${evG(S,v)})`);log(`${s.name} theo dõi ${title70(v)}: thêm 1 chứng cứ (nay ${evG(S,v)}).`)}}}}
 /* (a) people close to her protect her unasked: chance from lòng / affection / nature; each one who acts is named in the notice */
-function selfP70maid(){return S.maid?cl(Math.round((S.maid.loyal-55)*2.5),0,90):0}
+function selfP70maid(){return S.maid?cl(Math.round((S.maid.loyal-50)*4),0,95):0}
 function self70(a){const out=[];const busy=ords70().map(o=>o.sid);
  if(S.maid&&!busy.includes("maid")&&roll(selfP70maid()))out.push({n:S.maid.name,b:10,t:`${S.maid.name} tự canh chừng cho ngươi (lòng ${S.maid.loyal})`});
  for(const s of S.staff||[]){if(busy.includes(s.sid)||traitor70(s)||s.tr==="nhat")continue;const p=s.tr==="trung"?(s.loyal-50)*2:(s.loyal-80)*3;if(p>0&&roll(cl(p,0,85)))out.push({n:s.name,b:8,t:`${s.name} tự để mắt cho ngươi (lòng ${s.loyal}${s.kn?`, tính ${STR[s.tr]}`:""})`})}
@@ -5850,12 +5853,12 @@ function def70m(pp){const d=mkP("j70def",pp);return{t:"Phòng bị",h:d.t,opts:d
 function ordLine70(o){const s=sv70(o.sid),O=ORD70[o.k];return `${s?s.name:"?"}: ${O.n.toLowerCase()}${o.tgt!=null&&RV(o.tgt)?` ${title70(RV(o.tgt))}`:""}`}
 PEND.j70def=pp=>{if(!S)return null;const L=ords70();const cur=L.length?`<p>Lệnh đang có: ${L.map(ordLine70).join("; ")}.</p>`:"<p>Chưa có lệnh phòng bị nào.</p>";
  const free=[S.maid?"maid":null].concat((S.staff||[]).map(s=>s.sid)).filter(x=>x!=null&&!ordOf70(x)&&sv70(x));
- if(pp.s===1){const o=[];for(const k in ORD70){const O=ORD70[k];if(!free.length)break;const c=ch70(`Giao việc: ${O.n.toLowerCase()}`,{wt:[G70(O.d)],k:[R70(`mỗi tháng${O.bac?` Bạc -${O.bac}`:""}${O.lo?`, lòng kẻ hầu ${O.lo}`:""}${!O.bac&&!O.lo?" không tốn bạc":""}`),R70("kẻ hầu ấy bận, không sai đi việc khác được")]});c.go=()=>{Q.unshift(def70m({s:2,o:k}));};o.push(c)}
+ if(pp.s===1){const o=[];for(const k in ORD70){const O=ORD70[k];if(!free.length)break;const c=ch70(`Giao việc: ${O.n.toLowerCase()}`,{wt:[G70((k==="canh"?"giữ được cung: ":"")+O.d)],k:[R70(`mỗi tháng${O.bac?` Bạc -${O.bac}`:""}${O.lo?`, lòng kẻ hầu ${O.lo}`:""}${!O.bac&&!O.lo?" không tốn bạc":""}`),R70("kẻ hầu ấy bận, không sai đi việc khác được")]});c.go=()=>{Q.unshift(def70m({s:2,o:k}));};o.push(c)}
   for(const x of L.slice(0,3)){const c=ch70(`Bãi lệnh: ${ordLine70(x)}`,{wt:[G70(`${svN70(x.sid)} rảnh tay${ORD70[x.k].bac?`, đỡ ${ORD70[x.k].bac} lượng mỗi tháng`:""}`)],k:[R70(`mất tác dụng ${ORD70[x.k].n.toLowerCase()}`)],ok:()=>{L.splice(L.indexOf(x),1);return `Ngươi bãi lệnh ${ORD70[x.k].n.toLowerCase()} của ${svN70(x.sid)}.`}});o.push(c)}
   o.push(ch70("Giữ nguyên",{wt:[G70("không tốn gì thêm")],k:[R70("phòng bị như cũ")],ok:()=>"Ngươi giữ nguyên các lệnh."}));
   return{t:cur+`<p class="past">Mỗi kẻ hầu nhận một việc. Kẻ đã bị người khác mua chuộc thì giữ việc cũng như không, lại đem chuyện kể với chủ của hắn.${free.length?"":" Không còn kẻ hầu nào rảnh."}</p>`,o,who:S.maid?pMaid():null}}
  if(pp.s===2){const O=ORD70[pp.o];if(!O)return null;const o=free.slice(0,5).map(sid=>{const s=sv70(sid);const pw=pp.o==="canh"?cl(Math.round(4+(s.loyal||0)/10),4,14):null;
-   const c=ch70(`${s.name} (lòng ${s.loyal||0})`,{wt:[G70(pw!=null?`canh chừng: dễ bắt kẻ hại hơn +${pw}`:O.d)],k:[R70(`${s.name} bận việc này`)].concat(O.bac?[R70(`Bạc -${O.bac} mỗi tháng`)]:[]).concat((s.loyal||0)<40?[R70("lòng thấp: dễ bị mua chuộc")]:[])});
+   const c=ch70(`${s.name} (lòng ${s.loyal||0})`,{wt:[G70(pw!=null?`giữ được cung: dễ bắt kẻ hại hơn +${pw}`:O.d)],k:[R70(`${s.name} bận việc này`)].concat(O.bac?[R70(`Bạc -${O.bac} mỗi tháng`)]:[]).concat((s.loyal||0)<40?[R70("lòng thấp: dễ bị mua chuộc")]:[])});
    c.go=()=>{if(O.tgt){Q.unshift(def70m({s:3,o:pp.o,sid}));return}L.push({k:pp.o,sid,since:wk()});log(`Ngươi giao cho ${s.name} việc ${O.n.toLowerCase()}.`)};return c});
   o.push(ch70("Thôi",{wt:[G70("không tốn gì")],k:[R70("chưa có thêm phòng bị")],ok:()=>"Ngươi gác lại."}));return{t:`<p>Giao cho ai việc <b>${O.n.toLowerCase()}</b>?</p><p class="past">${O.d}.</p>`,o,who:S.maid?pMaid():null}}
  if(pp.s===4){const s=sv70(pp.sid);if(!s)return null;const cur=ordOf70(pp.sid);const o=[];
@@ -5871,7 +5874,7 @@ PEND.j70def=pp=>{if(!S)return null;const L=ords70();const cur=L.length?`<p>Lện
  return null};
 /* ---------- every warning carries concrete answers ---------- */
 function thrOpts70(v){const o=[];const mat=S.mat||0;
- o.push(Object.assign(ch70("Ra lệnh phòng bị",{wt:[G70("chọn kẻ hầu canh cung, thử độc, theo dõi nàng")],k:[R70("kẻ hầu bận việc, có lệnh tốn bạc mỗi tháng")]}),{go:()=>{Q.unshift(def70m({s:1}))}}));
+ o.push(Object.assign(ch70("Ra lệnh phòng bị",{wt:[G70("giữ được mình: chọn kẻ hầu canh cung, thử độc, theo dõi nàng")],k:[R70("kẻ hầu bận việc, có lệnh tốn bạc mỗi tháng")]}),{go:()=>{Q.unshift(def70m({s:1}))}}));
  o.push(Object.assign(ch70(`Dò la ${v.name}`,{c:{},p:oSpy(S),wt:[G70(`chứng cứ về ${v.name} +1`)],lt:[R70(`${v.name} mất thiện cảm`)],k:[R70("Bạc -15")]}),{go:()=>{if(S.bac<15){log("Không đủ bạc để dò la.");return}log(runAct(S,v,"spy")||"Ngươi cho người dò la.")}}));
  if(accOK(S,v)){const c=ch70(`Tố giác ${title70(v)}`,{p:oAccuse(S,v),wt:[G70("nàng bị xử theo chứng cứ")],lt:[R70("tố hụt: mất chứng cứ, Danh giảm")]});c.go=()=>log(runAct(S,v,"accuse")||"Ngươi tố giác.");o.push(c)}
  if(!S.thDead)o.push(ch70("Xin Thái hậu che chở",{c:{bac:-20},p:cl(30+(S.th||0)/2,5,95),wt:[G70("3 tuần tới kẻ hại ngươi khó ra tay gấp đôi")],lt:[R70("Thái hậu với ngươi -3")],ok:()=>{S.guardWarn=Math.max(S.guardWarn||0,3);return "Thái hậu sai thị vệ để mắt đến cung ngươi."},no:()=>{apply({th:-3});return "Thái hậu không muốn dính vào chuyện hậu cung."}}));
