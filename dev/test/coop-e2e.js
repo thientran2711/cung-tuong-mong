@@ -35,11 +35,14 @@ async function clear(o,n=25){for(let i=0;i<n;i++){const st=await o.p.evaluate(()
    const m=document.getElementById('modal');if(!m||m.hidden)return typeof S!=='undefined'&&S&&S.mg?'mg':'';const all=[...m.querySelectorAll('button:not([disabled])')].filter(x=>x.offsetParent!==null);const b=all.find(x=>/Nhận thân phận|Nhập cung|Tiến cung|Vào cung/.test(x.textContent))||m.querySelector('#mr button:not([disabled])')||m.querySelector('.opts button:not([disabled])');if(b){b.click();return'x'}return'stuck'});
   if(st==='mg'){await o.p.evaluate(()=>{try{S.mg=null;render()}catch(e){}});continue}
   if(st!=='x')return st;await sleep(200)}return'many'}
-async function playWeek(o){/* three buổi: Qua buổi, Qua buổi, Qua đêm */for(let k=0;k<3;k++){await clear(o);
-   const before=await o.p.evaluate(()=>[S.buoi||0,S.tuan,S.month]);
-   const did=await o.p.evaluate(()=>{const b=document.getElementById('next');if(!b||b.disabled)return false;b.click();return true});
-   if(!did){ok(false,o.name+' #next enabled',before);return false}
-   await sleep(500);}await clear(o);return true}
+/* press "Qua buổi"/"Qua đêm" when it is enabled (waits up to 20 s: after the friend's dialogs, the host's NPC places, …) */
+async function press(o){for(let t=0;t<80;t++){await clear(o);const r=await o.p.evaluate(()=>{const b=document.getElementById('next');if(!b||b.disabled)return false;b.click();return true});if(r)return true;await sleep(250)}
+  ok(false,o.name+' #next enabled',await o.p.evaluate(()=>[S.buoi||0,S.tuan,S.month,document.getElementById('next').textContent]));return false}
+/* one buổi for both (PROTOCOL §9: the buổi advances when both have ended it) */
+async function buoiBoth(A,B,shotWait){const k0=await A.p.evaluate(()=>__co().week+':'+(S.buoi||0));await press(A);if(shotWait)await shot(A,shotWait);await press(B);
+  for(let t=0;t<80;t++){const a=await A.p.evaluate(()=>__co().week+':'+(S.buoi||0)),b=await B.p.evaluate(()=>__co().week+':'+(S.buoi||0));if(a!==k0&&b!==k0&&a===b)return true;await clear(A);await clear(B);await sleep(250)}
+  ok(false,'buổi '+k0+' advanced for both');return false}
+async function weekBoth(A,B,w){for(let k=0;k<3;k++)await buoiBoth(A,B,w===0&&k===0?'06-waiting-friend':null)}
 
 (async()=>{const b=await chromium.launch();
  const A=await mk(b,'fold',[686,880,2.2]),B=await mk(b,'ipad',[1180,820,2]);
@@ -65,8 +68,7 @@ async function playWeek(o){/* three buổi: Qua buổi, Qua buổi, Qua đêm */
  for(const o of [A,B])ok(await o.p.evaluate(()=>{const f=rivals.find(v=>v.coop);return f&&typeof kitKnown==='function'&&!kitKnown(f)&&!kitKnownName(f)}),o.name+': friend starts as Người lạ (unknown, like any NPC)');await shot(A,'05-world');await shot(B,'05-world');
  /* 3 three weeks */
  for(let w=0;w<3;w++){const wk=(await C(A)).week;
-  await playWeek(A);ok(await until(A,x=>__co().waiting||__co().week>x,wk,8000),`week ${w+1}: A ended, waits for B`);if(w===0)await shot(A,'06-waiting-friend');
-  await playWeek(B);
+  await weekBoth(A,B,w);
   ok(await until(A,x=>__co().week===x+1&&!__co().waiting,wk,30000),`week ${w+1}: A advanced`);ok(await until(B,x=>__co().week===x+1&&!__co().waiting,wk,30000),`week ${w+1}: B advanced`);
   await clear(A);await clear(B);await same('after week '+(w+1))}
  await shot(A,'07-after3');await shot(B,'07-after3');
@@ -92,7 +94,7 @@ async function playWeek(o){/* three buổi: Qua buổi, Qua buổi, Qua đêm */
  ok(await A.p.evaluate(()=>{const f=rivals.find(v=>v.coop);return f&&!kitKnown(f)&&!kitKnownName(f)}),'reborn friend is a stranger again (Người lạ)');
  await clear(A);await clear(B);await shot(A,'12-reborn-seen');await shot(B,'12-reborn');
  /* 6 one more week after rebirth */
- {const wk=(await C(A)).week;await playWeek(A);await playWeek(B);ok(await until(B,x=>__co().week===x+1,wk,30000),'week after rebirth advances');}
+ {const wk=(await C(A)).week;await weekBoth(A,B,1);ok(await until(B,x=>__co().week===x+1,wk,30000),'week after rebirth advances');}
  /* 7 single player untouched + old save loads */
  const oldHtml=execSync('git -C '+JSON.stringify(ROOT)+' show origin/main:index.html',{maxBuffer:64e6}).toString();
  const D=await mk(b,'solo',[686,880,2.2]);await D.ctx.route(BASE+'old.html',r=>r.fulfill({status:200,contentType:'text/html; charset=utf-8',body:oldHtml.replace(/navigator\.serviceWorker\.register/g,'(()=>Promise.reject())')}));
@@ -100,8 +102,9 @@ async function playWeek(o){/* three buổi: Qua buổi, Qua buổi, Qua đêm */
  await D.p.evaluate(()=>{SLOT=2;document.getElementById('title').hidden=true;start();Q.length=0;save()});const oldName=await D.p.evaluate(()=>S.name);
  await D.p.goto(BASE);await D.p.waitForTimeout(3500);await shot(D,'13-title-solo');
  ok(await tapText(D,/^Chơi một mình/),'solo: Chơi một mình');await D.p.waitForTimeout(800);
- ok(await tapText(D,/^Tiếp tục kiếp này/),'solo: old save listed');await D.p.waitForTimeout(1500);
- const ld=await D.p.evaluate(()=>({n:S&&S.name,coop:!!__co().on,fr:rivals.some(v=>v.coop)}));ok(ld.n===oldName&&!ld.coop&&!ld.fr,'solo: old save loads, no co-op',ld);
+ /* Chơi một mình = Tiếp tục the last sổ (old save) when there is one */
+ if(!await D.p.evaluate(()=>typeof S!=='undefined'&&!!S&&!!S.name))await tapText(D,/^Tiếp tục kiếp này/,4000);await D.p.waitForTimeout(1500);
+ const ld=await D.p.evaluate(()=>({n:typeof S!=='undefined'&&S&&S.name,coop:!!__co().on,fr:typeof rivals!=='undefined'&&(rivals||[]).some(v=>v.coop)}));ok(ld.n===oldName&&!ld.coop&&!ld.fr,'solo: old save loads, no co-op',ld);
  await clear(D);await shot(D,'14-solo-game');
  for(const o of [A,B,D])ok(!o.errs.length,o.name+': no page errors',o.errs.slice(0,5));
  const bad=res.filter(r=>!r[0]);console.log(`\n${res.length-bad.length}/${res.length} passed`);fs.writeFileSync(OUT+'/result.txt',res.map(r=>(r[0]?'ok  ':'FAIL')+' '+r[1]).join('\n')+'\n');

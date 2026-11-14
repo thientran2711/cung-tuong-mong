@@ -39,7 +39,7 @@ const STEP=()=>{const c=__co();if(c.frozen||c.waiting)return'coop';if(typeof S==
   const n=document.getElementById('next');if(n&&!n.disabled){window.__actsThis=0;window.__tabTried=0;window.__metThis=0;window.__hitThis=0;n.click();return'next'}return'idle'};
 /* per-buổi view: NPC whereabouts (from the shared state) + where each sees the other */
 const BUOI=()=>{const hm=x=>x==='home'?'r'+(COOPW.seat==='a'?901:902):x;if(typeof S==='undefined'||!S||S.dead)return null;const c=__co();const f=rivals.find(v=>v.coop);
-  return{key:c.week+'.'+(S.buoi||0),ready:!c.waiting&&!c.frozen&&!document.querySelector('#coopfz'),where:Object.entries(S.where||{}).filter(([k,v])=>!(+k>=900)&&typeof v==='string').map(([k,v])=>k+'@'+v).sort().join(),
+  return{key:c.week+'.'+(S.buoi||0),ready:!c.waiting&&!c.frozen&&!document.querySelector('#coopfz')&&(COOPW.seat==='a'||COOPW.whereKey===c.week+':'+(S.buoi||0)),where:Object.entries(S.where||{}).filter(([k,v])=>!(+k>=900)&&typeof v==='string').map(([k,v])=>k+'@'+v).sort().join(),
    fpl:f?hm(whereOf(f)):null,me:hm(S.place||'home'),fst:f?[f.sung,f.danh,f.suc].join('/'):null,fk:f?(kitKnown(f)?1:0)+(kitKnownName(f)?2:0):-1,mst:[S.sung,S.danh,S.suc].join('/')}};
 /* the world as this client sees it (only shared truth, no personal data) */
 const WORLD=()=>{const kidsOf=v=>(v.kids||[]).map(k=>k.name+(k.alive?'':'†')).join('/');
