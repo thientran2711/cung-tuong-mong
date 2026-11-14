@@ -15,4 +15,4 @@ Model gpt-2-6, 3:4, 1k (40 credits each), 1 style ref (bright: Ngự hoa viên c
 - Mẻ 7 (khuôn tối): tin-don, tai-mat, chuyen-la, dau-doc (vẽ lại, tối hơn), vu-oan (búp bê không mặt), hai-thai, hoi-lo, mat-uoc: nhận cả 8.
 - Mẻ 8: hinh-phat, lanh-cung(-2,-3), dai-xa, hh-viec(-2), cung-nu: nhận cả 8.
 - Mẻ 9: cung-nu-2, tu-tinh, con-tre-2 (vẽ lại: hổ vải truyền thống): nhận.
-## Xong: 52 nhóm, 69 tranh, 232 mã sự kiện. 73 lượt vẽ (69 + 4 vẽ lại/thử) x 40 = 2920 tín dụng.
+## Xong: 52 nhóm, 69 tranh, 232 mã sự kiện. 71 lượt vẽ (69 nhận + 2 bỏ: dau-doc bản đầu, con-tre-2 bản đầu) x 40 = 2840 tín dụng; số dư còn ~2.152.102 (quỹ dùng chung với thợ khác).
