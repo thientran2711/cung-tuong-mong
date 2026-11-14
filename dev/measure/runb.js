@@ -1,4 +1,4 @@
-// usage: node dev/measure/runb.js <sens|rand> <lives> <outfile.json>   env: BALJ='{"hz":1.4}' SERV=keep|fire AFF=1
+// usage: node dev/measure/runb.js <sens|rand> <lives> <outfile.json>   env: BALJ='{"hz":1.4}' SERV=keep|fire AFF=1 INP2=inx.js (extra counters) XJS='js run after load'
 const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
 const mode=process.argv[2],target=+process.argv[3]||40,out=process.argv[4];
 const M=__dirname,GAME=process.env.GAME||path.join(M,'..','index.html');
@@ -10,6 +10,8 @@ const M=__dirname,GAME=process.env.GAME||path.join(M,'..','index.html');
  await page.evaluate(()=>document.querySelector('#slots button[data-new="1"]').click());await page.waitForTimeout(800);
  await page.evaluate(`window.__servPolicy='${process.env.SERV||''}';window.__aff=${process.env.AFF?1:0};window.__hhStop=${process.env.HHSTOP?1:0};window.__balO=${process.env.BALJ||'null'};window.__fairO=${process.env.FAIRJ||'null'};window.__j70O=${process.env.J70J||'null'};window.__origO=${process.env.ORIG?JSON.stringify(process.env.ORIG):'null'}`);
  await page.evaluate(fs.readFileSync(path.join(M,process.env.INP||'inpage5.js'),'utf8'));
+ if(process.env.INP2)for(const f of process.env.INP2.split(','))await page.evaluate(fs.readFileSync(path.join(M,f),'utf8'));
+ if(process.env.XJS)await page.evaluate(process.env.XJS);
  const t0=Date.now();let n=0;
  while(true){n=await page.evaluate(([m])=>window.__bot.step(m,300),[mode]);
   fs.writeFileSync(out,JSON.stringify(await page.evaluate(()=>window.__res)));
