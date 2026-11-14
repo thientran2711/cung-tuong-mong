@@ -1,0 +1,20 @@
+# Magnific gpt-2-6 generations for img/kit/mo-*.webp (folder ba4aecfe-efce-47e2-b53f-30d292091886). name gen-id [bg-removed-id]
+tablet-back YMLqz52WeC lJ8VsDQgv9
+tablet-front huROmy8vqL gOIDwAPSXO (image ref tablet-back)
+xam-tube cpl5Y1G0eP LwB0jMzswO
+xam-stick N2Fm4fs6D9 8aNUoOSIrU
+seal-thanh huRy4uCvqL (Vietnamese THÀNH, keyed locally; old 成 N2Fm4Cl6D9 dropped)
+seal-bai ov9U7fS829 (Vietnamese BẠI, keyed locally; old 敗 fHA4vRoCDY dropped)
+edict-open SytDl8sUb8 MBwrVluDCm
+edict-closed rgeYkvcxtc Bh4gXJ0oQR
+leaves/petals sheet p8JjMZAehw p8JjDUwehw (2x2: leaf-dry, leaf-maple, petal-peach, petal-plum)
+peony N2Fm4lZ6D9 EbzNEL9uuO
+ink WDsbWVvcXe (no style ref; keyed locally)
+incense p8JjMzYehw rgeYr49xtc
+calendar s7oTjbql8e TdSkTvcVNR
+tray fHA4v8rCDY P3E8P0942C / tray-open SytDSOdUb8 If67h1XtvE
+chest xSdW1bTjfW xSdWx6njfW / chest-open SytDSyDUb8 6AHvRe5iJO
+chestg gOIMlwZSXO LwB0LROswO / chestg-open Bh4gBvsoQR fHA9uS2CDY
+giftbox eIOLpoidqL cpl5ca70eP / giftbox-open ov9Sofe829 CqGNQw7EEy
+coins sheet ov9SBhD829 O6fo4VLynm (2x2: ingot-silver, ingot-gold, coin-silver, coin-gold)
+weather icons 4x4 s7oTLJml8e s7oVSzbl8e (Xuân, Hạ, Thu, Đông rows in WX order)
