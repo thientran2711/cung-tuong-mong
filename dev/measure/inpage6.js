@@ -3,7 +3,7 @@ try{if(window.__balO)Object.assign(BAL,window.__balO)}catch(e){}
 try{if(window.__j70O)Object.assign(J70CFG,window.__j70O)}catch(e){}
 try{if(window.__fairO)Object.assign(window.FAIRN,window.__fairO)}catch(e){}
 const q=s=>document.querySelector(s),qa=s=>[...document.querySelectorAll(s)];
-window.__res=[];window.__lifeB=0;{const nb0=nextBuoi;nextBuoi=function(){window.__lifeB++;return nb0.apply(this,arguments)}}window.__logc={};window.__bad=[];window.__saveFail=[];window.__idle=0;window.__buoi=0;const ORIG=['tt','dtq','muoi','cn','nc','td','ch','thd'];const _start=start;start=function(){window.__oi=(window.__oi||0)+1;window.__forceOrigin=ORIG[window.__oi%8];return _start()};window.__iter=0;window.__lifeIter=0;window.__maxRank=0;window.__hhTurn=null;window.__turnActs=0;window.__sucTrace=[];window.__lastT="";window.__acts={};
+window.__res=[];window.__lifeB=0;{const nb0=nextBuoi;nextBuoi=function(){window.__lifeB++;return nb0.apply(this,arguments)}}window.__logc={};window.__bad=[];window.__saveFail=[];window.__idle=0;window.__buoi=0;const ORIG=['tt','dtq','muoi','cn','nc','td','ch','thd'];const _start=start;start=function(){window.__oi=(window.__oi||0)+1;window.__forceOrigin=window.__origO||ORIG[window.__oi%8];return _start()};window.__iter=0;window.__lifeIter=0;window.__maxRank=0;window.__hhTurn=null;window.__turnActs=0;window.__sucTrace=[];window.__lastT="";window.__acts={};
 popNum=()=>{};curtain=()=>{};fx=()=>{};save=()=>{};
 renderHUD=()=>{};renderStage=()=>{};renderPanel=()=>{};
 render=function(){if(!S)return;if(Q.length&&$("modal").hidden)showModal()};
@@ -26,7 +26,7 @@ function modalStep(sens){
       let pickI;
       if(!sens)pickI=rpick(okIdx)[1];
       else{let best=-1e9;pickI=okIdx[0][1];okIdx.forEach(([o,i])=>{const f=o.fx||{};let v=(f.sung||0)*1.5+(f.danh||0)*1.2+(f.hh||0)*.4+(f.th||0)*.4+(f.maid||0)*.1+(f.suc||0)*.2+(f.tamco||0)*.3+(f.bac||0)*.04;
-        if((f.duc||0)<0)v+=(f.duc||0)*6;else v+=(f.duc||0)*1.5;if(o.x&&/chứng cứ/.test(o.x))v+=2;if(o.x&&/nhân chứng|rửa oan|lật án|phong tước|giữ được/.test(o.x))v+=4;if(/tú nữ/.test(o.n))v-=.5;v+=Math.random()*.01;if(v>best){best=v;pickI=i}})}
+        if((f.duc||0)<0)v+=(f.duc||0)*6;else v+=(f.duc||0)*1.5;if(o.x&&/chứng cứ/.test(o.x))v+=2;if(o.x&&/nhân chứng|rửa oan|lật án|phong tước|giữ được/.test(o.x))v+=4;if(/tú nữ/.test(o.n))v-=.5;if(o.x&&/được phong/.test(o.x))v+=20;if(o.x&&/kết thúc kiếp này/.test(o.x))v-=20;if(o.x&&/Hoàng thượng để ý \+/.test(o.x))v+=3;v+=(f.tin||0)*.15+(f.nt||0)*.5;v+=Math.random()*.01;if(v>best){best=v;pickI=i}})}
       note("dilemma");chooseM(pickI);return true}
     closeModal();return true}
   return false}
@@ -50,7 +50,7 @@ function randomStep(){
 // ---- SENSIBLE
 function needs(){const nx=S.rank<7?RANKS[S.rank+1]:{s:70,d:70};return{ws:1+Math.max(0,nx.s-S.sung)/12,wd:1+Math.max(0,nx.d-S.danh)/8}}
 const BAD=/Giả mang thai|Gửi mật thư|Theo cha mưu đại sự|Diệt khẩu|Trung với cố quốc|Khiêu khích|Trút giận|Cài đồ|giấu|xạ hương|độc/i;
-function valW(w,N){w=w||{};return (w.sung?sg(w.sung):0)*N.ws+(w.danh||0)*N.wd+(w.th||0)*.3+(w.hh||0)*.25+(w.duc||0)*(S.duc<45?1.2:.4)+(w.maid||0)*.1+(w.mat||0)*.8+(w.tamco||0)*.3+(w.tai||0)*.2+(w.sac||0)*.5+(w.bac||0)*(S.bac<60?.08:.03)+(w.suc||0)*(S.suc<50?.3:.05)}
+function valW(w,N){w=w||{};return (w.nt||0)*.6+(w.tin||0)*.25+(w.sung?sg(w.sung):0)*N.ws+(w.danh||0)*N.wd+(w.th||0)*.3+(w.hh||0)*.25+(w.duc||0)*(S.duc<45?1.2:.4)+(w.maid||0)*.1+(w.mat||0)*.8+(w.tamco||0)*.3+(w.tai||0)*.2+(w.sac||0)*.5+(w.bac||0)*(S.bac<60?.08:.03)+(w.suc||0)*(S.suc<50?.3:.05)}
 function costW(c){c=c||{};return (c.suc||0)*(S.suc<50?.35:.08)+(c.bac||0)*(S.bac<60?.09:.035)+(c.duc?c.duc*3:0)+(c.sung||0)+(c.danh||0)}
 function scoreAct(a,N,cost){
   if(BAD.test(a.n))return -1e9;
