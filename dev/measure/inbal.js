@@ -14,6 +14,9 @@ const nb0=nextBuoi;nextBuoi=function(){try{if(S&&!S.dead){window.__bc++;if(S.ran
 const o0=over;over=function(){let st=null;try{const vals=Object.values(window.__nn);const npc=vals.reduce((a,b)=>a+b,0);const me=(S.nightLog||[]).length;
   st={nMe:me,nNpc:npc,nTopNpc:vals.length?Math.max(...vals):0,nNpcCount:vals.length,consorts:window.__cnN?window.__cnS/window.__cnN:null,meHH:window.__meHH}}catch(e){st={nerr:String(e)}}
  window.__nn={};window.__meHH=null;window.__bc=0;window.__cnS=0;window.__cnN=0;const r=o0.apply(this,arguments);try{const L=window.__res[window.__res.length-1];if(L)Object.assign(L,st)}catch(e){}return r};
+/* the j77 etiquette card: when a walk to a place ended without getting there (card closed / declined), a player would not try the same door again this buổi */
+window.__tried={};{const g0=goTo;goTo=function(k){const key=S?S.turn+"_"+S.tuan+"_"+S.buoi:"";const r=g0.apply(this,arguments);try{if(S&&k&&S.place!==k){(window.__tried[key]=window.__tried[key]||[]).push(k)}}catch(e){}return r}}
+if(typeof accessOf==="function"){const a0=accessOf;accessOf=function(p,k){try{if(p===S&&S){const key=S.turn+"_"+S.tuan+"_"+S.buoi;const t=window.__tried[key];if(t&&t.length>=1&&t.filter(x=>x===k).length>=2)return{ok:false,why:"bot: tried twice this buổi"}}}catch(e){}return a0.apply(this,arguments)}}
 /* watchdog: a buổi that takes >300 bot iterations is stuck (a free act repeated, a modal loop): record why once per kind, then move the day on */
 window.__stuck=[];window.__stuckN=0;let sk="",si=0,lastN=[];
 const st0=window.__bot.step;window.__bot.step=function(mode,n){let r=0;for(let i=0;i<n;i++){try{if(S&&!S.dead){const k=S.turn+"_"+S.tuan+"_"+S.buoi;if(k!==sk){sk=k;si=0}else si++;

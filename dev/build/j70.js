@@ -510,3 +510,8 @@ PEND.j70scar=pp=>{const s=S&&S.scar;if(!s)return null;const sc=scarOf(S);const o
  return{t:`<p>Mặt ngươi bị thương (${sc.name}): Sắc đang mất ${sc.sacLost}; còn ${sc.weeksLeft} tuần nữa mới lành.${SCAR70[s.sev].perm&&!s.cure?` Không có thuốc quý thì sẽ để lại sẹo (Sắc -${SCAR70[s.sev].perm}).`:""}</p>`,o}};
 /* the chip on person cards (kit chip) */
 (function(){const p0=pcard;pcard=function(o){try{if(S&&o&&o.name){const p=o.name===S.name?S:rivals.find(v=>v.name===o.name);const sc=p&&scarOf(p);if(sc&&(p===S||knows(p)))o=Object.assign({},o,{chips:(o.chips||[]).concat([chip(sc.chip,"hot")])})}}catch(e){}return p0.call(this,o)}})();
+/* ONE Ngọc dung cao (j67 gives it as a chapter reward, j70 sells it on the scar card): the rare cure for hủy dung.
+   Used on a scarred face: the wound will heal without a permanent scar (cure) and 4 weeks sooner; on a clear face only Sắc +3. Same for everyone. */
+(function(){if(typeof IT!=="object")return;IT.ngocdungcao=Object.assign({},IT.ngocdungcao||{kd:"Thuốc",pr:0,tg:[]},{n:"Ngọc dung cao",d:"Thoa mặt: chữa hủy dung (lành không để sẹo, sớm 4 tuần); mặt lành thì Sắc +3",use:{sac:3}});
+ const u0=useItem;useItem=function(p,ix,tgt){const e=p&&p.inv&&p.inv[ix];if(e&&e.k==="ngocdungcao"&&!e.h&&p.scar){const s=p.scar;p.inv.splice(ix,1);s.cure=1;s.pg=Math.min(s.need,(s.pg||0)+4);
+   return `${NMc(p)} thoa Ngọc dung cao: vết thương trên mặt sẽ lành không để sẹo, sớm hơn 4 tuần (còn ${Math.max(0,s.need-s.pg)} tuần).`}return u0.apply(this,arguments)}})();
