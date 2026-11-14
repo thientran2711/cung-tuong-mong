@@ -1,6 +1,6 @@
 import sys
 from PIL import Image, ImageDraw
-O="/tmp/claude-0/-home-user-phuong-lenh/1e222f2f-177f-54ad-8b97-a62a9b124c31/scratchpad/cung-dau/img"
+O="/home/user/cung-tuong-mong/img"
 rows=[r.split(",") for r in sys.argv[2:]]; TW=260; FH=520; PH=230
 cols=max(map(len,rows))
 sh=Image.new("RGB",(cols*TW,len(rows)*(FH+PH+20)),(242,232,212)); d=ImageDraw.Draw(sh)

@@ -3,7 +3,7 @@ import sys, json, os, io, subprocess
 from PIL import Image
 import numpy as np
 W=os.path.dirname(os.path.abspath(__file__))
-OUT="/tmp/claude-0/-home-user-phuong-lenh/1e222f2f-177f-54ad-8b97-a62a9b124c31/scratchpad/cung-dau/img"
+OUT="/home/user/cung-tuong-mong/img"
 J=json.load(open(W+"/jobs.json")); db=json.load(open(W+"/urls.json"))
 FP=OUT+"/FIGURES.json"; figs=json.load(open(FP)) if os.path.exists(FP) else []
 byfile={f["file"]:f for f in figs}
@@ -48,7 +48,7 @@ for line in open(sys.argv[1]):
     if not only and os.path.exists(f"{OUT}/{f0}.webp") and byfile.get(f"img/{f0}.webp",{}).get("bg")==bid: continue
     if bid not in db: print("nourl",jid); continue
     raw=f"{W}/bg/{jid}-{bid}.png"
-    if not os.path.exists(raw) or only: subprocess.run(["curl","-sS","-o",raw,db[bid]],check=True)
+    if not os.path.exists(raw): subprocess.run(["curl","-sS","-o",raw,db[bid]],check=True)
     im=Image.open(raw).convert("RGBA"); n=len(j["figs"])
     cols=split(im,n)
     if cols is None: bad.append(jid); print("SPLITFAIL",jid); continue
