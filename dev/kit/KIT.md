@@ -694,12 +694,19 @@ chest, Tư trang, wardrobe slots, reward chests, peddler, works, reward panels. 
 - Every person card `.pc` (consort, servant, child, Emperor, Thái hậu, court, officials, strangers; panel, pop and modal) has ONE header
   `.kpstrip.kphead` at its top: small kit frame (`mdH sm` cell, 44 px; 34 px on phones), name (`.pcname`), rank title (`.pcrk`) and the BARS
   (`.kpbars`: Ghen · Ngươi với nàng · Oán · Nàng với ngươi · Sủng). The real nodes are MOVED into it: no second copy anywhere in the card.
-- Opaque (`--panel2`), sticky at the card's top edge (`top:0`, card `padding-top:0`), in the flow: content scrolls UNDER it, nothing shows above it.
+- Opaque (`--panel2`), square corners, sticky at `top:-1px` with a 3 px cover shadow upward (card `padding-top:0`), in the flow: content scrolls UNDER it, nothing shows above it (measured: 0 card pixels above the header at every size).
 - Below: big portrait + wear slots + stat tiles + facts (left column, not sticky), act tabs + act cards (right; one column under 600 px).
 - One fact, one place: the Sủng stat tile is hidden when the header's Sủng bar shows the same fact (or the tile is "chưa rõ").
-- Size: the card is its own scroller, `max-height` = the rest of the panel under the pager (or the whole panel height when that rest is
-  < 320 px); a newly opened person is scrolled fully into view (`kitPcSize`, jk2b §18).
+- Size: the card is its own scroller. Portrait screens under 1000 px (Fold 686x880 / 755x1000, phones): the card is exactly the panel's height under
+  the sticky sub-tabs (`.kpcfull`) and the panel scrolls the face strip up out of view when a person is opened, so header + at least one whole act
+  card show (686x880: card 321 px, first act card whole). Wide screens: card = rest of the panel under the strip (whole panel if that is < 320 px).
+  A re-render of the same card (after an act) keeps the panel where she had it (`kitPcSize`, jk2b §18).
 - Tested 755x1000@2, 1180x820@2, 1366x1024@2, 412x1058@2, 686x880@2.2 (dev/shots/hotfix-card/).
+### 28.18 NO LONE BUTTON ROWS (owner 11/14, Fold) — jk2b §19
+- A single button never takes a whole row; it folds into an existing control (chip, sub-tab, menu). First case: the "Bảng phẩm vị" row above the
+  Phi tần face strip is gone; the rank table opens from her rank chip in the top bar (`#me-r`, dotted underline, title "Chạm để xem Bảng phẩm vị").
+  Inside the table the way back is "Về hồ sơ từng người" (sub-tab look). Leaving the tab/sub-tab closes the table.
+- Sticky sub-tabs `.ksub` in the panel: opaque and the panel's 8 px top padding band above them is covered (box-shadow in `--panel`), so nothing peeks above.
 ### 28.16 kitName: no doubled title
 `kitTitle` returns no title when the name already starts with it or with any role word (`KIT_ROLEPRE`: Thái y, thái giám, tổng quản, quan, thị vệ, vương gia, nhạc sư, công tử, ma ma, cô cô…).
 

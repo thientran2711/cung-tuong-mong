@@ -611,18 +611,29 @@ kitPcFix=function(pc){try{if(!pc||pc.dataset.k2==="1")return;const L=pc.querySel
  kitPcSize()}catch(e){console.error("kitPcFix",e)}};
 /* the card is at most the panel's height (one scroller inside the panel); a newly opened person is scrolled fully into view */
 function kitPcSize(){try{const P=$("panel");if(!P)return;const cs=getComputedStyle(P);const pb=parseFloat(cs.paddingBottom||0),pt=parseFloat(cs.paddingTop||0);
- P.querySelectorAll(".pc[data-k2]").forEach(pc=>{const pr=P.getBoundingClientRect();const full=P.clientHeight-pt-pb-4;
-  /* the card takes the rest of the panel under the pager (its own scroll); if that is too short it takes the whole panel height */
-  const top0=pc.getBoundingClientRect().top+P.scrollTop-pr.top;const rest=P.clientHeight-pb-top0-4;const h=rest>=Math.min(320,full)?rest:full;
-  pc.style.setProperty("--kpcmax",Math.max(200,Math.round(h))+"px");
-  const nm=(pc.querySelector(".kphead .kpsn")||{}).textContent||"";if(P.__kpcN!==nm){P.__kpcN=nm;requestAnimationFrame(()=>{try{const a=P.getBoundingClientRect(),c=pc.getBoundingClientRect();
-   if(c.bottom>a.bottom-pb+1)P.scrollTop+=Math.min(c.bottom-(a.bottom-pb)+2,c.top-a.top-pt);else if(c.top<a.top+pt)P.scrollTop+=c.top-a.top-pt}catch(e){}})}})}catch(e){}}
+ const sub=P.querySelector(".ksub");const subH=sub&&sub.offsetParent?sub.getBoundingClientRect().height+8:0;
+ P.querySelectorAll(".pc[data-k2]").forEach(pc=>{const pr=P.getBoundingClientRect();const full=P.clientHeight-pt-pb-subH-4;
+  /* portrait screens under 1000 px (Fold, phones): the card takes the WHOLE panel under the sticky sub-tabs and the panel scrolls the
+     face strip up out of the way, so the header + at least one whole act card are in view; wide screens keep strip + card together */
+  const top0=pc.getBoundingClientRect().top+P.scrollTop-pr.top;const rest=P.clientHeight-pb-top0-4;
+  const narrow=innerWidth<1000&&innerHeight>=innerWidth*.9;const h=narrow||rest<Math.min(320,full)?full:rest;
+  pc.style.setProperty("--kpcmax",Math.max(200,Math.round(h))+"px");pc.classList.toggle("kpcfull",h===full);
+  /* a re-render of the same card (after an act) rebuilds the panel: put the panel back where she had it (the browser clamped it while the
+     new card was still short) */
+  if(!P.__kpcL){P.__kpcL=1;P.addEventListener("scroll",()=>{if(P.querySelector(".pc.kpcfull"))P.__kpcWant=P.scrollTop},{passive:true})}
+  if(h===full&&P.__kpcWant!=null&&P.__kpcN===((pc.querySelector(".kphead .kpsn")||{}).textContent||"")&&Math.abs(P.scrollTop-P.__kpcWant)>1)P.scrollTop=P.__kpcWant;
+  const nm=(pc.querySelector(".kphead .kpsn")||{}).textContent||"";if(P.__kpcN!==nm){P.__kpcN=nm;const fit=()=>{try{const q=P.querySelector(".pc[data-k2]");if(!q)return;const a=P.getBoundingClientRect(),c=q.getBoundingClientRect();const sub2=P.querySelector(".ksub");
+   const sb=sub2&&sub2.offsetParent?sub2.getBoundingClientRect().bottom+6:a.top+pt;
+   if(narrow){const d=c.top-sb;if(Math.abs(d)>1)P.scrollTop+=d}
+   else if(c.bottom>a.bottom-pb+1)P.scrollTop+=Math.min(c.bottom-(a.bottom-pb)+2,c.top-sb);else if(c.top<sb)P.scrollTop+=c.top-sb}catch(e){}};
+   requestAnimationFrame(()=>{fit();requestAnimationFrame(fit)});const st0={v:null};setTimeout(()=>{st0.v=P.scrollTop;fit()},180);setTimeout(()=>{if(st0.v==null||Math.abs(P.scrollTop-st0.v)<2)fit()},450)}})}catch(e){}}
 addEventListener("resize",()=>{clearTimeout(window.__kpcS);window.__kpcS=setTimeout(kitPcSize,80)});
 (function(){const st=document.createElement("style");st.id="k2b-pchead";st.textContent=`
 .pc[data-k2]{max-height:var(--kpcmax,none)!important;overflow-y:auto!important;overscroll-behavior:contain;padding-top:0!important}
+.pc[data-k2].kpcfull{height:var(--kpcmax)!important;min-height:var(--kpcmax)!important;flex:0 0 auto!important}
 .pc[data-k2]>.kphead,.pc[data-k2]>.kphead.on{display:flex!important;visibility:visible!important;height:auto!important;opacity:1!important;overflow:visible!important;
- position:sticky!important;top:0!important;z-index:6;grid-column:1/-1;margin:0 -7px 6px!important;padding:6px 8px!important;gap:8px;align-items:center;flex-wrap:wrap;
- background:var(--panel2,#f6ead6)!important;border-bottom:1px solid var(--k-hair,#e6d3ac);border-radius:8px 8px 0 0;box-shadow:0 3px 6px -3px #5a3a2033}
+ position:sticky!important;top:-1px!important;z-index:6;grid-column:1/-1;margin:0 -7px 6px!important;padding:7px 8px 6px!important;gap:8px;align-items:center;flex-wrap:wrap;
+ background:var(--panel2,#f6ead6)!important;border-bottom:1px solid var(--k-hair,#e6d3ac);border-radius:0;box-shadow:0 -3px 0 0 var(--panel2,#f6ead6),0 3px 6px -3px #5a3a2033}
 .pc[data-k2]>.kphead .kpsf{flex:0 0 auto}.pc[data-k2]>.kphead .kpsf .md.kfc{width:44px!important}
 .pc[data-k2]>.kphead .kpsn{display:flex;flex-direction:column;line-height:1.15;min-width:0;flex:0 1 auto}
 .pc[data-k2]>.kphead .kpsn>.pcname,.pc[data-k2]>.kphead .kpsn>b{font-family:var(--display);font-size:1.15rem;margin:0;white-space:normal}
@@ -637,3 +648,22 @@ addEventListener("resize",()=>{clearTimeout(window.__kpcS);window.__kpcS=setTime
  .pc[data-k2]>.kphead .kpbars{font-size:.7rem;gap:0 10px;line-height:1.25}.pc[data-k2]>.kphead .kpbars .fbar{width:32px}.pc[data-k2]>.kphead .kpbars>*{flex-wrap:nowrap;white-space:nowrap}}
 `;document.head.appendChild(st)})();
 (function(){const r0=renderPanel;renderPanel=function(){const r=r0.apply(this,arguments);try{requestAnimationFrame(kitPcSize)}catch(e){}return r}})();
+
+/* ---------- 19. NO LONE BUTTON ROWS (owner 11/14, Fold): the "Bảng phẩm vị" button that took a whole row above the Phi tần face strip is
+   gone. The rank table opens from her rank chip in the top bar (#me-r, tap = Hậu cung → Phi tần → Bảng phẩm vị); inside the table the
+   one way back is the same kit sub-tab look ("Về hồ sơ từng người"). Rule: a single button never gets its own row; it folds into an
+   existing control (chip, sub-tab, menu). ---------- */
+(function(){if(typeof rvTabHTML!=="function")return;const r0=rvTabHTML;rvTabHTML=function(){let h=r0.apply(this,arguments);
+ if(!window.__rb)h=h.replace(/<div class="pctabs"><button class="pct[^"]*" data-rboard="1">[^<]*<\/button><\/div>/,"");return h}})();
+function kitRankBoard(){try{if(!S||S.dead||(typeof isSrv==="function"&&isSrv()))return;const b=document.querySelector('[data-tab="rv"]');
+ if(b&&tab!=="rv")b.click();else tab="rv";window.__rb=true;render();const P=$("panel");if(P)P.scrollTop=0}catch(e){console.error("kitRankBoard",e)}}
+document.addEventListener("click",e=>{const r=e.target.closest&&e.target.closest("#me-r");if(!r)return;e.stopPropagation();e.preventDefault();kitRankBoard()},true);
+(function(){const r0=renderHUD;renderHUD=function(){const r=r0.apply(this,arguments);try{const m=$("me-r");if(m){m.title="Chạm để xem Bảng phẩm vị";m.setAttribute("role","button");m.classList.add("krkb")}}catch(e){}return r}})();
+/* leaving the Phi tần sub-tab (or the Hậu cung group) closes the table, so the face strip is what she sees next time */
+document.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest("#tabs [data-tab], .ksub .ksubb");if(t&&window.__rb&&!t.closest("[data-rboard]"))window.__rb=false},true);
+(function(){const st=document.createElement("style");st.id="k2b-rkb";st.textContent=`
+/* sticky sub-tabs (.ksub) in the panel: opaque, and the panel's 8 px top padding band above them is covered too (nothing peeks above) */
+html body #panel .ksub{top:0!important;z-index:7!important;box-shadow:0 -9px 0 0 var(--panel),0 3px 6px -4px #5a3a2040}
+#me-r.krkb{cursor:pointer;text-decoration:underline dotted color-mix(in srgb,var(--gold) 60%,transparent);text-underline-offset:3px}
+#me-r.krkb:hover,#me-r.krkb:focus-visible{background:var(--k-sel,#fff3c4)}
+`;document.head.appendChild(st)})();
