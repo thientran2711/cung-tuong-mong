@@ -25,7 +25,7 @@ function lostEvUse(id){const c=loGet(id);if(c&&c.cev>0){c.cev--;return true}retu
 function loNm(k){return typeof wdFrameNm==="function"?wdFrameNm(k):((IT[k]||{}).n||"món đồ")}
 function loP(k){return byKey(k)}
 function loAlive(p){return !!p&&(p===S?!S.dead:p.alive&&!p.out)}
-function loPal(p){if(!p)return"";if(p===S)return"cung ngươi";try{const n=palName(palaceOf(p));if(n)return `${n} (${wdNm(p)})`}catch(e){}return `cung ${wdNm(p)}`}
+function loPal(p){if(!p)return"";if(p===S)return"cung ngươi";let k=true;try{k=typeof knows!=="function"||knows(p)}catch(e){}try{const n=palName(palaceOf(p));if(n)return k?`${n} (${wdNm(p)})`:n}catch(e){}return k?`cung ${wdNm(p)}`:"một cung khác"}
 function loPrice(e){const w=typeof wdItem==="function"?wdItem(e):null;return w?(w.pr||0):((IT[e.k]&&IT[e.k].pr)||0)}
 function loGrade(e){const w=typeof wdItem==="function"?wdItem(e):null;if(w)return w.g|0;const pr=loPrice(e);return (IT[e.k]&&IT[e.k].nt)?4:pr>=200?3:pr>=100?2:pr>=40?1:0}
 function loPic(e,sz){const w=typeof wdItem==="function"?wdItem(e):null;return typeof kitItem==="function"?kitItem({src:kitItemSrc(e.k,w?w.icon:""),name:loNm(e.k),grade:loGrade(e),size:sz||"md"}):""}
@@ -39,7 +39,7 @@ function loCause(p){let R0=[];try{R0=liveRivals(true).filter(v=>v!==p&&bandOf(da
 /* the same function for everyone: an item leaves its owner's chest */
 function loLose(p){if(!loAlive(p))return null;const L=(p.inv||[]).filter(loOk);if(!L.length)return null;
  L.sort((a,b)=>loPrice(b)-loPrice(a));const e=pick(L.slice(0,3));p.inv.splice(p.inv.indexOf(e),1);
- S.loSeq=(S.loSeq||0)+1;const c=Object.assign({id:S.loSeq,k:e.k,e,own:key(p),w:wk(),due:wk()+LO.findW[0]+R(LO.findW[1]-LO.findW[0]+1),st:"lost",at:null,open:0,cev:0,kn:{},hear:0,acc:null,d:(typeof wdWhen==="function"?wdWhen():"")},loCause(p));
+ S.loSeq=(S.loSeq||0)+1;const c=Object.assign({id:S.loSeq,k:e.k,e,own:key(p),w:wk(),due:wk()+LO.findW[0]+R(LO.findW[1]-LO.findW[0]+1),st:"lost",at:null,open:0,cev:0,kn:{},hear:0,acc:null,d:(typeof wdWhen==="function"?String(wdWhen()).replace(/^./,x=>x.toLowerCase()):"")},loCause(p));
  loL().push(c);p.loCd=S.turn+LO.cd;const nm=loNm(e.k);
  if(p===S){Q.push({t:"Đồ thất lạc",who:pMe(),h:`<p style="text-align:center">${loPic(e,"lg")}</p><p><b>${nm}</b> trong rương ngươi đã thất lạc.</p><p class="past">Chưa rõ vì sao. Vào mục Tư trang › Đồ thất lạc để tra xét.</p>`,btn:"Đã hiểu"});log(`${nm} trong rương thất lạc.`)}
  else{const txt=`${wdNmC(p)} báo mất ${nm}.`;try{newsAdd(p,"lo",txt);if(S.news&&S.news[0]&&S.news[0].t===txt){c.heard=1;log(txt)}}catch(x){}}
