@@ -148,3 +148,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (01:00Z) Owner: hairpin emotion icons look male — must clearly read as ancient-court women (feminine face, lips, fuller hairstyle with flowers/bộ diêu, no single topknot), still legible small.
 - (01:10Z) Owner approved the t7/t8 small huadian rollout on all consorts ('Hoa điền ok').
 - (01:25Z) Co-op: players must see each other live in the same place (e.g. Ngự hoa viên) and see the same NPCs there → sync per buổi, live presence, shared per-buổi seed for NPC whereabouts (coordinator decision answering owner's question).
+- (01:35Z) Co-op release plan: ship week-sync MVP first (after bug fixes + bot year), then per-buổi same-place sync (see each other live, same NPCs via host 'where', player-to-player acts with Nhận/Từ chối) as the next update (~4–5 h more).
