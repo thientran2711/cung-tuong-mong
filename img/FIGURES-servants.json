@@ -40,6 +40,54 @@
   "magnificUrl": "https://www.magnific.com/app/creation/nVjQEJ9YQD"
  },
  {
+  "role": "maid",
+  "identity": "m01",
+  "tier": "t1",
+  "ageBand": "a18",
+  "look": null,
+  "magnificUrl": "https://www.magnific.com/app/creation/xSdWcvQjfW",
+  "bg": "P3E8tcv42C",
+  "sheet": "C-m01-t1",
+  "file": "img/fig-maid-m01-t1-a18.webp",
+  "por": "img/por-maid-m01-t1-a18.webp"
+ },
+ {
+  "role": "maid",
+  "identity": "m01",
+  "tier": "t1",
+  "ageBand": "a26",
+  "look": null,
+  "magnificUrl": "https://www.magnific.com/app/creation/xSdWcvQjfW",
+  "bg": "P3E8tcv42C",
+  "sheet": "C-m01-t1",
+  "file": "img/fig-maid-m01-t1-a26.webp",
+  "por": "img/por-maid-m01-t1-a26.webp"
+ },
+ {
+  "role": "maid",
+  "identity": "m01",
+  "tier": "t1",
+  "ageBand": "a36",
+  "look": null,
+  "magnificUrl": "https://www.magnific.com/app/creation/xSdWcvQjfW",
+  "bg": "P3E8tcv42C",
+  "sheet": "C-m01-t1",
+  "file": "img/fig-maid-m01-t1-a36.webp",
+  "por": "img/por-maid-m01-t1-a36.webp"
+ },
+ {
+  "role": "maid",
+  "identity": "m01",
+  "tier": "t1",
+  "ageBand": "a51",
+  "look": null,
+  "magnificUrl": "https://www.magnific.com/app/creation/xSdWcvQjfW",
+  "bg": "P3E8tcv42C",
+  "sheet": "C-m01-t1",
+  "file": "img/fig-maid-m01-t1-a51.webp",
+  "por": "img/por-maid-m01-t1-a51.webp"
+ },
+ {
   "file": "img/fig-maid-m02-a18.webp",
   "por": "img/por-maid-m02-a18.webp",
   "role": "maid",
@@ -78,6 +126,54 @@
   "ageBand": "a51",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/SytV0FFUb8"
+ },
+ {
+  "role": "maid",
+  "identity": "m02",
+  "tier": "t1",
+  "ageBand": "a18",
+  "look": null,
+  "magnificUrl": "https://www.magnific.com/app/creation/xSdWMy4jfW",
+  "bg": "YMLqr1uWeC",
+  "sheet": "C-m02-t1",
+  "file": "img/fig-maid-m02-t1-a18.webp",
+  "por": "img/por-maid-m02-t1-a18.webp"
+ },
+ {
+  "role": "maid",
+  "identity": "m02",
+  "tier": "t1",
+  "ageBand": "a26",
+  "look": null,
+  "magnificUrl": "https://www.magnific.com/app/creation/xSdWMy4jfW",
+  "bg": "YMLqr1uWeC",
+  "sheet": "C-m02-t1",
+  "file": "img/fig-maid-m02-t1-a26.webp",
+  "por": "img/por-maid-m02-t1-a26.webp"
+ },
+ {
+  "role": "maid",
+  "identity": "m02",
+  "tier": "t1",
+  "ageBand": "a36",
+  "look": null,
+  "magnificUrl": "https://www.magnific.com/app/creation/xSdWMy4jfW",
+  "bg": "YMLqr1uWeC",
+  "sheet": "C-m02-t1",
+  "file": "img/fig-maid-m02-t1-a36.webp",
+  "por": "img/por-maid-m02-t1-a36.webp"
+ },
+ {
+  "role": "maid",
+  "identity": "m02",
+  "tier": "t1",
+  "ageBand": "a51",
+  "look": null,
+  "magnificUrl": "https://www.magnific.com/app/creation/xSdWMy4jfW",
+  "bg": "YMLqr1uWeC",
+  "sheet": "C-m02-t1",
+  "file": "img/fig-maid-m02-t1-a51.webp",
+  "por": "img/por-maid-m02-t1-a51.webp"
  },
  {
   "file": "img/fig-maid-m03-a18.webp",
@@ -120,6 +216,54 @@
   "magnificUrl": "https://www.magnific.com/app/creation/fHAyOYiCDY"
  },
  {
+  "role": "maid",
+  "identity": "m03",
+  "tier": "t1",
+  "ageBand": "a18",
+  "look": null,
+  "magnificUrl": "https://www.magnific.com/app/creation/xSdWMPujfW",
+  "bg": "4RuIffi9Aa",
+  "sheet": "C-m03-t1",
+  "file": "img/fig-maid-m03-t1-a18.webp",
+  "por": "img/por-maid-m03-t1-a18.webp"
+ },
+ {
+  "role": "maid",
+  "identity": "m03",
+  "tier": "t1",
+  "ageBand": "a26",
+  "look": null,
+  "magnificUrl": "https://www.magnific.com/app/creation/xSdWMPujfW",
+  "bg": "4RuIffi9Aa",
+  "sheet": "C-m03-t1",
+  "file": "img/fig-maid-m03-t1-a26.webp",
+  "por": "img/por-maid-m03-t1-a26.webp"
+ },
+ {
+  "role": "maid",
+  "identity": "m03",
+  "tier": "t1",
+  "ageBand": "a36",
+  "look": null,
+  "magnificUrl": "https://www.magnific.com/app/creation/xSdWMPujfW",
+  "bg": "4RuIffi9Aa",
+  "sheet": "C-m03-t1",
+  "file": "img/fig-maid-m03-t1-a36.webp",
+  "por": "img/por-maid-m03-t1-a36.webp"
+ },
+ {
+  "role": "maid",
+  "identity": "m03",
+  "tier": "t1",
+  "ageBand": "a51",
+  "look": null,
+  "magnificUrl": "https://www.magnific.com/app/creation/xSdWMPujfW",
+  "bg": "4RuIffi9Aa",
+  "sheet": "C-m03-t1",
+  "file": "img/fig-maid-m03-t1-a51.webp",
+  "por": "img/por-maid-m03-t1-a51.webp"
+ },
+ {
   "file": "img/fig-maid-m04-a18.webp",
   "por": "img/por-maid-m04-a18.webp",
   "role": "maid",
@@ -160,6 +304,54 @@
   "magnificUrl": "https://www.magnific.com/app/creation/gOIT0aVSXO"
  },
  {
+  "role": "maid",
+  "identity": "m04",
+  "tier": "t1",
+  "ageBand": "a18",
+  "look": null,
+  "magnificUrl": "https://www.magnific.com/app/creation/iGqvuV53uK",
+  "bg": "iGqvQQ43uK",
+  "sheet": "C-m04-t1",
+  "file": "img/fig-maid-m04-t1-a18.webp",
+  "por": "img/por-maid-m04-t1-a18.webp"
+ },
+ {
+  "role": "maid",
+  "identity": "m04",
+  "tier": "t1",
+  "ageBand": "a26",
+  "look": null,
+  "magnificUrl": "https://www.magnific.com/app/creation/iGqvuV53uK",
+  "bg": "iGqvQQ43uK",
+  "sheet": "C-m04-t1",
+  "file": "img/fig-maid-m04-t1-a26.webp",
+  "por": "img/por-maid-m04-t1-a26.webp"
+ },
+ {
+  "role": "maid",
+  "identity": "m04",
+  "tier": "t1",
+  "ageBand": "a36",
+  "look": null,
+  "magnificUrl": "https://www.magnific.com/app/creation/iGqvuV53uK",
+  "bg": "iGqvQQ43uK",
+  "sheet": "C-m04-t1",
+  "file": "img/fig-maid-m04-t1-a36.webp",
+  "por": "img/por-maid-m04-t1-a36.webp"
+ },
+ {
+  "role": "maid",
+  "identity": "m04",
+  "tier": "t1",
+  "ageBand": "a51",
+  "look": null,
+  "magnificUrl": "https://www.magnific.com/app/creation/iGqvuV53uK",
+  "bg": "iGqvQQ43uK",
+  "sheet": "C-m04-t1",
+  "file": "img/fig-maid-m04-t1-a51.webp",
+  "por": "img/por-maid-m04-t1-a51.webp"
+ },
+ {
   "file": "img/fig-maid-m05-a18.webp",
   "por": "img/por-maid-m05-a18.webp",
   "role": "maid",
@@ -198,6 +390,54 @@
   "ageBand": "a51",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/gOITTYOSXO"
+ },
+ {
+  "role": "maid",
+  "identity": "m05",
+  "tier": "t1",
+  "ageBand": "a18",
+  "look": null,
+  "magnificUrl": "https://www.magnific.com/app/creation/CqG9RLDEEy",
+  "bg": "O6fBhvvynm",
+  "sheet": "C-m05-t1",
+  "file": "img/fig-maid-m05-t1-a18.webp",
+  "por": "img/por-maid-m05-t1-a18.webp"
+ },
+ {
+  "role": "maid",
+  "identity": "m05",
+  "tier": "t1",
+  "ageBand": "a26",
+  "look": null,
+  "magnificUrl": "https://www.magnific.com/app/creation/CqG9RLDEEy",
+  "bg": "O6fBhvvynm",
+  "sheet": "C-m05-t1",
+  "file": "img/fig-maid-m05-t1-a26.webp",
+  "por": "img/por-maid-m05-t1-a26.webp"
+ },
+ {
+  "role": "maid",
+  "identity": "m05",
+  "tier": "t1",
+  "ageBand": "a36",
+  "look": null,
+  "magnificUrl": "https://www.magnific.com/app/creation/CqG9RLDEEy",
+  "bg": "O6fBhvvynm",
+  "sheet": "C-m05-t1",
+  "file": "img/fig-maid-m05-t1-a36.webp",
+  "por": "img/por-maid-m05-t1-a36.webp"
+ },
+ {
+  "role": "maid",
+  "identity": "m05",
+  "tier": "t1",
+  "ageBand": "a51",
+  "look": null,
+  "magnificUrl": "https://www.magnific.com/app/creation/CqG9RLDEEy",
+  "bg": "O6fBhvvynm",
+  "sheet": "C-m05-t1",
+  "file": "img/fig-maid-m05-t1-a51.webp",
+  "por": "img/por-maid-m05-t1-a51.webp"
  },
  {
   "file": "img/fig-maid-m06-a18.webp",
@@ -280,6 +520,54 @@
   "magnificUrl": "https://www.magnific.com/app/creation/eIOxjXfdqL"
  },
  {
+  "role": "maid",
+  "identity": "m07",
+  "tier": "t1",
+  "ageBand": "a18",
+  "look": null,
+  "magnificUrl": "https://www.magnific.com/app/creation/If6wP1UtvE",
+  "bg": "WDsbxLmcXe",
+  "sheet": "C-m07-t1",
+  "file": "img/fig-maid-m07-t1-a18.webp",
+  "por": "img/por-maid-m07-t1-a18.webp"
+ },
+ {
+  "role": "maid",
+  "identity": "m07",
+  "tier": "t1",
+  "ageBand": "a26",
+  "look": null,
+  "magnificUrl": "https://www.magnific.com/app/creation/If6wP1UtvE",
+  "bg": "WDsbxLmcXe",
+  "sheet": "C-m07-t1",
+  "file": "img/fig-maid-m07-t1-a26.webp",
+  "por": "img/por-maid-m07-t1-a26.webp"
+ },
+ {
+  "role": "maid",
+  "identity": "m07",
+  "tier": "t1",
+  "ageBand": "a36",
+  "look": null,
+  "magnificUrl": "https://www.magnific.com/app/creation/If6wP1UtvE",
+  "bg": "WDsbxLmcXe",
+  "sheet": "C-m07-t1",
+  "file": "img/fig-maid-m07-t1-a36.webp",
+  "por": "img/por-maid-m07-t1-a36.webp"
+ },
+ {
+  "role": "maid",
+  "identity": "m07",
+  "tier": "t1",
+  "ageBand": "a51",
+  "look": null,
+  "magnificUrl": "https://www.magnific.com/app/creation/If6wP1UtvE",
+  "bg": "WDsbxLmcXe",
+  "sheet": "C-m07-t1",
+  "file": "img/fig-maid-m07-t1-a51.webp",
+  "por": "img/por-maid-m07-t1-a51.webp"
+ },
+ {
   "file": "img/fig-maid-m08-a18.webp",
   "por": "img/por-maid-m08-a18.webp",
   "role": "maid",
@@ -320,6 +608,54 @@
   "magnificUrl": "https://www.magnific.com/app/creation/gOITVwMSXO"
  },
  {
+  "role": "maid",
+  "identity": "m08",
+  "tier": "t1",
+  "ageBand": "a18",
+  "look": null,
+  "magnificUrl": "https://www.magnific.com/app/creation/TdSkLExVNR",
+  "bg": "JNaXmvjOq4",
+  "sheet": "C-m08-t1",
+  "file": "img/fig-maid-m08-t1-a18.webp",
+  "por": "img/por-maid-m08-t1-a18.webp"
+ },
+ {
+  "role": "maid",
+  "identity": "m08",
+  "tier": "t1",
+  "ageBand": "a26",
+  "look": null,
+  "magnificUrl": "https://www.magnific.com/app/creation/TdSkLExVNR",
+  "bg": "JNaXmvjOq4",
+  "sheet": "C-m08-t1",
+  "file": "img/fig-maid-m08-t1-a26.webp",
+  "por": "img/por-maid-m08-t1-a26.webp"
+ },
+ {
+  "role": "maid",
+  "identity": "m08",
+  "tier": "t1",
+  "ageBand": "a36",
+  "look": null,
+  "magnificUrl": "https://www.magnific.com/app/creation/TdSkLExVNR",
+  "bg": "JNaXmvjOq4",
+  "sheet": "C-m08-t1",
+  "file": "img/fig-maid-m08-t1-a36.webp",
+  "por": "img/por-maid-m08-t1-a36.webp"
+ },
+ {
+  "role": "maid",
+  "identity": "m08",
+  "tier": "t1",
+  "ageBand": "a51",
+  "look": null,
+  "magnificUrl": "https://www.magnific.com/app/creation/TdSkLExVNR",
+  "bg": "JNaXmvjOq4",
+  "sheet": "C-m08-t1",
+  "file": "img/fig-maid-m08-t1-a51.webp",
+  "por": "img/por-maid-m08-t1-a51.webp"
+ },
+ {
   "file": "img/fig-maid-m09-a18.webp",
   "por": "img/por-maid-m09-a18.webp",
   "role": "maid",
@@ -358,6 +694,54 @@
   "ageBand": "a51",
   "look": null,
   "magnificUrl": "https://www.magnific.com/app/creation/KLM2ApKkqp"
+ },
+ {
+  "role": "maid",
+  "identity": "m09",
+  "tier": "t1",
+  "ageBand": "a18",
+  "look": null,
+  "magnificUrl": "https://www.magnific.com/app/creation/CqG9RUBEEy",
+  "bg": "bxT2WTG5Y2",
+  "sheet": "C-m09-t1",
+  "file": "img/fig-maid-m09-t1-a18.webp",
+  "por": "img/por-maid-m09-t1-a18.webp"
+ },
+ {
+  "role": "maid",
+  "identity": "m09",
+  "tier": "t1",
+  "ageBand": "a26",
+  "look": null,
+  "magnificUrl": "https://www.magnific.com/app/creation/CqG9RUBEEy",
+  "bg": "bxT2WTG5Y2",
+  "sheet": "C-m09-t1",
+  "file": "img/fig-maid-m09-t1-a26.webp",
+  "por": "img/por-maid-m09-t1-a26.webp"
+ },
+ {
+  "role": "maid",
+  "identity": "m09",
+  "tier": "t1",
+  "ageBand": "a36",
+  "look": null,
+  "magnificUrl": "https://www.magnific.com/app/creation/CqG9RUBEEy",
+  "bg": "bxT2WTG5Y2",
+  "sheet": "C-m09-t1",
+  "file": "img/fig-maid-m09-t1-a36.webp",
+  "por": "img/por-maid-m09-t1-a36.webp"
+ },
+ {
+  "role": "maid",
+  "identity": "m09",
+  "tier": "t1",
+  "ageBand": "a51",
+  "look": null,
+  "magnificUrl": "https://www.magnific.com/app/creation/CqG9RUBEEy",
+  "bg": "bxT2WTG5Y2",
+  "sheet": "C-m09-t1",
+  "file": "img/fig-maid-m09-t1-a51.webp",
+  "por": "img/por-maid-m09-t1-a51.webp"
  },
  {
   "file": "img/fig-maid-m10-a18.webp",

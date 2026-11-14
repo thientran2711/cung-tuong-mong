@@ -24,8 +24,8 @@ PROP=["a round silk fan","a folding fan","a sprig of plum blossoms","a thread-bo
 "a thread-bound book","a single peony","a small embroidered silk ball","a small rolled poem scroll","a jade flute","a small lotus flower","a painted paper fan",
 "a string of prayer beads","a small porcelain vase with a flower","a thread-bound songbook","a rolled poem scroll","a small embroidered pouch","a sprig of orchids",
 "a round fan painted with a moon","a branch of peach blossoms","a small painted scroll","a jade hair comb","a small bird cage","a white magnolia","a sprig of wisteria"]
-HUA=["a tiny magnolia bud","a small ruyi-head scroll","a tiny goldfish","three tiny dots in a vertical line","a tiny pomegranate flower","a small pair of cicada wings",
-"a tiny dragonfly","a small four-petal cross flower","a tiny calabash gourd","a tiny hibiscus flower","four tiny dots in a rhombus","a tiny star of five dots","a tiny lily",
+HUA=["a small four-petal cross flower","a small ruyi-head scroll","a tiny goldfish","three tiny dots in a vertical line","a tiny pomegranate flower","a small pair of cicada wings",
+"a tiny dragonfly","a tiny magnolia bud","a tiny calabash gourd","a tiny hibiscus flower","four tiny dots in a rhombus","a tiny star of five dots","a tiny lily",
 "a small single spiral coil","a tiny lily-of-the-valley bell","a tiny endless knot","a tiny fern sprig","a tiny wisteria cluster of three hanging dots","a tiny sun disc with short rays",
 "two tiny dots side by side","a tiny crane in flight","a small hexagon (tortoise-shell)","a tiny maple leaf","a tiny pine-needle cluster","a tiny morning-glory bloom","a small half-moon fan shape"]
 COL=["soft rose","pale coral","cinnabar red","soft pink","rose red","vermilion","peach pink","soft coral","rose pink","coral red","soft orange-red","pale pink","rose red"]

@@ -8,14 +8,14 @@ Lãnh cung (tcold): KHÔNG hoa điền. Không nốt ruồi, không beauty mark.
 
 | ID | Hoạ tiết | màu t1–t6 | màu áo chủ đạo |
 |---|---|---|---|
-| m01 | a tiny magnolia bud | soft rose | sage green and cream |
+| m01 | a small four-petal cross flower | soft rose | sage green and cream |
 | m02 | a small ruyi-head scroll | pale coral | moss green and silver |
 | m03 | a tiny goldfish | cinnabar red | slate blue and silver |
 | m04 | three tiny dots in a vertical line | soft pink | warm apricot and gold |
 | m05 | a tiny pomegranate flower | rose red | coral red and gold |
 | m06 | a small pair of cicada wings | vermilion | pale blue-grey and silver |
 | m07 | a tiny dragonfly | peach pink | pale jade green and white |
-| m08 | a small four-petal cross flower | soft coral | peach-salmon and gold |
+| m08 | a tiny magnolia bud | soft coral | peach-salmon and gold |
 | m09 | a tiny calabash gourd | rose pink | rose pink and gold |
 | m10 | a tiny hibiscus flower | coral red | sage green and gold |
 | m11 | four tiny dots in a rhombus | soft orange-red | sky blue and silver |
@@ -35,33 +35,6 @@ Lãnh cung (tcold): KHÔNG hoa điền. Không nốt ruồi, không beauty mark.
 | m25 | a tiny morning-glory bloom | pale pink | lavender violet and silver |
 | m26 | a small half-moon fan shape | rose red | blush pink and gold |
 
-## m27–m52 (thợ Part C2; prompt: dev/figwork/maidC2/mjobs.py, hàm huadian)
+## m27–m52 (thợ C2)
 
-| ID | Hoạ tiết | Màu t1–t6 |
-|---|---|---|
-| m27 | a tiny lily-of-the-valley bell | soft rose pink |
-| m28 | a small pomegranate flower | pale coral |
-| m29 | a small water-caltrop leaf | rose red |
-| m30 | a tiny magnolia bud | soft peach-pink |
-| m31 | a tiny gourd | cinnabar red |
-| m32 | a small lingzhi cloud-mushroom | vermilion |
-| m33 | a tiny ruyi head | coral red |
-| m34 | a tiny endless knot | pale pink |
-| m35 | a small wisteria cluster | soft rose pink |
-| m36 | a tiny hibiscus | pale coral |
-| m37 | a tiny koi fish | rose red |
-| m38 | a small apricot blossom | soft peach-pink |
-| m39 | a tiny dragonfly | cinnabar red |
-| m40 | a small rose | vermilion |
-| m41 | a tiny pine sprig | coral red |
-| m42 | a small pear blossom | pale pink |
-| m43 | a tiny iris | soft rose pink |
-| m44 | a small azalea | pale coral |
-| m45 | a tiny jasmine flower | rose red |
-| m46 | a small maple leaf | soft peach-pink |
-| m47 | four tiny dots in a square | cinnabar red |
-| m48 | a tiny palace-lantern shape | vermilion |
-| m49 | a tiny conch shell | coral red |
-| m50 | a small morning-glory | pale pink |
-| m51 | a tiny honeysuckle sprig | soft rose pink |
-| m52 | a small gardenia | pale coral |
+(thợ C2 điền)

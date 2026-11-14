@@ -10,4 +10,6 @@
 - Xem trước: dev/figwork/sheets/C_mNN_tK.jpg (một lineup/tấm, cột trái = cung nữ gốc).
 
 ## Trạng thái
-- (đang vẽ) t1 cho m01–m26.
+- Mẻ 1 (t1): m01–m05, m07–m09 xong (8 lineup, 32 hình). m02–m09 vẽ trước bảng hoa điền 84 kiểu nên đã sửa riêng hoa điền bằng gpt-2-6 edit
+  (giữ nguyên mọi thứ khác); m06 hoa điền ra to quá -> đang sửa nhỏ lại. Tín dụng mẻ 1 ≈ 9×270 (vẽ) + 9×270 (sửa hoa điền) + 3/bg ≈ 4.9k.
+- Đang vẽ: m06 (sửa), m10–m17 t1.

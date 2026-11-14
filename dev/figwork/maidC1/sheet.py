@@ -3,7 +3,7 @@ import sys,os
 from PIL import Image,ImageDraw,ImageFont
 H=os.path.dirname(os.path.abspath(__file__)); os.makedirs(H+"/sheets",exist_ok=True)
 F=ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",22)
-TH=760; CW=300
+TH=760; CW=380
 for jid in sys.argv[1:]:
     _,who,tt=jid.split("-")
     fs=[f"/home/user/cung-tuong-mong/img/fig-maid-{who}-a18.webp"]+[f"{H}/out/img/fig-maid-{who}-{tt}-{a}.webp" for a in ("a18","a26","a36","a51")]
