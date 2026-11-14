@@ -2,7 +2,22 @@
 # prints: n, HH %, early death %, causes, night shares (hers overall / before HH; top NPC), Sủng histograms, time to HH (game + real)
 import json,sys,os,collections,statistics as st
 sys.path.insert(0,os.path.dirname(os.path.abspath(__file__)))
+_a=sys.argv;sys.argv=[_a[0]]
 from an7 import cls,q
+sys.argv=_a
+def cls2(f):
+    if any(o in f for o in OLD): return 'old/survived (Thái phi, Thái hậu, ...)'
+    if 'Khó sinh' in f or 'phá thai' in f: return 'childbirth / abortion'
+    if 'Bệnh' in f or 'nguy kịch' in f or 'nhiễm lạnh' in f: return 'illness'
+    if 'Chết rét' in f or 'lãnh cung' in f.lower() or 'Phát điên' in f: return 'cold palace (death or banishment)'
+    if 'tru di' in f or 'ban' in f.lower() and ('rượu độc' in f or 'chết' in f or 'lụa' in f): return 'execution (ban chết)'
+    if 'đòn' in f or 'tra khảo' in f or 'trượng' in f or 'đánh chết' in f or 'Quỳ phạt' in f: return 'beaten to death (punishment)'
+    if 'dìm' in f or 'đẩy ngươi' in f or 'diệt khẩu' in f or 'sai người' in f: return 'murder'
+    if 'độc' in f: return 'poison'
+    if 'tự vẫn' in f or 'tự tận' in f: return 'suicide'
+    if 'đuổi' in f or 'Xuất cung' in f or 'Tư thông' in f: return 'expelled / affair exposed'
+    return 'other: '+f[:40]
+from an7 import OLD
 lab=sys.argv[1];F=sys.argv[2:]
 L=[];H={'npc':[0]*11,'me':[0]*11,'top':[0]*11}
 for fn in F:
@@ -18,14 +33,16 @@ if not n: print(lab,'no data');sys.exit()
 HH=[x for x in L if x.get('maxRank',0)>=7]
 died=[x for x in L if x.get('maxRank',0)<7 and cls(x['fate'])!='old/survived']
 print(f"{lab}: n={n} (timeout/crash {len(bad)})  HH {100*len(HH)/n:.0f}%  early death {100*len(died)/n:.0f}%")
-print('  early-death causes:',dict(collections.Counter(cls(x['fate']) for x in died).most_common()))
+print('  early-death causes:',dict(collections.Counter(cls2(x['fate']) for x in died).most_common()))
+births=sum(x.get('kids',0) for x in L);cbd=sum(1 for x in L if cls2(x['fate']).startswith('childbirth'))
+print(f"  births/life {births/n:.2f}; childbirth death per birth {100*cbd/max(1,births+cbd):.1f}%")
 N=[x for x in L if x.get('nMe') is not None and (x['nMe']+x['nNpc'])>0]
 if N:
     me=sum(x['nMe'] for x in N);tot=sum(x['nMe']+x['nNpc'] for x in N)
     per=[x['nMe']/(x['nMe']+x['nNpc']) for x in N]
     top=[x['nTopNpc']/(x['nMe']+x['nNpc']) for x in N]
     pre=[x for x in N if x.get('meHH')];preS=[x['meHH']['me']/max(1,x['meHH']['me']+x['meHH']['npc']) for x in pre]
-    ncons=st.mean(x.get('consorts',0) for x in N)
+    cs=[x['consorts'] for x in N if isinstance(x.get('consorts'),float)];ncons=st.mean(cs) if cs else 16
     print(f"  nights: her share pooled {100*me/tot:.1f}% (per-life median {100*q(per,.5):.1f}%, p25/p75 {100*q(per,.25):.0f}/{100*q(per,.75):.0f}); before HH median {100*q(preS,.5) if preS else 0:.1f}%; fair 1/{ncons:.0f} = {100/ncons:.1f}%")
     print(f"  top NPC's share per life: median {100*q(top,.5):.1f}% max {100*max(top):.1f}%;  her share >35% in {sum(p>.35 for p in per)}/{len(per)} lives")
 def pct(h): s=sum(h) or 1;return ' '.join(f"{100*v/s:.0f}" for v in h)

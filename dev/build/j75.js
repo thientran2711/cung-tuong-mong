@@ -115,7 +115,9 @@ PEND.prep=()=>{const wb=wearBonus(S),vp=vpItems(S).length>0,b=bestArt();const jb
    (f) S.nightWhy / window.nightWhy(): why tonight's pick (weights, Sủng, his mood, reasons) for the kit's notice. */
 (function(){
 /* knobs for the balance pass: eff = how often NPCs work for Sủng (×), custom = % mùng 1 / rằm to the Hoàng hậu, fav = nights in 6 that make độc sủng */
-const FAIRN=window.FAIRN={eff:1,custom:[40,20],fav:4};
+/* sat = the Emperor wants a change of face: each night a consort already had in the last 6 tuần beyond the first lowers her chance of the tablet by sat (×, floor satMin) and
+   her chance to lure him away (Tranh sủng / Chặn ngự giá) by satO points; the same for every consort, shown as a reason in nightWhy */
+const FAIRN=window.FAIRN={eff:1,custom:[40,20],fav:4,sat:0,satMin:.35,satO:0};
 const MOODW=["vui","bình thường","phiền muộn","giận dữ"];
 function talkOpts(p){const E=S.emp;return [has("trongtai")?3:(p.tai||0)>=60?1:0,has("chamchinh")?3:-1,has("datinh")||has("mesac")?3:has("lanhlung")?-1:0,E.mood>=2?2:1]}
 /* (a) an NPC's night: same formula as hers (PEND.prep q, PEND.night1 talk + mood + R(3), nightFx gains and reward) */
@@ -164,12 +166,15 @@ function monopoly(){const f=favNow();if(!f)return"";const p=f.p,me=p===S,nm=me?"
  if(roll(25)){const L=consorts().filter(x=>x!==p&&(x===S||(x.alive&&!x.out)));const x=pick(L);if(x){const b=x.sung;ap(x,{sung:3});ev+=x===S?`Nhà ngươi thấy ${nm} độc sủng, dâng lễ vật xin Hoàng thượng để mắt đến ngươi. Sủng ${b} → ${S.sung}. `:`Nhà ${x.name} thấy ${nm} độc sủng, dâng lễ vật xin Hoàng thượng để mắt đến con gái. Sủng nàng ${b} → ${x.sung}. `}}
  return ev}
 window.favNow=favNow;
+function satN(p){return Math.max(0,nightsIn(p,6)-1)}
+{const ncS=nightCh;nightCh=function(p){p=p||S;const c=ncS.call(this,p);const k=satN(p);if(!c||!k||!FAIRN.sat)return c;return Math.max(1,Math.round(c*Math.max(FAIRN.satMin,1-FAIRN.sat*k)))}}
+{const os0=oSteal;oSteal=function(a,m){const o=os0.apply(this,arguments);const k=a?satN(a):0;return k&&FAIRN.satO?cl(o-FAIRN.satO*k,5,95):o}}
 /* the admonition is heeded for 2 tuần: a visible cause, shown in the news and in nightWhy */
 const nc0=nightCh;nightCh=function(p){p=p||S;const c=nc0.call(this,p);if(c&&p.admonWk!=null&&wk()-p.admonWk>=0&&wk()-p.admonWk<=2)return Math.max(1,Math.round(c/2));return c};
 /* (d) mùng 1 / rằm: custom sends him to the Hoàng hậu; (f) the data of why */
 function whyRows(){const T=[];for(const p of consorts()){if(p!==S&&(!p.alive||p.out))continue;const w=nightCh(p);const rs=[];
   if(p.preg&&!(p===S&&S.pregUnk))rs.push({k:"preg",t:"đang có thai",pub:!p.hidden||p===S});if(illOf(p))rs.push({k:"ill",t:illName(p),pub:true});if(p.confined)rs.push({k:"conf",t:"cấm túc",pub:true});if(p.out)rs.push({k:"out",t:"lãnh cung",pub:true});
-  if(p.block)rs.push({k:"block",t:"thẻ bài bị giấu",pub:p===S?false:false});if(p.admonWk!=null&&wk()-p.admonWk<=2)rs.push({k:"admon",t:"vừa bị khuyên mưa móc đều khắp",pub:true});if(p.tablet)rs.push({k:"tablet",t:"đã đút lót Kính sự phòng",pub:p===S});
+  if(p.block)rs.push({k:"block",t:"thẻ bài bị giấu",pub:p===S?false:false});if(p.admonWk!=null&&wk()-p.admonWk<=2)rs.push({k:"admon",t:"vừa bị khuyên mưa móc đều khắp",pub:true});if(FAIRN.sat&&satN(p))rs.push({k:"sat",t:`đã được thị tẩm ${nightsIn(p,6)} đêm trong sáu tuần, ngài muốn đổi người`,pub:true});if(p.tablet)rs.push({k:"tablet",t:"đã đút lót Kính sự phòng",pub:p===S});
   T.push({id:p===S?"me":p.id,name:p===S?"Ngươi":p.name,rank:rkName(p),sung:p.sung,w,n6:nightsIn(p,6),reasons:rs})}
  const tot=T.reduce((a,x)=>a+x.w,0)||1;T.forEach(x=>x.share=Math.round(x.w*100/tot));return T.sort((a,b)=>b.w-a.w)}
 const fl0=flip;flip=function(){let rows=null;try{rows=whyRows()}catch(e){}const r=fl0.apply(this,arguments);let cause=S&&S.tonight?"tablet":"none";
