@@ -99,3 +99,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (21:40Z) Owner final: huadian t6 stays as is; only t7 and t8 smaller (consorts + Part C).
 - (22:00Z) Owner APPROVED t7/t8 smaller huadian (Part C pilot m08/m33): roll out to Part C 52 and consorts 32 at that size.
 - (22:05Z) Owner APPROVED the Tiểu thư ngoài cung plan (dev/OUTSIDE_PLAN.md on review/outside) — build it. Also fix tuyenTu() ages to 18+.
+- (22:20Z) Owner set GitHub secrets CLOUDFLARE_API_TOKEN + CLOUDFLARE_ACCOUNT_ID; co-op and single-player live in the same app/link (title: Chơi một mình / Chơi cùng bạn).
