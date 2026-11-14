@@ -134,3 +134,11 @@ vào fig: chỉ RGB trong mặt nạ elip (giữ alpha gốc), căn bằng phase
 - Tấm xem: dev/figwork/sheets/C_age1114_A.jpg, C_age1114_B.jpg (por 19/24/32/48), C_fh1114.jpg (trán t7/t6 sau sửa). cutcheck: không tăng so với bản trước (t8 cao sẵn do tua ngọc).
 - Còn lại: không có việc chặn. (Ghi chú: m45-t1 a36 hoa điền mờ từ bản gốc — chưa sửa.)
 SẴN SÀNG KIỂM LẠI.
+
+## Sửa 11/14 đêm (theo chủ): màu tóc/da a51, hoa điền t7/t8 nhỏ, lãnh cung m45/m38
+- Chủ chê a51 "tóc đen thui, màu lệch": ct.py = chuyển màu LAB tất định (không vẽ mới): tóc a36/a51 (điểm tối, ít sắc, vùng tóc) về mean/std tóc a26 cùng bậc; da vùng mặt về mean a26 (chỉ giảm tương phản → giữ nếp nhăn). 52 × t1–t8 (m33-t8 lấy tham chiếu m33-t6 vì a26 t8 cũng bị đen).
+- t6 GIỮ NGUYÊN (chủ quyết). t7: hoa điền thu nửa cỡ cùng kiểu (13 lưới S7_n, 4 nàng × 4 tuổi); t8: phượng vàng nhỏ đối xứng kiểu c26 bao chấm đỏ, hẹp hơn khoảng giữa hai đầu mày, không xanh trên da (13 lưới S8_n). Dán MODE=fh8 (trán). Bản thử m08/m33 (P67/P8) chủ đã duyệt.
+- Lãnh cung m45/m38 a51: greyfix.py kéo sợi xám về màu tóc a26.
+- Tấm xem: sheets/C_final1114_m08.jpg, C_final1114_m33.jpg (por gốc, t1/t4/t6/t7/t8 × 4 tuổi), C_t7_1114a/b.jpg, C_t8_1114a/b.jpg (trán cả 52 nàng).
+- JSON 2944 mục, không trùng, đủ tệp; main đã gộp (không có commit mới). Tín dụng thêm ≈ 28 × 175 ≈ 4.9k.
+SẴN SÀNG KIỂM LẠI.
