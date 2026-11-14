@@ -105,3 +105,10 @@
 - Đã gộp origin/main mới.
 - Ghi chú a51 (không chặn theo bản kiểm): soát 160 por a51 — c01–c16 phần lớn ra ~45–50; nhóm trông trẻ (~32–38): c17, c19, c23, c25, c27, c31, c32 (gần như mọi bậc),
   c18-tm0/tm1/tm3, c20-tm0/tm1/tm4, c04-tm2, c11-tm4, c26-tm0/tm1. Nếu cần, làm một lượt sửa gpt-2-6 (ref = gen cuối, chỉ thêm nếp nhẹ cho người ngoài cùng phải).
+
+## Sửa sau kiểm duyệt FAIL 9e831be (thợ sửa #2, 2026-11-14) — SẴN SÀNG KIỂM
+- Làm già lại 140 tượng a51 phần B (mọi c01–c32 × m0–m4 trừ các tượng đã đủ già: c01, c02, c03-m1..m3, c07-m0..m3, c08-m0, c13-m2, c20-m3).
+  Sửa bằng gpt-2-6 (folder ba4aecfe…), tách nền, cắt chân dung bằng porcrop.py. Sổ: dev/figwork/maidB/agefix/ages.txt (jid crop edit bg).
+- Xoá nốt ruồi còn sót (c04-m1/m2, c06-m4, c07-m4, c09-m0..m3, c11-m3, c12-m3/m4, c15-m0..m4, c17, c20-m4, c23, c28-m0/m2/m4).
+- cutcheck a51 phần B: max 1.85 (c19-tm0). Ghi chú: vài a26 cũ (không thuộc phạm vi) có điểm 2.8–3.8.
+- Nhánh này KHÔNG còn mang tệp phần A: img/*maid-m*, dev/figwork/maid/, PROGRESS.md, FIGURES-servants.json đã khôi phục y như review/maid-art.
