@@ -119,7 +119,9 @@ if(typeof q72HTML==="function")q72HTML=function(){return ktQ72HTML()};
 .kchecks{display:flex;flex-direction:column;gap:5px;margin:8px 0}
 .kchk{display:flex;align-items:flex-start;gap:8px;font-size:.88rem;line-height:1.35}.kchk .kchip{flex:0 0 auto;min-width:26px;justify-content:center}
 .kchk.y .kchkt{color:var(--dim,#6b5a44)}
-.ktacts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:6px;margin:0 0 10px}
+/* .pcb.ktacts: p1 .pcb (auto-fill 168 px) sits in a later <style> (body) and won at equal specificity -> a lone act was 1/4 wide (reviewer r7) */
+.ktacts,.pcb.ktacts{display:grid;grid-auto-rows:auto;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:6px;margin:0 0 10px}
+.ktprow>.pcb.kpanec{grid-template-columns:minmax(0,1fr);grid-auto-rows:auto}
 .ktpeople{display:flex;flex-direction:column;gap:6px;margin:0 0 10px}
 .ktprow{display:grid;grid-template-columns:minmax(0,1fr);gap:6px;padding:8px;border:1px solid var(--line);border-radius:var(--k-rad,8px);background:var(--k-card,#fffaf0)}
 @media (min-width:700px){.ktprow:has(.pcb){grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);align-items:center}}

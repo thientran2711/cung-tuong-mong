@@ -83,3 +83,22 @@ None pending. Only existing CDN images are used (art-*, vir-*, info-*, act-*).
 - tabs-kit-shots.js waits for `<img>` pictures too (PICWAIT env, default 8 s; the CDN is slow while the first-run loader pulls ~120 MB).
 - Tests (r7): pane-bar 755x1000, 1000x755, 1180x820, 1366x1024, 844x390, 390x844: 48/48 ok, 0 errs; tabs-kit-shots same 6 sizes 60/60 ok,
   0 errs; kit-page 5 sizes ok, 0 errs; minigame-tap 3/3 ok.
+
+## Review r7 (11/15, reviewer) — review/tabs-kit c0b650993 merged onto main ee5758195 as review/tabs-kit-r7 — PASS
+- Merge conflicts: assemble.py (main order incl. jclose after jaudit, + jpane/jtabs/jkitpage before j84), KIT.md. KIT numbering: main's
+  close-bugs owns §42 (CLOSE-BUGS RULES); this branch's kitActCompact (from kit-fig2) renumbered **§42 → §43** (KIT.md note under the section,
+  jk4/jtabs/j79/jkitpage refs and the §43 kit-page sample updated). Free: §44. Still ONE kitActCompactOn (jk4, identical to kit-fig2
+  3e212597e except the documented `.kpanec` extension). When kit-fig2 merges: drop its copy, keep §43.
+- FAIL items r6: 1 one skill card (§21 kitSkillCard; kitSkillHead/.ksk2 gone) OK; 2 kitSceneArt size:"thumb" (no .ksk2art/.ktqart/.kemptyart/
+  ::before thumbs) OK; 3 one kitActCompact OK; 4 .ktq/.kempty → §21 card / kitEmpty OK; 5 lone act card full row was NOT fixed in the built
+  page: p1.html `.pcb` (auto-fill 168 px) is in a later <style> (body) and beat `.ktacts` at equal specificity (lone card 177 px of 721 at
+  755x1000). Reviewer fix in jtabs: `.ktacts,.pcb.ktacts{…;grid-auto-rows:auto}` and `.ktprow>.pcb.kpanec{grid-template-columns:minmax(0,1fr)}`
+  (Nợ ân act beside a person) → lone card 721/721.
+- jk3 kitActKey → kitActSortKey scan (ACTS.json names + every act card on every tab / sub-tab, 1180x820):
+  | build | ACTS.json names: lookups ok / throw | act cards: own picture / lookup throws |
+  | main ee5758195 | 0 / 296 | 0 / 54 (all throw) |
+  | r7 | 296 / 0 | 59 of 59 cards with a key show img/act-<key> / 0 |
+  kitActSort still orders (no errors); j87 news picture lookups work (Tự học=tu-hoc-h …).
+- Tests on the merge: pane-bar 755x1000, 1000x755, 1180x820, 1366x1024, 844x390, 390x844, 412x1058: all tabs ok, 0 errs (Tư trang bar =
+  Túi đồ·Việc + filter row); tabs-kit-shots same sizes 80/80 ok, 0 errs; kit-page 6 sizes ok, 0 errs; minigame-tap 3/3; old save (made with
+  main index.html) loads at 6 sizes, 5 tabs render, no overflow, 0 errs.
