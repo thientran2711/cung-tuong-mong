@@ -86,7 +86,7 @@ Nhắc theo dõi: send_later 30 phút, tự đặt lại mỗi lượt (lịch l
 - [ ] Đang chơi không bị tải lại; co-op cập nhật — update-flow
 - [ ] Chơi cùng bạn: kẹt nút Vào phòng, lệch buổi tuần 3 — coop-ui
 - [ ] Kiểm mọi nút ra đúng kết quả (giao từ 14/11, mất khi đổi phiên) — review/act-audit
-- [ ] Luật một nguồn (số hiện = số luật kiểm; Thái hậu 50 vs 55) — review/rules-one-source
+- [x] Luật một nguồn — LIVE c5b93e63f
 - [x] Hết khắc khi tới nơi — LIVE 312b6b40a
 - [ ] Sân khấu: nàng lặp mỗi trang, nút trang khó hiểu, đếm người lệch Dư đồ, vị trí đứng không chuẩn, tên chồng — stage-slots
 - 06:05Z LIVE main=0783ec32a (lật nguyên tờ đục, 1300 ms, vuốt đổi tab; j22 'Đến chỗ hắn' theo luật đi khắc). Lo: vòng Luân hồi có thể trống hình thẻ — đang kiểm.
@@ -108,3 +108,4 @@ Nhắc theo dõi: send_later 30 phút, tự đặt lại mỗi lượt (lịch l
 - [ ] Cảm giác game: nút lún/sáng, PixiJS hiệu ứng, rung máy, rung màn (báo từ 14/11) — review/game-feel
 - 09:45Z review/update-flow 41c33af33 SẴN SÀNG KIỂM; review/rules-one-source 21a57eae1 SẴN SÀNG KIỂM → hàng người duyệt 1.
 - 09:55Z LIVE main=01c3a5b24 (hau-cung-ui) rồi 3bf16b9b1 (hotfix walk-spill: đi đường tràn sang buổi sau).
+- 10:00Z LIVE main=c5b93e63f rules-one-source (số hiện = số luật; Thái hậu 55; Đức 33 → 28).
