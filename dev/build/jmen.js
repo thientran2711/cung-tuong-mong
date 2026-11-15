@@ -112,7 +112,7 @@ function menNtCard(){if(!S||S.dead||Q.length)return;const T=(typeof trS==="funct
 
 /* ---------- 3. arrival: men and officials stand on the stage; a stray → the event card ---------- */
 (function(){const g=goTo;goTo=function(k){const fr=S&&S.place,t0=typeof used==="number"?used:0;const r=g.apply(this,arguments);try{if(!menRoad()||S.place!==k||!S.visit||S.visit.k!==k)return r;S.menFrom={k:fr,t:t0};
-  for(const c in (S.minW||{})){if(S.minW[c]!==k)continue;const h=(trS().H||{})[c];if(!h||S.visit.people.some(p=>p.ref===h))continue;S.visit.people.push({kind:"min",ref:h,name:h.name,ini:"官",col:"#7a6a50",info:`${TDOFF[h.c]||"Quan"} · ${S.minW[c]==="thu"?"vào chầu":"dự yến"}`})}
+  for(const c in (S.minW||{})){if(S.minW[c]!==k)continue;const h=(trS().H||{})[c];if(!h||S.visit.people.some(p=>p.ref===h))continue;S.visit.people.push({kind:"min",ref:h,name:h.name,ini:"Quan",col:"#7a6a50",info:`${TDOFF[h.c]||"Quan"} · ${S.minW[c]==="thu"?"vào chầu":"dự yến"}`})}
   S.visit.people.forEach(q=>{if(q&&q.kind==="man"&&q.ref&&!Object.getOwnPropertyDescriptor(q,"name").get){const m=q.ref;Object.defineProperty(q,"name",{get(){return menStageNm(m)},enumerable:true,configurable:true})}});
   S.menArr={k,t:used};menWatch(k,S.menFrom);
   try{renderStage()}catch(e){}}catch(e){console.error("men goTo",e)}return r}})();
