@@ -15,28 +15,35 @@ const KFX=window.KFX={log:[],app:null,q:1,live:0,loaded:false,loading:null,parts
 /* buzz patterns added to j11's VIB (ms) */
 Object.assign(VIB,{win:[12,40,12],fail:[35],death:[45],lock:[14],demote:[60,50,60],preg:[15,30,15],harm:[30,30,70]});
 /* THE TABLE: kind → buzz · shake (1 light, 2 hard) · flash · particles (comma list) */
-const FX={
- decree :{vib:"decree", shake:1,flash:"gold", px:"rays"},          // thánh chỉ, ân thưởng
- promote:{vib:"promote",shake:1,flash:"gold", px:"rays,stars"},    // thăng phẩm, tấn phong
+const FX={   /* every picture here is PAINTED (KIT §68 painted-fx): px = Pixi sprite kinds, flash gold/warm = glowburst sprite, flash blood/poison/
+               inkwisp = painted edge overlay (kitFxEdge), sheet = true-alpha sheet (kitFxSheet), light = screen-blend clip (kitFxLight) */
+ decree :{vib:"decree", shake:1,flash:"gold", px:"rays,golddust"}, // thánh chỉ, ân thưởng (gold dust off the edict)
+ promote:{vib:"promote",shake:1,flash:"gold", px:"rays,stars,goldpetals"}, // thăng phẩm, tấn phong
  coin   :{vib:"coin",                         px:"coins"},         // lĩnh bổng, được bạc
- hit    :{vib:"hit",    shake:2,flash:"red",  px:"inks"},          // bị tát, bị phạt, bị hại
- harm   :{vib:"harm",   shake:2,flash:"red",  px:"ink"},           // bị hãm hại nặng
- poison :{vib:"poison", shake:2,flash:"red",  px:"ink"},           // trúng độc
- expose :{vib:"expose", shake:2,flash:"red",  px:"ink"},           // bị phát giác, bị định tội
- verdict:{              shake:1},                                  // con dấu định tội (đi cùng expose)
+ hit    :{vib:"hit",    shake:2,              px:"brush"},         // bị tát, bị phạt: brush streak + paper shake
+ harm   :{vib:"harm",   shake:2,flash:"blood",px:"ink"},           // bị hãm hại nặng: ink-blood bleeds in from the edges
+ poison :{vib:"poison", shake:2,flash:"poison"},                   // trúng độc: green-black ink seeps in
+ expose :{vib:"expose", shake:2,flash:"blood",px:"ink"},           // bị phát giác, bị định tội
+ verdict:{              shake:1,              px:"inks"},          // con dấu định tội (đi cùng expose): seal slam + ink blot
+ seal   :{vib:"lock",   shake:1,              px:"inks"},          // con dấu thi tài / ấn định
  ink    :{                                    px:"inks"},          // kẻ khác sa cơ
+ rumour :{                      flash:"inkwisp"},                  // lời đồn: ink wisps curl in
  birth  :{vib:"birth",          flash:"warm", px:"flowers"},       // sinh con
- preg   :{vib:"preg",           flash:"warm", px:"petals"},        // có thai
+ preg   :{vib:"preg",           flash:"warm", px:"lotus"},         // có thai: lotus light + lotus petals
  favour :{                                    px:"petals"},        // được sủng
+ romance:{                                    px:"peach"},         // tình ý: peach blossom
+ betray :{vib:"harm",                         sheet:"thread"},     // phản bội / đoạn tuyệt: the red thread snaps
  night  :{vib:"night",          flash:"night",px:"motes"},         // đêm thị tẩm
- death  :{vib:"death",          flash:"dark"},                     // chết: tối dần, không rung mạnh
- demote :{vib:"demote",         flash:"dark", px:"ash"},           // giáng phẩm, lãnh cung
+ death  :{vib:"death",          flash:"dark", sheet:"silk",px:"incense"}, // chết: dims, white silk falls, incense rises
+ demote :{vib:"demote",         flash:"dark", px:"jade,ash"},      // giáng phẩm, lãnh cung: cracked jade + ash
  ash    :{                                    px:"ash"},           // vào lãnh cung
  win    :{vib:"win",                          px:"stars"},         // THÀNH
  fail   :{vib:"fail",                         px:"smoke"},         // HỎNG / BẤT LỢI
  mgwin  :{vib:"win",                          px:"stars"},         // thắng trò nhỏ
  mglose :{vib:"fail",                         px:"smoke"},         // thua trò nhỏ
  lantern:{                                    px:"lanterns"},      // đèn trời đêm lễ
+ festival:{                                   px:"lanterns",light:"fireworks"}, // lễ hội: sky lanterns + fireworks
+ letter :{                                    px:"letter"},        // mật thư
  lock   :{vib:"lock"}                                              // chạm nút khóa
 };
 window.FX=FX;
@@ -49,6 +56,8 @@ function kitFx(kind,o){const f=FX[kind];if(!f||!kfOn())return false;o=o||{};KFX.
  if(kfStill())return true;
  if(f.shake)kfShake(f.shake);if(f.flash)kfFlash(f.flash,kfPt(o));
  if(f.px){const pt=kfPt(o);for(const p of f.px.split(","))kfPx(p,pt)}
+ try{if(f.sheet&&typeof kitFxSheet==="function")kitFxSheet(f.sheet,o.el||null,f.sheet==="silk"?{scale:1.1}:{});
+  if(f.light&&typeof kitFxLight==="function")kitFxLight(f.light,null,{dur:o.dur||4000,scale:1})}catch(e){}
  return true}
 window.kitFx=kitFx;
 /* ---------- shake + flash (DOM, transform/opacity only) ---------- */
@@ -57,7 +66,9 @@ function kfShake(lv){const g=document.querySelector(".game")||document.getElemen
  try{g.animate(K.map(([x,y])=>({translate:`${x}px ${y}px`})),{duration:lv>1?360:260,easing:"ease-out"})}catch(e){}}
 /* gold / warm light = the PAINTED gold glow (KIT §68 sprite "glowburst", true alpha: shows on paper and on dark scenes); red / dark / night stay
    plain screen washes (colour grading over the whole screen, not a drawn object) */
-function kfFlash(k,pt){if((k==="gold"||k==="warm")&&typeof kitFxBurst==="function"){const r=pt&&pt.r,sz=r?Math.max(r.width,r.height):Math.min(innerWidth,innerHeight)*.55;
+function kfFlash(k,pt){if((k==="blood"||k==="poison"||k==="inkwisp")&&typeof kitFxEdge==="function"){kitFxEdge(k==="inkwisp"?"ink":k);return}
+ if(k==="red"&&typeof kitFxEdge==="function"){kitFxEdge("blood",{hold:300});return}  /* old callers of the flat red flash get the painted edge */
+ if((k==="gold"||k==="warm")&&typeof kitFxBurst==="function"){const r=pt&&pt.r,sz=r?Math.max(r.width,r.height):Math.min(innerWidth,innerHeight)*.55;
   kitFxBurst("glowburst",pt||null,1,{scale:Math.max(.6,Math.min(2.4,sz/220)),a0:k==="warm"?.6:.95,life:k==="warm"?70:55});return}
  const d=document.createElement("div");d.className="kfx-fl kfx-"+k;document.body.appendChild(d);setTimeout(()=>d.remove(),k==="dark"||k==="night"?2300:1500)}
 /* ---------- Pixi: one loader (also used by j11's stage layer) ---------- */
@@ -90,12 +101,21 @@ const KF_SPAWN={
  lanterns(p){const n=kfBudget(9);for(let i=0;i<n;i++){const x=RS(.06,.94)*innerWidth,y=innerHeight+RS(10,260),sc=RS(.8,1.5);
    const gl=kfSp("orb",x,y,{vy:RS(-1.1,-.7),life:RS(420,540),fade:"inout",a0:.5,sway:.25,lant:1},0xffa040,sc*1.4);const l=kfSp("lantern",x,y,{vy:gl.v.vy,life:gl.v.life,fade:"inout",a0:.95,sway:.25,lant:1},null,sc);l.rotation=RS(-.12,.12);l.v.ph=gl.v.ph}},
  pop(p){const n=kfBudget(6);for(let i=0;i<n;i++){const a=RS(0,Math.PI*2);kfSp("spark",p.x,p.y,{vx:Math.cos(a)*2,vy:Math.sin(a)*2,drag:.9,life:30},null,RS(.35,.6)).rotation=0}},
+ brush(p){const n=Math.min(2,kfBudget(2));for(let i=0;i<n;i++){const s=kfSp("brush",p.x+RS(-40,40),p.y+RS(-30,30),{life:RS(34,44),fade:"out",a0:.92,grow:.004},null,RS(3.2,4.2));s.rotation=RS(-.5,.2)}},
+ goldpetals(p){const n=kfBudget(18);for(let i=0;i<n;i++)kfSp("petal-gold",RS(0,innerWidth),RS(-90,-10),{vx:RS(-.4,.4),vy:RS(1.3,2.3),life:RS(140,200),spin:RS(-.06,.06),sway:.8,fade:"inout"},null,RS(.8,1.3))},
+ golddust(p){const n=kfBudget(22),r=p.r,w=r?Math.max(160,r.width):300;for(let i=0;i<n;i++)kfSp(R01()<.5?"spark":"ember",p.x+RS(-.5,.5)*w,p.y+RS(-40,10),{vx:RS(-.3,.3),vy:RS(.3,1.2),life:RS(70,120),fade:"inout",tw:.2,a0:.95},null,RS(.3,.7))},
+ jade(p){const n=kfBudget(9);for(let i=0;i<n;i++){const a=RS(-Math.PI*.9,-Math.PI*.1),sp=RS(2,5.5);kfSp("jade",p.x+RS(-12,12),p.y+RS(-8,8),{vx:Math.cos(a)*sp,vy:Math.sin(a)*sp,g:.22,life:RS(60,90),spin:RS(-.18,.18),fade:"out"},null,RS(.8,1.3))}},
+ incense(p){const n=kfBudget(6);for(let i=0;i<n;i++)kfSp("incense",RS(.25,.75)*innerWidth,innerHeight*RS(.65,.9),{vx:RS(-.15,.15),vy:RS(-.9,-.5),life:RS(160,220),grow:.002,fade:"inout",a0:.6,sway:.3},0xe8e2d8,RS(1.4,2.2)).rotation=0},
+ lotus(p){kfSp("lotuslight",p.x,p.y,{life:120,grow:.004,fade:"inout",a0:.9},null,1.1).rotation=0;const n=kfBudget(10);for(let i=0;i<n;i++){const a=RS(0,Math.PI*2),sp=RS(1.5,4);kfSp("petal-lotus",p.x,p.y,{vx:Math.cos(a)*sp,vy:Math.sin(a)*sp-1,g:.05,drag:.97,life:RS(90,130),spin:RS(-.06,.06),sway:.5},null,RS(.8,1.2))}},
+ peach(p){const n=kfBudget(18);for(let i=0;i<n;i++)kfSp("petal-peach",RS(0,innerWidth),RS(-80,-10),{vx:RS(-.5,.3),vy:RS(1.1,2),life:RS(150,210),spin:RS(-.05,.05),sway:.9,fade:"inout"},null,RS(.8,1.3))},
+ letter(p){const s=kfSp("letter",p.x,p.y+40,{vy:-.5,drag:.97,life:110,fade:"inout",a0:1},null,1.6);s.rotation=RS(-.12,.12);s.texture=KFK.tex.letter[0]},
  season(){const K=KF_SEASON(),k=K[Math.floor(R01()*K.length)];kfSp(k,RS(0,innerWidth),-12,{vx:RS(-.35,.25),vy:RS(.55,1),life:Math.round(innerHeight/.6)+60,spin:RS(-.03,.03),sway:.9,fade:"inout",a0:.9,amb:1},null,RS(.7,1.15))}
 };
 /* painted kinds each spawner needs (loaded before it runs); other modules adding KF_SPAWN kinds add their row here */
 const KF_PET=()=>{const s=KF_SEASON();return s[0]==="snow"?["petal-plum"]:s[0]==="leaf"?["petal-peach","osmanthus"]:s};
 const KF_KINDS={rays:["streak"],stars:["spark"],coins:["coin"],ink:["ink"],inks:["ink"],flowers:["petal-peach","petal-plum","osmanthus"],petals:()=>KF_PET(),
- motes:["ember","orb"],ash:["ash"],smoke:["smoke"],lanterns:["orb","lantern"],pop:["spark"],season:()=>KF_SEASON()};
+ motes:["ember","orb"],ash:["ash"],smoke:["smoke"],lanterns:["orb","lantern"],pop:["spark"],season:()=>KF_SEASON(),
+ brush:["brush"],goldpetals:["petal-gold"],golddust:["spark","ember"],jade:["jade"],incense:["incense"],lotus:["lotuslight","petal-lotus"],peach:["petal-peach"],letter:["letter"]};
 function kfKinds(name){const k=KF_KINDS[name];return typeof k==="function"?k():(k||[])}
 function kfPx(name,p){if(kfStill()||!KF_SPAWN[name])return;kfApp().then(()=>kfkLoad(kfKinds(name))).then(()=>{try{KF_SPAWN[name](p||kfPt());kfWake()}catch(e){console.error(e)}}).catch(()=>{})}
 function kfWake(){const a=KFX.app;if(!a)return;if(a.canvas.style.display==="none")a.canvas.style.display="";if(!a.ticker.started)a.ticker.start()}
