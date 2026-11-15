@@ -38,4 +38,11 @@ const MT={html:'text/html; charset=utf-8',js:'text/javascript',json:'application
  const back1=await p.evaluate(()=>({tab,detail:!!document.querySelector('#panel .kpmv')}));
  await p.evaluate(()=>document.querySelector('#panel [data-kpmback]').click());await p.waitForTimeout(800);
  const back2=await p.evaluate(()=>({tab,detail:!!document.querySelector('#panel .kpmv'),map:!!document.querySelector('#panel .mapv .mspot')}));
- console.log(JSON.stringify({TAG,setup,det,room,back1,back2,errs},null,1));await b.close()})();
+ /* her own home courtyard → Dãy nhà cung nhân (jres cung-nhan room, her servants) */
+ await p.evaluate(()=>{const b=document.querySelector('#panel .mspot[data-go="home"]');if(b)b.click()});await p.waitForTimeout(800);
+ const homeC=await p.evaluate(()=>({open:!!document.querySelector('#panel .kpmv'),rows:[...document.querySelectorAll('#panel .kpm-row')].map(x=>x.textContent.trim())}));
+ await shot('5-home');
+ await p.evaluate(()=>{const r=document.querySelector('#panel [data-kpmpart="cungnhan"]');if(r)r.click()});
+ await shot('6-cungnhan');
+ const srv=await p.evaluate(()=>({place:S.place,tab,scimg:document.getElementById('scimg').style.backgroundImage.slice(0,70),title:(document.querySelector('#sc-t .rt1')||{}).textContent,people:curPeople().map(x=>x.kind+':'+x.name),ox:document.documentElement.scrollWidth>innerWidth}));
+ console.log(JSON.stringify({TAG,setup,det,room,back1,back2,homeC,srv,errs},null,1));await b.close()})();

@@ -6,8 +6,25 @@
   Bảng ghép có nhãn: `dev/shots/residence/sheet-xuan-sang.jpg` (3396x7563; dựng lại: `python3 dev/art/residence_sheet.py xuan-sang`).
   Mã Magnific từng ảnh: `dev/shots/residence/gens.txt`. Đã tự xem từng ảnh: không người, đúng nét vẽ, mỗi cung một bản sắc, phối điện nhỏ/giản hơn mà không nghèo, hai phối điện của một cung khác bố cục.
   Tín dụng bước 1: 23 × 80 = 1.840 (cộng thử nghiệm 240 → 2.080).
-- BƯỚC 2 (CHỜ chủ duyệt bảng ghép): 15 bản còn lại mỗi phòng = SỬA từ bản xuân-sáng (1 tham chiếu ảnh = chính nó), 2k (65/ảnh): 25 × 15 = 375 ảnh ≈ 24.400 (+20% ≈ 29.000). Thứ tự: tối → chiều → trưa, rồi Hạ/Thu/Đông.
+- BƯỚC 2 XONG: đủ 400 tranh (25 phòng × 16). Tín dụng: bước 1+thử nghiệm 2.080; bước 2 = 375 × 65 = 24.375 (không vẽ lại). Tổng 26.455.
   Bố cục phối điện (để giữ khác nhau): CP Đ phòng ngủ+bàn trang điểm, T sập cửa sổ+đàn; KT Đ giường trong vòm trăng, T phòng trà; CT Đ phòng nhạc, T phòng ngủ+khung thêu; HA Đ thư phòng nhỏ, T phòng ngủ+bình phong; TM Đ phòng cắm hoa, T phòng ngủ+bàn cờ; DH Đ phòng ngủ+bàn trang điểm, T phòng vẽ; VH Đ phòng trà mở ra rừng trúc, T phòng ngủ sau vách vòm; TX Đ phòng thêu nhìn cầu, T phòng ngủ+góc đọc sách.
+
+## BƯỚC 2 (chủ duyệt bảng xuân-sáng) — 15 bản còn lại × 25 phòng + gắn vào game
+- Vẽ: 375 bản SỬA (gpt-2-6, 2k, 3:2; 1 tham chiếu = bản xuân-sáng của phòng; lời nhắc `dev/art/residence_prompts.txt`), thứ tự tối → chiều → trưa, rồi hạ, thu, đông.
+  Mã từng ảnh: `dev/shots/residence/gens.txt` (400 dòng = 25 phòng × 16). Tải về bằng projects_download_zip (≤50 mã/lần) rồi
+  `python3 dev/art/residence_proc.py <zip> [xem trước]` → `img/<phòng>-<mùa>-<buổi>.webp` (1620x1080, q72). Bản gốc 4k chỉ giữ cho xuân-sáng (dev/shots/residence/*.webp).
+  Đã xem từng bảng 25 ảnh/biến thể: giữ bố cục, đúng mùa/buổi, không người. Không phải vẽ lại ảnh nào.
+- Bảng ghép theo mùa: `dev/shots/residence/sheet-<mùa>.jpg` (25 phòng × 4 buổi) — `python3 dev/art/residence_season_sheet.py <mùa>`.
+- Mã: `dev/build/jres.js` (assemble: sau jk4, trước j84). RES_VAR viết lại bằng `python3 dev/art/gen_res_var.py`.
+  API cho thợ bản đồ cung: `residenceArt(palaceKey, 'chinh'|'dong'|'tay'|'cungnhan', mùa, buổi)` → đường ảnh (thiếu → cùng mùa buổi gần → xuân → xuân-sáng);
+  `residenceOf(p)`, `roomResidents(pal,part)`, `roomPeople(pal,part)` (ai đang ở nhà buổi này theo S.where), `resRoomName(r)`.
+  Luật phòng: chủ vị (rank ≥ PAL_HEAD=Tần, có pal) = chính điện; người ở chung (resHead) xếp theo khóa: 2 người đầu Đông phối điện, sau đó Tây;
+  Hoàng hậu Càn Ninh (khon-ninh-cung), lãnh cung lanh-cung, người chơi chưa làm chủ vị = Ngọc Thanh các (tam-cung-dem; mã palFix giữ nàng ở đó), cnv/cung nhân = cung-nhan.
+  Sân khấu: "home" và thăm cung "r<id>" tính phòng TƯƠI mỗi lần vẽ (renderStage, pxScene, evArt); thăm "Đến cung nàng thăm" = phòng của chính người đó,
+  chỉ người của phòng đó (+ khách ở chính điện); phòng của nàng có bạn cùng phòng đang ở nhà thì hiện cùng.
+  Sửa j11 (PIXI): ảnh nền tải chậm của lần trước không còn đè ảnh mới (PX.src) — trước đây đổi phòng cùng buổi có thể kẹt ảnh cũ.
+- Thử: `node dev/test/residence-live.js 686x880@2.2|1180x820@2 dev/shots/residence/game <tag>`: Thường tại ở Ngọc Thanh các → phong Tần → chính điện cung mình
+  (đổi ngay); thăm Đông phối điện có 2 người cùng phòng; tối. Không lỗi trang, không tràn ngang.
 
 # (thử nghiệm ban đầu)
 

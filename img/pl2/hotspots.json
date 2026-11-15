@@ -19,6 +19,12 @@
     "y": 0.3,
     "w": 0.19,
     "h": 0.45
+   },
+   "cungnhan": {
+    "x": 0.82,
+    "y": 0.62,
+    "w": 0.1,
+    "h": 0.2
    }
   },
   "nhat-quy-cung": {
@@ -39,6 +45,12 @@
     "y": 0.22,
     "w": 0.19,
     "h": 0.5
+   },
+   "cungnhan": {
+    "x": 0.86,
+    "y": 0.66,
+    "w": 0.1,
+    "h": 0.16
    }
   },
   "nhat-vinh-hoa": {
@@ -59,6 +71,12 @@
     "y": 0.27,
     "w": 0.14,
     "h": 0.45
+   },
+   "cungnhan": {
+    "x": 0.87,
+    "y": 0.6,
+    "w": 0.09,
+    "h": 0.17
    }
   },
   "nhat-spare-cung": {
@@ -79,6 +97,12 @@
     "y": 0.23,
     "w": 0.12,
     "h": 0.45
+   },
+   "cungnhan": {
+    "x": 0.87,
+    "y": 0.66,
+    "w": 0.09,
+    "h": 0.16
    }
   },
   "nhat-can-ninh": {
@@ -119,6 +143,12 @@
     "y": 0.3,
     "w": 0.14,
     "h": 0.4
+   },
+   "cungnhan": {
+    "x": 0.02,
+    "y": 0.6,
+    "w": 0.1,
+    "h": 0.2
    }
   },
   "nhat-duong-hoa": {
@@ -467,80 +497,6 @@
    "xuan-sang",
    "xuan-toi",
    "xuan-trua"
-  ]
- },
- "rooms": {
-  "canh-phuc-cung-dong-phoi": [
-   "xuan-sang"
-  ],
-  "canh-phuc-cung-tay-phoi": [
-   "xuan-sang"
-  ],
-  "canh-phuc-cung": [
-   "xuan-sang"
-  ],
-  "chung-tu-cung-dong-phoi": [
-   "xuan-sang"
-  ],
-  "chung-tu-cung-tay-phoi": [
-   "xuan-sang"
-  ],
-  "chung-tu-cung": [
-   "xuan-sang"
-  ],
-  "dien-huy-cung-dong-phoi": [
-   "xuan-sang"
-  ],
-  "dien-huy-cung-tay-phoi": [
-   "xuan-sang"
-  ],
-  "dien-huy-cung": [
-   "xuan-sang"
-  ],
-  "ham-an-cung-dong-phoi": [
-   "xuan-sang"
-  ],
-  "ham-an-cung-tay-phoi": [
-   "xuan-sang"
-  ],
-  "ham-an-cung": [
-   "xuan-sang"
-  ],
-  "khai-tuong-cung-dong-phoi": [
-   "xuan-sang"
-  ],
-  "khai-tuong-cung-tay-phoi": [
-   "xuan-sang"
-  ],
-  "khai-tuong-cung": [
-   "xuan-sang"
-  ],
-  "thua-minh-cung-dong-phoi": [
-   "xuan-sang"
-  ],
-  "thua-minh-cung-tay-phoi": [
-   "xuan-sang"
-  ],
-  "thua-minh-cung": [
-   "xuan-sang"
-  ],
-  "truong-xuan-cung-dong-phoi": [
-   "xuan-sang"
-  ],
-  "truong-xuan-cung-tay-phoi": [
-   "xuan-sang"
-  ],
-  "truong-xuan-cung": [
-   "xuan-sang"
-  ],
-  "vinh-hoa-cung-dong-phoi": [
-   "xuan-sang"
-  ],
-  "vinh-hoa-cung-tay-phoi": [
-   "xuan-sang"
-  ],
-  "vinh-hoa-cung": [
-   "xuan-sang"
   ]
  },
  "_grade": "owner 11/15: only the most luxurious grade (nhat) for every courtyard; same-rank palaces share a picture",

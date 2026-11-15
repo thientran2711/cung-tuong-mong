@@ -15,8 +15,7 @@ buổi này) → chạm một phần → tranh phòng ấy với đúng những 
   → img/pl2/nhat-<form>-<state>.webp (1792 px, q80, ~45 MB). Tín dụng Magnific đã dùng: 0.
   Soát mắt (dev/shots/palace-map/sheet-*.jpg): ổn; lưu ý: bản dong-chieu mọi sân ngả kem nhạt; khung hình vài trạng thái (spare-cung, cac
   mùa đông) xê dịch nhẹ so với xuân-sáng → điểm chạm đặt rộng; cac không vẽ rõ hai phối điện (điểm chạm đặt ở hai dãy tường bên).
-- Phòng: tranh residence xuân-sáng (24 phòng) thu về 1920x1280 q80 → img/res/. Bản mùa/buổi khi thợ residence vẽ xong: đặt cùng tên
-  <cung>-cung[-dong-phoi|-tay-phoi]-<mùa>-<buổi>.webp vào img/res/ rồi chạy `python3 dev/tools/pl2_sync.py` (tự nhận).
+- Phòng: từ vòng 3 dùng jres.js (review/residence-art 2c39d1ca, đã gộp): residenceArt / residenceOf / roomResidents — img/res/ đã xóa.
 
 ## Mã
 - `dev/build/jpm.js` (module cuối, sau j84): kitPalaceMap + điều hướng + đếm + phòng. KIT.md §33.
@@ -39,3 +38,10 @@ buổi này) → chạm một phần → tranh phòng ấy với đúng những 
   Đông cung: game chưa có nơi này → chưa gắn. Soát mắt: dev/shots/palace-map/sheet-*.jpg (truong-mon xuân-sáng cắt gần hơn các bản khác).
 - (4) Thử save cũ: dev/test/palace-oldsave.js (chơi 2 buổi ở bản page-curl, lưu ô 3, mở bản mới, "Tiếp tục kiếp này").
 - Tỉ lệ người: dùng sân khấu kit sẵn có (j59/kitFigScale khi review/fold-layout gộp) — jpm không đặt cỡ riêng.
+
+## Vòng 3: gộp review/residence-art 2c39d1ca (jres.js) — một nguồn
+- Gộp xong (sửa xung đột assemble.py: thêm jres + jpm; j11: giữ "một phông" của page-curl + chặn ảnh cũ đè ảnh mới PX.src của residence).
+- jpm gọi jres: phần của người = residenceOf, người ở = roomResidents, tranh phòng = residenceArt; bỏ KPM_SLUG/KPM_FLOOR/img/res (24 tệp).
+  Lưu ý: jres xếp phối điện "2 người đầu Đông, sau đó Tây" (khác cách xen kẽ cũ của jpm) — nay theo jres.
+- Càn Ninh: một điểm chạm (jres gộp mọi người dưới Hoàng hậu thành "kn").
+- Dãy nhà cung nhân: hàng/điểm chạm thứ 4 ở sân nhà của nàng (Ngọc Thanh các hoặc cung của nàng) → phòng cung-nhan với cung nhân của nàng.
