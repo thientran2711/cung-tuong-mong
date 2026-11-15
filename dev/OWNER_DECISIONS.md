@@ -414,3 +414,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (11:30Z) ĐẢO QUYẾT ĐỊNH: GIỮ thẻ tin đầu buổi (tin hằng ngày quan trọng; Tuần lục chỉ là tổng kết tuần). Đổi tên rõ hơn: "Tin trong cung hôm nay". Sửa ảnh Triều chính.
 - (11:30Z) Da mặt: ngoài làm sạch, mặt phải hồng hào khoẻ (má hồng nhẹ, không đậm); sửa các mặt tái/nhợt.
 - (11:35Z) Chân dung trong khung: THÂN người phải nằm giữa khung theo chiều ngang (nhiều ảnh lệch trái, hở mép phải); đầu có thể hơi lệch. Giữ tỷ lệ, chỉ dời.
+- [ ] (11:40Z) Tranh Thỉnh an Thái hậu/Hoàng hậu sai: dáng cúi kiểu hiện đại, váy bó kiểu sườn xám → vẽ lại dáng vạn phúc (tay chụm bên hông, khuỵu gối nhẹ, cúi đầu) + áo cung trang rộng tay, váy suông; rà mọi tranh hành sự có váy bó/cúi kiểu hiện đại.
