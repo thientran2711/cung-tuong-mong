@@ -1,4 +1,4 @@
-/* ================= jkrel: KIT §39 RELATION TABLE (owner 11/15 15:30Z + 16:50Z "LUẬT KIT TRƯỚC") =================
+/* ================= jkrel: KIT §42 RELATION TABLE (owner 11/15 15:30Z + 16:50Z "LUẬT KIT TRƯỚC") =================
    ONE component for "how this person stands with me" wherever a person's relation numbers are listed with their change:
    week book person pages (every person, same template), the kit sample page, and any new screen.
      kitRelRows(p, snap) → the FIXED rows for that kind of person (same order every time):
@@ -49,7 +49,7 @@ function kitRelDelta(label,dir,d,kind){d=KRT_INT(d)||0;return `<span class="krd"
   s.sung=S.sung;s.th=S.th;s.sp={};[S.maid].concat(S.staff||[]).forEach(x=>{if(x&&typeof x.loyal==="number")s.sp[x.sid!=null?x.sid:x.name]=[x.loyal,typeof tinOf==="function"?tinOf(x):0]})}catch(e){}return s}})();
 window.kitRelRows=kitRelRows;window.kitRelTable=kitRelTable;window.kitRelDelta=kitRelDelta;window.kitRelSubj=kitRelSubj;
 (function(){const st=document.createElement("style");st.id="kit-krt";st.textContent=`
-/* KIT §39 relation table: one grid, three aligned columns */
+/* KIT §42 relation table: one grid, three aligned columns */
 .krtw{container-type:inline-size;min-width:0;max-width:100%}
 .krt{display:grid;grid-template-columns:minmax(min(8.5em,46%),1fr) max-content max-content;column-gap:.7em;row-gap:.18em;align-items:baseline;
  margin:.2em 0 .45em;padding:.35em .55em;border:1px solid var(--k-hair,#e6d3ac);border-radius:var(--k-rad,8px);background:var(--k-card,#fffaf0);
@@ -64,3 +64,16 @@ window.kitRelRows=kitRelRows;window.kitRelTable=kitRelTable;window.kitRelDelta=k
 @container (max-width:17em){.krt{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.krt>.krt-h:first-child{display:none}.krt-l{grid-column:1 / -1;padding-top:.15em}.krt-n,.krt-v,.krt-d{text-align:left}.krt-u{grid-column:1 / -1;text-align:left}}
 .krd{white-space:nowrap;font-weight:600}.krd .krel{font-weight:600}.krd b.g{color:var(--good,#2f7a46)}.krd b.r{color:var(--bad,#b0332a)}.krd b.n{color:var(--ink,#3a2a1a)}
 `;document.head.appendChild(st)})();
+/* KIT SAMPLE PAGE (owner 16:50Z: every kit part is shown on the kit sample page) — open the game with ?kit=sample */
+function kitSample(){const R=(dir,label,now,d,kind)=>({dir,label,now,d,kind:kind||"good"});
+ const rows={"Phi tần":[R("them","Nàng → ta: thiện cảm",-13,2),R("them","Nàng oán ta",3,3,"bad"),R("them","Nàng ghen",11,-4,"bad"),R("me","Ta → nàng: thiện cảm",0,null)],
+  "Hoàng thượng":[R("them","Hoàng thượng → ta: sủng",42,5)],"Thái hậu":[R("them","Thái hậu → ta: thiện cảm",18,-2)],
+  "Kẻ hầu":[R("them","Hắn → ta: thiện cảm",64,1),R("me","Ta tin cậy",52,null)],"Người lạ":[{dir:"them",label:"Nàng → ta: thiện cảm",unk:"chưa rõ nàng nghĩ gì"}]};
+ const secs=Object.entries(rows).map(([h,r])=>({h:"kitRelTable · "+h,html:kitRelTable(r)}));
+ secs.push({h:"kitRelTable · cột hẹp (< 17em)",html:`<div style="max-width:15em">${kitRelTable(rows["Phi tần"])}</div>`});
+ secs.push({h:"kitRelDelta · trong dòng sự việc",html:`<p>Phi Tống Phương Hoa nhờ người đưa thư. ${kitRelDelta("Nàng oán ta","them",2,"bad")}, ${kitRelDelta("Nàng → ta: thiện cảm","them",-15)}; hai người khác: ${kitRelDelta("thiện cảm","none",7)}.</p>`});
+ if(typeof kitPanel==="function"&&typeof S!=="undefined"&&S)return kitPanel({kind:"info",title:"Kit mẫu · Quan hệ (§42)",sub:"jkrel.js",sections:secs});
+ const d=document.createElement("div");d.className="kp-sample";d.style.cssText="position:fixed;inset:20px;z-index:99999;overflow:auto;background:var(--k-card,#fffaf0);padding:16px;border:1px solid #d2b071;border-radius:8px";
+ d.innerHTML=secs.map(s=>`<h4 class="kpst">${s.h}</h4>${s.html}`).join("");document.body.appendChild(d);return d}
+window.kitSample=kitSample;
+try{if(/[?&]kit=sample\b/.test(location.search))addEventListener("load",()=>setTimeout(()=>{try{kitSample()}catch(e){console.error(e)}},1500))}catch(e){}
