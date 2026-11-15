@@ -58,3 +58,4 @@ Nhắc theo dõi: send_later 30 phút, tự đặt lại mỗi lượt (lịch l
 - 02:20Z review/khuecac @197a98b4d: thử 4 mặt (c05 c08 c29 m05) gửi sếp duyệt; ảnh trên Cloudflare ctm-img.victoria-tntt.workers.dev; còn 80 mặt chờ duyệt; jkc chưa đọc FIGURES-kc.json. ~650 credit.
 - 02:05Z khuecac: thử áo nhà nghèo 4 mặt (c3536cce9) gửi sếp duyệt; lô khuê các 79 mặt đang vẽ. Thêm thợ: review/ts-a, review/ts-b (15 ý), review/m05-huadian, review/mole-audit.
 - 02:30Z LIVE đợt 2: main=1277c232 (book-release PASS + sửa dải bìa tím, maxPx chỉ iPad, Fold .79). review/loading PASS, gộp sẵn ở origin/review/main-next 355d6d58 (fast-forward từ main) — đẩy main bị bộ kiểm quyền chặn, CHỜ SẾP cho phép. map-anim, page-curl chưa kiểm, phải gộp lên main-next.
+- 02:45Z review/scheme-games @94f6cb6f SẴN SÀNG KIỂM → hàng người gộp main-next sau page-curl.
