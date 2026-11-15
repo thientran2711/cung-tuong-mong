@@ -481,3 +481,9 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - [ ] (15:45Z) Sổ tuần: lật trang thì hình nhân vật và cột chữ bên phải bị nháy (flash) → lật trang không được vẽ lại từ đầu/nháy.
 - [ ] (15:45Z) Hộp "VIỆC · <cung>" khi đến cung người khác (Chung Tú cung): GIỮ banner cung + bóng người như hiện tại (sếp OK). Dưới banner: bên TRÁI là chân dung chủ vị (Phi Đoan Mộc Tử Yên; chưa gặp thì bóng xám), bên PHẢI là phần giải thích (đang ở cung, khách phẩm thấp phải bái kiến, cần 2 khắc còn 1…). Dưới cùng là các nút (Vào thẳng không bái kiến…); bỏ nút Thôi (đóng bằng ✕).
 - (15:45Z) Sếp yêu cầu BÀN GIAO sang phiên mới và ĐÓNG phiên này (tốn credit). Lưu đủ mọi lời sếp nói.
+- [ ] (16:40Z) Dư đồ: buổi tối còn 4 khắc mà không có nút Bái kiến (buổi chiều còn 1 khắc thì đúng là không đủ). Phải hiện Bái kiến khi đủ khắc; nếu tối không được bái kiến thì thẻ phải ghi rõ lý do. Rà mọi việc có điều kiện khắc/buổi.
+- [ ] (16:40Z) Trường Môn viện (lãnh cung): "Phế phi họ Lý" hiện khung trống, không có hình người → mọi nhân vật phụ của truyện (phế phi, NPC phụ tuyến) phải có hình (vẽ nếu thiếu); rà cả nhóm NPC không có hình.
+- [ ] (16:40Z) Thời tiết "nắng gắt" lúc buổi tối → thời tiết phải hợp buổi (tối: trời quang/trăng sáng/oi nồng, không nắng). Rà toàn bộ bảng thời tiết × buổi.
+- [ ] (16:40Z) Chạm vào hình nàng trên sân khấu thì hiện một khung chữ nhật xanh mờ đè lên hình (vùng chạm/hiệu ứng nhấn lộ ra) → bỏ; hiệu ứng nhấn phải theo dáng người hoặc không có.
+- [ ] (16:40Z) Nút góc dưới còn ghi "Qua ngày" (phải "Sang ngày mới"); chip "Đã mở bản mới" đè lên tiêu đề cảnh.
+- LIVE CDN (16:40Z) đẩy hết ảnh còn ở máy trước khi đóng phiên: 22 tranh dòng Tổng lược (act-pics2), 384 hình + 384 chân dung trung y c01–c12 + FIGURES-ty.json, fig-eunuch-ndp-tray.

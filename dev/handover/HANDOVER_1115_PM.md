@@ -164,3 +164,24 @@ Khoảng 4,8 GB trống. Dọn worktree của thợ đã xong: `git worktree rem
 Ghi chú người duyệt: review/kiem2-notes (R1 b505ed2df, R2 7edeb353e), review/r5-notes a53375818, R6 trên review/gift-chest-wip.
 
 Cảnh báo: R5 đã chạy `pkill -f chromium` lúc dọn, có thể làm chết bài thử của người khác.
+
+## LỖI SẾP BÁO THÊM LÚC ĐÓNG PHIÊN (16:40Z), chưa giao ai
+Chi tiết trong OWNER_DECISIONS 16:40Z.
+- Bái kiến: buổi tối còn 4 khắc mà vẫn không hiện nút Bái kiến.
+- Phế phi họ Lý ở lãnh cung: hiện khung trống, không có hình.
+- Buổi tối mà thời tiết ghi "nắng gắt".
+- Chạm vào nàng trên sân khấu: hiện khung chữ nhật xanh mờ.
+- Nút góc dưới còn ghi "Qua ngày"; chip "Đã mở bản mới" đè lên tiêu đề cảnh.
+
+## QUAN TRỌNG: máy mới không có worktree cũ
+Phiên mới chạy trên máy mới. Mọi thứ chỉ còn ở git (các nhánh) + CDN + Magnific (id trong PROGRESS).
+Lúc 16:40Z đã đẩy hết ảnh còn nằm ở máy lên CDN:
+- act-pics2: toàn bộ act-*/ev-*.
+- trung-y c01–c12 + FIGURES-ty.json.
+- fig-eunuch-ndp-tray.
+
+Những gì chưa có trên CDN thì lấy lại từ Magnific theo id trong PROGRESS:
+- ảnh nấu ăn j83: 40 ảnh + 3 tờ biểu tượng;
+- trung-y c13+ (zip hết hạn 16/11 sáng);
+- 8 lượt vẽ act-pics2 đang chờ.
+Ảnh trung y đã lên CDN nhưng code vẫn ở nhánh review/trung-y.
