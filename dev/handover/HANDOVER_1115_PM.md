@@ -309,3 +309,4 @@ Worker worktrees at /home/user/wt/<name>. Rule summaries for workers: /home/user
 - (s7) rank-title READY 3b8aa4aa1 (fwd; KIT §48.1 kitRankTone) → reviewer spawned (rank-title-r1). Owner Q: keep paper halo behind names on stage at night?
 - (s7) face-reveal READY 7e71ca65 (one j61 hook: any dialog showing a person reveals face, met for consorts; household always known; old-save backfill; scan 30 grey-after-dialog → 0) → reviewer spawned (face-reveal-r1).
 - (s7) LIVE main = item-events r1 (23a8e80eb): item tag on event banners, keep/give/burn/probe animations (KIT §64), 11 item pictures; give flies only to the named person; 844 short-screen item frame. art-complete group 1 (KC c11–c32 66 figs+66 por) live on CDN, c5f24910.
+- (s7) act-pics2 redraw (fwd) stopped at 92/380 → continuation art worker spawned in s7 (batches of 60).
