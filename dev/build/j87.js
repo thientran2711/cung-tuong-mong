@@ -438,7 +438,7 @@ function wkBookPages(){const d=wkBookData();const date=kitDate(S.month,S.year,S.
 .kbk-pg .kb{font-size:.9em;margin:.1em 0 .25em}
 .kbk-pg .kchips{margin:.15em 0 .3em}
 .kbk-pg .kchip{background:#fffaf0cc}
-.kbk-pg .kname,.kbk-pg .kname .kti{color:color-mix(in srgb,var(--rc,#2a1a12) 50%,#2a1a12)!important}
+.kbk-pg .kname{color:color-mix(in srgb,var(--rc,#2a1a12) 50%,#2a1a12)!important}/* the title keeps its rank tone (KIT 48.3) */
 .kbk-pg .kfact:has(>.kfdot){grid-template-columns:.6em minmax(0,1fr);gap:.55em}
 .kbk-pg .kfdot{width:.5em;height:.5em;border-radius:1px;background:var(--rule);border:0;transform:rotate(45deg);margin-top:.62em;opacity:.8}
 /* KIT §36.1 people-chip list (owner 11/15 04:25Z + 08:10Z): ONE grid of equal columns that line up across rows; every portrait the same

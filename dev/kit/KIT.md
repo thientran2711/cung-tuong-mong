@@ -2326,9 +2326,25 @@ her person card `.pcname` (pcard `o.me`, or o.name === S.name) + its sticky stri
 Where it applies (one CSS block `#kit-rt`, nobody styles a title over a name on their own): `kitNameRank` (sets `.krt`/`.krn`), stage name
 tags `.j59t`/`.j59n` (j59 sets `--rt`), 32.7 / kitEventDp captions `.kpsn .kname .kti` (kitName sets `--rt` on `.kti`), person cards
 `.pcrk` over `.pcname` (j15 sets `--rt`) and the sticky strip `.kpstrip`, Tuần lục person heading `.kbk-pname`, honour podium name plates `.kpod-plq` (j90). Dialog face captions (`.faces figcaption`, j3: "Nhập cung", "Thân phận kiếp này") are built with `kitNameRank` (rank over name). A title INSIDE a sentence
-(kitName in prose rows) keeps the plain inline look. Kit page sample §48.1: every title on parchment and on a dark scene (`.krs`).
+(kitName in prose rows) keeps the plain inline look (no glow, no outline, the line's own font) BUT in its rank tone (48.3). Kit page sample §48.1: every title on parchment and on a dark scene (`.krs`).
 Test: `node dev/test/rank-title.js <url> <outdir> <tag> [sizes] [day,night,rain,cold,dp,kit,old]` (colours, serif, title above name,
 no tag overlap / cut; OLDURL=<old build> for the old-save case).
+
+### 48.3 RANK TITLE + NAME IN RANK COLOUR EVERYWHERE · `kitRankPaint` (owner 15/11 s8: "Phẩm bậc trong mấy ô chọn này chưa theo màu phẩm, màu phẩm xuất hiện mới nơi có tên và phẩm của người.") — `dev/build/j79.js`
+ONE rule: wherever a person's rank / role title stands right before that person's name — picker rows of every act ("Sai … đi dò la"
+targets, gift / plant / visit pickers), cards, dialogs, lists, logs, Tuần lục, toasts, popups, co-op — the title is in its rank tone
+(`kitRankTone`, plain text in framed UI, lightened 55 % on `.modal.night`), the name in the person's colour (hers black `.kmy`).
+- New code writes `kitName(p)` (or `kitRankNameH(p, title, name)` = the kitName block with the text's own title).
+- Plain words "title name" already written by any builder are painted by `kitRankPaint(root)`: one MutationObserver pass (same model as
+  kitRelPaint §11.2) wraps each visible "title name" run of a KNOWN person (`kpPeople()`) into `<b class="kname"><span class="kti"
+  style="--rt">title</span> name</b>`. Words never change (textContent equal). Titles: consort ranks, Phế phi, Thái tử / Hoàng tử / Công chúa,
+  servants (Cung nữ [thân tín / thô sử], Đại cung nữ, Chưởng sự cô cô, Ma ma, Thái giám, Tổng quản, Nữ quan, Nhũ mẫu), Thái y, Thị vệ,
+  officials, Công tử. Skipped: existing kit name blocks (.kname .knr .krt .krn .kpsn .pcrk .pcname .j59t/.j59n .kpod-plq .kbk-pname),
+  `[data-vp-skip]`, `[data-norank]` (opt-out), form fields.
+- `kpPeopleIn` (Tuần lục / news rows): a title the text itself writes before the name now goes INSIDE the name block in its tone (it stayed ink).
+- CSS: `html body .kname .kti{color:var(--rt)}` in `#kit-rt` (jk4); the Tuần lục rule no longer forces the title to the name colour (j87).
+Scan: `node dev/test/rank-colour.js <url> <out.json> [WxH] [tuần] [shots]` (every place × person × picker, every tab, bot play; each visible
+pair OK/PLAIN) + `python3 dev/test/rank-colour-sites.py` (source sites: KIT / TEXT painted / SPLIT must be 0).
 
 ### 32.7b PEOPLE FILL THE COLUMN (owner 11/15, replaces the KIT_FIG .79 scale inside 32.7 columns) — `kitDpFit` (jk4)
 In a 32.7 person column every person stands from just under the name chips (37) down to the column floor: painted top (hair, crown,
