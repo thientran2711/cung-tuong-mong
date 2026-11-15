@@ -80,14 +80,14 @@ function srvVisitOf(k){const ppl=[];let msg="";const m=srvM();const W=S.where||{
  const rvP=v=>P(v.queen?"hh":v===m?"mis":"rv",{ref:v,name:(v.queen?"Hoàng hậu ":"")+v.name,ini:v.name.split(" ").pop()[0],col:RCOL[rkOf(v)],info:`${rkName(v)}${v===m?" · chủ nhân của ngươi":""} · ${v.trait}`});
  const svP=(s,o)=>{P("sv",{ref:s,sid:s.sid,name:s.name,ini:s.name.split(" ").pop()[0],col:"#b9a48a",info:`${srkName(s)} · ${o===m?"cùng cung":o?"người của "+o.name:"Nội vụ phủ"}`});if(o!==m&&!S.srv.met.includes(s.sid))S.srv.met.push(s.sid)};
  if(k==="tgk")return{k,people:ppl,talked:false,tk:{},msg:"Nước giặt lạnh buốt, chậu gỗ chất cao. Quản sự cầm roi đứng canh."};
- if(k==="home"){const mk=m&&palaceOf(m);if(W.emp===mk)P("emp",{name:"Hoàng thượng",ini:"帝",col:"#f0d070",info:"Hoàng thượng · đang ở cung chủ"});
+ if(k==="home"){const mk=m&&palaceOf(m);if(W.emp===mk)P("emp",{name:"Hoàng thượng",ini:"Đế",col:"#f0d070",info:"Hoàng thượng · đang ở cung chủ"});
   if(m&&srvWhere(m)===mk)rvP(m);else if(m)msg=`${m.name} đi vắng, đang ở ${placeOf(srvWhere(m)).n}.`;
   for(const s of (m&&m.staff||[]).slice(0,4))svP(s,m)}
- else{if(W.emp===k)P("emp",{name:"Hoàng thượng",ini:"帝",col:"#f0d070",info:"Hoàng thượng"});
+ else{if(W.emp===k)P("emp",{name:"Hoàng thượng",ini:"Đế",col:"#f0d070",info:"Hoàng thượng"});
   for(const v of liveRivals(true).filter(v=>srvWhere(v)===k).slice(0,4))rvP(v);
   if(k[0]==="r"||k==="kn"){const hd=accHostK(k);for(const s of (hd&&hd.staff||[]).slice(0,2))svP(s,hd)}
-  if(k==="tyv")P("ty",{name:"Thái y Trương",ini:"醫",col:"#8fc38a",info:"Thái y viện"})}
- const sn=S.srv.sent;if(sn&&!sn.done&&sn.k===k&&sn.until>=bid())P("task",{name:"Việc chủ sai",ini:"務",col:"#c9a46a",info:sn.n});
+  if(k==="tyv")P("ty",{name:"Thái y Trương",ini:"Y",col:"#8fc38a",info:"Thái y viện"})}
+ const sn=S.srv.sent;if(sn&&!sn.done&&sn.k===k&&sn.until>=bid())P("task",{name:"Việc chủ sai",ini:"Vụ",col:"#c9a46a",info:sn.n});
  if(!msg)msg=ppl.length?`Ở đây có ${ppl.length} người.`:"Không gặp ai.";
  return{k,people:ppl,talked:false,tk:{},msg}}
 function accHostK(k){if(k==="kn")return rivals.find(v=>v.queen&&v.alive&&!v.out)||null;return RV(+k.slice(1))}

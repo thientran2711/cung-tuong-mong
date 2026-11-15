@@ -26,3 +26,7 @@ không trong suốt".
   thấy (trước đó cũng chỉ thoáng ngoài mép màn). iPad: tờ cũng khuất ở gáy thay vì mờ dần trên trang tranh.
 - Ảnh trong dev/test/sheet-turn.js bị màn thỉnh tranh (#kload) che vì bộ thử không gỡ màn tải — ảnh tờ lật hợp lệ ở dev/shots/review/page-curl/.
 Ảnh: dev/shots/review/page-curl/ (turn-<khổ>-p20/45/70).
+
+## Gộp origin/main b165b1f7 (men + inventory-origin) lên trên
+- Xung đột chỉ sw.js (dựng lại). j22 "Đến chỗ hắn" (nam nhân) còn luật cũ can(tc+1) → walkOk/walkWhy.
+- 755 / 1180: 0 lỗi, 1 #panel, không nền tím, Tư trang lưới ô vuông đủ; tờ lật 755 Phi tần → Giao tình p .2/.45 đục; sổ cũ (main b165b1f7) nạp 755 / 1180; coop-e2e 59/59.

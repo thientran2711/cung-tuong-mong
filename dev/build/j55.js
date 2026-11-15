@@ -34,7 +34,7 @@ function deA(a,t,n){const T=trS();const m=T.de[key(a)]=T.de[key(a)]||{};m[key(t)
 function tdBacks(h,p){return h&&(h.af[key(p)]||0)>=40}
 function tdNews(h){const T=trS();T.news.unshift({w:`T${S.month}/${S.year}`,h});if(T.news.length>8)T.news.length=8}
 /* the head's portrait: a court official from the figure pool, the old official face until it loads */
-function pMin(h){try{faceFor(h,"official",h.age||50)}catch(e){}const fb=fsrc(h.fc,`img/face-official-${(CLANS.indexOf(h.c)%4)+1}.webp`);let src=fb;try{src=porOf(h,fb)}catch(e){}return{src,ini:"官",col:"#7a6a50",rw:TDOFF[h.c]}}
+function pMin(h){try{faceFor(h,"official",h.age||50)}catch(e){}const fb=fsrc(h.fc,`img/face-official-${(CLANS.indexOf(h.c)%4)+1}.webp`);let src=fb;try{src=porOf(h,fb)}catch(e){}return{src,ini:"Quan",col:"#7a6a50",rw:TDOFF[h.c]}}
 (function(){const r0=figRoles;figRoles=function(who){if(who&&who.isMin)return["official"];return r0.apply(this,arguments)}})();
 (function(){const f0=facesPresent;facesPresent=function(){const U=f0.apply(this,arguments);try{const T=S&&S.trieu;if(T&&T.H)for(const c in T.H)if(T.H[c].fc)U.add(T.H[c].fc)}catch(e){}return U}})();
 

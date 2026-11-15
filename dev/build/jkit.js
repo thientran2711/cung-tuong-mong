@@ -7,7 +7,8 @@
 /* maxPx (owner 11/15): body height never exceeds what the 1180 iPad stage gives (.79 × 685 ≈ 542 px), so taller stages (1366, larger iPads) do not make figures wider */
 const KIT_FIG={h:.79,man:1.07,maxPx:542,men:{emperor:1,eunuch:1,official:1,physician:1,man:1},
  kid(a){return typeof a==="number"&&a<18?Math.min(1,.55+.03*Math.max(1,a)):1},
- fac(src,age){const m=/fig-([a-z]+)-/.exec(src||"");return(m&&this.men[m[1]]?this.man:1)*this.kid(age)}};
+ fac(src,age){const m=/fig-([a-z]+)-/.exec(src||"");const un=/unknown-fig-m\./.test(src||""); /* the unknown-man silhouette is a man too (review/men) */
+  return((m&&this.men[m[1]])||un?this.man:1)*this.kid(age)}};
 window.KIT_FIG=KIT_FIG;
 /* KIT 33.6 · kitFigBody(src, cb) — the ONE body measurement for every full-body figure (room / place stages j59, event stages jk4,
    week book): alpha bbox (t,b,l,r) + ht = head top = first rows of fair forehead skin minus a hair allowance, so crowns, hairpins and

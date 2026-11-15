@@ -1,7 +1,7 @@
 /* ================= PERSON CARD: portrait box, info under it, actions on the right; one card at a time with a face strip ================= */
 const PG={};
 function pFaceOf(p){if(!p)return{src:"",ini:"?",col:"#8a7a6a"};if(p.kind==="emp")return pEmp();if(p.kind==="th")return pTH();if(p.kind==="maid")return pMaid();if(p.kind==="ty")return pDoc();
- if(p.kind==="ksp")return{src:courtSrc("ksp",S.court&&S.court.ksp),hue:0,ini:"宦",col:p.col||"#8a8aa0"};if(p.kind==="peddler")return{src:courtSrc("ped",S.court&&S.court.ped),hue:0,ini:"宦",col:p.col||"#8a8aa0"};if(p.kind==="kid"&&p.ref)return kidFace(p.ref);
+ if(p.kind==="ksp")return{src:courtSrc("ksp",S.court&&S.court.ksp),hue:0,ini:"Hoạn",col:p.col||"#8a8aa0"};if(p.kind==="peddler")return{src:courtSrc("ped",S.court&&S.court.ped),hue:0,ini:"Hoạn",col:p.col||"#8a8aa0"};if(p.kind==="kid"&&p.ref)return kidFace(p.ref);
  if(p.kind==="hh"&&p.ref){const f=pv(p.ref);return f}if(p.ref&&p.kind!=="kid"&&p.kind!=="chest")return pv(p.ref);return{src:"",ini:p.ini,col:p.col}}
 function pcPort(f,col,status){const rb=/^c\d/.test(f.rk||"")&&RIMG[+f.rk.slice(1)]?`<img class="pcb2" src="img/${RIMG[+f.rk.slice(1)]}.webp" alt="" onerror="this.remove()">`:"";return `<div class="pcp${f.src?"":" noimg"}${f.rk?" rk-"+f.rk.split(" ").join(" rk-"):""}" style="--c:${col||f.col||"var(--gold)"}">${f.src?`<img src="${f.src}" alt="" data-i="${f.ini||""}" onerror="kitImgErr(this,{cls:'noimg',swap:1})">`:(f.ini||"")}${rb}${status?`<em class="pcs">${status}</em>`:""}</div>`}
 function ghenBar(n){return `<div class="pgh"><span>Ghen <b>${n}</b></span><div class="mini"><u style="width:${cl(n,0,100)}%"></u></div></div>`}
@@ -53,7 +53,7 @@ function kidTabHTML(hl){return `<div class="pgwrap"><div class="ph"><span>${hl}<
 function staffTabHTML(){const [cm,ce]=capOf(S),nm=S.staff.filter(s=>s.role==="maid").length+1,ne=S.staff.filter(s=>s.role==="eunuch").length;
  const L=[];L.push({t:"maid",f:pMaid(),name:shortN(S.maid.name),sep:"Cung ngươi"});
  S.staff.forEach((s,j)=>L.push({t:"own",s,f:pServ(s),name:shortN(s.name)}));
- Object.entries(S.court).forEach(([k,c],j)=>L.push({t:"court",k,c,f:k==="ty"?pDoc():{src:courtSrc(k,c),ini:"宦",col:"#8a8aa0"},name:shortN(c.name),sep:j?"":"Trong cung"}));
+ Object.entries(S.court).forEach(([k,c],j)=>L.push({t:"court",k,c,f:k==="ty"?pDoc():{src:courtSrc(k,c),ini:"Hoạn",col:"#8a8aa0"},name:shortN(c.name),sep:j?"":"Trong cung"}));
  let first=true;liveRivals(true).forEach(v=>(v.staff||[]).forEach(s=>{L.push({t:"other",s,v,f:pServ(s),name:shortN(s.name),sep:first?"Cung khác":""});first=false}));
  const sinfo=s=>[tuoi(s.age),`${srkName(s)} · ${strShow(s)}`,typeof bondBars==="function"?bondBars(s):`Lòng <b>${s.loyal}</b>`,typeof tinOf==="function"&&tinOf(s)<40?`<span class="past">Chưa đủ tin để sai việc kín (cần Chủ tin 40)</span>`:""].filter(Boolean);
  const schip=s=>[s.lover&&(S.knowDT||[]).includes(s.sid)?chip("đối thực","hot"):"",s.spyFor==="me"?chip("tai mắt của ngươi","ok"):""];

@@ -20,7 +20,7 @@ function renderHUD(){if(typeof renderHud2==="function")renderHud2();$("me-n").te
 function renderStage(){const P=placeOf(S.place);$("stage").className="stage sc-"+P.sc;$("scimg").style.backgroundImage=SCIMG[P.sc]?`url(img/${SCIMG[P.sc]}.webp)`:"none";const ppl=curPeople();
  {const raw=S.visit&&S.visit.msg?S.visit.msg:P.d;const btns=(raw.match(/<button[\s\S]*?<\/button>/g)||[]).join("");const txt=raw.replace(/<button[\s\S]*?<\/button>/g,"").replace(/<[^>]+>/g,"");$("sc-t").innerHTML=`<h2><span class="rt1">${P.n}</span><span class="rmsg" title="${txt.replace(/"/g,"")}"> · ${txt}</span></h2>${btns}`}
  $("tokens").innerHTML=ppl.length?ppl.map((p,i)=>{const f=pFaceOf(p);
-   if(p.kind==="hh")f.ini="鳳";return `<button class="tok" data-p="${i}">${mdH(f)}<span class="tag">${p.name}</span></button>`}).join(""):`<p class="empty">Không có ai ở đây.</p>`;
+   if(p.kind==="hh")f.ini="Phượng";return `<button class="tok" data-p="${i}">${mdH(f)}<span class="tag">${p.name}</span></button>`}).join(""):`<p class="empty">Không có ai ở đây.</p>`;
  let pw="";if(popIdx!=null&&ppl[popIdx])pw=`<div class="pop pcpop">${popCard(ppl[popIdx],popIdx)}</div>`;
  $("popw").innerHTML=pw;kitFix($("popw"))}
 function rvButtons(v,i){const dis=!can(2)||!v.alive||v.out||S.dead;const b=(k,extra)=>{const a=ACT[k];if(!a||(a.kid&&!a.ok(S,v)))return"";const ok=a.ok(S,v),o=a.o?a.o(S,v):null;

@@ -170,9 +170,9 @@ function refreshHere(){if(!S||!S.visit||S.dead)return;const k=S.place||"home",W=
  const isR=p=>p&&(p.kind==="rival"||p.kind==="hh")&&p.ref;
  if(k==="home"){const f=friendEntry();const L=P.filter(p=>!(isR(p)&&isF(p.ref)));if(f&&W[f.id]==="home")L.push(rp(f));S.visit.people=L;return}
  const here=liveRivals(true).filter(v=>W[v.id]===k);const L=P.filter(p=>!isR(p)||(here.includes(p.ref)&&!isF(p.ref)));
- for(const v of here)if(!L.some(p=>isR(p)&&p.ref===v))L.push(v.queen&&qOn()?{...rp(v),kind:"hh",name:`Hoàng hậu ${v.name}`,ini:"鳳"}:rp(v));
+ for(const v of here)if(!L.some(p=>isR(p)&&p.ref===v))L.push(v.queen&&qOn()?{...rp(v),kind:"hh",name:`Hoàng hậu ${v.name}`,ini:"Phượng"}:rp(v));
  const ei=L.findIndex(p=>p.kind==="emp");if(W.emp!==k&&ei>=0&&["vuon","thu","dtd"].includes(k))L.splice(ei,1);
- else if(W.emp===k&&ei<0&&["vuon","thu"].includes(k))L.unshift({kind:"emp",name:"Hoàng thượng",ini:"帝",col:"#f0d070",info:`${empName()} · ${MOODS[S.emp.mood][0].toLowerCase()}`});
+ else if(W.emp===k&&ei<0&&["vuon","thu"].includes(k))L.unshift({kind:"emp",name:"Hoàng thượng",ini:"Đế",col:"#f0d070",info:`${empName()} · ${MOODS[S.emp.mood][0].toLowerCase()}`});
  S.visit.people=L}
 const LIVE=["sung","danh","suc","sac","tai","tamco","duc","rank","age"];
 function sendPos(){if(!CW.on||!CW.p2||!S||S.dead)return;const st={};for(const x of LIVE)st[x]=S[x];

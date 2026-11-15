@@ -53,7 +53,7 @@ function kitRoleOfFace(f){const rk=String(f.rk||""),rw=String(f.rw||"");let m;
  if((m=rk.match(/^sv(\d)/)))return{role:"maid",rank:+m[1]};if((m=rk.match(/^eu(\d)/)))return{role:"eunuch",rank:+m[1]};
  if(/^kid/.test(rk))return{role:/Công chúa/.test(rw)?"princess":"prince"};
  if(rk==="off")return{role:/Thái y/i.test(rw)?"physician":/thị vệ/i.test(rw)?"guard":/vương gia/i.test(rw)?"royal":/Công tử|nhạc|họa|sứ/i.test(rw)?"man":"official"};
- if(f.ini==="宦")return{role:"eunuch",rank:1};if(f.ini==="官")return{role:"official"};if(f.ini==="醫")return{role:"physician"};return{role:"other"}}
+ if(f.ini==="Hoạn")return{role:"eunuch",rank:1};if(f.ini==="Quan")return{role:"official"};if(f.ini==="Y")return{role:"physician"};return{role:"other"}}
 /* face object (or person) -> everything the renderer needs */
 function kitDecor(f){f=f||{};let r=f.__kr||(f.__kp?personRoleRank(f.__kp):null);if(!r){const x=kitRoleOfFace(f);r=Object.assign({origin:null,sex:(KIT_ROLES[x.role]||KIT_ROLES.other).sex,kid:false},x)}
  const known=f.__kp?kitIsKnown(f.__kp):true;const role=known?r.role:"unknown";let frame,bg,badge=null,emb=null,col,tint=null;
