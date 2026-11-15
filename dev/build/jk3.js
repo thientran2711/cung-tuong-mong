@@ -26,8 +26,8 @@ function k3Hud(){try{if(!S)return;const d=$$("me-d");if(d){const t=k3Date();if(d
  /* lãnh cung: the rank chip says what the figure label says (rkOfFace "Phế phi · lãnh cung"), not her old rank (review fold-layout) */
  if(S.out){const r=$$("me-r"),w="Phế phi · lãnh cung";if(r&&r.textContent.trim()!==w)r.textContent=w}
  /* her Tư chất: the kit stat cells in the top bar's kitStatRow (jk4) */
- k3TopRow();if(typeof kitStatSet!=="function")return;const hq=S.rank<7&&S.duc<50;
- [["sac","Sắc"],["tai","Tài"],["tamco","Tâm cơ"],["duc","Đức"]].forEach(([k,l])=>{const c=$$("hud-"+k);if(c)kitStatSet(c,S[k],{title:`${l} ${S[k]}${k==="duc"&&hq?" · Cần Đức 50 mới được lập Hoàng hậu":""} · chạm để xem đủ`,warn:k==="duc"&&hq?"Cần Đức 50 mới được lập Hoàng hậu":""})})}catch(e){}}
+ k3TopRow();if(typeof kitStatSet!=="function")return;const nd=hhNeed(S).duc,hq=S.rank<7&&S.duc<nd,dw=`Cần Đức ${BAL.hhDuc} mới được lập Hoàng hậu (mẹ Thái tử: ${BAL.hhDucHeir})`;
+ [["sac","Sắc"],["tai","Tài"],["tamco","Tâm cơ"],["duc","Đức"]].forEach(([k,l])=>{const c=$$("hud-"+k);if(c)kitStatSet(c,S[k],{title:`${l} ${S[k]}${k==="duc"&&hq?" · "+dw:""} · chạm để xem đủ`,warn:k==="duc"&&hq?dw:""})})}catch(e){}}
 /* the top bar's second row (KIT 31.1): time (buổi, khắc dots, weather, Quẻ tuần) + status chips | her Tư chất. ONE component, every device */
 function k3TopRow(){const hd=document.querySelector("header.hud");let tc=$$("k3tc");if(!tc&&hd){tc=document.createElement("div");tc.id="k3tc";tc.className="k3tc";
  tc.innerHTML=`<span id="k3tt" class="k3tt"></span>`;hd.appendChild(tc);
@@ -193,6 +193,16 @@ function k3Shell(){try{const gm=document.querySelector(".game");if(!gm)return;tr
 window.k3Shell=k3Shell;
 function k3Home(){K3SH.home=true;try{if(typeof popIdx!=="undefined"&&popIdx!=null){popIdx=null;if(typeof renderStage==="function")renderStage()}}catch(e){}const pw=$$("popw");if(pw&&pw.children.length)pw.innerHTML="";k3Shell();setTimeout(()=>{try{window.j59lay&&j59lay();typeof kitFloorFit==="function"&&kitFloorFit()}catch(e){}},30)}
 window.k3Home=k3Home;
+/* owner 11/15 06:38Z: tapping the place she is AT on Dư đồ opens that place's stage (scene + the people there), like arriving — on the
+   phone shell that is the room view, not the Hành sự panel; arriving from the map lands on the stage too. "‹ Phòng" says where she is
+   ("‹ Kính sự phòng") and returns to that stage (her current place, not home). */
+function k3ShowPlace(){window.__k3quiet=1;clearTimeout(window.__k3qt);window.__k3qt=setTimeout(()=>{window.__k3quiet=0},450);K3SH.home=true;k3Home()}
+function k3PlaceName(){try{if(!S||!S.place||S.place==="home")return"Phòng";return typeof accName==="function"?accName(S.place):(placeOf(S.place).n||"Phòng")}catch(e){return"Phòng"}}
+(function(){if(typeof j77Tap==="function"){const t0=j77Tap;j77Tap=function(k){const here=!!(S&&!S.dead&&!Q.length&&k&&S.place===k);const r=t0.apply(this,arguments);
+  if(here&&k3Phone())k3ShowPlace();return r}}
+ const g0=goTo;goTo=function(k){const fromMap=typeof tab!=="undefined"&&tab==="go";const p0=S&&S.place;const r=g0.apply(this,arguments);
+  try{if(fromMap&&k3Phone()&&S&&!S.dead&&S.place===k&&p0!==k&&!Q.length)k3ShowPlace()}catch(e){}return r};
+ const s0=k3Shell;k3Shell=function(){const r=s0.apply(this,arguments);try{const rb=$$("k3room");if(rb){const t="\u2039 "+k3PlaceName();if(rb.textContent!==t)rb.textContent=t;rb.title=S&&S.place&&S.place!=="home"?"Về "+k3PlaceName():"Về phòng"}}catch(e){}return r};window.k3Shell=k3Shell})();
 document.addEventListener("click",e=>{if(!k3Phone())return;const b=e.target.closest&&e.target.closest("#tabs [data-tab], #tabs [data-kg]");
  if(b){const active=b.classList.contains("on")||b.classList.contains("kgon")||b.getAttribute("aria-selected")==="true";
   if(!K3SH.home&&active&&!b.classList.contains("kghide")){e.preventDefault();e.stopPropagation();k3Home();return}
@@ -422,7 +432,10 @@ html body #modal .k3grid>button.ka.k3long{grid-column:1/-1;order:1}html body #mo
  const TOP={};function topOf(src,cb){if(TOP[src]!=null)return cb(TOP[src]);const im=new Image();im.onload=()=>{try{const w=64,h=Math.round(64*im.naturalHeight/im.naturalWidth);const c=document.createElement("canvas");c.width=w;c.height=h;
    const x=c.getContext("2d");x.drawImage(im,0,0,w,h);const d=x.getImageData(0,0,w,h).data;let y=0;outer:for(;y<h;y++){for(let i=0;i<w;i++)if(d[(y*w+i)*4+3]>40)break outer}TOP[src]=y/h}catch(e){TOP[src]=0}cb(TOP[src])};im.onerror=()=>{TOP[src]=0;cb(0)};im.src=src}
  function fit(){document.querySelectorAll(".pc.kpwide[data-k2]>.pcl>.pcp.kit").forEach(pp=>{const fr=pp.querySelector("img.kfr");if(!fr)return;const src=fr.getAttribute("src");
-   topOf(src,t=>{const cr=pp.querySelector("img.kcrest");const ct=cr?parseFloat(cr.style.getPropertyValue("--ct"))/100:NaN;if(ct>=0)t=Math.min(t,ct);const kin=pp.querySelector(".kin");const H=kin?kin.getBoundingClientRect().height:0;const cut=Math.max(0,t*H-4);pp.style.setProperty("margin-top",(-cut)+"px","important");pp.style.setProperty("--kptrim",cut+"px")})});
+   /* owner 11/15 05:45Z ("khung nhảy"): ONE portrait box for every person — the trimmed headroom is the same constant for every frame
+      (KIT_PORT_TRIM = the tallest crest's top), never measured per frame, so switching people never moves or resizes the frame */
+   /* the constant trim is pure CSS (jhc: .pc.kpwide .pcp.kit margin-top = 4px − KIT_PORT_TRIM × cell height), so it is there in the first frame */
+   pp.style.removeProperty("margin-top")});
   document.querySelectorAll(".pc[data-k2] .kpfacts .pcinfo>*,.pc[data-k2]>.pcl>p").forEach(e=>{const t=e.textContent.trim();if(e.classList.contains("kphelp")||!/^(Mới biết tên|Chưa biết)/.test(t)&&!(t.length>60&&e.tagName==="P"))return;
    const lab=/^Mới biết tên/.test(t)?"Mới biết tên":/^Chưa biết/.test(t)?"Chưa biết là ai":"Ghi chú";e.classList.add("kphelp");e.title=t;e.innerHTML=`${lab} <i aria-hidden="true">ⓘ</i>`})}
  let tt=0;try{new MutationObserver(()=>{if(!tt)tt=setTimeout(()=>{tt=0;fit()},40)}).observe(document.body,{childList:true,subtree:true})}catch(e){}addEventListener("resize",()=>setTimeout(fit,80));

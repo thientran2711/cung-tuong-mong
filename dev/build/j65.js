@@ -29,9 +29,7 @@ const KT=/^(Hoàng tử|Công chúa|Hoàng nữ|Thái tử) /;
 try{const t0=tuoi;tuoi=function(n){const h=t0.apply(this,arguments);return h?h.replace(/\s*<span class="past">\([^)]*\)<\/span>/,""):h}}catch(e){}
 try{const a0=ageLine;ageLine=function(p){const h=a0.apply(this,arguments);try{const ag=p===S?S.age:p.age;const b=BAND4N[band4(ag)];return h.replace(` · ${b}`,"")}catch(e){return h}}}catch(e){}
 /* ---- Đức warning: the cost already says "Đức -n" ---- */
-const dw=s=>String(s).replace(/Đức (\d+) → (-?\d+): /,"còn $2: ").replace("cần Đức 50","cần 50");
-try{const d0=ducWarnTxt;ducWarnTxt=function(){return dw(d0.apply(this,arguments))}}catch(e){}
-try{const d1=ducWarn;ducWarn=function(){return dw(d1.apply(this,arguments))}}catch(e){}
+/* (rules-one-source: the old shortening "Đức 33 → 28: …" → "còn 28: …" dropped the stat name; removed. The note keeps "Đức a → b".) */
 /* ---- consort card: relation chip repeats the "Nàng với ngươi" line ---- */
 try{const r0=rvCard;rvCard=function(){const h=r0.apply(this,arguments);return h.replace(/<span class="chip (hot|ok|)">(Thù ngươi|Thân với ngươi|Bình thường)<\/span>/,"")}}catch(e){}
 /* ---- "Đã biết": one line per distinct report ---- */

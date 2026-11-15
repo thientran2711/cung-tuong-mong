@@ -16,11 +16,16 @@ function palFix(){if(!S||!rivals)return;rivals.forEach(ensureT2);const occ={};co
  for(const p of heads)if(p.pal!=null){if(occ[p.pal]!=null)p.pal=null;else occ[p.pal]=key(p)}
  for(const p of heads)if(p.pal==null){const f=PALN.findIndex((_,i)=>occ[i]==null);if(f<0)continue;p.pal=f;occ[f]=key(p);if(p===S){S.palCer=1}}
  /* lower ranks live in a head's side hall (thiên điện); never left without a palace when a head exists */
- const hs=[S].concat(rivals).filter(p=>palHeadOK(p)||(p!==S&&p.queen&&p.alive&&!p.out));
+ /* owner 11/14 (OWNER_DECISIONS, Housing): Hoàng hậu lives ALONE in Càn Ninh cung and the Hoàng quý phi ALONE in hers — never a host,
+    for NPCs and for the player alike (palSolo). Anyone found under them (old saves, a host just promoted) moves out with a log line. */
+ const hs=[S].concat(rivals).filter(p=>palHeadOK(p)&&!palSolo(p));
  for(const p of [S].concat(rivals)){if(p!==S&&(!p.alive||p.out))continue;if(rkOf(p)>=PAL_HEAD){p.resHead=null;continue}
   const h=p.resHead!=null&&byKey(p.resHead);const ok=h&&h!==p&&hs.includes(h)&&(h!==S||palHeadOK(S));
   if(p===S){if(!ok)S.resHead=null;continue} /* she keeps Ngọc Thanh các until she is a head herself */
-  if(!ok){const L=hs.filter(x=>x!==p&&x!==S);const c=L.filter(x=>[S].concat(rivals).filter(y=>y.resHead===key(x)).length<3);p.resHead=(c.length?pick(c):L.length?pick(L):null);p.resHead=p.resHead?key(p.resHead):null}}}
+  if(!ok){const was=h&&h!==p&&palSolo(h)&&(h===S||h.alive&&!h.out)?h:null;const L=hs.filter(x=>x!==p&&x!==S);const c=L.filter(x=>[S].concat(rivals).filter(y=>y.resHead===key(x)).length<3);p.resHead=(c.length?pick(c):L.length?pick(L):null);p.resHead=p.resHead?key(p.resHead):null;
+   if(was)try{log(`${p.name} dời khỏi ${was===S?palName("home"):was.queen?"Càn Ninh cung":palName("r"+was.id)} (${was.queen||rkOf(was)>=7?"Hoàng hậu":"Hoàng quý phi"} ở riêng một cung), sang ${houseName(p)}.`)}catch(e){}}}}
+/* Hoàng hậu (NPC queen or the player at rank 7) and Hoàng quý phi (rank 6, not the queen) keep a palace to themselves */
+function palSolo(p){return !!p&&(p.queen||rkOf(p)>=6)}
 (function(){const a0=assignHouses;assignHouses=function(){palFix()}})();
 /* where a house lives on the plan */
 function palSlot(k){if(k==="home")return S.pal!=null?S.pal:null;if(k&&k[0]==="r"){const h=RV(+k.slice(1));return h&&h.pal!=null?h.pal:null}return null}
@@ -30,7 +35,8 @@ function residents(k){const L=[];if(k==="kn"){const q=rivals.find(v=>v.queen&&v.
  for(const p of [S].concat(rivals)){if(p!==S&&(!p.alive||p.out))continue;if(k!=="kn"&&p.queen)continue;const pk=palaceOf(p);if(pk===k&&!L.includes(p))L.push(p)}
  return L.sort((a,b)=>rkOf(b)-rkOf(a))}
 /* palaceOf: a lower consort living under the queen is in Càn Ninh */
-(function(){const p0=palaceOf;palaceOf=function(p){if(p!==S&&p&&!p.queen){const h=byKey(houseOf(p));if(h&&h!==S&&h.queen)return"kn"}return p0.apply(this,arguments)}})();
+/* (owner 11/14: nobody lives under the queen any more — palSolo; a stale link from an old save is cut in houseOf below until palFix runs) */
+(function(){const h0=houseOf;houseOf=function(p){const k=h0.apply(this,arguments);try{if(p&&k!==key(p)&&rkOf(p)<PAL_HEAD){const h=byKey(k);if(h&&palSolo(h))return key(p)}}catch(e){}return k}})();
 function houseName(p){const k=palaceOf(p);const hd=byKey(houseOf(p));return k==="home"?(p===S?palName("home"):`thiên điện ${palName("home")} (cung ngươi)`):hd===p?palName(k):`thiên điện ${palName(k)}`}
 /* places carry the plan names; one entry per house */
 (function(){const p0=places;places=function(){const L=p0.apply(this,arguments).filter(x=>!(x.k[0]==="r"));for(const x of L)if(PLNAME[x.k]){x.n=PLNAME[x.k][0];x.fn=PLNAME[x.k][1]}
@@ -81,3 +87,5 @@ function mapHTML(){const W=S.where||{};const disR=k=>S.out?"đang ở lãnh cung
  const ord=rivals.map((v,i)=>i).sort((a,b)=>ordG(rivals[a])-ordG(rivals[b])||rkOf(rivals[b])-rkOf(rivals[a]));let last=null;
  const it2=ord.map(i=>{const g=grp(rivals[i]);const x=Object.assign({},items[i]);if(g!==last){x.sep=g;last=g}return x}).concat(items.slice(n));const map=ord.concat(items.slice(n).map((_,j)=>n+j));
  return p0.call(this,key,it2,i=>mk(map[i]))}})();
+/* old saves: anyone living under the Hoàng hậu / Hoàng quý phi is moved out on load (palFix logs each move) */
+(function(){const d0=deser;deser=function(){const r=d0.apply(this,arguments);try{if(S&&rivals&&!S.dead)palFix()}catch(e){console.error("palFix load",e)}return r}})();

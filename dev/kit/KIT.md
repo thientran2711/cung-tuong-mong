@@ -479,7 +479,9 @@ ladder words from the real formulas; "có thể gặp người" → real words.
   trạng thái" + "Thu lại"); the stage never shrinks or gets covered when it opens. Collapsed by default.
 
 ## 20. TAB GROUPS + SUB-TABS (kit 2, owner 11/14: 8 bottom tabs)
-- Bar: Hành sự · Dư đồ · **Hậu cung** (Phi tần · Giao tình · Phe phái) · Cung nhân · Hoàng tự · Tư trang · Tài nghệ · **Mệnh truyện** (Mệnh truyện ·
+- **Replaced 11/15 06:00Z (owner, review/hau-cung-ui, jhc.js):** Hành sự · Dư đồ · **Hậu cung** (Hoàng thượng · Thái hậu `court` · Phi tần `rv` ·
+  Nam nhân `men` · Cung nhân `staff`) · **Giao tình** (Ân oán `rel` · Phe phái `fac`) · Hoàng tự · Tư trang · Tài nghệ · **Mệnh truyện**. See §36.
+- (old) Bar: Hành sự · Dư đồ · **Hậu cung** (Phi tần · Giao tình · Phe phái) · Cung nhân · Hoàng tự · Tư trang · Tài nghệ · **Mệnh truyện** (Mệnh truyện ·
   Việc nhờ · Sổ ghi). The game's tab keys stay (`rv rel fac story nho|quest|req log`); hidden member buttons stay in the DOM so `[data-tab="log"]`
   links keep working. Group table `KG`; a module adding a tab to a group adds its key there.
 - SUB-TABS = the ONE segmented control `.ksub > .ksubb(.on)` (sticky at the panel top); labels are read from the live tab buttons (j84 wording).
@@ -1134,7 +1136,7 @@ feet on the picture's floor line (86 % of its height), body height = KIT_FIG.h �
 name chips inside the picture's bottom edge (neighbours that touch go to a second row; never cut). No separate figure column: the story
 text runs full width under the picture, then the options. With 32.5 the picture + people + text stay fixed and only the options scroll;
 the picture is 30vh (26vh under 1000 px), compressed by kitDlgFit on short screens, and the figures are re-laid to its height.
-Without a picture band the old figure column (32.2) stays. Shots: dev/shots/book-release/dlg/s1180-*, s686-*.
+Without a picture band the person column layout 32.7 applies. Shots: dev/shots/book-release/dlg/s1180-*, s686-*.
 
 ## 34. BOOK UI · kitCurl (page curl) + kitBookSpread (two-page book) — `dev/build/jbook.js` (before j87) — KIT READY: page-curl
 Owner 11/14 (00:15Z, 00:45Z approval + later change): the UI is an open book. **iPad landscape = two-page spread**: LEFT = picture page
@@ -1226,6 +1228,14 @@ WALK RULE (owner 11/15 01:35Z, `walkOk(tc)` / `walkWhy(tc)` in j9 — one rule f
 walk anywhere whose walk cost ≤ khắc left (never walk + 1). Arriving with 0 left is allowed: the tap first shows a kit card "Đường đi N khắc
 · đến nơi là hết buổi, chỉ kịp xem ai ở đó" (Đi / Thôi, `j77LastWalk`); she sees who is there, next buổi she starts there. A label says
 "hết khắc" ONLY when 0 are left; a walk longer than what is left shows "đi N khắc" (+ lock mark; card reason "đi N khắc, còn M").
+WALK SPILL (owner 11/15 09:05Z, `walkSpill(k)` / `walkSpillGo(k)` in j9): a walk longer than the khắc left is NOT a dead end. The card
+says "Đường đi N khắc, còn M khắc: đi bây giờ thì đến nơi vào buổi chiều" and offers "Đi (đến nơi vào buổi sau)" — "Tốn: M khắc buổi
+sáng + (N−M) khắc buổi chiều · Thành: đến nơi buổi chiều, thấy ai ở đó" — plus Thôi (no separate "Đợi buổi sau" for this case). Going
+spends the M khắc left, turns the buổi (normal end-of-buổi processing: NPCs move, news cards first), then pays the rest from the new
+buổi and she arrives with 4−(N−M) khắc, seeing who is there then (1 left in the morning, Thái y viện 3 khắc → 1 + 2, arrives in the
+afternoon with 2 left). Not across the night: from buổi tối the night rule stands (no spill; "Đợi sáng mai (Qua đêm)"). If the place is
+closed in the next buổi (e.g. Thái y viện / Ngự hoa viên at night), the card says so and offers no spill. NPCs do not pay walk costs
+(placeWhere puts them per buổi), so there is nothing to change for them. Not in co-op world mode (its own buổi turns).
 
 ### 34.1c kitBookLive — the LIVE game is the open book (every tab, both roads; owner 11/15 priority)
 `kitBookLive()` runs after every render (jbook, end): `.game.kbook` (no cover board).
@@ -1385,6 +1395,26 @@ Grade colours (items, rewards): Thường `#9aa3a8`, Tinh phẩm `#5fa58c`, Trâ
 Art list (`img/kit/`): mo-tablet-back, mo-tablet-front, mo-xam-tube, mo-xam-stick, mo-seal-thanh, mo-seal-bai, mo-edict-closed, mo-edict-open, mo-leaf-dry, mo-leaf-maple, mo-petal-peach, mo-petal-plum, mo-peony, mo-ink, mo-incense, mo-calendar, mo-tray(-open), mo-chest(-open), mo-chestg(-open), mo-giftbox(-open), mo-ingot-silver, mo-ingot-gold, mo-coin-silver, mo-coin-gold, mo-wx-{hoadao,muaphun,suongsom,troiquang,nanggat,vekeu,giong,domdom,laphong,nangvang,gioheomay,trangram,tuyetnhe,tuyetday,suonggia,maino}.
 Not done here (other owners): kitRoulette (thân phận, review/kit-2b) and the honour podium (j90, section 26); the motion queue waits for them (`#kpodov`, roulette).
 
+### 32.7 ONE / TWO PEOPLE WITHOUT A SCENE PICTURE — person column LEFT, text + options RIGHT (owner 11/15 04:45Z, iPad "VIỆC · Có người đến") — `kitDpApply` / `kitDpFit` (jk4)
+Every kitEventStage dialog that names one or two people (`who`, `who2`, `stage:[a,b]`) and has NO place / event picture band — visitors
+("Có người đến"), people asking something (Thái hậu's questions, Việc khó xử), invite / choice cards with one person, two visitors:
+- LEFT column = the people FULL-BODY, the full height of the dialog (under the title to the bottom). Scale = KIT_FIG of that column
+  (woman body .79 × column height, forehead to feet via kitFigBody; men ×1.07; children by age; never shrunk to fit the text).
+  Feet on one line just above the name chips (33.5 two-line chip: rank on top, name below, rank colour). Two people stand side by side,
+  packed by their CORE with ≤ 20 % overlap (KIT 33 rule 4); outer sleeves inside; a chip that would touch its neighbour goes up one row
+  (over the hem), chips are clamped inside the column, never cut. The column is as wide as the people (or the widest chip).
+- RIGHT column: TOP = the event text (a fact row keeps its small face if it has one; the empty "world" dot is dropped);
+  BELOW = the options, one per row, full width, every line (Cần / Tốn / Được / Mất / Kèm, odds). ONLY the options list scrolls (32.5).
+- Dialog: height min(100dvh − 32 px, 720 px); width = people + ~470 px, capped to the screen; the right column keeps ≥ 280 px —
+  only if the screen is narrower than that do the people take one common factor (Fold 755 with two people still fits unshrunk).
+  No-option cards (Đã rõ) use the same layout; the button row sits under the right column.
+- Phones (< 600 px wide): people on top (row min(48dvh, 460 px), same KIT_FIG rule in that row), then the text, then the options
+  (only they scroll); the dialog fills the screen height.
+- A dialog WITH a picture band keeps 32.6 (people stand on the picture: e.g. "Nam nhân nơi cấm địa", headArt events).
+How: `.kpb` becomes display:contents so its figure column and text join #mb's grid next to `.opts` (no DOM move; kitDlgFit / kitEsFit
+still run; kitEsFit hands 32.7 columns to kitDpFit). Test: `node dev/test/dialog-person.js <site url> WxH@dpr <outdir> <tag> [kinds]`
+(kinds host, th, invite, ally2, many, men, pic). Shots before / after: dev/shots/dialog-person/ (755x1000, 1180x820, 1366x1024, 412x1058).
+
 ## 33. ONE FIGURE SCALE · KIT_FIG (owner 11/15 "người trên sân khấu quá nhỏ"; review fold-layout r3 FAIL 1366) — `dev/build/jkit.js` (top) + j59 + jk4
 
 **Single source of truth** for how big full-body people are drawn: `KIT_FIG` (jkit.js, also `window.KIT_FIG`, CSS `--kfig`).
@@ -1481,14 +1511,26 @@ Mechanics (not visual): assets.json (dev/site/assets.py) = [path, sha256/16, byt
 never wiped by a build (sw.js prunes only keys no longer in assets.json); app shell in `ctm-shell-<content hash>`; co-op worker and every
 other origin bypass the service worker.
 Tested 755x1000@2, 1180x820@2, 1366x1024@2, 686x880@2.2, 412x1058@2, 390x844@3, 1024x768@2 (dev/shots/loading/).
-### 35.2 NEW BUILD CARD · "Có bản mới" (owner 11/15: phone / home-screen app stuck on an old build) — `dev/site/swreg.js`, inlined by build_site.sh
+### 35.2 NEW BUILD · chip "Có bản mới" + reopen at a natural break (owner 11/15; 03:10Z "đang chơi thì sao") — `dev/site/swreg.js`, inlined by build_site.sh
 - sw.js is generated per build (`ctm-shell-<content hash>`); the page registers it (`updateViaCache:"none"`) and calls `registration.update()`
   on open, on every return to the foreground (visibilitychange / pageshow / focus / online) and every 20 min. New worker: skipWaiting →
-  clients.claim → `controllerchange` → card. index.html is network first (`cache:"no-cache"`), saved copy only offline / after 4 s.
-- Card `#kupd.kupd` (bottom centre, above `#tabs` and `.kloadchip`, z 9700, width ≤420 px): ONE `.dlg.kpanel[data-kind=notice]` with
-  `kpHeader("notice","Có bản mới","Cung Tường Mộng vừa có bản mới")` + `.kpnote` "Sổ đã ghi vẫn giữ nguyên. Tự mở bản mới sau N giây." +
-  one `.kbtn` "Mở bản mới". After 3 s (or the tap) the game saves and the page reopens on the new build.
-- Never during a dialog, queued notice, mini game/lesson (`S.mg`, `#ov`), motion moment, honour podium, week book or page turn: the card
-  waits; if one opens during the 3 s the card goes away and waits again. In the background with nothing open it reopens unseen.
-  On the first-entry loading screen it reopens at once (the loading resumes file by file).
-- Wording: "bản mới", "mở bản mới"; never "tải lại trang", "phiên bản", "cập nhật hệ thống" (VANPHONG §3).
+  clients.claim → `controllerchange` → the build is pending. index.html is network first (`cache:"no-cache"`). `window.CTM_BUILD` = build id.
+- RULE: a new build NEVER reloads the page in the middle of play. While playing, the only sign is the chip `#kupdchip.kchip.kupdchip`
+  "Có bản mới" (gold border, small lacquer dot) on the top bar, right of her rank / age chips (under the date when that row is full; it never
+  covers another part of the bar; hidden while any dialog is open). Tap → card `#kupd.kupd` (bottom centre above `#tabs`, z 9700, ≤420 px):
+  `.dlg.kpanel[data-kind=notice]` + `kpHeader("notice","Có bản mới","Mở bản mới ngay?")` + `.kpnote` "Sổ đang chơi giữ nguyên, mở lại đúng chỗ.
+  Để sau thì bản mới tự mở khi ngươi qua buổi." + `.kbtn.alt` "Để sau" · `.kbtn` "Mở bản mới".
+- The new build opens by itself only at a natural break: (1) after Qua buổi / Qua đêm, once the new buổi is written and its dialogs are read
+  (not after she has spent a khắc of it); (2) when the app comes back from the background after ≥ 10 min, before she does anything; (3) on the
+  title screen or the first-entry loading screen. Never during a mini game / lesson, motion moment, honour podium, week book, page turn, or a
+  death screen. Then: save() → `localStorage["ctm-upd-resume"]` {slot} → reload → the new build opens the SAME sổ through the title's own
+  "Tiếp tục" (same buổi, khắc, tab, queued dialogs) — no title screen, no Nạp sổ — and shows the line `#kupdline.kupdline` "Đã mở bản mới"
+  (top centre under the top bar, kit chip look, 4.5 s, fades).
+- Co-op (§ jcoop): never reloads while in a room unless both go. Builds are exchanged over the room's `act` relay
+  (`{t:"act",k:"ctm-upd",mode:"ver"|"have"|"ask"|"go"|"later"|"going",v}`; older clients ignore non-invite acts → no Worker change). Either
+  side finding a new build → both show the chip. Both reopen at the next buổi both have passed (the room's sync point) or together on request:
+  chip → card "Bạn chơi cùng sẽ được hỏi…" → the friend gets the card "Bạn muốn mở bản mới ngay" with "Để sau" · "Cùng mở". Before the reload
+  `COOPW.snap()` keeps the local week; after it the lobby's own "Trở lại phòng" rejoins (same code, same seat) and `COOPW.restore()` puts the week
+  back. Line meanwhile: "Hai người cùng mở bản mới, đang vào lại phòng". Two different builds never play on: `COOPW.hold` freezes Qua buổi and the
+  older side walks through the same save → reload → rejoin at once.
+- Wording: "bản mới", "mở bản mới", "Để sau", "Cùng mở"; never "tải lại trang", "phiên bản", "cập nhật" (VANPHONG §3).
