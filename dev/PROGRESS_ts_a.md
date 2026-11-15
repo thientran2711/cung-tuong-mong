@@ -166,3 +166,18 @@ Review fixes on r6:
 Tests ts-a.js at 755x1000@2, 1000x755@2, 1180x820@2, 1366x1024@2, 844x390@3: 18 steps each, 0 page errors, 0 overflow, 0 cut, 0 "???",
 0 bare "thiện cảm", 0 "quý ngươi", 0 Lui/Thôi/Đã hiểu buttons, date line 1 row, dressing tiles 0 px offset, old save loads. Grey left: Hoàng thượng
 only (kit-fig2). 390x844: portrait title screen as on main.
+Re-merged origin/main 64e91f1ae (conflicts: assemble list — jts.js before j84; jk3 K3_STATE line from main). Site rebuilt + committed.
+Tests re-run on that merge, 5 sizes: same result (18 steps each, 0 errors/overflow/cut/"???"/bare "thiện cảm"/"quý ngươi"/Lui, date 1 row,
+tiles 0 px, old save loads); grey only Hoàng thượng (kit-fig2). Top bar now 129 px Fold / 82 px landscape = main's header, not ts-a.
+
+### BOT BALANCE (r6): inpage6 sens, run_par.js 3 pages/build, seeded, main b8a58e873 vs ts-a-r6 (same main + jts)
+| build | lives | HH % | early death % | poisoned | childbirth | avg max rank | Phi+ % | years/life | kids/life |
+|---|---|---|---|---|---|---|---|---|---|
+| main | 75 | 0.0 | 60 | 34 | 9 | 4.09 | 47 | 9.8 | 0.19 |
+| ts-a | 66 | 1.5 | 44 | 23 | 5 | 3.86 | 36 | 10.5 | 0.15 |
+Owner targets HH ~32 %, early death ~40–45 %. ts-a HH is +1.5 points over main (< +5) → tsSummonGain / roll(14) NOT lowered.
+ts-a lowers early death (fewer poisonings: Nguy hiểm chung, Đóng cửa giữ mình, lì xì) to inside the owner range.
+Main itself is far from the HH target with this bot (0 %): promotion-exam gate / bot, not ts-a — for the balance owner (handover: BAL.ex.bar[2]).
+Limits: load 40–67 on 4 cores; ~25 pages per build crashed mid-life ("Target crashed", memory) and those lives are lost (long lives are
+over-represented among them, so absolute early death is biased up in BOTH builds); the target 80+ per build was not reached (75 / 66).
+Re-run: `node dev/measure/run_par.js root/dev/index-main.html sens 90 out.json inpage6.js 3 1` (index-main.html = origin/main dev/build assembled).
