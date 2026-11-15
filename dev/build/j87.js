@@ -260,7 +260,10 @@ function kbkArtLabel(src){const m=/img\/ev-([a-z-]+?)(?:-\d+)?\.webp/.exec(src||
 function kbkArt(facts,ctx){if(typeof evArtOf!=="function")return facts;let w=0;try{w=wk()}catch(e){}let prev="",prevT="";
  return (facts||[]).map((f,i)=>{if(!f||typeof f!=="object")return f;try{const t=kpPlain(f.text||"");const C=kbkCands(f,ctx,w+":"+i);
   const same=prevT&&prevT.split(/[.:·([]/)[0].trim()===t.split(/[.:·([]/)[0].trim();
-  const a=same?C[0]:(C.find(x=>x!==prev)||C[0]);if(a){f.art=a;f.artT=kbkArtLabel(a);prev=a;prevT=t}}catch(e){}return f})}
+  /* a picture MADE for this line (log rule / act name / its place) is right even if the line above has it too (same scene: "Thỉnh an Thái hậu" +
+     "được thấy mặt Thái hậu"); only general pictures (event category, act category, page default) step aside for the next candidate */
+  let own=false;try{own=!!C[0]&&(C[0]===kbkSpecific(t)||/^Đến /.test(t))}catch(e){}
+  const a=same||own?C[0]:(C.find(x=>x!==prev)||C[0]);if(a){f.art=a;f.artT=kbkArtLabel(a);prev=a;prevT=t}}catch(e){}return f})}
 
 /* ---- choice lines say WHAT and WITH WHOM (owner 11/15: "Nhịn." / "Đi." mean nothing in the books) ----
    chooseM logs "<option>." — now: a navigation-only choice (Thôi, Đi, Đợi buổi sau) logs nothing (the walk logs "Đến <nơi>." itself);

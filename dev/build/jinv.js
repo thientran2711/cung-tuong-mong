@@ -256,36 +256,43 @@ if(typeof invHTML==="function"){const inv0=invHTML;invHTML=function(){let h=inv0
    - tap a tile → it is selected and the BUY PANEL opens under the grid: the full item card (picture, Phẩm/Được/Mất/Ghi chú = kitItemRows),
      quantity row "−  [q]  +1 +2 +3 +4  Tối đa" (Tối đa = as many as she can afford, capped by stock and the bag limit per kind), live
      "Tổng: 60 bạc", then "Mua" — or the same button greyed "Thiếu bạc" (or the cap reason). Buying N pushes N items (the bag stacks them ×N).
+   - TABS (kit tab row, owner 11/15 11:00Z): "Mua" | "Bán" when spec.sell is given. Bán = her sellable goods (crafted works + sellable items) as the
+     same tiles, sell price under each, same quantity stepper + "Tổng", button "Bán"; nothing to sell → spec.sell.empty (how to get goods).
+     Doable tiles go first in both tabs. Sell data comes from econSellable(S) / econPrice(item) (economy worker, over j83 works); fallback below.
    - "Thôi" = the panel's plain small button at the bottom. Only the grid scrolls.
      kitShop({key, title, info, stage:[{__fig, __cap, __role, age}], items:[{k, src, name, grade, lux, price, unit, eff, rows, stock, have, onBuy(x,q)}],
               money:()=>n, carry:9, btn:"Thôi"})  */
 const KSHOP={reg:{}};
-function kitShopMax(o,x){const money=o.money?o.money():0;const carry=(o.carry||9)-(x.have?x.have():0);return Math.max(0,Math.min(Math.floor(money/Math.max(1,x.price)),x.stock==null?99:x.stock,carry))}
-function kitShopWhyQ(o,x,q){const money=o.money?o.money():0;if(x.why)return x.why;if((x.have?x.have():0)>=(o.carry||9))return"Rương đã đầy món này";if(x.stock!=null&&q>x.stock)return"Hết hàng";if(q*x.price>money)return"Thiếu bạc";return""}
-function kitShopPanel(o){const x=o.items[o.sel];if(!x)return"";const key=o.key||"shop";const q=Math.max(1,o.qty||1);const tot=q*x.price,why=kitShopWhyQ(o,x,q),mx=kitShopMax(o,x);
+function kitShopList(o){const L=o.mode==='sell'&&o.sell?(o.sell.items()||[]):(o.items||[]);const ok=L.filter(x=>kitShopMax(o,x)>0),no=L.filter(x=>kitShopMax(o,x)<1);return ok.concat(no)}
+function kitShopMax(o,x){if(x.sell)return x.why?0:Math.max(0,x.have?x.have():0);const money=o.money?o.money():0;const carry=(o.carry||9)-(x.have?x.have():0);return Math.max(0,Math.min(Math.floor(money/Math.max(1,x.price)),x.stock==null?99:x.stock,carry))}
+function kitShopWhyQ(o,x,q){if(x.sell)return x.why||(q>(x.have?x.have():0)?"Không đủ":"");const money=o.money?o.money():0;if(x.why)return x.why;if((x.have?x.have():0)>=(o.carry||9))return"Rương đã đầy món này";if(x.stock!=null&&q>x.stock)return"Hết hàng";if(q*x.price>money)return"Thiếu bạc";return""}
+function kitShopPanel(o){const x=(o.list||[])[o.sel];if(!x)return"";const key=o.key||"shop";const q=Math.max(1,o.qty||1);const tot=q*x.price,why=kitShopWhyQ(o,x,q),mx=kitShopMax(o,x);
  const qb=(v,l)=>`<button class="kbtn alt kshqb" data-kshop="${key}" data-kshq="${v}"${(v==="-"&&q<=1)||(v!=="-"&&mx<1)?" disabled":""}>${l}</button>`;
  return `<div class="kshbuy" aria-live="polite"><div class="kshbi">${kitItem({src:x.src512||x.src,name:"",grade:x.grade,size:"md",lux:x.lux}).replace('<span class="kitn"></span>','')}`+
   `<div class="kshbt"><b class="kshbn" style="color:${(KIT_GRADE[x.grade|0]||KIT_GRADE[0]).c}">${x.name}</b>${x.sub?`<span class="kshbs">${x.sub}</span>`:""}<div class="kinvrows">${x.rows||""}</div></div></div>`+
   `<div class="kshq"><span class="kshql">Số lượng</span>${qb("-","−")}<b class="kshqn">${q}</b>${qb(1,"+1")}${qb(2,"+2")}${qb(3,"+3")}${qb(4,"+4")}${qb("max","Tối đa")}</div>`+
-  `<div class="kshtot"><span>Tổng: <b>${tot} ${x.unit||"bạc"}</b></span><button class="kbtn kshgo" data-kshop="${key}" data-kshbuy="1"${why?" disabled":""}>${why||"Mua"}</button></div></div>`}
-function kitShopBody(o){const key=o.key||"shop";const money=o.money?o.money():0;
- const cells=(o.items||[]).map((x,i)=>{const g=KIT_GRADE[Math.max(0,Math.min(4,x.grade|0))]||KIT_GRADE[0];const no=kitShopMax(o,x)<1;
+  `<div class="kshtot"><span>Tổng: <b>${tot} ${x.unit||"bạc"}</b></span><button class="kbtn kshgo" data-kshop="${key}" data-kshbuy="1"${why?" disabled":""}>${why||(x.sell?"Bán":"Mua")}</button></div></div>`}
+function kitShopBody(o){const key=o.key||"shop";const money=o.money?o.money():0;o.list=kitShopList(o);
+ const tabs=o.sell?`<div class="pctabs kcattabs kshtabs" role="tablist">${kitTabRowHTML([{k:"buy",label:"Mua"},{k:"sell",label:"Bán"}],o.mode==="sell"?"sell":"buy",`data-kshop="${key}" data-kshtab`)}</div>`:"";
+ const cells=o.list.map((x,i)=>{const g=KIT_GRADE[Math.max(0,Math.min(4,x.grade|0))]||KIT_GRADE[0];const no=kitShopMax(o,x)<1;
   return `<div class="kshc${no?" kshno":""}${o.sel===i?" kshsel":""}" data-kshop="${key}" data-kshi="${i}" role="button" tabindex="0" aria-pressed="${o.sel===i}">${kitItem({src:x.src,name:x.name,grade:x.grade,lux:x.lux,size:"slot",tip:`${x.name} · chạm để chọn`})}`+
-   `<span class="kshn" style="color:${g.c}">${x.name}</span>${x.eff?`<span class="kshe">${x.eff}</span>`:""}<span class="kshp">${x.price} ${x.unit||"bạc"}</span></div>`}).join("");
- return `<div class="kshop${o.sel!=null?" kshop-sel":""}" data-kshop="${key}"><div class="kshl">${o.info||""}<span class="kshm">Ngươi có <b>${money}</b> ${o.unit||"bạc"}</span></div>`+
-  `<div class="kshg">${cells}</div>${o.sel!=null?kitShopPanel(o):""}</div>`}
-function kitShop(o){o=o||{};const key=o.key||"shop";o.sel=null;o.qty=1;KSHOP.reg[key]=o;
+   `<span class="kshn" style="color:${g.c}">${x.name}</span>${x.eff?`<span class="kshe">${x.eff}</span>`:""}<span class="kshp">${x.sell?"bán ":""}${x.price} ${x.unit||"bạc"}${x.sell&&x.have?` · có ${x.have()}`:""}</span></div>`}).join("");
+ const empty=o.mode==="sell"&&!o.list.length?`<p class="past kshempty">${(o.sell&&o.sell.empty)||"Chưa có gì để bán."}</p>`:"";
+ return `<div class="kshop${o.sel!=null?" kshop-sel":""}" data-kshop="${key}"><div class="kshl">${o.info||""}<span class="kshm">Ngươi có <b>${money}</b> ${o.unit||"bạc"}</span></div>${tabs}`+
+  (empty||`<div class="kshg">${cells}</div>${o.sel!=null&&o.list[o.sel]?kitShopPanel(o):""}`)+`</div>`}
+function kitShop(o){o=o||{};const key=o.key||"shop";o.sel=null;o.qty=1;o.mode="buy";KSHOP.reg[key]=o;
  return kitModal({kind:"info",title:o.title||"Mua đồ",html:kitShopBody(o),btn:o.btn||"Thôi",shop:key,stage:o.stage,onClose:o.onClose})}
 function kitShopRefresh(key){const o=KSHOP.reg[key];if(!o)return;const html=kitShopBody(o);
  try{for(const m of Q)if(m&&m.kit&&m.kit.shop===key)m.kit.html=html}catch(e){}
  const el=document.querySelector(`.kshop[data-kshop="${key}"]`);if(!el)return;const g=el.querySelector(".kshg"),st=g?g.scrollTop:0;el.outerHTML=html;
  const g2=document.querySelector(`.kshop[data-kshop="${key}"] .kshg`);if(g2)g2.scrollTop=st}
-document.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest("[data-kshi],[data-kshq],[data-kshbuy]");if(!t)return;
+document.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest("[data-kshi],[data-kshq],[data-kshbuy],[data-kshtab]");if(!t)return;
  e.stopPropagation();const o=KSHOP.reg[t.dataset.kshop];if(!o)return;const key=o.key||"shop";
+ if(t.dataset.kshtab!=null){o.mode=t.dataset.kshtab;o.sel=null;o.qty=1;kitShopRefresh(key);return}
  if(t.dataset.kshi!=null){o.sel=+t.dataset.kshi;o.qty=1;kitShopRefresh(key);try{const p=document.querySelector(`.kshop[data-kshop="${key}"] .kshbuy`);p&&p.scrollIntoView({block:"nearest"})}catch(err){}return}
- const x=o.items[o.sel];if(!x||t.disabled)return;
+ const x=(o.list||[])[o.sel];if(!x||t.disabled)return;
  if(t.dataset.kshq!=null){const v=t.dataset.kshq,mx=Math.max(1,kitShopMax(o,x));o.qty=v==="-"?Math.max(1,(o.qty||1)-1):v==="max"?mx:Math.max(1,Math.min(mx,(o.qty||1)+(+v)));kitShopRefresh(key);return}
- if(t.dataset.kshbuy!=null){const q=Math.max(1,o.qty||1);if(kitShopWhyQ(o,x,q))return;try{x.onBuy&&x.onBuy(x,q)}catch(err){console.error(err)}if(x.stock!=null)x.stock-=q;o.qty=1;kitShopRefresh(key);try{render()}catch(err){}}},true);
+ if(t.dataset.kshbuy!=null){const q=Math.max(1,o.qty||1);if(kitShopWhyQ(o,x,q))return;try{x.onBuy&&x.onBuy(x,q)}catch(err){console.error(err)}if(x.stock!=null&&!x.sell)x.stock-=q;o.qty=1;if(x.sell&&kitShopMax(o,x)<1)o.sel=null;else{const k=x.k;o.list=kitShopList(o);const j=o.list.findIndex(y=>y.k===k);o.sel=j<0?null:j}kitShopRefresh(key);try{render()}catch(err){}}},true);
 document.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.target.dataset&&e.target.dataset.kshi!=null){e.preventDefault();e.target.click()}});
 /* the seller on the stage: a pseudo person {__fig, __cap} → kitFigOf / kitName use them as is */
 (function(){if(typeof kitFigOf==="function"){const f0=kitFigOf;kitFigOf=function(p){if(p&&p.__fig)return p.__fig;return f0.apply(this,arguments)};window.kitFigOf=kitFigOf}
@@ -316,6 +323,8 @@ document.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.tar
 .kshn{font-weight:700;font-size:.8rem;line-height:1.2;overflow-wrap:anywhere}
 .kshe{font-size:.72rem;line-height:1.2;color:var(--ink2,#6a5040);overflow-wrap:anywhere}
 .kshp{font-size:.8rem;font-weight:600;color:var(--ink,#3a2418)}
+.kshtabs{margin:0}
+.kshempty{margin:6px 0;padding:10px;border:1px dashed var(--k-hair,#e6d3ac);border-radius:10px}
 .kshbuy{display:flex;flex-direction:column;gap:8px;padding:10px;border:1px solid var(--gold,#c9a46a);border-radius:10px;background:var(--k-card,#fffaf0);box-shadow:0 0 0 3px #f6ead6}
 .kshbi{display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px;align-items:start}
 .kshbt{display:flex;flex-direction:column;gap:2px;min-width:0}
@@ -342,6 +351,29 @@ function kitShopEff(k){const it=IT[k];if(!it)return"";if(it.dr)return `may áo: 
  if(it.sl&&it.w){const v={hair:"cài tóc",wrist:"đeo tay",waist:"đeo eo",scent:"đeo"}[it.sl]||"đeo";return `${v}: ${kinvPlain(it.w)}`}
  if(it.use){const u=kinvPlain(it.use);if(u)return `dùng: ${u}`}if(it.anti)return"giải độc một lần";if(it.ant)return"an thai";if(it.fert)return `${it.fert} tháng dễ thụ thai`;
  if(it.w){const u=kinvPlain(it.w);if(u)return u}if(it.gv)return"đem tặng: hợp ý";return String(it.d||"").split(/[.;]/)[0].slice(0,40)}
+/* sell data (coordinator 11/15): the economy worker exposes econSellable(S) / econPrice(item) over j83's handmade works (IT.tp entries {k:"tp",
+   wk:{n,kind,ti…}}, wkName, wkSellVal, wkSell) on review/balance-unified. The shop calls THEM when they exist; until they land, kitShopSellable /
+   kitShopPrice below do the same from the inventory: each handmade work is its own tile (wk.n, wkSellVal, sold by wkSell = j83's odds), plus
+   ordinary items with a price (half price, j8 sellItem). Group shape: {k, key, name, ix:[inventory indexes], n, crafted, src?, sell?:fn}. */
+function kitShopSellable(p){const g={};(p.inv||[]).forEach((e,i)=>{if(!e||e.h||e.w)return;
+ if(e.wk){const key="wk:"+e.wk.n;(g[key]=g[key]||{k:e.k,key,name:e.wk.n,wk:e.wk,crafted:true,ix:[],n:0}).ix.push(i);g[key].n++;return}
+ const it=IT[e.k];if(!it||it.keep||!(it.pr>0))return;const key="it:"+e.k;(g[key]=g[key]||{k:e.k,key,name:it.n,ix:[],n:0}).ix.push(i);g[key].n++});return Object.values(g)}
+function kitShopPrice(x){if(x&&x.wk&&typeof wkSellVal==="function")return wkSellVal(x.wk);const it=x&&IT[x.k];return it?Math.floor((it.pr||0)/2):0}
+/* review/econ (jecon.js): econSellable(p) → one entry per bag index {ix,k,name,grade,src,price,via:"noivu"|"agent",risk,no}; the Nội vụ phủ tab
+   shows the legal ones (via "noivu", 70 % price, no risk) grouped by k+name so equal goods stack; selling one = econSellUI(ix) (her sale),
+   else econSell(S,ix). "no" = why it can't be sold now (shown on the greyed button). */
+function kitShopSellList(){try{if(typeof econSellable==="function"){const g={};
+  for(const x of (econSellable(S)||[])){if(!x||(x.via&&x.via!=="noivu"))continue;const key="e:"+x.k+"|"+(x.name||"");
+   const G=g[key]=g[key]||{k:x.k,key,name:x.name,grade:x.grade,src:x.src,price:x.price,no:x.no||"",crafted:x.k==="tp",ix:[],n:0};G.ix.push(x.ix);G.n++}
+  return Object.values(g).map(G=>Object.assign(G,{sell:()=>{const ix=G.ix[G.ix.length-1];if(typeof econSellUI==="function")return econSellUI(ix);if(typeof econSell==="function")return econSell(S,ix)}}))}}
+ catch(e){console.error("econSellable",e)}return kitShopSellable(S)}
+function kitShopSellPrice(x){if(x&&x.price!=null)return x.price;try{if(typeof econPrice==="function"&&x&&x.ix&&x.ix.length){const v=econPrice(S,S.inv[x.ix[0]]);if(v!=null)return v}}catch(e){}return kitShopPrice(x)}
+function kitShopSellItems(){return (kitShopSellList()||[]).map(g=>{const k=g.k,it=IT[k]||{n:g.name||k};const a=typeof itemArt==="function"?itemArt(k):null;const nm=g.name||it.n;
+ return{k:g.key,sell:true,src:g.src||kitItemSrc(k,""),src512:a&&a.src512||"",name:nm,sub:g.crafted?"Tác phẩm tự tay":`${it.kd||""}${it.kd?" · ":""}${KIT_GRADE[a?a.grade|0:0].n}`,grade:g.grade!=null?g.grade|0:(a?a.grade|0:0),lux:0,price:kitShopSellPrice(g),why:g.no||"",
+  eff:g.crafted?"tự tay làm":kitShopEff(k),rows:!g.crafted&&IT[k]?kitItemRows(k):"",have:()=>((kitShopSellList()||[]).find(y=>y.key===g.key)||{n:0}).n,
+  onBuy:(x,q)=>{let got=0,n=0;for(let i=0;i<q;i++){const cur=(kitShopSellList()||[]).find(y=>y.key===g.key);if(!cur||!(cur.n>0))break;const b0=S.bac;
+    if(typeof cur.sell==="function")cur.sell();else{const ix=cur.ix[cur.ix.length-1];if(cur.wk&&typeof wkSell==="function"){const r=wkSell(S,ix);if(r)log(r)}else sellItem(S,ix)}got+=S.bac-b0;n++}
+   if(!g.crafted)log(`Bán ${nm}${n>1?` ×${n}`:""}. Bạc +${got}`)}}})}
 function kitShopNvp(){const c=S.court&&S.court.ped;const nm=c&&c.name?c.name:"";
  const items=(S.shop||[]).filter((k,i,a)=>IT[k]&&a.indexOf(k)===i).map(k=>{const it=IT[k];const a=typeof itemArt==="function"?itemArt(k):null;
   return{k,src:kitItemSrc(k,""),src512:a&&a.src512||"",name:it.n,sub:`${it.kd} · ${KIT_GRADE[a?a.grade|0:0].n}`,grade:a?a.grade|0:0,lux:it.sl||it.dr?luxVal(k):0,price:it.pr||0,
@@ -349,5 +381,6 @@ function kitShopNvp(){const c=S.court&&S.court.ped;const nm=c&&c.name?c.name:"";
    onBuy:(x,q)=>{apply({bac:-x.price*q});for(let i=0;i<q;i++)S.inv.push({k});log(`Mua ${it.n}${q>1?` ×${q}`:""}. Bạc -${x.price*q}`)}}});
  return kitShop({key:"nvp",title:"Nhờ thái giám mua đồ",carry:9,
   info:`<p>Thái giám Nội vụ phủ bưng vào một khay đồ mua từ ngoài cung, dâng lên cho nương nương chọn: “Đồ mới mang vào, xin nương nương xem qua.”</p>`,
-  stage:[{__fig:"img/fig-eunuch-ndp-tray.webp",__cap:nm,__role:"Thái giám Nội vụ phủ",age:28,sex:"m"}],items,money:()=>S.bac})}
+  stage:[{__fig:"img/fig-eunuch-ndp-tray.webp",__cap:nm,__role:"Thái giám Nội vụ phủ",age:28,sex:"m"}],items,money:()=>S.bac,
+  sell:{items:kitShopSellItems,empty:"Chưa có gì để bán. Đồ thêu, tranh, chữ… làm ra khi luyện tài nghệ (tab Tài nghệ); đồ trong rương Tư trang cũng bán được."}})}
 if(typeof invAct==="function"){const ia0=invAct;invAct=function(a){if(a==="shop"&&S&&!S.dead&&!Q.length&&typeof kitShop==="function"){try{kitShopNvp();render();return}catch(e){console.error("kitShop",e)}}return ia0.apply(this,arguments)}}

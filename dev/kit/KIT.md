@@ -787,6 +787,13 @@ Tap a tile → selected (red ring) and the BUY PANEL opens under the grid: item 
 Ghi chú incl. Xa xỉ); quantity row "Số lượng − [q] +1 +2 +3 +4 Tối đa" (Tối đa = as many as she can afford, capped by `stock` and the bag limit
 `carry` per kind minus what she has); live "Tổng: 60 bạc"; one "Mua" `.kbtn` — or the same button greyed "Thiếu bạc" / "Hết hàng" /
 "Rương đã đầy món này". Buying q pushes q items (the bag stacks them ×q), the shop stays open (tiles, money, panel refresh).
+TABS (owner 11/15 11:00Z): with `sell:{items:()=>[…], empty:"…"}` the card gets the kit tab row "Mua" | "Bán" (kitTabRowHTML, `.pctabs.kcattabs`).
+Bán = her sellable goods as the same tiles ("bán 15 bạc · có 2" under each), same quantity stepper + "Tổng", button "Bán"; nothing to sell →
+the `empty` line (Nội vụ phủ: how to get goods — luyện tài nghệ, tab Tài nghệ). Doable tiles first in both tabs. Sell data: review/econ jecon.js
+`econSellable(p)` → one entry per bag index `{ix,k,name,grade,src,price,via:"noivu"|"agent",risk,no}`; the Nội vụ phủ tab shows via "noivu"
+(legal, 70 % price, no risk), grouped by k+name (equal goods stack, "có N"), `no` greys the tile with its reason; one sale = `econSellUI(ix)`
+(else `econSell(S,ix)`); price = entry.price (else `econPrice(S, inv)`). The risky "Bán ra ngoài cung" stays j83 wkSell (not in this shop). Until they exist jinv's fallback (`kitShopSellable` / `kitShopPrice`) does the same from the bag: each handmade
+work its own tile (wk.n, wkSellVal, sold by wkSell with j83's odds) + items with a price (half price, j8 sellItem). Nothing else changes when they land.
 "Thôi" = the panel's plain small button at the bottom. Panel width 760 px (980 px ≥ 1000 px wide); tiles ≥ 96 px (108 px on iPad, 88 px phone).
 Used by: Nội vụ phủ "Nhờ thái giám mua đồ" (`kitShopNvp`, seller `img/fig-eunuch-ndp-tray.webp` = Nội vụ phủ eunuch holding a tray, stock 5, carry 9).
 Next buying screens (Tư trang buy, gifts, peddler) must call kitShop, not dialog option cards. Test: `node dev/test/shop-grid.js <url> <out> [sizes]`.

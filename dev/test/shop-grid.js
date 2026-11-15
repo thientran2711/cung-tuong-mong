@@ -24,6 +24,10 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
     fig:fig?fig.getAttribute('src').replace(/^.*img\//,''):'',figLeft:fr?Math.round(fr.left)<Math.round(gr.left):null,figAbove:fr?fr.bottom<=gr.top+2:null,band:!!M.querySelector('.kesband,.kdlgart'),
     scrollers:[...M.querySelectorAll('*')].filter(e=>e.scrollHeight>e.clientHeight+2&&/(auto|scroll)/.test(getComputedStyle(e).overflowY)).map(e=>e.className.split(' ')[0]),
     overflowX:document.documentElement.scrollWidth>innerWidth}});
+  /* Bán tab with nothing to sell: the hint line */
+  const empty=await p.evaluate(async()=>{const W=t=>new Promise(r=>setTimeout(r,t));const t=document.querySelector('#modal [data-kshtab="sell"]');if(!t)return'no tab';t.click();await W(400);
+   const e=document.querySelector('#modal .kshempty');const r=e?e.innerText:'(tiles '+document.querySelectorAll('#modal .kshc').length+')';document.querySelector('#modal [data-kshtab="buy"]').click();await W(300);return r});
+  await sleep(300);
   /* select an affordable tile, Tối đa */
   const sel=await p.evaluate(async()=>{const W=t=>new Promise(r=>setTimeout(r,t));const c=document.querySelector('#modal .kshc:not(.kshno)');if(!c)return'none';c.click();await W(400);
    const q1=document.querySelector('#modal .kshtot').innerText.replace(/\s+/g,' ');document.querySelector('#modal [data-kshq="max"]').click();await W(400);
@@ -33,5 +37,11 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
    const k=S.inv.length?S.inv[S.inv.length-1].k:'';const grp=(typeof kinvItems==='function'?kinvItems():[]).find(x=>x.name===IT[k].n);
    return{bac:[b0,S.bac],inv:[n0,S.inv.length],stack:grp?grp.qty:null,open:!!document.querySelector('#modal .kshop'),log:kpPlain(S.logs[0]),btnAfter:(document.querySelector('#modal [data-kshbuy]')||{}).textContent}});
   await sleep(500);await p.screenshot({path:`${OUT}/shop-${tag}-after.jpg`,type:'jpeg',quality:82});
-  R.push({sz,m1,sel,buy,errs});await ctx.close()}
+  /* Bán: the bought item is sellable now; sell 1 */
+  const sell=await p.evaluate(async()=>{const W=t=>new Promise(r=>setTimeout(r,t));document.querySelector('#modal [data-kshtab="sell"]').click();await W(400);
+   const c=document.querySelector('#modal .kshc');if(!c)return'no tile';const tile=c.innerText.replace(/\s+/g,' ');c.click();await W(400);
+   const b0=S.bac,n0=S.inv.length;const btn=document.querySelector('#modal [data-kshbuy]');const lab=btn.textContent;btn.click();await W(500);
+   return{tile,lab,bac:[b0,S.bac],inv:[n0,S.inv.length],log:kpPlain(S.logs[0])}});
+  await sleep(400);await p.screenshot({path:`${OUT}/shop-${tag}-sell.jpg`,type:'jpeg',quality:82});
+  R.push({sz,m1,empty,sel,buy,sell,errs});await ctx.close()}
  console.log(JSON.stringify(R,null,1));await b.close()})();
