@@ -24,7 +24,7 @@ const sleep=ms=>new Promise(r=>setTimeout(r,ms));
    const cut=[];root.forEach(r=>r.querySelectorAll('*').forEach(e=>{if(!e.offsetParent||e.children.length||!e.textContent.trim())return;const cs=getComputedStyle(e);
     if(e.scrollWidth>e.clientWidth+2&&['hidden','clip'].includes(cs.overflowX)&&cs.textOverflow!=='ellipsis')cut.push(e.className+':'+e.textContent.slice(0,30))}));
    const txt=root.map(r=>r.offsetParent||r.id==='panel'?r.innerText:'').join('\n');
-   return{ovf:document.documentElement.scrollWidth>innerWidth+1,cut:cut.slice(0,5),bad:(txt.match(/\?\?\?|undefined|NaN|\[object/)||[''])[0]}});
+   return{ovf:document.documentElement.scrollWidth>innerWidth+1,cut:cut.slice(0,5),bad:(()=>{const m=txt.match(/\?\?\?|undefined|NaN|\[object/);return m?txt.slice(Math.max(0,m.index-60),m.index+12).replace(/\s+/g,' '):''})()}});
   const skipOverlays=async()=>{for(let i=0;i<6;i++){const n=await p.evaluate(()=>{const k=document.getElementById('kload');if(k){k.remove();return 1}const o=document.getElementById('kroul');
     if(o&&o.isConnected){const b=[...o.querySelectorAll('button')].find(x=>/Bỏ qua/.test(x.textContent));if(b){b.click();return 1}}return 0});if(!n)break;await sleep(700)}};
   await p.goto(URL,{waitUntil:'domcontentloaded'});await sleep(2500);await p.evaluate(()=>{try{localStorage.clear()}catch(e){}});await p.reload({waitUntil:'domcontentloaded'});await sleep(3000);
@@ -35,6 +35,7 @@ const sleep=ms=>new Promise(r=>setTimeout(r,ms));
   R.card=await p.evaluate(()=>({path:!!document.querySelector('#modal [data-kcp="nha"]'),opts:[...document.querySelectorAll('#modal [data-kcp]')].map(b=>b.dataset.kcp)}));
   if(!R.card.path)F('identity card has no "Ở nhà chờ tuyển tú" option');
   await p.evaluate(()=>{const b=document.querySelector('#modal [data-kcp="nha"]');b.scrollIntoView({block:'center'});b.click()});await sleep(700);
+  for(let i=0;i<40&&await p.evaluate(()=>!!document.getElementById('kroul'));i++)await sleep(500);/* the roulette waits for its pictures */
   R.picked=await p.evaluate(()=>S.kcPick);await shot('0-card',true);R.m0=await meas();
   await p.evaluate(()=>{const b=document.querySelector('#modal button[data-nl="ok"]');b.scrollIntoView({block:'center'});b.click()});await sleep(1200);
   R.home=await p.evaluate(()=>({isKc:isKc(),age:S.age,rank:S.rank,place:S.place,fam:S.kc&&S.kc.fam.map(m=>m.t),Q:Q.map(m=>m.t),fig:figFor(S),tabs:[...document.querySelectorAll('#tabs button')].filter(b=>b.offsetParent).map(b=>b.textContent.trim())}));
@@ -67,6 +68,8 @@ const sleep=ms=>new Promise(r=>setTimeout(r,ms));
   else{if(R.pal.isKc||!R.pal.inPal)F('did not enter the palace');if(!(R.pal.rank>=0&&R.pal.rank<=2))F('entry rank '+R.pal.rank);if(!R.pal.inCons)F('not in consorts()');
    if(/-(kc|ngheo)-a18/.test(R.pal.fig||''))F('home dress in the palace');if(R.pal.danh>30)F('Danh carry-over '+R.pal.danh);if(R.pal.bac>400+200)F('Bạc carry-over '+R.pal.bac);
    if(!R.pal.tabs.some(t=>/Hậu cung/.test(t)))F('palace tabs not back: '+R.pal.tabs);
+   for(let i=0;i<4;i++){if(!await p.evaluate(()=>document.body.classList.contains('kbk-open')))break;await p.keyboard.press('Escape');await sleep(600)}/* Tuần lục of the first palace week */
+   await p.evaluate(()=>{tab='act';render()});await sleep(1500);
    await shot('4-palace',true);R.m4=await meas();
    for(let i=0;i<4;i++){await p.evaluate(()=>{for(let k=0;k<20&&Q.length;k++){const m=Q[0];if(m.opts&&m.opts.length)chooseM(0);else closeModal()}try{nextBuoi()}catch(e){}});await sleep(300)}
    R.reload=await p.evaluate(()=>{for(let k=0;k<20&&Q.length;k++){const m=Q[0];if(m.opts&&m.opts.length)chooseM(0);else closeModal()}save();const s=SLOT;const n=S.name;deser(loadSlot(s));render();return{same:S.name===n,isKc:isKc(),inPal:!!(S.kc&&S.kc.inPal),rank:S.rank}});

@@ -263,7 +263,9 @@ function kcSuitor(){const L=[["Thế tử hầu phủ","hau",80],["con trai Thư
  const f=L.filter(x=>x[2]<=S.kgt+35+R(20));const s=pick(f.length?f:L.slice(-2));return{n:s[0],k:s[1],q:s[2]}}
 
 /* ---------- events (PEND; options show only costs; results show the numbers) ---------- */
-function kcO(n,cost,go,more){const c=cost||{};const s=fmt(c);return Object.assign({n,fx:c,x:"",j67:s?"tốn: "+s:"tốn: không",go},more||{})}
+function kcO(n,cost,go,more){const c=cost||{};const s=fmt(c);/* r2: go is wrapped so the kit's source reader (j79 kitBranchFx) never shows an outcome
+   branch hidden in the closure as a sure "Tốn"; the real cost is fx, the outcome is told by the option's own hint (KCH) */
+ const g=function(){return go.apply(this,arguments)};return Object.assign({n,fx:c,x:"",j67:s?"tốn: "+s:"tốn: không",go:g},more||{})}
 function kcRes(t,b,txt){if(txt)log(txt);kcFix();try{resultShow(t,b,true)}catch(e){}}
 function kcDo(t,f){const b=rsnap();const r=f();kcRes(t,b,r)}
 const KCO={tt:{t:"Quân cờ đầu tiên"},dtq:{t:"Tin dữ Nhạn Môn"},muoi:{t:"Sổ muối"},thd:{t:"Tài nữ kinh thành"},ch:{t:"Thư của cô tổ"},td:{t:"Đêm trước tịch biên"}};
@@ -651,3 +653,5 @@ const KCO_H=[["cha hài lòng, thế lực nhà thêm chút ít","an toàn"],["c
 /* her own family is never a stranger (j61 name / face rule): the plaques, cards and event figures show their faces and names */
 (function(){const w=n=>{const f0=window[n];if(typeof f0!=="function")return;window[n]=function(p){try{const e=p&&(p.__kp||p.ref||p);if(kcIsFam(e))return true}catch(x){}return f0.apply(this,arguments)}};w("kitKnown");w("kitKnownName")})();
 (function(){if(typeof k61St!=="function")return;const s0=k61St;k61St=function(e){if(kcIsFam(e))return 3;return s0.apply(this,arguments)}})();
+/* in the palace the home numbers (Gia thanh, Áp lực hôn sự, Hồi môn, Lời đồn) are history: never a delta on a palace result card */
+(function(){const r0=resultShow;resultShow=function(t,b){try{if(b&&S&&S.kc&&!isKc())for(const k of ["kgt","kap","khm","kld"])b[k]=S[k]||0}catch(e){}return r0.apply(this,arguments)}})();
