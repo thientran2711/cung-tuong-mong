@@ -196,22 +196,77 @@ kitFigRects=function(){const st=$("stage");if(!st)return[];const out=[];st.query
    Use (data only): a Q / kitModal item with `hideOut:true` (every option) or an option with `hideOut:true`; any priced button may also carry
    `data-khide="1"`. An option with no such cost reads "Tốn: không". ---------- */
 const KIT_COSTRE=/khắc|\bSức\b|\bBạc\b|\bbạc\b/i;
+/* ---------- 6b. THE WORD HINT + RISK TAG on a hidden-outcome option (owner 11/15, KIT 28.6) ----------
+   Read from the option's OWN outcome rows (built by kaNorm1 from its real x / j67 text: the current odds and people of THIS moment) just
+   before they are hidden — so the hint is true for the current context and never a number. Clarity by her Tâm cơ / Tai mắt (BAL.hint*):
+   vague (only "có lợi về …" + "có cái giá"), plain (what changes), sharp (who reacts: Thái hậu, Hoàng hậu, the rival by name, Hoàng thượng).
+   Risk tag from the option's own odds word: none → "an toàn"; Liều / Khó → "liều"; any other ladder word → "có rủi ro".
+   An option may carry its own `hint` (string, or fn(level) → string) and `risk` ("an toàn" | "có rủi ro" | "liều"). */
+const KIT_HINT_LADDER=/(Liều|Khó|Năm ăn năm thua|Khá chắc|Rất chắc|Nắm chắc|Chắc)/;
+function kitHintLevel(){try{const t=S.tamco||0,m=S.mat||0;const B=typeof BAL==="object"?BAL:{};if(t>=(B.hintSharp||45)||m>=(B.hintMat||3))return 2;if(t>=(B.hintMid||25))return 1}catch(e){}return 0}
+/* one outcome phrase (numbers stripped) → [area, plain words, sharp words, sign] */
+function kitHintPhrase(t,sign){t=String(t||"").replace(/\s+/g," ").trim();if(!t)return null;const up=sign>0;const nm=(t.match(/^([^:]+?)\s+(?:Sủng|Danh|bớt|ghen|oán|quý)/)||[])[1]||"";
+ const L=[[/Thái hậu/i,"lòng người trên",up?"người trên hài lòng":"người trên phật ý",up?"Thái hậu hài lòng":"Thái hậu để bụng"],
+  [/Hoàng hậu/i,"lòng người trên",up?"người trên hài lòng":"người trên phật ý",up?"Hoàng hậu hài lòng":"Hoàng hậu sẽ để bụng"],
+  [/(^|\s)(nàng|hắn) Sủng|Sủng của|bớt sủng/i,"thế đối thủ",up?"đối thủ thất thế":"đối thủ được lợi",up?(nm&&!/^(nàng|hắn)$/.test(nm)?`${nm} thất thế`:"đối thủ thất thế"):"đối thủ được lợi"],
+  [/ghen|oán|ghét/i,"lòng người",up?"dễ kết oán":"nguôi giận",up?(nm?`${nm} sẽ thù`:"có kẻ sẽ thù"):(nm?`${nm} nguôi giận`:"có kẻ nguôi giận")],
+  [/quý ngươi|quý ta|thiện cảm|thân/i,"lòng người",up?"được lòng người":"mất lòng người",up?(nm?`${nm} ưa ngươi hơn`:"người ấy ưa ngươi hơn"):(nm?`${nm} không ưa ngươi`:"người ấy không ưa ngươi")],
+  [/chứng cứ/i,"thế mưu",up?"nắm thêm thóp":"lộ sơ hở",up?"nắm thêm thóp kẻ khác":"để lộ sơ hở"],
+  [/nghi|đa nghi|giận|quở|trách|phạt|giáng|cấm túc/i,"thánh ý",up?"được tin":"có thể bị nghi, bị phạt",up?"Hoàng thượng thêm tin":"Hoàng thượng có thể sinh nghi, trách phạt"],
+  [/thương con|hoàng tử|công chúa|\bcon\b/i,"phúc con cái",up?"con được thương":"con thiệt",up?"Hoàng thượng thương con hơn":"con bị lạnh nhạt"],
+  [/Ân tình/i,"tình nghĩa",up?"thêm tình nghĩa":"sứt mẻ tình nghĩa",up?"thêm tình nghĩa với Hoàng thượng":"sứt mẻ tình nghĩa với Hoàng thượng"],
+  [/Sủng|được ưa|thị tẩm/i,"ân sủng",up?"được để mắt":"bị lạt lẽo",up?"Hoàng thượng để mắt hơn":"Hoàng thượng lạt lẽo đi"],
+  [/Danh/i,"thể diện",up?"thêm thể diện":"mất thể diện",up?"thêm thể diện trong cung":"mất thể diện trước lục cung"],
+  [/Đức/i,"tiếng tốt",up?"được tiếng hiền":"mang tiếng ác",up?"được tiếng hiền đức":"mang tiếng thất đức"],
+  [/Bạc|lì xì/i,"tiền bạc",up?"có thêm bạc":"hao bạc",up?"có thêm bạc":"hao bạc"],
+  [/Sức|nghỉ/i,"sức khỏe",up?"dưỡng sức":"hao sức",up?"dưỡng sức":"hao sức"],
+  [/Sắc|Tài|Tâm cơ|Tai mắt|tài nghệ/i,"bản thân",up?"bản thân khá lên":"bản thân sút đi",up?"bản thân khá lên":"bản thân sút đi"],
+  [/Thái y|thuốc|bệnh|ốm|thai/i,"thân thể",up?"thân thể được giữ":"thân thể bị hại",up?"thân thể được giữ":"thân thể bị hại"]];
+ for(const [re,area,p1,p2] of L)if(re.test(t))return[area,p1,p2,sign];return["chuyện khác",up?"có lợi":"có hại",up?"có lợi":"có hại",sign]}
+function kitHintText(gain,loss,lv){const uniq=a=>[...new Set(a.filter(Boolean))];
+ if(lv===0){const ga=uniq(gain.map(x=>x[0])).slice(0,2),la=loss.length;
+  return (ga.length?`có lợi về ${ga.join(", ")}`:"chẳng được gì rõ")+(la?", nhưng có cái giá":"")}
+ const pick=x=>x[lv===2?2:1];const g=uniq(gain.map(pick)).slice(0,2),l=uniq(loss.map(pick)).slice(0,2);
+ return (g.length?g.join(", "):"không được gì rõ")+(l.length?`; nhưng ${l.join(", ")}`:"")}
+function kitHintOf(b,o){const rows={};b.querySelectorAll(".kb .kr").forEach(r=>{const l=((r.querySelector(".krl")||{}).textContent||"").trim();const v=r.querySelector(".krv");if(!v)return;
+  const parts=[...v.querySelectorAll(".ef, .kitem")].map(e=>e.textContent.trim()).filter(Boolean);(rows[l]=rows[l]||[]).push(...(parts.length?parts:[v.textContent.trim()]))});
+ const odText=((b.querySelector(":scope > .kat > .kodds")||{}).textContent||"")+" "+String(o&&o.x||"")+" "+String(o&&o.j67||"");
+ const od=(odText.match(KIT_HINT_LADDER)||[])[1]||"";const canFail=!!od||!!(rows["Mất"]&&/hỏng|không thành/i.test(String(o&&o.x||"")));
+ const risk=o&&o.risk?o.risk:!canFail?"an toàn":/^(Liều|Khó)$/.test(od)?"liều":"có rủi ro";
+ const lv=kitHintLevel();let hint="";
+ if(o&&o.hint)hint=typeof o.hint==="function"?o.hint(lv):String(o.hint);
+ else{const sg=s=>/(^|\s)[−-]\d|\bbớt\b|giảm/.test(s)?-1:1;
+  const gain=[],loss=[];(rows["Được"]||[]).concat(rows["Thành"]||[]).forEach(t=>{const s=sg(t);const p=kitHintPhrase(t,s);if(!p)return;/* a loss of someone else listed as her gain ("nàng Sủng -10") reads as the rival's fall */
+   if(/(^|\s)(nàng|hắn) |của /i.test(t)&&s<0)gain.push(kitHintPhrase(t,1));else(s>0?gain:loss).push(p)});
+  (rows["Mất"]||[]).concat(rows["Hỏng"]||[],rows["Kèm"]||[]).forEach(t=>{if(/không mất gì|không tốn gì/i.test(t))return;const s=sg(t);const up=/ghen|oán|ghét/i.test(t)?1:-1;
+   const p=kitHintPhrase(t,/ghen|oán|ghét/i.test(t)?(s>0?1:-1):(s>0&&!/(^|\s)[−-]\d/.test(t)&&!/nghi|phạt|trách|giận|quở/i.test(t)?-1:-1));if(p)loss.push(p);void up});
+  hint=kitHintText(gain,loss,lv)}
+ return{hint,risk}}
 function kitHideOut(b){try{if(!b||!b.classList.contains("ka")||b.dataset.khid==="1")return;b.dataset.khid="1";b.classList.add("khideout");
+ /* the hint + risk tag, read from the outcome rows before they go */
+ let H=null;try{const M=b.closest("#modal");const o=M&&typeof Q!=="undefined"&&Q[0]&&Q[0].opts&&b.dataset.m!=null?Q[0].opts[+b.dataset.m]:null;H=kitHintOf(b,o)}catch(e){console.error("kitHint",e)}
  const od=b.querySelector(":scope > .kat > .kodds");if(od&&b.dataset.kodds!=="1")od.remove();b.querySelectorAll(".kb .kr").forEach(r=>{if(!r.classList.contains("kr-ton")&&!r.classList.contains("kr-why"))r.remove()});
  const kb=b.querySelector(".kb");let ton=b.querySelector(".kr-ton");if(ton){const v=ton.querySelector(".krv");[...v.children].forEach(e=>{if(e.classList.contains("ksep"))return;if(!KIT_COSTRE.test(e.textContent))e.remove()});
   [...v.children].forEach((e,i,a)=>{if(e.classList.contains("ksep")&&(!e.previousElementSibling||e.previousElementSibling.classList.contains("ksep")||!e.nextElementSibling))e.remove()});
-  if(!v.querySelector(".ef"))ton.remove()}
- /* never a "Tốn: không" row (owner 11/15): an option that costs nothing shows no Tốn row */}catch(e){console.error("kitHideOut",e)}}
-(function(){const n0=kaNorm1;kaNorm1=function(b){const r=n0.apply(this,arguments);try{if(b&&b.dataset&&(b.dataset.khide==="1"||b.closest("[data-khide-all]")))kitHideOut(b)}catch(e){}
- /* no "Tốn: không" row anywhere (owner 11/15): a cost row whose only value is "không" goes */
- try{if(b&&b.querySelectorAll)b.querySelectorAll(".kr.kr-ton").forEach(t=>{const v=t.querySelector(".krv");if(v&&/^\s*không\s*$/i.test(v.textContent))t.remove()})}catch(e){}return r}})();
+  if(!v.querySelector(".ef"))v.innerHTML=`<span class="ef n">không</span>`}
+ else if(kb){kb.insertAdjacentHTML("beforeend",`<span class="kr kr-ton"><span class="krl">Tốn</span><span class="krv"><span class="ef n">không</span></span></span>`)}
+ else b.insertAdjacentHTML("beforeend",`<small class="kb"><span class="kr kr-ton"><span class="krl">Tốn</span><span class="krv"><span class="ef n">không</span></span></span></small>`)
+ if(H){const kb2=b.querySelector(".kb");if(kb2&&H.hint)kb2.insertAdjacentHTML("beforeend",`<span class="kr kr-hint"><span class="krl">Gợi ý</span><span class="krv"><span class="ef n khint">${H.hint}</span></span></span>`);
+  const kat=b.querySelector(":scope > .kat");const cls=H.risk==="an toàn"?"safe":H.risk==="liều"?"bold":"risk";
+  if(kat&&!kat.querySelector(".krisk"))kat.insertAdjacentHTML("beforeend",`<span class="krisk krisk-${cls}" title="${H.risk==="an toàn"?"việc này không hỏng được":H.risk==="liều"?"dễ hỏng":"có thể hỏng"}">${H.risk}</span>`)}}catch(e){console.error("kitHideOut",e)}}
+(function(){const st=document.createElement("style");st.id="k-hint";st.textContent=`
+.ka .kr.kr-hint .krv .khint{font-style:italic;color:var(--ink2,#6b4a2a);font-weight:500}
+.ka>.kat>.krisk{flex:0 0 auto;margin-left:auto;font-size:.72rem;font-weight:700;letter-spacing:.02em;padding:1px 8px;border-radius:999px;border:1px solid;white-space:nowrap}
+.ka>.kat>.krisk-safe{color:#3f7a52;border-color:#a9d3b5;background:#eef8f0}
+.ka>.kat>.krisk-risk{color:#8a6420;border-color:#e2c98f;background:#fbf3df}
+.ka>.kat>.krisk-bold{color:#a0301e;border-color:#e6a99c;background:#fbeae6}
+`;document.head.appendChild(st)})();
+(function(){const n0=kaNorm1;kaNorm1=function(b){const r=n0.apply(this,arguments);try{if(b&&b.dataset&&(b.dataset.khide==="1"||b.closest("[data-khide-all]")))kitHideOut(b)}catch(e){}return r}})();
 /* ON BY DEFAULT for every event choice, found at the shared builders: an item made by pushDil / pushFront / mkP (it carries pid / pp: weekly
    events j68, Mệnh truyện chapters j67, side events, dilemmas j70, story lines j96/j97 and any later module using them) or a kit choice panel
    (kit.kind "choice"). An item may opt out with showOut:true (never for events). */
 function kitIsEventChoice(m){return !!(m&&m.opts&&m.opts.length&&!m.showOut&&(m.hideOut||("pid" in m)||("pp" in m)||(m.kit&&(m.kit.kind==="choice"||m.kit.hideOut))))}
-/* owner 11/15 (reverses 11/14): event choices are NOT hidden by default any more — every option shows Cần / Tốn / Được / Mất / Kèm + odds
-   like an act card (kaNorm1 parses the option's x / j67 text). Only an item or option that sets hideOut:true itself hides its outcomes. */
-(function(){const s0=showModal;showModal=function(){const m=Q[0];const r=s0.apply(this,arguments);try{if(m&&m.opts&&(m.hideOut||m.opts.some(o=>o&&o.hideOut))){
+(function(){const s0=showModal;showModal=function(){const m=Q[0];if(kitIsEventChoice(m))m.hideOut=true;const r=s0.apply(this,arguments);try{if(m&&m.opts&&(m.hideOut||m.opts.some(o=>o&&o.hideOut))){
   document.querySelectorAll("#modal .opts > button[data-m], #modal .opts button.opt").forEach(b=>{const o=m.opts[+b.dataset.m];if(o&&o.showOut)return;if(m.hideOut||(o&&o.hideOut)){if(o&&o.showOdds)b.dataset.kodds="1";b.dataset.khide="1";if(b.classList.contains("ka"))kitHideOut(b)}})}}catch(e){console.error("hideOut",e)}return r}})();
 /* ACT-LIKE OPTIONS inside a dialog (kit owner #2): an option may carry showOdds:true — it keeps its odds word (Liều … Nắm chắc) beside the
    cost while the dialog's other outcomes stay hidden — or showOut:true — the full act card (Được / Mất / odds), e.g. "Xin ban", "Mua lén". */
