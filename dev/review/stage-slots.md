@@ -45,3 +45,5 @@ dev/shots/stage-slots/before-*.
   Đo bằng dev/test/ansung-inplace.js (ép cột chật bằng thẻ cao) ở 755x1000, 1000x755, 1180x820, 1366x1024, 844x390: không popover,
   bề rộng thẻ Ân sủng = bề rộng thẻ người (147/119/135/138/119 px), giá trị sát mép phải 0 px, 0 chữ bị cắt, cột trong sân khấu,
   0 tràn ngang, thu lại được. Ảnh r6-ansung-fix-*.jpg (thẻ người cao bất thường là do ép chật trong bài thử).
+- Gộp tiếp main ee5758195 (jimg, jclose) rồi f500d0464 (tabs-kit r7; jk3 đổi kitActKey→kitActSortKey, không đụng Ân sủng) — chạy lại trên
+  5edc1c938: stage-slots 1180/755 đạt, sổ cũ ok, Ân sủng tại chỗ 5/5 khổ, coop-e2e 59/59.
