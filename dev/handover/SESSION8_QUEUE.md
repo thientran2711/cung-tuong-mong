@@ -72,3 +72,6 @@ Dependencies: D29 before D13 (events/places read the ledger); D30 + D42 share j1
 
 ## E. Open owner questions (§6) — ask one at a time
 j72 bước vs Hồi · stage paper halo · Thái hậu title bronze vs plum · HT vs HH gold alike · Đáp ứng muted on paintings
+| C18 | review/kit-popup-sample (owner s8: show the pop-up kit; add §8 samples to kit page) | RUNNING |
+| C19 | review/pic-dupes (owner s8: two acts share one picture; scan + redraw) | RUNNING |
+| C20 | review/act-text (owner s8: broken/unclear act card text, whole family) | RUNNING |

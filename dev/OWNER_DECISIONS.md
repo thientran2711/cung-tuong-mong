@@ -836,3 +836,12 @@ All must work in co-op.
 - Owner (verbatim): "Vẽ tay kì vậy."
 - Screenshot dev/handover/refs/owner-bad-hands-thinhan-hh.jpg (Hành sự card "Thỉnh an Hoàng hậu", Lễ nghi picture: folded hands are malformed).
 - Decision: redraw that picture (Magnific gpt-2-6) with clean, natural hands; AND audit EVERY act/event picture for malformed hands/fingers (look at each; list + redraw the bad ones). → added to review/act-pics2 worker scope (it is already redrawing act pictures).
+
+## 15/11 (session 8) — Owner asks to see the shared pop-up kit
+- Owner (verbatim): "Gửi tôi ảnh kit chung pop up." The kit sample page (#kit) has NO pop-up (KIT §8 kpanel) sample → worker review/kit-popup-sample adds §8 samples (panel with small portrait subject, with event-stage figure, with options, result) to the kit page and produces screenshots for the owner.
+
+## 15/11 (session 8) — Two different acts share the same picture (owner screenshot)
+- Owner screenshot dev/handover/refs/owner-dup-act-picture.jpg (no words, both circled): "Nghỉ ngơi một lát" and "Đọc sách giải khuây" show the SAME picture (round window, vase, lacquer box). Rule: every act / event shows its own picture; no two different acts share one. → worker review/pic-dupes: scan all act + event picture keys for duplicate files/near-duplicates (perceptual hash), redraw the extra ones (gpt-2-6), matched to each act's text.
+
+## 15/11 (session 8) — Tài nghệ act card text broken and unclear (owner screenshot)
+- Owner screenshot dev/handover/refs/owner-act-text-jumble.jpg (circled): card "Tự học Thi: viết thơ, thư pháp": ĐƯỢC "tiến bộ Thi +1..2 · Tinh xảo: cần chơi 9 phần · Tuyệt phẩm: chỉ vật liệu quý); dâng · tặng được" (stray ")"), KÈM "tự tay chơi thì ra Thư pháp «Vọng nguyệt» (chơi 5 phần: Khá" (unclosed, cut), "+1..2" is not player wording. Rule: every act card line is complete, short, clear cổ-trang wording (VANPHONG), no broken brackets, no code-like ranges, no truncation. → worker review/act-text: whole family over all act cards (scan every generated card text for unbalanced brackets, "..", cut text, glued words).
