@@ -224,8 +224,7 @@ window.kitReward=kitReward;window.kitFlyItem=kitFlyItem;window.kitAlarm=kitAlarm
 /* 8: panels and cards open the same way; buttons answer the touch */
 .dlg,.dlg.kpanel,#kpop,.kpop{animation:kmIn .28s var(--km-ease) both}
 .rtoast.karesult.on{animation:kmUp .32s var(--km-ease) both}
-:is(button,.btn,.kbtn,.opt,.card.ka,.hc,[role="button"]):not(:disabled){transition:transform .09s ease,filter .09s ease,box-shadow .12s ease}
-:is(button,.btn,.kbtn,.opt,.card.ka,.hc,[role="button"]):not(:disabled):active{transform:translateY(1px) scale(.975);filter:brightness(.95)}
+/* press / release / ripple / rim light: jfx touch kit (KIT § Cảm giác/FX) — uses the 'scale' property, so an element's own transform stays */
 @keyframes kmIn{from{opacity:0;transform:translateY(14px) scale(.96)}to{opacity:1;transform:none}}
 @keyframes kmUp{from{opacity:0;transform:translate(-50%,24px)}to{opacity:1}}
 /* stage overlay */
