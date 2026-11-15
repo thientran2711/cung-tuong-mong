@@ -12,12 +12,21 @@
    save (e.g. 2 of every 3 consorts) — the others stay strangers and must be the grey silhouette in the strip AND in the rows. */
 const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
 const [,,URL,OUT,MW,WK]=process.argv;const MINW=+MW||30,WEEKS=+WK||6;if(OUT)fs.mkdirSync(OUT,{recursive:true});
-/* one game tick, the way a player would: lesson minigame -> skip; open dialog -> first visible choice; Sổ tuần -> "Vào ngày mới"; else next buổi */
+/* one game tick, the way a player would: a game on screen -> its VISIBLE skip ("Để …"), then its result button / ✕; open dialog -> first
+   visible choice it can pay for; Sổ tuần -> "Vào ngày mới"; else next buổi. r8 (11/15): NO workarounds any more — the driver used to
+   force-hide #ov + drop S.mg after 5 ticks and drop / close a dialog that came back 5–9 times; now a stuck screen is REPORTED
+   (window.__stuck = {kind, what}) and the run stops, so a game bug can no longer hide behind the driver. */
 const DRIVE=`window.__tick=async()=>{const W=t=>new Promise(r=>setTimeout(r,t));const ov=document.getElementById('ov');
- if(ov&&!ov.hidden){window.__ovn=(window.__ovn||0)+1;if(window.__ovn>5){window.__ovn=0;ov.hidden=true;S.mg=null;return 'ovx'}const b2=[...ov.querySelectorAll('button')].filter(x=>x.offsetParent);const ok=document.getElementById('mgok'),sk=document.getElementById('mgskip');if(ok)ok.click();else if(sk&&!sk.hidden)sk.click();else if(b2.length)b2[b2.length-1].click();else{ov.hidden=true;S.mg=null}return 'mg'}window.__ovn=0;
- if(S.mg){S.mg=null}
+ if(ov&&!ov.hidden){window.__ovn=(window.__ovn||0)+1;const V=[...ov.querySelectorAll('button')].filter(x=>x.offsetParent);
+  if(window.__ovn>12){window.__stuck={kind:'overlay',what:V.map(x=>x.id||x.className).join(','),mg:JSON.stringify(S.mg)};return 'stuck'}
+  const sk=V.find(x=>/^(Để|Học nhanh)/.test((x.textContent||'').trim())),ok=V.find(x=>/ok$/.test(x.id))||V.find(x=>x.classList.contains('kit-x'));const t=sk||ok||V[V.length-1];if(t)t.click();await W(60);return 'mg'}
+ window.__ovn=0;
  const dawn=document.getElementById('dawn');if(dawn&&!dawn.hidden&&dawn.innerHTML){const go=dawn.querySelector('#dawn-go');try{go&&go.click()}catch(e){}await W(30);dawn.hidden=true;dawn.innerHTML='';document.body.classList.remove('kbk-open');return 'dawn'}
- if(Q.length){const m=Q[0];if(window.__lq===m.t){window.__lqn=(window.__lqn||0)+1}else{window.__lq=m.t;window.__lqn=0}if(window.__lqn>8){Q.shift();showModal();return 'drop'}if(window.__lqn>4){closeModal();return 'close'}if(m.opts&&m.opts.length){const i=m.opts.findIndex(c=>!(c.fx&&c.fx.bac&&S.bac+c.fx.bac<0));if(i<0)closeModal();else chooseM(i)}else closeModal();return 'q'}
+ if(Q.length){const m=Q[0];if(window.__lq===m){window.__lqn=(window.__lqn||0)+1}else{window.__lq=m;window.__lqn=0}
+  if(window.__lqn>8){window.__stuck={kind:'dialog',what:String(m.t||'').slice(0,60),opts:(m.opts||[]).map(o=>o.n).slice(0,4)};return 'stuck'}
+  if(m.opts&&m.opts.length){const i=m.opts.findIndex(c=>!(c.fx&&c.fx.bac&&S.bac+c.fx.bac<0));if(i<0)closeModal();else{const t=m.t;chooseM(i);
+    /* the same dialog back in the queue right after its answer = the re-queue bug: reported, never skipped */
+    if(Q.some(x=>x===m||(x.pid&&x.pid===m.pid&&JSON.stringify(x.pp||null)===JSON.stringify(m.pp||null)&&x.t===t))){window.__stuck={kind:'requeue',what:String(t).slice(0,60),opt:m.opts[i].n};return 'stuck'}}}else closeModal();return 'q'}
  try{nextBuoi()}catch(e){}return 'buoi'};`;
 /* pictures: the CDN (jcdn IMG_BASE) is answered from git objects of IMGREV (default 3e212597e, the last commit with img/ in git) — fast, no disk;
    a file not there goes to the network; any other outside host is blocked */
@@ -39,7 +48,7 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
    if(wk()!==last){last=wk();if(wk()>=mw&&!S.out){const rk=liveRivals(true).map(v=>v.rank);if(new Set(rk).size>=3)return{w:wk(),rank:S.rank,met:Object.keys(S.met||{}).length,lives,json:JSON.stringify(ser())}}
     /* meet people the real way: go to a rival's palace once a week (the ones not met first) */
     try{if(!Q.length&&!S.mg){const L=liveRivals(true).filter(v=>v.alive&&!v.out);const v=L.find(x=>!S.met[x.id])||L[wk()%Math.max(1,L.length)];if(v)goTo(palaceOf(v))}}catch(e){}}
-   await window.__tick()}return{err:'no world',w:wk(),lives,dead:S.dead,srv:isSrv(),out:S.out,q:Q.length,qt:Q[0]&&Q[0].t,b:S.buoi}},[MINW]);
+   if(await window.__tick()==='stuck')return{err:'stuck',stuck:window.__stuck,w:wk()}}return{err:'no world',w:wk(),lives,dead:S.dead,srv:isSrv(),out:S.out,q:Q.length,qt:Q[0]&&Q[0].t,b:S.buoi}},[MINW]);
  json=W0.json||null;info=W0.json?{week:W0.w,rank:W0.rank,met:W0.met,lives:W0.lives}:W0;
  await ca.close();if(!json){console.log(JSON.stringify({err:'no world',info}));await b.close();return}
  if(OUT&&json)fs.writeFileSync(`${OUT}/save.json`,json)}
