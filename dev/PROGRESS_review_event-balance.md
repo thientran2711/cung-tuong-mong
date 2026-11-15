@@ -27,6 +27,19 @@ NODE_PATH=$(npm root -g) node dev/measure/evbot.js http://127.0.0.1:8861/dev/tmp
 ```
 (serving dev/index.html directly breaks: no charset meta → "Invalid or unexpected token".)
 
+## Merges
+- origin/main ebbbd9e (AGENTS.md / CLAUDE.md: English work files), review/opt-render 54f3814 (pure `kitHint(o,m,lv)`, cost mode everywhere).
+- Integration fix: opt-render's `kitSeal(ok)` (result seal, j63) clashed with main's `kitSeal(o)` (Trân nữ mark, jseal.js) → result cards got class
+  "undefined" (dev/test/opt-render.js failed). Renamed the result one to `kitResultSeal(ok)` (j63, jk2b sample, KIT.md §7). opt-render must do the same.
+
+## Bots
+- `dev/measure/inpage4.js` now runs on current main: skips/closes j82 mini-games (#kg82skip/#kg82ok), does not retry a place goTo refuses or a
+  card that changes nothing in the same buổi, life cap 60000 iterations (was 9000 → long lives ended as TIMEOUT).
+- `dev/measure/evbot.js`: hint bot scores `kitHint(o,m)` (what the player reads) + risk tag + cost; pages block media; partial results on crash.
+- The shared machine is short of memory (other workers' art jobs ~5.5 GB): renderer crashes ("Target crashed") cut most runs; the sample so far
+  is far too small for a verdict. Re-run with free memory: `EVPAR=3 node dev/measure/evbot.js <url> 80 hint,rand,same 1 4` then
+  `python3 dev/review/evbal_report.py run=<out.json>`.
+
 ## Open / next
 - Banners: 305 of 365 chapter beats have no own picture → list in dev/review/story-deadlines.md for act-pics2.
 - Hints are often vague/wrong ("có lợi; nhưng có hại", "Thái y" read as "thân thể bị hại") — opt-render worker's part.

@@ -48,7 +48,7 @@ async function run(b,mode,seed){const ctx=await b.newContext({viewport:{width:39
  await p.evaluate(()=>{const push0=window.__res.push.bind(window.__res);window.__res.push=function(x){try{x.pun=window.__pun;x.hintN=window.__hintSeen||0;window.__hintSeen=0}catch(e){}return push0(x)}});
  const grab=()=>p.evaluate(()=>window.__res.map(r=>({o:r.origin,rank:r.rank,max:r.maxRank,yrs:r.years,title:String(r.title||'').slice(0,40),fate:String(r.fate||'').slice(0,70),pun:r.pun||0,hint:r.hintN||0,err:r.err,acts:r.acts?{ev:r.acts['ev_'+window.__evmode]||0,dil:r.acts.dilemma||0}:null})));
  let res=[],live=null,crash='';const t0=Date.now();
- try{for(let i=0;i<STEPS;i++){await p.evaluate(([m])=>window.__bot.step(m,300),['sens']);if(i%5===4){res=await grab();console.error(mode,seed,'step',i+1,Math.round((Date.now()-t0)/1000)+'s','lives',res.length)}}
+ try{for(let i=0;i<STEPS;i++){await p.evaluate(([m])=>window.__bot.step(m,300),['sens']);if(i%5===4||process.env.EVDBG){res=await grab();const hp=await p.evaluate(()=>({mb:performance.memory?Math.round(performance.memory.usedJSHeapSize/1e6):0,logs:S&&S.logs?S.logs.length:0,Q:Q.length,turn:S&&S.turn,big:Object.entries(S||{}).map(([k,v])=>[k,JSON.stringify(v||0).length]).sort((a,b)=>b[1]-a[1]).slice(0,3)}));console.error(mode,seed,'step',i+1,Math.round((Date.now()-t0)/1000)+'s','lives',res.length,JSON.stringify(hp))}}
   res=await grab();
   live=await p.evaluate(()=>({turn:S&&S.turn,rank:S&&S.rank,ev:(window.__acts||{})['ev_'+window.__evmode]||0}))}catch(e){crash=String(e.message).slice(0,120);console.error(mode,seed,'CRASH',crash)}
  try{await ctx.close()}catch(e){}return{mode,seed,res,live,crash,errs:errs.slice(0,5)}}
