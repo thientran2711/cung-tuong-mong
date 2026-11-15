@@ -389,3 +389,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (10:00Z) Lô nào xong là có người duyệt riêng ngay, không xếp hàng (mở thêm người duyệt khi cần).
 - (10:05Z) Dấu ấn trên đầu nàng: 8 bậc, mỗi phẩm một dấu ấn (phượng vàng trên mây ngọc = Hoàng hậu; nụ sen ngọc = một bậc giữa; bỏ mẫu 1; không tua rua). Chỉ nhún lên xuống nhẹ, không phát sáng. Một tỷ lệ chung: cách đỉnh đầu một khoảng cố định ở mọi hình. Dấu ấn là vật phẩm: có trong rương mỗi lần thăng phẩm, nằm trong Tư trang, bấm Dùng để đổi, giữ được dấu ấn cũ.
 - (10:05Z) Trung y: duyệt kiểu; hoa điền phải là bản đã thu nhỏ (mẫu đang dùng tranh gốc chưa sửa).
+- (10:08Z) Trung y: 8 bậc, màu mỗi bậc = màu phẩm của nền khung chân dung (nhạt, lụa trơn): Đáp ứng ngà, Thường tại lục nhạt, Quý nhân lam nhạt, Tần hồng nhạt, Phi tím nhạt, Quý phi đỏ hồng nhạt, Hoàng quý phi cam hổ phách nhạt, Hoàng hậu vàng nhạt (~64.000 tín dụng).
