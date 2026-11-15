@@ -121,3 +121,4 @@ Nhắc theo dõi: send_later 30 phút, tự đặt lại mỗi lượt (lịch l
 - [ ] Má nhân vật bị đen trên nền tối (alpha thủng) → scene-light quét + vá mọi ảnh người.
 - [ ] Thẻ thông tin Hoàng thượng (và mọi thẻ người) không theo kit: khung luật trôi góc phải, khoảng trống lớn, nút "Đã hiểu" → gộp một thẻ người kit (giao stage-slots/person-acts).
 - [ ] Tua rua khung chân dung bị cắt mất; bấm nhân vật mở khung riêng không theo kit (giao stage-slots/person-acts).
+- [ ] Cung nhân: "Thiện cảm" vs "Lòng" vs "Chủ tin" lẫn lộn; "Người chạy việc: Tiểu Lâm Tử" nằm trên thẻ cung nữ Lan; "Cung ngươi"; tên có số (Thúy 2, Vân 2, Lan 2); nhãn "y Trương" bị cắt (giao act-audit).
