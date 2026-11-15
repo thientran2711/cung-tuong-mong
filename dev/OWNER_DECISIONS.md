@@ -183,3 +183,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (07:50Z) Owner: the back of the curling page must show page content (the new page's image), not blank paper.
 - (08:10Z) Owner: don't show the rank luxury allowance — only item 'Xa xỉ N' and the worn total; player learns limits from consequences.
 - (08:20Z) Owner: men's intrusions must not be luck — plan-driven (scheduled meetings/shifts in world state); she sees it only if she is really there at that time; recognition by stats; tai mắt can tip her off in advance.
+- (08:30Z) Coordinator decision for owner's '3–4 people on iPad': allow ~35% overlap on iPad (25% Fold), size by core body width so sleeves don't force the strip; same scale.
