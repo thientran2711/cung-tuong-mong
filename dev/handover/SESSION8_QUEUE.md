@@ -22,7 +22,7 @@ CDN uploads OK again (owner saved the Cloudflare token; R2 verified). Use CLOUDF
 
 ## B. Workers on FAILED reviews (§3)
 | B1 | review/night-end-r1 FAIL 6 items + in-night picture by tone + light night panel (C30 merged) + follow-ups | RUNNING |
-| B2 | review/outside-r2-r1 FAIL 5 items → worker | QUEUED |
+| B2 | review/outside-r2-r1 FAIL 5 items → worker (owner asked s8) | QUEUED-NEXT (TOP) |
 
 ## C. Unfinished workers (§4 + §9)
 | C1 | review/face-sharp (her face hazy on stage; LIVE BUG) | RUNNING wave 1 |
