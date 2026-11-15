@@ -19,7 +19,7 @@ async function mk(b,name,vp){const ctx=await b.newContext({viewport:{width:vp[0]
 async function until(o,fn,arg,ms=30000){try{await o.p.waitForFunction(fn,arg,{timeout:ms,polling:250});return true}catch(e){return false}}
 async function tapText(o,re,ms=8000){const t0=Date.now();while(Date.now()-t0<ms){const h=await o.p.evaluateHandle(src=>{const R=new RegExp(src);
   return [...document.querySelectorAll('button,a,[role=button]')].find(b=>b.offsetParent!==null&&!b.disabled&&R.test(b.textContent.trim()))||null},re.source);
-  const el=h.asElement();if(el){await el.click();return true}await sleep(250)}return false}
+  const el=h.asElement();if(el){try{await el.click({timeout:5000});return true}catch(e){}}await sleep(250)}return false}
 const shot=async(o,n)=>{try{await o.p.screenshot({path:`${OUT}/${n}.png`,timeout:120000})}catch(e){console.log('shot failed',n,e.message.split('\n')[0])}};
 /* close the normal game's dialogs (any button that only reads / takes the first road), end mini games: the test's own player */
 async function clear(o,n=25){for(let i=0;i<n;i++){const st=await o.p.evaluate(()=>{
@@ -46,7 +46,12 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
  await join(B,code);
  ok(await until(B,()=>COOP.seat==='b'&&!COOP.frozen,null,60000),'B in seat b');
  {const t0=Date.now();while(Date.now()-t0<90000){await clear(A);await clear(B);const a=await A.p.evaluate(()=>!!(window.COOPW&&COOPW.on&&COOPW.base&&typeof S!=='undefined'&&S)),c=await B.p.evaluate(()=>!!(window.COOPW&&COOPW.on&&COOPW.base&&typeof S!=='undefined'&&S));if(a&&c)break;await sleep(500)}}
- for(let i=0;i<6;i++){await clear(A);await clear(B);await sleep(400)}
+ /* both through Luân hồi (the roulette, then Nhận thân phận) and into the game */
+ {const inGame=o=>o.p.evaluate(()=>!!(COOPW.on&&typeof S!=='undefined'&&S&&!COOPW.inLife&&document.getElementById('title').hidden&&!document.querySelector('[id^="kroul"],.kroul-ov')&&document.getElementById('next').offsetParent)).catch(()=>false);
+  const t0=Date.now();while(Date.now()-t0<150000){await clear(A);await clear(B);if(await inGame(A)&&await inGame(B))break;await sleep(700)}
+  const dbg=o=>o.p.evaluate(()=>({on:COOPW.on,S:typeof S!=='undefined'&&!!S,inLife:COOPW.inLife,title:document.getElementById('title').hidden,roul:!!document.querySelector('[id^="kroul"],.kroul-ov'),next:!!document.getElementById('next').offsetParent,M:!document.getElementById('modal').hidden&&document.getElementById('mt').textContent})).catch(e=>e.message);
+  ok(await inGame(A)&&await inGame(B),'both chose their thân phận and are in the game',[await dbg(A),await dbg(B)])}
+ for(let i=0;i<4;i++){await clear(A);await clear(B);await sleep(400)}
  ok(await until(A,()=>!!COOPW.tm.view(),null,20000)&&await until(B,()=>!!COOPW.tm.view(),null,20000),'both see the clock');
  const n0=await A.p.evaluate(()=>[S.buoi||0,typeof B4L==='number'?B4L:2]);console.log('start buổi',n0);
  ok(await A.p.evaluate(()=>document.getElementById('next').textContent==='Sẵn sàng'),'#next says Sẵn sàng in co-op');
@@ -61,11 +66,12 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
   const ms=await bothPast(A,B,k,20000);ok(ms>=0&&ms<12000,'1: both ready → buổi steps at once',ms)}
  for(let i=0;i<3;i++){await clear(A);await clear(B);await sleep(300)}
  /* 2 one AFK: A ready, B does nothing → time out steps both */
- await setTm(A,{buoiMs:10000});await reset(A);
- {const k=(await K(A)).k;await shot(B,'tm-run-1180x820');
-  await B.p.setViewportSize({width:844,height:390});await sleep(800);await shot(B,'tm-run-844x390');await B.p.setViewportSize({width:1180,height:820});
+ await shot(B,'tm-run-1180x820');await B.p.setViewportSize({width:844,height:390});await sleep(800);await shot(B,'tm-run-844x390');await B.p.setViewportSize({width:1180,height:820});
+ for(let i=0;i<2;i++){await clear(A);await clear(B)}
+ await setTm(A,{buoiMs:15000});await reset(A);
+ {const k=(await K(A)).k;
   ok(await press(A),'2: A presses Sẵn sàng');const t0=Date.now();
-  const c=await K(B);ok(/Còn/.test(c.chip)&&/sẵn sàng/.test(c.chip),'2: B chip shows the clock + friend ready',c.chip);
+  ok(await until(B,()=>{const t=(document.getElementById('kctm')||{}).textContent||'';return /Còn/.test(t)&&/sẵn sàng/.test(t)},null,8000),'2: B chip shows the clock + friend ready',(await K(B)).chip);
   const ms=await bothPast(A,B,k,40000);ok(ms>=5000,'2: AFK B: time out steps both (not before the clock)',ms);
   const a=await K(A),bb=await K(B);ok(a.k===bb.k,'2: same buổi after time out',[a.k,bb.k])}
  for(let i=0;i<3;i++){await clear(A);await clear(B);await sleep(300)}
@@ -113,7 +119,7 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
   await A.page();await A.p.goto(BASE,DCL);await A.p.waitForTimeout(3000);await tapText(A,/^(Chơi cùng bạn|Cùng hảo hữu)/);await A.p.waitForTimeout(600);await tapText(A,/^Trở lại phòng/);
   ok(await until(A,()=>COOP.seat==='a'&&!COOP.frozen&&!!(window.COOPW&&COOPW.on&&typeof S!=='undefined'&&S),null,60000),'5: A back');
   ok(await until(A,()=>!!COOPW.tm.view(),null,15000),'5: A has the clock again');
-  const a2=(await K(A)).v;ok(a2&&a2.key===k0&&a2.left<=lb+1500&&a2.left<57000,'5: host reload keeps its clock',[lb,a2&&a2.left]);
+  const a2=(await K(A)).v;ok(a2&&a2.key===k0&&a2.left<=lb+1500&&a2.left<57000,'5: host reload keeps its clock',[k0,lb,a2]);
   await setTm(A,{buoiMs:60000,pauseCapMs:6000,readMs:2000});
   for(let i=0;i<3;i++){await clear(A);await clear(B)}await press(A);await press(B);ok(await bothPast(A,B,k0,30000)>=0,'5: play goes on after both reloads')}
  /* 6 single-player: no clock, the button keeps its words */

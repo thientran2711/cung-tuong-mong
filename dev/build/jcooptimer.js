@@ -7,7 +7,8 @@
      swreg's ctm-upd: no Worker change, older clients ignore non-invite acts); the guest shows host time (left counted down locally
      between two clk). Both send {mode:"st",key,pz,rd} (am I paused / ready) on change, on ask, and every 10 s.
    - Pauses: the clock stands still while either player has a dialog open or is in a mini game (Q / S.mg), at most BAL.coopTm.pauseCapMs
-     per buổi; then it runs on. While the room is frozen (a player away, two builds) it stands still and that costs no pause budget.
+     per buổi; then it runs on. While the room is frozen (a player away, two builds) or a player is choosing her thân phận (Luân hồi,
+     first life or rebirth; death screen; title) it stands still and that costs no pause budget (st.lf).
    - Time out (host sends up): each client ends its own buổi — sáng..chiều: COOPW.forceBend() (even under an open dialog / mini game: the
      room steps for the friend now, her step waits for the dialog through CW.pendBuoi, so no choice is cut and nothing runs twice);
      tối: nextBuoi() (→ endTurn → end) as soon as she has no dialog / mini game open. While her buổi is overdue, a dialog with no choice
@@ -32,12 +33,14 @@ const frozenRoom=()=>!CW.on||!CW.base||(CW.isFrozen?CW.isFrozen():!!COOP.frozen)
 function say(mode,o){try{COOP.send(Object.assign({t:"act",k:"ctm-tm",mode},o||{}))}catch(e){}}
 /* ---------- my status ---------- */
 function myPz(){if(!live())return false;return !!(Q.length||S.mg)}
+/* choosing a thân phận (first life / rebirth: Luân hồi) or a death screen: the room's clock stands still, no pause budget spent */
+function myLife(){if(!CW.on)return false;if(typeof S==='undefined'||!S||S.dead||CW.inLife)return true;const T=$("title");return !!(T&&!T.hidden)}
 function myRd(){if(!live()||S.dead)return false;if(myKey()!==roomKey())return false;return !!(CW.bend||CW.pend||CW.sent===wkN())}
-const ST={key:"",pz:false,rd:false,at:0};          /* what I last told the friend */
-const FS={key:"",pz:false,rd:false};               /* the friend's last status */
+const ST={key:"",pz:false,rd:false,lf:false,at:0};          /* what I last told the friend */
+const FS={key:"",pz:false,rd:false,lf:false};               /* the friend's last status */
 let bended={a:false,b:false},bkeyB="";             /* the server's bended view and its key */
-function sendSt(force){const k=roomKey(),pz=myPz(),rd=myRd(),t=pnow();if(!force&&ST.key===k&&ST.pz===pz&&ST.rd===rd&&t-ST.at<10000)return;
- ST.key=k;ST.pz=pz;ST.rd=rd;ST.at=t;say("st",{key:k,pz,rd})}
+function sendSt(force){const k=roomKey(),pz=myPz(),rd=myRd(),lf=myLife(),t=pnow();if(!force&&ST.key===k&&ST.pz===pz&&ST.rd===rd&&ST.lf===lf&&t-ST.at<10000)return;
+ ST.key=k;ST.pz=pz;ST.rd=rd;ST.lf=lf;ST.at=t;say("st",{key:k,pz,rd,lf})}
 function frReady(){const k=roomKey(),o=other();if(bkeyB===k&&bended[o])return true;if(FS.key===k&&FS.rd)return true;
  const e=COOP.state.ended||{};const b=+k.split(":")[1];return b>=LAST()&&!!e[o]}
 /* ---------- the clock: host ---------- */
@@ -52,7 +55,7 @@ function newClock(k){const t=TB(),L=lsGet();
 function sendClk(){if(!K)return;lastSync=pnow();say("clk",{key:K.key,left:Math.round(K.left),cap:Math.round(K.cap),run:!!K.run,up:!!K.up,pz:!!K.pzNow})}
 function hostTick(dt){const k=roomKey();if(!K||K.key!==k)newClock(k);
  const wasRun=K.run,wasPz=K.pzNow;
- if(frozenRoom()||K.up){K.run=false;K.pzNow=false}
+ if(frozenRoom()||K.up||myLife()||FS.lf){K.run=false;K.pzNow=false}
  else{const pz=(myPz()||(FS.key===k&&FS.pz))&&K.cap>0;K.pzNow=pz;
   if(pz){K.cap=Math.max(0,K.cap-dt);K.run=false}
   else{K.left=Math.max(0,K.left-dt);K.run=true;if(K.left<=0){K.up=true;K.run=false;sendClk();timeUp(k)}}}
@@ -87,7 +90,7 @@ function autoRead(){const M=$("modal");if(!Q.length||!M||M.hidden){AR.m=null;ret
 /* ---------- messages ---------- */
 COOP.on("act",m=>{if(!m||m.k!=="ctm-tm"||!CW.on||m.from===CW.seat)return;
  if(m.mode==="clk")onClk(m);
- else if(m.mode==="st"){const was=FS.key===m.key&&FS.rd;FS.key=m.key;FS.pz=!!m.pz;FS.rd=!!m.rd;if(m.rd&&!was&&m.key===roomKey()&&!myRd())note()}
+ else if(m.mode==="st"){const was=FS.key===m.key&&FS.rd;FS.key=m.key;FS.pz=!!m.pz;FS.rd=!!m.rd;FS.lf=!!m.lf;if(m.rd&&!was&&m.key===roomKey()&&!myRd())note()}
  else if(m.mode==="ask"){sendSt(true);if(host()){if(K)sendClk()}else{const v=view();if(v)say("have",{key:v.key,left:Math.round(v.left),cap:Math.round(v.cap),up:!!v.up})}}
  else if(m.mode==="have"&&host()&&K&&K.fresh&&m.key===K.key&&pnow()-K.born<15000){/* the guest kept the clock while I was away (refresh): take it */
   if(typeof m.left==="number"&&m.left<K.left){K.left=Math.max(0,m.left);K.cap=Math.max(0,Math.min(K.cap,+m.cap||0));if(m.up)K.up=true}K.fresh=false;sendClk();if(K.up)timeUp(K.key)}});
