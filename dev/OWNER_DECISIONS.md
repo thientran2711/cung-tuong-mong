@@ -424,3 +424,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (12:10Z) Tặng quà: ô ảnh trái = hình món đồ (không phải Triều chính); khung phải = thông tin món (phẩm, ai làm, ngày giờ, công dụng); danh sách người nhận chia tab như Hậu cung (Chí tôn/Phi tần/Nam nhân/Cung nhân). Rà mọi hộp thoại còn rơi về ảnh Triều chính.
 - (12:10Z) Tác phẩm tự tay đa dạng: mỗi loại (nấu, thêu, tranh, chữ…) khoảng 10 món mỗi phẩm, mỗi món có hình riêng, phẩm cao nhìn sang hơn.
 - LIVE CDN (12:10Z) Khung Đáp ứng A + 8 dấu trên đầu (đổi 6/7). Code nằm ở review/rank0-ivory chờ duyệt.
+- (12:12Z) Tranh Thỉnh an mới: sếp DUYỆT (dùng làm mẫu dáng vạn phúc + áo cung trang cho các tranh vẽ lại).
