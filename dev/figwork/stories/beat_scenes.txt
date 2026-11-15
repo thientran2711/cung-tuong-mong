@@ -78,3 +78,31 @@ cn_than:c2|0|a middle-aged woman in plain brown dress bows before a consort in a
 cn_than:c3|0|a consort studies an old family genealogy scroll rolled on a desk, a rival consort's portrait painting on the wall
 cn_than:t1|1|a consort sits at a desk with a jade pendant and a bound file before her, a candle burning low
 cn_than:x1|0|a consort kneels before the Emperor and the elderly Empress Dowager, offering a jade pendant and a file on a tray
+nc_gian:s1|1|a female musician holding a pipa slips a small folded letter into a foreign princess consort's hand in a dark garden corridor at night
+nc_gian:s2|1|a palace maid secretly writes in a small notebook by candlelight behind a screen while her mistress, a foreign princess consort, sleeps beyond it
+nc_gian:c1|0|a consort stands alone beside a large desk in the imperial study where a pictorial frontier map with mountains and a fortress pass lies open
+nc_gian:c2|0|a senior eunuch in dark robes bows and speaks quietly to a consort in a corridor, guards in armour visible at the far gate
+nc_gian:c3|1|at a lantern-lit banquet a foreign envoy in southern-style embroidered robes raises his cup and gazes meaningfully toward a consort across the hall
+nc_gian:t1|1|a consort reads a small letter by a single candle, a carrier pigeon on the windowsill behind her
+nc_gian:x1|0|a consort stands on a palace terrace looking toward distant mountains where faint smoke of a battle rises, her maid behind her
+nc_su:s1|0|a grand welcome banquet in the palace courtyard, a white elephant draped in gold cloth and chests of green jade presented, the Emperor seated with a consort beside him and a foreign prince bowing
+nc_su:s2|1|an opened lacquer chest of green jade stones at night, a eunuch holding a lantern finds the stones dull and fake, a consort looking on
+nc_su:c1|0|a foreign prince in southern embroidered robes speaks privately with his sister, a consort, in a quiet pavilion
+nc_su:c2|1|in a tavern at night an overturned table and spilled wine, a foreign warrior held back by his companions, a palace soldier sitting on the floor holding his arm
+nc_su:c3|0|the elegant elderly Empress Dowager in dark plum robes questions a consort in a grand hall while foreign envoys stand at the side
+nc_su:t1|0|a foreign prince bows to his sister, a consort, in a garden, while in the distance a young princess in pale pink walks with maids
+nc_su:x1|1|a farewell banquet at night, the Emperor at a desk with blank paper and brush turns to ask a consort sitting beside him, foreign envoys bowing
+nc_tuc:s1|0|the elegant elderly Empress Dowager looks at a foreign consort wearing a bright hanfu embroidered with peacocks, other consorts in pale silks watching
+nc_tuc:s2|0|a consort serves grilled fish wrapped in banana leaves on a tray in her palace kitchen courtyard, curious consorts leaning in
+nc_tuc:c1|0|a consort applies a herbal poultice wrapped in cloth to the back of the elderly Empress Dowager who lies on a couch, an imperial physician waiting
+nc_tuc:c2|0|a small water-splashing festival in a palace courtyard, a consort and maids playfully sprinkling water from silver bowls with flower petals
+nc_tuc:c3|0|a consort practises brush strokes at a desk, sheets of paper with only abstract ink strokes, another consort looking over her shoulder
+nc_tuc:t1|0|a consort and the elderly Empress Dowager sit side by side at a low desk in a Buddhist hall copying sutras, incense rising, pages showing only faint lines
+nc_tuc:x1|0|the Empress Dowager's grand birthday celebration, consorts kneel in a row presenting gifts on trays, a foreign consort offers a gift
+nc_vuong:s1|1|a consort in pale mourning white sits by a window at night holding a letter, a single candle, her maid kneeling beside her
+nc_vuong:s2|0|a consort at a table with two sealed letters before her, one with a red tassel and one with a black tassel
+nc_vuong:c1|0|an envoy opens three chests of gold before a consort in her hall, she keeps her hands folded calmly
+nc_vuong:c2|0|ministers in Ming court robes split into two groups arguing in the throne hall, the Emperor on the throne listening
+nc_vuong:c3|1|a breathless messenger kneels before a consort at night, she stands up with concern
+nc_vuong:t1|1|the Emperor and a consort sit alone by a lamp at night in his chamber, he leans toward her asking
+nc_vuong:x1|0|the Emperor on his throne in a grand hall with a consort standing at his side, ministers bowing below awaiting his decision
