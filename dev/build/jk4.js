@@ -173,7 +173,7 @@ function kitEventStage(m){try{const M=$("modal"),mb=$("mb");const dlg=M&&M.query
  if(!mb.querySelector(":scope > .kdlgart")){let a=null;const ev=body.querySelector(":scope > .kpsubj.kpev");
   if(ev){const im=ev.querySelector("img"),fr=ev.querySelector(".ksart");if(im)a={src:im.getAttribute("src"),lab:(fr&&fr.title)||""}}
   if(!a&&typeof kitEvArt==="function")a=kitEvArt(m);
-  if(a&&a.src){const d=document.createElement("div");d.className="kdlgart kesband";d.innerHTML=kitSceneArt(a.src,a.lab,Object.assign({shape:"wide",cap:!!a.lab},kitEvCat(m,a)));mb.prepend(d)}}
+  if(a&&a.src){const d=document.createElement("div");d.className="kdlgart kesband";d.innerHTML=kitSceneArt(a.src,a.lab,Object.assign({shape:"wide",cap:!!a.lab},kitEvCat(m,a),a.mark?{mark:a.mark,markAlt:a.markAlt||""}:{}));mb.prepend(d)}}
  body.querySelectorAll(":scope > .kpsubj").forEach(e=>e.remove());
  const s=document.createElement("div");s.className="kpsubj kes kes"+figs.length;s.innerHTML=figs.join("");body.prepend(s);body.classList.add("kphas","kesb");dlg.classList.add("kesdlg");return true}catch(e){console.error("kitEventStage",e);return false}}
 window.kitEventStage=kitEventStage;window.kitStageFig=kitStageFig;
