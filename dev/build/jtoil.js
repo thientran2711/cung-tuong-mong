@@ -165,7 +165,10 @@ const TOIL={st:null,geo:null};window.TOIL=TOIL;
 function toilSkill(){const B=BAL.toil;let h=0;try{h=kg82Lv(S,"hoa")||0}catch(e){}let m=null;try{m=wdMama(S)}catch(e){}
  return{sk:Math.max(0,Math.min(1,(S.sac||0)/B.sacDiv+h/B.hoaDiv+(m?B.mama:0))),hoa:h,mama:m}}
 function toilHUD(o){for(const k in o)kg82Set(k,o[k])}
-function toilOpen(){if(!S||S.dead)return;KG82.ctx="hoc";const occ=toilOcc();
+/* bots (dev/measure inpage4, window.__bot) cannot play the overlay: an average sitting — keep the clothes, a face drawn from skill + chance */
+function toilAuto(){const occ=toilOcc(),F=Math.max(...occ.map(o=>o.F)),d=toilDress(S,F),sk=toilSkill();const score=Math.round(cl(30+45*sk.sk+(Math.random()-.5)*40,0,100));
+ S.toilette={day:toilWk()*10,wk:toilWk(),score,makeup:true,style:d.style,dv:d.v,F,occ:occ.map(o=>o.k),look:score>=BAL.toil.tier[1]?"dep":null,auto:1}}
+function toilOpen(){if(!S||S.dead)return;if(window.__bot){toilAuto();return}KG82.ctx="hoc";const occ=toilOcc();
  const d=kg82Open({art:"Điểm trang",title:"Trước gương đồng",how:"Hồi 1: chọn y phục theo dịp hôm nay. Hồi 2–4: kẻ mày theo đường chỉ, đánh phấn đều hai má, chấm son đúng chỗ khi vòng khép vừa môi."});
  if(!d)return;["chai-bg","chai-brow","chai-puff","chai-rouge"].forEach(n=>{try{kg82Img(n)}catch(e){}});try{KIT_VEIL.load()}catch(e){}
  TOIL.st={occ,F:Math.max(...occ.map(o=>o.F)),parts:{},dv:null,start:wdCur(S)};toilHUD({score:"–",round:"1/4",time:"không hạn"});toilDressUI()}
