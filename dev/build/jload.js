@@ -41,6 +41,8 @@ try{KLOAD.paused=localStorage.getItem(LS)==="1"}catch(e){}
 .kloadchip .kchip{display:inline-flex;align-items:center;gap:7px;margin:0;font-size:.72rem;padding:3px 10px;border-color:var(--gold);background:#fffaf0f0;box-shadow:0 2px 8px #0003;cursor:pointer;font-family:inherit}
 .kloadchip .kprog-t{width:64px;flex:none;height:6px}
 .kloadchip.done{animation:kloadFade 1.2s 1.5s ease forwards}
+body.kload-dock .game{box-sizing:border-box!important;padding-bottom:calc(env(safe-area-inset-bottom,0px) + 30px)!important}
+body.kload-dock .kloadchip{opacity:1}body.kload-dock .kloadchip .kchip{padding:2px 9px;box-shadow:none}
 @keyframes kloadFade{to{opacity:0;visibility:hidden}}
 `;document.head.appendChild(st)})();
 
@@ -123,10 +125,20 @@ let bgOn=false,bgRun=false;
 function paintChip(){const g=KLOAD.fig;if(!bgOn||!g.total)return;
  if(!chip){chip=document.createElement("div");chip.className="kloadchip";document.body.appendChild(chip)}
  const done=!g.left,v=g.total?g.have/g.total*100:100;
- chip.classList.toggle("done",done);placeChip();
+ chip.classList.toggle("done",done);if(done&&!chip.__kgone){chip.__kgone=1;chip.addEventListener("animationend",()=>{chip.classList.add("gone");chip.hidden=true;placeChip()},{once:true})}placeChip();
  chip.innerHTML=`<button class="kchip" data-klc="1" aria-label="Thỉnh tranh nhân vật">${done?"Đã thỉnh đủ tranh nhân vật":KLOAD.paused?"Tạm ngưng thỉnh tranh · chạm để thỉnh tiếp":KLOAD.err==="quota"?"Máy hết chỗ cất tranh":KLOAD.err?"Mạng đứt · tranh thỉnh tiếp khi có mạng":"Thỉnh tranh nhân vật"}<span class="kprog-t"><u style="--v:${v.toFixed(1)}%"></u></span><b class="kprog-n" style="font-size:.72rem">${mb(g.have)} / ${mb(g.total)} MB</b></button>`}
 /* sits at the bottom-left, lifted above whatever kit bar/panel is docked at the bottom there (tab bar, title menu) so it covers no button */
-function placeChip(){if(!chip)return;const H=innerHeight;let lift=0;
+/* review/hau-cung-ui (owner 11/15 04:15Z: the chip covered "Kẻ hầu 1/1…" and the Hậu cung list): while a life is on screen the chip never floats
+   over the game — the game frame gives up a slim strip UNDER the tab bar (body.kload-dock: .game padding-bottom) and the chip sits in it.
+   Only a dialog's own buttons lift it (as before). Title screen / no game: the old placement below. */
+function placeChip(){if(!chip)return;const H=innerHeight;
+ const g=document.querySelector(".game"),tt=document.getElementById("title");const play=!!(g&&g.getClientRects().length&&!(tt&&!tt.hidden&&tt.getClientRects().length));
+ const dock=play&&!chip.classList.contains("gone");if(document.body.classList.contains("kload-dock")!==dock){document.body.classList.toggle("kload-dock",dock);try{dispatchEvent(new Event("resize"))}catch(e){}}
+ /* a full-screen book (Sổ tuần) owns the whole screen, its page-turn bar included: the chip waits behind it */
+ const book=document.body.classList.contains("kbk-open");chip.style.visibility=book?"hidden":"";
+ if(dock){let up=0;document.querySelectorAll("#modal:not([hidden]) .dlg,.kpopts").forEach(e=>{const r=e.getBoundingClientRect();if(!r.width||r.left>300||r.bottom<H-60||r.top<H*.35)return;up=Math.max(up,H-r.top)});
+  chip.style.bottom=up?`calc(env(safe-area-inset-bottom,0px) + ${Math.round(up)+6}px)`:"calc(env(safe-area-inset-bottom,0px) + 2px)";return}
+ let lift=0;
  document.querySelectorAll("#tabs,#modal:not([hidden]) .dlg,#kload .dlg,.kpopts").forEach(e=>{const r=e.getBoundingClientRect();
   if(!r.width||r.left>300||r.bottom<H-60||r.top<H*.35)return;lift=Math.max(lift,H-r.top)});
  /* review 11/15: never over the stage name chips (names are never covered) — sit above the name row it would touch */
@@ -135,6 +147,8 @@ function placeChip(){if(!chip)return;const H=innerHeight;let lift=0;
   if(!r.width||r.left>cw+12||r.right<4||r.top<H*.35||H-r.bottom>lift+60)return;lift=Math.max(lift,H-r.top+2)});
  chip.style.bottom=`calc(env(safe-area-inset-bottom,0px) + ${Math.round(lift)+8}px)`}
 addEventListener("resize",placeChip);setInterval(placeChip,1500);
+/* test hook (dev/test, review/hau-cung-ui): show the background chip with fake numbers, no download */
+KLOAD.testChip=(have,total)=>{bgOn=true;KLOAD.fig.total=total||635e6;KLOAD.fig.have=have||12e6;KLOAD.fig.left=KLOAD.fig.have<KLOAD.fig.total?1:0;paintChip()};
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-klc]");if(!b)return;e.stopPropagation();if(!KLOAD.fig.left)return;
  KLOAD.paused=!KLOAD.paused;try{localStorage.setItem(LS,KLOAD.paused?"1":"0")}catch(x){}paintChip();if(!KLOAD.paused)runBg()},true);
 async function startBg(){if(bgOn||!MAN)return;if(!figList.length){KLOAD.phase="all";return}
