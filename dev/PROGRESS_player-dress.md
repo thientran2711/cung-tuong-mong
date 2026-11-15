@@ -57,3 +57,15 @@ dresses need none (jtoil `toilOn` is off on the cung nữ road and in lãnh cung
 - toil-fit: +3328 points (1664 por + 1664 fig), 0 without reference, 10 random ones checked by eye (mouth + cheeks on the face); on the CDN.
 - Pre-existing, not touched: 390x844 shows no rotate prompt and the place subtitle wraps one letter per line (main too; small-bugs-2 noted it).
 - Merge note: review/small-bugs-2 (not on main yet) changes jimg kitMePor / porOf; no overlap with j66/j88.
+
+## Reviewer r6 (15/11, review/player-dress-r6 on origin/main 17e8fc038)
+- Branch already contained origin/main 17e8fc038 (merge = no-op); site rebuilt (index.html identical, assets.json/sw.js refreshed for the CDN index).
+- player-dress.js 1180x820: BAD 0 of 138, 0 page errors (all 7 surfaces). player-dress-old.js at 755x1000@2, 1000x755, 1180x820@2,
+  1366x1024@2, 844x390: all 3 old saves right dress (tm3 / cold / tm0) on stage + header, no overflow, no page error (1000x755 first run
+  read before the art loaded; screenshot right; rerun passed).
+- Pre-11/14 "player look" saves (player:look1-3, cung nữ rk3 / lãnh cung / consort r4) written by main load here: no pid added, same
+  look face, t1 (option c). Normal new game (no __nlInner) gets its identity through the Luân hồi card as on main.
+- trung-y.js and toilette.js 1180x820: pass, 0 errors. toil-fit spot check, makeup on (dep/diem): maid m07 t3 a18, m23 t6 a26, m41 t8 a36,
+  m52 t1 a51 — points present, blush on cheeks, lip on mouth.
+- small-bugs-2 (local review/small-bugs-2-r6 2e7e226d4): merge-tree conflicts only in built files (index.html, sw.js, assets.json); its
+  jimg mePor only acts on S.fid "player:*" before the manifests load, so no overlap with j66/j88. Whoever lands second: rebuild the site.
