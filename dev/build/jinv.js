@@ -335,7 +335,7 @@ const KSHOP={reg:{}};
  if(typeof kitName==="function"){const n0=kitName;kitName=function(p){if(p&&p.__fig)return p.__cap?`<b class="kname"><span class="kti">${p.__role||""}</span>${p.__cap}</b>`:"";return n0.apply(this,arguments)};window.kitName=kitName}})();
 /* the shop panel: no info / category art (the stage shows the seller); the header ✕ closes it (no "Thôi" row) */
 (function(){if(typeof kpBuild!=="function")return;const b0=kpBuild;kpBuild=function(M,m){const r=b0.apply(this,arguments);try{const dlg=M.querySelector(".dlg");if(!dlg)return r;
- const on=!!(m&&m.kit&&m.kit.shop);dlg.classList.toggle("kshopd",on);if(!on)return r;
+ const on=!!(m&&m.kit&&(m.kit.shop||m.kit.pick));dlg.classList.toggle("kshopd",on);if(!on)return r;
  const body=M.querySelector("#mb > .kpb");if(body){body.querySelectorAll(":scope > .kpsubj").forEach(e=>e.remove());body.classList.remove("kphas","kpinfo")}
  if(typeof kitXAdd==="function")kitXAdd(dlg)}catch(e){console.error("kitShop",e)}return r}})();
 function kitShopList(o){const L=o.mode==='sell'&&o.sell?(o.sell.items()||[]):(o.items||[]);const ok=L.filter(x=>kitShopMax(o,x)>0),no=L.filter(x=>kitShopMax(o,x)<1);return ok.concat(no)}
@@ -409,6 +409,9 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape"){for(const k in KSHO
 .kshqn{min-width:1.8em;text-align:center;font-size:.98rem}
 .kshc .kbtn.kshgo{min-height:0;height:34px;width:100%;padding:0 6px;font-size:.8rem;white-space:nowrap;align-self:end}
 .kshc .kbtn:disabled{filter:grayscale(1);opacity:.55;cursor:default}
+/* pick mode (28.13e, j83 recipes): no stepper row, the picture is not a zoom button */
+.kshc.kshpick{grid-template-rows:auto calc(2rem * 1.2 * .8) calc(2rem * 1.2 * .72) calc(1rem * 1.3 * .8) 34px}
+.kshc.kshpick>.kshpic{cursor:default}
 /* the floating kit item card */
 .dlg.kshopd{position:relative}
 .kshdet{position:absolute;inset:0;z-index:40;display:grid;place-items:center;padding:16px;background:#2a1a1240;border-radius:inherit}

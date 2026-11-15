@@ -30,6 +30,10 @@ KIT_SAMPLES.push(
  {id:"§51",title:"kitRowsJoin · hai bảng nối thành một",html:()=>kitRowsJoin(kitRows([["Giá",kitChip("Bạc",-40,"r"),"t"]]),kitRows([["Phẩm","Thượng phẩm","t"],["Dùng để","dâng, tặng, bày ở yến tiệc","t"]]))},
  {id:"§51",title:"kitReqRows · điều kiện (✓/✗)",html:()=>kitReqRows([[false,"Sủng 8 (cần 15)"],[true,"Ghế Phi: còn chỗ"],[false,"Hoàng hậu không chặn (Hoàng hậu -5)"],[true,"Đã qua một mùa ở phẩm này"]])},
  {id:"§51",title:"kitChip(kitRel(...)) · chip quan hệ trong câu luật",html:()=>`<p>mỗi lần: ${kitChip(kitRel("them","phi tần khác ghen ta"),3,"r")}</p>`});
+/* kit-fig2 parts (review r6): §48 kitNameRank, §49.1 kitRelRow (§50 kitEventDp is a live dialog: see dev/test/event-dp.js) */
+KIT_SAMPLES.push(
+ {id:"§48",title:"kitNameRank: phẩm + tên trên hình",html:()=>`<div class="kitpg-row">${kitNameRank("Quý nhân","Khương Mạn Châu","#3f62a8")}${kitNameRank("Đáp ứng","Trịnh Ngọc Hành","#9c8f74")}${kitNameRank("","Hoàng thượng","#b08a2a")}</div>`},
+ {id:"§49.1",title:"kitRelRow: thiện cảm · oán · sủng · chưa rõ",html:()=>`<div style="max-width:320px">${kitRelRow({kind:"quy",a:"Hoàng hậu",b:"ta",v:-24})}${kitRelRow({kind:"oan",a:"Ta",b:"Hoàng hậu",v:12})}${kitRelRow({kind:"pos",a:"Hoàng thượng",b:"ta",what:"sủng",gloss:"Sủng",v:41})}${kitRelRow({kind:"quy",a:"Tô Lan Chi",b:"Ôn Ngưng Sương",v:null})}</div>`});
 /* §53 (KIT 28.6 event options + §7 result card parts) (review/opt-render, moved here by reviewer r7 — ONE kit sample page). The event option is the
    game's own modal option markup (button.opt + dilLine) run through kaNorm → kitHideOut (data-khide), so hint + risk come from the real kitHint. */
 function kitPgEvOpts(){const W=o=>typeof word==="function"?word(o):"Khó lường";const O=[{n:"Gói bánh ú dâng Thái hậu",fx:{suc:-5,th:4},x:"Thái hậu thiện cảm +4"},
