@@ -20,7 +20,15 @@ function kitFigBody(src,cb){const KIT_FB=window.__KITFB||(window.__KITFB={});con
    if(b>t){let sk=-1;const lim=t+Math.round((b-t)*.45),need=Math.max(3,Math.round(w*.012));
     for(let y=t;y<=lim&&sk<0;y++){const q=y*w*4;let n=0;for(let i=l;i<=r;i++){const k=q+i*4;if(d[k+3]<200)continue;const R=d[k],G=d[k+1],B=d[k+2];
       if(R>150&&G>105&&B>85&&R-G>=8&&R-G<=62&&G-B>=-4&&G-B<=48&&R-B<=95)n++}if(n>=need)sk=y}
-    const ht=sk>=0?Math.max(t,sk-Math.round((b-sk)*.045)):t;v={t:t/h,b:(b+1)/h,l:l/w,r:(r+1)/w,ht:ht/h,ar:nw/nh}}}catch(x){}done(v)};
+    const ht=sk>=0?Math.max(t,sk-Math.round((b-sk)*.045)):t;
+    /* CORE column (owner 11/15): the torso / skirt column — the narrowest opaque run (≥ .4 of the bbox, so a gap row between arm and body is skipped) through the body centre on the waist-to-skirt band
+       (35–80 % of the body), ×1.2; sleeve flare beyond that is not counted (it may overlap a neighbour). cl/cr = its left/right. */
+    const bh=b-ht,c0=Math.round((l+r)/2);let cl=l,cr=r+1;
+    const run=y=>{const q=y*w*4;let c=c0;if(d[q+c*4+3]<=40){let k=1,f=-1;while(k<w/5&&f<0){if(c-k>=0&&d[q+(c-k)*4+3]>40)f=c-k;else if(c+k<w&&d[q+(c+k)*4+3]>40)f=c+k;k++}if(f<0)return null;c=f}
+     let A=c,Z=c;while(A>0&&d[q+(A-1)*4+3]>40)A--;while(Z<w-1&&d[q+(Z+1)*4+3]>40)Z++;return[A,Z+1]};
+    let ws=null;const mn=(r-l)*.4;for(let f=.35;f<=.8;f+=.02){const R=run(Math.round(ht+bh*f));if(R&&R[1]-R[0]>=mn&&(!ws||R[1]-R[0]<ws[1]-ws[0]))ws=R}
+    if(ws){const cc=(ws[0]+ws[1])/2,hw=(ws[1]-ws[0])*.6;cl=Math.max(l,cc-hw);cr=Math.min(r+1,cc+hw)}
+    v={t:t/h,b:(b+1)/h,l:l/w,r:(r+1)/w,ht:ht/h,ar:nw/nh,cl:cl/w,cr:cr/w}}}catch(x){}done(v)};
  im.onerror=()=>done({t:0,b:1,l:0,r:1,ht:0,ar:.45});im.src=src;return null}
 /* KIT 33.4 · kitImgErr — the ONE null-safe fallback for inline <img onerror>: a picture that fails after a re-render detached it
    does nothing (no "reading 'classList' of null" page errors). o.sel: ancestor to mark (default the parent); o.cls: class to add;
