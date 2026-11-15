@@ -16,8 +16,8 @@ function restDsB(){const i=BUOI.indexOf(BAL.restDsBuoi);return i<0?BUOI.length-1
 function restDsK(){return Math.max(BAL.restDsMinK,4-(typeof used==="number"?used:0))}
 function restDs(a){if(!a||a.rest!=="ds")return a;const T=restTonic(),k=restDsK();a.k=k;a.b=restDsB();a.o=100;a.w={suc:BAL.restDsSuc};a.l={};
  a.c=T?{}:{bac:-BAL.restDsBac};
- a.t=`Uống thuốc bổ, ngủ sớm: ${4-used<BAL.restDsMinK?`cần còn ít nhất ${BAL.restDsMinK} khắc;`:`dùng hết ${k} khắc còn lại,`} hết ${BUOI[restDsB()].toLowerCase()}.${T?"":" Rương không có thuốc bổ: sai người mua một chén."}`;
- a.x=T?`tốn: 1 ${T.it.n} trong rương`:""; /* review: the card says only what is spent — the "(thang thuốc bổ rẻ nhất; không mất bạc)" aside ran past the card at 844x390 */
+ const B=BUOI[restDsB()].toLowerCase();a.t=`Uống thuốc bổ, ngủ sớm: ${(S.buoi||0)!==restDsB()?`chỉ ${B}, dùng hết số khắc còn lại của buổi.`:4-used<BAL.restDsMinK?`cần còn ít nhất ${BAL.restDsMinK} khắc; hết ${B}.`:`dùng hết ${k} khắc còn lại, hết ${B}.`}${T?"":" Rương không có thuốc bổ: sai người mua một chén."}`;
+ a.x="";a.restTon=T?`1 ${T.it.n} trong rương`:""; /* review R6: the tonic is a COST — it goes in the Tốn row (cardH below), not in a.x (a.x is read as Được); the "(thang thuốc bổ rẻ nhất…)" aside ran past the card at 844x390 */
  a.go=()=>{const t=restTonic();if(t&&!(a.c&&a.c.bac)){S.inv.splice(t.i,1);log(`Ngươi sắc ${t.it.n} uống rồi ngủ sớm.`)}else log("Ngươi sai người mua chén thuốc bổ, uống rồi ngủ sớm.")};return a}
 function restLat(a){if(!a||a.rest!=="lat")return a;const e=typeof emoGet==="function"?emoGet(S):{k:"binh",v:0};const bad=REST_BAD.includes(e.k)&&e.v>=15;
  a.k=BAL.restLatK;a.c={};a.o=100;a.w={suc:BAL.restLatSuc};a.l={};
@@ -29,5 +29,6 @@ function restFix(a){return a&&a.rest==="ds"?restDs(a):a&&a.rest==="lat"?restLat(
 (function(){const p0=pool;pool=function(){const A=p0.apply(this,arguments);try{for(const a of A)if(a&&a.n==="Nghỉ ngơi dưỡng sức"){a.rest="ds";restDs(a)}}catch(e){}return A}})();
 (function(){const s0=j76stand;j76stand=function(){const A=s0.apply(this,arguments);try{for(const a of A)if(a&&a.n==="Nghỉ ngơi một lát"){a.rest="lat";restLat(a)}}catch(e){}return A}})();
 /* refresh from the live state on every draw and before playing */
-(function(){const ch=cardH;cardH=function(a){try{restFix(a)}catch(e){}return ch.apply(this,arguments)}})();
+(function(){const ch=cardH;cardH=function(a){try{restFix(a)}catch(e){}let h=ch.apply(this,arguments);
+ try{if(a&&a.rest==="ds"&&a.restTon)h=h.replace('<span class="kl">Tốn</span><span>',m=>m+eff(`<span class="r">${a.restTon}</span>`)+'<span class="ksep">·</span>')}catch(e){}return h}})();
 (function(){const a0=act;act=function(i){try{if(Array.isArray(deck))restFix(deck[i])}catch(e){}return a0.apply(this,arguments)}})();

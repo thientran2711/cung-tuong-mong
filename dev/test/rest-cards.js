@@ -31,6 +31,6 @@ const {chromium}=require('playwright');const [,,URL]=process.argv;
  const ok=r.dsMorning&&r.dsMorning.dis&&r.latMorning&&!r.latMorning.dis&&/bớt Buồn/.test(r.latSad.t)
   &&r.latDone.suc===6&&r.latDone.khac===1&&r.latDone.bac===0&&r.latDone.emo===32
   &&r.dsBacDone.suc===20&&r.dsBacDone.bac===-8&&r.dsBacDone.used===4&&/Bạc/.test(r.dsEveBac.t)&&/3 khắc/.test(r.dsEveBac.t)&&/hết buổi tối/.test(r.dsEveBac.t)&&!/Bạc -8.*Bạc -8/.test(r.dsEveBac.t)
-  &&r.dsTonicDone.suc===20&&r.dsTonicDone.bac===0&&r.dsTonicDone.used===4&&r.dsTonicDone.inv===-1&&r.dsTonicDone.left.join()==="nhansam"&&/A giao/.test(r.dsEveTonic.t)
+  &&r.dsTonicDone.suc===20&&r.dsTonicDone.bac===0&&r.dsTonicDone.used===4&&r.dsTonicDone.inv===-1&&r.dsTonicDone.left.join()==="nhansam"&&/Tốn[^Đ]*1 A giao trong rương[^Đ]*Được/.test(r.dsEveTonic.t)&&!/Được[^]*A giao/.test(r.dsEveTonic.t)&&!/Tốn[^Đ]*không/.test(r.dsEveTonic.t)
   &&r.dsLate.dis&&r.dsPoor.dis;
  console.log(JSON.stringify({ok,r,errs},null,1));await b.close();process.exit(ok&&!errs.length?0:1)})();
