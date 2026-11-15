@@ -1257,7 +1257,7 @@ Stage rule (j59 — every room / place / servant road / lãnh cung stage):
 Event stage (jk4 kitStageFig / kitEventStage, week-book person pages): each figure carries `--kfr = KIT_FIG.fac/KIT_FIG.man`,
 so a man fills the figure box and a woman / child stand at their kit ratio; feet share the bottom line (`.kesf` justify-end).
 
-Measured BEFORE 11/15 (.86 / ×1.08, superseded — see the book-release table in dev/review/LOG.md) (dev/shots/review/fold-layout/k33-*.jpg; figure image height / stage height; 0 page errors, 0 horizontal overflow, 0 cut chips):
+Measured BEFORE 11/15 (.86 / ×1.08, superseded — see the table in dev/PROGRESS_book_release.md) (dev/shots/review/fold-layout/k33-*.jpg; figure image height / stage height; 0 page errors, 0 horizontal overflow, 0 cut chips):
 
 | viewport | consort room (her + 1) | cung nữ, master away (her + 1) | cung nữ, 3 people | cung nữ, 6 people |
 |---|---|---|---|---|
