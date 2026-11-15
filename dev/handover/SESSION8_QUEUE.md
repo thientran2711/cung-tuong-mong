@@ -86,3 +86,4 @@ j72 bước vs Hồi · stage paper halo · Thái hậu title bronze vs plum · 
 | D50 | consorts without full-body figure art show a placeholder frame in the dialog person column (seen 755x1000, mood-dialog worker) → art-complete follow-up | QUEUED |
 | C28 | review/room-btn (owner s8: header '‹ Phòng' bar → painted room icon button) | QUEUED-NEXT |
 | C29 | review/rel-picker (owner s8: Giao tình relation pickers waste space → compact) | QUEUED-NEXT |
+| C30 | review/night-panel (owner s8: ĐÊM panel dark → same light kit panel; scan all dark-themed dialogs) | QUEUED-NEXT |
