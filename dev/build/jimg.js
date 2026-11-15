@@ -35,10 +35,12 @@ if(typeof kidPor==="function"){const k0=kidPor;kidPor=function(k,fb){const r=k0.
    identity (S.fid "player:lookN") is kept for life and her por depends only on look + age band (one dress for every life type: cung nữ,
    lãnh cung, every origin), so before FIGURES*.json arrive the header, cards and dialogs still show her own face, never the initials. */
 const MEBANDS=[18,26,36,51];
-function mePor(){try{const m=/^player:(.+)$/.exec(S&&S.fid||"");if(!m)return"";const a=S.age||18;const b=MEBANDS.reduce((x,y)=>Math.abs(y-a)<Math.abs(x-a)?y:x);
+/* review r6 (player-dress on main: every life now has a consort identity S.pid, por-consort-*, which needs the manifests): her last
+   resolved portrait is kept in S.porMe (saved) and shown until the manifests arrive — a reload never shows an empty frame */
+function mePor(){try{const m=/^player:(.+)$/.exec(S&&S.fid||"");if(!m)return S&&typeof S.porMe==="string"&&!(typeof PORK!=="undefined"&&PORK[S.porMe]===0)?S.porMe:"";const a=S.age||18;const b=MEBANDS.reduce((x,y)=>Math.abs(y-a)<Math.abs(x-a)?y:x);
  const src=`img/por-player-${m[1]}-t1-a${b}.webp`;return typeof PORK!=="undefined"&&PORK[src]===0?"":src}catch(e){return""}}
 window.kitMePor=mePor;
-if(typeof porOf==="function"){const p1=porOf;porOf=function(who,fb){const r=p1.apply(this,arguments);try{if(who===S&&S&&(!r||(oldFace(r)&&!figReady()))){const m=mePor();if(m)return m}}catch(e){}return r}}
+if(typeof porOf==="function"){const p1=porOf;porOf=function(who,fb){const r=p1.apply(this,arguments);try{if(who===S&&S&&typeof r==="string"&&/(^|\/)por-[^/]*\.webp/.test(r)&&!oldFace(r))S.porMe=r;if(who===S&&S&&(!r||(oldFace(r)&&!figReady()))){const m=mePor();if(m)return m}}catch(e){}return r}}
 /* a por that fails to load falls back to the old face in place (never a broken frame) */
 document.addEventListener("error",e=>{try{const im=e.target;if(!im||im.tagName!=="IMG")return;const s=im.getAttribute("src")||"";if(!/(^|\/)por-/.test(s)||im.dataset.jimgFb)return;
   if(typeof PORK!=="undefined")PORK[s]=0;if(typeof KPORK!=="undefined"&&/por-kid-/.test(s))KPORK[s]=0;im.dataset.jimgFb="1";clearTimeout(window.__jimgT);window.__jimgT=setTimeout(()=>{try{if(S)render()}catch(x){}},300)}catch(x){}},true);

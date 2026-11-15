@@ -2,7 +2,7 @@
    usage: node dev/test/small-bugs-2.js <page URL> <WxH@dpr> [oldPageURL] [shot dir]
    1 ROAD   on the cung nữ road and in lãnh cung, no consort-only goal/hint (lập Hoàng hậu, mẹ Thái tử, thăng bậc, thị tẩm, bổng lộc, sắc phong…)
             in any header cell title / warn badge / tap explanation (HX) / glossary popover. Prints every hit.
-   2 POR    her header portrait is her real por-player-* picture (loaded, visible) on every life type: 9 origins, cung nữ (rank 1 and 3),
+   2 POR    her header portrait is her real por-player-* / por-consort-* (player-dress identity) picture (loaded, visible) on every life type: 9 origins, cung nữ (rank 1 and 3),
             lãnh cung — also in the first seconds before the figure manifests arrive.
    3 MET    Hoàng thượng / Thái hậu / Hoàng hậu: the stage chip, portraits (mdH, pcPort, kitPortrait = news / Tuần lục rows), dialog figures
             (kitStageFig, kitFigOf) all agree; Hoàng thượng + Thái hậu are met from day one; Hoàng hậu is a silhouette until met, then a face.
@@ -53,10 +53,10 @@ const NEW=`window.__sb2new=(o,f)=>{window.__forceOrigin=o;SLOT=3;document.getEle
  const lives=[["cnv"],["cnv","rk3"],["thd","cold"],["tt"],["dtq"],["muoi"],["cn"],["nc"],["td"],["ch"],["thd"]];
  for(const [o,x] of lives){const r=await p.evaluate(async([o,x])=>{__sb2new(o,()=>{if(x==="cold")cold("thử");if(x==="rk3"&&S.srv)S.srv.rk=3});await new Promise(r=>setTimeout(r,2200));render();await new Promise(r=>setTimeout(r,800));
    const i=document.querySelector('#me-p img.kpor');const q=i&&i.getBoundingClientRect();return{s:i?(i.getAttribute('src')||'').split('/').pop():'',nw:i?i.naturalWidth:0,w:q?q.width:0,v:i?getComputedStyle(i).visibility+getComputedStyle(i).display:''}},[o,x]);
-  if(!/^por-player-/.test(r.s)||!r.nw||r.w<10||!/visible/.test(r.v))C('2 portrait',[`${o}${x?' '+x:''}: ${JSON.stringify(r)}`]);OUT.info['por '+o+(x||'')]=r.s}
+  if(!/^por-(player|consort)-/.test(r.s)||!r.nw||r.w<10||!/visible/.test(r.v))C('2 portrait',[`${o}${x?' '+x:''}: ${JSON.stringify(r)}`]);OUT.info['por '+o+(x||'')]=r.s}
  /* before the manifests: her portrait is still her own (FIGS emptied for the moment) */
  {const r=await p.evaluate(()=>{__sb2new("cnv");const f0=FIGS.slice(),g0=FIGSIG;FIGS.length=0;FIGSIG="";let s="";try{render();const i=document.querySelector('#me-p img.kpor')||document.querySelector('#me-p img');s=i?i.getAttribute('src'):'(no img) '+document.getElementById('me-p').innerText}finally{FIGS.push(...f0);FIGSIG=g0;render()}return s});
-  if(!/por-player-/.test(r))C('2 portrait',['before manifests (cnv): '+r])}
+  if(!/por-(player|consort)-/.test(r))C('2 portrait',['before manifests (cnv): '+r])}
  /* ---------- 3 MET ---------- */
  for(const o of ["thd","cnv"]){const r=await p.evaluate(async(o)=>{__sb2new(o);await new Promise(r=>setTimeout(r,2000));const P=[];
    const sil=s=>/unknown-/.test(String(s||''));const src=h=>(/src="([^"]+)"/.exec(h||'')||[])[1]||'';
