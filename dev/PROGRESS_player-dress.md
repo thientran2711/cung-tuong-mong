@@ -46,3 +46,14 @@ dresses need none (jtoil `toilOn` is off on the cung nữ road and in lãnh cung
 - `node dev/test/player-dress.js <url> [pids|all] [WxH@dpr]` — scan of every surface × state × age. Before (main) / after: see report.
 - `node dev/test/player-dress-old.js <old url> <new url> <WxH@dpr> [shots]` — saves written by main (cung nữ rk3, lãnh cung, Tân Giả khố)
   load in this build; stage + header show her face in the right dress; no page error, no horizontal overflow.
+
+## Results (15/11, after merging origin/main 17e8fc038)
+- Scan `player-dress.js` (c05 + m05, 138 cases × 7 surfaces): main BAD 44 of 138 (fig/por/stage/header/dialog/Tuần lục all wrong on
+  the cung nữ road: c05 always tm0, m05 always plain maid art) → this branch BAD 0. Extra faces c01, c32, m01, m52 at 844x390: BAD 0 of 276.
+- NPC maids, ranks forced 0..4: main = plain maid art for every rank; now tm0 / plain / tm2 / tm3 / tm4.
+- Old saves written by main (cung nữ Chưởng sự cô cô, lãnh cung, Tân Giả khố) load at 755x1000@2, 1000x755, 1180x820@2, 1366x1024@2,
+  844x390, 390x844: right dress on stage + header, no page error, no horizontal overflow (one 1180x820 run timed out on image load under
+  load 60; rerun passed).
+- toil-fit: +3328 points (1664 por + 1664 fig), 0 without reference, 10 random ones checked by eye (mouth + cheeks on the face); on the CDN.
+- Pre-existing, not touched: 390x844 shows no rotate prompt and the place subtitle wraps one letter per line (main too; small-bugs-2 noted it).
+- Merge note: review/small-bugs-2 (not on main yet) changes jimg kitMePor / porOf; no overlap with j66/j88.
