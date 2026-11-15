@@ -291,3 +291,4 @@ Worker worktrees at /home/user/wt/<name>. Rule summaries for workers: /home/user
 - 18:32Z hourly watch: main 64e91f1ae; load 60 (holding queue); 12 agents running (8 workers + calendar + 3 reviewers; act-pics2 resumed for rule swap + act-picture face/light audit); disk OK, packs 8.3G (repack when load drops).
 - book-title READY review/book-title e7769dc32 (d4 vertical title + Trân nữ seal on Tuần lục cover, KIT §27.1); reviewer started. Open note: 844x390 cover hint overlaps TUẦN seal.
 - act-pics2: 5-rule swap LIVE (19cf6188e; 6 lines moved as allowed). Act-picture audit: 288 faces + 121 negative-on-light + 22 normal-on-dark = 382 to redraw; coordinator approved redraw (batches of 60), keep 18 night-by-nature normal acts.
+- fig-bg step 1 sample sent to owner (A scroll / B moon window / C silk wash; rec C). §61 reserved for the background layer. Waiting for her pick.
