@@ -105,7 +105,8 @@ function ktMonth(){let ev="";if(!S||S.dead)return ev;
   if(!ktLive(p)){if(k.tut||k.vt){k.tut=0;k.vt=0;k.fav=0}}/* mẹ mất hay vào lãnh cung: không ai trả học phí */
   if(v&&ktLive(v)&&k.age>=3&&S.turn%3===0){const P=ktPT(v);if(roll(P[0]*100))ktTeach(k,v,"tv");if(roll(P[1]*100))ktTeach(k,v,"td")}
   if(k.age>=6&&!k.enr){k.enr=1;if(v)ktNpcTutor(k,v);else{tcSeeOwn(k,"thầy dạy",BAL.tc.nzOwn);ev+=`${k.name} tròn 6 tuổi, vào Thượng thư phòng học chung; thầy dạy thưa: tư chất con ${tcWord(k.tcO.v)}. Có thể mời thầy riêng ở thẻ con. `}}
-  if(!v&&k.age>=BAL.tc.nurseAge&&!k.tcO){tcSeeOwn(k,"nhũ mẫu",BAL.tc.nzNurse);ev+=`Nhũ mẫu thưa: ${k.name} ${tcWord(k.tcO.v)==="chậm hiểu"?"chậm biết nói, chậm biết đi":"lanh lợi"}, tư chất ${tcWord(k.tcO.v)}. `}
+  if(!v&&k.age>=BAL.tc.nurseAge&&!k.tcO){if(k.age>=6){tcSeeOwn(k,"thầy dạy",BAL.tc.nzOwn);ev+=`Thầy dạy thưa: tư chất ${k.name} ${tcWord(k.tcO.v)}. `}/* reviewer: old saves / children already at school — the teacher speaks, not the nurse */
+   else{tcSeeOwn(k,"nhũ mẫu",BAL.tc.nzNurse);ev+=`Nhũ mẫu thưa: ${k.name} ${tcWord(k.tcO.v)==="chậm hiểu"?(k.age<3?"chậm biết nói, chậm biết đi":"chậm hiểu lời"):"lanh lợi"}, tư chất ${tcWord(k.tcO.v)}. `}}
   ktGrow(k,p)}
  return ev}
 (function(){const k0=kidsMonth;kidsMonth=function(){let ev=k0.apply(this,arguments)||"";try{ev+=ktMonth()}catch(e){}return ev}})();
