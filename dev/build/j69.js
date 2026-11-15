@@ -29,7 +29,7 @@ if(typeof kpIdentity==="function"&&typeof kitChips==="function")(function(){cons
   d.innerHTML=kitChips([kitChip(`Thân phận ${ow69Rare(k).toLowerCase()}`,"n")]);box.appendChild(d)}}catch(e){console.error(e)}return r}})();
 else if(typeof nlCardHTML==="function")(function(){const c0=nlCardHTML;nlCardHTML=function(){const h=c0.apply(this,arguments);
  try{const k=S&&S.origin&&S.origin.k;if(!k||!OW69[k])return h;const c=`<div class="chips ow69">${chip(`Thân phận ${ow69Rare(k).toLowerCase()}`)}</div>`;
-  return h.replace(/(<div class="pcb rows">)/,c+"$1")}catch(e){return h}}})();
+  return h.replace(/(<div class="pcb rows">|<span class="kb kpkb">)/,c+"$1")}catch(e){return h}}})();
 /* end of life: compensation for hard origins */
 if(typeof pdGet==="function")(function(){const o0=over;over=function(h,t,fate){const was=!S||S.dead;const r=o0.apply(this,arguments);
  try{if(was)return r;const m=Q.find(x=>x&&x.cls==="end"&&x.pd);const k=S.origin&&S.origin.k;const tier=OHARD69[k]||0;const b=OBON69[tier];

@@ -198,7 +198,7 @@ def pull(globs):
     def get(k):
         for i in range(6):
             try:
-                with urllib.request.urlopen(urllib.request.Request(PUBLIC + keyurl(k), headers={"Cache-Control": "no-cache"}), timeout=120) as r:
+                with urllib.request.urlopen(urllib.request.Request(PUBLIC + keyurl(k), headers={"Cache-Control": "no-cache", "User-Agent": "ctm-cdn-sync"}), timeout=120) as r:
                     b = r.read()
                 if md5(b) == remote[k][0]:
                     break

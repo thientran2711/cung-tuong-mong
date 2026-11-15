@@ -155,7 +155,7 @@ function kitCourtHTML(cls){const R=kitCourtRows();if(!R.length)return"";const v=
 function kitCourtOpen(k){try{if(Q.length&&!/pcm/.test(Q[0].cls||""))return;if(k==="emp"){showEmp();return}
  const tb=k==="th"?"rel":"rv";if(k==="th")relSel="th";else{const q=queenP();const i=rivals.indexOf(q);if(i>=0)PG.rv=i}
  const b=document.querySelector(`[data-tab="${tb}"]`);if(b)b.click();else{tab=tb;render()}}catch(e){console.error("kitCourtOpen",e)}}
-addEventListener("click",e=>{const b=e.target.closest&&e.target.closest(".kcrow[data-kc]");if(!b)return;e.stopPropagation();const el=$("hud2");if(el&&!el.classList.contains("col")&&b.closest("#hud2")){const x=el.querySelector(".khx");if(x)x.click()}kitCourtOpen(b.dataset.kc)},true);
+addEventListener("click",e=>{const b=e.target.closest&&e.target.closest(".kcrow[data-kc]");if(!b||e.target.closest("img.kemo"))return; /* a tap on the mood seal = its popover (jemo), not the card */e.stopPropagation();const el=$("hud2");if(el&&!el.classList.contains("col")&&b.closest("#hud2")){const x=el.querySelector(".khx");if(x)x.click()}kitCourtOpen(b.dataset.kc)},true);
 function kitCourtStage(){try{const st=$("stage"),ks=$("kstat");let o=$("kcourt");const land=innerWidth>innerHeight;
  if(!st||!ks||!land||!S||S.dead||ks.style.visibility==="hidden"||(typeof isSrv==="function"&&isSrv())){if(o)o.remove();return}
  const h=kitCourtHTML("kcst");if(!h){if(o)o.remove();return}if(!o){o=document.createElement("div");o.id="kcourt";st.appendChild(o)}o.innerHTML=h;
@@ -190,24 +190,141 @@ kitFigRects=function(){const st=$("stage");if(!st)return[];const out=[];st.query
   const m=e.tagName==="IMG"?kitMask(e.currentSrc||e.src):null;if(!m){out.push({left:r.left,right:r.right,top:r.top,bottom:r.bottom});return}
   const N=m.b.length,bh=r.height/N;m.b.forEach((x,i)=>{if(x)out.push({left:r.left+r.width*x[0]-4,right:r.left+r.width*x[1]+4,top:r.top+i*bh,bottom:r.top+(i+1)*bh})})});return out};
 
-/* ---------- 6. OPTION MODE "cost" — hidden outcomes for EVENT choices (owner 11/14) ----------
-   Weekly events (j68), Mệnh truyện chapters (j67), side events and dilemmas: the option shows ONLY what it costs (Sức, khắc, Bạc) — no Được/Mất/Kèm,
-   no odds word, no notes. The result card afterwards still shows the true numbers (resultShow is untouched). Normal act cards keep everything.
+/* ---------- 6. OPTION MODE "cost" — hidden outcomes for EVENT choices (owner 11/14, 11/15 14:30Z, KIT 28.6) ----------
+   Every event choice (main / side stories, weekly events, festivals, NPC visits, dilemmas…): the option shows ONLY what it costs (Sức, khắc,
+   Bạc) and its Cần — no Được / Mất / Kèm, no odds word. An option with no cost has NO Tốn row (owner 13:25Z: never "Tốn: không"). Under it the
+   kit HINT row and in its head the kit RISK chip (6b). The result card afterwards shows the true numbers. Active acts keep everything.
    Use (data only): a Q / kitModal item with `hideOut:true` (every option) or an option with `hideOut:true`; any priced button may also carry
-   `data-khide="1"`. An option with no such cost reads "Tốn: không". ---------- */
+   `data-khide="1"`. Which items are events: `kitIsEventChoice` below. ---------- */
 const KIT_COSTRE=/khắc|\bSức\b|\bBạc\b|\bbạc\b/i;
+/* ---------- 6b. KIT HINT + KIT RISK (owner 11/15 15:05Z / 15:10Z, KIT 28.6 — shared kit parts kitHint / kitHintRow / kitRisk) ----------
+   kitHint(o, m, lv) → {hint, risk}: read from the option's OWN data (fx + its x / j67 text: the odds, people and state of THIS moment), so it is
+   true now and changes with the context (no fixed answer to learn). Words only: stat numbers never appear (a count in a story phrase is
+   written in words: "hai mươi trượng"). It names the main gain FIRST, then the price beyond Tốn, then what a failure brings.
+   Clarity lv (kitHintLevel: her Tâm cơ / Tai mắt, BAL.hint*):
+     0 vague — generic people ("bề trên", "đối thủ"), no chance word; a deadly failure is always said ("hỏng thì mất mạng").
+     1 plain — the roles (Thái hậu, Hoàng hậu, Hoàng thượng), a rough chance (dễ thành / thành bại khó đoán / khó thành) and the failure.
+     2 sharp — names (the rival by name) and the reading of the moment the data carries ("ngài trọng tài, rất hợp").
+   Risk: none / sure → "an toàn"; Khó / Liều or a deadly failure / side risk → "liều"; any other odds, "Khó lường" or a side risk → "có rủi ro".
+   An option may carry its own `hint` (string or fn(lv)) and `risk`; hints may never lie (an override must match the data). */
+const KIT_HINT_LADDER=/(Liều|Khó lường|Khó|Năm ăn năm thua|Khá chắc|Rất chắc|Nắm chắc|Chắc chắn|Chắc)/;
+function kitHintLevel(){try{const t=S.tamco||0,m=S.mat||0;const B=typeof BAL==="object"?BAL:{};if(t>=(B.hintSharp||45)||m>=(B.hintMat||3))return 2;if(t>=(B.hintMid||25))return 1}catch(e){}return 0}
+/* a count inside a story phrase in words (1..999): "20 trượng" → "hai mươi trượng" */
+function kitNumVi(n){const D=["không","một","hai","ba","bốn","năm","sáu","bảy","tám","chín"];n=Math.round(+n);if(!(n>=0&&n<1000))return String(n);
+ const two=x=>{if(x<10)return D[x];const t=Math.floor(x/10),u=x%10;const a=t===1?"mười":D[t]+" mươi";return u===0?a:a+" "+(u===1&&t>1?"mốt":u===5?"lăm":u===4&&t>1?"tư":D[u])};
+ if(n<100)return two(n);const h=Math.floor(n/100),r=n%100;return D[h]+" trăm"+(r===0?"":r<10?" lẻ "+D[r]:" "+two(r))}
+/* the option's raw kit line (the same text its act card would read), split into labelled items */
+function kitOptModel(o){let raw="";try{raw=o&&o.j67?String(o.j67):typeof dilLineRaw==="function"?dilLineRaw(o):String(o&&o.x||"")}catch(e){raw=String(o&&o.x||"")}
+ raw=raw.replace(/(nàng |hắn )?thù -(\d+)/g,(m,p,n)=>`${p||""}oán ta +${n}`);
+ const M={odds:"",items:[],notes:[]};let lab="";
+ for(const s0 of raw.split(/ · (?![^<]*>)/)){const s=kaPlain(s0);if(!s)continue;
+  const od=s.match(/^(Chắc chắn|Nắm chắc|Rất chắc|Khá chắc|Năm ăn năm thua|Chắc|Khó lường|Khó|Liều)$/);if(od&&!M.odds){M.odds=od[1];continue}
+  if(/^Quẻ: /.test(s))continue;
+  const ml=s.match(/^(được ngay|ngay|tốn|thành|thắng|được|hỏng|mất|kèm)\s*:\s*/i);let body=s,cont=true;
+  if(ml){lab=ml[1].toLowerCase();if(lab==="thắng"||lab==="được")lab="thành";if(lab==="mất")lab="hỏng";if(lab==="được ngay")lab="ngay";body=s.slice(ml[0].length);cont=false}
+  /* an unlabelled segment with no number after the effects = a reading of the moment ("ngài trọng tài, rất hợp") */
+  if(cont&&(lab==="hỏng"||lab==="kèm")&&!/\d/.test(body)&&!/^(nàng|hắn|các|Thái hậu|Hoàng hậu|Hoàng thượng|chứng cứ)/.test(body)){M.notes.push(body);continue}
+  for(const sc of body.split(/; /)){const P=[];for(const v of sc.split(/, (?![^(]*\))/)){const p=v.trim();if(!p)continue;if(P.length&&!/\d/.test(p)&&!/\d/.test(P[P.length-1])&&!/^(Sủng|Danh|Đức|Bạc|Sức|Ân tình|Thái hậu|Hoàng hậu|chứng cứ|nàng|hắn|các)/.test(p))P[P.length-1]+=", "+p;else P.push(p)}
+   P.forEach(p=>M.items.push({p,l:lab||"thành"}))}}
+ return M}
+/* her side of a phrase: +1 good for her, -1 bad, 0 neutral (the kit colour rule kcls/kaSent + story words) */
+function kitHintSign(p,l){if(/^(không (mất|được|tốn)[^,]*gì|không được không mất)/i.test(p))return 0;
+ if(l==="kèm"&&!/\+\s?\d/.test(p)&&!/bớt (ghen|oán)/.test(p))return -1;/* a side effect is a risk unless it is a plain gain */
+ if(/(^|\s)(phật ý|hận|sa sút|không thể|đoạn tuyệt|bẽ mặt|nhạt|lạt lẽo|lạnh nhạt|chán|trách|giận|ghét|tang vật|lộ là|bị đánh|chịu đòn|thất sủng|bị phạt)(\s|$|,)/i.test(p)&&!/^(nàng|con nàng|của nàng|hắn) /i.test(p))return -1;
+ if(/(thân|thiện cảm|quý ngươi|quý ta|tình ý|(^|\s|\()lòng)\s*[-−]\s?\d/i.test(p))return -1;if(/(thân|thiện cảm|quý ngươi|quý ta|tình ý|(^|\s|\()lòng)\s*\+\s?\d/i.test(p))return 1;
+ let c="n";try{c=kaSent(p,"n")}catch(e){}if(c==="g")return 1;if(c==="r")return -1;
+ if(/(^|\s)(hài lòng|thoát nạn|vui|hợp ý|thương|tin cậy|giữ được|được giữ|được dời|dọn sang|tạ ơn)(\s|$|,)/i.test(p))return 1;return l==="hỏng"?-1:l==="kèm"?-1:1}
+const KIT_DEADLY=/(tru di|ban chết|mất mạng|lộ là chết|là chết|bị chết|xử tử|xử trảm|\bchết\b)/i;
+/* one effect phrase → [vague, plain, sharp] words (numbers dropped), or null when it is only a cost */
+function kitHintPhrase(p,sg,nm,lv){const who=nm||"\u0001";
+ const story=()=>{const t=p.replace(/\s*\([^()]*\d[^()]*\)/g,"").replace(/(\d+)/g,(m,d)=>kitNumVi(d)).replace(/\s*\(\s*\)/g,"").trim();return [t,t,t]};
+ if(KIT_DEADLY.test(p))return lv===0?["mất mạng","mất mạng","mất mạng"]:story();
+ if(/^(Sức|Bạc)\s*[-−]\s*\d+$/.test(p)||/^\d+\s*khắc$/.test(p)||/^an toàn$/i.test(p))return null;
+ if(/(kẻ hầu|cung nhân) khác/i.test(p))return story();/* "kẻ hầu khác giữ kỷ cương (lòng +1)": the others, in the story's words */
+ const T=[/* [re, up, down, flags]: flags "i" hostility (her side is the reverse), "w" may match a phrase without a number */
+  [/chứng cứ/i,["nắm thêm thóp kẻ khác","nắm thêm chứng cứ",`nắm thêm chứng cứ về ${who}`],["mất một chứng cứ","mất chứng cứ trong tay","mất chứng cứ trong tay"],"w"],
+  [/long thai|có thai|mang thai|\bthai\b/i,["có phúc con cái","giữ được long thai","giữ được long thai"],["lỡ phúc con cái","lần này không thể có thai","lần này không thể có thai"],"w"],
+  [/Thái hậu/i,["được lòng bề trên","Thái hậu hài lòng","Thái hậu hài lòng"],["mất lòng bề trên","Thái hậu phật ý","Thái hậu để bụng"]],
+  [/Hoàng hậu/i,["được lòng bề trên","Hoàng hậu hài lòng","Hoàng hậu hài lòng"],["mất lòng bề trên","Hoàng hậu phật ý","Hoàng hậu để bụng"]],
+  [/^(nàng|hắn|con nàng)\s+(Sủng|Danh)|Sủng của|bớt sủng/i,["hạ được đối thủ","đối thủ thất thế",`${who} thất sủng`],["đối thủ được lợi","đối thủ được lợi",`${who} được lợi`]],
+  [/phi tần.*ghen|ghen.*phi tần/i,["chuốc lòng ghen","các phi tần ghen ghét","các phi tần ghen ghét"],["bớt người ghen","các phi tần bớt ghen","các phi tần bớt ghen"],"i"],
+  [/ghen|oán|ghét/i,["kết thêm oán","có người ghen ghét",`${who} sinh oán`],["bớt người oán","có người nguôi giận",`${who} nguôi giận`],"i"],
+  [/tình ý/i,["thêm tình riêng","người ấy thêm tình ý",`${who} thêm tình ý`],["dứt tình riêng","người ấy nguội lòng",`${who} nguội lòng`]],
+  [/thân\b|thiện cảm|quý ngươi|quý ta/i,["được lòng người","người ấy có thiện cảm hơn",`${who} có thiện cảm với ta hơn`],["mất lòng người","người ấy mất thiện cảm",`${who} mất thiện cảm với ta`]],
+  [/(^|\s|\()(lòng|Lòng)\s/,["được lòng kẻ hầu","kẻ hầu một lòng theo ta",`${who} một lòng theo ta`],["mất lòng kẻ hầu","kẻ hầu sinh oán",`${who} sinh oán`]],
+  [/thương con|hoàng tử|công chúa|các con/i,["có lợi cho con","con được thương","Hoàng thượng thương con hơn"],["con thiệt","con bị lạnh nhạt","con bị lạnh nhạt"]],
+  [/nghi ngươi|nghi ta|đa nghi|quở|cấm túc|giáng/i,["được tin","bệ hạ thêm tin","Hoàng thượng thêm tin"],["dễ bị nghi, bị phạt","có thể bị nghi, bị phạt","Hoàng thượng có thể sinh nghi, trách phạt"],"w"],
+  [/Ân tình/i,["thêm tình nghĩa","thêm tình nghĩa với bệ hạ","thêm tình nghĩa với Hoàng thượng"],["sứt mẻ tình nghĩa","sứt mẻ tình nghĩa với bệ hạ","sứt mẻ tình nghĩa với Hoàng thượng"]],
+  [/Sủng|được ưa|đêm vui/i,["được để mắt","bệ hạ để mắt hơn","Hoàng thượng để mắt hơn"],["bị lạt lẽo","bệ hạ lạt lẽo đi","Hoàng thượng lạt lẽo đi"]],
+  [/Danh/i,["thêm thể diện","thêm thể diện trong cung","thêm thể diện trong cung"],["mất thể diện","mất thể diện trước lục cung","mất thể diện trước lục cung"]],
+  [/Đức/i,["được tiếng hiền","được tiếng hiền đức","được tiếng hiền đức"],["mang tiếng ác","mang tiếng thất đức","mang tiếng thất đức"]],
+  [/Bạc|lì xì/i,["có thêm bạc","có thêm bạc","có thêm bạc"],["hao bạc","hao bạc","hao bạc"]],
+  [/Sức/i,["dưỡng sức","dưỡng sức","dưỡng sức"],["hao sức","hao sức","hao sức"]],
+  [/Tai mắt/i,["thêm tai mắt","thêm tai mắt","thêm tai mắt"],["mất tai mắt","mất tai mắt","mất tai mắt"]],
+  [/Tâm cơ/i,["thêm mưu trí","thêm tâm cơ","thêm tâm cơ"],["kém mưu trí","sút tâm cơ","sút tâm cơ"]],
+  [/Sắc|Tài\b|tài nghệ/i,["bản thân khá lên","bản thân khá lên","bản thân khá lên"],["bản thân sút đi","bản thân sút đi","bản thân sút đi"]],
+  [/Thái y|thuốc|bệnh|ốm/i,["giữ được thân thể","thân thể được giữ","thân thể được giữ"],["thân thể bị hại","thân thể bị hại","thân thể bị hại"],"w"]];
+ const num=/\d/.test(p)||/^(nàng|hắn|con nàng)\s/.test(p);
+ for(const [re,U,Dn,fl] of T)if(re.test(p)&&(num||/w/.test(fl||""))){/* hostility: "+" is bad for her — the sign already says which; the words follow her side */
+   const L=/i/.test(fl||"")?(sg>0?Dn:U):(sg>0?U:Dn);if(!num){const s=story();return [L[0],s[1],s[2]]}/* a story phrase keeps its own words */
+   return L[2].includes("\u0001")?[L[0],L[1],L[1]]:L}
+ if(/[+−-]\s?\d/.test(p))return null;/* an unknown stat line: never guessed */return story()}
+function kitHintWho(p,m){try{const L=(typeof liveRivals==="function"?liveRivals(true):[]).concat((typeof S!=="undefined"&&S&&S.men)||[],(typeof S!=="undefined"&&S&&S.staff)||[]);
+ for(const v of L)if(v&&v.name&&p.includes(v.name))return v.name;
+ if(!/^(nàng|hắn|con nàng)\s/.test(p))return"";const w=m&&m.who;if(w&&w.w&&w.w[0]==="r"){const v=typeof RV==="function"?RV(w.w[1]):null;if(v)return v.name}if(w&&w.nm)return w.nm}catch(e){}return""}
+/* how big a change is, in words (from Tâm cơ 25): "(nhiều)" / "(chút ít)" against the usual size of that stat — never the number */
+const KIT_HINT_MAG=[[/Thái hậu|Hoàng hậu|thiện cảm|thân\b|quý|tình ý|(^|\s|\()lòng\s|ghen|oán/i,10],[/được ưa/i,3],[/Sủng/i,5],[/Danh|Đức|Ân tình/i,4],[/Bạc/i,40],[/Sức/i,10],[/chứng cứ|Tai mắt|Tâm cơ|Sắc|Tài\b/i,2]];
+function kitHintMag(p){const n=(String(p).match(/[+−-]\s?(\d+)/)||[])[1];if(!n)return"";const v=+n;for(const [re,big] of KIT_HINT_MAG)if(re.test(p))return v>=big*1.5?" (nhiều)":v<=Math.max(1,Math.floor(big/4))?" (chút ít)":"";return""}
+function kitHint(o,m,lv){if(lv==null)lv=kitHintLevel();if(!o)return{hint:"",risk:"an toàn"};
+ if(o.hint){const h=typeof o.hint==="function"?o.hint(lv):String(o.hint);return{hint:h,risk:o.risk||"có rủi ro"}}
+ const M=kitOptModel(o);const od=M.odds&&M.odds!=="Chắc chắn"?M.odds:"";const uniq=a=>[...new Set(a.filter(Boolean))];
+ const sure=[],win=[],fail=[],side=[];let deadly=false,sideRisk=false;
+ for(const it of M.items){const sg=kitHintSign(it.p,it.l);if(!sg)continue;const ph=kitHintPhrase(it.p,sg,lv===2?kitHintWho(it.p,m):"",lv);if(!ph)continue;const w=ph[lv]+(lv>=1&&!KIT_DEADLY.test(it.p)?kitHintMag(it.p):"");
+  const isFail=it.l==="hỏng";if(KIT_DEADLY.test(it.p)&&(isFail||it.l==="kèm"||sg<0))deadly=true;
+  if(it.l==="kèm"){side.push([w,sg]);if(sg<0&&/(khả năng|có thể|nếu|dễ |có khi|bị lộ|phát giác)/i.test(it.p))sideRisk=true;continue}
+  if(isFail){if(sg<0)fail.push(w);continue}
+  if(/(nếu bị|bị lục|tang vật|lộ là|có thể bị|phát giác)/i.test(it.p))sideRisk=true;
+  (od?win:sure).push([w,sg])}
+ const good=uniq(sure.concat(win).filter(x=>x[1]>0).map(x=>x[0])).slice(0,2),bad=uniq(sure.concat(side).filter(x=>x[1]<0).map(x=>x[0])).slice(0,2),sideGood=uniq(side.filter(x=>x[1]>0).map(x=>x[0])).slice(0,1);
+ const parts=[];parts.push(good.length?good.concat(sideGood).join(", "):sideGood.length?sideGood.join(", "):bad.length||fail.length?"chẳng được gì":"không được mất gì");
+ if(od&&lv>=1)parts.push(/^(Nắm chắc|Rất chắc|Chắc)$/.test(od)?"dễ thành":/^(Khó|Liều)$/.test(od)?"khó thành":"thành bại khó đoán");
+ if(bad.length)parts.push("nhưng "+bad.join(", "));
+ const fl=uniq(fail).slice(0,2);if(fl.length&&(lv>=1||deadly))parts.push("hỏng thì "+(lv===0?(deadly?"mất mạng":fl[0]):fl.join(", ")));
+ if(lv===2&&M.notes.length){const n=uniq(M.notes.filter(x=>!/^an toàn$/i.test(x))).slice(0,1);if(n.length)parts.push(n[0])}
+ const risk=o.risk||(deadly||/^(Khó|Liều)$/.test(od)?"liều":od||sideRisk?"có rủi ro":"an toàn");
+ return{hint:parts.join("; "),risk}}
+/* the DOM fallback (a hidden-outcome button with no option object): its rows as a pseudo option */
+function kitHintOf(b,o){if(o)return kitHint(o,typeof Q!=="undefined"?Q[0]:null);const rows={};b.querySelectorAll(".kb .kr").forEach(r=>{const l=((r.querySelector(".krl")||{}).textContent||"").trim();const v=r.querySelector(".krv");if(v)(rows[l]=rows[l]||[]).push(...[...v.querySelectorAll(".ef")].map(e=>e.textContent.trim()))});
+ const odd=((b.querySelector(":scope > .kat > .kodds")||{}).textContent||"").match(KIT_HINT_LADDER);
+ const j67=[odd?odd[1]:"",rows["Được"]&&"thành: "+rows["Được"].join(", "),rows["Mất"]&&"hỏng: "+rows["Mất"].join(", "),rows["Kèm"]&&"kèm: "+rows["Kèm"].join(", ")].filter(Boolean).join(" · ");
+ return kitHint({j67},null)}
+/* KIT PARTS (KIT 28.6, kit sample page): the hint row and the risk chip — every hidden-outcome option uses these, nothing private */
+function kitHintRow(text){if(!text)return"";try{if(typeof VP==="object"&&VP&&VP.fix)text=VP.fix(text)}catch(e){}return `<span class="kr kr-hint"><span class="krl">Gợi ý</span><span class="krv"><span class="ef i">${text}</span></span></span>`}
+const KIT_RISK={"an toàn":["g","việc này không hỏng được"],"có rủi ro":["w","có thể hỏng"],"liều":["r","dễ hỏng, hỏng thì nặng"]};
+function kitRisk(word){const r=KIT_RISK[word]||KIT_RISK["có rủi ro"];return `<span class="kchip ${r[0]} krisk" title="${r[1]}">${KIT_RISK[word]?word:"có rủi ro"}</span>`}
 function kitHideOut(b){try{if(!b||!b.classList.contains("ka")||b.dataset.khid==="1")return;b.dataset.khid="1";b.classList.add("khideout");
+ /* the hint + risk chip, read from the option's data before its outcome rows go */
+ let H=null;try{const M=b.closest("#modal");const o=M&&typeof Q!=="undefined"&&Q[0]&&Q[0].opts&&b.dataset.m!=null?Q[0].opts[+b.dataset.m]:null;H=kitHintOf(b,o)}catch(e){console.error("kitHint",e)}
  const od=b.querySelector(":scope > .kat > .kodds");if(od&&b.dataset.kodds!=="1")od.remove();b.querySelectorAll(".kb .kr").forEach(r=>{if(!r.classList.contains("kr-ton")&&!r.classList.contains("kr-why"))r.remove()});
- const kb=b.querySelector(".kb");let ton=b.querySelector(".kr-ton");if(ton){const v=ton.querySelector(".krv");[...v.children].forEach(e=>{if(e.classList.contains("ksep"))return;if(!KIT_COSTRE.test(e.textContent))e.remove()});
+ let ton=b.querySelector(".kr-ton");if(ton){const v=ton.querySelector(".krv");[...v.children].forEach(e=>{if(e.classList.contains("ksep"))return;if(!KIT_COSTRE.test(e.textContent))e.remove()});
   [...v.children].forEach((e,i,a)=>{if(e.classList.contains("ksep")&&(!e.previousElementSibling||e.previousElementSibling.classList.contains("ksep")||!e.nextElementSibling))e.remove()});
-  if(!v.querySelector(".ef"))v.innerHTML=`<span class="ef n">không</span>`}
- else if(kb){kb.insertAdjacentHTML("beforeend",`<span class="kr kr-ton"><span class="krl">Tốn</span><span class="krv"><span class="ef n">không</span></span></span>`)}
- else b.insertAdjacentHTML("beforeend",`<small class="kb"><span class="kr kr-ton"><span class="krl">Tốn</span><span class="krv"><span class="ef n">không</span></span></span></small>`)}catch(e){console.error("kitHideOut",e)}}
+  if(!v.querySelector(".ef"))ton.remove()}/* owner 13:25Z: no cost → no Tốn row at all (never "Tốn: không") */
+ let kb=b.querySelector(".kb");if(!kb){b.insertAdjacentHTML("beforeend",`<small class="kb"></small>`);kb=b.querySelector(".kb")}
+ if(H){if(H.hint)kb.insertAdjacentHTML("beforeend",kitHintRow(H.hint));
+  const kat=b.querySelector(":scope > .kat");if(kat&&!kat.querySelector(".krisk"))kat.insertAdjacentHTML("beforeend",kitRisk(H.risk))}}catch(e){console.error("kitHideOut",e)}}
 (function(){const n0=kaNorm1;kaNorm1=function(b){const r=n0.apply(this,arguments);try{if(b&&b.dataset&&(b.dataset.khide==="1"||b.closest("[data-khide-all]")))kitHideOut(b)}catch(e){}return r}})();
-/* ON BY DEFAULT for every event choice, found at the shared builders: an item made by pushDil / pushFront / mkP (it carries pid / pp: weekly
-   events j68, Mệnh truyện chapters j67, side events, dilemmas j70, story lines j96/j97 and any later module using them) or a kit choice panel
-   (kit.kind "choice"). An item may opt out with showOut:true (never for events). */
-function kitIsEventChoice(m){return !!(m&&m.opts&&m.opts.length&&!m.showOut&&(m.hideOut||("pid" in m)||("pp" in m)||(m.kit&&(m.kit.kind==="choice"||m.kit.hideOut))))}
+/* the kit sample page for this section (kitRisk, kitHintRow, an event option in cost mode, kitResultSeal, kitKemRow) is ONE page: jkitpage.js
+   (#kit, KIT §47), samples "§53" (reviewer opt-render r7 dropped the duplicate ?kit / kitSample() page). */
+/* WHICH dialogs are EVENT choices (owner 14:30Z: every event — main / side stories, festivals, NPC visits, toilette reactions…): ON BY DEFAULT
+   for (a) every item made from a PEND entry by pushDil / pushFront / mkP (it carries pid / pp: j68 weekly events, j67 chapters, j70, j96/j97…)
+   EXCEPT the active-act pickers listed in KIT_ACT_PIDS (she opened them herself: gift / plant / taint / evidence pickers, the shop, the veil
+   pickers, the runner, the prince's bride) — those keep the full numbers (owner 15:05Z); (b) every item a builder flags `ev` (approachOne visits,
+   festivals FESTEV `ev:"fest"`, servant matters, the palace grant, the contest rounds, the festival contest entry); (c) a kit choice panel.
+   An item flagged `act` (an active act's own picker / confirm: Nội vụ phủ hire, Xuất gia?, map card…), `shop` (Hàng chợ đen) or `showOut`
+   is never an event. The full list per call site: dev/test/opt-scan.py (fails on an unclassified dialog with choices). */
+const KIT_ACT_PIDS=new Set(["giftpick","plantpick","taintpick","evpick","itarget","shop","plantsv","wkgive","runner","vlget","vlcraft","vlnvp","vlout","htban","h54ban"]);
+function kitIsEventChoice(m){if(!m||!m.opts||!m.opts.length||m.showOut||m.act||m.shop)return false;if(m.pid&&KIT_ACT_PIDS.has(m.pid))return false;
+ return !!(m.hideOut||m.ev||("pid" in m)||("pp" in m)||(m.kit&&(m.kit.kind==="choice"||m.kit.hideOut)))}
 (function(){const s0=showModal;showModal=function(){const m=Q[0];if(kitIsEventChoice(m))m.hideOut=true;const r=s0.apply(this,arguments);try{if(m&&m.opts&&(m.hideOut||m.opts.some(o=>o&&o.hideOut))){
   document.querySelectorAll("#modal .opts > button[data-m], #modal .opts button.opt").forEach(b=>{const o=m.opts[+b.dataset.m];if(o&&o.showOut)return;if(m.hideOut||(o&&o.hideOut)){if(o&&o.showOdds)b.dataset.kodds="1";b.dataset.khide="1";if(b.classList.contains("ka"))kitHideOut(b)}})}}catch(e){console.error("hideOut",e)}return r}})();
 /* ACT-LIKE OPTIONS inside a dialog (kit owner #2): an option may carry showOdds:true — it keeps its odds word (Liều … Nắm chắc) beside the
@@ -414,13 +531,19 @@ try{if(window.VP&&VP.rules){VP.rules.unshift(["BẢNG ĐIỂM","Bảng định t
    Which picture (data only, first match): item.art (a path) · item.stArt [arc, beat, ending] → stArtOf · item.evId → evArtOf(id, salt) ·
    item.pid (+ pp.id / pp.k) → evArtOf("<pid>:<id>") · news → evArtOf("news:<title>") · else the j89 default category. A panel about a person
    (who / subject) keeps the person's portrait (section 8). The frame is kitArtFrame (same frame as act art); the label = the category title. ---------- */
+/* the buổi news card (owner 11/15: "Triều chính" does not fit palace gossip): the picture of its MAIN item = the first sentence that maps
+   to a scene by the week book's table (j87 KBK_EVRE: thị tẩm, có thai, tin đồn, ốm, ban thưởng…); none → people visiting (kbkEvId default) */
+function kitNewsArtId(m){try{const t=String(m.h||"").replace(/<p class="past">[\s\S]*?<\/p>/,"");const plain=typeof kpPlain==="function"?kpPlain(t):t.replace(/<[^>]+>/g," ");
+ if(typeof kbkEvId!=="function"||typeof KBK_EVRE==="undefined")return "news:"+(m.t||"");
+ for(const s0 of plain.split(/(?<=[.!?])\s+/)){const s=s0.replace(/^\s*Tai mắt (kể|thấy):\s*/i,"");if(!s.trim())continue;if(/thẻ bài[^.]*lật/i.test(s))return "sys:thi-tam";for(const [re,id] of KBK_EVRE)if(re.test(s))return id}
+ return kbkEvId("",null)}catch(e){return "news:"+(m.t||"")}}
 function kitEvArt(m){try{if(!m||typeof evArtOf!=="function")return null;let src="",lab="";const pp=m.pp||{};const salt=(typeof S!=="undefined"&&S)?(S.year*100+S.month*3+(S.tuan||0)):0;
  if(m.art)src=m.art;else if(m.stArt&&typeof stArtOf==="function")src=stArtOf.apply(null,m.stArt);
- if(!src){const id=m.evId||(m.pid?(m.pid+(pp&&(pp.id||pp.k)?":"+(pp.id||pp.k):"")):"")||(m.kind==="news"||/Tin trong cung/.test(m.t||"")?"news:"+(m.t||""):"");
+ if(!src){const id=m.evId||(m.pid?(m.pid+(pp&&(pp.id||pp.k)?":"+(pp.id||pp.k):"")):"")||(m.kind==="news"||/Tin trong cung/.test(m.t||"")?kitNewsArtId(m):"");
   /* review/act-pics (owner 11/15 09:40Z): an id with NO event category (e.g. pid "shop") must not fall to the j89 default (Triều chính, officials
-     kneeling): it gets the room she is in, for the season and buổi (j17 evArt / j94); only real event ids use evArtOf */
+     kneeling): it gets the room she is in, for the season and buổi (j17 evArt / j94); only real event ids use evArtOf. News: kitNewsArtId (kit-close) */
   if(id&&(typeof evArtCat!=="function"||evArtCat(id))){src=evArtOf(id,salt);lab=typeof evArtTitle==="function"?evArtTitle(id):""}}
- if(!src&&(kitIsEventChoice(m)||m.kind==="news"||/Tin trong cung/.test(m.t||""))){try{src=typeof evArt==="function"?evArt():""}catch(e){src=""}if(!src)src=evArtOf("default",salt)}return src?{src,lab:lab||""}:null}catch(e){return null}}
+ if(!src&&(kitIsEventChoice(m)||m.kind==="news"||/Tin trong cung/.test(m.t||""))){try{src=typeof evArt==="function"?evArt():""}catch(e){src=""}}  /* no j89 default (Triều chính) as a stand-in: no room picture → no picture */return src?{src,lab:lab||""}:null}catch(e){return null}}
 (function(){const s0=showModal;showModal=function(){const m=Q[0];const r=s0.apply(this,arguments);try{const M=$("modal"),dlg=M&&M.querySelector(".dlg.kpanel");const body=M&&M.querySelector("#mb > .kpb");if(!m||!dlg||!body)return r;
   const kind=dlg.dataset.kind||"";const want=kitIsEventChoice(m)||kind==="news"||m.art||m.stArt||m.evId;if(!want||body.querySelector(":scope > .kpsubj"))return r;
   const a=kitEvArt(Object.assign({kind},m));if(!a)return r;window.__kitLastEvArt=a;body.classList.add("kphas","kpinfo");body.insertAdjacentHTML("afterbegin",`<div class="kpsubj kpiart kpev">${kitSceneArt(a.src,a.lab,{shape:"tall"})}</div>`)}catch(e){console.error("kitEvArt",e)}return r}})();
@@ -450,15 +573,22 @@ function kitOriginArt(k){return `img/bg-origin-${k}.webp`}
    o.shape "wide" (16:9; a card's top band) or "tall" (3:4; ev-* / st-* / act-* / info-* art). o.fb fallback src, o.col category colour
    (frame line + small category chip = label), o.cap false = no caption. */
 function kitOriginWide(k){return `img/origin-wide-${k}.webp`}
+/* o.size "thumb" = small square tile (28.19) */
 function kitSceneArt(src,label,o){o=o||{};const sh=o.shape==="tall"?"tall":"wide";const fb=o.fb?String(o.fb).replace(/'/g,""):"";
  const err=fb?`if(this.dataset.fb!=='1'){this.dataset.fb='1';this.src='${fb}'}else this.remove()`:"this.remove()";const lab=label?String(label).replace(/"/g,"&quot;"):"";
- return `<figure class="ksart ksart-${sh}${o.col?" ksart-cat":""}${o.cls?" "+o.cls:""}"${lab?` title="${lab}"`:""}${o.col?` style="--kcc:${o.col}"`:""}>`+
+ return `<figure class="ksart ksart-${sh}${o.size==="thumb"?" ksart-thumb":""}${o.col?" ksart-cat":""}${o.cls?" "+o.cls:""}"${lab?` title="${lab}"`:""}${o.col?` style="--kcc:${o.col}"`:""}>`+
   (lab?`<span class="ksart-ph">${label}</span>`:"")+(src?`<img src="${src}" alt="" loading="lazy" onerror="${err}">`:"")+
   (label&&o.cap!==false?(o.col?`<em class="ksart-chip">${label}</em>`:`<figcaption>${label}</figcaption>`):"")+`</figure>`}
 (function(){const st=document.createElement("style");st.id="k-sceneart";st.textContent=`
 .ksart{position:relative;margin:0;display:block;width:100%;overflow:hidden;border-radius:4px;background:#efe4cf;
  border:1px solid var(--gold,#8f5f0c);box-shadow:inset 0 0 0 2px #fffaf0,inset 0 0 0 3px #e6d3ac}
 .ksart-wide{aspect-ratio:16/9}.ksart-tall{aspect-ratio:3/4}
+/* size "thumb" (tabs-kit r7, KIT 28.19): the same frame as a small square tile beside text (skill / chapter / empty cards): --ksth (64 px; 56 px
+   on phones), 2 px mat, never stretched by its slot */
+.ksart.ksart-thumb{width:var(--ksth,64px);height:var(--ksth,64px);aspect-ratio:1;flex:0 0 auto;box-shadow:inset 0 0 0 1px #fffaf0,inset 0 0 0 2px #e6d3ac}
+.ksart.ksart-thumb>img{inset:2px;width:calc(100% - 4px);height:calc(100% - 4px)}
+.ksart.ksart-thumb>.ksart-ph{inset:2px;font-size:.6rem;padding:2px}
+@media (max-width:599px){.ksart.ksart-thumb{--ksth:56px}}
 .ksart>img{position:absolute;inset:3px;width:calc(100% - 6px);height:calc(100% - 6px);object-fit:cover;display:block;border-radius:2px;max-width:none}
 .ksart-ph{position:absolute;inset:3px;display:grid;place-items:center;text-align:center;padding:6px;font:700 .8rem/1.25 var(--display,serif);color:#fff3d8;
  background:linear-gradient(#5a3a1acc,#2a1a12cc),url(img/kit/bg-default.webp) center/cover;border-radius:2px}
@@ -595,7 +725,7 @@ function kitRoulette(o){const done=()=>{try{o.done&&o.done()}catch(e){}};if(!o||
 `;document.head.appendChild(st)})();
 
 /* ---------- 15. kitItem — ONE item tile for every item anywhere (chest, Tư trang, wardrobe slots K1/K2, reward chests, peddler, works,
-   reward panels). A simple frame (not the portrait frame): border + ground coloured by grade. Sizes sm (44 px) · md (64) · lg (96).
+   reward panels). A simple frame (not the portrait frame): border + ground coloured by grade. Sizes sm (52 px) · md (72) · lg (104) · xl (150, the reveal spotlight KIT §42).
    kitItem({src, name, grade(0..4), qty, label:[text,"ok"|"no"|"n"], on, empty, size, data:"attrs", tip}) → HTML.
    Grades (KIT_GRADE): Thường grey-taupe · Tinh phẩm jade green · Trân phẩm sapphire blue · Tuyệt phẩm amethyst purple · Ngự tứ imperial gold-red.
    Picture: itemArt(k) (j98, review/item-art) when present, else wd-* icons, else the item's own icon; kitItemSrc(k, fallback). ---------- */
@@ -629,7 +759,8 @@ document.addEventListener("click",ev=>{const t=ev.target.closest&&ev.target.clos
 (function(){const st=document.createElement("style");st.id="k2b-item";st.textContent=`
 .kitem{display:inline-flex;flex-direction:column;align-items:center;gap:2px;vertical-align:top;width:var(--isz);cursor:default;text-align:center}
 .kitem[role=button]{cursor:pointer}
-.kitem-sm{--isz:52px}.kitem-md{--isz:72px}.kitem-lg{--isz:104px}
+.kitem-sm{--isz:52px}.kitem-md{--isz:72px}.kitem-lg{--isz:104px}.kitem-xl{--isz:150px}
+.kitem-xl>.kitn{font-size:.9rem}
 .kitem-slot{--isz:100%;width:100%}
 .kitem.kitem-slot.kitem-empty>.kitb{background:linear-gradient(#efe5d2,#e9dcc5);border:1px solid #d6c29c;box-shadow:inset 0 2px 5px #5a3a2030,inset 0 -1px 0 #fff8}
 .kitem .kitm{position:absolute;right:2px;top:2px;font-style:normal;font-size:.58rem;line-height:1.3;border-radius:5px;padding:0 4px;background:#fffaf0e6;border:1px solid}

@@ -1,0 +1,2160 @@
+{
+ "miss": [],
+ "miss512": [],
+ "gradeBad": [],
+ "count": 151,
+ "all": [
+  {
+   "k": "tramngoc",
+   "set": "IT",
+   "kd": "Trâm cài",
+   "oldTier": 0,
+   "name": "Trâm ngọc bích",
+   "grade": 0,
+   "gname": "Thường",
+   "src": "img/wd-tramngoc.webp",
+   "src512": "img/wd-tramngoc.webp",
+   "bag": {
+    "grade": 0,
+    "src": "img/wd-tramngoc.webp",
+    "name": "Trâm ngọc bích"
+   }
+  },
+  {
+   "k": "boodieu",
+   "set": "IT",
+   "kd": "Trâm cài",
+   "oldTier": 2,
+   "name": "Bộ diêu vàng",
+   "grade": 2,
+   "gname": "Trân phẩm",
+   "src": "img/wd-boodieu.webp",
+   "src512": "img/wd-boodieu.webp",
+   "bag": {
+    "grade": 2,
+    "src": "img/wd-boodieu.webp",
+    "name": "Bộ diêu vàng"
+   }
+  },
+  {
+   "k": "tramphuong",
+   "set": "IT",
+   "kd": "Trâm cài",
+   "oldTier": 3,
+   "name": "Trâm phượng cửu vĩ",
+   "grade": 3,
+   "gname": "Tuyệt phẩm",
+   "src": "img/wd-tramphuong.webp",
+   "src512": "img/wd-tramphuong.webp",
+   "bag": {
+    "grade": 3,
+    "src": "img/wd-tramphuong.webp",
+    "name": "Trâm phượng cửu vĩ"
+   }
+  },
+  {
+   "k": "vongngoc",
+   "set": "IT",
+   "kd": "Trang sức",
+   "oldTier": 1,
+   "name": "Vòng ngọc Hòa Điền",
+   "grade": 1,
+   "gname": "Tinh phẩm",
+   "src": "img/item-vongngoc.webp",
+   "src512": "img/item512/item-vongngoc.webp",
+   "bag": {
+    "grade": 1,
+    "src": "img/item-vongngoc.webp",
+    "name": "Vòng ngọc Hòa Điền"
+   }
+  },
+  {
+   "k": "vongvang",
+   "set": "IT",
+   "kd": "Trang sức",
+   "oldTier": 2,
+   "name": "Vòng vàng chạm phượng",
+   "grade": 2,
+   "gname": "Trân phẩm",
+   "src": "img/item-vongvang.webp",
+   "src512": "img/item512/item-vongvang.webp",
+   "bag": {
+    "grade": 2,
+    "src": "img/item-vongvang.webp",
+    "name": "Vòng vàng chạm phượng"
+   }
+  },
+  {
+   "k": "sonphan",
+   "set": "IT",
+   "kd": "Trang sức",
+   "oldTier": 0,
+   "name": "Son phấn Dương Châu",
+   "grade": 0,
+   "gname": "Thường",
+   "src": "img/item-sonphan.webp",
+   "src512": "img/item512/item-sonphan.webp",
+   "bag": {
+    "grade": 0,
+    "src": "img/item-sonphan.webp",
+    "name": "Son phấn Dương Châu"
+   }
+  },
+  {
+   "k": "luahang",
+   "set": "IT",
+   "kd": "Vải vóc",
+   "oldTier": 0,
+   "name": "Lụa Hàng Châu",
+   "grade": 0,
+   "gname": "Thường",
+   "src": "img/item-luahang.webp",
+   "src512": "img/item512/item-luahang.webp",
+   "bag": {
+    "grade": 0,
+    "src": "img/item-luahang.webp",
+    "name": "Lụa Hàng Châu"
+   }
+  },
+  {
+   "k": "gamto",
+   "set": "IT",
+   "kd": "Vải vóc",
+   "oldTier": 2,
+   "name": "Gấm Tô Châu",
+   "grade": 2,
+   "gname": "Trân phẩm",
+   "src": "img/item-gamto.webp",
+   "src512": "img/item512/item-gamto.webp",
+   "bag": {
+    "grade": 2,
+    "src": "img/item-gamto.webp",
+    "name": "Gấm Tô Châu"
+   }
+  },
+  {
+   "k": "gamvang",
+   "set": "IT",
+   "kd": "Vải vóc",
+   "oldTier": 3,
+   "name": "Gấm minh hoàng",
+   "grade": 3,
+   "gname": "Tuyệt phẩm",
+   "src": "img/item-gamvang.webp",
+   "src512": "img/item512/item-gamvang.webp",
+   "bag": {
+    "grade": 3,
+    "src": "img/item-gamvang.webp",
+    "name": "Gấm minh hoàng"
+   }
+  },
+  {
+   "k": "nhansam",
+   "set": "IT",
+   "kd": "Thuốc bổ",
+   "oldTier": 1,
+   "name": "Nhân sâm trăm năm",
+   "grade": 1,
+   "gname": "Tinh phẩm",
+   "src": "img/item-nhansam.webp",
+   "src512": "img/item512/item-nhansam.webp",
+   "bag": {
+    "grade": 1,
+    "src": "img/item-nhansam.webp",
+    "name": "Nhân sâm trăm năm"
+   }
+  },
+  {
+   "k": "yensao",
+   "set": "IT",
+   "kd": "Thuốc bổ",
+   "oldTier": 0,
+   "name": "Yến sào",
+   "grade": 1,
+   "gname": "Tinh phẩm",
+   "src": "img/item-yensao.webp",
+   "src512": "img/item512/item-yensao.webp",
+   "bag": {
+    "grade": 1,
+    "src": "img/item-yensao.webp",
+    "name": "Yến sào"
+   }
+  },
+  {
+   "k": "agiao",
+   "set": "IT",
+   "kd": "Thuốc bổ",
+   "oldTier": 1,
+   "name": "A giao",
+   "grade": 1,
+   "gname": "Tinh phẩm",
+   "src": "img/item-agiao.webp",
+   "src512": "img/item512/item-agiao.webp",
+   "bag": {
+    "grade": 1,
+    "src": "img/item-agiao.webp",
+    "name": "A giao"
+   }
+  },
+  {
+   "k": "giaidoc",
+   "set": "IT",
+   "kd": "Thuốc",
+   "oldTier": 1,
+   "name": "Thuốc giải độc",
+   "grade": 1,
+   "gname": "Tinh phẩm",
+   "src": "img/item-giaidoc.webp",
+   "src512": "img/item512/item-giaidoc.webp",
+   "bag": {
+    "grade": 1,
+    "src": "img/item-giaidoc.webp",
+    "name": "Thuốc giải độc"
+   }
+  },
+  {
+   "k": "thuocanthai",
+   "set": "IT",
+   "kd": "Thuốc",
+   "oldTier": 0,
+   "name": "Thuốc an thai",
+   "grade": 0,
+   "gname": "Thường",
+   "src": "img/item-thuocanthai.webp",
+   "src512": "img/item512/item-thuocanthai.webp",
+   "bag": {
+    "grade": 0,
+    "src": "img/item-thuocanthai.webp",
+    "name": "Thuốc an thai"
+   }
+  },
+  {
+   "k": "huongtram",
+   "set": "IT",
+   "kd": "Hương liệu",
+   "oldTier": 0,
+   "name": "Hương trầm",
+   "grade": 0,
+   "gname": "Thường",
+   "src": "img/item-huongtram.webp",
+   "src512": "img/item512/item-huongtram.webp",
+   "bag": {
+    "grade": 0,
+    "src": "img/item-huongtram.webp",
+    "name": "Hương trầm"
+   }
+  },
+  {
+   "k": "tuithom",
+   "set": "IT",
+   "kd": "Hương liệu",
+   "oldTier": 0,
+   "name": "Túi thơm thêu",
+   "grade": 0,
+   "gname": "Thường",
+   "src": "img/item-tuithom.webp",
+   "src512": "img/item512/item-tuithom.webp",
+   "bag": {
+    "grade": 0,
+    "src": "img/item-tuithom.webp",
+    "name": "Túi thơm thêu"
+   }
+  },
+  {
+   "k": "xahuong",
+   "set": "IT",
+   "kd": "Hương liệu",
+   "oldTier": 1,
+   "name": "Xạ hương",
+   "grade": 1,
+   "gname": "Tinh phẩm",
+   "src": "img/item-xahuong.webp",
+   "src512": "img/item512/item-xahuong.webp",
+   "bag": {
+    "grade": 1,
+    "src": "img/item-xahuong.webp",
+    "name": "Xạ hương"
+   }
+  },
+  {
+   "k": "hacdinh",
+   "set": "IT",
+   "kd": "Độc dược",
+   "oldTier": 2,
+   "name": "Hạc đỉnh hồng",
+   "grade": 2,
+   "gname": "Trân phẩm",
+   "src": "img/item-hacdinh.webp",
+   "src512": "img/item512/item-hacdinh.webp",
+   "bag": {
+    "grade": 2,
+    "src": "img/item-hacdinh.webp",
+    "name": "Hạc đỉnh hồng"
+   }
+  },
+  {
+   "k": "botngua",
+   "set": "IT",
+   "kd": "Độc dược",
+   "oldTier": 0,
+   "name": "Bột ngứa",
+   "grade": 0,
+   "gname": "Thường",
+   "src": "img/item-botngua.webp",
+   "src512": "img/item512/item-botngua.webp",
+   "bag": {
+    "grade": 0,
+    "src": "img/item-botngua.webp",
+    "name": "Bột ngứa"
+   }
+  },
+  {
+   "k": "tranhco",
+   "set": "IT",
+   "kd": "Lễ vật",
+   "oldTier": 2,
+   "name": "Tranh cổ",
+   "grade": 2,
+   "gname": "Trân phẩm",
+   "src": "img/item-tranhco.webp",
+   "src512": "img/item512/item-tranhco.webp",
+   "bag": {
+    "grade": 2,
+    "src": "img/item-tranhco.webp",
+    "name": "Tranh cổ"
+   }
+  },
+  {
+   "k": "nghien",
+   "set": "IT",
+   "kd": "Lễ vật",
+   "oldTier": 1,
+   "name": "Nghiên mực Đoan Khê",
+   "grade": 1,
+   "gname": "Tinh phẩm",
+   "src": "img/item-nghien.webp",
+   "src512": "img/item512/item-nghien.webp",
+   "bag": {
+    "grade": 1,
+    "src": "img/item-nghien.webp",
+    "name": "Nghiên mực Đoan Khê"
+   }
+  },
+  {
+   "k": "dancoc",
+   "set": "IT",
+   "kd": "Lễ vật",
+   "oldTier": 2,
+   "name": "Đàn cổ Tiêu Vĩ",
+   "grade": 2,
+   "gname": "Trân phẩm",
+   "src": "img/item-dancoc.webp",
+   "src512": "img/item512/item-dancoc.webp",
+   "bag": {
+    "grade": 2,
+    "src": "img/item-dancoc.webp",
+    "name": "Đàn cổ Tiêu Vĩ"
+   }
+  },
+  {
+   "k": "demgam",
+   "set": "IT",
+   "kd": "Lễ vật",
+   "oldTier": 0,
+   "name": "Đệm gấm",
+   "grade": 0,
+   "gname": "Thường",
+   "src": "img/item-demgam.webp",
+   "src512": "img/item512/item-demgam.webp",
+   "bag": {
+    "grade": 0,
+    "src": "img/item-demgam.webp",
+    "name": "Đệm gấm"
+   }
+  },
+  {
+   "k": "ngocboi",
+   "set": "IT",
+   "kd": "Kỷ vật",
+   "oldTier": 0,
+   "name": "Ngọc bội ngự ban",
+   "grade": 4,
+   "gname": "Ngự tứ",
+   "src": "img/item-ngocboi.webp",
+   "src512": "img/item512/item-ngocboi.webp",
+   "bag": {
+    "grade": 4,
+    "src": "img/item-ngocboi.webp",
+    "name": "Ngọc bội ngự ban"
+   }
+  },
+  {
+   "k": "thunha",
+   "set": "IT",
+   "kd": "Thư từ",
+   "oldTier": 0,
+   "name": "Thư nhà",
+   "grade": 0,
+   "gname": "Thường",
+   "src": "img/item-thunha.webp",
+   "src512": "img/item512/item-thunha.webp",
+   "bag": {
+    "grade": 0,
+    "src": "img/item-thunha.webp",
+    "name": "Thư nhà"
+   }
+  },
+  {
+   "k": "chungcu",
+   "set": "IT",
+   "kd": "Thư từ",
+   "oldTier": 0,
+   "name": "Tập chứng cứ",
+   "grade": 0,
+   "gname": "Thường",
+   "src": "img/item-chungcu.webp",
+   "src512": "img/item512/item-chungcu.webp",
+   "bag": {
+    "grade": 0,
+    "src": "img/item-chungcu.webp",
+    "name": "Tập chứng cứ"
+   }
+  },
+  {
+   "k": "vangbac",
+   "set": "IT",
+   "kd": "Lễ vật",
+   "oldTier": 0,
+   "name": "Rương vàng bạc châu báu",
+   "grade": 2,
+   "gname": "Trân phẩm",
+   "src": "img/item-vangbac.webp",
+   "src512": "img/item512/item-vangbac.webp",
+   "bag": {
+    "grade": 2,
+    "src": "img/item-vangbac.webp",
+    "name": "Rương vàng bạc châu báu"
+   }
+  },
+  {
+   "k": "bienvang",
+   "set": "IT",
+   "kd": "Kỷ vật",
+   "oldTier": 0,
+   "name": "Biển vàng tạ ơn",
+   "grade": 2,
+   "gname": "Trân phẩm",
+   "src": "img/item-bienvang.webp",
+   "src512": "img/item512/item-bienvang.webp",
+   "bag": {
+    "grade": 2,
+    "src": "img/item-bienvang.webp",
+    "name": "Biển vàng tạ ơn"
+   }
+  },
+  {
+   "k": "bienngu",
+   "set": "IT",
+   "kd": "Kỷ vật",
+   "oldTier": 0,
+   "name": "Biển ngự bút «Trung hiếu lưỡng toàn»",
+   "grade": 4,
+   "gname": "Ngự tứ",
+   "src": "img/item-bienngu.webp",
+   "src512": "img/item512/item-bienngu.webp",
+   "bag": {
+    "grade": 4,
+    "src": "img/item-bienngu.webp",
+    "name": "Biển ngự bút «Trung hiếu lưỡng toàn»"
+   }
+  },
+  {
+   "k": "ngocdungcao",
+   "set": "IT",
+   "kd": "Thuốc",
+   "oldTier": 0,
+   "name": "Ngọc dung cao",
+   "grade": 3,
+   "gname": "Tuyệt phẩm",
+   "src": "img/item-ngocdungcao.webp",
+   "src512": "img/item512/item-ngocdungcao.webp",
+   "bag": {
+    "grade": 3,
+    "src": "img/item-ngocdungcao.webp",
+    "name": "Ngọc dung cao"
+   }
+  },
+  {
+   "k": "tram_dao",
+   "set": "IT",
+   "kd": "Trâm cài",
+   "oldTier": 0,
+   "name": "Trâm gỗ đào",
+   "grade": 0,
+   "gname": "Thường",
+   "src": "img/wd-tram-dao.webp",
+   "src512": "img/wd-tram-dao.webp",
+   "bag": {
+    "grade": 0,
+    "src": "img/wd-tram-dao.webp",
+    "name": "Trâm gỗ đào"
+   }
+  },
+  {
+   "k": "tram_dong",
+   "set": "IT",
+   "kd": "Trâm cài",
+   "oldTier": 0,
+   "name": "Trâm đồng mai hoa",
+   "grade": 0,
+   "gname": "Thường",
+   "src": "img/wd-tram-dong.webp",
+   "src512": "img/wd-tram-dong.webp",
+   "bag": {
+    "grade": 0,
+    "src": "img/wd-tram-dong.webp",
+    "name": "Trâm đồng mai hoa"
+   }
+  },
+  {
+   "k": "tram_hoalua",
+   "set": "IT",
+   "kd": "Trâm cài",
+   "oldTier": 0,
+   "name": "Trâm hoa lụa",
+   "grade": 0,
+   "gname": "Thường",
+   "src": "img/wd-tram-hoalua.webp",
+   "src512": "img/wd-tram-hoalua.webp",
+   "bag": {
+    "grade": 0,
+    "src": "img/wd-tram-hoalua.webp",
+    "name": "Trâm hoa lụa"
+   }
+  },
+  {
+   "k": "tram_ngoclan",
+   "set": "IT",
+   "kd": "Trâm cài",
+   "oldTier": 0,
+   "name": "Trâm bạc ngọc lan",
+   "grade": 1,
+   "gname": "Tinh phẩm",
+   "src": "img/wd-tram-ngoclan.webp",
+   "src512": "img/wd-tram-ngoclan.webp",
+   "bag": {
+    "grade": 1,
+    "src": "img/wd-tram-ngoclan.webp",
+    "name": "Trâm bạc ngọc lan"
+   }
+  },
+  {
+   "k": "thoa_diep",
+   "set": "IT",
+   "kd": "Trâm cài",
+   "oldTier": 0,
+   "name": "Thoa bạc song điệp",
+   "grade": 1,
+   "gname": "Tinh phẩm",
+   "src": "img/wd-thoa-diep.webp",
+   "src512": "img/wd-thoa-diep.webp",
+   "bag": {
+    "grade": 1,
+    "src": "img/wd-thoa-diep.webp",
+    "name": "Thoa bạc song điệp"
+   }
+  },
+  {
+   "k": "tram_hong",
+   "set": "IT",
+   "kd": "Trâm cài",
+   "oldTier": 1,
+   "name": "Trâm thạch anh hồng",
+   "grade": 1,
+   "gname": "Tinh phẩm",
+   "src": "img/wd-tram-hong.webp",
+   "src512": "img/wd-tram-hong.webp",
+   "bag": {
+    "grade": 1,
+    "src": "img/wd-tram-hong.webp",
+    "name": "Trâm thạch anh hồng"
+   }
+  },
+  {
+   "k": "hoadien_bac",
+   "set": "IT",
+   "kd": "Trâm cài",
+   "oldTier": 1,
+   "name": "Hoa điền bạc khảm lưu ly",
+   "grade": 2,
+   "gname": "Trân phẩm",
+   "src": "img/wd-hoadien-bac.webp",
+   "src512": "img/wd-hoadien-bac.webp",
+   "bag": {
+    "grade": 2,
+    "src": "img/wd-hoadien-bac.webp",
+    "name": "Hoa điền bạc khảm lưu ly"
+   }
+  },
+  {
+   "k": "thoa_vang",
+   "set": "IT",
+   "kd": "Trâm cài",
+   "oldTier": 1,
+   "name": "Thoa vàng hồ điệp",
+   "grade": 2,
+   "gname": "Trân phẩm",
+   "src": "img/wd-thoa-vang.webp",
+   "src512": "img/wd-thoa-vang.webp",
+   "bag": {
+    "grade": 2,
+    "src": "img/wd-thoa-vang.webp",
+    "name": "Thoa vàng hồ điệp"
+   }
+  },
+  {
+   "k": "tram_phithuy",
+   "set": "IT",
+   "kd": "Trâm cài",
+   "oldTier": 1,
+   "name": "Trâm phỉ thúy hải đường",
+   "grade": 1,
+   "gname": "Tinh phẩm",
+   "src": "img/wd-tram-phithuy.webp",
+   "src512": "img/wd-tram-phithuy.webp",
+   "bag": {
+    "grade": 1,
+    "src": "img/wd-tram-phithuy.webp",
+    "name": "Trâm phỉ thúy hải đường"
+   }
+  },
+  {
+   "k": "dientu_thuy",
+   "set": "IT",
+   "kd": "Trâm cài",
+   "oldTier": 2,
+   "name": "Điền tử điểm thúy",
+   "grade": 2,
+   "gname": "Trân phẩm",
+   "src": "img/wd-dientu-thuy.webp",
+   "src512": "img/wd-dientu-thuy.webp",
+   "bag": {
+    "grade": 2,
+    "src": "img/wd-dientu-thuy.webp",
+    "name": "Điền tử điểm thúy"
+   }
+  },
+  {
+   "k": "bd_phuong",
+   "set": "IT",
+   "kd": "Trâm cài",
+   "oldTier": 3,
+   "name": "Bộ diêu kim phượng ngậm châu",
+   "grade": 3,
+   "gname": "Tuyệt phẩm",
+   "src": "img/wd-bd-phuong.webp",
+   "src512": "img/wd-bd-phuong.webp",
+   "bag": {
+    "grade": 3,
+    "src": "img/wd-bd-phuong.webp",
+    "name": "Bộ diêu kim phượng ngậm châu"
+   }
+  },
+  {
+   "k": "tram_maudon",
+   "set": "IT",
+   "kd": "Trâm cài",
+   "oldTier": 3,
+   "name": "Trâm hồng ngọc mẫu đơn",
+   "grade": 2,
+   "gname": "Trân phẩm",
+   "src": "img/wd-tram-maudon.webp",
+   "src512": "img/wd-tram-maudon.webp",
+   "bag": {
+    "grade": 2,
+    "src": "img/wd-tram-maudon.webp",
+    "name": "Trâm hồng ngọc mẫu đơn"
+   }
+  },
+  {
+   "k": "diemthuy_cuu",
+   "set": "IT",
+   "kd": "Trâm cài",
+   "oldTier": 3,
+   "name": "Điểm thúy cửu điệp",
+   "grade": 3,
+   "gname": "Tuyệt phẩm",
+   "src": "img/wd-diemthuy-cuu.webp",
+   "src512": "img/wd-diemthuy-cuu.webp",
+   "bag": {
+    "grade": 3,
+    "src": "img/wd-diemthuy-cuu.webp",
+    "name": "Điểm thúy cửu điệp"
+   }
+  },
+  {
+   "k": "kimthoa_phuong",
+   "set": "IT",
+   "kd": "Trâm cài",
+   "oldTier": 3,
+   "name": "Kim thoa song phượng",
+   "grade": 3,
+   "gname": "Tuyệt phẩm",
+   "src": "img/wd-kimthoa-phuong.webp",
+   "src512": "img/wd-kimthoa-phuong.webp",
+   "bag": {
+    "grade": 3,
+    "src": "img/wd-kimthoa-phuong.webp",
+    "name": "Kim thoa song phượng"
+   }
+  },
+  {
+   "k": "phuongquan",
+   "set": "IT",
+   "kd": "Trâm cài",
+   "oldTier": 3,
+   "name": "Phượng quan bán giá",
+   "grade": 3,
+   "gname": "Tuyệt phẩm",
+   "src": "img/wd-phuongquan.webp",
+   "src512": "img/wd-phuongquan.webp",
+   "bag": {
+    "grade": 3,
+    "src": "img/wd-phuongquan.webp",
+    "name": "Phượng quan bán giá"
+   }
+  },
+  {
+   "k": "nt_nhuy",
+   "set": "IT",
+   "kd": "Trâm cài",
+   "oldTier": 0,
+   "name": "Trâm ngọc như ý ngự tứ",
+   "grade": 4,
+   "gname": "Ngự tứ",
+   "src": "img/wd-nt-nhuy.webp",
+   "src512": "img/wd-nt-nhuy.webp",
+   "bag": {
+    "grade": 4,
+    "src": "img/wd-nt-nhuy.webp",
+    "name": "Trâm ngọc như ý ngự tứ"
+   }
+  },
+  {
+   "k": "nt_haiduong",
+   "set": "IT",
+   "kd": "Trâm cài",
+   "oldTier": 0,
+   "name": "Bộ diêu «Hải đường xuân thụy» ngự tứ",
+   "grade": 4,
+   "gname": "Ngự tứ",
+   "src": "img/wd-nt-haiduong.webp",
+   "src512": "img/wd-nt-haiduong.webp",
+   "bag": {
+    "grade": 4,
+    "src": "img/wd-nt-haiduong.webp",
+    "name": "Bộ diêu «Hải đường xuân thụy» ngự tứ"
+   }
+  },
+  {
+   "k": "nt_dongchau",
+   "set": "IT",
+   "kd": "Trâm cài",
+   "oldTier": 0,
+   "name": "Trâm đông châu ngự tứ",
+   "grade": 4,
+   "gname": "Ngự tứ",
+   "src": "img/wd-nt-dongchau.webp",
+   "src512": "img/wd-nt-dongchau.webp",
+   "bag": {
+    "grade": 4,
+    "src": "img/wd-nt-dongchau.webp",
+    "name": "Trâm đông châu ngự tứ"
+   }
+  },
+  {
+   "k": "y_cungnu",
+   "set": "IT",
+   "kd": "Y phục",
+   "oldTier": 0,
+   "name": "Áo vải xanh cung nhân",
+   "grade": 0,
+   "gname": "Thường",
+   "src": "img/wd-y-cungnu.webp",
+   "src512": "img/wd-y-cungnu.webp",
+   "bag": {
+    "grade": 0,
+    "src": "img/wd-y-cungnu.webp",
+    "name": "Áo vải xanh cung nhân"
+   }
+  },
+  {
+   "k": "y_luamoc",
+   "set": "IT",
+   "kd": "Y phục",
+   "oldTier": 0,
+   "name": "Áo lụa mộc hồng nhạt",
+   "grade": 0,
+   "gname": "Thường",
+   "src": "img/wd-y-luamoc.webp",
+   "src512": "img/wd-y-luamoc.webp",
+   "bag": {
+    "grade": 0,
+    "src": "img/wd-y-luamoc.webp",
+    "name": "Áo lụa mộc hồng nhạt"
+   }
+  },
+  {
+   "k": "y_hoanho",
+   "set": "IT",
+   "kd": "Y phục",
+   "oldTier": 0,
+   "name": "Áo lụa thêu hoa nhỏ",
+   "grade": 0,
+   "gname": "Thường",
+   "src": "img/wd-y-hoanho.webp",
+   "src512": "img/wd-y-hoanho.webp",
+   "bag": {
+    "grade": 0,
+    "src": "img/wd-y-hoanho.webp",
+    "name": "Áo lụa thêu hoa nhỏ"
+   }
+  },
+  {
+   "k": "y_saxanh",
+   "set": "IT",
+   "kd": "Y phục",
+   "oldTier": 0,
+   "name": "Váy sa xanh ngọc",
+   "grade": 0,
+   "gname": "Thường",
+   "src": "img/wd-y-saxanh.webp",
+   "src512": "img/wd-y-saxanh.webp",
+   "bag": {
+    "grade": 0,
+    "src": "img/wd-y-saxanh.webp",
+    "name": "Váy sa xanh ngọc"
+   }
+  },
+  {
+   "k": "y_maimai",
+   "set": "IT",
+   "kd": "Y phục",
+   "oldTier": 0,
+   "name": "Áo gấm hoa mai",
+   "grade": 1,
+   "gname": "Tinh phẩm",
+   "src": "img/wd-y-maimai.webp",
+   "src512": "img/wd-y-maimai.webp",
+   "bag": {
+    "grade": 1,
+    "src": "img/wd-y-maimai.webp",
+    "name": "Áo gấm hoa mai"
+   }
+  },
+  {
+   "k": "y_vanthuy",
+   "set": "IT",
+   "kd": "Y phục",
+   "oldTier": 0,
+   "name": "Áo lụa Hàng Châu vân thủy",
+   "grade": 1,
+   "gname": "Tinh phẩm",
+   "src": "img/wd-y-vanthuy.webp",
+   "src512": "img/wd-y-vanthuy.webp",
+   "bag": {
+    "grade": 1,
+    "src": "img/wd-y-vanthuy.webp",
+    "name": "Áo lụa Hàng Châu vân thủy"
+   }
+  },
+  {
+   "k": "y_lan",
+   "set": "IT",
+   "kd": "Y phục",
+   "oldTier": 1,
+   "name": "Áo the thêu lan",
+   "grade": 1,
+   "gname": "Tinh phẩm",
+   "src": "img/wd-y-lan.webp",
+   "src512": "img/wd-y-lan.webp",
+   "bag": {
+    "grade": 1,
+    "src": "img/wd-y-lan.webp",
+    "name": "Áo the thêu lan"
+   }
+  },
+  {
+   "k": "y_tramnep",
+   "set": "IT",
+   "kd": "Y phục",
+   "oldTier": 1,
+   "name": "Váy lụa bách điệp",
+   "grade": 1,
+   "gname": "Tinh phẩm",
+   "src": "img/wd-y-tramnep.webp",
+   "src512": "img/wd-y-tramnep.webp",
+   "bag": {
+    "grade": 1,
+    "src": "img/wd-y-tramnep.webp",
+    "name": "Váy lụa bách điệp"
+   }
+  },
+  {
+   "k": "y_haiduong",
+   "set": "IT",
+   "kd": "Y phục",
+   "oldTier": 1,
+   "name": "Áo gấm thêu hải đường",
+   "grade": 2,
+   "gname": "Trân phẩm",
+   "src": "img/wd-y-haiduong.webp",
+   "src512": "img/wd-y-haiduong.webp",
+   "bag": {
+    "grade": 2,
+    "src": "img/wd-y-haiduong.webp",
+    "name": "Áo gấm thêu hải đường"
+   }
+  },
+  {
+   "k": "y_chimen",
+   "set": "IT",
+   "kd": "Y phục",
+   "oldTier": 1,
+   "name": "Áo choàng lụa thêu chim én",
+   "grade": 1,
+   "gname": "Tinh phẩm",
+   "src": "img/wd-y-chimen.webp",
+   "src512": "img/wd-y-chimen.webp",
+   "bag": {
+    "grade": 1,
+    "src": "img/wd-y-chimen.webp",
+    "name": "Áo choàng lụa thêu chim én"
+   }
+  },
+  {
+   "k": "y_maudon",
+   "set": "IT",
+   "kd": "Y phục",
+   "oldTier": 2,
+   "name": "Áo gấm Tô Châu thêu mẫu đơn",
+   "grade": 2,
+   "gname": "Trân phẩm",
+   "src": "img/wd-y-maudon.webp",
+   "src512": "img/wd-y-maudon.webp",
+   "bag": {
+    "grade": 2,
+    "src": "img/wd-y-maudon.webp",
+    "name": "Áo gấm Tô Châu thêu mẫu đơn"
+   }
+  },
+  {
+   "k": "y_hac",
+   "set": "IT",
+   "kd": "Y phục",
+   "oldTier": 2,
+   "name": "Cát phục tím thêu hạc",
+   "grade": 2,
+   "gname": "Trân phẩm",
+   "src": "img/wd-y-hac.webp",
+   "src512": "img/wd-y-hac.webp",
+   "bag": {
+    "grade": 2,
+    "src": "img/wd-y-hac.webp",
+    "name": "Cát phục tím thêu hạc"
+   }
+  },
+  {
+   "k": "y_kimtuyen",
+   "set": "IT",
+   "kd": "Y phục",
+   "oldTier": 3,
+   "name": "Cát phục đỏ thêu kim tuyến",
+   "grade": 3,
+   "gname": "Tuyệt phẩm",
+   "src": "img/wd-y-kimtuyen.webp",
+   "src512": "img/wd-y-kimtuyen.webp",
+   "bag": {
+    "grade": 3,
+    "src": "img/wd-y-kimtuyen.webp",
+    "name": "Cát phục đỏ thêu kim tuyến"
+   }
+  },
+  {
+   "k": "y_vancam",
+   "set": "IT",
+   "kd": "Y phục",
+   "oldTier": 3,
+   "name": "Áo gấm vân cẩm",
+   "grade": 2,
+   "gname": "Trân phẩm",
+   "src": "img/wd-y-vancam.webp",
+   "src512": "img/wd-y-vancam.webp",
+   "bag": {
+    "grade": 2,
+    "src": "img/wd-y-vancam.webp",
+    "name": "Áo gấm vân cẩm"
+   }
+  },
+  {
+   "k": "y_trieutim",
+   "set": "IT",
+   "kd": "Y phục",
+   "oldTier": 3,
+   "name": "Triều phục tím chạm phượng",
+   "grade": 3,
+   "gname": "Tuyệt phẩm",
+   "src": "img/wd-y-trieutim.webp",
+   "src512": "img/wd-y-trieutim.webp",
+   "bag": {
+    "grade": 3,
+    "src": "img/wd-y-trieutim.webp",
+    "name": "Triều phục tím chạm phượng"
+   }
+  },
+  {
+   "k": "y_bachdieu",
+   "set": "IT",
+   "kd": "Y phục",
+   "oldTier": 3,
+   "name": "Áo gấm thêu bách điểu",
+   "grade": 3,
+   "gname": "Tuyệt phẩm",
+   "src": "img/wd-y-bachdieu.webp",
+   "src512": "img/wd-y-bachdieu.webp",
+   "bag": {
+    "grade": 3,
+    "src": "img/wd-y-bachdieu.webp",
+    "name": "Áo gấm thêu bách điểu"
+   }
+  },
+  {
+   "k": "y_minhhoang",
+   "set": "IT",
+   "kd": "Y phục",
+   "oldTier": 3,
+   "name": "Triều phục minh hoàng thêu phượng",
+   "grade": 3,
+   "gname": "Tuyệt phẩm",
+   "src": "img/wd-y-minhhoang.webp",
+   "src512": "img/wd-y-minhhoang.webp",
+   "bag": {
+    "grade": 3,
+    "src": "img/wd-y-minhhoang.webp",
+    "name": "Triều phục minh hoàng thêu phượng"
+   }
+  },
+  {
+   "k": "y_phuongbao",
+   "set": "IT",
+   "kd": "Y phục",
+   "oldTier": 3,
+   "name": "Phượng bào đỏ thắm",
+   "grade": 3,
+   "gname": "Tuyệt phẩm",
+   "src": "img/wd-y-phuongbao.webp",
+   "src512": "img/wd-y-phuongbao.webp",
+   "bag": {
+    "grade": 3,
+    "src": "img/wd-y-phuongbao.webp",
+    "name": "Phượng bào đỏ thắm"
+   }
+  },
+  {
+   "k": "nt_longchon",
+   "set": "IT",
+   "kd": "Y phục",
+   "oldTier": 0,
+   "name": "Áo lông chồn ngự tứ",
+   "grade": 4,
+   "gname": "Ngự tứ",
+   "src": "img/wd-nt-longchon.webp",
+   "src512": "img/wd-nt-longchon.webp",
+   "bag": {
+    "grade": 4,
+    "src": "img/wd-nt-longchon.webp",
+    "name": "Áo lông chồn ngự tứ"
+   }
+  },
+  {
+   "k": "nt_bachhoa",
+   "set": "IT",
+   "kd": "Y phục",
+   "oldTier": 0,
+   "name": "Cát phục «Bách hoa» ngự tứ",
+   "grade": 4,
+   "gname": "Ngự tứ",
+   "src": "img/wd-nt-bachhoa.webp",
+   "src512": "img/wd-nt-bachhoa.webp",
+   "bag": {
+    "grade": 4,
+    "src": "img/wd-nt-bachhoa.webp",
+    "name": "Cát phục «Bách hoa» ngự tứ"
+   }
+  },
+  {
+   "k": "nt_hocuu",
+   "set": "IT",
+   "kd": "Y phục",
+   "oldTier": 0,
+   "name": "Hồ cừu trắng ngự tứ",
+   "grade": 4,
+   "gname": "Ngự tứ",
+   "src": "img/wd-nt-hocuu.webp",
+   "src512": "img/wd-nt-hocuu.webp",
+   "bag": {
+    "grade": 4,
+    "src": "img/wd-nt-hocuu.webp",
+    "name": "Hồ cừu trắng ngự tứ"
+   }
+  },
+  {
+   "k": "y_tang",
+   "set": "IT",
+   "kd": "Y phục",
+   "oldTier": 0,
+   "name": "Áo tang vải trắng",
+   "grade": 0,
+   "gname": "Thường",
+   "src": "img/wd-y-tang.webp",
+   "src512": "img/wd-y-tang.webp",
+   "bag": {
+    "grade": 0,
+    "src": "img/wd-y-tang.webp",
+    "name": "Áo tang vải trắng"
+   }
+  },
+  {
+   "k": "mc00",
+   "set": "IT",
+   "kd": "Mạng che mặt",
+   "oldTier": 0,
+   "name": "Mạng sa ngà",
+   "grade": 0,
+   "gname": "Thường",
+   "src": "img/veil-silk-ivory.png",
+   "src512": "img/veil-silk-ivory.png",
+   "bag": {
+    "grade": 0,
+    "src": "img/veil-silk-ivory.png",
+    "name": "Mạng sa ngà"
+   }
+  },
+  {
+   "k": "mc01",
+   "set": "IT",
+   "kd": "Mạng che mặt",
+   "oldTier": 0,
+   "name": "Mạng sa hồng thêu hoa",
+   "grade": 1,
+   "gname": "Tinh phẩm",
+   "src": "img/veil-silk-pink.png",
+   "src512": "img/veil-silk-pink.png",
+   "bag": {
+    "grade": 1,
+    "src": "img/veil-silk-pink.png",
+    "name": "Mạng sa hồng thêu hoa"
+   }
+  },
+  {
+   "k": "mc02",
+   "set": "IT",
+   "kd": "Mạng che mặt",
+   "oldTier": 0,
+   "name": "Mạng sa hồng thêu hoa",
+   "grade": 2,
+   "gname": "Trân phẩm",
+   "src": "img/veil-silk-pink.png",
+   "src512": "img/veil-silk-pink.png",
+   "bag": {
+    "grade": 2,
+    "src": "img/veil-silk-pink.png",
+    "name": "Mạng sa hồng thêu hoa"
+   }
+  },
+  {
+   "k": "mc03",
+   "set": "IT",
+   "kd": "Mạng che mặt",
+   "oldTier": 0,
+   "name": "Mạng sa hồng thêu hoa",
+   "grade": 3,
+   "gname": "Tuyệt phẩm",
+   "src": "img/veil-silk-pink.png",
+   "src512": "img/veil-silk-pink.png",
+   "bag": {
+    "grade": 3,
+    "src": "img/veil-silk-pink.png",
+    "name": "Mạng sa hồng thêu hoa"
+   }
+  },
+  {
+   "k": "mc10",
+   "set": "IT",
+   "kd": "Mạng che mặt",
+   "oldTier": 0,
+   "name": "Mạng chuỗi bạc lưu ly",
+   "grade": 0,
+   "gname": "Thường",
+   "src": "img/veil-t1.png",
+   "src512": "img/veil-t1.png",
+   "bag": {
+    "grade": 0,
+    "src": "img/veil-t1.png",
+    "name": "Mạng chuỗi bạc lưu ly"
+   }
+  },
+  {
+   "k": "mc11",
+   "set": "IT",
+   "kd": "Mạng che mặt",
+   "oldTier": 0,
+   "name": "Mạng chuỗi bạc lưu ly",
+   "grade": 1,
+   "gname": "Tinh phẩm",
+   "src": "img/veil-t1.png",
+   "src512": "img/veil-t1.png",
+   "bag": {
+    "grade": 1,
+    "src": "img/veil-t1.png",
+    "name": "Mạng chuỗi bạc lưu ly"
+   }
+  },
+  {
+   "k": "mc12",
+   "set": "IT",
+   "kd": "Mạng che mặt",
+   "oldTier": 0,
+   "name": "Mạng chuỗi bạc lưu ly",
+   "grade": 2,
+   "gname": "Trân phẩm",
+   "src": "img/veil-t1.png",
+   "src512": "img/veil-t1.png",
+   "bag": {
+    "grade": 2,
+    "src": "img/veil-t1.png",
+    "name": "Mạng chuỗi bạc lưu ly"
+   }
+  },
+  {
+   "k": "mc13",
+   "set": "IT",
+   "kd": "Mạng che mặt",
+   "oldTier": 0,
+   "name": "Mạng chuỗi bạc lưu ly",
+   "grade": 3,
+   "gname": "Tuyệt phẩm",
+   "src": "img/veil-t1.png",
+   "src512": "img/veil-t1.png",
+   "bag": {
+    "grade": 3,
+    "src": "img/veil-t1.png",
+    "name": "Mạng chuỗi bạc lưu ly"
+   }
+  },
+  {
+   "k": "mc20",
+   "set": "IT",
+   "kd": "Mạng che mặt",
+   "oldTier": 0,
+   "name": "Mạng dây lụa hồng kết trai",
+   "grade": 0,
+   "gname": "Thường",
+   "src": "img/veil-t2.png",
+   "src512": "img/veil-t2.png",
+   "bag": {
+    "grade": 0,
+    "src": "img/veil-t2.png",
+    "name": "Mạng dây lụa hồng kết trai"
+   }
+  },
+  {
+   "k": "mc21",
+   "set": "IT",
+   "kd": "Mạng che mặt",
+   "oldTier": 0,
+   "name": "Mạng dây lụa hồng kết trai",
+   "grade": 1,
+   "gname": "Tinh phẩm",
+   "src": "img/veil-t2.png",
+   "src512": "img/veil-t2.png",
+   "bag": {
+    "grade": 1,
+    "src": "img/veil-t2.png",
+    "name": "Mạng dây lụa hồng kết trai"
+   }
+  },
+  {
+   "k": "mc22",
+   "set": "IT",
+   "kd": "Mạng che mặt",
+   "oldTier": 0,
+   "name": "Mạng dây lụa hồng kết trai",
+   "grade": 2,
+   "gname": "Trân phẩm",
+   "src": "img/veil-t2.png",
+   "src512": "img/veil-t2.png",
+   "bag": {
+    "grade": 2,
+    "src": "img/veil-t2.png",
+    "name": "Mạng dây lụa hồng kết trai"
+   }
+  },
+  {
+   "k": "mc23",
+   "set": "IT",
+   "kd": "Mạng che mặt",
+   "oldTier": 1,
+   "name": "Mạng dây lụa hồng kết trai",
+   "grade": 3,
+   "gname": "Tuyệt phẩm",
+   "src": "img/veil-t2.png",
+   "src512": "img/veil-t2.png",
+   "bag": {
+    "grade": 3,
+    "src": "img/veil-t2.png",
+    "name": "Mạng dây lụa hồng kết trai"
+   }
+  },
+  {
+   "k": "mc30",
+   "set": "IT",
+   "kd": "Mạng che mặt",
+   "oldTier": 0,
+   "name": "Mạng bạc chạm hoa",
+   "grade": 0,
+   "gname": "Thường",
+   "src": "img/veil-t3.png",
+   "src512": "img/veil-t3.png",
+   "bag": {
+    "grade": 0,
+    "src": "img/veil-t3.png",
+    "name": "Mạng bạc chạm hoa"
+   }
+  },
+  {
+   "k": "mc31",
+   "set": "IT",
+   "kd": "Mạng che mặt",
+   "oldTier": 0,
+   "name": "Mạng bạc chạm hoa",
+   "grade": 1,
+   "gname": "Tinh phẩm",
+   "src": "img/veil-t3.png",
+   "src512": "img/veil-t3.png",
+   "bag": {
+    "grade": 1,
+    "src": "img/veil-t3.png",
+    "name": "Mạng bạc chạm hoa"
+   }
+  },
+  {
+   "k": "mc32",
+   "set": "IT",
+   "kd": "Mạng che mặt",
+   "oldTier": 1,
+   "name": "Mạng bạc chạm hoa",
+   "grade": 2,
+   "gname": "Trân phẩm",
+   "src": "img/veil-t3.png",
+   "src512": "img/veil-t3.png",
+   "bag": {
+    "grade": 2,
+    "src": "img/veil-t3.png",
+    "name": "Mạng bạc chạm hoa"
+   }
+  },
+  {
+   "k": "mc33",
+   "set": "IT",
+   "kd": "Mạng che mặt",
+   "oldTier": 1,
+   "name": "Mạng bạc chạm hoa",
+   "grade": 3,
+   "gname": "Tuyệt phẩm",
+   "src": "img/veil-t3.png",
+   "src512": "img/veil-t3.png",
+   "bag": {
+    "grade": 3,
+    "src": "img/veil-t3.png",
+    "name": "Mạng bạc chạm hoa"
+   }
+  },
+  {
+   "k": "mc40",
+   "set": "IT",
+   "kd": "Mạng che mặt",
+   "oldTier": 0,
+   "name": "Mạng vàng nhạt kết mã não",
+   "grade": 0,
+   "gname": "Thường",
+   "src": "img/veil-t4.png",
+   "src512": "img/veil-t4.png",
+   "bag": {
+    "grade": 0,
+    "src": "img/veil-t4.png",
+    "name": "Mạng vàng nhạt kết mã não"
+   }
+  },
+  {
+   "k": "mc41",
+   "set": "IT",
+   "kd": "Mạng che mặt",
+   "oldTier": 1,
+   "name": "Mạng vàng nhạt kết mã não",
+   "grade": 1,
+   "gname": "Tinh phẩm",
+   "src": "img/veil-t4.png",
+   "src512": "img/veil-t4.png",
+   "bag": {
+    "grade": 1,
+    "src": "img/veil-t4.png",
+    "name": "Mạng vàng nhạt kết mã não"
+   }
+  },
+  {
+   "k": "mc42",
+   "set": "IT",
+   "kd": "Mạng che mặt",
+   "oldTier": 1,
+   "name": "Mạng vàng nhạt kết mã não",
+   "grade": 2,
+   "gname": "Trân phẩm",
+   "src": "img/veil-t4.png",
+   "src512": "img/veil-t4.png",
+   "bag": {
+    "grade": 2,
+    "src": "img/veil-t4.png",
+    "name": "Mạng vàng nhạt kết mã não"
+   }
+  },
+  {
+   "k": "mc43",
+   "set": "IT",
+   "kd": "Mạng che mặt",
+   "oldTier": 2,
+   "name": "Mạng vàng nhạt kết mã não",
+   "grade": 3,
+   "gname": "Tuyệt phẩm",
+   "src": "img/veil-t4.png",
+   "src512": "img/veil-t4.png",
+   "bag": {
+    "grade": 3,
+    "src": "img/veil-t4.png",
+    "name": "Mạng vàng nhạt kết mã não"
+   }
+  },
+  {
+   "k": "mc50",
+   "set": "IT",
+   "kd": "Mạng che mặt",
+   "oldTier": 1,
+   "name": "Mạng kim hoa ngọc bích",
+   "grade": 0,
+   "gname": "Thường",
+   "src": "img/veil-t5.png",
+   "src512": "img/veil-t5.png",
+   "bag": {
+    "grade": 0,
+    "src": "img/veil-t5.png",
+    "name": "Mạng kim hoa ngọc bích"
+   }
+  },
+  {
+   "k": "mc51",
+   "set": "IT",
+   "kd": "Mạng che mặt",
+   "oldTier": 1,
+   "name": "Mạng kim hoa ngọc bích",
+   "grade": 1,
+   "gname": "Tinh phẩm",
+   "src": "img/veil-t5.png",
+   "src512": "img/veil-t5.png",
+   "bag": {
+    "grade": 1,
+    "src": "img/veil-t5.png",
+    "name": "Mạng kim hoa ngọc bích"
+   }
+  },
+  {
+   "k": "mc52",
+   "set": "IT",
+   "kd": "Mạng che mặt",
+   "oldTier": 2,
+   "name": "Mạng kim hoa ngọc bích",
+   "grade": 2,
+   "gname": "Trân phẩm",
+   "src": "img/veil-t5.png",
+   "src512": "img/veil-t5.png",
+   "bag": {
+    "grade": 2,
+    "src": "img/veil-t5.png",
+    "name": "Mạng kim hoa ngọc bích"
+   }
+  },
+  {
+   "k": "mc53",
+   "set": "IT",
+   "kd": "Mạng che mặt",
+   "oldTier": 3,
+   "name": "Mạng kim hoa ngọc bích",
+   "grade": 3,
+   "gname": "Tuyệt phẩm",
+   "src": "img/veil-t5.png",
+   "src512": "img/veil-t5.png",
+   "bag": {
+    "grade": 3,
+    "src": "img/veil-t5.png",
+    "name": "Mạng kim hoa ngọc bích"
+   }
+  },
+  {
+   "k": "mc60",
+   "set": "IT",
+   "kd": "Mạng che mặt",
+   "oldTier": 1,
+   "name": "Mạng kim vân trân châu",
+   "grade": 0,
+   "gname": "Thường",
+   "src": "img/veil-t6.png",
+   "src512": "img/veil-t6.png",
+   "bag": {
+    "grade": 0,
+    "src": "img/veil-t6.png",
+    "name": "Mạng kim vân trân châu"
+   }
+  },
+  {
+   "k": "mc61",
+   "set": "IT",
+   "kd": "Mạng che mặt",
+   "oldTier": 2,
+   "name": "Mạng kim vân trân châu",
+   "grade": 1,
+   "gname": "Tinh phẩm",
+   "src": "img/veil-t6.png",
+   "src512": "img/veil-t6.png",
+   "bag": {
+    "grade": 1,
+    "src": "img/veil-t6.png",
+    "name": "Mạng kim vân trân châu"
+   }
+  },
+  {
+   "k": "mc62",
+   "set": "IT",
+   "kd": "Mạng che mặt",
+   "oldTier": 3,
+   "name": "Mạng kim vân trân châu",
+   "grade": 2,
+   "gname": "Trân phẩm",
+   "src": "img/veil-t6.png",
+   "src512": "img/veil-t6.png",
+   "bag": {
+    "grade": 2,
+    "src": "img/veil-t6.png",
+    "name": "Mạng kim vân trân châu"
+   }
+  },
+  {
+   "k": "mc63",
+   "set": "IT",
+   "kd": "Mạng che mặt",
+   "oldTier": 3,
+   "name": "Mạng kim vân trân châu",
+   "grade": 3,
+   "gname": "Tuyệt phẩm",
+   "src": "img/veil-t6.png",
+   "src512": "img/veil-t6.png",
+   "bag": {
+    "grade": 3,
+    "src": "img/veil-t6.png",
+    "name": "Mạng kim vân trân châu"
+   }
+  },
+  {
+   "k": "mc70",
+   "set": "IT",
+   "kd": "Mạng che mặt",
+   "oldTier": 2,
+   "name": "Mạng kim ty mẫu đơn",
+   "grade": 0,
+   "gname": "Thường",
+   "src": "img/veil-t7.png",
+   "src512": "img/veil-t7.png",
+   "bag": {
+    "grade": 0,
+    "src": "img/veil-t7.png",
+    "name": "Mạng kim ty mẫu đơn"
+   }
+  },
+  {
+   "k": "mc71",
+   "set": "IT",
+   "kd": "Mạng che mặt",
+   "oldTier": 3,
+   "name": "Mạng kim ty mẫu đơn",
+   "grade": 1,
+   "gname": "Tinh phẩm",
+   "src": "img/veil-t7.png",
+   "src512": "img/veil-t7.png",
+   "bag": {
+    "grade": 1,
+    "src": "img/veil-t7.png",
+    "name": "Mạng kim ty mẫu đơn"
+   }
+  },
+  {
+   "k": "mc72",
+   "set": "IT",
+   "kd": "Mạng che mặt",
+   "oldTier": 3,
+   "name": "Mạng kim ty mẫu đơn",
+   "grade": 2,
+   "gname": "Trân phẩm",
+   "src": "img/veil-t7.png",
+   "src512": "img/veil-t7.png",
+   "bag": {
+    "grade": 2,
+    "src": "img/veil-t7.png",
+    "name": "Mạng kim ty mẫu đơn"
+   }
+  },
+  {
+   "k": "mc73",
+   "set": "IT",
+   "kd": "Mạng che mặt",
+   "oldTier": 3,
+   "name": "Mạng kim ty mẫu đơn",
+   "grade": 3,
+   "gname": "Tuyệt phẩm",
+   "src": "img/veil-t7.png",
+   "src512": "img/veil-t7.png",
+   "bag": {
+    "grade": 3,
+    "src": "img/veil-t7.png",
+    "name": "Mạng kim ty mẫu đơn"
+   }
+  },
+  {
+   "k": "mc80",
+   "set": "IT",
+   "kd": "Mạng che mặt",
+   "oldTier": 3,
+   "name": "Mạng phượng điểm thúy",
+   "grade": 0,
+   "gname": "Thường",
+   "src": "img/veil-t8.png",
+   "src512": "img/veil-t8.png",
+   "bag": {
+    "grade": 0,
+    "src": "img/veil-t8.png",
+    "name": "Mạng phượng điểm thúy"
+   }
+  },
+  {
+   "k": "mc81",
+   "set": "IT",
+   "kd": "Mạng che mặt",
+   "oldTier": 3,
+   "name": "Mạng phượng điểm thúy",
+   "grade": 1,
+   "gname": "Tinh phẩm",
+   "src": "img/veil-t8.png",
+   "src512": "img/veil-t8.png",
+   "bag": {
+    "grade": 1,
+    "src": "img/veil-t8.png",
+    "name": "Mạng phượng điểm thúy"
+   }
+  },
+  {
+   "k": "mc82",
+   "set": "IT",
+   "kd": "Mạng che mặt",
+   "oldTier": 3,
+   "name": "Mạng phượng điểm thúy",
+   "grade": 2,
+   "gname": "Trân phẩm",
+   "src": "img/veil-t8.png",
+   "src512": "img/veil-t8.png",
+   "bag": {
+    "grade": 2,
+    "src": "img/veil-t8.png",
+    "name": "Mạng phượng điểm thúy"
+   }
+  },
+  {
+   "k": "mc83",
+   "set": "IT",
+   "kd": "Mạng che mặt",
+   "oldTier": 3,
+   "name": "Mạng phượng điểm thúy",
+   "grade": 3,
+   "gname": "Tuyệt phẩm",
+   "src": "img/veil-t8.png",
+   "src512": "img/veil-t8.png",
+   "bag": {
+    "grade": 3,
+    "src": "img/veil-t8.png",
+    "name": "Mạng phượng điểm thúy"
+   }
+  },
+  {
+   "k": "mcnt",
+   "set": "IT",
+   "kd": "Mạng che mặt",
+   "oldTier": 0,
+   "name": "Mạng ngự tứ",
+   "grade": 4,
+   "gname": "Ngự tứ",
+   "src": "img/veil-t3.png",
+   "src512": "img/veil-t3.png",
+   "bag": {
+    "grade": 4,
+    "src": "img/veil-t3.png",
+    "name": "Mạng ngự tứ"
+   }
+  },
+  {
+   "k": "tp-tranh-b1",
+   "set": "WORK",
+   "name": "thử",
+   "grade": 0,
+   "gname": "Thường",
+   "src": "img/item-tp-tranh-b1.webp",
+   "src512": "img/item512/item-tp-tranh-b1.webp",
+   "bag": null
+  },
+  {
+   "k": "tp-tranh-b2",
+   "set": "WORK",
+   "name": "thử",
+   "grade": 1,
+   "gname": "Khá",
+   "src": "img/item-tp-tranh-b2.webp",
+   "src512": "img/item512/item-tp-tranh-b2.webp",
+   "bag": null
+  },
+  {
+   "k": "tp-tranh-b3",
+   "set": "WORK",
+   "name": "thử",
+   "grade": 2,
+   "gname": "Tinh xảo",
+   "src": "img/item-tp-tranh-b3.webp",
+   "src512": "img/item512/item-tp-tranh-b3.webp",
+   "bag": null
+  },
+  {
+   "k": "tp-tranh-b4",
+   "set": "WORK",
+   "name": "thử",
+   "grade": 3,
+   "gname": "Tuyệt phẩm",
+   "src": "img/item-tp-tranh-b4.webp",
+   "src512": "img/item512/item-tp-tranh-b4.webp",
+   "bag": null
+  },
+  {
+   "k": "tp-theu-b1",
+   "set": "WORK",
+   "name": "thử",
+   "grade": 0,
+   "gname": "Thường",
+   "src": "img/item-tp-theu-b1.webp",
+   "src512": "img/item512/item-tp-theu-b1.webp",
+   "bag": null
+  },
+  {
+   "k": "tp-theu-b2",
+   "set": "WORK",
+   "name": "thử",
+   "grade": 1,
+   "gname": "Khá",
+   "src": "img/item-tp-theu-b2.webp",
+   "src512": "img/item512/item-tp-theu-b2.webp",
+   "bag": null
+  },
+  {
+   "k": "tp-theu-b3",
+   "set": "WORK",
+   "name": "thử",
+   "grade": 2,
+   "gname": "Tinh xảo",
+   "src": "img/item-tp-theu-b3.webp",
+   "src512": "img/item512/item-tp-theu-b3.webp",
+   "bag": null
+  },
+  {
+   "k": "tp-theu-b4",
+   "set": "WORK",
+   "name": "thử",
+   "grade": 3,
+   "gname": "Tuyệt phẩm",
+   "src": "img/item-tp-theu-b4.webp",
+   "src512": "img/item512/item-tp-theu-b4.webp",
+   "bag": null
+  },
+  {
+   "k": "tp-bhoa-b1",
+   "set": "WORK",
+   "name": "thử",
+   "grade": 0,
+   "gname": "Thường",
+   "src": "img/item-tp-bhoa-b1.webp",
+   "src512": "img/item512/item-tp-bhoa-b1.webp",
+   "bag": null
+  },
+  {
+   "k": "tp-bhoa-b2",
+   "set": "WORK",
+   "name": "thử",
+   "grade": 1,
+   "gname": "Khá",
+   "src": "img/item-tp-bhoa-b2.webp",
+   "src512": "img/item512/item-tp-bhoa-b2.webp",
+   "bag": null
+  },
+  {
+   "k": "tp-bhoa-b3",
+   "set": "WORK",
+   "name": "thử",
+   "grade": 2,
+   "gname": "Tinh xảo",
+   "src": "img/item-tp-bhoa-b3.webp",
+   "src512": "img/item512/item-tp-bhoa-b3.webp",
+   "bag": null
+  },
+  {
+   "k": "tp-bhoa-b4",
+   "set": "WORK",
+   "name": "thử",
+   "grade": 3,
+   "gname": "Tuyệt phẩm",
+   "src": "img/item-tp-bhoa-b4.webp",
+   "src512": "img/item512/item-tp-bhoa-b4.webp",
+   "bag": null
+  },
+  {
+   "k": "tp-tho-b1",
+   "set": "WORK",
+   "name": "thử",
+   "grade": 0,
+   "gname": "Thường",
+   "src": "img/item-tp-tho-b1.webp",
+   "src512": "img/item512/item-tp-tho-b1.webp",
+   "bag": null
+  },
+  {
+   "k": "tp-tho-b2",
+   "set": "WORK",
+   "name": "thử",
+   "grade": 1,
+   "gname": "Khá",
+   "src": "img/item-tp-tho-b2.webp",
+   "src512": "img/item512/item-tp-tho-b2.webp",
+   "bag": null
+  },
+  {
+   "k": "tp-tho-b3",
+   "set": "WORK",
+   "name": "thử",
+   "grade": 2,
+   "gname": "Tinh xảo",
+   "src": "img/item-tp-tho-b3.webp",
+   "src512": "img/item512/item-tp-tho-b3.webp",
+   "bag": null
+  },
+  {
+   "k": "tp-tho-b4",
+   "set": "WORK",
+   "name": "thử",
+   "grade": 3,
+   "gname": "Tuyệt phẩm",
+   "src": "img/item-tp-tho-b4.webp",
+   "src512": "img/item512/item-tp-tho-b4.webp",
+   "bag": null
+  },
+  {
+   "k": "tp-kinh-b1",
+   "set": "WORK",
+   "name": "thử",
+   "grade": 0,
+   "gname": "Thường",
+   "src": "img/item-tp-kinh-b1.webp",
+   "src512": "img/item512/item-tp-kinh-b1.webp",
+   "bag": null
+  },
+  {
+   "k": "tp-kinh-b2",
+   "set": "WORK",
+   "name": "thử",
+   "grade": 1,
+   "gname": "Khá",
+   "src": "img/item-tp-kinh-b2.webp",
+   "src512": "img/item512/item-tp-kinh-b2.webp",
+   "bag": null
+  },
+  {
+   "k": "tp-kinh-b3",
+   "set": "WORK",
+   "name": "thử",
+   "grade": 2,
+   "gname": "Tinh xảo",
+   "src": "img/item-tp-kinh-b3.webp",
+   "src512": "img/item512/item-tp-kinh-b3.webp",
+   "bag": null
+  },
+  {
+   "k": "tp-kinh-b4",
+   "set": "WORK",
+   "name": "thử",
+   "grade": 3,
+   "gname": "Tuyệt phẩm",
+   "src": "img/item-tp-kinh-b4.webp",
+   "src512": "img/item512/item-tp-kinh-b4.webp",
+   "bag": null
+  },
+  {
+   "k": "tp-khuc-b1",
+   "set": "WORK",
+   "name": "thử",
+   "grade": 0,
+   "gname": "Thường",
+   "src": "img/item-tp-khuc-b1.webp",
+   "src512": "img/item512/item-tp-khuc-b1.webp",
+   "bag": null
+  },
+  {
+   "k": "tp-khuc-b2",
+   "set": "WORK",
+   "name": "thử",
+   "grade": 1,
+   "gname": "Khá",
+   "src": "img/item-tp-khuc-b2.webp",
+   "src512": "img/item512/item-tp-khuc-b2.webp",
+   "bag": null
+  },
+  {
+   "k": "tp-khuc-b3",
+   "set": "WORK",
+   "name": "thử",
+   "grade": 2,
+   "gname": "Tinh xảo",
+   "src": "img/item-tp-khuc-b3.webp",
+   "src512": "img/item512/item-tp-khuc-b3.webp",
+   "bag": null
+  },
+  {
+   "k": "tp-khuc-b4",
+   "set": "WORK",
+   "name": "thử",
+   "grade": 3,
+   "gname": "Tuyệt phẩm",
+   "src": "img/item-tp-khuc-b4.webp",
+   "src512": "img/item512/item-tp-khuc-b4.webp",
+   "bag": null
+  },
+  {
+   "k": "tp-the-b1",
+   "set": "WORK",
+   "name": "thử",
+   "grade": 0,
+   "gname": "Thường",
+   "src": "img/item-tp-the-b1.webp",
+   "src512": "img/item512/item-tp-the-b1.webp",
+   "bag": null
+  },
+  {
+   "k": "tp-the-b2",
+   "set": "WORK",
+   "name": "thử",
+   "grade": 1,
+   "gname": "Khá",
+   "src": "img/item-tp-the-b2.webp",
+   "src512": "img/item512/item-tp-the-b2.webp",
+   "bag": null
+  },
+  {
+   "k": "tp-the-b3",
+   "set": "WORK",
+   "name": "thử",
+   "grade": 2,
+   "gname": "Tinh xảo",
+   "src": "img/item-tp-the-b3.webp",
+   "src512": "img/item512/item-tp-the-b3.webp",
+   "bag": null
+  },
+  {
+   "k": "tp-the-b4",
+   "set": "WORK",
+   "name": "thử",
+   "grade": 3,
+   "gname": "Tuyệt phẩm",
+   "src": "img/item-tp-the-b4.webp",
+   "src512": "img/item512/item-tp-the-b4.webp",
+   "bag": null
+  },
+  {
+   "k": "tp-mua-b1",
+   "set": "WORK",
+   "name": "thử",
+   "grade": 0,
+   "gname": "Thường",
+   "src": "img/item-tp-mua-b1.webp",
+   "src512": "img/item512/item-tp-mua-b1.webp",
+   "bag": null
+  },
+  {
+   "k": "tp-mua-b2",
+   "set": "WORK",
+   "name": "thử",
+   "grade": 1,
+   "gname": "Khá",
+   "src": "img/item-tp-mua-b2.webp",
+   "src512": "img/item512/item-tp-mua-b2.webp",
+   "bag": null
+  },
+  {
+   "k": "tp-mua-b3",
+   "set": "WORK",
+   "name": "thử",
+   "grade": 2,
+   "gname": "Tinh xảo",
+   "src": "img/item-tp-mua-b3.webp",
+   "src512": "img/item512/item-tp-mua-b3.webp",
+   "bag": null
+  },
+  {
+   "k": "tp-mua-b4",
+   "set": "WORK",
+   "name": "thử",
+   "grade": 3,
+   "gname": "Tuyệt phẩm",
+   "src": "img/item-tp-mua-b4.webp",
+   "src512": "img/item512/item-tp-mua-b4.webp",
+   "bag": null
+  },
+  {
+   "k": "tp-ao-b1",
+   "set": "WORK",
+   "name": "thử",
+   "grade": 0,
+   "gname": "Thường",
+   "src": "img/item-tp-ao-b1.webp",
+   "src512": "img/item512/item-tp-ao-b1.webp",
+   "bag": null
+  },
+  {
+   "k": "tp-ao-b2",
+   "set": "WORK",
+   "name": "thử",
+   "grade": 1,
+   "gname": "Khá",
+   "src": "img/item-tp-ao-b2.webp",
+   "src512": "img/item512/item-tp-ao-b2.webp",
+   "bag": null
+  },
+  {
+   "k": "tp-ao-b3",
+   "set": "WORK",
+   "name": "thử",
+   "grade": 2,
+   "gname": "Tinh xảo",
+   "src": "img/item-tp-ao-b3.webp",
+   "src512": "img/item512/item-tp-ao-b3.webp",
+   "bag": null
+  },
+  {
+   "k": "tp-ao-b4",
+   "set": "WORK",
+   "name": "thử",
+   "grade": 3,
+   "gname": "Tuyệt phẩm",
+   "src": "img/item-tp-ao-b4.webp",
+   "src512": "img/item512/item-tp-ao-b4.webp",
+   "bag": null
+  },
+  {
+   "k": "tp-mon-b1",
+   "set": "WORK",
+   "name": "thử",
+   "grade": 0,
+   "gname": "Thường",
+   "src": "img/item-tp-mon-b1.webp",
+   "src512": "img/item512/item-tp-mon-b1.webp",
+   "bag": null
+  },
+  {
+   "k": "tp-mon-b2",
+   "set": "WORK",
+   "name": "thử",
+   "grade": 1,
+   "gname": "Khá",
+   "src": "img/item-tp-mon-b2.webp",
+   "src512": "img/item512/item-tp-mon-b2.webp",
+   "bag": null
+  },
+  {
+   "k": "tp-mon-b3",
+   "set": "WORK",
+   "name": "thử",
+   "grade": 2,
+   "gname": "Tinh xảo",
+   "src": "img/item-tp-mon-b3.webp",
+   "src512": "img/item512/item-tp-mon-b3.webp",
+   "bag": null
+  },
+  {
+   "k": "tp-mon-b4",
+   "set": "WORK",
+   "name": "thử",
+   "grade": 3,
+   "gname": "Tuyệt phẩm",
+   "src": "img/item-tp-mon-b4.webp",
+   "src512": "img/item512/item-tp-mon-b4.webp",
+   "bag": null
+  },
+  {
+   "k": "tp-huong-b1",
+   "set": "WORK",
+   "name": "thử",
+   "grade": 0,
+   "gname": "Thường",
+   "src": "img/item-tp-huong-b1.webp",
+   "src512": "img/item512/item-tp-huong-b1.webp",
+   "bag": null
+  },
+  {
+   "k": "tp-huong-b2",
+   "set": "WORK",
+   "name": "thử",
+   "grade": 1,
+   "gname": "Khá",
+   "src": "img/item-tp-huong-b2.webp",
+   "src512": "img/item512/item-tp-huong-b2.webp",
+   "bag": null
+  },
+  {
+   "k": "tp-huong-b3",
+   "set": "WORK",
+   "name": "thử",
+   "grade": 2,
+   "gname": "Tinh xảo",
+   "src": "img/item-tp-huong-b3.webp",
+   "src512": "img/item512/item-tp-huong-b3.webp",
+   "bag": null
+  },
+  {
+   "k": "tp-huong-b4",
+   "set": "WORK",
+   "name": "thử",
+   "grade": 3,
+   "gname": "Tuyệt phẩm",
+   "src": "img/item-tp-huong-b4.webp",
+   "src512": "img/item512/item-tp-huong-b4.webp",
+   "bag": null
+  }
+ ]
+}

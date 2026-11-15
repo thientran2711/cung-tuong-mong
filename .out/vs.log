@@ -1,0 +1,7 @@
+fold-land {"s":0.8475,"rot":false,"inner":[1180,820],"minFont":{"css":9.92,"screen":8.4,"at":"kstw:!"},"taps":["go→go","inv→inv","act→act"],"errs":0}
+ipad {"s":1,"rot":false,"inner":[1180,820],"minFont":{"css":9.92,"screen":9.9,"at":"kstw:!"},"taps":["go→go","inv→inv","act→act"],"errs":0}
+ipad-pro {"s":1.1576,"rot":false,"inner":[1180,820],"minFont":{"css":9.92,"screen":11.5,"at":"kstw:!"},"taps":["go→go","inv→inv","act→act"],"errs":0}
+phone-land {"s":0.4756,"rot":false,"inner":[1180,820],"minFont":{"css":9.92,"screen":4.7,"at":"kstw:!"},"taps":["go→go","inv→inv","act→act"],"errs":0}
+fold-port {"s":1,"rot":false,"inner":[755,1000],"minFont":{"css":9.92,"screen":9.9,"at":"kstw:!"},"taps":["go→go","inv→inv","act→act"],"errs":0}
+narrow {"s":0.4756,"rot":true,"inner":[1180,820],"minFont":{"css":9.92,"screen":4.7,"at":"kstw:!"},"taps":["go→go","inv→inv","act→act"],"errs":0,"swipe":0,"turned":{"s":0.4756,"rot":false,"same":true}}
+sameLandscapeLayout true

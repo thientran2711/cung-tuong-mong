@@ -1,6 +1,6 @@
 /* ================= jtime4: BỐN BUỔI MỖI TUẦN (sáng, trưa, chiều, tối), 4 khắc mỗi buổi = 16 khắc =================
    Loaded right after j1 (which declares BUOI with 3 entries and the "3 buổi a tuần" comment): the array is extended in place.
-   S.buoi: 0 sáng, 1 trưa, 2 chiều, 3 tối. B4L = the last buổi (tối, "Qua đêm"), B4N = buổi per tuần.
+   S.buoi: 0 sáng, 1 trưa, 2 chiều, 3 tối. B4L = the last buổi (tối, "Sang ngày mới"), B4N = buổi per tuần.
    Older code that meant "tối" by buoi===2 now reads B4L; "chiều" (old 1) is 2; the new trưa is 1.
    Rules of time that are per DAY stay per day: the NPC scheming pass (rivalsBuoi) still runs twice a day (entering chiều and tối,
    not entering trưa), so a longer day gives her more khắc to spend but not more Sức and not more danger.

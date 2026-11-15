@@ -10,7 +10,7 @@ function pcard(o){const f=o.f||{};const L=(o.lines||[]).filter(Boolean);const C=
  const G=(o.groups||[]).filter(g=>g&&g[1]&&g[1].filter(Boolean).length);
  const role=o.tabKey||"p";window.__pcTab=window.__pcTab||{};let act=window.__pcTab[role];if(!G.some(g=>g[0]===act))act=(G.find(g=>g[1].some(b=>/<button(?![^>]*disabled)/.test(b)))||G[0]||[])[0];
  const tabs=G.length>1?`<div class="pctabs">${G.map(([hd,B])=>{const n=B.filter(b=>/<button(?![^>]*disabled)/.test(b)).length,tot=B.filter(b=>/<button/.test(b)).length;return `<button class="pct${hd===act?" on":""}" data-pct="${hd}" data-role="${role}">${hd||"Việc"} <i title="làm được ${n} trên ${tot} việc">${n}/${tot}</i></button>`}).join("")}</div>`:"";
- const right=(o.note?`<p class="pcn">${o.note}</p>`:"")+tabs+(G.length?G.map(([hd,B])=>(G.length>1?`<div class="pcg${hd===act?" on":""}" data-g="${hd}">`:(hd?`<h5>${hd}</h5>`:""))+`<div class="pcb${String(B.filter(Boolean)[0]).startsWith('<div class="pcrow"')?" rows":""}">${B.filter(Boolean).join("")}</div>`+(G.length>1?"</div>":"")).join(""):(o.empty?`<p class="past">${o.empty}</p>`:""));
+ const right=(o.note?`<p class="pcn">${o.note}</p>`:"")+tabs+(G.length?G.map(([hd,B])=>(G.length>1?`<div class="pcg${hd===act?" on":""}" data-g="${hd}">`:(hd?`<h5>${hd}</h5>`:""))+(B.some(Array.isArray)?kitRows(B.filter(Array.isArray)):"")+(B=B.filter(x=>x&&!Array.isArray(x)),B.length?`<div class="pcb${String(B[0]).startsWith('<div class="pcrow"')?" rows":""}">${B.join("")}</div>`:"")+(G.length>1?"</div>":"")).join(""):(o.empty?`<p class="past">${o.empty}</p>`:""));
  return `<div class="pc${o.out?" out":""}" style="--c:${o.col||f.col||"var(--gold)"}"><div class="pcl">${pcPort(f,o.col,o.status)}<b class="pcname">${o.name}</b>${o.rank?`<span class="pcrk">${o.rank}</span>`:""}${o.ghen!=null?ghenBar(o.ghen):""}${L.length?`<div class="pcinfo">${L.map(x=>`<span>${x}</span>`).join("")}</div>`:""}${C.length?`<div class="chips">${C.join("")}</div>`:""}</div><div class="pcr">${o.close||""}${right}</div></div>`}
 /* one button: attrs string, name, small line, disabled reason ("" = enabled) */
 function pbtn(at,n,sm,why){const k=/class="oc/.test(sm||"")?sm:kitParse(sm||"");return `<button ${at}${why?" disabled":""}>${n}<small>${why?`<span class="kwhy">${why}</span> `:""}${k}</small></button>`}
@@ -70,7 +70,7 @@ function staffTabHTML(){const [cm,ce]=capOf(S),nm=S.staff.filter(s=>s.role==="ma
 
 /* ---- people met in a place (stage pop) ---- */
 function popCard(p,i){const opts=talkOpts(p),done=S.visit&&(S.visit.talked===true||(S.visit.tk||{})[i]);const v=p.ref;const f=pFaceOf(p);
- const close=`<button class="x pcx" id="popx" aria-label="Đóng">✕ Đóng</button>`;
+ const close=`<button type="button" class="kit-x pcx" id="popx" aria-label="Đóng" title="Đóng">✕</button>`;
  let rank="",lines=[],chips=[],ghen=null,col=p.col;
  if((p.kind==="rival"||p.kind==="hh")&&v){col=RCOL[v.queen?7:v.rank];rank=`${ic(RIMG[v.queen?7:v.rank],16)}${v.queen?"Hoàng hậu":RANKS[v.rank].n}`;ghen=v.ghen;lines=[ageLine(v),`Tính nết: ${trLine(v)}`].concat(relLines(v),[favLine(v)]);chips=["",sameHouse(S,v)?chip("cùng cung"):"",v.ev?chip(`${ic("chung-cu",14)}Chứng cứ ${v.ev}`,"hot"):"",illKnown(v)?chip(illName(v),"hot"):"",v.preg&&!v.hidden?chip(`${ic("thai",14)}Có thai tháng ${v.preg}`):"",facOf(v)?chip(`Phe ${facOf(v).name}`):""]}
  else if(p.kind==="emp"){rank="Hoàng thượng";lines=[tuoi(S.emp.age),`Tâm trạng: <b>${MOODS[S.emp.mood][0]}</b>`,`Ngài sủng ngươi <b>${S.sung}</b>`]}
@@ -83,7 +83,7 @@ function popCard(p,i){const opts=talkOpts(p),done=S.visit&&(S.visit.talked===tru
 
 /* ---- the Emperor / herself, opened as a card in the dialog ---- */
 function empCardHTML(){const E=S.emp;return pcard({f:pEmp(),col:"#f0d070",name:empName(),rank:"Hoàng thượng",lines:[tuoi(E.age),`Tâm trạng: <b>${MOODS[E.mood][0]}</b>`,`Ngài sủng ngươi <b>${S.sung}</b> · Ân tình <b>${S.an||0}</b>`],
- note:E.traits.map(t=>`<b>${ETRAITS[t][0]}</b>: ${ETRAITS[t][1]}`).join("<br>"),groups:[["Điều ngài thích",Object.keys(LIKES).map(k=>`<div class="pcrow"><span>${LIKEN[k]}</span><b>${E.known[k]?E.likes[k]:"chưa rõ"}</b></div>`)]],empty:""})+`<p class="past">Nói thật lòng với ngài, hoặc hỏi Kính sự phòng, để biết ngài thích gì.</p>`}
+ note:E.traits.map(t=>`<b>${ETRAITS[t][0]}</b>: ${ETRAITS[t][1]}`).join("<br>"),groups:[["Điều ngài thích",Object.keys(LIKES).map(k=>[LIKEN[k],E.known[k]?E.likes[k]:"chưa rõ",E.known[k]?"t":"n"])]],empty:""})+`<p class="past">Nói thật lòng với ngài, hoặc hỏi Kính sự phòng, để biết ngài thích gì.</p>`}
 function selfCardHTML(){const ch=[["Sắc",S.sac],["Tài",S.tai],["Tâm cơ",S.tamco],["Đức",S.duc],["Tai mắt",S.mat],["Thái hậu",S.th],["Hoàng hậu",S.hh]];
  return pcard({f:pMe(),col:RCOL[S.rank],name:S.name,rank:`${ic(RIMG[S.rank],16)}${S.rank>=7?"Hoàng hậu":RANKS[S.rank].n}`,lines:[`${S.origin.n}`,ageLine(S),`Bổng lộc: <b>${S.out?5:BL[Math.min(7,S.rank)]}</b> bạc/tháng · công kẻ hầu -${(S.staff||[]).length*WAGE}`,`Cung nữ ${S.maid.name} · lòng <b>${S.maid.loyal}</b>`],chips:[illOf(S)?chip(illName(S),"hot"):"",S.preg?chip(`${ic("thai",14)}Mang thai tháng ${S.preg}`,"hot"):"",facOf(S)?chip(`Phe ${facOf(S).name}`):""],
- groups:[["Tư chất",ch.map(([a,b])=>`<div class="pcrow"><span>${a}</span><b>${b}</b></div>`)],["Tài nghệ",ARTS.map(a=>`<div class="pcrow"><span>${ic(AIMG[a.k],14)}${a.n}</span><b>${S.arts[a.k]}</b></div>`)]]})}
+ groups:[["Tư chất",ch.map(([a,b])=>[a,b,"t"])],["Tài nghệ",ARTS.map(a=>[`${ic(AIMG[a.k],14)}${a.n}`,S.arts[a.k],"t"])]]})}

@@ -15,7 +15,17 @@ function kitPlaceInfo(k,h){let tc=0,n=0;try{tc=k===S.place?0:travel(S.place,k)}c
  const F=[];if(tc)F.push(`Đường đi <b>${tc}</b> khắc`);F.push(`Còn <b>${left}</b> khắc`);if(n)F.push(`<b>${n}</b> bóng người`);const hr=kitPlaceHours(k);
  const t=document.createElement("template");t.innerHTML=String(h||"");const L=[];
  t.content.querySelectorAll("p").forEach(p=>{const s=p.textContent.trim();if(!s||/bóng người ở đó\.?$/.test(s)||/^Mở cửa buổi sáng/.test(s))return;L.push(`<p class="kplr${p.classList.contains("past")?" kplsm":""}">${p.innerHTML}</p>`)});
- return `<div class="kplinfo"><div class="kplf">${F.map(x=>`<span>${x}</span>`).join("")}</div>${hr?`<div class="kplh">${hr[0].toUpperCase()+hr.slice(1)}</div>`:""}${L.join("")}</div>`}
+ const info=`<div class="kplinfo"><div class="kplf">${F.map(x=>`<span>${x}</span>`).join("")}</div>${hr?`<div class="kplh">${hr[0].toUpperCase()+hr.slice(1)}</div>`:""}${L.join("")}</div>`;
+ const q=kitPlaceHost(k);if(!q)return info;
+ return `<div class="kplhost" data-pid="${q.pid}"><div class="kplhp">${kitNameRank(q.rank,q.name,q.col)}<div class="kplhf">${pcPort(q.f,q.col)}</div></div>${info}</div>`}
+/* KIT 32.8b (owner 11/15 15:45Z, "VIỆC · Chung Tú cung"): a place card of a palace whose HEAD is at home shows her under the picture:
+   LEFT her portrait with name + rank above (KIT 48 kitNameRank; not met = the grey kit silhouette, stranger rule 49.3, via relPerson),
+   RIGHT the info box (she is in, the greeting rule, khắc needed / left). Consort palaces + Càn Ninh (Hoàng hậu) + Đức Thọ (Thái hậu). */
+function kitPlaceHost(k){try{if(!S||!k||k==="home"||typeof relPerson!=="function")return null;
+ if(k==="tn"){if(S.thDead)return null;return relPerson("th")}
+ if(k!=="kn"&&k[0]!=="r")return null;const h=typeof accHost==="function"?accHost(k):null;
+ if(!h||h===S||!h.alive||h.out||(typeof whereOf==="function"&&whereOf(h)!==k))return null;return relPerson(h.id)}catch(e){return null}}
+window.kitPlaceHost=kitPlaceHost;
 function kitPlaceDress(m,k){if(!m||!k||m.placeK)return;m.placeK=k;const a=kitPlaceArt(k);if(a)m.headArt=a;m.h=kitPlaceInfo(k,m.h);if(m.opts)m.optLayout=undefined}
 /* the people on the picture: grey kit silhouettes (f / m / k by who is really there), feet on the floor line, no faces */
 function kitPlaceSil(){try{const m=Q[0];const d=document.querySelector("#modal .dlg");if(!d)return;d.classList.toggle("kplace",!!(m&&m.placeK));if(!m||!m.placeK)return;
@@ -32,9 +42,10 @@ function kitPlaceSil(){try{const m=Q[0];const d=document.querySelector("#modal .
 /* ---------- KIT 32.9 ONE OPTION LAYOUT RULE (kitOptLayout) — every dialog, 32.6 / 32.7 included ----------
    SHORT option = its name + at most ONE effect line (Tốn / Được / … row); LONG = two or more rows (Cần / Tốn / Được / Mất / Kèm), or a name
    over two lines. All short → 2-column grid of equal buttons (3 on ≥ 1000 px with 3+); any long → each long one is a full-width row, the
-   short ones share the grid. "Thôi" / "Lui" / "Để sau" (kback) is a compact secondary button with no effect line, always last; when every
-   other option is long it sits as a slim row under them. A Q item may still force optLayout:'rows'|'grid'. */
-const KIT_BACK=/^(Thôi|Lui|Để sau|Bỏ qua|Không đi)$/;
+   short ones share the grid. "Để sau" / "Bỏ qua" / "Không đi" (kback) is a compact secondary button with no empty effect line, in its
+   own place (no "always last" rule any more); when every other option is long it sits as a slim row. "Thôi" / "Lui" are never buttons:
+   the dialog's ✕ (KIT 32.10). A Q item may still force optLayout:'rows'|'grid'. */
+const KIT_BACK=/^(Để sau|Bỏ qua|Không đi)$/;
 function kitOptIsBack(b){const t=b.querySelector(".kan");return KIT_BACK.test(((t||b).textContent||"").trim())}
 function kitOptIsLong(b){if(b.classList.contains("kback"))return false;const rows=b.querySelectorAll(".kr").length;if(rows>=2)return true;
  const t=b.querySelector(".kan");const lh=parseFloat(t?getComputedStyle(t).lineHeight:0)||20;return !!(t&&t.getBoundingClientRect().height>lh*2.3)}
@@ -52,8 +63,7 @@ function kitOptCramped(g){return [...g.querySelectorAll(":scope > button.ka:not(
    g.querySelectorAll(":scope > button.ka").forEach(b=>b.classList.remove("k3long","k3odd"))})}catch(e){}return r}})();
 (function(){const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);try{kitPlaceSil();requestAnimationFrame(()=>{kitPlaceSil();try{kitDlgFit()}catch(e){}})}catch(e){}return r}})();
 (function(){const st=document.createElement("style");st.id="k-place";st.textContent=`
-/* 32.9 back button: compact, last */
-html body #modal .opts>button.ka.kback,html body #modal .kpscopts>button.ka.kback{order:3!important}
+/* 32.9 secondary button ("Để sau" / "Bỏ qua"): compact; keeps its place (KIT 32.10: no "Thôi luôn cuối") */
 html body #modal .opts.k3rows>button.ka.kback{min-height:0!important;padding-top:7px!important;padding-bottom:7px!important}
 html body #modal .opts>button.ka.kback .kat{justify-content:center;border-bottom:0!important;padding-bottom:0!important;margin-bottom:0!important}
 html body #modal .opts>button.ka.kback .kan{font-weight:600;color:var(--ink2,#6b4a2a)}
@@ -76,6 +86,12 @@ html body #modal .opts>button.ka.kback .kan{text-align:center;width:100%}
 #modal .dlg.kplace .kplinfo p.kplr.kplsm{font-size:.8rem;color:var(--ink2,#6b4a2a);margin-top:3px}
 #modal .dlg.kplace .kplf+p.kplr{border-top:1px solid #ead9b4;padding-top:6px}
 #modal .dlg.kplace #mb>.kdlgart{margin-bottom:6px}
+#modal .dlg.kplace .kplhost{display:grid;grid-template-columns:clamp(84px,22%,124px) minmax(0,1fr);gap:10px;align-items:start;margin:2px 0 0}
+#modal .dlg.kplace .kplhost>.kplinfo{margin:0}
+@media (max-height:560px){#modal .dlg.kplace .kplhost{grid-template-columns:76px minmax(0,1fr)}}
+#modal .dlg.kplace .kplhp{display:flex;flex-direction:column;align-items:stretch;gap:4px;min-width:0}
+#modal .dlg.kplace .kplhp>.knr{text-align:center}
+#modal .dlg.kplace .kplhf .pcp{width:100%!important;max-width:none!important;max-height:none!important;height:auto!important;margin:0!important;float:none!important}
 #modal .dlg.kplace .ksart .kplsil{position:absolute;left:0;right:0;bottom:12%;height:58%;display:flex;justify-content:center;align-items:flex-end;pointer-events:none;z-index:2}
 #modal .dlg.kplace .ksart .kplsil img{height:100%;width:auto;max-width:none;margin:0 -1%;opacity:.78;filter:grayscale(1) brightness(.42) blur(.3px);transform:translateY(calc(var(--i) * 2%))}
 #modal .dlg.kplace .ksart .kplsil img.kpls-k{height:62%}

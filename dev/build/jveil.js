@@ -14,7 +14,7 @@
    Old saves: p.scar.veil = 1 without an item → she is given the matching Thường veil of her own phẩm (worn, phẩm known).
    Knobs: VL below. Balance notes in dev/ITEMS_EARNED.md. ================= */
 const VL={base:[6,10,15,22,35,50,75,110,160],gMul:[1,1.5,2.2,3.2],cover:[2/3,.6,.53,.47,.4],
- mat:[0,12,45],              /* craft material cost: vải sa · dây bạc, trai · kim tuyến, ngọc */
+ mat:[0,6,45],               /* craft material cost: vải sa · dây bạc, trai · kim tuyến, ngọc */
  outX:.8,outRisk:12,outDanh:3, /* mua lén: price factor, % the errand leaks, Danh lost */
  askHH:15,askTH:10,askFail:2, /* xin ban: odds = base + favour/2; favour lost on refusal */
  craftSuc:10,                /* Sức spent on a crafting session (2 khắc) */
@@ -89,7 +89,12 @@ function vlLv(p){const a=vlArt();try{return typeof wkLv==="function"?wkLv(p,a):(
 function vlQ(p,m,raw){let c=0;try{if(typeof wkCongPh==="function")c=wkCongPh(p)}catch(e){}return raw+vlLv(p)+m+c}
 function vlCraftOut(p,m,raw){const q=vlQ(p,m,raw);const i=q>=14?3:q>=10?2:q>=6?1:0;const [P,g]=VL_CRAFT[m][i];return vlKey(P,g)}
 function vlCraft(p,m,raw){const k=vlCraftOut(p,m,raw);if(VL.mat[m])ap(p,{bac:-VL.mat[m]});vlGain(p,k,{from:"tay",giver:""});return k}
-function vlGradeOdds(p,m){const lo=vlG({k:vlCraftOut(p,m,5)}),hi=vlG({k:vlCraftOut(p,m,10)});const G=WD_GRADE;return `chơi được 5 phần: ${G[lo]}${hi>lo?` · chơi giỏi: tới ${G[hi]}`:""}`}
+/* (owner 14:50Z, paid tiers) the card shows the same concrete facts as every j83 material card: what 5 phần makes, its worth in bạc,
+   the play score each better band needs, and what this material can never reach */
+function vlGradeOdds(p,m){const G=WD_GRADE,k5=vlCraftOut(p,m,5),lo=vlG({k:k5});const N=[];let last=k5;
+ for(let r=6;r<=10;r++){const k=vlCraftOut(p,m,r);if(k!==last){N.push(`${G[vlG({k})]} (${IT[k].pr} bạc): cần chơi ${r} phần`);last=k}}
+ const top=VL_CRAFT[m][3],cap=vlG({k:vlKey(top[0],top[1])});
+ return `chơi 5 phần: ${G[lo]}, đáng ${IT[k5].pr} bạc${N.length?" · "+N.join(" · "):""}${cap<3?` · cao nhất ${G[cap]}`:""}`}
 /* buy at Nội vụ phủ: her own phẩm (and plain sa), phẩm known */
 function vlNvpList(p){const P=Math.min(8,wdPOf(p));const L=[vlKey(P,0),vlKey(P,1),vlKey(P,2)];if(P>0)L.unshift(vlKey(0,0));return L}
 function vlBuyNvp(p,k){const pr=IT[k].pr;if((p.bac||0)<pr)return"";ap(p,{bac:-pr});vlGain(p,k,{from:"nvp",giver:"Nội vụ phủ",known:"Nội vụ phủ cấp theo phẩm"});return `${NMc(p)} đặt ở Nội vụ phủ ${IT[k].n}: Bạc -${pr}. `}

@@ -1,0 +1,192 @@
+{
+ "sites": 35,
+ "siteList": [
+  "j2.js:150 S.inv.push(",
+  "j24.js:27 S.inv.push(",
+  "j29.js:54 S.inv.push(",
+  "j67.js:1712 S.inv.push(",
+  "j8.js:188 p.inv.push(",
+  "j8.js:210 r.inv.push(",
+  "j8.js:215 t.inv.push(",
+  "j8.js:242 p.inv.push(",
+  "j8.js:413 p.inv.push(",
+  "j8.js:415 p.inv.push(",
+  "j8.js:446 S.inv.push(",
+  "j8.js:449 S.inv.push(",
+  "j8.js:451 S.inv.push(",
+  "j83.js:92 r.inv.push(",
+  "j83.js:110 S.inv.push(",
+  "j83.js:183 v.inv.push(",
+  "j83.js:211 p.inv.push(",
+  "j83.js:213 p.inv.push(",
+  "j83.js:217 p.inv.push(",
+  "j92.js:147 p.inv.push(",
+  "j92.js:148 p.inv.push(",
+  "j92.js:168 p.inv.push(",
+  "j92.js:219 p.inv.push(",
+  "j92.js:299 t.inv.push(",
+  "j92.js:349 p.inv.push(",
+  "j92.js:374 v.inv.push(",
+  "j93.js:197 KMSNAP.inv.push(",
+  "j97.js:28 S.inv.push(",
+  "jearn.js:23 S.inv.push(",
+  "jveil.js:43 p.inv.push(",
+  "jveil.js:55 p.inv.push(",
+  "jveil.js:56 p.inv.push(",
+  "jveil.js:83 p.inv.push(",
+  "jveil.js:186 v.inv.push(",
+  "jwdinv.js:38 p.inv.push("
+ ],
+ "steps": [
+  {
+   "name": "work mon",
+   "adds": 1,
+   "gains": 1,
+   "rewards": 0,
+   "shown": [
+    "Bát gà hấp lá sen · Khá · pic"
+   ]
+  },
+  {
+   "name": "work theu",
+   "adds": 1,
+   "gains": 1,
+   "rewards": 0,
+   "shown": [
+    "Khăn thêu uyên ương · Thường · pic"
+   ]
+  },
+  {
+   "name": "work tranh",
+   "adds": 1,
+   "gains": 1,
+   "rewards": 0,
+   "shown": [
+    "Bức tranh «Cúc» · Tinh xảo · pic"
+   ]
+  },
+  {
+   "name": "work tho",
+   "adds": 1,
+   "gains": 1,
+   "rewards": 0,
+   "shown": [
+    "Bức thư pháp «Hoa triêu» · Khá · pic"
+   ]
+  },
+  {
+   "name": "work khuc",
+   "adds": 1,
+   "gains": 1,
+   "rewards": 0,
+   "shown": [
+    "Khúc đàn tự phổ «Lạc mai» · Thường · pic"
+   ]
+  },
+  {
+   "name": "generic add (purchase / find)",
+   "adds": 1,
+   "gains": 1,
+   "rewards": 0,
+   "shown": [
+    "Nhân sâm trăm năm · Tinh phẩm · pic"
+   ]
+  },
+  {
+   "name": "ân thưởng (bestow)",
+   "adds": 1,
+   "gains": 0,
+   "rewards": 1,
+   "shown": []
+  },
+  {
+   "name": "gift from Thái hậu",
+   "adds": 1,
+   "gains": 0,
+   "rewards": 1,
+   "shown": []
+  },
+  {
+   "name": "burst of 3",
+   "adds": 3,
+   "gains": 3,
+   "rewards": 0,
+   "shown": [
+    "Son phấn Dương Châu · Thường · pic",
+    "Hương trầm · Thường · pic",
+    "Đệm gấm · Thường · pic"
+   ]
+  }
+ ],
+ "bag": [
+  {
+   "name": "Bát gà hấp lá sen",
+   "src": "https://ctm-img.victoria-tntt.workers.dev/img/item-tp-mon-b2.webp",
+   "gname": "Khá",
+   "ti": 1,
+   "q": 7
+  },
+  {
+   "name": "Khăn thêu uyên ương",
+   "src": "https://ctm-img.victoria-tntt.workers.dev/img/item-tp-theu-b1.webp",
+   "gname": "Thường",
+   "ti": 0,
+   "q": 4
+  },
+  {
+   "name": "Bức tranh «Cúc»",
+   "src": "https://ctm-img.victoria-tntt.workers.dev/img/item-tp-tranh-b3.webp",
+   "gname": "Tinh xảo",
+   "ti": 2,
+   "q": 10
+  },
+  {
+   "name": "Bức thư pháp «Hoa triêu»",
+   "src": "https://ctm-img.victoria-tntt.workers.dev/img/item-tp-tho-b2.webp",
+   "gname": "Khá",
+   "ti": 1,
+   "q": 7
+  },
+  {
+   "name": "Khúc đàn tự phổ «Lạc mai»",
+   "src": "https://ctm-img.victoria-tntt.workers.dev/img/item-tp-khuc-b1.webp",
+   "gname": "Thường",
+   "ti": 0,
+   "q": 0
+  }
+ ],
+ "works": [
+  {
+   "n": "Bát gà hấp lá sen",
+   "ti": 1,
+   "q": 7,
+   "tier": "Khá"
+  },
+  {
+   "n": "Khăn thêu uyên ương",
+   "ti": 0,
+   "q": 4,
+   "tier": "Thường"
+  },
+  {
+   "n": "Bức tranh «Cúc»",
+   "ti": 2,
+   "q": 10,
+   "tier": "Tinh xảo"
+  },
+  {
+   "n": "Bức thư pháp «Hoa triêu»",
+   "ti": 1,
+   "q": 7,
+   "tier": "Khá"
+  },
+  {
+   "n": "Khúc đàn tự phổ «Lạc mai»",
+   "ti": 0,
+   "q": 0,
+   "tier": "Thường"
+  }
+ ],
+ "errs": [],
+ "fails": []
+}
