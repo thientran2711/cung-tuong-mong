@@ -21252,7 +21252,7 @@ function petcGrow(p,P,quiet){const n=petcNext(P);if(!n||n.ageNow<n.age||(P.aff||
    itemPic:petcPic(P,true),facts:[`Công dụng bây giờ: ${E.join(", ")||"làm cung thêm vui"}.`,P.stg<3?`Lớn tiếp: ${petcNextTxt(P)}.`:"Đã là Linh thú: công dụng mạnh nhất."]})}catch(e){}},60)}
  try{log(`${p===S?"":NM(p)+": "}${petT(P).n} lớn lên thành ${BAL.pet.stages[P.stg]}.`)}catch(e){}return true}
 function petcPic(P,big){const a=petcStageSrc(P,1);const T=petT(P);
- return `<span class="kitem kitem-lg kig${T.tr}${T.tr===4?" kitem-nt":""}" style="--ig:${KIT_GRADE[T.tr].g};--ic:${KIT_GRADE[T.tr].c}${KIT_GRADE[T.tr].r?";--ir:"+KIT_GRADE[T.tr].r:""}"><span class="kitb"><img src="${a.src}" style="transform:scale(${a.scale})" alt="" onerror="if(this.dataset.f){this.remove()}else{this.dataset.f=1;this.src='${a.fb}'}">${T.tr===4?'<i class="kits" aria-hidden="true">Ngự</i>':""}</span></span>`}
+ return `<span class="kitem kitem-lg kig${T.tr}${T.tr===4?" kitem-nt":""}" style="--ig:${KIT_GRADE[T.tr].g};--ic:${KIT_GRADE[T.tr].c}${KIT_GRADE[T.tr].r?";--ir:"+KIT_GRADE[T.tr].r:""}"><span class="kitb"><img src="${a.src}" alt="" onerror="if(this.dataset.f){this.remove()}else{this.dataset.f=1;this.style.transform='scale(${a.scale})';this.src='${a.fb}'}">${T.tr===4?'<i class="kits" aria-hidden="true">Ngự</i>':""}</span></span>`}
 function petcFx(){try{if(typeof sfx==="function")sfx("chime")}catch(e){}}
 /* ---------- the week: decay, servant care, NPC care, omen → sick → gone; growth ---------- */
 petWeek=function(){for(const p of [S].concat(liveRivals(true))){const L=tsbPets(p);if(!L.length)continue;const me=p===S;
@@ -21279,7 +21279,7 @@ function petcClose(){const ov=document.getElementById("kpetcare");if(ov)ov.remov
 function petcDraw(msg){const ov=document.getElementById("kpetcare");const P=tsbPets(S)[PETC.i];if(!ov||!P){petcClose();return}const T=petT(P),s=petStage(P),a=petcStageSrc(P,1);const t1=whyTime(BAL.pet.khac);const m=tsbMaid(S);
  const g=(k,n,x)=>pbtn(`data-petc="${k}"`,n,`tốn: ${BAL.pet.khac} khắc · ${x}`,t1);
  ov.innerHTML=`<div class="kpcbox"><div class="kpch"><b>${T.n}</b><span class="kchip n">${BAL.pet.stages[s]}</span><span class="kchip n" style="color:${KIT_GRADE[T.tr].c}">${PET_TIER[T.tr]}</span><button class="kbtn alt kpcx" data-petc="close">Xong</button></div>
-  <div class="kpcstage" id="kpcstage"><img id="kpcimg" src="${a.src}" style="--sc:${a.scale}" alt="" draggable="false" onerror="if(this.dataset.f){this.remove()}else{this.dataset.f=1;this.src='${a.fb}'}"></div><div id="kpcgame"></div>
+  <div class="kpcstage" id="kpcstage"><img id="kpcimg" src="${a.src}" style="--sc:1" alt="" draggable="false" onerror="if(this.dataset.f){this.remove()}else{this.dataset.f=1;this.style.setProperty('--sc','${a.scale}');this.src='${a.fb}'}"></div><div id="kpcgame"></div>
   <div class="kpcbars">${petcBars(P)}</div>
   <p class="kpcmsg">${msg||`Công dụng: ${petcEffects(P).join(", ")||"làm cung thêm vui"}. Lớn tiếp: ${petcNextTxt(P)}.`}</p>
   <div class="rbtn kpcacts">${g("feed","Cho ăn",`thành: No tăng, Tình cảm tăng · kéo đúng món ${T.n.toLowerCase()} ăn vào nó`)}${g("bath","Tắm, chải lông","thành: Sạch tăng · vuốt đều tay 5 lần")}${g("play","Chơi","thành: Vui tăng · chạm khi đồ chơi qua giữa (3 lần)")}
@@ -21568,7 +21568,7 @@ window.VP={fix,date,num,ord,mon,rules:RULES,full:FULL,tabs:TABS,refresh:()=>{pat
      (COOPW.hold freezes Qua buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="f2be6c9f951f";window.CTM_BUILD=BUILD;
+const BUILD="5114f652e27d";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
