@@ -49,3 +49,6 @@ KIT_SAMPLES.push(
 .kitpg-seal .rtoast.karesult{position:static;transform:none;opacity:1;display:inline-flex;padding:4px 8px}
 `;document.head.appendChild(st)})();
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-kitsample]");if(b){e.stopPropagation();e.preventDefault()}},true);
+/* §32.1 / §32.12 the top bar's stat row (owner 15/11 ~17:50Z: LEFT Sắc · Tài · Tâm cơ · Đức · Danh · Sủng | RIGHT Bạc · Sức), review/header-danh */
+KIT_SAMPLES.push({id:"§32.1",title:"kitStatRow: thanh đầu trang (trái 6 | phải 2)",html:()=>{const c=(k,ic,l,v,b)=>kitStatCell("img/"+ic+".webp",l,v,{k,bar:b==null?null:b,title:l+" "+v+" · chạm để xem đủ"});
+ return kitStatRow([{cells:[c("sac","sac","Sắc",51),c("tai","tai","Tài",87),c("tamco","tam-co","Tâm cơ",12),c("duc","duc","Đức",40),c("danh","danh","Danh",14,14),c("sung","sung","Sủng",22,22)]},{cells:[c("bac","bac","Bạc",120),c("suc","suc","Sức",90,90)]}])}});
