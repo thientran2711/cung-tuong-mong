@@ -1,6 +1,6 @@
 # Review: review/close-bugs (15e36a6c6) — reviewer R6, 2026-11-15
 
-Merged onto origin/main ebbbd9eff, then again onto d50f5f772 (rank0-emo, rest-balance, scene-light), as review/close-bugs-r6.
+Merged onto origin/main ebbbd9eff, then again onto 1a99caf7d (d50f5f772 rank0-emo, rest-balance, scene-light + img-quality; merge commit 79f0aeb7c says d50f5f772, the merged parent is 1a99caf7d), as review/close-bugs-r6.
 
 ## Merge
 - Conflicts: assemble.py (kept main order incl. jseal; jclose before j84), KIT.md, built files (rebuilt with dev/site/build_site.sh).
@@ -9,7 +9,7 @@ Merged onto origin/main ebbbd9eff, then again onto d50f5f772 (rank0-emo, rest-ba
   note left in KIT.md §42, refs fixed in KIT 28.6, jclose.js, swreg.js ("KIT §7.4" was a wrong ref -> §42.2), PROGRESS_close_bugs.md.
 - assemble order: main's list + jclose.js after jaudit.js (before jmark, jkpor, j84, jimg).
 
-## Scans re-run on the merge with d50f5f772 (all 0)
+## Scans re-run on the merge with 1a99caf7d (all 0)
 | scan | result |
 |---|---|
 | cb-gate.fn.js (Bái kiến, all places × buổi × khắc) | 0 / 350 bad |
