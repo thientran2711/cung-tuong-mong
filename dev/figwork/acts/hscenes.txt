@@ -322,8 +322,8 @@ hoi-chuyen-cu|0|a consort's hand in a pink sleeve offering a cup of tea to an ol
 dang-thu-ht|0|a consort's hand handing a sealed letter to a eunuch's dark-sleeved hands at the threshold of an imperial study
 nho-dua-thu-keu-oan|0|a hand in a plain undyed sleeve passing a folded letter through the gap of a weathered cold-palace gate into a maid's green-sleeved hand
 lat-an-tien-de|0|memorials scattered on the floor beside the Emperor's yellow robe hem, one yellow-sleeved hand clenched in anger at the edge of a desk
-xu-tram|0|a distant execution ground outside city walls under a grey sky, black banners, a crowd far away, no blood, no weapons shown
-tau-xin-nguoi-cua-cha|0|a consort's hands presenting an unrolled recommendation memorial (abstract lines) to the Emperor's yellow sleeve at a desk
+xu-tram|0|an empty execution ground outside grey city walls seen from far away under a heavy overcast sky, black banners hanging limp, a lone crow on a wooden post, no people, no blood, no weapons
+tau-xin-nguoi-cua-cha|0|a consort's hands presenting a closed, rolled memorial tied with a red ribbon to the Emperor's yellow sleeve at a desk, the scroll completely closed
 cam-co|0|a jeweled hairpin laid on a pawnshop counter, a pawnbroker's hand in a plain brown sleeve weighing silver on a small scale
 chuoc-lai|0|a consort's hand placing silver on a pawnshop counter and taking back a small jewelry box from the pawnbroker's brown sleeve
 may-ao|0|a tailor's hands with a measuring cord and chalk at a consort's pink sleeve, bolts of brocade spread on a table
@@ -341,3 +341,27 @@ hh-thuong-hien-thuc|0|the Empress's hand in a red phoenix brocade sleeve giving 
 tro-ve-lanh-cung-nuoi|0|maids' green-sleeved hands carrying a wooden chest of belongings through a newly opened palace gate
 tha-toi-chet|0|the Emperor's yellow sleeve waving in a gesture of pardon, before it a figure's sleeves pressed to the floor in a kowtow
 vao-lanh-cung|0|a weathered cold-palace gate creaking open, a hand in a plain undyed sleeve carrying a small cloth bundle stepping inside
+roi-lanh-cung|0|a hand in a plain undyed sleeve stepping out through a cold-palace gate, a maid's green-sleeved hands holding out a folded new silk robe to her
+dem-dong-lanh-cung|1|hands in thin plain undyed sleeves huddled over a cold, dead charcoal brazier in a bare room, snow drifting through a broken lattice window
+duoc-an-xa-ve-cung|0|a eunuch's dark sleeves holding an unrolled blank pardon edict before a cold-palace gate, a kneeling figure's plain undyed sleeves raised to receive it
+thai-hau-quo-trach|0|an elder lady's hand in a dark brocade sleeve raised sternly in rebuke, before her a kneeling consort's pink sleeves bowed to the floor
+vuong-gia-quo-trach|0|the Emperor's yellow sleeve pointing in rebuke, before it a prince's bowed dark blue sleeves and jade belt
+cach-chuc-bien-ai|0|a man's hand in a plain grey traveling sleeve holding the reins of a horse before a distant frontier pass gate, a straw hat hanging on the saddle, desolate hills
+thai-hau-bang-ha|0|a palace hall hung with white mourning cloth, kneeling sleeves of plain white mourning robes bowed to the floor before an altar with white candles
+nhan-sac-phai|0|a mature lady's elegant hand in a pink sleeve holding a bronze hand mirror reflecting spring blossoms (no face visible), a dressing table
+gai-ngua-yen-tiec|0|a consort's hand pulling her pink sleeve down to cover her wrist as she rises from a banquet table, wine cups and dishes, other guests' sleeves turning to look
+dich-dau-mua|0|a palace gate tied off with pale quarantine cloth strips, a physician's hand in a dark green sleeve carrying a medicine basket, a cloth mask in hand
+nhiem-benh|0|a feverish lady's hand limp on a quilt, a damp cloth folded on a basin beside, a maid's green-sleeved hand gently fanning with a round fan
+tu-boc-thuoc|0|a consort's hands weighing herbs on a small brass balance scale, an apothecary cabinet of many small drawers behind
+hau-benh-ca-thang|0|a consort's hand in a pink sleeve feeding a spoonful of medicine toward an elder lady's frail hand resting on an embroidered quilt
+gui-le-van-an|0|a maid's green-sleeved hands carrying a tray of gift boxes to the carved doorway of the Empress Dowager's palace
+gui-bac-chua-benh|0|a maid's hands wrapping small silver ingots inside a handkerchief and tying it into a bundle, a folded letter beside
+xin-an-ve-tham|0|a kneeling consort's clasped pleading hands in pink sleeves before the Empress's red phoenix brocade hem
+viet-thu-hoi-han|0|a consort's hand writing a family letter with a brush beside an open window, abstract lines on the paper, pink sleeve
+bo-yen-thuc-ben-con|1|a consort's hand holding a small child's tiny hand on a sickbed through the night, a half-burned candle, an elegant banquet robe draped forgotten over a chair
+moi-thai-y-du-yen|0|a physician's hand taking the pulse of a small child's tiny wrist on a pillow, at the doorway a consort's banquet-robe sleeve about to leave
+lao-vao-cuu|0|a consort's hands supporting a maid's arm in a green sleeve out of a smoky hall doorway, smoke and embers behind
+chi-huy-dap-lua|0|a consort's hand pointing commandingly, servants' hands passing buckets of water toward a smoking hall roof
+tra-ke-phong-hoa|0|a eunuch's hand holding a lantern low over a spilled oil stain on a scorched wooden floor
+giup-mot-tay|0|a consort's hand passing a small paper packet of powder to another lady's hand, hidden under the drape of a wide sleeve
+dung-ra-can|0|a consort's hands raised and spread between two other ladies' sleeves tugging toward each other in a quarrel
