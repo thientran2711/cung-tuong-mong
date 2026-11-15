@@ -272,7 +272,7 @@ function aaPunishTxt(sev){const m=has("nongnay")?3:has("nhantu")?1:2;return sev>
        (the veil craft). */
 (function(){let lastTap=0;window.__aaL=0;
  const ovOpen=()=>{const ov=document.getElementById("ov");return !!(ov&&!ov.hidden)||!!document.querySelector("#kg82go,.kg82act")};
- const busy=()=>!!(S&&(S.mg||window.__aaPend||(Q.length&&Q[0]&&/làm ra tác phẩm gì|^Học |^Tự luyện|mạng che mặt/.test(Q[0].t||""))))||ovOpen();
+ const busy=()=>!!(S&&(S.mg||window.__aaPend||(Q.length&&Q[0]&&/làm ra tác phẩm gì|^Học |^Tự học|mạng che mặt/.test(Q[0].t||""))))||ovOpen();
  document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-learn],[data-wkprac]");if(!b)return;const now=Date.now();
   if(busy()||now-lastTap<700){e.stopPropagation();e.stopImmediatePropagation();e.preventDefault();return}lastTap=now},true);
  const KEYS=["suc","bac","th"];const snap=()=>({suc:S.suc,bac:S.bac,th:S.th,used});
@@ -307,6 +307,6 @@ function aaPunishTxt(sev){const m=has("nongnay")?3:has("nhantu")?1:2;return sev>
   fin=1;showLast(ttl,before,ok,q0)}catch(e){console.error(e)}};
  if(typeof playArt==="function"){const p0=playArt;playArt=function(o){window.__aaL=1;if(o&&typeof o.onDone==="function"){const d0=o.onDone,ttl=o.title;
   o=Object.assign({},o,{onDone:function(raw,x){const sk=!!(x&&x.skipped);const r1=cl(Math.round(raw||0),0,10);window.aaPayMG({title:ttl,skip:sk,ok:r1>=5,raw:sk?null:r1});return d0.apply(this,arguments)}})}return p0.call(this,o)}}
- if(typeof openMG==="function"){const o0=openMG;openMG=function(k,lv,cb){window.__aaL=1;let ttl="";try{const m=S.mg,a=ARTS.find(x=>x.k===k);ttl=`${m&&m.mode==="prac"?"Tự luyện":m&&m.mode==="self"?"Tự học":m&&m.mode==="th"?"Học cùng Thái hậu":"Học"} ${a?a.n:""}`}catch(e){}
+ if(typeof openMG==="function"){const o0=openMG;openMG=function(k,lv,cb){window.__aaL=1;let ttl="";try{const m=S.mg,a=ARTS.find(x=>x.k===k);ttl=`${m&&m.mode==="prac"?"Tự học":m&&m.mode==="self"?"Tự học":m&&m.mode==="th"?"Học với Thái hậu":"Học"} ${a?a.n:""}`}catch(e){}
   if(ttl&&!window.__aaTitle)window.__aaTitle=ttl;const cb2=typeof cb==="function"?function(g){window.aaPayMG({title:ttl,g});return cb.apply(this,arguments)}:cb;return o0.call(this,k,lv,cb2)}}
  if(typeof resultShow==="function"){const r0=resultShow;window.__aaR0=r0;resultShow=function(){if(window.__aaPend||fin||(ovOpen()&&S&&S.mg))return;if(window.__aaIn){window.__aaRS={t:this,a:arguments};return}return r0.apply(this,arguments)}}})();
