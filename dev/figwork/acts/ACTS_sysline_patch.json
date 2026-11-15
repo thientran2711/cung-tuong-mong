@@ -1,0 +1,196 @@
+{
+ "_doc": "act-pics2 system-line rules (meanings.py \"Tổng lược system lines\" block): insert these log rules, in this order, right before the tu-dung rule of the CURRENT img/ACTS.json. Every key is on the CDN (or \"-\" = no thumbnail).",
+ "insertBefore": "tu-dung",
+ "log": [
+  [
+   "^(Lan Tần|X|null|XX|XXX|\\d+|\\?ln)\\.?$|^(Không thành|Lập công|Ngày hội|Lan Tần|X): (\\d+|X|Lan TầnX?)\\.?$|^X · |^X \\d|^X: X |^Ngươi: |^Rời |^Đến |^Đức .+ vì |^Chương |^Kiếp |^Mệnh truyện|^Kết cục xuất thân|^Muốn thay y phục|^Không đủ |^Ngươi đang bận|^Ngươi đang theo đuổi đủ mưu|^Mọi việc êm xuôi|^Ngươi ở lại|^Tự luyện nhanh: không ra|^Buổi .+ làm ra|kể: .+ đang ở|^Việc nhờ .+ dừng lại|không ai có việc nhờ|^Biết được: |biết .+ là người |đã thử giành đêm nay|không còn dịp giành lại|thời cơ đã qua, đành thôi|^Tự chọn đồ: ngươi giữ nguyên|^X xin |không ghi tên|không dâng lễ|nghỉ trong cung|không sang dự tiệc|từ chối khéo lời rủ|^X: .+ về nhất\\.$|khen lễ của (?!ngươi)|chưa chuẩn mối",
+   "-"
+  ],
+  [
+   "Đứng chót",
+   "dung-chot"
+  ],
+  [
+   "Ngươi đoạt giải|của ngươi đứng đầu",
+   "doat-giai"
+  ],
+  [
+   "Ngươi hạng [23]:",
+   "hang-nhi-ba"
+  ],
+  [
+   "đoạt giải|dâng .+ đứng đầu|Ngươi hạng \\d|^Ta hạng \\d",
+   "nguoi-khac-doat-giai"
+  ],
+  [
+   "ghi tên dự thi|ghi tên dâng|^Vào thi",
+   "ghi-ten-du-thi"
+  ],
+  [
+   "bắt đầu bày mưu",
+   "bat-dau-bay-muu"
+  ],
+  [
+   "^Ngủ một đêm",
+   "ngu-mot-dem"
+  ],
+  [
+   "quá tuần đã hỏng",
+   "do-hong-bo"
+  ],
+  [
+   "^Xác lão Vương|xác lão Vương nổi",
+   "xac-lao-vuong"
+  ],
+  [
+   "^Xin xăm",
+   "xin-xam"
+  ],
+  [
+   "được thị tẩm|^Đêm nay Hoàng thượng đã ở cung ngươi",
+   "thi-tam"
+  ],
+  [
+   "^Đêm nay Hoàng thượng đã ở cung",
+   "dem-cung-khac"
+  ],
+  [
+   "báo tin có thai",
+   "bao-tin-co-thai"
+  ],
+  [
+   "giữ kín tin có thai",
+   "giu-kin-co-thai"
+  ],
+  [
+   "^Đường xa",
+   "duong-xa"
+  ],
+  [
+   "ăn vận giản dị",
+   "chai-chuot-gian-di"
+  ],
+  [
+   "ăn vận lộng lẫy",
+   "chai-chuot-long-lay"
+  ],
+  [
+   "ăn vận vừa vặn",
+   "chai-chuot-vua-van"
+  ],
+  [
+   "Nội vụ phủ đưa y phục",
+   "noi-vu-dua-y-phuc"
+  ],
+  [
+   "^Ngươi thay |^Tự chọn đồ: ngươi thay",
+   "thay-y-phuc"
+  ],
+  [
+   "^Ngươi tháo ",
+   "thao-trang-suc"
+  ],
+  [
+   "^Ngươi đeo ",
+   "deo-trang-suc"
+  ],
+  [
+   "^Thiếu lễ: y phục",
+   "thieu-le-y-phuc"
+  ],
+  [
+   "để mắt tới y phục",
+   "ht-de-mat-y-phuc"
+  ],
+  [
+   "đeo mạng che mặt",
+   "deo-mang-che"
+  ],
+  [
+   "ban mạng che mặt",
+   "xin-mang-che"
+  ],
+  [
+   "tháo mạng che",
+   "thao-mang-che"
+  ],
+  [
+   "đã lành hẳn, nhan sắc như xưa|đã lành vết thương trên mặt\\.?$",
+   "vet-thuong-lanh"
+  ],
+  [
+   "để lại sẹo|còn sẹo",
+   "lanh-con-seo"
+  ],
+  [
+   "sai .+ theo dõi",
+   "sai-theo-doi"
+  ],
+  [
+   "theo dõi .+: thêm 1 chứng cứ",
+   "theo-doi-duoc"
+  ],
+  [
+   "theo dõi .+ chẳng mang về tin gì",
+   "theo-doi-trang"
+  ],
+  [
+   "bám theo .+ bị .+ bắt gặp",
+   "theo-doi-bi-bat"
+  ],
+  [
+   "ngươi được phong ",
+   "tan-phong"
+  ],
+  [
+   "khéo khước từ",
+   "tu-choi"
+  ],
+  [
+   "^Ngươi tố giác",
+   "to-giac"
+  ]
+ ],
+ "held": [
+  "ban-hon-con",
+  "ban-ra-ngoai",
+  "bay-o-yen-tiec",
+  "cam-do",
+  "chuoc-do",
+  "chuyen-lo-ra",
+  "co-viec-nho",
+  "cung-duong-dau-den",
+  "cuoi-chinh-phi",
+  "dat-noi-vu",
+  "de-bat-nguoi-hau",
+  "do-hoi-gia-the",
+  "doi-cung",
+  "du-tiec-nguoi-khac",
+  "giao-viec",
+  "giau-ngu-tu",
+  "giau-trong-ruong",
+  "hanh-le-bi-che",
+  "ke-la-vao-phong",
+  "kham-phong",
+  "khan-cha-me",
+  "le-duoc-khen",
+  "len-mua-ngoai-cung",
+  "minh-oan",
+  "moi-uong-tra",
+  "ngu-tu",
+  "ngu-tu-tim-lai",
+  "nhan-loi-nho",
+  "nhan-loi-tra-do",
+  "nhan-nguoi-chay-viec",
+  "nho-tra-an",
+  "quoc-tang",
+  "thang-bac",
+  "thang-cuoc",
+  "thay-dong-tinh",
+  "thua-bac",
+  "thua-cuoc",
+  "tiec-duoc-khen",
+  "tiec-truc-trac",
+  "tu-tay-ket"
+ ]
+}

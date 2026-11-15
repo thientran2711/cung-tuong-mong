@@ -129,3 +129,73 @@ LEFT (unchanged from the list above unless noted)
   - New batch of 8 drawn and on the CDN: e68-springallergy, e68-stormnight, evpick, giftpick, j70thr, j71f-thanhtho-2, j71f-vantho-1, j71x-sac.
   - e68-stormnight and giftpick were redrawn because an unrequested Emperor appeared; for scenes with no Emperor, add "NO Emperor, nobody in yellow".
   - **89 banners left** (python3 dev/figwork/acts/dprompt.py N lists them; fetch with fetchd.py; PREV=<scratchpad>/prev).
+
+## Coordinator order 15/11 (b), after 7cce4420d (that commit is reviewed as its own code batch)
+(a) System-line ACTS patch: APPLIED LIVE.
+- Tool: dev/figwork/acts/syspatch.py. Output: ACTS_sysline_patch.json.
+- Block: 77 rules in the meanings.py "Tổng lược system lines" block.
+  - 37 added. Their keys are on the CDN, or "-" (1 rule).
+  - 40 held because no picture exists yet; those lines keep their old behaviour. The held keys are listed in the patch file.
+- The rules go at the END of the log. All 510 live rules come before the block in meanings.py, and the only rule after it (tu-dung) is not live.
+- Before: 300 acts, 10 prefixes, 510 log rules, 498 distinct keys. After: 300 / 10 / 547 / 529. 0 keys missing on the CDN; the first 510 rules are unchanged.
+- The 8 veil/scar/spy keys are wired.
+- Note: 23 of the 36 newly referenced pictures (earlier gens2 system-line batch) show full figures. They are book event/result lines, which may show people, so I kept them. Coordinator decides whether to redraw any as hands-only.
+- Also: live ACTS.json has 510 of meanings.py's 837 rules. About 250 other act-pics2 meaning rules have never been merged; that is outside this patch.
+(b) More "man" identities: DONE, live.
+- Finding: suitors and the Bắc Địch prince use jht's private ctFace, which reads img/FIGURES-congtu.json (congtu-1..10, a18 + a26 only), never the men pool. With more than 10 live suitors, the rest fell back to initials.
+- New: quytu-1..9 (young noblemen; scholar, noble, martial, merchant and hunter looks) and bacdich-1 (northern steppe prince, fur-trimmed robe, no Qing hat).
+  - Each has the 4 age bands a18, a26, a36 and a51 (figure + portrait), drawn as one gpt-2-6 lineup of 4 ages, background removed, cut by dev/figwork/menpool2/proc.py, portraits by porcrop.py.
+  - Colours: no pink or purple. 80 files, plus FIGURES-congtu.json (20 identities, 60 entries), on the CDN; every entry checked.
+- Code: dev/build/jct2.js (after jht in assemble.py) wraps window.h54Face. The Bắc Địch prince always gets bacdich-1, and ordinary suitors only take it if every other face is live.
+- Test: dev/test/suitor-faces.js, 18 known suitors. 0 without a portrait, 0 duplicate faces, the prince gets por-man-bacdich-1, no page errors.
+  - Unmet suitors still show the "unknown" silhouette (jht stranger rule, unchanged).
+
+## Session 15/11 late (coordinator order: 5 steps)
+Notes: `cdn_sync.py --pull` does NOT refresh img/_index.json reliably (stale local copy); verify keys against the live index fetched with `curl -A ctm https://ctm-img.victoria-tntt.workers.dev/img/_index.json`. Checker: tmp-free copy in dev/figwork/acts/verify_acts.py (BEFORE AFTER INDEX).
+### Step 1 DONE: 23 full-figure system-line pictures classified (16:50Z rule)
+- ACTION (she does it) -> redrawn hands-only as act-<key>-h.webp (12): ghi-ten-du-thi, bat-dau-bay-muu, ngu-mot-dem, giu-kin-co-thai, chai-chuot-gian-di, chai-chuot-long-lay, chai-chuot-vua-van, thay-y-phuc, thao-trang-suc, deo-trang-suc, deo-mang-che, tu-choi (tu-choi also serves the acts "Từ chối / Khéo từ chối / Từ chối khéo", it showed two women).
+- EVENT/RESULT (kept, people allowed) (12): dung-chot, doat-giai, hang-nhi-ba, nguoi-khac-doat-giai, do-hong-bo, xac-lao-vuong, thi-tam, dem-cung-khac, noi-vu-dua-y-phuc, thieu-le-y-phuc, ht-de-mat-y-phuc, tan-phong (+ duong-xa landscape).
+- Already hands-only: xin-xam, bao-tin-co-thai, to-giac.
+- Live ACTS.json patched with hpatch.py (now skips hgens 'plain name' lines): 3 acts + 13 log rules -> -h; counts unchanged 300/10/547; 0 keys missing in the live index. Patch record: ACTS_hands_patch2.json.
+- Flag for coordinator: doat-giai and nguoi-khac-doat-giai show the Emperor handing the prize (scene text names him); kept.
+### Coordinator add-on DONE: "Khảo hạch tấn phong" (review/promo-exam jexam.js card n:"Khảo hạch tấn phong")
+- Hands-only exam desk picture (brush, inkstone, sealed scroll, embroidery hoop, guqin corner) on the CDN as img/act-khao-hach-tan-phong.webp (plain name; hgens id 1lpoY9Sr4r).
+- Live ACTS.json acts["Khảo hạch tấn phong"] = "khao-hach-tan-phong" (acts 300 -> 301; key verified in the live _index, 0 missing).
+### Step 2 DONE (data only, live): meanings.py rules merged into live ACTS.json
+- Tool: dev/figwork/acts/mergepatch.py LIVE.json INDEX.json PATCH.json OUT.json CORPUS.txt (meanings.py order; live rules keep key + relative order, asserted).
+- Corpus guard: corpus.py builds first sentences from inv_ast.js (static inventory of every log/ret/option template, 1477 lines; tmp copy of inv_ast.js needs B=<worktree>/dev/build/ and the module list taken from the `js=` line). A new rule that would take a line away from a live picture rule is held ("heldSteals").
+- Before: acts 301, prefix 10, log 547, 529 distinct keys. After: 301 / 10 / 554 / 529. 0 keys missing in the live _index.
+- Added 7: six "-" rules (origins, item names, wardrobe buttons, stat deltas, Bổng lộc/Đợi/Mặc kệ, plot-fragment lines) + xac-lao-vuong's "^Xác lão Vương". Corpus effect: 38 lines None -> "-" (no thumbnail), 0 lines lose a picture.
+- Held 277 rules (picture not on the CDN): keys in merge_held_keys.txt (this IS the remaining-picture queue, see step 5). Held 6 "-" rules that would steal picture lines (e.g. "Núp sau hòn giả sơn ..." would lose nghe-lom-gia-son): listed under heldSteals in ACTS_merge_patch.json; the meanings.py rules need narrowing before they can go live.
+- Rerun after new pictures land: same command; it adds whatever is now on the CDN.
+- Note: dev/test/act-pics.js is stale against current main (start() not defined) — not used.
+### Step 3 DONE (code, commit f0512cdce + test ab8e03206): a467 Tổng lược fallback
+- Main (ad94afe4e) already had: ACTS log rule first, "-" -> no picture, no "Có người đến" default except on the Emperor's / Thái hậu's pages, kitEvArt without the j89 default.
+- Remaining gap fixed in j87 kbkCands: on ctx "me" (Việc của ngươi) a line with no ACTS rule no longer takes an event-group (KBK_EVRE) or act-category (act-cat-*) stand-in; only a picture made for the line (log rule / its place / its act name), else none.
+- Test dev/test/a467-me-art.js <url> <corpus.txt>: 1477 corpus lines. Old path: 649 own, 186 event-group, 500 act-category (10 "Có người đến"), 142 none. New "me": 649 own, 0 stand-ins, 828 none. 0 page errors.
+- Shots dev/test/a467-book-shots.js <url> <outdir> at 755x1000@2, 1000x755, 1180x820@2, 1366x1024@2, 844x390, 390x844: no overflow, 0 broken images, 0 page errors; the visitor line has no picture, her wardrobe/refusal lines pick deo-trang-suc-h / thao-trang-suc-h / tu-choi-h.
+- Test page note: dev/index.html is a fragment without <meta charset>; serve a wrapped copy (tmp/site/index.html) or the root build, never dev/ raw (Invalid token in Chromium).
+- Main merged in (b5? see git log: "Merge origin/main into review/act-pics2"), assemble.py keeps jct2 after jht.
+### Step 4 IN PROGRESS: dialog banners (89 -> 73 left)
+- 16 drawn, checked on sheets, on the CDN: j71x-tai nc1 news-tin-trong-cung night2 q72-doi-thuoc q72-don-ta q72-hh-trungthu q72-loi-thoi q72-maid-tet q72-mat-tram q72-ns-doi q72-th-aodong q72-th-mai q72-th-thanhminh q72-th-trungcuu q72-tv-mua (ids in gens_dlg.txt).
+- Prompts: dprompt.py template + "NO Emperor, nobody in yellow" for scenes without him; envoy in nc1 wears a hood (no fur hat).
+### Step 5 STARTED: remaining act pictures (hands-only, -h names)
+- Queue = `python3 dev/figwork/acts/prompts2.py --todo 400` (284 before this batch) = the held keys of mergepatch. Write an English hands-only scene per key in hscenes.txt (Vietnamese scene in meanings.py), `hprompt.py 8`, generate gpt-2-6 3:4 with the style ref it names, `hfetch.py`, sheet-check, cdn_sync, then rerun mergepatch.py (with tmp corpus) to wire them live.
+- Batch 1 (8) on the CDN and wired live: van-dong-do-dau chai-chuot-nhan-sac nghi-lay-suc o-yen-nghi tinh-duong ngu-som o-cung-giu-am ban-thuong. Live ACTS: log 554 -> 562, keys 529 -> 537, 0 missing, corpus: 0 picture lines lost (1 line None -> ban-thuong-h). 276 left.
+
+## Review r7 (reviewer, 15/11 late): branch @50ebc3e40a merged onto origin/main 31907911d as review/act-pics2-r7
+- Merge: one conflict, dev/build/assemble.py = main's module list + jct2.js after jht.js. Site rebuilt (build_site.sh), served from the root build.
+- Data (LIVE CDN, curl -A ctm): ACTS.json acts 301 / prefix 10 / log 562 / 537 distinct keys, 0 missing in the live _index (verify_acts.py).
+  FIGURES-congtu.json: 20 identities, all files on the CDN; quytu-1..9 + bacdich-1 have 4 age bands, congtu-1..10 only a18 + a26 (not "20 x 4").
+- 23 act pictures looked at (12 step-1 -h, 8 batch-1 -h, khao-hach-tan-phong, doat-giai, nguoi-khac-doat-giai): every -h shows hands/objects only, no face.
+- FIX jct2.js: ctFace's fallback (after S.ctUsed has seen every face) takes ANY face not live, bacdich-1 included, so ordinary suitors got the
+  prince's face (churn test: 15 of 40 rounds; the live main build gives it out too). Now a stand-in pool entry holding bacdich-1 is pushed
+  while an ordinary suitor picks (removed in finally), and an ordinary suitor already holding bacdich-1 (old save) picks again. After: 0 of 40.
+  dev/test/suitor-faces.js gained the churn + stranger-silhouette checks.
+- FIX j87 kbkCands: the "no event-group / act-category stand-in" rule only covered ctx "me"; other people's pages ("p") and Triều đình · thiên
+  hạ ("world") still showed group pictures (513 act-category + 186 event-group lines of 1511). Rule now covers every Tổng lược page (owner 14:15Z /
+  14:30Z, LUẬT SỬA CẢ NHÓM); the Emperor's / Thái hậu's page default (main ad94afe4e) unchanged. a467-me-art.js reports me/p/world/emp and fails
+  on any stand-in in me/p/world. Corpus 1511 lines: me/p/world each 670 own, 841 none, 0 stand-ins.
+- a467-book-shots.js: added window.__bot (the jload first-run download screen covered the book) and a wait for images.
+- Owner decision pending (not changed): doat-giai / nguoi-khac-doat-giai show the Emperor handing out the prize.
+- Re-merged origin/main 27491781fe (toilette r6): assemble = main list + jct2 after jht; tests rerun on that build (suitor-faces churn 0, a467-me-art 1520 lines 0 stand-ins in me/p/world, book shots 6 sizes no overflow / 0 broken / 0 errors, old save from the live site loads, its bacdich-1 suitor re-picks).
