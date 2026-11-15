@@ -620,3 +620,10 @@ BALANCE / SYSTEMS:
   Ideas: (a) her own days: birthday, Emperor's/Thái hậu's/Hoàng hậu's birthdays (Vạn thọ/Thánh thọ/Thiên thu) with gift reminders; (b) stipend day, Nội vụ phủ issue days, monthly thái y visit if built; (c) KNOWN deadlines: exam/khảo hạch dates, tuyển tú year, pregnancy due month, children's birthdays and school exams, pet growth; (d) "sổ hẹn": acts she schedules ahead (send a gift on day X, visit someone) + reminder the day before; (e) prep checklist per festival (what contest, what art/item to prepare, ready ✓/✗ from her inventory and art levels); (f) lucky/unlucky days from the weekly quẻ (only known ones); (g) weather forecast for the coming tuần if she has the right servant/skill; (h) tap a day → past log of what happened that day (memory); (i) moon phases (rằm/mùng một) for rites; (j) co-op: the friend's important days visible too.
 - Event dialog frames: add the Trân nữ seal (kitSeal "TRÂN NỮ" stamp) in a corner of every event frame.
 - Rosy skin: some consorts' faces are now rosier than their hands (mismatch) → hands/neck/arms must match the face tone (whole class audit). Player look 1 (fig-player-look1) still does not look rosy → fix. Owner marked Ngọc Lan (maid) as the liked reference.
+
+## 15/11 ~20:20Z — Thái y: build all 4 ideas (owner)
+1. Routine pulse visit by the thái y once a month, free: short verdict (khỏe / hơi yếu / có bệnh).
+2. "Mời thái y bắt mạch" anytime, small bạc cost (with an equivalent non-bạc road): clearer health state, can detect slow poison, musk (xạ hương) and other hidden harm already in the game (j40 plots).
+3. Pregnancy: already found by the thái y 3–6 weeks after conception (j75) — keep; a requested pulse check may find it earlier (from ~1 month), or symptoms (nausea) hint at it.
+4. A bribed thái y (S.court.ty.af bribes exist) may lie or secretly leak news; a trusted thái y avoids this.
+All must work in co-op.
