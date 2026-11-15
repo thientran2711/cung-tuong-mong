@@ -1,0 +1,21 @@
+{
+ "oldSave": {
+  "name": "Tô Tịch Nhan",
+  "key": "hclh-save-v2-3"
+ },
+ "oldLoad": {
+  "ok": true,
+  "name": "Tô Tịch Nhan",
+  "inv": 1
+ },
+ "swCached": [
+  "pixi-8.5.2.min.js?h=1341e0cc3a8e91ff"
+ ],
+ "offline": {
+  "pixi": true,
+  "overlay": true,
+  "parts": 20,
+  "stage": true
+ },
+ "offlineErrs": []
+}
