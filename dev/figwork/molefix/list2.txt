@@ -1,0 +1,60 @@
+consort-c01-tm0-a18 149,223,8
+consort-c01-tm0-a26 149,223,8
+consort-c01-tm0-a36 149,223,8
+consort-c04-tm0-a18 196,173
+consort-c04-tm0-a26 196,173
+consort-c07-tm0-a18 187,173 pk=5
+consort-c07-tm2-a18 190,172 204,173
+consort-c08-tm2-a18 194,181 156,249
+consort-c08-tm2-a26 198,181 156,249
+consort-c08-tm2-a36 160,246
+consort-c08-tm3-a26 195,163
+consort-c08-tm4-a36 160,248
+consort-c08-tcold-a18 192,181 160,248,4 pk=5
+consort-c09-t2-a26 142,209
+consort-c09-t2-a36 156,225
+consort-c09-t5-a18 146,204
+consort-c09-t5-a26 145,217
+consort-c17-t2-a26 156,222
+consort-c17-t3-a18 143,211 145,217
+consort-c17-t3-a26 155,226 154,231
+consort-c17-tm2-a18 152,223
+consort-c17-tm2-a26 152,223
+consort-c17-tm2-a36 152,223
+consort-c23-t2-a26 154,235
+consort-c23-t8-a51 150,218
+consort-c23-tm4-a51 148,226 189,180
+consort-c28-t2-a26 154,219
+maid-m26-t1-a26 154,232 pk=5
+maid-m26-t3-a18 151,219 pk=5
+maid-m39-tm3-a26 159,230
+maid-m39-tm4-a18 189,178 pk=5
+maid-m52-t1-a26 231,237
+maid-m52-t1-a36 230,238
+maid-m52-t1-a51 227,231,4 237,229,3 pk=5 fig=165,118;171,117 fr=3
+maid-m52-t2-a51 231,236,4 pk=5 fr=4
+kid-f09-a14 190,169
+kid-f09-a20 189,174
+kid-p14-a9 185,182
+thaihau-h3-a51 188,172 pk=4
+maid-m52-t2-a26 230,236 pk=5
+maid-m52-t2-a36 230,236 pk=5
+maid-m26-tm2-a36 153,231 pk=4
+maid-m39-tm4-a26 189,178 pk=4
+kid-f11-a14 189,165 pk=4
+kid-f12-a20 198,180 pk=4
+kid-f24-a4 186,168 pk=4
+thaihau-h1-a51 188,170 pk=4
+consort-c24-tcold-a36 162,253 pk=4
+consort-c24-tcold-a51 162,253 pk=4
+consort-c24-tm0-a36 162,253 pk=4
+consort-c24-tm0-a51 162,253 pk=4
+consort-c24-tm1-a36 162,253 pk=4
+consort-c24-tm1-a51 162,253 pk=4
+consort-c24-tm2-a36 162,253 pk=4
+consort-c24-tm2-a51 162,253 pk=4
+consort-c24-tm3-a36 162,253 pk=4
+consort-c24-tm3-a51 162,253 pk=4
+consort-c24-tm4-a36 162,253 pk=4
+consort-c24-tm4-a51 162,253 pk=4
+kid-p14-a4
