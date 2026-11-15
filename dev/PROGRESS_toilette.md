@@ -95,3 +95,10 @@ giữ nguyên "đẹp" và "diêm dúa" như hiện tại), 509a2dad5 (phản �
   event frame. popMax check: 4 reactions → 2 frames, last one ends "Còn: <name> — ghen +2 · <name> — ghen +1."; all options hideOut.
 - Bot balance (bot-same.js 80 steps both builds): NOT run — machine load 41–50 on 4 CPUs (one toilette.js size took ~10 min). Still open.
 - Minor (not blocking): at 1000x755 / 844x390 the dress screen scrolls inside the game box (buttons below the fold), same as other kg82 games.
+- Re-merged origin/main ce840fa84 (opt-render §53 kitHint, gift-ui, act-pics2): assemble = main list (jly, jgift, jevban) + jtoil after jkitpage.
+  After it the reaction options got the generic kitHint ("Đáp lại · Gợi ý: không được mất gì" — false: it is a 50% roll). FIX: each reaction
+  option carries its own `hint` (by kitHintLevel) + `risk`: Xin lỗi "bề trên / <name> nguôi giận phần nào" (an toàn), Cười trừ "cho qua, không đổi gì",
+  Đáp lại "có thể thêm danh tiếng, cũng có thể mất lòng" / sharper with the name and "hỏng thì … càng phật ý" (có rủi ro), Tạ ơn "nhận lời khen".
+  755x1000 + 844x390 re-run on the merge: 0 errors, no overflow, old save loads.
+- For the coordinator (main, not toilette): in the event frame the person tag ("Thái hậu") now sits at the TOP edge of the banner and is half
+  hidden at 755x1000 (before ce840fa84 it was at the bottom) — comes with the banner crop change on main (jevban / gift-ui), affects any `who` event.
