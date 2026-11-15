@@ -667,3 +667,6 @@ All must work in co-op.
 2. Morning after a lạnh nhạt night: other consorts already know and mock her — wire into the existing reaction buttons (Xin lỗi / Cười trừ / Đáp lại style).
 3. Night the Emperor spends at another palace: she hears music drifting over; if she knows that consort, she learns who it is (stranger rule otherwise).
 4. Full-moon (rằm) or festival nights: the night-end picture shows a full moon / flower lanterns (painted variants, Magnific).
+
+## 15/11 ~21:15Z — Card-flip shows HER knowledge (owner)
+- In the card-flip scene, each card's face/name follows HER knowledge (j61 stranger rule): unknown people show the grey silhouette + '???'. Everything shown in the game is what SHE sees, never what the Emperor knows.
