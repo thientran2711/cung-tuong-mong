@@ -28,7 +28,7 @@ function menGuards(){return (S.men||[]).filter(m=>m.rw==="thị vệ")}
 
 /* ---------- 1. who is where this buổi, and why ---------- */
 function menHcPal(v){const k=palaceOf(v);return k==="home"?null:k}
-function menPlace(){menInit();const W={},Y={};const b=S.buoi||0,night=b===2;let f=null;try{f=festToday()}catch(e){}
+function menPlace(){menInit();const W={},Y={};const b=S.buoi||0,night=b===(typeof B4L!=="undefined"?B4L:2);let f=null;try{f=festToday()}catch(e){}
  const L=liveRivals(true);
  for(const m of S.men){if(!m.alive||menBanned(m))continue;const rw=m.rw;let k=null,w="";
   if(rw==="thị vệ"){if(roll(70)){k=night?pick(["dtd","thu","ksp"]):pick(["thu","dtd"]);w="duty"}}
