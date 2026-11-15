@@ -71,6 +71,7 @@ Went LIVE via session 7: month-calendar r1, chap-label r1, item-events r1 (§64)
 - review/idea-history (aa1714ed) + review/idea-design (17b2ba71) — DONE docs: dev/ideas/HISTORY_IDEAS_1115.md, DESIGN_IDEAS_1115.md.
 
 ### Reviewers running (branch → r1)
+(all session-7 reviewers have reported; none running)
 recipes (cut — see below) (+ level-up grants a recipe, 4 sub-styles everywhere, Công/Dung/Ngôn/Hạnh sub-styles, Kỳ in sub-style UI), place-colour.
 
 ### READY, reviewer NOT yet spawned
@@ -113,3 +114,4 @@ KIT registry additions by session 7: §64 item-events, §65 promo-reward, §66 r
 - (s7 add) Owner 22:55Z co-op timer additions (Tạm dừng for both, generic waiting line, lag-safe absolute deadline + clock offset, grace, reconnect, latency e2e) → sent to coop-timer worker.
 - (s7 add) LIVE main = rank-title r1 (43daceaf3): vivid rank tones (≥4.4:1), glow/outline only on paintings, plain in framed UI; her name gold glow on paintings / black bold in UI (§48.1b); no box around dp captions (§48.1c).
 - (s7 add) HIGH PRIORITY REGRESSION: at 844x390 the stage tags overlap (Quý phi / Đáp ứng) and figures squeeze bottom-left beside '+2' — clean on e5a327d1, broken on d8b81af9 (likely small-bugs-2 r6 'j59 panel side by centre'). Fix first on the new account. Owner questions from rank-title: Thái hậu title bronze vs plum frame; Hoàng thượng #8f6800 vs Hoàng hậu #8c5f00 look alike; Đáp ứng muted on paintings.
+- (s7 add) LIVE main = place-colour r1 + place-art (f53bdade0): one scene grade incl. Pixi, root-cause fix j3 new-day overwrote lãnh cung visit, 34 new paintings (Tân Giả khố, maid room), 0 flagged states in 968. Check: painting missing in reviewer's 844x390 shots (may be the same 844 stage regression or test timing).
