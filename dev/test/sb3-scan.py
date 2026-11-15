@@ -21,7 +21,7 @@ def strip_comments(t):
       j=t.find('\n',i);j=n if j<0 else j;i=j;continue
     out.append(c);i+=1
   return ''.join(out)
-THAN=re.compile(r'(?<![\wÀ-ỹ])thân\s*(?:[+\-−±]\s*(?:\d|\$\{)|\$\{[^}]*\}\s*\d*\s*(?=[^\w]))')
+THAN=re.compile(r'(?<![\wÀ-ỹ])(?<!Phụ )thân\s*(?:[+\-−±]\s*(?:\d|\$\{)|\$\{[^}]*\}\s*\d*\s*(?=[^\w]))')
 def scan(rx,files=None):
   hits=[]
   for f in sorted(files or glob.glob(D+'j*.js')):
