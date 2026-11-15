@@ -176,9 +176,7 @@ function wdAutoFor(p,bias){const tgt=Math.min(8,wdPOf(p))+(bias||0);wdApply(p,wd
 /* NPC choice: by belief + trait (Kiêu ngạo / Tham vọng dress up, Hiền lành / Nhu mì keep modest) */
 function wdNpcBias(v){const t=(typeof traitsOf==="function"?traitsOf(v):[v.trait]).join(" ");return /Kiêu ngạo|Tham vọng/.test(t)?1:/Hiền lành|Nhu mì/.test(t)?-.5:0}
 
-/* ---------- bonus to Sắc / Danh while worn (adds to the existing wearBonus; Vượt phẩm items count 1.5x as before) ---------- */
-(function(){const w0=wearBonus;wearBonus=function(p){const b=w0.apply(this,arguments);try{if(!p)return b;const w=wdOf(p);const over=wdStatus(p)==="over";
-  for(const sl of ["tram","y"]){const it=wdItem(w[sl]);if(!it)continue;for(const s in it.w){b[s]=(b[s]||0)+Math.round(it.w[s]*(over?1.5:1))}}}catch(e){}return b}})();
+/* bonus to Sắc / Danh while worn: the ONE wearBonus is in jwdinv (WD slots count their own effect, never ×1.5: the Vượt phẩm status stays hidden) */
 /* the old hair 'wear' button now puts the item into the TRÂM slot */
 (function(){const w0=wear;wear=function(p,ix){const e=p&&p.inv&&p.inv[ix];if(e&&IT[e.k]&&IT[e.k].wsl){wdWear(p,ix);return}return w0.apply(this,arguments)}})();
 /* old 'vượt phẩm' list (used by j8 night / j25 text) = the over-rank worn items */
@@ -383,7 +381,7 @@ function wdMonth(pre){let ev="";S.wdk=S.wdk||{};
  for(const p of consorts()){const P=wdPOf(p);const p0=p===S?pre.P:p.wdP0;if(p0!=null&&P>p0){const k1=wdPickAt(P,"y",1),k2=wdPickAt(P,"tram",1);for(const k of [k1,k2])if(k)wdGain(p,k,{from:"nvp",giver:"Nội vụ phủ",nvp:1});
    if(p===S&&(k1||k2))log(`Nội vụ phủ đưa y phục theo phẩm mới: ${[k1,k2].filter(Boolean).map(k=>WD_ITEMS[k].n).join(", ")}.`)}if(p!==S)p.wdP0=P}
  for(const p of consorts()){if(p!==S){wdNpcInit(p);wdNpcDress(p)}const st=wdStatus(p);
-  if(st==="over"){if(roll(40)){ap(p,{sung:WD.overSung});if(p===S)log(`Hoàng thượng để mắt tới y phục rực rỡ của ngươi. Sủng +${WD.overSung}.`)}for(const v of liveRivals(true))if(v!==p&&p===S&&roll(30))v.ghen=cl((v.ghen||0)+WD.overGhen,0,100)}
+  if(st==="over"){if(roll(40)){ap(p,{sung:WD.overSung});if(p===S)log(`Hoàng thượng để mắt tới y phục rực rỡ của ngươi. Sủng +${WD.overSung}.`)}/* rivals' jealousy: the approved luxury law (jinv luxMonth) */}
   if(!p.confined&&roll(st==="ok"?WD.remarkOk:st==="tang"?70:WD.remarkBad))ev+=wdRemark(p,st)}
  ev+=wdTaimat();ev+=wdPawnMonth(S);for(const p of consorts())wdNtMonth(p);
  /* NPCs short of silver sell quietly too */
@@ -447,29 +445,8 @@ function wdGroomUI(){if(!S||S.dead||!can(1))return;const w=wdGroomW(S);const m=w
 function wdChest(sl){return (S.inv||[]).map((e,ix)=>({e,ix})).filter(x=>x.e&&!x.e.h&&wdItem(x.e)&&(!sl||wdItem(x.e).sl===sl)).map(({e,ix})=>{const it=wdItem(e);
  return{ix,k:it.k,slot:it.sl,name:it.n,grade:it.g,gradeName:WD_GRADE[it.g],icon:it.icon,nt:it.nt,fx:plainFx(it.w)||"giản dị",giver:e.giver||null,date:e.d||null,knownP:wdKnowsE(e)?wdPName(it.P):null,price:it.pr}})}
 window.wdChest=wdChest;
-function wdIcon(it,s){return it?`<img class="ic" src="${it.icon}" width="${s||22}" height="${s||22}" alt="" onerror="this.remove()">`:""}
 function wdSrcTxt(e){if(!e)return"";if(e.from==="base")return"phẩm phục được cấp";if(e.from==="nvp")return`Nội vụ phủ cấp${e.d?", "+e.d:""}`;if(e.giver)return`${e.giver}${wdIsNt(e)?" ngự tứ":" ban"}${e.d?", "+e.d:""}`;if(e.from==="story")return"phần thưởng";return"đồ trong rương"}
-function wdInvHTML(){const w=wdOf(S);const lab=wdKnownStatus(S);const self=S.wdSelf&&S.wdSelf.it===wdCur(S)?S.wdSelf:null;const ag=wdAgent(S);
- const head=lab?`Đã biết: ${WD_LABEL[lab]}`:self?`Lời ${self.by}: ${WD_LABEL[self.st]} (chưa chắc)`:"Chưa ai nhận xét bộ đang mặc";
- const row=(it,title,info,B)=>`<div class="ph"><span>${wdIcon(it,24)}<b>${title}</b></span><span>${info}</span></div>${B.length?`<div class="rbtn" style="margin-bottom:8px">${B.join("")}</div>`:""}`;
- let h=`<div class="ph"><span><b>Trang phục đang mặc</b></span><span>${head}</span></div>`;
- for(const sl of ["tram","y"]){const e=w[sl],it=wdItem(e);const B=[];if(it&&!(sl==="y"&&e.from==="base"))B.push(pbtn(`data-wd="off" data-sl="${sl}"`,"Tháo",`thành: ${sl==="y"?"thay về phẩm phục được cấp":"để tóc trơn"}`,""));
-  h+=row(it,`${sl==="tram"?"Trâm cài":"Y phục"}: ${it?it.n:(sl==="tram"?"Chưa cài":"Thường phục")}`,it?`${WD_GRADE[it.g]} · ${plainFx(it.w)||"giản dị"} · ${wdSrcTxt(e)} · ${wdKnowsE(e)?"đồ phẩm "+wdPName(wdP(e,S)):e.from==="base"?"cấp theo phẩm hiện tại":"chưa rõ phẩm"}`:"",B)}
- h+=`<div class="rbtn" style="margin-bottom:8px">`+pbtn(`data-wd="auto"`,"Tự chọn đồ",`${word(wdAutoOdds())} · tốn: 0 khắc · thành: thay ngay bộ ngươi cho là hợp phẩm · kèm: có thể trúng bộ sai phẩm (${wdUnknownN()} món chưa rõ phẩm)`,"")+
-  pbtn(`data-wd="groom"`,"Chải chuốt",`tốn: 1 khắc · thành: trò chải chuốt ${WD.groomSec} giây, kim dừng giữa là đúng phẩm · kèm: cao quá thành vượt phẩm, thấp quá thành quá giản dị`,whyTime(1))+`</div>`;
- const L=wdChest();
- if(L.length){h+=`<div class="ph"><span><b>Rương trâm cài, y phục (${L.length})</b></span><span>${ag?`Bán lén, cầm cố qua ${ag.name}`:"Chưa có ma ma hay thái giám tin cẩn để bán lén"}</span></div>`+L.map(x=>{const B=[];const it=WD_ITEMS[x.k];
-   B.push(pbtn(`data-wd="wear" data-ix="${x.ix}"`,"Mặc",`tốn: 1 khắc · thành: thay vào ô ${x.slot==="tram"?"Trâm cài":"Y phục"}`,whyTime(1)));
-   B.push(pbtn(`data-it="gift" data-ix="${x.ix}"`,"Tặng",`tốn: 2 khắc · thành: chọn người nhận`,x.nt?"đồ ngự tứ: không được đem tặng":whyTime(2)));
-   const ntWhy=x.nt?"đồ ngự tứ: bán, cầm là bất kính":"";const agWhy=ag?"":"chưa có ma ma hay thái giám tin cẩn";
-   const lo=Math.round(x.price*WD.sellLo/100),hi=Math.round(x.price*WD.sellHi/100),pct=ag?wdSellPct(S,ag):0;
-   B.push(pbtn(`data-wd="sell" data-ix="${x.ix}"`,"Bán lén",`${word(100-wdLeak(S,ag))} · tốn: 1 khắc · thành: Bạc +${ag?Math.round(x.price*pct/100):lo+"–"+hi} · kèm: lộ ra thì mang tiếng túng thiếu, Danh -${WD.sellDanh}`,ntWhy||agWhy||whyTime(1)));
-   B.push(pbtn(`data-wd="pawn" data-ix="${x.ix}"`,"Cầm cố",`${word(100-wdLeak(S,ag,true))} · tốn: 1 khắc · thành: Bạc +${Math.round(x.price*WD.pawnPct/100)}, chuộc lại ${Math.round(x.price*WD.redeemPct/100)} bạc trong ${WD.pawnWeeks} tuần · kèm: lộ ra thì Danh -${WD.sellDanh}`,ntWhy||agWhy||whyTime(1)));
-   const e=S.inv[x.ix];return row(it,x.name,`${x.slot==="tram"?"Trâm cài":"Y phục"} · ${x.gradeName} · ${x.fx} · ${wdSrcTxt(e)} · ${x.knownP?"đồ phẩm "+x.knownP:"chưa rõ phẩm"}`,B)}).join("")}
- const PW=S.wdPawn||[];if(PW.length){h+=`<div class="ph"><span><b>Đồ đang cầm cố (${PW.length})</b></span><span></span></div>`+PW.map((P,i)=>row(wdItem(P.e),wdItem(P.e).n,`Hạn chuộc: còn ${Math.max(0,P.due-wk())} tuần · qua ${P.ag}`,[pbtn(`data-wd="redeem" data-i="${i}"`,"Chuộc lại",`tốn: 1 khắc, Bạc -${P.back} · thành: món đồ về lại rương`,S.bac<P.back?`thiếu bạc (cần ${P.back})`:whyTime(1))])).join("")}
- return h}
-(function(){if(typeof invHTML!=="function")return;const i0=invHTML;invHTML=function(){const W=(S.inv||[]).filter(e=>e&&!e.h&&wdItem(e));W.forEach(e=>e.h=1);let h;try{h=i0.apply(this,arguments)}finally{W.forEach(e=>delete e.h)}
- let x="";try{x=wdInvHTML()}catch(e){console.error(e)}return x+h.replace(/<p class="past">Rương trống\.[^<]*<\/p>/,W.length?"":"$&")}})();
+/* Tư trang UI: jinv bag + "Đang mang" (jwdinv); the separate "Trang phục đang mặc / Rương" block is gone */
 document.addEventListener("click",ev=>{const b=ev.target.closest("[data-wd]");if(!b||b.disabled)return;ev.stopPropagation();const a=b.dataset.wd;
  if(a==="auto")wdAutoUI();else if(a==="groom")wdGroomUI();else if(a==="wear")wdWearUI(+b.dataset.ix);else if(a==="off")wdOffUI(b.dataset.sl);
  else if(a==="sell")wdSellUI(+b.dataset.ix);else if(a==="pawn")wdPawnUI(+b.dataset.ix);else if(a==="redeem")wdRedeemUI(+b.dataset.i)},true);
