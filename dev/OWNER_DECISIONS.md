@@ -344,3 +344,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (06:05Z) Bảng mua bán với thái giám dùng ĐÚNG hộp thoại có người (cùng thành phần, cùng kích thước), không to hơn.
 - (06:10Z) Màn ngang: mọi màn hình ngang dùng ĐÚNG bố cục iPad (khung thiết kế 1180x820) phóng to/thu nhỏ đều như kéo cửa sổ, không dàn lại; Fold dọc: khung 755x1000 phóng to/thu nhỏ. Một bố cục cho mỗi chiều màn hình.
 - (06:12Z) Điện thoại ngang chữ nhỏ: chấp nhận, không làm bố cục riêng.
+- (06:20Z) Không xếp hàng duyệt: lô nào xong và qua duyệt trước thì lên live trước; chạy nhiều người duyệt song song, mỗi người gộp lên main mới nhất.
