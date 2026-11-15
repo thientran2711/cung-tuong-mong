@@ -170,3 +170,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (05:45Z) Owner: category tab row must sit centred (equal gaps) between the card row above and the content below; sticky row must not cover content.
 - (05:50Z) Owner: worn items have a luxury axis too: within rank but too luxurious → jealousy/ghen ghét, superiors' disapproval; modest dress small Đức/Danh. Same for NPCs; shown in Đang mang.
 - (06:00Z) Owner: add more wear slots with real rules (hoa tai, ngọc bội, túi thơm, khăn che mặt…), using existing item art; rank + luxury rules per slot.
+- (06:05Z) Owner: stage figures taller still → KIT_FIG woman .92, men ×1.07; don't shrink for 'her+1' — figures may stand behind the plaque column.
