@@ -1,0 +1,47 @@
+{
+ "1180x820": {
+  "state": {
+   "stage": [
+    596,
+    687
+   ],
+   "col": [
+    466,
+    86,
+    129,
+    186
+   ],
+   "text": "Hoàng thượng | Bình thường | Thái hậu | với ngươi 0 | Hoàng hậu | với ngươi 0 | Xuân Hạnh | Lòng 74",
+   "collapsed": false,
+   "clip": [],
+   "cut": [],
+   "over": [],
+   "figs": 2,
+   "sheetBtn": false,
+   "overflowX": false,
+   "hc": [
+    "date=Tháng ba, năm thứ nhất · thượng tuần",
+    "buoi=còn 4 khắc",
+    "lot=Quẻ tuần: Trung (Giao thiệp)",
+    "undefined=hoa đào bay",
+    "sac=Sắc 42",
+    "tai=Tài 83",
+    "tamco=Tâm cơ 24",
+    "duc=Đức 40",
+    "mat=Tai mắt 2",
+    "th=Thái hậu với ngươi 0",
+    "hh=Hoàng hậu với ngươi 0",
+    "maid=Lòng Xuân Hạnh 74",
+    "con=Có thai Liều",
+    "dem=Lật thẻ Liều",
+    "an=Ân tình (đêm) 12",
+    "bl=Bổng lộc sau 3 tuần",
+    "aw=Số lần ân thưởng 0"
+   ]
+  },
+  "sheetOpen": false,
+  "card": null,
+  "ladder": false,
+  "errs": []
+ }
+}
