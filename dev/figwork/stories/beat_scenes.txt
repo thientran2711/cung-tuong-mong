@@ -123,7 +123,7 @@ ch_benh:x1|0|the elderly Empress Dowager, recovered, sits propped up in bed with
 ch_ho:s1|0|two young consorts each kneel offering a cup of tea on a tray to the elderly Empress Dowager seated in her hall, who tastes one
 ch_ho:s2|0|two young consorts stand apart in a garden, each holding an opened letter, glancing at each other
 ch_ho:c1|0|the elderly Empress Dowager looks down at a plain small gift box on a tray, a consort beside her surprised, another consort watching from the doorway
-ch_ho:c2|0|a consort kneels before the stern Empress in her hall, another consort standing aside watching thoughtfully
+ch_ho:c2|0|a consort kneels before the composed Empress in her hall, another consort standing aside watching thoughtfully
 ch_ho:c3|0|the elderly Empress Dowager sits holding the hand of a small sad little princess about six years old, two young consorts standing before her
 ch_ho:t1|1|a consort arrives at night at another consort's door and the two face each other under a lantern, one extending her hand
 ch_ho:x1|0|two young consorts kneel side by side before the elderly Empress Dowager seated on a raised seat in her grand hall
@@ -206,7 +206,7 @@ s_thu:t1|1|a consort sits at her desk at night with two folded letters and a sma
 s_thu:x1|0|a folded letter lies alone on a polished desk in a consort's study, a consort seated looking at it, morning light
 s_hoa:s1|1|a palace hall burning at night, flames and smoke rising over the rooftops, eunuchs and maids carrying water buckets, a consort watching from a courtyard
 s_hoa:s2|1|a rescued palace maid wrapped in a blanket, sooty but unhurt, whispers to a consort in a courtyard at night, smoke in the background
-s_hoa:c1|0|a consort stands calmly while another consort points at her accusingly before the stern Empress in a hall
+s_hoa:c1|0|a consort stands calmly while another consort points at her accusingly before the composed Empress in a hall
 s_hoa:c2|0|a consort and her maid observe from behind a pillar a eunuch in grey robes carrying oil jars in a back courtyard
 s_hoa:c3|0|the Emperor views the charred ruins of a palace hall, workmen clearing beams, a consort beside him
 s_hoa:t1|1|a consort in a ruined archive at night holds up a lantern to scorched shelves of old ledgers
@@ -214,7 +214,7 @@ s_hoa:x1|0|the Emperor on his throne summons several consorts and a kneeling eun
 s_su:s1|0|at a palace banquet a fair-haired foreign envoy in a long dark travelling coat bows in a strange foreign manner, the Emperor and court watching curiously
 s_su:s2|0|a consort holds a small ornate European hand mirror, a gift, seeing her reflection, a fair-haired foreign envoy bowing nearby
 s_su:c1|0|a consort listens attentively to an interpreter in Ming robes standing between the Emperor and a fair-haired foreign envoy
-s_su:c2|0|a fair-haired foreign envoy kneels before the Emperor in the throne hall, ministers in Ming robes frowning in disapproval
+s_su:c2|0|a fair-haired foreign envoy kneels before the Emperor in the throne hall, ministers in Ming robes watching gravely
 s_su:c3|0|a large ornate golden European mechanical clock with a stopped dial, without numerals, on a table in a palace hall, a consort and eunuchs looking at it
 s_su:t1|0|a fair-haired foreign envoy and a consort stand at a table where a blank scroll document lies, a brush ready
 s_su:x1|1|a farewell banquet at night, the Emperor turns to ask a consort beside him, a fair-haired foreign envoy raising his cup
