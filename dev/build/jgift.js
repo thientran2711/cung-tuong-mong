@@ -141,7 +141,7 @@ function giftBagFor(t){return S.inv.map((e,i)=>[e,i]).filter(([e])=>e&&!e.h&&(e.
 PEND.giftto=p=>{const t=p.t;const L=giftBagFor(t);if(!L.length)return{t:"<p>Rương trống: chưa có món nào để dâng.</p>",o:[{n:"Thôi",fx:{},kgx:1}]};
  L.sort((a,b)=>(b.ok-a.ok)||(b.v-a.v));const who=t==="emp"?"Hoàng thượng":"Thái hậu";
  return{t:`<p>Dâng món gì lên ${who}? Mỗi món ghi đúng điều được, theo tâm trạng và sở thích của ${t==="emp"?"ngài":"người"}.</p>`,
-  o:L.map(x=>({n:`${giftName(x.e)}${x.e.wk?" ("+WTIER[x.e.wk.ti]+")":""}`,fx:{},kgift:x.ok?x.x:"",kgwhy:x.ok?"":x.why,lock:!x.ok,kgg:x.e.wk?"wk":"it",
+  o:L.map(x=>({n:`${giftName(x.e)}${x.e.wk?" ("+WTIER[x.e.wk.ti]+")":""}`,ik:x.i,fx:{},kgift:x.ok?x.x:"",kgwhy:x.ok?"":x.why,lock:!x.ok,kgg:x.e.wk?"wk":"it",
    go:()=>{if(!x.ok)return;spend(2);const i=S.inv.indexOf(x.e);window.__kitLastEvArt={src:giftArt(x.e).src,lab:giftName(x.e)};log(giveTo(S,t,i))}})).concat([{n:"Thôi",fx:{},kgx:1}])}};
 function courtMeet(t){const B=[];try{
  if(t==="emp"){const k=(S.where||{}).emp;const night=(S.buoi||0)>=3;

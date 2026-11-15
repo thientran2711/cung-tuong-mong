@@ -16,8 +16,9 @@ for(const SZ of L){const [WH,DPR]=SZ.split('@');const [W,H]=WH.split('x').map(Nu
  await p.goto(BASE,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function');await p.waitForTimeout(3000);
  const R={sz:SZ};
  R.rot=await p.evaluate(()=>{const e=document.querySelector('#rotate,.rotate,#rot');return e?getComputedStyle(e).display!=='none'&&e.offsetParent!==null:false});
+ await p.waitForFunction(()=>typeof nlFigsReady!=='function'||nlFigsReady(),null,{timeout:30000}).catch(()=>{});
  await p.evaluate(()=>{try{kitRoulette=function(){}}catch(e){}SLOT=3;document.getElementById('title').hidden=true;
-  for(let i=0;i<60;i++){try{store.set(NL_KEY,null)}catch(e){}start();if(!(typeof isSrv==='function'&&isSrv()))break}
+  for(let i=0;i<60;i++){try{store.set(NL_KEY,null)}catch(e){}try{start()}catch(e){}if(typeof S!=='undefined'&&S&&!(typeof isSrv==='function'&&isSrv()))break}
   Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;document.querySelectorAll('.kroul,#kroul,#kroulw').forEach(e=>e.remove());
   S.rank=Math.max(S.rank,2);S.bac=500;S.used=0;
   for(const k of ["tramngoc","vongngoc","sonphan","boodieu","tramphuong","vongvang"])if(IT[k])S.inv.push({k,from:"me"});
@@ -32,8 +33,8 @@ for(const SZ of L){const [WH,DPR]=SZ.split('@');const [W,H]=WH.split('x').map(Nu
   const tops={};tiles.forEach(t=>{const y=Math.round(t.getBoundingClientRect().top);(tops[y]=tops[y]||[]).push(t)});
   let spread=0;for(const y in tops){const ns=tops[y].map(t=>t.querySelector('.kshn').getBoundingClientRect().top);spread=Math.max(spread,Math.max(...ns)-Math.min(...ns))}
   const cut=[...M.querySelectorAll('*')].filter(e=>e.offsetParent&&e.children.length===0&&e.textContent.trim()&&e.scrollWidth>e.clientWidth+2&&['hidden','clip'].includes(getComputedStyle(e).overflowX)&&!e.closest('.kshn,.kshe')).slice(0,4).map(e=>e.className+':'+e.textContent.slice(0,30));
-  const optsVisible=M?[...M.querySelectorAll('.opts>.opt')].filter(o=>o.offsetParent&&!o.closest('.kipd')).length:0;
-  return{grid:!!g,tiles:tiles.length,rows:Object.keys(tops).length,perRow:Math.max(0,...Object.values(tops).map(a=>a.length)),spread,optsVisible,
+  const optsVisible=M?[...M.querySelectorAll('.opts>.opt')].filter(o=>o.offsetParent).length:0;const gr=g?g.getBoundingClientRect():null;const gridVis=gr?gr.height>40&&gr.top<vh&&gr.bottom>0:false;
+  return{grid:!!g,gridVis,gridH:gr?Math.round(gr.height):0,tiles:tiles.length,rows:Object.keys(tops).length,perRow:Math.max(0,...Object.values(tops).map(a=>a.length)),spread,optsVisible,
    inView:r?r.left>=-1&&r.right<=vw+1&&r.top>=-1&&r.bottom<=vh+1:false,ovf:document.documentElement.scrollWidth>vw+1,cut,
    pics:tiles.filter(t=>{const i=t.querySelector('img');return i&&i.complete&&i.naturalWidth>0}).length}});
  const close=()=>p.evaluate(()=>{Q.length=0;document.getElementById('modal').hidden=true;render()});
@@ -51,7 +52,7 @@ for(const SZ of L){const [WH,DPR]=SZ.split('@');const [W,H]=WH.split('x').map(Nu
  /* confirm → gift given, kitFxGift plays (log), tap to skip */
  await p.evaluate(()=>{window.__fxlog=[];const o=window.kitFxGift;if(o)window.kitFxGift=function(){__fxlog.push([...arguments].slice(0,1).join());return o.apply(this,arguments)}});
  R.before=await p.evaluate(()=>S.inv.length);
- await p.evaluate(()=>{const g=document.querySelector('#modal .kipgo');g&&g.click()});await p.waitForTimeout(700);await shot('3-givefx');
+ await p.evaluate(()=>{const g=document.querySelector('#modal .kipgo');g&&g.click()});if(process.env.SEQ){for(const t of [350,500,500,600,600,700,800]){await p.waitForTimeout(t);await p.screenshot({path:`${OUT}/${W}x${H}-seq-${Date.now()%100000}.jpg`,type:'jpeg',quality:60})}}else{await p.waitForTimeout(700);await shot('3-givefx')}
  R.after=await p.evaluate(()=>({inv:S.inv.length,fx:window.__fxlog||[],kfk:typeof KFK!=="undefined"?(KFK.log||[]).slice(-4):null,live:document.querySelectorAll('.kfxk').length,carry:document.querySelectorAll('.kgpc').length}));
  await p.mouse.click(Math.round(W/2),Math.round(H/2));await p.waitForTimeout(400);
  R.skip=await p.evaluate(()=>({live:document.querySelectorAll('.kgpc').length}));
