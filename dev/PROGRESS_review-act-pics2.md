@@ -124,3 +124,8 @@ LEFT (unchanged from the list above unless noted)
   - thanhtho was redrawn once: the first version decorated the east compound, but Từ Ninh cung (tn) is the west compound with the lotus pond.
   - Wired through `files` in the FEST table (j31 for vulan, vantho, lapbat; j71 for thanhtho) and in map-hotspots.json (14 festivals now).
   - Checked with dev/test/fest-art.js: all 14 festivals resolve to their own map picture where one exists, and fDay7 dialogs carry the banner and evId "fest:<k>". No page errors.
+- (4) Dialog banners:
+  - pending_dlg.txt was stale: all 34 entries were already on the CDN as ev-<key>.webp. They are now recorded in gens_dlg.txt and pending_dlg.txt is empty.
+  - New batch of 8 drawn and on the CDN: e68-springallergy, e68-stormnight, evpick, giftpick, j70thr, j71f-thanhtho-2, j71f-vantho-1, j71x-sac.
+  - e68-stormnight and giftpick were redrawn because an unrequested Emperor appeared; for scenes with no Emperor, add "NO Emperor, nobody in yellow".
+  - **89 banners left** (python3 dev/figwork/acts/dprompt.py N lists them; fetch with fetchd.py; PREV=<scratchpad>/prev).
