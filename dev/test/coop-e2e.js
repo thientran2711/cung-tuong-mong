@@ -29,6 +29,8 @@ async function until(o,fn,arg,ms=30000){try{await o.p.waitForFunction(fn,arg,{ti
 /* wait for fn while both players read their dialogs (the week's end goes out only once her dialogs are closed) */
 async function untilC(o,fn,arg,ms=40000){const t0=Date.now();while(Date.now()-t0<ms){if(await o.p.evaluate(fn,arg).catch(()=>false))return true;for(const x of ALL)if(x.p&&!x.p.isClosed())await clear(x);await sleep(300)}return false}
 const ALL=[];
+/* DOMContentLoaded, not load: a CDN picture or font that hangs on the network held the load event past 120 s (3 of ~17 runs, always the guest's join); the game is up at DCL and every step waits for its own state */
+const DCL={waitUntil:'domcontentloaded'};
 async function tapText(o,re,ms=8000){const t0=Date.now();while(Date.now()-t0<ms){const h=await o.p.evaluateHandle(src=>{const R=new RegExp(src);
   return [...document.querySelectorAll('button,a,[role=button]')].find(b=>b.offsetParent!==null&&!b.disabled&&R.test(b.textContent.trim()))||null},re.source);
   const el=h.asElement();if(el){await el.click();return true}await sleep(250)}return false}
@@ -63,14 +65,14 @@ async function weekBoth(A,B,w){const n=await A.p.evaluate(()=>typeof B4N==='numb
 (async()=>{const b=await chromium.launch();
  const A=await mk(b,'fold',[686,880,2.2]),B=await mk(b,'ipad',[1180,820,2]);ALL.push(A,B);
  /* 1 host makes a room */
- await A.page();await A.p.goto(BASE);await A.p.waitForTimeout(3000);await shot(A,'01-title');
+ await A.page();await A.p.goto(BASE,DCL);await A.p.waitForTimeout(3000);await shot(A,'01-title');
  ok(await tapText(A,/^(Chơi cùng bạn|Cùng hảo hữu)/),'A taps Chơi cùng bạn');await A.p.waitForTimeout(600);await shot(A,'02-coop-menu');
  ok(await tapText(A,/^(Mời bạn|Mời hảo hữu)/),'A taps Mời bạn');
  ok(await until(A,()=>__co().code&&__co().seat==='a'),'A has a room code, seat a');
  const code=(await C(A)).code;console.log('room',code);await clear(A);await shot(A,'03-invite-waiting');
  const w0=await A.p.evaluate(()=>!!(__co().frozen));ok(w0,'A waits for the friend (frozen before join)');
  /* 2 guest joins by link */
- await B.page();await B.p.goto(BASE+'?room='+code);await B.p.waitForTimeout(3000);await shot(B,'04-join');
+ await B.page();await B.p.goto(BASE+'?room='+code,DCL);await B.p.waitForTimeout(3000);await shot(B,'04-join');
  await tapText(B,/^Vào phòng/,4000);
  ok(await until(B,()=>__co().seat==='b'&&__co().online&&__co().online.a&&__co().online.b&&!__co().frozen,null,40000),'B joined seat b, both online');
  ok(await until(A,()=>!__co().frozen,null,20000),'A unfrozen when B is in');
@@ -97,7 +99,7 @@ async function weekBoth(A,B,w){const n=await A.p.evaluate(()=>typeof B4N==='numb
  ok(await until(A,()=>__co().frozen,null,60000),'A frozen when B left');await shot(A,'08-frozen');
  ok(await A.p.evaluate(()=>document.getElementById('next').disabled||!!__co().frozen),'A cannot advance while frozen');
  const wkF=(await C(A)).week;
- await B.page();await B.p.goto(BASE+'?room='+code);await B.p.waitForTimeout(3000);await tapText(B,/^Vào phòng|^Tiếp tục/,3000);
+ await B.page();await B.p.goto(BASE+'?room='+code,DCL);await B.p.waitForTimeout(3000);await tapText(B,/^Vào phòng|^Tiếp tục/,3000);
  ok(await until(B,x=>__co().seat==='b'&&__co().week===x&&!__co().frozen,wkF,40000),'B back in same seat and week');
  ok(await until(A,()=>!__co().frozen,null,20000),'A resumes');await clear(A);await clear(B);await same('after rejoin');await shot(B,'09-rejoined');
  /* 5 B dies → normal rebirth choice → new person in the same world */
@@ -119,9 +121,9 @@ async function weekBoth(A,B,w){const n=await A.p.evaluate(()=>typeof B4N==='numb
  /* 7 single player untouched + old save loads */
  const oldHtml=execSync('git -C '+JSON.stringify(ROOT)+' show origin/main:index.html',{maxBuffer:64e6}).toString();
  const D=await mk(b,'solo',[686,880,2.2]);await D.ctx.route(BASE+'old.html',r=>r.fulfill({status:200,contentType:'text/html; charset=utf-8',body:oldHtml.replace(/navigator\.serviceWorker\.register/g,'(()=>Promise.reject())')}));
- await D.page();await D.p.goto(BASE+'old.html');await D.p.waitForTimeout(3500);
+ await D.page();await D.p.goto(BASE+'old.html',DCL);await D.p.waitForTimeout(3500);
  await D.p.evaluate(()=>{SLOT=2;document.getElementById('title').hidden=true;start();Q.length=0;localStorage.setItem(SK(2),JSON.stringify(ser()));localStorage.setItem('hclh-slot','2')});const oldName=await D.p.evaluate(()=>S.name);
- await D.p.goto(BASE);await D.p.waitForTimeout(3500);await shot(D,'13-title-solo');
+ await D.p.goto(BASE,DCL);await D.p.waitForTimeout(3500);await shot(D,'13-title-solo');
  ok(await tapText(D,/^Chơi một mình/),'solo: Chơi một mình');await D.p.waitForTimeout(800);
  /* Chơi một mình = Tiếp tục the last sổ (old save) when there is one */
  if(!await D.p.evaluate(()=>typeof S!=='undefined'&&!!S&&!!S.name))await tapText(D,/^Tiếp tục kiếp này/,4000);await D.p.waitForTimeout(1500);
