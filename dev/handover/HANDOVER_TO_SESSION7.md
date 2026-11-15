@@ -47,3 +47,11 @@ Huadian size 10/9/8% (rec 10%); son's birth exam vs direct promotion; servant/ma
 
 ## Machine notes
 Main checkout shallow; workers use sparse worktrees in /home/user/wt/<name>; fetch --depth=30 under flock /home/user/wt/fetch.lock; never clone. Packs ~8 GB → repack when load drops (nice, pack.threads=1, --window=0). Own http server per worker, kill by PID only. Magnific balance ~1.45M credits.
+
+## ACCOUNT MOVE (owner 15/11 ~22:10Z)
+Account usage ~98%: the project moves to another account (new container). Everything needed must be on GitHub or the CDN.
+- Reference images that lived only on local disk are now in dev/handover/refs/ (owner markups: pets, fig-bg, rosy; samples: night-end, por-scale, rank-title, mk-colour, calendar, pets, handmade works, fig-bg, placeholders, Ân sủng ref, rank-title ref).
+- Session 6 agent log: dev/handover/AGENTS_SESSION6.txt.
+- NOT saved (too big, rollback only): /home/user/wt/porscale-orig/ (150 MB originals of 3317 re-cropped portraits). The re-crop is live; to roll back one would need the old CDN versions (not kept).
+- Running workers were told to commit+push WIP and write PROGRESS resume notes: balance-pass (review/balance-pass), fix-float r8 (→ review/fix-float-r8), mk-colour (review/mk-colour), reviewer small-bugs-2 (review/small-bugs-2-r6). Check each branch's PROGRESS file before re-spawning on the new account.
+- New account setup: re-create Cloudflare CDN access (api.cloudflare.com connector) for cdn_sync, Magnific connector (folder ba4aecfe-efce-47e2-b53f-30d292091886 must be reachable — it belongs to the old Magnific account; if not shared, art jobs need a new folder and STYLE refs re-uploaded), GitHub access to thientran2711/cung-tuong-mong.
