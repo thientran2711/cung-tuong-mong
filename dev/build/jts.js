@@ -159,7 +159,7 @@ function tsLeHost(p,to){const me=p===S;if(me){const G=tsGuests(S).filter(x=>x!==
   const gifts=G.filter(v=>aff(v,S)>=30&&v.inv&&v.inv.length).slice(0,2);const gl=[];for(const v of gifts){const k=pick(["tuithom","demgam","sonphan","huongtram"]);S.inv.push({k,from:v.id});gl.push(`${v.name}: ${IT[k].n}`)}
   const n=G.length,hi=8*n,lo=4*n;const s=tsS();s.leN=(s.leN||0)+1;
   tsPanel({t:`Lễ tấn phong · ${RANKS[to].n}`,art:"img/ev-tan-phong.webp",stage:G.slice(0,1).concat([S]),h:`<p>Thánh chỉ vừa tuyên, ${n} vị phi tần sang cung ngươi dự lễ chúc mừng.</p>${tsFacts(lines)}${gl.length?tsRows([["Quà mừng",gl.join(" · "),"g"]]):""}<p class="past">Theo lệ, chủ lễ phát lì xì cho khách. Phát hậu thì lòng người êm; không phát dễ mang tiếng keo kiệt.</p>`,
-   opts:[tsOpt({n:"Phát lì xì hậu",fx:{bac:-hi},need:[tsNeedBac(hi)],duoc:[`${n} vị khách bớt ghen 6`,"thiện cảm +4","Danh +2"],go:()=>{G.forEach(v=>{v.ghen=cl((v.ghen||0)-6,0,100);tsAff(v,4)});apply({danh:2});log(`Lễ tấn phong: ngươi phát lì xì hậu cho ${n} vị khách.`)}}),
+   opts:[tsOpt({n:"Phát lì xì hậu",fx:{bac:-hi},need:[tsNeedBac(hi)],duoc:[`${n} vị khách bớt ghen 6`,"thiện cảm +4","Danh +1"],go:()=>{G.forEach(v=>{v.ghen=cl((v.ghen||0)-6,0,100);tsAff(v,4)});apply({danh:1});log(`Lễ tấn phong: ngươi phát lì xì hậu cho ${n} vị khách.`)}}),
     tsOpt({n:"Phát lì xì vừa phải",fx:{bac:-lo},need:[tsNeedBac(lo)],duoc:[`${n} vị khách bớt ghen 3`,"thiện cảm +2"],go:()=>{G.forEach(v=>{v.ghen=cl((v.ghen||0)-3,0,100);tsAff(v,2)});log(`Lễ tấn phong: ngươi phát lì xì cho ${n} vị khách.`)}}),
     tsOpt({n:"Không phát",mat:["Danh -2","người đang ghen: ghen +3 (chê keo kiệt)"],go:()=>{apply({danh:-2});G.forEach(v=>{if((v.ghen||0)>=40)v.ghen=cl(v.ghen+3,0,100)});log("Lễ tấn phong: ngươi không phát lì xì; có người xì xào chê keo kiệt.")}})]});
   return}
@@ -196,12 +196,12 @@ function tsSummonW(p){return Math.pow(Math.max(1,(p.sung||0)),1.4)*(1+((p===S?S.
 /* what he asks for: by her gifts and the season (du hồ only in the warm months) */
 function tsSummonKind(p){const a=p.arts||{};const warm=S.month>=4&&S.month<=9;const L=[["dan",1+(a.cam||0)*2],["co",1+(a.ky||0)*2]];if(warm)L.push(["duho",2.5]);let t=L.reduce((s,x)=>s+x[1],0)*Math.random();for(const x of L){t-=x[1];if(t<=0)return x[0]}return L[0][0]}
 function tsSummonOdds(p,k){const a=p.arts||{};return k==="dan"?40+(a.cam||0)*9+(p.tai||0)/6:k==="co"?40+(a.ky||0)*9+(p.tamco||0)/5:45+effSac(p)/5+(p.tai||0)/8}
-function tsSummonGain(raw){return{sung:raw>=8?7:raw>=5?4:raw>=3?2:1,an:raw>=8?4:raw>=5?2:1}}
-function tsSummonWeek(){if(!S||S.dead||S.out||(typeof isSrv==="function"&&isSrv()))return;if(!roll(26*tsMoodW()))return;
+function tsSummonGain(raw){return{sung:raw>=8?4:raw>=5?3:raw>=3?2:1,an:raw>=8?3:raw>=5?2:1}}
+function tsSummonWeek(){if(!S||S.dead||S.out||(typeof isSrv==="function"&&isSrv()))return;if(!roll(14*tsMoodW()))return;
  const C=consorts().filter(p=>p.alive!==false&&!p.out&&!p.confined&&!(p.preg>=8));if(!C.length)return;
  const w=C.map(tsSummonW);let r=Math.random()*w.reduce((a,b)=>a+b,0),i=0;while(r>w[i]&&i<w.length-1){r-=w[i];i++}const p=C[i];const k=tsSummonKind(p);
  if(p!==S){const raw=typeof kg82NpcRaw==="function"?kg82NpcRaw(p,k==="duho"?"dan":k):5;const g=tsSummonGain(raw);ap(p,{sung:g.sung});p.an=cl((p.an||0)+g.an,0,100);
-  if(k==="duho"&&tsRebel()&&roll(40)){if(roll(tsSummonOdds(p,k)))ap(p,{sung:6,danh:4})}if(knows(p)||S.mat>=2)log(`${p.name} được Hoàng thượng triệu ${k==="dan"?"đánh đàn":k==="co"?"đánh cờ":"du hồ"}.`);return}
+  if(k==="duho"&&tsRebel()&&roll(40)){if(roll(tsSummonOdds(p,k)))ap(p,{sung:4,danh:3})}if(knows(p)||S.mat>=2)log(`${p.name} được Hoàng thượng triệu ${k==="dan"?"đánh đàn":k==="co"?"đánh cờ":"du hồ"}.`);return}
  tsSummonMe(k)}
 function tsSummonMe(k){const E=S.emp;const odds=tsSummonOdds(S,k);const nm={dan:"đánh đàn",co:"đánh cờ",duho:"du hồ"}[k];const reb=k==="duho"?tsRebel():0;
  const likes=k==="dan"&&E.known&&E.known.music?` Ngài thích khúc ${E.likes.music}.`:"";
@@ -210,7 +210,7 @@ function tsSummonMe(k){const E=S.emp;const odds=tsSummonOdds(S,k);const nm={dan:
   intro:[["Hoàng thượng",k==="dan"?"nghe đàn trong thư phòng":k==="co"?"bày cờ trong thư phòng":"ngồi thuyền giữa hồ sen","n"]].concat(reb?[["Điềm báo","cấm quân canh hai bờ, có tin loạn đảng trà trộn","r"]]:[]),
   onDone:res=>{const g=tsSummonGain(res.raw);const L=[];apply({sung:g.sung});S.an=cl((S.an||0)+g.an,0,100);
    L.push(res.raw>=5?`Hoàng thượng vui lòng (${nm}).`:`Hoàng thượng lơ đãng, ngồi được một lúc thì về (${nm}).`);
-   if(res.guard!=null){if(res.guard){apply({sung:6,danh:4});S.an=cl((S.an||0)+4,0,100);L.push("Lau sậy động, ngươi kêu hộ giá kịp lúc; cấm quân bắt được kẻ lạ. Ngài nhớ ơn ngươi.")}else{apply({suc:-8});L.push("Lau sậy động, cấm quân xông tới trước; kẻ lạ bị bắt. Ngươi kinh hãi.")}}
+   if(res.guard!=null){if(res.guard){apply({sung:4,danh:3});S.an=cl((S.an||0)+3,0,100);L.push("Lau sậy động, ngươi kêu hộ giá kịp lúc; cấm quân bắt được kẻ lạ. Ngài nhớ ơn ngươi (Sủng +4, Danh +3, Ân tình +3).")}else{apply({suc:-8});L.push("Lau sậy động, cấm quân xông tới trước; kẻ lạ bị bắt. Ngươi kinh hãi.")}}
    log(L.join(" "));tsRes(`Hoàng thượng triệu ${nm}`,b,res.raw>=5||res.guard===1);render()}})};
  const g7=tsSummonGain(8),g3=tsSummonGain(3);
  tsPanel({t:`Hoàng thượng triệu ${nm}`,who:pEmp(),art:k==="duho"?"img/ev-le-ha.webp":k==="co"?"img/ev-hoang-de-vui-2.webp":"img/ev-tai-nghe.webp",
@@ -263,14 +263,14 @@ function tsDressReturn(){const s=tsS();s.borrow=0;for(let i=S.inv.length-1;i>=0;
 function tsDressHold(){const s=tsS();const D=s.dress;if(!D||D.m!==S.month||D.y!==S.year)return;s.dress=null;const th=D.th,T=TS_THEME[th];
  const C=liveRivals(true).filter(v=>!v.confined&&!v.out);const R=C.map(v=>{const P=tsNpcDress(v,th);const d=tsDressPts(v,P,th);return{p:v,raw:d.raw,vp:d.vp,score:tsDressTotal(v,d.raw)}});
  const finish=(mine)=>{const all=R.concat(mine?[mine]:[]).sort((a,b)=>b.score-a.score);all.forEach((x,i)=>x.place=i+1);const b=tsPre();const L=[];
-  for(const x of all){if(x.vp.length)ap(x.p,{danh:-3});if(x.place===1){ap(x.p,{sung:4,danh:4});bestow(x.p,"contest")}else if(x.place<=3)ap(x.p,{danh:2})}
+  for(const x of all){if(x.vp.length)ap(x.p,{danh:-3});if(x.place===1){ap(x.p,{sung:3,danh:3});bestow(x.p,"contest")}else if(x.place<=3)ap(x.p,{danh:2})}
   if(mine){const x=mine;L.push(`Hội phối đồ (${T.n}): ngươi đứng thứ ${x.place}/${all.length}.`);if(x.vp.length)L.push(`${tsDressHost()?"Hoàng hậu":"Thái hậu"} nhắc: ${x.vp.join(", ")} vượt phẩm vị. Danh -3.`)}
   else L.push(`Hội phối đồ (${T.n}): ${all[0].p.name} đứng đầu.`);log(L.join(" "));tsDressReturn();
   const show=()=>{tsRes(`Hội phối đồ · ${T.n}`,b,mine?mine.place<=3:null);render()};
   if(mine&&typeof kitPodiumShow==="function"&&!tsBot()&&all.length>=2)kitPodiumShow(all.slice(0,Math.max(3,all.length)).map(x=>({who:x.p,score:x.score,place:x.place})),{title:`Hội phối đồ · ${T.n}`,sub:T.d,onNext:show});else show()};
  if(!tsOn()||S.out||S.confined||S.rank>=7){finish(null);return}
  tsPanel({t:`Hội phối đồ · ${T.n}`,art:S.month>=7?"img/ev-le-thu-3.webp":"img/ev-dieu-lanh.webp",who:tsDressHost()?pv(tsDressHost()):pTH(),h:`<p>Ngự hoa viên bày bình phong gấm. Lục cung lần lượt ra mắt theo đề <b>${T.n}</b> (${T.d}).</p>`,opts:[
-  tsOpt({n:"Tự tay phối đồ",fx:{suc:-5},need:[tsNeedSuc(5)],duoc:["đứng đầu: Sủng +4, Danh +4, một món ban thưởng","vào ba người đầu: Danh +2"],mat:["đồ vượt phẩm vị: Danh -3"],note:"tự phối đồ hoặc để cung nữ chọn giúp",later:1,go:()=>tsDressGame(th,(P,sk)=>{const d=tsDressPts(S,P,th);finish({p:S,raw:d.raw,vp:d.vp,score:tsDressTotal(S,d.raw)})})}),
+  tsOpt({n:"Tự tay phối đồ",fx:{suc:-5},need:[tsNeedSuc(5)],duoc:["đứng đầu: Sủng +3, Danh +3, một món ban thưởng","vào ba người đầu: Danh +2"],mat:["đồ vượt phẩm vị: Danh -3"],note:"tự phối đồ hoặc để cung nữ chọn giúp",later:1,go:()=>tsDressGame(th,(P,sk)=>{const d=tsDressPts(S,P,th);finish({p:S,raw:d.raw,vp:d.vp,score:tsDressTotal(S,d.raw)})})}),
   tsOpt({n:"Cáo bệnh, không dự",mat:["Danh -1"],go:()=>{apply({danh:-1});finish(null)}})]})}
 /* the dressing board: tap item tiles into four slots, then present; skip = her maid picks (by her loyalty) */
 function tsDressGame(th,done){const T=TS_THEME[th];const P={};const inv=S.inv.map((e,i)=>({e,i})).filter(({e})=>TS_SLOT.some(([,,fit])=>fit(e.k)));
@@ -278,9 +278,9 @@ function tsDressGame(th,done){const T=TS_THEME[th];const P={};const inv=S.inv.ma
  if(tsBot()||typeof kg82Open!=="function"){setTimeout(()=>done(maidPick(),true),0);return}
  const d=kg82Open({art:"Phối đồ",title:`Đề: ${T.n}`,how:`Chạm một món để đặt vào chỗ của nó (chạm lại để bỏ). Đề ${T.n}: ${T.d}. Xong thì chạm "Ra mắt".`});if(!d){done(maidPick(),true);return}const box=kg82Box();
  const grade=k=>typeof kmTierOf==="function"?kmTierOf(k):0;const src=k=>{try{const a=typeof itemArt==="function"?itemArt(k):null;if(a&&a.src)return a.src}catch(e){}return typeof kmItemImg==="function"?kmItemImg(k):""};
- const paint=()=>{const pts=tsDressPts(S,P,th).raw;kg82Set("score",`${pts}/10`);kg82Set("round",`${Object.keys(P).filter(k=>P[k]).length}/4 chỗ`);kg82Set("time","không giới hạn");
+ const paint=()=>{const pts=tsDressPts(S,P,th).raw;kg82Set("score",`${pts}/10`);kg82Set("round",`đã đặt ${Object.keys(P).filter(k=>P[k]).length}/4`);kg82Set("time","không giới hạn");
   box.innerHTML=`<div class="ts-slots">${TS_SLOT.map(([sl,lab])=>`<div class="ts-slot"><small>${lab}</small>${P[sl]?kitItem({name:IT[P[sl]].n,src:src(P[sl]),grade:grade(P[sl]),size:"sm"}):kitItem({empty:true,name:"trống",size:"sm"})}</div>`).join("")}</div>`+
-   `<div class="ts-items">${inv.length?inv.map(({e,i})=>{const on=Object.values(P).includes(e.k);return `<button type="button" class="ts-it${on?" ksel":""}" aria-pressed="${on}" data-tsi="${i}">${kitItem({name:IT[e.k].n,src:src(e.k),grade:grade(e.k),size:"sm"})}</button>`}).join(""):`<p class="past">Rương chưa có trang sức, vải vóc hay hương phấn nào.</p>`}</div>`+
+   `<div class="ts-items">${inv.length?inv.map(({e,i})=>{const on=Object.values(P).includes(e.k);return `<button type="button" class="ts-it${on?" ts-on":""}" aria-pressed="${on}" data-tsi="${i}">${kitItem({name:IT[e.k].n,src:src(e.k),grade:grade(e.k),size:"sm"})}</button>`}).join(""):`<p class="past">Rương chưa có trang sức, vải vóc hay hương phấn nào.</p>`}</div>`+
    `<div class="kg82act"><button class="kbtn" id="tsdgo">Ra mắt</button><button class="kbtn alt" id="tsdskip">Bỏ qua<small>${S.maid?S.maid.name:"cung nữ"} chọn giúp (theo lòng nàng: ${word(S.maid?S.maid.loyal:50)})</small></button></div>`;
   box.querySelectorAll("[data-tsi]").forEach(b=>b.onclick=()=>{const e=S.inv[+b.dataset.tsi];if(!e)return;const s=TS_SLOT.find(([,,fit])=>fit(e.k));if(!s)return;P[s[0]]=P[s[0]]===e.k?null:e.k;paint()});
   $("tsdgo").onclick=()=>{kg82Close();done(P,false)};$("tsdskip").onclick=()=>{kg82Close();done(maidPick(),true)}};paint()}
@@ -302,7 +302,7 @@ function tsDressGame(th,done){const T=TS_THEME[th];const P={};const inv=S.inv.ma
 #kg82 .ts-slot>small{font-size:.74rem;color:var(--k-lab,#8a7350)}
 #kg82 .ts-items{display:grid;grid-template-columns:repeat(auto-fill,minmax(88px,1fr));gap:6px;max-height:42vh;overflow:auto;padding:2px}
 #kg82 .ts-it{background:none;border:0;padding:0;cursor:pointer;min-width:0;opacity:.75}
-#kg82 .ts-it.ksel{opacity:1;filter:var(--k-glow,drop-shadow(0 0 5px #ffd66e) drop-shadow(0 0 2px #be8c1ee6));transform:scale(1.06)}
+#kg82 .ts-it.ts-on{opacity:1;filter:var(--k-glow,drop-shadow(0 0 5px #ffd66e) drop-shadow(0 0 2px #be8c1ee6));transform:scale(1.06)}
 #kg82 .kgbox{position:relative}
 #kg82 .ts-guard{position:absolute;left:50%;top:38%;transform:translateX(-50%);z-index:2;min-height:44px}
 @media (max-width:420px){#kg82 .ts-slots{grid-template-columns:repeat(2,minmax(0,1fr))}}

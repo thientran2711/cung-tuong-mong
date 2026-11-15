@@ -1162,7 +1162,7 @@ Owner 11/15 02:00Z (Top 15 of dev/research/TRUNGSINH_COMPARE.md). Everything is 
   exported by jk3 for this). Tap → their panels (Nguy hiểm chung: bar value, people the player knows, unknown count, Cách tính, actions;
   Xét phẩm: promoReqP rows Đủ / Thiếu).
 - **Dressing board** (Hội phối đồ): four slots (Cài tóc · Đeo tay · Áo · Hương, phấn) as `kitItem` tiles, inventory tiles as buttons; selected tile =
-  the one kit selected look (31.13: `.ksel`, `--k-glow`, ×1.06, others opacity .75). HUD: Phần x/10 · Hồi n/4 chỗ. Result → `kitPodiumShow`.
+  the one kit selected look (31.13: `--k-glow` glow, ×1.06, others opacity .75; class `.ts-on`, no box). HUD: Phần x/10 · Hồi n/4 chỗ. Result → `kitPodiumShow`.
 - Pictures used: ev-tai-nghe (đàn), ev-hoang-de-vui-2 (cờ), ev-le-ha (du hồ), ev-tan-phong (lễ tấn phong), ev-sinh-no (ân thưởng sau sinh),
   ev-le-xuan-2 / ev-le-thu-2 (thả đèn), ev-yen-tiec (báo đề), ev-dieu-lanh / ev-le-thu-3 (hội phối đồ). No new art.
 

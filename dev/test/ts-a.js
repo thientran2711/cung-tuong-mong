@@ -6,8 +6,11 @@ const {chromium}=require('playwright');
 const [,,BASE,SZ,OUT,TAG,MODE]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=WH.split('x').map(Number);
 const fs=require('fs');
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:+(DPR||1),reducedMotion:'reduce',hasTouch:true,isMobile:W<1100});
+ /* BASE "root" = serve the repo root from disk through the browser (no separate server needed) */
+ let URL0=BASE;if(BASE==='root'){const R=require('path').resolve(__dirname,'../..');const MT={html:'text/html; charset=utf-8',js:'text/javascript',json:'application/json',webp:'image/webp',png:'image/png',jpg:'image/jpeg',mp3:'audio/mpeg',css:'text/css',webmanifest:'application/json'};
+  await ctx.route('http://ts.local/**',r=>{let u=decodeURIComponent(new URL(r.request().url()).pathname);if(u==='/')u='/index.html';const f=R+u;if(!fs.existsSync(f))return r.fulfill({status:404,body:''});r.fulfill({status:200,contentType:MT[f.split('.').pop()]||'application/octet-stream',body:fs.readFileSync(f)})});URL0='http://ts.local/index.html'}
  const p=await ctx.newPage();p.setDefaultTimeout(240000);const errs=[];p.on('pageerror',e=>errs.push(e.message));
- await p.goto(BASE,{waitUntil:'domcontentloaded'});await p.waitForTimeout(3000);
+ await p.goto(URL0,{waitUntil:'domcontentloaded'});await p.waitForTimeout(3000);
  await p.evaluate(()=>{SLOT=3;document.getElementById('title').hidden=true;
   for(let i=0;i<80;i++){try{store.set(NL_KEY,null)}catch(e){}start();if(!isSrv())break}try{NLP=null}catch(e){}
   Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;render()});
