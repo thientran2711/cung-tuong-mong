@@ -67,12 +67,28 @@ def recs(all_=False):
     return json.load(open(RECF)) if os.path.exists(RECF) else {}
 
 def finish(im, name):
+    """fig only; returns (fig path, cleaned full-res cut) — portraits are made per sheet in portraits()"""
     im = sp.clean(im)
     a = im.split()[3].point(lambda v: 255 if v > 12 else 0); im = im.crop(a.getbbox()); w, h = im.size
     fig = im.resize((max(1, round(w * 900 / h)), 900), Image.LANCZOS)
     fp = f"{OUT}/{name}.webp"; sp.save_webp(fig, fp)
-    porcrop.make(fp, OUT, src=im, name=name + ".webp")
-    return fp
+    return fp, im
+
+def portraits(items):
+    """items: [(fig path, full-res cut, name)] of one sheet (same face, 4 ages). The haar detector sometimes boxes face+hair/hands
+    (portrait comes out zoomed out, c25 ty3/ty4): a face width off the sheet median by >22% is replaced by the median, with the eye
+    line placed like the sheet's other ages (relative to the head top)."""
+    F = []
+    for fp, im, name in items:
+        fig = Image.open(fp).convert("RGBA"); face = porcrop.find_face(fig)
+        top = porcrop.silhouette_head(np.asarray(fig)[..., 3])[1]; F.append([fp, im, name, list(face), top])
+    med = float(np.median([f[3][2] for f in F])); good = [f for f in F if abs(f[3][2] / med - 1) <= 0.22]
+    rel = float(np.median([(f[3][1] - f[4]) / f[3][2] for f in good])) if good else None
+    for fp, im, name, face, top in F:
+        if abs(face[2] / med - 1) > 0.22 and rel is not None:
+            face = [face[0], top + rel * med, med, face[3] + "-fixed"]; print(name, "portrait face fixed", flush=True)
+        por = porcrop.crop(im, tuple(face), im.height / 900.0, fig_h=im.height)
+        porcrop.save_webp(por, f"{OUT}/por-{name[4:]}.webp")
 
 _RB = None
 def cut(im):
@@ -105,14 +121,15 @@ def proc(only=None):
             im = load_cut(role, ident, g, gen, bg)
         except BaseException as ex:
             print(key, "SKIP", ex); continue
-        cols = sp.split(im, 4)
+        cols = sp.split(im, 4); items = []
         for (x0, x1), ag in zip(cols, AG):
             name = f"fig-{role}-{ident}-ty{g}-{ag}"
-            finish(im.crop((max(0, x0 - 4), 0, min(im.width, x1 + 4), im.height)), name)
+            fp, big = finish(im.crop((max(0, x0 - 4), 0, min(im.width, x1 + 4), im.height)), name); items.append((fp, big, name))
             R[f"img/{name}.webp"] = {"role": role, "identity": ident, "ty": int(g), "tier": f"ty{g}", "ageBand": ag,
                                      "file": f"img/{name}.webp", "por": f"img/por-{name[4:]}.webp",
                                      "magnificUrl": "https://www.magnific.com/app/creation/" + gen, "bg": bg if bg != "-" else "local-isnet", "sheet": f"TY-{ident}-{g}"}
-        print(key, "ok", [x1 - x0 for x0, x1 in cols])
+        portraits(items)
+        print(key, "ok", [x1 - x0 for x0, x1 in cols], flush=True)
         json.dump(R, open(RECF, "w"), indent=0, ensure_ascii=False)
         open(W + "/done.txt", "a").write(key + ":" + (bg if bg != '-' else gen) + "\n")
         if "/src/" not in _raw:  # keep the archived sources
