@@ -636,3 +636,11 @@ All must work in co-op.
 
 ## 15/11 ~20:30Z — What 'dark' means for pictures (owner)
 - DARK picture for scheming/negative events/acts = gloomy, shadowy, ominous mood (âm u, tối tăm) like the first act pictures in Hành sự she liked — NOT simply a night-time sky. A daytime scene can be dark in mood (heavy shadows, cold muted palette, low light). LIGHT = normal mood. Applies to act redraws, placeholders, event backgrounds, everything with light/dark by tone.
+
+## 15/11 ~20:40Z — NPC deaths/replacement, Phế phi họ Lý story, real side stories, fig-bg pick, event name tag (owner)
+- Lãnh cung: when a real rival is sent to the cold palace, Phế phi họ Lý STAYS too (two people there). She only leaves when she dies.
+- ALL NPCs can die. After a death: maids and eunuchs are replaced right away by a NEW person (new face/picture — never reuse the dead person's picture); some posts have no replacement (e.g. Phế phi họ Lý in lãnh cung: empty until a real person arrives).
+- Phế phi họ Lý gets her own story line (a real side-story quest).
+- SIDE STORIES must be real stories: every NPC carries a life goal / ambition / personal story; helping them fulfil it completes a side quest with rewards. Today's "phụ tuyến" are only small daily events (someone comes, frames her…) — real side lines need their own plot, like in games where a side line is the story of a secondary character.
+- Event person dialog: remove the square box around the rank + name caption (circled "Tần / Liễu Phương Hoa"); put rank + name straight on the white dialog background.
+- fig-bg: owner picks A = SILK HANGING SCROLL, drawn like a real vertical scroll with a rod at the top and a rod at the bottom (like an edict scroll held vertically); the person is painted ON the scroll. Fix: the Vương gia figure spills outside the scroll — figures too big. Inside the scroll ALL figures are the same size; the Emperor/men need not be taller than the others (tall men make the figure too big for the scroll).
