@@ -9,11 +9,9 @@
       Tính nết · Luật riêng / Điều thích / Quan hệ) instead of the old portrait card with a floating quote box.
    4. The big portrait frame (person card, Hậu cung, Giao tình) shows the WHOLE 550x1037 canvas: the box grows DOWN so the ngọc bội pendant
       and the tua rua tassel hang under the same-size frame (the opening keeps its size and place).
-   KIT_REL / kitRel come from review/act-audit (jaudit); until it is merged the same values are defined here behind a guard. */
+   KIT_REL / kitRel come from review/act-audit (jaudit). */
 (function(){
-/* ---------- 0. relation words (KIT_REL, VANPHONG §1) — guarded copy of review/act-audit ---------- */
-if(!window.KIT_REL)window.KIT_REL={aff:"thiện cảm",affThem:"Nàng → ta: thiện cảm",affMe:"Ta → nàng: thiện cảm",oan:"oán ta",unknown:"chưa rõ nàng nghĩ gì"};
-if(typeof window.kitRel!=="function")window.kitRel=function(dir,text){return `<span class="krel krel-${dir==="me"?"me":"them"}">${text}</span>`};
+/* KIT_REL / kitRel / .krel colours: jaudit (review/act-audit, merged 11/15) — jpa only uses them */
 const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const T=s=>String(s==null?"":s).replace(/\s+/g," ").trim();
 
@@ -99,7 +97,6 @@ const after=()=>{kpaPerson();kpaNotes();kitSortDoable()};
 let jt=0;try{new MutationObserver(()=>{if(!jt)jt=setTimeout(()=>{jt=0;after()},30)}).observe(document.body,{childList:true,subtree:true})}catch(e){}
 
 const st=document.createElement("style");st.id="jpa-css";st.textContent=`
-.krel-them{color:var(--rel-them,#7a4fa0)!important;font-weight:600}.krel-me{color:var(--rel-me,#2f6f9f)!important;font-weight:600}
 /* §37.2 person view: rank line above the name, at the very top; the figure right under it */
 html body #popw .pc.kpa>.pcl{display:flex!important;flex-direction:column;align-items:stretch;gap:4px;padding-top:0!important}
 html body #popw .pc.kpa>.pcl>.pcname{order:-1!important;display:flex!important;flex-direction:column-reverse;align-items:flex-start;min-height:0!important;margin:0!important;line-height:1.15}
