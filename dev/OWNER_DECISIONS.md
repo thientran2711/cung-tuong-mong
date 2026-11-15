@@ -465,3 +465,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - LIVE CDN (13:55Z) 19 tranh Tự học riêng từng môn (nối mã khi act-pics2 vào main).
 - (14:05Z) ĐẢO luật KIT §28.6 (11/14: lựa chọn sự việc chỉ hiện Tốn): sếp muốn MỌI lựa chọn hiện đủ Được/Mất/mức chắc. review/opt-render.
 - (14:05Z) Sếp dặn đêm: ô cảm xúc cho nhân vật nam; nút việc với phi tần phải có ảnh nhỏ; các tab làm lại phải chia tab con; sự việc thành/bại phải đổi tâm trạng + mặt nàng; trò cắm hoa phải là trò cắm hoa (mỗi món đúng trò); sự việc "trả quà" phải có quà thật; sau tranh sủng + tắm phải sang ngày mới; tiếng khóc nghe như cười → thay; Ân tình/chân tình phải THẤY số; vật liệu đắt phải đáng tiền; gửi mẫu da hồng + mẫu trang điểm.
+- (14:15Z) Tuần lục: mọi dòng đều dùng chung ảnh phòng nàng → mỗi loại dòng có ảnh riêng; không có thì không hiện ảnh, không lặp ảnh phòng. Dòng lựa chọn phải có ngữ cảnh ("Mặc kệ." trơn trụi là sai).
