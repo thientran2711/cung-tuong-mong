@@ -197,3 +197,5 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (10:40Z) LIVE: review/coop merged to main 614b00ec (book UI + fold-layout + KIT_FIG + co-op 2 người).
 - (01:20Z, qua phiên cũ) Owner: app cài màn hình chính / điện thoại kẹt bản cũ do sw.js cũ → sw mới phải tự kiểm bản mới khi mở app và khi quay lại, tự chuyển sang bản mới sau 1 lần mở lại; giao thợ review/loading.
 - (01:25Z) Owner (ảnh màn nhà, 'Thanh gì đây'): dải tím sọc giữa tranh sân khấu và hàng nút = mép bìa sách (.kbk-board) lộ ra → lỗi, bỏ; bìa không được hiện thành một dải riêng. Giao người duyệt sửa trong đợt 2.
+- (01:30Z) Owner: from now on ALL images go to Cloudflare, not stored in the GitHub repo → worker review/cdn-images (R2 + Worker or Pages; IMG_BASE; cdn_sync for new art; git rm img/ without rewriting history).
+- (01:30Z) Owner: Dư đồ scroll/unroll animation too fast → slow down (~2×, ease, interruptible, off with Cảnh động) → worker review/map-anim.

@@ -51,3 +51,4 @@ Phiên mới: session_01V1ZZH1F24tkuejhCvtXqV8. Đã nhắn phiên cũ bảo th�
 Kiểm origin 01:16Z: không nhánh nào đẩy thêm (page-curl vẫn f40f8d45, routes 978ff81f, scheme-games chưa có).
 Thợ mới đã giao: người duyệt kit + gộp main + dựng site cho review/book-release; page-curl (lật nguyên tờ); routes (nhánh truyện); scheme-games (Nghe ngóng, Truyền lời, Mặc cả, Thời cơ — trừu tượng).
 Nhắc theo dõi: send_later 30 phút, tự đặt lại mỗi lượt (lịch lặp tối thiểu 1 giờ).
+- 01:30Z giao thêm: review/loading (sw tự cập nhật, sếp kẹt bản cũ), review/cdn-images (ảnh lên Cloudflare, bỏ img/ khỏi kho), review/map-anim (Dư đồ cuộn chậm lại). Thứ tự gộp main: book-release → loading → map-anim → cdn-images.
