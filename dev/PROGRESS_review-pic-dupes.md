@@ -20,3 +20,12 @@ of these only ve-hau and tranh-ghe-xong are live (one log rule each) and both ar
   book pictures (Sai đi dò la -> sai-di-do-la-h, Xin Thái hậu đỡ lời -> xin-th-do-loi-g-h, Đưa cơm áo -> dua-com-ao-h); "Hành lễ" off bai-kien-h.
 - Owner redraw "Đêm thị tẩm" quilt carry: img/ev-night1-v2.webp (new name, CDN caches by name), jevban KIT_DLGMAP night1 -> night1-v2.
 - Drawn but NOT wired (coordinator dropped the tone task; review/night-end-r1 owns it): img/ev-night2-warm.webp, img/ev-night2-tender.webp (on CDN).
+- ACTS.json patch APPLIED LIVE 15/11 (fresh pull, live == pulled, verified after push): acts 301 -> 386, distinct act keys 216 -> 255; log/prefix untouched.
+  Includes nghe-ngong-chung (maid card act "Nghe ngóng chung", jwhy). 36 new pictures + 1 = 37 keys (scenes.txt/gens.txt).
+- Tests (local build + live ACTS): Hành sự cards "Nghỉ ngơi một lát" -> act-nghi-ngoi-mot-lat, "Đọc sách giải khuây" -> act-doc-sach-giai-khuay;
+  night1 dialog shows ev-night1-v2; 755x1000 and 1180x820: no horizontal overflow, 0 page errors.
+
+## Left / for others
+- review/act-pics2: near-duplicate template pictures ve-hau (#269) and tranh-ghe-xong (#249) are in its queue.
+- Not covered: q72 quest step names ("Đến <consort palace>", step titles) only render with an active quest; a runtime pass with quests would list them.
+- Coordinator: ev-night2-warm / ev-night2-tender are on the CDN but unused (night-end-r1 owns the tone pictures).

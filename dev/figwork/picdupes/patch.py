@@ -16,7 +16,11 @@ for pet in json.load(open(sys.argv[4]))['pets'] if len(sys.argv)>4 else []:
     P["Chăm "+pet]="cham-thu-nuoi";P["Cho "+pet+" theo hầu"]="cho-thu-theo-hau"
 for pl in ["tẩm cung ngươi","Ngự hoa viên","Cần Chính điện","Dưỡng Hòa điện","Đức Thọ cung","Càn Ninh cung","Thái y viện","Kính sự phòng","Lãnh cung"]:
     P["Đến "+pl]="den-noi-lam-viec"
-miss=[k for k in set(P.values()) if 'act-%s.webp'%k not in IX];assert not miss,miss
+import urllib.request
+def live(k):
+    try:return urllib.request.urlopen(urllib.request.Request('https://ctm-img.victoria-tntt.workers.dev/img/act-%s.webp'%k,method='HEAD',headers={'User-Agent':'ctm'}),timeout=30).status==200
+    except Exception:return False
+miss=[k for k in set(P.values()) if 'act-%s.webp'%k not in IX and not live(k)];assert not miss,miss
 before=(len(L['acts']),len(set(L['acts'].values())));chg=[(n,L['acts'].get(n),k) for n,k in P.items() if L['acts'].get(n)!=k]
 L['acts'].update(P);json.dump(L,open(sys.argv[3],'w'),ensure_ascii=False,separators=(',',':'))
 print('acts before %d (keys %d) after %d (keys %d); changed %d'%(before+(len(L['acts']),len(set(L['acts'].values())),len(chg))))
