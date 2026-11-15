@@ -697,3 +697,8 @@ All must work in co-op.
 
 ## 15/11 ~22:00Z — Sounds: no owner approval (owner)
 - Game sounds go straight into the game; do NOT send them to the owner for listening/approval. Coordinator + workers judge by measurement and by meaning-mapping; owner reports anything she dislikes while playing.
+
+## 15/11 ~22:25Z — Rank title look: brighter; glow only on paintings (owner)
+- Rank-title colours are too pale/dull, hard to read → make every rank colour more SATURATED and vivid (still readable).
+- The GLOW + outline effect only where the name sits ON A PAINTING (stage figures over the scene picture, scroll/figure art). In framed UI (dialogs, cards, name boxes, Tuần lục text, lists — anything with a panel/paper background) use the same vivid colour as PLAIN text: no glow, no outline.
+- Her own name: black + light-gold glow on paintings (per 20:10Z); in framed UI plain black (bold OK).
