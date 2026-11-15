@@ -200,3 +200,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (01:30Z) Owner: from now on ALL images go to Cloudflare, not stored in the GitHub repo → worker review/cdn-images (R2 + Worker or Pages; IMG_BASE; cdn_sync for new art; git rm img/ without rewriting history).
 - (01:30Z) Owner: Dư đồ scroll/unroll animation too fast → slow down (~2×, ease, interruptible, off with Cảnh động) → worker review/map-anim.
 - (01:35Z) Owner (Dư đồ, còn 2 khắc mà nơi nào cũng 'hết khắc'): luật cũ đòi đường đi + 1 khắc. Quyết định điều phối: đi được nơi nào đường đi ≤ khắc còn; đến nơi hết buổi vẫn đi được (chỉ kịp xem ai ở đó, buổi sau bắt đầu ở đó); chữ 'hết khắc' chỉ khi thật còn 0, còn lại ghi 'đi N khắc'. Giao review/map-anim.
+- (01:40Z) Owner: vẽ áo khuê các cho tuyến tiểu thư → thường phục khuê các, a18, mọi gương mặt người chơi (32 phi tần + player nếu dùng), không hoa điền; thử 4 người gửi sếp duyệt trước; ảnh lên Cloudflare. Nhánh review/khuecac.
