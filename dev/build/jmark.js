@@ -1,66 +1,98 @@
 
 /* ================= jmark: kitMeMark — "this is HER" marker over the player's head (owner 11/15: "không biết ai là mình") =================
-   kitMeMark(figEl): a small painted palace emblem (img/kit/me-mark.webp, gpt-2-6, transparent) floating just above the head of HER figure.
-   One component for every place her full-body figure is drawn: the stage (#mefig, whatever slot she stands in) and dialogs / event stages
-   (kitStageFig → figure.kesf.kesme). Never on anyone else (callers pass only her figure; kitMeMark also refuses a figure not marked as hers).
-   Position: centred on the head (opaque top rows of the figure art, measured once per picture), bottom of the emblem 2 px above the hair.
-   It never covers the scene title (#sc-t) or the stage plaques/chips (#kshL, #kshR, .k3chips…): if it would, it is nudged down onto the hair.
-   Motion: slow float + soft glow pulse, only when "Cảnh động" (OPT.fxon) is on and the system does not ask for reduced motion.
-   Data: KIT_MEMARK {src, h (fraction of her figure height), min, max (px)}. ============================================================= */
-window.KIT_MEMARK=window.KIT_MEMARK||{src:"img/kit/me-mark.webp",h:.115,min:30,max:76,ar:.62};
+   kitMeMark(figEl): a small painted palace hair-ornament emblem floating above the head of HER figure. One component for every place her
+   full-body figure is drawn: the stage (#mefig, whatever slot she stands in) and dialogs / event stages (kitStageFig → figure.kesf.kesme).
+   Never on anyone else (kitMeMark refuses a figure that is not marked as hers).
+   EIGHT markers, one per rank 0→7 (owner 11/15): img/kit/me-mark-<r>.webp (gpt-2-6, transparent, no tassel), growing in grandeur:
+   0 ivory plum blossom · 1 silver orchid + green jade · 2 silver flower + aquamarine · 3 jade lotus bud (Tần) · 4 amethyst chrysanthemum + luan ·
+   5 ruby peony · 6 amber phoenix wing · 7 gold phoenix on a jade cloud (Hoàng hậu). Size factor KIT_MEMARK.sc[r].
+   ONE PLACEMENT RULE: marker bottom = TOP OF HER HEAD (first opaque row of the figure art, hair ornaments included) − gap, gap = KIT_MEMARK.gap ×
+   her drawn figure height (same fraction for every figure, size and screen). Never covers the head; when there is not enough room above the head
+   (dialogs, the scene title) the marker SHRINKS instead (down to KIT_MEMARK.tiny px).
+   Motion: only a gentle bob (no glow), only with Cảnh động on and no reduced motion. A very faint soft shadow keeps it readable on busy paintings.
+   ITEMS: markers are owned items (S.meMarks = ranks owned; S.meMark = the one she shows, null = highest owned). Every promotion gives that rank's
+   marker (shown in the rank chest of review/gift-chest — jrankset rsChest/kitReward kind "chest" — via the hook below); old saves get every rank
+   up to the current one on load. Tư trang has a "Dấu ấn" tab; tapping a marker → "Dùng" switches to it (any owned one, older ones too). ===== */
+window.KIT_MEMARK=window.KIT_MEMARK||{h:.085,gap:.012,min:26,max:72,tiny:12,sc:[.78,.84,.9,.95,1,1.06,1.12,1.3]};
+const KMM_NAMES=["Mai ngà","Lan bạc ngọc bích","Hoa bạc ngọc lam","Búp sen ngọc","Cúc tím chim loan","Mẫu đơn hồng ngọc","Cánh phượng hổ phách","Phượng vàng mây ngọc"];
+/* ---------- owned markers (save data) ---------- */
+function kmmRankNow(){try{if(!S||S.out)return null;if(typeof isSrv==="function"&&isSrv())return null;return Math.max(0,Math.min(7,S.rank|0))}catch(e){return null}}
+function kmmOwned(){try{if(!S)return[];const r=kmmRankNow();if(!Array.isArray(S.meMarks)){S.meMarks=[];if(r!=null)for(let i=0;i<=r;i++)S.meMarks.push(i)}
+ else if(r!=null&&!S.meMarks.includes(r)){for(let i=0;i<=r;i++)if(!S.meMarks.includes(i))S.meMarks.push(i)}S.meMarks.sort((a,b)=>a-b);return S.meMarks}catch(e){return[]}}
+function kmmCur(){const L=kmmOwned();if(!L.length)return null;const c=S.meMark;return c!=null&&L.includes(c)?c:L[L.length-1]}
+function kmmSrc(r){return `img/kit/me-mark-${r}.webp`}
+window.kitMeMarkUse=function(r){const L=kmmOwned();if(!L.includes(r))return false;S.meMark=r;kmmSched();return true};
+/* ---------- head measurement (once per picture) ---------- */
 const KMM_HEAD={};
-/* head centre of a figure picture: mean x of the opaque pixels in the top 10 % of the body; t = top of the body (fractions) */
+/* x = mean x of the opaque pixels in the top 10 % of the body; t = first opaque row (hair ornaments included); fractions of the picture */
 function kmmHead(src,cb){const o=KMM_HEAD[src];if(o&&o.v)return o.v;if(o){o.w.push(cb);return null}const e={v:null,w:[cb]};KMM_HEAD[src]=e;
  const im=new Image();im.decoding="async";im.crossOrigin="anonymous";
  const done=v=>{e.v=v;const L=e.w;e.w=[];L.forEach(f=>{try{f&&f()}catch(x){}})};
- im.onload=()=>{let v={t:0,x:.5};try{const h=200,w=Math.max(1,Math.round(im.naturalWidth*h/im.naturalHeight));const c=document.createElement("canvas");c.width=w;c.height=h;
+ im.onload=()=>{let v={t:0,x:.5};try{const h=400,w=Math.max(1,Math.round(im.naturalWidth*h/im.naturalHeight));const c=document.createElement("canvas");c.width=w;c.height=h;
    const g=c.getContext("2d",{willReadFrequently:true});g.drawImage(im,0,0,w,h);const d=g.getImageData(0,0,w,h).data;let t=-1,b=-1;
-   for(let y=0;y<h;y++){const q=y*w*4;for(let i=0;i<w;i++)if(d[q+i*4+3]>60){if(t<0)t=y;b=y;break}}
+   for(let y=0;y<h;y++){const q=y*w*4;let n=0;for(let i=0;i<w;i++)if(d[q+i*4+3]>60)n++;if(n>=2){if(t<0)t=y;b=y}}
    if(t>=0){const lim=t+Math.max(2,Math.round((b-t)*.1));let sx=0,n=0;for(let y=t;y<=lim;y++){const q=y*w*4;for(let i=0;i<w;i++)if(d[q+i*4+3]>60){sx+=i;n++}}v={t:t/h,x:n?sx/n/w:.5}}}catch(x){}done(v)};
  im.onerror=()=>done({t:0,x:.5});im.src=src;return null}
 function kmmMotion(){try{if(matchMedia("(prefers-reduced-motion: reduce)").matches)return false;return!(typeof OPT!=="undefined"&&OPT&&OPT.fxon===false)}catch(e){return false}}
 function kmmIsMe(fig){return!!fig&&(fig.id==="mefig"||!!fig.closest(".kesme"))}
-/* rectangles the emblem must never cover */
 function kmmAvoid(){const L=[];document.querySelectorAll("#sc-t h2,#kshL,#kshR,.k3chips,.kchip,.kmnote,#j59metag .tag").forEach(e=>{const r=e.getBoundingClientRect();if(r.width>0&&r.height>0)L.push(r)});return L}
+/* the drawn picture box inside an <img> (object-fit: contain) */
+function kmmBox(fig){const fr=fig.getBoundingClientRect();let bx=fr.left,by=fr.top,bw=fr.width,bh=fr.height;const nw=fig.naturalWidth,nh=fig.naturalHeight;
+ if(nw&&nh){const ar=nw/nh;if(bw/bh>ar){const w=bh*ar;bx+=(bw-w)/2;bw=w}else{const h=bw/ar;by+=(bh-h)/2;bh=h}}return{bx,by,bw,bh}}
 function kitMeMark(fig){try{
  if(!fig||!kmmIsMe(fig)||!fig.isConnected)return null;const host=fig.offsetParent||fig.parentElement;if(!host)return null;
- let mk=host.querySelector(":scope>.kmemark");
- if(!mk){mk=document.createElement("span");mk.className="kmemark";mk.setAttribute("aria-hidden","true");
-  mk.innerHTML=`<img src="${KIT_MEMARK.src}" alt="" draggable="false" onerror="this.parentNode&&this.parentNode.remove()">`;host.appendChild(mk)}
- const src=fig.currentSrc||fig.getAttribute("src")||"";const hd=src?kmmHead(src,()=>kitMeMark(fig)):{t:0,x:.5};if(!hd){mk.style.visibility="hidden";return mk}
- const fr=fig.getBoundingClientRect(),hr=host.getBoundingClientRect();if(fr.height<20){mk.style.visibility="hidden";return mk}
- /* object-fit: contain → the drawn picture box inside the element */
- let bx=fr.left,by=fr.top,bw=fr.width,bh=fr.height;const nw=fig.naturalWidth,nh=fig.naturalHeight;
- if(nw&&nh){const ar=nw/nh;if(bw/bh>ar){const w=bh*ar;bx+=(bw-w)/2;bw=w}else{const h=bw/ar;by+=(bh-h)/2;bh=h}}
- const H=Math.round(Math.max(KIT_MEMARK.min,Math.min(KIT_MEMARK.max,bh*KIT_MEMARK.h))),W=Math.round(H*KIT_MEMARK.ar);
- const cx=bx+bw*hd.x,headTop=by+bh*hd.t;let top=headTop-2-H;
- const hostTop=hr.top+2;if(top<hostTop)top=hostTop;
- /* never over the scene title / plaques / chips: push it down below them (onto the hair) */
- for(const r of kmmAvoid()){if(cx+W/2>r.left&&cx-W/2<r.right&&top<r.bottom&&top+H>r.top)top=Math.max(top,r.bottom+2)}
+ let mk=host.querySelector(":scope>.kmemark");const r=kmmCur();if(r==null){if(mk)mk.remove();return null}
+ const src=kmmSrc(r);
+ if(!mk){mk=document.createElement("span");mk.className="kmemark";mk.setAttribute("aria-hidden","true");mk.innerHTML=`<img alt="" draggable="false">`;host.appendChild(mk)}
+ const im=mk.firstChild;if(im.getAttribute("src")!==src){im.onerror=()=>{mk.style.display="none"};im.onload=()=>{mk.style.display="";kmmSched()};im.setAttribute("src",src)}
+ const fsrc=fig.currentSrc||fig.getAttribute("src")||"";const hd=fsrc?kmmHead(fsrc,()=>kitMeMark(fig)):{t:0,x:.5};if(!hd){mk.style.visibility="hidden";return mk}
+ const B=kmmBox(fig),hr=host.getBoundingClientRect();if(B.bh<20){mk.style.visibility="hidden";return mk}
+ const K=KIT_MEMARK,sc=K.sc[r]||1;let H=Math.round(Math.max(K.min*sc,Math.min(K.max*sc,B.bh*K.h*sc)));
+ const ar=im.naturalWidth&&im.naturalHeight?im.naturalWidth/im.naturalHeight:1;
+ const cx=B.bx+B.bw*hd.x,headTop=B.by+B.bh*hd.t,gap=Math.max(1,B.bh*K.gap),bottom=headTop-gap;
+ /* room above the head: the host's top edge, and anything the marker must not cover (scene title, plaques, chips) */
+ /* dialogs: the room above the figure is the figure column (the free space over the head inside the dialog), not just the figure box */
+ let roomTop=hr.top+1;const col=fig.id==="mefig"?null:fig.closest(".kesf");if(col){const cb=(col.parentElement||col).getBoundingClientRect();roomTop=Math.min(roomTop,cb.top+2)}for(const q of kmmAvoid()){const W=H*ar;if(cx+W/2>q.left&&cx-W/2<q.right&&q.bottom<=bottom&&q.bottom>roomTop-1)roomTop=Math.max(roomTop,q.bottom+1)}
+ if(bottom-roomTop<H)H=Math.max(K.tiny,Math.floor(bottom-roomTop));
+ const W=Math.round(H*ar),top=bottom-H;
  mk.style.cssText=`left:${(cx-hr.left-W/2+host.scrollLeft).toFixed(1)}px;top:${(top-hr.top+host.scrollTop).toFixed(1)}px;width:${W}px;height:${H}px`;
- mk.classList.toggle("kmmove",kmmMotion());mk.style.visibility="";return mk}catch(e){return null}}
+ mk.dataset.r=r;mk.dataset.gap=(headTop-(top+H)).toFixed(1);mk.classList.toggle("kmmove",kmmMotion());return mk}catch(e){console.error("kitMeMark",e);return null}}
 /* drop markers whose figure is gone (scene change, dialog closed) */
-function kmmSweep(){document.querySelectorAll(".kmemark").forEach(m=>{const h=m.parentElement;if(!h||!(h.querySelector("#mefig")||h.querySelector(".kesme img.kesimg")||h.closest(".kesme")))m.remove()})}
+function kmmSweep(){document.querySelectorAll(".kmemark").forEach(m=>{const h=m.parentElement;if(!h||!(h.querySelector(":scope>#mefig")||h.querySelector(":scope>img.kesimg")&&h.closest(".kesme")))m.remove()})}
 function kmmAll(){kmmSweep();const me=document.getElementById("mefig");if(me)kitMeMark(me);document.querySelectorAll(".kesme img.kesimg").forEach(kitMeMark)}
 let kmmT=0;function kmmSched(){clearTimeout(kmmT);requestAnimationFrame(kmmAll);kmmT=setTimeout(()=>{kmmAll();setTimeout(kmmAll,700)},250)}
-/* stage: after every renderStage (figure sizes settle a little later: re-place twice) */
 (function(){if(typeof renderStage!=="function")return;const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);try{kmmSched()}catch(e){}return r}})();
-/* dialogs / event stages: her figure carries .kesme */
 (function(){if(typeof kitStageFig!=="function")return;const f0=kitStageFig;kitStageFig=function(p,o){let h=f0.apply(this,arguments);try{const q=p&&(p.__kp||p);if(q&&typeof S!=="undefined"&&q===S&&h)h=h.replace('<figure class="kesf"','<figure class="kesf kesme"')}catch(e){}return h}})();
 (function(){if(typeof showModal!=="function")return;const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);try{kmmSched()}catch(e){}return r}})();
 addEventListener("resize",kmmSched);
 document.addEventListener("load",e=>{const t=e.target;if(t&&t.tagName==="IMG"&&(t.id==="mefig"||t.classList.contains("kesimg")))kmmSched()},true);
-try{new MutationObserver(()=>{if(document.getElementById("mefig")||document.querySelector(".kesme"))kmmSched();else kmmSweep()}).observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:["src","class","hidden"]})}catch(e){}
+try{new MutationObserver(ms=>{if(ms.every(m=>m.target.closest&&m.target.closest(".kmemark")))return;if(document.getElementById("mefig")||document.querySelector(".kesme"))kmmSched();else kmmSweep()})
+ .observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:["src","hidden"]})}catch(e){}
 (function(){const st=document.createElement("style");st.id="kmm-css";st.textContent=`
-.kmemark{position:absolute;z-index:6;pointer-events:none;display:block;filter:drop-shadow(0 1px 1.5px #3a1d1099) drop-shadow(0 0 3px #fff3c4cc)}
-.kmemark>img{position:relative;display:block;width:100%;height:100%;object-fit:contain}
-.kmemark::before{content:"";position:absolute;left:-45%;right:-45%;top:-12%;bottom:-12%;border-radius:50%;background:radial-gradient(closest-side,#fff8e6e6,#fff3d0a0 45%,#fff3d000 100%);pointer-events:none}
+.kmemark{position:absolute;z-index:6;pointer-events:none;display:block;filter:drop-shadow(0 1px 1.5px #2a1a1238)}
+.kmemark>img{display:block;width:100%;height:100%;object-fit:contain;object-position:50% 100%}
 .kesme .kesfi{position:relative}
-@media (prefers-reduced-motion:no-preference){
- .kmemark.kmmove{animation:kmmGlow 3.2s ease-in-out infinite}
- .kmemark.kmmove>img{animation:kmmFloat 3.2s ease-in-out infinite}}
-@keyframes kmmFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
-@keyframes kmmGlow{0%,100%{filter:drop-shadow(0 1px 1.5px #3a1d1099) drop-shadow(0 0 2px #fff3c4aa)}50%{filter:drop-shadow(0 1px 1.5px #3a1d1099) drop-shadow(0 0 8px #ffe39a)}}
- .kmemark.kmmove::before{animation:kmmHalo 3.2s ease-in-out infinite}
-@keyframes kmmHalo{0%,100%{opacity:.75;transform:scale(.94)}50%{opacity:1;transform:scale(1.06)}}
+@media (prefers-reduced-motion:no-preference){.kmemark.kmmove>img{animation:kmmBob 3.4s ease-in-out infinite}}
+@keyframes kmmBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
 `;document.head.appendChild(st)})();
+/* ---------- markers are items: promotion gives the new rank's marker; the rank chest shows it ---------- */
+let kmmLast=null;
+function kmmCheck(){try{if(!S||S.dead)return;const r=kmmRankNow();if(r==null)return;const had=Array.isArray(S.meMarks)?S.meMarks.slice():null;kmmOwned();
+ if(had&&!had.includes(r)){kmmLast=r;if(S.meMark!=null&&S.meMark<r)S.meMark=null}}catch(e){}}
+(function(){if(typeof render!=="function")return;const r0=render;render=function(){kmmCheck();return r0.apply(this,arguments)}})();
+/* review/gift-chest (jrankset): the rank chest is kitReward({kind:"chest",title:"Phẩm phục …"}); add that rank's marker to its items.
+   When jrankset is absent the marker is still owned (no chest of its own). */
+(function(){if(typeof kitReward!=="function")return;const k0=kitReward;kitReward=function(o){try{if(o&&o.kind==="chest"&&/^Phẩm phục/.test(o.title||"")&&Array.isArray(o.items)){
+  const r=kmmLast!=null?kmmLast:kmmRankNow();if(r!=null&&!o.items.some(x=>x&&x.mme!=null)){o.items=o.items.concat([{n:`Dấu ấn: ${KMM_NAMES[r]}`,d:"Dấu trên đầu ngươi, cho biết ngươi đứng ở đâu",img:kmmSrc(r),tier:Math.min(4,1+(r>>1)),mme:r}]);kmmLast=null}}}catch(e){}
+ return k0.apply(this,arguments)}})();
+/* ---------- Tư trang: "Dấu ấn" tab ---------- */
+try{if(typeof KINV_CATS!=="undefined"&&!KINV_CATS.some(c=>c[0]==="dau"))KINV_CATS.push(["dau","Dấu ấn",[]])}catch(e){}
+(function(){if(typeof kinvItems!=="function")return;const k0=kinvItems;kinvItems=function(){const L=k0.apply(this,arguments);try{const cur=kmmCur();
+  for(const r of kmmOwned())L.push({id:"mme"+r,cat:"dau",mme:r,src:kmmSrc(r),src512:kmmSrc(r),name:KMM_NAMES[r],grade:Math.min(4,r>>1),qty:1,on:r===cur,onText:"Đang dùng",lux:0,
+   tip:`Dấu ấn ${RANKS[r]?RANKS[r].n:""}${r===cur?" · đang dùng":""}`})}catch(e){}return L}})();
+(function(){if(typeof kinvOpen!=="function")return;const o0=kinvOpen;kinvOpen=function(x){if(!x||x.mme==null)return o0.apply(this,arguments);try{const r=x.mme,on=r===kmmCur();
+  kitModal({kind:"info",title:KMM_NAMES[r],sub:`Dấu ấn · ${RANKS[r]?RANKS[r].n:""}`,itemPic:kitItem({src:x.src,name:"",grade:x.grade,size:"lg"}).replace('<span class="kitn"></span>',''),
+   html:`${kitFacts([`Được ban khi lên ${RANKS[r]?RANKS[r].n:""}.`,on?"Ngươi đang dùng dấu này.":"Dấu hiện trên đầu ngươi ở mọi cảnh, để biết ngươi đứng ở đâu."])}`+
+    (on?"":`<div class="rbtn kinvacts">${pbtn(`data-kmmuse="${r}"`,"Dùng","thành: dấu này hiện trên đầu ngươi","")}</div>`),btn:"Lui"})}catch(e){console.error("kmm open",e)}}})();
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-kmmuse]");if(!b)return;e.stopPropagation();e.preventDefault();
+ const r=+b.dataset.kmmuse;try{closeModal()}catch(x){}if(window.kitMeMarkUse(r)){try{render()}catch(x){}}},true);

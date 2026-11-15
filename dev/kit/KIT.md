@@ -1597,10 +1597,17 @@ Tested 755x1000@2, 1180x820@2, 1366x1024@2, 686x880@2.2, 412x1058@2, 390x844@3, 
 - Art (owner 11/15 v2): same chibi lady, soft watercolour/gongbi, thin gold rim, expressions exaggerated like emoji so each mood reads at 38 px.
 - Data only through `window.kitEmotion(p)` → `{k,name,v,why,known}`; alt "Tâm trạng: <tên> (<cause>)". Nobody draws another mood icon; no code-reshaped facial expressions (owner 22:50Z): the seal + ring are the only display of feelings.
 
-## 37. kitMeMark · dấu "là ngươi" (owner 11/15: she could not tell which figure is HER) — `dev/build/jmark.js` (before j84)
-- `kitMeMark(figEl)`: a small painted palace emblem `img/kit/me-mark.webp` (gpt-2-6, transparent; owner picks 1 of 3, sheet
-  dev/shots/me-mark/options.jpg) floating just above HER head, with a soft warm light disc behind it so it reads on any painting.
-- Where: her stage figure `#mefig` (any slot) and every dialog / event stage figure of her (`kitStageFig` adds `.kesme`). Never on anyone else.
-- Size: 11.5 % of her drawn figure height, 30–76 px; centred on the head (top rows of the opaque art, measured once per picture).
-- Never covers the scene title `#sc-t`, the stage plaques `#kshL/#kshR`, chips or notes: it is nudged down onto the hair instead.
-- Motion: slow 4 px float + glow pulse, only with Cảnh động on and no reduced motion. Data: `KIT_MEMARK {src,h,min,max,ar}`.
+## 37. kitMeMark · dấu "là ngươi" (owner 11/15) — `dev/build/jmark.js` (before j84)
+- EIGHT markers, one per rank: `img/kit/me-mark-<r>.webp` (gpt-2-6, transparent, NO tassel), growing in grandeur: 0 ivory plum · 1 silver orchid +
+  green jade · 2 silver flower + aquamarine · 3 jade lotus bud · 4 amethyst chrysanthemum + luan · 5 ruby peony · 6 amber phoenix wing ·
+  7 gold phoenix on a jade cloud (Hoàng hậu). Size factor `KIT_MEMARK.sc[r]` (0.78 → 1.3). Sheet dev/shots/me-mark/ranks8.jpg.
+- Where: her stage figure `#mefig` (any slot) and her figure in dialogs / event stages (`kitStageFig` adds `.kesme`). Never on anyone else.
+- ONE placement rule: marker bottom = top of her head (first opaque row of the figure art, hair ornaments included) − `KIT_MEMARK.gap` (1.2 %)
+  × her drawn figure height. Measured: Fold stage 7.7 px on a 644 px figure, iPad 6.5 px, iPad dialog 6.3 px on 524 px, 390 dialog 3.8 px on
+  320 px (all = rule). Height 8.5 % of the figure × sc[r], 26–72 px; when the room above the head is short (dialog, scene title, plaques,
+  chips) it SHRINKS (down to 12 px), never covers the head or the title.
+- Motion: a gentle 3 px bob only (Cảnh động on, no reduced motion); a very faint soft shadow; no glow.
+- Items: `S.meMarks` (owned ranks), `S.meMark` (chosen; null = highest owned). Every promotion adds that rank's marker; old saves get ranks
+  0..current on load. The rank chest of review/gift-chest (`kitReward({kind:"chest",title:"Phẩm phục …"})`, jrankset `rsChest`) gets the
+  marker as one more item through a `kitReward` wrapper in jmark (no edit in jrankset). Tư trang: tab "Dấu ấn"; tap a marker → "Dùng"
+  (`kitMeMarkUse(r)`), any owned one, older ones too. Servant road: none until she becomes a consort.
