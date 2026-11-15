@@ -264,3 +264,5 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (07:30Z) Owner hỏi vì sao đĩa thợ hay đầy: kho có ~5 GB lịch sử ảnh + mỗi thợ chép ra 1,4 GB (img/ trong cây) × ~13 thợ. Khi cdn-images lên main, img/ rời khỏi cây → mỗi thợ ~0,2 GB. Làm nhẹ lịch sử (tạo kho mới/filter) cần sếp đồng ý.
 - (07:30Z) Owner xem nền 4 buổi, chê Kính sự phòng tối quá rực/AI (đã gửi 11 tờ nền 4 mùa × 4 buổi; chờ sếp chỉ nơi cần làm lại).
 - (07:30Z) Owner: nhãn sân khấu dòng 2 phải là TÊN người, không phải chức ('Thái giám / Tổng quản' sai) → mọi NPC có tên riêng cổ trang, chức ở dòng 1 (review/stage-slots).
+- (07:35Z) Owner: CHO PHÉP THƯỜNG TRỰC vẽ tranh khi thấy thiếu, không cần hỏi — phải đúng phong cách game (gpt-2-6, STYLE_ANCHOR).
+- (07:35Z) Owner: thú cưng vẽ luôn; 4 con quá ít → 18–24 con, có phẩm bậc + Xa xỉ N (luật như đồ mang), mỗi bậc công dụng khác (báo trước bị hại, canh cung, nghe lén, Sủng, Danh…), thần thú hiếm ĐỠ MỘT MẠNG cho chủ; có mặt trái thật; NPC cùng luật. review/pets.
