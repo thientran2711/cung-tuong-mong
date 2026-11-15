@@ -56,3 +56,4 @@ Nhắc theo dõi: send_later 30 phút, tự đặt lại mỗi lượt (lịch l
 - 02:10Z review/map-anim @af8f56f7e SẴN SÀNG KIỂM (Dư đồ trải 1150 ms; luật đi ≤ khắc còn) → hàng duyệt #3.
 - 02:15Z review/page-curl @8aca1aae SẴN SÀNG KIỂM (lật nguyên tờ, 1300 ms, vuốt đổi tab) → hàng duyệt #4. Fold một trang: mặt sau tờ chỉ thấy thoáng (gáy ở mép trái) — chờ sếp có chê không.
 - 02:20Z review/khuecac @197a98b4d: thử 4 mặt (c05 c08 c29 m05) gửi sếp duyệt; ảnh trên Cloudflare ctm-img.victoria-tntt.workers.dev; còn 80 mặt chờ duyệt; jkc chưa đọc FIGURES-kc.json. ~650 credit.
+- 02:05Z khuecac: thử áo nhà nghèo 4 mặt (c3536cce9) gửi sếp duyệt; lô khuê các 79 mặt đang vẽ. Thêm thợ: review/ts-a, review/ts-b (15 ý), review/m05-huadian, review/mole-audit.
