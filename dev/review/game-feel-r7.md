@@ -32,3 +32,8 @@ between §53 and §55), KIT_REQUESTS.md (both rows), built index.html/sw.js/asse
 
 ## Result: PASS (all of item-lose, item-pics, reward-box, item-gain, reveal-shots ×5 sizes, kit-page ×5, view-scale ×6, old save) after the
 second merge onto origin/main b8a58e873.
+
+## Third merge: origin/main 618fa6db9 (econ-stipend jstip/jecon, kit-table)
+assemble = main list + jkrev, jfx after jkitpage; site rebuilt. jstip's goodsGive / monthly stipend use kitReward and push their entries
+into KMSNAP, so jfx kmDiff does not reveal them twice: probe → Thái hậu goods = one tray, story goods = one Hộp gấm, stipend = one chest
+"Bổng lộc tháng ba · Nội vụ phủ phát", all with pictures + real grades, 0 errors. Re-run on this merge: item-lose, reward-box, item-gain PASS.
