@@ -41,12 +41,13 @@ function tyLost(p,why){if(!p)return;p.tyNvp=wk()+BAL.ty.reissueWk;p.tyWhy=why||p
 /* jearn removed the "Tháo" button for the robe; the item panel gets "Cởi y phục" back */
 (function(){if(typeof wdActBtns!=="function")return;const a0=wdActBtns;wdActBtns=function(e,g){const B=a0.apply(this,arguments);try{
   if(g&&g.wdSlot==="y")B.push(pbtn(`data-wd="off" data-sl="y"`,"Cởi y phục",`thành: cất vào rương, mặc trung y · kèm: ra khỏi tẩm cung hay gặp người khi mặc trung y: Danh -${BAL.ty.out} trở lên`,S.place!=="home"?"chỉ cởi trong tẩm cung":""))}catch(x){}return B}})();
-(function(){if(typeof wdWear!=="function")return;const w0=wdWear;wdWear=function(p){const was=tyOn(p);const r=w0.apply(this,arguments);try{if(was&&!tyOn(p)){p.tyNvp=null;if(p===S)log("Ngươi mặc lại y phục, thôi mặc trung y.")}}catch(e){}return r};window.wdWear=wdWear})();
+(function(){if(typeof wdWearEntry!=="function")return;const w0=wdWearEntry;wdWearEntry=function(p){const was=tyOn(p);const r=w0.apply(this,arguments);try{if(was&&!tyOn(p)){p.tyNvp=null;if(p===S)log("Ngươi mặc lại y phục, thôi mặc trung y.")}}catch(e){}return r};window.wdWearEntry=wdWearEntry})();
 
 /* ---------- the price of going out / meeting people in trung y (BAL.ty) ---------- */
 function tyRoyalAt(k,ppl){try{if((ppl||[]).some(x=>x&&(x.kind==="emp"||x.kind==="th")))return true;const W=S.where||{};return W.emp===k||(k==="tn"&&!S.thDead)}catch(e){return false}}
 function tyCost(k,ppl){const T=BAL.ty;const L=[];let danh=0,duc=0;if(!k)return{danh,duc,L};
- if(k==="home"){const vis=(ppl||[]).filter(x=>x&&(x.kind==="emp"||x.kind==="th"||(x.ref&&(rivals||[]).includes(x.ref))));if(vis.length){danh+=T.meet;L.push(`có người đến thăm: Danh -${T.meet}`)}
+ if(k==="home"){let mates=[];try{mates=typeof residents==="function"?residents("home"):[]}catch(e){}
+  const vis=(ppl||[]).filter(x=>x&&(x.kind==="emp"||x.kind==="th"||(x.ref&&(rivals||[]).includes(x.ref)&&!mates.includes(x.ref))));if(vis.length){danh+=T.meet;L.push(`có người đến thăm: Danh -${T.meet}`)}
   if(tyRoyalAt(k,ppl)){danh+=T.royal;duc+=T.royalDuc;L.push(`gặp Hoàng thượng / Thái hậu: tai tiếng, Danh -${T.royal}, Đức -${T.royalDuc}`)}return{danh,duc,L}}
  danh+=T.out;L.push(`ra khỏi tẩm cung: Danh -${T.out}`);
  const n=ppl?ppl.length:(typeof countAt==="function"?countAt(k):0);if(n>=T.crowdN){danh+=T.crowd;L.push(`nơi đông người: Danh -${T.crowd}`)}
@@ -60,8 +61,8 @@ function tyCharge(k){try{if(!tyOn(S)||!S.visit)return;const key=`${wk()}.${S.buo
 (function(){if(typeof goTo!=="function")return;const g0=goTo;goTo=function(k){
   if(window.__tyCardK===k){window.__tyCardK=null;window.__tyGo=1;try{const r=g0.apply(this,arguments);try{if(S&&S.place===k)tyCharge(k)}catch(e){}return r}finally{window.__tyGo=0}}
   if(S&&!S.dead&&k&&k!=="home"&&k!==S.place&&tyOn(S)&&!window.__tyGo&&!Q.length&&!S.out){const c=tyCost(k,null);
-   Q.push({t:"Ra ngoài khi mặc trung y?",kind:"notice",h:`<p class="past">${when()}</p><p>Ngươi đang mặc trung y (${TY_COL[tyTier(S)]}), chưa khoác y phục.</p><p>Mặc trung y ra khỏi tẩm cung là thiếu lễ, người trong cung sẽ chê cười.</p>`,
-    opts:[{n:"Vẫn đi",fx:{},x:`mất: ${c.L.join(" · ")}`,go:()=>{setTimeout(()=>{window.__tyGo=1;try{goTo(k)}finally{window.__tyGo=0}},0)}},
+   Q.push({t:"Ra ngoài khi mặc trung y?",kind:"notice",h:`<p class="past">${when()}</p><p>Ngươi đang mặc trung y (${TY_COL[tyTier(S)]}), chưa khoác y phục.</p><p>Mặc trung y ra khỏi tẩm cung là thiếu lễ, người trong cung sẽ chê cười: ${c.L.join("; ")}.</p>`,
+    opts:[{n:"Vẫn đi",fx:{},x:`mất: Danh -${c.danh}${c.duc?` · mất: Đức -${c.duc}`:""}`,go:()=>{setTimeout(()=>{window.__tyGo=1;try{goTo(k)}finally{window.__tyGo=0}},0)}},
           {n:"Ở lại",fx:{},x:"thay y phục trong Tư trang (Y phục → Mặc) rồi hãy đi",go:()=>{}}]});render();return}
   const r=g0.apply(this,arguments);try{if(S&&S.place===k)tyCharge(k)}catch(e){}return r};window.goTo=goTo})();
 /* a visitor at home while she is in trung y */
@@ -84,8 +85,8 @@ function tyRob(k){const T=BAL.ty;const w=wdOf(S);const e=w.y;if(!e||!wdItem(e))r
  w.y=null;S.tyOmen=null;tyLost(S,"cuop");S.tyRobbed=(S.tyRobbed||0)+1;
  const nm=typeof accName==="function"?accName(k):k;apply({danh:-(T.robDanh+T.robWalk)});
  log(`Trên đường ở ${nm}, kẻ lạ giật mất ${it.n}. Ngươi phải mặc trung y về cung (Danh -${T.robDanh+T.robWalk}).`);
- Q.push({t:"Bị giật y phục giữa đường",kind:"notice",h:`<p class="past">${when()}</p><p>${(S.buoi||0)>=(typeof B4L==="number"?B4L:3)?"Trời tối":"Nơi vắng người"}, ở ${nm} có kẻ bịt mặt xông ra giật mất ${it.n} của ngươi rồi chạy biến.</p><p>Ngươi chỉ còn trung y, đành cúi đầu đi về tẩm cung.</p>${plot?`<p>Cung nhân thì thầm: kẻ ấy hình như là người của ${plot.name}.</p>`:""}`,
-  opts:[{n:"Về tẩm cung",fx:{danh:0},x:`mất: ${it.n} · Danh -${T.robDanh+T.robWalk} · Nội vụ phủ cấp lại áo sau ${T.reissueWk} tuần, hoặc mặc áo khác trong Tư trang`,go:()=>{}}]});
+ Q.push({t:"Bị giật y phục giữa đường",kind:"notice",h:`<p class="past">${when()}</p><p>${(S.buoi||0)>=(typeof B4L==="number"?B4L:3)?"Trời tối":"Nơi vắng người"}, ở ${nm} có kẻ bịt mặt xông ra giật mất ${it.n} của ngươi rồi chạy biến.</p><p>Ngươi mất ${it.n}, chỉ còn trung y, đành cúi đầu đi về tẩm cung.</p><p>Nội vụ phủ sẽ cấp lại áo sau ${T.reissueWk} tuần; muốn sớm hơn thì mặc áo khác trong Tư trang.</p>${plot?`<p>Cung nhân thì thầm: kẻ ấy hình như là người của ${plot.name}.</p>`:""}`,
+  opts:[{n:"Về tẩm cung",fx:{},x:`mất: Danh -${T.robDanh+T.robWalk}`,go:()=>{}}]});
  try{for(const v of liveRivals(true).slice(0,2))newsAdd(v,"ty",`Nghe nói ${S.name} bị giật y phục giữa đường, phải mặc trung y về cung`,true)}catch(x){}
  window.__tyGo=1;try{const a=window.__accSilent;window.__accSilent=1;goTo("home");window.__accSilent=a}finally{window.__tyGo=0}return true}
 (function(){if(typeof goTo!=="function")return;const g0=goTo;goTo=function(k){const p0=S&&S.place;const r=g0.apply(this,arguments);
@@ -96,12 +97,12 @@ function tyWeek(){const T=BAL.ty;let ev="";try{
    Q.push({t:"Điềm báo",kind:"notice",h:`<p class="past">${when()}</p><p>Cung nhân báo: mấy đêm nay có kẻ lạ lảng vảng quanh lối đi vắng, hỏi han giờ giấc ngươi ra vào.</p><p>Có người thấy kẻ ấy từng ra vào chỗ ${v.name}.</p>`,
     opts:[{n:"Đã rõ",fx:{},x:`${T.omenWk} tuần tới: đi đêm, qua nơi vắng dễ bị giật y phục · ở nơi đông người, đi ban ngày thì không sao`,go:()=>{}}]})}}
  /* Nội vụ phủ issues a plain robe of her rank (a chest) */
- if(S&&!S.dead&&S.tyNvp&&wk()>=S.tyNvp){S.tyNvp=null;const w=wdOf(S);if(!w.y){const k=typeof earnPlainY==="function"?earnPlainY(S):null;if(k&&WD_ITEMS[k]){S.inv=S.inv||[];S.inv.push({k,src:"nvp",nvp:1,giver:"Nội vụ phủ",d:typeof wdWhen==="function"?wdWhen():""});try{earnK(S,k)}catch(e){}
+ if(S&&!S.dead&&S.tyNvp!=null&&wk()>=S.tyNvp){S.tyNvp=null;const w=wdOf(S);if(!w.y){const k=typeof earnPlainY==="function"?earnPlainY(S):null;if(k&&WD_ITEMS[k]){S.inv=S.inv||[];S.inv.push({k,src:"nvp",nvp:1,giver:"Nội vụ phủ",d:typeof wdWhen==="function"?wdWhen():""});try{earnK(S,k)}catch(e){}
    log(`Nội vụ phủ đưa tới ${WD_ITEMS[k].n}, cất trong Tư trang.`);try{kitReward({kind:"gift",title:"Nội vụ phủ cấp y phục",from:"Nội vụ phủ",items:[{n:WD_ITEMS[k].n,d:"Y phục · mặc trong Tư trang",img:WD_ITEMS[k].icon,tier:WD_ITEMS[k].g|0}]})}catch(e){}}}}
  /* NPCs: the same rule as data */
  for(const v of liveRivals(true)){if(v.out)continue;try{const w=wdOf(v);
   if(!w.y&&typeof earnFromChest==="function"){const c=earnFromChest(v,"y");if(c){w.y=c;v.tyNvp=null}}
-  if(!w.y&&v.tyNvp&&wk()>=v.tyNvp){v.tyNvp=null;const k=typeof earnPlainY==="function"?earnPlainY(v):null;if(k)w.y={k,src:"nvp",nvp:1,giver:"Nội vụ phủ"}}
+  if(!w.y&&v.tyNvp!=null&&wk()>=v.tyNvp){v.tyNvp=null;const k=typeof earnPlainY==="function"?earnPlainY(v):null;if(k)w.y={k,src:"nvp",nvp:1,giver:"Nội vụ phủ"}}
   if(!w.y){if(v.tyNvp==null)tyLost(v,"");if(whereOf(v)!==palaceOf(v)){if(typeof v.danh==="number")v.danh=Math.max(0,v.danh-T.npcOut);try{newsAdd(v,"ty",`${v.name} mặc trung y mà ra khỏi cung, bị chê thiếu lễ`)}catch(e){}}}
   else if(roll(T.npcRob)&&roll(35)){const e=w.y;if(e&&wdItem(e)&&!wdItem(e).nt){w.y=null;tyLost(v,"cuop");if(typeof v.danh==="number")v.danh=Math.max(0,v.danh-T.robDanh);try{newsAdd(v,"ty",`${v.name} đi đêm qua lối vắng, bị kẻ lạ giật mất y phục, phải mặc trung y về cung`)}catch(x){}}}
  }catch(e){}}}catch(e){console.error(e)}return ev}

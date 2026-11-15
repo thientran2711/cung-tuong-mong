@@ -52,8 +52,14 @@ def rv(out, gens):
         x, y = (i % cols) * tw, (i // cols) * (th + 30); S.paste(im, (x, y + 30)); d.text((x + 6, y + 3), lab, font=F, fill=(80, 30, 20))
     S.save(out, quality=82); print(out)
 
-def recs():
-    p = W + "/recs.json"; return json.load(open(p)) if os.path.exists(p) else {}
+PART = os.environ.get("TY_PART", "")
+RECF = W + "/recs" + (("-" + PART.replace("/", "of")) if PART else "") + ".json"
+def recs(all_=False):
+    if all_:
+        R = {}
+        for f in sorted(glob.glob(W + "/recs*.json")): R.update(json.load(open(f)))
+        return R
+    return json.load(open(RECF)) if os.path.exists(RECF) else {}
 
 def finish(im, name):
     im = sp.clean(im)
@@ -80,7 +86,9 @@ _raw = None
 
 def proc(only=None):
     R = recs(); done = set(open(W + "/done.txt").read().split()) if os.path.exists(W + "/done.txt") else set()
-    for line in open(HERE + "/bg.txt"):
+    pi, pn = (int(x) for x in PART.split("/")) if PART else (0, 1)
+    for li, line in enumerate(open(HERE + "/bg.txt")):
+        if li % pn != pi: continue
         p = line.split()
         if len(p) < 5: continue
         role, ident, g, gen, bg = p[:5]; key = f"{role}-{ident}-ty{g}"
@@ -98,13 +106,13 @@ def proc(only=None):
                                      "file": f"img/{name}.webp", "por": f"img/por-{name[4:]}.webp",
                                      "magnificUrl": "https://www.magnific.com/app/creation/" + gen, "bg": bg if bg != "-" else "local-isnet", "sheet": f"TY-{ident}-{g}"}
         print(key, "ok", [x1 - x0 for x0, x1 in cols])
-        json.dump(R, open(W + "/recs.json", "w"), indent=0, ensure_ascii=False)
+        json.dump(R, open(RECF, "w"), indent=0, ensure_ascii=False)
         open(W + "/done.txt", "a").write(key + ":" + (bg if bg != '-' else gen) + "\n")
         try: os.remove(_raw)
         except Exception: pass
 
 def sheet(out, keys):
-    F = ImageFont.truetype(FONT, 18); R = recs()
+    F = ImageFont.truetype(FONT, 18); R = recs(True)
     ids = sorted({(r["role"], r["identity"]) for r in R.values()}, key=lambda x: (x[0] != "consort", x[1]))
     if keys: ids = [x for x in ids if f"{x[0]}-{x[1]}" in keys]
     fw, fh = 70, 225; rowW = 16 * fw + 160
@@ -122,7 +130,7 @@ def sheet(out, keys):
     S.save(out, quality=80); print(out, S.size)
 
 def manifest():
-    R = recs(); L = sorted(R.values(), key=lambda r: (r["role"] != "consort", r["identity"], r["ty"], r["ageBand"]))
+    R = recs(True); L = sorted(R.values(), key=lambda r: (r["role"] != "consort", r["identity"], r["ty"], r["ageBand"]))
     json.dump(L, open(OUT + "/FIGURES-ty.json", "w"), ensure_ascii=False, indent=0); print(len(L))
 
 def refs():
