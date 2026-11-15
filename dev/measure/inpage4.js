@@ -72,6 +72,8 @@ function talkScore(t,N){const{p,a}=t;
   if(p.kind==="emp")v+=1;
   return v/Math.sqrt(a.act?2:1)}
 function sensibleStep(){
+  /* balance-pass: sit the promotion exam when its window opens, played at her own level (as inpage6; jexam window.__exAuto) */
+  window.__exAuto=1;{const ei=deck.findIndex(a=>a&&a.exam&&cardOK(a));if(ei>=0){note("exam");act(ei);return}}
   const N=needs();
   // accuse
   if(can(2)){const accs=[];rivals.forEach((v,i)=>{if(v.alive&&!v.out&&rvBtns(i).includes("accuse")){const o=ACT.accuse.o?ACT.accuse.o(S,v):70;accs.push({v,i,o})}});
