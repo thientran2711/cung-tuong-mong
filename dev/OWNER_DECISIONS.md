@@ -186,3 +186,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (08:30Z) Coordinator decision for owner's '3–4 people on iPad': allow ~35% overlap on iPad (25% Fold), size by core body width so sleeves don't force the strip; same scale.
 - (08:40Z) Owner: tư tình child → classic 'trích huyết nghiệm thân' blood test (can be tampered by either side; same rules for NPCs). Sent to routes worker.
 - (08:50Z) Owner: in dialogs only the option list scrolls; title/picture/figures/text stay fixed (kit rule for all dialogs).
+- (08:55Z) Owner: blood test gets animation/minigame; scheme acts get minigames (worker review/scheme-games; always option to skip and use plain odds; NPCs plain odds).
