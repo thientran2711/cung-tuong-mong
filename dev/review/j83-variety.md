@@ -1,6 +1,6 @@
 # Review r6: review/j83-variety (self-made works option A + paid tiers)
 
-Reviewed: review/j83-variety a45a12dc1 (rebased on main 70c792d4). Merged onto origin/main 94ea008a2, then 5e491704d (gift-ui), as
+Reviewed: review/j83-variety a45a12dc1 (rebased on main 70c792d4). Merged onto origin/main 94ea008a2, then 5e491704d (gift-ui), then aa9689da5 (promo-exam, kit-fig2 batch 1), as
 **review/j83-variety-r6**. Site rebuilt (CDN image base).
 
 ## Merge decisions
@@ -40,5 +40,8 @@ Reviewed: review/j83-variety a45a12dc1 (rebased on main 70c792d4). Merged onto o
   vs "Bộ diêu kim phượng 150 (59)" looks inverted; the real wear stats (j92) rise with price (5/2 → 6/3 → 8/4). A cleaner metric would read
   the j92 stats for every hairpin / robe.
 - No rotate prompt at 390x844 on main either (game draws portrait); not this branch.
+
+Re-run on the final merge (main aa9689da5): wk-kind-game 11 kinds at 755x1000@2 all OK, kit-page 12 samples ok at 755x1000 / 844x390,
+paid-tiers 0 FAIL, pick / material / old save at 1180x820 ok, 0 page errors.
 
 Result: **PASS** (see the head commit of review/j83-variety-r6).
