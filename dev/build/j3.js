@@ -34,7 +34,7 @@ function showModal(){const M=$("modal");if(!Q.length){M.hidden=true;return}const
   kitFix(M);M.hidden=false;const f=M.querySelector(".opt:not(:disabled),#mclose");if(f)f.focus({preventScroll:true})}
 function closeModal(){const m=Q.shift();if(m&&m.onClose)m.onClose();if(!S.dead||Q.length)showModal();render()}
 function chooseM(i){const m=Q[0];if(!m||!m.opts)return;const c=m.opts[i];if(c.fx&&c.fx.bac&&S.bac+c.fx.bac<0)return;Q.shift();
-  apply(c.fx||{});log(`${c.n}. ${fmt(c.fx)}${c.x&&!c.go?" · "+c.x:""}`);if(c.go)c.go();showModal();render()}
+  {const b0=snapReal();apply(c.fx||{});const d=logReal(b0);log(`${c.n}.${d?" "+d+".":""}`)}if(c.go)c.go();showModal();render()}
 
 /* nights */
 /* rivals */
