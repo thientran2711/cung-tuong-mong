@@ -40,6 +40,12 @@ NODE_PATH=$(npm root -g) node dev/measure/evbot.js http://127.0.0.1:8861/dev/tmp
   is far too small for a verdict. Re-run with free memory: `EVPAR=3 node dev/measure/evbot.js <url> 80 hint,rand,same 1 4` then
   `python3 dev/review/evbal_report.py run=<out.json>`.
 
+## Hints that tell options apart (after opt-render reached main, 94ea008)
+- jevb §5 `evbDedup(m)` before each dialog: colliding hints → lowest clearer level, then the option's chance word, gain size, odds number
+  (`od` option data, added to night1 talk (j8) and j71 contest options). Data only, kitHint untouched. Test dev/test/hint-dedup.js →
+  dev/review/hint-dedup.md: dialogs with duplicates 88 → 36, options 189 → 78, all left are true ties (missLeft 0).
+- Bot table: dev/review/event-balance.md (final build: hint 4.33 / rand 3.75 / same 3.67 avg max rank; same dies early; 3–6 lives per bot,
+  direction only — run 12 seeds on a quiet machine for a firm verdict).
+
 ## Open / next
 - Banners: 305 of 365 chapter beats have no own picture → list in dev/review/story-deadlines.md for act-pics2.
-- Hints are often vague/wrong ("có lợi; nhưng có hại", "Thái y" read as "thân thể bị hại") — opt-render worker's part.
