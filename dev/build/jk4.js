@@ -335,15 +335,15 @@ window.KIT_FOCUS=Object.assign({"ev-trieu-chinh-2.webp":"50% 15%","ev-thang-tran
 function kitDpFit(){try{const o=kitDpOn();if(!o||!o.d.classList.contains("kdper"))return;const {d,mb,col}=o;
  const narrow=innerWidth<600;d.classList.toggle("kdnarrow",narrow);
  const F=[...col.querySelectorAll(":scope > .kesf")].filter(f=>!f.classList.contains("kesno"));if(!F.length)return;let wait=false;
- const L=F.map(f=>{const im=f.querySelector(".kesimg"),src=im&&im.getAttribute("src");const b=src?kitFigBody(src,()=>requestAnimationFrame(kitDpFit)):null;
-  if(!b){wait=true}const kfr=parseFloat(im&&im.style.getPropertyValue("--kfr"))||1;return{f,im,b,fac:kfr*(KIT_FIG.man||1),cap:f.querySelector(".kpsn")||col.querySelector(`:scope > .kpsn[data-kdp="${F.indexOf(f)}"]`)}});
- if(wait)return;
+ const L=F.map(f=>{const im=f.querySelector(".kesimg"),src=im&&im.getAttribute("src");let b=src?kitFigBody(src,()=>requestAnimationFrame(kitDpFit)):null;if(im&&!im.complete&&!im.dataset.kdpl){im.dataset.kdpl=1;im.addEventListener("load",()=>requestAnimationFrame(kitDpFit),{once:true})}
+  if(!b){wait=true}else if(im&&im.naturalWidth&&im.naturalHeight&&Math.abs(b.ar-im.naturalWidth/im.naturalHeight)>.005)b=Object.assign({},b,{ar:im.naturalWidth/im.naturalHeight});/* the true aspect always (never squash a person) */const kfr=parseFloat(im&&im.style.getPropertyValue("--kfr"))||1;return{f,im,b,fac:kfr*(KIT_FIG.man||1),cap:f.querySelector(".kpsn")||col.querySelector(`:scope > .kpsn[data-kdp="${F.indexOf(f)}"]`)}});
  /* KIT 32.7c (owner 11/15 "Khung to quá"): the dialog is as tall as its CONTENT (title + text + options), never stretched to the screen:
     height = clamp(min(100dvh − 32, 500 px), natural, min(100dvh − 32, 720 px)); the people are then scaled to that column. A dialog whose
     content is taller (many options, the shop grid) stays at the cap, so the shop and a full person dialog keep the same box. */
  if(!narrow){const cap=Math.min(innerHeight-32,720),lo=Math.min(innerHeight-32,KIT_DP_MINH);const h0=d.style.height;d.style.height="auto";
   const nat=kitDpNat(d,mb,col);const h=Math.round(Math.max(lo,Math.min(cap,nat)));d.style.height=h+"px";
   if(h0!==h+"px"){d.__kdpN=(d.__kdpN||0)+1;if(d.__kdpN<4)requestAnimationFrame(kitDpFit)}}
+ if(wait)return;/* (stage-fig-size) the dialog takes its content height even while a figure is still loading */
  /* KIT 48 (owner 11/15): the name + rank (kitNameRank chip) sit ABOVE the people, at the top of the column; KIT 32.7b (owner 11/15): every
     person FILLS the column from just under the chips down to the column bottom — the painted top (hair, crown, hat) under the chips, the feet
     on the column floor; man and woman alike (aspect kept), children by age (KIT_FIG.fac < 1). */
@@ -440,9 +440,9 @@ function kitDpNat(d,mb,col){try{const cs=e=>getComputedStyle(e);const items=[...
    if(!id)return r;const src=evArtOf(id,salt);return src?{src,lab:typeof evArtTitle==="function"?evArtTitle(id):""}:r}catch(e){return r}};window.kitEvArt=kitEvArt;
  const k0=kitEventStage;kitEventStage=function(){window.__kesArt=1;try{return k0.apply(this,arguments)}finally{window.__kesArt=0}};window.kitEventStage=kitEventStage})();
 /* review/stage-fig-size (kit-sample race: a 1180 run drew no figure): kitFigOf needs the figure list (FIGURES.json from the CDN, j28 FIGS);
-   a person dialog opened before it arrives fell back to the small portrait and stayed so. Until the list is in, every 300 ms (≤ 60 s): when
-   it lands and the open dialog names a person but has no stage column, the dialog is drawn again (same Q[0], showModal). */
-(function(){let n=0;const t=setInterval(()=>{try{if(++n>200){clearInterval(t);return}if(typeof FIGS==="undefined"||!FIGS.length)return;clearInterval(t);
+   a person dialog opened before it arrives fell back to the small portrait and stayed so. For 60 s, every 300 ms: whenever the list
+   changes (first list, then the merged one) and the open dialog names a person but has no stage column, the dialog is drawn again (same Q[0], showModal). */
+(function(){let n=0,last=null;const t=setInterval(()=>{try{if(++n>200){clearInterval(t);return}if(typeof FIGS==="undefined"||!FIGS.length||FIGS===last)return;last=FIGS;/* j28 sets a first list (FIGURES.json), j39 loadFigs replaces it with the merged one (Thái hậu, officials …): retry on each */
  const M=document.getElementById("modal");const m=typeof Q!=="undefined"&&Q[0];if(!M||M.hidden||!m)return;const d=M.querySelector(".dlg.kpanel");
  if(!d||/^(info|rule|person)$/.test(d.dataset.kind||"")||M.querySelector("#mb .kpsubj.kes")||!kitStagePeople(m).length)return;showModal()}catch(e){}},300)})();
 /* kitEsFit (33.6) sizes figures in the old side column; a 32.7 column is sized by kitDpFit instead */
