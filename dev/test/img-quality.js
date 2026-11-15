@@ -1,7 +1,7 @@
 /* img-quality.js — audit of every person picture on screen (portraits, figures, silhouettes).
    usage: node dev/test/img-quality.js <baseURL e.g. http://127.0.0.1:8765/index.html> <outdir> [sizes "755x1000@2,1180x820@2"] [md path]
    (on a slow machine run one size per process into the same <outdir>: the report merges the sizes already there)
-   env: IQ_ONLY=<regex on screen names> to run a subset; IQ_SHOTS=1 for screenshots (off by default: disk); IQ_CARDS=8 cards per strip tab, IQ_PLACES=6 places.
+   env: IQ_ONLY=<regex on screen names> to run a subset, IQ_SKIP=<regex> to leave screens out (slow line: IQ_SKIP='lạ · Danh mục'); IQ_SHOTS=1 for screenshots (off by default: disk); IQ_CARDS=8 cards per strip tab, IQ_PLACES=6 places.
    Walks the screens of a NEW life (consort road; strangers everywhere) and of the same life once everyone is known:
    top bar + Hoàng thượng / Thái hậu / Hoàng hậu chips, the stage at every place with people (+ the card of each person tapped on
    the stage), every tab (Hậu cung strip + card of EVERY consort, Cung nhân strip + card of EVERY servant, Giao tình, Hoàng tự,
@@ -17,11 +17,11 @@
    Writes <outdir>/img-quality.json, screenshots <outdir>/<w>-<screen>.jpg and the table <md path> (default dev/test/IMG_QUALITY.md).
    Exit 1 when anything is flagged or a page error / 404 happened. */
 const {chromium}=require('playwright');const fs=require('fs'),path=require('path');
-const [,,BASE,OUT,SZS,MD]=process.argv;
+const [,,BASE,OUT,SZS,MD]=process.argv;const MERGE=BASE==='--merge';
 if(!BASE||!OUT){console.error('usage: node dev/test/img-quality.js <baseURL> <outdir> [sizes] [md]');process.exit(2)}
-const SIZES=(SZS||'755x1000@2,1180x820@2').split(',').map(s=>{const [wh,d]=s.split('@');const [w,h]=wh.split('x').map(Number);return{w,h,dpr:+(d||1),tag:s}});
+const SIZES=MERGE?[]:(SZS||'755x1000@2,1180x820@2').split(',').map(s=>{const [wh,d]=s.split('@');const [w,h]=wh.split('x').map(Number);return{w,h,dpr:+(d||1),tag:s}});
 const MDP=MD||path.join(__dirname,'IMG_QUALITY.md');fs.mkdirSync(OUT,{recursive:true});
-const UP=1.25,FACEMIN=.85,ONLY=process.env.IQ_ONLY?new RegExp(process.env.IQ_ONLY):null,SHOTS=process.env.IQ_SHOTS==='1';
+const UP=1.25,FACEMIN=.85,ONLY0=process.env.IQ_ONLY?new RegExp(process.env.IQ_ONLY):null,SKIP=process.env.IQ_SKIP?new RegExp(process.env.IQ_SKIP):null,ONLY=(ONLY0||SKIP)?{test:n=>(!ONLY0||ONLY0.test(n))&&!(SKIP&&SKIP.test(n))}:null,SHOTS=process.env.IQ_SHOTS==='1';
 
 /* ---- in-page measurement: every person picture visible on screen ---- */
 function measure(screen){
@@ -161,6 +161,8 @@ async function walk(p,SZ,ALL,phase){
  await ev(p,()=>__iqClean());}
 
 (async()=>{
+ /* --merge: node dev/test/img-quality.js --merge <outdir> <a/img-quality.json,b/img-quality.json,…> [md] — one report from runs made in parallel */
+ if(BASE==='--merge'){const ALL=[],ERR=[];for(const f of SZS.split(',')){const o=JSON.parse(fs.readFileSync(f,'utf8'));ALL.push(...o.ALL);ERR.push(...o.ERR)}fs.writeFileSync(path.join(OUT,'img-quality.json'),JSON.stringify({ALL,ERR}));return report(ALL,ERR,[])}
  const PX=process.env.HTTPS_PROXY||process.env.https_proxy;const b=await chromium.launch(PX?{proxy:{server:PX,bypass:'127.0.0.1,localhost'}}:{}); /* pictures come from the CDN (dev/art/CDN.md) */const ALL=[];const ERR=[];
  for(const SZ of SIZES){
   /* a renderer that crashes on a loaded machine is re-opened (up to 3 tries); screens already measured are skipped (DONE) */
@@ -192,9 +194,10 @@ async function walk(p,SZ,ALL,phase){
   }catch(e){console.log(SZ.tag,'attempt',attempt,'crashed:',String(e.message||e).split('\n')[0]);ERR.push(...errs.map(e=>SZ.tag+' '+e));try{await ctx.close()}catch(x){}
    if(attempt===3){ERR.push(SZ.tag+' CRASH '+String(e.message||e).split('\n')[0])}}
   }}
- await b.close();
+ await b.close();report(ALL,ERR,SIZES)})().catch(e=>{console.error(e);process.exit(2)});
+function report(ALL,ERR,SIZES){
  /* sizes run as separate processes (slow machines): merge with the rows of the other sizes already in <outdir>/img-quality.json */
- try{const old=JSON.parse(fs.readFileSync(path.join(OUT,'img-quality.json'),'utf8'));const mine=new Set(SIZES.map(s=>s.tag));
+ if(SIZES.length)try{const old=JSON.parse(fs.readFileSync(path.join(OUT,'img-quality.json'),'utf8'));const mine=new Set(SIZES.map(s=>s.tag));
   ALL.unshift(...(old.ALL||[]).filter(x=>!mine.has(x.size)));ERR.unshift(...(old.ERR||[]).filter(e=>!mine.has(e.split(' ')[0])))}catch(e){}
  ALL.forEach(x=>{const f=[];if(x.early)f.push('FACE_FALLBACK');else if(x.broken)f.push('BROKEN');else{if(x.scale>UP)f.push('UPSCALE');if(x.k==='face')f.push('FACE_FALLBACK');if(x.onScr>.9&&x.face<FACEMIN)f.push('HALF_FACE');if(/blur/.test(x.filter||'')&&x.k!=='unk'&&!/unknown/.test(x.src))f.push('BLUR')}x.flags=f});
  fs.writeFileSync(path.join(OUT,'img-quality.json'),JSON.stringify({ALL,ERR}));
@@ -212,4 +215,4 @@ async function walk(p,SZ,ALL,phase){
  if(ERR.length)L.push('','## Lỗi trang / 404','',...ERR.map(e=>'- '+e));
  fs.writeFileSync(MDP,L.join('\n')+'\n');
  console.log(`TOTAL ${ALL.length} pictures · flagged ${bad.length} (UPSCALE ${cnt('UPSCALE')}, FACE_FALLBACK ${cnt('FACE_FALLBACK')}, HALF_FACE ${cnt('HALF_FACE')}, BROKEN ${cnt('BROKEN')}, BLUR ${cnt('BLUR')}) · errors ${ERR.length}`);
- process.exit(bad.length||ERR.length?1:0)})().catch(e=>{console.error(e);process.exit(2)});
+ process.exit(bad.length||ERR.length?1:0)}
