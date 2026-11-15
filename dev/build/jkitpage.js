@@ -79,3 +79,29 @@ KIT_SAMPLES.push({id:"§28.1",title:"pcPort · mdH: khung chân dung đủ ngọ
  return `<div class="kitpg-row" style="align-items:flex-start"><div class="pc" style="overflow:visible;max-width:240px"><div class="pcl">${pcPort(me)}</div></div>`+
   `<div style="display:flex;gap:10px;align-items:flex-start;flex-wrap:wrap">${mdH(em,"xs")}${mdH(th,"sm")}${mdH(pv0,"")}${mdH(me,"big")}</div></div>`+
   `<div class="pcb rows" style="max-width:360px">${[em,pv0,me].map(f=>`<div class="pcrow"><span>${mdH(f,"xs")} ${f.rw||""}: dòng tin mẫu</span></div>`).join("")}</div>`}});
+/* §8 PANEL KIT — the ONE pop-up frame (review/kit-popup-sample, owner 11/15 "cho xem kit pop-up"): the kit page cannot draw #modal inline
+   (one modal, fixed, above the game), so this sample lists the variants and each button opens the REAL pop-up with kitModal (same data
+   path as the game: kpBuild + kitEventStage + kitEvArt + kitDlgFit); the kit page hides while it is open and comes back on close.
+   Variants: ĐIỀU info about a person · LUẬT rule with its small 3:4 picture slot · VIỆC event (stage figure column + scene band + act-card
+   options) · KẾT QUẢ result · TIN news without a person (picture in its type frame, 32.3). Real sample people: Thái hậu, Hoàng hậu. */
+function kitPopSample(k){try{if(typeof S==="undefined"||!S||typeof kitModal!=="function")return false;
+ const R=typeof liveRivals==="function"?liveRivals(true):[];const qp=typeof queenP==="function"?queenP():null;
+ const q=(qp&&qp!==S?qp:null)||R.find(v=>v.queen)||R[0]||null;const v2=R.find(v=>v!==q)||q;const nop=()=>{};
+ const pg=document.getElementById("kitpage");const was=!!(pg&&!pg.hidden);const back=()=>{if(was)pg.hidden=false};
+ if(typeof Q!=="undefined"&&Q.length)return false;if(pg)pg.hidden=true;
+ const S0={
+  info:{kind:"info",title:"Thái hậu",sub:"Từ Ninh cung",subject:pTH(),facts:["Thái hậu là mẹ của Hoàng thượng, đứng đầu hậu cung.","Người trọng lễ nghi, ghét kẻ phô trương."],
+   sections:[{h:"Lòng người với ta",chips:[kitChip("Thiện cảm",12),kitChip("Đức",3)]},{h:"Cách lấy lòng",rows:[["Thỉnh an mỗi tuần",kitChip("Thiện cảm",2),"t"],["Dâng kinh chép tay",kitChip("Thiện cảm",5),"t"]]}],btn:"Đã hiểu"},
+  rule:{kind:"rule",title:"Bổng lộc",facts:["Mỗi tháng Nội vụ phủ phát bổng lộc theo phẩm vị.","Phẩm càng cao, bạc càng nhiều."],rows:[["Thường tại",kitChip("Bạc",20,"g"),"t"],["Quý nhân",kitChip("Bạc",40,"g"),"t"]],btn:"Đã hiểu"},
+  event:q&&{kind:"choice",title:"Hoàng hậu triệu kiến",sub:"Thượng tuần · buổi sáng",subject:q,facts:[{who:q,text:"cho gọi ta đến Khôn Ninh cung, hỏi chuyện đêm qua ta được lật thẻ bài."}],
+   opts:[{n:"Cúi đầu nhận lỗi",fx:{duc:2},x:"Chắc · nàng thiện cảm +5 · Sủng -1",go:nop},{n:"Thưa rằng do Hoàng thượng định",fx:{danh:1},x:"Năm ăn năm thua · thành: Danh +2 · hỏng: nàng oán +8",go:nop},{n:"Dâng lễ vật xin bỏ qua",fx:{bac:-20},x:"Khá chắc · Bạc -20 · nàng thiện cảm +8",go:nop}]},
+  result:q&&{kind:"result",title:"Kết quả: Thỉnh an Hoàng hậu",sub:"Thượng tuần · buổi sáng",subject:q,facts:[{who:q,text:"hài lòng vì ta giữ lễ.",chips:[["Thiện cảm",5]]},{who:S,kind:"me",text:"được tiếng hiền thục trong cung.",chips:[["Đức",2],["Sức",-10]]}],btn:"Đã hiểu"},
+  news:{kind:"news",title:"Tin trong cung",sub:"Tháng 3 · Năm 1",facts:[v2?{who:v2,text:"được lật thẻ bài đêm qua",chips:[["Sủng",3]]}:"Đêm qua Hoàng thượng lật thẻ bài.","Tháng này: Được mùa khắp nơi. Kho lúa +12."],btn:"Đã rõ"}};
+ const sp=S0[k];if(!sp){back();return false}sp.onClose=back;
+ if(sp.opts)sp.opts.forEach(o=>{const g=o.go;o.go=()=>{g();setTimeout(back,0)}});kitModal(sp);return true}catch(e){console.error("kitPopSample",e);const pg=document.getElementById("kitpage");if(pg)pg.hidden=false;return false}}
+window.kitPopSample=kitPopSample;
+KIT_SAMPLES.push({id:"§8",title:"kitModal · khung pop-up chung: ĐIỀU · LUẬT · VIỆC · KẾT QUẢ · TIN (chạm để mở pop-up thật)",html:()=>{
+ const L=[["info","ĐIỀU · Thái hậu (người)"],["rule","LUẬT · Bổng lộc (tranh nhỏ 3:4)"],["event","VIỆC · Hoàng hậu triệu kiến (hình người + lựa chọn)"],["result","KẾT QUẢ · Thỉnh an Hoàng hậu"],["news","TIN · Tin trong cung (không người)"]];
+ const ok=typeof S!=="undefined"&&S;return `<div class="kitpg-row">${L.map(([k,t])=>`<button type="button" class="kbtn${k==="info"?"":" alt"}" data-kpop="${k}"${ok?"":" disabled"}>${t}</button>`).join("")}</div>`+
+  (ok?"":kitFacts(["Vào một kiếp rồi mở lại trang mẫu để xem pop-up."],{group:false}))}});
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("#kitpage [data-kpop]");if(!b)return;e.stopPropagation();e.preventDefault();kitPopSample(b.dataset.kpop)},true);
