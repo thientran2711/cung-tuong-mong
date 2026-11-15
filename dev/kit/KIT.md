@@ -712,6 +712,7 @@ kitBook({head:"Sổ tuần · Tháng tư · thượng tuần · năm thứ nhấ
 - While the book is open nothing covers it: the floating result card (`#rtoast`) is dismissed when the book opens and hidden while it is open.
 - Re-measured when the web fonts finish loading (no early page break from fallback-font metrics).
 - Book art is published from the 768x1024 originals (no blur at @2/@3).
+- Cover seal vs. hint (review/book-title r6): the cover `.kbk-in` is a size container and `.kbk-cseal` gets `margin-bottom:max(0px,calc(3cqh + 2.2em + 4px - 7cqw))`, so the TUẦN seal always clears the page-turn hint, also when the hint wraps (844x390).
 - Wording (VANPHONG): Sổ tuần, Tổng lược, Bìa sổ, Trang N / M, tiếp theo, Tuần này đến đây là hết., seal HẾT TUẦN, Lui, Vào ngày mới.
 
 ### 27.1 COVER TITLE PICTURE · `KBK_TITLE_IMG` (owner 11/15, review/book-title) — `dev/build/j87.js`

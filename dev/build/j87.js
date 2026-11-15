@@ -497,6 +497,10 @@ body.kbk-open #rtoast,body:has(#dawn.kbkdawn:not([hidden])) #rtoast{opacity:0!im
 .kbk-cn{color:#eadcbf;font-family:var(--display);font-size:.9em;text-align:right}
 .kbk-cseal{margin-top:auto;align-self:flex-end;font-family:var(--display);font-size:1em;color:#fff4dc;background:var(--rule);border:2px solid #fff4dc55;outline:2px solid var(--rule);padding:.45em .5em;letter-spacing:.1em;transform:rotate(-4deg)}
 .kbk-hint{position:absolute;left:18%;right:9%;bottom:3%;text-align:center;color:#eadcbfcc;font-size:.78em}
+/* the cover seal clears the page-turn hint even when the hint wraps to two lines (narrow covers, e.g. 844x390): hint = bottom 3% of the page + up to 2 lines;
+   the seal sits on the 7%-of-width bottom padding, so it is lifted by the difference (cq units of the cover .kbk-in) */
+.kbk .kbk-pg.k-cover .kbk-in{container-type:size}
+.kbk .kbk-pg.k-cover .kbk-cseal{margin-bottom:max(0px,calc(3cqh + 2.2em + 4px - 7cqw))}
 /* closing page */
 .kbk-end{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:1em;padding:0 .5em}
 .kbk-et{margin:0;font-family:var(--display);font-size:1.6em;color:var(--ink);line-height:1.3}
