@@ -324,10 +324,10 @@ function promoGap(r){return r<3?3:3+(r-2)*2}
 function promoReqP(p){if(rkOf(p)>=7)return[];const r=rkOf(p),nx=RANKS[r+1],L=[];const me=p===S,qq=queenP();
  if(p.out)return[[false,"Đang ở lãnh cung"]];L.push([p.sung>=nx.s,`Sủng ${p.sung}/${nx.s}`],[p.danh>=nx.d,`Danh ${p.danh}/${nx.d}`],[S.turn-p.lastPromo>=promoGap(r),`Cách lần sắc phong trước ${S.turn-p.lastPromo}/${promoGap(r)} tháng`]);
  const qBlock=qq&&qq!==p;
- if(qBlock&&r+1>=2&&r+1<7)L.push([p.hh>-40||p.th>=50,`Hoàng hậu không chặn (Hoàng hậu ${p.hh}, cần trên -40; hoặc Thái hậu 50)`]);
+ if(qBlock&&r+1>=2&&r+1<7)L.push([p.hh>BAL.qBlockHh||p.th>=BAL.qBlockTh,`Hoàng hậu không chặn (Hoàng hậu ${p.hh}, cần trên ${BAL.qBlockHh}; hoặc Thái hậu ${BAL.qBlockTh})`]);
  if(has("hieuthao"))L.push([p.th>=0,`Thái hậu gật đầu (${p.th}/0), vì Hoàng thượng hiếu thảo`]);
- if(r+1===7){const tn=has("hieuthao")?40:50,nd=S.heir&&S.heir.k.alive&&(S.heir.v===(me?null:p))?40:50;const sn=sonsOf(p).length>0;L.push([S.turn>=(p.seatBan||0),p.seatBan>S.turn?`Vừa tố Hoàng hậu, bị nghi tranh ngôi (còn ${p.seatBan-S.turn} tháng)`:"Không bị nghi tranh ngôi"],[!qq,"Ngôi Hoàng hậu bỏ trống"],[sn?p.th>=tn:p.th>=tn+30,sn?`Có hoàng tử và Thái hậu ủng hộ (${p.th}/${tn})`:`Chưa có hoàng tử: cần Thái hậu hết lòng (${p.th}/${tn+30})`],[p.duc>=nd,`Đức ${p.duc}/${nd}${nd<40?" (mẹ Thái tử)":""}`])}
- else if(r+1>=5)L.push([p.hh>-30||p.th>=30||!qBlock||(facOf(p)&&facStr(facOf(p))>=180),"Hoàng hậu không phản đối, hoặc Thái hậu 30, hoặc phe mạnh (thế lực 180)"]);
+ if(r+1===7){const N=hhNeed(p),tn=N.th,nd=N.duc,sn=N.sons;L.push([S.turn>=(p.seatBan||0),p.seatBan>S.turn?`Vừa tố Hoàng hậu, bị nghi tranh ngôi (còn ${p.seatBan-S.turn} tháng)`:"Không bị nghi tranh ngôi"],[!qq,"Ngôi Hoàng hậu bỏ trống"],[p.th>=tn,sn?`Có hoàng tử và Thái hậu ủng hộ (${p.th}/${tn})`:`Chưa có hoàng tử: cần Thái hậu hết lòng (${p.th}/${tn})`],[p.duc>=nd,`Đức ${p.duc}/${nd}${N.heir?" (mẹ Thái tử)":""}`])}
+ else if(r+1>=5)L.push([p.hh>BAL.hiOppHh||p.th>=BAL.hiOppTh||!qBlock||(facOf(p)&&facStr(facOf(p))>=BAL.hiOppFac),`Hoàng hậu không phản đối, hoặc Thái hậu ${BAL.hiOppTh}, hoặc phe mạnh (thế lực ${BAL.hiOppFac})`]);
  if(p.confined)L.push([false,`Đang cấm túc (${p.confined} tháng)`]);return L}
 function promoReq(){return promoReqP(S)}
 /* the vacant seat is contested: every eligible consort (Quý phi and above) weighs in by favour, Thái hậu, sons and name */

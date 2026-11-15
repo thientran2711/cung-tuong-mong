@@ -3,7 +3,7 @@
 const CR=["Tài nghệ","Đức hạnh","Thế lực"];
 function crW(i){return i===0?(has("trongtai")?1.5:1):i===1?(has("hieuthao")?1.5:1):(has("danghi")?.6:1)}
 function ct(){return S.contest||null}
-function candOK(p,r){if(p.out||p.confined||(p!==S&&!p.alive))return false;if(rkOf(p)!==r-1)return false;const req=promoReqP(p).filter(x=>!/Chờ ghế|Ghế |bỏ trống/.test(x[1]));if(r===7)return req.filter(x=>!/Cách lần/.test(x[1])).every(x=>x[0])&&(p.th||0)>=40;return req.every(x=>x[0])}
+function candOK(p,r){if(p.out||p.confined||(p!==S&&!p.alive))return false;if(rkOf(p)!==r-1)return false;const req=promoReqP(p).filter(x=>!/Chờ ghế|Ghế |bỏ trống/.test(x[1]));if(r===7)return req.filter(x=>!/Cách lần/.test(x[1])).every(x=>x[0])&&(p.th||0)>=BAL.hhTh;return req.every(x=>x[0])}
 /* a seat opens: decree and candidate list */
 function contestOpen(r){if(ct())return"";const C=consorts().filter(p=>candOK(p,r));if(!C.length)return"";if(C.length===1&&C[0]!==S){return promoteP(C[0])||""}
  const len=r===7?3:1;S.contest={r,c:C.map(key),t0:wk(),len,round:0,sc:{},bk:{},pr:{},sab:{},dq:[],hint:0};
