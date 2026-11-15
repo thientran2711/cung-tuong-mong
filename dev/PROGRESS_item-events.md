@@ -1,4 +1,4 @@
-# PROGRESS — review/item-events (KIT §58 items in events, owner 15/11 ~18:10Z)
+# PROGRESS — review/item-events (KIT §64 items in events, owner 15/11 ~18:10Z)
 
 ## Done
 - `dev/build/jitev.js` (after jfx in assemble.py): resolver `ievOf` (explicit pid resolvers giftin / pgin / cnvBribe / story `gi`, econ STIP_EV
@@ -6,7 +6,7 @@
   top of the text column), `kitItemFx` (keep / back / give / burn / tear / smash / pour / well / bury / use), 6 new Pixi particle kinds,
   tap-to-skip catcher, claim rule (no double reveal / no double lose animation), silver bribes = coins.
 - 10 new story item pictures (gpt-2-6), IT entries + ITEM_ART_G grades; hinhnhan now an IT item (il).
-- KIT.md §58 (number provisional — ask the coordinator), kit page sample "§58".
+- KIT.md §64 (coordinator registry), kit page sample "§64".
 - Scan: `dev/test/item-events-scan.js` → `dev/review/item-events-table.md` (event → item → choice → act), 0 gaps.
 - Test: `dev/test/item-events.js` (5 sizes).
 ## Notes for whoever resumes
@@ -18,4 +18,4 @@
   on keep, no second reveal, animation runs, tap skips, no h-overflow, options in cost mode). One E68 giftArrive variant did not build at two
   sizes (random actor) and was skipped; the other variant passed.
 - Scan: 837 dialog texts, 65 with an item and choices acting on it, 0 gaps (dev/review/item-events-table.md).
-- Kit page #kit: §58 sample present (8 item tags + 10 act buttons).
+- Kit page #kit: §64 sample present (8 item tags + 10 act buttons).

@@ -1,4 +1,4 @@
-/* ================= jitev — ITEMS IN EVENTS (owner 15/11 ~18:10Z, review/item-events) — KIT §58 (number provisional: coordinator registry) =================
+/* ================= jitev — ITEMS IN EVENTS (owner 15/11 ~18:10Z, review/item-events) — KIT §64 (coordinator registry) =================
    Owner rule: every event where an ITEM appears that could come into her hands (a letter delivered, a gift offered, a found object, a confiscated
    thing returned, a bribe, a poisoned dish, a token…) shows that ITEM'S ICON in the event dialog (kit item frame kitItem with its grade, in the
    banner / info area), and the choices act on it with an animation:
@@ -13,8 +13,8 @@
                  m.item (explicit) · IEV_PID[pid](pp, m) (gift / poisoned dish / goods events / story beats) · nouns in the dialog text (IEV_NOUN)
                  with at least one option acting on the item (IEV_VERB on the option name). Same function = the scan (dev/test/item-events-scan.js).
      kitItemTag(I) → the kit item frame (kitItem md, grade colour + grade word) placed on the event banner (bottom-right) or, without a banner,
-                 at the top of the text column (§58.1).
-     kitItemFx(act, I, {from, to, done}) → the animation (§58.2). Off: "Cảnh động" off / reduced motion → no flight (the item still goes into
+                 at the top of the text column (§64.1).
+     kitItemFx(act, I, {from, to, done}) → the animation (§64.2). Off: "Cảnh động" off / reduced motion → no flight (the item still goes into
                  Tư trang); bots / quiet → nothing. Any tap during an animation finishes it at once (catcher layer, pointer-events auto).
    Story items that had no IT entry (letters, notes, tokens…) are real IT items now (IEV_IT, art img/item-<k>.webp, gpt-2-6).
    Old saves: nothing stored (the dialog is resolved from pid + pp, which old saves already keep); new IT keys only add. */
@@ -87,7 +87,7 @@ function ievOf(m){if(!m||!m.opts||!m.opts.length)return null;let r=null;
  if(!r)return null;const e=r.e||null,key=e?e.k:r.key;if(!key||!(IT[key]||(typeof WD_ITEMS==="object"&&WD_ITEMS[key])))return null;
  const I=kitItemInfo(e||key);const acts=r.acts&&!r.txt?ievActsFor(m,r.acts,r.offer):r.acts||ievActsFor(m,null,r.offer);return{I,e,key,acts,who:r.who||null,own:!!r.own}}
 window.ievOf=ievOf;window.ievVerb=ievVerb;window.ievNoun=ievNoun;
-/* ---------- §58.1 kitItemTag: the item frame on the event banner / at the top of the text ---------- */
+/* ---------- §64.1 kitItemTag: the item frame on the event banner / at the top of the text ---------- */
 function kitItemTag(I){return `<div class="kiev" data-kiev="${I.k}">${kitItem({src:I.src,name:I.name,grade:I.grade,size:"md",tip:`${I.name} · ${I.gname}`})}</div>`}
 window.kitItemTag=kitItemTag;
 function ievPlace(R){const mb=document.getElementById("mb");if(!mb)return null;mb.querySelectorAll(".kiev:not(.kiev-own)").forEach(x=>x.remove());if(!R)return null;
@@ -95,7 +95,7 @@ function ievPlace(R){const mb=document.getElementById("mb");if(!mb)return null;m
  const h=kitItemTag(R.I);const ban=mb.querySelector(":scope > .kdlgart .ksart");
  if(ban){ban.insertAdjacentHTML("beforeend",h);const t=ban.lastElementChild;t.classList.add("kiev-ban");return t}
  const col=mb.querySelector(".kpmain")||mb.querySelector(".spkt")||mb.querySelector(".kpb")||mb;col.insertAdjacentHTML("afterbegin",h);const t=col.firstElementChild;t.classList.add("kiev-txt");return t}
-/* ---------- §58.2 kitItemFx: the animations ---------- */
+/* ---------- §64.2 kitItemFx: the animations ---------- */
 function ievStill(){try{return matchMedia("(prefers-reduced-motion: reduce)").matches||(typeof OPT!=="undefined"&&OPT.fxon===false)}catch(e){return false}}
 function ievOn(){return !window.__bot&&!(typeof quiet!=="undefined"&&quiet)}
 function ievBag(){const t=[...document.querySelectorAll('#tabs [data-tab="inv"],[data-tab="inv"]')].find(x=>{const r=x.getBoundingClientRect();return r.width&&r.bottom>0&&r.top<innerHeight});return t||null}
@@ -196,12 +196,12 @@ window.kitItemFx=kitItemFx;
     if(act==="keep")render()}catch(e){console.error("iev choose",e)}}
   return r})})();
 (function(){const st=document.createElement("style");st.id="kit-itev";st.textContent=`
-/* §58.1 item frame on the event banner (bottom-right) or at the top of the text column */
+/* §64.1 item frame on the event banner (bottom-right) or at the top of the text column */
 #mb .ksart>.kiev-ban{position:absolute;right:8px;bottom:8px;z-index:3;padding:5px 5px 3px;border-radius:10px;background:rgba(255,250,240,.93);box-shadow:0 2px 8px #0003;line-height:1}
 #mb .kiev-txt{float:right;margin:0 0 6px 10px;padding:4px 4px 2px;border-radius:10px;background:rgba(255,250,240,.9);box-shadow:0 1px 5px #0002}
 #mb .kiev .kitem{cursor:default}
 @media (max-height:500px){#mb .kiev .kitem-md{--isz:56px}}
-/* §58.2 animation pieces (WAAPI on fixed clones; particles on the jfx Pixi layer) */
+/* §64.2 animation pieces (WAAPI on fixed clones; particles on the jfx Pixi layer) */
 .kievfx{position:fixed;z-index:9480;pointer-events:none;will-change:transform,opacity}
 .kievfx>img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 4px 6px #0005)}
 .kievfx.kievburn{overflow:visible}
@@ -212,6 +212,6 @@ window.kitItemFx=kitItemFx;
 @media (prefers-reduced-motion:reduce){.kievfx,.kievring,.kievmound,#kievcatch{display:none!important}}
 `;document.head.appendChild(st)})();
 /* §47 kit page samples */
-try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§58",title:"kitItemTag · kitItemFx (vật phẩm trong sự kiện)",
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§64",title:"kitItemTag · kitItemFx (vật phẩm trong sự kiện)",
  html:()=>`<div class="kitpg-row">${["thu","matthu","giaymat","tinvat","khantay","chenthuoc","batcanh","lenhbai"].map(k=>kitItemTag(kitItemInfo(k))).join(" ")}</div>`+
   `<div class="kitpg-row">${["keep","back","give","burn","tear","smash","pour","well","bury","use"].map(a=>`<button type="button" class="kbtn alt" onclick="kitItemFx('${a}',kitItemInfo('${a==="pour"||a==="use"?"chenthuoc":a==="smash"?"vongngoc":"thu"}'),{from:this.getBoundingClientRect()})">${a}</button>`).join(" ")}</div>`})}catch(e){}

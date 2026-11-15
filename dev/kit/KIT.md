@@ -2494,9 +2494,9 @@ figure (Thái hậu h1–h3, t7/t8 trains, wide a51 sleeves) is handled in `dev/
   <url|page.html> <outdir>` — the figure download is held while the reader turns pages, then released: same fact still in view, 0 window
   resize events.
 
-## 58. ITEMS IN EVENTS · kitItemTag · kitItemFx (owner 15/11 ~18:10Z, review/item-events) — `dev/build/jitev.js` (after jfx) — number PROVISIONAL (not in the coordinator registry yet)
+## 64. ITEMS IN EVENTS · kitItemTag · kitItemFx (owner 15/11 ~18:10Z, review/item-events) — `dev/build/jitev.js` (after jfx) (registry: coordinator)
 Owner rule: every event where an item could come into her hands shows the ITEM'S ICON in the dialog, and each choice acts on it with an animation.
-### 58.1 ievOf · kitItemTag — the item in the dialog
+### 64.1 ievOf · kitItemTag — the item in the dialog
 - `ievOf(m)` → `{I (kitItemInfo §54.1), e, key, acts[], who}` for a dialog (Q[0]); null = no item. ONE resolver, used by the game (showModal /
   chooseM) and by the scan: `m.item` (explicit) · `IEV_PID[pid](pp)` (giftin / pgin: the real entry pp.e; cnvBribe: silver; story beats with `gi`;
   `false` = never an item, e.g. tsbPetGift; tsbBul: her demanded entry, "Giao" = give) · econ `STIP_EV` goods events (E68: the options in `no` give the gift back) · nouns in the dialog
@@ -2510,7 +2510,7 @@ Owner rule: every event where an item could come into her hands shows the ITEM'S
 - Story items with no IT entry are real IT items now (pr 0, `story:1`, art img/item-<k>.webp + item512, gpt-2-6): Bức thư `thu`, Mật thư `matthu`,
   Mảnh giấy nhắn `giaymat`, Tín vật `tinvat`, Khăn tay lụa `khantay`, Chén thuốc `chenthuoc`, Bát canh `batcanh`, Lệnh bài `lenhbai`,
   Tập sách chép tay `sachchep`, Cành hoa ép `canhhoa`, Hình nhân bùa ngải `hinhnhan` (il: đồ cấm, soát ra là tội).
-### 58.2 kitItemFx(act, I, {from, to}) — the animations (shared; any module may call it)
+### 64.2 kitItemFx(act, I, {from, to}) — the animations (shared; any module may call it)
 | act | what plays | ms (`BAL.itev`) |
 |---|---|---|
 | keep | rises, arcs into the Tư trang tab, tab glows (the kitGain flight path, §54) — a REAL entry in S.inv | 900 |
@@ -2528,7 +2528,7 @@ Owner rule: every event where an item could come into her hands shows the ITEM'S
   dialog under it); it removes itself when the last animation ends (safety 2.2 s). `kitItemFxSkip()` does the same from code.
 - Off: "Cảnh động" off / reduced motion → no flight (keep still adds the item, the tab glows); bots / quiet → nothing.
 - Silver (bribes, `vangbac`): keep = `kitCoins("in")` from the icon, no item.
-### 58.3 Wiring (one place) and the claim rule
+### 64.3 Wiring (one place) and the claim rule
 - showModal (wrapped): resolves Q[0], places the tag, sets `data-kia`. chooseM (wrapped): reads the icon + figure rects, runs the choice, then
   the act. While the choice runs, goods of THAT item added by the choice (econ goodsGive box, kmDiff → kgGroups reveal) are CLAIMED: no second
   box / reveal — the flight from the dialog is the reveal; an entry the choice removes leaves with the act, not with kitLose's bag fly (give / sell / fade); a forced loss (jtsb tsbBul "Giao") keeps its §54.2 notice card after the flight. A dialog that already draws the item in the kit frame (jtsb `.tsbtile`) gets no second frame: that tile is the flight source.
@@ -2540,4 +2540,4 @@ Owner rule: every event where an item could come into her hands shows the ITEM'S
   letters / tokens / dish / jade with every act; frame + grade, acts, real entry, no double reveal, tap-skip, overflow, cost mode);
   scan `node dev/test/item-events-scan.js <url> dev/review/item-events-table.md [--fail]` (every E68 variant, ARC67 + GB67 beat, j97 rare,
   PEND builder: event → item → choice → act; fails on a destroying/handing choice with no item found, or an item without a picture).
-- Kit page (§47): sample "§58" = every story item tag + one button per act.
+- Kit page (§47): sample "§64" = every story item tag + one button per act.

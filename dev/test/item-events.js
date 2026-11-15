@@ -1,4 +1,4 @@
-/* KIT §58 items in events (owner 15/11 ~18:10Z, review/item-events).
+/* KIT §64 items in events (owner 15/11 ~18:10Z, review/item-events).
    usage: node dev/test/sw-serve.js <port> <repo root>  (another shell);  node dev/test/item-events.js http://127.0.0.1:<port>/ <outdir> [WxH,WxH…] [save.json]
    Per size: opens real event dialogs that carry an item (gift in: giftin; a poisoned / plain dish: pgin; goods events e68 + econ STIP_EV;
    story text dialogs with a letter / token / dish / jade) and checks:
