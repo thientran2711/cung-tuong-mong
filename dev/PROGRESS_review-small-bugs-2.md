@@ -17,3 +17,11 @@ Slot rule detail: next to a reserved panel the edge figure is pulled in (j59 inL
 Her mistress on the cung nữ road counts as met (met61) — she was a grey silhouette in the Phận sự row.
 Residual (not fixed, pre-existing on main): 390x844 phone portrait has no rotate prompt; the place subtitle wraps one letter per line on the left edge, which pushes the folded chip row down over the heads (main overlaps too, less).
 KIT.md: §12.1, §13 note, §32.12 note, §33.7 note, §49.3a.
+
+## Reviewer r6 (review/small-bugs-2-r6, merged onto origin/main 888463759)
+- Merge: conflicts only in built files (index.html, sw.js, assets.json) → rebuilt with dev/site/build_site.sh. jk3 auto-merge (event-balance K3 row + road guards) checked by hand.
+- Fixed on r6: (a) j59 widthFor/leftFor decide a panel's side by its CENTRE — tassel-fix's 2-column plaques start left of mid-stage at 844x390 (kshR 204–420 on a 8–429 stage), so the old `q.left > mid` test skipped the reservation and a figure stood under the plaques (srv, lc +1/+2/+3, home +2, vườn +2/+3). (b) KIT_GLOSS_ROAD "Ân tình" for srv and cold: jpoison (main) rewrote the consort gloss with "thị tẩm".
+- small-bugs-2.js (test page needs `<meta charset="utf-8">` when served by python http.server): all checks empty + old save OK at 755x1000@2, 1000x755, 1180x820@2, 1366x1024 (@1; @2 in one long page slows down after ~5 new games and hangs — main does the same, test-harness load), 844x390, 390x844 (direct mode).
+- stage-slots.sh 844x390: n1–n5 clean; ksp case now squeezes 2 slots to the 44 px left of the plaques (tag overlap) — before r6 those figures stood under the plaques (stage-slots.js does not check panels).
+- header-danh 1180x820@2 clean; tassel-scan 844x390: 1 hit (rel view, "Tư trang" button over a pendant) — same on main.
+- Real 390x844 phone (host mode): game shown as the 1180x820 layout rotated 90° (s 0.476) + one-time 4 s tip "Xoay ngang điện thoại để chơi"; automated runs (navigator.webdriver) get direct mode, so the 390x844 test runs never see that.
