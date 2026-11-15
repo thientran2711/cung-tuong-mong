@@ -92,7 +92,7 @@ DONE
 - All gens2 pictures (incl. the 24 system-line ones, 17 person-card ones, toilette banners) were already on the CDN; nothing was lost.
 - The 8 queued generations in pending2.txt (veil/scar/spy scenes) were NOT used: they show full people and fail the 16:50Z rule. Their keys (xin-mang-che, thao-mang-che, vet-thuong-lanh, lanh-con-seo, sai-theo-doi, theo-doi-duoc, theo-doi-trang, theo-doi-bi-bat) still need hands-only pictures.
 - **16:50Z audit (action pictures = hands/objects only):** every picture used by ACTS.json `acts`/`prefix` was checked on contact sheets. The older batch (gens.txt, 92) is hands-only except cho-muon; the newer batch (gens2, 125) showed full people except day-con-xuong-ho and rut-the. **124 redrawn** hands-only (scenes: dev/figwork/acts/hscenes.txt, prompts: hprompt.py, fetch: hfetch.py, ids: hgens.txt), each checked on a sheet; redos logged in redo2.txt. On the CDN as `img/act-<key>-h.webp` (new names, the CDN caches by name for 7 days).
-- **ACTS patch:** dev/figwork/acts/ACTS_hands_patch.json (163 acts + 8 prefix + 129 log rules -> `<key>-h`). Apply to the CURRENT CDN manifest with `python3 dev/figwork/acts/hpatch.py img/ACTS.json PATCH.json OUT.json` (pull first), then cdn_sync OUT as img/ACTS.json. NOT pushed by me (live manifest; coordinator's call). Verified: all 498 picture keys referenced by the patched manifest exist on the CDN.
+- **ACTS patch:** dev/figwork/acts/ACTS_hands_patch.json (163 acts + 8 prefix + 129 log rules -> `<key>-h`). Apply to the CURRENT CDN manifest with `python3 dev/figwork/acts/hpatch.py img/ACTS.json PATCH.json OUT.json` (pull first), then cdn_sync OUT as img/ACTS.json. APPLIED 15/11 by me after the coordinator approved: fresh pull, patched, every key re-checked against _index (498 distinct keys, 0 missing), pushed. Before: 0 '-h' keys. After: 124 '-h' keys, used by 163 acts, 8 prefixes and 129 log rules. Totals unchanged: 300 acts, 10 prefixes, 510 log rules. Verified: all 498 picture keys referenced by the patched manifest exist on the CDN.
 - **Tuần lục title** (owner 17:14Z + redo): dev/figwork/title/. Horizontal v1-v4, vertical d1-d4 (letters stacked, fits the cover label slot), b1-b4 (two word blocks). Sheets: title-tuanluc-sheet.jpg, title-tuanluc-vertical-sheet.jpg. Waiting for the owner's pick; wiring = draw the PNG inside .kbk-label in j87 coverH.
 
 LEFT (unchanged from the list above unless noted)
@@ -102,3 +102,5 @@ LEFT (unchanged from the list above unless noted)
 4. Remaining act pictures ~240 (LEFT 5) — draw with hprompt.py style (hands only).
 5. Đoan ngọ dragon-boat banner; side-story NPC figures + portraits (incl. Phế phi họ Lý) — not started.
 6. Playwright Tuần lục check after the patch lands (LEFT 7/8).
+
+- dev/site/cdn_sync.py --pull was broken for everyone: the CDN Worker returns 403 when there is no User-Agent, and urllib sends none. Fixed by adding a User-Agent to the download request.
