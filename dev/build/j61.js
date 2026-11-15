@@ -27,7 +27,9 @@ function k61St(e){if(!e||!S||e===S)return 3;const K=k61S();if(!K)return 3;return
 function isKnown61(e){return k61St(e)>=1}
 /* public figures (kit review): Hoàng thượng, Thái hậu and the reigning Hoàng hậu are known by name and title (stage 2) from the first
    day; their face (grey silhouette until then) shows after the first meeting / thỉnh an */
-function k61Pub(e){if(!e||!S)return false;if(e===S.emp)return true;if(S.thO&&e===S.thO)return true;return !!((rivals||[]).includes(e)&&e.queen&&!e.out&&e.alive!==false)}
+function k61Pub(e){if(!e||!S)return false;if(e===S.emp)return true;if(S.thO&&e===S.thO)return true;if(k61IsKid(e))return true;return !!((rivals||[]).includes(e)&&e.queen&&!e.out&&e.alive!==false)}
+/* the Emperor's children are announced at birth: every name is public; the FACE only after she has met the child (owner 11/15, jht) */
+function k61IsKid(e){return !!(e&&typeof e==="object"&&(e.sex==="m"||e.sex==="f")&&"fond" in e&&allKids().some(([k])=>k===e))}
 function k61Named(e){return k61St(e)>=2||k61Pub(e)}
 function kitKnown(p){try{const e=k61PortEnt(p);return e?isKnown61(e):true}catch(e){return true}}
 function kitKnownName(p){try{const e=k61PortEnt(p);return e?k61Named(e):true}catch(e){return true}}
@@ -103,7 +105,7 @@ function k61AskBtn(e){const k=kOf61(e);const o=od(45+(S.mat||0)*8+((S.maid&&S.ma
 /* owner 11/15 08:00Z: no "3/3" — a plain level word, tap = what raises it and what it opens (KIT_GLOSS "Quen biết", jhc) */
 const K61STW=["Người lạ","Mới thấy mặt","Biết tên","Đã quen"];
 function k61StChip(st){const w=K61STW[st]||K61STN[st];return chip(typeof kitGloss==="function"?kitGloss("Quen biết",w):w,st>=3?"ok":"")}
-(function(){const c0=pcard;pcard=function(o){try{const e=o&&k61PortEnt(o.f);const st=e?k61St(e):3;if(e&&!k61Named(e)){const pop=!!o.close;
+(function(){const c0=pcard;pcard=function(o){try{const e=o&&k61PortEnt(o.f);if(e&&k61IsKid(e)){const a=arguments;return k61Pass(o.f,()=>c0.apply(this,a))}/* children: jht draws what the palace knows */const st=e?k61St(e):3;if(e&&!k61Named(e)){const pop=!!o.close;
   const G=(o.groups||[]).filter(g=>g&&g[1]).map(([hd,B])=>[hd,B.filter(b=>b&&/^<button/.test(String(b))).map(b=>pop?b:k61Dis(String(b)))]).filter(g=>g[1].length);
   if(!pop)G.unshift(["Làm quen",[k61AskBtn(e)]]);
   const chips=[k61StChip(st)].concat((o.chips||[]).filter(c=>c&&/class="chip loc/.test(c)));
