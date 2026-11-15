@@ -436,3 +436,5 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (12:35Z) Phòng chiều mưa mùa xuân u ám như lãnh cung → chỉnh màu thời tiết/buổi cho ấm, sáng dịu.
 - LIVE CDN (12:35Z) 88 ảnh thú cưng mới (22 con × 4 giai đoạn) + 18 tranh hành sự sửa dáng vạn phúc.
 - (12:40Z) Làm lại theo giao diện game (kit, có hình, không như trang chữ): tab Tài nghệ, tab Mệnh truyện, tab Việc nhờ.
+- (12:45Z) Chân dung trẻ con (Hoàng tự) mỗi đứa zoom khác nhau → chuẩn hóa theo cỡ đầu cho MỌI họ chân dung (trẻ, công tử, cung nhân, Hoàng thượng…).
+- (12:45Z) Trẻ sơ sinh không thể có "Hiền tài". Lúc sinh chỉ có TƯ CHẤT (bẩm sinh, ẩn, chỉ lộ qua lời ladder). Văn/Võ/Đức bắt đầu gần 0, tăng qua dạy dỗ (thầy, mẹ, Hoàng thượng), nhân theo tư chất. Hiền tài suy từ Văn/Võ/Đức, chỉ xét từ 6 tuổi. Trước 6 tuổi xếp kế vị theo đích/trưởng + Hoàng thượng thương.
