@@ -42,3 +42,13 @@ Base: origin/main (merged; see git log). In the assemble.py module list keep mai
 ## LEFT / notes
 - Owner 17:27Z (LUẬT · Ân thưởng label|value table sweep): asked the coordinator to split it to another worker.
 - Missing figure art seen in tests: Thái y (physician) has no full-length figure, so the silhouette is used.
+
+## Review r6 (review/fix-float-r6, on origin/main 5e491704d)
+- Merged 56517d0de onto main 5e491704d (assemble: main list + jkrel after jaudit, jint + jnight before j84). Site rebuilt.
+- KIT renumbered per the coordinator registry: relation table §52 (kitImgSync §52.1), number delta §57 (was §51/§51.1/§52; §51 = kit-table). KIT.md (note at the top of §52), jkrel/j87 comments, kit sample ids, PROGRESS.
+- Reviewer fixes: Tuần lục ✕ z-index 6 → 999 (kitBook stacks sheets at z=n*2-i, so a 4+ sheet book covered the ✕ — visible at 755x1000);
+  jkrel CSS scoped to `.krtw>.krt` (bare `.krt` is also the origin-roulette tile in jk2b); a stranger's table has no Hiện nay/Tuần này heads;
+  book-person.js calls kn() before S.met; stale "flow" line in its header fixed.
+- Tests: book-person 5 sizes PASS; kit-page 5 sizes PASS (12 samples incl. §52 ×3, §57); rel-words-scan 0/0; night-day ok; int-stats 5 sizes ok;
+  rules-one-source 755/844 ok + old save loads; sheet-turn 5 sizes ok; page-curl 5 sizes ok; coop-e2e 59/59 (incl. old save).
+- Not this branch: page-curl.js screenshots show the Luân hồi screen (test does not dismiss #kroul); load-migrate.js / inv-origin.js stale vs main (Cache.add, #kload).

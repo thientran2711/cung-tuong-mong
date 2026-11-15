@@ -5,7 +5,7 @@
    - every person section has the kit relation table (.krt) with the fixed rows for its kind, 3 aligned columns (x of each column ±1 px);
    - no private chips (.kbk-rel, .kbk-relchips, .kbk-pair), no non-integer number, no "..", no "Nàng ta oán ta", no bare "thiện cảm" label,
      no card text (" · kèm:", "đến +N"), no gift counted as evidence, current rank titles only;
-   - a person with < 3 lines and Triều đình · thiên hạ never have a page of their own (they flow); no page is less than 1/3 full unless last;
+   - every subject keeps its own page (owner 17:45Z: no page merging) and every page has its full-length figure (Triều đình · thiên hạ = Hoàng thượng);
    - small avatars: no box behind the frame (computed background transparent); Sổ này ghi names one colour; no "Lui" button (✕ only);
    - turning pages: every <img> on the turning sheet copy and on the next page is decoded before the turn starts (img.complete && decode)
      and the live page is not rebuilt (same DOM nodes before/after a turn). */
