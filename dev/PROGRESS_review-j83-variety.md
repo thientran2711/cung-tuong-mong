@@ -1,5 +1,23 @@
 # PROGRESS: review/j83-variety
 
+## STATE (latest session, 15/11 ~12Z) — read this first
+- Option A is DONE in code and art for all 11 kinds (10 recipes × 4 tiers = 440 pictures + 18 new cooking ingredient icons):
+  - `dev/build/jwkr.js` (appended after jwkg.js): `WKR` recipes per kind (`id r01..r10`, name, level to unlock `WKR_LV`, cooking steps, `like` = the j1 LIKES entry).
+  - Flow: "Học/Tự luyện <art>: làm gì?" = kit tile grid (KIT 28.13e pick mode `.kshc.kshpick`, panel `kit:{pick:1}`, tabs per kind, ✕ kit-x) →
+    "<recipe>: dùng vật liệu gì?" (3 j83 material cards) → the kind's game (jwkg) with the recipe name as title; cooking plays the recipe's ingredients + heat
+    (`k91Cook` wrapper forces `K91_RC`), cắm hoa a one-flower recipe arranges that flower (`WKR_FL`) → the work = recipe name, `wk.r`, picture by tier.
+  - `itemArt` wrapper: `img/item-tp-<kind>-<rid>-b<ti+1>.webp` (+ item512) when `WKR_ART[kind]`; old saves (no `wk.r`) keep the old tier picture.
+  - NPC works and the deck card also get a recipe (deck: the emperor's liked dish / flower when known).
+- Art: sheets are 2×2 (one recipe, 4 tiers) gpt-2-6 2k, ids in `dev/art/j83_recipe_sheets.txt`; Magnific cut-outs in `dev/art/j83_recipe_cuts.txt`
+  (kind rid production-id hmac → URL `https://pikaso.cdnpk.net/private/production/<id>/render.png?token=exp=1794960000~hmac=<hmac>`).
+  Split: components of the whole cut-out sheet go to the quadrant of their centre (no neighbour fragments), bbox square +4 % pad, 512 + 256 webp q90.
+  Cooking (mon) art came from the earlier session ids (below); icons `img/kit/mg-banh-<key>.webp` 360×253.
+- Paid tiers (owner 14:50Z group rule): `dev/review/paid-tiers.md` (before/after), `node dev/test/paid-tiers.js <url>` (0 FAIL), `python3 dev/test/paid-scan.py`.
+- "Thôi": removed from every j83 dialog (gift, đồ cấm, recipe pick, material) and the 4 veil dialogs (✕ kit-x via `KWK_XPID` / `xc:1` in jwkg.js).
+  The game-wide removal is review/kit-close (not merged yet) — not duplicated here.
+- Tests: `ONLY=<kinds> node dev/test/wk-kind-game.js <url> <WxH@dpr> <outdir>` (pick grid → material → game kind + recipe → product name/picture).
+
+
 Base this branch on the latest `origin/main`. It was rebased onto main 6e6c2ae6d.
 
 It is not merged and has no PR. The site files (index.html, sw.js, assets.json) are NOT rebuilt on this branch. Rebuild them with `bash dev/site/build_site.sh` after finishing, and never commit a `CTM_IMG_BASE=` test build.

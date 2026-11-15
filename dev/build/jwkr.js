@@ -41,7 +41,7 @@ const WKR={
 /* normalised: WKR[kind][i] = {id:"r01", n, lv, st, like} */
 for(const k in WKR)WKR[k]=WKR[k].map((x,i)=>({id:"r"+String(i+1).padStart(2,"0"),n:x[0],lv:WKR_LV[i],st:x[1]||null,like:x[2]||null}));
 /* kinds whose 40 pictures are on the CDN */
-const WKR_ART={mon:1};
+const WKR_ART={mon:1,tranh:1,theu:1,bhoa:1,huong:1,tho:1,kinh:1,khuc:1,the:1,mua:1,ao:1};
 function wkrOf(kind,id){return (WKR[kind]||[]).find(x=>x.id===id)||null}
 function wkrOpen(p,kind){const K=WK[kind];const l=wkLv(p,K.a);return (WKR[kind]||[]).filter(x=>x.lv<=l)}
 /* the recipe a work's like-matching subject stands for */
@@ -70,6 +70,12 @@ function wkrNow(){const m=typeof S!=="undefined"&&S&&S.mg;const w=(m&&m.wk)||(ty
  const c0=k91Cook;k91Cook=function(box,env){const w=kwrPlay||wkrNow();const r=w&&w.kind==="mon"&&wkrOf("mon",w.r);if(!r)return c0.apply(this,arguments);
   const keep=K91_RC.splice(0,K91_RC.length,[r.n,r.st]);try{return c0.apply(this,arguments)}finally{K91_RC.splice(0,K91_RC.length,...keep)}};
  try{if(KG82_ENG.cook===c0)KG82_ENG.cook=k91Cook;for(const g in KG82_ENG)if(KG82_ENG[g]===c0)KG82_ENG[g]=k91Cook}catch(e){}})();
+/* cắm hoa: a one-flower recipe arranges only that flower (the 5 painted flower kinds of j91); mixed / other flowers keep the mix */
+const WKR_FL={r01:"chrys",r02:"orchid",r03:"plum",r04:"peach",r09:"peony"};
+(function(){if(typeof k91Arrange!=="function")return;const a0=k91Arrange;k91Arrange=function(){const w=kwrPlay||wkrNow();const f=w&&w.kind==="bhoa"&&WKR_FL[w.r];
+  const one=f&&K91_FL.find(x=>x[2]===f);if(!one)return a0.apply(this,arguments);const keep=K91_FL.splice(0,K91_FL.length,one,one,one,one,one);
+  try{return a0.apply(this,arguments)}finally{K91_FL.splice(0,K91_FL.length,...keep)}};
+ try{for(const g in KG82_ENG)if(KG82_ENG[g]===a0)KG82_ENG[g]=k91Arrange}catch(e){}})();
 /* ---- step 1: WHAT to make (kit 28.13e tile grid, pick mode: picture · name · what it takes · level · button) ---- */
 const KWR={k:null,mode:null,run:null,kind:null};
 function wkrTile(kind,r,l){const ok=r.lv<=l,a=ARTS.find(x=>x.k===WK[kind].a);const eff=r.st?r.st.map(s=>s[0]).join(", "):WK[kind].n;
