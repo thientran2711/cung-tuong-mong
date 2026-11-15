@@ -84,7 +84,10 @@ function kitLinePos(el){try{const nx=document.getElementById("next");let bot=inn
  /* a dialog is open: the pill sits just above the dialog box (or under it), never on its title or buttons */
  const M=document.getElementById("modal"),d=M&&!M.hidden?M.querySelector(".dlg"):null;if(d){const r=d.getBoundingClientRect();if(r.top>=44){el.style.bottom="auto";el.style.top=Math.round(r.top-38)+"px";return}if(innerHeight-r.bottom>=44)bot=Math.min(bot,innerHeight-2)}
  el.style.top="auto";el.style.bottom=Math.round(innerHeight-bot+10)+"px"}catch(e){}}
-function kitLine(text,ms){let el=document.getElementById("kupdline");if(!el){el=document.createElement("div");el.id="kupdline";el.className="kupdline";el.setAttribute("role","status");document.body.appendChild(el)}
+function kitLineCss(){if(document.getElementById("kit-line"))return;const st=document.createElement("style");st.id="kit-line";st.textContent=`
+.kupdline{position:fixed;left:50%;transform:translateX(-50%);z-index:9750;max-width:calc(100vw - 24px);margin:0;padding:5px 14px;border-radius:14px;border:1px solid var(--gold,#b8892b);background:#fffaf0f4;color:var(--ink,#3a2418);font:600 .82rem/1.3 var(--body,inherit);box-shadow:0 4px 14px #0004;text-align:center;pointer-events:none;transition:opacity .5s}
+.kupdline.out{opacity:0}`;document.head.appendChild(st)}
+function kitLine(text,ms){kitLineCss();let el=document.getElementById("kupdline");if(!el){el=document.createElement("div");el.id="kupdline";el.className="kupdline";el.setAttribute("role","status");document.body.appendChild(el)}
  el.textContent=text;el.classList.remove("out");kitLinePos(el);clearTimeout(kitLine.t);if(ms)kitLine.t=setTimeout(()=>{el.classList.add("out");setTimeout(()=>{if(el.classList.contains("out"))el.remove()},600)},ms);return el}
 window.kitLine=kitLine;
 
