@@ -29,7 +29,9 @@ const KFK_SP={
 const KFK_LIGHT={
  candle:{w:320,h:320},"glow-gold":{w:384,h:384},moonlight:{w:288,h:384},"lantern-red":{w:288,h:384},divine:{w:288,h:384}
 };
-const KFK_SHEET={ /* filled by dev/fxwork/sheet.sh: cols×rows frames of w×h, fps, played once */
+const KFK_SHEET={ /* dev/fxwork/sheet.sh: cols×rows frames of w×h (true alpha), fps, played once; poster = last frame (reduced motion) */
+ silk:{cols:6,rows:4,n:24,w:120,h:214,fps:5,src:"silk-sheet.webp",poster:"silk.webp"},       /* white silk descends and settles (death) */
+ thread:{cols:4,rows:4,n:16,w:256,h:144,fps:7,src:"thread-sheet.webp",poster:"thread.webp"}  /* red thread trembles and snaps (betrayal) */
 };
 /* motion per kind for kitFxBurst (fall | burst | rise | bloom | rain) */
 const KFK_MOVE={"petal-plum":"fall","petal-peach":"fall","petal-lotus":"fall",osmanthus:"fall",leaf:"fall",snow:"fall",ash:"fall",paper:"burst",
