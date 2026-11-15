@@ -1,0 +1,10 @@
+# KIT_REQUESTS — thành phần kit còn thiếu (luật KIT TRƯỚC, sếp 16:50Z / 17:45Z)
+Thợ báo "KIT REQUEST" trong báo cáo → điều phối ghi vào đây → giao làm thành phần kit chung (KIT.md + trang mẫu kit) TRƯỚC, rồi thợ mới dùng.
+
+| Ngày | Ai xin | Thành phần | Dùng ở | Giao cho | Trạng thái |
+|---|---|---|---|---|---|
+| 15/11 | R opt-render | Nhãn rủi ro (.krisk), dòng gợi ý (.khint), dòng kèm (.kakem), dấu THÀNH/BẠI (.neu .seal) → làm từ kitChip | lựa chọn sự kiện | opt-render-fix | đang làm |
+| 15/11 | fix-float | kitRelTable (bảng chip quan hệ Tuần lục), KIT §39 | Tuần lục, thẻ tin | fix-float | đang làm |
+| 15/11 | sếp 17:27Z | Bảng nhãn\|giá trị một cột cố định (mở rộng kitRows) | LUẬT, thông tin món, Mệnh truyện… | kit-table | đang làm |
+| 15/11 | sếp 17:16Z | Ảnh nhỏ theo phẩm không khung vuông | mọi dòng người | fix-float | đang làm |
+| 15/11 | kit-fig2 (owner 17:04Z) | World / family stat change inside a fact ("Kho lúa −10", "nhà Hộ bộ thế lực +6", "Biên cương −4"): today a plain kchip (news card) or kchip + book-only .kbk-long (Tuần lục). Relation changes ("thân +23", "thiện cảm +5") = fix-float kitRelDelta, needs merging into main first | news card "Tin trong cung", Tuần lục | (coordinator) | requested |

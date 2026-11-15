@@ -11,7 +11,7 @@
    The friend = one rival entry {id:<her pid>, coop:true} built from her P (consort), or, while she serves as a cung nữ,
    one servant {sid:<her pid>, coop:true} in her mistress's staff. Her rows (sung, danh, Thiện cảm …) changed by my acts are
    written back into P[friend].S, so the server's 3-way merge adds my deltas to hers.
-   Week: "Qua đêm" runs endTurn() locally (friend entry taken out; on the guest the world-agency functions are muted so
+   Week: "Sang ngày mới" runs endTurn() locally (friend entry taken out; on the guest the world-agency functions are muted so
    world events roll once, on the host); once the week's dialogs are read, the client sends {t:"end",week,state:C} and waits
    (#next disabled; jcooplobby shows "Đợi bạn xong tuần"). The merged C comes back as {t:"week"} and the local game is rebuilt.
    Death: the normal rebirth flow (over → "Đầu thai kiếp sau" → Luân hồi card). nlRun is hooked so the new life is put into the
@@ -153,7 +153,7 @@ function frozen(){const s=COOP.state;return CW.on&&(s.status!=="open"||!s.peerOn
 function lockNext(){const n=$("next");if(!n)return;const wb=CW.on&&(CW.bend||needWhere()||!!CW.pendBuoi);const lock=CW.on&&(waiting()||frozen()||CW.pend||!CW.base||wb);
  if(lock){if(!n.disabled)n.disabled=true;if(n.dataset.coopWait!=="1")n.dataset.coopWait="1";const t=wb?(CW.bend?"Đợi hảo hữu xong buổi":"Đợi hảo hữu"):null;if(t&&n.textContent!==t){/* keep the button's own width (the tabs beside it must not shrink): the longer words wrap inside */
   if(!n.style.maxWidth&&n.offsetWidth)n.style.maxWidth=n.offsetWidth+"px";n.classList.add("kcwait");n.textContent=t}}
- else if(n.dataset.coopWait){delete n.dataset.coopWait;n.style.maxWidth="";n.classList.remove("kcwait");n.disabled=!!(S&&(S.dead||Q.length||S.mg));const t=S&&(S.buoi||0)>=(typeof B4L==="number"?B4L:2)?"Qua ngày":"Sang buổi";if(n.textContent!==t)n.textContent=t}}
+ else if(n.dataset.coopWait){delete n.dataset.coopWait;n.style.maxWidth="";n.classList.remove("kcwait");n.disabled=!!(S&&(S.dead||Q.length||S.mg));const t=S&&(S.buoi||0)>=(typeof B4L==="number"?B4L:2)?"Sang ngày mới":"Sang buổi";if(n.textContent!==t)n.textContent=t}}
 /* ---------- phase 2 (PROTOCOL §9): same buổi, same place, acts between the two ---------- */
 Object.assign(CW,{bend:false,whereKey:"",lastWhere:null,fpos:null,posKey:"",p2:true,allow:false,acts:{}});
 const bkey=()=>wk()+":"+((S&&S.buoi)||0);
@@ -226,7 +226,7 @@ function sendRes(v,k,b0,txt,id){const b1=fsnap(v);const fx={};for(const x of DK)
 const seenIds=new Set();
 function onAct(m){if(!CW.on||m.from===CW.seat||!S||S.dead||seenIds.has(m.id))return;seenIds.add(m.id);if(m.mode!=="invite")return;
  const what=m.k==="gift"?`muốn tặng ngươi ${esc(m.item||"một món quà")}`:`muốn kết giao với ngươi`;
- pushModal({t:"Hảo hữu tìm đến",h:`<p><b>${esc(m.who)}</b> ${what}.</p>`,opts:[
+ pushModal({act:1,t:"Hảo hữu tìm đến",h:`<p><b>${esc(m.who)}</b> ${what}.</p>`,opts:[
   {n:"Nhận",fx:{},x:"hảo hữu tiếp tục việc ấy",go:()=>COOP.send({t:"actr",id:m.id,ok:true,k:m.k})},
   {n:"Từ chối",fx:{},x:"không nhận",go:()=>COOP.send({t:"actr",id:m.id,ok:false,k:m.k})}]});showModal();render()}
 function onRes(m){if(!CW.on||m.from===CW.seat||!S||seenIds.has("r"+m.id))return;seenIds.add("r"+m.id);COOP.send({t:"actr",id:m.id,ok:true,ack:1});if(S.dead)return;

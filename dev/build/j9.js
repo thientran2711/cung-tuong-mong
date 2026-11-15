@@ -93,7 +93,7 @@ function relHTML(){const P=consorts();const sel=relSel==="emp"||relSel==="th"?re
  let h=`<div class="reltab">`+[["me","Ngươi"]].concat(liveRivals(true).map(v=>[v.id,v.name]),[["emp","Hoàng thượng"]],S.thDead?[]:[["th","Thái hậu"]]).map(([k,n])=>`<button data-rel="${k}" aria-pressed="${String(k)===String(relSel)}">${n}</button>`).join("")+`</div>`;
  const row=(n,a,b)=>`<div class="rrow"><span>${n}</span><span>${a}</span><span>${b}</span></div>`;
  if(sel==="emp"){h+=row("<b>Người</b>","<b>Ngài sủng</b>","<b>Ân tình</b>")+P.map(p=>row(p===S?"Ngươi":p.name,p.sung,p.an||0)).join("");return h}
- if(sel==="th"){h+=row("<b>Người</b>","<b>Thái hậu thương</b>","")+P.map(p=>row(p===S?"Ngươi":p.name,p.th,"")).join("");return h}
+ if(sel==="th"){h+=row("<b>Người</b>","<b>Thái hậu → người ấy: thiện cảm</b>","")+P.map(p=>row(p===S?"Ngươi":p.name,p.th,"")).join("");return h}
  h+=row("<b>Với</b>","<b>Thiện cảm (đi · về)</b>","<b>Oán (đi · về)</b>")+P.filter(p=>p!==sel).map(p=>row((p===S?"Ngươi":p.name)+(sameHouse(sel,p)?" · cùng cung":""),`${aff(sel,p)} · ${aff(p,sel)}`,`${oan(sel,p)} · ${oan(p,sel)}`)).join("");
  h+=row("Hoàng thượng",`sủng ${sel.sung}`,`ân tình ${sel.an||0}`)+(S.thDead?"":row("Thái hậu",`thương ${sel.th}`,""));
  return h}
@@ -128,6 +128,6 @@ function rivalsBuoi(){let ev="";for(const v of liveRivals(true)){if(!v.alive||v.
 function nextBuoi(){if(!S||S.dead||Q.length||S.mg)return;if((S.buoi||0)>=B4L){S.buoi=0;endTurn();return}
  S.buoi=(S.buoi||0)+1;used=0;const ev=b4NpcActs()?rivalsBuoi():"";if(S.dead){render();return}placeWhere();popIdx=null;popMsg="";
  if(S.out)coldVisit();else if(S.place!=="home"){const k=S.place;S.place="home";const u=used;goTo(k);used=u}else S.visit={k:"home",people:homePeople(),talked:false,tk:{}};
- if(ev)Q.push({t:"Tin trong cung",h:`<p class="past">${when()} · ${BUOI[S.buoi]}</p><p>${ev}</p>`});curtain();render()}
+ if(ev)Q.push({t:"Tin trong cung buổi này",kind:"news",h:`<p class="past">${when()} · ${BUOI[S.buoi]}</p><p>${ev}</p>`});curtain();render()}
 A("pushp","Đẩy xuống hồ sen",{c:{duc:-12},ok:(a,t)=>whereOf(a)==="vuon"&&together(a,t),o:a=>odA(a,40+a.tamco/4),f:(a,t)=>pushPond(a,t)});
 A("trip","Ngáng chân",{c:{duc:-4},ok:(a,t)=>together(a,t),o:a=>odA(a,50+a.tamco/5),f:(a,t)=>trip(a,t)});
