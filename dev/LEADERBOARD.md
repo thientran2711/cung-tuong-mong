@@ -106,4 +106,6 @@ cao nhất · `mama` · `endk` tiêu đề kết cục · `fate` lời kết · 
   (cùng board.js trên node:sqlite) — 3 khách giả, 5 kiếp, đổi tên, ngoại tuyến rồi gửi lại, sổ bản cũ.
 
 ## PROGRESS
-- 15/11: Worker `ctm-rank` triển khai (wrangler qua proxy, bản 3f13e913), `/health` 200, `/top/lives` rỗng; `ctm-coop` vẫn 200.
+- 15/11: Worker `ctm-rank` triển khai (wrangler qua proxy; bản 3f13e913, rồi d7bcca9b), `/health` 200, `/top/lives` rỗng; `ctm-coop` vẫn 200.
+- Kiểm Worker thật trên workerd (`wrangler dev`, DO SQLite thật): `node rank/worker/test/http.test.mjs http://127.0.0.1:<port>` ALL OK
+  (hello + CORS, chấm điểm, tần suất, từ chối, top, đổi tên, /me, preflight). Test này ghi dữ liệu: KHÔNG chạy vào bảng thật.
