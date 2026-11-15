@@ -782,9 +782,13 @@ Test: dev/test/inv-grade.js checks on every panel tab that each act card's botto
   card (player, consorts, maids, ma ma, Thái hậu…), and on Tư trang. The outfit status chip (Đúng phẩm / Vượt phẩm / Quá giản dị / Phạm tang) shows
   only when the player knows it (`wdSlots().label`). Tap: her own → Tư trang on that slot; someone else → item panel (name, grade, giver, status if
   known, where the "Hặc ăn mặc sai phẩm" act is). Replaces j92's temporary "Trâm: … / Y phục: …" chips.
-- K2 Rương đồ (Tư trang, `wdInvHTML` rebuilt with kit parts): "Đang mặc" (K1 md + status chip + collection line) with act cards Tháo / Tự chọn đồ /
-  Chải chuốt; "Rương đồ" with sub-tabs Trâm cài N · Y phục N (`.ksub`), a grid of kitItem lg; tap an item → its facts + act cards Mặc / Tặng /
-  Bán lén / Cầm cố (Ngự tứ: disabled with the reason); "Đang cầm cố" tiles with Chuộc lại. All acts are j92's (`data-wd`), priced as act cards.
+- K2 Rương đồ: REMOVED (review/balance-unified, 11/15). The wardrobe has no block of its own; it lives in Tư trang's ONE bag + "Đang mang"
+  (`dev/build/jwdinv.js`, after jinv): WD trâm in the bag tab Trang sức, WD y phục in the tab Y phục (picture `WD_ITEMS[k].icon` = img/wd-<key>.webp,
+  grade ground, corner Xa xỉ N); worn ones carry the worn band (Đang cài / Đang mặc), pawned ones the tag "đang cầm". Đang mang: Cài tóc = `p.wd.tram`,
+  Y phục = `p.wd.y` (one slot each). Tap an item → the one item panel (kitItemRows-style Phẩm · Được · Mất · Ghi chú, "chưa rõ phẩm" until learnt)
+  + j92 act cards Cài/Mặc · Tháo · Tặng · Bán lén · Cầm cố · Chuộc lại; tap the Cài tóc / Y phục slot → pick another (1 khắc), fabric "May áo",
+  Tự chọn đồ, Chải chuốt. Header: Sắc/Danh of ONE `wearBonus`, Xa xỉ total (ONE `luxOf`, WD included), and the Đúng/Vượt phẩm chip only when known
+  or someone said it (j92 hidden rule: the level / allowance is never shown).
 ### 28.15 PERSON CARD after review FAIL 5b81408
 - Screens 600–999 px portrait (Fold) on card tabs: stage 22 % of the screen. Left sticky column order: name, rank, BARS, portrait, wear slots, facts;
   right column: act tabs + act cards. Fold 755x1000 without scrolling: name y≈585, bars 630–733, first act card 679–793 (measured).
@@ -1509,3 +1513,13 @@ Tested 755x1000@2, 1180x820@2, 1366x1024@2, 686x880@2.2, 412x1058@2, 390x844@3, 
   back. Line meanwhile: "Hai người cùng mở bản mới, đang vào lại phòng". Two different builds never play on: `COOPW.hold` freezes Qua buổi and the
   older side walks through the same save → reload → rejoin at once.
 - Wording: "bản mới", "mở bản mới", "Để sau", "Cùng mở"; never "tải lại trang", "phiên bản", "cập nhật" (VANPHONG §3).
+
+## 36. EMOTION SEAL · dấu tâm trạng (review/emotion, `dev/build/jemo.js`, owner 11/14) — one layer of `pcPort`
+- Every frame drawn by `pcPort` (so every size: tall frame, person card cell, `mdH` xs/sm/default/big strips) carries `img.kemo.kemo-<k>`:
+  `img/kit/emo-<k>.webp` (160 px, transparent; owner-approved set: a simple palace lady — soft oval face, wide two-bun chignon, pink flower, gold bộ diêu — with a bold ink expression on a solid colour ground per feeling, thin gold rim; gpt-2-6, Magnific VXUSWLpMMU; pilot sheet dev/shots/emotion/pilot-emo-lady.jpg).
+  Keys: vui · binh · buon · gian · so · ghen · lo · dau · muu · an (chưa rõ "?").
+- Place: top-left corner of the photo window, over the frame edge (left 8.5 %, top 17.5 %, width 22 % of the canvas); sm 30 %, xs 38 % so it stays ≥ 11 px.
+  z-index 4 (above frame and crest), drop shadow. Giận and Đau khổ pulse softly (off with reduced motion).
+- No ring/aura around the frame (owner 11/14 late: removed); the seal alone shows the feeling.
+- Fog: stranger → nothing; known person, no fresh news → grey "?" seal; her own → always.
+- Data only through `window.kitEmotion(p)` → `{k,name,v,why,known}`; tooltip/alt "Tâm trạng: <tên> (<cause>)". Nobody draws another mood icon; no code-reshaped facial expressions (owner 22:50Z): the seal + ring are the only display of feelings.

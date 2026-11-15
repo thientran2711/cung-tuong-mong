@@ -19,7 +19,7 @@ function accessOf(p,k){p=p||S;if(!k)return{ok:false,why:"cung trống",kind:"rul
  if(k==="kn"){if(!qOn()||r>=7)return{ok:true};if(b===0||r>=5)return{ok:true};return{ok:false,why:"chỉ sáng thỉnh an",kind:"rule",ask:"bk"}}
  if(k==="tn"){if(S.thDead)return{ok:true};if(r<2)return{ok:false,why:"cần phẩm Quý nhân",kind:"rule"};if(b===0)return{ok:true};return{ok:false,why:"chỉ sáng thỉnh an",kind:"rule"}}
  if(k[0]==="r"){const h=ctx.host;if(!h||!h.alive||h.out)return{ok:true};const hr=rkOf(h);if(r>=hr-1)return{ok:true};return{ok:false,why:`cần phẩm ${RANKS[Math.max(0,hr-1)].n}`,kind:"rule",ask:"bk"}}
- if(ACC_DAY[k]){if(b<=1)return{ok:true};return{ok:false,why:"đóng cửa tối",kind:"hour"}}
+ if(ACC_DAY[k]){if(b<B4L)return{ok:true};return{ok:false,why:"đóng cửa tối",kind:"hour"}}
  return{ok:true}}
 /* the odds and prices (her side; an NPC module may call the same) */
 function accSneakO(k,a){a=a||S;const base=k==="dtd"?25:k==="thu"?30:k==="tn"||k==="kn"?35:k[0]==="r"?45:55;return odA(a,base+(a.tamco||0)/5+(a.mat||0)*3)}
@@ -75,7 +75,7 @@ document.addEventListener("click",e=>{const s=e.target.closest("[data-acsneak]")
 /* owner 11/15 06:35Z: the new buổi starts AT her place (S.place stays) with the new occupants — the gate is not asked again (she is
    already inside); only a real reason moves her (night / week end, cấm túc, lãnh cung, a summons), and then a line says why */
 (function(){const n0=nextBuoi;nextBuoi=function(){window.__accSilent=1;window.__accStay=1;const k=S&&S.place,b=S&&(S.buoi||0);try{return n0.apply(this,arguments)}finally{window.__accSilent=0;window.__accStay=0;
- try{if(S&&!S.dead&&k&&k!=="home"&&b<2&&(S.buoi||0)===b+1&&S.place!==k&&S.visit){const why=S.out?"ngươi bị đày vào lãnh cung":S.confined?"ngươi đang bị cấm túc":"";
+ try{if(S&&!S.dead&&k&&k!=="home"&&b<(typeof B4L==="number"?B4L:2)&&(S.buoi||0)===b+1&&S.place!==k&&S.visit){const why=S.out?"ngươi bị đày vào lãnh cung":S.confined?"ngươi đang bị cấm túc":"";
   if(why){const nm=typeof accName==="function"?accName(k):k;S.visit.msg=(S.visit.msg?S.visit.msg+" ":"")+`Không ở lại ${nm} được: ${why}.`;log(`Rời ${nm}: ${why}.`);if(typeof render==="function")render()}}}catch(e){}}}})();
 /* a summons from the Thái hậu is a pass to Đức Thọ cung this buổi */
 (function(){const c0=chooseM;chooseM=function(i){try{const m=Q[0];if(m&&/triệu/i.test(m.t||"")&&m.opts&&m.opts[i]&&/^Đến/.test(m.opts[i].n)){if(/Thái hậu/.test(m.t))accGrant(S,"tn");if(/Hoàng thượng/.test(m.t)){accGrant(S,"dtd");accGrant(S,"thu")}if(/Hoàng hậu/.test(m.t))accGrant(S,"kn")}}catch(e){}return c0.apply(this,arguments)}})();
@@ -113,7 +113,7 @@ function accInfo(){if(!S||Q.length)return;const R=n=>`<b>${n}</b>`;
  <p>${R("Càn Ninh cung")}: sáng thỉnh an, ai cũng vào. Lúc khác: được mời, hoặc từ Quý phi.</p>
  <p>${R("Đức Thọ cung")}: sáng thỉnh an, từ Quý nhân. Thấp hơn: khi Thái hậu triệu.</p>
  <p>${R("Cung phi tần khác")}: phẩm ngươi không thấp hơn chủ cung quá một bậc, hoặc được mời.</p>
- <p>${R("Thái y viện, Ngự hoa viên")}: sáng, chiều. Tối đóng cửa.</p>
+ <p>${R("Thái y viện, Ngự hoa viên")}: sáng, trưa, chiều. Tối đóng cửa.</p>
  <p>${R("Kính sự phòng")}: phi tần nào cũng vào. ${R("Trường Môn viện")}: ai cũng vào, bị thấy: Danh -2.</p>
  <p>${R("Cung của ngươi")}: luôn vào được.</p>
  <p>Chỗ có dấu khóa: không vào được lúc này. <b>Lẻn vào</b>: tốn khắc, bị bắt Danh -8 và bị phạt.</p></div>`,btn:"Đã rõ"});showModal()}

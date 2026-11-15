@@ -146,7 +146,8 @@ export class Room {
     if (t === "ping") return this.send(ws, { t: "pong" });
     if (t === "bend") {
       if (msg.week !== m.week || msg.buoi !== (m.buoi || 0)) return this.send(ws, { t: "error", code: "badbuoi", msg: "tuần " + m.week + " buổi " + (m.buoi || 0) });
-      if ((m.buoi || 0) >= 2) return this.send(ws, { t: "error", code: "badbuoi", msg: "buổi tối kết thúc bằng end" });
+      /* buổi per week: 3 (old clients) or what the host said at init (4 since jtime4: sáng, trưa, chiều, tối) */
+      if ((m.buoi || 0) >= (m.nb || 3) - 1) return this.send(ws, { t: "error", code: "badbuoi", msg: "buổi tối kết thúc bằng end" });
       m.bended = m.bended || {}; m.bended[seat] = true;
       const other = seat === "a" ? "b" : "a";
       if (m.bended[other] || !m.seats[other]) { m.buoi = (m.buoi || 0) + 1; m.bended = {}; await this.saveMeta(); return this.bcast({ t: "buoi", week: m.week, buoi: m.buoi, bended: { a: false, b: false } }); }
@@ -168,7 +169,7 @@ export class Room {
       if (seat !== "a") return this.send(ws, { t: "error", code: "notyours", msg: "chỉ chủ phòng" });
       if (await this.loadC()) return this.send(ws, { t: "error", code: "hasstate", msg: "phòng đã có thế giới" });
       const C = msg.state; if (!C || typeof C !== "object") return;
-      C.week = m.week = 0; m.ended = {}; m.buoi = 0; m.bended = {};
+      C.week = m.week = 0; m.ended = {}; m.buoi = 0; m.bended = {}; m.nb = (msg.nb === 4 ? 4 : 3);
       await this.saveC(C); await this.saveMeta();
       return this.bcast({ t: "state", state: C, week: m.week, by: seat });
     }

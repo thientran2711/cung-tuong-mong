@@ -141,7 +141,7 @@ function sendMe(){T("sendMe "+(S&&S.dead));if(!CW.on||!S||S.dead)return;
  /* a new life: the old life's pending / sent week end is void (the server drops my sent end on `me`); she ends this week herself */
  if(CW.base){CW.pend=false;if(CW.sent===wk())CW.sent=-1;CW.bend=false}
  const C=toCanon();CW.dying=null;
- if(!CW.base){/* host's first world */COOP.send({t:"init",state:C});CW.base=C}else{COOP.send({t:"me",P:C.P[CW.seat]});CW.base.P=CW.base.P||{};CW.base.P[CW.seat]=J(C.P[CW.seat])}
+ if(!CW.base){/* host's first world */COOP.send({t:"init",state:C,nb:typeof B4N==="number"?B4N:3});CW.base=C}else{COOP.send({t:"me",P:C.P[CW.seat]});CW.base.P=CW.base.P||{};CW.base.P[CW.seat]=J(C.P[CW.seat])}
  try{if(CW.base&&CW.base.P&&CW.base.P[fs()]&&!friendEntry())placeFriend(CW.base.P[fs()])}catch(e){console.error(e)}
  /* a new life starts in the room's CURRENT buổi (the friend may already be in buổi chiều / tối) */
  if(CW.p2&&typeof CW.rbuoi==="number"&&(S.buoi||0)!==CW.rbuoi&&CW.rweek===wk()){S.buoi=CW.rbuoi;used=0;try{placeWhere()}catch(e){console.error(e)}}
@@ -153,7 +153,7 @@ function frozen(){const s=COOP.state;return CW.on&&(s.status!=="open"||!s.peerOn
 function lockNext(){const n=$("next");if(!n)return;const wb=CW.on&&(CW.bend||needWhere()||!!CW.pendBuoi);const lock=CW.on&&(waiting()||frozen()||CW.pend||!CW.base||wb);
  if(lock){if(!n.disabled)n.disabled=true;if(n.dataset.coopWait!=="1")n.dataset.coopWait="1";const t=wb?(CW.bend?"Đợi bạn xong buổi":"Đợi bạn"):null;if(t&&n.textContent!==t){/* keep the button's own width (the tabs beside it must not shrink): the longer words wrap inside */
   if(!n.style.maxWidth&&n.offsetWidth)n.style.maxWidth=n.offsetWidth+"px";n.classList.add("kcwait");n.textContent=t}}
- else if(n.dataset.coopWait){delete n.dataset.coopWait;n.style.maxWidth="";n.classList.remove("kcwait");n.disabled=!!(S&&(S.dead||Q.length||S.mg));const t=S&&(S.buoi||0)>=2?"Qua đêm":"Qua buổi";if(n.textContent!==t)n.textContent=t}}
+ else if(n.dataset.coopWait){delete n.dataset.coopWait;n.style.maxWidth="";n.classList.remove("kcwait");n.disabled=!!(S&&(S.dead||Q.length||S.mg));const t=S&&(S.buoi||0)>=(typeof B4L==="number"?B4L:2)?"Qua đêm":"Qua buổi";if(n.textContent!==t)n.textContent=t}}
 /* ---------- phase 2 (PROTOCOL §9): same buổi, same place, acts between the two ---------- */
 Object.assign(CW,{bend:false,whereKey:"",lastWhere:null,fpos:null,posKey:"",p2:true,allow:false,acts:{}});
 const bkey=()=>wk()+":"+((S&&S.buoi)||0);
@@ -307,7 +307,7 @@ const mute=n=>{const f=window[n];if(typeof f!=="function")return;window[n]=funct
  if(!CW.on)return f.apply(this,arguments);let r;CW.inTurn=true;try{r=withoutFriend(()=>f.apply(this,arguments))}finally{CW.inTurn=false}if(S){CW.pend=true;try{render()}catch(e){}lockNext()}return r}})();
 (function(){const f=nextBuoi;nextBuoi=function(){if(!CW.on)return f.apply(this,arguments);if(waiting()||frozen()||CW.pend||!CW.base)return;
  /* same buổi for both: buổi sáng / chiều end with `bend`; the server's `buoi` runs the real step (CW.allow); buổi tối ends the week (`end`) */
- if(CW.p2&&!CW.allow&&(S.buoi||0)<2){if(!S||S.dead||Q.length||S.mg||needWhere())return;bend();return}
+ if(CW.p2&&!CW.allow&&(S.buoi||0)<(typeof B4L==="number"?B4L:2)){if(!S||S.dead||Q.length||S.mg||needWhere())return;bend();return}
  const r=f.apply(this,arguments);if(!CW.pend){keepFriendPos();refreshHere()}return r}})();
 /* #next was wired to the bare nextBuoi in j6 (before any wrapper): in co-op route the button through the wrapped one */
 (function(){const n=$("next");if(!n)return;const o=n.onclick;n.onclick=function(e){if(CW.on)return nextBuoi();return o?o.call(this,e):undefined}})();
