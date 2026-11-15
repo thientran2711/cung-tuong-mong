@@ -62,7 +62,7 @@ function j77Card(k,empty){if(!S||S.dead||Q.length)return;
  showModal()}
 /* a walk that uses the last khắc: say so plainly, then go (she sees who is there; next buổi she starts there) */
 function j77LastWalk(k,tc){let n=0;try{n=countAt(k)}catch(e){}
- Q.push({t:accName(k),h:`<p>Đường đi ${tc} khắc · đến nơi là hết buổi, chỉ kịp xem ai ở đó.</p>${n?`<p class="past">Có ${n} bóng người ở đó.</p>`:""}<p class="past">Buổi sau ngươi bắt đầu ở đó.</p>`,
+ Q.push({t:accName(k),h:`<p>Đường đi ${tc} khắc · đến nơi là hết khắc, sang buổi sau.</p>${n?`<p class="past">Có ${n} bóng người ở đó.</p>`:""}<p class="past">Ngươi ở lại đó: buổi sau bắt đầu ngay tại chỗ, thấy ai ở đó.</p>`,
   opts:[{n:"Đi",fx:{},x:`Chắc chắn · tốn: ${tc} khắc · thành: đến nơi, thấy ai ở đó; người ở đó có thể đến gần`,go:()=>setTimeout(()=>{if(S&&!S.dead&&!Q.length)goTo(k)},0)},{n:"Thôi",fx:{},x:""}]});showModal()}
 /* one tap rule for the map and the list */
 function j77Tap(k,empty){if(!S||S.dead||Q.length)return;if(empty||!k)return j77Card(k,empty||"Cung trống");
@@ -205,3 +205,9 @@ accInfo=function(){if(!S||Q.length)return;const R=n=>`<b>${n}</b>`;
  for(const v of rivals){if(!v.alive||v.out)continue;const k=W[v.id];if(!k||k==="home"||k[0]!=="r"||palaceOf(v)===k)continue;const h=accHost(k);
   if(!h||h===v||!h.alive||h.out||whereOf(h)!==k||rkOf(h)-rkOf(v)<C.rankGap)continue;
   if(roll(C.npcGreet))relAdd(v,h,C.okAff);else relAdd(v,h,accSkipAff(h,v))}}catch(e){}return r}})();
+
+/* owner 11/15 06:45Z: when the khắc run out the buổi still turns over by itself, but she STAYS where she is (j41 nextBuoi keeps
+   S.place): the stage of that place shows who is there in the new buổi, with one line "Sang buổi tối · ngươi vẫn ở Kính sự phòng" */
+(function(){const n0=nextBuoi;nextBuoi=function(){const k=S&&S.place,b=S?(S.buoi||0):0;const r=n0.apply(this,arguments);
+ try{if(S&&!S.dead&&!S.out&&k&&k!=="home"&&b<2&&(S.buoi||0)===b+1&&S.place===k&&S.visit&&S.visit.k===k){const nm=typeof accName==="function"?accName(k):k;
+  const line=`Sang ${String(BUOI[S.buoi]).toLowerCase()} · ngươi vẫn ở ${nm}.`;if(!(S.visit.msg||"").includes(line)){S.visit.msg=line+(S.visit.msg?" "+S.visit.msg:"");render()}}}catch(e){}return r}})();
