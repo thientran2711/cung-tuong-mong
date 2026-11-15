@@ -73,7 +73,7 @@ function kitRelSamples(){const R=(dir,label,now,d,kind)=>({dir,label,now,d,kind:
  return [{id:"§52",title:"kitRelTable · phi tần · Hoàng thượng · Thái hậu · kẻ hầu · người lạ",html:()=>Object.values(rows).map(r=>kitRelTable(r)).join("")},
   {id:"§52",title:"kitRelTable · cột hẹp (< 240px)",html:()=>`<div style="max-width:220px">${kitRelTable(rows["Phi tần"])}</div>`},
   {id:"§52",title:"kitRelDelta · trong dòng sự việc",html:()=>`<p>Phi Tống Phương Hoa nhờ người đưa thư. ${kitRelDelta("Nàng oán ta","them",2,"bad")}, ${kitRelDelta("Nàng → ta: thiện cảm","them",-15)}; hai người khác: ${kitRelDelta("thiện cảm","none",7)}.</p>`},
-  {id:"§57",title:"kitNumDelta / kitDeltaAuto · số không phải quan hệ",html:()=>`<p>Tháng này: Được mùa khắp nơi, ${kitNumDelta("Kho lúa",12)}; nhà Hộ bộ ${kitNumDelta("thế lực",6)}; ${kitNumDelta("Sủng",-3)}; ${kitDeltaAuto("nàng oán ngươi",4)}.</p>`}]}
+  {id:"§57",title:"kitNumDelta / kitDeltaAuto · số không phải quan hệ",html:()=>`<p>Tháng này: Được mùa khắp nơi, ${kitNumDelta("Kho lúa",12)}; nhà Hộ bộ ${kitNumDelta("thế lực",6)}; ${kitNumDelta("Sủng",-3)}; ${kitDeltaAuto("nàng oán ngươi",4)}.</p><p>Phi Tống Phương Hoa nhờ người đưa thư. ${kitDeltaAuto("Nàng oán ta",2)}, ${kitDeltaAuto("thân",-2,"Nàng oán ta +2, ")} (một chữ “thân” trơn ngay sau nàng → ta: người làm được ghi rõ).</p>`}]}
 setTimeout(()=>{try{if(window.KIT_SAMPLES)KIT_SAMPLES.push(...kitRelSamples())}catch(e){console.error(e)}},0);
 /* ---- KIT §57 NUMBER DELTA (kit request from kit-fig2, KIT_REQUESTS.md): one inline change for anything that is not a relation
    ("Kho lúa −10", "nhà Hộ bộ thế lực +6", "Sủng +3"): same family as kitRelDelta — label in ink, the number a whole number in the
@@ -87,10 +87,17 @@ function kitDeltaAuto(label,d,before){const l=String(label||"").trim(),b=String(
  let m=/^(?:(.*?)\s+)?(quý|với) (ngươi|ta)$/i.exec(l);if(m){const w=(m[1]||"").trim();return kitRelDelta(`${w&&!/^(nàng|nàng ta)$/i.test(w)?w:"Nàng"} → ta: thiện cảm`,"them",d,"good")}
  m=/^(?:(.*?)\s+)?oán (ngươi|ta)$/i.exec(l);if(m){const w=(m[1]||"").trim();return kitRelDelta(`${w&&!/^(nàng|nàng ta)$/i.test(w)?w:"Nàng"} oán ta`,"them",d,"bad")}
  m=/^(?:(.*?)\s+)?ghen$/i.exec(l);if(m){const w=(m[1]||"").trim();return kitRelDelta(w?`${/^(nàng|nàng ta)$/i.test(w)?"Nàng":w} ghen`:"ghen","them",d,"bad")}
- if(/^(?:.*\s)?(thiện cảm|thân)$/i.test(l)){const toMe=/(?:→|với)\s*ta:?\s*$/.test(b);const pre=l.replace(/(thiện cảm|thân)$/i,"").trim();return (pre?pre+" ":"")+kitRelDelta("thiện cảm",toMe?"them":"none",d,"good")}
+ /* a bare "thân / thiện cảm ±N" names its actor (KIT §57, review r6): right after another change of the SAME person toward me in the same
+    sentence ("Nàng oán ta +2, thân −2") it is that person's thiện cảm toward me → "Nàng → ta: thiện cảm −2"; only a label the writer
+    already framed ("hai người khác: thiện cảm") or with no such lead stays a change between two other people */
+ if(/^(?:.*\s)?(thiện cảm|thân)$/i.test(l)){const toMe=/(?:→|với)\s*ta:?\s*$/.test(b);const pre=l.replace(/(thiện cảm|thân)$/i,"").trim();
+  const lead=!pre&&/(?:oán (?:ta|ngươi)|(?:quý|với) (?:ta|ngươi)|→ ta:?\s*thiện cảm|ghen)\s?[+\-−]\s?\d+\s*,\s*$/i.exec(b);
+  if(toMe||lead||/^(nàng|nàng ta)$/i.test(pre)){const w=lead&&/(?:^|[.;:!?>]\s*)([\p{L}][\p{L} ]{0,40}?) (?:oán|quý|với|ghen|→)[^,.;:]*,\s*$/u.exec(b);
+   let who=w?w[1].trim():"";if(!who||who.split(" ").length>4||/^(nàng|nàng ta|ta)$/i.test(who))who="Nàng";who=who[0].toUpperCase()+who.slice(1);return toMe?kitRelDelta("thiện cảm","them",d,"good"):kitRelDelta(`${who} → ta: thiện cảm`,"them",d,"good")}
+  return (pre?pre+" ":"")+kitRelDelta("thiện cảm","none",d,"good")}
  return kitNumDelta(l,d)}
 window.kitNumDelta=kitNumDelta;window.kitDeltaAuto=kitDeltaAuto;
 const KRD_ARROW=/((?:[Nn]àng|Hoàng hậu|Thái hậu|Hoàng thượng|Hắn|[Tt]a|[\p{Lu}][\p{L}]*(?: [\p{Lu}][\p{L}]*){0,2}) → (?:ta|nàng|hắn)(?:: thiện cảm|: sủng)) ([+\-−])\s?(\d+(?:[.,]\d+)?)/gu;
 if(typeof kpChipify==="function"){kpChipify=function(html){return kpMapText(html,s=>s.replace(KRD_ARROW,(m,l,sg,n)=>kitRelDelta(l,/^[Tt]a /.test(l)?"me":"them",Math.round((sg==="+"?1:-1)*parseFloat(n.replace(",","."))),"good")).replace(KP_DELTA,(m,l,sg,n,off,str)=>{if(/^(năm|tháng|tuần|ngày|tuổi|lần|khắc)$/i.test(l.split(" ").pop()))return m;
-  const v=Math.round((sg==="+"?1:-1)*parseFloat(n.replace(",",".")));return kitDeltaAuto(l,v,str.slice(Math.max(0,off-14),off))})).replace(/<\/b><\/span>([,.;:!?)])/g,"</b>$1</span>")/* review r6: the comma / stop after a change stays on its line (nowrap .krd), never starts the next line */}}
+  const v=Math.round((sg==="+"?1:-1)*parseFloat(n.replace(",",".")));return kitDeltaAuto(l,v,str.slice(Math.max(0,off-60),off))})).replace(/<\/b><\/span>([,.;:!?)])/g,"</b>$1</span>")/* review r6: the comma / stop after a change stays on its line (nowrap .krd), never starts the next line */}}
 (function(){const st=document.createElement("style");st.id="kit-krd-n";st.textContent=`.krd-n .krd-l{font-weight:600;color:var(--ink,#3a2a1a)}.krd .krd-l{font-weight:600}`;document.head.appendChild(st)})();

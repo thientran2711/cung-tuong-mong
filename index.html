@@ -12159,13 +12159,20 @@ const KCL_FREEZE=["boxSizing","display","width","height","minWidth","minHeight",
 /* NO FLASH (owner 11/15 15:45Z: turning the Sổ tuần page made the figure and the right column blink): a picture that is shown again —
    on a turning sheet's copy, on a page that was hidden, on a page the game has just re-rendered — must never paint one empty frame
    while it decodes. kitImgSync(root) marks every <img> decoding="sync" + eager (the browser paints it decoded, from its cache) and
-   returns a promise that resolves once all of them are decoded; callers start a turn after it (capped) and pre-decode the next pages. */
+   returns a promise that resolves once all of them are decoded; callers start a turn after it (capped) and pre-decode the next pages.
+   Copies too (review r6: under load a turning sheet's copy of a portrait was still loading while the live page had it decoded):
+   kclPrep gives each copied <img> the live one's resolved source (currentSrc: the same decoded bitmap from the memory cache, no
+   second srcset pick) and decodes the copy; kitImgPending(root) tells whether any picture of a copy is not ready yet, and the turns
+   (kitSheetTurn.ready / .pending, j87 kitBook, kitCurlSwap) keep a copy hidden — the live page shown — until it is decoded (capped). */
+function kitImgPending(root){try{return !!root&&[...(root.tagName==="IMG"?[root]:root.querySelectorAll("img"))].some(im=>im.getAttribute("src")&&(!im.complete||!im.naturalWidth))}catch(e){return false}}
+window.kitImgPending=kitImgPending;
 function kitImgSync(root,ms){try{if(!root)return Promise.resolve();const L=root.tagName==="IMG"?[root]:[...root.querySelectorAll("img")];
  for(const im of L){if(im.getAttribute("decoding")!=="sync")im.setAttribute("decoding","sync");if(im.loading==="lazy")im.loading="eager"}
  const P=Promise.all(L.map(im=>im.decode?im.decode().catch(()=>0):0));return ms?Promise.race([P,new Promise(r=>setTimeout(r,ms))]):P}catch(e){return Promise.resolve()}}
 window.kitImgSync=kitImgSync;
 function kclPrep(src,keepId){if(!(src&&src.nodeType===1))return null;kitImgSync(src)/* the copies inherit eager + sync */;const m=src.cloneNode(true),A=[src,...src.querySelectorAll("*")],B=[m,...m.querySelectorAll("*")],sc=[],lk=[];
   for(let i=0;i<A.length;i++){const a=A[i],b=B[i];if(!b)break;if(keepId&&i===0&&b.id)b.dataset.kclid=b.id;b.removeAttribute("id");
+   if(a.tagName==="IMG"&&a.complete&&a.naturalWidth&&a.currentSrc&&b.getAttribute("src")!==a.currentSrc){b.removeAttribute("srcset");b.removeAttribute("sizes");b.src=a.currentSrc}
    if(i&&b.nodeType===1&&b.style&&a.getClientRects().length){const c0=getComputedStyle(a);for(const k of KCL_FREEZE){const v=c0[k];if(v)b.style[k]=v}}
    else if(i&&b.style&&getComputedStyle(a).display==="none")b.style.display="none";
    if(a.scrollTop||a.scrollLeft)sc.push([b,a.scrollTop,a.scrollLeft]);
@@ -12289,7 +12296,9 @@ function kitSheetTurn(o){o=o||{};const host=o.host,w=Math.max(40,o.w|0),h=Math.m
   gL.style.width=Math.max(24,-c*w+24).toFixed(1)+"px";gL.style.opacity=!o.shadeL||c>=0?"0":(0.85*s).toFixed(3);
   }
  set(o.p||0);
- return {el:root,set,rescroll,setBack(src){put(B,src);rescroll();set(last)},setFront(src){put(F,src);rescroll();set(last)},destroy(){root.remove()},sheet:1}}
+ return {el:root,set,rescroll,setBack(src){put(B,src);rescroll();set(last)},setFront(src){put(F,src);rescroll();set(last)},destroy(){root.remove()},sheet:1,
+  /* the copies' pictures: pending() = one is not decoded yet; ready(ms) resolves once all are (capped at ms) */
+  pending(){return kitImgPending(root)},ready(ms){return kitImgSync(root,ms)}}}
 
 /* kitCurl = the kit's page turn for every book (week book j87, kitBookSpread): since the owner's 11/15 10:00Z rule it is the WHOLE-SHEET
    turn (kitSheetTurn); the corner-fold engine stays as kitCurlFold (not used for page turns any more). Same call shape:
@@ -12332,10 +12341,14 @@ function kitCurlSwap(el,fn,opt){opt=opt||{};const run=()=>{try{fn&&fn()}catch(e)
  const sig=()=>{const q=el.querySelector(".pc,.pgwrap,.kbl,section,div");return el.scrollHeight+"|"+el.scrollTop+"|"+(q?q.getBoundingClientRect().top+":"+q.offsetHeight:"")};
  let s0=sig();const iv=setInterval(()=>{if(!alive){clearInterval(iv);return}const s1=sig();if(s1!==s0){s0=s1;reback()}},70);setTimeout(reback,90);
  const fin=()=>{alive=false;clearInterval(iv);host.remove();if(kclLive===end)kclLive=null};
- const stop=kitCurlRun(c,fwd?0:1,fwd?1:0,opt.ms||KIT_TURN_MS,fin,kitTurnEase);
+ let stop=kitCurlRun(c,fwd?0:1,fwd?1:0,opt.ms||KIT_TURN_MS,fin,kitTurnEase);
+ /* a copied picture not decoded yet (heavy load): the sheet stays hidden (the live page shows), then turns from the start once the
+    copy is decoded; still not ready after 350 ms → no turn at all (never a blank frame on the sheet) */
+ if(c.pending&&c.pending()){host.style.visibility="hidden";stop();c.set(fwd?0:1);
+  c.ready(350).then(()=>{if(!alive)return;if(c.pending()){end();return}host.style.visibility="";stop=kitCurlRun(c,fwd?0:1,fwd?1:0,opt.ms||KIT_TURN_MS,fin,kitTurnEase);kitCurlSwap.t0=stop.t0})}
  const end=()=>{stop();fin()};kclLive=end;
  /* test hook: hold the running turn at p (kitCurlSwap.hold(.45)) */
- kitCurlSwap.t0=stop.t0;kitCurlSwap.hold=p=>{stop();c.set(p)};kitCurlSwap.end=end;return true}
+ kitCurlSwap.t0=stop.t0;kitCurlSwap.hold=p=>{stop();c.set(p);host.style.visibility=""};kitCurlSwap.end=end;return true}
 
 /* ---------- kitLeather: the unrolled leather map (Dư đồ) — NOT a book page (owner 11/15 04:00Z) ----------
    kitLeather(el) adds the hide surface around el's map painting: tanned leather with grain and burnt edges, an uneven hide outline,
@@ -12755,11 +12768,16 @@ function kitBook(spec){spec=spec||{};const rm=()=>{try{return reducedMotion()}ca
   el.style.visibility="hidden";el.classList.add("turn");return el}
  const ease=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2,easeOut=t=>1-Math.pow(1-t,3);
  let animId=0;
- function animate(i,from,to,dur,fn,done){const el=beginTurn(i,to>=from?1:-1);if(!el){done&&done();return}busy=true;const t0=performance.now(),id=++animId;
+ function animate(i,from,to,dur,fn,done){const el=beginTurn(i,to>=from?1:-1);if(!el){done&&done();return}busy=true;
+  /* the sheet's copies of the pictures not decoded yet (kitImgSync / kitImgPending, KIT §52.1): the live sheet stays shown and the copy
+     hidden until they are (at most 350 ms), then the turn starts — never one blank portrait on the turning sheet */
+  const cu=el.__curl;if(cu&&cu.pending&&cu.pending()){const id0=++animId;cu.el.style.visibility="hidden";el.style.visibility="visible";
+   cu.ready(350).then(()=>{if(id0!==animId)return;cu.el.style.visibility="";el.style.visibility="hidden";run()});pend={el,to,done};return}
+  run();function run(){const t0=performance.now(),id=++animId;
   pend={el,to,done};
-  const step=now=>{if(id!==animId)return;const t=Math.min(1,(now-t0)/dur);el.__curl&&el.__curl.set(from+(to-from)*fn(t),el.__dir||1);if(t<1)requestAnimationFrame(step);else{busy=false;pend=null;done&&done()}};requestAnimationFrame(step)}
+  const step=now=>{if(id!==animId)return;const t=Math.min(1,(now-t0)/dur);el.__curl&&el.__curl.set(from+(to-from)*fn(t),el.__dir||1);if(t<1)requestAnimationFrame(step);else{busy=false;pend=null;done&&done()}};requestAnimationFrame(step)}}
  /* a tap while a turn runs: that turn jumps to its end at once, then the new one starts (fast taps never jam; KIT §34.0) */
- let pend=null;function flush(){if(!busy||!pend)return;const f=pend;pend=null;animId++;try{f.el.__curl&&f.el.__curl.set(f.to)}catch(e){}busy=false;f.done&&f.done()}
+ let pend=null;function flush(){if(!busy||!pend)return;const f=pend;pend=null;animId++;try{if(f.el.__curl){f.el.__curl.el.style.visibility="";f.el.__curl.set(f.to)}}catch(e){}busy=false;f.done&&f.done()}
  function fade(nc){busy=true;book.classList.add("fade");setTimeout(()=>{cur=nc;paint();book.classList.remove("fade");setTimeout(()=>{busy=false},160)},160)}
  /* a picture of the sheets about to show that is still on its way (a painting that replaced a silhouette a moment ago): wait for it,
     at most 350 ms, so the turning sheet never shows it blank (owner 15:45Z) */
@@ -21434,6 +21452,15 @@ function onBuoi(m){T("onBuoi "+m.week+"."+m.buoi+" me "+wk()+"."+(S&&S.buoi)+" Q
  if(m.week===wk()&&(S.buoi||0)===m.buoi-1&&!S.dead){CW.allow=true;try{nextBuoi()}finally{CW.allow=false}}
  if(host())sendWhere();else if(CW.lastWhere)applyWhere(CW.lastWhere);sendPos();lockNext()}
 function bend(){T("bend "+wk()+"."+(S&&S.buoi));if(CW.bend)return;CW.bend=true;COOP.send({t:"bend",week:wk(),buoi:S.buoi||0});lockNext()}
+/* a night with the Emperor spends the rest of her day (jnight). In co-op the day only moves through the sync path above:
+   sáng / chiều → `bend` (the server's `buoi` then runs the real step for both), tối → endTurn → `end` → the merged week.
+   CW.nightEnd() ends THIS seat's current buổi once: nothing while her buổi is already ended (bend sent, week pending / sent), while
+   the room is frozen, while a dialog or a room step is pending, or while her buổi is not the room's buổi (never ahead of the friend).
+   Returns the buổi key it ended ("week:buổi") or "" (nothing done: jnight asks again on the next render). */
+CW.nightEnd=function(){if(!CW.on||!S||S.dead||Q.length||S.mg)return"";if(waiting()||frozen()||CW.pend||!CW.base||CW.bend||CW.pendBuoi||needWhere())return"";
+ const b=S.buoi||0;if(typeof CW.rbuoi==="number"&&CW.rweek===wk()&&CW.rbuoi!==b)return"";
+ const k=bkey();used=4;nextBuoi();return (CW.bend||CW.pend||(S.buoi||0)!==b)?k:""};
+CW.bkey=bkey;
 COOP.on("buoi",onBuoi);
 /* the room's current buổi (for a reborn life that joins mid-week) */
 const rb=m=>{if(m&&typeof m.buoi==="number"){CW.rbuoi=m.buoi;CW.rweek=m.week!=null?m.week:wk()}};
@@ -23216,7 +23243,7 @@ function kitRelSamples(){const R=(dir,label,now,d,kind)=>({dir,label,now,d,kind:
  return [{id:"§52",title:"kitRelTable · phi tần · Hoàng thượng · Thái hậu · kẻ hầu · người lạ",html:()=>Object.values(rows).map(r=>kitRelTable(r)).join("")},
   {id:"§52",title:"kitRelTable · cột hẹp (< 240px)",html:()=>`<div style="max-width:220px">${kitRelTable(rows["Phi tần"])}</div>`},
   {id:"§52",title:"kitRelDelta · trong dòng sự việc",html:()=>`<p>Phi Tống Phương Hoa nhờ người đưa thư. ${kitRelDelta("Nàng oán ta","them",2,"bad")}, ${kitRelDelta("Nàng → ta: thiện cảm","them",-15)}; hai người khác: ${kitRelDelta("thiện cảm","none",7)}.</p>`},
-  {id:"§57",title:"kitNumDelta / kitDeltaAuto · số không phải quan hệ",html:()=>`<p>Tháng này: Được mùa khắp nơi, ${kitNumDelta("Kho lúa",12)}; nhà Hộ bộ ${kitNumDelta("thế lực",6)}; ${kitNumDelta("Sủng",-3)}; ${kitDeltaAuto("nàng oán ngươi",4)}.</p>`}]}
+  {id:"§57",title:"kitNumDelta / kitDeltaAuto · số không phải quan hệ",html:()=>`<p>Tháng này: Được mùa khắp nơi, ${kitNumDelta("Kho lúa",12)}; nhà Hộ bộ ${kitNumDelta("thế lực",6)}; ${kitNumDelta("Sủng",-3)}; ${kitDeltaAuto("nàng oán ngươi",4)}.</p><p>Phi Tống Phương Hoa nhờ người đưa thư. ${kitDeltaAuto("Nàng oán ta",2)}, ${kitDeltaAuto("thân",-2,"Nàng oán ta +2, ")} (một chữ “thân” trơn ngay sau nàng → ta: người làm được ghi rõ).</p>`}]}
 setTimeout(()=>{try{if(window.KIT_SAMPLES)KIT_SAMPLES.push(...kitRelSamples())}catch(e){console.error(e)}},0);
 /* ---- KIT §57 NUMBER DELTA (kit request from kit-fig2, KIT_REQUESTS.md): one inline change for anything that is not a relation
    ("Kho lúa −10", "nhà Hộ bộ thế lực +6", "Sủng +3"): same family as kitRelDelta — label in ink, the number a whole number in the
@@ -23230,12 +23257,19 @@ function kitDeltaAuto(label,d,before){const l=String(label||"").trim(),b=String(
  let m=/^(?:(.*?)\s+)?(quý|với) (ngươi|ta)$/i.exec(l);if(m){const w=(m[1]||"").trim();return kitRelDelta(`${w&&!/^(nàng|nàng ta)$/i.test(w)?w:"Nàng"} → ta: thiện cảm`,"them",d,"good")}
  m=/^(?:(.*?)\s+)?oán (ngươi|ta)$/i.exec(l);if(m){const w=(m[1]||"").trim();return kitRelDelta(`${w&&!/^(nàng|nàng ta)$/i.test(w)?w:"Nàng"} oán ta`,"them",d,"bad")}
  m=/^(?:(.*?)\s+)?ghen$/i.exec(l);if(m){const w=(m[1]||"").trim();return kitRelDelta(w?`${/^(nàng|nàng ta)$/i.test(w)?"Nàng":w} ghen`:"ghen","them",d,"bad")}
- if(/^(?:.*\s)?(thiện cảm|thân)$/i.test(l)){const toMe=/(?:→|với)\s*ta:?\s*$/.test(b);const pre=l.replace(/(thiện cảm|thân)$/i,"").trim();return (pre?pre+" ":"")+kitRelDelta("thiện cảm",toMe?"them":"none",d,"good")}
+ /* a bare "thân / thiện cảm ±N" names its actor (KIT §57, review r6): right after another change of the SAME person toward me in the same
+    sentence ("Nàng oán ta +2, thân −2") it is that person's thiện cảm toward me → "Nàng → ta: thiện cảm −2"; only a label the writer
+    already framed ("hai người khác: thiện cảm") or with no such lead stays a change between two other people */
+ if(/^(?:.*\s)?(thiện cảm|thân)$/i.test(l)){const toMe=/(?:→|với)\s*ta:?\s*$/.test(b);const pre=l.replace(/(thiện cảm|thân)$/i,"").trim();
+  const lead=!pre&&/(?:oán (?:ta|ngươi)|(?:quý|với) (?:ta|ngươi)|→ ta:?\s*thiện cảm|ghen)\s?[+\-−]\s?\d+\s*,\s*$/i.exec(b);
+  if(toMe||lead||/^(nàng|nàng ta)$/i.test(pre)){const w=lead&&/(?:^|[.;:!?>]\s*)([\p{L}][\p{L} ]{0,40}?) (?:oán|quý|với|ghen|→)[^,.;:]*,\s*$/u.exec(b);
+   let who=w?w[1].trim():"";if(!who||who.split(" ").length>4||/^(nàng|nàng ta|ta)$/i.test(who))who="Nàng";who=who[0].toUpperCase()+who.slice(1);return toMe?kitRelDelta("thiện cảm","them",d,"good"):kitRelDelta(`${who} → ta: thiện cảm`,"them",d,"good")}
+  return (pre?pre+" ":"")+kitRelDelta("thiện cảm","none",d,"good")}
  return kitNumDelta(l,d)}
 window.kitNumDelta=kitNumDelta;window.kitDeltaAuto=kitDeltaAuto;
 const KRD_ARROW=/((?:[Nn]àng|Hoàng hậu|Thái hậu|Hoàng thượng|Hắn|[Tt]a|[\p{Lu}][\p{L}]*(?: [\p{Lu}][\p{L}]*){0,2}) → (?:ta|nàng|hắn)(?:: thiện cảm|: sủng)) ([+\-−])\s?(\d+(?:[.,]\d+)?)/gu;
 if(typeof kpChipify==="function"){kpChipify=function(html){return kpMapText(html,s=>s.replace(KRD_ARROW,(m,l,sg,n)=>kitRelDelta(l,/^[Tt]a /.test(l)?"me":"them",Math.round((sg==="+"?1:-1)*parseFloat(n.replace(",","."))),"good")).replace(KP_DELTA,(m,l,sg,n,off,str)=>{if(/^(năm|tháng|tuần|ngày|tuổi|lần|khắc)$/i.test(l.split(" ").pop()))return m;
-  const v=Math.round((sg==="+"?1:-1)*parseFloat(n.replace(",",".")));return kitDeltaAuto(l,v,str.slice(Math.max(0,off-14),off))})).replace(/<\/b><\/span>([,.;:!?)])/g,"</b>$1</span>")/* review r6: the comma / stop after a change stays on its line (nowrap .krd), never starts the next line */}}
+  const v=Math.round((sg==="+"?1:-1)*parseFloat(n.replace(",",".")));return kitDeltaAuto(l,v,str.slice(Math.max(0,off-60),off))})).replace(/<\/b><\/span>([,.;:!?)])/g,"</b>$1</span>")/* review r6: the comma / stop after a change stays on its line (nowrap .krd), never starts the next line */}}
 (function(){const st=document.createElement("style");st.id="kit-krd-n";st.textContent=`.krd-n .krd-l{font-weight:600;color:var(--ink,#3a2a1a)}.krd .krd-l{font-weight:600}`;document.head.appendChild(st)})();
 /* ================= jclose — owner bugs 15/11 16:40Z–17:24Z, each fixed for its WHOLE class (review/close-bugs) =================
    Scans: dev/test/cb-gate.fn.js (khắc/buổi gates), cb-wx (weather × buổi), cb-tap.fn.js (tap paint), cb-suc (Cần duplicates),
@@ -24369,22 +24403,29 @@ window.intAll=intAll;
    prep and the night dialogs, the game stayed in the same buổi with the khắc she had left, as if the night had not happened.
    Now: once the night is spent (nightFx), whatever is left of the day is used up and time runs on to the next morning as soon as
    the night's dialogs are closed (the normal nextBuoi steps run for each buổi in between: rivals act, events can still come).
-   S.toMorning = {t: turn, b: buổi} of the night. It is dropped as soon as the day has changed by ANY road (nextBuoi, a co-op week
-   merge that rebuilds S, a load), so it can never skip a fresh morning.
-   Co-op (review 11/15, "does jnight call nextBuoi itself?"): yes, through the co-op wrapper (jcoopworld: sáng/chiều → bend, tối →
-   endTurn → the merged week). There it asks ONCE per buổi; while the room waits for the friend nothing more is sent. */
+   S.toMorning = {d: day, b: buổi} of the night, day = wk() (S.turn*3+S.tuan: one tuần of the calendar is one day of play; S.turn
+   alone is the MONTH and does not change between two days). It is dropped as soon as the day has changed by ANY road (endTurn,
+   a co-op week merge that rebuilds S, a load), so it can never spend a fresh morning.
+   Co-op (review r6: the old timer called nextBuoi itself and keyed "once per buổi" on the month, so a stale night from an earlier
+   day could end a buổi again, or never end it): the day moves ONLY through the co-op sync path. COOPW.nightEnd() ends this seat's
+   current buổi once (sáng / chiều → bend, then the server's `buoi` steps both seats; tối → endTurn → end → the merged week),
+   and does nothing while her buổi is already ended, a dialog / room step is pending, or her buổi is not the room's buổi.
+   A buổi counts as asked only when nightEnd really ended it, so a refused try is simply tried again on the next render. */
 (function(){if(typeof nightFx!=="function")return;
- const tb=()=>({t:S.turn,b:S.buoi||0});
- const coop=()=>{try{return !!(typeof CW==="object"&&CW&&CW.on)}catch(e){return false}};
- /* still the same night? (an old save may hold the former flag 1: treat it as "this buổi") */
- const live=()=>{const m=S&&S.toMorning;if(!m)return false;if(m===1||m===true){S.toMorning=tb();return true}
-  if(S.turn!==m.t||(S.buoi||0)<m.b){S.toMorning=0;return false}return true};
+ const day=()=>typeof wk==="function"?wk():(S.turn*3+(S.tuan||0));
+ const tb=()=>({d:day(),b:S.buoi||0});
+ const coop=()=>{try{return !!(window.COOPW&&COOPW.on)}catch(e){return false}};
+ /* still the same day? (older saves: flag 1 / {t,b} = "this day") */
+ const live=()=>{const m=S&&S.toMorning;if(!m)return false;if(m===1||m===true||typeof m.d!=="number"){S.toMorning=tb();return true}
+  if(m.d!==day()){S.toMorning=0;return false}return true};
  const f0=nightFx;nightFx=function(){const r=f0.apply(this,arguments);try{if(S&&!S.dead)S.toMorning=tb()}catch(e){}return r};
  let busy=false,asked="";
- const step=()=>{if(busy||!S||!S.toMorning||S.dead||Q.length||S.mg)return;if(!live())return;if(typeof advLock!=="undefined"&&advLock)return;
-  const key=S.turn+":"+(S.buoi||0);if(coop()&&asked===key)return;busy=true;
-  setTimeout(()=>{busy=false;try{if(!S||S.dead||Q.length||S.mg||!live())return;const k=S.turn+":"+(S.buoi||0);if(coop()){if(asked===k)return;asked=k}
-   used=4;nextBuoi();live();try{showModal()}catch(e){}render()}catch(e){console.error("toMorning",e)}},400)};
+ const ready=()=>S&&S.toMorning&&!S.dead&&!Q.length&&!S.mg&&live();
+ const step=()=>{if(busy||!ready())return;const co=coop();if(!co&&typeof advLock!=="undefined"&&advLock)return;
+  if(co&&asked===COOPW.bkey())return;busy=true;
+  setTimeout(()=>{busy=false;try{if(!ready())return;
+   if(coop()){if(asked===COOPW.bkey())return;const k=COOPW.nightEnd();if(k)asked=k;else setTimeout(step,1500);live();return}
+   if(co)return;used=4;nextBuoi();live();try{showModal()}catch(e){}render()}catch(e){console.error("toMorning",e)}},400)};
  const r0=render;render=function(){const r=r0.apply(this,arguments);try{step()}catch(e){}return r}})();
 /* j84 — VĂN PHONG: every player-visible word in one classical (cổ trang) register. Style guide: dev/kit/VANPHONG.md.
    Must stay the LAST module. It changes no rule or number: (1) data patches (tab names, tooltips); (2) one replacement
@@ -24740,7 +24781,7 @@ if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§28.13e",title:"Pick 
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="7d409cf0cbeb";window.CTM_BUILD=BUILD;
+const BUILD="ee9919a56263";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

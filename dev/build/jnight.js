@@ -3,20 +3,27 @@
    prep and the night dialogs, the game stayed in the same buổi with the khắc she had left, as if the night had not happened.
    Now: once the night is spent (nightFx), whatever is left of the day is used up and time runs on to the next morning as soon as
    the night's dialogs are closed (the normal nextBuoi steps run for each buổi in between: rivals act, events can still come).
-   S.toMorning = {t: turn, b: buổi} of the night. It is dropped as soon as the day has changed by ANY road (nextBuoi, a co-op week
-   merge that rebuilds S, a load), so it can never skip a fresh morning.
-   Co-op (review 11/15, "does jnight call nextBuoi itself?"): yes, through the co-op wrapper (jcoopworld: sáng/chiều → bend, tối →
-   endTurn → the merged week). There it asks ONCE per buổi; while the room waits for the friend nothing more is sent. */
+   S.toMorning = {d: day, b: buổi} of the night, day = wk() (S.turn*3+S.tuan: one tuần of the calendar is one day of play; S.turn
+   alone is the MONTH and does not change between two days). It is dropped as soon as the day has changed by ANY road (endTurn,
+   a co-op week merge that rebuilds S, a load), so it can never spend a fresh morning.
+   Co-op (review r6: the old timer called nextBuoi itself and keyed "once per buổi" on the month, so a stale night from an earlier
+   day could end a buổi again, or never end it): the day moves ONLY through the co-op sync path. COOPW.nightEnd() ends this seat's
+   current buổi once (sáng / chiều → bend, then the server's `buoi` steps both seats; tối → endTurn → end → the merged week),
+   and does nothing while her buổi is already ended, a dialog / room step is pending, or her buổi is not the room's buổi.
+   A buổi counts as asked only when nightEnd really ended it, so a refused try is simply tried again on the next render. */
 (function(){if(typeof nightFx!=="function")return;
- const tb=()=>({t:S.turn,b:S.buoi||0});
- const coop=()=>{try{return !!(typeof CW==="object"&&CW&&CW.on)}catch(e){return false}};
- /* still the same night? (an old save may hold the former flag 1: treat it as "this buổi") */
- const live=()=>{const m=S&&S.toMorning;if(!m)return false;if(m===1||m===true){S.toMorning=tb();return true}
-  if(S.turn!==m.t||(S.buoi||0)<m.b){S.toMorning=0;return false}return true};
+ const day=()=>typeof wk==="function"?wk():(S.turn*3+(S.tuan||0));
+ const tb=()=>({d:day(),b:S.buoi||0});
+ const coop=()=>{try{return !!(window.COOPW&&COOPW.on)}catch(e){return false}};
+ /* still the same day? (older saves: flag 1 / {t,b} = "this day") */
+ const live=()=>{const m=S&&S.toMorning;if(!m)return false;if(m===1||m===true||typeof m.d!=="number"){S.toMorning=tb();return true}
+  if(m.d!==day()){S.toMorning=0;return false}return true};
  const f0=nightFx;nightFx=function(){const r=f0.apply(this,arguments);try{if(S&&!S.dead)S.toMorning=tb()}catch(e){}return r};
  let busy=false,asked="";
- const step=()=>{if(busy||!S||!S.toMorning||S.dead||Q.length||S.mg)return;if(!live())return;if(typeof advLock!=="undefined"&&advLock)return;
-  const key=S.turn+":"+(S.buoi||0);if(coop()&&asked===key)return;busy=true;
-  setTimeout(()=>{busy=false;try{if(!S||S.dead||Q.length||S.mg||!live())return;const k=S.turn+":"+(S.buoi||0);if(coop()){if(asked===k)return;asked=k}
-   used=4;nextBuoi();live();try{showModal()}catch(e){}render()}catch(e){console.error("toMorning",e)}},400)};
+ const ready=()=>S&&S.toMorning&&!S.dead&&!Q.length&&!S.mg&&live();
+ const step=()=>{if(busy||!ready())return;const co=coop();if(!co&&typeof advLock!=="undefined"&&advLock)return;
+  if(co&&asked===COOPW.bkey())return;busy=true;
+  setTimeout(()=>{busy=false;try{if(!ready())return;
+   if(coop()){if(asked===COOPW.bkey())return;const k=COOPW.nightEnd();if(k)asked=k;else setTimeout(step,1500);live();return}
+   if(co)return;used=4;nextBuoi();live();try{showModal()}catch(e){}render()}catch(e){console.error("toMorning",e)}},400)};
  const r0=render;render=function(){const r=r0.apply(this,arguments);try{step()}catch(e){}return r}})();

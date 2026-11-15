@@ -134,11 +134,16 @@ function kitBook(spec){spec=spec||{};const rm=()=>{try{return reducedMotion()}ca
   el.style.visibility="hidden";el.classList.add("turn");return el}
  const ease=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2,easeOut=t=>1-Math.pow(1-t,3);
  let animId=0;
- function animate(i,from,to,dur,fn,done){const el=beginTurn(i,to>=from?1:-1);if(!el){done&&done();return}busy=true;const t0=performance.now(),id=++animId;
+ function animate(i,from,to,dur,fn,done){const el=beginTurn(i,to>=from?1:-1);if(!el){done&&done();return}busy=true;
+  /* the sheet's copies of the pictures not decoded yet (kitImgSync / kitImgPending, KIT §52.1): the live sheet stays shown and the copy
+     hidden until they are (at most 350 ms), then the turn starts — never one blank portrait on the turning sheet */
+  const cu=el.__curl;if(cu&&cu.pending&&cu.pending()){const id0=++animId;cu.el.style.visibility="hidden";el.style.visibility="visible";
+   cu.ready(350).then(()=>{if(id0!==animId)return;cu.el.style.visibility="";el.style.visibility="hidden";run()});pend={el,to,done};return}
+  run();function run(){const t0=performance.now(),id=++animId;
   pend={el,to,done};
-  const step=now=>{if(id!==animId)return;const t=Math.min(1,(now-t0)/dur);el.__curl&&el.__curl.set(from+(to-from)*fn(t),el.__dir||1);if(t<1)requestAnimationFrame(step);else{busy=false;pend=null;done&&done()}};requestAnimationFrame(step)}
+  const step=now=>{if(id!==animId)return;const t=Math.min(1,(now-t0)/dur);el.__curl&&el.__curl.set(from+(to-from)*fn(t),el.__dir||1);if(t<1)requestAnimationFrame(step);else{busy=false;pend=null;done&&done()}};requestAnimationFrame(step)}}
  /* a tap while a turn runs: that turn jumps to its end at once, then the new one starts (fast taps never jam; KIT §34.0) */
- let pend=null;function flush(){if(!busy||!pend)return;const f=pend;pend=null;animId++;try{f.el.__curl&&f.el.__curl.set(f.to)}catch(e){}busy=false;f.done&&f.done()}
+ let pend=null;function flush(){if(!busy||!pend)return;const f=pend;pend=null;animId++;try{if(f.el.__curl){f.el.__curl.el.style.visibility="";f.el.__curl.set(f.to)}}catch(e){}busy=false;f.done&&f.done()}
  function fade(nc){busy=true;book.classList.add("fade");setTimeout(()=>{cur=nc;paint();book.classList.remove("fade");setTimeout(()=>{busy=false},160)},160)}
  /* a picture of the sheets about to show that is still on its way (a painting that replaced a silhouette a moment ago): wait for it,
     at most 350 ms, so the turning sheet never shows it blank (owner 15:45Z) */

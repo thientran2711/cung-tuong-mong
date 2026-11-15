@@ -6,10 +6,10 @@ const {chromium}=require('playwright');const [,,URL]=process.argv;
  const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));p.setDefaultTimeout(0);
  await p.goto(URL,{waitUntil:'domcontentloaded',timeout:0});await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function',null,{timeout:0});await p.waitForTimeout(2500);
  const R={};
- for(const how of ["steal","road","ksp"]){
+ for(const how of ["steal","road","ksp","morning"]){
   R[how]=await p.evaluate(async how=>{for(const id of ['kload','kroul']){const x=document.getElementById(id);if(x)x.remove()}try{localStorage.clear()}catch(e){}SLOT=3;window.__nlInner=1;document.getElementById('title').hidden=true;
    for(let i=0;i<60;i++){start();if(!isSrv())break}Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;S.preg=0;
-   S.buoi=B4L;used=2;S.tonight=null;try{NT&&(NT.d={})}catch(e){}render();const before={buoi:S.buoi,turn:S.turn,used,day:(typeof wk==="function"?wk():0)};
+   S.buoi=how==="morning"?0:B4L;used=2;/* "morning": a night won at buổi sáng spends that day only (the next day starts fresh) */S.tonight=null;try{NT&&(NT.d={})}catch(e){}render();const before={buoi:S.buoi,turn:S.turn,used,day:(typeof wk==="function"?wk():0)};
    const v=liveRivals(false)[0];
    if(how==="ksp"){S.tonight="me";pushDil?pushDil(mkP("ksp"),"Kính sự phòng báo tin"):Q.push({t:"Kính sự phòng",h:"",opts:mkP("ksp").o});showModal()}
    else{stealWin(S,v,how==="road"?"road":"feign");showModal()}
@@ -19,5 +19,5 @@ const {chromium}=require('playwright');const [,,URL]=process.argv;
    await sleep(600);
    return{before,after:{buoi:S.buoi,turn:S.turn,used,day:(typeof wk==="function"?wk():0)},nights:S.nights,clicks,titles:[...new Set(titles)].slice(0,6),toMorning:S.toMorning}},how);
  }
- const ok=Object.values(R).every(r=>r.after.buoi===0&&r.after.used<4&&(r.after.turn!==r.before.turn||r.after.day!==r.before.day)&&r.nights>0&&!r.toMorning);
+ const ok=Object.values(R).every(r=>r.after.buoi===0&&r.after.used<4&&r.after.day===r.before.day+1&&r.nights>0&&!r.toMorning);
  console.log(JSON.stringify({ok,R,errs},null,1));await b.close();process.exit(ok&&!errs.length?0:1)})();

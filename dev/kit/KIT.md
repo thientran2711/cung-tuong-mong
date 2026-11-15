@@ -2279,6 +2279,10 @@ One inline change for anything that is not a person's relation ("Kho lúa −10"
 - `kitDeltaAuto(label, d, textBefore)` picks the right one: relation words (quý/với ngươi|ta, oán ngươi|ta, ghen, thiện cảm, thân) →
   `kitRelDelta` with the KIT_REL words ("Nàng → ta: thiện cảm", "Nàng oán ta", between two other people "thiện cảm" without a direction
   colour); anything else → `kitNumDelta`.
+- The actor is always named (review r6): a bare "thân / thiện cảm ±N" right after another change of the same person toward me in the
+  same sentence ("Nàng oán ta +2, thân −2", textBefore = the 60 characters before it) is that person's thiện cảm toward me →
+  "Nàng → ta: thiện cảm −2" (or "<Name> → ta: thiện cảm"). Only a label the writer already framed ("hai người khác: thiện cảm")
+  or one with no such lead stays the undirected "thiện cảm". Sample on the kit page §57.
 - Used by every fact line: `kpChipify` (j79, overridden in jkrel) → `kitFacts` → news "Tin trong cung hôm nay", Tuần lục, panel notes,
   Bổng lộc row. New code that prints a change inside text calls `kitDeltaAuto` / `kitNumDelta`; boxed `kitChip` stays for chip ROWS
   (e.g. "Ta tuần qua"), never inside a sentence.
