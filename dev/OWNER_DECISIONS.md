@@ -178,3 +178,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (07:00Z) Owner: luxury shown as numbers (corner 'Xa xỉ N' per item; header total vs allowance), not words. Ref dev/owner-shots/1115-xaxi-ref.jpg.
 - (07:15Z) Owner: choice cards (e.g. Nam nhân nơi cấm địa) must show each option's full Tốn/Được/Mất (+ odds), like Hành sự cards — not costs only.
 - (07:20Z) Owner: 4 named guards → paint 4 distinct guard looks (thive-3, thive-4 × 4 ages).
+- (07:40Z) Owner: wants alternative story routes (not only climbing to Thái hậu): tư tình with another man (incl. for a child), escape the palace, leave legally (xuất gia, ban hôn), follow another man. Worker on review/routes (design + build, tasteful, full option cards, same rules for NPCs).
