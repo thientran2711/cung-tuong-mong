@@ -117,3 +117,4 @@ Nhắc theo dõi: send_later 30 phút, tự đặt lại mỗi lượt (lịch l
 - [ ] Đồ tự tay làm (chơi mini game tài nghệ → thành phẩm, tặng bất kỳ ai, bán) ĐÃ CÓ ở j83 trên review/balance-unified nhưng CHƯA LÊN LIVE; điều phối từng nói nhầm "chưa có". Phải đưa balance-unified lên sớm + tab Bán dùng j83.
 - [ ] 4 buổi (có trưa) đã làm ở chuỗi balance (review/balance-unified) nhưng CHƯA LIVE → ưu tiên duyệt balance-unified ngay sau lô đang duyệt.
 - [x] LIVE 1c7a3fcb2: dialog-person (hộp thoại có người: người toàn thân bên trái, chữ trên phải, lựa chọn dưới phải).
+- [ ] Bảng mua đồ: hình người nhỏ, ô lệch hàng, khung mua lặp lại món → thợ review/shop-fix.

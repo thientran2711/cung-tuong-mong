@@ -331,3 +331,8 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - BỎ mọi nút "Thôi" (và Lui/Đóng) khắp game; mỗi bảng đóng được có một nút ✕ góc trên phải.
 - Chữ phải cặp nhau: "Sang buổi" / "Sang ngày mới" (bỏ "Qua ngày").
 - (05:40Z) Đồ tự tay làm: vẽ lại Áo múa tự may cả 4 bậc (áo đứng thẳng thấy trọn từ cổ tới gấu, không gấp, không giá treo); vẽ lại Điệu múa cả 4 bậc thành dáng người múa; vẽ lại Thế cờ tàn Tuyệt phẩm cho khác hẳn Trân phẩm. Thư pháp/khúc phổ/kinh: bỏ chữ Hán. Trong game đồ tự làm dùng khung + nền theo phẩm như trang bị (kitItem).
+
+## 15/11 ~05:45Z (sếp, bực vì thợ không theo kit)
+- Mọi màn PHẢI dùng thành phần kit chung (khung, hình người, tab, nút, ✕); thợ không được tự làm khung/hình riêng. Người duyệt FAIL mọi nhánh làm riêng.
+- Sếp OCD: mọi hàng/cột phải thẳng hàng, theo lề; giá, tên, nút trong lưới cùng một đường ngang.
+- Bảng mua đồ: hình thái giám cao hết khung như hộp thoại có người; bỏ khung mua bên dưới (không lặp món); − số + và nút Mua ngay trên ô.
