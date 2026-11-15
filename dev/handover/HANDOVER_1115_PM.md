@@ -272,3 +272,4 @@ Worker worktrees at /home/user/wt/<name>. Rule summaries for workers: /home/user
 - tassel-fix ready abfecc6c8 (full pendant+tassel on every frame, KIT §28.1 changed; header +17px on landscape — coordinator accepted) → reviewer spawned.
 - scene-light db2c0efc3 (r8 fixes) → r9 review. Coordinator accepted 182px text at 1000x755 and train-only fade past the left page edge.
 - LIVE main = game-feel (80be56be0): kitLose, slow item reveals, real grades, per-giver boxes, no letter placeholders, Pixi FX, rot.js scaled frame (landscape = 1180x820 design scaled, phone portrait shows rotated). Small open: story-gift box empty 'from' line.
+- act art LIVE (data): 73 dialog banners, 263 hands-only act pictures (ACTS log 825 rules / 800 keys, held queue empty), 42 story covers (EVENTS.json). Approved: 305 chapter-beat pictures (~12.2k credits, owner rule 'draw missing art without asking').
