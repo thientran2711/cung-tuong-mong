@@ -1,115 +1,115 @@
-# BÀN GIAO 15/11 chiều (phiên chính 5 → phiên chính 6)
+# HANDOVER 15/11 afternoon (main session 5 → main session 6)
 
-Đọc theo thứ tự này:
-1. dev/OWNER_DECISIONS.md: toàn bộ, nhất là các dòng từ 11:00Z ngày 15/11. Mọi lời sếp nói đều đã ghi ở đó.
-2. dev/handover/WORKER_BRIEF.md (đầu tệp có 2 luật: LUẬT ƯU TIÊN SỐ 1 và LUẬT SỬA CẢ NHÓM).
-3. Tệp này.
-4. dev/handover/HANDOVER_1115.md (bàn giao sáng nay, mục LỖI SẾP BÁO CÒN MỞ).
+Read in this order:
+1. dev/OWNER_DECISIONS.md: all of it, especially the lines from 11:00Z on 15/11. Everything the owner said is logged there.
+2. dev/handover/WORKER_BRIEF.md (the top of the file has 2 rules: PRIORITY RULE #1 (LUẬT ƯU TIÊN SỐ 1) and FIX-THE-WHOLE-GROUP RULE (LUẬT SỬA CẢ NHÓM)).
+3. This file.
+4. dev/handover/HANDOVER_1115.md (this morning's handover, section OWNER-REPORTED BUGS STILL OPEN).
 
-## Cách làm việc với sếp (bắt buộc)
-- Gọi "sếp", xưng "em". Trả lời tiếng Việt, gọn. Mọi báo cáo kết thúc bằng "~X% xong / ~Y% chơi được" (hiện ~96% / ~90%).
-- Phiên chính CHỈ điều phối: giao thợ (subagent), giao người duyệt, tự đẩy main khi người duyệt PASS (fast-forward), tự chạy cdn_sync cho thợ.
-- Mỗi lời sếp → ghi dev/OWNER_DECISIONS.md NGAY trong lượt đó, rồi commit và đẩy nhánh claude/cung-tuong-mong-handover-hj0h8w.
-- LUẬT ƯU TIÊN SỐ 1: trước khi giao việc, kiểm OWNER_DECISIONS, HANDOVER, PROGRESS_*, git grep origin/main và mọi origin/review/*, cùng các thợ đang chạy.
-- LUẬT SỬA CẢ NHÓM (sếp 14:50Z): sếp báo một lỗi thì sửa CẢ NHÓM cùng loại. Thợ viết script rà hết, báo bảng trước/sau. Nhắc luật này mỗi lần giao việc.
-- PASS là đẩy main không cần hỏi. Đẩy ảnh lên Cloudflare không cần hỏi. Vẽ ảnh thiếu/sai không cần hỏi.
-- Ảnh: Magnific gpt-2-6 DUY NHẤT, folder ba4aecfe-efce-47e2-b53f-30d292091886, luôn truyền folderReference. Ảnh ở CDN, không vào git.
-- Không có hai người duyệt cùng xếp hàng một nhánh. Nhiều người duyệt chạy song song, nhánh nào qua trước lên trước.
-- Nhắc canh thợ 1 tiếng một lần (sếp 15/11 ~18:05Z), không 30 phút.
-- Giới hạn 20 subagent cùng lúc. Khi đầy thì gửi tiếp cho thợ đã xong (SendMessage tự resume).
+## How to work with the owner (mandatory)
+- Address her as "sếp", refer to yourself as "em". Answer in Vietnamese, briefly. Every report ends with "~X% xong / ~Y% chơi được" (currently ~96% / ~90%).
+- The main session ONLY coordinates: assigns workers (subagents), assigns reviewers, pushes main itself when a reviewer PASSes (fast-forward), runs cdn_sync for workers.
+- Every owner statement → log in dev/OWNER_DECISIONS.md IN THAT SAME turn, then commit and push branch claude/cung-tuong-mong-handover-hj0h8w.
+- PRIORITY RULE #1 (LUẬT ƯU TIÊN SỐ 1): before assigning, check OWNER_DECISIONS, HANDOVER, PROGRESS_*, git grep origin/main and every origin/review/*, plus the running workers.
+- FIX-THE-WHOLE-GROUP RULE (LUẬT SỬA CẢ NHÓM) (owner 14:50Z): when the owner reports one bug, fix THE WHOLE GROUP of that kind. The worker writes a script to audit everything and reports a before/after table. Restate this rule in every assignment.
+- PASS means push main without asking. Pushing images to Cloudflare needs no asking. Drawing missing/wrong images needs no asking.
+- Images: Magnific gpt-2-6 ONLY, folder ba4aecfe-efce-47e2-b53f-30d292091886, always pass folderReference. Images live on the CDN, not in git.
+- Never two reviewers queued on one branch. Many reviewers run in parallel; whichever branch passes first goes up first.
+- Worker watch reminder once every hour (owner 15/11 ~18:05Z), not 30 minutes.
+- Limit of 20 concurrent subagents. When full, send further work to workers that have finished (SendMessage auto-resumes).
 
 ## CDN
-- Upload: dev/site/cdn_sync.py. Script lấy gốc repo theo vị trí của nó, nên phải chép vào thư mục tạm có dev/site/ + img/ rồi `git init`, hoặc chạy trong worktree của thợ.
-- Lệnh: `python3 dev/site/cdn_sync.py <files>`; `--git REF --missing-only`; `--pull`.
-- Danh mục: https://ctm-img.victoria-tntt.workers.dev/img/_index.json (files: [key, md5, bytes]).
-- img/ACTS.json (bảng tên việc → tranh) đã gộp lúc 15:30Z: chỉ trỏ tới tranh đã có trên CDN. Tranh mới lên thì gộp thêm (so với _index).
-- Scratchpad chung bị phiên khác xóa vài lần. Thợ phải để tệp tạm trong worktree của mình.
+- Upload: dev/site/cdn_sync.py. The script finds the repo root from its own location, so copy it into a temp dir with dev/site/ + img/ then `git init`, or run it inside the worker's worktree.
+- Commands: `python3 dev/site/cdn_sync.py <files>`; `--git REF --missing-only`; `--pull`.
+- Index: https://ctm-img.victoria-tntt.workers.dev/img/_index.json (files: [key, md5, bytes]).
+- img/ACTS.json (act name → picture table) merged at 15:30Z: points only to pictures already on the CDN. When new pictures go up, merge more (compare with _index).
+- The shared scratchpad was wiped by other sessions several times. Workers must keep temp files in their own worktree.
 
-## Main hiện tại
-`70c792d41` (shop-fix). Trước đó lần lượt: 6e6c2ae6d act-audit (trò chơi nhỏ: bấm chỉ mở trò, chơi xong mới trừ), 218a591fd hoang-tu.
+## Current main
+`70c792d41` (shop-fix). Before that, in order: 6e6c2ae6d act-audit (minigames: tap only opens the game, deduct after playing), 218a591fd hoang-tu.
 
-## Nhánh và trạng thái lúc bàn giao
-Mỗi thợ được lệnh đẩy hết việc dở và viết dev/PROGRESS_<nhánh>.md trên nhánh của mình. Đọc tệp đó trước khi giao tiếp.
+## Branches and status at handover
+Every worker was ordered to push all partial work and write dev/PROGRESS_<branch>.md on its branch. Read that file before reassigning.
 
-### Đã xong, chờ duyệt (giao người duyệt mới)
-| Nhánh | sha | Nội dung |
+### Done, awaiting review (assign new reviewers)
+| Branch | sha | Content |
 |---|---|---|
-| review/fix-float | af7c388cb+ | Số lẻ → số nguyên (jint.js); "thù" → oán; nhật ký ghi kết quả thật; dòng lựa chọn có ngữ cảnh; qua đêm sang ngày mới (jnight.js). Thợ đang thêm khuôn chung trang người Tuần lục (chip, HIỆN NAY, dòng chỉ có tên). |
-| review/opt-render | a8ec98511 | Lựa chọn sự kiện: CHỈ giá + Cần + GỢI Ý bằng lời + nhãn rủi ro (KIT §28.6 bật). Dấu THÀNH/BẠI chỉ theo roll. Kèm gộp. |
-| review/rest-balance | 0f4670e90 | Dưỡng sức (tối, hết buổi, thuốc/8 bạc, +20) vs Nghỉ lát (+6, bớt tâm trạng xấu) |
-| review/kit-close | 1bd240a54 | Tư trang 2 tab; giữ thẻ tin "Tin trong cung buổi này" + ảnh đúng; chắn bấm lọt (#kxcatch); ✕ đóng. R5 đang duyệt. |
-| review/rank0-ivory | (xem PROGRESS) | Khung Đáp ứng A; 8 dấu (đổi 6/7); chân dung không zoom, dời lên, canh giữa thân (jkpor). Ảnh đã lên CDN. |
-| review/scene-light | 05562ad0d+ | Mưa chiều hết nâu sepia (jsl.js). Còn: da hồng 807 chân dung (ĐÃ DUYỆT), sửa j87 Thái hậu tràn cột, cắt lại hình bị cắt mép. |
-| review/img-quality | badc75e45 | Chân dung lấy ngay (không mặt 256 cũ phóng to), người lạ khung đá, công tử chưa gặp hình bóng |
-| review/game-feel | 80bfd8feb | Hiệu ứng Pixi, rung, khung thu phóng một layout (rot.js), kitGain mọi món, món tự làm có tên/hình |
-| review/brand | bc1c7f324 | Logo app từ tranh màn tải; mộc Trân nữ góc phải trên (jseal.js) |
-| review/emo-men | 8bc5b0d40 | Ô cảm xúc nam (nam trẻ + nam đứng tuổi). Ảnh đã lên CDN. Xung đột emoBadge với rank0-ivory (xem PROGRESS). |
-| review/hoangtu-tuchat | 46917d3db | Tư chất ẩn, Văn/Võ/Đức lớn dần, hiền tài từ 6 tuổi; "Hoàng tự trong cung" hiện điều cả cung biết; trẻ chưa gặp hình bóng; con mình không còn bị xem là người lạ |
-| review/poison-gift | fe78f2c07 | Ân tình có thanh số; chân tình có điều kiện thật hiện trên thẻ; bỏ độc vào quà; NPC cũng làm; kim bạc thử độc |
-| review/econ | d0c0c7308 | Núm mưu NPC |
-| review/sub-odds, review/person-acts, review/stage-slots, review/header-fix, review/drag-curl, review/scheme-games, review/weather, review/gift-chest, review/ts-b + review/pets-gop-thu | xem dev/review/*-queue.md | Trong hàng các người duyệt cũ |
+| review/fix-float | af7c388cb+ | Decimals → integers (jint.js); "thù" → oán; log records real outcomes; choice lines with context; overnight goes to a new day (jnight.js). Worker is adding a shared template for Tuần lục person pages (chips, HIỆN NAY, lines with only a name). |
+| review/opt-render | a8ec98511 | Event choices: ONLY price + Cần + verbal HINT + risk label (KIT §28.6 on). THÀNH/BẠI stamp follows only the roll. Kèm merged. |
+| review/rest-balance | 0f4670e90 | Dưỡng sức (evening, ends the buổi, tonic/8 silver, +20) vs Nghỉ lát (+6, eases bad mood) |
+| review/kit-close | 1bd240a54 | Tư trang 2 tabs; keeps the news card "Tin trong cung buổi này" + correct images; tap-through guard (#kxcatch); ✕ closes. R5 reviewing. |
+| review/rank0-ivory | (see PROGRESS) | Đáp ứng frame A; 8 marks (6/7 swapped); portraits not zoomed, moved up, body centred (jkpor). Images already on CDN. |
+| review/scene-light | 05562ad0d+ | Afternoon rain no longer sepia brown (jsl.js). Left: rosy skin for 807 portraits (APPROVED), fix j87 Thái hậu overflowing the column, re-cut edge-cut figures. |
+| review/img-quality | badc75e45 | Portraits load immediately (no old upscaled 256 faces), strangers in stone frame, unmet công tử as silhouettes |
+| review/game-feel | 80bfd8feb | Pixi effects, vibration, one-layout scaling frame (rot.js), kitGain for every item, handmade items with names/pictures |
+| review/brand | bc1c7f324 | App logo from the loading-screen painting; Trân nữ seal top right (jseal.js) |
+| review/emo-men | 8bc5b0d40 | Male mood cells (young men + middle-aged men). Images already on CDN. emoBadge conflicts with rank0-ivory (see PROGRESS). |
+| review/hoangtu-tuchat | 46917d3db | Hidden tư chất, Văn/Võ/Đức grow, hiền tài from age 6; "Hoàng tự trong cung" shows what the whole palace knows; unmet children as silhouettes; her own children no longer treated as strangers |
+| review/poison-gift | fe78f2c07 | Ân tình has a number bar; chân tình has real conditions shown on the card; poison in gifts; NPCs do it too; silver needle poison test |
+| review/econ | d0c0c7308 | NPC scheme knob |
+| review/sub-odds, review/person-acts, review/stage-slots, review/header-fix, review/drag-curl, review/scheme-games, review/weather, review/gift-chest, review/ts-b + review/pets-gop-thu | see dev/review/*-queue.md | In the old reviewers' queues |
 
-### Đã bị trả về (FAIL), đang sửa
-- review/ts-a: lệch hàng ô, chip làm gãy dòng ngày ở Fold, Lễ tấn phong sai tranh, chữ "thiện cảm" trơn, "Phi ???", nút "Lui", bài thử hỏng vì màn Luân hồi. Thợ sửa trên nhánh fix-ts-a.
-- review/pets: bảng mua thú chưa thành lưới có hình kiểu cửa tiệm, lệch 17px. Thợ sửa trên review/pets-fix (dựa pets-gop-thu). ts-b chỉ vào main CÙNG pets.
+### Returned (FAIL), being fixed
+- review/ts-a: misaligned cells, chip breaks the date line on Fold, Lễ tấn phong wrong picture, bare "thiện cảm", "Phi ???", "Lui" button, test broken by the Luân hồi screen. Worker fixing on branch fix-ts-a.
+- review/pets: pet shop not yet a picture grid like a shop, 17px misalignment. Worker fixing on review/pets-fix (based on pets-gop-thu). ts-b goes to main only TOGETHER with pets.
 
-### Đang làm dở (đọc PROGRESS của nhánh)
-- review/act-pics2: tranh hành sự riêng từng nghĩa, khoảng 360/617.
-  - Xong: 17 tranh việc thẻ người (đã lên CDN), 19 tranh Tự học riêng từng môn (đã lên), 10 banner phản ứng trang điểm (đã lên), banner hộp thoại 4:3 ev-<key>.webp (16+/121).
-  - Còn: ảnh dòng Tổng lược Tuần lục (ngủ, món hỏng, xác lão Vương, vào thi, xếp hạng…); 121 banner hộp thoại (dev/review/pic-shared.md trên review/gift-ui).
-  - Bảng: dev/figwork/acts/dlg_list.tsv. CẤM dùng ảnh nhóm.
+### In progress (read the branch's PROGRESS)
+- review/act-pics2: own act picture per meaning, about 360/617.
+  - Done: 17 person-card act pictures (on CDN), 19 per-subject Tự học pictures (up), 10 makeup reaction banners (up), 4:3 dialog banners ev-<key>.webp (16+/121).
+  - Left: Tuần lục Tổng lược line images (sleep, failed dish, old Vương's body, entering the exam, ranking…); 121 dialog banners (dev/review/pic-shared.md on review/gift-ui).
+  - Table: dev/figwork/acts/dlg_list.tsv. Group pictures BANNED.
 - review/gift-ui:
-  - Hộp tặng quà (ảnh món, thông tin, tab người nhận); thẻ đồ người khác đang dùng hiện ảnh món.
-  - Việc ban ngày với Hoàng thượng/Thái hậu (Xin yết kiến, Dâng quà, Thỉnh an). Còn: Xin hầu cờ (cần Kỳ), Xin đánh đàn (cần Cầm), Mời dạo ngự hoa viên (không bão), mỗi ngày một lần chung với yết kiến, NPC cũng làm.
-  - Nối ev-<key>.webp vào hộp thoại.
-  - Chuẩn hóa cỡ đầu cho mọi họ chân dung (trẻ, công tử, cung nhân…), làm trên rank0-ivory.
+  - Gift dialog (item image, info, recipient tabs); card for an item someone else is using shows the item image.
+  - Daytime acts with the Emperor/Thái hậu (Xin yết kiến, Dâng quà, Thỉnh an). Left: Xin hầu cờ (needs Kỳ), Xin đánh đàn (needs Cầm), Mời dạo ngự hoa viên (no storm), once per day shared with the audience, NPCs too.
+  - Wire ev-<key>.webp into dialogs.
+  - Normalise head size for every portrait family (children, công tử, servants…), built on rank0-ivory.
 - review/kit-fig2:
-  - kitEventDp: khuôn CHUNG cho mọi sự kiện có người. Trái là hình toàn thân, tên ở TRÊN; phải trên là banner ngang; giữa là thông tin; dưới là nút ngắn hai cái/hàng hoặc dài, tùy nội dung. Cỡ theo hộp người chuẩn.
-  - kitActCompact: thẻ việc thu nhỏ khi bên trái có hình người.
-  - Luật người lạ ở thẻ tin + Tuần lục + Ân oán; Ân oán chia tab.
-  - Thẻ việc chưa có tranh riêng thì KHÔNG hiện ảnh (không ảnh nhóm).
-- review/tabs-kit: tab Tài nghệ, Mệnh truyện, Việc nhờ làm theo giao diện game, CHIA TAB CON; hàng lọc cố định sát dưới khung chỉ số, ngoài vùng cuộn (luật kit cho mọi tab).
-- review/toilette: trò Điểm trang buổi sáng (chọn áo + kẻ mày/phấn/son).
-  - Lớp mặt đẹp/diêm dúa ĐÃ DUYỆT (a820a52ab).
-  - 10 phản ứng hiện KHUNG SỰ KIỆN (tối đa 2 mỗi dịp).
-  - toil-fit phải đo trên ảnh CDN hiện tại (bản cũ có hoa điền to).
-- review/j83-variety: tác phẩm tự tay, phương án A (10 món × 4 phẩm).
-  - Mỗi món có trò chơi đúng tên (cắm hoa ≠ vẽ), nguyên liệu đúng món.
-  - Vật liệu đắt phải đáng tiền ở MỌI tài nghệ và mọi lựa chọn trả thêm tiền (dev/review/paid-tiers.md).
-  - Bỏ nút Thôi.
+  - kitEventDp: SHARED template for every event with a person. Left full-body figure, name ABOVE; right top landscape banner; middle info; bottom short buttons two per row or long, depending on content. Sized to the standard person box.
+  - kitActCompact: compact act card when a person figure is on the left.
+  - Stranger rule in news cards + Tuần lục + Ân oán; Ân oán split into tabs.
+  - Act cards without their own picture show NO image (no group pictures).
+- review/tabs-kit: Tài nghệ, Mệnh truyện, Việc nhờ tabs in game UI, SPLIT INTO SUB-TABS; filter row fixed right under the stats frame, outside the scroll area (kit rule for every tab).
+- review/toilette: morning Điểm trang game (choose dress + brows/powder/lipstick).
+  - Pretty/gaudy face layer APPROVED (a820a52ab).
+  - 10 reactions shown as EVENT FRAMES (max 2 per occasion).
+  - toil-fit must be measured on the current CDN images (old version had big huadian).
+- review/j83-variety: handmade works, option A (10 items × 4 grades).
+  - Each item has a game matching its name (flower arranging ≠ painting), ingredients matching the dish.
+  - Expensive materials must be worth it in EVERY skill and every pay-more choice (dev/review/paid-tiers.md).
+  - Remove the Thôi button.
 - review/event-honest → event-balance:
-  - Kết quả theo BỐI CẢNH (nết người ngẫu nhiên mỗi đời, tâm trạng, quan hệ…) để không ai "thuộc bài".
-  - Chơi khéo phải hơn rõ rệt; chơi bừa bị phạt/giáng/chết. Ba bot: đọc gợi ý / chọn bừa / luôn một ô.
-  - Sự kiện đổi tâm trạng nàng + mặt + ô tâm trạng hiện NGUYÊN NHÂN (nàng và NPC).
-  - Sự kiện phải có điều kiện thật ("trả quà" khi chưa tặng).
-  - Nhiệm vụ nhân chứng lão Vương: thêm đường không tốn bạc, giá theo bậc, cho hoãn vài buổi.
-- review/trung-y: code xong (jty.js). Ảnh c01–c12 xong (giữ, chưa lên CDN tới khi duyệt). c13–c32 + m01–m19 đã vẽ nhưng chưa cắt (zip hết hạn 16/11 ~08:00Z: cắt trước!). m20–m52 chưa vẽ. Đọc dev/PROGRESS_trung_y.md.
-- review/sfx: âm thanh theo nghĩa sự kiện; tiếng khóc nghe như tiếng cười → thay.
-- review/rank-ui: bục Bảng vàng, thẻ cuối đời.
-- review/pets-fix: như trên.
+  - Outcomes by CONTEXT (random natures per life, mood, relations…) so nobody "memorises" the answers.
+  - Skilful play must clearly win; random play gets punished/demoted/killed. Three bots: reads hints / random / always one slot.
+  - Events change her mood + face + mood cell shows the CAUSES (her and NPCs).
+  - Events must have real preconditions ("trả quà" when nothing was given).
+  - Old Vương witness quest: add a silver-free path, price by rank, allow postponing a few buổi.
+- review/trung-y: code done (jty.js). Images c01–c12 done (kept, not on CDN until reviewed). c13–c32 + m01–m19 drawn but not cut (zip expires 16/11 ~08:00Z: cut first!). m20–m52 not drawn. Read dev/PROGRESS_trung_y.md.
+- review/sfx: sound by event meaning; crying that sounds like laughing → replace.
+- review/rank-ui: Bảng vàng podium, end-of-life card.
+- review/pets-fix: as above.
 
-## Lỗi sếp báo còn mở (chưa có nhánh nào xong)
-- [ ] Sổ tuần: lật trang thì hình nhân vật và cột chữ bên phải bị NHÁY → chưa giao ai. Giao cho thợ Tuần lục (fix-float hoặc mới).
-- [ ] Hộp "VIỆC · <cung>" khi đến cung người khác (vd. Chung Tú cung) → chưa giao ai. Giao cho kit-fig2 (kitEventDp):
-  - GIỮ banner cung + bóng người như hiện tại.
-  - Dưới đó: TRÁI là chân dung chủ vị (chưa gặp thì bóng xám); PHẢI là giải thích (đang ở cung, khách phẩm thấp phải bái kiến, cần 2 khắc còn 1…).
-  - Dưới cùng là nút; bỏ "Thôi".
-- [ ] Tuần lục trang người: khuôn chung cho mọi người, chip một màu, HIỆN NAY thẳng cột, không số lẻ, "Nàng oán ta" (đang ở fix-float).
-- [ ] Ảnh dòng Tuần lục lặp ảnh phòng (act-pics2).
-- [ ] Chân dung trẻ con zoom khác nhau → chuẩn hóa cỡ đầu (gift-ui/rank0-ivory).
-- [ ] Hộp "Có người đến" to quá; Đoan ngọ dùng ảnh Triều chính (kit-fig2 + act-pics2).
-- [ ] Hình Thái hậu bị cột Tuần lục cắt (scene-light, sửa j87).
-- [ ] Bảng mua thú (pets-fix). Con mèo đã vẽ lại.
+## Owner-reported bugs still open (no branch finished)
+- [ ] Sổ tuần: turning the page makes the character figure and the right text column FLASH → not assigned. Give to the Tuần lục worker (fix-float or new).
+- [ ] "VIỆC · <cung>" box when visiting another's palace (e.g. Chung Tú cung) → not assigned. Give to kit-fig2 (kitEventDp):
+  - KEEP the palace banner + people silhouettes as now.
+  - Below: LEFT the palace head's portrait (grey silhouette if unmet); RIGHT the explanation (at the palace, lower-rank guests must pay respects, needs 2 khắc has 1…).
+  - Buttons at the bottom; remove "Thôi".
+- [ ] Tuần lục person page: shared template for everyone, one-colour chips, HIỆN NAY in straight columns, no decimals, "Nàng oán ta" (in fix-float).
+- [ ] Tuần lục line images repeat the room picture (act-pics2).
+- [ ] Children's portraits zoomed differently → normalise head size (gift-ui/rank0-ivory).
+- [ ] "Có người đến" box too big; Đoan ngọ uses the Triều chính picture (kit-fig2 + act-pics2).
+- [ ] Thái hậu figure cut by the Tuần lục column (scene-light, fix j87).
+- [ ] Pet shop (pets-fix). The cat has been redrawn.
 
-## Đã quyết, KHÔNG làm lại
-- Lựa chọn sự kiện ẩn Được/Mất (KIT §28.6), có gợi ý bằng lời + nhãn rủi ro (14:30Z, 15:05Z, 15:10Z).
-- Ân tình chỉ với Hoàng thượng. Người khác dùng "quý ta"/"oán ta". Chân tình là điều kiện tặng quà, không phải thanh điểm.
-- Hoa điền đã thu nhỏ trên CDN. KHÔNG làm lại; chỉ đo kiểm.
-- Ô cảm xúc nam: chỉ cần nam/nữ, nhưng bộ nam đứng tuổi đã làm thì dùng luôn.
-- Da hồng mức mẫu đã duyệt; trang điểm đẹp/diêm dúa đã duyệt.
+## Decided, do NOT redo
+- Event choices hide Được/Mất (KIT §28.6), with verbal hints + risk labels (14:30Z, 15:05Z, 15:10Z).
+- Ân tình only with the Emperor. Others use "quý ta"/"oán ta". Chân tình is a gift condition, not a points bar.
+- Huadian already shrunk on the CDN. Do NOT redo; only measure/check.
+- Male mood cells: only male/female needed, but the middle-aged male set already made is used anyway.
+- Rosy skin at the approved sample level; pretty/gaudy makeup approved.
 
-## Người duyệt
-Mỗi người duyệt cũ ghi hàng của mình vào dev/review/R*-queue.md. Phiên mới tạo người duyệt mới, mỗi người MỘT nhánh, chạy song song. Thứ tự ưu tiên:
+## Reviewers
+Each old reviewer logged its queue in dev/review/R*-queue.md. The new session creates new reviewers, each ONE branch, running in parallel. Priority order:
 1. fix-float
 2. opt-render
 3. kit-close
@@ -121,98 +121,98 @@ Mỗi người duyệt cũ ghi hàng của mình vào dev/review/R*-queue.md. Ph
 9. brand
 10. poison-gift
 11. scene-light
-12. phần còn lại
+12. the rest
 
-## Đĩa
-Khoảng 4,8 GB trống. Dọn worktree của thợ đã xong: `git worktree remove --force --force` + `git worktree prune`. Đừng xóa worktree của thợ đang chạy hoặc còn ảnh chưa lên CDN (act-pics2, trung-y/agent-a40a826e3f9c2878f, scene-light, j83-variety).
+## Disk
+About 4.8 GB free. Clean up finished workers' worktrees: `git worktree remove --force --force` + `git worktree prune`. Don't delete worktrees of running workers or ones with images not yet on the CDN (act-pics2, trung-y/agent-a40a826e3f9c2878f, scene-light, j83-variety).
 
-## PHỤ LỤC: báo cáo cuối của thợ và người duyệt (15/11 ~09:50Z)
-Đọc PROGRESS trên từng nhánh trước khi giao tiếp.
+## APPENDIX: final reports from workers and reviewers (15/11 ~09:50Z)
+Read PROGRESS on each branch before reassigning.
 
-### Thợ
-| Nhánh | sha | PROGRESS | Ghi chú |
+### Workers
+| Branch | sha | PROGRESS | Notes |
 |---|---|---|---|
-| review/fix-float | e03bf36a0 | dev/PROGRESS_fix-float.md | Cần rebase lên main. Commit đầu là WIP trang người Tuần lục mục (1)–(9), chưa thử. Còn LEFT: (7) khuôn cố định, (8) thẳng cột, test chip số nguyên. |
-| review/tabs-kit | a94a34925 | dev/PROGRESS_tabs-kit.md | Đã rebase lên main 70c792d41, phải thử lại. |
-| review/rest-balance | 0f4670e90 | không có | Xong. |
-| review/ts-a | 02d7db25f | dev/PROGRESS_ts_a.md | WIP: 5 lỗi FAIL đã sửa code, cần chụp 4 khổ. Bóng xám Hoàng thượng để cho kit-fig2. |
-| review/kit-close | 1bd240a54 | | Sẵn sàng duyệt. Bản gộp dở của R5: review/kit-close-merged-wip 9e3ab039a (chưa thử). |
-| review/opt-render | a8ec98511 | | Sẵn sàng duyệt, chưa ai xem. |
-| review/hoangtu-tuchat | d8e4fe943 | dev/PROGRESS_hoangtu-tuchat.md | Xong, 22/22 ở 5 khổ. Sẵn sàng duyệt. |
-| review/toilette | 71efeee98 | dev/PROGRESS_toilette.md | Còn: đo lại điểm mặt trên ảnh CDN rồi đẩy toil-fit.json; chụp 1180; bot; nối kitEventDp. Banner ev-toil-* đã lên CDN. Báo act-audit: leAttire dùng S.turn*10+S.buoi nhưng S.turn là tháng. |
-| review/scene-light | fd765c0a4 | dev/PROGRESS_review-scene-light.md | Da hồng 807 (đã duyệt) CHƯA bắt đầu; cắt lại hình cắt mép chưa làm; j87 Thái hậu đã commit, chưa đo lại. |
-| review/act-pics2 | c457f3d8a | dev/PROGRESS_review-act-pics2.md | 22 tranh dòng Tổng lược đã vẽ, CHƯA lên CDN (lệnh trong PROGRESS); 8 lượt vẽ đang chờ tải; còn sửa kbkArt (giao a467/gift-ui). |
-| review/trung-y | f99807021 | worktree agent-a40a826e3f9c2878f: dev/PROGRESS_trung_y.md (mục "BÀN GIAO 15/11 ~09:35Z") | Đủ 84 mặt đã vẽ. Cắt mới xong c01–c12 (trong img/). c13/15/16/18/19 cắt rồi nhưng cutcheck báo bán trong suốt (xem batch2 sheet). Còn lại chưa cắt. ZIP HẾT HẠN 16/11 08:00–09:19Z: làm ngay! |
-| review/sfx | d83929a06 | dev/PROGRESS_sfx.md | Âm theo nghĩa; thay tiếng khóc giống cười và 5 tiếng khác. Cần chạy lại test và cần người nghe thử. |
-| review/rank-ui | f8f914a0e | dev/PROGRESS_review_rank-ui.md | Bục Bảng vàng, thẻ cuối đời. Còn chạy test 844 + podium.js. Khi gộp lấy kitDpFit/kitNameRank của kit-fig2. |
-| review/pets-fix | 8edc3a83e | dev/PROGRESS_pets-fix.md | Đã gộp pet-care + shop-fix (shop-fix đã ở main). Còn lệch 17px, test 5 khổ, sửa bài thử. |
-| review/j83-variety, review/kit-fig2, review/gift-ui | xem PROGRESS trên nhánh | | Chưa kịp báo cuối, đọc nhánh. |
+| review/fix-float | e03bf36a0 | dev/PROGRESS_fix-float.md | Needs rebase onto main. First commit is WIP Tuần lục person page items (1)–(9), untested. LEFT: (7) fixed template, (8) straight columns, integer chip test. |
+| review/tabs-kit | a94a34925 | dev/PROGRESS_tabs-kit.md | Rebased onto main 70c792d41, must be retested. |
+| review/rest-balance | 0f4670e90 | none | Done. |
+| review/ts-a | 02d7db25f | dev/PROGRESS_ts_a.md | WIP: 5 FAIL bugs fixed in code, needs shots at 4 sizes. Emperor grey silhouette left to kit-fig2. |
+| review/kit-close | 1bd240a54 | | Ready for review. R5's partial merge: review/kit-close-merged-wip 9e3ab039a (untested). |
+| review/opt-render | a8ec98511 | | Ready for review, nobody has looked. |
+| review/hoangtu-tuchat | d8e4fe943 | dev/PROGRESS_hoangtu-tuchat.md | Done, 22/22 at 5 sizes. Ready for review. |
+| review/toilette | 71efeee98 | dev/PROGRESS_toilette.md | Left: re-measure face points on CDN images then push toil-fit.json; 1180 shots; bot; wire kitEventDp. ev-toil-* banners on CDN. Tell act-audit: leAttire uses S.turn*10+S.buoi but S.turn is the month. |
+| review/scene-light | fd765c0a4 | dev/PROGRESS_review-scene-light.md | Rosy skin 807 (approved) NOT started; re-cutting edge-cut figures not done; j87 Thái hậu committed, not re-measured. |
+| review/act-pics2 | c457f3d8a | dev/PROGRESS_review-act-pics2.md | 22 Tổng lược line pictures drawn, NOT on CDN (command in PROGRESS); 8 generations waiting to download; kbkArt fix still to do (assigned a467/gift-ui). |
+| review/trung-y | f99807021 | worktree agent-a40a826e3f9c2878f: dev/PROGRESS_trung_y.md (section "BÀN GIAO 15/11 ~09:35Z") | All 84 faces drawn. Only c01–c12 newly cut (in img/). c13/15/16/18/19 cut but cutcheck reports semi-transparency (see batch2 sheet). Rest not cut. ZIP EXPIRES 16/11 08:00–09:19Z: do it now! |
+| review/sfx | d83929a06 | dev/PROGRESS_sfx.md | Sound by meaning; replaced the laugh-like crying and 5 other sounds. Needs test rerun and a human listener. |
+| review/rank-ui | f8f914a0e | dev/PROGRESS_review_rank-ui.md | Bảng vàng podium, end-of-life card. Still to run test 844 + podium.js. On merge take kitDpFit/kitNameRank from kit-fig2. |
+| review/pets-fix | 8edc3a83e | dev/PROGRESS_pets-fix.md | Merged pet-care + shop-fix (shop-fix already on main). Left: 17px misalignment, test 5 sizes, fix the test. |
+| review/j83-variety, review/kit-fig2, review/gift-ui | see PROGRESS on the branch | | No final report in time, read the branch. |
 
-### Người duyệt
-| Nhánh | Kết quả | Ghi chú |
+### Reviewers
+| Branch | Result | Notes |
 |---|---|---|
-| act-audit, shop-fix | PASS, đã ở main | Main = 70c792d41. |
-| review/stage-slots | PASS | Ref review/stage-slots-merged = 8b4b51679. Phải chạy stage-slots hoặc coop-e2e một lần trên ref này rồi mới đẩy main. Chưa duyệt: drag-curl, header-fix (+ avatar to), scene-light. Ghi chú dev/review/R3-queue.md. |
-| fix-float | chưa kết luận | coop-e2e lỗi 2 lần mỗi lần một bước. Bản gộp review/fix-float-kiem2-wip 2dd99230b. Còn hỏi: jnight có tự gọi nextBuoi trong co-op không. |
-| rest-balance | gần PASS | Bản gộp review/rest-balance-kiem2-wip ba566d8ff có 2 sửa: j79 thẻ tràn 57px ở 844, lỗi này đang có trên main. |
-| person-acts | chưa kết luận | 1 lỗi: tab "Đối đầu" chui dưới ✕ ở 1000x755. Bản gộp review/person-acts-review-wip d5f60c87c. |
-| gift-chest | chưa kết luận | Bản gộp review/gift-chest-wip 6e6dea11d; bài thử treo ở Giao tình. Đụng rank0-ivory: lên phẩm hiện 2 rương. |
-| weather | phải sửa | wxRiskWord phải dùng chanceW(); dùng "−" không dùng "-". |
-| rank0-ivory | phải đo | KIT_POR.dx=.18 > khoảng thừa .07 nên có thể hở cạnh. |
-| Chưa bắt đầu | | game-feel, brand, img-quality, emo-men, opt-render, scheme-games, econ, rank-ui. |
+| act-audit, shop-fix | PASS, on main | Main = 70c792d41. |
+| review/stage-slots | PASS | Ref review/stage-slots-merged = 8b4b51679. Must run stage-slots or coop-e2e once on this ref before pushing main. Not reviewed: drag-curl, header-fix (+ bigger avatar), scene-light. Notes dev/review/R3-queue.md. |
+| fix-float | no verdict | coop-e2e failed twice, at a different step each time. Merge review/fix-float-kiem2-wip 2dd99230b. Open question: does jnight call nextBuoi by itself in co-op. |
+| rest-balance | nearly PASS | Merge review/rest-balance-kiem2-wip ba566d8ff has 2 fixes: j79 card overflows 57px at 844, a bug currently on main. |
+| person-acts | no verdict | 1 bug: "Đối đầu" tab hides under ✕ at 1000x755. Merge review/person-acts-review-wip d5f60c87c. |
+| gift-chest | no verdict | Merge review/gift-chest-wip 6e6dea11d; test hangs at Giao tình. Collides with rank0-ivory: promotion shows 2 chests. |
+| weather | needs fixes | wxRiskWord must use chanceW(); use "−" not "-". |
+| rank0-ivory | needs measuring | KIT_POR.dx=.18 > spare margin .07 so edges may gap. |
+| Not started | | game-feel, brand, img-quality, emo-men, opt-render, scheme-games, econ, rank-ui. |
 
-Ghi chú người duyệt: review/kiem2-notes (R1 b505ed2df, R2 7edeb353e), review/r5-notes a53375818, R6 trên review/gift-chest-wip.
+Reviewer notes: review/kiem2-notes (R1 b505ed2df, R2 7edeb353e), review/r5-notes a53375818, R6 on review/gift-chest-wip.
 
-Cảnh báo: R5 đã chạy `pkill -f chromium` lúc dọn, có thể làm chết bài thử của người khác.
+Warning: R5 ran `pkill -f chromium` while cleaning up, which may have killed other people's tests.
 
-## LỖI SẾP BÁO THÊM LÚC ĐÓNG PHIÊN (16:40Z), chưa giao ai
-Chi tiết trong OWNER_DECISIONS 16:40Z.
-- Bái kiến: buổi tối còn 4 khắc mà vẫn không hiện nút Bái kiến.
-- Phế phi họ Lý ở lãnh cung: hiện khung trống, không có hình.
-- Buổi tối mà thời tiết ghi "nắng gắt".
-- Chạm vào nàng trên sân khấu: hiện khung chữ nhật xanh mờ.
-- Nút góc dưới còn ghi "Qua ngày"; chip "Đã mở bản mới" đè lên tiêu đề cảnh.
+## MORE OWNER BUGS AT SESSION CLOSE (16:40Z), not assigned
+Details in OWNER_DECISIONS 16:40Z.
+- Bái kiến: evening with 4 khắc left still shows no Bái kiến button.
+- Phế phi họ Lý in the cold palace: empty frame, no figure.
+- Evening weather says "nắng gắt".
+- Tapping her on the stage: a faint blue rectangle appears.
+- Bottom corner button still says "Qua ngày"; the "Đã mở bản mới" chip covers the scene title.
 
-## QUAN TRỌNG: máy mới không có worktree cũ
-Phiên mới chạy trên máy mới. Mọi thứ chỉ còn ở git (các nhánh) + CDN + Magnific (id trong PROGRESS).
-Lúc 16:40Z đã đẩy hết ảnh còn nằm ở máy lên CDN:
-- act-pics2: toàn bộ act-*/ev-*.
+## IMPORTANT: the new machine has no old worktrees
+The new session runs on a new machine. Everything remains only in git (branches) + CDN + Magnific (ids in PROGRESS).
+At 16:40Z every image still on the machine was pushed to the CDN:
+- act-pics2: all act-*/ev-*.
 - trung-y c01–c12 + FIGURES-ty.json.
 - fig-eunuch-ndp-tray.
 
-Những gì chưa có trên CDN thì lấy lại từ Magnific theo id trong PROGRESS:
-- ảnh nấu ăn j83: 40 ảnh + 3 tờ biểu tượng;
-- trung-y c13+ (zip hết hạn 16/11 sáng);
-- 8 lượt vẽ act-pics2 đang chờ.
-Ảnh trung y đã lên CDN nhưng code vẫn ở nhánh review/trung-y.
+Anything not on the CDN must be re-fetched from Magnific by the ids in PROGRESS:
+- j83 cooking images: 40 images + 3 icon sheets;
+- trung-y c13+ (zip expires morning of 16/11);
+- 8 pending act-pics2 generations.
+Trung y images are on the CDN but the code is still on branch review/trung-y.
 
-## PHIÊN CHÍNH 6 (nhận lúc đóng phiên 5)
-Đã giao 20 việc (tối đa): trung-y (cắt c13+ trước khi zip hết hạn); fix-float (làm nốt khuôn trang người + lỗi NHÁY khi lật Sổ tuần); người duyệt: opt-render, kit-close, rest-balance, hoangtu-tuchat, stage-slots (chạy thử trên 8b4b51679), game-feel, img-quality, brand; thợ: kit-fig2 (+ hộp "VIỆC · <cung>"), act-pics2 (+ hình Phế phi họ Lý và mọi NPC phụ thiếu hình), scene-light (da hồng 807), tabs-kit, ts-a, event-balance, gift-ui, toilette, j83-variety, close-bugs (nhánh mới review/close-bugs: Bái kiến buổi tối, thời tiết theo buổi, khung xanh khi chạm nàng, "Qua ngày" + chip "Đã mở bản mới").
-Chờ chỗ trống: người duyệt rank0-ivory + emo-men, poison-gift; thợ pets-fix, sfx, rank-ui. Duyệt fix-float sau khi thợ báo xong.
-Worktree thợ ở /home/user/wt/<tên>. Bản tóm tắt luật cho thợ: /home/user/wt/PREAMBLE.txt, REVIEWER.txt.
-- Phiên 5 nhắn thêm 4 ý 16:50Z (đã có trong OWNER_DECISIONS). Đã đưa LUẬT KIT TRƯỚC lên đầu WORKER_BRIEF + bản cho người duyệt. Hàng chờ thêm: thợ hoa điền thu nhỏ thêm một cỡ (làm mẫu vài mặt cho sếp duyệt trước).
-- 09:50Z (giờ máy): ĐĨA ĐẦY do 20 thợ cùng fetch đầy đủ repo nông → 6 việc bị chặn, đã chạy lại. Luật mới cho thợ: fetch --depth=30 dưới `flock /home/user/wt/fetch.lock`, không clone lại.
-- review/event-honest chưa từng được đẩy (mất theo máy cũ) → event-balance làm lại từ main + opt-render.
-- Đã giao: 16:55Z/16:58Z/17:00Z → fix-float (quét kit Tuần lục); 17:04Z ảnh tin sai người → kit-fig2 (ưu tiên, báo sớm). Hàng chờ: reward-anim (17:02Z), hoa điền thu nhỏ thêm, R rank0-ivory+emo-men, R poison-gift, pets-fix, sfx, rank-ui.
-- 17:06Z luật sự kiện chính/phụ tuyến (nhãn + hạn chót + đường không tốn bạc) → event-balance. Chi tiết hộp gấm 17:02Z giữ ở hàng chờ reward-anim (giờ hiện món ~1,2–1,5 s, rà mọi món thiếu hình, nhãn phẩm thật, bỏ dòng không đổi).
-- ~10:00Z ĐĨA: phiên có hạn mức ghi ~39 GB (df không đúng). Đã bắt mọi worktree dùng sparse-checkout (bỏ dev/shots, dev/owner-shots, dev/figwork), cấm clone đầy đủ; trống lại ~19 GB.
-- 17:08Z hội thi lệch chủ đề (Hội Phượng · thi thêu) + 'TỐN không' → close-bugs; ảnh banner → kit-fig2/act-pics2.
-- 17:12Z Cần chip trùng (Múa yến tiệc) → close-bugs. Khối 'Ân sủng' (Có thai/Lật thẻ/Ân tình) bị gập, sếp không thấy → chờ sếp chọn cách hiện.
-- LIVE main = ca361b147 (hoangtu-tuchat, PASS, kèm sửa j53 lời báo tư chất theo tuổi).
-- opt-render FAIL (ghi chú review/opt-render-r6 6f256f7f4): sự kiện dựng thẳng (Thái hậu triệu, 7 lễ hội…) vẫn hiện Được/Mất; gợi ý rơi về "chuyện khác"; CSS riêng .krisk/.khint → thợ mới sửa trên review/opt-render (làm thành kit chung). event-balance giữ phần bot cân bằng.
-- Đã mở người duyệt rank0-ivory + emo-men (gộp chung).
-- 17:14Z chữ tiêu đề 'Tuần lục' vẽ thư pháp Việt (chữ Latin có dấu, không Hán) 3–4 mẫu → act-pics2 làm trước, sếp chọn rồi mới gắn.
-- 17:16Z khung vuông thừa sau ảnh nhỏ + tên nhiều màu + dòng 'Tuần này' dài + nút Lui (Tổng lược Tuần lục) → fix-float, sửa ở kit chung.
-- 17:20Z THĂNG PHẨM PHẢI QUA KHẢO HẠCH (đủ điều kiện chỉ là được thi; trượt thì chờ; NPC cùng luật) → hàng chờ, giao ngay khi có chỗ (thợ promo-exam). Hỏi sếp: đường nô tài/ma ma có cần thi không.
-- 17:24Z phòng trưa vẫn nâu (scene-light tách lô sớm), đom đóm buổi trưa (close-bugs), ban thưởng tranh cổ không có rương (người duyệt game-feel kiểm).
-- 17:27Z bảng nhãn|giá trị lệch cột (LUẬT · Ân thưởng) → kit bảng chung + rà mọi danh sách → fix-float.
-- LIVE main = 114887bc1 (brand: icon app + mộc Trân nữ; người duyệt sửa dấu "NỮ" bị đọc "NƠ" và chip "Có bản mới" đè thẻ Hoàng thượng).
-- 17:27Z bảng nhãn|giá trị tách sang thợ mới review/kit-table (fix-float xin tách).
-- 4 mẫu chữ Tuần lục trên CDN title-tuanluc-v1..v4.webp, đã gửi sếp chọn.
-- Hàng chờ (thứ tự): promo-exam (17:20Z), econ-stipend (17:30Z đồ bổng lộc vào Tư trang thật + rương; 17:33Z cắt xén bổng lộc; dựa review/econ), header-danh (17:36Z + sửa ≈17:50Z: trái Sắc·Tài·Tâm cơ·Đức·Danh·Sủng, phải Bạc·Sức; gộp review/header-fix), reward-anim (17:02Z), hoa điền thu nhỏ, R poison-gift, pets-fix, sfx, rank-ui.
-- 17:40Z bảng Ân sủng bung to tràn mép → người duyệt stage-slots tìm/sửa; vết đen ở cổ hình Mạnh Mộng Điệp (Thường tại) + rà mọi hình → scene-light.
-- 17:45Z SẾP ĐÍNH CHÍNH: Tuần lục KHÔNG dồn trang (mỗi mục một trang như cũ); lỗi thật là trang "Triều đình · thiên hạ" thiếu hình toàn thân → mọi trang phải có hình người (fix-float). Hoa điền: đo tỷ lệ rộng hoa/rộng mặt từng bậc trên CDN, báo bậc nào vượt, đề xuất MỘT cỡ nhỏ hơn cho mọi bậc, gửi mẫu cho sếp TRƯỚC (hàng chờ, ưu tiên cao). Luật kit trước: dán nguyên văn vào mọi lời giao (PREAMBLE), người duyệt FAIL mọi thứ không theo kit, sổ dev/kit/KIT_REQUESTS.md.
-- scene-light lô sớm SẴN SÀNG KIỂM 6f624274e (bỏ lớp sepia/nâu ở phòng nàng 4 buổi; mưa ấm) → người duyệt đầu tiên rảnh nhận ngay.
+## MAIN SESSION 6 (taken over at session 5 close)
+Assigned 20 tasks (max): trung-y (cut c13+ before the zip expires); fix-float (finish person-page template + FLASH bug when turning Sổ tuần); reviewers: opt-render, kit-close, rest-balance, hoangtu-tuchat, stage-slots (test run on 8b4b51679), game-feel, img-quality, brand; workers: kit-fig2 (+ "VIỆC · <cung>" box), act-pics2 (+ Phế phi họ Lý figure and every side NPC missing a figure), scene-light (rosy skin 807), tabs-kit, ts-a, event-balance, gift-ui, toilette, j83-variety, close-bugs (new branch review/close-bugs: evening Bái kiến, weather by buổi, blue box on tapping her, "Qua ngày" + "Đã mở bản mới" chip).
+Waiting for a slot: reviewers rank0-ivory + emo-men, poison-gift; workers pets-fix, sfx, rank-ui. Review fix-float after the worker reports done.
+Worker worktrees at /home/user/wt/<name>. Rule summaries for workers: /home/user/wt/PREAMBLE.txt, REVIEWER.txt.
+- Session 5 sent 4 more points at 16:50Z (already in OWNER_DECISIONS). Put KIT-FIRST RULE (LUẬT KIT TRƯỚC) at the top of WORKER_BRIEF + the reviewer version. Added to queue: huadian worker to shrink one more size (sample a few faces for owner approval first).
+- 09:50Z (machine clock): DISK FULL because 20 workers each did a full fetch of the shallow repo → 6 tasks blocked, rerun. New worker rule: fetch --depth=30 under `flock /home/user/wt/fetch.lock`, never re-clone.
+- review/event-honest was never pushed (lost with the old machine) → event-balance redoes it from main + opt-render.
+- Assigned: 16:55Z/16:58Z/17:00Z → fix-float (Tuần lục kit sweep); 17:04Z news images of the wrong person → kit-fig2 (priority, report early). Queue: reward-anim (17:02Z), huadian shrink further, R rank0-ivory+emo-men, R poison-gift, pets-fix, sfx, rank-ui.
+- 17:06Z main/side story event rule (label + deadline + silver-free path) → event-balance. 17:02Z brocade box details stay in the reward-anim queue (item reveal now ~1.2–1.5 s, audit every item missing a picture, real grade labels, drop no-change lines).
+- ~10:00Z DISK: the session has a write quota of ~39 GB (df is wrong). Forced every worktree to use sparse-checkout (excluding dev/shots, dev/owner-shots, dev/figwork), banned full clones; ~19 GB free again.
+- 17:08Z festival off-theme (Hội Phượng · thi thêu) + 'TỐN không' → close-bugs; banner images → kit-fig2/act-pics2.
+- 17:12Z duplicate Cần chip (Múa yến tiệc) → close-bugs. 'Ân sủng' block (Có thai/Lật thẻ/Ân tình) collapsed, owner can't see it → waiting for owner to choose how to show it.
+- LIVE main = ca361b147 (hoangtu-tuchat, PASS, plus fix to j53 age-based tư chất messages).
+- opt-render FAIL (notes review/opt-render-r6 6f256f7f4): directly built events (Thái hậu summons, 7 festivals…) still show Được/Mất; hints fall back to "chuyện khác"; private CSS .krisk/.khint → new worker fixes on review/opt-render (make them shared kit). event-balance keeps the bot balance part.
+- Opened reviewer for rank0-ivory + emo-men (merged together).
+- 17:14Z 'Tuần lục' title drawn as Vietnamese calligraphy (Latin letters with diacritics, no Chinese) 3–4 samples → act-pics2 does it first, owner picks, then attach.
+- 17:16Z extra square frame behind small avatars + multicoloured names + long 'Tuần này' line + Lui button (Tuần lục Tổng lược) → fix-float, fix in the shared kit.
+- 17:20Z PROMOTION REQUIRES AN EXAM (meeting conditions only allows sitting it; fail and wait; NPCs same rules) → queue, assign as soon as a slot frees (worker promo-exam). Ask owner: do the servant/mama roads need exams.
+- 17:24Z midday room still brown (scene-light split off an early batch), fireflies at midday (close-bugs), antique painting reward without chest (game-feel reviewer checks).
+- 17:27Z misaligned label|value table (LUẬT · Ân thưởng) → shared kit table + audit every list → fix-float.
+- LIVE main = 114887bc1 (brand: app icon + Trân nữ seal; reviewer fixed the "NỮ" mark being read as "NƠ" and the "Có bản mới" chip covering the Emperor card).
+- 17:27Z label|value table split off to new worker review/kit-table (fix-float asked to split).
+- 4 Tuần lục lettering samples on CDN title-tuanluc-v1..v4.webp, sent for owner to choose.
+- Queue (in order): promo-exam (17:20Z), econ-stipend (17:30Z stipend items into real Tư trang + chest; 17:33Z stipend skimming; based on review/econ), header-danh (17:36Z + fix ≈17:50Z: left Sắc·Tài·Tâm cơ·Đức·Danh·Sủng, right Bạc·Sức; merge review/header-fix), reward-anim (17:02Z), huadian shrink, R poison-gift, pets-fix, sfx, rank-ui.
+- 17:40Z Ân sủng panel balloons over the edge → stage-slots reviewer finds/fixes; black mark at the neck of Mạnh Mộng Điệp's figure (Thường tại) + audit every figure → scene-light.
+- 17:45Z OWNER CORRECTION: Tuần lục does NOT pack pages (one section per page as before); the real bug is the "Triều đình · thiên hạ" page lacking a full-body figure → every page must have a person figure (fix-float). Huadian: measure flower width/face width ratio per tier on the CDN, report tiers that exceed, propose ONE smaller size for every tier, send samples to the owner FIRST (queue, high priority). Kit-first rule: paste verbatim into every assignment (PREAMBLE), reviewers FAIL anything not per kit, log dev/kit/KIT_REQUESTS.md.
+- scene-light early batch SẴN SÀNG KIỂM 6f624274e (removed the sepia/brown layer in her room in all 4 buổi; warm rain) → first free reviewer takes it immediately.
 - ~10:50Z (machine clock) CPU OVERLOAD: load ~60 on 4 cores; bot browsers crash (ts-a balance could not be measured). Rule: do NOT refill slots as they free; target ≤12 running agents, at most ~6 that run Playwright at once. ts-a 0b7e154a2 UI ready; balance (bot fix + 80 lives) pending until load drops.
 - From now on this file and all repo docs are written in English (owner ~18:30Z).
 - LIVE main = 041cdcd1f: kit-close (311260527: Tư trang 2 tabs, news card, no tap-through, ✕ only) + ChatGPT docs (ebbbd9eff) + scene-light colour part (no sepia/brown in her room, warm rain). Not refilling the freed reviewer slot (CPU overload rule).
