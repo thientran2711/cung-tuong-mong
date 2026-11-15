@@ -689,3 +689,8 @@ All must work in co-op.
 
 ## 15/11 ~21:45Z — Scene pictures for both orientations (owner)
 - Night-end/new-day/card-flip and other full scenes must work on landscape AND portrait screens. Rule: paint LANDSCAPE, high-res (≥1536 px wide), with the subject inside a centred safe zone so a portrait crop (3:4 / 9:16) still shows it; store a focal point per picture (object-position) so portrait screens crop around it. Current night-end art is 1024x768 (4:3 landscape) → check portrait crops at 755x1000 and redraw wider/higher-res if the subject gets cut.
+
+## 15/11 ~21:50Z — Sub-styles: always 4; also Công Dung Ngôn Hạnh (owner)
+- Checked: Kỳ (cờ) exists as an art (ARTS: Cầm, Kỳ, Thi, Họa, Vũ, Y thuật & điều hương) and as a work kind (Cờ).
+- EVERY art / work kind must have exactly 4 sub-styles (recipes branch has some with 3 → add a 4th).
+- Công · Dung · Ngôn · Hạnh (j85) must ALSO have 4 sub-styles each, learnt and valued the same way (tastes/trọng, teachers, level-up unlocks).
