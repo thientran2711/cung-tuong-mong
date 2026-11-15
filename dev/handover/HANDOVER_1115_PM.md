@@ -255,3 +255,4 @@ Worker worktrees at /home/user/wt/<name>. Rule summaries for workers: /home/user
 - Coordinator docs translated to English (04cf057d61). WORKER_BRIEF commit-message rule fixed to English.
 - LIVE main = toilette (27491781f): morning Điểm trang, approved looks, reactions as kitEventDp frames (max 2), leAttire fix, quote-split fix. Open: bot balance for toilette not run (load); #toil-css small private block awaiting kit review.
 - event-balance ready dffda4241 (story labels, deadlines, non-silver routes 179/179 + 34/34, context outcomes, mood causes, real preconditions, hint dedup 88→36) → reviewer. Story art gap: 26 arcs no cover, 305/365 beats no picture → act-art worker queue.
+- trung-y: c13–c32 + m01–m19 cut, checked, on CDN (FIGURES-ty.json 1632 records); sources for m20–m52 on disk, cutting continues. Code jty.js still needs review after.
