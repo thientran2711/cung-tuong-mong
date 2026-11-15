@@ -299,3 +299,4 @@ Worker worktrees at /home/user/wt/<name>. Rule summaries for workers: /home/user
 - (s7) Owner 21:00Z tasks assigned: review/outside-r2 (re-port jkc.js pre-palace route + khuecac dress onto current main), review/face-reveal (face known when a person appears in any event dialog; Thái hậu silhouette bug).
 - (s7, fwd) por-scale: sample sent to owner; ~3250 portrait re-crops to per-group face targets (children .294, consorts/maids .241, eunuchs .261, men .255…); full run continues in s6; mk-colour must re-run mkfit.py --stale after.
 - LIVE main = ts-a r6 (4e37161c0): Top 15 lô A (Nguy hiểm chung, etc.); k61Meet sets S.met; VP 'quý ngươi hơn' fix. Bot: main HH 0% vs ~32% target (balance owner).
+- (s7, fwd) LIVE main = ts-a (4e37161c0, ff by s6). Notes routed: S.met/Emperor-grey → face-reveal; HH 0% bot → s6 balance-pass; minor VP 'theo lòng nàng' ambiguity on dressing contest (queue).
