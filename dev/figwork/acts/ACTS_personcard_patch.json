@@ -1,0 +1,38 @@
+{
+ "_doc": "Person-card acts (kit-fig2 list + j8/j30/j78/j92 acts that shared a picture): merge acts into img/ACTS.json acts; insert log rules BEFORE the rule [\"^Mời (?!làm|...\", \"hoc-voi-thay-con\"] (first match wins).",
+ "acts": {
+  "Ly gián": "ly-gian",
+  "Hạ độc dần": "ha-doc-dan",
+  "Tố tội thật": "to-toi-that",
+  "Bóc chuyện tư tình": "boc-tu-tinh",
+  "Xin Hoàng hậu giáng": "xin-hh-giang",
+  "Trình Thái hậu": "trinh-chung-cu-th",
+  "Trình Hoàng hậu": "trinh-chung-cu-hh",
+  "Uy hiếp đòi bạc": "uy-hiep-doi-bac",
+  "Bán cho phe khác": "ban-chung-cu",
+  "Dò la": "do-la",
+  "Vu oan": "vu-oan",
+  "Hạ độc con nàng": "ha-doc-con",
+  "Đẩy con nàng xuống hồ": "day-con-xuong-ho",
+  "Cài đồ vào rương": "cai-do-ruong",
+  "Mời nàng sang cung": "moi-nang-sang-cung",
+  "Hặc ăn mặc sai phẩm": "hac-sai-pham",
+  "Giá họa trộm đồ": "gia-hoa-trom-do",
+  "Trả chứng cứ lấy lòng": "tra-chung-cu",
+  "Hỏi người hầu: đó là ai?": "hoi-nguoi-hau"
+ },
+ "log": [
+  [
+   "^Mời nàng sang cung|mời .+ sang cung",
+   "moi-nang-sang-cung"
+  ],
+  [
+   "^Hặc ăn mặc sai phẩm|ăn mặc sai phẩm",
+   "hac-sai-pham"
+  ],
+  [
+   "^Giá họa trộm đồ|giá họa .+ trộm",
+   "gia-hoa-trom-do"
+  ]
+ ]
+}

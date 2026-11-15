@@ -59,8 +59,13 @@ Thi hành: `dev/build/j84.js` (module cuối trong assemble.py) sửa dữ liệ
 | Khả năng của một điều kèm theo (có thai, được ban thưởng, lật thẻ, bị lộ, bị phạt, chết… trong Được / Mất / Kèm, thẻ kết quả, Sổ ghi, lời dặn, ô trạng thái) | Rất thấp / Thấp / Vừa / Cao / Rất cao (không có thì "Không có"); trong dòng: "có thai: khả năng thấp · được ban thưởng: khả năng vừa"; ô: "Có thai: Thấp"; sổ ghi: "(khả năng: vừa)". Hàm `chanceW` / `chanceLvl` (j1) | "có thai: Liều", "được ban thưởng: Khó", "cơ may: …" cho điều kèm theo |
 | Chạm màn hình (lời dặn) | chạm | bấm, click, nhấn |
 | Mở một tab (lời dặn) | Vào mục Phe phái | Mở tab Phe phái |
-| Quan hệ hai chiều (thẻ người, Giao tình, sổ tuần, kết quả việc) | chủ ngữ + động từ + đối tượng: "Nàng quý ngươi: Bình thường · -5", "Nàng oán ngươi: 0", "Ngươi quý nàng …", "Ngươi oán nàng …"; theo vai khi tự nhiên: "Hoàng hậu quý ngươi", "Hắn quý ngươi"; chưa biết: "Nàng quý ngươi: chưa rõ" | Thiện cảm (đứng trơ), Ngươi với nàng, Nàng với ngươi |
+| Quan hệ hai chiều (thẻ người, Giao tình, sổ tuần, kết quả việc) | chủ ngữ + động từ + đối tượng: "Nàng quý ngươi: Bình thường · -5", "Nàng oán ngươi: 0", "Ngươi quý nàng …", "Ngươi oán nàng …"; theo vai khi tự nhiên: "Hoàng hậu quý ngươi", "Hắn quý ngươi"; chưa biết: "Nàng quý ngươi: chưa rõ" | Thiện cảm (đứng trơ), Ngươi với nàng, Nàng với ngươi | (thẻ người, sổ tuần, kết quả việc vẫn dùng lối này)
 | Mức "quý" | Ghét (≤ -30) · Không ưa (-29…-11) · Bình thường (-10…10) · Có cảm tình (11…29) · Quý mến (30…59) · Thân thiết (≥ 60) | Lạnh nhạt, Thân |
+| Hàng quan hệ kitRelRow (Giao tình › Ân oán, owner 11/15) | dòng 1: "<A> → <B>: thiện cảm" / "<A> → <B>: oán" (người chơi = "ta": "Hoàng hậu → ta: oán", "Ta → Hoàng hậu: thiện cảm"); dòng 2: "<mức> · <số>" rồi thanh | "Nàng quý ngươi" trong Ân oán, "thù" |
+| Hai chỉ số quan hệ (giữ riêng, không gộp; owner 11/15) | chạm nhãn: **Thiện cảm**: "có chịu giúp, kết giao với ta không" · **Oán**: "mối hận vì việc ta đã làm, có muốn trả đũa ta không; nguôi dần mỗi tháng" | thù, thù hận |
+| Mức "oán" (0…100, BAL.oanLv) | Không oán (< 5) · Chút oán (5…19) · Oán (20…44) · Oán sâu (45…74) · Oán hận (≥ 75) | Thù, Thù hận |
+| Người chưa gặp (Ân oán) | "Ta chưa gặp <tên>, chưa rõ nàng ta đối với người khác ra sao. Gặp nàng ta, dò la, hoặc có thêm tai mắt." | Ngươi chưa gặp …, Gặp nàng |
+| Tiền của người chơi (cửa hàng) | "Ta có N bạc" | Ngươi có N bạc |
 | Kẻ hầu được sai đi làm việc | Người chạy việc: <tên> (chạm: "Khi ngươi sai người dò la, đưa thư, mua đồ…, người này đi; chọn theo Lòng và tài"); nút "Đổi ›" | Sai đi: <tên> |
 | Ngày đầu cuộc | Thân phận kiếp này · Nhận thân phận · Nhập cung | — |
 | Chơi chung (sếp 15/11) | Cùng hảo hữu · Mời hảo hữu · hảo hữu (người chơi cùng) · Ám hiệu · Nhập ám hiệu | Chơi cùng bạn, Mời bạn, bạn, tri kỷ, Mã phòng |
