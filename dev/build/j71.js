@@ -13,7 +13,7 @@ const G7=t=>`<span class="g">${t}</span>`,R7=t=>`<span class="r">${t}</span>`;
 function j7s(){if(!S)return null;const j=S.j71=S.j71||{};j.fy=j.fy||{};j.vu=j.vu||{};j.n=j.n||0;j.fn=j.fn||0;j.win=j.win||0;j.cong=j.cong||0;j.pd=j.pd||0;j.npc=j.npc||0;if(j.pt==null)j.pt=-99;return j}
 function j7On(){return !!(S&&!S.dead&&!S.out&&!(typeof isSrv==="function"&&isSrv()))}
 /* Thánh thọ Thái hậu joins the calendar (map banner + mini-events); hidden once she is gone */
-if(typeof FEST!=="undefined"&&!FEST.thanhtho)FEST.thanhtho={name:"Thánh thọ Thái hậu",m:10,t:[1]};
+if(typeof FEST!=="undefined"&&!FEST.thanhtho)FEST.thanhtho={name:"Thánh thọ Thái hậu",m:10,t:[1],files:{sang:"img/map-fest-thanhtho-sang.webp"}};
 (function(){const f0=festToday;festToday=function(){const f=f0.apply(this,arguments);if(f&&f.k==="thanhtho"&&S&&S.thDead)return null;return f}})();
 function nm7(p){return p===S?"ngươi":p.name}
 function gn7(p){return p===S?"ngươi":String(p.name).split(" ").pop()}

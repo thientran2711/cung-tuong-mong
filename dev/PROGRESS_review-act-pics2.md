@@ -118,3 +118,9 @@ LEFT (unchanged from the list above unless noted)
   - Each festival also has a 4:3 dialog banner, img/ev-fest-<k>-b.webp, shown as headArt on the festival dialogs, keeping the Emperor portrait. Wired in j31 (FESTEV push) and j71 (fDay7 wrapper), which also set evId "fest:<k>". This includes the Đoan ngọ banner.
   - Files: dev/figwork/fest/ (fscenes.txt, fbanner_prompts.txt, ffetch.py, fgens.txt).
   - Still to do: map-fest pictures for thanhtho, vulan, vantho, lapbat.
+- (3) Festivals, part 2, DONE:
+  - Map pictures added for vulan (night), vantho, thanhtho and lapbat (morning): img/map-fest-<k>-<buoi>.webp, edited from the season map with that map as the image reference.
+  - Shift against the season map, measured on a 4x3 tile grid: within 2 px everywhere, so the hotspots are unchanged (dev/figwork/fest/mapfetch.py).
+  - thanhtho was redrawn once: the first version decorated the east compound, but Từ Ninh cung (tn) is the west compound with the lotus pond.
+  - Wired through `files` in the FEST table (j31 for vulan, vantho, lapbat; j71 for thanhtho) and in map-hotspots.json (14 festivals now).
+  - Checked with dev/test/fest-art.js: all 14 festivals resolve to their own map picture where one exists, and fDay7 dialogs carry the banner and evId "fest:<k>". No page errors.
