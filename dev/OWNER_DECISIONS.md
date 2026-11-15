@@ -472,3 +472,5 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (14:35Z) Trang điểm: "đẹp" giảm má hồng chút; "diêm dúa" = má hồng của bản "đẹp" hiện tại đậm hơn chút (môi đậm hơn, phấn bóng hơn), vẫn đẹp, KHÔNG như hề.
 - (14:40Z) Phản ứng về y phục/trang điểm (chủ tiệc nghiêm phạt mặt mộc, người hay ghen, Hoàng thượng thích/không thích, phi tần trêu diêm dúa…) phải HIỆN KHUNG SỰ KIỆN, không âm thầm trong nhật ký. Mỗi dịp tối đa 1–2 khung, phần còn lại gộp.
 - (14:50Z) LUẬT: sếp báo một lỗi thì sửa CẢ NHÓM (vd. vật liệu đắt không đáng tiền: rà mọi tài nghệ/món + mọi lựa chọn trả thêm tiền để được bản tốt hơn). Ghi vào WORKER_BRIEF; điều phối nhắc trong mỗi lần giao.
+- (15:00Z) DUYỆT: trang điểm bản mới (đẹp + diêm dúa, a820a52ab). DUYỆT mẫu da hồng hào → sửa 807 chân dung. Ô cảm xúc nam: chỉ cần nam/nữ, nhưng bộ nam đứng tuổi đã làm thì dùng luôn.
+- [ ] (15:00Z) Hoa điền mặt c05 ở y phục t5, t8 vẫn to → thu nhỏ + rà mọi chân dung phi tần.
