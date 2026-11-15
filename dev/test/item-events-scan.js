@@ -27,6 +27,10 @@ const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT,F
   try{for(const id in R97){const d=R97[id];if(d&&d.n)add('j97 rare',`${id} ${d.tag||''}`,`${d.t||''} ${d.n}`,[d.n])}}catch(e){}
   /* other dialog builders */
   for(const k in PEND){if(/^e68/.test(k)||k==='j67')continue;const src=PEND[k].toString();const names=[...src.matchAll(/\bn:\s*(["'`])((?:(?!\1).){2,80})\1/g)].map(m=>m[2].replace(/\$\{[^}]*\}/g,'…'));
+   if(k==='tsbPetGift')continue;
+   if(k==='giftin'){rows.push({src:'PEND',ev:k,key:'(pp.e)',name:'món quà người khác tặng (entry thật, cả tác phẩm tự tay)',pic:true,opts:[['Nhận','keep'],['Trả lại quà','back'],['Đem đến Thái y viện nghiệm độc','give']],forced:true});continue}
+   if(k==='tsbBul'){rows.push({src:'PEND',ev:k,key:'(pp.ix)',name:'món của ngươi bị đòi',pic:true,opts:names.map(n=>[n,/^Giao$/.test(n)?'give':'']),forced:true});continue}
+   if(k==='cnvBribe'){rows.push({src:'PEND',ev:k,key:'vangbac',name:'Bạc (của đút)',pic:true,opts:names.map(n=>{const v=ievVerb(n);return [n,v==='refuse'?'back':v==='keep'?'keep (bạc bay vào ô Bạc)':v||'']}),forced:true});continue}
    const f=k==='giftin'||k==='pgin'?{key:'(entry pp.e)'}:null;
    if(f){rows.push({src:'PEND',ev:k,key:'(pp.e)',name:'món quà / món ăn của người tặng',pic:true,opts:names.map(n=>{const v=ievVerb(n);return [n,v==='refuse'?'back':v||'']}),forced:true});continue}
    add('PEND',k,src.replace(/\$\{[^}]*\}/g,' '),names)}

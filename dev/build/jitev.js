@@ -67,9 +67,11 @@ function ievNoun(txt){const s=ievTxt(txt);let best=null,at=1e9;
  return best}
 /* explicit resolvers per saved-dialog id (pid + pp survive a reload, so old saves resolve the same way) */
 const IEV_PID={
- giftin:p=>p&&p.e?{e:p.e,who:p.f,offer:1}:null,
- pgin:(p,m)=>p&&p.e?{e:p.e,who:p.f,acts:(m.opts||[]).map(o=>/kim bạc|nếm/i.test(ievTxt(o&&o.n))?"test":"auto"),offer:1}:null,
+ giftin:p=>p&&p.e?{e:p.e,who:p.f,offer:1,own:1}:null,
+ pgin:(p,m)=>p&&p.e?{e:p.e,who:p.f,acts:(m.opts||[]).map(o=>/kim bạc|nếm/i.test(ievTxt(o&&o.n))?"test":"auto"),offer:1,own:1}:null,
  cnvBribe:()=>({key:"vangbac",offer:1}),
+ /* a higher consort demands one of HER items (jtsb): "Giao" = it flies to her; the §54.2 loss card still follows */
+ tsbBul:(p,m)=>{const e=p&&p.ix>=0?S.inv[p.ix]:null;if(!e||e.h)return false;return{e,acts:(m.opts||[]).map(o=>/^Giao$/.test(ievTxt(o&&o.n))?"give":null)}},
  tsbPetGift:()=>false,
  j67:(p)=>{try{const A=th67(p.t);const b=A&&beatDef67(A,p.b);if(b&&b.gi){const k=Array.isArray(b.gi)?b.gi[0]:b.gi;return{key:Array.isArray(k)?k[0]:k}}}catch(e){}return null}};
 /* E68 events that hand her goods (econ STIP_EV): the item + which options refuse it */
@@ -83,12 +85,13 @@ function ievOf(m){if(!m||!m.opts||!m.opts.length)return null;let r=null;
   if(!r)r=ievE68(m);
   if(!r){const k=ievNoun(`${m.t||""} ${m.h||""}`)||ievNoun((m.opts||[]).map(o=>o&&o.n).join(" · "));if(k&&IT[k]){const acts=ievActsFor(m);if(acts.some(Boolean))r={key:k,acts,txt:1}}}}catch(e){console.error("ievOf",e);r=null}
  if(!r)return null;const e=r.e||null,key=e?e.k:r.key;if(!key||!(IT[key]||(typeof WD_ITEMS==="object"&&WD_ITEMS[key])))return null;
- const I=kitItemInfo(e||key);const acts=r.acts&&!r.txt?ievActsFor(m,r.acts,r.offer):r.acts||ievActsFor(m,null,r.offer);return{I,e,key,acts,who:r.who||null}}
+ const I=kitItemInfo(e||key);const acts=r.acts&&!r.txt?ievActsFor(m,r.acts,r.offer):r.acts||ievActsFor(m,null,r.offer);return{I,e,key,acts,who:r.who||null,own:!!r.own}}
 window.ievOf=ievOf;window.ievVerb=ievVerb;window.ievNoun=ievNoun;
 /* ---------- §58.1 kitItemTag: the item frame on the event banner / at the top of the text ---------- */
 function kitItemTag(I){return `<div class="kiev" data-kiev="${I.k}">${kitItem({src:I.src,name:I.name,grade:I.grade,size:"md",tip:`${I.name} · ${I.gname}`})}</div>`}
 window.kitItemTag=kitItemTag;
-function ievPlace(R){const mb=document.getElementById("mb");if(!mb)return null;mb.querySelectorAll(".kiev").forEach(x=>x.remove());if(!R)return null;
+function ievPlace(R){const mb=document.getElementById("mb");if(!mb)return null;mb.querySelectorAll(".kiev:not(.kiev-own)").forEach(x=>x.remove());if(!R)return null;
+ const own=mb.querySelector(".tsbtile");if(own){own.classList.add("kiev","kiev-own");return own}
  const h=kitItemTag(R.I);const ban=mb.querySelector(":scope > .kdlgart .ksart");
  if(ban){ban.insertAdjacentHTML("beforeend",h);const t=ban.lastElementChild;t.classList.add("kiev-ban");return t}
  const col=mb.querySelector(".kpmain")||mb.querySelector(".spkt")||mb.querySelector(".kpb")||mb;col.insertAdjacentHTML("afterbegin",h);const t=col.firstElementChild;t.classList.add("kiev-txt");return t}
@@ -173,9 +176,9 @@ window.kitItemFx=kitItemFx;
    const rest=E.filter(e=>!mine.includes(e));if(!rest.length)return;arguments[0]=rest}}return o.apply(this,arguments)});
  W("kgGroups",o=>function(add){const H=IEV.hold;const L=(add||[]).filter(x=>{if(IEV.claim.has(x))return false;if(H&&x&&(x.k===H.key||(H.e&&x.wk&&H.e.wk&&x.wk.n===H.e.wk.n))){IEV.claim.add(x);H.got.push(x);return false}return true});
   if(L.length)return o.call(this,L)});
- W("kitLose",o=>function(x,op){const H=IEV.hold;if(H&&x&&Array.isArray(x)){const L=x.filter(e=>!(e&&e.k===H.key));if(!L.length)return;arguments[0]=L}return o.apply(this,arguments)});
+ W("kitLose",o=>function(x,op){const H=IEV.hold;if(H&&x&&Array.isArray(x)&&!(op&&op.why==="lose")){const L=x.filter(e=>!(e&&e.k===H.key));if(!L.length)return;arguments[0]=L}return o.apply(this,arguments)});
  W("chooseM",o=>function(i){const C=IEV.cur,m=typeof Q!=="undefined"?Q[0]:null;if(!C||C.m!==m||!m||!m.opts||!m.opts[i]||!ievOn())return o.apply(this,arguments);
-  const R=C.R,act=R.acts[i];if(!act)return o.apply(this,arguments);
+  const R=C.R;let act=R.acts[i];if(!act)return o.apply(this,arguments);
   const tag=document.querySelector("#mb .kiev .kitb")||document.querySelector("#mb .kiev");const from=tag?tag.getBoundingClientRect():null;
   const fig=document.querySelector("#mb .kpsubj .kesf .kesimg")||document.querySelector("#mb .kpsubj .kesf");const to=fig?fig.getBoundingClientRect():null;
   const inv0=(S.inv||[]).slice();IEV.hold={key:R.key,e:R.e,got:[],bac0:S.bac||0};let r;
@@ -183,10 +186,12 @@ window.kitItemFx=kitItemFx;
    try{/* keep = a REAL entry in Tư trang: the one the choice added, else one made here */
     if(act==="keep"&&R.key==="vangbac"){const fr=from?{x:from.left+from.width/2,y:from.top+from.height/2}:null;try{kitCoins("in",Math.max(10,(S.bac||0)-(H.bac0||0)),fr)}catch(e){}IEV.last={act:"coins",name:R.I.name,key:R.key,opt:m.opts[i].n};return r}
     if(act==="keep"){let got=[...new Set(H.got.concat((S.inv||[]).filter(x=>x&&!inv0.includes(x)&&x.k===R.key)))].filter(x=>(S.inv||[]).includes(x));
-     if(!got.length&&!S.dead){const e=R.e?Object.assign({},R.e):{k:R.key};e.from=e.from||(R.who&&typeof R.who==="string"?R.who:"story");e.d=S.turn;delete e.h;S.inv.push(e);got=[e]}
+     if(!got.length&&R.own)act="use";/* the dialog's own logic decided (a poisoned dish eaten / thrown away): nothing goes to the bag */
+     else if(!got.length&&!S.dead){const e=R.e?Object.assign({},R.e):{k:R.key};e.from=e.from||(R.who&&typeof R.who==="string"?R.who:"story");e.d=S.turn;delete e.h;S.inv.push(e);got=[e]}
      got.forEach(x=>{IEV.claim.add(x);try{if(KMSNAP&&KMSNAP.inv&&!KMSNAP.inv.includes(x))KMSNAP.inv.push(x);kfSeen.add(x)}catch(e){}})}
-    else{/* an entry of hers that the choice removed (handed over / destroyed) leaves without the bag animation: the act shows it */
-     for(const x of inv0)if(x&&x.k===R.key&&!(S.inv||[]).includes(x))try{KFX.lt.set(x,{why:"use"})}catch(e){}}
+    else if(IT[R.key]&&IT[R.key].story&&!R.e){/* a story item she kept earlier (letter, token…) that this choice sends back / destroys leaves Tư trang for real */
+     const gone=inv0.some(x=>x&&x.k===R.key&&!(S.inv||[]).includes(x));const j=(S.inv||[]).findIndex(x=>x&&x.k===R.key&&!x.h);
+     if(!gone&&j>=0){const x=S.inv.splice(j,1)[0];try{KFX.lt.set(x,{why:"use"})}catch(e){}render()}}
     IEV.last={act,name:R.I.name,key:R.key,opt:m.opts[i].n};kitItemFx(act,R.I,{from,to:act==="back"||act==="give"?to:null});
     if(act==="keep")render()}catch(e){console.error("iev choose",e)}}
   return r})})();

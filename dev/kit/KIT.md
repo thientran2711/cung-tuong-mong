@@ -2499,7 +2499,7 @@ Owner rule: every event where an item could come into her hands shows the ITEM'S
 ### 58.1 ievOf · kitItemTag — the item in the dialog
 - `ievOf(m)` → `{I (kitItemInfo §54.1), e, key, acts[], who}` for a dialog (Q[0]); null = no item. ONE resolver, used by the game (showModal /
   chooseM) and by the scan: `m.item` (explicit) · `IEV_PID[pid](pp)` (giftin / pgin: the real entry pp.e; cnvBribe: silver; story beats with `gi`;
-  `false` = never an item, e.g. tsbPetGift) · econ `STIP_EV` goods events (E68: the options in `no` give the gift back) · nouns in the dialog
+  `false` = never an item, e.g. tsbPetGift; tsbBul: her demanded entry, "Giao" = give) · econ `STIP_EV` goods events (E68: the options in `no` give the gift back) · nouns in the dialog
   title / text / option names (`IEV_NOUN`, specific first) when at least one option acts on the item.
 - Option act = `o.ia` (explicit) · the resolver's list · `IEV_OPT` text overrides · the EARLIEST verb of the option name (`IEV_VERB`):
   burn · tear · smash · pour · well · bury · back · refuse (= back only when the item is offered to her) · give · use · keep. Idioms are excluded
@@ -2531,8 +2531,10 @@ Owner rule: every event where an item could come into her hands shows the ITEM'S
 ### 58.3 Wiring (one place) and the claim rule
 - showModal (wrapped): resolves Q[0], places the tag, sets `data-kia`. chooseM (wrapped): reads the icon + figure rects, runs the choice, then
   the act. While the choice runs, goods of THAT item added by the choice (econ goodsGive box, kmDiff → kgGroups reveal) are CLAIMED: no second
-  box / reveal — the flight from the dialog is the reveal; an entry the choice removes leaves with the act, not with kitLose's bag animation.
-  keep with nothing added by the choice → the engine adds the entry (`from` = giver / story).
+  box / reveal — the flight from the dialog is the reveal; an entry the choice removes leaves with the act, not with kitLose's bag fly (give / sell / fade); a forced loss (jtsb tsbBul "Giao") keeps its §54.2 notice card after the flight. A dialog that already draws the item in the kit frame (jtsb `.tsbtile`) gets no second frame: that tile is the flight source.
+  keep with nothing added by the choice → the engine adds the entry (`from` = giver / story); except dialogs that own the outcome (`own`: giftin,
+  pgin — a poisoned dish eaten or thrown away adds nothing → the act becomes `use`). A story item (IT `story:1`) she kept earlier that a later
+  choice sends back / destroys is taken out of Tư trang for real (no §54.2 animation: the act shows it).
 - Options stay in cost mode (§53 opt-render untouched: the tag is outside `.opts`).
 - Tests: `node dev/test/item-events.js <url> <outdir> [sizes] [save]` (real dialogs: gift, poisoned / plain dish, econ goods events, story
   letters / tokens / dish / jade with every act; frame + grade, acts, real entry, no double reveal, tap-skip, overflow, cost mode);

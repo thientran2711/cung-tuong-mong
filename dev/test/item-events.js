@@ -13,12 +13,14 @@
 const {chromium}=require('playwright');const fs=require('fs');const [,,BASE,OUT,SZ,SAVE]=process.argv;fs.mkdirSync(OUT,{recursive:true});
 const SIZES=(SZ||'755x1000,1000x755,1180x820,1366x1024,844x390').split(',');
 (async()=>{const b=await chromium.launch();let fails=[];const rows=[];
-for(const sz of SIZES){const [W,H]=sz.split('x').map(Number);const c=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:1,serviceWorkers:'block'});const p=await c.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));
+for(const sz of SIZES){const [W,H]=sz.split('x').map(Number);const c=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:1,serviceWorkers:'block'});const p=await c.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));await p.addInitScript(()=>{window.__nlInner=1});
  await p.goto(BASE,{waitUntil:'domcontentloaded',timeout:0});await p.waitForFunction(()=>typeof start==='function'&&window.kitItemFx&&window.ievOf,null,{timeout:0});await p.waitForTimeout(2000);
  await p.addStyleTag({content:'#kroul,#kroulw{display:none!important}'});
  await p.evaluate(async save=>{const kl=document.getElementById('kload');if(kl)kl.remove();document.getElementById('title').hidden=true;
   let oldOk=null;if(save){try{localStorage.setItem(SK(3),save);const d=loadSlot(3);SLOT=3;quiet=true;deser(d);quiet=false;deal();oldOk=!!S}catch(e){quiet=false;oldOk='ERR '+e.message}window.__old=oldOk}if(!save&&(typeof S==='undefined'||!S||S.dead||isSrv()))for(let i=0;i<200;i++){start();if(!isSrv())break}
+  if(save){try{showModal();window.__oldTag=!!document.querySelector('#modal:not([hidden]) .kiev .kitem')}catch(e){window.__oldTag='ERR '+e.message}}
   Q.length=0;document.getElementById('modal').hidden=true;document.querySelectorAll('[id^=kroul],#dawn,.kmov').forEach(e=>e.remove());render()},SAVE?fs.readFileSync(SAVE,'utf8'):null);
+ if(SAVE){const o=await p.evaluate(()=>({old:window.__old,tag:window.__oldTag}));rows.push([sz,'old save','','',JSON.stringify(o),o.old===true&&o.tag===true?'ok':'FAIL']);if(!(o.old===true&&o.tag===true))fails.push(`${sz} old save: ${JSON.stringify(o)}`)}
  await p.waitForTimeout(800);
  /* the cases: build a dialog, show it */
  const CASES=await p.evaluate(()=>{const v=rivals.find(x=>x.alive&&!x.out);const L=[];
@@ -26,6 +28,7 @@ for(const sz of SIZES){const [W,H]=sz.split('x').map(Number);const c=await b.new
   L.push({id:'giftin-back',mk:`pushDil(mkP("giftin",{f:key(RV(${v.id})),e:{k:"tramngoc",from:key(RV(${v.id}))}}),"Quà tặng")`,pick:'Trả lại',want:'back',k:'tramngoc'});
   L.push({id:'pgin-back',mk:`pushDil(mkP("pgin",{f:key(RV(${v.id})),dn:"Yến sào",pk:null,o:0,e:{k:"yensao",from:key(RV(${v.id}))}}),"Quà tặng")`,pick:'Trả lại',want:'back',k:'yensao'});
   L.push({id:'pgin-keep',mk:`pushDil(mkP("pgin",{f:key(RV(${v.id})),dn:"Yến sào",pk:null,o:0,e:{k:"yensao",from:key(RV(${v.id}))}}),"Quà tặng")`,pick:'Nhận ngay',want:'keep',k:'yensao'});
+  L.push({id:'tsbBul-give',mk:`S.inv.push({k:"tramngoc"});pushDil(mkP("tsbBul",{a:${v.id},k:"doi",ix:S.inv.length-1,n:1}),"Bị làm khó")`,pick:'Giao',want:'give',k:'tramngoc'});
   /* a real E68 goods event (econ STIP_EV) */
   try{for(const [id,re,k] of STIP_EV){const s=E68I[id];if(!s)continue;let pp=null;try{pp=s.pp?s.pp():{}}catch(e){}if(!pp)continue;const V=s.v||[""];const vi=V.findIndex(t=>re.test(t));if(vi<0)continue;pp.vi=vi;
     L.push({id:'e68-'+id,mk:`pushDil(mkP("e68${id}",${JSON.stringify(pp)}),"Có người đến")`,pick:0,want:'keep',k});if(L.length>=6)break}}catch(e){}
