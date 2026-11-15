@@ -74,9 +74,9 @@ def score(path):
     dirty = int(light > LIGHT_MAX or dark > DARK_MAX or specks > 30 or transl > 0.25)
     return dict(file=path, light=round(light, 1), dark=round(dark, 1), halo_p=round(halo_p, 3), kind=kind, specks=specks, transl=round(transl, 3), dirty=dirty)
 
-def defringe(rgb, a, depth=5):
+def defringe(rgb, a, depth=5, erode=2):
     """colour decontamination: edge pixels take the object's colour from 2–depth px inward; alpha untouched"""
-    core = ndi.binary_erosion(a > 235, iterations=2)
+    core = ndi.binary_erosion(a > 235, iterations=erode) if erode else (a > 235)
     if core.sum() < 50: core = a > 235
     dist, idx = ndi.distance_transform_edt(~core, return_indices=True)
     src = rgb[idx[0], idx[1]]
@@ -103,7 +103,9 @@ def clean(src, dst, matte=None, keep_size=True):
         a = np.where(ndi.binary_dilation(keep[lab], iterations=2), a, 0)
     ch = ndi.grey_erosion(a, size=(2, 2)); smear = (a > 20) & (a < 200)
     a = np.where(smear, a * 0.55 + ch * 0.45, a)
-    rgb = defringe(rgb, a)
+    # small pictures (256 px icons): thin parts (pins, strings, filigree) are only a few px wide — a gentle pass keeps their colours
+    small = a.shape[1] <= 300
+    rgb = defringe(rgb, a, depth=2 if small else 5, erode=0 if small else 2)
     out = np.dstack([np.clip(rgb, 0, 255), np.clip(a, 0, 255)]).astype(np.uint8)
     Image.fromarray(out, "RGBA").save(dst, "WEBP", quality=90, method=6, exact=True)
     return dst
