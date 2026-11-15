@@ -28,6 +28,7 @@ window.__evpick=function(m,okIdx){const mode=window.__evmode;if(!mode||!m||!(m.p
  if(mode==="same")return ok[0][1];if(mode==="rand")return ok[Math.floor(Math.random()*ok.length)][1];
  let best=-1e9,bi=ok[0][1];
  /* review/opt-render 54f3814: kitHint(o,m,lv) is a pure function of the option data at her current clarity level = exactly what the player reads */
+ try{if(typeof evbDedup==='function')evbDedup(m)}catch(e){}
  for(const [o,i] of ok){let H={hint:'',risk:''};try{H=kitHint(o,m)}catch(e){}const h=H.hint,r=H.risk;const f=o.fx||{};const t=(f.bac<0?'Bạc '+f.bac+' ':'')+(f.suc<0?'Sức '+f.suc:'');const v=window.__hintScore(h,r,t)+Math.random()*.01;if(v>best){best=v;bi=i}}
  window.__hintSeen=(window.__hintSeen||0)+1;return bi};
 /* outcome counters for this life (reset by over) */

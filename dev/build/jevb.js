@@ -75,3 +75,36 @@ function evbMood(m,c,b){const nm=String(c.n||"").replace(/<[^>]+>/g,"").split(":
   if(p.vi===0&&o.robe)d.t=String(d.t).replace("bộ y phục thêu phượng của ngươi",`bộ ${IT[o.robe.k].n.replace(/^Áo /,"áo ")} của ngươi`);
   if(p.vi===2&&o.pin)d.t=String(d.t).replace("chiếc trâm ngọc",`chiếc ${IT[o.pin.k].n.replace(/^Trâm/,"trâm")}`);
   if(p.vi===1&&o.inst&&o.inst.k)d.t=String(d.t).replace("cây đàn tỳ bà của ngươi",`cây ${IT[o.inst.k].n.replace(/^Đàn/,"đàn")} của ngươi`)}catch(e){}return d}}catch(e){}})();
+/* ---------- (5) HINTS THAT TELL OPTIONS APART (coordinator 15/11 after opt-render r7; owner 15:10Z "reading hints must clearly beat random") ----------
+   kitHint (jk2b, pure) at the VAGUE level (Tâm cơ < BAL.hintMid, most new lives) often gives two or more options of one dialog the same words
+   (night1 talk, giu "có phúc con cái" ×2, prep, festival invitations…). Before a dialog shows, options whose hints collide get a per-option
+   `hint` (option data, which kitHint honours) taken from the LOWEST clarer level at which they differ — still words only, still the truth of this
+   moment; the risk tag stays kitHint's own. Options that read the same at every level keep their text (their cost / risk tells them apart).
+   Not kitHint's structure: data only. Test: dev/test/hint-dedup.js (before/after table over the game's own dialogs). */
+function evbDedup(m){try{if(!m||!m.opts||m.opts.length<2||typeof kitHint!=="function")return 0;if(typeof kitIsEventChoice==="function"&&!kitIsEventChoice(m))return 0;
+ const lv=kitHintLevel();const O=m.opts;O.forEach(o=>{if(o&&o.__dhA){delete o.hint;delete o.risk;delete o.__dhA}});
+ const raw=O.map(o=>(o&&!o.hint)?kitHint(o,m,lv):null);let fixed=0;
+ const groups={};raw.forEach((h,i)=>{if(h&&h.hint)(groups[h.hint]=groups[h.hint]||[]).push(i)});
+ for(const g of Object.values(groups)){if(g.length<2)continue;let pick=null;
+  for(let l=lv+1;l<=2&&!pick;l++){const T=g.map(i=>kitHint(O[i],m,l).hint);if(new Set(T).size>1)pick={l,T}}
+  const T=pick?pick.T.slice():g.map(i=>raw[i].hint);
+  /* still the same words: add the option's own chance (its ladder word, in words) and then, if needed, how big its gain is next to the others */
+  const dup=()=>{const c={};T.forEach(x=>c[x]=(c[x]||0)+1);return T.map(x=>c[x]>1)};
+  if(dup().some(Boolean))g.forEach((i,j)=>{if(!dup()[j]||/thành|khó đoán/.test(T[j]))return;const ch=evbChance(O[i]);if(ch)T[j]+=`; ${ch}`});
+  if(dup().some(Boolean)){const G=g.map(i=>evbGain(O[i]));const d=dup();const hi=Math.max(...G),lo=Math.min(...G);
+   if(hi>lo)g.forEach((i,j)=>{if(!d[j])return;if(G[j]===hi)T[j]+="; lợi lớn hơn cả";else if(G[j]===lo)T[j]+="; lợi ít hơn cả"})}
+  /* same words still: the option's own chance number (option data `od`: night talk fit, contest odds), best and worst named */
+  if(dup().some(Boolean)){const D=g.map(i=>O[i]&&typeof O[i].od==="number"?O[i].od:null);const d=dup();const L=D.filter(x=>x!=null);
+   if(L.length>1&&Math.max(...L)>Math.min(...L)){const hi=Math.max(...L),lo=Math.min(...L);g.forEach((i,j)=>{if(!d[j]||D[j]==null)return;if(D[j]===hi)T[j]+="; cơ may cao hơn cả";else if(D[j]===lo)T[j]+="; cơ may thấp hơn cả"})}}
+  if(T.every((x,j)=>x===raw[g[j]].hint))continue;
+  g.forEach((i,j)=>{const t=T[j];if(!t)return;
+   const o=O[i],risk=raw[i].risk,l0=lv;o.hint=l=>l===l0?t:(()=>{const c=Object.assign({},o);delete c.hint;delete c.risk;return kitHint(c,m,l).hint})();o.risk=risk;o.__dhA=1;fixed++})}
+ return fixed}catch(e){console.error("evbDedup",e);return 0}}
+window.evbDedup=evbDedup;
+/* the option's chance in words, from its own ladder word (what it shows elsewhere in the game) — never a number */
+function evbChance(o){const s=String((o&&(o.x||o.j67))||"")+" "+String((o&&o.n)||"");const w=(s.replace(/<[^>]+>/g,"").match(/(Liều|Khó|Năm ăn năm thua|Khá chắc|Rất chắc|Nắm chắc|Chắc)(?=\s|·|$)/)||[])[1]||(o&&o.p!=null?word(o.p):"");
+ return !w?"":/^(Liều|Khó)$/.test(w)?"khó thành":w==="Năm ăn năm thua"?"thành bại khó đoán":/^(Rất chắc|Nắm chắc)$/.test(w)?"gần như chắc thành":"dễ thành"}
+/* how big the option's gain is: the sum of the positive numbers in its success part (fx + thành:) */
+function evbGain(o){let s=0;try{const f=Object.assign({},o.w||{});for(const v of Object.values(f))if(v>0)s+=v;const x=String(o.x||o.j67||"").replace(/<[^>]+>/g,"");const m=x.split(/hỏng:|kèm:/)[0];
+ (m.match(/\+\s?\d+/g)||[]).forEach(n=>s+=+n.replace(/\D/g,""))}catch(e){}return s}
+(function(){const s0=showModal;showModal=function(){try{if(Q[0])evbDedup(Q[0])}catch(e){}return s0.apply(this,arguments)}})();

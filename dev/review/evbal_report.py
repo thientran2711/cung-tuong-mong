@@ -39,6 +39,14 @@ for lab, d in runs:
         top = sorted(fates.items(), key=lambda x: -x[1])[:6]
         out.append(f"- {NAMES[m]} endings: " + '; '.join(f'{k} ×{v}' for k, v in top))
     out.append('')
+pool = {}
+for lab, d in runs:
+    for x in d.get('lives', []): pool.setdefault(x['mode'], []).extend(x['res'])
+out += ['## All runs pooled', '', '| bot | lives | avg max rank | reached Phi (5+) % | reached Hoàng hậu (7+) % | died % | life < 3 yrs % | ended below best rank % | years / life |', '|---|---|---|---|---|---|---|---|---|']
+for m in ('hint', 'rand', 'same'):
+    if m in pool:
+        s = stats(pool[m]); out.append(f"| {NAMES[m]} | {s['lives']} | {s['avgMax']} | {s['phi']} | {s['hh']} | {s['death']} | {s['early']} | {s['demoted']} | {s['yrs']} |")
+out.append('')
 os.makedirs(os.path.dirname(os.path.abspath(__file__)), exist_ok=True)
 open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'event-balance.md'), 'w').write('\n'.join(out) + '\n')
 print('\n'.join(out[-14:]))
