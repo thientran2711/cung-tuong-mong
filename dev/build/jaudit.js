@@ -255,3 +255,54 @@ function aaPunishTxt(sev){const m=has("nongnay")?3:has("nhantu")?1:2;return sev>
 
 /* 22. servant start · Lĩnh đồ ở Nội vụ phủ: srvMeet (j42) has a hidden 1-in-4 "bắt nạt: Sức −5" — now on the card in Kèm */
 (function(){if(typeof srvCards!=="function")return;const c0=srvCards;srvCards=function(){const X=c0.apply(this,arguments);try{for(const a of X||[])if(a&&a.n==="Lĩnh đồ ở Nội vụ phủ"&&!/bắt nạt/.test(a.x||""))a.x=(a.x?a.x+" · ":"")+`kèm: bị thái giám Nội vụ phủ bắt nạt, Sức -5: ${typeof chanceW==="function"?chanceW(25):"khả năng thấp"}`}catch(e){}return X}})();
+
+/* 23. MINI-GAME ACTS — one shared path (owner bug 11/15, live: one tap on the Hành sự card "Tự học Nấu nướng" paid Sức −15, Bạc −6
+   and 2 khắc and showed a BẠI card, and only THEN the game intro opened). Cause: every act that opens a mini-game paid and rolled
+   as a plain act first — the deck card through act() → runOpt (cost, roll, result card), then its go opened the game; the
+   lesson buttons through lessonMode (j23) and the "làm ra tác phẩm gì?" dialog (j83 chooseM, material Bạc); the veil craft
+   (jveil) the same way. The game itself then decides the real outcome.
+   Now, for every act that opens a mini-game (all of them go through openMG or playArt):
+   (a) one tap = one act: a lesson/practice tap is ignored while its dialog or game is open, and for 700 ms after a tap;
+       a deck card is marked done at once and refuses while a game is open;
+   (b) a tap opens only the intro: whatever the act took before the game opened (Sức, Bạc, Thái hậu, khắc) is put back at once and
+       kept as pending; no roll, no result card. The deck card does not go through runOpt at all;
+   (c) the pending cost is paid when the game reports (played or "Để trời định"); closing the game unplayed costs nothing;
+   (d) one result card comes LAST, after the game screen closes: the cost plus what the game gave, sealed by the score
+       (THÀNH from 5 of 10, the 2-point lesson; after "Để trời định" by what the quick lesson gave); none when the game shows its own result dialog
+       (the veil craft). */
+(function(){let lastTap=0;window.__aaL=0;
+ const ovOpen=()=>{const ov=document.getElementById("ov");return !!(ov&&!ov.hidden)||!!document.querySelector("#kg82go,.kg82act")};
+ const busy=()=>!!(S&&(S.mg||window.__aaPend||(Q.length&&Q[0]&&/làm ra tác phẩm gì|^Học |^Tự luyện|mạng che mặt/.test(Q[0].t||""))))||ovOpen();
+ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-learn],[data-wkprac]");if(!b)return;const now=Date.now();
+  if(busy()||now-lastTap<700){e.stopPropagation();e.stopImmediatePropagation();e.preventDefault();return}lastTap=now},true);
+ const KEYS=["suc","bac","th"];const snap=()=>({suc:S.suc,bac:S.bac,th:S.th,used});
+ const diff=(b,extra)=>{const c={khac:used-b.used};KEYS.forEach(k=>c[k]=(S[k]||0)-(b[k]||0)-((extra&&extra[k])||0));return c};
+ const putBack=(b,extra)=>{KEYS.forEach(k=>S[k]=b[k]+((extra&&extra[k])||0));used=b.used};
+ const keep=c=>{window.__aaPend=c;if(S.mg)S.mg.cost=c;try{save()}catch(e){}try{render()}catch(e){}};
+ /* run fn; if it opened a mini-game, undo what it paid and keep that pending (the outermost call does it, once) */
+ window.aaDefer=function(fn,ctx,args,extra){if(!S||window.__aaPend||(S.mg&&S.mg.cost))return fn.apply(ctx,args);const b=snap(),L=window.__aaL;window.__aaL=0;let r;
+  try{r=fn.apply(ctx,args)}finally{const went=window.__aaL;window.__aaL=L||went;if(went&&!window.__aaPend&&!(S.mg&&S.mg.cost)){const c=diff(b,extra);putBack(b,extra);keep(c)}}return r};
+ if(typeof lessonMode==="function"){const l0=lessonMode;lessonMode=function(){let mat=0;try{if(typeof wkPend==="object"&&wkPend&&WK[wkPend.kind])mat=WK[wkPend.kind].mat[wkPend.mat]||0}catch(e){}
+  return window.aaDefer(l0,this,arguments,mat?{bac:mat}:null)}}
+ if(typeof chooseM==="function"){const c0=chooseM;chooseM=function(){return window.aaDefer(c0,this,arguments)}}
+ if(typeof vlCraftRun==="function"){const v0=vlCraftRun;vlCraftRun=function(){window.__aaTitle="Tự tay kết mạng che mặt";return v0.apply(this,arguments)}}
+ /* the Hành sự deck cards that open a game (j83 wkDeckCard): no runOpt — the act() guards, then straight to the game */
+ if(typeof wkDeckCard==="function"){const w0=wkDeckCard;wkDeckCard=function(){const a=w0.apply(this,arguments);if(a)a.aaMG=1;return a}}
+ if(typeof act==="function"){const a0=act;act=function(i){const a=Array.isArray(deck)&&deck[i];if(!a||!a.aaMG||typeof a.go!=="function")return a0.apply(this,arguments);
+  if((a.b!=null&&(S.buoi||0)!==a.b)||!can(cardCost(a))||a.done||S.dead||Q.length||!canPay(a)||busy())return;
+  a.done=1;const c={khac:cardCost(a)};KEYS.forEach(k=>c[k]=(a.c&&a.c[k])||0);window.__aaTitle=a.n;window.__aaL=0;a.go();
+  if(window.__aaL)keep(c);else{a.done=0;window.__aaTitle=null}render()}}
+ /* the one result, after the game screen closes */
+ let fin=null;
+ const showLast=(title,before,ok,q0)=>{let n=0;const t=setInterval(()=>{if(++n>2400||(!ovOpen()&&!(S&&S.mg))){clearInterval(t);fin=null;
+   try{if(S&&!S.dead&&Q.length<=q0)window.__aaR0(title,before,ok)}catch(e){console.error(e)}}},250)};
+ window.aaPayMG=function(score){try{const m=S&&S.mg;const c=(m&&m.cost)||window.__aaPend;if(m)m.cost=null;window.__aaPend=null;if(!c||fin)return;
+  const before=rsnap(),q0=Q.length;apply({suc:c.suc||0,bac:c.bac||0,th:c.th||0});if(c.khac)spend(c.khac);
+  const sc=score||{};const ok=sc.skip?null:sc.raw!=null?sc.raw>=5:sc.g!=null?sc.g>=2:true;
+  const ttl=(window.__aaTitle||sc.title||"Trò tài nghệ")+(sc.skip?" · để trời định":sc.raw!=null?` · phần chơi ${sc.raw}/10`:"");window.__aaTitle=null;
+  fin=1;showLast(ttl,before,ok,q0)}catch(e){console.error(e)}};
+ if(typeof playArt==="function"){const p0=playArt;playArt=function(o){window.__aaL=1;if(o&&typeof o.onDone==="function"){const d0=o.onDone,ttl=o.title;
+  o=Object.assign({},o,{onDone:function(raw,x){const sk=!!(x&&x.skipped);const r1=cl(Math.round(raw||0),0,10);window.aaPayMG({title:ttl,skip:sk,ok:r1>=5,raw:sk?null:r1});return d0.apply(this,arguments)}})}return p0.call(this,o)}}
+ if(typeof openMG==="function"){const o0=openMG;openMG=function(k,lv,cb){window.__aaL=1;let ttl="";try{const m=S.mg,a=ARTS.find(x=>x.k===k);ttl=`${m&&m.mode==="prac"?"Tự luyện":m&&m.mode==="self"?"Tự học":m&&m.mode==="th"?"Học cùng Thái hậu":"Học"} ${a?a.n:""}`}catch(e){}
+  if(ttl&&!window.__aaTitle)window.__aaTitle=ttl;const cb2=typeof cb==="function"?function(g){window.aaPayMG({title:ttl,g});return cb.apply(this,arguments)}:cb;return o0.call(this,k,lv,cb2)}}
+ if(typeof resultShow==="function"){const r0=resultShow;window.__aaR0=r0;resultShow=function(){if(window.__aaPend||fin||(ovOpen()&&S&&S.mg))return;return r0.apply(this,arguments)}}})();
