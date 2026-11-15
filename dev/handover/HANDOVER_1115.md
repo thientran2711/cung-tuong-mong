@@ -89,3 +89,4 @@ Nhắc theo dõi: send_later 30 phút, tự đặt lại mỗi lượt (lịch l
 - [ ] Luật một nguồn (số hiện = số luật kiểm; Thái hậu 50 vs 55) — review/rules-one-source
 - 06:05Z LIVE main=0783ec32a (lật nguyên tờ đục, 1300 ms, vuốt đổi tab; j22 'Đến chỗ hắn' theo luật đi khắc). Lo: vòng Luân hồi có thể trống hình thẻ — đang kiểm.
 - 06:10Z hotfix/pc-size 04a204ff6 (ResizeObserver #panel) sẵn → người duyệt 1 gộp lên main 0783ec32a + dựng site, rồi đẩy.
+- 06:30Z cdn_sync: 816 ảnh hoa điền (23 mặt đổi hoa lá xong hết + c12 t2–6 thu nhỏ) lên CDN.
