@@ -35,7 +35,7 @@ CDN uploads OK again (owner saved the Cloudflare token; R2 verified). Use CLOUDF
 | C8 | review/fig-bg step 2 (silk scroll A) | QUEUED |
 | C9 | review/huadian-size (batch at 8.5%) | QUEUED |
 | C10 | OWNER_LEDGER sweep (docs) | DONE (dev/handover/OWNER_LEDGER.md; D29–D49 added) |
-| C11 | review/pick-hint (owner s8: odds explanation lines unclear, whole family) | RUNNING wave 1 |
+| C11 | review/pick-hint @ 29972cd7 (incl. rank+name together + rank halo) | SẴN SÀNG KIỂM → REVIEWING (pick-hint-r1) |
 | C12 | review/hc-portrait (owner s8: Hậu cung portrait frame top gap + widen) | RUNNING |
 | C13 | review/gift-pick (owner s8: gift picker picture grid + gift animation; animation needs A2 fxkit) | RUNNING |
 | C14 | review/row-align (owner s8: label/value rows in one block share one label column) | RUNNING |
