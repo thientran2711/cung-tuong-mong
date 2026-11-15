@@ -3821,7 +3821,8 @@ const BAL={outQ:85,hz:2.0,conc:.3/.7,later:6,hhTh:55};
    Readers: j59 (every room / place stage, consort + servant road), jk4 kitStageFig / kitEventStage + week book (CSS var --kfig). */
 /* table by sex / age (× the adult woman):  adult woman 1 (≈ .79 of the stage — the ratio the owner approved 11/15 in page-curl shot ipad1180-tab-45, measured .787) · adult man / eunuch / official / physician 1.07 (capped under the ribbon)
    · child a<18: .55 + .03·a (age 5 ≈ .70, 10 ≈ .85, 15 = 1) — heads always stay under the top label (ribbon) */
-const KIT_FIG={h:.79,man:1.07,men:{emperor:1,eunuch:1,official:1,physician:1,man:1},
+/* maxPx (owner 11/15): body height never exceeds what the 1180 iPad stage gives (.79 × 685 ≈ 542 px), so taller stages (1366, larger iPads) do not make figures wider */
+const KIT_FIG={h:.79,man:1.07,maxPx:542,men:{emperor:1,eunuch:1,official:1,physician:1,man:1},
  kid(a){return typeof a==="number"&&a<18?Math.min(1,.55+.03*Math.max(1,a)):1},
  fac(src,age){const m=/fig-([a-z]+)-/.exec(src||"");return(m&&this.men[m[1]]?this.man:1)*this.kid(age)}};
 window.KIT_FIG=KIT_FIG;
@@ -5617,7 +5618,7 @@ function j59lay(force){const st=document.getElementById("stage");if(!st||!S)retu
  let tw=it.map(x=>x.tag?x.tag.offsetWidth:0);
  const KA=st.__kfa;/* KIT_FLOOR anchor (jk2b kitFloorFit): feet on the painted floor line while the figure keeps its kit height */
  const size=(rows)=>{const fo0=Math.max(sH*.03,rows*(tagH+3)+6);const foA=KA&&KA.feet?sH-KA.feet:0;
-  const fo=Math.max(fo0,Math.min(foA,sH-topR-KF.h*sH));CAP=sH-fo-topR;return{fo,H:Math.max(sH*.2,Math.min(KF.h*sH,CAP))}};
+  const fo=Math.max(fo0,Math.min(foA,sH-topR-KF.h*sH));CAP=sH-fo-topR;return{fo,H:Math.max(sH*.2,Math.min(KF.h*sH,CAP,KF.maxPx||1e9))}};
  /* the plaque column only covers the top of the stage: when it ends above the heads, the people may use the full width under it */
  const headTop=(z)=>sH-z.fo-Math.min(z.H*maxF,sH-z.fo-topR);
  const widthFor=(z)=>{let rr=rightR;try{const kR=document.getElementById("kshR");if(gR&&kR&&!kR.hidden&&kR.offsetHeight&&kR.getBoundingClientRect().bottom-R.top+4<headTop(z))rr=8}catch(e){}return{rr,avail:sW-8-rr-gL}};
