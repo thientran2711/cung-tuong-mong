@@ -115,3 +115,18 @@ b14 https://pikaso.cdnpk.net/tmp/bulk-downloads/a33ae9db-7f34-428b-84b0-fbf5efa0
 - Workers stopped; .tywork sources/intermediates deleted after CDN verification (sources.txt keeps the gen ids; re-zip from Magnific if ever needed).
 - Pending owner: a further huadian shrink may be approved — if so the trung-y portraits join that batch later.
 - Next: code review of jty.js on review/trung-y.
+
+## REVIEW r6 (review/trung-y-r6, 15/11 ~15:10Z) — merged onto origin/main b8a58e87
+- Merge: conflicts only assemble.py (jty.js after jmen in main's list) and jbal.js (BAL.ty kept beside main's wk/tchMin/hint knobs). Site rebuilt.
+- Reviewer fixes in jty.js:
+  1. ONE thiếu lễ: in trung y, jaudit/jtoil leAttire returns state "plain" with Danh 0 / Đức 0 (the robe rule BAL.ty already charged them on
+     arrival) and only the host's thiện cảm (BAL.thieuLe.aff, strict ×1.5); jtoil keeps its makeup part, skips the dress part. aaThieuLe0 is
+     false for anyone in trung y (NPC serveTH no double Danh). Before: Thỉnh an Thái hậu in trung y = arrival Danh -8 Đức -1 AND Danh -2 Đức -1 again.
+  2. No private CSS (KIT rule): .mchip.tyx / .kplr.tyx removed; map tile uses plain .mchip, place-card line uses kitChips.
+  3. Card options in kit row grammar (KIT §6): "Vẫn đi" → Tốn: Danh -N (was "Mất: mất: Danh -2"); "Ở lại" / robbery / omen notes → Ghi chú/Kèm.
+  4. The Emperor at her palace at NIGHT (thị tẩm) is no breach (no tai tiếng, no visitor Danh).
+  5. Robbery card is Q.unshift (reported at once, ahead of any queued card).
+  6. Makeup layer (jtoil kmk) had no points for the trung y art (img/toil-fit.json had 0 "-ty" files → no makeup while in trung y):
+     measured with toilfit.py --extend --all --only -ty (template transfer from her measured portrait) → toil-fit.json + CDN.
+- Tests: dev/test/trung-y.js (setup now waits for the async start() and keeps a consort; it used to land on a palace-maid life ~40 %),
+  new dev/test/trung-y-scan.js (every picture of her in trung y: stage, header, tabs, Tuần lục; makeup layer; one thiếu lễ; night).

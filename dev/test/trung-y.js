@@ -16,8 +16,13 @@ const [,,URL,SZ,OUT,TAG,OLD,LOC]=process.argv;const [WH,DPR]=SZ.split('@');const
  if(OLD&&fs.existsSync(OLD)){const d=fs.readFileSync(OLD,'utf8');R.old=await p.evaluate(d=>{try{const kl=document.getElementById('kload');if(kl)kl.remove();localStorage.setItem(SK(2),d);SLOT=2;const dd=loadSlot(2);quiet=true;deser(dd);quiet=false;try{deal()}catch(e){}document.getElementById('title').hidden=true;
    Q.length=0;render();const w=wdOf(S);return{ok:!!S&&!S.dead,name:S.name,y:!!w.y,ty:tyOn(S)}}catch(e){return{err:e.message}}},d);await p.waitForTimeout(1500);await shot('old')}
  /* 2. a new life, a consort; face c01 (art drawn) */
- R.setup=await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;
-  for(let i=0;i<60;i++){start();if(!isSrv())break}Q.length=0;try{NLP=null}catch(e){}const s=document.createElement('style');s.textContent='.kroul{display:none!important}';document.head.appendChild(s);
+ /* start() is async: wait for the new life, keep a consort (not a palace maid) */
+ await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}document.getElementById('title').hidden=true});
+ for(let i=0;i<20;i++){await p.evaluate(()=>{window.S0=typeof S!=='undefined'?S:null;try{store.set(NL_KEY,null)}catch(e){}start()});
+  await p.waitForFunction(()=>typeof S!=='undefined'&&S&&S!==window.S0&&S.origin,null,{timeout:30000});
+  if(await p.evaluate(()=>S.origin.k!=='cnv'&&!isSrv()&&!S.out))break}
+ R.setup=await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();SLOT=3;document.getElementById('title').hidden=true;
+  Q.length=0;try{NLP=null}catch(e){}const s=document.createElement('style');s.textContent='.kroul{display:none!important}';document.head.appendChild(s);
   S.pid='consort:c01';S.fid='consort:c01';try{figUsed().push('consort:c01')}catch(e){}
   S.place='home';S.visit={k:'home',people:homePeople(),talked:false,tk:{}};S.buoi=0;used=0;tab='act';render();return{srv:isSrv(),fid:figPick(S),rank:S.rank,y:!!wdOf(S).y}});
  await clear();await p.waitForFunction(()=>window.TYF&&TYF.ix||true);await p.waitForTimeout(2500);
