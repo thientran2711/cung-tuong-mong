@@ -323,3 +323,10 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 
 ## 15/11 ~05:20Z (sếp) kinh tế theo phẩm
 - Lo: Hoàng hậu 320/tháng xài không hết, Đáp ứng 30 mà đồ, học, mưu kế đều 20–30. Hướng điều phối chọn: phẩm cao nhiều tiền nhưng chi phí giữ thể diện/nghĩa vụ/kẻ hầu tăng theo phẩm (bạc dư HH chỉ ~3–4 lần Đáp ứng); phẩm thấp có nguồn thu có lý do (bán đồ tự làm, thưởng, nhà mẹ đẻ, làm việc cho người trên); giá chia bậc (thường 3–15, vừa 20–60, xa xỉ 100–400, đồ vượt phẩm có rủi ro); phẩm thấp có đường không tốn bạc (khắc, Tâm cơ, ân tình) nhưng chậm/rủi ro hơn; thẻ bổng lộc tháng ghi rõ thu chi.
+
+## 15/11 ~05:35Z (sếp)
+- Chỉnh màu nền nơi chốn: DUYỆT (dịu, đỡ AI). Chỉnh hết các nơi (trừ Lãnh cung).
+- Dư đồ: KHÔNG chỉnh. Ảnh Dư đồ sáng/trưa/chiều/tối lấy từ Phượng Lệnh, giữ y nguyên.
+- Lớp sáng cho nhân vật: sếp còn phân vân; chờ tờ so (không phủ / nhẹ / hiện tại). Mặc định tắt.
+- BỎ mọi nút "Thôi" (và Lui/Đóng) khắp game; mỗi bảng đóng được có một nút ✕ góc trên phải.
+- Chữ phải cặp nhau: "Sang buổi" / "Sang ngày mới" (bỏ "Qua ngày").
