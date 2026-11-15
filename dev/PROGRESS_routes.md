@@ -34,6 +34,14 @@ Plan: dev/STORY_ROUTES_PLAN.md. Module: dev/build/jroute.js (after jmen, before 
 - Số đo: xem dev/STORY_ROUTES_PLAN.md «Kết quả đo 15/11».
 - Mục 11 «mật ước sinh con khi Hoàng thượng vô sinh»: sếp bỏ (02:15Z) — đã gỡ sạch, không còn gì trong code.
 
+## TẠM DỪNG (coordinator: đĩa đầy) — chỗ nối tiếp
+- Đã gộp origin/main b165b1f7 (merge, không rebase để khỏi force-push): jmen lấy bản main + buổi tối theo B4L; assemble thêm jinv/jcoop*/jload.
+- Sau gộp: routes_reach 15/15, dev/test/routes.js (đã bỏ qua vòng Luân hồi #kroul) 755x1000@2 + 1180x820@2: 0 lỗi, 0 tràn, 0 chữ cắt; sổ cũ OK.
+- CHƯA XONG: đo cân bằng lại SAU khi gộp main (lần đo trước gộp: n=30 HH 33 %, chết sớm 23 % — bằng mức gốc của game theo PROGRESS_balance;
+  lần đo sau gộp mới được n=7, HH 29 %, chết sớm 43 % — quá ít để kết luận). Chạy lại: tạo zz-test.html (dev/index.html + meta charset),
+  `GAME=$PWD/zz-test.html INP=inpage6.js INP2=inx.js HHSTOP=1 XJS='<xoay 9 thân phận>' node dev/measure/runb.js sens 12 out.json` ×3, `python3 dev/measure/anx.py`.
+- Bot ẩn dật (dev/measure/routes.js ad): bản mới (hại người → ở yên, vẫn tốn thời gian) chưa đo xong; bản trước cho thấy bot thường hại người nên chưa có kết an nhiên.
+
 ## Còn mở (hỏi sếp, không tự làm)
 - Bát nước vẽ tay (mg-nghiem-bowl) thay bát vẽ bằng canvas — cần sếp cho vẽ.
 - Dấu khung trò nghiệm thân đang là «TÀI NGHỆ»; có thể đổi sang dấu «MƯU» khi review/scheme-games gộp.
