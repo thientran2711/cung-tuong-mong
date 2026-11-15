@@ -198,3 +198,4 @@ Notes: `cdn_sync.py --pull` does NOT refresh img/_index.json reliably (stale loc
   on any stand-in in me/p/world. Corpus 1511 lines: me/p/world each 670 own, 841 none, 0 stand-ins.
 - a467-book-shots.js: added window.__bot (the jload first-run download screen covered the book) and a wait for images.
 - Owner decision pending (not changed): doat-giai / nguoi-khac-doat-giai show the Emperor handing out the prize.
+- Re-merged origin/main 27491781fe (toilette r6): assemble = main list + jct2 after jht; tests rerun on that build (suitor-faces churn 0, a467-me-art 1520 lines 0 stand-ins in me/p/world, book shots 6 sizes no overflow / 0 broken / 0 errors, old save from the live site loads, its bacdich-1 suitor re-picks).
