@@ -63,8 +63,11 @@ rules] A character lineup of THREE full-body standing figures ... Signature colo
   run audit.py which caches it). `python3 ue_spec.py ue-u01-r0` prints ref + prompt. Gen: gpt-2-6, 4k, 21:9, quality high, refs [ref].
 - Manifest: FIGURES-servants.json (j39 merges it; holds maid/mama/eunuch). Pull it fresh before proc:
   `python3 dev/site/cdn_sync.py --pull img/FIGURES-servants.json` then `python3 -I proc.py ue_jobs.json FIGURES-servants.json ue_bgN.txt`.
-- Generated so far (ids in ue_gens.txt): pilot u01 r0/r2/r3 - not yet looked at / cut. Next: look at the pilot, adjust ue_spec.py if
-  needed, then the other 29 x 3; demole_por.py -n --sheet + browsheet on every new face before upload.
+- DONE: u01 r0/r2/r3 (12 figs + 12 por) cut (ue_bg1.txt), looked at (rvsheet: face kept, 3 ranks clearly different), cutcheck max 1.9,
+  demole 0 hits, on CDN with FIGURES-servants.json (2956 records).
+- NEXT: u02..u30 x r0/r2/r3 (87 sheets): `python3 ue_spec.py ue-u02-r0 ue-u02-r2 ue-u02-r3` -> generate (refs [ref]) -> append ids to
+  ue_gens.txt -> LOOK -> remove_background -> ue_bgN.txt -> pull FIGURES-servants.json -> proc.py ue_jobs.json FIGURES-servants.json
+  ue_bgN.txt -> rvsheet + cutcheck + demole_por.py -n --sheet -> cdn_sync -> commit. Batches of ~5 eunuchs (15 sheets, 4050 credits).
 - Picker DONE (jartc.js part 3): f88Best wrapped; staff eunuchs (role eunuch/eun, not S) -> f88Pick base mode with rank who.rk
   (null = 1), nearest drawn rank wins, so it is safe before all art lands. vt.js checks it: ranks 0,1,2,3,undefined -> r0,r1,r2,r3,r1.
 - Pilot look: r0 (plain faded robe, cloth cap) good; r3 (gold python robe) good; r2 first try = same as the r1 reference -> spec now
@@ -72,7 +75,7 @@ rules] A character lineup of THREE full-body standing figures ... Signature colo
   TODO: u10/u20/u30 already wear deep crimson at r1 (ECOL idx 7) -> give their r2 another colour (e.g. deep ochre gold).
 
 ## Remaining (in order)
-- Eunuch ranks r0/r2/r3 x 4 ages x 30 (360) + picker: pass srk(who) for staff eunuchs, tiers "r0".."r3" (base = r1).
+- Eunuch ranks: u02-u30 left (348 figs); picker done.
 - Kids adult bands a26/a36/a51 x 48 (144) + picker: kidBandOf beyond 20.
 - HOLD: player looks, tm96 promoted men.
 

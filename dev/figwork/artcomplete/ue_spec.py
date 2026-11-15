@@ -30,6 +30,9 @@ for i in range(1,31):
         J[f"ue-{u}-{r}"]=dict(ref=REF[u],rank=r,figs=[dict(file=f"fig-eunuch-{u}-{r}-{a}",role="eunuch",identity=u,tier=r,ageBand=a) for a in AG])
 if len(sys.argv)>1:
     for jid in sys.argv[1:]:
-        j=J[jid];rk,dr=RANK[j["rank"]];col="" if j["rank"]=="r2" else "Keep his own robe colour family from the reference. "
+        j=J[jid];rk,dr=RANK[j["rank"]]
+        col="" if j["rank"]=="r2" else "Keep his own robe colour family from the reference. "
+        if j["rank"]=="r2" and jid.split("-")[1] in ("u10","u20","u30"):   # these already wear deep crimson at r1
+            dr=dr.replace("a deep crimson red silk round-collar robe (head eunuchs wear red)","a deep ochre-gold silk round-collar robe")
         print(json.dumps({"jid":jid,"ref":j["ref"],"prompt":T.format(rank=rk,dress=dr,col=col)},ensure_ascii=False))
 else: json.dump(J,open(W+"/ue_jobs.json","w"),indent=0,ensure_ascii=False); print(len(J),"jobs")
