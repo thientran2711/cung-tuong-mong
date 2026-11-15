@@ -55,7 +55,7 @@ kinh-hong-vu|0|a dancer's long water sleeves flying in a swirl over the polished
 lam-tho-trung-cuu|0|a brush writing on paper on a terrace table with yellow chrysanthemums and a cup of chrysanthemum wine, autumn mountains
 ly-gian|1|a hand slipping a forged letter between two folded fans on a table, sowing discord, candle
 mama-cong|0|an older governess's weathered hand guiding a young lady's hand pushing a needle through an embroidery hoop
-mama-dung|0|an older governess's hand adjusting the hairpin on a young lady's chignon before a bronze mirror, only the back of the head
+mama-dung|0|an older governess's hand in a dark sleeve and a young lady's hand together arranging a few simple elegant hairpins and a comb on a tray before a bronze mirror, modest neat beauty
 mama-hanh|0|an older governess's hand placing a book of etiquette in a young lady's open hands, a teapot and cups set in perfect order
 mama-ngon|0|an older governess's hand tapping lightly beside lines in an open book of proper speech, the young lady's hands folded
 mang-chan-thuoc|0|two hands carrying a folded warm quilt and a wrapped box of medicine through falling snow toward a wooden door
@@ -63,11 +63,11 @@ moi-den-cung|0|a hand offering a red invitation card, the edge of a palace gate 
 moi-nang-sang-cung|0|a hand gesturing toward an open moon gate leading into a warmly lit courtyard at sunset, a lantern
 moi-thay-day-nghe|0|a hand setting down a red engagement letter beside a guqin, a pipa and a brush set, inviting a master
 mua-chuoc|1|a hand slipping a silver ingot into a maid's plain grey sleeve, behind a pillar
-nghe-loi-tai-mat|1|a maid's hand in a grey sleeve bowing low and touching her ear, a lantern in a dark corridor
+nghe-loi-tai-mat|1|a maid's hand in a plain grey sleeve closing around a small folded note slipped to her at a dark corridor corner, a lantern glow, a promise to report
 nhan-bac-tai-mat|1|a maid's plain grey hand closing over a small purse of silver, half hidden in her sleeve
 nho-con-noi-giup|0|a mother's hand straightening the collar of a young prince's blue robe before he goes, only hands and collar visible
 nho-giup-do|0|a hand gently holding another lady's sleeve in a plea, a teacup and a folded request letter
-nhun-nhuong|0|a hand stepping back to yield a seat cushion to another, a corridor and fallen petals
+nhun-nhuong|0|a hand gently pushing the finer embroidered seat cushion toward another's place at a low table, keeping a plain cushion for herself, fallen petals
 noi-that-long|1|two hands resting near each other on a table by candlelight, an open heart-shaped jade pendant between them
 phat-vi|0|a lady's sleeve beside a stone courtyard step where a pair of plain cloth shoes kneels on the cold grey stone, punishment
 phat-vo-co|1|a long brocade skirt hem sweeping past a maid's lowered hands touching the floor, night lanterns
