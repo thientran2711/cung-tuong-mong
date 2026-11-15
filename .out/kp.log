@@ -1,0 +1,11 @@
+{
+ "bad": 0,
+ "R": {
+  "755x1000@2": "ok 13 samples, act widths 337,337,701",
+  "1000x755@2": "ok 13 samples, act widths 446,446,946",
+  "1180x820@2": "ok 13 samples, act widths 265,265,1126",
+  "1366x1024@2": "ok 13 samples, act widths 312,312,1312",
+  "844x390@3": "ok 13 samples, act widths 381,381,790"
+ },
+ "errs": []
+}

@@ -1,0 +1,4 @@
+755x1000: reveal + list + gain + lose card ok, errors 0
+1000x755: reveal + list + gain + lose card ok, errors 0
+1180x820: reveal + list + gain + lose card ok, errors 0
+PASS
