@@ -16,6 +16,7 @@ INP=INP.replace(GOH,'{const bk=S.turn+"_"+S.tuan+"_"+S.buoi;window.__gof=window.
 const CDH='deck.forEach((a,i)=>{if(!cardOK(a))return;const c=cardCost(a);opts.push({s:scoreAct(a,N,c),f:()=>{note("card");act(i)}})});';if(!INP.includes(CDH))throw new Error('inpage4 card hook moved');
 /* a card that changes nothing (no khắc spent, no dialog) is not tried again in the same buổi */
 INP=INP.replace(CDH,'{const bk=S.turn+"_"+S.tuan+"_"+S.buoi;window.__cdf=window.__cdf||{};deck.forEach((a,i)=>{if(!cardOK(a)||window.__cdf[a.n]===bk)return;const c=cardCost(a);opts.push({s:scoreAct(a,N,c),f:()=>{note("card");const u0=used,q0=Q.length,s0=S.suc,b0=S.bac;act(i);if(used===u0&&Q.length===q0&&S.suc===s0&&S.bac===b0&&!S.mg)window.__cdf[a.n]=bk}})})}');
+INP=INP.replace('window.__lifeIter>9000','window.__lifeIter>60000');/* long lives are real lives, not a stall */
 /* new mini-games (j82): press the skip/close buttons */
 INP=INP.replace(OVH,"{const k=q('#kg82skip')||q('#ov .kg82act button:not(#kg82go)')||q('#kg82ok')||q('#ov button.kbtn');if(k){k.click();return true}}"+OVH);if(!INP.includes(HOOK))throw new Error('inpage4 hook moved');
 INP=INP.replace(HOOK,'{const ep=window.__evpick?window.__evpick(m,okIdx):null;if(ep!=null){note("ev_"+window.__evmode);chooseM(ep);return true}}'+HOOK);
@@ -45,6 +46,7 @@ window.__pun=0;window.__dem=0;window.__deathWhy="";
 async function run(b,mode,seed){const ctx=await b.newContext({viewport:{width:390,height:844},serviceWorkers:'block'});
  await ctx.addInitScript(([sd])=>{let s=sd*7919+12345;Math.random=()=>{s|=0;s=s+0x6D2B79F5|0;let t=Math.imul(s^s>>>15,1|s);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296};
   try{const g=crypto.getRandomValues.bind(crypto);crypto.getRandomValues=a=>{for(let i=0;i<a.length;i++)a[i]=Math.floor(Math.random()*4294967296)>>>0;return a}}catch(e){}},[seed]);
+ await ctx.route(/\.(webp|png|jpe?g|mp3|ogg|m4a)(\?|$)/i,r=>r.abort());/* lighter pages: no pictures or sound */
  const p=await ctx.newPage();p.setDefaultTimeout(0);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,160)));
  await p.goto(URL,{waitUntil:'domcontentloaded',timeout:0});await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function',null,{timeout:0});await p.waitForTimeout(1500);
  await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;window.__forceOrigin='tt';document.getElementById('title').hidden=true;start()});
