@@ -508,3 +508,7 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (17:33Z) TÍNH NĂNG MỚI: bổng lộc bị cắt xén hằng tháng (như phim cung đấu): do thất sủng, vừa phạm lỗi/bị phạt/giáng, bề trên có oán sai chèn ép, thái giám Nội vụ phủ tham chưa được lót tay… Hiện khung sự kiện khi bổng lộc tới (vải thô, trà mốc, thiếu bạc) kèm lý do; lựa chọn: nhịn / đút lót / sai cung nữ đi đòi / tố lên trên / ghi nhớ. NPC cũng bị. Chuyển phiên 6.
 - (17:36Z) Thanh chỉ số đầu trang: dời DANH sang nhóm trái ngay sau Đức (Sắc · Tài · Tâm cơ · Đức · Danh); nhóm phải chỉ Bạc · Sức · Sủng. Chuyển phiên 6.
 - [ ] (17:40Z) Khối "Ân sủng" bên phải sân khấu bấm mở lại thì phình to, tràn mép phải, cắt chữ → mở tại chỗ, rộng bằng cột, thẳng hàng. Hình nàng (Thường tại) có vết đen ở cổ do tách nền → sửa + rà vết đen quanh cổ/cổ áo mọi hình. Chuyển phiên 6.
+- (17:45Z) SỬA: Tuần lục KHÔNG dồn trang. Mỗi mục/chuyện mới sang trang mới là đúng. Lỗi thật của trang Triều đình · thiên hạ là THIẾU HÌNH TOÀN THÂN; mỗi trang phải có hình toàn thân.
+- (17:45Z) Hoa điền: một số bậc (Thường tại, Tần…) vẫn to → đo theo bậc, đề xuất cỡ nhỏ hơn cho mọi bậc, gửi mẫu trước.
+- (17:45Z) Luật kit-trước phải THỰC THI: dán nguyên văn vào mọi lời giao việc/duyệt; người duyệt đánh rớt chỗ tự chế; thợ ghi yêu cầu kit thiếu vào dev/kit/KIT_REQUESTS.md. Luật nằm ở đầu dev/handover/WORKER_BRIEF.md.
+- (17:45Z) Phiên 5 archive theo lệnh sếp.
