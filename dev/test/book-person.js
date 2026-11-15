@@ -63,7 +63,7 @@ let SIZES=args.slice(1).filter((a,i,A)=>a!=='--shots'&&A[i-1]!=='--shots');if(!S
    const ids=()=>[...root.querySelectorAll('.kbk-sheet')];for(let k=0;k<Math.min(5,bk.max);k++){const before=ids();
     const watch=new MutationObserver(()=>{});let bad=[];
     const chk=()=>{for(const im of root.querySelectorAll('.ksht img,.kbk-sheet img')){const sh=im.closest('.ksht,.kbk-sheet');if(sh.style.visibility==='hidden'||getComputedStyle(sh).visibility==='hidden')continue;
-      if(!im.complete||!im.naturalWidth)bad.push((im.closest('.ksht')?'copy:':'live:')+(im.complete?'broken:':'loading:')+im.src.split('/').pop());else if(im.closest('.ksht')&&im.decoding!=='sync')bad.push('async:'+im.src.split('/').pop())}};
+      if(!im.complete||!im.naturalWidth){/* still downloading everywhere = the network, not a flash; a copy blank while its page holds the picture decoded = a flash */const live=[...root.querySelectorAll('.kbk-sheet img')].find(x=>x.src===im.src&&x.complete&&x.naturalWidth);if(im.closest('.ksht')&&!live)res.net=(res.net||0)+1;else bad.push((im.closest('.ksht')?'copy:':'live:')+(im.complete?'broken:':'loading:')+im.src.split('/').pop())}else if(im.closest('.ksht')&&im.decoding!=='sync')bad.push('async:'+im.src.split('/').pop())}};
     bk.next();await new Promise(r=>requestAnimationFrame(()=>r()));chk();await new Promise(r=>setTimeout(r,1600));chk();
     const after=ids();res.rebuilt+=before.filter((x,i)=>x!==after[i]).length;res.undecoded.push(...bad)}
    res.undecoded=[...new Set(res.undecoded)].slice(0,8);return res});
@@ -79,7 +79,7 @@ let SIZES=args.slice(1).filter((a,i,A)=>a!=='--shots'&&A[i-1]!=='--shots');if(!S
   if(new RegExp(`(Đáp ứng|Thường tại|Quý nhân|Tần|Phi) ${R.setup.names[2]}`).test(all)&&R.setup.promo[0]!==R.setup.promo[1]){/* must be the new title */
    const m=all.match(new RegExp(`(\\S+ \\S+|\\S+) ${R.setup.names[2]}`,'g'))||[];R.titles=[...new Set(m)].slice(0,6)}
   P.forEach((x,i)=>{if(x.priv)bad.push('private chip p'+i);for(const t of x.tables){if(new Set(t.x1).size>1&&Math.max(...t.x1)-Math.min(...t.x1)>1)bad.push('col1 x p'+i);if(Math.max(...t.x2)-Math.min(...t.x2)>1)bad.push('col2 x p'+i);if(Math.max(...t.lx)-Math.min(...t.lx)>1)bad.push('label x p'+i);
-    if(t.labels.some(l=>/^thiện cảm$/i.test(l)))bad.push('bare thiện cảm');if(t.over)bad.push('table overflows p'+i)}});
+    if(t.labels.some(l=>/^thiện cảm$/i.test(l)))bad.push('bare thiện cảm');if(t.over)bad.push('table overflows p'+i+' '+x.title+' '+t.labels.join('|'))}});
   const persons=P.filter(x=>x.fig);for(const x of persons)if(!x.tables.length&&!/tiếp theo|^Tổng lược|^Triều đình/.test(x.title))bad.push('person page without kit table: '+x.title);
   /* owner 17:45Z: every page (Tổng lược, each person, Triều đình · thiên hạ) has the full-length figure of its subject */
   P.forEach((x,i)=>{if(!x.fig)bad.push(`page ${i} "${x.title}" has no figure`)});if(!P.some(x=>/^Triều đình/.test(x.title)))bad.push('no Triều đình page');

@@ -13,13 +13,13 @@ const {chromium}=require('playwright');const [,,URL,SZ]=process.argv;const [W,H]
  await p.evaluate(()=>{for(const id of ['kload','kroul']){const x=document.getElementById(id);if(x)x.remove()}try{localStorage.clear()}catch(e){}SLOT=3;window.__nlInner=1;document.getElementById('title').hidden=true;
   for(let i=0;i<60;i++){start();if(!isSrv())break}Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;render();window.__bot=true;S.mat=12;
   S.met=S.met||{};for(const v of liveRivals(false))S.met[v.id]=wk();S.wkSnap=wkSnap();for(let n=0;n<6;n++){Q.length=0;S.mg=null;used=4;try{nextBuoi()}catch(e){}}Q.length=0;render()});
- const C={natalt:0,bare:0,than:0,frac:0,box:0,screens:0};const S0={natalt:[],bare:[],than:[],frac:[],box:[]};
+ const C={natalt:0,bare:0,than:0,frac:0,box:0,rows:0,screens:0};const S0={natalt:[],bare:[],than:[],frac:[],box:[],rows:[]};
  const scan=async(where)=>{await p.waitForTimeout(700);const r=await p.evaluate(()=>{const vis=e=>{const r=e.getBoundingClientRect();return r.width>0&&r.height>0&&getComputedStyle(e).visibility!=='hidden'};
-   const txt=document.body.innerText;const o={natalt:[],bare:[],than:[],frac:[],box:[]};
+   const txt=document.body.innerText;const o={natalt:[],bare:[],than:[],frac:[],box:[],rows:[]};for(const m of txt.matchAll(/.{0,30}oán ta \d.{0,12}/g))o.rows.push(m[0]);
    for(const m of txt.matchAll(/.{0,30}[Nn]àng ta (?:oán ta|→ ta|ghen).{0,10}/g))o.natalt.push(m[0]);
    for(const m of txt.matchAll(/.{0,30}(?<![\p{L}])thân [+\-−]\s?\d.{0,5}/gu))o.than.push(m[0]);
    for(const m of txt.matchAll(/.{0,25}(?:Sủng|Danh|Đức|oán|ghen|thiện cảm|Thiện cảm|tin cậy|Thái hậu|Hoàng hậu)[^\n\d]{0,12}[+\-−]?\d+[.,]\d+.{0,5}/g))o.frac.push(m[0]);
-   for(const e of document.querySelectorAll('.krel,.kst-chip small,.kpc small,.krt-l,.kr3k')){if(!vis(e))continue;const t=e.innerText.trim();if(/^thiện cảm:?$/i.test(t))o.bare.push(t+' @'+(e.closest('[class]')||{}).className)}
+   for(const e of document.querySelectorAll('.krel,.kst-chip small,.kpc small,.krt-l,.kr3k')){if(!vis(e)||e.closest('.ef,.kchip,.krd,.k3v'))continue;/* act-card deltas "thiện cảm +10" and the servant bar "Thiện cảm" are the VANPHONG §1 words (owner 09:55Z, 10:10Z) */const t=e.innerText.trim();if(/^thiện cảm:?$/i.test(t))o.bare.push(t+' @'+(e.parentElement.closest('[class]')||{}).className+' | '+(e.parentElement.closest('[class]')||{}).innerText.slice(0,60))}
    for(const e of document.querySelectorAll('span.md.kfc')){if(!vis(e))continue;const cs=getComputedStyle(e);if(cs.boxShadow!=='none'||cs.backgroundColor!=='rgba(0, 0, 0, 0)'||cs.backgroundImage!=='none')o.box.push(cs.boxShadow.slice(0,40))}
    return o});
   C.screens++;for(const k in r){C[k]+=r[k].length;for(const s of r[k])if(S0[k].length<4)S0[k].push(where+': '+s.replace(/\s+/g,' '))}};
