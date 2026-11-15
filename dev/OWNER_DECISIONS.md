@@ -661,3 +661,9 @@ All must work in co-op.
 ## 15/11 ~21:00Z — Effects painted with Magnific too (owner)
 - Owner wants effects (falling petals, candle flicker, glow, embers…) made with Magnific too, then put into the game; worried they may be too transparent / hard to separate from the background.
 - Coordinator method: (1) particle effects (petals, leaves, snow, embers, sparkles): paint single sprites with gpt-2-6 on a plain background, cut with images_remove_background → transparent PNG/WebP, check edges on dark + light, animate with the existing Pixi/jfx particle layer; (2) light effects (candle flame flicker, glow, moonlight, lantern): Magnific short video on pure BLACK background, shown with mix-blend-mode: screen (black disappears, no alpha needed, works on iPhone Safari) — exported as a small looping MP4/WebM or sprite sheet; (3) only when a solid effect needs real transparency: video_remove_background → frames → sprite sheet WebP (Safari-safe). Keep files small (download-size rule).
+
+## 15/11 ~21:10Z — Night follow-ups: build all 4 (owner)
+1. Morning after a mặn nồng night: Kính sự phòng comes to record it in the book, maids gossip, Danh +small.
+2. Morning after a lạnh nhạt night: other consorts already know and mock her — wire into the existing reaction buttons (Xin lỗi / Cười trừ / Đáp lại style).
+3. Night the Emperor spends at another palace: she hears music drifting over; if she knows that consort, she learns who it is (stranger rule otherwise).
+4. Full-moon (rằm) or festival nights: the night-end picture shows a full moon / flower lanterns (painted variants, Magnific).
