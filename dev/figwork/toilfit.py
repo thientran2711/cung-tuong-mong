@@ -148,7 +148,10 @@ def extend():
     pors = sorted(f for f in files if re.match(r"por-(consort|maid)-", f) and f not in out)
     # the player's own pictures first: consort faces in consort dress (t5–t8 above the measured t1–t4) and lãnh cung; "--all" adds cung nữ dress,
     # origin pictures (kc/ngheo) and the maid identities
-    if "--all" not in sys.argv: pors = [f for f in pors if re.match(r"por-consort-c\d+-t([5-8]|cold)-a\d+\.webp$", f)]
+    # "--more": also her own other dresses as a consort face — cung nữ dress (tm0–tm4: she starts as a maid) and the origin pictures (kc / ngheo)
+    if "--all" not in sys.argv:
+        pat = r"por-consort-c\d+-(t([5-8]|cold|m[0-4])|kc|ngheo)-a\d+\.webp$" if "--more" in sys.argv else r"por-consort-c\d+-t([5-8]|cold)-a\d+\.webp$"
+        pors = [f for f in pors if re.match(pat, f)]
     only = sys.argv[sys.argv.index("--only") + 1] if "--only" in sys.argv else None
     if only: pors = [f for f in pors if only in f]
     keys0 = [k for k in out if k.startswith("por-")]   # measured portraits (snapshot: the pool threads must not read `out` while it grows)
