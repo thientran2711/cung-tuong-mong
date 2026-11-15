@@ -38,7 +38,7 @@ const blob=(rev,f)=>execFileSync('git',['cat-file','blob',rev+':'+f],{cwd:__dirn
     const fi=figs.map(im=>{const r=R(im);const fb=(window.__KITFB||{})[im.getAttribute('src')];const v=fb&&fb.v||{t:0,b:1};return{top:r.top+v.t*r.height,bot:r.top+v.b*r.height}});
     const btns=op?[...op.children].filter(x=>x.offsetParent):[];const lastB=btns.length?Math.max(...btns.map(x=>R(x).bottom)):0;const dr=R(d);
     const txt=(M.querySelector('#mb').innerText||'');const plainTC=[...M.querySelectorAll('#mb *')].filter(e=>!e.closest('.krr')&&[...e.childNodes].some(n=>n.nodeType===3&&/thiện cảm/i.test(n.textContent))).map(e=>e.textContent.trim().slice(0,50));
-    const o={t:String(m.t).replace(/<[^>]+>/g,'').slice(0,48),src:m.__src,bsrc:((ban&&ban.querySelector('img')||{}).getAttribute?ban.querySelector('img').getAttribute('src'):'').replace(/^.*\//,''),kdper:d.classList.contains('kdper'),people:figs.length,banner:ban?(C?R(ban).left>=C.right-1:false):null,
+    const o={t:String(m.t).replace(/<[^>]+>/g,'').slice(0,48),src:m.__src,bsrc:((ban&&ban.querySelector('img')||{}).getAttribute?ban.querySelector('img').getAttribute('src'):'').split('/').pop(),kdper:d.classList.contains('kdper'),people:figs.length,banner:ban?(C?R(ban).left>=C.right-1:false):null,
      chipAbove:fi.length?fi.every(f=>capB<=f.top+2):null,fill:fi.length&&C?+((fi[0].bot-fi[0].top)/(C.bottom-capB)).toFixed(2):null,dlgH:Math.round(dr.height),vh:innerHeight,
      emptyUnder:btns.length?Math.round(dr.bottom-lastB):null,nOpt:btns.length,plainTC};
     return o}`);

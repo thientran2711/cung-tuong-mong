@@ -58,7 +58,7 @@ Main (f500d0464) was already merged; nothing new on main. fix-float kitRelDelta 
   NOT done (rule 5): "Thái hậu → ta: thiện cảm +3" in option rows = NAMES.th; becomes kitRelDelta when fix-float lands on main.
 - 2 place card head (KIT 32.8b, jplace `kitPlaceHost`): picture band + silhouettes kept; under it head portrait LEFT (relPerson: unmet =
   grey silhouette, name stays) with kitNameRank above, info box RIGHT; no Thôi (32.10 already hides it). All 4 place-card builders.
-- 3 Ân oán (KIT 43.2b, jhc): each picker = kit sub-tabs (Ta · Chí tôn · Phi tần + counts) + the Hậu cung strip of that group only;
+- 3 Ân oán (KIT 49.2b, jhc): each picker = kit sub-tabs (Ta · Chí tôn · Phi tần + counts) + the Hậu cung strip of that group only;
   `.kpinline` keeps a picker's tab row out of the pane bar (jpane free()). Act cards: no own picture → no picture anywhere (jk4 wrapper
   on kitActArt / kpActArt, `.kanoart` global).
 - 4b overlays (jk4 + j5): the j5 lesson panel's #mgskip stayed "not hidden" inside the hidden panel and its used "Xong" (#mgok, old
@@ -135,3 +135,12 @@ img/fig-eunuch-ndp-tray.webp (committed in git on review/shop-fix; not on the CD
   figure ok; kit-page 0 bad.
 - Not this batch / left for the worker: kitEventDp 1a (empty space under 2 short options, 125–340 px at 1180x820), wording "mếch lòng" in chips
   (KIT_REQUESTS kitRelDelta), Sổ ghi old lines "Sủng nàng ta 43 → 46" (stored text, not a fact row).
+- r6 part 2: merged origin/main 94ea008a2 (stage-slots + opt-render §53). Conflicts: KIT.md (§48–50 kept + §53 kept; §49 subsections renamed
+  43.x → 49.x; §47 sample list names §48/§49.1), jkitpage.js (both sample blocks kept, page = 10 samples), built files rebuilt.
+  4. Stat-only sentence ("Danh -1.", "Kho lúa -8, nhà X thế lực -6.") now stays on the row of the fact it belongs to (kpSentences), and no
+     stray "," between two chips (kpFactRow). Re-tested on the merged build: news-face-real 14/14, rv 5 sizes fixture + old save 0 bad, kit-page
+     5 sizes 0 bad, opt-render fails [] , opt-scan unclassified 0, 0 page errors.
+- r6 part 3: merged origin/main afb2676a2 (header-danh, act-pics2, gift-ui r6): only built files conflicted (rebuilt). Re-test: news-face-real 12/12, rv fixture + old save 5 sizes 0 bad, kit-page 0 bad, 0 page errors.
+- NOTE for the coordinator: during this review some other session switched /home/user/wt/kit-fig2-r6 to branch review/kit-fig2 and edited
+  j5/jhc/jk4/jplace/KIT.md/news-face-real.js there (uncommitted, 12:25Z). The reviewer's commit 00c72e4e4 therefore also sits on the LOCAL
+  review/kit-fig2 ref of that worktree. Review work continued in /home/user/wt/kf2r6.

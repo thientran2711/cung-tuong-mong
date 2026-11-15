@@ -187,7 +187,7 @@ function wkBookData(){const s=S.wkSnap||wkSnap();const n=Math.max(0,Math.min(S.l
   const html=String(h).replace(/<span class="ld">[^<]*<\/span>/,"").replace(/\s*\(Đã ghi vào mục Đã biết[^)]*\)\.?/g,"");let last=null;
   for(let t of kpSentences(html)){const tp=kpPlain(t);if(!tp||SKIPRE.test(tp)||/^\(?Đã ghi vào mục Đã biết/.test(tp))continue;
    if(/^(Tháng này|Tin triều đình|Triều đình|Thiên hạ)\s*:/.test(tp)){t=t.replace(/^((?:<[^>]+>)*)\s*(Tháng này|Tin triều đình|Triều đình|Thiên hạ)\s*:\s*/,"$1");world.push(t);last="world";continue}
-   if(KBK_DELTA_ONLY.test(tp)&&last){const tgt=last==="world"?world:last===S?me:(by.get(last)||{}).F;if(tgt&&tgt.length){tgt[tgt.length-1]+=" "+t;continue}}
+   if((KBK_DELTA_ONLY.test(tp)||!kbkMeaning(tp))&&last){const tgt=last==="world"?world:last===S?me:(by.get(last)||{}).F;if(tgt&&tgt.length){tgt[tgt.length-1]+=" "+t;continue}}
    const [,w0]=kpPeopleIn(t,people);const w=w0.map(x=>x&&x.kind==="th"&&!rivals.includes(x)?TH:x);let p=w.find(x=>x!==S&&!(S.emp&&x===S.emp))||w[0]||null;
    if(!p&&last&&last!=="world"&&!/^(Được mùa|Mất mùa|Sớ|Kho)/.test(tp))p=last;
    if(!p&&(last==="world"&&/^(Nhà |Kho |.*thế lực)/.test(tp)||KBK_WORLD.test(tp))){world.push(t);last="world";continue}
@@ -250,19 +250,29 @@ function kbkKeySrc(key,salt,t,html){key=String(key||"");if(!key)return[];
  if(key.startsWith("ev:")){const c=key.slice(3);const C=EVART&&EVART.categories&&EVART.categories[c];return C&&C.files?C.files.slice():[]}
  if(key.startsWith("scene:")){const sc=key.slice(6);const cur=typeof SCIMG==="object"&&SCIMG[sc];return cur?[`img/${cur}.webp`]:[]}
  return [`img/act-${key}.webp`]}
-function kbkCands(f,ctx,salt){const html=String(f.text||"");const t=kpPlain(html).replace(/[\s\u00a0]+/g," ").trim();const C=[];const add=a=>{for(const x of [].concat(a||[]))if(x&&!C.includes(x))C.push(x)};
+/* review/act-pics2 (owner 11/15: every meaning its own picture): ACTS.json "log" = every meaning rule of dev/figwork/acts/meanings.py, compiled once;
+   key "-" = a sentence with no meaning of its own (a reaction, a result, a number, a UI word): it joins the line of the sentence before it */
+let KBK_RC=null,KBK_RCsrc=null;
+function kbkRules(){const R=(typeof KIT_ACTS!=="undefined"&&KIT_ACTS.log)||[];if(R!==KBK_RCsrc){KBK_RCsrc=R;KBK_RC=[];for(const [re,key] of R){try{KBK_RC.push([new RegExp(re,"i"),key])}catch(e){}}}return KBK_RC}
+function kbkFirst(html){let s=html;try{const L=kpSentences(String(html||""));if(L.length)s=L[0]}catch(e){}return kpPlain(s).replace(/[\s\u00a0]+/g," ").trim()}
+function kbkMeaning(t){t=String(t||"").replace(/[\s\u00a0]+/g," ").trim();for(const [re,key] of kbkRules())if(re.test(t))return key==="-"?"":key;
+ if(/^Đến /.test(t))return"place";const head=t.split(/[.:·([]/)[0].trim();try{if(head.length>=3&&typeof kitActKey==="function"&&kitActKey(head))return"act"}catch(e){}
+ return kbkRules().length?"":"?"}
+function kbkCands(f,ctx,salt){const html=String(f.text||"");const t=kbkFirst(html);const C=[];const add=a=>{for(const x of [].concat(a||[]))if(x&&!C.includes(x))C.push(x)};
  const head=t.split(/[.:·([]/)[0].trim();
  const R=(typeof KIT_ACTS!=="undefined"&&KIT_ACTS.log)||[];
- for(const [re,key] of R){let ok=false;try{ok=new RegExp(re,"i").test(t)}catch(e){}if(ok){add(kbkKeySrc(key,salt,t,html));break}}
+ for(const [re,key] of kbkRules()){if(re.test(t)){if(key==="-")return[];add(kbkKeySrc(key,salt,t,html));break}}  /* "-" = a line with no meaning: no picture */
  if(/^Đến /.test(t))add(kbkPlaceArt(t,html));
  let ak="";try{ak=head.length>=3&&typeof kitActKey==="function"?kitActKey(head):""}catch(e){}if(ak)add(`img/act-${ak}.webp`);
  for(const [re,id] of KBK_EVRE)if(re.test(t)){add(kbkEvFiles(id,salt));break}
  try{const cat=kitActCat(head||t);if(((KIT_ACTS||{}).have||[]).includes("act-cat-"+cat))add(`img/act-cat-${cat}.webp`)}catch(e){}
- add(kbkEvFiles(kbkEvId(t,ctx),salt));
+ /* the page default only on the Emperor's / Thái hậu's own pages (a picture of that person); her lines, other people's and the world's get
+    NO picture rather than the same "Có người đến" room on every line (act-pics2 a467 / owner: one meaning = one picture) */
+ if(!C.length&&(ctx==="emp"||ctx==="th"))add(kbkEvFiles(kbkEvId(t,ctx),salt));
  return C}
 /* a picture made for this very line (ACTS.json log rule or act name), "" when only a general one would fit */
-function kbkSpecific(t){t=kpPlain(t).replace(/[\s\u00a0]+/g," ").trim();const R=(typeof KIT_ACTS!=="undefined"&&KIT_ACTS.log)||[];
- for(const [re,key] of R){let ok=false;try{ok=new RegExp(re,"i").test(t)}catch(e){}if(ok)return kbkKeySrc(key,"",t,"")[0]||""}
+function kbkSpecific(t){t=kbkFirst(t);const R=(typeof KIT_ACTS!=="undefined"&&KIT_ACTS.log)||[];
+ for(const [re,key] of kbkRules()){if(re.test(t))return key==="-"?"":(kbkKeySrc(key,"",t,"")[0]||"")}
  const head=t.split(/[.:·([]/)[0].trim();let ak="";try{ak=head.length>=3&&typeof kitActKey==="function"?kitActKey(head):""}catch(e){}return ak?`img/act-${ak}.webp`:""}
 function kbkArtLabel(src){const m=/img\/ev-([a-z-]+?)(?:-\d+)?\.webp/.exec(src||"");if(m&&EVART&&EVART.categories){for(const c in EVART.categories)if((EVART.categories[c].files||[]).includes(src))return EVART.categories[c].title||""}
  const a=/img\/act-cat-([a-z-]+)\.webp/.exec(src||"");if(a&&typeof KIT_CAT!=="undefined"&&KIT_CAT[a[1]])return KIT_CAT[a[1]][0];return""}
