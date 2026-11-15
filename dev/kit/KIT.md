@@ -1104,6 +1104,7 @@ Plaques: `--k3pl` = `rgba(255,250,240,.88)`, `1px --line`, radius 8, text ≥ .7
   EXTENSION (jstory, owner 17:06Z): a module adds a state chip by pushing its key to `window.K3_STATE` and appending a
   `#hud2 .hc.hot[data-hx=key]` button (label + `<b>value</b>`); jk3 draws it in the top-bar state row (`#k3tt`) like the others.
   Used by the story deadline chip `pl67` "Hạn: <việc> <còn N buổi/ngày>" (tap = that story choice again).
+  Label and value are spaced by `.k3tt .k3r>.k3l+b` (jk4, review r6: "truy sát4 buổi" ran together). Kit page sample `§31.2` (jstory).
 - RIGHT column: Hoàng thượng (mood) · Thái hậu · Hoàng hậu (`với ngươi ±N` green/red, mood only when known: no "chưa rõ" filler) · her servant
   (`Lòng N`) — tap = that person's card. Servant road: + Hoàng thượng để ý, Lương tháng, Công lao.
 - ÂN SỦNG plaque (owner 11/15 04:05Z, review/sub-odds; `k3AnSung` / `k3AsRows`, jk3) right UNDER the court chips, same solid plaque card and

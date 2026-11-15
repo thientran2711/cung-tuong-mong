@@ -92,13 +92,13 @@ function evbDedup(m){try{if(!m||!m.opts||m.opts.length<2||typeof kitHint!=="func
   const dup=()=>{const c={};T.forEach(x=>c[x]=(c[x]||0)+1);return T.map(x=>c[x]>1)};
   if(dup().some(Boolean))g.forEach((i,j)=>{if(!dup()[j]||/thành|khó đoán/.test(T[j]))return;const ch=evbChance(O[i]);if(ch)T[j]+=`; ${ch}`});
   /* best / worst are named WITHIN each set of options that still read the same (not the whole group: an option already told apart
-     may hold the group's extreme, review r6) */
+     may hold the group's extreme; 'hơn cả' only when the set is the whole dialog, else 'nhỉnh hơn / kém hơn', review r6) */
   const clus=()=>{const c={};T.forEach((x,j)=>(c[x]=c[x]||[]).push(j));return Object.values(c).filter(L=>L.length>1)};
   if(dup().some(Boolean)){const G=g.map(i=>evbGain(O[i]));for(const C of clus()){const V=C.map(j=>G[j]);const hi=Math.max(...V),lo=Math.min(...V);
-   if(hi>lo)C.forEach(j=>{if(G[j]===hi)T[j]+="; lợi lớn hơn cả";else if(G[j]===lo)T[j]+="; lợi ít hơn cả"})}}
+   const all=C.length===O.length;if(hi>lo)C.forEach(j=>{if(G[j]===hi)T[j]+=all?"; lợi lớn hơn cả":"; lợi nhỉnh hơn";else if(G[j]===lo)T[j]+=all?"; lợi ít hơn cả":"; lợi kém hơn"})}}
   /* same words still: the option's own chance number (option data `od`: night talk fit, contest odds), best and worst named */
   if(dup().some(Boolean)){const D=g.map(i=>O[i]&&typeof O[i].od==="number"?O[i].od:null);for(const C of clus()){const L=C.map(j=>D[j]).filter(x=>x!=null);
-   if(L.length>1&&Math.max(...L)>Math.min(...L)){const hi=Math.max(...L),lo=Math.min(...L);C.forEach(j=>{if(D[j]==null)return;if(D[j]===hi)T[j]+="; cơ may cao hơn cả";else if(D[j]===lo)T[j]+="; cơ may thấp hơn cả"})}}}
+   if(L.length>1&&Math.max(...L)>Math.min(...L)){const hi=Math.max(...L),lo=Math.min(...L);const all=C.length===O.length;C.forEach(j=>{if(D[j]==null)return;if(D[j]===hi)T[j]+=all?"; cơ may cao hơn cả":"; cơ may nhỉnh hơn";else if(D[j]===lo)T[j]+=all?"; cơ may thấp hơn cả":"; cơ may kém hơn"})}}}
   if(T.every((x,j)=>x===raw[g[j]].hint))continue;
   g.forEach((i,j)=>{const t=T[j];if(!t)return;
    const o=O[i],risk=raw[i].risk,l0=lv;o.hint=l=>l===l0?t:(()=>{const c=Object.assign({},o);delete c.hint;delete c.risk;return kitHint(c,m,l).hint})();o.risk=risk;o.__dhA=1;fixed++})}
