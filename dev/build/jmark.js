@@ -5,7 +5,7 @@
    Never on anyone else (kitMeMark refuses a figure that is not marked as hers).
    EIGHT markers, one per rank 0→7 (owner 11/15): img/kit/me-mark-<r>.webp (gpt-2-6, transparent, no tassel), growing in grandeur:
    0 ivory plum blossom · 1 silver orchid + green jade · 2 silver flower + aquamarine · 3 jade lotus bud (Tần) · 4 amethyst chrysanthemum + luan ·
-   5 ruby peony · 6 amber phoenix wing · 7 gold phoenix on a jade cloud (Hoàng hậu). Size factor KIT_MEMARK.sc[r].
+   5 ruby peony · 6 gold phoenix on a jade cloud · 7 amber-gold phoenix with spread wings (Hoàng hậu; owner 11/15 swap). Size factor KIT_MEMARK.sc[r].
    ONE PLACEMENT RULE: marker bottom = TOP OF HER HEAD (first opaque row of the figure art, hair ornaments included) − gap, gap = KIT_MEMARK.gap ×
    her drawn figure height (same fraction for every figure, size and screen). Never covers the head; when there is not enough room above the head
    (dialogs, the scene title) the marker SHRINKS instead (down to KIT_MEMARK.tiny px).
@@ -13,8 +13,8 @@
    ITEMS: markers are owned items (S.meMarks = ranks owned; S.meMark = the one she shows, null = highest owned). Every promotion gives that rank's
    marker (shown in the rank chest of review/gift-chest — jrankset rsChest/kitReward kind "chest" — via the hook below); old saves get every rank
    up to the current one on load. Tư trang has a "Dấu ấn" tab; tapping a marker → "Dùng" switches to it (any owned one, older ones too). ===== */
-window.KIT_MEMARK=window.KIT_MEMARK||{h:.085,gap:.012,min:26,max:72,tiny:12,sc:[.78,.84,.9,.95,1,1.06,1.12,1.3]};
-const KMM_NAMES=["Mai ngà","Lan bạc ngọc bích","Hoa bạc ngọc lam","Búp sen ngọc","Cúc tím chim loan","Mẫu đơn hồng ngọc","Cánh phượng hổ phách","Phượng vàng mây ngọc"];
+window.KIT_MEMARK=window.KIT_MEMARK||{h:.085,gap:.012,min:26,max:72,tiny:12,sc:[.78,.84,.9,.95,1,1.06,1.14,1.22]};
+const KMM_NAMES=["Mai ngà","Lan bạc ngọc bích","Hoa bạc ngọc lam","Búp sen ngọc","Cúc tím chim loan","Mẫu đơn hồng ngọc","Phượng vàng mây ngọc","Cánh phượng hổ phách"];
 /* ---------- owned markers (save data) ---------- */
 function kmmRankNow(){try{if(!S||S.out)return null;if(typeof isSrv==="function"&&isSrv())return null;return Math.max(0,Math.min(7,S.rank|0))}catch(e){return null}}
 function kmmOwned(){try{if(!S)return[];const r=kmmRankNow();if(!Array.isArray(S.meMarks)){S.meMarks=[];if(r!=null)for(let i=0;i<=r;i++)S.meMarks.push(i)}

@@ -311,11 +311,11 @@ function kitCourtChips(){try{const c=$("kcchips");if(c)c.remove();const box=$("k
    C: (1) the portrait is cut tighter: the por picture is 1.14x the window, raised 5 % of its height, clipped to the window (head near the top
    edge, person larger); (2) every rank/role has its own crest on the top bar (img/kit/crest-<key>.webp, gpt-2-6, one style reference: the
    approved Hoàng hậu frame), smaller for low ranks; Hoàng hậu, Hoàng thượng, Thái hậu and Thái tử keep the crest painted in their frame. ---------- */
-window.KIT_CREST={ar:{"consort-1":.337,"consort-2":.538,"consort-3":.506,"consort-4":.569,"consort-5":.554,"maid-0":.483,"maid-1":.467,"maid-2":.521,"maid-3":.481,"maid-4":.479,"mama-0":.263,"mama-1":.283,"mama-2":.317,"mama-3":.423,"mama-4":.419,"eunuch":.283,"unknown":.254},
+window.KIT_CREST={ar:{"consort-0":.329,"consort-1":.337,"consort-2":.538,"consort-3":.506,"consort-4":.569,"consort-5":.554,"maid-0":.483,"maid-1":.467,"maid-2":.521,"maid-3":.481,"maid-4":.479,"mama-0":.263,"mama-1":.283,"mama-2":.317,"mama-3":.423,"mama-4":.419,"eunuch":.283,"unknown":.254},
  /* owner 11/15 04:20Z + 05:45Z ("còn nguyên chỗ hở", "mấy góc trên rối"): every crest's SOLID base (measured: the lowest row ≥ 25 % of its
     widest row) sits 6 canvas units BELOW the bar line, overlapping the frame top like a real crown piece; widths of consort-2..5 stay clear of
     the frame's own corner ornaments (x 115–435) so crest and corners never pile up */
- base:{"consort-1":.95,"consort-2":.667,"consort-3":.577,"consort-4":.637,"consort-5":.627,"maid-0":.96,"maid-1":.96,"maid-2":.86,"maid-3":.93,"maid-4":.72,"mama-0":.89,"mama-1":.9,"mama-2":.81,"mama-3":.8,"mama-4":.75,"eunuch":.9,"unknown":.97},
+ base:{"consort-0":.95,"consort-1":.95,"consort-2":.667,"consort-3":.577,"consort-4":.637,"consort-5":.627,"maid-0":.96,"maid-1":.96,"maid-2":.86,"maid-3":.93,"maid-4":.72,"mama-0":.89,"mama-1":.9,"mama-2":.81,"mama-3":.8,"mama-4":.75,"eunuch":.9,"unknown":.97},
  w:{"consort-0":300,"consort-1":310,"consort-2":318,"consort-3":322,"consort-4":326,"consort-5":330,"maid-0":190,"maid-1":205,"maid-2":220,"maid-3":235,"maid-4":250,"mama-0":250,"mama-1":266,"mama-2":282,"mama-3":298,"mama-4":314,"eunuch":280,"unknown":300},W:380,
  /* y of the line the crest stands on (canvas units): the frame's top bar; maids: the top of the silk bow painted on their frame */
  bar:{"consort-0":191,"consort-1":189,"consort-2":187,"consort-3":186,"consort-4":182,"consort-5":175,"maid":150,"mama":150,"eunuch":172,"unknown":171},BAR:172,
