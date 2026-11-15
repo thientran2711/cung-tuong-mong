@@ -543,3 +543,8 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - Do NOT redraw a picture just to show hands. Existing whole-figure back views and silhouettes are fine.
 - The ONLY hard rule: no visible face of any character (a face makes the player think it is a specific person).
 - Background light: DARK background = scheming, plotting, negative acts; LIGHT background = normal acts.
+
+## 15/11 ~18:45Z — Placeholder pictures for missing art (owner)
+- Draw 4 generic palace-intrigue pictures used whenever an EVENT or an ACT has no picture of its own: event-light, event-dark, act-light, act-dark.
+- Light/dark = tone (positive vs negative/scheming), NOT time of day.
+- Purpose: when the owner sees one of these in play she knows that event/act still lacks its own picture and can report it; the coordinator can also list every event/act that falls back to them (easy to find as the game grows).
