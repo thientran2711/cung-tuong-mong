@@ -12848,8 +12848,9 @@ function kbkCands(f,ctx,salt){const html=String(f.text||"");const t=kbkFirst(htm
  for(const [re,key] of kbkRules()){if(re.test(t)){if(key==="-")return[];add(kbkKeySrc(key,salt,t,html));break}}  /* "-" = a line with no meaning: no picture */
  if(/^Đến /.test(t))add(kbkPlaceArt(t,html));
  let ak="";try{ak=head.length>=3&&typeof kitActKey==="function"?kitActKey(head):""}catch(e){}if(ak)add(`https://ctm-img.victoria-tntt.workers.dev/img/act-${ak}.webp`);
- for(const [re,id] of KBK_EVRE)if(re.test(t)){add(kbkEvFiles(id,salt));break}
- try{const cat=kitActCat(head||t);if(((KIT_ACTS||{}).have||[]).includes("act-cat-"+cat))add(`https://ctm-img.victoria-tntt.workers.dev/img/act-cat-${cat}.webp`)}catch(e){}
+ /* Tổng lược, every page (act-pics2 a467; owner 14:15Z "no picture rather than a repeated one", 14:30Z group pictures banned; reviewer r7
+    widened it from "Việc của ngươi" to other people's pages and Triều đình · thiên hạ, LUẬT SỬA CẢ NHÓM): a line shows ONLY a picture made
+    for it (ACTS log rule, its place, its act name); no match → NO picture, never an event-group (KBK_EVRE) or act-category stand-in */
  /* the page default only on the Emperor's / Thái hậu's own pages (a picture of that person); her lines, other people's and the world's get
     NO picture rather than the same "Có người đến" room on every line (act-pics2 a467 / owner: one meaning = one picture) */
  if(!C.length&&(ctx==="emp"||ctx==="th"))add(kbkEvFiles(kbkEvId(t,ctx),salt));
@@ -22041,6 +22042,15 @@ const st=document.createElement("style");st.id="kit-ht";st.textContent=`
 .kht .ph>span{min-width:0;overflow-wrap:anywhere}
 `;document.head.appendChild(st);
 })();
+/* coordinator 15/11: more "man" faces for the princess suitors (jht ctFace reads img/FIGURES-congtu.json, never the men pool).
+   FIGURES-congtu.json now also holds quytu-1..9 (4 age bands each) and bacdich-1. jht keeps CTIX / ctFace private, so this works through
+   the state its closure reads: the Bắc Địch prince (j54 hW, house "Bắc Địch") gets cf "bacdich-1" preset (ctFace keeps a preset cf).
+   bacdich-1 is his alone: while an ordinary suitor picks a face, a stand-in pool entry holding "bacdich-1" makes ctFace treat it as live
+   (ctFace's fallback takes any face not live once S.ctUsed has seen them all; reviewer r7: 15 of 40 churn rounds gave it to a suitor). */
+(function(){if(typeof window.h54Face!=="function")return;const h0=window.h54Face,BD="bacdich-1";
+ window.h54Face=h54Face=function(s){let P=null,hold=null;try{if(s&&s.house==="Bắc Địch"){if(s.cf!==BD)s.cf=BD}
+   else if(s&&S&&typeof h54Pool==="function"){if(s.cf===BD)delete s.cf;if(!s.cf){P=h54Pool();hold={cf:BD};P.push(hold)}}}catch(e){}
+  try{return h0.apply(this,arguments)}finally{if(P&&hold){const i=P.indexOf(hold);if(i>=0)P.splice(i,1)}}}})();
 /* ================= jload: NHẬP CUNG LẦN ĐẦU — thỉnh tranh vẽ, tiếng nhạc về máy (owner 11/14) — KIT.md section 35 =================
    assets.json (dev/site/assets.py, built by build_site.sh) lists every image + sound as [path, sha256/16, bytes, group].
    The long-lived cache 'ctm-assets' holds them keyed by content ('<path>?h=<hash>'); sw.js serves it and never wipes it on a build.
@@ -24096,7 +24106,7 @@ if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§28.13e",title:"Pick 
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="98d7f31ec12c";window.CTM_BUILD=BUILD;
+const BUILD="305bed60f2a5";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

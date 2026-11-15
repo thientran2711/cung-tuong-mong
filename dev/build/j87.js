@@ -264,10 +264,9 @@ function kbkCands(f,ctx,salt){const html=String(f.text||"");const t=kbkFirst(htm
  for(const [re,key] of kbkRules()){if(re.test(t)){if(key==="-")return[];add(kbkKeySrc(key,salt,t,html));break}}  /* "-" = a line with no meaning: no picture */
  if(/^Đến /.test(t))add(kbkPlaceArt(t,html));
  let ak="";try{ak=head.length>=3&&typeof kitActKey==="function"?kitActKey(head):""}catch(e){}if(ak)add(`img/act-${ak}.webp`);
- /* Tổng lược "Việc của ngươi" (ctx "me", act-pics2 a467 / owner 16:50Z: one meaning = one picture): her line shows ONLY a picture made for it
-    (ACTS log rule, its place, its act name); no ACTS match → NO picture, never an event-group or act-category stand-in */
- if(ctx!=="me"){for(const [re,id] of KBK_EVRE)if(re.test(t)){add(kbkEvFiles(id,salt));break}
-  try{const cat=kitActCat(head||t);if(((KIT_ACTS||{}).have||[]).includes("act-cat-"+cat))add(`img/act-cat-${cat}.webp`)}catch(e){}}
+ /* Tổng lược, every page (act-pics2 a467; owner 14:15Z "no picture rather than a repeated one", 14:30Z group pictures banned; reviewer r7
+    widened it from "Việc của ngươi" to other people's pages and Triều đình · thiên hạ, LUẬT SỬA CẢ NHÓM): a line shows ONLY a picture made
+    for it (ACTS log rule, its place, its act name); no match → NO picture, never an event-group (KBK_EVRE) or act-category stand-in */
  /* the page default only on the Emperor's / Thái hậu's own pages (a picture of that person); her lines, other people's and the world's get
     NO picture rather than the same "Có người đến" room on every line (act-pics2 a467 / owner: one meaning = one picture) */
  if(!C.length&&(ctx==="emp"||ctx==="th"))add(kbkEvFiles(kbkEvId(t,ctx),salt));

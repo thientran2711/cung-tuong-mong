@@ -182,3 +182,19 @@ Notes: `cdn_sync.py --pull` does NOT refresh img/_index.json reliably (stale loc
 ### Step 5 STARTED: remaining act pictures (hands-only, -h names)
 - Queue = `python3 dev/figwork/acts/prompts2.py --todo 400` (284 before this batch) = the held keys of mergepatch. Write an English hands-only scene per key in hscenes.txt (Vietnamese scene in meanings.py), `hprompt.py 8`, generate gpt-2-6 3:4 with the style ref it names, `hfetch.py`, sheet-check, cdn_sync, then rerun mergepatch.py (with tmp corpus) to wire them live.
 - Batch 1 (8) on the CDN and wired live: van-dong-do-dau chai-chuot-nhan-sac nghi-lay-suc o-yen-nghi tinh-duong ngu-som o-cung-giu-am ban-thuong. Live ACTS: log 554 -> 562, keys 529 -> 537, 0 missing, corpus: 0 picture lines lost (1 line None -> ban-thuong-h). 276 left.
+
+## Review r7 (reviewer, 15/11 late): branch @50ebc3e40a merged onto origin/main 31907911d as review/act-pics2-r7
+- Merge: one conflict, dev/build/assemble.py = main's module list + jct2.js after jht.js. Site rebuilt (build_site.sh), served from the root build.
+- Data (LIVE CDN, curl -A ctm): ACTS.json acts 301 / prefix 10 / log 562 / 537 distinct keys, 0 missing in the live _index (verify_acts.py).
+  FIGURES-congtu.json: 20 identities, all files on the CDN; quytu-1..9 + bacdich-1 have 4 age bands, congtu-1..10 only a18 + a26 (not "20 x 4").
+- 23 act pictures looked at (12 step-1 -h, 8 batch-1 -h, khao-hach-tan-phong, doat-giai, nguoi-khac-doat-giai): every -h shows hands/objects only, no face.
+- FIX jct2.js: ctFace's fallback (after S.ctUsed has seen every face) takes ANY face not live, bacdich-1 included, so ordinary suitors got the
+  prince's face (churn test: 15 of 40 rounds; the live main build gives it out too). Now a stand-in pool entry holding bacdich-1 is pushed
+  while an ordinary suitor picks (removed in finally), and an ordinary suitor already holding bacdich-1 (old save) picks again. After: 0 of 40.
+  dev/test/suitor-faces.js gained the churn + stranger-silhouette checks.
+- FIX j87 kbkCands: the "no event-group / act-category stand-in" rule only covered ctx "me"; other people's pages ("p") and Triều đình · thiên
+  hạ ("world") still showed group pictures (513 act-category + 186 event-group lines of 1511). Rule now covers every Tổng lược page (owner 14:15Z /
+  14:30Z, LUẬT SỬA CẢ NHÓM); the Emperor's / Thái hậu's page default (main ad94afe4e) unchanged. a467-me-art.js reports me/p/world/emp and fails
+  on any stand-in in me/p/world. Corpus 1511 lines: me/p/world each 670 own, 841 none, 0 stand-ins.
+- a467-book-shots.js: added window.__bot (the jload first-run download screen covered the book) and a wait for images.
+- Owner decision pending (not changed): doat-giai / nguoi-khac-doat-giai show the Emperor handing out the prize.
