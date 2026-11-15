@@ -62,6 +62,15 @@ Nhánh `review/page-curl` từ origin/review/fold-layout (đã gộp tới e7deb
 - `kitCurlSwap.hold(p)` / `.end()` = móc thử (không còn đóng băng rAF toàn trang → trang dưới đo bố cục bình thường).
 - KIT.md §34.0 LUẬT LẬT TRANG (7 điểm) + §27 dòng lật sổ tuần; §34.1 cũ ghi là lịch sử.
 - Thử: `dev/test/sheet-turn.js` → ảnh `dev/shots/page-curl2/<tag>-fwd-{20,45,70}.jpg`, `-back-{60,30}.jpg`.
+- Sếp 01:50Z "cho animation lật trang chậm lại": MỘT hằng số `KIT_TURN_MS` = 1300 ms (cũ: lật tab 760, sổ tuần 680, sách 700),
+  nhịp `kitTurnEase` (nhấc chậm, quay đều, đáp êm dài). Bấm khi đang lật: lượt đang chạy nhảy tới cuối rồi lượt mới chạy (sổ tuần: flush()).
+- Lật tab vẫn chạy khi khung #panel xê dịch vài px giữa hai tab (iPad 1366 lần đầu); chỉ bỏ lật khi đổi bố cục lớn (>40 px / >12 %).
+- KẾT QUẢ THỬ (máy thử load ~20): sheet-turn.js Fold 755x1000@2, iPad 1180x820@2, 1366x1024@2: lật tới/lùi có tờ, 1 #panel, 0 id trùng,
+  không tràn ngang, 0 lỗi trang, bấm nhanh 12 lần không kẹt (0 tờ sót), vuốt trái → Cung nhân / vuốt phải → Hậu cung, nút tab lật được,
+  Cảnh động tắt = 0 tờ. page-curl.js (sổ tuần) Fold 755: nguyên tờ, lật lùi, kéo tay, giảm chuyển động = không tờ, 0 lỗi.
+- Không sửa mã lưu/nạp (sổ cũ không bị đụng).
+- DỪNG (SẴN SÀNG KIỂM). Còn lại nếu sếp muốn: trên Fold (một trang) mặt sau tờ chỉ thấy thoáng qua vì nửa sau đi ra ngoài mép trái màn hình
+  (trục gáy = mép trái trang); iPad thấy rõ mặt sau đáp lên trang tranh.
 
 ## Kiểm thử (Playwright)
 - page-curl: 1180x820@2, 1366x1024@2, 686x880@2.2, 755x1000@2 — không lỗi trang, không tràn ngang, giảm chuyển động = không cong (mờ chéo).
