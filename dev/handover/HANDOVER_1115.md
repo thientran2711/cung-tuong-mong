@@ -129,3 +129,4 @@ Nhắc theo dõi: send_later 30 phút, tự đặt lại mỗi lượt (lịch l
 - [ ] Thẻ cuối kiếp: hình nhân vật nhỏ (phải cao gần hết cột), các ô viền tự làm không theo kit, tên dưới chân → giao rank-ui (dùng hộp thoại có người + hàng kit).
 - [x] LIVE 14967f899 (09:05Z): cdn-images + thinhan-art — game đọc mọi ảnh từ Cloudflare, img/ rời khỏi git (hoa điền nhỏ, hết nốt ruồi, mặt Thái hậu mới, nền đã chỉnh màu, vá alpha đợt 1, 103 tranh việc mới).
 - [x] LIVE d69030384 (09:45Z): sub-odds — cơ may chi tiết, "Vì sao", chip quý ta.
+- [ ] (10:25Z) Hệ thống chăm thú (lớn dần + màn thú ảo) giao cho thợ kinh tế làm sau econ (review/pet-care) vì đã đủ 20 thợ chạy cùng lúc.
