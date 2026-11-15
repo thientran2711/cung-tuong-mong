@@ -101,3 +101,4 @@ j72 bước vs Hồi · stage paper halo · Thái hậu title bronze vs plum · 
 | C40 | review/actcard-small (owner OVERRIDE: keep big + small cards; small card picture square → portrait rectangle 3:4; equal sizes per grid; tap picture → big + info; odds label or "!" → why-detail) | QUEUED-NEXT |
 | C41 | review/tuduc-mg (owner s8: Tứ đức minigames missing → 4 games Công/Dung/Ngôn/Hạnh, easy rules) | QUEUED-NEXT |
 | C42 | review/evidence-truth (owner s8: evidence only for real deeds; clean player safe; frame scheme separate; news one fact per line) | QUEUED-NEXT (high) |
+| C43 | review/coop-invite-ux (owner s8 'Rồi sao nữa': waiting state, 1-2-3 steps, auto-continue on join) | QUEUED |
