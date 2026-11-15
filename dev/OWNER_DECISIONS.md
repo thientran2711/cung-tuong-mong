@@ -185,3 +185,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (08:20Z) Owner: men's intrusions must not be luck — plan-driven (scheduled meetings/shifts in world state); she sees it only if she is really there at that time; recognition by stats; tai mắt can tip her off in advance.
 - (08:30Z) Coordinator decision for owner's '3–4 people on iPad': allow ~35% overlap on iPad (25% Fold), size by core body width so sleeves don't force the strip; same scale.
 - (08:40Z) Owner: tư tình child → classic 'trích huyết nghiệm thân' blood test (can be tampered by either side; same rules for NPCs). Sent to routes worker.
+- (08:50Z) Owner: in dialogs only the option list scrolls; title/picture/figures/text stay fixed (kit rule for all dialogs).
