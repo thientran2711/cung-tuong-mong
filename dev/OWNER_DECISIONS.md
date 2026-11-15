@@ -404,3 +404,5 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (11:05Z) Tư trang chia 2 tab nhỏ: "Việc" và "Túi đồ" (túi + ô Đang mặc thấy ngay, không phải cuộn).
 - (11:05Z) Bỏ khung "Tin trong cung" đầu buổi (trùng Tuần lục, gây rối). Tin người khác chỉ vào Tuần lục (có dấu tin mới). Việc ảnh hưởng tới nàng vẫn báo ngay bằng thẻ ngắn ghi rõ.
 - (11:05Z) Da mặt một số nhân vật bị dơ/vệt tối → quét toàn bộ, đề xuất làm sạch nhẹ (không vẽ lại mặt).
+- (11:10Z) Linh thú: được có hào quang nhưng VẼ SẴN trong tranh; mỗi thú có tranh Linh thú riêng. Đổi: Kỳ lân lên Ngự tứ, Thiên mã xuống Tuyệt phẩm.
+- [ ] (11:10Z) Người chưa gặp vẫn lộ mặt ở thẻ tin và trang Tuần lục → kit-fig2 quét toàn bộ chỗ vẽ ảnh người.
