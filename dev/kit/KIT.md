@@ -262,9 +262,13 @@ One short sentence of what happened, from the log of this act, rival names with 
 Mất   Đức 30→26 (−4) · Hoàng hậu Liễu Họa Mi: ghét ngươi hơn (thiện cảm −15), ghen +25, oán +20   red, person name in ink
                                                      Xem đầy đủ ở Nhật ký   (link: opens the Nhật ký tab)
 ```
-- Seal follows the outcome FOR HER, not the branch that fired: THÀNH (green) when things went her way; HỎNG (red) when the act
-  failed; BẤT LỢI (red) when the net result is a loss (no gain and a real loss beyond Sức/Bạc, or the log says she was blamed/
-  punished/exposed), e.g. petition "Trình lên Hoàng thượng… trách ngươi gây chuyện", Danh 52→44 → BẤT LỢI. Never THÀNH on a loss.
+- SEAL (owner 11/15, replaces the old "outcome for her" guess): THÀNH / HỎNG come ONLY from the act's own roll (`resultShow(title,
+  before, true|false)`); an act without a roll ("sure", null) gets NO seal and no stamp: the neutral header "KẾT QUẢ" (`.neu`). Never
+  inferred from log words or from how many lines are Được / Mất (a good night stamped "BẤT LỢI · BẠI" because the option was named
+  "Xin tha cho cung nữ bị phạt" and 12 consorts got jealous).
+- KÈM (owner 11/15): other people's feelings — the consorts' ghen / oán — are not her gains or losses: one collapsed line
+  "Kèm: 12 phi tần ghen thêm 8" (`.kakem`, ranges as "3–8"), a tap opens the names; a person she has not met is "người chưa quen".
+  Their liking FOR HER (quý ngươi hơn / ghét ngươi hơn) and evidence stay in Được / Mất.
 - Values are the REAL changes (snapshot before → now), never the option preview: no ranges, no "có thể", no repeated price line.
 - One group per person; the two-way relation is ONE plain phrase (her feeling toward you; yours only if hers did not move);
   "Hoàng hậu với ngươi" merges into the queen's group. Lines with "→" lists, "thành:/kèm:" previews are never used as the sentence;
@@ -702,6 +706,22 @@ so stage blocks may stand beside a head or between figures, never over the paint
 ### 28.6 OPTION MODE "cost" (hidden outcomes for EVENT choices)
 - Event choices (weekly events j68, Mệnh truyện chapters j67, side events, dilemmas) show ONLY the cost: the Tốn row with Sức / khắc / Bạc
   (`.ka.khideout`); no Được / Mất / Kèm / Ghi chú rows and no odds meter. No cost → "Tốn: không". Conditions (Cần row) stay.
+- Owner 11/15 (confirmed again after a one-hour reversal): event choices stay suspenseful — main story, side stories, festivals, NPC
+  visits, toilette reactions, every event. Normal acts, person-card acts, the shop and gifts keep the full numbers.
+- WORD HINT + RISK TAG (owner 11/15, approved design) — every event option shows, under its Tốn / Cần:
+  · ONE hint line "Gợi ý: …" (`.kr-hint`), words only, no number, built by `kitHintOf` (jk2b) from the option's OWN outcome rows just
+    before they are hidden — i.e. from its real x / j67 text, computed at this moment from the current people, odds and her state — so
+    the hint is TRUE now and changes when the context changes (no fixed answer to memorise). Phrases map the effect (Sủng, Danh, Đức,
+    Ân tình, Bạc, Sức, quý / ghen / oán, chứng cứ, nghi / phạt, con, …) and its sign; a rival's loss listed as her gain reads as the rival's fall.
+  · Clarity by her Tâm cơ / Tai mắt (`BAL.hintMid` 25, `BAL.hintSharp` 45, `BAL.hintMat` 3): below hintMid VAGUE ("có lợi về thể diện,
+    nhưng có cái giá"); from hintMid PLAIN ("người trên hài lòng; nhưng bị lạt lẽo"); from hintSharp or Tai mắt ≥ hintMat SHARP, naming who
+    reacts ("Thái hậu để bụng", "<tên> thất thế", "Hoàng thượng có thể sinh nghi, trách phạt").
+  · A RISK TAG in the option head (`.krisk`): "an toàn" (no odds: cannot fail), "có rủi ro" (any ladder word from Năm ăn năm thua up),
+    "liều" (Liều / Khó). Never the odds word or a percentage.
+  · Hand-written override per option: `hint` (string or fn(level)) and `risk`. Hints may never lie: an override must match the data.
+- After the choice the result card shows the full Được / Mất + why, and the Tuần lục logs the truth.
+- The balance of the hidden outcomes is audited instead (dev/review/event-balance.md). Test: `dev/test/opt-render.js` (every PEND dialog:
+  Tốn or Cần, a hint without digits, a risk tag, no Được / Mất / odds; the same option read at Tâm cơ 5 / 30 / 70 gets vague / plain / sharp).
 - The result card (section 7) is unchanged and shows the true numbers after the choice.
 - ON BY DEFAULT for event choices at the shared builders (`kitIsEventChoice`): every item made by `pushDil` / `pushFront` / `mkP` (it carries
   `pid`/`pp`: j68 weekly events, j67 chapters, side events, j70 dilemmas, j96/j97 story lines, any later module) and every kit choice panel
