@@ -224,3 +224,61 @@ document.addEventListener("click",e=>{if(e.target&&e.target.closest&&e.target.cl
 /* "Cảnh động" off: no sheen / ripple / particles either (OPT.fxon read at every use; the class only stops the CSS sheen) */
 (function(){const sync=()=>{try{document.documentElement.classList.toggle("kf-still",kfStill())}catch(e){}};sync();document.addEventListener("change",e=>{if(e.target&&e.target.id==="o-fx"){sync();if(kfStill()){KFX.ambOn=false;try{KFX.parts.forEach(s=>s.destroy());KFX.parts.length=0}catch(x){}}}},true);
  const st=document.createElement("style");st.textContent=`.kf-still .kbtn{animation:none!important}.kf-still .kftl{transition:none}`;document.head.appendChild(st)})();
+/* ================= kitGain — EVERY item she gains is revealed (owner 11/15, loot-game rule) =================
+   kitGain(entry|key, {from}) → the item rises in the centre with a light burst in its GRADE colour, its painting, name and grade under it,
+   "Nhận"; tap Nhận or anywhere → it flies into the Tư trang tab (sound + light buzz), which glows. Queued with the other motion pieces (kmPush).
+   Handmade works (j83 IT.tp, entry.wk) show their own name (e.g. "Bát chè hạt sen"), their tier word (Thường · Khá · Tinh xảo · Tuyệt phẩm)
+   and their tier painting (j98 itemArt(entry)).
+   WIRING: ONE universal path — after every render (j93 kmDiff), every NEW entry of S.inv that j93 did not already present as a reward
+   (bestow → kitReward chest/tray; a gift from another person → kitReward tray/gift box) goes through kitGain: works from Tài nghệ /
+   lessons / mini-games (cooking, embroidery, painting, calligraphy, music…), purchases, finds, stories, anything else. So no call site
+   can add an item silently. Test: dev/test/item-gain.js. Hooks for tests: KFX.gains [{name, grade}], KFX.rewards (kitReward items). */
+function kgInfo(x){const e=x&&typeof x==="object"?x:{k:x};const it=(typeof IT==="object"&&IT[e.k])||{};let a=null;try{a=typeof itemArt==="function"?itemArt(e.wk?e:e.k):null}catch(err){}
+ let src=a?(a.src512||a.src):"";if(!src&&typeof kmItemImg==="function")src=kmItemImg(e.k);
+ const KG=typeof KIT_GRADE!=="undefined"?KIT_GRADE:[{n:"Thường",c:"#9a8a78"}];
+ if(e.wk){const ti=Math.max(0,Math.min(3,e.wk.ti|0));return{name:e.wk.n||it.n||"",grade:ti,gname:(typeof WTIER!=="undefined"?WTIER[ti]:KG[ti].n),col:KG[ti].c,src,sub:"Tác phẩm tự tay"}}
+ const g=a?a.grade|0:0;return{name:it.n||String(e.k||""),grade:g,gname:KG[g].n,col:KG[g].c,src,sub:it.kd||""}}
+function kitGain(x,o){o=o||{};if(!kfOn())return;const I=kgInfo(x);KFX.gains=KFX.gains||[];KFX.gains.push({name:I.name,grade:I.gname,src:I.src});
+ const run=done=>{const still=kfStill();const ov=document.createElement("div");ov.className="kmov kfgain"+(still?" km-red":"");ov.setAttribute("role","dialog");ov.setAttribute("aria-label",I.name);
+  ov.style.setProperty("--gc",I.col);
+  ov.innerHTML=`<div class="kfg"><div class="kfgl"></div><div class="kfgi">${I.src?`<img src="${I.src}" alt="" draggable="false">`:""}</div><b class="kfgn">${I.name}</b><span class="kfgg">${I.gname}${I.sub?` · ${I.sub}`:""}</span>${o.from?`<small class="kfgf">${o.from}</small>`:""}<button type="button" class="kbtn kfgok">Nhận</button></div>`;
+  document.body.appendChild(ov);try{sfx("sfx-open")}catch(e){}if(!still){const r=ov.querySelector(".kfgi").getBoundingClientRect();kfPx("stars",{x:r.left+r.width/2,y:r.top+r.height/2,r})}
+  let closed=false;const close=e=>{if(e)e.stopPropagation();if(closed)return;closed=true;const im=ov.querySelector(".kfgi img");
+   const tb=[...document.querySelectorAll('#tabs [data-tab="inv"],#tabs [data-kg]')].find(t=>t.offsetWidth&&(t.dataset.tab==="inv"||/Tư trang/.test(t.textContent)))||document.querySelector('[data-tab="inv"]');
+   try{sfx("sfx-coin");vib("coin")}catch(err){}
+   if(im&&tb&&!still&&im.animate){const a=im.getBoundingClientRect(),b=tb.getBoundingClientRect();const fl=im.cloneNode();fl.className="kfgfly";fl.style.cssText=`left:${a.left}px;top:${a.top}px;width:${a.width}px;height:${a.height}px`;document.body.appendChild(fl);
+    const dx=b.left+b.width/2-(a.left+a.width/2),dy=b.top+b.height/2-(a.top+a.height/2),sc=Math.max(.12,Math.min(b.width,b.height)/Math.max(1,a.width));
+    const an=fl.animate([{transform:"none",opacity:1},{transform:`translate(${dx*.5}px,${dy*.5-60}px) scale(.6)`,opacity:1,offset:.5},{transform:`translate(${dx}px,${dy}px) scale(${sc})`,opacity:.2}],{duration:620,easing:"cubic-bezier(.5,0,.6,1)"});
+    an.onfinish=()=>{fl.remove();tb.classList.remove("kfhit");void tb.offsetWidth;tb.classList.add("kfhit");setTimeout(()=>tb.classList.remove("kfhit"),700);kfPx("pop",{x:b.left+b.width/2,y:b.top+b.height/2})}}
+   KFX.gainClosed=(KFX.gainClosed||0)+1;ov.classList.add("km-out");setTimeout(()=>ov.remove(),240);done()};
+  ov.addEventListener("click",close)};
+ if(typeof kmPush==="function")kmPush(run);else run(()=>{})}
+window.kitGain=kitGain;
+(function(){const W=(n,f)=>{const o=window[n];if(typeof o!=="function")return;window[n]=f(o)};
+ W("kitReward",o=>function(spec){try{KFX.rewards=(KFX.rewards||0)+((spec&&spec.items&&spec.items.length)||1)}catch(e){}return o.apply(this,arguments)});
+ /* j93 showed bought items with kitFlyItem from kmDiff: kitGain does that now (reveal + fly), so the old fly is skipped there */
+ W("kitFlyItem",o=>function(){if(KFX.inDiff)return;return o.apply(this,arguments)});
+ W("kmDiff",o=>function(){let before=null;try{if(typeof KMSNAP!=="undefined"&&KMSNAP&&typeof KMS!=="undefined"&&KMS===S&&S)before=KMSNAP.inv.slice()}catch(e){}
+  KFX.inDiff=true;let r;try{r=o.apply(this,arguments)}finally{KFX.inDiff=false}
+  try{if(before&&S&&!S.dead&&kfOn()){const add=S.inv.filter(x=>!before.includes(x));
+    if(add.length&&add.length<=6)for(const x of add){if(x.from&&x.from!=="emp"&&x.from!=="me")continue;/* a gift from a person: j93 kitReward */kitGain(x)}}}catch(e){console.error(e)}
+  return r})})();
+(function(){const st=document.createElement("style");st.textContent=`
+.kmov.kfgain{cursor:pointer}
+.kfg{position:relative;display:flex;flex-direction:column;align-items:center;gap:6px;padding:18px 26px 16px;max-width:min(360px,90vw);text-align:center;color:#fff3dc}
+.kfgl{position:absolute;left:50%;top:102px;width:300px;height:300px;margin:-150px 0 0 -150px;border-radius:50%;pointer-events:none;
+ background:radial-gradient(circle,color-mix(in srgb,var(--gc) 80%,#fff) 0,color-mix(in srgb,var(--gc) 45%,transparent) 32%,transparent 68%);animation:kfgBurst 1.1s ease-out both,kfgBreath 2.4s ease-in-out 1.1s infinite}
+.kfgi{position:relative;width:168px;height:168px;display:flex;align-items:center;justify-content:center;animation:kfgRise .6s cubic-bezier(.2,.9,.3,1.2) both}
+.kfgi img{max-width:100%;max-height:100%;filter:drop-shadow(0 0 14px var(--gc)) drop-shadow(0 4px 8px #0006)}
+.kfgn{position:relative;font-family:var(--display,serif);font-size:1.18rem;line-height:1.25;animation:kfgUp .4s .35s ease-out both}
+.kfgg{position:relative;font-size:.84rem;font-weight:700;padding:2px 12px;border-radius:999px;background:var(--gc);color:#fff;animation:kfgUp .4s .45s ease-out both}
+.kfgf{position:relative;font-size:.76rem;color:#f6ead6c0}
+.kfgok{position:relative;margin-top:6px;min-width:120px;animation:kfgUp .4s .55s ease-out both}
+.kfgfly{position:fixed;z-index:9470;pointer-events:none;object-fit:contain}
+@keyframes kfgBurst{0%{transform:scale(.2);opacity:0}35%{transform:scale(1.15);opacity:1}100%{transform:scale(1);opacity:.85}}
+@keyframes kfgBreath{0%,100%{opacity:.85;transform:scale(1)}50%{opacity:1;transform:scale(1.06)}}
+@keyframes kfgRise{from{transform:translateY(30px) scale(.4);opacity:0}to{transform:none;opacity:1}}
+@keyframes kfgUp{from{transform:translateY(8px);opacity:0}to{transform:none;opacity:1}}
+.kmov.kfgain.km-red *{animation:none!important}
+@media (prefers-reduced-motion:reduce){.kmov.kfgain *{animation:none!important}}
+`;document.head.appendChild(st)})();

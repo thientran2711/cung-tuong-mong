@@ -1491,6 +1491,18 @@ Numbers fly: after every result card, each changed stat (Sủng, Danh, Sức, B�
 (`.kfnum`, "Sủng +6") and flies into ITS top-bar cell (`#hud-<k>`), which glows gold (+) or red (−) on arrival (`.kfhit/.kfhit-r`); stats
 without a cell (Thái hậu, Hoàng hậu, Tai mắt, Ân tình) rise and fade. Replaces j93's rising `.kmfls` pills.
 
+### kitGain — EVERY item she gains is revealed (owner 11/15, loot-game rule)
+`kitGain(entry|key,{from})` (jfx): the item rises in the centre with a light burst in its GRADE colour (KIT_GRADE), its painting, name and
+grade under it, "Nhận"; tap Nhận or anywhere → it flies into the Tư trang tab (sfx-open on reveal, sfx-coin + buzz `coin` on landing), the tab
+glows. Queued with the motion pieces (kmPush). No "Lui" button (kit motion overlay: tap closes).
+- ONE universal path: after every render, j93 `kmDiff` compares S.inv with the last snapshot; every new entry that is not already shown by
+  `kitReward` (ân thưởng via bestow → chest/tray; a gift from another person → tray/gift box) goes through kitGain — Tài nghệ works from every
+  lesson / practice mini-game (cooking, embroidery, painting, calligraphy, music…), purchases (replaces j93 kitFlyItem there), finds,
+  stories, any call site (35 `inv.push` sites today). A new call site needs no wiring. Test `dev/test/item-gain.js` fails on a silent add.
+- Handmade works (j83 `IT.tp` + `entry.wk`): own name (`wk.n`, e.g. "Bát gà hấp lá sen"), tier word from the score (`wk.ti`: Thường · Khá ·
+  Tinh xảo · Tuyệt phẩm; q ≥ 6 Khá, ≥ 10 Tinh xảo, ≥ 14 Tuyệt phẩm), tier painting `item-tp-<kind>-b<ti+1>` (j98 `itemArt(entry)`).
+  The Tư trang bag (jinv) now keeps each work as its own piece with that name / picture / tier, and its panel offers Dâng, tặng · Bán · Bày.
+
 ### Rules
 - Buzz = `navigator.vibrate` = Android only (owner's Fold). iPhone/iPad have no vibrate: nothing fails, the picture effects carry the moment.
 - "Rung" off (`OPT.vib=false`) → no buzz. "Cảnh động" off (`OPT.fxon=false`) or `prefers-reduced-motion` → buzz only: no shake, flash,
