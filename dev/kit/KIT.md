@@ -1277,6 +1277,8 @@ Stage rule (j59 — every room / place / servant road / lãnh cung stage):
    exactly one person.
    Size cap (owner 11/15): the body height never exceeds `KIT_FIG.maxPx` = 542 px (what .79 gives on the 1180 iPad stage), so a
    taller stage (1366: .61 of 889 px, larger iPads) keeps the 1180 figure size and fits her + 2 like 1180.
+   The cap applies to iPad-wide layouts only (viewport ≥ 1000 px, where 3 people are allowed); the Fold / phone room view (2 people)
+   keeps the full .79 of its taller stage (review 11/15: the cap had shrunk the Fold, the primary device, from .79 to .66).
    She herself stands on the stage at EVERY place she is (j28, owner 11/15): first / left, chip in her rank colour, counted in the 3 / 2.
    Measured 11/15: dev/shots/book-release/stage/n*.jpg, table in dev/PROGRESS_book_release.md.
 6. Name chips are never cut: in the strip each slot is at least chip width + 8 px.
