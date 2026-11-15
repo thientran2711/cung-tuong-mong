@@ -131,7 +131,8 @@ function wkLessonOK(k,mode){const l=S.arts[k],cost=5+l*5;if(!S||S.dead||Q.length
  if(mode==="self")return can(2)&&S.suc>=25;if(mode==="th")return can(2)&&S.th>=40&&(S.buoi||0)===0&&!S.thDead;return can(2)&&S.bac>=cost}
 function wkAsk(k,mode,run){const a=ARTS.find(x=>x.k===k),l=S.arts[k],fee=mode==="teacher"?5+l*5:0;const O=[];
  for(const kind of wkKindsOf(k)){const K=WK[kind];for(let m=0;m<3;m++)O.push({n:`${K.w} · ${K.mn[m]}`,fx:K.mat[m]?{bac:-K.mat[m]}:{},x:`${wkOddsTxt(S,kind,m)}${K.per?" · phải dâng trong tuần":""}${K.fin?" · "+plain(fmt(K.fin)):""}`,go:()=>{wkPend={kind,mat:m};run();if(!S.mg){wkPend=null;if(K.mat[m])apply({bac:K.mat[m]})}}})}
- Q.push({t:`${mode==="prac"?"Tự luyện":"Học"} ${a.n}: làm ra tác phẩm gì?`,who:pMe(),xc:1,h:`<p>Tự tay làm (chơi trò tài nghệ): ra thành phẩm. Học nhanh: ${mode==="prac"?"":"vẫn tiến bộ, "}không ra thành phẩm. Phẩm = phần chơi trò tài nghệ (0..10) + ${a.n} bậc ${l}: +${l} + vật liệu (thường +${WMAT[0]}, tốt +${WMAT[1]}, quý +${WMAT[2]}).</p><p class="past">Thường dưới 6 · Khá 6 · Tinh xảo 10 · Tuyệt phẩm 14: chỉ vật liệu quý mới thành Tuyệt phẩm. Vật liệu tốt, quý còn làm quà giá trị hơn và bán được giá hơn.${fee?` Phí thầy ${fee} bạc trả riêng.`:""}</p>`,opts:O});showModal();render()}
+ O.push({n:"Thôi",fx:{}});
+ Q.push({act:1,t:`${mode==="prac"?"Tự luyện":"Học"} ${a.n}: làm ra tác phẩm gì?`,who:pMe(),h:`<p>Tự tay làm (chơi trò tài nghệ): ra thành phẩm. Học nhanh: ${mode==="prac"?"":"vẫn tiến bộ, "}không ra thành phẩm. Phẩm = phần chơi trò tài nghệ (0..10) + ${a.n} bậc ${l}: +${l} + vật liệu (thường +${WMAT[0]}, tốt +${WMAT[1]}, quý +${WMAT[2]}).</p><p class="past">Thường dưới 6 · Khá 6 · Tinh xảo 10 · Tuyệt phẩm 14</p><p>Chỉ vật liệu quý mới thành Tuyệt phẩm. Vật liệu tốt, quý còn làm quà giá trị hơn và bán được giá hơn.${fee?` Phí thầy ${fee} bạc trả riêng.`:""}</p>`,opts:O});showModal();render()}
 (function(){const l0=lessonMode;lessonMode=function(k,mode){if(wkPend||!wkLessonOK(k,mode))return l0.apply(this,arguments);wkAsk(k,mode,()=>l0.call(this,k,mode))}})();
 /* practice once mastered: j82's playArt gives the raw score directly when present; otherwise the art's lesson game */
 function wkPractice(k){if(!wkLessonOK(k,"prac"))return;wkAsk(k,"prac",()=>{if(!wkLessonOK(k,"prac"))return;apply({suc:-10});spend(2);
@@ -159,6 +160,7 @@ PEND.wkgive=p=>{const e=S.inv[p.ix];if(!e||!e.wk)return null;const w=e.wk;const 
   O.push({n,fx:{},x:wkGainTxt(ev),go:()=>{spend(2);log(wkGive(S,r,S.inv.indexOf(e)))}})}
  if(w.kind==="mon"&&S.inv.some(x=>x.k==="hacdinh"&&!x.h))for(const v of liveRivals(true)){const sp=cl(oSee(v,true)-4*(facN(S)-1),5,95);
   O.push({n:`Lén bỏ Hạc đỉnh hồng rồi tặng ${rkName(v)} ${v.name}`,fx:{},x:`${word(oPoison(S))} · thành: nàng trúng độc, Sức -120, thường là chết, dùng hết 1 Hạc đỉnh hồng · hỏng: bị tra ra, ban chết · kèm: Đức -10 · nàng phát giác trước (${word(100-sp)} qua mắt nàng) thì nàng nắm 2 chứng cứ`,go:()=>{spend(2);log(wkPoison(S,v,S.inv.indexOf(e)))}})}
+ O.push({n:"Thôi",fx:{}});
  return{t:`<p>Dâng, tặng <b>${w.n}</b> (${WTIER[w.ti]}, ${w.bn==="ngươi"?"tự tay ngươi làm":"của "+w.bn}) cho ai? Tốn 2 khắc.</p><p class="past">Đồ quý mua bằng bạc giá trị hơn: Tranh cổ, Đàn cổ dâng Hoàng thượng Sủng +5. Đồ tự tay làm được thêm chân tình với người hiền hậu, thêm hợp ý khi trúng sở thích.${no.length?"<br>"+no.join("<br>"):""}</p>`,o:O}};
 function wkAct(a,ix){const e=S.inv[ix];if(!e||!e.wk||S.dead||Q.length)return;
  if(a==="give"){if(!can(2))return;pushDil(mkP("wkgive",{ix}),"Dâng, tặng tác phẩm");render();return}
@@ -223,7 +225,8 @@ function illBuy(p,r,k,from,paid){const R0=IROUTE[r],nm=p===S?"Ngươi":`${rkName
 function illAsk(r){const R0=IROUTE[r];if(S.dead||Q.length||!can(R0.k)||R0.need(S))return;const O=[];
  if(r==="ally"){for(const v of illAllies(S))for(const e of v.inv.filter(e=>WILL[e.k]&&!e.h&&!e.t).slice(0,3))O.push({n:`${IT[e.k].n} của ${rkName(v)} ${v.name}`,fx:{},x:`thành: có ${IT[e.k].n} (${WILL[e.k].eff}) · kèm: nàng nắm 1 chứng cứ của ngươi`,go:()=>{spend(R0.k);log(illBuy(S,"ally",e.k,v))}})}
  else for(const k of R0.ks){const c=R0.cost(k);O.push({n:`${IT[k].n}: ${WILL[k].eff}`,fx:{bac:-c},x:`${word(R0.o(S))} · thành: có ${IT[k].n}, ${R0.when} · hỏng: ${R0.fail(S)} · kèm: Đức -3`,go:()=>{spend(R0.k);log(illBuy(S,r,k,null,1))}})}
- Q.push({t:R0.n,xc:1,who:pMe(),h:`<p>${R0.n}. Tốn ${R0.k} khắc.</p><p class="past">${Object.keys(WILL).map(k=>`${IT[k].n}: ${WILL[k].eff}; ${WILL[k].tr}`).join("<br>")}</p>`,opts:O});showModal();render()}
+ O.push({n:"Thôi",fx:{}});
+ Q.push({act:1,t:R0.n,who:pMe(),h:`<p>${R0.n}. Tốn ${R0.k} khắc.</p><p class="past">${Object.keys(WILL).map(k=>`${IT[k].n}: ${WILL[k].eff}; ${WILL[k].tr}`).join("<br>")}</p>`,opts:O});showModal();render()}
 if(typeof wrapR==="function")wrapR("illAsk",r=>IROUTE[r]?IROUTE[r].n:"");
 function illHTML(){return `<div class="ph"><span>Đồ cấm: độc dược không bán công khai. Bị lộ là có người nắm chứng cứ của ngươi.</span></div><div class="rbtn" style="margin-bottom:6px">`+Object.entries(IROUTE).map(([r,R0])=>{const nd=R0.need(S);const lo=Math.min(...R0.ks.map(R0.cost)),hi=Math.max(...R0.ks.map(R0.cost));
  return pbtn(`data-ill="${r}"`,R0.n,r==="ally"?`Chắc chắn · tốn: ${R0.k} khắc · thành: có đồ cấm · kèm: nàng nắm 1 chứng cứ của ngươi`:`${word(R0.o(S))} · tốn: ${R0.k} khắc, Bạc -${lo}..${hi} · thành: có độc dược, ${R0.when} · hỏng: ${R0.fail(S)} · kèm: Đức -3`,whyTime(R0.k)||nd)}).join("")+`</div>`}

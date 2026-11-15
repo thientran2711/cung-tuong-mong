@@ -116,7 +116,52 @@ function kinvOpen(x){const g=x.g,it=IT[g.k],i=g.i;const over=it.rk&&it.rk>S.rank
 (function(){if(typeof kpBuild!=="function")return;const b0=kpBuild;kpBuild=function(M,m){const r=b0.apply(this,arguments);try{const sp=m&&m.kit;if(!sp||!sp.itemPic)return r;
  const body=M.querySelector("#mb > .kpb");if(!body)return r;const old=body.querySelector(":scope > .kpsubj");if(old)old.remove();
  body.classList.add("kphas");body.classList.remove("kpinfo");body.insertAdjacentHTML("afterbegin",`<div class="kpsubj kpitem">${sp.itemPic}</div>`);
+ kitSlotDress(M,body);
  if(typeof kitFix==="function")kitFix(body)}catch(e){console.error("itemPic",e)}return r}})();
+/* ---------- KIT 28.13f ITEM / EQUIPMENT-SLOT CARD — compact (owner 11/15 "ĐIỀU · Ô cài tóc" far too big) ----------
+   Every item panel (bag tile → kinvOpen / wdOpen / wdFabOpen) and every equipment-slot panel (Bên mình: cài tóc, đeo tay, đeo eo,
+   túi thơm, khăn che mặt, y phục → keqPick / wdSlotOpen) is the standard kit dialog box (kit panel width, never taller than the person
+   dialog 32.7: min(100dvh − 32 px, 720 px), only the body scrolls), laid out:
+   1. TOP ROW: the small item tile (kitItem at the bag-grid tile size, 64 px; empty slot = its faint ghost) LEFT, its kit rows RIGHT
+      (Phẩm / Được / Mất / Ghi chú) + the "Đã biết" chip.
+   2. The info lines FULL WIDTH under that row (Rương chưa có…, Nhờ thái giám mua đồ…), plain lines without the round fact dots or faces;
+      the pick-a-piece row (.keqpick) full width too.
+   3. The acts by the option rule (kitOptLayout 32.9): short acts (name + ≤ 1 row) share a 2–3 column grid, an act with two or more rows
+      (Cần / Tốn / Được / Kèm, odds) is a full-width row (short cells pack together first: grid-auto-flow dense); every card keeps all its lines, tight (content height, no stretched cells).
+   4. No "Lui": the header ✕ (32.10), a tap outside, Esc. */
+function kitSlotDress(M,body){const dlg=M.querySelector(".dlg");if(!dlg)return;dlg.classList.add("kitslot");const subj=body.querySelector(":scope > .kpsubj.kpitem"),main=body.querySelector(":scope > .kpmain");if(!subj||!main)return;
+ const head=document.createElement("div");head.className="kslhead";const info=document.createElement("div");info.className="kslinfo";
+ const rows=main.querySelector(":scope > .kinvrows");if(rows)info.appendChild(rows);
+ /* a chip line right after the rows ("Đã biết: Đúng phẩm") belongs to the item */
+ const nx=main.firstElementChild;if(rows&&nx&&nx.tagName==="P"&&nx.children.length===1&&nx.firstElementChild.matches(".kchip"))info.appendChild(nx);
+ head.appendChild(subj);head.appendChild(info);body.insertBefore(head,main);body.classList.add("kslb")}
+function kitSlotFit(){try{const d=document.querySelector("#modal .dlg.kitslot");if(!d)return;
+ d.querySelectorAll(".kinvacts").forEach(g=>{const B=[...g.querySelectorAll(":scope > button")];const long=b=>typeof kitOptIsLong==="function"?kitOptIsLong(b):b.querySelectorAll(".kr").length>=2;
+  B.forEach(b=>b.classList.remove("ksllong"));B.forEach(b=>{if(long(b))b.classList.add("ksllong")});
+  /* a grid cell too narrow for its own line (an effect value that wraps, a name over two lines) becomes a full row too */
+  B.forEach(b=>{if(b.classList.contains("ksllong"))return;const t=b.querySelector(".kan");const lt=parseFloat(t?getComputedStyle(t).lineHeight:0)||20;
+   if((t&&t.getBoundingClientRect().height>lt*1.6)||[...b.querySelectorAll(".krv")].some(v=>{const l=parseFloat(getComputedStyle(v).lineHeight)||18;return v.getBoundingClientRect().height>l*1.6}))b.classList.add("ksllong")})})}catch(e){console.error("kitSlotFit",e)}}
+setTimeout(()=>{if(typeof showModal!=="function")return;const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);try{kitSlotFit();requestAnimationFrame(kitSlotFit)}catch(e){}return r}},0);
+(function(){const st=document.createElement("style");st.id="kslot-css";st.textContent=`
+#modal .dlg.kpanel.kslot{max-height:min(calc(100dvh - 32px),720px);width:min(560px,calc(100vw - 24px))}
+#modal .dlg.kitslot #mb>.kpb.kslb{display:block!important}
+#modal .dlg.kitslot .kslhead{display:grid;grid-template-columns:64px minmax(0,1fr);gap:4px 12px;align-items:start;margin:0 0 6px}
+#modal .dlg.kitslot .kslhead>.kpsubj.kpitem{position:static!important;width:64px;margin:0;padding:0;top:auto}
+#modal .dlg.kitslot .kslhead>.kpsubj.kpitem>.kitem{--isz:64px!important;width:64px!important}
+#modal .dlg.kitslot .kslhead>.kpsubj.kpitem .kitg{display:none}
+#modal .dlg.kitslot .kslhead>.kpsubj.kpitem .kitx{font-size:.62rem;padding:1px 4px}
+#modal .dlg.kitslot .kslinfo{min-width:0}
+#modal .dlg.kitslot .kslinfo>.kinvrows{margin:0}
+#modal .dlg.kitslot .kslinfo>p{margin:4px 0 0}
+#modal .dlg.kitslot .kpmain>.kfacts,#modal .dlg.kitslot .kpmain .kfacts{margin:2px 0 6px;gap:2px}
+#modal .dlg.kitslot .kfact{grid-template-columns:minmax(0,1fr)!important;min-height:0;padding:2px 0;border:0}
+#modal .dlg.kitslot .kfact>:not(.kft){display:none!important}
+#modal .dlg.kitslot .kpmain>p.past{margin:4px 0}
+#modal .dlg.kitslot .kinvacts{grid-template-columns:repeat(auto-fill,minmax(min(100%,180px),1fr));grid-auto-flow:row dense;align-items:start;gap:6px;margin-top:8px}
+#modal .dlg.kitslot .kinvacts>button{height:auto!important;min-height:0!important;align-self:start}
+#modal .dlg.kitslot .kinvacts>button.ksllong{grid-column:1/-1}
+@media (min-width:1000px){#modal .dlg.kitslot .kinvacts{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}}
+`;document.head.appendChild(st)})();
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-kinvact]");if(!b)return;e.stopPropagation();if(b.disabled)return;
  const a=b.dataset.kinvact,ix=+b.dataset.ix;try{closeModal()}catch(x){}itemAct(a,ix)},true);
 /* ---------- KIT 33b kitEquipSlots — "Đang mang": the named EQUIPMENT slots (owner 11/15, RPG-style), under the bag ----------
@@ -244,8 +289,31 @@ function keqPick(x){if(x.k==="veil"){const on=veilOn(S),need=veilNeed(S),has=vei
    :kitFacts([x.k==="dress"?"Rương chưa có vải để may áo.":`Rương chưa có món nào ${({hair:"cài tóc",wrist:"đeo tay",waist:"đeo eo",scent:"đeo bên mình"})[x.k]} được.`,"Nhờ thái giám mua đồ, hoặc chờ được ban thưởng."]),btn:"Lui"})}
 if(typeof invHTML==="function"){const inv0=invHTML;invHTML=function(){let h=inv0.apply(this,arguments);try{
   const i=h.indexOf('<div class="cards">');if(i>=0)h=h.slice(0,i);h=h.replace(/^<div class="ph">[\s\S]*?<\/div>\s*/,"");
-  return h+kitInvGrid({key:"tutrang",tabs:KINV_CATS.map(c=>({k:c[0],label:c[1]})).concat(S.inv.some(e=>!e.h&&IT[e.k]&&kinvCat(IT[e.k].kd)==="tap")?[{k:"tap",label:"Tạp vật"}]:[]),
-   items:kinvItems(),minRows:2,onPick:kinvOpen})+keqTT()}catch(e){console.error("kitInvGrid",e);return inv0.apply(this,arguments)}}}
+  const bag=kitInvGrid({key:"tutrang",tabs:KINV_CATS.map(c=>({k:c[0],label:c[1]})).concat(S.inv.some(e=>!e.h&&IT[e.k]&&kinvCat(IT[e.k].kd)==="tap")?[{k:"tap",label:"Tạp vật"}]:[]),
+   items:kinvItems(),minRows:2,onPick:kinvOpen})+keqTT();
+  return kinvSubHTML(h,bag)}catch(e){console.error("kitInvGrid",e);return inv0.apply(this,arguments)}}}
+/* ---------- Tư trang SUB-TABS (owner 11/15): the ONE sub-tab control (.ksub > .ksubb, KIT 20 — same as Hậu cung) at the top:
+   "Túi đồ" (default: the bag grid with its category chips + the "Bên mình" equipment slots, seen without scrolling past any act) ·
+   "Việc" (Nhờ thái giám mua đồ, Soát đồ, Sai cung nữ… — the act cards, doable ones first: kitDoableFirst, KIT 37.1).
+   The pick is remembered per viewer (hclh-inv-sub); both panes are rendered, the other one is hidden. ---------- */
+let KINV_SUB=(()=>{try{return localStorage.getItem("hclh-inv-sub")||"tui"}catch(e){return"tui"}})();
+function kinvSubHTML(acts,bag){const cur=KINV_SUB==="viec"&&acts.trim()?"viec":"tui";const P=[["tui","Túi đồ"],["viec","Việc"]];
+ const nav=`<div class="kinvsubw"><nav class="ksub kinvsub" role="tablist">${P.map(([k,l])=>`<button type="button" class="ksubb${k===cur?" on":""}" role="tab" aria-selected="${k===cur}" data-kinvsub="${k}">${l}</button>`).join("")}</nav></div>`;
+ return nav+`<div class="kinvpane" data-kinvpane="tui"${cur==="tui"?"":" hidden"}>${bag}</div><div class="kinvpane kdoable" data-kinvpane="viec"${cur==="viec"?"":" hidden"}>${acts}</div>`}
+function kinvDoable(){try{const pane=document.querySelector('#panel [data-kinvpane="viec"]');if(!pane)return;
+ const first=typeof kitDoableFirst==="function"?kitDoableFirst:function(box,sel){const L=[...box.children].filter(c=>!sel||c.matches(sel));if(L.length<2)return;
+   const off=e=>e.disabled||e.classList.contains("kdis")||e.getAttribute("aria-disabled")==="true"||(!/^(BUTTON|A)$/.test(e.tagName)&&!!(e.querySelector("button")&&e.querySelector("button").disabled));
+   const want=L.filter(e=>!off(e)).concat(L.filter(off));if(want.every((e,i)=>e===L[i]))return;const mk=document.createComment("kd");box.insertBefore(mk,L[0]);want.forEach(e=>box.insertBefore(e,mk));mk.remove()};
+ pane.querySelectorAll(".rbtn, .cards, .opts").forEach(b=>first(b,"button"));first(pane,null)}catch(e){console.error("kinvDoable",e)}}
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-kinvsub]");if(!b)return;e.preventDefault();e.stopPropagation();
+ KINV_SUB=b.dataset.kinvsub;try{localStorage.setItem("hclh-inv-sub",KINV_SUB)}catch(x){}const P=document.getElementById("panel");if(P)P.scrollTop=0;try{renderPanel()}catch(x){render()}},true);
+(function(){const r0=renderPanel;renderPanel=function(){const r=r0.apply(this,arguments);try{if(tab==="inv")kinvDoable()}catch(e){}return r}})();
+(function(){const st=document.createElement("style");st.id="kinvsub-css";st.textContent=`
+#panel .kinvpane[hidden]{display:none!important}
+#panel .kinvsubw{position:sticky;top:0;z-index:6;background:var(--k-card,#fffaf0);padding-bottom:2px}
+#panel .kinvsubw>.ksub.kinvsub{margin:0 0 8px;position:static}
+/* kgSub (j79) owns a direct-child .ksub of #panel: ours sits in .kinvsubw so it is not removed */
+`;document.head.appendChild(st)})();
 
 /* ================= KIT 28.13d kitShop — THE SHOP (owner 11/15 09:40Z + 10:30Z + 10:45Z markups; shop-fix 11/15: the shop IS the person dialog) =================
    Every buying screen (Nội vụ phủ "Nhờ thái giám mua đồ", later Tư trang buy, gifts) is this one pattern:

@@ -87,14 +87,15 @@ function wkrTile(kind,r,l){const ok=r.lv<=l,a=ARTS.find(x=>x.k===WK[kind].a);con
   `<button type="button" class="kbtn kshgo" ${A} data-kwrgo="1"${ok?"":` disabled title="${why}"`}>${ok?"Làm":"Chưa mở"}</button></div>`}
 function wkrBody(){const k=KWR.k,kinds=wkKindsOf(k).filter(x=>WKR[x]);const kind=kinds.includes(KWR.kind)?KWR.kind:kinds[0];KWR.kind=kind;const l=wkLv(S,k),a=ARTS.find(x=>x.k===k);
  const tabs=kinds.length>1?`<div class="pctabs kcattabs kshtabs" role="tablist">${kitTabRowHTML(kinds.map(x=>({k:x,label:WK[x].n,n:wkrOpen(S,x).length,tip:"món mở được"})),kind,"data-kwrtab")}</div>`:"";
- return `<div class="kshop kwr">${tabs}<p class="past">Chọn làm gì trước: mỗi món một hình, phẩm càng cao càng tinh xảo. ${a.n} bậc ${l}: mở ${wkrOpen(S,kind).length}/${WKR[kind].length} món.</p>`+
+ return `<div class="kshop kwr"><div class="kshl"><span class="kshm">Chọn làm gì trước: mỗi món một hình, phẩm càng cao càng tinh xảo. ${a.n} bậc ${l}: mở ${wkrOpen(S,kind).length}/${WKR[kind].length} món.</span></div>${tabs}`+
   `<div class="kshg">${WKR[kind].map(r=>wkrTile(kind,r,l)).join("")}</div></div>`}
 function wkrRefresh(){const el=document.querySelector("#modal .kshop.kwr");if(!el)return;const g=el.querySelector(".kshg"),st=g?g.scrollTop:0;el.outerHTML=wkrBody();const g2=document.querySelector("#modal .kshop.kwr .kshg");if(g2)g2.scrollTop=st}
 /* step 2: the material for that recipe (the j83 cards: odds at 5 phần, score needed per tier, ceiling, gift / sale value) */
 function wkrMat(kind,rid){const k=KWR.k,mode=KWR.mode,run=KWR.run,K=WK[kind],r=wkrOf(kind,rid),a=ARTS.find(x=>x.k===k),l=S.arts[k],fee=mode==="teacher"?5+l*5:0;const O=[];
  for(let m=0;m<3;m++)O.push({n:`${r.n} · ${K.mn[m]}`,fx:K.mat[m]?{bac:-K.mat[m]}:{},x:`${wkOddsTxt(S,kind,m)}${K.per?" · phải dâng trong tuần":""}${K.fin?" · "+plain(fmt(K.fin)):""}`,
   go:()=>{wkPend={kind,mat:m,r:rid,subj:wkrSubj(kind,r)};run();if(!S.mg){wkPend=null;if(K.mat[m])apply({bac:K.mat[m]})}}});
- Q.push({t:`${r.n}: dùng vật liệu gì?`,who:pMe(),xc:1,h:`<p>Phẩm = phần chơi (0..10) + ${a.n} bậc ${l}: +${l} + vật liệu (thường +${WMAT[0]}, tốt +${WMAT[1]}, quý +${WMAT[2]}).</p><p class="past">Thường dưới 6 · Khá 6 · Tinh xảo 10 · Tuyệt phẩm 14: chỉ vật liệu quý mới thành Tuyệt phẩm. Vật liệu tốt, quý còn làm quà giá trị hơn và bán được giá hơn.${fee?` Phí thầy ${fee} bạc trả riêng.`:""}</p>`,opts:O})}
+ O.push({n:"Thôi",fx:{}});
+ Q.push({act:1,t:`${r.n}: dùng vật liệu gì?`,who:pMe(),h:`<p>Phẩm = phần chơi (0..10) + ${a.n} bậc ${l}: +${l} + vật liệu (thường +${WMAT[0]}, tốt +${WMAT[1]}, quý +${WMAT[2]}).</p><p class="past">Thường dưới 6 · Khá 6 · Tinh xảo 10 · Tuyệt phẩm 14</p><p>Chỉ vật liệu quý mới thành Tuyệt phẩm. Vật liệu tốt, quý còn làm quà giá trị hơn và bán được giá hơn.${fee?` Phí thầy ${fee} bạc trả riêng.`:""}</p>`,opts:O})}
 wkAsk=function(k,mode,run){const a=ARTS.find(x=>x.k===k);if(!wkKindsOf(k).some(x=>WKR[x]))return;Object.assign(KWR,{k,mode,run,kind:KWR.k===k?KWR.kind:null});
  Q.push({t:`${mode==="prac"?"Tự luyện":"Học"} ${a.n}: làm gì?`,kit:{kind:"info",pick:1,html:wkrBody()},btn:"Đã hiểu",cls:"kwrd"});showModal();render()};
 document.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest("[data-kwrtab],[data-kwrgo]");if(!t||!document.querySelector("#modal .kshop.kwr"))return;e.stopPropagation();
@@ -107,7 +108,5 @@ document.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest
   c.t=kind==="mon"?`Tự tay nấu ${r.n}${lk?", món ngài thích":""}.`:kind==="bhoa"?`Cắm ${r.n.toLowerCase()}${lk?", loài hoa ngài yêu":""}.`:`${WK[kind].n}: ${r.n}.`;
   c.x=c.x.replace(/tự tay chơi thì ra [^(]*\(/,`tự tay chơi thì ra ${r.n} (`);
   c.go=function(){const a=g.apply(this,arguments);try{if(S.mg&&S.mg.wk){S.mg.wk.r=r.id;S.mg.wk.subj=wkrSubj(kind,r);save()}}catch(e){}return a}}catch(e){}return c}})();
-(function(){const st=document.createElement("style");st.id="k-wkr";st.textContent=`
-#modal.kwrd .kshop.kwr{display:flex;flex-direction:column;gap:6px;min-height:0}
-#modal.kwrd .kshop.kwr>.past{margin:0}
-`;document.head.appendChild(st)})();
+/* kit sample page (§47 #kit): the pick tile of KIT 28.13e, drawn by the real wkrTile (one open recipe, one locked by level) */
+if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§28.13e",title:"Pick tile .kshc.kshpick (mở · chưa mở)",html:()=>`<div class="kshop kwr"><div class="kshg">${wkrTile("mon",WKR.mon[0],0)}${wkrTile("mon",WKR.mon[9],0)}</div></div>`});

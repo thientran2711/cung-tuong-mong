@@ -14,7 +14,7 @@
    Old saves: p.scar.veil = 1 without an item → she is given the matching Thường veil of her own phẩm (worn, phẩm known).
    Knobs: VL below. Balance notes in dev/ITEMS_EARNED.md. ================= */
 const VL={base:[6,10,15,22,35,50,75,110,160],gMul:[1,1.5,2.2,3.2],cover:[2/3,.6,.53,.47,.4],
- mat:[0,6,45],              /* craft material cost: vải sa · dây bạc, trai · kim tuyến, ngọc */
+ mat:[0,6,45],               /* craft material cost: vải sa · dây bạc, trai · kim tuyến, ngọc */
  outX:.8,outRisk:12,outDanh:3, /* mua lén: price factor, % the errand leaks, Danh lost */
  askHH:15,askTH:10,askFail:2, /* xin ban: odds = base + favour/2; favour lost on refusal */
  craftSuc:10,                /* Sức spent on a crafting session (2 khắc) */
@@ -122,10 +122,10 @@ PEND.vlget=pp=>{if(!S||S.dead)return null;const sc=S.scar?scarOf(S):null;const O
  O.push(vlOpt({n:"Đặt ở Nội vụ phủ",fx:{},x:`tốn: 1 khắc · thành: mạng đúng phẩm của ngươi, giá theo phẩm`,go:()=>{if(!can(1))return;pushDil(mkP("vlnvp"),"Nội vụ phủ")}}));
  O.push(vlOpt({n:"Sai người mua lén ngoài cung",fx:{},x:ag?`tốn: 1 khắc · thành: rẻ hơn, nhiều kiểu · kèm: chưa rõ phẩm, lộ ra thì Danh -${VL.outDanh}`:"chưa có ma ma, thái giám hay cung nữ tin cẩn để sai",go:()=>{if(!ag||!can(1))return;pushDil(mkP("vlout"),"Mua lén ngoài cung")}}));
  for(const G of vlGivers(S))O.push(vlOpt({n:`Xin ${G.n} ban mạng`,fx:{},x:`${word(G.o)} · tốn: 1 khắc · thành: ${G.n} ban mạng Tinh phẩm đúng phẩm · hỏng: ${G.n} với ngươi -${VL.askFail}`,go:()=>{if(!can(1))return;spend(1);log(vlAsk(S,G.k));render()}}));
-
+ O.push({n:"Thôi",fx:{},j67:"tốn: không tốn gì"});
  return{who:pMe(),t:`<p>${sc?`Mặt ngươi bị thương (${sc.name}): Sắc đang mất ${sc.sacLost}. `:""}Mạng che mặt phải tự làm, mua hoặc được ban.</p><p class="past">${vlGivers(S).map(G=>`Xin ${G.n} ban: ${word(G.o)}, hỏng thì ${G.n} quý ngươi -${VL.askFail}.`).join(" ")}${ag?` Mua lén qua ${ag.name}: lộ ra thì Danh -${VL.outDanh}.`:""} Mạng phẩm cao hơn phẩm của ngươi là vượt phẩm (chưa ai biết cho tới khi có người nhận xét).</p>`,o:O}};
 PEND.vlcraft=pp=>{const lv=vlLv(S),a=ARTS.find(x=>x.k===vlArt());const O=[0,1,2].map(m=>vlOpt({n:`Kết bằng ${VL_MATN[m]}`,fx:VL.mat[m]?{bac:-VL.mat[m]}:{},x:`tốn: 2 khắc, Sức -${VL.craftSuc} · thành: ${vlGradeOdds(S,m)}`,go:()=>vlCraftRun(m)}));
-
+ O.push({n:"Thôi",fx:{},j67:"tốn: không tốn gì"});
  return{who:pMe(),t:`<p>Tự tay kết mạng che mặt bằng trò thêu. Phẩm của mạng là phần chơi, cộng ${a?a.n:"Thêu thùa"} bậc ${lv}, cộng vật liệu: thường thêm 0, tốt thêm 1, quý thêm 2.</p><p class="past">Dưới 6 ra mạng Thường, từ 6 Tinh phẩm, từ 10 Trân phẩm, từ 14 Tuyệt phẩm. Vật liệu quý ra kiểu mạng phẩm cao. Chơi được 5 phần: vải sa ra ${WD_GRADE[vlG({k:vlCraftOut(S,0,5)})]}, dây bạc ra ${WD_GRADE[vlG({k:vlCraftOut(S,1,5)})]}, kim tuyến ra ${WD_GRADE[vlG({k:vlCraftOut(S,2,5)})]}.</p>`,o:O}};
 function vlCraftRun(m){if(!can(2)||S.suc<VL.craftSuc){if(VL.mat[m])apply({bac:VL.mat[m]});return}spend(2);apply({suc:-VL.craftSuc});
  const fin=(raw,sk)=>{raw=cl(Math.round(raw||0),0,10);if(VL.mat[m])S.bac+=VL.mat[m];/* chooseM already paid; vlCraft pays it once */const k=vlCraft(S,m,raw);const it=IT[k];
@@ -133,10 +133,10 @@ function vlCraftRun(m){if(!can(2)||S.suc<VL.craftSuc){if(VL.mat[m])apply({bac:VL
   Q.push({t:"Tự tay kết mạng",who:pMe(),h:`<p style="text-align:center">${typeof kitItem==="function"?kitItem({src:vlSrc(k),name:it.n,grade:g,size:"lg"}):""}</p><p>Ngươi kết xong <b>${it.n}</b> · ${WD_GRADE[g]}.</p><p class="past">Phẩm của mạng: chưa rõ. ${S.scar?"Vào mục Tư trang để đeo.":"Cất vào rương."}</p>`,btn:"Đã hiểu"});try{showModal();render()}catch(x){}};
  if(typeof playArt==="function"){try{playArt({art:vlArt(),title:"Kết mạng che mặt",onDone:(raw,o)=>fin(raw,o&&o.skipped)});return}catch(x){console.error(x)}}fin(5,true)}
 PEND.vlnvp=pp=>{const L=vlNvpList(S);const O=L.map(k=>vlOpt({n:`${IT[k].n} · ${WD_GRADE[vlG({k})]}`,fx:{bac:-IT[k].pr},x:`tốn: 1 khắc · thành: đồ phẩm ${wdPName(+k[2])}, ${VL_COVER[vlG({k})]}`,go:()=>{spend(1);S.bac+=IT[k].pr;log(vlBuyNvp(S,k))}}));
-return{who:pEunCourt("ped"),t:"<p>Thái giám Nội vụ phủ dâng sổ mẫu: “Mạng che theo phẩm của nương nương, xin người chọn.”</p>",o:O}};
+ O.push({n:"Thôi",fx:{},j67:"tốn: không tốn gì"});return{who:pEunCourt("ped"),t:"<p>Thái giám Nội vụ phủ dâng sổ mẫu: “Mạng che theo phẩm của nương nương, xin người chọn.”</p>",o:O}};
 PEND.vlout=pp=>{const ag=vlAgent(S);if(!ag)return null;const L=vlOutList(S);const lk=vlLeak(S,ag);
  const O=L.map(k=>vlOpt({n:`${IT[k].n} · ${WD_GRADE[vlG({k})]}`,fx:{bac:-vlOutPrice(k)},x:`${word(100-lk)} · tốn: 1 khắc · thành: ${VL_COVER[vlG({k})]} · kèm: chưa rõ phẩm; lộ ra thì Danh -${VL.outDanh}`,go:()=>{spend(1);S.bac+=vlOutPrice(k);log(vlBuyOut(S,k))}}));
-return{who:pMe(),t:`<p>${ag.name} thưa: “Chợ ngoài cửa Thần Vũ có đủ kiểu mạng, rẻ hơn Nội vụ phủ, chỉ là không biết đồ phẩm nào.”</p>`,o:O}};
+ O.push({n:"Thôi",fx:{},j67:"tốn: không tốn gì"});return{who:pMe(),t:`<p>${ag.name} thưa: “Chợ ngoài cửa Thần Vũ có đủ kiểu mạng, rẻ hơn Nội vụ phủ, chỉ là không biết đồ phẩm nào.”</p>`,o:O}};
 function vlWearUI(ix){const n=vlWear(S,ix);if(!n)return;window.__vlPick=null;log(`Ngươi đeo ${n}.`);render()}
 function vlOffUI(){const n=vlOff(S);if(n)log(`Ngươi tháo ${n}, cất vào rương.`);render()}
 function vlGetUI(){if(!S||S.dead||Q.length)return;pushDil(mkP("vlget"),"Mạng che mặt");render()}

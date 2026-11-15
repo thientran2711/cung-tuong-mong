@@ -5,7 +5,7 @@
      kinh → chép kinh (NEW: đồ nét theo bản kinh mẫu) · khuc → đàn · the → cờ · mua → múa · ao → may áo (NEW: khâu theo đường may)
      mon → nấu ăn · huong → điều hương
    The two new games use the trace engine (j91 k91Trace) with their own figures, score 0..10 like every other game.
-   Also: Q items with xc:1 get a ✕ close in the dialog's corner instead of a "Thôi" option (kit rule). ================= */
+   ================= */
 const WKGAME={tranh:"ve",theu:"theu",bhoa:"hoa",tho:"tho",kinh:"kinh",khuc:"dan",the:"co",mua:"mua",ao:"may",mon:"banh",huong:"huong"};
 const kwkL=(x0,y0,x1,y1)=>t=>[x0+(x1-x0)*t,y0+(y1-y0)*t];
 const kwkQ=(x0,y0,cx,cy,x1,y1)=>t=>{const u=1-t;return[u*u*x0+2*u*t*cx+t*t*x1,u*u*y0+2*u*t*cy+t*t*y1]};
@@ -38,8 +38,5 @@ function wkGameOf(art){const m=typeof S!=="undefined"&&S&&S.mg;const w=(m&&m.wk)
 (function(){const k0=kg82Kind;kg82Kind=function(){if(kwkG&&KG82_KIND[kwkG])return kwkG;return k0.apply(this,arguments)}})();
 (function(){const p0=playArt;playArt=function(o){const g=o&&(o.game||wkGameOf(o.art));if(!g)return p0.apply(this,arguments);kwkG=g;try{return p0.apply(this,arguments)}finally{kwkG=null}};window.playArt=playArt})();
 (function(){const o0=openMG;openMG=function(){const m=typeof S!=="undefined"&&S&&S.mg;kwkPick=(m&&(m.wk||wkPend))||wkPend||null;try{return o0.apply(this,arguments)}finally{kwkPick=null}}})();
-/* ✕ close (kit 32.10 kit-x in the panel header) for Q items marked xc and the j83 gift / illicit dialogs: no "Thôi" row */
-const KWK_XPID=["wkgive","vlget","vlcraft","vlnvp","vlout"];
-(function(){const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);try{const M=$("modal"),d=M&&M.querySelector(".dlg");const m=Q[0];
- if(d&&!M.hidden&&m&&(m.xc||KWK_XPID.includes(m.pid))){const h=d.querySelector(":scope > .kph");if(h&&!h.querySelector(":scope > .kit-x")){h.insertAdjacentHTML("beforeend",kitXHTML('data-kitx="wk"',"Đóng"));
-  h.lastElementChild.addEventListener("click",e=>{e.stopPropagation();closeModal()})}}}catch(e){}return r}})();
+/* close: the j83 / veil dialogs keep a plain "Thôi" option, which KIT 32.10 (j3 kitCancelIx + jk4 kitCloseSync) never draws:
+   the dialog gets the kit ✕ in its header, and ✕ / tap outside / Esc run it (merge with main, reviewer r6). */

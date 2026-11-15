@@ -249,7 +249,7 @@ function kpBuild(M,m){const dlg=M.querySelector(".dlg"),mb=$("mb"),mt=$("mt");if
 .kname.kme{color:var(--ink)}
 .kchips{display:inline-flex;flex-wrap:wrap;gap:4px}
 .kchip{display:inline-flex;flex-wrap:nowrap;align-items:baseline;gap:3px;font-size:.76rem;line-height:1.25;padding:1px 7px;border-radius:10px;border:1px solid var(--line);background:#fff;color:var(--dim);white-space:normal;overflow-wrap:anywhere;margin:1px 2px;vertical-align:baseline}
-.kchip b{font-weight:700;white-space:nowrap;flex:0 0 auto}.kchip.g{color:var(--good);border-color:#8fbf9f;background:#eef7f0}.kchip.r{color:var(--bad);border-color:#e3a497;background:#fcefeb}.kchip.n{color:var(--ink)}
+.kchip b{font-weight:700;white-space:nowrap;flex:0 0 auto}.kchip.g{color:var(--good);border-color:#8fbf9f;background:#eef7f0}.kchip.r{color:var(--bad);border-color:#e3a497;background:#fcefeb}.kchip.n{color:var(--ink)}.kchip.w{color:var(--gold);border-color:var(--trim);background:#fbf3df}/* KIT 28.6 kitRisk "có rủi ro" (amber), with g = an toàn, r = liều */.kat>.kchip.krisk{flex:0 0 auto;margin-left:auto;font-weight:700;white-space:nowrap}
 .kpl{display:flex;align-items:center;gap:8px}.kplt{display:flex;flex-direction:column;min-width:0}.kplt small{color:var(--dim);font-size:.74rem}
 /* facts */
 .kfacts{display:flex;flex-direction:column}
@@ -671,7 +671,7 @@ span.md.kmini.kmini>.kmf{position:absolute;inset:0;background:var(--kfr) 50% 34.
 /* 1 · act art in the consort-card frame, same size as the Phi tần card portrait */
 :root{--kaw:150px;--kah:226px}@media (max-width:599px){:root{--kaw:120px;--kah:177px}}
 .kaart{flex:0 0 var(--kaw)!important;width:var(--kaw)!important;height:var(--kah)!important;border-radius:0!important;overflow:visible!important;background:none!important;box-shadow:none!important;margin:0!important}
-.cards:has(> button.ka.kart){grid-template-columns:repeat(auto-fill,minmax(max(440px,31%),1fr))!important}
+.cards:has(> button.ka.kart){grid-template-columns:repeat(auto-fill,minmax(min(100%,max(440px,31%)),1fr))!important}
 @media (max-width:599px){.cards:has(> button.ka.kart){grid-template-columns:1fr!important}}
 button.ka.kcard.kart{gap:10px!important;min-height:calc(var(--kah) + 12px)}
 button.ka.kcard.kart{border-left:4px solid var(--kcc0,var(--line))!important}
@@ -748,7 +748,7 @@ function kgBar(){const T=$("tabs");if(!T)return;const on=kgOn();
   if(!on){if(b.dataset.kg){b.textContent=b.dataset.kl0;b.dataset.s=b.dataset.ks0;delete b.dataset.kg}b.classList.remove("kghide");return}
   if(i===0){if(!b.dataset.kg){b.dataset.kl0=b.textContent;b.dataset.ks0=b.dataset.s||"";}b.dataset.kg=g;b.classList.remove("kghide");/* a group head is always shown (a key that was a member of another group before KG changed keeps no stale kghide — review 11/15: Giao tình vanished) */if(b.textContent!==KG[g].l)b.textContent=KG[g].l;b.dataset.s=KG[g].s;b.setAttribute("aria-selected",String(kgOf(tab)===g));b.classList.toggle("kgon",kgOf(tab)===g)}
   else b.classList.add("kghide")})}}
-function kgSub(){const P=$("panel");if(!P)return;const g=kgOf(tab);let nav=P.querySelector(":scope > .ksub");if(!g||!kgOn()){if(nav)nav.remove();return}
+function kgSub(){const P=$("panel");if(!P)return;const g=kgOf(tab);let nav=P.querySelector(":scope > .ksub:not(.kpgsub), :scope > .kpbar > .ksub:not(.kpgsub)");if(!g||!kgOn()){if(nav)nav.remove();return}
  try{localStorage.setItem("hclh-kg-"+g,tab)}catch(e){}
  const html=kgKeys(g).map(k=>`<button class="ksubb${k===tab?" on":""}" role="tab" aria-selected="${k===tab}" data-ksub="${k}">${kgLabel(k)}</button>`).join("");
  if(!nav){nav=document.createElement("nav");nav.className="ksub";nav.setAttribute("role","tablist");P.prepend(nav)}nav.innerHTML=html}
@@ -764,40 +764,43 @@ html body #tabs.tabs button.kghide{display:none!important}
 .ksubb:last-child{border-right:0}.ksubb.on{background:var(--k-card,#fffaf0);color:var(--gold);box-shadow:inset 0 -3px 0 var(--gold)}
 @media (max-width:599px){.ksubb{font-size:.78rem;min-height:34px;padding:4px 4px}}
 `;document.head.appendChild(st)})();
-/* ---- SKILL CARD (owner 11/14): every art (Cầm, Kỳ, Thi, Họa, Vũ, Y, Thêu, Nấu…) and every Tứ đức course is ONE card of the same structure:
-   picture LEFT in the shared portrait frame (img/art-<k>.webp | img/vir-<k>.webp when listed in img/INFO.json have:["art-cam",…]; else act-category art),
-   info RIGHT (level, progress bar with numbers, what EACH level gives: reached ✓ / next / locked), act buttons BELOW (pbtn → act-card frame).
-   kitSkillCard({kind:"art"|"vir", k, name, level, max, prog:[cur,need], desc, levels:["Bậc 1 gives…",…], acts:[pbtn html], note}) */
+/* ---- KIT §21 · SKILL CARD = THE ONE HEAD CARD (owner 11/14; one form since tabs-kit r7, owner 11/15 "tab như trang chữ"):
+   every art (Cầm, Kỳ, Thi, Họa, Vũ, Y, Thêu, Nấu…), every Tứ đức course, every Tác phẩm line, the Mệnh truyện chapter / Sắc phong head and
+   an empty state are ONE card: small painted picture LEFT (kitSceneArt size "thumb", §28.19), RIGHT: kicker, name + kitSteps (segments + "Bậc l/max";
+   tap = the levels when stepsAttr is given), one desc line, tiến bộ bar (or "Đã tinh thông"), "Bậc n mở" chip + what it gives; act cards BELOW in a
+   grid of act cells, each cell a kpanec (§43 compact acts under 640 px). levels:[text per level] still works: the next level's text becomes the "Bậc n mở" line.
+   kitSkillCard({kind, k, name, kicker, level, max, word:"Bậc", prog:[cur,need] | prog:cur+need:n, bar:false, desc, next, levels, acts:[pbtn…], img, stepsAttr, can}) */
 function kitSkillArt(kind,k,name){const key=`${kind}-${k}`;const have=(KIT_INFOM.have||[]);const ah=(KIT_ACTS.have||[]);
  return have.includes(key)?`img/${key}.webp`:ah.includes("act-cat-hoc-tap")?"img/act-cat-hoc-tap.webp":""}
-function kitSkillCard(o){o=o||{};const l=o.level||0,max=o.max||(o.levels||[]).length||5;const [cur,need]=o.prog||[0,0];
- const lv=(o.levels||[]).map((t,i)=>{const st=i<l?"ok":i===l?"nx":"lock";return `<li class="ksl ${st}"><b>Bậc ${i+1}</b><span>${t}</span><em>${st==="ok"?"✓ đã có":st==="nx"?"bậc kế":"chưa mở"}</em></li>`}).join("");
- const bar=l<max&&need?`<div class="kskp"><span>Tiến bộ</span><span class="kskb"><u style="width:${Math.min(100,Math.round(cur/need*100))}%"></u></span><b>${cur}/${need}</b></div>`:l>=max?`<div class="kskp done"><b>Đã tinh thông</b></div>`:"";
- return `<div class="kskill" data-skill="${o.kind||"art"}-${o.k||""}"><div class="kskart">${kitArtFrame(kitSkillArt(o.kind||"art",o.k,o.name),o.name,"kcat-hoc-tap",KIT_CAT["hoc-tap"][1])}</div>`+
-  `<div class="kskinfo"><div class="kskh"><b>${o.name||""}</b><span class="ksklv">Bậc ${l}/${max}</span></div>${o.desc?`<div class="kskdo">${o.desc}</div>`:""}${bar}<ol class="ksls">${lv}</ol>${o.note?`<div class="kpnote">${o.note}</div>`:""}</div>`+
-  `<div class="kskacts pcb">${(o.acts||[]).join("")}</div></div>`}
-/* Tài nghệ tab through the skill card (same structure for every art; no ranges: progress = what the lesson game scores, self-study 6 parts in 10) */
-if(typeof artTabHTML==="function"){artTabHTML=function(){let h=`<div class="ph"><span>Mỗi buổi học tốn 2 khắc. Ba cách học, giá trị ngang nhau, tốn thứ khác nhau.</span>${S.master?`<span class="g">Danh sư còn dạy ${S.master} tháng</span>`:""}</div><div class="kskills">`;
- h+=ARTS.map(a=>{const l=S.arts[a.k],need=l+2,cost=5+l*5,ms=(typeof ARTMS==="object"&&ARTMS[a.k])||[];const t2=whyTime(2);const stn=a.st==="sac"?"Sắc":"Tài";
-  const levels=[0,1,2,3,4].map(i=>ms[i]||`${stn} +2`);
-  const acts=l>=5?[]:[pbtn(`data-learn="${a.k}" data-mode="self"`,"Tự học",`Chắc chắn · tốn: Sức -15 · thành: tiến bộ bằng 6 phần 10 số phần đạt trong trò học (ít nhất +1)`,t2||(S.suc<25?"Sức dưới 25":"")),
-   pbtn(`data-learn="${a.k}" data-mode="teacher"`,"Học với thầy",`Chắc chắn · tốn: Bạc -${cost}, Sức -10 · thành: tiến bộ đủ số phần đạt trong trò học, luôn hơn tự học 1, thầy kể một sở thích của Hoàng thượng hoặc chuyện của một phi tần (chứng cứ +1): ${chanceW(30)}`,t2||(S.bac<cost?`thiếu bạc (cần ${cost})`:"")),
-   S.thDead?"":pbtn(`data-learn="${a.k}" data-mode="th"`,"Xin Thái hậu cho học cùng",`Chắc chắn · tốn: Sức -10 · thành: tiến bộ đủ số phần đạt trong trò học, Thái hậu quý ngươi +3`,t2||(S.th<40?"cần Thái hậu → ta: thiện cảm 40":(S.buoi||0)!==0?"chỉ buổi sáng":""))].filter(Boolean);
-  return kitSkillCard({kind:"art",k:a.k,name:a.n,level:l,max:5,prog:[S.artp[a.k],need],desc:(typeof ARTDO==="object"&&ARTDO[a.k]||"")+` · mỗi bậc: ${stn} +2`,levels,acts})}).join("")+`</div>`;return h}}
+function kitSteps(l,max,attr,word){max=max||5;word=word||"Bậc";const seg=Array.from({length:max},(_,i)=>`<i class="${i<l?"on":""}"></i>`).join("");
+ return `<${attr?"button type=\"button\"":"span"} class="ksteps" ${attr||""} aria-label="${word} ${l} trên ${max}"><span class="kstepd">${seg}</span><b>${word} ${l}/${max}</b></${attr?"button":"span"}>`}
+function kitBar(label,cur,need){return `<div class="kskp"><span>${label}</span><span class="kskb"><u style="width:${need?Math.min(100,Math.round(cur/need*100)):0}%"></u></span><b>${cur}/${need}</b></div>`}
+function kitSkillCard(o){o=o||{};const l=o.level||0,max=o.max!=null?o.max:((o.levels||[]).length||5);
+ const pr=Array.isArray(o.prog)?o.prog:[o.prog||0,o.need||0];const [cur,need]=pr;
+ const img=o.img!=null?o.img:(o.k?kitSkillArt(o.kind||"art",o.k,o.name):"");
+ const next=o.next!=null?o.next:((o.levels||[])[l]||"");
+ const bar=o.bar===false||!max?"":l<max?(need?kitBar("Tiến bộ",cur,need):""):`<span class="kchip g">Đã tinh thông</span>`;
+ const acts=(o.acts||[]).filter(Boolean);
+ return `<div class="kskill${o.can===false?" kdone":""}" data-skill="${o.kind||"art"}-${o.k||""}"><div class="kskh2">${img?kitSceneArt(img,o.name||"",{shape:"tall",size:"thumb",cap:false}):""}`+
+  `<div class="kskinfo">${o.kicker?`<small class="kskk">${o.kicker}</small>`:""}<div class="kskh"><b>${o.name||""}</b>${max?kitSteps(l,max,o.stepsAttr,o.word):""}</div>${o.desc?`<div class="kskdo">${o.desc}</div>`:""}${bar}`+
+  `${max&&l<max&&next?`<span class="kskx"><span class="kchip n">${o.word||"Bậc"} ${l+1} mở</span> ${next}</span>`:""}</div></div>`+
+  `${acts.length?`<div class="kskacts pcb">${acts.map(a=>`<div class="kpanec">${a}</div>`).join("")}</div>`:""}${o.note?`<div class="kpnote">${o.note}</div>`:""}</div>`}
+/* kitEmpty(title,line): an empty state = the same card with no steps: the topic's painted picture (kitInfoArt) + one short line */
+function kitEmpty(title,line){const a=typeof kitInfoArt==="function"?kitInfoArt(title):{src:""};return kitSkillCard({kind:"empty",name:"",max:0,img:a&&a.src||"",desc:line})}
 (function(){const st=document.createElement("style");st.id="kit2-skill";st.textContent=`
-.kskills{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,520px),1fr));gap:10px}
-.kskill{display:grid;grid-template-columns:var(--kaw) minmax(0,1fr);grid-template-areas:"art info" "acts acts";gap:8px 12px;padding:10px;border:1px solid var(--line);border-radius:var(--k-rad,8px);background:var(--k-card,#fffaf0);border-left:4px solid ${"#3f62a8"}}
-.kskart{grid-area:art;height:var(--kah)}.kskinfo{grid-area:info;display:flex;flex-direction:column;gap:5px;min-width:0}.kskacts{grid-area:acts}
-.kskh{display:flex;justify-content:space-between;align-items:baseline;gap:8px;border-bottom:1px solid var(--k-hair);padding-bottom:3px}.kskh b{font-family:var(--display);font-size:1.05rem;color:var(--gold)}
-.ksklv{font-weight:700;font-size:.86rem;color:var(--ink)}.kskdo{font-size:.8rem;color:var(--dim)}
-.kskp{display:grid;grid-template-columns:auto 1fr auto;gap:8px;align-items:center;font-size:.78rem;color:var(--k-lab)}.kskp b{color:var(--ink)}.kskp.done{display:block;color:var(--good)}
+.kskills{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,460px),1fr));gap:10px}
+.kskill{display:flex;flex-direction:column;gap:8px;padding:10px;margin:0 0 8px;border:1px solid var(--line);border-radius:var(--k-rad,8px);background:var(--k-card,#fffaf0)}
+.kskills>.kskill{margin:0}.kskill.kdone{opacity:.92}
+.kskh2{display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px;align-items:start}.kskh2:not(:has(>.ksart)){grid-template-columns:minmax(0,1fr)}
+.kskinfo{display:flex;flex-direction:column;gap:5px;min-width:0}.kskk{color:var(--dim);font-size:.78rem}
+.kskh{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:4px 10px}.kskh:has(>b:empty){justify-content:flex-end}.kskh b{font-family:var(--display);font-size:1.05rem;color:var(--gold)}
+.kskdo{font-size:.82rem;color:var(--dim);line-height:1.35}.kskx{display:flex;flex-wrap:wrap;align-items:center;gap:4px;font-size:.8rem}
+.kskp{display:grid;grid-template-columns:auto 1fr auto;gap:8px;align-items:center;font-size:.78rem;color:var(--k-lab)}.kskp b{color:var(--ink)}
 .kskb{height:8px;border-radius:5px;background:#eadfca;overflow:hidden}.kskb u{display:block;height:100%;background:linear-gradient(90deg,#c9a24a,#8f5f0c)}
-.ksls{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
-.ksl{display:grid;grid-template-columns:3.6rem minmax(0,1fr) auto;gap:6px;align-items:baseline;font-size:.8rem;padding:2px 0;border-top:1px dotted var(--k-hair)}
-.ksl b{font-size:.72rem;color:var(--k-lab);text-transform:uppercase}.ksl em{font-style:normal;font-size:.68rem;white-space:nowrap}
-.ksl.ok span{color:var(--good);font-weight:600}.ksl.ok em{color:var(--good)}.ksl.nx span{color:var(--ink);font-weight:600}.ksl.nx em{color:var(--gold);font-weight:700}.ksl.lock span,.ksl.lock em{color:#9a8a78}
-.kskacts.pcb{display:grid!important;grid-template-columns:repeat(auto-fill,minmax(220px,1fr))!important;gap:6px}
-@media (max-width:599px){.kskill{grid-template-columns:96px minmax(0,1fr)}.kskart{height:142px}.ksl{grid-template-columns:3rem minmax(0,1fr)}.ksl em{grid-column:2}.kskacts.pcb{grid-template-columns:1fr!important}}
+.ksteps{display:inline-flex;align-items:center;gap:6px;border:0;background:none;padding:0;font:inherit;color:inherit;cursor:default}button.ksteps{cursor:pointer}
+.kstepd{display:inline-flex;gap:3px}.kstepd i{width:14px;height:8px;border-radius:4px;background:var(--k-hair,#e6d3ac);box-shadow:inset 0 0 0 1px #5a3a2018}.kstepd i.on{background:var(--gold,#b8862b)}
+.ksteps b{font-size:.78rem;color:var(--dim);font-weight:600;white-space:nowrap}
+.kskacts.pcb{display:grid!important;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr))!important;gap:6px}
 `;document.head.appendChild(st)})();
 /* ---- PERSON STATS (owner 11/14): every consort shows the SAME stat set as the player, as kit tiles: Sủng · Đức · Danh · Sắc · Tài · Tâm cơ.
    A value shows only once known, else "chưa rõ". Hook for the reveal stages (j61/j85 Đức, tai mắt/intel): window.kitStatKnown(v, key) -> true|false.
