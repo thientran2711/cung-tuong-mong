@@ -2282,6 +2282,9 @@ The rank / role line above every name is a TITLE, the name under it is plain ink
 | Hoàng hậu | gold #ecbf3c | | Hoàng tử · Công chúa · Người lạ | sky #9ec8f0 · peach #f5b0a0 · grey #c4c4c4 |
 
 Men are never pink/purple. Unknown title → the caller's colour lightened (62 % + white).
+**48.1c NO BOX (owner 15/11 ~20:40Z)**: person-dialog captions (kitEventDp `.kdpcap`, 32.7 `.kesf>.kpsn`, the event-stage overlay
+`.kesov>.kpsn`) have no box / frame / plate: rank + name sit straight on the dialog background (title colour + outline as above, name plain
+ink, hers gold-glow). Over a picture (`.kesov`) the name keeps the paper halo of scene words for readability.
 **48.1b HER OWN NAME (owner 15/11 ~20:10Z)**: the name of HER character (the local player's `S` only; in co-op the friend's name is
 NOT marked) = near-black ink #1a0f08 + a soft light-gold glow (`.kmy`: text-shadow #fff6d8 1px, #ffe9a8 3px, #f3cf6a 6px, #e8bd4a 11px),
 so she spots herself at once. Everybody else's name stays plain ink (stage names keep the paper halo for readability). `.kmy` is set by:

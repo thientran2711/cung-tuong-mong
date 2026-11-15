@@ -295,7 +295,7 @@ window.kitEsOvFit=kitEsOvFit;
 #mb .kesov>.kesf{position:absolute;margin:0;display:block}
 #mb .kesov>.kesf .kesfi{display:block;position:relative}
 #mb .kesov>.kesf .kesimg{display:block;max-width:none!important;max-height:none!important;filter:var(--klf,brightness(1)) drop-shadow(0 4px 5px #0006)}
-#mb .kesov>.kpsn{position:absolute;bottom:3px;transform:translateX(-50%);z-index:20;white-space:nowrap;background:rgba(255,250,240,.92);border:1px solid var(--line,#e6d3ac);border-radius:6px;padding:0 6px;font-size:.78rem;line-height:1.25;text-align:center}
+#mb .kesov>.kpsn{position:absolute;bottom:3px;transform:translateX(-50%);z-index:20;white-space:nowrap;background:none;border:0;padding:0 6px;font-size:.78rem;line-height:1.25;text-align:center}
 #mb .kesov>.kpsn[data-row="1"]{bottom:calc(3px + 2.6em)}
 #mb>.kdlgart.kesonpic .ksart>figcaption,#mb>.kdlgart.kesonpic .ksart>.ksart-chip{top:6px;bottom:auto}
 #mb>.kpb.kesfull{display:block!important;grid-template-columns:none!important}
@@ -436,7 +436,7 @@ html body #modal .dlg.kdper>#mb>.opts>*{width:100%!important;max-width:none!impo
 #modal .dlg.kdper .kes>.kesf .kesfi{display:block;position:relative}
 #modal .dlg.kdper .kes .kesimg{display:block;max-width:none!important;max-height:none!important}
 #modal .dlg.kdper .kes>.kpsn.kdpcap{position:absolute;top:0;bottom:auto;transform:translateX(-50%);z-index:20;white-space:nowrap;margin:0;text-align:center;
- background:rgba(255,250,240,.92);border:1px solid var(--line,#e6d3ac);border-radius:6px;padding:1px 8px}
+ background:none;border:0;padding:1px 8px}
 /* (KIT 48) the second chip line is placed by kitDpFit (style.top) */
 #modal .dlg.kdper .kes>.kpsn .kname{display:flex;flex-direction:column;align-items:center;line-height:1.2;color:color-mix(in srgb,var(--rc,#2a1a12) 45%,#2a1a12);font-size:1rem}
 #modal .dlg.kdper .kes>.kpsn .kname .kti{font-size:.74rem;font-weight:600;letter-spacing:.02em;line-height:1.1;color:color-mix(in srgb,var(--rc,#7a5530) 75%,#2a1a12)}
@@ -520,6 +520,10 @@ html body .kbk-pname .kname .kti{display:block;font-size:.62em!important;margin:
 /* stage tags: never a plate (owner 11/13 "figure name labels without background"), also in the compact stage (.j59c) */
 html body .stage.j59 #tokens .tok .tag,html body .stage.j59 #j59metag .tag{background:none!important;border:0!important;box-shadow:none!important;padding:0!important}
 html body .krs .krn{text-shadow:0 0 2px #fff8ee,0 0 5px #fff8ee,0 0 9px #fff8eecc}
+/* 48.1c (owner 15/11 ~20:40Z): person-dialog captions (kitEventDp .kdpcap, event-stage .kesov captions) have NO box: rank + name sit
+   straight on the dialog; over a picture (.kesov) the name keeps the scene-word paper halo for readability */
+html body #mb .kesov>.kpsn,html body #modal .dlg.kdper .kes>.kpsn.kdpcap,html body .kesf>.kpsn{background:none!important;border:0!important;box-shadow:none!important;border-radius:0!important}
+html body #mb .kesov>.kpsn .kname:not(.kmy){text-shadow:0 0 2px #fff8ee,0 0 5px #fff8ee,0 0 9px #fff8eecc}
 html body .modal.night .kpsn .kname,html body .modal.night .knr>.knr-n,html body .modal.night .krn,html body .modal.night .kbk-pname .kname{color:#f3e6cf!important}
 /* 48.1b her own name: black ink + soft light-gold glow (wins over the stage paper halo and the night parchment ink) */
 html body .kmy,html body .krs .krn.kmy,html body .modal.night .kmy,html body .stage .tok .tag .j59n.kmy,html body .stage #j59metag .tag .j59n.kmy,html body .kpsn .kname.kmy,html body .pc .pcl .pcname.kmy,html body .kbk-pname .kname.kmy,html body .kpod-plq .kname.kmy{color:#1a0f08!important;

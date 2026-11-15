@@ -28,3 +28,16 @@ old save loads (ok month 4) at all 5 sizes; kit page sample 54 blocks, no horizo
 (slot rule KIT 33.7, unchanged). Contact sheet: /home/user/wt/rank-title-contact-sheet.jpg (not in git).
 Contrast (WCAG): title fill vs its outline 6.5–14.3:1; vs a night scene 6.3–13.8:1; on parchment the outline carries it (outline vs
 parchment ≈ 17:1) — fill vs parchment only 1.2–2.6:1, which is why the outline is part of the kit.
+
+## Review r1 (review/rank-title-r1, merged onto origin/main e5a327d1)
+- Merge: index.html / sw.js / assets.json conflicts = generated files, taken from main and rebuilt (bash dev/site/build_site.sh).
+- Reviewer fixes: Đại cung nữ tone #86a8ec (blue, MRCOL family; was jade) and Nữ quan #b6a6e6 (lavender, MRCOL family).
+  Dialog face captions (j3 `.faces figcaption`: "Nhập cung", "Thân phận kiếp này") now built with kitNameRank (rank over name; was name over rank).
+- Owner 15/11 ~20:10Z — KIT 48.1b: HER own name = near-black ink + soft light-gold glow (`.kmy`), set by kitNameRank (4th arg / kitIsMyName),
+  Ân oán relSide, stage tag j59 (p===S), kitName(S,{named}) (32.7 captions, Tuần lục, podium), kpIdentity, her pcard + strip. Co-op friend not marked.
+- Owner 15/11 ~20:40Z — KIT 48.1c: person-dialog captions (kitEventDp .kdpcap, .kesf>.kpsn, event-stage .kesov>.kpsn) have no box;
+  .kesov names over a picture keep the paper halo.
+- Tests: rank-title.js 5 sizes × 10 cases: 0 page errors, 0 bad, old save loads; chap-label.js (755/1000/844) all ok; month-cal.js bad 0;
+  kit-page.js only the pre-existing "lỗi … reading 'out'" sample error (same on origin/main); ts-oldsave.js ok (12 weeks, no errors).
+- Owner questions (not blocking): stage keeps the paper halo behind names; Thái hậu title is bronze while her frame is deep plum + gold;
+  pale tones (Đáp ứng ivory, Phế phi ash, thô sử, Người lạ) on white/parchment read mainly through the dark outline.
