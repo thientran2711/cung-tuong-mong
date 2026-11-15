@@ -11,7 +11,8 @@
      Time out = dl passed + BAL.coopTm.graceMs (the screens show "Hết buổi" at 0, the step comes after the grace).
      Messages ride the room's act relay ({t:"act",k:"ctm-tm",…}, like swreg's ctm-upd: no Worker change; older clients ignore them).
    - Both players send {mode:"st",key,pz,rd,lf} (paused / ready / choosing a thân phận) on change, on ask, and every 10 s.
-   - Pauses: (a) a player in a mini game or a dialog (Q / S.mg) stops the clock for both, at most BAL.coopTm.pauseCapMs per buổi; the friend
+   - Pauses: (a) a player in a mini game (S.mg / #ov; owner 23:20Z: ONLY mini games, not dialogs or animations) stops the clock for
+     both, at most BAL.coopTm.pauseCapMs per buổi; the friend
      only sees "Hảo hữu đang dở tay, xin đợi" (never what she is doing). (b) "Tạm dừng" (chip button) stops the game for both until the one
      who paused presses "Tiếp tục" ({mode:"hold",on}; kit panel over both screens, no budget). (c) room frozen (a player away, two builds),
      a player choosing her thân phận (Luân hồi, death screen, title): stopped, no budget.
@@ -46,11 +47,10 @@ let pingN=0;function ping(){if(host()||!CW.on)return;say("tp",{t0:Date.now(),n:+
 function onTq(m){const t1=Date.now(),rtt=t1-(+m.t0||t1);if(rtt<0||rtt>20000)return;offS.push([rtt,(+m.th||0)+rtt/2-t1]);if(offS.length>8)offS.shift();
  OFF=offS.slice().sort((a,b)=>a[0]-b[0])[0][1]}
 /* ---------- my status ---------- */
-/* an animation she has to watch (reward / gift / edict / night moments kmStage .kmov, mini game #ov, honour podium, item fx, coins, the week
-   book, the calendar flip) stops the clock too, under the same cap */
-const ANIM=".kmov,#ov,#kpodov,.kievfx,.kcoinfly,.klsfly,.kbk,.kcl-host";
-function anim(){try{for(const m of document.querySelectorAll(ANIM)){const r=m.getBoundingClientRect();if(r.width&&r.height&&getComputedStyle(m).visibility!=="hidden"&&getComputedStyle(m).display!=="none")return true}}catch(e){}return false}
-function myPz(){if(!live())return false;return !!(Q.length||S.mg||anim())}
+/* owner 23:20Z: the clock stops ONLY while a player is in a mini game (S.mg / the mini game overlay #ov), under the cap — not for
+   dialogs, rewards, gifts, edicts, night moments */
+function inMg(){try{if(S&&S.mg)return true;const o=document.getElementById("ov");if(o){const r=o.getBoundingClientRect();if(r.width&&r.height&&!o.hidden&&getComputedStyle(o).display!=="none")return true}}catch(e){}return false}
+function myPz(){if(!live())return false;return inMg()}
 /* buổi length: the host's pick in the lobby (3 / 5 / 8 phút, localStorage "ctm-coop-len"), else BAL.coopTm.buoiMs */
 const LENK="ctm-coop-len";
 function lenPick(){try{const n=+localStorage.getItem(LENK);return TB().lens.includes(n)?n:0}catch(e){return 0}}
