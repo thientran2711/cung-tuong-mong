@@ -557,6 +557,10 @@ kitPodium(list,o)            // HTML only (no overlay)
 kitPodiumTag(qItem,list,o)   // a Q item shows the podium first, then its panel (non-enumerable: never saved)
 kitFigOf(person)             // full-body src (figure, kid figure, or stranger silhouette)
 ```
+Optional per entry (added for the Bảng vinh danh, `jrank.js`, whose people are other players' characters, not people of this life):
+`fig` full-body src (overrides `kitFigOf`), `face` pframe face for the no-figure fallback, `nameH` plaque name HTML (overrides `kitName`),
+`you` text of the own-column tag (with `mine:true`). Entries without them render exactly as before. The leaderboard embeds the stage
+(`kpodCol` + `kpodFit`) inside its own `.kpod.krk` frame above the ranked list (dev/LEADERBOARD.md).
 Art: Magnific gpt-2-6, 1 style ref (face-consort-01), folder ba4aecfe…; no faces. medal-1..3 (240 px, keyed), podium-step (512x384), podium-bg (1344x752).
 
 ## 27. WEEK REPORT FLIP-BOOK (j87) — `kitBook({pages,onClose})`
