@@ -2323,6 +2323,17 @@ Men are never pink/purple. Unknown title → the caller's colour darkened (80 % 
 **48.1d RANK HALO ON A PAINTING (owner 15/11 "Phẩm của tôi cũng viền sáng như tên", review/pick-hint)**: on a painting (stage tag `.j59t`,
 `.kesov` caption title, `.krs`) the RANK line gets the same light paper halo as the name line under it (text-shadow #fff8ee 1/2/5/9px) and
 keeps its full rank tone (`--rt`, KIT_RT); every KIT_RT tone is >= 4.7:1 against the halo. Replaces the old dark outline + tinted glow.
+ON THE STAGE this halo is HERS ONLY (48.1e below).
+**48.1e STAGE: ONLY HER TAG GLOWS (owner 15/11 session 8, overrides 48.1d for the stage)**: on the stage only HER tag (rank line + name
+line) glows: rank line = the 48.1d paper halo, name = the 48.1b light-gold glow. Her tag = `#j59metag` or any stage tag of S (`.tag.j59mine`,
+set by j59tags); co-op: each player sees only her OWN tag glowing, the friend's tag is plain. Every other person's stage tag (`.stage .tok
+.tag:not(.j59mine)`): plain rank colour + plain ink name, no blurred halo; only a 0.6px hairline paper edge with zero blur (#fff8ee)
+so the plain words stay readable on dark carpets / night scenes (scan `dev/test/stage-tag-contrast.js` + `.py`: 14 places x sáng/tối,
+plain lines with NO edge fell to 1.0–1.7:1 against the painting; with the edge every glyph sits on its own paper rim, >= 4.7:1 for every
+KIT_RT tone and the name ink).
+Captions over event pictures (`.kesov`) and the kit scene row (`.krs`) keep 48.1d (not the stage).
+**Stage side cards** (`.ksh .k3c`, the people column beside the stage): a person's title + name stack as rank line over the name (title
+`.kti` display:block), so a long "Cung nữ thân tín Hồng Ngọc" never widens the column (755) or squeezes the card (844).
 **48.1c NO BOX (owner 15/11 ~20:40Z)**: person-dialog captions (kitEventDp `.kdpcap`, 32.7 `.kesf>.kpsn`, the event-stage overlay
 `.kesov>.kpsn`) have no box / frame / plate: rank + name sit straight on the dialog background (title colour + outline as above, name plain
 ink, hers gold-glow). Over a picture (`.kesov`) the name keeps the paper halo of scene words for readability.

@@ -5807,11 +5807,11 @@ const J59U={};function j59unkSrc(g){const u=`https://ctm-img.victoria-tntt.worke
 function j59unk(b,p,im){const s0=im.getAttribute("src")||"";const m=/fig-(emperor|eunuch|official|physician|man)-|unknown-fig-m\./.test(s0)||p.kind==="emp";const u=j59unkSrc(/unknown-fig-k\./.test(s0)?"k":m?"m":"f");
  if(u){b.classList.remove("j59unk");if(im.getAttribute("src")!==u)im.src=u}else b.classList.add("j59unk")}
 function j59tags(st,tk){const ppl=typeof curPeople==="function"?curPeople():[];
- if(tk)tk.querySelectorAll(".tok").forEach(b=>{const g=b.querySelector(".tag"),p=ppl[+b.dataset.p];if(!g||!p)return;const h=j59tagHTML(p,p.name);if(g.dataset.j59!==h){g.innerHTML=h;g.dataset.j59=h}g.style.setProperty("--tc",j59col(p));g.classList.toggle("j59u",!j59known(p));g.title=g.innerText.replace(/\n/g," · ");const im=b.querySelector(".figimg");if(im){if(!j59known(p))j59unk(b,p,im);else b.classList.remove("j59unk")}});
+ if(tk)tk.querySelectorAll(".tok").forEach(b=>{const g=b.querySelector(".tag"),p=ppl[+b.dataset.p];if(!g||!p)return;const h=j59tagHTML(p,p.name);if(g.dataset.j59!==h){g.innerHTML=h;g.dataset.j59=h}g.style.setProperty("--tc",j59col(p));g.classList.toggle("j59u",!j59known(p));g.classList.toggle("j59mine",p===S);g.title=g.innerText.replace(/\n/g," · ");const im=b.querySelector(".figimg");if(im){if(!j59known(p))j59unk(b,p,im);else b.classList.remove("j59unk")}});
  const me=document.getElementById("mefig");let mt=document.getElementById("j59metag");
  if(!me){if(mt)mt.remove();return null}
  if(!mt){mt=document.createElement("div");mt.id="j59metag";mt.className="tok j59me";mt.style.visibility="hidden";mt.innerHTML='<span class="tag"></span>';st.appendChild(mt)}
- const g=mt.firstChild,h=j59tagHTML(S,S.name);if(g.dataset.j59!==h){g.innerHTML=h;g.dataset.j59=h}g.style.setProperty("--tc",j59col(S));return mt}
+ const g=mt.firstChild,h=j59tagHTML(S,S.name);g.classList.add("j59mine");if(g.dataset.j59!==h){g.innerHTML=h;g.dataset.j59=h}g.style.setProperty("--tc",j59col(S));return mt}
 /* selection: the person whose pop card is open (popIdx), or herself after a tap on her figure; one at a time */
 let J59ME=false;
 function j59sel(st,tk,me){let pi=null;try{pi=typeof popIdx==="number"?popIdx:null}catch(e){}if(pi!=null)J59ME=false;
@@ -11399,7 +11399,11 @@ window.kitDedupTitle=kitDedupTitle;
 const KIT_NOCH=/(^|[.;·,:]\s*|\s)((?:[^\s.;·,:<>]+ ){0,5}?)(−?-?\d+(?:[.,]\d+)?)\s*→\s*\3(?=\s*(?:[.;·,]|$))\s*[;·,]?\s*/g;
 /* review/pick-hint: the tidy-up runs only on a text piece where a "N → N" clause was really dropped — before, every piece that ended in ", "
    just before a name/chip tag lost its comma ("thái giám canh cung, <name>" → "canh cungCung nữ …") */
-function kitNoChange(h){try{return kpMapText(String(h||""),s=>{KIT_NOCH.lastIndex=0;if(!KIT_NOCH.test(s))return s;KIT_NOCH.lastIndex=0;return s.replace(KIT_NOCH,(m,a)=>/[.;·,:]/.test(a)?a.replace(/\s+$/,"")+" ":a).replace(/ {2,}/g," ").replace(/\s+\./g,".").replace(/[;·,]\s*(\.|$)/g,"$1")})}catch(e){return h}}
+/* review/pick-hint-r1: the harmless tidies (double space, space before a full stop) still run on every piece as before; only the
+   separator strip at the end of a piece waits for a dropped clause */
+function kitNoChange(h){try{return kpMapText(String(h||""),s=>{KIT_NOCH.lastIndex=0;const hit=KIT_NOCH.test(s);KIT_NOCH.lastIndex=0;
+ if(!hit)return s.replace(/ {2,}/g," ").replace(/\s+\./g,".");
+ return s.replace(KIT_NOCH,(m,a)=>/[.;·,:]/.test(a)?a.replace(/\s+$/,"")+" ":a).replace(/ {2,}/g," ").replace(/\s+\./g,".").replace(/[;·,]\s*(\.|$)/g,"$1")})}catch(e){return h}}
 window.kitNoChange=kitNoChange;
 /* a row that starts in lower case after a clause was dropped gets a capital first letter */
 function kitCapFirst(h){let done=false;try{return kpMapText(String(h||""),s=>{if(done)return s;const i=s.search(/\S/);if(i<0)return s;done=true;return s.slice(0,i)+s[i].toLocaleUpperCase("vi")+s.slice(i+1)})}catch(e){return h}}
@@ -13784,7 +13788,7 @@ function scarOf(p){p=p||S;const s=p&&p.scar;if(!s)return null;const left=Math.ma
 window.scarOf=scarOf;
 (function(){const e0=effSac;effSac=function(p){let r=e0.apply(this,arguments);try{if(p&&p.scar)r=cl(r-Math.round(p.scar.d*(p.scar.veil?2/3:1)),0,130)}catch(e){}return r}})();
 function scar70(t,sev,a,how){const L=SCAR70[sev];t.scar={sev,d:L.d,need:L.need,pg:0,veil:0,tr:0,cure:0,by:a?key(a):null,at:wk(),how:how||""};ap(t,{sung:-L.sung,danh:-L.danh});
- if(t===S){for(const v of liveRivals(true))v.ghen=cl((v.ghen||0)-6*sev,0,100)}return L}
+ if(t===S){for(const v of liveRivals(true))v.ghen=cl((v.ghen||0)-Math.round(6*sev),0,100)}return L}
 A("huydung","Hủy dung",{c:{bac:-30,duc:-8},ok:(a,t)=>(a.bac||0)>=30&&!t.scar,o:a=>odA(a,38+(a.tamco||0)/5+(a.mat||0)*4),x:"Sắc nàng giảm mạnh, ân sủng giảm",f:(a,t)=>{
  ap(a,{bac:-30});if(typeof ducAdd==="function")ducAdd(a,-8,"hủy dung");else ap(a,{duc:-8});a.schemes=(a.schemes||0)+1;const how=window.__j70hd||"phan";
  const c=caught(a,t,how==="phan"||how==="son","hủy dung "+NM(t)+(how==="canh"?" bằng bát canh nóng":how==="meo"?" bằng cách dụ mèo dữ":" bằng phấn trộn độc"));if(c)return c;
@@ -21053,19 +21057,28 @@ window.kitIsMyName=kitIsMyName;
  const T=H([".krt",".knr>.knr-r",".stage .tok .tag .j59t",".stage #j59metag .tag .j59t",".kpsn .kname .kti",".pc .pcl .pcrk",".kpstrip .kpsn small",".kbk-pname .kname .kti",".kpod-plq .kname .kti"]);
  const N=H([".krn",".knr>.knr-n",".stage .tok .tag .j59n",".stage #j59metag .tag .j59n",".kpsn .kname",".pc .pcl .pcname",".kpstrip .kpsn b",".kbk-pname .kname",".kpod-plq .kname"]);
  /* ON A PAINTING (owner 22:25Z): stage name tags over the scene, captions laid over a picture (.kesov), the kit sample's scene row (.krs) */
- const PT=H([".stage .tok .tag .j59t",".stage #j59metag .tag .j59t","#mb .kesov>.kpsn .kname .kti",".krs .krt",".krs .knr>.knr-r"]);
- const PN=H([".stage .tok .tag .j59n",".stage #j59metag .tag .j59n","#mb .kesov>.kpsn .kname",".krs .krn",".krs .knr>.knr-n"]);
+ const PT=H([".stage #j59metag .tag .j59t",".stage .tok .tag.j59mine .j59t","#mb .kesov>.kpsn .kname .kti",".krs .krt",".krs .knr>.knr-r"]);
+ const PN=H([".stage #j59metag .tag .j59n","#mb .kesov>.kpsn .kname",".krs .krn",".krs .knr>.knr-n"]);
+ /* 48.1e STAGE: ONLY HER TAG GLOWS (owner 15/11 session 8 "chỉ có tôi là mới có chữ phẩm và tên là phát sáng thôi, còn những người khác là
+    bình thường"; overrides 48.1d for the stage). Her tag = #j59metag / any stage tag of S (class .j59mine set by j59tags; co-op: each player's own S, the friend's tag is plain).
+    Everybody else's stage tag: plain rank colour + plain ink name, NO glow (no blurred halo); only a 0.6px hairline paper edge with zero blur
+    (reads as the letter's own edge, not light) so the plain words stay readable on a dark carpet / night scene (OS = other people's tag parts). */
+ const OS=H([".stage .tok .tag:not(.j59mine)",".stage .tok .tag:not(.j59mine) .j59t",".stage .tok .tag:not(.j59mine) .j59n"]);
  st.textContent=`
 :root{--krt-ol:#1c100a;--krt-ink:#2a1a12}
 ${T}{font-family:var(--display,"Noto Serif",Georgia,serif)!important;font-weight:700!important;font-style:normal;letter-spacing:.03em!important;
  color:var(--rt,color-mix(in srgb,var(--rc,var(--tc,#7a5a30)) 80%,#000))!important;text-shadow:none!important;
  background:none!important;box-shadow:none!important;line-height:1.2!important;padding:0 2px!important}
 ${N}{color:var(--krt-ink)!important;font-weight:700;text-shadow:none!important}
-${PT}{color:var(--rt,color-mix(in srgb,var(--rc,var(--tc,#7a5a30)) 80%,#000))!important;/* 48.1d (owner 15/11 "Phẩm của tôi cũng viền sáng như tên"): the rank line on a painting gets the SAME light
+${PT}{color:var(--rt,color-mix(in srgb,var(--rc,var(--tc,#7a5a30)) 80%,#000))!important;/* 48.1d (owner 15/11 "Phẩm của tôi cũng viền sáng như tên"): on a painting HER rank line (stage: hers only, 48.1e) gets the SAME light
  halo as the name line under it (was a dark outline + tinted glow, hard to read), in its full rank tone so it keeps its colour on the light halo */
  text-shadow:0 0 1px #fff8ee,0 0 2px #fff8ee,0 0 5px #fff8ee,0 0 9px #fff8eecc!important}
 ${PN}{text-shadow:0 0 2px #fff8ee,0 0 5px #fff8ee,0 0 9px #fff8eecc!important}
+${OS}{text-shadow:-.6px 0 0 #fff8ee,.6px 0 0 #fff8ee,0 -.6px 0 #fff8ee,0 .6px 0 #fff8ee!important}
 html body .kpsn .kname .kti{display:block;font-size:.84rem!important}
+/* stage side cards (.ksh .k3c, review/pick-hint-r1): a person's title + name (kitRankNamePaint / kitName) stack as rank line over name,
+   like every other card head (48.1), so the side column keeps its width at 755 / 844 */
+html body .ksh .k3c .k3ct .kname{display:block;white-space:normal}html body .ksh .k3c .k3ct .kname .kti{display:block;font-size:.84em!important;letter-spacing:0!important;padding:0!important}
 html body .kpstrip .kpsn small{order:-1}
 html body .knr>.knr-r,html body .stage .tok .tag .j59t,html body .stage #j59metag .tag .j59t{font-size:.84rem!important;margin:0 0 1px!important}
 html body .stage .tok .tag .j59t.j59only,html body .stage #j59metag .tag .j59t.j59only{font-size:.92rem!important}
@@ -24847,8 +24860,16 @@ function kitRankNamePaint(root,dry){const out=[];if(!root||!S||!document.createT
   if(hit){if(last<v.length)f.appendChild(document.createTextNode(v.slice(last)));n.parentNode.replaceChild(f,n)}}
  return out}
 window.kitRankNamePaint=kitRankNamePaint;
-(function(){let q=false;const run=()=>{q=false;try{if(!window.__krnOff)kitRankNamePaint(document.body)}catch(e){}};const mo=new MutationObserver(()=>{if(!q){q=true;requestAnimationFrame(run)}});
- const go=()=>{try{mo.observe(document.body,{childList:true,subtree:true,characterData:true})}catch(e){}run()};if(document.body)go();else document.addEventListener("DOMContentLoaded",go)})();
+/* review/pick-hint-r1: the observer repaints only the subtrees that changed in this frame (added nodes, edited text), not the whole body
+   (a full-body pass costs 2-8 % of a render on the big tabs and ran on every mutating frame: count-ups, toasts, timers). Its own
+   replacements are skipped (they hold no bare name), so it never loops; too many roots in one frame → one full pass. */
+(function(){let q=false,full=true;const R=new Set();
+ const run=()=>{q=false;const all=full,L=[...R];full=false;R.clear();if(window.__krnOff)return;
+  try{if(all||L.length>120){kitRankNamePaint(document.body);return}
+   for(const n of L)if(n.isConnected&&!L.some(m=>m!==n&&m.contains(n)))kitRankNamePaint(n)}catch(e){}};
+ const add=n=>{const e=n&&(n.nodeType===1?n:n.parentElement);if(e&&!(e.matches&&e.matches(".kname,.kname *")))R.add(e)};
+ const mo=new MutationObserver(M=>{for(const m of M){if(m.type==="characterData")add(m.target);else m.addedNodes.forEach(add)}if(R.size&&!q){q=true;requestAnimationFrame(run)}});
+ const go=()=>{try{mo.observe(document.body,{childList:true,subtree:true,characterData:true})}catch(e){}full=true;run()};if(document.body)go();else document.addEventListener("DOMContentLoaded",go)})();
 /* ================= jclose — owner bugs 15/11 16:40Z–17:24Z, each fixed for its WHOLE class (review/close-bugs) =================
    Scans: dev/test/cb-gate.fn.js (khắc/buổi gates), cb-wx (weather × buổi), cb-tap.fn.js (tap paint), cb-suc (Cần duplicates),
    cb-fest (festival × contest titles), cb-ton (event "Tốn: không"). Before/after tables: dev/PROGRESS_close_bugs.md. */
@@ -27994,7 +28015,7 @@ window.kitPhTone=kitPhTone;window.KIT_PH=KIT_PH;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="c467b7769974";window.CTM_BUILD=BUILD;
+const BUILD="a9b613b255e3";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

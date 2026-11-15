@@ -343,5 +343,13 @@ function kitRankNamePaint(root,dry){const out=[];if(!root||!S||!document.createT
   if(hit){if(last<v.length)f.appendChild(document.createTextNode(v.slice(last)));n.parentNode.replaceChild(f,n)}}
  return out}
 window.kitRankNamePaint=kitRankNamePaint;
-(function(){let q=false;const run=()=>{q=false;try{if(!window.__krnOff)kitRankNamePaint(document.body)}catch(e){}};const mo=new MutationObserver(()=>{if(!q){q=true;requestAnimationFrame(run)}});
- const go=()=>{try{mo.observe(document.body,{childList:true,subtree:true,characterData:true})}catch(e){}run()};if(document.body)go();else document.addEventListener("DOMContentLoaded",go)})();
+/* review/pick-hint-r1: the observer repaints only the subtrees that changed in this frame (added nodes, edited text), not the whole body
+   (a full-body pass costs 2-8 % of a render on the big tabs and ran on every mutating frame: count-ups, toasts, timers). Its own
+   replacements are skipped (they hold no bare name), so it never loops; too many roots in one frame → one full pass. */
+(function(){let q=false,full=true;const R=new Set();
+ const run=()=>{q=false;const all=full,L=[...R];full=false;R.clear();if(window.__krnOff)return;
+  try{if(all||L.length>120){kitRankNamePaint(document.body);return}
+   for(const n of L)if(n.isConnected&&!L.some(m=>m!==n&&m.contains(n)))kitRankNamePaint(n)}catch(e){}};
+ const add=n=>{const e=n&&(n.nodeType===1?n:n.parentElement);if(e&&!(e.matches&&e.matches(".kname,.kname *")))R.add(e)};
+ const mo=new MutationObserver(M=>{for(const m of M){if(m.type==="characterData")add(m.target);else m.addedNodes.forEach(add)}if(R.size&&!q){q=true;requestAnimationFrame(run)}});
+ const go=()=>{try{mo.observe(document.body,{childList:true,subtree:true,characterData:true})}catch(e){}full=true;run()};if(document.body)go();else document.addEventListener("DOMContentLoaded",go)})();
