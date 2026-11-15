@@ -96,5 +96,6 @@ j72 bước vs Hồi · stage paper halo · Thái hậu title bronze vs plum · 
 | C37 | review/panel-size (owner s8: all pop-ups same frame size per viewport) | QUEUED-NEXT |
 | D51 | fxkit follow-ups: cracked tea cup, scroll unroll, red seal slam, swaddle reveal, letter under door + wire call sites (PROGRESS_fxkit.md); clean committed .out/ folder on main | QUEUED |
 | C38 | review/ev-art-fit (owner s8: unrelated event pictures; no generic default; paint missing) | RUNNING |
-| C39 | review/tab-underline (owner s8: stray bar through selected category chip) | QUEUED-NEXT |
+| C39 | review/tab-underline (owner s8: stray bar through selected chip + grey scroll track under chip rows, all tab rows) | QUEUED-NEXT |
 | D52 | skin-match audit of 7347 never-measured figures (plan in PROGRESS_review-skin-match.md; worktree /home/user/wt/skin cache) | QUEUED |
+| C40 | review/actcard-one (owner s8: one compact act card everywhere; tap picture to enlarge) | QUEUED-NEXT (unless owner objects) |
