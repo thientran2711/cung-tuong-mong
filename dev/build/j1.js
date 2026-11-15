@@ -80,8 +80,6 @@ function apply(o){const pops=[];
     if(k==="maid"){S.maid.loyal=cl(S.maid.loyal+v,0,100);pops.push([k,v]);continue}
     if(k==="sung")v=sg(v);S[k]=(S[k]||0)+v;if(NAMES[k])pops.push([k,v])}
   for(const k of ["sung","danh","suc","sac","tai","tamco","duc"])S[k]=cl(S[k],0,100);
-  /* "Hoàng hậu quý ngươi" (S.hh) IS the Hoàng hậu's feeling toward her: her person card ("Nàng với ngươi") moves with it (owner 11/15) */
-  if(o.hh){try{const q=typeof queenP==="function"?queenP():null;if(q&&q!==S&&typeof affAdd==="function")affAdd(q,S,o.hh)}catch(e){}}
   S.th=cl(S.th,-100,100);S.hh=cl(S.hh,-100,100);S.bac=Math.max(0,S.bac);S.mat=cl(S.mat,0,10);
   if(!quiet)pops.forEach(([k,v],i)=>popNum(k,v,i))}
 function popNum(k,v,i){const el=$("hud-"+k)||$("stage");if(!el)return;const r=el.getBoundingClientRect();
