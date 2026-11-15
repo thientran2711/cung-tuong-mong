@@ -895,3 +895,9 @@ All must work in co-op.
 - Owner (verbatim): "Làm thành biểu tượng phòng hay sao để bấm đi."
 - Screenshot dev/handover/refs/owner-room-button.jpg (header right column: a wide empty bar with "‹ Phòng" that reads like an empty field).
 - Decision: replace it with a compact painted ROOM ICON button (kit button, Magnific-painted icon of her residence/door; small label under/beside it, e.g. "Về phòng"; when she is elsewhere the label names where it goes back to). Same icon style as the other HUD icons; tooltip; works on all viewports; co-op same. The freed header space stays clean (no empty bar). Whole family: any other "‹ Nơi" back bars use the same kit icon button. → worker review/room-btn (QUEUED: subagent cap).
+
+## 15/11 (session 8) — Giao tình relation picker wastes space; press-fx URGENT (owner screenshot)
+- Owner (verbatim): "Khung này choáng space quá. Coi sắp xếp lại đi. Làm gấp cái vụ chạm vào đâu cũng có hiệu ứng khung to nhún, nhức đầu quá."
+- Screenshot dev/handover/refs/owner-giaotinh-picker-space.jpg (Giao tình › Ân oán: "Xem quan hệ của" group tabs + portrait strip with ‹ › pager, then "với" group tabs + another strip, each strip mostly empty, tall; the actual relation card starts far down).
+- Decision (coordinator design): compact the two pickers: one row each — label + group chips + portraits on the SAME line where width allows (iPad), smaller portrait cells, pager only when the strip overflows, no tall empty bands; or a single two-slot selector "[Hoàng thượng] ⇄ [Tần Kiều Nguyệt]" that opens a kit person picker on tap. Goal: the relation card is visible without scrolling on 1180x820 and 755x1000. Same fix for other screens using these person strips with large empty space. → worker review/rel-picker (QUEUED: subagent cap).
+- press-fx made URGENT → worker review/press-fx spawned immediately.
