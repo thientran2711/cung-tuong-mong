@@ -48,6 +48,11 @@ Luôn bắt đầu từ bản CDN (`https://ctm-img.victoria-tntt.workers.dev/im
   Rescan of the fixed figs: 8 / 799 still flag a smaller second wedge (left as is).
 - NOT DONE: smudge clean (skin-smudge fix) — detector still catches wrinkles/beards, not calibrated; rosy uploads did not include it.
   Edge OUTPAINT for 8 figs (list above) — needs Magnific credits (~270 each per earlier estimate), waiting for coordinator.
+- LIVE CDN (12:30Z): the 8 edge-cut a18 figures (c10-t8, m12-t7, m15-t8, m17-t7, m30-t8, m32-t8, m33-t7, m36-t6) outpainted:
+  left quarter of the original GPT 2.6 sheet + parchment pad → gpt-2-6 edit "continue the cut train" (40 cr each) → Magnific remove
+  background → tools/ec.py grafts ONLY the new train onto the CDN figure (CDN pixels kept; Lab colour match; premultiplied feather
+  over a 90-px band on the train that crosses the old cut; figure rescaled to 900 tall when the train lies below the old floor:
+  ×0.975–0.998, m36 ×0.93). cutcheck unchanged, edge-cut 0. Sheet dev/art/scene-light/edge-outpaint.jpg.
 
 ## LỖI ĐÃ BIẾT
 - Chạy thử trên máy: màn "Luân hồi" phủ sân khấu → script phải ẩn phần tử phủ (book.js đã làm). Máy không WebGL → không thấy vệt mưa.
