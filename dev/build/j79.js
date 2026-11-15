@@ -216,13 +216,15 @@ const KIT_GLOSS_ROAD={
   "Danh":"Tiếng tăm của ngươi trong đám cung nhân. Danh cao thì được tin cậy, có người để ý xin cưới; mất khi bị bắt quả tang hay bị chê cười.",
   "Sắc":"Nhan sắc. Giúp được người khác quý, được Hoàng thượng để ý.",
   "Tài":"Tài học: đàn, thơ, chữ. Giúp làm tròn việc chủ giao, được Hoàng thượng để ý.",
-  "Bạc":"Tiền riêng của ngươi: lương tháng, tiền thưởng. Dùng để mua đồ, đút lót, nhờ người."},
+  "Bạc":"Tiền riêng của ngươi: lương tháng, tiền thưởng. Dùng để mua đồ, đút lót, nhờ người.",
+  "Ân tình":"Tình nghĩa riêng giữa Hoàng thượng và một phi tần. Phận cung nữ chưa có Ân tình; được Hoàng thượng để ý, nâng làm phi tần rồi mới có."},
  cold:{"Sủng":"Hoàng thượng còn thương ngươi bao nhiêu (0–100). Còn sủng thì dễ được nhớ đến, được ân xá ra khỏi lãnh cung.",
   "Đức":"Tiếng hiền đức. Giữ được Đức thì dễ được minh oan, được ân xá. Làm việc ác bị lộ thì mất Đức.",
   "Danh":"Tiếng tăm của ngươi trong cung. Ở lãnh cung Danh mòn dần; còn Danh thì người ngoài còn nhớ đến mà nói giúp.",
   "Sắc":"Nhan sắc. Giúp Hoàng thượng còn nhớ đến ngươi.",
   "Tài":"Tài học: đàn, thơ, chữ. Thơ văn gửi ra ngoài có thể làm Hoàng thượng động lòng.",
-  "Bạc":"Tiền riêng của ngươi. Ở lãnh cung không còn tiền phát hằng tháng; dùng để đút lót, nhờ người đưa tin."}};
+  "Bạc":"Tiền riêng của ngươi. Ở lãnh cung không còn tiền phát hằng tháng; dùng để đút lót, nhờ người đưa tin.",
+  "Ân tình":"Tình nghĩa riêng giữa Hoàng thượng và ngươi, còn lại từ những ngày được gần ngài. Còn Ân tình thì thư từ lãnh cung được ngài đọc, xin tha tội dễ thành. Ở đây không gặp được ngài nên Ân tình phai dần."}};
 function kitGlossText(term){const r=kitRoad();const R=r&&KIT_GLOSS_ROAD[r];return R&&R[term]!=null?R[term]:(KIT_GLOSS[term]||"")}
 window.kitRoad=kitRoad;window.kitGlossText=kitGlossText;
 /* HX (header tap texts) follows the road: rebuilt from kitGlossText when the road changes; the consort texts are kept as they were */
