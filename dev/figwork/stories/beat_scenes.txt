@@ -218,3 +218,52 @@ s_su:c2|0|a fair-haired foreign envoy kneels before the Emperor in the throne ha
 s_su:c3|0|a large ornate golden European mechanical clock with a stopped dial, without numerals, on a table in a palace hall, a consort and eunuchs looking at it
 s_su:t1|0|a fair-haired foreign envoy and a consort stand at a table where a blank scroll document lies, a brush ready
 s_su:x1|1|a farewell banquet at night, the Emperor turns to ask a consort beside him, a fair-haired foreign envoy raising his cup
+s_dich:s1|0|imperial physicians in Ming robes and cloth face masks seal the gate of a palace courtyard with a wooden bar, eunuchs keeping people back, a consort watching gravely from a distance
+s_dich:s2|1|a consort at her desk at night reads an old blank-paged medical book by lamplight, small porcelain jars and a tiny silver lancet laid out beside it
+s_dich:c1|0|a small prince of about five lies ill in a canopied bed, his mother, a consort, kneeling at the bedside holding his hand, an imperial physician nearby
+s_dich:c2|0|palace maids whisper behind their sleeves in a corridor, glancing toward a consort who walks past composed with her own maid
+s_dich:c3|0|the Emperor rests on a daybed with a light fever, a cool cloth on his brow, a consort and imperial physicians attending him anxiously
+s_dich:t1|0|a consort directs imperial physicians and eunuchs in a courtyard turned infirmary, rows of beds under awnings, steaming herbal pots
+s_dich:x1|0|the Emperor in his hall commends a consort who bows before him, imperial physicians kneeling to one side, sunlight streaming in
+s_tinh:s1|0|in the imperial garden a handsome young palace guard in Ming armour-robe hands back a dropped silk handkerchief to a consort, their fingers almost touching
+s_tinh:s2|0|a palace maid discreetly hands a consort a folded sheet of blank paper in her chamber, the consort holding it thoughtfully
+s_tinh:c1|1|behind a large rockery in the garden at night a handsome young palace guard stands at a respectful distance before a consort, a lantern on the ground
+s_tinh:c2|1|a consort sits alone by a window at night, an untouched tea set beside her, the empty corridor beyond, a lonely mood
+s_tinh:c3|0|an older eunuch in grey robes leans close to whisper to a consort in a corridor, the consort remaining composed
+s_tinh:t1|1|a handsome young palace guard at a small side gate of the palace wall at night offers his hand to a consort, she hesitates, moonlight
+s_tinh:x1|0|the Emperor seated in his study asks a consort who stands before him, a serious calm mood, eunuchs at the door
+s_thay:s1|0|an elderly chief eunuch with white hair in dark Ming robes murmurs a word to a consort as she passes him in a long corridor
+s_thay:s2|0|an elderly white-haired chief eunuch bows and asks a favour of a consort in her courtyard, a young eunuch of about eighteen behind him
+s_thay:c1|0|an elderly white-haired chief eunuch sits on a low stool telling an old story to a consort in her hall, teacups between them
+s_thay:c2|0|an elderly white-haired chief eunuch stands accused in a hall while a consort points at an open account ledger without writing, other eunuchs watching
+s_thay:c3|1|an elderly white-haired chief eunuch hands a consort a small sealed folded note at night by a lantern, watching her carefully
+s_thay:t1|0|a frail elderly white-haired chief eunuch in a sickroom gives a consort a thick closed bound notebook with a plain cover
+s_thay:x1|0|an elderly white-haired chief eunuch with a small bundle bows farewell to a consort at a palace gate, a cart waiting outside
+s_ban:s1|0|two consorts kneel side by side before the composed Empress in a grand hall, a small cloth doll on the floor before them as evidence
+s_ban:s2|1|a consort and her maid peer from behind a lattice screen at night at another consort speaking secretly with a eunuch
+s_ban:c1|0|a proud consort arrives at another consort's hall and is greeted, both calm, a cautious first friendly meeting
+s_ban:c2|0|a new palace maid is presented by a eunuch to a consort in her courtyard while another consort watches from the corridor
+s_ban:c3|0|at a palace banquet one consort stands awkwardly being questioned while another consort rises from her seat to speak for her, guests watching
+s_ban:t1|1|two consorts sit facing each other at a tea table at night by candlelight, making a pact, the cups raised together
+s_ban:x1|0|two consorts stand side by side calm and united in a hall facing a third consort in rich robes, the Empress seated behind
+st_the:s1|0|two consorts drink tea together in a garden pavilion, one leaning slightly forward speaking warmly
+st_the:s2|0|a consort hands small silk pouches of silver to two grateful palace maids from the household office in a side courtyard
+st_the:c1|0|a dignified minister in a dark Ming official robe bows to a consort through a half-open screen in a reception room
+st_the:c2|0|a consort in rich robes whispers into the ear of another consort's maid in a corridor, the maid looking uneasy
+st_the:c3|0|a consort beside an open chest of silk bolts hands bolts of silk to her maids and eunuchs, all bowing
+st_the:t1|0|a consort stands protectively in front of her kneeling maid in a courtyard, facing a eunuch accuser holding a small silver ingot
+st_the:x1|0|several consorts and a minister stand together behind one consort in a hall, a united faction, the Empress seat empty in the background
+st_con:s1|0|a consort with her son, a prince of about seven, meets two tutors in the study hall, an elderly stern scholar and a young scholar, both in Ming robes
+st_con:s2|1|a prince of about six sleeps feverish in bed at night, his mother the consort holding a cool cloth, an imperial physician measuring medicine by candlelight
+st_con:c1|0|a prince of about seven plays with a wooden top in a garden while his mother's maid notices a eunuch lurking behind a pillar
+st_con:c2|0|the Emperor in his study listens to a prince of about eight who bows and answers, two other young princes waiting, the consort watching from the side
+st_con:c3|0|two young princes of about seven play together with a kite in the imperial garden, two consorts watching from a pavilion, one smiling
+st_con:t1|0|a consort holds her son, a prince of about seven, close in her hall while maids whisper in the doorway
+st_con:x1|0|several consorts kneel in a hall before the Emperor's dais, each with a young child beside her, princes and princesses of different ages
+st_dong:s1|0|the Emperor in his study turns to ask a consort, a minister kneeling with a closed memorial before him
+st_dong:s2|0|a powerful minister in a dark Ming official robe bows to a consort in a reception room, his young daughter of about ten standing behind him
+st_dong:c1|0|a consort in rich robes speaks to a circle of court ladies in a garden, glancing toward a teenage prince of about fourteen passing in the distance
+st_dong:c2|0|the Empress Dowager, an elderly lady in dark brown robes, sits beside the Emperor in her palace, speaking seriously, a consort standing aside
+st_dong:c3|0|princes of about fifteen and sixteen shoot arrows at targets on a palace training ground, the Emperor watching from a pavilion
+st_dong:t1|1|at night in the imperial kitchen a consort's maid catches a eunuch's wrist over a bowl of food, a small paper packet in his hand
+st_dong:x1|0|the Emperor on his throne addresses kneeling ministers in Ming robes in the great hall, a prince of about sixteen kneeling before the dais
