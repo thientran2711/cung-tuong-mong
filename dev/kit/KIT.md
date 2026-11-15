@@ -348,6 +348,39 @@ Rất thấp < Thấp < Vừa < Cao < Rất cao (0 → "Không có"), the same s
 - Check: `node dev/test/sub-odds.js <site> index.html <out> after` (word detector: no ladder word after ':' or '(').
 Never %, never "Chắc chắn" (sure acts show nothing).
 
+### 11.2 MÀU CHIỀU QUAN HỆ (owner 11/15) — `kitRel(dir,text)` + `kitRelPaint(root)` (jaudit §11), tokens in `p1.html :root`
+| Chiều | Token | Màu | Ví dụ nhãn |
+|---|---|---|---|
+| Người khác → ta (thiện cảm, oán, ghen, tin… của họ với ta) | `--rel-them` | #7a4fa0 (tím) | "Nàng → ta: thiện cảm", "oán ta", "Hoàng hậu với ta", "Thái hậu → ta: thiện cảm", thẻ việc "thiện cảm +10", "ghen +25" |
+| Ta → người khác | `--rel-me` | #2f6f9f (lam) | "Ta → nàng: thiện cảm", "Ta tin cậy", "tin cậy Tiểu Lộ Tử +3" |
+- Only the LABEL takes the direction colour (weight 600); the number keeps the Được/Mất colour (green/red) where it is a change. Never green/red for a direction.
+- Contrast on paper (#fffaf0): purple 5.8:1, blue 5.2:1 (AA). There is no dark-night UI theme (`color-scheme:light`).
+- New code writes `kitRel("them"|"me", label)`; text already on screen is coloured by `kitRelPaint` (one MutationObserver pass, same as VP). Words come from `KIT_REL` (VANPHONG §1).
+
+### 11.3 THIẾU LỄ on formal act cards (owner 11/15) — jaudit §16, numbers `BAL.thieuLe`
+- Formal acts (Thỉnh an Thái hậu / Hoàng hậu, every talk with Hoàng thượng): when she is underdressed for her rank (nothing worn, or worn
+  luxury < `BAL.thieuLe.frac` of her rank allowance; a worn bestowed rank set always counts as proper), the card shows in **Kèm**:
+  "thiếu lễ (y phục dưới phẩm): Danh −2, Đức −1, Thái hậu thiện cảm −3" (strict host ×1.5), and "Vì sao" lists "Y phục dưới phẩm".
+  The number on the card is the very object the act applies (one source). Same rule for NPCs (SOC serveTH). Test: dev/test/thieu-le.js.
+- ONE judgement: `leAttire(p, occasion, host)` → `{state: "ok"|"plain"|"showy"|"overRank", delta:{danh,duc,aff}, why:[…]}` (jaudit §17).
+  "plain" = dressed below rank, or (review/toilette) the day's `p.toilette = {day, score, makeup}` says no makeup / score < 40.
+  Host by nết: etiquette-minded (Thái hậu Đa nghi/Kiêu ngạo, Hoàng hậu Kiêu ngạo/Ghen tuông) ×1.5; frugal (Hiền lành/Nhu mì) approves
+  plain (Đức +1, thiện cảm +2) and frowns at showy (thiện cảm −2). Card head: "thiếu lễ (…)", "giản dị hợp ý Thái hậu", "y phục quá xa hoa, … không vừa mắt".
+
+### 11.1 "VÌ SAO <bậc>?" — the odds breakdown (owner 11/15 05:55Z: no luck without cause) — `dev/build/jwhy.js`, KIT READY
+- Tapping the odds meter (`.kodm`) on ANY act card, person-card act or option opens the same kit popover (`kpPop`) with:
+  title `Vì sao <bậc>?` (`.kpopt`), one line per factor (`.kpopx > .ef.g` raises / `.ef.r` lowers / `.ef.n` neutral), then the
+  7-step ladder. A factor reads `<who/what> <value>: dễ hơn|khó hơn [chút | N bậc]` — N = round(points/12), never %.
+  Example: "Lòng Ngọc Lan 72: dễ hơn chút · Hoàng hậu đa nghi: khó hơn 1 bậc · Ngọc Lan quen người Càn Ninh: dễ hơn 1 bậc · Quẻ tuần: khó hơn 1 bậc".
+- Factors are the REAL formula's inputs: an act with its own list gives it (`a.why()` on options, `ACT[k].why(a,t)` on consort acts);
+  otherwise `whyDiff()` re-evaluates the act's own odds with each input (her Tai mắt, Tâm cơ, Tài, Sắc, Danh, Sủng, Đức, Thái hậu,
+  Hoàng hậu, Ân tình, Sức, maid's Lòng, Tài nghệ bậc, the target's stats, Hoàng thượng's mood) set to neutral and lists every one
+  that moves it. Quẻ tuần (`lotB`) is always its own line. Hidden facts stay hidden: a target's stats show without numbers; an
+  unknown nết shows as "Nết <người> (ngươi chưa rõ)".
+- The card's odds word = the odds the roll uses (servant sent, Quẻ, Sức included). Never build a second explanation panel.
+- Spy (dò la) has ONE formula for everyone (`spyFactors`/`spyRaw`, knobs in `BAL.spy*`): the player, her maid at home, NPC consorts
+  and their servants (`runAct` spy, j28 "người của X dò hỏi"), and the servant-start order (`ordOdds`).
+
 ## 12. GLOSSARY (j79)
 `KIT_GLOSS` holds the plain meaning of every game term; `kitGloss(term)` draws it with a dotted underline, tap = popover. Delta chips and tiles
 apply it automatically; HUD help (`HX`) reads the same text. Terms: Sủng, Danh, Đức, Sắc, Tài, Tâm cơ, Tai mắt, Ân tình, Sức, Bạc, Chủ tin, Lòng,
@@ -786,6 +819,47 @@ It extends ghen (v.ghen) and itemMonth; vượt phẩm/tố stays j8 vpItems/vpA
 (10 px) above and below, neighbours' own margins zeroed → the row sits centred between the cards above and the list below; (3) sticky ONLY
 when the panel content is > 1.5× the panel height (`kitTabStick()` sets `.kstick`); on short pages it scrolls with the page and never overlaps.
 Test: dev/test/inv-grade.js checks on every panel tab that each act card's bottom edge hits the card itself, and reports the gaps above/below.
+### 28.13d kitShop — THE SHOP (owner 11/15 09:40Z + 10:30Z + 10:45Z markups, review/act-pics; owner 11/15 shop-fix: "the shop IS the person dialog") — `dev/build/jinv.js` — THE pattern for EVERY buying screen
+`kitShop({key, title, info, stage:[{__fig, __cap, __role, age}], items:[{k, src, name, grade, lux, price, unit, eff, rows, sub, stock, have, onBuy(x,q)}], money:()=>n, carry:9, sell:{items, empty}})`.
+- The card IS the KIT 32.7 person dialog (kitDpApply / kitDpFit, jk4) — same component, same box (people + 470 px wide, height
+  min(100dvh − 32 px, 720 px)), same header, same figure column: the seller full-body at the kit figure scale (KIT_FIG, never a private
+  size), two-line name chip under the feet. `stage` takes a pseudo person `{__fig: src, __cap: name, __role}` (kitFigOf / kitName pass it
+  through). NO size of its own: test = its box equals a plain 32.7 dialog with the same person ±1 px.
+- RIGHT column (where a person dialog has text + options): the seller's line + "Ta có N bạc", the kit tab row "Mua" | "Bán"
+  (kitTabRowHTML, `.pctabs.kcattabs`), then the TILE GRID (28.13e), the only thing that scrolls. Short landscape screens (height ≤ 500 px,
+  phone landscape): the seller's line is dropped and "Ta có N bạc" sits left of the tab row so a whole tile row shows.
+- No buy panel under the grid (never repeat the item). Buying is ON the tile (28.13e). Tap a tile picture → the kit item card floats over
+  the dialog (`.kshdet`: kitItem + name + kind · grade + kitRows "Tốn: Bạc −N mỗi món" (Bán: "Được: Bạc +N mỗi món") + kitItemRows
+  Phẩm / Được / Mất / Ghi chú), closed by its ✕ (kit-x), a tap outside it or Esc.
+- No "Thôi": the dialog closes with the header ✕ (kit-x, 32.10); the button row is hidden.
+- Buying q pushes q items (the bag stacks them ×q), the shop stays open (tiles, money refresh; q back to 1).
+- Bán = her sellable goods as the same tiles ("bán 15 bạc · có 2"), same stepper, button "Bán" / "Bán · 30 bạc"; nothing to sell → the
+  `empty` line (Nội vụ phủ: how to get goods — luyện tài nghệ, tab Tài nghệ). Doable tiles first in both tabs. Sell data: review/econ jecon.js
+  `econSellable(p)` → one entry per bag index `{ix,k,name,grade,src,price,via:"noivu"|"agent",risk,no}`; the Nội vụ phủ tab shows via "noivu"
+  (legal, 70 % price, no risk), grouped by k+name (equal goods stack, "có N"), `no` greys the tile with its reason; one sale = `econSellUI(ix)`
+  (else `econSell(S,ix)`); price = entry.price (else `econPrice(S, inv)`). The risky "Bán ra ngoài cung" stays j83 wkSell (not in this shop).
+  Until they exist jinv's fallback (`kitShopSellable` / `kitShopPrice`) does the same from the bag: each handmade work its own tile
+  (wk.n, wkSellVal, sold by wkSell with j83's odds) + items with a price (half price, j8 sellItem).
+Used by: Nội vụ phủ "Nhờ thái giám mua đồ" (`kitShopNvp`, seller `img/fig-eunuch-ndp-tray.webp` = Nội vụ phủ eunuch holding a tray, stock 5, carry 9).
+Next buying screens (Tư trang buy, gifts, peddler) must call kitShop, not dialog option cards.
+Test: `node dev/test/shop-fix.js <build url> <outdir> [WxH@dpr,…]` (box = plain person dialog, row alignment, buy ×2 → bag ×2, sell, item card,
+✕). Shots before / after: dev/shots/shop-fix/ (755x1000, 1000x755, 1180x820, 844x390).
+### 28.13e ALIGNED TILE GRID + BUY ON THE TILE (owner 11/15 shop-fix, "everything on one line") — `.kshg` / `.kshc` (jinv) — for every grid of goods
+Any grid of goods with a price (shop, later gifts, peddler, rewards to pick) uses this tile, never a free-flowing column:
+- Grid: equal columns `repeat(auto-fill, minmax(118px, 1fr))` (124 px ≥ 1000 px wide); rows `max-content`, so every tile in a row has
+  the same height.
+- Tile = a grid with FIXED rows, in this order: picture (kitItem "slot", ≤ 84 px square; 64 px on short landscape) · NAME (grade colour,
+  2 lines reserved, clamped at 2 — a one-line name still keeps the 2-line slot) · USE LINE (one short effect, 2 lines reserved, clamped) ·
+  PRICE (one line, the unit price once) · STEPPER `[−] q [+]` (30 px) · BUTTON (34 px, full tile width). Content never pushes a row:
+  picture tops, name tops, use-line tops, price bottoms, steppers and buttons sit on one line across a row (test: spread ≤ 1 px).
+- q starts at 1, q ≤ what she can afford, the stock and the bag limit per kind (`carry` minus what she has); − greyed at 1, + greyed at the max.
+  q > 1 shows as the Tư trang stack badge on the picture (kitItem `qty` → `.kitq` "×N", bottom-right — the same badge as the bag), live.
+- Button: "Mua" (q = 1) / "Mua · 60 bạc" (q > 1, the total) — Bán tab "Bán" / "Bán · 30 bạc". Cannot: the same button greyed with a short
+  word ("Thiếu bạc", "Hết hàng", "Rương đầy"; a long reason goes to the tooltip). A tile she cannot buy even once has its picture greyed.
+- Tap the picture → the floating kit item card (28.13d). Never TỐN/CẦN rows on the tile.
+Scene rule (same branch, jk2b kitEvArt): a dialog id with NO EVENTS category (plain "Tin trong cung", other pid without a category) gets the room she
+is in (j17 evArt, season × buổi), never the j89 default category (Triều chính, officials kneeling).
+
 ### 28.14 WARDROBE K1 + K2 (review/wardrobe j92)
 - K1 `kitWearSlots(p,{size})`: two kitItem tiles (Trâm cài · Y phục, empty = "Chưa cài" / "Thường phục") right under the portrait on EVERY person
   card (player, consorts, maids, ma ma, Thái hậu…), and on Tư trang. The outfit status chip (Đúng phẩm / Vượt phẩm / Quá giản dị / Phạm tang) shows
@@ -1068,17 +1142,23 @@ have their Cần row. Check: `dev/test/sub-odds.js` (order.sorted / order.stable
 - Được / Mất / Kèm carry only real game effects with a number or a concrete consequence. No flavour ("được tiếng cứng cỏi", "giữ lễ",
   "giữ êm thể diện", "cha mẹ vui lòng", "Thái hậu vui lòng" next to "Thái hậu quý ngươi +3"): map it to its stat or drop it.
 - A positive never sits on the red Kèm line (j63 `kaRows`: a green item written under "kèm:" goes to Được).
-- Relations read subject + verb + object with the number: "Hoàng hậu quý ngươi +4", "Thái hậu quý ngươi +8", "nàng quý ngươi -3",
-  "Hắn quý ngươi +15", "nàng oán ngươi +9". Never the bare word "thiện cảm", never "X với ngươi". `NAMES.th/hh` = "Thái hậu / Hoàng hậu quý
-  ngươi". `S.hh` IS the Hoàng hậu's own regard for her (j24 `hhBind`); the result card shows the real before→after ("quý ngươi hơn (0→4, +4)").
-  Personality can scale a positive regard change (persF trust): the result card shows the true number. Audit: `dev/test/rel-audit.js`
-  (every Hành sự act × 3 origins × 3 buổi + every talk option on 6 consorts: a claimed "quý ngươi ±" must move that field; 0 mismatches).
+- Relations (owner 11/15 09:55Z, supersedes the "quý" wording of the sub-odds merge): ONE word, **thiện cảm**, from `KIT_REL`
+  (jaudit, VANPHONG §1): chips "Nàng → ta: thiện cảm" / "Ta → nàng: thiện cảm", card lines "thiện cảm +10", "oán ta +8";
+  unknown value → "chưa rõ nàng nghĩ gì". Labels coloured by direction (§11.2). `S.hh` IS the Hoàng hậu's own regard for her
+  (j24 `hhBind`); the result card shows the real before→after. Personality scales a change (persF trust/slight): the card draws it
+  with the same functions (exact when her nết is known, else a range). Audits: `dev/test/rel-audit.js`, `dev/test/act-audit.js`.
 - Đức warning on acts that lower Đức below the bar: ONLY "Đức 33 → 28" on the Kèm line (`ducWarnTxt` j19 / `ducWarn` j6), never "còn 28",
   never a rank-rule suffix; rank requirements live in the rank / promotion screens.
 - No placeholder rows: "không mất gì" / "không được gì" never show in Mất / Được (j63 `kaRows`); a row that would be empty is omitted.
 - A side risk that comes with an act (being seen, a rumour…) is a Kèm item on the chance scale with its real consequence:
   "bị người thấy, một phi tần nắm 1 chứng cứ: khả năng thấp" — never an odds word glued into Được.
 - GHI CHÚ only when it adds information: a note that repeats Cần ("(chỉ buổi tối)" when Cần shows "Buổi tối") is dropped (`kaNoteDedup`, j63).
+
+### 31.21 NEVER THE SAME FACT TWICE ON A CARD (owner 11/15 09:40Z) — `kaNorm1` (j63)
+- A Cần item that is only "afford the cost" ("thiếu bạc (cần 20)", "Bạc 20 (có 5)") is dropped when the Tốn row already shows that
+  cost (Bạc −20). When she is short, the Tốn row itself adds a red "thiếu bạc (có N)" and the card is greyed. Cần keeps only the
+  conditions that are NOT the cost: time (khắc, buổi), rank, place, Sức ≥ 20 for long acts, items, people, evidence.
+- Same rule for any row: a value already shown in one row is never repeated in another (Ghi chú that repeats Cần is dropped, j63).
 
 ## 32. KIT 4 · ONE STAT CELL · EVENT STAGE · EVENT FRAMES (kit owner #3, owner + review 11/14) — `dev/build/jk4.js` (after jk3, before j84)
 
@@ -1462,6 +1542,13 @@ Not yet: the outer-court card (`menNtCard`, a kitModal rule card). Test: `node d
   phones) the group goes back to rows (`kitOptCramped`). A Q item may still force optLayout.
 - "Thôi" / "Lui" / "Để sau" / "Bỏ qua" (`kback`): compact secondary button, name only, always last; when every other option is long it is a
   slim full row under them, otherwise a grid cell. The meaningless "Ghi chú: không được mất gì" line is gone everywhere (j63 drops it).
+
+### 32.10 kit-x — THE close ✕ (owner 11/15: no "Thôi" buttons anywhere; a card closes with ONE ✕ at the top right of its header) — `kitXHTML` / `kitXAdd` (jk4)
+`kitXHTML(attrs, label)` → `<button class="kit-x" aria-label="Lui">✕</button>` (VANPHONG: "Lui", not "Đóng"): 36 px square, kit ink on a cream ground, hair border,
+gold ring on focus (night: dark ground, gold ✕). `kitXAdd(dlg)` puts it into a kit panel header `.kph` at the right end — placed absolutely
+(the header keeps the height of every other dialog, the title gets 56 px of right padding) — and it closes the panel the normal way
+(#mclose click: onClose runs); the caller hides the old button row. A floating card inside a panel (shop item card) uses the same class at
+its own top right. Workers removing "Thôi" elsewhere (review/person-acts) use THIS class name `kit-x`. First user: kitShop (28.13d).
 
 ## 33. ONE FIGURE SCALE · KIT_FIG (owner 11/15 "người trên sân khấu quá nhỏ"; review fold-layout r3 FAIL 1366) — `dev/build/jkit.js` (top) + j59 + jk4
 
