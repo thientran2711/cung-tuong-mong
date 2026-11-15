@@ -1,7 +1,7 @@
 # Kiểm duyệt: review/kit-close (1bd240a54) gộp lên main 70c792d41 — PASS (người duyệt R6)
 
 Ngày 2026-11-15. Nhánh: `review/kit-close-r6`, dựng trên bản gộp dở của R5 `review/kit-close-merged-wip` 9e3ab039a (gộp lên main 70c792d41,
-main chưa đổi từ đó). Dựng lại site: index.html trùng khít bản gộp (assets.json/sw.js chỉ khác theo máy, không lấy).
+rồi gộp thêm main 114887bc1 (brand, hoangtu-tuchat; chỉ xung đột index.html/sw.js/assets.json/LOG = dựng lại). Dựng lại site: index.html trùng khít bản gộp (assets.json/sw.js chỉ khác theo máy, không lấy).
 
 ## Kết quả thử (máy chung tải 14–17; tranh từ CDN, chặn `ctmload`)
 - `dev/test/kit-close2.js` 755x1000@2, 1000x755@2, 1180x820@2, 844x390@3: chạm lọt — thẻ kết quả, thẻ tin, thẻ chọn, thẻ mình, cửa hàng, thẻ món:
@@ -18,9 +18,15 @@ main chưa đổi từ đó). Dựng lại site: index.html trùng khít bản g
 - 390x844: bản main chưa có màn "xoay ngang" (rot.js ở review/game-feel) — không thuộc nhánh này.
 - coop: nhánh chỉ đổi chữ "Qua ngày/Qua đêm" → "Sang ngày mới" trong jcoop*; không chạy coop-e2e (máy quá tải, đĩa đầy).
 
+## Thử lại trên bản gộp main 114887bc1
+- kit-close2 755x1000@2 + 844x390@3: 0 chạm lọt, Túi đồ*/Việc (6, làm được trước), thẻ tin 1 ✕ 0 nút chữ, chạm ngoài đóng; tranh tin
+  khớp tin (lật thẻ bài → "Hoàng thượng ngự giá", nói xấu với cung nhân → "Chuyện kẻ hầu"); 0 lỗi.
+- kit-close 1180x820@2 + 1000x755@2 + sổ cũ: mọi bảng ✕/chạm ngoài/Esc đóng, bắt buộc không đóng, Sổ tuần ✕, thẻ người phòng ✕,
+  "Sang buổi"/"Sang ngày mới", sổ cũ ok, 0 tràn, 0 lỗi.
+
 ## Sửa của người duyệt
 - `kit-close.js` / `kit-close2.js` kcWait: chờ đời mới ổn định 1,5 s rồi mới xét, bỏ cả đời cung nữ (origin cnv) — trước đó thử đôi khi rơi
-  vào đời cung nữ (không có tab Tư trang) và chết ở `[data-kinvsub=viec]`.
+  vào đời cung nữ (không có tab Tư trang) và chết ở `[data-kinvsub=viec]`; kit-close2 còn đổi đời ngay trước mục B nếu vẫn là cung nữ.
 
 ## Đáng lo (không chặn)
 1. 844x390: khung Tư trang chỉ cao ~250 px nên ô "Đang mang" nằm dưới lưới túi, phải cuộn (lưới tối thiểu 2 hàng). Muốn thấy ngay ở điện thoại

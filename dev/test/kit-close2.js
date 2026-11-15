@@ -61,6 +61,8 @@ const [,,PAGE,OUT,SIZES]=process.argv;fs.mkdirSync(OUT,{recursive:true});const s
     /* a second tap now DOES reach the act (the catcher is gone) */
     res[how]={act:tg.n,closed,actRan:ran,ok:closed&&!ran};if(how==="touch"&&name==="result")await shot('through-result-open')}}
   /* ---------- B. Tư trang sub-tabs ---------- */
+  /* r6: a servant life has no Tư trang: make sure this is a consort life before section B (the life can still be replaced late) */
+  await p.evaluate(()=>{for(let i=0;i<40&&typeof isSrv==="function"&&isSrv();i++){S=null;start()}S.bac=400;S.suc=90});
   await clean();await p.evaluate(()=>{tab="inv";render()});await sleep(700);
   R.inv.tui=await p.evaluate(()=>{const subs=[...document.querySelectorAll('#panel .kinvsub .ksubb')].map(x=>x.textContent+(x.classList.contains('on')?'*':''));
    const k=document.querySelector('#panel .keq');const g=document.querySelector('#panel .kinvpane[data-kinvpane="tui"]');const r=k&&k.getBoundingClientRect();const pr=document.getElementById('panel').getBoundingClientRect();
