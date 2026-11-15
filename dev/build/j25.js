@@ -38,7 +38,7 @@ resultShow=function(title,before,okHint){if(!S||!before||S.dead)return;const d=R
 /* stop the buổi from turning over under the result: wait a little longer */
 (function(){const r0=render;render=function(){const L=advLock;if(!S||S.dead||Q.length||S.mg||used<4||L)return r0.apply(this,arguments);advLock=true;const ret=(function(){const a=advLock;advLock=true;return r0.apply(this,arguments)}).apply(this,arguments);setTimeout(()=>{advLock=false;if(used>=4&&!Q.length&&S&&!S.dead&&!S.mg)nextBuoi()},2600);return ret}})();
 /* Xuất gia asks first */
-function xgConfirm(go){Q.unshift({t:"Xuất gia?",h:"<p>Cạo tóc đi tu là <b>kết thúc kiếp này</b>. Không quay lại được.</p>",opts:[{n:"Xuất gia, kết thúc kiếp này",fx:{},x:"kết thúc kiếp này",go},{n:"Thôi",fx:{}}]});showModal()}
+function xgConfirm(go){Q.unshift({act:1,t:"Xuất gia?",h:"<p>Cạo tóc đi tu là <b>kết thúc kiếp này</b>. Không quay lại được.</p>",opts:[{n:"Xuất gia, kết thúc kiếp này",fx:{},x:"kết thúc kiếp này",go},{n:"Thôi, ở lại",fx:{}}]});showModal()}
 /* no faking illness from lãnh cung; no deck card that cannot help */
 (function(){const d0=deal;deal=function(){d0.apply(this,arguments);if(S&&S.out)deck=deck.filter(a=>a.n!=="Giả bệnh")}})();
 /* map tiles: every disabled tile says why */
@@ -81,7 +81,7 @@ Object.assign(ITIMG,{tramngoc:"tram-phuong",vongvang:"vong-ngoc",gamvang:"gam-to
 /* each rival palace looks a little different (tint of the shared hall art by owner rank) */
 (function(){const r0=renderStage;renderStage=function(){r0.apply(this,arguments);try{const st=$("stage");const k=S.place;st.classList.remove("rp0","rp1","rp2","rp3","day","night");if(k&&k[0]==="r"){const v=RV(+k.slice(1));if(v)st.classList.add("rp"+(v.rank>=5?3:v.rank>=3?2:v.rank>=1?1:0))}st.classList.add((S.buoi||0)===B4L?"night":"day")}catch(e){}}})();
 /* a faction may ask her to join (two-way) */
-(function(){const a1=approachOne;approachOne=function(){if(!facOf(S)&&(S.facs||[]).length&&roll(20)){const f=pick(S.facs);const l=facLeader(f);if(l&&l!==S&&aff(l,S)>=0)return{t:"Có người đến",who:pv(l),h:`<p>${l.name}, người đứng đầu ${f.name}, mời ngươi vào phe.</p>`,opts:[{n:"Nhận lời vào phe",fx:{},x:`nàng quý ngươi +10 · kẻ thù của phe oán ngươi`,go:()=>{f.m.push(key(S));relAdd(S,l,10)}},{n:"Khéo từ chối",fx:{},x:"nàng quý ngươi -3",go:()=>relAdd(S,l,-3)}]}}return a1.apply(this,arguments)}})();
+(function(){const a1=approachOne;approachOne=function(){if(!facOf(S)&&(S.facs||[]).length&&roll(20)){const f=pick(S.facs);const l=facLeader(f);if(l&&l!==S&&aff(l,S)>=0)return{ev:1,t:"Có người đến",who:pv(l),h:`<p>${l.name}, người đứng đầu ${f.name}, mời ngươi vào phe.</p>`,opts:[{n:"Nhận lời vào phe",fx:{},x:`nàng quý ngươi +10 · kẻ thù của phe oán ngươi`,go:()=>{f.m.push(key(S));relAdd(S,l,10)}},{n:"Khéo từ chối",fx:{},x:"nàng quý ngươi -3",go:()=>relAdd(S,l,-3)}]}}return a1.apply(this,arguments)}})();
 /* card sub-tabs: one group at a time, remembered per role */
 document.addEventListener("click",e=>{const b=e.target.closest("[data-pct]");if(!b)return;e.stopPropagation();e.preventDefault();window.__pcTab=window.__pcTab||{};window.__pcTab[b.dataset.role]=b.dataset.pct;const c=b.closest(".pcr");c.querySelectorAll(".pct").forEach(x=>x.classList.toggle("on",x===b));c.querySelectorAll(".pcg").forEach(g=>g.classList.toggle("on",g.dataset.g===b.dataset.pct))},true);
 /* consort faces by DRESS TIER (picked by rank), reviewed by eye: only serene, slim, adult, approved-style faces; stern, plump, sad or childlike ones are left out */

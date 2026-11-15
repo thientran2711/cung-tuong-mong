@@ -146,6 +146,7 @@ button.ka .krv .ef.g{color:var(--good)}
 button.ka .krv .ef.r{color:var(--bad)}
 button.ka .krv .ef.t{color:var(--ink);font-weight:600}
 button.ka .krv .ef.n{color:var(--dim);font-weight:400}
+.kb .krv .ef.i{color:var(--dim);font-weight:500;font-style:italic}/* KIT 28.6 kitHintRow: the word hint of an event option (also the kit sample page) */
 button.ka .krv .ksep{color:#b9a27a;margin:0 4px}
 button.ka .kr-why .krl{color:var(--bad)}
 button.ka .kr-why .kwhy{color:var(--bad);font-weight:600;display:inline}button.ka .kr-why .kwhy.kok{color:var(--good);font-weight:500}button.ka .kr-why .krl{color:#8a7350}
@@ -198,13 +199,17 @@ function kaResultRows(before){const G=[],B=[];const K=[];const skip=new Set();
  if(S.maid&&before.maid!=null&&S.maid.loyal!==before.maid){const d=S.maid.loyal-before.maid;(d>0?G:B).push(`<span class="ef ${d>0?"g":"r"}">Lòng ${S.maid.name} ${before.maid}→${S.maid.loyal} (${kaN(d)})</span>`)}
  for(const [who,gp,bp] of per){if(gp.length)G.push(`<span class="ef t">${who}:</span> <span class="ef g">${gp.join(", ")}</span>`);if(bp.length)B.push(`<span class="ef t">${who}:</span> <span class="ef r">${bp.join(", ")}</span>`)}
  return [G,B,K]}
-/* the KÈM line: one summary per kind and direction ("12 phi tần ghen thêm 8" / "3 phi tần bớt oán 2–5"), the names behind a tap */
-function kaKemHTML(K){if(!K||!K.length)return"";const grp={};for(const x of K){const key=x.k+(x.d>0?"+":"-");(grp[key]=grp[key]||[]).push(x)}
+/* KIT PART kitKemRow(K) (KIT 7 + 28.6, kit sample page): the KÈM line of a result — other people's feelings, one summary per kind and
+   direction ("12 phi tần ghen thêm 8" / "3 phi tần bớt oán 2–5"), the names behind a tap (.kkem.on); K = [{v, k:"ghen"|"oán", d}] */
+function kitKemRow(K){if(!K||!K.length)return"";const grp={};for(const x of K){const key=x.k+(x.d>0?"+":"-");(grp[key]=grp[key]||[]).push(x)}
  const parts=Object.entries(grp).map(([key,L])=>{const up=key.endsWith("+"),k=key.slice(0,-1);const ds=L.map(x=>Math.abs(x.d));const lo=Math.min(...ds),hi=Math.max(...ds);
   const amt=lo===hi?`${lo}`:`${lo}–${hi}`;const verb=up?`${k} thêm ${amt}`:`bớt ${k} ${amt}`;
   const names=L.map(x=>`${kaNamed(x.v)?kaWho(x.v):"người chưa quen"} ${up?"+":"−"}${Math.abs(x.d)}`);
-  return `<span class="kakem" role="button" tabindex="0" aria-expanded="false"><span class="kakems">${L.length} ${L.length>1?"phi tần":"người"} ${verb}</span><span class="kakeml">${names.join(" · ")}</span></span>`});
+  return `<span class="kkem" role="button" tabindex="0" aria-expanded="false"><span class="kkems">${L.length} ${L.length>1?"phi tần":"người"} ${verb}</span><span class="kkeml">${names.join(" · ")}</span></span>`});
  return `<span class="kr kr-kem"><span class="krl">Kèm</span><span class="krv">${parts.join('<span class="ksep">·</span>')}</span></span>`}
+const kaKemHTML=kitKemRow;
+/* KIT PART kitSeal(ok) (KIT 7): the result seal — true → THÀNH (.ok), false → HỎNG (.bad), no roll → "KẾT QUẢ" (.sure, the kit's grey seal, no stamp) */
+function kitSeal(ok){return ok===true?{cls:"ok",t:"THÀNH"}:ok===false?{cls:"bad",t:"HỎNG"}:{cls:"sure",t:"KẾT QUẢ"}}
 resultShow=function(title,before,okHint){if(!S||!before||S.dead)return;
  const [G,B,K]=kaResultRows(before);const n=Math.max(0,(S.logSeq||0)-before.seq);let sen="";try{sen=kaSentence(before)}catch(e){}if(sen&&kaPlain(sen).replace(/[.!…\s]+$/,"").toLowerCase()===kaPlain(title||"").replace(/[.!…\s]+$/,"").toLowerCase())sen="";
  const why=S.logs.slice(0,Math.min(n,S.logs.length)).map(plain).join(" ");
@@ -214,16 +219,16 @@ resultShow=function(title,before,okHint){if(!S||!before||S.dead)return;
  const netBad=!G.length&&realLoss;
  /* owner 11/15: THÀNH / HỎNG come ONLY from the act's own roll (okHint true / false); no roll ("sure", null) → no seal, the neutral header
     "KẾT QUẢ" — never inferred from the log words or from how many lines are Được / Mất (failTxt / netBad stay for the old callers' log) */
- const ok=okHint===true?true:okHint===false?false:null;const seal=ok===true?"THÀNH":ok===false?"HỎNG":"KẾT QUẢ";void failTxt;void netBad;
+ const ok=okHint===true?true:okHint===false?false:null;const SL=kitSeal(ok),seal=SL.t;void failTxt;void netBad;
  if(!G.length&&!B.length&&!sen&&!(K&&K.length))return;if(window.__bot)return;
  let t=$("rtoast");if(!t){t=document.createElement("div");t.id="rtoast";document.body.appendChild(t)}
- t.onclick=e=>{const kk=e.target.closest(".kakem");if(kk){e.stopPropagation();const on=!kk.classList.contains("on");kk.classList.toggle("on",on);kk.setAttribute("aria-expanded",String(on));clearTimeout(window.__rtT);return}
+ t.onclick=e=>{const kk=e.target.closest(".kkem");if(kk){e.stopPropagation();const on=!kk.classList.contains("on");kk.classList.toggle("on",on);kk.setAttribute("aria-expanded",String(on));clearTimeout(window.__rtT);return}
   if(e.target.closest(".kalog")){const tb=document.querySelector('[data-tab="log"]');if(tb)tb.click();else{try{tab="log";renderPanel()}catch(x){}}}t.classList.remove("on")};
  const rows=[];if(G.length)rows.push({k:"duoc",label:"Được",items:G});if(B.length)rows.push({k:"mat",label:"Mất",items:B});if(!rows.length&&!(K&&K.length))rows.push({k:"note",label:"Ghi chú",items:['<span class="ef n">không đổi chỉ số</span>']});
  window.kaLastResult={title,ok,seal,sentence:sen,rows:rows.map(r=>({k:r.k,label:r.label,items:r.items.map(kaPlain)}))};
  const row=r=>`<span class="kr kr-${r.k}"><span class="krl">${r.label}</span><span class="krv">${r.items.map(x=>`<span class="kitem">${x}</span>`).join("")}</span></span>`;
- t.className="rtoast karesult "+(ok===true?"ok":ok===false?"bad":"neu");
- t.innerHTML=`<div class="rt"><span class="kat"><b class="seal">${seal}</b><span class="kan">${title||""}</span></span>${sen?`<span class="ksen">${sen}</span>`:""}<span class="kb">${rows.map(row).join("")}${kaKemHTML(K)}</span><span class="kalog" role="button" tabindex="0">Xem đầy đủ ở Nhật ký</span></div>`;
+ t.className="rtoast karesult "+SL.cls;
+ t.innerHTML=`<div class="rt"><span class="kat"><b class="seal">${seal}</b><span class="kan">${title||""}</span></span>${sen?`<span class="ksen">${sen}</span>`:""}<span class="kb">${rows.map(row).join("")}${kitKemRow(K)}</span><span class="kalog" role="button" tabindex="0">Xem đầy đủ ở Nhật ký</span></div>`;
  void t.offsetWidth;t.classList.add("on");clearTimeout(window.__rtT);window.__rtT=setTimeout(()=>t.classList.remove("on"),9000)};
 (function(){const st=document.createElement("style");st.id="ka-res-css";st.textContent=`
 .rtoast.karesult{display:block;max-width:min(94vw,520px);width:max-content;min-width:min(94vw,300px);padding:9px 12px 8px}
@@ -235,12 +240,11 @@ resultShow=function(title,before,okHint){if(!S||!before||S.dead)return;
 .rtoast.karesult .kb{grid-template-columns:3.4rem minmax(0,1fr);font-size:.8rem;line-height:1.4}
 .rtoast.karesult .kb .ef{font-weight:600}.rtoast.karesult .kb .ef.t{color:var(--ink);font-weight:700}
 .rtoast.karesult .kitem{display:block}
-.rtoast.karesult .kr-kem .krl{color:var(--dim,#8a7350)}
-.rtoast.karesult .kakem{display:block;cursor:pointer;color:var(--ink2,#6b4a2a)}
-.rtoast.karesult .kakem .kakems{text-decoration:underline dotted;text-underline-offset:3px}
-.rtoast.karesult .kakem .kakeml{display:none;font-size:.76rem;color:var(--dim,#8a7350);line-height:1.35;margin-top:2px}
-.rtoast.karesult .kakem.on .kakeml{display:block}
-.rtoast.karesult.neu .seal{background:#8a7350;border-color:#6b5838}
+.kb .kr-kem .krl{color:var(--dim)}
+.kb .kkem{display:block;cursor:pointer;color:var(--ink)}
+.kb .kkem .kkems{text-decoration:underline dotted;text-underline-offset:3px}
+.kb .kkem .kkeml{display:none;font-size:.76rem;color:var(--dim);line-height:1.35;margin-top:2px}
+.kb .kkem.on .kkeml{display:block}
 .rtoast.karesult .kalog{align-self:flex-end;font-size:.74rem;color:var(--gold);text-decoration:underline;cursor:pointer}
 `;document.head.appendChild(st)})();
 /* "có thể bị người của nàng phát giác" -> the real chance word for this target (same formula as caught(), j8), never % */
