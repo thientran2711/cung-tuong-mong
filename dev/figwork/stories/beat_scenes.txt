@@ -162,3 +162,31 @@ thd_hoc:c2|0|the Emperor arrives at the palace classroom, small children stand a
 thd_hoc:c3|0|a consort teaches a classroom of small children, other mothers, consorts, watching from the doorway
 thd_hoc:t1|0|an imperial physician attends a small princess about seven years old lying on a couch, her mother consort beside her, the teacher consort standing apart
 thd_hoc:x1|0|in a grand hall young princes about ten years old stand before the Emperor on the throne reciting, ministers watching, a consort among the spectators
+cnv_chu:s1|1|at midnight a consort burns a letter in a brazier, she looks up and meets the eyes of a young palace maid standing in the doorway holding a lamp
+cnv_chu:s2|0|a young palace maid making the bed finds a small paper packet of medicine hidden under the pillow, holding it thoughtfully
+cnv_chu:c1|0|two palace maids talk in a quiet corner of a courtyard, one from another palace holding out a small silver ingot persuasively, the other stepping back
+cnv_chu:c2|1|a consort presses a small paper packet into the hands of her young maid in a dim chamber at night
+cnv_chu:c3|0|the Emperor seated in a consort's hall glances up at a young palace maid serving him tea, the consort's seat empty beside him
+cnv_chu:t1|0|officials of the palace household in dark robes question a line of palace maids and eunuchs standing in a courtyard
+cnv_chu:x1|1|a young palace maid stands alone in a dark corridor holding a small closed box against her chest, lantern light
+cnv_ban:s1|0|in a back courtyard a slender young palace maid kneels with her wrists bound by a soft cord, another young maid rushing toward her
+cnv_ban:s2|0|a palace maid hides behind a pillar watching another maid secretly slip a jade bangle into her own sleeve near a jewellery box
+cnv_ban:c1|1|a feverish young palace maid lies on a straw mat in a dark locked room, another maid passes a bowl of water through the bars of the window
+cnv_ban:c2|0|a consort seated in her chamber questions a young maid who stands before her with head bowed
+cnv_ban:c3|0|a palace maid secretly places an embroidered handkerchief next to an open jewellery box on a dressing table
+cnv_ban:t1|1|two young palace maids sit close together on a bed in a servants' room at night, one comforting the other
+cnv_ban:x1|0|a palace courtyard where a young maid kneels in the centre, a consort seated on the steps as judge, maids and eunuchs standing around watching
+cnv_mat:s1|0|in the rain under a palace eave, a young palace maid holds an oil-paper umbrella over the Emperor
+cnv_mat:s2|0|a consort seated at her dressing table looks coldly over her shoulder at a young maid kneeling behind her
+cnv_mat:c1|0|the Emperor seated beside a consort in her hall, his gaze drifting toward a young maid standing at the side holding a tray
+cnv_mat:c2|0|a consort in a garden smiles and beckons a young palace maid of another palace, offering her a jade hairpin
+cnv_mat:c3|0|a young palace maid washes clothes at a basin in a back garden, singing softly, a figure in yellow robes listening half-hidden behind a moon gate
+cnv_mat:t1|0|a consort points as she gives orders to a eunuch matchmaker, a young palace maid kneeling distressed but composed
+cnv_mat:x1|1|Mid-Autumn night under a full moon, the Emperor and a consort seated at a table with mooncakes, a young palace maid pouring wine into the Emperor's cup
+cnv_ma:s1|0|a young palace maid carefully carries a full tray of tea cups across a pebbled courtyard, a strict elderly matron watching with arms folded in her sleeves
+cnv_ma:s2|1|a young palace maid copies figures into an account ledger at a desk by lamplight, stacks of ledgers around her, pages with only faint lines
+cnv_ma:c1|1|a young palace maid spoons medicine to an old matron lying ill in bed in a simple room
+cnv_ma:c2|0|a broken porcelain vase on the floor, several palace maids pointing at one young maid who stands calmly
+cnv_ma:c3|0|a small pouch of silver lies on a table in an empty room, a young palace maid standing beside it with her hands folded, not touching it
+cnv_ma:t1|1|an old matron and a young palace maid talk in whispers in a storeroom at night by a single candle
+cnv_ma:x1|0|a line of palace maids stand in a household office courtyard being examined, a strict elderly matron seated at a table judging
