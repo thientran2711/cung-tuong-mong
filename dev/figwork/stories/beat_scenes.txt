@@ -225,7 +225,7 @@ s_dich:c2|0|palace maids whisper behind their sleeves in a corridor, glancing to
 s_dich:c3|0|the Emperor rests on a daybed with a light fever, a cool cloth on his brow, a consort and imperial physicians attending him anxiously
 s_dich:t1|0|a consort directs imperial physicians and eunuchs in a courtyard turned infirmary, rows of beds under awnings, steaming herbal pots
 s_dich:x1|0|the Emperor in his hall commends a consort who bows before him, imperial physicians kneeling to one side, sunlight streaming in
-s_tinh:s1|0|in the imperial garden a handsome young palace guard in Ming armour-robe hands back a dropped silk handkerchief to a consort, their fingers almost touching
+s_tinh:s1|0|in the imperial garden a handsome young palace guard in plain dark blue Ming armour-robe hands back a dropped silk handkerchief to a consort in pink and green hanfu, their fingers almost touching
 s_tinh:s2|0|a palace maid discreetly hands a consort a folded sheet of blank paper in her chamber, the consort holding it thoughtfully
 s_tinh:c1|1|behind a large rockery in the garden at night a handsome young palace guard stands at a respectful distance before a consort, a lantern on the ground
 s_tinh:c2|1|a consort sits alone by a window at night, an untouched tea set beside her, the empty corridor beyond, a lonely mood
@@ -240,7 +240,7 @@ s_thay:c3|1|an elderly white-haired chief eunuch hands a consort a small sealed 
 s_thay:t1|0|a frail elderly white-haired chief eunuch in a sickroom gives a consort a thick closed bound notebook with a plain cover
 s_thay:x1|0|an elderly white-haired chief eunuch with a small bundle bows farewell to a consort at a palace gate, a cart waiting outside
 s_ban:s1|0|two consorts kneel side by side before the composed Empress in a grand hall, a small cloth doll on the floor before them as evidence
-s_ban:s2|1|a consort and her maid peer from behind a lattice screen at night at another consort speaking secretly with a eunuch
+s_ban:s2|1|a consort and her maid stand half hidden behind a tall lattice screen at night, hands folded at the waist, watching another consort speaking secretly with a eunuch in the next room
 s_ban:c1|0|a proud consort arrives at another consort's hall and is greeted, both calm, a cautious first friendly meeting
 s_ban:c2|0|a new palace maid is presented by a eunuch to a consort in her courtyard while another consort watches from the corridor
 s_ban:c3|0|at a palace banquet one consort stands awkwardly being questioned while another consort rises from her seat to speak for her, guests watching
