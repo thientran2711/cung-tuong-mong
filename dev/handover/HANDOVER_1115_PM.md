@@ -248,3 +248,4 @@ Worktree thợ ở /home/user/wt/<tên>. Bản tóm tắt luật cho thợ: /hom
 - LIVE main = promo-exam (aa9689da5): promotion requires the exam; NPCs too; cold palace shows 'phục vị'. Balance bot not yet run (load) — run run5b.sh when quiet; if HH low, lower BAL.ex.bar[2].
 - kit-fig2 r8 ready 196edb362e (kitEventDp for every person event, VIỆC·<cung> place cards, Ân oán sub-tabs, no group pictures, overlay-close fix 35/35) → reviewer spawned.
 - game-feel fixed 5ffbf8b267 (kitLose, slow reveals BAL.reveal, real grades, veils pictures, kit §54) → re-review spawned. Also brings rot.js (rotate on phone portrait).
+- LIVE main = j83-variety (31907911d): 11 kinds × 10 recipes with own pictures + matching minigames, paid tiers worth it (6→1 dominated, the 1 is legit), Thôi via kit ✕.
