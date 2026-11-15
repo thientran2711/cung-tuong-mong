@@ -1,0 +1,38 @@
+{
+ "_doc": "act-pics2 step 2: all meanings.py rules merged into the live ACTS.json log in meanings.py order. add = [regex, key, index in the new log]; held = rules left out because their picture is not on the CDN [key, regex, scene].",
+ "add": [
+  [
+   "tư thông bị phát giác, bị ban chết|^Chuyện tư tình bại lộ",
+   "tu-thong-ban-chet-h",
+   694
+  ],
+  [
+   "tố giác .+ trước Hoàng hậu",
+   "to-giac-truoc-hh-h",
+   819
+  ],
+  [
+   "tố giác .+ trước Hoàng thượng|^Tố lên Hoàng thượng",
+   "to-giac-truoc-ht-h",
+   820
+  ],
+  [
+   "tố giác .+ trước ",
+   "to-giac-truoc-h",
+   821
+  ],
+  [
+   "tố giác .+ không thành|tố .+ nhưng không đủ chứng",
+   "to-giac-khong-thanh-h",
+   822
+  ]
+ ],
+ "held": [
+  [
+   "scene:rv",
+   "^Đến cung nàng thăm",
+   ""
+  ]
+ ],
+ "heldSteals": []
+}
