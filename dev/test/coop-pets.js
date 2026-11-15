@@ -77,7 +77,7 @@ async function waitFr(o,fn,ms=15000){const t0=Date.now();while(Date.now()-t0<ms)
  ok(await waitFr(B,()=>/được chăm/.test(JSON.stringify(Q)+((document.getElementById('modal')||{}).textContent||''))),'B sees the help note (Hảo hữu sang giúp)');
  await B.p.screenshot({path:OUT+'/01-help-note-guest.png'});
  const b1=await myPets(B);const p0=b0.find(x=>x.t===tgH),p1=b1.find(x=>x.t===tgH);
- ok(p0&&p1&&p1.full===Math.min(100,p0.full+25),'B\'s own pet ('+tgH+'): fullness +25 (Đói -25)',[p0,p1]);
+ ok(p0&&p1&&p1.full===Math.min(100,p0.full+25),'B\'s own pet ('+tgH+'): No +25',[p0,p1]);
  ok(await B.p.evaluate(()=>(S.rl||{})[COOPW.seat==='a'?902:901]||0)>rl0,'B: thiện cảm toward A went up');
  await clear(B);
  /* 1b gift an item to the friend (Tặng quà = invite → she accepts → her own Quà tặng dialog → the item is in HER bag) */

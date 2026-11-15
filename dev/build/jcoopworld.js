@@ -248,7 +248,7 @@ function petApply(ops,k){const out=[];if(!Array.isArray(ops))return out;
    out.push(k==="petsteal"?`<span class="r">Không thấy ${nm} đâu nữa; cửa lồng mở, có dấu người lạ.</span>`:`<span class="r">${T.n} của ngươi ${fly?"sổ lồng bay mất, tìm không thấy":"bỗng lăn ra bỏ ăn rồi chết, không rõ vì sao"}.</span>`);continue}
   if(o.op==="d"&&o.d){try{if(typeof petcInit==="function")petcInit(P)}catch(e){}const d=o.d,L2=[];
    for(const x of ["full","clean","joy","aff"])if(typeof d[x]==="number"){P[x]=cl((P[x]||0)+d[x],0,100)}
-   if(d.full)L2.push(`Đói ${d.full>0?"-":"+"}${Math.abs(d.full)}`);if(d.clean)L2.push(`Sạch ${d.clean>0?"+":""}${d.clean}`);if(d.joy)L2.push(`Vui ${d.joy>0?"+":""}${d.joy}`);if(d.aff)L2.push(`Tình cảm ${d.aff>0?"+":""}${d.aff}`);
+   if(d.full)L2.push(`No ${d.full>0?"+":""}${d.full}`);if(d.clean)L2.push(`Sạch ${d.clean>0?"+":""}${d.clean}`);if(d.joy)L2.push(`Vui ${d.joy>0?"+":""}${d.joy}`);if(d.aff)L2.push(`Tình cảm ${d.aff>0?"+":""}${d.aff}`);
    try{if(typeof petcSync==="function")petcSync(P)}catch(e){}if((d.full||0)+(d.clean||0)+(d.joy||0)>0)P.bad=0;
    out.push(`${T.n} của ngươi được chăm (${L2.join(", ")}).`)}}
  return out}

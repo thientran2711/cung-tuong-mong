@@ -1,6 +1,6 @@
 # PROGRESS review/coop-pets — co-op pets + co-op audit (owner batch 15/11 ~20:05Z, coordinator s7)
 
-Base: origin/main 23a8e80e. Files: dev/build/jcoopworld.js, jpet.js, jpetcare.js, jk4.js (kit), jkitpage.js (kit sample), dev/kit/KIT.md §32.1,
+Base: origin/main 23a8e80e. Files: dev/build/jcoopworld.js, jpet.js, jpetcare.js,
 dev/test/coop-pets.js (new), dev/test/coop-audit.py (new) → dev/coop/COOP_AUDIT.md, dev/test/coop-e2e.js (E2E_TO env timeout only).
 
 ## Done
@@ -21,10 +21,9 @@ dev/test/coop-pets.js (new), dev/test/coop-audit.py (new) → dev/coop/COOP_AUDI
    and costs twice.
 5. **Ngự tứ = Linh thú only** (coordinator): code already gated `rescue` at stage 3; texts fixed: base use "khi đã thành Linh thú thì ĐỠ MỘT
    MẠNG…" (event offers petLine), Non stage no longer promised the rescue "lớn lên mới…", stages 1–2 "đỡ một mạng: chỉ khi thành Linh thú".
-6. **Pet bar "Đói"** (coordinator): care screen cell = Đói = 100 − full (higher = hungrier), kit warning colour + kit "!" from Đói 70
-   (= BAL.pet.sad neglect line). Whole class: care-screen bars, pet card "Chăm" row, feed button text ("bớt Đói"), game result + log
-   ("Đói -N", real change after clamp), co-op help note. Upkeep not paid now lowers full/joy (was care only, overwritten by petcSync).
-   KIT: `kitStatCell({hot})` / `kitStatSet({hot})` — KIT.md §32.1, sample §32.1b on the kit page (no private CSS).
+6. **Pet bar label**: coordinator first said "Đói"; OWNER 15/11 ~22:30Z overrode it: label stays **"No"** (fullness, higher = better).
+   The Đói change + kit `hot` option were reverted (jk4/jkitpage/KIT.md = main). Kept: game result/log show the real change after clamp;
+   unpaid upkeep now lowers full/joy (was care only, overwritten by petcSync).
 7. **Co-op audit** `python3 dev/test/coop-audit.py --md dev/coop/COOP_AUDIT.md` (table + evidence + big-item plans B1–B5).
 
 ## Tests
