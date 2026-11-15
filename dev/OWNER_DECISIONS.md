@@ -459,3 +459,5 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (13:35Z) Điều phối chốt việc ban ngày với Hoàng thượng: Xin hầu cờ (cần Kỳ), Xin đánh đàn (cần Cầm), Mời dạo ngự hoa viên (không bão); mỗi ngày một lần chung với Xin yết kiến; NPC cũng làm được.
 - (13:35Z) Trung y đợt 1 (c01–c12, 8 bậc) đạt; giữ, đẩy CDN khi nhánh qua duyệt.
 - (13:40Z) LỖI: "Nàng oán ta 2.36000…" số lẻ → mọi chỉ số làm tròn khi ghi + sửa sổ cũ; "thù" → "oán"; Tuần lục ghi lại chữ của THẺ thay vì kết quả thật → ghi kết quả thật.
+- (13:45Z) Tuần lục: chữ tràn bị cắt ở đáy trang; chép nguyên chữ hướng dẫn của thẻ (Dùng chứng cứ…) → ghi sự việc ngắn gọn, trang dài thì sang trang; chip không gãy dòng.
+- (13:45Z) Thái hậu bị cắt áo: do bố cục Tuần lục (hình rộng nhất bị cột hẹp cắt), sửa CSS chứ không vẽ thêm. Da nhợt: sửa 807 chân dung (a*<8.0). Hình cắt mép: cắt lại từ tờ gốc trước.
