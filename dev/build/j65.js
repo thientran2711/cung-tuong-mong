@@ -187,7 +187,7 @@ document.addEventListener("click",()=>setTimeout(nrDOM,0));
 const T=s=>String(s==null?"":s).replace(/<[^>]+>/g,"").replace(/\s+/g," ").trim();
 /* --- 1+2. names and faces: drawn by the kit (j79). Panels: kpBuild/kitFacts put the face beside each fact and the first mention
    as rank title + name in rank colour (kitName). Nhật ký rows use the same kit function at render time (stored log text stays plain). --- */
-function kitNames(h){try{if(typeof kpPeopleIn!=="function"||typeof kpPeople!=="function"||!h)return h;return kpPeopleIn(h,kpPeople())[0]}catch(e){return h}}
+function kitNames(h){try{if(typeof kpPeopleIn!=="function"||typeof kpPeople!=="function"||!h)return h;if(typeof kitDedupTitle==="function")h=kitDedupTitle(h);/* KIT 9: old stored log lines */return kpPeopleIn(h,kpPeople())[0]}catch(e){return h}}
 /* --- 3. week card: true deltas, no leftover choice labels, each fact once, faces beside their lines --- */
 const LONE=/^[^\s.·:]+(?: [^\s.·:]+)?\.$/;          /* "Thôi." — a choice label with nothing after it */
 const ACTRES=/^[^.]{1,60}\.(?: (?:Thành|Hỏng)\.)?\s*((?:[A-ZĐÀ-Ỹ][^·.+\-\d]*? (?:[+-]\d+(?: \((?:đã đầy|chạm đáy) -?\d+\))?|đã đầy -?\d+|chạm đáy -?\d+)\s*(?:·\s*)?)+)$/;

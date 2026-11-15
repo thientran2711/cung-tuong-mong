@@ -4,7 +4,7 @@
 const fs=require('fs'),cp=require('child_process');const ref=process.argv[2]||'HEAD';
 const src=(f,r)=>r?cp.execSync(`git show ${r}:dev/build/${f}`).toString():fs.readFileSync('dev/build/'+f,'utf8');
 const grabB=s=>{const m=/function kitBulletsHTML[\s\S]*?\n(?=function kitBullets\()/.exec(s);return new Function(m[0]+';return kitBulletsHTML')()};
-const grabS=s=>{const p=/const kpPlain=.*\n/.exec(s)[0];const m=/function kpSentences[\s\S]*?\n(?=\/\* text segments only)/.exec(s);return new Function(p+m[0]+';return kpSentences')()};
+const grabS=s=>{const p=/const kpPlain=.*\n/.exec(s)[0]+((/const KP_UP=.*\n/.exec(s)||[''])[0])+((/const KP_ENDS=.*\n/.exec(s)||[''])[0]);const m=/function kpSentences[\s\S]*?\n(?=\/\* text segments only)/.exec(s);return new Function(p+m[0]+';return kpSentences')()};
 const F={bullets:[grabB(src('jk3.js',ref)),grabB(src('jk3.js'))],rows:[grabS(src('j79.js',ref)),grabS(src('j79.js'))]};
 const files=fs.readdirSync('dev/build').filter(f=>/^j.*\.js$/.test(f));const Qs=new Map();
 for(const f of files){const s=fs.readFileSync('dev/build/'+f,'utf8');for(const m of s.matchAll(/“([^”"`\n]{6,400})”/g)){if(/[.!?…]\s+[A-ZĐÀ-Ỹ“]/u.test(m[1]))Qs.set('“'+m[1]+'”',f)}}

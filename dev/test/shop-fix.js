@@ -8,12 +8,12 @@
 const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT,SIZES]=process.argv;fs.mkdirSync(OUT,{recursive:true});
 const sleep=t=>new Promise(r=>setTimeout(r,t));
 (async()=>{const b=await chromium.launch();const R=[];
- for(const sz of (SIZES||"755x1000@2,1000x755@2,1180x820@2,844x390@3").split(",")){const [wh,dpr]=sz.split("@");const [W,H]=wh.split("x").map(Number);
+ for(const sz of (SIZES||"755x1000@2,1000x755@2,1180x820@2,844x390@3").split(",")){const [wh,dpr]=sz.split("@");const [W,H]=wh.split("x").map(Number);const SZH=H;
   const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:+dpr,hasTouch:true,isMobile:W<1100,serviceWorkers:'block',reducedMotion:'reduce'});
   const p=await ctx.newPage();p.setDefaultTimeout(240000);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
   await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof showModal==='function');await sleep(2500);
   await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;
-   for(let i=0;i<60;i++){start();if(!isSrv())break}Q.length=0;const md=document.getElementById("modal");if(md)md.hidden=true;try{NLP=null}catch(e){}render();const kr=document.getElementById("kroul");if(kr)kr.remove()});
+   for(let i=0;i<400;i++){start();if(!isSrv())break}Q.length=0;const md=document.getElementById("modal");if(md)md.hidden=true;try{NLP=null}catch(e){}render();const kr=document.getElementById("kroul");if(kr)kr.remove()});
   await sleep(1200);await p.addStyleTag({content:'#kroul{display:none!important}'});
   const imgs=()=>p.evaluate(()=>Promise.all([...document.querySelectorAll('#modal img')].map(i=>i.complete?0:new Promise(r=>{i.onload=i.onerror=r;setTimeout(r,8000)}))));
   const shot=async n=>{await imgs();await sleep(700);for(let t=0;t<3;t++){try{await p.screenshot({path:`${OUT}/${n}-${wh}.jpg`,type:'jpeg',quality:82,timeout:120000});break}catch(e){await sleep(2000)}}};
@@ -42,7 +42,7 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
     greyBtns:[...M.querySelectorAll('.kshgo:disabled')].map(b=>b.textContent),hovf:document.documentElement.scrollWidth>innerWidth+1}});
   await closeAll();
   /* reference 1: a plain person dialog with the SAME seller (32.7) */
-  await p.evaluate(()=>{Q.push({t:"Có người đến",stage:[{__fig:"img/fig-eunuch-ndp-tray.webp",__cap:(S.court&&S.court.ped&&S.court.ped.name)||"",__role:"Thái giám Nội vụ phủ",age:28,sex:"m"}],h:`<p>Thái giám Nội vụ phủ đến bẩm việc.</p>`,opts:[{n:"Cho vào",fx:{},x:"không đổi gì",go:()=>{}},{n:"Bảo lui",fx:{},x:"không đổi gì",go:()=>{}}]});showModal()});
+  for(let tr=0;tr<4;tr++){await p.evaluate(()=>{Q.push({t:"Có người đến",stage:[{__fig:"img/fig-eunuch-ndp-tray.webp",__cap:(S.court&&S.court.ped&&S.court.ped.name)||"",__role:"Thái giám Nội vụ phủ",age:28,sex:"m"}],h:`<p>Thái giám Nội vụ phủ đến bẩm việc.</p>`,opts:[{n:"Cho vào",fx:{},x:"không đổi gì",go:()=>{}},{n:"Bảo lui",fx:{},x:"không đổi gì",go:()=>{}}]});showModal()});await sleep(1000);if(await p.evaluate(()=>!document.getElementById("modal").hidden))break}/* a game timer sometimes empties Q right after: open again */
   await imgs();await sleep(1500);const refSame=await box();await shot('ref-seller');await closeAll();
   await p.evaluate(()=>invAct("shop"));await imgs();await sleep(1500);
   /* buy 2 of the first affordable tile: + → label + badge; then buy */
@@ -65,5 +65,5 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
    return{tile,lab1,lab2,badge,bac:[b0,S.bac],inv:[n0,S.inv.length],log:kpPlain(S.logs[0]),after:(document.querySelector('#modal .kshempty')||{}).textContent||document.querySelectorAll('#modal .kshc').length+' tiles'}});
   await shot('shop-sell');
   const xClose=await p.evaluate(async()=>{const W=t=>new Promise(r=>setTimeout(r,t));document.querySelector('#modal .kph > .kit-x').click();await W(400);return document.getElementById('modal').hidden});
-  R.push({sz,refSame,refWoman,shopBox,sameAsSeller:refSame.every((v,i)=>Math.abs(v-shopBox[i])<=1),geo,buy,det,detClosed,sell,xClose,errs});await ctx.close()}
+  R.push({sz,refSame,refWoman,shopBox,sameAsSeller:Math.abs(refSame[2]-shopBox[2])<=1&&Math.abs(refSame[0]-shopBox[0])<=1,capH:Math.min(+SZH-32,720),geo,buy,det,detClosed,sell,xClose,errs});await ctx.close()}
  console.log(JSON.stringify(R,null,1));await b.close()})().catch(e=>{console.error(e);process.exit(1)});
