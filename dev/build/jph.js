@@ -26,8 +26,8 @@ function kitPhNote(kind,id,tone,title){try{const k=kind+"|"+id;if(KIT_PH_SEEN[k]
  console.info("[CTM missing pic]",kind,id,tone,e.title)}catch(e){}}
 const kitPhPlain=s=>String(s||"").replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim();
 /* manifests ready? (before they arrive every id looks unmapped: no placeholder, no record) */
-const kitPhEvReady=()=>typeof EVART!=="undefined"&&!!EVART;
-const kitPhActReady=()=>typeof KIT_ACTS!=="undefined"&&!!KIT_ACTS&&!!KIT_ACTS.acts&&Object.keys(KIT_ACTS.acts).length>0;
+function kitPhEvReady(){return typeof EVART!=="undefined"&&!!EVART}
+function kitPhActReady(){try{return typeof KIT_ACTS!=="undefined"&&!!KIT_ACTS&&!!KIT_ACTS.acts&&Object.keys(KIT_ACTS.acts).length>0}catch(e){return false}}
 const kitPhOnCdn=src=>{try{if(typeof KIT_CDNHAVE==="undefined"||!KIT_CDNHAVE)return true;return KIT_CDNHAVE.has(String(src).replace(/^.*?(?=img\/)/,""))}catch(e){return true}};
 /* ---- events ---- */
 function kitPhEvId(m){try{if(typeof kitDlgId==="function"){const i=kitDlgId(m);if(i)return i}}catch(e){}return "title:"+kitPhPlain(m&&m.t)}
@@ -41,24 +41,15 @@ function kitPhEvent(m){const tone=kitPhEvTone(m);kitPhNote("event",kitPhEvId(m),
   if(r&&r.src&&!(room&&r.src===room)&&r.src!==KIT_PH.act.light&&r.src!==KIT_PH.act.dark)return r;
   return kitPhEvent(m)}catch(e){return r}};window.kitEvArt=kitEvArt})();
 /* ---- acts ---- */
-function kitPhActOwn(name){try{const k=typeof kitActKey==="function"?kitActKey(name):"";return !!k&&kitPhOnCdn(`img/act-${k}.webp`)}catch(e){return false}}
 (function(){if(typeof kitActArt!=="function")return;const k0=kitActArt;kitActArt=function(name){const r=k0.apply(this,arguments);try{
   if(!r||!kitPhActReady())return r;if(r.src&&!/\/act-cat-/.test(r.src)&&kitPhOnCdn(r.src))return r;
   const tone=kitPhTone(name,{cat:r.cat});r.src=KIT_PH.act[tone];r.ph=tone}catch(e){}return r};window.kitActArt=kitActArt})();
-/* the act card: an act with no own picture gets the placeholder in the normal art slot (was: no thumbnail, .kanoart) */
-function kitPhActCard(b){try{if(!kitPhActReady()||!b||b.dataset.kph)return;const kan=b.querySelector(".kan");if(!kan)return;
- const name=typeof kpActName==="function"?kpActName(kan):kitPhPlain(kan.textContent);if(!name)return;if(kitPhActOwn(name)&&!b.classList.contains("kanoart"))return;
- const a=kitActArt(name);if(!a||!a.ph)return;kitPhNote("act",name,a.ph,a.label||"");
- let body=b.querySelector(":scope > .kabody");if(!body){body=document.createElement("span");body.className="kabody";[...b.childNodes].forEach(n=>{if(!(n.nodeType===1&&n.classList.contains("kaart")))body.appendChild(n)});b.appendChild(body)}
- let art=b.querySelector(":scope > .kaart");if(!art){art=document.createElement("span");art.className="kaart";b.prepend(art)}
- art.innerHTML=typeof kitArtFrame==="function"?kitArtFrame(a.src,a.label,"kcat-"+a.cat,a.col):`<img src="${a.src}" alt="">`;art.title=a.label||"";if(a.col)b.style.setProperty("--kcc0",a.col);
- b.dataset.kart=a.cat;b.dataset.kph=a.ph;b.classList.remove("kanoart");b.classList.add("kart")}catch(e){}}
-window.kitPhActCard=kitPhActCard;
-(function(){if(typeof kpActArt!=="function")return;const p0=kpActArt;kpActArt=function(b){const r=p0.apply(this,arguments);try{kitPhActCard(b)}catch(e){}return r};window.kpActArt=kpActArt})();
-(function(){if(typeof kitActCompactOn!=="function")return;const c0=kitActCompactOn;kitActCompactOn=function(root){const r=c0.apply(this,arguments);try{
-  (root||document).querySelectorAll(".pc>.pcr button.ka.kanoart, .kpanec button.ka.kanoart, button.ka.kcard.kanoart").forEach(kitPhActCard)}catch(e){}return r};window.kitActCompactOn=kitActCompactOn})();
-/* a .kanoart card re-marked by a later render pass keeps its placeholder (the class would hide the slot again) */
-(function(){const st=document.createElement("style");st.id="kph-css";st.textContent=`button.ka[data-kph].kanoart>.kaart{display:block!important}`;document.head.appendChild(st)})();
+/* the act card: j79 kpActArt draws kitActArt's src (the placeholder above) in the normal art slot; jk4 / jexam no longer drop the slot
+   once the manifests are ready (they test kitPhActReady). Here only: mark the card (data-kph, not observed by j63 kaMO) and record it once. */
+(function(){if(typeof kpActArt!=="function")return;const p0=kpActArt;kpActArt=function(b){const r=p0.apply(this,arguments);try{
+  const im=b&&b.querySelector(':scope > .kaart img[src*="/ph-act-"]');if(!im){if(b&&b.dataset.kph)delete b.dataset.kph;return r}
+  const tone=/ph-act-dark/.test(im.getAttribute("src"))?"dark":"light";if(b.dataset.kph!==tone)b.dataset.kph=tone;
+  const kan=b.querySelector(".kan");const name=kan?(typeof kpActName==="function"?kpActName(kan):kitPhPlain(kan.textContent)):"";if(name)kitPhNote("act",name,tone,b.dataset.kart||"")}catch(e){}return r};window.kpActArt=kpActArt})();
 /* kit sample page */
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§59",title:"Tranh tạm (chưa có tranh riêng): sự kiện sáng · tối, việc sáng · tối",html:()=>`<div class="kitpg-row">`+
  `<div style="width:220px">${kitSceneArt(KIT_PH.ev.light,"",{shape:"wide"})}</div><div style="width:220px">${kitSceneArt(KIT_PH.ev.dark,"",{shape:"wide"})}</div>`+

@@ -54,7 +54,7 @@ const [,,BASE,OUT,MD]=process.argv;
   const harvest=()=>document.querySelectorAll('button.ka.kcard .kan, .pc>.pcr button.ka .kan, .kpanec button.ka .kan').forEach(k=>{try{const n=kpActName(k);if(n)acts.add(n)}catch(e){}});
   harvest();for(const t of [...new Set([...document.querySelectorAll('[data-tab]')].map(b=>b.dataset.tab))]){try{tab=t;for(const k in PG)PG[k]=0;render();harvest();
    /* page through every person card of a paged tab (rivals, men, staff, court) */
-   for(const key of Object.keys(PG)){for(let i=1;i<40;i++){PG[key]=i;render();if(PG[key]!==i)break;harvest()}PG[key]=0}}catch(e){}}
+   if(PG[t]!=null){for(let i=1;i<60;i++){PG[t]=i;render();if(PG[t]!==i)break;harvest()}PG[t]=0}}catch(e){}}
   const actRows=[...acts].filter(Boolean).sort().map(n=>{const key=kitActKey(n);const a=kitActArt(n);return{name:n,key,ph:a&&a.ph||"",tone:a&&a.ph||"",cat:a&&a.cat||""}});
   return{rows,acts:actRows,missing:window.CTM_MISSING_PICS||[]}});
  const ev=res.missing.filter(x=>x.kind==="event");const evIds=[...new Map(ev.map(x=>[x.id,x])).values()].sort((a,b)=>a.id.localeCompare(b.id));
