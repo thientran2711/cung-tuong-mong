@@ -2282,15 +2282,21 @@ buổi ∈ sang|trua|chieu|toi) gets `.stage.kown`:
   Characters are never overlaid. Lãnh cung (`.sc-lc`) is excluded and keeps its bleak painting.
 - `window.kitSceneTag()` re-applies the classes (called after `renderStage` and `lightTick`).
 
-**56.3 Wide figures on the Tuần lục person page — NEVER shrink (owner 03:55Z one figure scale; 13:45Z Thái hậu cut).** `.kbk-person.kbk-full`
-has a figure column `--porf` sized for a normal standing figure (aspect ≈ .42). A wider figure (Thái hậu h1–h3, t7/t8 trains, wide a51 sleeves)
-keeps the kit height (≈ 93 % of the picture height, same as everyone) and is never scaled or cut on the left:
-- `kitBookFigCol(figHtml, PW, PH)` (jsl, called by j87 `personBody` while paginating): on wide pages the column becomes just wide enough for
-  the face + torso — figure centre + 14 % of its height (≤ 74 % of the page) — so the text is paginated in its final width ("tiếp theo"
-  pages as usual). Figure aspect comes from a cache filled on first sight; an open book re-lays out once when a new picture's shape arrives.
-- `kitBookFigClamp`: moves the figure's left edge inside the page; whatever is wider than the column (train, outer sleeve) runs BEHIND the
-  text, which then sits on the kit soft paper panel — class `.kbk-figover`, the same panel phones use (`.kbk.narrow`). Text never covers
-  face/torso on wide pages. Phones (`.kbk.narrow`): unchanged from r7 — OPEN owner decision: a figure wider than the whole phone page
-  (Thái hậu, t7/t8 trains) is still scaled to the page (≈ 61–65 % height) and the text panel overlaps its side.
-- Measure: `dev/art/scene-light/tools/bookwide.js PAGE.html OUTDIR` with `FIGS=fig-a.webp,fig-b.webp` (and `SZ`, `SHOTS=1`) prints per size ×
-  figure: hRatio (figure / picture height), scale (must be 1), cutL/cutR (past the person box), torsoClear (≥ 0), textCut (0), textW.
+**56.3 Wide figures on the Tuần lục person page (owner 03:55Z one scale ≈85–90 %, never shrink to fit; 13:45Z Thái hậu cut; coordinator
+r8: text ≥ 220 px).** `.kbk-person.kbk-full` gives the figure a column `--porf` sized for a normal standing figure (aspect ≈ .42). A wider
+figure (Thái hậu h1–h3, t7/t8 trains, wide a51 sleeves) is handled in `dev/build/jsl.js`:
+- `kitBookFigCol(figHtml, PW, PH)` — called by j87 `personBody` WHILE PAGINATING, so the text is measured in its final column. It widens the
+  column until face + torso fit (head centre + 12 % of figure height; the head centre comes from the picture's alpha, so figures whose train
+  runs to one side are placed by their body, not the picture centre), but the text keeps ≥ 220 px (or, where the page is too small for 220,
+  never less than a normal figure's page). If both cannot hold, the figure is lowered from the kit height (≈ 93 %) towards **85 % — never
+  below**. Aspect + head centre are cached on first sight; a book already open then calls its OWN re-layout (`root.__kbk.relayout()`, no
+  window resize), which keeps the reader on the page holding the same fact (j87 leaves carry `b0`, the first block; spread = left page).
+- `kitBookFigClamp` (live pages, layout px): figure left edge at the page's left; if the body would reach under the text it slides left so
+  face + torso end at the column edge — only the outer train/sleeve may pass the page edge, and it FADES into the paper (48 px mask), never a
+  straight cut. What is wider than the column runs behind the text on the kit soft paper panel `.kbk-figover`; the panel costs no layout
+  (background + box-shadow spread, no padding), so pagination and the live page agree.
+- Phones (`.kbk.narrow`): unchanged from r7 (narrow portrait is not a supported layout, owner 05:50Z).
+- Tests (committed): `node dev/test/book-figwide.js <url|page.html> <outdir>` — 14 facts, every page: text cut, text width, broken words,
+  facts/page, figure height ≥ 0.85, never scaled, page-1 name, torso clear, body never past the left edge. `node dev/test/book-relayout.js
+  <url|page.html> <outdir>` — the figure download is held while the reader turns pages, then released: same fact still in view, 0 window
+  resize events.

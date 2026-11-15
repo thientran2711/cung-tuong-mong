@@ -60,6 +60,10 @@ Luôn bắt đầu từ bản CDN (`https://ctm-img.victoria-tntt.workers.dev/im
 - Smudge detector calibrated (skin-smudge.py blobs_only: men out, line-like marks/wrinkles out, eye band, inner face oval, colourless
   greys = hair/props out, ring of skin). Result on 6 338 CDN portraits: 0 real smudges left (top hits are 1–3 px jaw-edge specks) →
   NO smudge batch. Sheet dev/art/scene-light/smudge-calibrated-top12.jpg.
+- r8 FAIL fixes (on review/scene-light-r8 + main): (1) .kbk-figover panel has no layout cost → no text cut; (2) late figure shape →
+  the book's own relayout keeping the same fact (j87 b0/logicalB), no global resize; (3) text ≥ 220 px (or ≥ a normal page where 220 is
+  impossible: 1000x755 = 182), figure lowered to ≥ 85 %; body placed by its head centre (HX); train past the page edge fades (mask).
+  Tests: dev/test/book-figwide.js, dev/test/book-relayout.js (both ALL OK at 755x1000/1000x755/1180x820/1366x1024).
 
 ## LỖI ĐÃ BIẾT
 - Chạy thử trên máy: màn "Luân hồi" phủ sân khấu → script phải ẩn phần tử phủ (book.js đã làm). Máy không WebGL → không thấy vệt mưa.

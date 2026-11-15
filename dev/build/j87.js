@@ -39,7 +39,7 @@ function kitBook(spec){spec=spec||{};const rm=()=>{try{return reducedMotion()}ca
  root.innerHTML=`<div class="kbk-stage"><div class="kbk-book"></div></div><div class="kbk-bar"><button class="kbk-nav kbk-prev" aria-label="Trang trước">‹</button><span class="kbk-no" aria-live="polite"></span><button class="kbk-nav kbk-next" aria-label="Trang sau">›</button></div><button type="button" class="kit-x kbk-x" aria-label="${spec.closeLabel||"Đóng"}" title="${spec.closeLabel||"Đóng"}">✕</button><div class="kbk-measure" aria-hidden="true"></div>`;
  (spec.host||document.body).appendChild(root);
  const book=root.querySelector(".kbk-book"),stage=root.querySelector(".kbk-stage"),meas=root.querySelector(".kbk-measure"),noEl=root.querySelector(".kbk-no");
- let mode="single",PW=0,PH=0,leaves=[],sheets=[],cur=0,maxCur=0,busy=false,closed=false,logical=0;
+ let mode="single",PW=0,PH=0,leaves=[],sheets=[],cur=0,maxCur=0,busy=false,closed=false,logical=0,logicalB=null;
 
  /* ---- page shells ---- */
  const head=spec.head||"";
@@ -62,16 +62,16 @@ function kitBook(spec){spec=spec||{};const rm=()=>{try{return reducedMotion()}ca
    if(p.kind==="end"){L.push({cls:"k-end",html:endH(p),kind:"end",folio:true});continue}
    const isP=p.kind==="person"&&p.who;const blocks=kbkExpand(p.blocks,isP?p.who:null);let i=0,first=true;
    if(isP&&PW<440&&p.rows&&p.rows.length)blocks.unshift({html:kitRows(p.rows)});
-   do{meas.innerHTML=shell(isP?"k-person r":"k-text r",isP?personBody(p,!first):`${textTop(p,!first)}<div class="kbk-flow"></div>`,"0");
+   do{const b0=i;meas.innerHTML=shell(isP?"k-person r":"k-text r",isP?personBody(p,!first):`${textTop(p,!first)}<div class="kbk-flow"></div>`,"0");
     const flow=meas.querySelector(".kbk-flow");const over=()=>flow.scrollHeight>flow.clientHeight+1;let n=0;
     while(i<blocks.length){flow.insertAdjacentHTML("beforeend",blocks[i].html);if(over()&&n>0){flow.lastElementChild.remove();break}i++;n++}
     while(n>1&&i<blocks.length&&blocks[i-1]&&blocks[i-1].head){flow.lastElementChild.remove();i--;n--}
-    L.push({cls:isP?"k-person":"k-text",html:meas.querySelector(".kbk-body").innerHTML,kind:p.kind,folio:true,src:p});first=false}while(i<blocks.length);
+    L.push({cls:isP?"k-person":"k-text",html:meas.querySelector(".kbk-body").innerHTML,kind:p.kind,folio:true,src:p,b0});first=false}while(i<blocks.length);
   }
   meas.innerHTML="";return L}
 
  /* ---- layout: spread on landscape tablets, single page otherwise ---- */
- function layout(keep){const W=root.clientWidth||innerWidth,H=root.clientHeight||innerHeight;const bar=root.querySelector(".kbk-bar").offsetHeight||48;
+ function layout(keep,keepB){const W=root.clientWidth||innerWidth,H=root.clientHeight||innerHeight;const bar=root.querySelector(".kbk-bar").offsetHeight||48;
   const aw=W-(W<600?20:40),ah=H-bar-(H<700?18:30);const spread=W>=900&&W/H>=1.15;mode=spread?"spread":"single";
   if(spread){PH=Math.min(ah,Math.floor(aw/2/.7));PW=Math.min(Math.floor(aw/2),Math.floor(PH*.76))}
   else{const sp=W<600?8:12;PW=Math.min(aw-sp,Math.floor(ah*.74));PH=Math.min(ah,Math.floor(PW/.5));PW=Math.floor(PW)}
@@ -92,7 +92,10 @@ function kitBook(spec){spec=spec||{};const rm=()=>{try{return reducedMotion()}ca
   book.innerHTML=sheets.map((s,i)=>`<div class="kbk-sheet" data-i="${i}"><div class="kbk-face kbk-front">${shell(s.front.cls+" r",s.front.html,s.front.folio?String(s.front.no||""):"")}<i class="kbk-sh"></i></div><div class="kbk-face kbk-back">${shell(s.back.cls+" l",s.back.html,s.back.folio?String(s.back.no||""):"")}<i class="kbk-sh"></i></div></div>`).join("")+`<i class="kbk-cast"></i><i class="kbk-gutter"></i>`;
   book.querySelectorAll(".kbk-go").forEach(b=>b.onclick=e=>{e.stopPropagation();close()});
   /* restore position by logical page */
-  cur=0;if(keep!=null){for(let i=0;i<sheets.length;i++){const s=sheets[i];if(s.front.src===keep||s.back.src===keep||s.front.kind===keep||s.back.kind===keep){cur=spread&&s.back.src===keep?i+1:i;break}}cur=Math.min(cur,maxCur)}
+  cur=0;if(keep!=null){for(let i=0;i<sheets.length;i++){const s=sheets[i];if(s.front.src===keep||s.back.src===keep||s.front.kind===keep||s.back.kind===keep){cur=spread&&s.back.src===keep?i+1:i;break}}
+   /* same reading position: the page of that section that holds the first block the reader was on (not the section's first page) */
+   if(keepB!=null&&typeof keep==="object"){let best=null;sheets.forEach((s,i)=>{for(const f of [s.front,s.back])if(f.src===keep&&f.b0!=null&&f.b0<=keepB&&(!best||f.b0>=best.b0))best={b0:f.b0,i:spread&&f===s.back?i+1:i}});if(best)cur=best.i}
+   cur=Math.min(cur,maxCur)}
   paint()}
  const sheetEls=()=>book.querySelectorAll(".kbk-sheet");
  function paint(){const els=sheetEls();const n=els.length;els.forEach(el=>{if(el.__curl){el.__curl.destroy();el.__curl=null}});
@@ -106,7 +109,8 @@ function kitBook(spec){spec=spec||{};const rm=()=>{try{return reducedMotion()}ca
   else label=s&&s.front.kind==="cover"?"Bìa sổ":s&&s.front.no?`Trang ${s.front.no}`:"";
   const tot=leaves.filter(l=>l.no).length;noEl.textContent=label+(label&&label!=="Bìa sổ"?` / ${tot}`:"");
   root.querySelector(".kbk-prev").disabled=cur<=0;root.querySelector(".kbk-next").disabled=cur>=maxCur;
-  logical=(sheets[cur]&&(sheets[cur].front.src||sheets[cur].front.kind))||null}
+  logical=(sheets[cur]&&(sheets[cur].front.src||sheets[cur].front.kind))||null;logicalB=sheets[cur]&&sheets[cur].front.b0!=null?sheets[cur].front.b0:null;
+  const lv=mode==="spread"&&cur>0?sheets[cur-1].back:null;if(lv&&lv.src){logical=lv.src;logicalB=lv.b0!=null?lv.b0:null}}   /* spread: the left page is the earliest one in view */
 
  /* ---- the turn: p = 0 (flat, right) … 1 (turned, left) ---- */
  /* the turn: the WHOLE sheet swings around the spine (kitCurl = kitSheetTurn, jbook / KIT §34.1, owner 11/15 10:00Z); content printed on the sheet */
@@ -164,12 +168,12 @@ function kitBook(spec){spec=spec||{};const rm=()=>{try{return reducedMotion()}ca
   if(k==="ArrowRight"||k==="PageDown"){e.preventDefault();next()}else if(k==="ArrowLeft"||k==="PageUp"){e.preventDefault();prev()}
   else if(k==="Escape"){e.preventDefault();close()}else if((k==="Enter"||k===" ")&&!e.target.closest("button")){e.preventDefault();if(cur>=maxCur)close();else next()}};
  document.addEventListener("keydown",key);
- let rt=0;const onR=()=>{clearTimeout(rt);rt=setTimeout(()=>{if(!closed&&!busy)layout(logical)},120)};addEventListener("resize",onR);
+ let rt=0;const onR=()=>{clearTimeout(rt);rt=setTimeout(()=>{if(!closed&&!busy)layout(logical,logicalB)},120)};addEventListener("resize",onR);
  function close(){if(closed)return;closed=true;document.removeEventListener("keydown",key);removeEventListener("resize",onR);try{spec.onClose&&spec.onClose()}catch(e){console.error(e)}}
  layout(null);
  /* web fonts that arrive after the first measure change line heights: measure again (keeps the page) */
  try{if(document.fonts&&document.fonts.status!=="loaded")document.fonts.ready.then(()=>{if(!closed&&!busy)layout(logical)})}catch(e){}
- root.__kbk={relayout:()=>{if(!closed&&!busy)layout(logical)}};
+ root.__kbk={relayout:()=>{if(!closed&&!busy)layout(logical,logicalB)}};
  return {root,next,prev,go,close,get cur(){return cur},get max(){return maxCur},get mode(){return mode},relayout:()=>layout(logical)}}
 
 /* ---------- week data → pages ---------- */

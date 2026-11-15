@@ -76,26 +76,41 @@ window.KIT_SCENE_TINT=window.KIT_SCENE_TINT==null?0:window.KIT_SCENE_TINT;
    · whatever is still wider (train / outer sleeve) runs BEHIND the text, which then sits on the kit's soft paper panel
      (.kbk-figover = the same panel phones use); the figure's left edge is moved inside the page so nothing is cut on the left;
    · phones (.kbk.narrow): same — figure moved inside the page, never scaled; the text already sits on the paper panel. */
-(function(){let q=0;const AR=window.__figAR=window.__figAR||{};const R=window.__kbkRatio=window.__kbkRatio||{h:.86,w:.9};
- const st=document.createElement("style");st.textContent=`.kbk-person.kbk-figover>.kbk-phead,.kbk-person.kbk-figover>.kbk-flow{position:relative;z-index:1;background:color-mix(in srgb,var(--paper,#f3e3c0) 86%,transparent);border-radius:6px;padding:.2em .4em}.kbk-person.kbk-figover>.kbk-por{overflow:visible;z-index:0}`;document.head.appendChild(st);
- /* column width for j87 personBody (called while paginating, so the text is measured in the final column): figure aspect from a
-    cache filled on first sight (a book already open re-lays out once the picture is known); page-body ratios measured on live pages */
+(function(){let q=0;const TEXT_MIN=220,FIG_MIN=.85,TORSO=.12;   /* TORSO: half shoulder width ≈ 12 % of figure height (sleeves/train may go behind the text) */
+ const AR=window.__figAR=window.__figAR||{},HX=window.__figHX=window.__figHX||{},R=window.__kbkRatio=window.__kbkRatio||{h:.86,w:.9};
+ const st=document.createElement("style");st.textContent=`.kbk-person.kbk-figover>.kbk-phead,.kbk-person.kbk-figover>.kbk-flow{position:relative;z-index:1;background:color-mix(in srgb,var(--paper,#f3e3c0) 86%,transparent);border-radius:6px;box-shadow:0 0 0 .35em color-mix(in srgb,var(--paper,#f3e3c0) 86%,transparent)}.kbk-person.kbk-figover>.kbk-por{overflow:visible;z-index:0}`;document.head.appendChild(st);
+ /* where the BODY stands in the picture (0..1 of its width): centre of the head = alpha mass of the top 16 % rows. Trains/outpainted hems
+    make many figures asymmetric, so the body is not the picture centre. CDN images are CORS-open; on failure 0.5. */
+ function headX(I){try{const w=96,h=Math.max(8,Math.round(96*I.naturalHeight/I.naturalWidth)),c=document.createElement("canvas");c.width=w;c.height=h;const g=c.getContext("2d");g.drawImage(I,0,0,w,h);
+   const d=g.getImageData(0,0,w,Math.max(2,Math.round(h*.16))).data;let sx=0,sa=0;for(let i=3;i<d.length;i+=4){const a=d[i];if(a>40){sx+=((i>>2)%w)*a;sa+=a}}return sa?sx/sa/w:.5}catch(e){return .5}}
+ function learn(src,then){if(AR[src]!=null)return;AR[src]=0;const I=new Image();I.crossOrigin="anonymous";
+   I.onload=()=>{AR[src]=I.naturalWidth/Math.max(1,I.naturalHeight);HX[src]=headX(I);then&&then()};I.onerror=()=>{delete AR[src]};I.src=src}
+ /* column width + figure height for j87 personBody — called WHILE PAGINATING, so the text is measured in its final column */
  window.kitBookFigCol=function(fig,PW,PH){try{const m=/src="([^"]+)"/.exec(fig||"");if(!m||!PW||!PH||PW<440)return "";const src=m[1];
-   if(!AR[src]){if(AR[src]!==0){AR[src]=0;const I=new Image();I.onload=()=>{AR[src]=I.naturalWidth/Math.max(1,I.naturalHeight);if(document.querySelector(".kbk"))dispatchEvent(new Event("resize"))};I.src=src}return ""}
-   const kfr=+((/--kfr:([\d.]+)/.exec(fig)||[])[1]||1),H=PH*R.h*kfr,w0=AR[src]*H,base=Math.min(PW*.45,PH*.8*.42);if(w0<=base+1)return "";
-   const col=Math.min(w0/2+.14*H+4,PW*R.w*.74);return col>base+1?`;grid-template-columns:${Math.round(col)}px minmax(0,1fr)`:""}catch(e){return ""}};
+   if(!AR[src]){learn(src,()=>document.querySelectorAll(".kbk").forEach(r=>{try{r.__kbk&&r.__kbk.relayout()}catch(e){}}));return ""}   /* the book's own re-layout, same reading position */
+   const kfr0=+((/--kfr:([\d.]+)/.exec(fig)||[])[1]||1),pic=PH*R.h,ar=AR[src],hx=HX[src]!=null?HX[src]:.5,base=Math.min(PW*.45,PH*.8*.42);
+   const fs=Math.max(13,Math.min(17,PW/34)),boxW=PW*R.w,colMax=boxW-fs-Math.min(TEXT_MIN,boxW-base-fs);   /* text ≥ 220 px, or never narrower than a normal figure's page */
+   const per=hx*ar+TORSO,need=k=>per*pic*k+4;                                                  /* body right edge when the figure starts at the column's left */
+   let kfr=kfr0;if(ar*pic*kfr<=base+1)return "";
+   if(need(kfr)>colMax)kfr=Math.max(FIG_MIN,Math.min(kfr,(colMax-4)/(per*pic)));                 /* lower the figure, never below 85 % */
+   const col=Math.max(base,Math.min(need(kfr),colMax));
+   return `${kfr<kfr0?`;--kfr:${kfr.toFixed(3)}`:""};grid-template-columns:${Math.round(col)}px minmax(0,1fr)`}catch(e){return ""}};
+ /* live pages: place the figure (layout px, so page-turn transforms do not matter). Figure wider than its column: left edge at the page's
+    left; if the body would then reach under the text, slide it left so face + torso end at the column edge — only the outer train/sleeve may
+    pass the page edge, never the body. */
  function clamp(){q=0;try{document.querySelectorAll(".kbk-person.kbk-full .kesfi").forEach(f=>{const box=f.closest(".kbk-person");if(!box)return;
    const por=box.querySelector(":scope>.kbk-por"),pg=box.closest(".kbk-pg");if(!por)return;
-   f.style.transform="";const w0=f.offsetWidth,bw=box.getBoundingClientRect().width;if(!w0||!bw){box.classList.remove("kbk-figover");return}
-   if(pg&&pg.offsetHeight&&pg.offsetWidth){R.h=+(por.getBoundingClientRect().height/pg.offsetHeight/(+getComputedStyle(box).getPropertyValue("--kfr")||1)*(+getComputedStyle(box).getPropertyValue("--kfr")||1)).toFixed(3);R.w=+(bw/pg.offsetWidth).toFixed(3)}
-   const im=f.querySelector("img");if(im&&im.naturalWidth)AR[im.getAttribute("src")]=im.naturalWidth/im.naturalHeight;
-   const b=box.getBoundingClientRect(),pr=por.getBoundingClientRect();
+   f.style.transform="";{const i0=f.querySelector("img");if(i0&&i0.style.maskImage){i0.style.maskImage="";i0.style.webkitMaskImage=""}}const w0=f.offsetWidth,H=f.offsetHeight,bw=box.offsetWidth,pw=por.offsetWidth;if(!w0||!bw){box.classList.remove("kbk-figover");return}
+   if(pg&&pg.offsetHeight&&pg.offsetWidth&&!box.closest(".kbk.narrow")){R.h=+(por.offsetHeight/pg.offsetHeight).toFixed(3);R.w=+(bw/pg.offsetWidth).toFixed(3)}
+   const im=f.querySelector("img"),src=im&&im.getAttribute("src");if(src&&AR[src]==null)learn(src,soon);const hx=src&&HX[src]!=null?HX[src]:.5;
    if(box.closest(".kbk.narrow")){   /* phones: unchanged from r7 (OPEN: a figure wider than the whole page is still scaled to the page — owner decision pending) */
-    const s=w0>b.width?b.width/w0:1,w=w0*s,l=pr.left+(pr.width-w)/2;let dx=0;if(l<b.left)dx=b.left-l;else if(l+w>b.right)dx=b.right-(l+w);
+    const s=w0>bw?bw/w0:1,w=w0*s,l=(pw-w)/2;let dx=0;if(l<0)dx=-l;else if(l+w>bw)dx=bw-(l+w);
     const t=(s<1||Math.abs(dx)>0.5)?`translateX(${dx.toFixed(1)}px) scale(${s.toFixed(4)})`:"";f.style.transformOrigin="50% 100%";if(f.style.transform!==t)f.style.transform=t;return}
-   const l=pr.left+(pr.width-w0)/2;let dx=0;if(l<b.left)dx=b.left-l;
-   box.classList.toggle("kbk-figover",w0>pr.width+1);
-   const t=Math.abs(dx)>0.5?`translateX(${dx.toFixed(1)}px)`:"";if(f.style.transform!==t)f.style.transform=t})}catch(e){}}
+   const over=w0>pw+1;box.classList.toggle("kbk-figover",over);if(!over)return;
+   let L=0;const bodyR=hx*w0+TORSO*H;if(L+bodyR>pw)L=Math.max(pw-bodyR,-(hx*w0-TORSO*H));
+   const dx=L-(pw-w0)/2,t=Math.abs(dx)>0.5?`translateX(${dx.toFixed(1)}px)`:"";if(f.style.transform!==t)f.style.transform=t;
+   /* a train that passes the page's left edge must not end in a straight cut (owner 13:45Z): it fades into the paper over 48 px */
+   if(im){const mk=L<-0.5?`linear-gradient(to right,transparent ${(-L).toFixed(0)}px,#000 ${(-L+48).toFixed(0)}px)`:"";if(im.style.maskImage!==mk){im.style.maskImage=mk;im.style.webkitMaskImage=mk}}})}catch(e){}}
  function soon(){if(!q){q=requestAnimationFrame(clamp);setTimeout(clamp,450);setTimeout(clamp,1300)}}
  window.kitBookFigClamp=clamp;
  try{new MutationObserver(ms=>{if(ms.some(m=>[...m.addedNodes].some(n=>n.nodeType===1&&(n.matches(".kbk-person,.kesfi,.kbk")||n.querySelector&&n.querySelector(".kbk-person.kbk-full")))))soon()}).observe(document.body,{childList:true,subtree:true})}catch(e){}
