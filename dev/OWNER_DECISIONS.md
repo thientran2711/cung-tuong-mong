@@ -232,3 +232,6 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (04:35Z) Owner: trang 'tiếp theo' trong Sổ tuần cũng phải có hình toàn thân full trang như trang đầu; chỉ sang trang khi thật hết chỗ; dòng '(Đã ghi vào mục Đã biết…)' thành chú thích nhỏ. review/hau-cung-ui.
 - (04:45Z) Owner: hộp thoại có người (vd 'Có người đến') → trái người toàn thân cao hết hộp; phải trên lời sự kiện, phải dưới nút chọn. Luật KIT §32.7 cho hộp thoại có người không tranh cảnh. review/dialog-person.
 - (04:50Z) Owner chê tranh Thỉnh an mới (nhìn từ sau, tay như để sau mông) → vẽ lại: vạn phúc lễ, tay chắp phía trước bên hông phải, nhìn nghiêng/3/4 mặt hướng Thái hậu; Thái hậu đúng tuổi, không hoa điền. act-thinh-an-v3.
+- (04:55Z) Owner: Hành sự (và mọi danh sách việc) — việc làm được ngay lên trên cùng, rồi việc chỉ vướng giờ, rồi việc vướng điều kiện khác; thứ tự ổn định. review/sub-odds.
+- (04:55Z) Owner hỏi "tiếng cứng cỏi là sao" → cấm chữ hiệu ứng mơ hồ không có luật thật trong Được/Mất/Kèm; điều tốt không nằm dòng Kèm đỏ. review/sub-odds.
+- (04:55Z) c12 Phi hoa điền đã thu nhỏ (~c03 t1 × 1.2), đẩy CDN.
