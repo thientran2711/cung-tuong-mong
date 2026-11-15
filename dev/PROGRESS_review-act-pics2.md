@@ -179,3 +179,6 @@ Notes: `cdn_sync.py --pull` does NOT refresh img/_index.json reliably (stale loc
 ### Step 4 IN PROGRESS: dialog banners (89 -> 73 left)
 - 16 drawn, checked on sheets, on the CDN: j71x-tai nc1 news-tin-trong-cung night2 q72-doi-thuoc q72-don-ta q72-hh-trungthu q72-loi-thoi q72-maid-tet q72-mat-tram q72-ns-doi q72-th-aodong q72-th-mai q72-th-thanhminh q72-th-trungcuu q72-tv-mua (ids in gens_dlg.txt).
 - Prompts: dprompt.py template + "NO Emperor, nobody in yellow" for scenes without him; envoy in nc1 wears a hood (no fur hat).
+### Step 5 STARTED: remaining act pictures (hands-only, -h names)
+- Queue = `python3 dev/figwork/acts/prompts2.py --todo 400` (284 before this batch) = the held keys of mergepatch. Write an English hands-only scene per key in hscenes.txt (Vietnamese scene in meanings.py), `hprompt.py 8`, generate gpt-2-6 3:4 with the style ref it names, `hfetch.py`, sheet-check, cdn_sync, then rerun mergepatch.py (with tmp corpus) to wire them live.
+- Batch 1 (8) on the CDN and wired live: van-dong-do-dau chai-chuot-nhan-sac nghi-lay-suc o-yen-nghi tinh-duong ngu-som o-cung-giu-am ban-thuong. Live ACTS: log 554 -> 562, keys 529 -> 537, 0 missing, corpus: 0 picture lines lost (1 line None -> ban-thuong-h). 276 left.
