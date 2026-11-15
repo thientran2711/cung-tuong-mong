@@ -283,6 +283,7 @@ function kitHint(o,m,lv){if(lv==null)lv=kitHintLevel();if(!o)return{hint:"",risk
  for(const it of M.items){const sg=kitHintSign(it.p,it.l);if(!sg)continue;const ph=kitHintPhrase(it.p,sg,lv===2?kitHintWho(it.p,m):"",lv);if(!ph)continue;const w=ph[lv]+(lv>=1&&!KIT_DEADLY.test(it.p)?kitHintMag(it.p):"");
   const isFail=it.l==="hỏng";if(KIT_DEADLY.test(it.p)&&(isFail||it.l==="kèm"||sg<0))deadly=true;
   if(it.l==="kèm"){side.push([w,sg]);if(sg<0&&/(khả năng|có thể|nếu|dễ |có khi|bị lộ|phát giác)/i.test(it.p))sideRisk=true;continue}
+  if(isFail&&M.odds==="Chắc chắn"){if(sg<0)sure.push([w,sg]);continue}/* a CERTAIN option cannot fail: its "Mất:" is a sure price ("nhưng …"), never "hỏng thì …" (review pets-fix r6) */
   if(isFail){if(sg<0)fail.push(w);continue}
   if(/(nếu bị|bị lục|tang vật|lộ là|có thể bị|phát giác)/i.test(it.p))sideRisk=true;
   (od?win:sure).push([w,sg])}

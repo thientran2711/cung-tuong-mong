@@ -806,6 +806,8 @@ so stage blocks may stand beside a head or between figures, never over the paint
       ("dễ thành" / "thành bại khó đoán" / "khó thành") and the failure ("hỏng thì cả họ bị tru di").
     2 SHARP — names ("Hoa Băng Tâm thất sủng") and the reading of the moment the data carries ("ngài trọng tài, rất hợp").
   · A hand-written override per option: `hint` (string or fn(lv)) and `risk`; it may never lie (must match the data).
+  · A "Chắc chắn" option cannot fail: its "Mất:" items are a sure price and read "nhưng …", never "hỏng thì …" (review/pets-fix-r6: ts-b "Nhịn"
+    read "hỏng thì mất thể diện").
 - KIT PART `kitHintRow(text)` → the row `Gợi ý | <span class="ef i">…</span>` (`.kr-hint`; `.ef.i` = dim italic value, kit act-card CSS j63).
 - KIT PART `kitRisk(word)` → the risk chip in the option head: a `kitChip` tone — "an toàn" `.kchip.g`, "có rủi ro" `.kchip.w` (amber, kit
   chip CSS j79), "liều" `.kchip.r` — plus `.krisk` (pushed right in `.kat`). an toàn = cannot fail; liều = Khó / Liều or a deadly failure /
