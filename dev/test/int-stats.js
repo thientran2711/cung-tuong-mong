@@ -22,7 +22,10 @@ let SIZES=args.slice(1);if(!SIZES.length)SIZES=['755x1000@2','1180x820@2','412x1
    R.load=await p.evaluate(()=>{const v=rivals[0];v.oan=2.36;v.rel=-3.4;S.ro[v.id]=1.64;if(S.maid)S.maid.loyal=50.5;const d=ser();deser(d);const w=rivals.find(x=>x.id===v.id);return{oan:w.oan,rel:w.rel,ro:S.ro[v.id],loyal:S.maid&&S.maid.loyal}});
    /* the real log line of a sure act (no card text) */
    R.logLine=await p.evaluate(()=>{const a={n:"Thử việc chắc",c:{suc:-5},o:100,w:{danh:2},x:"được: Danh +2 · kèm: lời hứa trên thẻ"};const s0=S.logSeq;runOpt(a);return plain(S.logs[0])});
-   ok=ok&&R.sim.nbad===0&&R.sim.weeks>=4&&!R.sim.thu.length&&!R.sim.help.length&&Number.isInteger(R.load.oan)&&Number.isInteger(R.load.rel)&&Number.isInteger(R.load.ro)&&(R.load.loyal==null||Number.isInteger(R.load.loyal))&&!/lời hứa/.test(R.logLine)&&/Danh \d+→\d+/.test(R.logLine)}
+   ok=ok&&R.sim.nbad===0&&R.sim.weeks>=4&&!R.sim.thu.length&&!R.sim.help.length&&Number.isInteger(R.load.oan)&&Number.isInteger(R.load.rel)&&Number.isInteger(R.load.ro)&&(R.load.loyal==null||Number.isInteger(R.load.loyal))&&!/lời hứa/.test(R.logLine)&&/Danh \d+→\d+/.test(R.logLine);
+   /* a dialog choice is logged with its event and what really happened */
+   R.choice=await p.evaluate(()=>{Q.length=0;Q.push({t:"Lão Vương bị truy sát",h:"",opts:[{n:"Mặc kệ",fx:{danh:-2},go:()=>log("Ông bị giết, mất nhân chứng.")}]});const n0=S.logs.length;chooseM(0);Q.length=0;return{line:plain(S.logs[0]),added:S.logs.length-n0}});
+   ok=ok&&/^Lão Vương bị truy sát: Mặc kệ → Ông bị giết, mất nhân chứng\. Danh \d+→\d+\.$/.test(R.choice.line.trim())&&R.choice.added===1}
   /* week book: a page with one very long entry and long chips */
   R.book=await p.evaluate(async()=>{const v=rivals[0];const long=`<b>Ngươi có thêm chứng cứ về ${v.name}</b>: `+Array(40).fill(`lời ${v.name} nói xấu người khác sau lưng <span class="ef r">${v.name} Sủng −10</span>`).join("; ")+".";
    const bk=kitBook({pages:[{kind:"cover",title:"Tuần lục"},{kind:"text",title:"Thử",blocks:[{facts:[long]},{facts:["Một dòng ngắn."]}]},{kind:"person",who:v,blocks:[{facts:[long,long]}]},{kind:"end"}],head:"Thử"});
