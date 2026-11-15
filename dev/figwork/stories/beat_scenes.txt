@@ -1,0 +1,59 @@
+dtq_huynh:c3|0|consorts whispering behind fans in a palace garden while a young consort in red walks past them with a calm proud face, a frontier war banner motif embroidered on her sleeve
+dtq_huynh:t1|1|a narrow mountain path at night near an enemy camp of tents and campfires, a young general in torn armor slips past a sleeping sentry
+dtq_huynh:x1|0|the Emperor at his desk in the council hall with a frontier map spread before him, ministers in Ming robes standing at a distance, a consort in red waiting by a pillar
+td_an:s1|1|an old clerk in plain dark robe leads a consort with a lantern between tall shelves of bound case files in a dusty archive
+td_an:s2|0|morning greeting in the Empress's hall, a consort in pale robes kneels in line while another consort turns her head to study her closely
+td_an:c1|1|an old eunuch in grey robes hides in a dark alley behind stacked crates while men with torches search the lane beyond
+td_an:c2|1|a lacquered study desk in a minister's mansion at night, a sealed letter tucked under an inkstone, a lamp burning low, nobody present
+td_an:c3|0|a low-ranked consort stands at the bottom of long palace stairs looking up at the distant main hall high above
+td_an:t1|1|an archive building burning at night, orange flames from the windows, guards running with water buckets
+td_an:x1|0|a consort kneels before the Emperor's desk holding up a closed memorial folder, the Emperor and the elderly Empress Dowager seated above her
+td_ke:s1|1|a consort alone at a desk by lamplight comparing two old documents with a magnifying stone, a bronze seal box open beside them
+td_ke:s2|0|a consort holds an old cloth purse of silver coins found in a chest, a faded memory of a snowy palace gate seen through the window
+td_ke:c1|0|an elderly censor in a dark Ming official robe and black gauze hat bows and offers a closed account book to a consort in a quiet side hall
+td_ke:c2|0|an open gift box on a table holding a golden hairpin broken in two, a consort standing over it with a still face
+td_ke:c3|1|two consorts meet secretly in a moonlit pavilion, one in pale blue clasping her hands anxiously while the other listens
+td_ke:t1|1|a consort sits at a desk with two closed memorial folders before her, a candle between them, choosing
+td_ke:x1|1|a consort kneels on a stone floor before the Emperor's carved desk at night holding a memorial folder in both hands, the Emperor seated reading lamp beside him
+td_song:s1|0|a traveling merchant in a plain brown robe presents a small silver bracelet on a cloth to a consort at a side gate
+td_song:s2|0|two consorts drinking tea in a pavilion, one leans in asking a question while the other holds her teacup very still
+td_song:c1|0|a column of young conscript soldiers in plain padded armor marching toward a frontier fortress under grey skies
+td_song:c2|0|on a dusty battlefield a young soldier carries a wounded officer on his back out of the smoke
+td_song:c3|0|the Emperor speaks to a consort in a warm chamber, a frontier map on the wall, her eyes glistening but calm
+td_song:t1|0|an officer in a frontier camp compares a young soldier's face with an old portrait scroll held by a clerk
+td_song:x1|0|the Emperor at his desk reads a military report, a young soldier kneels in the hall below between two guards
+td_tha:s1|1|a feverish consort lies in bed under a silk quilt, a physician shakes his head, another consort stands at the door holding a folded herbal recipe
+td_tha:s2|1|a consort kneels alone before ancestral tablets in a candlelit shrine hall, her shoulders bowed, another consort watches unseen from the doorway
+td_tha:c1|1|a maid's hand holds a tiny musk packet over an incense box on a dressing table, the consort beside her has not decided
+td_tha:c2|0|a consort reads a confiscated letter at a window seat, the envelope with a broken wax seal on her lap
+td_tha:c3|0|a pregnant consort walks slowly in a garden supported by two maids, other consorts bowing as she passes
+td_tha:t1|1|two consorts face each other alone in a candlelit chamber, one standing just inside the door, both silent and serious
+td_tha:x1|0|a consort stands where two palace corridors meet, holding a thick bundle of evidence letters, one corridor leading toward a distant grand hall
+muoi_lau:s1|1|a river wharf at night, soldiers with torches seize three salt cargo boats, a merchant steward led away in ropes
+muoi_lau:s2|0|ministers in dark Ming robes and black gauze hats kneel in the court hall presenting memorial folders, an empty carved throne platform above
+muoi_lau:c1|0|an old steward in brown robe kneels in a courtyard confessing to an official, a consort listening from behind a screen
+muoi_lau:c2|1|a single salt barge moored alone at a foggy dock at night under one lantern, salt sacks stacked on deck, no people
+muoi_lau:c3|0|a consort in silk visits another consort's chamber, taking her hand with a gentle sympathetic expression over a tea table
+muoi_lau:t1|1|a consort at a desk at night tracing a red thread across a map of canals and warehouses with ledgers open beside it
+muoi_lau:x1|0|an old white-haired merchant kneels in a courthouse before a magistrate's bench, guards with staffs on both sides
+muoi_doi:s1|0|a consort reads a letter at a window, behind her a painting of full granaries, a pile of silver ingots on the table
+muoi_doi:s2|0|crowds of hungry villagers in plain hemp clothes gather outside a city gate, guards on the wall above
+muoi_doi:c1|0|soldiers carry rice sacks out of a merchant's granary while clerks record on tablets, a merchant watching helplessly
+muoi_doi:c2|0|a rich merchant warehouse piled to the ceiling with rice sacks, a fat steward counting coins, hungry people outside the gate
+muoi_doi:c3|0|imperial physicians in cloth masks tending sick villagers on straw mats in a temple yard, herb smoke rising
+muoi_doi:t1|0|an elderly merchant father in brown silk robe turns his back in his hall, a letter crumpled on the floor
+muoi_doi:x1|0|the Emperor on his throne receives kneeling merchants in a hall, some offered rewards on trays, others guarded
+muoi_no:s1|0|an open account ledger with an abacus and a brush on a consort's table, red tally marks, a consort studying it
+muoi_no:s2|0|a young maid bows at a side door delivering a quiet request to a consort holding an account book
+muoi_no:c1|0|a eunuch in dark robe offers a heavy purse of silver on a tray to a consort, who keeps her hand on a ledger
+muoi_no:c2|0|a consort kneels before the Empress on her seat in a grand hall, a ledger lying open on the floor between them
+muoi_no:c3|1|two consorts talk quietly in a dim corner of a pavilion at night, one leaning closer to share a secret
+muoi_no:t1|0|a consort kneels pleading before another consort who sits holding an account book, a maid standing aside
+muoi_no:x1|0|consorts seated in rows in a grand hall for a seat contest, two consorts exchanging a meaningful glance across the room
+cn_chu:s1|0|a consort kneels offering a teacup to a seated proud senior consort while other consorts watch from their seats
+cn_chu:s2|0|a palace maid in plain green whispers a message to a consort at a garden gate
+cn_chu:c1|0|a proud consort speaks to the Empress in her hall, pointing at broken jade cup pieces on a tray, another consort standing still
+cn_chu:c2|0|a proud consort kneels accused in a hall as a hairpin is shown on a tray, she looks toward another consort standing at the side
+cn_chu:c3|0|the Emperor and a consort stroll in a garden, the Emperor turning to ask her a question
+cn_chu:t1|1|a proud consort sits sleepless at her dressing table at night, a candle burning low
+cn_chu:x1|1|a mid-autumn banquet under a full moon, two consorts seated side by side at the same rank, other consorts watching
