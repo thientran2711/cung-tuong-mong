@@ -71,6 +71,19 @@ for f in mods:
     head=mm.group(1) or ''
     cls='ev' if head.startswith('ev') or re.search(r'\bev\s*:',a) else 'act' if head.startswith('act') or re.search(r'showOut\s*:\s*(true|1)',a) else 'shop' if head.startswith('shop') else 'kit' if re.search(r'\bkit\s*:\s*spec',a) else 'pid' if re.search(r'\bpid\s*:',a) else '??'
     rows.append((f,ln,'literal',title,cls,None))
+# choices ADDED AFTER the literal (reviewer r7: "Thái y bắt mạch" card.opts=[…] slipped both scans): NAME.opts=[…] → classify by the flags of
+# the `const NAME={…}` literal just before it; no literal in reach (m = Q[0] etc.) → an existing dialog, skipped
+for f in mods:
+  t=open(os.path.join(D,f),encoding='utf-8').read()
+  for mm in re.finditer(r'\b(\w+)\.opts\s*=\s*\[',t):
+    nm=mm.group(1);ln=t.count('\n',0,mm.start())+1
+    lm=None
+    for x in re.finditer(r'(?:const|let|var)\s+'+nm+r'\s*=\s*\{',t[max(0,mm.start()-1500):mm.start()]):lm=x
+    if not lm:continue
+    a=arg(t,max(0,mm.start()-1500)+lm.end())
+    tm=re.search(r'\bt:\s*(`[^`]*`|"[^"]*"|[A-Za-z_][\w.()]*)',a);title=(tm.group(1) if tm else nm)[:44]
+    cls='ev' if re.search(r'\bev\s*:',a) else 'act' if re.search(r'\b(act\s*:|showOut\s*:\s*(true|1))',a) else 'shop' if re.search(r'\bshop\s*:',a) else 'pid' if re.search(r'\bpid\s*:',a) else '??'
+    rows.append((f,ln,'.opts=',title,cls,None))
 # PEND ids: every PEND.<id>= definition, event unless in KIT_ACT_PIDS
 pend=[]
 for f in mods:

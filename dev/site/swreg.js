@@ -176,7 +176,8 @@ function peerCard(){mkCard("Bạn muốn mở bản mới ngay","Hai người c�
 K.card=()=>card();
 let lineT=0;
 K.lines=[];
-function line(text,ms){css();K.lines.push([text,Date.now()]);let el=$i("kupdline");if(!el){el=document.createElement("div");el.id="kupdline";el.className="kupdline";el.setAttribute("role","status");document.body.appendChild(el)}
+function line(text,ms){css();K.lines.push([text,Date.now()]);if(typeof window.kitLine==="function"){window.kitLine(text,ms);return} /* KIT §42.2: one-line notices sit above the bottom bar, never on the scene title (owner 15/11 16:40Z) */
+ let el=$i("kupdline");if(!el){el=document.createElement("div");el.id="kupdline";el.className="kupdline";el.setAttribute("role","status");document.body.appendChild(el)}
  el.textContent=text;el.classList.remove("out");const hud=document.querySelector("header.hud");const hb=hud&&vis(hud)?hud.getBoundingClientRect().bottom:0;
  el.style.top=Math.round(Math.max(10,hb+8))+"px";clearTimeout(lineT);if(ms)lineT=setTimeout(()=>{el.classList.add("out");setTimeout(()=>{if(el.classList.contains("out"))el.remove()},600)},ms)}
 K.line=line;

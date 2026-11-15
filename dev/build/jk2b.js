@@ -155,7 +155,7 @@ function kitCourtHTML(cls){const R=kitCourtRows();if(!R.length)return"";const v=
 function kitCourtOpen(k){try{if(Q.length&&!/pcm/.test(Q[0].cls||""))return;if(k==="emp"){showEmp();return}
  const tb=k==="th"?"rel":"rv";if(k==="th")relSel="th";else{const q=queenP();const i=rivals.indexOf(q);if(i>=0)PG.rv=i}
  const b=document.querySelector(`[data-tab="${tb}"]`);if(b)b.click();else{tab=tb;render()}}catch(e){console.error("kitCourtOpen",e)}}
-addEventListener("click",e=>{const b=e.target.closest&&e.target.closest(".kcrow[data-kc]");if(!b)return;e.stopPropagation();const el=$("hud2");if(el&&!el.classList.contains("col")&&b.closest("#hud2")){const x=el.querySelector(".khx");if(x)x.click()}kitCourtOpen(b.dataset.kc)},true);
+addEventListener("click",e=>{const b=e.target.closest&&e.target.closest(".kcrow[data-kc]");if(!b||e.target.closest("img.kemo"))return; /* a tap on the mood seal = its popover (jemo), not the card */e.stopPropagation();const el=$("hud2");if(el&&!el.classList.contains("col")&&b.closest("#hud2")){const x=el.querySelector(".khx");if(x)x.click()}kitCourtOpen(b.dataset.kc)},true);
 function kitCourtStage(){try{const st=$("stage"),ks=$("kstat");let o=$("kcourt");const land=innerWidth>innerHeight;
  if(!st||!ks||!land||!S||S.dead||ks.style.visibility==="hidden"||(typeof isSrv==="function"&&isSrv())){if(o)o.remove();return}
  const h=kitCourtHTML("kcst");if(!h){if(o)o.remove();return}if(!o){o=document.createElement("div");o.id="kcourt";st.appendChild(o)}o.innerHTML=h;
@@ -313,21 +313,8 @@ function kitHideOut(b){try{if(!b||!b.classList.contains("ka")||b.dataset.khid===
  if(H){if(H.hint)kb.insertAdjacentHTML("beforeend",kitHintRow(H.hint));
   const kat=b.querySelector(":scope > .kat");if(kat&&!kat.querySelector(".krisk"))kat.insertAdjacentHTML("beforeend",kitRisk(H.risk))}}catch(e){console.error("kitHideOut",e)}}
 (function(){const n0=kaNorm1;kaNorm1=function(b){const r=n0.apply(this,arguments);try{if(b&&b.dataset&&(b.dataset.khide==="1"||b.closest("[data-khide-all]")))kitHideOut(b)}catch(e){}return r}})();
-/* THE KIT SAMPLE PAGE (KIT.md "Trang mẫu kit"): every shared part of this section, drawn by the kit functions themselves (no copy of their
-   markup). Open: index.html?kit (after the game has started) or kitSample() in the console. Parts: kitChip tones g / r / n / w / ok / no,
-   kitRisk ×3, an event option in cost mode (Tốn + kitHintRow + kitRisk, no Tốn when free), the result seals kitResultSeal(true|false|null) and
-   kitKemRow. A new shared part is added HERE as well as in KIT.md. */
-function kitSample(){if(typeof S==="undefined"||!S)return false;const opt=(n,ton,hint,risk)=>`<button class="opt ka khideout" data-ka="1" data-khid="1" type="button"><span class="kat"><span class="kan">${n}</span>${kitRisk(risk)}</span><small class="kb">${ton?`<span class="kr kr-ton"><span class="krl">Tốn</span><span class="krv"><span class="ef r">${ton}</span></span></span>`:""}${kitHintRow(hint)}</small></button>`;
- const seal=ok=>{const s=typeof kitResultSeal==="function"?kitResultSeal(ok):{cls:"sure",t:"KẾT QUẢ"};return `<span class="rtoast karesult ${s.cls}" style="position:static;transform:none;opacity:1;display:inline-flex;margin:2px;padding:4px 8px"><b class="seal">${s.t}</b></span>`};
- const kem=typeof kitKemRow==="function"?kitKemRow(liveRivals(true).slice(0,3).map((v,i)=>({v,k:"ghen",d:4+i*2}))):"";
- const h=`<div class="kpsheetb"><p class="past">Trang mẫu kit — mỗi phần dưới đây do chính hàm kit vẽ (KIT.md).</p>
-  <h4>kitChip (g · r · n · w · ok · no)</h4><p>${kitChip("Sủng",3)}${kitChip("Danh",-2)}${kitChip("Thường","n")}${kitChip("có rủi ro","w")}${kitChip("đủ Sức","ok")}${kitChip("thiếu bạc","no")}</p>
-  <h4>kitRisk (KIT 28.6)</h4><p>${kitRisk("an toàn")}${kitRisk("có rủi ro")}${kitRisk("liều")}</p>
-  <h4>Lựa chọn sự kiện (chế độ giá + kitHintRow + kitRisk)</h4><div class="opts">${opt("Gói bánh ú dâng Thái hậu","Sức -5","Thái hậu hài lòng","an toàn")}${opt("Xin ân cho gia đình","","thêm thể diện trong cung, có thêm bạc; thành bại khó đoán; hỏng thì bệ hạ lạt lẽo đi","có rủi ro")}${opt("Theo cha mưu đại sự","","Hoàng hậu bị phế; khó thành; hỏng thì cả họ bị tru di","liều")}</div>
-  <h4>kitSeal (THÀNH · HỎNG · KẾT QUẢ)</h4><p>${seal(true)}${seal(false)}${seal(null)}</p>
-  <h4>kitKemRow (chạm để xem tên)</h4><span class="kb" onclick="const k=event.target.closest('.kkem');if(k)k.classList.toggle('on')">${kem}</span></div>`;
- Q.unshift({t:"Mẫu kit",h,btn:"Đã hiểu",act:1});showModal();return true}
-(function(){try{if(/[?&]kit\b/.test(location.search)){const go=()=>{if(typeof S!=="undefined"&&S&&S.name&&document.getElementById("title").hidden)kitSample();else setTimeout(go,800)};setTimeout(go,1500)}}catch(e){}})();
+/* the kit sample page for this section (kitRisk, kitHintRow, an event option in cost mode, kitResultSeal, kitKemRow) is ONE page: jkitpage.js
+   (#kit, KIT §47), samples "§53" (reviewer opt-render r7 dropped the duplicate ?kit / kitSample() page). */
 /* WHICH dialogs are EVENT choices (owner 14:30Z: every event — main / side stories, festivals, NPC visits, toilette reactions…): ON BY DEFAULT
    for (a) every item made from a PEND entry by pushDil / pushFront / mkP (it carries pid / pp: j68 weekly events, j67 chapters, j70, j96/j97…)
    EXCEPT the active-act pickers listed in KIT_ACT_PIDS (she opened them herself: gift / plant / taint / evidence pickers, the shop, the veil
@@ -586,15 +573,22 @@ function kitOriginArt(k){return `img/bg-origin-${k}.webp`}
    o.shape "wide" (16:9; a card's top band) or "tall" (3:4; ev-* / st-* / act-* / info-* art). o.fb fallback src, o.col category colour
    (frame line + small category chip = label), o.cap false = no caption. */
 function kitOriginWide(k){return `img/origin-wide-${k}.webp`}
+/* o.size "thumb" = small square tile (28.19) */
 function kitSceneArt(src,label,o){o=o||{};const sh=o.shape==="tall"?"tall":"wide";const fb=o.fb?String(o.fb).replace(/'/g,""):"";
  const err=fb?`if(this.dataset.fb!=='1'){this.dataset.fb='1';this.src='${fb}'}else this.remove()`:"this.remove()";const lab=label?String(label).replace(/"/g,"&quot;"):"";
- return `<figure class="ksart ksart-${sh}${o.col?" ksart-cat":""}${o.cls?" "+o.cls:""}"${lab?` title="${lab}"`:""}${o.col?` style="--kcc:${o.col}"`:""}>`+
+ return `<figure class="ksart ksart-${sh}${o.size==="thumb"?" ksart-thumb":""}${o.col?" ksart-cat":""}${o.cls?" "+o.cls:""}"${lab?` title="${lab}"`:""}${o.col?` style="--kcc:${o.col}"`:""}>`+
   (lab?`<span class="ksart-ph">${label}</span>`:"")+(src?`<img src="${src}" alt="" loading="lazy" onerror="${err}">`:"")+
   (label&&o.cap!==false?(o.col?`<em class="ksart-chip">${label}</em>`:`<figcaption>${label}</figcaption>`):"")+`</figure>`}
 (function(){const st=document.createElement("style");st.id="k-sceneart";st.textContent=`
 .ksart{position:relative;margin:0;display:block;width:100%;overflow:hidden;border-radius:4px;background:#efe4cf;
  border:1px solid var(--gold,#8f5f0c);box-shadow:inset 0 0 0 2px #fffaf0,inset 0 0 0 3px #e6d3ac}
 .ksart-wide{aspect-ratio:16/9}.ksart-tall{aspect-ratio:3/4}
+/* size "thumb" (tabs-kit r7, KIT 28.19): the same frame as a small square tile beside text (skill / chapter / empty cards): --ksth (64 px; 56 px
+   on phones), 2 px mat, never stretched by its slot */
+.ksart.ksart-thumb{width:var(--ksth,64px);height:var(--ksth,64px);aspect-ratio:1;flex:0 0 auto;box-shadow:inset 0 0 0 1px #fffaf0,inset 0 0 0 2px #e6d3ac}
+.ksart.ksart-thumb>img{inset:2px;width:calc(100% - 4px);height:calc(100% - 4px)}
+.ksart.ksart-thumb>.ksart-ph{inset:2px;font-size:.6rem;padding:2px}
+@media (max-width:599px){.ksart.ksart-thumb{--ksth:56px}}
 .ksart>img{position:absolute;inset:3px;width:calc(100% - 6px);height:calc(100% - 6px);object-fit:cover;display:block;border-radius:2px;max-width:none}
 .ksart-ph{position:absolute;inset:3px;display:grid;place-items:center;text-align:center;padding:6px;font:700 .8rem/1.25 var(--display,serif);color:#fff3d8;
  background:linear-gradient(#5a3a1acc,#2a1a12cc),url(img/kit/bg-default.webp) center/cover;border-radius:2px}

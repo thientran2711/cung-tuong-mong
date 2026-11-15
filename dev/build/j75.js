@@ -77,7 +77,7 @@ const ng0=night;night=function(p){p=p||S;if(p!==S)return ng0.apply(this,argument
 function pregFind(){if(!S||S.dead)return;if(!S.preg){S.pregUnk=0;return}if(!S.pregUnk)return;if(wk()<(S.pregDisc||0)&&S.preg<4)return;
  S.pregUnk=0;const m=S.preg;const canHide=S.hidden&&S.preg<=3;
  const h=`<p>Mấy hôm nay ${S.maid?`cung nữ ${S.maid.name}`:"cung nữ"} thấy ngươi biếng ăn, hay buồn nôn, liền mời thái y.</p><p><b class="g">Thái y bắt mạch: ngươi đã có thai, đang tháng thứ ${m}.</b></p>${canHide?`<p class="past">Ngươi có thể giấu thai đến hết tháng thứ 3, hoặc báo tin để được sủng ái.</p>`:""}`;
- const card={t:"Thái y bắt mạch",who:pDoc(),h};
+ const card={ev:1,t:"Thái y bắt mạch",who:pDoc(),h};/* ev: keep secret / announce is an EVENT choice (KIT 28.6; reviewer r7: its opts are set after the literal, so it slipped) */
  if(canHide)card.opts=[{n:"Giữ kín, dặn thái y không nói",fx:{},x:"giấu thai đến hết tháng thứ 3 · phi tần chưa biết để nhắm vào thai",go:()=>{S.hidden=true;log("Ngươi giữ kín tin có thai.")}},
   {n:"Báo tin cho Hoàng thượng",fx:{sung:6,th:5},x:"các phi tần ghen +6 · kẻ ác có thể nhắm vào thai",go:()=>{S.hidden=false;ghenAll(6);log("Ngươi báo tin có thai.")}}];
  else card.btn="Đã hiểu";
