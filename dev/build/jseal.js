@@ -101,7 +101,10 @@ function kitSealEvPlace(){const M=document.getElementById("modal");const dlg=M&&
  const D=dlg.getBoundingClientRect(),bl=dlg.clientLeft,bt=dlg.clientTop,iw=dlg.clientWidth,ih=dlg.clientHeight;const occ=kitSealOcc(dlg,s);const P=KSEAL_EV.pad,G=KSEAL_EV.gap;
  const free=(x,y,z)=>{const a={l:D.left+bl+x-G,t:D.top+bt+y-G,r:D.left+bl+x+z+G,b:D.top+bt+y+z+G};if(a.l<0||a.t<0||a.r>innerWidth||a.b>innerHeight)return false;
   for(const r of occ)if(Math.min(a.r,r.right)>Math.max(a.l,r.left)&&Math.min(a.b,r.bottom)>Math.max(a.t,r.top))return false;return true};
- const put=(x,y,z,c)=>{s.style.setProperty("--kseal",z+"px");s.style.left=(x+dlg.scrollLeft)+"px";s.style.top=(y+dlg.scrollTop)+"px";s.dataset.c=c;s.dataset.sz=z};
+ /* anchored to its corner (right / bottom), so a frame that later grows or shrinks keeps the seal in the same corner */
+ const put=(x,y,z,c)=>{s.style.setProperty("--kseal",z+"px");const R=c==="br"||c==="tr"||c==="room",B=c==="br"||c==="bl"||c==="room";
+  s.style.left=R?"auto":x+"px";s.style.right=R?P+"px":"auto";s.style.top=B?"auto":y+"px";s.style.bottom=B?P+"px":"auto";s.dataset.c=c;s.dataset.sz=z;
+  try{if(window.__ksRO&&dlg.__ksRO!==1){dlg.__ksRO=1;window.__ksRO.observe(dlg)}}catch(e){}};
  const big=innerHeight<=500?KSEAL_EV.sz.slice(1):KSEAL_EV.sz;
  if(!dlg.classList.contains("kseal-room"))for(const z of big){const C=[["br",iw-z-P,ih-z-P],["bl",P,ih-z-P],["tr",iw-z-P,P],["tl",P,P]];for(const [c,x,y] of C)if(free(x,y,z)){put(x,y,z,c);return}}
  const z=big[big.length-1];if(!dlg.classList.contains("kseal-room")){dlg.style.setProperty("--ksealroom",(z+P*2)+"px");dlg.classList.add("kseal-room")}
@@ -112,7 +115,7 @@ window.kitSealEvPlace=kitSealEvPlace;
  addEventListener("resize",later);document.addEventListener("load",e=>{if(e.target&&e.target.tagName==="IMG"&&e.target.closest&&e.target.closest("#modal"))later()},true);
  const hook=()=>{const M=document.getElementById("modal");if(!M||M.__ksObs)return;M.__ksObs=1;
   try{new MutationObserver(ms=>{if(ms.some(x=>![...x.addedNodes,...x.removedNodes].every(n=>n.nodeType===1&&n.classList&&n.classList.contains("kseal-ev"))))later()}).observe(M,{childList:true,subtree:true,attributes:true,attributeFilter:["hidden","class"]})}catch(e){}
-  try{const ro=new ResizeObserver(later);const d=M.querySelector(".dlg");if(d)ro.observe(d)}catch(e){}};
+  try{window.__ksRO=new ResizeObserver(later);const d=M.querySelector(".dlg");if(d){d.__ksRO=1;window.__ksRO.observe(d)}}catch(e){}};
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",hook);else hook()})();
 (function(){const st=document.createElement("style");st.id="kseal-ev-css";st.textContent=`
 #modal .dlg>.kseal-ev{position:absolute;width:var(--kseal,36px);height:var(--kseal,36px);z-index:3;pointer-events:none;opacity:.9;mix-blend-mode:multiply}
