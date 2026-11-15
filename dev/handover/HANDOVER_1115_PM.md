@@ -242,3 +242,4 @@ Worktree thợ ở /home/user/wt/<tên>. Bản tóm tắt luật cho thợ: /hom
 - header-danh ready 6cc1b756d (owner groups, header-fix merged: portrait = name block height, place button under time block, two-row header only when needed, tooltips/taps on every cell) → reviewer spawned. KIT §32.12 approved.
 - LIVE main = act-pics2 batch 1 (ce840fa84): Phế phi họ Lý figure (jly.js), 14 festival banners + 4 festival maps, cdn_sync --pull UA fix. Minor open: at 844x390 a second person on the lãnh cung stage hides behind the people-list panel (general stage layout).
 - promo-exam ready a0ea105b1 → reviewer spawned (KIT note → §55; no group picture on the exam card; act-pics3 drawing act-khao-hach-tan-phong). Son's birth now grants an exam instead of +1 rank → ask owner.
+- LIVE main = header-danh (afb2676a2): header groups per owner (left Sắc·Tài·Tâm cơ·Đức·Danh·Sủng, right Bạc·Sức), header-fix merged, tooltips/taps. Queued: servant-road header Đức '!' + blank portrait.
