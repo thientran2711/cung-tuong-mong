@@ -364,3 +364,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (07:45Z) Tranh việc: kiểm kê 713 nghĩa → vẽ thêm ~613 tranh (≈29.500 tín dụng, theo lệnh vẽ không cần hỏi). Mỗi dòng Tuần lục = một việc = một tranh (câu phản ứng sau gộp vào dòng đầu). Hoàng thượng không đội mũ lông kiểu Thanh; trang phục theo phong cách gốc (áo giao lĩnh), không cổ áo kiểu sườn xám.
 - (07:50Z) Đáp ứng: chốt TRẮNG NGÀ (ngà ấm, không trắng tinh); chữ/chip dùng mã ngà-sâm banh đậm hơn cho đọc rõ.
 - (07:50Z) Nhân vật của ta có dấu ấn cung đình (không phải mũi tên thường) trên đầu ở mọi màn, có hiệu ứng nhẹ (lơ lửng + sáng nhẹ), vẽ bằng Magnific; chỉ nàng, không NPC.
+- (07:55Z) Biểu tượng cảm xúc (emo-*): giữ kiểu mặt chibi tròn nhưng vẽ lại theo nét tranh của game (mềm, màu dịu, viền vàng mảnh, không nét đen dày).
