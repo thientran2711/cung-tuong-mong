@@ -9,6 +9,12 @@ for k,rx,sc in R:
 order=[];seen=set()
 for k,rx,sc in R:
     if k in M and k not in seen and k!='-': order.append(k); seen.add(k)
+extra=[]
+for k,rx,sc in R:
+    if k!='-' and k not in M and k not in seen and k not in extra: extra.append(k)
+for k in extra:
+    rx=next(r for kk,r,_ in R if kk==k)
+    M[k]={'heads':['(chỉ gặp khi chơi) /'+rx[:60]+'/'],'old':[],'src':[]}; order.append(k); seen.add(k)
 def esc(t): return t.replace('|','/').replace('\n',' ')
 new=[k for k in order if SC.get(k)]; keep=[k for k in order if not SC.get(k)]
 shared_before=sum(1 for k in order for o,_ in M[k]['old'][:1] if o)  # informational
