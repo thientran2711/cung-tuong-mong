@@ -394,3 +394,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (10:15Z) Chữ quan hệ: "thiện cảm" thắng (bỏ luật "quý ngươi" ở KIT §31.20). Mọi việc phải qua một hàm cơ may odA (một nguồn).
 - (10:20Z) Thú cưng lớn dần: Non → Trưởng thành → Linh thú, mỗi cấp mở thêm hiệu ứng; Ngự tứ chỉ đỡ mạng khi đã lớn hẳn. Chăm kiểu thú ảo: màn hình trọn có hình thú, chỉ số Đói/Sạch/Vui/Tình cảm, mini game cho ăn/tắm/chơi; bỏ bê thì ốm/buồn/bỏ đi (có báo). Tranh: mỗi thú có hình non + lớn.
 - (10:30Z) Thanh đầu trang: ô chân dung của nàng to bằng cả khối tên (đang quá nhỏ, phía trên còn trống).
+- (10:40Z) Thú cưng người khác: sang cung người khác (NPC hoặc hảo hữu khi chơi chung) có thể giúp chăm (+thiện cảm), hại (trừu tượng), trộm (thú càng lớn càng khó, có thể bị cắn, bị bắt). NPC cũng làm vậy với thú của nàng. Cùng luật, đủ thẻ.
