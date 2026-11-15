@@ -174,3 +174,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (06:15Z) Owner approved figure ratio of dev/owner-shots/1115-fig-ok.jpg (iPad 1180 Ngọc Thanh các, ≈.76–.80 of stage) as the standard → KIT_FIG women at that ratio everywhere (supersedes .92).
 - (06:20Z) Owner: no grey boxes over locked places on Dư đồ — same label style + lock mark; actions in a tap card; no cut text.
 - (06:25Z) Owner: during page curl, the next page must already be visible underneath the lifting page (like a real book).
+- (06:40Z) Owner: no Chinese characters in UI — ngự tứ seal shows Vietnamese 'Ngự' in the red square seal.
