@@ -20,7 +20,8 @@ def tokens(texts):
             pre=m.group(1).strip();sg=-1 if m.group(2) in '-−–' else 1;lo=int(m.group(3));hi=int(m.group(4) or lo)
             low=pre.lower();fam=None;who='me'
             if re.search(r'\bnàng\b|\bcon\b|hoàng tử|công chúa',low) and not re.search(r'với ngươi|quý ngươi',low):who='other'
-            if 'chứng cứ' in low:fam='ev';who='other'
+            if 'chủ tin' in low:fam='loyal'
+            elif 'chứng cứ' in low:fam='ev';who='other'
             elif 'ghen' in low:fam='ghen';who='other'
             elif 'oán' in low or 'thù' in low:fam='oan';who='other'
             elif 'thái hậu' in low:fam='S.th'
@@ -31,7 +32,7 @@ def tokens(texts):
             elif re.search(r'thương',low) and 'hoàng thượng' in low:fam='kid.fond'
             else:
                 for k,v in STAT.items():
-                    if re.search(r'(^|\s)'+k+r'$',pre) or pre.endswith(k):fam=v;break
+                    if re.search(r'(^|\s)'+k+r'( ngươi| ta)?$',pre) or pre.endswith(k):fam=v;break
                 if fam=='S.tai' and who=='other':fam='kid.tal'
                 if fam in('S.sung','S.danh','S.suc') and who=='other':fam='rv.'+fam[2:]
             if fam:out.append((fam,sg,lo,hi,who,t.strip()[:60]))
@@ -44,7 +45,7 @@ def fam_of(k):
     if k=='maid.loyal':return 'loyal'
     if k=='S.hh':return 'hh'
     return k
-MENT={'S.inv':r'món|đồ|rương|quà|mua|nhận|bán|cầm|dâng|tặng|vật|thuốc|ban','S.lot':r'quẻ','emp.mood':r'tâm trạng|vui|giận|phật ý|nguôi','S.rank':r'phẩm|thăng|giáng|tấn phong|sắc phong',
+MENT={'ghen':r'ghen','oan':r'oán','S.inv':r'món|đồ|rương|quà|mua|nhận|bán|cầm|dâng|tặng|vật|thuốc|ban','S.lot':r'quẻ','emp.mood':r'tâm trạng|vui|giận|phật ý|nguôi','S.rank':r'phẩm|thăng|giáng|tấn phong|sắc phong',
  'S.confined':r'cấm túc','S.dead':r'chết','S.preg':r'thai','rv.alive':r'chết','rv.out':r'lãnh cung','rv.rank':r'phẩm|giáng|thăng','myaff':r'ngươi quý|ngươi ghét|ngươi với',
  'S.out':r'lãnh cung','kid.alive':r'chết|mất'}
 def judge(x):
@@ -77,17 +78,19 @@ def judge(x):
         if not ch:issues.append(('a',f'thẻ ghi «{t}» mà {"không" if True else ""} đổi gì ({ "thành" if win else "hỏng"})'));continue
         ok=[dv for k,dv in ch if dv*sg>0]
         if not ok:issues.append(('a',f'thẻ ghi «{t}» mà đổi ngược chiều: '+', '.join(f'{k} {dv:+}' for k,dv in ch)));continue
-        if not any(lo<=abs(dv)<=hi for dv in ok):
+        clamp=[k for k,dv in ch if isinstance(d[k][1],(int,float)) and d[k][1] in (0,100) and abs(dv)<=hi]
+        if not any(lo<=abs(dv)<=hi for dv in ok) and not clamp:
             issues.append(('a',f'thẻ ghi «{t}» mà đổi {", ".join(f"{k} {dv:+}" for k,dv in ch)}'))
     hhS=[dv for k,dv in fams.get('hh',[]) if dv];hhA=[dv for k,dv in fams.get('aff',[]) if dv and '.HH ' in k]
     if hhS and not hhA:issues.append(('a',f'S.hh (Hoàng hậu với ngươi) {hhS[0]:+} mà Hoàng hauser quý ngươi (thẻ nàng) không đổi'.replace('hauser','hậu')))
     said=set(f for f,*_ in toks_ton+toks_g+toks_m+toks_k)
-    low=text.lower()
+    low=(text+' '+(x.get('parent') or '')).lower()
     for fam,L in fams.items():
         if fam in said or (fam=='aff' and 'hh' in said) or (fam=='hh' and 'aff' in said):continue
         if fam=='hh' and (x.get('sf','').startswith('rv:HH') or 'Hoàng hậu' in (c.get('name') or '') or 'oan' in said or 'ghen' in said):continue  # S.hh mirrors the queen's own feeling
         if fam=='myaff' and ('aff' in said or 'oan' in said or 'hh' in said):continue
         if fam=='loyal' and re.search(r'lòng',low):continue
+        if fam=='loyal' and all(dv is None for k,dv in L) and re.search(r'bị bắt|khai ra|đánh chết|cài người|đổi người|tiến cử',low):continue
         if fam=='loyal' and all(dv is None for k,dv in L) and re.search(r'bị bắt|khai',toast.lower()):
             issues.append(('b','ẩn: kẻ hầu được sai bị bắt và mất khỏi cung ngươi ('+', '.join(sorted({k.split('.')[1] for k,dv in L}))+') — thẻ không ghi'));continue
         if fam=='loyal' and all(dv is not None and 0<dv<=8 for k,dv in L) and all(k.endswith('.tin') for k,dv in L):

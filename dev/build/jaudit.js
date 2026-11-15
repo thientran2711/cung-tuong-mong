@@ -151,3 +151,8 @@ function kitThey(p,hostile){try{if(!p)return"vị ấy";if(p===S.emp||p.kind==="
  const man=p.role==="eunuch"||p.kind==="man"||p.rw||p.sex==="m"||(typeof S.men==="object"&&Array.isArray(S.men)&&S.men.includes(p));if(man)return hostile?"hắn":"y";
  if(p.role==="maid"||p.kind==="rival"||p.kind==="hh"||(rivals||[]).includes(p)||p.queen!=null)return"nàng ta";return"vị ấy"}catch(e){return"vị ấy"}}
 window.kitThey=kitThey;
+
+/* 13. every other consort-act outcome text that says "thù −N" / "thân ±N" is a relAdd in the code (j8): drawn with the real numbers */
+(function(){const T=()=>typeof J78==="object"&&J78.cardV||null;for(const k of Object.keys(AOUT)){const d=Object.getOwnPropertyDescriptor(AOUT,k);if(!d||d.get||!Array.isArray(d.value))continue;const old=d.value;
+ const fx=s=>{const t=T();if(!t||typeof s!=="string")return s;return s.replace(/(nàng )?thù -(\d+)/g,(m,_,n)=>pvRel(t,-n)).replace(/(nàng )?thân ([+\-])(\d+)/g,(m,_,sg,n)=>pvRel(t,(sg==="+"?1:-1)*n))};
+ try{Object.defineProperty(AOUT,k,{configurable:true,enumerable:true,get(){return old.map(fx)},set(v){}})}catch(e){}}})();
