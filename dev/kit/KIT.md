@@ -2666,7 +2666,7 @@ Owner rule: every event where an item could come into her hands shows the ITEM'S
 ## 69. CO-OP BUỔI CLOCK · kitCoopClock (owner 15/11 ~21:25Z, review/coop-timer) — `dev/build/jcooptimer.js` (after jkitpage)
 - `kitCoopClock({left, len, state, fr})` → one row of kit chips (`.kchips.kctm`, `kitChip` look): clock chip with a small ring
   (`.kctm-r`, share of time left) + words, and the friend's chip. state `run` → `.kchip.n` "Còn 1 phút 42 giây" (`.r` under 20 giây);
-  `pz` → `.kchip.w` "Tạm dừng · còn …"; `stop` (room frozen) → `.n` without counting; `up` → `.r` "Hết buổi". fr `ready` →
+  `pz` (a pause or a hold) → `.kchip.w` "Đợi · còn …"; `stop` (room frozen) → `.n` without counting; `up` → `.r` "Hết buổi". fr `ready` →
   `kitChip("Hảo hữu đã sẵn sàng","ok")`, `busy` → `kitChip("Hảo hữu đang dở tay, xin đợi","w")` (never what she is doing). `btn` → the chip
   button "Tạm dừng" (`button.kchip.n[data-ctm=hold]`, ≥ 26 px, gold edge, like §35.2's chip button). Time words: "N phút M giây" / "M giây" (no clock digits).
 - `kitCoopHold(mine)` → the kit panel over both screens while the game is held (same markup as the freeze panel #coopfz: `.modal.kpscene >

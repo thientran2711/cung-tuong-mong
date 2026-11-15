@@ -160,7 +160,7 @@ function css(){if(document.getElementById("kctm-css"))return;const st=document.c
 function kitCoopClock(o){css();o=o||{};const p=Math.max(0,Math.min(1,(o.left||0)/(o.len||1)));const ring=`<i class="kctm-r" style="--p:${p.toFixed(3)}"></i>`;
  const L=[];
  if(o.state==="up")L.push(`<span class="kchip r">${ring}Hết buổi</span>`);
- else if(o.state==="pz")L.push(`<span class="kchip w">${ring}Tạm dừng · còn ${fmtT(o.left)}</span>`);
+ else if(o.state==="pz")L.push(`<span class="kchip w">${ring}Đợi · còn ${fmtT(o.left)}</span>`);
  else if(o.state==="stop")L.push(`<span class="kchip n">${ring}Còn ${fmtT(o.left)}</span>`);
  else L.push(`<span class="kchip ${(o.left||0)<=20000?"r":"n"}">${ring}Còn ${fmtT(o.left)}</span>`);
  if(o.fr==="ready")L.push(kitChip("Hảo hữu đã sẵn sàng","ok"));else if(o.fr==="busy")L.push(kitChip("Hảo hữu đang dở tay, xin đợi","w"));

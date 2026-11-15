@@ -25788,7 +25788,7 @@ function css(){if(document.getElementById("kctm-css"))return;const st=document.c
 function kitCoopClock(o){css();o=o||{};const p=Math.max(0,Math.min(1,(o.left||0)/(o.len||1)));const ring=`<i class="kctm-r" style="--p:${p.toFixed(3)}"></i>`;
  const L=[];
  if(o.state==="up")L.push(`<span class="kchip r">${ring}Hết buổi</span>`);
- else if(o.state==="pz")L.push(`<span class="kchip w">${ring}Tạm dừng · còn ${fmtT(o.left)}</span>`);
+ else if(o.state==="pz")L.push(`<span class="kchip w">${ring}Đợi · còn ${fmtT(o.left)}</span>`);
  else if(o.state==="stop")L.push(`<span class="kchip n">${ring}Còn ${fmtT(o.left)}</span>`);
  else L.push(`<span class="kchip ${(o.left||0)<=20000?"r":"n"}">${ring}Còn ${fmtT(o.left)}</span>`);
  if(o.fr==="ready")L.push(kitChip("Hảo hữu đã sẵn sàng","ok"));else if(o.fr==="busy")L.push(kitChip("Hảo hữu đang dở tay, xin đợi","w"));
@@ -28232,7 +28232,7 @@ if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§28.13e",title:"Pick 
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="c783e5635b95";window.CTM_BUILD=BUILD;
+const BUILD="29da6c38bb86";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
