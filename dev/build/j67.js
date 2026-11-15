@@ -216,12 +216,12 @@ rumor:{h:"Lời đồn về {sj}",w:"maid",t:"{maid} hớt hải báo: khắp l�
  {n:"Mặc kệ, giữ mình",c:{danh:-3},w:{duc:2},wx:"không ai bắt được lỗi ngươi",rt:"Ngươi im lặng, lời đồn tự nhạt dần."}]},
 hh:{h:"Hoàng hậu hỏi đến {sj}",w:"hh",need:["hh"],t:"Hoàng hậu {hh} cho gọi ngươi đến Càn Ninh cung, chậm rãi hỏi về {sj}.",o:[
  {n:"Thành thật trình bày",c:{danh:-2},w:{hh:8},wx:"Hoàng hậu bớt nghi",lx:"Hoàng hậu biết thêm chuyện của ngươi",rt:"Hoàng hậu gật đầu, không làm khó ngươi."},
- {n:"Xin Hoàng hậu đứng ra che chở",c:{bac:-30},o:()=>40+S.hh/3,w:{hh:5},sc:1,wx:"có thêm chỗ dựa",l:{hh:-8},rt:"Hoàng hậu hứa sẽ nói giúp một câu.",rf:"Hoàng hậu lạnh nhạt: “Chuyện của muội, muội tự lo.”"},
+ {n:"Xin Hoàng hậu đứng ra che chở",c:{bac:-30},o:()=>40+S.hh/3,w:{hh:10},sc:1,wx:"có thêm chỗ dựa",l:{hh:-8},rt:"Hoàng hậu hứa sẽ nói giúp một câu.",rf:"Hoàng hậu lạnh nhạt: “Chuyện của muội, muội tự lo.”"},
  {n:"Khéo léo lảng sang chuyện khác",c:{suc:-3},o:()=>40+S.tamco/3,wx:"giữ kín chuyện của mình",sc:1,l:{hh:-10},rt:"Hoàng hậu không moi được gì.",rf:"Hoàng hậu nhận ra ngươi giấu giếm."}]},
 th:{h:"Thái hậu để ý đến {sj}",w:"th",need:["th"],t:"Thái hậu gõ nhẹ chuỗi hạt: “Ai gia nghe nói về {sj}. Ngươi định thế nào?”",o:[
  {n:"Xin Thái hậu chỉ bảo",c:{danh:-2},w:{th:8},wx:"Thái hậu thấy ngươi biết điều",rt:"Thái hậu chỉ cho ngươi vài đường."},
  {n:"Thưa rằng đã có tính toán",c:{suc:-3},o:()=>40+S.tai/4+S.th/5,w:{th:4},sc:1,wx:"Thái hậu nể ngươi",l:{th:-8},rt:"Thái hậu khẽ cười: “Được, để ai gia xem.”",rf:"Thái hậu chau mày: “Tự cao.”"},
- {n:"Dâng lễ, khéo xin bà đừng nhúng tay",c:{bac:-40},w:{th:3},wx:"tự mình xoay xở",lx:"Thái hậu sẽ không đỡ ngươi chuyện này",rt:"Thái hậu nhận lễ, để ngươi tự lo."}]},
+ {n:"Dâng lễ, khéo xin bà đừng nhúng tay",c:{bac:-40},w:{th:9},wx:"tự mình xoay xở",lx:"Thái hậu sẽ không đỡ ngươi chuyện này",rt:"Thái hậu nhận lễ, để ngươi tự lo."}]},
 emp:{h:"Hoàng thượng hỏi thẳng về {sj}",w:"emp",t:"Đêm ấy Hoàng thượng đặt chén trà xuống: “Trẫm nghe về {sj}. Nàng nói thật cho trẫm.”",o:[
  {n:"Nói thật hết",c:{sung:-3},w:{duc:3},sc:1,wx:"Hoàng thượng tin ngươi hơn",rt:"Hoàng thượng im lặng hồi lâu rồi nắm tay ngươi."},
  {n:"Nói nửa thật nửa che",c:{},o:()=>45+S.tamco/3+S.sung/6,w:{sung:4},wx:"qua được đêm nay",l:{sung:-6},lx:"ngài nghi ngươi",rt:"Hoàng thượng gật gù, không hỏi thêm.",rf:"Hoàng thượng nhíu mày: nàng có điều giấu trẫm."},
@@ -233,7 +233,7 @@ spy:{h:"Một kẻ gạ bán tin về {sj}",w:"eun",t:"Một thái giám Nội v
 ill:{h:"Lo nghĩ về {sj} làm ngươi sinh bệnh",w:"doc",t:"Lo nghĩ chuyện {sj}, ngươi trằn trọc nhiều đêm. Thái y bắt mạch, khuyên tĩnh dưỡng.",o:[
  {n:"Nghe lời, tĩnh dưỡng",c:{sung:-3},w:{suc:12},wx:"khỏe lại",lx:"việc phải gác lại ít lâu",rt:"Ngươi nghỉ ngơi, sắc mặt hồng hào trở lại."},
  {n:"Gắng gượng lo tiếp",c:{suc:-10},sc:1,wx:"không bỏ lỡ thời cơ",rt:"Ngươi cố sức, việc vẫn chạy."},
- {n:"Mời thái y giỏi, uống thuốc quý",c:{bac:-45},w:{suc:8},wx:"vừa khỏe vừa không lỡ việc",rt:"Thuốc quý hiệu nghiệm."}]},
+ {n:"Mời thái y giỏi, uống thuốc quý",c:{bac:-45},w:{suc:16},wx:"vừa khỏe vừa không lỡ việc",rt:"Thuốc quý hiệu nghiệm."}]},
 rival:{h:"Một phi tần muốn lợi dụng {sj}",w:"v2",need:["v2"],t:"{v2} biết chuyện {sj}, cười nhạt trước mặt mọi người, như muốn nhân dịp này dẫm ngươi xuống.",o:[
  {n:"Nhịn, không để bị khích",c:{danh:-2},w:{duc:3},wx:"không cho nàng cớ",rt:"Ngươi chỉ mỉm cười cho qua."},
  {n:"Đáp trả sắc sảo",c:{},o:()=>40+S.tai/4+S.danh/5,w:{danh:4},wx:"nàng bẽ mặt",l:{danh:-4},lx:"{v2} oán ngươi",go:(A,ok)=>{const v=rv67(A,"v2");if(v)oanAdd(v,S,ok?10:6)},rt:"Cả phòng bật cười, {v2} đỏ mặt.",rf:"Lời ngươi vụng, {v2} càng đắc ý."},
@@ -1129,7 +1129,7 @@ ARC67.thd_tho={o:"thd",t:"Danh hiệu Tài nữ",w:"emp",sj:"thơ của ngươi"
   {n:"Xin Hoàng thượng thứ lỗi vì thơ lọt ra",need:["nsrv"],c:{},o:50,w:{sung:4},sc:1,wx:"ngài đòi đọc thơ ngươi",l:{sung:-2},rt:"Hoàng thượng đọc xong, cười lớn.",rf:"Hoàng thượng chẳng để tâm."}]},
  s2:{h:"Luyện thơ",w:"maid",t:"Kỳ thi Tài nữ còn vài tháng. Ngươi cần luyện thêm.",o:[
   {n:"Thức đêm luyện thơ",c:{suc:-8},w:{tai:4},sc:1,wx:"thơ sắc hơn",rt:"Giấy viết chất cao bằng gối."},
-  {n:"Mời thầy Hàn lâm dạy",c:{bac:-50},w:{tai:3},sc:1,wx:"học được luật thơ cung đình",rt:"Thầy khen ngươi có cốt cách."}]},
+  {n:"Mời thầy Hàn lâm dạy",c:{bac:-50},w:{tai:6},sc:1,wx:"học được luật thơ cung đình",rt:"Thầy khen ngươi có cốt cách."}]},
  c1:{h:"{v} tố ngươi đạo thơ",w:"v",need:["v"],t:"{v} tố trước mặt mọi người: bài thơ trên quạt là của một thi nhân đời trước.",o:[
   {n:"Ứng tác ngay một bài khác",c:{suc:-3},o:()=>30+S.tai/2+S.arts.thi*6,w:{danh:5},sc:1,wx:"rửa tiếng oan",l:{danh:-8},lx:"bị tin là đạo thơ",rt:"Bài thơ mới khiến cả phòng lặng người.",rf:"Ngươi run tay, thơ vụng, ai cũng tin lời {v}."},
   {n:"Nhờ {n1} minh oan",c:{bac:-30},o:A=>45+(A.f.ally?20:0),w:{danh:3},sc:1,wx:"Hàn lâm làm chứng",l:{danh:-6},rt:"{n1} đem bản nháp có ngày tháng ra làm chứng.",rf:"{n1} không dám dính vào."}]},
@@ -1678,7 +1678,7 @@ ARC67.st_dong={o:"st",ok:()=>nsrv67()&&mySons().length>0,t:"Ngôi Đông cung",w
   {n:"Lật lại chuyện con nàng",c:{},o:45,w:{tamco:2},wx:"{v} bẽ mặt",l:{danh:-3},go:(A)=>{const v=rv67(A,"v");if(v)oanAdd(v,S,8)},rt:"{v} câm lặng.",rf:"Ngươi bị chê hẹp hòi."}]},
  c2:{h:"Thái hậu nói một câu",w:"th",need:["th"],t:"Thái hậu sắp nói với Hoàng thượng về chuyện Đông cung.",o:[
   {n:"Đưa con đến hầu Thái hậu mỗi ngày",c:{suc:-5},w:{th:8},sc:1,wx:"Thái hậu thương cháu",rt:"Thái hậu khen con ngươi hiếu thuận."},
-  {n:"Dâng lễ lên Đức Thọ cung",c:{bac:-50},w:{th:5},sc:1,wx:"Thái hậu nhớ đến ngươi",rt:"Thái hậu nhận lễ."}]},
+  {n:"Dâng lễ lên Đức Thọ cung",c:{bac:-50},w:{th:10},sc:1,wx:"Thái hậu nhớ đến ngươi",rt:"Thái hậu nhận lễ."}]},
  c3:{h:"Khảo hạch các hoàng tử",w:"emp",t:"Hoàng thượng khảo hạch văn võ các hoàng tử.",o:[
   {n:"Mời thầy giỏi kèm riêng",c:{bac:-50},o:55,sc:2,wx:"con đứng đầu",l:{},lx:"con chỉ đứng giữa",go:(A,ok)=>ok?e67heir(6):"",rt:"Con ngươi đứng đầu kỳ khảo.",rf:"Con ngươi chỉ đứng giữa."},
   {n:"Tự dạy con",c:{suc:-6},w:{duc:2},sc:1,wx:"con hiểu lòng mẹ",rt:"Con ngươi làm bài vững vàng."}]},
