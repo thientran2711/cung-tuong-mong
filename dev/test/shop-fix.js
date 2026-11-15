@@ -13,7 +13,7 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
   const p=await ctx.newPage();p.setDefaultTimeout(240000);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
   await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof showModal==='function');await sleep(2500);
   await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;
-   for(let i=0;i<60;i++){start();if(!isSrv())break}Q.length=0;const md=document.getElementById("modal");if(md)md.hidden=true;try{NLP=null}catch(e){}render();const kr=document.getElementById("kroul");if(kr)kr.remove()});
+   for(let i=0;i<400;i++){start();if(!isSrv())break}Q.length=0;const md=document.getElementById("modal");if(md)md.hidden=true;try{NLP=null}catch(e){}render();const kr=document.getElementById("kroul");if(kr)kr.remove()});
   await sleep(1200);await p.addStyleTag({content:'#kroul{display:none!important}'});
   const imgs=()=>p.evaluate(()=>Promise.all([...document.querySelectorAll('#modal img')].map(i=>i.complete?0:new Promise(r=>{i.onload=i.onerror=r;setTimeout(r,8000)}))));
   const shot=async n=>{await imgs();await sleep(700);for(let t=0;t<3;t++){try{await p.screenshot({path:`${OUT}/${n}-${wh}.jpg`,type:'jpeg',quality:82,timeout:120000});break}catch(e){await sleep(2000)}}};
@@ -42,7 +42,7 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
     greyBtns:[...M.querySelectorAll('.kshgo:disabled')].map(b=>b.textContent),hovf:document.documentElement.scrollWidth>innerWidth+1}});
   await closeAll();
   /* reference 1: a plain person dialog with the SAME seller (32.7) */
-  await p.evaluate(()=>{Q.push({t:"Có người đến",stage:[{__fig:"img/fig-eunuch-ndp-tray.webp",__cap:(S.court&&S.court.ped&&S.court.ped.name)||"",__role:"Thái giám Nội vụ phủ",age:28,sex:"m"}],h:`<p>Thái giám Nội vụ phủ đến bẩm việc.</p>`,opts:[{n:"Cho vào",fx:{},x:"không đổi gì",go:()=>{}},{n:"Bảo lui",fx:{},x:"không đổi gì",go:()=>{}}]});showModal()});
+  for(let tr=0;tr<4;tr++){await p.evaluate(()=>{Q.push({t:"Có người đến",stage:[{__fig:"img/fig-eunuch-ndp-tray.webp",__cap:(S.court&&S.court.ped&&S.court.ped.name)||"",__role:"Thái giám Nội vụ phủ",age:28,sex:"m"}],h:`<p>Thái giám Nội vụ phủ đến bẩm việc.</p>`,opts:[{n:"Cho vào",fx:{},x:"không đổi gì",go:()=>{}},{n:"Bảo lui",fx:{},x:"không đổi gì",go:()=>{}}]});showModal()});await sleep(1000);if(await p.evaluate(()=>!document.getElementById("modal").hidden))break}/* a game timer sometimes empties Q right after: open again */
   await imgs();await sleep(1500);const refSame=await box();await shot('ref-seller');await closeAll();
   await p.evaluate(()=>invAct("shop"));await imgs();await sleep(1500);
   /* buy 2 of the first affordable tile: + → label + badge; then buy */
