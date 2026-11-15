@@ -341,3 +341,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (05:55Z) Tuần lục: MỖI việc/nghĩa khác nhau một tranh riêng, không chấp nhận dùng chung vì "cùng cảnh"; câu tin cũng có tranh riêng.
 - (06:00Z) Lớp sáng nhân vật: chọn A, KHÔNG phủ; nhân vật giữ màu gốc ở cả 4 buổi. Chỉ chỉnh màu nền.
 - (06:00Z) Má nhân vật bị đen trên nền tối (lỗi tách nền, alpha thủng trong mặt) → quét mọi ảnh người, vá alpha bằng code.
+- (06:05Z) Bảng mua bán với thái giám dùng ĐÚNG hộp thoại có người (cùng thành phần, cùng kích thước), không to hơn.
