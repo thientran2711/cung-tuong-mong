@@ -252,3 +252,15 @@ thay-mat-thai-hau thay-mat-thai-hau-h
 thay-noi-chuyen-rieu-rao thay-noi-chuyen-rieu-rao-h
 theo-ve-vuong-phu theo-ve-vuong-phu-h
 thi-tam thi-tam-h
+khoc-xin-tha-h khoc-xin-tha-g-h
+quy-xin-tha-cho-nang-h quy-xin-tha-cho-nang-g-h
+xin-an-dien xin-an-dien-h
+vao-cung-phong-h vao-cung-phong-g-h
+xin-an-ve-tham-h xin-an-ve-tham-g-h
+ket-minh-h ket-minh-g-h
+banh-trung-thu-h banh-trung-thu-g-h
+cau-xin-h cau-xin-g-h
+cau-xin-quan-su-h cau-xin-quan-su-g-h
+day-le-nghi-h day-le-nghi-g-h
+dung-ra-can-h dung-ra-can-g-h
+dung-ve-phia-h dung-ve-phia-g-h

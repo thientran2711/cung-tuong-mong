@@ -268,3 +268,14 @@ cau-xin-quan-su|0|a maid in green seen from behind bowing low before an older co
 day-le-nghi|0|an older court lady in dark brown seen from behind demonstrating the upright curtsy to a young maid in green beside her, both seen from behind, hands hidden in sleeves, bright courtyard
 dung-ra-can|0|a consort seen from behind stepping between two quarrelling ladies, her arms spread wide in long sleeves to separate them, bright courtyard
 dung-ve-phia|0|a consort seen from behind standing shoulder to shoulder beside a lady in blue, facing a lady in red across a courtyard, a dispute, all hands hidden in sleeves
+bo-yen-thuc-ben-con|1|a mother seen from behind sitting at a child's sickbed holding a bowl of medicine, the child only a small shape under an embroidered quilt with nothing visible, a half-burned candle, an elegant banquet robe draped forgotten over a chair
+hau-benh-ca-thang|0|a consort seen from behind sitting on a stool beside an elder lady's curtained sickbed, holding a bowl of medicine in both hands, bright quiet room
+khen-tai-nghe|0|a guqin just played on a table with flower petals on the strings, a lady seen from behind beside it turning toward another lady seen from behind who bows in thanks, bright room
+mat-tau|1|a consort seen from behind kneeling close beside the carved arm of a dragon throne, leaning to whisper, an imperial yellow sleeve resting on the armrest, shadowed hall
+nang-so-viec-nguy|1|a maid seen from behind huddled small in a dim corner beside a guttering candle, her arms wrapped in her green sleeves, shoulders hunched in fear
+nho-cau-xin|0|a lady in plain undyed robes seen from behind kneeling in a bare cold-palace room before a visiting consort in pink seen from behind, bright cold light
+trung-doc|1|a court physician in a dark green robe seen from behind kneeling at a curtained bedside, a maid in green seen from behind standing frightened, an overturned cup on the floor, shadowed room
+trung-doc-thuoc-giai|0|a small porcelain antidote vial standing in an open chest beside a cup of water on a tray, a maid seen from behind lifting the tray toward a curtained bed, bright room
+xin-th-do-loi|0|a consort seen from behind kneeling at the feet of an elder lady seated in a dark brocade robe, the elder's hand resting on the consort's shoulder, bright hall
+xin-che-cho|0|a consort seen from behind kneeling low before the Empress's red phoenix brocade hem, hands hidden in her sleeves, asking for protection, bright hall
+sinh-ha|0|a midwife seen from behind holding a newborn bundle wrapped completely in red cloth, nothing of the baby visible, turning toward a curtained bed, soft daylight
