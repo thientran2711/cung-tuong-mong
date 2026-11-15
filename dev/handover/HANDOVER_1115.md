@@ -94,3 +94,6 @@ Nhắc theo dõi: send_later 30 phút, tự đặt lại mỗi lượt (lịch l
 - 06:30Z cdn_sync: 816 ảnh hoa điền (23 mặt đổi hoa lá xong hết + c12 t2–6 thu nhỏ) lên CDN.
 - 07:00Z TẠM DỪNG (đĩa): review/ts-a 1103c85e6 (7 ý xong, cần đo bot 80+ đời, HH nghi cao), review/ts-b d29e3952c (ý 1,7,8,9,13 xong + Có người đến cân bằng + soát thế khó; 2 TIMEOUT bot cần soát; đề xuất 4 tranh thú nuôi), review/tutorial 190042887 (2/3; cần chạy test đủ + khóa tab mới), review/routes (chờ). Worktree đã gỡ; chạy lại khi đĩa đủ.
 - 07:10Z review/khuecac 963d38bed SẴN SÀNG KIỂM: 84 mặt × 2 bộ (kc, ngheo) trên CDN, jkc.js; nằm trên review/outside → chỉ lên live khi outside gộp (đang chờ hợp nhất đồ mặc/balance). ~12k credit. Thứ muội mặc giống nàng, bạn khuê phòng mặc kc (thợ tự thêm — hỏi sếp).
+- 07:20Z SẴN SÀNG KIỂM: review/court-rules b702cae67 (HH/HQP ở riêng; Thái hậu 51–62 + tranh a51; hết khắc ở lại nơi; chạm nơi đang đứng; nút ‹ tên nơi), review/dialog-person 2b321b3b0 (KIT §32.7) → hàng người duyệt 1. Tranh Thái hậu a51 (h1/h2/h3 fig+por) trông 25–30 → hỏi sếp vẽ lại.
+- 07:20Z TẠM DỪNG review/routes 453203123 (15 kết cục đi tới được; cần đo cân bằng sau gộp; đề xuất tranh bát nghiệm huyết).
+- 07:20Z cdn_sync 368 ảnh thu nhỏ hoa điền phi tần (đợt 1–2).
