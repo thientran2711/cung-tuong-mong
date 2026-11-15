@@ -231,3 +231,4 @@ Worktree thợ ở /home/user/wt/<tên>. Bản tóm tắt luật cho thợ: /hom
 - toilette ready 8742f8abb → reviewer spawned (face points 4262 on current art, reactions as event frames, leAttire key fix, game-wide quote-split fix). kit-fig2 part 2 handed to a fresh worker (old one out of context).
 - kit-table ready 77625c7ab → reviewer (renumber §41→§51). KIT section registry now in /home/user/wt/PREAMBLE.txt: main §39–§43, §45–§47; reserved §48–50 kit-fig2, §51 kit-table, §52 fix-float, §53 opt-render, §54 game-feel, §55 promo-exam, §56 scene-light.
 - LIVE main = stage-slots (53a61f8e8): stage slot fixes + Ân sủng panel opens IN PLACE in the right column (owner 17:40Z bug, matched to owner's reference shot); coop-e2e 59/59.
+- header-danh worker spawned (left Sắc·Tài·Tâm cơ·Đức·Danh·Sủng, right Bạc·Sức; merges what is still needed from review/header-fix; fixes quẻ/Sắc overlap at 1000x755).
