@@ -2053,6 +2053,8 @@ Emperor's visits. It is the 32.7 person dialog:
 
 ### 50.1 ONE TEMPLATE FOR EVERY EVENT WITH A PERSON (owner 11/15 13:00Z + 13:15Z; acceptance "VIỆC · Thái hậu triệu") — review kit-fig2 r8
 - LEFT: ONE person — the main one (`stage[0]` / `who`); a second person is named in the text (owner "several people → only the main one").
+- Festival dialogs (j71 invitations j71i / j71x, the festival day, its contests): `kitFestKey(m)` → evId `fest:<k>` = the festival's own
+  picture (Đoan ngọ = ev-le-ha), never the Triều chính default (owner 13:00Z).
 - RIGHT top: a banner for EVERY event with a person: its own event picture, else the picture of its kind — `j24:<slug of the title>`
   (EVENTS.json: Có người đến, Thái hậu triệu, Hoàng thượng đến, Kẻ hầu xin, Một ánh mắt, Việc của kẻ hầu), else the week-book meaning
   table `KBK_EVRE` (j87) on title + text, else Hoàng thượng / Thái hậu / visitor by who it is; a dialog about herself alone gets a

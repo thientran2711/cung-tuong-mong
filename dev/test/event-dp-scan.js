@@ -17,7 +17,7 @@ const blob=(rev,f)=>execFileSync('git',['cat-file','blob',rev+':'+f],{cwd:__dirn
    const f=decodeURIComponent(m[1]);for(const rev of [IMGREV,'HEAD'])try{return r.fulfill({status:200,body:blob(rev,f),contentType:CT[(f.split('.').pop()||'').toLowerCase()]||'application/octet-stream'})}catch(e){}return r.fulfill({status:404,body:''})});
   const p=await ctx.newPage();p.setDefaultTimeout(0);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
   await p.goto(URL,{waitUntil:'domcontentloaded',timeout:0});await p.waitForFunction(()=>typeof start==='function'&&typeof showTitle==='function',null,{timeout:0});await sleep(2500);
-  await p.addStyleTag({content:'#kroul{display:none!important}'});if(process.env.ONLY24)await p.evaluate(()=>{window.__ONLY24=1});
+  await p.addStyleTag({content:'#kroul{display:none!important}'});if(process.env.ONLY24)await p.evaluate(()=>{window.__ONLY24=1});if(process.env.MAXN)await p.evaluate(n=>{window.__MAXN=n},+process.env.MAXN);
   if(SAVE){await p.evaluate(j=>{localStorage.setItem(SK(1),j);const kl=document.getElementById('kload');if(kl)kl.remove();showTitle()},fs.readFileSync(SAVE,'utf8'));await sleep(500);
    await p.evaluate(()=>{document.getElementById('title').hidden=false;document.querySelector('[data-load="1"]').click()});await sleep(2500)}
   else await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();document.getElementById('title').hidden=true;for(let i=0;i<400;i++){start();if(!isSrv())break}});
@@ -29,25 +29,33 @@ const blob=(rev,f)=>execFileSync('git',['cat-file','blob',rev+':'+f],{cwd:__dirn
    const tryQ=(fn,src)=>{const n0=Q.length;try{fn()}catch(e){}for(const m of Q.slice(n0>0?0:0))if(kp(m).length)add(m,src);Q.length=0};
    try{for(const k in FV7)tryQ(()=>j71Fest(k,0),'j71 '+k)}catch(e){}
    tryQ(()=>j71FeastInvite('tai'),'j71x tai');tryQ(()=>j71FeastInvite('sac'),'j71x sac');for(let i=0;i<4;i++)tryQ(()=>j71Merit(),'j71m');
-   window.__SCAN=[...seen.values()];document.getElementById('modal').hidden=true;return window.__SCAN.length});
+   window.__SCAN=[...seen.values()];if(window.__MAXN){const by={};window.__SCAN=window.__SCAN.filter(m=>{const k=String(m.t).slice(0,14);by[k]=(by[k]||0)+1;return by[k]<=2}).slice(0,window.__MAXN)}document.getElementById('modal').hidden=true;return window.__SCAN.length});
   const rows=[];
-  for(let i=0;i<n;i++){const r=await p.evaluate(async i=>{const W=t=>new Promise(r=>setTimeout(r,t));const m=window.__SCAN[i];m.must=1;Q.length=0;Q.push(m);showModal();await W(400);
-    await Promise.all([...document.querySelectorAll('#modal img')].map(im=>im.complete?0:new Promise(r=>{im.onload=im.onerror=r;setTimeout(r,6000)})));await W(700);
-    const M=document.getElementById('modal');if(M.hidden)return{t:m.t,shown:false};const d=M.querySelector('.dlg'),R=e=>e.getBoundingClientRect();
+  await p.evaluate(`window.__meas=async(m)=>{const W=t=>new Promise(r=>setTimeout(r,t));await Promise.all([...document.querySelectorAll('#modal img')].map(im=>im.complete?0:new Promise(r=>{im.onload=im.onerror=r;setTimeout(r,6000)})));await W(700);const M=document.getElementById('modal');if(M.hidden)return{t:(m||{}).t,shown:false};const d=M.querySelector('.dlg'),R=e=>e.getBoundingClientRect();
     const col=M.querySelector('#mb .kpsubj.kes'),ban=M.querySelector('#mb > .kdlgart'),op=M.querySelector('#mb > .opts');const C=col?R(col):null;
     const figs=col?[...col.querySelectorAll(':scope > .kesf:not(.kesno) .kesimg')]:[];const caps=col?[...col.querySelectorAll('.kpsn')].map(R):[];
     const capB=caps.length?Math.max(...caps.map(c=>c.bottom)):0;
     const fi=figs.map(im=>{const r=R(im);const fb=(window.__KITFB||{})[im.getAttribute('src')];const v=fb&&fb.v||{t:0,b:1};return{top:r.top+v.t*r.height,bot:r.top+v.b*r.height}});
     const btns=op?[...op.children].filter(x=>x.offsetParent):[];const lastB=btns.length?Math.max(...btns.map(x=>R(x).bottom)):0;const dr=R(d);
     const txt=(M.querySelector('#mb').innerText||'');const plainTC=[...M.querySelectorAll('#mb *')].filter(e=>!e.closest('.krr')&&[...e.childNodes].some(n=>n.nodeType===3&&/thiện cảm/i.test(n.textContent))).map(e=>e.textContent.trim().slice(0,50));
-    const o={t:String(m.t).replace(/<[^>]+>/g,'').slice(0,48),src:m.__src,kdper:d.classList.contains('kdper'),people:figs.length,banner:ban?(C?R(ban).left>=C.right-1:false):null,
+    const o={t:String(m.t).replace(/<[^>]+>/g,'').slice(0,48),src:m.__src,bsrc:((ban&&ban.querySelector('img')||{}).getAttribute?ban.querySelector('img').getAttribute('src'):'').replace(/^.*\//,''),kdper:d.classList.contains('kdper'),people:figs.length,banner:ban?(C?R(ban).left>=C.right-1:false):null,
      chipAbove:fi.length?fi.every(f=>capB<=f.top+2):null,fill:fi.length&&C?+((fi[0].bot-fi[0].top)/(C.bottom-capB)).toFixed(2):null,dlgH:Math.round(dr.height),vh:innerHeight,
      emptyUnder:btns.length?Math.round(dr.bottom-lastB):null,nOpt:btns.length,plainTC};
-    return o},i);rows.push(r)}
+    return o}`);
+  for(let i=0;i<n;i++){const r=await p.evaluate(async i=>{const W=t=>new Promise(r=>setTimeout(r,t));const m=window.__SCAN[i];m.must=1;Q.length=0;Q.push(m);showModal();await W(400);return await window.__meas(m)},i);rows.push(r)}
+  /* PLAY=N: play N ticks of the real game (visible buttons only) and measure every NEW dialog with a person on the way */
+  if(+process.env.PLAY){const pr=await p.evaluate(async N=>{const W=t=>new Promise(r=>setTimeout(r,t));const ov=document.getElementById('ov');const seen=new Set();const out=[];Q.length=0;document.getElementById('modal').hidden=true;
+   for(let g=0;g<N&&!S.dead;g++){if(ov&&!ov.hidden){const V=[...ov.querySelectorAll('button')].filter(x=>x.offsetParent);const t=V.find(x=>/^(Để|Học nhanh)/.test((x.textContent||'').trim()))||V.find(x=>/ok$/.test(x.id))||V.find(x=>x.classList.contains('kit-x'))||V[V.length-1];if(t)t.click();await W(80);continue}
+    const dawn=document.getElementById('dawn');if(dawn&&!dawn.hidden&&dawn.innerHTML){const go=dawn.querySelector('#dawn-go');try{go&&go.click()}catch(e){}await W(40);dawn.hidden=true;dawn.innerHTML='';document.body.classList.remove('kbk-open');continue}
+    if(Q.length){const m=Q[0];const M=document.getElementById('modal');if(M.hidden)showModal();await W(60);
+     const key=String(m.t||'').replace(/<[^>]+>/g,'').slice(0,40)+'|'+(m.pid||'');if(!seen.has(key)&&kitStagePeople(m).length&&!M.hidden){seen.add(key);const r=await window.__meas(m);r.src='play';out.push(r)}
+     if(m.opts&&m.opts.length){const i=m.opts.findIndex(c=>!(c.fx&&c.fx.bac&&S.bac+c.fx.bac<0));if(i<0)closeModal();else chooseM(i)}else closeModal();await W(30);continue}
+    try{nextBuoi()}catch(e){}await W(40)}return out},+process.env.PLAY);rows.push(...pr)}
+
   /* one picture per kind for the eye */
   for(const [i,nm] of [[0,'first']]){}
   const pick=await p.evaluate(()=>window.__SCAN.findIndex(m=>/Thái hậu triệu/.test(m.t)));
   if(pick>=0){await p.evaluate(async i=>{window.__SCAN[i].must=1;Q.length=0;Q.push(window.__SCAN[i]);showModal();await new Promise(r=>setTimeout(r,2200))},pick);await p.screenshot({path:`${OUT}/${TAG}-thai-hau-trieu-${wh}.jpg`,type:'jpeg',quality:55})}
   ALL.push({sz,rows,errs:errs.slice(0,5)});await ctx.close()}
- for(const s of ALL){console.log(`== ${s.sz}  (${s.rows.length} dialogs)`);for(const r of s.rows)console.log(`${r.kdper?'dp ':'-- '}${String(r.t).padEnd(48)} ${String(r.src).padEnd(10)} ppl:${r.people} ban:${r.banner} chipAbove:${r.chipAbove} fill:${r.fill} h:${r.dlgH}/${r.vh} under:${r.emptyUnder} opts:${r.nOpt}${r.plainTC&&r.plainTC.length?' TC:'+r.plainTC.join('|'):''}`);if(s.errs.length)console.log('errs',s.errs)}
+ for(const s of ALL){console.log(`== ${s.sz}  (${s.rows.length} dialogs)`);for(const r of s.rows)console.log(`${r.kdper?'dp ':'-- '}${String(r.t).padEnd(48)} ${String(r.src).padEnd(10)} ${String(r.bsrc||'').padEnd(22)} ppl:${r.people} ban:${r.banner} chipAbove:${r.chipAbove} fill:${r.fill} h:${r.dlgH}/${r.vh} under:${r.emptyUnder} opts:${r.nOpt}${r.plainTC&&r.plainTC.length?' TC:'+r.plainTC.join('|'):''}`);if(s.errs.length)console.log('errs',s.errs)}
  fs.writeFileSync(`${OUT}/${TAG}-scan.json`,JSON.stringify(ALL,null,1));await b.close()})().catch(e=>{console.error(e);process.exit(1)});
