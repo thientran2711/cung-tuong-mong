@@ -19,7 +19,8 @@ const KFK_SP={
  "petal-plum":{n:9,s:64,d:22},"petal-peach":{n:9,s:64,d:22},"petal-lotus":{n:9,s:80,d:30},osmanthus:{n:9,s:48,d:13},
  leaf:{n:9,s:80,d:26},snow:{n:5,s:48,d:15},ash:{n:9,s:56,d:16},paper:{n:9,s:72,d:20},coin:{n:9,s:64,d:22},ink:{n:9,s:128,d:44},
  lantern:{n:4,s:128,d:30},spark:{n:9,s:64,d:26,b:"add"},ember:{n:9,s:40,d:12,b:"add"},orb:{n:3,s:96,d:34,b:"add",t:1},
- streak:{n:3,s:192,d:46,b:"add",t:1},smoke:{n:3,s:128,d:44,t:1}
+ streak:{n:3,s:192,d:46,b:"add",t:1},smoke:{n:3,s:128,d:44,t:1},
+ glowburst:{n:1,s:256,d:220} /* the painted gold glow still with true alpha (luma): reads on light paper AND dark scenes */
 };
 /* w×h = clip size; f = sheet frames (6×4); r = aspect of the art box (w/h) */
 const KFK_LIGHT={
@@ -29,10 +30,10 @@ const KFK_SHEET={ /* filled by dev/fxwork/sheet.sh: cols×rows frames of w×h, f
 };
 /* motion per kind for kitFxBurst (fall | burst | rise | bloom | rain) */
 const KFK_MOVE={"petal-plum":"fall","petal-peach":"fall","petal-lotus":"fall",osmanthus:"fall",leaf:"fall",snow:"fall",ash:"fall",paper:"burst",
- coin:"rain",ink:"bloom",smoke:"bloom",lantern:"rise",spark:"burst",ember:"rise",orb:"rise",streak:"burst"};
+ coin:"rain",glowburst:"flash",ink:"bloom",smoke:"bloom",lantern:"rise",spark:"burst",ember:"rise",orb:"rise",streak:"burst"};
 const KFK=window.KFK={loaded:new Set(),tex:{},lights:0,sheets:0,pool:[],made:0,freed:0,log:[],live:new Set()};
 const kfkU=f=>KFK_BASE+f;
-function kfkLow(){try{const c=navigator.connection;return !!((c&&c.saveData)||(navigator.deviceMemory&&navigator.deviceMemory<=2)||(navigator.hardwareConcurrency&&navigator.hardwareConcurrency<=2)||(window.KFX&&KFX.q<.45))}catch(e){return false}}
+function kfkLow(){try{const c=navigator.connection;return !!((c&&c.saveData)||(navigator.deviceMemory&&navigator.deviceMemory<=2)||(navigator.hardwareConcurrency&&navigator.hardwareConcurrency<=2))}catch(e){return false}}
 function kfkLog(x){KFK.log.push(x);if(KFK.log.length>80)KFK.log.shift()}
 /* ---------- 1. sprites ---------- */
 const kfkTexP={};
@@ -61,6 +62,7 @@ function kfkMove(name,p,i,n,o){const m=o.motion||KFK_MOVE[name]||"burst",W=inner
  if(m==="rain")return{x:kR(.06,.94)*W,y:kR(-120,-10),v:{vx:kR(-.6,.6),vy:kR(2,4)*sp,g:.22,life:o.life||kR(90,120),spin:kR(-.03,.03),coin:1,fade:"out"}};
  if(m==="rise")return{x:r?p.x+kR(-.5,.5)*r.width:(name==="lantern"?kR(.06,.94)*W:p.x+kR(-80,80)),y:name==="lantern"&&!r?H+kR(10,200):p.y+kR(-20,30),
   v:{vx:kR(-.3,.3),vy:-kR(.6,1.4)*sp,life:o.life||(name==="lantern"?kR(420,540):kR(90,150)),sway:.4,fade:"inout",a0:.95}};
+ if(m==="flash")return{x:p.x,y:p.y,v:{life:o.life||55,grow:o.grow!=null?o.grow:.012,a0:o.a0!=null?o.a0:.95,fade:"inout"}};
  if(m==="bloom")return{x:p.x+kR(-50,50),y:p.y+kR(-40,40),v:{life:o.life||kR(70,95),grow:kR(.006,.012),a0:kR(.55,.8),fade:"inout",vy:name==="smoke"?-kR(.5,1.1):0}};
  const a=o.up?kR(-Math.PI*.95,-Math.PI*.05):kR(0,Math.PI*2),v=kR(3,8)*sp;return{x:p.x,y:p.y,v:{vx:Math.cos(a)*v,vy:Math.sin(a)*v-1.5,g:.08,drag:.95,life:o.life||kR(60,100),spin:kR(-.12,.12),sway:.4,fade:"out"},rot:name==="streak"?a:null}}
 function kitFxBurst(name,at,n,o){o=o||{};if(!KFK_SP[name]||!kfOn()||kfStill())return Promise.resolve(0);kfkLog("burst:"+name);

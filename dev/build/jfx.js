@@ -55,9 +55,10 @@ window.kitFx=kitFx;
 function kfShake(lv){const g=document.querySelector(".game")||document.getElementById("game");if(!g||!g.animate)return;
  const a=lv>1?7:3.5,K=lv>1?[[0,0],[-a,1.5],[a,-2],[-a*.7,1],[a*.5,-1],[-a*.25,.5],[0,0]]:[[0,0],[-a,0],[a,.8],[-a*.5,0],[0,0]];
  try{g.animate(K.map(([x,y])=>({translate:`${x}px ${y}px`})),{duration:lv>1?360:260,easing:"ease-out"})}catch(e){}}
-/* gold / warm light = the PAINTED glow clip (KIT §68 kitFxLight "glow-gold", screen blend); red / dark / night stay plain screen washes (colour
-   grading over the whole screen, not a drawn object) */
-function kfFlash(k,pt){if((k==="gold"||k==="warm")&&typeof kitFxLight==="function"){const h=kitFxLight("glow-gold",pt||null,{dur:k==="warm"?1100:850,fade:600,scale:k==="warm"?.95:.8,opacity:k==="warm"?.6:.95});if(h)return}
+/* gold / warm light = the PAINTED gold glow (KIT §68 sprite "glowburst", true alpha: shows on paper and on dark scenes); red / dark / night stay
+   plain screen washes (colour grading over the whole screen, not a drawn object) */
+function kfFlash(k,pt){if((k==="gold"||k==="warm")&&typeof kitFxBurst==="function"){const r=pt&&pt.r,sz=r?Math.max(r.width,r.height):Math.min(innerWidth,innerHeight)*.55;
+  kitFxBurst("glowburst",pt||null,1,{scale:Math.max(.6,Math.min(2.4,sz/220)),a0:k==="warm"?.6:.95,life:k==="warm"?70:55});return}
  const d=document.createElement("div");d.className="kfx-fl kfx-"+k;document.body.appendChild(d);setTimeout(()=>d.remove(),k==="dark"||k==="night"?2300:1500)}
 /* ---------- Pixi: one loader (also used by j11's stage layer) ---------- */
 function kfApp(){if(KFX.app)return Promise.resolve(KFX.app);if(KFX.loading)return KFX.loading;
@@ -210,9 +211,7 @@ document.addEventListener("click",e=>{if(e.target&&e.target.closest&&e.target.cl
  transition:transform .32s cubic-bezier(.3,.8,.3,1.1),width .32s cubic-bezier(.3,.8,.3,1.1),opacity .2s;box-shadow:0 0 6px #f0d07088}
 /* flashes */
 .kfx-fl{position:fixed;inset:0;z-index:9440;pointer-events:none}
-.kfx-gold{box-shadow:inset 0 0 90px 18px #f0d070cc;background:radial-gradient(ellipse at 50% 42%,#fff3c433 0,#fff3c400 60%);animation:kfFl 1.3s ease-out forwards}
 .kfx-red{box-shadow:inset 0 0 80px 16px #b00000cc;animation:kfRed .9s ease-out forwards}
-.kfx-warm{background:radial-gradient(ellipse at 50% 45%,#ffd8a040 0,#ffb07022 50%,#ffb07000 75%);box-shadow:inset 0 0 70px 10px #ffc08066;animation:kfFl 1.4s ease-out forwards}
 .kfx-night{background:radial-gradient(ellipse at 50% 60%,#ff9a5022 0,#3a1a2a55 80%);animation:kfFl 2.2s ease-in-out forwards}
 .kfx-dark{background:radial-gradient(ellipse at 50% 50%,#0000 20%,#000a 100%);animation:kfDark 2.2s ease-in-out forwards}
 @keyframes kfFl{0%{opacity:0}18%{opacity:1}100%{opacity:0}}

@@ -38,9 +38,9 @@ const settle=p=>p.waitForFunction(()=>KFX.parts.length===0&&KFK.lights===0&&KFK.
    await new Promise(r=>setTimeout(r,300));d.remove();return out});
   /* sheets */
   r.sheets=await p.evaluate(async()=>{const out={};for(const n of Object.keys(KFK_SHEET)){const h=kitFxSheet(n,null,{});await new Promise(r=>setTimeout(r,700));out[n]=!!(h&&/webp/.test(h.el.style.backgroundImage))}return out});
-  if(SHOTS&&['fold','ipad','phone-land'].includes(tag)){await p.evaluate(()=>{kitFxLight('candle',{x:innerWidth*.25,y:innerHeight*.45},{size:Math.min(innerWidth,innerHeight)*.35,dur:6000});
+  if(SHOTS&&['fold','ipad','phone-land'].includes(tag)){await p.evaluate(()=>{['kroul','dawn','kpodov'].forEach(i=>{const e=document.getElementById(i);if(e)e.remove()});const m=document.getElementById('modal');if(m)m.hidden=true;kitFxLight('candle',{x:innerWidth*.25,y:innerHeight*.45},{size:Math.min(innerWidth,innerHeight)*.35,dur:6000});
     kitFxLight('glow-gold',{x:innerWidth*.62,y:innerHeight*.4},{dur:6000});kitFxBurst('petal-peach',null,24);kitFxBurst('spark',{x:innerWidth*.62,y:innerHeight*.4},16);kitFxBurst('coin',null,10)});
-   await sleep(1800);await p.screenshot({path:`${OUT}/fx-${tag}.jpg`,type:'jpeg',quality:60,timeout:120000})}
+   await sleep(1300);await p.screenshot({path:`${OUT}/fx-${tag}.jpg`,type:'jpeg',quality:60,timeout:120000})}
   r.clean=await settle(p);r.left=await p.evaluate(()=>({parts:KFX.parts.length,lights:KFK.lights,sheets:KFK.sheets,dom:document.querySelectorAll('.kfxk').length,
    overflow:document.documentElement.scrollWidth>innerWidth+1}));
   r.errs=errs.slice(0,6);r.bad404=bad;
