@@ -783,3 +783,4 @@ All must work in co-op.
 
 ## 15/11 (late, session 7) — Her face blurry on stage (owner screenshot)
 - Owner screenshot (Ngọc Thanh các, Thường tại, 20 tuổi, chưa điểm trang): HER figure's face is hazy/soft while maid Ngọc Lan beside her is crisp; owner suspects background removal ("tách nền sao mà mặt bị mất nét"). → review/face-sharp worker (find the real cause, whole class).
+- (owner, last message to session 7) The account runs on paid usage: once workers stop reporting, archive this chat. → Session 7 stopped its remaining agents (their WIP is on their branches) and archived itself.
