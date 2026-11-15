@@ -29,7 +29,7 @@ function rvButtons(v,i){const dis=!can(2)||!v.alive||v.out||S.dead;const b=(k,ex
  if(S.rank>=7)h+=`<div class="rbtn"><button data-e="${i}" data-k="judge" ${dis||evG(S,v)<2?"disabled":""}>Xử tội<small>${evG(S,v)>=2?"theo chứng cứ":"cần 2 chứng cứ"}</small></button><button data-e="${i}" data-k="conf" ${dis?"disabled":""}>Tịch thu trang sức<small>nàng thù -20</small></button><button data-e="${i}" data-k="reward" ${dis||S.bac<30?"disabled":""}>Ban thưởng<small>Bạc -30 · thân +20</small></button>${v.confined?`<button data-e="${i}" data-k="pardon" ${dis?"disabled":""}>Ân xá<small>hết cấm túc</small></button>`:""}</div>`;
  return h}
 function renderPanel(){try{renderPanel0()}catch(e){console.error(e);const el=$("panel");el.innerHTML=`<p class="past">Mục này đang lỗi, ngươi chọn mục khác.</p>`}}
-function renderPanel0(){const el=$("panel");let h="";faceInit();const gm=document.querySelector(".game");if(gm)gm.classList.toggle("cardtab",["rv","kid","staff"].includes(tab));
+function renderPanel0(){const el=$("panel");let h="";faceInit();const gm=document.querySelector(".game");if(gm)gm.classList.toggle("cardtab",["rv","kid","staff","court","men"].includes(tab));
  if(tab==="act"){const pr=S.preg?`${S.hidden?"Đang giấu thai":"Mang thai"} tháng ${S.preg}${S.preg<=3||S.preg>=7?" · tháng hiểm":""}`:`Có thai mỗi lần thị tẩm: <b>${word(conceiveCh())}</b>`;
    h=`<div class="cards">${deck.map(cardH).join("")}</div>`}
  if(tab==="go")h=mapHTML();

@@ -312,8 +312,11 @@ function kitCourtChips(){try{const c=$("kcchips");if(c)c.remove();const box=$("k
    edge, person larger); (2) every rank/role has its own crest on the top bar (img/kit/crest-<key>.webp, gpt-2-6, one style reference: the
    approved Hoàng hậu frame), smaller for low ranks; Hoàng hậu, Hoàng thượng, Thái hậu and Thái tử keep the crest painted in their frame. ---------- */
 window.KIT_CREST={ar:{"consort-0":.329,"consort-1":.337,"consort-2":.538,"consort-3":.506,"consort-4":.569,"consort-5":.554,"maid-0":.483,"maid-1":.467,"maid-2":.521,"maid-3":.481,"maid-4":.479,"mama-0":.263,"mama-1":.283,"mama-2":.317,"mama-3":.423,"mama-4":.419,"eunuch":.283,"unknown":.254},
- base:{"consort-0":.95,"consort-1":.95,"consort-2":.66,"consort-3":.72,"consort-4":.62,"consort-5":.62,"maid-0":.96,"maid-1":.96,"maid-2":.86,"maid-3":.93,"maid-4":.72,"mama-0":.89,"mama-1":.9,"mama-2":.81,"mama-3":.8,"mama-4":.75,"eunuch":.9,"unknown":.97},
- w:{"consort-0":300,"consort-1":320,"consort-2":344,"consort-3":366,"consort-4":388,"consort-5":410,"maid-0":190,"maid-1":205,"maid-2":220,"maid-3":235,"maid-4":250,"mama-0":250,"mama-1":266,"mama-2":282,"mama-3":298,"mama-4":314,"eunuch":280,"unknown":300},W:380,
+ /* owner 11/15 04:20Z + 05:45Z ("còn nguyên chỗ hở", "mấy góc trên rối"): every crest's SOLID base (measured: the lowest row ≥ 25 % of its
+    widest row) sits 6 canvas units BELOW the bar line, overlapping the frame top like a real crown piece; widths of consort-2..5 stay clear of
+    the frame's own corner ornaments (x 115–435) so crest and corners never pile up */
+ base:{"consort-0":.95,"consort-1":.95,"consort-2":.667,"consort-3":.577,"consort-4":.637,"consort-5":.627,"maid-0":.96,"maid-1":.96,"maid-2":.86,"maid-3":.93,"maid-4":.72,"mama-0":.89,"mama-1":.9,"mama-2":.81,"mama-3":.8,"mama-4":.75,"eunuch":.9,"unknown":.97},
+ w:{"consort-0":300,"consort-1":310,"consort-2":318,"consort-3":322,"consort-4":326,"consort-5":330,"maid-0":190,"maid-1":205,"maid-2":220,"maid-3":235,"maid-4":250,"mama-0":250,"mama-1":266,"mama-2":282,"mama-3":298,"mama-4":314,"eunuch":280,"unknown":300},W:380,
  /* y of the line the crest stands on (canvas units): the frame's top bar; maids: the top of the silk bow painted on their frame */
  bar:{"consort-0":191,"consort-1":189,"consort-2":187,"consort-3":186,"consort-4":182,"consort-5":175,"maid":150,"mama":150,"eunuch":172,"unknown":171},BAR:172,
  key:function(frame){const m=/frame-([a-z0-9-]+)\.webp/.exec(frame||"");if(!m)return null;let k=m[1];if(/^eunuch-[012]$/.test(k))k="eunuch";return this.ar[k]?k:null},
@@ -873,27 +876,32 @@ function kitPcGrid(pc){try{if(!pc||pc.querySelector(".kpgrid"))return;const L=pc
  const chip=(lab,val,full,extra)=>{lab=String(lab||"");lab=lab.charAt(0).toUpperCase()+lab.slice(1);const u=unk(val);const w=document.createElement("span");
   w.innerHTML=kitStatCell(null,lab,u?"?":val,{tag:"span",cls:"kst-chip"+(u?" kst-unk":""),title:full||(lab+": "+val),nobar:true});const c=w.firstElementChild;if(extra)extra.forEach(x=>x&&c.appendChild(x));return c};
  const rowA=[],rowB=[],rowC=[];
+ let PX=null;try{PX=typeof kitPersonByName==="function"?kitPersonByName((pc.querySelector(".pcname")||{}).textContent||""):null}catch(e){}
+ const SJ=PX&&PX.queen?"Hoàng hậu":"Nàng",OB=PX&&PX.queen?"Hoàng hậu":"nàng";
+ const QV=n=>(typeof quyW==="function"?quyW(n):"")+" · "+(n>0?"+":"")+n,RG=(k,l)=>typeof kitGloss==="function"?kitGloss(k,l):l;
  const bars=pc.querySelector(".kpbars");
  if(bars)[...bars.children].forEach(r=>{const t=T(r.textContent);
   const sb=[...r.querySelectorAll(".sbar")];if(sb.length){sb.forEach(x=>{const l=T((x.querySelector(".sbl")||{}).textContent),v=T((x.querySelector("b")||{}).textContent);rowA.push(chip(l,v,l+": "+v,[x.querySelector(".sbt")]))});return}
   if(/^Ghen/.test(t)){rowA.push(chip("Ghen",T(t.replace(/^Ghen:?/,"")),t));return}
-  if(/với nàng/.test(t)){const fb=[...r.querySelectorAll(".fbar")];const nums=[...t.matchAll(/·\s*(-?\d+)/g)].map(m=>m[1]);
-   const m1=t.match(/với nàng:\s*([^·]+)·\s*(-?\d+)/),m2=t.match(/(Không oán|Oán[^·]*)·\s*(-?\d+)/);
-   rowA.push(chip("Thiện cảm",m1?m1[2]:(nums[0]||"?"),"Ngươi với nàng: "+(m1?T(m1[1])+" · "+m1[2]:t),[fb[0]]));
-   if(m2||fb[1])rowA.push(chip("Oán",m2?m2[2]:(nums[1]||"?"),m2?T(m2[0]):"Oán",[fb[1]]));return}
-  if(/^Nàng với ngươi/.test(t)){const v=T(t.replace(/^Nàng với ngươi:?/,""));const n=v.match(/·\s*(-?\d+)/);rowA.push(chip("Nàng với ngươi",n?n[1]:v,t,[...r.querySelectorAll(".fbar")]));return}
+  /* owner 11/15 05:25Z: subject + verb + object — "Nàng quý ngươi: Bình thường · -5", "Nàng oán ngươi: 0", "Ngươi quý nàng …", "Ngươi oán nàng …" */
+  if(/với nàng/.test(t)){const fb=[...r.querySelectorAll(".fbar")];const nums=[...t.matchAll(/·\s*([+-]?\d+)/g)].map(m=>+m[1]);
+   rowA.push(chip(RG("Quý","Ngươi quý "+OB),nums.length?QV(nums[0]):"?","Ngươi quý "+OB+": "+(nums.length?QV(nums[0]):"chưa rõ"),[fb[0]]));
+   rowA.push(chip(RG("Oán","Ngươi oán "+OB),nums.length>1?String(nums[1]):"?","Ngươi oán "+OB+": "+(nums.length>1?nums[1]:"chưa rõ"),[fb[1]]));return}
+  if(/^Nàng với ngươi/.test(t)){const fb=[...r.querySelectorAll(".fbar")];const nums=[...t.matchAll(/·\s*([+-]?\d+)/g)].map(m=>+m[1]);
+   rowA.push(chip(RG("Quý",SJ+" quý ngươi"),nums.length?QV(nums[0]):"?",SJ+" quý ngươi: "+(nums.length?QV(nums[0]):"chưa rõ"),[fb[0]]));
+   rowA.push(chip(RG("Oán",SJ+" oán ngươi"),nums.length>1?String(nums[1]):"?",SJ+" oán ngươi: "+(nums.length>1?nums[1]:"chưa rõ"),[fb[1]]));return}
   if(/^Sủng/.test(t)){const v=T(t.replace(/^Sủng:?/,""));rowB.push(chip("Sủng",unk(v)?"?":v.replace(/\s*\(.*\)$/,""),t));return}
   if(/^(Lòng|Chủ tin|Thương)/.test(t)){const m=t.match(/^([^:\d]+):?\s*(.*)$/);rowA.push(chip(T(m[1]),T(m[2]).replace(/\s*\(.*\)$/,""),t,[...r.querySelectorAll(".fbar,.mini")]));return}
   const m=t.match(/^([^:]{1,24}):\s*(.*)$/);if(m)rowA.push(chip(T(m[1]),T(m[2]),t,[...r.querySelectorAll(".fbar,.mini")]));else{const c=document.createElement("span");c.className="kst kst-chip";c.appendChild(r);rowA.push(c)}});
  pc.querySelectorAll(".kst-tile").forEach(k=>{if(k.hidden&&!/Sủng/.test(k.textContent))return;const l=T((k.querySelector(".kstl")||{}).textContent),v=T((k.querySelector(".kstv")||{}).textContent);
   if(/^Sủng$/i.test(l)&&rowB.some(c=>/Sủng/.test(c.textContent)))return;rowB.push(chip(l.charAt(0)+l.slice(1).toLowerCase(),v,l+": "+v))});
  const tiles=pc.querySelector(".kstgrid");
- const info=pc.querySelector(".kpfacts .pcinfo");if(info)[...info.children].forEach(sp=>{const t=T(sp.textContent).replace(/\s*ⓘ$/,"");const btn=sp.querySelector("button");
+ const info=pc.querySelector(".kpfacts .pcinfo");if(info)[...info.children].forEach(sp=>{if(sp.classList.contains("krun")||sp.querySelector(".krun"))return;const t=T(sp.textContent).replace(/\s*ⓘ$/,"");const btn=sp.querySelector("button");
   const m=t.match(/^(Tuổi)\s+(\d+)/)||t.match(/^([^:]{1,24}):\s*(.*)$/)||t.match(/^([^\d:·]{2,20}?)\s+(-?\d+)$/);if(m&&T(m[2]).length<=28){rowC.push(chip(T(m[1]),T(m[2]),t,btn?[btn]:null));sp.remove()}});
  try{const nmx=(pc.querySelector(".pcname")||{}).textContent||"";const px=typeof kitPersonByName==="function"?kitPersonByName(nmx):null;
   if(px&&typeof rivals!=="undefined"&&rivals.includes(px)){const have=l=>rowA.some(c=>((c.querySelector("small")||{}).textContent||"").trim()===l);
-   ["Ghen","Oán","Thiện cảm","Nàng với ngươi"].forEach(l=>{if(!have(l))rowA.push(chip(l,"?",l+": chưa rõ"))})}}catch(e){}
- const ORD=["Ghen","Oán","Thiện cảm","Nàng với ngươi"],oi=c=>{const l=(c.querySelector("small")||{}).textContent||"";const i=ORD.indexOf(l.trim());return i<0?99:i};rowA.sort((x,y)=>oi(x)-oi(y));
+   [[SJ+" quý ngươi","Quý"],[SJ+" oán ngươi","Oán"],["Ngươi quý "+OB,"Quý"],["Ngươi oán "+OB,"Oán"],["Ghen","Ghen"]].forEach(([l,g])=>{if(!have(l))rowA.push(chip(RG(g,l),"?",l+": chưa rõ"))})}}catch(e){}
+ const ORD=[SJ+" quý ngươi",SJ+" oán ngươi","Ngươi quý "+OB,"Ngươi oán "+OB,"Ghen"],oi=c=>{const l=(c.querySelector("small")||{}).textContent||"";const i=ORD.indexOf(l.trim());return i<0?99:i};rowA.sort((x,y)=>oi(x)-oi(y));
  const SORD=["Sủng","Đức","Danh","Sắc","Tài","Tâm cơ"],si=c=>{const l=((c.querySelector("small")||{}).textContent||"").trim().toLowerCase();const i=SORD.findIndex(x=>x.toLowerCase()===l);return i<0?99:i};rowB.sort((x,y)=>si(x)-si(y));
  const g=document.createElement("div");g.className="kpgrid";[rowA,rowB,rowC].forEach((R,i)=>{if(!R.length)return;const d=document.createElement("div");d.className="kpgr kpgr"+i;R.forEach(c=>d.appendChild(c));g.appendChild(d)});
  if(!g.children.length)return;
