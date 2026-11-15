@@ -66,7 +66,8 @@ function kitBook(spec){spec=spec||{};const rm=()=>{try{return reducedMotion()}ca
     const flow=meas.querySelector(".kbk-flow");const over=()=>flow.scrollHeight>flow.clientHeight+1;let n=0;
     while(i<blocks.length){flow.insertAdjacentHTML("beforeend",blocks[i].html);if(over()&&n>0){flow.lastElementChild.remove();break}i++;n++}
     while(n>1&&i<blocks.length&&blocks[i-1]&&blocks[i-1].head){flow.lastElementChild.remove();i--;n--}
-    L.push({cls:isP?"k-person":"k-text",html:meas.querySelector(".kbk-body").innerHTML,kind:p.kind,folio:true,src:p});first=false}while(i<blocks.length);
+    /* one entry taller than a whole page: never clipped — that page's text column scrolls inside the page */
+    const big=over();L.push({cls:(isP?"k-person":"k-text")+(big?" k-scroll":""),html:meas.querySelector(".kbk-body").innerHTML,kind:p.kind,folio:true,src:p});first=false}while(i<blocks.length);
   }
   meas.innerHTML="";return L}
 
@@ -417,3 +418,14 @@ body.kbk-open #rtoast,body:has(#dawn.kbkdawn:not([hidden])) #rtoast{opacity:0!im
 .kbk-no{min-width:8.5em;text-align:center;font-family:var(--display);font-size:.9rem;font-weight:600;color:#fff3d6;background:#1c2439e6;border:1px solid #c9a46a88;border-radius:20px;padding:.45em .9em;white-space:nowrap}
 .kbk-bar .kbtn.alt{min-height:40px;padding:6px 16px}
 `;document.head.appendChild(st)})();
+
+/* owner 11/15 (Tuần lục cut off): no text is ever clipped. Entries flow to the next page; a single entry longer than a page scrolls
+   inside its own text column (k-scroll). Stat chips inside running text never break inside ("Tần Liễu Họa / Mi Sủng −1 0"):
+   they stay on one line, and a long one (a name + a number) reads as plain coloured text instead of a chip. */
+(function(){const st=document.createElement("style");st.id="kbk-noclip";st.textContent=`
+.kbk-pg.k-scroll .kbk-flow{overflow-y:auto!important;overscroll-behavior:contain;touch-action:pan-y;scrollbar-width:thin}
+.kbk .kbk-flow .ef,.kbk .kbk-flow .kchip{white-space:nowrap}
+.kbk .kbk-flow .ef.kbk-long,.kbk .kbk-flow .kchip.kbk-long{white-space:normal;background:none!important;border:0!important;box-shadow:none!important;padding:0!important;display:inline!important;border-radius:0!important}
+`;document.head.appendChild(st)})();
+function kbkLongChips(root){try{(root||document).querySelectorAll(".kbk .kbk-flow .ef:not(.kbk-long),.kbk .kbk-flow .kchip:not(.kbk-long)").forEach(c=>{if((c.textContent||"").trim().length>16)c.classList.add("kbk-long")})}catch(e){}}
+(function(){const k0=kbkExpand;kbkExpand=function(){const out=k0.apply(this,arguments);try{const t=document.createElement("template");for(const b of out){if(!b||!b.html||!/class="(ef|kchip)/.test(b.html))continue;t.innerHTML=b.html;t.content.querySelectorAll(".ef,.kchip").forEach(c=>{if((c.textContent||"").trim().length>16)c.classList.add("kbk-long")});b.html=t.innerHTML}}catch(e){}return out}})();
