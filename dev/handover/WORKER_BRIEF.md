@@ -1,3 +1,9 @@
+> **LUẬT KIT TRƯỚC (sếp, 15/11 16:50Z, ưu tiên số 1):** MỌI chỗ hiện thông tin (chip, hàng chỉ số, dòng quan hệ, thẻ…) trên toàn game lấy từ kit chuẩn. Thợ KHÔNG tự viết/vẽ kiểu riêng. Chưa có kit → DỪNG, báo điều phối → làm thành phần kit chung + ghi KIT.md + trang mẫu kit → rồi mới dùng. Người duyệt FAIL mọi chip/hàng làm riêng.
+
+> **LUẬT SỬA CẢ NHÓM (sếp, 15/11 14:50Z):** sếp báo lỗi ở MỘT chỗ thì thợ sửa CẢ NHÓM cùng loại (mọi tài nghệ/món, mọi sự kiện, mọi thẻ cùng kiểu…): viết script rà hết, báo bảng trước/sau. Không chỉ sửa đúng chỗ sếp chỉ.
+
+> **LUẬT ƯU TIÊN SỐ 1 (sếp, 15/11 ~05:25Z):** TRƯỚC KHI GIAO BẤT CỨ VIỆC GÌ cho thợ, điều phối PHẢI kiểm xem việc đó đã có chưa: (1) grep OWNER_DECISIONS + HANDOVER + PROGRESS_*.md; (2) `git grep` trên origin/main VÀ mọi nhánh origin/review/* (tên tính năng, từ khóa); (3) hỏi danh sách thợ đang chạy. Có rồi → dùng lại / đưa nhánh đó lên, KHÔNG làm mới, KHÔNG nói với sếp "chưa có" khi chưa kiểm. Thợ cũng phải làm bước (2) trước khi viết mã mới. (Bài học: đồ tự tay làm j83 và 4 buổi đã có trên nhánh mà điều phối nói "chưa có".)
+
 COMMON BRIEF (Cung Tường Mộng, repo thientran2711/cung-tuong-mong, live https://thientran2711.github.io/cung-tuong-mong/)
 Before doing anything: read dev/HANDOVER.md (all, esp. PRIORITY RULES, ONE KIT REVIEW GATE, KIT-FIRST, PRIORITY DEVICES, OWNER RULES ADDED 11/14, TRẠNG THÁI 14/11 + Cập nhật 15:50Z), dev/OWNER_DECISIONS.md, dev/kit/KIT.md, dev/kit/VANPHONG.md, dev/art/STYLE_ANCHOR.md (art), and the PROGRESS file(s) on your branch.
 Binding owner rules that apply to everyone:
@@ -9,4 +15,3 @@ Binding owner rules that apply to everyone:
 - Do not create pull requests. Do not message the owner. Report back to the coordinator: what you did, branch + commit, test results, anything blocked, and "SẴN SÀNG KIỂM" when ready for review. Keep report concise (English or Vietnamese).
 RULE (00:10Z): every owner screenshot must be on the approved layout (base origin/review/page-curl or later, which includes review/fold-layout). Never send shots from old main layout.
 RULE (03:55Z): ONE kit figure scale (kitFigScale/KIT_FIG): full-body figures ≈85–90% of picture height everywhere, never shrink to fit (+N), names never cut. Never set private figure sizes.
-RULE (01:30Z 15/11, owner): ảnh mới: đẩy Cloudflare bằng cdn_sync, không commit vào git — `python3 dev/site/cdn_sync.py [tệp]` (img/ ở máy, đã .gitignore; ảnh cũ: `--pull`); manifest img/*.json: --pull trước khi sửa, đẩy ngay sau. Xem dev/art/CDN.md.

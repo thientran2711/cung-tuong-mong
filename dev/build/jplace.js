@@ -32,9 +32,10 @@ function kitPlaceSil(){try{const m=Q[0];const d=document.querySelector("#modal .
 /* ---------- KIT 32.9 ONE OPTION LAYOUT RULE (kitOptLayout) — every dialog, 32.6 / 32.7 included ----------
    SHORT option = its name + at most ONE effect line (Tốn / Được / … row); LONG = two or more rows (Cần / Tốn / Được / Mất / Kèm), or a name
    over two lines. All short → 2-column grid of equal buttons (3 on ≥ 1000 px with 3+); any long → each long one is a full-width row, the
-   short ones share the grid. "Thôi" / "Lui" / "Để sau" (kback) is a compact secondary button with no effect line, always last; when every
-   other option is long it sits as a slim row under them. A Q item may still force optLayout:'rows'|'grid'. */
-const KIT_BACK=/^(Thôi|Lui|Để sau|Bỏ qua|Không đi)$/;
+   short ones share the grid. "Để sau" / "Bỏ qua" / "Không đi" (kback) is a compact secondary button with no empty effect line, in its
+   own place (no "always last" rule any more); when every other option is long it sits as a slim row. "Thôi" / "Lui" are never buttons:
+   the dialog's ✕ (KIT 32.10). A Q item may still force optLayout:'rows'|'grid'. */
+const KIT_BACK=/^(Để sau|Bỏ qua|Không đi)$/;
 function kitOptIsBack(b){const t=b.querySelector(".kan");return KIT_BACK.test(((t||b).textContent||"").trim())}
 function kitOptIsLong(b){if(b.classList.contains("kback"))return false;const rows=b.querySelectorAll(".kr").length;if(rows>=2)return true;
  const t=b.querySelector(".kan");const lh=parseFloat(t?getComputedStyle(t).lineHeight:0)||20;return !!(t&&t.getBoundingClientRect().height>lh*2.3)}
@@ -52,8 +53,7 @@ function kitOptCramped(g){return [...g.querySelectorAll(":scope > button.ka:not(
    g.querySelectorAll(":scope > button.ka").forEach(b=>b.classList.remove("k3long","k3odd"))})}catch(e){}return r}})();
 (function(){const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);try{kitPlaceSil();requestAnimationFrame(()=>{kitPlaceSil();try{kitDlgFit()}catch(e){}})}catch(e){}return r}})();
 (function(){const st=document.createElement("style");st.id="k-place";st.textContent=`
-/* 32.9 back button: compact, last */
-html body #modal .opts>button.ka.kback,html body #modal .kpscopts>button.ka.kback{order:3!important}
+/* 32.9 secondary button ("Để sau" / "Bỏ qua"): compact; keeps its place (KIT 32.10: no "Thôi luôn cuối") */
 html body #modal .opts.k3rows>button.ka.kback{min-height:0!important;padding-top:7px!important;padding-bottom:7px!important}
 html body #modal .opts>button.ka.kback .kat{justify-content:center;border-bottom:0!important;padding-bottom:0!important;margin-bottom:0!important}
 html body #modal .opts>button.ka.kback .kan{font-weight:600;color:var(--ink2,#6b4a2a)}
