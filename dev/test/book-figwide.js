@@ -17,6 +17,7 @@ const isFile=!/^https?:/.test(SRC);
   await p.waitForFunction(()=>typeof start==='function'&&typeof kitBook==='function',null,{timeout:120000});
   await p.evaluate(()=>{try{localStorage.clear()}catch(e){}document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;Q.length=0;
    for(const e of [...document.body.querySelectorAll('*')]){const cs=getComputedStyle(e);if(cs.position==='fixed'&&/Luân hồi/.test(e.textContent||''))e.remove()}});
+  await p.evaluate(()=>document.fonts&&document.fonts.ready);await p.waitForTimeout(8000);   /* warm up (review r9): the book's paper art + fonts load as in a real game before the first book opens; a cold book is measured mid-load (transient 199–202 px) */
   const NORMW=globalThis.NORMW||(globalThis.NORMW={});
   for(const FIG of [NORMAL,...FIGS]){
    const r=await p.evaluate(async([FIG,N])=>{

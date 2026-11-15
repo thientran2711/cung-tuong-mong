@@ -91,3 +91,29 @@ KIT §56.3 documents kitBookFigCol + .kbk-figover (kit-only, no private UI found
    ONE fact per page (14 facts → 14–16 pages); after the late re-layout the page-1 heading showed no name. 1180x820/1366x1024: 130–150 px
    (2–3 facts per page, readable). Needs a minimum text width (coordinator/owner trade-off vs 85–93 % height; 85 % is still in range).
 - Note: phone-width scaling unchanged (narrow portrait not a supported layout per owner 05:50Z) — acceptable.
+
+# Review r9: review/scene-light db2c0efc3 merged onto main b0052d607 — PASS (reviewer R9)
+Branch `review/scene-light-r9` (merge cf0aadcfb; conflicts only in built files assets.json/index.html/sw.js → rebuilt with dev/site/build_site.sh).
+
+## r8 failures
+1. Text cut (.kbk-figover): FIXED. Panel = background + box-shadow spread (no padding/layout cost). book-figwide.js textCut 0 on every page,
+   12 Thái hậu + 3 long-train (m33-t7-a18, c10-t8-a18, m32-t8-a18) + normal c01, 14 facts, at 755x1000 / 1000x755 / 1180x820 / 1366x1024.
+2. Late re-layout: FIXED. kitBookFigCol calls root.__kbk.relayout() (layout(logical,logicalB)); book-relayout.js (h1-a51 and c10-t8-a18,
+   TURNS 1/2) keeps the fact in view at all 4 sizes, 0 window resize dispatched. Extra probe releasing the picture DURING a page turn
+   (0/150/300 ms): fact kept, wide column applied, no stuck state.
+3. Text column: FIXED within the coordinator's limits. Text ≥ 220 px at 755x1000 / 1180x820 / 1366x1024; 182 px at 1000x755 (normal figure
+   there: 169 px — accepted). Figure height 0.849–0.936, never scaled, torso clear 14–28 px, body never cut (cutL 0), name on page 1, 0 broken
+   words, ≥ 2 facts per page. Train past the left edge ≤ 149 px (c10-t8-a18 @1366) ends in the 48 px fade (looked at shots).
+   Screenshots of Thái hậu h1-a51 page 1 at all 4 sizes: face/torso clear, text whole, heading "Thái hậu" on page 1.
+
+## Reviewer change
+- dev/test/book-figwide.js: 8 s warm-up after start() (+ fonts.ready). Without it the FIRST wide figure of a cold page was sometimes measured
+  while the book's paper art/fonts were still loading (__kbkRatio from defaults → transient text 199–202 px for ~5–9 s, then 220 px). Probe on
+  a warm page: column correct within 1–5 s (the CORS shape fetch), text 220 px. Real books open long after load, so not a game bug.
+  With the warm-up: 2 × 2 sizes + 1 full run of all 16 figures × 4 sizes: ALL OK.
+
+## General
+- Old save (mk-oldsave2.js on origin/main build) loads + 3 buổi at 755x1000, 1000x755, 1180x820, 1366x1024, 844x390, 390x844: 0 page errors,
+  0 h-overflow, .stage.kown on.
+- sheet-turn.js and page-curl.js at 755x1000, 1000x755, 1180x820, 1366x1024: one #panel, no overflow, no stuck sheet, errs [].
+- Kit: §56.3 documents kitBookFigCol + .kbk-figover; no private UI.
