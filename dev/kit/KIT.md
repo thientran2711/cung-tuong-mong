@@ -2648,4 +2648,8 @@ mood (liked / did not like) and the rewards; sound + light by mood; a new-day pi
 - Layout: column (picture over list) everywhere; landscape up to 900 px high (phone 844x390, 1000x755, 1180x820) = picture left, list right.
 - Art (gpt-2-6, folder ba4aecfe, no faces, light/dark by tone): `img/kit/ne-night-{warm,normal,cold,lonely}.webp`,
   `img/kit/ne-dawn-{xuan,ha,thu,dong}.webp` (1024x768); festivals reuse the 14 `ev-fest-<k>-b.webp`.
+- **Scene rule (owner 15/11 ~21:45Z, all full-scene pictures):** every full-scene picture serves landscape AND portrait screens. Paint
+  landscape, high-res (≥ 1536 px wide), the subject inside a centred safe zone; store a focal point per picture and crop portrait screens
+  (755x1000 = 3:4, 9:16) around it with `object-position`. **Painted only (owner):** every picture, light and particle here is PAINTED art
+  (Magnific gpt-2-6); code only animates painted sprites (transform / opacity / filter) — no CSS-gradient glows, CSS dots or lines as art.
 - Kit sample page: §62 (all 9 pictures + "Xem thẻ đêm" opens a sample card). Test: `node dev/test/night-end.js <url> <outdir> <WxH,…>`.

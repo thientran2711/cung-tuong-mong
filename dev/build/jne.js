@@ -80,8 +80,10 @@ function tierOf(){const P=N||{};let pts=P.s||0;const why=[`đêm ${pts}`];
 const HELD=[];{const kr=window.kitReward;if(typeof kr==="function"){window.kitReward=function(spec){if(window.__kneHold){HELD.push(spec);return}return kr.apply(this,arguments)};kitReward=window.kitReward}}
 function release(){window.__kneHold=0;const L=HELD.splice(0);L.forEach(x=>{try{kitReward(x)}catch(e){}})}
 /* the option's own result toast during her night is dropped: the night card shows the whole night (before = the night's start) */
-const rs0=resultShow;resultShow=function(title,before){if(title!=="Đêm thị tẩm"&&(window.__kneHold||window.__kneMute)&&!window.__bot)return;if(title==="Đêm thị tẩm"&&N&&S&&!S.dead&&!window.__bot&&typeof kmPush==="function"){try{
+const rs0=resultShow;resultShow=function(title,before){if(title!=="Đêm thị tẩm"&&(window.__kneHold||window.__kneMute)&&!window.__bot)return;if(title==="Đêm thị tẩm"&&N&&S&&!S.dead){try{
+  /* game rule first (bots / no-UI too, so balance runs see the same mood step), then the card */
   const T=tierOf();const m0=N.m0!=null?N.m0:S.emp.mood;const dm=NE.mood[T.tier]||0;let m1=S.emp.mood;if(dm<0)m1=Math.max(0,m1+dm);else if(dm>0&&m1<NE.moodCap)m1=Math.min(NE.moodCap,m1+dm);S.emp.mood=m1;
+  if(window.__bot||typeof kmPush!=="function"){N=null;HELD.length=0;window.__kneHold=0;return rs0.apply(this,arguments)}
   const items=S.inv.slice(N.inv).filter(e=>e&&e.from==="emp");HELD.length=0;window.__kneHold=0;
   window.kneLast={tier:T.tier,pts:T.pts,why:T.why,m0,m1,items:items.map(e=>e.k)};
   const line=T.tier==="warm"?"Nến đỏ cháy suốt canh khuya, tiếng đàn còn vương bên gối.":T.tier==="cold"?"Ngọn nến lụi dần, trăng lạnh soi qua song cửa.":"Côn trùng rỉ rả ngoài hiên, ngọn nến lặng lẽ cháy tới sáng.";
