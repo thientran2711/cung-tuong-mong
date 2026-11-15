@@ -2259,6 +2259,36 @@ the top edge (KIT 33: figures fill the stage), where the scene title (top left) 
 a label over the head would cover either. Pets: no pet card exists on main yet.
 Test: `node dev/test/name-rank.js <url> <outdir> <tag> [sizes]` + `dev/test/fig-fill.js` (chip bottom ≤ painted top).
 
+### 48.1 RANK TITLE · `kitRankTone` + `.krt` / `.krn` (owner, ref. shot of another game: a title floating above the name) — `dev/build/jk4.js`
+The rank / role line above every name is a TITLE, the name under it is plain ink. One look everywhere a rank sits over a name:
+- TITLE: serif `var(--display)` (Noto Serif) bold, letter-spacing .03em, in the rank's OWN colour (`--rt` = `kitRankTone(title)`), with a
+  thin dark outline (8 hairline text-shadows in `--krt-ol` #1c100a) + a soft glow of the same colour (lightened, 3 px + 8 px), no chip,
+  no background — so it reads on painted scenes by day, night, rain, lãnh cung and on parchment dialogs alike.
+- NAME: `--krt-ink` #2a1a12, bold, no colour, no glow (on a painted stage the scene words keep their paper halo, KIT 33.5 / `.krs`;
+  on a dark `.modal.night` panel the name is parchment #f3e6cf).
+- Sizes: title .8rem (a title that IS the name, e.g. "Hoàng thượng", `.j59only`: .92rem); name as before (stage 1rem, knr .98rem).
+  Tuần lục heading: title .62em of the 1.4em heading, on its own line above the name.
+`kitRankTone(title, col)` → colour, ONE table `KIT_RT` keyed by the title's words (so every builder agrees whatever `--rc` it passes):
+
+| title | colour | | title | colour |
+|---|---|---|---|---|
+| Đáp ứng | ivory-champagne #eadbb4 | | Phế phi · lãnh cung | ash #c9d3dc |
+| Thường tại | green #7fcf8a | | Thái hậu | bronze #d39a5e |
+| Quý nhân | blue #78aef0 | | Hoàng thượng | imperial yellow #ffe066 |
+| Tần | pink #f49ac0 | | Cung nữ thô sử / Cung nữ / Đại cung nữ | jade #b9c7c2 / #86d0be / #5cc4b0 |
+| Phi (any "… phi") | purple #c39bea | | Chưởng sự cô cô / Nữ quan / Ma ma | terracotta #e0a88a / periwinkle #a9b4ea / sand #d9b38c |
+| Quý phi | rose-red #f2707a | | Tiểu thái giám / Thái giám / Thủ lĩnh / Tổng quản | sage #bccab4 / green #94c9a0 / steel #8fb4d6 / bronze #d8a27c |
+| Hoàng quý phi | amber #f7a540 | | Thái y · officials · Thị vệ | teal #7fd0c0 · steel blue #9db8e6 · #a8bcd0 |
+| Hoàng hậu | gold #ecbf3c | | Hoàng tử · Công chúa · Người lạ | sky #9ec8f0 · peach #f5b0a0 · grey #c4c4c4 |
+
+Men are never pink/purple. Unknown title → the caller's colour lightened (62 % + white).
+Where it applies (one CSS block `#kit-rt`, nobody styles a title over a name on their own): `kitNameRank` (sets `.krt`/`.krn`), stage name
+tags `.j59t`/`.j59n` (j59 sets `--rt`), 32.7 / kitEventDp captions `.kpsn .kname .kti` (kitName sets `--rt` on `.kti`), person cards
+`.pcrk` over `.pcname` (j15 sets `--rt`) and the sticky strip `.kpstrip`, Tuần lục person heading `.kbk-pname`, honour podium name plates `.kpod-plq` (j90). A title INSIDE a sentence
+(kitName in prose rows) keeps the plain inline look. Kit page sample §48.1: every title on parchment and on a dark scene (`.krs`).
+Test: `node dev/test/rank-title.js <url> <outdir> <tag> [sizes] [day,night,rain,cold,dp,kit,old]` (colours, serif, title above name,
+no tag overlap / cut; OLDURL=<old build> for the old-save case).
+
 ### 32.7b PEOPLE FILL THE COLUMN (owner 11/15, replaces the KIT_FIG .79 scale inside 32.7 columns) — `kitDpFit` (jk4)
 In a 32.7 person column every person stands from just under the name chips (37) down to the column floor: painted top (hair, crown,
 hat) under the chips, feet on the floor, aspect kept. Man and woman alike (no ×1.07 here); children keep their age factor
