@@ -191,3 +191,6 @@ Những gì chưa có trên CDN thì lấy lại từ Magnific theo id trong PRO
 Chờ chỗ trống: người duyệt rank0-ivory + emo-men, poison-gift; thợ pets-fix, sfx, rank-ui. Duyệt fix-float sau khi thợ báo xong.
 Worktree thợ ở /home/user/wt/<tên>. Bản tóm tắt luật cho thợ: /home/user/wt/PREAMBLE.txt, REVIEWER.txt.
 - Phiên 5 nhắn thêm 4 ý 16:50Z (đã có trong OWNER_DECISIONS). Đã đưa LUẬT KIT TRƯỚC lên đầu WORKER_BRIEF + bản cho người duyệt. Hàng chờ thêm: thợ hoa điền thu nhỏ thêm một cỡ (làm mẫu vài mặt cho sếp duyệt trước).
+- 09:50Z (giờ máy): ĐĨA ĐẦY do 20 thợ cùng fetch đầy đủ repo nông → 6 việc bị chặn, đã chạy lại. Luật mới cho thợ: fetch --depth=30 dưới `flock /home/user/wt/fetch.lock`, không clone lại.
+- review/event-honest chưa từng được đẩy (mất theo máy cũ) → event-balance làm lại từ main + opt-render.
+- Đã giao: 16:55Z/16:58Z/17:00Z → fix-float (quét kit Tuần lục); 17:04Z ảnh tin sai người → kit-fig2 (ưu tiên, báo sớm). Hàng chờ: reward-anim (17:02Z), hoa điền thu nhỏ thêm, R rank0-ivory+emo-men, R poison-gift, pets-fix, sfx, rank-ui.
