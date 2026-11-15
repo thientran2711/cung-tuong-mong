@@ -1,4 +1,4 @@
-# PROGRESS review/rank0-ivory (owner 11/15) — base: origin/main (merged d69030384)
+# PROGRESS review/rank0-ivory (owner 11/15) — base: origin/main (origin/main merged at cdebc90f7)
 
 ## DONE
 - f63e764be / 7b9faf092: Đáp ứng = option A (old brown-grey carved frame + crest kept; ivory pearl brocade `bg-consort-0`, pearl gem `gem-0`), KIT_CREST consort-0 restored; RCOL[0] `#9c8f74`; KIT §1.3/§4.1b.
