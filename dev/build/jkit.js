@@ -2,9 +2,9 @@
    The single source of truth for how big full-body people are drawn: h = figure (visible body, head to feet) / stage-or-picture height;
    man = men's height factor; kid(age) = children's factor by age; fac(src,age) = the factor of one figure file for one person.
    Readers: j59 (every room / place stage, consort + servant road), jk4 kitStageFig / kitEventStage + week book (CSS var --kfig). */
-/* table by sex / age (× the adult woman):  adult woman 1 (≈ .86 of the picture) · adult man / eunuch / official / physician 1.08 (≈ .93)
+/* table by sex / age (× the adult woman):  adult woman 1 (≈ .79 of the stage — the ratio the owner approved 11/15 in page-curl shot ipad1180-tab-45, measured .787) · adult man / eunuch / official / physician 1.07 (capped under the ribbon)
    · child a<18: .55 + .03·a (age 5 ≈ .70, 10 ≈ .85, 15 = 1) — heads always stay under the top label (ribbon) */
-const KIT_FIG={h:.86,man:1.08,men:{emperor:1,eunuch:1,official:1,physician:1,man:1},
+const KIT_FIG={h:.79,man:1.07,men:{emperor:1,eunuch:1,official:1,physician:1,man:1},
  kid(a){return typeof a==="number"&&a<18?Math.min(1,.55+.03*Math.max(1,a)):1},
  fac(src,age){const m=/fig-([a-z]+)-/.exec(src||"");return(m&&this.men[m[1]]?this.man:1)*this.kid(age)}};
 window.KIT_FIG=KIT_FIG;

@@ -81,11 +81,15 @@ document.addEventListener("click",e=>{const s=e.target.closest("[data-acsneak]")
 function accDis(html,k){if(!html||!k||!S||S.place===k)return html;const a=accessOf(S,k);if(a.ok||/<button[^>]* disabled/.test(html))return html;return html.replace("<button ","<button disabled ").replace("<small>",`<small><span class="kwhy">${a.why}</span> `)}
 (function(){if(typeof seeBtn==="function"){const s0=seeBtn;seeBtn=function(v){const h=s0.apply(this,arguments);try{return accDis(h,whereOf(v))}catch(e){return h}}}
  if(typeof visitBtn==="function"){const v0=visitBtn;visitBtn=function(v){const h=v0.apply(this,arguments);try{return accDis(h,palaceOf(v))}catch(e){return h}}}})();
-/* THE MAP: grey as a whole when she cannot enter now; reason in grey; the ways in as kit buttons */
+/* THE MAP: a place she cannot enter now keeps the kit map label + a lock mark; the reason and the ways in live in the option card (j77Card) */
 function accSpot(all,cls,k,attrs,inner){const st=accState(k);if(st.here||!st.why)return all;
  attrs=attrs.replace(/\sdisabled/g,"").replace(/title="([^"]*)"/,(m,t)=>`title="${t.replace(/ · (hết khắc|đang cấm túc[^·"]*|đang ở lãnh cung)/,"")} · ${st.why}"`);
- inner=inner.replace(/<span class="mmeta">[\s\S]*?<\/span>(?=<|$)/,"");
- return `<div class="mspot${cls.replace(/\soff/g,"")} off agrey" data-ak="${k}"${attrs}>${inner}<span class="mwhy">${st.why}</span>${accMini(k,st)}</div>`}
+ /* KIT map-label rule (owner 11/15 "map grey box"): a locked place wears the SAME label as every place (name + "N bóng") plus a small lock
+    mark; no grey box over the map art, no reason line, no buttons on the map — a tap opens the kit option card (j77Card: reason, Xin yết
+    kiến / bái kiến, Lẻn vào with odds and khắc) */
+ inner=inner.replace(/(<span class="mlab">[\s\S]*?)(<\/span>)/,`$1${ACC_LOCK}$2`);
+ return `<div class="mspot${cls.replace(/\soff/g,"")} off agrey" data-ak="${k}"${attrs} aria-label="${accName(k)}: ${st.why}">${inner}</div>`}
+const ACC_LOCK=`<svg class="mlock" viewBox="0 0 12 14" width="10" height="12" aria-hidden="true"><path d="M3 6V4.2a3 3 0 0 1 6 0V6" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="1.5" y="6" width="9" height="7" rx="1.5" fill="currentColor"/></svg>`;
 (function(){const m0=mapHTML;mapHTML=function(){let h=m0.apply(this,arguments);if(window.__mapList)return h;
  try{h=h.replace(/<button class="mspot([^"]*)" data-go="([^"]+)"([^>]*)>([\s\S]*?)<\/button>/g,(all,cls,k,attrs,inner)=>accSpot(all,cls,k,attrs,inner));
   h=h.replace('<button class="btn mz" data-maplist="1">','<button class="btn mz" data-acinfo="1" aria-label="Ra vào cung cấm">ⓘ Ra vào</button><button class="btn mz" data-maplist="1">')}catch(e){}
@@ -108,13 +112,12 @@ function accInfo(){if(!S||Q.length)return;const R=n=>`<b>${n}</b>`;
  <p>${R("Thái y viện, Ngự hoa viên")}: sáng, chiều. Tối đóng cửa.</p>
  <p>${R("Kính sự phòng")}: phi tần nào cũng vào. ${R("Trường Môn viện")}: ai cũng vào, bị thấy: Danh -2.</p>
  <p>${R("Cung của ngươi")}: luôn vào được.</p>
- <p>Chỗ xám: không vào được lúc này. <b>Lẻn vào</b>: tốn khắc, bị bắt Danh -8 và bị phạt.</p></div>`,btn:"Đã rõ"});showModal()}
-/* look: grey as a whole */
+ <p>Chỗ có dấu khóa: không vào được lúc này. <b>Lẻn vào</b>: tốn khắc, bị bắt Danh -8 và bị phạt.</p></div>`,btn:"Đã rõ"});showModal()}
+/* look: the same label as every place + a lock mark (no grey box) */
 (function(){const st=document.createElement("style");st.textContent=`
-.mspot.agrey{cursor:default;background:#20201c66;border-color:#9a9a9255;-webkit-backdrop-filter:grayscale(1) brightness(.72);backdrop-filter:grayscale(1) brightness(.72);pointer-events:auto}
-.mspot.agrey:hover{border-color:#9a9a9255;background:#20201c66}
-.mspot.agrey .mlab{opacity:1!important;background:#2b2b28d9;color:#bdbdb4;text-shadow:none}
-.mspot.agrey .msil{filter:grayscale(1);opacity:.6}
+.mspot.agrey{cursor:pointer;pointer-events:auto}
+.mspot.agrey .mlab{opacity:1!important}
+.mspot .mlab .mlock{display:inline-block;vertical-align:-1px;margin-left:4px;opacity:.85}
 .mspot .mwhy{display:block;background:#2b2b28d9;color:#c9c9c0;font-size:.55rem;line-height:1.2;border-radius:6px;padding:0 5px;margin-top:1px;white-space:nowrap;pointer-events:none}
 .mspot.sm .mwhy{font-size:.5rem;padding:0 3px}
 .mspot .macts{display:flex;flex-direction:column;gap:2px;margin-top:2px;align-items:center;z-index:3}
