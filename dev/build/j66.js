@@ -44,3 +44,10 @@ function pidEnforce(){if(!S||!S.pid)return false;let ch=false;S.fid=S.pid;const 
   if(ch&&NLP&&NLP.seed===d.seed)store.set(NL_KEY,d)}}catch(e){console.error(e)}return r}})();
 /* the identity card: show her portrait as soon as it has loaded (the card is a modal, render() alone does not redraw it) */
 (function(){const c0=nlCard;nlCard=function(){const r=c0.apply(this,arguments);try{const src=figFor(S,"por");if(src&&PORK[src]!==1){const im=new Image();im.onload=()=>{PORK[src]=1;try{const m=Q[0];if(NLP&&m&&m.nl){m.faces=[[pMe(),S.name]];showModal()}}catch(e){}};im.src=src}}catch(e){}return r}})();
+/* review/player-dress: a life started past Luân hồi (window.__nlInner: test drivers, tools) used to get no identity and fell back to the
+   old t1-only player looks (t1 dress on the cung nữ road and in lãnh cung). It now takes a free identity at once, before any picture
+   of her is kept, so every life is one of the 84 faces with all its dresses. Loaded saves are untouched (deser does not call start). */
+(function(){const s0=start;start=function(){const r=s0.apply(this,arguments);try{if(window.__nlInner&&S&&!S.pid&&!S.dead){
+  const used=new Set((S.fidUsed||[]).filter(k=>!/^player:/.test(k)));let K=[];try{K=typeof f88Keys==="function"?f88Keys("consort"):pidKeys()}catch(e){K=pidKeys()}
+  const free=K.filter(k=>!used.has(k));const L=free.length?free:K;if(L.length){S.pid=L[Math.floor(Math.random()*L.length)%L.length];
+   S.fidUsed=(S.fidUsed||[]).filter(k=>!/^player:/.test(k));pidEnforce()}}}catch(e){console.error("pid inner",e)}return r}})();

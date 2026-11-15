@@ -57,11 +57,48 @@ def analyse(path):
     dark = (ref_L - L); grey = (np.maximum(Cb, gc - 2) - C)
     sm = skin & (dark >= 7) & (grey >= 3)
     sm = cv2.morphologyEx(sm.astype(np.uint8), cv2.MORPH_OPEN, np.ones((2, 2), np.uint8)) > 0
+    sm = blobs_only(sm, dark, w, h, path, skin=skin, C=C, Cc=Cc)
     hp = (L - cv2.GaussianBlur(L, (0, 0), max(1.0, (x1 - x0) / 60)))[skin]
     frac = float(sm.sum()) / float(skin.sum()); depth = float(dark[sm].mean()) if sm.any() else 0.0
     return dict(file=path, box=[x0, y0, x1, y1], skin=int(skin.sum()), smudge=round(100 * frac, 2), depth=round(depth, 1),
                 mottle=round(float(hp.std()), 2), score=round(100 * frac * depth / 10, 2),
                 Lc=round(Lc, 1), ac=round(ac, 1), bc=round(bc, 1), Cc=round(Cc, 1)), (im, sm, skin, (x0, y0, x1, y1), Lb, Cb, gl, gc)
+
+MEN_ROLES = ("man", "eunuch", "official", "emperor", "physician")
+
+def blobs_only(sm, dark, w, h, path, skin=None, C=None, Cc=None):
+    """CALIBRATION (coordinator 15/11): keep only real smudges = soft, roundish grey patches.
+    Dropped: thin/elongated marks (wrinkles, crow's feet, smile lines — normal on 51+ faces, painted on purpose), marks hugging the
+    eye band (lashes/eye shadow) and anything on men (beard shadow, stubble). 51+ also needs a deeper patch (dark ≥ 10)."""
+    name = os.path.basename(path)
+    parts = name.split("-")
+    if len(parts) > 1 and parts[1] in MEN_ROLES: return np.zeros_like(sm)
+    old = "-a51" in name
+    n, lb, st, _ = cv2.connectedComponentsWithStats(sm.astype(np.uint8), 8)
+    keep = np.zeros_like(sm)
+    amin = (w / 60.0) ** 2; tmin = w / 90.0
+    for i in range(1, n):
+        x, y, ww, hh, ar = st[i]
+        if ar < amin: continue
+        m = (lb[y:y + hh, x:x + ww] == i).astype(np.uint8)
+        thick = float(cv2.distanceTransform(np.pad(m, 1), cv2.DIST_L2, 3).max()) * 2
+        cnts, _ = cv2.findContours(m, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+        (_, _), (rw, rh), _ = cv2.minAreaRect(np.vstack(cnts)); el = max(rw, rh) / max(1.0, min(rw, rh))
+        fill = ar / max(1.0, rw * rh)
+        cy = (y + hh / 2) / h
+        if thick < tmin or el > 3.0 or fill < 0.35: continue          # line-like → wrinkle / fold
+        if 0.30 < cy < 0.47: continue                                  # eye band (lashes, shadow under the eyes)
+        cx = (x + ww / 2) / w
+        if (cx - .5) ** 2 / .32 ** 2 + (cy - .56) ** 2 / .32 ** 2 > 1: continue   # outside the inner face oval (hair line, jaw edge, props)
+        mm = lb == i
+        if C is not None and float(C[mm].mean()) < 0.65 * Cc: continue  # nearly colourless = grey hair / book / collar, not skin
+        if float(dark[mm].mean()) > 22: continue                       # far too dark for a smudge = hair strand / prop edge
+        if skin is not None:
+            ring = (cv2.dilate(mm.astype(np.uint8), np.ones((7, 7), np.uint8)) > 0) & ~mm
+            if ring.any() and float(skin[ring].mean()) < 0.6: continue    # must sit inside skin all round
+        if old and (thick < 1.6 * tmin or float(dark[lb == i].mean()) < 10): continue
+        keep |= (lb == i)
+    return keep
 
 def fix(im, sm, skin, box, Lb, Cb, gl, gc, strength=0.85):
     """tách tần số trên vết bẩn: tông thấp (blur) kéo về nền da trơn; lớp chi tiết (ảnh − blur) giữ nguyên."""
