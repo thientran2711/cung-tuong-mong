@@ -236,3 +236,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (04:55Z) Owner hỏi "tiếng cứng cỏi là sao" → cấm chữ hiệu ứng mơ hồ không có luật thật trong Được/Mất/Kèm; điều tốt không nằm dòng Kèm đỏ. review/sub-odds.
 - (04:55Z) c12 Phi hoa điền đã thu nhỏ (~c03 t1 × 1.2), đẩy CDN.
 - (05:05Z) Owner: nam nhân không thuộc tab Hậu cung → chuyển sang Cung nhân, mục 'Nam nhân đã gặp'; tên nam nhân không trùng; thẻ nam nhân phải có việc hoặc lý do rõ. review/hau-cung-ui.
+- (05:08Z) Owner báo lỗi live: Hậu cung › Phi tần (Hạ Tố Tâm, Dùng chứng cứ) dải người chỉ 1 người, thẻ người co lại ~1/3, cắt tranh và thẻ việc, trống lớn bên dưới → sửa gấp (review/hau-cung-ui, đẩy riêng).
