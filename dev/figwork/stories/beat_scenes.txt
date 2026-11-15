@@ -134,3 +134,31 @@ ch_bi:c2|0|the elderly Empress Dowager gazes searchingly at a consort who sits o
 ch_bi:c3|1|the dignified Empress reads a folded letter by lamplight in her chamber, her maid holding the lamp
 ch_bi:t1|1|an old palace maid with white hair sits in a humble room speaking to a young consort by an oil lamp
 ch_bi:x1|0|the Emperor seated in his study with an old letter on his desk looks up at a consort who enters and bows
+thd_tho:s1|0|a young scholar in plain blue robes recites from an open painted silk fan to a small crowd of scholars at a city teahouse
+thd_tho:s2|1|a consort sits at a writing desk by lamplight composing poetry with a brush, crumpled drafts beside her, papers showing only faint brush marks
+thd_tho:c1|0|in a garden gathering of consorts, one consort points at a painted fan held by another consort, the others turning to look
+thd_tho:c2|1|a shifty eunuch in grey offers a sealed envelope to a consort's maid in a shadowy corridor, the maid hesitating
+thd_tho:c3|1|the Emperor and a consort stand side by side on a moonlit terrace before an open lattice window, the moon reflected in a pond, he gestures to the moon as if posing a riddle
+thd_tho:t1|1|a consort finds an unfamiliar old hand-bound book hidden under her pillow at night, her maid holding a candle, both alarmed but composed
+thd_tho:x1|0|a poetry examination in a snowy courtyard of the Hanlin academy, consorts seated at rows of small desks writing with brushes, snow falling, scholar judges watching
+thd_sach:s1|0|a consort kneels beside an opened old wooden book chest, lifting out a thick bound book with blank covers
+thd_sach:s2|0|a servant in brown robes bows and presents a lacquered gift box to a consort's maid at the palace gate, the consort watching from the steps
+thd_sach:c1|0|an elderly Hanlin scholar in dark blue Ming robes and a black scholar hat turns the pages of a thick bound book while a consort sits opposite at a tea table
+thd_sach:c2|0|a river dike breached in a flood, muddy water rushing over farmland and drowned fields under grey sky, small distant figures on a hill, no Emperor
+thd_sach:c3|0|a consort's chamber in disarray, drawers pulled open and books scattered, a maid kneeling to show the consort
+thd_sach:t1|1|a consort stands by a brazier at night holding a thick book over the flames, hesitating
+thd_sach:x1|0|a consort places a newly printed stack of bound books on a desk in a printing workshop, craftsmen with woodblocks around her
+thd_tro:s1|0|a consort reads a letter in her study, a young scholar's worn writing box on the table
+thd_tro:s2|0|a crowd of young scholars in plain robes gathers before a large blank notice wall outside an academy gate, protesting calmly
+thd_tro:c1|0|a wealthy official in Ming robes secretly passes a pouch of silver to a clerk behind a pillar in a ministry courtyard
+thd_tro:c2|1|a clerk with a lantern searches through tall shelves of rolled examination papers in a dark ministry archive, a consort's maid beside him
+thd_tro:c3|0|a young scholar in plain blue robes, bandaged arm in a sling, sits on a bed in a humble inn room, a friend helping him
+thd_tro:t1|0|in a grand palace hall, young scholars kneel at small desks writing a re-examination while the Emperor watches from the throne
+thd_tro:x1|0|the Emperor seated at his desk with stacked examination papers looks up to ask a consort standing beside him
+thd_hoc:s1|0|a consort teaching a classroom of noisy young children, little princes and princesses about six to nine years old, in a palace study room, some children fidgeting and playing
+thd_hoc:s2|0|a consort kneels gently beside a small boy prince about seven years old sitting alone at a desk, other children laughing at the side
+thd_hoc:c1|0|a consort stands facing another consort who holds the hand of her small son in a palace corridor
+thd_hoc:c2|0|the Emperor arrives at the palace classroom, small children stand at their desks reciting, a consort teacher bowing
+thd_hoc:c3|0|a consort teaches a classroom of small children, other mothers, consorts, watching from the doorway
+thd_hoc:t1|0|an imperial physician attends a small princess about seven years old lying on a couch, her mother consort beside her, the teacher consort standing apart
+thd_hoc:x1|0|in a grand hall young princes about ten years old stand before the Emperor on the throne reciting, ministers watching, a consort among the spectators
