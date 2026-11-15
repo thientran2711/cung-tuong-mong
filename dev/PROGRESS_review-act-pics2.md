@@ -149,3 +149,12 @@ LEFT (unchanged from the list above unless noted)
 - Code: dev/build/jct2.js (after jht in assemble.py) wraps window.h54Face. The Bắc Địch prince always gets bacdich-1, and ordinary suitors only take it if every other face is live.
 - Test: dev/test/suitor-faces.js, 18 known suitors. 0 without a portrait, 0 duplicate faces, the prince gets por-man-bacdich-1, no page errors.
   - Unmet suitors still show the "unknown" silhouette (jht stranger rule, unchanged).
+
+## Session 15/11 late (coordinator order: 5 steps)
+Notes: `cdn_sync.py --pull` does NOT refresh img/_index.json reliably (stale local copy); verify keys against the live index fetched with `curl -A ctm https://ctm-img.victoria-tntt.workers.dev/img/_index.json`. Checker: tmp-free copy in dev/figwork/acts/verify_acts.py (BEFORE AFTER INDEX).
+### Step 1 DONE: 23 full-figure system-line pictures classified (16:50Z rule)
+- ACTION (she does it) -> redrawn hands-only as act-<key>-h.webp (12): ghi-ten-du-thi, bat-dau-bay-muu, ngu-mot-dem, giu-kin-co-thai, chai-chuot-gian-di, chai-chuot-long-lay, chai-chuot-vua-van, thay-y-phuc, thao-trang-suc, deo-trang-suc, deo-mang-che, tu-choi (tu-choi also serves the acts "Từ chối / Khéo từ chối / Từ chối khéo", it showed two women).
+- EVENT/RESULT (kept, people allowed) (12): dung-chot, doat-giai, hang-nhi-ba, nguoi-khac-doat-giai, do-hong-bo, xac-lao-vuong, thi-tam, dem-cung-khac, noi-vu-dua-y-phuc, thieu-le-y-phuc, ht-de-mat-y-phuc, tan-phong (+ duong-xa landscape).
+- Already hands-only: xin-xam, bao-tin-co-thai, to-giac.
+- Live ACTS.json patched with hpatch.py (now skips hgens 'plain name' lines): 3 acts + 13 log rules -> -h; counts unchanged 300/10/547; 0 keys missing in the live index. Patch record: ACTS_hands_patch2.json.
+- Flag for coordinator: doat-giai and nguoi-khac-doat-giai show the Emperor handing the prize (scene text names him); kept.
