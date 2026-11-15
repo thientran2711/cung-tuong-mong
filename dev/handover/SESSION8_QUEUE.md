@@ -27,7 +27,7 @@ CDN uploads OK again (owner saved the Cloudflare token; R2 verified). Use CLOUDF
 ## C. Unfinished workers (§4 + §9)
 | C1 | review/face-sharp (her face hazy on stage; LIVE BUG) | RUNNING wave 1 |
 | C2 | review/rank-colour (owner s8: rank colour in picker rows, whole class) | RUNNING wave 1 |
-| C3 | review/art-complete (eunuch ranks, grown kids, 128 old looks, 56 old-love men, demole) | RUNNING wave 1 |
+| C3 | review/art-complete @ e8a7446e4 (eunuch ranks 360/360 DONE; kids 144, old looks 128, old-love men 56 left) | RUNNING part 2 |
 | C4 | review/act-pics2 @ 5f80a2727 (237/380 live; 143 left from thu-cu-lot) | RESUME later (QUEUED) |
 | C5 | review/skin-match @ 9bb31ae53 (1500/1500 on CDN) | SẴN SÀNG KIỂM → reviewer QUEUED-NEXT |
 | C6 | review/mk-colour (8+8 presets, 8 vụng, lips QA, then reveal scene) | QUEUED |
