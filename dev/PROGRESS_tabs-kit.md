@@ -17,10 +17,16 @@ Base: origin/main 70c792d41 (rebased, fast-forward). Branch tip before this file
   - `dev/test/tabs-kit-shots.js`: 5 sizes, every sub-tab: 0 bad, 0 errors. Shots are in dev/shots/tabs-kit (412x1058, 1180x820).
 - `dev/test/minigame-tap.js` works with the luân hồi start screen and opens the Cầm kỳ thi họa sub-tab.
 
+## Round 2 (resumed in a sparse worktree, main still 70c792d41)
+- Tác phẩm sub-tab rebuilt with kit parts (ktWorksHTML in jtabs.js): kitSkillHead per art, kinds as kchips, ⓘ Tác phẩm gloss; was a paragraph + bare divs. Việc nhờ "Đang làm" stays the kit pcard pager (same as Hậu cung).
+- ktDoable/ktTotal also count `data-wk="prac"` (the real attribute).
+- pane-bar.js: the "content over the bar edge" check only counts elements inside #panel (a game overlay once flaked 1000x755).
+- Re-tested at 755x1000, 1000x755, 1180x820, 1366x1024, 844x390 (+390x844, 412x1058): pane-bar 0 bad, tabs-kit-shots 0 bad, minigame-tap ok, 0 page errors.
+- No rotate prompt exists on main at 390x844 (game simply renders portrait); not in this branch's scope.
+- KIT numbering clash: review/kit-fig2 (WIP) also uses KIT §39 (kitActCompact) and §40 (kitEventDp). Whoever merges second renumbers; when kit-fig2's kitActCompact lands, switch jtabs to it.
+
 ## LEFT
 - kitActCompact is my own spec. When kit-fig2 (a85ed9d7e3e67c112) pushes its kitActCompact, switch to it.
-- After the rebase onto 70c792d41 (shop-fix), the tests were not re-run: the run was cut off (exit 144). Re-run pane-bar and tabs-kit-shots on all 5 sizes.
-- Owner (A): the Việc nhờ "Đang làm" pager and the Tác phẩm (works) section are still the old cards inside the sub-tabs. Make them kit cards too.
 - The bottom-right button "Qua ngày" → "Sang ngày mới" is owned by kit-close. Do not reintroduce "Qua ngày".
 - The pane bar uses sticky-at-top inside #panel: opaque, nothing above it, flush. It is not a separate DOM scroller. If a reviewer requires a real separate scroll body, restructure #panel (jk2b/jhc use P.scrollTop).
 

@@ -25,7 +25,7 @@ let SIZES=args.slice(1).filter((a,i)=>/^\d+x\d+@/.test(a));if(!SIZES.length)SIZE
     /* what is drawn just above and just below the bar's bottom edge, at 3 x positions */
     const xs=[br.left+12,br.left+br.width/2,br.right-14];o.above=[];o.edge=[];
     for(const x of xs){for(let y=Math.ceil(pr.top+bt);y<br.top-0.5;y++){const e=document.elementFromPoint(x,y);if(e&&P.contains(e)&&!bar.contains(e)&&e!==P)o.above.push(y)}
-     const e2=document.elementFromPoint(x,br.bottom-1);if(e2&&!bar.contains(e2)&&e2!==bar)o.edge.push((e2.className||e2.tagName)+'')}
+     const e2=document.elementFromPoint(x,br.bottom-1);if(e2&&P.contains(e2)&&!bar.contains(e2)&&e2!==bar)o.edge.push((e2.className||e2.tagName)+'')}
     return o});
    const rest=await m();await p.evaluate(()=>{const P=document.getElementById('panel');P.scrollTop=Math.min(500,P.scrollHeight)});await p.waitForTimeout(250);const scr=await m();
    const fail=[];if(!rest.hidden){

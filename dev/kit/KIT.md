@@ -1799,4 +1799,5 @@ Kèm + odds ladder), restored the same way from a save (`deserQ`).
 - **Empty state** `kitEmpty(title,line)`: small painted vignette (kitInfoArt) + one short line, no paragraph.
 - **Person rows**: `kitPersonLine(p,{sub})` (portrait + name + what is owed / what is known) inside `.ktprow`, with the act for that person beside it.
 - Tài nghệ = Tứ đức · Cầm kỳ thi họa · Vũ · Y · Nữ công · Tác phẩm; Mệnh truyện = Chương này · Sắc phong · Đã qua; Việc nhờ = Đang làm · Nợ ân · Trong cung. Header numbers are `kchip`s.
+- Tác phẩm (j83 works) = one `kitSkillHead` per art that makes works: what it makes as `kchip`s, "phẩm +bậc", the quality ladder line, and "Tự luyện, làm tác phẩm" (bậc 5) as `kitActCompact`; the rules sit behind `ⓘ Tác phẩm`. Việc nhờ "Đang làm" keeps the kit person card pager (`pcard`, as Hậu cung).
 - Test: `dev/test/tabs-kit-shots.js` (5 sizes, every sub-tab: 0 errors, no horizontal overflow, no clipped card, no Thôi/Lui, sub-tabs in the pane bar).

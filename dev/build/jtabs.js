@@ -38,8 +38,8 @@ function kitSkillHead(o){const l=o.level||0,max=o.max||5;
   <div class="ksk2i"><div class="ksk2n"><b>${o.name}</b>${kitSteps(l,max,o.stepsAttr)}</div>${o.desc?`<small class="ksk2d">${o.desc}</small>`:""}
   ${l<max?kitBar("Tiến bộ",o.prog||0,o.need||0):`<span class="kchip g">Đã tinh thông</span>`}${l<max&&o.next?`<span class="ksk2x"><span class="kchip n">Bậc ${l+1} mở</span> ${o.next}</span>`:""}</div></div>
   ${o.acts&&o.acts.length?`<div class="pcb ksk2a">${o.acts.join("")}</div>`:""}</div>`}
-const ktDoable=h=>(String(h).match(/<button(?![^>]*\bdisabled\b)[^>]*data-(learn|vlearn|charity|wkprac|q72a|q72c)/g)||[]).length;
-const ktTotal=h=>(String(h).match(/<button[^>]*data-(learn|vlearn|charity|wkprac|q72a|q72c)/g)||[]).length;
+const ktDoable=h=>(String(h).match(/<button(?![^>]*\bdisabled\b)[^>]*data-(learn|vlearn|charity|wkprac|wk="prac"|q72a|q72c)/g)||[]).length;
+const ktTotal=h=>(String(h).match(/<button[^>]*data-(learn|vlearn|charity|wkprac|wk="prac"|q72a|q72c)/g)||[]).length;
 /* ---------- TÀI NGHỆ ---------- */
 function ktArtSkills(){const t2=whyTime(2);const out=[];
  for(const V of (typeof VIR!=="undefined"?VIR:[])){const l=S.vir[V.k],cost=virCost(l);const B=l>=5?[]:[
@@ -55,14 +55,23 @@ function ktArtSkills(){const t2=whyTime(2);const out=[];
   out.push({g:["cam","ky","thi","hoa"].includes(a.k)?"cktt":"nc",kind:"art",k:a.k,name:a.n,level:l,prog:S.artp[a.k],need:l+2,desc:((typeof ARTDO==="object"&&ARTDO[a.k])||"")+extra,next:fx[l]?fxItems(fx[l],"n").join(" "):"",acts:B,img,stepsAttr:`data-v85tab="${a.k}"`})}
  return out}
 function ktArtHTML(){try{vNormAll()}catch(e){}const SK=ktArtSkills();const G=[["duc","Tứ đức"],["cktt","Cầm kỳ thi họa"],["nc","Vũ · Y · Nữ công"]];
- let works="";try{works=typeof wkTabHTML==="function"?wkTabHTML():""}catch(e){works=""}
+ let works="";try{works=ktWorksHTML()}catch(e){works=""}
  const list=G.map(([k,label])=>{const L=SK.filter(s=>s.g===k);const h=L.map(s=>s.acts.join("")).join("");return{k,label,doable:ktDoable(h),total:ktTotal(h)}});
  if(works&&works.replace(/<[^>]+>/g,"").trim())list.push({k:"wk",label:"Tác phẩm",doable:ktDoable(works),total:ktTotal(works)||null,n:null});
  const sub=kitSubTabs("art",list);let h=sub.html+`<div class="ktop">${kitInfo("Cách học")}${sub.cur==="duc"?` ${kitInfo("Tứ đức")} <span class="kchip n">Đức <b>${S.duc}</b></span> <button class="lnk ladi" data-v85tab="duc">ⓘ luật Đức</button>`:""}${S.master?` <span class="kchip g">Danh sư còn dạy ${S.master} tháng</span>`:""}</div>`;
- if(sub.cur==="wk")return h+`<div class="ktwk">${works}</div>`;
+ if(sub.cur==="wk")return h.replace(`${kitInfo("Cách học")}`,`${kitInfo("Tác phẩm")}`)+`<div class="ksk2s">${works}</div>`;
  const L=SK.filter(s=>s.g===sub.cur).map(s=>Object.assign(s,{can:s.acts.some(a=>!/\sdisabled[\s>]/.test(a.slice(0,a.indexOf(">")+1)))}));
  L.sort((a,b)=>(b.can-a.can)||((a.level>=5)-(b.level>=5)));
  return h+`<div class="ksk2s">${L.map(kitSkillHead).join("")}</div>`}
+/* Tác phẩm (j83 works): one skill head per art that makes works = picture, bậc, what it makes as chips, the quality ladder;
+   "Tự luyện, làm tác phẩm" (mastered only) as a compact act. Rules behind the ⓘ "Tác phẩm" gloss (was a paragraph + bare divs). */
+function ktWorksHTML(){if(typeof wkKindsOf!=="function"||typeof WK!=="object")return"";const why=whyTime(2)||(S.suc<15?"Sức dưới 15":"");
+ const L=ARTS.map(a=>{const l=S.arts[a.k],ks=wkKindsOf(a.k);if(!ks.length)return null;const img=kitSkillArt("art",a.k,a.n)||(typeof AIMG==="object"&&AIMG[a.k]?AIMG[a.k]:"");
+  const acts=l>=5?[kitActCompact(`data-wk="prac" data-art="${a.k}"`,"Tự luyện, làm tác phẩm",`Chắc chắn · tốn: Sức -10, 2 khắc · thành: một tác phẩm, ${wkOddsTxt(S,ks[0],0)}`,why,ktThumb("Tự luyện, làm tác phẩm",img))]:[];
+  const kinds=ks.map(k=>`<span class="kchip n">${WK[k].w}${WK[k].per?" · để 1 tuần":""}</span>`).join(" ");
+  return{kind:"wk",k:a.k,name:a.n,level:l,prog:S.artp[a.k],need:l+2,desc:`${kinds} <span class="kchip g">phẩm +${l}</span><br>${wkOddsTxt(S,ks[0],0)}`,next:"",acts,img,can:acts.length&&!why}}).filter(Boolean);
+ L.sort((a,b)=>(b.can-a.can)||(b.level-a.level));return L.map(kitSkillHead).join("")}
+KIT_GLOSS["Tác phẩm"]="Mỗi buổi học, tự luyện mà tự tay chơi trò tài nghệ thì ra một tác phẩm (Học nhanh: không ra thành phẩm), cất vào rương để dâng, tặng, bán, bày ở yến tiệc. Phẩm = phần chơi trò tài nghệ 0..10 + bậc tài nghệ + vật liệu. Đồ mua bằng bạc vẫn quý hơn. Môn đã tinh thông (bậc 5) thì tự luyện ra tác phẩm ngay.";
 artTabHTML=function(){return ktArtHTML()};
 /* ---------- MỆNH TRUYỆN ---------- */
 function ktStoryHTML(){const c=S.st.ch,M=S.st.M,m=S.st.ms,Q0=(typeof QUEST67==="object"&&(QUEST67[S.origin.k]||QUEST67.tt))||{t:""};
