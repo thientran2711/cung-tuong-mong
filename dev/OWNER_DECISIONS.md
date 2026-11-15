@@ -440,3 +440,6 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (12:45Z) Trẻ sơ sinh không thể có "Hiền tài". Lúc sinh chỉ có TƯ CHẤT (bẩm sinh, ẩn, chỉ lộ qua lời ladder). Văn/Võ/Đức bắt đầu gần 0, tăng qua dạy dỗ (thầy, mẹ, Hoàng thượng), nhân theo tư chất. Hiền tài suy từ Văn/Võ/Đức, chỉ xét từ 6 tuổi. Trước 6 tuổi xếp kế vị theo đích/trưởng + Hoàng thượng thương.
 - (12:50Z) Hoàng tự trong cung (con phi tần khác): phải hiện điều cả cung biết (mẹ là ai, tuổi, thứ bậc, tước, ai nuôi). Trẻ chưa gặp: hiện bóng xám trẻ con ở mọi chỗ.
 - [ ] (12:55Z) Hình Thái hậu (Tuần lục) bị cắt thẳng mất góc trái áo → vẽ nối áo, cắt lại; rà mọi hình toàn thân bị cắt thẳng ở mép.
+- (13:00Z) Hộp thoại sự việc có người (VIỆC · Có người đến…) to quá: dùng cỡ hộp người chuẩn của kit, vừa nội dung; tên + bậc nằm TRÊN hình.
+- (13:00Z) Lời mời Đoan ngọ dùng ảnh Triều chính + người tí hon, nhãn đè đầu → cần ảnh riêng (thuyền rồng), sửa nhãn đè.
+- LIVE CDN (13:00Z) 136 tranh hành sự đợt 3.
