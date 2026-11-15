@@ -59,11 +59,11 @@ let SIZES=args.slice(1).filter((a,i,A)=>a!=='--shots'&&A[i-1]!=='--shots');if(!S
    const bar=[...root.querySelectorAll('.kbk-bar button')].map(x=>x.innerText.trim());
    return{pages:out,nameCols,md:[...new Set(md)],bar}});
   /* page turn: what the turning copy shows must already be decoded, the live sheets are not rebuilt */
-  R.turn=await p.evaluate(async()=>{const bk=window.__kbk;const root=document.querySelector('.kbk');const res={steps:[],rebuilt:0,undecoded:[]};
+  R.turn=await p.evaluate(async()=>{const bk=window.__kbk;const root=document.querySelector('.kbk');await kitImgSync(root);const res={steps:[],rebuilt:0,undecoded:[]};
    const ids=()=>[...root.querySelectorAll('.kbk-sheet')];for(let k=0;k<Math.min(5,bk.max);k++){const before=ids();
     const watch=new MutationObserver(()=>{});let bad=[];
     const chk=()=>{for(const im of root.querySelectorAll('.ksht img,.kbk-sheet img')){const sh=im.closest('.ksht,.kbk-sheet');if(sh.style.visibility==='hidden'||getComputedStyle(sh).visibility==='hidden')continue;
-      if(!im.complete||!im.naturalWidth)bad.push(im.src.split('/').pop());else if(im.closest('.ksht')&&im.decoding!=='sync')bad.push('async:'+im.src.split('/').pop())}};
+      if(!im.complete||!im.naturalWidth)bad.push((im.closest('.ksht')?'copy:':'live:')+(im.complete?'broken:':'loading:')+im.src.split('/').pop());else if(im.closest('.ksht')&&im.decoding!=='sync')bad.push('async:'+im.src.split('/').pop())}};
     bk.next();await new Promise(r=>requestAnimationFrame(()=>r()));chk();await new Promise(r=>setTimeout(r,1600));chk();
     const after=ids();res.rebuilt+=before.filter((x,i)=>x!==after[i]).length;res.undecoded.push(...bad)}
    res.undecoded=[...new Set(res.undecoded)].slice(0,8);return res});
