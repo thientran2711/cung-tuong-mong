@@ -278,7 +278,8 @@ function kpBuild(M,m){const dlg=M.querySelector(".dlg"),mb=$("mb"),mt=$("mt");if
    one word per line); labels wrap inside that column, every value starts at the same x. */
 .kpkb{font-size:.84rem;grid-template-columns:fit-content(var(--kt-lab,max(34%,7rem))) minmax(0,1fr)}
 .kpkb .krl{padding-top:.18rem;white-space:normal;overflow-wrap:normal;word-break:normal;hyphens:none;line-height:1.25}
-.kpkb .krl .md{vertical-align:middle;margin-right:4px}
+/* a person label: small face, name beside it (wraps beside the face) */
+.kpkb .krl:has(>.md){display:flex;align-items:center;gap:5px}.kpkb .krl>.md{flex:none;margin:0}
 /* tiers */
 .ktiers{display:flex;flex-direction:column;gap:4px}
 .ktier{display:grid;grid-template-columns:5.2rem minmax(0,1fr) auto;gap:8px;align-items:center;padding:5px 8px;border:1px solid var(--k-hair);border-radius:var(--k-rad);background:linear-gradient(90deg,rgba(194,59,34,calc(var(--lv)*.16)),transparent 70%),var(--k-card)}
