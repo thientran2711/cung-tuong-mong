@@ -401,3 +401,6 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (10:52Z) Bỏ rùa khỏi thú cưng: Linh quy ngàn năm → Thiên mã (Ngự tứ); Bạch quy → Hạc đỉnh hồng (Trân phẩm).
 - (10:55Z) Hoa văn trên thú theo giai đoạn: non ít/không có, càng lớn càng đẹp, Linh thú đẹp nhất.
 - (10:57Z) Linh thú: khác trưởng thành bằng chính tranh vẽ (dáng uy nghi, bộ lông/hoa văn/trang sức), KHÔNG dùng hiệu ứng phát sáng.
+- (11:05Z) Tư trang chia 2 tab nhỏ: "Việc" và "Túi đồ" (túi + ô Đang mặc thấy ngay, không phải cuộn).
+- (11:05Z) Bỏ khung "Tin trong cung" đầu buổi (trùng Tuần lục, gây rối). Tin người khác chỉ vào Tuần lục (có dấu tin mới). Việc ảnh hưởng tới nàng vẫn báo ngay bằng thẻ ngắn ghi rõ.
+- (11:05Z) Da mặt một số nhân vật bị dơ/vệt tối → quét toàn bộ, đề xuất làm sạch nhẹ (không vẽ lại mặt).
