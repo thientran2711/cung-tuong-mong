@@ -18,7 +18,7 @@ OUT = W + "/out"; os.makedirs(OUT, exist_ok=True); os.makedirs(W + "/bg", exist_
 import importlib.util
 def _load(n, f):
     sp_ = importlib.util.spec_from_file_location(n, f); m = importlib.util.module_from_spec(sp_); sp_.loader.exec_module(m); return m
-sp = _load("spfuncs", REPO + "/dev/figwork/maidC/spfuncs.py"); porcrop = _load("porcrop", REPO + "/dev/figwork/porcrop.py")
+sp = _load("spfuncs", REPO + "/dev/figwork/maidC/spfuncs.py"); porcrop = _load("porcrop", REPO + "/dev/figwork/porcrop.py"); refine = _load("refine", HERE + "/refine.py")
 AG = ["a18", "a26", "a36", "a51"]
 FONT = "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
 
@@ -85,7 +85,8 @@ def load_cut(role, ident, g, gen, bg):
     global _raw
     if bg == "-":
         _raw = get(gen, f"{W}/bg/{gen}.png"); im = Image.open(_raw).convert("RGB")
-        return cut(im.resize((im.width // 2, im.height // 2), Image.LANCZOS) if im.height > 1100 else im)
+        im = im.resize((im.width // 2, im.height // 2), Image.LANCZOS) if im.height > 1100 else im
+        return refine.refine(im, cut(im))  # colour key vs plain backdrop: pale robes/sleeves/hair isnet left semi-transparent (c13-c19)
     _raw = get(bg, f"{W}/bg/{bg}.png"); return Image.open(_raw).convert("RGBA")
 _raw = None
 
@@ -157,8 +158,10 @@ def publish(ids):
             for ag in AG:
                 for k in ("fig", "por"): shutil.copy2(f"{OUT}/{k}-{role}-{ident}-ty{g}-{ag}.webp", f"{REPO}/img/")
     mp = REPO + "/img/FIGURES-ty.json"; R = {r["file"]: r for r in (json.load(open(mp)) if os.path.exists(mp) else [])}
-    R.update(recs(True))
-    L = sorted((r for r in R.values() if os.path.exists(REPO + "/" + r["file"]) and os.path.exists(REPO + "/" + r["por"])),
+    # old records stay (their files may live only on the CDN: img/ is pulled lazily and cleaned after upload);
+    # new records only for the role-ids published now
+    R.update({k: v for k, v in recs(True).items() if f'{v["role"]}-{v["identity"]}' in ids})
+    L = sorted(R.values(),
                key=lambda r: (r["role"] != "consort", r["identity"], r["ty"], r["ageBand"]))
     json.dump(L, open(mp, "w"), ensure_ascii=False, indent=0); print("FIGURES-ty.json", len(L))
 
