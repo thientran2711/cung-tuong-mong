@@ -150,8 +150,9 @@ function accEtqGo(k,h,greet,then){if(!S||S.dead||Q.length)return;const sh=h.name
  const C=ACC_ETQ,sg=n=>(n>0?"+":"")+n;
  if(greet){if(!j77Kh(travel(S.place,k)+C.khac))return;spend(C.khac);relAdd(S,h,C.okAff);log(`Ngươi cúi chào, bái kiến ${accRkName(h)} ${h.name} ở ${accName(k)}: chủ vị quý ngươi ${sg(C.okAff)}.`)}
  else{if(C.mode==="required")return;const a=accSkipAff(h,S);relAdd(S,h,a);if(C.skipDanh)apply({danh:C.skipDanh});log(`<span class="r">Vào ${accName(k)} không chào chủ vị ${h.name}: thiếu lễ, chủ vị quý ngươi ${sg(a)}${C.skipDanh?`, Danh ${sg(C.skipDanh)}`:""}.</span>`)}
- try{if(bf)resultShow(greet?`Bái kiến ${accRkName(h)} ${h.name}`:`Vào ${accName(k)} không bái kiến`,bf,true)}catch(e){}/* act audit: the change came after the dialog had closed, so no result card showed it */
- accGrant(S,k);then()}
+ accGrant(S,k);then();
+ /* act audit: the change came after the dialog had closed, and the arrival card ("không đổi gì") covered it: show it after arriving */
+ setTimeout(()=>{try{if(bf)resultShow(greet?`Bái kiến ${accRkName(h)} ${h.name}`:`Vào ${accName(k)} không bái kiến`,bf,true)}catch(e){}},30)}
 /* the gate: every way in (map, person card, follow) passes the greeting first */
 (function(){const g0=goTo;goTo=function(k){if(!S||!k||k===S.place||k==="home"||window.__accSilent||window.__j77etq)return g0.apply(this,arguments);
  const h=accEtq(S,k);if(!h||S.dead||Q.length||S.out||S.confined||!accessOf(S,k).ok)return g0.apply(this,arguments);
