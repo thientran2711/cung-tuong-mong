@@ -37,5 +37,18 @@ bash dev/measure/pass/sensloop.sh <abs path>/index.html <dir>/s <origin offset> 
 python3 dev/measure/anpass.py ev <label> <dir>/b_*.json ; python3 dev/measure/anpass.py sens <label> <dir>/s_*.json
 ```
 
+## Bạc ↔ road without silver (owner rule via coordinator, 15/11 evening)
+- Scan: `NODE_PATH=$(npm root -g) node dev/measure/bacroad.js <page> <out.json> [val.json]` → table `<out>.md` + summary. Every bạc choice
+  (j67 chapter beats, j72 phụ tuyến steps, jecon scheme pairs, jrest, monthly duty) at ranks 1/3/5, both roads priced in khắc:
+  1 bạc = 16 / (bạc earned per tuần at that rank: 17/20/25/40/45/51/60/70 for ranks 0..7, sensible-bot flow, inpromo.js), 1 Sức = 1/6 khắc
+  (nghỉ một lát), Danh 4.2 / Đức 8 / Sủng 4 khắc a point, a relation point 1/3 khắc; odds: E = p·V − (1−p)·loss, V = max(gains, price).
+  gap = (E other − E silver) / price; |gap| ≤ 0.3 = she hesitates.
+- Fix (jstory `altCost`, BAL.bacTuan + BAL.altK): the road without silver costs Sức + lower odds (+ khắc on j72) in proportion to the
+  price in khắc at her rank (floors = the old flat road). jrest restDsSuc 24 / restDsBac 6; jecon dutySkip.duc 0, selfMinus 8,
+  loyalCost 25, favorCost 30. Before/after: dev/review/bacroad-before.md, dev/review/bacroad-after.md.
+- Left: j72 bạc prices are not scaled by rank (a 15-bạc step is cheap at rank 5, dear at rank 1) → rank 1 j72 pairs stay "other road
+  obvious"; scheme prices at rank 1 (40 bạc ≈ 2 tuần of income) make the free roads obvious there (owner's schemeRk design).
+  Wording: some j72 roads read oddly ("Trả {A} 66 bạc (nhờ người, không dùng bạc)", repaying a loan without silver) — story text owner.
+
 ## Results
 (see the final report section below; filled at the end of the pass)
