@@ -37,7 +37,8 @@ Owner 15/11: scene-light fixed only her room (Ngọc Thanh các) — check every
   colour spread 2.4–7.2 vs 8.5–12.3 for their sáng sibling): tam-cung-dem (Ngọc Thanh các) xuan/ha/thu/dong-trua, tu-ninh-cung (Đức Thọ)
   ×4 trưa, phi-tan-cung-ha-trua. This is the "her room at trưa all brown" the owner saw — it is IN the picture, no code filter left.
   The script writes a proposed Lab re-grade (colour spread restored, cast halfway to the sáng sibling, L* untouched) + sheet; NOT uploaded.
-  To ship: look at .ahcache/onetone/*.webp, copy to img/, `python3 dev/site/cdn_sync.py img/<files>`.
+  To ship: re-run the script (input = the 160 CDN paintings, e.g. the scan cache .ahcache/img), look at every output, copy to img/,
+  `python3 dev/site/cdn_sync.py img/<files>`.
 
 ## Known / not code
 - Tân Giả khố and Lãnh cung share the lãnh cung painting (sc "lc"); the cung nữ room uses her room painting (tam-cung). Art gap, not a

@@ -41,9 +41,9 @@ const GREY='data:image/png;base64,'+(()=>{/* 60x150 flat grey PNG, built by hand
  const clean=()=>p.evaluate(()=>{Q.length=0;for(const e of [...document.body.querySelectorAll('*')]){const cs=getComputedStyle(e);if(cs.position==='fixed'&&/Luân hồi|Tiếp/.test(e.textContent||'')&&!e.closest('#stage'))e.remove()}
   const k=document.getElementById('kroul');if(k)k.remove();const m=document.getElementById('modal');if(m){m.classList.remove('on');m.hidden=true}const d=document.getElementById('dawn');if(d)d.hidden=true});
  await clean();
- /* scan-only CSS: .zpcs hides text + people (scene pixels), .zpcr also switches off every scene filter/overlay (painting as painted) */
- await p.addStyleTag({content:`.zpcs .stop,.zpcs .tokens,.zpcs .tok,.zpcs .kmemark,.zpcs .ksh,.zpcs .j59sz,.zpcs #popw{visibility:hidden!important}
-  html body .stage.zpcr .scimg,html body .stage.zpcr>.pxc{filter:none!important}html body .stage.zpcr>.light{display:none!important}html body .stage.zpcr::after,html body .stage.zpcr::before{display:none!important}html body .stage.zpcr{box-shadow:none!important;filter:none!important}
+ /* scan-only CSS: html.zpcs #stage hides text + people (scene pixels), .zpcr also switches off every scene filter/overlay (painting as painted) */
+ await p.addStyleTag({content:`html.zpcs #stage .stop,html.zpcs #stage .tokens,html.zpcs #stage .tok,html.zpcs #stage .kmemark,html.zpcs #stage .ksh,html.zpcs #stage .j59sz,html.zpcs #stage #popw{visibility:hidden!important}
+  html.zpcr #stage.stage .scimg,html.zpcr #stage.stage>.pxc{filter:none!important}html.zpcr #stage.stage>.light{display:none!important}html.zpcr #stage.stage::after,html.zpcr #stage.stage::before{display:none!important}html.zpcr #stage.stage{box-shadow:none!important;filter:none!important}
   #pcprobe{position:absolute!important;left:44%!important;bottom:3%!important;top:auto!important;right:auto!important;transform:none!important;z-index:3;background:none;border:0;padding:0;width:60px;height:150px}#pcprobe .figimg{width:60px;height:150px;display:block}`});
  await p.evaluate(G=>{const pr=document.createElement('button');pr.id='pcprobe';pr.className='tok fig';pr.innerHTML=`<img class="figimg" src="${G}">`;window.__pcpr=pr;document.body.appendChild(pr)},GREY);await p.waitForTimeout(300);
  /* places: one per scene + one consort palace per tier (rp0..rp3) + Tân Giả khố */
@@ -80,11 +80,11 @@ const GREY='data:image/png;base64,'+(()=>{/* 60x150 flat grey PNG, built by hand
       prR:(r=>({x:r.x-st.getBoundingClientRect().x,y:r.y-st.getBoundingClientRect().y,w:r.width,h:r.height}))(pr.querySelector('img').getBoundingClientRect())}},GREY);
    const id=`${name}-${se}-${bu}-${wi}`,el=await p.$('#stage');
    await el.screenshot({path:`${OUT}/f/${id}.jpg`,type:'jpeg',quality:88,animations:'disabled'}).catch(()=>{});
-   await p.evaluate(()=>document.getElementById('stage').classList.add('zpcs'));
+   await p.evaluate(()=>document.documentElement.classList.add('zpcs'));
    await el.screenshot({path:`${OUT}/s/${id}.jpg`,type:'jpeg',quality:82,animations:'disabled'});
-   await p.evaluate(()=>{const st=document.getElementById('stage');st.classList.add('zpcr');try{if(PX.app)PX.app.render()}catch(e){}});
+   await p.evaluate(()=>{document.documentElement.classList.add('zpcr');try{if(PX.app)PX.app.render()}catch(e){}});
    await el.screenshot({path:`${OUT}/r/${id}.jpg`,type:'jpeg',quality:82,animations:'disabled'});
-   await p.evaluate(()=>{const st=document.getElementById('stage');st.classList.remove('zpcs','zpcr');const pr=document.getElementById('pcprobe');if(pr)pr.remove();try{if(PX.app)PX.app.ticker.start()}catch(e){}});
+   await p.evaluate(()=>{document.documentElement.classList.remove('zpcs','zpcr');const pr=document.getElementById('pcprobe');if(pr)pr.remove();try{if(PX.app)PX.app.ticker.start()}catch(e){}});
    rows.push({id,place:name,k,se,bu,wi,wx:wn,...info});
    if(rows.length%40===0)console.log(rows.length,'states',Math.round((Date.now()-t0)/1000)+'s')}}
  /* Dư đồ map: 4 seasons × 4 buổi + every festival day (tab "go") */
