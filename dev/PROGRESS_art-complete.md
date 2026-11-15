@@ -14,6 +14,14 @@ HOLD (owner): old-save player looks (128), promoted old-love men (56).
 - Batch 5: KC maid faces m01-m13 = 39 figs + 39 por (kc_bg4.txt). Same noblewoman prompt (kc maids are bride-pool ladies too), prop set = (n-1)%6 of kc_props.py SETS.
 - Batch 6: KC maid faces m14-m26 = 39 figs + 39 por (kc_bg5.txt).
 - Batch 7: KC maid faces m27-m39 = 39 figs + 39 por (kc_bg6.txt).
+- Forehead-mark sweep (coordinator 15/11, after reviewer found moles on c05/c08): kc_prompt.txt now says "no mole, no forehead mark,
+  no bead between brows ... clean bare forehead and brow area". New tool dev/figwork/artcomplete/demole_por.py (haar face box ->
+  central forehead strip down to the brow line -> small dark spot -> cv2 inpaint, in place; figs: head area x4; -n = dry run).
+  Every por c11-c32 + m01-m39 (a26/a36/a51) viewed zoomed at the brows (browsheet), before/after. Fixed + re-uploaded:
+  por (38): consort-c11-kc-a26 consort-c11-kc-a51 consort-c17-kc-a26 consort-c17-kc-a36 consort-c17-kc-a51 consort-c19-kc-a36 consort-c19-kc-a51 consort-c21-kc-a26 consort-c21-kc-a36 consort-c21-kc-a51 consort-c23-kc-a26 consort-c23-kc-a36 consort-c23-kc-a51 consort-c25-kc-a36 consort-c26-kc-a26 consort-c26-kc-a36 consort-c26-kc-a51 consort-c29-kc-a26 consort-c29-kc-a36 consort-c29-kc-a51 consort-c32-kc-a26 consort-c32-kc-a36 consort-c32-kc-a51 maid-m06-kc-a26 maid-m06-kc-a36 maid-m06-kc-a51 maid-m10-kc-a26 maid-m10-kc-a36 maid-m10-kc-a51 maid-m11-kc-a36 maid-m14-kc-a36 maid-m19-kc-a36 maid-m19-kc-a51 maid-m20-kc-a26 maid-m20-kc-a36 maid-m20-kc-a51 maid-m29-kc-a51 maid-m36-kc-a36
+  fig (35): consort-c11-kc-a26 consort-c11-kc-a36 consort-c11-kc-a51 consort-c17-kc-a26 consort-c17-kc-a36 consort-c17-kc-a51 consort-c19-kc-a36 consort-c19-kc-a51 consort-c21-kc-a26 consort-c21-kc-a36 consort-c21-kc-a51 consort-c23-kc-a26 consort-c23-kc-a36 consort-c23-kc-a51 consort-c25-kc-a36 consort-c26-kc-a26 consort-c26-kc-a36 consort-c26-kc-a51 consort-c29-kc-a26 consort-c29-kc-a36 consort-c29-kc-a51 consort-c32-kc-a26 consort-c32-kc-a36 consort-c32-kc-a51 maid-m06-kc-a36 maid-m06-kc-a51 maid-m10-kc-a26 maid-m10-kc-a36 maid-m10-kc-a51 maid-m14-kc-a26 maid-m14-kc-a36 maid-m19-kc-a36 maid-m20-kc-a26 maid-m20-kc-a36 maid-m20-kc-a51
+  (2 por spots done by hand: m29-a51 dot, m36-a36 light bead.) The a18 sheets were not in scope.
+  NEW FACES: run demole_por.py -n on new por/fig and look at the brow crops before upload.
 - Code (dev/build/jartc.js, appended to assemble.py; site rebuilt with dev/site/build_site.sh):
   1. married spouses (k.hW.s phò mã, k.pW.chinh / trac) age +1 each new year (wrap of ageYear);
   2. staff maids whose first face comes at 36+ take a free maid identity (full rank x age), mama pool = fallback.
