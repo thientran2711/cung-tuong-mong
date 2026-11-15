@@ -72,7 +72,7 @@ Went LIVE via session 7: month-calendar r1, chap-label r1, item-events r1 (§64)
 - review/idea-history (aa1714ed) + review/idea-design (17b2ba71) — DONE docs: dev/ideas/HISTORY_IDEAS_1115.md, DESIGN_IDEAS_1115.md.
 
 ### Reviewers running (branch → r1)
-rank-title (+ her-name gold glow, dp caption box removal, vivid colours, glow only on paintings), recipes (cut — see below) (+ level-up grants a recipe, 4 sub-styles everywhere, Công/Dung/Ngôn/Hạnh sub-styles, Kỳ in sub-style UI), place-colour.
+recipes (cut — see below) (+ level-up grants a recipe, 4 sub-styles everywhere, Công/Dung/Ngôn/Hạnh sub-styles, Kỳ in sub-style UI), place-colour.
 
 ### READY, reviewer NOT yet spawned
 - review/coop-pets @ 3236348b6 — co-op pet help/harm/steal relay, late-act re-send, gifts to friend reach her, NPC pets host-only, Ngự tứ text fix, label stays 'No'; coop-e2e 3×59/59 (E2E_TO=120000), coop-pets.js 44/44. Audit dev/coop/COOP_AUDIT.md: BROKEN in co-op → B2 nights (host must pick the Emperor's night; shared heir), B4 festivals + NPC schemes skip the guest, B3 Emperor death off in co-op, B1 item/kid steal + servant acts, B5 exam seat caps → co-op worker after review.
@@ -111,3 +111,5 @@ KIT registry additions by session 7: §64 item-events, §65 promo-reward, §66 r
 - (s7 add) LIVE main = placeholder-pics r1 (ddde2842d): 4 placeholder pictures (KIT §59), act/exam picture slot kept; MISSING_PICS.md: events 1/303 (e68:flowerBloom), acts 18/95 on placeholder → art queue.
 - (s7 add) act-pics2 @ f224e35d4: 192/380 live; 25 night-sky darks in keys 1–92 redrawn as K-g-h (cache-safe names). Next from key 193 (scenes 193–212 written). Coordinator decisions for next worker: redraw sai-khat-bong (pink floral on a man → no pink), redraw bao-cung-chinh-ti (3–4 figures = group), say-thai (miscarriage) tone → dark (fix tag in redraw_order.txt and redraw).
 - (s7 add) Owner 22:55Z co-op timer additions (Tạm dừng for both, generic waiting line, lag-safe absolute deadline + clock offset, grace, reconnect, latency e2e) → sent to coop-timer worker.
+- (s7 add) LIVE main = rank-title r1 (43daceaf3): vivid rank tones (≥4.4:1), glow/outline only on paintings, plain in framed UI; her name gold glow on paintings / black bold in UI (§48.1b); no box around dp captions (§48.1c).
+- (s7 add) HIGH PRIORITY REGRESSION: at 844x390 the stage tags overlap (Quý phi / Đáp ứng) and figures squeeze bottom-left beside '+2' — clean on e5a327d1, broken on d8b81af9 (likely small-bugs-2 r6 'j59 panel side by centre'). Fix first on the new account. Owner questions from rank-title: Thái hậu title bronze vs plum frame; Hoàng thượng #8f6800 vs Hoàng hậu #8c5f00 look alike; Đáp ứng muted on paintings.
