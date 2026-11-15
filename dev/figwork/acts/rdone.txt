@@ -82,3 +82,11 @@ doc-thuc-quet-don doc-thuc-quet-don-h
 dot-tho dot-tho-h
 dung-chot dung-chot-h
 dung-ve-dai-hy dung-ve-dai-hy-h
+duoc-be-con duoc-be-con-h
+duoc-thang-cung-nu duoc-thang-cung-nu-h
+duoc-thay-mat duoc-thay-mat-h
+duoi-di duoi-di-h
+dut-bac-xin-giu dut-bac-xin-giu-h
+gia-nhap-phe gia-nhap-phe-h
+gia-say-thai gia-say-thai-h
+gia-thai-bi-lat gia-thai-bi-lat-h
