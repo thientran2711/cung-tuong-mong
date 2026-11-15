@@ -65,7 +65,7 @@ function stipAlly(p){const st=stipSt(p);if((st.tips||0)>=BAL.stip.allyTips)retur
  const e=(p.staff||[]).find(s=>s.role==="eunuch"&&!s.spyFor&&(s.loyal||0)>=BAL.stip.allyLoyal);return e?`thái giám ${e.name} của cung có người quen ở Nội vụ phủ`:""}
 /* the visible causes this month (same for her and every NPC) */
 function stipCauses(p,cut){const B=BAL.stip,st=stipSt(p),C=[],r=rkOf(p);
- if((p.sung||0)<B.lowSung)C.push({k:"sung",txt:`${p===S?"ngươi":"nàng"} thất sủng (Sủng ${p.sung||0})`});
+ if((p.sung||0)<B.lowSung)C.push({k:"sung",txt:`thất sủng (Sủng ${p.sung||0})`});
  else if(st.sung0!=null&&st.sung0-(p.sung||0)>=B.dropSung)C.push({k:"sung",txt:`Sủng sa sút (${st.sung0} → ${p.sung||0})`});
  if(st.rk0!=null&&r<st.rk0)st.fault=S.turn;
  if(p.confined>0)C.push({k:"fault",txt:"đang bị cấm túc"});else if(st.fault!=null&&S.turn-st.fault<=B.faultM)C.push({k:"fault",txt:st.rk0!=null&&r<st.rk0?"vừa bị giáng phẩm":"vừa phạm lỗi, bị phạt"});
@@ -73,7 +73,7 @@ function stipCauses(p,cut){const B=BAL.stip,st=stipSt(p),C=[],r=rkOf(p);
  if(!sup){const L=consorts().filter(v=>v!==p&&!v.out&&v.alive!==false&&rkOf(v)>r&&rkOf(v)>=B.supRank&&oan(v,p)>=B.oan).sort((a,b)=>oan(b,p)-oan(a,p));sup=L[0]||null}
  if(sup)C.push({k:"sup",v:sup,txt:`${rkName(sup)} ${sup.name} có oán, sai Nội vụ phủ chèn ép`});
  const W=stipW();const tipped=st.tip!=null&&S.turn-st.tip<B.tipM;const pun=W.pun!=null&&S.turn-W.pun<B.punishM;
- if(W.greedy&&!tipped&&!pun)C.push({k:"eun",txt:`${stipEunName()} lo việc phát bổng vốn tham, chưa được lót tay`});
+ if(W.greedy&&!tipped&&!pun)C.push({k:"eun",txt:"thái giám Nội vụ phủ lo việc phát bổng vốn tham, chưa được lót tay"});
  if(p.maid&&((p.maid.loyal||0)<B.maidLoyal||p.maid.spyFor))C.push({k:"maid",txt:`cung nữ ${p.maid.name} không một lòng, để mặc người ta bớt xén`});
  return{C,sup}}
 function stipSkim(p,base,cut){try{if(!p||p.out||p.dead||rkOf(p)>=7||p.queen||(p===S&&typeof isSrv==="function"&&isSrv()))return null;
@@ -119,7 +119,7 @@ function stipReportTo(SK){const q=queenP();const hhBehind=q&&q!==S&&SK.sup===q;c
 function stipEvent(G,SK){const B=BAL.stip,r=rkOf(S),st=stipSt(S),W=stipW();const tip=B.tip[Math.min(7,r)];const eun=stipEunName();
  const miss=G.filter(g=>g.kem||g.lost).map(g=>g.lost?`thiếu ${stipNm(g.k0,g.n0).replace(/^\d+ \S+ /,"")}`:`${stipNm(g.k,g.n)} thay ${stipNm(g.k0,g.n0)}`);
  const rows=[["Lĩnh được",stipGoodsTxt(G)||"không có đồ","n"]];if(SK.bac)rows.push(["Thiếu bạc",`Bạc −${SK.bac}`,"r"]);if(SK.cut)rows.push(["Khất bổng",`theo ý ${rkName(SK.sup||queenP())}: bớt 3 phần 10 bạc`,"r"]);if(miss.length)rows.push(["Bị đổi, bớt",miss,"r"]);
- const h=`<p>${eun} đưa bổng lộc tới, mắt không dám nhìn thẳng: vải thô, trà mốc, bạc thiếu.</p>${kitRows(rows)}${typeof kitHintRow==="function"?kitHintRow(`Vì ${SK.why}.`):`<p class="past">Vì ${SK.why}.</p>`}`;
+ rows.push(["Gợi ý",`<span class="ef i">Vì ${SK.why}.</span>`]);const h=`<p>${eun} đưa bổng lộc tới, mắt không dám nhìn thẳng.</p>${kitRows(rows)}`;
  const back=()=>{if(SK.bac)apply({bac:SK.bac});return stipRestore(S,G)};
  const O=[{n:"Nhịn",fx:{},x:"không được không mất · kèm: tháng sau dễ bị bớt xén nữa",go:()=>{st.meek=S.turn;log("Ngươi nhịn, không nói gì. Nội vụ phủ biết cung ngươi dễ bảo.")}}];
  const supTxt=SK.sup?`${rkName(SK.sup)} ${SK.sup.name}`:"";

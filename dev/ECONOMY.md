@@ -83,3 +83,28 @@ Tiền rảnh mỗi tháng (bổng − công − lễ nghĩa, tháng không cấ
 Hoàng hậu / Đáp ứng ≈ 3,5× (trước: 320 / 30 = 10×). Ghi chú: kẻ hầu của nàng trong bot hầu như 0 (S.staff trống; cung nữ thân tín là S.maid,
 không tính công) nên công kẻ hầu gần như không trừ — lễ nghĩa mới là phần tăng theo phẩm. Cấm túc rất hay (bổng nửa) ở bậc thấp.
 Đo lại: `OUT=dir bash dev/measure/run5e.sh <game> <nhãn> 8`, rồi `python3 dev/measure/anecon.py dir/<nhãn>_?.json`, `python3 dev/measure/anx.py <nhãn> dir/<nhãn>_?.json`.
+
+## 6. Stipend goods are real items (owner 15/11 17:30Z, review/econ-stipend, dev/build/jstip.js)
+- `BAL.stip.goods[rank]` (+ winter coal `BAL.stip.coal[rank]`) are pushed into `p.inv` each month as real items (`from:"noivu"`), with
+  picture (j98 itemArt), grade and use: Vải bông / Lụa Hàng Châu / Gấm Tô Châu (may áo, tặng, bán), Trà Long Tĩnh / Trà Quân Sơn ngân châm
+  (uống, tặng, "Pha … mời khách" in a visit: thiện cảm +3 / +5), Than bạc sương (đốt sưởi: Sức +6 winter, +2 otherwise), Son phấn, Yến sào,
+  Nhân sâm. Lãnh cung: 1 súc vải thô (+ than đen in winter).
+- Her payout = kitReward chest "Bổng lộc tháng …" (items + silver). The month card row "Đồ phát" and the Tuần lục line list the real goods;
+  wording "trả công N kẻ hầu: −W bạc".
+- Nội vụ phủ buys its own issue back at `BAL.stip.resell` % of the normal sale price (no monthly cash leak from goods).
+- NPCs get the same goods; at most `npcKeep×3` issued entries are kept (older ones used up).
+- jecon no longer reassigns `stipend` (that dropped the j53/j54 children's fee wrappers): j20 `stipend()` calls `econStipend()`.
+
+## 7. Nội vụ phủ cắt xén (owner 15/11 17:33Z)
+Causes (each visible, each adds `BAL.stip.w[k]` to the monthly chance, capped `BAL.stip.cap`): Sủng < `lowSung` or fell ≥ `dropSung`;
+cấm túc / scheme caught / demoted within `faultM` months; a superior of rank ≥ `supRank` above her with oán ≥ `oan`; the greedy Nội vụ phủ
+eunuch (per game, `greedy` %) not tipped in `tipM` months; her cung nữ loyalty < `maidLoyal` (or a spy). After "Nhịn" +`meekAdd`, after a
+failed claim +`spiteAdd` next month. Prevented by Sủng ≥ `safeSung`, a tip within `tipM` months, an ally among the eunuchs (her eunuch
+loyal ≥ `allyLoyal`, or `allyTips` tips). The Empress is never skimmed. Skim = silver `cutSmall` (1 cause) / `cutBig` (2+) of the bổng and
+goods one step worse (`down`: gấm→lụa, lụa/vải→vải thô hàng kém, trà→trà mốc, than→than đen and one basket less, son phấn/yến/sâm missing).
+Old Hoàng hậu khất bổng (j20 payCuts, −30 %) is not stacked: that month the order is the cause and no second silver cut is taken.
+Her event "Bổng lộc bị cắt xén" (person dialog with the Nội vụ phủ eunuch, event cost mode, reason as Gợi ý): Nhịn · Đút bạc (`tip[rank]`;
+goods restored unless a superior ordered it) · Sai cung nữ đi đòi (odds by loyalty, lanh, Sủng; −25 vs a superior) · Tố lên Hoàng hậu
+(Thái hậu when the Empress is behind it or dislikes her; to the Empress who ordered it: Liều, she resents) · Ghi nhớ để trả thù sau
+(Tai mắt: evidence on the superior, or the eunuch's books → +15 to the next report). NPCs: same rule; tip if rich, maid claims, or endure;
+news via newsAdd.

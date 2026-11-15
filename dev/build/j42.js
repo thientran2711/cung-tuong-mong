@@ -244,7 +244,7 @@ function srvDoOrder(k,t){const m=srvM();if(!m||!t)return;m.schemes=(m.schemes||0
 function srvBribeOffer(){const m=srvM();const L=liveRivals(true).filter(v=>v!==m&&hostility(v,m)>=25&&(v.bac||0)>=40);if(!L.length)return;pushDil(mkP("cnvBribe",{r:pick(L).id}),"Bạc lạ")}
 function srvFramedEvent(){const m=srvM();const L=srvColleagues().filter(s=>(S.srv.af[s.sid]||0)<0);if(!L.length)return;pushDil(mkP("cnvFrame",{sid:pick(L).sid}),"Bị vu oan")}
 function srvFriendTip(){const f=srvFriendList();if(!f.length)return;const s=pick(f);const m=srvM();const L=liveRivals(true).filter(x=>x!==m);
- if(roll(55)&&L.length){const v=pick(L);S.srv.intel.push(v.id);log(`${s.name} kể nhỏ với ngươi chuyện trong cung ${v.name}. Ngươi có tin để bẩm chủ.`)}else{apply({bac:2});log(`${s.name} chia cho ngươi ít bánh trái và 2 lạng bạc.`)}}
+ if(roll(55)&&L.length){const v=pick(L);S.srv.intel.push(v.id);log(`${s.name} kể nhỏ với ngươi chuyện trong cung ${v.name}. Ngươi có tin để bẩm chủ.`)}else{apply({bac:2});const gb=typeof goodsGive==="function"?goodsGive(S,"banhtrai",{from:"story",who:s.name}):"";log(`${s.name} chia cho ngươi ít bánh trái và 2 lạng bạc.${gb?` ${gb} vào rương.`:""}`)}}
 
 /* ---------- saveable choices ---------- */
 PEND.cnvScold=()=>{const m=srvM();if(!isSrv()||!m)return null;const o=od(40+S.sac/3);
