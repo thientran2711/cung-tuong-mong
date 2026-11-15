@@ -1040,6 +1040,15 @@ The picture is capped at 28vh (24vh under 1000 px wide); if the fixed part still
 compressed first (down to 14vh, `--kdpic`), figures scale with it. Dialogs without `.opts` (Đã rõ cards, person cards, identity /
 Luân hồi panels with `.kpscopts`) are unchanged. Shots: dev/shots/book-release/dlg/.
 
+### 32.6 PEOPLE ON THE PICTURE — event stage (owner 11/15, dev/owner-shots/1115-figs-on-scene.jpg) — `kitEsOvFit` (jk4)
+When an event dialog has a place / event picture band (headArt or the event picture), kitEventStage puts the people ON it (`.kesov`):
+feet on the picture's floor line (86 % of its height), body height = KIT_FIG.h × picture height (kitFigBody, forehead to feet; men
+×KIT_FIG.man, capped under the top edge; children by age), packed by core width with ≤ 25 % overlap, outer sleeves inside the picture,
+name chips inside the picture's bottom edge (neighbours that touch go to a second row; never cut). No separate figure column: the story
+text runs full width under the picture, then the options. With 32.5 the picture + people + text stay fixed and only the options scroll;
+the picture is 30vh (26vh under 1000 px), compressed by kitDlgFit on short screens, and the figures are re-laid to its height.
+Without a picture band the old figure column (32.2) stays. Shots: dev/shots/book-release/dlg/s1180-*, s686-*.
+
 ## 34. BOOK UI · kitCurl (page curl) + kitBookSpread (two-page book) — `dev/build/jbook.js` (before j87) — KIT READY: page-curl
 Owner 11/14 (00:15Z, 00:45Z approval + later change): the UI is an open book. **iPad landscape = two-page spread**: LEFT = picture page
 (illustration only: the big full-body figure / scene that goes with the right page; it never takes info away from the right page),
