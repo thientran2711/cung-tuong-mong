@@ -1,4 +1,4 @@
-# Review r7: review/opt-render (54f381436) merged on main f500d0464 — PASS (branch review/opt-render-r7)
+# Review r7: review/opt-render (54f381436) merged on main 53a61f8e8 (f500d0464 + stage-slots) — PASS (branch review/opt-render-r7)
 
 Merges: main ee5758195 (close-bugs) then main f500d0464 (tabs-kit). Site rebuilt (index.html / sw.js / assets.json committed).
 
@@ -59,3 +59,4 @@ Nhánh gộp: `review/opt-render-r6` (gộp sạch, không xung đột). Dựng 
 5. LUẬT KIT (16:50Z): nhãn rủi ro `.krisk` là chip riêng, màu tự đặt (#3f7a52/#8a6420/#a0301e) trong khối style `k-hint`, không dùng `chip()`/`kitChip` của kit; `.kakem`, `.neu .seal`, `.khint` cũng CSS riêng. Phải là thành phần kit (KIT.md + trang mẫu kit) qua điều phối.
 6. KIT.md §28.6 trỏ `dev/review/event-balance.md` — không tồn tại; rà cân bằng bằng bot (14:30Z/15:10Z) chưa làm. Không có dev/PROGRESS_review-opt-render.md.
 7. Bạc −5 của đêm thị tẩm (13:30Z "phải truy nguồn") chưa truy; test tự trừ Bạc −5.
+- Re-merged main 53a61f8e8 (stage-slots; only built files conflicted): opt-render.js 1180x820 0 fails / 0 errors, F 87 kinds, D no Bạc line; kit-page 844x390 OK; opt-scan 0 unclassified.
