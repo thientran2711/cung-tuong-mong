@@ -105,13 +105,20 @@ function kg82Pluck(i,ok){try{if(typeof auOk!=="function"||!auOk())return;const C
 /* ---------- the overlay host (the kit frame inside #ov) ---------- */
 const KG82={run:null,peek:()=>null,phase:"",kinds:KG82_KIND};
 window.KG82=KG82;
-function kg82Frame(o){const hud=[["score","Phần","0/10"],["round","Hồi","–"],["time","Còn","–"]];
+/* the progress cell's label follows the game type (review/small-bugs-2): exams count "Môn", contest results "Hạng", the engines their own
+   word ("Hồi 2/5" -> Hồi · 2/5, "Câu 1/5" -> Câu · 1/5). o.round = a fixed word for the whole frame (exam: "Môn"; engine updates then keep it). */
+const KG82_RW=/^(Hồi|Câu|Môn|Vòng|Lượt|Bước)\s+(.+)$/,KG82_PLACE=/^(Nhất|Nhì|Ba|Hạng\s*\d+)$/;
+function kg82Frame(o){KG82.rlock=o.round||"";const hud=[["score","Phần","0/10"],["round",o.round||"Hồi",o.roundV||"–"],["time","Còn","–"]];
  if(kg82Kit())return kitGameFrame({art:o.art,title:o.title,how:o.how,hud,id:"kg82box"});
  return `<div class="kgame"><div class="kph"><b class="kpseal">TÀI NGHỆ</b><span class="kpht"><span class="kptitle">${o.art}: ${o.title}</span></span></div><div class="kghow"><span class="krl">Cách chơi</span><span>${o.how}</span></div>`+
   `<div class="kghud">${hud.map(([k,l,v])=>`<span class="kgc"><small>${l}</small><b data-kg="${k}">${v}</b></span>`).join("")}</div><div class="kgbox" id="kg82box"></div><div class="kgres" id="kg82box-res" hidden></div></div>`}
 /* a HUD count "a/b" (Phần 7/10, Hồi 2/3) never shows above its ceiling; KG82.over counts any engine that tried (tests fail on it) */
 function kg82Cap(v){if(typeof v!=="string")return v;return v.replace(/(\d+)\/(\d+)/,(m,a,b)=>{if(+a>+b){KG82.over=(KG82.over||0)+1;return b+"/"+b}return m})}
-function kg82Set(k,v){if(typeof kitGameSet==="function")kitGameSet(k,v);else document.querySelectorAll(`[data-kg="${k}"]`).forEach(e=>e.innerHTML=v)}
+function kg82Set(k,v){if(k==="round"&&typeof v==="string"){let lab=null;const m=KG82_RW.exec(v.trim());
+  if(m){if(KG82.rlock&&m[1]!==KG82.rlock)return;lab=m[1];v=m[2]}else if(KG82_PLACE.test(v.trim())){lab="Hạng"}else if(KG82.rlock)lab=KG82.rlock;
+  if(lab)document.querySelectorAll('[data-kg="round"]').forEach(e=>{const l=e.previousElementSibling;if(l&&l.tagName==="SMALL"&&l.textContent!==lab)l.textContent=lab})}
+ kg82Set0(k,v)}
+function kg82Set0(k,v){if(typeof kitGameSet==="function")kitGameSet(k,v);else document.querySelectorAll(`[data-kg="${k}"]`).forEach(e=>e.innerHTML=v)}
 function kg82Open(o){kg82Close(true);const ov=$("ov");if(!ov)return null;[...ov.children].forEach(c=>{if(c.id!=="kg82"){c.dataset.kg82h=c.hidden?"1":"0";c.hidden=true}});
  const d=document.createElement("div");d.id="kg82";d.className="mg kpanel kgame kg82";d.setAttribute("role","dialog");d.setAttribute("aria-modal","true");d.innerHTML=kg82Frame(o);ov.appendChild(d);ov.hidden=false;d.scrollTop=0;return d}
 function kg82Close(silent){if(KG82.run&&KG82.run.stop){try{KG82.run.stop()}catch(e){}}KG82.run=null;KG82.peek=()=>null;KG82.phase="";
