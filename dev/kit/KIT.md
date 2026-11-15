@@ -1233,7 +1233,7 @@ Not done here (other owners): kitRoulette (thân phận, review/kit-2b) and the 
 
 | who | factor (× adult woman) | ≈ share of the stage / picture height |
 |---|---|---|
-| adult woman | 1 | **KIT_FIG.h = .79** (owner 11/15: the ratio approved in page-curl shot `dev/shots/curl2/ipad1180-tab-45.jpg`, measured .787) |
+| adult woman | 1 | **KIT_FIG.h = .79** (owner 11/15: the ratio approved in the page-curl shot kept as `dev/shots/curl2/ipad1180-tab-45-ref-ratio.jpg` (from a51a155f), measured .787) |
 | adult man / eunuch / official / physician (`fig-emperor/eunuch/official/physician/man-*`) | **KIT_FIG.man = 1.07** | ≈ .85 (capped under the place ribbon; the cap never shrinks the others) |
 | child, age a < 18 | `.55 + .03·a` (5 → .70, 10 → .85, 15 → 1) | by age |
 
@@ -1241,17 +1241,22 @@ Not done here (other owners): kitRoulette (thân phận, review/kit-2b) and the 
 (the old j59 `MANF`/`MEN`/child formula and the `.7` "tall stage" strip factor are gone; j59 reads KIT_FIG).
 
 Stage rule (j59 — every room / place / servant road / lãnh cung stage):
-1. Everybody in one scene has ONE scale: woman body height = .79 × stage height (feet on the floor line — the painted floor
+1. Everybody in one scene has ONE scale: woman BODY height (kitFigBody: forehead-top to feet, crowns/hairpins not counted, 33.6) = .79 × stage height (feet on the floor line — the painted floor
    anchor is honoured only while the kit height still fits — heads under the place ribbon). Men ×1.07 — a taller figure is CAPPED under the ribbon on its own, it never lowers the women. Children by age.
 2. People use the FULL stage width (owner 11/15): they may stand behind/under the RIGHT plaque column — its plaques float on top on a
    solid card (`.kshR .k3p` opaque). The left gutter (if any) is kept. An EMPTY plaque column reserves no gutter (jk3 k3Gut).
-3. Widths count the visible body (bbox l..r), not transparent margins.
-4. The size never shrinks to fit more people: if all do not fit, the others stand in a strip of **equal whole-person slots**
-   (slot = widest figure or widest name chip), the strip is exactly N slots wide, scrolls with scroll-snap per person, and the
-   count chips "› N" / "N ‹" count the rest. When the right plaque column ends high, both chips stand in the empty gutter
-   under it (› above, ‹ below) so the strip keeps its width for people.
-5. No "her + 1" shrink any more (owner 11/15): only the "› N" strip decides who is visible. The one remaining exception is a stage
-   narrower than ONE whole person (without her), which scales down to exactly one person.
+3. Widths count the visible body (kitFigBody alpha bbox l..r; silhouettes too), not transparent margins.
+4. Up to **4 people at once on iPad (3 on Fold / phones)** at that one scale (owner 11/15). They are packed by visible body width;
+   each figure may step back over its left neighbour by up to **15 %** of its own body (later ones in front, same scale, no back
+   row). Only when more than 4 (3) people are there, or they still do not fit at 15 %, the others go to the strip: equal whole-person
+   slots (slot = widest visible body × .85 or widest name chip), at most 4 (3) visible, scroll-snap per person, the strip box padded
+   so end sleeves are not clipped where the room allows. The count chips "› N" / "N ‹" stand in the stage's bottom corners in the
+   name row under the feet, never over a figure. Names are never cut: overlapping chips go to two rows (stagger).
+5. No "her + 1" shrink (owner 11/15). The one remaining exception is a stage narrower than ONE whole person, which scales down to
+   exactly one person.
+   Geometry (measured 11/15): the iPad left page is 596 px (1180) / 691 px (1366) wide; one consort at .79 is 200–260 px of visible
+   body, the "Người lạ" silhouette ~300–390 px (wide sleeves). So 3–4 at once fit only for slim figures; with wide robes / silhouettes
+   the strip shows 2 + "› N". Fold 686 (670 px stage, shorter) shows 3.
 6. Name chips are never cut: in the strip each slot is at least chip width + 8 px.
 
 Event stage (jk4 kitStageFig / kitEventStage, week-book person pages): each figure carries `--kfr = KIT_FIG.fac/KIT_FIG.man`,
@@ -1265,6 +1270,9 @@ Measured BEFORE 11/15 (.86 / ×1.08, superseded — see the table in dev/PROGRES
 | 1180x820@2 | .86 / .86 | .66 (Hoàng hậu, wide) + "› 4" | .66 | .66 + counts |
 | 1366x1024@2 | .83 / .83 | .75 / .81 man | .62 + "› 1" (was .30, cut) | .62 + counts |
 | 1024x768@2 | .78 / .84 man | .60 + "› 1" | .60 | .60 + counts |
+
+**KIT 33.6 · kitFigBody(src, cb)** (jkit.js, same code as review/men jk4): the ONE body measurement — alpha bbox + head top from the
+forehead skin minus a hair allowance; j59 room/place stages (J59BB cache) and jk4 event stages size every figure by it.
 
 **KIT 33.4 · kitImgErr(img, {sel, cls, text, swap})** (jkit.js): the ONE null-safe fallback for inline `<img onerror>`;
 does nothing when a re-render already detached the picture (fixes "Cannot read properties of null (reading 'classList')"
