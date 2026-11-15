@@ -358,3 +358,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (07:10Z) Hình người trong hộp thoại có người cao gần hết cột (≥95%), áp cho mọi hộp thoại có người qua kit.
 - [x] LIVE 482a99f97 (07:08Z): balance-unified — 4 buổi, đồ tự tay làm, tủ đồ gộp Tư trang, chơi cùng 4 buổi.
 - (07:15Z) Dòng quan hệ (thiện cảm/oán) dùng MỘT thành phần kit: nhãn; "chữ · số" một dòng + thanh cùng vị trí/độ dài mọi dòng; thiện cảm có vạch giữa (âm/dương), oán/ghen (không âm) đầy từ trái nhưng cùng cỡ; oán cũng có thang chữ.
+- (07:20Z) Tên + phẩm của nhân vật LUÔN đặt PHÍA TRÊN chân dung/hình người (dòng phẩm nhỏ, rồi dòng tên), ở mọi nơi; một thành phần kit kitNameRank.
