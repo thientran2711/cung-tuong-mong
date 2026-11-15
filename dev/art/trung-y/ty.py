@@ -11,7 +11,7 @@ import sys, os, re, json, glob, subprocess, io
 from PIL import Image, ImageDraw, ImageFont
 import numpy as np
 HERE = os.path.dirname(os.path.abspath(__file__)); REPO = os.path.dirname(os.path.dirname(os.path.dirname(HERE)))
-W = os.environ.get("TYW", "/tmp/claude-0/-home-user/d64e4822-8005-553d-be5a-3c77c37ea939/scratchpad/ty")
+W = os.environ.get("TYW", os.path.join(REPO, ".tywork"))
 OUT = W + "/out"; os.makedirs(OUT, exist_ok=True); os.makedirs(W + "/bg", exist_ok=True)
 import importlib.util
 def _load(n, f):
@@ -94,6 +94,7 @@ def proc(only=None):
         role, ident, g, gen, bg = p[:5]; key = f"{role}-{ident}-ty{g}"
         if only and key not in only: continue
         if key + ":" + (bg if bg != '-' else gen) in done and not only: continue
+        if not only and os.path.exists(f"{REPO}/img/fig-{key}-a51.webp"): continue  # already published to img/
         try:
             im = load_cut(role, ident, g, gen, bg)
         except BaseException as ex:

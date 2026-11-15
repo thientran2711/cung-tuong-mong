@@ -32,5 +32,15 @@ Tên tệp: img/fig-<role>-<id>-ty<1..8>-<a18|a26|a36|a51>.webp, img/por-…; b�
 - Tư trang: ô Y phục có "Cởi y phục" (chỉ trong tẩm cung); Mặc lại → hết trung y.
 - Test: `node dev/test/trung-y.js <url> 755x1000@2 <out> fold <oldsave.json> <dir ảnh ty ở máy>` (trang phải có <meta charset>).
 
-## Tiến độ
-- Mẻ 1 xong (c01–c12, 96 sheet, tờ: scratchpad sheets/batch1-c01-c12.jpg). Gen xong tới m13 (mẻ 7 đang chạy); tách nền chạy nền ~2 sheet/phút.
+## Tiến độ (15/11 ~08:55Z)
+- ĐÃ XONG + ĐÃ KIỂM: c01–c12 (96 sheet → 384 fig + 384 por) trong img/ của worktree + img/FIGURES-ty.json (384 bản ghi); tờ dev/art/trung-y/batch1-c01-c12.jpg.
+  Điều phối: GIỮ, chưa đẩy CDN; đẩy cả bộ một lần sau khi nhánh qua kiểm.
+- ĐÃ VẼ (gen trên Magnific, id trong dev/art/trung-y/bg.txt, 408 dòng): c01–c32, m01–m19 (51 mặt). CHƯA VẼ: m20–m52 (33 mặt, ~6 mẻ).
+  Ref đã tải lên cho mọi mặt (refs.txt; c17 = eIOPc5QdqL bản tải lại). Lưu ý refs.txt đúng; đọc tay danh sách dễ lệch một dòng (đã lệch một lần, đã sửa nhãn).
+- Tách nền: scratchpad chung bị phiên khác xóa sạch lúc ~08:48Z (mất out/ của c13–c22 đang làm). Đã chuyển sang <repo>/.tywork và chạy lại
+  `bash dev/art/trung-y/run_bg.sh` (fetcher + 2 worker). Zip: .tywork/zips.txt (b2–b7, hạn 16/11 ~08:00Z); b8 zip uuid a33ae047-41cd-443c-b41d-7c80d7d8382f
+  (projects_download status → thêm "b8 <url>" vào .tywork/zips.txt). Quá hạn thì zip lại từ id trong bg.txt.
+- Sau mỗi mẻ tách nền: `python3 .tywork/alpha-holes.py --fix .tywork/out <files>`; cutcheck; `ty.py sheet`; chép fig/por vào img/; dựng lại img/FIGURES-ty.json (chỉ tệp có trong img/).
+- Lệnh đẩy (điều phối chạy, sau kiểm): `python3 dev/site/cdn_sync.py img/fig-*-ty*.webp img/por-*-ty*.webp img/FIGURES-ty.json`.
+- Test Playwright (dev/test/trung-y.js) 755x1000@2 + 1180x820@2: ô trống → ty1/ty4/ty8 đúng bậc ở sân khấu, hộp thoại (ty2), chân dung;
+  thẻ ra ngoài "Mất: Danh -5"; tai tiếng trước Hoàng thượng; cướp áo chạy; điềm báo; Nội vụ phủ cấp lại; NPC Danh + tin đồn; sổ cũ (main) nạp; 0 lỗi trang, 0 tràn ngang.
