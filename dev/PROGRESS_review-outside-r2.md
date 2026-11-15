@@ -55,3 +55,8 @@ branch (that would revert ~9.7k lines): only the files the road needs were taken
 - KIT REQUEST: none (only existing kit parts used). Dư đồ at home is a list of kit place buttons (there is no house/city map painting; the leather map §34.1b needs one).
 - Art: house/city scenes still reuse palace rooms (old placeholders: khuê phòng = phi-tan-cung …); family faces reuse official / mama / thị vệ pools (Huynh trưởng in guard armour). New art not drawn in this pass.
 - Balance (OUTSIDE_PLAN §12, HH parity) not re-measured; dev/measure/kcbot.js ported.
+
+## Results (cb76f51d + site build)
+- route.js 755x1000@2, 1000x755@2, 1180x820@2, 1366x1024@2, 844x390@2: all PASS (origins tt/cn→eligible re-roll/dtq/nc→re-roll/cn→re-roll; entry ranks 0–1), 0 page errors, no overflow / clipped text / "???", no palace dialog at home, palace tabs back after entry, palace dress (t1) after entry, save+reload OK.
+- oldsave.js 755x1000@2: a save made on origin/main's published index.html loads here (palace life, no S.kc), plays 6 buổi; a home save reloads at home. PASS.
+- opt-scan.py --fail: 3 unclassified = jty.js on main (not this branch); kcE is a PEND event (cost mode).
