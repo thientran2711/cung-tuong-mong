@@ -31,7 +31,7 @@ const [,,BASE,SZ,OUT,TAG,OLD]=process.argv;const [WH,DPR]=SZ.split('@');const [W
  await shot('03-bought-result');A.push(await audit('bought'));
  const after=await p.evaluate(()=>({pets:S.pets.map(x=>x.t),on:S.petOn,sac:S.sac}));
  /* a full stable: one of each tier */
- await clearQ();await p.evaluate(()=>{S.petTip=0;S.pets=[];S.petOn=-1;S.rank=6;document.querySelectorAll('.kmov').forEach(e=>e.remove());petAdd(S,'bachloc','Thu săn, Hoàng thượng ban','hunt');petAdd(S,'khongtuoc','Hoàng thượng ban','emp');petAdd(S,'vet','Nhờ thái giám mua','buy');petAdd(S,'cho','Nhờ thái giám mua','buy');S.pets[3].care=20;render()});
+ await clearQ();await p.evaluate(()=>{S.petTip=0;S.pets=[];S.petOn=-1;S.rank=6;document.querySelectorAll('.kmov').forEach(e=>e.remove());petAdd(S,'bachloc','Thu săn, Hoàng thượng ban','hunt');petAdd(S,'phuong','Hoàng thượng ban','emp');petAdd(S,'vet','Nhờ thái giám mua','buy');petAdd(S,'cho','Nhờ thái giám mua','buy');S.pets[3].care=20;render()});
  await p.waitForTimeout(900);await shot('04-tip-first');A.push(await audit('tip'));
  await clearQ();await p.evaluate(()=>{if(!document.querySelector('#panel .keq[data-keq="pets"]'))((document.querySelector('#panel .keq')&&document.getElementById('panel').getBoundingClientRect().height>50)||document.querySelector('#tabs [data-tab=inv]').click())});await p.waitForTimeout(800);
  await p.evaluate(()=>{const e=document.querySelector('#panel .keq[data-keq="pets"]');if(e)e.scrollIntoView({block:'start'})});await p.waitForTimeout(400);await shot('05-inv-pets');A.push(await audit('inv-pets'));
@@ -40,7 +40,7 @@ const [,,BASE,SZ,OUT,TAG,OLD]=process.argv;const [WH,DPR]=SZ.split('@');const [W
  await p.click('#modal [data-pet="follow"]');await p.waitForTimeout(700);await shot('08-follow-result');const fol=await p.evaluate(()=>({on:S.petOn,tamco:S.tamco,petB:S.petB}));
  /* event cards */
  await clearQ();await p.evaluate(()=>{petCard("tsbPetGift",{src:"emp",t:"bachac"},"Ngự ban")});await p.waitForTimeout(900);await shot('09-card-ngu-ban');A.push(await audit('card-emp'));
- await clearQ();await p.evaluate(()=>{petCard("tsbPetHunt",{ts:["ngua","caotuyet"]},"Thu săn")});await p.waitForTimeout(900);await shot('10-card-thu-san');A.push(await audit('card-hunt'));
+ await clearQ();await p.evaluate(()=>{petCard("tsbPetHunt",{ts:["camke","cuuvi"]},"Thu săn")});await p.waitForTimeout(900);await shot('10-card-thu-san');A.push(await audit('card-hunt'));
  await p.evaluate(()=>{const b=document.querySelector('#modal .opts button[data-m="1"]');if(b)b.click()});await p.waitForTimeout(900);await shot('11-thu-san-result');
  await clearQ();await p.evaluate(()=>{petCard("tsbPetW",{i:3},"Thú nuôi biếng ăn")});await p.waitForTimeout(900);await shot('12-card-bieng-an');A.push(await audit('card-w'));
  /* đỡ mạng: Sức 0 at the end of the week */

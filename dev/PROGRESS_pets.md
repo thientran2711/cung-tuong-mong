@@ -3,6 +3,12 @@
 Nhánh từ origin/review/ts-b (d29e3952c) + gộp origin/main (df5a6010). Mã: `dev/build/jpet.js` (sau jtsb, trước j84). Phần thú nuôi cũ của
 jtsb (4 con) đã dời hết sang jpet; jtsb chỉ còn gọi `tsbPetWeek/tsbPetMonth/petGuard/tsbPetHTML`.
 
+## ĐỔI DANH SÁCH (sếp 15/11, qua điều phối): Thường + Tinh phẩm = thú thật; Trân phẩm → Tuyệt phẩm → Ngự tứ = linh vật/thần thú nhỏ
+(không sư tử, hổ, cáo thường). Bỏ: Mèo Ba Tư, Tế khuyển, Rùa vàng, Ngựa lùn, Khổng tước lam, Bạch hạc, Cáo tuyết, Tuyết điêu,
+Bạch khổng tước. Vẹt ngũ sắc + Chó sư tử xuống Tinh phẩm (giữ khóa). Sổ cũ: `PET_OLD` (jpet.js) đổi con đã bỏ sang con gần nhất CÙNG PHẨM:
+batu→linhmieu, tekhuyen→camke, rua→bachquy, ngua→lyngu, khongtuoc→phuong, bachac→kylan, caotuyet→cuuvi, tuyetdieu→ngoctho,
+bachkt→thanhlong (đổi tại chỗ trong `tsbPets`, thẻ đang chờ đổi trong PEND; ảnh qua `petK`). 22 con = 5/6/4/4/3.
+
 ## 22 con · 5 phẩm = thang đồ (sếp 10:10Z: Thường / Tinh phẩm / Trân phẩm / Tuyệt phẩm / Ngự tứ = thần thú; cùng khung islot, màu KIT_GRADE, dấu Ngự) (Xa xỉ N = [10,18,30,46,66][bậc] + giá/40)
 | Bậc | Con (Xa xỉ) | +1 khi theo hầu | Công dụng (luật thật) | Mặt trái | Nguồn |
 |---|---|---|---|---|---|
@@ -15,19 +21,19 @@ jtsb (4 con) đã dời hết sang jpet; jtsb chỉ còn gọi `tsbPetWeek/tsbPe
 | Tinh phẩm | Sáo nói (21) | Tâm cơ | canh cung 6 | nhại lời: Danh -1 (8/tháng) | mua 110, Hoàng thượng, nam nhân |
 | Tinh phẩm | Đôi uyên ương (21) | Sắc | Ân tình +2 mỗi đêm thị tẩm | cần ao (dưới Tần khó nuôi) | mua 100, Hoàng thượng, nam nhân |
 | Tinh phẩm | Cá chép gấm (22) | Danh | điềm: Danh +1 (12/tháng) | cần ao | mua 140, Hoàng thượng |
-| Trân phẩm | Mèo Ba Tư mắt ngọc (37) | Sắc | đánh hơi rất tinh | rụng lông, quý nên dễ ghen | mua 260 (Khó), Hoàng thượng, Hoàng hậu, cống phẩm |
-| Trân phẩm | Chó sư tử lông vàng (32) | Danh | canh cung 18 | sủa, cắn kẻ hầu (Lòng -1) | Hoàng hậu ban |
-| Trân phẩm | Vẹt ngũ sắc (36) | Tâm cơ | nghe lén: 25/tháng nắm 1 chứng cứ kẻ thù | nàng từng bày mưu: 12/tháng kẻ thù nắm chứng cứ của nàng | mua 240 (Khó), Hoàng thượng, cống phẩm |
-| Trân phẩm | Tế khuyển săn (32) | Tâm cơ | canh 12 + đuổi thú dữ 25 | sủa | Thu săn |
-| Trân phẩm | Rùa vàng trăm tuổi (30) | Đức | Thái hậu quý nàng +1/tháng | mất nó: Thái hậu -8 | Thái hậu ban |
-| Trân phẩm | Ngựa lùn Điền Nam (33) | Sắc | Sức +2/tuần | Bạc -6/tháng, chuồng ồn: người chung cung oán | Thu săn |
-| Tuyệt phẩm | Khổng tước lam (50) | Danh | Sủng +2 mỗi đêm thị tẩm | Bạc -8/tháng, kêu chói tai: người chung cung oán | Hoàng thượng (Sủng ≥80), cống phẩm |
-| Tuyệt phẩm | Bạch hạc (49) | Đức | điềm lành 20/tháng: Danh +2, Thái hậu +1 | cần ao | Hoàng thượng (Sủng ≥80), cống phẩm |
-| Tuyệt phẩm | Cáo tuyết (49) | Sắc (+2) | Sắc +2 khi theo hầu | lời đồn hồ ly: Thái hậu -1 (40/tháng), Danh -1 (15) | Thu săn |
-| Tuyệt phẩm | Tuyết điêu (49) | Tâm cơ | đánh hơi 88 + canh 8 | cắn kẻ hầu | cống phẩm |
+| Tinh phẩm | Vẹt ngũ sắc (22, từ Trân xuống) | Tâm cơ | nghe lén: 15/tháng nắm 1 chứng cứ kẻ thù | nàng từng bày mưu: 10/tháng kẻ thù nắm chứng cứ của nàng | mua 160, Hoàng thượng |
+| Tinh phẩm | Chó sư tử lông vàng (20, từ Trân xuống) | Danh | canh cung 12 | sủa, cắn kẻ hầu (Lòng -1) | Hoàng hậu ban, Thu săn |
+| Trân phẩm | Bạch quy vân văn (30) | Đức | Thái hậu quý nàng +1/tháng | mất nó: Thái hậu -8 | Thái hậu ban |
+| Trân phẩm | Linh miêu mắt ngọc (37) | Sắc | đánh hơi rất tinh (75) | rụng lông, quý nên dễ ghen | mua 260 (Khó), Hoàng thượng, Hoàng hậu, cống phẩm |
+| Trân phẩm | Cẩm kê (32) | Danh | canh cung 15 + đuổi thú dữ 20 | gáy sớm: người chung cung oán | Thu săn, cống phẩm |
+| Trân phẩm | Long lý vảy vàng (32) | Tài | Sức +2/tuần, điềm Danh +1 (10/tháng) | dễ bị bỏ thuốc vào bồn | Hoàng thượng, cống phẩm |
+| Tuyệt phẩm | Cửu vĩ hồ (49) | Sắc (+2) | Sắc +2 khi theo hầu | lời đồn hồ ly: Thái hậu -1 (40/tháng), Danh -1 (15) | Thu săn, cống phẩm |
+| Tuyệt phẩm | Kỳ lân con (50) | Danh | canh 18 + đuổi thú dữ 25, điềm Danh +1 (10) | Bạc -8/tháng | Hoàng thượng (Sủng ≥80), cống phẩm |
+| Tuyệt phẩm | Ngọc thố (49) | Đức | đánh hơi 88 + bớt oán 2/tháng | yếu rét | Hoàng thượng (Sủng ≥80), Thu săn |
+| Tuyệt phẩm | Phượng hoàng non (50) | Sắc | Sủng +2 mỗi đêm thị tẩm | Bạc -8/tháng, kêu vang: người chung cung oán | Hoàng thượng (Sủng ≥80), cống phẩm |
 | Ngự tứ | Bạch lộc (66) | Đức | ĐỠ MỘT MẠNG; điềm lành Danh +2 | rất dễ bị ghen, bị nhắm hại | Thu săn: Sủng ≥75, 5 phần trăm |
 | Ngự tứ | Linh quy ngàn năm (66) | Đức | ĐỠ MỘT MẠNG; Thái hậu +1/tháng | mất: Thái hậu -8 | Thái hậu ban (Thái hậu ≥85, phẩm ≥ Phi, hiếm) |
-| Ngự tứ | Bạch khổng tước (66) | Sắc | ĐỠ MỘT MẠNG; Sủng +2 mỗi đêm thị tẩm | rất dễ bị ghen | cống phẩm tháng giêng: người Sủng cao nhất, Sủng ≥75, 7 phần trăm |
+| Ngự tứ | Thanh long con (66) | Danh | ĐỠ MỘT MẠNG; Sủng +2 mỗi đêm thị tẩm | rất dễ bị ghen | cống phẩm tháng giêng: người Sủng cao nhất, Sủng ≥75, 7 phần trăm |
 
 Chung: bạc nuôi theo con (0–8/tháng; thiếu bạc: khí lực -25), khí lực giảm mỗi tuần (3–12; cần ao dưới Tần +5; thỏ mùa đông +6;
 có kẻ hầu tin cẩn: nửa), chăm 1 khắc (khí lực 95, Sức +2), dưới 30 thẻ "biếng ăn" (Tự tay chăm / Giao kẻ hầu / Để sau), 0 thì mất.
@@ -68,3 +74,14 @@ Thú nuôi biếng ăn (tranh thú ở đầu thẻ). Lời dặn lần đầu (
 - Sai số với n≈10 là ±30 điểm: chưa kết luận được ±3. Tác động trực tiếp của đỡ mạng bị chặn trên bởi tỉ lệ đời được đỡ (0/9 ở mẫu này;
   nguồn thần thú: Thu săn Sủng ≥75 × 5, cống phẩm Sủng cao nhất ≥75 × 7 (năm 2 lần), Thái hậu ≥85 + phẩm ≥ Phi × 15 trong 2,5/tháng).
   Chênh HH giữa hai mẫu là nhiễu (khác nhau ở khó sinh, không do thú). VIỆC CÒN: chạy `runpets.js sens 40` mỗi bên khi máy rảnh.
+
+
+## VẼ LẠI (review/pets-art, sếp 15/11: tranh cũ như ảnh chụp, ngồi đệm/đứng đá → bỏ)
+- Magnific gpt-2-6, thư mục ba4aecfe…, 1 ảnh phong cách (gpt-2-6 chỉ nhận 1) = tranh cảnh đã duyệt 5jVD3wpKxe ("Two palace maids in soft green",
+  gongbi/màu nước mềm). KHÔNG dùng tranh thú cũ. Mỗi con một ảnh 1:1 trên nền giấy trơn, không đệm/đá/bệ; chim trên giá/lồng, cá trong bồn.
+- Tách nền: Magnific images_remove_background → scratchpad proc.py: điểm bán trong suốt lấy màu tranh gốc (không viền tối), bỏ đốm rời,
+  lấp lỗ nhỏ, cắt vuông 90 phần trăm, 512 + 256 webp. Linh vật/thần thú: quầng sáng mềm (kylan vàng nhạt, bạch lộc trắng bạc).
+- Mỗi con 2 tranh (điều phối 15/11): Non `img/pet-<k>-non.webp` (+pet512/) và Trưởng thành `img/pet-<k>.webp`; Linh thú dùng tranh trưởng thành + hiệu ứng.
+- Mẫu (chờ duyệt): dev/shots/pets/mau.jpg — Mèo mướp non + trưởng thành, Chó nhỏ lông xù, Vẹt ngũ sắc trên giá, Kỳ lân con, Bạch lộc.
+  Magnific: mèo WDsgFxxcXe (cắt gOImT5DSXO), mèo non vQZAyUua47 (LwB808xswO), chó cplSHLy0eP (nVjsQ6MYQD), vẹt gOIm0IRSXO (tCiRUDcmZJ),
+  kỳ lân EbzYPnzuuO (iGq5mJF3uK), bạch lộc s7oIWtnl8e (ksDeAQ316B). Chưa đẩy CDN (chờ duyệt).
