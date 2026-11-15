@@ -18,6 +18,10 @@ function kitCurlOff(){try{return typeof reducedMotion==="function"?reducedMotion
 function kitCurlEase(t){return t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2}
 /* a quick lift then a slower settle (a flick of the page): the next page shows under the corner from the first frames (owner 11/15) */
 function kitCurlLift(t){return 1-Math.pow(1-t,1.6)}
+/* KIT_TURN_MS: the ONE page-turn duration (owner 11/15 01:50Z "cho animation lật trang chậm lại": ~2× the old 680–760 ms).
+   KIT.md §34.0. kitTurnEase: slow lift, even swing, a long gentle settle as the sheet lands. */
+const KIT_TURN_MS=1300;
+function kitTurnEase(t){const u=1-Math.pow(1-t,1.45);return (1-Math.cos(Math.PI*u))/2}
 function kitCurlFade(el,mid,done,ms){ms=ms||170;if(!el){mid&&mid();done&&done();return}el.classList.add("kcl-fade");
  setTimeout(()=>{try{mid&&mid()}catch(e){console.error(e)}el.classList.remove("kcl-fade");setTimeout(()=>done&&done(),ms)},ms)}
 function kitCurlSfx(){try{if(typeof kbkSfx==="function")kbkSfx()}catch(e){}}
@@ -54,7 +58,7 @@ function kclPrep(src,keepId){if(!(src&&src.nodeType===1))return null;const m=src
   const cs=getComputedStyle(src);for(const k of["display","flexDirection","flexWrap","alignItems","alignContent","justifyContent","gap","gridTemplateRows","gridTemplateColumns","gridAutoRows","paddingTop","paddingRight","paddingBottom","paddingLeft","boxSizing","overflowX","overflowY","backgroundColor","backgroundImage","borderTopWidth","borderRightWidth","borderBottomWidth","borderLeftWidth","borderTopStyle","borderRightStyle","borderBottomStyle","borderLeftStyle","borderTopColor","borderRightColor","borderBottomColor","borderLeftColor","borderRadius","fontSize"])try{m.style[k]=cs[k]}catch(e){}
   if(m.style.display==="none"||m.style.display==="contents")m.style.display="block";
   m.setAttribute("aria-hidden","true");m.inert=true;return{m,sc,lk}}
-function kitCurl(o){o=o||{};const host=o.host,w=Math.max(40,o.w|0),h=Math.max(40,o.h|0);
+function kitCurlFold(o){o=o||{};const host=o.host,w=Math.max(40,o.w|0),h=Math.max(40,o.h|0);
  const mir=!!o.mirror,BIG=Math.ceil(Math.hypot(w,h)*2)+40,lift=o.lift!=null?o.lift*h:Math.min(h*.42,w*.8);
  const root=document.createElement("div");root.className="kcl"+(o.cls?" "+o.cls:"");
  root.style.cssText=`left:${o.x||0}px;top:${o.y||0}px;width:${w}px;height:${h}px`+(mir?";transform:scaleX(-1)":"");
@@ -121,65 +125,89 @@ function kitCurlRun(c,from,to,dur,done,ease){ease=ease||kitCurlEase;const t0=per
  const step=now=>{if(!alive)return;const t=Math.min(1,(now-t0)/Math.max(1,dur));c.set(from+(to-from)*ease(t),dir);if(t<1)requestAnimationFrame(step);else{alive=false;done&&done()}};
  c.set(from,dir);requestAnimationFrame(step);const cancel=()=>{alive=false};cancel.t0=t0;return cancel}
 
-/* ---------- kitSheetTurn: the WHOLE sheet turns around the spine (owner 11/15, binder reference dev/owner-shots/1115-turn-ref-*.jpg) ----------
-   kitSheetTurn({host, front, back, w, h, dir, ctx}) → {el, set(p), setBack(el), rescroll(), destroy()}
-   One sheet element with two faces (preserve-3d, backface hidden): front = the old page, back = the new page, both printed ON the
-   sheet, so they rotate, foreshorten and tilt with it. It swings around the spine edge (left edge; dir −1: right edge) with
-   perspective, a small tilt and skew near mid-turn (paper feel), shading on each face, and a soft shadow on the page underneath.
-   Per frame only transform/opacity change. */
-function kitSheetTurn(o){o=o||{};const host=o.host,w=Math.max(40,o.w|0),h=Math.max(40,o.h|0),back=(o.dir||1)<0;
- const root=document.createElement("div");root.className="kst";root.style.cssText=`width:${w}px;height:${h}px;perspective:${Math.round(Math.max(2200,w*4))}px;perspective-origin:${back?w:0}px 45%`;
+/* ---------- kitSheetTurn: THE page turn — the WHOLE sheet swings around the spine (owner 11/15 10:00Z; binder reference
+   dev/owner-shots/1115-turn-ref-1.jpg, -2.jpg) ----------
+   kitSheetTurn({host, front, back, under, w, h, x, y, p, ctx, vanish, shadeL, shadeR}) → {el, set(p), setBack(src), setFront(src), rescroll(), destroy()}
+   One sheet with two faces (preserve-3d, backface hidden). front = what the sheet shows lying on the RIGHT of the spine (p 0),
+   back = what it shows once turned onto the LEFT (p 1). Both are printed ON the sheet (kclPrep copies, no ids), so the content
+   rotates, foreshortens and tilts with it — never pinned to the page beneath. The spine is the sheet's LEFT edge, at (x,y) in host px.
+   p 0 → 1 = forward (right → left); a backward turn is the same motion run 1 → 0 (the sheet comes back over the spine).
+   Look: perspective from above the spine (the free edge grows as it rises toward the reader), a slight tilt + skew mid-turn
+   (paper, not a board), face shading by angle, a soft shadow cast on the ground under the lifted sheet on each side.
+   under: an optional still copy laid on the ground beneath the sheet (backward live turn: the old page that the sheet covers).
+   vanish: the sheet fades out over the last 18 % toward p 1 (it lands on something that is not this page: picture page / off screen).
+   Per frame only transform/opacity change (compositor). */
+function kitSheetTurn(o){o=o||{};const host=o.host,w=Math.max(40,o.w|0),h=Math.max(40,o.h|0);
+ const root=document.createElement("div");root.className="ksht"+(o.cls?" "+o.cls:"");
+ root.style.cssText=`left:${o.x||0}px;top:${o.y||0}px;width:${w}px;height:${h}px;perspective:${Math.round(Math.max(1900,w*3.6))}px;perspective-origin:0px 42%`;
  const ctxWrap=m=>{if(!o.ctx)return m;const d=document.createElement("div");d.className=o.ctx.className+" kcl-ctx";d.appendChild(m);return d};
- const gs=document.createElement("i");gs.className="kst-gs";if(back){gs.style.left="auto";gs.style.right="0";gs.style.transform="scaleX(-1)"}
- const sheet=document.createElement("div");sheet.className="kst-sheet";sheet.style.cssText=`width:${w}px;height:${h}px;transform-origin:${back?w:0}px 50%`;
- const face=(cls)=>{const f=document.createElement("div");f.className="kst-face "+cls;const sh=document.createElement("i");sh.className="kst-sh";f.appendChild(sh);return{f,sh,sc:[],lk:[]}};
- const F=face("kst-front"),B=face("kst-back");
- const put=(Fc,src)=>{const p=kclPrep(src,!!o.ctx);[...Fc.f.children].forEach(ch=>{if(ch!==Fc.sh)ch.remove()});
-  if(p){Fc.f.insertBefore(ctxWrap(p.m),Fc.sh);Fc.sc=p.sc;Fc.lk=p.lk}else{const d=document.createElement("div");d.className="kpaper";Fc.f.insertBefore(d,Fc.sh)}};
+ const fill=(box,src,keep)=>{const p=src&&src.nodeType===1?kclPrep(src,!!o.ctx):null;
+  if(p){box.insertBefore(ctxWrap(p.m),keep||null);return p}
+  const d=document.createElement("div");d.className="kpaper kcl-blank";if(typeof src==="string"&&src)d.innerHTML=src;box.insertBefore(d,keep||null);return null};
+ let U=null;if(o.under){const u=document.createElement("div");u.className="ksht-under";const pu=fill(u,o.under);U={u,sc:pu?pu.sc:[]};root.appendChild(u)}
+ const gR=document.createElement("i");gR.className="ksht-gs";const gL=document.createElement("i");gL.className="ksht-gs ksht-gl";
+ const sheet=document.createElement("div");sheet.className="ksht-sheet";sheet.style.cssText=`width:${w}px;height:${h}px;transform-origin:0 50%`;
+ const face=cls=>{const f=document.createElement("div");f.className="ksht-face "+cls;const sh=document.createElement("i");sh.className="ksht-sh";f.appendChild(sh);return{f,sh,sc:[],lk:[]}};
+ const F=face("ksht-front"),B=face("ksht-back");
+ const put=(Fc,src)=>{[...Fc.f.children].forEach(ch=>{if(ch!==Fc.sh)ch.remove()});const p=fill(Fc.f,src,Fc.sh);Fc.sc=p?p.sc:[];Fc.lk=p?p.lk:[]};
  put(F,o.front);put(B,o.back||null);
- sheet.append(F.f,B.f);root.append(gs,sheet);host.appendChild(root);
- const rescroll=()=>{for(const [e,t,l] of F.sc.concat(B.sc)){e.style.scrollBehavior="auto";e.style.scrollSnapType="none";e.scrollTop=t;e.scrollLeft=l}};rescroll();
- const sg=back?1:-1;let last=0;
- function set(p){p=Math.max(0,Math.min(1,p));last=p;const s=Math.sin(Math.PI*p);
-  /* the back face follows the live new page's scroll (it may still settle while the sheet turns) */
-  for(const [a,b] of B.lk){if(b.scrollTop!==a.scrollTop)b.scrollTop=a.scrollTop}
-  const ang=sg*180*p,tilt=sg*-4*s,skew=sg*2.2*s,lift=-0.012*h*s;
+ sheet.append(F.f,B.f);root.append(gR,gL,sheet);host.appendChild(root);
+ const rescroll=()=>{for(const [e,t,l] of F.sc.concat(B.sc,U?U.sc:[])){e.style.scrollBehavior="auto";e.style.scrollSnapType="none";e.scrollTop=t;e.scrollLeft=l}};rescroll();
+ let last=0;
+ function set(p){p=Math.max(0,Math.min(1,+p||0));last=p;const s=Math.sin(Math.PI*p),c=Math.cos(Math.PI*p);
+  /* a live face follows its page's scroll (the new page may still settle while the sheet turns) */
+  for(const Fc of [F,B])for(const [a,b] of Fc.lk){if(b.scrollTop!==a.scrollTop)b.scrollTop=a.scrollTop}
+  const ang=-180*p,tilt=4.2*s,skew=-2.4*s,lift=-0.014*h*s;
   sheet.style.transform=`translateY(${lift.toFixed(2)}px) rotateZ(${tilt.toFixed(3)}deg) rotateY(${ang.toFixed(3)}deg) skewY(${skew.toFixed(3)}deg)`;
-  /* face shading: the front darkens as it turns away from the light, the back lightens as it lands */
+  /* the face turning away from the light darkens, the one landing brightens */
   F.sh.style.opacity=Math.min(1,p*1.9).toFixed(3);B.sh.style.opacity=Math.min(1,(1-p)*1.9).toFixed(3);
-  /* shadow cast on the page underneath, under the lifted sheet */
-  const proj=Math.max(0,Math.cos(Math.PI*p))*w;gs.style.width=Math.max(24,proj+24)+"px";gs.style.opacity=(0.85*s).toFixed(3);
-  if(o.vanish)root.style.opacity=p>.82?Math.max(0,1-(p-.82)/.18).toFixed(3):"1"}
- set(0);
- return {el:root,set,rescroll,setBack(src){put(B,src);set(last)},destroy(){root.remove()}}}
+  /* shadow cast under the lifted sheet: on the right ground while it rises, on the left while it lands */
+  gR.style.width=Math.max(24,c*w+24).toFixed(1)+"px";gR.style.opacity=o.shadeR===false||c<=0?"0":(0.85*s).toFixed(3);
+  gL.style.width=Math.max(24,-c*w+24).toFixed(1)+"px";gL.style.opacity=!o.shadeL||c>=0?"0":(0.85*s).toFixed(3);
+  if(o.vanish)sheet.style.opacity=p>.82?Math.max(0,1-(p-.82)/.18).toFixed(3):"1"}
+ set(o.p||0);
+ return {el:root,set,rescroll,setBack(src){put(B,src);rescroll();set(last)},setFront(src){put(F,src);rescroll();set(last)},destroy(){root.remove()},sheet:1}}
 
-/* ---------- kitCurlSwap: turn a live page (tab switch) ----------
-   kitCurlSwap(el, fn, {dir, ms}) : copies el as it is now, runs fn() (the game re-renders el in place), then the copy curls away
-   from the corner over the new content (dir 1: bottom-right corner → left; dir −1: bottom-left corner → right) and fades as it leaves.
-   The copy drops ids (no duplicate #panel for the game scripts) but carries el.s own box layout and the real heights of big boxes.
-   No turn when el is not shown, when its box changed (another layout, e.g. the map), or with reduced motion (cross-fade instead). */
+/* kitCurl = the kit's page turn for every book (week book j87, kitBookSpread): since the owner's 11/15 10:00Z rule it is the WHOLE-SHEET
+   turn (kitSheetTurn); the corner-fold engine stays as kitCurlFold (not used for page turns any more). Same call shape:
+   kitCurl({host, front, back, w, h, x, y, p, shadeL, shadeR, vanish, ctx}) → {set(p,dir), destroy(), el, rescroll(), setBack()} */
+function kitCurl(o){return kitSheetTurn(o)}
+
+/* ---------- kitCurlSwap: turn a live page (tab switch) with the whole sheet ----------
+   kitCurlSwap(el, fn, {dir, ms}) : copies el as it is now, runs fn() (the game re-renders el in place), then
+   dir 1 (forward): the sheet carrying the OLD page swings over the spine (left edge of el); its back carries the NEW page; the live new
+     page lies underneath from the first frame (owner 06:25Z). The sheet fades as it lands beyond the spine (picture page / off screen).
+   dir −1 (back): the same motion reversed: the sheet carrying the NEW page comes back over the spine (its back = the old page) and lands
+     exactly on the new live page; a still copy of the old page lies underneath until it is covered.
+   The copies drop ids (one #panel only) and carry el's own box layout. No turn when el is not shown, when its box changed (another
+   layout, e.g. the map), or when "Cảnh động" is off / reduced motion (instant swap with a short cross-fade).
+   A new turn while one runs ends the old one at once (fast taps never pile up). */
 let kclLive=null;
 function kitCurlSwap(el,fn,opt){opt=opt||{};const run=()=>{try{fn&&fn()}catch(e){console.error(e)}};
  if(kclLive){try{kclLive()}catch(e){}kclLive=null}
  const r0=el&&el.getBoundingClientRect();
  if(!el||!r0||r0.width<60||r0.height<60||!el.getClientRects().length){run();return false}
  if(kitCurlOff()){el.classList.add("kcl-fade");run();requestAnimationFrame(()=>requestAnimationFrame(()=>el.classList.remove("kcl-fade")));return false}
+ const fwd=(opt.dir||1)>0;
  const host=document.createElement("div");host.className="kcl-host";host.style.cssText=`left:${r0.left}px;top:${r0.top}px;width:${r0.width}px;height:${r0.height}px`;
- let c=null;try{c=kitSheetTurn({host,front:el,back:null,w:r0.width,h:r0.height,ctx:el.closest(".game"),dir:opt.dir||1,vanish:true})}catch(e){console.error(e)}
+ let c=null;try{c=fwd?kitSheetTurn({host,front:el,back:null,w:r0.width,h:r0.height,ctx:el.closest(".game"),vanish:true,p:0})
+                    :kitSheetTurn({host,front:null,back:el,under:el,w:r0.width,h:r0.height,ctx:el.closest(".game"),vanish:true,p:1})}catch(e){console.error(e)}
  run();
  const r1=el.getBoundingClientRect();
  if(!c||Math.abs(r1.left-r0.left)>2||Math.abs(r1.top-r0.top)>2||Math.abs(r1.width-r0.width)>2||Math.abs(r1.height-r0.height)>2||!el.getClientRects().length){host.remove();return false}
- /* the back of the turning sheet = the new page (as in a real book: the page you turn to is printed on its back) */
- try{c.setBack(el)}catch(e){console.error(e)}
+ /* the new page printed on the sheet: on its back (forward) or on its front (back turn), as in a real book */
+ const take=()=>{if(fwd)c.setBack(el);else c.setFront(el)};
+ try{take()}catch(e){console.error(e)}
  document.body.appendChild(host);c.rescroll();kitCurlSfx();
- /* the new page finishes its layout a moment later (person card sizing, chips): take the back again once it has settled,
-    so the whole page (tabs, strip, card, acts) is on the back, at the same place as the real page underneath */
- let alive=true;const reback=()=>{if(!alive)return;try{c.setBack(el);c.rescroll()}catch(e){}};
+ /* the new page finishes its layout a moment later (person card sizing, chips): print it again once it has settled */
+ let alive=true;const reback=()=>{if(!alive)return;try{take()}catch(e){}};
  const sig=()=>{const q=el.querySelector(".pc,.pgwrap,.kbl,section,div");return el.scrollHeight+"|"+el.scrollTop+"|"+(q?q.getBoundingClientRect().top+":"+q.offsetHeight:"")};
  let s0=sig();const iv=setInterval(()=>{if(!alive){clearInterval(iv);return}const s1=sig();if(s1!==s0){s0=s1;reback()}},70);setTimeout(reback,90);
- /* a quick lift then a slower settle (a flick of the page): the new page shows under the corner from the first frames */
- const stop=kitCurlRun(c,0,1,opt.ms||760,()=>{alive=false;host.remove();if(kclLive===end)kclLive=null},kitCurlEase);
- const end=()=>{alive=false;stop();host.remove()};kclLive=end;kitCurlSwap.t0=stop.t0;return true}
+ const fin=()=>{alive=false;clearInterval(iv);host.remove();if(kclLive===end)kclLive=null};
+ const stop=kitCurlRun(c,fwd?0:1,fwd?1:0,opt.ms||KIT_TURN_MS,fin,kitTurnEase);
+ const end=()=>{stop();fin()};kclLive=end;
+ /* test hook: hold the running turn at p (kitCurlSwap.hold(.45)) */
+ kitCurlSwap.t0=stop.t0;kitCurlSwap.hold=p=>{stop();c.set(p)};kitCurlSwap.end=end;return true}
 
 /* ---------- kitLeather: the unrolled leather map (Dư đồ) — NOT a book page (owner 11/15 04:00Z) ----------
    kitLeather(el) adds the hide surface around el's map painting: tanned leather with grain and burnt edges, an uneven hide outline,
@@ -230,14 +258,14 @@ function kitBookSpread(host,spec){spec=spec||{};const root=document.createElemen
    u.style.cssText+=`;position:absolute;top:0;left:${dir>0?0:pw}px;width:${pw}px;height:${h}px`;under.appendChild(u);book.appendChild(under);
    const cu=dir>0?kitCurl({host:book,front:oR,back:nL,w:pw,h,x:pw,y:0,po:0,shadeL:true})
                  :kitCurl({host:book,front:nR,back:oL,w:pw,h,x:pw,y:0,po:0,shadeL:true,p:1,dir:-1});
-   kitCurlRun(cu,dir>0?0:1,dir>0?1:0,700,()=>{cu.destroy();under.remove();busy=false});
+   kitCurlRun(cu,dir>0?0:1,dir>0?1:0,KIT_TURN_MS,()=>{cu.destroy();under.remove();busy=false});
    return}
   /* one page (text only): forward = the old page curls away over the new one; back = the new page curls back in over the old */
-  if(dir>0){const old=R.cloneNode(true);set(c);if(toMap())return;const cu=kitCurl({host:book,front:old,back:null,w:r.width,h:r.height,x:0,y:0,po:r.width*.5,shadeL:false});
-   kitCurlRun(cu,0,1,700,()=>{cu.destroy();busy=false})}
+  if(dir>0){const old=R.cloneNode(true);set(c);if(toMap())return;const cu=kitCurl({host:book,front:old,back:R,w:r.width,h:r.height,x:0,y:0,shadeL:false,vanish:true});
+   kitCurlRun(cu,0,1,KIT_TURN_MS,()=>{cu.destroy();busy=false})}
   else{const old=R.cloneNode(true);old.style.cssText+=";position:absolute;inset:0";const under=document.createElement("div");under.className="kbs-under kbs-under1";under.appendChild(old);
-   set(c);if(toMap())return;book.appendChild(under);const cu=kitCurl({host:book,front:R,back:null,w:r.width,h:r.height,x:0,y:0,po:r.width*.5,shadeL:false,p:1,dir:-1});
-   kitCurlRun(cu,1,0,700,()=>{cu.destroy();under.remove();busy=false})}}
+   set(c);if(toMap())return;book.appendChild(under);const cu=kitCurl({host:book,front:R,back:old,w:r.width,h:r.height,x:0,y:0,shadeL:false,vanish:true,p:1});
+   kitCurlRun(cu,1,0,KIT_TURN_MS,()=>{cu.destroy();under.remove();busy=false})}}
  const ro=typeof ResizeObserver==="function"?new ResizeObserver(()=>{if(!busy)layout()}):null;ro&&ro.observe(host);
  set(spec);layout();
  return {el:root,picEl,textEl,get mode(){return mode},swap,set,relayout:layout,destroy(){ro&&ro.disconnect();root.remove()}}}
@@ -359,17 +387,20 @@ html .game .kleather>.maptools>.past,html .game .kleather>.maptools>.fest{displa
 @keyframes kl-un{from{clip-path:polygon(48.51% 0.36%,48.69% 0.72%,48.9% 0.59%,49.13% 0.06%,49.36% 0.04%,49.57% 0.08%,49.76% 0.47%,50.02% 0.14%,50.2% 0.69%,50.46% 0.63%,50.64% 1.07%,50.83% 0.94%,51.06% 0.16%,51.26% 0.34%,51.48% 0.5%,51.5% 7.31%,51.48% 14.03%,51.49% 20.55%,51.5% 27.98%,51.48% 35.57%,51.49% 43.03%,51.49% 49.6%,51.48% 57.54%,51.49% 64.43%,51.49% 72.18%,51.48% 78.15%,51.48% 84.95%,51.49% 93.37%,51.49% 99.83%,51.29% 99.96%,51.08% 99.16%,50.86% 99.04%,50.63% 99.24%,50.43% 99.36%,50.21% 99.08%,50.03% 99.48%,49.8% 99.93%,49.58% 99.29%,49.39% 99.1%,49.13% 99.58%,48.94% 99.98%,48.71% 99.82%,48.5% 99.5%,48.5% 93.39%,48.5% 85.21%,48.51% 79.31%,48.5% 71.33%,48.51% 65.05%,48.52% 57.87%,48.51% 49.83%,48.51% 43.63%,48.52% 35.02%,48.5% 28.04%,48.51% 21.4%,48.51% 13.81%,48.5% 6.98%)}to{clip-path:polygon(0.4% 0.36%,6.44% 0.72%,13.43% 0.59%,21.16% 0.06%,28.59% 0.04%,35.58% 0.08%,42.04% 0.47%,50.65% 0.14%,56.59% 0.69%,65.18% 0.63%,71.22% 1.07%,77.66% 0.94%,85.29% 0.16%,92.09% 0.34%,99.35% 0.5%,99.86% 7.31%,99.49% 14.03%,99.56% 20.55%,99.95% 27.98%,99.46% 35.57%,99.75% 43.03%,99.64% 49.6%,99.36% 57.54%,99.8% 64.43%,99.58% 72.18%,99.42% 78.15%,99.22% 84.95%,99.67% 93.37%,99.6% 99.83%,92.84% 99.96%,86.05% 99.16%,78.72% 99.04%,71.06% 99.24%,64.47% 99.36%,57.06% 99.08%,50.89% 99.48%,43.19% 99.93%,36.12% 99.29%,29.56% 99.1%,21.0% 99.58%,14.62% 99.98%,7.07% 99.82%,0.09% 99.5%,0.05% 93.39%,0.1% 85.21%,0.31% 79.31%,0.06% 71.33%,0.44% 65.05%,0.66% 57.87%,0.22% 49.83%,0.29% 43.63%,0.77% 35.02%,0.14% 28.04%,0.19% 21.4%,0.47% 13.81%,0% 6.98%)}}
 @keyframes kl-rl{from{left:calc(50% - 16px)}to{left:2px}}@keyframes kl-rr{from{right:calc(50% - 16px)}to{right:2px}}
 /* kitSheetTurn: the whole sheet swings around the spine */
-.kst{position:absolute;left:0;top:0;pointer-events:none}
-.kst-sheet{position:absolute;left:0;top:0;transform-style:preserve-3d;-webkit-transform-style:preserve-3d;will-change:transform}
-.kst-face{position:absolute;inset:0;overflow:hidden;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:3px;box-shadow:0 0 14px #2a14064d}
-.kst-back{transform:rotateY(180deg)}
-html body .kst .kst-face>*:not(.kst-sh){position:absolute!important;inset:0!important;width:auto!important;height:auto!important;max-height:none!important;margin:0!important;visibility:visible!important;transform:none!important}
-.kst-sh{position:absolute;inset:0;z-index:60;pointer-events:none;opacity:0}
-.kst-front>.kst-sh{background:linear-gradient(90deg,#2a140612,#2a14064d 60%,#2a140685)}
-.kst-back>.kst-sh{background:linear-gradient(90deg,#2a140670,#2a140638 40%,#2a140614)}
-.kst-gs{position:absolute;top:0;bottom:0;left:0;opacity:0;background:linear-gradient(90deg,#1e0f0510,#1e0f0559 calc(100% - 24px),transparent)}
-html body .kst .kcl-ctx{display:block!important;position:absolute!important;inset:0!important;background:none!important;padding:0!important;margin:0!important;border:0!important;max-width:none!important;min-height:0!important;height:auto!important;overflow:hidden!important}
-html body .kst .kcl-ctx>*{position:absolute!important;inset:0!important;width:auto!important;height:auto!important;max-height:none!important;margin:0!important;transform:none!important;visibility:visible!important}
+.ksht{position:absolute;left:0;top:0;pointer-events:none;z-index:9999}
+.ksht-sheet{position:absolute;left:0;top:0;transform-style:preserve-3d;-webkit-transform-style:preserve-3d;will-change:transform}
+.ksht-face{position:absolute;inset:0;overflow:hidden;background:#f3e7cc;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:3px;box-shadow:0 0 14px #2a14064d}
+.ksht-back{transform:rotateY(180deg)}
+html body .ksht .ksht-face>*:not(.ksht-sh){position:absolute!important;inset:0!important;width:auto!important;height:auto!important;max-height:none!important;margin:0!important;visibility:visible!important;transform:none!important}
+.ksht-sh{position:absolute;inset:0;z-index:60;pointer-events:none;opacity:0}
+.ksht-front>.ksht-sh{background:linear-gradient(90deg,#2a140612,#2a14064d 60%,#2a140685)}
+.ksht-back>.ksht-sh{background:linear-gradient(90deg,#2a140670,#2a140638 40%,#2a140614)}
+.ksht-gs{position:absolute;top:0;bottom:0;left:0;opacity:0;background:linear-gradient(90deg,#1e0f0510,#1e0f0559 calc(100% - 24px),transparent)}
+.ksht-gl{left:auto;right:100%;background:linear-gradient(270deg,#1e0f0510,#1e0f0559 calc(100% - 24px),transparent)}
+.ksht-under{position:absolute;inset:0;overflow:hidden}
+html body .ksht .ksht-under>*{position:absolute!important;inset:0!important;width:auto!important;height:auto!important;max-height:none!important;margin:0!important;visibility:visible!important;transform:none!important}
+html body .ksht .kcl-ctx{display:block!important;position:absolute!important;inset:0!important;background:none!important;padding:0!important;margin:0!important;border:0!important;max-width:none!important;min-height:0!important;height:auto!important;overflow:hidden!important}
+html body .ksht .kcl-ctx>*{position:absolute!important;inset:0!important;width:auto!important;height:auto!important;max-height:none!important;margin:0!important;transform:none!important;visibility:visible!important}
 .kcl-host{position:fixed;z-index:40;pointer-events:none;
  /* the turning page never rises above the page area (stays under the top bar); it may still swing out sideways over the left page */
  clip-path:polygon(-6000px 0,6000px 0,6000px calc(100% + 3px),-6000px calc(100% + 3px))}
@@ -432,3 +463,24 @@ function kitBookLive(){const g=document.querySelector(".game");if(!g)return;
      if(typeof kitPcSize==="function"){requestAnimationFrame(()=>{try{kitPcSize()}catch(e){}});setTimeout(()=>{try{kitPcSize()}catch(e){}},150)}}}catch(e){console.error(e)}
    return out};
   window.render=render},0)})();
+
+/* ---------- swipe the page to turn it (like the week book and the owner's binder app): on #panel a quick horizontal swipe = the next /
+   previous tab in the tab bar (left swipe → forward, the sheet swings over the spine; right swipe → back). Not on the map, not in a
+   dialog, not when the swipe starts in something that scrolls sideways (person strip, chips) or in a form control. ---------- */
+(function(){let sw=null;
+ const sideScroll=t=>{for(let e=t;e&&e.id!=="panel"&&e!==document.body;e=e.parentElement){if(e.scrollWidth>e.clientWidth+4){const ox=getComputedStyle(e).overflowX;if(ox==="auto"||ox==="scroll")return true}}return false};
+ const down=(t,x,y)=>{sw=null;if(!(t&&t.closest))return;
+  if(!t.closest("#panel")||t.closest("input,textarea,select,canvas,[data-noswipe],.kgl,.mapv")||document.querySelector(".game.maptab"))return;
+  const m=document.getElementById("modal");if(m&&!m.hidden)return;if(sideScroll(t))return;sw={x,y,t:performance.now()}};
+ const up=(x,y)=>{const s=sw;sw=null;if(!s)return;const dx=x-s.x,dy=y-s.y,dt=performance.now()-s.t;
+  if(Math.abs(dx)<64||Math.abs(dx)<Math.abs(dy)*1.8||dt>900)return;
+  const B=[...document.querySelectorAll("#tabs [data-tab]")].filter(b=>b.offsetParent&&!b.disabled);const cur=B.findIndex(b=>typeof tab!=="undefined"&&b.dataset.tab===tab);if(cur<0)return;
+  const nb=B[cur+(dx<0?1:-1)];if(!nb)return;nb.click();
+  /* the swipe was a page turn, not a tap: swallow a click that may follow on the panel */
+  const kill=ev=>{ev.stopPropagation();ev.preventDefault()};document.addEventListener("click",kill,{capture:true,once:true});setTimeout(()=>document.removeEventListener("click",kill,{capture:true}),350)};
+ /* touch: touch events (a pointer stream is cancelled once the browser starts panning); mouse / pen: pointer events */
+ document.addEventListener("touchstart",e=>{if(e.touches.length!==1){sw=null;return}const q=e.touches[0];down(e.target,q.clientX,q.clientY)},{passive:true,capture:true});
+ document.addEventListener("touchend",e=>{const q=e.changedTouches[0];if(q)up(q.clientX,q.clientY)},{passive:true,capture:true});
+ document.addEventListener("touchcancel",()=>{sw=null},{passive:true,capture:true});
+ document.addEventListener("pointerdown",e=>{if(e.pointerType==="touch")return;if(e.button>0||!e.isPrimary){sw=null;return}down(e.target,e.clientX,e.clientY)},{passive:true,capture:true});
+ document.addEventListener("pointerup",e=>{if(e.pointerType==="touch")return;up(e.clientX,e.clientY)},{passive:true,capture:true})})();

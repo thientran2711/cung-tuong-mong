@@ -51,6 +51,18 @@ Nhánh `review/page-curl` từ origin/review/fold-layout (đã gộp tới e7deb
   thoáng lệch chữ (thẻ người đang đo lại) — kiểm lại trên máy thật; (4) lật lùi (dir −1) quay quanh mép phải, chưa soi kỹ ảnh back-45;
   (5) sổ tuần chưa chuyển sang cả tờ (vẫn kitCurl) — hỏi chủ có muốn giống không.
 
+## v3 NGUYÊN TỜ (15/11, thợ mới, nối từ 0e8cb4ef; luật sếp 06:25Z + 07:50Z + 10:00Z, ảnh mẫu dev/owner-shots/1115-turn-ref-1/2.jpg)
+- `kitSheetTurn` viết lại (jbook): trục gáy = mép TRÁI tờ (luôn), p 0→1 = lật tới; lật lùi = cùng chuyển động chạy 1→0 (tờ mang trang mới
+  quay ngược qua gáy, đáp đúng lên trang mới; bản chụp trang cũ nằm dưới `under` tới khi bị phủ). Bỏ kiểu cũ "lật lùi quay quanh mép phải".
+  Tùy chọn x/y (gáy trong host), p đầu, shadeL/shadeR (bóng hai bên đất), vanish (mờ 18 % cuối), setFront/setBack.
+- `kitCurl` = `kitSheetTurn` (sổ tuần j87 + kitBookSpread tự đổi sang nguyên tờ); bộ gấp góc cũ giữ tên `kitCurlFold` (không dùng).
+- SỬA LỖI: lớp `.kst` của tờ lật TRÙNG lớp ô chỉ số `.kst` (jk4/j79) → ô chỉ số thanh trên bị `pointer-events:none` + absolute.
+  Đổi họ lớp tờ lật thành `.ksht*`.
+- Vuốt ngang trên trang (#panel) = sang tab kế / tab trước (trái = tới); bỏ qua bản đồ, hộp thoại, ô nhập, thứ cuộn ngang.
+- `kitCurlSwap.hold(p)` / `.end()` = móc thử (không còn đóng băng rAF toàn trang → trang dưới đo bố cục bình thường).
+- KIT.md §34.0 LUẬT LẬT TRANG (7 điểm) + §27 dòng lật sổ tuần; §34.1 cũ ghi là lịch sử.
+- Thử: `dev/test/sheet-turn.js` → ảnh `dev/shots/page-curl2/<tag>-fwd-{20,45,70}.jpg`, `-back-{60,30}.jpg`.
+
 ## Kiểm thử (Playwright)
 - page-curl: 1180x820@2, 1366x1024@2, 686x880@2.2, 755x1000@2 — không lỗi trang, không tràn ngang, giảm chuyển động = không cong (mờ chéo).
   390x844@3: khung giữa chụp được, trình duyệt thử bị sập ở bước kéo tay (máy thử load ~50, bộ nhớ) — cần chạy lại khi máy rảnh.
