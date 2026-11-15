@@ -445,3 +445,7 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - LIVE CDN (13:00Z) 136 tranh hành sự đợt 3.
 - (13:05Z) Hàng nút lọc (Tất cả/Nghỉ ngơi/…) đang trôi đè lên thẻ khi cuộn → cố định sát ngay dưới khung chỉ số, nằm NGOÀI vùng cuộn; chỉ danh sách bên dưới cuộn. Luật kit cho mọi tab.
 - (13:05Z) Sếp hỏi cân bằng Nhịn/Đáp trả: đã làm trong review/ts-b (cfbffb955), đang duyệt (R2), chưa lên.
+- (13:15Z) Khuôn chung kitEventDp cho MỌI sự việc có người xuất hiện: trái = hình người toàn thân (tên trên); phải trên = ảnh sự việc (ngang); giữa = thông tin; dưới = nút chọn (ngắn đôi một hàng hoặc dài, tùy nội dung). Ảnh ngang: cắt từ ảnh dọc bằng điểm lấy nét nếu được, không được mới vẽ ngang.
+- (13:15Z) Thẻ Hoàng thượng ban ngày phải có việc: xin yết kiến, dâng canh, dâng tranh/thơ/đồ (chọn từ túi), hầu cờ đàn, mời dạo vườn; Thái hậu tương tự.
+- (13:15Z) "Chân tình" đang là phép thử nết ẩn → đổi thành nguyên nhân thật, hiện ở "Vì sao" (tự tay làm cho đúng người + đủ thân). Thêm giải nghĩa Ân tình.
+- (13:15Z) Dò ảnh dùng chung: không làm lại phần tranh hành sự (act-pics2 đã có bản đồ nghĩa), chỉ dò hộp thoại/sự kiện/thẻ tin.
