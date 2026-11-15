@@ -327,7 +327,7 @@ Rules
   ("Tháng này: …" lines go to the last group, prefix dropped). Never pass a joined string of several facts from new code.
 - `kitName(p)` · `kitTitle(p)` · `kitPersonLine(p,{sub,chips})` · `kitFaceH(p,size)`.
 - `kitChip(label, n)` delta chip (sign + colour by meaning) · `kitChip(text,"ok"|"no"|"g"|"r"|"n")` status chip (✓ / ✗) · `kitChips(list)`.
-- `kitRows([[label, value|[values], cls]])` = the act-card `.kb` grid (labels small caps `--k-lab`). `kitTiers([...])` ladders (rule panels).
+- `kitRows([[label, value|[values], cls]])` = the act-card `.kb` grid (labels small caps `--k-lab`) = THE kit table for every label|value list (§51). `kitTiers([...])` ladders (rule panels).
 - `kitTiles([[label,value]])` small stat tiles, 4 per row (scene panels).
 - Tokens (j79 `:root`): `--k-hair #e6d3ac` hairlines · `--k-lab #8a7350` labels · `--k-card #fffaf0` · `--k-card2 #f6ead6` · `--k-seal #9a2c1c` · `--k-rad 8px`. The act card (j63) uses the same values.
 
@@ -900,6 +900,11 @@ One dialog for giving any chest item (bought goods and handmade works; chest "T�
   dialog option (portrait `mdH xs`, name, odds · Tốn · Được · Kèm via kitParse) or a locked option with its reason (`.kwhy`).
 - Close: the kit ✕ only (32.10 turns the "Thôi" option into kit-x). The item someone else wears (`kitOtherItem`, tap a slot on her card) is
   a kitModal info card: kitItem lg + kitItemRows + the owner line (`mdH sm` + name) + kitFacts, closed by the kit ✕.
+- An option with `kgg:"all"` is not a recipient: it shows under every recipient tab (review/poison-gift: "Bỏ độc vào…" on food, drink and sachets,
+  jpoison). A handmade work's recipient row carries the chân tình check in its Ghi chú ("Chân tình: đủ — …" / "chưa đủ — cần …", jpoison
+  gfSincere). The poison card it opens (PEND.pgpick, in KIT_ACT_PIDS) is a plain kit dialog: options with the real odds word + Tốn/Được/Mất/Kèm
+  and `option.why()` for the kit "Vì sao" popover (11.1; `option.base` = the act's base, else BAL.spyBase). The incoming-dish card (PEND.pgin)
+  is an event choice (28.6: price + hint, own `hint`/`risk`).
 ### 28.13c kitEquipSlots — "Đang mang" EQUIPMENT SLOTS (owner 11/15, RPG-style) — `dev/build/jinv.js` — KIT READY
 `kitEquipSlots({key, title, slots:[{k,label,item:{src,name,grade,tip}|null,ghost,mini}], sum, onPick:fn(slot)})` → `.keq` under the bag:
 header = kit section title + totals (Sắc/Danh chips · "Xa xỉ <total>" neutral · "N món vượt phẩm: dễ bị tố" law notice; chips wrap, never cut).
@@ -2248,6 +2253,42 @@ merit invitation, opened for real and measured (layout, one person, banner in th
 > §40 APP ICON) and with open branches (review/kit-fig2 §39 kitActCompact / §40 kitEventDp, review/ts-a §39 TOP 15,
 > review/kit-table / fix-float §39 kitRelTable). Renumbered to §45/§46; §41–§44 were left free for those branches; main took §41 (kitMeMark), close-bugs §42 (CLOSE-BUGS RULES); tabs-kit r7 put kit-fig2's kitActCompact at §43 (reviewer r7: it was §42 on the branch, clashed with close-bugs §42); §44 still free.
 > kit-fig2's jk4 `kitActCompactOn` and §46 `kitActCompact` (jtabs) were the same idea — folded in tabs-kit r7: jtabs uses kit-fig2's part (§43).
+
+## 51. KIT TABLE · every label|value list = ONE kitRows grid (owner 11/15 17:27Z, review/kit-table) — j79 `.kpkb` + `kitRows` / `kitReqRows`
+(Numbered §41 on review/kit-table; renumbered §51 by review/kit-table-r6 because main §41 = kitMeMark — coordinator registry.)
+Owner bug: in LUẬT · Ân thưởng ("Đêm thị tẩm vui | Trâm ngọc bích…", "Sinh hoàng tử | Ngọc bội ngự ban…") the right column started at a
+different x on every row, because each legacy row (`.pcb.rows > .pcrow`, a flex row with `justify-content:space-between`) sized its own
+label ("Sinh hoàng tử" wrapped to 3 lines, one word per line).
+- **Rule:** any list of label | value rows is built with `kitRows([[label, value|[values], cls]])` — one CSS grid, rows are `display:contents`,
+  so every value of the table starts at the SAME x (±1 px). Never write `<div class="pcrow"><span>label</span><b>value</b></div>` again
+  (a `.pcrow` with ONE cell, e.g. a news line or a log line, is a plain list line, not a table).
+- **Label column (one width per table):** `grid-template-columns: fit-content(var(--kt-lab, max(34%, 7rem))) minmax(0,1fr)` = the longest
+  label, capped at 34 % of the table (never under 7rem, so a label is never one word per line); longer labels wrap INSIDE the column
+  (`white-space:normal`, no word breaking). A caller may set `--kt-lab` on a container for a narrower/wider cap; nobody sets private widths.
+- **Values:** `cls` = g | r | n | t (green / red / dim / ink). A value that is already a kit piece (`kitChip`, `.ef`, `kitName`) is kept as
+  is; an array of values is joined with the kit `·` separator. Silver in a value = `kitChip("Bạc", n)`, never "+N bạc".
+- **Person card groups (`pcard`, j15):** a group may hold kit rows as tuples `["label", value, cls]` next to buttons/notes; the tuples
+  become ONE `kitRows` table, the strings stay in the `.pcb` grid below it (Điều ngài thích, Tư chất, Tài nghệ, Đường đi của cung nữ,
+  Việc nhờ "Bước này" / "Các bước").
+- **Tables written one after another** (shop detail: price row + `kitItemRows`): `kitRowsJoin(kitRows(a), kitRows(b))` merges them into
+  ONE grid so the values line up across both.
+- **Requirement lists:** `kitReqRows([[ok, "Sủng 8 (cần 15)"], …])` = the same table: label = what is needed, value = ✓/✗ + numbers
+  (green met, red unmet). "Ghế Phi: còn chỗ" → Ghế Phi | ✓ còn chỗ; "X (a, b)" → X | a, b; a bare sentence → sentence | ✓ đủ / ✗ chưa đủ.
+  Used by Mệnh truyện "Điều kiện sắc phong …" (legacy j6 panel and the tabs-kit sub-tab Mệnh truyện · Sắc phong, jtabs `ktStoryHTML`;
+  r6 replaced `kitChecks(R)` there: §46 kitChecks stays for one-cell check lists such as chapter steps).
+- **Relation chip in a rule text:** "mỗi lần: phi tần khác ghen +3" = `kitChip(kitRel("them","phi tần khác ghen ta"), 3, "r")`
+  (label purple §11.2, number red).
+- **Fact rows without a person (`kitFacts` world rows):** no blank round dot any more (`.kfact > .kfdot` hidden, text takes the row); the
+  week book keeps its small diamond bullet.
+- Migrated (legacy `.pcrow` → kitRows): Ân thưởng (rewards + Sổ ân thưởng), Bổng lộc, Thang nguy hiểm (j24 fallback), Tuyển tú, Bảng phẩm
+  vị "Ghế theo phẩm", Kiếp này (end card) + Sổ luân hồi, Tranh ghế (contestants + score table), Hoàng thượng "Điều ngài thích" (j15 + jhc),
+  self card Tư chất / Tài nghệ, cung nữ "Đường đi", identity card (nlCard), Kế vị box, Thượng thư phòng box, Việc nhờ steps, Điều kiện
+  sắc phong. j65 / j69 DOM fixes read both `.pcrow` and `.kb > .kr` rows. Tuần lục HIỆN NAY is review/fix-float (kitRelTable), not here.
+- Kit sample page (§47, `#kit`): jkitpage registers §51 samples kitRows, kitRowsJoin, kitReqRows, `kitChip(kitRel(…))`.
+- Test: `node dev/test/kit-table.js <site url> <W>x<H>@dpr [shotdir]` opens every tab / sub-tab / person / category, the HUD rule dialogs,
+  rule panels, item dialogs, the shop, Sổ luân hồi and the end card; per list it prints the value-x spread, labels standing one word per
+  line, and any legacy two-cell `.pcrow` or flex space-between row list. Exit 1 on any fail.
+
 ## 53. EVENT-CHOICE PARTS · kitHint · kitRisk · kitHintRow · kitKemRow · kitResultSeal (owner 11/15 14:30Z / 15:05Z / 15:10Z, review/opt-render) — `dev/build/jk2b.js`, `dev/build/j63.js`
 Index of the shared parts review/opt-render added (number from the coordinator's registry; the rules live where they apply):
 - `kitIsEventChoice(m)` + `KIT_ACT_PIDS` + data flags `ev` / `act` / `shop` — which dialogs are events (cost mode): §28.6.

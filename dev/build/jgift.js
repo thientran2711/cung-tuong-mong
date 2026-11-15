@@ -33,9 +33,9 @@ function giftInfo(e,best){const a=giftArt(e),R=[];
   R.push(["Món",`${art?art+", ":""}${w.q} phần`]);
   R.push(["Người làm",w.bn==="ngươi"?"Tự tay ngươi làm":w.bn]);R.push(["Làm lúc",w.d||"—"]);
   if(w.p!=null)R.push(["Lưu ý",w.p<wk()?"đã nguội, không dâng được nữa":"phải dâng trong tuần này, để lâu thì nguội"]);
-  R.push(["Khi tặng","Đồ tự tay làm được thêm chân tình với người hiền hậu, thêm hợp ý khi trúng sở thích"])}
+  R.push(["Khi tặng","Thành chân tình khi đủ: tự tay làm, đúng ý người nhận, đủ thân, không ngay sau khi nhờ việc; mỗi người ghi rõ đủ hay thiếu gì"])}
  else{const it=IT[e.k]||{};if(it.d)R.push(["Dùng",it.d]);const fr=typeof kinvFrom==="function"?kinvFrom(e.from):"";R.push(["Nguồn",fr||"Đồ của ngươi"]);
-  if(e.t&&typeof TAINT==="object"&&TAINT[e.t])R.push(["Đã tẩm",TAINT[e.t].n]);R.push(["Khi tặng","Món hợp người nhận thì được nhiều hơn"])}
+  if(e.t&&typeof TAINT==="object"&&TAINT[e.t])R.push(["Đã tẩm",TAINT[e.t].n]);R.push(["Khi tặng","Món hợp người nhận thì được nhiều hơn; đồ mua bằng bạc không thành chân tình"])}
  if(best)R.push(["Hợp nhất",best]);
  /* reviewer r6 (LUẬT KIT TRƯỚC): the kit item-card head (.kshdt name in its grade colour + kind · grade, as the shop card 28.13d) and kit rows
     (kitRows in .kinvrows), no private chip / row styles */
@@ -77,7 +77,7 @@ function giftDecorate(){const M=$("modal");const m=Q[0];const gix=giftIxOf(m);if
   if(typeof kitTabRowHTML==="function"&&tabs.length>1)box.insertAdjacentHTML("beforebegin",`<div class="pctabs kcattabs kgifttabs" role="tablist">${kitTabRowHTML(tabs.map(([k,l])=>({k,label:l,n:`${cnt[k][0]}/${cnt[k][1]}`,tip:`tặng được ${cnt[k][0]} trên ${cnt[k][1]} người`})),GIFT_TAB,"data-kgtab")}</div>`);
   giftFilter(M)}
  /* 3. close: the kit ✕ (32.10, kitCancelIx turns the "Thôi" option into kit-x) — no private ✕ (reviewer r6: there were two) */}
-function giftFilter(M){M.querySelectorAll(".opt[data-kgg]").forEach(b=>{b.hidden=GIFT_TAB&&M.querySelector(".kgifttabs")?b.dataset.kgg!==GIFT_TAB:false})}
+function giftFilter(M){M.querySelectorAll(".opt[data-kgg]").forEach(b=>{b.hidden=GIFT_TAB&&M.querySelector(".kgifttabs")?b.dataset.kgg!==GIFT_TAB&&b.dataset.kgg!=="all":false})}
 document.addEventListener("click",ev=>{const t=ev.target.closest&&ev.target.closest("[data-kgtab]");if(!t)return;ev.stopPropagation();ev.preventDefault();GIFT_TAB=t.dataset.kgtab;
  const M=$("modal");M.querySelectorAll("[data-kgtab]").forEach(b=>{const on=b.dataset.kgtab===GIFT_TAB;b.classList.toggle("on",on);b.setAttribute("aria-selected",on)});giftFilter(M)},true);
 (function(){const s0=showModal;showModal=function(){try{if(giftIxOf(Q[0])!=null||(Q[0]&&Q[0].pid==="giftto"))Q[0].showOut=true}catch(e){}const r=s0.apply(this,arguments);try{giftDecorate()}catch(e){console.error("gift",e)}return r}})();
@@ -158,8 +158,8 @@ document.addEventListener("click",ev=>{const g=ev.target.closest&&ev.target.clos
  try{closeModal()}catch(e){}
  if(g.dataset.kgmgo){if(typeof goTo==="function")goTo(g.dataset.kgmgo);return}
  const t=g.dataset.kgmgive;if(!can(2)||Q.length)return;pushDil(mkP("giftto",{t}),t==="emp"?"Dâng quà lên Hoàng thượng":"Dâng quà lên Thái hậu");render()},true);
-(function(){const P0=typeof pcard==="function"?pcard:null;if(!P0)return;pcard=function(o){try{if(o&&o.groups&&o.groups[0]&&o.groups[0][0]==="Việc hôm nay"){
-   const t=o.rank==="Hoàng thượng"?"emp":/^Thái hậu/.test(o.rank||"")?"th":null;if(t){const B=courtMeet(t);if(B.length)o.groups=[["Gặp "+(t==="emp"?"ngài":"Thái hậu")+" ban ngày",B]].concat(o.groups)}}}catch(e){}return P0.apply(this,arguments)}})();
+(function(){const P0=typeof pcard==="function"?pcard:null;if(!P0)return;pcard=function(o){try{const gi=o&&o.groups?o.groups.findIndex(g=>g&&g[0]==="Việc hôm nay"):-1;if(gi>=0){
+   const t=o.rank==="Hoàng thượng"?"emp":/^Thái hậu/.test(o.rank||"")?"th":null;if(t){const B=courtMeet(t);if(B.length){o.groups=o.groups.slice();o.groups.splice(gi,0,["Gặp "+(t==="emp"?"ngài":"Thái hậu")+" ban ngày",B])}}}}catch(e){}return P0.apply(this,arguments)}})();
 /* the giftto picker: same decoration as the gift dialog (✕, locked rows), no tabs */
 (function(){const g0=giftIxOf;giftIxOf=function(m){return g0(m)}})();
 (function(){const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);try{const m=Q[0],M=$("modal");if(m&&m.pid==="giftto"&&M&&!M.hidden){const dlg=M.querySelector(".dlg");dlg.classList.add("kgiftdlg");let back=null;
@@ -205,7 +205,7 @@ function kmEmpBtns(){return Object.keys(KM_EMPACT).map(k=>pbtn(`data-kmemp="${k}
 document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.closest("[data-kmemp]");if(!b||b.disabled)return;ev.stopPropagation();ev.preventDefault();const kind=b.dataset.kmemp;
  try{closeModal()}catch(e){}const r=kmEmpAct(S,kind);if(!r){render();return}log(r.txt);
  if(r.ok&&kind!=="walk"){const tc=S.tamco||0;const oW=odA(S,30+tc/2),oL=odA(S,40+tc/2);
-  Q.push({t:KM_EMPACT[kind][0],h:`<p>${KM_EMPACT[kind][1]}</p><p class="g">${r.txt}</p><p>${kind==="ky"?"Ván cờ đến hồi gay cấn.":"Khúc đàn sắp hết."} Ngươi định thế nào?</p>`,
+  Q.push({ev:1,t:KM_EMPACT[kind][0],h:`<p>${KM_EMPACT[kind][1]}</p><p class="g">${r.txt}</p><p>${kind==="ky"?"Ván cờ đến hồi gay cấn.":"Khúc đàn sắp hết."} Ngươi định thế nào?</p>`,
    opts:[{n:kind==="ky"?"Thắng khéo, để ngài thua mà vẫn vui":"Kết khúc thật hay, khoe tài",fx:{},x:`${word(oW)} · thành: Danh +1, Sủng +1 · hỏng: ngài phật ý, Sủng -1`,go:()=>{if(roll(oW)){ap(S,{danh:1,sung:1});log("Ngài khen ngươi khéo léo. Danh +1 · Sủng +1.")}else{ap(S,{sung:-1});log("Ngài thoáng phật ý. Sủng -1.")}}},
     {n:kind==="ky"?"Cố ý thua một nước":"Cố ý đàn chậm lại, để ngài chỉ bảo",fx:{},x:`${word(oL)} · thành: Ân tình +1 · hỏng: ngài nhận ra, Sủng -1`,go:()=>{if(roll(oL)){ap(S,{an:1});log("Ngài đắc ý, càng thương ngươi. Ân tình +1.")}else{ap(S,{sung:-1});log("Ngài nhận ra ngươi cố ý nhường. Sủng -1.")}}}]})}
  else Q.push({t:KM_EMPACT[kind][0],h:`<p>${KM_EMPACT[kind][1]}</p><p class="${r.ok?"g":"r"}">${r.txt}</p>`});

@@ -655,10 +655,11 @@ button.ka.kanoart>.kaart{display:none!important}
  button.ka.kart .kat>.kan{flex:1 1 auto!important;min-width:0!important}
  button.ka.kart .kat>:not(.kan){flex:0 0 auto!important;white-space:nowrap!important}
  button.ka.kart .klead{display:-webkit-box!important;-webkit-box-orient:vertical!important;-webkit-line-clamp:1!important;overflow:hidden!important}
- button.ka.kart small.kb{display:flex!important;flex-wrap:wrap!important;gap:3px 6px!important}
- button.ka.kart small.kb>.kr{display:inline-flex!important;flex-wrap:wrap!important;align-items:center!important;gap:2px 4px!important;width:auto!important;max-width:100%!important;grid-template-columns:none!important;border:0!important;padding:0!important}
- button.ka.kart small.kb>.kr>.krl{flex:0 0 auto!important;width:auto!important;min-width:0!important;font-size:.66rem!important}
- button.ka.kart small.kb>.kr>.krv{display:inline-flex!important;flex-wrap:wrap!important;gap:2px 4px!important;min-width:0!important}
+ /* KIT §51 (kit-table r6): the Cần/Tốn/Được rows stay ONE kit table (j63 .kb grid, rows display:contents) so every value starts at the
+    same x; only the value cell flows its chips. (Was a flex chip flow: short values sat beside the label, long ones under it.) */
+ button.ka.kart small.kb{display:grid!important;grid-template-columns:fit-content(var(--kt-lab,max(34%,7rem))) minmax(0,1fr)!important;column-gap:6px!important;row-gap:2px!important}
+ button.ka.kart small.kb>.kr>.krl{font-size:.66rem!important;align-self:baseline}
+ button.ka.kart small.kb>.kr>.krv{display:flex!important;flex-wrap:wrap!important;gap:2px 4px!important;min-width:0!important}
  button.ka.kart small.kb>.kr>.krv>*{display:inline-block!important;white-space:normal!important;max-width:100%!important;overflow-wrap:anywhere}
  button.ka.kart small.kb>.kr>.krv>.ksep{display:none!important}
 }

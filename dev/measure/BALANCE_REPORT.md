@@ -182,3 +182,26 @@ Childbirth is the largest share. Next is the bot's own spying getting caught ("B
 then illness and the rare poison that lands. NPC lethal acts on her are tried often but rarely land
 (poison ~20 tried / 0.3 landed a life; pond 12 / 0.5), because the sensible bot keeps its defence orders (Phòng bị) up.
 A careless player gets hit much more often.
+
+## 16 khắc một tuần (4 buổi × 4 khắc, B4L) — đo 15/11 (review/balance-unified), bot sensible
+Nguồn: uni71 = 71 đời HHSTOP trên bb60f35 (hợp nhất đồ mặc, núm v12); full12 = 12 đời trọn vẹn (không HHSTOP) trên 9a2ba35bf
+(đã gộp main df3094e7) với inbuoi.js; e3 = 40 đời trên review/econ (để so).
+| | v12 cũ (3 buổi) | uni71 (16 khắc) | e3 (econ) |
+|---|---|---|---|
+| Hoàng hậu | 35 % | 37 % | 45 % |
+| chết sớm | 42 % | 46 % | 45 % |
+| năm tới HH (25/50/75) | ?/5,8/? | 3,9 / 5,2 / 7,8 | 4,4 / 6,0 / 7,5 |
+| tuần tới HH (25/50/75) | ?/208/? | 139 / 188 / 280 | 158 / 216 / 271 |
+| phút thật @10 s/tuần | 35 | 23 / 31 / 47 | 26 / 36 / 45 |
+| phút thật @20 s/tuần | 69 | 46 / 63 / 93 | 53 / 72 / 90 |
+- Thái hậu / Hoàng thái hậu: chỉ có khi đời kết thúc lúc Hoàng thượng băng (j3 over). full12: Mẫu hậu Hoàng thái hậu 2/12 (tuần 444 và 522 = 12,3 và
+  14,5 năm), Thái phi 2/12, HH 6/12 (tuần 115, 190, 202, 217, 274, 289; trung vị ~210). Nữ đế: không có trong game.
+- Nhanh hơn v12 ~10 % số tuần (188 so với 208) — trong độ ồn (n nhỏ), không rõ rệt.
+- KHẮC mới là giới hạn, không phải Sức: full12 có 83 % buổi dùng hết 4 khắc, 0 % buổi dừng vì Sức < 20, 16 % buổi không còn việc đáng làm;
+  Sức trung bình cuối buổi 54. Bot dùng ~3,7 khắc mỗi buổi = ~14,6 khắc / tuần.
+- Giây thật mỗi tuần (ước lượng): ~14,6 khắc / tuần, việc tốn 1–2 khắc → ~9–10 lần chọn + 1–2 thẻ sự kiện mỗi tuần; 3–5 giây mỗi lần chọn
+  → 35–60 giây / tuần. Vậy HH trung vị 188 tuần ≈ 110–190 phút chơi thật (không phải 31–63 phút như cách tính 10–20 s / tuần).
+- Đề xuất (CHƯA áp): (a) muốn Sức là giới hạn thật: tăng Sức tốn của việc thường (trò chuyện, dạo, đi thăm 3–5 Sức) hoặc giảm hồi Sức tuần
+  ~25 %, để bot dừng sớm ~20–30 % số buổi; (b) muốn HH ~60–90 phút thật: giảm số tuần tới HH ~40 % (hạ ngưỡng thăng bậc / tăng Sủng
+  mỗi đêm ~20 %) hoặc 3 khắc mỗi buổi (12 khắc / tuần) giữ số tuần như nay.
+- Sinh nở: khó sinh 17,8 % / lần (uni71), 20,8 % (e3) — cao hơn đích 8–12 % dù rủi ro hiện trên thẻ ~11–13: cần soát (số hiện ≠ số chết?).

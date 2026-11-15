@@ -112,7 +112,7 @@ const R97L=[
  fx:{danh:10,bac:150,sung:5},rw:"nt_nhuy",ti:"Vĩnh Hòa phu nhân"},
 {a:"nc_tuc",tag:"Chim công của Thái hậu",w:"th",p:.15,n:"Múa cho Thái hậu xem trong áo lông công của mẹ",c:{suc:-6},
  path:["Giải thích ý nghĩa chim công","Dâng một phần lên Thái hậu","Xin dâng thuốc quê nhà","Mời các phi tần cùng chơi","Viết thơ bằng chữ Nam Chiếu","Kể chuyện Phật giáo"],np:2,bad:["Đổi sang y phục Đại Hy","Thôi nấu","Không dám, sợ mang họa"],sc:2,x:[()=>!S.thDead&&(r97art("vu")>=2||S.sac>=55),"Thái hậu còn sống; Vũ bậc 2 hoặc Sắc từ 55"],
- t:"Điệu múa dứt, Thái hậu tự tay khoác cho ngươi tấm áo choàng của chính bà: “Ai gia sống đến tuổi này mới biết, người ngoài là người chưa ai chịu hiểu.” Điệu chim công được ghi vào nhạc phủ, và từ đó ai chê y phục Nam Chiếu là chê Đức Thọ cung.",
+ t:"Điệu múa dứt, Thái hậu tự tay cài lên tóc ngươi cây trâm đông châu của chính bà: “Ai gia sống đến tuổi này mới biết, người ngoài là người chưa ai chịu hiểu.” Điệu chim công được ghi vào nhạc phủ, và từ đó ai chê y phục Nam Chiếu là chê Đức Thọ cung.",
  fx:{th:20,danh:8,sac:2},rw:"nt_dongchau",ti:"Chim công của Đức Thọ cung"},
 {a:"nc_vuong",tag:"Nữ vương Nam Chiếu",w:"emp",p:.10,n:"Mở phong thư thứ ba, thư của các trưởng lão Nam Chiếu",c:{suc:-4},
  path:["Xin Hoàng thượng cho để tang","Đọc kỹ, dò xem ai được lòng dân","Trả lại","Vận động Lễ bộ","Quỳ xin Hoàng thượng cứu","Gửi bạc riêng giúp huynh","Nói thật những gì đã dò"],np:2,bad:["Nhận vàng","Vận động Binh bộ"],sc:2,x:[()=>S.sung>=45,"Sủng từ 45"],
