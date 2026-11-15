@@ -105,3 +105,4 @@ Nhắc theo dõi: send_later 30 phút, tự đặt lại mỗi lượt (lịch l
 - 08:40Z review/sub-odds 96d7c2df8 SẴN SÀNG KIỂM → hàng duyệt sau hau-cung-ui. Chip phải che đầu người trên điện thoại → stage-slots.
 - 08:50Z LIVE main=312b6b40a court-rules (HH/HQP ở riêng; Thái hậu đúng tuổi; hết khắc ở lại nơi; chạm nơi đang đứng; nút ‹ tên nơi; Luân hồi tải trước hình).
 - [ ] Đi đường xa hơn khắc còn bị chặn (báo từ 14/11) — HOTFIX hotfix/walk-spill
+- [ ] Cảm giác game: nút lún/sáng, PixiJS hiệu ứng, rung máy, rung màn (báo từ 14/11) — review/game-feel
