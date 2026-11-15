@@ -100,7 +100,7 @@ html body #modal .opts.kiphas>.kipw{grid-column:1/-1!important;width:100%;max-wi
 .kipd>.opt.kipcard{pointer-events:none;margin:0;width:100%}
 .kipd>.kipgo{align-self:stretch;min-height:40px}
 .kipd>.kipgo:disabled{filter:grayscale(1);opacity:.55}
-@media (max-height:500px) and (orientation:landscape){.kipw{display:grid;grid-template-columns:minmax(0,1fr) minmax(200px,42%);align-items:start}.kipg{max-height:calc(100dvh - 150px)}}
+@media (max-height:500px) and (orientation:landscape){.kipw{display:grid;grid-template-columns:minmax(0,1fr) minmax(200px,42%);grid-template-areas:"g d";align-items:start}.kipw>.kipg{grid-area:g;max-height:calc(100dvh - 150px);--kshsz:84px}.kipw>.kipd{grid-area:d}}
 @media (max-width:600px){.kipg{--kshsz:84px}}
 `;document.head.appendChild(st)})();
 if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§28.13i",title:"Item pick grid (Tặng quà · Dâng quà · Cài đồ) — tile + selected",html:()=>{try{

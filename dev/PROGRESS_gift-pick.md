@@ -36,7 +36,16 @@ OWNER_DECISIONS 22:45Z #4/#5 (painted gift animations), 22:35Z perf budget.
 - `node dev/test/gift-pick-board.js <url> <out> [WxH] [fxdir]` — storyboard of the moment (one shot per phase; the shared test box is far
   too loaded for a live video: performance.now advanced 7–17 s per 600 ms wait, CDN fx files took ~25 s).
 - `node dev/test/gift-pick-video.js` — video of the live moment (for a faster machine).
-- Results: see the final report / section below.
+- Results (local build, loaded shared box, 15/11): `gift-pick.js` PASS at 755x1000@2, 1000x755, 1180x820, 1366x1024, 844x390@2,
+  390x844@2 (portrait plays, no rotate prompt): all three pickers show the grid (13 / 12 / 12 tiles, 5 per row on tablets, 3 on 390 wide,
+  name rows spread 0 px), selected + detail + confirm in view, confirm gives the item (bag 13 → 12) and starts kitFxGiftCarry
+  (log giftcarry:give → gift:open → glowburst + spark), tap skip leaves 0 fx nodes, Gọn = 0 fx nodes, 0 page errors, 0 overflow,
+  0 clipped text, 0 HTTP errors. Fixes found by the run: grid inside the option box (it takes the options' place in the 32.7 person
+  dialog — plantpick), full width across the kit 2-col option grid (inline grid-column), phone landscape grid | detail areas.
+  Storyboard `gift-pick-board.js` 1180x820: item drops into the open box · closed box · hands carry it · arrival with ribbon slipping
+  off · open box — all pictures read clean on the room (looked at each).
+- Scan `gift-pick-scan.js`: before (origin/main) 3 item pickers as text lists → after 3/3 picture grid, exit 0.
+- Known: on 390x844 the plantpick person dialog (32.7 layout, big figure) leaves the grid ~270 px tall; it scrolls inside the option box.
 
 ## Resume
 `bash dev/site/build_site.sh`; serve the worktree (`python3 -m http.server <free port>`), run the tests above. When review/item-info
