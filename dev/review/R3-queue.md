@@ -1,5 +1,5 @@
 # Hàng duyệt người duyệt 3 (2026-11-15, khi điều phối đóng phiên)
-- review/stage-slots @ 8034f407 — **PASS (có sửa của người duyệt)**. Nhánh gộp review/stage-slots-merged = fast-forward từ origin/main 6e6c2ae6d.
+- review/stage-slots @ 8034f407 — **PASS (có sửa của người duyệt)**. Nhánh gộp review/stage-slots-merged = fast-forward từ origin/main 70c792d41 (lần gộp cuối 70c792d4: tự động, không xung đột mã — chỉ dựng lại index.html/sw.js/assets.json; chưa chạy thử lại trên lần gộp này).
   Chi tiết: dev/review/stage-slots.md. Đã kiểm trên bản gộp main d69030384: stage-slots 5 khổ, stage-counts, kit 14 tab 5 khổ, sổ cũ, coop-e2e 59/59.
   Trên bản gộp main 6e6c2ae6d (lần gộp cuối): stage-slots 1180 + 755 đạt, stage-counts 0 lệch; kit/coop lần cuối chưa chạy xong (máy tải ~50)
   — main chỉ thêm act-audit (không đụng j59/j38), nên rủi ro thấp; người kế tiếp có thể chạy lại coop-e2e trước khi đẩy main.
