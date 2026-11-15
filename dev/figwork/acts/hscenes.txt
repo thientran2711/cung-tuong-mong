@@ -221,3 +221,27 @@ dang-ngoc-nhu-y|0|a consort's hands presenting a jade ruyi scepter on a brocade 
 le-mon|0|a maid's hands placing a small wrapped gift box on a crowded table of birthday offerings, longevity peaches and grand gifts around it
 dang-cau-doi|0|a consort's hands presenting a rolled red paper scroll (blank) to the Emperor's yellow sleeve, New Year red lanterns
 giai-cau-do-den|1|a lady's hand reaching up to a blank paper riddle slip hanging under a glowing lantern among a row of lanterns, Lantern Festival night
+dao-den|1|two ladies' hands in pink and blue sleeves each holding a glowing paper lantern on a stroll through a night garden, rows of lanterns, Lantern Festival
+tha-den-cau-con|1|a consort's hands setting a small red paper lantern afloat on a dark lake, a quiet wish for a child, its glow reflected in the water
+tao-mo|0|a consort's hands clasped in a respectful request, kneeling before the Empress's red phoenix brocade hem, a fresh willow sprig for Qingming laid on the floor beside her
+lam-banh-cho-con|0|a consort's hands pressing dough into a carved mooncake mould, two small children's tiny hands helping on the floured table
+don-giao-thua|1|the Emperor's yellow sleeve and a consort's pink sleeve resting side by side on a veranda railing, New Year's Eve fireworks bursting in the night sky beyond
+viet-cau-doi|0|a consort's hand brushing abstract strokes (no readable characters) on a long strip of red paper, a maid's green-sleeved hands pasting another red strip on a door frame
+thu-mui-ten|0|a consort's hands drawing a bow with an arrow aimed at a distant target on a hunting ground, banners without writing, the Emperor's yellow sleeve at the edge watching
+cuoc-thien-xa|0|ladies' hands placing silver ingots as bets on a viewing stand railing, far off guards shooting arrows at targets on a field
+hoi-phuong|0|a lady's hand in a red riding sleeve holding the reins of a decorated horse on a parade ground, red banners without writing
+sai-di-do-la|0|a consort's hand in a pink sleeve pointing toward a distant palace roof, a young eunuch's dark sleeves bowed low in front of her
+nho-do-tin|0|a maid's hands in green sleeves passing a small wrapped parcel of cakes to a eunuch's dark-sleeved hands by a side gate
+do-la-duoc|0|a kneeling maid's hands clasped as she reports, a mistress's hand in a pink sleeve resting attentively on a carved armrest leaning closer
+nghe-len-duoc|1|a hand pressed flat against a paper lattice door at night; inside, lamplight casts the shadows of two figures talking on the paper
+nap-nghe-bi-bat|0|an older court lady's hand in a dark brown sleeve gripping a maid's green sleeve and pulling her away from beneath a window
+len-cai|1|a hand slipping a small wrapped packet inside an embroidered pillow on someone else's bed, dim candlelight
+ke-len-cai-bi-bat|1|a guard's armored hand clamping down on a young eunuch's dark sleeve as he carries an empty wooden chest out through a palace gate at night
+tim-thay-hinh-nhan|0|a eunuch's hand pulling a small cloth doll pierced with pins out from under a bed, other sleeves drawing back in alarm
+vu-oan-bi-lo|0|the Empress's hand in a red phoenix brocade sleeve holding up a small cloth doll, before her a kneeling figure's clasped hands and bowed sleeves
+dao-duoc-hinh-nhan-trieu|0|a guard's armored hands lifting the lid of a muddy wooden box dug up from the roots of a courtyard tree, a small cloth doll inside, a spade beside
+hinh-nhan-lan-goc|0|a eunuch's hand holding a small cloth doll, following a trail of footprints toward the closed red door of a palace hall
+khap-cung-don|0|clusters of maids' green sleeves leaning together in whispers along a long corridor, all turned toward a distant palace gate
+loi-don-khong-ai-tin|0|two maids' sleeves turning away with a dismissive wave of the hand, leaving a lone maid's green sleeve standing in an empty corridor
+loi-don-phung-phi|0|maids' hands pointing at an open brocade chest overflowing with gold jewelry and silks, whispering sleeves around it
+ly-gian-khong-tin|0|the Emperor's yellow sleeve flicked away dismissively, before it a figure's dark sleeves bowed low, a palace study desk

@@ -19,4 +19,6 @@ for s in C:
     elif b in (None,'-'): gain+=1; ex.append(('gain',b,a,s))
     else: lost+=1; ex.append(('LOST',b,a,s))
 print('lines',len(C),'same',same,'gained picture/marker',gain,'lost picture',lost)
-for e in ex[:40]: print(*e[:3],'|',e[3][:80])
+import os
+if os.environ.get('V'):
+    for e in ex[:40]: print(*e[:3],'|',e[3][:80])
