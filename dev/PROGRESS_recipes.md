@@ -68,3 +68,11 @@ Shots were kept out of git (dev/shots excluded). Phone landscape 844x390: the pi
 - NPC sub-style knowledge is derived (hash + art level), not stored; NPC books are only gifts.
 - Her own allergy is not modelled.
 - Balance bot: see section below.
+
+## Balance
+- Teacher fee by rank (bạc = max(3, 8 % of BAL.pay)): Đáp ứng 3 · Thường tại 4 · Quý nhân 6 · Tần 8 · Phi 10 · Quý phi 13 · HQP 17 · Hoàng hậu 22
+  (old: 5+5×bậc = 5..25 whatever the rank, so it was dear at low rank and trivial at high rank). NPCs pay the same (j85 npcStudy → tchFeeOf).
+  Bot lesson() (j2) and dev/measure/inpage6.js now read tchFee.
+- Bot smoke (dev/measure run1b.sh, 1 shard, 2 lives, cap 40 min on a loaded machine; .art copy with CAP env): life 1 (dtq) 37 months, rank 4,
+  28 lessons, 7 exams, no page errors. Life 2 hit the time cap. A full 5×6 run was not possible under the machine load: please run
+  `dev/measure/run5b.sh` when the machine is free.
