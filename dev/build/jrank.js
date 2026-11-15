@@ -23,7 +23,7 @@ function rkIdGet(){let d=store.get(RK_ID);if(d&&/^[a-z0-9]{16,40}$/.test(d.gid||
 function rkIdSet(o){const d=Object.assign(rkIdGet(),o);store.set(RK_ID,d);return d}
 function rkMyName(){const d=rkIdGet();return d.pn||"Khách vô danh"}
 /* ---------- network ---------- */
-async function rkReq(m,path,body){const c=typeof AbortController==="function"?new AbortController():null;const t=c?setTimeout(()=>c.abort(),9000):0;
+async function rkReq(m,path,body){const c=typeof AbortController==="function"?new AbortController():null;const t=c?setTimeout(()=>c.abort(),15000):0;
  try{const r=await fetch(rkUrl()+path,{method:m,headers:body?{"Content-Type":"application/json"}:{},body:body?JSON.stringify(body):undefined,signal:c?c.signal:undefined,cache:"no-store",credentials:"omit"});
   let j=null;try{j=await r.json()}catch(e){}return{st:r.status,j:j||{}}}catch(e){return{st:0,j:{}}}finally{if(t)clearTimeout(t)}}
 let RK_HELLO=0;
@@ -43,7 +43,7 @@ function rkSummary(endk,fate){const k=S.rk||{};const kids=S.kids||[];const y=Mat
  const cut=s=>{s=String(s||"");const i=s.indexOf("img/");return i>0?s.slice(i):s};
  let alive=false;try{alive=typeof overAlive==="function"?!!overAlive(fate):false}catch(e){}
  return{n:S.name,o:S.origin&&S.origin.k||"",on:S.origin&&S.origin.n||"",mr,sr,mama:!!(k.mama||(S.srv&&S.srv.mama)),out:!!S.out,endk,fate:String(fate||"").slice(0,140),
-  alive,rare:!!(S.rareEnd||S.rare||/Cơ duyên hiếm/.test(String(fate||""))),y,age:S.age|0,age0:Math.max(12,Math.min(40,(S.age|0)-y)),
+  alive:alive||/Thái hậu|Thái phi/.test(endk),rare:!!(S.rareEnd||S.rare||/Cơ duyên hiếm/.test(String(fate||""))),y,age:S.age|0,age0:Math.max(12,Math.min(40,(S.age|0)-y)),
   sons:kids.filter(x=>x&&x.sex==="m").length,daus:kids.filter(x=>x&&x.sex!=="m").length,tz:Math.min(kids.filter(x=>x&&x.sex==="m").length,(S.pdw&&S.pdw.tz||[]).length),
   danh:Math.round(S.danh||0),duc:Math.round(S.duc||0),tg:(S.pdN&&S.pdN.tg)|0,fig:cut(fig),por:cut(por),
   mode:typeof CW!=="undefined"&&CW&&CW.on?"coop":"solo",seed:(S.rkSeed>>>0)||0,ver:RK_VER,t0:S.rkT0||0,trail:(k.t||[]).slice(0,80)}}
@@ -51,13 +51,13 @@ function rkSummary(endk,fate){const k=S.rk||{};const kids=S.kids||[];const y=Mat
 function rkQ(){const q=store.get(RK_Q);return Array.isArray(q)?q:[]}
 function rkRes(lid){const r=store.get(RK_RES)||{};return lid?r[lid]:r}
 function rkResSet(lid,v){const r=store.get(RK_RES)||{};r[lid]=v;const ks=Object.keys(r);if(ks.length>30)ks.sort((a,b)=>(r[a].at||0)-(r[b].at||0)).slice(0,ks.length-30).forEach(k=>delete r[k]);store.set(RK_RES,r)}
-let RK_FL=0,RK_RT=0;
+let RK_FL=0,RK_RT=0,RK_NF=0;
 async function rkFlush(){if(RK_FL){RK_FL=2;return}const q0=rkQ();if(!q0.length)return;RK_FL=1;let wait=0;
  try{await rkHello();const d=rkIdGet();
   for(const it of q0){const r=await rkReq("POST","/life",{gid:d.gid,lid:it.lid,life:it.life});
-   if(r.st===200&&r.j.ok){rkResSet(it.lid,{score:r.j.score,rank:r.j.rank,of:r.j.of,at:Date.now()});if(r.j.me)rkIdSet({pid:r.j.me.pid,pn:r.j.me.pn})}
+   if(r.st===200&&r.j.ok){RK_NF=0;rkResSet(it.lid,{score:r.j.score,rank:r.j.rank,of:r.j.of,at:Date.now()});if(r.j.me)rkIdSet({pid:r.j.me.pid,pn:r.j.me.pn})}
    else if(r.st===429){wait=Math.max(16000,Math.min(3600000,r.j.retry||16000));break}
-   else if(r.st===0||r.st>=500){wait=60000;break}
+   else if(r.st===0||r.st>=500){RK_NF++;wait=RK_NF<3?15000:60000;break}
    else rkResSet(it.lid,{refused:r.j.why||String(r.st),at:Date.now()});
    store.set(RK_Q,rkQ().filter(x=>x.lid!==it.lid));rkEndPaint(it.lid)}}
  finally{const again=RK_FL===2;RK_FL=0;if(again&&!wait)setTimeout(rkFlush,50)}
