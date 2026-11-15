@@ -50,13 +50,19 @@ const RULES=[
  ["người bạn","người quen"],["Bạn trong cung","Người quen trong cung"],["Bạn (thiện","Người quen (thiện"],["cần bạn ","cần người quen "],
  ["nghe bạn là","nghe người quen là"],["bạn mạnh","kẻ mạnh"],["bỏ bạn ","bỏ người quen "],
  /* the player's own acts: narration calls her "ngươi" */
- ["Mời đến cung ta","Mời nàng sang cung"],["Mục Việc:","Mục Phận sự:"]
+ ["Mời đến cung ta","Mời nàng sang cung"],["Mục Việc:","Mục Phận sự:"],
+ /* owner 11/15 (final names): narrator / UI text names the player in the FIRST person — "ngươi" → "ta" ("Con của ta", "Hoàng hậu
+    với ta", "Ta với Quý phi"). NPC speech keeps "ngươi": anything inside “…” (also a quote that opens or closes in another text node)
+    is left as it is. Applied on screen only, so code that matches "ngươi" in logs (and old saves) is unchanged. List: NAMING_APPLIED.md */
+ /* review 11/15 (sub-odds): relation lines in old event cards "Thái hậu với ngươi -3" read as the one relation word "quý" (KIT §36.3) */
+ [/(Thái hậu|Hoàng hậu|Nàng|nàng|Hắn|hắn) với ngươi(?=\s*(?:[-+]?\d|$))/g,"$1 quý ngươi"],
+ [/^[^“”]*”|“[^”]*(?:”|$)|(?<![\p{L}\p{M}])([Nn])gươi(?![\p{L}\p{M}])/gu,(m,n)=>n?(n==="N"?"Ta":"ta"):m]
 ];
 /* whole-text exact labels (trimmed) */
 const FULL={"Đã rõ":"Đã hiểu","Đóng":"Lui","✕ Đóng":"✕ Lui","Hành động":"Hành sự","Quan hệ":"Giao tình","Chỉ số":"Tư chất"};
 /* save-slot words only on the title screen / save-book panel */
 const SLOT={"Trống":"Chưa ghi","trống":"chưa ghi"};
-const QUICK=/T\d|[Nn]ăm \d|[Tt]háng \d|năm thứ \d|^B[1-5]:|Ô |ô |\[|Nhật ký|Tuyến truyện|Bản đồ|tab |[Xx]ét nghiệm|[Kk]iểm tra|chỉ số|Thu gọn|Mở rộng|cơ hội|[Ll]ượt|tải lại|[Bb]ấm|[Bb]ạn|[Đđ]iểm|ván|[Mm]ã|ký tự|Chắc chắn ghi|âm thanh|Hiệu ứng|Tắt tiếng|cung ta|Mục Việc|[Nn]ương nương|Đóng|Đã rõ|Hành động|Quan hệ|Chỉ số|[Tt]rống/;
+const QUICK=/T\d|[Nn]ăm \d|[Tt]háng \d|năm thứ \d|^B[1-5]:|Ô |ô |\[|Nhật ký|Tuyến truyện|Bản đồ|tab |[Xx]ét nghiệm|[Kk]iểm tra|chỉ số|Thu gọn|Mở rộng|cơ hội|[Ll]ượt|tải lại|[Bb]ấm|[Bb]ạn|[Đđ]iểm|ván|[Mm]ã|ký tự|Chắc chắn ghi|âm thanh|Hiệu ứng|Tắt tiếng|cung ta|Mục Việc|[Nn]ương nương|Đóng|Đã rõ|Hành động|Quan hệ|Chỉ số|[Tt]rống|[Nn]gươi/;
 function lowRank(){try{return !!(S&&S.rank<3&&!(typeof isSrv==="function"&&isSrv()))}catch(e){return false}}
 function addr(s){/* servants/eunuchs speaking to the player: tiểu chủ below Tần */
   if(!/[Nn]ương nương/.test(s)||!lowRank())return s;
@@ -78,7 +84,7 @@ function fixEl(el){if(el.nodeType===3)return fixText(el);if(el.nodeType!==1||SKI
   el.querySelectorAll("[title],[aria-label],[placeholder],[data-s],[data-l0]").forEach(x=>{for(const a of ATTR)if(x.hasAttribute(a))fixAttr(x,a)});
   const w=document.createTreeWalker(el,NodeFilter.SHOW_TEXT);let n;const L=[];while(n=w.nextNode())L.push(n);L.forEach(fixText)}
 /* data patches */
-const TABS={act:["Hành sự","Hành sự"],go:["Dư đồ","Dư đồ"],rv:["Phi tần","Phi tần"],rel:["Ân oán","Ân oán"],court:["Hoàng thượng · Thái hậu","Thánh thượng"],men:["Nam nhân","Nam nhân"],fac:["Phe phái","Phe"],staff:["Cung nhân","Cung nhân"],kid:["Hoàng tự","Hoàng tự"],inv:["Tư trang","Tư trang"],art:["Tài nghệ","Tài nghệ"],story:["Mệnh truyện","Mệnh"],log:["Sổ ghi","Sổ ghi"]};
+const TABS={act:["Hành sự","Hành sự"],go:["Dư đồ","Dư đồ"],rv:["Phi tần","Phi tần"],rel:["Ân oán","Ân oán"],court:["Chí tôn","Chí tôn"],men:["Nam nhân","Nam nhân"],fac:["Phe phái","Phe"],staff:["Cung nhân","Cung nhân"],kid:["Hoàng tự","Hoàng tự"],inv:["Tư trang","Tư trang"],art:["Tài nghệ","Tài nghệ"],story:["Mệnh truyện","Mệnh"],log:["Sổ ghi","Sổ ghi"]};
 function patchTabs(){document.querySelectorAll("#tabs button[data-tab]").forEach(b=>{const T=TABS[b.dataset.tab];if(!T)return;
   if(b.dataset.l0!=null){b.dataset.l0=T[0];b.dataset.s0=T[1]}if(!(typeof isSrv==="function"&&isSrv())){b.textContent=T[0];b.dataset.s=T[1]}})}
 try{if(typeof SRVTABS==="object"&&SRVTABS){if(SRVTABS.act==="Việc")SRVTABS.act="Phận sự";if(SRVTABS.story==="Thân phận")SRVTABS.story="Thân phận"}}catch(e){}

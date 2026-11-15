@@ -32,7 +32,7 @@ const VIRFX={
 /* ---- new arts: Thêu thùa, Nấu nướng ---- */
 (function(){if(!ARTS.find(a=>a.k==="theu"))ARTS.push({k:"theu",n:"Thêu thùa",st:"tai",u:"Bậc 3: bán đồ thêu, Bạc +5 mỗi tháng"},{k:"nau",n:"Nấu nướng",st:"tai",u:"Bậc 3: canh bổ dâng Hoàng thượng, Ân tình +1 mỗi tháng"});
  ARTDO.theu="Tài: thêu thùa, may vá; đồ thêu làm quà, bán lấy bạc";ARTDO.nau="Tài: nấu canh, làm bánh; giữ Sức, dâng món được Ân tình";
- AIMG.theu=AIMG.theu||"theu";AIMG.nau=AIMG.nau||"nau";
+ AIMG.theu=AIMG.theu||"";AIMG.nau=AIMG.nau||"";  /* no img/theu.webp, img/nau.webp icon drawn yet: ic("") shows none (was a 404 then onerror remove) */
  try{if(!MG.theu)MG.theu=["Thêu: nhớ mẫu thêu","Lật hai ô một hồi, tìm đủ các cặp mẫu thêu giống nhau trong số hồi cho phép.",gHoa];
   if(!MG.nau)MG.nau=["Nấu: nhớ thứ tự","Xem các bước nấu sáng lên rồi làm lại đúng thứ tự. 5 hồi, mỗi hồi dài thêm một bước.",gVu]}catch(e){}
  ARTS.forEach(a=>{ARTMS[a.k]=ARTFX[a.k]||ARTMS[a.k]||[]})})();

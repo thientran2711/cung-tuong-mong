@@ -63,8 +63,8 @@ function kvDebate(){const H=S.heir;if(!H||!H.k||!H.k.alive||kvQueenMom(H.v))retu
  const o=kvOrder();const d=o.find(x=>x.dich&&!x.k.heir&&x.k.age>=6);if(!d||!roll(KV.deb))return"";S.kvDeb=S.turn;const h=H.k;
  const p=cl(Math.round(30+(d.k.tal-h.tal)/2+(d.k.fond-h.fond)/2-(h.age>=16?10:0)),10,85);
  const pre=`<b>Triều đình bàn lệ lập đích:</b> đại thần dâng sớ xin lập ${d.k.name}, đích tử của ${d.v?"Hoàng hậu "+d.v.name:"ngươi (Hoàng hậu)"}, thay Thái tử ${h.name} (con ${kvMomName(H.v)}). `;
- if(roll(p)){setHeir(d.k,d.v);fx("gold");return pre+`<span class="${d.v?(H.v?"":"r"):"g"}">Hoàng thượng phế ${h.name}, lập ${d.k.name} làm Thái tử</span> (cơ may đổi ngôi: ${word(p)}).${d.v?"":" Danh +10."} `}
- return pre+`Hoàng thượng giữ ${h.name} ở ngôi Thái tử (cơ may đổi ngôi: ${word(p)}). `}
+ if(roll(p)){setHeir(d.k,d.v);fx("gold");return pre+`<span class="${d.v?(H.v?"":"r"):"g"}">Hoàng thượng phế ${h.name}, lập ${d.k.name} làm Thái tử</span> (khả năng đổi ngôi: ${chanceLo(p)}).${d.v?"":" Danh +10."} `}
+ return pre+`Hoàng thượng giữ ${h.name} ở ngôi Thái tử (khả năng đổi ngôi: ${chanceLo(p)}). `}
 heirMonth=function(){if(S.heir&&S.heir.k&&S.heir.k.alive)return kvDebate();S.heir=null;
  const o=kvOrder();const c=o.filter(x=>x.k.age>=6);if(!c.length)return"";
  const wait=!c.some(x=>x.dich)&&o.some(x=>x.dich);/* đích tử còn nhỏ: triều đình chờ */
