@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Face boxes of every por-* picture → img/POR_FACE.json (jkpor.js reads it to give every portrait the same HEAD size).
-usage: python3 dev/tools/por_face.py <dir with por-*.webp> <out POR_FACE.json>
+"""Face boxes of every por-* picture → img/POR_FACE2.json (jkpor.js reads it to give every portrait the same HEAD size).
+usage: python3 dev/tools/por_face.py <dir with por-*.webp> <out POR_FACE2.json>
 Per picture: [face top, face height, face centre x] as fractions of the picture (OpenCV Haar frontal face on the picture over white;
 the largest face), plus the opaque top (hair ornaments) and the body centre on the chest rows. Format:
-{"v":1,"f":{"consort-c01-t1-a18":[ft,fh,fx,top,bx],...}} (3 decimals; missing face → fh 0)."""
+{"v":2,"f":{"consort-c01-t1-a18":[ft,fh,fx,top,bx],...}} (3 decimals; missing face → fh 0)."""
 import sys, os, json
 import numpy as np, cv2
 from PIL import Image
@@ -43,6 +43,6 @@ def main(src, out):
     fs = sorted(f for f in os.listdir(src) if f.startswith('por-') and f.endswith('.webp'))
     with Pool(int(os.environ.get("POR_PROCS") or max(1, os.cpu_count() or 1))) as P:
         R = {k: v for k, v in P.imap_unordered(_job, [(f[4:-5], os.path.join(src, f)) for f in fs], chunksize=16) if v is not None}
-    json.dump({"v": 1, "f": R}, open(out, 'w'), separators=(',', ':'))
+    json.dump({"v": 2, "f": R}, open(out, 'w'), separators=(',', ':'))
     print(len(R), 'pictures', sum(1 for v in R.values() if v[1] == 0), 'without a face')
 if __name__ == '__main__': main(*sys.argv[1:3])

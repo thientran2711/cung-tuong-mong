@@ -1,6 +1,6 @@
 /* ================= jkpor: ONE portrait framing rule for every kit frame (owner 11/15) =================
    Every por-* picture in a pcPort cell (person card, strips, header, rows…), measured once per picture (canvas, 160 px high):
-   1. SIZE (owner 11/15: "never zoom in"; then "kids at different zoom"): the FACE (OpenCV face box per picture, img/POR_FACE.json made by
+   1. SIZE (owner 11/15: "never zoom in"; then "kids at different zoom"): the FACE (OpenCV face box per picture, img/POR_FACE2.json made by
       dev/tools/por_face.py) is KIT_POR.face of the window height for EVERY portrait — consorts, maids, mamas, eunuchs, men, officials,
       physicians, the Emperor, Thái hậu, the player, children of every age. z = face target ÷ face height, clamped to KIT_POR.zr = [1, 1.14] (never more zoom
       than the approved 1.14 cut); the target (.2975) is the small face at 1.14, so no picture needs zooming in. KIT_POR.fam can give a family its own target.
@@ -16,8 +16,10 @@
    within ±3 % (old fixed 1.14: 3973); what is left is faces too big even at z = 1 (kid-a4, a few consorts/maids) — see PROGRESS_gift-ui.
    A face box over .40 of the picture is a false detection (5 pictures): those keep z = KIT_POR.z. */
 window.KIT_POR=window.KIT_POR||{z:1.14,g:.03,t0:.10,dx:.18,zr:[1,1.14],face:.2975,fbad:.40,fam:{}};
-/* img/POR_FACE.json (dev/tools/por_face.py, OpenCV face boxes of every por picture): {"v":1,"f":{"<name>":[faceTop,faceH,faceX,opaqueTop,bodyX]}} */
-let KPOR_FACE=null;try{fetch("img/POR_FACE.json").then(r=>r.ok?r.json():null).then(j=>{if(j&&j.f){KPOR_FACE=j.f;document.querySelectorAll("img.kpor").forEach(kporApply)}}).catch(()=>{})}catch(e){}
+/* img/POR_FACE2.json (dev/tools/por_face.py, OpenCV face boxes of every por picture): {"v":2,"f":{"<name>":[faceTop,faceH,faceX,opaqueTop,bodyX]}}
+   reviewer gift-ui-r6: a NEW file name (and v 2 required) on purpose — older builds (zr up to 1.6, still cached by players or on other branches)
+   fetch img/POR_FACE.json, which must never be uploaded; only this build (zr [1, 1.14]) reads the manifest, so the upload cannot zoom anyone */
+let KPOR_FACE=null;try{fetch("img/POR_FACE2.json").then(r=>r.ok?r.json():null).then(j=>{if(j&&j.v>=2&&j.f){KPOR_FACE=j.f;document.querySelectorAll("img.kpor").forEach(kporApply)}}).catch(()=>{})}catch(e){}
 function kporFace(src){const m=/por-([^/?]+)\.webp/.exec(src||"");const v=m&&KPOR_FACE&&KPOR_FACE[m[1]];return v&&v[1]>0&&v[1]<=(KIT_POR.fbad||1)?v:null}
 const KPOR_T={};
 function kporFam(src){const m=/por-([a-z]+)-[^/]*?(?:-(a\d+))?\.webp/.exec(src||"");if(!m)return"";return m[1]==="kid"?(m[2]?"kid-"+m[2]:""):m[1]}
@@ -43,7 +45,7 @@ function kporTop(src,cb){const o=KPOR_T[src];if(o&&o.v!=null)return o.v;if(o){o.
  im.onerror=()=>done({t:KIT_POR.t0,f:null,x:.5});im.src=src;return null}
 /* geometry of one picture → inline custom properties read by the kit CSS below */
 function kporGeo(src,v){const K=KIT_POR,WL=14.655,WT=20.289,WW=70.691,WH=49.373;
- /* size: the FACE (OpenCV box from POR_FACE.json) is K.face of the window height for every picture (a family may override: K.fam) */
+ /* size: the FACE (OpenCV box from POR_FACE2.json) is K.face of the window height for every picture (a family may override: K.fam) */
  let z=K.z;const F=kporFace(src);if(F){const tgt=K.fam[kporFam(src)]||K.face;z=Math.max(K.zr[0],Math.min(K.zr[1],tgt/F[1]));v=Object.assign({},v,{t:F[3]||v.t,x:F[4]||v.x})}
  const L=Math.min(v.t*z-K.g,z-1);const cv=(z-1)/2/z;/* max shift that keeps the picture covering the window */
  const D=Math.max(-(v.eL?Math.min(K.dx,cv):K.dx),Math.min(v.eR?Math.min(K.dx,cv):K.dx,(v.x||.5)-.5));

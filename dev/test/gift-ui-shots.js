@@ -9,8 +9,8 @@ const [,,BASE,SZ,OUT,TAG]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=
  await ctx.addInitScript(()=>{setInterval(()=>{document.querySelectorAll(".krskip").forEach(b=>b.click())},300)});
  const p=await ctx.newPage();p.setDefaultTimeout(240000);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
  await p.route('**/assets.json',r=>r.fulfill({status:404,body:''}));
- /* POR_FACE=<file>: serve that img/POR_FACE.json (before it is on the CDN) */
- if(process.env.POR_FACE)await p.route('**/img/POR_FACE.json',r=>r.fulfill({path:process.env.POR_FACE,contentType:'application/json',headers:{'access-control-allow-origin':'*'}}));
+ /* POR_FACE=<file>: serve that img/POR_FACE2.json (before it is on the CDN) */
+ if(process.env.POR_FACE)await p.route('**/img/POR_FACE2.json',r=>r.fulfill({path:process.env.POR_FACE,contentType:'application/json',headers:{'access-control-allow-origin':'*'}}));
  await p.goto(BASE,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function');await p.waitForTimeout(4000);
  const rot=await p.evaluate(()=>{const e=document.querySelector('#rotate,.rotate,#rot');return e?getComputedStyle(e).display!=='none'&&e.offsetParent!==null:false});
  await p.evaluate(()=>{SLOT=3;document.getElementById('title').hidden=true;

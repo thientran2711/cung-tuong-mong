@@ -37,8 +37,11 @@ function giftInfo(e,best){const a=giftArt(e),R=[];
  else{const it=IT[e.k]||{};R.push(["Món",`${it.kd||"Vật phẩm"}${it.d?" · "+it.d:""}`]);const fr=typeof kinvFrom==="function"?kinvFrom(e.from):"";R.push(["Nguồn",fr||"Đồ của ngươi"]);
   if(e.t&&typeof TAINT==="object"&&TAINT[e.t])R.push(["Đã tẩm",TAINT[e.t].n]);R.push(["Khi tặng","Món hợp người nhận thì được nhiều hơn"])}
  if(best)R.push(["Hợp nhất",best]);
- return `<div class="kgift"><b class="kgift-n">${giftE(giftName(e))}</b> <span class="kgift-g kg${a.grade|0}">${giftE(e.wk?WTIER[e.wk.ti]:a.gradeName)}</span>`+
-  `<dl class="kgift-rows">${R.map(([k,v])=>`<dt>${k}</dt><dd>${giftE(v)}</dd>`).join("")}</dl></div>`}
+ /* reviewer r6 (LUẬT KIT TRƯỚC): the kit item-card head (.kshdt name in its grade colour + kind · grade, as the shop card 28.13d) and kit rows
+    (kitRows in .kinvrows), no private chip / row styles */
+ const g=(typeof KIT_GRADE!=="undefined"&&KIT_GRADE[Math.max(0,Math.min(4,a.grade|0))])||{};const sub=[e.wk?(WK[e.wk.kind]?WK[e.wk.kind].n:"Tác phẩm"):(IT[e.k]||{}).kd||"Vật phẩm",e.wk?WTIER[e.wk.ti]:a.gradeName].filter(Boolean).join(" · ");
+ return `<div class="kshdt kgift"><b class="kshdn"${g.c?` style="color:${g.c}"`:""}>${giftE(giftName(e))}</b><span class="kshds">${giftE(sub)}</span></div>`+
+  `<div class="kinvrows">${kitRows(R.map(([k,v])=>[k,giftE(v)]))}</div>`}
 const GIFT_TABS=[["ct","Chí tôn"],["pt","Phi tần"],["nn","Nam nhân"],["cn","Cung nhân"]];
 function giftDialog(ix){const e=S.inv[ix];if(!e||e.h)return null;const P=giftPeople(e).map(([g,id,t,lab])=>Object.assign({g,id,t,lab},giftEval(e,t)));
  P.sort((a,b)=>(b.ok-a.ok)||(b.v-a.v));const bestP=P.find(p=>p.ok);const best=bestP?`${bestP.lab}`:"";
@@ -73,9 +76,7 @@ function giftDecorate(){const M=$("modal");const m=Q[0];const gix=giftIxOf(m);if
   if(!tabs.some(([k])=>k===GIFT_TAB))GIFT_TAB=(tabs.find(([k])=>cnt[k][0])||tabs[0]||[])[0];
   if(typeof kitTabRowHTML==="function"&&tabs.length>1)box.insertAdjacentHTML("beforebegin",`<div class="pctabs kcattabs kgifttabs" role="tablist">${kitTabRowHTML(tabs.map(([k,l])=>({k,label:l,n:`${cnt[k][0]}/${cnt[k][1]}`,tip:`tặng được ${cnt[k][0]} trên ${cnt[k][1]} người`})),GIFT_TAB,"data-kgtab")}</div>`);
   giftFilter(M)}
- /* 3. ✕ close in the title bar = the old Thôi */
- if(back&&!dlg.querySelector(".kgiftx")){const x=document.createElement("button");x.className="kgiftx";x.type="button";x.setAttribute("aria-label","Đóng");x.textContent="✕";
-  x.addEventListener("click",ev=>{ev.stopPropagation();ev.preventDefault();back.hidden=false;back.click()});dlg.appendChild(x)}}
+ /* 3. close: the kit ✕ (32.10, kitCancelIx turns the "Thôi" option into kit-x) — no private ✕ (reviewer r6: there were two) */}
 function giftFilter(M){M.querySelectorAll(".opt[data-kgg]").forEach(b=>{b.hidden=GIFT_TAB&&M.querySelector(".kgifttabs")?b.dataset.kgg!==GIFT_TAB:false})}
 document.addEventListener("click",ev=>{const t=ev.target.closest&&ev.target.closest("[data-kgtab]");if(!t)return;ev.stopPropagation();ev.preventDefault();GIFT_TAB=t.dataset.kgtab;
  const M=$("modal");M.querySelectorAll("[data-kgtab]").forEach(b=>{const on=b.dataset.kgtab===GIFT_TAB;b.classList.toggle("on",on);b.setAttribute("aria-selected",on)});giftFilter(M)},true);
@@ -96,14 +97,7 @@ window.KIT_PICFALL=window.KIT_PICFALL||{};
   const t=giftPlain(m.t||"")+" "+giftPlain(m.h||"").slice(0,80);const a=typeof kitActArt==="function"?kitActArt(t):null;
   return a&&a.src?{src:a.src,lab:a.label||""}:null}catch(e){return r}}})();
 (function(){const st=document.createElement("style");st.id="kgift-css";st.textContent=`
-.kgift{display:flex;flex-direction:column;gap:4px;min-width:0}
-.kgift-n{font-family:var(--display);font-size:1.12rem;color:var(--ink);line-height:1.25}
-.kgift-g{display:inline-block;align-self:flex-start;font-size:.78rem;font-weight:700;padding:1px 9px;border-radius:9px;border:1px solid var(--line);background:var(--panel2);color:var(--gold)}
-.kgift-rows{display:grid;grid-template-columns:auto minmax(0,1fr);gap:3px 10px;margin:4px 0 0}
-.kgift-rows dt{font-size:.74rem;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--dim);padding-top:2px;white-space:nowrap}
-.kgift-rows dd{margin:0;font-size:.9rem;line-height:1.35;overflow-wrap:anywhere}
 .kgiftdlg{position:relative}
-.kgiftx{position:absolute;top:6px;right:8px;z-index:5;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:1.05rem;line-height:1;cursor:pointer}
 .kgiftdlg .kgifttabs{margin:6px 0 4px}
 .kgiftdlg .opt.kgiftno{opacity:.62}
 .kgiftdlg .opt[hidden],.kgiftdlg .opt.kgiftback{display:none!important}
@@ -122,10 +116,7 @@ function kitOtherItem(v,x,sl){try{const W=typeof WD_ITEMS==="object"&&WD_ITEMS[x
 addEventListener("click",ev=>{const t=ev.target.closest&&ev.target.closest("[data-kwear]");if(!t||t.dataset.kwho==="me")return;
  const v=(typeof rivals!=="undefined"&&rivals.find(r=>String(r.id)===t.dataset.kwho))||null;if(!v||typeof wdSlots!=="function")return;const x=wdSlots(v).find(s=>s.slot===t.dataset.kwear);if(!x||x.empty)return;
  ev.stopPropagation();ev.preventDefault();kitOtherItem(v,x,t.dataset.kwear)},true);
-/* ✕ close for kit panels that ask for it (spec.kx): the bottom "Lui/Đã hiểu" row is hidden, ✕ in the title bar does the same */
-(function(){const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);try{const m=Q[0],M=$("modal");if(m&&m.kit&&m.kit.kx&&M&&!M.hidden){const dlg=M.querySelector(".dlg");dlg.classList.add("kgiftdlg");
-  const mc=$("mclose");if(mc){mc.closest("#mr")&&($("mr").hidden=true);if(!dlg.querySelector(".kgiftx")){const x=document.createElement("button");x.className="kgiftx";x.type="button";x.setAttribute("aria-label","Đóng");x.textContent="✕";
-   x.addEventListener("click",ev=>{ev.stopPropagation();ev.preventDefault();const c=$("mclose");if(c)c.click()});dlg.appendChild(x)}}}else if(M){const r0=$("mr");if(r0)r0.hidden=false;const x=M.querySelector(".dlg > .kgiftx");if(x&&!(giftIxOf(m)!=null))x.remove()}}catch(e){}return r}})();
+/* ✕ for kitOtherItem: the kit (32.10) already turns its "Lui" button into kit-x; the private ✕ that stood beside it is gone (reviewer r6) */
 /* a gift that ARRIVES (PEND.giftin) shows the item, too */
 (function(){const k0=kitEvArt;kitEvArt=function(m){try{if(m&&m.pid==="giftin"&&m.pp&&m.pp.e){const a=giftArt(m.pp.e);if(a&&a.src)return{src:a.src,lab:giftName(m.pp.e)}}}catch(e){}return k0.apply(this,arguments)}})();
 (function(){const st=document.createElement("style");st.textContent=`.kgiftown{display:flex;align-items:center;gap:8px;margin:0 0 6px;font-weight:600}.kgiftown .md{flex:0 0 auto}`;document.head.appendChild(st)})();
@@ -175,8 +166,7 @@ document.addEventListener("click",ev=>{const g=ev.target.closest&&ev.target.clos
 (function(){const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);try{const m=Q[0],M=$("modal");if(m&&m.pid==="giftto"&&M&&!M.hidden){const dlg=M.querySelector(".dlg");dlg.classList.add("kgiftdlg");let back=null;
   M.querySelectorAll(".opt[data-m]").forEach(b=>{const o=m.opts[+b.dataset.m];if(!o)return;if(o.kgx){back=b;b.hidden=true;b.classList.add("kgiftback");return}if(o.lock){b.disabled=true;b.classList.add("kgiftno")}
    if(!b.querySelector(".kitem")){const it=S.inv.find(e=>e&&giftName(e)===String(o.n).replace(/ \([^)]*\)$/,""));if(it){const a=giftArt(it);b.insertAdjacentHTML("afterbegin",kitItem({src:a.src,name:"",grade:a.grade,size:"sm"}).replace('<span class="kitn"></span>',''))}}});
-  if(back&&!dlg.querySelector(".kgiftx")){const x=document.createElement("button");x.className="kgiftx";x.type="button";x.setAttribute("aria-label","Đóng");x.textContent="✕";
-   x.addEventListener("click",ev=>{ev.stopPropagation();ev.preventDefault();back.hidden=false;back.click()});dlg.appendChild(x)}}}catch(e){}return r}})();
+  }}catch(e){}return r}})();
 (function(){const st=document.createElement("style");st.textContent=`.kgiftdlg .opt>.kitem{float:left;width:44px;margin:0 8px 0 0}`;document.head.appendChild(st)})();
 /* ---------- three daytime acts with the Emperor (coordinator 11/15, one rule for her and every consort) ----------
    hầu cờ (Kỳ ≥ 1) · đánh đàn hầu ngài (Cầm ≥ 1): odds odA(Kỳ/Cầm bậc, his mood mm(), Sủng); thành: Sủng +2..4, Ân tình +1, then her choice
@@ -193,11 +183,13 @@ function kmEmpO(a,kind){const sung=a.sung||0;
  return odA(a,20+sung/3+effSac(a)/6+mm())}
 const KM_DAYWHY="hôm nay đã gặp ngài một lần";
 function kmEmpWhy(a,kind){if(a.kmEmpDay===wk())return KM_DAYWHY;const f=kmEmpFree();if(!f.ok)return f.why;
- if((kind==="ky"||kind==="cam")&&!((a.arts&&a.arts[kind])>=1))return `cần ${kind==="ky"?"Kỳ":"Cầm"} bậc 1`;if(kind==="walk"&&kmStorm())return"trời giông bão";if(a===S&&!can(2))return"hết khắc";if((a.suc||0)<BAL.empDay.suc+5)return"Sức quá thấp";return""}
+ if((kind==="ky"||kind==="cam")&&!((a.arts&&a.arts[kind])>=1))return `cần ${kind==="ky"?"Kỳ":"Cầm"} bậc 1`;if(kind==="walk"&&kmStorm())return S.wx.f===4?"tuyết rơi dày":"trời giông bão";if(a===S&&!can(2))return"hết khắc";if((a.suc||0)<BAL.empDay.suc+5)return"Sức quá thấp";return""}
 const KM_EMPACT={ky:["Xin hầu cờ","Ngươi xin bày bàn cờ, hầu Hoàng thượng một ván."],cam:["Xin đánh đàn hầu ngài","Ngươi mang đàn đến, xin gảy một khúc cho ngài nghe."],
  walk:["Mời ngài dạo ngự hoa viên","Ngươi mời Hoàng thượng thong thả dạo ngự hoa viên."]};
-function kmEmpLine(kind){const o=kmEmpO(S,kind);if(kind==="walk"){const n0=nightCh(S),n1=cl(n0+BAL.empDay.walkNight,0,70);
-  return `${word(o)} · tốn: 2 khắc, Sức -${BAL.empDay.suc} · thành: Sủng +2, tối nay được lật thẻ: ${word(n0)} → ${word(n1)} · hỏng: ngài từ chối khéo · kèm: phi tần đang ở vườn thấy, ghen +3`}
+function kmEmpLine(kind){const o=kmEmpO(S,kind);if(kind==="walk"){const n0=nightCh(S),n1=cl(n0+BAL.empDay.walkNight,0,70),w0=word(n0),w1=word(n1);
+  /* reviewer r6: never "Liều → Liều"; the walk only helps when she can be picked tonight at all (nightCh wrapper: r > 0) */
+  const night=n0<=0||n1<=n0?"":w0===w1?`, tối nay dễ được lật thẻ hơn (vẫn ${w0})`:`, tối nay được lật thẻ: ${w0} → ${w1}`;
+  return `${word(o)} · tốn: 2 khắc, Sức -${BAL.empDay.suc} · thành: Sủng +2${night} · hỏng: ngài từ chối khéo · kèm: phi tần đang ở vườn thấy, ghen +3`}
  return `${word(o)} · tốn: 2 khắc, Sức -${BAL.empDay.suc} · thành: Sủng +2..4, Ân tình +1, rồi chọn thắng khéo hay cố ý thua · hỏng: ngài chán, Sủng -1`}
 /* the act itself — the same function for her and for every consort */
 function kmEmpAct(a,kind){const why=kmEmpWhy(a,kind);if(why)return null;a.kmEmpDay=wk();if(a===S)spend(2);ap(a,{suc:-BAL.empDay.suc});const ok=roll(kmEmpO(a,kind));const me=a===S;const nm=me?"Ngươi":`${rkName(a)} ${a.name}`;
