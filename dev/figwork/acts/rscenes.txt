@@ -92,12 +92,12 @@ gia-nhap-phe|1|consorts' hands around a shared table in a dim hall, one hand set
 gia-say-thai|1|a maid seen from behind carrying out a bowl of medicine from behind a bed curtain at night, a physician's bowed back
 gia-thai-bi-lat|1|a physician's hand holding up a small cotton pillow in a dim hall, a consort seen from behind kneeling below
 gian-la-loi|0|a handkerchief fallen on the floor between a mistress's angry hand on a table and a kneeling maid's hands, daylight
-gianh-dem-khong-thanh|1|the imperial dragon palanquin passing straight by a palace gate at night, a consort seen from behind waiting at the gate
+gianh-dem-khong-thanh|1|the imperial dragon palanquin passing straight by a shadowed palace gate, a consort seen from behind waiting alone in the gloom of the gateway
 giau-bi-thay|1|a consort's hand drawing a curtain closed over a screen at night, a maid's hand pushing the door ajar
 giu-bai-tho|0|a consort's hands placing a poem sheet into a lacquer box and lifting a brush to write a reply, bright desk
 giu-ngoi-thai-tu|0|an imperial yellow sleeve with a hand resting on the shoulder of a teenage crown prince seen from behind, bright hall
 han-mang-on|0|a man in a blue robe seen from behind bowing deeply before a consort's sleeve at a small side gate, daylight
-han-thay-mat|1|a man in a dark green robe seen from behind half turning his shoulder in a dark garden at night
+han-thay-mat|1|a man in a dark green robe seen from behind half turning his shoulder in a shadowed overgrown corner of a garden
 hang-nhi-ba|0|a consort's hands holding a small silk prize box, standing second in a row of contestants seen from behind, bright hall
 he-lo-so-thich|0|an old eunuch's hand pointing at a plate of pastries and a vase of flowers on a table, a consort's hands listening, daylight
 het-han-tra-xet|1|an official's hands closing a case file and laying a paper seal across it on a desk at night
@@ -107,8 +107,8 @@ hoang-de-nhiu-may|0|the Emperor seen from behind in imperial yellow turning away
 hoang-thuong-bo-qua|0|an imperial yellow sleeve waving dismissal over a desk, a consort's hands bowing, bright study
 hoang-thuong-cam-kich|0|an imperial yellow sleeve handing a jade box to a consort's bowed hands, bright hall
 hoang-thuong-chi-hon|0|a eunuch's hands unrolling a blank imperial edict scroll, a princess in red seen from behind kneeling, bright courtyard
-hoang-thuong-dang-nghe|0|the Emperor seen from behind on a dragon throne with ministers' backs kneeling in rows below, bright hall
-hoang-thuong-dong-long-tong-nu|0|an imperial yellow sleeve with a hand resting on a kneeling consort's shoulder, seen from behind, an envoy procession beyond
+hoang-thuong-dang-nghe|0|the Emperor seen from behind on a dragon throne, listening, one minister's bowed back kneeling with a memorial below, bright hall
+hoang-thuong-dong-long-tong-nu|0|an imperial yellow sleeve with a hand resting on a kneeling consort's shoulder, seen from behind, envoy banners far beyond
 hoang-thuong-khong-cho|0|an imperial yellow sleeve closing a memorial on a desk, a consort's hands withdrawing, bright study
 hoang-thuong-khong-nghe-hoa-than|1|a consort seen from behind kneeling in a dusk courtyard as a red bridal palanquin leaves through a far gate with the envoys
 hoang-thuong-khong-vui-phat|1|the Emperor seen from behind in imperial yellow at a window at dusk, looking out at a courtyard where someone kneels
@@ -119,3 +119,35 @@ ke-chuyen-cua|0|a maid seen from behind leaning in to whisper to her mistress se
 ke-chuyen-nghe-tu|0|a kneeling maid's hands gesturing as she reports, her mistress's hand on a teacup, bright room
 ke-chuyen-xau|0|a deposed consort seen from behind in plain cloth at the barred window of the cold palace, whispering to a listener's sleeve, daylight
 ke-nho-chuyen-cung|0|two maids seen from behind sitting on the edge of a well, heads together, bright servants' yard
+kham-cung|0|a palace guard's gloved hand lifting a small hidden bundle out of an opened chest in a ransacked bedchamber, an official's sleeve pointing, daylight
+khen-mot-cau|0|a consort's hand offering a teacup across a small tea table toward an imperial yellow sleeve, warm afternoon light
+kho-chiu-sau-qua|0|a consort seen from behind leaning wearily on a table, one hand pressed to her temple, an opened gift box beside her, bright room
+kho-ho-so-chay|1|a records storehouse burning in the night, flames from the roof, a clerk seen from behind running with a water bucket
+khoi-benh|0|a consort seen from behind sitting up by a sunny window, an empty medicine bowl on the sill beside her hand
+khoi-benh-seo|0|a hand placing a hand mirror face down on a dressing table beside a thin silk veil, bright window light
+khong-ban-chinh-su|0|a consort's hands closing a memorial and setting it aside, then offering a teacup to an imperial yellow sleeve, bright study
+khong-biet-gi-moi|0|a maid seen from behind standing with empty open hands before her seated mistress's sleeve, bright room
+khong-chuan-lay|0|the Emperor in imperial yellow seen from behind walking away down a bright corridor, a princess in pink seen from behind standing still
+khong-tin-danh-don|1|a mistress's hand pointing at the door, a eunuch's hands gripping a maid's wrist and pulling her out, dim lamplit hall
+khuyen-con-nhan-nhin|0|a mother's hands clasping her married daughter's hands across a tea table, both sleeves only, bright room
+khuyen-giu-long-the|0|a consort's hands offering a bowl of medicine to an imperial yellow sleeve resting tiredly on a desk of memorials, bright study
+lai-nghe-doi-thuc|1|two maids seen from behind whispering behind a pillar, one hand pointing at a eunuch and a maid standing close together far off, dusk
+lam-nhu-khong-thay|0|a consort seen from behind turning down a different garden path, a faint figure half-hidden behind a rockery far away, daylight
+lam-tho-v2|0|a consort's hand writing a poem with a brush on blank paper, a rolled finished sheet tied with ribbon beside it, bright study
+lanh-lung|0|a consort seen from behind turning away, a guest's hands bowed in apology left standing, bright hall
+lap-thai-tu|0|a small crown prince seen from behind kneeling in a great bright hall, his small hands raised to receive a golden investiture book
+len-bac|0|a consort's hand setting down a brush beside finished calligraphy, a teacher's hand raised in approval, bright study
+len-vao-bi-bat|1|two palace guards' hands with lanterns seizing the arm of a figure in a dark hooded cloak seen from behind at a side gate at night
+len-vao-trot-lot|1|a figure in a dark hooded cloak seen from behind slipping through a side gate into a dark courtyard, a lantern far away
+linh-luong|0|a maid's hands receiving a small pouch of silver across the counter of the palace stores, a clerk's hand and ledger, daylight
+lo-mieng-ke|1|a maid seen from behind at a gate at dusk, raising a handkerchief to cover her mouth, a eunuch's sleeve leaning in to listen
+loi-don-ac-y|1|two servants seen from behind whispering in the deep shadow of a palace gateway, one pointing toward a far palace roof
+long-the-bat-an|1|an imperial yellow sleeve resting on a bed cover behind a half-drawn curtain, a physician's fingers taking the pulse at the wrist, dim lamplit room
+long-the-da-an|0|the Emperor in imperial yellow seen from behind strolling in a sunny morning garden, a eunuch's back following
+luc-duoc-thu|1|a consort's hands lifting a bundle of tied letters from the bottom of an open chest by candlelight
+mang-tin-ve|0|a young eunuch seen from behind bowing to report under a veranda, his mistress's sleeve resting on the rail, daylight
+mat-thu-bi-chan|1|a guard's hand holding up a sealed secret letter in the shadow of a city gate, a single torch, the courier's back held by another hand
+moi-sang-cung-nang|0|a maid's hands kneeling to offer a blank invitation card to a consort's hand, bright hall
+mua-ve-cung|0|a maid seen from behind carrying a cloth bundle following a eunuch's back out of a courtyard gate, her old mistress's sleeve on the rail, daylight
+nam-chieu-chien|1|a general seen from behind on horseback on a ridge at dusk, facing distant southern jungle mountains and smoke of a battle, war banners
+nam-chieu-thang|0|an envoy's hands opening a chest of gold and silver before a palace gate, the envoy seen from behind kneeling, bright day
