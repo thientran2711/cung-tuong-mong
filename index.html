@@ -11683,7 +11683,7 @@ span.md.kmini.kmini>.kmf{position:absolute;inset:0;background:var(--kfr) 50% 34.
 /* 1 · act art in the consort-card frame, same size as the Phi tần card portrait */
 :root{--kaw:150px;--kah:226px}@media (max-width:599px){:root{--kaw:120px;--kah:177px}}
 .kaart{flex:0 0 var(--kaw)!important;width:var(--kaw)!important;height:var(--kah)!important;border-radius:0!important;overflow:visible!important;background:none!important;box-shadow:none!important;margin:0!important}
-.cards:has(> button.ka.kart){grid-template-columns:repeat(auto-fill,minmax(max(440px,31%),1fr))!important}
+.cards:has(> button.ka.kart){grid-template-columns:repeat(auto-fill,minmax(min(100%,max(440px,31%)),1fr))!important}
 @media (max-width:599px){.cards:has(> button.ka.kart){grid-template-columns:1fr!important}}
 button.ka.kcard.kart{gap:10px!important;min-height:calc(var(--kah) + 12px)}
 button.ka.kcard.kart{border-left:4px solid var(--kcc0,var(--line))!important}
@@ -21753,6 +21753,40 @@ html body #modal .opts>button.ka.kback .kan{text-align:center;width:100%}
 #modal .dlg.kplace .ksart .kplsil img.kpls-k{height:62%}
 #modal .dlg.kplace .ksart .kplsil b{align-self:flex-end;margin-left:6px;font-size:.8rem;color:#fffaf0;background:rgba(40,24,12,.55);border-radius:9px;padding:0 6px}
 `;document.head.appendChild(st)})();
+/* ================= jrest: HAI CÁCH NGHỈ — mỗi cách một lựa chọn thật (owner 11/15) =================
+   Before: "Nghỉ ngơi dưỡng sức" (1 khắc, Sức +20, "uống thuốc bổ, ngủ sớm") and "Nghỉ ngơi một lát" (1 khắc, Sức +6) cost the same,
+   so the second was never worth taking, and the first gave a tonic and a night's sleep for free in any buổi.
+   Now each card does what its own text says (numbers: BAL.rest*):
+   - Nghỉ ngơi dưỡng sức = uống thuốc bổ, ngủ sớm: chỉ buổi tối; dùng hết số khắc còn lại của buổi (ít nhất BAL.restDsMinK),
+     tức là hết buổi tối; Sức +BAL.restDsSuc; cần một thang thuốc bổ trong rương (dùng thang rẻ nhất) HOẶC Bạc BAL.restDsBac mua thuốc.
+   - Nghỉ ngơi một lát = mọi buổi, BAL.restLatK khắc, Sức +BAL.restLatSuc, không tốn gì, và bớt nỗi buồn/lo/giận… BAL.restLatEmo
+     (jemo, chỉ khi tâm trạng đang xấu; bình thường hay vui thì không đổi — thẻ nói rõ).
+   The cards are refreshed from the live state each time they are drawn or played, so Cần/Tốn/Được always match what happens. */
+Object.assign(BAL,{restDsSuc:20,restDsBac:8,restDsMinK:2,restDsBuoi:"Buổi tối",restLatSuc:6,restLatK:1,restLatEmo:8});
+const REST_BAD=["buon","gian","so","lo","ghen","dau"];
+/* the cheapest tonic she owns (kind "Thuốc bổ"), or null */
+function restTonic(){if(!S||!Array.isArray(S.inv))return null;let best=-1,pr=1e9;
+ S.inv.forEach((e,i)=>{const it=e&&IT[e.k];if(it&&it.kd==="Thuốc bổ"&&!e.h&&!e.w&&(it.pr||0)<pr){pr=it.pr||0;best=i}});return best<0?null:{i:best,e:S.inv[best],it:IT[S.inv[best].k]}}
+function restDsB(){const i=BUOI.indexOf(BAL.restDsBuoi);return i<0?BUOI.length-1:i}
+function restDsK(){return Math.max(BAL.restDsMinK,4-(typeof used==="number"?used:0))}
+function restDs(a){if(!a||a.rest!=="ds")return a;const T=restTonic(),k=restDsK();a.k=k;a.b=restDsB();a.o=100;a.w={suc:BAL.restDsSuc};a.l={};
+ a.c=T?{}:{bac:-BAL.restDsBac};
+ const B=BUOI[restDsB()].toLowerCase();a.t=`Uống thuốc bổ, ngủ sớm: ${(S.buoi||0)!==restDsB()?`chỉ ${B}, dùng hết số khắc còn lại của buổi.`:4-used<BAL.restDsMinK?`cần còn ít nhất ${BAL.restDsMinK} khắc; hết ${B}.`:`dùng hết ${k} khắc còn lại, hết ${B}.`}${T?"":" Rương không có thuốc bổ: sai người mua một chén."}`;
+ a.x="";a.restTon=T?`1 ${T.it.n} trong rương`:""; /* review R6: the tonic is a COST — it goes in the Tốn row (cardH below), not in a.x (a.x is read as Được); the "(thang thuốc bổ rẻ nhất…)" aside ran past the card at 844x390 */
+ a.go=()=>{const t=restTonic();if(t&&!(a.c&&a.c.bac)){S.inv.splice(t.i,1);log(`Ngươi sắc ${t.it.n} uống rồi ngủ sớm.`)}else log("Ngươi sai người mua chén thuốc bổ, uống rồi ngủ sớm.")};return a}
+function restLat(a){if(!a||a.rest!=="lat")return a;const e=typeof emoGet==="function"?emoGet(S):{k:"binh",v:0};const bad=REST_BAD.includes(e.k)&&e.v>=15;
+ a.k=BAL.restLatK;a.c={};a.o=100;a.w={suc:BAL.restLatSuc};a.l={};
+ a.t=`Nằm nghỉ trong tẩm cung, uống chén trà sen.${bad?"":` Tâm trạng đang ${typeof EMO==="object"&&EMO[e.k]?EMO[e.k].toLowerCase():"bình thường"}: không đổi.`}`;
+ a.x=bad?`được: bớt ${EMO[e.k]} ${Math.min(BAL.restLatEmo,e.v)} (${e.v} → ${Math.max(0,e.v-BAL.restLatEmo)})`:"";
+ a.go=()=>{try{const m=S.emo;if(m&&REST_BAD.includes(m.k)&&m.v>=15){const v0=m.v;m.v=Math.max(0,m.v-BAL.restLatEmo);emoSync(S);log(`Nghỉ một lát, lòng nhẹ đi: bớt ${EMO[m.k]} ${v0-m.v}.`)}}catch(x){}};return a}
+function restFix(a){return a&&a.rest==="ds"?restDs(a):a&&a.rest==="lat"?restLat(a):a}
+/* mark the two cards wherever they are dealt */
+(function(){const p0=pool;pool=function(){const A=p0.apply(this,arguments);try{for(const a of A)if(a&&a.n==="Nghỉ ngơi dưỡng sức"){a.rest="ds";restDs(a)}}catch(e){}return A}})();
+(function(){const s0=j76stand;j76stand=function(){const A=s0.apply(this,arguments);try{for(const a of A)if(a&&a.n==="Nghỉ ngơi một lát"){a.rest="lat";restLat(a)}}catch(e){}return A}})();
+/* refresh from the live state on every draw and before playing */
+(function(){const ch=cardH;cardH=function(a){try{restFix(a)}catch(e){}let h=ch.apply(this,arguments);
+ try{if(a&&a.rest==="ds"&&a.restTon)h=h.replace('<span class="kl">Tốn</span><span>',m=>m+eff(`<span class="r">${a.restTon}</span>`)+'<span class="ksep">·</span>')}catch(e){}return h}})();
+(function(){const a0=act;act=function(i){try{if(Array.isArray(deck))restFix(deck[i])}catch(e){}return a0.apply(this,arguments)}})();
 /* ================= jwhy — "Vì sao <bậc>?" (owner 11/15 05:55Z: no luck without cause) =================
    1. ONE spy formula (dò la) for everyone: the player, her maid, NPC consorts and their servants. The odds come from real,
       visible factors: who spies (her Tai mắt, Tâm cơ, Tài), who goes (the servant's Lòng, nết, rank, whether she knows people
@@ -22477,7 +22511,7 @@ window.VP={fix,date,num,ord,mon,rules:RULES,full:FULL,tabs:TABS,refresh:()=>{pat
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="08ec9640d5f0";window.CTM_BUILD=BUILD;
+const BUILD="e724c70ce52b";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
