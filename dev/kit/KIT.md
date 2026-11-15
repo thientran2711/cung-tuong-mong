@@ -1328,3 +1328,14 @@ Mechanics (not visual): assets.json (dev/site/assets.py) = [path, sha256/16, byt
 never wiped by a build (sw.js prunes only keys no longer in assets.json); app shell in `ctm-shell-<content hash>`; co-op worker and every
 other origin bypass the service worker.
 Tested 755x1000@2, 1180x820@2, 1366x1024@2, 686x880@2.2, 412x1058@2, 390x844@3, 1024x768@2 (dev/shots/loading/).
+### 35.2 NEW BUILD CARD · "Có bản mới" (owner 11/15: phone / home-screen app stuck on an old build) — `dev/site/swreg.js`, inlined by build_site.sh
+- sw.js is generated per build (`ctm-shell-<content hash>`); the page registers it (`updateViaCache:"none"`) and calls `registration.update()`
+  on open, on every return to the foreground (visibilitychange / pageshow / focus / online) and every 20 min. New worker: skipWaiting →
+  clients.claim → `controllerchange` → card. index.html is network first (`cache:"no-cache"`), saved copy only offline / after 4 s.
+- Card `#kupd.kupd` (bottom centre, above `#tabs` and `.kloadchip`, z 9700, width ≤420 px): ONE `.dlg.kpanel[data-kind=notice]` with
+  `kpHeader("notice","Có bản mới","Cung Tường Mộng vừa có bản mới")` + `.kpnote` "Sổ đã ghi vẫn giữ nguyên. Tự mở bản mới sau N giây." +
+  one `.kbtn` "Mở bản mới". After 3 s (or the tap) the game saves and the page reopens on the new build.
+- Never during a dialog, queued notice, mini game/lesson (`S.mg`, `#ov`), motion moment, honour podium, week book or page turn: the card
+  waits; if one opens during the 3 s the card goes away and waits again. In the background with nothing open it reopens unseen.
+  On the first-entry loading screen it reopens at once (the loading resumes file by file).
+- Wording: "bản mới", "mở bản mới"; never "tải lại trang", "phiên bản", "cập nhật hệ thống" (VANPHONG §3).
