@@ -123,11 +123,12 @@ function helpers(){
 const STEPS=[];const step=(name,fn)=>STEPS.push({name,fn});
 const ev=(p,f,a)=>p.evaluate(f,a);
 async function shot(p,SZ,name){if(!SHOTS)return;const fn=`${SZ.w}-${name.replace(/[^a-zA-Z0-9]+/g,'_')}.jpg`;try{await p.screenshot({path:path.join(OUT,fn),type:'jpeg',quality:62,timeout:120000})}catch(e){}}
-async function look(p,SZ,name,ALL,ms){if(ONLY&&!ONLY.test(name))return;
+const DONE=new Set();
+async function look(p,SZ,name,ALL,ms){if(ONLY&&!ONLY.test(name))return;if(DONE.has(SZ.tag+'|'+name))return;
  /* first paint: an old face-* fallback put in the page before the portrait has loaded (porOf gating) is what a slow phone shows */
  const early=await p.evaluate(()=>[...document.querySelectorAll('img')].filter(i=>/(^|\/)face-[^/]*\.webp/.test(i.getAttribute('src')||'')&&i.getClientRects().length&&!i.closest('[hidden]')).map(i=>{const b=i.closest('.pcp,.md,figure,.tok');return{src:i.getAttribute('src'),who:((b&&(b.getAttribute('title')||b.innerText))||'').replace(/\s+/g,' ').trim().slice(0,40)}}));
  early.forEach(e=>ALL.push({screen:name+' (lúc mở)',who:e.who,src:e.src.replace(/^.*?img\//,'img/'),k:'face',nw:0,nh:0,cssW:0,cssH:0,scale:0,face:1,onScr:0,fit:'',where:'',early:1,size:SZ.tag}));
- await settle(p,ms);await bgSizes(p);const rows=await p.evaluate(measure,name);rows.forEach(x=>x.size=SZ.tag);ALL.push(...rows);await shot(p,SZ,name);
+ await settle(p,ms);await bgSizes(p);const rows=await p.evaluate(measure,name);rows.forEach(x=>x.size=SZ.tag);ALL.push(...rows);await shot(p,SZ,name);DONE.add(SZ.tag+'|'+name);
  const f=rows.filter(x=>x.scale>UP||x.k==='face'||(x.onScr>.9&&x.face<FACEMIN)||x.broken).length;console.log(SZ.tag,name,'·',rows.length,'pictures',f?`· ${f} flagged`:'')}
 
 async function walk(p,SZ,ALL,phase){
@@ -162,25 +163,31 @@ async function walk(p,SZ,ALL,phase){
 (async()=>{
  const b=await chromium.launch();const ALL=[];const ERR=[];
  for(const SZ of SIZES){
+  /* a renderer that crashes on a loaded machine is re-opened (up to 3 tries); screens already measured are skipped (DONE) */
+  for(let attempt=1;attempt<=3;attempt++){
   const ctx=await b.newContext({viewport:{width:SZ.w,height:SZ.h},deviceScaleFactor:SZ.dpr,hasTouch:true,isMobile:SZ.w<1100,serviceWorkers:'block',reducedMotion:'reduce'});
   await ctx.addInitScript(()=>{window.__bot=1}); /* no background art download (jload) during the audit */
   const p=await ctx.newPage();p.setDefaultTimeout(300000);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
   const bad=[];p.on('response',r=>{if(r.status()>=400&&/\.(webp|png|jpg|json)/.test(r.url()))bad.push(r.status()+' '+r.url().replace(/^.*?\/img\//,'img/'))});
+  try{
   await p.goto(BASE,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&document.getElementById('title'),null,{timeout:180000});await p.waitForTimeout(2500);
   await look(p,SZ,'Trang đầu (Luân hồi)',ALL,800);
   /* co-op lobby from the title screen */
-  if(await ev(p,()=>{const b=document.querySelector('#modal .kco');if(b){b.click();return 1}return 0}))await look(p,SZ,'Chơi cùng bạn (sảnh)',ALL,900);
+  if(!DONE.has(SZ.tag+'|Chơi cùng bạn (sảnh)')&&await ev(p,()=>{const b=document.querySelector('#modal .kco');if(b){b.click();return 1}return 0}))await look(p,SZ,'Chơi cùng bạn (sảnh)',ALL,900);
   await ev(p,helpers);await ev(p,()=>__iqStart());await p.waitForTimeout(1200);await ev(p,()=>{__iqClean();render()});
   await walk(p,SZ,ALL,'lạ');
   /* week book: the next buổi until the book opens */
-  if(!ONLY||ONLY.test('Sổ tuần')){await ev(p,()=>{__iqClean();try{for(let i=0;i<4;i++){nextBuoi();if(document.querySelector('.kbook,.kbk'))break}}catch(e){}});await look(p,SZ,'Sổ tuần',ALL,2500);
+  if((!ONLY||ONLY.test('Sổ tuần'))&&!DONE.has(SZ.tag+'|Sổ tuần')){await ev(p,()=>{__iqClean();try{for(let i=0;i<4;i++){nextBuoi();if(document.querySelector('.kbook,.kbk'))break}}catch(e){}});await look(p,SZ,'Sổ tuần',ALL,2500);
    for(let i=0;i<3;i++){const ok=await ev(p,()=>{const n=document.querySelector('.kbook .knext,.kbk .knext,[data-kbnext],.kbook button.next');if(n){n.click();return 1}return 0});if(!ok)break;await look(p,SZ,`Sổ tuần · trang ${i+2}`,ALL,900)}}
   /* stage 1 (face seen, name unknown: "???" + descriptor) — the catalogue only */
   await ev(p,()=>{__iqClean();try{if(typeof kbookClose==='function')kbookClose()}catch(e){}__iqKnowAll(1)});
-  {const tot=await ev(p,()=>__iqPeople().length);const per=SZ.w>1000?6:4;for(let i=0;i<tot;i+=per){const nm=`thấy mặt · Danh mục ${i+1}-${Math.min(tot,i+per)}`;if(ONLY&&!ONLY.test(nm))continue;await ev(p,([i,n])=>__iqCatalog(i,n),[i,per]);await look(p,SZ,nm,ALL,600)}}
+  {const tot=await ev(p,()=>__iqPeople().length);const per=SZ.w>1000?6:4;for(let i=0;i<tot;i+=per){const nm=`thấy mặt · Danh mục ${i+1}-${Math.min(tot,i+per)}`;if(ONLY&&!ONLY.test(nm))continue;if(DONE.has(SZ.tag+'|'+nm))continue;await ev(p,([i,n])=>__iqCatalog(i,n),[i,per]);await look(p,SZ,nm,ALL,600)}}
   await ev(p,()=>{__iqClean();__iqKnowAll(3)});
   await walk(p,SZ,ALL,'quen');
-  ERR.push(...errs.map(e=>SZ.tag+' '+e),...[...new Set(bad)].map(u=>SZ.tag+' '+u));await ctx.close()}
+  ERR.push(...errs.map(e=>SZ.tag+' '+e),...[...new Set(bad)].map(u=>SZ.tag+' '+u));await ctx.close();break
+  }catch(e){console.log(SZ.tag,'attempt',attempt,'crashed:',String(e.message||e).split('\n')[0]);ERR.push(...errs.map(e=>SZ.tag+' '+e));try{await ctx.close()}catch(x){}
+   if(attempt===3){ERR.push(SZ.tag+' CRASH '+String(e.message||e).split('\n')[0])}}
+  }}
  await b.close();
  /* sizes run as separate processes (slow machines): merge with the rows of the other sizes already in <outdir>/img-quality.json */
  try{const old=JSON.parse(fs.readFileSync(path.join(OUT,'img-quality.json'),'utf8'));const mine=new Set(SIZES.map(s=>s.tag));
