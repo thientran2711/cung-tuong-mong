@@ -1,0 +1,166 @@
+# Thú nuôi 22x4 — Magnific (thư mục ba4aecfe…), gpt-2-6, style ref = kỳ lân EbzYPnzuuO. gens = tranh gốc, cuts = tách nền (tải lại được).
+## gens
+# key stage gen_id  (stage: g=grown, non, tn, lt) ; style ref EbzYPnzuuO
+meomuop g cplS1Iv0eP
+meomuop non EbzY3VzuuO
+cho g VXU7jafMMU
+vet g 6AHbfMeiJO
+kylan g EbzYPnzuuO
+bachloc g s7oIWtnl8e
+hoami g xSdBeT9jfW
+tho g CqGnA3kEEy
+cavang g s7oIBd7l8e
+meo g ksDeMVu16B
+sao g 0egUlgxTfW
+uyenuong g JNaCvCPOq4
+cachep g CqGnAYgEEy
+sutu g 1lpdDBzr4r
+hac g YMLljOOWeC
+linhmieu g EbzYGeGuuO
+camke g SythIbFUb8
+lyngu g Do7OwGTpcl
+cuuvi g JNaCvscOq4
+thienma g w4hamsn7EI
+ngoctho g SythILrUb8
+phuong g 4RuFEyF9Aa
+thanhlong g mE3Z3a3hJQ
+# FINAL grown: meomuop=s7oI8oJl8e(cut UPmvvMPwny) phuong=ksDepPA16B(cut w4haaDH7EI); other grown above (cut ids: hoami N2FqHMZ6D9 tho jUXoBifLD0 cavang ksDep9z16B meo Bh4N9KEoQR sao rgeXdiHxtc uyenuong ov96N1Z829 cachep dty4PKJXSL sutu yiCuED4PW9 hac 5jVDM3VKxe linhmieu xSdBXzUjfW camke 4RuFQo69Aa lyngu 5jVDMZDKxe cuuvi 0egUS5ETfW thienma 1lpdengr4r ngoctho gOImtM1SXO thanhlong YMLlsKbWeC)
+meomuop non cplSS5F0eP
+meomuop tn SythhpMUb8
+meomuop lt ksDeeWm16B
+cho non KLMppcFkqp
+cho tn ksDeeTa16B
+cho lt N2FqqQB6D9
+hoami non iGq557B3uK
+hoami tn 5jVDDCrKxe
+hoami lt p8JyyWxehw
+tho non 79vffs0JAL
+tho tn 79vfflTJAL
+tho lt 3zbKK9HREY
+cavang non iGq559h3uK
+cavang tn lJ8ttLFgv9
+cavang lt XmP9NqxBfo
+meo non ksDed9A16B
+meo tn 79vfCcqJAL
+meo lt s7oItGWl8e
+sao non P3EQFeH42C
+sao tn 8aNi3lTIrU
+sao lt 3zbKkv2REY
+uyenuong non s7oItTpl8e
+uyenuong tn 0egUw4gTfW
+uyenuong lt O6fEuKjynm
+cachep non 5jVDptHKxe
+cachep tn YMLlgNyWeC
+cachep lt LwB8IHjswO
+vet non lJ8tm5Kgv9
+vet tn eIOP4cBdqL
+vet lt jUXo859LD0
+sutu non Bh4NiEBoQR
+sutu tn 6AHbK0AiJO
+sutu lt If63ZbStvE
+hac non 1lpdBPur4r
+hac tn gOImvZsSXO
+hac lt LwB8tRWswO
+linhmieu non gOImvGfSXO
+linhmieu tn jUXoI2CLD0
+linhmieu lt jUXoI8SLD0
+camke non rgeXoBQxtc
+camke tn LwB8tmgswO
+camke lt 1lpdB82r4r
+lyngu non rgeXotbxtc
+lyngu tn XmP96ZYBfo
+lyngu lt ov963zh829
+cuuvi non gOImvFpSXO
+cuuvi tn 6AHbkZPiJO
+cuuvi lt N2FqKZg6D9
+thienma non YMLlUMYWeC
+thienma tn Sythf9JUb8
+thienma lt dty46a5XSL
+ngoctho non mE3ZGq2hJQ
+ngoctho tn JNaCQ2IOq4
+ngoctho lt KLMpX70kqp
+phuong non CqGnciQEEy
+phuong tn 1lpdo0Jr4r
+phuong lt bxTMeYA5Y2
+bachloc non XmP9iJ9Bfo
+bachloc tn xSdBIpBjfW
+bachloc lt SythftXUb8
+kylan non 1lpdoeOr4r
+kylan tn WDsgwgEcXe
+kylan lt 3zbKrSIREY
+thanhlong non 4RuFbLd9Aa
+thanhlong tn KLMpXaSkqp
+thanhlong lt 9ZQH5gQNYZ
+
+## cuts (tên tệp img/pet-<tên>.webp)
+meomuop-non N2FqK9r6D9
+meomuop-tn LwB8mLGswO
+meomuop-lt KLMpB1ikqp
+cho-non Do7O9ddpcl
+cho-tn Bh4NRIcoQR
+cho-lt WDsg7V4cXe
+hoami-non KLMpBjZkqp
+hoami-tn ksDeosw16B
+meomuop UPmvvMPwny
+phuong w4haaDH7EI
+hoami-lt MBwJ4hkDCm
+tho-non VXU7PhDMMU
+tho-tn 8aNi2HNIrU
+tho-lt LwB8hN2swO
+cavang-non xSdBt9ijfW
+cavang-tn 1lpd8PCr4r
+cavang-lt gOImfZtSXO
+meo-non XmP93qkBfo
+meo-tn rgeXIZVxtc
+meo-lt WDsg7uMcXe
+sao-non 6AHb18ViJO
+sao-tn 1lpd82Kr4r
+sao-lt LwB8hYfswO
+uyenuong-non If63ASNtvE
+uyenuong-tn u5nWVNPQLD
+uyenuong-lt EbzYTNkuuO
+cachep-non 9ZQHKfVNYZ
+cachep-tn iGq5ru93uK
+cachep-lt MBwJ4g3DCm
+vet-non huR2ni4vqL
+vet-tn 1lpd8Dwr4r
+vet-lt ov96Z4V829
+sutu-non Do7O977pcl
+sutu-tn u5nWVYGQLD
+sutu-lt lJ8taaVgv9
+hac-non rgeXItyxtc
+hac-tn xSdBthfjfW
+hac-lt N2Fqkxh6D9
+linhmieu-non WDsg7P5cXe
+linhmieu-tn MBwJ4iVDCm
+linhmieu-lt huR2nTYvqL
+camke-non Do7O9ZZpcl
+camke-tn yiCuqgIPW9
+camke-lt 79vfQsnJAL
+lyngu-non rgeXIbzxtc
+lyngu-tn 8aNi2drIrU
+lyngu-lt KLMpBqPkqp
+cuuvi-non nVjsUA2YQD
+cuuvi-tn huR2ntBvqL
+cuuvi-lt lJ8tasEgv9
+thienma-non 79vfF6BJAL
+thienma-tn s7oIayyl8e
+thienma-lt cplSOXc0eP
+ngoctho-non xSdBmJfjfW
+ngoctho-tn WDsgJBRcXe
+ngoctho-lt aF2GckWfSh
+phuong-non lJ8tf6jgv9
+phuong-tn UPmvuZKwny
+phuong-lt cplSOCo0eP
+bachloc-non LwB8vAWswO
+bachloc-tn YMLl7C8WeC
+bachloc-lt 4RuFKeU9Aa
+kylan-non TdSwPHlVNR
+kylan-tn fHAz0J5CDY
+kylan-lt rgeXtAFxtc
+thanhlong-non eIOPirgdqL
+thanhlong-tn eIOPigOdqL
+thanhlong-lt MBwJ9sNDCm
+# redo (bg filled square): thienma-lt gen lJ8tEtzgv9 cut cplSPW60eP; kylan-lt gen 9ZQHrbdNYZ cut xSdBvxejfW; thanhlong-lt gen xSdBvttjfW cut nVjsOWAYQD
+
+trưởng thành khác (cut): cho=If63OnftvE vet=u5nWRpmQLD kylan=iGq5mJF3uK bachloc=ksDeAQ316B; còn lại xem dòng FINAL grown
