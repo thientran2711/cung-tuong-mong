@@ -42,3 +42,4 @@ Máy chậm (nhiều thợ) — Playwright ít lượt, reducedMotion. Đĩa ~7 
 
 ## Báo cáo cuối từ thợ phiên cũ (sau bàn giao)
 - review/page-curl @0e8cb4ef (lật nguyên tờ trong 1fdc37c2): tờ quay quanh gáy, mặt trước trang cũ / mặt sau trang mới, 760 ms; bản sao mang layout inline (vì book-release bỏ id). Còn: gửi ảnh sếp (dev/shots/curl2/*-tab-25/45/65), KIT chưa ghi kitSheetTurn, iPad 65% chữ chồng lúc thẻ người chưa ổn định, ảnh lật ngược chưa soát, hỏi sếp lật tuần có làm nguyên tờ không.
+- review/scheme-games @0c894835 (CHƯA sẵn sàng kiểm): 4 trò Nghe ngóng / Truyền lời / Mặc cả / Thời cơ trong dev/build/jsgame.js, hộp chọn Tự ra tay / Giao cho người làm, NPC không chơi, kit seal MƯU (KIT §13.2). Còn: build_site, chạy lại dev/test/schemegames.js từng trình duyệt ở 686 và 1180, kiểm Truyền lời ở 390px, chưa gắn j78 overhear / j9 placeHarms / bribeServ. Ghi chú: dev/PROGRESS_scheme-games.md.
