@@ -81,9 +81,11 @@ Thú nuôi biếng ăn (tranh thú ở đầu thẻ). Lời dặn lần đầu (
   gongbi/màu nước mềm). KHÔNG dùng tranh thú cũ. Mỗi con một ảnh 1:1 trên nền giấy trơn, không đệm/đá/bệ; chim trên giá/lồng, cá trong bồn.
 - Tách nền: Magnific images_remove_background → scratchpad proc.py: điểm bán trong suốt lấy màu tranh gốc (không viền tối), bỏ đốm rời,
   lấp lỗ nhỏ, cắt vuông 90 phần trăm, 512 + 256 webp. Linh vật/thần thú: quầng sáng mềm (kylan vàng nhạt, bạch lộc trắng bạc).
-- Mỗi con 3 tranh (sếp 15/11, 4 bậc lớn: Non → Thiếu niên → Trưởng thành → Linh thú): Non `img/pet-<k>-non.webp`, Thiếu niên
-  `img/pet-<k>-tn.webp`, Trưởng thành `img/pet-<k>.webp` (mỗi cái cả pet512/); Linh thú = tranh trưởng thành + quầng sáng bằng mã (không tranh riêng).
-  Non/Thiếu niên vẽ với tranh trưởng thành làm ảnh tham chiếu (cùng một con). Tổng 66 tranh. ĐANG CHỜ sếp duyệt mẫu (hươu trắng tinh? vẹt to hơn?).
+- Mỗi con 4 tranh, mỗi bậc lớn một tranh (sếp 15/11): Non `img/pet-<k>-non.webp`, Thiếu niên `img/pet-<k>-tn.webp`, Trưởng thành
+  `img/pet-<k>.webp`, Linh thú `img/pet-<k>-lt.webp` (mỗi cái cả pet512/). Linh thú = bản uy nghi, linh khí của chính con trưởng thành:
+  thú thật → lông/vân sáng như tiên, sợi sáng, dáng đường bệ, có thể đeo ngọc/vàng; linh vật → hình đầy đủ hơn (cửu vĩ hồ hiện đủ chín
+  đuôi, bờm/sừng lớn hơn…). Non/Thiếu niên/Linh thú vẽ với tranh trưởng thành làm ảnh tham chiếu (cùng một con). Tổng 88 tranh.
+  ĐANG CHỜ sếp duyệt mẫu (hươu trắng tinh? vẹt to hơn trên giá?).
 - Mẫu (chờ duyệt): dev/shots/pets/mau.jpg — Mèo mướp non + trưởng thành, Chó nhỏ lông xù, Vẹt ngũ sắc trên giá, Kỳ lân con, Bạch lộc.
   Magnific: mèo WDsgFxxcXe (cắt gOImT5DSXO), mèo non vQZAyUua47 (LwB808xswO), chó cplSHLy0eP (nVjsQ6MYQD), vẹt gOIm0IRSXO (tCiRUDcmZJ),
   kỳ lân EbzYPnzuuO (iGq5mJF3uK), bạch lộc s7oIWtnl8e (ksDeAQ316B). Chưa đẩy CDN (chờ duyệt).
