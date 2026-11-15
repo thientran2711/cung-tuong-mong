@@ -9,17 +9,37 @@ const VO={cur:null,last:{}};
 function voice(k,force){try{if(!auOk()&&!force)return;if(!force&&Date.now()-(VO.last[k]||0)<6000)return;VO.last[k]=Date.now();const vol=OPT.vo==null?.7:OPT.vo;if(!vol)return;
  if(VO.cur){try{VO.cur.pause()}catch(e){}}const a=new Audio(pick(voFiles(k)));a.volume=vol;VO.cur=a;a.addEventListener("error",()=>{if(VO.cur===a)VO.cur=null});
  AU.duck=.6;if(AU.cur)AU.cur.volume=musVol();a.addEventListener("ended",()=>{AU.duck=1;if(AU.cur)AU.cur.volume=musVol();if(VO.cur===a)VO.cur=null});const p=a.play();if(p&&p.catch)p.catch(()=>{})}catch(e){}}
-/* which voice a card calls for: the speaker (sex, age) and the moment */
+/* which voice a card calls for: the MEANING of the card first (tone), then the speaker (sex, age).
+   Owner 11/15 ("Có người đến": a consort sends back my gift, 'không dám nhận', played a laugh): a word like "tặng" says nothing about the
+   mood. Tones: shock · gossip · hostile · mocking · sad · cold (polite refusal, distance) · joyful (only real joy words, never negated) ·
+   neutral. A laugh only for mocking (f) or joyful; cold / neutral = no voice (the card keeps its soft open chime). */
+const VOT={
+ shock:/băng hà|ban chết|bại lộ|có độc|trúng độc|sảy thai|sảy|chết|kinh hãi|thất kinh/,
+ gossip:/tin đồn|đồn rằng|rỉ tai|buôn chuyện|xì xào|bàn tán/,
+ hostile:/buộc tội|chất vấn|sầm sập|quát|mắng|nổi giận|giận dữ|phẫn nộ|đe dọa|hăm dọa|trừng mắt|quở|trách|vu cáo|tố cáo|vạch mặt|phật ý|cau mày|chau mày|sa sầm|nổi trận|đuổi/,
+ mocking:/che miệng cười|bụm miệng cười|cười như không cười|mỉa mai|chế giễu|cười nhạo|cười khẩy|cười mỉa|khinh khỉnh|giễu cợt|châm chọc|hạ nhục|khiêu khích|bĩu môi/,
+ sadStrong:/khóc|rơi lệ|nghẹn ngào|nức nở|bị phạt|phạt quỳ|giáng|lãnh cung|bị đánh|đánh đòn|trượng|tang lễ|qua đời|mất con/,
+ sad:/thở dài|buồn|chia ly|biệt ly|hòa thân|không (được )?về thăm|khách chê|bị chê|chê bai|chê cười|ủ rũ|đau lòng|ốm|lâm bệnh|tủi/,
+ cold:/không dám nhận|trả lại|gửi trả|từ chối|khước từ|cáo lui|lạnh nhạt|lạnh lùng|né tránh|xa cách|không tiếp|đóng cửa không|làm ngơ/,
+ joy:/vui mừng|mừng rỡ|hớn hở|tươi cười|cười tươi|rạng rỡ|vui vẻ|kết làm chị em|kết nghĩa|cười khúc khích|reo lên|hoan hỉ|đắc ý cười/,
+ warm:/nhận lời|cảm tạ|vui lòng|cảm kích|mỉm cười|e lệ|hài lòng|khen|ban thưởng/,
+ neg:/không (hề |còn |mấy )?(vui|mừng|hài lòng|cười|khen)|chẳng (vui|mừng|cười)|chưa (vui|hài lòng)|kém vui|mất vui/};
+function voTone(txt){const t=String(txt||"");
+ if(VOT.shock.test(t))return"shock";if(VOT.gossip.test(t))return"gossip";if(VOT.hostile.test(t)||VOT.neg.test(t))return"hostile";
+ if(VOT.mocking.test(t))return"mocking";if(VOT.sadStrong.test(t))return"sadStrong";if(VOT.cold.test(t))return"cold";if(VOT.sad.test(t))return"sad";
+ if(VOT.joy.test(t))return"joy";if(VOT.warm.test(t))return"warm";return"neutral"}
+/* tone × speaker → voice key (null = no voice) */
+const VOMAP={
+ emp:{hostile:"m-grunt",mocking:"m-grunt",sadStrong:"m-sigh",sad:"m-sigh",joy:"m-chuckle",warm:"m-chuckle"},
+ th:{hostile:"old-hmph",mocking:"old-hmph",cold:"old-hmph"},
+ f:{hostile:"f-angry",mocking:"f-angry",sadStrong:"f-cry",sad:"f-sigh",joy:"f-laugh",warm:"f-softlaugh"}};
 function voKind(m){const w=m.who||{};const k=(w.w||[])[0];const txt=String((m.t||"")+" "+(m.h||"")).replace(/<[^>]+>/g," ");
  const emp=k==="e"||/Hoàng thượng/.test(m.t||"");const th=w.rk==="th"||/Thái hậu/.test(m.t||"");
  if(/chào đời|hạ sinh|sinh hạ|Sinh hoàng|sinh công chúa/.test(txt))return"baby-cry";
- if(/các con|hoàng tử nhỏ|công chúa nhỏ/.test(txt)&&/chơi|sang|vui/.test(txt))return"child-giggle";
- if(/băng hà|ban chết|bại lộ|có độc|trúng độc|sảy|chết/.test(txt))return/trước mặt|cả hậu cung|yến/.test(txt)?"crowd-gasp":"f-gasp";
- if(/tin đồn|đồn rằng|rỉ tai|buôn chuyện/.test(txt))return"gossip";
- if(emp){if(/phật ý|cau mày|nổi giận|quở|trách|đuổi/.test(txt))return"m-grunt";if(/vui|cười|ban thưởng|hài lòng|khen/.test(txt))return"m-chuckle";if(/thở dài|buồn|lo/.test(txt))return"m-sigh";return null}
- if(th){if(/không vui|phật ý|trách|chau mày|lạnh lùng/.test(txt))return"old-hmph";return null}
- if(/bị phạt|giáng|quỳ|đánh|trách phạt|lãnh cung|khóc/.test(txt))return"f-cry";
- if(/mỉa mai|khiêu khích|hạ nhục|giận/.test(txt))return"f-angry";
- if(/tặng|nhận lời|tươi cười|vui lòng|cảm tạ|kết làm chị em/.test(txt))return /e lệ|khẽ/.test(txt)?"f-softlaugh":"f-laugh";
- if(/thở dài|buồn|ốm/.test(txt))return"f-sigh";return null}
+ const tone=voTone(txt);
+ if(/các con|hoàng tử nhỏ|công chúa nhỏ/.test(txt)&&/chơi|sang|vui/.test(txt)&&(tone==="joy"||tone==="warm"||tone==="neutral"))return"child-giggle";
+ if(tone==="shock")return/trước mặt|cả hậu cung|yến/.test(txt)?"crowd-gasp":"f-gasp";
+ if(tone==="gossip")return"gossip";
+ const M=emp?VOMAP.emp:th?VOMAP.th:VOMAP.f;return M[tone]||null}
+window.voTone=voTone;window.VOT=VOT;window.VOMAP=VOMAP;
 (function(){const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);try{const m=Q[0];if(m&&m!==VO.lastCard){VO.lastCard=m;const k=voKind(m);if(k)voice(k)}}catch(e){}return r}})();
