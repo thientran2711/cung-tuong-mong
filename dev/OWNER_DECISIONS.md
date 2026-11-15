@@ -241,3 +241,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (05:15Z) Owner báo lỗi: Thỉnh an Hoàng hậu 'thiện cảm +4' mà không đổi gì. Sửa: việc tăng 'Hoàng hậu với ngươi +4' thật; thẻ kết quả hiện số thật. Thuật ngữ thống nhất: 'Ngươi với nàng' / 'Nàng (Hoàng hậu, Hắn…) với ngươi', bỏ chữ 'thiện cảm' trơn. Soát mọi hiệu ứng quan hệ. review/sub-odds + review/hau-cung-ui.
 - (05:18Z) Owner DUYỆT cỡ hoa điền thu nhỏ (c12 Phi) → làm chuẩn cỡ cho mọi bậc.
 - (05:20Z) Owner: tab Hậu cung phải có cả Hoàng thượng, Thái hậu (nhóm đầu dải người, thẻ người + việc có sẵn). review/hau-cung-ui.
+- (05:25Z) Owner: 'Ngươi với nàng / Nàng với ngươi' khó hiểu → nhãn chủ-vị rõ: 'Nàng quý ngươi: <mức> · số', 'Nàng oán ngươi: số', 'Ngươi quý nàng…', 'Hoàng hậu quý ngươi +4'; mức: Ghét/Không ưa/Bình thường/Có cảm tình/Quý mến/Thân thiết. Mọi nơi (thẻ, Giao tình, việc, kết quả, sổ ghi).
