@@ -92,7 +92,7 @@ function kitItemRows(k,o){o=o||{};const it=IT[k];if(!it)return"";const a=typeof 
  if(it.use){const u=Object.entries(it.use).filter(([x,v])=>v).map(([x,v])=>`${N[x]||x} ${v>0?"+":""}${v}`);if(u.length)D.push((it.kd==="Thư từ"?"đọc: ":"dùng: ")+u.join(", "))}
  if(it.ant)D.push("an thai");if(it.fert)D.push(`${it.fert} tháng dễ thụ thai`);if(it.anti)D.push("cứu một lần trúng độc");if(it.evi)D.push(`chứng cứ +${it.evi}`);
  if(it.keep)D.push("Sủng không dưới 15");if(it.gv)D.push("đem tặng: hợp ý");if(k==="botngua")D.push("phi tần trúng: Danh -5");if(it.mat)D.push("trộn vào túi thơm, hương trầm");
- if(over)M.push("vượt phẩm: dễ bị tố");if((o.worn||o.dress)&&typeof luxOf==="function"&&luxOf(S).lv>=2&&luxGrade(k)>=2)M.push(luxOf(S).lv===3?"quá xa xỉ: dễ bị ghen":"xa hoa: người khác ghen");if(it.il)M.push("bị khám ra là có tội");if(it.keep)M.push("mất là đại họa");
+ if(over)M.push("vượt phẩm: dễ bị tố");if(it.il)M.push("bị khám ra là có tội");if(it.keep)M.push("mất là đại họa");
  if(o.ownTaint&&typeof TAINT==="object"&&TAINT[o.ownTaint])M.push(`đã ${TAINT[o.ownTaint].n}: ${TAINT[o.ownTaint].hurt}`);
  if(it.sl||it.dr)G.push(`xa xỉ ${luxVal(k)}`);if(o.months!=null)G.push(`còn ${o.months} tháng`);else if(it.dr)G.push("áo mặc 3 tháng");
  if(it.sl)G.push({hair:"cài tóc",wrist:"đeo tay",waist:"đeo eo",scent:"đeo bên mình"}[it.sl]||"");if(it.rk)G.push(`hợp phẩm từ ${RANKS[Math.min(7,it.rk)].n}`);
@@ -174,7 +174,8 @@ function luxAllow(p){return 36+16*Math.max(0,Math.min(7,rkOf(p)|0))+((p.sung|0)>
 function luxOf(p){const L=luxWorn(p);const sc=L.reduce((s,k)=>s+luxVal(k),0);const bud=luxAllow(p);
  const lv=sc===0?0:sc<=bud?1:sc<=bud*1.5?2:3;return{lv,sc,bud,name:LUX_N[lv][0],cls:LUX_N[lv][1]}}
 /* kit chip: total worn luxury vs allowance; over the allowance = red */
-function kitLuxChip(x){return `<span class="kchip ${x.sc>x.bud?"r":"n"} kluxc" title="${x.sc>x.bud?(x.lv===3?"quá xa xỉ: dễ bị ghen, bị chê":"xa hoa: người khác ghen"):"trong mức được phép"}">Xa xỉ <b>${x.sc}</b> / ${x.bud}</span>`}
+/* owner 11/15: only the worn TOTAL, neutral — never the allowance, never a level word or colour; she learns the limit from what happens */
+function kitLuxChip(x){return `<span class="kchip n kluxc">Xa xỉ <b>${x.sc}</b></span>`}
 function luxMonth(p){try{if(!p||p.out||p.alive===false)return"";const x=luxOf(p);let r="";const me=p===S;
  if(x.lv>=2){const n=x.lv===3?3:1;liveRivals(true).forEach(v=>{if(v===p)return;const m=LUX_TR[v.trait]||1;v.ghen=cl((v.ghen||0)+Math.max(1,Math.round(n*m*(me?1:.5))),0,100)});
   if(me&&x.lv===3)r+="Hậu cung xì xào ngươi ăn mặc quá xa xỉ, nhiều người ghen. "}
@@ -219,7 +220,7 @@ function keqTT(){const wb=wearBonus(S),vp=vpItems(S);const slots=KEQ_TT.map(([sl
   let mini="";if(item&&sl==="veil")mini=veilNeed(S)?kitChip("Sắc",2):`<span class="keql2"><span class="keqm">mặt đã lành</span><span class="keqw" title="che mặt không cần: dễ bị đồn" aria-label="che mặt không cần: dễ bị đồn">⚠</span></span>`;
   else if(item){const k=sl==="dress"?S.dress.k:S.inv[ix].k,it=IT[k],over=!!(it.rk&&it.rk>S.rank),m=over?1.5:1,N=typeof NAMES==="object"?NAMES:{};
    const fx=sl==="dress"?[["Sắc",Math.round(it.dr*m)]]:Object.entries(it.w||{}).filter(([a,v])=>v).map(([a,v])=>[N[a]||a,Math.round(v*m)]);
-   const lux=luxOf(S).lv>=2&&luxGrade(k)>=2;const risk=over?"vượt phẩm: dễ bị tố":lux?"xa xỉ: dễ bị ghen":"";
+   const risk=over?"vượt phẩm: dễ bị tố":"";
    mini=fx.map(([a,v])=>kitChip(a,v)).join("")+(sl==="dress"||risk?`<span class="keql2">${sl==="dress"?`<span class="keqm">còn ${S.dress.until-S.turn} tháng</span>`:""}${risk?`<span class="keqw" title="${risk}" aria-label="${risk}">⚠</span>`:""}</span>`:"")}
   return{k:sl,label,item,note,ix,mini,hint:kitItemHint(sl),ghost:sl==="dress"?`img/wd512/wd-${keqTier()}-y-01.webp`:sl==="veil"?"img/veil-silk-ivory.png":keqArt(gk)}});
  const C=[];if(wb.sac)C.push(["Sắc",wb.sac]);if(wb.danh)C.push(["Danh",wb.danh]);

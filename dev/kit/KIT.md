@@ -745,10 +745,10 @@ chest, Tư trang, wardrobe slots, reward chests, peddler, works, reward panels. 
   equipment slots below (they grow up to 112 px). Refit on grid width / panel height change (ResizeObserver).
 ### 28.13c kitEquipSlots — "Đang mang" EQUIPMENT SLOTS (owner 11/15, RPG-style) — `dev/build/jinv.js` — KIT READY
 `kitEquipSlots({key, title, slots:[{k,label,item:{src,name,grade,tip}|null,ghost,mini}], sum, onPick:fn(slot)})` → `.keq` under the bag:
-header = kit section title + ALL totals and warnings (Sắc/Danh chips · luxury level chip · "N món vượt phẩm: dễ bị tố"; chips wrap, never cut).
+header = kit section title + totals (Sắc/Danh chips · "Xa xỉ <total>" neutral · "N món vượt phẩm: dễ bị tố" law notice; chips wrap, never cut).
 Slots auto-fit (≥ 80 px columns, wrap to a 2nd row when needed). Each slot = kitItem "slot" (same grade ground + frame as the bag).
 TIDY RULE (owner): under a FILLED slot at most 2 short lines — item name in its grade colour + main effect chip(s) (+ "N th" for a timed dress)
-+ a small red ⚠ if vượt phẩm or xa xỉ (reason in the tooltip). EMPTY slot: the slot name only + the type silhouette (`ghost`). Full facts only on tap.
++ a small red ⚠ only if vượt phẩm (law; reason in the tooltip; luxury is never hinted). EMPTY slot: the slot name only + the type silhouette (`ghost`). Full facts only on tap.
 Tư trang slots = the rules' wear slots (`IT.sl`, j8 wear()/wearBonus/vpItems/tố vượt phẩm are generic on it):
 Cài tóc (hair) · Đeo tay (wrist) · Đeo eo (waist: ngọc bội ngự ban, Danh +1, still never given/sold) · Túi thơm (scent: túi thơm thêu, Sắc +1,
 worn instead of used up; a tainted sachet keeps hurting via taintHit) · Y phục (áo may từ vải, `S.dress`, 3 tháng; the slot shows the GARMENT:
@@ -759,12 +759,14 @@ with the face healed: 1 in 4 a month whispers, Danh -1 (⚠ on the slot). Toggle
 Hoa tai / Giày hoa: NOT added — no item painting exists (held until the owner OKs new art). New slots need a real `IT.sl` rule first.
 ### 33c kitItemRows(k, o) — the ONE fact block of an item
 Kit act-card rows (kitRows): Phẩm (grade name in its colour) · Được (effects; worn effects ×1.5 above her rank as wearBonus) · Mất (vượt phẩm,
-xa xỉ, contraband, loss, own taint) · Ghi chú (months left, slot, rank it suits). Used at the top of the item panel (bag slot tap) and the
+contraband, loss, own taint — never the hidden luxury level) · Ghi chú (months left, slot, rank it suits). Used at the top of the item panel (bag slot tap) and the
 equipment slot tap (dress panel). Never re-written per screen.
 ### LUXURY axis (owner 11/15) — NUMBERS, never words — `luxVal(k)`, `luxAllow(p)`, `luxOf(p)`, `luxMonth(p)` (jinv, via j8 itemMonth: everyone)
 Every wearable item / garment has "Xa xỉ N" = [8,16,28,44,64][grade] + giá/10. Her allowance = 36 + 16 × rank (+10 if Sủng ≥ 60).
 kitItem `lux:N` → a small dark corner tab "Xa xỉ N" (top-right; "đã tẩm" moves to the left) on bag slots, equipment slots and the panel picture.
-Header chip `kitLuxChip`: "Xa xỉ <total> / <allowance>", red when over. Rules (internal levels): ≤ allowance fine; ≤ 1.5× → others' Ghen +1
+Header chip `kitLuxChip`: ONLY the worn total "Xa xỉ <total>", neutral colour (owner 11/15: never the allowance, never a level word, colour or
+warning — she learns the limit from what happens: ghen, gossip, Thái hậu). Item panels show only each item's own "Xa xỉ N". The ⚠ under a slot and the
+"N món vượt phẩm: dễ bị tố" chip are kept: vượt phẩm is palace LAW (j8 rank caps, tố vượt phẩm), not the hidden luxury rule. Rules (internal levels): ≤ allowance fine; ≤ 1.5× → others' Ghen +1
 (× trait: Kiêu ngạo/Tham vọng 1.5, Hiểm độc 1.2, Hiền lành/Nhu mì 0.5; half for an NPC wearer); above → Ghen +3, Thái hậu may frown
 (chance 50 − Đức/2, 10–50: Thái hậu -3 / NPC Danh -2), gossip 1 in 4: Danh -1; nothing worn from Quý nhân up: 1 in 4 Đức +1.
 It extends ghen (v.ghen) and itemMonth; vượt phẩm/tố stays j8 vpItems/vpAccuse.

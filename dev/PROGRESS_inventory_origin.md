@@ -50,3 +50,4 @@ Quyết định chủ: OWNER_DECISIONS 11/15 04:00Z + lệnh điều phối (lu�
   ống xăm "Xăm"; trò lật hoa chữ Việt; "Chữ Nhân". Thử: quét CJK trong toàn trang (0).
 - "2 th" → "còn 2 tháng" (dòng 2 dưới chip). Mặt người chơi tái xanh (ảnh chủ 1115-pale-face): do TRANH img/fig-consort-c02-t1-a18.webp (da tông lạnh xám),
   không phải mạng che / bộ lọc; viền sáng quanh người chơi trên sân khấu đổi màu theo ánh sáng (j59), không phủ lên mặt.
+- Chủ: KHÔNG lộ mức được phép. Đầu khung chỉ "Xa xỉ <tổng>" màu trung tính; bỏ gợi ý xa xỉ ở dòng Mất và dấu ⚠ (⚠ chỉ còn cho vượt phẩm = luật).
