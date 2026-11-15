@@ -336,3 +336,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - Mọi màn PHẢI dùng thành phần kit chung (khung, hình người, tab, nút, ✕); thợ không được tự làm khung/hình riêng. Người duyệt FAIL mọi nhánh làm riêng.
 - Sếp OCD: mọi hàng/cột phải thẳng hàng, theo lề; giá, tên, nút trong lưới cùng một đường ngang.
 - Bảng mua đồ: hình thái giám cao hết khung như hộp thoại có người; bỏ khung mua bên dưới (không lặp món); − số + và nút Mua ngay trên ô.
+- (05:50Z) Màn hình hỗ trợ: điện thoại khổ Fold (~755x1000) dọc + ngang; điện thoại ngang; iPad ngang. KHÔNG dùng điện thoại dọc hẹp (kiểu iPhone): game tự hiện xoay ngang sẵn để người chơi xoay máy. Bộ kích thước kiểm mới: 755x1000, 1000x755, 1180x820, 1366x1024, 844x390 (+ kiểm 390x844 hiện xoay).
