@@ -2,7 +2,7 @@
    Loads after jgift (the kit gift dialog of main, gift-ui): it only ADDS to that dialog, never replaces it. Numbers in BAL.pg / BAL.gift.
    1. POISONS (real items, bought by the existing đồ-cấm routes j83 WILL/IROUTE): Hạc đỉnh hồng (chết), Độc ngấm dần (Sức −25, ốm 3 tháng = the
       "Hạ độc dần" effect), Phấn hủy nhan (Sắc −8), Xạ hương (sảy thai, only a pregnant target), Mê dược (Sức −10, thẻ bài rút 1 tuần).
-   2. Giving food / drink / a sachet — her own work (j83 kinds mon, huong) or a bought food (yến sào, nhân sâm, a giao) — the gift dialog gets one
+   2. Giving food / drink / a sachet — her own work (j83 kinds mon, huong) or a bought / stipend good of those kinds (tonics, tea, snacks, wine, túi thơm) — the gift dialog gets one
       more row "Bỏ độc vào…" (in every recipient tab) when she holds a poison: it opens a card of target × poison, each a kit option with the REAL
       odds word, Tốn/Được/Mất/Kèm with numbers (an active act: owner 15:05Z) and the kit "Vì sao <bậc>?" popover (jwhy: option.why()).
       pgOdds(a,t,e) = odA(a, BAL.pg.base + Tâm cơ/4 + the target's thiện cảm toward the giver /4 + grade × BAL.pg.grade
@@ -34,8 +34,9 @@ try{Object.assign(WILL,{docngam:{eff:"Sức -25, ốm ba tháng",tr:"khó lần 
 /* won: the kit "thành" text of her card ("nàng … -N" = harm to a rival, green in the kit) */
 const PGX={hacdinh:{n:"Hạc đỉnh hồng",won:"nàng Sức -120 · nàng thường chết",duc:10},docngam:{n:"Độc ngấm dần",won:"nàng Sức -25 · nàng ốm ba tháng",duc:6},
  phanhuy:{n:"Phấn hủy nhan",won:"nàng Sắc -8 vì nổi mẩn",duc:5},xahuong:{n:"Xạ hương",won:"nàng sảy thai · nàng Sức -25",duc:10,preg:1},meduoc:{n:"Mê dược",won:"nàng Sức -10 · nàng không được lật thẻ một tuần",duc:3}};
-const PGX_FOOD=["yensao","nhansam","agiao"];
-function pgFood(e){return !!e&&!e.h&&(e.wk?["mon","huong"].includes(e.wk.kind):PGX_FOOD.includes(e.k))}
+/* food, drink, sachets: handmade dishes / sachets, and every bought or stipend good of those kinds (jstip tea, snacks, wine; j8 tonics; túi thơm) */
+const PGX_FOOD=["yensao","nhansam","agiao","tuithom"],PGX_KD=["Thuốc bổ","Trà","Điểm tâm","Rượu"];
+function pgFood(e){return !!e&&!e.h&&(e.wk?["mon","huong"].includes(e.wk.kind):PGX_FOOD.includes(e.k)||!!(IT[e.k]&&PGX_KD.includes(IT[e.k].kd)))}
 function pgHeld(a){return Object.keys(PGX).filter(k=>(a.inv||[]).some(e=>e&&e.k===k&&!e.h))}
 function pgGrade(e){return e&&e.wk?(e.wk.ti|0):e&&IT[e.k]?Math.min(3,Math.floor((IT[e.k].pr||0)/25)):0}
 function pgNm(p,cap){return p===S?(cap?"Ngươi":"ngươi"):p.name}

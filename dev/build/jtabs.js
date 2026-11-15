@@ -81,7 +81,7 @@ function ktStoryHTML(){const c=S.st.ch,M=S.st.M,m=S.st.ms,Q0=(typeof QUEST67==="
   else if(S.out)h+=kitEmpty("Sắc phong",`Ngươi đang ở lãnh cung: không bàn chuyện sắc phong. Được minh oan thì phục vị ${RANKS[Math.max(0,Math.min(6,S.coldRank||0))].n} (hoặc thấp hơn một bậc).`);
   else{const R=promoReq();const ok=R.filter(x=>x[0]).length;
    h+=kitSkillCard({kind:"rank",k:String(S.rank+1),kicker:"Điều kiện sắc phong",name:RANKS[S.rank+1].n,level:ok,max:R.length,word:"Đạt",bar:false,next:"",img:kitInfoArt("sắc phong").src||art});
-   R.sort((a,b)=>a[0]-b[0]);h+=kitChecks(R);
+   R.sort((a,b)=>a[0]-b[0]);/* KIT §51 (owner 11/15 17:27Z): the requirement list is ONE kit table (kitReqRows: label | ✓/✗ + numbers), unmet first */h+=kitReqRows(R);
    h+=`<div class="ktop">${kitInfo("Ngôi Hoàng hậu")} <span class="kchip ${S.duc>=hhNeed(S).duc?"g":"r"}">Đức <b>${S.duc}/${hhNeed(S).duc}</b></span> ${typeof exChips==="function"?`${kitInfo("Khảo hạch tấn phong")} ${exChips()}`:`<span class="kchip n">đủ điều kiện: cuối tháng có thánh chỉ</span>`}</div>`}}
  else{const R=past.map(x=>[`Chương ${x.n}`,`${msName67(x)} · <b class="${x.k>0?"g":x.k<0?"r":""}">${x.tag}</b>`]);
   rare.forEach(x=>R.push([`✦ ${ARC67[x.a]?ARC67[x.a].t:x.a}`,x.ti&&x.ti!==x.tag?`${x.tag} · danh hiệu «${x.ti}»`:x.tag]));
