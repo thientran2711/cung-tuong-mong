@@ -204,3 +204,4 @@ Worktree thợ ở /home/user/wt/<tên>. Bản tóm tắt luật cho thợ: /hom
 - 17:14Z chữ tiêu đề 'Tuần lục' vẽ thư pháp Việt (chữ Latin có dấu, không Hán) 3–4 mẫu → act-pics2 làm trước, sếp chọn rồi mới gắn.
 - 17:16Z khung vuông thừa sau ảnh nhỏ + tên nhiều màu + dòng 'Tuần này' dài + nút Lui (Tổng lược Tuần lục) → fix-float, sửa ở kit chung.
 - 17:20Z THĂNG PHẨM PHẢI QUA KHẢO HẠCH (đủ điều kiện chỉ là được thi; trượt thì chờ; NPC cùng luật) → hàng chờ, giao ngay khi có chỗ (thợ promo-exam). Hỏi sếp: đường nô tài/ma ma có cần thi không.
+- 17:24Z phòng trưa vẫn nâu (scene-light tách lô sớm), đom đóm buổi trưa (close-bugs), ban thưởng tranh cổ không có rương (người duyệt game-feel kiểm).
