@@ -41,15 +41,11 @@ if(typeof kitDecor==="function"){const d0=kitDecor;kitDecor=function(f){const d=
   const e=(typeof k61PortEnt==="function"&&k61PortEnt(f))||f.__kp;let lab="Người lạ";try{if(e&&typeof k61NoFace==="function"&&k61NoFace(e))lab=k61Lab(e)}catch(x){}
   return Object.assign({},d,{role:"unknown",known:false,frame:KIT_DIR+"frame-unknown.webp",bg:KIT_DIR+"bg-unknown.webp",badge:KIT_DIR+"tok-unknown.webp",emb:null,tint:null,col:"#9aa0a6",unknownSrc:/kit\/unknown-[fmk]\.webp/.test(String(f.src||""))?f.src:d.unknownSrc,metal:(KIT_ROLES.unknown||{}).metal||d.metal,label:lab})}}catch(x){}return d}}
 
-/* 5 — men's portraits: the 11 "man" identities (FIGURES-others) were taken first by the công tử of the court families (j54 h54Face,
-   8 of them as soon as the Hoàng tự tab drew the marriage list), so 6 of the 9 palace men (sứ thần, nhạc sư, thị vệ…) had no por and
-   showed the old 256 px face-official-*.webp: 1.55–1.7x upscale in the card frame + the oval mask = the blurred, zoomed "khung nam".
-   Công tử live outside the palace and she has never met them (owner: chưa gặp = người lạ, không lộ mặt): they show the grey silhouette
-   in the stone frame and no longer take an identity; the palace men get theirs. An old save whose men lost out takes the identity back
-   from a công tử (that công tử becomes a silhouette). Art owed: more young-noble "man" identities (dev/test/IMG_QUALITY.md). */
-if(typeof h54Face==="function"){const h0=h54Face;h54Face=function(s){try{if(s&&!s.fid){
-  const f={rk:"off",rw:"Công tử",src:KIT_DIR+"unknown-m.webp",hue:0,ini:String(s.name||"?").split(" ").pop()[0],col:"#6a8aa0",stranger:1};
-  f.__kp=s;try{f.__kr=personRoleRank(s,"man")}catch(e){}return f}}catch(e){}return h0.apply(this,arguments)}}
+/* 5 — men's portraits: under the old j54 h54Face the công tử of the court families took the 11 "man" identities (FIGURES-others) first,
+   so 6 of the 9 palace men (sứ thần, nhạc sư, thị vệ…) had no por and showed the old 256 px face-official-*.webp (1.55–1.7x upscale).
+   jht.js (review/hoang-tu, on main) now gives công tử their own faces (FIGURES-congtu.json) and the grey silhouette while unknown, and never
+   takes a men-pool identity, so h54Face is left to jht (reviewer r6: an extra silhouette wrapper here hid the công tử portrait even after
+   "Dò hỏi gia thế" / hứa hôn). An old save whose men lost out still takes the identity back from a công tử (s.fid, unused by jht). */
 if(typeof figPick==="function"){const p0=figPick;figPick=function(who){let r=p0.apply(this,arguments);try{
   if(!r&&who&&S&&(S.men||[]).includes(who)&&typeof FIGIX!=="undefined"&&FIGIX.man){
    const ct=(S.hPool||[]).find(s=>s&&s.fid&&FIGIX.man[s.fid]);
