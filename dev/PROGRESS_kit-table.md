@@ -45,4 +45,8 @@ Status: SẴN SÀNG KIỂM (branch pushed). Worktree deleted after push.
   Ân thưởng dialog opens, no horizontal overflow. Screens checked by eye: Hậu cung act cards (compact), LUẬT Ân thưởng, Mệnh truyện ·
   Sắc phong, #kit page at 755x1000 and 844x390.
 - Seen, not this branch: the "Tối nay Hoàng thượng lật thẻ" toast sits over an open dialog at 844x390 (main behaviour).
+- Second main merge (main moved to afb2676a2: header-danh, act-pics2, gift-ui, opt-render r7): conflicts KIT.md + jkitpage.js (kept §51 and
+  §53 sections / samples), built files rebuilt. Rerun on the new merge: kit-table.js 755x1000 1123/0 · 1000x755 1129/0 · 1180x820 1118/0 ·
+  1366x1024 1139/0 · 844x390 1131/0 · 390x844 1127/0; pane-bar 48/48 (bad 0); tabs-kit-shots 60/60 (bad 0); old save (main afb2676a2
+  build) 6 sizes 8/8 tabs, no overflow; 0 page errors everywhere.
 - Result: PASS (see report sha).
