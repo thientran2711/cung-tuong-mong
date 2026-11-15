@@ -1,0 +1,16 @@
+# Khuê các thường phục (tier 'kc', a18 only) — Magnific gpt-2-6 ONLY, folder ba4aecfe-efce-47e2-b53f-30d292091886, 9:16, 2k.
+# Link: https://www.magnific.com/app/creation/<id>. Prompt: python3 dev/art/khuecac/mkprompt.py <face>.
+# Identity ref = idref.py sheet (live t1 a18 figure + face close-up, red/gold huadian painted out), uploaded; style ref rotates consort-01/05/12/18.
+# Columns: face  gen  idref_upload  style_ref  bg_removed  status   (bg_removed '-' = none yet)
+# --- Round 1 (identity ref = bare live t1 a18 figure; lighter/sketchier, c29 kept a faint forehead mark) ---
+c05 gOII5QZSXO XmPPWg1Bfo 8aNsy0CIrU - r1-superseded
+c08 XmPPWG6Bfo jUXXF0mLD0 3zbtQNvREY - r1-superseded
+c14 1lppEaJr4r 6AHHUaYiJO YMLuxraWeC - r1-spare(no-mark,usable-if-approved)
+c29 0eggR3KTfW w4hh1Xt7EI 4RuXEXL9Aa - r1-superseded
+# --- Round 2 = PILOT ---
+# c05: gen gOIIk8ESXO had a small red forehead dot; gpt-2-6 edit bxTTCxt5Y2 did not remove it -> dot retouched locally (cv2 inpaint, ~30 px), upload s7ooKoYl8e, cut If66pi4tvE
+# c29: gen mE33eAXhJQ had a faint forehead stroke; gpt-2-6 edit VXUUzB4MMU mostly removed it (first cut Bh44VOvoQR unused) -> remnant retouched locally, upload KLMMutCkqp, cut 9ZQQwLDNYZ
+c05 gOIIk8ESXO XmPP0LqBfo 8aNsy0CIrU If66pi4tvE final
+c08 yiCClEyPW9 eIOOWxbdqL 3zbtQNvREY ksDDQgs16B final
+c29 mE33eAXhJQ ksDDuA216B 4RuXEXL9Aa 9ZQQwLDNYZ final
+m05 9ZQQUCRNYZ gOIIkToSXO YMLuxraWeC lJ88kyhgv9 final
