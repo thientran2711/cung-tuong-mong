@@ -66,3 +66,4 @@ Nhắc theo dõi: send_later 30 phút, tự đặt lại mỗi lượt (lịch l
 - 03:35Z LIVE main=c30884d9e (bỏ bìa tím + Dư đồ trải chậm + luật đi khắc). Thợ con bị chặn đẩy main → điều phối tự đẩy (sếp cho phép thường trực). Người duyệt 2 đẩy kết quả lên review/main-next2.
 - 04:00Z review/cdn-images @477d2094 SẴN SÀNG KIỂM (R2 bucket ctm-img + Worker ctm-img.victoria-tntt.workers.dev; 11673 ảnh; img/ bỏ khỏi cây). Lo: live có loading tải 83 MB lần đầu (116 s) — người duyệt phải sửa để vào game nhanh. Nhánh còn img/: đẩy CDN bằng cdn_sync --git trước khi gộp (điều phối chạy lệnh vì thợ bị chặn). Đề xuất làm nhẹ lịch sử git (cần sếp).
 - 04:15Z LIVE main=482a310ea (review/men: nam nhân theo lịch, 4 thị vệ). Đã chạy cdn_sync 109 ảnh xóa nốt ruồi (review/mole-fix 50a7a15c0) + 392 ảnh hoa điền.
+- 04:40Z review/thinhan-art @6f027b3d3 (tranh Thỉnh an mới act-thinh-an-v2 trên CDN, 160 credit) → gộp cùng cdn-images.
