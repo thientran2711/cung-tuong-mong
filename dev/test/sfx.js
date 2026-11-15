@@ -35,13 +35,19 @@ const [,,URL,SZ,OUT]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=WH.sp
  await step("mua đồ (+ bay vào Tư trang)",["sfx-buy","sfx-item-fly"],`(()=>{S.bac=9999;const k=Object.keys(IT).find(k=>IT[k].pr>0&&IT[k].pr<200&&typeof ITIMG==="object"&&ITIMG[k]);if(!buy(S,k))throw "buy";render()})()`,1400);
  await step("bán đồ",["sfx-sell","sfx-coin"],`(()=>{const ix=S.inv.findIndex(e=>!e.h&&IT[e.k]&&IT[e.k].pr>=2);if(ix<0)throw "noinv";if(!sellItem(S,ix))throw "sell"})()`,900);
  await step("tặng đồ cho người",["sfx-item-fly"],`(()=>{S.inv.push({k:Object.keys(IT).find(k=>IT[k].pr>0)});const r=liveRivals(false).find(v=>v.alive);if(!giveTo(S,r,S.inv.length-1))throw "give"})()`,900);
- await step("bị thu hồi / mất đồ",["sfx-item-lose"],`(()=>{const k=Object.keys(IT).find(k=>IT[k].pr>0);S.inv.push({k});if(!takeItem(S,k))throw "take"})()`,900);
+ /* KIT §54.2 kitLose: the sound follows WHY the item left (merged main 15/11) */
+ for(const [nm,o,f] of [["mất đồ",{why:"lose",title:"Mất đồ"},"sfx-item-lose"],["bị tịch thu",{why:"lose",title:"Bị tịch thu"},"sfx-confiscate"],["bị soát phòng",{why:"lose",title:"Bị soát phòng"},"sfx-search"],["bị cướp",{why:"lose",title:"Bị cướp"},"sfx-item-lose"],["dùng hết (fade)",{why:"fade"},"sfx-close"]])
+  await step("kitLose: "+nm,[f],`(()=>{const k=Object.keys(IT).find(k=>IT[k].pr>0);kitLose({k},${JSON.stringify(o)})})()`,900);
+ await step("bạc ra (kitCoins out)",["sfx-buy"],`kitCoins("out",5)`,700);
+ await step("kitGain: món hiện ra rồi bay vào Tư trang",["sfx-item-pop","sfx-item-fly"],`(()=>{kitGain({k:Object.keys(IT).find(k=>IT[k].pr>0&&IT[k].pr<30)});setTimeout(()=>{const b=document.querySelector(".kfgain .krevok");if(b)b.click()},1500)})()`,2400);
  const reward=async(name,code,want)=>step(name,want,code,1500,async()=>{await tapOv('#kmrew .kmrew');await p.evaluate(()=>new Promise(r=>setTimeout(r,2600)));await tapOv('#kmrew .kmtake');await p.evaluate(()=>new Promise(r=>setTimeout(r,400)))});
  await reward("thưởng đêm: mâm sơn son",`bestow(S,"night")`,["sfx-decree","sfx-chest-rattle","sfx-tray-open","sfx-item-pop","sfx-reward-take"]);
  await reward("thưởng lớn: rương gỗ",`(()=>{S.bac=50;bestow(S,"contest")})()`,["sfx-decree","sfx-chest-rattle","sfx-chest-open","sfx-reward-take"]);
  await reward("ngự tứ: rương rồng phượng",`bestow(S,"son")`,["sfx-decree","sfx-chest-rattle","sfx-chest-royal","sfx-reward-take"]);
  await reward("quà người tặng: hộp gấm",`(()=>{const r=liveRivals(false).find(v=>v.alive);S.inv.push({k:Object.keys(IT).find(k=>IT[k].pr>0),from:r.id});render()})()`,["sfx-notice","sfx-chest-rattle","sfx-gift-open","sfx-item-pop","sfx-reward-take"]);
  await reward("Thái hậu ban: mâm",`(()=>{S.inv.push({k:Object.keys(IT).find(k=>IT[k].pr>0),from:"th"});render()})()`,["sfx-tray-open","sfx-reward-take"]);
+ await reward("nhặt được: bọc vải",`kitReward({kind:"pouch",title:"Bọc vải",from:"Nhặt được",items:[{n:"Khăn",img:"",tier:0}]})`,["sfx-notice","sfx-chest-rattle","sfx-tray-open","sfx-item-pop","sfx-reward-take"]);
+ await reward("bổng lộc bị cắt xén",`kitReward({kind:"chest",title:"Bổng lộc tháng Giêng",from:"Nội vụ phủ phát · bị cắt xén",items:[{n:"Lụa",img:"",tier:1}]})`,["sfx-chest-open","sfx-item-lose","sfx-reward-take"]);
  await step("thăng phẩm: thánh chỉ",["sfx-edict-unroll","sfx-item-pop"],`(()=>{S.rank=Math.min(6,S.rank+1);render()})()`,2200);
  await step("giáng phẩm",["sfx-gloom"],`(()=>{S.rank=Math.max(0,S.rank-1);render()})()`,1500);
  await step("cấm túc",["sfx-door-shut"],`(()=>{S.confined=2;render()})()`,800);
@@ -59,6 +65,14 @@ const [,,URL,SZ,OUT]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=WH.sp
  await step("quẻ xấu",["sfx-lot-bad"],`(()=>{const d=document.createElement("div");d.innerHTML=kitXamHTML({lv:4,dom:"Hung"});const x=d.firstElementChild;x.classList.add("km-skip");document.body.appendChild(x);ksfxXam(x,{lv:4,dom:"Hung"});setTimeout(()=>x.remove(),500)})()`,700);
  await step("thẻ kết quả THÀNH",["sfx-seal-stamp","sfx-win"],`(()=>{const bf=Object.fromEntries(RKEYS.map(([k])=>[k,S[k]||0]));S.sung=(S.sung||0)+5;resultShow("Dâng trà",bf,true)})()`,1300);
  await step("thẻ kết quả BẠI",["sfx-seal-stamp","sfx-fail"],`(()=>{const bf=Object.fromEntries(RKEYS.map(([k])=>[k,S[k]||0]));S.danh=Math.max(0,(S.danh||0)-5);resultShow("Bày mưu",bf,false)})()`,1300);
+ await step("thẻ kết quả: bị phát giác",["sfx-seal-stamp","sfx-expose"],`(()=>{const bf=Object.fromEntries(RKEYS.map(([k])=>[k,S[k]||0]));resultShow("Bỏ độc bị phát giác",bf,false)})()`,1300);
+ await step("thẻ kết quả: mưu hạ độc thành (không phát âm thắng sáng)",["sfx-seal-stamp","sfx-scheme"],`(()=>{const bf=Object.fromEntries(RKEYS.map(([k])=>[k,S[k]||0]));resultShow("Hạ độc",bf,true)})()`,1300);
+ await step("khảo hạch tấn phong: trượt",["sfx-fail"],`exDone(S,{pass:false,total:20,P:{bar:60}})`,800);
+ await step("khảo hạch tấn phong: đỗ",["sfx-rank-new"],`exDone(S,{pass:true,total:90,P:{bar:60}})`,1200);
+ await step("điểm trang: tên khóa cũ sfx(\"learn-good\") nay kêu",["sfx-learn-good"],`sfx("learn-good")`,500);
+ await step("trò nhỏ: lời chấm theo màu (Lem son = hụt)",["sfx-mg-miss"],`kg82Pop([],10,10,"Lem son",kg82Col("--red","#c23b22"))`,500);
+ for(const [nm,h,f] of [["kim bạc hóa đen (có độc)","Kim bạc thử vào bát canh liền hóa đen: canh có độc!","sfx-expose"],["trả lại quà","{A} sai người trả lại quà ngươi tặng, nhắn 'không dám nhận'.","sfx-close"],["dâng hương (lễ)","Ngươi theo Thái hậu dâng hương ở Phật đường.","sfx-rite"],["bị tịch thu (thẻ)","Nội vụ phủ tịch thu đồ cấm trong phòng ngươi.","sfx-confiscate"]])
+  await step("chữ trên thẻ: "+nm,[f],`(()=>{const bf=Object.fromEntries(RKEYS.map(([k])=>[k,S[k]||0]));resultShow(${JSON.stringify(h)},bf,false)})()`,1400);
  await step("qua buổi (chuông khánh)",["sfx-buoi-bell"],`(()=>{S.buoi=1;buoiShift()})()`,800);
  await step("sang buổi tối (mõ canh)",["sfx-night-watch"],`(()=>{S.buoi=B4L;buoiShift()})()`,800);
  await step("qua tuần (trống + lật lịch + quẻ tốt trong Sổ tuần)",["sfx-week-drum","sfx-page","sfx-lot-good"],`(()=>{S.buoi=0;S.lot={lv:1,dom:"Cát",i:0};dawn()})()`,3200);
@@ -74,8 +88,13 @@ const [,,URL,SZ,OUT]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=WH.sp
  await step("thời tiết đổi: gió",["sfx-wind"],`(()=>{S.wx={n:"gió heo may thử",k:"wind",f:0};render()})()`,1500);
  await step("thời tiết đổi: tuyết",["sfx-snow"],`(()=>{S.wx={n:"tuyết rơi thử",k:"snow",f:1};render()})()`,1500);
  await step("thời tiết đổi: giông",["sfx-thunder"],`(()=>{S.wx={n:"giông thử",k:"storm",f:1};render()})()`,1500);
+ for(const [n,k,f] of [["ve kêu râm ran","sun","sfx-wx-cicada"],["đom đóm","dust","sfx-wx-crickets"],["trời quang","dust","sfx-wx-birds"],["hoa đào bay","petal","sfx-wind"]])
+  await step("thời tiết đổi: "+n,[f],`(()=>{S.wx={n:"x",k:"rain",f:0};render();S.wx={n:"${n}",k:"${k}",f:0};render()})()`,1500);
+ await step("thời tiết đổi: giông (chip)",["sfx-thunder"],`(()=>{S.wx={n:"giông tố",k:"storm",f:3};render()})()`,1500);
  await step("chạm chip thời tiết",["sfx-thunder"],`(()=>{const c=document.querySelector(".kmwx");if(!c)throw "nochip";c.click()})()`,500);
  await step("Tết: pháo",["sfx-firecracker"],`(()=>{S.month=12;S.tuan=2;render();S.month=1;S.tuan=0;render()})()`,2200);
+ await step("Đoan ngọ: trống hội",["sfx-festival"],`(()=>{S.month=4;S.tuan=2;render();S.month=5;S.tuan=0;render()})()`,2200);
+ await step("Thanh minh: lễ",["sfx-rite"],`(()=>{S.month=2;S.tuan=2;render();S.month=3;S.tuan=0;render()})()`,2200);
  await step("thắng bục vinh danh (hạng mới)",["sfx-podium","sfx-rank-new"],`(()=>{const r=liveRivals(false).filter(v=>v.alive);kitPodiumShow([{who:S,score:9,place:1},{who:r[0],score:6,place:2},{who:r[1],score:4,place:3}],{title:"Hội thi"})})()`,1900);
  await step("trò nhỏ: đàn (dây đúng / hụt)",["sfx-mg-pluck","sfx-mg-miss"],`(()=>{kg82Pluck(2,true);setTimeout(()=>kg82Pluck(0,false),150)})()`,500);
  await step("trò nhỏ: lời chấm (Tuyệt / Trượt)",["sfx-item-pop","sfx-mg-miss"],`(()=>{const L=[];kg82Pop(L,10,10,"Tuyệt!","#0a0");setTimeout(()=>{KSFX.last={};kg82Pop(L,10,10,"Trượt","#a00")},200)})()`,600);
@@ -89,7 +108,8 @@ const [,,URL,SZ,OUT]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=WH.sp
  const VC=[["Có người đến","{A} sai người trả lại quà ngươi tặng, nhắn 'không dám nhận'.",{},null],
   ["Có người đến","Lệ phi sầm sập kéo đến, buộc tội ngươi cài người vào cung nàng.",{},"f-angry"],
   ["Có người đến","Lệ quý nhân sang thăm, ngồi uống trà.",{},null],["Quà","Tô quý nhân tươi cười nhận quà ngươi tặng.",{},"f-laugh"],
-  ["Quà","Tô quý nhân nhận lời, cảm tạ ngươi.",{},"f-softlaugh"],["Lời qua tiếng lại","Hiền phi mỉa mai: muội muội thật khéo.",{},"f-laugh"],
+  ["Quà","Tô quý nhân nhận lời, cảm tạ ngươi.",{},"f-softlaugh"],["Lời qua tiếng lại","Hiền phi mỉa mai: muội muội thật khéo.",{},"f-angry"],
+  ["Lời qua tiếng lại","“Phấn son của muội hôm nay… đậm đà thật đấy.” Nàng ta che miệng cười khúc khích.",{},"f-angry"],["Hoàng thượng","Hoàng thượng cảm kích, ban thưởng · kèm: con sang Bắc Địch, không về thăm.",{w:["e"]},"m-sigh"],
   ["Hoàng thượng","Hoàng thượng không vui vì ngươi đến muộn.",{w:["e"]},"m-grunt"],["Hoàng thượng","Hoàng thượng hài lòng, ban thưởng.",{w:["e"]},"m-chuckle"],
   ["Thái hậu","Thái hậu lạnh lùng không nhận lễ.",{rk:"th"},"old-hmph"],["Bị phạt","Ngươi bị phạt quỳ ngoài sân.",{},"f-cry"],["Tin","Có tin đồn rằng ngươi thất sủng.",{},"gossip"]];
  const vr=await p.evaluate(VC=>VC.map(([t,h,w,want])=>{const got=voKind({t,h,who:w});return{h,tone:voTone(t+" "+h),want,got,ok:got===want}}),VC);

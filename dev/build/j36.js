@@ -17,9 +17,9 @@ const VOT={
  shock:/băng hà|ban chết|bại lộ|có độc|trúng độc|sảy thai|sảy|chết|kinh hãi|thất kinh/,
  gossip:/tin đồn|đồn rằng|rỉ tai|buôn chuyện|xì xào|bàn tán/,
  hostile:/buộc tội|chất vấn|sầm sập|quát|mắng|nổi giận|giận dữ|phẫn nộ|đe dọa|hăm dọa|trừng mắt|quở|trách|vu cáo|tố cáo|vạch mặt|phật ý|cau mày|chau mày|sa sầm|nổi trận|đuổi/,
- mocking:/mỉa mai|chế giễu|cười nhạo|cười khẩy|cười mỉa|khinh khỉnh|giễu cợt|châm chọc|hạ nhục|khiêu khích|bĩu môi/,
+ mocking:/che miệng cười|bụm miệng cười|cười như không cười|mỉa mai|chế giễu|cười nhạo|cười khẩy|cười mỉa|khinh khỉnh|giễu cợt|châm chọc|hạ nhục|khiêu khích|bĩu môi/,
  sadStrong:/khóc|rơi lệ|nghẹn ngào|nức nở|bị phạt|phạt quỳ|giáng|lãnh cung|bị đánh|đánh đòn|trượng|tang lễ|qua đời|mất con/,
- sad:/thở dài|buồn|ủ rũ|đau lòng|ốm|lâm bệnh|tủi/,
+ sad:/thở dài|buồn|chia ly|biệt ly|hòa thân|không (được )?về thăm|khách chê|bị chê|chê bai|chê cười|ủ rũ|đau lòng|ốm|lâm bệnh|tủi/,
  cold:/không dám nhận|trả lại|gửi trả|từ chối|khước từ|cáo lui|lạnh nhạt|lạnh lùng|né tránh|xa cách|không tiếp|đóng cửa không|làm ngơ/,
  joy:/vui mừng|mừng rỡ|hớn hở|tươi cười|cười tươi|rạng rỡ|vui vẻ|kết làm chị em|kết nghĩa|cười khúc khích|reo lên|hoan hỉ|đắc ý cười/,
  warm:/nhận lời|cảm tạ|vui lòng|cảm kích|mỉm cười|e lệ|hài lòng|khen|ban thưởng/,
@@ -32,7 +32,7 @@ function voTone(txt){const t=String(txt||"");
 const VOMAP={
  emp:{hostile:"m-grunt",mocking:"m-grunt",sadStrong:"m-sigh",sad:"m-sigh",joy:"m-chuckle",warm:"m-chuckle"},
  th:{hostile:"old-hmph",mocking:"old-hmph",cold:"old-hmph"},
- f:{hostile:"f-angry",mocking:"f-laugh",sadStrong:"f-cry",sad:"f-sigh",joy:"f-laugh",warm:"f-softlaugh"}};
+ f:{hostile:"f-angry",mocking:"f-angry",sadStrong:"f-cry",sad:"f-sigh",joy:"f-laugh",warm:"f-softlaugh"}};
 function voKind(m){const w=m.who||{};const k=(w.w||[])[0];const txt=String((m.t||"")+" "+(m.h||"")).replace(/<[^>]+>/g," ");
  const emp=k==="e"||/Hoàng thượng/.test(m.t||"");const th=w.rk==="th"||/Thái hậu/.test(m.t||"");
  if(/chào đời|hạ sinh|sinh hạ|Sinh hoàng|sinh công chúa/.test(txt))return"baby-cry";

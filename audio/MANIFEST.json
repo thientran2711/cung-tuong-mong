@@ -728,5 +728,69 @@
   "seconds": 1.02,
   "bytes": 8403,
   "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
+ },
+ "sfx-wx-birds": {
+  "kind": "sfx",
+  "file": "sfx-wx-birds.mp3",
+  "magnificUrl": "https://www.magnific.com/app/creation/SytEsfYUb8",
+  "seconds": 2.09,
+  "bytes": 16971,
+  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
+ },
+ "sfx-wx-cicada": {
+  "kind": "sfx",
+  "file": "sfx-wx-cicada.mp3",
+  "magnificUrl": "https://www.magnific.com/app/creation/6AHryIGiJO",
+  "seconds": 2.19,
+  "bytes": 17807,
+  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
+ },
+ "sfx-wx-crickets": {
+  "kind": "sfx",
+  "file": "sfx-wx-crickets.mp3",
+  "magnificUrl": "https://www.magnific.com/app/creation/6AHr41oiJO",
+  "seconds": 2.14,
+  "bytes": 17389,
+  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
+ },
+ "sfx-rite": {
+  "kind": "sfx",
+  "file": "sfx-rite.mp3",
+  "magnificUrl": "https://www.magnific.com/app/creation/0egyz5eTfW",
+  "seconds": 2.46,
+  "bytes": 19897,
+  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
+ },
+ "sfx-festival": {
+  "kind": "sfx",
+  "file": "sfx-festival.mp3",
+  "magnificUrl": "https://www.magnific.com/app/creation/s7oa1TAl8e",
+  "seconds": 1.38,
+  "bytes": 11328,
+  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
+ },
+ "sfx-confiscate": {
+  "kind": "sfx",
+  "file": "sfx-confiscate.mp3",
+  "magnificUrl": "https://www.magnific.com/app/creation/8aNAewAIrU",
+  "seconds": 1.57,
+  "bytes": 12791,
+  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
+ },
+ "sfx-search": {
+  "kind": "sfx",
+  "file": "sfx-search.mp3",
+  "magnificUrl": "https://www.magnific.com/app/creation/tCizXOImZJ",
+  "seconds": 1.85,
+  "bytes": 15090,
+  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
+ },
+ "sfx-scheme": {
+  "kind": "sfx",
+  "file": "sfx-scheme.mp3",
+  "magnificUrl": "https://www.magnific.com/app/creation/lJ8freygv9",
+  "seconds": 1.78,
+  "bytes": 14463,
+  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
  }
 }

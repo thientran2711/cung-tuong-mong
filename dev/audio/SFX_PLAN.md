@@ -133,3 +133,44 @@ Tệp mới: Magnific ElevenLabs, mono 64 kbps, loudnorm −20 LUFS như bộ c�
 ## Tạo âm (Magnific audio_sfx_generate, ElevenLabs) — 72 tệp, 490 tín dụng
 Phong cách: cung đình cổ trang nhẹ (đàn tranh, chuông đồng nhỏ, khánh, mõ, vải lụa, gỗ), 1–2 s gốc, cắt còn 0,24–2,0 s.
 Link từng tệp: `audio/MANIFEST.json` (`magnificUrl`). Kết quả đo (sau chuẩn hóa) và kiểm Playwright: `dev/audio/RESULT.md`.
+
+## After merging main 15/11 PM (game-feel, gift-chest, econ-stipend, poison-gift, promo-exam, toilette, opt-render) — owner 08:45Z / 13:25Z / 14:05Z
+Inventory: `node dev/audio/inventory.js <site url> dev/audio/INVENTORY.md` reads the LIVE tables of the built game and writes the table
+(every FX kind, feedback call, motion stage, reward box, kitGain grade, kitLose why/title, kitCoins, shop, 16 weathers, every festival,
+every minigame kind incl. exam kinds, result outcomes, exam, poison, toilette, card words, voice tone × speaker, dialog categories, pets,
+every literal sfx()/kitSfx() in the source) + checks: unmapped 0, missing file 0, meaning mismatch 0 (bad moment → happy sound / good → sad),
+and a scan of ~6900 card texts (sad words → no happy voice/sound; joy words → no sad one). Exit 1 on any failure.
+| Moment (new / changed) | Sound | Where |
+|---|---|---|
+| kitGain (every item she gains) | item-pop / item-rare (grade ≥ 3) on reveal, item-fly on Nhận (was: open + coin) | jfx kitGain |
+| kitReward item reveal (one by one) | item-pop / item-rare by grade, rising; silver = coin-bounce (was: open / coin) | j93 kitReward |
+| Bọc vải (pouch, nhặt được) | notice · rattle · tray-open (cloth) | jsfx SFXBOX |
+| Bổng lộc bị cắt xén | chest + item-lose after the lid | box head words |
+| kitLose sell · give · fade | sell · item-fly · close (once: skipped if the action already sounded < 1.5 s) | jsfx ksfxLoseKey |
+| kitLose lose: Mất đồ · Bị cướp/lấy trộm/ép giao | item-lose | |
+| kitLose lose: Bị tịch thu | ＋ sfx-confiscate (lacquer lid shut + latch + low string) | |
+| kitLose lose: Bị soát phòng / Soát ra đồ bẩn | ＋ sfx-search (drawers, rummaging) | |
+| kitCoins out (pay, fine) | buy (once) | |
+| takeItem | no sound (a USE, jfx tags it "use"); was item-lose = a sad sound on a neutral use | |
+| verdict (định tội) | gloom (was sfx-decree: a bright fanfare for a conviction = MISMATCH found by the inventory) | SFXN |
+| FX kinds without a sound | harm→expose, ink→notice, preg→bloom, favour→lot-good, death, demote/ash→gloom, lantern→festival | kitFx wrapper |
+| Result: HỎNG + bị phát giác | seal + expose | ksfxOutcome |
+| Result: THÀNH of a dark scheme (hạ độc, hãm hại, vu oan) | seal + ＋ sfx-scheme (low guzheng + muted gong), never the bright win | |
+| Promotion exam pass / fail | rank-new / fail | exDone |
+| Poison found (kim bạc hóa đen, có độc) | expose | card words |
+| Gift sent back (không dám nhận) | close (voice: none, tone cold) | card words |
+| Prayer, incense, rites (dâng hương, lễ Phật, tế tổ…) | ＋ sfx-rite (singing bowl + wooden fish) | card words |
+| Festivals: Tết / Giao thừa / Nguyên tiêu | firecracker | SFXFEST |
+| Thanh minh / Trùng cửu / Đông chí | rite | |
+| every other festival (Đoan ngọ, Thất tịch, Trung thu, Hội Phượng, Vạn thọ…) | ＋ sfx-festival (hand drums + small cymbal) | |
+| Weather by name (16): birds (trời quang, nắng vàng, sương sớm), cicadas (nắng gắt, ve kêu), crickets (đom đóm, trăng rằm), wind (hoa đào, lá phong, heo may), rain, thunder, snow | ＋ sfx-wx-birds, -cicada, -crickets | SFXWXN |
+| Minigames: hoa (flower pattern), mua (dance steps), every engine | brush / step; scored words by their COLOUR (red = miss, green = good) | SFXMG, SFXMGE, kg82Pop |
+| Toilette: brow stroke, powder, lipstick dot, verdict | brush, brush (puff), by colour, good / bad / notice (overdone = bad) | jtoil |
+| Mixer: sfx("tap"), sfx("learn-good") (jtoil) were 404 | a moment key or bare stem resolves (ksfxFile) | jsfx |
+| Voice: mocking consort | f-angry (scoffing hmph) — was the happy f-laugh sample | j36 VOMAP |
+| Voice: "che miệng cười khúc khích" (teasing) · "con sang Bắc Địch, không về thăm" · "khách chê" | mocking · sad · sad (were laugh / chuckle / soft laugh) | j36 VOT |
+New files (Magnific ElevenLabs, folder of the project; ids in dev/audio/gens.tsv): sfx-wx-birds, sfx-wx-cicada, sfx-wx-crickets, sfx-rite,
+sfx-festival, sfx-confiscate, sfx-search, sfx-scheme — 120 credits incl. 2 retakes (the first birds take was silence, −60 LUFS; the first
+crickets −47 LUFS). Normalised with norm.py to Mmax −16 LUFS, peak ≤ −1.5 dBFS (ambience cut to 2.2 s with fades). Measured (spectral
+centroid / band share, no speakers): birds 5.5 kHz, cicada 6.7 kHz, crickets 4.1 kHz with ≤ 3 % energy in the 300–3000 Hz voice band
+(no voices); rite / festival tonal 1.1–1.4 kHz; scheme 310 Hz (dark); confiscate / search 2.2–2.3 kHz broadband (wood / cloth).
