@@ -68,7 +68,7 @@ def probe(r, d):
 def measure(d):
     rows = load(d); T = []
     for r in rows:
-        s = stats(f"{d}/s/{r['id']}.jpg"); raw = None if r.get('map') else stats(f"{d}/r/{r['id']}.jpg")
+        s = stats(f"{d}/s/{r['id']}.jpg"); raw = None if r.get('map') else stats(f"{os.environ.get('RAWFROM', d)}/r/{r['id']}.jpg")  # RAWFROM: take the painting-as-painted pass from another run (same build layout)
         t = dict(id=r['id'], place=r['place'], se=r['se'], bu=r['bu'], wi=r.get('wi'), wx=r.get('wx'), map=r.get('map', 0),
                  bg=r.get('bg') or r.get('src'), chain=chain(r), seen=s, raw=raw, probe=None if r.get('map') else probe(r, d),
                  mef=r.get('mef'), figf=r.get('figf'), prf=r.get('prf'), cls=r.get('cls', ''))
