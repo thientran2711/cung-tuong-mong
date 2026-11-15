@@ -71,7 +71,7 @@ Nhắc theo dõi: send_later 30 phút, tự đặt lại mỗi lượt (lịch l
 
 ## LỖI SẾP BÁO CÒN MỞ (soát mỗi lượt theo dõi; xong thì gạch)
 - [x] Thỉnh an Hoàng hậu không cộng — LIVE f7a9e9880
-- [ ] Thẻ phi tần co lại, dải 1 người (Hạ Tố Tâm) — review/hau-cung-ui (đẩy riêng)
+- [x] Thẻ phi tần co lại — LIVE df5a60103
 - [ ] Chữ 'Liều' cho khả năng phụ (có thai, ban thưởng, ô trạng thái) — review/sub-odds
 - [x] Tờ lật trong suốt — LIVE 0783ec32a
 - [ ] Chip 'Thỉnh tranh nhân vật' đè chữ; tải lần đầu 83 MB — hau-cung-ui + cdn-images
@@ -97,3 +97,4 @@ Nhắc theo dõi: send_later 30 phút, tự đặt lại mỗi lượt (lịch l
 - 07:20Z SẴN SÀNG KIỂM: review/court-rules b702cae67 (HH/HQP ở riêng; Thái hậu 51–62 + tranh a51; hết khắc ở lại nơi; chạm nơi đang đứng; nút ‹ tên nơi), review/dialog-person 2b321b3b0 (KIT §32.7) → hàng người duyệt 1. Tranh Thái hậu a51 (h1/h2/h3 fig+por) trông 25–30 → hỏi sếp vẽ lại.
 - 07:20Z TẠM DỪNG review/routes 453203123 (15 kết cục đi tới được; cần đo cân bằng sau gộp; đề xuất tranh bát nghiệm huyết).
 - 07:20Z cdn_sync 368 ảnh thu nhỏ hoa điền phi tần (đợt 1–2).
+- 07:25Z LIVE main=df5a60103 (hotfix thẻ phi tần co lại: đo lại sau mỗi lần đổi tab). Vòng Luân hồi: hình chỉ chậm, sẽ tải trước.
