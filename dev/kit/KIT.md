@@ -8,6 +8,10 @@ game pre-rotated with taps landing on the right buttons (owner 11/15; 412x1058 /
 Anything not listed here, or listed but drawn differently, is a FAIL.
 
 ## 0. SUPPORTED SCREENS · DESIGN CANVAS — RULE: ONE LAYOUT PER ORIENTATION, SCALED (owner 11/15) — `dev/site/rot.js`
+**0.1 Rotate prompt (owner 15/11 05:50Z "390x844 shows the rotate prompt"; review/small-bugs-3):** on a narrow portrait screen (w/h < 0.62) the prompt
+"⟳ Xoay ngang điện thoại để chơi" (`#krottip`, one line, `width:max-content`) shows on EVERY open and every turn back to portrait, until she turns the
+phone (it goes) or taps it; the sideways game stays playable under it. Direct mode (tests, `?khost=0`) shows the same prompt without catching taps.
+(Was: once per device for 4 s, localStorage `ctm-rot-tip` — a returning player saw the sideways title screen only; the prompt wrapped to 2 lines.)
 The game is laid out at exactly TWO design sizes and never reflows on a device: the picture is scaled uniformly, like resizing a window.
 
 | screen | layout drawn | how it is shown |
