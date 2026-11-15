@@ -1977,7 +1977,7 @@ Each rule closes a whole class; the scans that prove it live in `dev/test/cb-*.{
 - Inside a palace whose chủ vị outranks her and is home, without having greeted this buổi (walked in with the last khắc, the buổi turned while
   she was there): tapping that palace on Dư đồ opens the place card with "Bái kiến <phẩm>" (1 khắc) or the reason ("cần 1 khắc, còn 0"), and
   "Thôi" (she stays; not asked again this buổi). The new buổi's visit line says so. A walk that arrives next buổi says the greeting comes on arrival.
-### 42.6 EVENT OPTIONS SHOW ONLY REAL COSTS — no "Tốn: không" row (see 28.6).
+### 42.6 EVENT OPTIONS SHOW ONLY REAL COSTS — no "Tốn: không" row (see 28.6). One implementation: `kitHideOut` (jk2b) drops the empty Tốn row; the jclose wrapper was removed (reviewer opt-render r7).
 ### 42.7 FESTIVAL CONTEST TITLES — `FT7` (j71)
 - Every contest variant has its own title naming what it really asks for: "<hội> · Lời mời: <Thi …>", "<hội> · <Thi …>" (day card). The
   festival's bracketed theme ("Hội Phượng (thi cưỡi ngựa bắn cung)") is dropped from titles (`fShort7`), so a contest that is not the theme

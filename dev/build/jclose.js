@@ -103,7 +103,8 @@ window.kitLine=kitLine;
 
 /* ---------- 6. NO "Tốn: không" ON EVENT CHOICES (owner 17:08Z) ----------
    An event option that costs nothing shows no Tốn row at all (only real costs are shown). kitHideOut (jk2b, KIT 28.6) wrote "không". */
-(function(){if(typeof kitHideOut!=="function")return;const h0=kitHideOut;kitHideOut=function(b){const r=h0.apply(this,arguments);try{if(b)b.querySelectorAll(".kr-ton").forEach(t=>{const v=t.querySelector(".krv");if(v&&/^\s*không\s*$/i.test(v.textContent))t.remove()})}catch(e){}return r}})();
+   ONE implementation (reviewer opt-render r7): kitHideOut itself (jk2b, KIT 28.6) drops the Tốn row when no real cost is left, so the
+   wrapper that removed a "không" row here is gone. dev/test/cb-ton.fn.js still checks it.
 
 /* ---------- 7. WEATHER NEVER ADDS WALKING KHẮC (owner 15/11 06:40Z, found again by the khắc-gate scan) ----------
    "KHÔNG thêm khắc đi đường (đã có Sức hồi chậm, không phạt 2 lần)": a far walk is 2 khắc in every weather (was 3 when wet).
