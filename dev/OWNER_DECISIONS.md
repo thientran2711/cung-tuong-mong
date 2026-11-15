@@ -229,3 +229,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (04:20Z) Owner: khung chân dung (Quý phi) phần đỉnh trang trí rời rạc, lệch → sửa trong kit khung theo phẩm, đỉnh gắn liền khung (review/hau-cung-ui).
 - (04:25Z) Owner: danh sách người (Sổ tuần 'Sổ này ghi') phải thẳng cột dọc → luật kit: mọi danh sách chip người dùng lưới cột đều. review/hau-cung-ui.
 - (04:30Z) Owner: trang người trong Sổ tuần → nhân vật cao full trang (dưới tiêu đề chạy tới trên số trang), chữ cột phải; luật kit §27. review/hau-cung-ui.
+- (04:35Z) Owner: trang 'tiếp theo' trong Sổ tuần cũng phải có hình toàn thân full trang như trang đầu; chỉ sang trang khi thật hết chỗ; dòng '(Đã ghi vào mục Đã biết…)' thành chú thích nhỏ. review/hau-cung-ui.
