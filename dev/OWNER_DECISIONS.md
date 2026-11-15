@@ -303,3 +303,8 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - Gộp "Thánh thượng · Thái hậu" thành tab 2 chữ (đề xuất: Chí tôn).
 - "Qua đêm" đổi thành "Qua ngày" (hoặc "Sang ngày mới"); bỏ "Đợi sáng".
 - Bảng "Nhờ thái giám mua đồ": hình thái giám toàn thân bên trái như thẻ sự kiện người, không ảnh nền nơi chốn; trên là lời dẫn, dưới là lưới ô vật phẩm (ô Tư trang), dưới mỗi ô là giá và nút Mua. Dùng kit chung.
+
+## 15/11 ~05:05Z (sếp) tên cổ ngữ + cửa hàng
+- Chơi cùng bạn / Mời bạn → "Cùng hảo hữu" / "Mời hảo hữu" (tri kỷ quá thân mật). Bảng vàng: ok. Qua đêm → Qua ngày.
+- Chữ "ngươi" chỉ người chơi trên giao diện đổi thành "ta" (ngôi thứ nhất): "Con của ta", "Hoàng hậu với ta". Lời thoại NPC nói với nàng vẫn giữ "ngươi".
+- Cửa hàng kiểu game kiếm hiệp: ô có hình món đồ, tên, công dụng, đơn giá; chọn ô thì hiện hàng số lượng +1/+2/+3/+4/Tối đa, tự cộng tổng tiền, rồi nút Mua.
