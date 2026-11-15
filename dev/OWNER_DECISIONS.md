@@ -220,3 +220,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (03:15Z) Owner: cho phép thường trực tự đẩy ảnh lên Cloudflare (kể cả ghi đè ảnh sửa cùng tên), không cần hỏi.
 - (03:20Z) Co-op cập nhật: cả hai thấy chip; tới Qua buổi (điểm đồng bộ) chủ phòng báo → cả hai ghi sổ, mở bản mới, TỰ vào lại đúng phòng/đúng chỗ; phòng không nhận máy khác bản (máy cũ được dẫn cập nhật rồi vào lại); có thể chủ động 'Mở bản mới ngay' (hỏi người kia). review/update-flow.
 - (03:40Z) Owner: sửa giao diện chơi cùng bạn GẤP để sếp chơi với bạn → thợ review/coop-ui (chơi thử 2 máy trên live, sửa chỗ vướng, ưu tiên cao nhất).
+- (03:45Z) Owner: tranh việc Thỉnh an (váy + giày quỳ trên đệm) giống phạt quỳ → đổi tranh: phi tần hành lễ phúc thân/cúi chào trang nhã trước điện, không quỳ đệm. Ưu tiên tranh có sẵn, không có thì vẽ gpt-2-6. review/thinhan-art.
