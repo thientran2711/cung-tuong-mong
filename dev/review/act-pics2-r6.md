@@ -1,4 +1,4 @@
-# Review review/act-pics2 @7cce4420d — r6 (merged onto origin/main 94ea008a2)
+# Review review/act-pics2 @7cce4420d — r6 (merged onto origin/main 94ea008a2, then 5e491704d gift-ui r6)
 Branch review/act-pics2-r6. Later worker commits (after 7cce4420d) are NOT included.
 
 Merge: conflicts in assemble.py (main's module list + jly.js after j88) and j31.js (main's `ev:"fest"` on every FESTEV item kept; the
@@ -18,3 +18,10 @@ Checks (local build, CDN pictures):
   categories, all files present; 14 ev-fest-*-b banners present. dev/test/cdn-refs.py: only img/POR_FACE.json missing (main's jkpor.js, not this branch).
 - opt-scan.py --fail: 0 unclassified. Tuần lục (j87/j79 meaning rules) opens from the old save, 0 broken images, 0 errors.
 - Pictures looked at: 10 action pictures (hands/objects only: OK), festival/story pictures with small people: OK.
+
+Second merge (main moved to 5e491704d, gift-ui r6): j87 kbkCands conflict — kept main's rule (key "-" = no picture, return []) on the
+branch's compiled rules (kbkRules); assemble = main's list + jly.js after j88. Rebuilt; re-ran probe at 5 sizes, npc-art-audit (50/50 with
+a figure, 0 errors) and fest-art (14/14 banner + evId on fDay7, 0 errors).
+Not this branch (pre-existing on main): img/POR_FACE.json literal not on the CDN (jkpor.js); at 844x390 the second stage person in lãnh cung
+sits behind the people list panel (stage layout, same for any person there).
+RESULT: PASS
