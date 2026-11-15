@@ -468,7 +468,7 @@ window.kitXHTML=kitXHTML;window.kitXAdd=kitXAdd;
 .kph:has(>.kit-x){padding-right:56px!important}
 .kit-x:hover{background:#fff;border-color:var(--gold,#c9a46a)}
 .kit-x:focus-visible{outline:none;box-shadow:0 0 0 2px var(--gold,#c9a46a)}
-.modal.night .kit-x{background:#2a1610;color:#e9c07a;border-color:#4a2a20}
+
 `;document.head.appendChild(st)})();
 /* ================= KIT 48 · kitNameRank — name + rank ABOVE the picture (owner 11/15: "people read top to bottom") ==========   ONE block for every portrait / figure label: the rank on one small line (rank colour), the name under it, then the picture below.
    `kitNameRank(rank, name, col)` → `<div class="knr" style="--rc:col"><small class="knr-r">rank</small><b class="knr-n">name</b></div>`.
@@ -528,11 +528,7 @@ html body .kbk-pname .kname .kti{display:block;font-size:.62em!important;margin:
 html body .stage.j59 #tokens .tok .tag,html body .stage.j59 #j59metag .tag{background:none!important;border:0!important;box-shadow:none!important;padding:0!important}
 /* 48.1c (owner 15/11 ~20:40Z): person-dialog captions (kitEventDp .kdpcap, event-stage .kesov captions) have NO box */
 html body #mb .kesov>.kpsn,html body #modal .dlg.kdper .kes>.kpsn.kdpcap,html body .kesf>.kpsn{background:none!important;border:0!important;box-shadow:none!important;border-radius:0!important}
-/* dark panels (.modal.night): name in parchment, title in its lightened tone (plain, no glow) */
-html body .modal.night .kpsn .kname,html body .modal.night .knr>.knr-n,html body .modal.night .krn,html body .modal.night .kbk-pname .kname{color:#f3e6cf!important}
-html body .modal.night .krt,html body .modal.night .knr>.knr-r,html body .modal.night .kpsn .kname .kti,html body .modal.night .kbk-pname .kname .kti{color:color-mix(in srgb,var(--rt,#7a5a30) 55%,#fff)!important}
-/* 48.1b her own name: black; on a painting + a soft light-gold glow, in framed UI plain black bold */
-html body .kmy,html body .modal.night .kmy{color:#1a0f08!important;font-weight:700!important;text-shadow:none!important}
+html body .kmy{color:#1a0f08!important;font-weight:700!important;text-shadow:none!important}
 html body .stage .tok .tag .j59n.kmy,html body .stage #j59metag .tag .j59n.kmy,html body #mb .kesov>.kpsn .kname.kmy,html body .krs .krn.kmy,html body .krs .knr>.knr-n.kmy{color:#1a0f08!important;
  text-shadow:0 0 1px #fff6d8,0 0 3px #ffe9a8,0 0 6px #f3cf6a,0 0 11px #e8bd4acc!important}
 `;document.head.appendChild(st)})();
