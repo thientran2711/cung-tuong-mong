@@ -17,7 +17,8 @@
    turns "Nàng oán ta" into "Nàng ta oán ta". */
 const KRT_INT=v=>v==null||v===""||isNaN(+v)?null:Math.round(+v);
 function kitRelSubj(p){try{if(!p)return"Nàng";if(S&&p===S.emp)return"Hoàng thượng";if(S&&(p===S.thO||p.kind==="th"))return"Thái hậu";if(p.queen)return"Hoàng hậu";
- const man=p.sex==="m"||p.male||p.kind==="eunuch"||p.kind==="man"||p.kind==="guard"||p.kind==="official"||/^(thái giám|thị vệ|quan)/i.test(p.role||"");return man?"Hắn":"Nàng"}catch(e){return"Nàng"}}
+ /* the kit's own reading of who a person is (j60 personRoleRank: eunuch, guard, physician, men → "m") */
+ let man=p.sex==="m"||!!p.male;try{if(typeof personRoleRank==="function")man=personRoleRank(p).sex==="m"}catch(e){}return man?"Hắn":"Nàng"}catch(e){return"Nàng"}}
 function kitRelLab(dir,text){return `<span class="krel krel-${dir==="me"?"me":"them"}" data-vp-skip>${text}</span>`}
 function kitRelRows(p,snap){const R=[];if(!p)return R;const sj=kitRelSubj(p),ob=sj==="Nàng"?"nàng":sj==="Hắn"?"hắn":sj;const s=snap||{};
  const dd=(now,was)=>now==null||was==null?null:KRT_INT(now)-KRT_INT(was);

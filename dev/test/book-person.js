@@ -80,6 +80,7 @@ let SIZES=args.slice(1).filter((a,i,A)=>a!=='--shots'&&A[i-1]!=='--shots');if(!S
    const m=all.match(new RegExp(`(\\S+ \\S+|\\S+) ${R.setup.names[2]}`,'g'))||[];R.titles=[...new Set(m)].slice(0,6)}
   P.forEach((x,i)=>{if(x.priv)bad.push('private chip p'+i);for(const t of x.tables){if(new Set(t.x1).size>1&&Math.max(...t.x1)-Math.min(...t.x1)>1)bad.push('col1 x p'+i);if(Math.max(...t.x2)-Math.min(...t.x2)>1)bad.push('col2 x p'+i);if(Math.max(...t.lx)-Math.min(...t.lx)>1)bad.push('label x p'+i);
     if(t.labels.some(l=>/^thiện cảm$/i.test(l)))bad.push('bare thiện cảm');if(t.over)bad.push('table overflows p'+i+' '+x.title+' '+t.labels.join('|'))}});
+  P.forEach((x,i)=>{if(/^(Thái giám|Thị vệ|Thái y|Hoàng thượng)/.test(x.title))for(const tb of x.tables)if(tb.labels.some(l=>/^Nàng/.test(l)))bad.push('man labelled Nàng p'+i+' '+x.title)});
   const persons=P.filter(x=>x.fig);for(const x of persons)if(!x.tables.length&&!/tiếp theo|^Tổng lược|^Triều đình/.test(x.title))bad.push('person page without kit table: '+x.title);
   /* owner 17:45Z: every page (Tổng lược, each person, Triều đình · thiên hạ) has the full-length figure of its subject */
   P.forEach((x,i)=>{if(!x.fig)bad.push(`page ${i} "${x.title}" has no figure`)});if(!P.some(x=>/^Triều đình/.test(x.title)))bad.push('no Triều đình page');
