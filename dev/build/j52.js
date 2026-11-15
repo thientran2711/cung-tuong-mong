@@ -40,11 +40,11 @@ function nlFigsReady(){try{return typeof FIGSIG==="undefined"||FIGSIG!==""}catch
 function nlBegin(){const go=()=>{const d=nlGet();NLP={seed:d.seed};nlRun(d);if(d.re)S.nlRe=d.re;nlFaces(d);nlCard()};
  if(nlFigsReady())return go();let n=0;const t=setInterval(()=>{if(nlFigsReady()||++n>=25){clearInterval(t);go()}},100)}
 start=function(){if(window.__nlInner)return _start52.apply(this,arguments);return nlBegin()};
-function nlStat(l,v){return `<div class="pcrow"><span>${l}</span><b>${v}</b></div>`}
+function nlStat(l,v){return [l,v,"t"]}/* KIT §41: a kit table row */
 function nlCardHTML(){const o=S.origin,pts=pdGet(),ok=pts>=PD_COST,srv=typeof isSrv==="function"&&isSrv();
  const pos=srv?"Cung nữ":o.k==="cnv"?"Cung nữ":RANKS[S.rank].n;
  return `<p><b>${S.name}</b>, ${S.age} tuổi, ${o.n}. ${o.t}</p>
- <div class="pcb rows">${nlStat("Xuất thân",o.n)}${nlStat("Vào cung",pos)}${nlStat("Tuổi",S.age)}${nlStat("Tài",S.tai)}${nlStat("Sắc",S.sac)}${nlStat("Tâm cơ",S.tamco)}${nlStat("Đức",S.duc)}${nlStat("Danh",S.danh)}${nlStat("Thái hậu ưa",S.th)}${nlStat("Bạc",S.bac)}${nlStat("Hoàng thượng",`${S.emp.era}, ${S.emp.age} tuổi`)}</div>
+ ${kitRows([nlStat("Xuất thân",o.n),nlStat("Vào cung",pos),nlStat("Tuổi",S.age),nlStat("Tài",S.tai),nlStat("Sắc",S.sac),nlStat("Tâm cơ",S.tamco),nlStat("Đức",S.duc),nlStat("Danh",S.danh),nlStat("Thái hậu ưa",S.th),nlStat("Bạc",S.bac),nlStat("Hoàng thượng",`${S.emp.era}, ${S.emp.age} tuổi`)])}
  <p class="past">Thân phận này đã định sẵn: tải lại trang, chọn ô khác hay bấm Kiếp mới vẫn ra đúng thân phận này. Phúc duyên đang có: <b>${pts}</b>.</p>
  <div class="opts nlopts"><button class="opt" data-nl="ok">Nhận thân phận<small>tốn: không · thành: bắt đầu kiếp này</small></button>
  <button class="opt" data-nl="re" ${ok?"":"disabled"}>Đổi thân phận (−${PD_COST} Phúc duyên)${ok?`<small>tốn: Phúc duyên -${PD_COST} · thành: thân phận mới (cũng định sẵn)</small>`:`<small data-kp="1">Cần ${PD_COST} Phúc duyên, đang có ${pts}</small>`}</button></div>`}

@@ -38,6 +38,15 @@ function kitChips(list){return `<span class="kchips">${(list||[]).map(x=>Array.i
 /* kitRows([[label, value(html|array of chips/values), cls]]) cls: g|r|n|t (value colour), "need" for a Cần row of chips */
 function kitRows(rows){return `<span class="kb kpkb">`+(rows||[]).filter(r=>r&&r[1]!=null&&r[1]!==""&&!(Array.isArray(r[1])&&!r[1].length)).map(([l,v,c])=>{const vals=Array.isArray(v)?v:[v];
  return `<span class="kr"><span class="krl">${l}</span><span class="krv">${vals.map(x=>/^\s*<span class="(kchip|ef|kname)/.test(x)||/^\s*<b class="kname/.test(x)?x:`<span class="ef ${c||"n"}">${x}</span>`).join('<span class="ksep">·</span>')}</span></span>`}).join("")+`</span>`}
+/* KIT §41 kitRowsJoin(kitRows(a), kitRows(b), …) -> ONE table: kit tables written one after another (price rows + the item's rows)
+   are merged into a single grid, so their values line up too. Pass only kitRows / kitItemRows output (or ""). */
+function kitRowsJoin(){return [...arguments].filter(Boolean).join("").replace(/(<\/span><\/span>)<\/span>\s*<span class="kb kpkb">/g,"$1")}
+/* KIT §41 kitReqRows([[ok, "Sủng 8 (cần 15)"], ...]) -> a requirement list as ONE kit table: label = what is needed, value = ✓/✗ + the
+   numbers (green met / red unmet). "Sủng 8 (cần 15)" -> Sủng | ✗ 8 (cần 15); "Ghế Phi: còn chỗ" -> Ghế Phi | ✓ còn chỗ;
+   "Hoàng hậu không chặn (Hoàng hậu -5, …)" -> Hoàng hậu không chặn | ✗ Hoàng hậu -5, …; a bare sentence -> sentence | ✓ đủ / ✗ chưa đủ. */
+function kitReqSplit(t){t=String(t||"").trim();let m=t.match(/^([^(\d:]+?)(?::\s*|\s+)(-?\d[\s\S]*)$/);if(m)return [m[1],m[2]];
+ m=t.match(/^([^:(]+?):\s+([\s\S]+)$/);if(m)return [m[1],m[2]];m=t.match(/^([^(]+?)\s*\(([\s\S]+)\)$/);if(m)return [m[1],m[2]];return [t,""]}
+function kitReqRows(list){return kitRows((list||[]).filter(Boolean).map(([ok,t])=>{const [l,v]=kitReqSplit(t);return [l,`${ok?"✓":"✗"} ${v||(ok?"đủ":"chưa đủ")}`,ok?"g":"r"]}))}
 /* tiers / ladders: [{k:"30–59", n:"hại nhỏ", d:"Tung tin đồn, Dò la", on:true, c:"r"}] */
 function kitTiers(list,o){o=o||{};const N=list.length;return `<div class="ktiers">${list.map((t,i)=>`<div class="ktier${t.on?" on":""}" style="--lv:${(i+1)/N}"><span class="ktk">${t.k}</span><span class="ktb"><b class="${t.c||""}">${t.n}</b>${t.d?`<small>${t.d}</small>`:""}</span>${t.on?`<span class="kchip n">${o.here||"đang ở"}</span>`:""}</div>`).join("")}</div>`}
 
@@ -257,12 +266,19 @@ function kpBuild(M,m){const dlg=M.querySelector(".dlg"),mb=$("mb"),mt=$("mt");if
 .kfact:last-child{border-bottom:0}
 .kfact>.md{width:34px!important;height:34px!important;margin:0!important;position:static!important}
 .kfdot{width:34px;height:34px;border-radius:50%;background:radial-gradient(circle,#c9a46a 0 4px,transparent 5px),url(img/kit/bg-default.webp) center/80px;border:1px solid var(--line);box-sizing:border-box}
+/* KIT §41 (owner 11/15 17:27Z): a fact with no person shows NO blank dot (an empty round icon means nothing); the text takes the row.
+   The week book keeps its small diamond bullet (j87 .kbk-pg .kfdot). */
+.kfact>.kfdot{display:none}.kfact:has(>.kfdot){grid-template-columns:minmax(0,1fr)}.kbk-pg .kfact>.kfdot{display:block}
 .kft{font-size:.88rem;color:var(--ink);overflow-wrap:anywhere;align-self:center}.kft p{margin:0}
 .kfwhen{display:block;color:var(--dim);font-size:.7rem}.kfwhy{display:block;color:var(--dim);font-size:.74rem}
 .kintel{display:flex;flex-direction:column}.kint{display:grid;grid-template-columns:34px minmax(0,1fr);gap:8px;padding:5px 0;border-bottom:1px dotted var(--k-hair)}.kint>.md{width:34px!important;height:34px!important;margin:0!important}
 .kisrc{display:block;color:var(--dim);font-size:.72rem}
-/* rows inside panels: same grid as the act card */
-.kpkb{font-size:.84rem}.kpkb .krl{padding-top:.18rem}
+/* rows inside panels: same grid as the act card. KIT §41 KIT TABLE (owner 11/15 17:27Z): every label|value list is ONE kitRows grid;
+   the label column is fixed per table = its longest label, capped at --kt-lab (34% of the table, never under 7rem so a label is never
+   one word per line); labels wrap inside that column, every value starts at the same x. */
+.kpkb{font-size:.84rem;grid-template-columns:fit-content(var(--kt-lab,max(34%,7rem))) minmax(0,1fr)}
+.kpkb .krl{padding-top:.18rem;white-space:normal;overflow-wrap:normal;word-break:normal;hyphens:none;line-height:1.25}
+.kpkb .krl .md{vertical-align:middle;margin-right:4px}
 /* tiers */
 .ktiers{display:flex;flex-direction:column;gap:4px}
 .ktier{display:grid;grid-template-columns:5.2rem minmax(0,1fr) auto;gap:8px;align-items:center;padding:5px 8px;border:1px solid var(--k-hair);border-radius:var(--k-rad);background:linear-gradient(90deg,rgba(194,59,34,calc(var(--lv)*.16)),transparent 70%),var(--k-card)}
