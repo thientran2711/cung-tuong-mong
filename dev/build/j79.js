@@ -15,7 +15,7 @@ function kitTitle(p){try{if(!p)return"";if(p===S)return"";if(S&&p===S.emp)return
 function kitRtOf(t,col){try{return typeof kitRankTone==="function"?kitRankTone(t,col):""}catch(e){return""}}
 function kitPersonCol(p){try{if(typeof rivals!=="undefined"&&rivals.includes(p))return p.out?KIT_COLD_COL:RCOL[p.queen?7:cl(p.rank||0,0,7)];if(p===S)return S.out?KIT_COLD_COL:RCOL[cl(S.rank||0,0,7)];
  const d=kitDecor(kitFace(p));return d.col||"#8a7350"}catch(e){return"#8a7350"}}
-function kitName(p,o){o=o||{};if(!p)return"";if(p===S&&o.named){const srv=typeof isSrv==="function"&&isSrv();return `<b class="kname" style="--rc:${kitPersonCol(S)}">${srv||o.noTitle?"":`<span class="kti" style="--rt:${kitRtOf(S.out?"Phế phi":RANKS[S.rank].n)}">${S.out?"Phế phi":RANKS[S.rank].n}</span> `}${S.name}</b>`}if(p===S)return `<b class="kname kme" style="--rc:${kitPersonCol(S)}">${o.cap?"Ngươi":"ngươi"}</b>`;
+function kitName(p,o){o=o||{};if(!p)return"";if(p===S&&o.named){const srv=typeof isSrv==="function"&&isSrv();return `<b class="kname kmy" style="--rc:${kitPersonCol(S)}">${srv||o.noTitle?"":`<span class="kti" style="--rt:${kitRtOf(S.out?"Phế phi":RANKS[S.rank].n)}">${S.out?"Phế phi":RANKS[S.rank].n}</span> `}${S.name}</b>`}if(p===S)return `<b class="kname kme" style="--rc:${kitPersonCol(S)}">${o.cap?"Ngươi":"ngươi"}</b>`;
  const t=o.noTitle?"":kitTitle(p);let nm=S&&p===S.emp?"":S&&(p===S.thO||p.kind==="th")?"":(p.name||"");if(t&&nm)nm=kitTitledName(t,nm);else if(o.pre&&nm)nm=kitTitledName(String(o.pre).trim().split(" ").slice(-5).join(" "),nm);/* old saves: "Tổng quản thái giám Tổng quản Lý Liên Anh" in a stored log */
  return `<b class="kname" style="--rc:${kitPersonCol(p)}">${t?`<span class="kti" style="--rt:${kitRtOf(t,kitPersonCol(p))}">${t}</span>${nm?" ":""}`:""}${nm}</b>`}
 /* KIT 9 (owner 11/15 "Cung nữ Cung nữ thân tín …", "Tổng quản thái giám Tổng quản Lý Liên Anh"): ONE rule for every title + name builder —
@@ -451,7 +451,7 @@ function kpIsScene(m){return !!(m&&(m.nl||/\bnlcard\b/.test(m.cls||"")||/^Nhập
 function kpIdentity(M,m){const dlg=M.querySelector(".dlg"),mb=$("mb");const o=S.origin,srv=typeof isSrv==="function"&&isSrv();
  const pos=srv||o.k==="cnv"?"Cung nữ":RANKS[S.rank].n;const pts=typeof pdGet==="function"?pdGet():0;
  const opts=mb.querySelector(".nlopts");if(opts)opts.remove();
- const name=`<b class="kname" style="--rc:${srv?kitServCol("maid",1):RCOL[cl(S.rank||0,0,7)]}"><span class="kti" style="--rt:${kitRtOf(pos)}">${pos}</span> ${S.name}</b>`;
+ const name=`<b class="kname kmy" style="--rc:${srv?kitServCol("maid",1):RCOL[cl(S.rank||0,0,7)]}"><span class="kti" style="--rt:${kitRtOf(pos)}">${pos}</span> ${S.name}</b>`;
  const tiles=[["Tài",S.tai],["Sắc",S.sac],["Tâm cơ",S.tamco],["Đức",S.duc],["Danh",S.danh],["Thái hậu ưa",S.th],["Bạc",S.bac],["Hoàng thượng",`${S.emp.era} · ${S.emp.age} tuổi`]];
  mb.innerHTML=`<div class="kpb kphas kpid"><div class="kpsubj">${pframe(pMe())}</div><div class="kpmain"><div class="kpidn">${name}<small>${o.n} · ${S.age} tuổi</small></div><div class="kpidt">${o.t||""}</div></div></div>${kitTiles(tiles)}<div class="kpnote">Thân phận đã định: nạp lại sổ, đổi sổ hay bắt đầu kiếp mới vẫn ra đúng thân phận này.</div>`;
  if(opts){opts.classList.add("kpopts","kpscopts");mb.appendChild(opts)}

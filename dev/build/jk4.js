@@ -474,7 +474,7 @@ window.kitXHTML=kitXHTML;window.kitXAdd=kitXAdd;
    `kitNameRank(rank, name, col)` → `<div class="knr" style="--rc:col"><small class="knr-r">rank</small><b class="knr-n">name</b></div>`.
    Used by: Ân oán cards (kitRel3), every person dialog (32.7 chips = `.kpsn.knr` at the column top, kitDpFit), the shop seller, person
    cards (Hậu cung / Cung nhân: `.pcl` name + rank moved above the portrait). The same look as the 32.7 chip's kitName (rank over name). */
-function kitNameRank(rank,name,col){const rt=rank?kitRankTone(rank,col):"";return `<div class="knr" style="--rc:${col||"#7a5530"}">${rank?`<small class="knr-r krt" style="--rt:${rt}">${rank}</small>`:""}<b class="knr-n krn">${name||""}</b></div>`}
+function kitNameRank(rank,name,col,me){const rt=rank?kitRankTone(rank,col):"";if(me==null)me=kitIsMyName(name);return `<div class="knr" style="--rc:${col||"#7a5530"}">${rank?`<small class="knr-r krt" style="--rt:${rt}">${rank}</small>`:""}<b class="knr-n krn${me?" kmy":""}">${name||""}</b></div>`}
 window.kitNameRank=kitNameRank;
 /* ================= KIT 48.1 · RANK TITLE (owner, ref. shot "a title floating above the character's name") ==========
    The rank / role line above every name is a TITLE: serif (var(--display)), bold, in the rank's OWN colour = the colour family of that rank's
@@ -482,21 +482,25 @@ window.kitNameRank=kitNameRank;
    parchment dialogs). The NAME line under it is plain dark ink (no colour, no glow).
    `kitRankTone(title, col)` → the title colour, looked up by the title's WORDS (one table, so every builder agrees whatever --rc it passes):
    consorts Đáp ứng ivory-champagne · Thường tại green · Quý nhân blue · Tần pink · Phi purple · Quý phi rose-red · Hoàng quý phi amber ·
-   Hoàng hậu gold; Phế phi / lãnh cung ash; Thái hậu bronze; Hoàng thượng imperial yellow; maids jade family (Chưởng sự cô cô terracotta,
-   Nữ quan periwinkle), ma ma sand; men never pink/purple: eunuchs sage → steel → bronze, Thái y teal, officials / guards steel blue;
+   Hoàng hậu gold; Phế phi / lãnh cung ash; Thái hậu bronze; Hoàng thượng imperial yellow; maids follow MRCOL (thô sử grey-jade, Cung nữ jade, Đại cung nữ blue, Chưởng sự cô cô terracotta,
+   Nữ quan lavender), ma ma sand; men never pink/purple: eunuchs sage → steel → bronze, Thái y teal, officials / guards steel blue;
    Hoàng tử sky, Công chúa peach; stranger grey. Unknown title → the caller's colour, lightened.
    Classes: `.krt` title, `.krn` name (kitNameRank sets both); the same look is given (CSS below) to every rank-over-name block that is built
    elsewhere: stage name tags (.j59t / .j59n), kitEventDp / 32.7 captions (.kpsn .kname .kti — kitName sets --rt on .kti), person cards
    (.pcrk over .pcname), the Tuần lục person heading (.kbk-pname). Inline titles inside sentences (kitName in prose) keep the plain look. */
 const KIT_RT=[[/hoàng quý phi/,"#f7a540"],[/phế phi|lãnh cung/,"#c9d3dc"],[/quý phi/,"#f2707a"],[/hoàng hậu/,"#ecbf3c"],[/thái hậu/,"#d39a5e"],
  [/hoàng thượng|hoàng đế|thánh thượng|thiên tử/,"#ffe066"],[/phi$/,"#c39bea"],[/(^|\s)tần$/,"#f49ac0"],[/quý nhân/,"#78aef0"],[/thường tại/,"#7fcf8a"],
- [/đáp ứng/,"#eadbb4"],[/thô sử/,"#b9c7c2"],[/chưởng sự|cô cô/,"#e0a88a"],[/nữ quan/,"#a9b4ea"],[/đại cung nữ/,"#5cc4b0"],[/cung nữ|thị nữ/,"#86d0be"],
+ [/đáp ứng/,"#eadbb4"],[/thô sử/,"#b9c7c2"],[/chưởng sự|cô cô/,"#e0a88a"],[/nữ quan/,"#b6a6e6"],[/đại cung nữ/,"#86a8ec"],[/cung nữ|thị nữ/,"#86d0be"],
  [/ma ma|nhũ mẫu|vú/,"#d9b38c"],[/tổng quản/,"#d8a27c"],[/thủ lĩnh/,"#8fb4d6"],[/tiểu thái giám/,"#bccab4"],[/thái giám|nội giám/,"#94c9a0"],
  [/thái y|ngự y/,"#7fd0c0"],[/hoàng tử|thái tử|vương/,"#9ec8f0"],[/công chúa/,"#f5b0a0"],[/người lạ/,"#c4c4c4"],
  [/tể tướng|tướng quân|thượng thư|học sĩ|quan|thị lang|đại nhân/,"#9db8e6"],[/thị vệ|vệ|lính|tướng/,"#a8bcd0"]];
 function kitRankTone(t,col){const s=String(t==null?"":t).replace(/<[^>]*>/g,"").replace(/\s+/g," ").trim().toLowerCase();
  for(const [re,c] of KIT_RT)if(re.test(s))return c;return col?`color-mix(in srgb,${col} 62%,#fff)`:"#e0cfa8"}
 window.kitRankTone=kitRankTone;window.KIT_RT=KIT_RT;
+/* KIT 48.1b (owner 15/11 ~20:10Z): HER own name (the local player's character only, also in co-op) = black ink + a soft light-gold glow
+   (class .kmy on the name line), so she spots herself at once; everybody else's name stays plain ink. kitIsMyName(name) = it is S.name. */
+function kitIsMyName(n){try{const s=String(n==null?"":n).replace(/<[^>]*>/g,"").trim();return !!(s&&typeof S!=="undefined"&&S&&S.name&&s===String(S.name).trim())}catch(e){return false}}
+window.kitIsMyName=kitIsMyName;
 (function(){const st=document.createElement("style");st.id="kit-rt";
  const T=[".krt",".knr>.knr-r",".stage .tok .tag .j59t",".stage #j59metag .tag .j59t",".kpsn .kname .kti",".pc .pcl .pcrk",".kpstrip .kpsn small",".kbk-pname .kname .kti",".kpod-plq .kname .kti"].map(x=>"html body "+x).join(",");
  const N=[".krn",".knr>.knr-n",".stage .tok .tag .j59n",".stage #j59metag .tag .j59n",".kpsn .kname",".pc .pcl .pcname",".kpstrip .kpsn b",".kbk-pname .kname",".kpod-plq .kname"].map(x=>"html body "+x).join(",");
@@ -517,6 +521,9 @@ html body .kbk-pname .kname .kti{display:block;font-size:.62em!important;margin:
 html body .stage.j59 #tokens .tok .tag,html body .stage.j59 #j59metag .tag{background:none!important;border:0!important;box-shadow:none!important;padding:0!important}
 html body .krs .krn{text-shadow:0 0 2px #fff8ee,0 0 5px #fff8ee,0 0 9px #fff8eecc}
 html body .modal.night .kpsn .kname,html body .modal.night .knr>.knr-n,html body .modal.night .krn,html body .modal.night .kbk-pname .kname{color:#f3e6cf!important}
+/* 48.1b her own name: black ink + soft light-gold glow (wins over the stage paper halo and the night parchment ink) */
+html body .kmy,html body .krs .krn.kmy,html body .modal.night .kmy,html body .stage .tok .tag .j59n.kmy,html body .stage #j59metag .tag .j59n.kmy,html body .kpsn .kname.kmy,html body .pc .pcl .pcname.kmy,html body .kbk-pname .kname.kmy,html body .kpod-plq .kname.kmy{color:#1a0f08!important;
+ text-shadow:0 0 1px #fff6d8,0 0 3px #ffe9a8,0 0 6px #f3cf6a,0 0 11px #e8bd4acc!important}
 `;document.head.appendChild(st)})();
 (function(){const st=document.createElement("style");st.id="kit-nr";st.textContent=`
 .knr{display:flex;flex-direction:column;align-items:center;text-align:center;line-height:1.2;max-width:100%;min-width:0}

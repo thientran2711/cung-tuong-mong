@@ -2275,16 +2275,22 @@ The rank / role line above every name is a TITLE, the name under it is plain ink
 | Đáp ứng | ivory-champagne #eadbb4 | | Phế phi · lãnh cung | ash #c9d3dc |
 | Thường tại | green #7fcf8a | | Thái hậu | bronze #d39a5e |
 | Quý nhân | blue #78aef0 | | Hoàng thượng | imperial yellow #ffe066 |
-| Tần | pink #f49ac0 | | Cung nữ thô sử / Cung nữ / Đại cung nữ | jade #b9c7c2 / #86d0be / #5cc4b0 |
-| Phi (any "… phi") | purple #c39bea | | Chưởng sự cô cô / Nữ quan / Ma ma | terracotta #e0a88a / periwinkle #a9b4ea / sand #d9b38c |
+| Tần | pink #f49ac0 | | Cung nữ thô sử / Cung nữ / Đại cung nữ | grey-jade #b9c7c2 / jade #86d0be / blue #86a8ec (MRCOL family) |
+| Phi (any "… phi") | purple #c39bea | | Chưởng sự cô cô / Nữ quan / Ma ma | terracotta #e0a88a / lavender #b6a6e6 / sand #d9b38c |
 | Quý phi | rose-red #f2707a | | Tiểu thái giám / Thái giám / Thủ lĩnh / Tổng quản | sage #bccab4 / green #94c9a0 / steel #8fb4d6 / bronze #d8a27c |
 | Hoàng quý phi | amber #f7a540 | | Thái y · officials · Thị vệ | teal #7fd0c0 · steel blue #9db8e6 · #a8bcd0 |
 | Hoàng hậu | gold #ecbf3c | | Hoàng tử · Công chúa · Người lạ | sky #9ec8f0 · peach #f5b0a0 · grey #c4c4c4 |
 
 Men are never pink/purple. Unknown title → the caller's colour lightened (62 % + white).
+**48.1b HER OWN NAME (owner 15/11 ~20:10Z)**: the name of HER character (the local player's `S` only; in co-op the friend's name is
+NOT marked) = near-black ink #1a0f08 + a soft light-gold glow (`.kmy`: text-shadow #fff6d8 1px, #ffe9a8 3px, #f3cf6a 6px, #e8bd4a 11px),
+so she spots herself at once. Everybody else's name stays plain ink (stage names keep the paper halo for readability). `.kmy` is set by:
+`kitNameRank(rank,name,col,me)` (4th arg; omitted → `kitIsMyName(name)` = it is `S.name`), Ân oán `relSide` (her side "Ta"), stage tag
+`.j59n` when the figure is S, `kitName(S,{named:true})` (32.7 captions, Tuần lục heading, podium plate), her identity card (kpIdentity),
+her person card `.pcname` (pcard `o.me`, or o.name === S.name) + its sticky strip. Kit page sample §48.1 shows her name next to another.
 Where it applies (one CSS block `#kit-rt`, nobody styles a title over a name on their own): `kitNameRank` (sets `.krt`/`.krn`), stage name
 tags `.j59t`/`.j59n` (j59 sets `--rt`), 32.7 / kitEventDp captions `.kpsn .kname .kti` (kitName sets `--rt` on `.kti`), person cards
-`.pcrk` over `.pcname` (j15 sets `--rt`) and the sticky strip `.kpstrip`, Tuần lục person heading `.kbk-pname`, honour podium name plates `.kpod-plq` (j90). A title INSIDE a sentence
+`.pcrk` over `.pcname` (j15 sets `--rt`) and the sticky strip `.kpstrip`, Tuần lục person heading `.kbk-pname`, honour podium name plates `.kpod-plq` (j90). Dialog face captions (`.faces figcaption`, j3: "Nhập cung", "Thân phận kiếp này") are built with `kitNameRank` (rank over name). A title INSIDE a sentence
 (kitName in prose rows) keeps the plain inline look. Kit page sample §48.1: every title on parchment and on a dark scene (`.krs`).
 Test: `node dev/test/rank-title.js <url> <outdir> <tag> [sizes] [day,night,rain,cold,dp,kit,old]` (colours, serif, title above name,
 no tag overlap / cut; OLDURL=<old build> for the old-save case).
