@@ -570,3 +570,8 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
   - repeating the same item to the same person loses effect (the Emperor gets bored; after N times no points) — same for Thái hậu and consorts;
   - each person has likes and dislikes; a wrong gift may be refused or make them angrier;
   - some people have allergies; gifting what they're allergic to can make them accuse her of trying to harm them.
+
+## 15/11 ~20:15Z — Teacher learning + sub-styles per art (owner)
+- "Học với thầy" is almost never chosen: low ranks have no bạc for it, and at high ranks the arts are already maxed. Fix: lower the price a lot, or make palace tutoring free / paid in something else (check how learning in the palace should cost).
+- Each art splits into sub-styles like dishes do (cầm: kinds of instruments/pieces; họa: kinds of painting; etc.). Each person has their own taste among them; a gift/performance only pleases when it matches. More variety and choice, and it stops players knowing everything too early/fast.
+- Owner asked to see pet tiers, item/handmade art (sheets sent).
