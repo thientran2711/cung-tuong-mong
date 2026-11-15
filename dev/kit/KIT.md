@@ -2111,6 +2111,19 @@ Ngươi oán · Ghen), Ân oán rows, week-book "Hiện nay" rows and delta chip
 - ONE box for every person and rank: the `.pcp.kit` cell at the full left-column width (left edge = the name/rank's left edge, width = the chips
   column), its top headroom trimmed by ONE constant `KIT_PORT_TRIM` (= .015 of the canvas, the tallest painted top: Thái hậu / Hoàng thượng /
   Hoàng hậu) — never measured per frame (jk3 §14). Switching people never moves or resizes the box (0 px shift).
+- **WIDE CELL + NO HEADROOM (owner 15/11, "phía trên còn dư chỗ" / "kéo giãn cạnh trái và phải cho khung avatar to bề ngang"; review/hc-portrait,
+  `dev/build/jhcpor.js`, supersedes the constant trim above):** every `pcard` portrait cell (`.pc>.pcl>.pcp.kit`: all Hậu cung sub-tabs, stage
+  pop-up card, Người lạ and known people) shows the frame's WIDE variant `img/kit/frame-<x>-w.webp` (made by `dev/tools/frame_wide.py`:
+  content-aware seams through the plain parts of the top/bottom bars, corners/side bars/crest/pendant untouched, same 550x1037 canvas, opening
+  2s units wider, its top/bottom unchanged; `KIT_FRW[frame] = [s, opaqueTop, opaqueBottom]`, s = 0 for Hoàng thượng / Thái hậu whose frames
+  already fill the canvas). The portrait is NOT zoomed: the ground (`.kbg`) widens, the por clip widens by s each side and the picture's own
+  left/right edges fade (mask) — no hard garment cut. Badge `.kgem` / emblem `.kemb` move out by s. The cell's top = the higher of the
+  frame's first opaque row and its `KIT_CREST` crest top, 4 px under the name (name block no longer padded to 2.4em); its bottom = under the
+  tassel. Constants per frame file (no measuring), so the first frame is the settled frame; a person switch still cross-fades. The box top
+  therefore differs between frames with tall and low crests (owner's newer ruling: no empty band). Small frames (mdH, strips, stage, week
+  book) keep the narrow frame. A -w picture that fails to load falls back to the normal frame (`kitFrwErr`).
+  New frame art ⇒ `python3 dev/tools/frame_wide.py <dir> <out> frame-<x>`, look at it, push the -w file with cdn_sync, add its `KIT_FRW`
+  entry (dev/tools/frame_wide.json). Kit page sample §36.4.
 - Swap: the old portrait (`.kin`) fades out over the new one in 180 ms (`.kpxf`); none with reduced motion / Cảnh động off. The strip's small
   frames are the same pictures, so the next portrait is already loaded.
 - Crests (§28.0, `KIT_CREST`): each crest's SOLID base (lowest row ≥ 25 % of its widest row, measured from the webp) sits 6 canvas units BELOW
