@@ -24,7 +24,9 @@ function sbar(v,lo,hi){lo=lo==null?-100:lo;hi=hi==null?100:hi;const x=Math.max(l
  return `<span class="ksbar" aria-hidden="true"><i class="ksb-mid"></i><u class="${x>=0?"g":"r"}" style="${x>=0?"left:50%":"right:50%"};width:${h.toFixed(1)}%"></u></span>`}
 window.kitSignedBar=sbar;
 /* one bar row: "<subj> quý <obj>: Bình thường · -5 [bar]" / "<subj> oán <obj>: 0 [bar]" */
-function relBar(kind,subj,obj,v){const lab=`${subj} ${kind} ${obj}`;
+function relBar(kind,subj,obj,v){/* KIT_REL words (owner 11/15): "Nàng → ta: thiện cảm", "Nàng oán ta", "Ta → nàng: thiện cảm"; kitRel colours the direction */
+ subj=subj==="Ngươi"?"Ta":subj;obj=obj==="ngươi"?"ta":obj;const dir=obj==="ta"?"them":subj==="Ta"?"me":"";
+ let lab=kind==="quý"?`${subj} → ${obj}: thiện cảm`:`${subj} oán ${obj}`;if(dir&&typeof kitRel==="function")lab=kitRel(dir,lab);
  if(v==null)return `<div class="kr3b"><span class="kr3k">${gl(kind==="quý"?"Quý":"Oán",lab)}</span><span class="kr3v"><span class="ef n">chưa rõ</span></span></div>`;
  if(kind==="quý")return `<div class="kr3b"><span class="kr3k">${gl("Quý",lab)}</span><span class="kr3v"><span class="ef ${v>10?"g":v<-10?"r":"n"}">${quyW(v)} · ${sg(v)}</span>${sbar(v)}</span></div>`;
  return `<div class="kr3b"><span class="kr3k">${gl("Oán",lab)}</span><span class="kr3v"><span class="ef ${v>=30?"r":v>10?"r":"n"}">${Math.round(v)}</span>${fbar(v,0,100,false)}</span></div>`}
