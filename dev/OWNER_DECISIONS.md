@@ -644,3 +644,13 @@ All must work in co-op.
 - SIDE STORIES must be real stories: every NPC carries a life goal / ambition / personal story; helping them fulfil it completes a side quest with rewards. Today's "phụ tuyến" are only small daily events (someone comes, frames her…) — real side lines need their own plot, like in games where a side line is the story of a secondary character.
 - Event person dialog: remove the square box around the rank + name caption (circled "Tần / Liễu Phương Hoa"); put rank + name straight on the white dialog background.
 - fig-bg: owner picks A = SILK HANGING SCROLL, drawn like a real vertical scroll with a rod at the top and a rod at the bottom (like an edict scroll held vertically); the person is painted ON the scroll. Fix: the Vương gia figure spills outside the scroll — figures too big. Inside the scroll ALL figures are the same size; the Emperor/men need not be taller than the others (tall men make the figure too big for the scroll).
+
+## 15/11 ~20:50Z — fig-bg crop rule + card-flip (lật thẻ bài) scene (owner)
+- fig-bg A (silk scroll): wide robes that would spill past the scroll edge are CROPPED to the scroll frame (accepted), never sticking out.
+- END-OF-DAY CARD FLIP SCENE (big event → make it beautiful; Magnific painted scene / video allowed, but it must blend with the game's own animation so it looks like ONE continuous event, not pasted):
+  1. Tray (Kính sự phòng) with every eligible woman's card = her existing avatar frame (the jade-pendant frame with tassel); NO back-side art needed (the Emperor knows the names; he chooses, not a lucky draw).
+  2. Start: all cards lit. Then the ones in their monthly cycle (or otherwise barred) turn grey (animation), are lifted out of the tray; the rest re-arrange neatly (animation).
+  3. The tray is carried/presented to the Emperor (animation).
+  4. He picks: the chosen card glows and grows to the centre of the screen.
+  5. If it is HER card, an extra animation tells her she was chosen.
+  Coordinator to propose how (owner asked for the idea) and then build.
