@@ -189,3 +189,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (08:55Z) Owner: blood test gets animation/minigame; scheme acts get minigames (worker review/scheme-games; always option to skip and use plain odds; NPCs plain odds).
 - (09:05Z) Coordinator: to let owner play with a friend sooner, ship review/coop (includes book-release 1b90526) as one live release after kit review; iPad 3–4 people, dialog scroll, full flap come in the next update.
 - (09:10Z) Owner: event dialogs put the people standing on the scene picture (not a separate figure column) to save space; text full width below.
+- (09:30Z) Scheme minigames: first worker stopped by a safety classifier (likely the poison-dose game). Scope narrowed to abstract games: Nghe ngóng, Truyền lời, Mặc cả; no poison minigame.
