@@ -228,3 +228,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (04:20Z) Owner: hoa điền to quá (Hạ Tố Tâm, Phi). Luật mới: t1 = cỡ c03 t1; lớn dần rất ít, tối đa ~1.25× bề ngang t1 tới t6; t7 nửa cỡ, t8 phượng vàng nhỏ. Soát hết phi tần + cung nữ Part C, thu nhỏ cái quá cỡ (review/m05-huadian).
 - (04:20Z) Owner: khung chân dung (Quý phi) phần đỉnh trang trí rời rạc, lệch → sửa trong kit khung theo phẩm, đỉnh gắn liền khung (review/hau-cung-ui).
 - (04:25Z) Owner: danh sách người (Sổ tuần 'Sổ này ghi') phải thẳng cột dọc → luật kit: mọi danh sách chip người dùng lưới cột đều. review/hau-cung-ui.
+- (04:30Z) Owner: trang người trong Sổ tuần → nhân vật cao full trang (dưới tiêu đề chạy tới trên số trang), chữ cột phải; luật kit §27. review/hau-cung-ui.
