@@ -537,3 +537,9 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - Keep it short: just the festival name, what contests it has, or short info about that festival.
 - Only the fixed yearly festivals (common knowledge) go on it. Private contests, tea parties, private palace banquets and other surprise events do NOT appear on the calendar.
 - Calendar entry (owner): a small desk-calendar icon in a corner of her room background picture; tap it to open the calendar.
+
+## 15/11 ~18:50Z — Act pictures: no faces, not hands-only (owner)
+- "Hands" was only an example. Each act picture shows whatever fits the act: hands, feet, a back view or a silhouette (e.g. dancing, spying/eavesdropping shown as a whole figure from behind or as a shadow is OK).
+- Do NOT redraw a picture just to show hands. Existing whole-figure back views and silhouettes are fine.
+- The ONLY hard rule: no visible face of any character (a face makes the player think it is a specific person).
+- Background light: DARK background = scheming, plotting, negative acts; LIGHT background = normal acts.
