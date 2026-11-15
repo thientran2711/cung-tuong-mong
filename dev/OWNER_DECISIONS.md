@@ -397,3 +397,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (10:40Z) Thú cưng người khác: sang cung người khác (NPC hoặc hảo hữu khi chơi chung) có thể giúp chăm (+thiện cảm), hại (trừu tượng), trộm (thú càng lớn càng khó, có thể bị cắn, bị bắt). NPC cũng làm vậy với thú của nàng. Cùng luật, đủ thẻ.
 - (10:42Z) Thú cưng lớn qua 4 giai đoạn: Non → Thiếu niên → Trưởng thành → Linh thú (tranh cho 3 giai đoạn đầu; Linh thú = tranh trưởng thành + hào quang hiệu ứng).
 - (10:45Z) Mỗi giai đoạn thú cưng một tranh riêng (4 tranh/con, Linh thú cũng có tranh riêng, uy nghi hơn) — 88 tranh.
+- (10:50Z) Thú cưng: kỳ lân con + bạch lộc đẹp → làm mốc phong cách. Mèo, chó, vẹt còn tả thực → vẽ lại mọi thú thật theo đúng nét kỳ lân/bạch lộc.
