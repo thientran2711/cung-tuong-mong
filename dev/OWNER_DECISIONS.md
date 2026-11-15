@@ -406,3 +406,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (11:05Z) Da mặt một số nhân vật bị dơ/vệt tối → quét toàn bộ, đề xuất làm sạch nhẹ (không vẽ lại mặt).
 - (11:10Z) Linh thú: được có hào quang nhưng VẼ SẴN trong tranh; mỗi thú có tranh Linh thú riêng. Đổi: Kỳ lân lên Ngự tứ, Thiên mã xuống Tuyệt phẩm.
 - [ ] (11:10Z) Người chưa gặp vẫn lộ mặt ở thẻ tin và trang Tuần lục → kit-fig2 quét toàn bộ chỗ vẽ ảnh người.
+- [ ] (11:20Z) Thẻ tin: ảnh Tịch Nhan/Ngọc Hành sai người, nền ô cùng màu dù khác bậc → kit-fig2 dùng chung ảnh với Hậu cung + màu khung theo bậc hiện tại.
