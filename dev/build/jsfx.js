@@ -100,7 +100,7 @@ const SFXPET={meomuop:"petCat",meo:"petCat",batu:"petCat",cho:"petDog",sutu:"pet
  tho:"petRabbit",cavang:"petFish",cachep:"petFish",uyenuong:"petDuck",rua:"petTurtle",linhquy:"petTurtle",ngua:"petHorse",khongtuoc:"petPeacock",
  bachkt:"petPeacock",bachac:"petCrane",caotuyet:"petFox",tuyetdieu:"petWeasel",bachloc:"petDeer"};
 /* minigame stroke per kind (j82/j91 KG82_KIND keys): the touch that IS the move */
-const SFXMG={co:["down","mgStone"],theu:["down","mgNeedle"],kim:["up","mgNeedle"],ve:["down","mgBrush"],hoa:["down","mgFlower"],mua:["down","mgStep"],dauho:["up","mgThrow"],ban:["down","mgArrow"],banh:["down","mgFire"]};
+const SFXMG={co:["down","mgStone"],theu:["down","mgNeedle"],kim:["up","mgNeedle"],ve:["down","mgBrush"],hoa:["down","mgFlower"],mua:["down","mgStep"],hat:["down","mgPluck"],tho:["down","mgBrush"],doi:["down","mgBrush"],kinh:["down","mgBrush"],chai:["down","mgBrush"],huong:["down","mgPuff"],may:["down","mgNeedle"],dauho:["up","mgThrow"],ban:["down","mgArrow"],banh:["down","mgFire"]};
 /* how each minigame kind sounds, by its engine (j82 KG82_KIND[k].e; exam kinds of jexam too): stroke · scored word (kg82Pop by colour) · end */
 const SFXMGE={rhythm:"mgPluck",go:"mgStone",aim:"mgThrow",pattern:"mgBrush",steps:"mgStep",quiz:"tap"};
 function ksfxMgStroke(k){const m=SFXMG[k];if(m)return m[1];try{const e=KG82_KIND[k]&&KG82_KIND[k].e;return SFXMGE[e]||null}catch(x){return null}}

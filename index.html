@@ -25524,7 +25524,7 @@ const SFXPET={meomuop:"petCat",meo:"petCat",batu:"petCat",cho:"petDog",sutu:"pet
  tho:"petRabbit",cavang:"petFish",cachep:"petFish",uyenuong:"petDuck",rua:"petTurtle",linhquy:"petTurtle",ngua:"petHorse",khongtuoc:"petPeacock",
  bachkt:"petPeacock",bachac:"petCrane",caotuyet:"petFox",tuyetdieu:"petWeasel",bachloc:"petDeer"};
 /* minigame stroke per kind (j82/j91 KG82_KIND keys): the touch that IS the move */
-const SFXMG={co:["down","mgStone"],theu:["down","mgNeedle"],kim:["up","mgNeedle"],ve:["down","mgBrush"],hoa:["down","mgFlower"],mua:["down","mgStep"],dauho:["up","mgThrow"],ban:["down","mgArrow"],banh:["down","mgFire"]};
+const SFXMG={co:["down","mgStone"],theu:["down","mgNeedle"],kim:["up","mgNeedle"],ve:["down","mgBrush"],hoa:["down","mgFlower"],mua:["down","mgStep"],hat:["down","mgPluck"],tho:["down","mgBrush"],doi:["down","mgBrush"],kinh:["down","mgBrush"],chai:["down","mgBrush"],huong:["down","mgPuff"],may:["down","mgNeedle"],dauho:["up","mgThrow"],ban:["down","mgArrow"],banh:["down","mgFire"]};
 /* how each minigame kind sounds, by its engine (j82 KG82_KIND[k].e; exam kinds of jexam too): stroke · scored word (kg82Pop by colour) · end */
 const SFXMGE={rhythm:"mgPluck",go:"mgStone",aim:"mgThrow",pattern:"mgBrush",steps:"mgStep",quiz:"tap"};
 function ksfxMgStroke(k){const m=SFXMG[k];if(m)return m[1];try{const e=KG82_KIND[k]&&KG82_KIND[k].e;return SFXMGE[e]||null}catch(x){return null}}
@@ -25992,7 +25992,7 @@ if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§28.13e",title:"Pick 
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="8743aafa693a";window.CTM_BUILD=BUILD;
+const BUILD="2cf22931f116";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
