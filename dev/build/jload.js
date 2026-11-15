@@ -129,6 +129,10 @@ function paintChip(){const g=KLOAD.fig;if(!bgOn||!g.total)return;
 function placeChip(){if(!chip)return;const H=innerHeight;let lift=0;
  document.querySelectorAll("#tabs,#modal:not([hidden]) .dlg,#kload .dlg,.kpopts").forEach(e=>{const r=e.getBoundingClientRect();
   if(!r.width||r.left>300||r.bottom<H-60||r.top<H*.35)return;lift=Math.max(lift,H-r.top)});
+ /* review 11/15: never over the stage name chips (names are never covered) — sit above the name row it would touch */
+ const cw=(chip.firstElementChild||chip).getBoundingClientRect().width||300;
+ document.querySelectorAll("#stage .tag,#j59metag>*,#stage .j59more").forEach(e=>{const r=e.getBoundingClientRect();
+  if(!r.width||r.left>cw+12||r.right<4||r.top<H*.35||H-r.bottom>lift+60)return;lift=Math.max(lift,H-r.top+2)});
  chip.style.bottom=`calc(env(safe-area-inset-bottom,0px) + ${Math.round(lift)+8}px)`}
 addEventListener("resize",placeChip);setInterval(placeChip,1500);
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-klc]");if(!b)return;e.stopPropagation();if(!KLOAD.fig.left)return;
