@@ -1696,3 +1696,26 @@ Kèm + odds ladder), restored the same way from a save (`deserQ`).
 - No ring/aura around the frame (owner 11/14 late: removed); the seal alone shows the feeling.
 - Fog: stranger → nothing; known person, no fresh news → grey "?" seal; her own → always.
 - Data only through `window.kitEmotion(p)` → `{k,name,v,why,known}`; tooltip/alt "Tâm trạng: <tên> (<cause>)". Nobody draws another mood icon; no code-reshaped facial expressions (owner 22:50Z): the seal + ring are the only display of feelings.
+
+## 39. ẤN TRÂN NỮ · kitSeal (owner 11/15, review/brand) — `dev/build/jseal.js` (after jk4)
+- Ported from Phượng Lệnh `public/choi/js/kit/seal.js`: square cinnabar seal, TRÂN over NỮ cut white into the cinnabar (bạch văn), Vietnamese
+  seal-script capitals drawn in code (`kitSealWord(w,x,y,bw,bh,sw)`, one even stroke on a 6×10 grid, diacritics carved the same way), worn
+  edge + grained ink by FIXED-seed turbulence (`#kseal-ink`, same every render), carved mask `#kseal-tn`, tilt −2°. Inline SVG, no image.
+- `kitSeal({cls})` → markup (64-unit viewBox; size with CSS `--kseal`; colour = `currentColor`, cinnabar #b02a20). Defs injected once
+  (`#kseal-defs`). Nobody draws another seal; Phượng Lệnh's THÀNH/BẠI/HÒA result seals are not ported (not used here).
+- Top bar: ONE seal in the top-right corner of the cream bar (`header.hud > .kseal-hud`), a mark only: aria-hidden, `pointer-events:none`,
+  no tap, z-index 2, multiply blend. Its room is made by measuring the bar (kitSealHud, on every renderHUD + resize):
+  wrapped bar (portrait / phone landscape) → the Buổi/Quẻ block steps left (`#k3tc` margin-right = seal + 12 px), seal 38 px (30 px when
+  height ≤ 500); one-row bar (≥ 1000 px landscape) → the bar keeps a right gutter (`.kseal-pad`), seal centred in it; 1000–1179 px the stat
+  cells use the phone label form (icon only, name in tooltip) and the seal is 34 px, so the longest quẻ "Quẻ Thượng thượng (Giao thiệp)"
+  no longer runs into the cells (it did by 58 px at 1000 px before this change).
+- "Có bản mới" chip (swreg.js place()): never on the seal; with no free spot in the bar it sits just under the bar, centred.
+- Measured (dev/test/brand-seal.js, ±1 px, dev/shots/brand/seal-measure.jsonl), gap seal→nearest part of the bar / quẻ line / chip:
+  755×1000 12 / 12 / 332 · 1000×755 15.9 / 334.6 / 426 · 1180×820 23 / 497.5 / 513 · 1366×1024 23 / 589.3 / 940 · 844×390 12 / 12 / 431;
+  time block → stat cells (one-row): 17.6 (1000), 18.7 (1180), 110.5 (1366); 0 overlaps, 0 page errors, no horizontal overflow.
+
+## 40. APP ICON (owner 11/15, review/brand) — `dev/art/make_icons.py`
+- From the title/first-load key art (img/title-key.webp, backdrop 'title'): the lady in the red/gold phoenix headdress, face + ornaments +
+  shoulders, in a gold band on cinnabar #8a2a1e. icons/icon-192.png, icon-512.png (purpose any, rounded tile), icon-maskable-192/512.png
+  (purpose maskable, full bleed, round portrait inside the 80 % safe circle), apple-touch-icon.png 180 (opaque), favicon = dev/build/icon.webp
+  (inlined) + icons/favicon-48.png. Preview: dev/shots/brand/icon-preview.png. An installed Android PWA may keep the old icon until reinstall.
