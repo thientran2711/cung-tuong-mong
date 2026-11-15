@@ -68,10 +68,10 @@
   "Xin Hoàng thượng ân xá": "xin-an-dien",
   "Bàn chuyện triều chính": "ban-trieu-chinh",
   "Xin xăm ở Phật đường": "xin-xam",
-  "Thỉnh an": "thinh-an",
-  "Xin bái kiến": "thinh-an",
-  "Xin yết kiến": "thinh-an",
-  "Chào hỏi đúng lễ": "thinh-an",
+  "Thỉnh an": "thinh-an-v2",
+  "Xin bái kiến": "thinh-an-v2",
+  "Xin yết kiến": "thinh-an-v2",
+  "Chào hỏi đúng lễ": "thinh-an-v2",
   "Xin Thái hậu đỡ lời": "xin-che-cho",
   "Xin Hoàng hậu che chở": "xin-che-cho",
   "Nhờ giúp đỡ": "xin-che-cho",
@@ -209,7 +209,9 @@
   "Mời đến cung ta": "den-tham",
   "Đến cung nàng thăm": "den-tham",
   "Đến chỗ hắn": "den-tham",
-  "Lẻn vào": "len-vao"
+  "Lẻn vào": "len-vao",
+  "Thỉnh an Thái hậu": "thinh-an-v2",
+  "Thỉnh an Hoàng hậu": "thinh-an-v2"
  },
  "cats": {
   "hau-ha": "Hầu hạ",
