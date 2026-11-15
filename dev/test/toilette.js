@@ -57,6 +57,11 @@ fs.mkdirSync(DIR,{recursive:true});
   await p.screenshot({path:`${DIR}/toil-${tag}-6-face-${lk}.jpg`,quality:70})}
  await p.evaluate(()=>{const b=document.querySelector('#tabs [data-tab=inv]')||document.querySelector('[data-tab=inv]');if(b)b.click()});await p.waitForTimeout(1500);await p.screenshot({path:`${DIR}/toil-${tag}-7-tutrang.jpg`,quality:70});
 
+ /* 4b. a reaction pops up as an event dialog with the person (owner): thỉnh an Thái hậu with a bare face before a strict Thái hậu */
+ out.react=await p.evaluate(()=>{Q.length=0;S.thTrait="Đa nghi";S.toilSeen=null;S.toilette.makeup=false;S.toilette.look=null;S.buoi=0;used=0;S.suc=90;
+  const a=talkOpts({kind:'th'}).find(x=>/^Thỉnh an/.test(x.n));if(!a)return'no card';a.lock=false;const card=[a.x,a.risk].join(' | ');const r0=roll;roll=()=>true;try{runOpt(a)}finally{roll=r0}return{card}});
+ await p.waitForTimeout(400);out.react.q=await p.evaluate(()=>Q.map(x=>x.toilEv||x.t));await p.evaluate(()=>{try{while(Q.length&&!Q[0].toilEv)Q.shift();showModal()}catch(e){}});await p.waitForTimeout(2500);
+ await p.screenshot({path:`${DIR}/toil-${tag}-8-react.jpg`,quality:70});await p.evaluate(()=>{Q.length=0;try{closeModal()}catch(e){}const m=document.getElementById('modal');if(m)m.hidden=true;S.toilette.makeup=true;render()});
  /* 5. skipping does not block: next buổi with no toilette */
  out.skip=await p.evaluate(()=>{S.toilette=null;const b=S.buoi;try{nextBuoi()}catch(e){return 'err '+e.message}return {from:b,to:S.buoi,q:Q.length}});
  /* 6. old save loads */

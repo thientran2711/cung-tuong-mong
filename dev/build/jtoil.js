@@ -127,7 +127,7 @@ function toilGhenOf(v,L){const B=BAL.toil;let g=(L.showy?B.ghenShowy:0)+(L.mk===
 function toilRival(v,doIt){if(!v||!toilOn(S)||toilSeen(v))return null;const L=toilLook(),B=BAL.toil;const T=traitsOf(v);const frugal=T.some(t=>t==="Hiền lành"||t==="Nhu mì");
  const g=Math.round(toilGhenOf(v,L));let aff=0,txt="";
  if(frugal&&(L.plain||L.mk==="moc")){aff=B.praisePlain;txt=`nàng ta chuộng giản dị: quý ta +${aff}`}else if(frugal&&L.showy){aff=B.frownShowy;txt=`ta ăn vận phô trương: nàng ta quý ta ${aff}`}
- if(L.mk==="diem"&&!txt){txt="nàng ta che miệng cười lớp phấn son diêm dúa của ta: bớt ghen 2";if(doIt){v.ghen=cl((v.ghen||0)-2,0,100);toilMark(v);log(`${v.name} che miệng cười khúc khích: phấn son của ta hôm nay diêm dúa quá.`)}return{txt,aff:0,g:0}}
+ if(L.mk==="diem"&&!txt){txt="nàng ta che miệng cười lớp phấn son diêm dúa của ta: bớt ghen 2";if(doIt){v.ghen=cl((v.ghen||0)-2,0,100);toilMark(v)}return{txt,aff:0,g:0}}
  if(g)txt=[txt,`${L.showy?"ta ăn vận phô trương":"dung nhan ta tuyệt mỹ"}: nàng ta ghen +${g}`].filter(Boolean).join(" · ");if(!txt)return null;
  if(doIt){if(aff)affAdd(v,S,aff);if(g)v.ghen=cl((v.ghen||0)+g,0,100);toilMark(v)}return{txt,aff,g}}
 function toilCrowd(doIt){const L=toilLook();if(!L.showy&&L.mk!=="tuyet")return{n:0};if(toilSeen("crowd"))return{n:0};let n=0;const R=liveRivals(false).filter(v=>!v.queen&&!v.out);
@@ -303,6 +303,53 @@ function toilFinish(made){const st=TOIL.st;if(!st)return;try{if(KG82.run&&KG82.r
 #kg82 .toilw .toilfig .pcp{max-width:220px;margin:0 auto 6px}
 #kg82 .toilw .kinv .kinvg{grid-template-columns:repeat(auto-fill,minmax(54px,1fr))}
 @media (max-width:640px){#kg82 .toilw{grid-template-columns:1fr}#kg82 .toilw .toilfig{display:grid;grid-template-columns:110px 1fr;gap:4px 10px;align-items:start}#kg82 .toilw .toilfig .pcp{grid-row:span 3;max-width:110px;margin:0}}`;document.head.appendChild(st)})();
+
+/* ---------- REACTIONS POP UP (owner 15/11): every reaction to her look is an event dialog with the person, never only a log line ----------
+   Kit event-with-person layout (KIT 32.7: `who` → the person full-body on the left; kitEventDp when kit-fig2 lands). Event choices show the
+   cost only (28.6 hideOut). At most BAL.toil.popMax dialogs per occasion (one act), the strongest first; the rest join the last one as a line.
+   Event keys (banner art to come, ab06): TOIL_EV. */
+Object.assign(BAL.toil,{popMax:2,replyDanh:1,replyWin:50,sorryBack:.5});
+const TOIL_EV={"th-scold":"Thái hậu chê dung nhan","th-praise":"Thái hậu khen","hh-scold":"Hoàng hậu chê dung nhan","hh-praise":"Hoàng hậu khen",
+ "emp-like":"Hoàng thượng ưng ý","emp-dislike":"Hoàng thượng không vừa mắt","rival-jealous":"Phi tần ghen","rival-tease":"Phi tần cười cợt",
+ "rival-praise":"Phi tần khen giản dị","crowd-jealous":"Cả hậu cung để ý"};
+window.TOIL_EV=TOIL_EV;
+const TOIL_POP=[];let TOIL_POPT=0;
+function toilSay(k,ctx){const mk=ctx.mk,dv=ctx.dress;const plain=dv==="giandi",showy=dv==="photruong"||dv==="vuot"||dv==="tang";
+ switch(k){
+  case"th-scold":return mk==="moc"?"“Mặt mộc mà đến thỉnh an ai gia sao? Thật chẳng ra thể thống.”":mk==="vung"?"“Phấn son lem nhem thế kia, cung nữ của ngươi không biết hầu hạ sao?”":mk==="diem"?"“Son phấn đậm quá, trông chẳng giống con nhà nề nếp.”":plain?"“Ăn vận sơ sài như vậy mà dám đến trước mặt ai gia?”":"“Ăn vận phô trương quá, chẳng hợp lễ chút nào.”";
+  case"th-praise":return plain||mk==="moc"?"“Giản dị thế này mới phải đạo, ai gia thích.”":"“Hôm nay ăn vận đoan trang, thật vừa mắt ai gia.”";
+  case"hh-scold":return mk==="moc"?"“Muội đến thỉnh an bổn cung mà mặt mộc thế này ư?”":mk==="diem"?"“Son phấn của muội hôm nay… có phần quá tay.”":plain?"“Y phục sơ sài quá, người ngoài nhìn vào lại bảo bổn cung không dạy dỗ.”":"“Muội ăn vận lộng lẫy như vậy, định át cả bổn cung sao?”";
+  case"hh-praise":return plain||mk==="moc"?"“Giản dị mà thanh nhã, bổn cung rất thích.”":"“Muội hôm nay thật chỉn chu, đúng là biết lễ.”";
+  case"emp-like":return mk==="tuyet"||mk==="dep"?"“Hôm nay ái phi trông thật tươi tắn, trẫm nhìn mãi không chán.”":"“Ăn vận như vậy rất hợp ý trẫm.”";
+  case"emp-dislike":return mk==="moc"?"“Sao hôm nay trông nhợt nhạt thế?”":mk==="diem"?"“Son phấn đậm quá, trẫm không quen.”":plain?"“Sao ăn vận sơ sài vậy?”":"“Lộng lẫy quá, trẫm lại thích vẻ thanh nhã hơn.”";
+  case"rival-jealous":return showy?"“Phô trương đến thế, muội không sợ người ta dị nghị sao?”":"“Muội muội hôm nay đẹp quá, khéo Hoàng thượng chẳng rời mắt được.”";
+  case"rival-tease":return"“Ôi chao, phấn son của muội hôm nay… đậm đà thật đấy.” Nàng ta che miệng cười khúc khích.";
+  case"rival-praise":return"“Muội ăn vận nhã nhặn, tỷ thích.”";
+  case"crowd-jealous":return showy?"Lúc thỉnh an, mấy phi tần cứ liếc nhìn y phục của ta rồi thì thầm với nhau.":"Lúc thỉnh an, ánh mắt các phi tần cứ dừng trên dung nhan của ta.";}return""}
+/* r = {k, who (face), host ("th" | "emp" | consort), n (signed change shown in words), line (numbers), ctx} */
+function toilReact(r){TOIL_POP.push(r);clearTimeout(TOIL_POPT);TOIL_POPT=setTimeout(toilFlush,0)}
+function toilBack(host,n){if(!n)return;if(host==="th")apply({th:n});else if(host==="emp")apply({sung:n>0?1:-1});else if(host&&host!==S)affAdd(host,S,n)}
+function toilFlush(){if(!TOIL_POP.length||!S||S.dead)return;const L=TOIL_POP.splice(0).sort((a,b)=>Math.abs(b.n)-Math.abs(a.n));const top=L.slice(0,BAL.toil.popMax),rest=L.slice(BAL.toil.popMax);
+ top.forEach((r,i)=>{const bad=r.n<0;const who=toilWho(r.host==null?null:r.host)||"";const more=i===top.length-1&&rest.length?`<p class="past">Còn: ${rest.map(x=>`${x.name||toilWho(x.host)} — ${x.line}`).join(" · ")}.</p>`:"";
+  const h=`<p>${toilSay(r.k,r.ctx)}</p><p class="past">${r.line}.</p>${more}`;
+  const back=Math.ceil(Math.abs(r.n)*BAL.toil.sorryBack);
+  const opts=bad?[
+    {n:"Xin lỗi",fx:{},hideOut:true,go:()=>{toilBack(r.host,back);log(`Ta cúi đầu nhận lỗi; ${r.name||who} nguôi giận phần nào.`)}},
+    {n:"Cười trừ",fx:{},hideOut:true,go:()=>{log("Ta cười trừ cho qua.")}},
+    {n:"Đáp lại",fx:{suc:-2},hideOut:true,go:()=>{if(roll(BAL.toil.replyWin)){apply({danh:BAL.toil.replyDanh});log("Ta đáp lại khéo léo, người nghe gật gù.")}else{toilBack(r.host,-1);if(r.v)r.v.ghen=cl((r.v.ghen||0)+2,0,100);log("Ta đáp lại, không khí càng gượng.")}}}]
+   :[{n:r.host==="emp"||r.host==="th"||(r.host&&r.host.queen)?"Tạ ơn":"Cảm tạ",fx:{},hideOut:true,go:()=>{}}];
+  Q.push({t:TOIL_EV[r.k]||"Dung nhan",who:r.who,h,opts,hideOut:true,toilEv:r.k,art:`img/ev-toil-${r.k}.webp`/* banner by ab06, 640×480 */})});
+ try{render()}catch(e){}}
+/* hook the three places that apply a reaction */
+(function(){const ap1=aaThieuLeApply;aaThieuLeApply=function(host,f0){const L=leAttire(S,"",host);const r=ap1.apply(this,arguments);try{const t=L.toil;const f=f0||L.delta;const n=f.aff||0;
+  if(t&&n){const k=host==="th"?(n>0?"th-praise":"th-scold"):host==="emp"?(n>0?"emp-like":"emp-dislike"):host&&host.queen?(n>0?"hh-praise":"hh-scold"):null;
+   if(k){const who=host==="th"?pTH():host==="emp"?pEmp():pv(host);const nm=host==="emp"?"Sủng":`${toilWho(host)} thiện cảm`;
+    toilReact({k,who,host,n,name:toilWho(host),line:`${t.why.map(w=>w[0]).join(", ")}: ${host==="emp"?(n>0?"Sủng +1":"Sủng -1"):`${nm} ${n>0?"+":""}${n}`}${f.danh?`, Danh ${f.danh}`:""}`,ctx:{mk:t.mk,dress:t.dress}})}}}catch(e){console.error(e)}return r}})();
+(function(){const r0=toilRival;toilRival=function(v,doIt){const e=r0.apply(this,arguments);try{if(doIt&&e){const L=toilLook();const k=L.mk==="diem"&&!e.aff&&!e.g?"rival-tease":e.g?"rival-jealous":e.aff>0?"rival-praise":"rival-jealous";
+  toilReact({k,who:pv(v),host:v,v,n:e.g?-e.g:(e.aff||-1),name:v.name,line:e.txt,ctx:{mk:L.mk,dress:L.dv}})}}catch(x){}return e}})();
+(function(){const c0=toilCrowd;toilCrowd=function(doIt){const R0=doIt?liveRivals(false).filter(v=>!v.queen&&!v.out).map(v=>[v,v.ghen||0]):[];const e=c0.apply(this,arguments);try{if(doIt&&e&&e.n){
+  const top=R0.map(([v,g])=>[v,(v.ghen||0)-g]).sort((a,b)=>b[1]-a[1])[0];const L=toilLook();if(top)toilReact({k:"crowd-jealous",who:pv(top[0]),host:top[0],v:top[0],n:-e.n,name:top[0].name,line:`phi tần thấy ta ${e.why}: ghen +${e.n}`,ctx:{mk:L.mk,dress:L.dv}})}}catch(x){}return e}})();
+
 window.toilOpen=toilOpen;window.toilDress=toilDress;window.toilFx=toilFx;window.toilNpc=toilNpc;window.toilOcc=toilOcc;
 
 /* ---------- the look on her face, everywhere her portrait / figure is drawn (owner 15/11, coordinator 10:xxZ) ----------
