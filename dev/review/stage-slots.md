@@ -32,3 +32,16 @@ bằng dev/site/build_site.sh; assets.json lấy mục lục ảnh từ CDN). Nh
 - Thẻ chip triều còn ghi "với ngươi"/"quý ta" tùy bản — theo main.
 Ảnh: dev/shots/review/stage-slots/ (sau-*.jpg trên bản gộp; truoc-sua-844x390-n5-p3.jpg = lỗi 1 trước khi sửa); ảnh trước (main) của thợ ở
 dev/shots/stage-slots/before-*.
+
+## Vòng r6 (người duyệt R6, 2026-11-15) — nhánh review/stage-slots-r6
+- 8b4b51679 (stage-slots-merged) là con của main 70c792d41, nhưng main đã sang 114887bc1 rồi d50f5f772 → gộp lại hai lần (xung đột chỉ
+  index.html/sw.js/assets.json, dựng lại bằng dev/site/build_site.sh; main không đụng phần khuôn ô của j59/jk3).
+- Thử trên bản gộp cuối: stage-slots.js 1180x820@2 + 755x1000@2 — 5 ca đạt, 0 lỗi trang, sổ cũ (main d50f5f772) nạp "ok month 4";
+  coop-e2e 59/59 (bản chạy tạm dev/test/_coop-tmp.js chỉ nới hạn chờ 30 → 120 s vì máy tải ~60; tệp thử không đổi).
+- Sửa của người duyệt (lệnh điều phối, lỗi sếp 17:40Z, ảnh mẫu an-sung-ok.jpg): chip "Ân sủng ›" (khi cột phải chật) trên main mở
+  kpPop `.kascard` NỔI, rộng 300 px, tràn khỏi cột/sân khấu (ảnh r6-ansung-main-1180x820-popover.jpg) — lỗi có sẵn trên main (jk3,
+  đưa vào cùng act-audit/sub-odds), không do stage-slots. Nay: chạm → thẻ Ân sủng đầy đủ mở TẠI CHỖ trong cột phải, cùng bề rộng thẻ
+  người, nhãn trái / giá trị phải; tiêu đề "Ân sủng ‹" thu lại; cột cuộn trong sân khấu khi mở; tự thu khi đổi nơi/buổi/tháng. KIT §33 ghi.
+  Đo bằng dev/test/ansung-inplace.js (ép cột chật bằng thẻ cao) ở 755x1000, 1000x755, 1180x820, 1366x1024, 844x390: không popover,
+  bề rộng thẻ Ân sủng = bề rộng thẻ người (147/119/135/138/119 px), giá trị sát mép phải 0 px, 0 chữ bị cắt, cột trong sân khấu,
+  0 tràn ngang, thu lại được. Ảnh r6-ansung-fix-*.jpg (thẻ người cao bất thường là do ép chật trong bài thử).
