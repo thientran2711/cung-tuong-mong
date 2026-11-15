@@ -172,3 +172,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (06:00Z) Owner: add more wear slots with real rules (hoa tai, ngọc bội, túi thơm, khăn che mặt…), using existing item art; rank + luxury rules per slot.
 - (06:05Z) Owner: stage figures taller still → KIT_FIG woman .92, men ×1.07; don't shrink for 'her+1' — figures may stand behind the plaque column.
 - (06:15Z) Owner approved figure ratio of dev/owner-shots/1115-fig-ok.jpg (iPad 1180 Ngọc Thanh các, ≈.76–.80 of stage) as the standard → KIT_FIG women at that ratio everywhere (supersedes .92).
+- (06:20Z) Owner: no grey boxes over locked places on Dư đồ — same label style + lock mark; actions in a tap card; no cut text.
