@@ -213,3 +213,4 @@ Notes: `cdn_sync.py --pull` does NOT refresh img/_index.json reliably (stale loc
 - Beats batch D (16): ch_co c3-x1, ch_benh (7), ch_ho s1-t1 live + wired, 0 missing. 128 of 295 done, 167 left.
 - Beats batch E (16): ch_ho x1, ch_bi (7), thd_tho (7), thd_sach s1 live + wired, 0 missing. 144 of 295 done, 151 left. Scenes written (not all drawn yet): thd_sach..thd_hoc, cnv_chu, cnv_ban, cnv_mat, cnv_ma.
 - Beats batch F (16): thd_sach s2-x1, thd_tro (7), thd_hoc s1 s2 c1 live + wired, 0 missing. 160 of 295 done, 135 left. Queued gens (ids in spending.txt, fetch with sgo.sh): thd_hoc c2-x1, cnv_chu (7), cnv_ban s1-c3.
+- Beats batch G (16): thd_hoc c2-x1, cnv_chu (7), cnv_ban s1-c3 live + wired, 0 missing. 176 of 295 done, 119 left. Queued (ids in spending.txt): cnv_ban t1 x1, cnv_mat (7), cnv_ma (7). Scenes written, not drawn: s_than, s_thu, s_hoa, s_su.

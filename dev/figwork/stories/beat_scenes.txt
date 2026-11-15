@@ -190,3 +190,31 @@ cnv_ma:c2|0|a broken porcelain vase on the floor, several palace maids pointing 
 cnv_ma:c3|0|a small pouch of silver lies on a table in an empty room, a young palace maid standing beside it with her hands folded, not touching it
 cnv_ma:t1|1|an old matron and a young palace maid talk in whispers in a storeroom at night by a single candle
 cnv_ma:x1|0|a line of palace maids stand in a household office courtyard being examined, a strict elderly matron seated at a table judging
+s_than:s1|0|a young eunuch, a handsome youth of about eighteen in grey robes, kneels before a consort in her courtyard, looking up at her earnestly
+s_than:s2|0|a palace maid whispers a report to a consort in a corridor, in the distance a young eunuch walks beside an older eunuch
+s_than:c1|0|a young eunuch in grey robes bows low before a consort seated in her hall, asking to serve her
+s_than:c2|0|two consorts meet on a garden bridge, one smiling knowingly as she speaks, the other calm
+s_than:c3|0|in the imperial kitchen a young eunuch is held by the arm by a stern head cook, a tray of fine dishes on the table, other kitchen staff watching
+s_than:t1|1|at night a young eunuch kneels before a consort in her chamber by candlelight, confessing, his head bowed
+s_than:x1|0|a consort stands calmly in a hall while another consort presents a folded note to a senior eunuch, a young eunuch kneeling at the side
+s_thu:s1|0|a consort bends to pick up a folded letter lying on the stone path of the imperial garden among fallen petals
+s_thu:s2|0|from behind a flowering bush a palace maid watches another maid anxiously searching the ground of the garden
+s_thu:c1|1|a consort stands at her window at night looking at a nearly full moon, a folded letter in her hand
+s_thu:c2|0|two consorts stroll in the imperial garden, one turning to ask the other a probing question
+s_thu:c3|1|a consort finds a second folded letter slipped under her door at night, her maid holding a lantern
+s_thu:t1|1|a consort sits at her desk at night with two folded letters and a small box laid out before her, thinking
+s_thu:x1|0|a folded letter lies alone on a polished desk in a consort's study, a consort seated looking at it, morning light
+s_hoa:s1|1|a palace hall burning at night, flames and smoke rising over the rooftops, eunuchs and maids carrying water buckets, a consort watching from a courtyard
+s_hoa:s2|1|a rescued palace maid wrapped in a blanket, sooty but unhurt, whispers to a consort in a courtyard at night, smoke in the background
+s_hoa:c1|0|a consort stands calmly while another consort points at her accusingly before the stern Empress in a hall
+s_hoa:c2|0|a consort and her maid observe from behind a pillar a eunuch in grey robes carrying oil jars in a back courtyard
+s_hoa:c3|0|the Emperor views the charred ruins of a palace hall, workmen clearing beams, a consort beside him
+s_hoa:t1|1|a consort in a ruined archive at night holds up a lantern to scorched shelves of old ledgers
+s_hoa:x1|0|the Emperor on his throne summons several consorts and a kneeling eunuch in a hall, a consort standing calm
+s_su:s1|0|at a palace banquet a fair-haired foreign envoy in a long dark travelling coat bows in a strange foreign manner, the Emperor and court watching curiously
+s_su:s2|0|a consort holds a small ornate European hand mirror, a gift, seeing her reflection, a fair-haired foreign envoy bowing nearby
+s_su:c1|0|a consort listens attentively to an interpreter in Ming robes standing between the Emperor and a fair-haired foreign envoy
+s_su:c2|0|a fair-haired foreign envoy kneels before the Emperor in the throne hall, ministers in Ming robes frowning in disapproval
+s_su:c3|0|a large ornate golden European mechanical clock with a stopped dial, without numerals, on a table in a palace hall, a consort and eunuchs looking at it
+s_su:t1|0|a fair-haired foreign envoy and a consort stand at a table where a blank scroll document lies, a brush ready
+s_su:x1|1|a farewell banquet at night, the Emperor turns to ask a consort beside him, a fair-haired foreign envoy raising his cup
