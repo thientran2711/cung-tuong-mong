@@ -930,6 +930,10 @@ header = kit section title + totals (Sắc/Danh chips · "Xa xỉ <total>" neutr
 Slots auto-fit (≥ 80 px columns, wrap to a 2nd row when needed). Each slot = kitItem "slot" (same grade ground + frame as the bag).
 TIDY RULE (owner): under a FILLED slot at most 2 short lines — item name in its grade colour + main effect chip(s) (+ "N th" for a timed dress)
 + a small red ⚠ only if vượt phẩm (law; reason in the tooltip; luxury is never hinted). EMPTY slot: the slot name only + the type silhouette (`ghost`). Full facts only on tap.
+ROW ALIGNMENT (owner 15/11 05:45Z OCD rule; review/pets-fix): every slot is FOUR fixed rows on a CSS subgrid — picture · name (`.keqnm`) ·
+chips (`.keqfx`) · note line (`.keqnote`: the `.keql2` part of `mini`, e.g. "theo hầu · Khỏe", "còn N tháng", ⚠). `keqMiniSplit(mini)` splits a
+slot's `mini` at its `.keql2`, so names, chip lines and note lines sit on one line across a row even when one slot has a chip and its
+neighbour has none (was: the followed pet's status line 17 px lower than the others). Measured by dev/test/pets-fix.js (row.pets / row.tutrang ≤ 1 px).
 Tư trang slots = the rules' wear slots (`IT.sl`, j8 wear()/wearBonus/vpItems/tố vượt phẩm are generic on it):
 Cài tóc (hair) · Đeo tay (wrist) · Đeo eo (waist: ngọc bội ngự ban, Danh +1, still never given/sold) · Túi thơm (scent: túi thơm thêu, Sắc +1,
 worn instead of used up; a tainted sachet keeps hurting via taintHit) · Y phục (áo may từ vải, `S.dress`, 3 tháng; the slot shows the GARMENT:
@@ -981,6 +985,11 @@ Used by: Nội vụ phủ "Nhờ thái giám mua đồ" (`kitShopNvp`, seller `i
 Next buying screens (Tư trang buy, gifts, peddler) must call kitShop, not dialog option cards.
 Test: `node dev/test/shop-fix.js <build url> <outdir> [WxH@dpr,…]` (box = plain person dialog, row alignment, buy ×2 → bag ×2, sell, item card,
 ✕). Shots before / after: dev/shots/shop-fix/ (755x1000, 1000x755, 1180x820, 844x390).
+- (review/pets-fix) A shop / pick person dialog (`kitModal({shop})` or `kitModal({pick:true})`) is not an event: it never gets the event band
+  picture (kitEvArt returns null for it; a title word such as "tuyết" used to pull the snow-day picture). `pick:true` = the same dialog without
+  a shop grid: users — the pet care screen (jpetcare: the pet is the "person" of the left column, `stage:[{__fig, __cap, __role}]`; right column
+  = kitStatRow care cells, kitRows, kitGameFrame mini-game with `.kgbtn` pieces, act cards; closed by the kit ✕) and the pet shop (jpet petShop,
+  same seller and "???" naming as kitShopNvp).
 ### 28.13e ALIGNED TILE GRID + BUY ON THE TILE (owner 11/15 shop-fix, "everything on one line") — `.kshg` / `.kshc` (jinv) — for every grid of goods
 Any grid of goods with a price (shop, later gifts, peddler, rewards to pick) uses this tile, never a free-flowing column:
 - Grid: equal columns `repeat(auto-fill, minmax(118px, 1fr))` (124 px ≥ 1000 px wide); rows `max-content`, so every tile in a row has

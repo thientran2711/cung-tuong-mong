@@ -184,7 +184,12 @@ const KEQ={reg:{}};
 function kitEquipSlots(o){o=o||{};const key=o.key||"eq";KEQ.reg[key]=o;const L=o.slots||[];
  return `<div class="keq" data-keq="${key}" style="--keqn:${L.length}"><div class="keqh"><h4 class="kpst">${o.title||"Bên mình"}</h4><div class="keqsum">${o.sum||""}</div></div><div class="keqs">`+
   L.map((x,i)=>`<div class="keqc">${kitItem(x.item?{src:x.item.src,name:x.item.name,grade:x.item.grade,lux:x.item.lux,size:"slot",tip:x.item.tip||x.item.name,data:`data-keqk="${key}" data-keqi="${i}" role="button" tabindex="0"`}
-   :{empty:true,size:"slot",ghost:x.ghost,tip:`${x.label}: trống`,data:`data-keqk="${key}" data-keqi="${i}" role="button" tabindex="0"`})}${x.item?`<b class="keqnm" style="color:${KIT_GRADE[x.item.grade|0].c}">${x.item.name}</b>${x.mini?`<span class="keqfx">${x.mini}</span>`:""}`:`<b class="keql">${x.label}</b>`}</div>`).join("")+`</div></div>`}
+   :{empty:true,size:"slot",ghost:x.ghost,tip:`${x.label}: trống`,data:`data-keqk="${key}" data-keqi="${i}" role="button" tabindex="0"`})}${x.item?`<b class="keqnm" style="color:${KIT_GRADE[x.item.grade|0].c}">${x.item.name}</b>${keqMiniSplit(x.mini)}`:`<b class="keql">${x.label}</b>`}</div>`).join("")+`</div></div>`}
+/* ROW ALIGNMENT (owner 15/11 05:45Z OCD rule; review/pets-fix): each slot is 4 fixed rows on a CSS subgrid — picture · name · chips · note line
+   (.keql2: "theo hầu · Khỏe", "còn N tháng", ⚠) — so across a row of slots the names, the chip lines and the note lines sit on one line even when
+   one slot has a chip and its neighbour has none (was: the followed pet's status line 17 px lower). */
+function keqMiniSplit(m){m=m||"";const i=m.indexOf('<span class="keql2">');const chips=i<0?m:m.slice(0,i),note=i<0?"":m.slice(i);
+ return `<span class="keqfx">${chips}</span><span class="keqnote">${note}</span>`}
 document.addEventListener("click",e=>{const s=e.target.closest&&e.target.closest("[data-keqi]");if(!s)return;e.stopPropagation();const o=KEQ.reg[s.dataset.keqk];const x=o&&o.slots&&o.slots[+s.dataset.keqi];if(x&&o.onPick)o.onPick(x)},true);
 document.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.target.dataset&&e.target.dataset.keqi!=null){e.preventDefault();e.target.click()}});
 (function(){const st=document.createElement("style");st.id="keq-css";st.textContent=`
@@ -198,6 +203,9 @@ document.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.tar
 @media (max-width:899px){.keq{--keqsz:76px}.keq .keqs{gap:8px}}
 .keq .keqc{display:flex;flex-direction:column;align-items:center;gap:2px;min-width:0;text-align:center}
 .keq .keqc>.kitem-slot{width:min(var(--keqsz,96px),100%)}
+@supports (grid-template-rows:subgrid){.keq .keqs{grid-auto-rows:auto;align-items:start}.keq .keqc{display:grid;grid-row:span 4;grid-template-rows:subgrid;row-gap:2px;justify-items:center;align-content:start}
+ .keq .keqc>.keqfx:empty,.keq .keqc>.keqnote:empty{min-height:0}}
+.keq .keqnote{display:flex;justify-content:center;min-width:0}.keq .keqnote>.keql2{flex-basis:auto}
 .keq .keqrows{align-self:stretch;text-align:left;margin-top:4px;padding-top:4px;border-top:1px dashed var(--k-hair,#e6d3ac)}
 .keq .keqrows .kpkb{font-size:.74rem}.keq .keqrows .krl{white-space:nowrap}
 .keq .keqhint{font-size:.7rem;line-height:1.25;color:var(--ink2,#7a6a58);font-style:italic;margin-top:2px}

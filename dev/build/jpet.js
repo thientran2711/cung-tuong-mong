@@ -230,7 +230,7 @@ function petRows(P,i){const T=petT(P);const D=[`${PET_SN[T.st]} +${1+(T.sacX||0)
  const G=[`Xa xỉ ${petLux(P.t)} (theo hầu tính đủ, ở tẩm cung tính nửa)`,P.from?P.from:"",`khí lực ${Math.max(0,Math.round(P.care||0))}/100`];if(T.rescue)G.push("chỉ đỡ được một lần");
  return kitRows([["Phẩm",`<span class="ef n" style="color:${KIT_GRADE[T.tr].c};font-weight:700">${PET_TIER[T.tr]}</span>`],["Được",D,"g"],["Mất",M,"r"],["Ghi chú",G.filter(Boolean),"n"]])}
 function petPick(x){if(x.item){const i=x.i,P=tsbPets(S)[i];if(!P)return;const T=petT(P),t1=whyTime(1),B=[];
-  B.push(pbtn(`data-pet="care" data-i="${i}"`,`Chăm ${T.n.replace(/^./,c=>c.toLowerCase())}`,`tốn: 1 khắc · thành: khí lực ${T.n.replace(/^./,c=>c.toLowerCase())} lên 95 · Sức +2 (khuây khỏa)`,t1||((P.care||0)>=90?"đang khỏe, chưa cần chăm":"")));
+  B.push(pbtn(`data-pet="care" data-i="${i}"`,`Chăm ${T.n.replace(/^./,c=>c.toLowerCase())}`,`thành: mở màn chăm: cho ăn, tắm chải, chơi (mỗi việc 1 khắc) · No, Sạch, Vui, Tình cảm tăng`,""));
   if(S.petOn!==i){const cur=tsbPetOn(S);B.push(pbtn(`data-pet="follow" data-i="${i}"`,`Cho ${T.n.replace(/^./,c=>c.toLowerCase())} theo hầu`,`thành: ${PET_SN[T.st]} +${1+(T.sacX||0)} · Xa xỉ của nó tính đủ${cur?` · Mất: ${petT(cur).n} về tẩm cung, ${PET_SN[petT(cur).st]} -${1+(petT(cur).sacX||0)}`:""}`,""))}
   const fromHi=/emp|hunt|trib/.test(P.src||"")||P.from==="Hoàng thượng ban",fromTh=P.src==="th";
   B.push(pbtn(`data-pet="free" data-i="${i}"`,"Gửi về Ngự thú viên",`thành: bớt Xa xỉ ${S.petOn===i?petLux(P.t):Math.round(petLux(P.t)/2)}${T.up?` · thôi tốn Bạc ${T.up} mỗi tháng`:""} · Mất: ${T.n}${fromHi?" · Hoàng thượng phật ý, Sủng -3":fromTh?" · Thái hậu quý ngươi -8":P.src==="hh"?" · Hoàng hậu quý ngươi -3":""}`,""));
@@ -251,10 +251,10 @@ function petShopItems(){const sfx=typeof petcStageSrc==="function"?"-non":"";
   return{k,src:petSrc(k,0,sfx),src512:petSrc(k,1,sfx),name:T.n,sub:`${PET_TIER[T.tr]} · Xa xỉ ${petLux(k)}`,grade:T.tr,lux:petLux(k),price:T.pr,
    eff:`${word(o)} · ${PET_SN[T.st]} +${1+(T.sacX||0)} · ${T.use}`,rows,stock:1,have:()=>0,why:t1?"Hết khắc":(tsbPets(S).some(P=>P.t===k)?"Đã có":""),
    onBuy:(x,q)=>{for(let i=0;i<q;i++)if(!petBuyOne(k))break}}})}
-function petShop(){const c=S.court&&S.court.ped;
+function petShop(){const c=S.court&&S.court.ped;let nm=c&&c.name?c.name:"";try{if(nm&&typeof k61Named==="function"&&!k61Named(c))nm="???"}catch(e){}/* same seller + naming as kitShopNvp */
  return kitShop({key:"pet",title:"Nhờ thái giám tìm thú nuôi",carry:Math.max(0,petMax(S)-tsbPets(S).length),
   info:`<p>Thái giám Nội vụ phủ khom lưng: “Thú nhỏ ngoài cung, nô tài tìm được mấy loài này, xin nương nương chọn.” Còn ${petMax(S)-tsbPets(S).length} ô; con quý hiếm không mua được: Hoàng thượng, Thái hậu, Hoàng hậu ban, Thu săn tháng chín, cống phẩm tháng giêng.</p>`,
-  stage:[c&&c.name?c:{__fig:"img/fig-eunuch-ndp-tray.webp",__cap:"",__role:"Thái giám Nội vụ phủ",age:28,sex:"m"}],items:petShopItems(),money:()=>S.bac})}
+  stage:[{__fig:"img/fig-eunuch-ndp-tray.webp",__cap:nm,__role:"Thái giám Nội vụ phủ",age:28,sex:"m"}],items:petShopItems(),money:()=>S.bac})}
 function petBuyO(k){const T=PET[k];return cl(Math.round([78,62,38][T.tr]+(S.mat||0)*[3,4,5][T.tr]),5,95)}
 function petDo(k,b){if(!S||S.dead||Q.length)return;const i=+b.dataset.i;
  if(k==="care"){const P=tsbPets(S)[i];if(!P||!can(1))return;spend(1);P.care=95;P.warn=0;apply({suc:2});log(`Ngươi tự tay chăm ${petT(P).n.replace(/^./,c=>c.toLowerCase())}.`)}
@@ -272,6 +272,7 @@ function petTipShow(){try{kitModal({kind:"rule",title:"Thú nuôi",sub:"lời d�
  "Mỗi con có phẩm như đồ (Thường, Tinh phẩm, Trân phẩm, Tuyệt phẩm, Ngự tứ: thần thú) và Xa xỉ N. Thú nuôi tính vào Xa xỉ như đồ đang mang: con theo hầu tính đủ, con ở tẩm cung tính nửa.",
  "Nuôi thứ quá xa xỉ so với thân phận: hậu cung ghen ghét, bề trên không vừa ý. Mức vừa phải không ai nói ra, chỉ biết qua chuyện xảy đến.",
  "Một con theo hầu: thêm 1 Tư chất. Con nào cũng có công dụng riêng và mặt trái riêng; chạm vào ô để xem.",
- "Mỗi tuần thú mất khí lực; chăm tốn 1 khắc (có kẻ hầu tin cẩn thì đỡ). Bỏ bê tới kiệt thì mất. Có con tốn bạc nuôi mỗi tháng.",
- "Thần thú rất hiếm, chỉ đỡ được một mạng cho chủ, một lần."],btn:"Đã hiểu"})}catch(e){}}
+ "Thú lớn dần: Non → Thiếu niên → Trưởng thành → Linh thú; càng lớn công dụng càng mạnh. Lớn nhờ thời gian nuôi và Tình cảm.",
+ "Mỗi tuần thú đói, bẩn, buồn dần (No, Sạch, Vui, Tình cảm). Chạm vào thú → Chăm: cho ăn, tắm, chơi, mỗi việc 1 khắc; có kẻ hầu tin cẩn thì giao được. Bỏ bê lâu: biếng ăn, ốm, rồi bỏ đi. Có con tốn bạc nuôi mỗi tháng.",
+ "Thần thú Ngự tứ rất hiếm, chỉ khi đã thành Linh thú mới đỡ được một mạng cho chủ, một lần."],btn:"Đã hiểu"})}catch(e){}}
 /* the clock: jtsb's endTurn wrapper calls tsbPetWeek / tsbPetMonth */

@@ -46,8 +46,7 @@ function petcGrow(p,P,quiet){const n=petcNext(P);if(!n||n.ageNow<n.age||(P.aff||
  if(p===S&&!quiet&&!tsbBot()){const T=petT(P);const E=petcEffects(P);setTimeout(()=>{try{petcFx();kitModal({kind:"notice",title:`${T.n} đã lớn: ${BAL.pet.stages[P.stg]}`,sub:PET_TIER[T.tr],
    itemPic:petcPic(P,true),facts:[`Công dụng bây giờ: ${E.join(", ")||"làm cung thêm vui"}.`,P.stg<3?`Lớn tiếp: ${petcNextTxt(P)}.`:"Đã là Linh thú: công dụng mạnh nhất."]})}catch(e){}},60)}
  try{log(`${p===S?"":NM(p)+": "}${petT(P).n} lớn lên thành ${BAL.pet.stages[P.stg]}.`)}catch(e){}return true}
-function petcPic(P,big){const a=petcStageSrc(P,1);const T=petT(P);
- return `<span class="kitem kitem-lg kig${T.tr}${T.tr===4?" kitem-nt":""}" style="--ig:${KIT_GRADE[T.tr].g};--ic:${KIT_GRADE[T.tr].c}${KIT_GRADE[T.tr].r?";--ir:"+KIT_GRADE[T.tr].r:""}"><span class="kitb"><img src="${a.src}" alt="" onerror="if(this.dataset.f){this.remove()}else{this.dataset.f=1;this.style.transform='scale(${a.scale})';this.src='${a.fb}'}">${T.tr===4?'<i class="kits" aria-hidden="true">Ngự</i>':""}</span></span>`}
+function petcPic(P,big){const a=petcStageSrc(P,1);const T=petT(P);return kitItem({src:a.src,name:"",grade:T.tr,size:"lg"}).replace('<span class="kitn"></span>','')}
 function petcFx(){try{if(typeof sfx==="function")sfx("chime")}catch(e){}}
 /* ---------- the week: decay, servant care, NPC care, omen → sick → gone; growth ---------- */
 petWeek=function(){for(const p of [S].concat(liveRivals(true))){const L=tsbPets(p);if(!L.length)continue;const me=p===S;
@@ -67,43 +66,59 @@ petWeek=function(){for(const p of [S].concat(liveRivals(true))){const L=tsbPets(
    petcGrow(p,P,!me)}}};
 /* ---------- the care screen ---------- */
 const PETC={i:-1,game:null};
-function petcBars(P){const b=(l,v,c)=>`<div class="kpcb"><span>${l}</span><i style="--v:${Math.round(v)}%;--c:${c}"></i><b>${Math.round(v)}</b></div>`;
- return b("No",P.full,"#c98a3a")+b("Sạch",P.clean,"#4f8fb8")+b("Vui",P.joy,"#d46a8a")+b("Tình cảm",P.aff,"#b8434a")}
-function petcOpen(i){const P=tsbPets(S)[i];if(!P)return;petcInit(P);PETC.i=i;let ov=document.getElementById("kpetcare");if(!ov){ov=document.createElement("div");ov.id="kpetcare";ov.className="kpc";document.body.appendChild(ov)}petcDraw()}
-function petcClose(){const ov=document.getElementById("kpetcare");if(ov)ov.remove();PETC.i=-1;PETC.game=null;try{render()}catch(e){}}
-function petcDraw(msg){const ov=document.getElementById("kpetcare");const P=tsbPets(S)[PETC.i];if(!ov||!P){petcClose();return}const T=petT(P),s=petStage(P),a=petcStageSrc(P,1);const t1=whyTime(BAL.pet.khac);const m=tsbMaid(S);
+/* THE CARE SCREEN = the KIT 32.7 person dialog (same frame as the shop, kitShop 28.13d; review/pets-fix, KIT-first rule): the PET is the
+   "person" — its stage picture full height in the left column at the kit figure scale, name chip under it; RIGHT: the four care numbers as
+   kit stat cells with bars (kitStatRow, KIT 32.1), what it does now / next stage (kitRows), the mini-game in the kit mini-game frame
+   (kitGameFrame, KIT 13: pieces are .kgbtn), then the act cards (pbtn). Closed by the kit ✕ (32.10). No style of its own. */
+function petcBars(P){return kitStatRow([{cells:[["No",P.full],["Sạch",P.clean],["Vui",P.joy],["Tình cảm",P.aff]].map(([l,v])=>kitStatCell("",l,Math.round(v),{bar:Math.round(v),title:`${l} ${Math.round(v)}/100`}))}])}
+function petcFig(){return document.querySelector("#modal .kpsubj.kes .kesimg")||document.querySelector("#modal .kpsubj.kes")}
+function petcOpen(i){const P=tsbPets(S)[i];if(!P)return;petcInit(P);PETC.i=i;PETC.game=null;const T=petT(P),s=petStage(P),a=petcStageSrc(P,1);
+ try{if(!document.getElementById("modal").hidden)closeModal()}catch(e){}
+ kitModal({kind:"info",title:`Chăm ${T.n.replace(/^./,c=>c.toLowerCase())}`,sub:`${BAL.pet.stages[s]} · ${PET_TIER[T.tr]}`,pick:true,
+  stage:[{__fig:a.src,__cap:T.n,__role:BAL.pet.stages[s],age:20,sex:"f",__pet:1}],html:`<div id="kpcare">${petcBody(P)}</div>`,onClose:()=>{PETC.i=-1;PETC.game=null;try{render()}catch(e){}}})}
+function petcClose(){PETC.i=-1;PETC.game=null;try{closeModal()}catch(e){}try{render()}catch(e){}}
+function petcBody(P,msg){const T=petT(P);const t1=whyTime(BAL.pet.khac);const m=tsbMaid(S);
  const g=(k,n,x)=>pbtn(`data-petc="${k}"`,n,`tốn: ${BAL.pet.khac} khắc · ${x}`,t1);
- ov.innerHTML=`<div class="kpcbox"><div class="kpch"><b>${T.n}</b><span class="kchip n">${BAL.pet.stages[s]}</span><span class="kchip n" style="color:${KIT_GRADE[T.tr].c}">${PET_TIER[T.tr]}</span><button class="kbtn alt kpcx" data-petc="close">Xong</button></div>
-  <div class="kpcstage" id="kpcstage"><img id="kpcimg" src="${a.src}" style="--sc:1" alt="" draggable="false" onerror="if(this.dataset.f){this.remove()}else{this.dataset.f=1;this.style.setProperty('--sc','${a.scale}');this.src='${a.fb}'}"></div><div id="kpcgame"></div>
-  <div class="kpcbars">${petcBars(P)}</div>
-  <p class="kpcmsg">${msg||`Công dụng: ${petcEffects(P).join(", ")||"làm cung thêm vui"}. Lớn tiếp: ${petcNextTxt(P)}.`}</p>
-  <div class="rbtn kpcacts">${g("feed","Cho ăn",`thành: No tăng, Tình cảm tăng · kéo đúng món ${T.n.toLowerCase()} ăn vào nó`)}${g("bath","Tắm, chải lông","thành: Sạch tăng · vuốt đều tay 5 lần")}${g("play","Chơi","thành: Vui tăng · chạm khi đồ chơi qua giữa (3 lần)")}
-   ${m?pbtn(`data-petc="maid"`,`Giao ${m.name} chăm`,`thành: ${BAL.pet.maidW} tuần, mỗi tuần đỡ một nửa phần hao · kèm: không thêm tình cảm`,P.maidW>tsbWk()?`${m.name} đang chăm`:""):""}</div></div>`}
+ return petcBars(P)+kitRows([["Công dụng",petcEffects(P).length?petcEffects(P):["làm cung thêm vui"],"g"],["Lớn tiếp",[petcNextTxt(P)],"n"]].concat(msg?[["Vừa rồi",[msg],"n"]]:[]))+
+  `<div id="kpcgw"></div><div class="rbtn">${g("feed","Cho ăn",`thành: No tăng, Tình cảm tăng · chọn đúng món ${T.n.toLowerCase()} ăn, kéo vào nó`)}${g("bath","Tắm, chải lông","thành: Sạch tăng · vuốt dọc lông nó 5 lần, đều tay")}${g("play","Chơi","thành: Vui tăng, Sức +1 · chạm đúng quả cầu đang sáng (3 lần)")}`+
+  (m?pbtn(`data-petc="maid"`,`Giao ${m.name} chăm`,`thành: ${BAL.pet.maidW} tuần, mỗi tuần đỡ một nửa phần hao · kèm: không thêm tình cảm`,P.maidW>tsbWk()?`${m.name} đang chăm`:""):"")+`</div>`}
+function petcDraw(msg){const box=document.getElementById("kpcare");const P=tsbPets(S)[PETC.i];if(!box||!P){petcClose();return}PETC.game=null;box.innerHTML=petcBody(P,msg);try{if(typeof kitFix==="function")kitFix(box)}catch(e){}}
+/* the game area: the kit mini-game frame inside the dialog; returns its box */
+function petcGameBox(title,how){const w=document.getElementById("kpcgw");if(!w)return null;w.innerHTML=kitGameFrame({art:"Chăm",title,how,id:"kpcgame"});
+ try{w.scrollIntoView({block:"nearest"})}catch(e){}return document.getElementById("kpcgame")}
 function petcGain(kind,score){const P=tsbPets(S)[PETC.i];if(!P)return;const G=BAL.pet.gain[kind],v=Math.round(G[0]+(G[1]-G[0])*score),f={feed:"full",bath:"clean",play:"joy"}[kind];
  P[f]=cl(P[f]+v,0,100);const af=Math.round(BAL.pet.affGain[0]+(BAL.pet.affGain[1]-BAL.pet.affGain[0])*score);P.aff=cl(P.aff+af,0,100);if(kind==="play")apply({suc:1});petcSync(P);P.bad=0;
- const T=petT(P);const grew=petcGrow(S,P,false);petcDraw(`${T.n}: ${({full:"No",clean:"Sạch",joy:"Vui"})[f]} +${v}, Tình cảm +${af}${score>=.8?" · rất vừa ý":score<.35?" · chưa khéo":""}.`);
- log(`Ngươi ${({feed:"cho",bath:"tắm cho",play:"chơi với"})[kind]} ${T.n.toLowerCase()} (${({full:"No",clean:"Sạch",joy:"Vui"})[f]} +${v}, Tình cảm +${af}).`)}
-/* game 1: drag the right food onto the pet */
+ const T=petT(P);const s0=petStage(P);const grew=petcGrow(S,P,false);const msg=`${({full:"No",clean:"Sạch",joy:"Vui"})[f]} +${v}, Tình cảm +${af}${score>=.8?" · rất vừa ý":score<.35?" · chưa khéo":""}.`;
+ log(`Ngươi ${({feed:"cho",bath:"tắm cho",play:"chơi với"})[kind]} ${T.n.toLowerCase()} (${({full:"No",clean:"Sạch",joy:"Vui"})[f]} +${v}, Tình cảm +${af}).`);
+ if(grew&&petStage(P)!==s0){petcClose();return}/* the "đã lớn" card (petcGrow) comes next */petcDraw(msg)}
+/* game 1: pick the food this species eats and drag it onto the pet (or tap the food, then the pet) */
 function petcFeed(){const P=tsbPets(S)[PETC.i];const ok=PETC_FOOD[petcKind(P.t)];const L=[ok].concat(PETC_FOODS.filter(x=>x!==ok).sort(()=>Math.random()-.5).slice(0,2)).sort(()=>Math.random()-.5);
- const box=document.getElementById("kpcgame");box.innerHTML=`<div class="kpcfood">${L.map(x=>`<button class="kpcf" data-food="${x}">${x}</button>`).join("")}</div><div class="kpchint">Kéo món nó ăn vào nó (hay chạm món rồi chạm nó)</div>`;
- let sel=null,tries=0;const done=x=>{tries++;if(x===ok){petcGain("feed",tries===1?1:.5)}else if(tries>=2){petcGain("feed",.15)}else{box.querySelector(".kpchint").textContent=`${P.t?petT(P).n:""} quay đi, không ăn ${x}. Thử món khác.`}};
- box.querySelectorAll(".kpcf").forEach(b=>{b.addEventListener("pointerdown",e=>{e.preventDefault();sel=b.dataset.food;const g=b.cloneNode(true);g.className="kpcf kpcdrag";document.body.appendChild(g);
-   const mv=ev=>{g.style.left=ev.clientX+"px";g.style.top=ev.clientY+"px"};mv(e);const up=ev=>{removeEventListener("pointermove",mv);removeEventListener("pointerup",up);g.remove();const im=document.getElementById("kpcimg");
-    const r=(im||box).getBoundingClientRect();if(ev.clientX>=r.left&&ev.clientX<=r.right&&ev.clientY>=r.top&&ev.clientY<=r.bottom)done(sel)};addEventListener("pointermove",mv);addEventListener("pointerup",up)})});
- const stg=document.getElementById("kpcstage");if(stg)stg.onclick=e=>{if(sel&&!e.target.closest(".kpcf"))done(sel)}}
-/* game 2: five even strokes over the pet */
-function petcBath(){const box=document.getElementById("kpcgame"),st=document.getElementById("kpcstage");box.innerHTML=`<div class="kpchint">Vuốt dọc lông 5 lần, đều tay (0/5)</div>`;const lens=[];let a=null;
- const dn=e=>{e.preventDefault();try{st.setPointerCapture(e.pointerId)}catch(x){}a={x:e.clientX,y:e.clientY}},up=e=>{if(!a)return;const d=Math.hypot(e.clientX-a.x,e.clientY-a.y);a=null;if(d<20)return;lens.push(d);box.querySelector(".kpchint").textContent=`Vuốt dọc lông 5 lần, đều tay (${lens.length}/5)`;
-  if(lens.length>=5){st.removeEventListener("pointerdown",dn);st.removeEventListener("pointerup",up);const m=lens.reduce((x,y)=>x+y)/5,sd=Math.sqrt(lens.reduce((x,y)=>x+(y-m)*(y-m),0)/5);petcGain("bath",cl(1-sd/m*1.6,0,1))}};
- st.addEventListener("pointerdown",dn);st.addEventListener("pointerup",up)}
-/* game 3: tap when the toy crosses the middle, 3 times */
-function petcPlay(){const box=document.getElementById("kpcgame");box.innerHTML=`<div class="kpcbar"><i class="kpcz"></i><b class="kpcball"></b></div><div class="kpchint">Chạm khi quả cầu qua giữa (0/3)</div>`;
- const ball=box.querySelector(".kpcball");let t0=performance.now(),n=0,hits=0,raf=0,stop=false;const pos=t=>.5+.5*Math.sin((t-t0)*.004*(1+n*.25));
- const fr=t=>{if(stop)return;ball.style.left=(pos(t)*100)+"%";raf=requestAnimationFrame(fr)};raf=requestAnimationFrame(fr);
- const tap=e=>{if(stop)return;e.preventDefault();const p=pos(performance.now());if(Math.abs(p-.5)<.1)hits++;n++;box.querySelector(".kpchint").textContent=`Chạm khi quả cầu qua giữa (${n}/3) · trúng ${hits}`;
-  if(n>=3){stop=true;cancelAnimationFrame(raf);box.removeEventListener("pointerdown",tap);petcGain("play",hits/3)}};box.addEventListener("pointerdown",tap);PETC.peek=()=>pos(performance.now())}
+ const box=petcGameBox("Cho ăn",`Kéo món ${petT(P).n.toLowerCase()} ăn vào nó (hay chạm món rồi chạm nó). Sai hai lần thì nó bỏ ăn.`);if(!box)return;PETC.game="feed";
+ box.innerHTML=`<div class="rbtn">${L.map(x=>`<button type="button" class="kgbtn" data-food="${x}">${x}</button>`).join("")}</div>`;
+ let sel=null,tries=0,over=false;const done=x=>{if(over)return;tries++;if(x===ok){over=true;petcGain("feed",tries===1?1:.5)}else if(tries>=2){over=true;petcGain("feed",.15)}
+  else{box.querySelectorAll(".kgbtn").forEach(b=>b.classList.toggle("on",false));const w=box.querySelector(`[data-food="${x}"]`);if(w)w.disabled=true;sel=null}};
+ const fig=petcFig();const onFig=(x,y)=>{const f=petcFig();if(!f)return false;const r=f.getBoundingClientRect();return x>=r.left&&x<=r.right&&y>=r.top&&y<=r.bottom};
+ box.querySelectorAll("[data-food]").forEach(b=>{b.style.touchAction="none";b.addEventListener("pointerdown",e=>{e.preventDefault();sel=b.dataset.food;box.querySelectorAll(".kgbtn").forEach(x=>x.classList.toggle("on",x===b));
+   const g=b.cloneNode(true);Object.assign(g.style,{position:"fixed",zIndex:99999,pointerEvents:"none",transform:"translate(-50%,-50%)",margin:0});document.body.appendChild(g);
+   const mv=ev=>{g.style.left=ev.clientX+"px";g.style.top=ev.clientY+"px"};mv(e);const up=ev=>{removeEventListener("pointermove",mv);removeEventListener("pointerup",up);g.remove();if(onFig(ev.clientX,ev.clientY))done(sel)};
+   addEventListener("pointermove",mv);addEventListener("pointerup",up)})});
+ const col=document.querySelector("#modal .kpsubj.kes");if(col)col.onclick=()=>{if(sel&&PETC.game==="feed")done(sel)}}
+/* game 2: five even strokes along the pet's coat (on its picture) */
+function petcBath(){const box=petcGameBox("Tắm, chải lông","Vuốt dọc lông nó 5 lần, đều tay (vuốt trên hình nó).");const st=document.querySelector("#modal .kpsubj.kes");if(!box||!st)return;PETC.game="bath";
+ box.innerHTML=kitFacts(["Đã vuốt 0/5"]);const lens=[];let a=null;st.style.touchAction="none";
+ const dn=e=>{e.preventDefault();try{st.setPointerCapture(e.pointerId)}catch(x){}a={x:e.clientX,y:e.clientY}},up=e=>{if(!a||PETC.game!=="bath")return;const d=Math.hypot(e.clientX-a.x,e.clientY-a.y);a=null;if(d<20)return;lens.push(d);
+  box.innerHTML=kitFacts([`Đã vuốt ${lens.length}/5`]);
+  if(lens.length>=5){st.removeEventListener("pointerdown",dn);st.removeEventListener("pointerup",up);st.style.touchAction="";const m=lens.reduce((x,y)=>x+y)/5,sd=Math.sqrt(lens.reduce((x,y)=>x+(y-m)*(y-m),0)/5);petcGain("bath",cl(1-sd/m*1.6,0,1))}};
+ st.addEventListener("pointerdown",dn);st.addEventListener("pointerup",up);PETC.bath={dn,up}}
+/* game 3: the ball lights up under one of three kit buttons in turn; tap the lit one before it moves (3 rounds) */
+function petcPlay(){const box=petcGameBox("Chơi","Quả cầu sáng lên ở một ô rồi lăn sang ô khác: chạm đúng ô đang sáng (3 lần).");if(!box)return;PETC.game="play";
+ const N=["Trái","Giữa","Phải"];box.innerHTML=`<div class="rbtn">${N.map((x,i)=>`<button type="button" class="kgbtn" data-ball="${i}">${x}</button>`).join("")}</div>`+kitFacts(["Lượt 0/3 · trúng 0"]);
+ let lit=-1,n=0,hits=0,tm=0;const B=[...box.querySelectorAll("[data-ball]")];const step=()=>{if(PETC.game!=="play"||!document.body.contains(box)){clearTimeout(tm);return}
+  let j;do{j=Math.floor(Math.random()*3)}while(j===lit);lit=j;B.forEach((b,i)=>b.classList.toggle("on",i===lit));tm=setTimeout(step,Math.max(420,820-n*140))};step();
+ PETC.peek=()=>lit;B.forEach((b,i)=>b.addEventListener("click",e=>{e.preventDefault();e.stopPropagation();if(PETC.game!=="play")return;if(i===lit)hits++;n++;
+  const f=box.querySelector(".kfacts");if(f)f.outerHTML=kitFacts([`Lượt ${n}/3 · trúng ${hits}`]);if(n>=3){clearTimeout(tm);PETC.game=null;petcGain("play",hits/3)}else{clearTimeout(tm);step()}}))}
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-petc]");if(!b||b.disabled)return;e.stopPropagation();const k=b.dataset.petc;
- if(k==="close"){petcClose();return}const P=tsbPets(S)[PETC.i];if(!P)return;
+ if(k==="close"){petcClose();return}const P=tsbPets(S)[PETC.i];if(!P)return;if(PETC.game)return;
  if(k==="maid"){const m=tsbMaid(S);if(!m)return;P.maidW=tsbWk()+BAL.pet.maidW;petcDraw(`${m.name} nhận chăm ${petT(P).n.toLowerCase()} ${BAL.pet.maidW} tuần.`);return}
  if(!can(BAL.pet.khac))return;spend(BAL.pet.khac);if(k==="feed")petcFeed();else if(k==="bath")petcBath();else if(k==="play")petcPlay()},true);
 /* "Chăm" on the pet card opens the screen; the card shows stage + effects + next */
@@ -135,22 +150,8 @@ try{const add=(g,k)=>{const x=RVGRP.find(r=>r[0]===g);if(x&&!x[1].includes(k))x[
 window.coopPetAct=window.coopPetAct||function(kind,fid){try{if(typeof coopAct==="function")coopAct({k:"pet-"+kind,to:fid})}catch(e){}};
 /* old saves: every pet gets its stage + stats once */
 (function(){const d0=deser;deser=function(){const r=d0.apply(this,arguments);try{for(const p of [S].concat(rivals||[]))for(const P of tsbPets(p))petcInit(P),petcSync(P)}catch(e){}return r}})();
-(function(){const st=document.createElement("style");st.id="kpetcare-css";st.textContent=`
-.kpc{position:fixed;inset:0;z-index:9600;background:radial-gradient(circle at 50% 35%,#fbf3e4 0,#efe0c3 70%,#e2cda6 100%);display:flex;align-items:stretch;justify-content:center;overflow:auto}
-.kpcbox{width:min(100%,760px);display:flex;flex-direction:column;gap:8px;padding:max(10px,env(safe-area-inset-top)) 14px 14px}
-.kpch{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.kpch b{font-family:var(--display,serif);font-size:1.3rem;color:var(--ink,#2a1a12)}.kpcx{margin-left:auto}
-.kpcstage{position:relative;flex:1 1 auto;min-height:min(46vh,420px);display:grid;place-items:center;border-radius:14px;background:radial-gradient(circle at 50% 60%,#fffaf0 0,#f3e4c6 70%);border:1px solid var(--gold,#c9a46a);overflow:hidden;touch-action:none}
-.kpcstage>img{pointer-events:none;-webkit-user-drag:none;max-height:min(44vh,400px);max-width:90%;transform:scale(var(--sc,1));transform-origin:50% 85%;filter:drop-shadow(0 6px 10px #5a3a2044);user-select:none}
-.kitb#kpcgame{display:flex;min-height:0;flex-direction:column;align-items:center;gap:6px;pointer-events:auto}
-.kpcfood{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}.kpcf{font:600 .95rem var(--body,sans-serif);padding:8px 12px;border-radius:10px;border:1px solid var(--gold,#c9a46a);background:#fffaf0;touch-action:none}
-.kpcdrag{position:fixed;z-index:9700;transform:translate(-50%,-50%);pointer-events:none;box-shadow:0 4px 12px #0004}
-.kpchint{font-size:.85rem;background:#fffaf0e6;border-radius:8px;padding:2px 8px;color:var(--ink,#2a1a12)}
-.kpcbar{position:relative;width:min(80%,420px);height:30px;border-radius:15px;background:#f6ead6;border:1px solid var(--gold,#c9a46a)}.kpcz{position:absolute;left:40%;width:20%;top:0;bottom:0;background:#2d7a5233;border-left:2px solid #2d7a52;border-right:2px solid #2d7a52}
-.kpcball{position:absolute;top:3px;width:24px;height:24px;margin-left:-12px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fff,#d46a8a)}
-.kpcbars{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:6px 12px}
-.kpcb{display:grid;grid-template-columns:4.6em 1fr 2.2em;align-items:center;gap:6px;font-size:.85rem}.kpcb i{height:10px;border-radius:5px;background:linear-gradient(90deg,var(--c) var(--v),#e8dcc4 var(--v));box-shadow:inset 0 1px 2px #0002}.kpcb b{text-align:right}
-.kpcmsg{margin:0;font-size:.88rem;color:var(--ink,#2a1a12)}
-.kpcacts{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:6px}
-@media (max-height:500px){.kpcstage{min-height:42vh}.kpcstage>img{pointer-events:none;-webkit-user-drag:none;max-height:40vh}}
-`;document.head.appendChild(st)})();
+/* KIT 28.13d rule (review/pets-fix): a shop / pick person dialog (kitModal {shop} or {pick}) is not an event: no event band picture over it
+   (a title such as "Chăm mèo tuyết" matched the snow-day event by the word "tuyết"). Outermost kitEvArt wrapper (after jk4). */
+(function(){if(typeof kitEvArt!=="function")return;const a0=kitEvArt;kitEvArt=function(m){if(m&&m.kit&&(m.kit.shop||m.kit.pick))return null;return a0.apply(this,arguments)};window.kitEvArt=kitEvArt})();
+/* no private CSS: the care screen is kit parts only (person dialog, kitStatRow, kitRows, kitGameFrame, .kgbtn, pbtn) */
 window.petcOpen=petcOpen;window.petStage=petStage;window.petcGrow=petcGrow;
