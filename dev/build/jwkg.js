@@ -38,12 +38,8 @@ function wkGameOf(art){const m=typeof S!=="undefined"&&S&&S.mg;const w=(m&&m.wk)
 (function(){const k0=kg82Kind;kg82Kind=function(){if(kwkG&&KG82_KIND[kwkG])return kwkG;return k0.apply(this,arguments)}})();
 (function(){const p0=playArt;playArt=function(o){const g=o&&(o.game||wkGameOf(o.art));if(!g)return p0.apply(this,arguments);kwkG=g;try{return p0.apply(this,arguments)}finally{kwkG=null}};window.playArt=playArt})();
 (function(){const o0=openMG;openMG=function(){const m=typeof S!=="undefined"&&S&&S.mg;kwkPick=(m&&(m.wk||wkPend))||wkPend||null;try{return o0.apply(this,arguments)}finally{kwkPick=null}}})();
-/* ✕ close for Q items marked xc (no "Thôi" row) */
-(function(){const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);try{const M=$("modal"),d=M&&M.querySelector(".dlg");const old=M&&M.querySelector("#mxc");if(old)old.remove();
- if(d&&!M.hidden&&Q.length&&Q[0].xc){const b=document.createElement("button");b.id="mxc";b.type="button";b.className="x mxc";b.setAttribute("aria-label","Đóng");b.textContent="✕";
-  b.onclick=e=>{e.stopPropagation();closeModal()};d.appendChild(b)}}catch(e){}return r}})();
-(function(){const st=document.createElement("style");st.id="k-wkg";st.textContent=`
-html body #modal .dlg:has(>#mxc){position:relative}
-html body #modal .dlg>#mxc{position:absolute;top:8px;right:8px;z-index:9;width:34px;height:34px;min-height:0;padding:0;margin:0;border-radius:50%;display:flex;align-items:center;justify-content:center;
- font-size:1rem;line-height:1;background:rgba(255,250,240,.92);border:1px solid rgba(120,80,40,.45);color:var(--ink2,#6b4a2a);cursor:pointer}
-html body #modal .dlg:has(>#mxc) #mt{padding-right:44px}`;document.head.appendChild(st)})();
+/* ✕ close (kit 32.10 kit-x in the panel header) for Q items marked xc and the j83 gift / illicit dialogs: no "Thôi" row */
+const KWK_XPID=["wkgive"];
+(function(){const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);try{const M=$("modal"),d=M&&M.querySelector(".dlg");const m=Q[0];
+ if(d&&!M.hidden&&m&&(m.xc||KWK_XPID.includes(m.pid))){const h=d.querySelector(":scope > .kph");if(h&&!h.querySelector(":scope > .kit-x")){h.insertAdjacentHTML("beforeend",kitXHTML('data-kitx="wk"',"Đóng"));
+  h.lastElementChild.addEventListener("click",e=>{e.stopPropagation();closeModal()})}}}catch(e){}return r}})();
