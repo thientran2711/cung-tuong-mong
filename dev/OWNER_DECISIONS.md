@@ -736,3 +736,9 @@ All must work in co-op.
   13. Pregnancy / birth: soft pink lotus light, swaddle reveal.
   14. Love / romance: drifting peach blossom + red thread.
   15. Weather: keep code, but optionally upgrade rain/snow/petals to painted sprites for style match.
+
+## 15/11 ~22:55Z — Co-op pause + timer sync (owner)
+- Add a "Tạm dừng" button in co-op: pressing it pauses the game for BOTH players (the other cannot continue) until the one who paused resumes. Friend sees a cổ-ngữ notice (e.g. "Hảo hữu xin tạm nghỉ, chờ giây lát").
+- When one player is in a minigame (or forced dialog), the other must wait — normal; the shared buổi timer pauses for both (with the cap).
+- The waiting player sees only a generic old-style notice, NOT what the friend is doing (e.g. "Hảo hữu đang dở tay, xin đợi" / "Hảo hữu đang bận việc").
+- Owner's main worry: LAG. Sync design: the host owns the clock as an absolute deadline (server time), not a per-device countdown; pause/resume are sent immediately and stamp the remaining ms; each client shows remaining = deadline − synced now (clock offset measured with pings), so both screens agree within ~0.2 s; on resume the host re-issues the deadline; give a 1–2 s grace before auto-advance so a slow message never steals time; reconnect restores the paused/remaining state from the room snapshot (builds on fix-float r8 CW.wkIn / bend resend).
