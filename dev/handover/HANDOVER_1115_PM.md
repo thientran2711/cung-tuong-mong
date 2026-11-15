@@ -198,3 +198,6 @@ Worktree thợ ở /home/user/wt/<tên>. Bản tóm tắt luật cho thợ: /hom
 - ~10:00Z ĐĨA: phiên có hạn mức ghi ~39 GB (df không đúng). Đã bắt mọi worktree dùng sparse-checkout (bỏ dev/shots, dev/owner-shots, dev/figwork), cấm clone đầy đủ; trống lại ~19 GB.
 - 17:08Z hội thi lệch chủ đề (Hội Phượng · thi thêu) + 'TỐN không' → close-bugs; ảnh banner → kit-fig2/act-pics2.
 - 17:12Z Cần chip trùng (Múa yến tiệc) → close-bugs. Khối 'Ân sủng' (Có thai/Lật thẻ/Ân tình) bị gập, sếp không thấy → chờ sếp chọn cách hiện.
+- LIVE main = ca361b147 (hoangtu-tuchat, PASS, kèm sửa j53 lời báo tư chất theo tuổi).
+- opt-render FAIL (ghi chú review/opt-render-r6 6f256f7f4): sự kiện dựng thẳng (Thái hậu triệu, 7 lễ hội…) vẫn hiện Được/Mất; gợi ý rơi về "chuyện khác"; CSS riêng .krisk/.khint → thợ mới sửa trên review/opt-render (làm thành kit chung). event-balance giữ phần bot cân bằng.
+- Đã mở người duyệt rank0-ivory + emo-men (gộp chung).
