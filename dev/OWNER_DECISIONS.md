@@ -199,3 +199,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (01:25Z) Owner (ảnh màn nhà, 'Thanh gì đây'): dải tím sọc giữa tranh sân khấu và hàng nút = mép bìa sách (.kbk-board) lộ ra → lỗi, bỏ; bìa không được hiện thành một dải riêng. Giao người duyệt sửa trong đợt 2.
 - (01:30Z) Owner: from now on ALL images go to Cloudflare, not stored in the GitHub repo → worker review/cdn-images (R2 + Worker or Pages; IMG_BASE; cdn_sync for new art; git rm img/ without rewriting history).
 - (01:30Z) Owner: Dư đồ scroll/unroll animation too fast → slow down (~2×, ease, interruptible, off with Cảnh động) → worker review/map-anim.
+- (01:35Z) Owner (Dư đồ, còn 2 khắc mà nơi nào cũng 'hết khắc'): luật cũ đòi đường đi + 1 khắc. Quyết định điều phối: đi được nơi nào đường đi ≤ khắc còn; đến nơi hết buổi vẫn đi được (chỉ kịp xem ai ở đó, buổi sau bắt đầu ở đó); chữ 'hết khắc' chỉ khi thật còn 0, còn lại ghi 'đi N khắc'. Giao review/map-anim.
