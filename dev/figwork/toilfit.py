@@ -152,6 +152,8 @@ def extend():
     if "--all" not in sys.argv:
         pat = r"por-consort-c\d+-(t([5-8]|cold|m[0-4])|kc|ngheo)-a\d+\.webp$" if "--more" in sys.argv else r"por-consort-c\d+-t([5-8]|cold)-a\d+\.webp$"
         pors = [f for f in pors if re.match(pat, f)]
+    # "--re <regex>": only the portraits whose name matches (e.g. her maid face's consort tiers: 'por-maid-m\d+-t[1-8]-')
+    if "--re" in sys.argv: pors = [f for f in pors if re.search(sys.argv[sys.argv.index("--re") + 1], f)]
     only = sys.argv[sys.argv.index("--only") + 1] if "--only" in sys.argv else None
     if only: pors = [f for f in pors if only in f]
     keys0 = [k for k in out if k.startswith("por-")]   # measured portraits (snapshot: the pool threads must not read `out` while it grows)
