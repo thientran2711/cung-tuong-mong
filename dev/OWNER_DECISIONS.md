@@ -266,3 +266,6 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (07:30Z) Owner: nhãn sân khấu dòng 2 phải là TÊN người, không phải chức ('Thái giám / Tổng quản' sai) → mọi NPC có tên riêng cổ trang, chức ở dòng 1 (review/stage-slots).
 - (07:35Z) Owner: CHO PHÉP THƯỜNG TRỰC vẽ tranh khi thấy thiếu, không cần hỏi — phải đúng phong cách game (gpt-2-6, STYLE_ANCHOR).
 - (07:35Z) Owner: thú cưng vẽ luôn; 4 con quá ít → 18–24 con, có phẩm bậc + Xa xỉ N (luật như đồ mang), mỗi bậc công dụng khác (báo trước bị hại, canh cung, nghe lén, Sủng, Danh…), thần thú hiếm ĐỠ MỘT MẠNG cho chủ; có mặt trái thật; NPC cùng luật. review/pets.
+- (08:00Z) LIVE main=e659176f0 coop-ui (sửa kẹt nút Vào phòng, Hành sự trống khi vào lại, nút Gửi/Chép đường dẫn, hướng dẫn 6 bước). Lệch buổi tuần 3 chưa tái hiện.
+- (08:00Z) Owner: sân khấu vẽ người thừa thành chân dung nhỏ đứng trên sàn → cấm; người thừa vào '+N', người lạ = hình bóng cỡ thật (stage-slots). 'Quen biết 3/3' khó hiểu → chữ rõ (hau-cung-ui). 'MẤT: không được gì' vô nghĩa → bỏ/thay hậu quả thật (sub-odds).
+- (08:05Z) Owner: chân dung người lạ mờ + phóng to nửa mặt → người lạ dùng hình bóng; soát TOÀN BỘ ảnh hiển thị (mờ, phóng, cắt mặt, ảnh dự phòng) review/img-quality.
