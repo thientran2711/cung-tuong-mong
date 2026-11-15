@@ -14,12 +14,12 @@ Mỗi ảnh: nguồn, cỡ tự nhiên, cỡ hiển thị × devicePixelRatio �
 |---|---|---|---|---|---|
 | TRƯỚC (main 14967f89) Fold | 24 | 99 | 0 | 0 | 0 |
 | TRƯỚC iPad | 12 | 95 | 1 | 0 | 0 |
-| SAU (review/img-quality) Fold | 11 | 0 | 0 | 0 | 0 |
+| SAU (review/img-quality trên main d6903038) Fold | 9 | 0 | 0 | 0 | 0 |
 | SAU iPad | 0 | 0 | 0 | 0 | 0 |
 
-Trước: 231 lần hiện ảnh lỗi / 2302 đo. Sau: 11 / 2167, lỗi trang + 404: 0.
+Trước: 231 lần hiện ảnh lỗi / 2302 đo. Sau: 9 / 2130, lỗi trang + 404: 0.
 
-**Còn lại (11, chỉ Fold):** người toàn thân trên sân khấu (fig-*.webp cao 900 px) hiện cao 644–689 px CSS ×2 = phóng 1,43–1,53. Cỡ sân khấu Fold đã được duyệt
+**Còn lại (9, chỉ Fold):** người toàn thân trên sân khấu (fig-*.webp cao 900 px) hiện cao 644–689 px CSS ×2 = phóng 1,43–1,53. Cỡ sân khấu Fold đã được duyệt
 (KIT §33: Fold giữ trọn .79, không áp trần maxPx), nên không thu nhỏ người; phải có ảnh lớn hơn (xem "Cần vẽ/cắt lại"). iPad 1180: 542 px → 1,20, đạt.
 
 ## Nguyên nhân (trước)
@@ -45,7 +45,7 @@ Trước: 231 lần hiện ảnh lỗi / 2302 đo. Sau: 11 / 2167, lỗi trang +
 ## Cần vẽ / cắt lại (điều phối)
 
 1. **fig-*.webp (5 177 tệp) xuất lại ≥ 1 100 px cao** từ tranh gốc gpt-2-6 trên Magnific (mã lượt vẽ trong gens.txt/sheets*.txt; sheetproc.py đang thu về 900 px).
-   Đây là 11 chỗ phóng còn lại trên Fold (1,43–1,53).
+   Đây là 9 chỗ phóng còn lại trên Fold (1,43–1,53).
 2. **por-*.webp cắt lại từ ảnh gốc cỡ lớn** (`porcrop.py --src-scale` / tham số src): hiện por được cắt từ fig 900 px nên đã phóng sẵn ~1,6× bên trong
    (đo 60 tệp: phi tần 1,59, cung nữ 1,59, thái giám 1,74, Hoàng thượng 1,76) — mặt mềm dù hiển thị chỉ ~0,9×. Làm cùng đợt với mục 1.
 3. **Thêm ≥ 12 identity nam trẻ "công tử"** (×4 tuổi, áo không hồng/tím) để công tử có mặt khi đã gặp; hiện 11 identity chỉ đủ cho 9 nam nhân trong cung.
@@ -53,13 +53,13 @@ Trước: 231 lần hiện ảnh lỗi / 2302 đo. Sau: 11 / 2167, lỗi trang +
 
 ## Sau — bảng chi tiết
 
-Bộ đo: `node dev/test/img-quality.js <baseURL> <outdir>` (Playwright). Chạy: 2026-11-15T07:49Z · cỡ 755x1000@2, 1180x820@2 · 2167 lần hiện ảnh người trên 233 màn.
+Bộ đo: `node dev/test/img-quality.js <baseURL> <outdir>` (Playwright). Chạy: 2026-11-15T08:15Z · cỡ 755x1000@2, 1180x820@2 · 2130 lần hiện ảnh người trên 232 màn.
 
 Ngưỡng: phóng (cỡ hiển thị × devicePixelRatio ÷ cỡ ảnh) > 1.25 = mờ (UPSCALE) · face-*.webp cũ hiện ra = FACE_FALLBACK · mặt thấy < 85% = HALF_FACE · 404 / không giải mã = BROKEN · bộ lọc blur trên mặt thật = BLUR.
 
 | Lỗi | số lần hiện |
 |---|---|
-| UPSCALE | 11 |
+| UPSCALE | 9 |
 | FACE_FALLBACK | 0 |
 | HALF_FACE | 0 |
 | BROKEN | 0 |
@@ -70,17 +70,14 @@ Ngưỡng: phóng (cỡ hiển thị × devicePixelRatio ÷ cỡ ảnh) > 1.25 =
 
 | cỡ | màn | người (vd) | nguồn (vd) | cỡ ảnh | hiển thị css | phóng max | mặt thấy min | lỗi | lần |
 |---|---|---|---|---|---|---|---|---|---|
-| 755x1000@2 | lạ · Nơi home | Cung nữ Bích Ngọc | img/fig-maid-m47-a18.webp | 300x900 | 215x644 | 1.43 | 100% | UPSCALE | 1 |
-| 755x1000@2 | lạ · Nơi home | - | img/fig-consort-c11-t3-a18.webp | 339x900 | 243x644 | 1.43 | 100% | UPSCALE | 1 |
-| 755x1000@2 | lạ · Nơi thu | - | img/fig-consort-c11-t3-a18.webp | 339x900 | 243x644 | 1.43 | 100% | UPSCALE | 1 |
-| 755x1000@2 | lạ · Nơi thu · người 2 | Cung nữ Bích Ngọc | img/fig-maid-m47-a18.webp | 300x900 | 215x644 | 1.43 | 100% | UPSCALE | 1 |
-| 755x1000@2 | lạ · Nơi thu · người 2 | - | img/fig-consort-c11-t3-a18.webp | 339x900 | 243x644 | 1.43 | 100% | UPSCALE | 1 |
-| 755x1000@2 | quen · Nơi home | Cung nữ Bích Ngọc | img/fig-maid-m47-a18.webp | 300x900 | 215x644 | 1.43 | 100% | UPSCALE | 1 |
-| 755x1000@2 | quen · Nơi home | - | img/fig-consort-c11-t3-a18.webp | 339x900 | 243x644 | 1.43 | 100% | UPSCALE | 1 |
-| 755x1000@2 | quen · Nơi tn | Cung nữ Bích Ngọc | img/fig-emperor-a26-1.webp | 345x900 | 264x689 | 1.53 | 100% | UPSCALE | 1 |
-| 755x1000@2 | quen · Nơi tn | - | img/fig-consort-c11-t3-a18.webp | 339x900 | 243x644 | 1.43 | 100% | UPSCALE | 1 |
-| 755x1000@2 | quen · Nơi tn · người 2 | Cung nữ Bích Ngọc | img/fig-maid-m47-a18.webp | 300x900 | 215x644 | 1.43 | 100% | UPSCALE | 1 |
-| 755x1000@2 | quen · Nơi tn · người 2 | - | img/fig-consort-c11-t3-a18.webp | 339x900 | 243x644 | 1.43 | 100% | UPSCALE | 1 |
+| 755x1000@2 | lạ · Nơi home | Cung nữ Tố Cầm | img/fig-maid-m30-a18.webp | 272x900 | 195x644 | 1.43 | 100% | UPSCALE | 1 |
+| 755x1000@2 | lạ · Nơi home | - | img/fig-consort-c19-t1-a18.webp | 301x900 | 215x644 | 1.43 | 100% | UPSCALE | 1 |
+| 755x1000@2 | lạ · Nơi tn | - | img/fig-consort-c19-t1-a18.webp | 301x900 | 215x644 | 1.43 | 100% | UPSCALE | 1 |
+| 755x1000@2 | quen · Nơi home | Cung nữ Tố Cầm | img/fig-maid-m30-a18.webp | 272x900 | 195x644 | 1.43 | 100% | UPSCALE | 1 |
+| 755x1000@2 | quen · Nơi home | - | img/fig-consort-c19-t1-a18.webp | 301x900 | 215x644 | 1.43 | 100% | UPSCALE | 1 |
+| 755x1000@2 | quen · Nơi dtd | Cung nữ Tố Cầm | img/fig-consort-c04-t5-a18.webp | 351x900 | 251x644 | 1.43 | 100% | UPSCALE | 2 |
+| 755x1000@2 | quen · Nơi dtd · người 2 | Cung nữ Tố Cầm | img/fig-maid-m30-a18.webp | 272x900 | 195x644 | 1.43 | 100% | UPSCALE | 1 |
+| 755x1000@2 | quen · Nơi dtd · người 2 | - | img/fig-consort-c19-t1-a18.webp | 301x900 | 215x644 | 1.43 | 100% | UPSCALE | 1 |
 
 ## Tất cả ảnh đã đo (gộp theo màn + loại)
 
@@ -91,25 +88,24 @@ Ngưỡng: phóng (cỡ hiển thị × devicePixelRatio ÷ cỡ ảnh) > 1.25 =
 | 755x1000@2 | lạ · Nơi home | fig | 2 | 1.43 | 100% |
 | 755x1000@2 | lạ · Nơi home | unk | 3 | 0.05 | 100% |
 | 755x1000@2 | lạ · Nơi home · người 1 | por | 2 | 0.94 | 100% |
-| 755x1000@2 | lạ · Nơi vuon | por | 1 | 0.16 | 100% |
-| 755x1000@2 | lạ · Nơi vuon · người 1 | por | 1 | 0.16 | 100% |
-| 755x1000@2 | lạ · Nơi vuon · người 1 | unk | 1 | 0.43 | 100% |
-| 755x1000@2 | lạ · Nơi vuon · người 2 | por | 1 | 0.16 | 100% |
-| 755x1000@2 | lạ · Nơi vuon · người 2 | unk | 1 | 0.43 | 100% |
-| 755x1000@2 | lạ · Nơi thu | por | 2 | 0.16 | 100% |
-| 755x1000@2 | lạ · Nơi thu | fig | 2 | 1.43 | 100% |
-| 755x1000@2 | lạ · Nơi thu | unk | 3 | 0.05 | 100% |
-| 755x1000@2 | lạ · Nơi thu · người 1 | por | 2 | 0.94 | 100% |
-| 755x1000@2 | lạ · Nơi thu · người 2 | por | 2 | 0.16 | 100% |
-| 755x1000@2 | lạ · Nơi thu · người 2 | fig | 2 | 1.43 | 100% |
-| 755x1000@2 | lạ · Nơi thu · người 2 | unk | 3 | 0.05 | 100% |
-| 755x1000@2 | lạ · Nơi tn | por | 1 | 0.16 | 100% |
+| 755x1000@2 | lạ · Nơi thu | por | 1 | 0.16 | 100% |
+| 755x1000@2 | lạ · Nơi thu · người 1 | por | 2 | 0.98 | 100% |
+| 755x1000@2 | lạ · Nơi tn | por | 2 | 0.16 | 100% |
+| 755x1000@2 | lạ · Nơi tn | fig | 2 | 1.43 | 100% |
+| 755x1000@2 | lạ · Nơi tn | unk | 3 | 0.05 | 100% |
 | 755x1000@2 | lạ · Nơi tn · người 1 | por | 1 | 0.16 | 100% |
-| 755x1000@2 | lạ · Nơi tn · người 1 | unk | 1 | 0.43 | 100% |
+| 755x1000@2 | lạ · Nơi tn · người 1 | unk | 1 | 0.41 | 100% |
+| 755x1000@2 | lạ · Nơi tn · người 2 | por | 1 | 0.16 | 100% |
+| 755x1000@2 | lạ · Nơi tn · người 2 | unk | 1 | 0.41 | 100% |
+| 755x1000@2 | lạ · Nơi kn | por | 1 | 0.16 | 100% |
+| 755x1000@2 | lạ · Nơi kn · người 1 | por | 1 | 0.16 | 100% |
+| 755x1000@2 | lạ · Nơi kn · người 1 | unk | 1 | 0.43 | 100% |
+| 755x1000@2 | lạ · Nơi kn · người 2 | por | 1 | 0.16 | 100% |
+| 755x1000@2 | lạ · Nơi kn · người 2 | unk | 1 | 0.43 | 100% |
 | 755x1000@2 | lạ · Hoàng thượng · Thái hậu | por | 1 | 0.16 | 100% |
-| 755x1000@2 | lạ · Hoàng thượng · Thái hậu | unk | 5 | 0.41 | 100% |
+| 755x1000@2 | lạ · Hoàng thượng · Thái hậu | unk | 3 | 0.41 | 100% |
 | 755x1000@2 | lạ · Hoàng thượng · Thái hậu · thẻ 1 | por | 1 | 0.16 | 100% |
-| 755x1000@2 | lạ · Hoàng thượng · Thái hậu · thẻ 1 | unk | 5 | 0.43 | 100% |
+| 755x1000@2 | lạ · Hoàng thượng · Thái hậu · thẻ 1 | unk | 3 | 0.43 | 100% |
 | 755x1000@2 | lạ · Hoàng thượng · Thái hậu · thẻ 2 | por | 1 | 0.16 | 100% |
 | 755x1000@2 | lạ · Hoàng thượng · Thái hậu · thẻ 2 | unk | 3 | 0.43 | 100% |
 | 755x1000@2 | lạ · Phi tần | por | 1 | 0.16 | 100% |
@@ -117,7 +113,7 @@ Ngưỡng: phóng (cỡ hiển thị × devicePixelRatio ÷ cỡ ảnh) > 1.25 =
 | 755x1000@2 | lạ · Phi tần · thẻ 1 | por | 1 | 0.16 | 100% |
 | 755x1000@2 | lạ · Phi tần · thẻ 1 | unk | 11 | 0.43 | 100% |
 | 755x1000@2 | lạ · Phi tần · thẻ 4 | por | 1 | 0.16 | 100% |
-| 755x1000@2 | lạ · Phi tần · thẻ 4 | unk | 10 | 0.43 | 100% |
+| 755x1000@2 | lạ · Phi tần · thẻ 4 | unk | 11 | 0.43 | 100% |
 | 755x1000@2 | lạ · Phi tần · thẻ 7 | por | 1 | 0.16 | 100% |
 | 755x1000@2 | lạ · Phi tần · thẻ 7 | unk | 12 | 0.43 | 100% |
 | 755x1000@2 | lạ · Phi tần · thẻ 10 | por | 1 | 0.16 | 100% |
@@ -143,8 +139,6 @@ Ngưỡng: phóng (cỡ hiển thị × devicePixelRatio ÷ cỡ ảnh) > 1.25 =
 | 755x1000@2 | lạ · Giao tình · emp | unk | 3 | 0.36 | 100% |
 | 755x1000@2 | lạ · Giao tình · th | por | 2 | 0.16 | 100% |
 | 755x1000@2 | lạ · Giao tình · th | unk | 3 | 0.36 | 100% |
-| 755x1000@2 | lạ · Hoàng tự | por | 1 | 0.16 | 100% |
-| 755x1000@2 | lạ · Hoàng tự | unk | 9 | 0.05 | 100% |
 | 755x1000@2 | lạ · Phe phái | por | 1 | 0.16 | 100% |
 | 755x1000@2 | lạ · Dư đồ | por | 1 | 0.16 | 100% |
 | 755x1000@2 | lạ · Tư trang | por | 1 | 0.16 | 100% |
@@ -160,18 +154,18 @@ Ngưỡng: phóng (cỡ hiển thị × devicePixelRatio ÷ cỡ ảnh) > 1.25 =
 | 755x1000@2 | thấy mặt · Danh mục 21-24 | por | 7 | 1.08 | 100% |
 | 755x1000@2 | thấy mặt · Danh mục 25-28 | por | 7 | 1.08 | 100% |
 | 755x1000@2 | thấy mặt · Danh mục 29-32 | por | 7 | 1.08 | 100% |
-| 755x1000@2 | thấy mặt · Danh mục 33-36 | por | 7 | 1.08 | 100% |
-| 755x1000@2 | thấy mặt · Danh mục 37-40 | por | 7 | 1.08 | 100% |
-| 755x1000@2 | thấy mặt · Danh mục 41-44 | por | 5 | 1.08 | 100% |
+| 755x1000@2 | thấy mặt · Danh mục 33-36 | por | 5 | 1.08 | 100% |
+| 755x1000@2 | thấy mặt · Danh mục 37-40 | por | 4 | 1.08 | 100% |
+| 755x1000@2 | thấy mặt · Danh mục 41-44 | por | 7 | 1.08 | 100% |
 | 755x1000@2 | thấy mặt · Danh mục 45-48 | por | 4 | 1.08 | 100% |
-| 755x1000@2 | thấy mặt · Danh mục 49-52 | por | 5 | 1.08 | 100% |
+| 755x1000@2 | thấy mặt · Danh mục 49-52 | por | 8 | 1.08 | 100% |
 | 755x1000@2 | thấy mặt · Danh mục 53-56 | por | 8 | 1.08 | 100% |
 | 755x1000@2 | thấy mặt · Danh mục 57-60 | por | 8 | 1.08 | 100% |
 | 755x1000@2 | thấy mặt · Danh mục 61-64 | por | 8 | 1.08 | 100% |
-| 755x1000@2 | thấy mặt · Danh mục 65-68 | por | 7 | 1.08 | 100% |
-| 755x1000@2 | thấy mặt · Danh mục 65-68 | unk | 1 | 0.47 | 100% |
+| 755x1000@2 | thấy mặt · Danh mục 65-68 | por | 3 | 1.08 | 100% |
+| 755x1000@2 | thấy mặt · Danh mục 65-68 | unk | 5 | 0.47 | 100% |
 | 755x1000@2 | thấy mặt · Danh mục 69-72 | unk | 8 | 0.47 | 100% |
-| 755x1000@2 | thấy mặt · Danh mục 73-75 | unk | 7 | 0.47 | 100% |
+| 755x1000@2 | thấy mặt · Danh mục 73-73 | unk | 3 | 0.47 | 100% |
 | 755x1000@2 | quen · Thanh trên + Hành sự | por | 1 | 0.16 | 100% |
 | 755x1000@2 | quen · Nơi home | por | 5 | 0.16 | 100% |
 | 755x1000@2 | quen · Nơi home | fig | 2 | 1.43 | 100% |
@@ -179,21 +173,21 @@ Ngưỡng: phóng (cỡ hiển thị × devicePixelRatio ÷ cỡ ảnh) > 1.25 =
 | 755x1000@2 | quen · Nơi vuon | por | 1 | 0.16 | 100% |
 | 755x1000@2 | quen · Nơi vuon · người 1 | por | 2 | 0.98 | 100% |
 | 755x1000@2 | quen · Nơi vuon · người 2 | por | 2 | 0.98 | 100% |
-| 755x1000@2 | quen · Nơi tn | por | 5 | 0.16 | 100% |
-| 755x1000@2 | quen · Nơi tn | fig | 2 | 1.53 | 100% |
-| 755x1000@2 | quen · Nơi tn · người 1 | por | 2 | 0.94 | 100% |
-| 755x1000@2 | quen · Nơi tn · người 2 | por | 5 | 0.16 | 100% |
-| 755x1000@2 | quen · Nơi tn · người 2 | fig | 2 | 1.43 | 100% |
-| 755x1000@2 | quen · Nơi kn | por | 1 | 0.16 | 100% |
-| 755x1000@2 | quen · Nơi kn · người 1 | por | 2 | 0.98 | 100% |
+| 755x1000@2 | quen · Nơi dtd | por | 5 | 0.16 | 100% |
+| 755x1000@2 | quen · Nơi dtd | fig | 2 | 1.43 | 100% |
+| 755x1000@2 | quen · Nơi dtd · người 1 | por | 2 | 0.94 | 100% |
+| 755x1000@2 | quen · Nơi dtd · người 2 | por | 5 | 0.16 | 100% |
+| 755x1000@2 | quen · Nơi dtd · người 2 | fig | 2 | 1.43 | 100% |
+| 755x1000@2 | quen · Nơi tn | por | 1 | 0.16 | 100% |
+| 755x1000@2 | quen · Nơi tn · người 1 | por | 2 | 0.98 | 100% |
 | 755x1000@2 | quen · Hoàng thượng · Thái hậu | por | 4 | 0.94 | 100% |
-| 755x1000@2 | quen · Hoàng thượng · Thái hậu · thẻ 1 | por | 6 | 0.98 | 100% |
+| 755x1000@2 | quen · Hoàng thượng · Thái hậu · thẻ 1 | por | 4 | 0.98 | 100% |
 | 755x1000@2 | quen · Hoàng thượng · Thái hậu · thẻ 2 | por | 4 | 0.98 | 100% |
-| 755x1000@2 | quen · Phi tần | por | 10 | 0.98 | 100% |
+| 755x1000@2 | quen · Phi tần | por | 11 | 0.98 | 100% |
 | 755x1000@2 | quen · Phi tần · thẻ 1 | por | 11 | 0.98 | 100% |
 | 755x1000@2 | quen · Phi tần · thẻ 4 | por | 11 | 0.98 | 100% |
 | 755x1000@2 | quen · Phi tần · thẻ 7 | por | 11 | 0.98 | 100% |
-| 755x1000@2 | quen · Phi tần · thẻ 10 | por | 10 | 0.98 | 100% |
+| 755x1000@2 | quen · Phi tần · thẻ 10 | por | 11 | 0.98 | 100% |
 | 755x1000@2 | quen · Nam nhân | por | 11 | 0.98 | 100% |
 | 755x1000@2 | quen · Nam nhân · thẻ 1 | por | 11 | 0.98 | 100% |
 | 755x1000@2 | quen · Nam nhân · thẻ 3 | por | 11 | 0.98 | 100% |
@@ -203,11 +197,11 @@ Ngưỡng: phóng (cỡ hiển thị × devicePixelRatio ÷ cỡ ảnh) > 1.25 =
 | 755x1000@2 | quen · Cung nhân | por | 12 | 0.98 | 100% |
 | 755x1000@2 | quen · Cung nhân · thẻ 1 | por | 12 | 0.98 | 100% |
 | 755x1000@2 | quen · Cung nhân · thẻ 6 | por | 12 | 0.98 | 100% |
-| 755x1000@2 | quen · Cung nhân · thẻ 11 | por | 13 | 0.98 | 100% |
+| 755x1000@2 | quen · Cung nhân · thẻ 11 | por | 12 | 0.98 | 100% |
 | 755x1000@2 | quen · Cung nhân · thẻ 16 | por | 12 | 0.98 | 100% |
 | 755x1000@2 | quen · Cung nhân · thẻ 21 | por | 12 | 0.98 | 100% |
 | 755x1000@2 | quen · Giao tình | por | 17 | 0.82 | 100% |
-| 755x1000@2 | quen · Giao tình · me | por | 18 | 0.82 | 100% |
+| 755x1000@2 | quen · Giao tình · me | por | 17 | 0.82 | 100% |
 | 755x1000@2 | quen · Giao tình · 1 | por | 16 | 0.16 | 100% |
 | 755x1000@2 | quen · Giao tình · 2 | por | 16 | 0.16 | 100% |
 | 755x1000@2 | quen · Giao tình · 3 | por | 16 | 0.16 | 100% |
@@ -215,8 +209,8 @@ Ngưỡng: phóng (cỡ hiển thị × devicePixelRatio ÷ cỡ ảnh) > 1.25 =
 | 755x1000@2 | quen · Giao tình · 5 | por | 16 | 0.16 | 100% |
 | 755x1000@2 | quen · Giao tình · 6 | por | 16 | 0.16 | 100% |
 | 755x1000@2 | quen · Giao tình · 7 | por | 16 | 0.16 | 100% |
-| 755x1000@2 | quen · Hoàng tự | por | 4 | 0.16 | 100% |
-| 755x1000@2 | quen · Hoàng tự | unk | 6 | 0.05 | 100% |
+| 755x1000@2 | quen · Hoàng tự | por | 2 | 0.16 | 100% |
+| 755x1000@2 | quen · Hoàng tự | unk | 8 | 0.05 | 100% |
 | 755x1000@2 | quen · Phe phái | por | 1 | 0.16 | 100% |
 | 755x1000@2 | quen · Dư đồ | por | 1 | 0.16 | 100% |
 | 755x1000@2 | quen · Tư trang | por | 1 | 0.16 | 100% |
@@ -231,18 +225,18 @@ Ngưỡng: phóng (cỡ hiển thị × devicePixelRatio ÷ cỡ ảnh) > 1.25 =
 | 755x1000@2 | quen · Danh mục 21-24 | por | 7 | 1.08 | 100% |
 | 755x1000@2 | quen · Danh mục 25-28 | por | 7 | 1.08 | 100% |
 | 755x1000@2 | quen · Danh mục 29-32 | por | 7 | 1.08 | 100% |
-| 755x1000@2 | quen · Danh mục 33-36 | por | 7 | 1.08 | 100% |
-| 755x1000@2 | quen · Danh mục 37-40 | por | 7 | 1.08 | 100% |
-| 755x1000@2 | quen · Danh mục 41-44 | por | 5 | 1.08 | 100% |
+| 755x1000@2 | quen · Danh mục 33-36 | por | 5 | 1.08 | 100% |
+| 755x1000@2 | quen · Danh mục 37-40 | por | 4 | 1.08 | 100% |
+| 755x1000@2 | quen · Danh mục 41-44 | por | 7 | 1.08 | 100% |
 | 755x1000@2 | quen · Danh mục 45-48 | por | 4 | 1.08 | 100% |
-| 755x1000@2 | quen · Danh mục 49-52 | por | 5 | 1.08 | 100% |
+| 755x1000@2 | quen · Danh mục 49-52 | por | 8 | 1.08 | 100% |
 | 755x1000@2 | quen · Danh mục 53-56 | por | 8 | 1.08 | 100% |
 | 755x1000@2 | quen · Danh mục 57-60 | por | 8 | 1.08 | 100% |
 | 755x1000@2 | quen · Danh mục 61-64 | por | 8 | 1.08 | 100% |
-| 755x1000@2 | quen · Danh mục 65-68 | por | 7 | 1.08 | 100% |
-| 755x1000@2 | quen · Danh mục 65-68 | unk | 1 | 0.47 | 100% |
+| 755x1000@2 | quen · Danh mục 65-68 | por | 3 | 1.08 | 100% |
+| 755x1000@2 | quen · Danh mục 65-68 | unk | 5 | 0.47 | 100% |
 | 755x1000@2 | quen · Danh mục 69-72 | unk | 8 | 0.47 | 100% |
-| 755x1000@2 | quen · Danh mục 73-75 | unk | 7 | 0.47 | 100% |
+| 755x1000@2 | quen · Danh mục 73-73 | unk | 3 | 0.47 | 100% |
 | 1180x820@2 | lạ · Thanh trên + Hành sự | por | 2 | 0.16 | 100% |
 | 1180x820@2 | lạ · Thanh trên + Hành sự | fig | 2 | 1.2 | 100% |
 | 1180x820@2 | lạ · Thanh trên + Hành sự | unk | 3 | 0.05 | 100% |
@@ -252,6 +246,15 @@ Ngưỡng: phóng (cỡ hiển thị × devicePixelRatio ÷ cỡ ảnh) > 1.25 =
 | 1180x820@2 | lạ · Nơi home · người 1 | por | 3 | 0.83 | 100% |
 | 1180x820@2 | lạ · Nơi home · người 1 | fig | 2 | 1.2 | 100% |
 | 1180x820@2 | lạ · Nơi home · người 1 | unk | 3 | 0.05 | 100% |
+| 1180x820@2 | lạ · Nơi vuon | por | 2 | 0.16 | 100% |
+| 1180x820@2 | lạ · Nơi vuon | fig | 3 | 1.2 | 100% |
+| 1180x820@2 | lạ · Nơi vuon | unk | 3 | 0.05 | 100% |
+| 1180x820@2 | lạ · Nơi vuon · người 1 | por | 2 | 0.16 | 100% |
+| 1180x820@2 | lạ · Nơi vuon · người 1 | fig | 3 | 1.2 | 100% |
+| 1180x820@2 | lạ · Nơi vuon · người 1 | unk | 4 | 0.36 | 100% |
+| 1180x820@2 | lạ · Nơi vuon · người 2 | por | 2 | 0.16 | 100% |
+| 1180x820@2 | lạ · Nơi vuon · người 2 | fig | 3 | 1.2 | 100% |
+| 1180x820@2 | lạ · Nơi vuon · người 2 | unk | 4 | 0.36 | 100% |
 | 1180x820@2 | lạ · Nơi thu | por | 2 | 0.16 | 100% |
 | 1180x820@2 | lạ · Nơi thu | fig | 2 | 1.2 | 100% |
 | 1180x820@2 | lạ · Nơi thu | unk | 3 | 0.05 | 100% |
@@ -267,15 +270,6 @@ Ngưỡng: phóng (cỡ hiển thị × devicePixelRatio ÷ cỡ ảnh) > 1.25 =
 | 1180x820@2 | lạ · Nơi tn · người 2 | por | 2 | 0.16 | 100% |
 | 1180x820@2 | lạ · Nơi tn · người 2 | fig | 3 | 1.2 | 100% |
 | 1180x820@2 | lạ · Nơi tn · người 2 | unk | 4 | 0.36 | 100% |
-| 1180x820@2 | lạ · Nơi kn | por | 2 | 0.16 | 100% |
-| 1180x820@2 | lạ · Nơi kn | fig | 3 | 1.2 | 100% |
-| 1180x820@2 | lạ · Nơi kn | unk | 3 | 0.05 | 100% |
-| 1180x820@2 | lạ · Nơi kn · người 1 | por | 2 | 0.16 | 100% |
-| 1180x820@2 | lạ · Nơi kn · người 1 | fig | 3 | 1.2 | 100% |
-| 1180x820@2 | lạ · Nơi kn · người 1 | unk | 4 | 0.36 | 100% |
-| 1180x820@2 | lạ · Nơi kn · người 2 | por | 2 | 0.16 | 100% |
-| 1180x820@2 | lạ · Nơi kn · người 2 | fig | 3 | 1.2 | 100% |
-| 1180x820@2 | lạ · Nơi kn · người 2 | unk | 4 | 0.36 | 100% |
 | 1180x820@2 | lạ · Hoàng thượng · Thái hậu | por | 2 | 0.16 | 100% |
 | 1180x820@2 | lạ · Hoàng thượng · Thái hậu | fig | 2 | 1.2 | 100% |
 | 1180x820@2 | lạ · Hoàng thượng · Thái hậu | unk | 7 | 0.36 | 100% |
@@ -335,7 +329,7 @@ Ngưỡng: phóng (cỡ hiển thị × devicePixelRatio ÷ cỡ ảnh) > 1.25 =
 | 1180x820@2 | lạ · Giao tình · th | unk | 6 | 0.14 | 100% |
 | 1180x820@2 | lạ · Hoàng tự | por | 2 | 0.16 | 100% |
 | 1180x820@2 | lạ · Hoàng tự | fig | 2 | 1.2 | 100% |
-| 1180x820@2 | lạ · Hoàng tự | unk | 10 | 0.05 | 87% |
+| 1180x820@2 | lạ · Hoàng tự | unk | 9 | 0.05 | 100% |
 | 1180x820@2 | lạ · Phe phái | por | 2 | 0.16 | 100% |
 | 1180x820@2 | lạ · Phe phái | fig | 2 | 1.2 | 100% |
 | 1180x820@2 | lạ · Phe phái | unk | 3 | 0.05 | 100% |
@@ -347,44 +341,42 @@ Ngưỡng: phóng (cỡ hiển thị × devicePixelRatio ÷ cỡ ảnh) > 1.25 =
 | 1180x820@2 | lạ · Mệnh truyện | fig | 2 | 1.2 | 100% |
 | 1180x820@2 | lạ · Mệnh truyện | unk | 3 | 0.05 | 100% |
 | 1180x820@2 | lạ · Thẻ Hoàng thượng | unk | 1 | 0.4 | 100% |
-| 1180x820@2 | lạ · Hộp thoại có người | fig | 1 | 0.78 | 100% |
-| 1180x820@2 | Sổ tuần | por | 2 | 0.16 | 100% |
-| 1180x820@2 | Sổ tuần | fig | 2 | 1.2 | 100% |
-| 1180x820@2 | Sổ tuần | unk | 3 | 0.05 | 100% |
+| 1180x820@2 | lạ · Hộp thoại có người | por | 2 | 0.16 | 100% |
+| 1180x820@2 | lạ · Hộp thoại có người | fig | 2 | 1.2 | 100% |
+| 1180x820@2 | lạ · Hộp thoại có người | unk | 3 | 0.05 | 100% |
+| 1180x820@2 | Sổ tuần | fig | 1 | 0.78 | 100% |
 | 1180x820@2 | thấy mặt · Danh mục 1-6 | por | 13 | 0.95 | 100% |
 | 1180x820@2 | thấy mặt · Danh mục 7-12 | por | 14 | 0.95 | 100% |
 | 1180x820@2 | thấy mặt · Danh mục 13-18 | por | 11 | 0.95 | 100% |
 | 1180x820@2 | thấy mặt · Danh mục 19-24 | por | 10 | 0.95 | 100% |
-| 1180x820@2 | thấy mặt · Danh mục 25-30 | por | 13 | 0.95 | 100% |
-| 1180x820@2 | thấy mặt · Danh mục 31-36 | por | 11 | 0.95 | 100% |
-| 1180x820@2 | thấy mặt · Danh mục 37-42 | por | 8 | 0.95 | 100% |
+| 1180x820@2 | thấy mặt · Danh mục 25-30 | por | 11 | 0.95 | 100% |
+| 1180x820@2 | thấy mặt · Danh mục 31-36 | por | 10 | 0.95 | 100% |
+| 1180x820@2 | thấy mặt · Danh mục 37-42 | por | 10 | 0.95 | 100% |
 | 1180x820@2 | thấy mặt · Danh mục 43-48 | por | 7 | 0.95 | 100% |
-| 1180x820@2 | thấy mặt · Danh mục 49-54 | por | 11 | 0.95 | 100% |
+| 1180x820@2 | thấy mặt · Danh mục 49-54 | por | 14 | 0.95 | 100% |
 | 1180x820@2 | thấy mặt · Danh mục 55-60 | por | 14 | 0.95 | 100% |
 | 1180x820@2 | thấy mặt · Danh mục 61-66 | por | 14 | 0.95 | 100% |
-| 1180x820@2 | thấy mặt · Danh mục 67-72 | por | 6 | 0.95 | 100% |
-| 1180x820@2 | thấy mặt · Danh mục 67-72 | unk | 8 | 0.42 | 100% |
-| 1180x820@2 | thấy mặt · Danh mục 73-76 | unk | 12 | 0.42 | 100% |
+| 1180x820@2 | thấy mặt · Danh mục 67-72 | por | 3 | 0.95 | 100% |
+| 1180x820@2 | thấy mặt · Danh mục 67-72 | unk | 11 | 0.42 | 100% |
+| 1180x820@2 | thấy mặt · Danh mục 73-75 | unk | 9 | 0.42 | 100% |
 | 1180x820@2 | quen · Thanh trên + Hành sự | por | 5 | 0.16 | 100% |
 | 1180x820@2 | quen · Thanh trên + Hành sự | fig | 2 | 1.2 | 100% |
 | 1180x820@2 | quen · Nơi home | por | 5 | 0.16 | 100% |
 | 1180x820@2 | quen · Nơi home | fig | 2 | 1.2 | 100% |
 | 1180x820@2 | quen · Nơi home · người 1 | por | 6 | 0.83 | 100% |
 | 1180x820@2 | quen · Nơi home · người 1 | fig | 2 | 1.2 | 100% |
-| 1180x820@2 | quen · Nơi vuon | por | 5 | 0.16 | 100% |
-| 1180x820@2 | quen · Nơi vuon | fig | 3 | 1.2 | 100% |
-| 1180x820@2 | quen · Nơi vuon · người 1 | por | 6 | 0.83 | 100% |
-| 1180x820@2 | quen · Nơi vuon · người 1 | fig | 3 | 1.2 | 100% |
-| 1180x820@2 | quen · Nơi vuon · người 2 | por | 6 | 0.83 | 100% |
-| 1180x820@2 | quen · Nơi vuon · người 2 | fig | 3 | 1.2 | 100% |
-| 1180x820@2 | quen · Nơi dtd | por | 5 | 0.16 | 100% |
-| 1180x820@2 | quen · Nơi dtd | fig | 2 | 1.2 | 100% |
-| 1180x820@2 | quen · Nơi dtd · người 1 | por | 6 | 0.83 | 100% |
-| 1180x820@2 | quen · Nơi dtd · người 1 | fig | 2 | 1.2 | 100% |
+| 1180x820@2 | quen · Nơi thu | por | 5 | 0.16 | 100% |
+| 1180x820@2 | quen · Nơi thu | fig | 2 | 1.2 | 100% |
+| 1180x820@2 | quen · Nơi thu · người 1 | por | 6 | 0.83 | 100% |
+| 1180x820@2 | quen · Nơi thu · người 1 | fig | 2 | 1.2 | 100% |
 | 1180x820@2 | quen · Nơi tn | por | 5 | 0.16 | 100% |
 | 1180x820@2 | quen · Nơi tn | fig | 2 | 1.2 | 100% |
 | 1180x820@2 | quen · Nơi tn · người 1 | por | 6 | 0.83 | 100% |
 | 1180x820@2 | quen · Nơi tn · người 1 | fig | 2 | 1.2 | 100% |
+| 1180x820@2 | quen · Nơi kn | por | 5 | 0.16 | 100% |
+| 1180x820@2 | quen · Nơi kn | fig | 2 | 1.2 | 100% |
+| 1180x820@2 | quen · Nơi kn · người 1 | por | 6 | 0.83 | 100% |
+| 1180x820@2 | quen · Nơi kn · người 1 | fig | 2 | 1.2 | 100% |
 | 1180x820@2 | quen · Hoàng thượng · Thái hậu | por | 8 | 0.83 | 100% |
 | 1180x820@2 | quen · Hoàng thượng · Thái hậu | fig | 2 | 1.2 | 100% |
 | 1180x820@2 | quen · Hoàng thượng · Thái hậu · thẻ 1 | por | 9 | 0.83 | 100% |
@@ -407,11 +399,11 @@ Ngưỡng: phóng (cỡ hiển thị × devicePixelRatio ÷ cỡ ảnh) > 1.25 =
 | 1180x820@2 | quen · Nam nhân · thẻ 1 | fig | 2 | 1.2 | 100% |
 | 1180x820@2 | quen · Nam nhân · thẻ 3 | por | 12 | 0.83 | 100% |
 | 1180x820@2 | quen · Nam nhân · thẻ 3 | fig | 2 | 1.2 | 100% |
-| 1180x820@2 | quen · Nam nhân · thẻ 5 | por | 13 | 0.83 | 100% |
+| 1180x820@2 | quen · Nam nhân · thẻ 5 | por | 12 | 0.83 | 100% |
 | 1180x820@2 | quen · Nam nhân · thẻ 5 | fig | 2 | 1.2 | 100% |
-| 1180x820@2 | quen · Nam nhân · thẻ 7 | por | 13 | 0.83 | 100% |
+| 1180x820@2 | quen · Nam nhân · thẻ 7 | por | 12 | 0.83 | 100% |
 | 1180x820@2 | quen · Nam nhân · thẻ 7 | fig | 2 | 1.2 | 100% |
-| 1180x820@2 | quen · Nam nhân · thẻ 9 | por | 13 | 0.83 | 100% |
+| 1180x820@2 | quen · Nam nhân · thẻ 9 | por | 12 | 0.83 | 100% |
 | 1180x820@2 | quen · Nam nhân · thẻ 9 | fig | 2 | 1.2 | 100% |
 | 1180x820@2 | quen · Cung nhân | por | 13 | 0.83 | 100% |
 | 1180x820@2 | quen · Cung nhân | fig | 2 | 1.2 | 100% |
@@ -419,15 +411,13 @@ Ngưỡng: phóng (cỡ hiển thị × devicePixelRatio ÷ cỡ ảnh) > 1.25 =
 | 1180x820@2 | quen · Cung nhân · thẻ 1 | fig | 2 | 1.2 | 100% |
 | 1180x820@2 | quen · Cung nhân · thẻ 6 | por | 13 | 0.83 | 100% |
 | 1180x820@2 | quen · Cung nhân · thẻ 6 | fig | 2 | 1.2 | 100% |
-| 1180x820@2 | quen · Cung nhân · thẻ 11 | por | 14 | 0.83 | 100% |
+| 1180x820@2 | quen · Cung nhân · thẻ 11 | por | 13 | 0.83 | 100% |
 | 1180x820@2 | quen · Cung nhân · thẻ 11 | fig | 2 | 1.2 | 100% |
 | 1180x820@2 | quen · Cung nhân · thẻ 16 | por | 13 | 0.83 | 100% |
 | 1180x820@2 | quen · Cung nhân · thẻ 16 | fig | 2 | 1.2 | 100% |
 | 1180x820@2 | quen · Cung nhân · thẻ 21 | por | 13 | 0.83 | 100% |
 | 1180x820@2 | quen · Cung nhân · thẻ 21 | fig | 2 | 1.2 | 100% |
-| 1180x820@2 | quen · Giao tình | por | 22 | 0.87 | 100% |
-| 1180x820@2 | quen · Giao tình | fig | 2 | 1.2 | 100% |
-| 1180x820@2 | quen · Giao tình · me | por | 21 | 0.87 | 100% |
+| 1180x820@2 | quen · Giao tình · me | por | 21 | 0.47 | 100% |
 | 1180x820@2 | quen · Giao tình · me | fig | 2 | 1.2 | 100% |
 | 1180x820@2 | quen · Giao tình · 1 | por | 20 | 0.16 | 100% |
 | 1180x820@2 | quen · Giao tình · 1 | fig | 2 | 1.2 | 100% |
@@ -443,9 +433,9 @@ Ngưỡng: phóng (cỡ hiển thị × devicePixelRatio ÷ cỡ ảnh) > 1.25 =
 | 1180x820@2 | quen · Giao tình · 6 | fig | 2 | 1.2 | 100% |
 | 1180x820@2 | quen · Giao tình · 7 | por | 20 | 0.16 | 100% |
 | 1180x820@2 | quen · Giao tình · 7 | fig | 2 | 1.2 | 100% |
-| 1180x820@2 | quen · Hoàng tự | por | 8 | 0.16 | 100% |
+| 1180x820@2 | quen · Hoàng tự | por | 7 | 0.16 | 100% |
 | 1180x820@2 | quen · Hoàng tự | fig | 2 | 1.2 | 100% |
-| 1180x820@2 | quen · Hoàng tự | unk | 4 | 0.05 | 87% |
+| 1180x820@2 | quen · Hoàng tự | unk | 4 | 0.05 | 100% |
 | 1180x820@2 | quen · Phe phái | por | 5 | 0.16 | 100% |
 | 1180x820@2 | quen · Phe phái | fig | 2 | 1.2 | 100% |
 | 1180x820@2 | quen · Dư đồ | por | 1 | 0.16 | 100% |
@@ -460,16 +450,20 @@ Ngưỡng: phóng (cỡ hiển thị × devicePixelRatio ÷ cỡ ảnh) > 1.25 =
 | 1180x820@2 | quen · Danh mục 7-12 | por | 14 | 0.95 | 100% |
 | 1180x820@2 | quen · Danh mục 13-18 | por | 11 | 0.95 | 100% |
 | 1180x820@2 | quen · Danh mục 19-24 | por | 10 | 0.95 | 100% |
-| 1180x820@2 | quen · Danh mục 25-30 | por | 13 | 0.95 | 100% |
-| 1180x820@2 | quen · Danh mục 31-36 | por | 11 | 0.95 | 100% |
-| 1180x820@2 | quen · Danh mục 37-42 | por | 8 | 0.95 | 100% |
+| 1180x820@2 | quen · Danh mục 25-30 | por | 11 | 0.95 | 100% |
+| 1180x820@2 | quen · Danh mục 31-36 | por | 10 | 0.95 | 100% |
+| 1180x820@2 | quen · Danh mục 37-42 | por | 10 | 0.95 | 100% |
 | 1180x820@2 | quen · Danh mục 43-48 | por | 7 | 0.95 | 100% |
-| 1180x820@2 | quen · Danh mục 49-54 | por | 11 | 0.95 | 100% |
+| 1180x820@2 | quen · Danh mục 49-54 | por | 14 | 0.95 | 100% |
 | 1180x820@2 | quen · Danh mục 55-60 | por | 14 | 0.95 | 100% |
 | 1180x820@2 | quen · Danh mục 61-66 | por | 14 | 0.95 | 100% |
-| 1180x820@2 | quen · Danh mục 67-72 | por | 6 | 0.95 | 100% |
-| 1180x820@2 | quen · Danh mục 67-72 | unk | 8 | 0.42 | 100% |
-| 1180x820@2 | quen · Danh mục 73-76 | unk | 12 | 0.42 | 100% |
+| 1180x820@2 | quen · Danh mục 67-72 | por | 3 | 0.95 | 100% |
+| 1180x820@2 | quen · Danh mục 67-72 | unk | 11 | 0.42 | 100% |
+| 1180x820@2 | quen · Danh mục 73-75 | unk | 9 | 0.42 | 100% |
+| 1180x820@2 | quen · Giao tình | por | 21 | 0.49 | 100% |
+| 1180x820@2 | quen · Giao tình | fig | 2 | 1.2 | 100% |
+| 755x1000@2 | lạ · Hoàng tự | por | 4 | 0.16 | 100% |
+| 755x1000@2 | lạ · Hoàng tự | unk | 7 | 0.05 | 100% |
 
 
 ## Trước — gộp theo cỡ + tệp (main 14967f89)

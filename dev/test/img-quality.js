@@ -35,9 +35,11 @@ function measure(screen){
  const inset=(el,b,r)=>{const cp=getComputedStyle(el).clipPath;const m=/^inset\(([^)]*)\)/.exec(cp||'');if(!m)return r;const v=m[1].split(/\s+round\s+/)[0].trim().split(/\s+/);
   const q=[v[0],v[1]||v[0],v[2]||v[0],v[3]||v[1]||v[0]].map((x,i)=>/%$/.test(x)?parseFloat(x)/100*((i%2)?b.width:b.height):parseFloat(x)||0);
   return{l:Math.max(r.l,b.left+q[3]),t:Math.max(r.t,b.top+q[0]),r:Math.min(r.r,b.right-q[1]),b:Math.min(r.b,b.bottom-q[2])}};
- const clipRect=el=>{let r={l:-1e9,t:-1e9,r:1e9,b:1e9};r=inset(el,el.getBoundingClientRect(),r);
+ const SC={cut:0};const clipRect=el=>{SC.cut=0;let r={l:-1e9,t:-1e9,r:1e9,b:1e9};r=inset(el,el.getBoundingClientRect(),r);
   for(let e=el.parentElement;e&&e!==document.documentElement;e=e.parentElement){const cs=getComputedStyle(e);if(cs.display==='none')return null;
    const b=e.getBoundingClientRect();if(cs.overflowX!=='visible'||cs.overflowY!=='visible'||cs.contain.includes('paint'))r={l:Math.max(r.l,b.left),t:Math.max(r.t,b.top),r:Math.min(r.r,b.right),b:Math.min(r.b,b.bottom)};
+   /* a list scrolled so the picture is half out of its scroll box is not a crop fault */
+   if(/auto|scroll/.test(cs.overflowY+cs.overflowX)){const m=el.getBoundingClientRect();if(m.top<b.top-1||m.bottom>b.bottom+1||m.left<b.left-1||m.right>b.right+1)SC.cut=1}
    r=inset(e,b,r)}
   return{l:Math.max(r.l,0),t:Math.max(r.t,0),r:Math.min(r.r,VW),b:Math.min(r.b,VH)}};
  const visible=el=>{for(let e=el;e;e=e.parentElement){if(e.hidden)return false;const cs=getComputedStyle(e);if(cs.display==='none'||cs.visibility==='hidden'||+cs.opacity<.05)return false}return true};
@@ -69,7 +71,7 @@ function measure(screen){
   const vis=Math.max(0,Math.min(fx1,cr.r,box.right)-Math.max(fx0,cr.l,box.left))*Math.max(0,Math.min(fy1,cr.b,box.bottom)-Math.max(fy0,cr.t,box.top));
   const face=vis/((fx1-fx0)*(fy1-fy0));
   /* judge the crop only for pictures fully inside the viewport and not clipped by a scrolling list (a card scrolled half out is not a crop fault) */
-  const onScr=(Math.min(box.right,VW)-Math.max(box.left,0))*(Math.min(box.bottom,VH)-Math.max(box.top,0))/(box.width*box.height);
+  const onScr=SC.cut?0:(Math.min(box.right,VW)-Math.max(box.left,0))*(Math.min(box.bottom,VH)-Math.max(box.top,0))/(box.width*box.height);
   let filt='';for(let e=el;e&&e!==document.body;e=e.parentElement){const f=getComputedStyle(e).filter;if(f&&f!=='none')filt+=f+' '}
   R.push({screen,who:who(el),src:src.replace(/^.*?img\//,'img/'),k,nw,nh,cssW:Math.round(box.width),cssH:Math.round(box.height),scale:+scale.toFixed(2),face:+face.toFixed(2),onScr:+onScr.toFixed(2),fit:fitMode,where:place(el),bg:isBg?1:0,filter:filt.trim()})};
  document.querySelectorAll('img').forEach(im=>{const src=im.currentSrc||im.src||'';if(!PERSON.test(src)||!visible(im))return;
