@@ -14,11 +14,24 @@
 - sheet.py / zoom.py / crops.py: before|after sheets (zoom shows changed-pixel map).
 - Calibration on 21 samples LOOKED at (hands/necks only change; clothes untouched apart from WebP re-encode noise, q92 like the rosy pass).
 
-## State (21:00Z)
-- Audit: rosy-pass figs (959) + 80 random others measured. 899 flagged (consort 438, maid 374+1, eunuch 33, kid 29, man 9, official 6,
-  mama 3, emperor 1, player look3 5). Remaining ~7300 non-rosy figs NOT yet audited (runm.sh; ~60/min under load).
-- Fix batch on flag1 running (log/fix.jsonl); uploaded so far = log/uploaded.txt (resume: fixrun skips names in fix.jsonl; upload.sh skips uploaded.txt). cutcheck before/after = log/cut.tsv (no file worse).
+## State (session end, ~21:50Z)
+- Rosy-pass class + players DONE locally: 892 figs + 609 por necks fixed (dev/art/skin-match/TABLE.md: median face-rosier excess a*
+  neck 4.2–4.5 → 0.2–0.3, hands 5.3 → 0.4–0.5), player look 1 rosy (5 fig + 5 por), player look 3 neck/hands matched (5 fig + 5 por).
+  Looked at sheets: only hands/necks change; clothes untouched (WebP q92 re-encode noise only). Sample: dev/art/skin-match/sample-before-after.jpg
+- cutcheck on all 1500 changed files (log/cut.tsv): none worse except +0.25..+0.5 on 2 player-look1 figs (pre-existing scores ~91–97) and 2 por (+0.3).
+- UPLOADED TO CDN: 234 of 1500 files = log/uploaded.txt. NOT uploaded = files in log/fix.jsonl (f + por) minus uploaded.txt.
+  The fixed pixels are LOST with this container → re-generate them (deterministic): see Resume.
+- Audit of the ~7300 never-rosied figs: 1036 lines in log/all.jsonl (only ~80 random non-rosied so far; 1 natural mismatch per ~80 → expect ~100 more).
 
+## Next steps (exact)
+1. Setup (Resume block below), download base: fig-* listed in log/fix.jsonl + their por-*.
+2. Re-run fixes only for the NOT-uploaded names (fixrun skips names already in REC, so use a fresh REC):
+   python3 -c "import json;u=set(open('dev/art/skin-match/log/uploaded.txt').read().split());[print(json.loads(l)['f']) for l in open('dev/art/skin-match/log/fix.jsonl') if json.loads(l)['f'] not in u and 'player_look1' not in l]" > todo.txt
+   .ahcache/sm/venv/bin/python dev/art/skin-match/fixrun.py dev/art/skin-match/base.json .ahcache/sm/base .ahcache/sm/out .ahcache/sm/fix.jsonl $(cat todo.txt)
+   (por of a fig whose fig was uploaded but por not: check uploaded.txt for por-<id> too.) Player look1: player.py if its files are not in uploaded.txt.
+3. dev/art/skin-match/upload.sh (cutcheck + cdn_sync, logs uploaded.txt).
+4. Finish audit: .ahcache/sm/runm.sh (measure.py over remaining fig-*), select.py → flag.txt, fixrun on new names, LOOK at crops.py sheet, upload.sh.
+5. Update TABLE.md (table.py), commit logs, push, report "SẴN SÀNG KIỂM".
 ## Resume (fresh container)
   cd <worktree>; mkdir -p .ahcache/sm; python3 -m venv --system-site-packages .ahcache/sm/venv; .ahcache/sm/venv/bin/pip install mediapipe==1.2.3
   apt-get install -y libegl1 libgles2; curl -o .ahcache/sm/mc.tflite <model url above>; curl -o .ahcache/sm/index.json https://ctm-img.victoria-tntt.workers.dev/img/_index.json
