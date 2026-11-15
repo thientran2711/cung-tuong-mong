@@ -300,3 +300,4 @@ Worker worktrees at /home/user/wt/<name>. Rule summaries for workers: /home/user
 - (s7, fwd) por-scale: sample sent to owner; ~3250 portrait re-crops to per-group face targets (children .294, consorts/maids .241, eunuchs .261, men .255…); full run continues in s6; mk-colour must re-run mkfit.py --stale after.
 - LIVE main = ts-a r6 (4e37161c0): Top 15 lô A (Nguy hiểm chung, etc.); k61Meet sets S.met; VP 'quý ngươi hơn' fix. Bot: main HH 0% vs ~32% target (balance owner).
 - (s7, fwd) LIVE main = ts-a (4e37161c0, ff by s6). Notes routed: S.met/Emperor-grey → face-reveal; HH 0% bot → s6 balance-pass; minor VP 'theo lòng nàng' ambiguity on dressing contest (queue).
+- (s7) LIVE main = month-calendar r1 (8ee414c1b): desk calendar on her room stage → 3×10 month grid, fixed FEST festivals only, KIT §58; desk avoids +N chips. Pre-existing #kit §28.1 sample error still open (queue).
