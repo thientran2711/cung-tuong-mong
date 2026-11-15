@@ -273,3 +273,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (08:10Z) Owner: lật trang phải CONG theo ngón tay khi giữ-kéo (kéo tới lui, dừng là đứng), thả quá nửa hoặc hất nhanh mới lật hẳn, chưa thì bật về; nút ‹ › cũng lật cong; bìa cũng cong (cứng hơn). review/drag-curl.
 - (08:10Z) Owner hỏi lại thẳng cột 'Sổ này ghi': đã giao review/hau-cung-ui từ 04:25Z, chưa lên live.
 - 08:10Z cdn_sync 216 ảnh thu nhỏ hoa điền cung nữ (đợt 3).
+- (08:15Z) Owner: tranh việc trong Sổ tuần trùng nhau (Nhịn = Làm thơ; Ngủ đêm = Đi) → mỗi việc khác nghĩa một tranh riêng đúng nghĩa (thiếu thì vẽ); 'Đi.' → 'Đến <nơi>'; 'Nhịn.' có ngữ cảnh; nhãn 'X quý ngươi'. review/act-pics.
