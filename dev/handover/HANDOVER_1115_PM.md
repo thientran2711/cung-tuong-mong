@@ -217,3 +217,4 @@ Worktree thợ ở /home/user/wt/<tên>. Bản tóm tắt luật cho thợ: /hom
 - From now on this file and all repo docs are written in English (owner ~18:30Z).
 - LIVE main = 041cdcd1f: kit-close (311260527: Tư trang 2 tabs, news card, no tap-through, ✕ only) + ChatGPT docs (ebbbd9eff) + scene-light colour part (no sepia/brown in her room, warm rain). Not refilling the freed reviewer slot (CPU overload rule).
 - LIVE main = rest-balance (207824297): Rest a moment (+6, 1 khắc) vs Recover (evening only, tonic or 8 silver, +20); tonic shown under Cost.
+- game-feel FAIL (review/game-feel-r6 5a04b3b21, reviewer fixed the no-chest imperial reward + letter placeholders): kitLose missing, slow reveals (17:02Z), private reveal CSS → new worker on review/game-feel (absorbs queued reward-anim).
