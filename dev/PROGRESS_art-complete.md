@@ -22,7 +22,13 @@ HOLD (owner): old-save player looks (128), promoted old-love men (56).
   Every por c11-c32 + m01-m39 (a26/a36/a51) viewed zoomed at the brows (browsheet), before/after. Fixed + re-uploaded:
   por (38): consort-c11-kc-a26 consort-c11-kc-a51 consort-c17-kc-a26 consort-c17-kc-a36 consort-c17-kc-a51 consort-c19-kc-a36 consort-c19-kc-a51 consort-c21-kc-a26 consort-c21-kc-a36 consort-c21-kc-a51 consort-c23-kc-a26 consort-c23-kc-a36 consort-c23-kc-a51 consort-c25-kc-a36 consort-c26-kc-a26 consort-c26-kc-a36 consort-c26-kc-a51 consort-c29-kc-a26 consort-c29-kc-a36 consort-c29-kc-a51 consort-c32-kc-a26 consort-c32-kc-a36 consort-c32-kc-a51 maid-m06-kc-a26 maid-m06-kc-a36 maid-m06-kc-a51 maid-m10-kc-a26 maid-m10-kc-a36 maid-m10-kc-a51 maid-m11-kc-a36 maid-m14-kc-a36 maid-m19-kc-a36 maid-m19-kc-a51 maid-m20-kc-a26 maid-m20-kc-a36 maid-m20-kc-a51 maid-m29-kc-a51 maid-m36-kc-a36
   fig (35): consort-c11-kc-a26 consort-c11-kc-a36 consort-c11-kc-a51 consort-c17-kc-a26 consort-c17-kc-a36 consort-c17-kc-a51 consort-c19-kc-a36 consort-c19-kc-a51 consort-c21-kc-a26 consort-c21-kc-a36 consort-c21-kc-a51 consort-c23-kc-a26 consort-c23-kc-a36 consort-c23-kc-a51 consort-c25-kc-a36 consort-c26-kc-a26 consort-c26-kc-a36 consort-c26-kc-a51 consort-c29-kc-a26 consort-c29-kc-a36 consort-c29-kc-a51 consort-c32-kc-a26 consort-c32-kc-a36 consort-c32-kc-a51 maid-m06-kc-a36 maid-m06-kc-a51 maid-m10-kc-a26 maid-m10-kc-a36 maid-m10-kc-a51 maid-m14-kc-a26 maid-m14-kc-a36 maid-m19-kc-a36 maid-m20-kc-a26 maid-m20-kc-a36 maid-m20-kc-a51
-  (2 por spots done by hand: m29-a51 dot, m36-a36 light bead.) The a18 sheets were not in scope.
+  (2 por spots done by hand: m29-a51 dot, m36-a36 light bead.)
+  Sweep part 2 (coordinator): kc a18 (c01-c32 + m01-m52, por+fig) and c01-c10 a26/a36/a51 (por+fig): dry run + --sheet + brow
+  sheet looked at. Fixed + re-uploaded: por consort c02-a36, c04-a51, c06-a26, c06-a36 (spot=), c08-a36, c16-a18;
+  fig consort c07-a18, c02-a51, c03-a36, c04-a51, c06-a26, c06-a36, c08-a36, fig maid m41-a18. False hits left alone:
+  por maid m16-a18 (clothing), fig c18-a26 / m04-a51 / m42-a36 / m44-a51 (hairline).
+  TOOLS for the whole-game audit: demole_por.py (docstring = usage; files or quoted globs; -n, --sheet OUT.jpg, spot=x,y)
+  and browsheet.py (plain brow crops of every face, to catch faint dots the detector misses). Both in dev/figwork/artcomplete/.
   NEW FACES: run demole_por.py -n on new por/fig and look at the brow crops before upload.
 - Code (dev/build/jartc.js, appended to assemble.py; site rebuilt with dev/site/build_site.sh):
   1. married spouses (k.hW.s phò mã, k.pW.chinh / trac) age +1 each new year (wrap of ageYear);
