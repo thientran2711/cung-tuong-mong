@@ -46,6 +46,10 @@ Nhánh `review/page-curl` từ origin/review/fold-layout (đã gộp tới e7deb
   preserve-3d, mặt trước = trang cũ, mặt sau = trang mới, chữ in trên tờ nên quay/nghiêng theo tờ; nghiêng nhẹ + skew giữa lượt,
   bóng trên trang dưới; 760 ms; cắt trên/dưới khung trang). Bản sao (kclPrep) bỏ mọi id (gộp book-release) và tự mang bố cục tính sẵn.
   Sổ tuần vẫn dùng kitCurl (góc gấp, mặt sau = trang kế).
+- DỪNG Ở ĐÂY (1fdc37c2, đã đẩy): kitSheetTurn chạy, Fold 686 + iPad 1180 không lỗi. Còn lại: (1) gửi ảnh 25/45/65 % cho chủ
+  (dev/shots/curl2/{fold686,ipad1180}-tab-*.jpg) chờ duyệt; (2) KIT.md §32/34 chưa ghi kitSheetTurn; (3) ở 65 % iPad trang thật bên dưới
+  thoáng lệch chữ (thẻ người đang đo lại) — kiểm lại trên máy thật; (4) lật lùi (dir −1) quay quanh mép phải, chưa soi kỹ ảnh back-45;
+  (5) sổ tuần chưa chuyển sang cả tờ (vẫn kitCurl) — hỏi chủ có muốn giống không.
 
 ## Kiểm thử (Playwright)
 - page-curl: 1180x820@2, 1366x1024@2, 686x880@2.2, 755x1000@2 — không lỗi trang, không tràn ngang, giảm chuyển động = không cong (mờ chéo).
