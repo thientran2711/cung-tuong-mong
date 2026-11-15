@@ -5,7 +5,9 @@
 const {chromium}=require('playwright');const [,,URL]=process.argv;
 (async()=>{const b=await chromium.launch();const p=await (await b.newContext({viewport:{width:755,height:1000},deviceScaleFactor:2,serviceWorkers:'block'})).newPage();
  const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));p.setDefaultTimeout(0);
- await p.goto(URL,{waitUntil:'domcontentloaded',timeout:0});await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function',null,{timeout:0});await p.waitForTimeout(1500);
+ await p.goto(URL,{waitUntil:'domcontentloaded',timeout:0});await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function',null,{timeout:0});/* wait for the loader (jload) to hand over, else start() can run before the game is ready and S stays undefined */
+ for(let n=0;n<600;n++){const s=await p.evaluate(()=>{const b=document.querySelector('#kload [data-kl="go"]');if(b){b.click();return ''}return window.KLOAD&&['done','skipped','all'].includes(KLOAD.phase)&&!document.getElementById('kload')?'ok':''});if(s)break;await p.waitForTimeout(1000)}
+ await p.waitForTimeout(1500);
  const r=await p.evaluate(()=>{try{localStorage.clear()}catch(e){}document.getElementById('title').hidden=true;for(let i=0;i<12;i++){start();if(!isSrv())break}Q.length=0;
   const m=document.getElementById('modal');if(m)m.hidden=true;tab="act";const out={};
   const txt=i=>{const el=document.querySelector(`.card[data-i="${i}"]`);return el?{dis:el.disabled,t:el.innerText.replace(/\s+/g," ").slice(0,320)}:null};
