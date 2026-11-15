@@ -125,3 +125,42 @@ Mỗi người duyệt cũ ghi hàng của mình vào dev/review/R*-queue.md. Ph
 
 ## Đĩa
 Khoảng 4,8 GB trống. Dọn worktree của thợ đã xong: `git worktree remove --force --force` + `git worktree prune`. Đừng xóa worktree của thợ đang chạy hoặc còn ảnh chưa lên CDN (act-pics2, trung-y/agent-a40a826e3f9c2878f, scene-light, j83-variety).
+
+## PHỤ LỤC: báo cáo cuối của thợ và người duyệt (15/11 ~09:50Z)
+Đọc PROGRESS trên từng nhánh trước khi giao tiếp.
+
+### Thợ
+| Nhánh | sha | PROGRESS | Ghi chú |
+|---|---|---|---|
+| review/fix-float | e03bf36a0 | dev/PROGRESS_fix-float.md | Cần rebase lên main. Commit đầu là WIP trang người Tuần lục mục (1)–(9), chưa thử. Còn LEFT: (7) khuôn cố định, (8) thẳng cột, test chip số nguyên. |
+| review/tabs-kit | a94a34925 | dev/PROGRESS_tabs-kit.md | Đã rebase lên main 70c792d41, phải thử lại. |
+| review/rest-balance | 0f4670e90 | không có | Xong. |
+| review/ts-a | 02d7db25f | dev/PROGRESS_ts_a.md | WIP: 5 lỗi FAIL đã sửa code, cần chụp 4 khổ. Bóng xám Hoàng thượng để cho kit-fig2. |
+| review/kit-close | 1bd240a54 | | Sẵn sàng duyệt. Bản gộp dở của R5: review/kit-close-merged-wip 9e3ab039a (chưa thử). |
+| review/opt-render | a8ec98511 | | Sẵn sàng duyệt, chưa ai xem. |
+| review/hoangtu-tuchat | d8e4fe943 | dev/PROGRESS_hoangtu-tuchat.md | Xong, 22/22 ở 5 khổ. Sẵn sàng duyệt. |
+| review/toilette | 71efeee98 | dev/PROGRESS_toilette.md | Còn: đo lại điểm mặt trên ảnh CDN rồi đẩy toil-fit.json; chụp 1180; bot; nối kitEventDp. Banner ev-toil-* đã lên CDN. Báo act-audit: leAttire dùng S.turn*10+S.buoi nhưng S.turn là tháng. |
+| review/scene-light | fd765c0a4 | dev/PROGRESS_review-scene-light.md | Da hồng 807 (đã duyệt) CHƯA bắt đầu; cắt lại hình cắt mép chưa làm; j87 Thái hậu đã commit, chưa đo lại. |
+| review/act-pics2 | c457f3d8a | dev/PROGRESS_review-act-pics2.md | 22 tranh dòng Tổng lược đã vẽ, CHƯA lên CDN (lệnh trong PROGRESS); 8 lượt vẽ đang chờ tải; còn sửa kbkArt (giao a467/gift-ui). |
+| review/trung-y | f99807021 | worktree agent-a40a826e3f9c2878f: dev/PROGRESS_trung_y.md (mục "BÀN GIAO 15/11 ~09:35Z") | Đủ 84 mặt đã vẽ. Cắt mới xong c01–c12 (trong img/). c13/15/16/18/19 cắt rồi nhưng cutcheck báo bán trong suốt (xem batch2 sheet). Còn lại chưa cắt. ZIP HẾT HẠN 16/11 08:00–09:19Z: làm ngay! |
+| review/sfx | d83929a06 | dev/PROGRESS_sfx.md | Âm theo nghĩa; thay tiếng khóc giống cười và 5 tiếng khác. Cần chạy lại test và cần người nghe thử. |
+| review/rank-ui | f8f914a0e | dev/PROGRESS_review_rank-ui.md | Bục Bảng vàng, thẻ cuối đời. Còn chạy test 844 + podium.js. Khi gộp lấy kitDpFit/kitNameRank của kit-fig2. |
+| review/pets-fix | 8edc3a83e | dev/PROGRESS_pets-fix.md | Đã gộp pet-care + shop-fix (shop-fix đã ở main). Còn lệch 17px, test 5 khổ, sửa bài thử. |
+| review/j83-variety, review/kit-fig2, review/gift-ui | xem PROGRESS trên nhánh | | Chưa kịp báo cuối, đọc nhánh. |
+
+### Người duyệt
+| Nhánh | Kết quả | Ghi chú |
+|---|---|---|
+| act-audit, shop-fix | PASS, đã ở main | Main = 70c792d41. |
+| review/stage-slots | PASS | Ref review/stage-slots-merged = 8b4b51679. Phải chạy stage-slots hoặc coop-e2e một lần trên ref này rồi mới đẩy main. Chưa duyệt: drag-curl, header-fix (+ avatar to), scene-light. Ghi chú dev/review/R3-queue.md. |
+| fix-float | chưa kết luận | coop-e2e lỗi 2 lần mỗi lần một bước. Bản gộp review/fix-float-kiem2-wip 2dd99230b. Còn hỏi: jnight có tự gọi nextBuoi trong co-op không. |
+| rest-balance | gần PASS | Bản gộp review/rest-balance-kiem2-wip ba566d8ff có 2 sửa: j79 thẻ tràn 57px ở 844, lỗi này đang có trên main. |
+| person-acts | chưa kết luận | 1 lỗi: tab "Đối đầu" chui dưới ✕ ở 1000x755. Bản gộp review/person-acts-review-wip d5f60c87c. |
+| gift-chest | chưa kết luận | Bản gộp review/gift-chest-wip 6e6dea11d; bài thử treo ở Giao tình. Đụng rank0-ivory: lên phẩm hiện 2 rương. |
+| weather | phải sửa | wxRiskWord phải dùng chanceW(); dùng "−" không dùng "-". |
+| rank0-ivory | phải đo | KIT_POR.dx=.18 > khoảng thừa .07 nên có thể hở cạnh. |
+| Chưa bắt đầu | | game-feel, brand, img-quality, emo-men, opt-render, scheme-games, econ, rank-ui. |
+
+Ghi chú người duyệt: review/kiem2-notes (R1 b505ed2df, R2 7edeb353e), review/r5-notes a53375818, R6 trên review/gift-chest-wip.
+
+Cảnh báo: R5 đã chạy `pkill -f chromium` lúc dọn, có thể làm chết bài thử của người khác.
