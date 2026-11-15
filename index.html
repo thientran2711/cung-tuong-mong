@@ -13378,7 +13378,7 @@ function sendMe(){T("sendMe "+(S&&S.dead));if(!CW.on||!S||S.dead)return;
  if(host())sendWhere();else if(CW.lastWhere)applyWhere(CW.lastWhere);CW.posKey="";sendPos();render()}
 function snapStats(){const o={};for(const k of ["sung","danh","bac","suc","sac","tai","tamco","duc","th","hh","rank"])o[k]=S[k];return o}
 function waiting(){const s=COOP.state;return CW.on&&(CW.sent===wk()||!!(s.ended&&s.ended[CW.seat]))}
-function frozen(){const s=COOP.state;return CW.on&&(s.status!=="open"||!s.peerOnline)}
+function frozen(){const s=COOP.state;return CW.on&&(s.status!=="open"||!s.peerOnline||!!CW.hold)}  /* CW.hold: the two are on different builds (swreg.js, KIT §35.2) */
 /* touch #next only when its state really changes (j63 observes every "disabled" write) */
 function lockNext(){const n=$("next");if(!n)return;const wb=CW.on&&(CW.bend||needWhere()||!!CW.pendBuoi);const lock=CW.on&&(waiting()||frozen()||CW.pend||!CW.base||wb);
  if(lock){if(!n.disabled)n.disabled=true;if(n.dataset.coopWait!=="1")n.dataset.coopWait="1";const t=wb?(CW.bend?"Đợi bạn xong buổi":"Đợi bạn"):null;if(t&&n.textContent!==t){/* keep the button's own width (the tabs beside it must not shrink): the longer words wrap inside */
@@ -13559,6 +13559,18 @@ if(typeof nlAccept==="function"){const f=nlAccept;nlAccept=function(){const r=f.
 /* a start() that bypasses Luân hồi (window.__nlInner): attach + send at once */
 (function(){const f=start;start=function(){const r=f.apply(this,arguments);try{if(CW.on&&window.__nlInner&&S&&!S.dead){const C=CW.dying||CW.base;if(C)attach(C);CW.inLife=false;sendMe()}}catch(e){console.error(e)}return r}})();
 CW.toCanon=toCanon;CW.fromCanon=fromCanon;CW.friend=friendEntry;CW.sendEnd=sendEnd;
+/* new build in co-op (dev/site/swreg.js, KIT §35.2): the page reloads into the new build and rejoins the room. The room only holds the
+   week's base, so the local week (acts of this week's buổi, her khắc, the friend entry) is kept across the reload:
+   CW.snap() → plain JSON written before the reload; CW.restore(o) right after the rejoin (COOP "start" → begin) puts it back when the
+   room is still in the same week, then catches up with the room (buổi, host's NPC places, the friend's last place). */
+CW.snap=()=>{if(!CW.on||!S||S.dead||!CW.base)return null;let d;try{d=ser()}catch(e){return null}
+ return {room:COOP.state.room,seat:CW.seat,week:wk(),buoi:S.buoi||0,used,d,c:{sent:CW.sent,pend:CW.pend,whereKey:CW.whereKey,lastWhere:CW.lastWhere,fpos:CW.fpos,mine:CW.mine||null,life:CW.life||0,p2:CW.p2,news:CW.news||""}}};
+CW.restore=o=>{if(!o||!o.d||!CW.on||o.seat!==CW.seat||o.week!==wk()||o.c.pend||o.c.sent===wk()||(CW.rweek===wk()&&typeof CW.rbuoi==="number"&&CW.rbuoi<o.buoi))return false;
+ quiet=true;try{deser(o.d)}finally{quiet=false}used=o.used||0;try{deal()}catch(e){}  /* the hand of acts is not in a sổ: dealt again, as the title's Tiếp tục does */
+ Object.assign(CW,o.c);CW.bend=false;CW.pendBuoi=null;CW.posKey="";CW.inLife=false;
+ try{keepFriendPos();refreshHere()}catch(e){}syncRoom(CW.roomMsg);try{$("title").hidden=true}catch(e){}
+ if(Q.length)showModal();render();lockNext();return true};
+
 }catch(e){console.error(e)}})();
 /* ================= jload: NHẬP CUNG LẦN ĐẦU — thỉnh tranh vẽ, tiếng nhạc về máy (owner 11/14) — KIT.md section 35 =================
    assets.json (dev/site/assets.py, built by build_site.sh) lists every image + sound as [path, sha256/16, bytes, group].
@@ -13815,65 +13827,209 @@ window.VP={fix,date,num,ord,mon,rules:RULES,full:FULL,tabs:TABS,refresh:()=>{pat
 </script>
 
 <script>
-/* Service worker hook-up for Cung Tường Mộng (inlined at the end of index.html by dev/site/build_site.sh; KIT.md §35.2).
-   Owner 11/15: the installed app / phone must never stay on an old build.
-   - registers sw.js (updateViaCache none) at once and asks the server for a new sw.js: on open, every time the app comes back to the
-     foreground (visibilitychange / pageshow / focus / online) and every 20 minutes while open (at most once per 10 s).
-   - sw.js changes exactly when the build changes (its name holds the content hash); a new one installs, skips waiting, claims this page
-     → 'controllerchange' here → the kit card "Có bản mới" (3 s, then the page opens the new build by itself).
-   - never in the middle of a dialog, a queued notice, a mini game or a lesson: the card waits until the screen is free; the game saves
-     on every render and once more right before reopening, so every written sổ (hclh-slot / hclh-save-v2-<n>) stays.
-   - while the app is in the background with a new build pending and nothing open, it reopens there (the player sees the new build on return).
-   Test hook: window.KSW {had, pending, shown, checks, card()}. */
+/* New builds for Cung Tường Mộng (inlined at the end of index.html by dev/site/build_site.sh; KIT.md §35.2).
+   Owner 11/15: the installed app / phone must never stay on an old build — and (15/11 03:10Z) "I am playing, what then?":
+   a new build NEVER reloads the page in the middle of play.
+   - registers sw.js (updateViaCache none) and asks for a new sw.js on open, on every return to the foreground and every 20 min.
+     A new worker takes over ('controllerchange') → the build is "pending".
+   - pending while playing: only the kit chip "Có bản mới" on the top bar (#kupdchip, beside her rank). Tap → kit card
+     "Có bản mới · Mở bản mới ngay?" with Để sau / Mở bản mới.
+   - the new build opens by itself only at a natural break:
+       · Qua buổi / Qua đêm: once the new buổi has begun (and its dialogs are read; not after she has spent a khắc of it),
+       · the app comes back from the background after ≥ 10 minutes (before she does anything),
+       · the title screen / first-entry loading screen.
+     Then: save() → note {slot} in localStorage "ctm-upd-resume" → reload → the new build opens the SAME sổ (the title's own
+     "Tiếp tục" path: same buổi, same khắc, same tab, the open dialogs of the queue) and shows the line "Đã mở bản mới".
+   - co-op (jcoop / jcoopworld): never reloads while in a room unless both go together. Each client tells the other its build
+     through the room's `act` relay ({t:"act",k:"ctm-upd",mode,v}; PROTOCOL §9.1 relays any act unchanged; older clients ignore
+     acts that are not invites, so no Worker change). Either one finding a new build → both show the chip. Both open it at the
+     next buổi both have passed (the room's own sync point), or when one asks (chip → Mở bản mới → the friend: Cùng mở / Để sau).
+     Before the reload the local week is kept (COOPW.snap); after it the lobby's own "Trở lại phòng" rejoins the same room and seat,
+     and COOPW.restore puts the week back: no code to type, no invite. Two different builds never play on: the room holds
+     (COOPW.hold freezes Qua buổi) and the older one walks through the same save → reload → rejoin at once.
+   Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-if(!("serviceWorker" in navigator)||!/^https?:$/.test(location.protocol))return;
-const SW=navigator.serviceWorker,K=window.KSW={had:!!SW.controller,pending:false,shown:false,checks:0};
-let reg=null,last=0,timer=0;
+const BUILD="5f0fce8e2c4a";window.CTM_BUILD=BUILD;
+const LSK="ctm-upd-resume",AWAY=10*60e3;
+const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
+const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
+const $i=id=>document.getElementById(id);
+const LS={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v);return true}catch(e){return false}},del(k){try{localStorage.removeItem(k)}catch(e){}}};
+
+/* ---------- the game as seen from here (all guarded: this runs after the game's scripts, but never trusts them) ---------- */
+const G=()=>{try{return typeof S!=="undefined"&&S?S:null}catch(e){return null}};
+const khac=()=>{try{return typeof used!=="undefined"?used:0}catch(e){return 0}};
+const bk=()=>{const s=G();return s?[s.year,s.month,s.tuan,s.buoi||0].join(":"):""};
+function vis(e){return !!e&&!e.hidden&&e.getClientRects().length>0&&getComputedStyle(e).visibility!=="hidden"}
+const titleUp=()=>{const t=$i("title");return !!t&&!t.hidden};
+const loading=()=>!!$i("kload");
+const coop=()=>window.COOP&&typeof COOP==="object"?COOP:null;
+const inRoom=()=>{const c=coop();return !!(c&&c.state&&(c.state.status!=="off"||c.state.playing))||!!(window.COOPW&&COOPW.on)};
+const coopOn=()=>!!(window.COOPW&&COOPW.on);
+/* something she would lose by leaving now: a mini game / lesson, a motion moment, the honour podium, the week book, a page turning */
+function hardBusy(){try{const s=G();if(s&&s.mg&&!s.dead)return true;if(vis($i("ov")))return true;
+ for(const m of document.querySelectorAll(".kmov,#kpodov,.kbk,.kcl-host"))if(vis(m))return true}catch(e){}return false}
+/* …or any dialog at all (queued notice, kit card, co-op waiting panel) */
+function busy(){if(hardBusy())return true;try{if(typeof Q!=="undefined"&&Q&&Q.length)return true;
+ for(const m of document.querySelectorAll(".modal"))if(m.id!=="kload"&&vis(m))return true;if($i("kupd"))return true}catch(e){}return false}
+const playing=()=>{const s=G();return !!s&&!s.dead&&!titleUp()&&!loading()};
+
+/* ---------- service worker ---------- */
+let reg=null,last=0;
 function check(force){if(!reg)return;const n=Date.now();if(!force&&n-last<10000)return;last=n;K.checks++;
  reg.update().catch(()=>{});if(reg.waiting)reg.waiting.postMessage({ctm:"skip"})}
-SW.register("sw.js",{updateViaCache:"none"}).then(r=>{reg=r;check(true);
- r.addEventListener("updatefound",()=>{const w=r.installing;if(w)w.addEventListener("statechange",()=>{if(w.state==="installed"&&r.waiting)r.waiting.postMessage({ctm:"skip"})})})}).catch(()=>{});
-document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible"){check(true);if(K.pending)soon()}else if(K.pending&&!busy())go()});
-addEventListener("pageshow",e=>{if(e.persisted)check(true)});
-addEventListener("focus",()=>check());addEventListener("online",()=>check(true));
-setInterval(()=>{if(document.visibilityState==="visible")check()},20*60e3);
-SW.addEventListener("controllerchange",()=>{if(!K.had){K.had=true;return}K.pending=true;soon()});
+K.check=()=>check(true);
+if(SW){
+ SW.register("sw.js",{updateViaCache:"none"}).then(r=>{reg=r;check(true);
+  r.addEventListener("updatefound",()=>{const w=r.installing;if(w)w.addEventListener("statechange",()=>{if(w.state==="installed"&&r.waiting)r.waiting.postMessage({ctm:"skip"})})})}).catch(()=>{});
+ addEventListener("pageshow",e=>{if(e.persisted)check(true)});
+ addEventListener("focus",()=>check());addEventListener("online",()=>check(true));
+ setInterval(()=>{if(document.visibilityState==="visible")check()},20*60e3);
+ SW.addEventListener("controllerchange",()=>{if(!K.had){K.had=true;return}if(K.pending)return;K.pending=true;K.k0=bk();K.u0=khac();onPending()});
+}
+document.addEventListener("visibilitychange",()=>{const n=Date.now();
+ if(document.visibilityState==="hidden"){K.hidAt=n;if(K.pending&&!inRoom()&&(titleUp()||loading())&&!K.resuming)reopen(null);return}
+ check(true);
+ /* back after ≥ 10 min: a natural break until she does something (same buổi, same khắc) */
+ if(K.hidAt&&n-K.hidAt>=K.awayMs)K.away={until:n+120e3,k:bk(),u:khac()};K.hidAt=0;tick()});
 
-/* the screen is "busy" when leaving now would drop what she is doing */
-function vis(e){return !!e&&!e.hidden&&e.getClientRects().length>0&&getComputedStyle(e).visibility!=="hidden"}
-function busy(){try{
- if(typeof Q!=="undefined"&&Q&&Q.length)return true;
- if(typeof S!=="undefined"&&S&&S.mg&&!S.dead)return true;
- if(vis(document.getElementById("ov")))return true;
- for(const m of document.querySelectorAll(".modal"))if(m.id!=="kload"&&vis(m))return true;
- for(const m of document.querySelectorAll(".kmov,#kpodov,.kbk,.kcl-host"))if(vis(m))return true;  /* motion moment, honour podium, week book, page turning */
- }catch(e){}return false}
-function soon(){clearTimeout(timer);if(!K.pending)return;if(document.visibilityState!=="visible"||busy()){timer=setTimeout(soon,1200);return}card()}
-K.card=()=>card();
-/* above the bottom tab bar and the background-download chip, whichever is higher */
-function place(el){let top=innerHeight;document.querySelectorAll("#tabs,.kloadchip").forEach(e=>{const r=e.getBoundingClientRect();if(r.height&&r.top>innerHeight*.5)top=Math.min(top,r.top)});
- el.style.bottom=Math.max(12,Math.round(innerHeight-top+10))+"px"}
-function go(){try{if(typeof save==="function")save()}catch(e){}location.reload()}
+/* ---------- when the new build opens ---------- */
+let T=0;
+function onPending(){K.why="";chip();if(inRoom())say("have");tick();if(!T)T=setInterval(tick,1000)}
+function tick(){place();if(!K.pending||K.resuming||K.leaving)return;
+ /* first-entry loading screen / title / dead end of a life with nothing to keep: open at once (the loading resumes file by file) */
+ if(loading()){reopen(null);return}
+ if(inRoom()){coopTick();return}
+ const s=G();
+ /* title screen (not while she types in Chép sổ / Nạp sổ); a life being chosen (Luân hồi, no S yet) or a death screen waits */
+ if(titleUp()){const a=document.activeElement;if(!K.cardEl&&!(a&&/^(INPUT|TEXTAREA)$/.test(a.tagName)))reopen(null);return}
+ if(!s||s.dead||K.cardEl)return;
+ const n=Date.now();
+ if(K.away&&n<K.away.until&&K.away.k===bk()&&K.away.u===khac()&&!hardBusy()){reopen("away");return}
+ /* the new buổi has begun and stayed quiet for 2 ticks (its late hooks have run and written the sổ) */
+ if(bk()!==K.k0&&khac()===0&&!busy()){if(++K.calm>=2)reopen("buoi");return}K.calm=0}
+/* save → remember the sổ → reload. why null = nothing to resume (title / loading screen) */
+function reopen(why,extra){if(K.leaving)return;K.leaving=true;K.applied=why||"title";
+ if(why){const s=G();let slot=1;try{slot=SLOT}catch(e){}
+  try{if(typeof save==="function")save()}catch(e){}
+  LS.set(LSK,JSON.stringify(Object.assign({slot,at:Date.now(),why,k:bk(),u:khac(),from:BUILD,name:s&&s.name},extra||{})))}
+ setTimeout(()=>location.reload(),extra&&extra.coop?350:0)}
 
-/* kit card: kpanel + kpHeader("notice") + kpnote + one .kbtn; plain reload if the kit is missing */
-function card(){if(K.shown)return;K.shown=true;
- if(document.getElementById("kload")){go();return}  /* first-entry loading screen: it resumes file by file on the new build */
- if(typeof kpHeader!=="function"){setTimeout(go,3000);return}
- if(!document.getElementById("kit-upd")){const st=document.createElement("style");st.id="kit-upd";st.textContent=`
+/* ---------- co-op ---------- */
+let seq=0;
+function say(mode,x){const c=coop();if(!c||!c.send)return;try{c.send(Object.assign({t:"act",id:"upd-"+Date.now().toString(36)+"-"+(seq++),k:"ctm-upd",mode,v:BUILD,pending:K.pending},x||{}))}catch(e){}}
+function hold(on){if(window.COOPW&&COOPW.hold!==on){COOPW.hold=on;try{render()}catch(e){}}}
+/* the friend is ready for the new build too (or plays an older client that cannot tell us) */
+function peerReady(){const p=K.peer;if(!p)return (Date.now()-(K.onSince||0))>10e3;return p.pending||p.v!==BUILD}
+function coopTick(){if(!coopOn()){/* in the lobby / waiting room: never; once she leaves the room the title path above takes over */return}
+ const s=G();if(!s||s.dead)return;const W=window.COOPW||{};
+ const older=K.peer&&K.peer.v!==BUILD;   /* we differ and this side found a newer build: this side is the older one */
+ if((older||K.goNow)&&!hardBusy()){coopGo(older?"older":"together");return}
+ if(bk()!==K.k0&&khac()===0&&!busy()&&!W.pend&&!W.bend&&W.sent!==(coop().state.week||0)&&peerReady()){if(++K.calm>=2)coopGo("buoi");return}K.calm=0}
+function coopGo(why){const W=window.COOPW;const o=W&&W.snap&&W.snap();if(!o){K.goNow=false;return}
+ say("going");line("Hai người cùng mở bản mới, đang vào lại phòng",0);reopen(why,{coop:true,room:o.room,seat:o.seat,snap:o})}
+function onAct(m){if(!m||m.k!=="ctm-upd")return;const c=coop();if(!c||m.from===c.state.you)return;
+ K.peer={v:m.v,pending:!!m.pending,at:Date.now()};
+ const diff=m.v!==BUILD;hold(diff);
+ if(diff||m.mode==="have"||m.mode==="ask"||m.mode==="go")check(true);
+ if(m.mode==="ver"&&!diff&&K.pending)say("have");
+ if(m.mode==="ask")peerCard();
+ if(m.mode==="go"){K.goNow=true;line("Bạn chơi cùng muốn mở bản mới ngay",3500)}
+ if(m.mode==="later"){K.asked=false;line("Bạn để sau · hai người cùng mở bản mới ở buổi sau",4000)}
+ if(m.mode==="going")line("Bạn chơi cùng đang mở bản mới, sắp trở lại",6000);
+ if(diff&&!K.pending)line("Hai người đang ở hai bản khác nhau · đợi cùng một bản",6000);
+ tick()}
+function hookCoop(){const c=coop();if(!c||!c.on||K.hooked)return;K.hooked=true;
+ c.on("act",onAct);
+ c.on("start",()=>{K.onSince=Date.now();setTimeout(()=>{resumeCoop();say("ver")},0)});
+ c.on("peer",on=>{if(on){K.onSince=Date.now();say("ver")}});
+ c.on("stop",()=>{K.peer=null;K.goNow=false;hold(false);tick()})}
+
+/* ---------- kit pieces: chip on the top bar, the card, the one-line notice ---------- */
+function css(){if($i("kit-upd"))return;const st=document.createElement("style");st.id="kit-upd";st.textContent=`
+.kupdchip{position:fixed;z-index:25;display:inline-flex;align-items:center;gap:5px;margin:0;font:600 .72rem/1.25 var(--body,inherit);padding:2px 9px 2px 7px;border-radius:10px;border:1px solid var(--gold,#b8892b);background:#fffaf0f0;color:var(--ink,#3a2418);box-shadow:0 2px 8px #0002;cursor:pointer;white-space:nowrap}
+.kupdchip::before{content:"";width:7px;height:7px;border-radius:50%;background:#b0402c;box-shadow:0 0 0 2px #b0402c33}
+.kupdchip[hidden]{display:none}
 .kupd{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 74px);transform:translateX(-50%);z-index:9700;width:min(420px,calc(100vw - 24px));animation:kupdIn .3s ease}
 .kupd .dlg.kpanel{width:100%;max-width:none;margin:0;box-shadow:0 6px 24px #0006}
 .kupd .dlg.kpanel .kpb{padding:8px 14px 2px;min-height:0;flex:none}.kupd .dlg.kpanel .kpnote{margin:0}
 .kupd .dlg.kpanel .kpopts{display:flex;justify-content:flex-end;gap:8px;padding:8px 14px 12px;margin:0;min-height:0;position:static}
 @media (max-width:599px){.kupd .dlg.kpanel .kpb{padding:6px 10px 2px}.kupd .dlg.kpanel .kpopts{padding:6px 10px 10px}}
-@keyframes kupdIn{from{opacity:0;transform:translate(-50%,12px)}}`;document.head.appendChild(st)}
- const el=document.createElement("div");el.className="kupd";el.id="kupd";let n=3;
- const note=()=>`Sổ đã ghi vẫn giữ nguyên. Tự mở bản mới sau ${n} giây.`;
- el.innerHTML=`<div class="dlg kpanel" data-kind="notice">${kpHeader("notice","Có bản mới","Cung Tường Mộng vừa có bản mới")}<div class="kpb"><div class="kpnote">${note()}</div></div><div class="kpopts"><button class="kbtn" data-kupd="1">Mở bản mới</button></div></div>`;
- document.body.appendChild(el);place(el);
- el.querySelector("[data-kupd]").addEventListener("click",go);
- /* she opened something during the 3 s: take the card away and wait again (the tap on the button always opens at once) */
- const t=setInterval(()=>{place(el);if(busy()){clearInterval(t);el.remove();K.shown=false;soon();return}
-  n--;if(n<=0){clearInterval(t);go();return}const p=el.querySelector(".kpnote");if(p)p.textContent=note()},1000)}
+@keyframes kupdIn{from{opacity:0;transform:translate(-50%,12px)}}
+.kupdline{position:fixed;left:50%;transform:translateX(-50%);z-index:9750;max-width:calc(100vw - 24px);margin:0;padding:5px 14px;border-radius:14px;border:1px solid var(--gold,#b8892b);background:#fffaf0f4;color:var(--ink,#3a2418);font:600 .82rem/1.3 var(--body,inherit);box-shadow:0 4px 14px #0004;text-align:center;pointer-events:none;transition:opacity .5s}
+.kupdline.out{opacity:0}`;document.head.appendChild(st)}
+/* beside her rank / age on the top bar; under the date when that row is full; never over another part of the bar */
+function place(){const el=$i("kupdchip");if(!el)return;
+ const show=K.pending&&!K.leaving&&playing()&&!busy();el.hidden=!show;K.chip=show;if(!show)return;
+ const hud=document.querySelector("header.hud"),r=$i("me-r"),d=$i("me-d"),me=$i("me");if(!hud||!r||!me){el.style.cssText="top:8px;right:8px";return}
+ const H=hud.getBoundingClientRect(),w=el.offsetWidth,h=el.offsetHeight;
+ const others=[...hud.children].filter(e=>e!==me&&e.getClientRects().length).map(e=>e.getBoundingClientRect()).filter(q=>q.width&&q.height);
+ const free=(x,y)=>x>=H.left+2&&x+w<=Math.min(H.right-2,innerWidth-4)&&!others.some(q=>x<q.right+4&&x+w>q.left-4&&y<q.bottom&&y+h>q.top);
+ const row=r.closest(".k3rr")||r,rr=[row,...row.querySelectorAll("*")].map(e=>e.getBoundingClientRect()).filter(q=>q.width).reduce((a,q)=>({right:Math.max(a.right,q.right),top:a.top,height:a.height}),row.getBoundingClientRect()),dr=d?d.getBoundingClientRect():rr;
+ const at=[[rr.right+8,rr.top+(rr.height-h)/2],[dr.right+8,dr.top+(dr.height-h)/2]].find(([x,y])=>free(x,y))||[Math.max(H.left+4,H.right-w-6),H.top+4];
+ el.style.left=Math.round(at[0])+"px";el.style.top=Math.round(at[1])+"px"}
+function chip(){css();let el=$i("kupdchip");
+ if(!el){el=document.createElement("button");el.id="kupdchip";el.className="kchip kupdchip";el.type="button";el.textContent="Có bản mới";el.setAttribute("aria-label","Có bản mới · chạm để xem");
+  el.addEventListener("click",e=>{e.stopPropagation();card()});document.body.appendChild(el)}
+ place()}
+function close(){if(K.cardEl){K.cardEl.remove();K.cardEl=null}place()}
+function mkCard(sub,note,btns){css();close();if(typeof kpHeader!=="function")return null;
+ const el=document.createElement("div");el.className="kupd";el.id="kupd";
+ el.innerHTML=`<div class="dlg kpanel" data-kind="notice" role="dialog" aria-modal="false">${kpHeader("notice","Có bản mới",sub)}<div class="kpb"><div class="kpnote">${note}</div></div><div class="kpopts">${btns.map((b,i)=>`<button class="kbtn${b.alt?" alt":""}" data-kupd="${i}">${b.n}</button>`).join("")}</div></div>`;
+ const s=el.querySelector(".kpseal");if(s)s.remove();
+ el.addEventListener("click",e=>{const b=e.target.closest("[data-kupd]");if(!b)return;e.stopPropagation();try{if(typeof sfx==="function")sfx("sfx-tap")}catch(x){}const f=btns[+b.dataset.kupd];close();f.go()});
+ document.body.appendChild(el);K.cardEl=el;
+ let top=innerHeight;document.querySelectorAll("#tabs,.kloadchip").forEach(e=>{const q=e.getBoundingClientRect();if(q.height&&q.top>innerHeight*.5)top=Math.min(top,q.top)});
+ el.style.bottom=Math.max(12,Math.round(innerHeight-top+10))+"px";
+ const f=el.querySelector(".kbtn:not(.alt)");if(f)f.focus({preventScroll:true});return el}
+/* the chip's card: open now (the sổ is written, the page comes back at the same place) or later (next natural break) */
+function card(){if(!K.pending)return;
+ if(coopOn()){
+  if(!K.peer&&(Date.now()-(K.onSince||0))>10e3){mkCard("Mở bản mới ngay?","Hai người cùng mở bản mới, vào lại đúng phòng, đúng chỗ. Để sau thì bản mới tự mở khi hai người qua buổi.",
+    [{n:"Để sau",alt:1,go(){}},{n:"Mở bản mới",go(){coopGo("tap")}}]);return}
+  mkCard("Mở bản mới ngay?","Bạn chơi cùng sẽ được hỏi. Hai người cùng mở bản mới, vào lại đúng phòng, đúng chỗ. Để sau thì bản mới tự mở khi hai người qua buổi.",
+   [{n:"Để sau",alt:1,go(){}},{n:"Mở bản mới",go(){K.asked=true;say("ask");line("Đã hỏi bạn chơi cùng",3500)}}]);return}
+ mkCard("Mở bản mới ngay?","Sổ đang chơi giữ nguyên, mở lại đúng chỗ. Để sau thì bản mới tự mở khi ngươi qua buổi.",
+  [{n:"Để sau",alt:1,go(){}},{n:"Mở bản mới",go(){reopen("tap")}}])}
+/* the friend asked to open the new build now */
+function peerCard(){mkCard("Bạn muốn mở bản mới ngay","Hai người cùng mở bản mới, vào lại đúng phòng, đúng chỗ. Sổ đang chơi giữ nguyên.",
+ [{n:"Để sau",alt:1,go(){say("later")}},{n:"Cùng mở",go(){say("go");K.goNow=true;if(!K.pending)check(true);tick()}}])}
+K.card=()=>card();
+let lineT=0;
+K.lines=[];
+function line(text,ms){css();K.lines.push([text,Date.now()]);let el=$i("kupdline");if(!el){el=document.createElement("div");el.id="kupdline";el.className="kupdline";el.setAttribute("role","status");document.body.appendChild(el)}
+ el.textContent=text;el.classList.remove("out");const hud=document.querySelector("header.hud");const hb=hud&&vis(hud)?hud.getBoundingClientRect().bottom:0;
+ el.style.top=Math.round(Math.max(10,hb+8))+"px";clearTimeout(lineT);if(ms)lineT=setTimeout(()=>{el.classList.add("out");setTimeout(()=>{if(el.classList.contains("out"))el.remove()},600)},ms)}
+K.line=line;
+
+/* ---------- after the reload: back into the same sổ / the same room ---------- */
+let rec=null;try{rec=JSON.parse(LS.get(LSK)||"null")}catch(e){}
+if(rec&&!(Date.now()-rec.at<180e3))rec=null;
+if(!rec)LS.del(LSK);
+/* the title (or the co-op lobby on it) is up and the first-entry loading is over */
+const ready=()=>typeof loadSlot==="function"&&!loading()&&titleUp()&&!!document.querySelector("#modal.kpthome .kpmenu");
+function waitFor(f,ms,then,fail){const t0=Date.now();(function step(){let v=false;try{v=f()}catch(e){}if(v){then();return}if(Date.now()-t0>ms){if(fail)fail();return}setTimeout(step,300)})()}
+function resumeSolo(){K.resuming=true;
+ waitFor(ready,180e3,()=>{let ok=false;try{const d=loadSlot(rec.slot);if(d){SLOT=rec.slot;
+   const b=document.querySelector('#modal.kpthome [data-tgo="cont"]');if(b)b.click();
+   else{const l=$i("slots")&&$i("slots").querySelector(`[data-load="${rec.slot}"]`);if(l)l.click()}
+   ok=!!G()&&!titleUp()}}catch(e){console.error(e)}
+  LS.del(LSK);K.resuming=false;K.resumed={ok,t:Date.now(),why:rec.why,slot:rec.slot,k:bk(),u:khac(),was:rec.k,wasU:rec.u};
+  if(ok)line("Đã mở bản mới",4500);tick()},()=>{LS.del(LSK);K.resuming=false})}
+/* co-op: the lobby's own "Trở lại phòng" (same code, same seat); COOP "start" → jcoopworld begin → resumeCoop puts the week back */
+function resumeCoop(){if(!rec||!rec.coop||!window.COOPW||!COOPW.restore)return;const r=rec;rec=null;LS.del(LSK);
+ let ok=false;try{ok=COOPW.restore(r.snap)}catch(e){console.error(e)}
+ K.resuming=false;K.resumed={ok,coop:true,why:r.why,room:coop().state.room,seat:COOPW.seat,k:bk(),u:khac(),was:r.snap.buoi};
+ line(ok?"Đã mở bản mới":"Đã mở bản mới · vào lại phòng",4500);tick()}
+function rejoin(){K.resuming=true;line("Hai người cùng mở bản mới, đang vào lại phòng",0);
+ waitFor(()=>ready()&&coop()&&document.querySelector('#modal.kpthome [data-coop="co"]'),180e3,()=>{LS.set("ctm-coop-room",rec.room);
+  document.querySelector('#modal.kpthome [data-coop="co"]').click();
+  waitFor(()=>document.querySelector('#modal [data-coop="resume"]'),10e3,()=>document.querySelector('#modal [data-coop="resume"]').click(),()=>{K.resuming=false})},
+  ()=>{K.resuming=false;LS.del(LSK)});
+ /* nobody came back within 3 minutes: leave her in the lobby, which already offers "Trở lại phòng" */
+ setTimeout(()=>{if(rec&&rec.coop){rec=null;LS.del(LSK);K.resuming=false;line("Chưa vào lại được phòng · chạm Trở lại phòng",5000)}},180e3)}
+function boot(){hookCoop();if(!rec)return;if(rec.coop)rejoin();else resumeSolo()}
+if(document.readyState==="loading")addEventListener("DOMContentLoaded",boot);else setTimeout(boot,0);
 })();
 </script>
 </body>
