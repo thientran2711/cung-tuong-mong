@@ -4,11 +4,11 @@ const HARMK={"Dò la":"spy","Tung tin đồn":"rumor","Bỏ độc vào trà nà
 AOUT.trip=["nàng vấp ngã: Danh nàng -3 (có thai: có thể động thai)","bị thấy: nàng oán ngươi"];AOUT.pushp=["nàng rơi xuống hồ sen, Sức nàng giảm mạnh","bị lộ: bị phạt, nàng oán"];
 const RISKRE=/(lộ:|mách lại|nắm thóp|có thể (mách|nắm|bị|lật)|phật ý|bị khám|tội|ban chết|sẽ)/;
 (function(){const t0=talkOpts;talkOpts=function(p){const A=t0.apply(this,arguments);const v=p&&p.ref;return A.map(a=>{a=Object.assign({},a);if(HARMK[a.n])a.k=HARMK[a.n];
-  if(a.n==="Nhờ giúp đỡ"&&v&&aff(v,S)<30){a.lock=true;a.t=`cần thiện cảm 30 (đang ${aff(v,S)})`}
+  if(a.n==="Nhờ giúp đỡ"&&v&&aff(v,S)<30){a.lock=true;a.t=`cần nàng quý ngươi 30 (đang ${aff(v,S)})`}
   if(a.n==="Cảnh báo nàng"&&/không có căn cứ/.test(a.x||"")){a.lock=true;a.t="chưa biết ai đang hại nàng"}
   if(a.open&&!S.inv.some(e=>!e.h)){a.lock=true;a.t="rương trống"}
-  if(/^Bàn tán về/.test(a.n)&&/mách lại/.test(a.x||"")){a.x="";a.x="thiện cảm -3";a.risk=`nàng mách lại, ${a.n.replace(/^Bàn tán về /,"")} oán ngươi +10: ${word(50)}`}
-  if(a.n==="Chia sẻ bí mật"&&/nắm thóp/.test(a.x||"")){a.x=a.x.replace(/ · nàng có thể nắm thóp ngươi/,"");a.risk=`nàng nắm 1 chứng cứ của ngươi: ${word(50)}`}
+  if(/^Bàn tán về/.test(a.n)&&/mách lại/.test(a.x||"")){a.x="";a.x="nàng quý ngươi -3";a.risk=`nàng mách lại, ${a.n.replace(/^Bàn tán về /,"")} oán ngươi +10: ${chanceW(50)}`}
+  if(a.n==="Chia sẻ bí mật"&&/nắm thóp/.test(a.x||"")){a.x=a.x.replace(/ · nàng có thể nắm thóp ngươi/,"");a.risk=`nàng nắm 1 chứng cứ của ngươi: ${chanceW(50)}`}
   if(a.n==="Khiêu khích"){a.risk=a.x;a.x=""}
   return a})}})();
 /* the talk line: cost in khắc, gains green, risks and failure red, needs as disabled reasons */
@@ -20,13 +20,13 @@ optLine=function(a){const o=a.o==null?100:a.o;const rolled=o<100&&!a.lock;const 
 (function(){const t1=talk;talk=function(oi){const p=S&&curPeople()[popIdx];const a=p&&talkOpts(p)[oi];if(a&&a.open){if(a.lock||S.dead||Q.length)return;const tc=a.act?2:1;if(!can(tc))return;S.payOnPick=tc;S.visit.tk=S.visit.tk||{};a.open();render();return}return t1.apply(this,arguments)}})();
 ["giftpick","plantpick"].forEach(id=>{const b0=PEND[id];if(!b0)return;PEND[id]=function(){const d=b0.apply(this,arguments);if(d&&d.o)d.o=d.o.map(o=>/^Thôi/.test(o.n)?Object.assign({},o,{go:()=>{S.payOnPick=0;if(o.go)o.go()}}):Object.assign({},o,{go:()=>{if(S.payOnPick){spend(S.payOnPick);S.payOnPick=0;if(popIdx!=null&&S.visit){S.visit.tk=S.visit.tk||{};S.visit.tk[popIdx]=1}}if(o.go)o.go()}}));return d};});
 /* gifts list their gain per target and a face */
-(function(){const g0=PEND.giftpick;PEND.giftpick=function(p){const d=g0.apply(this,arguments);try{const e=S.inv[p&&p.ix!=null?p.ix:-1];if(d&&d.o)d.o.forEach(o=>{if(/^Thôi/.test(o.n))return;if(e){const r=/Hoàng thượng/.test(o.n)?"emp":/Thái hậu/.test(o.n)?"th":rivals.find(v=>o.n.includes(v.name));if(r){const g=giftVal(Object.assign({k:e.k},IT[e.k]),r);o.x=o.x||`${r==="emp"?"Sủng":r==="th"?"Thái hậu với ngươi":"thiện cảm nàng"} +${g}`}}})}catch(x){}return d}})();
+(function(){const g0=PEND.giftpick;PEND.giftpick=function(p){const d=g0.apply(this,arguments);try{const e=S.inv[p&&p.ix!=null?p.ix:-1];if(d&&d.o)d.o.forEach(o=>{if(/^Thôi/.test(o.n))return;if(e){const r=/Hoàng thượng/.test(o.n)?"emp":/Thái hậu/.test(o.n)?"th":rivals.find(v=>o.n.includes(v.name));if(r){const g=giftVal(Object.assign({k:e.k},IT[e.k]),r);o.x=o.x||`${r==="emp"?"Sủng":r==="th"?"Thái hậu quý ngươi":"nàng quý ngươi"} +${g}`}}})}catch(x){}return d}})();
 /* R-B: explicit verdicts and every kind of change */
 function relSnap(){const o={};for(const v of rivals){o[v.id]={a:aff(v,S),m:aff(S,v),e:v.ev||0,g:v.ghen||0,o:Math.round(oan(v,S))}}return o}
 (function(){const rs=rsnap;rsnap=function(){const b=rs.apply(this,arguments);if(b){b.rel=relSnap();b.maidL=S.maid?S.maid.loyal:0}return b}})();
 resultShow=function(title,before,okHint){if(!S||!before||S.dead)return;const d=RKEYS.map(([k,n])=>[n,(S[k]||0)-before[k],S[k]||0]).filter(x=>x[1]);if(S.maid&&S.maid.loyal!==before.maid)d.push([`Lòng ${S.maid.name}`,S.maid.loyal-before.maid,S.maid.loyal]);
  const R=before.rel||{};for(const v of rivals){const b=R[v.id];if(!b)continue;const a=aff(v,S),m=aff(S,v),e=v.ev||0,g=v.ghen||0,o=Math.round(oan(v,S));const nm=v.name.split(" ").pop();
-  if(a!==b.a)d.push([`${nm} với ngươi (thiện cảm)`,a-b.a,a]);if(m!==b.m)d.push([`Ngươi với ${nm}`,m-b.m,m]);if(e!==b.e)d.push([`Chứng cứ về ${nm}`,e-b.e,e]);if(g!==b.g)d.push([`${nm} ghen`,-(g-b.g),g,true]);if(o!==b.o)d.push([`${nm} oán ngươi`,-(o-b.o),o,true])}
+  if(a!==b.a)d.push([`${nm} quý ngươi`,a-b.a,a]);if(m!==b.m)d.push([`Ngươi với ${nm}`,m-b.m,m]);if(e!==b.e)d.push([`Chứng cứ về ${nm}`,e-b.e,e]);if(g!==b.g)d.push([`${nm} ghen`,-(g-b.g),g,true]);if(o!==b.o)d.push([`${nm} oán ngươi`,-(o-b.o),o,true])}
  const n=Math.max(0,Math.min(S.logs.length,(S.logSeq||0)-before.seq));const why=S.logs.slice(0,n).map(plain).reverse().join(" ").replace(/\s+/g," ").trim();
  const seal=okHint==="sure"?"XONG":okHint===false?"HỎNG":okHint===true?"THÀNH":(/chặn kịp|phát giác|bị lộ|bị bắt|không thành|hỏng|từ chối|không ai tin/i.test(why)?"HỎNG":"THÀNH");if(!d.length&&!why)return;
  if(window.__bot)return;let t=$("rtoast");if(!t){t=document.createElement("div");t.id="rtoast";document.body.appendChild(t)}t.onclick=()=>t.classList.remove("on");
@@ -64,8 +64,8 @@ const LACK={musk:t=>!t.preg||t.hidden?"nàng không có thai (ngươi biết)":"
 /* HUD chip names say exactly what they are */
 (function(){const r0=renderHud2;renderHud2=function(){r0.apply(this,arguments);const el=$("hud2");if(!el)return;const fix=(k,lab)=>{const b=el.querySelector(`.hc[data-hx="${k}"]`);if(b){const bb=b.querySelector("b");const i=b.querySelector("i");b.innerHTML=lab+(bb?` <b>${bb.innerHTML}</b>`:"")+(i?i.outerHTML:"")}};fix("maid",`Lòng ${S.maid?S.maid.name:"cung nữ"}`);fix("con","Dễ có thai:");fix("dem","Được lật thẻ:");fix("an","Ân tình (đêm)");fix("aw","Số lần ân thưởng");if(S.lot)fix("lot",`Quẻ tuần: ${LV[S.lot.lv]} (${S.lot.dom})`)}})();
 /* relation words in lines: one wording, colour by meaning for her */
-(function(){const kp=kitParse;kitParse=function(str){str=String(str||"").replace(/(nàng |hắn )?thù -(\d+)/g,(m,p,n)=>`${p||""}oán ngươi +${n}`).replace(/thân -(\d+)/g,"thiện cảm -$1").replace(/thân \+(\d+)/g,"thiện cảm +$1").replace(/\bngay: /g,"được ngay: ");return kp(str)}})();
-(function(){const k0=kcls;kcls=function(t){const s=String(t).replace(/<[^>]+>/g,"");if(/thiện cảm\s*-|lòng\s*-|Sủng\s*-|Danh\s*-|Đức\s*-|oán ngươi \+|ghen \+/i.test(s)&&!/\bnàng\b.*-/.test(s.replace(/oán ngươi.*/,"")))return"r";return k0(t)}})();
+(function(){const kp=kitParse;kitParse=function(str){str=String(str||"").replace(/(nàng |hắn )?thù -(\d+)/g,(m,p,n)=>`${p||""}oán ngươi +${n}`).replace(/thân -(\d+)/g,"quý ngươi -$1").replace(/thân \+(\d+)/g,"quý ngươi +$1").replace(/\bngay: /g,"được ngay: ");return kp(str)}})();
+(function(){const k0=kcls;kcls=function(t){const s=String(t).replace(/<[^>]+>/g,"");if(/thiện cảm\s*-|quý ngươi\s*-|lòng\s*-|Sủng\s*-|Danh\s*-|Đức\s*-|oán ngươi \+|ghen \+/i.test(s)&&!/\bnàng\b.*-/.test(s.replace(/oán ngươi.*/,"")))return"r";return k0(t)}})();
 /* dialog options: a face beside every named person */
 (function(){const s0=showModal;showModal=function(){s0.apply(this,arguments);const M=$("modal");if(M.hidden)return;M.querySelectorAll(".opt").forEach(b=>{if(b.querySelector(".md"))return;const tx=b.firstChild&&b.firstChild.textContent||"";const v=rivals.find(r=>tx.includes(r.name));const f=v?pv(v):/Hoàng thượng/.test(tx)?pEmp():/Thái hậu/.test(tx)?pTH():null;if(f)b.insertAdjacentHTML("afterbegin",mdH(f,"xs"))})}})();
 /* the ghen of a rival is hidden until she knows her */
@@ -81,7 +81,7 @@ Object.assign(ITIMG,{tramngoc:"tram-phuong",vongvang:"vong-ngoc",gamvang:"gam-to
 /* each rival palace looks a little different (tint of the shared hall art by owner rank) */
 (function(){const r0=renderStage;renderStage=function(){r0.apply(this,arguments);try{const st=$("stage");const k=S.place;st.classList.remove("rp0","rp1","rp2","rp3","day","night");if(k&&k[0]==="r"){const v=RV(+k.slice(1));if(v)st.classList.add("rp"+(v.rank>=5?3:v.rank>=3?2:v.rank>=1?1:0))}st.classList.add((S.buoi||0)===B4L?"night":"day")}catch(e){}}})();
 /* a faction may ask her to join (two-way) */
-(function(){const a1=approachOne;approachOne=function(){if(!facOf(S)&&(S.facs||[]).length&&roll(20)){const f=pick(S.facs);const l=facLeader(f);if(l&&l!==S&&aff(l,S)>=0)return{t:"Có người đến",who:pv(l),h:`<p>${l.name}, người đứng đầu ${f.name}, mời ngươi vào phe.</p>`,opts:[{n:"Nhận lời vào phe",fx:{},x:`nàng thiện cảm +10 · kẻ thù của phe oán ngươi`,go:()=>{f.m.push(key(S));relAdd(S,l,10)}},{n:"Khéo từ chối",fx:{},x:"nàng thiện cảm -3",go:()=>relAdd(S,l,-3)}]}}return a1.apply(this,arguments)}})();
+(function(){const a1=approachOne;approachOne=function(){if(!facOf(S)&&(S.facs||[]).length&&roll(20)){const f=pick(S.facs);const l=facLeader(f);if(l&&l!==S&&aff(l,S)>=0)return{t:"Có người đến",who:pv(l),h:`<p>${l.name}, người đứng đầu ${f.name}, mời ngươi vào phe.</p>`,opts:[{n:"Nhận lời vào phe",fx:{},x:`nàng quý ngươi +10 · kẻ thù của phe oán ngươi`,go:()=>{f.m.push(key(S));relAdd(S,l,10)}},{n:"Khéo từ chối",fx:{},x:"nàng quý ngươi -3",go:()=>relAdd(S,l,-3)}]}}return a1.apply(this,arguments)}})();
 /* card sub-tabs: one group at a time, remembered per role */
 document.addEventListener("click",e=>{const b=e.target.closest("[data-pct]");if(!b)return;e.stopPropagation();e.preventDefault();window.__pcTab=window.__pcTab||{};window.__pcTab[b.dataset.role]=b.dataset.pct;const c=b.closest(".pcr");c.querySelectorAll(".pct").forEach(x=>x.classList.toggle("on",x===b));c.querySelectorAll(".pcg").forEach(g=>g.classList.toggle("on",g.dataset.g===b.dataset.pct))},true);
 /* consort faces by DRESS TIER (picked by rank), reviewed by eye: only serene, slim, adult, approved-style faces; stern, plump, sad or childlike ones are left out */
