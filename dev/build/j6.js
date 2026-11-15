@@ -3,7 +3,7 @@
 const RIMG=["rank-dap-ung","rank-thuong-tai","rank-quy-nhan","rank-tan","rank-phi","rank-quy-phi","rank-hoang-quy-phi","rank-hoang-hau"];
 const SCIMG={vuon:"ngu-hoa-vien",thu:"ngu-thu-phong",dtd:"duong-tam-dien",tn:"tu-ninh-cung",kn:"khon-ninh-cung",rv:"phi-tan-cung",tyv:"thai-y-vien",ksp:"kinh-su-phong",lc:"lanh-cung"};
 const AIMG={cam:"cam",ky:"ky",thi:"thi",hoa:"hoa",vu:"vu",y:"y-thuat"};
-function ic(n,s){s=s||16;return `<img class="ic" src="img/${n}.webp" width="${s}" height="${s}" alt="" onerror="this.remove()">`}
+function ic(n,s){if(!n)return "";s=s||16;return `<img class="ic" src="img/${n}.webp" width="${s}" height="${s}" alt="" onerror="this.remove()">`}
 function chip(t,cls){return `<span class="chip ${cls||""}">${t}</span>`}
 /* warns when an act would drop Đức under the Hoàng hậu bar (40) */
 function ducWarn(c){const t=ducWarnTxt(c);return t?`<span class="fx r"><b>${t}</b></span>`:""}

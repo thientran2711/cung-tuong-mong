@@ -30,8 +30,27 @@ def bgkey(p):
     ri = ROLE.index(role) if role in ROLE else len(ROLE)
     t = re.search(r'-t(\d)', b); a = re.search(r'-a(\d\d)', b)
     return (1 + ri, int(t.group(1)) if t else 0, int(a.group(1)) if a else 0, b)
+# pictures live on Cloudflare (dev/art/CDN.md): with IMG_BASE set (dev/build/jcdn.js; CTM_IMG_BASE overrides, empty = local img/ as before)
+# the img/ list comes from the CDN's img/_index.json [key, md5[:16], bytes] — md5 instead of sha256, it is only a content key.
+_m = re.search(r'^const IMG_BASE="([^"]*)";', open(os.path.join(R, 'dev', 'build', 'jcdn.js'), encoding='utf-8').read(), re.M)
+IMG_BASE = os.environ.get('CTM_IMG_BASE', _m.group(1) if _m else '')
 files = []
-for top in ('img', 'audio', 'icons'):
+if IMG_BASE:
+    import urllib.request
+    for i in range(5):
+        try:
+            with urllib.request.urlopen(urllib.request.Request(IMG_BASE + 'img/_index.json', headers={'Cache-Control': 'no-cache', 'User-Agent': 'ctm-build'}), timeout=60) as r:
+                IDX = json.load(r)
+            break
+        except Exception as e:
+            if i == 4: sys.exit(f'assets.py: cannot read {IMG_BASE}img/_index.json: {e}')
+    for k, hv, sz in IDX['files']:
+        if not k.startswith('img/') or not k.lower().endswith(EXT): continue
+        parts = k.split('/')
+        if any(x.startswith(('.', '_')) for x in parts[1:]) or any(x.startswith('old') for x in parts[1:-1]): continue
+        g = 'fig' if re.match(r'img/(fig|por|ev|st|map-fest)-', k) else 'core'
+        files.append([k, hv, sz, g])
+for top in (('audio', 'icons') if IMG_BASE else ('img', 'audio', 'icons')):
     for root, ds, fs in os.walk(os.path.join(R, top)):
         ds[:] = sorted(d for d in ds if not d.startswith(('.', '_', 'old')))
         for f in sorted(fs):

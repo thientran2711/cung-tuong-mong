@@ -101,7 +101,7 @@ QUYẾT ĐỊNH CỦA CHỦ (14/11): KHÔNG vẽ lại tranh thẻ việc. Mọi
 | theu-thua | Luyện thêu thùa, chữ nghĩa | OK | |
 | thi-tai-nu | Dự thi Tài nữ ở Hàn lâm viện | OK | |
 | thi-tham | Tâm sự | KHÔNG RÕ | hai chiếc quạt, không thấy tâm sự |
-| thinh-an | Thỉnh an | KHÔNG RÕ | vạt áo trên nệm, không thấy bái kiến ai |
+| thinh-an | Thỉnh an | KHÔNG RÕ | vạt áo trên nệm, không thấy bái kiến ai. 15/11 (sếp chê "giống phạt quỳ") -> thay bằng **thinh-an-v2** (review/thinhan-art) |
 | thu-toi | Thú tội với Hoàng thượng | KHÔNG RÕ | trâm cài rơi dưới đất, không thấy quỳ nhận tội |
 | thuong | Thưởng cung nữ | OK | |
 | to-giac | Tố giác | KHÔNG RÕ | phong thư trên bàn tối |
@@ -134,3 +134,7 @@ Tên trò chơi nhỏ (Đàn, Cờ, Thơ, Vẽ, Múa, Hát, Thêu, Câu đối, 
 Thẻ có tên ghép lúc chạy (Thỉnh an Hoàng hậu, Phô tài: …, Mua …, Đến gặp …) nay tìm được tranh riêng nhờ khớp tiền tố.
 Thẻ có chân dung người nhận ở tiêu đề (vd. Chặn ngự giá) trước đây rơi về tranh nhóm. Nay đã ra tranh riêng (commit e826ec83, 683cb7bc).
 
+
+
+## 15/11 review/thinhan-art: tranh Thỉnh an mới
+Sếp 03:45Z: "Thỉnh an sao giống phạt quỳ vậy". Tra tranh có sẵn (img/ act-*/ev-*, act-art, act-art2, phuong-lenh-art): không có cảnh phi tần đứng hành lễ (ev-thinh-an cũng quỳ; phuong-lenh-art chỉ có nơi chốn + người anime khác phong cách). Vẽ mới gpt-2-6 (thư mục ba4aecfe…), sửa từ bản thử act-art2 JNamSLjOq4 (cùng điện, Thái hậu trên bảo tọa) + style consort-01: phi tần ĐỨNG nhún mình phúc lễ (tay chắp bên hông, cúi đầu) hướng về bảo tọa, buổi sáng sáng sủa. Bản dùng: **ksDpOj816B** (thử: 9ZQFWj4NYZ, Sytm3qyUb8 quay lưng khỏi bảo tọa; ov9NHmW829 khom quá). Cắt 384x506 -> img/act-thinh-an-v2.webp (tên mới để máy người chơi không giữ bản cũ), đẩy CDN bằng cdn_sync. ACTS.json: Thỉnh an, Xin bái kiến, Xin yết kiến, Chào hỏi đúng lễ + mục riêng Thỉnh an Thái hậu / Thỉnh an Hoàng hậu -> thinh-an-v2 (đã đẩy CDN). act-thinh-an.webp cũ giữ nguyên trên CDN (sổ/nhánh cũ).
