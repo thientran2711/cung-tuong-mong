@@ -86,7 +86,9 @@ function evbDedup(m){try{if(!m||!m.opts||m.opts.length<2||typeof kitHint!=="func
  const raw=O.map(o=>(o&&!o.hint)?kitHint(o,m,lv):null);let fixed=0;
  const groups={};raw.forEach((h,i)=>{if(h&&h.hint)(groups[h.hint]=groups[h.hint]||[]).push(i)});
  for(const g of Object.values(groups)){if(g.length<2)continue;let pick=null;
-  for(let l=lv+1;l<=2&&!pick;l++){const T=g.map(i=>kitHint(O[i],m,l).hint);if(new Set(T).size>1)pick={l,T}}
+  /* the lowest clearer level that leaves the fewest options reading the same (review r6: night1 @vague took level 1, which still left 2 pairs, while level 2 told all apart) */
+  const nd=T=>{const c={};T.forEach(x=>c[x]=(c[x]||0)+1);return T.filter(x=>c[x]>1).length};
+  for(let l=lv+1;l<=2;l++){const T=g.map(i=>kitHint(O[i],m,l).hint);if(new Set(T).size>1&&(!pick||nd(T)<nd(pick.T)))pick={l,T}}
   const T=pick?pick.T.slice():g.map(i=>raw[i].hint);
   /* still the same words: add the option's own chance (its ladder word, in words) and then, if needed, how big its gain is next to the others */
   const dup=()=>{const c={};T.forEach(x=>c[x]=(c[x]||0)+1);return T.map(x=>c[x]>1)};

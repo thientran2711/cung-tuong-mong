@@ -63,3 +63,9 @@ NODE_PATH=$(npm root -g) node dev/measure/evbot.js http://127.0.0.1:8861/dev/tmp
 - Bots r6 (EVPAR=1, seeds 11–14 × 45 steps, 0 page errors): hint 5 lives avg max 3.8 / Phi 40 % / died 60 %; rand 4 lives 3.75 / 25 % / 0 %;
   same 6 lives 3.33 / 0 % / 50 % → table in dev/review/event-balance.md. Hint not clearly ahead of random yet (small sample).
 - Known, not fixed: at 390x844 in-game (portrait, normally behind the rotate prompt) the top-bar state row with the pl67 chip + "Chưa điểm trang" runs past the right edge.
+- Second merge: origin/main 80be56be0 (game-feel r7, poison-gift, trung-y, econ-stipend, kit-table); assemble = main list + jstory, jevb after jtoil; built files
+  taken from main then rebuilt. Fix: evbDedup picks the clearer level that leaves the FEWEST options reading the same (night1 @vague took level 1 with 2
+  pairs left while level 2 told all apart → hint-dedup.js exit 1). Chip label shortened to "Hạn lo liệu <N>" (the long "Hạn: <việc>" pushed "Chưa điểm
+  trang" over the Sắc stat at 1000x755). Re-run after merge: story-deadline 12/12 ×5 sizes, event-context 9/9, hint-dedup exit 0 twice, old saves OK,
+  chip in view at 6 sizes. opt-render: 2 fails that main 80be56be0 has too (same test on main's build): night card shows "Bạc +20" (jecon nightBac,
+  econ-stipend) and trung-y "Điềm báo" notice (jty) with an opts list not flagged as event/act.

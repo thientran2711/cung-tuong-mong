@@ -82,9 +82,9 @@ try{window.K3_STATE.push("pl67")}catch(e){}
 HX.pl67="Việc trong Mệnh truyện ngươi đã nhận lời lo liệu. Chạm để lo liệu ngay.";
 /* kit page #kit sample of the K3_STATE hook (KIT 31.2): a module's state chip in the top-bar state row, drawn by jk3 k3row (review r6) */
 if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§31.2",title:"K3_STATE: chip trạng thái ở hàng đầu trang (hạn lo liệu)",html:()=>typeof k3row!=="function"?"":
- `<div class="k3tc"><span class="k3tt"><span class="kstl k3l1">${k3row("pl67","Hạn: Nhân chứng bị truy sát","4 buổi","hot")} ${k3row("fake","Giả bệnh","","hot")}</span></span></div>`});
+ `<div class="k3tc"><span class="k3tt"><span class="kstl k3l1">${k3row("pl67","Hạn lo liệu","4 buổi","hot")} ${k3row("fake","Giả bệnh","","hot")}</span></span></div>`});
 (function(){const h0=renderHud2;renderHud2=function(){const r=h0.apply(this,arguments);try{const P=pl67();const el=$("hud2");if(P&&el&&!el.querySelector('[data-hx="pl67"]')){const left=P.due-absB67();
-  el.insertAdjacentHTML("beforeend",`<button class="hc hot" data-hx="pl67">Hạn: ${P.h||P.n} <b>${dlT67(left)}</b></button>`);if(typeof k3Stage==="function")k3Stage()}}catch(e){}return r}})();
+  el.insertAdjacentHTML("beforeend",`<button class="hc hot" data-hx="pl67">Hạn lo liệu <b>${dlT67(left)}</b></button>`);if(typeof k3Stage==="function")k3Stage()}}catch(e){}return r}})();
 window.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest('[data-k3="pl67"],[data-hx="pl67"],[data-pl67]');if(!t)return;e.stopPropagation();e.preventDefault();pl67Open()},true);
 (function(){const p0=panel67;panel67=function(){let h=p0.apply(this,arguments);try{const P=pl67();if(!P)return h;const left=P.due-absB67();
   const blk=`<h3>Đang lo liệu</h3>`+rows67([["Việc",P.n],["Hạn",(typeof kitChip==="function"?kitChip(`còn ${dlT67(left)}`,left<=3?"r":"n"):`còn ${dlT67(left)}`)],["Cần",`Bạc ${P.cost} (có ${S.bac})`,S.bac>=P.cost?"g":"r"],
