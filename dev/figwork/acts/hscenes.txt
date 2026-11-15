@@ -174,3 +174,26 @@ bi-bat-tra-khao|1|a maid's wrists bound with soft rope resting on her lap in a d
 bi-cam-tuc|0|a heavy palace gate shut with a wooden bar, a guard's spear shaft leaning beside it, a lone teacup on an empty table seen through the lattice
 bi-day-xuong-ho|0|maids' hands pulling a soaked pink sleeve up from a lotus pond onto stone steps, water dripping, lotus leaves
 bi-giang|0|a consort's hands removing gold hairpins and laying them on a lacquer tray held by a eunuch's dark sleeves
+dung-sau-hau-chu|0|a maid's folded hands in green sleeves standing behind the carved chair of her mistress at a banquet, the mistress's pink sleeve on the armrest, dishes and wine cups
+day-le-nghi|0|an older court lady's hands in a dark brown sleeve gently adjusting a young maid's clasped hands at the right side of her waist for the upright wanfu greeting, green sleeves
+cau-xin-quan-su|0|a maid's clasped pleading hands in green sleeves before an older court lady's dark brown sleeve holding a rattan cane
+quan-su-gat-dau|0|an older court lady's hand in a dark brown sleeve laying a rattan cane down on a table, a maid's green-sleeved hands relaxing on the rim of a wooden wash basin
+bi-quan-su-bat-gap|0|a stack of wooden wash basins in a servants' courtyard, a maid's green sleeve resting idle on her knee beside them, an older court lady's dark brown sleeve with a rattan cane appearing at the edge
+cui-dau-nhan-loi|0|a maid's hands pressed flat on the floor in a kneeling apology, green sleeves spread, before the embroidered hem of her mistress's pink skirt
+khoc-xin-tha|0|a kneeling maid's hands clasped together pleading, green sleeves trembling, before the hem of a red robe on a palace floor
+cai-lai|0|a mistress's hand in a red sleeve slapping flat on a carved table so the teacups jump, a maid's green sleeves standing firm opposite
+vang-lenh|0|a mistress's hand in a pink sleeve pointing out an order, a maid's hands in green sleeves clasped low in obedience
+mat-bao-hh|1|a kneeling maid's hands clasped close as she whispers, before the Empress's red phoenix brocade sleeve resting on a carved armrest, closed room, one candle
+mat-bao-cho|0|a maid's hand slipping a folded blank note through the gap of a lattice door into another maid's waiting hand
+len-bao-tin|1|a maid's hand gripping a swinging paper lantern while hurrying along a dark palace corridor, green sleeve and skirt hem in motion
+thanh-minh|0|a kneeling maid's arm in a green sleeve raised, pointing firmly across a hall toward someone's dark sleeve
+dut-bac-rut-loi|0|behind a garden tree trunk, one maid's hand pressing a small silver ingot into another maid's open palm, green sleeves
+cui-dau-thua-ten|0|a maid's clasped hands in green sleeves lowered respectfully on a garden path, before the Emperor's yellow dragon-embroidered sleeve and robe hem
+viec-khong-thanh|1|a maid's hand clutching a small paper packet of powder, slipping back through a door left ajar in a dark corridor
+nang-so-viec-nguy|1|a maid's hands hugging her own shoulders, green sleeves trembling, huddled in a dim corner beside a guttering candle
+doan-ra-do-minh|0|a consort's hand in a pink sleeve resting on a veranda railing; beyond in the garden a eunuch's dark sleeve peeks from behind a red pillar
+nhan-toi-thay|0|a consort's pink sleeve stepping forward with one hand raised to shield, behind her a kneeling maid's green sleeves on the floor, facing the Empress's red phoenix brocade hem
+de-nang-chiu-don|0|a consort's pink sleeve turned away at a doorway while a eunuch's dark hand leads a maid out by the wrist, green sleeve
+lam-ngo|0|a consort's hand holding a round silk fan as she walks past, pink sleeve flowing, a blurred cluster of whispering sleeves to one side
+mua-lay|1|a consort's hand in a pink sleeve sliding silver ingots across a table toward a eunuch's dark sleeve that passes back a sealed blank letter, candle
+dua-com-ao|0|a maid's hands carrying a covered bamboo food basket and a folded padded cotton coat to a weathered cold-palace door, a plain undyed sleeve reaching out
