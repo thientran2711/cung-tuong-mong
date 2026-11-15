@@ -18,5 +18,5 @@ def tile(k):
 rows=(len(items)+cols-1)//cols; S=Image.new('RGB',(cols*(W+16)+16,rows*(TH+LH+16)+16),'#f4ecdd'); d=ImageDraw.Draw(S)
 for i,(k,lab,*_) in enumerate(items):
     x=16+(i%cols)*(W+16); y=16+(i//cols)*(TH+LH+16); S.paste(tile(k),(x,y))
-    d.text((x+4,y+TH+6),os.path.basename(k).replace('.webp',''),fill='#5a1e14',font=F); d.text((x+4,y+TH+34),lab[:48],fill='#222',font=F2)
+    d.text((x+4,y+TH+6),os.path.basename(k).replace('.webp','').replace('.jpg',''),fill='#5a1e14',font=F); d.text((x+4,y+TH+34),lab[:48],fill='#222',font=F2)
 S.save(out,quality=88); print(out,S.size)
