@@ -2266,7 +2266,7 @@ function renderPanel0(){const el=$("panel");let h="";faceInit();const gm=documen
    h=kidTabHTML(hl)}
  if(tab==="art")h=artTabHTML();
  if(tab==="story"){const s=STORY[S.origin.k];if(s.calc)S.st.step=s.calc();
-   h=`<div class="story"><h3>${s.t}</h3><p style="margin:0 0 4px">${s.goal}</p><p style="margin:0">Bước <b>${S.st.step}/${s.n}</b> · ${S.st.done===1?`<span class="g">Thành: ${S.st.tag}</span>`:S.st.done===-1?`<span class="r">Bại: ${S.st.tag}</span>`:s.hint()}</p></div>`;
+   h=`<div class="story"><h3>${s.t}</h3><p style="margin:0 0 4px">${s.goal}</p><p style="margin:0"><b>${typeof lab67==="function"&&lab67()||`Bước ${S.st.step}/${s.n}`}</b> · ${S.st.done===1?`<span class="g">Thành: ${S.st.tag}</span>`:S.st.done===-1?`<span class="r">Bại: ${S.st.tag}</span>`:s.hint()}</p></div>`;
    const c=(ok,t)=>`<span class="${ok?"y":"n"}">${ok?"✓":"✗"} ${t}</span>`;
    h+=S.rank>=7?`<div class="req"><h3>Ngươi là Hoàng hậu</h3>Đưa con mình lên ngôi để thành Hoàng thái hậu.</div>`:S.out?`<div class="req"><h3>Lãnh cung</h3>Không bàn chuyện sắc phong. Được minh oan thì phục vị ${RANKS[Math.max(0,Math.min(6,S.coldRank||0))].n} (hoặc thấp hơn một bậc).</div>`:`<div class="req"><h3>Điều kiện sắc phong ${RANKS[S.rank+1].n}</h3>${kitReqRows(promoReq())}<span class="past">Ngôi Hoàng hậu về sau cần: ngôi bỏ trống, có hoàng tử và Thái hậu ${BAL.hhTh} (không con trai: Thái hậu ${has("hieuthao")?BAL.hhThNoSonHieu:BAL.hhThNoSon}), và <b class="${S.duc>=hhNeed(S).duc?"g":"r"}">Đức ${S.duc} (cần ${hhNeed(S).duc})</b> (mẹ Thái tử chỉ cần ${BAL.hhDucHeir}). Khi ngôi trống, Hoàng thượng chọn trong những người đủ điều kiện (nặng ở hoàng tử, Thái hậu, Danh).</span><br><span class="past">Đủ điều kiện thì được dự khảo hạch tấn phong; đỗ thì có thánh chỉ. Sinh hoàng tử: được ân thi khảo hạch ngay.</span></div>`}
  if(tab==="inv")h=invHTML();
@@ -6418,6 +6418,17 @@ function v267(){return !!(S&&S.st&&S.st.v2)}
 function th67(i){return v267()?(i==="m"?S.st.M:(S.st.X||[])[i]):null}
 function thAll67(){return v267()?[S.st.M].concat(S.st.X||[]).filter(Boolean):[]}
 function thKey67(t){return t===S.st.M?"m":(S.st.X||[]).indexOf(t)}
+/* story position (owner 15/11 20:30Z): every story progress label shows the CHAPTER and the ACT, "Chương 2 · Hồi 3/4" (lab67).
+   Main line: chapter = A.chap; an old save without it takes the chapter count S.st.ch.n, else Chương 1. Hồi = the act she is on
+   (A.i+1 of A.seq.length; a closed chapter = n/n). A phụ tuyến arc (old saves, S.st.X) is one chapter: act only. The old story
+   from before chapters (no S.st.v2): Chương 1 · Hồi step+1/n. A milestone chapter (S.st.ms, a checklist) has no acts: Chương only. */
+function pos67(A){const st=S&&S.st;if(!st)return null;
+ if(!v267()){const s=STORY[S.origin&&S.origin.k],n=(s&&s.n)||0;return{c:1,i:n?Math.min((st.step||0)+(st.done?0:1),n):0,n}}
+ if(A===undefined){if(st.ms&&st.ch)return{c:st.ch.n||1,i:0,n:0};A=st.M}
+ if(!A)return st.ch&&st.ch.n?{c:st.ch.n,i:0,n:0}:null;
+ const n=A.seq?A.seq.length:0,i=A.done?n:Math.min((A.i||0)+1,n),side=A!==st.M&&(st.X||[]).includes(A);
+ return{c:side?0:(A.chap||(st.ch&&st.ch.n)||1),i,n,side}}
+function lab67(A){const p=pos67(A);if(!p)return"";return [p.c?`Chương ${p.c}`:"",p.n?`Hồi ${p.i}/${p.n}`:""].filter(Boolean).join(" · ")}
 function storyBusy(){try{return v267()&&(S.st.bm===S.turn||Q.some(m=>m.pid==="j67"))}catch(e){return false}}
 window.storyBusy=storyBusy;
 /* ---------- history (per origin and shared "*") ---------- */
@@ -6533,7 +6544,7 @@ function res67(tk,bid,i,odds){const A=th67(tk);if(!A||A.cur!==bid)return;const a
  const sure=odds>=100,ok=sure||roll(odds);if(!sure){ap67(ok?o.w:o.l);if(ok&&o.sc)A.sc+=o.sc;if(!ok&&o.sf)A.sc=Math.max(0,A.sc+o.sf)}else{ap67(o.w);if(o.sc)A.sc+=o.sc}
  if(ok&&o.f)A.f[o.f]=1;if(!ok&&o.ff)A.f[o.ff]=1;let extra="";try{if(o.go)extra=o.go(A,ok)||""}catch(e){console.error(e)}
  const said=fill67(ok?(o.rt||""):(o.rf||""),A);
- log(`<b>${a.t}</b>: ${sure?"":ok?'<span class="g">Thành.</span> ':'<span class="r">Hỏng.</span> '}${said}${" "+fmt(sure?o.w:ok?o.w:o.l)}${extra?" "+extra:""}`);
+ log(`<b>${lab67(A)} · ${a.t}</b>: ${sure?"":ok?'<span class="g">Thành.</span> ':'<span class="r">Hỏng.</span> '}${said}${" "+fmt(sure?o.w:ok?o.w:o.l)}${extra?" "+extra:""}`);
  A.hist.push(`${fill67(b.l||b.h||"",A)}: ${fill67(o.n,A)}${sure?"":ok?" (thành)":" (hỏng)"}`);A.used.push(bid);A.cur=null;A.i++;
  const end=o.e?(Array.isArray(o.e)?(ok?o.e[0]:o.e[1]):o.e):null;
  if(end){end67(A,end);return}
@@ -6586,7 +6597,7 @@ if(typeof lifeSave==="function")(function(){const l0=lifeSave;lifeSave=function(
 function msName67(x){return x.a?ARC67[x.a].t:x.t}
 function obj67(){const c=S.st&&S.st.ch,A=S.st&&S.st.M,m=S.st&&S.st.ms;if(!c)return"";
  if(m){const d=MS67[m.id];const nx=d.steps(m).find(x=>!x[1]);return `Chương ${c.n}/${c.max} «${d.t()}»: ${nx?nx[0]:"sắp xong"}`}
- if(c.all)return `Mệnh truyện trọn vẹn: ${c.fin||""}`;if(!A)return"";return `Chương ${A.chap||1}/${c.max} «${ARC67[A.a].t}»: ${hint67(A)}`}
+ if(c.all)return `Mệnh truyện trọn vẹn: ${c.fin||""}`;if(!A)return"";return `${lab67(A)} «${ARC67[A.a].t}»: ${hint67(A)}`}
 function thRows67(A,row){const a=ARC67[A.a];const n=A.seq.length,i=A.done?n:A.i;
  return rows67([["Mục tiêu",fill67(a.g,A)],["Tiến độ",`Đã qua ${i}/${n} hồi · còn ${n-i}`],["Lợi thế",`${A.sc} · mỗi phần thêm cơ may ở hồi cao trào`],["Đã qua",A.hist.join("<br>")],A.done?["Kết cục",A.tag,A.done===1?"g":A.done===-1?"r":""]:["Kế tiếp",hint67(A)]])}
 function panel67(){const row=(a,b)=>`<div class="pcrow"><span>${a}</span><span>${b}</span></div>`;const c=S.st.ch,M=S.st.M,Q0=QUEST67[S.origin.k]||QUEST67.tt;
@@ -6595,8 +6606,8 @@ function panel67(){const row=(a,b)=>`<div class="pcrow"><span>${a}</span><span>$
  if(c&&c.done)h+=rows67([["Kết cục xuất thân",c.fin,S.st.done===1?"g":"r"]]);
  const m=S.st.ms;if(m&&c){const d=MS67[m.id],st=d.steps(m);h+=`<h3>Chương ${c.n}/${c.max}: ${d.t()}</h3>`+rows67([["Mục tiêu",d.g()],["Các bước",st.map(x=>(x[1]?"✓ ":"✗ ")+x[0]).join("<br>")],["Tiến độ",`Xong ${st.filter(x=>x[1]).length}/${st.length} bước`]])}
  else if(c&&c.all)h+=rows67([["Chính tuyến","Đã đi hết các chương","g"]]);
- else if(M)h+=`<h3>Chương ${M.chap||1}/${c?c.max:6}: ${ARC67[M.a].t}</h3>`+thRows67(M,row);
- const X=S.st.X||[];if(X.length)h+=`<h3>Phụ tuyến</h3>`+X.map(A=>`<h3>${ARC67[A.a].t}</h3>`+thRows67(A,row)).join("");
+ else if(M)h+=`<h3>${lab67(M)}: ${ARC67[M.a].t}</h3>`+thRows67(M,row);
+ const X=S.st.X||[];if(X.length)h+=`<h3>Phụ tuyến</h3>`+X.map(A=>`<h3>${ARC67[A.a].t} · ${lab67(A)}</h3>`+thRows67(A,row)).join("");
  else h+=`<p class="past">Phụ tuyến (người thân thất lạc, mật thư, hỏa hoạn, sứ thần...) có thể mở về sau.</p>`;
  return h}
 (function(){const p0=renderPanel0;renderPanel0=function(){const r=p0.apply(this,arguments);try{if(tab==="story"&&v267()&&!(typeof isSrv==="function"&&isSrv())){const el=$("panel"),s=el.querySelector(".story");if(s&&!el.querySelector(".st67")){s.outerHTML=`<div class="st67">${panel67()}</div>`;kitFix(el)}}}catch(e){console.error(e)}return r}})();
@@ -8156,7 +8167,7 @@ function msCheck67(){const m=S.st.ms,c=S.st.ch;if(!m||!c||!msDone67(m))return;co
  card67("result",`Chương ${c.n} khép lại`,[["Kết cục","Xong","g"],["Sự việc",d.end],["Thay đổi",fmt(d.fx)],R&&R.row],pMe(),d.t());S.st.ms=null;chAdvance67(null);syncMain67()}
 /* the "Mệnh truyện" card: the only way an arc chapter moves on (not while she is a servant: then beats come on their own) */
 function storyActs67(){if(!v267()||S.dead||S.out)return[];const A=S.st.M;if(!A||A.done||A.cur||!A.nb||S.turn<A.due||isSrv67()||Q.some(m=>m.pid==="j67"))return[];const b=beatDef67(A,A.nb);if(!b)return[];
- return [{n:`Mệnh truyện: ${fill67(b.h||"",A)}`,t:`Chương ${A.chap} «${ARC67[A.a].t}» · hồi ${A.i+1}/${A.seq.length} · còn ${Math.max(0,A.dl-S.turn)} tháng tới hạn.`,c:{suc:-5},o:100,w:{},x:"mở hồi kế tiếp của chương, giữ Lợi thế, gần phần thưởng",dom:"Giao thiệp",j67:1,go:()=>{fireBeat67(A);try{showModal()}catch(e){}}}]}
+ return [{n:`Mệnh truyện: ${fill67(b.h||"",A)}`,t:`${lab67(A)} «${ARC67[A.a].t}» · còn ${Math.max(0,A.dl-S.turn)} tháng tới hạn.`,c:{suc:-5},o:100,w:{},x:"mở hồi kế tiếp của chương, giữ Lợi thế, gần phần thưởng",dom:"Giao thiệp",j67:1,go:()=>{fireBeat67(A);try{showModal()}catch(e){}}}]}
 Object.keys(STORY).forEach(k=>{Object.defineProperty(STORY[k],"acts",{get:()=>v267()?storyActs67:(STORY[k].__old||{}).acts,configurable:true,enumerable:true})});
 (function(){const d0=deal;deal=function(){const r=d0.apply(this,arguments);try{if(v267()&&S.st.done&&deck)deck.push(...storyActs67())}catch(e){}return r}})();
 function a67Month(){if(!v267()||S.dead)return"";const st=S.st;try{msCheck67()}catch(e){console.error(e)}
@@ -8176,14 +8187,14 @@ function hint67(A){if(!A)return"";if(A.done)return A.tag;const b=A.cur?beatDef67
 function obj67(){const c=S.st&&S.st.ch,A=S.st&&S.st.M,m=S.st&&S.st.ms;if(!c)return"";
  if(m){const d=MS67[m.id];const nx=d.steps(m).find(x=>!x[1]);return `Chương ${c.n} «${d.t()}»: ${nx?nx[0]:"sắp xong"}`}
  if(c.all)return "Đã đi hết các chương của mệnh truyện";if(!A)return"";
- return `Chương ${A.chap} «${ARC67[A.a].t}» · hạn còn ${Math.max(0,A.dl-S.turn)} tháng · ${hint67(A)}`}
+ return `${lab67(A)} «${ARC67[A.a].t}» · hạn còn ${Math.max(0,A.dl-S.turn)} tháng · ${hint67(A)}`}
 function panel67(){const c=S.st.ch,M=S.st.M,m=S.st.ms,Q0=QUEST67[S.origin.k]||QUEST67.tt;
  let h=`<div class="story"><h3>Mệnh truyện: ${Q0.t}</h3><p class="past" style="margin:0">Chính tuyến của kiếp này khoảng ${c?c.max:13} chương, từ ngày nhập cung đến ngày con ngươi lên ngôi Đông cung. Các phụ tuyến là việc nhờ, sự kiện, mưu sự ở các mục khác.</p></div>`
   +rows67([["Luật chương","Mỗi chương truyện có hạn. Mở từng hồi bằng thẻ «Mệnh truyện» ở mục Hành sự (Sức -5, 2 khắc). Theo đuổi thì giữ Lợi thế, có cơ thắng và phần thưởng."],["Nếu bỏ mặc","Quá hạn, chương tự khép ở kết cục xấu: mất Lợi thế, chịu thiệt của kết cục thua, Danh -3, kết cục xuất thân xấu đi. Không chết, đường lên ngôi Hoàng hậu vẫn mở.","r"],["Phần thưởng","thắng: đồ quý, hiếm hay trân phẩm theo truyện; vừa: đồ thường; thua: không"]]);
  if(c&&c.past.length)h+=`<h3>Các chương đã qua</h3>`+rows67(c.past.map(x=>[`Chương ${x.n}`,`${msName67(x)} · <b class="${x.k>0?"g":x.k<0?"r":""}">${x.tag}</b>`]));
  if(c&&c.done)h+=rows67([["Kết cục xuất thân",c.fin,S.st.tag&&c.fin?"g":""]]);
  if(m&&c){const d=MS67[m.id],st=d.steps(m);h+=`<h3>Chương ${c.n}: ${d.t()}</h3>`+rows67([["Mục tiêu",d.g()],["Các bước",st.map(x=>(x[1]?"✓ ":"✗ ")+x[0]).join("<br>")],["Tiến độ",`Xong ${st.filter(x=>x[1]).length}/${st.length} bước`],["Hạn","không có hạn"]])}
- else if(M){const a=ARC67[M.a],n=M.seq.length,i=M.done?n:M.i;h+=`<h3>Chương ${M.chap}: ${a.t}</h3>`+rows67([["Mục tiêu",fill67(a.g,M)],["Tiến độ",`Đã qua ${i}/${n} hồi · còn ${n-i}`],["Hạn",`còn ${Math.max(0,M.dl-S.turn)} tháng`,M.dl-S.turn<=1?"r":""],["Lợi thế",`${M.sc} · mỗi phần thêm cơ may ở hồi cao trào`],["Đã qua",M.hist.join("<br>")],["Kế tiếp",hint67(M)]])}
+ else if(M){const a=ARC67[M.a],n=M.seq.length,i=M.done?n:M.i;h+=`<h3>${lab67(M)}: ${a.t}</h3>`+rows67([["Mục tiêu",fill67(a.g,M)],["Tiến độ",`Đã qua ${i}/${n} hồi · còn ${n-i}`],["Hạn",`còn ${Math.max(0,M.dl-S.turn)} tháng`,M.dl-S.turn<=1?"r":""],["Lợi thế",`${M.sc} · mỗi phần thêm cơ may ở hồi cao trào`],["Đã qua",M.hist.join("<br>")],["Kế tiếp",hint67(M)]])}
  else if(c&&c.all)h+=rows67([["Chính tuyến","Đã đi hết các chương","g"]]);
  const nx=c?c.plan.slice(c.i+1).filter(x=>x!=="fin").length:0;if(nx)h+=`<p class="past">Còn khoảng ${nx} chương phía trước.</p>`;
  return h}
@@ -24986,9 +24997,12 @@ function ktStoryHTML(){const c=S.st.ch,M=S.st.M,m=S.st.ms,Q0=(typeof QUEST67==="
  if(sub.cur==="now"){let card="";
   if(m&&c){const d=MS67[m.id],st=d.steps(m);const done=st.filter(x=>x[1]).length;const nx=st.find(x=>!x[1]);
    card=kitSkillCard({kind:"story",k:"ms",kicker:`Chương ${c.n}`,name:d.t(),level:done,max:st.length,word:"Bước",bar:false,next:"",img:art})+rows67([["Mục tiêu",d.g()],["Bước này",nx?nx[0]:"đã xong mọi bước",nx?"":"g"],["Hạn","không có hạn"]])+kitChecks(st.map(x=>[x[1],x[0]]))}
-  else if(M){const a=ARC67[M.a],n=M.seq.length,i=M.done?n:M.i;
-   card=kitSkillCard({kind:"story",k:M.a,kicker:`Chương ${M.chap}`,name:a.t,level:i,max:n,word:"Hồi",bar:false,next:"",img:art})+rows67([["Mục tiêu",fill67(a.g,M)],["Hồi kế tiếp",hint67(M)],["Hạn",`còn ${Math.max(0,M.dl-S.turn)} tháng`,M.dl-S.turn<=1?"r":""],["Lợi thế",`${M.sc} · mỗi phần thêm cơ may ở hồi cao trào`]])}
+  else if(M){const a=ARC67[M.a],P=pos67(M)||{c:M.chap||1,i:0,n:M.seq.length};/* kicker Chương N, steps "Hồi i/n" = the act she is on, as in the story dialog title (lab67) */
+   card=kitSkillCard({kind:"story",k:M.a,kicker:`Chương ${P.c}`,name:a.t,level:P.i,max:P.n,word:"Hồi",bar:false,next:"",img:art})+rows67([["Mục tiêu",fill67(a.g,M)],["Hồi kế tiếp",hint67(M)],["Hạn",`còn ${Math.max(0,M.dl-S.turn)} tháng`,M.dl-S.turn<=1?"r":""],["Lợi thế",`${M.sc} · mỗi phần thêm cơ may ở hồi cao trào`]])}
   else if(c&&c.all)card=kitEmpty("Mệnh truyện","Đã đi hết các chương của kiếp này.");
+  else if(!v267()&&S.st&&STORY[S.origin.k]){/* old save from before chapters (v1 story): one chapter, its steps as acts */const s=STORY[S.origin.k],P=pos67()||{c:1,i:0,n:s.n||0};let hn="";try{hn=s.hint?s.hint():""}catch(e){}
+   card=kitSkillCard({kind:"story",k:"v1",kicker:`Chương ${P.c}`,name:s.t,level:P.i,max:P.n,word:"Hồi",bar:false,next:"",img:art})+rows67([["Mục tiêu",s.goal],
+    S.st.done?["Kết cục",S.st.tag||(S.st.done>0?"Thành":"Hỏng"),S.st.done>0?"g":"r"]:["Kế tiếp",hn||"chờ hồi kế tiếp"]])}
   else card=kitEmpty("Mệnh truyện","Chưa mở chương nào. Mở bằng thẻ «Mệnh truyện» ở Hành sự.");
   const nx=c?c.plan.slice(c.i+1).filter(x=>x!=="fin").length:0;
   h+=`<div class="ktop"><span class="kchip n">${ktEsc(Q0.t)}</span>${nx?` <span class="kchip n">còn khoảng ${nx} chương</span>`:""} ${kitInfo("Luật chương")}</div>`+card;
@@ -25771,6 +25785,230 @@ function kgGroups(add){const G=new Map();
 .kmov.kfgain.km-red *{animation:none!important}
 @media (prefers-reduced-motion:reduce){.kmov.kfgain *{animation:none!important}}
 `;document.head.appendChild(st)})();
+/* ================= jitev — ITEMS IN EVENTS (owner 15/11 ~18:10Z, review/item-events) — KIT §64 (coordinator registry) =================
+   Owner rule: every event where an ITEM appears that could come into her hands (a letter delivered, a gift offered, a found object, a confiscated
+   thing returned, a bribe, a poisoned dish, a token…) shows that ITEM'S ICON in the event dialog (kit item frame kitItem with its grade, in the
+   banner / info area), and the choices act on it with an animation:
+     keep  (nhận / giữ / cất / đọc…)       → the item flies into Tư trang (kitGain fly path, KIT §54) — a REAL entry in S.inv
+     back  (trả lại / gửi trả / từ chối…)  → the item flies back to the giver (the person of the dialog)
+     give  (dâng / trình / nộp / giao…)     → the item flies to that person (the dialog's person when named, else away up)
+     burn · tear · smash · pour · well · bury → the item is destroyed on the spot (paper curls + embers + ash · torn in two · shatters ·
+           tipped and poured out · thrown in an arc into water with ripples · sinks under a mound of earth)
+     use   (uống / ăn / thoa…)              → the item glows and dissolves into motes
+   ONE engine, read in one place (showModal + chooseM):
+     ievOf(m)  → {I: kitItemInfo, e: entry|null, key, acts:[act per option], who} for the dialog m (Q[0]) — resolvers in order:
+                 m.item (explicit) · IEV_PID[pid](pp, m) (gift / poisoned dish / goods events / story beats) · nouns in the dialog text (IEV_NOUN)
+                 with at least one option acting on the item (IEV_VERB on the option name). Same function = the scan (dev/test/item-events-scan.js).
+     kitItemTag(I) → the kit item frame (kitItem md, grade colour + grade word) placed on the event banner (bottom-right) or, without a banner,
+                 at the top of the text column (§64.1).
+     kitItemFx(act, I, {from, to, done}) → the animation (§64.2). Off: "Cảnh động" off / reduced motion → no flight (the item still goes into
+                 Tư trang); bots / quiet → nothing. Any tap during an animation finishes it at once (catcher layer, pointer-events auto).
+   Story items that had no IT entry (letters, notes, tokens…) are real IT items now (IEV_IT, art img/item-<k>.webp, gpt-2-6).
+   Old saves: nothing stored (the dialog is resolved from pid + pp, which old saves already keep); new IT keys only add. */
+try{BAL.itev=Object.assign({keep:900,back:1000,burn:1400,tear:1100,smash:1100,pour:1200,well:1300,bury:1300,use:900},BAL.itev||{})}catch(e){}
+const IEV=window.IEV={log:[],cur:null,hold:null,claim:new WeakSet(),run:[]};
+/* ---------- story items (gpt-2-6 sheet TdS42S9VNR, cut 88 %, CDN) ---------- */
+const IEV_IT={
+ thu:{n:"Bức thư",kd:"Thư từ",d:"Thư tay gửi đến ngươi · giữ làm kỷ niệm",g:0},
+ matthu:{n:"Mật thư",kd:"Thư từ",d:"Thư niêm sáp đỏ · bị soát ra là rắc rối",g:1},
+ giaymat:{n:"Mảnh giấy nhắn",kd:"Thư từ",d:"Mẩu giấy gấp nhỏ, chữ viết vội",g:0},
+ tinvat:{n:"Tín vật",kd:"Kỷ vật",d:"Vật làm tin của người xưa",g:1},
+ khantay:{n:"Khăn tay lụa",kd:"Kỷ vật",d:"Khăn lụa thêu một cành mai",g:0},
+ chenthuoc:{n:"Chén thuốc",kd:"Thuốc",d:"Một chén thuốc sắc còn ấm",g:0},
+ batcanh:{n:"Bát canh",kd:"Điểm tâm",d:"Bát canh hầm táo đỏ, hạt sen",g:0},
+ sachchep:{n:"Tập sách chép tay",kd:"Thư từ",d:"Tập giấy khâu chỉ, chữ chép tay",g:0},
+ canhhoa:{n:"Cành hoa ép",kd:"Kỷ vật",d:"Cành hoa khô ép giữa trang giấy",g:0},
+ hinhnhan:{n:"Hình nhân bùa ngải",kd:"Vật chứng",d:"Hình nhân cắm kim, bùa vàng · bị soát ra là tội bùa ngải",g:0,il:1},
+ lenhbai:{n:"Lệnh bài",kd:"Kỷ vật",d:"Thẻ gỗ viền vàng, ra vào cửa cung",g:1}};
+for(const k in IEV_IT){const x=IEV_IT[k];if(!IT[k])IT[k]={n:x.n,kd:x.kd,d:x.d,pr:0,tg:[],story:1,il:x.il||undefined};try{if(!(k in ITEM_ART_G))ITEM_ART_G[k]=x.g}catch(e){}}
+/* ---------- nouns in the dialog text → item (specific first) ---------- */
+const IEV_NOUN=[
+ [/mật thư|thư mật|mật ước|mật hàm|mật tín|thư niêm/i,"matthu"],
+ [/thư nhà|thư của (mẹ|cha|phụ thân|mẫu thân|huynh|ca ca|tỷ)/i,"thunha"],
+ [/mảnh giấy|mẩu giấy|tờ giấy nhỏ|mảnh thư/i,"giaymat"],
+ [/bức thư|lá thư|phong thư|thư tay|tờ thư|thư không ký|hồi âm|bức hòa thư|thư (cầu|xin|tình|riêng|của)/i,"thu"],
+ [/bài thơ|tờ thơ/i,"giaymat"],[/tập thơ|bản thảo|quyển sách|bộ sách|sách chép|quốc sách/i,"sachchep"],[/cành hoa|hoa ép|hoa khô/i,"canhhoa"],
+ [/tín vật/i,"tinvat"],[/lệnh bài|kim bài/i,"lenhbai"],[/ngọc bội/i,"ngocboi"],
+ [/khăn tay|khăn lụa/i,"khantay"],[/túi thơm|túi hương/i,"tuithom"],[/hình nhân|bùa (chú|ngải)/i,"hinhnhan"],
+ [/bát thuốc|chén thuốc|thang thuốc/i,"chenthuoc"],[/bát canh|bát chè|chén chè|canh hầm|chén canh/i,"batcanh"],
+ [/hộp điểm tâm|hộp mứt|đĩa bánh|bánh trái/i,"banhtrai"],[/bình rượu|vò rượu|hũ rượu/i,"ruoucuc"],
+ [/cây trâm|chiếc trâm/i,"tramngoc"],[/chiếc vòng/i,"vongngoc"],[/bức tranh|bức họa/i,"tranhco"],
+ [/tập chứng cứ|xấp chứng cứ|cuốn sổ|sổ sách|sổ nợ|giấy nợ|văn tự/i,"chungcu"],
+ [/(đốt|giữ|dâng|xé|trả|nhận|cất|đọc|mở|gửi|trình|nộp) (lại |hết |cả )?(bức |lá |phong )?thư|thư từ/i,"thu"],[/(đốt|giữ|cất|trả|ném|giặt) (lại |chiếc )?khăn|chiếc khăn/i,"khantay"],[/túi bạc|nén bạc|thỏi bạc|hộp vàng bạc|đút lót|hối lộ/i,"vangbac"]];
+/* ---------- option name → what it does to the item (earliest verb in the name wins) ---------- */
+const IEV_VERB=[["burn",/(?<!đã )(đốt|thiêu|châm lửa|hơ (lên )?lửa)/i],["tear",/(^|\s)xé(?=\s|,|$)/i],["smash",/đập (vỡ|nát|bỏ|tan)|bẻ gãy|bẻ đôi|nghiền nát|đánh vỡ|ném vỡ/i],
+ ["pour",/đổ (đi|bỏ|xuống|ra)|hắt (đi|bỏ)/i],["well",/giếng|(ném|thả|vứt) (xuống|vào) (hồ|sông|ao)|xuống hồ|xuống sông/i],["bury",/chôn(?! chặt)/i],
+ ["back",/trả (lại|về)(?! cho)|gửi trả|đưa trả|hoàn trả/i],["refuse",/từ chối|khước từ|không nhận|chối từ/i],
+ ["give",/dâng|trình (lên|với)?|(^|\s)nộp|giao (cho|nộp|lại|ra)|đưa (cho|lên|tới|đến)|chuyển (cho|tới)|tặng lại|đem (đến|tới|cho|lên)|mang (đến|tới|lên|cho)|chia cho|trả (\S+ ){0,2}cho/i],
+ ["use",/(^|\s)uống|ăn (ngay|hết|thử|luôn)|nếm|thoa lên|dùng ngay/i],
+ ["keep",/(^|\s)(?<!vờ )nhận(?! (lỗi|tội|sai|phạt|việc|lời|lệnh|thật|ra|nuôi|xét))|(^|\s)giữ(?! (kín|phép|mình|lễ|lời|khoảng|bí mật|miệng|im|thể diện|đèn|gìn|ý|chừng|nghiêm))|(^|\s)cất(?! (lời|tiếng|bước))|mở (thư|ra|xem)|(^|\s)đọc|nhặt|cầm lấy|lấy (thư|lại|về|sổ|khăn)|xem thư|đeo|cài lên/i]];
+/* option names whose first verb is not what happens to the item shown (the token is kept away, only the note burns) */
+const IEV_OPT=[[/đốt mảnh giấy, cất tín vật/i,"give"]];
+const IEV_DESTROY=["burn","tear","smash","pour","well","bury"];
+function ievTxt(h){return String(h==null?"":h).replace(/<[^>]*>/g," ").replace(/\s+/g," ").trim()}
+function ievVerb(n){const s=ievTxt(n);for(const [re,a] of IEV_OPT)if(re.test(s))return a;let best=null,at=1e9;for(const [a,re] of IEV_VERB){const m=re.exec(s);if(m&&m.index<at){at=m.index;best=a}}return best}
+function ievNoun(txt){const s=ievTxt(txt);let best=null,at=1e9;
+ for(const [re,k] of IEV_NOUN){const m=re.exec(s);if(m&&m.index<at){at=m.index;best=k}}
+ /* an IT name in bold (gift / goods texts) beats the generic nouns */
+ try{const B=[...String(txt||"").matchAll(/<b>([^<]{2,40})<\/b>/g)].map(x=>x[1]);for(const b of B){const k=Object.keys(IT).find(k=>IT[k]&&IT[k].n===b&&k!=="tp");if(k)return k}}catch(e){}
+ return best}
+/* explicit resolvers per saved-dialog id (pid + pp survive a reload, so old saves resolve the same way) */
+const IEV_PID={
+ /* "Đem đến Thái y viện": the outcome decides (j8: found tainted → kept as evidence, else back into her chest) → "probe" (§64.2) */
+ giftin:(p,m)=>p&&p.e?{e:p.e,who:p.f,acts:(m.opts||[]).map(o=>/thái y|nghiệm/i.test(ievTxt(o&&o.n))?"probe":"auto"),offer:1,own:1}:null,
+ pgin:(p,m)=>p&&p.e?{e:p.e,who:p.f,acts:(m.opts||[]).map(o=>/kim bạc|nếm/i.test(ievTxt(o&&o.n))?"test":"auto"),offer:1,own:1}:null,
+ cnvBribe:()=>({key:"vangbac",offer:1}),
+ /* a higher consort demands one of HER items (jtsb): "Giao" = it flies to her; the §54.2 loss card still follows */
+ tsbBul:(p,m)=>{const e=p&&p.ix>=0?S.inv[p.ix]:null;if(!e||e.h)return false;return{e,acts:(m.opts||[]).map(o=>/^Giao$/.test(ievTxt(o&&o.n))?"give":null)}},
+ tsbPetGift:()=>false,
+ j67:(p)=>{try{const A=th67(p.t);const b=A&&beatDef67(A,p.b);if(b&&b.gi){const k=Array.isArray(b.gi)?b.gi[0]:b.gi;return{key:Array.isArray(k)?k[0]:k}}}catch(e){}return null}};
+/* E68 events that hand her goods (econ STIP_EV): the item + which options refuse it */
+function ievE68(m){try{if(!/^e68/.test(m.pid||"")||typeof stipEvItem!=="function")return null;const id=m.pid.slice(3);const r=stipEvItem(id,{p:m.pp||{},vi:(m.pp||{}).vi||0});
+ if(!r)return null;const no=r[4]||[];return{key:r[2],acts:(m.opts||[]).map((o,i)=>{if(!no.includes(i))return"keep";const v=ievVerb(o.n);return !v||v==="refuse"?"back":v})}}catch(e){return null}}
+function ievActsFor(m,base,offer){const O=m.opts||[];return O.map((o,i)=>{if(o&&o.ia)return o.ia;if(base&&base[i]&&base[i]!=="auto")return base[i]==="test"?null:base[i];const v=ievVerb(o&&o.n);return v==="refuse"?(offer?"back":null):v})}
+/* THE resolver: dialog → item + acts (null = no item in this dialog) */
+function ievOf(m){if(!m||!m.opts||!m.opts.length)return null;let r=null;
+ try{if(m.item)r=typeof m.item==="string"?{key:m.item}:m.item;
+  if(!r&&m.pid&&IEV_PID[m.pid]){r=IEV_PID[m.pid](m.pp||{},m);if(r===false)return null}
+  if(!r)r=ievE68(m);
+  if(!r){const k=ievNoun(`${m.t||""} ${m.h||""}`)||ievNoun((m.opts||[]).map(o=>o&&o.n).join(" · "));if(k&&IT[k]){const acts=ievActsFor(m);if(acts.some(Boolean))r={key:k,acts,txt:1}}}}catch(e){console.error("ievOf",e);r=null}
+ if(!r)return null;const e=r.e||null,key=e?e.k:r.key;if(!key||!(IT[key]||(typeof WD_ITEMS==="object"&&WD_ITEMS[key])))return null;
+ const I=kitItemInfo(e||key);const acts=r.acts&&!r.txt?ievActsFor(m,r.acts,r.offer):r.acts||ievActsFor(m,null,r.offer);return{I,e,key,acts,who:r.who||null,own:!!r.own}}
+window.ievOf=ievOf;window.ievVerb=ievVerb;window.ievNoun=ievNoun;
+/* ---------- §64.1 kitItemTag: the item frame on the event banner / at the top of the text ---------- */
+function kitItemTag(I){return `<div class="kiev" data-kiev="${I.k}">${kitItem({src:I.src,name:I.name,grade:I.grade,size:"md",tip:`${I.name} · ${I.gname}`})}</div>`}
+window.kitItemTag=kitItemTag;
+function ievPlace(R){const mb=document.getElementById("mb");if(!mb)return null;mb.querySelectorAll(".kiev:not(.kiev-own)").forEach(x=>x.remove());if(!R)return null;
+ const own=mb.querySelector(".tsbtile");if(own){own.classList.add("kiev","kiev-own");return own}
+ const h=kitItemTag(R.I);const ban=mb.querySelector(":scope > .kdlgart .ksart");
+ if(ban){ban.insertAdjacentHTML("beforeend",h);const t=ban.lastElementChild;t.classList.add("kiev-ban");return t}
+ const col=mb.querySelector(".kpmain")||mb.querySelector(".spkt")||mb.querySelector(".kpb")||mb;col.insertAdjacentHTML("afterbegin",h);const t=col.firstElementChild;t.classList.add("kiev-txt");return t}
+/* ---------- §64.2 kitItemFx: the animations ---------- */
+function ievStill(){try{return matchMedia("(prefers-reduced-motion: reduce)").matches||(typeof OPT!=="undefined"&&OPT.fxon===false)}catch(e){return false}}
+function ievOn(){return !window.__bot&&!(typeof quiet!=="undefined"&&quiet)}
+function ievBag(){const t=[...document.querySelectorAll('#tabs [data-tab="inv"],[data-tab="inv"]')].find(x=>{const r=x.getBoundingClientRect();return r.width&&r.bottom>0&&r.top<innerHeight});return t||null}
+function ievClone(I,r){const w=document.createElement("div");w.className="kievfx";w.style.cssText=`left:${r.left}px;top:${r.top}px;width:${r.width}px;height:${r.height}px`;
+ w.innerHTML=I.src?`<img src="${I.src}" alt="">`:"";document.body.appendChild(w);return w}
+function ievCatch(){let c=document.getElementById("kievcatch");if(!c){c=document.createElement("div");c.id="kievcatch";c.setAttribute("aria-hidden","true");
+  c.addEventListener("pointerdown",e=>{e.stopPropagation();e.preventDefault();kitItemFxSkip()},true);document.body.appendChild(c)}clearTimeout(IEV.catchT);IEV.catchT=setTimeout(()=>{const k=document.getElementById("kievcatch");if(k)k.remove()},2200);return c}
+function ievUncatch(){if(IEV.run.some(a=>a.playState==="running"||a.playState==="pending"))return;const k=document.getElementById("kievcatch");if(k)k.remove()}
+function kitItemFxSkip(){const L=IEV.run.splice(0);for(const a of L)try{a.finish()}catch(e){}document.querySelectorAll(".kievfx,.kievring,.kievmound").forEach(x=>x.remove());const c=document.getElementById("kievcatch");if(c)c.remove()}
+window.kitItemFxSkip=kitItemFxSkip;
+function ievAnim(el,K,o){const a=el.animate(K,Object.assign({fill:"both",easing:"cubic-bezier(.4,.05,.45,1)"},o));IEV.run.push(a);a.finished.catch(()=>{}).then(()=>{const i=IEV.run.indexOf(a);if(i>=0)IEV.run.splice(i,1)});return a}
+function ievPx(name,x,y){try{if(typeof kfPx==="function")kfPx(name,{x,y})}catch(e){}}
+const ievT=(x,y,s,r)=>`translate(${x}px,${y}px) scale(${s==null?1:s}) rotate(${r||0}deg)`;
+function ievCenter(r){return{x:r.left+r.width/2,y:r.top+r.height/2}}
+/* act ∈ keep back give burn tear smash pour well bury use; o.from = rect of the item in the dialog; o.to = rect / element (back, give) */
+function kitItemFx(act,I,o){o=o||{};if(!ievOn())return 0;if(typeof I==="string"||(I&&!I.name&&I.k))I=kitItemInfo(I);
+ IEV.log.push({act,name:I&&I.name});if(IEV.log.length>80)IEV.log.shift();
+ const RB=(typeof BAL==="object"&&BAL.itev)||{};
+ if(ievStill()||!I||!document.body.animate){if(act==="keep"){const tb=ievBag();if(tb){tb.classList.remove("kfhit");void tb.offsetWidth;tb.classList.add("kfhit");setTimeout(()=>tb.classList.remove("kfhit"),700)}}return 0}
+ let r=o.from&&o.from.width?o.from:null;if(!r){const s=Math.min(110,innerWidth*.22);r={left:innerWidth/2-s/2,top:innerHeight*.4-s/2,width:s,height:s}}
+ const w=ievClone(I,r),c=ievCenter(r);ievCatch();let d=RB[act]||1200;const end=()=>{w.remove();setTimeout(ievUncatch,0)};
+ try{try{if(typeof sfx==="function")sfx(act==="keep"?"sfx-coin":"sfx-open")}catch(e){}
+ if(act==="keep"){const tb=ievBag();const b=tb?tb.getBoundingClientRect():{left:innerWidth/2,top:innerHeight-40,width:0,height:0};const t=ievCenter(b);
+  const dx=t.x-c.x,dy=t.y-c.y,sc=Math.max(.15,Math.min(b.width||40,b.height||40)/Math.max(1,r.width));d=RB.keep||900;
+  ievAnim(w,[{transform:ievT(0,0,1),opacity:1},{transform:ievT(0,-18,1.12),opacity:1,offset:.2},{transform:ievT(dx*.5,dy*.5-70,.7),opacity:1,offset:.6},{transform:ievT(dx,dy,sc),opacity:.25}],{duration:d}).finished.then(()=>{end();
+   if(tb){tb.classList.remove("kfhit");void tb.offsetWidth;tb.classList.add("kfhit");setTimeout(()=>tb.classList.remove("kfhit"),700);ievPx("pop",t.x,t.y)}try{vib("coin")}catch(e){}}).catch(end)}
+ else if(act==="back"||act==="give"){let t=null;const to=o.to&&o.to.getBoundingClientRect?o.to.getBoundingClientRect():o.to;
+  if(to&&to.width)t={x:to.left+to.width/2,y:to.top+to.height*.42};else t={x:act==="back"?-r.width:innerWidth/2,y:act==="back"?c.y-40:-r.height};
+  const dx=t.x-c.x,dy=t.y-c.y;d=RB.back||1000;
+  ievAnim(w,[{transform:ievT(0,0,1),opacity:1},{transform:ievT(0,-14,1.06),opacity:1,offset:.18},{transform:ievT(dx*.55,dy*.55-50,.8,act==="back"?-8:0),opacity:1,offset:.6},{transform:ievT(dx,dy,.4),opacity:0}],{duration:d}).finished.then(end).catch(end)}
+ else if(act==="burn"){d=RB.burn||1400;w.classList.add("kievburn");const fr=document.createElement("i");fr.className="kievflame";w.appendChild(fr);
+  ievAnim(w,[{transform:ievT(0,0,1,0),filter:"sepia(0) brightness(1)",clipPath:"inset(0 0 0% 0)",opacity:1},{transform:ievT(0,-6,1.02,-3),filter:"sepia(.6) brightness(.9)",clipPath:"inset(0 0 22% 0)",opacity:1,offset:.3},
+   {transform:ievT(0,-10,.97,4),filter:"sepia(1) brightness(.55)",clipPath:"inset(0 0 62% 0)",opacity:.95,offset:.7},{transform:ievT(0,-16,.9,-2),filter:"sepia(1) brightness(.2)",clipPath:"inset(0 0 100% 0)",opacity:0}],{duration:d,easing:"ease-in"});
+  ievAnim(fr,[{bottom:"0%",opacity:0},{bottom:"5%",opacity:1,offset:.12},{bottom:"62%",opacity:1,offset:.75},{bottom:"100%",opacity:0}],{duration:d,easing:"ease-in"}).finished.then(end).catch(end);
+  ievPx("embers",c.x,r.top+r.height*.8);setTimeout(()=>ievPx("embers",c.x,r.top+r.height*.45),d*.4);setTimeout(()=>ievPx("ashfall",c.x,r.top+r.height*.3),d*.55)}
+ else if(act==="tear"){d=RB.tear||1100;w.style.visibility="hidden";const mk=cl=>{const h=ievClone(I,r);h.style.clipPath=cl;return h};
+  const L=mk("polygon(0 0,52% 0,46% 18%,55% 34%,45% 52%,54% 70%,47% 86%,52% 100%,0 100%)"),Rr=mk("polygon(52% 0,100% 0,100% 100%,52% 100%,47% 86%,54% 70%,45% 52%,55% 34%,46% 18%)");
+  ievAnim(L,[{transform:ievT(0,0,1,0),opacity:1},{transform:ievT(-4,0,1,-2),opacity:1,offset:.25},{transform:ievT(-r.width*.45,r.height*.9,.92,-24),opacity:0}],{duration:d});
+  ievAnim(Rr,[{transform:ievT(0,0,1,0),opacity:1},{transform:ievT(4,0,1,2),opacity:1,offset:.25},{transform:ievT(r.width*.45,r.height*.95,.92,26),opacity:0}],{duration:d}).finished.then(()=>{L.remove();Rr.remove();end()}).catch(()=>{L.remove();Rr.remove();end()});
+  setTimeout(()=>ievPx("scraps",c.x,c.y),d*.25)}
+ else if(act==="smash"){d=RB.smash||1100;w.style.visibility="hidden";const P=["polygon(0 0,50% 0,40% 45%,0 35%)","polygon(50% 0,100% 0,100% 40%,60% 50%,40% 45%)","polygon(0 35%,40% 45%,35% 100%,0 100%)","polygon(40% 45%,60% 50%,70% 100%,35% 100%)","polygon(60% 50%,100% 40%,100% 100%,70% 100%)"];
+  const V=[[-1,-1],[1,-1.1],[-1.2,.6],[0,1],[1.2,.6]];const S=P.map(p=>{const h=ievClone(I,r);h.style.clipPath=p;return h});let last=null;
+  S.forEach((h,i)=>{const [vx,vy]=V[i];last=ievAnim(h,[{transform:ievT(0,0,1,0),opacity:1},{transform:ievT(i%2?3:-3,0,1,0),opacity:1,offset:.12},{transform:ievT(i%2?-3:3,0,1,0),opacity:1,offset:.22},
+   {transform:ievT(vx*r.width*.5,vy*r.height*.35-10,1,vx*30),opacity:1,offset:.5},{transform:ievT(vx*r.width*.7,vy*r.height*.3+r.height*.9,.85,vx*70),opacity:0}],{duration:d})});
+  last.finished.then(()=>{S.forEach(h=>h.remove());end()}).catch(()=>{S.forEach(h=>h.remove());end()});setTimeout(()=>ievPx("dust",c.x,c.y),d*.24)}
+ else if(act==="pour"){d=RB.pour||1200;ievAnim(w,[{transform:ievT(0,0,1,0),opacity:1},{transform:ievT(-6,-10,1,-30),opacity:1,offset:.25},{transform:ievT(-10,-14,1,-115),opacity:1,offset:.5},{transform:ievT(-12,-14,.95,-120),opacity:1,offset:.8},{transform:ievT(-12,-6,.9,-110),opacity:0}],{duration:d,easing:"ease-in-out"}).finished.then(end).catch(end);
+  const lip={x:r.left+r.width*.15,y:r.top+r.height*.4};setTimeout(()=>ievPx("drops",lip.x,lip.y),d*.38);setTimeout(()=>ievPx("drops",lip.x,lip.y),d*.55)}
+ else if(act==="well"){d=RB.well||1300;const land={x:c.x+Math.min(140,innerWidth*.18),y:Math.min(innerHeight-40,c.y+r.height*1.3)};const dx=land.x-c.x,dy=land.y-c.y;
+  ievAnim(w,[{transform:ievT(0,0,1,0),opacity:1},{transform:ievT(dx*.4,-r.height*.7,.85,60),opacity:1,offset:.35},{transform:ievT(dx*.9,dy*.8,.45,170),opacity:1,offset:.7},{transform:ievT(dx,dy+8,.25,200),opacity:0,offset:.78},{transform:ievT(dx,dy+8,.2,200),opacity:0}],{duration:d,easing:"cubic-bezier(.3,0,.6,1)"}).finished.then(end).catch(end);
+  setTimeout(()=>{for(let i=0;i<3;i++){const g=document.createElement("i");g.className="kievring";g.style.cssText=`left:${land.x}px;top:${land.y}px`;document.body.appendChild(g);
+    ievAnim(g,[{transform:"translate(-50%,-50%) scale(.2)",opacity:.9},{transform:"translate(-50%,-50%) scale(1.6)",opacity:0}],{duration:d*.55,delay:i*150,easing:"ease-out"}).finished.then(()=>g.remove()).catch(()=>g.remove())}
+   ievPx("splash",land.x,land.y)},d*.74)}
+ else if(act==="bury"){d=RB.bury||1300;const land={x:c.x,y:Math.min(innerHeight-30,c.y+r.height*.9)};const mo=document.createElement("i");mo.className="kievmound";mo.style.cssText=`left:${land.x}px;top:${land.y}px;width:${r.width*1.5}px;height:${r.height*.55}px`;document.body.appendChild(mo);
+  ievAnim(w,[{transform:ievT(0,0,1,0),opacity:1,clipPath:"inset(0 0 0 0)"},{transform:ievT(0,r.height*.55,.8,0),opacity:1,clipPath:"inset(0 0 0 0)",offset:.4},{transform:ievT(0,r.height*1.05,.75,0),opacity:1,clipPath:"inset(0 0 65% 0)",offset:.75},{transform:ievT(0,r.height*1.2,.7,0),opacity:0,clipPath:"inset(0 0 100% 0)"}],{duration:d,easing:"ease-in"}).finished.then(end).catch(end);
+  ievAnim(mo,[{transform:"translate(-50%,-30%) scaleY(0)",opacity:0},{transform:"translate(-50%,-60%) scaleY(.6)",opacity:1,offset:.45},{transform:"translate(-50%,-80%) scaleY(1)",opacity:1,offset:.8},{transform:"translate(-50%,-80%) scaleY(1)",opacity:0}],{duration:d*1.15}).finished.then(()=>mo.remove()).catch(()=>mo.remove());
+  setTimeout(()=>ievPx("dust",land.x,land.y-10),d*.45)}
+ else if(act==="use"){d=RB.use||900;ievAnim(w,[{transform:ievT(0,0,1),filter:"brightness(1)",opacity:1},{transform:ievT(0,-8,1.12),filter:"brightness(1.5)",opacity:1,offset:.4},{transform:ievT(0,-20,.6),filter:"brightness(2)",opacity:0}],{duration:d,easing:"ease-out"}).finished.then(end).catch(end);
+  setTimeout(()=>ievPx("stars",c.x,c.y),d*.3)}
+ else{end();return 0}}catch(e){console.error("kitItemFx",e);end()}
+ return d}
+window.kitItemFx=kitItemFx;
+/* new particle kinds for the shared Pixi layer (jfx KF_SPAWN): embers, ash falling at a point, paper scraps, dust, water drops, splash */
+(function(){if(typeof KF_SPAWN!=="object")return;const Rr=(a,b)=>a+Math.random()*(b-a);
+ Object.assign(KF_SPAWN,{
+  embers(p){const n=kfBudget(16);for(let i=0;i<n;i++)kfSp("glow",p.x+Rr(-36,36),p.y+Rr(-8,8),{vx:Rr(-.5,.5),vy:Rr(-2.4,-1),drag:.985,life:Rr(45,75),sway:.5,fade:"out",a0:.95},Math.random()<.5?0xff7a20:0xffc040,Rr(.25,.5),"add")},
+  ashfall(p){const n=kfBudget(12);for(let i=0;i<n;i++)kfSp("petal",p.x+Rr(-40,40),p.y+Rr(-10,10),{vx:Rr(-.6,.6),vy:Rr(.2,.9),g:.02,life:Rr(90,130),spin:Rr(-.08,.08),sway:.6,fade:"inout",a0:.85},Math.random()<.5?0x4a4440:0x8a8480,Rr(.3,.6))},
+  scraps(p){const n=kfBudget(8);for(let i=0;i<n;i++)kfSp("petal",p.x+Rr(-14,14),p.y+Rr(-30,30),{vx:Rr(-1.6,1.6),vy:Rr(-1.2,.4),g:.08,life:Rr(60,90),spin:Rr(-.2,.2),sway:.4,fade:"out",a0:.9},0xf1e6cc,Rr(.35,.6))},
+  dust(p){const n=kfBudget(8);for(let i=0;i<n;i++){const a=Rr(Math.PI*1.05,Math.PI*1.95),sp=Rr(1,2.6);kfSp("blob",p.x+Rr(-20,20),p.y,{vx:Math.cos(a)*sp,vy:Math.sin(a)*sp*.5,drag:.94,life:Rr(45,70),grow:.02,fade:"out",a0:.45},0x9a7a55,Rr(.4,.7))}},
+  drops(p){const n=kfBudget(10);for(let i=0;i<n;i++)kfSp("petal",p.x+Rr(-6,6),p.y+Rr(-4,4),{vx:Rr(-.8,.2),vy:Rr(.5,1.8),g:.22,life:Rr(40,60),fade:"out",a0:.85},Math.random()<.5?0x5a3a20:0x8a6a40,Rr(.18,.32))},
+  splash(p){const n=kfBudget(12);for(let i=0;i<n;i++){const a=Rr(-Math.PI*.9,-Math.PI*.1),sp=Rr(1.5,3.4);kfSp("petal",p.x,p.y,{vx:Math.cos(a)*sp,vy:Math.sin(a)*sp,g:.16,life:Rr(35,55),fade:"out",a0:.85},Math.random()<.5?0xbfe0f0:0xffffff,Rr(.18,.32))}}})})();
+/* ---------- wiring: showModal places the tag; chooseM plays the act ---------- */
+(function(){const W=(n,f)=>{const o=window[n];if(typeof o!=="function")return;window[n]=f(o)};
+ W("showModal",o=>function(){const r=o.apply(this,arguments);try{const m=typeof Q!=="undefined"&&Q[0];const M=document.getElementById("modal");
+   const R=M&&!M.hidden&&m?ievOf(m):null;IEV.cur=R?{m,R}:null;ievPlace(R);
+   if(R){const B=[...document.querySelectorAll("#mb .opts [data-m]")];B.forEach(b=>{const a=R.acts[+b.dataset.m];if(a)b.dataset.kia=a;else delete b.dataset.kia})}}catch(e){console.error("iev show",e)}return r});
+ /* goods given INSIDE the choice (econ goodsGive → its box) are claimed by the flight; entries pushed by the choice are not revealed twice */
+ W("stipReveal",o=>function(E){if(IEV.hold&&Array.isArray(E)){const k=IEV.hold.key;const mine=E.filter(e=>e&&e.k===k);if(mine.length){mine.forEach(e=>{IEV.claim.add(e);IEV.hold.got.push(e);try{if(KMSNAP&&KMSNAP.inv)KMSNAP.inv.push(e)}catch(x){}});
+   const rest=E.filter(e=>!mine.includes(e));if(!rest.length)return;arguments[0]=rest}}return o.apply(this,arguments)});
+ W("kgGroups",o=>function(add){const H=IEV.hold;const L=(add||[]).filter(x=>{if(IEV.claim.has(x))return false;if(H&&x&&(x.k===H.key||(H.e&&x.wk&&H.e.wk&&x.wk.n===H.e.wk.n))){IEV.claim.add(x);H.got.push(x);return false}return true});
+  if(L.length)return o.call(this,L)});
+ W("kitLose",o=>function(x,op){const H=IEV.hold;if(H&&x&&Array.isArray(x)&&!(op&&op.why==="lose")){const L=x.filter(e=>!(e&&e.k===H.key));if(!L.length)return;arguments[0]=L}return o.apply(this,arguments)});
+ W("chooseM",o=>function(i){const C=IEV.cur,m=typeof Q!=="undefined"?Q[0]:null;if(!C||C.m!==m||!m||!m.opts||!m.opts[i]||!ievOn())return o.apply(this,arguments);
+  const R=C.R;let act=R.acts[i];if(!act)return o.apply(this,arguments);
+  const tag=document.querySelector("#mb .kiev .kitb")||document.querySelector("#mb .kiev");const from=tag?tag.getBoundingClientRect():null;
+  const fig=document.querySelector("#mb .kpsubj .kesf .kesimg")||document.querySelector("#mb .kpsubj .kesf");let to=fig?fig.getBoundingClientRect():null;
+  /* give: to the dialog's person only when the option names that person ("Dâng lại cho Hoàng thượng" with Hoàng thượng shown); "đem cho cung nữ",
+     "nộp Hàn lâm viện"… → the item goes away (up), never to the giver shown */
+  if((act==="give"||act==="probe")&&to){const nm=ievTxt((document.querySelector("#mb .kpsubj .kpsn")||{}).textContent||"").toLowerCase(),on=ievTxt(m.opts[i].n).toLowerCase();
+   const P=nm.split(/\s*[·,]\s*|\s+/).filter(w=>w.length>1);const hit=nm&&(on.includes(nm)||P.length>=2&&P.some((w,j)=>j<P.length-1&&on.includes(w+" "+P[j+1])));if(!hit)to=null}
+  const inv0=(S.inv||[]).slice();IEV.hold={key:R.key,e:R.e,got:[],bac0:S.bac||0};let r;
+  try{r=o.apply(this,arguments)}finally{const H=IEV.hold;IEV.hold=null;
+   try{if(act==="probe")act=(S.inv||[]).some(x=>x&&!inv0.includes(x)&&x.k===R.key)?"keep":"give";
+    /* keep = a REAL entry in Tư trang: the one the choice added, else one made here */
+    if(act==="keep"&&R.key==="vangbac"){const fr=from?{x:from.left+from.width/2,y:from.top+from.height/2}:null;try{kitCoins("in",Math.max(10,(S.bac||0)-(H.bac0||0)),fr)}catch(e){}IEV.last={act:"coins",name:R.I.name,key:R.key,opt:m.opts[i].n};return r}
+    if(act==="keep"){let got=[...new Set(H.got.concat((S.inv||[]).filter(x=>x&&!inv0.includes(x)&&x.k===R.key)))].filter(x=>(S.inv||[]).includes(x));
+     if(!got.length&&R.own)act="use";/* the dialog's own logic decided (a poisoned dish eaten / thrown away): nothing goes to the bag */
+     else if(!got.length&&!S.dead){const e=R.e?Object.assign({},R.e):{k:R.key};e.from=e.from||(R.who&&typeof R.who==="string"?R.who:"story");e.d=S.turn;delete e.h;S.inv.push(e);got=[e]}
+     got.forEach(x=>{IEV.claim.add(x);try{if(KMSNAP&&KMSNAP.inv&&!KMSNAP.inv.includes(x))KMSNAP.inv.push(x);kfSeen.add(x)}catch(e){}})}
+    else if(IT[R.key]&&IT[R.key].story&&!R.e){/* a story item she kept earlier (letter, token…) that this choice sends back / destroys leaves Tư trang for real */
+     const gone=inv0.some(x=>x&&x.k===R.key&&!(S.inv||[]).includes(x));const j=(S.inv||[]).findIndex(x=>x&&x.k===R.key&&!x.h);
+     if(!gone&&j>=0){const x=S.inv.splice(j,1)[0];try{KFX.lt.set(x,{why:"use"})}catch(e){}render()}}
+    IEV.last={act,name:R.I.name,key:R.key,opt:m.opts[i].n,to:!!(to&&(act==="back"||act==="give"))};kitItemFx(act,R.I,{from,to:act==="back"||act==="give"?to:null});
+    if(act==="keep")render()}catch(e){console.error("iev choose",e)}}
+  return r})})();
+(function(){const st=document.createElement("style");st.id="kit-itev";st.textContent=`
+/* §64.1 item frame on the event banner (bottom-right) or at the top of the text column */
+#mb .ksart>.kiev-ban{position:absolute;right:8px;bottom:8px;z-index:3;padding:5px 5px 3px;border-radius:10px;background:rgba(255,250,240,.93);box-shadow:0 2px 8px #0003;line-height:1}
+#mb .kiev-txt{float:right;margin:0 0 6px 10px;padding:4px 4px 2px;border-radius:10px;background:rgba(255,250,240,.9);box-shadow:0 1px 5px #0002}
+#mb .kiev .kitem{cursor:default}
+/* short landscape (844x390): the banner is ~95 px tall → a 40 px picture, name + grade on one line each, so the frame stays inside the banner (r1) */
+@media (max-height:500px){#mb .kiev .kitem-md{--isz:40px;width:auto;min-width:40px}#mb .kiev .kitem>.kitn,#mb .kiev .kitem>.kitg{white-space:nowrap}#mb .ksart>.kiev-ban{right:6px;bottom:6px;padding:3px 4px 2px}}
+/* §64.2 animation pieces (WAAPI on fixed clones; particles on the jfx Pixi layer) */
+.kievfx{position:fixed;z-index:9480;pointer-events:none;will-change:transform,opacity}
+.kievfx>img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 4px 6px #0005)}
+.kievfx.kievburn{overflow:visible}
+.kievflame{position:absolute;left:-6%;right:-6%;height:16%;bottom:0;border-radius:50%;background:radial-gradient(ellipse at 50% 60%,#fff4c0 0,#ffb040 30%,#e0501a 60%,#e0501a00 75%);filter:blur(2px);mix-blend-mode:screen}
+.kievring{position:fixed;z-index:9479;width:120px;height:34px;border-radius:50%;border:2px solid #a8d4ec;box-shadow:0 0 6px #ffffffaa;pointer-events:none}
+.kievmound{position:fixed;z-index:9481;border-radius:50% 50% 8% 8%/90% 90% 10% 10%;background:radial-gradient(ellipse at 50% 30%,#a8845a 0,#7a5a38 60%,#5e4228 100%);pointer-events:none;transform-origin:50% 100%}
+#kievcatch{position:fixed;inset:0;z-index:9478;background:transparent}
+@media (prefers-reduced-motion:reduce){.kievfx,.kievring,.kievmound,#kievcatch{display:none!important}}
+`;document.head.appendChild(st)})();
+/* §47 kit page samples */
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§64",title:"kitItemTag · kitItemFx (vật phẩm trong sự kiện)",
+ html:()=>`<div class="kitpg-row">${["thu","matthu","giaymat","tinvat","khantay","chenthuoc","batcanh","lenhbai"].map(k=>kitItemTag(kitItemInfo(k))).join(" ")}</div>`+
+  `<div class="kitpg-row">${["keep","back","give","burn","tear","smash","pour","well","bury","use"].map(a=>`<button type="button" class="kbtn alt" onclick="kitItemFx('${a}',kitItemInfo('${a==="pour"||a==="use"?"chenthuoc":a==="smash"?"vongngoc":"thu"}'),{from:this.getBoundingClientRect()})">${a}</button>`).join(" ")}</div>`})}catch(e){}
 /* ================= jtoil: ĐIỂM TRANG BUỔI SÁNG (owner 15/11 09:30Z, review/toilette) =================
    Every morning (buổi sáng = the start of a tuần-day) the player MAY sit at her mirror (1 khắc, BAL.toil.khac; never forced, never blocks):
    (a) CHỌN Y PHỤC — pick trâm / y phục / trang sức from Tư trang (the ONE bag kitInvGrid + equipment slots) for the day's occasions
@@ -26158,8 +26396,8 @@ function toilFaceLayer(p,file){const lk=toilLookOfP(p);if(!lk)return"";const src
 if(typeof kitFxLayers==="function"){const fx0=kitFxLayers;kitFxLayers=function(p,file){const h=fx0.apply(this,arguments);let m="";try{m=toilFaceLayer(p,file)}catch(e){}return m+h}}
 /* ================= jstory: STORY LABELS · DEADLINES · PRICE BY RANK · NON-SILVER ROUTES (owner 15/11 13:55Z + 17:06Z) =================
    Wraps only (j67 chapters, j4 old story, j97 rare chance, j72 side quests); loaded after jk2b/jaudit so the kit option wrappers sit inside.
-   (1) Every story dialog is titled with its line, quest and step: "Chính tuyến · Báo thù cho nhà · Bước 3/5" (j67 main chapter: quest of the
-       origin, hồi i/n of the chapter) · "Phụ tuyến · <việc> · Lời nhờ" (j72 offer). Data only: the kit header (seal VIỆC + title).
+   (1) Every story dialog is titled with its line, quest, chapter and act: "Chính tuyến · Báo thù cho nhà · Chương 2 · Hồi 3/5" (j67 lab67,
+       owner 15/11 20:30Z; old saves without a chapter: Chương 1) · "Phụ tuyến · <việc> · Lời nhờ" (j72 offer). Data only: the kit header.
    (2) A chapter option that costs more Bạc than she has is not a dead button any more: a sibling option "…: nhận lời, lo liệu trong N"
        keeps the beat open with a DEADLINE by severity (BAL.dl67Khan / dl67Vua / dl67Lon, in buổi). She can settle it later from any screen:
        the countdown chip in the stage status plaque (Tình trạng, tap = the same choice again), the Mệnh truyện tab, or the beat card itself.
@@ -26200,10 +26438,10 @@ function altOf67(A,bid,o){const base=typeof o.o==="function"?o.o:(o.o==null?80:o
  return L.concat(alts.filter(x=>{try{return oNeed67(x)}catch(e){return true}}))}catch(e){console.error("jstory opts",e);return L}}})();
 /* ---------- the dialog: label, pledge option, "để sau" ---------- */
 function quest67(){try{return (QUEST67[S.origin.k]||QUEST67.tt).t}catch(e){return"Mệnh truyện"}}
-function title67(A){if(!A)return"Mệnh truyện";const main=A===S.st.M;return `${main?"Chính tuyến":"Phụ tuyến"} · ${main?quest67():ARC67[A.a].t} · Bước ${Math.min(A.i+1,A.seq.length)}/${A.seq.length}`}
+function title67(A){if(!A)return"Mệnh truyện";const main=A===S.st.M;return `${main?"Chính tuyến":"Phụ tuyến"} · ${main?quest67():ARC67[A.a].t} · ${lab67(A)}`}
 function pl67(){const P=S&&S.pl67;if(!P)return null;let A=null;try{A=th67(P.t)}catch(e){}if(!A||A.a!==P.a||A.cur!==P.b||A.done){S.pl67=null;return null}return P}
 (function(){const p0=PEND.j67;PEND.j67=function(p){const d=p0.apply(this,arguments);try{if(!d||!v267())return d;const A=th67(p.t);if(!A)return d;const b=beatDef67(A,p.b);const O=opts67(A,b);
- d.t=String(d.t).replace(/^<b>([^<]*)<\/b> <span class="past">· hồi \d+\/\d+<\/span>/,(m,x)=>`<b>Chương ${A.chap||1} · ${x}</b>`);
+ d.t=String(d.t).replace(/^<b>([^<]*)<\/b> <span class="past">· hồi \d+\/\d+<\/span>/,(m,x)=>`<b>${(pos67(A)||{}).c?`Chương ${pos67(A).c} · `:""}${x}</b>`);
  const P=pl67();
  if(P&&P.a===p.a&&P.b===p.b){const left=P.due-absB67();d.t+=`<br><span class="past">Ngươi đã nhận lời «${P.n}»: còn ${dlT67(left)} để lo đủ Bạc ${P.cost}.</span>`;
   d.o.push({n:"Để sau, còn lo liệu",fx:{},x:"",j67:`kèm: còn ${dlT67(left)} tới hạn`,hint:"việc chưa xong, hạn vẫn chạy",risk:"an toàn",go:()=>log(`Ngươi khất việc «${P.n}», còn ${dlT67(left)}.`)})}
@@ -26229,8 +26467,8 @@ function pl67Lapse(){const P=pl67();if(!P||S.dead)return;const A=th67(P.t);const
 (function(){const n0=nextBuoi;nextBuoi=function(){const r=n0.apply(this,arguments);try{const P=pl67();if(P&&absB67()>=P.due)pl67Lapse()}catch(e){console.error("jstory lapse",e)}return r}})();
 /* ---------- labels on every story dialog ---------- */
 (function(){const d0=pushDil;pushDil=function(d,title){try{if(d&&v267()){if(d.pid==="j67"){const A=th67(d.pp&&d.pp.t);if(A)title=title67(A)}
-  else if(d.pid==="j97x")title=`Chính tuyến · ${quest67()} · Cơ duyên hiếm`}
- else if(d&&title==="Tuyến truyện"&&S&&S.st)title=`Chính tuyến · ${quest67()} · Bước ${(S.st.step||0)+1}`}catch(e){}return d0.call(this,d,title)}})();
+  else if(d.pid==="j97x"){const c=S.st.ch,a=d.pp&&d.pp.a,x=c&&c.past?c.past.slice().reverse().find(y=>y.a===a):null;title=`Chính tuyến · ${quest67()} · Chương ${x?x.n:(pos67()||{}).c||1} · Cơ duyên hiếm`}}
+ else if(d&&title==="Tuyến truyện"&&S&&S.st)title=`Chính tuyến · ${quest67()} · ${lab67()||"Chương 1"}`}catch(e){}return d0.call(this,d,title)}})();
 (function(){const s0=showModal;showModal=function(){try{const m=Q[0];if(m&&m.pid==="q72o"&&!m.__lab&&typeof q72X==="function"){const X=q72X(m.pp.x);if(X){m.t=`Phụ tuyến · ${plain(q72Title(X))} · Lời nhờ (${X.T.s.length} bước)`;m.__lab=1}}}catch(e){}return s0.apply(this,arguments)}})();
 /* the Cần row of an option (kit data-kneed, j63) for modal options that carry kneed */
 (function(){const n0=kaNorm1;kaNorm1=function(b){try{if(b&&b.dataset&&b.dataset.m!=null&&!b.dataset.kneed){const M=b.closest&&b.closest("#modal");const o=M&&Q[0]&&Q[0].opts&&Q[0].opts[+b.dataset.m];
@@ -26245,7 +26483,7 @@ if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§31.2",title:"K3_STAT
   el.insertAdjacentHTML("beforeend",`<button class="hc hot" data-hx="pl67">Hạn lo liệu <b>${dlT67(left)}</b></button>`);if(typeof k3Stage==="function")k3Stage()}}catch(e){}return r}})();
 window.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest('[data-k3="pl67"],[data-hx="pl67"],[data-pl67]');if(!t)return;e.stopPropagation();e.preventDefault();pl67Open()},true);
 (function(){const p0=panel67;panel67=function(){let h=p0.apply(this,arguments);try{const P=pl67();if(!P)return h;const left=P.due-absB67();
-  const blk=`<h3>Đang lo liệu</h3>`+rows67([["Việc",P.n],["Hạn",(typeof kitChip==="function"?kitChip(`còn ${dlT67(left)}`,left<=3?"r":"n"):`còn ${dlT67(left)}`)],["Cần",`Bạc ${P.cost} (có ${S.bac})`,S.bac>=P.cost?"g":"r"],
+  const blk=`<h3>Đang lo liệu</h3>`+rows67([["Việc",`${P.n} · Chương ${P.chap||1}`],["Hạn",(typeof kitChip==="function"?kitChip(`còn ${dlT67(left)}`,left<=3?"r":"n"):`còn ${dlT67(left)}`)],["Cần",`Bạc ${P.cost} (có ${S.bac})`,S.bac>=P.cost?"g":"r"],
    ["Quá hạn","việc hỏng như bỏ mặc, Danh -"+BAL.dl67Pen,"r"],["Đường khác","có cách không dùng bạc trong chính việc này"]])+`<p><button class="kbtn" data-pl67="1">Lo liệu ngay</button></p>`;
   const i=h.indexOf("</div>");h=i>=0?h.slice(0,i+6)+blk+h.slice(i+6):blk+h}catch(e){console.error(e)}return h}})();
 (function(){const o0=obj67;obj67=function(){const r=o0.apply(this,arguments);try{const P=pl67();if(P)return `Lo liệu «${P.n}»: còn ${dlT67(P.due-absB67())} · `+r}catch(e){}return r}})();
@@ -27209,7 +27447,7 @@ if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§28.13e",title:"Pick 
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="e87fcaf9cae2";window.CTM_BUILD=BUILD;
+const BUILD="b40e65e246c8";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
