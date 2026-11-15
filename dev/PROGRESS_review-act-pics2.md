@@ -158,3 +158,6 @@ Notes: `cdn_sync.py --pull` does NOT refresh img/_index.json reliably (stale loc
 - Already hands-only: xin-xam, bao-tin-co-thai, to-giac.
 - Live ACTS.json patched with hpatch.py (now skips hgens 'plain name' lines): 3 acts + 13 log rules -> -h; counts unchanged 300/10/547; 0 keys missing in the live index. Patch record: ACTS_hands_patch2.json.
 - Flag for coordinator: doat-giai and nguoi-khac-doat-giai show the Emperor handing the prize (scene text names him); kept.
+### Coordinator add-on DONE: "Khảo hạch tấn phong" (review/promo-exam jexam.js card n:"Khảo hạch tấn phong")
+- Hands-only exam desk picture (brush, inkstone, sealed scroll, embroidery hoop, guqin corner) on the CDN as img/act-khao-hach-tan-phong.webp (plain name; hgens id 1lpoY9Sr4r).
+- Live ACTS.json acts["Khảo hạch tấn phong"] = "khao-hach-tan-phong" (acts 300 -> 301; key verified in the live _index, 0 missing).

@@ -145,3 +145,4 @@ thao-trang-suc|1|a consort's hand in a pink sleeve laying a gold hairpin down in
 deo-trang-suc|0|a maid's hand picking a gold hairpin from an open jewellery box on a dressing table beside a bronze mirror, a few loose pins and a jade bangle on silk
 deo-mang-che|0|a consort's hands holding up a thin pale lavender silk veil by its two upper corners with small pearl hooks, beside a bronze mirror, a corridor with red pillars beyond
 tu-choi|0|a consort's hand in a pink sleeve gently pushing back a red-wrapped gift box across a tea table toward a visitor's jade-green sleeve, a teapot and two cups, polite refusal
+khao-hach-tan-phong|0|exam desk on a palace floor, brush on inkstone, sealed rolled exam scroll, embroidery hoop and guqin corner, a hand in a pink sleeve setting the brush down (promo-exam act 'Khảo hạch tấn phong'; plain name)
