@@ -151,3 +151,63 @@ moi-sang-cung-nang|0|a maid's hands kneeling to offer a blank invitation card to
 mua-ve-cung|0|a maid seen from behind carrying a cloth bundle following a eunuch's back out of a courtyard gate, her old mistress's sleeve on the rail, daylight
 nam-chieu-chien|1|a general seen from behind on horseback on a ridge at dusk, facing distant southern jungle mountains and smoke of a battle, war banners
 nam-chieu-thang|0|an envoy's hands opening a chest of gold and silver before a palace gate, the envoy seen from behind kneeling, bright day
+nang-thay-nghe-len|1|a consort's back view, half turned toward a red pillar in a shadowed corridor, the hem of a hidden listener's robe peeking out from behind the pillar
+nghe-ban-ke|0|two maids' hands wringing laundry beside a stone well in a sunny servants' yard, wooden tubs and a bucket on a rope
+nghe-len-khong-duoc|1|a listener's hand and shoulder pressed against a closed lattice door, the room beyond dark and empty, shadowed corridor
+nghe-lom-gia-son|1|a consort's hand gripping the edge of a craggy rockery as she leans to listen, two faint silhouettes beyond the rocks in a gloomy garden
+ngu-dem|0|a quiet bedchamber with a canopy bed, drawn gauze curtains, a folded quilt and a single soft lamp, peaceful warm evening light
+nguoi-khac-doat-giai|0|an imperial yellow sleeve handing a jade ruyi prize on a red cushion to a consort's embroidered sleeve, bright hall
+nguoi-quen-che-cho|0|an older consort's hand warmly clasping a young consort's hand, embroidered sleeves, a sunny garden pavilion behind
+nha-the-luc|0|the red-lacquered gate of a grand noble mansion with red lanterns, a horse-drawn carriage waiting at the steps, no people
+nhan-lam-tai-mat|1|a young eunuch seen from behind kneeling low before a consort's embroidered slippers and hem, a shadowed room
+nhan-loi-sang-cung|0|two consorts' hands across a tea table in a bright palace hall, one pouring tea for the guest
+nhan-loi-vao-phe|0|a consort's hands receiving a tea cup offered by another consort's richer sleeve across a table, bright hall
+nhan-qua-co-van-de|0|a maid's hands lifting a hairpin out of an opened gift box, holding it up to the light to inspect it, a consort's sleeve behind
+nhan-ra-dieu-la|1|a consort's hand holding a tea cup up to a low lamp, the tea a strange cloudy colour, shadowed room
+nhan-toi-thay-chu|1|a loyal maid seen from behind kneeling with bowed head while a guard's armoured hand grips her shoulder, a consort's hem behind, shadowed courtyard
+nhan-tong-nu|0|an imperial yellow sleeve lifting a young noblewoman's red sleeve as she bows, bright throne hall
+nhin-loi-mia|0|a consort's hands clenched quietly on her lap over her embroidered skirt, a fan held tight, bright hall, composed restraint
+nho-thai-giam-dan|0|a eunuch seen from behind leading the way through a round moon gate, a consort following behind him, sunny garden
+noi-do-vien-quan|0|a consort's hand resting on a desk beside a small silk purse of silver, beyond the doorway a kneeling official seen from behind
+noi-trong-yeu-vat|1|an empty carved cradle draped with a red cloth in a dark birthing room, a maid's hands pulling back in fear
+noi-vu-chua-co-nguoi|0|a eunuch's hands holding an open blank ledger at a counter of the Household Department, a brush resting beside it, daylight
+noi-vu-dua-y-phuc|0|a eunuch's hands presenting a lacquer tray of neatly folded brocade robes to a consort's waiting sleeve, bright hall
+noi-vu-thay-la|0|a eunuch's hands holding up a blank paper slip and squinting at it over a counter, a ledger and abacus beside, daylight
+o-lai-lam-ma-ma|0|a mature palace matron's hands showing a young maid's hands how to fold a robe on a table, bright room
+pho-tai-dem|0|a consort seen from behind dancing with long flowing water sleeves under red lanterns in a warm evening hall, an imperial yellow sleeve resting on a chair arm
+quen-o-noi-vu|0|two maids' hands clasping in greeting over a counter piled with bolts of cloth in the Household Department, daylight
+quet-san|0|a maid's hands sweeping fallen leaves with a bamboo broom in a sunny palace courtyard
+quy-xin-giu-con|0|a consort seen from behind kneeling, holding a little girl close against her side, an imperial yellow sleeve before them, bright hall
+quy-xin-tha-cung-nu|0|a consort seen from behind kneeling before the Empress's phoenix-embroidered hem, pleading for a maid, bright hall
+ra-tay-bi-bat|1|a eunuch's hand clamping the wrist of a hand that is secretly snapping a zither string, shadowed back room
+ran-day-pho-ma|0|an imperial yellow sleeve raised in admonition over a young man in a blue robe seen from behind kneeling, bright hall
+roi-phe|1|a consort's hand setting her tea cup down firmly as she rises from a table of other consorts' cups, shadowed hall
+rot-ho-nhiem-lanh|0|a consort seen from behind wrapped in a thick quilt by a glowing brazier, a maid's hands drying her long wet hair with a towel
+rot-ruou-nung-niu|0|a consort's hand pouring wine from a jade ewer into a cup held by an imperial yellow sleeve, warm red lamplight
+rua-tieng-oan-tho|1|a consort seen from behind standing straight in a stone courtyard, a crumpled accusing paper lying on the ground before her, heavy grey overcast sky
+sai-khat-bong|0|a eunuch's hand striking a line through an entry in a stipend ledger with a brush, daylight office
+sai-nguoi-moi|0|a red invitation card on a lacquer tray carried by a maid's hands, bright corridor
+sai-nguoi-tang|0|a maid's hands offering a gift box on a tray at the threshold of a bright palace hall
+sang-tham-di-vang|0|a visiting consort seen from behind at a closed palace door, a maid's hands folded in a bow beside it, bright day
+sang-tham-hoi|0|a visiting consort's hands holding a gift box, met at a doorway by the host consort's outstretched hands, sunny
+say-thai|0|an empty cradle beside a curtained bed, a physician's hand resting on a medicine bowl, pale subdued morning light
+sinh-doi|0|two newborn babies swaddled in red cloths lying together in one carved cradle, soft daylight, seen from above, no faces shown
+sinh-ha|0|a midwife's hands passing a newborn swaddled in red cloth to a mother's hands reaching from a bed, soft daylight
+su-than-cau-hon|0|a northern envoy in a fur-trimmed robe seen from behind leading a fine white horse into a palace courtyard, bright day
+su-than-trieu-cong|0|an envoy's hands presenting a tray of tribute treasures, coral and jade, before the steps of a throne, an imperial yellow sleeve above
+su-than-ve|0|northern envoys on horseback seen from behind riding out through a city gate, no bridal sedan, bright day
+ta-on-xuat-gia|0|a maid in red seen from behind bowing deeply before a small bridal sedan, bright day
+tai-mat-bao-nam-nhan|1|a kneeling maid seen from behind whispering into a consort's ear, a low lamp, the dark palace wall beyond the window
+tai-mat-bao-noi-o|1|a eunuch seen from behind in a corner of a shadowed corridor, his hand pointing toward a distant palace roof
+tai-mat-bat-gap-len-gap|1|a maid's hand on a red pillar as she peers out, two silhouettes meeting secretly in a gloomy garden beyond
+tai-mat-khong-do-ra|1|a eunuch seen from behind kneeling with empty open hands before a consort's hem, shadowed room
+tai-mat-nghe-duoc|1|a eunuch's hand and shoulder pressed behind a painted folding screen, two shadows talking beyond it, shadowed room
+tam-cho-gia|0|a steaming wooden bathtub with silk towels and a jade comb on a stool, scattered petals, warm soft lamplight
+tan-phong|0|a eunuch's hands holding an open blank yellow edict scroll, a consort seen from behind kneeling below, bright hall
+tan-phong-hh|0|a consort seen from behind wearing a phoenix crown, receiving a golden book on a tray from a eunuch's hands, grand bright hall
+tang-cho|0|a consort's hands offering an open brocade box with a jade hairpin to another consort's hands, bright room
+tang-tram-ket-than|0|a consort's hands sliding a jade hairpin into another woman's hair seen from behind, bright garden
+tap-truoc|0|a consort's hands plucking a guqin alone in a quiet sunny practice room
+tha-loi|0|a consort's hand accepting an apology letter from a kneeling maid's raised hands, bright hall
+tha-loi-cung-nhan|0|a consort's hand reaching down to help up a kneeling maid's hands, bright hall
+thai-da-lo|0|a pregnant consort seen from behind strolling in a sunny garden with her hand on her rounded belly
