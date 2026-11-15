@@ -118,9 +118,9 @@ function j59lay(force){const st=document.getElementById("stage");if(!st||!S)retu
  const visW=(x,h)=>boxW(x,h)*Math.max(.2,kCR(x.b)-kCL(x.b));
  const oL=(x,h)=>boxW(x,h)*Math.max(0,kCL(x.b)-x.b.l),oR=(x,h)=>boxW(x,h)*Math.max(0,x.b.r-kCR(x.b));
  const meX={f:1,b:mb||{t:0,b:1,l:0,r:1},ar:mar};const meU=me?visW(meX,1):0;
- /* owner 11/15: up to 4 people at once on iPad (3 on Fold / phones), same kit scale, packed by core body width; each figure may
-    step back over its left neighbour by up to OVX (35 % iPad, 25 % Fold) of its core, later ones in front; "› N" only beyond that */
- const OVX=innerWidth>=1000?.35:.25,MAXN=innerWidth>=1000?4:3,nP=it.length+(me?1:0);
+ /* owner 11/15 (later: "4 is too crowded"): at most 3 people at once on iPad, 2 on Fold / phones (her included), same kit scale, packed by core body width; each figure may
+    step back over its left neighbour by up to OVX (20 %) of its core, later ones in front; the others via the "› N" pages */
+ const OVX=.2,MAXN=innerWidth>=1000?3:2,nP=it.length+(me?1:0);
  const edgeL=h=>me?oL(meX,h):it.length?oL(it[0],h):0,edgeR=h=>it.length?oR(it[it.length-1],h):me?oR(meX,h):0;
  const total=(h,ov)=>{ov=ov||0;return fixed+edgeL(h)+edgeR(h)+it.reduce((a,x,i)=>a+visW(x,h)*(i>0||me?1-ov:1)+4+gap,0)+(me?meU*h+gap:0)};
  const ovNeed=(h,av)=>{const t0=total(h,0);if(t0<=av)return 0;const v=it.reduce((a,x,i)=>a+(i>0||me?visW(x,h):0),0);return v?(t0-av)/v:9};
