@@ -187,3 +187,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (08:40Z) Owner: tư tình child → classic 'trích huyết nghiệm thân' blood test (can be tampered by either side; same rules for NPCs). Sent to routes worker.
 - (08:50Z) Owner: in dialogs only the option list scrolls; title/picture/figures/text stay fixed (kit rule for all dialogs).
 - (08:55Z) Owner: blood test gets animation/minigame; scheme acts get minigames (worker review/scheme-games; always option to skip and use plain odds; NPCs plain odds).
+- (09:05Z) Coordinator: to let owner play with a friend sooner, ship review/coop (includes book-release 1b90526) as one live release after kit review; iPad 3–4 people, dialog scroll, full flap come in the next update.
