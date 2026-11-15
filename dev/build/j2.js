@@ -18,7 +18,7 @@ function start(){
   pushModal({t:"Nhập cung",faces:[[pMe(),S.name],[pEmp(),"Hoàng thượng"],[pMaid(),S.maid.name]],h:`<p>${S.name}, ${S.age} tuổi, ${o.n}. ${o.t} Hôm nay ngươi được đưa vào cung, phong <b>${RANKS[S.rank].n}</b>. Cung nữ ${S.maid.name} theo hầu ngươi từ nhà.</p>
    <p><b>${empName()}</b>, ${E.age} tuổi: ${E.traits.map(t=>ETRAITS[t][0]).join(", ")}.</p>
    <p><b>Tuyến truyện: ${s.t}.</b> ${s.goal}${o.k==="td"?` Kẻ vu cho cha ngươi là ${S.foeDad}; con gái hắn, ${S.foe}, đang ở trong cung.`:""}</p>
-   <p class="past">Mỗi tháng ba tuần; mỗi tuần ba buổi (sáng, chiều, tối), mỗi buổi 4 khắc. Mở Bản đồ để đi gặp người, chạm vào người để nói chuyện hay ra tay.</p>`});
+   <p class="past">Mỗi tháng ba tuần; mỗi tuần bốn buổi (sáng, trưa, chiều, tối), mỗi buổi 4 khắc. Mở Bản đồ để đi gặp người, chạm vào người để nói chuyện hay ra tay.</p>`});
   flip();newLots();deal();render();
 }
 function homePeople(){const p=[{kind:"maid",name:S.maid.name,ini:S.maid.name.split(" ").pop()[0],col:"#b9a48a",info:`Cung nữ thân tín · lòng ${S.maid.loyal}`}];
@@ -51,8 +51,8 @@ function artActs(){const A=[],r=S.arts;
  return A}
 function deal(){
  const X=[];const v=S.tonight&&S.tonight!=="me"?S.tonight:null;
- if(v){X.push({n:"Tranh sủng",t:`Tối nay thẻ bài của ${v.name} được lật. Sai cung nữ giả cớ ngươi đau tim, mời Hoàng thượng sang.`,c:{duc:-4},o:oSteal(S),w:{},l:{sung:-3},b:2,x:stealX(v),go:()=>{log(stealWin(S,v,"feign"))}});
-  X.push({n:"Chặn ngự giá",t:`Chờ ở hành lang ngự giá đi qua, múa một khúc dưới đèn lồng, mong ngài dừng bước.`,c:{suc:-5},o:oSteal(S,"road"),w:{},l:{sung:-3},b:2,x:stealX(v,1),go:()=>{log(stealWin(S,v,"road"))}})}
+ if(v){X.push({n:"Tranh sủng",t:`Tối nay thẻ bài của ${v.name} được lật. Sai cung nữ giả cớ ngươi đau tim, mời Hoàng thượng sang.`,c:{duc:-4},o:oSteal(S),w:{},l:{sung:-3},b:B4L,x:stealX(v),go:()=>{log(stealWin(S,v,"feign"))}});
+  X.push({n:"Chặn ngự giá",t:`Chờ ở hành lang ngự giá đi qua, múa một khúc dưới đèn lồng, mong ngài dừng bước.`,c:{suc:-5},o:oSteal(S,"road"),w:{},l:{sung:-3},b:B4L,x:stealX(v,1),go:()=>{log(stealWin(S,v,"road"))}})}
  const ua=artActs();if(ua.length)X.push(pick(ua));
  const live=S.kids.filter(k=>k.alive);
  const ed=live.filter(k=>k.age>=3).sort((a,b)=>a.tal-b.tal);
