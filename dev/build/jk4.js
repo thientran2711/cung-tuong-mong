@@ -149,7 +149,7 @@ window.kitEvCat=kitEvCat;
 .kesf{margin:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;min-width:0;flex:1 1 0}
 .kesf.kesno{display:none}
 .kesfi{position:relative;display:block;max-width:100%}
-.kesfi>.kesimg{display:block;width:auto;height:auto;max-width:100%;max-height:calc(clamp(200px,40dvh,400px)*var(--kfr,1));filter:drop-shadow(0 6px 8px #3a201033)}
+.kesfi>.kesimg{display:block;width:auto;height:auto;max-width:100%;max-height:calc(clamp(200px,40dvh,400px)*var(--kfr,1));filter:var(--klf,brightness(1)) drop-shadow(0 6px 8px #3a201033)}
 .kesfi>.kesfx{position:absolute;inset:0;pointer-events:none;z-index:2}
 .kesf>.kpsn{margin-top:2px;text-align:center}
 /* KIT 33.5: the event-stage / book-page name chip is the same two-line chip as the stage: rank / role small on top, name below, rank-tinted */
@@ -163,7 +163,7 @@ window.kitEvCat=kitEvCat;
 
 /* ---------- Thái hậu chip opens HER person card (owner: not the Giao tình tab), same pcard component as the Emperor's card (showEmp) ---------- */
 function kitThCardHTML(){try{const R=(typeof kitCourtRows==="function"?kitCourtRows():[]).find(r=>r.k==="th")||{};const known=typeof window.kitCourtKnown!=="function"||window.kitCourtKnown("th")!==false;
- const L=[typeof tuoi==="function"&&S.thAge?tuoi(S.thAge):"",R.mood&&!/chưa rõ/.test(R.mood[0])?`Tâm trạng: <b>${R.mood[0]}</b>`:"",known?`Thái hậu thương ngươi <b>${S.th|0}</b>`:"Thái hậu thương ngươi: <b>chưa rõ</b>"].filter(Boolean);
+ const L=[typeof tuoi==="function"&&S.thAge?tuoi(S.thAge):"",R.mood&&!/chưa rõ/.test(R.mood[0])?`Tâm trạng: <b>${R.mood[0]}</b>`:"",known?`Thái hậu → ta: thiện cảm <b>${S.th|0}</b>`:"Thái hậu → ta: thiện cảm: <b>chưa rõ</b>"].filter(Boolean);
  return pcard({f:pTH(),col:"#c9a0e0",name:"Thái hậu",rank:"Thái hậu · Đức Thọ cung",lines:L,groups:[],empty:""})+`<p class="past">Muốn gặp Thái hậu: Hành sự → Thỉnh an Thái hậu (sang Đức Thọ cung).</p>`}catch(e){return""}}
 (function(){if(typeof kitCourtOpen!=="function")return;const o0=kitCourtOpen;kitCourtOpen=function(k){if(k==="th"&&typeof pcard==="function"&&!S.thDead){try{if(Q.length&&!/pcm/.test(Q[0].cls||""))return;const h=kitThCardHTML();if(h){Q.unshift({t:"Thái hậu",cls:"pcm",h});showModal();return}}catch(e){}}return o0.apply(this,arguments)}})();
 
@@ -229,7 +229,7 @@ function kitEsOvFit(){try{const ov=document.querySelector("#mb .kesov");if(!ov)r
 window.kitEsOvFit=kitEsOvFit;
 (function(){if(typeof kitEventStage!=="function")return;const k0=kitEventStage;kitEventStage=function(m){const r=k0.apply(this,arguments);
  try{if(r){const mb=document.getElementById("mb");const band=mb&&mb.querySelector(":scope > .kdlgart");const art=band&&band.querySelector(".ksart");const col=mb&&mb.querySelector(":scope > .kpb > .kpsubj.kes");
-  /* KIT 40 kitEventDp (owner 11/15): an event WITH a person keeps the person column (32.7) and the event picture becomes a landscape
+  /* KIT 45 kitEventDp (owner 11/15): an event WITH a person keeps the person column (32.7) and the event picture becomes a landscape
      BANNER at the top of the right column — the people are no longer put on the picture (32.6 is retired for person events) */
   if(art&&col&&window.KIT_EVENT_DP!==false){band.classList.add("kdpban")}
   else if(art&&col&&!art.querySelector(".kesov")){const ov=document.createElement("div");ov.className="kesov";[...col.querySelectorAll(":scope > .kesf")].forEach(f=>ov.appendChild(f));art.appendChild(ov);col.remove();
@@ -242,7 +242,7 @@ window.kitEsOvFit=kitEsOvFit;
 #mb .kesov{position:absolute;inset:0;pointer-events:none;z-index:2;overflow:hidden}
 #mb .kesov>.kesf{position:absolute;margin:0;display:block}
 #mb .kesov>.kesf .kesfi{display:block;position:relative}
-#mb .kesov>.kesf .kesimg{display:block;max-width:none!important;max-height:none!important;filter:drop-shadow(0 4px 5px #0006)}
+#mb .kesov>.kesf .kesimg{display:block;max-width:none!important;max-height:none!important;filter:var(--klf,brightness(1)) drop-shadow(0 4px 5px #0006)}
 #mb .kesov>.kpsn{position:absolute;bottom:3px;transform:translateX(-50%);z-index:20;white-space:nowrap;background:rgba(255,250,240,.92);border:1px solid var(--line,#e6d3ac);border-radius:6px;padding:0 6px;font-size:.78rem;line-height:1.25;text-align:center}
 #mb .kesov>.kpsn[data-row="1"]{bottom:calc(3px + 2.6em)}
 #mb>.kdlgart.kesonpic .ksart>figcaption,#mb>.kdlgart.kesonpic .ksart>.ksart-chip{top:6px;bottom:auto}
@@ -269,13 +269,13 @@ function kitDpApply(){try{const o=kitDpOn();const d0=document.querySelector("#mo
  /* a "world" fact row's empty dot means nothing beside a full figure */
  body.querySelectorAll(".kfact > .kfdot").forEach(x=>{x.parentElement.classList.add("kfnodot");x.remove()});
  const kids=[...mb.children].filter(c=>c!==body&&!c.classList.contains("opts"));kids.forEach(c=>c.classList.add("kdpr"));
- /* KIT 40 kitEventDp: banner (event picture) on top of the right column, focus point per picture; short options two per row */
+ /* KIT 45 kitEventDp: banner (event picture) on top of the right column, focus point per picture; short options two per row */
  const ban=mb.querySelector(":scope > .kdlgart.kdpban");d.classList.toggle("kdpbanner",!!ban);
  if(ban){const im=ban.querySelector("img");if(im){const f=(im.getAttribute("src")||"").replace(/^.*\//,"");im.style.setProperty("object-position",(window.KIT_FOCUS||{})[f]||"50% 50%","important")}}
  const op=mb.querySelector(":scope > .opts");if(op){const B=[...op.children].filter(x=>x.matches("button,.opt"));
   const short=B.length>=2&&B.every(b=>b.querySelectorAll(".kr").length<=2&&(b.textContent||"").replace(/\s+/g," ").trim().length<=70);op.classList.toggle("kdpo2",short)}
  kitDpFit()}catch(e){console.error("kitDpApply",e)}}
-/* KIT 40: banner focus points (object-position) for vertical event art; anything not listed = "50% 50%" (chosen from the crop sheets, dev/review/event-banners.md) */
+/* KIT 45: banner focus points (object-position) for vertical event art; anything not listed = "50% 50%" (chosen from the crop sheets, dev/review/event-banners.md) */
 window.KIT_FOCUS=Object.assign({"ev-trieu-chinh-2.webp":"50% 15%","ev-thang-tran.webp":"50% 55%","ev-hoang-de-gian.webp":"50% 15%","ev-di-san.webp":"50% 15%","ev-le-thu.webp":"50% 15%","ev-le-thu-2.webp":"50% 15%","ev-le-thu-3.webp":"50% 15%","ev-le-dong-2.webp":"50% 15%","ev-thoi-tiet-3.webp":"50% 15%","ev-dieu-troi.webp":"50% 15%","ev-dieu-lanh.webp":"50% 15%","ev-mat-uoc.webp":"50% 15%"},window.KIT_FOCUS||{});/* dev/review/event-banners.md */
 function kitDpFit(){try{const o=kitDpOn();if(!o||!o.d.classList.contains("kdper"))return;const {d,mb,col}=o;
  const narrow=innerWidth<600;d.classList.toggle("kdnarrow",narrow);
@@ -289,10 +289,12 @@ function kitDpFit(){try{const o=kitDpOn();if(!o||!o.d.classList.contains("kdper"
  if(!narrow){const cap=Math.min(innerHeight-32,720),lo=Math.min(innerHeight-32,500);const h0=d.style.height;d.style.height="auto";
   const nat=d.scrollHeight;const h=Math.round(Math.max(lo,Math.min(cap,nat)));d.style.height=h+"px";
   if(h0!==h+"px"){d.__kdpN=(d.__kdpN||0)+1;if(d.__kdpN<4)requestAnimationFrame(kitDpFit)}}
- /* KIT 37 (owner 11/15): the name + rank (kitNameRank chip) sit ABOVE the people, at the top of the column; KIT 32.7b (owner 11/15): every
+ /* KIT 42 (owner 11/15): the name + rank (kitNameRank chip) sit ABOVE the people, at the top of the column; KIT 32.7b (owner 11/15): every
     person FILLS the column from just under the chips down to the column bottom — the painted top (hair, crown, hat) under the chips, the feet
     on the column floor; man and woman alike (aspect kept), children by age (KIT_FIG.fac < 1). */
- L.forEach((x,i)=>{if(x.cap){x.cap.dataset.kdp=i;x.cap.classList.add("kdpcap","knr");if(x.cap.parentElement!==col)col.appendChild(x.cap)}});
+ L.forEach((x,i)=>{if(x.cap){x.cap.dataset.kdp=i;x.cap.classList.add("kdpcap","knr");if(x.cap.parentElement!==col)col.appendChild(x.cap);
+  /* review shop-fix (main): kitEsFit (33.6) may have left position:relative + a narrow max-width inline on a cached figure; clear them */
+  x.cap.style.removeProperty("position");x.cap.style.removeProperty("z-index");x.cap.style.removeProperty("max-width")}});
  const capH=Math.max(0,...L.map(x=>x.cap?x.cap.offsetHeight:0));
  const H=col.clientHeight;if(H<80)return;const floor=H-2;
  const capW=Math.max(0,...L.map(x=>x.cap?x.cap.scrollWidth:0));
@@ -342,7 +344,7 @@ html body #modal .dlg.kdper>#mb>.opts>*{width:100%!important;max-width:none!impo
 #modal .dlg.kdper .kes .kesimg{display:block;max-width:none!important;max-height:none!important}
 #modal .dlg.kdper .kes>.kpsn.kdpcap{position:absolute;top:0;bottom:auto;transform:translateX(-50%);z-index:20;white-space:nowrap;margin:0;text-align:center;
  background:rgba(255,250,240,.92);border:1px solid var(--line,#e6d3ac);border-radius:6px;padding:1px 8px}
-/* (KIT 37) the second chip line is placed by kitDpFit (style.top) */
+/* (KIT 42) the second chip line is placed by kitDpFit (style.top) */
 #modal .dlg.kdper .kes>.kpsn .kname{display:flex;flex-direction:column;align-items:center;line-height:1.2;color:color-mix(in srgb,var(--rc,#2a1a12) 45%,#2a1a12);font-size:1rem}
 #modal .dlg.kdper .kes>.kpsn .kname .kti{font-size:.74rem;font-weight:600;letter-spacing:.02em;line-height:1.1;color:color-mix(in srgb,var(--rc,#7a5530) 75%,#2a1a12)}
 #modal .dlg.kdper .kfact.kfnodot{grid-template-columns:minmax(0,1fr)}
@@ -361,9 +363,10 @@ html body #modal .dlg.kdper>#mb>.opts>*{width:100%!important;max-width:none!impo
    `kitXAdd(dlg)` puts one into a kit panel header (.kph, right end, absolutely placed so the header keeps the height of every other
    dialog) and makes it close the panel the normal way (#mclose: onClose runs);
    the panel's button row (#mr) is then hidden by the caller's class. Floating cards inside a panel (shop item card) use the same class. */
-function kitXHTML(attrs,label){return `<button type="button" class="kit-x" aria-label="${label||"Đóng"}" title="${label||"Đóng"}"${attrs?" "+attrs:""}>✕</button>`}
-function kitXAdd(dlg){try{const h=dlg&&dlg.querySelector(":scope > .kph");if(!h||h.querySelector(":scope > .kit-x"))return;h.insertAdjacentHTML("beforeend",kitXHTML('data-kitx="panel"'));
- h.lastElementChild.addEventListener("click",e=>{e.stopPropagation();const c=document.getElementById("mclose");if(c)c.click()})}catch(e){console.error("kitXAdd",e)}}
+function kitXHTML(attrs,label){return `<button type="button" class="kit-x" aria-label="${label||"Lui"}" title="${label||"Lui"}"${attrs?" "+attrs:""}>✕</button>`}
+function kitXAdd(dlg,close){try{if(!dlg)return null;const h=dlg.querySelector(":scope > .kph");let x=dlg.querySelector(":scope > .kph > .kit-x, :scope > .kit-x.kxabs");if(x)return x;
+ if(h){h.insertAdjacentHTML("beforeend",kitXHTML('data-kitx="panel"'));x=h.lastElementChild}else{dlg.insertAdjacentHTML("afterbegin",kitXHTML('data-kitx="panel"'));x=dlg.firstElementChild;x.classList.add("kxabs")}
+ x.addEventListener("click",e=>{e.stopPropagation();e.preventDefault();if(typeof close==="function")close();else kitModalClose()});return x}catch(e){console.error("kitXAdd",e);return null}}
 window.kitXHTML=kitXHTML;window.kitXAdd=kitXAdd;
 (function(){const st=document.createElement("style");st.id="kit-x";st.textContent=`
 .kit-x{flex:none;margin-left:auto;width:36px;height:36px;min-height:0;padding:0;display:inline-grid;place-items:center;border-radius:8px;cursor:pointer;
@@ -374,8 +377,7 @@ window.kitXHTML=kitXHTML;window.kitXAdd=kitXAdd;
 .kit-x:focus-visible{outline:none;box-shadow:0 0 0 2px var(--gold,#c9a46a)}
 .modal.night .kit-x{background:#2a1610;color:#e9c07a;border-color:#4a2a20}
 `;document.head.appendChild(st)})();
-/* ================= KIT 37 · kitNameRank — name + rank ABOVE the picture (owner 11/15: "people read top to bottom") =================
-   ONE block for every portrait / figure label: the rank on one small line (rank colour), the name under it, then the picture below.
+/* ================= KIT 42 · kitNameRank — name + rank ABOVE the picture (owner 11/15: "people read top to bottom") ==========   ONE block for every portrait / figure label: the rank on one small line (rank colour), the name under it, then the picture below.
    `kitNameRank(rank, name, col)` → `<div class="knr" style="--rc:col"><small class="knr-r">rank</small><b class="knr-n">name</b></div>`.
    Used by: Ân oán cards (kitRel3), every person dialog (32.7 chips = `.kpsn.knr` at the column top, kitDpFit), the shop seller, person
    cards (Hậu cung / Cung nhân: `.pcl` name + rank moved above the portrait). The same look as the 32.7 chip's kitName (rank over name). */
@@ -393,7 +395,7 @@ window.kitNameRank=kitNameRank;
 html body .pc.kpwide[data-k2]>.pcl>.pcrk{order:-4!important;margin:0!important}
 html body .pc.kpwide[data-k2]>.pcl>.pcname{align-items:flex-start!important}
 `;document.head.appendChild(st)})();
-/* ================= KIT 39 · kitActCompact — act cards in a NARROW pane beside a portrait / figure (owner 11/15: "the act picture squeezes the
+/* ================= KIT 44 · kitActCompact — act cards in a NARROW pane beside a portrait / figure (owner 11/15: "the act picture squeezes the
    text into a thin column") =================
    Panes that hold a person on the left (person card `.pc > .pcr`: Hậu cung · Thánh thượng / Phi tần / Cung nhân "Việc hôm nay", Hoàng tự
    child cards) are inline-size containers named `kpane`. When the pane is under 640 px wide every act card (`button.ka.kart`) inside it
@@ -439,7 +441,7 @@ window.kitActCompactOn=kitActCompactOn;
  button.ka.kart>.kaart{flex-basis:72px!important;width:72px!important;height:72px!important}
 }
 `;document.head.appendChild(st)})();
-/* ================= KIT 40 · kitEventDp — THE event-with-a-person dialog (owner 11/15) =================
+/* ================= KIT 45 · kitEventDp — THE event-with-a-person dialog (owner 11/15) =================
    Every event where a person appears (visits "Có người đến", invitations, confrontations, the Emperor's visits): the 32.7 person dialog
    (LEFT: the people full height, name + rank above — 32.7b / 37; content height — 32.7c) and, when the event has a picture, the picture is a
    landscape BANNER at the top of the RIGHT column (cover-cropped at its focus point KIT_FOCUS[file] || "50% 50%"), then the event text as
@@ -451,4 +453,103 @@ html body #modal .dlg.kdper>#mb>.kdlgart.kdpban>.ksart{width:100%!important;heig
 html body #modal .dlg.kdper>#mb>.kdlgart.kdpban>.ksart img{width:100%!important;height:100%!important;object-fit:cover!important}
 #modal .dlg.kdper.kdpbanner>#mb>.kpb>.kpmain,#modal .dlg.kdper.kdpbanner>#mb>.kdpr:not(.kdlgart){grid-column:2}
 html body #modal .dlg.kdper>#mb>.opts.kdpo2,html body #modal .dlg.kdper>#mb>.opts.kdpo2.k3grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;align-content:start;gap:8px}
+`;document.head.appendChild(st)})();
+
+/* ================= KIT 32.10 · CLOSING A PANEL — ✕ + tap outside + Esc, once for every panel (owner 11/15: no "Thôi" / "Lui" / "Đóng" /
+   "Đã hiểu" buttons that only close) =================
+   #modal (every dialog / card / place card / person card / shop / Tư trang card / title pages): after each render kitCloseSync() looks for
+   the way this panel closes —
+   · a dialog with options: the option that only closes (j3 kitCancelIx: "Thôi" / "Lui" / "Đóng" / "Đã hiểu", no effect) — j3 never draws
+     it; ✕ runs it through chooseM (its go / wrappers run as before);
+   · a card without options: the button row's close word ("Đã hiểu", "Lui", "‹ Lui", "Đã rõ") — hidden, ✕ clicks it (onClose runs);
+     a card whose only button means something ("Tạ ơn", "Cúi đầu", "Chuyển kiếp", "Tiếp tục"…) keeps it and gets no ✕;
+   · none of these = a FORCED panel (an event that must be chosen): no ✕, a tap outside does nothing, Esc does nothing.
+   Closable → ONE kit-x at the top right of the header (.kph; a card without .kph: the dialog's own top-right corner), a tap on the dimmed
+   ground outside the box closes (only when the press STARTED on the ground and did not move: a drag / scroll that ends outside never
+   closes), Esc closes. kitCloseLayer(root, box, close) gives other overlays (kitBook, game results, the room person card) the same. */
+const KIT_XW=/^(?:✕\s*)?(?:‹\s*)?(Thôi|Lui|Đóng|Đã hiểu|Đã rõ|OK|Xong)$/;
+function kitModalCloser(){const M=document.getElementById("modal");if(!M||M.hidden)return null;
+ const mr=document.getElementById("mr");
+ const rowB=mr?[...mr.querySelectorAll("button")]:[];const xb=rowB.filter(b=>b.dataset.kxw==="1"||KIT_XW.test(kitCloseTxt(b.textContent)));
+ if(xb.length){xb.forEach(b=>{if(!b.hidden)b.hidden=true;if(b.dataset.kxw!=="1")b.dataset.kxw="1"});const b=xb[0];return()=>b.click()}
+ const m=typeof Q!=="undefined"?Q[0]:null;const onQ=m&&!M.classList.contains("kptitle");
+ if(onQ&&m.opts){const i=kitCancelIx(m);if(i>=0)return()=>chooseM(i)}
+ return null}
+function kitModalClose(){const M=document.getElementById("modal");if(!M||M.hidden)return false;const f=M.__kx||kitModalCloser();if(!f)return false;f();return true}
+function kitCloseSync(){try{const M=document.getElementById("modal");if(!M)return;const dlg=M.querySelector(".dlg");if(!dlg)return;
+ const f=M.hidden?null:kitModalCloser();M.__kx=f;const kx=f?"1":"0";if(M.dataset.kx!==kx)M.dataset.kx=kx;
+ const old=dlg.querySelectorAll(".kit-x[data-kitx=panel]");
+ if(!f){old.forEach(x=>x.remove());return}
+ const hasHead=!!dlg.querySelector(":scope > .kph");old.forEach(x=>{if(hasHead?!x.parentElement.matches(".kph"):!x.classList.contains("kxabs"))x.remove()});
+ kitXAdd(dlg)}catch(e){console.error("kitCloseSync",e)}}
+window.kitModalClose=kitModalClose;window.kitCloseSync=kitCloseSync;
+/* the same for any other overlay: root = the dimmed full-screen layer, box = the panel, close = what closing does */
+const KIT_LAYERS=[];
+function kitCloseLayer(root,box,close,o){o=o||{};if(!root||root.__kxl)return;root.__kxl={box,close,pri:o.pri||0};KIT_LAYERS.push(root);
+ let down=null;root.addEventListener("pointerdown",e=>{down=(e.target===root||(o.ground&&e.target.matches(o.ground)))?{x:e.clientX,y:e.clientY,t:Date.now()}:null},true);
+ root.addEventListener("click",e=>{const d=down;down=null;if(!d||!(e.target===root||(o.ground&&e.target.matches(o.ground))))return;
+  if(Math.hypot(e.clientX-d.x,e.clientY-d.y)>10||Date.now()-d.t>900)return;e.stopPropagation();close()})}
+window.kitCloseLayer=kitCloseLayer;
+(function(){const M=document.getElementById("modal");if(!M)return;
+ /* after every render (outermost wrapper: installed once every module has loaded) and whenever the button row / header changes */
+ setTimeout(()=>{const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);kitCloseSync();return r}},0);
+ let q=0;new MutationObserver(()=>{if(q)return;q=1;Promise.resolve().then(()=>{q=0;kitCloseSync()})}).observe(M,{childList:true,subtree:true,attributes:true,attributeFilter:["hidden"]});
+ let down=null;
+ M.addEventListener("pointerdown",e=>{down=e.target===M&&M.__kx?{x:e.clientX,y:e.clientY,t:Date.now()}:null},true);
+ M.addEventListener("click",e=>{const d=down;down=null;if(!d||e.target!==M)return;if(Math.hypot(e.clientX-d.x,e.clientY-d.y)>10||Date.now()-d.t>900)return;e.stopPropagation();kitModalClose()})})();
+/* Esc: the top-most open closable panel (another overlay over the dialog first, then the dialog, then the room person card) */
+document.addEventListener("keydown",e=>{if(e.key!=="Escape")return;setTimeout(()=>{if(e.defaultPrevented||document.body.classList.contains("kbk-open"))return;
+ if([...document.querySelectorAll(".kpod")].some(x=>x.offsetParent))return;
+ const L=KIT_LAYERS.filter(r=>r.isConnected&&!r.hidden&&getComputedStyle(r).display!=="none"&&r.__kxl.box()).sort((a,b)=>b.__kxl.pri-a.__kxl.pri);
+ if(L.length){e.preventDefault();L[0].__kxl.close();return}
+ if(kitModalClose()){e.preventDefault();return}
+ const px=document.getElementById("popx");if(px&&px.offsetParent){e.preventDefault();px.click()}},0)});
+/* game / lesson results in #ov (kg82 "Đã hiểu", j92 Chải chuốt, the old j5 "Xong"): the result card closes with ✕ / tap outside / Esc,
+   which press that button (its own handler applies the result as before); while the game runs there is no ✕ */
+function kitOvBtn(){const ov=document.getElementById("ov");if(!ov||ov.hidden)return null;const b=ov.querySelector("#kg82ok, #kg92ok, #mgok");return b&&b.isConnected?b:null}
+function kitOvSync(){try{const b=kitOvBtn();if(!b)return;if(!b.hidden)b.hidden=true;const row=b.parentElement;if(row&&row!==b.closest(".kpanel,.mg")&&![...row.children].some(c=>!c.hidden)&&!row.hidden)row.hidden=true;
+ const pan=b.closest("#kg82, .mg")||b.closest(".kpanel");if(!pan||pan.querySelector(".kit-x[data-kitx=ov]"))return;const h=pan.querySelector(".kph");
+ const html=kitXHTML('data-kitx="ov"');if(h){if(getComputedStyle(h).position==="static")h.style.position="relative";h.insertAdjacentHTML("beforeend",html)}else{pan.style.position=pan.style.position||"relative";pan.insertAdjacentHTML("afterbegin",html);pan.firstElementChild.classList.add("kxabs")}
+ const x=pan.querySelector(".kit-x[data-kitx=ov]");x.addEventListener("click",e=>{e.stopPropagation();e.preventDefault();const c=kitOvBtn();if(c)c.click()})}catch(e){console.error("kitOvSync",e)}}
+(function(){const ov=document.getElementById("ov");if(!ov)return;let q=0;new MutationObserver(()=>{if(q)return;q=1;Promise.resolve().then(()=>{q=0;kitOvSync()})}).observe(ov,{childList:true,subtree:true});
+ kitCloseLayer(ov,()=>kitOvBtn(),()=>{const c=kitOvBtn();if(c)c.click()},{pri:2})})();
+/* the person card opened from the room (#popw, KIT 28.18): its ✕ is #popx; a tap on the empty scene closes it too */
+(function(){const st=document.getElementById("stage");if(!st)return;let dn=null;const free=t=>!t.closest("button,a,input,.pop,#popw,[data-p],.k3p,.hud2");
+ st.addEventListener("pointerdown",e=>{dn=free(e.target)?{x:e.clientX,y:e.clientY,t:Date.now()}:null},true);
+ st.addEventListener("click",e=>{const d=dn;dn=null;if(!d||!free(e.target))return;if(Math.hypot(e.clientX-d.x,e.clientY-d.y)>10||Date.now()-d.t>900)return;
+  const px=document.getElementById("popx");if(px&&px.offsetParent)px.click()})})();
+(function(){const st=document.createElement("style");st.id="kit-x-close";st.textContent=`
+#modal .dlg:has(>.kit-x.kxabs){position:relative}
+#modal .dlg>.kit-x.kxabs{position:absolute;top:8px;right:8px;z-index:9}
+#modal .dlg.kpanel:has(>.kit-x.kxabs){overflow:auto}
+#modal[data-kx="1"] .dlg>#mr:not(:has(>:not([hidden]))){display:none!important}
+#modal .dlg>#mr>[hidden],#ov [hidden]{display:none!important}
+#ov .kph>.kit-x{position:absolute;right:10px;top:50%;transform:translateY(-50%);margin:0}
+#ov .kit-x.kxabs{position:absolute;top:8px;right:8px;z-index:9}
+`;document.head.appendChild(st)})();
+
+/* ================= KIT 32.10 · THE TAP CATCHER (owner 11/15: "the outside tap closed the result card AND ran the act under it") =================
+   A closable card that floats WITHOUT its own dimmed ground (the act result card #rtoast — THÀNH / HỎNG / BẤT LỢI) gets a full-screen
+   transparent catcher (#kxcatch) right under it while it is open. The first tap outside the card ONLY closes it: pointerdown, touchstart,
+   touchend, mousedown, mouseup and click on the catcher are all swallowed (preventDefault + stopPropagation), nothing underneath fires, and
+   the catcher stays 400 ms after the close to eat a late ghost click. Dialogs (#modal), the book and game results already have their own
+   full-screen ground that closes on a real tap (kitCloseSync / kitCloseLayer) — the same rule: the tap is spent on closing. */
+function kitCatchOn(card,close){let c=document.getElementById("kxcatch");if(!c){c=document.createElement("div");c.id="kxcatch";c.setAttribute("aria-hidden","true");document.body.appendChild(c)
+  const eat=e=>{e.preventDefault();e.stopPropagation();e.stopImmediatePropagation()};
+  /* the close happens on the release (pointerup / touchend), never on the later click: a touch whose touchend is cancelled sends no click;
+     the catcher then stays 400 ms and eats the click / ghost click that may still come */
+  const shut=()=>{if(!c.__close||c.__closing)return;c.__closing=1;try{c.__close()}catch(x){}setTimeout(()=>{c.hidden=true;c.__closing=0;c.__close=null},400)};
+  ["pointerdown","touchstart","mousedown","mouseup","contextmenu","click","dblclick"].forEach(t=>c.addEventListener(t,eat,{passive:false}));
+  c.addEventListener("pointerup",e=>{eat(e);shut()},{passive:false});c.addEventListener("touchend",e=>{eat(e);shut()},{passive:false})}
+ const z=parseInt(getComputedStyle(card).zIndex)||45;c.style.zIndex=String(z-1);c.__close=close;c.__closing=0;c.hidden=false}
+function kitCatchOff(){const c=document.getElementById("kxcatch");if(c&&!c.__closing){c.hidden=true;c.__close=null}}
+window.kitCatchOn=kitCatchOn;window.kitCatchOff=kitCatchOff;
+(function(){let obs=null;const watch=t=>{if(!t||t.__kxw)return;t.__kxw=1;
+  const sync=()=>{const on=t.classList.contains("on")&&!t.hidden&&getComputedStyle(t).visibility!=="hidden";if(on)kitCatchOn(t,()=>{t.classList.remove("on");clearTimeout(window.__rtT)});else kitCatchOff()};
+  new MutationObserver(sync).observe(t,{attributes:true,attributeFilter:["class","hidden"]});sync()};
+ const find=()=>watch(document.getElementById("rtoast"));find();
+ obs=new MutationObserver(()=>{if(document.getElementById("rtoast")){find();obs.disconnect()}});obs.observe(document.body,{childList:true})})();
+(function(){const st=document.createElement("style");st.id="kit-catch";st.textContent=`
+#kxcatch{position:fixed;inset:0;background:transparent;touch-action:none;-webkit-tap-highlight-color:transparent}
+#kxcatch[hidden]{display:none!important}
 `;document.head.appendChild(st)})();

@@ -29,7 +29,7 @@ window.kitSignedBar=sbar;
 function pbar(v,hi,good){hi=hi||100;const x=Math.max(0,Math.min(hi,+v||0)),w=x/hi*100;
  return `<span class="ksbar ksbp" aria-hidden="true"><u class="${good?"g":"r"}" style="left:0;width:${w.toFixed(1)}%"></u><i class="ksb-mk ${good?"g":"r"}" style="left:${w.toFixed(1)}%"></i></span>`}
 window.kitPosBar=pbar;
-/* KIT §38.1 kitRelRow (owner 11/15): ONE relation row everywhere.
+/* KIT §43.1 kitRelRow (owner 11/15): ONE relation row everywhere.
    line 1 = the label "<A> → <B>: thiện cảm|oán" in the KIT_REL colour (purple: someone → ta, blue: ta → someone, ink: between two others);
    line 2 = "<word> · <number>" then the bar on the SAME line; the word column and the bar have fixed widths, so every row's bar starts and
    ends at the same x. thiện cảm (−100..100) = kitSignedBar (midline at the centre, green right / red left); oán (0..100) = kitPosBar + the
@@ -79,7 +79,7 @@ const fcol=f=>(f&&f.col)||"#7a5530";
 /* who is who in a relation label: the player "ta", the Empress by title, the Emperor / Thái hậu by title, others by their short name */
 const whoL=p=>p===S?"ta":p==="emp"?"Hoàng thượng":p==="th"?"Thái hậu":p&&p.queen?"Hoàng hậu":shortN(p.name);
 const capL=s=>s==="ta"?"Ta":s;
-/* KIT §38.3 relPerson(k): ONE helper — the person object, the face drawn from THAT object, the name, the rank, the colour. Strangers
+/* KIT §43.3 relPerson(k): ONE helper — the person object, the face drawn from THAT object, the name, the rank, the colour. Strangers
    (not met: knows(v) false — the same test that writes "Ta chưa gặp …") get the shared grey silhouette (kitStrangerOf, j61), the name stays. */
 function relPerson(k){
  if(k==="me"){const f=pMe();return{k,p:S,f,name:"Ta",rank:S.out?"Phế phi":RANKS[S.rank].n,col:fcol(f),pid:"me"}}
@@ -88,7 +88,7 @@ function relPerson(k){
  const v=(rivals||[]).find(x=>String(x.id)===String(k));if(!v)return null;const met=typeof isKnown61==="function"?isKnown61(v):knows(v);const f=met?pv(v):kitStrangerOf(v);
  return{k:v.id,p:v,f,name:v.name,rank:rkName(v),col:met?fcol(f):"#8a8a8a",met,pid:typeof kOf61==="function"?kOf61(v):String(v.id)}}
 window.relPerson=relPerson;
-/* KIT §38.2 (owner 11/15): Ân oán = "Xem quan hệ của X" (strip 1) + "với Y" (strip 2) — both the Hậu cung pager strip (pager, j15: ‹ ›,
+/* KIT §43.2 (owner 11/15): Ân oán = "Xem quan hệ của X" (strip 1) + "với Y" (strip 2) — both the Hậu cung pager strip (pager, j15: ‹ ›,
    N/M, selected highlight), grouped Ta · Chí tôn · Phi tần, labels = the name only. The panel shows ONE pair under the heading
    "Quan hệ giữa X và Y": X | the rows both ways | Y, then "Đã biết về X". Y defaults to Ta (her own relation with X); when X = Ta, Y
    defaults to the first person of strip 2. Never a hidden counterpart. PG.rel ↔ relSel (an outside link that sets relSel still works). */
@@ -106,7 +106,7 @@ function hcRelHTML(){kn();const items=relItems().map(x=>Object.assign(x,{q:relPe
  const strip2=pager("relY",Ys2.map(x=>stripItem(x,x.q)),()=>"");
  return `<div class="pgwrap krelpg"><p class="krelst">Xem quan hệ của</p>${strip1}<p class="krelst">với</p>${strip2}${relPair(X,Y)}</div>`}
 function relSide(q){return `<div class="kr3p" data-pid="${q.pid}" data-fk="${q.f&&q.f.kk!=null?q.f.kk:q.pid}">${kitNameRank(q.rank,q.name,q.col)}<div class="kr3f">${pcPort(q.f,q.col)}</div></div>`}
-/* the rows between two people, both ways (KIT §38.1 kitRelRow). A value is shown when the one who feels it is Ta, or Ta has met both. */
+/* the rows between two people, both ways (KIT §43.1 kitRelRow). A value is shown when the one who feels it is Ta, or Ta has met both. */
 function relRows(X,Y){const a=X.p,b=Y.p;const met=p=>p===S||(p!=="emp"&&p!=="th"&&knows(p));
  if(a==="emp"||b==="emp"){const z=a==="emp"?b:a;if(z===S)return kitRelRow({kind:"pos",a:"Hoàng thượng",b:"ta",what:"sủng",gloss:"Sủng",v:S.sung})+kitRelRow({kind:"pos",a:"Hoàng thượng",b:"ta",what:"ân tình",gloss:"Ân tình",v:S.an||0});
   const kf=S.kf&&S.kf[z.id];return kitRelRow({kind:"pos",a:"Hoàng thượng",b:whoL(z),what:"sủng",gloss:"Sủng",v:kf?kf.s:null})}
@@ -130,7 +130,7 @@ relHTML=function(){if(!S)return"";if(S.known&&typeof k61Hide==="function"){const
 function mkTab(k,l,s,before){const T0=$("tabs");if(!T0||T0.querySelector(`[data-tab="${k}"]`))return;const b=document.createElement("button");b.dataset.tab=k;b.dataset.s=s;b.setAttribute("role","tab");b.textContent=l;b.dataset.l0=l;b.dataset.s0=s;
  const ref=T0.querySelector(`[data-tab="${before}"]`);if(ref)ref.after(b);else T0.appendChild(b);return b}
 (function(){const T0=$("tabs");if(!T0)return;const rv=T0.querySelector('[data-tab="rv"]');
- if(rv&&!T0.querySelector('[data-tab="court"]')){const b=document.createElement("button");b.dataset.tab="court";b.dataset.s="Thánh thượng";b.setAttribute("role","tab");b.textContent="Hoàng thượng · Thái hậu";b.dataset.l0=b.textContent;b.dataset.s0=b.dataset.s;rv.before(b)}
+ if(rv&&!T0.querySelector('[data-tab="court"]')){const b=document.createElement("button");b.dataset.tab="court";b.dataset.s="Chí tôn";b.setAttribute("role","tab");b.textContent="Chí tôn";b.dataset.l0=b.textContent;b.dataset.s0=b.dataset.s;rv.before(b)}
  mkTab("men","Nam nhân","Nam nhân","rv");
  /* staff (Cung nhân) belongs to Hậu cung: place its button inside the group (after men) so the bar order stays Hậu cung · Giao tình */
  const st=T0.querySelector('[data-tab="staff"]'),mn=T0.querySelector('[data-tab="men"]');if(st&&mn)mn.after(st);
@@ -138,16 +138,16 @@ function mkTab(k,l,s,before){const T0=$("tabs");if(!T0||T0.querySelector(`[data-
  /* servant road: its own tabs (j42 SRVTABS) — the new keys are not servant tabs */
 })();
 try{const mt0=KG.mt&&KG.mt.keys?KG.mt.keys.slice():[];for(const k in KG)delete KG[k];Object.assign(KG,{hc:{keys:["court","rv","men","staff"],l:"Hậu cung",s:"Hậu cung"},gt:{keys:["rel","fac"],l:"Giao tình",s:"Giao tình"},mt:{keys:["story","nho","quest","req","log"],l:"Mệnh truyện",s:"Mệnh truyện"}});/* keep Mệnh truyện members other modules added earlier (jbal2 "q72" Việc nhờ) */mt0.forEach((k,i)=>{if(!KG.mt.keys.includes(k)&&!["rv","rel","fac","staff","court","men"].includes(k))KG.mt.keys.splice(Math.min(i,KG.mt.keys.length),0,k)})}catch(e){}
-try{if(window.VP&&VP.tabs)Object.assign(VP.tabs,{court:["Hoàng thượng · Thái hậu","Thánh thượng"],men:["Nam nhân","Nam nhân"],rel:["Ân oán","Ân oán"]})}catch(e){}
+try{if(window.VP&&VP.tabs)Object.assign(VP.tabs,{court:["Chí tôn","Chí tôn"],men:["Nam nhân","Nam nhân"],rel:["Ân oán","Ân oán"]})}catch(e){}
 /* the sub-tab label: long on wide panels, short ("Thánh thượng") where four segments are tight */
 (function(){if(typeof kgSub!=="function")return;const k0=kgSub;kgSub=function(){const r=k0.apply(this,arguments);try{const P=$("panel");const b=P&&P.querySelector('.ksub [data-ksub="court"]');
-  if(b){const w=P.clientWidth||innerWidth;b.innerHTML=w<640?"Thánh thượng":"Hoàng thượng · Thái hậu";b.title="Hoàng thượng · Thái hậu"}
+  if(b){const w=P.clientWidth||innerWidth;b.innerHTML=w<640?"Chí tôn":"Chí tôn";b.title="Chí tôn"}
   const r2=P&&P.querySelector('.ksub [data-ksub="rel"]');if(r2&&T(r2.textContent)!=="Ân oán")r2.textContent="Ân oán"}catch(e){}return r}})();
 
 /* court sub-tab: Hoàng thượng + Thái hậu, the same pager + person card; their acts = the day's act cards about them (from the Hành sự deck) */
 function deckFor(re){try{return (deck||[]).map((a,i)=>[a,i]).filter(([a])=>a&&!a.done&&re.test((a.n||"")+" "+(a.x||""))).map(([a,i])=>cardH(a,i))}catch(e){return[]}}
 function thCard(){const known=typeof window.kitCourtKnown!=="function"||window.kitCourtKnown("th")!==false;
- const L=[typeof tuoi==="function"&&S.thAge?tuoi(S.thAge):"",known?`Thái hậu thương ngươi: <b>${S.th|0}</b>`:"Thái hậu thương ngươi: <b>chưa rõ</b>"].filter(Boolean);
+ const L=[typeof tuoi==="function"&&S.thAge?tuoi(S.thAge):"",known?`Thái hậu → ta: thiện cảm: <b>${S.th|0}</b>`:"Thái hậu → ta: thiện cảm: <b>chưa rõ</b>"].filter(Boolean);
  const acts=deckFor(/Thái hậu|Đức Thọ/);
  return pcard({f:pTH(),col:"#c9a0e0",name:"Thái hậu",rank:"Thái hậu · Đức Thọ cung",lines:L,groups:[["Việc hôm nay",acts.length?acts:[`<p class="kr3note">Hôm nay Hành sự không có việc nào về Thái hậu. Thỉnh an Thái hậu: sang Đức Thọ cung (Dư đồ) buổi sáng.</p>`]]],empty:""})}
 function empCard(){const E=S.emp;const acts=deckFor(/Hoàng thượng|ngự giá|ngự thư phòng|Dưỡng Tâm|thị tẩm/i);
@@ -225,7 +225,7 @@ const st=document.createElement("style");st.id="kit-hc";st.textContent=`
 .ksbar{position:relative;display:inline-block;width:92px;height:8px;flex:0 0 auto;border-radius:4px;background:var(--k-card2,#efe4cc);box-shadow:inset 0 0 0 1px #b89a6a55;overflow:hidden;vertical-align:middle}
 .ksbar>.ksb-mid{position:absolute;left:calc(50% - 1px);top:-1px;bottom:-1px;width:2px;background:#7a5530;opacity:.7;z-index:1}
 .ksbar>u{position:absolute;top:1px;bottom:1px;border-radius:3px}.ksbar>u.g{background:var(--good,#3d8a5a)}.ksbar>u.r{background:var(--bad,#b0402c)}.kr3v .fbar{width:70px;flex:0 0 auto}
-/* KIT §38.1 kitRelRow: label line (KIT_REL colour) + ONE line "word · number" | bar; fixed word column + fixed bar → equal bar x / width */
+/* KIT §43.1 kitRelRow: label line (KIT_REL colour) + ONE line "word · number" | bar; fixed word column + fixed bar → equal bar x / width */
 .krr{display:flex;flex-direction:column;gap:2px;min-width:0}
 .krrl{color:var(--krc,#6a5040);font-size:.76rem;font-weight:700;line-height:1.25}.krrl *{color:inherit!important}
 .krr2{display:grid;grid-template-columns:var(--krrw,8.2rem) var(--krrbw,84px);column-gap:8px;align-items:center;justify-content:start;min-height:18px}
@@ -235,7 +235,7 @@ const st=document.createElement("style");st.id="kit-hc";st.textContent=`
 .ksbar>.ksb-mk{position:absolute;top:50%;width:3px;height:14px;border-radius:2px;transform:translate(-50%,-50%);background:#5a3a20;z-index:2;box-shadow:0 0 0 1px #fffaf0}
 .ksbar>.ksb-mk.g{background:#2c6a44}.ksbar>.ksb-mk.r{background:#8a2c1c}
 .ksbar.ksbn{opacity:.45}
-/* KIT §38.2 Ân oán pair: two pager strips (X, Y), heading, X | rows | Y, then "Đã biết về X" */
+/* KIT §43.2 Ân oán pair: two pager strips (X, Y), heading, X | rows | Y, then "Đã biết về X" */
 .krelst{margin:6px 0 2px;font-size:.78rem;color:var(--dim);font-weight:600}
 .krelh{margin:10px 0 6px;font-family:var(--display);font-size:1.02rem;color:var(--ink,#3a2418)}
 .krel3.krpair{grid-template-columns:minmax(100px,150px) minmax(0,1fr) minmax(100px,150px);align-items:start}

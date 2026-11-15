@@ -24,14 +24,16 @@ function k61All(){const L=[];if(!S)return L;const add=e=>{if(e&&typeof e==="obje
  (rivals||[]).forEach(v=>{add(v);add(v.maid);(v.staff||[]).forEach(add);(v.kids||[]).forEach(add)});
  for(const c in (S.court||{}))add(S.court[c]);(S.men||[]).forEach(add);try{const T=S.trieu;if(T&&T.H)for(const c in T.H)add(T.H[c])}catch(e){}return L}
 function k61St(e){if(!e||!S||e===S)return 3;const K=k61S();if(!K)return 3;return +K[kOf61(e)]||0}
-/* owner 11/15 (stranger rule, KIT §38.3): a consort Ta has NOT MET is a grey silhouette everywhere (portraits, strips, news rows, figures,
+/* owner 11/15 (stranger rule, KIT §43.3): a consort Ta has NOT MET is a grey silhouette everywhere (portraits, strips, news rows, figures,
    the week book) — her name may be known, her face is not. Met = she talked / acted with her (S.met), or lives in the same palace
    (the "Đã quen" level alone is not enough: owner case "listed in Ân oán, Ta chưa gặp"). Everyone else keeps the face level (>= 1). */
 function met61(e){try{return !!(S&&S.met&&S.met[e.id])||(typeof sameHouse==="function"&&sameHouse(S,e))}catch(x){return false}}
 function isKnown61(e){if(k61St(e)<1)return false;if(S&&e&&e!==S&&(rivals||[]).includes(e))return met61(e);return true}
 /* public figures (kit review): Hoàng thượng, Thái hậu and the reigning Hoàng hậu are known by name and title (stage 2) from the first
    day; their face (grey silhouette until then) shows after the first meeting / thỉnh an */
-function k61Pub(e){if(!e||!S)return false;if(e===S.emp)return true;if(S.thO&&e===S.thO)return true;return !!((rivals||[]).includes(e)&&e.queen&&!e.out&&e.alive!==false)}
+function k61Pub(e){if(!e||!S)return false;if(e===S.emp)return true;if(S.thO&&e===S.thO)return true;if(k61IsKid(e))return true;return !!((rivals||[]).includes(e)&&e.queen&&!e.out&&e.alive!==false)}
+/* the Emperor's children are announced at birth: every name is public; the FACE only after she has met the child (owner 11/15, jht) */
+function k61IsKid(e){return !!(e&&typeof e==="object"&&(e.sex==="m"||e.sex==="f")&&"fond" in e&&allKids().some(([k])=>k===e))}
 function k61Named(e){return k61St(e)>=2||k61Pub(e)}
 function kitKnown(p){try{const e=k61PortEnt(p);return e?isKnown61(e):true}catch(e){return true}}
 function kitKnownName(p){try{const e=k61PortEnt(p);return e?k61Named(e):true}catch(e){return true}}
@@ -92,7 +94,7 @@ const K61U={};["f","m","k","fig-f","fig-m","fig-k"].forEach(g=>{try{const im=new
 function k61G(e){const k=k61Kind(e);return k==="kid"?"k":["emp","man","eun","tq","phys","off"].includes(k)?"m":"f"}
 function k61Sil(p){const e=k61PortEnt(p);if(!e||isKnown61(e))return p;const g=k61G(e);
  return Object.assign({},p,{src:K61U[g]?`img/kit/unknown-${g}.webp`:"",ini:"?",col:"#8a8a8a",rw:p.rw?(k61Named(e)?k61Lab(e):k61Short(e)):p.rw,stranger:1})}
-/* the same grey silhouette for a person Ta has not met (knows(v) false), whatever her face level: Ân oán strips + panel (KIT §38.3) */
+/* the same grey silhouette for a person Ta has not met (knows(v) false), whatever her face level: Ân oán strips + panel (KIT §43.3) */
 function kitStrangerOf(v){const p=pv(v);const g=k61G(v);return Object.assign({},p,{src:K61U[g]?`img/kit/unknown-${g}.webp`:"",ini:"?",col:"#8a8a8a",stranger:1})}
 window.kitStrangerOf=kitStrangerOf;
 (function(){const c0=pcPort;pcPort=function(f,col,status){const g=k61Sil(f||{});return c0.call(this,g,g.stranger?g.col:col,status)}})();
@@ -110,7 +112,7 @@ function k61AskBtn(e){const k=kOf61(e);const o=od(45+(S.mat||0)*8+((S.maid&&S.ma
 /* owner 11/15 08:00Z: no "3/3" — a plain level word, tap = what raises it and what it opens (KIT_GLOSS "Quen biết", jhc) */
 const K61STW=["Người lạ","Mới thấy mặt","Biết tên","Đã quen"];
 function k61StChip(st){const w=K61STW[st]||K61STN[st];return chip(typeof kitGloss==="function"?kitGloss("Quen biết",w):w,st>=3?"ok":"")}
-(function(){const c0=pcard;pcard=function(o){try{const e=o&&k61PortEnt(o.f);const st=e?k61St(e):3;if(e&&!k61Named(e)){const pop=!!o.close;
+(function(){const c0=pcard;pcard=function(o){try{const e=o&&k61PortEnt(o.f);if(e&&k61IsKid(e)){const a=arguments;return k61Pass(o.f,()=>c0.apply(this,a))}/* children: jht draws what the palace knows */const st=e?k61St(e):3;if(e&&!k61Named(e)){const pop=!!o.close;
   const G=(o.groups||[]).filter(g=>g&&g[1]).map(([hd,B])=>[hd,B.filter(b=>b&&/^<button/.test(String(b))).map(b=>pop?b:k61Dis(String(b)))]).filter(g=>g[1].length);
   if(!pop)G.unshift(["Làm quen",[k61AskBtn(e)]]);
   const chips=[k61StChip(st)].concat((o.chips||[]).filter(c=>c&&/class="chip loc/.test(c)));

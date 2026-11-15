@@ -34,9 +34,9 @@ function kbkExpand(blocks,skip){const out=[];for(const b of (blocks||[])){if(!b)
  return out}
 
 function kitBook(spec){spec=spec||{};const rm=()=>{try{return reducedMotion()}catch(e){return false}};
- const root=document.createElement("div");root.className="kbk";root.setAttribute("role","dialog");root.setAttribute("aria-label",spec.label||"Sổ tuần");
+ const root=document.createElement("div");root.className="kbk";root.setAttribute("role","dialog");root.setAttribute("aria-label",spec.label||"Tuần lục");
  for(const k of Object.keys(KBK_ART))if(KBK_HAVE[k])root.classList.add("art-"+k);
- root.innerHTML=`<div class="kbk-stage"><div class="kbk-book"></div></div><div class="kbk-bar"><button class="kbk-nav kbk-prev" aria-label="Trang trước">‹</button><span class="kbk-no" aria-live="polite"></span><button class="kbk-nav kbk-next" aria-label="Trang sau">›</button><button class="kbtn alt kbk-x">${spec.closeLabel||"Lui"}</button></div><div class="kbk-measure" aria-hidden="true"></div>`;
+ root.innerHTML=`<div class="kbk-stage"><div class="kbk-book"></div></div><div class="kbk-bar"><button class="kbk-nav kbk-prev" aria-label="Trang trước">‹</button><span class="kbk-no" aria-live="polite"></span><button class="kbk-nav kbk-next" aria-label="Trang sau">›</button></div><button type="button" class="kit-x kbk-x" aria-label="${spec.closeLabel||"Đóng"}" title="${spec.closeLabel||"Đóng"}">✕</button><div class="kbk-measure" aria-hidden="true"></div>`;
  (spec.host||document.body).appendChild(root);
  const book=root.querySelector(".kbk-book"),stage=root.querySelector(".kbk-stage"),meas=root.querySelector(".kbk-measure"),noEl=root.querySelector(".kbk-no");
  let mode="single",PW=0,PH=0,leaves=[],sheets=[],cur=0,maxCur=0,busy=false,closed=false,logical=0;
@@ -44,7 +44,7 @@ function kitBook(spec){spec=spec||{};const rm=()=>{try{return reducedMotion()}ca
  /* ---- page shells ---- */
  const head=spec.head||"";
  const shell=(cls,inner,folio)=>`<div class="kbk-pg ${cls}"><div class="kbk-in">${head&&!/k-cover|k-blank|k-back/.test(cls)?`<div class="kbk-rh">${head}</div>`:""}<div class="kbk-body">${inner}</div>${folio?`<div class="kbk-fo">${folio}</div>`:""}</div></div>`;
- const coverH=p=>`<div class="kbk-cv"><div class="kbk-stitch"></div><div class="kbk-label"><b class="kbk-lt">${String(p.title||"Sổ tuần").split(" ").map(w=>`<span>${w}</span>`).join(" ")}</b></div><div class="kbk-cmeta">${p.sub?`<span class="kbk-ls">${p.sub}</span>`:""}${p.note?`<span class="kbk-cn">${p.note}</span>`:""}</div><b class="kbk-cseal">${p.seal||"TUẦN"}</b><span class="kbk-hint">${p.hint||"Vuốt trang hoặc chạm mép phải để lật"}</span></div>`;
+ const coverH=p=>`<div class="kbk-cv"><div class="kbk-stitch"></div><div class="kbk-label"><b class="kbk-lt">${String(p.title||"Tuần lục").split(" ").map(w=>`<span>${w}</span>`).join(" ")}</b></div><div class="kbk-cmeta">${p.sub?`<span class="kbk-ls">${p.sub}</span>`:""}${p.note?`<span class="kbk-cn">${p.note}</span>`:""}</div><b class="kbk-cseal">${p.seal||"TUẦN"}</b><span class="kbk-hint">${p.hint||"Vuốt trang hoặc chạm mép phải để lật"}</span></div>`;
  const endH=p=>`<div class="kbk-end"><span class="kbk-orn"></span><h3 class="kbk-et">${p.title||"Tuần này đến đây là hết."}</h3><b class="kbk-seal" aria-label="${(p.seal||["HẾT","TUẦN"]).join(" ")}">${(p.seal||["HẾT","TUẦN"]).map(s=>`<i>${s}</i>`).join("")}</b>${p.note?`<p class="kbk-en">${p.note}</p>`:""}<button class="kbtn kbk-go" id="${p.btnId||"kbk-go"}">${p.btn||"Đã hiểu"}</button></div>`;
  const blankH=()=>`<div class="kbk-blank"><span class="kbk-orn"></span></div>`;
  const textTop=(p,cont)=>`<div class="kbk-th"><h3 class="kbk-t">${p.title||""}${cont?` <small class="kbk-cont">tiếp theo</small>`:""}</h3>${p.sub&&!cont?`<small class="kbk-ts">${p.sub}</small>`:""}</div>`;
@@ -157,6 +157,9 @@ function kitBook(spec){spec=spec||{};const rm=()=>{try{return reducedMotion()}ca
  book.addEventListener("pointerup",endDrag);book.addEventListener("pointercancel",endDrag);
  root.querySelector(".kbk-next").onclick=e=>{e.stopPropagation();next()};root.querySelector(".kbk-prev").onclick=e=>{e.stopPropagation();prev()};
  root.querySelector(".kbk-x").onclick=e=>{e.stopPropagation();close()};
+ /* KIT 32.10: a tap on the ground around the book closes it (press started there and did not move; a page drag never closes) */
+ {let dn=null;const gr=t=>t===root||t===stage;root.addEventListener("pointerdown",e=>{dn=gr(e.target)?{x:e.clientX,y:e.clientY,t:Date.now()}:null},true);
+  root.addEventListener("click",e=>{const d=dn;dn=null;if(!d||!gr(e.target)||busy)return;if(Math.hypot(e.clientX-d.x,e.clientY-d.y)>10||Date.now()-d.t>900)return;e.stopPropagation();close()})}
  const key=e=>{if(closed||root.offsetParent===null&&!root.getClientRects().length)return;const k=e.key;
   if(k==="ArrowRight"||k==="PageDown"){e.preventDefault();next()}else if(k==="ArrowLeft"||k==="PageUp"){e.preventDefault();prev()}
   else if(k==="Escape"){e.preventDefault();close()}else if((k==="Enter"||k===" ")&&!e.target.closest("button")){e.preventDefault();if(cur>=maxCur)close();else next()}};
@@ -303,7 +306,7 @@ function kbkOptName(m,c){const n=String(c.n||"");if(c.lg)return c.lg;const ctx=k
   return r}})();
 
 function wkBookPages(){const d=wkBookData();const date=kitDate(S.month,S.year,S.tuan);const sea=`${SEASON[S.month-1]}${S.wx?" · "+S.wx.n:""}`;
- const P=[{kind:"cover",title:"Sổ tuần",sub:date,note:sea}];
+ const P=[{kind:"cover",title:"Tuần lục",sub:date,note:sea}];
  const b=[];b.push({rows:[["Ngày",date,"t"],["Tiết",sea,"n"]]});
  if(S.lot){const bad=LVB[S.lot.lv]<0||(S.lot.dom==="Hung"&&S.lot.lv>=3),good=LVB[S.lot.lv]>0;b.push({h:kitGloss("Quẻ tuần")});b.push({rows:[["Quẻ",`<span class="ef t">${LV[S.lot.lv]} · ${S.lot.dom}</span>`],["Lời quẻ",(LOTS[S.lot.i]||[])[2]||"","n"],["Tuần này",String(lotEffect(S.lot)).replace(/…\./," và các việc khác cùng loại."),bad?"r":good?"g":"n"]]})}
  b.push({h:"Ngươi tuần qua"});b.push({chips:d.D.filter(([,v])=>v)});
@@ -318,7 +321,7 @@ function wkBookPages(){const d=wkBookData();const date=kitDate(S.month,S.year,S.
  if(d.world.length)P.push({kind:"text",title:"Triều đình · thiên hạ",blocks:[{facts:kbkArt(d.world.map(f=>Object.assign(f,{kind:"world"})),"world")}]});
  const nf=d.me.length+d.world.length+d.persons.reduce((a,p)=>a+p.n,0);
  P.push({kind:"end",title:"Tuần này đến đây là hết.",seal:["HẾT","TUẦN"],note:nf?`Sổ ghi ${nf} việc${d.persons.length?`, ${d.persons.length} người`:""}.`:"Một tuần yên ả.",btn:"Vào ngày mới",btnId:"dawn-go"});
- return {pages:P,head:`Sổ tuần · ${date}`}}
+ return {pages:P,head:`Tuần lục · ${date}`}}
 
 /* ---------- the dawn: the book replaces the week panel; "Vào ngày mới" closes it and the day goes on ---------- */
 (function(){if(typeof dawn!=="function")return;const old=dawn;
@@ -326,7 +329,7 @@ function wkBookPages(){const d=wkBookData();const date=kitDate(S.month,S.year,S.
   S.wkSnap=wkSnap();try{const rt=$("rtoast");if(rt){rt.classList.remove("on");clearTimeout(window.__rtT)}document.body.classList.add("kbk-open")}catch(e){}let w=$("dawn");if(!w){w=document.createElement("div");w.id="dawn";w.className="dawn";document.body.appendChild(w)}
   w.classList.add("kbkdawn");w.onclick=null;w.innerHTML=`<div class="dsky"><i class="lan l1"></i><i class="lan l2"></i><i class="lan l3"></i><i class="sun"></i></div>`;
   w.hidden=false;w.classList.toggle("rm",reducedMotion());void w.offsetWidth;w.classList.add("on");
-  const tok=w.__kbkTok={};const bk=kitBook({pages:built.pages,head:built.head,host:w,label:"Sổ tuần",onClose:()=>{if(w.__kbkTok!==tok)return;document.body.classList.remove("kbk-open");w.classList.remove("on");setTimeout(()=>{if(w.__kbkTok!==tok)return;w.hidden=true;w.innerHTML=""},reducedMotion()?0:350)}});
+  const tok=w.__kbkTok={};const bk=kitBook({pages:built.pages,head:built.head,host:w,label:"Tuần lục",onClose:()=>{if(w.__kbkTok!==tok)return;document.body.classList.remove("kbk-open");w.classList.remove("on");setTimeout(()=>{if(w.__kbkTok!==tok)return;w.hidden=true;w.innerHTML=""},reducedMotion()?0:350)}});
   window.__kbk=bk;setTimeout(bell,reducedMotion()?0:1400);try{w.querySelector(".kbk-next").focus({preventScroll:true})}catch(e){}}})();
 
 (function(){const st=document.createElement("style");st.id="kbk-css";st.textContent=`
@@ -339,6 +342,7 @@ function wkBookPages(){const d=wkBookData();const date=kitDate(S.month,S.year,S.
 .kbk-measure{position:absolute;left:-99999px;top:0;visibility:hidden;pointer-events:none;contain:layout style}
 .kbk-measure>.kbk-pg{position:relative;width:100%;height:100%}
 .kbk-stage{display:flex;align-items:center;justify-content:center;width:100%;flex:0 0 auto}
+.kbk>.kbk-x{position:absolute;top:max(10px,env(safe-area-inset-top));right:max(12px,env(safe-area-inset-right));z-index:6;box-shadow:0 2px 8px #2a1a1240}
 .kbk-book{position:relative;width:var(--pw);height:var(--ph);transform-style:flat;touch-action:pan-y;user-select:none;-webkit-user-select:none;transition:transform .55s cubic-bezier(.3,.7,.3,1),opacity .16s}
 .kbk.spread .kbk-book{width:calc(var(--pw) * 2)}
 .kbk.spread .kbk-book.closed{transform:translateX(calc(var(--pw) * -.5))}

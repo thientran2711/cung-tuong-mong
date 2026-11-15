@@ -3,14 +3,14 @@
 const RIMG=["rank-dap-ung","rank-thuong-tai","rank-quy-nhan","rank-tan","rank-phi","rank-quy-phi","rank-hoang-quy-phi","rank-hoang-hau"];
 const SCIMG={vuon:"ngu-hoa-vien",thu:"ngu-thu-phong",dtd:"duong-tam-dien",tn:"tu-ninh-cung",kn:"khon-ninh-cung",rv:"phi-tan-cung",tyv:"thai-y-vien",ksp:"kinh-su-phong",lc:"lanh-cung"};
 const AIMG={cam:"cam",ky:"ky",thi:"thi",hoa:"hoa",vu:"vu",y:"y-thuat"};
-function ic(n,s){s=s||16;return `<img class="ic" src="img/${n}.webp" width="${s}" height="${s}" alt="" onerror="this.remove()">`}
+function ic(n,s){if(!n)return "";s=s||16;return `<img class="ic" src="img/${n}.webp" width="${s}" height="${s}" alt="" onerror="this.remove()">`}
 function chip(t,cls){return `<span class="chip ${cls||""}">${t}</span>`}
 /* warns when an act would drop Đức under the Hoàng hậu bar (40) */
 function ducWarn(c){const t=ducWarnTxt(c);return t?`<span class="fx r"><b>${t}</b></span>`:""}
 function cardH(a,i){const poor=a.c&&a.c.bac&&S.bac+a.c.bac<0,o=a.o==null?100:a.o;const dis=!can(cardCost(a))||a.done||poor||a.lock||S.dead||(a.b!=null&&(S.buoi||0)!==a.b);
  const gain=[fmt(a.w),a.x].filter(Boolean).join(" · ")||"không";
  return `<button class="card" data-i="${i}" ${dis?"disabled":""}><h4>${a.n}</h4><span class="fx">${pips(cardCost(a))} ${cardCost(a)} khắc${a.b!=null?` · <b>Chỉ ${BUOI[a.b].toLowerCase()}</b>`:""}</span><p>${a.t||""}</p>${o<100&&!a.lock?`<span class="odds">${word(cl(o+lotB(S,a.dom),5,95))}${lotTag(a.dom)}</span>`:`<span class="odds">Chắc chắn</span>`}<span class="fx">Tốn: ${fmt(a.c)||"không"}</span>${ducWarn(a.c)}<span class="fx">Thành: ${gain}</span>${o<100&&!a.lock?`<span class="fx">Hỏng: ${fmt(a.l)||"không mất gì"}</span>`:""}</button>`}
-function render(){if(!S)return;renderHUD();renderStage();renderPanel();$("next").disabled=S.dead||Q.length>0||!!S.mg;$("next").textContent=(S.buoi||0)>=B4L?"Qua đêm":"Qua buổi";if(!S.dead&&!Q.length&&!S.mg&&used>=4&&!advLock){advLock=true;setTimeout(()=>{advLock=false;if(used>=4&&!Q.length&&!S.dead)nextBuoi()},350)}
+function render(){if(!S)return;renderHUD();renderStage();renderPanel();$("next").disabled=S.dead||Q.length>0||!!S.mg;$("next").textContent=(S.buoi||0)>=B4L?"Sang ngày mới":"Sang buổi";if(!S.dead&&!Q.length&&!S.mg&&used>=4&&!advLock){advLock=true;setTimeout(()=>{advLock=false;if(used>=4&&!Q.length&&!S.dead)nextBuoi()},350)}
  document.querySelectorAll("#tabs button").forEach(b=>b.setAttribute("aria-selected",b.dataset.tab===tab));
  if(Q.length&&$("modal").hidden)showModal();save()}
 function renderHUD(){if(typeof renderHud2==="function")renderHud2();$("me-n").textContent=S.name;$("me-r").innerHTML=ic(RIMG[S.rank],14)+(S.rank>=7?"Hoàng hậu":RANKS[S.rank].n)+(S.hieu?` · hiệu ${S.hieu}`:"");$("me-d").textContent=`T${S.month}/${S.year} · ${TUAN[S.tuan]} · ${BUOI[S.buoi||0]} · ${S.wx?S.wx.n:""} ${"●".repeat(Math.max(0,4-used))}${"○".repeat(Math.min(4,used))}`;
@@ -25,12 +25,12 @@ function renderStage(){const P=placeOf(S.place);$("stage").className="stage sc-"
  $("popw").innerHTML=pw;kitFix($("popw"))}
 function rvButtons(v,i){const dis=!can(2)||!v.alive||v.out||S.dead;const b=(k,extra)=>{const a=ACT[k];if(!a||(a.kid&&!a.ok(S,v)))return"";const ok=a.ok(S,v),o=a.o?a.o(S,v):null;
   return `<button data-r="${i}" data-a="${k}" ${dis||!ok?"disabled":""}>${k==="poison"||k==="kpoison"?ic("doc",14):""}${a.n}<small>${[o!=null&&ok?word(cl(o+lotB(S,ACTDOM[k]),5,95))+lotTag(ACTDOM[k]):"",fmt(a.c),!ok&&a.x?a.x:ok&&a.x?a.x:""].filter(Boolean).join(" · ")||"không tốn"}</small></button>`};
- if(sameHouse(S,v))return `<p class="past">Cùng ${houseName(v)} với ngươi: không thể lấy lòng hay ra tay.</p>`;let h=`<p class="past" style="margin:2px 0">${together(S,v)?"Đang cùng chỗ với nàng":`Không cùng chỗ: phải sai người đi (khó hơn; việc hại: kẻ đi bị bắt, khai ra ngươi: ${word(confessRisk(bestSent(S)))})`}</p><div class="rbtn">${["spy","ally","gift","rumor","bribe","block","frame","poison","accuse","vp","plant","musk","catswap","ksab","kpoison","pond","kframe","takeaway"].map(k=>b(k)).join("")}</div>`;
+ if(sameHouse(S,v))return `<p class="past">Cùng ${houseName(v)} với ngươi: không thể lấy lòng hay ra tay.</p>`;let h=`<p class="past" style="margin:2px 0">${together(S,v)?"Đang cùng chỗ với nàng":`Không cùng chỗ: phải sai người đi (khó hơn; việc hại: kẻ đi bị bắt, khai ra ngươi: ${chanceW(confessRisk(bestSent(S)))})`}</p><div class="rbtn">${["spy","ally","gift","rumor","bribe","block","frame","poison","accuse","vp","plant","musk","catswap","ksab","kpoison","pond","kframe","takeaway"].map(k=>b(k)).join("")}</div>`;
  if(S.rank>=7)h+=`<div class="rbtn"><button data-e="${i}" data-k="judge" ${dis||evG(S,v)<2?"disabled":""}>Xử tội<small>${evG(S,v)>=2?"theo chứng cứ":"cần 2 chứng cứ"}</small></button><button data-e="${i}" data-k="conf" ${dis?"disabled":""}>Tịch thu trang sức<small>nàng thù -20</small></button><button data-e="${i}" data-k="reward" ${dis||S.bac<30?"disabled":""}>Ban thưởng<small>Bạc -30 · thân +20</small></button>${v.confined?`<button data-e="${i}" data-k="pardon" ${dis?"disabled":""}>Ân xá<small>hết cấm túc</small></button>`:""}</div>`;
  return h}
 function renderPanel(){try{renderPanel0()}catch(e){console.error(e);const el=$("panel");el.innerHTML=`<p class="past">Mục này đang lỗi, ngươi chọn mục khác.</p>`}}
 function renderPanel0(){const el=$("panel");let h="";faceInit();const gm=document.querySelector(".game");if(gm)gm.classList.toggle("cardtab",["rv","kid","staff","court","men"].includes(tab));
- if(tab==="act"){const pr=S.preg?`${S.hidden?"Đang giấu thai":"Mang thai"} tháng ${S.preg}${S.preg<=3||S.preg>=7?" · tháng hiểm":""}`:`Có thai mỗi lần thị tẩm: <b>${word(conceiveCh())}</b>`;
+ if(tab==="act"){const pr=S.preg?`${S.hidden?"Đang giấu thai":"Mang thai"} tháng ${S.preg}${S.preg<=3||S.preg>=7?" · tháng hiểm":""}`:`Có thai mỗi lần thị tẩm: <b>${chanceLvl(conceiveCh())}</b>`;
    h=`<div class="cards">${deck.map(cardH).join("")}</div>`}
  if(tab==="go")h=mapHTML();
  if(tab==="rv")h=rvTabHTML();
@@ -40,7 +40,7 @@ function renderPanel0(){const el=$("panel");let h="";faceInit();const gm=documen
  if(tab==="story"){const s=STORY[S.origin.k];if(s.calc)S.st.step=s.calc();
    h=`<div class="story"><h3>${s.t}</h3><p style="margin:0 0 4px">${s.goal}</p><p style="margin:0">Bước <b>${S.st.step}/${s.n}</b> · ${S.st.done===1?`<span class="g">Thành: ${S.st.tag}</span>`:S.st.done===-1?`<span class="r">Bại: ${S.st.tag}</span>`:s.hint()}</p></div>`;
    const c=(ok,t)=>`<span class="${ok?"y":"n"}">${ok?"✓":"✗"} ${t}</span>`;
-   h+=S.rank>=7?`<div class="req"><h3>Ngươi là Hoàng hậu</h3>Đưa con mình lên ngôi để thành Hoàng thái hậu.</div>`:`<div class="req"><h3>Điều kiện sắc phong ${RANKS[S.rank+1].n}</h3>${promoReq().map(([ok,t])=>c(ok,t)).join("<br>")}<br><span class="past">Ngôi Hoàng hậu về sau cần: ngôi bỏ trống, có hoàng tử và Thái hậu ${BAL.hhTh} (không con trai: Thái hậu ${has("hieuthao")?BAL.hhThNoSonHieu:BAL.hhThNoSon}), và <b class="${S.duc>=hhNeed(S).duc?"g":"r"}">Đức ${S.duc}/${hhNeed(S).duc}</b> (mẹ Thái tử: ${BAL.hhDucHeir}). Khi ngôi trống, Hoàng thượng chọn trong những người đủ điều kiện (nặng ở hoàng tử, Thái hậu, Danh).</span><br><span class="past">Đủ điều kiện thì cuối tháng có thánh chỉ. Sinh hoàng tử được thăng thêm một bậc.</span></div>`}
+   h+=S.rank>=7?`<div class="req"><h3>Ngươi là Hoàng hậu</h3>Đưa con mình lên ngôi để thành Hoàng thái hậu.</div>`:`<div class="req"><h3>Điều kiện sắc phong ${RANKS[S.rank+1].n}</h3>${promoReq().map(([ok,t])=>c(ok,t)).join("<br>")}<br><span class="past">Ngôi Hoàng hậu về sau cần: ngôi bỏ trống, có hoàng tử và Thái hậu ${BAL.hhTh} (không con trai: Thái hậu ${has("hieuthao")?BAL.hhThNoSonHieu:BAL.hhThNoSon}), và <b class="${S.duc>=hhNeed(S).duc?"g":"r"}">Đức ${S.duc} (cần ${hhNeed(S).duc})</b> (mẹ Thái tử chỉ cần ${BAL.hhDucHeir}). Khi ngôi trống, Hoàng thượng chọn trong những người đủ điều kiện (nặng ở hoàng tử, Thái hậu, Danh).</span><br><span class="past">Đủ điều kiện thì cuối tháng có thánh chỉ. Sinh hoàng tử được thăng thêm một bậc.</span></div>`}
  if(tab==="inv")h=invHTML();
  if(tab==="rel")h=relHTML();
  if(tab==="staff")h=staffTabHTML();

@@ -11,7 +11,7 @@
    The friend = one rival entry {id:<her pid>, coop:true} built from her P (consort), or, while she serves as a cung nữ,
    one servant {sid:<her pid>, coop:true} in her mistress's staff. Her rows (sung, danh, Thiện cảm …) changed by my acts are
    written back into P[friend].S, so the server's 3-way merge adds my deltas to hers.
-   Week: "Qua đêm" runs endTurn() locally (friend entry taken out; on the guest the world-agency functions are muted so
+   Week: "Sang ngày mới" runs endTurn() locally (friend entry taken out; on the guest the world-agency functions are muted so
    world events roll once, on the host); once the week's dialogs are read, the client sends {t:"end",week,state:C} and waits
    (#next disabled; jcooplobby shows "Đợi bạn xong tuần"). The merged C comes back as {t:"week"} and the local game is rebuilt.
    Death: the normal rebirth flow (over → "Đầu thai kiếp sau" → Luân hồi card). nlRun is hooked so the new life is put into the
@@ -54,7 +54,7 @@ function buildFriend(P,mine){if(!P||!P.S||P.dead||P.S.dead)return null;const s=J
  v.__b=J(Object.assign({},...STAT.map(k=>({[k]:v[k]})),{rel:v.rel,oan:v.oan,rl:v.rl,ro:v.ro,em:v.evm.me,out:v.out,rank:v.rank}));
  return v}
 function buildFriendSrv(P){const s=P.S;return {sid:fp(),coop:true,name:P.name||s.name,role:"maid",fc:s.fc,fk:s.fk,face:0,hue:0,age:s.age||18,tr:"trung",loyal:60,
- spyFor:null,lover:null,af:{},kn:1,imp:"bạn chơi cùng",org:"bạn chơi cùng"}}
+ spyFor:null,lover:null,af:{},kn:1,imp:"hảo hữu chơi cùng",org:"hảo hữu chơi cùng"}}
 function pullFriend(){T("pull");const out=[];for(let i=rivals.length-1;i>=0;i--)if(isF(rivals[i]))out.push([i,rivals.splice(i,1)[0]]);
  for(const v of rivals)if(v.staff)for(let i=v.staff.length-1;i>=0;i--)if(isF(v.staff[i]))out.push([-1,v.staff.splice(i,1)[0],v]);return out}
 function pushFriend(L){for(const [i,v,m] of L.reverse()){if(i<0){if(m&&m.staff&&!m.staff.includes(v))m.staff.push(v)}else if(!rivals.includes(v))rivals.splice(Math.min(i,rivals.length),0,v)}}
@@ -151,9 +151,9 @@ function waiting(){const s=COOP.state;return CW.on&&(CW.sent===wk()||!!(s.ended&
 function frozen(){const s=COOP.state;return CW.on&&(s.status!=="open"||!s.peerOnline||!!CW.hold)}  /* CW.hold: the two are on different builds (swreg.js, KIT §35.2) */
 /* touch #next only when its state really changes (j63 observes every "disabled" write) */
 function lockNext(){const n=$("next");if(!n)return;const wb=CW.on&&(CW.bend||needWhere()||!!CW.pendBuoi);const lock=CW.on&&(waiting()||frozen()||CW.pend||!CW.base||wb);
- if(lock){if(!n.disabled)n.disabled=true;if(n.dataset.coopWait!=="1")n.dataset.coopWait="1";const t=wb?(CW.bend?"Đợi bạn xong buổi":"Đợi bạn"):null;if(t&&n.textContent!==t){/* keep the button's own width (the tabs beside it must not shrink): the longer words wrap inside */
+ if(lock){if(!n.disabled)n.disabled=true;if(n.dataset.coopWait!=="1")n.dataset.coopWait="1";const t=wb?(CW.bend?"Đợi hảo hữu xong buổi":"Đợi hảo hữu"):null;if(t&&n.textContent!==t){/* keep the button's own width (the tabs beside it must not shrink): the longer words wrap inside */
   if(!n.style.maxWidth&&n.offsetWidth)n.style.maxWidth=n.offsetWidth+"px";n.classList.add("kcwait");n.textContent=t}}
- else if(n.dataset.coopWait){delete n.dataset.coopWait;n.style.maxWidth="";n.classList.remove("kcwait");n.disabled=!!(S&&(S.dead||Q.length||S.mg));const t=S&&(S.buoi||0)>=(typeof B4L==="number"?B4L:2)?"Qua đêm":"Qua buổi";if(n.textContent!==t)n.textContent=t}}
+ else if(n.dataset.coopWait){delete n.dataset.coopWait;n.style.maxWidth="";n.classList.remove("kcwait");n.disabled=!!(S&&(S.dead||Q.length||S.mg));const t=S&&(S.buoi||0)>=(typeof B4L==="number"?B4L:2)?"Sang ngày mới":"Sang buổi";if(n.textContent!==t)n.textContent=t}}
 /* ---------- phase 2 (PROTOCOL §9): same buổi, same place, acts between the two ---------- */
 Object.assign(CW,{bend:false,whereKey:"",lastWhere:null,fpos:null,posKey:"",p2:true,allow:false,acts:{}});
 const bkey=()=>wk()+":"+((S&&S.buoi)||0);
@@ -226,8 +226,8 @@ function sendRes(v,k,b0,txt,id){const b1=fsnap(v);const fx={};for(const x of DK)
 const seenIds=new Set();
 function onAct(m){if(!CW.on||m.from===CW.seat||!S||S.dead||seenIds.has(m.id))return;seenIds.add(m.id);if(m.mode!=="invite")return;
  const what=m.k==="gift"?`muốn tặng ngươi ${esc(m.item||"một món quà")}`:`muốn kết giao với ngươi`;
- pushModal({t:"Bạn tìm đến",h:`<p><b>${esc(m.who)}</b> ${what}.</p>`,opts:[
-  {n:"Nhận",fx:{},x:"bạn tiếp tục việc ấy",go:()=>COOP.send({t:"actr",id:m.id,ok:true,k:m.k})},
+ pushModal({t:"Hảo hữu tìm đến",h:`<p><b>${esc(m.who)}</b> ${what}.</p>`,opts:[
+  {n:"Nhận",fx:{},x:"hảo hữu tiếp tục việc ấy",go:()=>COOP.send({t:"actr",id:m.id,ok:true,k:m.k})},
   {n:"Từ chối",fx:{},x:"không nhận",go:()=>COOP.send({t:"actr",id:m.id,ok:false,k:m.k})}]});showModal();render()}
 function onRes(m){if(!CW.on||m.from===CW.seat||!S||seenIds.has("r"+m.id))return;seenIds.add("r"+m.id);COOP.send({t:"actr",id:m.id,ok:true,ack:1});if(S.dead)return;
  const fx={};for(const k in m.fx||{})if(DK.includes(k)&&typeof m.fx[k]==="number")fx[k]=m.fx[k];const g=m.flags||{},fpid=fp();
@@ -239,11 +239,11 @@ function onRes(m){if(!CW.on||m.from===CW.seat||!S||seenIds.has("r"+m.id))return;
  const note=m.seen?`<p>${who}</p>${m.seen==="named"&&m.txt?`<p class="past">${esc(m.txt)}</p>`:""}${Object.keys(fx).length?`<p>${fmt(fx)}</p>`:""}`:"";
  if(g.dead){if(note)pushModal({t:"Biến cố",h:note});try{die(m.seen==="named"?`Bị ${m.who} hại`:"Bị kẻ gian hãm hại")}catch(e){console.error(e)}return}
  if(g.cold){try{cold(m.seen==="named"?`Bị ${m.who} hại, đày vào lãnh cung`:"Bị vu hại, đày vào lãnh cung")}catch(e){console.error(e)}}
- if(note){pushModal({t:m.seen==="named"?"Bạn ra tay":"Biến cố",h:note});showModal()}render()}
+ if(note){pushModal({t:m.seen==="named"?"Hảo hữu ra tay":"Biến cố",h:note});showModal()}render()}
 function onActr(m){if(!CW.on||m.from===CW.seat||m.ack)return;const a=CW.acts[m.id];delete CW.acts[m.id];if(!a)return;const v=RV(a.v);
- if(!m.ok||!v||!v.alive){pushModal({t:"Bạn từ chối",h:`<p><b>${esc(friendName())}</b> không nhận.</p>`});showModal();render();return}
+ if(!m.ok||!v||!v.alive){pushModal({t:"Hảo hữu từ chối",h:`<p><b>${esc(friendName())}</b> không nhận.</p>`});showModal();render();return}
  CW.inv=m.id;let r="";try{r=runAct(S,v,a.k,a.extra)}finally{CW.inv=false}if(r)log(r);
- pushModal({t:"Bạn nhận lời",h:`<p>${r||"Bạn đã nhận."}</p>`});showModal();render()}
+ pushModal({t:"Hảo hữu nhận lời",h:`<p>${r||"Hảo hữu đã nhận."}</p>`});showModal();render()}
 COOP.on("act",onAct);COOP.on("res",onRes);COOP.on("actr",onActr);
 /* the week's end goes out once her dialogs are read: checked after each render / presence change (event-driven) */
 let tryT=0;function tryEnd(){tryT=0;if(CW.on&&CW.pendBuoi&&S&&!Q.length&&!S.mg){onBuoi(CW.pendBuoi);return}if(CW.on&&S&&CW.pend&&!Q.length&&!S.mg&&!S.dead&&!frozen())sendEnd()}
@@ -254,7 +254,7 @@ function newsHTML(){const P=CW.base&&CW.base.P&&CW.base.P[CW.seat];if(!CW.mine||
  const L=[];for(const k in CW.mine){if(k==="rank")continue;const d=(S[k]||0)-(CW.mine[k]||0);if(d)L.push(`${(typeof NAMES==="object"&&NAMES[k])||k} ${d>0?"+":""}${d}`)}
  return L.length?`<p>Trong tuần, chuyện bên ${esc(friendName())} và trong cung khiến ngươi: <b>${L.join(", ")}</b>.</p>`:""}
 function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
-function friendName(){const P=CW.base&&CW.base.P&&CW.base.P[fs()];return P?(P.name||(P.S&&P.S.name)||"bạn"):"bạn"}
+function friendName(){const P=CW.base&&CW.base.P&&CW.base.P[fs()];return P?(P.name||(P.S&&P.S.name)||"hảo hữu"):"hảo hữu"}
 function worldNews(C){if(host())return"";const n=C.W&&C.W.S&&C.W.S.cnews;if(!n||!n.h)return"";
  return String(n.h).split(/(?<=\.\s|<\/span>\s?|<\/b>\s?)/).filter(x=>x.trim()&&!/gươi/.test(x)).join(" ")}
 function onWeek(m){T("week");if(!CW.on||!m.state)return;const C=m.state;CW.base=J(C);CW.pend=false;
@@ -272,7 +272,7 @@ function onState(m){T("state");if(!CW.on||!m.state)return;const C=m.state;
  /* the friend's character changed (first character / reborn): keep my week, take the new base and her new entry */
  const had=CW.base;CW.base=J(C);if(had&&had.P&&had.P[CW.seat]&&C.P&&!C.P[CW.seat])CW.base.P[CW.seat]=had.P[CW.seat];
  if(S&&!S.dead&&!CW.inLife){const old=friendEntry();placeFriend(C.P[fs()]);
-  const P=C.P[fs()];if(P&&(!old||old.name!==P.name)&&!P.dead)pushModal({t:"Bạn vào cung",h:`<p>Bạn ngươi ${old?"đã đầu thai, ":"đã chọn xong thân phận, "}nay ở trong cung${friendSrv(P)?", làm cung nữ":", phong "+esc(RANKS[P.rank]?RANKS[P.rank].n:"")}. Mặt mũi, tên tuổi kiếp này ra sao, phải gặp mới biết.</p><p class="past">Muốn gặp nhau: hai người cùng đến một nơi trên Dư đồ trong cùng một buổi, rồi chạm vào người kia và chọn Chào hỏi.</p>`});
+  const P=C.P[fs()];if(P&&(!old||old.name!==P.name)&&!P.dead)pushModal({t:"Hảo hữu vào cung",h:`<p>Hảo hữu ngươi ${old?"đã đầu thai, ":"đã chọn xong thân phận, "}nay ở trong cung${friendSrv(P)?", làm cung nữ":", phong "+esc(RANKS[P.rank]?RANKS[P.rank].n:"")}. Mặt mũi, tên tuổi kiếp này ra sao, phải gặp mới biết.</p><p class="past">Muốn gặp nhau: hai người cùng đến một nơi trên Dư đồ trong cùng một buổi, rồi chạm vào người kia và chọn Chào hỏi.</p>`});
   showModal();render()}}
 function newLife(){CW.inLife=true;CW.newLife=true;try{start()}catch(e){console.error(e)}}
 function begin(d){T("begin");CW.on=true;CW.seat=d.you||COOP.state.you;const C=d.state||COOP.state.C;CW.base=C?J(C):null;CW.sent=-1;CW.pend=false;
