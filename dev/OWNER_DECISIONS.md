@@ -439,3 +439,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (12:45Z) Chân dung trẻ con (Hoàng tự) mỗi đứa zoom khác nhau → chuẩn hóa theo cỡ đầu cho MỌI họ chân dung (trẻ, công tử, cung nhân, Hoàng thượng…).
 - (12:45Z) Trẻ sơ sinh không thể có "Hiền tài". Lúc sinh chỉ có TƯ CHẤT (bẩm sinh, ẩn, chỉ lộ qua lời ladder). Văn/Võ/Đức bắt đầu gần 0, tăng qua dạy dỗ (thầy, mẹ, Hoàng thượng), nhân theo tư chất. Hiền tài suy từ Văn/Võ/Đức, chỉ xét từ 6 tuổi. Trước 6 tuổi xếp kế vị theo đích/trưởng + Hoàng thượng thương.
 - (12:50Z) Hoàng tự trong cung (con phi tần khác): phải hiện điều cả cung biết (mẹ là ai, tuổi, thứ bậc, tước, ai nuôi). Trẻ chưa gặp: hiện bóng xám trẻ con ở mọi chỗ.
+- [ ] (12:55Z) Hình Thái hậu (Tuần lục) bị cắt thẳng mất góc trái áo → vẽ nối áo, cắt lại; rà mọi hình toàn thân bị cắt thẳng ở mép.
