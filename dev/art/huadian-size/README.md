@@ -13,3 +13,7 @@ Samples (NOT batch): shrink.py removes the mark from the skin (robust 2nd-order 
 scaled about its centroid (alpha + premultiplied colour, 4x supersampled). Boxes set by hand per face (samples.py).
 Sheet: huadian-sample-sheet.jpg = https://ctm-img.victoria-tntt.workers.dev/img/huadian-sample-sheet.jpg
 Batch (after approval) would need: per-image box check (brows inside the box get eaten), fig + por, all 4 ages.
+
+## Sample 2 (owner: 0.07 too small)
+huadian-sample-sheet-2.jpg (sheet2.py) = same 6 faces, BEFORE | 0.10 | 0.09 | 0.08, marks already <= the size left untouched.
+CDN: https://ctm-img.victoria-tntt.workers.dev/img/huadian-sample-sheet-2.jpg. Waiting for the owner to pick one size; no batch.
