@@ -1037,7 +1037,7 @@ function endTurn(){
   if(S.suc<=0)return die("Bệnh nặng, không qua khỏi");
   if(S.tuan===2){ev+=monthTick();if(S.dead)return}else S.tuan++;
   if(Q.length===qStart&&roll(22))pushDil(makeDil());
-  rollWx();S.place="home";placeWhere();if(S.out)coldVisit();S.visit={k:"home",people:homePeople(),talked:false};used=0;popIdx=null;popMsg="";
+  rollWx();S.place="home";placeWhere();if(S.out)coldVisit();else S.visit={k:"home",people:homePeople(),talked:false};used=0;popIdx=null;popMsg="";
   flip();if(!S.dead)newLots();
   if(ev)Q.splice(qStart,0,{t:"Tin trong cung buổi này",kind:"news",h:`<p class="past">${when()}</p><p>${ev}</p>`});
   if(S.justCrowned){S.justCrowned=0;record("Lên ngôi Hoàng hậu");Q.unshift({t:"Mẫu nghi thiên hạ",cls:"end",who:pMe(),h:`<p>Sau ${S.year} năm trong cung, ${S.name} nhận kim sách kim ấn, lên ngôi Hoàng hậu.</p><p>Con đường còn lại: đưa một hoàng tử lên ngôi, thành Hoàng thái hậu.</p>`,btn:"Tiếp tục"})}
@@ -2064,7 +2064,7 @@ function overhear(k){const here=liveRivals(true).filter(v=>whereOf(v)===k);if(he
 /* the palace map */
 const MAPL=[["thu","dtd","tn"],["kn","vuon","ksp"],["tyv","lc","home"]];
 function mapHTMLgrid(){const W=S.where||{};const dis=k=>!walkOk(travel(S.place,k))||S.confined||S.dead||S.place===k;
- const tile=(k,n,sc,sub)=>`<button class="mtile" data-go="${k}" ${k==="home"?(S.place==="home"?"disabled":""):(dis(k)?"disabled":"")} style="${(SCIMG[sc]||k==="home")?`background-image:url(https://ctm-img.victoria-tntt.workers.dev/img/${k==="home"?"tam-cung-dem":SCIMG[sc]}.webp)`:""}"><span class="mband">${k!=="home"&&S.place!==k&&!walkOk(travel(S.place,k))?`<span class="mchip">${used>=4?"hết khắc":`đi ${travel(S.place,k)} khắc`}</span>`:""}<b>${n}</b><span>${countAt(k)?silChip(countAt(k)):"vắng"} · ${k==="home"?"không tốn khắc":travel(S.place,k)+" khắc"}</span>${sub&&k!=="home"?`<small>${sub}</small>`:""}</span></button>`;
+ const tile=(k,n,sc,sub)=>`<button class="mtile" data-go="${k}" ${k==="home"?(S.place==="home"?"disabled":""):(dis(k)?"disabled":"")} style="${(SCIMG[sc]||k==="home")?`background-image:url(https://ctm-img.victoria-tntt.workers.dev/img/${k==="home"&&sc!=="maid"?"tam-cung-dem":SCIMG[sc]}.webp)`:""}"><span class="mband">${k!=="home"&&S.place!==k&&!walkOk(travel(S.place,k))?`<span class="mchip">${used>=4?"hết khắc":`đi ${travel(S.place,k)} khắc`}</span>`:""}<b>${n}</b><span>${countAt(k)?silChip(countAt(k)):"vắng"} · ${k==="home"?"không tốn khắc":travel(S.place,k)+" khắc"}</span>${sub&&k!=="home"?`<small>${sub}</small>`:""}</span></button>`;
  let h=`<div class="ph"><span>Đi gần 1 khắc, xa 2 khắc · còn <b>${4-used}</b> ${pips(4-used)}. Đi được khi đường đi không quá số khắc còn; đến nơi hết khắc thì chỉ kịp xem ai ở đó.</span>${S.confined?`<span class="r">Cấm túc ${S.confined} tháng</span>`:""}</div><div class="pmap">`;
  for(const row of MAPL)for(const k of row){if(k==="kn"&&!qOn()){h+=`<div class="mtile off"><b>Càn Ninh cung</b><span>bỏ trống</span></div>`;continue}const P=placeOf(k);h+=tile(k,k==="home"?"Tẩm cung":P.n,P.sc,k==="home"?"không tốn việc":"")}
  h+=`</div><div class="pmap two">`+liveRivals(false).filter(v=>palaceOf(v)!=="home").map(v=>{const k="r"+v.id;return tile(k,typeof palName==="function"?palName(k):"Cung phi tần","rv","")}).filter((x,i,a)=>a.indexOf(x)===i).join("")+`</div>`;
@@ -2398,7 +2398,7 @@ function pxLoad(){if(PX.loading||PX.app||PX.failed||RM)return;PX.loading=true;
   const g=new PIXI.Graphics();g.circle(8,8,8).fill(0xffffff);PX.tex.dot=app.renderer.generateTexture(g);const e=new PIXI.Graphics();e.ellipse(10,5,10,5).fill(0xffffff);PX.tex.petal=app.renderer.generateTexture(e);
   app.ticker.add(pxTick);PX.loading=false;PX.key="";pxScene()}catch(err){PX.failed=true;PX.loading=false}}).catch(()=>{PX.failed=true;PX.loading=false})}
 function pxCap(){return innerWidth<700?60:120}
-function pxKind(){const P=placeOf(S.place),night=(S.buoi||0)===B4L,out=["vuon","lc","home"].includes(P.sc),w=S.wx?S.wx.k:"dust";
+function pxKind(){const P=placeOf(S.place),night=(S.buoi||0)===B4L,out=["vuon","lc","home","tgk","maid"].includes(P.sc),w=S.wx?S.wx.k:"dust";
  if(out){const m={petal:"petal",rain:"rain",mist:"smoke",dust:night?"fly":"dust",sun:"dust",storm:"rain",leaf:"leaf",wind:"leaf",snow:"snow",snowh:"snow",frost:"snow",snowp:"snow"}[w]||"dust";return m}
  if(P.sc==="tn")return"smoke";if(P.sc==="thu")return"dust";if(night)return"fly";return w==="rain"||w==="storm"?"rain":"dust"}
 async function pxScene(){if(!S||RM||!OPT.fxon){if(PX.app)PX.app.canvas.style.display="none";return}if(!PX.app){pxLoad();return}PX.app.canvas.style.display="";
@@ -3707,7 +3707,7 @@ function pastHTML(){const p=lifeLog();if(!p.length){const o=store.get("cung-kiep
 function themeTick(){if(!S)return;const sea=SEAK[SEASON[S.month-1]]||"ha";const f=festToday();const b=document.body;if(b.dataset.sea!==sea)b.dataset.sea=sea;const fk=f&&["newyear","trungthu","thattich","giaothua","nguyentieu"].includes(f.k)?f.k:"";if((b.dataset.fest||"")!==fk){if(fk)b.dataset.fest=fk;else delete b.dataset.fest}}
 (function(){const r0=render;render=function(){const r=r0.apply(this,arguments);try{themeTick()}catch(e){}return r}})();
 /* festival weather: gold and red sparks outdoors on Tết, Nguyên tiêu, Giao thừa; night-blue stars on Thất tịch use the fireflies */
-(function(){if(typeof pxKind!=="function")return;const k0=pxKind;pxKind=function(){const k=k0.apply(this,arguments);try{const f=festToday();const P=placeOf(S.place);if(f&&["vuon","lc","home"].includes(P.sc)){if(["newyear","giaothua","nguyentieu"].includes(f.k))return "gold";if(f.k==="thattich"||f.k==="trungthu")return "fly"}}catch(e){}return k}})();
+(function(){if(typeof pxKind!=="function")return;const k0=pxKind;pxKind=function(){const k=k0.apply(this,arguments);try{const f=festToday();const P=placeOf(S.place);if(f&&["vuon","lc","home","tgk","maid"].includes(P.sc)){if(["newyear","giaothua","nguyentieu"].includes(f.k))return "gold";if(f.k==="thattich"||f.k==="trungthu")return "fly"}}catch(e){}return k}})();
 /* ================= TRANH GHẾ: an open seat is won in a three-round contest, same for every candidate ================= */
 /* rounds: Tài nghệ (art + skill), Đức hạnh (Thái hậu's dilemma), Thế lực (backers); each 0-10, weighted by the Emperor's traits */
 const CR=["Tài nghệ","Đức hạnh","Thế lực"];
@@ -4361,8 +4361,8 @@ function srvInit(){const L=liveRivals(true);if(!L.length)return;const m=pick(L.f
   try{if(isSrv()&&(p===S||typeof p==="string"||p==null)){const k=typeof p==="string"?p:typeof place==="string"?place:place&&place.k;const h=window.placeEnterHook(S,k);if(h){if(typeof r==="boolean")return h.ok;if(r&&typeof r==="object")return Object.assign({},r,{ok:h.ok,why:h.why||r.why});return h}}}catch(e){}return r}})})();
 
 /* ---------- places and people ---------- */
-(function(){const p0=placeOf;placeOf=function(k){if(k==="tgk")return{k,n:"Tân Giả khố",d:"Nơi cung nhân bị phạt giặt giũ ngày đêm.",sc:"lc"};
- if(k==="home"&&isSrv()){const m=srvM();return{k,n:`Phòng cung nữ · ${m?palName(palaceOf(m)):""}`,d:"Dãy phòng nhỏ sau hậu điện, nơi cung nữ ăn ngủ.",sc:"home"}}return p0.apply(this,arguments)}})();
+(function(){const p0=placeOf;placeOf=function(k){if(k==="tgk")return{k,n:"Tân Giả khố",d:"Nơi cung nhân bị phạt giặt giũ ngày đêm.",sc:"tgk"};
+ if(k==="home"&&isSrv()){const m=srvM();return{k,n:`Phòng cung nữ · ${m?palName(palaceOf(m)):""}`,d:"Dãy phòng nhỏ sau hậu điện, nơi cung nữ ăn ngủ.",sc:"maid"}}return p0.apply(this,arguments)}})();
 function srvVisitOf(k){const ppl=[];let msg="";const m=srvM();const W=S.where||{};const P=(sk,o)=>ppl.push(Object.assign({kind:"srv",sk},o));
  const rvP=v=>P(v.queen?"hh":v===m?"mis":"rv",{ref:v,name:(v.queen?"Hoàng hậu ":"")+v.name,ini:v.name.split(" ").pop()[0],col:RCOL[rkOf(v)],info:`${rkName(v)}${v===m?" · chủ nhân của ngươi":""} · ${v.trait}`});
  const svP=(s,o)=>{P("sv",{ref:s,sid:s.sid,name:s.name,ini:s.name.split(" ").pop()[0],col:"#b9a48a",info:`${srkName(s)} · ${o===m?"cùng cung":o?"người của "+o.name:"Nội vụ phủ"}`});if(o!==m&&!S.srv.met.includes(s.sid))S.srv.met.push(s.sid)};
@@ -17465,12 +17465,19 @@ window.kitReward=kitReward;window.kitFlyItem=kitFlyItem;window.kitAlarm=kitAlarm
    thành tên bản mùa/buổi; KIT_FLOOR (kit-2b) được nhân bản cho tên mới để đường sàn vẫn đúng. */
 const SCN_SEAS={"Xuân":"xuan","Hạ":"ha","Thu":"thu","Đông":"dong"};
 /* SCN_VAR: bản có thật trong img/ — cảnh: "mùa-buổi …" (viết lại bằng dev/art/gen_scene_seasons.py) */
-const SCN_VAR={"duong-tam-dien":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang ha-trua ha-chieu ha-toi thu-sang thu-trua thu-chieu thu-toi dong-sang dong-trua dong-chieu dong-toi","khon-ninh-cung":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang ha-trua ha-chieu ha-toi thu-sang thu-trua thu-chieu thu-toi dong-sang dong-trua dong-chieu dong-toi","kinh-su-phong":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang ha-trua ha-chieu ha-toi thu-sang thu-trua thu-chieu thu-toi dong-sang dong-trua dong-chieu dong-toi","lanh-cung":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang ha-trua ha-chieu ha-toi thu-sang thu-trua thu-chieu thu-toi dong-sang dong-trua dong-chieu dong-toi","ngu-hoa-vien":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang ha-trua ha-chieu ha-toi thu-sang thu-trua thu-chieu thu-toi dong-sang dong-trua dong-chieu dong-toi","ngu-thu-phong":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang ha-trua ha-chieu ha-toi thu-sang thu-trua thu-chieu thu-toi dong-sang dong-trua dong-chieu dong-toi","phi-tan-cung":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang ha-trua ha-chieu ha-toi thu-sang thu-trua thu-chieu thu-toi dong-sang dong-trua dong-chieu dong-toi","tam-cung-dem":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang ha-trua ha-chieu ha-toi thu-sang thu-trua thu-chieu thu-toi dong-sang dong-trua dong-chieu dong-toi","thai-y-vien":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang ha-trua ha-chieu ha-toi thu-sang thu-trua thu-chieu thu-toi dong-sang dong-trua dong-chieu dong-toi","tu-ninh-cung":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang ha-trua ha-chieu ha-toi thu-sang thu-trua thu-chieu thu-toi dong-sang dong-trua dong-chieu dong-toi"};/*@SCN_VAR*/
+const SCN_VAR={"duong-tam-dien":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang ha-trua ha-chieu ha-toi thu-sang thu-trua thu-chieu thu-toi dong-sang dong-trua dong-chieu dong-toi","khon-ninh-cung":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang ha-trua ha-chieu ha-toi thu-sang thu-trua thu-chieu thu-toi dong-sang dong-trua dong-chieu dong-toi","kinh-su-phong":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang ha-trua ha-chieu ha-toi thu-sang thu-trua thu-chieu thu-toi dong-sang dong-trua dong-chieu dong-toi","lanh-cung":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang ha-trua ha-chieu ha-toi thu-sang thu-trua thu-chieu thu-toi dong-sang dong-trua dong-chieu dong-toi","ngu-hoa-vien":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang ha-trua ha-chieu ha-toi thu-sang thu-trua thu-chieu thu-toi dong-sang dong-trua dong-chieu dong-toi","ngu-thu-phong":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang ha-trua ha-chieu ha-toi thu-sang thu-trua thu-chieu thu-toi dong-sang dong-trua dong-chieu dong-toi","phi-tan-cung":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang ha-trua ha-chieu ha-toi thu-sang thu-trua thu-chieu thu-toi dong-sang dong-trua dong-chieu dong-toi","tam-cung-dem":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang ha-trua ha-chieu ha-toi thu-sang thu-trua thu-chieu thu-toi dong-sang dong-trua dong-chieu dong-toi","thai-y-vien":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang ha-trua ha-chieu ha-toi thu-sang thu-trua thu-chieu thu-toi dong-sang dong-trua dong-chieu dong-toi","tu-ninh-cung":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang ha-trua ha-chieu ha-toi thu-sang thu-trua thu-chieu thu-toi dong-sang dong-trua dong-chieu dong-toi","tan-gia-kho":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang ha-trua ha-chieu ha-toi thu-sang thu-trua thu-chieu thu-toi dong-sang dong-trua dong-chieu dong-toi","phong-cung-nu":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang ha-trua ha-chieu ha-toi thu-sang thu-trua thu-chieu thu-toi dong-sang dong-trua dong-chieu dong-toi"};/*@SCN_VAR*/
 const SCN_HAVE={};for(const s in SCN_VAR)for(const v of SCN_VAR[s].split(" "))if(v)SCN_HAVE[s+"-"+v]=1;
 const SCN_NEAR={sang:["sang","trua","chieu"],trua:["trua","sang","chieu"],chieu:["chieu","trua","sang"],toi:["toi"]};
 function sceneImg(base){try{if(!base||!S)return base;const se=SCN_SEAS[SEASON[(S.month||1)-1]];if(!se)return base;
  const four=typeof BUOI!=="undefined"&&BUOI.length>=4,b=S.buoi||0,bu=(four?["sang","trua","chieu","toi"]:["sang","chieu","toi"])[b]||"sang";
  for(const x of SCN_NEAR[bu]){const n=base+"-"+se+"-"+x;if(SCN_HAVE[n])return n}return base}catch(e){return base}}
+/* review/place-art (coordinator 15/11): own paintings for the two places that borrowed another place's picture.
+   Tân Giả khố (j42 placeOf sc "tgk", was the lãnh cung painting "lc") = tan-gia-kho-<mùa>-<buổi>; the maid's room (j42 placeOf "home"
+   while isSrv(), sc "maid", was her consort room tam-cung-dem) = phong-cung-nu-<mùa>-<buổi>. Floor line + open-floor anchor read from
+   the paintings (jk2b merges window.KIT_FLOOR / KIT_FANCHOR set before it). */
+if(typeof SCIMG==="object"){SCIMG.tgk="tan-gia-kho";SCIMG.maid="phong-cung-nu"}
+window.KIT_FLOOR=Object.assign(window.KIT_FLOOR||{},{"tan-gia-kho":.55,"phong-cung-nu":.6});
+window.KIT_FANCHOR=Object.assign(window.KIT_FANCHOR||{},{"tan-gia-kho":{x:.5,feet:.9},"phong-cung-nu":{x:.5,feet:.9}});
 (function(){if(typeof SCIMG!=="object")return;const BASE=Object.assign({},SCIMG),SET={};
  function sync(){try{for(const k in SCIMG){if(SET[k]!==SCIMG[k])BASE[k]=SCIMG[k]}/* chỗ khác đổi SCIMG sau này: nhận làm gốc mới */
   for(const k in BASE){const n=sceneImg(BASE[k]);SCIMG[k]=n;SET[k]=n;
@@ -21400,17 +21407,45 @@ window.KIT_SCENE_TINT=window.KIT_SCENE_TINT==null?0:window.KIT_SCENE_TINT;
    ánh tán xạ ấm nhẹ — bớt tương phản chút, sáng hơn chút, KHÔNG ngả xám/lam, KHÔNG sepia/nâu; lớp .light (z 0, DƯỚI người) phủ ánh ngà ấm rất nhẹ,
    người giữ nguyên màu (không phủ lên hình). Vệt mưa do lớp hạt j11 vẽ. Lãnh cung giữ nguyên vẻ hoang lạnh của tranh. */
 (function(){const css=document.createElement("style");css.textContent=`
-.stage.kown .scimg{filter:none!important}
-.stage.kown.rp2 .scimg{filter:saturate(1.04)!important}.stage.kown.rp3 .scimg{filter:saturate(1.07) brightness(1.02)!important}
-.stage.kown.kwet:not(.sc-lc) .scimg{filter:saturate(.97) contrast(.94) brightness(1.07)!important}
-.stage.kown.kwet.night:not(.sc-lc) .scimg{filter:saturate(.95) contrast(.95) brightness(1.01)!important}
-.stage.kown.kwet:not(.sc-lc)>.light{background:linear-gradient(rgba(255,238,210,.13),rgba(255,226,188,.08))!important}
-.stage.kown.kwet.night:not(.sc-lc)>.light{background:linear-gradient(rgba(255,214,160,.04),rgba(255,200,140,.06))!important}`;document.head.appendChild(css);
- function tag(){try{const st=$("stage");if(!st||!S)return;let own=false;try{own=/-(sang|trua|chieu|toi)$/.test(SCIMG[placeOf(S.place).sc]||"")}catch(e){}
-  st.classList.toggle("kown",own);st.classList.toggle("kwet",own&&typeof wet==="function"&&!!wet())}catch(e){}}
+.stage .scimg,.stage>.pxc{filter:var(--kscf,none)!important}
+.stage.kown:not(.kwet):not(.sc-lc)>.light{background:none!important}
+.stage.kown.kwet:not(.sc-lc)>.light{background:linear-gradient(rgba(255,234,198,.10),rgba(255,222,178,.06))!important}
+.stage.kown.kwet.night:not(.sc-lc)>.light{background:linear-gradient(rgba(255,214,160,.04),rgba(255,200,140,.05))!important}`;document.head.appendChild(css);
+ /* KIT §56.2 ONE SCENE GRADE (owner 15/11 LUẬT SỬA CẢ NHÓM: every place, not only her room). The ONLY filter on a scene picture is
+    --kscf, written here and used by BOTH backdrops: the CSS picture (.scimg) and the Pixi copy of it (.pxc canvas, which hides .scimg
+    on WebGL devices — before, every .scimg filter silently vanished there, so a phone and a no-WebGL screen showed different colours).
+    The old stacked rules of p1.html/j25 (.sc-home brightness 1.25/1.35 + sepia .12, rp1 sepia .25, rp2/rp3 saturate 1.3–1.4 + hue/sepia)
+    are overridden for EVERY picture, graded or not. Dry snow / frost (j12 lightTick: a cool rgba(200,225,255) wash) on a graded painting:
+    no wash (the winter paintings already hold their snow light; a blue-grey cast is the lãnh cung look) — the frost edge (.frost) stays.
+    Wet grade re-measured over every graded place (scan: the r9 values .97/.94/1.07 + ivory .13 took chroma −1.7 on average, −3.5 on the
+    warm chiều halls = greyer; now chroma ±0, b* +1, L* +5). Knobs: KIT_SCENE.grade(o) → filter string; o = {own, wet, night, sc, tier}. */
+ const G={dry:"none",wet:"saturate(1.05) contrast(.95) brightness(1.05)",wetNight:"saturate(1.02) contrast(.96) brightness(1.02)",
+  rp2:"saturate(1.04)",rp3:"saturate(1.07) brightness(1.02)"};
+ function grade(o){if(o.sc==="lc")return "none";               /* lãnh cung: the bleak painting as painted (Tân Giả khố has its own painting, sc "tgk", graded like the others) */
+  if(o.own&&o.wet)return o.night?G.wetNight:G.wet;
+  return o.tier===3?G.rp3:o.tier===2?G.rp2:G.dry}
+ function state(){const P=placeOf(S.place),k=S.place;let own=false,tier=-1;try{own=/-(sang|trua|chieu|toi)$/.test(SCIMG[P.sc]||"")}catch(e){}
+  if(k&&k[0]==="r"){try{const v=RV(+k.slice(1));if(v)tier=v.rank>=5?3:v.rank>=3?2:v.rank>=1?1:0}catch(e){}}
+  return {own,wet:typeof wet==="function"&&!!wet(),night:(S.buoi||0)===(typeof B4L==="number"?B4L:3),sc:P.sc,tier}}
+ window.KIT_SCENE={G,grade,state};
+ function tag(){try{const st=$("stage");if(!st||!S)return;const o=state();
+  st.classList.toggle("kown",o.own);st.classList.toggle("kwet",o.own&&o.wet);
+  const f=grade(o);if(st.style.getPropertyValue("--kscf")!==f)st.style.setProperty("--kscf",f)}catch(e){}}
  window.kitSceneTag=tag;
  if(typeof renderStage==="function"){const r2=renderStage;renderStage=function(){const r=r2.apply(this,arguments);tag();return r}}
  if(typeof lightTick==="function"){const l0=lightTick;lightTick=function(){const r=l0.apply(this,arguments);tag();return r}}})();
+/* ---- KIT §56.4 LIFE-STATE PLACE (coordinator 15/11: a lãnh cung save showed Ngọc Thanh các on the stage) ----
+   The stage picture follows S.place. Two life states pin her to one place, whatever path set S.place:
+   · in lãnh cung (S.out): Lãnh cung. A new day (j3) leaves S.visit.k="home" after coldVisit, so a reload (deser) put her back "home"
+     = her old palace picture; any later S.place="home" did the same. → coldVisit() (place lc + the fallen consorts with her).
+   · a maid serving punishment in Tân Giả khố (S.srv.lau>0): Tân Giả khố (j42 forced it only on goTo).
+   Checked before every render/renderStage, so old saves are right on load. Promotion (S.pal) only renames "home": same room picture. */
+(function(){function lifePlace(){try{if(typeof S!=="object"||!S||S.dead)return;
+  if(S.out){if(S.place!=="lc"||!S.visit||S.visit.k!=="lc"){if(typeof coldVisit==="function")coldVisit();else{S.place="lc";S.visit={k:"lc",people:[],talked:false}}}}
+  else if(typeof isSrv==="function"&&isSrv()&&S.srv.lau>0&&(S.place!=="tgk"||!S.visit||S.visit.k!=="tgk")){S.place="tgk";if(typeof srvVisitOf==="function")S.visit=srvVisitOf("tgk")}}catch(e){}}
+ window.kitLifePlace=lifePlace;
+ if(typeof render==="function"){const f0=render;render=function(){lifePlace();return f0.apply(this,arguments)}}
+ if(typeof renderStage==="function"){const f1=renderStage;renderStage=function(){lifePlace();return f1.apply(this,arguments)}}})();
 /* ---- TUẦN LỤC: WIDE FIGURES (owner 13:45Z Thái hậu cut by the column; 03:55Z ONE figure scale: full body ≈85–90 % of picture
    height, NEVER shrink to fit) — KIT §56.3 ----
    The person page (.kbk-person.kbk-full) gives the figure a fixed column --porf sized for a normal standing figure. A wider figure
@@ -23833,7 +23868,7 @@ window.petcOpen=petcOpen;window.petStage=petStage;window.petcGrow=petcGrow;
    MIDDLE = one info box (walk khắc, khắc left, people, opening hours, the rule / reason lines); BOTTOM = the buttons by the shared rule.
    Vertical on every size (owner 08:58Z replaced "picture left / info right"). */
 function kitPlaceArt(k){try{if(typeof scnSync==="function")scnSync();
- if(k==="home"){const f=typeof sceneImg==="function"?sceneImg("tam-cung-dem"):"tam-cung-dem";return{src:`https://ctm-img.victoria-tntt.workers.dev/img/${f}.webp`,label:placeOf(k).n}}
+ if(k==="home"&&placeOf(k).sc!=="maid"){const f=typeof sceneImg==="function"?sceneImg("tam-cung-dem"):"tam-cung-dem";return{src:`https://ctm-img.victoria-tntt.workers.dev/img/${f}.webp`,label:placeOf(k).n}}
  const P=placeOf(k);const f=SCIMG[P.sc]||SCIMG.rv;return f?{src:`https://ctm-img.victoria-tntt.workers.dev/img/${f}.webp`,label:P.n}:null}catch(e){return null}}
 function kitPlaceHours(k){if(typeof ACC_DAY!=="undefined"&&ACC_DAY[k])return"mở cửa sáng, chiều";if(k==="tn")return"tiếp lúc sáng thỉnh an";
  if(k==="kn")return"sáng thỉnh an, lúc khác phải được mời";if(k==="dtd"||k==="thu")return"chỉ vào khi được triệu";return""}
@@ -27922,7 +27957,7 @@ window.kitPhTone=kitPhTone;window.KIT_PH=KIT_PH;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="9530a955c6d0";window.CTM_BUILD=BUILD;
+const BUILD="8d0c965420ea";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
