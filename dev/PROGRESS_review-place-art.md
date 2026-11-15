@@ -27,7 +27,7 @@ Run: `python3 dev/art/scene-night.py <src dir> <out> khon-ninh-cung-xuan-toi:31 
 - Sheets: dev/review/place-art/sheet-tan-gia-kho.jpg, sheet-phong-cung-nu.jpg.
 
 ## Data wiring (SẴN SÀNG KIỂM)
-- dev/test/life-place.js expectations updated (maid room → phong-cung-nu-*, Tân Giả khố → tan-gia-kho-*): ALL OK, 0 page errors at 755x1000, 1000x755 (others: see report).
+- dev/test/life-place.js expectations updated (maid room → phong-cung-nu-*, Tân Giả khố → tan-gia-kho-*): ALL OK, 0 page errors at 755x1000, 1000x755, 1180x820, 1366x1024, 844x390.
 - dev/build/j42.js placeOf: tgk sc "lc" → "tgk"; maid "home" (isSrv) sc "home" → "maid".
 - dev/build/j94.js: SCIMG.tgk="tan-gia-kho", SCIMG.maid="phong-cung-nu" (j94 sceneImg picks <name>-<mùa>-<buổi>); KIT_FLOOR .55/.6 and
   KIT_FANCHOR {x:.5,feet:.9} for both (jk2b merges window.* presets); SCN_VAR regenerated (12 scenes × 16) by dev/art/gen_scene_seasons.py
