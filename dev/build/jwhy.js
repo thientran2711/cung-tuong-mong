@@ -8,7 +8,7 @@
       has one (a.why / ACT[k].why); otherwise the real formula is re-evaluated with each stat set to a neutral value, so the
       list is always the formula's own inputs. KIT.md §11.1. ================= */
 /* spy knobs (balance: the average odds over all consort pairs stays where oSpy+sentPen had it; dev/test/act-audit.js --spy) */
-Object.assign(BAL,{spyBase:58,spyMat:6,spySent:12,spyNoAgent:20,spyKnow:10,spyCnv:6});
+Object.assign(BAL,{spyBase:58,spyMat:6,spySent:0,spyNoAgent:20,spyKnow:10,spyCnv:6});
 const WHYSTEP=12;/* ≈ one ladder step (31/46/56/66/81/91) */
 function whyStep(pts){const a=Math.abs(pts);if(a<1)return"";const n=Math.round(a/WHYSTEP);return `${pts>0?"dễ hơn":"khó hơn"}${n>=1?` ${n} bậc`:" chút"}`}
 function whyNm(p){if(!p)return"";if(p===S)return"ngươi";const q=p.queen?"Hoàng hậu":"";return q||p.name||""}

@@ -32,7 +32,7 @@ function aaFallenT(){const L=liveRivals(true);if(!L.length)return null;const d=v
  const v=typeof J78==="object"&&J78.cardV;if(!v||!S||v===S||together(S,v)||["accuse","vp","gift","steal","road","takeaway"].includes(k))return h;const sv=bestSent(S);
  const tin=s=>s?String(h).replace(/thành: ([^·]+)/,(m,x)=>`thành: ${x.trim()}, Chủ tin với ${s.name} +3 `):h;/* runAct → servMerit(sv,2) → tinAdd 1.5×2 */
  if(["ally","spy"].includes(k))return tin(sv);
- h=tin(sv);const r=confessRisk(sv);return h+` · kèm: ${sv?`${sv.name} được sai đi`:"người được sai"} bị bắt thì khai ra ngươi (nàng nắm 1 chứng cứ), có khi bị đánh chết: ${word(r)}`}catch(e){}return h}})();
+ h=tin(sv);const r=confessRisk(sv);return h+` · kèm: ${sv?`${sv.name} được sai đi`:"người được sai"} bị bắt thì khai ra ngươi (nàng nắm 1 chứng cứ), có khi bị đánh chết: ${typeof chanceW==="function"?chanceW(r):word(r)}`}catch(e){}return h}})();
 
 /* 4. ĐỀ BẠT (owner): she raises her own servant one tier (SRK), capped by srkMax for her rank; NPC mistresses by the same rule
    (servRanks already promotes by merit; an NPC may also đề bạt a loyal servant early, same numbers). Numbers in BAL (one source).
@@ -229,3 +229,29 @@ aaThieuLeTxt=function(host,f0){const L=leAttire(S,"",host),f=f0||L.delta;const w
 aaThieuLeApply=function(host,f0){const L=leAttire(S,"",host),f=f0||L.delta;if(!f.danh&&!f.duc&&!f.aff)return;apply({danh:f.danh,duc:f.duc});
  if(host==="th")apply({th:f.aff});else if(host==="emp")apply({sung:f.aff>0?1:(Math.round(f.aff/3)||-1)});else if(host&&host!==S)affAdd(host,S,f.aff);
  const t=aaThieuLeTxt(host,f);log(`${f.aff>0?"":'<span class="r">'}${t[0].toUpperCase()+t.slice(1)}.${f.aff>0?"":"</span>"}`)};
+
+/* 18. ONE odds pipeline (coordinator 11/15): the six acts that skipped odA now go through it, so Sức < 30, Quẻ tuần and the
+   sent-servant penalty apply to the roll, and the card (ACT.o + sentPenNow) shows the same number.
+   Ly gián, Hạ độc dần, Tố tội thật, Bóc chuyện tư tình (j30 odT) · Xin Hoàng hậu giáng (j30) · Trình Hoàng hậu (j78). */
+odT=function(a,base){return odA(a,base+(a.tamco||0)/4)};
+(function(){const card=(k,raw)=>(a,t)=>{const v=raw(a,t);if(v==null)return v;const o=odA(a,v);if(a!==S||!t||ACTX.a)return o;const p=typeof sentPenNow==="function"?sentPenNow(a,t,k):0;return p?cl(o-p,5,95):o};
+ const X=ACT.xinhh;if(X){const raw=(a,t)=>{const q=queenP();return q?30+aff(q,a)/2-aff(q,t)/2:null};X.o=card("xinhh",raw);
+  X.f=(a,t)=>{ap(a,{bac:-30});const q=queenP();const o=odA(a,raw(a,t));if(roll(o))return `Hoàng hậu nghe lời ${NM(a)}, tâu xin giáng ${NM(t)}. `+demote(t,"bị Hoàng hậu tâu giáng");affAdd(q,a,-10);return `Hoàng hậu gạt lời ${NM(a)} đi. `}}
+ const T=ACT.trinhhh;if(T){const raw=(a,t)=>{const q=queenP();return q?35+aff(q,a)/2+evG(a,t)*8:null};T.o=card("trinhhh",raw);
+  T.f=(a,t)=>{const q=queenP();const o=odA(a,raw(a,t));evA(a,t,-2);if(roll(o)){punish(t,"bị Hoàng hậu xét tội theo chứng cứ",1);affAdd(t,a,-10);return `${j78Who(a)} trình chứng cứ lên Hoàng hậu: ${j78who(t)} bị xét tội. `}affAdd(q,a,-5);return `Hoàng hậu bác chứng cứ ${j78who(a)} trình về ${j78who(t)}. `}}})();
+
+/* 19. an oán preview when the target is not chosen yet (j55 "Dò la nhà ngoại": relAdd −8 + oán +8 → oán ≈ 12.8 × her nết) */
+function pvOanAny(n){try{const vs=Object.values(PERS).map(P=>P.slight!=null?P.slight:1);const lo=Math.max(1,Math.round(n*Math.min(...vs))),hi=Math.round(n*Math.max(...vs)*Math.max(1,Math.max(...vs)));return lo===hi?`oán ta +${lo}`:`oán ta +${lo} đến +${hi}`}catch(e){return `oán ta +${Math.round(n)}`}}
+
+/* 20. "bị phạt" on cards = what punish() (j8) does: cấm túc N tháng (Hoàng thượng nóng nảy 3, nhân từ 1, thường 2);
+   a grave fault (sev 2) may instead cost one rank (nóng nảy: always, nhân từ: 1 in 4, else half the time) */
+function aaPunishTxt(sev){const m=has("nongnay")?3:has("nhantu")?1:2;return sev>=2?`bị phạt: cấm túc ${m} tháng hoặc giáng một bậc (${word(has("nongnay")?100:has("nhantu")?25:50)})`:`bị phạt: cấm túc ${m} tháng`}
+(function(){if(typeof actLineRaw!=="function")return;const a0=actLineRaw;actLineRaw=function(k){const h=a0.apply(this,arguments);if(typeof h!=="string")return h;const sev={frame:2,ksab:2,accuse:2}[k]||1;return h.replace(/bị phạt(?! ?[:(])/g,aaPunishTxt(sev))}})();
+
+/* 21. Lục rương (j2 + j78): the caught risk now carries the real numbers for this consort (relAdd −15 → thiện cảm −15, oán ta scaled
+   by her nết) and the real punishment (punish sev 1) */
+(function(){const t0=talkOpts;talkOpts=function(p){const A=t0.apply(this,arguments);try{if(p&&p.kind==="chest"&&p.ref){const v=p.ref;const i=A.findIndex(a=>a&&a.n==="Lục rương tìm chứng cứ");
+ if(i>=0)A[i]=Object.assign({},A[i],{risk:`cung nhân của nàng ta bắt gặp: ${pvRel(v,-15)}, ${aaPunishTxt(1)}`})}}catch(e){}return A}})();
+
+/* 22. servant start · Lĩnh đồ ở Nội vụ phủ: srvMeet (j42) has a hidden 1-in-4 "bắt nạt: Sức −5" — now on the card in Kèm */
+(function(){if(typeof srvCards!=="function")return;const c0=srvCards;srvCards=function(){const X=c0.apply(this,arguments);try{for(const a of X||[])if(a&&a.n==="Lĩnh đồ ở Nội vụ phủ"&&!/bắt nạt/.test(a.x||""))a.x=(a.x?a.x+" · ":"")+`kèm: bị thái giám Nội vụ phủ bắt nạt, Sức -5: ${typeof chanceW==="function"?chanceW(25):"khả năng thấp"}`}catch(e){}return X}})();
