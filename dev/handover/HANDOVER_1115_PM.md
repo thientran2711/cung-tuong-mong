@@ -321,3 +321,4 @@ Worker worktrees at /home/user/wt/<name>. Rule summaries for workers: /home/user
 - LIVE main = book-title r6 (41cdf7c3f), pushed by session 6.
 - (s7, fwd) LIVE main = book-title r6 (41cdf7c3f, ff by s6). Main-side small issues → small-bugs-3 items 9–12 (§28.1, §53 seal samples, 'Tuần' fallback 1000x755, 390x844 rotate prompt).
 - (s7) night-end READY ef0582dd5 (fwd; jne.js KIT §62) → reviewer spawned (night-end-r1).
+- (s7) placeholder-pics READY d70983bb8 (fwd; jph.js KIT §59) → reviewer spawned (placeholder-pics-r1).
