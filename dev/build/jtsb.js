@@ -44,7 +44,7 @@ const TSB_THU_W=[.6,.32,.08];
 function tsbSev(){const x=Math.random();return x<TSB_THU_W[0]?1:x<TSB_THU_W[0]+TSB_THU_W[1]?2:3}
 
 /* ---------------- defences shared by every planned harm (one rule for everyone) ---------------- */
-function tsbGuard(t){if(!t)return 0;let g=0;const w=tsbWk();if((t.tsbGuard||0)>=w)g+=25;if(tsbPetOn(t)&&tsbPetOn(t).t==="cho")g+=10;if(t===S?tsbMaid(S):(t.maid&&(t.maid.loyal||0)>=70))g+=8;return g}
+function tsbGuard(t){if(!t)return 0;let g=0;const w=tsbWk();if((t.tsbGuard||0)>=w)g+=25;g+=petGuard(t);if(t===S?tsbMaid(S):(t.maid&&(t.maid.loyal||0)>=70))g+=8;return g}
 function tsbThuO(a,t){return cl(Math.round(odA(a,44+(a.tamco||0)/5+(a.mat||0)*3)-tsbGuard(t)),5,90)}
 function tsbFireO(a,t){return cl(Math.round(odA(a,46+(a.tamco||0)/5)-tsbGuard(t)),5,90)}
 
@@ -76,25 +76,7 @@ AOUT.phonghoa=["đồ cháy được trong kho nàng bị thiêu (1-2 món)","l�
 try{ACTDOM.phonghoa="Mưu kế";if(typeof ACAUGHT!=="undefined")ACAUGHT.push("phonghoa")}catch(e){}
 
 /* ---------------- 7. Thú nuôi ---------------- */
-const TSB_PET={meo:{n:"Mèo tuyết",st:"sac",sn:"Sắc",d:"lông trắng như tuyết, quấn chân chủ"},cho:{n:"Chó nhỏ lông xù",st:"tamco",sn:"Tâm cơ",d:"tinh mắt, thấy người lạ là sủa (canh cửa)"},
- hoami:{n:"Chim họa mi",st:"tai",sn:"Tài",d:"hót theo tiếng đàn, nhắc chủ luyện tập"},tho:{n:"Thỏ ngọc",st:"duc",sn:"Đức",d:"hiền lành, ai thấy cũng mềm lòng"}};
-const TSB_PETK=Object.keys(TSB_PET),TSB_PET_PR=60,TSB_PET_MAX=3;
-function tsbPets(p){return (p&&p.pets)||[]}
-function tsbPetOn(p){const L=tsbPets(p);const i=p?p.petOn:-1;return i!=null&&i>=0&&L[i]?L[i]:null}
-function tsbPetBonus(p,on){/* the +1 of the following pet: applied once, removed when it stops following */const P=tsbPetOn(p);
- if(p.petB){const k=p.petB;if(p===S)S[k]=Math.max(0,(S[k]||0)-1);else p[k]=Math.max(0,(p[k]||0)-1);p.petB=null}
- if(on&&P){const k=TSB_PET[P.t].st;if(p===S)S[k]=(S[k]||0)+1;else p[k]=(p[k]||0)+1;p.petB=k}}
-function tsbPetAdd(p,t,from){p.pets=p.pets||[];if(p.pets.length>=TSB_PET_MAX)return null;const P={t,from,care:70,at:tsbWk()};p.pets.push(P);if(p.petOn==null||p.petOn<0||!tsbPetOn(p)){p.petOn=p.pets.length-1;tsbPetBonus(p,true)}return P}
-function tsbPetLose(p,i,why){const L=tsbPets(p);const P=L[i];if(!P)return"";const was=p.petOn===i;if(was)tsbPetBonus(p,false);L.splice(i,1);if(was)p.petOn=-1;else if(p.petOn>i)p.petOn--;if(was&&L.length){p.petOn=0;tsbPetBonus(p,true)}
- if(p===S)tsbLedger({what:TSB_PET[P.t].n,how:why});return TSB_PET[P.t].n}
-function tsbPetFollow(p,i){if(!tsbPets(p)[i])return;tsbPetBonus(p,false);p.petOn=i;tsbPetBonus(p,true)}
-/* the enemy's small harm: open the cage / chase the pet away (abstract) */
-A("thaopet","Thả thú nuôi của nàng đi",{c:{bac:-10},ok:(a,t)=>(a.bac||0)>=10&&tsbPets(t).length>0,o:(a,t)=>cl(Math.round(odA(a,52+(a.tamco||0)/5)-tsbGuard(t)),5,90),x:"nàng mất thú nuôi đang theo hầu",
- f:(a,t)=>{ap(a,{bac:-10});const c=caught(a,t,false,"sai người mở lồng thú nuôi của "+NM(t));if(c)return c;const o=cl(Math.round(odA(a,52+(a.tamco||0)/5)-tsbGuard(t)),5,90);
-  if(!roll(o)){const e=roll(40);if(e)evA(t,a,1);return `Kẻ lạ lảng vảng bên lồng thú nuôi của ${NM(t)} bị kẻ hầu chặn kịp, bỏ chạy${e?`; hắn khai là người của ${NM(a)} (chứng cứ +1)`:""}. `}
-  const i=tsbPets(t).indexOf(tsbPetOn(t)||tsbPets(t)[0]);const n=tsbPetLose(t,i,"bị thả đi (chưa rõ ai làm)");return `<span class="r">${tsbCap(n)} của ${NM(t)} sổng lồng chạy mất, tìm không thấy.</span> `}});
-AOUT.thaopet=["nàng mất thú nuôi đang theo hầu","kẻ hầu bắt gặp: nàng có thể nắm 1 chứng cứ"];
-try{ACTDOM.thaopet="Mưu kế"}catch(e){}
+/* (thú nuôi: dời sang jpet.js — phẩm bậc, xa xỉ, công dụng, đỡ mạng; tsbPets/tsbPetOn/thaopet/tsbPetWeek/tsbPetMonth ở đó) */
 
 /* ---------------- 9. Ép nộp của (mở rộng uyhiep j78: đòi bạc HOẶC một món thật) ---------------- */
 function tsbWant(a,t){/* the most valuable thing t really owns that a would want (equipped items count) */const tr=typeof traitsOf==="function"?traitsOf(a):[];const vain=tr.includes("Kiêu ngạo")||tr.includes("Tham lam")||tr.includes("Xa hoa");
@@ -125,7 +107,7 @@ const TSB_PLAN=["thathu","phonghoa"];
    tsbCard("tsbBul",{a:a.id,k,ix:want?want[1]:-1,n:r.n},k==="uyhiep"?"Bị uy hiếp đòi của":"Bị ép nộp của");return ""}}catch(e){console.error("tsb runAct",e)}
  return r0.apply(this,arguments)}})();
 function tsbThWeek(){const L=S.tsbTh||[];const w=tsbWk();const keep=[];for(const th of L){const a=byKey(th.a),t=byKey(th.t);if(!a||!t||a===t||(a!==S&&(!a.alive||a.out))||(t!==S&&(!t.alive||t.out))){continue}
-  if(!th.seen&&w<th.due){/* omen: the target's own eyes; she gets a card, an NPC simply guards */const see=cl(oSee(t)+(tsbPetOn(t)&&tsbPetOn(t).t==="cho"?15:0),5,95);
+  if(!th.seen&&w<th.due){/* omen: the target's own eyes; she gets a card, an NPC simply guards */const see=cl(oSee(t)+(petGuard(t)?15:0),5,95);
    if(roll(see)){th.seen=1;if(t===S){if(!Q.some(m=>m.pid==="tsbOmen"))tsbCard("tsbOmen",{k:th.k,a:th.a},"Điềm lạ quanh cung")}else t.tsbGuard=w+2}}
   if(w>=th.due){TSB.now=1;let r="";try{r=runAct(a,t,th.k)||""}catch(e){console.error(e)}finally{TSB.now=0}
    if(t===S&&r){Q.push({t:th.k==="thathu"?"Hung tin trong cung":"Hỏa hoạn",h:`<p>${r}</p>`,headArt:th.k==="phonghoa"?tsbArt("ev-hoa-hoan","Hỏa hoạn"):undefined});log(r);tsbShow()}
@@ -207,45 +189,10 @@ PEND.tsbFireW=()=>{const W=S&&S.tsbFW;if(!W)return null;const hau=W.cause==="hau
  O.push({n:"Bỏ qua",fx:{},x:`Chắc chắn · kèm: có thể cháy mất một món đồ (vải vóc, thư từ, hương liệu, lễ vật bằng gỗ, giấy)`});
  return{t:`<p>${t}</p>`,o:O,headArt:tsbPlaceArt(),title:"Đèn nến trong cung"}};
 
-/* ---------------- 7. thú nuôi: nguồn, chăm, điềm báo, mất ---------------- */
-function tsbPetWeek(){for(const p of [S].concat(liveRivals(true))){const L=tsbPets(p);if(!L.length)continue;
-  for(let i=L.length-1;i>=0;i--){const P=L[i];if(p===S){P.care=(P.care||0)-(tsbMaid(S)?4:8)}else{P.care=cl((P.care||0)-5+((p.suc||0)>30?6:0),0,100)}
-   if(p===S&&P.care<30&&!P.warn){P.warn=1;if(tsbOn()&&!Q.some(m=>m.pid==="tsbPetW"))tsbCard("tsbPetW",{i},"Thú nuôi biếng ăn")}
-   if(P.care<=0){const n=tsbPetLose(p,i,P.t==="hoami"?"bay mất vì bỏ bê":"yếu dần vì bỏ bê");if(p===S&&n)log(`<span class="r">${tsbCap(n)} của ngươi bị bỏ bê lâu ngày, ${P.t==="hoami"?"sổ lồng bay mất":"yếu dần rồi không qua khỏi"}.</span>`)}}}}
-function tsbPetMonth(){if(!S||S.dead)return;const w=tsbWk();
- if(tsbOn()&&tsbPets(S).length<TSB_PET_MAX&&(S.sung||0)>=55&&roll(7)&&!Q.some(m=>m.pid==="tsbPetGift"))tsbCard("tsbPetGift",{src:"emp",t:pick(TSB_PETK)},"Ngự ban");
- else if(tsbOn()&&tsbPets(S).length<TSB_PET_MAX&&(S.men||[]).some(m=>m.alive&&(m.tinh||0)>=50)&&roll(6)&&!Q.some(m=>m.pid==="tsbPetGift")){const m=(S.men||[]).filter(m=>m.alive&&(m.tinh||0)>=50).sort((x,y)=>y.tinh-x.tinh)[0];tsbCard("tsbPetGift",{src:"man",m:m.id,t:pick(TSB_PETK)},"Quà gửi lén")}
- for(const v of liveRivals(true)){if(tsbPets(v).length)continue;if((v.sung||0)>=55&&roll(5))tsbPetAdd(v,pick(TSB_PETK),"Hoàng thượng ban");else if((v.bac||0)>=150&&roll(3)){ap(v,{bac:-TSB_PET_PR});tsbPetAdd(v,pick(TSB_PETK),"nhờ thái giám mua")}}}
-PEND.tsbPetGift=pp=>{if(!S)return null;const T=TSB_PET[pp.t];if(!T)return null;const O=[];
- if(pp.src==="emp"){O.push({n:"Tạ ơn, nhận nuôi",fx:{},x:`Chắc chắn · thành: có ${T.n} theo hầu, ${T.sn} +1 khi nó theo · kèm: ba phi tần ghen ngươi nhất ghen +3 · (mỗi tuần phải chăm)`,go:()=>{tsbPetAdd(S,pp.t,"Hoàng thượng ban");liveRivals(true).sort((x,y)=>(y.ghen||0)-(x.ghen||0)).slice(0,3).forEach(v=>v.ghen=cl((v.ghen||0)+3,0,100));log(`<span class="g">Ngươi tạ ơn, nhận ${T.n} Hoàng thượng ban.</span>`)}});
-  O.push({n:"Xin gửi lại Ngự thú viên",fx:{},x:`Chắc chắn · thành: không ai ghen · Mất: Hoàng thượng hơi phật ý, Sủng -2`,go:()=>{apply({sung:-2});log("Ngươi xin gửi con vật lại Ngự thú viên; Hoàng thượng hơi phật ý.")}});
-  return{t:`<p>Hoàng thượng nhớ lời ngươi từng khen, sai thái giám đem đến một ${T.n.toLowerCase()} (${T.d}), ban cho ngươi nuôi.</p>`,o:O,stage:S.emp?[S.emp]:undefined,headArt:tsbArt("act-cat-ban-thuong","Ngự ban"),title:"Ngự ban"}}
- const m=typeof manById==="function"?manById(pp.m):null;if(!m)return null;const risk=typeof lộRisk==="function"?lộRisk("home"):25;
- O.push({n:"Nhận",fx:{},x:`${word(100-risk)} · thành: có ${T.n} theo hầu, ${T.sn} +1 khi nó theo · hắn vui, tình ý +5 · hỏng: có người dò ra nguồn quà, Danh -3, một phi tần nắm 1 chứng cứ của ngươi · (mỗi tuần phải chăm)`,go:()=>{tsbPetAdd(S,pp.t,`${m.name} gửi tặng`);m.tinh=cl((m.tinh||0)+5,0,100);if(!roll(100-risk)){apply({danh:-3});const v=liveRivals(true).sort((x,y)=>(y.mat||0)-(x.mat||0))[0];if(v)evA(v,S,1);log(`<span class="r">Có người dò ra ${T.n.toLowerCase()} là quà ${m.name} gửi; lời ra tiếng vào.</span>`)}else log(`Ngươi lặng lẽ nhận ${T.n.toLowerCase()} ${m.name} gửi tặng.`)}});
- O.push({n:"Trả lại",fx:{},x:`Chắc chắn · thành: giữ mình trong sạch · Mất: hắn buồn, tình ý -5`,go:()=>{m.tinh=cl((m.tinh||0)-5,0,100);log(`Ngươi trả lại món quà của ${m.name}.`)}});
- return{t:`<p>Một thái giám quen việc lén đưa đến cung ngươi một ${T.n.toLowerCase()} (${T.d}); kèm mảnh giấy ghi tên ${m.name}.</p>`,o:O,headArt:tsbArt("act-mat-thu","Quà gửi lén"),title:"Quà gửi lén"}};
-PEND.tsbPetW=pp=>{const P=tsbPets(S)[pp.i];if(!P)return null;const T=TSB_PET[P.t];const mm=tsbMaid(S);const O=[];
- O.push({n:"Tự tay chăm",fx:{},x:`Chắc chắn · tốn: 1 khắc · thành: ${T.n} khỏe lại · Sức +3 (khuây khỏa)`,need:[tsbNeedKhac(1)],go:()=>{tsbKh(1);P.care=90;P.warn=0;apply({suc:3});log(`Ngươi tự tay chăm ${T.n.toLowerCase()}; nó khỏe lại.`)}});
- if(mm)O.push({n:`Giao ${mm.name} chăm`,fx:{},x:`${word(cl(mm.loyal,5,95))} · thành: ${T.n} khỏe lại · hỏng: kẻ hầu chăm qua loa`,go:()=>{if(roll(mm.loyal)){P.care=80;P.warn=0;log(`${mm.name} chăm ${T.n.toLowerCase()} chu đáo.`)}else{P.care+=15;log(`${mm.name} chăm qua loa.`)}}});
- O.push({n:"Để sau",fx:{},x:`Chắc chắn · kèm: bỏ bê thêm vài tuần thì mất ${T.n.toLowerCase()}`});
- return{t:`<p>Mấy hôm nay ${T.n.toLowerCase()} của ngươi biếng ăn, ${P.t==="hoami"?"không hót nữa":"lông xơ xác"}.</p>`,o:O,title:"Thú nuôi biếng ăn"}};
-/* Tư trang: a "Thú nuôi" block (kit item tiles + act cards) + "Sổ đồ mất" */
-function tsbPetHTML(){if(!S||!tsbOn())return"";const L=tsbPets(S);const t1=whyTime(1);let h=`<div class="ph"><span>Thú nuôi (${L.length}/${TSB_PET_MAX})</span><span>một con theo hầu: +1 một Tư chất</span></div>`;
- if(L.length)h+=`<div class="kitems">${L.map((P,i)=>{const T=TSB_PET[P.t];return kitItem({src:"",name:T.n,grade:P.from==="Hoàng thượng ban"?2:1,label:S.petOn===i?[`Theo hầu · ${T.sn} +1`,"ok"]:[P.care<30?"Biếng ăn":"Khỏe","n"],tip:`${T.n}: ${T.d} · ${P.from}`,size:"md"})}).join("")}</div>`;
- const B=[];L.forEach((P,i)=>{const T=TSB_PET[P.t];B.push(pbtn(`data-tsb="care" data-i="${i}"`,`Chăm ${T.n.toLowerCase()}`,`Chắc chắn · tốn: 1 khắc · thành: ${T.n} khỏe · Sức +3`,t1||(P.care>=90?"đang khỏe, chưa cần chăm":"")));
-  if(S.petOn!==i)B.push(pbtn(`data-tsb="follow" data-i="${i}"`,`Cho ${T.n.toLowerCase()} theo hầu`,`Chắc chắn · thành: ${T.sn} +1 khi nó theo${tsbPetOn(S)?` · Mất: con đang theo thôi theo, ${TSB_PET[tsbPetOn(S).t].sn} -1`:""}`,""))});
- if(L.length<TSB_PET_MAX)TSB_PETK.forEach(k=>{const T=TSB_PET[k];const o=70+(S.mat||0)*3;B.push(pbtn(`data-tsb="buy" data-k="${k}"`,`Nhờ thái giám mua ${T.n.toLowerCase()}`,`${word(o)} · tốn: 1 khắc · Bạc -${TSB_PET_PR} · thành: có ${T.n} (${T.sn} +1 khi theo hầu) · hỏng: thái giám mua phải con ốm, mất bạc · (mỗi tuần phải chăm)`,t1||(S.bac<TSB_PET_PR?`cần ${TSB_PET_PR} bạc`:"")))});
- if(B.length)h+=`<div class="rbtn">${B.join("")}</div>`;
+/* Tư trang: "Thú nuôi" (jpet petHTML) + "Sổ đồ mất" */
+function tsbPetHTML(){if(!S||!tsbOn())return"";let h="";try{if(typeof petHTML==="function")h+=petHTML()}catch(e){console.error("petHTML",e)}
  const D=(S.tsbLog||[]).slice(0,8);if(D.length)h+=`<div class="ph"><span>Sổ đồ mất</span><span>ghi đúng món và nguyên do</span></div><ul class="kbul">${D.map(x=>`<li>${x.when?x.when+": ":""}<b>${x.what}</b> ${x.how}${x.by?` (${x.by})`:""}${x.cause?` · ${x.cause}`:""}${x.back?' · <span class="g">đã lấy lại</span>':""}</li>`).join("")}</ul>`;
  return h}
-(function(){if(typeof invHTML!=="function")return;const i0=invHTML;invHTML=function(){const h=i0.apply(this,arguments);try{const x=tsbPetHTML();if(!x)return h;return h+x}catch(e){console.error("tsbPetHTML",e);return h}}})();
-function tsbDo(k,b){if(!S||S.dead||Q.length)return;const i=+b.dataset.i;
- if(k==="care"){const P=tsbPets(S)[i];if(!P||!can(1))return;spend(1);P.care=95;P.warn=0;apply({suc:3});log(`Ngươi chăm ${TSB_PET[P.t].n.toLowerCase()}.`)}
- else if(k==="follow"){tsbPetFollow(S,i);log(`${TSB_PET[tsbPets(S)[i].t].n} theo hầu ngươi.`)}
- else if(k==="buy"){const t=b.dataset.k;if(!TSB_PET[t]||!can(1)||S.bac<TSB_PET_PR)return;spend(1);apply({bac:-TSB_PET_PR});if(roll(70+(S.mat||0)*3)){tsbPetAdd(S,t,"nhờ thái giám mua");log(`<span class="g">Thái giám Nội vụ phủ mua về cho ngươi một ${TSB_PET[t].n.toLowerCase()}.</span>`)}else log(`<span class="r">Thái giám mua phải con ốm, không nuôi được; mất ${TSB_PET_PR} lượng.</span>`)}
- render()}
-window.tsbDo=tsbDo;if(typeof wrapR==="function")wrapR("tsbDo",k=>({care:"Chăm thú nuôi",follow:"Cho theo hầu",buy:"Nhờ thái giám mua thú nuôi"})[k]||"");
-document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.closest("[data-tsb]");if(!b||b.disabled)return;ev.stopPropagation();window.tsbDo(b.dataset.tsb,b)},true);
 
 /* ---------------- groups: she can do the same acts (person card), NPCs pick them by the same bands ---------------- */
 (function(){try{const add=(g,k)=>{const x=RVGRP.find(r=>r[0]===g);if(x&&!x[1].includes(k))x[1].push(k)};add("Hại nhỏ","batnat");add("Hại nhỏ","thaopet");add("Hại nặng","thathu");add("Hại nặng","phonghoa");

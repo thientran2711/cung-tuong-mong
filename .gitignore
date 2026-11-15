@@ -3,3 +3,5 @@ dev/build/all.js
 __pycache__/
 __pycache__/
 dev/site/.assets-cache.json
+img/pet-*.webp
+img/pet512/
