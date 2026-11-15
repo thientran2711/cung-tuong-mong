@@ -1783,3 +1783,20 @@ Kèm + odds ladder), restored the same way from a save (`deserQ`).
 - No ring/aura around the frame (owner 11/14 late: removed); the seal alone shows the feeling.
 - Fog: stranger → nothing; known person, no fresh news → grey "?" seal; her own → always.
 - Data only through `window.kitEmotion(p)` → `{k,name,v,why,known}`; tooltip/alt "Tâm trạng: <tên> (<cause>)". Nobody draws another mood icon; no code-reshaped facial expressions (owner 22:50Z): the seal + ring are the only display of feelings.
+
+## 39. PANE = FIXED BAR + SCROLL BODY (owner 11/15, review/tabs-kit · `dev/build/jpane.js`)
+- Every tab pane is one layout: the **pane bar** (`.kpbar`) holds the page's sub-tabs (`.ksub`) and its first filter row (`.kcattabs`, Hành sự categories, Tư trang item filters, the jtabs sub-tabs); everything else is the list.
+- The bar sits flush at the top of the pane, directly under the header frame (the pane's own border is the kit gap), full width, opaque, no shadow; it never moves. The list scrolls below it and is cut off at the bar's bottom edge; nothing shows above or behind the bar (pane top padding is 0 while a bar is present). `scroll-padding-top` = bar height, so anchored scrolling stops below it.
+- Tabs keep drawing their own rows where they always did; `kitPane()` (after every panel render, on panel child changes and on resize) moves them into the bar. k3CatTabs finds its row by `data-g`, kgSub finds `.ksub` inside the bar. No other code may make a row sticky.
+- Test: `dev/test/pane-bar.js` (5 sizes, every tab, at rest and scrolled, ±1 px: bar flush, does not move, nothing above, nothing over its edge, opaque, full width; pane ends at the bottom nav).
+
+## 40. KIT TABS: SUB-TABS, SKILL HEAD, COMPACT ACT, CHECK ROWS, EMPTY STATE (owner 11/15, review/tabs-kit · `dev/build/jtabs.js`)
+- **Sub-tabs** `kitSubTabs(key,[{k,label,doable,total|n}])`: the same `.pctabs.kcattabs` row as Hành sự, count "làm được/tổng"; it goes into the pane bar (§39); the choice is remembered per tab; the first visit opens the first group with something she can do. No long single scroll of mixed cards.
+- **Skill head** `kitSkillHead({kind,k,name,level,prog,need,desc,next,acts,img})`: painted picture (64 px, `img/art-*`, `img/vir-*`), name, **kitSteps** (5 segments + "Bậc l/5"; tap = the five levels), tiến bộ bar (`.kskp`), next unlock as `kchip n "Bậc n mở"` + what it gives; acts below. Cards she can act on come first, mastered last.
+- **Compact act** `kitActCompact(attrs,name,sm,why,img)`: the normal act card (Cần/Tốn/Được rows, kaNorm) with a 40 px painted thumbnail on the left (`--kth`): the act's own painting, else the skill's picture, the category painting only as the last resort.
+- **Rules text** never as a paragraph on the page: `kitInfo(term)` = "ⓘ term" gloss (KIT_GLOSS) that opens on tap.
+- **Check rows** `kitChecks([[ok,text]])`: ✓ green / ✗ red chip + text, unmet first.
+- **Empty state** `kitEmpty(title,line)`: small painted vignette (kitInfoArt) + one short line, no paragraph.
+- **Person rows**: `kitPersonLine(p,{sub})` (portrait + name + what is owed / what is known) inside `.ktprow`, with the act for that person beside it.
+- Tài nghệ = Tứ đức · Cầm kỳ thi họa · Vũ · Y · Nữ công · Tác phẩm; Mệnh truyện = Chương này · Sắc phong · Đã qua; Việc nhờ = Đang làm · Nợ ân · Trong cung. Header numbers are `kchip`s.
+- Test: `dev/test/tabs-kit-shots.js` (5 sizes, every sub-tab: 0 errors, no horizontal overflow, no clipped card, no Thôi/Lui, sub-tabs in the pane bar).
