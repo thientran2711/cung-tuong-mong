@@ -40,7 +40,10 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
    R.newsRows={n:out.length,bad:out.filter(o=>!o.ok)}}
   /* review/face-reveal (owner 15/11 ~21:00Z): an event dialog that SHOWS her reveals her — the dialog itself draws her real face/figure,
      she counts as met, and every renderer shows her face afterwards */
-  {Q.push({t:'Có người đến',who:pv(U),stage:[U],h:'<p>Một phi tần sang chơi.</p>',opts:[{n:'Tiếp',fx:{},x:'',go:()=>{}}]});showModal();await W(900);
+  /* review face-reveal r1: an optional event that j68 evGate HOLDS (never drawn) must not reveal her */
+  {const d0=E68S.day;E68S.day=-1;Q.push({t:'Có người đến',opt:1,who:pv(U),stage:[U],h:'<p>Một phi tần sang chơi.</p>',opts:[{n:'Tiếp',fx:{},x:'',go:()=>{}}]});showModal();await W(300);
+   R.heldNoReveal={shown:!document.getElementById('modal').hidden,met:S.met[U.id]!=null,st:k61St(U)};E68S.day=d0;EVHOLD.length=0;Q.length=0;document.getElementById('modal').hidden=true}
+  {Q.push({t:'Có người đến',must:1,who:pv(U),stage:[U],h:'<p>Một phi tần sang chơi.</p>',opts:[{n:'Tiếp',fx:{},x:'',go:()=>{}}]});showModal();await W(900);
    const h=document.getElementById('modal').innerHTML;R.dialogReveal={shown:!document.getElementById('modal').hidden,face:real.some(f=>h.includes(f)),sil:/unknown-/.test(h),met:S.met[U.id]!=null,after:!/unknown-/.test(mdH(pv(U),'sm'))};
    Q.length=0;document.getElementById('modal').hidden=true;delete S.met[U.id]}
   /* met again → her face returns */

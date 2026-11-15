@@ -170,12 +170,20 @@ function k61ShownEnts(m){const L=[];if(!m||!S)return L;const add=x=>{if(!x||type
  (Array.isArray(m.stage)?m.stage:[]).forEach(add);add(m.who);add(m.who2);add(m.kit&&m.kit.subject);(Array.isArray(m.kit&&m.kit.stage)?m.kit.stage:[]).forEach(add);
  (Array.isArray(m.faces)?m.faces:[]).forEach(f=>add(f&&f[0]));return L}
 function k61NameIn(e,txt){return k61Vars(e).some(v=>txt.includes(v))}
-function k61Shown(m){try{if(!m||!S||m.__k61||!k61S())return;const E=k61ShownEnts(m);m.__k61=1;if(!E.length)return;
+/* panels she opens herself to look something up (Chứng cứ về X, Đã biết về X, Tâm trạng · X) only SHOW what she already has:
+   never a meeting (review face-reveal r1: opening the intel / evidence panel of an unmet consort made her met) */
+function k61Look(m){return !!(m&&m.kit&&m.kit.look)}
+function k61Shown(m){try{if(!m||!S||m.__k61||!k61S()||k61Look(m))return;const E=k61ShownEnts(m);m.__k61=1;if(!E.length)return;
   const txt=String((m.t||"")+" "+(m.h||"")).replace(/<[^>]+>/g," ");let w=null;try{w=m.who?k61PortEnt(m.who)||m.who.__kp||m.who:null}catch(x){}
   for(const e of E){const talk=!!(m.opts&&m.opts.length)&&e===w;const st=talk||k61NameIn(e,txt)?2:1;
    const how=k61Pub(e)?"":talk?"Người ấy đến tận nơi nói chuyện với ngươi.":"Người ấy hiện ra trước mặt ngươi.";
    if(k61St(e)<st||((rivals||[]).includes(e)&&!met61(e)))k61Meet(e,how,st)}}catch(x){console.error("k61Shown",x)}}
-(function(){const s0=showModal;showModal=function(){try{k61Shown(Q[0])}catch(e){}return s0.apply(this,arguments)}})();
+/* WHEN: only the dialog that is really drawn. j68 evGate (assembled before j61, so it runs INSIDE this wrapper) holds / drops optional
+   events from Q right before drawing; revealing Q[0] before it ran met people whose dialog never opened (review face-reveal r1). So the
+   reveal runs right after evGate; without j68 (or for an item left unrevealed) it runs here, before / after drawing. */
+(function(){if(typeof evGate==="function"){const g0=evGate;evGate=function(){const r=g0.apply(this,arguments);try{k61Shown(Q[0])}catch(e){}return r}}
+ const s0=showModal;showModal=function(){try{if(typeof evGate!=="function")k61Shown(Q[0])}catch(e){}const r=s0.apply(this,arguments);
+  try{const M=document.getElementById("modal");if(M&&!M.hidden&&Q[0]&&!Q[0].__k61)k61Shown(Q[0])}catch(e){}return r}})();
 /* old saves (cheap backfill, once): a consort the old rule named in a dialog ("… đến tận nơi nói chuyện với ngươi") was never marked met,
    so she stayed a grey silhouette; her logged line marks her met now */
 function k61Backfill(){try{if(!S||!S.known||S.k61bf)return;S.k61bf=1;const T=(S.logs||[]).map(x=>String(x).replace(/<[^>]+>/g," ")).filter(x=>/đến tận nơi nói chuyện với ngươi|tự đến gặp ngươi|tự tìm đến ngươi/.test(x));
