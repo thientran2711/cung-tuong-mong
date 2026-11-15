@@ -125,3 +125,4 @@ Nhắc theo dõi: send_later 30 phút, tự đặt lại mỗi lượt (lịch l
 - [ ] Thanh đầu trang Fold dọc vỡ: tên gãy 2 dòng, chip phẩm/tuổi bị nút nơi chốn đè, ngày gãy 3 dòng (giao review/header-fix).
 - [ ] Ân oán: người chưa gặp vẫn hiện mặt thật (phải là bóng xám, chỉ hiện tên) → kit-fig2 dùng hàm người lạ chung + rà mọi chỗ vẽ ảnh đại diện.
 - [ ] Ân oán: chọn "Ngươi" lại hiện bảng Hoàng hậu; chọn Chu Thục Nghi (là Hoàng hậu) hiện sai chân dung; ô "Đã biết" y hệt nhau, không rõ nói về ai (giao kit-fig2).
+- [x] LIVE cfd321e94 (08:30Z): naming — Cùng/Mời hảo hữu, Tuần lục, Sang buổi, Ám hiệu, Bên mình, tab Chí tôn, "ngươi"→"ta" trên giao diện.
