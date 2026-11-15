@@ -1,0 +1,61 @@
+# audit 15/11 redraws: KEY|dark|scene (no visible face; hands, feet, back view or silhouette)
+an-mac-gian-di|0|a consort's hands smoothing a plain pale silk robe with simple trim laid on a dressing table, a single plain hairpin beside it
+ba-do-bi-bat|1|a guard's armoured hand gripping the wrist of a midwife holding a cloth-covered basket at a back door of a birthing room at night
+ban-dung|1|a palace maid seen from behind kneeling on the floor of a throne hall, offering a folded note up toward the foot of a dragon throne
+ban-dung-hh|1|a palace maid seen from behind kneeling before a phoenix chair, offering up a folded note with both hands
+ban-dung-ta|1|a maid's hands passing a folded note across a table to a consort's red embroidered sleeve, candlelight
+ban-ga|0|a maid's hands in red sleeves receiving a red wedding bundle from a consort's hands, a guard's boots standing nearby
+ban-thien-ha|0|an imperial yellow sleeve pointing at a large painted landscape map scroll on a wall, a consort's pink sleeve beside it
+ban-tho-van|0|an imperial yellow sleeve and a consort's pink sleeve side by side over an open poem scroll on a desk, brush and inkstone, lamplight
+ban-tin-phat-oan|1|a maid's hand slipping a folded note through the crack of a palace door at night
+bao-cung-chinh-ti|1|lanterns carried by guards seen from behind hurrying along a dark garden path, a maid leading
+bao-dau-tim|0|a consort's hand holding a small cup of medicine tea on a bed table, a bright palace bedroom, curtains open
+bat-con-doc-sach|0|a boy prince seen from behind at a desk reading a book in a closed study room, daylight on the paper window
+bat-gap-mot-minh|1|a lone figure in rich robes seen from behind walking down an empty lantern-lit corridor at night
+bat-gap-noi-khe|1|two figures seen from behind under eaves at night, one hand hiding a small object into a sleeve
+bat-gap-sat-ben|1|two shadows standing close behind a rockery at night, the silhouettes cast on the ground
+bi-bat-gap|1|a eunuch's raised lantern lighting two long shadows behind a rockery at night
+bi-bat-gap-luc-ruong|1|a consort's hands frozen inside someone else's open clothing chest, lantern light falling across from a doorway
+bi-danh-truong|1|an empty long punishment bench and wooden staves in a stone courtyard at dusk, a eunuch's boots waiting, no blood
+bi-day-tan-gia-kho|1|rough hands in coarse cloth sleeves scrubbing laundry in wooden tubs in a grey servants' yard
+bi-duoi-ve-noi-vu|1|a maid seen from behind carrying a small bundle, led by a eunuch out of a palace gate at dusk
+bi-phat-quy|1|a maid seen from behind kneeling alone in the middle of a large stone courtyard, long evening shadows
+bi-thay-truong-mon|1|a consort seen from behind leaving a shabby gate of a deserted courtyard at dusk, a distant maid's silhouette watching
+bi-tuoc-tai-nu|1|an official's hands rolling up an award scroll and taking it away from a consort's hands, dim hall
+biet-bi-do-nha|1|a consort's hands crumpling a family letter on a desk at night, candlelight
+biet-co-thai|0|a consort's hand resting on her belly, the other on a small calendar booklet on a bright table
+biet-danh-tinh|0|a maid seen from behind whispering into a consort's ear in a sunny corridor, a distant noble lady's back far away
+biet-so-thich-ht|0|a consort's hands holding a small note beside a plate of pastries and a vase of flowers, daylight
+cam-con-gap|0|a mother's hand placing a folded letter face down before a young princess's small hands on a table
+can-gian|0|a consort seen from behind standing straight before a dragon throne where an imperial yellow sleeve rests on the armrest
+cao-benh-cho-con|0|a child's small hand on a quilt in a bed, a mother's hand holding it, bright closed room
+cha-thang-tran|0|cavalry riders seen from behind carrying victory banners through a city gate, crowds' raised arms, bright day
+cha-thua-tran|1|a torn general's banner on a frontier pass in wind and dust, soldiers seen from behind retreating at dusk
+chan-ngu-gia-thanh|0|a consort seen from behind curtsying before a stopped imperial dragon palanquin in a palace lane, a yellow sleeve lifting the curtain
+chet-trong-nguc|1|a closed prison door and a white sheet on an empty stretcher in a dark corridor, no blood
+chi-cuoi|0|a eunuch's hands folded inside his sleeves, standing still in a bright corridor
+cho-bac|0|a consort's hand placing a silver ingot into another lady's open palm
+cho-con-du-thi|0|a small child's hands bowing before an examiners' desk with paper and brushes laid out, bright hall
+chu-cang-buc|0|a mistress's sleeve flung back as she turns away, a kneeling maid's hands on the floor, daylight
+chu-nho-on|0|a mistress's hands helping a kneeling maid's hands up, warm daylight
+chu-sa-sam|0|a consort's red sleeve turned away beside an imperial yellow sleeve, a maid's hands folded behind, bright pavilion
+chua-ban-hon|0|a consort's hands closing an album of portrait paintings and setting it aside on a table
+chua-nhan-vao-phe|1|a consort's hands folded firmly in her sleeves, another lady's pleading hands reaching toward her, dim hall
+co-ke-thay-liec-mat|1|a maid's hand parting a curtain, beyond it a pond and a young man's silhouette on the far bank, dusk
+co-nguoi-thay-voi|1|two maids seen from behind with heads together whispering in a corridor, a consort's figure far away
+con-biet-me-xin|0|a young princess's small hand holding her mother's hand on a sunny veranda
+con-chi-hoi-han|0|a young prince seen from behind standing before a desk where an imperial yellow sleeve waves him off
+con-co-net|0|a child's small feet and toy ball in a sunny courtyard, a mother's skirt hem on the veranda
+con-di-tuan-bien|0|a young prince in light armour seen from behind bowing to his mother before mounting a horse at a gate
+con-noi-tot|0|a grown prince seen from behind speaking before an imperial yellow sleeve resting on a desk, bright study
+con-quy-xin-cho-me|0|a grown prince seen from behind kneeling with forehead to the floor before a dragon throne
+con-tron-tuoi|0|a child's small hands holding a birthday longevity bun before a mother's lap, bright room
+con-ve-du-yen|0|a grown prince's hand raising a wine cup at a banquet table beside an imperial yellow sleeve
+cui-chao-bai-kien|0|a consort seen from behind curtsying before an empty-looking high seat in a bright main hall of another palace
+cui-dau-tuan-lenh|0|a consort seen from behind bowing her head before a standing figure's raised imperial yellow sleeve
+cung-khong-biet-la-ai|1|two maids seen from behind watching a stranger's figure disappear down a dim corridor
+cung-nu-bi-mua-khai|1|a stranger's hand passing silver to a maid's hand behind a pillar at night
+cung-nu-hau-thay-mot-dem|0|a maid seen from behind carrying a small bundle out of a palace gate in early morning light
+cung-nu-lot-mat-xanh|0|a maid's hands in new consort sleeves receiving a jade bracelet from an imperial yellow sleeve
+cung-nu-trom-bac|1|a maid's hand stealthily lifting the lid of a silver chest at night
+da-quen-biet|0|two consorts' hands around one tea table, cups and pastries, bright pavilion
