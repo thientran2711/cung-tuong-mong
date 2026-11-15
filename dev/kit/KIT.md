@@ -38,15 +38,15 @@ Read it live: `RCOL[rank]`, or `KIT_RANK_COL[rank]` / `KIT_RANK_COL.cold` / `kit
 
 | rank | name | colour | gem (`img/kit/gem-N`) | brocade (`img/kit/bg-consort-N`) | frame (`frame-consort-N`) |
 |---|---|---|---|---|---|
-| 0 | Đáp ứng | `#8a7a6a` nâu xám | smoky brown-grey topaz, brass bezel | brown-grey taupe silk, jasmine | carved wood stained brown-grey, brass caps, plum blossom |
+| 0 | Đáp ứng | `#9c8f74` (owner 11/15; chip/text code, champagne-taupe so the 75 % ink mix reads 4.5:1) | lustrous ivory pearl / moonstone cabochon, thin silver bezel, seed pearls | warm ivory pearl silk (never pure white), tone-on-tone jasmine + faint plum | owner 11/15 option A: the ORIGINAL carved wood stained brown-grey, brass caps, plum crest (`frame-consort-0` + `crest-consort-0` unchanged) — only the ground and gem turned ivory/pearl |
 | 1 | Thường tại | `#7aa07a` xanh lục | jade, brass bezel | celadon green, plum blossom | dark green lacquer wood, silver/jade inlay, orchid |
 | 2 | Quý nhân | `#6a8aa0` xanh lam | aquamarine, silver bezel | sky blue, orchid | silver filigree, seed pearls, chrysanthemum, small tassel |
 | 3 | Tần | `#d48fa6` hồng phấn | rose quartz, silver-gold bezel | rose pink, orchid | silver + pale gold, lotus, jade insets, pearl drop |
 | 4 | Phi | `#a07ab0` tím | amethyst, silver bezel, pearls | lavender, chrysanthemum | gold filigree, peonies, coral beads |
 | 5 | Quý phi | `#c06a6a` đỏ | ruby, gold bezel | crimson, peony + clouds (gold thread) | gold, red enamel, rubies, red tassel |
-| 6 | Hoàng quý phi | `#d98a3a` cam | amber, gold bezel with phoenix wings | amber gold, phoenix feathers | gold, twin phoenixes, amber, pearls, jade disc |
+| 6 | Hoàng quý phi | `#d98a3a` cam | amber, gold bezel with phoenix wings | amber gold, phoenix feathers | (owner 11/15: clearly grander than Quý phi; NEW frame drawn on review/rank0-ivory, NOT approved/uploaded yet — live art is still the old twin-phoenix frame) two large gold phoenixes with spread wings at the top corners, wide openwork gold filigree, amber enamel + amber cabochons, pearl strings, amber peonies, large white-amber jade bi with phoenix, full orange-gold tassel |
 | 7 | Hoàng hậu | `#f0d070` vàng | imperial gold + ruby heart, phoenix crown | imperial bright yellow-gold, phoenix + peony (no red) | all-gold phoenix crest, yellow-gold enamel, gold gems, white jade bi, gold tassel (Quý phi keeps the red frame) |
-| cold | Lãnh cung | `#cfd3d8` | (none) | `bg-cold` pale grey worn silk, withered plum | `frame-cold` weathered grey wood |
+| cold | Lãnh cung | `#cfd3d8` | (none) | `bg-cold` pale grey worn silk, withered plum | `frame-cold` (owner 11/15; NEW frame drawn on review/rank0-ivory, NOT approved/uploaded yet — live art is still the old weathered grey wood) ash-grey cracked, peeling lacquer, tarnished pewter caps, BARE plum branch, cracked grey jade, dull pewter tassel |
 
 (`RCOL` values on main before j59: index 1 is still the old `#a8946a`; the frame/gem/brocade art already follows the table above.)
 
@@ -122,7 +122,7 @@ The old rank grounds `.rk-*`, the gold border and the `rank-*.webp` corner icon 
 | consort-3 Tần | rose-quartz flower | powder pink |
 | consort-4 Phi | amethyst in silver filigree | lavender |
 | consort-5 Quý phi | ruby and gold peony | crimson |
-| consort-6 Hoàng quý phi | amber and gold phoenix wing, pearls | orange-gold |
+| consort-6 Hoàng quý phi | large white-amber jade bi with gold phoenix, pearl strings, amber drops | full orange-gold |
 | consort-7 Hoàng hậu | large white jade bi disc with gold phoenix, pearl strings | long golden yellow |
 | emp | the richest: large imperial yellow dragon jade bi set in gold with rubies and pearl strings, big gold knot | long double imperial yellow tassel |
 | thaihau | very rich: white-and-lavender jade phoenix around a shou medallion, antique gold, amethysts, pearl strings | long double tassel, deep plum and gold |
@@ -134,7 +134,7 @@ The old rank grounds `.rk-*`, the gold border and the `rank-*.webp` corner icon 
 | man | round white jade disc | charcoal black |
 | royal | navy-and-gold python jade | navy and gold |
 | guard | bronze tiger tally | dark crimson |
-| cold | cracked pale grey jade | faded grey |
+| cold | cracked pale grey jade | dull faded pewter grey (owner 11/15) |
 | unknown | grey stone disc with mist | soft grey |
 | eunuch-0..3 | jade bead → silver cap → silver + knot → gold-capped jade pendant | ERCOL `#8f9a8a` `#5f8a6a` `#3f6a8a` `#7a4a3a` |
 | maid-0..4 / mama-0..4 | plain jade bead → jade flower → silver flower → silver plum blossom → gold plum blossom with pearl | MRCOL `#9aa3a8` `#5fa39a` `#4f74a8` `#a0584a` `#6a5a8e` |
@@ -486,7 +486,7 @@ Grid rows: every card in a row has the row's height (fitted to content, `grid-au
   a fact that is no longer true carries a "nay đã khác" chip. The old one-line "Đã biết: a · b" is gone.
 
 ## 17. WORDING
-Player-visible text follows dev/kit/VANPHONG.md (j84): the single confirm button reads "Đã hiểu", close reads "Lui"; dates as in section 15;
+Player-visible text follows dev/kit/VANPHONG.md (j84): a panel that only informs or closes has no button: ✕ + tap outside + Esc (32.10); dates as in section 15;
 no %, no "điểm/chỉ số", no English. Kit row labels (Cần / Tốn / Được / Mất / Kèm / Ghi chú) and tab names are read from the live UI; the kit never
 hard-codes tab labels.
 
@@ -603,7 +603,7 @@ Art: Magnific gpt-2-6, 1 style ref (face-consort-01), folder ba4aecfe…; no fac
 
 ## 27. WEEK REPORT FLIP-BOOK (j87) — `kitBook({pages,onClose})`
 The week summary (dawn) is an old ledger she turns page by page. j87 replaces the j79 week panel; "Vào ngày mới" on the closing page
-(button id `dawn-go`) closes the book and the day goes on as before. "Lui" in the bar closes it at any page.
+(button id `dawn-go`) closes the book and the day goes on as before. The ✕ at the top right (kit-x, 32.10), a tap on the ground around the book or Esc closes it at any page.
 
 Pages (data only; kitBook never takes markup for structure):
 ```js
@@ -661,6 +661,11 @@ kitBook({head:"Sổ tuần · Tháng tư · thượng tuần · năm thứ nhấ
   and shows the same cell at a smaller width (`span.md.kit.kfc`, xs 26 px · sm 38 · default 60 · big 84; aspect 550:795). No other frame
   markup exists (the old cropped `.kmini` body frame is gone). A change to the frame shows at every size.
 - Cell = canvas x 0–550, y 0–795: crest room on top, photo window, band; the pendant/tassel below is drawn only where the full canvas shows.
+- Portrait placement (owner 11/15, `dev/build/jkpor.js`, replaces the fixed 5 % raise of C1 below; the 1.14x scale is KEPT, never zoom): per por picture
+  the top of the head (first opaque row, hair ornaments included) is moved to 3 % of the window under its top edge (lift capped at 0.14 so the
+  picture still covers the window bottom; more body shows below), and the BODY (mid-point of the shoulder/chest rows, head ignored) to the
+  window centre (offset capped ±18 % of the picture, and — reviewer r6 — never so far that the picture's own painted side edge comes inside the window). Same rule in every pcPort cell and size (card, strips, header, rows). Measured on all
+  32 consorts: scale 1.14 before = after, head gap 2.9 px at a 96 px window (one capped at 8.5), body centre 0 % (before −16…+11 %).
 - Portrait cut (C1): the por picture is 1.14x the window, raised 5 % of its height and clipped to the window (head near the top edge, the
   person larger); old `face-*` art and the grey silhouette keep the plain window.
 - Crests (C2): every rank and role has its own crest on the top bar, `img/kit/crest-<key>.webp` (gpt-2-6, one style reference = the approved
@@ -669,7 +674,7 @@ kitBook({head:"Sổ tuần · Tháng tư · thượng tuần · năm thứ nhấ
   ONE top ornament per frame, never two: the small motif painted at the top centre of consort-0..5 and unknown frames was removed from the
   frame picture (corners kept) and the crest stands on the bar; frames whose painted top is already a full crest keep it and get no extra crest
   (Hoàng hậu phoenix, Hoàng thượng dragon, Thái hậu, Thái tử, HQP twin phoenixes, guard tiger, prince qilin, princess phoenix + peach, royal python,
-  official crane, physician bamboo, man jade disc, cold plum, head eunuch cloud). maid-0..4: a flower/bell spray standing ON the silk bow painted on
+  official crane, physician bamboo, man jade disc, cold bare plum, head eunuch cloud). maid-0..4: a flower/bell spray standing ON the silk bow painted on
   the maid frame (jasmine + jade bead → jade plum → silver plum + silver bell → silver plum + jade bells → gold plum + pearls); ma ma 0..4: silk
   bows on the cartouche; eunuch 0..2: jade ring above the whisk. Width grows with rank (300→432 canvas units for consorts), base on the top bar (y 172).
   Data: `KIT_CREST` {ar, base, w, key(frameUrl), html(frameUrl)}; a new role adds its crest here.
@@ -787,6 +792,25 @@ chest, Tư trang, wardrobe slots, reward chests, peddler, works, reward panels. 
   Trâm cài / Y phục chest uses the same kitInvGrid.
 - (11/15) The grid GROWS by whole rows into the panel's free height (no big empty gap at the bottom); what is left (< one row) goes to the
   equipment slots below (they grow up to 112 px). Refit on grid width / panel height change (ResizeObserver).
+### 28.13f ITEM / EQUIPMENT-SLOT CARD — compact (owner 11/15: "ĐIỀU · Ô cài tóc" far too big) — `kitSlotDress` / `kitSlotFit` (jinv)
+Every item panel (bag tile → kinvOpen / wdOpen / wdFabOpen) and every "Bên mình" slot panel (cài tóc, đeo tay, đeo eo, túi thơm, khăn che
+mặt, y phục → keqPick / wdSlotOpen) is the standard kit dialog box (`.dlg.kitslot`: kit panel width min(560 px, 100vw − 24 px), never
+taller than the person dialog 32.7 — min(100dvh − 32 px, 720 px) — only its body scrolls):
+1. TOP ROW: the small item tile LEFT (kitItem at the bag-grid tile size, 64 px; an empty slot shows its faint ghost; the grade word is not
+   repeated under it), its kit rows RIGHT (Phẩm / Được / Mất / Ghi chú) + the "Đã biết: …" chip.
+2. The info lines FULL WIDTH under that row ("Rương chưa có trâm cài nào khác.", "Nhờ thái giám mua đồ, hoặc chờ được ban thưởng."),
+   plain lines without the round fact dots or faces; the pick-a-piece row (`.keqpick`) full width too.
+3. The acts by the option rule (32.9): a short act (name + one row that does not wrap) is a cell of a 2–3 column grid; an act with two or
+   more rows (Cần / Tốn / Được / Kèm, odds) or a wrapping line is a full-width row; the short cells pack together (dense grid). Cards keep every line, sized to their content (no
+   stretched cells, no tall empty space).
+4. No "Lui": the header ✕, a tap outside, Esc (32.10).
+Test: `node dev/test/slot-card.js <build page> <outdir> <tag> [sizes]`. Shots before / after: dev/shots/kit-close/slot-before-*, slot-after-*
+(755x1000, 1000x755, 1180x820).
+### 28.13g TƯ TRANG SUB-TABS (owner 11/15) — `kinvSubHTML` (jinv)
+Tư trang opens with the ONE sub-tab control (§20 `.ksub > .ksubb`, the Hậu cung one; kept inside `.kinvsubw`, sticky at the panel top):
+**Túi đồ** (default) = the bag grid with its category chips + the "Bên mình" equipment slots, on screen without scrolling past any act ·
+**Việc** = the Tư trang acts (Nhờ thái giám mua đồ, Soát đồ, Sai cung nữ…, Chợ đen, Xin đồng minh), doable ones first (`kitDoableFirst`,
+§37.1 of review/person-acts when merged; jinv carries the same rule until then). The pick is remembered per viewer (`hclh-inv-sub`).
 ### 28.13c kitEquipSlots — "Đang mang" EQUIPMENT SLOTS (owner 11/15, RPG-style) — `dev/build/jinv.js` — KIT READY
 `kitEquipSlots({key, title, slots:[{k,label,item:{src,name,grade,tip}|null,ghost,mini}], sum, onPick:fn(slot)})` → `.keq` under the bag:
 header = kit section title + totals (Sắc/Danh chips · "Xa xỉ <total>" neutral · "N món vượt phẩm: dễ bị tố" law notice; chips wrap, never cut).
@@ -1033,7 +1057,7 @@ tam-cung-dem .68/.94, thai-y-vien .45/.9, tu-ninh-cung .5/.9. A new room adds it
 ### 31.7 kitPhoneShell (jk3 §6) — portrait screens under 1000 px wide (Fold, phones)
 Two views instead of the split: HOME = the room full screen between the slim top bar and the tab bar (stage HUD plaques on it; figures big on the
 floor; tap a person = card) · PANEL = a bottom tab opens full screen in place of the room (sub-tabs, compact picker strip, person card get the
-whole height). Back to the room: tap the active tab again, or "‹ Phòng" (kit `.btn`, top bar, only shown in PANEL view); "Qua buổi" always lands
+whole height). Back to the room: tap the active tab again, or "‹ Phòng" (kit `.btn`, top bar, only shown in PANEL view); "Sang buổi" always lands
 in the room; any code that switches tab opens the PANEL view. A card opened from the room (`#popw`) shows full screen and returns to the room.
 Result cards / events overlay as before. Classes on `.game`: `k3ph` (shell on) · `k3home` · `k3pop`. Room view measured: 686x880 670x720 (0.93) ·
 755x1000 739x867 (0.85) · 412x1058 400x860 (0.47) · 390x844 378x646 (0.59). Landscape / ≥ 1000 px keep the split (31.3).
@@ -1079,7 +1103,7 @@ to `#rtoast .ksen` (result card), `.pc .pcn` (person-card result note), kit pane
 - Court chips (Hoàng thượng / Thái hậu / Hoàng hậu / her servant): title one line (`nowrap`); the right plaque column is `max-content` (min
   `--kgw`, max 46 % of the stage) and j59 reads its real width as the gutter.
 - A card opened from the room (`#popw`) lies above the panel's sticky rows (z 12); its "✕ Lui" sits in the card's top-right corner (no lone row, 28.18).
-- Kit panel close row (`.dlg.kpanel>.mr`, "Đã hiểu") is pinned at the dialog bottom; the body scrolls under it.
+- Kit panel button row (`.dlg.kpanel>.mr`, buttons that mean something; close words are gone, 32.10) is pinned at the dialog bottom; the body scrolls under it.
 - Category tabs (31.11) stay ONE sideways row under 1000 px (the chip-list wrap rule 31.5 excludes `.kcattabs`).
 - Person info chip labels start with a capital ("Lòng 70", not "lòng").
 - A row holding several bars (servant "Lòng ▮ 78 · Chủ tin ▮ 52", `.sbar`) gives one chip per bar.
@@ -1332,14 +1356,14 @@ lock mark (`.mlock`, after the name) — no grey box over the map art, no reason
 label opens the kit option card (`j77Card`): the reason, Xin yết kiến / Xin bái kiến, Lẻn vào (odds ladder, khắc, what is lost), wait.
 WALK RULE (owner 11/15 01:35Z, `walkOk(tc)` / `walkWhy(tc)` in j9 — one rule for map, list, person-card visit/see, servant road): she may
 walk anywhere whose walk cost ≤ khắc left (never walk + 1). Arriving with 0 left is allowed: the tap first shows a kit card "Đường đi N khắc
-· đến nơi là hết buổi, chỉ kịp xem ai ở đó" (Đi / Thôi, `j77LastWalk`); she sees who is there, next buổi she starts there. A label says
+· đến nơi là hết buổi, chỉ kịp xem ai ở đó" (Đi, ✕ to stay, `j77LastWalk`); she sees who is there, next buổi she starts there. A label says
 "hết khắc" ONLY when 0 are left; a walk longer than what is left shows "đi N khắc" (+ lock mark; card reason "đi N khắc, còn M").
 WALK SPILL (owner 11/15 09:05Z, `walkSpill(k)` / `walkSpillGo(k)` in j9): a walk longer than the khắc left is NOT a dead end. The card
 says "Đi bây giờ thì đến nơi vào buổi chiều" (N and M in the 32.8 fact line) and offers "Đi (đến nơi vào buổi sau)" — "Tốn: M khắc buổi
-sáng + (N−M) khắc buổi chiều · Thành: đến nơi buổi chiều, thấy ai ở đó" — plus Thôi (no separate "Đợi buổi sau" for this case). Going
+sáng + (N−M) khắc buổi chiều · Thành: đến nơi buổi chiều, thấy ai ở đó" — plus ✕ to stay (no separate "Đợi buổi sau" for this case). Going
 spends the M khắc left, turns the buổi (normal end-of-buổi processing: NPCs move, news cards first), then pays the rest from the new
 buổi and she arrives with 4−(N−M) khắc, seeing who is there then (1 left in the morning, Thái y viện 3 khắc → 1 + 2, arrives in the
-afternoon with 2 left). Not across the night: from buổi tối the night rule stands (no spill; "Đợi sáng mai (Qua đêm)"). If the place is
+afternoon with 2 left). Not across the night: from buổi tối the night rule stands (no spill; "Sang ngày mới"). If the place is
 closed in the next buổi (e.g. Thái y viện / Ngự hoa viên at night), the card says so and offers no spill. NPCs do not pay walk costs
 (placeWhere puts them per buổi), so there is nothing to change for them. Not in co-op world mode (its own buổi turns).
 
@@ -1533,7 +1557,7 @@ the SAME large place-event frame as place event dialogs (32.6), VERTICAL on ever
 - MIDDLE = one info box `.kplinfo`: a fact line "Đường đi N khắc · Còn M khắc · K bóng người", a dim hours / entry-rule line (mở cửa sáng,
   chiều · sáng thỉnh an, lúc khác phải được mời · chỉ vào khi được triệu), then the card's own lines (reason, greeting rule, why a way in
   is closed). No empty "world" dot, no repeated "Có N bóng người ở đó" line.
-- BOTTOM = the buttons by 32.9. Waiting (owner final names): at night "Qua ngày"; in the day "Sang buổi" only when one buổi helps
+- BOTTOM = the buttons by 32.9. Waiting (owner final names 11/15): at night "Sang ngày mới"; in the day "Sang buổi" only when one buổi helps
   (not for a place that opens only in the morning); a too-long walk gets the spill button instead (34.1d).
 Not yet: the outer-court card (`menNtCard`, a kitModal rule card). Test: `node dev/test/place-card.js <url> WxH@dpr <outdir> <tag>`
 (spill, last, night, rank, etq, sneak). Shots before / after: dev/shots/place-card/ (755x1000, 1180x820, 412x1058).
@@ -1543,15 +1567,57 @@ Not yet: the outer-court card (`menNtCard`, a kitModal rule card). Test: `node d
 - All short → 2-column grid of equal buttons (3 on ≥ 1000 px with 3+); any long → each long one is a full-width row, short ones share the
   grid. If a grid cell is too narrow for its own lines (an effect value wraps, a name over two lines — e.g. 32.7 two-person column on Fold,
   phones) the group goes back to rows (`kitOptCramped`). A Q item may still force optLayout.
-- "Thôi" / "Lui" / "Để sau" / "Bỏ qua" (`kback`): compact secondary button, name only, always last; when every other option is long it is a
-  slim full row under them, otherwise a grid cell. The meaningless "Ghi chú: không được mất gì" line is gone everywhere (j63 drops it).
+- "Để sau" / "Bỏ qua" / "Không đi" (`kback`): compact secondary button, name only (rows without a number dropped), in its own place — the
+  old "Thôi always last" rule is gone (owner 11/15, 32.10): "Thôi" / "Lui" are never buttons any more, the dialog closes with its ✕. When
+  every other option is long it is a slim full row, otherwise a grid cell. The meaningless "Ghi chú: không được mất gì" line is gone everywhere (j63 drops it).
 
-### 32.10 kit-x — THE close ✕ (owner 11/15: no "Thôi" buttons anywhere; a card closes with ONE ✕ at the top right of its header) — `kitXHTML` / `kitXAdd` (jk4)
-`kitXHTML(attrs, label)` → `<button class="kit-x" aria-label="Lui">✕</button>` (VANPHONG: "Lui", not "Đóng"): 36 px square, kit ink on a cream ground, hair border,
-gold ring on focus (night: dark ground, gold ✕). `kitXAdd(dlg)` puts it into a kit panel header `.kph` at the right end — placed absolutely
-(the header keeps the height of every other dialog, the title gets 56 px of right padding) — and it closes the panel the normal way
-(#mclose click: onClose runs); the caller hides the old button row. A floating card inside a panel (shop item card) uses the same class at
-its own top right. Workers removing "Thôi" elsewhere (review/person-acts) use THIS class name `kit-x`. First user: kitShop (28.13d).
+### 32.10 CLOSING A PANEL — ONE ✕ (kit-x) + tap outside + Esc; forced panels have none (owner 11/15: "no Thôi / Lui / Đóng / Đã hiểu buttons") — `kitXHTML` / `kitXAdd` / `kitCloseSync` / `kitCloseLayer` (jk4), j3 `kitCancelIx`
+THE component — one place, every panel inherits it (#modal: event dialogs, choice cards, place cards 32.8, person cards / self / Hoàng thượng
+(pcm), info and report cards, Tư trang item and slot cards 28.13f, the shop 28.13d, title-screen pages, co-op pages; plus the week book
+kitBook, game / lesson results in #ov and the person card opened from the room #popw).
+- THE ✕: `kitXHTML(attrs, label)` → `<button class="kit-x" aria-label="Lui">✕</button>` (VANPHONG "Lui"): 36 px square, kit ink on a cream ground, hair
+  border, gold ring on focus (night: dark ground, gold ✕). ONE per panel, at the TOP RIGHT of the panel header `.kph` (placed absolutely: the
+  header keeps the height of every other dialog, the title gets 56 px of right padding). A card without `.kph` (person cards `pcm`) gets it at
+  the dialog's own top-right corner (`.kit-x.kxabs`, 8 px in); the room person card (#popw) has it as `#popx.kit-x` in the card's corner
+  (jk3 §9); the week book at the screen's top right (`.kbk > .kbk-x`); a game result at its header's right end. A floating card inside a
+  panel (shop item card) uses the same class at its own top right. `kitXAdd(dlg, close)` adds it (once) and wires it.
+- NO CLOSE-ONLY BUTTONS: a dialog option whose label is only "Thôi" / "Lui" / "Đóng" / "Đã hiểu" / "Đã rõ" and has no effect
+  (`kitCancelIx(m)`, j3) is never drawn; a card's button row word "Đã hiểu" / "Đã rõ" / "Lui" / "‹ Lui" / "Đóng" / "Xong" is hidden
+  (`data-kxw`), and an empty button row is not drawn. The old behaviour stays: ✕ runs that option through `chooseM` (its `go` and every
+  wrapper run as before) or clicks that button (`onClose` runs; title pages go home). A button that MEANS something stays
+  ("Tạ ơn", "Tuân chỉ", "Cúi đầu", "Bước vào", "Chuyển kiếp", "Đầu thai kiếp sau", "Tiếp tục", "Vào ngày mới", "Để sau", "Bỏ qua"…), and
+  so do story choices that begin with "Thôi," (they carry an outcome: "Thôi, không đào sâu" Đức +2…).
+- TAP OUTSIDE: a tap on the dimmed ground around the box closes a closable panel exactly like ✕. Only a real tap: the press must START on the
+  ground and end there, moved < 10 px, within 0.9 s — a drag or scroll that starts in the box and ends on the ground never closes, a swipe on
+  the book never closes. The room person card (docked beside the stage) closes on a tap on the empty scene (not on a person, a button or
+  a plaque). Full-screen boxes (phones) have no ground: ✕ and Esc.
+- Esc closes the top-most open closable panel (an overlay over the dialog first — book, game result — then the dialog, then the room card);
+  it runs after the panel's own key handler (title pages, the book and the podium keep theirs).
+- FORCED PANELS: a dialog with options and no close-only option (an event that must be chosen — week events, Việc khó xử, story chapters,
+  summons, the death / rebirth card, a decree to accept) has NO ✕; a tap outside and Esc do nothing. A card whose only button means
+  something (above) is forced too. `m.mustChoose:true` forces a dialog even if it carries a "Thôi". While a game runs (#ov) there is no ✕.
+- Writers: never add a "Thôi" / "Lui" / "Đóng" / "Đã hiểu" button to close; give the dialog its cancel as `{n:"Thôi", fx:{}}` (optionally
+  with `go`) or leave `btn` empty on a card — the kit turns it into ✕ + tap outside + Esc. Words: VANPHONG §1.
+- THE TAP IS SPENT ON CLOSING (owner 11/15: "the outside tap closed the result card and also ran the act under it"): a card with a dimmed
+  ground (#modal, the book, game results) closes on the ground's own click, so nothing under it fires. A card that floats WITHOUT a ground —
+  the act result card `#rtoast` (THÀNH / HỎNG / BẤT LỢI) — gets the full-screen transparent catcher `#kxcatch` (`kitCatchOn(card, close)` /
+  `kitCatchOff()`, jk4) right under it while it is open: the first tap outside closes it on release (pointerup / touchend) and every
+  event of that tap (pointerdown / touchstart / touchend / mousedown / mouseup / click) is swallowed; the catcher stays 400 ms after the
+  close to eat a late ghost click. A later floating card uses the same pair. Test: `dev/test/kit-close2.js` taps an act button's position
+  under each card kind (result, info, choice, person, shop, item; touch and mouse) and checks the card closed and khắc / Sức / Bạc / Sủng /
+  the log did not change.
+Test: `node dev/test/kit-close.js <build page> <outdir> [WxH@dpr,…] [oldsave.json]` (✕ / tap outside / Esc per panel kind, drag-to-ground
+stays open, forced dialog stays, room card, book, "Sang buổi" / "Sang ngày mới", no close words on any tab, old save loads).
+Shots: dev/shots/kit-close/ (755x1000@2, 1000x755@2, 1180x820@2, 844x390@3).
+
+### 32.11 NEWS CARD "Tin trong cung buổi này" (owner 11/15, kept: the morning news matters; the Tuần lục is only the week's summary)
+- Fires at the start of a buổi when something happened (j9 nextBuoi, j3 endTurn → the first buổi of the new tuần): title "Tin trong cung
+  buổi này", `kind:"news"` (seal TIN). The night's rest is its own line about HER: "Ta ngủ một đêm: Sức +N" (j76, her face).
+- Picture = the scene of its MAIN item (`kitNewsArtId`, jk2b): the first sentence that maps by the week book's table (j87 `KBK_EVRE`;
+  "thẻ bài … được lật" → thị tẩm; the "Tai mắt kể:" lead-in is not a scene), none → "Có người đến chơi". Never the "Triều chính" default.
+- Closes by the kit (32.10): ✕, a tap outside, Esc; no "Đã hiểu".
+- Rows name whose number moved: "Sủng của <tên> 35 → 38" (the person's face from the shared avatar renderer kitFaceH); a line with no
+  change says nothing about numbers (no "Sủng nàng 45 → 45"; j75 NPC effort / family gift lines).
 
 ## 33. ONE FIGURE SCALE · KIT_FIG (owner 11/15 "người trên sân khấu quá nhỏ"; review fold-layout r3 FAIL 1366) — `dev/build/jkit.js` (top) + j59 + jk4
 
@@ -1693,8 +1759,8 @@ Tested 755x1000@2, 1180x820@2, 1366x1024@2, 686x880@2.2, 412x1058@2, 390x844@3, 
   "Có bản mới" (gold border, small lacquer dot) on the top bar, right of her rank / age chips (under the date when that row is full; it never
   covers another part of the bar; hidden while any dialog is open). Tap → card `#kupd.kupd` (bottom centre above `#tabs`, z 9700, ≤420 px):
   `.dlg.kpanel[data-kind=notice]` + `kpHeader("notice","Có bản mới","Mở bản mới ngay?")` + `.kpnote` "Sổ đang chơi giữ nguyên, mở lại đúng chỗ.
-  Để sau thì bản mới tự mở khi ngươi qua buổi." + `.kbtn.alt` "Để sau" · `.kbtn` "Mở bản mới".
-- The new build opens by itself only at a natural break: (1) after Qua buổi / Qua đêm, once the new buổi is written and its dialogs are read
+  Để sau thì bản mới tự mở khi ngươi sang buổi." + `.kbtn.alt` "Để sau" · `.kbtn` "Mở bản mới".
+- The new build opens by itself only at a natural break: (1) after Sang buổi / Sang ngày mới, once the new buổi is written and its dialogs are read
   (not after she has spent a khắc of it); (2) when the app comes back from the background after ≥ 10 min, before she does anything; (3) on the
   title screen or the first-entry loading screen. Never during a mini game / lesson, motion moment, honour podium, week book, page turn, or a
   death screen. Then: save() → `localStorage["ctm-upd-resume"]` {slot} → reload → the new build opens the SAME sổ through the title's own
@@ -1705,7 +1771,7 @@ Tested 755x1000@2, 1180x820@2, 1366x1024@2, 686x880@2.2, 412x1058@2, 390x844@3, 
   side finding a new build → both show the chip. Both reopen at the next buổi both have passed (the room's sync point) or together on request:
   chip → card "Bạn chơi cùng sẽ được hỏi…" → the friend gets the card "Bạn muốn mở bản mới ngay" with "Để sau" · "Cùng mở". Before the reload
   `COOPW.snap()` keeps the local week; after it the lobby's own "Trở lại phòng" rejoins (same code, same seat) and `COOPW.restore()` puts the week
-  back. Line meanwhile: "Hai người cùng mở bản mới, đang vào lại phòng". Two different builds never play on: `COOPW.hold` freezes Qua buổi and the
+  back. Line meanwhile: "Hai người cùng mở bản mới, đang vào lại phòng". Two different builds never play on: `COOPW.hold` freezes Sang buổi and the
   older side walks through the same save → reload → rejoin at once.
 - Wording: "bản mới", "mở bản mới", "Để sau", "Cùng mở"; never "tải lại trang", "phiên bản", "cập nhật" (VANPHONG §3).
 
@@ -1843,7 +1909,13 @@ stranger card is not used for children (their card is drawn by jht). Old saves: 
   z-index 4 (above frame and crest), drop shadow. Giận and Đau khổ pulse softly (off with reduced motion).
 - No ring/aura around the frame (owner 11/14 late: removed); the seal alone shows the feeling.
 - Fog: stranger → nothing; known person, no fresh news → grey "?" seal; her own → always.
-- Data only through `window.kitEmotion(p)` → `{k,name,v,why,known}`; tooltip/alt "Tâm trạng: <tên> (<cause>)". Nobody draws another mood icon; no code-reshaped facial expressions (owner 22:50Z): the seal + ring are the only display of feelings.
+- Tap (owner 11/15): no visible label; TAPPING any seal (hers or an NPC's, any frame size) opens the kit popover `kpPop` (j79) with the mood
+  word + the one-line cause the game knows ("Giận: bị Hoàng hậu trách"; "Tâm trạng chưa rõ" for the grey seal); any other tap closes it; the tap
+  never also opens the card under it (capture handler in jemo). Keyboard: Enter/Space on the focused seal.
+- Art (owner 11/15 v2): same chibi lady, soft watercolour/gongbi, thin gold rim, expressions exaggerated like emoji so each mood reads at 38 px.
+- Data only through `window.kitEmotion(p)` → `{k,name,v,why,known}`; alt "Tâm trạng: <tên> (<cause>)". Nobody draws another mood icon; no code-reshaped facial expressions (owner 22:50Z): the seal + ring are the only display of feelings.
+
+- MEN wear men's seals (owner 11/15, review/emo-men): same 10 moods, same coloured grounds, gold rim and marks (Sợ: pale purple upper face + fear lines; Giận: red flushed face + anger mark). `img/kit/emo-m-<k>.webp` = young man (Hoàng thượng, thái tử/hoàng tử, công tử/nam nhân, vương gia, thái giám, thị vệ); `img/kit/emo-mo-<k>.webp` = mature man with cap and short beard (quan, thái y, any man 45+ except Hoàng thượng). Women and girls keep `img/kit/emo-<k>.webp`. ONE rule `emoArtSet(p)` in jemo (personRoleRank sex/role); art cut from 5x2 chroma sheets by `dev/art/emo_cut.py`; check: `dev/test/emo-men.js`, sheet dev/shots/emo-men/sheet.jpg.
 
 ## 39. ẤN TRÂN NỮ · kitSeal (owner 11/15, review/brand) — `dev/build/jseal.js` (after jk4)
 - Ported from Phượng Lệnh `public/choi/js/kit/seal.js`: square cinnabar seal, TRÂN over NỮ cut white into the cinnabar (bạch văn), Vietnamese
@@ -1871,3 +1943,18 @@ stranger card is not used for children (their card is drawn by jht). Old saves: 
   shoulders, in a gold band on cinnabar #8a2a1e. icons/icon-192.png, icon-512.png (purpose any, rounded tile), icon-maskable-192/512.png
   (purpose maskable, full bleed, round portrait inside the 80 % safe circle), apple-touch-icon.png 180 (opaque), favicon = dev/build/icon.webp
   (inlined) + icons/favicon-48.png. Preview: dev/shots/brand/icon-preview.png. An installed Android PWA may keep the old icon until reinstall.
+
+## 41. kitMeMark · dấu "là ngươi" (owner 11/15) — `dev/build/jmark.js` (before j84)
+- EIGHT markers, one per rank: `img/kit/me-mark-<r>.webp` (gpt-2-6, transparent, NO tassel), growing in grandeur: 0 ivory plum · 1 silver orchid +
+  green jade · 2 silver flower + aquamarine · 3 jade lotus bud · 4 amethyst chrysanthemum + luan · 5 ruby peony · 6 gold phoenix on a jade cloud ·
+  7 amber-gold phoenix with spread wings (Hoàng hậu; owner 11/15 swapped 6↔7). Size factor `KIT_MEMARK.sc[r]` (0.78 → 1.22). Sheet dev/shots/me-mark/ranks8.jpg.
+- Where: her stage figure `#mefig` (any slot) and her figure in dialogs / event stages (`kitStageFig` adds `.kesme`). Never on anyone else.
+- ONE placement rule: marker bottom = top of her head (first opaque row of the figure art, hair ornaments included) − `KIT_MEMARK.gap` (1.2 %)
+  × her drawn figure height. Measured: Fold stage 7.7 px on a 644 px figure, iPad 6.5 px, iPad dialog 6.3 px on 524 px, 390 dialog 3.8 px on
+  320 px (all = rule). Height 8.5 % of the figure × sc[r], 26–72 px; when the room above the head is short (dialog, scene title, plaques,
+  chips) it SHRINKS (down to 12 px), never covers the head or the title.
+- Motion: a gentle 3 px bob only (Cảnh động on, no reduced motion); a very faint soft shadow; no glow.
+- Items: `S.meMarks` (owned ranks), `S.meMark` (chosen; null = highest owned). Every promotion adds that rank's marker; old saves get ranks
+  0..current on load. The rank chest of review/gift-chest (`kitReward({kind:"chest",title:"Phẩm phục …"})`, jrankset `rsChest`) gets the
+  marker as one more item through a `kitReward` wrapper in jmark (no edit in jrankset). Tư trang: tab "Dấu ấn"; tap a marker → "Dùng"
+  (`kitMeMarkUse(r)`), any owned one, older ones too. Servant road: none until she becomes a consort.
