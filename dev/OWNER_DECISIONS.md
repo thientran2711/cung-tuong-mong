@@ -694,3 +694,6 @@ All must work in co-op.
 - Checked: Kỳ (cờ) exists as an art (ARTS: Cầm, Kỳ, Thi, Họa, Vũ, Y thuật & điều hương) and as a work kind (Cờ).
 - EVERY art / work kind must have exactly 4 sub-styles (recipes branch has some with 3 → add a 4th).
 - Công · Dung · Ngôn · Hạnh (j85) must ALSO have 4 sub-styles each, learnt and valued the same way (tastes/trọng, teachers, level-up unlocks).
+
+## 15/11 ~22:00Z — Sounds: no owner approval (owner)
+- Game sounds go straight into the game; do NOT send them to the owner for listening/approval. Coordinator + workers judge by measurement and by meaning-mapping; owner reports anything she dislikes while playing.
