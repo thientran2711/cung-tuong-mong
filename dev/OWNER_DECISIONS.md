@@ -614,3 +614,9 @@ BALANCE / SYSTEMS:
 
 ## 15/11 ~20:10Z — Her own name (owner)
 - Rank-title look: HER character's name is black ink with a soft light-gold glow/outline, so she can instantly tell which name is hers. Other people's names stay plain black (paper halo on stage only for readability).
+
+## 15/11 ~20:15Z — Calendar ideas, Trân nữ seal on event frames, rosy skin mismatch (owner)
+- Calendar: owner asked for more ideas to make it useful → coordinator listed ideas (below); per owner rule, build them without waiting.
+  Ideas: (a) her own days: birthday, Emperor's/Thái hậu's/Hoàng hậu's birthdays (Vạn thọ/Thánh thọ/Thiên thu) with gift reminders; (b) stipend day, Nội vụ phủ issue days, monthly thái y visit if built; (c) KNOWN deadlines: exam/khảo hạch dates, tuyển tú year, pregnancy due month, children's birthdays and school exams, pet growth; (d) "sổ hẹn": acts she schedules ahead (send a gift on day X, visit someone) + reminder the day before; (e) prep checklist per festival (what contest, what art/item to prepare, ready ✓/✗ from her inventory and art levels); (f) lucky/unlucky days from the weekly quẻ (only known ones); (g) weather forecast for the coming tuần if she has the right servant/skill; (h) tap a day → past log of what happened that day (memory); (i) moon phases (rằm/mùng một) for rites; (j) co-op: the friend's important days visible too.
+- Event dialog frames: add the Trân nữ seal (kitSeal "TRÂN NỮ" stamp) in a corner of every event frame.
+- Rosy skin: some consorts' faces are now rosier than their hands (mismatch) → hands/neck/arms must match the face tone (whole class audit). Player look 1 (fig-player-look1) still does not look rosy → fix. Owner marked Ngọc Lan (maid) as the liked reference.
