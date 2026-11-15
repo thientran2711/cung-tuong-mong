@@ -65,3 +65,24 @@ Phẩm cấp = bậc: b1 Thường · b2 Tinh phẩm · b3 Trân phẩm · b4 Tu
 ## Ghi chú
 - 22 ảnh cũ (128x128, tên cũ `item-a-giao.webp`…) vẫn để nguyên trong img/ cho bản cũ; mã mới dùng ảnh theo khóa IT (j98 trỏ `ITIMG[k]=k`). Vẽ lại hết để cùng phong cách, cùng cỡ 256/512 (ảnh cũ chỉ 128, `chungcu` đang mượn ảnh hình nhân, 11 món mượn ảnh món khác).
 - Khi thêm món IT mới: thêm khóa + phẩm cấp vào `ITEM_ART_G` (j98) và bảng trên, vẽ cùng quy trình (dev/art/PROGRESS_items.md).
+
+## 3. Stipend / gift goods (review/econ-stipend, 15/11) — 16 items, one 4x4 gpt-2-6 sheet (Magnific XmP3moABfo, bg lJ8aJscgv9, style ref If67SFwtvE)
+| Key | Name | Grade |
+|---|---|---|
+| vaibong | Vải bông | Thường |
+| vaitho | Vải thô (hàng kém) | Thường |
+| tragoi | Trà Long Tĩnh | Thường |
+| trahop | Trà Quân Sơn ngân châm | Tinh phẩm |
+| tramoc | Trà mốc (hàng kém) | Thường |
+| thanbac | Than bạc sương | Thường |
+| thanden | Than đen (hàng kém) | Thường |
+| banhtrai | Hộp điểm tâm | Thường |
+| ruoucuc | Rượu hoa cúc | Thường |
+| aolong | Áo lông chồn tiến cống | Trân phẩm |
+| cocngoc | Bộ cờ ngọc | Trân phẩm |
+| guong | Gương Tây dương | Tinh phẩm |
+| thamba | Thảm Ba Tư | Trân phẩm |
+| cungbac | Cung bạc chạm rồng | Tinh phẩm |
+| traicay | Giỏ trái cây tiến cống | Thường |
+| lanquy | Chậu lan quý | Tinh phẩm |
+Cut: connected components assigned to cells by centroid, 88 % fill, 512 + 256 webp, checked on cream and red. On the CDN (cdn_sync).
