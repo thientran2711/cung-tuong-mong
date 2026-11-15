@@ -247,3 +247,4 @@ Worktree thợ ở /home/user/wt/<tên>. Bản tóm tắt luật cho thợ: /hom
 - LIVE main = kit-fig2 batch 1 (10043ac2b): real-save news/Tuần lục avatars, one fact per news row, doubled titles game-wide, KIT §48/§49. promo-exam PASS dfe3865d5 (on afb2676a2) → reviewer re-merging 10043ac2b. Exam act picture act-khao-hach-tan-phong live.
 - LIVE main = promo-exam (aa9689da5): promotion requires the exam; NPCs too; cold palace shows 'phục vị'. Balance bot not yet run (load) — run run5b.sh when quiet; if HH low, lower BAL.ex.bar[2].
 - kit-fig2 r8 ready 196edb362e (kitEventDp for every person event, VIỆC·<cung> place cards, Ân oán sub-tabs, no group pictures, overlay-close fix 35/35) → reviewer spawned.
+- game-feel fixed 5ffbf8b267 (kitLose, slow reveals BAL.reveal, real grades, veils pictures, kit §54) → re-review spawned. Also brings rot.js (rotate on phone portrait).
