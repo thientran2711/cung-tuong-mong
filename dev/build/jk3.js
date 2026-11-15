@@ -99,7 +99,11 @@ function k3Stage(){try{const st=$$("stage");if(!st)return;{const pk=S?(S.place||
  const full=hR0+k3AnSung(false)+hY;
  /* Ân sủng under the court chips; when the column would run past the stage floor or onto a figure / name tag -> ONE "Ân sủng ›" chip */
  if(R.dataset.full!==full||R.dataset.w!==String(st.clientWidth)+"x"+st.clientHeight){R.classList.remove("kasx");R.innerHTML=full;R.dataset.full=full;R.dataset.w=st.clientWidth+"x"+st.clientHeight;R.dataset.h=full;
-  if(k3AsCrowded(st,R)){const one=hR0+k3AnSung(!window.__kasOpen,true)+hY;R.innerHTML=one;R.dataset.h=one}}
+  R.classList.remove("k3c2");
+  if(k3AsCrowded(st,R)){const one=hR0+k3AnSung(!window.__kasOpen,true)+hY;R.innerHTML=one;R.dataset.h=one}
+  /* tassel-fix (owner 15/11 06:35Z): the plaque frames show the whole pendant + tassel (KIT 28.0), so a short stage (phone landscape)
+     may still be crowded with Ân sủng folded: the court plaques then stand in TWO aligned columns (same frame size, never smaller) */
+  if(k3AsCrowded(st,R))R.classList.add("k3c2")}
  /* a tapped-open Ân sủng card stays inside the stage: the column scrolls instead of running past the floor */
  R.classList.toggle("kasx",!!R.querySelector(".kasopen"));
  k3Gut()}catch(e){console.error("k3Stage",e)}}
@@ -203,6 +207,7 @@ html body .stage.k3g.k3n #sc-t h2{font-size:.86rem}
 .ksh .k3wx{padding-left:0!important;font-size:.75rem!important;background:none!important;border:0!important;box-shadow:none!important;min-height:0!important}
 .ksh .k3wx img{width:18px!important;height:18px!important;border-radius:50%}
 .ksh .k3cs{display:flex;flex-direction:column;gap:4px}
+.kshR.k3c2{max-width:52%}.kshR.k3c2 .k3cs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px;align-items:stretch}.kshR.k3c2 .k3c .k3ct>b{white-space:normal}
 .ksh .k3c{display:flex;align-items:center;gap:5px;padding:2px 6px 2px 3px;font:inherit;text-align:left;cursor:pointer;min-height:0;color:var(--ink);width:100%}
 .ksh .k3c .md{flex:0 0 auto}
 .ksh .k3c .k3ct{display:flex;flex-direction:column;line-height:1.2;min-width:0}
