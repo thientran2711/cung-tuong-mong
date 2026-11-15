@@ -11,6 +11,13 @@
 - `dev/test/coop-timer.js`: cases 1 both ready early, 2 AFK timeout, 3 mini game pause+cap, 4 dialogs at tối timeout, 5 guest+host reload, 6 single-player.
   Run 1: 40/41 (only fail = test ordering in case 2: screenshots ate the shortened clock before the chip check; fix: shots first, then setTm/reset, then wait for chip).
 
+## Round 2
+- Merged origin/review/fix-float-r8 @677e54e6b (coordinator order): conflicts resolved = assemble (main list + jcooptimer + jkrel/jint/jnight
+  at fix-float's places), KIT.md (both), j84 (main's relation rules, then fix-float's), built files rebuilt (build_site.sh).
+- Clock stands still (no pause budget) while either player chooses her thân phận / is dead / on the title (st.lf): run 2 showed the
+  default clock running out during the opening Luân hồi.
+- Run 2: 32/35 (setup did not wait for Luân hồi; case 3 then started at tối; case 5 key check) → test fixed: waits for both in game, prints keys.
+
 ## Next steps
 1. Fix case 2 ordering in coop-timer.js; run ≥3 times (one browser pair at a time):
    `python3 dev/build/assemble.py && node dev/test/coop-timer.js .tmp/rN`
