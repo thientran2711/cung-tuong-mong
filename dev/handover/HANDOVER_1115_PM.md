@@ -252,3 +252,4 @@ Worker worktrees at /home/user/wt/<name>. Rule summaries for workers: /home/user
 - 13:33Z watch: main 31907911d (j83 live). Load 47, disk 11 GB. Started econ-stipend (17:30Z + 17:33Z) and translate-docs (this file and OWNER_DECISIONS will be rewritten in English).
 - scene-light r7 PASS 8dfd2be94 HELD (not pushed): wide figures incl. Thái hậu shrink to 57–63% height (breaks owner 03:55Z). Sent back to scene-light worker: train behind text panel, ≥85% height.
 - act-pics2 batch 3: LIVE data — 12 action pictures redrawn hands-only (chải chuốt, đeo/tháo trang sức, từ chối…), exam act picture, +15 log rules (562 rules, 537 keys, 0 missing), 16 dialog banners. Code (jct2 suitor faces + a467 'own picture or none' in j87) → reviewer. New art worker: 73 banners + 276 act pictures. Owner to decide: doat-giai pictures show the Emperor giving the prize.
+- Coordinator docs translated to English (04cf057d61). WORKER_BRIEF commit-message rule fixed to English.
