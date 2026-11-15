@@ -556,3 +556,9 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 
 ## 15/11 ~19:15Z — Thái y pulse check (owner question)
 - Owner: no option to invite the Thái y to take her pulse; how does she know if she is pregnant or how her health is? Does the Thái y come monthly/automatically? (Coordinator answered with today's facts + proposal; waiting for her pick.)
+
+## 15/11 ~19:35Z — Night-end and new-day pictures (owner)
+- A closing picture for each night: NOT a picture of the bedding act, but the END-of-night mood: a warm/passionate night vs a cold/distant night vs a lonely night when she was not summoned. It shows how the night affected the Emperor's mood (liked / didn't like) and the rewards given.
+- Add sound + on-screen animation by mood (e.g. happy night = soft laughter; unhappy night = a sigh).
+- When she skips to a new day (no bedding that night), show a NEW-DAY picture that depends on the season (xuân/hạ/thu/đông) and on festivals that day; make it beautiful.
+- Owner asked for more ideas of this kind.
