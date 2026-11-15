@@ -19,7 +19,10 @@ Base: review/game-feel-r6 @ 5a04b3b21 (reviewer fixes: one box per giver, garmen
    documented KIT.md §54 (registry number for game-feel parts) + KIT_REQUESTS.md row + kit page samples §54.1/§54.2.
 
 ## Tests (dev/test, server: node dev/test/sw-serve.js 8961 <wt>)
-item-lose.js (new) PASS · item-pics.js (new) PASS · reveal-shots.js (new, 5 sizes) · reward-box.js PASS · item-gain.js PASS.
+item-lose.js (new) PASS · item-pics.js (new) PASS (151 ids, 0 missing, grade == bag) · reveal-shots.js (new) PASS at 755x1000, 1000x755,
+1180x820, 1366x1024, 844x390 (reveal, list, kitGain, loss card inside the screen, 0 errors) · reward-box.js PASS · item-gain.js PASS ·
+kit-page.js ok at every size (0 errors) · view-scale.js: taps right at every size, 390x844 rotated (s .4756, same layout when turned), 0 errors;
+sameLandscapeLayout false only for fold-land = tab row 24 px lower while jload's bottom picture-download bar ("Thỉnh tranh nhân vật") was showing (timing, not this branch).
 
 ## Resume notes
 - KIT §54 is "awaiting kit review". If the coordinator renumbers, update jkrev.js header + KIT.md §54 + KIT_REQUESTS row.
