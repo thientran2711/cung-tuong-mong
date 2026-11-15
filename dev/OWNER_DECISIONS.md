@@ -776,3 +776,7 @@ All must work in co-op.
 
 ## 15/11 ~23:35Z — Makeup: 8 'vụng' looks (owner)
 - Add 8 VỤNG (clumsy) looks drawn on her face like the other presets: crooked brows, lipstick past the lip line / uneven, smudged eyeshadow, blotchy or patchy powder, uneven blush, smeared mascara-like ink, etc. (4 cool + 4 warm colour variants). Shown when the makeup minigame score is low (vụng tier), using her picked colours where possible. Same exact-anchor QA so the clumsy look reads as intentional, not a rendering bug.
+
+## 15/11 ~21:45Z (session 7 clock) — Move house to a new account (owner)
+- Owner: move now. Session 7 sums up everything and packs the handover so that a NEW main chat (session 8) on a NEW account continues all of it: re-open EVERY unfinished worker; no worker and no owner idea from today may be lost.
+- Owner asked to check which account had its usage limit reset today or yesterday.
