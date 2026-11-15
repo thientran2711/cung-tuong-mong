@@ -81,3 +81,16 @@ b14 https://pikaso.cdnpk.net/tmp/bulk-downloads/a33ae9db-7f34-428b-84b0-fbf5efa0
      `TYW=.tywork python3 dev/art/trung-y/ty.py sheet dev/art/trung-y/batchN-....jpg <role-id...>` rồi XEM tờ (hoa điền nhỏ, không nốt ruồi, không chữ Hán, tay);
      `python3 dev/art/trung-y/ty.py publish <role-id...>` (chép vào img/ + dựng lại img/FIGURES-ty.json, giữ bản ghi cũ); commit tờ + code, push review/trung-y.
   4. Đủ 84 mặt (672×4 fig + por) → báo SẴN SÀNG KIỂM; lệnh đẩy (điều phối chạy): `python3 dev/site/cdn_sync.py img/fig-*-ty*.webp img/por-*-ty*.webp img/FIGURES-ty.json`.
+
+## TIẾP TỤC 15/11 ~10:45Z (máy mới, worktree /home/user/wt/trung-y)
+- NGUỒN AN TOÀN: zip b2–b14 tải về, giữ dạng `.tywork/src/<gen>.webp` (full-res 3840x1920, webp q96; `dev/art/trung-y/bin/dl2.sh` + `z2src.py`), zip xóa sau khi đổi (đĩa chung chật).
+  Danh sách: dev/art/trung-y/sources.txt (HAVE/MISS theo bg.txt). c13–c32 + m01–m19 đủ hết. Mất .tywork → zip lại từ id trong bg.txt (hạn zip cũ 16/11 ~08:00–09:19Z).
+- BÁN TRONG SUỐT (c13/15/16/18/19): isnet để áo nhạt / tay áo rủ / tóc alpha 30–200 (tay áo c16 ty5, tóc c16 ty2 a51, tay áo c15 ty1).
+  Sửa ở bước cắt: `dev/art/trung-y/refine.py` (khóa màu theo nền giấy đo ở mép tờ: ΔE Lab 7→16 = alpha 0→255, chỉ trong vùng hình isnet;
+  xóa cặn nền phẳng (ΔE<4, không vân); lòng hình cách mép >3px → đặc). Áo ngà (ΔE 3–7 so với nền) chỉ được làm đặc lòng hình.
+  Kiểm: `bin/solid.py` (tỉ lệ điểm bán trong suốt trong lòng hình fig; >0,5% = cờ) + cutcheck + alpha-holes --fix (bin/fin.sh).
+  Mọi mặt c13+ cắt lại từ đầu bằng bản này (bản cắt cũ trên máy cũ bỏ).
+- Chạy: `setsid bash -c 'exec -a ty-workers-loop bash .tywork/bin/workers.sh'` (3 worker; máy chung tải ~60 → ~1 tờ/phút).
+  Xong vài mặt: `bash .tywork/bin/fin.sh <tag> <role-id...>` → tờ dev/art/trung-y/sheet-<tag>.jpg + por-<tag>.jpg (XEM) →
+  `python3 dev/art/trung-y/ty.py publish <ids>` → `python3 dev/site/cdn_sync.py <fig/por của các mặt đó> img/FIGURES-ty.json` → xóa bản trong img/ + out/.
+- img/ ở máy chỉ có FIGURES-ty.json (kéo từ CDN); publish giữ bản ghi cũ dù tệp không ở máy.
