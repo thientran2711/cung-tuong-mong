@@ -764,3 +764,12 @@ All must work in co-op.
 ## 15/11 ~23:20Z — Timer pauses only for minigames; spread events across buổi (owner)
 - Co-op timer: only MINIGAMES pause the buổi timer; animations/hoạt cảnh do NOT (overrides 23:10Z on that point; default 5 min stays).
 - Events pile up in the MORNING (buổi sáng): everything arrives at once. Spread events across the day's buổi (sáng/trưa/chiều/tối/đêm): each event gets a fitting buổi (thỉnh an + edicts morning, gossip/visits midday/afternoon, banquets/intrigue evening, night stuff at night), a per-buổi cap on popups (queue the rest to later buổi), stipend/rewards not all on the same morning. Measure: popups per buổi histogram before/after with bots.
+
+## 15/11 ~23:30Z — Makeup "final look" reveal scene (owner; coordinator design)
+- After the makeup minigame: a reveal scene of her FINAL LOOK of the day.
+  1. Full-body figure (today's dress + makeup overlay) steps in on a painted backdrop: her dressing room before a tall bronze mirror, warm lamplight (Magnific plate; landscape with portrait focal point).
+  2. Look-specific effect: đẹp/thanh nhã = soft petals + gentle glow + light chime; diêm dúa = gold sparkle, stronger warm light, bolder sound; vụng = a smudge-ink wobble + embarrassed sound; mặt mộc = simple soft daylight.
+  3. Then a smooth ZOOM into the face, which lands inside a round bronze-mirror frame (gương đồng) like her avatar frame, so on a phone she clearly sees today's face (lips/eyes/blush with her chosen colours). Hold 2–3 s; tap to skip / tap again to close.
+  4. Close card: look tier (vụng/vừa/đẹp/tuyệt/diêm dúa) + preset name + a one-line hint of how people may react today.
+- During the minigame, the mirror already shows her portrait (jtoil) — keep it live-updating with the chosen colours as she picks them (preview).
+- Painted art + Magnific effects rules and perf budget apply; co-op: friend sees only a small notice.
