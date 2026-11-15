@@ -32,3 +32,4 @@ AUDIT(gown/bow, coordinator 11/15): bai-kien thoat-than-no-ty chao-hoi-dung-le c
 redo: tranh-ghe-xong them-cung-nu (forward bow)
 noi-vu-thay-la Chinese chars on plaque
 noi-vu-chua-co-nguoi maid back-turned
+chu-nho-on maid open-mouth smile
