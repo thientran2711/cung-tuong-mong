@@ -20,3 +20,9 @@ chip "phi tần khác ghen +3" not in kit relation wording.
 
 ## Resume
 - If more lists appear, the test prints them (kind legacy / flex / kit-adjacent or spread > 1 / oneWord).
+
+## Results (kit-table.js, 11/15)
+755x1000 1182 lists / 0 fails · 1000x755 1291/0 · 1180x820 1284/0 · 1366x1024 1283/0 · 844x390 1274/0 · 390x844 1193/0; 0 page errors.
+Before (origin/main, 755x1000): Ân thưởng rewards spread 99.9 px (2 labels one word per line), Sổ ân thưởng 42.1 px, Bảng phẩm vị
+"Ghế theo phẩm" 61 px, Bổng lộc 9.1 px, Điều ngài thích legacy rows, shop detail two tables 9.1 px apart. After: 0 px everywhere.
+Status: SẴN SÀNG KIỂM (branch pushed). Worktree deleted after push.
