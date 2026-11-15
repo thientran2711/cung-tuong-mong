@@ -179,6 +179,7 @@ Cách làm (jaudit §1): mỗi lần thời gian trôi ở tầng trên cùng (`
 | Đầu (trước sửa) | main c5b93e63f | dau (+ một phần toi) | 291 | 743 | 213 | 46 | 13 | 1 / 18 | 0 |
 | Sau sửa (đợt 1) | review/act-audit (trước các sửa §12-§17 cuối) | dau, toi, cao, con, hh | 837 | 2405 | 626 | 78* | 103* | 2 / 28 | 0 |
 | Kiểm lại | review/act-audit mới nhất | dau (đến Dư đồ Càn Ninh) | 143 | 356 | 118 | 11 | 3 | 1 / 10 | 0 |
+| Kiểm lại sau rebase lên main 14967f899 | review/act-audit | dau (ván ra thân phận cung nữ: Phận sự) | 92 | 240 | 55 | 13 | 0 | 0 / 24 | 0 |
 
 \* Đợt 1 bao 5 trạng thái nên nhiều nút hơn. Phần lớn SAI/ẨN còn lại của đợt 1 đã sửa sau đó (việc hại tại Dư đồ, "thù/thân" → số thật, Sủng qua `sg`, Bái kiến) hoặc là **báo nhầm của bộ chấm** (đã kiểm tay):
 - "Mua chuộc cung nữ: Bạc −40 mà thật −10": đúng (−40 rồi trộm được +30).
@@ -188,6 +189,7 @@ Cách làm (jaudit §1): mỗi lần thời gian trôi ở tầng trên cùng (`
 - Khi mọi lần gieo bị ép "thành", rủi ro phụ (bị phát giác, kẻ hầu bị bắt) cũng nổ: bộ chấm tính đó là kết quả hỏng.
 
 Còn mở (ghi để điều phối):
+- Chế độ cung nữ › Lĩnh đồ ở Nội vụ phủ: thẻ "Sức −8", thật −13 (j42).
 - Thỉnh an Hoàng hậu / Xin Thái hậu đỡ lời: số "Hoàng hậu quý ngươi" (S.hh và quan hệ Hoàng hậu lệch nhau) — thợ hotfix-thinhan.
 - Học với thầy: "thầy kể một sở thích của Hoàng thượng hoặc chuyện của một phi tần" — có lần không cho tin gì (j23); cần chủ của Tài nghệ xem.
 - Phe phái › Biếu quà, gửi thư cho quan: ngoài "thiện cảm +20" của quan còn làm Hoàng hậu (nhà đối địch) thiện cảm −5 — ẩn (j55).

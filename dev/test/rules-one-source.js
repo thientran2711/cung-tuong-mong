@@ -10,7 +10,8 @@ const fresh=()=>{try{localStorage.clear()}catch(e){}document.getElementById('tit
 (async()=>{const b=await chromium.launch();const R={size:SZ};const errs=[],errsOld=[];
  const mk=()=>b.newContext({viewport:{width:W,height:H},deviceScaleFactor:+(DPR||1),hasTouch:W<1100,isMobile:W<1100,reducedMotion:'reduce',serviceWorkers:'block'});
  /* 1. an old save made by the published build */
- const c0=await mk();const p0=await boot(c0,BASE+'/index.html',errsOld);
+ /* the old save is made at the Fold size (the published build's landscape start may wait on the identity screen); it is loaded at the size under test */
+ const c0=await b.newContext({viewport:{width:755,height:1000},deviceScaleFactor:2,serviceWorkers:'block'});const p0=await boot(c0,process.env.OLD_URL||BASE+'/index.html',errsOld);
  const old=await p0.evaluate(`(()=>{(${fresh})();SLOT=3;for(let i=0;i<3;i++){try{nextBuoi()}catch(e){}Q.length=0}quiet=false;try{NLP=null}catch(e){}save();const o={};for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);o[k]=localStorage.getItem(k)}return o})()`);
  lg('old saved keys '+Object.keys(old).map(k=>k+':'+String(old[k]).length).join(','));await c0.close();
  const c1=await mk();await c1.addInitScript(o=>{if(!sessionStorage.getItem('__seeded')){for(const k in o)localStorage.setItem(k,o[k]);sessionStorage.setItem('__seeded','1')}},old);
