@@ -313,3 +313,7 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - Thẻ người (Hành sự với một người): tên + phẩm sát trên cùng, khung chân dung kéo lên, bỏ khoảng trống phía trên; chỗ dư dành cho thông tin.
 - LUẬT CHUNG: ở mọi danh sách nút/việc trong game, nút làm được nằm trên cùng, nút mờ xuống dưới.
 - Các việc bên phải thẻ người chia theo tab nhỏ của kit chung; bấm tab mới hiện các việc thuộc nhóm đó.
+
+## 15/11 ~05:15Z (sếp) bổng lộc + bán đồ tự làm
+- Xem lại bổng lộc hằng tháng cho cân bằng với giá đồ; hiện thẻ khi nhận bổng lộc.
+- Đồ tự làm khi học tài (thêu, vẽ tranh, thư pháp…) thành vật phẩm, bán được cho thái giám Nội vụ phủ. Thẻ thái giám có 2 tab kit: Mua | Bán.
