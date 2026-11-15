@@ -70,7 +70,7 @@ window.KIT_SCENE_TINT=window.KIT_SCENE_TINT==null?0:window.KIT_SCENE_TINT;
     warm chiều halls = greyer; now chroma ±0, b* +1, L* +5). Knobs: KIT_SCENE.grade(o) → filter string; o = {own, wet, night, sc, tier}. */
  const G={dry:"none",wet:"saturate(1.05) contrast(.95) brightness(1.05)",wetNight:"saturate(1.02) contrast(.96) brightness(1.02)",
   rp2:"saturate(1.04)",rp3:"saturate(1.07) brightness(1.02)"};
- function grade(o){if(o.sc==="lc")return "none";               /* lãnh cung + Tân Giả khố: the bleak painting as painted */
+ function grade(o){if(o.sc==="lc")return "none";               /* lãnh cung: the bleak painting as painted (Tân Giả khố has its own painting, sc "tgk", graded like the others) */
   if(o.own&&o.wet)return o.night?G.wetNight:G.wet;
   return o.tier===3?G.rp3:o.tier===2?G.rp2:G.dry}
  function state(){const P=placeOf(S.place),k=S.place;let own=false,tier=-1;try{own=/-(sang|trua|chieu|toi)$/.test(SCIMG[P.sc]||"")}catch(e){}
