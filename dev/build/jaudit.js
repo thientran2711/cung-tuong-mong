@@ -281,7 +281,11 @@ function aaPunishTxt(sev){const m=has("nongnay")?3:has("nhantu")?1:2;return sev>
  const keep=c=>{window.__aaPend=c;if(S.mg)S.mg.cost=c;try{save()}catch(e){}try{render()}catch(e){}};
  /* run fn; if it opened a mini-game, undo what it paid and keep that pending (the outermost call does it, once) */
  window.aaDefer=function(fn,ctx,args,extra){if(!S||window.__aaPend||(S.mg&&S.mg.cost))return fn.apply(ctx,args);const b=snap(),L=window.__aaL;window.__aaL=0;let r;
-  try{r=fn.apply(ctx,args)}finally{const went=window.__aaL;window.__aaL=L||went;if(went&&!window.__aaPend&&!(S.mg&&S.mg.cost)){const c=diff(b,extra);putBack(b,extra);keep(c)}}return r};
+  window.__aaIn=(window.__aaIn||0)+1;const rs0=window.__aaRS;window.__aaRS=null;
+  try{r=fn.apply(ctx,args)}finally{window.__aaIn--;const went=window.__aaL;window.__aaL=L||went;const held=window.__aaRS;window.__aaRS=rs0;
+   if(went&&!window.__aaPend&&!(S.mg&&S.mg.cost)){const c=diff(b,extra);putBack(b,extra);keep(c)}
+   /* review 11/15 (veil craft): a result card the act raised while its game was opening is dropped — the one result comes after the game */
+   else if(held&&!went){try{window.__aaR0.apply(held.t,held.a)}catch(e){console.error(e)}}}return r};
  if(typeof lessonMode==="function"){const l0=lessonMode;lessonMode=function(){let mat=0;try{if(typeof wkPend==="object"&&wkPend&&WK[wkPend.kind])mat=WK[wkPend.kind].mat[wkPend.mat]||0}catch(e){}
   return window.aaDefer(l0,this,arguments,mat?{bac:mat}:null)}}
  if(typeof chooseM==="function"){const c0=chooseM;chooseM=function(){return window.aaDefer(c0,this,arguments)}}
@@ -305,4 +309,4 @@ function aaPunishTxt(sev){const m=has("nongnay")?3:has("nhantu")?1:2;return sev>
   o=Object.assign({},o,{onDone:function(raw,x){const sk=!!(x&&x.skipped);const r1=cl(Math.round(raw||0),0,10);window.aaPayMG({title:ttl,skip:sk,ok:r1>=5,raw:sk?null:r1});return d0.apply(this,arguments)}})}return p0.call(this,o)}}
  if(typeof openMG==="function"){const o0=openMG;openMG=function(k,lv,cb){window.__aaL=1;let ttl="";try{const m=S.mg,a=ARTS.find(x=>x.k===k);ttl=`${m&&m.mode==="prac"?"Tự luyện":m&&m.mode==="self"?"Tự học":m&&m.mode==="th"?"Học cùng Thái hậu":"Học"} ${a?a.n:""}`}catch(e){}
   if(ttl&&!window.__aaTitle)window.__aaTitle=ttl;const cb2=typeof cb==="function"?function(g){window.aaPayMG({title:ttl,g});return cb.apply(this,arguments)}:cb;return o0.call(this,k,lv,cb2)}}
- if(typeof resultShow==="function"){const r0=resultShow;window.__aaR0=r0;resultShow=function(){if(window.__aaPend||fin||(ovOpen()&&S&&S.mg))return;return r0.apply(this,arguments)}}})();
+ if(typeof resultShow==="function"){const r0=resultShow;window.__aaR0=r0;resultShow=function(){if(window.__aaPend||fin||(ovOpen()&&S&&S.mg))return;if(window.__aaIn){window.__aaRS={t:this,a:arguments};return}return r0.apply(this,arguments)}}})();
