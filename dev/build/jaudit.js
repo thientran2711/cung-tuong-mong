@@ -156,3 +156,14 @@ window.kitThey=kitThey;
 (function(){const T=()=>typeof J78==="object"&&J78.cardV||null;for(const k of Object.keys(AOUT)){const d=Object.getOwnPropertyDescriptor(AOUT,k);if(!d||d.get||!Array.isArray(d.value))continue;const old=d.value;
  const fx=s=>{const t=T();if(!t||typeof s!=="string")return s;return s.replace(/(nàng )?thù -(\d+)/g,(m,_,n)=>pvRel(t,-n)).replace(/(nàng )?thân ([+\-])(\d+)/g,(m,_,sg,n)=>pvRel(t,(sg==="+"?1:-1)*n))};
  try{Object.defineProperty(AOUT,k,{configurable:true,enumerable:true,get(){return old.map(fx)},set(v){}})}catch(e){}}})();
+
+/* 14. harm acts offered at a PLACE (j9 placeHarms) drew their card from ACT.x + the cost as a gain: no Tốn line, no outcome,
+   no caught risk. They now use the same outcome texts as the consort card (AOUT, with real numbers for this target) and their
+   real cost in Tốn (the act itself pays it, so the talk() pre-charge is refunded at once). Khiêu khích: relAdd −15, not "oán +10". */
+(function(){if(typeof placeHarms!=="function")return;const p0=placeHarms;const KEY={"Dò la":"spy","Tung tin đồn":"rumor","Bỏ độc vào trà nàng":"poison","Bỏ xạ hương vào thuốc nàng":"musk","Đẩy con nàng xuống hồ":"pond","Đẩy nàng xuống hồ sen":"pushp","Ngáng chân nàng":"trip"};
+ const COST={pushp:{duc:-12},trip:{duc:-4}};
+ placeHarms=function(v,k){const H=p0.apply(this,arguments);return H.map(h=>{const key=KEY[h.n];if(!key||!AOUT[key])return h;const c=(ACT[key]&&ACT[key].c&&Object.keys(ACT[key].c).length?ACT[key].c:COST[key])||null;
+  return Object.assign({},h,{k:key,c,tgt:v,run:()=>{if(c)apply(Object.fromEntries(Object.entries(c).map(([a,b])=>[a,-b])));return h.run()}})})}})();
+(function(){if(typeof optLine!=="function")return;const o0=optLine;optLine=function(a){if(!a||!a.tgt||typeof J78!=="object")return o0.apply(this,arguments);const pv=J78.cardV;J78.cardV=a.tgt;try{return o0.apply(this,arguments)}finally{J78.cardV=pv}}})();
+(function(){const t0=talkOpts;talkOpts=function(p){const A=t0.apply(this,arguments);try{const v=p&&p.ref;if(!v||p.kind!=="rival")return A;const i=A.findIndex(a=>a&&a.n==="Khiêu khích");
+ if(i>=0)A[i]=Object.assign({},A[i],{x:`${pvRel(v,-15)}, nàng ta ghen +10`})}catch(e){}return A}})();

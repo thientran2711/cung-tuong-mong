@@ -26,6 +26,7 @@ def tokens(texts):
             elif 'oán' in low or 'thù' in low:fam='oan';who='other'
             elif 'thái hậu' in low:fam='S.th'
             elif 'hoàng hậu' in low:fam='hh'
+            elif re.search(r'[Tt]hiện cảm (của )?[A-ZĐ]',pre) or re.search(r'thiện cảm (của )?(cung nữ|kẻ hầu)',low):fam='loyal'
             elif re.search(r'thiện cảm|quý ngươi|quý ta|quý nàng|\bthân\b|ghét',low):fam='aff';who='other'
             elif re.search(r'\blòng\b',low):fam='loyal'
             elif 'sức khỏe' in low:fam='kid.hp'
