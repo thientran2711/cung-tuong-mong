@@ -53,7 +53,8 @@ window.kitStatCell=kitStatCell;window.kitStatSet=kitStatSet;window.kitStatRow=ki
 .k3tt>.kstv{height:var(--kst-n);line-height:var(--kst-n);font-family:var(--display);font-size:1.02rem}
 .k3tt>*>*{vertical-align:baseline;margin-right:10px}.k3tt>*>*:last-child{margin-right:0}
 .k3tc .k3tt .k3r{display:inline-flex;align-items:baseline;min-height:0!important;line-height:1;font-family:var(--body,inherit);font-size:.74rem}
-.k3tc .k3tt .kstl .k3r{display:inline-block;vertical-align:top;font-size:.7rem;line-height:var(--kst-l);height:var(--kst-l)}.k3tc .k3tt .kstl .k3r>*{vertical-align:baseline}.k3tc .k3tt .kstl .k3dots{display:inline-flex;vertical-align:-1px;margin-left:5px}
+.k3tc .k3tt .kstl .k3r{display:inline-block;vertical-align:top;font-size:.7rem;line-height:var(--kst-l);height:var(--kst-l)}
+.k3tt .k3r>.k3l+b{margin-left:.3em}.k3tc .k3tt .kstl .k3r>*{vertical-align:baseline}.k3tc .k3tt .kstl .k3dots{display:inline-flex;vertical-align:-1px;margin-left:5px}
 .k3tc .k3tt .k3wx{min-height:0!important}
 .k3tc .k3tt .k3wx img{width:18px!important;height:18px!important;border-radius:50%;align-self:center}
 .k3tc .k3dots{display:inline-flex;gap:3px;align-self:center}.k3tc .k3dots i{width:9px;height:9px;border-radius:50%;border:1.5px solid var(--gold);background:transparent}.k3tc .k3dots i.on{background:var(--gold)}
@@ -115,7 +116,8 @@ html body header.hud.khd2 .k3tt>.kstl,html body header.hud.khd2 .k3tt>.kstv{whit
 `;document.head.appendChild(st)})();
 /* KIT 32.12 kitHdFit: ≥ 1000 px the bar is one row only when it fits (her block, the whole time block and the eight cells side by side);
    otherwise .khd2 = the two-row bar (same grid as 600–999 px). Measured in the one-row form, in one synchronous pass (no flicker).
-   ≥ 600 px it also sets --kmeh = her name block's height: the portrait frame (ratio 550/795) is exactly that tall (owner 15/11 10:30Z). */
+   ≥ 600 px it also sets --kmeh = her name block's height: the frame keeps the width it had when its crest+window+band (550/795) was exactly that tall (owner 15/11 10:30Z);
+   since tassel-fix (owner 15/11 06:35Z) the jade pendant + tassel hang below it whole (cell 550/1037), so the frame is 1037/795 of the name block. */
 function kitHdMe(hd){try{const mi=hd.querySelector(":scope>.me .mi");const h=mi&&matchMedia("(min-width:600px)").matches?Math.round(mi.getBoundingClientRect().height):0;
  const v=h>20?h+"px":"";if(hd.style.getPropertyValue("--kmeh")!==v){if(v)hd.style.setProperty("--kmeh",v);else hd.style.removeProperty("--kmeh")}}catch(e){}}
 function kitHdFit(){try{const hd=document.querySelector("header.hud");if(!hd)return;kitHdMe(hd);const wide=matchMedia("(min-width:1000px)").matches;

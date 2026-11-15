@@ -39,7 +39,7 @@ function kitBook(spec){spec=spec||{};const rm=()=>{try{return reducedMotion()}ca
  root.innerHTML=`<div class="kbk-stage"><div class="kbk-book"></div></div><div class="kbk-bar"><button class="kbk-nav kbk-prev" aria-label="Trang trước">‹</button><span class="kbk-no" aria-live="polite"></span><button class="kbk-nav kbk-next" aria-label="Trang sau">›</button></div><button type="button" class="kit-x kbk-x" aria-label="${spec.closeLabel||"Đóng"}" title="${spec.closeLabel||"Đóng"}">✕</button><div class="kbk-measure" aria-hidden="true"></div>`;
  (spec.host||document.body).appendChild(root);
  const book=root.querySelector(".kbk-book"),stage=root.querySelector(".kbk-stage"),meas=root.querySelector(".kbk-measure"),noEl=root.querySelector(".kbk-no");
- let mode="single",PW=0,PH=0,leaves=[],sheets=[],cur=0,maxCur=0,busy=false,closed=false,logical=0,lastKey="";
+ let mode="single",PW=0,PH=0,leaves=[],sheets=[],cur=0,maxCur=0,busy=false,closed=false,logical=0,logicalB=null,lastKey="";
 
  /* ---- page shells ---- */
  const head=spec.head||"";
@@ -55,7 +55,7 @@ function kitBook(spec){spec=spec||{};const rm=()=>{try{return reducedMotion()}ca
  const personBody=(p,cont)=>{const fw=p.kind==="person"?p.who:p.fig;let fig=typeof kitStageFig==="function"&&fw&&kitStageFig(fw,{cap:false})||"";
   /* owner 17:45Z: every page has its subject's full-length figure; no painting (yet) or the figure list still loading → the kit silhouette */
   if(!fig&&fw&&typeof kitStageFig==="function"){let sx="f";try{const r=personRoleRank(fw);sx=r.kid?"k":r.sex==="m"?"m":"f"}catch(e){}fig=kitStageFig(fw,{cap:false,src:(typeof KIT_DIR==="string"?KIT_DIR:"img/kit/")+`unknown-fig-${sx}.webp`})||""}const kfr=(/--kfr:([\d.]+)/.exec(fig)||[])[1]||"1";
-  return `<div class="kbk-person${fig?" kbk-full":""}" style="--kfr:${kfr}"><div class="kbk-por">${fig||(fw?pframe(kitFace(fw)):"")}</div><div class="kbk-phead">${personTop(p,!!cont)}</div><div class="kbk-flow"></div></div>`};
+  return `<div class="kbk-person${fig?" kbk-full":""}" style="--kfr:${kfr}${typeof kitBookFigCol==="function"?kitBookFigCol(fig,PW,PH):""}"><div class="kbk-por">${fig||(fw?pframe(kitFace(fw)):"")}</div><div class="kbk-phead">${personTop(p,!!cont)}</div><div class="kbk-flow"></div></div>`};
 
  /* ---- pagination: fill each page until it overflows, continue on the next ---- */
  function paginate(){const L=[];meas.style.width=PW+"px";meas.style.height=PH+"px";
@@ -66,17 +66,17 @@ function kitBook(spec){spec=spec||{};const rm=()=>{try{return reducedMotion()}ca
    if(isP&&PW<440&&p.rel&&p.rel.length)blocks.unshift({html:kitRelTable(p.rel)});
    /* a continuation page of a flowing text page is titled by the section it continues (owner 17:00Z: short sections share pages) */
    const secAt=k=>{for(let q=k-1;q>=0;q--)if(blocks[q]&&blocks[q].sec)return blocks[q].sec;return null};
-   do{const tp=first?p:{title:blocks[i]&&blocks[i].sec?p.title:(secAt(i)||p.title)};meas.innerHTML=shell(isP?"k-person r":"k-text r",isP?personBody(p,!first):`${textTop(tp,!first)}<div class="kbk-flow"></div>`,"0");
+   do{const b0=i;const tp=first?p:{title:blocks[i]&&blocks[i].sec?p.title:(secAt(i)||p.title)};meas.innerHTML=shell(isP?"k-person r":"k-text r",isP?personBody(p,!first):`${textTop(tp,!first)}<div class="kbk-flow"></div>`,"0");
     const flow=meas.querySelector(".kbk-flow");const over=()=>flow.scrollHeight>flow.clientHeight+1;let n=0;
     while(i<blocks.length){flow.insertAdjacentHTML("beforeend",blocks[i].html);if(over()&&n>0){flow.lastElementChild.remove();break}i++;n++}
     while(n>1&&i<blocks.length&&blocks[i-1]&&blocks[i-1].head){flow.lastElementChild.remove();i--;n--}
     /* one entry taller than a whole page: never clipped — that page's text column scrolls inside the page */
-    const big=over();L.push({cls:(isP?"k-person":"k-text")+(big?" k-scroll":""),html:meas.querySelector(".kbk-body").innerHTML,kind:p.kind,folio:true,src:p});first=false}while(i<blocks.length);
+    const big=over();L.push({cls:(isP?"k-person":"k-text")+(big?" k-scroll":""),html:meas.querySelector(".kbk-body").innerHTML,kind:p.kind,folio:true,src:p,b0});first=false}while(i<blocks.length);
   }
   meas.innerHTML="";return L}
 
  /* ---- layout: spread on landscape tablets, single page otherwise ---- */
- function layout(keep){const W=root.clientWidth||innerWidth,H=root.clientHeight||innerHeight;const bar=root.querySelector(".kbk-bar").offsetHeight||48;
+ function layout(keep,keepB){const W=root.clientWidth||innerWidth,H=root.clientHeight||innerHeight;const bar=root.querySelector(".kbk-bar").offsetHeight||48;
   const aw=W-(W<600?20:40),ah=H-bar-(H<700?18:30);const spread=W>=900&&W/H>=1.15;mode=spread?"spread":"single";
   if(spread){PH=Math.min(ah,Math.floor(aw/2/.7));PW=Math.min(Math.floor(aw/2),Math.floor(PH*.76))}
   else{const sp=W<600?8:12;PW=Math.min(aw-sp,Math.floor(ah*.74));PH=Math.min(ah,Math.floor(PW/.5));PW=Math.floor(PW)}
@@ -96,15 +96,19 @@ function kitBook(spec){spec=spec||{};const rm=()=>{try{return reducedMotion()}ca
   else{for(const l of leaves)sheets.push({front:l,back:{cls:"k-verso",html:blankH(),kind:"verso"}});maxCur=Math.max(0,sheets.length-1)}
   /* a relayout that comes out the same (fonts ready, book art loaded, a resize that keeps the page size) keeps the pages that are on screen:
      the book is never rebuilt from scratch under her eyes (owner 15:45Z: the figure and the right column flashed) */
+  /* restore position by logical page (+ the block the reader was on) */
+  const restore=()=>{cur=0;if(keep!=null){for(let i=0;i<sheets.length;i++){const s=sheets[i];if(s.front.src===keep||s.back.src===keep||s.front.kind===keep||s.back.kind===keep){cur=spread&&s.back.src===keep?i+1:i;break}}
+   /* same reading position: the page of that section that holds the first block the reader was on (not the section's first page) */
+   if(keepB!=null&&typeof keep==="object"){let best=null;sheets.forEach((s,i)=>{for(const f of [s.front,s.back])if(f.src===keep&&f.b0!=null&&f.b0<=keepB&&(!best||f.b0>=best.b0))best={b0:f.b0,i:spread&&f===s.back?i+1:i}});if(best)cur=best.i}
+   cur=Math.min(cur,maxCur)}};
   const key=mode+"|"+PW+"x"+PH+"|"+sheets.map(s=>s.front.cls+s.front.html+"\u0001"+s.back.cls+s.back.html).join("\u0002");
-  if(key===lastKey&&book.querySelector(".kbk-sheet")){cur=0;if(keep!=null){for(let i=0;i<sheets.length;i++){const s=sheets[i];if(s.front.src===keep||s.back.src===keep||s.front.kind===keep||s.back.kind===keep){cur=spread&&s.back.src===keep?i+1:i;break}}cur=Math.min(cur,maxCur)}paint();return}
+  if(key===lastKey&&book.querySelector(".kbk-sheet")){restore();paint();return}
   lastKey=key;
   book.innerHTML=sheets.map((s,i)=>`<div class="kbk-sheet" data-i="${i}"><div class="kbk-face kbk-front">${shell(s.front.cls+" r",s.front.html,s.front.folio?String(s.front.no||""):"")}<i class="kbk-sh"></i></div><div class="kbk-face kbk-back">${shell(s.back.cls+" l",s.back.html,s.back.folio?String(s.back.no||""):"")}<i class="kbk-sh"></i></div></div>`).join("")+`<i class="kbk-cast"></i><i class="kbk-gutter"></i>`;
   book.querySelectorAll(".kbk-go").forEach(b=>b.onclick=e=>{e.stopPropagation();close()});
   /* no flash on turning (owner 15:45Z): every picture of the book decoded once, painted decoded from then on (kitImgSync, jbook) */
   try{if(typeof kitImgSync==="function")kitImgSync(book)}catch(e){}
-  /* restore position by logical page */
-  cur=0;if(keep!=null){for(let i=0;i<sheets.length;i++){const s=sheets[i];if(s.front.src===keep||s.back.src===keep||s.front.kind===keep||s.back.kind===keep){cur=spread&&s.back.src===keep?i+1:i;break}}cur=Math.min(cur,maxCur)}
+  restore();
   paint()}
  const sheetEls=()=>book.querySelectorAll(".kbk-sheet");
  function paint(){const els=sheetEls();const n=els.length;els.forEach(el=>{if(el.__curl){el.__curl.destroy();el.__curl=null}});
@@ -118,7 +122,8 @@ function kitBook(spec){spec=spec||{};const rm=()=>{try{return reducedMotion()}ca
   else label=s&&s.front.kind==="cover"?"Bìa sổ":s&&s.front.no?`Trang ${s.front.no}`:"";
   const tot=leaves.filter(l=>l.no).length;noEl.textContent=label+(label&&label!=="Bìa sổ"?` / ${tot}`:"");
   root.querySelector(".kbk-prev").disabled=cur<=0;root.querySelector(".kbk-next").disabled=cur>=maxCur;
-  logical=(sheets[cur]&&(sheets[cur].front.src||sheets[cur].front.kind))||null}
+  logical=(sheets[cur]&&(sheets[cur].front.src||sheets[cur].front.kind))||null;logicalB=sheets[cur]&&sheets[cur].front.b0!=null?sheets[cur].front.b0:null;
+  const lv=mode==="spread"&&cur>0?sheets[cur-1].back:null;if(lv&&lv.src){logical=lv.src;logicalB=lv.b0!=null?lv.b0:null}}   /* spread: the left page is the earliest one in view */
 
  /* ---- the turn: p = 0 (flat, right) … 1 (turned, left) ---- */
  /* the turn: the WHOLE sheet swings around the spine (kitCurl = kitSheetTurn, jbook / KIT §34.1, owner 11/15 10:00Z); content printed on the sheet */
@@ -186,17 +191,17 @@ function kitBook(spec){spec=spec||{};const rm=()=>{try{return reducedMotion()}ca
   if(k==="ArrowRight"||k==="PageDown"){e.preventDefault();next()}else if(k==="ArrowLeft"||k==="PageUp"){e.preventDefault();prev()}
   else if(k==="Escape"){e.preventDefault();close()}else if((k==="Enter"||k===" ")&&!e.target.closest("button")){e.preventDefault();if(cur>=maxCur)close();else next()}};
  document.addEventListener("keydown",key);
- let rt=0;const onR=()=>{clearTimeout(rt);rt=setTimeout(()=>{if(!closed&&!busy)layout(logical)},120)};addEventListener("resize",onR);
+ let rt=0;const onR=()=>{clearTimeout(rt);rt=setTimeout(()=>{if(!closed&&!busy)layout(logical,logicalB)},120)};addEventListener("resize",onR);
  function close(){if(closed)return;closed=true;document.removeEventListener("keydown",key);removeEventListener("resize",onR);try{spec.onClose&&spec.onClose()}catch(e){console.error(e)}}
  layout(null);
  /* web fonts that arrive after the first measure change line heights: measure again (keeps the page) */
  try{if(document.fonts&&document.fonts.status!=="loaded")document.fonts.ready.then(()=>{if(!closed&&!busy)layout(logical)})}catch(e){}
- root.__kbk={relayout:()=>{if(!closed&&!busy)layout(logical)}};
+ root.__kbk={relayout:()=>{if(!closed&&!busy)layout(logical,logicalB)}};
  /* the figure list (img/FIGURES.json) may arrive after the book opened: lay out again once, the silhouettes become the paintings */
  {let nF=typeof FIGS!=="undefined"?FIGS.length:0;const iv=setInterval(()=>{if(closed){clearInterval(iv);return}const n=typeof FIGS!=="undefined"?FIGS.length:0;if(n!==nF){nF=n;if(!busy){clearInterval(iv);
   /* load the paintings first, then swap them in (never a figure that is still on its way) */
   const L=(spec.pages||[]).map(p=>p.kind==="person"?p.who:p.fig).filter(Boolean).map(w=>{try{return kitFigOf(w)}catch(e){return""}}).filter(Boolean);
-  Promise.race([Promise.all([...new Set(L)].map(u=>new Promise(r=>{const im=new Image();im.onload=im.onerror=()=>{(im.decode?im.decode().catch(()=>0):Promise.resolve()).then(r)};im.src=u}))),new Promise(r=>setTimeout(r,4000))]).then(()=>{if(!closed&&!busy)layout(logical)})}}},500);setTimeout(()=>clearInterval(iv),60000)}
+  Promise.race([Promise.all([...new Set(L)].map(u=>new Promise(r=>{const im=new Image();im.onload=im.onerror=()=>{(im.decode?im.decode().catch(()=>0):Promise.resolve()).then(r)};im.src=u}))),new Promise(r=>setTimeout(r,4000))]).then(()=>{if(!closed&&!busy)layout(logical,logicalB)})}}},500);setTimeout(()=>clearInterval(iv),60000)}
  return {root,next,prev,go,close,get cur(){return cur},get max(){return maxCur},get mode(){return mode},relayout:()=>layout(logical)}}
 
 /* ---------- week data → pages ---------- */
