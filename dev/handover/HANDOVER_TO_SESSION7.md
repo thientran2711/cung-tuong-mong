@@ -67,7 +67,7 @@ Went LIVE via session 7: month-calendar r1, chap-label r1, item-events r1 (§64)
 - review/fxkit — shared painted-effects kit §68 (sprites via remove_background, light videos on black + screen blend, alpha sheets).
 - review/coop-timer — co-op buổi countdown (§69), ready/timeout, host clock, pauses with cap.
 - review/skin-match (art) — face vs hand/neck skin tone audit of all fig-*, player look1 rosy, ref maid m03.
-- review/place-art (art) — regrade 9 brown trưa + 6 too-bright nights, new Tân Giả khố + cung nữ room paintings.
+- review/place-art @ 83864aa5d DONE (on place-colour): 9 trưa regraded, 5 nights darkened, 34 new paintings (tan-gia-kho, phong-cung-nu), j42/j94 wiring → place-colour reviewer asked to merge + review together.
 - review/art-complete (art) — head c1feba27c (clean stop): KC c11–c32 + maids m01–m52 done, mole sweeps done; eunuch ranks: u01 done, u02–u30 left (87 sheets; ue_spec.py/ue_gens.txt; PROGRESS 'Group (b)'); rank-aware eunuch picker (jartc part 3) SẴN SÀNG KIỂM; group (c) grown kids 144 + kidBandOf not started. HELD for owner: old-save player looks 128, promoted old-love men 56.
 - review/act-pics2 (art) — redraw 152/380+ live; worker re-checking keys 1–92 darks for night-sky look, continuing from 153.
 - review/idea-history (aa1714ed) + review/idea-design (17b2ba71) — DONE docs: dev/ideas/HISTORY_IDEAS_1115.md, DESIGN_IDEAS_1115.md.
