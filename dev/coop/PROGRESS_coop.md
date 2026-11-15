@@ -15,6 +15,18 @@ Lead/backend: coop/worker/** + dev/coop/PROTOCOL.md. Worker B: dev/build/jcoop.j
 - Live protocol test `node coop/worker/test/ws.test.mjs`: ALL OK (seats, gzip big state, me, 3 weeks end→merge→week, guest leaves →
   presence offline, reconnect same seat/week, third player refused).
 
+## Lead · integration (15/11)
+- Merged origin/review/page-curl (fold-layout + book UI) into review/coop (00147f5); assemble order: … jk3, jk4, jcoop, jcooplobby, jcoopworld, j84.
+- Server phase 2 (PROTOCOL §9/9.1, deployed): bend/buoi, where (host), pos (full fields incl. live stats), act/actr/res/note relays;
+  merge3 NOADD set (mood, rank, dates, age, face, ids …: host wins, no delta sums).
+- jcoopworld fixes after C left (lead): j61 knowledge for the friend (no knowFriend; a new life of hers = stranger again), guest always uses
+  the host's `where` for the exact week.buổi (host re-sends on every re-placement), live stats in `pos`, reborn life joins the room's
+  current buổi, hidden queued dialog re-shown, "Đợi bạn" note closable before the world exists, debug trace `COOPW.tr`.
+- Tests: `dev/test/coop-e2e.js` (two browsers, Fold 686x880@2.2 + iPad 1180x820@2, live Worker): 59 checks, see dev/shots/coop/result.txt.
+  `dev/test/coop-bot.js 52`: one year, 0 divergences (report dev/coop/BOT_COOP.md). `dev/test/coop-world.js` (C): 30/30.
+  `coop/worker/test/ws.test.mjs` (server, live) ALL OK. `dev/test/coop-dbg-hostdeath.js` = repro tool for a death in buổi tối.
+- Owner guide (Vietnamese): dev/coop/HUONGDAN.md.
+
 ## B · client net + lobby (worker B)
 - `dev/build/jcoop.js` (window.COOP) + `dev/build/jcooplobby.js`, registered in assemble.py after j98, before j84. Default URL
   https://ctm-coop.victoria-tntt.workers.dev; `window.COOP_URL` set before load overrides it. Nothing connects in single-player.

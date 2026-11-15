@@ -15,9 +15,14 @@
 
 ## Khi đang chơi
 - Hai người ở **cùng một hậu cung**: cùng Hoàng thượng, cùng các phi tần, chuyện gì xảy ra thì cả hai đều chịu.
-  Bạn của sếp hiện ra như một phi tần thật trong cung: có tên, có phẩm vị, gặp được, tặng quà được, và cũng hại được nhau.
-- Mỗi người tự làm việc của mình trong tuần. Hết buổi tối, chạm **Qua đêm**.
-  Ai xong trước thì thấy dòng **"Đợi bạn xong tuần"**; khi cả hai xong, tuần mới bắt đầu cho cả hai cùng lúc.
+  Bạn của sếp hiện ra như một phi tần thật trong cung (hoặc một cung nữ, nếu bạn chọn thân phận cung nữ).
+  Lúc đầu bạn chỉ là **Người lạ**, như mọi người khác trong cung: phải gặp rồi mới biết mặt, biết tên.
+- Hai người luôn ở **cùng một buổi**. Ai đến Ngự hoa viên thì người kia cũng đến được, và thấy nhau đứng ở đó,
+  thấy cùng những người đang ở đó.
+- Gặp nhau rồi thì làm được mọi việc như với người trong cung: trò chuyện, tặng quà, kết giao, mà cũng hại nhau được
+  (tung tin đồn, vu oan…). Tặng quà, kết giao thì người kia được chọn nhận hay không.
+- Mỗi người tự làm việc của mình. Hết buổi thì chạm **Qua buổi**, hết buổi tối thì chạm **Qua đêm**.
+  Ai xong trước thì thấy **"Đợi bạn xong buổi"** (hoặc **"Đợi bạn xong tuần"**). Khi cả hai xong, buổi sau bắt đầu cho cả hai cùng lúc.
 - Nếu một người tắt máy hoặc mất mạng, cả cung **dừng lại**, người kia thấy **"Đợi bạn trở lại"**.
   Người kia chỉ cần mở lại đường dẫn cũ (hoặc mở trò chơi, chạm **Chơi cùng bạn**). Trò chơi tự chơi tiếp đúng chỗ cũ, không mất gì.
 - Nếu một người **chết**: người đó đầu thai ngay như khi chơi một mình (chọn ở nhà làm tiểu thư hay tiến cung), rồi sống tiếp

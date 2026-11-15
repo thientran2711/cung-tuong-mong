@@ -95,7 +95,8 @@ async function weekBoth(A,B,w){for(let k=0;k<3;k++)await buoiBoth(A,B,w===0&&k==
  ok(!after.dead&&after.n!==before.n&&after.era===before.era,'B reborn as a new person in the same world',[before,after]);
  {let seen=false;const t0=Date.now();while(Date.now()-t0<40000){await clear(A);await clear(B);seen=await A.p.evaluate(n=>!!(rivals.find(v=>v.coop)||rivals.flatMap(v=>v.staff||[]).find(x=>x.coop))&&(rivals.find(v=>v.coop)||rivals.flatMap(v=>v.staff||[]).find(x=>x.coop)||null).name===n,after.n);if(seen)break;await sleep(700)}
   ok(seen,'A sees the reborn friend by her new name',await A.p.evaluate(()=>((rivals.find(v=>v.coop)||rivals.flatMap(v=>v.staff||[]).find(x=>x.coop)||null)||{}).name));}
- ok(await A.p.evaluate(()=>{const f=(rivals.find(v=>v.coop)||rivals.flatMap(v=>v.staff||[]).find(x=>x.coop)||null);return f&&!kitKnown(f)&&!kitKnownName(f)}),'reborn friend is a stranger again (Người lạ)');
+ {const r=await A.p.evaluate(()=>{const f=(rivals.find(v=>v.coop)||rivals.flatMap(v=>v.staff||[]).find(x=>x.coop)||null);return{ok:!!f&&!kitKnown(f)&&!kitKnownName(f),srv:f&&f.id==null,st:f&&k61St(f),here:f&&f.id!=null&&whereOf(f),me:S.place,tr:COOPW.tr.slice(-12)}});
+  ok(r.ok,'reborn friend is a stranger again (Người lạ)',r.ok?undefined:r)}
  await clear(A);await clear(B);await shot(A,'12-reborn-seen');await shot(B,'12-reborn');
  /* 6 one more week after rebirth */
  {const wk=(await C(A)).week;await weekBoth(A,B,1);ok(await untilC(B,x=>__co().week===x+1,wk,40000),'week after rebirth advances');}
