@@ -169,7 +169,16 @@ window.kitEmotion=function(p){try{if(!S)return null;const q=emoRes(p);if(!q)retu
  if(q===S.emp&&!(e.v>=40)){const k=["vui","binh","buon","gian"][S.emp.mood]||"binh";e={k,v:k==="binh"?0:50,why:k===e.k?e.why:""}}return{k:e.k,name:EMO[e.k],v:e.v||0,why:e.why||"",known:true}}catch(e){return null}};
 /* ---------- the badge (KIT.md 31): one layer in pcPort → every frame size ---------- */
 function emoBadge(p){const m=window.kitEmotion(p);if(!m)return"";const t=m.known?`Tâm trạng: ${m.name}${m.why&&m.k!=="binh"?" ("+m.why+")":""}`:"Tâm trạng: chưa rõ";
- return `<img class="kemo kemo-${m.k}" src="img/kit/emo-${m.k}.webp" alt="${t}" title="${t}" onerror="this.remove()">`}
+ const E=x=>String(x==null?"":x).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+ /* owner 11/15: no visible label; TAP the seal = the kit popover (kpPop, j79) with the mood word + one-line cause; any other tap closes it */
+ return `<img class="kemo kemo-${m.k}" src="img/kit/emo-${m.k}.webp" alt="${E(t)}" data-kemo="${E(m.known?m.name:"Chưa rõ")}" data-kemow="${E(m.known&&m.k!=="binh"?m.why:"")}" role="button" tabindex="0" onerror="this.remove()">`}
+/* tap on any seal (hers or an NPC's, any frame size): kit popover; capture phase so the tap never also opens the card/portrait under it */
+function emoTipHTML(el){const n=el.dataset.kemo||"",w=el.dataset.kemow||"";const E=x=>String(x).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+ return n==="Chưa rõ"?`<div class="kpopt">Tâm trạng chưa rõ</div><div class="kpopx">Lâu rồi chưa gặp, chưa biết lòng người này ra sao.</div>`:`<div class="kpopt">${E(n)}${w?": "+E(w):""}</div>`}
+function emoTip(el){try{if(typeof kpPop==="function")kpPop(el,emoTipHTML(el))}catch(e){}}
+document.addEventListener("click",e=>{const el=e.target&&e.target.closest&&e.target.closest("img.kemo");if(!el)return;e.stopPropagation();e.preventDefault();emoTip(el)},true);
+document.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.target&&e.target.matches&&e.target.matches("img.kemo")){e.preventDefault();emoTip(e.target)}},true);
+["pointerdown","touchstart","mousedown"].forEach(t=>document.addEventListener(t,e=>{if(e.target&&e.target.closest&&e.target.closest("img.kemo"))e.stopPropagation()},{capture:true,passive:true}));
 (function(){const p0=pcPort;pcPort=function(f){let h=p0.apply(this,arguments);try{if(!emoOn()||!f||!f.__kp||/class="kemo/.test(h))return h;const b=emoBadge(f.__kp);if(!b)return h;
   const i=h.indexOf('<span class="kin">');if(i<0)return h;const j=h.indexOf('<img class="kfr"',i);if(j<0)return h;
   let depth=0,end=-1;const re=/<\/?span\b[^>]*>/g;re.lastIndex=i;let mm;while((mm=re.exec(h))){if(mm[0][1]==="/"){depth--;if(depth===0){end=mm.index;break}}else depth++}
@@ -179,6 +188,7 @@ function emoBadge(p){const m=window.kitEmotion(p);if(!m)return"";const t=m.known
 span.md.kfc.sm .kin>img.kemo{width:30%!important;left:5%!important;top:16%!important}
 span.md.kfc.xs .kin>img.kemo{width:38%!important;left:2%!important;top:14%!important}
 .kin>img.kemo.kemo-an{opacity:.85!important}
+.kin>img.kemo{cursor:pointer;-webkit-tap-highlight-color:transparent}
 @media (prefers-reduced-motion:no-preference){.kin>img.kemo.kemo-gian,.kin>img.kemo.kemo-dau{animation:kemoPulse 2.4s ease-in-out infinite!important}}
 @keyframes kemoPulse{0%,100%{filter:drop-shadow(0 1px 1.5px #000a)}50%{filter:drop-shadow(0 0 4px #ffcf8a) drop-shadow(0 1px 1.5px #000a)}}
 `;document.head.appendChild(st)})();
