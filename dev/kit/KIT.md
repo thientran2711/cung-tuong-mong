@@ -2291,33 +2291,35 @@ Test: `node dev/test/name-rank.js <url> <outdir> <tag> [sizes]` + `dev/test/fig-
 
 ### 48.1 RANK TITLE · `kitRankTone` + `.krt` / `.krn` (owner, ref. shot of another game: a title floating above the name) — `dev/build/jk4.js`
 The rank / role line above every name is a TITLE, the name under it is plain ink. One look everywhere a rank sits over a name:
-- TITLE: serif `var(--display)` (Noto Serif) bold, letter-spacing .03em, in the rank's OWN colour (`--rt` = `kitRankTone(title)`), with a
-  thin dark outline (8 hairline text-shadows in `--krt-ol` #1c100a) + a soft glow of the same colour (lightened, 3 px + 8 px), no chip,
-  no background — so it reads on painted scenes by day, night, rain, lãnh cung and on parchment dialogs alike.
-- NAME: `--krt-ink` #2a1a12, bold, no colour, no glow (on a painted stage the scene words keep their paper halo, KIT 33.5 / `.krs`;
-  on a dark `.modal.night` panel the name is parchment #f3e6cf).
-- Sizes: title .8rem (a title that IS the name, e.g. "Hoàng thượng", `.j59only`: .92rem); name as before (stage 1rem, knr .98rem).
+- TITLE: serif `var(--display)` (Noto Serif) bold, letter-spacing .03em, in the rank's OWN colour (`--rt` = `kitRankTone(title)`), VIVID
+  (owner 15/11 22:25Z: every tone ≥ 4.4:1 on parchment #fbf3e2), no chip, no background.
+- FRAMED UI (dialogs incl. kitEventDp captions, person cards, Tuần lục, lists, podium plates, kit page): PLAIN text in the vivid tone — no glow,
+  no outline. On a dark `.modal.night` panel the tone is lightened (55 % + white), still plain.
+- ON A PAINTING (stage name tags `.j59t` over the scene, captions over a picture `.kesov`, the kit sample's scene row `.krs`): the tone
+  lightened (72 % + white) + a thin dark outline (8 hairline text-shadows `--krt-ol` #1c100a) + a soft glow of the same colour (3 px + 8 px).
+- NAME: `--krt-ink` #2a1a12, bold, no colour; on a painting it keeps the paper halo of scene words (KIT 33.5); on `.modal.night` parchment #f3e6cf.
+- Sizes: title .84rem (a title that IS the name, e.g. "Hoàng thượng", `.j59only`: .92rem); name as before (stage 1rem, knr .98rem).
   Tuần lục heading: title .62em of the 1.4em heading, on its own line above the name.
 `kitRankTone(title, col)` → colour, ONE table `KIT_RT` keyed by the title's words (so every builder agrees whatever `--rc` it passes):
 
 | title | colour | | title | colour |
 |---|---|---|---|---|
-| Đáp ứng | ivory-champagne #eadbb4 | | Phế phi · lãnh cung | ash #c9d3dc |
-| Thường tại | green #7fcf8a | | Thái hậu | bronze #d39a5e |
-| Quý nhân | blue #78aef0 | | Hoàng thượng | imperial yellow #ffe066 |
-| Tần | pink #f49ac0 | | Cung nữ thô sử / Cung nữ / Đại cung nữ | grey-jade #b9c7c2 / jade #86d0be / blue #86a8ec (MRCOL family) |
-| Phi (any "… phi") | purple #c39bea | | Chưởng sự cô cô / Nữ quan / Ma ma | terracotta #e0a88a / lavender #b6a6e6 / sand #d9b38c |
-| Quý phi | rose-red #f2707a | | Tiểu thái giám / Thái giám / Thủ lĩnh / Tổng quản | sage #bccab4 / green #94c9a0 / steel #8fb4d6 / bronze #d8a27c |
-| Hoàng quý phi | amber #f7a540 | | Thái y · officials · Thị vệ | teal #7fd0c0 · steel blue #9db8e6 · #a8bcd0 |
-| Hoàng hậu | gold #ecbf3c | | Hoàng tử · Công chúa · Người lạ | sky #9ec8f0 · peach #f5b0a0 · grey #c4c4c4 |
+| Đáp ứng | champagne-bronze #876638 | | Phế phi · lãnh cung | ash slate #5d6b7a |
+| Thường tại | green #1a7f37 | | Thái hậu | bronze #9c4f12 |
+| Quý nhân | blue #1f5fcc | | Hoàng thượng | imperial gold #8f6800 |
+| Tần | pink #c42a78 | | Cung nữ thô sử / Cung nữ / Đại cung nữ | grey-jade #52746a / jade #0a7d68 / blue #2f5db0 (MRCOL family) |
+| Phi (any "… phi") | purple #7e3cc8 | | Chưởng sự cô cô / Nữ quan / Ma ma | terracotta #b4441e / violet #6a46b8 / sand-brown #8f5a24 |
+| Quý phi | crimson #c8102e | | Tiểu thái giám / Thái giám / Thủ lĩnh / Tổng quản | sage #59743a / green #1f7a48 / steel #2a5f92 / bronze #934414 |
+| Hoàng quý phi | amber #b04a00 | | Thái y · officials · Thị vệ | teal #0a7d76 · blue #2f55a4 · steel #465f80 |
+| Hoàng hậu | gold #8c5f00 | | Hoàng tử · Công chúa · Người lạ | sky #1a6fb8 · coral #bf412b · grey #666666 |
 
-Men are never pink/purple. Unknown title → the caller's colour lightened (62 % + white).
+Men are never pink/purple. Unknown title → the caller's colour darkened (80 % + black).
 **48.1c NO BOX (owner 15/11 ~20:40Z)**: person-dialog captions (kitEventDp `.kdpcap`, 32.7 `.kesf>.kpsn`, the event-stage overlay
 `.kesov>.kpsn`) have no box / frame / plate: rank + name sit straight on the dialog background (title colour + outline as above, name plain
 ink, hers gold-glow). Over a picture (`.kesov`) the name keeps the paper halo of scene words for readability.
 **48.1b HER OWN NAME (owner 15/11 ~20:10Z)**: the name of HER character (the local player's `S` only; in co-op the friend's name is
 NOT marked) = near-black ink #1a0f08 + a soft light-gold glow (`.kmy`: text-shadow #fff6d8 1px, #ffe9a8 3px, #f3cf6a 6px, #e8bd4a 11px),
-so she spots herself at once. Everybody else's name stays plain ink (stage names keep the paper halo for readability). `.kmy` is set by:
+on a PAINTING (stage tag, .kesov, .krs); in framed UI her name is plain black bold, no glow (owner 22:25Z). Everybody else's name stays plain ink (stage names keep the paper halo for readability). `.kmy` is set by:
 `kitNameRank(rank,name,col,me)` (4th arg; omitted → `kitIsMyName(name)` = it is `S.name`), Ân oán `relSide` (her side "Ta"), stage tag
 `.j59n` when the figure is S, `kitName(S,{named:true})` (32.7 captions, Tuần lục heading, podium plate), her identity card (kpIdentity),
 her person card `.pcname` (pcard `o.me`, or o.name === S.name) + its sticky strip. Kit page sample §48.1 shows her name next to another.
