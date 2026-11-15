@@ -127,3 +127,4 @@ Nhắc theo dõi: send_later 30 phút, tự đặt lại mỗi lượt (lịch l
 - [ ] Ân oán: chọn "Ngươi" lại hiện bảng Hoàng hậu; chọn Chu Thục Nghi (là Hoàng hậu) hiện sai chân dung; ô "Đã biết" y hệt nhau, không rõ nói về ai (giao kit-fig2).
 - [x] LIVE cfd321e94 (08:30Z): naming — Cùng/Mời hảo hữu, Tuần lục, Sang buổi, Ám hiệu, Bên mình, tab Chí tôn, "ngươi"→"ta" trên giao diện.
 - [ ] Thẻ cuối kiếp: hình nhân vật nhỏ (phải cao gần hết cột), các ô viền tự làm không theo kit, tên dưới chân → giao rank-ui (dùng hộp thoại có người + hàng kit).
+- [x] LIVE 14967f899 (09:05Z): cdn-images + thinhan-art — game đọc mọi ảnh từ Cloudflare, img/ rời khỏi git (hoa điền nhỏ, hết nốt ruồi, mặt Thái hậu mới, nền đã chỉnh màu, vá alpha đợt 1, 103 tranh việc mới).
