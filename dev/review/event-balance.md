@@ -75,3 +75,15 @@ steps per page: 70 · pages: 3 · page errors: 0
 - always-the-same: avg max rank 3.67, died 66.7% → loses.
 - sample: 3 lives in the smallest group — too small for a firm verdict (≥30 lives per bot wanted).
 
+
+## Review r6 (build 5813d85e6 = r6 merge on main 27491781f + evbDedup fix), seeds 11–14 × 45 steps, ONE page at a time (EVPAR=1), 12 pages, page errors 0
+
+| bot | lives | avg max rank | reached Phi (5+) % | reached Hoàng hậu (7+) % | died % | life < 3 yrs % | ended below best rank % | years / life |
+|---|---|---|---|---|---|---|---|---|
+| đọc gợi ý (hint) | 5 | 3.8 | 40.0 | 0.0 | 60.0 | 0.0 | 100.0 | 10.92 |
+| chọn bừa (rand) | 4 | 3.75 | 25.0 | 0.0 | 0.0 | 0.0 | 100.0 | 14.35 |
+| luôn ô đầu (same) | 6 | 3.33 | 0.0 | 0.0 | 50.0 | 16.7 | 100.0 | 9.71 |
+
+- endings: hint — Thái phi ×2, Trúng độc ×2, Khó sinh ×1; rand — Thái phi ×4; same — Thái phi ×3, Trúng độc ×3.
+- Reviewer reading: same order as the worker's final run (hint ≥ rand > same on avg max rank, same reaches Phi 0 %), but hint is NOT clearly ahead
+  of random (3.8 vs 3.75) and dies more often (60 % vs 0 %, poison / childbirth). 4–6 lives per bot: direction only.

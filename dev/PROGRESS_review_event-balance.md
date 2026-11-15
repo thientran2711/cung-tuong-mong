@@ -49,3 +49,17 @@ NODE_PATH=$(npm root -g) node dev/measure/evbot.js http://127.0.0.1:8861/dev/tmp
 
 ## Open / next
 - Banners: 305 of 365 chapter beats have no own picture → list in dev/review/story-deadlines.md for act-pics2.
+
+## Review r6 (branch review/event-balance-r6, merged onto origin/main 27491781f)
+- Merge: one conflict, dev/build/assemble.py → main list (with jtoil after jkitpage) + jstory, jevb after jtoil. Site rebuilt with dev/site/build_site.sh (root index.html has the charset head; test against /index.html).
+- Fixes on r6: (1) jevb evbDedup named best/worst over the whole collided group, so after the merge night1 @vague left 2 options with different odds unmarked
+  (hint-dedup.js exit 1, missLeft 2) → extremes are now taken within each set that still reads the same; wording "cơ may/lợi … hơn cả" only when that set
+  is the whole dialog, else "nhỉnh hơn / kém hơn" (an option already marked "dễ thành" was outranked by one called "cao hơn cả").
+  (2) Kit k3 top-bar state row printed label and value together ("truy sát4 buổi"): `.k3tt .k3r>.k3l+b{margin-left:.3em}` (jk4), KIT.md 31.2 note.
+  (3) #kit sample §31.2 for the K3_STATE hook (jstory, KIT_SAMPLES).
+- Tests (r6): story-deadline.js 12/12 at 755x1000, 1000x755, 1180x820, 1366x1024, 844x390; event-context.js 9/9; hint-dedup.js exit 0 (88 → 31 dialogs,
+  missLeft 0); opt-render.js fails [] at 1180x820@2 and 755x1000@2 (all event dialogs EVENT = cost mode); story_audit 179/179 + j72 34/34;
+  old saves from the main build (plain life; mid-chapter Bạc beat) load, play 24 buổi, 0 page errors.
+- Bots r6 (EVPAR=1, seeds 11–14 × 45 steps, 0 page errors): hint 5 lives avg max 3.8 / Phi 40 % / died 60 %; rand 4 lives 3.75 / 25 % / 0 %;
+  same 6 lives 3.33 / 0 % / 50 % → table in dev/review/event-balance.md. Hint not clearly ahead of random yet (small sample).
+- Known, not fixed: at 390x844 in-game (portrait, normally behind the rotate prompt) the top-bar state row with the pl67 chip + "Chưa điểm trang" runs past the right edge.
