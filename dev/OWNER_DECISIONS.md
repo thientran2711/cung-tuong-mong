@@ -901,3 +901,8 @@ All must work in co-op.
 - Screenshot dev/handover/refs/owner-giaotinh-picker-space.jpg (Giao tình › Ân oán: "Xem quan hệ của" group tabs + portrait strip with ‹ › pager, then "với" group tabs + another strip, each strip mostly empty, tall; the actual relation card starts far down).
 - Decision (coordinator design): compact the two pickers: one row each — label + group chips + portraits on the SAME line where width allows (iPad), smaller portrait cells, pager only when the strip overflows, no tall empty bands; or a single two-slot selector "[Hoàng thượng] ⇄ [Tần Kiều Nguyệt]" that opens a kit person picker on tap. Goal: the relation card is visible without scrolling on 1180x820 and 755x1000. Same fix for other screens using these person strips with large empty space. → worker review/rel-picker (QUEUED: subagent cap).
 - press-fx made URGENT → worker review/press-fx spawned immediately.
+
+## 15/11 (session 8) — A gain shown in red (owner screenshot)
+- Owner (verbatim): "Tại sao + mà màu đỏ."
+- Screenshot dev/handover/refs/owner-kem-plus-red.jpg ("Tự học Thêu thùa: thêu khăn": KÈM "tiến bộ Thêu thùa +1..2" in red).
+- Rule: every value is coloured by its MEANING (gain green, loss red, neutral plain), never by the row it sits in; gains belong in ĐƯỢC, not KÈM. Whole family across all cards → added to review/act-text scope (scan: "+N shown red / −N shown green").
