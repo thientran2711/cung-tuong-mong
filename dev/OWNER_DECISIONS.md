@@ -914,3 +914,8 @@ All must work in co-op.
 ## 15/11 (session 8) — Night picture looks cold on a warm night; night panel is dark, unlike the game (owner screenshots)
 - Owner (verbatim): "Ảnh này là gì mà nhìn như bị ghẻ lạnh vậy." Screenshot dev/handover/refs/owner-night-cold-picture.jpg: text "Ngài khẽ cười, kéo ta lại gần" but the picture shows her and the Emperor sitting far apart. → the night picture must match the night's tone (warm → close/tender, tasteful; cold → distant); draw the warm version. Assigned to review/pic-dupes worker.
 - Owner (verbatim): "Tại sao khung này màu tối, khác hoàn toàn game mình." Screenshot dev/handover/refs/owner-night-dark-panel.jpg: the ĐÊM panel uses a black/dark theme (dark body, dark title band) unlike every other pop-up. Rule: ONE pop-up look (KIT §8): night panels use the same light paper panel as the rest; the night feel comes from the painted picture/background, the ĐÊM seal colour and lighting accents only — never a dark panel body. Whole family: scan every kpanel kind / data-kind and any dark-themed dialog (night, lãnh cung, death, KIẾP end…) → same light panel. → worker review/night-panel (QUEUED: subagent cap; coordinate with B1 night-end-r1).
+
+## 15/11 (session 8) — Sổ ghi numbers don't match the header (owner screenshot)
+- Owner (verbatim): "Tại sao không khớp."
+- Screenshot dev/handover/refs/owner-log-mismatch.jpg: Sổ ghi "Đêm nay ta được thị tẩm. Sủng 33 → 40 …" while the header shows Sủng 37.
+- Rule: every stat/relation change is logged with its reason; the log's "X → Y" chain for each stat replays exactly to the header value; same-moment changes in applied order. Whole family audit of unlogged stat changes. → worker review/log-sync (spawned).
