@@ -13,13 +13,15 @@ rows=[l.split() for l in open(os.path.join(H,'gens.txt')) if l.strip() and not l
 out=[]
 for r in rows:
     if len(r)<6 or r[5]!='final':continue
-    c,gen=r[0],r[1];role='maid' if c.startswith('m') else 'consort'
-    fig=f'img/fig-{role}-{c}-kc-a18.webp';por=f'img/por-{role}-{c}-kc-a18.webp'
+    c,gen=r[0],r[1];T='kc'
+    if ':' in c:T,c=c.split(':')          # 'ngheo:c05' rows = poor-family outfit (origins thd, td)
+    role='maid' if c.startswith('m') else 'consort'
+    fig=f'img/fig-{role}-{c}-{T}-a18.webp';por=f'img/por-{role}-{c}-{T}-a18.webp'
     if not os.path.exists(os.path.join(W,fig)):print('missing',fig);continue
     pal=SERV.get(c) if role=='maid' else re.search(r'clean bright colours: ([^.]*)\.',J[f'N-{c}-t1']['prompt']).group(1)
-    out.append({'role':role,'identity':c,'tier':'kc','ageBand':'a18','palette':pal,
-                'magnificUrl':'https://www.magnific.com/app/creation/'+gen,'bg':r[4],'sheet':'KC-'+c,'file':fig,'por':por})
-out.sort(key=lambda f:(f['role'],f['identity']))
+    out.append({'role':role,'identity':c,'tier':T,'ageBand':'a18','palette':pal,
+                'magnificUrl':'https://www.magnific.com/app/creation/'+gen,'bg':r[4],'sheet':T.upper()+'-'+c,'file':fig,'por':por})
+out.sort(key=lambda f:(f['tier'],f['role'],f['identity']))
 os.makedirs(os.path.join(R,'img'),exist_ok=True)
 json.dump(out,open(os.path.join(R,'img','FIGURES-kc.json'),'w'),ensure_ascii=False,indent=0)
 print(len(out),'records')

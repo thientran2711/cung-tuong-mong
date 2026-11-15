@@ -14,3 +14,10 @@ c05 gOIIk8ESXO XmPP0LqBfo 8aNsy0CIrU If66pi4tvE final
 c08 yiCClEyPW9 eIOOWxbdqL 3zbtQNvREY ksDDQgs16B final
 c29 mE33eAXhJQ ksDDuA216B 4RuXEXL9Aa 9ZQQwLDNYZ final
 m05 9ZQQUCRNYZ gOIIkToSXO YMLuxraWeC lJ88kyhgv9 final
+# --- NGHÈO pilot (tier ngheo, origins thd/td; owner 02:30Z; prompt: mkprompt.py --ngheo <face>) ---
+# c29: forehead dot retouched with retouch.py (small blob only), upload s7oojzUl8e, cut 5jVVqR7Kxe
+ngheo:c05 fHAAm8JCDY XmPP0LqBfo 8aNsy0CIrU SyttlWrUb8 final
+ngheo:c08 XmPPDeABfo eIOOWxbdqL 3zbtQNvREY jUXXrG2LD0 final
+ngheo:c29 N2FFPih6D9 ksDDuA216B 4RuXEXL9Aa 5jVVqR7Kxe final
+ngheo:m05 JNaaU9NOq4 gOIIkToSXO YMLuxraWeC YMLLzEGWeC final
+# --- KHUÊ CÁC batch (79 faces; idref uploaded from CDN img/_kcwork/idref-<face>.jpg) ---

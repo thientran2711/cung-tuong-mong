@@ -46,5 +46,53 @@
 "sheet": "KC-m05",
 "file": "img/fig-maid-m05-kc-a18.webp",
 "por": "img/por-maid-m05-kc-a18.webp"
+},
+{
+"role": "consort",
+"identity": "c05",
+"tier": "ngheo",
+"ageBand": "a18",
+"palette": "peacock teal and gold",
+"magnificUrl": "https://www.magnific.com/app/creation/fHAAm8JCDY",
+"bg": "SyttlWrUb8",
+"sheet": "NGHEO-c05",
+"file": "img/fig-consort-c05-ngheo-a18.webp",
+"por": "img/por-consort-c05-ngheo-a18.webp"
+},
+{
+"role": "consort",
+"identity": "c08",
+"tier": "ngheo",
+"ageBand": "a18",
+"palette": "cherry-blossom pink and pale green",
+"magnificUrl": "https://www.magnific.com/app/creation/XmPPDeABfo",
+"bg": "jUXXrG2LD0",
+"sheet": "NGHEO-c08",
+"file": "img/fig-consort-c08-ngheo-a18.webp",
+"por": "img/por-consort-c08-ngheo-a18.webp"
+},
+{
+"role": "consort",
+"identity": "c29",
+"tier": "ngheo",
+"ageBand": "a18",
+"palette": "ink blue and pale grey",
+"magnificUrl": "https://www.magnific.com/app/creation/N2FFPih6D9",
+"bg": "5jVVqR7Kxe",
+"sheet": "NGHEO-c29",
+"file": "img/fig-consort-c29-ngheo-a18.webp",
+"por": "img/por-consort-c29-ngheo-a18.webp"
+},
+{
+"role": "maid",
+"identity": "m05",
+"tier": "ngheo",
+"ageBand": "a18",
+"palette": "coral red and gold",
+"magnificUrl": "https://www.magnific.com/app/creation/JNaaU9NOq4",
+"bg": "YMLLzEGWeC",
+"sheet": "NGHEO-m05",
+"file": "img/fig-maid-m05-ngheo-a18.webp",
+"por": "img/por-maid-m05-ngheo-a18.webp"
 }
 ]
