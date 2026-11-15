@@ -53,3 +53,15 @@ hoặc đã quen một nam nhân (tình ý ≥ 20 / Thanh mai). Mệnh truyện 
 
 ## Đo (bot tìm lối, dev/measure/routes.js)
 Đích: trốn cung thành 10–25 % số lần thử của người chơi cẩn thận; tư tình bị lộ phần lớn khi ham gặp; kết hợp lệ hiếm (5–20 % số lần xin).
+
+### Kết quả đo 15/11 (sau chỉnh; bot tìm lối = inpage6 + dev/measure/routes.js, 100000 vòng mỗi lối)
+- Bot cân bằng không còn thấy thẻ «Lối riêng» (cổng `window.__rtGo` chỉ bật trong lúc bot tìm lối chọn thẻ).
+- **Trốn cung** (gốc theo cách 12/16/10/22/8, trần 45, hỏa hoạn 1,2 %/tháng là chuyện thật cả cung):
+  người cẩn thận 15 kiếp, 16 lần trốn → 3 thoát (≈19 %/lần), 13 bị bắt; người liều (đi ngay khi thẻ mở) 19 kiếp, 33 lần → 3 thoát (≈9 %).
+- **Rời cung hợp lệ** (xuất gia: cần 2 năm trong cung + Thái hậu 40, cơ may −12 + Thái hậu/3 + (Đức−50)/3 − Sủng/3, bị bác đợi một năm):
+  19 kiếp, xuất gia 65 lần xin → 4 được chuẩn (≈6 %); phế làm thứ dân 7 (đều từ lãnh cung); ban hôn 1 lần xin, bị bác.
+- **Tư tình** (bot ham gặp): 13 kiếp, 28 lần gặp lén, 14 lần bị thấy, 16 lần bị phi tần bắt được, 9 lần bị tố → 7 kiếp bại lộ (54 %).
+- **Ẩn dật**: xem PROGRESS_routes (bot ẩn dật không hại ai).
+- Mỗi kết cục đi tới được bằng thẻ thật: `node dev/measure/routes_reach.js` → 15/15 (tc_cung, tc_dan, tc_lien, tc_bat, hl_tu, hl_hon,
+  hl_que, hl_phe, ad_an, tt_hoa, ng_vach, ng_oan, tt_lo, ng_vu, tt_kin).
+- Cân bằng chung (runb sens, HHSTOP, xoay 9 thân phận, n=28): HH 36 %, chết sớm 21 % — trong khung (HH 35–45 %, chết sớm ≤ 45 %).

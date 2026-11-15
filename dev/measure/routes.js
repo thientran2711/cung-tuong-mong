@@ -13,7 +13,8 @@ const MT={html:'text/html',js:'text/javascript',json:'application/json'};
  const p=await ctx.newPage();p.setDefaultTimeout(900000);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,160)));
  await p.goto('http://game.local/zz-test.html',{waitUntil:'domcontentloaded'});await p.waitForTimeout(3000);
  await p.evaluate(()=>{try{localStorage.clear()}catch(e){}document.getElementById('title').hidden=true;for(let i=0;i<60;i++){start();if(!(typeof isSrv==='function'&&isSrv()))break}Q.length=0});
- await p.evaluate(fs.readFileSync(path.join(__dirname,'inpage6.js'),'utf8'));
+ let INP=fs.readFileSync(path.join(__dirname,'inpage6.js'),'utf8');if(MODE==='ad')INP=INP.split('rvBtns(i).forEach').join('rvBtns(i).filter(k=>!(S.rt&&S.rt.ad&&S.rt.ad.on&&RT_HARM.includes(k))).forEach');/* a quiet-life player does not scheme */
+ await p.evaluate(INP);
  await p.evaluate(([mode,careful])=>{window.__rtL=[];const rec=(cut)=>{try{if(!S||(typeof isSrv==='function'&&isSrv()))return;const T=S.rt||{};window.__rtL.push({open:!!T.open,ends:(T.ends||[]).slice(),y:+(S.turn/12).toFixed(2),cut:!!cut,fate:S.fate||"",ad:T.ad?{on:T.ad.on,harm:T.ad.harm||0,m:S.turn-T.ad.since,duc:S.duc}:null})}catch(e){}};
   const o0=over;over=function(){rec(false);return o0.apply(this,arguments)};const s0=start;start=function(){try{if(S&&!S.dead&&S.turn>0)rec(true)}catch(e){}return s0.apply(this,arguments)};
   const PRI={tc:["tc0","tc_guard","tc_maid","tc_home","tc_route","tc_pass","tc_cloth","tc_drug"],tt:null,hl:["hl_plead","hl_tu","hl_hon","hl_que","hl_phe"],ad:["ad0","ad_kinh","ad_che"]};
@@ -28,7 +29,8 @@ const MT={html:'text/html',js:'text/javascript',json:'application/json'};
    if(!a&&PRI[mode])for(const id of PRI[mode]){a=C.find(x=>x.rtId===id);if(a)break}
    if(!a&&mode==='tc'&&T.tc&&prepN>=4&&careful!=='0'){}
    if(!a)return;go(a);for(let k=0;k<20&&Q.length;k++){const m=Q[0];if(m.opts&&m.opts.length){const i=Math.floor(Math.random()*m.opts.length);try{chooseM(i)}catch(e){Q.shift()}}else closeModal()}}};
-  if(mode==='ad'){const r0=rvBtns;rvBtns=function(){const L=r0.apply(this,arguments);return S&&S.rt&&S.rt.ad&&S.rt.ad.on?L.filter(k=>!RT_HARM.includes(k)):L}}/* a quiet-life player does not scheme */
+  /* a quiet-life player does not scheme */
+  if(mode==='ad'){const d0=doAct;doAct=function(i,k){if(S&&S.rt&&S.rt.ad&&S.rt.ad.on&&RT_HARM.includes(k)){if(can(2))spend(2);return}return d0.apply(this,arguments)}}/* she stays in instead of scheming (time still passes, so the bot is not stuck) */
   const nb=nextBuoi;nextBuoi=function(){const r=nb.apply(this,arguments);try{window.__rtPol()}catch(e){}return r}},[MODE||'tc',CAREFUL==null?'1':CAREFUL]);
  const N=+ITER||20000;for(let i=0;i<N;i+=500){await p.evaluate(()=>window.__bot.step('sens',500))}
  const r=await p.evaluate(()=>{const L=window.__rtL.slice();const E={};L.forEach(x=>x.ends.forEach(e=>E[e]=(E[e]||0)+1));

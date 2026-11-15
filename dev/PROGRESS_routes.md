@@ -22,7 +22,23 @@ Plan: dev/STORY_ROUTES_PLAN.md. Module: dev/build/jroute.js (after jmen, before 
 - Painted bowl sprite (mg-nghiem-bowl) + a dedicated board would replace the canvas bowl — needs owner OK for new Magnific art.
 - Route art uses existing event pictures as placeholders (ev-tu-tinh, ev-mat-uoc, ev-cung-nu, ev-hoi-lo, ev-thu-nha, ev-hoa-hoan, act-xuat-gia…).
 
-## Where I stopped (handover 15/11 — coordinator STOP; resume from here)
+## Phiên 15/11 (tiếp) — xong, SẴN SÀNG KIỂM
+- Gộp origin/review/book-release @4bbed569 (hộp thoại chỉ cuộn lựa chọn KIT 32.5, người đứng trên tranh KIT 32.6, sân khấu 3/2 người) — không xung đột.
+- Bot: rtCards mở cho bot chỉ khi `window.__rtGo` (bật trong lúc chính sách tìm lối chọn thẻ, có chặn gọi lồng) → bot cân bằng không bao giờ bấm thẻ Lối riêng.
+- Chỉnh: trốn cung gốc 12/16/10/22/8, trần 45, hỏa hoạn 1,2 %/tháng (chuyện thật của cả cung, không còn chỉ xảy ra khi nàng đang tính trốn);
+  xuất gia cần 2 năm trong cung + Thái hậu 40, cơ may −12 + Thái hậu/3 + (Đức−50)/3 − Sủng/3 (+8 khi Thái hậu nói giúp), bị bác đợi một năm;
+  phi tần trốn cùng cơ may như nàng (22 + 11 khi được nàng giúp, mỗi tháng 40 % là đêm thử sau 3 tháng chuẩn bị; hỏng là bị bắt).
+- «Một đời giấu kín» ghi cả khi nàng có con riêng mà chưa từng mở lối (S.rt chưa có).
+- dev/measure/routes_reach.js: chơi thẻ/hộp thoại thật theo thứ tự cho 15 kết cục → 15/15.
+- Ảnh dev/shots/routes2 (755x1000@2, 1180x820@2, reducedMotion): 0 lỗi trang, 0 tràn ngang, 0 chữ bị cắt. Sổ cũ (dev/test/outside/oldsave.js) nạp được, 0 lỗi.
+- Số đo: xem dev/STORY_ROUTES_PLAN.md «Kết quả đo 15/11».
+- Mục 11 «mật ước sinh con khi Hoàng thượng vô sinh»: sếp bỏ (02:15Z) — đã gỡ sạch, không còn gì trong code.
+
+## Còn mở (hỏi sếp, không tự làm)
+- Bát nước vẽ tay (mg-nghiem-bowl) thay bát vẽ bằng canvas — cần sếp cho vẽ.
+- Dấu khung trò nghiệm thân đang là «TÀI NGHỆ»; có thể đổi sang dấu «MƯU» khi review/scheme-games gộp.
+
+## (cũ) Where I stopped (handover 15/11) — đã xử lý ở trên
 Last measure (dev/measure/routes.js, 80000 bot iterations each, build with escape bases 20/24/20/30/18, prep +8/+6/+5/+4, heat/2.5, cap 60):
 - tc careful: 21 lives, 24 escape attempts → 10 out (42 % per attempt, ~48 % of lives), 11 caught. STILL TOO EASY vs target 10–25 %.
 - tc careless (arg 0): 22 lives, 41 attempts → 8 out, 33 caught (~36 % of lives).
