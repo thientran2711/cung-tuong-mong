@@ -4832,21 +4832,68 @@ const DIL={"Chuyên cần":{v:1.3,d:1.15,w:.8,m:1,n:0,up:"học chữ, học l�
  "Bướng bỉnh":{v:1,d:.9,w:1,m:.5,n:5,up:"gan dạ, đi thi không sợ",dn:"không nghe mẹ dạy (mẹ dạy chỉ được nửa)"}};
 const DILK=Object.keys(DIL);
 const KTKID=["ksab","kpoison","pond","kframe"];
+/* ---- TƯ CHẤT (owner 11/15): trẻ sinh ra chỉ có tư chất (bẩm sinh, từ cha mẹ + may rủi, ẩn, không đổi); Văn · Võ · Đức bắt đầu gần 0 và lớn
+   dần mỗi tháng nhờ dạy dỗ (thầy, mẹ dạy, Tài/Đức của mẹ, Hoàng thượng để mắt), nhân theo tư chất; Hiền tài suy ra từ ba tài, chỉ hiện từ 6 tuổi.
+   Tư chất chỉ lộ ra thành một chữ phỏng chừng khi có người nhìn (nhũ mẫu, thầy dạy; con người khác: lời đồn), con mình đọc sát hơn. Cùng một luật cho mọi người mẹ. */
+Object.assign(BAL,{tc:{base:12,mom:.35,emp:.35,rnd:20,min:5,max:95,
+ mul:[.45,1.55],     /* hệ số học nhanh ở tư chất 0 / 100 */
+ born:2,              /* Văn, Võ, Đức lúc lọt lòng: 0..born */
+ nat:[.12,.3,.1],     /* tự lớn mỗi tháng: 0–2 tuổi, 3–5 tuổi, từ 6 tuổi */
+ momP:.12,            /* mẹ ở bên (Tài → Văn, Đức → Đức) mỗi tháng khi mẹ 100, từ 1 tuổi */
+ empP:.06,empW:.5,    /* Hoàng thượng để mắt (thương 100) mỗi tháng; Võ nhận nửa */
+ cam:.5,              /* mẹ giỏi đàn (Cầm 4+): Văn thêm mỗi tháng từ 3 tuổi */
+ simTeach:.35,        /* phần mẹ dạy trung bình mỗi mùa (để quy đổi con cũ) */
+ hienAge:6,barAge:3,nurseAge:1,rumAge:6,
+ nzNurse:12,nzOwn:7,nzOther:15,  /* độ lệch khi đoán tư chất: nhũ mẫu, thầy dạy / mẹ, lời đồn */
+ w:[30,45,60,75],     /* tư chất → chữ: chậm hiểu · tầm thường · khá · thông tuệ · hơn người */
+ fw:[30,55,75],       /* lòng thương của Hoàng thượng → lời cả cung thấy (con người khác) */
+ hw:[-12,-4,5,14],    /* Hiền tài so với mức thường của tuổi → chữ (con người khác, lời đồn) */
+ exp:[25,5,70],       /* mức thường của tuổi (khảo hạch): min(exp[2], exp[0] + exp[1]·(tuổi − 6)) */
+ old:[15,.75,10]}});  /* con cũ: tư chất = old[0] + old[1]·Tài cũ ± old[2] */
+const TCW=["chậm hiểu","tầm thường","khá","thông tuệ","hơn người"];
+const HTW=["kém chúng bạn","dưới chúng bạn","ngang chúng bạn","hơn chúng bạn","vượt chúng bạn"];
+function tcMul(k){const T=BAL.tc;return T.mul[0]+(T.mul[1]-T.mul[0])*cl(k.tc==null?50:k.tc,0,100)/100}
+function tcNz(n){return R(2*n+1)-n}
+function tcLad(v,th,W){let i=0;while(i<th.length&&v>th[i])i++;return W[i]}
+function tcWord(v){return tcLad(v,BAL.tc.w,TCW)}
+function tcSeeOwn(k,by,nz){if(k.tc==null)return null;k.tcO={v:cl(k.tc+tcNz(nz),0,100),by};return k.tcO}
+/* what she can say about a child's tư chất: {w, by} or null (never the number) */
+function tcSeen(k,mine){const T=BAL.tc;if(!k||k.tc==null)return null;if(mine)return k.tcO?{w:tcWord(k.tcO.v),by:k.tcO.by}:null;
+ if(k.age<T.rumAge)return null;if(k.tcR==null)k.tcR=cl(k.tc+tcNz(T.nzOther),0,100);return{w:tcWord(k.tcR),by:"lời đồn"}}
+function hienShown(k){return !!k&&k.age>=BAL.tc.hienAge}
+function hienWord(k){if(!hienShown(k))return null;if(k.hn==null)k.hn=tcNz(Math.round(BAL.tc.nzOther/2));return tcLad(ktHien(k)+k.hn-ktExp(k.age),BAL.tc.hw,HTW)}
+/* the mother of a new child: her Tài, Đức, Tâm cơ and arts; the Emperor's hidden fixed gifts; luck */
+function tcBorn(p){const T=BAL.tc,a=(p&&p.arts)||{},E=ktEmp();const mom=cl(.4*(p.tai||40)+.3*(p.duc||40)+.3*(p.tamco||30)+(a.thi||0)+(a.ky||0)+(a.cam||0)+(a.vu||0),0,100);
+ return cl(Math.round(T.base+T.mom*mom+T.emp*(E.v+E.w+E.d)/3+tcNz(T.rnd)),T.min,T.max)}
+/* one month of growth (every child, every mother); o = {h health, nf teacher paid, live mother at hand, sim expected lessons} */
+function tcGrowCore(k,p,o){const T=BAL.tc,m=tcMul(k),h=o.h,a=k.age||0,band=a<3?0:a<6?1:2;
+ ["tv","tw","td"].forEach(f=>ktUp(k,f,T.nat[band]*h*m));
+ if(a>=1&&o.live&&p){ktUp(k,"tv",T.momP*cl(p.tai||0,0,100)/100*h*m);ktUp(k,"td",T.momP*cl(p.duc||0,0,100)/100*h*m)}
+ if(a>=1){const e=T.empP*cl(k.fond||0,0,100)/100*h*m;ktUp(k,"tv",e);ktUp(k,"td",e);ktUp(k,"tw",e*T.empW)}
+ const R0=ktRates(k);ktUp(k,"tv",R0.v*h*o.nf*m);ktUp(k,"td",R0.d*h*o.nf*m);ktUp(k,"tw",R0.w*h*o.nf*m);
+ if(o.live&&p&&a>=3&&(p.arts||{}).cam>=4)ktUp(k,"tv",T.cam*h*m);
+ if(o.sim&&a>=3&&p){ktUp(k,"tv",o.sim/3*ktTeachG(k,p,"tv"));ktUp(k,"td",o.sim/3*ktTeachG(k,p,"td"))}}
+/* stats a child of this age and tư chất would have (old saves, children already alive when a life starts); shape = old Văn/Võ/Đức leanings */
+function tcAgeFill(k,shape){const T=BAL.tc,mom={tai:45,duc:50,arts:{}};const x={tc:k.tc,age:0,fond:k.fond||40,sex:k.sex,tut:0,vt:0,dil:k.dil,tv:T.born/2,tw:T.born/2,td:T.born/2};
+ const n=Math.max(0,(k.age||0)*12);for(let i=0;i<n;i++){x.age=Math.floor(i/12);if(x.age>=6){x.tut=k.tut||0;x.vt=k.vt||0}tcGrowCore(x,mom,{h:1,nf:1,live:true,sim:T.simTeach})}
+ const sh=shape||{tv:1,tw:1,td:1};["tv","tw","td"].forEach(f=>{k[f]=cl(x[f]*cl(sh[f]||1,.6,1.4),0,100)})}
 function ktMom(k){const e=allKids().find(([x])=>x===k);return e?(e[1]||S):null}
 function ktLive(p){return p===S?!S.dead&&!S.out:!!(p&&p.alive&&!p.out)}
 function ktEmp(){const E=S.emp;if(!E.tp)E.tp={v:35+R(41),w:35+R(41),d:30+R(41)};return E.tp}
 function ktTal(k){k.tal=Math.round((k.tv+k.tw+k.td)/3);k._t=k.tal}
 /* con cũ (bản lưu cũ, con có sẵn lúc vào cung): chia Tài cũ làm ba, lệch chút ít */
-function ktInit(k){if(k.tv!=null)return;const t=k.tal==null?40:k.tal,n=()=>cl(t+R(11)-5,0,100);k.tv=n();k.tw=n();k.td=n();k.dil=k.dil||pick(DILK);k.tut=k.tut||0;k.vt=k.vt||0;ktTal(k)}
+function ktInit(k){if(k.tcv===1&&k.tv!=null)return;const T=BAL.tc;k.dil=k.dil||pick(DILK);k.tut=k.tut||0;k.vt=k.vt||0;
+ /* old save (Văn/Võ/Đức were the inborn numbers) or a child made without a birth: the old talent becomes tư chất, the stats restart at what that age would have */
+ let shape=null,base=k.tal==null?45:k.tal;if(k.tv!=null){const av=Math.max(1,(k.tv+k.tw+k.td)/3);base=av;shape={tv:k.tv/av,tw:k.tw/av,td:k.td/av}}
+ if(k.tc==null)k.tc=cl(Math.round(T.old[0]+T.old[1]*base+tcNz(T.old[2])),T.min,T.max);
+ tcAgeFill(k,shape);k.tcv=1;ktTal(k)}
 /* mã cũ cộng/trừ thẳng vào tal (biến cố, mưu phá việc học): chia đều phần chênh cho ba tài */
 function ktSync(k){if(!k)return;ktInit(k);if(k.tal!==k._t){const d=k.tal-k._t;k.tv=cl(k.tv+d,0,100);k.tw=cl(k.tw+d,0,100);k.td=cl(k.td+d,0,100)}ktTal(k)}
 function ktSyncAll(){if(S)allKids().forEach(([k])=>ktSync(k))}
 function ktR(x){return Math.round(x)}
 function ktHien(k){ktSync(k);return Math.round(.4*k.tv+.4*k.td+.2*k.tw)}
 /* thiên tư lúc sinh: mẹ (Tài, Tâm cơ, Đức, tài nghệ) + Hoàng thượng (tư chất ẩn, cố định) + may rủi; một công thức cho mọi người mẹ */
-function ktBorn(k,p){const a=p.arts||{},E=ktEmp();
- const mv=cl(.6*(p.tai||40)+.2*(p.tamco||30)+2.5*((a.thi||0)+(a.ky||0)+(a.cam||0)),0,100),md=cl(p.duc||40,0,100),mw=cl(25+6*(a.vu||0)+.2*(p.tamco||30),0,100);
- const f=(m,e)=>cl(3+.22*m+.2*e+R(18),1,100);k.tv=f(mv,E.v);k.tw=f(mw,E.w);k.td=f(md,E.d);k.dil=pick(DILK);k.tut=0;k.vt=0;k.born53=1;ktTal(k)}
+function ktBorn(k,p){const T=BAL.tc;k.tc=tcBorn(p);k.tv=R(T.born+1);k.tw=R(T.born+1);k.td=R(T.born+1);k.dil=pick(DILK);k.tut=0;k.vt=0;k.born53=1;k.tcv=1;k.tcO=null;k.tcR=null;k.hn=null;ktTal(k)}
 (function(){const m0=mkKid;mkKid=function(){const k=m0.apply(this,arguments);try{ktInit(k)}catch(e){}return k}})();
 (function(){const b0=birthP;birthP=function(p){const n0=(p.kids||[]).length;const r=b0.apply(this,arguments);try{(p.kids||[]).slice(n0).forEach(k=>ktBorn(k,p))}catch(e){}return r}})();
 /* ---- học: thầy, nết, sức khỏe, mẹ còn hay mất ---- */
@@ -4858,14 +4905,11 @@ function ktRates(k,noDil){const D=noDil?{v:1,d:1,w:1}:ktD(k),t=k.tut||0;
 /* ước mỗi năm ở mức hiện tại (không tính nết ẩn): con số "khoảng" trên nút */
 function ktYear(k,f,rate){return Math.max(0,Math.round(12*rate*Math.max(0,1-k[f]/KT.cap)))}
 function ktFee(k){if(!k.alive||k.age<6)return 0;return (k.tut===3&&k.fav?KT.feeFav:KT.fee[k.tut||0])+(k.vt?KT.feeVo:0)}
-function ktGrow(k,p){if(!k.alive||k.age<3)return;ktSync(k);const h=ktHp(k),nf=ktLive(p)?1:.7,R0=ktRates(k);
- ["tv","tw","td"].forEach(f=>ktUp(k,f,KT.nat*h));
- ktUp(k,"tv",R0.v*h*nf);ktUp(k,"td",R0.d*h*nf);ktUp(k,"tw",R0.w*h*nf);
- if(ktLive(p)&&(p.arts||{}).cam>=4)ktUp(k,"tv",.5*h);/* mẹ giỏi đàn: con thấm âm luật, chữ nghĩa */
- if(k.dil==="Ham chơi"&&S.turn%3===0)k.fond=cl(k.fond+1,0,100);ktTal(k)}
+function ktGrow(k,p){if(!k.alive)return;ktSync(k);const live=ktLive(p);tcGrowCore(k,p,{h:ktHp(k),nf:live?1:.7,live});
+ if(k.dil==="Ham chơi"&&k.age>=3&&S.turn%3===0)k.fond=cl(k.fond+1,0,100);ktTal(k)}
 /* mẹ tự dạy: dạy chữ theo Tài của mẹ, dạy lễ nghi theo Đức của mẹ; mỗi thứ một lần mỗi tháng */
 function ktSea(){return Math.floor((S.turn||0)/3)}/* mỗi mùa (3 tháng) mẹ dạy mỗi thứ một lần */
-function ktTeachG(k,p,f){const st=f==="tv"?(p.tai||0):(p.duc||0);return Math.round((.8+cl(st,0,100)/60)*Math.max(0,1-k[f]/KT.cap)*ktD(k).m*10)/10}
+function ktTeachG(k,p,f){const st=f==="tv"?(p.tai||0):(p.duc||0);return Math.round((.8+cl(st,0,100)/60)*Math.max(0,1-k[f]/KT.cap)*ktD(k).m*tcMul(k)*10)/10}
 function ktG(g){return String(g).replace(".",",")}
 function ktTeach(k,p,f){ktSync(k);const g=ktTeachG(k,p,f);k[f]=cl(k[f]+g,0,100);k[f==="tv"?"mtv":"mtd"]=ktSea();ktTal(k);return g}
 const KTPT={"Hiền lành":[.35,.55,.3],"Nhu mì":[.35,.55,.35],"Tham vọng":[.45,.3,.6],"Kiêu ngạo":[.3,.25,.5],"Hiểm độc":[.4,.15,.5],"Đa nghi":[.35,.3,.4]};
@@ -4880,7 +4924,9 @@ function ktMonth(){let ev="";if(!S||S.dead)return ev;
  for(const [k,v] of allKids()){if(!k.alive)continue;ktSync(k);const p=v||S;
   if(!ktLive(p)){if(k.tut||k.vt){k.tut=0;k.vt=0;k.fav=0}}/* mẹ mất hay vào lãnh cung: không ai trả học phí */
   if(v&&ktLive(v)&&k.age>=3&&S.turn%3===0){const P=ktPT(v);if(roll(P[0]*100))ktTeach(k,v,"tv");if(roll(P[1]*100))ktTeach(k,v,"td")}
-  if(k.age>=6&&!k.enr){k.enr=1;if(v)ktNpcTutor(k,v);else ev+=`${k.name} tròn 6 tuổi, vào Thượng thư phòng học chung. Có thể mời thầy riêng ở thẻ con. `}
+  if(k.age>=6&&!k.enr){k.enr=1;if(v)ktNpcTutor(k,v);else{tcSeeOwn(k,"thầy dạy",BAL.tc.nzOwn);ev+=`${k.name} tròn 6 tuổi, vào Thượng thư phòng học chung; thầy dạy thưa: tư chất con ${tcWord(k.tcO.v)}. Có thể mời thầy riêng ở thẻ con. `}}
+  if(!v&&k.age>=BAL.tc.nurseAge&&!k.tcO){if(k.age>=6){tcSeeOwn(k,"thầy dạy",BAL.tc.nzOwn);ev+=`Thầy dạy thưa: tư chất ${k.name} ${tcWord(k.tcO.v)}. `}/* reviewer: old saves / children already at school — the teacher speaks, not the nurse */
+   else{tcSeeOwn(k,"nhũ mẫu",BAL.tc.nzNurse);ev+=`Nhũ mẫu thưa: ${k.name} ${tcWord(k.tcO.v)==="chậm hiểu"?(k.age<3?"chậm biết nói, chậm biết đi":"chậm hiểu lời"):"lanh lợi"}, tư chất ${tcWord(k.tcO.v)}. `}}
   ktGrow(k,p)}
  return ev}
 (function(){const k0=kidsMonth;kidsMonth=function(){let ev=k0.apply(this,arguments)||"";try{ev+=ktMonth()}catch(e){}return ev}})();
@@ -4896,7 +4942,7 @@ const KTE={tet:{n:"Câu đối Tết",m:[12],p:70,f:{tv:.75,td:.25},a:6,dom:"Vă
  khao:{n:"Khảo bài ở Thượng thư phòng",m:[4,5],p:35,f:{tv:.6,td:.4},a:6,dom:"Văn",t:"Hoàng thượng bất ngờ ngự đến Thượng thư phòng, gọi từng hoàng tự lên đọc bài, giảng sách."},
  tthu:{n:"Yến Trung thu",m:[8],p:50,f:{td:.6,tv:.4},a:6,dom:"Đức",t:"Yến Trung thu, các hoàng tự hành lễ dâng bánh, đọc thơ chúc thọ trước Hoàng thượng và Thái hậu."},
  san:{n:"Thu săn",m:[10],p:70,f:{tw:1},a:8,dom:"Võ",t:"Thu săn ở bãi săn hoàng gia: Hoàng thượng cho các hoàng tử (và công chúa có học võ) thi cưỡi ngựa bắn cung."}};
-function ktExp(a){return Math.min(72,36+3.6*(a-6))}/* mức thường của con ở tuổi ấy */
+function ktExp(a){const E=BAL.tc.exp;return Math.min(E[2],E[0]+E[1]*(a-6))}/* mức thường của con ở tuổi ấy */
 function ktDom(k,E){ktSync(k);return Object.entries(E.f).reduce((s,[f,w])=>s+k[f]*w,0)}
 function ktEl(k,E){return k.alive&&k.age>=E.a&&(E.f.tw?(k.sex==="m"||k.vt):true)}
 function ktEdge(k,E,prep){return ktDom(k,E)-ktExp(k.age)+(prep?KT.prep:0)+(E.f.tw||ktD(k).n>0?ktD(k).n:0)}
@@ -4944,15 +4990,15 @@ function ktQuiet(e){const E=KTE[e];S.kt53t=S.turn;const L=ktList(E).filter(([k])
 function ktHeirW(k){return Math.max(0,ktHien(k)*1.1-12)}
 /* cài sau khi mọi mô-đun đã nạp (j51 đứng trước hay sau j53 đều được) */
 function ktHeirInstall(){if(window.__ktHeirOn)return;window.__ktHeirOn=1;
-if(typeof kvW==="function"){const w0=kvW;kvW=function(k){const w=w0.apply(this,arguments);try{ktSync(k);return w-k.tal/2+ktHeirW(k)}catch(e){return w}}} 
+if(typeof kvW==="function"){const w0=kvW;kvW=function(k,v,dich,truong){const w=w0.apply(this,arguments);try{ktSync(k);if(!hienShown(k))return 5+(dich?60:0)+(truong?25:0)+(k.fond||0)/2;return w-k.tal/2+ktHeirW(k)}catch(e){return w}}} 
 else{const h0=heirMonth;heirMonth=function(){const L=allKids().map(([k])=>[k,k.tal]);try{L.forEach(([k])=>{ktSync(k);k.tal=2*ktHeirW(k)})}catch(e){}let r;try{r=h0.apply(this,arguments)}finally{L.forEach(([k,t])=>{k.tal=t})}return r}} 
-if(typeof kvWhy==="function"){const y0=kvWhy;kvWhy=function(x){return String(y0.apply(this,arguments)).replace(/^Tài \d+/,`Hiền tài ${ktHien(x.k)}`)}} 
-(function(){const h0=heirMonth;heirMonth=function(){const r=h0.apply(this,arguments);try{if(r&&S.heir&&S.heir.k)return String(r).replace(/lập hiền: Tài \d+/,`lập hiền: Văn ${ktR(S.heir.k.tv)}, Đức ${ktR(S.heir.k.td)}, Võ ${ktR(S.heir.k.tw)}`)}catch(e){}return r}})();}
+if(typeof kvWhy==="function"){const y0=kvWhy;kvWhy=function(x){return String(y0.apply(this,arguments)).replace(/^Tài \d+ · được thương \d+/,!hienShown(x.k)?"còn nhỏ: chỉ xét đích, trưởng, lòng thương":x.v?`Hiền tài ${hienWord(x.k)} (lời đồn)`:`Hiền tài ${ktHien(x.k)} · được thương ${x.k.fond}`)}} 
+(function(){const h0=heirMonth;heirMonth=function(){const r=h0.apply(this,arguments);try{if(r&&S.heir&&S.heir.k)return String(r).replace(/lập hiền: Tài \d+, được ngài thương \d+/,S.heir.v?`lập hiền: tiếng học hành ${hienWord(S.heir.k)}, được ngài thương`:`lập hiền: Văn ${ktR(S.heir.k.tv)}, Đức ${ktR(S.heir.k.td)}, Võ ${ktR(S.heir.k.tw)}, được ngài thương ${S.heir.k.fond}`)}catch(e){}return r}})();}
 setTimeout(ktHeirInstall,0);
 /* con tài giỏi khiến phi tần có con khác ghen: mưu nhắm vào con nàng nặng thêm chút ít (Hiền tài từ 80, tối đa ×1,35) */
-function ktEnvy(v,t){if(!t||t===v||!S)return 1;const ks=(t===S?S.kids:(t.kids||[])).filter(k=>k.alive&&k.age>=3);if(!ks.length||!(v.kids||[]).some(k=>k.alive))return 1;const h=Math.max(...ks.map(ktHien));return h>=80?1+Math.min(.35,(h-80)/50):1}
+function ktEnvy(v,t){if(!t||t===v||!S)return 1;const ks=(t===S?S.kids:(t.kids||[])).filter(k=>k.alive&&hienShown(k));if(!ks.length||!(v.kids||[]).some(k=>k.alive))return 1;const h=Math.max(...ks.map(ktHien));return h>=80?1+Math.min(.35,(h-80)/50):1}
 (function(){if(typeof mindMenu!=="function")return;const m0=mindMenu;mindMenu=function(v,t){const O=m0.apply(this,arguments);try{const m=ktEnvy(v,t);if(m>1&&Array.isArray(O))return O.map(([k,w])=>KTKID.includes(k)?[k,w*m]:[k,w])}catch(e){}return O}})();
-(function(){const t0=tKid;tKid=function(t){const r=t0.apply(this,arguments);try{if(!window.__kvS&&t){const ks=(t===S?S.kids:(t.kids||[])).filter(k=>k.alive&&k.age>=3&&ktHien(k)>=80);if(ks.length&&roll(50))return ks.sort((a,b)=>ktHien(b)-ktHien(a))[0]}}catch(e){}return r}})();
+(function(){const t0=tKid;tKid=function(t){const r=t0.apply(this,arguments);try{if(!window.__kvS&&t){const ks=(t===S?S.kids:(t.kids||[])).filter(k=>k.alive&&hienShown(k)&&ktHien(k)>=80);if(ks.length&&roll(50))return ks.sort((a,b)=>ktHien(b)-ktHien(a))[0]}}catch(e){}return r}})();
 /* ---- hành động của nàng: dạy chữ, dạy lễ nghi, chọn thầy, xin Hoàng thượng cử danh sư, thầy võ ---- */
 function ktLast(k){const t=k.lt;if(!t)return "";const RW={ex:"xuất sắc",ok:"khá",poor:"kém",skip:"ở nhà"};return `${t.n} năm ${t.y}: ${t.top?"đứng đầu, ":""}${RW[t.r]}`}
 function ktBtns(k){if(!k.alive)return[];ktSync(k);const B=[],t2=whyTime(2),t1=whyTime(1),young=k.age<3?"con còn quá nhỏ (cần 3 tuổi)":"";
@@ -4990,14 +5036,19 @@ document.addEventListener("click",e=>{const b=e.target.closest("[data-kt53]");if
   deck[i]=Object.assign({},deck[i],{n:`Dạy ${k.sex==="m"?"hoàng tử":"công chúa"} học chữ`,t:`Tự tay dạy ${k.name} chữ nghĩa.`,c:{suc:-5},x:`Văn ${k.name} +${ktG(g)}`,go:()=>{ktTeach(k,S,"tv")}})}catch(e){}}})();
 /* ---- giao diện: thẻ con, dòng tin ở tẩm cung, bảng Thượng thư phòng ---- */
 (function(){if(typeof kidActs!=="function")return;const a0=kidActs;kidActs=function(k){return a0.apply(this,arguments).filter(h=>!/data-kid="teach"/.test(h))}})();
-function ktLines(k){ktSync(k);const L=[`<span class="ktbars">${sbar("Văn",k.tv,"kv")}${sbar("Võ",k.tw,"kw")}${sbar("Đức",k.td,"kd")}</span>`,`Tài chung <b>${k.tal}</b>`];
+function tcLine(k,mine){const s=tcSeen(k,mine);const t=typeof kitGloss==="function"?kitGloss("Tư chất hoàng tự","Tư chất"):"Tư chất";
+ if(s)return `${t}: <b>${s.w}</b> <small class="past">(${s.by}${s.by==="lời đồn"?"":" thưa"})</small>`;return `${t}: <b>chưa rõ</b>${k.age<1?' <small class="past">(con còn đỏ hỏn)</small>':""}`}
+function hienLine(k,mine){const t=typeof kitGloss==="function"?kitGloss("Hiền tài","Hiền tài"):"Hiền tài";if(!hienShown(k))return `${t}: <b>còn nhỏ, chưa rõ</b>`;
+ return mine?`${t} <b>${ktHien(k)}</b>`:`${t}: <b>${hienWord(k)}</b> <small class="past">(lời đồn)</small>`}
+function ktBars(k){return k.age>=BAL.tc.barAge?`<span class="ktbars">${sbar("Văn",k.tv,"kv")}${sbar("Võ",k.tw,"kw")}${sbar("Đức",k.td,"kd")}</span>`:""}
+function ktLines(k){ktSync(k);const L=[tcLine(k,true),hienLine(k,true),k.age>=BAL.tc.barAge?ktBars(k):"Văn, Võ, Đức: con còn bế ẵm, chưa học gì"];
  L.push(k.age<6?"Chưa vào Thượng thư phòng (6 tuổi)":`Thầy: <b>${TUT[k.tut||0]}</b>${k.tut===3&&k.fav?" (Hoàng thượng cử)":""}${k.vt?" · có thầy võ":""}${ktFee(k)?` · Bạc ${ktFee(k)}/tháng`:""}`);
  L.push(k.dilK?`Nết học: <b>${k.dil}</b> (${ktD(k).up}; ${ktD(k).dn})`:"Nết học: chưa rõ");
  const lt=ktLast(k);if(lt)L.push(`Lần thi gần nhất: ${lt}`);return L}
 (function(){const kc=kidCard;kidCard=function(k){if(k&&k.alive)try{ktSync(k)}catch(e){}let h=kc.apply(this,arguments);if(!k||!k.alive)return h;try{
   h=h.replace(`<span>Tài <b>${k.tal}</b></span>`,ktLines(k).map(x=>`<span>${x}</span>`).join(""));
   h=h.replace('<div class="pcr">',`<div class="pcr"><h5>Học hành</h5><div class="pcb">${ktBtns(k).join("")}</div>`)}catch(e){}return h}})();
-(function(){const h0=homePeople;homePeople=function(){const P=h0.apply(this,arguments);try{P.forEach(p=>{if(p.kind==="kid"&&p.ref&&p.info){ktSync(p.ref);p.info=p.info.replace(/Tài \d+/,`Văn ${ktR(p.ref.tv)} · Võ ${ktR(p.ref.tw)} · Đức ${ktR(p.ref.td)}`)}})}catch(e){}return P}})();
+(function(){const h0=homePeople;homePeople=function(){const P=h0.apply(this,arguments);try{P.forEach(p=>{if(p.kind==="kid"&&p.ref&&p.info){ktSync(p.ref);p.info=p.info.replace(/ · Tài \d+/,p.ref.age>=BAL.tc.barAge?` · Văn ${ktR(p.ref.tv)} · Võ ${ktR(p.ref.tw)} · Đức ${ktR(p.ref.td)}`:"")}})}catch(e){}return P}})();
 function ktBoxHTML(){const A=allKids().filter(([k])=>k.alive&&k.age>=6);const L=A.filter(([k,v])=>!v||k.lt).sort((a,b)=>(!!a[1])-(!!b[1])||((b[0].lt&&b[0].lt.r==="ex")-(a[0].lt&&a[0].lt.r==="ex")));if(!A.length)return "";const rest=A.length-L.length;
  const rows=L.map(([k,v])=>`<div class="pcrow"><span>${mdH(kidFace(k),"xs")}<span>${k.name} · ${k.age} tuổi · con ${v?v.name:"<strong class=\"g\">ngươi</strong>"}</span></span><b>${ktLast(k)||"chưa thi lần nào"}</b></div>`).join("");
  return `<div class="ktbox"><h5>Thượng thư phòng</h5><div class="pcb rows">${rows}</div><p class="past">${rest?`Còn ${rest} hoàng tự chưa dự kỳ thử tài nào. `:""}Kết quả các kỳ Hoàng thượng thử tài (cả cung đều biết). Câu đối Tết tháng 12, khảo bài tháng 4–5, yến Trung thu tháng 8, thu săn tháng 10.</p></div>`}
@@ -10306,7 +10357,9 @@ function k61St(e){if(!e||!S||e===S)return 3;const K=k61S();if(!K)return 3;return
 function isKnown61(e){return k61St(e)>=1}
 /* public figures (kit review): Hoàng thượng, Thái hậu and the reigning Hoàng hậu are known by name and title (stage 2) from the first
    day; their face (grey silhouette until then) shows after the first meeting / thỉnh an */
-function k61Pub(e){if(!e||!S)return false;if(e===S.emp)return true;if(S.thO&&e===S.thO)return true;return !!((rivals||[]).includes(e)&&e.queen&&!e.out&&e.alive!==false)}
+function k61Pub(e){if(!e||!S)return false;if(e===S.emp)return true;if(S.thO&&e===S.thO)return true;if(k61IsKid(e))return true;return !!((rivals||[]).includes(e)&&e.queen&&!e.out&&e.alive!==false)}
+/* the Emperor's children are announced at birth: every name is public; the FACE only after she has met the child (owner 11/15, jht) */
+function k61IsKid(e){return !!(e&&typeof e==="object"&&(e.sex==="m"||e.sex==="f")&&"fond" in e&&allKids().some(([k])=>k===e))}
 function k61Named(e){return k61St(e)>=2||k61Pub(e)}
 function kitKnown(p){try{const e=k61PortEnt(p);return e?isKnown61(e):true}catch(e){return true}}
 function kitKnownName(p){try{const e=k61PortEnt(p);return e?k61Named(e):true}catch(e){return true}}
@@ -10382,7 +10435,7 @@ function k61AskBtn(e){const k=kOf61(e);const o=od(45+(S.mat||0)*8+((S.maid&&S.ma
 /* owner 11/15 08:00Z: no "3/3" — a plain level word, tap = what raises it and what it opens (KIT_GLOSS "Quen biết", jhc) */
 const K61STW=["Người lạ","Mới thấy mặt","Biết tên","Đã quen"];
 function k61StChip(st){const w=K61STW[st]||K61STN[st];return chip(typeof kitGloss==="function"?kitGloss("Quen biết",w):w,st>=3?"ok":"")}
-(function(){const c0=pcard;pcard=function(o){try{const e=o&&k61PortEnt(o.f);const st=e?k61St(e):3;if(e&&!k61Named(e)){const pop=!!o.close;
+(function(){const c0=pcard;pcard=function(o){try{const e=o&&k61PortEnt(o.f);if(e&&k61IsKid(e)){const a=arguments;return k61Pass(o.f,()=>c0.apply(this,a))}/* children: jht draws what the palace knows */const st=e?k61St(e):3;if(e&&!k61Named(e)){const pop=!!o.close;
   const G=(o.groups||[]).filter(g=>g&&g[1]).map(([hd,B])=>[hd,B.filter(b=>b&&/^<button/.test(String(b))).map(b=>pop?b:k61Dis(String(b)))]).filter(g=>g[1].length);
   if(!pop)G.unshift(["Làm quen",[k61AskBtn(e)]]);
   const chips=[k61StChip(st)].concat((o.chips||[]).filter(c=>c&&/class="chip loc/.test(c)));
@@ -20982,6 +21035,24 @@ function pkState(k){if(k.pW){const W=k.pW;return `chính phi ${W.chinh.name}, co
  if(k.pB){const q=qnById(k.pB.q);return `đã hứa hôn với ${q?q.name+", con gái "+q.off:"quý nữ"}${k.age<18?", cưới khi tròn 18":""}`}return k.age>=16?"chưa bàn hôn sự":"chưa đến tuổi bàn hôn sự (16)"}
 window.pkState=pkState;
 
+/* ---------- STRANGER RULE for children (owner 11/15): a child she has never met shows the grey child silhouette everywhere (strip, card,
+   Kế vị, stage); the name is public (announced at birth, j61 k61Pub). Met = her own children (from birth), a palace visit to the mother,
+   a festival banquet, a khảo hạch they sit together, a child she takes in. Old saves: other mothers' children start unmet (once). ---------- */
+function kidMet(k){try{return isKnown61(k)}catch(e){return true}}
+function kidMeet(L,how){try{if(!S||!S.known)return;L=(L||[]).filter(k=>k&&k.alive&&!kidMet(k));if(!L.length)return;k61Know(L,"",true,1);
+ if(how)log(`Ngươi đã được gặp mặt ${L.map(k=>k.name).join(", ")}${how}.`)}catch(e){}}
+(function(){const b0=birthP;birthP=function(p){const n0=((p&&p.kids)||[]).length;const r=b0.apply(this,arguments);try{if(p===S&&S.known)k61Know(S.kids.slice(n0),"",true,3)}catch(e){}return r}})();
+(function(){if(typeof goTo!=="function")return;const g0=goTo;goTo=function(){const r=g0.apply(this,arguments);try{if(S&&!S.dead&&S.known)for(const v of (rivals||[]))if(v.alive&&!v.out&&palaceOf(v)===S.place)kidMeet((v.kids||[]).filter(k=>k.alive),` ở cung ${v.name}`)}catch(e){}return r}})();
+(function(){if(typeof festival!=="function")return;const f0=festival;festival=function(title){const r=f0.apply(this,arguments);try{if(r&&S&&S.known)kidMeet(allKids().map(([k])=>k).filter(k=>k.alive&&k.age>=1),` trong ${String(title||"yến tiệc").replace(/<[^>]+>/g,"")}`)}catch(e){}return r}})();
+(function(){if(typeof ktRun!=="function")return;const r0=ktRun;ktRun=function(e){let L=[];try{L=ktList(KTE[e]).map(([k])=>k)}catch(x){}const r=r0.apply(this,arguments);try{kidMeet(L," ở buổi khảo hạch")}catch(x){}return r}})();
+(function(){const a=ACT&&ACT.takeaway;if(!a)return;const f0=a.f;a.f=function(x,t){const B=((t&&t.kids)||[]).slice();const r=f0.apply(this,arguments);try{for(const k of B)if(!(t.kids||[]).includes(k)){if(!k.bm)k.bm={n:t===S?S.name:`${rkName(t)} ${t.name}`};if(x===S&&S.known)k61Know([k],"",true,3)}}catch(e){}return r}})();
+/* children of a consort who shares her palace (side halls): she sees them every day */
+function kidMeetHome(){try{if(S&&!S.dead&&S.known&&!S.out)for(const v of (rivals||[]))if(v.alive&&!v.out&&palaceOf(v)==="home")kidMeet((v.kids||[]).filter(k=>k.alive),` ở cùng cung với ngươi`)}catch(e){}}
+(function(){const m0=monthTick;monthTick=function(){const ev=m0.apply(this,arguments);kidMeetHome();return ev}})();
+function kidMetMig(){try{if(!S||S.kmet||!k61S())return;S.kmet=1;for(const [k,v] of allKids()){if(v)delete S.known[kOf61(k)];else S.known[kOf61(k)]=3}K61VER++}catch(e){}}
+(function(){const d0=deser;deser=function(){const r=d0.apply(this,arguments);kidMetMig();return r}})();
+(function(){const s0=start;start=function(){const r=s0.apply(this,arguments);try{if(S)S.kmet=1}catch(e){}return r}})();
+
 /* ---------- UI ---------- */
 const HTK=["kid","kvo","kin","hon","qt"];
 const HTL={kid:["Con của ngươi","Con ngươi"],kvo:["Kế vị","Kế vị"],kin:["Hoàng tự trong cung","Trong cung"],hon:["Hôn sự","Hôn sự"],qt:["Quý tộc kén rể · kén dâu","Quý tộc"]};
@@ -21007,12 +21078,17 @@ addEventListener("resize",()=>requestAnimationFrame(htFitSub));
 function htEmpty(art,title,lines,acts){return `<div class="khtempty"><div class="khte-art">${kitArtFrame(art,"")}</div><div class="khte-b"><b class="khte-t">${title}</b><ul class="kr3l">${lines.map(x=>`<li>${x}</li>`).join("")}</ul>${acts?`<div class="pcb">${acts}</div>`:""}</div></div>`}
 const momLab=p=>p===S?"Ngươi":`${rkName(p)} ${p.name}`;
 const momNote=p=>p===S?"":!p.alive?" (đã mất)":p.out?" (lãnh cung)":"";
-function kbars(k){try{ktSync(k)}catch(e){}return k.tv!=null?`<span class="ktbars">${sbar("Văn",k.tv,"kv")}${sbar("Võ",k.tw,"kw")}${sbar("Đức",k.td,"kd")}</span>`:""}
-const hien=k=>`${gl("Hiền tài","Hiền tài")} <b>${k.tal}</b>`;
-const thuong=k=>`Hoàng thượng thương <b>${k.fond}</b>`;
+/* owner 11/15 (TƯ CHẤT vs HIỀN TÀI): Văn · Võ · Đức only for her own child from 3; Hiền tài only from 6 (her own: the number, others: the
+   palace's word); tư chất never as a number. Other mothers' children: only what the whole palace knows. */
+const mineK=k=>S.kids.includes(k);
+function kbars(k){try{ktSync(k)}catch(e){}return mineK(k)&&k.tv!=null?ktBars(k):""}
+const hien=k=>hienLine(k,mineK(k));
+function fondWord(k){const W=BAL.tc.fw,f=k.fond||0;return f>=W[2]?"rất yêu chiều":f>=W[1]?"yêu":f>=W[0]?"như các con khác":"ít để mắt"}
+const thuong=k=>mineK(k)?`Hoàng thượng thương <b>${k.fond}</b>`:`Được thương: <b>${fondWord(k)}</b>`;
 const sname=k=>shortN(String(k.name).replace(/^(Hoàng tử|Công chúa) /,""));
-try{Object.assign(KIT_GLOSS,{"Hiền tài":"Tài học chung của hoàng tự (trung bình Văn, Võ, Đức). Lệ lập hiền xét Hiền tài cùng lòng thương của Hoàng thượng.",
- "Lập đích, lập trưởng, lập hiền":"Con Hoàng hậu (đích tử) đứng đầu, rồi hoàng tử lớn nhất (trưởng tử); sau đó xét Hiền tài, lòng thương của Hoàng thượng, phẩm vị người mẹ, Thái hậu quý người mẹ và nhà vợ chống lưng. Hoàng tử từ 6 tuổi mới được xét lập Thái tử. Băng hà khi chưa lập Thái tử: đích tử lên ngôi, không có thì trưởng tử.",
+try{Object.assign(KIT_GLOSS,{"Hiền tài":"Tài học của hoàng tự, suy ra từ Văn, Võ, Đức (Văn và Đức nặng hơn). Trẻ dưới 6 tuổi chưa xét: Hiền tài chưa rõ. Lệ lập hiền xét Hiền tài cùng lòng thương của Hoàng thượng. Con phi tần khác: chỉ có lời đồn.",
+ "Tư chất hoàng tự":"Thứ trẻ mang theo khi chào đời: từ cha mẹ và một phần may rủi, không đổi. Tư chất cao thì học gì cũng nhanh hơn. Không ai biết chắc: nhũ mẫu (từ 1 tuổi), thầy dạy (từ 6 tuổi) chỉ nói phỏng chừng; con phi tần khác chỉ có lời đồn. Văn, Võ, Đức thì phải dạy dỗ mới có: thầy giỏi, mẹ dạy chữ, dạy lễ nghi, mẹ có Tài, có Đức, Hoàng thượng để mắt.",
+ "Lập đích, lập trưởng, lập hiền":"Con Hoàng hậu (đích tử) đứng đầu, rồi hoàng tử lớn nhất (trưởng tử); sau đó xét Hiền tài, lòng thương của Hoàng thượng, phẩm vị người mẹ, Thái hậu quý người mẹ và nhà vợ chống lưng. Hoàng tử dưới 6 tuổi chỉ xét đích, trưởng và lòng thương của Hoàng thượng; từ 6 tuổi mới xét lập hiền và mới được lập Thái tử. Băng hà khi chưa lập Thái tử: đích tử lên ngôi, không có thì trưởng tử.",
  "Nhà vợ chống lưng":"Nhà quyền thần có con gái gả cho hoàng tử đứng sau người mẹ và hoàng tử: cộng vào thế lực phe, tranh ghế và thứ tự kế vị (lập hiền).",
  "Nhà chồng chống lưng":"Nhà phò mã đứng sau người mẹ của công chúa: cộng vào thế lực phe và tranh ghế."})}catch(e){}
 
@@ -21028,25 +21104,40 @@ function kvReasons(x,i,o){const L=[];const k=x.k;
  if(k.heir)L.push("Đã được lập làm Thái tử: đứng đầu hàng kế vị.");
  if(x.dich)L.push(`Đích tử (con Hoàng hậu): lệ lập đích đứng trước mọi hoàng tử khác.`);
  if(x.truong)L.push("Trưởng tử: lớn tuổi nhất trong các hoàng tử.");
- if(!x.dich&&!x.truong&&!k.heir)L.push(`Lập hiền: Hiền tài ${k.tal}, Hoàng thượng thương ${k.fond}, mẹ là ${x.v?rkName(x.v):RANKS[S.rank].n}.`);
+ if(!x.dich&&!x.truong&&!k.heir){if(!hienShown(k))L.push(`Còn nhỏ: chỉ xét đích, trưởng và lòng thương của Hoàng thượng (lòng thương: ${x.v?fondWord(k):k.fond}).`);
+  else L.push(x.v?`Lập hiền: Hiền tài ${hienWord(k)} (lời đồn), lòng thương: ${fondWord(k)}, mẹ là ${rkName(x.v)}.`:`Lập hiền: Hiền tài ${ktHien(k)}, Hoàng thượng thương ${k.fond}, mẹ là ${RANKS[S.rank].n}.`)}
  const b=pkBackOf(k);if(b)L.push(`Nhà vợ chống lưng +${b}.`);
  if(k.age<6)L.push("Chưa đủ 6 tuổi: chưa được xét lập Thái tử.");
  const prev=o[i-1];if(prev&&!k.heir)L.push(`Đứng sau ${prev.k.name}${prev.k.heir?" (Thái tử)":prev.dich&&!x.dich?" (đích tử)":""}.`);return L}
 function kvCard(x,i,o){const k=x.k,v=x.v||S,mine=!x.v;const chips=[k.heir?chip("Thái tử","ok"):"",x.dich?chip("Đích tử","ok"):"",x.truong?chip("Trưởng tử","ok"):"",pkBackOf(k)?chip(gl("Nhà vợ chống lưng",`Nhà vợ chống lưng +${pkBackOf(k)}`),"ok"):""];
  const acts=mine?[pbtn(`data-ht="go" data-t="kid" data-pi="${S.kids.indexOf(k)}"`,"Xem con ở mục Con của ngươi","dạy dỗ, chăm con, bàn hôn sự","")]:[];
- return pcard({tabKey:"kvo",f:kidFace(k),name:k.name,rank:`${ic("con",16)}Kế vị thứ ${i+1} · ${k.age} tuổi`,lines:[`Mẹ: <b>${momLab(v)}</b>${momNote(v)}`,hien(k),kbars(k),thuong(k)],chips,
+ return pcard({tabKey:"kvo",f:kidFace(k),name:k.name,rank:`${ic("con",16)}Kế vị thứ ${i+1} · ${k.age} tuổi`,lines:[`Mẹ: <b>${momLab(v)}</b>${momNote(v)}`,tcLine(k,mine),hien(k),kbars(k),thuong(k)],chips,
   groups:[["Vì sao đứng thứ "+(i+1),kvReasons(x,i,o).map(t=>`<p class="kr3note khtwhy">${t}</p>`)],["",acts]],empty:""})}
 function kvTab(){const o=kvOrder();const rule=`<div class="ph khtrule"><span>${gl("Lập đích, lập trưởng, lập hiền","Lập đích · lập trưởng · lập hiền")} <small class="past">(chạm để xem đủ luật)</small></span><span>${o.length} hoàng tử</span></div>`;
  if(!o.length)return rule+htEmpty("https://ctm-img.victoria-tntt.workers.dev/img/act-phong-tuoc.webp","Trong cung chưa có hoàng tử",["Hoàng tử nào ra đời (con ngươi hay con phi tần khác) sẽ đứng vào hàng kế vị ở đây, theo lệ lập đích, lập trưởng, lập hiền.","Hoàng tử từ 6 tuổi mới được xét lập Thái tử."]);
  return rule+pager("kvo",o.map((x,i)=>({f:kidFace(x.k),name:`${i+1}. ${sname(x.k)}`})),i=>kvCard(o[i],i,o))}
 /* 3. Hoàng tự trong cung (other mothers, grouped by mother) */
 function kinList(){const L=[];for(const v of (rivals||[])){const ks=(v.kids||[]).filter(k=>k.alive);if(ks.length)ks.sort((a,b)=>b.age-a.age).forEach((k,j)=>L.push({k,v,sep:j===0?momLab(v)+momNote(v):""}))}return L}
-function kinCard(x){const k=x.k,v=x.v;const o=k.sex==="m"?kvOrder():[];const i=o.findIndex(z=>z.k===k);
- const L=[`Mẹ: <b>${momLab(v)}</b>${momNote(v)}${v.alive&&!v.out?` · ${palName(palaceOf(v))}`:""}`,hien(k),kbars(k),thuong(k)];
- try{const lt=ktLast(k);if(lt)L.push(`Lần thi gần nhất: ${lt}`)}catch(e){}
- if(k.sex==="f"){try{h54Init(k);L.push(`Hôn sự: ${h54State(k)}`)}catch(e){}}else if(k.age>=14||k.pB||k.pW)L.push(`Hôn sự: ${pkState(k)}`);
- const chips=[i>=0?chip(`Kế vị thứ ${i+1}`,""):"",k.heir?chip("Thái tử","ok"):"",k.hW?chip(k.hW.kind==="hoa"?"Hòa thân Bắc Địch":"Đã xuất giá","ok"):""];
- return pcard({tabKey:"kin",f:kidFace(k),name:k.sex==="f"&&typeof h54Name==="function"?(h54Init(k),h54Name(k)):k.name,rank:`${ic("con",16)}${k.sex==="m"?"Hoàng tử":"Công chúa"} · ${k.age} tuổi`,lines:L,chips,groups:[],empty:"Con của phi tần khác: ngươi chỉ biết những điều cả cung đều biết."})}
+/* birth order among all the Emperor's children of the same sex (dead ones counted: the palace remembers) */
+function kinOrd(k){try{kvStamp()}catch(e){}const L=allKids().map(([x])=>x).filter(x=>x.sex===k.sex).sort((a,b)=>(a.bt||0)-(b.bt||0));return L.indexOf(k)+1}
+function kinRaise(k,v){const bm=k.bm&&k.bm.n?`; mẹ đẻ: ${k.bm.n}`:"";
+ if(!v.alive)return `nhũ mẫu và cung nhân trông nom (mẹ đã mất)${bm}`;if(v.out)return `nhũ mẫu và cung nhân trông nom (mẹ ở lãnh cung)${bm}`;
+ return `${bm?"nuôi dưới gối ":""}${momLab(v)} · ${palName(palaceOf(v))}${bm}`}
+function kinHealth(k){return k.hp<35?"đang ốm nặng, thái y ra vào":k.hp<60?"hay đau ốm":"khỏe mạnh"}
+function kinCard(x){const k=x.k,v=x.v;const o=k.sex==="m"?kvOrder():[];const i=o.findIndex(z=>z.k===k);const met=kidMet(k);
+ const title=k.heir?"Thái tử":k.sex==="m"?"Hoàng tử":"Công chúa";
+ const L=[`Mẹ: <b>${momLab(v)}</b>${momNote(v)}`,tcLine(k,false),hien(k),thuong(k)];
+ /* the right pane = what the whole palace knows (owner 11/15): mother (face by the stranger rule), age, birth order, title, honours, illness, who raises */
+ const R=[["Tuổi",`${k.age} tuổi`],["Thứ bậc",`${k.sex==="m"?"hoàng tử":"công chúa"} thứ ${kinOrd(k)} của Hoàng thượng`],["Tước vị",title+(i>=0?` · kế vị thứ ${i+1}`:"")],
+  ["Nuôi dạy",kinRaise(k,v)],["Sức khỏe",kinHealth(k),k.hp<35?"r":"n"]];
+ if(k.age>=6)R.push(["Học",`Thượng thư phòng · ${TUT[k.tut||0]}${k.vt?" · có thầy võ":""}`]);
+ try{const lt=ktLast(k);if(lt)R.push(["Khảo hạch",lt+(k.lt&&k.lt.r==="ex"?" · được Hoàng thượng khen":""),k.lt&&k.lt.r==="ex"?"g":k.lt&&k.lt.r==="poor"?"r":"n"])}catch(e){}
+ if(k.sex==="f"){try{h54Init(k);R.push(["Hôn sự",h54State(k)])}catch(e){}}else if(k.age>=14||k.pB||k.pW)R.push(["Hôn sự",pkState(k)]);
+ const pub=[kitPersonLine(v,{sub:v===S?"":`mẹ ${k.sex==="m"?"hoàng tử":"công chúa"}${momNote(v)}`}),kitRows(R)];
+ if(!met){pub.push(`<p class="kr3note">Ngươi chưa gặp mặt ${k.sex==="m"?"hoàng tử":"công chúa"} này: chỉ nghe tên. Gặp ở yến tiệc, buổi khảo hạch, hoặc sang cung mẹ con thăm thì mới biết mặt.</p>`);
+  const vb=v.alive&&!v.out&&typeof visitBtn==="function"?visitBtn(v):"";if(vb)pub.push(vb)}
+ const chips=[i>=0?chip(`Kế vị thứ ${i+1}`,""):"",k.heir?chip("Thái tử","ok"):"",k.hW?chip(k.hW.kind==="hoa"?"Hòa thân Bắc Địch":"Đã xuất giá","ok"):"",met?"":chip("Chưa gặp mặt",""),k.hp<35?chip("Đang ốm","hot"):""];
+ return pcard({tabKey:"kin",f:kidFace(k),name:k.sex==="f"&&typeof h54Name==="function"?(h54Init(k),h54Name(k)):k.name,rank:`${ic("con",16)}${title} · ${k.age} tuổi`,lines:L,chips,groups:[["Cả cung đều biết",pub]],empty:""})}
 function kinTab(){const L=kinList();if(!L.length)return htEmpty("https://ctm-img.victoria-tntt.workers.dev/img/act-cat-cham-con.webp","Phi tần khác chưa có con",["Hoàng tử, công chúa của các phi tần khác hiện ở đây, xếp theo người mẹ.","Con ngươi ở mục Con của ngươi."]);
  return `<div class="ph"><span>Con của các phi tần khác, xếp theo người mẹ.</span><span>${L.length} hoàng tự</span></div>`+pager("kin",L.map(x=>({f:kidFace(x.k),name:sname(x.k),sep:x.sep})),i=>kinCard(L[i]))}
 /* 4. Hôn sự (princesses and princes of age, every mother) */
@@ -21933,7 +22024,7 @@ window.VP={fix,date,num,ord,mon,rules:RULES,full:FULL,tabs:TABS,refresh:()=>{pat
      (COOPW.hold freezes Qua buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="40dd0cd98f0a";window.CTM_BUILD=BUILD;
+const BUILD="27b2aa5db600";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
