@@ -562,3 +562,11 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - Add sound + on-screen animation by mood (e.g. happy night = soft laughter; unhappy night = a sigh).
 - When she skips to a new day (no bedding that night), show a NEW-DAY picture that depends on the season (xuân/hạ/thu/đông) and on festivals that day; make it beautiful.
 - Owner asked for more ideas of this kind.
+
+## 15/11 ~19:50Z — Art completeness rule + handmade recipes (owner)
+- ART RULE (every character ever drawn, incl. the new faces for suitors / foreign princes): full set of 4 AGE BANDS (18–25/26–35/36–50/51+). If the person can rise in rank, EVERY rank they can hold × 4 age bands.
+- HANDMADE WORKS (j83, ~10 per type): she must NOT be able to make everything from the start. Each item needs its recipe/pattern learnt first — learn it, or BUY the recipe (recipe books / pattern sheets as shop items with their own pictures).
+- Why it matters:
+  - repeating the same item to the same person loses effect (the Emperor gets bored; after N times no points) — same for Thái hậu and consorts;
+  - each person has likes and dislikes; a wrong gift may be refused or make them angrier;
+  - some people have allergies; gifting what they're allergic to can make them accuse her of trying to harm them.
