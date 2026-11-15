@@ -14,7 +14,7 @@ const MT={html:'text/html',js:'text/javascript',json:'application/json'};
  await p.goto('http://game.local/zz-test.html',{waitUntil:'domcontentloaded'});await p.waitForTimeout(3000);
  await p.evaluate(()=>{try{localStorage.clear()}catch(e){}document.getElementById('title').hidden=true;for(let i=0;i<60;i++){start();if(!(typeof isSrv==='function'&&isSrv()))break}Q.length=0});
  await p.evaluate(fs.readFileSync(path.join(__dirname,'inpage6.js'),'utf8'));
- await p.evaluate(([mode,careful])=>{window.__rtL=[];const rec=(cut)=>{try{if(!S||(typeof isSrv==='function'&&isSrv()))return;const T=S.rt||{};window.__rtL.push({open:!!T.open,ends:(T.ends||[]).slice(),y:+(S.turn/12).toFixed(2),cut:!!cut,fate:S.fate||""})}catch(e){}};
+ await p.evaluate(([mode,careful])=>{window.__rtL=[];const rec=(cut)=>{try{if(!S||(typeof isSrv==='function'&&isSrv()))return;const T=S.rt||{};window.__rtL.push({open:!!T.open,ends:(T.ends||[]).slice(),y:+(S.turn/12).toFixed(2),cut:!!cut,fate:S.fate||"",ad:T.ad?{on:T.ad.on,harm:T.ad.harm||0,m:S.turn-T.ad.since,duc:S.duc}:null})}catch(e){}};
   const o0=over;over=function(){rec(false);return o0.apply(this,arguments)};const s0=start;start=function(){try{if(S&&!S.dead&&S.turn>0)rec(true)}catch(e){}return s0.apply(this,arguments)};
   const PRI={tc:["tc0","tc_guard","tc_maid","tc_home","tc_route","tc_pass","tc_cloth","tc_drug"],tt:null,hl:["hl_plead","hl_tu","hl_hon","hl_que","hl_phe"],ad:["ad0","ad_kinh","ad_che"]};
   const go=a=>{const i=deck.indexOf(a);if(i<0)return;window.__rtActs=(window.__rtActs||0)+1;act(i);if(typeof rtStat==='function')rtStat('bot_'+String(a.rtId).replace(/\d+$/,''))};
@@ -28,8 +28,9 @@ const MT={html:'text/html',js:'text/javascript',json:'application/json'};
    if(!a&&PRI[mode])for(const id of PRI[mode]){a=C.find(x=>x.rtId===id);if(a)break}
    if(!a&&mode==='tc'&&T.tc&&prepN>=4&&careful!=='0'){}
    if(!a)return;go(a);for(let k=0;k<20&&Q.length;k++){const m=Q[0];if(m.opts&&m.opts.length){const i=Math.floor(Math.random()*m.opts.length);try{chooseM(i)}catch(e){Q.shift()}}else closeModal()}}};
+  if(mode==='ad'){const r0=rvBtns;rvBtns=function(){const L=r0.apply(this,arguments);return S&&S.rt&&S.rt.ad&&S.rt.ad.on?L.filter(k=>!RT_HARM.includes(k)):L}}/* a quiet-life player does not scheme */
   const nb=nextBuoi;nextBuoi=function(){const r=nb.apply(this,arguments);try{window.__rtPol()}catch(e){}return r}},[MODE||'tc',CAREFUL==null?'1':CAREFUL]);
  const N=+ITER||20000;for(let i=0;i<N;i+=500){await p.evaluate(()=>window.__bot.step('sens',500))}
  const r=await p.evaluate(()=>{const L=window.__rtL.slice();const E={};L.forEach(x=>x.ends.forEach(e=>E[e]=(E[e]||0)+1));
-  return{lives:L.length,full:L.filter(x=>!x.cut).length,years:+L.reduce((s,x)=>s+x.y,0).toFixed(1),opened:L.filter(x=>x.open).length,ends:E,n:window.__rtN||{},acts:window.__rtActs||0,bad:window.__bad.slice(0,5)}});
+  return{lives:L.length,full:L.filter(x=>!x.cut).length,years:+L.reduce((s,x)=>s+x.y,0).toFixed(1),opened:L.filter(x=>x.open).length,ends:E,n:window.__rtN||{},acts:window.__rtActs||0,bad:window.__bad.slice(0,5),ad:L.filter(x=>x.ad).map(x=>x.ad).slice(0,15)}});
  r.mode=MODE;r.careful=CAREFUL;r.errs=errs.slice(0,8);console.log(JSON.stringify(r));if(OUT)fs.writeFileSync(OUT,JSON.stringify(r));await b.close()})().catch(e=>{console.error(e);process.exit(1)});

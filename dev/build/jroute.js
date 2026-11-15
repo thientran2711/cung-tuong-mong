@@ -150,7 +150,7 @@ function rtTcCards(){const T=rtS(),A=[];const tc=T.tc;
    kem:`Lời ra tiếng vào ${rtHeatW(T.heat).toLowerCase()} (cơ may -${Math.round(T.heat/2.5)})`,go:()=>rtFled(k),fail:()=>rtCaughtEsc(k)}))}
  A.push(rtCard({id:"tcstop",r:2,n:"Thôi ý định trốn đi",t:"Đốt hết thư từ, cất yêu bài xuống đáy rương.",art:RT_ART.tc,k:1,x:"lời ra tiếng vào lắng bớt · lối Trốn khỏi cung khép lại",go:()=>{T.tc=null;rtHeat(-8);log("Ngươi đốt hết thư từ. Bức tường son vẫn đứng đó.")}}));
  return A}
-function rtEscO(k){const T=rtS(),P=(T.tc&&T.tc.prep)||{};const base={doan:12,chet:16,hoa:12,theo:22,lc:10}[k]||10;
+function rtEscO(k){const T=rtS(),P=(T.tc&&T.tc.prep)||{};const base={doan:12,chet:16,hoa:10,theo:22,lc:8}[k]||8;
  return cl(base+(P.guard?8:0)+(P.route?6:0)+(P.maid?5:0)+(P.home?4:0)+(P.pass&&k!=="doan"?3:0)-Math.round(T.heat/2.5)-(T.watch>S.turn?15:0)-rtDuc()+rtDf().o,5,RTC.maxFinal)}
 function rtFled(k){const T=rtS(),P=T.tc.prep,m=rtMan();const withM=!!(m&&T.tt&&T.tt.st>=4);rtStat("tc_ok");
  const id=withM?"tc_cung":P.home?"tc_dan":"tc_lien";rtEnd(id);
@@ -166,10 +166,10 @@ function rtCaughtEsc(k){const T=rtS();rtStat("tc_caught");rtEnd("tc_bat");T.tc=n
 /* ---------- 3. RỜI CUNG HỢP LỆ ---------- */
 function rtHlCards(){const T=rtS(),A=[],H=T.hl;const kidsSmall=rtKidsAlive().filter(k=>(k.age||0)<15).length;const cd=k=>H["cd_"+k]&&H["cd_"+k]>S.turn;const cdN=k=>[[`đợi qua cơn giận của Hoàng thượng (còn ${H["cd_"+k]-S.turn} tháng)`,!cd(k)]];
  const nights=(S.nightLog||[]).length;
- if(!S.out){A.push(rtCard({id:"hl_tu",r:3,n:"Dâng biểu xin xuất gia",t:"Xin cạo tóc vào chùa Hộ Quốc, cầu phúc cho xã tắc.",art:RT_ART.tu,o:od(5+(S.th||0)/2+(S.duc-50)/2-S.sung/3+(H.plead?10:0)+rtDf().o),k:2,
+ if(!S.out){A.push(rtCard({id:"hl_tu",r:3,n:"Dâng biểu xin xuất gia",t:"Xin cạo tóc vào chùa Hộ Quốc, cầu phúc cho xã tắc.",art:RT_ART.tu,o:od(-12+(S.th||0)/3+(S.duc-50)/3-S.sung/3+(H.plead?8:0)+rtDf().o),k:2,
    need:[["không có con nhỏ dưới 15 tuổi",!kidsSmall],["không mang thai",!S.preg],[`Đức 50 (có ${S.duc})`,S.duc>=50],[`ở cung đủ 2 năm (đã ${Math.floor(S.turn/12)} năm)`,S.turn>=24],[`Thái hậu thương ngươi (có ${S.th||0}/40)`,(S.th||0)>=40&&!S.thDead]].concat(cdN("tu")),
-   x:"kết thúc kiếp này trong cửa Phật",lx:"Hoàng thượng phật ý · Sủng -8 · đợi 6 tháng",go:()=>{rtEnd("hl_tu");over("Dâng biểu xuất gia",`Hoàng thượng phê một chữ «Chuẩn». ${S.name} cạo tóc ở chùa Hộ Quốc, tiếng mõ sớm chiều thay tiếng trống canh trong cung.`,"Xuất gia",true)},
-   fail:()=>{apply({sung:-8});H.cd_tu=S.turn+6;rtStat("hl_tu_no");log(`<span class="r">Hoàng thượng ném tấu biểu xuống đất: «Trẫm còn sống, nàng đã muốn bỏ trẫm mà đi?»</span>`)}}));
+   x:"kết thúc kiếp này trong cửa Phật",lx:"Hoàng thượng phật ý · Sủng -8 · đợi một năm",go:()=>{rtEnd("hl_tu");over("Dâng biểu xuất gia",`Hoàng thượng phê một chữ «Chuẩn». ${S.name} cạo tóc ở chùa Hộ Quốc, tiếng mõ sớm chiều thay tiếng trống canh trong cung.`,"Xuất gia",true)},
+   fail:()=>{apply({sung:-8});H.cd_tu=S.turn+12;rtStat("hl_tu_no");log(`<span class="r">Hoàng thượng ném tấu biểu xuống đất: «Trẫm còn sống, nàng đã muốn bỏ trẫm mà đi?»</span>`)}}));
   A.push(rtCard({id:"hl_plead",r:3,n:"Nhờ Thái hậu nói giúp",t:"Quỳ trước Đức Thọ cung, kể nỗi lòng muốn rời cung.",art:RT_ART.ta,c:{bac:-30},o:od(35+(S.th||0)/2),k:1,need:[[`Thái hậu thương ngươi (có ${S.th||0}/40)`,(S.th||0)>=40&&!S.thDead],["chưa nhờ",!H.plead]],
    x:"Thái hậu đứng về phía ngươi khi ngươi xin rời cung (xin ban hôn, về quê dễ hơn nhiều; xuất gia dễ hơn)",lx:"Thái hậu không vui · Thái hậu -6",go:()=>{H.plead=1},fail:()=>{apply({th:-6})}}));
   const vg=(S.men||[]).filter(m=>m.alive&&m.rw==="vương gia"&&((m.tinh||0)>=50||(T.tt&&T.tt.mid===m.id&&T.tt.st>=3)));const v1=vg[0];
@@ -275,7 +275,7 @@ function rtNpcMeet(){if(!rtRoad()||!rtNight()||Q.length)return;const T=rtS();for
 (function(){const d0=danger;danger=function(v,t){const d=d0.apply(this,arguments);return t===S&&S&&S.rt&&S.rt.ad&&S.rt.ad.on?Math.round(d*.6):d}})();
 (function(){if(typeof doAct!=="function")return;const d0=doAct;doAct=function(i,k){const r=d0.apply(this,arguments);try{if(S.rt&&S.rt.ad&&S.rt.ad.on&&RT_HARM.includes(k))S.rt.ad.harm=(S.rt.ad.harm||0)+1}catch(e){}return r}})();
 /* the end of a life: a lover's child never exposed = «Một đời giấu kín» */
-(function(){const o0=over;over=function(h,t,fate){try{if(S&&!S.dead&&S.rt&&!S.rt.exposed&&rtKidsAlive().some(k=>k.tf))rtEnd("tt_kin")}catch(e){}return o0.apply(this,arguments)}})();
+(function(){const o0=over;over=function(h,t,fate){try{if(S&&!S.dead&&!(S.rt&&S.rt.exposed)&&rtKidsAlive().some(k=>k.tf))rtEnd("tt_kin")}catch(e){}return o0.apply(this,arguments)}})();
 /* ---------- Mệnh truyện: the route chapters; Sổ luân hồi: endings met ---------- */
 function rtRows(L){return typeof rows67==="function"?rows67(L):`<div class="pcb rows">${L.map(r=>`<div class="pcrow"><span>${r[0]}</span><span>${r[1]}</span></div>`).join("")}</div>`}
 function rtStoryHTML(){if(!S||!S.rt||!S.rt.open)return"";const T=S.rt;const ck=(t,ok)=>(ok?"✓ ":"✗ ")+t;let h=`<h3>Lối riêng</h3>`;const rows=[["Lời ra tiếng vào",`${rtHeatW(T.heat)} (${T.heat}/100)`,T.heat>=60?"r":""]];
