@@ -1450,7 +1450,7 @@ ARC67.s_su={o:"*",ok:nsrv67,t:"Sứ thần phương Tây",w:"emp",sj:"sứ đoà
  p:[["s1","s2"],["c1","c2","c3","G.th","G.rival"],["t1"],["x1"]],
  B:{
  s1:{h:"Yến tiếp sứ",w:"emp",t:"Sứ thần tóc vàng cúi chào theo lối lạ. Cả yến lúng túng.",o:[
-  {n:"Đáp lễ theo lối của họ",c:{},o:45,w:{danh:4},sc:1,wx:"sứ thần quý ngươi",l:{th:-5},lx:"Thái hậu chê lạ",rt:"Sứ thần cười rạng rỡ.",rf:"Thái hậu chau mày."},
+  {n:"Đáp lễ theo lối của họ",c:{},o:45,w:{danh:4},sc:1,wx:"sứ thần có thiện cảm với ta",l:{th:-5},lx:"Thái hậu chê lạ",rt:"Sứ thần cười rạng rỡ.",rf:"Thái hậu chau mày."},
   {n:"Giữ lễ Đại Hy",c:{},w:{th:4},wx:"Thái hậu hài lòng",lx:"sứ thần ngượng",rt:"Lễ nghi đúng phép."}]},
  s2:{h:"Món quà kỳ lạ",w:"emp",t:"Sứ thần tặng ngươi một chiếc gương soi rõ từng sợi tóc.",o:[
   {n:"Dâng lên Thái hậu",c:{},w:{th:6},wx:"Thái hậu thích",lx:"không giữ được quà",rt:"Thái hậu soi mãi không chán."},
