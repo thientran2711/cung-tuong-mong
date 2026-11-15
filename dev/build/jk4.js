@@ -630,7 +630,7 @@ window.kitCatchOn=kitCatchOn;window.kitCatchOff=kitCatchOff;
    The same rule for every act card inside a kpane (a deck card whose only picture is its category picture loses the thumbnail there). */
 function kitActCompactOn(root){try{const R0=root||document;
  R0.querySelectorAll(".pc>.pcr button.ka, .kpanec button.ka").forEach(b=>{try{const kan=b.querySelector(".kan");if(!kan)return;const nm=typeof kpActName==="function"?kpActName(kan):kan.textContent.trim();
-   const key=typeof kitActKey==="function"?kitActKey(nm):"";b.classList.toggle("kanoart",!key);if(key&&!b.classList.contains("kart")&&typeof kpActArt==="function")kpActArt(b)}catch(e){}});
+   const key=typeof kitActKey==="function"?kitActKey(nm):"";const has=!!key||(typeof kitPhActReady==="function"&&kitPhActReady());/* KIT §59: no own picture → the placeholder (jph) */b.classList.toggle("kanoart",!has);if(has&&!b.classList.contains("kart")&&typeof kpActArt==="function"){delete b.dataset.kart;kpActArt(b)}}catch(e){}});
  R0.querySelectorAll(".pc>.pcr button.ka.kart .klead, .kpanec button.ka.kart .klead").forEach(e=>{if(!e.title)e.title=e.textContent.trim()})}catch(e){}}
 window.kitActCompactOn=kitActCompactOn;
 /* owner 11/15 14:30Z + 15:45Z ("no group images"): EVERY act card (Hành sự deck, person cards, Ân oán, panes) shows its OWN act picture only.
@@ -638,7 +638,7 @@ window.kitActCompactOn=kitActCompactOn;
    marked .kanoart and its text takes the full width. (kitActArt keeps returning cat / label for the category edge colour.) */
 (function(){if(typeof kitActArt!=="function")return;const k0=kitActArt;kitActArt=function(name){const r=k0.apply(this,arguments);try{const key=typeof kitActKey==="function"?kitActKey(name):"";if(!key&&r)r.src=""}catch(e){}return r};window.kitActArt=kitActArt;
  if(typeof kpActArt!=="function")return;const p0=kpActArt;kpActArt=function(b){const r=p0.apply(this,arguments);try{const kan=b.querySelector(".kan");const nm=kan?(typeof kpActName==="function"?kpActName(kan):kan.textContent.trim()):"";
-  const own=!!(nm&&typeof kitActKey==="function"&&kitActKey(nm));b.classList.toggle("kanoart",!own);if(!own){const a=b.querySelector(":scope > .kaart");if(a)a.remove();b.classList.remove("kart")}}catch(e){}return r};window.kpActArt=kpActArt})();
+  const own=!!(nm&&typeof kitActKey==="function"&&kitActKey(nm))||(typeof kitPhActReady==="function"&&kitPhActReady());/* KIT §59: the placeholder stands in */b.classList.toggle("kanoart",!own);if(!own){const a=b.querySelector(":scope > .kaart");if(a)a.remove();b.classList.remove("kart")}}catch(e){}return r};window.kpActArt=kpActArt})();
 (function(){if(typeof render!=="function")return;const r0=render;render=function(){const r=r0.apply(this,arguments);try{kitActCompactOn(document.getElementById("panel"))}catch(e){}return r};window.render=render})();
 (function(){const st=document.createElement("style");st.id="kit-act-compact";st.textContent=`
 button.ka.kanoart>.kaart{display:none!important}

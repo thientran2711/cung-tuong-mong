@@ -2617,3 +2617,28 @@ Owner rule: every event where an item could come into her hands shows the ITEM'S
   scan `node dev/test/item-events-scan.js <url> dev/review/item-events-table.md [--fail]` (every E68 variant, ARC67 + GB67 beat, j97 rare,
   PEND builder: event → item → choice → act; fails on a destroying/handing choice with no item found, or an item without a picture).
 - Kit page (§47): sample "§64" = every story item tag + one button per act.
+
+## 59. PLACEHOLDER PICTURES · KIT_PH · kitPhTone (owner 15/11 ~18:45Z, review/placeholder-pics) — `dev/build/jph.js` (last module)
+Four generic palace still-lifes (Magnific gpt-2-6, no people, no faces) stand in for every EVENT or ACT that has no picture of its own, so the
+owner recognises "this one still lacks its picture" in play. They are deliberately emblematic (no scene, no people) so they never look like a real picture.
+| file | size | used for |
+|---|---|---|
+| `img/ph-event-light.webp` | 640x480 (as dialog banners `ev-<key>`) | event dialog, normal / positive tone: closed folding screen + sealed scroll, soft daylight |
+| `img/ph-event-dark-v2.webp` | 640x480 | event dialog, negative / scheming tone: same still-life in a gloomy hall on an overcast day — heavy shadow, cold muted slate/grey-green (owner: dark = gloomy mood, NOT night) |
+| `img/ph-act-light.webp` | 384x506 (as act pictures `act-<key>`) | act card, normal tone: blank round fan + lacquer box + jade hairpin, daylight |
+| `img/ph-act-dark-v2.webp` | 384x506 | act card, scheming / harmful tone: same objects in cold grey gloom, box ajar, vial |
+- **Tone rule (`kitPhTone(text,{cat,fam})`)**: DARK when the act category is `hai-nguoi` / `muu-ke`, or the event family (j68) is `rumor` / `myst`,
+  or the id + title + first sentence of the body (event) / the act name (act) match `KIT_PH_NEG` (harm, poison, framing, scheming, spying, rumours, bribery, theft,
+  punishment, jealousy/rivalry, quarrels, resentment, cold palace, demotion, crime, illness, death…); otherwise LIGHT. Tone, never time of day.
+- **Events**: outermost `kitEvArt` wrapper. When the dialog would show nothing, or only the room she stands in (j17 `evArt`, the old generic
+  stand-in), it shows the event placeholder. Never replaces: EVENTS.json category art, own banners `ev-<key>` (jevban), story beats (`stArt`),
+  explicit `art`, festival bands, j24 people pictures. Shop / pick / gift / giftin dialogs keep their rules (no event picture).
+- **Acts**: `kitActArt` returns the placeholder (`r.ph = "light"|"dark"`) when the act has no own key (`kitActKey`) or its `img/act-<key>.webp`
+  is not in the CDN index; j79 `kpActArt` draws it in the normal act-art slot (`kitArtFrame`, category edge colour) of every act card
+  (deck, person cards, panes, exam card): jk4 (`kpActArt` / `kitActCompactOn`) and jexam no longer drop the slot once `kitPhActReady()` —
+  replacing the earlier "no thumbnail" (`.kanoart`) state. Card marked `data-kph="light|dark"` (not observed by j63 kaMO: no render loop).
+- **Not changed**: the week book (Tuần lục) lines — owner 11/15 "no picture rather than a repeated one" still holds there.
+- **Before the manifests load** (EVART / ACTS.json) nothing is replaced and nothing recorded (every id would look unmapped).
+- **Dev list**: `window.CTM_MISSING_PICS` = `[{kind:"event"|"act", id, tone, title}]`, each logged once (`console.info("[CTM missing pic]",…)`).
+  Whole-game list: `node dev/tools/missing_pics.js <build url> <out.json> dev/art/MISSING_PICS.md`.
+- Kit sample page: §59 (four pictures).
