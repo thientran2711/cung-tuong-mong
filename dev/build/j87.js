@@ -3,7 +3,7 @@
    The week summary (dawn) is an old ledger she turns page by page: cover → Tổng lược → one page per person
    (large kit portrait) → Triều đình · thiên hạ → closing page "Tuần này đến đây là hết." with a seal.
    Two-page spread on landscape tablets, one page at a time on portrait screens. Pages never scroll: content that
-   does not fit continues on the next page ("tiếp theo"). Drag/swipe turns the page in 3D (perspective + shade + cast
+   does not fit continues on the next page ("tiếp theo"). Drag/swipe turns the page with a paper CURL (kitCurl, jbook: bending strips, shaded faces, moving cast
    shadow), tap the page edges, the ‹ › buttons or the arrow keys; prefers-reduced-motion = cross-fade.
    Art: img/book-cover.webp, img/book-left.webp, img/book-right.webp, img/book-end.webp when present, else CSS paper.
    Data only, never markup:
@@ -50,7 +50,7 @@ function kitBook(spec){spec=spec||{};const rm=()=>{try{return reducedMotion()}ca
  const textTop=(p,cont)=>`<div class="kbk-th"><h3 class="kbk-t">${p.title||""}${cont?` <small class="kbk-cont">tiếp theo</small>`:""}</h3>${p.sub&&!cont?`<small class="kbk-ts">${p.sub}</small>`:""}</div>`;
  const personTop=(p,cont)=>cont?`<div class="kbk-th kbk-pc">${kitFaceH(p.who,"sm")}<h3 class="kbk-t">${kitName(p.who,{cap:true,named:p.who===S})} <small class="kbk-cont">tiếp theo</small></h3></div>`
    :`<div class="kbk-pname">${kitName(p.who,{cap:true,named:p.who===S})}${p.sub?`<small class="kbk-ts">${p.sub}</small>`:""}</div>${p.chips&&p.chips.length?`<div class="kbk-pchips">${kitChips(p.chips)}</div>`:""}${p.rows&&p.rows.length&&PW>=440?kitRows(p.rows):""}`;
- const personBody=(p,cont)=>cont?`${personTop(p,true)}<div class="kbk-flow"></div>`:`<div class="kbk-person"><div class="kbk-por">${pframe(kitFace(p.who))}</div><div class="kbk-phead">${personTop(p,false)}</div><div class="kbk-flow"></div></div>`;
+ const personBody=(p,cont)=>cont?`${personTop(p,true)}<div class="kbk-flow"></div>`:`<div class="kbk-person"><div class="kbk-por">${typeof kitStageFig==="function"&&kitStageFig(p.who,{cap:false})||pframe(kitFace(p.who))}</div><div class="kbk-phead">${personTop(p,false)}</div><div class="kbk-flow"></div></div>`;
 
  /* ---- pagination: fill each page until it overflows, continue on the next ---- */
  function paginate(){const L=[];meas.style.width=PW+"px";meas.style.height=PH+"px";
@@ -90,7 +90,7 @@ function kitBook(spec){spec=spec||{};const rm=()=>{try{return reducedMotion()}ca
   cur=0;if(keep!=null){for(let i=0;i<sheets.length;i++){const s=sheets[i];if(s.front.src===keep||s.back.src===keep||s.front.kind===keep||s.back.kind===keep){cur=spread&&s.back.src===keep?i+1:i;break}}cur=Math.min(cur,maxCur)}
   paint()}
  const sheetEls=()=>book.querySelectorAll(".kbk-sheet");
- function paint(){const els=sheetEls();const n=els.length;
+ function paint(){const els=sheetEls();const n=els.length;els.forEach(el=>{if(el.__curl){el.__curl.destroy();el.__curl=null}});
   els.forEach((el,i)=>{const fl=i<cur;el.style.transform=fl?"rotateY(-180deg)":"";el.style.zIndex=fl?String(i+1):String(n*2-i);
    const near=mode==="spread"?(i>=cur-2&&i<=cur+1):(i>=cur-1&&i<=cur+1);el.style.visibility=near&&!(mode==="single"&&fl)?"visible":"hidden";
    el.classList.remove("turn");el.querySelectorAll(".kbk-sh").forEach(s=>s.style.opacity="")});
@@ -104,22 +104,24 @@ function kitBook(spec){spec=spec||{};const rm=()=>{try{return reducedMotion()}ca
   logical=(sheets[cur]&&(sheets[cur].front.src||sheets[cur].front.kind))||null}
 
  /* ---- the turn: p = 0 (flat, right) … 1 (turned, left) ---- */
- function setTurn(el,p){const a=-180*p;el.style.transform=`perspective(${Math.round(PW*3.2)}px) rotateY(${a.toFixed(2)}deg)`;const sh=el.querySelectorAll(".kbk-sh");
-  const s=Math.sin(Math.PI*p);if(sh[0])sh[0].style.opacity=String(Math.min(1,p*1.6)*.85);if(sh[1])sh[1].style.opacity=String((1-p)*.85);
-  const cast=book.querySelector(".kbk-cast");if(cast){const c=Math.cos(Math.PI*p);
-   if(p<.5){cast.style.left=mode==="spread"?"50%":"0";cast.style.transform=`scaleX(${Math.max(.02,c).toFixed(3)})`;cast.classList.remove("lft")}
-   else{cast.style.left=mode==="spread"?"0":"0";cast.style.transform=`scaleX(${Math.max(.02,-c).toFixed(3)})`;cast.classList.add("lft")}
-   cast.style.opacity=(mode==="single"&&p>=.5?0:s*.9).toFixed(3)}}
- function beginTurn(i){const els=sheetEls();const el=els[i];if(!el)return null;el.style.visibility="visible";el.style.zIndex="9999";el.classList.add("turn");
+ /* the turn is a CURL (kitCurl v2, jbook / KIT §34.1): the corner lifts, the sheet folds on a diagonal, its back shows, shadow along the fold */
+ function setTurn(el,p){const c=el&&el.__curl;if(c)c.set(p)}
+ function beginTurn(i,dir){const els=sheetEls();const el=els[i];if(!el)return null;
   for(let k=i-2;k<=i+2;k++)if(els[k])els[k].style.visibility="visible";if(mode==="single"&&els[i+1]&&i===cur)els[i+1].style.visibility="visible";
-  if(mode==="spread")book.classList.remove("closed","atend");return el}
+  if(mode==="spread")book.classList.remove("closed","atend");
+  if(el.__curl){el.style.visibility="hidden";return el}el.__dir=dir||1;
+  /* one page at a time: the back of the turning sheet shows the next page (owner 11/15), not a blank verso */
+  const nx=mode==="single"&&els[i+1]?els[i+1].querySelector(".kbk-front>.kbk-pg"):null;
+  el.__curl=kitCurl({host:book,front:el.querySelector(".kbk-front>.kbk-pg"),back:nx||el.querySelector(".kbk-back>.kbk-pg"),w:PW,h:PH,x:mode==="spread"?PW:0,y:0,
+   po:mode==="spread"?0:PW*.5,shadeL:mode==="spread",dir:dir||1,p:i<cur?1:0});
+  el.style.visibility="hidden";el.classList.add("turn");return el}
  const ease=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2,easeOut=t=>1-Math.pow(1-t,3);
  let animId=0;
- function animate(i,from,to,dur,fn,done){const el=beginTurn(i);if(!el){done&&done();return}busy=true;const t0=performance.now(),id=++animId;
-  const step=now=>{if(id!==animId)return;const t=Math.min(1,(now-t0)/dur);setTurn(el,from+(to-from)*fn(t));if(t<1)requestAnimationFrame(step);else{busy=false;done&&done()}};requestAnimationFrame(step)}
+ function animate(i,from,to,dur,fn,done){const el=beginTurn(i,to>=from?1:-1);if(!el){done&&done();return}busy=true;const t0=performance.now(),id=++animId;
+  const step=now=>{if(id!==animId)return;const t=Math.min(1,(now-t0)/dur);el.__curl&&el.__curl.set(from+(to-from)*fn(t),el.__dir||1);if(t<1)requestAnimationFrame(step);else{busy=false;done&&done()}};requestAnimationFrame(step)}
  function fade(nc){busy=true;book.classList.add("fade");setTimeout(()=>{cur=nc;paint();book.classList.remove("fade");setTimeout(()=>{busy=false},160)},160)}
- function next(){if(busy||cur>=maxCur)return;kbkSfx();if(rm()){fade(cur+1);return}const i=cur;animate(i,0,1,720,ease,()=>{cur=i+1;paint()})}
- function prev(){if(busy||cur<=0)return;kbkSfx();if(rm()){fade(cur-1);return}const i=cur-1;animate(i,1,0,720,ease,()=>{cur=i;paint()})}
+ function next(){if(busy||cur>=maxCur)return;kbkSfx();if(rm()){fade(cur+1);return}const i=cur;animate(i,0,1,680,kitCurlLift,()=>{cur=i+1;paint()})}
+ function prev(){if(busy||cur<=0)return;kbkSfx();if(rm()){fade(cur-1);return}const i=cur-1;animate(i,1,0,680,kitCurlLift,()=>{cur=i;paint()})}
  function go(n){animId++;busy=false;drag=null;n=Math.max(0,Math.min(maxCur,n));cur=n;paint()}
 
  /* ---- drag / swipe / tap ---- */
@@ -129,7 +131,7 @@ function kitBook(spec){spec=spec||{};const rm=()=>{try{return reducedMotion()}ca
  book.addEventListener("pointermove",e=>{if(!drag||e.pointerId!==drag.id)return;const dx=e.clientX-drag.x0,dy=e.clientY-drag.y0;drag.hist.push([performance.now(),e.clientX]);if(drag.hist.length>8)drag.hist.shift();
   if(!drag.dir){if(Math.abs(dx)<8||Math.abs(dx)<Math.abs(dy))return;
    const fwd=mode==="spread"?drag.side>=.5:dx<0;if(fwd&&cur>=maxCur||!fwd&&cur<=0){drag.dir=9;return}
-   drag.dir=fwd?1:-1;try{book.setPointerCapture(e.pointerId)}catch(_){}if(!rm()){drag.i=fwd?cur:cur-1;drag.el=beginTurn(drag.i)}}
+   drag.dir=fwd?1:-1;try{book.setPointerCapture(e.pointerId)}catch(_){}if(!rm()){drag.i=fwd?cur:cur-1;drag.el=beginTurn(drag.i,drag.dir)}}
   if(drag.dir===9||!drag.el)return;e.preventDefault();const r=drag.r;
   /* distance the finger needs to travel for a full turn: to the opposite edge of the book */
   if(drag.dir===1){const span=Math.max(80,drag.x0-(mode==="spread"?r.left:r.left-r.width*.15));drag.p=Math.max(0,Math.min(1,-dx/span))}

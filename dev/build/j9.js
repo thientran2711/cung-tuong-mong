@@ -11,9 +11,9 @@ function hostility(v,t){return oan(v,t)+Math.max(0,-aff(v,t))/2+(t===S?v.ghen/2:
 function oanMonth(){for(const v of rivals){v.oan=Math.max(0,(v.oan||0)-2);for(const k in v.ro)v.ro[k]=Math.max(0,v.ro[k]-2)}for(const k in S.ro)S.ro[k]=Math.max(0,S.ro[k]-2)}
 
 /* houses: Phi and above head a palace; lower consorts live under a head. Same house: cannot harm or win over each other */
-function houseOf(p){return rkOf(p)>=4?key(p):(p.resHead!=null&&byKey(p.resHead)&&(byKey(p.resHead)===S?S.rank>=4:byKey(p.resHead).alive&&!byKey(p.resHead).out&&rkOf(byKey(p.resHead))>=4)?p.resHead:key(p))}
+function houseOf(p){return rkOf(p)>=PAL_HEAD?key(p):(p.resHead!=null&&byKey(p.resHead)&&(byKey(p.resHead)===S?S.rank>=PAL_HEAD:byKey(p.resHead).alive&&!byKey(p.resHead).out&&rkOf(byKey(p.resHead))>=PAL_HEAD)?p.resHead:key(p))}
 function sameHouse(a,b){return a!==b&&houseOf(a)===houseOf(b)}
-function assignHouses(){const heads=consorts().filter(p=>rkOf(p)>=4);for(const p of consorts()){if(rkOf(p)>=4){p.resHead=null;continue}if(houseOf(p)!==key(p))continue;p.resHead=heads.length&&roll(70)?key(pick(heads.filter(h=>h!==p))||p):null}}
+function assignHouses(){const heads=consorts().filter(p=>rkOf(p)>=PAL_HEAD);for(const p of consorts()){if(rkOf(p)>=PAL_HEAD){p.resHead=null;continue}if(houseOf(p)!==key(p))continue;p.resHead=heads.length&&roll(70)?key(pick(heads.filter(h=>h!==p))||p):null}}
 function houseName(p){const h=byKey(houseOf(p));return h===S?"tẩm cung của ngươi":h===p?"cung riêng":"cung "+h.name}
 
 /* where everyone is this tuần: by role, trait, season and time of month */
