@@ -21,3 +21,5 @@ cùng tỉ lệ (khung = 0.9 bề ngang mặt), ô đầu = c03 t1 làm chuẩn.
 - c12 t2 t3 t4 t5 t6
 - Đợt 1: c01 c04 c13 t2–t5; c14 t3–t5; c24 t2–t6; c06 t2 t4 t6
 - Đợt 2: c21 t2 t5; c22 t2 t3; c28 t5; c07 t2; c08 t3 t5; c10 t4 t5; c16 t4; c18 t5; c19 t6; c23 t5 t6; c26 t2; c29 t5; c30 t5; c31 t3 t6; c32 t2 t5; c15 t6
+- Đợt 3 (cung nữ): m01 t5 t6; m10 t6; m13 t5; m14 t3 t4 t5; m17 t2 t3 t4; m20 t3; m22 t3 t5; m24 t3–t6; m35 t2 t4; m36 t5; m40 t3 t5 t6; m41 t2 t5; m42 t4 t6
+- Bỏ qua sau khi xem lại (cỡ đã trong trần sau đợt đổi hoa lá): m03 t2, m15 t4 t5, m32 t6

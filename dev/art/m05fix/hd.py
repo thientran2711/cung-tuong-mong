@@ -9,7 +9,7 @@ from PIL import Image,ImageDraw
 import lib
 from lib import ccrop,comp,save_webp,find_face,fh_crop,F,AGES,BG,WT
 from swap import SW
-ROOT=os.path.dirname(os.path.abspath(__file__))+"/../hd"
+ROOT=os.path.abspath(os.environ.get("HDROOT",os.path.dirname(os.path.abspath(__file__))+"/../hd"))
 T=1024; NC=2
 SZ={1:60,2:63,3:66,4:70,5:73,6:77}
 PAINT="painted directly on the skin like lip rouge, soft natural painted edges that melt into the skin texture (never a sticker, never a decal, no shadow, no thickness)"

@@ -4,7 +4,7 @@ import sys,os,glob,shutil,subprocess,numpy as np
 from PIL import Image
 H=os.path.dirname(os.path.abspath(__file__)); WT="/home/user/cung-tuong-mong/.claude/worktrees/agent-a8fc7f5e0876349f1"
 for f in sys.argv[1:]:
-    D=f"{H}/../hd/{f}"; figs=sorted(glob.glob(f"{D}/out/fig-*.webp")); dst=[]
+    D=os.path.abspath(os.environ.get("HDROOT",f"{H}/../hd"))+f"/{f}"; SUF=os.environ.get("SHOTSUF",""); figs=sorted(glob.glob(f"{D}/out/fig-*.webp")); dst=[]
     for p in figs:
         b=os.path.basename(p); o=np.asarray(Image.open(f"{D}/orig/{b}").convert("RGBA"))[...,3]; n=np.asarray(Image.open(p).convert("RGBA"))[...,3]
         assert o.shape==n.shape and (o==n).all(), ("alpha changed",b)
@@ -19,5 +19,5 @@ for f in sys.argv[1:]:
     worse=[(k,old.get(k),v) for k,v in new.items() if v>=1 and v>old.get(k,0)+0.8]
     print(f,len(dst),"figs; cutcheck worse than before:",worse or "none")
     ts=sorted({os.path.basename(x).split("-")[3] for x in dst})
-    subprocess.run([sys.executable,f"{H}/sheet.py",f"{WT}/dev/shots/m05fix/{f}.jpg",f"{D}/orig",f"{WT}/img",f,f"{f}: hoa điền đổi sang hoa lá (trước/sau, a18 các bậc; hàng dưới {ts[0]} bốn tuổi)"]+ts,cwd=H,capture_output=True)
-    shutil.copy(f"{D}/c/cmp.jpg",f"{WT}/dev/shots/m05fix/{f}-forehead.jpg")
+    subprocess.run([sys.executable,f"{H}/sheet.py",f"{WT}/dev/shots/m05fix/{f}{SUF}.jpg",f"{D}/orig",f"{WT}/img",f,os.environ.get("SHOTTITLE",f"{f}: hoa điền đổi sang hoa lá")+f" (trước/sau, a18 các bậc; hàng dưới {ts[0]} bốn tuổi)"]+ts,cwd=H,capture_output=True)
+    shutil.copy(f"{D}/c/cmp.jpg",f"{WT}/dev/shots/m05fix/{f}{SUF}-forehead.jpg")

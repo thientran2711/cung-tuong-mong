@@ -1,0 +1,16 @@
+consort-c21 t2 t5
+consort-c22 t2 t3
+consort-c28 t5
+consort-c07 t2
+consort-c08 t3 t5
+consort-c10 t4 t5
+consort-c16 t4
+consort-c18 t5
+consort-c19 t6
+consort-c23 t5 t6
+consort-c26 t2
+consort-c29 t5
+consort-c30 t5
+consort-c31 t3 t6
+consort-c32 t2 t5
+consort-c15 t6

@@ -3,11 +3,11 @@ import sys,os,subprocess
 H=os.path.dirname(os.path.abspath(__file__))
 os.environ["TX"]="/root/.claude/projects/-home-user-cung-tuong-mong/d64e4822-8005-553d-be5a-3c77c37ea939/subagents/agent-a8fc7f5e0876349f1.jsonl:/root/.claude/projects/-home-user/d64e4822-8005-553d-be5a-3c77c37ea939/subagents/agent-a8fc7f5e0876349f1.jsonl"
 E={}
-for l in open(f"{H}/edits.txt"):
+for l in open(os.environ.get("EDITS",f"{H}/edits.txt")):
     p=l.split()
     if len(p)>=3: E[(p[0],p[1])]=p[2]
 for f in sys.argv[1:]:
-    D=f"{H}/../hd/{f}"; ts=sorted(t for (ff,t) in E if ff==f)
+    D=os.path.abspath(os.environ.get("HDROOT",f"{H}/../hd"))+f"/{f}"; ts=sorted(t for (ff,t) in E if ff==f)
     # always refetch when the id changed: keep a stamp per tier
     args=[]
     for t in ts:
