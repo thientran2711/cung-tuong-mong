@@ -3272,7 +3272,7 @@ function figFor(p,kind){if(!FIGS.length||!p)return"";const role=figRole(p),who=p
 (function(){const r0=renderStage;renderStage=function(){r0.apply(this,arguments);try{if(!FIGS.length)return;const ppl=curPeople();document.querySelectorAll("#tokens .tok").forEach(b=>{const p=ppl[+b.dataset.p];const who=p&&(p.kind==="emp"||p.kind==="th"?p:p.ref);if(!who)return;const src=figFor(p.kind==="emp"||p.kind==="th"?p:who);if(!src)return;
   const md=b.querySelector(".md");if(md){const im=document.createElement("img");im.className="figimg";im.alt="";im.src=src;im.onerror=()=>{im.remove();md.style.display=""};md.style.display="none";b.insertBefore(im,md);b.classList.add("fig")}})}catch(e){}}})();
 /* her own figure in her palace (and in lãnh cung while she lives there) */
-(function(){const r0=renderStage;renderStage=function(){r0.apply(this,arguments);try{const st=$("stage");let el=document.getElementById("mefig");const show=FIGS.length&&(S.place==="home"||(S.out&&S.place==="lc"));const src=show?figFor(S):"";if(!src){if(el)el.remove();return}if(!el){el=document.createElement("img");el.id="mefig";el.alt="";st.appendChild(el)}if(el.getAttribute("src")!==src)el.src=src}catch(e){}}})();
+(function(){const r0=renderStage;renderStage=function(){r0.apply(this,arguments);try{const st=$("stage");let el=document.getElementById("mefig");/* owner 11/15: she is drawn at EVERY place she is (first / left, counted in the 4 / 3 people of the stage) */const show=FIGS.length&&!!S.place;const src=show?figFor(S):"";if(!src){if(el)el.remove();return}if(!el){el=document.createElement("img");el.id="mefig";el.alt="";st.appendChild(el)}if(el.getAttribute("src")!==src)el.src=src}catch(e){}}})();
 
 /* ================= PERSONALITY: one engine for every character ================= */
 /* each trait = weights over the act menu + reaction rules; a person's behaviour = product of both traits' weights */
@@ -3821,7 +3821,8 @@ const BAL={outQ:85,hz:2.0,conc:.3/.7,later:6,hhTh:55};
    Readers: j59 (every room / place stage, consort + servant road), jk4 kitStageFig / kitEventStage + week book (CSS var --kfig). */
 /* table by sex / age (× the adult woman):  adult woman 1 (≈ .79 of the stage — the ratio the owner approved 11/15 in page-curl shot ipad1180-tab-45, measured .787) · adult man / eunuch / official / physician 1.07 (capped under the ribbon)
    · child a<18: .55 + .03·a (age 5 ≈ .70, 10 ≈ .85, 15 = 1) — heads always stay under the top label (ribbon) */
-const KIT_FIG={h:.79,man:1.07,men:{emperor:1,eunuch:1,official:1,physician:1,man:1},
+/* maxPx (owner 11/15): body height never exceeds what the 1180 iPad stage gives (.79 × 685 ≈ 542 px), so taller stages (1366, larger iPads) do not make figures wider */
+const KIT_FIG={h:.79,man:1.07,maxPx:542,men:{emperor:1,eunuch:1,official:1,physician:1,man:1},
  kid(a){return typeof a==="number"&&a<18?Math.min(1,.55+.03*Math.max(1,a)):1},
  fac(src,age){const m=/fig-([a-z]+)-/.exec(src||"");return(m&&this.men[m[1]]?this.man:1)*this.kid(age)}};
 window.KIT_FIG=KIT_FIG;
@@ -5607,9 +5608,9 @@ function j59lay(force){const st=document.getElementById("stage");if(!st||!S)retu
  const visW=(x,h)=>boxW(x,h)*Math.max(.2,kCR(x.b)-kCL(x.b));
  const oL=(x,h)=>boxW(x,h)*Math.max(0,kCL(x.b)-x.b.l),oR=(x,h)=>boxW(x,h)*Math.max(0,x.b.r-kCR(x.b));
  const meX={f:1,b:mb||{t:0,b:1,l:0,r:1},ar:mar};const meU=me?visW(meX,1):0;
- /* owner 11/15: up to 4 people at once on iPad (3 on Fold / phones), same kit scale, packed by core body width; each figure may
-    step back over its left neighbour by up to OVX (35 % iPad, 25 % Fold) of its core, later ones in front; "› N" only beyond that */
- const OVX=innerWidth>=1000?.35:.25,MAXN=innerWidth>=1000?4:3,nP=it.length+(me?1:0);
+ /* owner 11/15 (later: "4 is too crowded"): at most 3 people at once on iPad, 2 on Fold / phones (her included), same kit scale, packed by core body width; each figure may
+    step back over its left neighbour by up to OVX (20 %) of its core, later ones in front; the others via the "› N" pages */
+ const OVX=.2,MAXN=innerWidth>=1000?3:2,nP=it.length+(me?1:0);
  const edgeL=h=>me?oL(meX,h):it.length?oL(it[0],h):0,edgeR=h=>it.length?oR(it[it.length-1],h):me?oR(meX,h):0;
  const total=(h,ov)=>{ov=ov||0;return fixed+edgeL(h)+edgeR(h)+it.reduce((a,x,i)=>a+visW(x,h)*(i>0||me?1-ov:1)+4+gap,0)+(me?meU*h+gap:0)};
  const ovNeed=(h,av)=>{const t0=total(h,0);if(t0<=av)return 0;const v=it.reduce((a,x,i)=>a+(i>0||me?visW(x,h):0),0);return v?(t0-av)/v:9};
@@ -5617,7 +5618,7 @@ function j59lay(force){const st=document.getElementById("stage");if(!st||!S)retu
  let tw=it.map(x=>x.tag?x.tag.offsetWidth:0);
  const KA=st.__kfa;/* KIT_FLOOR anchor (jk2b kitFloorFit): feet on the painted floor line while the figure keeps its kit height */
  const size=(rows)=>{const fo0=Math.max(sH*.03,rows*(tagH+3)+6);const foA=KA&&KA.feet?sH-KA.feet:0;
-  const fo=Math.max(fo0,Math.min(foA,sH-topR-KF.h*sH));CAP=sH-fo-topR;return{fo,H:Math.max(sH*.2,Math.min(KF.h*sH,CAP))}};
+  const fo=Math.max(fo0,Math.min(foA,sH-topR-KF.h*sH));CAP=sH-fo-topR;return{fo,H:Math.max(sH*.2,Math.min(KF.h*sH,CAP,KF.maxPx||1e9))}};
  /* the plaque column only covers the top of the stage: when it ends above the heads, the people may use the full width under it */
  const headTop=(z)=>sH-z.fo-Math.min(z.H*maxF,sH-z.fo-topR);
  const widthFor=(z)=>{let rr=rightR;try{const kR=document.getElementById("kshR");if(gR&&kR&&!kR.hidden&&kR.offsetHeight&&kR.getBoundingClientRect().bottom-R.top+4<headTop(z))rr=8}catch(e){}return{rr,avail:sW-8-rr-gL}};
@@ -8052,21 +8053,24 @@ function kitCurl(o){o=o||{};const host=o.host,w=Math.max(40,o.w|0),h=Math.max(40
  const mir=!!o.mirror,BIG=Math.ceil(Math.hypot(w,h)*2)+40,lift=o.lift!=null?o.lift*h:Math.min(h*.42,w*.8);
  const root=document.createElement("div");root.className="kcl"+(o.cls?" "+o.cls:"");
  root.style.cssText=`left:${o.x||0}px;top:${o.y||0}px;width:${w}px;height:${h}px`+(mir?";transform:scaleX(-1)":"");
- /* a face copy: sticky → relative (one static picture), ids dropped (keepId keeps the root's, so #id styles still apply), scroll kept */
- const prep=(src,keepId)=>{if(!(src&&src.nodeType===1))return null;const m=src.cloneNode(true),A=[src,...src.querySelectorAll("*")],B=[m,...m.querySelectorAll("*")],sc=[];
-  for(let i=0;i<A.length;i++){const a=A[i],b=B[i];if(!b)break;if(!(keepId&&i===0))b.removeAttribute("id");
+ /* a face copy: sticky → relative (one static picture), ALL ids dropped (no second #panel during the curl), scroll kept */
+ const prep=(src,keepId)=>{if(!(src&&src.nodeType===1))return null;const m=src.cloneNode(true),A=[src,...src.querySelectorAll("*")],B=[m,...m.querySelectorAll("*")],sc=[],lk=[];
+  for(let i=0;i<A.length;i++){const a=A[i],b=B[i];if(!b)break;/* NO duplicate ids during a curl (book-release 11/15): every id is dropped, the root keeps it as data-kclid */if(keepId&&i===0&&b.id)b.dataset.kclid=b.id;b.removeAttribute("id");
    if(a.scrollTop||a.scrollLeft)sc.push([b,a.scrollTop,a.scrollLeft]);
    const ca=getComputedStyle(a);if(i&&ca.position==="sticky")b.style.position="relative";
    /* a copied scroller is a still picture: clip it plainly (a live scroll layer inside the moving page is mis-clipped by the compositor) */
-   if(/auto|scroll/.test(ca.overflowY+ca.overflowX))b.style.setProperty("overflow","hidden","important");
+   if(/auto|scroll/.test(ca.overflowY+ca.overflowX)){b.style.setProperty("overflow","hidden","important");lk.push([a,b])}
    /* big boxes keep their real size (heights from grid/container units of the old parent would not resolve in the copy) */
    if(i&&a.firstElementChild){const r=a.getBoundingClientRect();if(r.height>=100&&r.width>=100){const st=b.style;st.setProperty("box-sizing","border-box","important");st.setProperty("height",r.height+"px","important");st.setProperty("min-height","0","important");st.setProperty("max-height","none","important");st.setProperty("flex","none","important")}}}
   /* the copy leaves its parent, so rules like ".game>#panel" stop matching: carry the root's own box layout inline */
   const cs=getComputedStyle(src);for(const k of["display","flexDirection","flexWrap","alignItems","alignContent","justifyContent","gap","gridTemplateRows","gridTemplateColumns","gridAutoRows","paddingTop","paddingRight","paddingBottom","paddingLeft","boxSizing","overflowX","overflowY","backgroundColor","backgroundImage","borderTopWidth","borderRightWidth","borderBottomWidth","borderLeftWidth","borderTopStyle","borderRightStyle","borderBottomStyle","borderLeftStyle","borderTopColor","borderRightColor","borderBottomColor","borderLeftColor","borderRadius","fontSize"])try{m.style[k]=cs[k]}catch(e){}
   if(m.style.display==="none"||m.style.display==="contents")m.style.display="block";
-  m.setAttribute("aria-hidden","true");m.inert=true;return{m,sc}};
+  m.setAttribute("aria-hidden","true");m.inert=true;return{m,sc,lk}};
+ /* o.ctx: the live page's ancestor (e.g. .game): the copy sits in a stand-in carrying its classes, so rules like ".game.k3ph #panel …"
+    still match the copy and it lays out exactly like the live page (owner 11/15: the back must be the WHOLE page, aligned) */
+ const ctxWrap=m=>{if(!o.ctx)return m;const d=document.createElement("div");d.className=o.ctx.className+" kcl-ctx";d.appendChild(m);return d};
  const face=(src,cls,keepId)=>{const f=document.createElement("div");f.className="kcl-face "+cls;f.style.width=w+"px";f.style.height=h+"px";
-  const p=prep(src,keepId);if(p)f.appendChild(p.m);else if(typeof src==="string"&&src)f.innerHTML=src;else f.innerHTML=`<div class="kpaper kcl-blank"></div>`;return{f,sc:p?p.sc:[]}};
+  const p=prep(src,keepId);if(p)f.appendChild(ctxWrap(p.m));else if(typeof src==="string"&&src)f.innerHTML=src;else f.innerHTML=`<div class="kpaper kcl-blank"></div>`;return{f,sc:p?p.sc:[]}};
  const hp=cls=>{const b=document.createElement("div");b.className="kcl-hp "+cls;b.style.width=b.style.height=BIG+"px";return b};
  /* ground: shadow along the fold on the page being uncovered (page-clipped) */
  const gnd=document.createElement("div");gnd.className="kcl-gnd";const gs=document.createElement("i");gs.className="kcl-gs";gs.style.height=BIG+"px";gnd.appendChild(gs);
@@ -8080,7 +8084,9 @@ function kitCurl(o){o=o||{};const host=o.host,w=Math.max(40,o.w|0),h=Math.max(40
  root.append(gnd,hF,hB);host.appendChild(root);
  const rescroll=()=>{for(const [e,t,l] of FR.sc.concat(BK.sc)){e.style.scrollBehavior="auto";e.style.scrollSnapType="none";e.scrollTop=t;e.scrollLeft=l}};rescroll();
  const MX=[-1,0,0,1,w,0];let dir0=o.dir||1;
- function set(p,dir){if(dir)dir0=dir;p=Math.max(0,Math.min(1,p));
+ function set(p,dir){if(dir)dir0=dir;p=Math.max(0,Math.min(1,p));BK.lastP=p;
+  /* aligned back: follow the live page's scroll (it may still settle while the sheet turns) */
+  if(o.backAligned&&BK.lk)for(const [a,b] of BK.lk){if(b.scrollTop!==a.scrollTop)b.scrollTop=a.scrollTop;if(b.scrollLeft!==a.scrollLeft)b.scrollLeft=a.scrollLeft}
   let cx=w-2*w*p,cy=h-lift*Math.sin(Math.PI*p);
   /* never fold the spine: |C−(0,h)| ≤ w */
   const dd=Math.hypot(cx,cy-h);if(dd>w){cx=cx*w/dd;cy=h+(cy-h)*w/dd}
@@ -8093,7 +8099,9 @@ function kitCurl(o){o=o||{};const host=o.host,w=Math.max(40,o.w|0),h=Math.max(40
   /* flap content: the back face lies (when turned) on [−w,0]; now = reflect(spine-mirror(it)) = R·S·translate(−w) */
   let G=kclMul(R,[-1,0,0,1,0,0]);G=kclMul(G,[1,0,0,1,-w,0]);
   hF.style.transform=kclM(BF);const iB=kclInv(BF);FR.f.style.transform=kclM(mir?kclMul(iB,MX):iB);
-  hB.style.transform=kclM(BF);BK.f.style.transform=kclM(kclMul(iB,mir?kclMul(G,MX):G));
+  hB.style.transform=kclM(BF);const Gm=mir?kclMul(G,MX):G;BK.f.style.transform=kclM(kclMul(iB,Gm));
+  /* aligned back: the flap keeps its folded shape (BK.f), the page inside it is put back at its own place on screen */
+  if(o.backAligned&&BK.al)BK.al.style.setProperty("transform",kclM(kclMul(kclInv(Gm),mir?MX:[1,0,0,1,0,0])),"important");
   /* how far the folded part reaches beyond the fold */
   let dm=0;for(const [X,Y] of [[0,0],[w,0],[0,h],[w,h]]){const s=(X-Mx)*nx+(Y-My)*ny;if(s>dm)dm=s}
   const el=Math.sin(Math.PI*p);
@@ -8108,8 +8116,11 @@ function kitCurl(o){o=o||{};const host=o.host,w=Math.max(40,o.w|0),h=Math.max(40
   root.style.setProperty("--kcl-e",el.toFixed(3));
   if(o.vanish)root.style.opacity=p>.8?Math.max(0,1-(p-.8)/.2).toFixed(3):"1"}
  set(o.p||0);
- /* setBack(el): the back of the turning sheet shows a real page (the destination page, read the right way once turned; owner 11/15) */
- function setBack(src){const p=prep(src,false);if(!p)return;[...BK.f.children].forEach(ch=>{if(ch!==sh)ch.remove()});BK.f.insertBefore(p.m,sh);BK.sc=p.sc}
+ /* backAligned (tab switch, owner 11/15): the back shows the destination page at its own place and scale, upright, so the flap and
+    the uncovered part together show the WHOLE new page; the flap adds only its shape, shading and fold shadow.
+    setBack(el): the back of the turning sheet shows a real page (the destination page, read the right way once turned; owner 11/15) */
+ function setBack(src){const p=prep(src,!!o.ctx);if(!p)return;[...BK.f.children].forEach(ch=>{if(ch!==sh)ch.remove()});let n=ctxWrap(p.m);if(o.backAligned){const al=document.createElement("div");al.className="kcl-al";al.style.setProperty("width",w+"px","important");al.style.setProperty("height",h+"px","important");al.appendChild(n);n=al;BK.al=al}
+  BK.f.insertBefore(n,sh);BK.sc=p.sc;BK.lk=p.lk;if(BK.lastP!=null)set(BK.lastP)}
  return {el:root,set,rescroll,setBack,destroy(){root.remove()},n:1}}
 
 function kitCurlRun(c,from,to,dur,done,ease){ease=ease||kitCurlEase;const t0=performance.now();let alive=true;const dir=to>=from?1:-1;
@@ -8128,16 +8139,21 @@ function kitCurlSwap(el,fn,opt){opt=opt||{};const run=()=>{try{fn&&fn()}catch(e)
  if(!el||!r0||r0.width<60||r0.height<60||!el.getClientRects().length){run();return false}
  if(kitCurlOff()){el.classList.add("kcl-fade");run();requestAnimationFrame(()=>requestAnimationFrame(()=>el.classList.remove("kcl-fade")));return false}
  const host=document.createElement("div");host.className="kcl-host";host.style.cssText=`left:${r0.left}px;top:${r0.top}px;width:${r0.width}px;height:${r0.height}px`;
- let c=null;try{c=kitCurl({host,front:el,back:null,w:r0.width,h:r0.height,x:0,y:0,keepId:false,mirror:(opt.dir||1)<0,vanish:true,lift:.5,cls:"kcl-tab"})}catch(e){console.error(e)}
+ let c=null;try{c=kitCurl({host,front:el,back:null,w:r0.width,h:r0.height,x:0,y:0,keepId:!!el.closest(".game"),ctx:el.closest(".game"),mirror:(opt.dir||1)<0,vanish:true,lift:.5,backAligned:true,cls:"kcl-tab"})}catch(e){console.error(e)}
  run();
  const r1=el.getBoundingClientRect();
  if(!c||Math.abs(r1.left-r0.left)>2||Math.abs(r1.top-r0.top)>2||Math.abs(r1.width-r0.width)>2||Math.abs(r1.height-r0.height)>2||!el.getClientRects().length){host.remove();return false}
  /* the back of the turning sheet = the new page (as in a real book: the page you turn to is printed on its back) */
  try{c.setBack(el)}catch(e){console.error(e)}
  document.body.appendChild(host);c.rescroll();kitCurlSfx();
+ /* the new page finishes its layout a moment later (person card sizing, chips): take the back again once it has settled,
+    so the whole page (tabs, strip, card, acts) is on the back, at the same place as the real page underneath */
+ let alive=true;const reback=()=>{if(!alive)return;try{c.setBack(el);c.rescroll()}catch(e){}};
+ const sig=()=>{const q=el.querySelector(".pc,.pgwrap,.kbl,section,div");return el.scrollHeight+"|"+el.scrollTop+"|"+(q?q.getBoundingClientRect().top+":"+q.offsetHeight:"")};
+ let s0=sig();const iv=setInterval(()=>{if(!alive){clearInterval(iv);return}const s1=sig();if(s1!==s0){s0=s1;reback()}},70);setTimeout(reback,90);
  /* a quick lift then a slower settle (a flick of the page): the new page shows under the corner from the first frames */
- const stop=kitCurlRun(c,0,1,opt.ms||720,()=>{host.remove();if(kclLive===end)kclLive=null},kitCurlLift);
- const end=()=>{stop();host.remove()};kclLive=end;kitCurlSwap.t0=stop.t0;return true}
+ const stop=kitCurlRun(c,0,1,opt.ms||720,()=>{alive=false;host.remove();if(kclLive===end)kclLive=null},kitCurlLift);
+ const end=()=>{alive=false;stop();host.remove()};kclLive=end;kitCurlSwap.t0=stop.t0;return true}
 
 /* ---------- kitLeather: the unrolled leather map (Dư đồ) — NOT a book page (owner 11/15 04:00Z) ----------
    kitLeather(el) adds the hide surface around el's map painting: tanned leather with grain and burnt edges, an uneven hide outline,
@@ -8225,6 +8241,10 @@ function kitBookPic(o){o=o||{};const ax=o.ax!=null?o.ax:.5,feet=o.feet!=null?o.f
 .kcl-face{position:absolute;left:0;top:0;overflow:hidden;transform-origin:0 0}
 .kcl .kcl-face>*:not(.kcl-sh){position:absolute!important;inset:0!important;width:auto!important;height:auto!important;max-height:none!important;margin:0!important;visibility:visible!important;transform:none!important}
 .kcl-fr{box-shadow:0 0 0 1px #8a5a2418}
+html body .kcl .kcl-face>.kcl-al{inset:auto!important;left:0!important;top:0!important;transform-origin:0 0!important;overflow:visible!important}
+html body .kcl .kcl-al>*{position:absolute!important;inset:0!important}
+html body .kcl .kcl-ctx{display:block!important;position:absolute!important;inset:0!important;background:none!important;padding:0!important;margin:0!important;border:0!important;max-width:none!important;min-height:0!important;height:auto!important;overflow:hidden!important}
+html body .kcl .kcl-ctx>*{position:absolute!important;inset:0!important;width:auto!important;height:auto!important;max-height:none!important;margin:0!important;transform:none!important;visibility:visible!important}
 .kcl .kcl-face>.kcl-ghost{opacity:.075!important;transform:scaleX(-1)!important;filter:grayscale(.6) blur(.4px);pointer-events:none;z-index:1}
 /* the flap: its own soft shadow falls on the page below it */
 .kcl-bk{box-shadow:0 0 16px 2px #2a14064d,0 0 3px #2a140640;background:#f3e7cc}
@@ -12130,6 +12150,56 @@ window.kitDlgFit=kitDlgFit;
 @media (max-width:999px){.modal .dlg.kdscroll>#mb .kpsubj img,.modal .dlg.kdscroll>#mb .kdlgart .ksart,.modal .dlg.kdscroll>#mb .kpsubj .ksart{max-height:var(--kdpic,24vh)}}
 `;document.head.appendChild(st)})();
 
+/* ================= KIT 32.6 · PEOPLE ON THE PICTURE (owner 11/15, dev/owner-shots/1115-figs-on-scene.jpg) =================
+   Event dialogs (kitEventStage): when there is a place / event picture band, the people stand ON it — feet on the picture's floor
+   line (86 % of its height), body height KIT_FIG.h × picture height (kitFigBody: forehead to feet; men ×KIT_FIG.man, capped under the
+   top edge; children by age), packed side by side by their core width (overlap ≤ 25 %), name chips inside the picture's bottom edge.
+   No separate figure column: the story text runs full width under the picture, then the options (KIT 32.5: picture + people + text
+   fixed, only the options scroll). Without a picture band the old figure column stays. kitEsOvFit re-lays the figures whenever the
+   picture height changes (kitDlgFit compresses the picture on short screens; figures scale with it). */
+function kitEsOvFit(){try{const ov=document.querySelector("#mb .kesov");if(!ov)return;const art=ov.parentElement;const H=art.clientHeight,W=art.clientWidth;if(H<40||W<40)return;
+ const F=[...ov.querySelectorAll(":scope > .kesf")].filter(f=>!f.classList.contains("kesno"));if(!F.length)return;let wait=false;
+ const L=F.map(f=>{const im=f.querySelector(".kesimg"),src=im&&im.getAttribute("src");const b=src?kitFigBody(src,()=>requestAnimationFrame(kitEsOvFit)):null;if(!b||!im.naturalWidth){wait=true;if(im&&!im.dataset.kov){im.dataset.kov=1;im.addEventListener("load",()=>requestAnimationFrame(kitEsOvFit))}}
+  const kfr=parseFloat(im&&im.style.getPropertyValue("--kfr"))||1;return{f,im,b,fac:kfr*(KIT_FIG.man||1)}});
+ if(wait)return;
+ const floor=H*.86,top=H*.03;
+ const sz=L.map(x=>{const bt=x.b.ht>x.b.t?x.b.ht:x.b.t;const body=Math.min(KIT_FIG.h*H*x.fac,floor-top);const ih=body/Math.max(.2,x.b.b-bt);const iw=ih*(x.b.ar||x.im.naturalWidth/x.im.naturalHeight);
+  const cl=x.b.cl!=null?x.b.cl:x.b.l,cr=x.b.cr!=null?x.b.cr:x.b.r;return{ih,iw,core:iw*(cr-cl),cl,cr,l:x.b.l,r:x.b.r,b:x.b.b}});
+ /* pack: core widths with up to 25 % overlap, outer sleeves inside the picture */
+ const tot=o=>sz.reduce((a,s,i)=>a+s.core*(i?1-o:1),0)+sz[0].iw*(sz[0].cl-sz[0].l)+sz[sz.length-1].iw*(sz[sz.length-1].r-sz[sz.length-1].cr);
+ let o=0;const av=W-16;if(tot(0)>av){const v=sz.slice(1).reduce((a,s)=>a+s.core,0);o=Math.min(.25,v?(tot(0)-av)/v:0)}
+ let k=1;const t=tot(o);if(t>av)k=av/t;/* still too wide (very narrow picture): one common factor */
+ let x=(W-t*k)/2+sz[0].iw*k*(sz[0].cl-sz[0].l);
+ L.forEach((it,i)=>{const s=sz[i];const ih=s.ih*k,iw=s.iw*k;if(i)x-=s.core*k*o;const left=x-iw*s.cl;
+  it.f.style.left=left.toFixed(1)+"px";it.f.style.width=iw.toFixed(1)+"px";it.im.style.height=ih.toFixed(1)+"px";it.im.style.width=iw.toFixed(1)+"px";
+  it.f.style.top=(floor-ih*s.b).toFixed(1)+"px";it.f.style.zIndex=String(2+i);x+=s.core*k;
+  const cap=it.f.querySelector(".kpsn");if(cap){cap.style.left=(left+iw*(s.cl+s.cr)/2).toFixed(1)+"px";cap.dataset.row="0"}});
+ /* name chips: inside the picture bottom, never cut; neighbours that touch go to a second row */
+ const caps=L.map(it=>it.f.querySelector(".kpsn")).filter(Boolean);caps.forEach(c=>{c.style.translate="";ov.appendChild(c)});
+ let prev=null;caps.forEach(c=>{const r=c.getBoundingClientRect(),A=art.getBoundingClientRect();let s=0;if(r.left<A.left+4)s=A.left+4-r.left;else if(r.right>A.right-4)s=A.right-4-r.right;if(s)c.style.translate=s.toFixed(1)+"px 0";
+  const q=c.getBoundingClientRect();if(prev&&q.left<prev.right+4&&prev.c.dataset.row==="0")c.dataset.row="1";prev={right:q.right,c}})}catch(e){console.error("kitEsOvFit",e)}}
+window.kitEsOvFit=kitEsOvFit;
+(function(){if(typeof kitEventStage!=="function")return;const k0=kitEventStage;kitEventStage=function(m){const r=k0.apply(this,arguments);
+ try{if(r){const mb=document.getElementById("mb");const band=mb&&mb.querySelector(":scope > .kdlgart");const art=band&&band.querySelector(".ksart");const col=mb&&mb.querySelector(":scope > .kpb > .kpsubj.kes");
+  if(art&&col&&!art.querySelector(".kesov")){const ov=document.createElement("div");ov.className="kesov";[...col.querySelectorAll(":scope > .kesf")].forEach(f=>ov.appendChild(f));art.appendChild(ov);col.remove();
+   band.classList.add("kesonpic");const b=mb.querySelector(":scope > .kpb");if(b)b.classList.add("kesfull");requestAnimationFrame(kitEsOvFit)}}}catch(e){console.error("kesov",e)}return r};window.kitEventStage=kitEventStage})();
+(function(){if(typeof kitDlgFit!=="function")return;const d0=kitDlgFit;kitDlgFit=function(){const r=d0.apply(this,arguments);try{kitEsOvFit()}catch(e){}return r};window.kitDlgFit=kitDlgFit;
+ let t=0;addEventListener("resize",()=>{clearTimeout(t);t=setTimeout(kitEsOvFit,140)})})();
+(function(){const st=document.createElement("style");st.id="kit-esov";st.textContent=`
+#mb>.kdlgart.kesonpic>.ksart{position:relative;height:var(--kdpic,30vh)!important;max-height:none!important;min-height:150px}
+#mb>.kdlgart.kesonpic>.ksart>img{object-position:center 60%}
+#mb .kesov{position:absolute;inset:0;pointer-events:none;z-index:2;overflow:hidden}
+#mb .kesov>.kesf{position:absolute;margin:0;display:block}
+#mb .kesov>.kesf .kesfi{display:block;position:relative}
+#mb .kesov>.kesf .kesimg{display:block;max-width:none!important;max-height:none!important;filter:drop-shadow(0 4px 5px #0006)}
+#mb .kesov>.kpsn{position:absolute;bottom:3px;transform:translateX(-50%);z-index:20;white-space:nowrap;background:rgba(255,250,240,.92);border:1px solid var(--line,#e6d3ac);border-radius:6px;padding:0 6px;font-size:.78rem;line-height:1.25;text-align:center}
+#mb .kesov>.kpsn[data-row="1"]{bottom:calc(3px + 2.6em)}
+#mb>.kdlgart.kesonpic .ksart>figcaption,#mb>.kdlgart.kesonpic .ksart>.ksart-chip{top:6px;bottom:auto}
+#mb>.kpb.kesfull{display:block!important;grid-template-columns:none!important}
+#mb>.kpb.kesfull>*{max-width:none!important;width:auto}
+@media (max-width:999px){#mb>.kdlgart.kesonpic>.ksart{height:var(--kdpic,26vh)!important;min-height:130px}}
+`;document.head.appendChild(st)})();
+
 /* ===================== jsgame.js — TRÒ MƯU (scheme mini-games), review/scheme-games =====================
    Three short skill checks on existing player acts (person card, group "Hại nhỏ" / "Hại nặng"):
      spy    "Dò la"             → Nghe ngóng : keep the shadow in the safe band (tap Nép) + tap the phrases with the words to listen for → odds of evidence
@@ -12224,7 +12294,7 @@ function sgTruyen(box,env){const R=sgRM();const C=kg82Canvas(box,.9,420),{g,W,H}
   for(const x of G.E){const a=P(x.a),c=P(x.b);const on=path.some((v,k)=>k>0&&path[k-1]===x.a&&v===x.b);g.save();
    g.strokeStyle=on?K91C.ink:x.t===3?"#b8860b":x.t===2?"#d0662a":"#b8321f";g.lineWidth=on?4.5:x.t===3?3:x.t===2?2.2:1.6;if(x.t===1&&!on)g.setLineDash([6,5]);
    g.beginPath();g.moveTo(a.x,a.y);g.lineTo(c.x,c.y);g.stroke();g.setLineDash([]);
-   const mx=(a.x+c.x)/2,my=(a.y+c.y)/2;g.fillStyle="#fffaf0";g.beginPath();g.ellipse(mx,my,6+x.t*5,7,0,0,Math.PI*2);g.fill();g.lineWidth=1;g.strokeStyle=K91C.hair;g.stroke();
+   const mx=a.x+(c.x-a.x)*.42,my=a.y+(c.y-a.y)*.42;g.fillStyle="#fffaf0";g.beginPath();g.ellipse(mx,my,6+x.t*5,7,0,0,Math.PI*2);g.fill();g.lineWidth=1;g.strokeStyle=K91C.hair;g.stroke();
    for(let d=0;d<x.t;d++){g.fillStyle=x.t===3?"#b8860b":x.t===2?"#d0662a":"#b8321f";g.beginPath();g.arc(mx-(x.t-1)*5+d*10,my,3.2,0,Math.PI*2);g.fill()}g.restore()}
   const L=path[path.length-1];
   for(let i=0;i<G.N.length;i++){const q=P(i),x=G.N[i];const st=path.includes(i)?(i===L?"on":"ok"):(phase==="play"&&edge(L,i)?"n":"n");
@@ -12314,7 +12384,7 @@ SG.K={
  bribe:{g:"mac",t:"Mặc cả",eng:sgMac,dur:"3 hồi × 9 giây",span:[5,15],
   how:"Chỉnh số bạc rồi chạm «Trao». Lòng nàng cho biết còn xa hay gần giá nàng muốn. Trả thiếu cả ba hồi thì nàng không nhận; trả dư thì tốn bạc.",
   hud:[["score","Phần","0/10"],["round","Hồi","1/3"],["time","Còn","9 giây"]],
-  ask:v=>`Mua chuộc cung nữ ${v.maid&&v.maid.name?v.maid.name+" ":""}của ${NM(v)}: tự mặc cả, hay giao cho người làm?`,extra:"trả thiếu cả ba hồi thì nàng không nhận và báo cho chủ",
+  ask:v=>`Mua chuộc cung nữ ${v.maid&&v.maid.name&&!/\?/.test(v.maid.name)?v.maid.name+" ":""}của ${NM(v)}: tự mặc cả, hay giao cho người làm?`,extra:"trả thiếu cả ba hồi thì nàng không nhận và báo cho chủ",
   mod:(raw,o)=>o&&o.deal?{od:[15,10,5][o.deal-1]||5,bac:o.X}:{od:0,bac:0,nodeal:1}}};
 
 /* Thời cơ on the stealth acts of the Hại nặng / Sát hại groups (card wording only: the act's own name) */
