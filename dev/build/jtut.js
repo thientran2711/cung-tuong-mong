@@ -174,6 +174,23 @@ function mapSpot(){const L=[...document.querySelectorAll("#panel .mspot:not(.off
 function resOn(){const t=$q("#rtoast");return t&&t.classList.contains("on")?t:null}
 const R=(k,v,c)=>[k,v,c||"n"];
 
+/* ---------- tab groups, read live (data-tab, KG, .ksub .ksubb[data-ksub]) ---------- */
+const GROUP_ANCHORS=["rv","rel","staff"];
+const SUBSAY={rv:"thẻ từng phi tần: chạm mặt để xem, giao thiệp hay ra tay",rel:"ai thương, ai ghen, ai oán {x}",fac:"các phe trong cung và chỗ đứng của {x}",
+ staff:"kẻ hầu của {x}: Lòng là họ trung bao nhiêu, Chủ tin là {x} tin họ bao nhiêu; Lòng dưới 45 dễ bị mua chuộc",
+ emp:"Hoàng thượng, Thái hậu: hầu hạ, thỉnh an, xem lòng người trên",th:"Thái hậu: thỉnh an, xem lòng người",men:"nam nhân trong cung: thái y, thị vệ, quan viên",
+ story:"truyện riêng của thân phận {x}",log:"mọi việc đã qua",kid:"con của {x}",art:"các môn tài nghệ",inv:"rương đồ của {x}"};
+function grpOf(k){try{for(const g in KG)if(KG[g].keys.includes(k))return g}catch(e){}return null}
+function grpKeys(k){const g=grpOf(k);try{return g?KG[g].keys.filter(x=>tabBtn(x)):[k]}catch(e){return[k]}}
+function grpFirst(k){const L=grpKeys(k);return L.includes(k)?k:L[0]}
+function tabLabel(x){const sb=$q(`#panel .ksub .ksubb[data-ksub="${x}"]`);const b=tabBtn(x);return ((sb&&sb.textContent)||(b&&(b.dataset.l0||b.textContent))||x).trim().replace(/\s+\d+$/,"")}
+function grpLabel(k){const g=grpOf(k);const gb=groupBtn(k);try{if(g&&KG[g].l)return KG[g].l}catch(e){}return gb?gb.textContent.trim():tabLabel(k)}
+function grpWhen(k,i){if(!tabBtn(k)||!groupBtn(k))return false;const g=grpOf(k)||("t:"+k);
+ for(let j=0;j<i;j++){const a=GROUP_ANCHORS[j];if(tabBtn(a)&&groupBtn(a)&&(grpOf(a)||("t:"+a))===g)return false}return true}
+function grpHTML(k){const L=grpKeys(k);if(srv()&&k==="staff")return say(`<p>Đồng liêu là những cung nữ, thái giám làm cùng {x}. Kết thân thì được đỡ đần; gây thù thì bị hãm hại.</p>`);
+ const rows=L.map(x=>[tabLabel(x),say(SUBSAY[x]||""),"n"]).filter(r=>r[1]);
+ if(L.length<2)return say(`<p>${rows[0]?rows[0][0]+": "+rows[0][1]+".":""}</p>`);
+ return say(`<p>Mục ${grpLabel(k)} có ${L.length} phần, chạm hàng trên cùng để đổi:</p>`)+kitRows(rows)}
 /* ---------- LƯỢT DẪN ĐẦU KIẾP: 12 steps ---------- */
 const STEPS=[
  {id:"chao",title:"Lời chào",big:true,prep(){goRoom()},
@@ -183,23 +200,24 @@ const STEPS=[
    :say(`<p>Tám ô trên cùng là căn cơ của {x}:</p>${kitRows([R("Tư chất","Sắc · Tài · Tâm cơ · Đức"),R("Bạc","tiền riêng để chi tiêu"),R("Sức","để làm việc; dưới 20 thì không làm được việc nặng"),R("Sủng","Hoàng thượng thương {x} bao nhiêu"),R("Danh","tiếng tăm trong cung")].map(x=>[x[0],say(x[1]),x[2]]))}<p>Chạm vào ô nào cũng có lời giải.</p>`)},
  {id:"khac",title:"Buổi · khắc · quẻ tuần",target:"#k3tt",prep(){goRoom()},
   html:()=>say(`<p>Mỗi buổi có 4 khắc, chấm tròn đầy là khắc còn lại. Việc nào cũng tốn khắc; hết khắc thì qua buổi.</p><p>Đầu mỗi tuần rút một quẻ: quẻ tốt thì loại việc ghi trong ngoặc dễ thành hơn suốt tuần, quẻ xấu thì khó hơn; gặp quẻ Hung thì nên giữ mình. Bên cạnh là thời tiết hôm nay.</p>`)},
- {id:"the",title:"Đọc một thẻ việc",when:()=>shown("act"),target:()=>pickAct(),pad:4,
+ {id:"the",title:"Đọc một thẻ việc",when:()=>!!groupBtn("act"),target:()=>pickAct(),pad:4,
   prep(re){goTab("act");setTimeout(()=>{allCat();const c=pickAct();if(c&&!re)scrollTo(c)},420)},
   html:()=>say(`<p>Mỗi việc là một thẻ. Chữ bên phải là cơ may: Liều, Khó, Năm ăn năm thua, Khá chắc, Chắc, Rất chắc, Nắm chắc; việc chắc thì không ghi.</p>${kitRows([R("Cần","điều kiện: ✓ đã đủ, ✗ còn thiếu"),R("Tốn","khắc và thứ phải bỏ ra"),R("Được","lợi khi thành, chữ xanh","g"),R("Mất","thiệt khi hỏng, chữ đỏ","r"),R("Kèm","hệ lụy có thể đến dù thành","r")])}<p>Dòng Quẻ dưới cơ may cho biết quẻ tuần làm việc ấy dễ hay khó hơn; "có thai: Liều" trong Được là cơ may riêng của điều ấy.</p>`)},
- {id:"thu",title:"Làm thử một việc",when:()=>shown("act"),target:()=>pickAct(),pad:4,interact:true,noNext:true,
+ {id:"thu",title:"Làm thử một việc",when:()=>!!groupBtn("act"),target:()=>pickAct(),pad:4,interact:true,noNext:true,
   prep(re){goTab("act");setTimeout(()=>{allCat();const c=pickAct();if(c&&!re)scrollTo(c)},420)},
   html:()=>say(`<p class="ktut-do">{X} chạm vào thẻ đang sáng để làm thử một việc thật.</p><p>Làm xong sẽ có thẻ kết quả.</p>`)},
  {id:"ketqua",title:"Thẻ kết quả",target:()=>resOn(),pad:4,skipIf:()=>!resOn(),
   prep(){try{clearTimeout(window.__rtT)}catch(e){}},
   html:()=>say(`<p>Sau mỗi việc, thẻ kết quả đóng dấu <b>Thành</b> hay <b>Hỏng</b>, ghi đúng những gì được và mất.</p><p>Thẻ tự lui sau ít lâu; việc đã qua đều chép vào Sổ ghi.</p>`)},
- {id:"dudo",title:"Dư đồ",when:()=>shown("go"),target:()=>mapSpot(),pad:6,prep(){goTab("go")},marks:[()=>tabBtn("go")],
+ {id:"dudo",title:"Dư đồ",when:()=>!!groupBtn("go"),target:()=>mapSpot(),pad:6,prep(){goTab("go")},marks:[()=>groupBtn("go")],
   html:()=>say(`<p>Dư đồ là bản đồ hậu cung. Mỗi nhãn ghi số bóng người ở đó và đường đi tốn mấy khắc; bóng người chưa cho biết là ai, đến nơi mới thấy mặt.</p><p>Chạm nhãn để đi. Nơi có dấu khóa thì phải xin yết kiến, hoặc lẻn vào và chịu hiểm.</p>`)},
- {id:"haucung",title:"Hậu cung",when:()=>shown("rv"),target:()=>$q("#panel .ksub")||panelBox(),pad:4,prep(){goTab("rv")},marks:[()=>tabBtn("rv")],
-  html:()=>say(`<p>Mục Hậu cung có ba phần:</p>${kitRows([R("Phi tần","thẻ từng người: chạm mặt để xem, giao thiệp hay ra tay"),R("Giao tình","ai thương, ai ghen, ai oán {x}"),R("Phe phái","các phe trong cung và chỗ đứng của {x}")].map(x=>[x[0],say(x[1]),x[2]]))}`)},
- {id:"cungnhan",title:"Cung nhân",when:()=>shown("staff"),target:()=>panelBox(),pad:0,prep(){goTab("staff")},marks:[()=>tabBtn("staff")],
-  html:()=>srv()?say(`<p>Đồng liêu là những cung nữ, thái giám làm cùng {x}. Kết thân thì được đỡ đần; gây thù thì bị hãm hại.</p>`)
-   :say(`<p>Cung nhân là kẻ hầu của {x}. Lòng là họ trung với {x} bao nhiêu, Chủ tin là {x} tin họ bao nhiêu.</p><p>Lòng dưới 45 thì dễ bị người khác mua chuộc; thưởng phạt cho phải lẽ.</p>`)},
- {id:"tutrang",title:"Tư trang",when:()=>shown("inv"),target:()=>panelBox(),pad:0,prep(){goTab("inv")},marks:[()=>tabBtn("inv")],
+ /* GROUP STEPS (tab layout may change: review/hau-cung-ui 06:00Z). Read from data attributes only: the tab keys (data-tab) and the
+    group table KG; labels come from the live buttons, words per sub-tab from SUBSAY by key. A group step = the tab group that holds
+    the step's anchor key; a later step whose group is the same as an earlier one is left out; a key that is its own top tab gets the
+    same step without sub-tabs. To change the tour for a new layout: edit GROUP_ANCHORS / SUBSAY only. */
+ ...GROUP_ANCHORS.map((k,i)=>({id:"nhom"+i,anchor:k,title:()=>grpLabel(k),when:()=>grpWhen(k,i),target:()=>$q("#panel .ksub")||panelBox(),pad:4,
+  prep(){goTab(grpFirst(k))},marks:[()=>groupBtn(k)],html:()=>grpHTML(k)})),
+ {id:"tutrang",title:"Tư trang",when:()=>!!groupBtn("inv"),target:()=>panelBox(),pad:0,prep(){goTab("inv")},marks:[()=>groupBtn("inv")],
   html:()=>say(`<p>Tư trang là rương đồ của {x}: trâm cài, y phục, quà được ban.</p><p>Mặc hợp phẩm thì yên; vượt phẩm hay quá giản dị đều có người để ý. Đồ ngự tứ không được bán.</p>`)},
  {id:"soghi",title:"Sổ ghi",when:()=>!!tabBtn("log"),target:()=>panelBox(),pad:0,prep(){goTab("log")},marks:[()=>$q("#panel .ksubb.on"),()=>groupBtn("log")],
   html:()=>say(`<p>Sổ ghi chép mọi việc đã qua: việc {x} làm, việc người khác làm với {x}, tin trong cung.</p><p>${srv()?"Sổ ghi là mục riêng ở hàng dưới.":"Sổ ghi nằm trong mục Mệnh truyện, cạnh truyện riêng của thân phận {x}."}</p>`)},
@@ -208,7 +226,7 @@ const STEPS=[
  {id:"quabuoi",title:"Qua buổi",target:"#next",pad:4,side:"above",prep(){goRoom()},last:true,
   html:()=>say(`<p>Hết khắc hay muốn nghỉ thì chạm <b>Qua buổi</b>. Qua hết buổi tối là sang tuần mới: Hoàng thượng lật thẻ bài, rút quẻ mới.</p><p>{M} xin lui. Gặp việc mới, {m} sẽ dặn thêm đôi lời.</p>`)}];
 window.KTUT_STEPS=STEPS;
-const TOUR_TABS={the:"act",dudo:"go",haucung:"rv",cungnhan:"staff",tutrang:"inv",soghi:"log",khac:"que"};
+const TOUR_TABS={the:"act",dudo:"go",tutrang:"inv",soghi:"log",khac:"que"};
 function steps(){return STEPS.filter(s=>!s.when||s.when())}
 function total(){return steps().filter(s=>s.id!=="ketqua").length}
 function numOf(s){const L=steps().filter(x=>x.id!=="ketqua");const i=L.indexOf(s);return i<0?L.indexOf(STEPS[STEPS.indexOf(s)-1])+1:i+1}
@@ -220,11 +238,11 @@ function next(){const was=STEPS[T.step];if(was&&was.id==="ketqua"){const t=resOn
  if(i>=STEPS.length){tourEnd("done");return}T.step=i;show(true)}
 function show(prep){const s=STEPS[T.step];if(!s)return;if(busy()){T.paused=true;coachOff();return}T.paused=false;
  if(prep&&s.prep)try{s.prep(false)}catch(e){}
- const k=TOUR_TABS[s.id];if(k){REC.seen["tab-"+k]=1;saveRec()}
+ const k=TOUR_TABS[s.id];if(k){REC.seen["tab-"+k]=1;saveRec()}if(s.anchor){grpKeys(s.anchor).forEach(x=>REC.seen["tab-"+x]=1);saveRec()}
  const n=numOf(s),tot=total();
  const btns=[{k:"skip",t:"Bỏ qua lời dặn",alt:true}];if(!s.noNext)btns.push({k:"next",t:s.last?"Đã hiểu":"Tiếp"});
  setTimeout(()=>{if(!T.on||STEPS[T.step]!==s)return;if(busy()){T.paused=true;coachOff();return}
-  kitCoach({title:s.title,sub:`${MM_NAME} · lời dặn ${n}/${tot}`,html:typeof s.html==="function"?s.html():s.html,target:s.target,pad:s.pad,interact:s.interact,marks:s.marks,side:s.side,big:s.big,btns,
+  kitCoach({title:typeof s.title==="function"?s.title():s.title,sub:`${MM_NAME} · lời dặn ${n}/${tot}`,html:typeof s.html==="function"?s.html():s.html,target:s.target,pad:s.pad,interact:s.interact,marks:s.marks,side:s.side,big:s.big,btns,
    on(k){if(k==="skip")return tourEnd("skip");if(k==="next")next()}})},prep&&s.prep?560:0)}
 /* the trial act: the step ends when the act's result arrives (result card, or the act opened a dialog of its own) */
 function watchTry(){const s=STEPS[T.step];if(!T.on||!s||s.id!=="thu")return;
