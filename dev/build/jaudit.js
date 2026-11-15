@@ -200,7 +200,7 @@ function aaThieuLeApply(host,f0){if(!f0&&!aaThieuLe(S))return;const f=f0||aaThie
 (function(){try{if(typeof SOC==="object"&&SOC.serveTH){const r0=SOC.serveTH.run;SOC.serveTH.run=function(v){const r=r0.apply(this,arguments);try{if(aaThieuLe(v)){const f=aaThieuLeFx("th");ap(v,{danh:f.danh});v.th=cl((v.th||0)+f.aff,-100,100)}}catch(e){}return r}}}catch(e){}})();
 
 /* 17. leAttire(p, occasion, host) — ONE judgement of how someone is dressed for a formal moment (owner 11/15), used by Thiếu lễ and
-   by review/toilette (the morning dress-up + makeup game writes p.toilette = {day: S.turn*10+S.buoi day key, score 0–100, makeup: bool}).
+   by review/toilette (the morning dress-up + makeup game writes p.toilette = {wk: wk() day key, score 0–100, makeup: bool}).
    Returns {state:"ok"|"plain"|"showy"|"overRank", delta:{danh,duc,aff}, why:[…]}. Host reaction by nết:
    etiquette-minded hosts (Thái hậu Đa nghi/Kiêu ngạo, Hoàng hậu Kiêu ngạo/Ghen tuông) punish "plain" ×BAL.thieuLe.strict;
    a frugal host (Thái hậu Hiền lành, Hoàng hậu Hiền lành/Nhu mì) approves plain dress (small +). Showy/overRank stay the
@@ -208,7 +208,7 @@ function aaThieuLeApply(host,f0){if(!f0&&!aaThieuLe(S))return;const f=f0||aaThie
 function leHostKind(host){try{const T=host==="th"?traitsOf({kind:"th"}):host&&host!=="emp"?traitsOf(host):[];
  if(T.some(t=>t==="Hiền lành"||t==="Nhu mì"))return"frugal";if(host==="th"?T.some(t=>t==="Đa nghi"||t==="Kiêu ngạo"):T.some(t=>t==="Kiêu ngạo"||t==="Ghen tuông"))return"strict";}catch(e){}return"normal"}
 function leAttire(p,occasion,host){p=p||S;const why=[];let state="ok";try{
- const x=typeof luxOf==="function"?luxOf(p):{lv:1,sc:1,bud:1};const tl=p.toilette&&p.toilette.day===(S.turn*10+(S.buoi||0))?p.toilette:null;
+ const x=typeof luxOf==="function"?luxOf(p):{lv:1,sc:1,bud:1};const tl=p.toilette&&p.toilette.wk!=null&&p.toilette.wk===(typeof wk==="function"?wk():-1)?p.toilette:null;/* one look per DAY (wk(): S.turn is the month, so turn*10+buoi never matched) */
  if(x.lv>=3){state="overRank";why.push("y phục vượt phẩm")}else if(x.lv===2){state="showy";why.push("y phục quá xa hoa")}
  else if(aaThieuLe0(p)){state="plain";why.push("y phục dưới phẩm")}
  else if(tl&&(tl.makeup===false||(tl.score|0)<40)){state="plain";why.push(tl.makeup===false?"không điểm trang":"điểm trang qua loa")}}catch(e){}
