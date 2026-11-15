@@ -51,7 +51,7 @@ function kitBook(spec){spec=spec||{};const rm=()=>{try{return reducedMotion()}ca
  /* KIT §27 person pages (owner 11/15 04:30Z + 04:35Z): EVERY page about a person — continuation pages too — is the same page: the full-body
     figure fills the page body on the left (same scale on every page), the text column on the right; "(tiếp theo)" on the title, no small portrait */
  const personTop=(p,cont)=>cont?`<div class="kbk-pname">${kitName(p.who,{cap:true,named:p.who===S})} <small class="kbk-cont">(tiếp theo)</small></div>`
-   :`<div class="kbk-pname">${kitName(p.who,{cap:true,named:p.who===S})}${p.sub?`<small class="kbk-ts">${p.sub}</small>`:""}</div>${p.chips&&p.chips.length?`<div class="kbk-pchips">${kitChips(p.chips)}</div>`:""}${p.rows&&p.rows.length&&PW>=440?kitRows(p.rows):""}`;
+   :`<div class="kbk-pname">${kitName(p.who,{cap:true,named:p.who===S})}${p.sub?`<small class="kbk-ts">${p.sub}</small>`:""}</div>${(p.chips&&p.chips.length)||(p.rel&&p.rel.length)?`<div class="kbk-pchips">${p.chips&&p.chips.length?kitChips(p.chips):""}${p.rel&&p.rel.length?`<span class="kchips kbk-relchips">${p.rel.join("")}</span>`:""}</div>`:""}${p.rows&&p.rows.length&&PW>=440?kitRows(p.rows):""}`;
  const personBody=(p,cont)=>{const fig=typeof kitStageFig==="function"&&kitStageFig(p.who,{cap:false})||"";const kfr=(/--kfr:([\d.]+)/.exec(fig)||[])[1]||"1";
   return `<div class="kbk-person${fig?" kbk-full":""}" style="--kfr:${kfr}"><div class="kbk-por">${fig||pframe(kitFace(p.who))}</div><div class="kbk-phead">${personTop(p,!!cont)}</div><div class="kbk-flow"></div></div>`};
 
@@ -196,14 +196,15 @@ function wkBookData(){const s=S.wkSnap||wkSnap();const n=Math.max(0,Math.min(S.l
  const D=[["Sủng",S.sung-s.sung],["Danh",S.danh-s.danh],["Sức",S.suc-s.suc],["Bạc",S.bac-s.bac]];
  if(s.duc!=null)D.push(["Đức",S.duc-s.duc]);if(s.mat!=null)D.push(["Tai mắt",S.mat-s.mat]);if(s.an!=null)D.push(["Ân tình",(S.an||0)-s.an]);
  const rank=S.rank!==s.rank?(S.rank>s.rank?"Được thăng ":"Bị giáng xuống ")+(S.rank>=7?"Hoàng hậu":RANKS[S.rank].n):"",kids=S.kids.length-(s.kids||0);
- const persons=[...by.values()].map(x=>{const p=x.who;const chips=[],rows=[];
+ const persons=[...by.values()].map(x=>{const p=x.who;const chips=[],rows=[],rel=[];
   if(typeof rivals!=="undefined"&&rivals.includes(p)){const o=s.pp&&s.pp[p.id];
-   const sj=p.queen?"Hoàng hậu":"Nàng";/* owner 11/15 05:25Z: "Nàng quý ngươi", never the bare "Thiện cảm" */
-   if(o){[[sj+" quý ngươi",(p.rel||0)-o[0]],["Ghen",(p.ghen||0)-o[1]],[sj+" oán ngươi",(p.oan||0)-o[2]]].forEach(([l,v])=>{if(v)chips.push([l,v])})}
-   rows.push(["Hiện nay",[`<span class="ef n kbk-pair">${kitGloss("Quý",sj+" quý ngươi")} ${p.rel||0}</span>`,`<span class="ef n kbk-pair">${kitGloss("Oán",sj+" oán ngươi")} ${p.oan||0}</span>`,`<span class="ef n kbk-pair">${kitGloss("Ghen")} ${p.ghen||0}</span>`]])}
+   const sj=p.queen?"Hoàng hậu":"Nàng";/* owner 11/15: one relation renderer (kbkRel, KIT §11.2 words: "<ai> → ta: thiện cảm", "<ai> oán ta", "ghen"), whole numbers */
+   const L=kbkRelLabels(sj);const rd=x=>Math.round(+x||0);
+   if(o){[[L.aff,rd(p.rel)-rd(o[0]),"aff"],[L.ghen,rd(p.ghen)-rd(o[1]),"bad"],[L.oan,rd(p.oan)-rd(o[2]),"bad"]].forEach(([l,v,k])=>{if(v)rel.push(kbkRel(l,v,k,true))})}
+   const KR=x=>typeof kitRel==="function"?kitRel("them",x):x;rows.push([KR(L.aff),kbkRel("",rd(p.rel),"aff",false)],[KR(L.oan),kbkRel("",rd(p.oan),"bad",false)],[KR(L.ghen),kbkRel("",rd(p.ghen),"bad",false)])}
   else if(S.emp&&p===S.emp){if(S.sung-s.sung)chips.push(["Sủng",S.sung-s.sung])}
   else if(S.thO&&p===S.thO&&s.th!=null&&S.th-s.th)chips.push(["Thái hậu",S.th-s.th]);
-  return {kind:"person",who:p,chips,rows,blocks:[{facts:dedup(x.F)}],n:x.F.length}});
+  return {kind:"person",who:p,chips,rows,rel,blocks:[{facts:dedup(x.F)}],n:x.F.length}}).filter(x=>x.n>0||x.rel.length||x.chips.length);
  const rk=p=>S.emp&&p.who===S.emp?0:(S.thO&&p.who===S.thO)||p.who.kind==="th"?1:2;
  persons.sort((a,b)=>rk(a)-rk(b)||b.n-a.n);
  return {D,rank,kids,pay,me:dedup(me),world:dedup(world),persons}}
@@ -429,3 +430,25 @@ body.kbk-open #rtoast,body:has(#dawn.kbkdawn:not([hidden])) #rtoast{opacity:0!im
 `;document.head.appendChild(st)})();
 function kbkLongChips(root){try{(root||document).querySelectorAll(".kbk .kbk-flow .ef:not(.kbk-long),.kbk .kbk-flow .kchip:not(.kbk-long)").forEach(c=>{if((c.textContent||"").trim().length>16)c.classList.add("kbk-long")})}catch(e){}}
 (function(){const k0=kbkExpand;kbkExpand=function(){const out=k0.apply(this,arguments);try{const t=document.createElement("template");for(const b of out){if(!b||!b.html||!/class="(ef|kchip)/.test(b.html))continue;t.innerHTML=b.html;t.content.querySelectorAll(".ef,.kchip").forEach(c=>{if((c.textContent||"").trim().length>16)c.classList.add("kbk-long")});b.html=t.innerHTML}}catch(e){}return out}})();
+
+/* ---- relations in the week book: ONE renderer (owner 11/15, Hoàng hậu Chu Thục Nghi page: "oán ta −1.8", three colours in one chip,
+   "Hiện nay" cut off). Label = who → ta, in the direction colour (kitRel "them", KIT §11.2); the number is a whole number, green when
+   it is good for her (more thiện cảm, less oán / ghen), red when bad, neutral for a standing value. Names never get a colour of their own. */
+function kbkRelLabels(sj){const R=typeof KIT_REL==="object"?KIT_REL:{aff:"thiện cảm",oan:"oán ta"};return{aff:`${sj} → ta: ${R.aff||"thiện cảm"}`,oan:`${sj} ${R.oan||"oán ta"}`,ghen:`${sj} ghen`}}
+function kbkRel(label,v,kind,delta){v=Math.round(+v||0);const good=kind==="aff"?v>0:v<0;const c=delta?(good?"g":"r"):"n";const lab=label?(typeof kitRel==="function"?kitRel("them",label):label)+" ":"";
+ return `<span class="kchip kbk-rel ${c}">${lab}<b>${delta&&v>0?"+":""}${v}</b></span>`}
+/* inline chips inside entries: a relation change written by the log ("Hoàng hậu quý ngươi -3", "nàng oán ngươi +9", "ghen +25") is
+   redrawn with the same renderer and words */
+const KBK_RELRE=/^(.*?)\b(quý ngươi|quý ta|thân|thiện cảm|oán ngươi|oán ta|ghen)\s*([+\-−]\s?\d+(?:[.,]\d+)?)$/i;
+function kbkRelInline(root){root.querySelectorAll(".ef").forEach(c=>{const t=(c.textContent||"").replace(/\s+/g," ").trim();const m=KBK_RELRE.exec(t);if(!m)return;
+ const who=m[1].replace(/[\s:,→]+$/,"").trim()||"Nàng";const w=m[2].toLowerCase();const v=+m[3].replace("−","-").replace(/\s/g,"").replace(",",".");
+ const L=kbkRelLabels(who);const k=/oán/.test(w)?"oan":w==="ghen"?"ghen":"aff";const tmp=document.createElement("template");tmp.innerHTML=kbkRel(L[k],v,k==="aff"?"aff":"bad",true);c.replaceWith(tmp.content.firstChild)})}
+(function(){const k0=kbkExpand;kbkExpand=function(){const out=k0.apply(this,arguments);try{const t=document.createElement("template");for(const b of out){if(!b||!b.html||!/class="ef/.test(b.html))continue;t.innerHTML=b.html;kbkRelInline(t.content);b.html=t.innerHTML}}catch(e){}return out}})();
+/* an entry that is only a name ("Hoàng hậu Chu Thục Nghi.") says nothing: dropped */
+(function(){const k0=kbkExpand;kbkExpand=function(){return k0.apply(this,arguments).filter(b=>{if(!b||!b.html)return !!b;const t=String(b.html).replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim().replace(/[.·:]+$/,"");
+  if(!t)return false;try{const P=[S].concat(typeof rivals!=="undefined"?rivals:[]).filter(Boolean);for(const p of P){const nm=p.name||"";if(nm&&(t===nm||t.endsWith(" "+nm))&&t.split(" ").length<=nm.split(" ").length+2)return false}}catch(e){}return true})}})();
+(function(){const st=document.createElement("style");st.id="kbk-rel";st.textContent=`
+.kbk .kbk-rel{white-space:nowrap;font-weight:600}.kbk .kbk-rel .krel{font-weight:600}.kbk .kbk-rel.n b{color:var(--ink,#3a2a1a)}
+.kbk .kbk-rel.g b{color:var(--good,#2f7a46)}.kbk .kbk-rel.r b{color:var(--bad,#b0332a)}
+.kbk .kbk-relchips{display:inline-flex;flex-wrap:wrap;gap:4px}
+`;document.head.appendChild(st)})();
