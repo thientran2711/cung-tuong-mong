@@ -890,3 +890,8 @@ All must work in co-op.
   → RULE (overrides the earlier "rank halo for everyone" entry): on the stage, ONLY HER tag (rank line + name line) has the light glow/halo — that is how the player tells herself apart. Every other person's stage tag has NO glow (plain rank colour + name, still readable). Applies to co-op: each player sees only her own tag glowing (the friend's tag plain).
 - Owner (verbatim): "Tới ô Danh thì ô đó phát sáng: vàng nếu cộng, không phải, xanh lá chứ." → stat-fx: + glows GREEN (− glows dim red), not gold.
 - Owner approved the buổi transition design as written (ink-wash dissolve to the new buổi light, painted sky band with sun/moon arc, calligraphy buổi title + seal, dawn mist + first light, tap to skip, Gọn = quick fade) and added: "Vẽ bằng magnific cho giống các hiệu ứng và chuyển màn khác" → all its pieces painted with Magnific (gpt-2-6), same method as the other painted effects/transitions (§68).
+
+## 15/11 (session 8) — Header "‹ Phòng" bar → a room icon button (owner screenshot)
+- Owner (verbatim): "Làm thành biểu tượng phòng hay sao để bấm đi."
+- Screenshot dev/handover/refs/owner-room-button.jpg (header right column: a wide empty bar with "‹ Phòng" that reads like an empty field).
+- Decision: replace it with a compact painted ROOM ICON button (kit button, Magnific-painted icon of her residence/door; small label under/beside it, e.g. "Về phòng"; when she is elsewhere the label names where it goes back to). Same icon style as the other HUD icons; tooltip; works on all viewports; co-op same. The freed header space stays clean (no empty bar). Whole family: any other "‹ Nơi" back bars use the same kit icon button. → worker review/room-btn (QUEUED: subagent cap).
