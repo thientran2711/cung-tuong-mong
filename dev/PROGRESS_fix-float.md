@@ -86,3 +86,10 @@ Base: origin/main (merged; see git log). In the assemble.py module list keep mai
 3. Wording: kitDeltaAuto names the actor of a bare "thân / thiện cảm ±N" right after a change of the same person toward me in the same
    sentence: "Nàng oán ta +2, thân −2" → "Nàng → ta: thiện cảm −2"; "Lâm Phi oán ta +3, thân −4" → "Lâm Phi → ta: …"; "các phi tần ghen +10,
    thân −5" → "Các phi tần → ta: …"; "hai người khác: thiện cảm +7" unchanged. KIT §57 note + kit page §57 sample.
+4. Merges: origin/main b8a58e87 (kit-fig2 r8) and 80be56be0 (game-feel r7, poison-gift, trung-y, stipend). assemble = main list + jkrel after
+   jaudit, jint + jnight before j84. KIT.md keeps main §51 (kit table) + this branch §52 / §52.1 / §57.
+5. Test harness: coop-e2e loads pages to DOMContentLoaded (a hanging CDN request held the guest's `load` past 120 s in 3 of ~17 runs:
+   aborted runs, not game faults); night-day stops at the new morning (a summons of the next day is not this night) and waits longer.
+Tests on 505dbad17 (load avg 40–66): coop-e2e 4/4 complete runs 59/59 (5th aborted by the page-load hang above); after the DCL fix 5/5 59/59; COOP_NIGHTS stress 59/59
+(6 forced nights); book-person 5× at 1366x1024 + 1180x820: 0 bad, 0 undecoded (+ 755x1000 ok); kit-page 755x1000 + 1180x820 ok (22 samples);
+rel-words-scan 755/1180: all counts 0; night-day 2× ok (incl. the new buổi-sáng case); sheet-turn 755x1000 + 1180x820: no overflow, no ids, errs 0.
