@@ -141,9 +141,13 @@ function j59lay(){const st=document.getElementById("stage");if(!st||!S)return;co
  const widthFor=(z)=>{let rr=rightR;try{const kR=document.getElementById("kshR");const head=sH-z.fo-Math.min(z.H*maxF,sH-z.fo-topR);/* the right plaque column (court chips, maid, Ân sủng) is reserved when it reaches down to the heads: no face or name is ever under it
     (coordinator 11/15, supersedes "may stand under it"); a column that ends above the heads leaves the full width. Compact stages
     (phone landscape, scaled iPad layout later) keep the old rule. */
-   if(!cmp&&kR&&!kR.hidden&&kR.offsetHeight){const q=kR.getBoundingClientRect();if(q.bottom-R.top+4>=head&&q.left>R.left+sW*.5){rr=Math.max(rr,R.right-q.left+6);z.rsv=q.bottom-R.top+4<sH-z.fo}}}catch(e){}return rr};
+   /* review/small-bugs-2 (owner: a second person in lãnh cung hid behind the people panel at 844x390): compact stages reserve it too —
+      no figure is ever placed under a stage panel, at any size, in any place */
+   if(kR&&!kR.hidden&&kR.offsetHeight){const q=kR.getBoundingClientRect();/* the panel is on the right when its centre is (tassel-fix's 2-column plaques start left of mid-stage at 844x390) */if(q.bottom-R.top+4>=head&&(q.left+q.right)/2>R.left+sW*.5){rr=Math.max(rr,R.right-q.left+6);z.rsv=q.bottom-R.top+4<sH-z.fo}}}catch(e){}return rr};
  const MAXN=innerWidth>=1000?3:2,M=E.length,nAll=M+(me?1:0);
- const geo=(N,z)=>{const paged=nAll>N;const CW=paged?(innerWidth<600?34:46):0;/* page-chip gutters: 46 px, 34 on phones so two slots still hold a man (KIT 33.7) */const rr=widthFor(z);const x0=8+gL+CW;/* a reserved right column that ends above the name row holds the "+N" chip under it: no second gutter */const CWR=paged&&z.rsv&&rr>=CW+8?0:CW;const avail=Math.max(40,sW-x0-rr-CWR);return{N,paged,CW,rr,x0R:CWR?rr:rr-CW,x0,avail,sw:avail/N}};
+ const leftFor=(z)=>{let ll=8+gL;try{const kL=document.getElementById("kshL");const head=sH-z.fo-Math.min(z.H*maxF,sH-z.fo-topR);
+   if(kL&&!kL.hidden&&kL.offsetHeight>4){const q=kL.getBoundingClientRect();if(q.bottom-R.top+4>=head&&(q.left+q.right)/2<R.left+sW*.5)ll=Math.max(ll,q.right-R.left+6)}}catch(e){}return ll};
+ const geo=(N,z)=>{const paged=nAll>N;const CW=paged?(innerWidth<600?34:46):0;/* page-chip gutters: 46 px, 34 on phones so two slots still hold a man (KIT 33.7) */const rr=widthFor(z);const lf=leftFor(z);/* a figure core may be up to 1/(1−OVX) of its slot (rule 4): next to a reserved panel the slots keep that spill off the panel too */const pL=lf>8+gL,pR=rr>rightR;const x0=lf+CW;/* a reserved right column that ends above the name row holds the "+N" chip under it: no second gutter */const CWR=paged&&z.rsv&&rr>=CW+8?0:CW;const avail=Math.max(40,sW-x0-rr-CWR);const sw=avail/N;return{N,paged,CW,rr,xl:lf,pL,pR,limL:x0,limR:x0+avail,x0R:CWR?rr:rr-CW,x0,avail,sw}};
  /* a figure fits its slot when its core, less the 20 % a neighbour may step over (KIT 33 rule 4), is within the slot width */
  const fits=(g,h)=>(!me||coreW(meX,h)*(1-OVX)<=g.sw)&&F.every(x=>coreW(x,h)*(1-OVX)<=g.sw)&&nfW<=g.sw;
  /* measure EVERY name chip (all pages), not only the page on screen: a hidden chip reads 0 px and the floor band (fo) would shift between pages (reviewer, 844x390 page 3) */
@@ -173,13 +177,16 @@ function j59lay(){const st=document.getElementById("stage");if(!st||!S)return;co
  if(tk){tk.style.setProperty("left","0px","important");tk.style.setProperty("right","0px","important");tk.style.setProperty("top","0px","important");tk.style.setProperty("bottom","0px","important");
   ["paddingLeft","paddingRight","paddingBottom","columnGap","justifyContent"].forEach(k=>tk.style[k]="")}
  const centres=[];let slot=0;
- if(showMe){const meH=H/(mb.b-j59bt(mb)),meW=meH*mar,meC=((kCL(mb)+kCR(mb))/2-.5)*meW;const cx=cxOf(slot++);centres.push(cx);
+/* next to a reserved panel the edge figure's core is pulled in so it ends at the panel edge (a wide robe may step over its slot by the
+    neighbour allowance, never under a panel — review/small-bugs-2) */
+ const inLim=(cx,cw)=>{if(G.pR&&cx+cw/2>G.limR)cx=G.limR-cw/2;if(G.pL&&cx-cw/2<G.limL)cx=G.limL+cw/2;return cx};
+ if(showMe){const meH=H/(mb.b-j59bt(mb)),meW=meH*mar,meC=((kCL(mb)+kCR(mb))/2-.5)*meW;const cx=inLim(cxOf(slot++),coreW(meX,H));centres.push(cx);
   me.style.setProperty("height",meH.toFixed(1)+"px","important");me.classList.add("j59sz");
   me.style.left=(cx-meC).toFixed(1)+"px";me.style.bottom=(fo-(1-mb.b)*meH).toFixed(1)+"px";
   if(mt){const g=mt.firstChild;mt.style.left=cx.toFixed(1)+"px";mt.style.top=(floorY+3).toFixed(1)+"px";g.style.translate="";mt.style.visibility="";
    /* her chip on the same top line as every other chip (the holder box may add its own offset) */
    const d=R.top+st.clientTop+floorY+3-g.getBoundingClientRect().top;if(Math.abs(d)>.3)mt.style.top=(floorY+3+d).toFixed(1)+"px"}}
- for(const x of vis){const cx=cxOf(slot++);centres.push(cx);const t=x.tok;
+  for(const x of vis){let cx=cxOf(slot++);if(!x.nf)cx=inLim(cx,coreW(x,H));centres.push(cx);const t=x.tok;
   if(x.nf){t.style.left=(cx-t.offsetWidth/2).toFixed(1)+"px";t.style.bottom=fo.toFixed(1)+"px";continue}
   const ih=imgH(x,H),w=boxW(x,H),cw=coreW(x,H);
   x.im.style.setProperty("height",ih.toFixed(1)+"px","important");x.im.style.setProperty("width","auto","important");
@@ -187,7 +194,7 @@ function j59lay(){const st=document.getElementById("stage");if(!st||!S)return;co
   x.im.style.setProperty("margin-bottom",(-(1-x.b.b)*ih).toFixed(1)+"px","important");x.im.classList.add("j59sz");x.im.style.translate="";
   t.style.left=(cx-cw/2).toFixed(1)+"px";t.style.bottom=fo.toFixed(1)+"px";t.style.zIndex="";if(x.tag)x.tag.style.translate=""}
  st.dataset.j59slots=centres.map(c=>(c+st.clientLeft).toFixed(1)).join(",");st.dataset.j59n=String(N);
- j59chips(st,R,pages>1?{pg,pages,before,after,fo,CW:G.CW,x0L:8+gL,x0R:G.x0R}:null);
+ j59chips(st,R,pages>1?{pg,pages,before,after,fo,CW:G.CW,x0L:G.xl,x0R:G.x0R}:null);
  st.__j59here=persons}
 /* KIT element "rank outline": thin edge glow in --halo (her rank colour) along her own figure only; never an aura; pulse only with Hiệu ứng hình and no reduced motion.
    KIT element "selection outline" (.j59sel): brighter warm-white edge glow #fff3c4 on the one person she has selected (popIdx) or on herself (tap her figure); replaces her rank outline while she is selected */

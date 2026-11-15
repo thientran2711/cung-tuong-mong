@@ -47,7 +47,7 @@ function petcGrow(p,P,quiet){const n=petcNext(P);if(!n||n.ageNow<n.age||(P.aff||
    itemPic:petcPic(P,true),facts:[`Công dụng bây giờ: ${E.join(", ")||"làm cung thêm vui"}.`,P.stg<3?`Lớn tiếp: ${petcNextTxt(P)}.`:"Đã là Linh thú: công dụng mạnh nhất."]})}catch(e){}},60)}
  try{log(`${p===S?"":NM(p)+": "}${petT(P).n} lớn lên thành ${BAL.pet.stages[P.stg]}.`)}catch(e){}return true}
 function petcPic(P,big){const a=petcStageSrc(P,1);const T=petT(P);return kitItem({src:a.src,name:"",grade:T.tr,size:"lg"}).replace('<span class="kitn"></span>','')}
-function petcFx(){try{if(typeof sfx==="function")sfx("chime")}catch(e){}}
+function petcFx(){try{if(typeof kitSfx==="function")kitSfx("notice");else if(typeof sfx==="function")sfx("sfx-notice")}catch(e){}} /* the old "chime" name had no file (404) */
 /* ---------- the week: decay, servant care, NPC care, omen → sick → gone; growth ---------- */
 petWeek=function(){for(const p of [S].concat(liveRivals(true))){const L=tsbPets(p);if(!L.length)continue;const me=p===S;
   if(p.out){for(let i=L.length-1;i>=0;i--)petLose(p,i,"Nội vụ phủ thu lại khi vào lãnh cung");if(me)log(`<span class="r">Vào lãnh cung, thú nuôi của ngươi bị Nội vụ phủ thu lại hết.</span>`);continue}
