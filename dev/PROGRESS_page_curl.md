@@ -42,6 +42,35 @@ Nhánh `review/page-curl` từ origin/review/fold-layout (đã gộp tới e7deb
 - 15/11 (chủ: "chỗ lật trang, ảnh trang sau không hiện lên"): trang mới vẽ sẵn bên dưới, bản chụp trang cũ cong đi ở trên;
   góc nhấc cao hơn (lift .42h, lật tab .5h) và nhịp "búng" kitCurlLift (1−(1−t)^1.6) nên trang sau lộ ngay từ những khung đầu;
   mặt sau tờ giấy trơn có bóng chữ ngược mờ (ghost .075) khi lật tab. Sổ tuần và lật lùi dùng cùng nhịp.
+- 15/11 muộn (chủ chê lật góc, mẫu app binder 1115-turn-ref-*): đổi tab = CẢ TỜ quay quanh gáy (kitSheetTurn: một tờ hai mặt
+  preserve-3d, mặt trước = trang cũ, mặt sau = trang mới, chữ in trên tờ nên quay/nghiêng theo tờ; nghiêng nhẹ + skew giữa lượt,
+  bóng trên trang dưới; 760 ms; cắt trên/dưới khung trang). Bản sao (kclPrep) bỏ mọi id (gộp book-release) và tự mang bố cục tính sẵn.
+  Sổ tuần vẫn dùng kitCurl (góc gấp, mặt sau = trang kế).
+- DỪNG Ở ĐÂY (1fdc37c2, đã đẩy): kitSheetTurn chạy, Fold 686 + iPad 1180 không lỗi. Còn lại: (1) gửi ảnh 25/45/65 % cho chủ
+  (dev/shots/curl2/{fold686,ipad1180}-tab-*.jpg) chờ duyệt; (2) KIT.md §32/34 chưa ghi kitSheetTurn; (3) ở 65 % iPad trang thật bên dưới
+  thoáng lệch chữ (thẻ người đang đo lại) — kiểm lại trên máy thật; (4) lật lùi (dir −1) quay quanh mép phải, chưa soi kỹ ảnh back-45;
+  (5) sổ tuần chưa chuyển sang cả tờ (vẫn kitCurl) — hỏi chủ có muốn giống không.
+
+## v3 NGUYÊN TỜ (15/11, thợ mới, nối từ 0e8cb4ef; luật sếp 06:25Z + 07:50Z + 10:00Z, ảnh mẫu dev/owner-shots/1115-turn-ref-1/2.jpg)
+- `kitSheetTurn` viết lại (jbook): trục gáy = mép TRÁI tờ (luôn), p 0→1 = lật tới; lật lùi = cùng chuyển động chạy 1→0 (tờ mang trang mới
+  quay ngược qua gáy, đáp đúng lên trang mới; bản chụp trang cũ nằm dưới `under` tới khi bị phủ). Bỏ kiểu cũ "lật lùi quay quanh mép phải".
+  Tùy chọn x/y (gáy trong host), p đầu, shadeL/shadeR (bóng hai bên đất), vanish (mờ 18 % cuối), setFront/setBack.
+- `kitCurl` = `kitSheetTurn` (sổ tuần j87 + kitBookSpread tự đổi sang nguyên tờ); bộ gấp góc cũ giữ tên `kitCurlFold` (không dùng).
+- SỬA LỖI: lớp `.kst` của tờ lật TRÙNG lớp ô chỉ số `.kst` (jk4/j79) → ô chỉ số thanh trên bị `pointer-events:none` + absolute.
+  Đổi họ lớp tờ lật thành `.ksht*`.
+- Vuốt ngang trên trang (#panel) = sang tab kế / tab trước (trái = tới); bỏ qua bản đồ, hộp thoại, ô nhập, thứ cuộn ngang.
+- `kitCurlSwap.hold(p)` / `.end()` = móc thử (không còn đóng băng rAF toàn trang → trang dưới đo bố cục bình thường).
+- KIT.md §34.0 LUẬT LẬT TRANG (7 điểm) + §27 dòng lật sổ tuần; §34.1 cũ ghi là lịch sử.
+- Thử: `dev/test/sheet-turn.js` → ảnh `dev/shots/page-curl2/<tag>-fwd-{20,45,70}.jpg`, `-back-{60,30}.jpg`.
+- Sếp 01:50Z "cho animation lật trang chậm lại": MỘT hằng số `KIT_TURN_MS` = 1300 ms (cũ: lật tab 760, sổ tuần 680, sách 700),
+  nhịp `kitTurnEase` (nhấc chậm, quay đều, đáp êm dài). Bấm khi đang lật: lượt đang chạy nhảy tới cuối rồi lượt mới chạy (sổ tuần: flush()).
+- Lật tab vẫn chạy khi khung #panel xê dịch vài px giữa hai tab (iPad 1366 lần đầu); chỉ bỏ lật khi đổi bố cục lớn (>40 px / >12 %).
+- KẾT QUẢ THỬ (máy thử load ~20): sheet-turn.js Fold 755x1000@2, iPad 1180x820@2, 1366x1024@2: lật tới/lùi có tờ, 1 #panel, 0 id trùng,
+  không tràn ngang, 0 lỗi trang, bấm nhanh 12 lần không kẹt (0 tờ sót), vuốt trái → Cung nhân / vuốt phải → Hậu cung, nút tab lật được,
+  Cảnh động tắt = 0 tờ. page-curl.js (sổ tuần) Fold 755: nguyên tờ, lật lùi, kéo tay, giảm chuyển động = không tờ, 0 lỗi.
+- Không sửa mã lưu/nạp (sổ cũ không bị đụng).
+- DỪNG (SẴN SÀNG KIỂM). Còn lại nếu sếp muốn: trên Fold (một trang) mặt sau tờ chỉ thấy thoáng qua vì nửa sau đi ra ngoài mép trái màn hình
+  (trục gáy = mép trái trang); iPad thấy rõ mặt sau đáp lên trang tranh.
 
 ## Kiểm thử (Playwright)
 - page-curl: 1180x820@2, 1366x1024@2, 686x880@2.2, 755x1000@2 — không lỗi trang, không tràn ngang, giảm chuyển động = không cong (mờ chéo).

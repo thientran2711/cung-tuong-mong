@@ -14,8 +14,8 @@ L=ast.literal_eval(re.search(r"for f in (\[[^\]]*\])",src).group(1));old=ast.lit
 L=L+[x for x in old if x not in L]  # keep modules that live only in dev/ (j50+), in their order, at the end
 dst=re.sub(r"for f in \[[^\]]*\]","for f in "+repr(L),dst,count=1);open(sys.argv[2],'w').write(dst)
 P
-mkdir -p $R/img $R/audio $R/icons
-find $S/cung-dau/img -maxdepth 1 -type f \( -name '*.webp' -o -name '*.json' \) ! -name '_*' -exec cp {} $R/img/ \;
+mkdir -p $R/audio $R/icons
+# pictures are NOT copied into the repo any more (dev/art/CDN.md): push them with python3 dev/site/cdn_sync.py
 cp $S/cung-dau/audio/*.mp3 $S/cung-dau/audio/*.json $R/audio/ 2>/dev/null || true
 # index.html + sw.js (content hash, swreg.js) + assets.json: the one build script
 bash $D/site/build_site.sh
