@@ -2,8 +2,10 @@
 const BL=[30,45,60,90,130,180,240,320];
 const BLG=["1 súc vải · 1 gói trà","1 súc vải · 1 gói trà · than","1 súc lụa · 1 hộp trà · than","1 súc lụa · 1 hộp trà · than · son phấn","2 súc lụa · 2 hộp trà · than · son phấn","2 súc gấm · 2 hộp trà · than · son phấn","3 súc gấm · trà · than · son phấn · yến sào","4 súc gấm · trà · than · son phấn · yến sào · sâm"];
 const WAGE=3;
-/* pays one consort her month; returns the plain line */
-function stipend(p){const r=rkOf(p),me=p===S,staff=(p.staff||[]).length;let base=BL[Math.min(7,r)],why=[];
+/* pays one consort her month; returns the plain line. jecon (econStipend) is THE stipend; j53/j54 wrap this name for the children's fees, so jecon
+   must not reassign it (it did: the fee wrappers were lost) */
+function stipend(p){return typeof econStipend==="function"?econStipend(p):stipend0(p)}
+function stipend0(p){const r=rkOf(p),me=p===S,staff=(p.staff||[]).length;let base=BL[Math.min(7,r)],why=[];
  if(p.out){base=5;why.push("lãnh cung: chỉ 5 bạc")}else{if(p.confined){base=Math.round(base/2);why.push("cấm túc: nửa bổng")}if(p.cutPay>0){base=Math.round(base*.7);why.push(`Nội vụ phủ khất bổng${p.cutBy?" theo ý "+p.cutBy:""}; bớt 3 phần 10`);p.cutPay--;if(!p.cutPay)p.cutBy=""}}
  const wage=p.out?0:staff*WAGE,bonus=p.bonusPay||0;p.bonusPay=0;const net=base-wage+bonus;ap(p,{bac:net});
  const line=`Bổng lộc tháng ${S.month} (${rkName(p)}): +${base} bạc${p.out?"":" · "+BLG[Math.min(7,r)]}${wage?` · công ${staff} kẻ hầu -${wage}`:""}${bonus?` · ân thưởng +${bonus}`:""} = ${net>=0?"+":""}${net} bạc${why.length?" ("+why.join("; ")+")":""}.`;
