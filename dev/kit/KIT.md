@@ -1429,3 +1429,13 @@ Tested 755x1000@2, 1180x820@2, 1366x1024@2, 686x880@2.2, 412x1058@2, 390x844@3, 
   waits; if one opens during the 3 s the card goes away and waits again. In the background with nothing open it reopens unseen.
   On the first-entry loading screen it reopens at once (the loading resumes file by file).
 - Wording: "bản mới", "mở bản mới"; never "tải lại trang", "phiên bản", "cập nhật hệ thống" (VANPHONG §3).
+
+## 36. EMOTION SEAL · dấu tâm trạng (review/emotion, `dev/build/jemo.js`, owner 11/14) — one layer of `pcPort`
+- Every frame drawn by `pcPort` (so every size: tall frame, person card cell, `mdH` xs/sm/default/big strips) carries `img.kemo.kemo-<k>`:
+  `img/kit/emo-<k>.webp` (160 px, transparent; owner-approved set: a simple palace lady — soft oval face, wide two-bun chignon, pink flower, gold bộ diêu — with a bold ink expression on a solid colour ground per feeling, thin gold rim; gpt-2-6, Magnific VXUSWLpMMU; pilot sheet dev/shots/emotion/pilot-emo-lady.jpg).
+  Keys: vui · binh · buon · gian · so · ghen · lo · dau · muu · an (chưa rõ "?").
+- Place: top-left corner of the photo window, over the frame edge (left 8.5 %, top 17.5 %, width 22 % of the canvas); sm 30 %, xs 38 % so it stays ≥ 11 px.
+  z-index 4 (above frame and crest), drop shadow. Giận and Đau khổ pulse softly (off with reduced motion).
+- No ring/aura around the frame (owner 11/14 late: removed); the seal alone shows the feeling.
+- Fog: stranger → nothing; known person, no fresh news → grey "?" seal; her own → always.
+- Data only through `window.kitEmotion(p)` → `{k,name,v,why,known}`; tooltip/alt "Tâm trạng: <tên> (<cause>)". Nobody draws another mood icon; no code-reshaped facial expressions (owner 22:50Z): the seal + ring are the only display of feelings.
