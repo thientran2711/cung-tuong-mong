@@ -43,12 +43,15 @@ function kitTiers(list,o){o=o||{};const N=list.length;return `<div class="ktiers
 
 /* ---------- facts: one fact per row (never a run-on paragraph) ---------- */
 /* split an HTML run into sentences, keeping inline tags balanced across the cut */
-function kpSentences(html){const toks=String(html||"").split(/(<[^>]+>)/);const out=[];let cur="",stack=[];
+function kpSentences(html){const toks=String(html||"").split(/(<[^>]+>)/);const out=[];let cur="",stack=[],qd=0;const qOn=(String(html).match(/“/g)||[]).length===(String(html).match(/”/g)||[]).length;
  const cut=()=>{const close=stack.slice().reverse().map(t=>`</${t.n}>`).join("");if(kpPlain(cur))out.push(cur+close);cur=stack.map(t=>t.o).join("")};
  for(const tk of toks){if(!tk)continue;if(tk[0]==="<"){const m=tk.match(/^<\s*(\/)?\s*([a-z0-9]+)/i);if(m){const n=m[2].toLowerCase();if(/^(br|img|hr)$/.test(n)){if(n==="br"){cut();continue}cur+=tk;continue}
     if(m[1]){const i=stack.map(x=>x.n).lastIndexOf(n);if(i>=0)stack.splice(i,1)}else if(!/\/>$/.test(tk))stack.push({n,o:tk})}cur+=tk;continue}
-  const parts=tk.split(/(?<=[.!?])\s+(?=["“(]?[A-ZÀÁẢÃẠĂẮẰẲẴẶÂẤẦẨẪẬĐÈÉẺẼẸÊẾỀỂỄỆÌÍỈĨỊÒÓỎÕỌÔỐỒỔỖỘƠỚỜỞỠỢÙÚỦŨỤƯỨỪỬỮỰỲÝỶỸỴ0-9])/);
-  parts.forEach((p,i)=>{cur+=p;if(i<parts.length-1)cut()})}
+  /* a quoted speech “…” stays ONE row (review/toilette: "“Mặt mộc mà đến thỉnh an ai gia sao? Thật chẳng ra thể thống.”" was two rows):
+     no cut inside the quotes; a cut after the closing ” when the speech ended a sentence */
+  const re=/(?<=[.!?]["”]?)\s+(?=["“(]?[A-ZÀÁẢÃẠĂẮẰẲẴẶÂẤẦẨẪẬĐÈÉẺẼẸÊẾỀỂỄỆÌÍỈĨỊÒÓỎÕỌÔỐỒỔỖỘƠỚỜỞỠỢÙÚỦŨỤƯỨỪỬỮỰỲÝỶỸỴ0-9])/g;let last=0;
+  for(const mm of tk.matchAll(re)){const seg=tk.slice(last,mm.index);if(qOn)for(const c of seg){if(c==="“")qd++;else if(c==="”")qd=Math.max(0,qd-1)}cur+=seg;last=mm.index+mm[0].length;if(qd===0)cut();else cur+=mm[0]}
+  const seg=tk.slice(last);if(qOn)for(const c of seg){if(c==="“")qd++;else if(c==="”")qd=Math.max(0,qd-1)}cur+=seg}
  if(kpPlain(cur))out.push(cur);return out.map(s=>s.trim()).filter(s=>kpPlain(s)&&kpPlain(s)!==".")}
 /* text segments only (never inside a tag) */
 function kpMapText(html,fn){return String(html).split(/(<[^>]+>)/).map(s=>s&&s[0]==="<"?s:fn(s)).join("")}
