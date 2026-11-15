@@ -225,3 +225,5 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (04:05Z) Owner: chuyển Tai mắt + Ân sủng (Có thai, Lật thẻ, Ân tình đêm, Số lần ân thưởng) lên sân khấu, cột phải dưới các chip Hoàng thượng/Thái hậu/Hoàng hậu/kẻ hầu; bỏ hẳn bảng 'Tư chất · trạng thái' (thông tin khác đã có chỗ khác). Có thai/Lật thẻ theo thang Rất thấp…Rất cao. Giao review/sub-odds.
 - (04:15Z) Owner: Giao tình mỗi người chia 3 cột — trái tranh người lớn như chỗ khác, giữa thanh quan hệ, phải "Đã biết" gạch đầu dòng. review/hau-cung-ui.
 - (04:15Z) Owner hỏi "Sai đi Tiểu Lâm Tử là sao" → đổi thành "Người chạy việc: …" có giải thích, chỉ một chỗ, có thể chọn người. Chip "Thỉnh tranh nhân vật" không được đè nội dung. review/hau-cung-ui.
+- (04:20Z) Owner: hoa điền to quá (Hạ Tố Tâm, Phi). Luật mới: t1 = cỡ c03 t1; lớn dần rất ít, tối đa ~1.25× bề ngang t1 tới t6; t7 nửa cỡ, t8 phượng vàng nhỏ. Soát hết phi tần + cung nữ Part C, thu nhỏ cái quá cỡ (review/m05-huadian).
+- (04:20Z) Owner: khung chân dung (Quý phi) phần đỉnh trang trí rời rạc, lệch → sửa trong kit khung theo phẩm, đỉnh gắn liền khung (review/hau-cung-ui).
