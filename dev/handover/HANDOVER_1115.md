@@ -75,8 +75,8 @@ Nhắc theo dõi: send_later 30 phút, tự đặt lại mỗi lượt (lịch l
 - [ ] Chữ 'Liều' cho khả năng phụ (có thai, ban thưởng, ô trạng thái) — review/sub-odds
 - [x] Tờ lật trong suốt — LIVE 0783ec32a
 - [ ] Chip 'Thỉnh tranh nhân vật' đè chữ; tải lần đầu 83 MB — hau-cung-ui + cdn-images
-- [ ] Nam nhân trong Hậu cung; thiếu Hoàng thượng/Thái hậu; tên trùng — hau-cung-ui
-- [ ] 'Sai đi Tiểu Lâm Tử' khó hiểu — hau-cung-ui
+- [x] Nam nhân/tab Hậu cung — LIVE 01c3a5b24
+- [x] Người chạy việc — LIVE 01c3a5b24
 - [ ] Chữ hiệu ứng mơ hồ ('tiếng cứng cỏi'); việc làm được chưa lên đầu — sub-odds
 - [ ] Sự kiện Có người đến chưa cân bằng — ts-b
 - [ ] Tranh Thỉnh an (quỳ / tay sau) — chờ vẽ lại v3 (cần thợ mới khi đĩa đủ)
@@ -104,6 +104,7 @@ Nhắc theo dõi: send_later 30 phút, tự đặt lại mỗi lượt (lịch l
 - 08:25Z LIVE main=5c1007a69 (Sổ tuần 'Sổ này ghi' thẳng cột). hau-cung-ui còn ~30–40 phút.
 - 08:40Z review/sub-odds 96d7c2df8 SẴN SÀNG KIỂM → hàng duyệt sau hau-cung-ui. Chip phải che đầu người trên điện thoại → stage-slots.
 - 08:50Z LIVE main=312b6b40a court-rules (HH/HQP ở riêng; Thái hậu đúng tuổi; hết khắc ở lại nơi; chạm nơi đang đứng; nút ‹ tên nơi; Luân hồi tải trước hình).
-- [ ] Đi đường xa hơn khắc còn bị chặn (báo từ 14/11) — HOTFIX hotfix/walk-spill
+- [x] Đi đường xa hơn khắc — LIVE 3bf16b9b1
 - [ ] Cảm giác game: nút lún/sáng, PixiJS hiệu ứng, rung máy, rung màn (báo từ 14/11) — review/game-feel
 - 09:45Z review/update-flow 41c33af33 SẴN SÀNG KIỂM; review/rules-one-source 21a57eae1 SẴN SÀNG KIỂM → hàng người duyệt 1.
+- 09:55Z LIVE main=01c3a5b24 (hau-cung-ui) rồi 3bf16b9b1 (hotfix walk-spill: đi đường tràn sang buổi sau).
