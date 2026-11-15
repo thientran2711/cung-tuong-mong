@@ -8078,7 +8078,9 @@ function kitCurl(o){o=o||{};const host=o.host,w=Math.max(40,o.w|0),h=Math.max(40
   root.style.setProperty("--kcl-e",el.toFixed(3));
   if(o.vanish)root.style.opacity=p>.8?Math.max(0,1-(p-.8)/.2).toFixed(3):"1"}
  set(o.p||0);
- return {el:root,set,rescroll,destroy(){root.remove()},n:1}}
+ /* setBack(el): the back of the turning sheet shows a real page (the destination page, read the right way once turned; owner 11/15) */
+ function setBack(src){const p=prep(src,false);if(!p)return;[...BK.f.children].forEach(ch=>{if(ch!==sh)ch.remove()});BK.f.insertBefore(p.m,sh);BK.sc=p.sc}
+ return {el:root,set,rescroll,setBack,destroy(){root.remove()},n:1}}
 
 function kitCurlRun(c,from,to,dur,done,ease){ease=ease||kitCurlEase;const t0=performance.now();let alive=true;const dir=to>=from?1:-1;
  const step=now=>{if(!alive)return;const t=Math.min(1,(now-t0)/Math.max(1,dur));c.set(from+(to-from)*ease(t),dir);if(t<1)requestAnimationFrame(step);else{alive=false;done&&done()}};
@@ -8096,10 +8098,12 @@ function kitCurlSwap(el,fn,opt){opt=opt||{};const run=()=>{try{fn&&fn()}catch(e)
  if(!el||!r0||r0.width<60||r0.height<60||!el.getClientRects().length){run();return false}
  if(kitCurlOff()){el.classList.add("kcl-fade");run();requestAnimationFrame(()=>requestAnimationFrame(()=>el.classList.remove("kcl-fade")));return false}
  const host=document.createElement("div");host.className="kcl-host";host.style.cssText=`left:${r0.left}px;top:${r0.top}px;width:${r0.width}px;height:${r0.height}px`;
- let c=null;try{c=kitCurl({host,front:el,back:null,w:r0.width,h:r0.height,x:0,y:0,keepId:false,mirror:(opt.dir||1)<0,vanish:true,ghost:true,lift:.5,cls:"kcl-tab"})}catch(e){console.error(e)}
+ let c=null;try{c=kitCurl({host,front:el,back:null,w:r0.width,h:r0.height,x:0,y:0,keepId:false,mirror:(opt.dir||1)<0,vanish:true,lift:.5,cls:"kcl-tab"})}catch(e){console.error(e)}
  run();
  const r1=el.getBoundingClientRect();
  if(!c||Math.abs(r1.left-r0.left)>2||Math.abs(r1.top-r0.top)>2||Math.abs(r1.width-r0.width)>2||Math.abs(r1.height-r0.height)>2||!el.getClientRects().length){host.remove();return false}
+ /* the back of the turning sheet = the new page (as in a real book: the page you turn to is printed on its back) */
+ try{c.setBack(el)}catch(e){console.error(e)}
  document.body.appendChild(host);c.rescroll();kitCurlSfx();
  /* a quick lift then a slower settle (a flick of the page): the new page shows under the corner from the first frames */
  const stop=kitCurlRun(c,0,1,opt.ms||720,()=>{host.remove();if(kclLive===end)kclLive=null},kitCurlLift);
@@ -8278,7 +8282,9 @@ html .game .kleather>.maptools>.past,html .game .kleather>.maptools>.fest{displa
 .kl-unroll>.kl-l{animation:kl-rl .62s cubic-bezier(.25,.7,.25,1)}.kl-unroll>.kl-r{animation:kl-rr .62s cubic-bezier(.25,.7,.25,1)}
 @keyframes kl-un{from{clip-path:polygon(48.51% 0.36%,48.69% 0.72%,48.9% 0.59%,49.13% 0.06%,49.36% 0.04%,49.57% 0.08%,49.76% 0.47%,50.02% 0.14%,50.2% 0.69%,50.46% 0.63%,50.64% 1.07%,50.83% 0.94%,51.06% 0.16%,51.26% 0.34%,51.48% 0.5%,51.5% 7.31%,51.48% 14.03%,51.49% 20.55%,51.5% 27.98%,51.48% 35.57%,51.49% 43.03%,51.49% 49.6%,51.48% 57.54%,51.49% 64.43%,51.49% 72.18%,51.48% 78.15%,51.48% 84.95%,51.49% 93.37%,51.49% 99.83%,51.29% 99.96%,51.08% 99.16%,50.86% 99.04%,50.63% 99.24%,50.43% 99.36%,50.21% 99.08%,50.03% 99.48%,49.8% 99.93%,49.58% 99.29%,49.39% 99.1%,49.13% 99.58%,48.94% 99.98%,48.71% 99.82%,48.5% 99.5%,48.5% 93.39%,48.5% 85.21%,48.51% 79.31%,48.5% 71.33%,48.51% 65.05%,48.52% 57.87%,48.51% 49.83%,48.51% 43.63%,48.52% 35.02%,48.5% 28.04%,48.51% 21.4%,48.51% 13.81%,48.5% 6.98%)}to{clip-path:polygon(0.4% 0.36%,6.44% 0.72%,13.43% 0.59%,21.16% 0.06%,28.59% 0.04%,35.58% 0.08%,42.04% 0.47%,50.65% 0.14%,56.59% 0.69%,65.18% 0.63%,71.22% 1.07%,77.66% 0.94%,85.29% 0.16%,92.09% 0.34%,99.35% 0.5%,99.86% 7.31%,99.49% 14.03%,99.56% 20.55%,99.95% 27.98%,99.46% 35.57%,99.75% 43.03%,99.64% 49.6%,99.36% 57.54%,99.8% 64.43%,99.58% 72.18%,99.42% 78.15%,99.22% 84.95%,99.67% 93.37%,99.6% 99.83%,92.84% 99.96%,86.05% 99.16%,78.72% 99.04%,71.06% 99.24%,64.47% 99.36%,57.06% 99.08%,50.89% 99.48%,43.19% 99.93%,36.12% 99.29%,29.56% 99.1%,21.0% 99.58%,14.62% 99.98%,7.07% 99.82%,0.09% 99.5%,0.05% 93.39%,0.1% 85.21%,0.31% 79.31%,0.06% 71.33%,0.44% 65.05%,0.66% 57.87%,0.22% 49.83%,0.29% 43.63%,0.77% 35.02%,0.14% 28.04%,0.19% 21.4%,0.47% 13.81%,0% 6.98%)}}
 @keyframes kl-rl{from{left:calc(50% - 16px)}to{left:2px}}@keyframes kl-rr{from{right:calc(50% - 16px)}to{right:2px}}
-.kcl-host{position:fixed;z-index:40;pointer-events:none}
+.kcl-host{position:fixed;z-index:40;pointer-events:none;
+ /* the turning page never rises above the page area (stays under the top bar); it may still swing out sideways over the left page */
+ clip-path:polygon(-6000px 0,6000px 0,6000px 6000px,-6000px 6000px)}
 .kcl-in{animation:kcl-in .3s ease-out}@keyframes kcl-in{from{opacity:0}to{opacity:1}}
 @media (prefers-reduced-motion:reduce){.kleather.kl-unroll,.kl-unroll>.kl-roll,.kcl-in{animation:none}}
 /* ===== the live game as an open BOOK (owner 11/14 approval, 11/15 priority) — kitBookLive =====
@@ -8450,7 +8456,9 @@ function kitBook(spec){spec=spec||{};const rm=()=>{try{return reducedMotion()}ca
   for(let k=i-2;k<=i+2;k++)if(els[k])els[k].style.visibility="visible";if(mode==="single"&&els[i+1]&&i===cur)els[i+1].style.visibility="visible";
   if(mode==="spread")book.classList.remove("closed","atend");
   if(el.__curl){el.style.visibility="hidden";return el}el.__dir=dir||1;
-  el.__curl=kitCurl({host:book,front:el.querySelector(".kbk-front>.kbk-pg"),back:el.querySelector(".kbk-back>.kbk-pg"),w:PW,h:PH,x:mode==="spread"?PW:0,y:0,
+  /* one page at a time: the back of the turning sheet shows the next page (owner 11/15), not a blank verso */
+  const nx=mode==="single"&&els[i+1]?els[i+1].querySelector(".kbk-front>.kbk-pg"):null;
+  el.__curl=kitCurl({host:book,front:el.querySelector(".kbk-front>.kbk-pg"),back:nx||el.querySelector(".kbk-back>.kbk-pg"),w:PW,h:PH,x:mode==="spread"?PW:0,y:0,
    po:mode==="spread"?0:PW*.5,shadeL:mode==="spread",dir:dir||1,p:i<cur?1:0});
   el.style.visibility="hidden";el.classList.add("turn");return el}
  const ease=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2,easeOut=t=>1-Math.pow(1-t,3);
