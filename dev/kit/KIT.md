@@ -1201,6 +1201,14 @@ WALK RULE (owner 11/15 01:35Z, `walkOk(tc)` / `walkWhy(tc)` in j9 — one rule f
 walk anywhere whose walk cost ≤ khắc left (never walk + 1). Arriving with 0 left is allowed: the tap first shows a kit card "Đường đi N khắc
 · đến nơi là hết buổi, chỉ kịp xem ai ở đó" (Đi / Thôi, `j77LastWalk`); she sees who is there, next buổi she starts there. A label says
 "hết khắc" ONLY when 0 are left; a walk longer than what is left shows "đi N khắc" (+ lock mark; card reason "đi N khắc, còn M").
+WALK SPILL (owner 11/15 09:05Z, `walkSpill(k)` / `walkSpillGo(k)` in j9): a walk longer than the khắc left is NOT a dead end. The card
+says "Đường đi N khắc, còn M khắc: đi bây giờ thì đến nơi vào buổi chiều" and offers "Đi (đến nơi vào buổi sau)" — "Tốn: M khắc buổi
+sáng + (N−M) khắc buổi chiều · Thành: đến nơi buổi chiều, thấy ai ở đó" — plus Thôi (no separate "Đợi buổi sau" for this case). Going
+spends the M khắc left, turns the buổi (normal end-of-buổi processing: NPCs move, news cards first), then pays the rest from the new
+buổi and she arrives with 4−(N−M) khắc, seeing who is there then (1 left in the morning, Thái y viện 3 khắc → 1 + 2, arrives in the
+afternoon with 2 left). Not across the night: from buổi tối the night rule stands (no spill; "Đợi sáng mai (Qua đêm)"). If the place is
+closed in the next buổi (e.g. Thái y viện / Ngự hoa viên at night), the card says so and offers no spill. NPCs do not pay walk costs
+(placeWhere puts them per buổi), so there is nothing to change for them. Not in co-op world mode (its own buổi turns).
 
 ### 34.1c kitBookLive — the LIVE game is the open book (every tab, both roads; owner 11/15 priority)
 `kitBookLive()` runs after every render (jbook, end): `.game.kbook` (no cover board).
