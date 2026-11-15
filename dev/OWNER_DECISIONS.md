@@ -670,3 +670,6 @@ All must work in co-op.
 
 ## 15/11 ~21:15Z — Card-flip shows HER knowledge (owner)
 - In the card-flip scene, each card's face/name follows HER knowledge (j61 stranger rule): unknown people show the grey silhouette + '???'. Everything shown in the game is what SHE sees, never what the Emperor knows.
+
+## 15/11 ~21:20Z — Recipes also from levelling an art (owner)
+- Besides buying/teachers, each time an art goes up one level she ALSO learns one new recipe/pattern of that art (plus the usual level rewards). Not everything must be bought. (Self-study still doesn't open a new sub-style; the level-up recipe comes from sub-styles she already knows, or the next basic one.)
