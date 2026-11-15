@@ -41,3 +41,23 @@ Build with `python3 dev/build/assemble.py`, then wrap dev/index.html as _aa.html
 
 ## cdn_sync
 None pending. Only existing CDN images are used (art-*, vir-*, info-*, act-*).
+
+## Review r6 (11/15, review/tabs-kit-r6 = tabs-kit c9cd7e7cd merged on main 114887bc1) — FAIL (kit only; all tests pass)
+- Merge: conflicts in assemble.py (kept main's jseal.js + added jpane.js, jtabs.js before j84) and KIT.md. KIT §39/§40 of this branch renumbered to
+  **§45 (pane bar) / §46 (kit tabs)**; main already has §39 kitSeal / §40 APP ICON; kit-fig2 (§39/§40), ts-a (§39), kitRelTable (§39) still need
+  numbers — §41–§44 left free for them (note under §44/§45 in KIT.md). File headers of jpane/jtabs/pane-bar/tabs-kit-shots updated.
+- Tests (all green): pane-bar 6 sizes × 8 tabs 48/48 ok, 0 errs; tabs-kit-shots 5 sizes × 10 sub-tabs 50/50 ok, 0 errs; minigame-tap 3/3 at
+  755x1000, 1000x755, 1180x820, 1366x1024, 844x390; old save (made with main build) loads at 5 sizes, tabs render, no overflow, 0 errs.
+- FAIL items (kit rule 16:50Z):
+  1. `kitSkillHead` (.ksk2) is a SECOND skill card beside KIT §21 `kitSkillCard` (.kskill, "every art and every Tứ đức course uses it"); §21 was
+     not changed and kitSkillCard is now dead. One skill card only: evolve kitSkillCard into the new form (steps, bậc kế chip, compact acts) and
+     update §21, or retire §21 explicitly and delete kitSkillCard + its CSS.
+  2. New picture tiles `.ksk2art`, `.ktqart`, `.kemptyart` (64/56 px) and the act thumbnail `button.ka[data-kacc]::before` (40 px) are drawn with
+     their own CSS, against KIT 28.19 / 31.10 ("kitSceneArt / kitArtFrame = THE ONE non-person picture component"). Needs a kit size of
+     kitSceneArt (small/thumb) — KIT REQUEST to coordinator — then use it.
+  3. `kitActCompact` (jtabs) duplicates review/kit-fig2's kit part of the same name (jk4 `kitActCompactOn`, kit-fig2 KIT §39, "only the act's
+     own picture, no category picture"); jtabs falls back to the skill picture. Wait for / reuse kit-fig2's part, do not ship a second one.
+  4. `.ktq` (Mệnh truyện chapter / sắc phong head card) and `.kempty` are new card frames; take them through the coordinator as kit parts
+     (KIT REQUEST) or build them from an existing kit card (kitPanel / kitRows / kitInfoArt) before use.
+  5. Minor: Việc nhờ › Đang làm at 755x1000 — the single compact act card sits in a 1/2-width column and wraps "Được" into 4 lines while the
+     rest of the row is empty (.ktacts minmax 300px); let a lone card take the full row.
