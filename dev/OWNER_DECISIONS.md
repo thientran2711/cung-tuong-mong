@@ -426,3 +426,5 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - LIVE CDN (12:10Z) Khung Đáp ứng A + 8 dấu trên đầu (đổi 6/7). Code nằm ở review/rank0-ivory chờ duyệt.
 - (12:12Z) Tranh Thỉnh an mới: sếp DUYỆT (dùng làm mẫu dáng vạn phúc + áo cung trang cho các tranh vẽ lại).
 - (12:20Z) Ảnh Triều chính hiện lung tung là do nhiều sự việc KHÔNG có ảnh riêng nên rơi về ảnh mặc định. Việc cần: dò mọi ảnh đang được dùng cho 2 sự việc khác nhau trở lên (và mọi chỗ rơi về ảnh mặc định) → vẽ ảnh riêng cho các sự việc còn thiếu.
+- (12:25Z) Trò chơi tự tay phải khớp món: chọn món trước (công thức có hình) → nguyên liệu/bước trong trò chơi là của đúng món đó (canh gà: gà, sâm, lá sen…; chè dưỡng nhan: hạt sen, long nhãn, ngân nhĩ, táo đỏ…) → thành phẩm là món đó, hình đúng món, phẩm theo điểm.
+- (12:25Z) Thêm lựa chọn "Bỏ độc vào" khi tặng món ăn/thức uống/túi thơm (cần có độc dược). Odds theo Tâm cơ, người nhận có thử độc không, thiện cảm, phẩm món. Lộ thì truy ra nàng. NPC cũng làm vậy với nàng; nàng có "Thử độc". MẶC ĐỊNH (sếp có thể đổi): không cho hạ độc Hoàng thượng và Thái hậu (có người thử độc, tội khi quân).
