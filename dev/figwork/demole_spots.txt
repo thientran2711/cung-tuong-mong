@@ -1,0 +1,2 @@
+N-c01-tcold demole spot=542,200 spot=555,247
+N-c17-tcold demole spot=2358,233

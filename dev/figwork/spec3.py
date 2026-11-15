@@ -16,7 +16,7 @@ for cid,tr,mt in CONS:
         J[f"N-{cid}-t{t}"]=dict(prompt=PRE+LINE+f" An imperial consort. Her face: {IDF[cid]}.{idp}"+AGW+f" Outfit for all four: {TIERS[t]}, {col(t,tr)}. Pose for all four: {POSE[tr]}."+END,
             ref=None if first else f"SHEET:N-{cid}-t1",
             figs=[dict(file=f"fig-consort-{cid}-t{t}-{a}",role="consort",identity=cid,tier=t,ageBand=a,look=tr) for a in AG])
-LOOKF={"look1":"elegant oval face with defined cheekbones, almond eyes, straight dark brows, small straight nose, a tiny beauty mark under her left eye",
+LOOKF={"look1":"elegant oval face with defined cheekbones, almond eyes, straight dark brows, small straight nose, long soft lashes",
 "look2":"heart-shaped face, round gentle eyes, softly arched brows, full rosy lips, a soft side-swept fringe on the right",
 "look3":"slender long face, large soft almond eyes, high cheekbones, fine thin brows, hair parted in the centre",
 "look4":"graceful softly rounded oval face, clear bright eyes, gentle straight brows, a light wispy fringe, a small red huadian mark between her brows"}
@@ -35,7 +35,7 @@ ECOL=["dark steel blue","dark green","slate grey-blue","deep teal","brown","navy
 MF=["oval face with fine features","refined slender face","gentle face with a defined jaw","soft handsome face with calm gentle eyes","long elegant face with fine brows","face with high cheekbones and a straight nose","youthful handsome face with gentle round eyes","noble face with thick straight brows","delicate face with warm almond eyes","handsome face with a slim pointed chin"]
 for i in range(30):
     tr=TRS[i%5]
-    J[f"N-eunuch-u{i+1:02d}"]=dict(prompt=PRE+LINE+f" A handsome, refined palace eunuch, beardless. His face: {MF[i%10]}{', a small mole on his cheek' if i>=20 else (', slightly wavy hair at the temples' if i>=10 else '')}. Left to right: about 22; about 31; about 43, faint lines, still handsome; about 57, distinguished, fine lines and greying hair, still handsome. All four: a {ECOL[(i*3)%10]} round-collar palace robe with a belt and a black gauze hat, black boots, {ET[tr]}."+" Eyes soft and warm, never slanted. Every man handsome at every age, no caricature. No text, no labels.",
+    J[f"N-eunuch-u{i+1:02d}"]=dict(prompt=PRE+LINE+f" A handsome, refined palace eunuch, beardless. His face: {MF[i%10]}{', smooth clear cheeks' if i>=20 else (', slightly wavy hair at the temples' if i>=10 else '')}. Left to right: about 22; about 31; about 43, faint lines, still handsome; about 57, distinguished, fine lines and greying hair, still handsome. All four: a {ECOL[(i*3)%10]} round-collar palace robe with a belt and a black gauze hat, black boots, {ET[tr]}."+" Eyes soft and warm, never slanted. Every man handsome at every age, no caricature. No text, no labels.",
         ref=None, figs=[dict(file=f"fig-eunuch-u{i+1:02d}-{a}",role="eunuch",identity=f"u{i+1:02d}",ageBand=a,look=tr) for a in AG])
 json.dump(J,open('jobs.json','w'),indent=0)
 print(len([k for k in J if k.startswith('N-')]))

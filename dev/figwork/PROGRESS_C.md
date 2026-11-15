@@ -1,0 +1,144 @@
+# Part C (gộp C1 + C2): 52 cung nữ m01–m52 mặc thang áo phi tần t1–t8 + lãnh cung (nhánh review/maid-art-c)
+
+Lịch sử trước 11/14 sáng: xem PROGRESS_C1.md (m01–m26) và PROGRESS_C2.md (m27–m52). Từ đây một thợ làm cả 52 người, ghi ở file này.
+
+- File: img/fig-maid-mNN-tK-aAA.webp + img/por-maid-mNN-tK-aAA.webp (K = t1..t8 / cold; AA = a18/a26/a36/a51 = tuổi 19/24/32/48;
+  por 384x506 canh giữa mặt bằng porcrop.py). Bản ghi img/FIGURES-servants.json role "maid", tier "t1".."t8"/"cold", sheet "C-mNN-tK", palette = họ màu.
+- Công cụ gộp: dev/figwork/maidC/ — mjobs.py (prompt m01–m52: dữ liệu C1 m01–m26 + C2 m27–m52), hands.py (TAY LINH ĐỘNG: 4 tuổi 4 kiểu tay khác nhau
+  + 4 đạo cụ khác nhau; tuổi 19 cầm đạo cụ riêng của người đó), calm.py (khối STILL dáng đứng yên, ~7.5 đầu, lụa không xuyên thấu, không khăn bay),
+  lad3.py (áo t4–t8 = spec5 art5 nhánh consort-art: luật màu, t8 áo choàng + mũ cửu phượng, đuôi áo thẳng), hl.py (hoa điền 8 nấc HL/HS, cỡ +~5%/bậc),
+  cold_pose trong mjobs.py (lãnh cung: áo vải trơn, trâm gỗ, không hoa điền, đồ vật giản dị khác nhau mỗi tuổi).
+  pproc.py (tách 4 tuổi), cutcheck.py -> fixalpha.py (vá vải mỏng) -> porcrop.py, sheet.py, batch.sh, pub.sh (fetch + đặt lại theo origin rồi gộp bản ghi), merge.py.
+- GPT 2.6 (gpt-2-6), 2:1, 4k, high; 1 style ref (consort-01/05/12/18 luân phiên) + ref danh tính = lineup cung nữ gốc a18; folder ba4aecfe…; 270 + 3 (tách nền) = 273 tín dụng/lineup.
+- Hoa điền: HUADIAN_C.md (84 kiểu không trùng). Không nốt ruồi (m13, m26 dặn bỏ nốt ruồi của ảnh gốc).
+- Tấm xem trước: dev/figwork/sheets/C_mNN_tK.jpg.
+
+## 11/14 kiểm t1/t2 cũ
+- Xem lại toàn bộ t1 m01–m52 (dáng yên) và t2 m27–m33: gần như mọi lineup dùng CHUNG một đạo cụ cho 2–3 tuổi (quạt/quạt/quạt, cành hoa ×3, túi thơm ×3…)
+  và tuổi 48 hay chắp tay -> trái luật "mỗi tuổi một kiểu tay + một đạo cụ khác". Quyết định: VẼ LẠI cả 52 lineup t1 và t2 bằng hands.py.
+  Bỏ 6 bản t2 m01–m06 của C1 (dáng cũ, chưa xử lý) và 2 bản t1 m25/m26 tĩnh của C1 (cùng lỗi tay).
+
+## Trạng thái hiện tại / việc tiếp (đọc trước khi làm tiếp)
+- t1: XONG 52/52 (vẽ lại, tay linh động). t2: m01–m14 XONG (bản mới). t2 m27–m33 trên nhánh vẫn là bản CŨ của C2 (đạo cụ lặp) -> sẽ bị đè khi vẽ t2 m27–m33.
+- Còn lại: t2 m15–m52 (38), t3–t8 (6×52 = 312), lãnh cung (52) ≈ 402 lineup ≈ 110k tín dụng.
+- Cách làm 1 mẻ 8 lineup (scratchpad cw/ = bản sao dev/figwork/maidC/ + cf/cutcheck,porcrop,fixalpha,rematte + haar/yunet.onnx):
+  1) `bash mid.sh C-mNN-tK ...` in style ref, ref danh tính và phần giữa prompt; phần đầu/đuôi cố định = PRE.txt/POST.txt (m13, m26 có câu bỏ nốt ruồi).
+     Có thể chỉnh tay một đạo cụ nếu hai tuổi trùng loại (ghi chú trong gens.txt).
+  2) images_generate gpt-2-6, 2:1, 4k, extraSettings quality high, references [style STY, image MREF], folder ba4aecfe…; ghi `jid gen hands` vào gens.txt.
+  3) `python3 rv.py rvN.jpg GEN...` -> xem tấm duyệt; xấu thì vẽ lại.
+  4) images_remove_background từng gen, creations_wait cho xong (URL phải nằm trong transcript để urls.py bắt), rồi
+     `bash batch.sh "jids" "bgids" "dòng tiến độ"` (addbg -> pproc -> cutcheck/fixalpha -> porcrop 384x506 -> sheet -> PROGRESS -> pub.sh). batch.sh tự dừng nếu thiếu URL.
+  pub.sh luôn fetch + đặt lại theo origin/review/maid-art-c trước khi chép file và gộp bản ghi (merge.py chỉ thay bản ghi cùng "file").
+- rematte.py chưa cần: cutcheck sau fixalpha đều < 1.
+
+## Mẻ (tín dụng)
+Mẻ 1: t1 vẽ lại tay linh động m01–m09 + m30 (10 lineup). Tín dụng 10×273 = 2730.
+Mẻ 2: t1 vẽ lại tay linh động m10–m17 (8 lineup). Tín dụng 8×273 = 2184.
+Mẻ 3: t1 vẽ lại tay linh động m18–m25 (8 lineup). Tín dụng 8×273 = 2184.
+Mẻ 4: t1 vẽ lại tay linh động m26–m29, m31–m34 (8 lineup). Tín dụng 8×273 = 2184.
+Mẻ 5: t1 vẽ lại tay linh động m35–m42 (8 lineup). Tín dụng 8×273 = 2184.
+Mẻ 6: t1 vẽ lại tay linh động m43–m50 (8 lineup). Tín dụng 8×273 = 2184.
+Mẻ 7: t1 m51–m52 → t1 XONG cả 52 người (tay linh động); t2 m01–m06 (hoa điền nấc 2). 8 lineup, tín dụng 8×273 = 2184.
+Mẻ 8: t2 m07–m14 (8 lineup). Tín dụng 8×273 = 2184. Cộng dồn phiên này: 66 lineup ≈ 18.0k (gồm 2 lineup thử).
+
+## C-A (thợ m01–m26): mẻ và tín dụng
+Mẻ A1 (thợ m01–m26): t2 m15–m22 (8 lineup + 2 vẽ lại hoa điền m16 m21). Tín dụng 10×270 + 8×3 = 2724.
+Mẻ A2 (thợ m01–m26): t2 m23–m26 (t2 m01–m26 XONG) + t3 m01–m04. 13 lần vẽ + 8 tách nền: 13×270 + 8×3 = 3534.
+Mẻ A3 (thợ m01–m26): t3 m05–m12 (8 lineup + 1 vẽ lại m05 lụa mỏng). 9×270 + 8×3 = 2454.
+Mẻ A4 (thợ m01–m26): t3 m13–m20. 13 lần vẽ/sửa + 8 tách nền: 13×270 + 8×3 = 3534.
+Mẻ A5 (thợ m01–m26): t3 m21–m26 → t3 XONG m01–m26; t4 m01–m02. 12 lần vẽ/sửa (vẽ lại m21, m24, m25 + sửa tóc m24) + 8 tách nền: 12×270 + 8×3 = 3264; m26 xoá nốt ruồi chấm vá.
+Mẻ A6 (thợ m01–m26): t4 m03–m10. 10 lần vẽ/sửa (sửa m04 thêm hoa điền tuổi 19, m05 thu nhỏ hoa điền) + 8 tách nền: 10×270 + 8×3 = 2724.
+Mẻ A7 (thợ m01–m26): t4 m11–m18. 8 lineup + 8 tách nền: 8×273 = 2184; m13 xoá nốt ruồi chấm vá (tóc tuổi 48 m13 sẽ sửa ở mẻ sau).
+Mẻ A8 (thợ m01–m26): t4 m19–m26 → t4 XONG m01–m26; thay m13 t4 (sửa tóc tuổi 48). 10 lần vẽ/sửa (sửa m23 hoa điền phẳng, m13 tóc) + 9 tách nền: 10×270 + 9×3 = 2727; m13 m26 xoá nốt ruồi chấm vá.
+Mẻ A9 (thợ m01–m26): t5 m01–m08 (hoa điền nấc 5 vàng lá + son). 8 lineup + 8 tách nền: 8×273 = 2184.
+Mẻ A10 (thợ m01–m26): t5 m09–m16. 8 lineup + 8 tách nền: 8×273 = 2184; m13 xoá nốt ruồi chấm vá.
+Mẻ A11 (thợ m01–m26): t5 m17–m24. 11 lần vẽ/sửa (sửa m21 hoa điền hạc ×2, m18 tóc tuổi 48) + 8 tách nền: 11×270 + 8×3 = 2994.
+Mẻ A12 (thợ m01–m26): t5 m25–m26 → t5 XONG m01–m26; t6 m01–m06 (hoa điền nấc 6 vàng lá + 1 hạt trai). 12 lần vẽ/sửa (sửa m02 tóc tuổi 48; m04 m05 m06 bỏ dây treo cho hoa điền nằm trên da) + 8 tách nền: 12×270 + 8×3 = 3264; m26 xoá nốt ruồi chấm vá.
+Mẻ A13 (thợ m01–m26): t6 m07–m14. 8 lineup + 8 tách nền: 8×273 = 2184; m13 xoá nốt ruồi chấm vá.
+Mẻ A14 (thợ m01–m26): t6 m15–m22. 8 lineup + 8 tách nền: 8×273 = 2184.
+Mẻ A15 (thợ m01–m26): t6 m23–m25, t7 m01–m04. 7 lineup + 1 sửa (m02-t7 tóc bạc) + 7 tách nền: 8×270 + 7×3 = 2181.
+Mẻ A16a (thợ m01–m26): t6 m26 (vẽ 1 + sửa hỏng 1 + vẽ lại 1, bỏ dây trán; xoá nốt ruồi bằng code) + 1 tách nền: 3×270 + 3 = 813.
+Mẻ A16 (thợ m01–m26): t7 m05–m12. 8 lineup + 2 sửa (m05, m12 bỏ dây treo hoa điền) + 8 tách nền: 10×270 + 8×3 = 2724.
+Mẻ A17 (thợ m01–m26): t7 m13–m20 (m13 xoá nốt ruồi bằng code). 8 lineup + 8 tách nền: 8×273 = 2184.
+Mẻ A18 (thợ m01–m26): t7 m21–m26, t8 m01–m02 (m26 xoá nốt ruồi bằng code). 8 lineup + 1 sửa (m02-t8 tóc bạc) + 8 tách nền: 9×270 + 8×3 = 2454.
+Mẻ A19 (thợ m01–m26): t8 m03–m10. 8 lineup + 2 sửa (m05 bỏ dây treo, m08 bỏ dải trán) + 8 tách nền: 10×270 + 8×3 = 2724.
+Mẻ A20 (thợ m01–m26): t8 m11–m18 (m13 xoá nốt ruồi bằng code). 8 lineup + 8 tách nền: 8×273 = 2184.
+Mẻ A21 (thợ m01–m26): t8 m19–m26 + lãnh cung m01–m08 (16 lineup đã vẽ trước = 4320) + 12 sửa hoa điền/tóc (t8 m19, m23, m24, m25, m11, m12, m17 bỏ dây/chuỗi ngọc/dải trán; m03-t8 thu nhỏ; t7 m06, m08, m16 bỏ dây; lãnh cung m01 tóc bạc tuổi 48) + 23 tách nền: 16×270 + 12×270 + 23×3 = 7629. m26 xoá nốt ruồi bằng code.
+Mẻ A22 (thợ m01–m26): lãnh cung m09–m16 — vẽ 8 tờ gpt-2-6 4k (2160) + tách nền 8 (24), tẩy nốt ruồi m13 bằng mã; tóc tuổi 48 đen, trán trống = 2184 tín dụng
+Mẻ A23 (thợ m01–m26): lãnh cung m17–m26 — vẽ 10 tờ gpt-2-6 4k (2700) + sửa tóc xám tuổi 48 m24 (270) + tách nền 11 (33), tẩy nốt ruồi m26 bằng mã; trán trống = 3003 tín dụng. Xong lãnh cung m01–m26
+
+## C-B (thợ m27–m52): mẻ và tín dụng
+Mẻ B1: t2 m27–m34 (vẽ lại m27–m33, đạo cụ khác loại mỗi tuổi). 8 lineup, tín dụng 8×273 = 2184.
+Mẻ B2: t2 m35–m42 (8 lineup + 1 vẽ lại m40 vì hoa điền to). Tín dụng 9×273 = 2457.
+Mẻ B3: t2 m43–m50 (8 lineup + 1 vẽ lại m47 vì tay áo hơi trong). Tín dụng 9×273 = 2457.
+Mẻ B4: t2 m51–m52 (t2 m27–m52 XONG) + t3 m27–m32 (hoa điền nấc 3). 8 lineup, tín dụng 8×273 = 2184.
+Mẻ B5: t3 m33–m40. 8 lineup, tín dụng 8×273 = 2184.
+Mẻ B6: t3 m41–m48. 8 lineup, tín dụng 8×273 = 2184.
+Mẻ B7: t3 m49–m52 (t3 m27–m52 XONG) + t4 m27–m30 (hoa điền nấc 4 viền vàng). 8 lineup, tín dụng 8×273 = 2184.
+Mẻ B8: t4 m31–m38. 8 lineup, tín dụng 8×273 = 2184.
+Mẻ B9: t4 m39–m46. 8 lineup, tín dụng 8×273 = 2184.
+Mẻ B10: t4 m47–m52 (t4 m27–m52 XONG) + t5 m27–m28 (hoa điền nấc 5 vàng lá). 8 lineup, tín dụng 8×273 = 2184.
+Mẻ B11: t5 m29–m36 (8 lineup + vẽ lại m33, m36 vì quạt tròn và gương giống nhau). Tín dụng 10×273 = 2730.
+Mẻ B12: t5 m37–m44. 8 lineup, tín dụng 8×273 = 2184.
+Mẻ B13: t5 m45–m52 (t5 m27–m52 XONG). 8 lineup, tín dụng 8×273 = 2184.
+Mẻ B14: t6 m27–m32 (hoa điền nấc 6, 1 hạt trai; 6 lineup + vẽ lại m29, m30 vì đuôi váy hơi trong). Tín dụng 8×273 = 2184.
+Mẻ B15: t6 m33–m40. 8 lineup, tín dụng 8×273 = 2184.
+Mẻ B16: t6 m41–m48 (8 lineup + vẽ lại m41 vì áo choàng hơi trong). Tín dụng 9×270 + 8×3 = 2454.
+Mẻ B17: t6 m49–m52 (t6 m27–m52 XONG) + t7 m27–m30 (hoa điền nấc 7 vàng lá dát phẳng + men son + 1 chấm hồng ngọc). 8 lineup + vẽ lại m51, m29-t7, m30-t7 vì lớp ngoài hơi trong (thêm câu OPACITY vào lad3.py cho t6+). Tín dụng 11×270 + 8×3 = 2994.
+Mẻ B18: t7 m31–m38 (8 lineup + vẽ lại m35 vì váy ngoài hơi trong). Tín dụng 9×270 + 8×3 = 2454.
+Mẻ B19: t7 m39–m46 (8 lineup + vẽ lại m45 vì tóc tuổi 48 ngả xám). Tín dụng 9×270 + 8×3 = 2454.
+Mẻ B20: t7 m47–m52 (t7 m27–m52 XONG). 6 lineup, tín dụng 6×273 = 1638.
+Mẻ B21: t8 m27–m34 (hoa điền nấc 8 phượng vàng lá mảnh + thuý lam; bỏ dáng 'tay giấu trong tay áo' ở hands.py để tuổi 48 cũng cầm đạo cụ). 8 lineup, tín dụng 8×273 = 2184.
+Mẻ B22: thay t8 m28, m31, m32 (hoa điền phượng quá rộng → sửa hl.py: phượng nghiêng, cánh khép, hẹp không quá khoảng giữa hai đầu mày; m31 vẽ 2 lần vì áo choàng hơi trong → lad3.py: áo choàng + đuôi t8 'heavy opaque brocade'). 4 lần vẽ + 3 tách nền: 4×270 + 3×3 = 1089.
+Mẻ B23: t8 m35–m42 (8 lineup + vẽ lại m37 vì tóc tuổi 48 bạc thái dương, m39 vì có nốt ruồi má). Phát hiện ảnh gốc m39 có nốt ruồi má → thêm m39 vào MOLE trong mjobs.py và chấm vá nốt ruồi trên fig t1–t7 m39 (mole.py + spotfix.py, por làm lại). Tín dụng 10×270 + 8×3 = 2724.
+Mẻ B24: t8 m43–m50. 8 lineup, tín dụng 8×273 = 2184. (Đã quét nốt ruồi tự động toàn bộ fig m27–m52: chỉ m39 có, đã vá ở B23.)
+Mẻ B25: t8 m51–m52 (t8 m27–m52 XONG) + lãnh cung m27–m32 (áo trơn lụa dày đục — đổi 'linen' thành 'thick plain opaque silk' trong mjobs.py; trâm gỗ, không hoa điền, đồ vật giản dị khác loại mỗi tuổi). 8 lineup, tín dụng 8×273 = 2184.
+Mẻ B26: lãnh cung m33–m40. 8 lineup, tín dụng 8×273 = 2184.
+Mẻ B27: lãnh cung m41–m48 (8 lineup + vẽ lại m41 vì tóc tuổi 48 bạc thái dương). Tín dụng 9×270 + 8×3 = 2454.
+Mẻ B28: lãnh cung m49–m52 (4 lineup + vẽ lại m49 vì tóc tuổi 48 bạc, m52 vì đốm má tuổi 48; nốt ruồi còn sót ở m52-cold-a51 đã vá tay). Tín dụng 6×270 + 4×3 = 1632. LÃNH CUNG m27–m52 XONG.
+TRẠNG THÁI C-B: XONG TOÀN BỘ m27–m52 cho t2–t8 và lãnh cung (26 nàng × 8 bộ). Cộng dồn C-B: 236 lineup (gồm 20 lineup vẽ lại) ≈ 64.7k tín dụng (33.9k các phiên trước + 30.8k phiên B15–B28). Phiên B15–B28 thêm: lad3.py câu OPACITY cho t≥6 (áo choàng/tà/tay rộng đều gấm dày đục), hl.py t8 = phượng nghiêng cánh XẾP, hẹp không rộng hơn khoảng giữa hai đầu mày; hands.py bỏ giấu tay trong tay áo ở t8; mjobs.py MOLE = m13, m26, m39 (ảnh mẫu có nốt ruồi → lệnh bỏ); m39 t1–t7 đã vá nốt ruồi (mole.py/spotfix.py). Công cụ C-B: dev/figwork/maidCB/ (bản chạy ở scratchpad cwB; pub.sh chỉ chép tệp/bản ghi m27–m52, dòng tiến độ chèn vào mục này). Thay đổi so với maidC: hl.py t7 = vàng lá dát phẳng + men son đỏ + 1 chấm hồng ngọc, t8 = phượng vàng lá mảnh uốn chữ S + thuý lam (theo spec6), cỡ t8 ~1.25–1.33× (nhỏ hơn bản 1.4×), mọi nấc thêm 'vẽ trên da, nằm thấp giữa mày'; hands.py coi giỏ/bình hoa là cùng loại hoa, thư/cuộn/sách cùng loại giấy, quạt tròn/gương cùng loại tròn; gương ghi 'polished bronze hand mirror with a shiny reflective face' (trước đó gương ra giống quạt tròn); calm.py/POST.txt thêm 'thick opaque silk and brocade… skirt and train heavy opaque brocade'; lad3.py + mjobs.py bỏ câu 'NOT cream/ivory' cho họ màu kem/ngà (m36, m44, m48).
+
+## Sửa 11/14 tối (một thợ, m01–m52): lãnh cung + hoa điền t6/t7/t8 — SẴN SÀNG KIỂM LẠI
+Công cụ: dev/figwork/maidC/fix1114/ (p.py điều phối theo pc_st.txt/st.txt; hg.py lưới 4 đầu; pc_dl.py/put.py tải lên-xuống; proc.sh = pproc→cutcheck/fixalpha→porcrop→sheet; t6new.py prompt t6 mới; pub.py chép + gộp bản ghi + commit). gens.txt/bg.txt ở đó ghi gen/tách nền của mọi bộ đã thay.
+- LÃNH CUNG 52/52 làm lại (208 hình + por + tấm xem C_mNN_cold.jpg):
+  A) sửa gpt-2-6 4k trên bản cũ: bỏ hoa tai/trang sức, cổ áo/áo trơn không thêu, tuổi 32 chín chắn hơn, tuổi 48 ra đúng tuổi (đường nhăn nhẹ khoé mắt/khoé miệng, mặt đầy hơn, tóc vẫn đen) nhưng vẫn đẹp.
+     m11, m12, m15, m16, m19, m20, m23, m24 thêm câu 'bỏ hết thêu/hoa văn' (m11 sửa thêm 1 lần cho áo trơn).
+  B) hoa tai rất dai (gpt sửa cả tấm vẫn giữ móc tai nhỏ) → cắt 4 đầu thành lưới 2×2 (1024/đầu), tải lên, sửa gpt-2-6 2k 'bỏ hoa tai',
+     dán lại CHỈ vùng tai (căn bằng phaseCorrelate, mép mềm) vào bản 4k; m13/m26/m39 dán cả đầu (lệnh kèm bỏ nốt ruồi);
+     m25 m29 m30 m33 m43 m44 m48 m49 m50 m51 tuổi 48 còn trẻ → sửa thêm trên lưới, dán cả ô 48. Tải bản ghép lên, tách nền lại.
+- HOA ĐIỀN t6 vẽ mới 24 bộ (t6new.py: hoa điền 'PAINTED … flat makeup mark', vàng lá + màu riêng + viền vàng đôi, chấm trắng phẳng thay hạt trai, KHÔNG dây/hạt treo, mũ không chuỗi trán):
+  m04 m06 m08 m14 m17 m18 m19 m21 m22 m24 m26 + C-B m28 m29 m30 m32 m33 m37 m39 m40 m41 m42 m49 m50 m51 (m17 m21 m22 m24 m26 vẽ 2 lần, chọn bản tốt hơn). m26, m39 tẩy nốt ruồi bằng mã (mole.py/spotfix.py).
+- t7: m06 bỏ nét dọc lên chân tóc (sửa gpt-2-6); soát C-B: m27, m35 có dây dọc → sửa bỏ. Các t7 C-B khác là hoa văn gọn, giữ.
+- t8: m26 quá rộng → sửa thu hẹp; soát C-B: m28 m29 m30 m33 m34 m35 m37 m38 m39 m40 m42 m44 m47 m49 m51 m52 phượng rộng hơn khoảng giữa hai đầu mày → sửa 'thu hẹp nửa bề ngang' (m33 m34 m35 m40 sửa 2 lần). m26 tẩy nốt ruồi bằng mã.
+- cutcheck: chỉ còn m38-cold-a26 1.34, m47-cold-a36 1.16 (viền bó hoa khô, đã xem trên nền xanh: sạch); t6/t8 điểm cao do tua ngọc trong suốt, ngang bản cũ, đã xem.
+- Tín dụng ước: lãnh cung 52×270 + 56×175 (lưới) + 15×270 (sửa thêm/thử) + 150×3; t6 30×270; t7/t8 25×270 ≈ 45k.
+Còn lại/ghi chú cho người kiểm: một số t6 vẫn có chấm nhỏ dưới hoa điền (m08 m14 m29 m41 m49 m50) nhưng là hoa văn phẳng, không thành dây; t8 m33/m34 vẫn rộng xấp xỉ khoảng giữa hai mày.
+SẴN SÀNG KIỂM LẠI.
+
+## Sửa 11/14 khuya (thợ C mới, sau FAIL f6ca3d67): tuổi a36/a51 bậc t1–t8 + nét lên chân tóc + phụ
+Công cụ: dev/figwork/maidC/age1114/ (ag.py = lưới đầu + dán lại; tx.py = PUT/tải theo transcript; run.sh; pub.sh; fh.py = tấm soi trán; log.txt = tên lưới, id ảnh tải lên, id bản sửa gpt-2-6).
+Cách làm (không vẽ lại thân, không tách nền lại): cắt đầu từ chính fig-maid-*.webp (900 cao) → lưới 4 cột ô 512 (2048², 2k) → images_generate gpt-2-6 2k high, ref = lưới → dán ngược
+vào fig: chỉ RGB trong mặt nạ elip (giữ alpha gốc), căn bằng phaseCorrelate. MODE: mặc định = mặt (từ mày xuống cằm, giữ hoa điền), hair = vùng tóc trừ mặt
+(chỉ dán khi bản sửa tối hơn rõ), fh = trán + chân tóc. por làm lại bằng maidC/porcrop.py cho mọi fig đổi.
+- TUỔI: 52 lưới M01–M52, mỗi lưới = 1 nàng × 8 bậc × (a36, a51) = 16 đầu; cột 1/3 → ~33 (mặt đầy, chín chắn hơn), cột 2/4 → ~48 (nếp nhăn mảnh khoé mắt, rãnh cười nhẹ,
+  mặt đầy, vẫn đẹp). Dán vùng mặt. 832 hình. Tấm so sánh từng nàng: scratchpad agC/c/Mxx.jpg (18 | 26 | 32 cũ/mới | 48 cũ/mới).
+- TÓC: nhiều a51 gốc tóc ngả xám (m15-t7, m26-t6, m27-t8, m33 nhiều bậc, m34-t5, m37-t4, m43-t5, m49…) → 27 lưới H01–H27 (416 a51 + m33-t8 a18/a26/a36) sửa 'tóc đen nâu đậm, bỏ sợi xám/tím',
+  dán vùng tóc (403/419 ô tối hơn → dán). m33-t8 hết ánh xám-tím mọi tuổi.
+- t7 bỏ vạch/dây dọc lên chân tóc: m03 m05 m08 m12 m17 m21 m24 (đủ 4 tuổi; soát hết t7 m01–m26 bằng fh.py, các nàng khác sạch). t6 a51 bỏ nét lên tóc: m13 m15 m24 (+ m05 cuống anh đào).
+  Soát t6 a51 cả 52 nàng: chỉ 4 nàng trên có nét.
+- t6 m01 m02 m11 m21 (4 tuổi): hoa điền vẽ lại phẳng (không ngọc/hạt nổi). m48-t3: đèn lồng thu nhỏ ~1/3, bỏ móc (lưới 2×2 ô 1024: lưới 2:1 bị gpt xê dịch, đã bỏ).
+- Nốt ruồi còn sót trên fig gốc: m13-t1 a18/a26, m13-t2 a18/a26, m26-t1 a18 → vá bằng cw/mole.py --fix.
+- Lưu ý: m08-t6, m14-t3, m29-t7, m49-t2 a36/a51 đi qua 2 lần làm tuổi (lưới thử test1 rồi lưới Mxx) — đã xem, vẫn ~48.
+- Tín dụng: 53 lưới tuổi + 27 lưới tóc + 6 lưới trán = 86 × 175 ≈ 15.0k (+ tải lên miễn phí).
+- Đã gộp origin/main (8062e0da): FIGURES-servants.json 2944 mục (2112 nhánh + 832 mới của main), 16 mục cung nữ thường m13/m26/m39/m52 lấy bản main, đủ tệp, không trùng.
+- Tấm xem: dev/figwork/sheets/C_age1114_A.jpg, C_age1114_B.jpg (por 19/24/32/48), C_fh1114.jpg (trán t7/t6 sau sửa). cutcheck: không tăng so với bản trước (t8 cao sẵn do tua ngọc).
+- Còn lại: không có việc chặn. (Ghi chú: m45-t1 a36 hoa điền mờ từ bản gốc — chưa sửa.)
+SẴN SÀNG KIỂM LẠI.
+
+## Sửa 11/14 đêm (theo chủ): màu tóc/da a51, hoa điền t7/t8 nhỏ, lãnh cung m45/m38
+- Chủ chê a51 "tóc đen thui, màu lệch": ct.py = chuyển màu LAB tất định (không vẽ mới): tóc a36/a51 (điểm tối, ít sắc, vùng tóc) về mean/std tóc a26 cùng bậc; da vùng mặt về mean a26 (chỉ giảm tương phản → giữ nếp nhăn). 52 × t1–t8 (m33-t8 lấy tham chiếu m33-t6 vì a26 t8 cũng bị đen).
+- t6 GIỮ NGUYÊN (chủ quyết). t7: hoa điền thu nửa cỡ cùng kiểu (13 lưới S7_n, 4 nàng × 4 tuổi); t8: phượng vàng nhỏ đối xứng kiểu c26 bao chấm đỏ, hẹp hơn khoảng giữa hai đầu mày, không xanh trên da (13 lưới S8_n). Dán MODE=fh8 (trán). Bản thử m08/m33 (P67/P8) chủ đã duyệt.
+- Lãnh cung m45/m38 a51: greyfix.py kéo sợi xám về màu tóc a26.
+- Tấm xem: sheets/C_final1114_m08.jpg, C_final1114_m33.jpg (por gốc, t1/t4/t6/t7/t8 × 4 tuổi), C_t7_1114a/b.jpg, C_t8_1114a/b.jpg (trán cả 52 nàng).
+- JSON 2944 mục, không trùng, đủ tệp; main đã gộp (không có commit mới). Tín dụng thêm ≈ 28 × 175 ≈ 4.9k.
+SẴN SÀNG KIỂM LẠI.

@@ -1,0 +1,376 @@
+C-m27-t1 79vdXHiJAL
+C-m28-t1 O6fB8xlynm
+C-m29-t1 JNaXoj2Oq4
+C-m30-t1 jUXcTqyLD0
+C-m31-t1 If6wJpatvE
+C-m32-t1 ksDzYHr16B
+C-m33-t1 ksDzYqx16B
+C-m34-t1 jUXcT16LD0
+C-m27-t1 79vdINXJAL
+C-m28-t1 TdSkLBuVNR
+C-m29-t1 s7oTeyXl8e
+C-m30-t1 vQZy6b2a47
+C-m31-t1 8aNUyQPIrU
+C-m32-t1 tCi74qVmZJ
+C-m33-t1 SytDBZJUb8
+C-m34-t1 CqG9RspEEy
+C-m35-t1 huROi3yvqL
+C-m36-t1 jUXceX1LD0
+C-m37-t1 gOIMotxSXO
+C-m38-t1 Do7xUy7pcl
+C-m39-t1 jUXceIbLD0
+C-m40-t1 P3E8fqg42C
+C-m41-t1 xSdWpttjfW
+C-m42-t1 ksDzV8E16B
+C-m43-t1 LwB0oiMswO
+C-m44-t1 9ZQtFVJNYZ
+C-m45-t1 YMLqsvMWeC
+C-m46-t1 Bh4g9KBoQR
+C-m47-t1 gOIMtnISXO
+C-m48-t1 N2FmHX96D9
+C-m49-t1 Do7xJKQpcl
+C-m50-t1 mE3JRUchJQ
+C-m51-t1 YMLqlc9WeC
+C-m52-t1 jUXcogALD0
+C-m27-t2 6AHhbAUiJO
+C-m28-t2 ksDzegs16B
+C-m29-t2 s7oTIySl8e
+C-m30-t2 gOIMm9ESXO
+C-m31-t2 cpl5Soz0eP
+C-m32-t2 jUXco4GLD0
+C-m33-t2 iGqvk9V3uK
+C-m34-t2 5jVAeqHKxe
+C-m35-t2 Bh4giB6oQR
+C-m36-t2 N2FmKRq6D9
+C-m37-t2 SytDfO5Ub8
+C-m38-t2 WDsbwDScXe
+C-m39-t2 WDsbwpUcXe
+C-m40-t2 1lpnoSdr4r
+C-m38-t1 If6wG2RtvE
+C-m27-t1 79vdqGMJAL
+C-m28-t1 1lpnm48r4r
+C-m29-t1 TdSk9CfVNR
+C-m30-t1 ov9SGkj829
+C-m31-t1 8aNUzr7IrU
+C-m32-t1 jUXca2MLD0
+C-m33-t1 1lpnmRIr4r
+C-m34-t1 EbzNDOouuO
+C-m35-t1 jUXcfsgLD0
+C-m36-t1 LwB0Cl5swO
+C-m37-t1 LwB0CgKswO
+C-m39-t1 JNaX593Oq4
+C-m40-t1 LwB0Cw4swO
+C-m41-t1 0egK9dJTfW
+C-m42-t1 u5n6ek8QLD
+C-m43-t1 ov9SzEF829
+C-m44-t1 SytDqwaUb8
+C-m45-t1 P3E8x3642C
+C-m46-t1 JNaXk63Oq4
+C-m47-t1 EbzNdK2uuO
+C-m48-t1 6AHhlnxiJO
+C-m49-t1 JNaXkAzOq4
+C-m50-t1 CqG9ej6EEy
+C-m51-t1 1lpna4Mr4r
+C-m52-t1 vQZydFra47
+C-m27-t2 lJ8V5PQgv9
+C-m28-t2 ksDzEmp16B
+C-m29-t2 P3E8lrq42C
+C-m30-t2 XmPlcYJBfo
+C-m31-t2 JNaXjx1Oq4
+C-m32-t2 gOIMKkiSXO
+C-m33-t2 EbzN8tsuuO
+C-m02-t1 ksDz5Wy16B hands
+C-m30-t1 Do7xVlXpcl hands
+C-m01-t1 5jVA5YgKxe hands
+C-m03-t1 s7oTseMl8e hands
+C-m04-t1 s7oTsdDl8e hands
+C-m05-t1 9ZQt9ElNYZ hands
+C-m06-t1 yiCoyfqPW9 hands (a32 lantern instead of sprig)
+C-m07-t1 eIOLeyudqL hands
+C-m08-t1 If6wIRxtvE hands
+C-m09-t1 p8Jjp44ehw hands
+C-m10-t1 tCiJvPZmZJ hands
+C-m11-t1 P3EINa042C hands
+C-m12-t1 P3EINfT42C hands (a48 lantern instead of sprig)
+C-m13-t1 w4hdOmW7EI hands
+C-m14-t1 ksDnxpw16B hands
+C-m15-t1 JNaBPCeOq4 hands
+C-m16-t1 1lpYjXIr4r hands
+C-m17-t1 4Rut6q59Aa hands
+C-m18-t1 huRyEF9vqL hands
+C-m19-t1 dtylIvZXSL hands
+C-m20-t1 P3EIiAl42C hands
+C-m21-t1 p8JLoatehw hands
+C-m22-t1 6AHv20CiJO hands
+C-m23-t1 P3EIiYw42C hands
+C-m24-t1 CqGNHsLEEy hands (a32 brocade box)
+C-m25-t1 6AHv2DFiJO hands (a24 handkerchief)
+C-m26-t1 4RutRJ79Aa hands
+C-m27-t1 mE3OE8DhJQ hands
+C-m28-t1 WDs5DYecXe hands
+C-m29-t1 dtyltdOXSL hands
+C-m31-t1 aF24HChfSh hands
+C-m32-t1 LwBT7UBswO hands
+C-m33-t1 Ebz655LuuO hands
+C-m34-t1 w4hd96k7EI hands
+C-m35-t1 XmPgv9mBfo hands
+C-m36-t1 iGqanKa3uK hands
+C-m37-t1 XmPgviaBfo hands
+C-m38-t1 w4hdNu07EI hands
+C-m39-t1 WDs5eJ6cXe hands
+C-m40-t1 9ZQmA1UNYZ hands
+C-m41-t1 1lpYSmtr4r hands
+C-m42-t1 u5nikdkQLD hands
+C-m43-t1 dtylabnXSL hands
+C-m44-t1 w4hdiWg7EI hands
+C-m45-t1 w4hdicS7EI hands
+C-m46-t1 bxTAl6p5Y2 hands
+C-m47-t1 0egkoHsTfW hands
+C-m48-t1 cplKBHU0eP hands
+C-m49-t1 huRyq7WvqL hands
+C-m50-t1 WDs5XbrcXe hands
+C-m51-t1 Do7jvdKpcl hands
+C-m52-t1 5jVGUrWKxe hands
+C-m01-t2 jUX0PSQLD0 hands
+C-m02-t2 JNaB2NbOq4 hands
+C-m03-t2 LwBT47uswO hands
+C-m04-t2 4RutnAN9Aa hands
+C-m05-t2 YMLbBduWeC hands
+C-m06-t2 cplK8oF0eP hands
+C-m07-t2 0egktNGTfW hands
+C-m08-t2 LwBT9QTswO hands
+C-m09-t2 1lpYOCfr4r hands
+C-m10-t2 ksDnJEP16B hands
+C-m11-t2 1lpYOQvr4r hands
+C-m12-t2 VXUrhnpMMU hands
+C-m13-t2 cplKIGe0eP hands
+C-m14-t2 Sytp3LNUb8 hands (a19 beads glance-back)
+C-m27-t2 tCiJrOlmZJ handsB
+C-m28-t2 If671YQtvE handsB
+C-m29-t2 1lpYNvor4r handsB
+C-m30-t2 xSdciESjfW handsB
+C-m31-t2 vQZPsLha47 handsB
+C-m32-t2 iGqadXN3uK handsB
+C-m33-t2 WDs5aEvcXe handsB
+C-m34-t2 jUX0RGqLD0 handsB
+C-m35-t2 rgeWALIxtc handsB
+C-m36-t2 fHA9JQaCDY handsB
+C-m37-t2 4RutXZL9Aa handsB
+C-m38-t2 nVjqEptYQD handsB
+C-m39-t2 Sytp03iUb8 handsB
+C-m40-t2 UPmeTZSwny handsB
+C-m41-t2 If67lK9tvE handsB
+C-m42-t2 O6fopcoynm handsB
+C-m40-t2 SytpTfvUb8 handsB-redo(huadian smaller, low)
+C-m43-t2 If67Sg2tvE handsB
+C-m44-t2 yiC8XBZPW9 handsB
+C-m45-t2 s7oVcTBl8e handsB (a32 bamboo fruit basket)
+C-m46-t2 lJ8M0DBgv9 handsB
+C-m47-t2 huRy7X8vqL handsB
+C-m48-t2 mE3OwByhJQ handsB
+C-m49-t2 tCiJUozmZJ handsB
+C-m50-t2 LwBTWj4swO handsB
+C-m47-t2 gOIDdzfSXO handsB-redo(sheer sleeves)
+C-m51-t2 JNaBtZoOq4 handsB
+C-m52-t2 rgeWVOIxtc handsB (a48 book instead of basket)
+C-m27-t3 SytpBRJUb8 handsB
+C-m28-t3 w4hd8z87EI handsB
+C-m29-t3 YMLb1vBWeC handsB
+C-m30-t3 XmPg7KxBfo handsB (a48 brocade box)
+C-m31-t3 3zbfQoPREY handsB
+C-m32-t3 u5ni2y7QLD handsB
+C-m33-t3 5jVG0iGKxe handsB
+C-m34-t3 gOIDoT7SXO handsB
+C-m35-t3 5jVG0AcKxe handsB
+C-m36-t3 rgeWDcXxtc handsB
+C-m37-t3 fHA9ZiLCDY handsB
+C-m38-t3 8aNw4yDIrU handsB
+C-m39-t3 yiC8aaRPW9 handsB
+C-m40-t3 gOIDoIRSXO handsB (a32 birdcage)
+C-m41-t3 rgeWof7xtc handsB (a48 lantern)
+C-m42-t3 p8JL4Ahehw handsB
+C-m43-t3 fHA9Yd9CDY handsB
+C-m44-t3 KLMzdCrkqp handsB
+C-m45-t3 iGqakOc3uK handsB (a48 book)
+C-m46-t3 N2Fh5Ja6D9 handsB
+C-m47-t3 s7oVmril8e handsB
+C-m48-t3 79vXEwAJAL handsB
+C-m49-t3 79vXQl6JAL handsB
+C-m50-t3 w4hdugO7EI handsB
+C-m51-t3 rgeWIkixtc handsB
+C-m52-t3 SytpCSQUb8 handsB
+C-m27-t4 rgeWtL2xtc handsB
+C-m28-t4 N2Fh1RH6D9 handsB
+C-m29-t4 ov9U2vF829 handsB
+C-m30-t4 gOIDCytSXO handsB (a48 teacup)
+C-m31-t4 O6fo52Oynm handsB
+C-m32-t4 5jVG8wsKxe handsB
+C-m33-t4 1lpYmyor4r handsB
+C-m34-t4 N2FhxTj6D9 handsB
+C-m35-t4 s7oVCRDl8e handsB
+C-m36-t4 SytpQGgUb8 handsB (a48 teacup)
+C-m37-t4 VXUrNQWMMU handsB
+C-m38-t4 P3EIkpd42C handsB
+C-m39-t4 XmPgGyjBfo handsB
+C-m40-t4 Ebz6enHuuO handsB
+C-m41-t4 79vX5fbJAL handsB
+C-m42-t4 w4hdbQF7EI handsB
+C-m43-t4 SytpHQYUb8 handsB
+C-m44-t4 xSdcfapjfW handsB (a24 lantern)
+C-m45-t4 ov9Unnc829 handsB
+C-m46-t4 LwBTEQtswO handsB
+C-m47-t4 rgeWCHfxtc handsB
+C-m48-t4 YMLb921WeC handsB
+C-m49-t4 5jVGhbaKxe handsB
+C-m50-t4 ksDnaka16B handsB
+C-m51-t4 8aNw0mEIrU handsB
+C-m52-t4 fHA9dH2CDY handsB
+C-m27-t5 yiC8jRBPW9 handsB
+C-m28-t5 KLMzaSwkqp handsB
+C-m29-t5 P3EIlTn42C handsB (a48 birdcage)
+C-m30-t5 VXUrAuRMMU handsB
+C-m31-t5 WDs53COcXe handsB
+C-m32-t5 If67MsqtvE handsB
+C-m33-t5 Sytpk0xUb8 handsB
+C-m34-t5 vQZPdP2a47 handsB
+C-m35-t5 fHA9BNmCDY handsB
+C-m36-t5 s7oVbpNl8e handsB
+C-m33-t5 8aNwMMeIrU handsB-redo(fan+mirror alike; a48 beads)
+C-m36-t5 lJ8MK1Ggv9 handsB-redo(fan+mirror alike; a48 teacup)
+C-m37-t5 4RutUHl9Aa handsB
+C-m38-t5 5jVGEdAKxe handsB
+C-m39-t5 LwBT5v0swO handsB
+C-m40-t5 ov9UMA3829 handsB
+C-m41-t5 3zbfysNREY handsB
+C-m42-t5 vQZPBMoa47 handsB
+C-m43-t5 u5nivZbQLD handsB (a48 birdcage, two jade avoided)
+C-m44-t5 1lpYqTtr4r handsB
+C-m45-t5 JNaBghoOq4 handsB
+C-m46-t5 u5nivnrQLD handsB
+C-m47-t5 rgeWbdmxtc handsB
+C-m48-t5 iGqaPK13uK handsB
+C-m49-t5 jUX0KtmLD0 handsB
+C-m50-t5 TdS1nPLVNR handsB
+C-m51-t5 jUX0rpMLD0 handsB
+C-m52-t5 tCiJ8NcmZJ handsB
+C-m27-t6 N2Fh4Qw6D9 handsB
+C-m28-t6 fHA9vAmCDY handsB
+C-m29-t6 O6fo7Ezynm handsB
+C-m30-t6 s7oVjttl8e handsB (a24 birdcage, avoid 2 jade)
+C-m31-t6 SytplfOUb8 handsB (a24 box)
+C-m32-t6 ksDn5oz16B handsB
+C-m29-t6 rgeWrBZxtc handsB-redo(sheer train)
+C-m30-t6 nVjqnSXYQD handsB-redo(sheer train)
+C-m33-t6 lJ8Dy9ngv9 handsB
+C-m34-t6 EbziKL7uuO handsB
+C-m35-t6 ov9wfqd829 handsB
+C-m36-t6 79vB6Y4JAL handsB
+C-m37-t6 jUXT7ETLD0 handsB
+C-m38-t6 Do7LIACpcl handsB
+C-m39-t6 P3EtZsm42C handsB
+C-m40-t6 N2FvGUN6D9 handsB
+C-m41-t6 3zbCVwLREY handsB
+C-m42-t6 p8Jsfn9ehw handsB
+C-m43-t6 XmPSuTbBfo handsB
+C-m44-t6 If6JqegtvE handsB
+C-m45-t6 CqG6xmeEEy handsB
+C-m46-t6 6AHa04niJO handsB
+C-m47-t6 4RumYyg9Aa handsB
+C-m48-t6 6AHa06ciJO handsB
+C-m41-t6 gOIpR4PSXO handsB-redo(sheer cape)
+C-m49-t6 9ZQhTJyNYZ handsB
+C-m50-t6 XmPSHp5Bfo handsB
+C-m51-t6 6AHaM6niJO handsB
+C-m52-t6 LwBV3lIswO handsB
+C-m27-t7 Bh4UbtaoQR handsB
+C-m28-t7 MBwjEXUDCm handsB
+C-m29-t7 KLMnPLBkqp handsB
+C-m30-t7 79vBn65JAL handsB
+C-m51-t6 fHANl0VCDY handsB-redo(sheer sleeves; +OPACITY)
+C-m29-t7 JNaoWbcOq4 handsB-redo(sheer layers; +OPACITY)
+C-m30-t7 xSd0ifgjfW handsB-redo(sheer layers; +OPACITY)
+C-m31-t7 4RumDgF9Aa handsB
+C-m32-t7 5jVz9EJKxe handsB
+C-m33-t7 0eg1EGnTfW handsB
+C-m34-t7 5jVz9H4Kxe handsB
+C-m35-t7 yiCIVJrPW9 handsB
+C-m36-t7 ksDY6kN16B handsB
+C-m37-t7 VXUxFpdMMU handsB
+C-m38-t7 KLMn6xMkqp handsB
+C-m35-t7 UPmdc2Jwny handsB-redo(sheer overskirt)
+C-m39-t7 9ZQhB8pNYZ handsB
+C-m40-t7 s7oMY08l8e handsB
+C-m41-t7 UPmdTe2wny handsB
+C-m42-t7 ksDYZYI16B handsB
+C-m43-t7 tCiOgPjmZJ handsB
+C-m44-t7 gOIpcB7SXO handsB
+C-m45-t7 rgecADPxtc handsB
+C-m46-t7 4RumXEV9Aa handsB
+C-m45-t7 6AHaIOOiJO handsB-redo(a48 greyish hair)
+C-m47-t7 lJ8D05Egv9 handsB
+C-m48-t7 huRP7d8vqL handsB
+C-m49-t7 P3EtBU042C handsB
+C-m50-t7 bxTGRuH5Y2 handsB
+C-m51-t7 P3EtBJM42C handsB
+C-m52-t7 CqG6PanEEy handsB
+C-m27-t8 LwBVTISswO handsB
+C-m28-t8 O6f8oQkynm handsB
+C-m29-t8 p8JsLNuehw handsB
+C-m30-t8 xSd0cmnjfW handsB
+C-m31-t8 TdSr19MVNR handsB
+C-m32-t8 1lpWYhGr4r handsB
+C-m33-t8 gOIpDH3SXO handsB
+C-m34-t8 xSd0cEKjfW handsB
+C-m28-t8 UPmd8Puwny handsB-redo(huadian too wide; folded-wing phoenix)
+C-m31-t8 mE3yNQihJQ handsB-redo(huadian too wide)
+C-m32-t8 s7oMdP4l8e handsB-redo(huadian too wide)
+C-m31-t8 s7oMXexl8e handsB-redo2(sheer mantle; +opaque brocade mantle in lad3)
+C-m35-t8 O6f8assynm handsB
+C-m36-t8 EbziGmAuuO handsB
+C-m37-t8 MBwjUc8DCm handsB
+C-m38-t8 1lpWDkTr4r handsB
+C-m39-t8 nVjbjWGYQD handsB
+C-m40-t8 xSd0dlojfW handsB
+C-m41-t8 w4hXh4Y7EI handsB
+C-m42-t8 9ZQhQ2sNYZ handsB
+C-m37-t8 gOIpmipSXO handsB-redo(a48 grey temples)
+C-m39-t8 xSd0B9PjfW handsB-redo(cheek mole; MOLE+=m39)
+C-m43-t8 yiCIxcEPW9 handsB
+C-m44-t8 rgecCiPxtc handsB
+C-m45-t8 cplk6Cz0eP handsB
+C-m46-t8 aF29pUAfSh handsB
+C-m47-t8 jUXTuznLD0 handsB (huadian wording: four tiny cinnabar dots)
+C-m48-t8 6AHagI6iJO handsB
+C-m49-t8 jUXTuc0LD0 handsB
+C-m50-t8 s7oMFpRl8e handsB
+C-m51-t8 rgecFw3xtc handsB
+C-m52-t8 TdSrAIpVNR handsB
+C-m27-tcold huRPd5MvqL coldB(silk)
+C-m28-tcold 4RumSWI9Aa coldB(silk)
+C-m29-tcold p8JsYurehw coldB(silk)
+C-m30-tcold 0eg12fNTfW coldB(silk)
+C-m31-tcold 3zbCOBHREY coldB(silk)
+C-m32-tcold 4RumSeE9Aa coldB(silk)
+C-m33-tcold If6OmcJtvE coldB(silk)
+C-m34-tcold p8JldAGehw coldB(silk)
+C-m35-tcold eIOgXnldqL coldB(silk)
+C-m36-tcold aF2NCBIfSh coldB(silk)
+C-m37-tcold 6AHf3OpiJO coldB(silk)
+C-m38-tcold xSdTL5TjfW coldB(silk)
+C-m39-tcold rge0j5Bxtc coldB(silk)
+C-m40-tcold O6fIP7mynm coldB(silk)
+C-m41-tcold Bh4wtpFoQR coldB(silk)
+C-m42-tcold VXUje0EMMU coldB(silk)
+C-m43-tcold 9ZQv390NYZ coldB(silk)
+C-m44-tcold 79vo4OLJAL coldB(silk)
+C-m45-tcold UPmXyP3wny coldB(silk)
+C-m46-tcold huR4EQNvqL coldB(silk)
+C-m47-tcold P3EmiZl42C coldB(silk)
+C-m48-tcold YMLKVd1WeC coldB(silk)
+C-m41-tcold yiCtiAYPW9 coldB-redo(a48 grey temples)
+C-m49-tcold O6fIircynm B28-bad-grey
+C-m50-tcold JNa86sEOq4 B28
+C-m51-tcold UPmX4jgwny B28
+C-m52-tcold u5nRKaJQLD B28-bad-spots
+C-m49-tcold jUXVJNkLD0 B28 redo
+C-m52-tcold gOIe42WSXO B28 redo

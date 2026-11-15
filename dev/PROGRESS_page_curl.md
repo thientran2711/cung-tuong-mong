@@ -1,6 +1,6 @@
 # PROGRESS: kit sách · lật trang cong (review/page-curl)
 
-KIT READY: page-curl v2 (jbook.js + KIT.md §32.1/32.1b; ảnh `dev/shots/curl2/`)
+KIT READY: page-curl v2 (jbook.js + KIT.md §34.1/34.1b; ảnh `dev/shots/curl2/`)
 
 Nhánh `review/page-curl` từ origin/review/fold-layout (đã gộp tới e7debd1a). Không gộp main; chờ kiểm duyệt.
 
@@ -15,7 +15,7 @@ Nhánh `review/page-curl` từ origin/review/fold-layout (đã gộp tới e7deb
   - `kitBookPic({...})`: trang tranh (cảnh theo KIT_FANCHOR, người toàn thân đứng trên đường chân, bóng người lạ, nhãn chú thích, ô thử đồ).
   - Da giấy `.kpaper` dùng chung.
 - `j87` sổ tuần: thay lật cứng rotateY bằng `kitCurl` (vuốt theo ngón tay, nút ‹ ›, phím; spread trên iPad, một trang trên điện thoại).
-- KIT.md §32 (API + bảng trang trái/phải đã duyệt) và §27 (dòng lật trang).
+- KIT.md §34 (API + bảng trang trái/phải đã duyệt) và §27 (dòng lật trang).
 - Thử: `dev/test/page-curl.js` (khung giữa lật đóng băng rAF, lật lùi, kéo tay, giảm chuyển động), `dev/test/book-mock.js` (mockup).
 
 ## v2 (15/11, theo OWNER_DECISIONS 03:30Z + 04:00Z)
@@ -32,7 +32,7 @@ Nhánh `review/page-curl` từ origin/review/fold-layout (đã gộp tới e7deb
 - Dư đồ = BẢN ĐỒ DA (kitLeather, CSS, không vẽ mới): da thuộc có vân, mép cháy, viền da không đều, chỉ khâu, hai đầu cuộn, tranh bản đồ
   đặt trên da; đầy khung, không gáy/không trang. BỎ dải thông tin trên bản đồ (mùa · còn khắc · chú thích đi lại · chip lễ tết).
   Vào Dư đồ: bản đồ trải ra từ giữa (kitUnroll 620 ms). kitBookSpread `double` cũng là bản đồ da phủ cả sách.
-- KIT.md §32.1 (v2) + §32.1b kitLeather. Thử: `dev/test/curl-live.js` (game thật: bản đồ, khung giữa lật tab, lật lùi, đi hết các tab,
+- KIT.md §34.1 (v2) + §34.1b kitLeather. Thử: `dev/test/curl-live.js` (game thật: bản đồ, khung giữa lật tab, lật lùi, đi hết các tab,
   giảm chuyển động), `dev/test/page-curl.js` (sổ tuần).
 - SÁCH SỐNG (kitBookLive, 15/11 theo lệnh ưu tiên): game thật = cuốn sách mở. iPad ngang: sân khấu phòng = trang tranh trái, bảng tab = trang
   chữ phải, gáy giữa, bìa chàm phía sau; điện thoại: một trang giấy. Mọi tab, cả đường cung nữ. Dư đồ không phải trang (da).

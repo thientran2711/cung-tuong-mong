@@ -194,7 +194,7 @@ accInfo=function(){if(!S||Q.length)return;const R=n=>`<b>${n}</b>`;
  <p>${R("Thái y viện, Ngự hoa viên")}: sáng, chiều. Tối đóng cửa.</p>
  <p>${R("Kính sự phòng")}: phi tần nào cũng vào. ${R("Trường Môn viện")}: ai cũng vào, bị thấy: Danh -2.</p>
  <p>${R("Cung của ngươi")}: luôn vào được.</p>
- <p>Chỗ xám: không vào được lúc này; chạm để xem lý do và cách vào. <b>Lẻn vào</b>: tốn khắc, bị bắt Danh -8 và bị phạt.</p></div>`,btn:"Đã hiểu"});showModal()};
+ <p>Chỗ có dấu khóa: không vào được lúc này; chạm vào tên để xem lý do và cách vào. <b>Lẻn vào</b>: tốn khắc, bị bắt Danh -8 và bị phạt.</p></div>`,btn:"Đã hiểu"});showModal()};
 /* NPC guests keep the same courtesy: when a consort spends the buổi in a palace whose chủ vị outranks her, she greets
    (chủ vị thiện cảm +okAff toward her) or does not (the same scaled loss) */
 (function(){const pw=placeWhere;placeWhere=function(){const r=pw.apply(this,arguments);try{const C=ACC_ETQ;if(C.mode==="optional")return r;const W=S.where||{};

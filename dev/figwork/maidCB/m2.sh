@@ -1,0 +1,1 @@
+cd "$(dirname "$0")"; bash mid2.sh "$@" | sed 's/Outfit for all four (rank-[0-9][^)]*)[^:]*: a NEW outfit, /OUT: /; s/Forehead: a huadian ornament between the brows: /HD: /; s/; size: [^;]*; it grows only.*the same huadian on all four figures. Poses (NEW.*left to right: / || /'
