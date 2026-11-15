@@ -512,3 +512,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (17:45Z) Hoa điền: một số bậc (Thường tại, Tần…) vẫn to → đo theo bậc, đề xuất cỡ nhỏ hơn cho mọi bậc, gửi mẫu trước.
 - (17:45Z) Luật kit-trước phải THỰC THI: dán nguyên văn vào mọi lời giao việc/duyệt; người duyệt đánh rớt chỗ tự chế; thợ ghi yêu cầu kit thiếu vào dev/kit/KIT_REQUESTS.md. Luật nằm ở đầu dev/handover/WORKER_BRIEF.md.
 - (17:45Z) Phiên 5 archive theo lệnh sếp.
+- (≈17:50Z, sếp nói trực tiếp phiên 6) Thanh đầu trang — SỬA 17:36Z: nhóm TRÁI: Sắc · Tài · Tâm cơ · Đức · Danh · Sủng; nhóm PHẢI: chỉ Bạc · Sức. (Hiểu 'Danh sủng' = Danh rồi Sủng.) Giữ thẳng hàng ±1px, thanh dưới Sức/Sủng, giải nghĩa, đích số bay.
