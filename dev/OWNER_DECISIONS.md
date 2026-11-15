@@ -553,3 +553,6 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - Young-boy portraits: ~140 are big-face close-ups. Zoom/crop the small-face ones to match the big-face ones instead of redrawing.
 - Not every person in the game needs the same scale, but within EACH GROUP of people (boys, girls, consorts, maids, eunuchs, men...) portraits must share one face scale, so switching person to person never jumps big/small. Fix the whole class (scan all groups).
 - Makeup mini-game, "diêm dúa" side: like modern fashion/makeup games, the colours she picks (eyeshadow, blush, lipstick; eyebrow if any) must show in THOSE EXACT COLOURS on her own character picture (portrait + figure). Today only blush shows; add lips and eyes without making the picture look off. The "đẹp" look already approved stays as is.
+
+## 15/11 ~19:15Z — Thái y pulse check (owner question)
+- Owner: no option to invite the Thái y to take her pulse; how does she know if she is pregnant or how her health is? Does the Thái y come monthly/automatically? (Coordinator answered with today's facts + proposal; waiting for her pick.)
