@@ -6,7 +6,9 @@
    (default 755x1000@2,1000x755@2,1180x820@2,844x390@3). Images missing from a sparse checkout are fetched from the live site. */
 const {chromium}=require('playwright');const fs=require('fs');const https=require('https');
 /* start() may finish after the loading screen: wait for the life, and start again while it is a servant life */
-async function kcWait(p){for(let i=0;i<40;i++){await p.waitForFunction(()=>typeof S!=="undefined"&&S&&S.name,null,{timeout:90000});if(!(await p.evaluate(()=>typeof isSrv==="function"&&isSrv())))return;await p.evaluate(()=>{S=null;start()})}}
+async function kcWait(p){for(let i=0;i<40;i++){await p.waitForFunction(()=>typeof S!=="undefined"&&S&&S.name,null,{timeout:90000});await new Promise(r=>setTimeout(r,1500));
+ /* r6: the life can be replaced after the loading screen; check again after it settles, and never test a servant life (no Tư trang tab) */
+ if(!(await p.evaluate(()=>typeof isSrv==="function"&&isSrv()||(S&&S.origin&&S.origin.k==="cnv"))))return;await p.evaluate(()=>{S=null;start()})}}
 const [,,PAGE,OUT,SIZES,OLD]=process.argv;fs.mkdirSync(OUT,{recursive:true});
 const sleep=t=>new Promise(r=>setTimeout(r,t));const LIVE='https://thientran2711.github.io/cung-tuong-mong/';const cache=new Map();
 const live=p=>cache.has(p)?Promise.resolve(cache.get(p)):new Promise(res=>https.get(LIVE+p,r=>{const c=[];r.on('data',d=>c.push(d));r.on('end',()=>{const v={status:r.statusCode,body:Buffer.concat(c),ct:r.headers['content-type']||''};if(cache.size<500)cache.set(p,v);res(v)})}).on('error',()=>res({status:404,body:Buffer.alloc(0),ct:''})));
