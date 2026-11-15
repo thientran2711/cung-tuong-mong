@@ -139,8 +139,12 @@ Root causes and fixes (all in dev/build, site rebuilt with dev/site/build_site.s
 3. Harness (coop-e2e): COOP_OLD_REF env for the old-save build (the shared checkout's origin/main ref was moved to an item-events
    merge; use COOP_OLD_REF=ed7271deb); week-advance wait 90 s; old page waits for its code and uses __nlInner (start() left S unset
    behind Luân hồi → "reading 'buoi'"); tapText retries a detached button. night-day.js: new 5th case "stale".
-Tests so far (load 37–66): night-day 5 cases ok (stale: day stays, buổi sáng not ended, stale=1). coop-e2e plain on 0ef282c1e:
-run 1 59/59, run 4 59/59; runs 2, 3 aborted by harness (old.html S unset; detached click) — both harness fixes are now in.
-NEXT: finish plain coop-e2e to ≥5 complete runs, COOP_NIGHTS=1 ×2, book-person 5 sizes, sheet-turn 5 sizes; then push
-fast-forward to review/fix-float (it is an ancestor of 78c9106d4) and report. Runner: dev worktree .ce/run.sh (not committed):
-`COOP_OLD_REF=ed7271deb COOP_NIGHTS=0|1 node dev/test/coop-e2e.js <outdir>`.
+Tests on 677e54e6b (build = 0ef282c1e; load 37–66):
+- night-day: 5 cases ok (steal, road, ksp, morning: day 0 → 1; stale: the day stays, its buổi sáng is not ended, stale=1).
+- coop-e2e plain (COOP_OLD_REF=ed7271deb): 5 complete runs, all 59/59. 2 more runs were aborted by the harness (old.html left S unset;
+  a button detached before the click); both are fixed in the harness. Before the fixes (724d6841a / e38280c07): plain run 1 = week 3
+  "same date [[1,3,2],[1,4,0]]" (stale room replay), and a stall at buổi 0:0 with both seats bended locally (lost bend).
+- coop-e2e COOP_NIGHTS=1: 2 runs, 59/59 (8 and 10 forced nights).
+- book-person at 755x1000, 1000x755, 1180x820, 1366x1024 and 844x390: ok, bad [] at every size, errs [].
+- sheet-turn at the same 5 sizes: exit 0, one #panel, ids 0, errs [].
+RESULT r8: ready for review.
