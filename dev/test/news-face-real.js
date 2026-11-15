@@ -50,7 +50,7 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
  await p.evaluate(j=>{localStorage.setItem(SK(1),j);const kl=document.getElementById('kload');if(kl)kl.remove();showTitle()},json);await sleep(500);
  await p.evaluate(()=>{const T=document.getElementById('title');T.hidden=false;const b=document.querySelector('[data-load="1"]');b.click()});await sleep(2500);
  const res=await p.evaluate(async([WEEKS])=>{const W=t=>new Promise(r=>setTimeout(r,t));const file=s=>String(s||'').replace(/^.*\//,'').replace(/\?.*$/,'');
-  const out={name:S.name,rank:S.rank,week:wk(),ref:{},card:{},news:[],book:[],dlgs:{}};
+  const out={name:S.name,rank:S.rank,week:wk(),ref:{},card:{},news:[],book:[],dlgs:{},texts:[]};
   const closeAll=()=>{document.getElementById('modal').hidden=true;Q.length=0};
   /* reference: live Hậu cung strip (+ card) */
   const __tab0=tab;closeAll();window.__rb=false;tab='rv';render();await W(300);
@@ -66,6 +66,13 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
   /* Ta: the "Ta" tile of the Ân oán strip */
   tab='rel';relSel=null;PG.rel=null;render();await W(300);{const P=document.getElementById('panel');const t=[...P.querySelectorAll('.pstrip .pface')].find(x=>/^(Ta|Ngươi)$/.test(lab(x)));
    out.ref.__ME={src:t?tsrc(t):'',col:t?tcol(t):'',tile:t?lab(t):'(no Ta tile)',pMe:file(pMe().src)}}
+  /* name+title builders, every person: "<title or its first words> <name> sang." through kitFacts must not repeat the title */
+  try{const P=(typeof k61All==='function'?k61All():[]).concat(rivals,[S.emp]).filter(Boolean);const seen=new Set();const bad=[];let n=0;
+   for(const p of P){if(seen.has(p)||!p.name||p===S)continue;seen.add(p);const t=kitTitle(p);if(!t)continue;const w=t.split(' ');
+    for(const k of [...new Set([w.length,w.length>=3?2:w.length])]){const pre=w.slice(0,k).join(' ');const h=kitFacts([`${pre} ${p.name} sang.`],{group:false});const d=document.createElement('div');d.innerHTML=h;
+     const txt=((d.querySelector('.kft')||d).textContent).replace(/\s+/g,' ').trim();n++;const i=txt.indexOf(p.name);const before=txt.slice(0,i);
+     if((before.match(new RegExp(w[0],'g'))||[]).length>1)bad.push(txt.slice(0,90))}}
+   out.titleUnit={n,bad:bad.length,ex:bad.slice(0,8)}}catch(e){out.titleUnit={err:e.message}}
   tab=__tab0;render();
   /* who is named first in a row */
   const names=rivals.map(v=>[v.name,v]).sort((a,b)=>b[0].length-a[0].length);
@@ -78,17 +85,23 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
   /* play */
   const t0=wk();let guard=0;
   while(wk()<t0+WEEKS&&guard++<600&&!S.dead){
-   const dawn=document.getElementById('dawn');if(dawn&&!dawn.hidden&&dawn.innerHTML){out.book.push(...readRows(dawn).map(r=>Object.assign(r,{wk:wk()})));
+   const dawn=document.getElementById('dawn');if(dawn&&!dawn.hidden&&dawn.innerHTML){out.texts.push(dawn.innerText);out.book.push(...readRows(dawn).map(r=>Object.assign(r,{wk:wk()})));
     const go=dawn.querySelector('#dawn-go');try{if(go)go.click();else{dawn.hidden=true;dawn.innerHTML='';document.body.classList.remove('kbk-open')}}catch(e){}await W(400);dawn.hidden=true;dawn.innerHTML='';document.body.classList.remove('kbk-open');continue}
-   const m=document.getElementById('modal');if(!m.hidden){const t=(m.querySelector('h2,h3,.dt,.mt')||{}).textContent||'';out.dlgs[t.slice(0,30)]=(out.dlgs[t.slice(0,30)]||0)+1;
+   const m=document.getElementById('modal');if(!m.hidden){out.texts.push(m.innerText);const t=(m.querySelector('h2,h3,.dt,.mt')||{}).textContent||'';out.dlgs[t.slice(0,30)]=(out.dlgs[t.slice(0,30)]||0)+1;
     if(/Tin trong cung/.test(m.textContent.slice(0,200))){out.news.push(...readRows(m).map(r=>Object.assign(r,{wk:wk(),raw:m.querySelectorAll('.kfact').length})));if(!m.querySelector('.kfact'))out.news.push({noRows:1,html:m.innerHTML.slice(0,300)})}
     const bt=[...m.querySelectorAll('button')].filter(x=>x.offsetParent&&!/kit-x/.test(x.className));try{(bt[0]||{click(){closeAll()}}).click()}catch(e){closeAll()}await W(150);if(!m.hidden&&Q.length===0)m.hidden=true;continue}
    try{nextBuoi()}catch(e){out.err=e.message;break}await W(120)}
+  try{out.texts.push((S.logs||[]).map(x=>typeof plain==='function'?plain(String(x&&x.t||x)):String(x)).join('\n'))}catch(e){}
   out.weeks=wk()-t0;return out},[WEEKS]);
  if(OUT)await p.screenshot({path:`${OUT}/news-face-real.jpg`,type:'jpeg',quality:60});
  const all=[...res.news.map(r=>Object.assign({at:'news'},r)),...res.book.map(r=>Object.assign({at:'book'},r))].filter(r=>!r.noRows);
  const judged=all.filter(r=>r.ok!==null);const bad=judged.filter(r=>!r.ok);
  const sum={world:info,player:{name:res.name,rank:res.rank,week:res.week},weeksPlayed:res.weeks,ref:res.ref,cardN:Object.keys(res.card).filter(k=>res.card[k]).length,cardVsStrip:Object.keys(res.card).filter(k=>res.card[k]&&res.ref[k]&&res.card[k]!==res.ref[k].src).map(k=>[k,res.card[k],res.ref[k].src]),
   rows:{news:res.news.length,book:res.book.length,judged:judged.length,ok:judged.length-bad.length,bad:bad.length,noFace:all.filter(r=>r.who&&!r.face).length,stranger:judged.filter(r=>/unknown-/.test(r.src)).length},bad:bad.slice(0,30),sample:judged.slice(0,12),dlgs:res.dlgs,err:res.err,errs:errs.slice(0,8)};
+ /* doubled titles anywhere in the dialogs / books / Sổ ghi text: the same title twice in a row, or two titles before one name */
+ const TT='Thái tử|Hoàng tử|Công chúa|Hoàng hậu|Hoàng quý phi|Quý phi|Phi|Tần|Quý nhân|Thường tại|Đáp ứng|Thái hậu|Hoàng thượng|Phế phi|Thái y|Thị vệ|Ma ma|Cô cô|Cung nữ thân tín|Cung nữ|Thái giám|Tổng quản|Nữ quan|Nhũ mẫu|Nhạc sư|Họa sư|Tể tướng|Thượng thư|Tú nữ';
+ const DBL=new RegExp('(?:^|[^\\p{L}])((?:'+TT+') (?:'+TT+') \\p{Lu})','giu');const dbl={};
+ for(const t of res.texts)for(const line of String(t).split('\n')){let m;DBL.lastIndex=0;while((m=DBL.exec(line))){const L=m[1].slice(-1);if(L!==L.toUpperCase()||L===L.toLowerCase())continue;const k=m[1].slice(0,-2);if(/ Tần$/.test(k))continue;/* Tần = also a surname */if(/^(Hoàng thượng|Thái hậu) /.test(k)&&!/^(\S+ \S+) \1$/.test(k))continue;(dbl[k]=dbl[k]||[]).push(line.slice(0,140))}}
+ sum.doubleTitles=Object.fromEntries(Object.entries(dbl).map(([k,v])=>[k,{n:v.length,ex:[...new Set(v)].slice(0,3)}]));sum.textsN=res.texts.length;sum.titleUnit=res.titleUnit;
  if(OUT)fs.writeFileSync(`${OUT}/news-face-real.json`,JSON.stringify({sum,all},null,1));
  console.log(JSON.stringify(sum,null,1));await b.close()})().catch(e=>{console.error(e);process.exit(1)});

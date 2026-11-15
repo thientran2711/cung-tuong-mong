@@ -14,8 +14,17 @@ function kitTitle(p){try{if(!p)return"";if(p===S)return"";if(S&&p===S.emp)return
 function kitPersonCol(p){try{if(typeof rivals!=="undefined"&&rivals.includes(p))return p.out?KIT_COLD_COL:RCOL[p.queen?7:cl(p.rank||0,0,7)];if(p===S)return S.out?KIT_COLD_COL:RCOL[cl(S.rank||0,0,7)];
  const d=kitDecor(kitFace(p));return d.col||"#8a7350"}catch(e){return"#8a7350"}}
 function kitName(p,o){o=o||{};if(!p)return"";if(p===S&&o.named){const srv=typeof isSrv==="function"&&isSrv();return `<b class="kname" style="--rc:${kitPersonCol(S)}">${srv?"":`<span class="kti">${S.out?"Phế phi":RANKS[S.rank].n}</span> `}${S.name}</b>`}if(p===S)return `<b class="kname kme" style="--rc:${kitPersonCol(S)}">${o.cap?"Ngươi":"ngươi"}</b>`;
- const t=o.noTitle?"":kitTitle(p);const nm=S&&p===S.emp?"":S&&(p===S.thO||p.kind==="th")?"":(p.name||"");
+ const t=o.noTitle?"":kitTitle(p);let nm=S&&p===S.emp?"":S&&(p===S.thO||p.kind==="th")?"":(p.name||"");if(t&&nm)nm=kitTitledName(t,nm);else if(o.pre&&nm)nm=kitTitledName(String(o.pre).trim().split(" ").slice(-5).join(" "),nm);/* old saves: "Tổng quản thái giám Tổng quản Lý Liên Anh" in a stored log */
  return `<b class="kname" style="--rc:${kitPersonCol(p)}">${t?`<span class="kti">${t}</span>${nm?" ":""}`:""}${nm}</b>`}
+/* KIT 9 (owner 11/15 "Cung nữ Cung nữ thân tín …", "Tổng quản thái giám Tổng quản Lý Liên Anh"): ONE rule for every title + name builder —
+   some names carry their own title ("Tổng quản Lý Liên Anh"); the words of the name's start that the title already says are dropped.
+   kitTitledName(t,n) → the name part to print after t; kitTitled(t,n) → "t n" without a repeat (case ignored). */
+/* only words that are titles, never a surname that is also a rank word (Tần Khinh Vũ, rank Tần) */
+const KIT_NAME_TITLE_RX=/^(tổng quản|thái giám|cung nữ|cung nữ thân tín|thái y|ma ma|cô cô|thị vệ|nữ quan|nhũ mẫu|nhạc sư|họa sư|thợ \S+|tể tướng|thượng thư|thị lang|tướng quân|công tử|quan)$/;
+function kitTitledName(t,n){t=String(t||"").trim();n=String(n||"").trim();if(!t||!n)return n;const tl=t.toLowerCase(),w=n.split(" ");
+ for(let k=Math.min(4,w.length-1);k>=1;k--){const pre=w.slice(0,k).join(" ").toLowerCase();if(!KIT_NAME_TITLE_RX.test(pre))continue;if(tl===pre||tl.startsWith(pre+" ")||tl.endsWith(" "+pre)||tl.includes(" "+pre+" "))return w.slice(k).join(" ")}return n}
+function kitTitled(t,n){const m=kitTitledName(t,n);return t?(m?`${t} ${m}`:t):m}
+window.kitTitled=kitTitled;window.kitTitledName=kitTitledName;
 function kitFaceH(p,size){try{if(!p)return"";if(p.src!==undefined||p.ini!==undefined)return mdH(p,size||"sm");return mdH(kitFace(p),size||"sm")}catch(e){return""}}
 /* one person line: face + title/name + sub line (chips allowed) */
 function kitPersonLine(p,o){o=o||{};return `<div class="kpl">${kitFaceH(p,o.size||"sm")}<span class="kplt">${kitName(p,{cap:true})}${o.sub?`<small>${o.sub}</small>`:""}</span>${o.chips?`<span class="kplc">${o.chips}</span>`:""}</div>`}
@@ -56,10 +65,14 @@ const KP_DELTA=/((?:[A-Za-zÀ-ỹĐđ]+ ){0,2}[A-Za-zÀ-ỹĐđ]+) ([+\-−])(\d
 function kpChipify(html){return kpMapText(html,s=>s.replace(KP_DELTA,(m,l,sg,n)=>{if(/^(năm|tháng|tuần|ngày|tuổi|lần|khắc)$/i.test(l.split(" ").pop()))return m;const v=(sg==="+"?1:-1)*parseFloat(n.replace(",","."));return kitChip(l,v)}))}
 /* decorate the first mention of each person: rank title + name in rank colour (title not doubled) */
 /* the text already names a (different) title right before the name, e.g. "Thái tử" + a Hoàng tử: keep the text's title, never "Thái tử Hoàng tử X" */
-const KP_TITLE_RX=/(Thái tử|Hoàng tử|Công chúa|Hoàng hậu|Hoàng quý phi|Quý phi|Phi|Tần|Quý nhân|Thường tại|Đáp ứng|Thái hậu|Hoàng thượng|Phế phi|Thái y|Thị vệ|Ma ma|Cô cô) $/;
+/* owner 11/15 ("Cung nữ Cung nữ thân tín Tiểu Đào"): ANY title the text already puts before the name keeps the text's words — court ranks,
+   servants, officials, artisans, family words — and so does the start of the person's own title ("Cung nữ" before a "Cung nữ thân tín") */
+const KP_TITLE_RX=/(Thái tử|Hoàng tử|Công chúa|Hoàng hậu|Hoàng quý phi|Quý phi|Phi|Tần|Quý nhân|Thường tại|Đáp ứng|Thái hậu|Hoàng thượng|Phế phi|Thái y|Thị vệ|Ma ma|Cô cô|[Cc]ung nữ(?: thân tín)?|[Tt]hái giám|[Tt]ổng quản|[Nn]ữ quan|[Nn]hũ mẫu|[Nn]hạc sư|[Hh]ọa sư|[Tt]hợ [^ ]+|[Tt]ể tướng|[Tt]hượng thư|[Tt]hị lang|[Tt]ướng quân|[Cc]ông tử|[Tt]iểu chủ|[Cc]hủ tử|[Nn]ương nương|[Tt]ú nữ) $/;
+/* the text ends with the first word(s) of t (her own title, shortened) */
+function kpTitleTail(pre,t){const w=String(t||"").split(" ").filter(Boolean);for(let k=w.length;k>=1;k--){const x=w.slice(0,k).join(" ")+" ";if(pre.endsWith(x)||pre.toLowerCase().endsWith(x.toLowerCase()))return true}return false}
 function kpPeopleIn(html,people){const who=[];let h=html;const plain=kpPlain(html);
  for(const [n,p] of people){if(!plain.includes(n)||who.includes(p))continue;who.push(p);let done=false;
-  h=kpMapText(h,s=>{if(done)return s;const i=s.indexOf(n);if(i<0)return s;done=true;const t=kitTitle(p);let pre=s.slice(0,i);if(t&&pre.endsWith(t+" "))pre=pre.slice(0,-(t.length+1));const own=t&&KP_TITLE_RX.test(pre);return pre+kitName(p,{named:p===S,noTitle:own})+s.slice(i+n.length)})}
+  h=kpMapText(h,s=>{if(done)return s;const i=s.indexOf(n);if(i<0)return s;done=true;const t=kitTitle(p);let pre=s.slice(0,i);if(t&&pre.endsWith(t+" "))pre=pre.slice(0,-(t.length+1));const own=!!t&&(KP_TITLE_RX.test(pre)||kpTitleTail(pre,t));return pre+kitName(p,{named:p===S,noTitle:own,pre:own?pre:""})+s.slice(i+n.length)})}
  /* owner 11/15 (news rows showed the wrong person): the row's face = the person named FIRST in the sentence (the subject), not the one
     with the longest name — names are matched longest-first (no partial overlaps), then ordered by where they stand in the text */
  if(who.length>1){const at=p=>{const e=people.find(x=>x[1]===p);const i=e?plain.indexOf(e[0]):-1;return i<0?1e9:i};who.sort((a,b)=>at(a)-at(b))}
@@ -71,7 +84,12 @@ function kpPeopleIn(html,people){const who=[];let h=html;const plain=kpPlain(htm
  if(!who.length&&/Thái hậu/.test(plain)&&S)who.push(S.thO||{kind:"th"});
  return [h,who]}
 /* one fact object -> row.  fact = "html" | {who, text, chips:[[label,n]], why, when, kind:"me"|"person"|"world"} */
-function kpFactRow(f,people){const SKIP=window.__kpSkip;if(typeof f==="string")f={text:f};let text=f.text||"",who=f.who?[].concat(f.who):null;
+/* KIT 9: a title said twice in a row in stored text (old saves / old logs): "Tổng quản thái giám Tổng quản X" → "Tổng quản thái giám X",
+   "Cung nữ Cung nữ thân tín X" → "Cung nữ thân tín X" */
+const KIT_DUP_T=/(^|[\s>(:,])(Tổng quản|Thái giám|thái giám|Cung nữ|cung nữ|Thái y|thái y|Ma ma|ma ma|Cô cô|cô cô|Thị vệ|thị vệ)((?: (?:thái giám|thân tín))?) ((?:<[^>]+>)*)\2(?=[\s<])/g;
+function kitDedupTitle(h){return String(h||"").replace(KIT_DUP_T,(m,a,t,suf,tags)=>suf?`${a}${t}${suf}${tags?" "+tags:""}`:`${a}${tags}${t}`)}
+window.kitDedupTitle=kitDedupTitle;
+function kpFactRow(f,people){const SKIP=window.__kpSkip;if(typeof f==="string")f={text:f};let text=kitDedupTitle(f.text||""),who=f.who?[].concat(f.who):null;
  if(f.auto!==false){let w;[text,w]=kpPeopleIn(text,people);if(!who)who=w;text=kpChipify(text)}
  const p=who&&who[0];const world=f.kind==="world"||!p;const face=p&&p!==SKIP?kitFaceH(p,"sm"):`<span class="kfdot" aria-hidden="true"></span>`;
  const chips=f.chips&&f.chips.length?kitChips(f.chips):"";

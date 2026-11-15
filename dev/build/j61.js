@@ -55,9 +55,10 @@ function k61Desc(e){const k=k61Kind(e);
 function k61Short(e){const k=k61Kind(e);if(k==="consort")return e.out?"Phế phi":e.queen?"Hoàng hậu":RANKS[e.rank].n;if(k==="emp")return"Áo vàng";if(k==="th")return"Phượng bào";
  const d=k61Desc(e).replace(/^một (vị )?/,"");return d[0].toUpperCase()+d.slice(1)}
 const k61Cap=s=>s?s[0].toUpperCase()+s.slice(1):s;
-function k61Title(e){const k=k61Kind(e);if(k==="consort")return`${rkName(e)} ${e.name}`;if(k==="emp")return"Hoàng thượng";if(k==="th")return"Thái hậu";
- if(k==="tq")return`Tổng quản thái giám ${e.name}`;if(k==="phys")return`thái y ${e.name}`;if(k==="eun")return`thái giám ${e.name}`;if(k==="maid")return`cung nữ ${e.name}`;if(k==="mama")return`ma ma ${e.name}`;
- if(k==="off")return`${(typeof TDOFF!=="undefined"&&TDOFF[e.c])||"quan"} ${e.name}`;return e.name||"người ấy"}
+function k61Title(e){const k=k61Kind(e);if(k==="consort")return typeof kitTitled==="function"?kitTitled(rkName(e),e.name):`${rkName(e)} ${e.name}`;if(k==="emp")return"Hoàng thượng";if(k==="th")return"Thái hậu";
+ const T=(t,x)=>typeof kitTitled==="function"?kitTitled(t,x):`${t} ${x}`;/* KIT 9 kitTitled: no "Tổng quản thái giám Tổng quản …" */
+ if(k==="tq")return T("Tổng quản thái giám",e.name);if(k==="phys")return T("thái y",e.name);if(k==="eun")return T("thái giám",e.name);if(k==="maid")return T("cung nữ",e.name);if(k==="mama")return T("ma ma",e.name);
+ if(k==="off")return T((typeof TDOFF!=="undefined"&&TDOFF[e.c])||"quan",e.name);return e.name||"người ấy"}
 /* becoming known (logged once); the other side learns her too when they meet */
 function k61Know(list,how,quiet,st){st=st||2;if(!S||!k61S())return[];const L=(Array.isArray(list)?list:[list]).filter(e=>e&&e!==S&&k61St(e)<st);if(!L.length)return[];
  const nm=L.filter(e=>!k61Named(e)&&st>=2);const pubSeen=L.filter(e=>k61Pub(e)&&!isKnown61(e));const desc=L.filter(e=>!isKnown61(e)&&st===1).map(k61Desc);
