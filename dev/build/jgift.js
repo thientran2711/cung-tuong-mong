@@ -121,10 +121,9 @@ addEventListener("click",ev=>{const t=ev.target.closest&&ev.target.closest("[dat
 (function(){const k0=kitEvArt;kitEvArt=function(m){try{if(m&&m.pid==="giftin"&&m.pp&&m.pp.e){const a=giftArt(m.pp.e);if(a&&a.src)return{src:a.src,lab:giftName(m.pp.e)}}}catch(e){}return k0.apply(this,arguments)}})();
 (function(){const st=document.createElement("style");st.textContent=`.kgiftown{display:flex;align-items:center;gap:8px;margin:0 0 6px;font-weight:600}.kgiftown .md{flex:0 0 auto}`;document.head.appendChild(st)})();
 
-/* ---------- every dialog: no empty round dots on plain fact rows, no "Tốn: không" rows ---------- */
+/* ---------- every dialog: no empty round dots on plain fact rows ("Tốn: không": one implementation, kitHideOut jk2b §42.6) ---------- */
 (function(){const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);try{const M=$("modal");if(M&&!M.hidden){
-  M.querySelectorAll(".kfact > .kfdot").forEach(x=>{if(!x.querySelector("img,.md,.kit")){x.parentElement.classList.add("kfnodot");x.remove()}});
-  M.querySelectorAll(".opt .kr-ton").forEach(x=>{const v=(x.querySelector(".krv")||{}).textContent||"";if(/^\s*không\s*$/i.test(v))x.remove()})}}catch(e){}return r}})();
+  M.querySelectorAll(".kfact > .kfdot").forEach(x=>{if(!x.querySelector("img,.md,.kit")){x.parentElement.classList.add("kfnodot");x.remove()}})}}catch(e){}return r}})();
 (function(){const st=document.createElement("style");st.id="kgift-css2";st.textContent=`
 .kfact.kfnodot{grid-template-columns:minmax(0,1fr)!important}
 /* the event banner with people on the picture (KIT 33.6): category chip in the top-left corner, never over a head; name chips clear of the frame */
