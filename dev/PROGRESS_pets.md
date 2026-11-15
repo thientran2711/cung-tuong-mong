@@ -85,3 +85,16 @@ Thú nuôi biếng ăn (tranh thú ở đầu thẻ). Lời dặn lần đầu (
 - Mẫu (chờ duyệt): dev/shots/pets/mau.jpg — Mèo mướp non + trưởng thành, Chó nhỏ lông xù, Vẹt ngũ sắc trên giá, Kỳ lân con, Bạch lộc.
   Magnific: mèo WDsgFxxcXe (cắt gOImT5DSXO), mèo non vQZAyUua47 (LwB808xswO), chó cplSHLy0eP (nVjsQ6MYQD), vẹt gOIm0IRSXO (tCiRUDcmZJ),
   kỳ lân EbzYPnzuuO (iGq5mJF3uK), bạch lộc s7oIWtnl8e (ksDeAQ316B). Chưa đẩy CDN (chờ duyệt).
+
+## review/pet-care (thợ hợp nhất, 15/11) — dev/build/jpetcare.js (sau jpet), số trong BAL.pet
+- 4 độ lớn Non → Thiếu niên → Trưởng thành → Linh thú theo SỐ TUẦN NUÔI (BAL.pet.ageW 0/8/20/40) + TÌNH CẢM (affNeed 0/25/50/80). petT(P) trả
+  công dụng theo độ lớn (một nguồn): Non chỉ Sức +1/tuần; Thiếu niên công dụng ×0,6; Trưởng thành ×1; Linh thú ×1,4; Ngự tứ đỡ mạng CHỈ ở Linh thú.
+  Thẻ thú: Lớn · Đang có · Lớn tiếp (công dụng mở thêm + điều kiện) · Chăm. Lớn lên: thẻ báo ngay.
+- Chăm: màn hình kit toàn màn (thú lớn giữa, thanh No/Sạch/Vui/Tình cảm), 3 trò, mỗi trò 1 khắc: Cho ăn (kéo đúng món loài đó ăn),
+  Tắm/chải (5 lần vuốt đều tay), Chơi (chạm khi quả cầu qua giữa). Điểm = cách chơi, không xúc xắc. Giao kẻ hầu thân tín chăm 4 tuần (nửa hiệu quả).
+  Hao mỗi tuần; bỏ bê: thẻ điềm (biếng ăn) → sau 3 tuần bỏ đi (thẻ ngay). P.care (jpet đọc) = trung bình No/Sạch/Vui.
+- Tranh: img/pet512/pet-<k>-non|-tn|(trưởng thành)|-lt.webp; thiếu tranh thì dùng tranh trưởng thành thu nhỏ (Non .62, Thiếu niên .8). Không có quầng sáng bằng mã (sếp).
+- Cung người khác: "Giúp chăm thú nuôi của nàng" (petcare, thiện cảm +6), "Hại thú" (thaopet, jpet), "Trộm thú nuôi" (petsteal: khả năng
+  55/38/22/8 theo độ lớn, cắn Sức -8, náo động, bị bắt Danh -6 + chứng cứ; thú trộm giữ độ lớn, tình cảm 5). NPC cùng luật (mindMenu).
+  Chơi hai người: móc coopPetAct(kind, friendId) để chuyển qua relay act của phòng — CHƯA nối (cần thợ coop).
+- Sổ cũ: độ lớn theo thời gian đã nuôi (tối đa Trưởng thành), chỉ số từ khí lực.
