@@ -214,7 +214,7 @@ html body .stage.k3g.k3n #sc-t h2{font-size:.86rem}
 /* ---------- 6. kitPhoneShell (KIT 31.7, owner 11/14): portrait screens under 1000 px wide (Fold, phones) work as TWO views.
    HOME = the room scene full screen between the slim top bar and the bottom tab bar (stage HUD plaques on it; tap a person = card).
    PANEL = a bottom tab opens full screen in place of the room (sub-tabs, picker, person card get the whole height).
-   Back to the room: tap the active tab again, or the "Phòng" button in the top bar; "Qua buổi" always lands in the room. A person card
+   Back to the room: tap the active tab again, or the "Phòng" button in the top bar; "Sang buổi" always lands in the room. A person card
    opened from the room (#popw) shows full screen too and returns to the room when closed. Result cards / events overlay as before.
    Wider or landscape screens keep the split stage | panel. ---------- */
 const K3SH={home:true};
@@ -352,14 +352,16 @@ html body .kroul .krt.on{background:var(--k-card,#fffaf0)!important;box-shadow:n
 html body .ksel:not(.kpki),html body [aria-pressed="true"].kselable{outline:none!important;box-shadow:0 0 0 2px var(--k-sel-ring,#a8740c),0 0 10px 3px rgba(255,214,110,.85)!important}
 `;document.head.appendChild(st)})();
 
-/* ---------- 9. NO LONE BUTTON ROWS in person cards (KIT 28.18): the card's "✕ Lui" (#popx, card opened from the room) sits in the card's
+/* ---------- 9. NO LONE BUTTON ROWS in person cards (KIT 28.18): the card's ✕ (kit-x, #popx, card opened from the room) sits in the card's
    top-right corner beside the name row instead of taking a row of its own above the acts. ---------- */
 (function(){const st=document.createElement("style");st.id="k3-pcx";st.textContent=`
 html body .pc:has(>.pcr>.pcx){position:relative}
 /* a card opened from the room (#popw) lies over the panel: above the panel's sticky rows (sub-tabs, category tabs) */
 html body #popw{z-index:12!important}
 html body .pc>.pcr>.pcx{position:absolute!important;top:6px;right:6px;margin:0!important;z-index:8}
-html body .pc:has(>.pcr>.pcx)>.pcl>.kpnm{padding-right:78px}
+html body .pc:has(>.pcr>.pcx)>.pcl>.kpnm{padding-right:46px}
+/* KIT 32.10: the ✕ owns the card's top-right corner — the first act card starts under it, never under the ✕ */
+html body .pc>.pcr>.pcx+*{margin-top:42px!important}
 /* kit panels (report / story / info dialogs): the close row "Đã hiểu" is pinned at the dialog's bottom, the body scrolls under it */
 html body .dlg.kpanel>.mr{position:sticky;bottom:0;z-index:4;background:linear-gradient(rgba(255,250,240,0),var(--k-card,#fffaf0) 10px);padding-top:8px}
 `;document.head.appendChild(st)})();

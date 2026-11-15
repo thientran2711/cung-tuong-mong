@@ -1,7 +1,7 @@
-# Kiểm duyệt review/rank0-ivory + review/emo-men → review/rank0-emo-r6 (trên main ca361b147) — PASS có sửa của người duyệt
+# Kiểm duyệt review/rank0-ivory + review/emo-men → review/rank0-emo-r6 (trên main 041cdcd1f — gộp ca361b147 rồi gộp tiếp main mới) — PASS có sửa của người duyệt
 
 ## Gộp
-- assemble.py: giữ jht/jwhy/jaudit của main + jmark, jkpor (trước j84). jemo emoBadge: một hàm = bộ dấu nam (emoArtSet, emo-men) + chạm hiện kpPop, không chữ/không title (rank0-ivory). KIT §38 thêm dòng nam; kitMeMark đánh số lại §39 (trùng §37 Hoàng tự). Dựng lại site.
+- assemble.py: giữ jht/jwhy/jaudit của main + jmark, jkpor (trước j84). jemo emoBadge: một hàm = bộ dấu nam (emoArtSet, emo-men) + chạm hiện kpPop, không chữ/không title (rank0-ivory). KIT §38 thêm dòng nam; kitMeMark đánh số lại §41 (trùng §37 Hoàng tự; §39–40 của review/brand). Dựng lại site.
 
 ## Sửa của người duyệt
 1. Chạm dấu tâm trạng trên dải đầu trang (.kcrow: Hoàng thượng, Hoàng hậu…) mở thẻ người thay vì lời giải: listener window-capture của jk2b chạy trước jemo → jk2b bỏ qua img.kemo.
