@@ -1313,3 +1313,32 @@ from the ONE rank → colour lookup (j59col: kit rank palette RCOL for consorts 
 ("Hoàng thượng") is one big line. Rules live in jk3 (stage, incl. her own #j59metag) and jk4 (.kesf .kpsn — event stage and week-book
 person pages, same two lines from kitName's .kti + name). Chips stay inside: strip slots are ≥ chip width + 8 px; in a single row
 neighbours whose chips would touch go to two staggered rows (j59 crowd), and the final overlap check re-lays out.
+
+## 35. LOADING SCREEN · NHẬP CUNG LẦN ĐẦU + kitProgress (review/loading, `dev/build/jload.js` before j84) — awaiting kit review
+Owner 11/14: images + sounds are downloaded to the device on first entry with a proper loading screen; afterwards the game runs offline.
+- Screen `#kload.modal.kpscene.kload` = the `title` backdrop (`kitBackdrop(el,"title")`, KIT_BD, no new art) + ONE kit scene panel
+  (`.dlg.kpanel.kpsc`, `kpHeader("notice","Cung Tường Mộng","Lần đầu nhập cung · thỉnh tranh vẽ, tiếng nhạc về máy")`): right column in
+  landscape, bottom in portrait (section 14). Body `.klb`: one `kitProgress` + `.kpnote` lines (one-time note; size of the background set;
+  iPad/iPhone outside the home screen: "thêm vào màn hình chính"). Buttons `.kpopts` only when the line is cut/stalls:
+  `.kbtn.alt` "Vào cung ngay" + `.kbtn` "Thỉnh tiếp". Fades out (0.45 s) when the essential set is in; z 9600.
+- `kitProgress({label,have,total,sub})` → `.kprog`: `h4.kpst` label · track `.kprog-t` (12 px, `--line` border, `--k-card2` ground, fill
+  lacquer red → amber `#b0402c → #c98a2a` like the kit slider) · number `.kprog-n` "26 / 83 MB" (display font, `--gold`) · sub line `.kprog-s`
+  (time left in words: "còn chừng nửa phút / một phút / N phút", "sắp xong"). Never "%" (VANPHONG); MB is the only unit.
+- Background indicator `.kloadchip` (bottom-left, z 8700, above nothing important): one `.kchip` button with a 64 px `.kprog-t` + MB;
+  tap = "Tạm ngưng thỉnh tranh · chạm để thỉnh tiếp" (remembered); fades when done.
+- Wording: "thỉnh" (bring in) for downloading; no tải/dữ liệu/phiên bản (VANPHONG §3).
+Mechanics (not visual): assets.json (dev/site/assets.py) = [path, sha256/16, bytes, core|fig]; cache `ctm-assets` keyed `path?h=hash`,
+never wiped by a build (sw.js prunes only keys no longer in assets.json); app shell in `ctm-shell-<content hash>`; co-op worker and every
+other origin bypass the service worker.
+Tested 755x1000@2, 1180x820@2, 1366x1024@2, 686x880@2.2, 412x1058@2, 390x844@3, 1024x768@2 (dev/shots/loading/).
+### 35.2 NEW BUILD CARD · "Có bản mới" (owner 11/15: phone / home-screen app stuck on an old build) — `dev/site/swreg.js`, inlined by build_site.sh
+- sw.js is generated per build (`ctm-shell-<content hash>`); the page registers it (`updateViaCache:"none"`) and calls `registration.update()`
+  on open, on every return to the foreground (visibilitychange / pageshow / focus / online) and every 20 min. New worker: skipWaiting →
+  clients.claim → `controllerchange` → card. index.html is network first (`cache:"no-cache"`), saved copy only offline / after 4 s.
+- Card `#kupd.kupd` (bottom centre, above `#tabs` and `.kloadchip`, z 9700, width ≤420 px): ONE `.dlg.kpanel[data-kind=notice]` with
+  `kpHeader("notice","Có bản mới","Cung Tường Mộng vừa có bản mới")` + `.kpnote` "Sổ đã ghi vẫn giữ nguyên. Tự mở bản mới sau N giây." +
+  one `.kbtn` "Mở bản mới". After 3 s (or the tap) the game saves and the page reopens on the new build.
+- Never during a dialog, queued notice, mini game/lesson (`S.mg`, `#ov`), motion moment, honour podium, week book or page turn: the card
+  waits; if one opens during the 3 s the card goes away and waits again. In the background with nothing open it reopens unseen.
+  On the first-entry loading screen it reopens at once (the loading resumes file by file).
+- Wording: "bản mới", "mở bản mới"; never "tải lại trang", "phiên bản", "cập nhật hệ thống" (VANPHONG §3).
