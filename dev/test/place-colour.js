@@ -43,7 +43,7 @@ const GREY='data:image/png;base64,'+(()=>{/* 60x150 flat grey PNG, built by hand
  await clean();
  /* scan-only CSS: .zpcs hides text + people (scene pixels), .zpcr also switches off every scene filter/overlay (painting as painted) */
  await p.addStyleTag({content:`.zpcs .stop,.zpcs .tokens,.zpcs .tok,.zpcs .kmemark,.zpcs .ksh,.zpcs .j59sz,.zpcs #popw{visibility:hidden!important}
-  .zpcr .scimg,.zpcr .pxc{filter:none!important}.zpcr>.light{display:none!important}.zpcr::after,.zpcr::before{display:none!important}.zpcr{box-shadow:none!important;filter:none!important}
+  html body .stage.zpcr .scimg,html body .stage.zpcr>.pxc{filter:none!important}html body .stage.zpcr>.light{display:none!important}html body .stage.zpcr::after,html body .stage.zpcr::before{display:none!important}html body .stage.zpcr{box-shadow:none!important;filter:none!important}
   #pcprobe{position:absolute!important;left:44%!important;bottom:3%!important;top:auto!important;right:auto!important;transform:none!important;z-index:3;background:none;border:0;padding:0;width:60px;height:150px}#pcprobe .figimg{width:60px;height:150px;display:block}`});
  await p.evaluate(G=>{const pr=document.createElement('button');pr.id='pcprobe';pr.className='tok fig';pr.innerHTML=`<img class="figimg" src="${G}">`;window.__pcpr=pr;document.body.appendChild(pr)},GREY);await p.waitForTimeout(300);
  /* places: one per scene + one consort palace per tier (rp0..rp3) + Tân Giả khố */

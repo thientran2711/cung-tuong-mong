@@ -89,8 +89,9 @@ def flags(T):
             if db > 3 and dL < 1: why.append(f'brown wash (dL {dL:+.1f} db {db:+.1f})')
             if t['place'] not in COLD and dC < -3 and db < -1.5: why.append(f'grey cold wash (dC {dC:+.1f} db {db:+.1f})')
             if abs(dL) > 8: why.append(f'brightness changed dL {dL:+.1f}')
-        n = sum(1 for x in ch.split(' + ') if x != 'none' and not x.startswith('frost'))
-        if n >= 2: why.append(f'{n} stacked colour layers')
+        n = sum(1 for x in ch.split(' + ') if x.split(':')[0] in ('css', 'pixi', 'stage'))   # filters (a .light overlay is a layer, not a filter)
+        if n >= 2: why.append(f'{n} stacked filters')
+        if not t['map'] and t['place'] not in COLD and 'rgba(200, 225, 255' in ch: why.append('cool weather wash')
         if t['bu'] in (0, 1, 2) and s['L'] < 38 and t['place'] not in COLD: why.append(f'dark daytime L {s["L"]}')
         if t['bu'] == 3 and s['L'] > 52: why.append(f'night looks like day L {s["L"]}')
         pr = t['probe']

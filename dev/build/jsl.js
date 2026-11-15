@@ -58,16 +58,17 @@ window.KIT_SCENE_TINT=window.KIT_SCENE_TINT==null?0:window.KIT_SCENE_TINT;
 (function(){const css=document.createElement("style");css.textContent=`
 .stage .scimg,.stage>.pxc{filter:var(--kscf,none)!important}
 .stage.kown:not(.kwet):not(.sc-lc)>.light{background:none!important}
-.stage.kown.kwet:not(.sc-lc)>.light{background:linear-gradient(rgba(255,238,210,.13),rgba(255,226,188,.08))!important}
-.stage.kown.kwet.night:not(.sc-lc)>.light{background:linear-gradient(rgba(255,214,160,.04),rgba(255,200,140,.06))!important}`;document.head.appendChild(css);
+.stage.kown.kwet:not(.sc-lc)>.light{background:linear-gradient(rgba(255,234,198,.10),rgba(255,222,178,.06))!important}
+.stage.kown.kwet.night:not(.sc-lc)>.light{background:linear-gradient(rgba(255,214,160,.04),rgba(255,200,140,.05))!important}`;document.head.appendChild(css);
  /* KIT §56.2 ONE SCENE GRADE (owner 15/11 LUẬT SỬA CẢ NHÓM: every place, not only her room). The ONLY filter on a scene picture is
     --kscf, written here and used by BOTH backdrops: the CSS picture (.scimg) and the Pixi copy of it (.pxc canvas, which hides .scimg
     on WebGL devices — before, every .scimg filter silently vanished there, so a phone and a no-WebGL screen showed different colours).
     The old stacked rules of p1.html/j25 (.sc-home brightness 1.25/1.35 + sepia .12, rp1 sepia .25, rp2/rp3 saturate 1.3–1.4 + hue/sepia)
     are overridden for EVERY picture, graded or not. Dry snow / frost (j12 lightTick: a cool rgba(200,225,255) wash) on a graded painting:
     no wash (the winter paintings already hold their snow light; a blue-grey cast is the lãnh cung look) — the frost edge (.frost) stays.
-    Knobs: KIT_SCENE.grade(o) → filter string; o = {own, wet, night, sc, tier}. */
- const G={dry:"none",wet:"saturate(.97) contrast(.94) brightness(1.07)",wetNight:"saturate(.95) contrast(.95) brightness(1.01)",
+    Wet grade re-measured over every graded place (scan: the r9 values .97/.94/1.07 + ivory .13 took chroma −1.7 on average, −3.5 on the
+    warm chiều halls = greyer; now chroma ±0, b* +1, L* +5). Knobs: KIT_SCENE.grade(o) → filter string; o = {own, wet, night, sc, tier}. */
+ const G={dry:"none",wet:"saturate(1.05) contrast(.95) brightness(1.05)",wetNight:"saturate(1.02) contrast(.96) brightness(1.02)",
   rp2:"saturate(1.04)",rp3:"saturate(1.07) brightness(1.02)"};
  function grade(o){if(o.sc==="lc")return "none";               /* lãnh cung + Tân Giả khố: the bleak painting as painted */
   if(o.own&&o.wet)return o.night?G.wetNight:G.wet;
