@@ -1032,6 +1032,16 @@ A dialog may carry `headArt:"img/…webp"` or `{src,label}` → wide kitSceneArt
 - Card left column: name → rank → frame at full column width, trimmed so the frame's ornament (crest / cloud top, `img.kcrest --ct`) starts
   right under the rank (gap ≤ 12 px, measured 686 + 1180); the trim runs throttled (it starved under constant DOM mutations before).
 
+### 31.19 TOP BAR GRID — her block never wraps (owner 11/15 Fold shot: name on 2 lines, chips under "‹ Ngự hoa viên", date on 3 lines) — jk4 `kitHdFit`
+- ≥ 600 px her block is fixed: frame · name (1 line) · rank chip + age chip (1 line) · short date (1 line); `max-content`, never shrinks.
+  The time block (buổi + khắc · weather + Quẻ) is the column that gives: it wraps between its items, never cuts.
+- Two-row bar (600–999 px; ≥ 1000 px when the one row does not fit → `header.hud.khd2`, measured by `kitHdFit` on render/resize):
+  row 1 `menu · her block · (gap) · RIGHT COLUMN`, right column = time block with the "‹ Nơi" button under it (same left and right edge);
+  row 2 the eight kitStatCells. ≥ 1000 px keeps the one row (32.1) whenever it fits (typical iPad 1180).
+- Worst case measured (name "Hoàng Phủ Uyển Nghiêm", Hoàng quý phi / "Cung nữ của …", 29 tuổi, "Tháng mười một · trung tuần · năm thứ mười",
+  "mai nở trong tuyết", "Quẻ Thượng thượng (Giao thiệp)", "‹ Khải Tường cung"): 0 box overlaps, each line 1 line, no cut, no page error at
+  755x1000@2 · 1000x755@2 · 1180x820@2 · 844x390@3 (dev/shots/header-fix/). Phones < 600 px keep their own rows (32.1).
+
 ## 32. KIT 4 · ONE STAT CELL · EVENT STAGE · EVENT FRAMES (kit owner #3, owner + review 11/14) — `dev/build/jk4.js` (after jk3, before j84)
 
 ### 32.1 kitStatCell / kitStatRow — THE number cell (owner: "where is the shared kit, why do workers draw their own?")
