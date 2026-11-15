@@ -26,7 +26,7 @@ All finding line references below are to the **queued head**, unless explicitly 
 
 **What:** The accusation wrapper appends the current week to the accuser's `accL` **before** the inner action evaluates `oAccuse`. That action therefore counts the accusation being attempted as a previous accusation. The preview was computed before that append. Away from the clamps, execution is lower by BAL.accTire, currently 10.
 
-**Why:** KIT.md:381 requires “The card's odds word = the odds the roll uses”. jbal2.js:21 also describes fatigue from previous accusations reducing the **next** one and promises the real odds word. The formula is shared by player and NPC accusations, so the ordering error affects the whole family.
+**Why:** KIT.md:380 requires “The card's odds word = the odds the roll uses”. jbal2.js:21 also describes fatigue from previous accusations reducing the **next** one and promises the real odds word. The formula is shared by player and NPC accusations, so the ordering error affects the whole family.
 
 **Machine reproduction:** In each published index.html, start a consort life; clear existing modal choices; use an ordinary living non-queen target with two evidence; player rank 3, Sức 80, Danh 40, Tài 40; no previous accusations. Disable the emotion modifier and set the fortune contribution to zero to isolate this calculation. Read ACT.accuse.o, then intercept the roll argument while invoking the real runAct path, returning failure to avoid demotion/reward side effects.
 
@@ -88,7 +88,7 @@ The current-main total is not presented as a clean measurement of dress alone. T
 
 ### A-04 — The binding location/activity/motive ledger is absent from the merged game
 
-**Locations:** `dev/build/assemble.py:18` (module list); independent whereabouts in `dev/build/j9.js:21`, `dev/build/j22.js:9`, and `dev/build/jmen.js:57`; dormant gate integration `dev/build/jemo.js:148`.
+**Locations:** `dev/build/assemble.py:14` (module list); independent whereabouts in `dev/build/j9.js:21`, `dev/build/j22.js:9`, and `dev/build/jmen.js:57`; dormant gate integration `dev/build/jemo.js:148`.
 
 **What:** Neither audited bundle has S.roster or motiveOK. The main source tree lacks j95.js, dev/tools/roster.js and dev/test/ROSTER_AUDIT.md. Place generation still writes S.where; men's placement writes S.menW and S.menWhy; stages use S.visit.people. Emotion's “lazy” motive integration returns without installing its gate because the prerequisite function is absent.
 
@@ -125,7 +125,7 @@ The four-buổi report records childbirth deaths of 17.8% and 20.8% in its two s
 
 ### A-06 — The paid-choice scan's six suspects are not six proven dominated choices
 
-**Locations:** current-main `dev/test/paid-scan.py:42`; queued `dev/build/j67.js:218`, `:222`, `:234`, `:1131`, `:1680`; `dev/build/j96.js:125`.
+**Locations:** current-main `dev/test/paid-scan.py:36`; queued `dev/build/j67.js:218`, `:222`, `:234`, `:1131`, `:1680`; `dev/build/j96.js:125`.
 
 **What:** Running the existing scan against the queued source examined **595 options in 376 lists** and printed six “dominated paid options”. Manual comparison rejected all six as proofs: alternatives spend Danh, Sủng or Sức; some change story score; the maid option changes loyalty/trust and a story flag. Comparing only positive reward fields omits those trade-offs.
 
