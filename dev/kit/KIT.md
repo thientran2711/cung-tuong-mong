@@ -1175,19 +1175,19 @@ Stage rule (j59 — every room / place / servant road / lãnh cung stage):
 2. People use the FULL stage width (owner 11/15): they may stand behind/under the RIGHT plaque column — its plaques float on top on a
    solid card (`.kshR .k3p` opaque). The left gutter (if any) is kept. An EMPTY plaque column reserves no gutter (jk3 k3Gut).
 3. Widths count the visible body (kitFigBody alpha bbox l..r; silhouettes too), not transparent margins.
-4. Up to **4 people at once on iPad, 3 on Fold / phones** (her included) at that one scale (owner 11/15). They are packed by their
+4. At most **3 people at once on iPad, 2 on Fold / phones** (her included; owner 11/15 "4 is too crowded") at that one scale. They are packed by their
    **CORE** body column (kitFigBody cl..cr = narrowest torso/skirt run on the 35–80 % band × 1.2; sleeve flare beyond it is not
-   counted): each figure may step back over its left neighbour by up to **35 % of its core on iPad, 25 % on Fold** (later ones in
+   counted): each figure may step back over its left neighbour by up to **20 % of its core** so each person reads clearly (later ones in
    front, same scale, no back row). The outer sleeves of the first and last figure are counted, so no sleeve is ever clipped at the
    stage edge. Figures may stand under the right plaque column (plaques float on top, solid).
-   When more people are there than fit, the stage shows a **page** of whole people (as many as fit packed, ≤ 4 / 3); the count
+   When more people are there than fit, the stage shows a **page** of whole people (as many as fit packed, ≤ 3 iPad / 2 Fold); the count
    chips "› N" / "N ‹" in the stage's bottom corners (name row, under the feet) turn to the next / previous people. No clipped
    scroll strip. Names are never cut: neighbouring chips that would touch go to two rows (stagger); chips are clamped inside the
    stage again after late modules fill them.
 5. No "her + 1" shrink (owner 11/15). The one remaining exception is a stage narrower than ONE whole person, which scales down to
    exactly one person.
-   Measured 11/15 (Ngự hoa viên; dev/shots/book-release/stage/): 2, 3 and 4 people stand whole at 1180 (4 + "› 2" with 6);
-   1366 shows 3 + "› 1" when the 4 wear wide court robes (taller stage → wider figures); Fold 686 shows 3 + "› N".
+   She herself stands on the stage at EVERY place she is (j28, owner 11/15): first / left, chip in her rank colour, counted in the 3 / 2.
+   Measured 11/15: dev/shots/book-release/stage/n*.jpg, table in dev/PROGRESS_book_release.md.
 6. Name chips are never cut: in the strip each slot is at least chip width + 8 px.
 
 Event stage (jk4 kitStageFig / kitEventStage, week-book person pages): each figure carries `--kfr = KIT_FIG.fac/KIT_FIG.man`,
