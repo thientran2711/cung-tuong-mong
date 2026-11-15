@@ -24,6 +24,36 @@ Nhánh từ origin/main 14967f899 + gộp review/act-audit 8654bc57c (leAttire /
   `node dev/test/toil-looks.js <url> <out.jpg> [c05] [t1,t5,t8]` (tờ mẫu 3 dung nhan), `node dev/test/mk-oldsave2.js` (sổ cũ).
 - Ảnh: `dev/shots/toilette/`.
 
+## TRẠNG THÁI KHI DỪNG (điều phối đóng phiên)
+Nhánh: review/toilette (gốc origin/main 14967f899 + review/act-audit 8654bc57c gộp vào). Commit chính: ef831c28b (module), a820a52ab (dung nhan sếp DUYỆT —
+giữ nguyên "đẹp" và "diêm dúa" như hiện tại), 509a2dad5 (phản ứng bật sự kiện + toil-fit t1–t8/lãnh cung), commit WIP cuối (toilfit md5 + PROGRESS).
+
+### Đã xong
+- Điểm trang buổi sáng (thẻ + chip), trò chọn y phục, trò trang điểm, phán dịp, ảnh hưởng theo nết (leAttire), NPC cùng luật, bot tự điểm trang.
+- Dung nhan trên mặt nàng cả ngày (kitFxLayers) — dáng sếp duyệt ở a820a52ab; tờ mẫu dev/shots/toilette/looks-c05-t1-t5-t8.jpg.
+- Phản ứng bật thành sự kiện có người (10 khóa TOIL_EV, `art: img/ev-toil-<key>.webp` — tranh ab06 vẽ xong ở worktree agent-ab06ce27b6963775a,
+  CHƯA lên CDN: điều phối/thợ sau đẩy bằng `python3 dev/site/cdn_sync.py img/ev-toil-*.webp` từ worktree đó).
+- Kiểm toilette.js (chơi thật + sổ cũ): 755x1000@2 (cả bản có phản ứng: th-scold bật, sổ cũ nạp, 0 lỗi, không tràn), 1000x755@2, 844x390@3 đạt
+  (0 lỗi, không tràn, sổ cũ nạp). 1180x820@2 lần cuối bị ngắt giữa chừng (máy quá tải, lần trước đó đạt trước khi có sổ cũ).
+
+### CÒN LẠI (chính xác)
+1. toil-fit từ tranh CDN HIỆN TẠI (điều phối: tờ mẫu từng dùng tranh c05 hoa điền to cũ). Đã thêm ghi md5 (`dev/art/toil-fit-md5.json`,
+   `--stale` liệt kê tranh lệch md5). Việc: chạy lại đủ `python3 -I dev/figwork/toilfit.py` (đo lại por+fig t1–t4, ~70 phút máy bận) rồi
+   `python3 -I dev/figwork/toilfit.py --extend` (t5–t8, lãnh cung, ~60 phút; ghi md5), soát `python3 /…/lmview`-kiểu (xem vài tranh), rồi
+   `cp img/toil-fit.json dev/art/toil-fit.json` + `python3 dev/site/cdn_sync.py img/toil-fit.json`. Lần chạy lại đã bị ngắt: img/toil-fit.json
+   trên CDN vẫn là bản cũ (3518 tranh, đo trên tranh CDN lúc đó).
+2. Làm lại tờ mẫu bằng tranh CDN mới: `node dev/test/toil-looks.js <url> dev/shots/toilette/looks-c05-t1-t5-t8.jpg c05 t1,t5,t8` (giữ preset đã duyệt).
+3. Kiểm lại 1180x820@2 với sổ cũ: `node dev/test/toilette.js <url> 1180x820@2 <dir> <oldsave.json>` (sổ cũ: `node dev/test/mk-oldsave2.js <url bản không jtoil> <out.json>`).
+4. Bot cân bằng: `node dev/test/bot-same.js <urlA không jtoil> <urlB có jtoil> 80 sens` — harness đã sửa để chạy trên main mới (đợi S, bỏ trò nhỏ dở,
+   jload tắt); lần chạy 80 bước bị ngắt (máy tải ~70) — CHƯA có số. Bản base = assemble.py bỏ 'jtoil.js'.
+5. Nối kitEventDp (kit-fig2) khi có; banner đã có khóa.
+6. Báo thợ act-audit (đã ghi dưới): jaudit leAttire so day theo buổi; jtoil dùng wk().
+
+### Lỗi biết
+- Mặt quay nghiêng mạnh: má xa có thể chờm mép mặt.
+- Lời thoại phản ứng có 2 câu bị kitBullets tách thành 2 dòng (vd "…ai gia sao? / Thật chẳng ra thể thống.").
+- Máy kiểm chậm: trò trang điểm trong kiểm tự động dùng `TOIL.clock=12` (giãn đồng hồ); người chơi thật dùng 1.
+
 ## Còn lại / ghi chú
 - Mặt quay nghiêng mạnh: má xa có thể chờm mép mặt (điểm má đối xứng quanh miệng).
 - `toilfit.py --extend --all`: thêm áo cung nữ, kc/ngheo, mặt cung nữ m* (chưa chạy; nàng khi là phi tần không dùng).

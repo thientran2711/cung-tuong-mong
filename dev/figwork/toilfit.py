@@ -126,6 +126,20 @@ def transfer(src_img, v, dst_img, scales, top=1.0, minv=.55):
     if mvv < minv: return None
     mp = lambda x, y: [round((ox + (x / 100 * SW - x0) * s) / DW * 100, 2), round((oy + (y / 100 * SH - y0) * s) / DH * 100, 2)]
     return mp(v[0], v[1]) + mp(v[2], v[3]) + mp(v[4], v[5]) + [round(v[6] / 100 * SW * s / DW * 100, 2), round(v[7] / 100 * SH * s / DH * 100, 2), round(DH / DW, 4), v[9]]
+MD5F = "dev/art/toil-fit-md5.json"   # {picture: CDN md5[:16]} the points were measured on (live art changes → re-measure)
+def cdn_md5():
+    idx = json.loads(get(BASE + "_index.json"))
+    return {f[0][4:]: f[1] for f in idx["files"]}
+def save_md5(keys):
+    m = cdn_md5()
+    json.dump({k: m.get(k, "") for k in sorted(keys)}, open(MD5F, "w"), separators=(",", ":"), sort_keys=True)
+def stale():
+    """pictures whose CDN md5 differs from the one measured (or never recorded)"""
+    try: old = json.load(open(MD5F))
+    except Exception: old = {}
+    m = cdn_md5(); out = json.load(open("img/toil-fit.json"))
+    return sorted(k for k in out if old.get(k) != m.get(k))
+
 def extend():
     import re
     out = json.load(open("img/toil-fit.json"))
@@ -166,10 +180,12 @@ def extend():
                 json.dump({k: recheek(v) for k, v in out.items()}, open("img/toil-fit.json", "w"), separators=(",", ":"), sort_keys=True)
     out = {k: recheek(v) for k, v in out.items()}
     json.dump(out, open("img/toil-fit.json", "w"), separators=(",", ":"), sort_keys=True)
+    save_md5(out.keys())
     print(json.dumps({"n": len(out), "noRef": len(bad), "bad": bad[:10]}))
 
 def main():
     if "--extend" in sys.argv: return extend()
+    if "--stale" in sys.argv: s = stale(); print(len(s), s[:20]); return
     if "--recheek" in sys.argv:
         d = json.load(open("img/toil-fit.json")); d = {k: recheek(v) for k, v in d.items()}
         json.dump(d, open("img/toil-fit.json", "w"), separators=(",", ":"), sort_keys=True); print(len(d)); return
