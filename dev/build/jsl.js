@@ -65,3 +65,16 @@ window.KIT_SCENE_TINT=window.KIT_SCENE_TINT==null?0:window.KIT_SCENE_TINT;
  window.kitSceneTag=tag;
  if(typeof renderStage==="function"){const r2=renderStage;renderStage=function(){const r=r2.apply(this,arguments);tag();return r}}
  if(typeof lightTick==="function"){const l0=lightTick;lightTick=function(){const r=l0.apply(this,arguments);tag();return r}}})();
+/* ---- TUẦN LỤC: HÌNH RỘNG KHÔNG BỊ MÉP TRANG CẮT (sếp 11/15, Thái hậu fig-thaihau-h1-a51 730×900, áo đuôi dài) ----
+   Hình người trong trang người (.kbk-person.kbk-full) giữ đúng cỡ kit (chiều cao) và vẫn đứng giữa cột hình; chỉ khi tràn ra ngoài khung
+   trang thì DỜI vào trong (đuôi áo lấn sang phía chữ, như trước), và chỉ khi rộng hơn cả khung trang mới thu nhỏ vừa khung (chân giữ trên nền). */
+(function(){let q=0;
+ function clamp(){q=0;try{document.querySelectorAll(".kbk-person.kbk-full .kesfi").forEach(f=>{const box=f.closest(".kbk-person"),par=f.offsetParent;if(!box||!par)return;
+   const pr=par.getBoundingClientRect(),b=box.getBoundingClientRect(),w0=f.offsetWidth,l0=pr.left+f.offsetLeft;if(!w0||!b.width)return;   /* layout box, transforms ignored */
+   const s=w0>b.width?b.width/w0:1,w=w0*s,l=l0+(w0-w)/2;let dx=0;if(l<b.left)dx=b.left-l;else if(l+w>b.right)dx=b.right-(l+w);
+   const t=(s<1||Math.abs(dx)>0.5)?`translateX(${dx.toFixed(1)}px) scale(${s.toFixed(4)})`:"";
+   if(f.style.transform!==t){f.style.transformOrigin="50% 100%";f.style.transform=t}})}catch(e){}}
+ function soon(){if(!q){q=requestAnimationFrame(clamp);setTimeout(clamp,450);setTimeout(clamp,1300)}}
+ window.kitBookFigClamp=clamp;
+ try{new MutationObserver(soon).observe(document.body,{childList:true,subtree:true})}catch(e){}
+ addEventListener("resize",soon);document.addEventListener("load",e=>{if(e.target&&e.target.classList&&e.target.classList.contains("kesimg"))soon()},true)})();
