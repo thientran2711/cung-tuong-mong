@@ -7,7 +7,7 @@ CDN uploads OK again (owner saved the Cloudflare token; R2 verified). Use CLOUDF
 | # | Branch | Status |
 |---|---|---|
 | A1 | review/j59-fix (+ r1 WIP) | RUNNING wave 1 |
-| A2 | review/fxkit | RUNNING wave 1 |
+| A2 | review/fxkit → r1 PASS f012058f3 | LIVE |
 | A3 | review/small-bugs-3 | RUNNING wave 1 |
 | A4 | review/fix-float → r9 PASS 7ba53114d | LIVE (main fast-forwarded) |
 | A5 | review/coop-timer (after A4) | QUEUED |
@@ -94,3 +94,4 @@ j72 bước vs Hồi · stage paper halo · Thái hậu title bronze vs plum · 
 | C35 | review/pcard-fill (owner s8: person card right side empty → mood, relations, tastes, known facts, recent dealings, quick actions) | QUEUED-NEXT |
 | C36 | review/opt-pics (owner s8, repeated: every option card picture LEFT + info RIGHT like act cards; paint missing) | QUEUED-NEXT (top) |
 | C37 | review/panel-size (owner s8: all pop-ups same frame size per viewport) | QUEUED-NEXT |
+| D51 | fxkit follow-ups: cracked tea cup, scroll unroll, red seal slam, swaddle reveal, letter under door + wire call sites (PROGRESS_fxkit.md); clean committed .out/ folder on main | QUEUED |
