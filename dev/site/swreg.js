@@ -6,7 +6,7 @@
    - pending while playing: only the kit chip "Có bản mới" on the top bar (#kupdchip, beside her rank). Tap → kit card
      "Có bản mới · Mở bản mới ngay?" with Để sau / Mở bản mới.
    - the new build opens by itself only at a natural break:
-       · Qua buổi / Qua đêm: once the new buổi has begun (and its dialogs are read; not after she has spent a khắc of it),
+       · Sang buổi / Sang ngày mới: once the new buổi has begun (and its dialogs are read; not after she has spent a khắc of it),
        · the app comes back from the background after ≥ 10 minutes (before she does anything),
        · the title screen / first-entry loading screen.
      Then: save() → note {slot} in localStorage "ctm-upd-resume" → reload → the new build opens the SAME sổ (the title's own
@@ -17,7 +17,7 @@
      next buổi both have passed (the room's own sync point), or when one asks (chip → Mở bản mới → the friend: Cùng mở / Để sau).
      Before the reload the local week is kept (COOPW.snap); after it the lobby's own "Trở lại phòng" rejoins the same room and seat,
      and COOPW.restore puts the week back: no code to type, no invite. Two different builds never play on: the room holds
-     (COOPW.hold freezes Qua buổi) and the older one walks through the same save → reload → rejoin at once.
+     (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
 const BUILD="__B__";window.CTM_BUILD=BUILD;
@@ -156,11 +156,11 @@ function mkCard(sub,note,btns){css();close();if(typeof kpHeader!=="function")ret
 /* the chip's card: open now (the sổ is written, the page comes back at the same place) or later (next natural break) */
 function card(){if(!K.pending)return;
  if(coopOn()){
-  if(!K.peer&&(Date.now()-(K.onSince||0))>10e3){mkCard("Mở bản mới ngay?","Hai người cùng mở bản mới, vào lại đúng phòng, đúng chỗ. Để sau thì bản mới tự mở khi hai người qua buổi.",
+  if(!K.peer&&(Date.now()-(K.onSince||0))>10e3){mkCard("Mở bản mới ngay?","Hai người cùng mở bản mới, vào lại đúng phòng, đúng chỗ. Để sau thì bản mới tự mở khi hai người sang buổi.",
     [{n:"Để sau",alt:1,go(){}},{n:"Mở bản mới",go(){coopGo("tap")}}]);return}
-  mkCard("Mở bản mới ngay?","Bạn chơi cùng sẽ được hỏi. Hai người cùng mở bản mới, vào lại đúng phòng, đúng chỗ. Để sau thì bản mới tự mở khi hai người qua buổi.",
+  mkCard("Mở bản mới ngay?","Bạn chơi cùng sẽ được hỏi. Hai người cùng mở bản mới, vào lại đúng phòng, đúng chỗ. Để sau thì bản mới tự mở khi hai người sang buổi.",
    [{n:"Để sau",alt:1,go(){}},{n:"Mở bản mới",go(){K.asked=true;say("ask");line("Đã hỏi bạn chơi cùng",3500)}}]);return}
- mkCard("Mở bản mới ngay?","Sổ đang chơi giữ nguyên, mở lại đúng chỗ. Để sau thì bản mới tự mở khi ngươi qua buổi.",
+ mkCard("Mở bản mới ngay?","Sổ đang chơi giữ nguyên, mở lại đúng chỗ. Để sau thì bản mới tự mở khi ngươi sang buổi.",
   [{n:"Để sau",alt:1,go(){}},{n:"Mở bản mới",go(){reopen("tap")}}])}
 /* the friend asked to open the new build now */
 function peerCard(){mkCard("Bạn muốn mở bản mới ngay","Hai người cùng mở bản mới, vào lại đúng phòng, đúng chỗ. Sổ đang chơi giữ nguyên.",
