@@ -52,8 +52,29 @@ muoi_no:t1|0|a consort kneels pleading before another consort who sits holding a
 muoi_no:x1|0|consorts seated in rows in a grand hall for a seat contest, two consorts exchanging a meaningful glance across the room
 cn_chu:s1|0|a consort kneels offering a teacup to a seated proud senior consort while other consorts watch from their seats
 cn_chu:s2|0|a palace maid in plain green whispers a message to a consort at a garden gate
-cn_chu:c1|0|a proud consort speaks to the Empress in her hall, pointing at broken jade cup pieces on a tray, another consort standing still
+cn_chu:c1|0|a proud consort speaks to the Empress in her hall, gesturing at broken jade cup pieces on a tray, another consort standing still
 cn_chu:c2|0|a proud consort kneels accused in a hall as a hairpin is shown on a tray, she looks toward another consort standing at the side
 cn_chu:c3|0|the Emperor and a consort stroll in a garden, the Emperor turning to ask her a question
 cn_chu:t1|1|a proud consort sits sleepless at her dressing table at night, a candle burning low
 cn_chu:x1|1|a mid-autumn banquet under a full moon, two consorts seated side by side at the same rank, other consorts watching
+cn_tinh:s1|0|a young palace guard in dark armor takes his post at a consort's palace gate, a maid inside the courtyard glancing back anxiously
+cn_tinh:s2|1|three old folded letters tied with a faded red string lie in an open wooden box on a dressing table by candlelight, no people
+cn_tinh:c1|0|a eunuch in grey loiters near a red palace gate, peering at the guard posted there
+cn_tinh:c2|0|a young guard kneels in a courtyard with his head bowed, two officers with long staves standing over him, a consort watching from a corridor
+cn_tinh:c3|0|the Emperor walking past a palace gate glances back at a guard whose eyes follow a consort in pink
+cn_tinh:t1|1|a rival consort's maid secretly hands an old folded letter to her mistress in a dim corridor
+cn_tinh:x1|0|the Emperor seated in his hall holds an old letter, looking at a consort who stands before him calmly
+cn_ban:s1|0|a consort unfolds a scrap of plain cloth with charcoal smudges in her hands, a maid guarding the door
+cn_ban:s2|0|a harsh female overseer with a cane watches a thin maid scrubbing clothes in a cold laundry court
+cn_ban:c1|1|an old stone well in a dark courtyard at night, a single lantern beside it, no people
+cn_ban:c2|0|a thin palace maid wrapped in a thin quilt shivers on a straw mat in a cold servants' room in winter
+cn_ban:c3|0|a eunuch from the Empress's palace questions a consort politely in her hall, her maid standing behind her
+cn_ban:t1|0|a consort chooses seamstresses from a line of maids in a workroom, one thin maid among them lifts her eyes
+cn_ban:x1|1|a consort and a thin maid stand before an old stone well at night, the maid pointing down into it
+cn_than:s1|1|a dying old nursemaid in bed holds a young consort's hand by candlelight
+cn_than:s2|0|close view of a consort's hands holding an old white jade pendant on a red cord
+cn_than:c1|1|a consort reads an old case file by lamplight in a dusty archive, shelves of files behind her
+cn_than:c2|0|a middle-aged woman in plain brown dress bows before a consort in a reception hall, both cautious
+cn_than:c3|0|a consort studies an old family genealogy scroll rolled on a desk, a rival consort's portrait painting on the wall
+cn_than:t1|1|a consort sits at a desk with a jade pendant and a bound file before her, a candle burning low
+cn_than:x1|0|a consort kneels before the Emperor and the elderly Empress Dowager, offering a jade pendant and a file on a tray
