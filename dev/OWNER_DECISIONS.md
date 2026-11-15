@@ -657,3 +657,7 @@ All must work in co-op.
 
 ## 15/11 ~20:55Z — Painted, never code-drawn (owner)
 - All day-closing / night / bedding / card-flip pictures and scenes must be PAINTED with Magnific gpt-2-6 (folder ba4aecfe…), never drawn with code (CSS/SVG/canvas shapes). Code only animates painted art (move, glow, fade).
+
+## 15/11 ~21:00Z — Effects painted with Magnific too (owner)
+- Owner wants effects (falling petals, candle flicker, glow, embers…) made with Magnific too, then put into the game; worried they may be too transparent / hard to separate from the background.
+- Coordinator method: (1) particle effects (petals, leaves, snow, embers, sparkles): paint single sprites with gpt-2-6 on a plain background, cut with images_remove_background → transparent PNG/WebP, check edges on dark + light, animate with the existing Pixi/jfx particle layer; (2) light effects (candle flame flicker, glow, moonlight, lantern): Magnific short video on pure BLACK background, shown with mix-blend-mode: screen (black disappears, no alpha needed, works on iPhone Safari) — exported as a small looping MP4/WebM or sprite sheet; (3) only when a solid effect needs real transparency: video_remove_background → frames → sprite sheet WebP (Safari-safe). Keep files small (download-size rule).
