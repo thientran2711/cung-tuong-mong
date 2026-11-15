@@ -6,4 +6,7 @@ face-reveal-shots 755x1000@2, 1000x755, 1180x820@2, 1366x1024@2, 844x390: real f
 face-reveal-look.js; ts-oldsave (old main save loads + 12 weeks, no errors); backfill once-only check; chap-label OK;
 event-dp: layout numbers same as main (test is flaky on main too: 'rivals' undefined in the harness).
 Fixes made: see dev/PROGRESS_review-face-reveal.md "Review r1" (evGate timing; look:1 panels).
-Left: month-cal.js, kit-page.js compare vs main, 390x844 rotate shot.
+month-cal.js all 6 sizes ok incl. 390x844 rotate prompt; kit-page.js: only the pre-existing §28.1 sample error ('out'), same on main.
+Re-merged origin/main d8b81af9 (small-bugs-2 r6, k61SeedChiTon): j61 auto-merged; re-ran stranger-sweep, face-reveal-look, shots
+755x1000@2 + 844x390, ts-oldsave, backfill: all OK. Harness flakiness under load (page closed / 'rivals' undefined right after start)
+also happens on main (event-dp.js 3/3 on main), passes on retry. RESULT: PASS.
