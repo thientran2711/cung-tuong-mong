@@ -25,6 +25,7 @@ const {chromium}=require('playwright');const [,,URL,SZ,OUT,TAG]=process.argv;con
   S.place='home';S.visit={k:'home',people:homePeople(),talked:false,tk:{}};S.buoi=0;used=0;tab='act';
   const w=wdOf(S);w.y=null;S.toilette={day:wk()*10,wk:wk(),score:80,makeup:true,style:'fit',dv:'hoppham',F:1,occ:['th'],look:'dep'};render();return{fid:figPick(S),ty:tyOn(S),tier:tyTier(S)}});
  await clear();await p.waitForTimeout(3500);
+ await p.waitForFunction(()=>{const f=document.getElementById('mefig');return f&&f.complete&&f.naturalWidth>0&&[...document.querySelectorAll('.kmk')].every(i=>i.complete)},null,{timeout:60000}).catch(()=>{});await p.waitForTimeout(800);
  R.stage=await mine();R.mk=await p.evaluate(()=>{const f=document.getElementById('mefig');const box=f&&f.parentElement;const m=box&&box.querySelector('.kmk');return{fig:f&&f.getAttribute('src').split('/').pop(),kmk:!!m,kmkSrcLen:m?m.getAttribute('src').length:0}});
  await shot('1-stage');
  /* her stage figure up close: makeup layer over the trung y face */

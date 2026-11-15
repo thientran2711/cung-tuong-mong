@@ -130,3 +130,9 @@ b14 https://pikaso.cdnpk.net/tmp/bulk-downloads/a33ae9db-7f34-428b-84b0-fbf5efa0
      measured with toilfit.py --extend --all --only -ty (template transfer from her measured portrait) → toil-fit.json + CDN.
 - Tests: dev/test/trung-y.js (setup now waits for the async start() and keeps a consort; it used to land on a palace-maid life ~40 %),
   new dev/test/trung-y-scan.js (every picture of her in trung y: stage, header, tabs, Tuần lục; makeup layer; one thiếu lễ; night).
+- toil-fit for trung y DONE: 5376 ty files (2688 fig + 2688 por) measured, 0 failures, old 4262 entries unchanged; img/toil-fit.json on CDN
+  (9638) = dev/art/toil-fit.json, md5 in dev/art/toil-fit-md5.json. Checked by eye (12 sample faces incl. the worst-moved c14 ty*-a18) and
+  in game: rosy cheeks + lip tint sit on the trung y face (kmk drawn on fig-consort-c05-ty5-a18).
+- Results: trung-y.js PASS at 755x1000@2, 1000x755, 1180x820@2, 1366x1024@2, 844x390 (old save from the live site loads, 0 page errors,
+  no horizontal overflow); trung-y-scan.js 755x1000@2 + 1180x820@2: 0 non-trung-y pictures of her in stage/header/own card/tabs/Tuần lục;
+  thieu-le.js ok.
