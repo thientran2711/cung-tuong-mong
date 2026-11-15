@@ -101,3 +101,4 @@ Nhắc theo dõi: send_later 30 phút, tự đặt lại mỗi lượt (lịch l
 - [ ] Lựa chọn không tác dụng (Hỏi han sức khỏe…) — act-audit
 - [ ] NPC không có tên riêng (Tổng quản) — stage-slots
 - [ ] Nền Kính sự phòng tối quá rực — chờ sếp chỉ nơi/ảnh
+- 08:25Z LIVE main=5c1007a69 (Sổ tuần 'Sổ này ghi' thẳng cột). hau-cung-ui còn ~30–40 phút.
