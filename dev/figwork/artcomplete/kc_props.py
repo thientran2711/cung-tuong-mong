@@ -10,6 +10,6 @@ SETS=[("holding a folded paper fan","holding a small embroidered silk sachet","h
 A=("holding a round silk fan","hands folded in front holding a handkerchief","holding a string of prayer beads")
 ids=sys.argv[1:]
 for i,jid in enumerate(ids):
-    j=J[jid]; n=int(jid[-2:]); s=SETS[(n-11)%len(SETS)]; p=T.replace("<PALETTE>",j["pal"])
+    j=J[jid]; n=int(jid[-2:]); s=SETS[((n-11) if jid.startswith("kc-c") else (n-1))%len(SETS)]; p=T.replace("<PALETTE>",j["pal"])
     for a,b in zip(A,s): assert a in p; p=p.replace(a,b)
     print(json.dumps({"jid":jid,"ref":j["ref"],"ref2":j["ref2"],"prompt":p},ensure_ascii=False))
