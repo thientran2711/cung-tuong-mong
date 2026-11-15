@@ -107,6 +107,7 @@ img/fig-eunuch-ndp-tray.webp (committed in git on review/shop-fix; not on the CD
   4. Stat-only sentence ("Danh -1.", "Kho lúa -8, nhà X thế lực -6.") now stays on the row of the fact it belongs to (kpSentences), and no
      stray "," between two chips (kpFactRow). Re-tested on the merged build: news-face-real 14/14, rv 5 sizes fixture + old save 0 bad, kit-page
      5 sizes 0 bad, opt-render fails [] , opt-scan unclassified 0, 0 page errors.
+- r6 part 3: merged origin/main afb2676a2 (header-danh, act-pics2, gift-ui r6): only built files conflicted (rebuilt). Re-test: news-face-real 12/12, rv fixture + old save 5 sizes 0 bad, kit-page 0 bad, 0 page errors.
 - NOTE for the coordinator: during this review some other session switched /home/user/wt/kit-fig2-r6 to branch review/kit-fig2 and edited
   j5/jhc/jk4/jplace/KIT.md/news-face-real.js there (uncommitted, 12:25Z). The reviewer's commit 00c72e4e4 therefore also sits on the LOCAL
   review/kit-fig2 ref of that worktree. Review work continued in /home/user/wt/kf2r6.
