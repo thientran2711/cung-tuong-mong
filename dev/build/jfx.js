@@ -125,6 +125,7 @@ function kfNumbers(card,before){if(!card||!before||kfStill()||typeof S==="undefi
   an.onfinish=()=>{sp.remove();if(ok){cell.classList.remove("kfhit","kfhit-r");void cell.offsetWidth;cell.classList.add(dv>0?"kfhit":"kfhit-r");setTimeout(()=>cell.classList.remove("kfhit","kfhit-r"),700);if(KFX.app)KF_SPAWN.pop&&kfPx("pop",{x:cr.left+cr.width/2,y:cr.top+cr.height/2})}}})}
 /* ---------- touch kit ---------- */
 const KF_TAP='button,.btn,.kbtn,.opt,.card,.pct,[role="button"],[role="tab"],[data-tab]';
+const KF_FIG="#me,#emp,.tok";
 function kfDis(el){return el.disabled||el.classList.contains("kdis")||el.getAttribute("aria-disabled")==="true"}
 function kfWhy(el){const w=[...el.querySelectorAll(".kwhy:not(.kok)")].map(x=>x.textContent.replace(/^[✗✓]\s*/,"").trim()).filter(Boolean);return w[0]||el.getAttribute("title")||el.dataset.why||""}
 function kfRipple(el,e){const r=el.getBoundingClientRect();if(!r.width||r.width*r.height>innerWidth*innerHeight*.45)return;const cs=getComputedStyle(el);
@@ -140,7 +141,7 @@ function kfLocked(el,e){const now=Date.now();if(now-kfLastNo<350)return;kfLastNo
  const onDown=e=>{if(e.button>0)return;const t=e.target;if(!t||!t.closest)return;
   /* locked: the event target can be the disabled button itself (Chrome, Safari pointer events) */
   const lk=t.closest('button:disabled,.kdis,[aria-disabled="true"]');if(lk&&lk.closest(KF_TAP)){kfLocked(lk,e);return}
-  const el=t.closest(KF_TAP);if(!el||kfDis(el))return;down=el;el.classList.add("kfdown");if(!kfStill())kfRipple(el,e)};
+  const el=t.closest(KF_TAP);if(!el||kfDis(el))return;if(el.matches(KF_FIG))return;down=el;el.classList.add("kfdown");if(!kfStill())kfRipple(el,e)};
  const onUp=()=>{const el=down;down=null;if(!el)return;el.classList.remove("kfdown");if(kfStill()||!el.isConnected||!el.animate||el.classList.contains("tok"))return;
   try{el.animate([{scale:".96"},{scale:"1.025",offset:.55},{scale:"1"}],{duration:240,easing:"ease-out"})}catch(x){}};
  document.addEventListener("pointerdown",onDown,{capture:true,passive:true});document.addEventListener("pointerup",onUp,{capture:true,passive:true});document.addEventListener("pointercancel",onUp,{capture:true,passive:true});
@@ -184,11 +185,14 @@ document.addEventListener("click",e=>{if(e.target&&e.target.closest&&e.target.cl
 (function(){const st=document.createElement("style");st.id="kfx";st.textContent=`
 :root{--kf-gold:#f0d070;--kf-rim:0 0 0 1px #f0d070b0,0 0 12px #f0d07055}
 /* press: scale .96 (the individual 'scale' property, so an element's own transform is kept), shadow pulls in, gold rim light */
-:is(button,.btn,.kbtn,.opt,.card,.pct,[role="button"],[role="tab"],[data-tab]):not(:disabled):not(.kdis){transition:scale .1s ease,filter .1s ease,box-shadow .14s ease}
-:is(button,.btn,.opt,.card,.pct,[role="button"],[role="tab"],[data-tab]):not(:disabled):not(.kdis):is(:active,.kfdown){scale:.96;filter:brightness(.97);box-shadow:var(--kf-rim)}
+:is(button,.btn,.kbtn,.opt,.card,.pct,[role="button"],[role="tab"],[data-tab]):not(:disabled):not(.kdis):not(#me):not(#emp):not(.tok){transition:scale .1s ease,filter .1s ease,box-shadow .14s ease}
+:is(button,.btn,.opt,.card,.pct,[role="button"],[role="tab"],[data-tab]):not(:disabled):not(.kdis):not(#me):not(#emp):not(.tok):is(:active,.kfdown){scale:.96;filter:brightness(.97);box-shadow:var(--kf-rim)}
 .kbtn:not(:disabled):is(:active,.kfdown){scale:.96;box-shadow:inset 0 0 0 1px #f0d07099,var(--kf-rim)}
-@media (hover:hover){:is(button,.btn,.kbtn,.opt,.card.ka,.pct,[data-tab]):not(:disabled):not(.kdis):hover{box-shadow:0 0 0 1px #f0d07070,0 0 8px #f0d07033}
+@media (hover:hover){:is(button,.btn,.kbtn,.opt,.card.ka,.pct,[data-tab]):not(:disabled):not(.kdis):not(#me):not(#emp):not(.tok):hover{box-shadow:0 0 0 1px #f0d07070,0 0 8px #f0d07033}
  .kbtn:not(:disabled):hover{box-shadow:inset 0 0 0 1px #f0d07066,0 0 0 1px #f0d07070,0 0 8px #f0d07033}}
+/* people on the stage (her #me, stage figures .tok, Hoàng thượng #emp): no box press / rim / ripple / tap highlight — a rectangle over a
+   figure is wrong (owner 16:40Z); they answer with j59's own figure animation */
+:is(#me,#emp,.tok){-webkit-tap-highlight-color:transparent}
 .kfrip{position:fixed;z-index:9460;pointer-events:none;overflow:hidden}
 .kfrip i{position:absolute;border-radius:50%;background:radial-gradient(circle,#fff3c4aa 0,#f0d07055 40%,#f0d07000 70%);transform:scale(0);opacity:.9;animation:kfRip .6s ease-out forwards}
 @keyframes kfRip{to{transform:scale(1);opacity:0}}
