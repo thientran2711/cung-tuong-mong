@@ -2453,3 +2453,43 @@ No new kit part: the exam is built only from existing parts.
 - Mệnh truyện › Sắc phong: the exam row is one more `kitChecks` row; status = `kitChip(text,"g"|"r"|"n")` in the `.ktop` row (as §46 header
   numbers) next to `kitInfo("Khảo hạch tấn phong")`; cold palace shows `kitEmpty` (no promotion card).
 - Test: `node dev/test/promo-exam.js <url> [oldBuildUrl] [outdir|-] [sizes]`; next-rank scan: `node dev/test/promo-next-rank.js <url>`.
+
+## 56. SCENE LIGHT · KIT_LIGHT + stage classes `.kown` / `.kwet` + kitBookFigClamp (owner 11/15, review/scene-light) — `dev/build/jsl.js` (after jk4)
+_(Renumbered by reviewer r7: this section was §41 on review/scene-light; main uses §41 for kitMeMark, §56 is scene-light's registry slot. Old refs "KIT §41.x" for scene light = §56.x.)_
+One module owns how light/colour is applied to scene paintings and to characters on them. Nobody adds private `filter:` rules on `.scimg`,
+`#mefig`, `.tok.fig .figimg` or `.kesimg`; change the knobs here instead.
+
+**56.1 KIT_LIGHT (character light per buổi).** One CSS variable `--klf` (a list of interpolable filter functions) set on `:root` from
+`S.buoi` + season by `KIT_LIGHT.sync()` (wrapped around `render`, `renderStage`, `kitEventStage`). Every character filter rule writes
+`filter:var(--klf) drop-shadow(…)` (p1 `.tok.fig .figimg` / `#mefig`, j59 halo keyframes, jk4 `.kesimg`). Knob `BAL.klfStrength`:
+**0 = characters keep their painted colours (owner choice A, default)**, .5 light, 1 full. `KIT_LIGHT.css(buoi, season, k)` returns the string.
+
+**56.2 Graded scene paintings (stage classes).** A place whose painting is one of the per-buổi graded images (j94 `<name>-<season>-<buổi>`,
+buổi ∈ sang|trua|chieu|toi) gets `.stage.kown`:
+- `.stage.kown .scimg{filter:none}` — the old stacked filters (p1 `.sc-home.day` brightness 1.35 + sepia .12, j25 room tiers rp1 sepia .25,
+  rp2/rp3 saturate) are NOT applied on top of graded paintings (owner 17:24Z: "her room at trưa all brown"). rp2/rp3 keep a tiny lift.
+- j12's per-buổi colour wash `b4Light()` returns transparent for graded paintings (`KIT_SCENE_TINT=0`; 1 restores ~¼ of the old wash).
+- `.stage.kown.kwet` = wet weather (`wet()`: drizzle, storm, heavy snow) on a graded painting: **warm, soft light** (owner 12:35Z: spring rainy
+  afternoon must not look like the cold palace) — painting `saturate(.97) contrast(.94) brightness(1.07)`, night `saturate(.95) contrast(.95)
+  brightness(1.01)`; `.light` layer (z-index 0, **below** characters) a faint warm ivory gradient. Rain streaks come from j11 particles.
+  Characters are never overlaid. Lãnh cung (`.sc-lc`) is excluded and keeps its bleak painting.
+- `window.kitSceneTag()` re-applies the classes (called after `renderStage` and `lightTick`).
+
+**56.3 Wide figures on the Tuần lục person page (owner 03:55Z one scale ≈85–90 %, never shrink to fit; 13:45Z Thái hậu cut; coordinator
+r8: text ≥ 220 px).** `.kbk-person.kbk-full` gives the figure a column `--porf` sized for a normal standing figure (aspect ≈ .42). A wider
+figure (Thái hậu h1–h3, t7/t8 trains, wide a51 sleeves) is handled in `dev/build/jsl.js`:
+- `kitBookFigCol(figHtml, PW, PH)` — called by j87 `personBody` WHILE PAGINATING, so the text is measured in its final column. It widens the
+  column until face + torso fit (head centre + 12 % of figure height; the head centre comes from the picture's alpha, so figures whose train
+  runs to one side are placed by their body, not the picture centre), but the text keeps ≥ 220 px (or, where the page is too small for 220,
+  never less than a normal figure's page). If both cannot hold, the figure is lowered from the kit height (≈ 93 %) towards **85 % — never
+  below**. Aspect + head centre are cached on first sight; a book already open then calls its OWN re-layout (`root.__kbk.relayout()`, no
+  window resize), which keeps the reader on the page holding the same fact (j87 leaves carry `b0`, the first block; spread = left page).
+- `kitBookFigClamp` (live pages, layout px): figure left edge at the page's left; if the body would reach under the text it slides left so
+  face + torso end at the column edge — only the outer train/sleeve may pass the page edge, and it FADES into the paper (48 px mask), never a
+  straight cut. What is wider than the column runs behind the text on the kit soft paper panel `.kbk-figover`; the panel costs no layout
+  (background + box-shadow spread, no padding), so pagination and the live page agree.
+- Phones (`.kbk.narrow`): unchanged from r7 (narrow portrait is not a supported layout, owner 05:50Z).
+- Tests (committed): `node dev/test/book-figwide.js <url|page.html> <outdir>` — 14 facts, every page: text cut, text width, broken words,
+  facts/page, figure height ≥ 0.85, never scaled, page-1 name, torso clear, body never past the left edge. `node dev/test/book-relayout.js
+  <url|page.html> <outdir>` — the figure download is held while the reader turns pages, then released: same fact still in view, 0 window
+  resize events.
