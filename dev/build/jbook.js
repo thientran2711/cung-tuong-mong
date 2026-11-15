@@ -36,21 +36,24 @@ function kitCurl(o){o=o||{};const host=o.host,w=Math.max(40,o.w|0),h=Math.max(40
  const mir=!!o.mirror,BIG=Math.ceil(Math.hypot(w,h)*2)+40,lift=o.lift!=null?o.lift*h:Math.min(h*.42,w*.8);
  const root=document.createElement("div");root.className="kcl"+(o.cls?" "+o.cls:"");
  root.style.cssText=`left:${o.x||0}px;top:${o.y||0}px;width:${w}px;height:${h}px`+(mir?";transform:scaleX(-1)":"");
- /* a face copy: sticky → relative (one static picture), ids dropped (keepId keeps the root's, so #id styles still apply), scroll kept */
- const prep=(src,keepId)=>{if(!(src&&src.nodeType===1))return null;const m=src.cloneNode(true),A=[src,...src.querySelectorAll("*")],B=[m,...m.querySelectorAll("*")],sc=[];
-  for(let i=0;i<A.length;i++){const a=A[i],b=B[i];if(!b)break;if(!(keepId&&i===0))b.removeAttribute("id");
+ /* a face copy: sticky → relative (one static picture), ALL ids dropped (no second #panel during the curl), scroll kept */
+ const prep=(src,keepId)=>{if(!(src&&src.nodeType===1))return null;const m=src.cloneNode(true),A=[src,...src.querySelectorAll("*")],B=[m,...m.querySelectorAll("*")],sc=[],lk=[];
+  for(let i=0;i<A.length;i++){const a=A[i],b=B[i];if(!b)break;/* NO duplicate ids during a curl (book-release 11/15): every id is dropped, the root keeps it as data-kclid */if(keepId&&i===0&&b.id)b.dataset.kclid=b.id;b.removeAttribute("id");
    if(a.scrollTop||a.scrollLeft)sc.push([b,a.scrollTop,a.scrollLeft]);
    const ca=getComputedStyle(a);if(i&&ca.position==="sticky")b.style.position="relative";
    /* a copied scroller is a still picture: clip it plainly (a live scroll layer inside the moving page is mis-clipped by the compositor) */
-   if(/auto|scroll/.test(ca.overflowY+ca.overflowX))b.style.setProperty("overflow","hidden","important");
+   if(/auto|scroll/.test(ca.overflowY+ca.overflowX)){b.style.setProperty("overflow","hidden","important");lk.push([a,b])}
    /* big boxes keep their real size (heights from grid/container units of the old parent would not resolve in the copy) */
    if(i&&a.firstElementChild){const r=a.getBoundingClientRect();if(r.height>=100&&r.width>=100){const st=b.style;st.setProperty("box-sizing","border-box","important");st.setProperty("height",r.height+"px","important");st.setProperty("min-height","0","important");st.setProperty("max-height","none","important");st.setProperty("flex","none","important")}}}
   /* the copy leaves its parent, so rules like ".game>#panel" stop matching: carry the root's own box layout inline */
   const cs=getComputedStyle(src);for(const k of["display","flexDirection","flexWrap","alignItems","alignContent","justifyContent","gap","gridTemplateRows","gridTemplateColumns","gridAutoRows","paddingTop","paddingRight","paddingBottom","paddingLeft","boxSizing","overflowX","overflowY","backgroundColor","backgroundImage","borderTopWidth","borderRightWidth","borderBottomWidth","borderLeftWidth","borderTopStyle","borderRightStyle","borderBottomStyle","borderLeftStyle","borderTopColor","borderRightColor","borderBottomColor","borderLeftColor","borderRadius","fontSize"])try{m.style[k]=cs[k]}catch(e){}
   if(m.style.display==="none"||m.style.display==="contents")m.style.display="block";
-  m.setAttribute("aria-hidden","true");m.inert=true;return{m,sc}};
+  m.setAttribute("aria-hidden","true");m.inert=true;return{m,sc,lk}};
+ /* o.ctx: the live page's ancestor (e.g. .game): the copy sits in a stand-in carrying its classes, so rules like ".game.k3ph #panel …"
+    still match the copy and it lays out exactly like the live page (owner 11/15: the back must be the WHOLE page, aligned) */
+ const ctxWrap=m=>{if(!o.ctx)return m;const d=document.createElement("div");d.className=o.ctx.className+" kcl-ctx";d.appendChild(m);return d};
  const face=(src,cls,keepId)=>{const f=document.createElement("div");f.className="kcl-face "+cls;f.style.width=w+"px";f.style.height=h+"px";
-  const p=prep(src,keepId);if(p)f.appendChild(p.m);else if(typeof src==="string"&&src)f.innerHTML=src;else f.innerHTML=`<div class="kpaper kcl-blank"></div>`;return{f,sc:p?p.sc:[]}};
+  const p=prep(src,keepId);if(p)f.appendChild(ctxWrap(p.m));else if(typeof src==="string"&&src)f.innerHTML=src;else f.innerHTML=`<div class="kpaper kcl-blank"></div>`;return{f,sc:p?p.sc:[]}};
  const hp=cls=>{const b=document.createElement("div");b.className="kcl-hp "+cls;b.style.width=b.style.height=BIG+"px";return b};
  /* ground: shadow along the fold on the page being uncovered (page-clipped) */
  const gnd=document.createElement("div");gnd.className="kcl-gnd";const gs=document.createElement("i");gs.className="kcl-gs";gs.style.height=BIG+"px";gnd.appendChild(gs);
@@ -64,7 +67,9 @@ function kitCurl(o){o=o||{};const host=o.host,w=Math.max(40,o.w|0),h=Math.max(40
  root.append(gnd,hF,hB);host.appendChild(root);
  const rescroll=()=>{for(const [e,t,l] of FR.sc.concat(BK.sc)){e.style.scrollBehavior="auto";e.style.scrollSnapType="none";e.scrollTop=t;e.scrollLeft=l}};rescroll();
  const MX=[-1,0,0,1,w,0];let dir0=o.dir||1;
- function set(p,dir){if(dir)dir0=dir;p=Math.max(0,Math.min(1,p));
+ function set(p,dir){if(dir)dir0=dir;p=Math.max(0,Math.min(1,p));BK.lastP=p;
+  /* aligned back: follow the live page's scroll (it may still settle while the sheet turns) */
+  if(o.backAligned&&BK.lk)for(const [a,b] of BK.lk){if(b.scrollTop!==a.scrollTop)b.scrollTop=a.scrollTop;if(b.scrollLeft!==a.scrollLeft)b.scrollLeft=a.scrollLeft}
   let cx=w-2*w*p,cy=h-lift*Math.sin(Math.PI*p);
   /* never fold the spine: |C−(0,h)| ≤ w */
   const dd=Math.hypot(cx,cy-h);if(dd>w){cx=cx*w/dd;cy=h+(cy-h)*w/dd}
@@ -77,7 +82,9 @@ function kitCurl(o){o=o||{};const host=o.host,w=Math.max(40,o.w|0),h=Math.max(40
   /* flap content: the back face lies (when turned) on [−w,0]; now = reflect(spine-mirror(it)) = R·S·translate(−w) */
   let G=kclMul(R,[-1,0,0,1,0,0]);G=kclMul(G,[1,0,0,1,-w,0]);
   hF.style.transform=kclM(BF);const iB=kclInv(BF);FR.f.style.transform=kclM(mir?kclMul(iB,MX):iB);
-  hB.style.transform=kclM(BF);BK.f.style.transform=kclM(kclMul(iB,mir?kclMul(G,MX):G));
+  hB.style.transform=kclM(BF);const Gm=mir?kclMul(G,MX):G;BK.f.style.transform=kclM(kclMul(iB,Gm));
+  /* aligned back: the flap keeps its folded shape (BK.f), the page inside it is put back at its own place on screen */
+  if(o.backAligned&&BK.al)BK.al.style.setProperty("transform",kclM(kclMul(kclInv(Gm),mir?MX:[1,0,0,1,0,0])),"important");
   /* how far the folded part reaches beyond the fold */
   let dm=0;for(const [X,Y] of [[0,0],[w,0],[0,h],[w,h]]){const s=(X-Mx)*nx+(Y-My)*ny;if(s>dm)dm=s}
   const el=Math.sin(Math.PI*p);
@@ -92,7 +99,12 @@ function kitCurl(o){o=o||{};const host=o.host,w=Math.max(40,o.w|0),h=Math.max(40
   root.style.setProperty("--kcl-e",el.toFixed(3));
   if(o.vanish)root.style.opacity=p>.8?Math.max(0,1-(p-.8)/.2).toFixed(3):"1"}
  set(o.p||0);
- return {el:root,set,rescroll,destroy(){root.remove()},n:1}}
+ /* backAligned (tab switch, owner 11/15): the back shows the destination page at its own place and scale, upright, so the flap and
+    the uncovered part together show the WHOLE new page; the flap adds only its shape, shading and fold shadow.
+    setBack(el): the back of the turning sheet shows a real page (the destination page, read the right way once turned; owner 11/15) */
+ function setBack(src){const p=prep(src,!!o.ctx);if(!p)return;[...BK.f.children].forEach(ch=>{if(ch!==sh)ch.remove()});let n=ctxWrap(p.m);if(o.backAligned){const al=document.createElement("div");al.className="kcl-al";al.style.setProperty("width",w+"px","important");al.style.setProperty("height",h+"px","important");al.appendChild(n);n=al;BK.al=al}
+  BK.f.insertBefore(n,sh);BK.sc=p.sc;BK.lk=p.lk;if(BK.lastP!=null)set(BK.lastP)}
+ return {el:root,set,rescroll,setBack,destroy(){root.remove()},n:1}}
 
 function kitCurlRun(c,from,to,dur,done,ease){ease=ease||kitCurlEase;const t0=performance.now();let alive=true;const dir=to>=from?1:-1;
  const step=now=>{if(!alive)return;const t=Math.min(1,(now-t0)/Math.max(1,dur));c.set(from+(to-from)*ease(t),dir);if(t<1)requestAnimationFrame(step);else{alive=false;done&&done()}};
@@ -110,14 +122,21 @@ function kitCurlSwap(el,fn,opt){opt=opt||{};const run=()=>{try{fn&&fn()}catch(e)
  if(!el||!r0||r0.width<60||r0.height<60||!el.getClientRects().length){run();return false}
  if(kitCurlOff()){el.classList.add("kcl-fade");run();requestAnimationFrame(()=>requestAnimationFrame(()=>el.classList.remove("kcl-fade")));return false}
  const host=document.createElement("div");host.className="kcl-host";host.style.cssText=`left:${r0.left}px;top:${r0.top}px;width:${r0.width}px;height:${r0.height}px`;
- let c=null;try{c=kitCurl({host,front:el,back:null,w:r0.width,h:r0.height,x:0,y:0,keepId:false,mirror:(opt.dir||1)<0,vanish:true,ghost:true,lift:.5,cls:"kcl-tab"})}catch(e){console.error(e)}
+ let c=null;try{c=kitCurl({host,front:el,back:null,w:r0.width,h:r0.height,x:0,y:0,keepId:!!el.closest(".game"),ctx:el.closest(".game"),mirror:(opt.dir||1)<0,vanish:true,lift:.5,backAligned:true,cls:"kcl-tab"})}catch(e){console.error(e)}
  run();
  const r1=el.getBoundingClientRect();
  if(!c||Math.abs(r1.left-r0.left)>2||Math.abs(r1.top-r0.top)>2||Math.abs(r1.width-r0.width)>2||Math.abs(r1.height-r0.height)>2||!el.getClientRects().length){host.remove();return false}
+ /* the back of the turning sheet = the new page (as in a real book: the page you turn to is printed on its back) */
+ try{c.setBack(el)}catch(e){console.error(e)}
  document.body.appendChild(host);c.rescroll();kitCurlSfx();
+ /* the new page finishes its layout a moment later (person card sizing, chips): take the back again once it has settled,
+    so the whole page (tabs, strip, card, acts) is on the back, at the same place as the real page underneath */
+ let alive=true;const reback=()=>{if(!alive)return;try{c.setBack(el);c.rescroll()}catch(e){}};
+ const sig=()=>{const q=el.querySelector(".pc,.pgwrap,.kbl,section,div");return el.scrollHeight+"|"+el.scrollTop+"|"+(q?q.getBoundingClientRect().top+":"+q.offsetHeight:"")};
+ let s0=sig();const iv=setInterval(()=>{if(!alive){clearInterval(iv);return}const s1=sig();if(s1!==s0){s0=s1;reback()}},70);setTimeout(reback,90);
  /* a quick lift then a slower settle (a flick of the page): the new page shows under the corner from the first frames */
- const stop=kitCurlRun(c,0,1,opt.ms||720,()=>{host.remove();if(kclLive===end)kclLive=null},kitCurlLift);
- const end=()=>{stop();host.remove()};kclLive=end;kitCurlSwap.t0=stop.t0;return true}
+ const stop=kitCurlRun(c,0,1,opt.ms||720,()=>{alive=false;host.remove();if(kclLive===end)kclLive=null},kitCurlLift);
+ const end=()=>{alive=false;stop();host.remove()};kclLive=end;kitCurlSwap.t0=stop.t0;return true}
 
 /* ---------- kitLeather: the unrolled leather map (Dư đồ) — NOT a book page (owner 11/15 04:00Z) ----------
    kitLeather(el) adds the hide surface around el's map painting: tanned leather with grain and burnt edges, an uneven hide outline,
@@ -205,6 +224,10 @@ function kitBookPic(o){o=o||{};const ax=o.ax!=null?o.ax:.5,feet=o.feet!=null?o.f
 .kcl-face{position:absolute;left:0;top:0;overflow:hidden;transform-origin:0 0}
 .kcl .kcl-face>*:not(.kcl-sh){position:absolute!important;inset:0!important;width:auto!important;height:auto!important;max-height:none!important;margin:0!important;visibility:visible!important;transform:none!important}
 .kcl-fr{box-shadow:0 0 0 1px #8a5a2418}
+html body .kcl .kcl-face>.kcl-al{inset:auto!important;left:0!important;top:0!important;transform-origin:0 0!important;overflow:visible!important}
+html body .kcl .kcl-al>*{position:absolute!important;inset:0!important}
+html body .kcl .kcl-ctx{display:block!important;position:absolute!important;inset:0!important;background:none!important;padding:0!important;margin:0!important;border:0!important;max-width:none!important;min-height:0!important;height:auto!important;overflow:hidden!important}
+html body .kcl .kcl-ctx>*{position:absolute!important;inset:0!important;width:auto!important;height:auto!important;max-height:none!important;margin:0!important;transform:none!important;visibility:visible!important}
 .kcl .kcl-face>.kcl-ghost{opacity:.075!important;transform:scaleX(-1)!important;filter:grayscale(.6) blur(.4px);pointer-events:none;z-index:1}
 /* the flap: its own soft shadow falls on the page below it */
 .kcl-bk{box-shadow:0 0 16px 2px #2a14064d,0 0 3px #2a140640;background:#f3e7cc}
@@ -292,7 +315,9 @@ html .game .kleather>.maptools>.past,html .game .kleather>.maptools>.fest{displa
 .kl-unroll>.kl-l{animation:kl-rl .62s cubic-bezier(.25,.7,.25,1)}.kl-unroll>.kl-r{animation:kl-rr .62s cubic-bezier(.25,.7,.25,1)}
 @keyframes kl-un{from{clip-path:polygon(48.51% 0.36%,48.69% 0.72%,48.9% 0.59%,49.13% 0.06%,49.36% 0.04%,49.57% 0.08%,49.76% 0.47%,50.02% 0.14%,50.2% 0.69%,50.46% 0.63%,50.64% 1.07%,50.83% 0.94%,51.06% 0.16%,51.26% 0.34%,51.48% 0.5%,51.5% 7.31%,51.48% 14.03%,51.49% 20.55%,51.5% 27.98%,51.48% 35.57%,51.49% 43.03%,51.49% 49.6%,51.48% 57.54%,51.49% 64.43%,51.49% 72.18%,51.48% 78.15%,51.48% 84.95%,51.49% 93.37%,51.49% 99.83%,51.29% 99.96%,51.08% 99.16%,50.86% 99.04%,50.63% 99.24%,50.43% 99.36%,50.21% 99.08%,50.03% 99.48%,49.8% 99.93%,49.58% 99.29%,49.39% 99.1%,49.13% 99.58%,48.94% 99.98%,48.71% 99.82%,48.5% 99.5%,48.5% 93.39%,48.5% 85.21%,48.51% 79.31%,48.5% 71.33%,48.51% 65.05%,48.52% 57.87%,48.51% 49.83%,48.51% 43.63%,48.52% 35.02%,48.5% 28.04%,48.51% 21.4%,48.51% 13.81%,48.5% 6.98%)}to{clip-path:polygon(0.4% 0.36%,6.44% 0.72%,13.43% 0.59%,21.16% 0.06%,28.59% 0.04%,35.58% 0.08%,42.04% 0.47%,50.65% 0.14%,56.59% 0.69%,65.18% 0.63%,71.22% 1.07%,77.66% 0.94%,85.29% 0.16%,92.09% 0.34%,99.35% 0.5%,99.86% 7.31%,99.49% 14.03%,99.56% 20.55%,99.95% 27.98%,99.46% 35.57%,99.75% 43.03%,99.64% 49.6%,99.36% 57.54%,99.8% 64.43%,99.58% 72.18%,99.42% 78.15%,99.22% 84.95%,99.67% 93.37%,99.6% 99.83%,92.84% 99.96%,86.05% 99.16%,78.72% 99.04%,71.06% 99.24%,64.47% 99.36%,57.06% 99.08%,50.89% 99.48%,43.19% 99.93%,36.12% 99.29%,29.56% 99.1%,21.0% 99.58%,14.62% 99.98%,7.07% 99.82%,0.09% 99.5%,0.05% 93.39%,0.1% 85.21%,0.31% 79.31%,0.06% 71.33%,0.44% 65.05%,0.66% 57.87%,0.22% 49.83%,0.29% 43.63%,0.77% 35.02%,0.14% 28.04%,0.19% 21.4%,0.47% 13.81%,0% 6.98%)}}
 @keyframes kl-rl{from{left:calc(50% - 16px)}to{left:2px}}@keyframes kl-rr{from{right:calc(50% - 16px)}to{right:2px}}
-.kcl-host{position:fixed;z-index:40;pointer-events:none}
+.kcl-host{position:fixed;z-index:40;pointer-events:none;
+ /* the turning page never rises above the page area (stays under the top bar); it may still swing out sideways over the left page */
+ clip-path:polygon(-6000px 0,6000px 0,6000px 6000px,-6000px 6000px)}
 .kcl-in{animation:kcl-in .3s ease-out}@keyframes kcl-in{from{opacity:0}to{opacity:1}}
 @media (prefers-reduced-motion:reduce){.kleather.kl-unroll,.kl-unroll>.kl-roll,.kcl-in{animation:none}}
 /* ===== the live game as an open BOOK (owner 11/14 approval, 11/15 priority) — kitBookLive =====
