@@ -1,3 +1,5 @@
+> **LANGUAGE (owner, 15/11 ~18:30Z):** all repo work files, PROGRESS, reviews, KIT.md, commit messages and reports are written in ENGLISH (saves credits). Player-visible game text stays Vietnamese (VANPHONG.md).
+
 > **LUẬT KIT TRƯỚC (sếp, 15/11 16:50Z, ưu tiên số 1):** MỌI chỗ hiện thông tin (chip, hàng chỉ số, dòng quan hệ, thẻ…) trên toàn game lấy từ kit chuẩn. Thợ KHÔNG tự viết/vẽ kiểu riêng. Chưa có kit → DỪNG, báo điều phối → làm thành phần kit chung + ghi KIT.md + trang mẫu kit → rồi mới dùng. Người duyệt FAIL mọi chip/hàng làm riêng.
 
 > **LUẬT SỬA CẢ NHÓM (sếp, 15/11 14:50Z):** sếp báo lỗi ở MỘT chỗ thì thợ sửa CẢ NHÓM cùng loại (mọi tài nghệ/món, mọi sự kiện, mọi thẻ cùng kiểu…): viết script rà hết, báo bảng trước/sau. Không chỉ sửa đúng chỗ sếp chỉ.
