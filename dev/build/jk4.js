@@ -455,7 +455,7 @@ window.kitCatchOn=kitCatchOn;window.kitCatchOff=kitCatchOff;
 #kxcatch{position:fixed;inset:0;background:transparent;touch-action:none;-webkit-tap-highlight-color:transparent}
 #kxcatch[hidden]{display:none!important}
 `;document.head.appendChild(st)})();
-/* ================= KIT 42 · kitActCompact (cherry-picked from review/kit-fig2 3e212597e by tabs-kit r7; kit-fig2 KIT §39 → §42) — act cards in a NARROW pane beside a portrait / figure (owner 11/15: "the act picture squeezes the
+/* ================= KIT 43 · kitActCompact (cherry-picked from review/kit-fig2 3e212597e by tabs-kit r7; kit-fig2 KIT §39 → §42 → §43, reviewer r7: main close-bugs owns §42) — act cards in a NARROW pane beside a portrait / figure (owner 11/15: "the act picture squeezes the
    text into a thin column") =================
    Panes that hold a person on the left (person card `.pc > .pcr`: Hậu cung · Thánh thượng / Phi tần / Cung nhân "Việc hôm nay", Hoàng tự
    child cards) are inline-size containers named `kpane`. When the pane is under 640 px wide every act card (`button.ka.kart`) inside it

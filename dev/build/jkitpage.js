@@ -3,7 +3,7 @@
    every registered kit part drawn by the REAL kit functions (no copies), at the current screen size. Close = the kit ✕ or remove "#kit".
    Every new kit part adds its sample here in the same commit as its KIT.md section:
      KIT_SAMPLES.push({id:"§21", title:"kitSkillCard", html:()=>kitSkillCard({...})});
-   Samples render inside .kpanel-like paper; act cards (pbtn) are normalised by j63 kaNorm and compacted by §42 like in the game. */
+   Samples render inside .kpanel-like paper; act cards (pbtn) are normalised by j63 kaNorm and compacted by §43 like in the game. */
 const KIT_SAMPLES=[];window.KIT_SAMPLES=KIT_SAMPLES;
 function kitSamplePage(){try{let pg=document.getElementById("kitpage");if(!pg){pg=document.createElement("div");pg.id="kitpage";pg.setAttribute("role","dialog");pg.setAttribute("aria-label","Trang mẫu kit");document.body.appendChild(pg)}
  pg.innerHTML=`<div class="kitpg-h"><b>Trang mẫu kit</b><small>${KIT_SAMPLES.length} thành phần · dev/kit/KIT.md</small><button type="button" class="kitpg-x" aria-label="Đóng">✕</button></div>`+
@@ -14,7 +14,7 @@ function kitSamplePage(){try{let pg=document.getElementById("kitpage");if(!pg){p
 window.kitSamplePage=kitSamplePage;
 addEventListener("hashchange",()=>{if(location.hash==="#kit")kitSamplePage()});
 if(location.hash==="#kit")setTimeout(kitSamplePage,1200);
-/* samples of the parts added / changed by tabs-kit r7 (§21, §28.19 thumb, §42 compact acts, §45 pane bar, §46 tab parts) */
+/* samples of the parts added / changed by tabs-kit r7 (§21, §28.19 thumb, §43 compact acts, §45 pane bar, §46 tab parts) */
 KIT_SAMPLES.push(
  {id:"§28.19",title:"kitSceneArt: wide · tall · thumb",html:()=>`<div class="kitpg-row"><div style="width:220px">${kitSceneArt(kitInfoArt("sắc phong").src,"Rộng 16:9",{shape:"wide"})}</div><div style="width:120px">${kitSceneArt(kitSkillArt("vir","cong","Công"),"Cao 3:4",{shape:"tall"})}</div>${kitSceneArt(kitSkillArt("art","cam","Cầm"),"Nhỏ",{shape:"tall",size:"thumb",cap:false})}</div>`},
  {id:"§21",title:"kitSkillCard: môn (có việc), chương, trống",html:()=>`<div class="kskills">`+
@@ -23,7 +23,7 @@ KIT_SAMPLES.push(
   kitSkillCard({kind:"story",k:"x",kicker:"Chương 2",name:"Tên chương",level:1,max:4,word:"Hồi",bar:false,next:"",img:kitInfoArt("Mệnh truyện").src})+
   kitEmpty("Việc nhờ","Chưa ai nhờ ngươi việc gì.")+`</div>`},
  {id:"§46",title:"kitChecks · kitInfo",html:()=>kitChecks([[false,"Sủng 8 (cần 38)"],[true,"Danh 33 (cần 30)"]])+(typeof kitInfo==="function"?kitInfo("Việc nhờ"):"")},
- {id:"§42",title:"Việc gọn (cột hẹp, kpanec)",html:()=>`<div class="pcb ktacts"><div class="kpanec">${pbtn('data-kitsample="3"',"Hỏi han ở tẩm cung ta: ai cần giúp?","tốn: 1 khắc · thành: người ở đây có việc thì ngỏ lời nhờ","")}</div></div>`});
+ {id:"§43",title:"Việc gọn (cột hẹp, kpanec)",html:()=>`<div class="pcb ktacts"><div class="kpanec">${pbtn('data-kitsample="3"',"Hỏi han ở tẩm cung ta: ai cần giúp?","tốn: 1 khắc · thành: người ở đây có việc thì ngỏ lời nhờ","")}</div></div>`});
 (function(){const st=document.createElement("style");st.id="kit-page";st.textContent=`
 #kitpage{position:fixed;inset:0;z-index:2147483000;overflow:auto;background:var(--panel,#fffaf0);padding:0 16px 24px;color:var(--ink)}
 #kitpage[hidden]{display:none}

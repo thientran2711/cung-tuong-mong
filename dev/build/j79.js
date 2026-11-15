@@ -768,7 +768,7 @@ html body #tabs.tabs button.kghide{display:none!important}
    every art (Cầm, Kỳ, Thi, Họa, Vũ, Y, Thêu, Nấu…), every Tứ đức course, every Tác phẩm line, the Mệnh truyện chapter / Sắc phong head and
    an empty state are ONE card: small painted picture LEFT (kitSceneArt size "thumb", §28.19), RIGHT: kicker, name + kitSteps (segments + "Bậc l/max";
    tap = the levels when stepsAttr is given), one desc line, tiến bộ bar (or "Đã tinh thông"), "Bậc n mở" chip + what it gives; act cards BELOW in a
-   grid of act cells, each cell a kpanec (§42 compact acts under 640 px). levels:[text per level] still works: the next level's text becomes the "Bậc n mở" line.
+   grid of act cells, each cell a kpanec (§43 compact acts under 640 px). levels:[text per level] still works: the next level's text becomes the "Bậc n mở" line.
    kitSkillCard({kind, k, name, kicker, level, max, word:"Bậc", prog:[cur,need] | prog:cur+need:n, bar:false, desc, next, levels, acts:[pbtn…], img, stepsAttr, can}) */
 function kitSkillArt(kind,k,name){const key=`${kind}-${k}`;const have=(KIT_INFOM.have||[]);const ah=(KIT_ACTS.have||[]);
  return have.includes(key)?`img/${key}.webp`:ah.includes("act-cat-hoc-tap")?"img/act-cat-hoc-tap.webp":""}
