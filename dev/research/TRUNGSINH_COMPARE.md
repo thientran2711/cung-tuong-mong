@@ -84,3 +84,73 @@ Ngày 14/11/2026 (giờ VN đã sang 15/11). Bot Playwright, 755x1000 @2 (chính
 - Lễ xướng danh hội thời trang (cả dàn toàn thân): `/tmp/claude-0/-home-user-cung-tuong-mong/a5fd33d3-7f41-5bff-b6da-0b51bb3f7f98/scratchpad/tsg/59_fest_end.png`
 - Thẻ kết thúc đời: `/tmp/claude-0/-home-user-cung-tuong-mong/a5fd33d3-7f41-5bff-b6da-0b51bb3f7f98/scratchpad/tsg/49_ending.png`
 - (Thêm) bản đồ cung `18_hoangcung.png`, bản ngang `54_land_main.png`, tiệc đầu năm `42_square.png`.
+
+---
+
+## Đào sâu (CHƯA XONG — dừng giữa chừng theo lệnh tiết kiệm credit, 15/11)
+
+**Đã chơi thêm:** 2 bot chạy song song qua 2 phiên trình duyệt riêng, 3 kiểu chơi: "liều" (ưu tiên lựa chọn đối đầu), "an toàn" (chọn % cao, từ chối hẹn hò) và "tập trung thi". Tổng thêm khoảng 9 kiếp, 2 đường xuất thân (con nhà quan dự tuyển tú, cung nữ), khoảng 150 tháng, 196 loại màn/sự kiện được ghi lại. Có một kiếp lên tới **Quý Phi** (20 tuổi, được ban cung riêng), nhưng chết ngay tháng sau vì một lượt tung 49 %.
+
+**Chưa thấy:** hệ thống **nô bộc** và **báo thù do người chơi chủ động** (bản 1.59 ghi "Update hệ thống nô bộc & trả thù" lúc 02:22 15/11). Khả năng cao hai hệ thống này chỉ mở khi đã có cung riêng (Tần/Phi trở lên). Bot chưa sống sót đủ lâu ở phẩm cao để mở. Danh sách người quen (Nhân duyên) và thẻ người trên bản đồ, kể cả với người "Thù địch", chỉ có 2 nút **Trò chuyện / Tặng quà**, không có nút hại hay trả thù. Muốn làm tiếp: chơi tay tới Phi có cung riêng.
+
+Kiểm tra phía mình: đã grep `dev/build/j*.js` và docs.
+
+### Danh mục tính năng/sự kiện đã thấy (họ) — mình có chưa — cách đưa vào game mình
+
+**A. Bị hại (NPC → nàng), kích hoạt theo thanh Đố kỵ.** Tất cả đều là **một màn + nút Tiếp tục**, không có lựa chọn, chỉ báo số.
+| Sự kiện (mô tả lại) | Kích hoạt / kết quả | Mình có? | Đề xuất |
+|---|---|---|---|
+| **Thả linh miêu cào mặt** | Phi tần phẩm cao hơn ghen → thú cào mặt: Dung mạo về 0 và *không tăng lại được*, thiện cảm −20 với kẻ đó; vết cào hiện trên tranh mặt; người chơi bị **đuổi khỏi tẩm điện** khi được triệu; chữa bằng thuốc đổi mặt (500 bạc) | Có hủy dung + vết cào 1/2/3; có "nhồi lông mèo" / bột ngứa; **chưa có thú tấn công** | Thêm hành động hại "Thả mèo hoang/linh miêu" vào nhóm Hại nhỏ (hai chiều, có động cơ). Hệ quả: hủy dung 1–3 vết, không dự thị tẩm/thi Sắc cho tới khi chữa (khăn che / thái y / thuốc). Dùng lại overlay vết cào đã duyệt |
+| Hắt nước ngay lần đầu gặp | Lần đầu gặp người cao phẩm hơn: Sức −, Danh −, mở đầu bằng thiện cảm âm | Gần có (Dằn mặt, Khiêu khích) | Tạo "ấn tượng đầu" với người ghét mình: một câu có số, đặt ngay lúc gặp lần đầu trên bản đồ |
+| Chặn đường đòi bạc | 2 nút: nhịn (mất bạc) / không giao (bị làm nhục, Đố kỵ +8, Sức −, Danh −) | Có tống tiền | Giữ đúng 2 nút đơn giản này cho NPC mạnh hơn bắt nạt; lặp lại thì mở lựa chọn tố lên trên |
+| Trà bị tráo, phấn có độc, thuốc đổi màu | Mất Sức/Sắc; với thuốc lạ thì có 3 lựa chọn (giữ lại cho thái y xem / uống / khéo trả) | Có hạ độc, dị ứng, chứng cứ | Đã có, chỉ cần màn ngắn hơn |
+| Vu trộm (đồ giấu trong phòng), sổ sách bị sửa, tráo quà/thư, truyền sai giờ hẹn, bóp méo lời nói, phá bài luyện | Trừ Danh/Công trạng/thiện cảm với người bị lừa | Có (cài đồ vào rương, phản gián, vu oan) | Đã có. Họ hay ở chỗ **kẻ bị lừa là NPC thật** (thân vương, tướng quân) nên thiện cảm người đó giảm |
+| Hỏa hoạn | Cháy mất 1 món trong tủ, được cấp lại đồ thường | Không | Sự kiện thế giới: lửa đốt 1 món (Ngự tứ không cháy); có thể là mưu của kẻ thù |
+| "Sóng ngầm" (đại thần can gián vì quá được sủng) | 2 lựa chọn khoảng 50 %, có thể **chết** | Có (triều đình 5 nhà) | Giữ, nhưng luật mình bắt buộc phải có điềm báo trước |
+| Bạch nguyệt quang trở về | Người cũ của vua quay lại, chỉ 1 nút chịu chỉ → lãnh cung trọn đời | Không | Mệnh truyện theo tropes ngôn tình cung đấu; mình phải cho đường gỡ (Cơ duyên hiếm), không ép chết |
+
+**B. Tình cảm / sủng ái**
+| Sự kiện | Họ | Mình có? | Đề xuất |
+|---|---|---|---|
+| Lật thẻ bài thị tẩm | Nhận lời / cáo bệnh; chọn y phục thị tẩm; màn "kết quả" (hài lòng / bình thường / có thai) | Có (Kính sự phòng, lật thẻ) | Đã có |
+| Vua triệu: đánh đàn (minigame nhịp 30 giây, chạm/giữ nốt, chấm sao), caro 11×11 với vua (vua tự đánh, lưu ván, xin hoà), du hồ (chọn đồ, có thể gặp thích khách) | Có | Có đàn/cờ trong hội thi; triệu kiến có | **Đáng học:** minigame dùng làm *lời mời riêng của vua* chứ không chỉ để thi. Chơi tốt thì Sủng + |
+| Hẹn hò thân vương/tể tướng/thần y | Thiện cảm tới mốc → lời hẹn; phi tần nhận lời thì bị tố, có khi bị **xử tử**; cung nữ thì bị phạt bạc; cung nữ có thể được **cầu hôn → xuất cung** (kết cục) | Có tình cấm + Thanh mai trúc mã | Cùng một hành động, hậu quả theo thân phận: rất rõ và dễ nhớ |
+| **Vua vô sinh → mật ước với thân vương để có con nối dõi** | Bí mật, có thai, được ghi là con vua; sinh con được thăng phẩm, có thể nhảy tới Quý Phi | Không | Mệnh truyện hiếm: lựa chọn đạo đức, rủi ro bị lộ |
+| Sinh con thì thăng một bậc + tặng đồ | Có | Có sinh nở | Thêm "ân thưởng sau sinh": thăng 1 bậc + đồ ngự ban |
+
+**C. Thăng tiến / nghi lễ**
+- Tuyển tú = vẽ tay theo mẫu. **Khảo hạch cung nữ** = 3 vòng lật thẻ. **Đại khảo 2 năm/lần** = đủ 3 chỉ số ngưỡng (đổi theo kỳ) rồi mới thi vẽ, tối đa lên Tiệp dư; phẩm cao hơn cần "cơ duyên" (sinh con, sủng). → Mình có thể lấy ý **cổng ngưỡng chỉ số hiển thị rõ (x/y · Thiếu/Đủ) trước kỳ thi**.
+- **Đại lễ sắc phong** (cả của người khác): chọn lễ phục, đứng hàng chúc tụng, từng người chúc một câu, mở chiếu, rồi **phát phong bao** (20 bạc/người, +thiện cảm mỗi người). Được ban cung riêng. → Mình chưa có lễ phong phẩm có khách dự. Đề xuất "Lễ tấn phong": khách là NPC thật, phát lì xì để giảm ghen.
+- Tân đế đăng cơ khi vua băng hà; vua chết không người nối dõi → kết cục xuất gia. Mình có kế vị.
+
+**D. Đời sống, kinh tế, vật phẩm**
+- Biến cố đời thường có 3 lựa chọn (stat + %): thư nhà xin bạc, cứu cháy kho, ngựa hoảng, đèn rơi, bạn cùng phòng sốt, ma ma cũ ốm, nhặt trâm, nhặt ngọc ở giếng, túi bạc hối lộ, chợ đổi đồ cuối tháng (mua / mặc cả), cánh cổng hé mở (8 % trốn cung). Mình có nhiều sự kiện tuần tương tự.
+- **Hồ ước nguyện** (12 tháng/lần): dâng 100 bạc + 1 món từ Tinh xảo trở lên → hồ trả 0/100/500/1.000 bạc ngẫu nhiên, món dâng mất hẳn. Mình chưa có. Đề xuất "Thả đèn cầu may" ở Phật đường: đổi đồ thừa lấy vận may.
+- **Thú cưng:** lồng 100 bạc → gacha (có thể trượt, trùng thì đổi bạc); có phẩm và Xa xỉ; mỗi lúc **1 con đi cùng, cộng 1 chỉ số**; NPC nam thích mình thì tặng lồng thú; xếp hạng sưu tầm. Mình chưa có. Đề xuất: thú nuôi trong cung (mèo, chim, cá…), 1 con theo hầu +1 Tư chất nhỏ. Thú có thể bị kẻ thù hại hoặc dùng để hại (nối với mục A).
+- Cửa tiệm: quà bánh (−10 Đố kỵ), thuốc đổi mặt, thuốc an thai (1 viên / 5 năm). Thu mua đồ. Mình có bán/cầm.
+- Thủ công: thêu túi (tặng nam) / hộp trà (tặng nữ) bằng minigame vẽ; mỗi người nhận 1 lần/tháng. Mình có đồ làm từ bài học, chưa nối với tặng quà.
+
+**E. Hệ thống/giao diện đơn giản đáng học**
+- Mọi biến cố đều **một màn, 2–3 nút, mỗi nút một dòng "chỉ số · %"**, kết quả là thẻ "Vượt qua phép thử / Một bước chông chênh" kèm các dòng số. Rất dễ đọc. (Mình giữ luật thang chữ.)
+- 5 thể lực/tháng dùng chung cho việc, dạo chơi, trò chuyện, tặng quà, thủ công → **một nguồn lực duy nhất**, dễ hiểu (giống Sức của mình).
+
+### Top 15 nên thêm (xếp theo giá trị / độ dễ)
+1. Thả thú (linh miêu/mèo) hủy dung, hai chiều, chặn thị tẩm cho tới khi chữa.
+2. Lễ hội phối đồ theo đề (màu + phẩm), bục xếp hạng; cung nữ mượn đồ.
+3. Minigame làm *lời triệu riêng của vua* (đàn, cờ, du hồ) → Sủng.
+4. Đại lễ tấn phong có khách NPC + phát lì xì giảm ghen.
+5. Cổng ngưỡng chỉ số cho kỳ xét phẩm (x/y Đủ/Thiếu) hiện trước.
+6. Thanh nguy hiểm chung (tổng Ghen/Oán), cao thì các sự kiện bị hại mục A dày hơn.
+7. Thú cưng: nuôi, 1 con theo hầu +1 Tư chất, có thể bị hại.
+8. Ấn tượng đầu khi gặp người ghét mình (hắt nước, dằn mặt) bằng một câu có số.
+9. Bắt nạt đòi bạc, 2 nút đơn giản.
+10. Hậu quả hẹn hò khác nhau theo thân phận (phi tần bị tố / cung nữ bị phạt / cung nữ được cầu hôn xuất cung).
+11. Mật ước sinh con khi vua vô sinh (Mệnh truyện hiếm).
+12. Ân thưởng sau sinh (thăng 1 bậc + đồ ngự ban).
+13. Hỏa hoạn đốt đồ trong tủ.
+14. Hồ ước nguyện / thả đèn cầu may (đổi đồ lấy vận).
+15. Đồ thủ công nối với tặng quà (mỗi người 1 lần/tuần, chất lượng → thiện cảm).
+
+**Không nên học:** chết hoặc lãnh cung không báo trước, chỉ sau một lượt tung khoảng 50 % hoặc sau một màn chỉ có 1 nút. Mình luôn có điềm báo và đường gỡ.
+
+**Việc còn dở:** tìm hệ thống nô bộc và báo thù (cần chơi tay lên Phi có cung riêng). Ảnh chụp thêm: `scratchpad/tsg/70_wish.png`, `71_wishres.png`, `75_caro.png`, `77_pettab.png`, `78_petcard.png`. Log thô của bot: `scratchpad/bot/catalog*.log`, chỉ để đọc, không đưa vào repo.
