@@ -194,3 +194,4 @@ Worktree thợ ở /home/user/wt/<tên>. Bản tóm tắt luật cho thợ: /hom
 - 09:50Z (giờ máy): ĐĨA ĐẦY do 20 thợ cùng fetch đầy đủ repo nông → 6 việc bị chặn, đã chạy lại. Luật mới cho thợ: fetch --depth=30 dưới `flock /home/user/wt/fetch.lock`, không clone lại.
 - review/event-honest chưa từng được đẩy (mất theo máy cũ) → event-balance làm lại từ main + opt-render.
 - Đã giao: 16:55Z/16:58Z/17:00Z → fix-float (quét kit Tuần lục); 17:04Z ảnh tin sai người → kit-fig2 (ưu tiên, báo sớm). Hàng chờ: reward-anim (17:02Z), hoa điền thu nhỏ thêm, R rank0-ivory+emo-men, R poison-gift, pets-fix, sfx, rank-ui.
+- 17:06Z luật sự kiện chính/phụ tuyến (nhãn + hạn chót + đường không tốn bạc) → event-balance. Chi tiết hộp gấm 17:02Z giữ ở hàng chờ reward-anim (giờ hiện món ~1,2–1,5 s, rà mọi món thiếu hình, nhãn phẩm thật, bỏ dòng không đổi).
