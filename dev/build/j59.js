@@ -8,7 +8,7 @@
 /* KIT · rank colour palette (owner 11/14), set on the shared RCOL from j1 so badges, frames and the halo all follow:
    Đáp ứng nâu xám, Thường tại xanh lục, Quý nhân xanh lam, Tần hồng phấn, Phi tím, Quý phi đỏ, Hoàng quý phi cam, Hoàng hậu vàng; lãnh cung #cfd3d8 */
 window.MRCOL=["#9aa3a8","#5fa39a","#4f74a8","#a0584a","#6a5a8e"];window.ERCOL=["#8f9a8a","#5f8a6a","#3f6a8a","#7a4a3a"];
-try{["#8a7a6a","#7aa07a","#6a8aa0","#d48fa6","#a07ab0","#c06a6a","#d98a3a","#f0d070"].forEach((c,i)=>{RCOL[i]=c})}catch(e){}
+try{["#9c8f74","#7aa07a","#6a8aa0","#d48fa6","#a07ab0","#c06a6a","#d98a3a","#f0d070"].forEach((c,i)=>{RCOL[i]=c})}catch(e){}
 (function(){
 const J59BB={},J59W={};
 /* figure body box: the kit measurement (kitFigBody, jkit) — J59BB stays as the read cache other modules use */
@@ -190,11 +190,11 @@ function j59lay(force){const st=document.getElementById("stage");if(!st||!S)retu
   requestAnimationFrame(clampT);window.__j59tc=setTimeout(clampT,400)}}
 /* KIT element "rank outline": thin edge glow in --halo (her rank colour) along her own figure only; never an aura; pulse only with Hiệu ứng hình and no reduced motion.
    KIT element "selection outline" (.j59sel): brighter warm-white edge glow #fff3c4 on the one person she has selected (popIdx) or on herself (tap her figure); replaces her rank outline while she is selected */
-const SG=(a,o)=>`drop-shadow(0 6px 6px #0005) drop-shadow(0 0 1.5px #fff3c4) drop-shadow(0 0 3px #fff3c4) drop-shadow(0 0 ${a}px rgba(255,236,170,${o}))`;
-const HG=(a,c)=>`drop-shadow(0 8px 8px #0006) drop-shadow(0 0 ${a}px color-mix(in srgb,var(--halo) ${c}%,transparent))`;
+const SG=(a,o)=>`var(--klf,brightness(1)) drop-shadow(0 6px 6px #0005) drop-shadow(0 0 1.5px #fff3c4) drop-shadow(0 0 3px #fff3c4) drop-shadow(0 0 ${a}px rgba(255,236,170,${o}))`;
+const HG=(a,c)=>`var(--klf,brightness(1)) drop-shadow(0 8px 8px #0006) drop-shadow(0 0 ${a}px color-mix(in srgb,var(--halo) ${c}%,transparent))`;
 const css=document.createElement("style");css.textContent=`
-/* rank badge fills follow the new RCOL (c0 nâu xám, c1 xanh lục, c3 hồng phấn; others already match) */
-.rk-c0{background:linear-gradient(160deg,#e2dbd2,#b3a696)!important;border-color:#8a7a6a!important}
+/* rank badge fills follow the new RCOL (c0 trắng ngà ngọc trai, owner 11/15; c1 xanh lục, c3 hồng phấn; others already match) */
+.rk-c0{background:linear-gradient(160deg,#fbf8f1,#e6dfcf)!important;border-color:#9c8f74!important}
 .rk-c1{background:linear-gradient(160deg,#d6e6d0,#a3c39b)!important;border-color:#7aa07a!important}
 .rk-c3{background:repeating-linear-gradient(45deg,#f6dbe4 0 6px,#ecc6d3 6px 12px)!important;border-color:#d48fa6!important}
 .stage.j59{--halo:#f0d070}

@@ -1,12 +1,13 @@
 # Review: review/close-bugs (15e36a6c6) — reviewer R6, 2026-11-15
 
-Merged onto origin/main ebbbd9eff as review/close-bugs-r6.
+Merged onto origin/main ebbbd9eff, then again onto d50f5f772 (rank0-emo, rest-balance, scene-light), as review/close-bugs-r6.
 
 ## Merge
 - Conflicts: assemble.py (kept main order incl. jseal; jclose before j84), KIT.md, built files (rebuilt with dev/site/build_site.sh).
 - "Qua ngày" lines (j6, j77, jcoopworld, jcooplobby, jtime4, p1.html): identical to kit-close already on main, merged clean.
-- KIT numbering: this branch's §40 (close-bugs rules, kitLine) renumbered to **§41** (main has §39 kitSeal, §40 APP ICON); note left in
-  KIT.md §41, refs fixed in KIT 28.6, jclose.js, swreg.js ("KIT §7.4" was a wrong ref -> §41.2), PROGRESS_close_bugs.md.
+- KIT numbering: this branch's §40 (close-bugs rules, kitLine) renumbered to **§42** (main has §39 kitSeal, §40 APP ICON, §41 kitMeMark);
+  note left in KIT.md §42, refs fixed in KIT 28.6, jclose.js, swreg.js ("KIT §7.4" was a wrong ref -> §42.2), PROGRESS_close_bugs.md.
+- assemble order: main's list + jclose.js after jaudit.js (before jmark, jkpor, j84, jimg).
 
 ## Scans re-run on the merge (all 0)
 | scan | result |

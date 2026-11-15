@@ -2,7 +2,7 @@
 
 Base: origin/main 70c792d41. Code: `dev/build/jclose.js` (new, in assemble.py after jaudit, before j84) + small edits in j71 (festival
 titles), j6/j77/jcoopworld/jcooplobby/jtime4/p1.html (button names, SAME lines as review/kit-close so the two merge cleanly),
-dev/site/swreg.js (line() → kitLine). Kit: KIT.md §41 (was §40; renumbered by reviewer r6 — main has §39 kitSeal, §40 APP ICON) (+ 28.6 "no Tốn row when free").
+dev/site/swreg.js (line() → kitLine). Kit: KIT.md §42 (was §40; renumbered by reviewer r6 — main has §39 kitSeal, §40 APP ICON, §41 kitMeMark) (+ 28.6 "no Tốn row when free").
 
 ## Đã có ở nhánh khác trước khi làm (LUẬT ƯU TIÊN SỐ 1)
 - "Qua ngày" → "Sang ngày mới": ĐÃ SỬA trên review/kit-close (f3a17f9f9 / 74d032f7d, chờ duyệt, chưa lên main). Ở đây áp ĐÚNG các dòng đó
@@ -17,7 +17,7 @@ dev/site/swreg.js (line() → kitLine). Kit: KIT.md §41 (was §40; renumbered b
 | 2 | Thời tiết × buổi × mùa (16 loại × 4 buổi = 64 ô): chữ không hợp buổi | cb-wx.fn.js | 12 ô sai (nắng gắt tối, đom đóm sáng/trưa/chiều, trăng rằm ban ngày, sương sớm trưa/chiều/tối, ve kêu tối, nắng vàng tối) | 0 |
 | 3 | Chạm hình/ảnh hiện ô chữ nhật xanh (tap highlight rgba(51,181,229,.4)) | cb-tap.fn.js | 277 / 277 phần tử có ảnh chạm được | 0 / 292 |
 | 4a | Tên nút thời gian cũ người chơi thấy (Qua ngày/Qua buổi/Qua đêm/Đợi sáng) | cb-words.py | 4 | 0 |
-| 4b | "Đã mở bản mới" đè tiêu đề cảnh | kitLine (KIT §41.2) | dưới thanh trên, đè dải tiêu đề | trên thanh đáy / trên khung hộp thoại; 5 cỡ trong khung, không đè thanh trên |
+| 4b | "Đã mở bản mới" đè tiêu đề cảnh | kitLine (KIT §42.2) | dưới thanh trên, đè dải tiêu đề | trên thanh đáy / trên khung hộp thoại; 5 cỡ trong khung, không đè thanh trên |
 | 5 | Thẻ việc có 2 điều kiện Sức khác nhau (Múa: "cần Sức trên 20" + "Sức ≥5") | cb-need.fn.js | 9 thẻ (56 lượt) | 0 |
 | 6 | Hội × thi: tên lời mời không đúng việc thi (Hội Phượng (thi cưỡi ngựa bắn cung) · Lời mời thi thêu …) | cb-fest.js | 28 / 117 biến thể | 0 / 117 (mỗi biến thể có tên riêng FT7) |
 | 7 | Lựa chọn sự kiện hiện dòng "TỐN không" | cb-ton.fn.js | 71 lựa chọn | 0 |

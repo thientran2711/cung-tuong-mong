@@ -76,7 +76,7 @@ function wxSync(){try{if(!S||!S.wx)return;if(!S.wx.b||!WX_BUOI[S.wx.b])S.wx.b=WX
 html,body,*{-webkit-tap-highlight-color:transparent!important}
 #stage img:focus,#stage canvas:focus,#stage [role=button]:focus:not(:focus-visible),.kfig:focus:not(:focus-visible),img:focus:not(:focus-visible){outline:none!important}`;document.head.appendChild(st)})();
 
-/* ---------- 4a. KIT LINE (one-line notice, KIT §41.2) — owner 16:40Z: "Đã mở bản mới" sat on the scene title ----------
+/* ---------- 4a. KIT LINE (one-line notice, KIT §42.2) — owner 16:40Z: "Đã mở bản mới" sat on the scene title ----------
    kitLine(text, ms): a small pill ABOVE the bottom bar (tabs + Sang buổi), centred, never over the top bar, the scene title strip or a
    dialog title. Used by the new-build notice (dev/site/swreg.js) and any other one-line status. */
 function kitLinePos(el){try{const nx=document.getElementById("next");let bot=innerHeight;const bar=nx&&nx.offsetParent?nx.closest("nav,footer,.tabs,.bar,.bottom")||nx.parentElement:null;
