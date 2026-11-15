@@ -471,12 +471,30 @@ Contest boards = palace contest grounds with empty galleries, red curtains, lant
 | Múa (`mua`, học Vũ) | sân khấu thảm đỏ tròn | đình tập múa trong vườn | `mua-mat` (đệm múa; sáng = ánh vàng), `mua-fan`, `mua-bell` |
 | Nấu ăn (`banh`, học Nấu nướng) | bếp hội thi ngoài trời | bếp riêng trong cung | `banh-stove`, `banh-pot`, `banh-flame` (cao theo độ lửa), 19 nguyên liệu `banh-<nuoc·sen·nhan·duong·ga·thuoc·tao·kytu·gao·dung·yen·xuong·cusen·hanh·ot·giam·mam·ruou·muoi>` (ô nguyên liệu = thẻ giấy + ảnh) |
 | Điều hương (`huong`, học Y thuật & điều hương) | bàn gỗ trải lụa rêu, khói nhẹ | phòng hương dược, kệ hũ | `huong-censer` (lư dưới làn khói), 7 hũ `huong-<tram·nhai·que·hong·bacha·dan·moclan>` (núm thanh trượt) |
-| Chải chuốt (hệ trang phục, review/wardrobe — chưa có trò) | `mg-chai-bg`: bàn trang điểm, gương đồng mờ, hộp trang sức | — | dùng `kg82Bg(g,W,H,"chai")` khi trò ra đời |
+| Chải chuốt · Điểm trang (`chai`, review/wardrobe + review/toilette jtoil) | `mg-chai-bg`: bàn trang điểm, gương đồng mờ, hộp trang sức | — | `chai-brow` (bút kẻ mày; đầu bút ở góc trên phải ảnh, ax .95 ay .02), `chai-puff` (bông phấn), `chai-rouge` (hộp son + giấy son) |
 
 All 15 contest kinds + the 8 lessons (cam→dan, ky→co, thi→tho, hoa→ve, vu→mua, y→huong, theu, nau→banh) + practice/works (`playArt`) use these; any new mini-game adds its own `mg-<k>-bg(-hoc)` + sprites here first.
 HUD: "Phần x/10 · Hồi x/y · Còn …" (every round/throw/vase/lantern = "Hồi"); standings heading "Bảng định thứ"; never "điểm".
 HUD counts never pass their ceiling: "Phần" is the running share of the WHOLE game (same formula as the final mark), and `env.hud` caps any "a/b" at b (`kg82Cap`, counted in `KG82.over` for tests).
 No text over text: a pop (`kg82Pop`) replaces any live pop it would land on; a round verdict ("Khớp hương mẫu!", "Đối chỉnh!", "Thế hoa cân đối!"…) is drawn IN PLACE of the hint/heading line it would cover (`k91Say`), never floating over other words. `dev/test/minigames91.js` fails on any overlap of canvas or DOM text in `#kg82`.
+
+### 13.3 ĐIỂM TRANG BUỔI SÁNG (owner 15/11 09:30Z, review/toilette) — `dev/build/jtoil.js` (after jaudit, before j84) — awaiting kit review
+- Entry: act card "Điểm trang" at the top of Hành sự every buổi sáng (deck card, b:0, 1 khắc `BAL.toil.khac`, sure act, Kèm + Ghi chú say what
+  skipping means) AND the top-bar chip (k3 row line 1, `[data-k3="toil"]`): "Hôm nay: chưa điểm trang" → tap starts it; after: "Hôm nay: y phục
+  hợp dịp · trang điểm đẹp" (`.ok` / `.hot`), tap = kpPop. Never forced, never blocks Sang buổi.
+- Frame: the j82 game overlay (`kg82Open`, HUD Phần · Hồi x/4 · Còn). Hồi 1 CHỌN Y PHỤC (DOM, no canvas): left = her portrait `pcPort` with the
+  picture of the WORN y phục's tier (figFor with that tier) + "Hôm nay" kitFacts of the day's occasions; right = `kitEquipSlots` (key "toil": Cài tóc,
+  Y phục, Đeo tay, Đeo eo, Túi thơm; tap = take off) over `kitInvGrid` (key "toil", tabs Trâm cài · Y phục · Trang sức, the SAME items as Tư trang via
+  `kinvItems`; tap = wear). Buttons: Mặc bộ này · Giữ đồ hôm qua. Verdict row (kitRows): hợp dịp / hợp phẩm / quá giản dị / quá phô trương / vượt phẩm /
+  phạm tang. Hồi 2–4 TRANG ĐIỂM (canvas): the mirror of `mg-chai-bg` zoomed to fill the board, HER portrait in the glass (face from veil-fit),
+  live marks only (gold dotted guides, ink stroke, powder bloom, rouge dots, closing ring) + the three sprites as the tool under the finger.
+  The clock of each hồi starts at the first touch. Result = kitRows (each hồi /100, Phần chơi, Tay nghề chip, Dung nhan, Hôm nay: who reacts how).
+- Small CSS (`#toil-css`): `.toilw` two columns (portrait | slots + bag), one column under 640 px with a 110 px portrait beside the facts.
+- Face look all day (owner 15/11): one layer in the face-effects slot `kitFxLayers` (jk2b §7 — tall frame, small avatar, stage figures; same box as
+  the picture, order portrait < makeup < scar < veil): `<img class="kmk kmk-dep|kmk-diem">` = an SVG drawn from `img/toil-fit.json`
+  (mouth + both cheeks + face size per por-/fig- picture, `dev/figwork/toilfit.py`). Looks: none (mộc / vụng / vừa), `dep` (rosy feathered cheeks,
+  light lip tint, brighter skin), `diem` diêm dúa (owner 15/11: the same painted layer a little stronger — deeper, wider rouge, bolder lip tint, a little more powder sheen;
+  pretty, noticeably overdone, never clownish) — presets `TOIL_LOOKS`. Only her face. Sheet: `node dev/test/toil-looks.js`.
 
 ## 14. SCENE PANEL (j79) — identity card, opening story, title screen
 - Compact translucent kit frame (`rgba(255,250,240,.90)` + blur) to one side in landscape (max 440 px / 44vw, vertically centred, right) and in the
@@ -971,6 +989,9 @@ Any grid of goods with a price (shop, later gifts, peddler, rewards to pick) use
 - Button: "Mua" (q = 1) / "Mua · 60 bạc" (q > 1, the total) — Bán tab "Bán" / "Bán · 30 bạc". Cannot: the same button greyed with a short
   word ("Thiếu bạc", "Hết hàng", "Rương đầy"; a long reason goes to the tooltip). A tile she cannot buy even once has its picture greyed.
 - Tap the picture → the floating kit item card (28.13d). Never TỐN/CẦN rows on the tile.
+- PICK MODE `.kshc.kshpick` (j83 recipes, `dev/build/jwkr.js`): the same tile for "choose what to make" — picture · name (grade colour) · what it
+  takes (ingredients) · level line ("Họa bậc 2" / "mọi bậc") · button ("Làm"; locked = greyed "Chưa mở", reason in the tooltip). No stepper row; the grid,
+  tab row (`kitTabRowHTML`, one tab per kind when an art makes several) and tile sizes are the shop's. Panel spec `kit:{kind:"info", pick:1, html}` = the shop panel (`.kshopd`: no category art, button row hidden, header ✕ kit-x), never a "Thôi" row. Sample on the kit page (§47 `#kit`): id "§28.13e", the real `wkrTile` (one open, one locked).
 Scene rule (same branch, jk2b kitEvArt): a dialog id with NO EVENTS category (plain "Tin trong cung", other pid without a category) gets the room she
 is in (j17 evArt, season × buổi), never the j89 default category (Triều chính, officials kneeling).
 
@@ -1190,6 +1211,8 @@ A long result / report / spy / news paragraph (≥ 70 letters, 2+ facts) becomes
 text's own sentence ends and on a "Label:" after a long header ("X nghe lén chuyện của Y: Nết: Đa nghi" → 2 lines); a sentence that is only
 "( … )" filler becomes a dim footnote `small.kblf`; "(Bạc +60)" / "(thiện cảm -3)" get kit gain/cost colours. Applied automatically (MutationObserver)
 to `#rtoast .ksen` (result card), `.pc .pcn` (person-card result note), kit panel facts (`.dlg.kpanel .kfacts`); never the identity card.
+A quoted speech “…” is ONE fact: never split inside the quotes (a speech of two sentences stays one line; the next fact starts after the
+closing ”) — review/toilette 15/11, same rule in the kit fact rows `kpSentences` (j79, event / news dialogs). Scan `node dev/test/kbl-quote-scan.js <oldRef>` (116 multi-sentence speeches in the game: bullets 115 cut → 0, fact rows 115 → 0).
 ### 31.15 SMALL GROUP RULES (kit owner #2)
 - Name tags under figures never overlap: a tag that would touch another steps one line down (up when no room) — `k3Tags()` (jk3 §10).
 - Court chips (Hoàng thượng / Thái hậu / Hoàng hậu / her servant): title one line (`nowrap`); the right plaque column is `max-content` (min
@@ -1724,6 +1747,13 @@ the SAME large place-event frame as place event dialogs (32.6), VERTICAL on ever
   is closed). No empty "world" dot, no repeated "Có N bóng người ở đó" line.
 - BOTTOM = the buttons by 32.9. Waiting (owner final names 11/15): at night "Sang ngày mới"; in the day "Sang buổi" only when one buổi helps
   (not for a place that opens only in the morning); a too-long walk gets the spill button instead (34.1d).
+- 32.8b THE HEAD OF THE PALACE (owner 11/15 15:45Z, "VIỆC · Chung Tú cung") — `kitPlaceHost(k)` (jplace): when the palace has a head
+  who is at home (consort palaces: her chủ vị; Càn Ninh: Hoàng hậu; Đức Thọ: Thái hậu), the MIDDLE row is two columns `.kplhost`:
+  LEFT her portrait (`pcPort`) with name + rank ABOVE (48 kitNameRank), drawn through `relPerson` so a head she has NOT met is the grey
+  kit silhouette (stranger rule 49.3, the name stays); RIGHT the info box `.kplinfo` (she is in, the greeting rule, "cần N khắc, còn M").
+  The picture band with its grey silhouettes stays on top unchanged (owner OK); no "Thôi" button (32.10 ✕). Applies to every place card
+  of that palace: the greeting card (`accEtqCard`), the "you are here but have not greeted" card (`cbGreetCard`), the closed-place card
+  (`j77Card`) and the last walk (`j77LastWalk`).
 Not yet: the outer-court card (`menNtCard`, a kitModal rule card). Test: `node dev/test/place-card.js <url> WxH@dpr <outdir> <tag>`
 (spill, last, night, rank, etq, sneak). Shots before / after: dev/shots/place-card/ (755x1000, 1180x820, 412x1058).
 
@@ -2125,6 +2155,8 @@ container `kpane` under 640 px every act card is compact: the act's OWN picture 
 left, title + odds on one line, one-line description, Cần/Tốn/Được chips; no own picture → no thumbnail (`.kanoart`), never a category / skill
 picture as stand-in. Containers: person card `.pc > .pcr` (kit-fig2) and — tabs-kit r7 extension — any `.kpanec` (skill-card act cells,
 Việc nhờ act area, Nợ ân rows). `kitActCompactOn(root)` runs after `render()` and (jtabs) after `renderPanel()`.
+- r8 (owner 11/15 14:30Z "no group images"): the rule is now EVERY act card, not only panes: `kitActArt` returns no `act-cat-*` src and
+  `kpActArt` marks a card without its own picture `.kanoart` (no picture slot, text full width) — Hành sự deck, person cards, Ân oán.
 - Fix that came with it (main bug): jk3's sort helper was also named `kitActKey(b)` and, in the one concatenated script, replaced j79's
   `kitActKey(name)` (ACTS.json lookup) — every name lookup threw, so acts matched by prefix / wildcard lost their own picture across the game
   (j79 kitActArt wrapper, j87 news pictures). jk3's helper is now `kitActSortKey`.
@@ -2133,6 +2165,9 @@ Việc nhờ act area, Nợ ân rows). `kitActCompactOn(root)` runs after `rende
 - Every tab pane is one layout: the **pane bar** (`.kpbar`) holds the page's sub-tabs (`.ksub`) and its first filter row (`.kcattabs`, Hành sự categories, Tư trang item filters, the jtabs sub-tabs); everything else is the list.
 - The bar sits flush at the top of the pane, directly under the header frame (the pane's own border is the kit gap), full width, opaque, no shadow; it never moves. The list scrolls below it and is cut off at the bar's bottom edge; nothing shows above or behind the bar (pane top padding is 0 while a bar is present). `scroll-padding-top` = bar height, so anchored scrolling stops below it.
 - Tabs keep drawing their own rows where they always did; `kitPane()` (after every panel render, on panel child changes and on resize) moves them into the bar. k3CatTabs finds its row by `data-g`, kgSub finds `.ksub` inside the bar. No other code may make a row sticky.
+- Exception `.kpinline` (kit-fig2 r8): a picker that lives INSIDE the list and owns its own tab row (Ân oán "Xem quan hệ của" X / "với" Y,
+  §49.2b) wraps tab row + strip in `.kpinline`; `kitPane()` never moves a row inside `.kpinline` into the bar, and that row is static (never
+  sticky, no shadow, jpane CSS). The pane's own sub-tabs (Hậu cung · Ân oán …) still go to the bar as usual. Use it only for such pickers.
 - Test: `dev/test/pane-bar.js` (5 sizes, every tab, at rest and scrolled, ±1 px: bar flush, does not move, nothing above, nothing over its edge, opaque, full width; pane ends at the bottom nav).
 
 ## 46. KIT TABS: SUB-TABS, CHECK ROWS, INFO GLOSS (owner 11/15, review/tabs-kit · `dev/build/jtabs.js`)
@@ -2199,6 +2234,11 @@ Panel = ONE pair, heading "Quan hệ giữa X và Y": X (kitNameRank + portrait)
 X only, each with its source · when). Y defaults to Ta (her own relation with X); X = Ta → Y defaults to the first of strip 2. X = Ta →
 the "Đã biết" box is hidden (her own facts are in Tư chất / Mệnh truyện). Hoàng thượng ↔ Z: sủng (+ ân tình for Ta); Thái hậu ↔ Z: thiện cảm.
 A value shows when the one who feels it is Ta, or Ta has met both; else "chưa rõ".
+### 49.2b Picker = small tabs + one strip (owner 11/15: "like Hậu cung") — `hcRelHTML` (jhc)
+Each picker ("Xem quan hệ của" X, "với" Y) is a row of small kit sub-tabs (`kitSubTabs`, §46: Ta · Chí tôn · Phi tần, each with its head
+count) over the Hậu cung pager strip (j15 `pager`) of THAT group only — no group labels inside the strip. The X tab follows an outside link
+(relSel); Y keeps its own tab, default Ta (her own relation with X; Chí tôn when X = Ta). Tabs and strips are remembered (KTSUB, PG).
+Markup: each picker = `.kpinline.krelpk` (label + kitSubTabs row + strip) — the §45 `.kpinline` exception keeps the row with its strip.
 ### 49.3 relPerson + THE STRANGER RULE (owner 11/15) — `isKnown61` / `met61` (j61), `relPerson` (jhc)
 `relPerson(k)` = the ONE helper of Ân oán: person object → face drawn from THAT object, name, rank, colour (`data-pid` / `data-fk` on the
 side block; the test checks face key == person key for every X).
@@ -2235,6 +2275,21 @@ Emperor's visits. It is the 32.7 person dialog:
 - Data only through `window.kitEmotion(p)` → `{k,name,v,why,known}`; alt "Tâm trạng: <tên> (<cause>)". Nobody draws another mood icon; no code-reshaped facial expressions (owner 22:50Z): the seal + ring are the only display of feelings.
 
 - MEN wear men's seals (owner 11/15, review/emo-men): same 10 moods, same coloured grounds, gold rim and marks (Sợ: pale purple upper face + fear lines; Giận: red flushed face + anger mark). `img/kit/emo-m-<k>.webp` = young man (Hoàng thượng, thái tử/hoàng tử, công tử/nam nhân, vương gia, thái giám, thị vệ); `img/kit/emo-mo-<k>.webp` = mature man with cap and short beard (quan, thái y, any man 45+ except Hoàng thượng). Women and girls keep `img/kit/emo-<k>.webp`. ONE rule `emoArtSet(p)` in jemo (personRoleRank sex/role); art cut from 5x2 chroma sheets by `dev/art/emo_cut.py`; check: `dev/test/emo-men.js`, sheet dev/shots/emo-men/sheet.jpg.
+
+### 50.1 ONE TEMPLATE FOR EVERY EVENT WITH A PERSON (owner 11/15 13:00Z + 13:15Z; acceptance "VIỆC · Thái hậu triệu") — review kit-fig2 r8
+- LEFT: ONE person — the main one (`stage[0]` / `who`); a second person is named in the text (owner "several people → only the main one").
+- Festival dialogs (j71 invitations j71i / j71x, the festival day, its contests): `kitFestKey(m)` → evId `fest:<k>` = the festival's own
+  picture (Đoan ngọ = ev-le-ha), never the Triều chính default (owner 13:00Z).
+- RIGHT top: a banner for EVERY event with a person: its own event picture, else the picture of its kind — `j24:<slug of the title>`
+  (EVENTS.json: Có người đến, Thái hậu triệu, Hoàng thượng đến, Kẻ hầu xin, Một ánh mắt, Việc của kẻ hầu), else `e68:<id>`, else the week-book meaning
+  table `KBK_EVRE` (j87) on the TITLE, else Hoàng thượng / Thái hậu / visitor by who it is (never the room picture); a dialog about herself alone gets a
+  banner only when the table finds a real meaning.
+- Height = content: `kitDpNat` adds banner + text + the options' own content (not the stretched grid cell, which clipped the options and
+  made them scroll), floor 300 px (was 500: a two-choice summons left 125–340 px empty — reviewer r6 item 1a), cap min(100dvh − 32, 720).
+- Short options (≤ 2 rows, ≤ 70 characters) 2 per row; the 32.9 "long" mark (k3long / k3odd) no longer breaks such a group.
+- Not changed (rule: number chips wait for fix-float `kitRelDelta`): option rows still say "Thái hậu → ta: thiện cảm +3" (NAMES.th / hh).
+Test: `node dev/test/event-dp-scan.js <url> <outdir> <tag> [sizes] [save.json]` — every j24 approach kind + every festival / feast /
+merit invitation, opened for real and measured (layout, one person, banner in the right column, chip above, fill, empty px under the options).
 
 ## 39. ẤN TRÂN NỮ · kitSeal (owner 11/15, review/brand) — `dev/build/jseal.js` (after jk4)
 - Ported from Phượng Lệnh `public/choi/js/kit/seal.js`: square cinnabar seal, TRÂN over NỮ cut white into the cinnabar (bạch văn), Vietnamese

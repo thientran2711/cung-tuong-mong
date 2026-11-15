@@ -15,7 +15,17 @@ function kitPlaceInfo(k,h){let tc=0,n=0;try{tc=k===S.place?0:travel(S.place,k)}c
  const F=[];if(tc)F.push(`Đường đi <b>${tc}</b> khắc`);F.push(`Còn <b>${left}</b> khắc`);if(n)F.push(`<b>${n}</b> bóng người`);const hr=kitPlaceHours(k);
  const t=document.createElement("template");t.innerHTML=String(h||"");const L=[];
  t.content.querySelectorAll("p").forEach(p=>{const s=p.textContent.trim();if(!s||/bóng người ở đó\.?$/.test(s)||/^Mở cửa buổi sáng/.test(s))return;L.push(`<p class="kplr${p.classList.contains("past")?" kplsm":""}">${p.innerHTML}</p>`)});
- return `<div class="kplinfo"><div class="kplf">${F.map(x=>`<span>${x}</span>`).join("")}</div>${hr?`<div class="kplh">${hr[0].toUpperCase()+hr.slice(1)}</div>`:""}${L.join("")}</div>`}
+ const info=`<div class="kplinfo"><div class="kplf">${F.map(x=>`<span>${x}</span>`).join("")}</div>${hr?`<div class="kplh">${hr[0].toUpperCase()+hr.slice(1)}</div>`:""}${L.join("")}</div>`;
+ const q=kitPlaceHost(k);if(!q)return info;
+ return `<div class="kplhost" data-pid="${q.pid}"><div class="kplhp">${kitNameRank(q.rank,q.name,q.col)}<div class="kplhf">${pcPort(q.f,q.col)}</div></div>${info}</div>`}
+/* KIT 32.8b (owner 11/15 15:45Z, "VIỆC · Chung Tú cung"): a place card of a palace whose HEAD is at home shows her under the picture:
+   LEFT her portrait with name + rank above (KIT 48 kitNameRank; not met = the grey kit silhouette, stranger rule 49.3, via relPerson),
+   RIGHT the info box (she is in, the greeting rule, khắc needed / left). Consort palaces + Càn Ninh (Hoàng hậu) + Đức Thọ (Thái hậu). */
+function kitPlaceHost(k){try{if(!S||!k||k==="home"||typeof relPerson!=="function")return null;
+ if(k==="tn"){if(S.thDead)return null;return relPerson("th")}
+ if(k!=="kn"&&k[0]!=="r")return null;const h=typeof accHost==="function"?accHost(k):null;
+ if(!h||h===S||!h.alive||h.out||(typeof whereOf==="function"&&whereOf(h)!==k))return null;return relPerson(h.id)}catch(e){return null}}
+window.kitPlaceHost=kitPlaceHost;
 function kitPlaceDress(m,k){if(!m||!k||m.placeK)return;m.placeK=k;const a=kitPlaceArt(k);if(a)m.headArt=a;m.h=kitPlaceInfo(k,m.h);if(m.opts)m.optLayout=undefined}
 /* the people on the picture: grey kit silhouettes (f / m / k by who is really there), feet on the floor line, no faces */
 function kitPlaceSil(){try{const m=Q[0];const d=document.querySelector("#modal .dlg");if(!d)return;d.classList.toggle("kplace",!!(m&&m.placeK));if(!m||!m.placeK)return;
@@ -76,6 +86,12 @@ html body #modal .opts>button.ka.kback .kan{text-align:center;width:100%}
 #modal .dlg.kplace .kplinfo p.kplr.kplsm{font-size:.8rem;color:var(--ink2,#6b4a2a);margin-top:3px}
 #modal .dlg.kplace .kplf+p.kplr{border-top:1px solid #ead9b4;padding-top:6px}
 #modal .dlg.kplace #mb>.kdlgart{margin-bottom:6px}
+#modal .dlg.kplace .kplhost{display:grid;grid-template-columns:clamp(84px,22%,124px) minmax(0,1fr);gap:10px;align-items:start;margin:2px 0 0}
+#modal .dlg.kplace .kplhost>.kplinfo{margin:0}
+@media (max-height:560px){#modal .dlg.kplace .kplhost{grid-template-columns:76px minmax(0,1fr)}}
+#modal .dlg.kplace .kplhp{display:flex;flex-direction:column;align-items:stretch;gap:4px;min-width:0}
+#modal .dlg.kplace .kplhp>.knr{text-align:center}
+#modal .dlg.kplace .kplhf .pcp{width:100%!important;max-width:none!important;max-height:none!important;height:auto!important;margin:0!important;float:none!important}
 #modal .dlg.kplace .ksart .kplsil{position:absolute;left:0;right:0;bottom:12%;height:58%;display:flex;justify-content:center;align-items:flex-end;pointer-events:none;z-index:2}
 #modal .dlg.kplace .ksart .kplsil img{height:100%;width:auto;max-width:none;margin:0 -1%;opacity:.78;filter:grayscale(1) brightness(.42) blur(.3px);transform:translateY(calc(var(--i) * 2%))}
 #modal .dlg.kplace .ksart .kplsil img.kpls-k{height:62%}

@@ -96,15 +96,24 @@ const relGrp=k=>k==="me"?"Ta":k==="emp"||k==="th"?"Chí tôn":"Phi tần";
 const relSeps=L=>L.map((x,i)=>Object.assign({},x,{sep:i&&relGrp(L[i-1].k)===relGrp(x.k)?"":relGrp(x.k)}));
 function relItems(){return relSeps([{k:"me"},{k:"emp"}].concat(S.thDead?[]:[{k:"th"}],liveRivals(true).map(v=>({k:v.id}))))}
 const stripItem=(x,q)=>({f:q.f,name:q.name,sep:x.sep,dim:q.met===false});
-function hcRelHTML(){kn();const items=relItems().map(x=>Object.assign(x,{q:relPerson(x.k)})).filter(x=>x.q);const ix=(L,k)=>L.findIndex(x=>String(x.k)===String(k));
- if(hcRelHTML._last!==relSel||PG.rel==null||!items[PG.rel]){const i=ix(items,relSel);PG.rel=i<0?0:i;PG.relY=null}
- if(items[PG.rel].k!==relSel)PG.relY=null;relSel=items[PG.rel].k;hcRelHTML._last=relSel;const X=items[PG.rel].q;
+/* KIT §49.2b (owner 11/15 "small tabs + a person strip like Hậu cung"): each picker = a row of small kit sub-tabs (kitSubTabs, §46: Ta ·
+   Chí tôn · Phi tần with their head counts) over the Hậu cung pager strip of THAT group only (no group labels inside the strip). The X tab
+   follows relSel when an outside link sets it; Y keeps its own tab (default the group of Ta, i.e. her own relation with X). */
+function hcRelHTML(){kn();const all=relItems().map(x=>Object.assign(x,{q:relPerson(x.k),g:relGrp(x.k)})).filter(x=>x.q);const ix=(L,k)=>L.findIndex(x=>String(x.k)===String(k));
+ const GR=["Ta","Chí tôn","Phi tần"];const tabs=(key,L)=>GR.map(g=>({k:g,label:g,n:L.filter(x=>x.g===g).length})).filter(t=>t.n);
+ const outside=hcRelHTML._last!==relSel;if(outside){const i=ix(all,relSel);const g=i<0?"Ta":all[i].g;KTSUB.relx=g;PG.rel=null;PG.relY=null}
+ if(relSel==null||ix(all,relSel)<0)relSel=all[0].k;
+ const tx=kitSubTabs("relx",tabs("relx",all));const items=all.filter(x=>x.g===tx.cur);if(hcRelHTML._g!==tx.cur&&!outside)PG.rel=0;hcRelHTML._g=tx.cur;
+ if(PG.rel==null||!items[PG.rel]){const i=ix(items,relSel);PG.rel=i<0?0:i}
+ if(items[PG.rel].k!==relSel){relSel=items[PG.rel].k;PG.relY=null}hcRelHTML._last=relSel;const X=items[PG.rel].q;
  /* strip 2: everyone X can have a relation with (Hoàng thượng / Thái hậu: with Ta and the consorts only) */
- const Ys=items.filter(x=>x.k!==X.k&&!((X.k==="emp"||X.k==="th")&&(x.k==="emp"||x.k==="th"))); const Ys2=relSeps(Ys);
- if(PG.relY==null||!Ys2[PG.relY]){const i=X.k==="me"?0:ix(Ys2,"me");PG.relY=i<0?0:i}const Y=Ys2[PG.relY].q;
- const strip1=pager("rel",items.map(x=>stripItem(x,x.q)),()=>"");
- const strip2=pager("relY",Ys2.map(x=>stripItem(x,x.q)),()=>"");
- return `<div class="pgwrap krelpg"><p class="krelst">Xem quan hệ của</p>${strip1}<p class="krelst">với</p>${strip2}${relPair(X,Y)}</div>`}
+ const Ys=all.filter(x=>x.k!==X.k&&!((X.k==="emp"||X.k==="th")&&(x.k==="emp"||x.k==="th")));
+ const TY=tabs("rely",Ys);if(hcRelHTML._lx!==X.k||KTSUB.rely==null||!TY.some(t=>t.k===KTSUB.rely))KTSUB.rely=TY.some(t=>t.k==="Ta")?"Ta":TY[0].k;hcRelHTML._lx=X.k;
+ const ty=kitSubTabs("rely",TY);const Ys2=Ys.filter(x=>x.g===ty.cur);if(hcRelHTML._gy!==ty.cur)PG.relY=null;hcRelHTML._gy=ty.cur;
+ if(PG.relY==null||!Ys2[PG.relY])PG.relY=0;const Y=Ys2[PG.relY].q;
+ const strip1=pager("rel",items.map(x=>stripItem(Object.assign({},x,{sep:""}),x.q)),()=>"");
+ const strip2=pager("relY",Ys2.map(x=>stripItem(Object.assign({},x,{sep:""}),x.q)),()=>"");
+ return `<div class="pgwrap krelpg"><div class="kpinline krelpk"><p class="krelst">Xem quan hệ của</p>${tx.html}${strip1}</div><div class="kpinline krelpk"><p class="krelst">với</p>${ty.html}${strip2}</div>${relPair(X,Y)}</div>`}
 function relSide(q){return `<div class="kr3p" data-pid="${q.pid}" data-fk="${q.f&&q.f.kk!=null?q.f.kk:q.pid}">${kitNameRank(q.rank,q.name,q.col)}<div class="kr3f">${pcPort(q.f,q.col)}</div></div>`}
 /* the rows between two people, both ways (KIT §49.1 kitRelRow). A value is shown when the one who feels it is Ta, or Ta has met both. */
 function relRows(X,Y){const a=X.p,b=Y.p;const met=p=>p===S||(p!=="emp"&&p!=="th"&&knows(p));

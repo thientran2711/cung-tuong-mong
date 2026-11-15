@@ -5,7 +5,7 @@ import json, sys, os
 H = os.path.dirname(os.path.abspath(__file__))
 src, pout, aout = sys.argv[1:4]
 A = json.load(open(src))
-redo = {l.split()[0] for l in open(os.path.join(H, 'hgens.txt')) if l.strip()}
+redo = {l.split()[0] for l in open(os.path.join(H, 'hgens.txt')) if l.strip() and 'plain name' not in l}   # 'plain name' lines are served as act-<key>.webp
 P = {'_doc': 'act-pics2 16:50Z hands-only redraws: replace picture key K by K-h (img/act-K-h.webp, already on the CDN). Apply to the CURRENT img/ACTS.json (pull first).', 'map': {k: k + '-h' for k in sorted(redo)}, 'acts': {}, 'prefix': {}, 'log': 0}
 for sec in ('acts', 'prefix'):
     for name, k in A[sec].items():
