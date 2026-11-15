@@ -435,3 +435,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (12:35Z) Nghỉ dưỡng sức (+20) vs nghỉ một lát (+6) cùng giá → phân biệt: dưỡng sức chỉ buổi tối, hết buổi, cần thuốc bổ/bạc; một lát lúc nào cũng được, 1 khắc.
 - (12:35Z) Phòng chiều mưa mùa xuân u ám như lãnh cung → chỉnh màu thời tiết/buổi cho ấm, sáng dịu.
 - LIVE CDN (12:35Z) 88 ảnh thú cưng mới (22 con × 4 giai đoạn) + 18 tranh hành sự sửa dáng vạn phúc.
+- (12:40Z) Làm lại theo giao diện game (kit, có hình, không như trang chữ): tab Tài nghệ, tab Mệnh truyện, tab Việc nhờ.
