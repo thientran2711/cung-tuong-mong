@@ -15,6 +15,23 @@ function j76left(){return !S?0:(4-used)+4*(B4L-(S.buoi||0))}
 function j76nextName(){const b=Math.min(B4L,(S.buoi||0)+1);return BUOI[b].replace("Buổi ","buổi ")}
 /* would an act of c khắc started now spill into the next buổi? (only when it is allowed) */
 function j76spills(c){return !!S&&!S.dead&&c>0&&used<4&&used+c>4&&!S.j76carry&&!window.__j76win&&(S.buoi||0)<B4L&&c<=j76left()}
+/* ===== THE KHẮC NEED CHIP READS THE DAY (owner 15/11, "Khắc check must use the whole DAY's khắc") =====
+   One source for every "N khắc" item of a Cần row (act cards, person acts, servant / event options): j63/j79/jclose and jtsb used
+   to test used+c<=4 (this buổi only) while can() above already let the act spill. Green when it fits this buổi ("còn N") or spills
+   ("sang buổi trưa"); red only when it really cannot be done, saying why in words:
+   - bound to this buổi (a card with a.b, a sáng-only lesson: window w) → "không kịp xong trong buổi sáng (cần N khắc)";
+   - the day is short (buổi tối never runs past the night) → "hết khắc trong ngày (cần N, còn M)";
+   - 0 left / a spill already running → "hết khắc buổi này (cần N)" (the buổi turns first).
+   A card bound to ANOTHER buổi gets a plain ✓ "N khắc": its own Buổi chip says why it is closed now. */
+function j76arrive(c){const left=Math.max(0,4-used);let b=S.buoi||0,r=c-left;while(r>0&&b<B4L){b++;r-=4}return BUOI[b].replace("Buổi ","buổi ")}
+function j76need(c,a,win){if(!S||S.dead||!(c>0))return{t:`${c||0} khắc`,ok:true};const left=Math.max(0,4-used),b=S.buoi||0;
+ if(a&&a.b!=null&&a.b!==b)return{t:`${c} khắc`,ok:true};
+ if(used+c<=4)return{t:`${c} khắc (còn ${left})`,ok:true};
+ const w=win||(a&&a.b!=null)||window.__j76win;
+ if(left<=0||S.j76carry)return{t:`hết khắc buổi này (cần ${c})`,ok:false};
+ if(w)return{t:`không kịp xong trong ${BUOI[b].toLowerCase()} (cần ${c} khắc)`,ok:false};
+ if(c>j76left())return{t:`hết khắc trong ngày (cần ${c}, còn ${j76left()})`,ok:false};
+ return{t:`${c} khắc (sang ${j76arrive(c)})`,ok:true}}
 /* ===== ONE Sức FLOOR (folds the j80 hotfix in) =====
    Sức under 5 = kiệt sức: acts of 2+ khắc wait until she rests. A card that costs Sức needs more Sức than it costs.
    Exempt: 1-khắc acts, acts that restore Sức and cost none (rest), and walking (map, visits). */
@@ -26,10 +43,16 @@ can=function(c){if(window.__j76paid)c=Math.max(0,c-window.__j76paid);if(!S||S.de
  if(used+c<=4)return true;return j76spills(c)};
 
 (function(){const s0=spend;spend=function(c){if(window.__j76paid){window.__j76paid=0;return}const before=used;const r=s0.apply(this,arguments);
- try{if(S&&!S.dead&&used>4&&before<4&&(S.buoi||0)<B4L&&!window.__j76win){S.j76carry=(S.j76carry||0)+(used-4);used=4}}catch(e){}return r}})();
+ try{if(S&&!S.dead&&used>4&&before<4&&(S.buoi||0)<B4L&&!window.__j76win){S.j76carry=(S.j76carry||0)+(used-4);S.j76ck=j76key();used=4}}catch(e){}return r}})();
 /* the clock turns: carry the spilled khắc into the new buổi; a new day drops nothing because tối never spills */
-(function(){const n0=nextBuoi;nextBuoi=function(){if(!S)return n0.apply(this,arguments);const b0=S.buoi||0,c=S.j76carry||0;const r=n0.apply(this,arguments);
- try{if(c&&S&&(S.buoi||0)!==b0){if(!S.dead&&(S.buoi||0)>b0){used=Math.min(4,c);S.j76carry=c>4?c-4:0}else S.j76carry=0;if(!S.dead){save();render()}}}catch(e){}return r}})();
+function j76key(){try{return wkKey()+"/"+(S.buoi||0)}catch(e){return String(S&&S.buoi)}}
+/* co-op safety: a carry belongs to the buổi it was spent in. If the buổi changed without this wrapper (co-op re-sync sets S.buoi and
+   used=0 directly), the next buổi still pays it; anything older is dropped, never charged to a later buổi. */
+function j76carryFix(){try{if(!S||!S.j76carry||!S.j76ck||window.__j76nb)return;const k=j76key();if(k===S.j76ck)return;
+ const [w0,b0]=S.j76ck.split("/");if(w0===wkKey()&&+b0+1===(S.buoi||0))used=Math.max(used,Math.min(4,S.j76carry));S.j76carry=0;S.j76ck=""}catch(e){}}
+(function(){const r0=render;render=function(){j76carryFix();return r0.apply(this,arguments)}})();
+(function(){const n0=nextBuoi;nextBuoi=function(){if(!S)return n0.apply(this,arguments);const b0=S.buoi||0,c=(S.j76ck&&S.j76ck!==j76key())?0:(S.j76carry||0);if(!c&&S.j76carry){S.j76carry=0;S.j76ck=""}window.__j76nb=1;let r;try{r=n0.apply(this,arguments)}finally{window.__j76nb=0}
+ try{if(c&&S&&(S.buoi||0)!==b0){if(!S.dead&&(S.buoi||0)>b0){used=Math.min(4,c);S.j76carry=c>4?c-4:0;S.j76ck=S.j76carry?j76key():""}else{S.j76carry=0;S.j76ck=""}if(!S.dead){save();render()}}}catch(e){}return r}})();
 /* why an act cannot be done now, in words */
 (function(){const w0=whyTime;whyTime=function(c){if(!S||S.dead)return"";if(can(c))return"";const sw=j76sucWhy(c);if(sw)return sw;
  if(S.j76carry||used>=4)return w0.call(this,c)||"hết khắc buổi này";if(used+c>4&&window.__j76win)return `không kịp xong trong ${BUOI[S.buoi||0].toLowerCase()}`;
@@ -41,8 +64,8 @@ function j76win(a,f){const w=window.__j76win,r0=window.__j76rest,c0=window.__j76
 /* walking is never locked by the Sức floor */
 ["goTo","mapHTML","seeBtn","visitBtn","goSee","visitPal"].forEach(f=>{try{const o=window[f];if(typeof o!=="function")return;window[f]=function(){const t=window.__j76trip;window.__j76trip=1;try{return o.apply(this,arguments)}finally{window.__j76trip=t}}}catch(e){}});
 (function(){const cw=cardWhy;cardWhy=function(a){return j76win(a,()=>{const r=cw.apply(this,arguments);if(/^Hết khắc buổi này — chờ buổi sau$/.test(r||"")){const w=whyTime(cardCost(a));return j76cap(w)||r}return /^(không kịp xong|hết khắc trong ngày)/.test(r||"")?j76cap(r):r})}})();
-(function(){const ch=cardH;cardH=function(a,i){return j76win(a,()=>{let h=ch.apply(this,arguments);
- try{const c=cardCost(a);if(!/\sdisabled>/.test(h.slice(0,h.indexOf(">")+1))&&j76spills(c))h=h.replace(/<\/span>(\s*)(<span class="kinfo"|<\/button>\s*$)/,`<span class="kl">Ghi chú</span><span>${eff("kéo sang "+j76nextName())}</span></span>$1$2`)}catch(e){}return h})}})();
+/* deck cards: the spill is said once, on the Cần khắc chip (j76need: "2 khắc (sang buổi trưa)"), no second Ghi chú line */
+(function(){const ch=cardH;cardH=function(a,i){return j76win(a,()=>ch.apply(this,arguments))}})();
 (function(){const a0=act;act=function(i){return j76win(deck[i],()=>a0.apply(this,arguments))}})();
 /* learning with the Thái hậu is a sáng-only lesson: it must finish in sáng */
 (function(){const l0=lessonMode;lessonMode=function(k,mode){if(mode!=="th")return l0.apply(this,arguments);const w=window.__j76win;window.__j76win=1;try{return l0.apply(this,arguments)}finally{window.__j76win=w}}})();
@@ -55,7 +78,7 @@ function j76win(a,f){const w=window.__j76win,r0=window.__j76rest,c0=window.__j76
  try{if(!S||S.dead)return h;const trip=/data-(see|visit|follow)=/.test(at||"");const m=String(sm||"").replace(/<[^>]+>/g,"").match(/(\d+)\s*khắc/);
   let c=m?+m[1]:(window.__j76c||window.__j76lastC||0);if(trip&&m)c=+m[1]+1;
   if(why&&/^(đến nơi sẽ hết khắc — chờ buổi sau|hết khắc buổi này|Hết khắc buổi này — chờ buổi sau|hết khắc)$/.test(why)&&c){const w=whyTime(c);if(w&&w!==why)h=h.replace(`<span class="kwhy">${why}</span>`,`<span class="kwhy">${w}</span>`)}
-  else if(!why&&c&&j76spills(c))h=h.replace(/<\/small><\/button>$/,`<span class="kl">ghi chú</span><span class="ef n">${trip?"đến nơi đã sang "+j76nextName():"kéo sang "+j76nextName()}</span></small></button>`)}catch(e){}return h}})();
+  else if(!why&&c&&!trip&&j76spills(c)&&!/data-kneed=/.test(h))h=h.replace(/^<button /,`<button data-kneed="${encodeURIComponent(JSON.stringify([j76need(c)]))}" `)}catch(e){}return h}})(); /* the spill is said on the kit Cần chip ("✓ 2 khắc (sang buổi trưa)"), like the deck cards */
 /* a note never stays on a button that ended up greyed by a later gate (rank, access) */
 ["visitBtn","seeBtn"].forEach(f=>{try{const o=window[f];if(typeof o!=="function")return;window[f]=function(){const h=o.apply(this,arguments);return /^<button[^>]*\sdisabled/.test(h||"")?h.replace(/<span class="kl">ghi chú<\/span><span class="ef n">[^<]*<\/span>/,""):h}}catch(e){}});
 (function(){const w0=whyTime;whyTime=function(c){window.__j76lastC=c;return w0.apply(this,arguments)}})();
@@ -66,7 +89,7 @@ function j76win(a,f){const w=window.__j76win,r0=window.__j76rest,c0=window.__j76
  try{if(S&&!S.dead&&!Q.length&&!S.mg&&!S.out&&!S.confined&&k&&k!=="home"&&k!==S.place&&!S.j76carry&&!(typeof isSrv==="function"&&isSrv())){
   const tc=travel(S.place,k),room=4-used;
   if(tc>room&&room>0&&can(tc+1)&&!(typeof accessOf==="function"&&!accessOf(S,k).ok)){const b0=S.buoi||0;
-   S.j76carry=tc-room;used=4;log(`Đường xa: đi hết ${BUOI[b0].toLowerCase()}, đến nơi đã sang ${j76nextName()}.`);nextBuoi();
+   S.j76carry=tc-room;S.j76ck=j76key();used=4;log(`Đường xa: đi hết ${BUOI[b0].toLowerCase()}, đến nơi đã sang ${j76nextName()}.`);nextBuoi();
    if(S.dead||(S.buoi||0)===b0){S.j76carry=0;return}
    const q=Q.splice(0);window.__j76paid=tc;let r;try{r=g0.apply(this,arguments)}finally{window.__j76paid=0;Q.unshift(...q)}render();return r}}}catch(e){window.__j76paid=0}
  return g0.apply(this,arguments)}})();
