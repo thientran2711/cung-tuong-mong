@@ -534,10 +534,15 @@ festivals, tranh tài…), Tranh ghế result (j34), hoàng tự khảo thí (j5
                     (kitKnown false → name "Người lạ"); no figure art → the kit's tall 3:4 frame (`kitPortrait(p,{size:"lg"})`). Never a round avatar.
                     Per place a soft STAGE LIGHT (`--kl` colour): .kpod-beam = soft spotlight falling from above onto the person (in front, screen blend, faint),
                     .kpod-pool = oval pool of light at the feet on the step, .kpod-motes = a few small floating motes. Nhất warm gold, Nhì soft silver-white,
-                    Tam pale copper-rose; higher place = a little brighter; all subtle. Her own column: a little brighter + "Ngươi" tag ("Con ngươi" for her child).
-      .kpod-step    lacquered dais block (img/kit/podium-step.webp, border-image), Nhất step highest, Nhì middle, Tam lowest (heights fitted to content)
-        .kpod-medal img/kit/medal-1|2|3.webp (gold / silver / bronze cloud medallion with tassels) + word Nhất / Nhì / Tam
-        .kpod-plq   cream kit plaque: rank title + name (kitName, rank colour), sub (e.g. "Xuất sắc"), score "N phần", prize (kitChip or text, green)
+                    Tam pale copper-rose; higher place = a little brighter; all subtle. Her own column: a little brighter + "Ta" tag ("Con ta" for her child).
+                    THE FIGURES ARE THE BIGGEST THING ON THE STAGE (owner 15/11): figure height = all the stage height left above the plaques
+                    (`--kfh`; Nhất 100 %, Nhì/Tam 90 %), height wins over width (wide sleeves may reach a little past the column).
+      .kpod-step    THE STEP IS THE NAME PLAQUE (owner 15/11: "bục chính là ô bảng tên", no red dais block any more): cream kit card, gold
+                    hairline (Nhất a little richer); Nhất plaque highest, Nhì middle, Tam lowest (heights = content + a small lift, kpodFit);
+                    the figure's feet stand on its top edge
+        .kpod-you   own tag "Ta" ("Con ta" for her child), on the plaque's top-LEFT corner
+        .kpod-medal img/kit/medal-1|2|3.webp + word Nhất / Nhì / Tam, at the plaque's top-RIGHT corner, poking up a little (never on a dais)
+        .kpod-plq   plaque text: rank title + name (kitName, rank colour), sub (e.g. "Xuất sắc"), score "N phần", prize (kitChip or text, green)
   .kpod-ft          her place when she is not in the top three ("Ngươi đứng thứ 5 trong 5 người · 18 phần") + the ONE kit button "Tiếp" (.kbtn)
   .kpod-fx          confetti layer
 ```
@@ -546,7 +551,8 @@ The celebration FOLLOWS HER, whatever her place: paper + petals in her place col
 from HER figure when her column appears and fall over HER step, then a light petal fall over her step; at Nhất a little stronger (second burst, longer fall).
 Outside the top three: only the place lights, no confetti. Tap anywhere (not the button) = skip to the final state; Enter/Esc = skip, then Tiếp.
 `prefers-reduced-motion: reduce` → final state at once, no motes, no confetti.
-Layout: figures sized by the free height (`--kfh`, Nhất 100 %, others 84 %), never cover the plaques; plaques wrap text (no truncation), no horizontal
+Layout: figures sized by the free height (`--kfh`, Nhất 100 %, others 90 %), never cover the plaques; short landscape phones (≤ 500 px high)
+use a compact plaque; plaques wrap text (no truncation), no horizontal
 scroll; tested 755x1000@2, 1180x820@2, 1366x1024@2, 412x1058@2, 390x844@3, 1024x768@2 (shots dev/shots/podium/).
 
 API (data only):
@@ -561,6 +567,8 @@ Optional per entry (added for the Bảng vinh danh, `jrank.js`, whose people are
 `fig` full-body src (overrides `kitFigOf`), `face` pframe face for the no-figure fallback, `nameH` plaque name HTML (overrides `kitName`),
 `you` text of the own-column tag (with `mine:true`). Entries without them render exactly as before. The leaderboard embeds the stage
 (`kpodCol` + `kpodFit`) inside its own `.kpod.krk` frame above the ranked list (dev/LEADERBOARD.md).
+Users (all follow this section, 15/11): j82 startContest results (j71 hội thi, festivals, tranh tài, lessons with rivals), Tranh ghế
+(j34 contestEnd), hoàng tự khảo thí (j53 .ktlist), công chúa dâng nghệ (j54 .h54list), Bảng vàng (jrank). Shots dev/shots/rank-ui/.
 Art: Magnific gpt-2-6, 1 style ref (face-consort-01), folder ba4aecfe…; no faces. medal-1..3 (240 px, keyed), podium-step (512x384), podium-bg (1344x752).
 
 ## 27. WEEK REPORT FLIP-BOOK (j87) — `kitBook({pages,onClose})`
@@ -1398,6 +1406,25 @@ How: `.kpb` becomes display:contents so its figure column and text join #mb's gr
 still run; kitEsFit hands 32.7 columns to kitDpFit). Test: `node dev/test/dialog-person.js <site url> WxH@dpr <outdir> <tag> [kinds]`
 (kinds host, th, invite, ally2, many, men, pic). Shots before / after: dev/shots/dialog-person/ (755x1000, 1180x820, 1366x1024, 412x1058).
 Options in the right column follow 32.9 (all short → 2-column grid, else rows); the "one per row" above is the long case.
+
+### 32.7b FIGURE FILLS THE COLUMN · NAME ABOVE (owner 15/11, end card "Kiếp này"; same intent as review/kit-fig2 KIT 37 — take that branch's text when both merge)
+In every 32.7 person column: the name chip (rank on top, name under it — the kitName two-line look, `kdpcap knr`) sits at the TOP of the
+column, and each person FILLS the column from just under the chips down to the column floor (painted top incl. crown under the chips,
+aspect kept; adults alike, children by age via KIT_FIG.fac < 1). Her own figure is labelled with her rank + name (not "Ngươi").
+A 32.7 dialog with no option list (end card, Đã rõ cards) scrolls its text side; the figure column stays the visible height (sticky,
+`--kdcolh` set by kitDpFit), so the whole figure is always in view (844x390 included).
+End card (j32 `over`, + j52 / j69 / jkiep lines, + jrank "Bảng vàng" block): kit sections only — `<h3>` headline, `kitRows` (Nguyên do /
+Phòng được / Kẻ ra tay…), `h4.kpst` "Kiếp này" + `kitRows` (Thân phận, Sống trong cung, Phẩm cao nhất, Con cái, Chết vì | Kết cục),
+`h4.kpst` "Bảng vàng" + `kitRows` (Công danh kiếp này, Thứ hạng) + "Xem Bảng vàng" (kbtn alt); "Chuyển kiếp" stays the primary button.
+No boxed `.pcb` panels.
+
+### 32.10 kit-x — THE close ✕ (owner 11/15: no "Thôi" buttons anywhere; a card closes with ONE ✕ at the top right of its header) — `kitXHTML` / `kitXAdd` (jk4)
+`kitXHTML(attrs, label)` → `<button class="kit-x" aria-label="Đóng">✕</button>`: 36 px square, kit ink on a cream ground, hair border,
+gold ring on focus (night: dark ground, gold ✕). `kitXAdd(dlg)` puts it into a kit panel header `.kph` at the right end — placed absolutely
+(the header keeps the height of every other dialog, the title gets 56 px of right padding) — and it closes the panel the normal way
+(#mclose click: onClose runs); the caller hides the old button row. A floating card inside a panel (shop item card) uses the same class at
+its own top right. Workers removing "Thôi" elsewhere (review/person-acts) use THIS class name `kit-x`. First user: kitShop (28.13d).
+(Same code as review/shop-fix jk4, copied line for line so the two merge cleanly; users here: the Bảng vàng header ✕ and its "Cách tính" card ✕.)
 
 ### 32.8 PLACE CARD — the place-event frame for every place card (owner 11/15 08:55Z + 08:58Z) — `kitPlaceDress` / `kitPlaceSil` (jplace)
 Every place card — tap on a place on Dư đồ or in Danh sách nơi (`j77Card`: closed place, Xin bái kiến / Xin yết kiến / Lẻn vào / Nhờ thái
