@@ -23,7 +23,9 @@ Bài thử `probe` (index.html thật, ảnh từ CDN, SW chặn; kiếp mới +
 | 844x390 | 0 | 0 | 0 | 0 / 0 | được, 0 lỗi |
 - Main cùng bài thử (755): `porOf` trả face-* cũ, tab hiện 2–5 face-* mỗi tab; bản gộp: `porOf` trả por-* ngay (phi tần, cung nữ, Hoàng thượng), 0 face-*.
 - 390x844: màn tải "Lần đầu nhập cung" (như main) — không do nhánh.
-- img-quality.js (bộ đo của nhánh) chạy lại trên bản gộp: xem dòng "img-quality" dưới.
+- img-quality.js (bộ đo của nhánh) trên bản gộp, 755x1000@2, `IQ_ONLY='Danh mục|Hoàng tự|Nam nhân|Cung nhân'` (DANH MỤC = khung chân dung kit + khung nhỏ của MỌI người
+  trong đời ở 3 mức người lạ / thấy mặt / quen): **645 ảnh, 0 lỗi** (phóng 0, face-* cũ 0, nửa mặt 0, hỏng 0, làm mờ 0), lỗi trang 0.
+  Phần sân khấu đã chạy (Fold, 7 nơi): chỉ cờ phóng của người toàn thân fig 900 px (đã biết, việc tranh). Chạy đủ 232 màn không xong vì máy tải ~65.
 
 ## Dung lượng tải / bộ nhớ đệm
 - Nhánh không thêm tệp nào vào assets.json: unknown-* cùng mã băm với main (đã đẩy CDN trước khi main dựng). Phần lõi tải lần đầu: main 122,68 MB → gộp 123,15 MB;
