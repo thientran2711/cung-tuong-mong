@@ -1,0 +1,202 @@
+{
+ "ct01": {
+  "prompt": "Semi-realistic painterly guofeng portrait style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference image; plain light parchment background, soft even light; fair porcelain skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow, never upturned), closed lips; very handsome refined looks; no moles or marks on the face; faces clearly visible, 3/4 or frontal view; rich clear colours and smooth soft near-3D shading, not a pencil sketch. A character lineup of TWO full-body standing figures, head to feet, side by side with wide clear empty space between them, both the SAME young Chinese nobleman, the son of a high minister: the same face, same features (oval face with a straight nose) and the same signature colour family: deep sapphire blue with silver-white. All feet on one baseline. Left: about 20 years old, a handsome youthful young man, about seven and a half heads tall, an elegant layered silk scholar robe of a minister's son with embroidered borders, wide sleeves hanging straight, a jade belt with pendant, hair in a neat topknot with a small jade hair crown and hairpin, holding a closed folding fan. Right: about 32 years old, the same man visibly more mature (fuller face, steadier adult bearing), calm and distinguished, an elegant layered silk scholar robe of a minister's son with embroidered borders, wide sleeves hanging straight, a jade belt with pendant, hair in a neat topknot with a small jade hair crown and hairpin, slightly richer fabric, hands clasped behind the back. Calm composed upright standing poses, still, no motion, robes and sleeves hanging straight, no flying sashes. Dignified, serene, wealthy. NOT pink, NOT purple. No text, no frames.",
+  "style": "ksDAApm16B",
+  "figs": [
+   {
+    "file": "fig-man-congtu-1-a18",
+    "role": "man",
+    "sub": "congtu",
+    "identity": "congtu-1",
+    "ageBand": "a18"
+   },
+   {
+    "file": "fig-man-congtu-1-a26",
+    "role": "man",
+    "sub": "congtu",
+    "identity": "congtu-1",
+    "ageBand": "a26"
+   }
+  ]
+ },
+ "ct02": {
+  "prompt": "Semi-realistic painterly guofeng portrait style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference image; plain light parchment background, soft even light; fair porcelain skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow, never upturned), closed lips; very handsome refined looks; no moles or marks on the face; faces clearly visible, 3/4 or frontal view; rich clear colours and smooth soft near-3D shading, not a pencil sketch. A character lineup of TWO full-body standing figures, head to feet, side by side with wide clear empty space between them, both the SAME young Chinese nobleman, the son of a high minister: the same face, same features (gentle long face with soft dark brows) and the same signature colour family: jade green with ivory. All feet on one baseline. Left: about 20 years old, a handsome youthful young man, about seven and a half heads tall, an elegant layered silk scholar robe of a minister's son with embroidered borders, wide sleeves hanging straight, a jade belt with pendant, hair in a neat topknot with a small jade hair crown and hairpin, holding a thin book. Right: about 32 years old, the same man visibly more mature (fuller face, steadier adult bearing), calm and distinguished, an elegant layered silk scholar robe of a minister's son with embroidered borders, wide sleeves hanging straight, a jade belt with pendant, hair in a neat topknot with a small jade hair crown and hairpin, slightly richer fabric, holding an open book. Calm composed upright standing poses, still, no motion, robes and sleeves hanging straight, no flying sashes. Dignified, serene, wealthy. NOT pink, NOT purple. No text, no frames.",
+  "style": "vQZJy8Ja47",
+  "figs": [
+   {
+    "file": "fig-man-congtu-2-a18",
+    "role": "man",
+    "sub": "congtu",
+    "identity": "congtu-2",
+    "ageBand": "a18"
+   },
+   {
+    "file": "fig-man-congtu-2-a26",
+    "role": "man",
+    "sub": "congtu",
+    "identity": "congtu-2",
+    "ageBand": "a26"
+   }
+  ]
+ },
+ "ct03": {
+  "prompt": "Semi-realistic painterly guofeng portrait style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference image; plain light parchment background, soft even light; fair porcelain skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow, never upturned), closed lips; very handsome refined looks; no moles or marks on the face; faces clearly visible, 3/4 or frontal view; rich clear colours and smooth soft near-3D shading, not a pencil sketch. A character lineup of TWO full-body standing figures, head to feet, side by side with wide clear empty space between them, both the SAME young Chinese nobleman, the son of a high minister: the same face, same features (slightly square jaw, clean-cut features) and the same signature colour family: ivory white with sky blue. All feet on one baseline. Left: about 20 years old, a handsome youthful young man, about seven and a half heads tall, an elegant layered silk scholar robe of a minister's son with embroidered borders, wide sleeves hanging straight, a jade belt with pendant, hair in a neat topknot with a small jade hair crown and hairpin, holding a rolled scroll. Right: about 32 years old, the same man visibly more mature (fuller face, steadier adult bearing), calm and distinguished, an elegant layered silk scholar robe of a minister's son with embroidered borders, wide sleeves hanging straight, a jade belt with pendant, hair in a neat topknot with a small jade hair crown and hairpin, slightly richer fabric, holding a closed folding fan. Calm composed upright standing poses, still, no motion, robes and sleeves hanging straight, no flying sashes. Dignified, serene, wealthy. NOT pink, NOT purple. No text, no frames.",
+  "style": "TdS5LurVNR",
+  "figs": [
+   {
+    "file": "fig-man-congtu-3-a18",
+    "role": "man",
+    "sub": "congtu",
+    "identity": "congtu-3",
+    "ageBand": "a18"
+   },
+   {
+    "file": "fig-man-congtu-3-a26",
+    "role": "man",
+    "sub": "congtu",
+    "identity": "congtu-3",
+    "ageBand": "a26"
+   }
+  ]
+ },
+ "ct04": {
+  "prompt": "Semi-realistic painterly guofeng portrait style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference image; plain light parchment background, soft even light; fair porcelain skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow, never upturned), closed lips; very handsome refined looks; no moles or marks on the face; faces clearly visible, 3/4 or frontal view; rich clear colours and smooth soft near-3D shading, not a pencil sketch. A character lineup of TWO full-body standing figures, head to feet, side by side with wide clear empty space between them, both the SAME young Chinese nobleman, the son of a high minister: the same face, same features (oval face with soft features) and the same signature colour family: navy blue with gold. All feet on one baseline. Left: about 20 years old, a handsome youthful young man, about seven and a half heads tall, a rich brocade robe of a great house's young lord with cloud embroidery and a gold-trimmed collar, a jade belt, hair in a topknot with a small silver hair crown, holding a jade pendant on a cord. Right: about 32 years old, the same man visibly more mature (fuller face, steadier adult bearing), calm and distinguished, a rich brocade robe of a great house's young lord with cloud embroidery and a gold-trimmed collar, a jade belt, hair in a topknot with a small silver hair crown, slightly richer fabric, holding a tea cup. Calm composed upright standing poses, still, no motion, robes and sleeves hanging straight, no flying sashes. Dignified, serene, wealthy. NOT pink, NOT purple. No text, no frames.",
+  "style": "MBwklHsDCm",
+  "figs": [
+   {
+    "file": "fig-man-congtu-4-a18",
+    "role": "man",
+    "sub": "congtu",
+    "identity": "congtu-4",
+    "ageBand": "a18"
+   },
+   {
+    "file": "fig-man-congtu-4-a26",
+    "role": "man",
+    "sub": "congtu",
+    "identity": "congtu-4",
+    "ageBand": "a26"
+   }
+  ]
+ },
+ "ct05": {
+  "prompt": "Semi-realistic painterly guofeng portrait style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference image; plain light parchment background, soft even light; fair porcelain skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow, never upturned), closed lips; very handsome refined looks; no moles or marks on the face; faces clearly visible, 3/4 or frontal view; rich clear colours and smooth soft near-3D shading, not a pencil sketch. A character lineup of TWO full-body standing figures, head to feet, side by side with wide clear empty space between them, both the SAME young Chinese nobleman, the son of a high minister: the same face, same features (refined narrow face with high cheekbones) and the same signature colour family: teal with pale grey. All feet on one baseline. Left: about 20 years old, a handsome youthful young man, about seven and a half heads tall, a rich brocade robe of a great house's young lord with cloud embroidery and a gold-trimmed collar, a jade belt, hair in a topknot with a small silver hair crown, holding a bamboo flute. Right: about 32 years old, the same man visibly more mature (fuller face, steadier adult bearing), calm and distinguished, a rich brocade robe of a great house's young lord with cloud embroidery and a gold-trimmed collar, a jade belt, hair in a topknot with a small silver hair crown, slightly richer fabric, holding a rolled scroll. Calm composed upright standing poses, still, no motion, robes and sleeves hanging straight, no flying sashes. Dignified, serene, wealthy. NOT pink, NOT purple. No text, no frames.",
+  "style": "ksDAApm16B",
+  "figs": [
+   {
+    "file": "fig-man-congtu-5-a18",
+    "role": "man",
+    "sub": "congtu",
+    "identity": "congtu-5",
+    "ageBand": "a18"
+   },
+   {
+    "file": "fig-man-congtu-5-a26",
+    "role": "man",
+    "sub": "congtu",
+    "identity": "congtu-5",
+    "ageBand": "a26"
+   }
+  ]
+ },
+ "ct06": {
+  "prompt": "Semi-realistic painterly guofeng portrait style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference image; plain light parchment background, soft even light; fair porcelain skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow, never upturned), closed lips; very handsome refined looks; no moles or marks on the face; faces clearly visible, 3/4 or frontal view; rich clear colours and smooth soft near-3D shading, not a pencil sketch. A character lineup of TWO full-body standing figures, head to feet, side by side with wide clear empty space between them, both the SAME young Chinese nobleman, the son of a high minister: the same face, same features (soft round-oval face) and the same signature colour family: emerald green with cream. All feet on one baseline. Left: about 20 years old, a handsome youthful young man, about seven and a half heads tall, a general's son in a fitted dark brocade robe with leather bracers and a broad belt, hair in a high topknot with a dark metal hair crown, upright military bearing, holding a sheathed sword at his side. Right: about 32 years old, the same man visibly more mature (fuller face, steadier adult bearing), calm and distinguished, a general's son in a fitted dark brocade robe with leather bracers and a broad belt, hair in a high topknot with a dark metal hair crown, upright military bearing, slightly richer fabric, one hand on the hilt of a sheathed sword. Calm composed upright standing poses, still, no motion, robes and sleeves hanging straight, no flying sashes. Dignified, serene, wealthy. NOT pink, NOT purple. No text, no frames.",
+  "style": "vQZJy8Ja47",
+  "figs": [
+   {
+    "file": "fig-man-congtu-6-a18",
+    "role": "man",
+    "sub": "congtu",
+    "identity": "congtu-6",
+    "ageBand": "a18"
+   },
+   {
+    "file": "fig-man-congtu-6-a26",
+    "role": "man",
+    "sub": "congtu",
+    "identity": "congtu-6",
+    "ageBand": "a26"
+   }
+  ]
+ },
+ "ct07": {
+  "prompt": "Semi-realistic painterly guofeng portrait style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference image; plain light parchment background, soft even light; fair porcelain skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow, never upturned), closed lips; very handsome refined looks; no moles or marks on the face; faces clearly visible, 3/4 or frontal view; rich clear colours and smooth soft near-3D shading, not a pencil sketch. A character lineup of TWO full-body standing figures, head to feet, side by side with wide clear empty space between them, both the SAME young Chinese nobleman, the son of a high minister: the same face, same features (oval face with a straight nose) and the same signature colour family: slate grey-blue with white. All feet on one baseline. Left: about 20 years old, a handsome youthful young man, about seven and a half heads tall, an elegant layered silk scholar robe of a minister's son with embroidered borders, wide sleeves hanging straight, a jade belt with pendant, hair in a neat topknot with a small jade hair crown and hairpin, holding a writing brush. Right: about 32 years old, the same man visibly more mature (fuller face, steadier adult bearing), calm and distinguished, an elegant layered silk scholar robe of a minister's son with embroidered borders, wide sleeves hanging straight, a jade belt with pendant, hair in a neat topknot with a small jade hair crown and hairpin, slightly richer fabric, holding a jade pendant. Calm composed upright standing poses, still, no motion, robes and sleeves hanging straight, no flying sashes. Dignified, serene, wealthy. NOT pink, NOT purple. No text, no frames.",
+  "style": "TdS5LurVNR",
+  "figs": [
+   {
+    "file": "fig-man-congtu-7-a18",
+    "role": "man",
+    "sub": "congtu",
+    "identity": "congtu-7",
+    "ageBand": "a18"
+   },
+   {
+    "file": "fig-man-congtu-7-a26",
+    "role": "man",
+    "sub": "congtu",
+    "identity": "congtu-7",
+    "ageBand": "a26"
+   }
+  ]
+ },
+ "ct08": {
+  "prompt": "Semi-realistic painterly guofeng portrait style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference image; plain light parchment background, soft even light; fair porcelain skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow, never upturned), closed lips; very handsome refined looks; no moles or marks on the face; faces clearly visible, 3/4 or frontal view; rich clear colours and smooth soft near-3D shading, not a pencil sketch. A character lineup of TWO full-body standing figures, head to feet, side by side with wide clear empty space between them, both the SAME young Chinese nobleman, the son of a high minister: the same face, same features (gentle long face with soft dark brows) and the same signature colour family: warm brown with cream. All feet on one baseline. Left: about 20 years old, a handsome youthful young man, about seven and a half heads tall, a rich brocade robe of a great house's young lord with cloud embroidery and a gold-trimmed collar, a jade belt, hair in a topknot with a small silver hair crown, holding an open folding fan. Right: about 32 years old, the same man visibly more mature (fuller face, steadier adult bearing), calm and distinguished, a rich brocade robe of a great house's young lord with cloud embroidery and a gold-trimmed collar, a jade belt, hair in a topknot with a small silver hair crown, slightly richer fabric, holding a folding fan at the chest. Calm composed upright standing poses, still, no motion, robes and sleeves hanging straight, no flying sashes. Dignified, serene, wealthy. NOT pink, NOT purple. No text, no frames.",
+  "style": "MBwklHsDCm",
+  "figs": [
+   {
+    "file": "fig-man-congtu-8-a18",
+    "role": "man",
+    "sub": "congtu",
+    "identity": "congtu-8",
+    "ageBand": "a18"
+   },
+   {
+    "file": "fig-man-congtu-8-a26",
+    "role": "man",
+    "sub": "congtu",
+    "identity": "congtu-8",
+    "ageBand": "a26"
+   }
+  ]
+ },
+ "ct09": {
+  "prompt": "Semi-realistic painterly guofeng portrait style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference image; plain light parchment background, soft even light; fair porcelain skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow, never upturned), closed lips; very handsome refined looks; no moles or marks on the face; faces clearly visible, 3/4 or frontal view; rich clear colours and smooth soft near-3D shading, not a pencil sketch. A character lineup of TWO full-body standing figures, head to feet, side by side with wide clear empty space between them, both the SAME young Chinese nobleman, the son of a high minister: the same face, same features (slightly square jaw, clean-cut features) and the same signature colour family: midnight blue with jade. All feet on one baseline. Left: about 20 years old, a handsome youthful young man, about seven and a half heads tall, a general's son in a fitted dark brocade robe with leather bracers and a broad belt, hair in a high topknot with a dark metal hair crown, upright military bearing, holding a hunting bow at his side. Right: about 32 years old, the same man visibly more mature (fuller face, steadier adult bearing), calm and distinguished, a general's son in a fitted dark brocade robe with leather bracers and a broad belt, hair in a high topknot with a dark metal hair crown, upright military bearing, slightly richer fabric, holding a riding whip. Calm composed upright standing poses, still, no motion, robes and sleeves hanging straight, no flying sashes. Dignified, serene, wealthy. NOT pink, NOT purple. No text, no frames.",
+  "style": "ksDAApm16B",
+  "figs": [
+   {
+    "file": "fig-man-congtu-9-a18",
+    "role": "man",
+    "sub": "congtu",
+    "identity": "congtu-9",
+    "ageBand": "a18"
+   },
+   {
+    "file": "fig-man-congtu-9-a26",
+    "role": "man",
+    "sub": "congtu",
+    "identity": "congtu-9",
+    "ageBand": "a26"
+   }
+  ]
+ },
+ "ct10": {
+  "prompt": "Semi-realistic painterly guofeng portrait style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference image; plain light parchment background, soft even light; fair porcelain skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow, never upturned), closed lips; very handsome refined looks; no moles or marks on the face; faces clearly visible, 3/4 or frontal view; rich clear colours and smooth soft near-3D shading, not a pencil sketch. A character lineup of TWO full-body standing figures, head to feet, side by side with wide clear empty space between them, both the SAME young Chinese nobleman, the son of a high minister: the same face, same features (oval face with soft features) and the same signature colour family: pale celadon green with white. All feet on one baseline. Left: about 20 years old, a handsome youthful young man, about seven and a half heads tall, an elegant layered silk scholar robe of a minister's son with embroidered borders, wide sleeves hanging straight, a jade belt with pendant, hair in a neat topknot with a small jade hair crown and hairpin, holding a small go game box. Right: about 32 years old, the same man visibly more mature (fuller face, steadier adult bearing), calm and distinguished, an elegant layered silk scholar robe of a minister's son with embroidered borders, wide sleeves hanging straight, a jade belt with pendant, hair in a neat topknot with a small jade hair crown and hairpin, slightly richer fabric, holding a bamboo flute. Calm composed upright standing poses, still, no motion, robes and sleeves hanging straight, no flying sashes. Dignified, serene, wealthy. NOT pink, NOT purple. No text, no frames.",
+  "style": "vQZJy8Ja47",
+  "figs": [
+   {
+    "file": "fig-man-congtu-10-a18",
+    "role": "man",
+    "sub": "congtu",
+    "identity": "congtu-10",
+    "ageBand": "a18"
+   },
+   {
+    "file": "fig-man-congtu-10-a26",
+    "role": "man",
+    "sub": "congtu",
+    "identity": "congtu-10",
+    "ageBand": "a26"
+   }
+  ]
+ }
+}
