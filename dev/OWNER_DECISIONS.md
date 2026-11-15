@@ -350,3 +350,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (06:35Z) Khung chân dung phải hiện đủ ngọc bội + tua rua (đang bị cắt mất phía dưới).
 - (06:40Z) Sửa luật thời tiết: KHÔNG thêm khắc đi đường (đã có Sức hồi chậm, không phạt 2 lần). Cảm lạnh/trơn trượt là Mất của việc làm NGOÀI TRỜI (dạo vườn, chặn ngự giá ở vườn, quỳ ngoài sân…), ghi trên thẻ việc đó, không ghi trên thẻ đi đường.
 - (06:50Z) Thái độ của mọi người với nàng (kể cả kẻ hầu) chỉ dùng MỘT chữ "Thiện cảm"; bỏ "Lòng". Tên người không được có số.
+- (06:55Z) Nhịp chơi: chọn GIỮ NGUYÊN tốc độ (16 khắc/tuần, lên Hoàng hậu ~188 tuần, ~2–3 tiếng chơi thật). Không chỉnh nhanh hơn.
