@@ -1,4 +1,22 @@
-# PROGRESS review/coop-timer — co-op buổi clock (owner 15/11 ~21:25Z), KIT §69
+# PROGRESS review/coop-timer — co-op buổi clock (owner 15/11 ~21:25Z, ~22:55Z, ~23:10Z, ~23:20Z), KIT §69
+
+## OWNER TIMER RULES (all implemented in dev/build/jcooptimer.js)
+1. One shared countdown per room buổi = the MOST a buổi lasts. Default 5 phút (BAL.coopTm.buoiMs 300000); the host picks 3 / 5 / 8 phút
+   in the lobby ("Mời hảo hữu" screen, kitCoopLenRow; localStorage "ctm-coop-len").
+2. "Sẵn sàng" (#next in co-op) ends her buổi; the friend sees "Hảo hữu đã sẵn sàng" (chip + kitLine). Both ready → advance at once.
+3. Time out → both advance: day buổi via COOPW.forceBend (even under an open dialog / mini game; her step waits via CW.pendBuoi, no choice cut,
+   nothing twice), tối via nextBuoi→endTurn→end once she has no dialog open. Overdue: no-choice / single-road dialogs read for her after
+   readMs; real choices never made for her.
+4. Pause ONLY for mini games (S.mg / #ov), cap BAL.coopTm.pauseCapMs (60 s) per buổi (23:20Z override: NOT for dialogs, rewards, gifts,
+   edicts, night animations). The waiting friend sees only "Hảo hữu đang dở tay, xin đợi".
+5. "Tạm dừng" chip button: holds the game for BOTH until the pauser presses "Tiếp tục" (kitCoopHold kit panel; friend: "Hảo hữu xin tạm dừng").
+6. Lag-safe: host owns an ABSOLUTE deadline in host time (Worker has no time message; host time = server time stand-in); guest keeps a
+   clock offset from ping pairs (tp/tq over the act relay, min-rtt of 8); stop/start sent at once with remaining ms; graceMs 1.5 s at 0
+   before the step. Measured gap between the two screens under 300–800 ms lag: 96–124 ms.
+7. Reconnect / refresh: host's clock rides on its `pos` (tm) → the room snapshot restores it on either seat; host also keeps localStorage
+   "ctm-coop-tm". Built on fix-float r8 (merged @677e54e6b: CW.wkIn, bend resend).
+8. Clock stands still (no budget) while the room is frozen or a player chooses her thân phận (Luân hồi / roulette / death / title).
+
 
 ## State (WIP pushed)
 - `dev/build/jcooptimer.js` (new, assembled right after jkitpage.js): host-authoritative shared clock per room buổi; "Sẵn sàng" (#next label in co-op);
@@ -36,7 +54,15 @@
   e2e2 (bots pressing at once, loaded machine): n=16 median 1.1 s, p90 15.4 s, max 22.8 s, 0 time outs. Real human lengths need real play.
 - Runs before 23:20Z change: coop-timer r7–r9 42/42 ×3, coop-timer-lag l5–l6 27/27 ×2, coop-e2e 59/59.
 
+## Final test state (code bd9e1b0c4 and later)
+- coop-timer.js 43/43 ×3 (r10–r12) · coop-timer-lag.js 27/27 ×2 (l7–l8, l9 was running at hand-off) · coop-e2e (e2e3 was queued at
+  hand-off; previous build 59/59) · ts-oldsave OK. Shots looked at: chip 755x1000@2, 1180x820, 844x390, hold panel 844x390, busy line.
+
 ## Next steps / commands
+- Re-run coop-e2e once on the final build and record "buổi lengths" (median/p90) from its output; re-run coop-timer-lag once more.
+- Real human buổi lengths need real play (bots press at once: e2e2 median 1.1 s, p90 15.4 s).
+- Merge with review/coop-pets when that lands (both touch jcoopworld: mine = one export block after CW.toCanon; pets edits sendPos/onPos —
+  my pos `tm` rides on top via a COOP.send wrapper, so no line conflict expected).
 - `python3 dev/build/assemble.py && node dev/test/coop-timer.js .tmp/rN` (≈8 min) · `node dev/test/coop-timer-lag.js .tmp/lN` (≈6 min)
   · `COOP_OLD_REF=origin/main node dev/test/coop-e2e.js .tmp/e2e` · ts-oldsave: serve .tmp with old.html (git show origin/main:index.html) + new.html
   on one free port, `node dev/test/ts-oldsave.js http://127.0.0.1:P/old.html http://127.0.0.1:P/new.html`.
