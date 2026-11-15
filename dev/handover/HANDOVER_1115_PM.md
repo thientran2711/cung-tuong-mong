@@ -302,3 +302,4 @@ Worker worktrees at /home/user/wt/<name>. Rule summaries for workers: /home/user
 - (s7, fwd) LIVE main = ts-a (4e37161c0, ff by s6). Notes routed: S.met/Emperor-grey → face-reveal; HH 0% bot → s6 balance-pass; minor VP 'theo lòng nàng' ambiguity on dressing contest (queue).
 - (s7) LIVE main = month-calendar r1 (8ee414c1b): desk calendar on her room stage → 3×10 month grid, fixed FEST festivals only, KIT §58; desk avoids +N chips. Pre-existing #kit §28.1 sample error still open (queue).
 - (s7) item-events READY fc6eb5110 (fwd) → reviewer spawned (review/item-events-r1; renumber KIT §58→§64). Registry: §64 item-events.
+- (s7) sfx READY a7109a003 (fwd; includes live-bug fix: duplicate global kfWhy made locked-button taps throw) → reviewer spawned (review/sfx-r1). act-pics2 redraw batch 1: 60/380 faceless live (data).
