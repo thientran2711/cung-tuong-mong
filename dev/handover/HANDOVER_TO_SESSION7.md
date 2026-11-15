@@ -55,3 +55,48 @@ Account usage ~98%: the project moves to another account (new container). Everyt
 - NOT saved (too big, rollback only): /home/user/wt/porscale-orig/ (150 MB originals of 3317 re-cropped portraits). The re-crop is live; to roll back one would need the old CDN versions (not kept).
 - Running workers were told to commit+push WIP and write PROGRESS resume notes: balance-pass (review/balance-pass), fix-float r8 (→ review/fix-float-r8), mk-colour (review/mk-colour), reviewer small-bugs-2 (review/small-bugs-2-r6). Check each branch's PROGRESS file before re-spawning on the new account.
 - New account setup: re-create Cloudflare CDN access (api.cloudflare.com connector) for cdn_sync, Magnific connector (folder ba4aecfe-efce-47e2-b53f-30d292091886 must be reachable — it belongs to the old Magnific account; if not shared, art jobs need a new folder and STYLE refs re-uploaded), GitHub access to thientran2711/cung-tuong-mong.
+
+## SESSION 7 STATE AT ACCOUNT MOVE (15/11 ~22:15Z) — resume list for the next coordinator
+main = d8b81af9e (check `git ls-remote origin main`). Session 7 ran in its own container (4 CPUs; /home/user/wt recreated; PREAMBLE copy at dev/handover/PREAMBLE.txt, coordinator line says session 7 — update to the new session). All agents below were told to push WIP + write PROGRESS resume notes. On the new account: read each branch's dev/PROGRESS_*.md, then re-spawn (worker = continue; reviewer = re-run review from the branch tip, reuse any pushed -r1 branch).
+Went LIVE via session 7: month-calendar r1, chap-label r1, item-events r1 (§64), art-complete r1 (jartc + 50 pics), sfx r1.
+
+### Workers (branch → state)
+- review/promo-rules — son=direct promo, daughter/servant/mama exams, promotion reward chest + new-servant reveal (§65), rank-change FX (§66, painted via §68). In progress.
+- review/coop-pets — co-op pet help/harm/steal relay, "Đói" label, Linh thú life-save, co-op audit table. In progress.
+- review/cal-plus — calendar birthdays/stipend/deadlines/sổ hẹn/prep checklist/quẻ/weather/past-day log/moon/co-op (§58.3+) + Trân nữ seal on every event frame (§39.x). Reads thaiyNextVisit(), cycleDaysOf() if defined.
+- review/thaiy — monthly pulse visit, "Mời thái y bắt mạch" (bạc + equal non-bạc), early pregnancy check, bribed physician lies/leaks; exposes thaiyNextVisit().
+- review/cycle — monthly cycle (jcycle.js), Kính sự phòng cycle book, read/bribe/forge; exposes cycleDaysOf(), cycleLate().
+- review/cardflip — end-of-day card-flip scene (jflip.js, §67): painted plates, Emperor hand sprite, cards follow HER knowledge, landscape+portrait crops.
+- review/fxkit — shared painted-effects kit §68 (sprites via remove_background, light videos on black + screen blend, alpha sheets).
+- review/coop-timer — co-op buổi countdown (§69), ready/timeout, host clock, pauses with cap.
+- review/skin-match (art) — face vs hand/neck skin tone audit of all fig-*, player look1 rosy, ref maid m03.
+- review/place-art (art) — regrade 9 brown trưa + 6 too-bright nights, new Tân Giả khố + cung nữ room paintings.
+- review/art-complete (art) — head ≥9ece2024: groups 1–2 done (KC c11–c32, maids m01–m52), mole sweeps done; NOW group (b) eunuch ranks r0/r2/r3 ×ages + rank-aware picker, then (c) grown kids + kidBandOf. HELD for owner: old-save player looks 128, promoted old-love men 56.
+- review/act-pics2 (art) — redraw 152/380+ live; worker re-checking keys 1–92 darks for night-sky look, continuing from 153.
+- review/idea-history (aa1714ed) + review/idea-design (17b2ba71) — DONE docs: dev/ideas/HISTORY_IDEAS_1115.md, DESIGN_IDEAS_1115.md.
+
+### Reviewers running (branch → r1)
+rank-title (+ her-name gold glow, dp caption box removal), face-reveal, night-end (+ painted-only effects, landscape/portrait crops), placeholder-pics, recipes (+ level-up grants a recipe, 4 sub-styles everywhere, Công/Dung/Ngôn/Hạnh sub-styles, Kỳ in sub-style UI), place-colour, outside-r2 (+ age-18 home identity card, pair 2–10 bạc incidentals).
+
+### READY, reviewer NOT yet spawned
+- review/small-bugs-3 @ f490eb76 — 12 items (thân→thiện cảm, item caps, giver line, toast over dialog, face strip, header clash, subtitles, Bổng lộc kit table, k3 row, §28.1, §53 samples, Tuần fallback, rotate prompt). Close KIT_REQUESTS row "k3 top state row wrap" (now §31.2a).
+
+### Owner decisions NOT yet assigned (start these on the new account)
+1. result-sfx: win/fail sound on EVERY result surface, once, distinct; sound on by default; iPhone Safari unlock (owner ~22:05Z).
+2. item-art: poem items as calligraphy scroll/sheet/fan (44), incense distinct colours, equipment dress no-rack redraw, pet thiếu niên chubby redraw ×8; save 1024 masters img/hi/<key>.webp (21:35Z).
+3. item-big: centre-screen item display hi-res, transparent, no tile; frame only in Tư trang (21:35Z #4).
+4. night follow-ups on top of night-end (21:10Z): morning after mặn nồng, lạnh nhạt mockery, Emperor-elsewhere music, rằm/festival variants.
+5. fig-bg step 2 (20:40Z/20:50Z): A silk hanging scroll with top+bottom rods, same figure size inside, wide robes cropped to frame, status colour/motif table (review/fig-bg 21eb452d3, §61).
+6. NPC death + replacement whole class (new face, never reuse; some posts empty) + Phế phi Lý stays in lãnh cung until death + Lý side story (20:40Z).
+7. Real side stories: NPC life goals → side quests (20:40Z; pair with personality).
+8. econ-items (20:05Z #4,#7,#8): stipend item skimming (+ charcoal/ice by rank from history ideas), stolen clothes re-issue + odds, girlhood chest 6 slots.
+9. personality + trọng (13 virtues) for everyone incl. player; Thái hậu thỉnh an not flat +8, archetypes, lowering events (20:05Z #1,#2).
+10. emperor (20:05Z #5,#6): poison Emperor/Thái hậu roads (taster / two-pot / touch record checks), Emperor visits her palace.
+11. header-tabs + update-notes (20:05Z #10,#14).
+12. presentation (20:05Z #11–#13): sound by event group + voices, event frames by group/main/side story, remaining approved animations (via §68).
+13. mood bar (Sims-like, 20:05Z #3).
+14. huadian 8.5% batch (reuse review/huadian-size).
+15. Idea builds (owner: build without waiting): memories/Kỷ niệm + hook ledger first, then witnessed NPC scenes, bond ranks, arch-rival, Chí hướng, onboarding mentor, co-op Liên thủ, life-end montage, taste book; history: trap dress, Ban Tiệp dư palanquin, hiệp lý lục cung, child-raising below Tần, hidden prince, tùy giá.
+16. Small queue: whole-game mole audit with dev/figwork/artcomplete/demole_por.py; consort-c12-ty5-a51 pale patch over eyes → redraw; jk2b §7 veil/scar box follow jkpor zoom; outside route art (house/city paintings, Huynh trưởng civilian figure, house map); VP "theo lòng nàng" ambiguity; download-size; fig-export-1100; rank-ui; Bổng lộc / goodsGive done in small-bugs-3.
+Owner questions still open: j72 Việc nhờ "bước" vs "Hồi" (rec keep bước); stage paper halo behind names at night (rec keep); hourly watch trigger was blocked by permission in session 7 — new coordinator should create its own.
+KIT registry additions by session 7: §64 item-events, §65 promo-reward, §66 rank-change FX, §67 card-flip, §68 painted-fx, §69 coop-timer.
