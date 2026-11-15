@@ -1,0 +1,295 @@
+dtq_huynh|c3|Tin đồn huynh hàng giặc
+dtq_huynh|t1|Huynh trốn thoát?
+dtq_huynh|x1|Ngày quyết định
+muoi_lau|s1|Thuyền bị bắt
+muoi_lau|s2|Hộ bộ nhắm vào nhà ngươi
+muoi_lau|c1|Quản sự gian
+muoi_lau|c2|Thuyền muối thứ tư
+muoi_lau|c3|{v} ra vẻ thương cảm
+muoi_lau|t1|Đường dây lộ ra
+muoi_lau|x1|Xử án muối lậu
+muoi_doi|s1|Thư cha về kho thóc
+muoi_doi|s2|Dân đói kéo về kinh
+muoi_doi|c1|Triều đình đòi trưng thu thóc
+muoi_doi|c2|Đầu cơ của nhà khác
+muoi_doi|c3|Dịch bệnh sau đói
+muoi_doi|t1|Cha không chịu nghe
+muoi_doi|x1|Hoàng thượng xét công tội
+muoi_no|s1|Sổ nợ của hiệu buôn
+muoi_no|s2|{v} vay thêm
+muoi_no|c1|Có người đòi mua sổ nợ
+muoi_no|c2|Nợ lộ ra
+muoi_no|c3|{v} đề nghị trả nợ bằng tin
+muoi_no|t1|Nợ đến hạn cuối
+muoi_no|x1|Món nợ ngã ngũ
+cn_chu|s1|Chén trà trước mặt mọi người
+cn_chu|s2|Kẻ hầu cũ biết chuyện
+cn_chu|c1|Chuyện xưa bị khơi lại
+cn_chu|c2|{v} gặp nạn
+cn_chu|c3|Hoàng thượng hỏi về chủ cũ
+cn_chu|t1|Ngươi sắp vượt {v}
+cn_chu|x1|Ngày ngồi ngang hàng
+cn_tinh|s1|Người cũ gác cửa
+cn_tinh|s2|Bức thư cũ
+cn_tinh|c1|Một thái giám đánh hơi
+cn_tinh|c2|{n1} gặp nạn
+cn_tinh|c3|Hoàng thượng thấy ánh mắt
+cn_tinh|t1|Thư cũ lộ ra
+cn_tinh|x1|Ngày quá khứ gõ cửa
+cn_ban|s1|Lời nhắn từ Tân Giả khố
+cn_ban|s2|Kẻ đã đày Tố Nga
+cn_ban|c1|Bí mật của Tố Nga
+cn_ban|c2|Tố Nga ốm nặng
+cn_ban|c3|Có người hỏi về Tố Nga
+cn_ban|t1|Đưa Tố Nga ra khỏi Tân Giả khố
+cn_ban|x1|Sự thật về cái giếng
+cn_than|s1|Lời trăng trối
+cn_than|s2|Miếng ngọc
+cn_than|c1|Hồ sơ án cũ
+cn_than|c2|Một người nhận là thân thích
+cn_than|c3|Kẻ thù của họ Thẩm
+cn_than|t1|Nhận tổ hay không
+cn_than|x1|Ngày trình thân thế
+nc_gian|s1|Mật sứ trong đêm
+nc_gian|s2|Người hầu cố quốc
+nc_gian|c1|Bản đồ bố phòng
+nc_gian|c2|Cấm quân để ý
+nc_gian|c3|Sứ thần cố quốc dò hỏi
+nc_gian|t1|Phụ vương đòi một tin lớn
+nc_gian|x1|Mùa thu binh lửa
+nc_su|s1|Hoàng huynh vào kinh
+nc_su|s2|Lễ vật bị đánh tráo
+nc_su|c1|Hoàng huynh đòi giảm cống
+nc_su|c2|Sứ đoàn gây gổ
+nc_su|c3|Thái hậu thử ngươi
+nc_su|t1|Hoàng huynh nhờ một việc riêng
+nc_su|x1|Yến tiễn sứ
+nc_tuc|s1|Lời chê áo váy
+nc_tuc|s2|Món ăn quê nhà
+nc_tuc|c1|Thái hậu đau lưng
+nc_tuc|c2|Lễ hội té nước
+nc_tuc|c3|Học chữ Hán
+nc_tuc|t1|Thái hậu mời ngươi chép kinh
+nc_tuc|x1|Đại thọ Thái hậu
+nc_vuong|s1|Tin phụ vương băng hà
+nc_vuong|s2|Hai phong thư
+nc_vuong|c1|Hoàng thúc gửi lễ
+nc_vuong|c2|Triều đình chia phe
+nc_vuong|c3|Hoàng huynh gặp nguy
+nc_vuong|t1|Ai đáng làm vua
+nc_vuong|x1|Đại Hy chọn phe
+td_an|s1|Kho hồ sơ Hình bộ
+td_an|s2|{foe} để ý ngươi
+td_an|c1|Nhân chứng bị truy sát
+td_an|c2|Thư tay của {foed}
+td_an|c3|Phải lên cao mới dâng được sớ
+td_an|t1|{foed} ra tay trước
+td_an|x1|Dâng sớ lật án
+td_ke|s1|Một chi tiết không khớp
+td_ke|s2|Người gửi tiền cho ngươi
+td_ke|c1|Ngự sử giúp sức
+td_ke|c2|{n1} cảnh cáo
+td_ke|c3|{foe} cũng là con cờ
+td_ke|t1|Hai kẻ thù, một sớ tấu
+td_ke|x1|Đêm dâng sớ
+td_song|s1|Chiếc vòng bạc
+td_song|s2|Kẻ dò la
+td_song|c1|Em bị bắt lính đánh trận
+td_song|c2|Em lập công
+td_song|c3|Hoàng thượng hỏi chuyện biên ải
+td_song|t1|Thân phận em bị tra
+td_song|x1|Số phận người em
+td_tha|s1|{foe} ngã bệnh
+td_tha|s2|Nỗi đau của {foe}
+td_tha|c1|Cơ hội hại {foe}
+td_tha|c2|{foed} gửi thư cho con gái
+td_tha|c3|{foe} có thai
+td_tha|t1|{foe} biết ngươi là ai
+td_tha|x1|Lựa chọn cuối
+ch_co|s1|Việc đầu tiên
+ch_co|s2|Cô tổ chọn người hầu cho ngươi
+ch_co|c1|Gói thuốc
+ch_co|c2|Cô tổ muốn ngươi có con
+ch_co|c3|Hoàng hậu cầu hòa
+ch_co|t1|Cô tổ hỏi lòng ngươi
+ch_co|x1|Ván cờ cuối của cô tổ
+ch_benh|s1|Đức Thọ cung đóng cửa
+ch_benh|s2|Hoàng hậu nắm quyền
+ch_benh|c1|Thuốc của Thái y viện
+ch_benh|c2|Các phi tần xoay chiều
+ch_benh|c3|Chùa Hộ Quốc cầu an
+ch_benh|t1|Đêm nguy kịch
+ch_benh|x1|Thái hậu tỉnh dậy
+ch_ho|s1|Hai chén trà
+ch_ho|s2|Nhà ngoại muốn chọn một người
+ch_ho|c1|{v} gài bẫy
+ch_ho|c2|{v} gặp họa
+ch_ho|c3|Thái hậu muốn tác hợp con cháu
+ch_ho|t1|{v} tìm gặp ngươi
+ch_ho|x1|Thái hậu chọn người
+ch_bi|s1|Lá thư trong hộp gấm
+ch_bi|s2|Có người biết chuyện
+ch_bi|c1|Một phi tần dò hỏi
+ch_bi|c2|Thái hậu linh cảm
+ch_bi|c3|Bản sao thư đến tay Hoàng hậu
+ch_bi|t1|Sự thật năm xưa
+ch_bi|x1|Bí mật bị đem ra
+thd_tho|s1|Bài thơ lọt ra ngoài
+thd_tho|s2|Luyện thơ
+thd_tho|c1|{v} tố ngươi đạo thơ
+thd_tho|c2|Đề thi bị lộ
+thd_tho|c3|Hoàng thượng thử tài
+thd_tho|t1|Đêm trước kỳ thi
+thd_tho|x1|Kỳ thi Tài nữ
+thd_sach|s1|Rương sách cũ
+thd_sach|s2|{n1} nghe phong thanh
+thd_sach|c1|Hàn lâm viện muốn xem sách
+thd_sach|c2|Lũ lụt ở Hoài Bắc
+thd_sach|c3|Người lạ lục phòng
+thd_sach|t1|{n1} đề nghị
+thd_sach|x1|Sách ra đời hay không
+thd_tro|s1|Lá thư của học trò
+thd_tro|s2|Sĩ tử náo động
+thd_tro|c1|Nhà quan mua đề
+thd_tro|c2|Bài thi gốc
+thd_tro|c3|{n1} bị dọa
+thd_tro|t1|Phúc khảo
+thd_tro|x1|Định đoạt khoa án
+thd_hoc|s1|Buổi học đầu
+thd_hoc|s2|Đứa trẻ chậm hiểu
+thd_hoc|c1|{v} không bằng lòng
+thd_hoc|c2|Hoàng thượng xét bài
+thd_hoc|c3|Con ngươi cùng học
+thd_hoc|t1|Một đứa trẻ bị ốm sau giờ học
+thd_hoc|x1|Ngày khảo hạch
+cnv_chu|s1|Đêm trực
+cnv_chu|s2|Gói thuốc lạ
+cnv_chu|c1|Người khác dò hỏi
+cnv_chu|c2|Chủ sai việc nguy
+cnv_chu|c3|Hoàng thượng hỏi chuyện
+cnv_chu|t1|Bí mật sắp lộ
+cnv_chu|x1|Số phận của bí mật
+cnv_ban|s1|Xuân Đào bị bắt
+cnv_ban|s2|Kẻ thật sự lấy vòng
+cnv_ban|c1|Xuân Đào ốm trong ngục
+cnv_ban|c2|Chủ hỏi ngươi
+cnv_ban|c3|Thu Cúc ra tay trước
+cnv_ban|t1|Ngày xử
+cnv_ban|x1|Phiên xử ở sân sau
+cnv_mat|s1|Chiếc ô dưới mưa
+cnv_mat|s2|Chủ nghe phong thanh
+cnv_mat|c1|Ngài lại ghé
+cnv_mat|c2|Một phi tần khác muốn mua ngươi
+cnv_mat|c3|Bài hát nơi hậu viện
+cnv_mat|t1|Chủ ra tay
+cnv_mat|x1|Đêm Trung thu
+cnv_ma|s1|Bài học đầu
+cnv_ma|s2|Sổ sách Nội vụ phủ
+cnv_ma|c1|Ma ma ốm
+cnv_ma|c2|Đồng liêu ghen
+cnv_ma|c3|Ma ma thử lòng
+cnv_ma|t1|Ma ma có bí mật
+cnv_ma|x1|Ngày khảo việc
+s_than|s1|Một tiểu thái giám tìm ngươi
+s_than|s2|Ai đưa hắn vào cung
+s_than|c1|Hắn xin việc ở cung ngươi
+s_than|c2|{v} nhắc khéo
+s_than|c3|Hắn gặp nạn
+s_than|t1|Sự thật lộ ra
+s_than|x1|Ván cờ người thân
+s_thu|s1|Bức thư trong vườn
+s_thu|s2|Ai đánh rơi thư
+s_thu|c1|Đêm rằm sắp đến
+s_thu|c2|{v} dò hỏi
+s_thu|c3|Thư thứ hai
+s_thu|t1|Bằng chứng gom đủ
+s_thu|x1|Quyết định về bức thư
+s_hoa|s1|Lửa giữa đêm
+s_hoa|s2|Bóng người trong lửa
+s_hoa|c1|Người ta đổ cho ngươi
+s_hoa|c2|Tên thái giám tưới dầu
+s_hoa|c3|Tây cung xây lại
+s_hoa|t1|Vì sao lửa cháy
+s_hoa|x1|Kết vụ cháy
+s_su|s1|Yến tiếp sứ
+s_su|s2|Món quà kỳ lạ
+s_su|c1|Thông dịch bịa lời
+s_su|c2|Sứ thần xin truyền đạo
+s_su|c3|Đồng hồ hỏng
+s_su|t1|Sứ thần sắp về
+s_su|x1|Yến tiễn sứ
+s_dich|s1|Dịch vào cung
+s_dich|s2|Đơn thuốc cổ
+s_dich|c1|Hoàng tự lâm bệnh
+s_dich|c2|Tin đồn ngươi mang bệnh
+s_dich|c3|Hoàng thượng sốt
+s_dich|t1|Dịch lên đỉnh
+s_dich|x1|Dịch qua
+s_tinh|s1|Ánh mắt ở Ngự hoa viên
+s_tinh|s2|Bài thơ không tên
+s_tinh|c1|Hẹn gặp
+s_tinh|c2|Hoàng thượng lạnh nhạt
+s_tinh|c3|Có kẻ biết
+s_tinh|t1|{man} muốn đưa ngươi trốn
+s_tinh|x1|Hồi kết của cám dỗ
+s_thay|s1|Lời khuyên đầu tiên
+s_thay|s2|Ông muốn gì
+s_thay|c1|Bài học về chữ nhẫn
+s_thay|c2|Ông bị nghi
+s_thay|c3|Ông thử ngươi
+s_thay|t1|Ông già yếu
+s_thay|x1|Di sản của lão thái giám
+s_ban|s1|Cùng bị vu
+s_ban|s2|Kẻ đứng sau
+s_ban|c1|{v} tìm gặp
+s_ban|c2|{v2} lại ra tay
+s_ban|c3|Hai người cùng yến
+s_ban|t1|Liên minh hay không
+s_ban|x1|Đối mặt {v2}
+st_the|s1|Lời mời của {v}
+st_the|s2|Cài tai mắt
+st_the|c1|Một nhà quyền thần dò ý
+st_the|c2|{v2} chia rẽ
+st_the|c3|Ân thưởng chia đều
+st_the|t1|Phe cánh bị thử thách
+st_the|x1|Ngày phe cánh lên tiếng
+st_con|s1|Chọn thầy cho con
+st_con|s2|Con ốm
+st_con|c1|Có kẻ nhắm vào con
+st_con|c2|Hoàng thượng thử tài con
+st_con|c3|Con muốn chơi với con của đối thủ
+st_con|t1|Một lời đồn về con
+st_con|x1|Ngày con được định vị
+st_dong|s1|Sớ xin lập Thái tử
+st_dong|s2|Nhà quyền thần đặt cược
+st_dong|c1|Mẹ hoàng tử khác ra tay
+st_dong|c2|Thái hậu nói một câu
+st_dong|c3|Khảo hạch các hoàng tử
+st_dong|t1|Một âm mưu nhắm vào con
+st_dong|x1|Ngày lập Thái tử
+tm96a|a1|Ngày từ biệt
+tm96a|a2|Gặp lại ở {lvp}
+tm96a|a3|Tín vật trở lại
+tm96a|a4|Bức thư không ký tên
+tm96a|a5|Người hầu đã biết
+tm96a|a6|Đêm rằm tháng tám
+tm96b|b1l|Kẻ nắm thóp đòi giá
+tm96b|b1h|Tin chàng thăng chức
+tm96b|b1d|Ánh mắt từ xa
+tm96b|b2a|Chàng vì ngươi mà liều
+tm96b|b2b|Chàng chọn tiền đồ
+tm96b|b3a|Kẻ thù để ý
+tm96b|b3b|Thái giám đánh hơi
+tm96b|b4|Tang vật trong cung ngươi
+tm96b|b5|Hoàng thượng thử lòng
+tm96b|b6|Phiên tra hỏi
+tm96c|c1n|Mắt ở khắp nơi
+tm96c|c1o|Người bị giáng
+tm96c|c1t|Người được trọng dụng
+tm96c|c2|Hôn sự của chàng
+tm96c|c3a|“Theo ta đi”
+tm96c|c3b|Xin một lời dứt khoát
+tm96c|c4a|Đòn cuối của kẻ thù
+tm96c|c4b|Sóng ngầm trong triều
+tm96c|c5|Chuẩn bị cho ngày cuối
+tm96c|c6|Lựa chọn cuối
