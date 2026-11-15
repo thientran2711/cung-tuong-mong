@@ -21939,7 +21939,8 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
       (0.319) is the median face at the old 1.14× cut, so a typical picture keeps its old size. KIT_POR.fam can give a family its own target.
    2. HEAD TOP (hair ornaments included = first opaque row) sits KIT_POR.g of the window under the window's top edge — same gap for all;
       the lift is capped so the picture still covers the window bottom.
-   3. BODY (mid-point of the shoulder/chest rows, head ignored) centred in the window, offset capped at KIT_POR.dx.
+   3. BODY (mid-point of the shoulder/chest rows, head ignored) centred in the window, offset capped at KIT_POR.dx — and, when the picture's
+      own side edge is painted (garment cut by the picture border), capped so that edge never enters the window (reviewer r6: no hard cut).
    Old face-* art and the grey unknown silhouette keep their own rules; pictures without a family (data: avatars) or without a skin row
    keep z = KIT_POR.z. Window in .kin units (% of the kin box): left 14.655, top 20.289, width 70.691, height 49.373 (j60/jk2b). ========== */
 window.KIT_POR=window.KIT_POR||{z:1.14,g:.03,t0:.10,dx:.18,zr:[1,1.6],face:.319,fam:{}};
@@ -21959,7 +21960,10 @@ function kporMeasure(im){const h=160,w=Math.max(1,Math.round(im.naturalWidth*h/i
    if(d[k+3]>=200&&R>150&&G>105&&B>85&&R-G>=8&&R-G<=62&&G-B>=-4&&G-B<=48&&R-B<=95)n++}if(n>=need)ft=y}
  let f=null;if(ft>=0){const lo=Math.floor(ft+.12*h),hi=Math.floor(Math.min(h-1,ft+.5*h));let nk=lo,mn=1e9;for(let y=lo;y<hi;y++)if(wid[y]<mn){mn=wid[y];nk=y}f=(nk-ft)/h}
  let sx=0,n=0;if(trans)for(let y=Math.floor(h*.62);y<Math.floor(h*.8);y++){let l=-1,r=-1;for(let x=0;x<w;x++)if(A(x,y)>60){if(l<0)l=x;r=x}if(l>=0){sx+=(l+r+1)/2/w;n++}}
- return{t:t/h,f,x:n?sx/n:.5,trans}}
+ /* reviewer r6: is the picture's own left/right edge painted (garment cut by the picture border) below the head? then that edge must never
+    come inside the window (a hard vertical cut), so the body shift is capped there (kporGeo) */
+ let el=0,er=0;for(let y=t;y<h;y++){if(A(0,y)>128)el++;if(A(w-1,y)>128)er++}
+ return{t:t/h,f,x:n?sx/n:.5,trans,eL:el>1,eR:er>1}}
 function kporTop(src,cb){const o=KPOR_T[src];if(o&&o.v!=null)return o.v;if(o){o.w.push(cb);return null}const e={v:null,w:[cb]};KPOR_T[src]=e;
  const im=new Image();im.decoding="async";im.crossOrigin="anonymous";
  const done=v=>{e.v=v;const L=e.w;e.w=[];L.forEach(f=>{try{f&&f(v)}catch(x){}})};
@@ -21969,7 +21973,8 @@ function kporTop(src,cb){const o=KPOR_T[src];if(o&&o.v!=null)return o.v;if(o){o.
 function kporGeo(src,v){const K=KIT_POR,WL=14.655,WT=20.289,WW=70.691,WH=49.373;
  /* size: the FACE (OpenCV box from POR_FACE.json) is K.face of the window height for every picture (a family may override: K.fam) */
  let z=K.z;const F=kporFace(src);if(F){const tgt=K.fam[kporFam(src)]||K.face;z=Math.max(K.zr[0],Math.min(K.zr[1],tgt/F[1]));v=Object.assign({},v,{t:F[3]||v.t,x:F[4]||v.x})}
- const L=Math.min(v.t*z-K.g,z-1);const D=Math.max(-K.dx,Math.min(K.dx,(v.x||.5)-.5));
+ const L=Math.min(v.t*z-K.g,z-1);const cv=(z-1)/2/z;/* max shift that keeps the picture covering the window */
+ const D=Math.max(-(v.eL?Math.min(K.dx,cv):K.dx),Math.min(v.eR?Math.min(K.dx,cv):K.dx,(v.x||.5)-.5));
  const left=WL-(z-1)*WW/2-D*z*WW,top=WT-L*WH;const s=(z-1)/2;
  return{z,L,D,left,top,w:z*WW,h:z*WH,clip:`inset(${(L/z*100).toFixed(3)}% ${((s-D*z)/z*100).toFixed(3)}% ${((z-1-L)/z*100).toFixed(3)}% ${((s+D*z)/z*100).toFixed(3)}%)`}}
 function kporApply(img){try{if(!img||!img.classList||!img.classList.contains("kpor"))return;const src=img.currentSrc||img.getAttribute("src")||"";
@@ -22121,7 +22126,7 @@ window.VP={fix,date,num,ord,mon,rules:RULES,full:FULL,tabs:TABS,refresh:()=>{pat
      (COOPW.hold freezes Qua buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="d72b83a48f7e";window.CTM_BUILD=BUILD;
+const BUILD="5254b291a09e";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
