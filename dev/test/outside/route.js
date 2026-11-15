@@ -31,7 +31,9 @@ const sleep=ms=>new Promise(r=>setTimeout(r,ms));
   await skipOverlays();
   await p.evaluate(()=>document.querySelector('#slots button[data-new="1"]').click());await sleep(2500);await skipOverlays();
   /* the origin is pre-rolled by the life seed; the test makes it the chosen one (the card is drawn again) */
-  R.rolled=await p.evaluate(o=>{const r=S.origin.k;if(S.origin.k!==o){S.origin=ORIGINS.find(x=>x.k===o);nlCard()}return r},ORG);await sleep(600);await skipOverlays();
+  R.rolled=await p.evaluate(o=>{const r=S.origin.k;/* a servant start (cung nữ) has no home road: roll new lives until an eligible origin */
+   for(let i=0;i<60&&(S.srv||(typeof isSrv==='function'&&isSrv())||!KC.ok.includes(S.origin.k));i++){try{store.set(NL_KEY,null)}catch(e){}start()}
+   if(S.origin.k!==o&&!S.srv){S.origin=ORIGINS.find(x=>x.k===o);nlCard()}return r},ORG);await sleep(600);await skipOverlays();
   R.card=await p.evaluate(()=>({path:!!document.querySelector('#modal [data-kcp="nha"]'),opts:[...document.querySelectorAll('#modal [data-kcp]')].map(b=>b.dataset.kcp)}));
   if(!R.card.path)F('identity card has no "Ở nhà chờ tuyển tú" option');
   await p.evaluate(()=>{const b=document.querySelector('#modal [data-kcp="nha"]');b.scrollIntoView({block:'center'});b.click()});await sleep(700);
@@ -50,7 +52,7 @@ const sleep=ms=>new Promise(r=>setTimeout(r,ms));
   const titles=new Set();const steps=[];
   const play=async(n,stopIf)=>{for(let i=0;i<n;i++){const r=await p.evaluate(()=>{try{if(S.dead)return'dead';
      const vis=e=>e&&e.isConnected&&e.getClientRects().length>0;const ok=document.querySelector('#kg82ok');if(vis(ok)){ok.click();return'mgok'}const sk=document.querySelector('#kg82skip');if(vis(sk)){sk.click();return'mg'}
-     if(Q.length){const m=Q[0];const t='Q:'+m.t;if(m.opts&&m.opts.length){const L=m.opts.map((o,i)=>i).filter(i=>!m.opts[i].dis);chooseM(L.length?L[Math.floor(Math.random()*L.length)]:0);return t}closeModal();return t}
+     if(Q.length){const m=Q[0];const t=(isKc()&&m.pid!=='kcE'&&!m.nl&&!/^(Khuê các|Nhập cung)$/.test(m.t)?'Q:[ngoài] ':'Q:')+m.t;if(m.opts&&m.opts.length){const L=m.opts.map((o,i)=>i).filter(i=>!m.opts[i].dis);chooseM(L.length?L[Math.floor(Math.random()*L.length)]:0);return t}closeModal();return t}
      const L=deck.map((a,i)=>[a,i]).filter(([a])=>!a.done&&!a.lock&&can(cardCost(a))&&canPay(a));if(L.length&&Math.random()<.7){const [a,i]=L[Math.floor(Math.random()*L.length)];act(i);return'act:'+a.n}
      if(isKc()&&Math.random()<.2){const ks=Object.keys(KCPL).filter(k=>!kcGoWhy(k));if(ks.length){kcGo(ks[Math.floor(Math.random()*ks.length)]);render();return'go'}}
      nextBuoi();return'next'}catch(e){return'ERR '+e.message}});steps.push(r);if(/^Q:/.test(r))titles.add(r.slice(2));if(r==='dead'||/^ERR/.test(r))return r;if(await p.evaluate(stopIf))return'stop'}return'n'};
@@ -60,7 +62,7 @@ const sleep=ms=>new Promise(r=>setTimeout(r,ms));
     S.year=KC.ty;S.month=KC.tm-1;S.tuan=2;S.turn=Math.max(S.turn,20);S.kc.ev.chieu=1;S.kc.suit=[];S.kc.forced=0;S.kc.mien=0;
     Object.assign(S,{sac:Math.max(S.sac,70),suc:90,duc:Math.max(S.duc,50),danh:Math.max(S.danh,30),kld:0,kgt:Math.max(S.kgt,50)});window.__kcKeep=1;render()});
    R.play2=await play(300,()=>!isKc()||S.dead);await sleep(500)}
-  R.titles=[...titles];R.errSteps=steps.filter(x=>/^ERR/.test(x)).slice(0,5);if(R.errSteps.length)F('step errors');
+  R.titles=[...titles];R.foreign=R.titles.filter(t=>/^\[ngoài\]/.test(t));if(R.foreign.some(t=>/Kính sự phòng|thị tẩm|lật thẻ|Thái hậu triệu|Hoàng thượng đến/i.test(t)))F('palace event at home: '+R.foreign);R.errSteps=steps.filter(x=>/^ERR/.test(x)).slice(0,5);if(R.errSteps.length)F('step errors');
   R.pal=await p.evaluate(()=>{for(let i=0;i<20&&Q.length;i++){const m=Q[0];if(m.opts&&m.opts.length)chooseM(0);else closeModal()}render();
    return{isKc:isKc(),dead:!!S.dead,end:S.kc&&S.kc.end,inPal:!!(S.kc&&S.kc.inPal),rank:S.rank,rankN:RANKS[S.rank].n,inCons:consorts().includes(S),age:S.age,danh:S.danh,bac:S.bac,maid:S.maid&&S.maid.name,
     intel:S.kc&&S.kc.intel.length,fig:figFor(S),tabs:[...document.querySelectorAll('#tabs button')].filter(b=>b.offsetParent).map(b=>b.textContent.trim()),title:(document.getElementById('me-r')||{}).textContent}});

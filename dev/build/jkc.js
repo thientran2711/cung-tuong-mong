@@ -83,6 +83,10 @@ $("modal").addEventListener("click",e=>{const b=e.target.closest&&e.target.close
 (function(){if(typeof nlCard!=="function")return;const c0=nlCard;nlCard=function(){try{if(S&&!kcOk(S.origin.k))S.kcPick="cung"}catch(e){}return c0.apply(this,arguments)}})();
 
 function kcSnapReset(){try{S.wkSnap=wkSnap()}catch(e){}try{KMS=S;KMSNAP=kmSnap()}catch(e){}}
+/* r2: a home name never repeats a palace name (j61 hides the names of palace people she does not know, in any text: "Thăm cung nữ ???") */
+function kcFreeName(mk,more){const used=new Set();const tail=n=>String(n).split(" ").slice(-2).join(" ");const add=n=>{if(n){used.add(n);used.add(tail(n))}};
+ try{(typeof k61All==="function"?k61All():[]).forEach(e=>e&&add(e.name));(more||[]).forEach(m=>add(m.name))}catch(e){}
+ let n=mk();for(let i=0;i<40&&(used.has(n)||used.has(tail(n)));i++)n=mk();return n}
 function kcInit(){const k=S.origin.k;const sur=tdSur(S.name);const nm=g=>`${sur} ${g}`;
  const ag=a=>a;const T=(r,t,name,age,role,pref,tr,af)=>({id:"f"+r,r,t,name,age,fid:kcFreeFid(role,pref),tr:tr||pick(["Hiền lành","Nhu mì","Tham vọng","Đa nghi","Kiêu ngạo"]),af:af==null?30+R(25):af,me:30+R(20),oan:0,alive:1});
  const fam=[];const gl=shuf(KCMN.slice());const g=()=>gl.pop();
@@ -92,9 +96,9 @@ function kcInit(){const k=S.origin.k;const sur=tdSur(S.name);const nm=g=>`${sur}
  fam.push(T("di",momAlive?"Di nương":"Kế mẫu",`${pick(SURN)} thị`,33+R(6),"mama",[],pick(["Hiểm độc","Tham vọng","Kiêu ngạo","Hiền lành"]),R(25)));
  fam.push(T("to","Tổ mẫu",`Lão phu nhân ${sur} gia`,66+R(8),"mama",[],pick(["Cương trực","Hiền lành","Đa nghi"]),40+R(20)));
  fam.push(T("huynh","Huynh trưởng",nm(g()),21+R(4),"man",["man:thive-1","man:thive-2"],pick(["phong lưu","trung hậu","tham vọng","cẩn trọng"]),40+R(30)));
- const sis=T("muoi","Thứ muội",nm(pick(KCFN)),18,"consort",[],pick(["Kiêu ngạo","Tham vọng","Nhu mì","Hiểm độc","Hiền lành"]),R(30));
+ const sis=T("muoi","Thứ muội",kcFreeName(()=>nm(pick(KCFN)),fam),18,"consort",[],pick(["Kiêu ngạo","Tham vọng","Nhu mì","Hiểm độc","Hiền lành"]),R(30));
  sis.sac=40+R(50);sis.tai=30+R(50);sis.danh=4+R(8);fam.push(sis);
- for(let i=0;i<2;i++){const f=T("ban"+i,"Bạn khuê phòng",`${pick(SURN)} ${pick(KCFN)}`,18+R(2),"consort",[],pick(["Hiền lành","Nhu mì","Kiêu ngạo","Tham vọng"]),30+R(30));f.sac=40+R(50);f.tai=30+R(50);f.danh=4+R(8);fam.push(f)}
+ for(let i=0;i<2;i++){const f=T("ban"+i,"Khuê hữu",kcFreeName(()=>`${pick(SURN)} ${pick(KCFN)}`,fam),18+R(2),"consort",[],pick(["Hiền lành","Nhu mì","Kiêu ngạo","Tham vọng"]),30+R(30));f.sac=40+R(50);f.tai=30+R(50);f.danh=4+R(8);fam.push(f)}
  S.kc={v:1,fam,at:{},once:{},ev:{},ch:{o:0,tm:0,ke:0,hon:0},suit:[],intel:[],proof:{},le:0,ds:0,g7:-99,ldSeen:0,r0:S.rank,staff0:S.staff||[],y0:S.year,end:null,tt:null,log:[]};
  S.kgt=40+R(20)+(k==="tt"||k==="ch"?10:k==="td"?-10:0);S.kap=10+R(10);S.khm=Math.round((KCGTU[k]||50)*1.2);S.kld=0;S.kgtu=KCGTU[k]||50;
  S.age=18;S.rank=0;S.sung=0;S.danh=Math.min(S.danh,8);S.bac=Math.min(S.bac,40+Math.round(S.kgtu/2));S.staff=[];S.place="kc_khue";S.pal=null;S.tonight=null;
@@ -103,7 +107,7 @@ function kcInit(){const k=S.origin.k;const sur=tdSur(S.name);const nm=g=>`${sur}
  try{if(!S.tm96&&typeof tmRoll96==="function"&&tmRoll96(k)){const m=mkMan96(k);if(m){S.tm96={k,mid:m.id,h:60,sus:0,ev:0,rise:0,tok:0,v:1};const P=S.st&&S.st.ch&&S.st.ch.plan;
    if(P&&!P.includes("st:tm96a")){const iS=P.indexOf("ms:sung"),pA=iS>=0?iS+1:P.indexOf("ms:nhap")+1;P.splice(Math.max(S.st.ch.i+1,pA),0,"st:tm96a");const fi=P.indexOf("fin");P.splice(fi>=0?fi+1:P.length-2,0,"st:tm96c")}}}
   if(S.tm96){S.tm96.h=Math.min(S.tm96.h,60);S.tm96.tok=0;S.kc.tm=1;try{k61Know(manById(S.tm96.mid),"thanh mai",true,3)}catch(e){}}}catch(e){console.error(e)}
- kcWhere();Q=Q.filter(m=>m.nl||!/^Nhập cung$/.test(m.t||""));
+ kcWhere();Q=Q.filter(m=>m.nl);/* r2: every palace dialog the start queued (Nhập cung, a Kính sự phòng summons for tonight …) belongs to the palace road */
  const d=kcR("cha"),di=kcR("di");
  Q.push({t:"Khuê các",who:pMe(),h:`<p>Ngươi mười tám tuổi, con gái ${KCDAD[k][1]}. Chiếu tuyển tú ba năm một lần; kỳ tới vào mùa xuân năm thứ ba.</p>`+
   `<p>Từ nay đến đó còn hơn hai năm: học tài nghệ, giữ lòng cha mẹ, coi chừng ${di.t.toLowerCase()}, và giữ cho danh tiếng trong sạch. Nhà cũng có thể gả ngươi đi trước kỳ tuyển.</p>`+
@@ -573,7 +577,7 @@ function kcDressRec(fid,tier,age){const X=fid&&KCFX[fid];const L=X&&X[tier];if(!
  let b=null,bd=9;for(const f of L){const d=Math.abs(KC_AB.indexOf(f.ageBand||"a18")-w);if(d<bd){bd=d;b=f}}return b}
 function kcDressSrc(fid,kind,tier,age){const f=kcDressRec(fid,tier||kcDress(),age==null&&S?S.age:age);if(!f)return"";return figPath(kind==="por"?(f.por||f.file):f.file)}
 window.kcDressSrc=kcDressSrc;
-(function(){const g0=figFor;figFor=function(p,kind){try{if(isKc()&&p){const who=p===S?S:typeof figWho==="function"?figWho(p):null;
+(function(){const g0=figFor;figFor=function(p,kind){try{if((isKc()||typeof NLP!=="undefined"&&NLP&&S&&S.kcPick==="nha"&&kcOk(S.origin.k))&&p){/* r2: the identity card shows the home dress once "Ở nhà" is picked */const who=p===S?S:typeof figWho==="function"?figWho(p):null;
   if(who===S){const k=S.pid||S.fid||(typeof figPick==="function"?figPick(S):"");const s=kcDressSrc(k,kind);if(s)return s}}}catch(e){}return g0.apply(this,arguments)}})();
 /* her sister shares her home; the friends are daughters of officials (khuê các) */
 (function(){const k0=kcPor;kcPor=function(m,kind){try{if(isKc()&&m&&m.fid&&(m.r==="muoi"||/^ban/.test(m.r))){const s=kcDressSrc(m.fid,kind==="fig"?"fig":"por",m.r==="muoi"?kcDress():"kc",m.age);if(s)return s}}catch(e){}return k0.apply(this,arguments)}})();
