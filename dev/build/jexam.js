@@ -22,7 +22,7 @@ const EXQ={
  le:[{q:"Gặp Thái hậu giữa hành lang, phi tần phải làm gì?",a:"Đứng nép bên đường, cúi mình vấn an",w:["Đi tiếp cho kịp giờ","Gật đầu chào","Hỏi Thái hậu đi đâu"]},
   {q:"Thỉnh an Hoàng hậu vào lúc nào?",a:"Sáng sớm, theo giờ Hoàng hậu định",w:["Lúc nào rảnh thì sang","Chiều tối trước giờ ngủ","Chỉ ngày lễ Tết"]},
   {q:"Dâng trà lên bậc trên, tay đặt thế nào?",a:"Hai tay nâng chén, mắt nhìn xuống",w:["Một tay đưa chén","Đặt chén lên bàn rồi lui","Nhìn thẳng mà dâng"]},
-  {q:"Hoàng thượng ban thưởng, phi tần đáp lễ ra sao?",a:"Quỳ tạ ân, xưng thần thiếp",w:["Cảm ơn rồi cất đi","Đứng nhận, cười tươi","Từ chối cho khiêm nhường"]},
+  {q:"Hoàng thượng ban thưởng, phi tần đáp lễ ra sao?",a:"Quỳ tạ ân, xưng thần thiếp",w:["Nhận rồi cất đi","Đứng nhận, cười tươi","Từ chối cho khiêm nhường"]},
   {q:"Ngày giỗ tiên đế, trong cung phải giữ điều gì?",a:"Mặc đồ nhạt màu, không ca hát",w:["Bày yến cho vui","Cài trâm đỏ lấy may","Mở hội đánh cờ"]},
   {q:"Đi trong cung gặp phi tần phẩm cao hơn thì sao?",a:"Nhường đường, hành lễ trước",w:["Chờ người kia chào trước","Giả như không thấy","Đi nhanh qua cho xong"]},
   {q:"Phi tần tự xưng thế nào trước Hoàng thượng?",a:"Thần thiếp",w:["Nô tỳ","Bản cung","Ta"]},
@@ -106,7 +106,8 @@ function exCanSit(p){const e=exS(p);return !e.pass&&!(e.cd>S.turn)&&exElig(p)}
 function exDateT(turn,tuan){const d=turn-S.turn;const m0=S.month-1+d;const m=((m0%12)+12)%12+1,y=S.year+Math.floor(m0/12);
  try{if(typeof kitDate==="function")return kitDate(m,y,tuan)}catch(e){}return `tháng ${m}${tuan!=null?" "+TUAN[tuan]:""}`}
 function exDateW(w){return exDateT(Math.floor(w/3),w%3)}
-function exExTxt(P){if(!P.ex)return "quan Nội vụ phủ";const a=P.ex.att;return `${P.ex.name} (${P.ex.k==="th"?"Thái hậu quý":"Hoàng hậu quý"} ngươi ${a})`}
+/* the examiner's name only: how her liking moves the bar is said once, on the «Mức đỗ» row (exBarTxt) — keeps the round frame short on phones */
+function exExTxt(P){return P.ex?P.ex.name:"Quan Nội vụ phủ"}
 function exBarTxt(P){return P.sh?`${P.bar} phần (mức ${P.bar0}, ${P.sh>0?"hạ":"nâng"} ${Math.abs(P.sh)} vì ${P.ex.k==="th"?"Thái hậu":"Hoàng hậu"} ${P.sh>0?"quý":"không ưa"} ngươi)`:`${P.bar} phần`}
 
 /* ---------- the exam row in every requirement list (one gate for every promotion path) ---------- */
@@ -158,7 +159,13 @@ function exAdd(){try{if(Array.isArray(deck)&&!deck.some(a=>a&&a.exam))deck.unshi
 function exDrop(){try{if(Array.isArray(deck))deck=deck.filter(a=>!(a&&a.exam))}catch(e){}}
 (function(){const d0=deal;deal=function(){const r=d0.apply(this,arguments);try{if(exOn()&&!S.out&&!exSrv(S)&&S.ex&&S.ex.w1!=null&&!S.ex.pass)exAdd()}catch(e){}return r}})();
 (function(){const r0=runOpt;runOpt=function(a){if(a&&a.exam){if(!canPay(a))return null;if(a.c)apply(a.c);log(`Dự khảo hạch tấn phong ${exRk(exS(S).to)}. ${fmt(a.c)||""}`);try{a.go()}catch(e){console.error(e)}return true}return r0.apply(this,arguments)}})();
-(function(){const c0=cardH;cardH=function(a){let h=c0.apply(this,arguments);try{if(a&&a.exam)h=h.split("không mất gì").join(`trượt: chờ ${exCd(exS(S).to)} tháng mới được thi lại`)}catch(e){}return h}})();
+(function(){const c0=cardH;cardH=function(a){let h=c0.apply(this,arguments);try{if(a&&a.exam)h=h.split("không mất gì").join(`trượt: chờ ${exCd(exS(S).to)} tháng mới được thi lại`).replace(/<button\b/,'<button data-kexam="1"')}catch(e){}return h}})();
+/* its category word on the picture frame: an exam of etiquette and duties is «Lễ nghi», not the default «Giao thiệp» (same pattern as j79 sung-ai) */
+try{KIT_ACT_CATS.unshift(["le-nghi",/khảo hạch tấn phong/i])}catch(e){}
+/* the act picture (owner 14:30Z: no group images): the exam card shows ONLY its own picture (ACTS.json «Khảo hạch tấn phong»); with no own key
+   (or before ACTS.json arrives) it gets NO picture slot at all — never the category tile / category picture of kitActArt */
+(function(){if(typeof kpActArt!=="function")return;const k0=kpActArt;kpActArt=function(b){try{if(b&&b.dataset&&b.dataset.kexam&&!(typeof kitActKey==="function"&&kitActKey("Khảo hạch tấn phong"))){
+  b.dataset.kart="none";b.classList.remove("kart");b.classList.add("kanoart");const a=b.querySelector(":scope > .kaart");if(a)a.remove();return}if(b&&b.dataset&&b.dataset.kexam)b.classList.remove("kanoart")}catch(e){}return k0.apply(this,arguments)}})();
 (function(){const n0=nextBuoi;nextBuoi=function(){const r=n0.apply(this,arguments);try{exTick()}catch(e){console.error("exam tick",e)}return r}})();
 (function(){const r0=render;render=function(){try{exTick()}catch(e){console.error("exam tick",e)}return r0.apply(this,arguments)}})();
 
@@ -169,17 +176,17 @@ function exStart(){const e=exS(S);const P=exPlan(S);
  if(window.__exAuto||typeof kg82Open!=="function"||!document.getElementById("ov")){exDone(S,exSim(S));return}
  e.pend={raws:[]};const raws=e.pend.raws;let i=0;const n=P.rounds.length;
  const round=()=>{const k=P.rounds[i],K=KG82_KIND[k];KG82.ctx="thi";const lv=exLv(S,k);KG82.lv=lv;try{kg82Preload(k)}catch(x){}
-  const d=kg82Open({art:"Khảo hạch",title:`Vòng ${i+1}/${n} · ${K.n}`,how:K.how});if(!d){exAbort();return}
+  const d=kg82Open({art:"Khảo hạch",title:`Môn ${i+1}/${n} · ${K.n}`,how:K.how});if(!d){exAbort();return}
   const box=kg82Box();const SK=Math.round(kg82NpcMean(lv));
-  box.innerHTML=`<h4 class="kpst">Khảo hạch tấn phong ${exRk(P.to)}</h4>`+kg82Rows([["Giám khảo",exExTxt(P),"t"],["Vòng",`${i+1}/${n}: ${K.n} · ${K.t}`,"t"],["Độ khó",`${kg82DiffWord(lv)} · theo bậc ${lv}`,"n"],["Mức đỗ",`${exBarTxt(P)}, tính cả ${n} vòng cùng Tứ đức và tài nghệ`,"n"]])+
-   `<div class="kg82act"><button class="${kg82Btn()}" id="kg82go">Bắt đầu thi</button><button class="${kg82Btn(true)}" id="kg82skip">Để tài nghệ quyết định<small>vòng này tính ${SK}/10, như người cùng bậc</small></button></div>`;
+  box.innerHTML=`<h4 class="kpst">Khảo hạch tấn phong ${exRk(P.to)}</h4>`+kg82Rows([["Giám khảo",exExTxt(P),"t"],["Môn thi",`${i+1}/${n}: ${K.n} · ${K.t}`,"t"],["Độ khó",`${kg82DiffWord(lv)} · theo bậc ${lv}`,"n"],["Mức đỗ",`${exBarTxt(P)}, tính cả ${n} môn cùng Tứ đức và tài nghệ`,"n"]])+
+   `<div class="kg82act"><button class="${kg82Btn()}" id="kg82go">Bắt đầu thi</button><button class="${kg82Btn(true)}" id="kg82skip">Để tài nghệ quyết định<small>môn này tính ${SK}/10, như người cùng bậc</small></button></div>`;
   $("kg82go").onclick=()=>kg82Play(k,raw=>after(raw,false));$("kg82skip").onclick=()=>after(SK,true)};
  const after=(raw,sk)=>{raws.push(raw);i++;const last=i>=n;try{save()}catch(x){}
-  kg82ShowRes(kg82Rows([[`Vòng ${i}`,`${raw}/10 · ${kg82Word(raw)}${sk?" (để tài nghệ quyết định)":""}`,"t"]])+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82ok">${last?"Xem kết quả":"Vòng kế tiếp"}</button></div>`);
+  kg82ShowRes(kg82Rows([[`Môn ${i}`,`${raw}/10 · ${kg82Word(raw)}${sk?" (để tài nghệ quyết định)":""}`,"t"]])+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82ok">${last?"Xem kết quả":"Môn kế tiếp"}</button></div>`);
   kg82Set("score",`${raw}/10`);kg82Set("round",`${i}/${n}`);$("kg82ok").onclick=()=>{if(last)result();else round()}};
  const result=()=>{const sc=exScore(P,raws);const r=Object.assign(sc,{P,raws});
-  kg82Open({art:"Khảo hạch",title:`Kết quả · ${exRk(P.to)}`,how:"Điểm = phần thi các vòng + Tứ đức + tài nghệ. Đạt mức đỗ của giám khảo thì đỗ."});
-  const parts=[["Các vòng",raws.map((x,j)=>`${KG82_KIND[P.rounds[j]].n} ${x}/10`).join(" · ")],[`Phần thi (trung bình ${String(sc.avg).replace(".",",")} × ${BAL.ex.wPlay})`,`+${sc.play}`],[`Tứ đức (${P.virL})`,`+${P.vir}`],[P.artL,`+${P.art}`],["Mức đỗ","cần "+exBarTxt(P)]];
+  kg82Open({art:"Khảo hạch",title:`Kết quả · ${exRk(P.to)}`,how:"Tổng phần = phần thi các môn + Tứ đức + tài nghệ. Đạt mức đỗ của giám khảo thì đỗ."});
+  const parts=[["Các môn",raws.map((x,j)=>`${KG82_KIND[P.rounds[j]].n} ${x}/10`).join(" · ")],[`Phần thi (trung bình ${String(sc.avg).replace(".",",")} × ${BAL.ex.wPlay})`,`+${sc.play}`],[`Tứ đức (${P.virL})`,`+${P.vir}`],[P.artL,`+${P.art}`],["Mức đỗ","cần "+exBarTxt(P)]];
   const note=sc.pass?`Đỗ. ${P.to>=7?"Được dự chọn ngôi Hoàng hậu.":`Thánh chỉ tấn phong ${exRk(P.to)}.`}`:`Trượt. Chờ ${exCd(P.to)} tháng mới được thi lại.`;
   kg82ShowRes(kitGameResult({parts,total:`${sc.total} phần · cần ${P.bar}`,note})+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82ok">Đã hiểu</button></div>`);
   kg82Set("score",String(sc.total));kg82Set("round",`${n}/${n}`);kg82Set("time","đã hết");try{$("kg82ok").scrollIntoView({block:"nearest"})}catch(x){}
@@ -194,8 +201,8 @@ function exChips(){if(!exOn()||S.rank>=7||S.out)return"";const e=exS(S);const L=
  else if(e.grace===e.to)L.push(["g","Được ân thi ngay"]);
  else L.push(["n","Đủ điều kiện thì được dự khảo hạch"]);
  if(e.last&&!e.pass)L.push(["n",`Lần trước: ${e.last.s}/${e.last.b} phần`]);
- return L.map(([c,t])=>`<span class="kchip ${c}">${t}</span>`).join(" ")}
+ return L.map(([c,t])=>kitChip(t,c)).join(" ")}  /* kit status chips (KIT kitChip(text,"g"|"r"|"n")) */
 if(typeof KIT_GLOSS!=="undefined")KIT_GLOSS["Khảo hạch tấn phong"]="";
-(function(){const t=()=>{try{const B=BAL.ex;KIT_GLOSS["Khảo hạch tấn phong"]=`Đủ điều kiện sắc phong chỉ là được thi. Từ lúc đủ, ngươi có ${B.win} tuần để dự khảo hạch (thẻ ở Hành sự); lỡ hạn thì chờ như trượt. Phẩm thấp thi lễ nghi và nữ công; phẩm giữa thi cầm kỳ thi họa và câu đối; phẩm cao thi trị cung, xử án và đối đáp với Thái hậu. Điểm = phần thi các vòng (mỗi vòng 0–10, lấy trung bình nhân ${B.wPlay}) + Tứ đức + tài nghệ; giám khảo (Hoàng hậu, phẩm cao: Thái hậu) quý ngươi thì hạ mức đỗ, ghét thì nâng. Trượt: chờ ${B.cd[1]}–${B.cd[7]} tháng (phẩm càng cao càng lâu). Phi tần khác cũng thi như vậy. Sinh hoàng tử: được ân thi ngay.`}catch(e){}};
+(function(){const t=()=>{try{const B=BAL.ex;KIT_GLOSS["Khảo hạch tấn phong"]=`Đủ điều kiện sắc phong chỉ là được thi. Từ lúc đủ, ngươi có ${B.win} tuần để dự khảo hạch (thẻ ở Hành sự); lỡ hạn thì chờ như trượt. Phẩm thấp thi lễ nghi và nữ công; phẩm giữa thi cầm kỳ thi họa và câu đối; phẩm cao thi trị cung, xử án và đối đáp với Thái hậu. Tổng phần = phần thi các môn (mỗi môn 0–10, lấy trung bình nhân ${B.wPlay}) + Tứ đức + tài nghệ; giám khảo (Hoàng hậu, phẩm cao: Thái hậu) quý ngươi thì hạ mức đỗ, ghét thì nâng. Trượt: chờ ${B.cd[1]}–${B.cd[7]} tháng (phẩm càng cao càng lâu). Phi tần khác cũng thi như vậy. Sinh hoàng tử: được ân thi ngay.`}catch(e){}};
  if(typeof renderPanel0==="function"){const r0=renderPanel0;renderPanel0=function(){t();return r0.apply(this,arguments)}}})();
 window.exPlan=exPlan;window.exChance=exChance;window.exSim=exSim;window.exElig=exElig;window.exS=exS;window.exTick=exTick;window.exStart=exStart;

@@ -51,3 +51,19 @@ Bot: `dev/measure/inpage6.js` now sits the exam at once (window.__exAuto = rolle
   ≈ 4–6 months on a median ~64-month road to Hoàng hậu, while NPC rivals are slowed the same way at the seat. Estimated Hoàng hậu rate
   33 % → ~30–31 %, inside the ~32 % target band; if a real run shows lower, lower BAL.ex.bar[2] (31) first.
 - Next: rerun `OUT=… bash dev/measure/run5b.sh <game> new` when the machine is quiet (base vs new, 30 lives each).
+
+## Review r6 (review/promo-exam-r6, 15/11)
+Merged a0ea105b1 onto origin/main ce840fa84, then origin/main afb2676a2 (assemble: main order incl. jly/jgift/jevban + jexam after jtabs).
+Reviewer fixes:
+1. KIT note renumbered §48 → §55 (registry: §48–§50 = kit-fig2, §55 = promo-exam).
+2. Act card picture: only its own picture. ACTS.json already maps «Khảo hạch tấn phong» → act-khao-hach-tan-phong.webp (on CDN; hands-only
+   desk with brush, scroll + seal, embroidery hoop, zither: fits). Guard: the card carries `data-kexam`; a kpActArt wrapper gives NO picture
+   slot when there is no own key (checked by stubbing kitActKey: no .kaart, `kanoart`; restoring the key draws the own picture). Category word
+   «Lễ nghi» instead of the default «Giao thiệp».
+3. VANPHONG: player-visible "Vòng" → "Môn" (môn thi), "Điểm = …" → "Tổng phần = …" (điểm is a banned modern word), wrong option
+   "Cảm ơn rồi cất đi" → "Nhận rồi cất đi". The 40 questions read: one clear right answer each, period wording (thần thiếp per VANPHONG §2,
+   Thận hình ty, Kính sự phòng, Nữ huấn/Nữ giới), no modern terms.
+4. Mệnh truyện chips through `kitChip(text,tone)` (same markup, kit function) instead of hand-written `<span class="kchip">`.
+5. Round frame at 844x390: the start button fell below the frame (the examiner row now wraps with main's "thiện cảm" wording). The
+   examiner row shows the name only; the liking is said once on «Mức đỗ». 
+Balance bot NOT run: load ~35–40 on 4 cores and run5b.sh starts 5 browsers (coordinator: one browser at a time); estimate above stands.
