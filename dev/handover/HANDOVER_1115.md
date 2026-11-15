@@ -39,3 +39,6 @@ không vẽ lại thứ sếp không bảo; đừng bắt bẻ thứ sếp khôn
 ## Hạ tầng
 Co-op worker: https://ctm-coop.victoria-tntt.workers.dev (Cloudflare acct trong dev/coop/CLOUDFLARE.md). Magnific folder ba4aecfe-efce-47e2-b53f-30d292091886, model gpt-2-6.
 Máy chậm (nhiều thợ) — Playwright ít lượt, reducedMotion. Đĩa ~7 GB: dọn worktree thợ xong bằng `git worktree remove --force --force`.
+
+## Báo cáo cuối từ thợ phiên cũ (sau bàn giao)
+- review/page-curl @0e8cb4ef (lật nguyên tờ trong 1fdc37c2): tờ quay quanh gáy, mặt trước trang cũ / mặt sau trang mới, 760 ms; bản sao mang layout inline (vì book-release bỏ id). Còn: gửi ảnh sếp (dev/shots/curl2/*-tab-25/45/65), KIT chưa ghi kitSheetTurn, iPad 65% chữ chồng lúc thẻ người chưa ổn định, ảnh lật ngược chưa soát, hỏi sếp lật tuần có làm nguyên tờ không.
