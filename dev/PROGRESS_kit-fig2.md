@@ -179,3 +179,8 @@ img/fig-eunuch-ndp-tray.webp (committed in git on review/shop-fix; not on the CD
   1180x820: 408 px (main 500), banner ev-thinh-an (main: room picture), chip above, both options in one row, cost mode.
   news-face-real (fixture, 12 weeks, strict driver): no stuck / no re-queue, rows 36/36, titleUnit 0/60 (one old stored log line in the
   fixture still reads "Tổng quản thái giám Tổng quản …" in the raw text scan — stored data, k61Title already uses kitTitled).
+- r8 part 2: origin/main moved to f6d80ae65 (j83-variety, toilette, act-pics2 r7) → merged (built files only), site rebuilt.
+  overlay-close.js: main's j83-variety puts "Học X: làm gì?" (kind picker) + "…: dùng vật liệu gì?" before a lesson game; the driver now
+  taps the first open "Làm" and the first material like a player. Branch 35/35 ok; same driver on origin/main f6d80ae65: 35/35 FAIL.
+  Re-test on the merge: event-dp-scan fixture 1180 + 844 (14 each) 0 bad, Thái hậu triệu 408 px / 314 px, 10–11 px under; pane-bar 5 sizes
+  bad 0; tabs-kit-shots 5 sizes bad 0; kit-page 5 sizes bad 0; opt-render 1180 fails []; 0 page errors.

@@ -21,6 +21,10 @@ const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT]=
   const reset=()=>{Q.length=0;document.getElementById('modal').hidden=true;used=0;S.suc=100;S.bac=900;S.th=80;S.buoi=0;S.thDead=false;S.mg=null;window.__aaPend=null};
   const run=async(name,fn)=>{reset();let err='';try{await fn()}catch(e){err=e.message}await W(250);
    if(Q.length&&Q[0].opts&&/làm ra tác phẩm/.test(Q[0].t||'')){chooseM(0);await W(300)}
+   /* main j83-variety (f6d80ae65): a lesson first asks "Học X: làm gì?" (kind picker, kbtn kshgo: a player taps the first open "Làm"),
+      then "…: dùng vật liệu gì?" (first material) */
+   for(let st=0;st<3&&ov.hidden&&!document.getElementById('modal').hidden;st++){const g=[...document.querySelectorAll('#modal button.kshgo')].find(b=>b.offsetParent&&!b.disabled&&/^Làm/.test(b.innerText.trim()));
+    if(g)g.click();else if(Q.length&&Q[0].opts&&/làm gì\?|vật liệu gì\?/.test(Q[0].t||''))chooseM(0);else break;await W(400)}
    const opened=!ov.hidden;const taps=await play();await W(300);const L=left();out.push({name,opened,taps,ok:opened&&!L.length&&!err,left:L.join(', '),err})};
   for(const a of ARTS){for(const mode of ['self','teacher','th']){S.arts[a.k]=Math.min(S.arts[a.k]||0,3);await run(`lesson ${a.k} ${mode}`,()=>lessonMode(a.k,mode))}}
   for(const a of ARTS.slice(0,3)){await run(`resume ${a.k} (old save, no mode)`,()=>{S.mg={k:a.k,l:1};resumeMG()});await run(`resume ${a.k} self+wk`,()=>{S.mg={k:a.k,l:1,mode:'self',wk:{kind:WDEF[a.k],mat:0}};resumeMG()})}
