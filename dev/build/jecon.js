@@ -52,7 +52,7 @@ function econStipend(p){const r=rkOf(p),me=p===S,staff=(p.staff||[]).length;let 
  try{if(!(typeof isSrv==="function"&&isSrv())){const R=[["Bổng",`${rkName(S)}: +${base} bạc`,"g"]];if(gn)R.push(["Đồ phát",gn,SK&&SK.items?"r":"g"]);if(skB)R.push(["Bị cắt xén",`Nội vụ phủ bớt ${skB} bạc`,"r"]);if(wage)R.push(["Công kẻ hầu",`trả công ${staff} kẻ hầu: −${wage} bạc`,"r"]);
    if(bonus)R.push(["Ân thưởng",`+${bonus} bạc`,"g"]);if(home)R.push(["Nhà gửi vào",`${S.origin.n}: +${home} bạc`,"g"]);if(pat)R.push(["Việc vặt",`${rkName(pat.v)} ${pat.v.name} trả công: +${pat.n} bạc`,"g"]);
    if(why.length)R.push(["Ghi chú",why.join(" · "),"n"]);R.push(["Còn",`Bạc ${S.bac}`,"n"]);
-   const card={t:`Bổng lộc tháng ${econMonthName()}`,who:typeof pMe==="function"?pMe():null,h:kitRows(R)};
+   const card={ev:1,t:`Bổng lộc tháng ${econMonthName()}`,who:typeof pMe==="function"?pMe():null,h:kitRows(R)};
    if(d||bt){const sk=BAL.dutySkip.danh+Math.floor(Math.min(7,r)/2);const what=[d?`lễ nghĩa (lễ tiết, thưởng người hầu, tiếp khách) ${d} bạc`:"",bt?`ban thưởng phi tần dưới ${bt} bạc`:""].filter(Boolean).join(" · ");
     card.h+=`<p class="past">Việc theo phẩm ${rkName(S)} tháng này: ${what}.</p>`;
     card.opts=[{n:"Chu toàn lễ nghĩa",fx:{bac:-(d+bt)},x:`tốn: Bạc -${d+bt} · thành: giữ thể diện${bt?" · phi tần được thưởng quý ngươi hơn":""}`,go:()=>{const x=econDoDuty(S,true);if(x.paid)log(`Ngươi chu toàn lễ nghĩa tháng: Bạc -${d+bt}.`);else log(`Không đủ bạc lo lễ nghĩa: Danh -${x.dn}, Đức -${x.du}.`)}},

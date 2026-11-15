@@ -12,7 +12,7 @@
    (scroll-padding-top = bar height). The bar is built after every panel render from the rows the tabs already draw, so the tab
    code keeps its own rows (k3CatTabs finds its row by data-g, kgSub finds .ksub inside the bar). */
 function kitPane(){try{const P=$("panel");if(!P)return;let bar=P.querySelector(":scope > .kpbar");
- const free=r=>!r.closest(".pc,.kpc,.dlg,#popw,[hidden]");
+ const free=r=>!r.closest(".pc,.kpc,.dlg,#popw,[hidden],.kpinline");/* .kpinline (r8): a picker's own tab row (Ân oán X / Y) stays with its strip */
  const sub=P.querySelector(":scope > .ksub")||(bar&&bar.querySelector(":scope > .ksub:not(.kpgsub)"));
  /* the page's own sub-tab row (e.g. Tư trang "Túi đồ · Việc", jinv .kinvsub) — tabs-kit r7 */
  const pg=[...P.querySelectorAll(".ksub")].find(r=>r!==sub&&free(r)&&(r.parentElement!==P))||null;if(pg)pg.classList.add("kpgsub");
@@ -37,4 +37,7 @@ window.kitPane=kitPane;
 #panel.kpane>.kpbar>.ksub{position:static!important;margin:0!important;top:auto!important}
 #panel.kpane>.kpbar>.kcattabs{position:static!important;margin:0!important;padding:0!important;box-shadow:none!important;background:transparent!important;top:auto!important}
 #panel.kpane>.kpbar+*{margin-top:0!important}
+/* §45 exception .kpinline (r8): a tab row inside a picker that lives IN the list (Ân oán X / Y, §49.2b) stays with its strip: not moved
+   into the bar, never sticky, no shadow */
+#panel .kpinline>.kcattabs,#panel .kpinline>.kcattabs.kstick,#panel .kpinline>.ksub{position:static!important;top:auto!important;box-shadow:none!important;margin:2px 0 4px!important}
 `;document.head.appendChild(st)})();
