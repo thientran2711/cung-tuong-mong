@@ -129,3 +129,15 @@ LEFT (unchanged from the list above unless noted)
   - New batch of 8 drawn and on the CDN: e68-springallergy, e68-stormnight, evpick, giftpick, j70thr, j71f-thanhtho-2, j71f-vantho-1, j71x-sac.
   - e68-stormnight and giftpick were redrawn because an unrequested Emperor appeared; for scenes with no Emperor, add "NO Emperor, nobody in yellow".
   - **89 banners left** (python3 dev/figwork/acts/dprompt.py N lists them; fetch with fetchd.py; PREV=<scratchpad>/prev).
+
+## Coordinator order 15/11 (b), after 7cce4420d (that commit is reviewed as its own code batch)
+(a) System-line ACTS patch: APPLIED LIVE.
+- Tool: dev/figwork/acts/syspatch.py. Output: ACTS_sysline_patch.json.
+- Block: 77 rules in the meanings.py "Tổng lược system lines" block.
+  - 37 added. Their keys are on the CDN, or "-" (1 rule).
+  - 40 held because no picture exists yet; those lines keep their old behaviour. The held keys are listed in the patch file.
+- The rules go at the END of the log. All 510 live rules come before the block in meanings.py, and the only rule after it (tu-dung) is not live.
+- Before: 300 acts, 10 prefixes, 510 log rules, 498 distinct keys. After: 300 / 10 / 547 / 529. 0 keys missing on the CDN; the first 510 rules are unchanged.
+- The 8 veil/scar/spy keys are wired.
+- Note: 23 of the 36 newly referenced pictures (earlier gens2 system-line batch) show full figures. They are book event/result lines, which may show people, so I kept them. Coordinator decides whether to redraw any as hands-only.
+- Also: live ACTS.json has 510 of meanings.py's 837 rules. About 250 other act-pics2 meaning rules have never been merged; that is outside this patch.
