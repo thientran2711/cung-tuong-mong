@@ -20,7 +20,10 @@ sp = _load("spfuncs", REPO + "/dev/figwork/maidC/spfuncs.py"); porcrop = _load("
 AG = ["a18", "a26", "a36", "a51"]
 FONT = "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
 
+_URLS = None
 def urls():
+    global _URLS
+    if _URLS is not None: return _URLS
     p = W + "/urls.json"; db = json.load(open(p)) if os.path.exists(p) else {}
     R1 = re.compile(r'\\?"identifier\\?":\\?"(\w+)\\?",\\?"status\\?":\\?"completed\\?",\\?"results\\?":\{\\?"url\\?":\\?"([^"\\]+)')
     R2 = re.compile(r'identifier: (\w+)\\n\s*(?:name: [^\\]*\\n\s*)?(?:family: \S+\\n\s*)?tool: \S+\\n\s*status: completed\\n\s*url: \\"([^"\\]+)')
@@ -31,7 +34,7 @@ def urls():
             if "pikaso" not in line: continue
             for m in R1.finditer(line): db.setdefault(m.group(1), m.group(2))
             for m in R2.finditer(line): db.setdefault(m.group(1), m.group(2))
-    json.dump(db, open(p, "w"), indent=0); return db
+    json.dump(db, open(p, "w"), indent=0); _URLS = db; return db
 
 def get(gid, path, preview=False):
     if os.path.exists(path): return path
