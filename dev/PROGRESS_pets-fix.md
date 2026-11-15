@@ -23,8 +23,13 @@ main's list + `jtsb.js, jpet.js, jpetcare.js` after `jload.js`).
 - Tests: **dev/test/pets-fix.js** (new, full check at one size, see header); dev/test/pets.js + mk-oldsave-pets.js boot fixed
   (SW blocked, `__nlInner`, #kload/.krbox/#kroul hidden, proxy; pets.js buys through the kit shop; mk-oldsave works on main's index.html).
 
-## Results
-See the last commit message / report: 5 sizes with dev/test/pets-fix.js (old save made by main's index.html with legacy turtle keys).
+## Results (dev/test/pets-fix.js; old save made by main 80be56be0's index.html with legacy linhquy/rua pets)
+755x1000@2, 1000x755@2, 1180x820@2, 1366x1024@2, 844x390@3 (after the 2nd main merge 888463759 rerun at 755/844/1180): pets row + Đang mang
+row spread 0 px; pet shop 11 tiles in 3 columns, every row 0 px (picture/name/use/price/stepper/button/height), all -non pictures loaded;
+buy works (stage Non); card pictures -non/-tn/grown/-lt all load; care screen inside the screen, no event band, no private CSS, kit ✕ closes;
+games: No 40→80, Sạch 40→80, Vui 40→76; growth 1→2→3 + "đã lớn" card; Ngự tứ rescuer only at Linh thú; neglect → "Thú nuôi biếng ăn" →
+"Thú nuôi bỏ đi"; help (+rel) / steal (keeps stage) / NPC steals hers (+notice card); old save: linhquy→Kỳ lân, rua→Hạc; 0 page errors,
+no overflow. dev/test/pets.js + mk-oldsave-pets.js (main build save): pass, rescue works. 390x844 (?khost=1): frame pre-rotated (landscape).
 
 ## Open / notes
 - Co-op friend's pets (help/harm/steal through the room relay): `coopPetAct` hook exists, NOT wired (no `coopAct` relay in jcoop).
