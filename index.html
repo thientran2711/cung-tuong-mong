@@ -6361,11 +6361,11 @@ function drawSlots(){const s=$("slots");if(s)s.innerHTML=slotsHTML()}
 /* Thiết lập with the kit controls; "Mở tiếng" and "Im tiếng" are ONE switch (Tiếng) */
 optHTML=function(){return `<div class="optbox kctls">${kitToggle({id:"o-snd",label:"Tiếng",sub:"nhạc, tiếng động, giọng",on:!!(OPT.snd&&!OPT.mute),yes:"Mở tiếng",no:"Im tiếng"})}
  ${kitSlider({id:"o-mus",label:"Nhạc",value:OPT.mus})}${kitSlider({id:"o-sfx",label:"Tiếng động",value:OPT.sfx})}${kitSlider({id:"o-vo",label:"Giọng",value:OPT.vo==null?.7:OPT.vo})}
- ${kitToggle({id:"o-vib",label:"Rung",on:!!OPT.vib})}${kitToggle({id:"o-fx",label:"Cảnh động",on:!!OPT.fxon})}</div>`};
+ ${kitToggle({id:"o-vib",label:"Rung",on:!!OPT.vib})}${kitToggle({id:"o-fx",label:"Hiệu ứng",sub:"Gọn: tranh tĩnh, không hạt bay",on:!!OPT.fxon,yes:"Đầy đủ",no:"Gọn"})}</div>`};
 wireOpt=function(){const T=$("title");if(!T)return;let b=T.querySelector(".optwrap")||document.querySelector("#modal .optwrap");if(!b){b=document.createElement("div");b.className="optwrap";T.querySelector(".tbox").appendChild(b)}b.innerHTML=optHTML();
  $("o-snd").onchange=e=>{const on=e.target.checked;OPT.snd=on;OPT.mute=false;AU.unlocked=true;saveOpt();auTick();if(on)try{sfx("sfx-tap")}catch(x){}};
  $("o-mus").oninput=e=>{OPT.mus=+e.target.value;saveOpt();auTick()};$("o-sfx").oninput=e=>{OPT.sfx=+e.target.value;saveOpt()};$("o-vo").oninput=e=>{OPT.vo=+e.target.value;saveOpt();try{voice("f-softlaugh",1)}catch(x){}};
- $("o-vib").onchange=e=>{OPT.vib=e.target.checked;saveOpt()};$("o-fx").onchange=e=>{OPT.fxon=e.target.checked;saveOpt();try{pxScene()}catch(x){}}};
+ $("o-vib").onchange=e=>{OPT.vib=e.target.checked;saveOpt()};$("o-fx").onchange=e=>{OPT.fxon=e.target.checked;OPT.fxpick=1;OPT.fxauto=0;saveOpt();try{pxScene()}catch(x){}}};
 /* Chép sổ / Nạp sổ: kit text boxes and buttons */
 function kitXio(){const w=document.querySelector(".xiowrap");if(!w)return;w.querySelectorAll(".xiobox textarea").forEach(x=>kitInputize(x,x.id==="x-in"?"Dán bản chép":"Bản chép"));
  w.querySelectorAll(".xiobox button.main").forEach(b=>{b.classList.remove("main");b.classList.add("kbtn")});
@@ -23099,7 +23099,7 @@ async function plan(){
  if(!r||!r.ok)r=await caches.match("assets.json",{ignoreSearch:true});if(!r)return false;
  MAN=await r.json();const c=await caches.open(AC);HAVE=new Set((await c.keys()).map(q=>q.url));
  await migrate(c);
- coreList=[];figList=[];for(const f of MAN.files){const g=f[3]==="core"?"core":"fig",G=KLOAD[g];G.total+=f[2];
+ coreList=[];figList=[];for(const f of MAN.files){if(f[3]==="fx")continue;/* KIT §68 painted effects: on demand, never ahead */const g=f[3]==="core"?"core":"fig",G=KLOAD[g];G.total+=f[2];
   if(HAVE.has(keyOf(f))){G.have+=f[2];G.files++}else{(g==="core"?coreList:figList).push(f);G.left++}}
  return true}
 /* older builds kept files in 'ctm-<timestamp>' under their plain path: move those whose content still matches, then drop the old cache */
@@ -25684,28 +25684,35 @@ const KFX=window.KFX={log:[],app:null,q:1,live:0,loaded:false,loading:null,parts
 /* buzz patterns added to j11's VIB (ms) */
 Object.assign(VIB,{win:[12,40,12],fail:[35],death:[45],lock:[14],demote:[60,50,60],preg:[15,30,15],harm:[30,30,70]});
 /* THE TABLE: kind → buzz · shake (1 light, 2 hard) · flash · particles (comma list) */
-const FX={
- decree :{vib:"decree", shake:1,flash:"gold", px:"rays"},          // thánh chỉ, ân thưởng
- promote:{vib:"promote",shake:1,flash:"gold", px:"rays,stars"},    // thăng phẩm, tấn phong
+const FX={   /* every picture here is PAINTED (KIT §68 painted-fx): px = Pixi sprite kinds, flash gold/warm = glowburst sprite, flash blood/poison/
+               inkwisp = painted edge overlay (kitFxEdge), sheet = true-alpha sheet (kitFxSheet), light = screen-blend clip (kitFxLight) */
+ decree :{vib:"decree", shake:1,flash:"gold", px:"rays,golddust"}, // thánh chỉ, ân thưởng (gold dust off the edict)
+ promote:{vib:"promote",shake:1,flash:"gold", px:"rays,stars,goldpetals"}, // thăng phẩm, tấn phong
  coin   :{vib:"coin",                         px:"coins"},         // lĩnh bổng, được bạc
- hit    :{vib:"hit",    shake:2,flash:"red",  px:"inks"},          // bị tát, bị phạt, bị hại
- harm   :{vib:"harm",   shake:2,flash:"red",  px:"ink"},           // bị hãm hại nặng
- poison :{vib:"poison", shake:2,flash:"red",  px:"ink"},           // trúng độc
- expose :{vib:"expose", shake:2,flash:"red",  px:"ink"},           // bị phát giác, bị định tội
- verdict:{              shake:1},                                  // con dấu định tội (đi cùng expose)
+ hit    :{vib:"hit",    shake:2,              px:"brush"},         // bị tát, bị phạt: brush streak + paper shake
+ harm   :{vib:"harm",   shake:2,flash:"blood",px:"ink"},           // bị hãm hại nặng: ink-blood bleeds in from the edges
+ poison :{vib:"poison", shake:2,flash:"poison"},                   // trúng độc: green-black ink seeps in
+ expose :{vib:"expose", shake:2,flash:"blood",px:"ink"},           // bị phát giác, bị định tội
+ verdict:{              shake:1,              px:"inks"},          // con dấu định tội (đi cùng expose): seal slam + ink blot
+ seal   :{vib:"lock",   shake:1,              px:"inks"},          // con dấu thi tài / ấn định
  ink    :{                                    px:"inks"},          // kẻ khác sa cơ
+ rumour :{                      flash:"inkwisp"},                  // lời đồn: ink wisps curl in
  birth  :{vib:"birth",          flash:"warm", px:"flowers"},       // sinh con
- preg   :{vib:"preg",           flash:"warm", px:"petals"},        // có thai
+ preg   :{vib:"preg",           flash:"warm", px:"lotus"},         // có thai: lotus light + lotus petals
  favour :{                                    px:"petals"},        // được sủng
+ romance:{                                    px:"peach"},         // tình ý: peach blossom
+ betray :{vib:"harm",                         sheet:"thread"},     // phản bội / đoạn tuyệt: the red thread snaps
  night  :{vib:"night",          flash:"night",px:"motes"},         // đêm thị tẩm
- death  :{vib:"death",          flash:"dark"},                     // chết: tối dần, không rung mạnh
- demote :{vib:"demote",         flash:"dark", px:"ash"},           // giáng phẩm, lãnh cung
+ death  :{vib:"death",          flash:"dark", sheet:"silk",px:"incense"}, // chết: dims, white silk falls, incense rises
+ demote :{vib:"demote",         flash:"dark", px:"jade,ash"},      // giáng phẩm, lãnh cung: cracked jade + ash
  ash    :{                                    px:"ash"},           // vào lãnh cung
  win    :{vib:"win",                          px:"stars"},         // THÀNH
  fail   :{vib:"fail",                         px:"smoke"},         // HỎNG / BẤT LỢI
  mgwin  :{vib:"win",                          px:"stars"},         // thắng trò nhỏ
  mglose :{vib:"fail",                         px:"smoke"},         // thua trò nhỏ
  lantern:{                                    px:"lanterns"},      // đèn trời đêm lễ
+ festival:{                                   px:"lanterns",light:"fireworks"}, // lễ hội: sky lanterns + fireworks
+ letter :{                                    px:"letter"},        // mật thư
  lock   :{vib:"lock"}                                              // chạm nút khóa
 };
 window.FX=FX;
@@ -25716,58 +25723,74 @@ function kfPt(o){o=o||{};if(o.x!=null)return{x:o.x,y:o.y};const el=o.el&&o.el.ge
 function kitFx(kind,o){const f=FX[kind];if(!f||!kfOn())return false;o=o||{};KFX.log.push(kind);if(KFX.log.length>60)KFX.log.shift();
  try{if(f.vib)vib(f.vib)}catch(e){}
  if(kfStill())return true;
- if(f.shake)kfShake(f.shake);if(f.flash)kfFlash(f.flash);
+ if(f.shake)kfShake(f.shake);if(f.flash)kfFlash(f.flash,kfPt(o));
  if(f.px){const pt=kfPt(o);for(const p of f.px.split(","))kfPx(p,pt)}
+ try{if(f.sheet&&typeof kitFxSheet==="function")kitFxSheet(f.sheet,o.el||null,f.sheet==="silk"?{scale:1.1}:{});
+  if(f.light&&typeof kitFxLight==="function")kitFxLight(f.light,null,{dur:o.dur||4000,scale:1})}catch(e){}
  return true}
 window.kitFx=kitFx;
 /* ---------- shake + flash (DOM, transform/opacity only) ---------- */
 function kfShake(lv){const g=document.querySelector(".game")||document.getElementById("game");if(!g||!g.animate)return;
  const a=lv>1?7:3.5,K=lv>1?[[0,0],[-a,1.5],[a,-2],[-a*.7,1],[a*.5,-1],[-a*.25,.5],[0,0]]:[[0,0],[-a,0],[a,.8],[-a*.5,0],[0,0]];
  try{g.animate(K.map(([x,y])=>({translate:`${x}px ${y}px`})),{duration:lv>1?360:260,easing:"ease-out"})}catch(e){}}
-function kfFlash(k){const d=document.createElement("div");d.className="kfx-fl kfx-"+k;document.body.appendChild(d);setTimeout(()=>d.remove(),k==="dark"||k==="night"?2300:1500)}
+/* gold / warm light = the PAINTED gold glow (KIT §68 sprite "glowburst", true alpha: shows on paper and on dark scenes); red / dark / night stay
+   plain screen washes (colour grading over the whole screen, not a drawn object) */
+function kfFlash(k,pt){if((k==="blood"||k==="poison"||k==="inkwisp")&&typeof kitFxEdge==="function"){kitFxEdge(k==="inkwisp"?"ink":k);return}
+ if(k==="red"&&typeof kitFxEdge==="function"){kitFxEdge("blood",{hold:300});return}  /* old callers of the flat red flash get the painted edge */
+ if((k==="gold"||k==="warm")&&typeof kitFxBurst==="function"){const r=pt&&pt.r,sz=r?Math.max(r.width,r.height):Math.min(innerWidth,innerHeight)*.55;
+  kitFxBurst("glowburst",pt||null,1,{scale:Math.max(.6,Math.min(2.4,sz/220)),a0:k==="warm"?.6:.95,life:k==="warm"?70:55});return}
+ const d=document.createElement("div");d.className="kfx-fl kfx-"+k;document.body.appendChild(d);setTimeout(()=>d.remove(),k==="dark"||k==="night"?2300:1500)}
 /* ---------- Pixi: one loader (also used by j11's stage layer) ---------- */
 function kfApp(){if(KFX.app)return Promise.resolve(KFX.app);if(KFX.loading)return KFX.loading;
  KFX.loading=kitPixi().then(async P=>{const app=new P.Application();await app.init({backgroundAlpha:0,resizeTo:window,antialias:false,autoDensity:true,resolution:1,powerPreference:"low-power"});
   const c=app.canvas;c.id="kfxcv";c.setAttribute("aria-hidden","true");document.body.appendChild(c);app.ticker.maxFPS=60;KFX.root=new P.Container();app.stage.addChild(KFX.root);
   kfTex(P,app);app.ticker.add(kfTick);app.ticker.stop();c.style.display="none";KFX.app=app;KFX.loaded=true;return app}).catch(e=>{KFX.loading=null;KFX.failed=(KFX.failed||0)+1;throw e});
  return KFX.loading}
-function kfTex(P,app){const T=KFX.tex,G=()=>new P.Graphics(),gen=g=>app.renderer.generateTexture({target:g,resolution:2});
- let g=G();for(let i=8;i>0;i--)g.circle(16,16,i*2).fill({color:0xffffff,alpha:.13});T.glow=gen(g);
- g=G();g.ellipse(9,5,9,5).fill(0xffffff);T.petal=gen(g);
- g=G();g.moveTo(0,6).bezierCurveTo(5,-1,14,-1,20,6).bezierCurveTo(14,13,5,13,0,6).fill(0xffffff);T.leaf=gen(g);
- g=G();g.poly([10,0,12.4,7.6,20,10,12.4,12.4,10,20,7.6,12.4,0,10,7.6,7.6]).fill(0xffffff);T.star=gen(g);
- g=G();g.circle(10,10,10).fill(0xe9e6dc).circle(10,10,10).stroke({width:1.6,color:0x9c978a});g.circle(10,10,6.6).stroke({width:1,color:0xb8b3a6});g.rect(7.4,7.4,5.2,5.2).fill(0x7d786c);T.coin=gen(g);
- g=G();g.ellipse(16,2,16,2).fill(0xffffff);T.streak=gen(g);
- g=G();g.circle(16,16,16).fill({color:0xffffff,alpha:.35}).circle(16,16,12).fill({color:0xffffff,alpha:.4}).circle(16,16,8).fill({color:0xffffff,alpha:.5});T.blob=gen(g);
- g=G();g.roundRect(0,0,14,18,4).fill(0xf08a3a).roundRect(2.5,2.5,9,11,3).fill(0xffd48a).rect(5,17,4,3).fill(0x8a3a1a);T.lantern=gen(g)}
-/* particle: sprite + v {vx,vy,g,drag,life,max,spin,grow,a0,fade,sway,tw} */
-function kfSp(tex,x,y,v,tint,sc,blend){const P=window.PIXI;const s=new P.Sprite(KFX.tex[tex]);s.anchor.set(.5);s.x=x;s.y=y;if(tint!=null)s.tint=tint;s.scale.set(sc||1);if(blend)s.blendMode=blend;
- s.v=Object.assign({vx:0,vy:0,g:0,drag:1,life:60,max:60,spin:0,grow:0,a0:1,fade:"out",sway:0,ph:Math.random()*6.28,sc:sc||1},v);s.v.max=s.v.life;s.alpha=s.v.fade==="in"||s.v.fade==="inout"?0:s.v.a0;
- KFX.root.addChild(s);KFX.parts.push(s);return s}
-const KF_SEASON=()=>{const m=(typeof S!=="undefined"&&S&&S.month)||1;return m<=3?{tex:"petal",col:[0xf4b6c8,0xf9d3dc,0xffe8ee]}:m<=6?{tex:"petal",col:[0xf7c6d4,0xffffff,0xe9f2d0]}:m<=9?{tex:"leaf",col:[0xd9822b,0xc0502a,0xe0a83a]}:{tex:"petal",col:[0xc8283a,0xe05060,0xffffff]}};
+/* textures: PAINTED atlases only (KIT §68 painted-fx, jfxkit KFK_SP), loaded per kind on first use. The old code-drawn shapes
+   (glow, petal, leaf, star, coin, streak, blob, lantern — Pixi Graphics) are gone (owner 15/11 20:55Z: never code-drawn art). */
+function kfTex(){}
+/* particle: pooled painted sprite (jfxkit kfkSp) + v {vx,vy,g,drag,life,max,spin,grow,a0,fade,sway,tw}. tex = a KFK_SP kind; tint only
+   applies to neutral art (orb, streak, smoke). Old shape names map to their painted kind. */
+const KF_ALIAS={glow:"orb",star:"spark",blob:"smoke",petal:"petal-plum"};
+function kfSp(tex,x,y,v,tint,sc,blend){const k=KF_ALIAS[tex]||tex;const s=kfkSp(k,x,y,v,tint,sc,blend);if(s)return s;if(!KFK.loaded.has(k))kfkLoad([k]).catch(()=>{});return{v:{},scale:{set(){},x:1},rotation:0}}
+const KF_SEASON=()=>{const m=(typeof S!=="undefined"&&S&&S.month)||1;return m<=3?["petal-peach","petal-plum"]:m<=6?["petal-lotus"]:m<=9?["leaf","osmanthus"]:["snow","snow","petal-plum"]};
 function kfBudget(n){const w=innerWidth<700?.65:1;return Math.max(1,Math.round(n*KFX.q*w))}
 const R01=()=>Math.random(),RS=(a,b)=>a+Math.random()*(b-a);
 const KF_SPAWN={
- rays(p){const n=kfBudget(22);for(let i=0;i<n;i++){const a=RS(-Math.PI*.95,-Math.PI*.05),sp=RS(7,14);const s=kfSp("streak",p.x,p.y,{vx:Math.cos(a)*sp,vy:Math.sin(a)*sp,drag:.93,life:RS(40,60)},R01()<.5?0xf0d070:0xfff3c4,RS(.6,1.2),"add");s.rotation=a}},
- stars(p){const n=kfBudget(14),r=p.r,w=r?Math.max(120,r.width):260,h=r?Math.max(80,r.height):200;for(let i=0;i<n;i++){kfSp("star",p.x+RS(-.55,.55)*w,p.y+RS(-.6,.5)*h,{life:RS(50,80),fade:"inout",tw:RS(.15,.3),vy:-.15},R01()<.6?0xffe9a0:0xffffff,RS(.5,1.1),"add")}},
- coins(p){const n=kfBudget(18);for(let i=0;i<n;i++){const s=kfSp("coin",RS(.08,.92)*innerWidth,RS(-120,-10),{vx:RS(-.6,.6),vy:RS(2,4),g:.22,life:RS(90,120),spin:RS(.08,.2),coin:1,a0:1},null,RS(.8,1.25));s.v.ph=R01()*6}},
- ink(p){const n=kfBudget(6);for(let i=0;i<n;i++)kfSp("blob",p.x+RS(-60,60),p.y+RS(-50,50),{life:RS(70,95),grow:RS(.05,.09),a0:RS(.55,.75)},0x1a1410,RS(.6,1.2))},
- inks(p){const n=kfBudget(3);for(let i=0;i<n;i++)kfSp("blob",p.x+RS(-40,40),p.y+RS(-30,30),{life:RS(55,70),grow:RS(.04,.06),a0:.45},0x1a1410,RS(.4,.8))},
- flowers(p){const n=kfBudget(26),c=[0xf4b6c8,0xf08aa8,0xffe0e8,0xffd48a];for(let i=0;i<n;i++){const a=RS(0,Math.PI*2),sp=RS(3,8);kfSp("petal",p.x,p.y,{vx:Math.cos(a)*sp,vy:Math.sin(a)*sp-2,g:.09,drag:.96,life:RS(80,110),spin:RS(-.12,.12),sway:.6},c[i%4],RS(.8,1.4))}},
- petals(p){const n=kfBudget(16),c=[0xf4b6c8,0xf9d3dc,0xffffff];for(let i=0;i<n;i++)kfSp("petal",RS(0,innerWidth),RS(-80,-10),{vx:RS(-.4,.4),vy:RS(1.2,2.2),life:RS(140,200),spin:RS(-.05,.05),sway:.8,fade:"inout"},c[i%3],RS(.8,1.3))},
- motes(p){const n=kfBudget(16);for(let i=0;i<n;i++)kfSp("glow",RS(.1,.9)*innerWidth,RS(.45,1)*innerHeight,{vx:RS(-.2,.2),vy:RS(-1.1,-.4),life:RS(120,170),fade:"inout",a0:.7,sway:.4},R01()<.5?0xffb050:0xffd890,RS(.5,1),"add")},
- ash(p){const n=kfBudget(22);for(let i=0;i<n;i++)kfSp("petal",RS(0,innerWidth),RS(-60,-5),{vx:RS(-.5,.5),vy:RS(.8,1.6),life:RS(150,210),spin:RS(-.06,.06),sway:.7,fade:"inout",a0:.8},R01()<.5?0x6a6a6a:0x9a9a9a,RS(.4,.8))},
- smoke(p){const n=kfBudget(7);for(let i=0;i<n;i++)kfSp("blob",p.x+RS(-50,50),p.y+RS(-10,20),{vx:RS(-.3,.3),vy:RS(-1.2,-.6),life:RS(70,95),grow:RS(.02,.035),fade:"inout",a0:.5},0x8a8580,RS(.6,1))},
+ rays(p){const n=kfBudget(22);for(let i=0;i<n;i++){const a=RS(-Math.PI*.95,-Math.PI*.05),sp=RS(7,14);const s=kfSp("streak",p.x,p.y,{vx:Math.cos(a)*sp,vy:Math.sin(a)*sp,drag:.93,life:RS(40,60)},R01()<.5?0xf0d070:0xfff3c4,RS(.6,1.2));s.rotation=a}},
+ stars(p){const n=kfBudget(14),r=p.r,w=r?Math.max(120,r.width):260,h=r?Math.max(80,r.height):200;for(let i=0;i<n;i++){kfSp("spark",p.x+RS(-.55,.55)*w,p.y+RS(-.6,.5)*h,{life:RS(50,80),fade:"inout",tw:RS(.15,.3),vy:-.15},null,RS(.5,1.1)).rotation=0}},
+ coins(p){const n=kfBudget(18);for(let i=0;i<n;i++){const s=kfSp("coin",RS(.08,.92)*innerWidth,RS(-120,-10),{vx:RS(-.6,.6),vy:RS(2,4),g:.22,life:RS(90,120),spin:RS(-.03,.03),coin:1,a0:1},null,RS(.8,1.25));s.v.ph=R01()*6}},
+ ink(p){const n=kfBudget(6);for(let i=0;i<n;i++)kfSp("ink",p.x+RS(-60,60),p.y+RS(-50,50),{life:RS(70,95),grow:RS(.01,.02),a0:RS(.55,.75)},null,RS(.6,1.2))},
+ inks(p){const n=kfBudget(3);for(let i=0;i<n;i++)kfSp("ink",p.x+RS(-40,40),p.y+RS(-30,30),{life:RS(55,70),grow:RS(.008,.012),a0:.45},null,RS(.4,.8))},
+ flowers(p){const n=kfBudget(26),K=["petal-peach","petal-peach","petal-plum","osmanthus"];for(let i=0;i<n;i++){const a=RS(0,Math.PI*2),sp=RS(3,8);kfSp(K[i%4],p.x,p.y,{vx:Math.cos(a)*sp,vy:Math.sin(a)*sp-2,g:.09,drag:.96,life:RS(80,110),spin:RS(-.12,.12),sway:.6},null,RS(.8,1.4))}},
+ petals(p){const n=kfBudget(16),K=KF_PET();for(let i=0;i<n;i++)kfSp(K[i%K.length],RS(0,innerWidth),RS(-80,-10),{vx:RS(-.4,.4),vy:RS(1.2,2.2),life:RS(140,200),spin:RS(-.05,.05),sway:.8,fade:"inout"},null,RS(.8,1.3))},
+ motes(p){const n=kfBudget(16);for(let i=0;i<n;i++){const e=R01()<.6;kfSp(e?"ember":"orb",RS(.1,.9)*innerWidth,RS(.45,1)*innerHeight,{vx:RS(-.2,.2),vy:RS(-1.1,-.4),life:RS(120,170),fade:"inout",a0:.75,sway:.4},0xffc070,e?RS(.7,1.2):RS(.3,.55))}},
+ ash(p){const n=kfBudget(22);for(let i=0;i<n;i++)kfSp("ash",RS(0,innerWidth),RS(-60,-5),{vx:RS(-.5,.5),vy:RS(.8,1.6),life:RS(150,210),spin:RS(-.06,.06),sway:.7,fade:"inout",a0:.85},null,RS(.6,1.1))},
+ smoke(p){const n=kfBudget(7);for(let i=0;i<n;i++)kfSp("smoke",p.x+RS(-50,50),p.y+RS(-10,20),{vx:RS(-.3,.3),vy:RS(-1.2,-.6),life:RS(70,95),grow:RS(.004,.008),fade:"inout",a0:.55},0x8a8580,RS(.6,1))},
  lanterns(p){const n=kfBudget(9);for(let i=0;i<n;i++){const x=RS(.06,.94)*innerWidth,y=innerHeight+RS(10,260),sc=RS(.8,1.5);
-   const gl=kfSp("glow",x,y,{vy:RS(-1.1,-.7),life:RS(420,540),fade:"inout",a0:.55,sway:.25,lant:1},0xffa040,sc*2.2,"add");const l=kfSp("lantern",x,y,{vy:gl.v.vy,life:gl.v.life,fade:"inout",a0:.95,sway:.25,lant:1},null,sc);l.v.ph=gl.v.ph}},
- pop(p){const n=kfBudget(6);for(let i=0;i<n;i++){const a=RS(0,Math.PI*2);kfSp("star",p.x,p.y,{vx:Math.cos(a)*2,vy:Math.sin(a)*2,drag:.9,life:30},0xffe9a0,RS(.35,.6),"add")}},
- season(){const s=KF_SEASON();kfSp(s.tex,RS(0,innerWidth),-12,{vx:RS(-.35,.25),vy:RS(.55,1),life:Math.round(innerHeight/.6)+60,spin:RS(-.03,.03),sway:.9,fade:"inout",a0:.85,amb:1},s.col[Math.floor(R01()*s.col.length)],RS(.7,1.15))}
+   const gl=kfSp("orb",x,y,{vy:RS(-1.1,-.7),life:RS(420,540),fade:"inout",a0:.5,sway:.25,lant:1},0xffa040,sc*1.4);const l=kfSp("lantern",x,y,{vy:gl.v.vy,life:gl.v.life,fade:"inout",a0:.95,sway:.25,lant:1},null,sc);l.rotation=RS(-.12,.12);l.v.ph=gl.v.ph}},
+ pop(p){const n=kfBudget(6);for(let i=0;i<n;i++){const a=RS(0,Math.PI*2);kfSp("spark",p.x,p.y,{vx:Math.cos(a)*2,vy:Math.sin(a)*2,drag:.9,life:30},null,RS(.35,.6)).rotation=0}},
+ brush(p){const n=Math.min(2,kfBudget(2));for(let i=0;i<n;i++){const s=kfSp("brush",p.x+RS(-40,40),p.y+RS(-30,30),{life:RS(34,44),fade:"out",a0:.92,grow:.004},null,RS(3.2,4.2));s.rotation=RS(-.5,.2)}},
+ goldpetals(p){const n=kfBudget(18);for(let i=0;i<n;i++)kfSp("petal-gold",RS(0,innerWidth),RS(-90,-10),{vx:RS(-.4,.4),vy:RS(1.3,2.3),life:RS(140,200),spin:RS(-.06,.06),sway:.8,fade:"inout"},null,RS(.8,1.3))},
+ golddust(p){const n=kfBudget(22),r=p.r,w=r?Math.max(160,r.width):300;for(let i=0;i<n;i++)kfSp(R01()<.5?"spark":"ember",p.x+RS(-.5,.5)*w,p.y+RS(-40,10),{vx:RS(-.3,.3),vy:RS(.3,1.2),life:RS(70,120),fade:"inout",tw:.2,a0:.95},null,RS(.3,.7))},
+ jade(p){const n=kfBudget(9);for(let i=0;i<n;i++){const a=RS(-Math.PI*.9,-Math.PI*.1),sp=RS(2,5.5);kfSp("jade",p.x+RS(-12,12),p.y+RS(-8,8),{vx:Math.cos(a)*sp,vy:Math.sin(a)*sp,g:.22,life:RS(60,90),spin:RS(-.18,.18),fade:"out"},null,RS(.8,1.3))}},
+ incense(p){const n=kfBudget(6);for(let i=0;i<n;i++)kfSp("incense",RS(.25,.75)*innerWidth,innerHeight*RS(.65,.9),{vx:RS(-.15,.15),vy:RS(-.9,-.5),life:RS(160,220),grow:.002,fade:"inout",a0:.6,sway:.3},0xe8e2d8,RS(1.4,2.2)).rotation=0},
+ lotus(p){kfSp("lotuslight",p.x,p.y,{life:120,grow:.004,fade:"inout",a0:.9},null,1.1).rotation=0;const n=kfBudget(10);for(let i=0;i<n;i++){const a=RS(0,Math.PI*2),sp=RS(1.5,4);kfSp("petal-lotus",p.x,p.y,{vx:Math.cos(a)*sp,vy:Math.sin(a)*sp-1,g:.05,drag:.97,life:RS(90,130),spin:RS(-.06,.06),sway:.5},null,RS(.8,1.2))}},
+ peach(p){const n=kfBudget(18);for(let i=0;i<n;i++)kfSp("petal-peach",RS(0,innerWidth),RS(-80,-10),{vx:RS(-.5,.3),vy:RS(1.1,2),life:RS(150,210),spin:RS(-.05,.05),sway:.9,fade:"inout"},null,RS(.8,1.3))},
+ letter(p){const s=kfSp("letter",p.x,p.y+40,{vy:-.5,drag:.97,life:110,fade:"inout",a0:1},null,1.6);s.rotation=RS(-.12,.12);s.texture=KFK.tex.letter[0]},
+ season(){const K=KF_SEASON(),k=K[Math.floor(R01()*K.length)];kfSp(k,RS(0,innerWidth),-12,{vx:RS(-.35,.25),vy:RS(.55,1),life:Math.round(innerHeight/.6)+60,spin:RS(-.03,.03),sway:.9,fade:"inout",a0:.9,amb:1},null,RS(.7,1.15))}
 };
-function kfPx(name,p){if(kfStill()||!KF_SPAWN[name])return;kfApp().then(()=>{try{KF_SPAWN[name](p||kfPt());kfWake()}catch(e){console.error(e)}}).catch(()=>{})}
+/* painted kinds each spawner needs (loaded before it runs); other modules adding KF_SPAWN kinds add their row here */
+const KF_PET=()=>{const s=KF_SEASON();return s[0]==="snow"?["petal-plum"]:s[0]==="leaf"?["petal-peach","osmanthus"]:s};
+const KF_KINDS={rays:["streak"],stars:["spark"],coins:["coin"],ink:["ink"],inks:["ink"],flowers:["petal-peach","petal-plum","osmanthus"],petals:()=>KF_PET(),
+ motes:["ember","orb"],ash:["ash"],smoke:["smoke"],lanterns:["orb","lantern"],pop:["spark"],season:()=>KF_SEASON(),
+ brush:["brush"],goldpetals:["petal-gold"],golddust:["spark","ember"],jade:["jade"],incense:["incense"],lotus:["lotuslight","petal-lotus"],peach:["petal-peach"],letter:["letter"]};
+function kfKinds(name){const k=KF_KINDS[name];return typeof k==="function"?k():(k||[])}
+function kfPx(name,p){if(kfStill()||!KF_SPAWN[name])return;kfApp().then(()=>kfkLoad(kfKinds(name))).then(()=>{try{KF_SPAWN[name](p||kfPt());kfWake()}catch(e){console.error(e)}}).catch(()=>{})}
 function kfWake(){const a=KFX.app;if(!a)return;if(a.canvas.style.display==="none")a.canvas.style.display="";if(!a.ticker.started)a.ticker.start()}
 function kfTick(tk){const d=Math.min(3,tk.deltaTime),H=innerHeight,W=innerWidth,L=KFX.parts;let amb=0;
  for(let i=L.length-1;i>=0;i--){const s=L[i],v=s.v;v.life-=d;
-  if(v.life<=0||(v.amb&&s.y>H+20)){s.destroy();L.splice(i,1);continue}
+  if(v.life<=0||(v.amb&&s.y>H+20)){kfkFree(s);L.splice(i,1);continue}
   v.ph+=.03*d;v.vx*=Math.pow(v.drag,d);v.vy=v.vy*Math.pow(v.drag,d)+v.g*d;s.x+=(v.vx+(v.sway?Math.sin(v.ph)*v.sway:0))*d;s.y+=v.vy*d;
   if(v.spin)s.rotation+=v.spin*d;if(v.coin)s.scale.x=v.sc*Math.cos(v.ph*3);if(v.grow)s.scale.set(s.scale.y+v.grow*d);
   const f=v.life/v.max;let a=v.a0;if(v.fade==="out")a=v.a0*Math.min(1,f*2.2);else if(v.fade==="inout")a=v.a0*Math.min(1,f*4,(1-f)*6);if(v.tw)a*=.55+.45*Math.sin(v.ph*v.tw*40);s.alpha=Math.max(0,a);
@@ -25779,7 +25802,7 @@ function kfTick(tk){const d=Math.min(3,tk.deltaTime),H=innerHeight,W=innerWidth,
 /* ambient: seasonal petals / leaves drift over HER palace (home), sparse, only while nothing covers the screen */
 function kfAmbWant(){try{return !!(KFX.ambOK&&typeof S!=="undefined"&&S&&!S.dead&&S.place==="home"&&!kfStill()&&!document.hidden&&kfOn()&&(!document.getElementById("modal")||document.getElementById("modal").hidden)&&!document.querySelector(".kmov,#dawn:not([hidden]),#kroul,#kpodov,#title:not([hidden]),#kload"))}catch(e){return false}}
 let kfAmbT=0;function kfAmbient(){const on=kfAmbWant();KFX.ambOn=on;if(!on){clearInterval(kfAmbT);kfAmbT=0;return}
- if(kfAmbT)return;kfApp().then(()=>{if(kfAmbT||!kfAmbWant())return;kfWake();const cap=()=>Math.max(3,Math.round((innerWidth<700?6:10)*KFX.q));
+ if(kfAmbT)return;kfApp().then(()=>kfkLoad(kfKinds("season"))).then(()=>{if(kfAmbT||!kfAmbWant())return;kfWake();const cap=()=>Math.max(3,Math.round((innerWidth<700?6:10)*KFX.q));
   KF_SPAWN.season();kfAmbT=setInterval(()=>{if(!kfAmbWant()){KFX.ambOn=false;clearInterval(kfAmbT);kfAmbT=0;return}if(KFX.amb<cap()){KF_SPAWN.season();kfWake()}},1400)}).catch(()=>{})}
 /* ---------- numbers fly from the result card into their top-bar cell ---------- */
 const KF_CELL={sung:"hud-sung",danh:"hud-danh",suc:"hud-suc",bac:"hud-bac",duc:"hud-duc",sac:"hud-sac",tai:"hud-tai",tamco:"hud-tamco"};
@@ -25846,7 +25869,7 @@ document.addEventListener("click",e=>{if(e.target&&e.target.closest&&e.target.cl
  W("kitSheetTurn",o=>function(){try{if(kfOn())vib("tap")}catch(e){}return o.apply(this,arguments)});
  /* render: tabs underline, ambient petals at home, festival-night lanterns once per night */
  W("render",o=>function(){const r=o.apply(this,arguments);try{KFX.ambOK=true;kfTabsSoon();kfAmbient();
-   if(typeof S!=="undefined"&&S&&!S.dead&&kfOn()&&(S.buoi||0)===2&&typeof festToday==="function"&&festToday()){const k=`${S.year}-${S.month}-${S.tuan}`;if(KFX.festK!==k){KFX.festK=k;setTimeout(()=>kitFx("lantern"),600)}}}catch(e){console.error(e)}return r});
+   if(typeof S!=="undefined"&&S&&!S.dead&&kfOn()&&(S.buoi||0)===2&&typeof festToday==="function"&&festToday()){const k=`${S.year}-${S.month}-${S.tuan}`;if(KFX.festK!==k){KFX.festK=k;setTimeout(()=>kitFx("festival"),600)}}}catch(e){console.error(e)}return r});
  document.addEventListener("visibilitychange",()=>{try{if(KFX.app){if(document.hidden)KFX.app.ticker.stop();else if(KFX.parts.length)KFX.app.ticker.start()}kfAmbient()}catch(e){}});
  /* a modal closing / overlay leaving lets the ambient petals back */
  setInterval(()=>{try{if(KFX.ambOK&&!kfAmbT&&kfAmbWant())kfAmbient()}catch(e){}},2500)})();
@@ -25877,9 +25900,7 @@ document.addEventListener("click",e=>{if(e.target&&e.target.closest&&e.target.cl
  transition:transform .32s cubic-bezier(.3,.8,.3,1.1),width .32s cubic-bezier(.3,.8,.3,1.1),opacity .2s;box-shadow:0 0 6px #f0d07088}
 /* flashes */
 .kfx-fl{position:fixed;inset:0;z-index:9440;pointer-events:none}
-.kfx-gold{box-shadow:inset 0 0 90px 18px #f0d070cc;background:radial-gradient(ellipse at 50% 42%,#fff3c433 0,#fff3c400 60%);animation:kfFl 1.3s ease-out forwards}
 .kfx-red{box-shadow:inset 0 0 80px 16px #b00000cc;animation:kfRed .9s ease-out forwards}
-.kfx-warm{background:radial-gradient(ellipse at 50% 45%,#ffd8a040 0,#ffb07022 50%,#ffb07000 75%);box-shadow:inset 0 0 70px 10px #ffc08066;animation:kfFl 1.4s ease-out forwards}
 .kfx-night{background:radial-gradient(ellipse at 50% 60%,#ff9a5022 0,#3a1a2a55 80%);animation:kfFl 2.2s ease-in-out forwards}
 .kfx-dark{background:radial-gradient(ellipse at 50% 50%,#0000 20%,#000a 100%);animation:kfDark 2.2s ease-in-out forwards}
 @keyframes kfFl{0%{opacity:0}18%{opacity:1}100%{opacity:0}}
@@ -26002,6 +26023,191 @@ function kgGroups(add){const G=new Map();
 .kmov.kfgain.km-red *{animation:none!important}
 @media (prefers-reduced-motion:reduce){.kmov.kfgain *{animation:none!important}}
 `;document.head.appendChild(st)})();
+/* ================= jfxkit — PAINTED EFFECTS KIT (KIT §68 painted-fx; owner 15/11 20:55Z + 21:00Z "effects painted with Magnific too") =================
+   Every effect a scene shows is PAINTED (Magnific gpt-2-6, folder ba4aecfe…); code only moves / fades / glows painted art. Sources and
+   recipes: dev/fxwork (gens.txt ids, slice.py, light.sh, sheet.sh). Files live on the CDN under img/fx/ (cdn_sync.py, not git), lazy-loaded.
+   Three kinds:
+   1. SPRITES (particles) — KFK_SP: one small transparent WebP atlas per kind (n frames of s×s px side by side); animated on the ONE jfx Pixi
+      layer (pooled sprites, frame budget KFX.q). kitFxSprite(name,o) one particle · kitFxBurst(name,at,n,o) a group with the kind's motion.
+   2. LIGHTS — KFK_LIGHT: short looping clips painted on PURE BLACK, shown with mix-blend-mode:screen (black vanishes; no alpha → iPhone Safari
+      safe): <video> WebM(VP9)+MP4(H.264); low-end → WebP sprite sheet (6×4) stepped by a timer; reduced motion → the still poster.
+      kitFxLight(name, target, o) → handle {stop(ms)}.
+   3. SHEETS — KFK_SHEET: solid effects that need true alpha (white silk falling, red thread snapping), cut with video_remove_background →
+      frames → one WebP sprite sheet. kitFxSheet(name, target, o) → handle {stop(ms)}. A light can also be played as a sheet.
+   target = an element, {x,y} (viewport px) or null (screen centre). Everything auto-cleans: dur / end of sheet / target leaves the page.
+   kitFxPreload([names]) warms atlases / posters / clips before a scene (returns a Promise; never rejects).
+   Off switches: same as jfx — bots/quiet → nothing; Thiết lập "Hiệu ứng: Gọn" (OPT.fxon false; auto on weak devices / slow frames) or
+   prefers-reduced-motion → no particles, lights/sheets show their still. Budget (owner 22:35Z): sprite atlas ≤ ~40 KB, light clip ≤ ~400 KB,
+   files on demand only (assets.json group 'fx': jload never pre-downloads, sw.js caches by content once played); ONE Pixi layer, capped
+   (KFK_CAP), paused when hidden; nothing ever waits on an effect (fire and forget; co-op never blocks).
+   Test hook: window.KFK {loaded:Set, lights, sheets, pool, made, freed, log}. */
+const KFK_BASE="https://ctm-img.victoria-tntt.workers.dev/img/fx/";
+/* d = display px at scale 1 · b:"add" = additive (light) · t:1 = may be tinted (white / neutral art) */
+const KFK_SP={
+ "petal-plum":{n:9,s:64,d:22},"petal-peach":{n:9,s:64,d:22},"petal-lotus":{n:9,s:80,d:30},osmanthus:{n:9,s:48,d:13},
+ leaf:{n:9,s:80,d:26},snow:{n:5,s:48,d:15},ash:{n:9,s:56,d:16},paper:{n:9,s:72,d:20},coin:{n:9,s:64,d:22},ink:{n:9,s:128,d:44},
+ lantern:{n:4,s:128,d:30},spark:{n:9,s:64,d:26,b:"add"},ember:{n:9,s:40,d:12,b:"add"},orb:{n:3,s:96,d:34,b:"add",t:1},
+ streak:{n:3,s:192,d:46,b:"add",t:1},smoke:{n:3,s:128,d:44,t:1},
+ glowburst:{n:1,s:256,d:220}, /* the painted gold glow still with true alpha (luma): reads on light paper AND dark scenes */
+ brush:{n:9,s:160,d:70},"petal-gold":{n:9,s:56,d:22},jade:{n:9,s:64,d:24},incense:{n:9,s:96,d:46,t:1},lotuslight:{n:1,s:256,d:170},
+ gift:{n:4,s:160,d:120},letter:{n:4,s:128,d:90}  /* gift: 0 closed lacquer box · 1 box open with light · 2 silk-wrapped bundle · 3 untied ribbon;
+                                                    letter: 0 sealed letter · 1 open letter · 2 rolled note · 3 envelope */
+};
+/* full-screen painted EDGE overlays (ink on white → true alpha; portrait -p and landscape -l art): blood (danger), poison, ink (rumour) */
+const KFK_EDGE={blood:{},poison:{},ink:{}};
+/* w×h = clip size; f = sheet frames (6×4); r = aspect of the art box (w/h) */
+const KFK_LIGHT={
+ candle:{w:320,h:320},"glow-gold":{w:384,h:384},moonlight:{w:288,h:384},"lantern-red":{w:288,h:384},divine:{w:288,h:384},fireworks:{w:288,h:384}
+};
+const KFK_SHEET={ /* dev/fxwork/sheet.sh: cols×rows frames of w×h (true alpha), fps, played once; poster = last frame (reduced motion) */
+ silk:{cols:6,rows:4,n:24,w:120,h:214,fps:5,src:"silk-sheet.webp",poster:"silk.webp"},       /* white silk descends and settles (death) */
+ thread:{cols:4,rows:4,n:16,w:256,h:144,fps:7,src:"thread-sheet.webp",poster:"thread.webp"}  /* red thread trembles and snaps (betrayal) */
+};
+/* motion per kind for kitFxBurst (fall | burst | rise | bloom | rain) */
+const KFK_MOVE={"petal-plum":"fall","petal-peach":"fall","petal-lotus":"fall",osmanthus:"fall",leaf:"fall",snow:"fall",ash:"fall",paper:"burst",
+ coin:"rain",glowburst:"flash",lotuslight:"flash","petal-gold":"fall",jade:"burst",incense:"rise",brush:"flash",gift:"flash",letter:"flash",ink:"bloom",smoke:"bloom",lantern:"rise",spark:"burst",ember:"rise",orb:"rise",streak:"burst"};
+const KFK=window.KFK={loaded:new Set(),tex:{},lights:0,sheets:0,pool:[],made:0,freed:0,log:[],live:new Set()};
+const kfkU=f=>KFK_BASE+f;
+function kfkLow(){try{const c=navigator.connection;return !!((c&&c.saveData)||(navigator.deviceMemory&&navigator.deviceMemory<=2)||(navigator.hardwareConcurrency&&navigator.hardwareConcurrency<=2))}catch(e){return false}}
+function kfkLog(x){KFK.log.push(x);if(KFK.log.length>80)KFK.log.shift()}
+/* ---------- 1. sprites ---------- */
+const kfkTexP={};
+function kfkLoad(names){names=(Array.isArray(names)?names:[names]).filter(n=>KFK_SP[n]);
+ return kfApp().then(app=>Promise.all(names.map(n=>{if(kfkTexP[n])return kfkTexP[n];const K=KFK_SP[n],P=window.PIXI;
+  kfkTexP[n]=P.Assets.load({src:kfkU(n+".webp"),data:{crossOrigin:"anonymous"}}).then(base=>{const fr=[];
+   for(let i=0;i<K.n;i++)fr.push(new P.Texture({source:base.source,frame:new P.Rectangle(i*K.s,0,K.s,K.s)}));KFK.tex[n]=fr;KFX.tex[n]=fr;KFK.loaded.add(n);return fr})
+   .catch(e=>{delete kfkTexP[n];throw e});return kfkTexP[n]})))}
+/* the ONE particle maker (jfx kfSp calls this): pooled Pixi sprite with a painted frame */
+const KFK_CAP=()=>innerWidth<700?140:240;  /* hard cap of live particles on the ONE Pixi layer (owner perf budget 22:35Z) */
+function kfkSp(kind,x,y,v,tint,sc,blend,frame){const P=window.PIXI,K=KFK_SP[kind],fr=KFK.tex[kind];if(!P||!K||!fr||!KFX.root)return null;if(KFX.parts.length>=KFK_CAP())return null;
+ let s=KFK.pool.pop();if(!s){s=new P.Sprite(fr[0]);s.anchor.set(.5);KFK.made++}
+ s.texture=fr[frame!=null?frame%fr.length:Math.floor(Math.random()*fr.length)];s.x=x;s.y=y;s.rotation=Math.random()*6.28;s.visible=true;
+ s.tint=K.t&&tint!=null?tint:0xffffff;s.blendMode=blend||K.b||"normal";const k=(sc||1)*K.d/K.s;s.scale.set(k);
+ s.v=Object.assign({vx:0,vy:0,g:0,drag:1,life:60,max:60,spin:0,grow:0,a0:1,fade:"out",sway:0,ph:Math.random()*6.28,sc:k},v);s.v.max=s.v.life;
+ if(s.v.grow)s.v.grow*=K.d/K.s;s.alpha=s.v.fade==="in"||s.v.fade==="inout"?0:s.v.a0;KFX.root.addChild(s);KFX.parts.push(s);return s}
+function kfkFree(s){try{s.parent&&s.parent.removeChild(s);s.v=null;if(KFK.pool.length<400){s.visible=false;KFK.pool.push(s)}else s.destroy();KFK.freed++}catch(e){}}
+function kfkAt(at){if(at==null)return{x:innerWidth/2,y:innerHeight*.42};if(at.getBoundingClientRect){const r=at.getBoundingClientRect();return{x:r.left+r.width/2,y:r.top+r.height/2,r}}return at}
+function kitFxSprite(name,o){o=o||{};if(!KFK_SP[name]||!kfOn()||kfStill())return Promise.resolve(null);
+ return kfkLoad([name]).then(()=>{const p=kfkAt(o.el||(o.x!=null?{x:o.x,y:o.y}:null));const life=o.ms?o.ms*.06:(o.life||90);
+  const s=kfkSp(name,p.x,p.y,{vx:o.vx||0,vy:o.vy||0,g:o.g||0,drag:o.drag||1,life,spin:o.spin||0,sway:o.sway||0,grow:o.grow||0,a0:o.a0!=null?o.a0:1,fade:o.fade||"inout"},o.tint,o.scale||1,o.blend,o.frame);
+  if(s&&o.rot!=null)s.rotation=o.rot;kfWake();return s}).catch(()=>null)}
+const kR=(a,b)=>a+Math.random()*(b-a);
+function kfkMove(name,p,i,n,o){const m=o.motion||KFK_MOVE[name]||"burst",W=innerWidth,H=innerHeight,r=p.r,sp=o.speed||1;
+ if(m==="fall"){const wide=o.wide!==false&&!r;const x=wide?kR(0,W):p.x+kR(-.6,.6)*(r?Math.max(120,r.width):240);
+  return{x,y:wide?kR(-80,-10):p.y-(r?r.height/2:120)+kR(-40,0),v:{vx:kR(-.4,.4)*sp,vy:kR(1,2)*sp,life:o.life||kR(150,210),spin:kR(-.05,.05),sway:.8,fade:"inout"}}}
+ if(m==="rain")return{x:kR(.06,.94)*W,y:kR(-120,-10),v:{vx:kR(-.6,.6),vy:kR(2,4)*sp,g:.22,life:o.life||kR(90,120),spin:kR(-.03,.03),coin:1,fade:"out"}};
+ if(m==="rise")return{x:r?p.x+kR(-.5,.5)*r.width:(name==="lantern"?kR(.06,.94)*W:p.x+kR(-80,80)),y:name==="lantern"&&!r?H+kR(10,200):p.y+kR(-20,30),
+  v:{vx:kR(-.3,.3),vy:-kR(.6,1.4)*sp,life:o.life||(name==="lantern"?kR(420,540):kR(90,150)),sway:.4,fade:"inout",a0:.95}};
+ if(m==="flash")return{x:p.x,y:p.y,v:{life:o.life||55,grow:o.grow!=null?o.grow:.012,a0:o.a0!=null?o.a0:.95,fade:"inout"}};
+ if(m==="bloom")return{x:p.x+kR(-50,50),y:p.y+kR(-40,40),v:{life:o.life||kR(70,95),grow:kR(.006,.012),a0:kR(.55,.8),fade:"inout",vy:name==="smoke"?-kR(.5,1.1):0}};
+ const a=o.up?kR(-Math.PI*.95,-Math.PI*.05):kR(0,Math.PI*2),v=kR(3,8)*sp;return{x:p.x,y:p.y,v:{vx:Math.cos(a)*v,vy:Math.sin(a)*v-1.5,g:.08,drag:.95,life:o.life||kR(60,100),spin:kR(-.12,.12),sway:.4,fade:"out"},rot:name==="streak"?a:null}}
+function kitFxBurst(name,at,n,o){o=o||{};if(!KFK_SP[name]||!kfOn()||kfStill())return Promise.resolve(0);kfkLog("burst:"+name);
+ return kfkLoad([name]).then(()=>{const p=kfkAt(at),N=kfBudget(n||12);let k=0;
+  for(let i=0;i<N;i++){const m=kfkMove(name,p,i,N,o);const s=kfkSp(name,m.x,m.y,m.v,o.tint,(o.scale||1)*kR(.75,1.25),o.blend);if(s){k++;if(m.rot!=null)s.rotation=m.rot;if(m.v.coin)s.v.coin=1}}
+  kfWake();return k}).catch(()=>0)}
+/* ---------- 2. lights + 3. sheets (DOM, screen blend for lights) ---------- */
+const KFK_VPOOL={};
+function kfkBox(target,o,ar){let x,y,w;const r=target&&target.getBoundingClientRect?target.getBoundingClientRect():null;
+ if(r&&r.width){x=r.left+r.width*(o.cx!=null?o.cx:.5);y=r.top+r.height*(o.cy!=null?o.cy:.5);w=o.size||Math.max(r.width,r.height*ar)*(o.scale||1.2)}
+ else{const p=target&&target.x!=null?target:{x:innerWidth/2,y:innerHeight*.42};x=p.x;y=p.y;w=o.size||Math.min(innerWidth,innerHeight*ar)*(o.scale||.7)}
+ return{x,y,w,h:w/ar}}
+function kfkPlace(d,b){d.style.cssText+=`;left:${Math.round(b.x-b.w/2)}px;top:${Math.round(b.y-b.h/2)}px;width:${Math.round(b.w)}px;height:${Math.round(b.h)}px`}
+function kfkHandle(d,target,o,kind,onStop){let done=false,iv=0,to=0;KFK.live.add(d);KFK[kind]++;
+ const H={el:d,stop(ms){if(done)return;done=true;clearInterval(iv);clearTimeout(to);KFK.live.delete(d);KFK[kind]--;const f=ms!=null?ms:(o.fade!=null?o.fade:400);
+  try{for(const a of d.getAnimations?d.getAnimations():[])try{a.commitStyles();a.cancel()}catch(e){}}catch(e){}void d.offsetWidth;
+  d.style.transition=`opacity ${f}ms ease`;d.style.opacity="0";setTimeout(()=>{try{onStop&&onStop()}catch(e){}d.remove()},f+30)},get alive(){return !done}};
+ if(target&&target.getBoundingClientRect&&!o.inside)iv=setInterval(()=>{if(!target.isConnected||document.hidden&&kind==="lights"){H.stop(200);return}
+  if(o.follow!==false)kfkPlace(d,kfkBox(target,o,o.ar))},250);
+ if(o.dur)to=setTimeout(()=>H.stop(),o.dur);return H}
+function kfkLayer(o,cls){const d=document.createElement("div");d.className="kfxk "+cls;d.setAttribute("aria-hidden","true");if(o.z!=null)d.style.zIndex=o.z;if(o.opacity!=null)d.style.setProperty("--kfo",o.opacity);return d}
+function kfkSheetRun(d,src,cols,rows,n,fps,loop,onEnd){d.style.backgroundImage=`url("${src}")`;d.style.backgroundSize=`${cols*100}% ${rows*100}%`;let i=0;
+ const step=()=>{const c=i%cols,r=Math.floor(i/cols);d.style.backgroundPosition=`${cols>1?c*100/(cols-1):0}% ${rows>1?r*100/(rows-1):0}%`};step();
+ const iv=setInterval(()=>{i++;if(i>=n){if(loop)i=0;else{clearInterval(iv);onEnd&&onEnd();return}}step()},1000/fps);return iv}
+function kitFxLight(name,target,o){o=Object.assign({},o||{});const L=KFK_LIGHT[name];if(!L||!kfOn())return null;kfkLog("light:"+name);
+ if(KFK.lights>=4){const old=[...KFK.live].find(d=>d.classList.contains("kfxk-l"));old&&old.__h&&old.__h.stop(150)}
+ o.ar=L.w/L.h;const d=kfkLayer(o,"kfxk-l"),still=kfStill(),low=!still&&(o.low||kfkLow());let v=null,iv=0;
+ if(still){d.classList.add("kfxk-still");d.style.backgroundImage=`url("${kfkU(name+".webp")}")`}
+ else if(low){iv=kfkSheetRun(d,kfkU(name+"-sheet.webp"),6,4,24,o.fps||5,true)}
+ else{const pool=KFK_VPOOL[name]||(KFK_VPOOL[name]=[]);v=pool.pop();
+  if(!v){v=document.createElement("video");v.muted=true;v.defaultMuted=true;v.loop=true;v.playsInline=true;v.setAttribute("playsinline","");v.setAttribute("muted","");
+   v.preload="auto";v.disablePictureInPicture=true;v.poster=kfkU(name+".webp");v.innerHTML=`<source src="${kfkU(name+".webm")}" type="video/webm"><source src="${kfkU(name+".mp4")}" type="video/mp4">`}
+  v.playbackRate=o.rate||1;try{v.currentTime=o.t0!=null?o.t0:Math.random()*2}catch(e){}d.appendChild(v);const pr=v.play();pr&&pr.catch&&pr.catch(()=>{d.classList.add("kfxk-still");d.style.backgroundImage=`url("${kfkU(name+".webp")}")`})}
+ if(o.inside&&target&&target.appendChild){d.classList.add("kfxk-in");target.appendChild(d)}else{kfkPlace(d,kfkBox(target,o,o.ar));document.body.appendChild(d)}
+ requestAnimationFrame(()=>d.classList.add("on"));
+ const h=kfkHandle(d,target,o,"lights",()=>{clearInterval(iv);if(v){v.pause();v.remove();const p=KFK_VPOOL[name];if(p.length<2)p.push(v);else{v.removeAttribute("src");v.innerHTML="";v.load()}}});d.__h=h;return h}
+function kitFxSheet(name,target,o){o=Object.assign({},o||{});const Sd=KFK_SHEET[name],Ld=!Sd&&KFK_LIGHT[name];if(!Sd&&!Ld||!kfOn())return null;kfkLog("sheet:"+name);
+ const D=Sd||{w:Ld.w,h:Ld.h,cols:6,rows:4,n:24,fps:5,blend:"screen",src:name+"-sheet.webp",poster:name+".webp",loop:1};o.ar=D.w/D.h;
+ const d=kfkLayer(o,"kfxk-s"+(D.blend==="screen"?" kfxk-scr":""));let iv=0,h;
+ if(o.inside&&target&&target.appendChild){d.classList.add("kfxk-in");target.appendChild(d)}else{kfkPlace(d,kfkBox(target,o,o.ar));document.body.appendChild(d)}
+ const loop=o.loop!=null?o.loop:!!D.loop;
+ if(kfStill()){d.style.backgroundImage=`url("${kfkU(D.poster||D.src)}")`;d.style.backgroundSize="contain";if(!o.dur&&!loop)o.dur=o.hold||1600}
+ else iv=kfkSheetRun(d,kfkU(D.src||name+"-sheet.webp"),D.cols,D.rows,D.n,o.fps||D.fps,loop,()=>{if(!o.keep)setTimeout(()=>h.stop(),o.hold!=null?o.hold:500)});
+ requestAnimationFrame(()=>d.classList.add("on"));h=kfkHandle(d,target,o,"sheets",()=>clearInterval(iv));d.__h=h;return h}
+/* kitFxEdge(name, o) — the painted edge overlay bleeds in from outside the screen (scale 1.12 → 1 + fade), holds, fades.
+   o {in:ms 450, hold:ms 700, out:ms 900, opacity}. Reduced motion / Gọn: shown still for hold+in, then gone. */
+function kitFxEdge(name,o){o=o||{};if(!KFK_EDGE[name]||!kfOn())return null;kfkLog("edge:"+name);
+ const land=innerWidth>innerHeight,d=kfkLayer(o,"kfxk-e");d.style.backgroundImage=`url("${kfkU("edge-"+name+(land?"-l":"-p")+".webp")}")`;document.body.appendChild(d);
+ const st=kfStill(),i=o.in||450,h=o.hold!=null?o.hold:700,u=o.out||900;let H;
+ if(!st&&d.animate){d.style.transition="none";d.style.opacity="1";d.animate([{opacity:0,transform:"scale(1.12)"},{opacity:o.opacity||1,transform:"scale(1)"}],{duration:i,easing:"cubic-bezier(.2,.7,.3,1)",fill:"both"})}
+ else requestAnimationFrame(()=>d.classList.add("on"));
+ H=kfkHandle(d,null,{fade:u,dur:i+h},"sheets",null);d.__h=H;return H}
+/* kitFxObj(name, frame, target, o) — ONE painted object (a frame of a KFK_SP atlas) as a DOM picture for staged moments (gift, letter):
+   returns {el, to(x,y,ms,extra), frame(i), stop(ms)}; size o.size px (default the kind's d). Positions are viewport px (centre). */
+function kitFxObj(name,frame,target,o){o=o||{};const K=KFK_SP[name];if(!K||!kfOn())return null;const p=kfkAt(target),sz=o.size||K.d;
+ const d=kfkLayer(o,"kfxk-o");d.style.cssText+=`;left:0;top:0;width:${sz}px;height:${sz}px;background-image:url("${kfkU(name+".webp")}");background-size:${K.n*100}% 100%;transform:translate(${p.x-sz/2}px,${p.y-sz/2}px)`;
+ const fr=i=>{d.style.backgroundPosition=`${K.n>1?(i%K.n)*100/(K.n-1):0}% 0`};fr(frame||0);document.body.appendChild(d);requestAnimationFrame(()=>d.classList.add("on"));
+ let cur={x:p.x,y:p.y};const H=kfkHandle(d,null,{fade:o.fade||350,dur:o.dur},"sheets",null);d.__h=H;
+ H.frame=fr;H.to=(x,y,ms,ex)=>{ex=ex||{};const a=`translate(${cur.x-sz/2}px,${cur.y-sz/2}px) rotate(${ex.r0||0}deg) scale(${ex.s0||1})`,b=`translate(${x-sz/2}px,${y-sz/2}px) rotate(${ex.r||0}deg) scale(${ex.s||1})`;cur={x,y};
+  if(kfStill()||!d.animate){d.style.transform=b;return Promise.resolve()}const an=d.animate([{transform:a},{transform:b}],{duration:ms,easing:ex.ease||"cubic-bezier(.3,.7,.3,1)",fill:"forwards"});return an.finished.catch(()=>{})};
+ return H}
+/* kitFxGift(act, target, o) — painted gift moments. act: "give" (wrapped gift / lacquer box carried up to the target, ribbon slips off),
+   "open" (lacquer box opens: light + sparks), "refuse" (the gift is set down and taken back). o {kind:"box"|"silk", from:{x,y}}.
+   Fire and forget (never awaited by game logic); returns a Promise that settles when the moment ends. */
+function kitFxGift(act,target,o){o=o||{};if(!kfOn())return Promise.resolve(false);kfkLog("gift:"+act);const p=kfkAt(target),silk=o.kind==="silk",sz=o.size||Math.min(150,innerWidth*.28);
+ const from=o.from||{x:p.x,y:innerHeight+sz};const H=kitFxObj("gift",silk?2:0,from,{size:sz});if(!H)return Promise.resolve(false);const W=ms=>new Promise(r=>setTimeout(r,kfStill()?0:ms));
+ if(act==="open"){H.to(p.x,p.y,0);return W(350).then(()=>{H.to(p.x,p.y,180,{s:1.06,s0:1});return W(180)}).then(()=>{H.frame(1);kitFxBurst("glowburst",p,1,{scale:sz/150,a0:.85});kitFxBurst("spark",p,12,{up:1});return W(1400)}).then(()=>{H.stop(450);return true})}
+ const go=H.to(p.x,p.y,750,{r0:-4,r:0});
+ if(act==="refuse")return go.then(()=>W(500)).then(()=>H.to(p.x,p.y+sz*.15,260,{s:.96})).then(()=>W(450)).then(()=>H.to(from.x,from.y,700,{r:6})).then(()=>{H.stop(200);return true});
+ return go.then(()=>{if(!silk)return;const r=kitFxObj("gift",3,{x:p.x,y:p.y-sz*.35},{size:sz*.7});return r&&r.to(p.x+sz*.6,p.y-sz*.9,700,{r:40,s:.8}).then(()=>r.stop(300))}).then(()=>W(500)).then(()=>{H.stop(400);return true})}
+/* kitFxLetter(target, o) — a secret letter arrives (rises, sealed), then opens (frame 1). o {kind:"seal"|"roll"|"envelope", open:true} */
+function kitFxLetter(target,o){o=o||{};if(!kfOn())return Promise.resolve(false);const p=kfkAt(target),sz=o.size||Math.min(140,innerWidth*.26),f={roll:2,envelope:3}[o.kind]||0;
+ const H=kitFxObj("letter",f,{x:p.x,y:p.y+60},{size:sz});if(!H)return Promise.resolve(false);const W=ms=>new Promise(r=>setTimeout(r,kfStill()?0:ms));
+ return H.to(p.x,p.y,600,{r0:-8,r:-2}).then(()=>W(500)).then(()=>{if(o.open!==false){H.frame(1);kitFxBurst("orb",p,3,{tint:0xfff3d0})}return W(1200)}).then(()=>{H.stop(400);return true})}
+function kitFxPreload(names){const L=[];for(const n of names||[]){
+  if(KFK_SP[n])L.push(kfkLoad([n]).catch(()=>{}));
+  if(KFK_EDGE[n])L.push(new Promise(ok=>{const i=new Image();i.onload=i.onerror=()=>ok();i.src=kfkU("edge-"+n+(innerWidth>innerHeight?"-l":"-p")+".webp")}));
+  if(KFK_LIGHT[n]||KFK_SHEET[n]){const S=KFK_SHEET[n];const u=kfkU(S?S.src:(kfkLow()?n+"-sheet.webp":n+".webp"));L.push(new Promise(ok=>{const i=new Image();i.onload=i.onerror=()=>ok();i.src=u}))
+   if(KFK_LIGHT[n]&&!kfkLow()&&!kfStill()&&!(KFK_VPOOL[n]&&KFK_VPOOL[n].length)){const v=document.createElement("video");v.muted=true;v.playsInline=true;v.setAttribute("playsinline","");v.preload="auto";
+    v.poster=kfkU(n+".webp");v.innerHTML=`<source src="${kfkU(n+".webm")}" type="video/webm"><source src="${kfkU(n+".mp4")}" type="video/mp4">`;v.loop=true;(KFK_VPOOL[n]||(KFK_VPOOL[n]=[])).push(v)}}}
+ return Promise.all(L).then(()=>true)}
+function kitFxClear(){for(const d of [...KFK.live])d.__h&&d.__h.stop(0);for(const s of [...(KFX.parts||[])])kfkFree(s);if(KFX.parts)KFX.parts.length=0}
+/* "Hiệu ứng: Đầy đủ / Gọn" (Thiết lập, OPT.fxon; owner perf budget 22:35Z). Gọn = stills, no particles (kfStill). Until she picks
+   (OPT.fxpick), weak devices start in Gọn (kfkLow: saveData / deviceMemory ≤ 2 / ≤ 2 cores) and slow frames switch to Gọn for the
+   session (KFX.q at its floor with particles on screen, 3 checks in a row). OPT.fxauto marks an automatic Gọn (undone on a strong device). */
+function kfkAuto(){try{if(typeof OPT==="undefined"||OPT.fxpick)return;if(kfkLow()){if(OPT.fxon!==false){OPT.fxon=false;OPT.fxauto=1;KFK.auto="device"}}
+ else if(OPT.fxauto){OPT.fxon=true;OPT.fxauto=0;KFK.auto=""}}catch(e){}}
+kfkAuto();KFK.slowHits=0;
+setInterval(()=>{try{if(typeof OPT==="undefined"||OPT.fxpick||OPT.fxon===false||!KFX.app||document.hidden)return;
+ if(KFX.q<=.31&&KFX.parts.length>8){if(++KFK.slowHits>=3){OPT.fxon=false;OPT.fxauto=1;KFK.auto="slow";kitFxClear()}}else KFK.slowHits=Math.max(0,KFK.slowHits-1)}catch(e){}},2000);
+Object.assign(window,{kitFxSprite,kitFxBurst,kitFxLight,kitFxSheet,kitFxEdge,kitFxObj,kitFxGift,kitFxLetter,kitFxPreload,kitFxClear,KFK_SP,KFK_LIGHT,KFK_SHEET,KFK_EDGE});
+(function(){const st=document.createElement("style");st.textContent=`
+.kfxk{position:fixed;z-index:9445;pointer-events:none;opacity:0;transition:opacity .45s ease;background-repeat:no-repeat;background-position:center;background-size:contain}
+.kfxk.on{opacity:var(--kfo,1)}.kfxk-in{position:absolute}
+.kfxk-l,.kfxk-scr{mix-blend-mode:screen}
+.kfxk-e{inset:0;width:100vw;height:100vh;background-size:100% 100%;z-index:9446;transform-origin:50% 50%}
+.kfxk-o{background-repeat:no-repeat;will-change:transform}
+.kfxk-pgr{flex-wrap:wrap;gap:6px}.kfxk-pgd{background:#1c1820;padding:8px;border-radius:8px}.kfxk-pgi{height:22px;max-width:120px;object-fit:cover;object-position:left;vertical-align:middle}
+.kfxk-l video{width:100%;height:100%;object-fit:contain;display:block;background:#000}
+@media (prefers-reduced-motion:reduce){.kfxk{transition:none}}
+`;document.head.appendChild(st)})();
+/* §47 kit page sample: every painted kind, every light, every sheet (tap to play) */
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§68",title:"painted-fx · kitFxBurst · kitFxLight · kitFxSheet (hiệu ứng vẽ tay)",
+ html:()=>`<div class="kitpg-row kfxk-pgr">${Object.keys(KFK_SP).map(n=>`<button type="button" class="kbtn alt" onclick="kitFxBurst('${n}',this,14)"><img class="kfxk-pgi" src="${kfkU(n+".webp")}" alt=""> ${n}</button>`).join("")}</div>`+
+  `<div class="kitpg-row kfxk-pgr kfxk-pgd">${Object.keys(KFK_LIGHT).map(n=>`<button type="button" class="kbtn alt" onclick="kitFxLight('${n}',this.parentNode,{dur:3200,scale:.9})">${n}</button>`).join("")}${Object.keys(KFK_SHEET).map(n=>`<button type="button" class="kbtn alt" onclick="kitFxSheet('${n}',this.parentNode,{scale:.9})">${n}</button>`).join("")}</div>`+
+  `<div class="kitpg-row kfxk-pgr">${Object.keys(KFK_EDGE).map(n=>`<button type="button" class="kbtn alt" onclick="kitFxEdge('${n}')">edge ${n}</button>`).join("")}`+
+  `<button type="button" class="kbtn alt" onclick="kitFxGift('give',this,{kind:'silk'})">gift give</button><button type="button" class="kbtn alt" onclick="kitFxGift('open',this)">gift open</button>`+
+  `<button type="button" class="kbtn alt" onclick="kitFxGift('refuse',this)">gift refuse</button><button type="button" class="kbtn alt" onclick="kitFxLetter(this)">letter</button></div>`+
+  `<div class="kitpg-row kfxk-pgr">${Object.keys(FX).filter(k=>k!=="lock").map(k=>`<button type="button" class="kbtn alt" onclick="kitFx('${k}',{el:this})">kitFx ${k}</button>`).join("")}</div>`})}catch(e){}
 /* ================= jitev — ITEMS IN EVENTS (owner 15/11 ~18:10Z, review/item-events) — KIT §64 (coordinator registry) =================
    Owner rule: every event where an ITEM appears that could come into her hands (a letter delivered, a gift offered, a found object, a confiscated
    thing returned, a bribe, a poisoned dish, a token…) shows that ITEM'S ICON in the event dialog (kit item frame kitItem with its grade, in the
@@ -26165,12 +26371,14 @@ window.kitItemFx=kitItemFx;
 /* new particle kinds for the shared Pixi layer (jfx KF_SPAWN): embers, ash falling at a point, paper scraps, dust, water drops, splash */
 (function(){if(typeof KF_SPAWN!=="object")return;const Rr=(a,b)=>a+Math.random()*(b-a);
  Object.assign(KF_SPAWN,{
-  embers(p){const n=kfBudget(16);for(let i=0;i<n;i++)kfSp("glow",p.x+Rr(-36,36),p.y+Rr(-8,8),{vx:Rr(-.5,.5),vy:Rr(-2.4,-1),drag:.985,life:Rr(45,75),sway:.5,fade:"out",a0:.95},Math.random()<.5?0xff7a20:0xffc040,Rr(.25,.5),"add")},
-  ashfall(p){const n=kfBudget(12);for(let i=0;i<n;i++)kfSp("petal",p.x+Rr(-40,40),p.y+Rr(-10,10),{vx:Rr(-.6,.6),vy:Rr(.2,.9),g:.02,life:Rr(90,130),spin:Rr(-.08,.08),sway:.6,fade:"inout",a0:.85},Math.random()<.5?0x4a4440:0x8a8480,Rr(.3,.6))},
-  scraps(p){const n=kfBudget(8);for(let i=0;i<n;i++)kfSp("petal",p.x+Rr(-14,14),p.y+Rr(-30,30),{vx:Rr(-1.6,1.6),vy:Rr(-1.2,.4),g:.08,life:Rr(60,90),spin:Rr(-.2,.2),sway:.4,fade:"out",a0:.9},0xf1e6cc,Rr(.35,.6))},
-  dust(p){const n=kfBudget(8);for(let i=0;i<n;i++){const a=Rr(Math.PI*1.05,Math.PI*1.95),sp=Rr(1,2.6);kfSp("blob",p.x+Rr(-20,20),p.y,{vx:Math.cos(a)*sp,vy:Math.sin(a)*sp*.5,drag:.94,life:Rr(45,70),grow:.02,fade:"out",a0:.45},0x9a7a55,Rr(.4,.7))}},
-  drops(p){const n=kfBudget(10);for(let i=0;i<n;i++)kfSp("petal",p.x+Rr(-6,6),p.y+Rr(-4,4),{vx:Rr(-.8,.2),vy:Rr(.5,1.8),g:.22,life:Rr(40,60),fade:"out",a0:.85},Math.random()<.5?0x5a3a20:0x8a6a40,Rr(.18,.32))},
-  splash(p){const n=kfBudget(12);for(let i=0;i<n;i++){const a=Rr(-Math.PI*.9,-Math.PI*.1),sp=Rr(1.5,3.4);kfSp("petal",p.x,p.y,{vx:Math.cos(a)*sp,vy:Math.sin(a)*sp,g:.16,life:Rr(35,55),fade:"out",a0:.85},Math.random()<.5?0xbfe0f0:0xffffff,Rr(.18,.32))}}})})();
+  embers(p){const n=kfBudget(16);for(let i=0;i<n;i++)kfSp("ember",p.x+Rr(-36,36),p.y+Rr(-8,8),{vx:Rr(-.5,.5),vy:Rr(-2.4,-1),drag:.985,life:Rr(45,75),sway:.5,fade:"out",a0:.95},null,Rr(.7,1.3))},
+  ashfall(p){const n=kfBudget(12);for(let i=0;i<n;i++)kfSp("ash",p.x+Rr(-40,40),p.y+Rr(-10,10),{vx:Rr(-.6,.6),vy:Rr(.2,.9),g:.02,life:Rr(90,130),spin:Rr(-.08,.08),sway:.6,fade:"inout",a0:.9},null,Rr(.5,.9))},
+  scraps(p){const n=kfBudget(8);for(let i=0;i<n;i++)kfSp("paper",p.x+Rr(-14,14),p.y+Rr(-30,30),{vx:Rr(-1.6,1.6),vy:Rr(-1.2,.4),g:.08,life:Rr(60,90),spin:Rr(-.2,.2),sway:.4,fade:"out",a0:.95},null,Rr(.5,.85))},
+  dust(p){const n=kfBudget(8);for(let i=0;i<n;i++){const a=Rr(Math.PI*1.05,Math.PI*1.95),sp=Rr(1,2.6);kfSp("smoke",p.x+Rr(-20,20),p.y,{vx:Math.cos(a)*sp,vy:Math.sin(a)*sp*.5,drag:.94,life:Rr(45,70),grow:.004,fade:"out",a0:.5},0x9a7a55,Rr(.4,.7))}},
+  drops(p){const n=kfBudget(10);for(let i=0;i<n;i++)kfSp("ink",p.x+Rr(-6,6),p.y+Rr(-4,4),{vx:Rr(-.8,.2),vy:Rr(.5,1.8),g:.22,life:Rr(40,60),fade:"out",a0:.85},null,Rr(.12,.2))},
+  splash(p){const n=kfBudget(12);for(let i=0;i<n;i++){const a=Rr(-Math.PI*.9,-Math.PI*.1),sp=Rr(1.5,3.4);kfSp("orb",p.x,p.y,{vx:Math.cos(a)*sp,vy:Math.sin(a)*sp,g:.16,life:Rr(35,55),fade:"out",a0:.85},0xbfe0f0,Rr(.2,.35))}}})})();
+/* painted kinds these spawners need (KIT §68 painted-fx; loaded by jfx kfPx before spawning) */
+try{Object.assign(KF_KINDS,{embers:["ember"],ashfall:["ash"],scraps:["paper"],dust:["smoke"],drops:["ink"],splash:["orb"]})}catch(e){}
 /* ---------- wiring: showModal places the tag; chooseM plays the act ---------- */
 (function(){const W=(n,f)=>{const o=window[n];if(typeof o!=="function")return;window[n]=f(o)};
  W("showModal",o=>function(){const r=o.apply(this,arguments);try{const m=typeof Q!=="undefined"&&Q[0];const M=document.getElementById("modal");
@@ -27954,7 +28162,7 @@ window.kitPhTone=kitPhTone;window.KIT_PH=KIT_PH;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="79e571bb13ba";window.CTM_BUILD=BUILD;
+const BUILD="8aaf6e6adb15";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
