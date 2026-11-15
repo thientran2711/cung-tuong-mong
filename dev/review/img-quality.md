@@ -40,3 +40,4 @@ Bài thử `probe` (index.html thật, ảnh từ CDN, SW chặn; kiếp mới +
 ## Đáng lo (không chặn)
 - Fold: người toàn thân trên sân khấu (fig 900 px) phóng 1,43–1,53 — cần xuất lại fig ≥1100 px (IMG_QUALITY.md "Cần vẽ/cắt lại"), việc tranh, không do mã.
 - jimg thêm 1 dòng <style id="jimg"> (ẩn hình thật của người lạ trên sân khấu khi bóng chưa tải) — quy tắc ẩn, không phải thành phần giao diện riêng.
+- Main d50f5f772 (jkpor, không do nhánh): img/POR_FACE.json 404 trên CDN — jkpor chạy không có hộp mặt (dùng z mặc định). Cần đẩy CDN.
