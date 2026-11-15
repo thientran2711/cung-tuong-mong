@@ -150,9 +150,9 @@ Object.assign(ACTDOM,{trinhth:"Danh",trinhhh:"Danh",uyhiep:"Mưu kế",banphe:"M
 /* the act card lines read the target being shown (true numbers per target) */
 function j78out(k,a,t){const n=evG(a,t);const q=queenP();const m=has("nongnay")?3:has("nhantu")?1:2;const W=t?j78who(t):"nàng";
  if(k==="trinhth")return[`${W} Sủng -10 · Thái hậu quý ngươi +2`,"Thái hậu quý ngươi -4"];
- if(k==="trinhhh")return[`${W} bị cấm túc ${m} tháng`,"Hoàng hậu thân -5"];
+ if(k==="trinhhh")return[`${W} bị cấm túc ${m} tháng`,"Hoàng hậu thiện cảm -5"];
  if(k==="uyhiep")return[`Bạc +${t?j78pay(t):0} · kèm: ${W} oán ngươi +10`,`Danh -3 · ${W} oán ngươi +15`];
- if(k==="banphe"){const b=t&&j78buyer(a,t);return[`Bạc +${15*n} · ${b?j78who(b):"người mua"} thân +8 và nắm ${n} chứng cứ về ${W} · kèm: ${W} oán ngươi +5`,""]}
+ if(k==="banphe"){const b=t&&j78buyer(a,t);return[`Bạc +${15*n} · ${b?j78who(b):"người mua"} thiện cảm +8 và nắm ${n} chứng cứ về ${W} · kèm: ${W} oán ngươi +5`,""]}
  if(k==="tieuhuy")return[`${W} quý ngươi +${Math.min(30,8*n)} · ${W} oán ngươi -${Math.min(30,10*n)} · Đức +2`,""];
  return null}
 ["trinhth","trinhhh","uyhiep","banphe","tieuhuy"].forEach(k=>{try{Object.defineProperty(AOUT,k,{configurable:true,enumerable:true,get(){const t=J78.cardV;const o=j78out(k,S,t);return o}})}catch(e){}});
@@ -182,9 +182,9 @@ function evidenceActs(p){if(!S||!p||p===S)return[];const n=evG(S,p);const i=riva
  add("tocao",ok=>{const cr=realCrime(p);return{odds:odds("tocao",odT(S,50+n*10)),why:busy()||(n<1?nf(1):!cr?"nàng không có tội thật nào (vượt phẩm, đồ cấm, từng bày mưu)":""),cost:["2 khắc","Chứng cứ -1"],gain:[`${W} bị giáng xuống ${RANKS[Math.max(0,rkOf(p)-1)].n} vì ${cr||"tội thật"}`,"Danh +3"],fail:["Danh -5"]}});
  add("expose",ok=>({odds:odds("expose",odT(S,45+n*8)),why:busy()||(!hasScandal(p)?"nàng không có chuyện tư tình bị lộ":n<2?nf(2):""),cost:["2 khắc",`Chứng cứ -${n} (dùng hết)`],gain:[`${W} bị ban chết hoặc vào lãnh cung`],fail:["ngươi bị tội vu khống: vào lãnh cung hoặc giáng 2 bậc"]}));
  add("trinhth",ok=>({odds:odds("trinhth",odA(S,40+n*10+S.th/5)),why:busy()||(n<1?nf(1):S.thDead?"Thái hậu đã băng hà":rkOf(p)>=7?"Thái hậu không xét tội Hoàng hậu":""),cost:["2 khắc","Đức -2","Chứng cứ -1"],gain:[`${W} Sủng -10`,"Thái hậu quý ngươi +2"],fail:["Thái hậu quý ngươi -4"],risk:[`${W} quý ngươi -15`]}));
- add("trinhhh",ok=>{const q=queenP();return{odds:q&&q!==S&&q!==p?odds("trinhhh",cl(35+aff(q,S)/2+n*8,5,95)):"",why:busy()||(!q?"chưa có Hoàng hậu":q===S?"ngươi là Hoàng hậu: dùng Xử tội":q===p?"không trình Hoàng hậu tội của chính nàng":n<2?nf(2):""),cost:["2 khắc","Chứng cứ -2"],gain:[`${W} bị cấm túc ${m} tháng`],fail:["Hoàng hậu thân -5"],risk:[`${W} quý ngươi -10`]}});
+ add("trinhhh",ok=>{const q=queenP();return{odds:q&&q!==S&&q!==p?odds("trinhhh",cl(35+aff(q,S)/2+n*8,5,95)):"",why:busy()||(!q?"chưa có Hoàng hậu":q===S?"ngươi là Hoàng hậu: dùng Xử tội":q===p?"không trình Hoàng hậu tội của chính nàng":n<2?nf(2):""),cost:["2 khắc","Chứng cứ -2"],gain:[`${W} bị cấm túc ${m} tháng`],fail:["Hoàng hậu thiện cảm -5"],risk:[`${W} quý ngươi -10`]}});
  add("uyhiep",ok=>{const g=j78pay(p);return{odds:odds("uyhiep",odA(S,45+n*8-witOf(p)/5)),why:busy()||(n<1?nf(1):g<10?"nàng không còn đủ 10 lượng":""),cost:["2 khắc","Chứng cứ -1 (trả lại khi nàng chịu chi)"],gain:[`Bạc +${g}`],fail:["Danh -3",`${W} oán ngươi +15`],risk:[`${W} oán ngươi +10`].concat(together(S,p)?[]:[`sai người đi: kẻ đi bị bắt, khai ra ngươi (${W} nắm 1 chứng cứ): ${chanceW(confessRisk(bestSent(S)))}`])}});
- add("banphe",ok=>{const b=j78buyer(S,p);return{why:busy()||(n<1?nf(1):!b?"không ai đủ ghét nàng để mua":""),cost:["2 khắc",`Chứng cứ -${n} (dùng hết)`],gain:[`Bạc +${15*n}`].concat(b?[`${j78who(b)} thân +8`,`${j78who(b)} nắm ${n} chứng cứ về ${W}`]:[]),risk:[`${W} oán ngươi +5`],buyer:b?j78Ref(b):null}});
+ add("banphe",ok=>{const b=j78buyer(S,p);return{why:busy()||(n<1?nf(1):!b?"không ai đủ ghét nàng để mua":""),cost:["2 khắc",`Chứng cứ -${n} (dùng hết)`],gain:[`Bạc +${15*n}`].concat(b?[`${j78who(b)} thiện cảm +8`,`${j78who(b)} nắm ${n} chứng cứ về ${W}`]:[]),risk:[`${W} oán ngươi +5`],buyer:b?j78Ref(b):null}});
  add("tieuhuy",ok=>({why:busy()||(n<1?nf(1):""),cost:["2 khắc",`Chứng cứ -${n} (dùng hết)`],gain:[`${W} quý ngươi +${Math.min(30,8*n)}`,`${W} oán ngươi -${Math.min(30,10*n)}`,"Đức +2"]}));
  if(S.rank>=7)R0.push({k:"judge",n:"Xử tội",odds:"",why:busy()||(n<2?nf(2):""),cost:["2 khắc",`Chứng cứ -${n} (dùng hết)`],gain:[n>=3?`${W} bị giáng một bậc hoặc cấm túc ${m} tháng`:`${W} bị cấm túc ${m} tháng`],fail:[],risk:[`${W} quý ngươi -10`,`${W} oán ngươi +6`],go:()=>evidenceDo(p.id,"judge")});
  /* one kit price line per act, ready for pbtn/kitParse */
