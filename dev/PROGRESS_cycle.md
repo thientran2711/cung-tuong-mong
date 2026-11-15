@@ -39,3 +39,12 @@ Branch `review/cycle` from origin/main e3fc5f61. Module `dev/build/jcycle.js` (a
 
 ## Tests
 `node dev/test/cycle.js dev/index.html [outdir] [sizes]` — logic once + book panel + Kính sự phòng cards per size; see report.
+
+## State (resume notes)
+- Pushed: review/cycle (commits daee3400 code+test, 14993f36 test/PROGRESS/site rebuilt). Nothing local-only; no art generated.
+- dev/test/cycle.js on the site build: ALL OK at 755x1000, 1000x755, 1180x820, 1366x1024, 844x390 (@2/@3), 390x844 rotate prompt.
+- coop-e2e: first run timed out loading the page (machine load avg ~42 on 4 CPUs, page.goto 30 s default);
+  re-run with a 180 s default timeout (temporary local copy, not committed) was in progress when the account move was announced.
+- Next: re-run `NODE_PATH=$(npm root -g) node dev/test/coop-e2e.js <outdir>` on a quieter machine (after `python3 dev/build/assemble.py`);
+  if it times out only on page load, raise p.setDefaultTimeout in the test locally.
+- Merge note: assemble.py list conflicts trivially with review/thaiy (adds jthaiy.js) — keep both; jcycle.js stays last.
