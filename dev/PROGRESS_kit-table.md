@@ -49,4 +49,9 @@ Status: SẴN SÀNG KIỂM (branch pushed). Worktree deleted after push.
   §53 sections / samples), built files rebuilt. Rerun on the new merge: kit-table.js 755x1000 1123/0 · 1000x755 1129/0 · 1180x820 1118/0 ·
   1366x1024 1139/0 · 844x390 1131/0 · 390x844 1127/0; pane-bar 48/48 (bad 0); tabs-kit-shots 60/60 (bad 0); old save (main afb2676a2
   build) 6 sizes 8/8 tabs, no overflow; 0 page errors everywhere.
+- Third main merge (main 27491781f: kit-fig2 batch 1 §48–§50, promo-exam §55, j83-variety, toilette): conflicts j6 + jtabs (main added the
+  Lãnh cung case and the exam chips to Sắc phong; kept them, requirement list = kitReqRows), KIT.md + jkitpage (kept §48–§50 and §51), built
+  files rebuilt. The §51 compact-act grid rule in jk4 survived kit-fig2's §43 reference copy. Rerun: kit-table.js 755x1000 1141/0 ·
+  1000x755 1121/0 · 1180x820 1156/0 · 1366x1024 1148/0 · 844x390 1144/0 · 390x844 1117/0; pane-bar 48/48; tabs-kit-shots 60/60; old save
+  (main 27491781f build) 6 sizes 8/8 tabs, no overflow; 0 page errors.
 - Result: PASS (see report sha).
