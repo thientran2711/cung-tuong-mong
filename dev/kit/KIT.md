@@ -1031,6 +1031,15 @@ card fell back to the generic Học tập picture).
 | name tags under figures | j59 `.tag` (one builder, j59tagHTML) | — | single path ✔ |
 | headers / panels | kitPanel (`.dlg.kpanel`) · old `.dlg` dialogs | kitPanel | mostly migrated (26.x); old `.dlg` left in minigames |
 
+
+### 32.5 DIALOG — ONLY THE OPTIONS SCROLL (owner 11/15, dev/owner-shots/1115-dlg-scroll-*.jpg) — `kitDlgFit` (jk4, wraps showModal)
+Every dialog / event card with an options list (`#mb > .opts`: kitEventStage figures, headArt, speaker portrait, story text, notes —
+week events, encounters, choice cards) is a flex column: title, picture / figures and story text are FIXED (flex:none) and stay visible;
+ONLY the options list scrolls (flex:1, overflow auto, rows keep their full height) with a soft top shadow once scrolled (`.kdsh`).
+The picture is capped at 28vh (24vh under 1000 px wide); if the fixed part still takes more than 55 % of the dialog, the picture is
+compressed first (down to 14vh, `--kdpic`), figures scale with it. Dialogs without `.opts` (Đã rõ cards, person cards, identity /
+Luân hồi panels with `.kpscopts`) are unchanged. Shots: dev/shots/book-release/dlg/.
+
 ### MAP LABELS (book release: KIT §34.1d) — Map labels — one look for every place, locked or not (owner 11/15 "map grey box", j41 accSpot)
 Every place on Dư đồ wears the SAME label: name + "N bóng · K khắc" (+ silhouettes). A place she cannot enter now adds only a small
 lock mark (`.mlock`, after the name) — no grey box over the map art, no reason line, no buttons on the map, nothing cut. Tapping the
@@ -1157,17 +1166,19 @@ Stage rule (j59 — every room / place / servant road / lãnh cung stage):
 2. People use the FULL stage width (owner 11/15): they may stand behind/under the RIGHT plaque column — its plaques float on top on a
    solid card (`.kshR .k3p` opaque). The left gutter (if any) is kept. An EMPTY plaque column reserves no gutter (jk3 k3Gut).
 3. Widths count the visible body (kitFigBody alpha bbox l..r; silhouettes too), not transparent margins.
-4. Up to **4 people at once on iPad (3 on Fold / phones)** at that one scale (owner 11/15). They are packed by visible body width;
-   each figure may step back over its left neighbour by up to **15 %** of its own body (later ones in front, same scale, no back
-   row). Only when more than 4 (3) people are there, or they still do not fit at 15 %, the others go to the strip: equal whole-person
-   slots (slot = widest visible body × .85 or widest name chip), at most 4 (3) visible, scroll-snap per person, the strip box padded
-   so end sleeves are not clipped where the room allows. The count chips "› N" / "N ‹" stand in the stage's bottom corners in the
-   name row under the feet, never over a figure. Names are never cut: overlapping chips go to two rows (stagger).
+4. Up to **4 people at once on iPad, 3 on Fold / phones** (her included) at that one scale (owner 11/15). They are packed by their
+   **CORE** body column (kitFigBody cl..cr = narrowest torso/skirt run on the 35–80 % band × 1.2; sleeve flare beyond it is not
+   counted): each figure may step back over its left neighbour by up to **35 % of its core on iPad, 25 % on Fold** (later ones in
+   front, same scale, no back row). The outer sleeves of the first and last figure are counted, so no sleeve is ever clipped at the
+   stage edge. Figures may stand under the right plaque column (plaques float on top, solid).
+   When more people are there than fit, the stage shows a **page** of whole people (as many as fit packed, ≤ 4 / 3); the count
+   chips "› N" / "N ‹" in the stage's bottom corners (name row, under the feet) turn to the next / previous people. No clipped
+   scroll strip. Names are never cut: neighbouring chips that would touch go to two rows (stagger); chips are clamped inside the
+   stage again after late modules fill them.
 5. No "her + 1" shrink (owner 11/15). The one remaining exception is a stage narrower than ONE whole person, which scales down to
    exactly one person.
-   Geometry (measured 11/15): the iPad left page is 596 px (1180) / 691 px (1366) wide; one consort at .79 is 200–260 px of visible
-   body, the "Người lạ" silhouette ~300–390 px (wide sleeves). So 3–4 at once fit only for slim figures; with wide robes / silhouettes
-   the strip shows 2 + "› N". Fold 686 (670 px stage, shorter) shows 3.
+   Measured 11/15 (Ngự hoa viên; dev/shots/book-release/stage/): 2, 3 and 4 people stand whole at 1180 (4 + "› 2" with 6);
+   1366 shows 3 + "› 1" when the 4 wear wide court robes (taller stage → wider figures); Fold 686 shows 3 + "› N".
 6. Name chips are never cut: in the strip each slot is at least chip width + 8 px.
 
 Event stage (jk4 kitStageFig / kitEventStage, week-book person pages): each figure carries `--kfr = KIT_FIG.fac/KIT_FIG.man`,
@@ -1182,7 +1193,7 @@ Measured BEFORE 11/15 (.86 / ×1.08, superseded — see the book-release table i
 | 1366x1024@2 | .83 / .83 | .75 / .81 man | .62 + "› 1" (was .30, cut) | .62 + counts |
 | 1024x768@2 | .78 / .84 man | .60 + "› 1" | .60 | .60 + counts |
 
-**KIT 33.6 · kitFigBody(src, cb)** (jkit.js, same code as review/men jk4): the ONE body measurement — alpha bbox + head top from the
+**KIT 33.6 · kitFigBody(src, cb)** (jkit.js; review/men jk4 has the same code — drop that copy when merging, jkit adds cl/cr): the ONE body measurement — alpha bbox + CORE column cl..cr + head top from the
 forehead skin minus a hair allowance; j59 room/place stages (J59BB cache) and jk4 event stages size every figure by it.
 
 **KIT 33.4 · kitImgErr(img, {sel, cls, text, swap})** (jkit.js): the ONE null-safe fallback for inline `<img onerror>`;
