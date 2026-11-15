@@ -11,7 +11,7 @@ function tuoi(n){return n>0?`Tuổi <b>${n}</b>`:""}
 /* children: a variant at birth, the face band follows the age (initials if the file is missing) */
 function kidBand(a){return a<=2?"baby":a<=6?"small":a<=12?"child":"teen"}
 function kidFace(k){const mom=allKids().find(([x])=>x===k);const mr=mom?(mom[1]?(mom[1].queen?7:mom[1].rank):S.rank):S.rank;return Object.assign(kidFace0(k),{rk:"kid c"+mr,rw:k.sex==="m"?"Hoàng tử":"Công chúa"})}
-function kidFace0(k){if(k.fv==null||k.fv>4)k.fv=kidVar(k);return{src:k.fv?`img/face-${k.sex==="m"?"prince":"princess"}-${kidBand(k.age||0)}-${k.fv}.webp`:"",hue:0,ini:k.sex==="m"?"子":"女",col:k.heir?"#d9b25f":"#c98aa0"}}
+function kidFace0(k){if(k.fv==null||k.fv>4)k.fv=kidVar(k);return{src:k.fv?`img/face-${k.sex==="m"?"prince":"princess"}-${kidBand(k.age||0)}-${k.fv}.webp`:"",hue:0,ini:k.sex==="m"?"Tử":"Nữ",col:k.heir?"#d9b25f":"#c98aa0"}}
 
 /* ===== FACE REGISTRY: one face per person, by role (+ age band for eunuchs), drawn without repeats; saved on the person (fc) =====
    Pools are the img/ file lists; a file that fails to load falls back to the older inline AVATARS face (or the initial medallion).
@@ -79,6 +79,6 @@ function dilLine(c){const fx=fmt(c.fx||{}),x=c.x||"";const src=String(c.go||"")+
  if(!/hỏng/.test(s))s+=" · hỏng: không mất gì";return [fx?"ngay: "+fx:"",s].filter(Boolean).join(" · ")}
 /* the real speaker of an event: a named eunuch of that palace or of the court, a spy of hers; no speaker -> the place art */
 function pEunOf(p){const e=(p&&p.staff||[]).find(s=>s.role!=="maid");return e?Object.assign(pServ(e),{nm:e.name}):pEunCourt("ksp")}
-function pEunCourt(k){const c=S.court&&S.court[k];return{rk:k==="tq"?"eu3":"eu2",rw:k==="tq"?"Tổng quản thái giám":"Thái giám",src:courtSrc(k,c),hue:0,ini:"宦",col:"#8a8aa0",nm:c?c.name:""}}
+function pEunCourt(k){const c=S.court&&S.court[k];return{rk:k==="tq"?"eu3":"eu2",rw:k==="tq"?"Tổng quản thái giám":"Thái giám",src:courtSrc(k,c),hue:0,ini:"Hoạn",col:"#8a8aa0",nm:c?c.name:""}}
 function pSpy(){const s=(S.staff||[]).find(x=>x.spyFor==="me")||(S.staff||[]).find(x=>x.role==="maid");return s?Object.assign(pServ(s),{nm:s.name}):pMaid()}
 function evArt(){try{const P=placeOf(S.place);return SCIMG[P.sc]?`img/${SCIMG[P.sc]}.webp`:""}catch(e){return""}}

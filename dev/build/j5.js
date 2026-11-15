@@ -17,7 +17,7 @@ const YQ=[{q:"Cảm phong hàn, sợ lạnh, không ra mồ hôi. Dùng vị nà
  {q:"Ba thang thuốc an thai. Thang nào bị bỏ xạ hương?",a:"Thang hắc nồng, mùi hương ngai ngái",w:["Thang đắng nhẹ mùi ngải cứu","Thang ngọt vị táo đỏ","Thang thơm mùi trần bì"]},
  {q:"Ba đĩa bánh. Đĩa nào bị hạ độc?",a:"Bánh hoa quế: mèo ngửi rồi bỏ đi",w:["Bánh đậu xanh: mèo ăn sạch","Bánh hạt sen: nếm thử không sao","Bánh táo: thái giám nếm vẫn khỏe"]},
  {q:"Hoàng tử lên đậu, sốt cao, nổi mụn khắp người. Phải làm gì?",a:"Kiêng gió, giữ ấm, cách ly",w:["Tắm nước lạnh cho hạ sốt","Cho ra vườn hóng gió","Cho chơi cùng các hoàng tử khác"]}];
-const HOA=[["梅","Mai"],["蘭","Lan"],["菊","Cúc"],["竹","Trúc"],["山","Núi"],["水","Sông"],["鶴","Hạc"],["舟","Thuyền"]];
+const HOA=[["Mai",""],["Lan",""],["Cúc",""],["Trúc",""],["Núi",""],["Sông",""],["Hạc",""],["Thuyền",""]];
 const VU=[["↑","Giơ tay áo"],["←","Xoay trái"],["→","Xoay phải"],["↓","Cúi mình"]];
 const shuf=a=>a.slice().sort(()=>Math.random()-.5);
 let mgStop=null,mgDone=true;

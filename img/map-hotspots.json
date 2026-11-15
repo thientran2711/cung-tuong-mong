@@ -422,5 +422,52 @@
    "dressing": "new couplets, all lanterns lit; đông, snow"
   }
  },
- "festivalsNote": "Lunar month = game S.month (1..12); tuan = game tuần index (0 thượng 1-10, 1 trung 11-20, 2 hạ 21-30). A festival picture replaces map-<season>-<buoi> during its tuần; for a buổi with no festival picture, fall back to the season picture. Same framing as the season pictures (measured: 0 px shift on all 14), so the hotspots are unchanged."
+ "festivalsNote": "Lunar month = game S.month (1..12); tuan = game tuần index (0 thượng 1-10, 1 trung 11-20, 2 hạ 21-30). A festival picture replaces map-<season>-<buoi> during its tuần; for a buổi with no festival picture, fall back to the season picture. Same framing as the season pictures (measured: 0 px shift on all 14), so the hotspots are unchanged.",
+ "zones": {
+  "hc": {
+   "name": "Hậu cung",
+   "places": [
+    "vuon",
+    "kn",
+    "tn",
+    "lc",
+    "home",
+    "r*"
+   ],
+   "rule": "cấm nam nhân, trừ Hoàng thượng, thái giám, thái y hay thợ Nội vụ phủ có lệnh"
+  },
+  "nd": {
+   "name": "Nội đình",
+   "places": [
+    "dtd",
+    "thu"
+   ],
+   "rule": "thị vệ canh cửa; quan lại vào chầu; phi tần vào khi được triệu"
+  },
+  "dv": {
+   "name": "Nha sở",
+   "places": [
+    "tyv",
+    "ksp"
+   ],
+   "rule": "thái y, thái giám làm việc"
+  },
+  "nt": {
+   "name": "Ngoại triều",
+   "places": [
+    "ngt"
+   ],
+   "rule": "cấm nữ quyến"
+  }
+ },
+ "outerCourt": {
+  "name": "Ngoại triều",
+  "box": {
+   "x": 0.445,
+   "y": 0.805,
+   "w": 0.11,
+   "h": 0.12
+  },
+  "note": "south gate hall; grey, not enterable for women (jmen)"
+ }
 }

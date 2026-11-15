@@ -4,7 +4,7 @@ const SEAK={"Xuân":"xuan","Hạ":"ha","Thu":"thu","Đông":"dong"},BUK=["sang",
 function mapImg(){return `img/map-${SEAK[SEASON[S.month-1]]||"ha"}-${BUK[S.buoi||0]}.webp`}
 function mapSpots(){const L=[];for(const k in MAPH.places){if(k==="kn"&&!qOn())continue;L.push({k,box:MAPH.places[k].box,n:k==="home"?"Tẩm cung":placeOf(k).n})}
  const pals=[...new Set(liveRivals(false).filter(v=>palaceOf(v)!=="home"&&palaceOf(v)!=="kn").map(v=>palaceOf(v)))];pals.forEach((k,i)=>{const s=MAPH.rivalSlots[i];if(!s)return;const v=RV(+k.slice(1));L.push({k,box:s.box,n:v?`Cung ${v.name.split(" ").pop()}`:s.name,small:true,v})});return L}
-function mapHTML(){const W=S.where||{};const disR=k=>S.out?"đang ở lãnh cung":S.confined?`đang cấm túc (${S.confined} tháng)`:S.place===k?"đang ở đây":k!=="home"&&!can(travel(S.place,k)+1)?"hết khắc":"";
+function mapHTML(){const W=S.where||{};const disR=k=>S.out?"đang ở lãnh cung":S.confined?`đang cấm túc (${S.confined} tháng)`:S.place===k?"đang ở đây":k!=="home"&&!walkOk(travel(S.place,k))?(used>=4?"hết khắc":`đi ${travel(S.place,k)} khắc`):"";
  if(window.__mapList){return `<div class="ph"><button class="btn" data-maplist="0">Xem bản đồ hoàng cung<small>toàn cảnh</small></button></div>`+mapHTMLgrid()}
  const z=window.__mapZ||1;
  return `<div class="mapv"><div class="maptools"><span class="past">${SEASON[S.month-1]} · ${BUOI[S.buoi||0]} · còn ${4-used} khắc · đi gần 1 khắc, xa 2</span><span><button class="btn mz" data-mapz="-1" aria-label="Thu nhỏ">−</button><button class="btn mz" data-mapz="1" aria-label="Phóng to">+</button><button class="btn mz" data-maplist="1">Danh sách</button></span></div>

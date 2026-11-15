@@ -22,7 +22,7 @@ function start(){
   flip();newLots();deal();render();
 }
 function homePeople(){const p=[{kind:"maid",name:S.maid.name,ini:S.maid.name.split(" ").pop()[0],col:"#b9a48a",info:`Cung nữ thân tín · lòng ${S.maid.loyal}`}];
-  S.kids.filter(k=>k.alive).forEach(k=>p.push({kind:"kid",ref:k,name:k.name,ini:k.sex==="m"?"子":"女",col:k.heir?"#f0d070":"#c9a0e0",info:`${k.age} tuổi · Sức khỏe ${k.hp} · Tài ${k.tal} · Hoàng thượng thương ${k.fond}${k.heir?" · Thái tử":""}`}));return p}
+  S.kids.filter(k=>k.alive).forEach(k=>p.push({kind:"kid",ref:k,name:k.name,ini:k.sex==="m"?"Tử":"Nữ",col:k.heir?"#f0d070":"#c9a0e0",info:`${k.age} tuổi · Sức khỏe ${k.hp} · Tài ${k.tal} · Hoàng thượng thương ${k.fond}${k.heir?" · Thái tử":""}`}));return p}
 
 function pool(){const L=S.emp.likes,K=S.emp.known,tt=has("trongtai")?2:1;
  const A=[
@@ -71,6 +71,7 @@ function deal(){
 /* place acts also offered directly as cards: same option object as at the place (talkOpts), run once by runOpt */
 function directActs(){const A=[],mk=(p,i,n,t)=>{const a=talkOpts(p)[i];if(a)A.push(Object.assign({},a,{n,t}))};
  if(!S.thDead)mk({kind:"th"},0,"Thỉnh an Thái hậu","Sang Đức Thọ cung vấn an, chép kinh cho Thái hậu.");
+ /* hotfix 11/15: the deck act is the "Thỉnh an" talk option (moves S.hh), not option 0 "Hỏi han sức khỏe" whose run() a deck act never calls */
  if(qOn())mk({kind:"hh",ref:rivals[0]},Math.max(0,talkOpts({kind:"hh",ref:rivals[0]}).findIndex(a=>a.n==="Thỉnh an")),"Thỉnh an Hoàng hậu",`Sang Càn Ninh cung vấn an Hoàng hậu ${rivals[0].name}.`);A.forEach(a=>{a.lock=false;a.b=0});
  mk({kind:"ksp"},0,"Hối lộ Kính sự phòng","Đút lót Tổng quản thái giám giữ thẻ bài.");
  return A}
@@ -97,19 +98,19 @@ function placeOf(k){if(k==="home")return{k,n:"Tẩm cung của ngươi",d:"Cung 
 function rp(v){return{kind:"rival",ref:v,name:v.name,ini:v.name.split(" ").pop()[0],col:RCOL[v.queen?7:v.rank],info:`${v.queen?"Hoàng hậu":RANKS[v.rank].n} · ${trChip(v)} · Với ngươi: Thiện cảm ${aff(v,S)} · Oán ${oan(v,S)} · Ghen ${v.ghen}${sameHouse(S,v)?" · cùng cung":""}`}}
 function goTo(k){if(S.dead||Q.length||S.out)return;popIdx=null;popMsg="";
  if(k==="home"){S.place="home";S.visit={k,people:homePeople(),talked:false,tk:{}};render();return}
- const tc=travel(S.place,k);if(!can(tc+1)||S.confined)return;const P=placeOf(k);spend(tc);S.place=k;const W=S.where||{};
- const ppl=[];let msg="";const emp={kind:"emp",name:"Hoàng thượng",ini:"帝",col:"#f0d070",info:`${empName()} · ${MOODS[S.emp.mood][0].toLowerCase()}`};
+ const tc=travel(S.place,k);if(!walkOk(tc)||S.confined)return;const P=placeOf(k);spend(tc);S.place=k;const W=S.where||{};
+ const ppl=[];let msg="";const emp={kind:"emp",name:"Hoàng thượng",ini:"Đế",col:"#f0d070",info:`${empName()} · ${MOODS[S.emp.mood][0].toLowerCase()}`};
  const here=liveRivals(true).filter(v=>W[v.id]===k);const empHere=W.emp===k;
  if(k==="vuon"){if(empHere){ppl.push(emp);apply({sung:S.emp.mood<=1?3:1});msg="Ngươi tình cờ gặp Hoàng thượng đang dạo bước. Ngài dừng lại nhìn ngươi."}else msg="Hoa nở rộ. Hoàng thượng không ra vườn hôm nay."}
  if(k==="thu"){if(empHere){if(S.sung<40&&!roll(od(40+S.sung+mm()))){apply({sung:-3});S.visit={k,people:[emp],talked:true,tk:{},msg:"Hoàng thượng cau mày: “Trẫm đang bận việc nước.” Ngươi phải lui ra."};log("Đến Cần Chính điện, bị đuổi về.");render();return}
    ppl.push(emp);msg="Hoàng thượng đang phê tấu chương, ngẩng lên nhìn ngươi."}else msg="Ngài không có ở thư phòng."}
  if(k==="dtd"){if(S.sung<50)msg="Thái giám chặn cửa: “Không có khẩu dụ, nương nương xin hồi cung.”"+(empHere?" Hoàng thượng ở bên trong, ngươi không được gặp.":"");else if(empHere){ppl.push(emp);msg="Hoàng thượng đang nghỉ, cho ngươi vào hầu."}else msg="Hoàng thượng không có ở điện."}
- if(k==="tn"){if(S.thDead)msg="Đức Thọ cung vắng lặng từ ngày Thái hậu băng hà.";else ppl.push({kind:"th",name:"Thái hậu",ini:"慈",col:"#c9a0e0",info:`Thái hậu · lòng ${S.th}`})}
- for(const v of here){if(v.ill)v.ill.known=true;if(v.queen&&qOn())ppl.push({...rp(v),kind:"hh",name:`Hoàng hậu ${v.name}`,ini:"鳳"});else ppl.push(rp(v))}
- if(P.v&&!here.includes(P.v)&&P.v.alive&&!P.v.out){ppl.push({kind:"chest",ref:P.v,name:`Rương của ${P.v.name}`,ini:"箱",col:"#8a6a4a",info:"Chủ nhân đi vắng"});msg=`${P.v.name} không có ở cung.`}
- if(k==="tyv")ppl.push({kind:"ty",name:"Thái y Trương",ini:"醫",col:"#8fc38a",info:"Thái y viện"});
- if(k==="ksp")ppl.push({kind:"ksp",name:"Tổng quản",ini:"宦",col:"#b9a48a",info:"Giữ thẻ bài các phi tần"});
- if(k==="lc"){const f=rivals.filter(v=>v.alive&&v.out);(f.length?f.slice(0,3):[null]).forEach(v=>ppl.push(v?{kind:"fallen",ref:v,name:v.name,ini:v.name.split(" ").pop()[0],col:"#6a7a8a",info:"Phế phi"}:{kind:"fallen",name:"Phế phi họ Lý",ini:"李",col:"#6a7a8a",info:"Phế phi"}))}
+ if(k==="tn"){if(S.thDead)msg="Đức Thọ cung vắng lặng từ ngày Thái hậu băng hà.";else ppl.push({kind:"th",name:"Thái hậu",ini:"Từ",col:"#c9a0e0",info:`Thái hậu · lòng ${S.th}`})}
+ for(const v of here){if(v.ill)v.ill.known=true;if(v.queen&&qOn())ppl.push({...rp(v),kind:"hh",name:`Hoàng hậu ${v.name}`,ini:"Phượng"});else ppl.push(rp(v))}
+ if(P.v&&!here.includes(P.v)&&P.v.alive&&!P.v.out){ppl.push({kind:"chest",ref:P.v,name:`Rương của ${P.v.name}`,ini:"Rương",col:"#8a6a4a",info:"Chủ nhân đi vắng"});msg=`${P.v.name} không có ở cung.`}
+ if(k==="tyv")ppl.push({kind:"ty",name:"Thái y Trương",ini:"Y",col:"#8fc38a",info:"Thái y viện"});
+ if(k==="ksp")ppl.push({kind:"ksp",name:"Tổng quản",ini:"Hoạn",col:"#b9a48a",info:"Giữ thẻ bài các phi tần"});
+ if(k==="lc"){const f=rivals.filter(v=>v.alive&&v.out);(f.length?f.slice(0,3):[null]).forEach(v=>ppl.push(v?{kind:"fallen",ref:v,name:v.name,ini:v.name.split(" ").pop()[0],col:"#6a7a8a",info:"Phế phi"}:{kind:"fallen",name:"Phế phi họ Lý",ini:"Lý",col:"#6a7a8a",info:"Phế phi"}))}
  if(!msg)msg=ppl.length?`Ở đây có ${ppl.length} người.`:"Không gặp ai.";
  S.visit={k,people:ppl,talked:false,tk:{},msg};log(`Đến ${P.n}.`);render()}
 function curPeople(){return S.visit?S.visit.people:[]}
@@ -128,7 +129,7 @@ function talkOpts(p){const E=S.emp,K=E.known,L=E.likes,b=bestArt(),v=p.ref;
    {n:"Xin Thái hậu đỡ lời",o:od(45+S.th/3),lock:S.th<30,t:"cần Thái hậu 30",w:{danh:4,hh:5},x:"Hoàng hậu nể mặt",l:{th:-5}},
    {n:t?`Kể tội ${t.name}`:"Kể tội một phi tần",lock:!t,t:"cần chứng cứ",o:t?od(40+t.ev*10+S.th/5):0,w:{th:2,duc:-2},x:"nàng bị phạt",l:{th:-4},go:()=>{t.rel-=15;t.ev--;t.sung=cl(t.sung-10,0,100);log(`${t.name} bị Thái hậu quở trách, mất sủng.`)}}]}
  if(p.kind==="hh"){return topicOpts(v).filter(a=>["Hỏi han sức khỏe","Tạ lỗi","Nhún nhường","Chia sẻ bí mật"].includes(a.n)).concat([
-   {n:"Thỉnh an",lock:(S.buoi||0)!==0,t:"chỉ buổi sáng",c:{suc:-5},o:od(70),w:{hh:8,danh:2,duc:1},l:{hh:-3},go:()=>{v.ghen=cl(v.ghen-5,0,100)}},
+   {n:"Thỉnh an",lock:(S.buoi||0)!==0,t:"chỉ buổi sáng",c:{suc:-5},o:od(70),w:{hh:4,danh:2,duc:1},l:{hh:-3},go:()=>{v.ghen=cl(v.ghen-5,0,100)}},
    {n:"Xin Hoàng hậu che chở",lock:S.hh<20,t:"cần Hoàng hậu 20",o:od(45+S.hh/3),w:{hh:3},x:"2 tháng phi tần khó hại ngươi",l:{hh:-5},go:()=>S.shield=2},
    {n:"Khiêu khích",o:100,w:{danh:2,hh:-15},x:"Hoàng hậu ghen +15",go:()=>{v.ghen=cl(v.ghen+15,0,100);relAdd(S,v,-10)}}])}
  if(p.kind==="rival"){const A=topicOpts(v);

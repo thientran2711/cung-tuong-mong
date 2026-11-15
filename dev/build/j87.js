@@ -104,7 +104,7 @@ function kitBook(spec){spec=spec||{};const rm=()=>{try{return reducedMotion()}ca
   logical=(sheets[cur]&&(sheets[cur].front.src||sheets[cur].front.kind))||null}
 
  /* ---- the turn: p = 0 (flat, right) … 1 (turned, left) ---- */
- /* the turn is a CURL (kitCurl v2, jbook / KIT §34.1): the corner lifts, the sheet folds on a diagonal, its back shows, shadow along the fold */
+ /* the turn: the WHOLE sheet swings around the spine (kitCurl = kitSheetTurn, jbook / KIT §34.1, owner 11/15 10:00Z); content printed on the sheet */
  function setTurn(el,p){const c=el&&el.__curl;if(c)c.set(p)}
  function beginTurn(i,dir){const els=sheetEls();const el=els[i];if(!el)return null;
   for(let k=i-2;k<=i+2;k++)if(els[k])els[k].style.visibility="visible";if(mode==="single"&&els[i+1]&&i===cur)els[i+1].style.visibility="visible";
@@ -113,15 +113,18 @@ function kitBook(spec){spec=spec||{};const rm=()=>{try{return reducedMotion()}ca
   /* one page at a time: the back of the turning sheet shows the next page (owner 11/15), not a blank verso */
   const nx=mode==="single"&&els[i+1]?els[i+1].querySelector(".kbk-front>.kbk-pg"):null;
   el.__curl=kitCurl({host:book,front:el.querySelector(".kbk-front>.kbk-pg"),back:nx||el.querySelector(".kbk-back>.kbk-pg"),w:PW,h:PH,x:mode==="spread"?PW:0,y:0,
-   po:mode==="spread"?0:PW*.5,shadeL:mode==="spread",dir:dir||1,p:i<cur?1:0});
+   po:mode==="spread"?0:PW*.5,shadeL:mode==="spread",vanish:mode!=="spread",dir:dir||1,p:i<cur?1:0});
   el.style.visibility="hidden";el.classList.add("turn");return el}
  const ease=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2,easeOut=t=>1-Math.pow(1-t,3);
  let animId=0;
  function animate(i,from,to,dur,fn,done){const el=beginTurn(i,to>=from?1:-1);if(!el){done&&done();return}busy=true;const t0=performance.now(),id=++animId;
-  const step=now=>{if(id!==animId)return;const t=Math.min(1,(now-t0)/dur);el.__curl&&el.__curl.set(from+(to-from)*fn(t),el.__dir||1);if(t<1)requestAnimationFrame(step);else{busy=false;done&&done()}};requestAnimationFrame(step)}
+  pend={el,to,done};
+  const step=now=>{if(id!==animId)return;const t=Math.min(1,(now-t0)/dur);el.__curl&&el.__curl.set(from+(to-from)*fn(t),el.__dir||1);if(t<1)requestAnimationFrame(step);else{busy=false;pend=null;done&&done()}};requestAnimationFrame(step)}
+ /* a tap while a turn runs: that turn jumps to its end at once, then the new one starts (fast taps never jam; KIT §34.0) */
+ let pend=null;function flush(){if(!busy||!pend)return;const f=pend;pend=null;animId++;try{f.el.__curl&&f.el.__curl.set(f.to)}catch(e){}busy=false;f.done&&f.done()}
  function fade(nc){busy=true;book.classList.add("fade");setTimeout(()=>{cur=nc;paint();book.classList.remove("fade");setTimeout(()=>{busy=false},160)},160)}
- function next(){if(busy||cur>=maxCur)return;kbkSfx();if(rm()){fade(cur+1);return}const i=cur;animate(i,0,1,680,kitCurlLift,()=>{cur=i+1;paint()})}
- function prev(){if(busy||cur<=0)return;kbkSfx();if(rm()){fade(cur-1);return}const i=cur-1;animate(i,1,0,680,kitCurlLift,()=>{cur=i;paint()})}
+ function next(){flush();if(busy||cur>=maxCur)return;kbkSfx();if(rm()){fade(cur+1);return}const i=cur;animate(i,0,1,KIT_TURN_MS,kitTurnEase,()=>{cur=i+1;paint()})}
+ function prev(){flush();if(busy||cur<=0)return;kbkSfx();if(rm()){fade(cur-1);return}const i=cur-1;animate(i,1,0,KIT_TURN_MS,kitTurnEase,()=>{cur=i;paint()})}
  function go(n){animId++;busy=false;drag=null;n=Math.max(0,Math.min(maxCur,n));cur=n;paint()}
 
  /* ---- drag / swipe / tap ---- */
@@ -262,9 +265,9 @@ function wkBookPages(){const d=wkBookData();const date=kitDate(S.month,S.year,S.
 .kbk.spread .kbk-book.closed{transform:translateX(calc(var(--pw) * -.5))}
 .kbk-book.fade{opacity:0}
 /* boards behind the pages: cloth edges + page-stack lines */
-.kbk-book::before{content:"";position:absolute;inset:-7px -7px -7px -7px;border-radius:5px;background:repeating-linear-gradient(45deg,#ffffff07 0 2px,transparent 2px 5px),linear-gradient(var(--cloth),var(--cloth2));box-shadow:0 18px 40px #000b,inset 0 0 0 1px #ffffff14}
+.kbk-book::before{content:"";position:absolute;inset:-2px;border-radius:5px;background:linear-gradient(#e6d3ab,#c9ad7d);box-shadow:0 6px 18px #3a1e0a40}
 .kbk.spread .kbk-book.closed::before{left:calc(50% - 7px)}
-.kbk.single .kbk-book::before{left:-16px}
+.kbk.single .kbk-book::before{left:-4px}
 .kbk-book::after{content:"";position:absolute;top:2px;bottom:2px;right:-4px;width:4px;background:repeating-linear-gradient(90deg,#e9d8b4 0 1px,#bfa679 1px 2px);border-radius:0 2px 2px 0}
 .kbk.single .kbk-book{margin-left:12px}
 .kbk-sheet{position:absolute;top:0;left:0;width:100%;height:100%;transform-origin:0 50%;transform-style:preserve-3d;transition:none}
