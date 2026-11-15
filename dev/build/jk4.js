@@ -69,6 +69,33 @@ html body .game#game.k3ph header.hud>#k3room:not([hidden]){grid-area:room}
  html body header.hud>#k3tc{justify-self:end}
  #kstrow>.kstg{flex:1 1 0;grid-auto-columns:minmax(0,1fr);column-gap:4px}
 }
+/* KIT 31.19 TOP BAR GRID (header-fix, owner 11/15 Fold shot: name on 2 lines, chips under "‹ Ngự hoa viên", date on 3 lines).
+   Her block never wraps and never shrinks (name 1 line · rank + age chips 1 line · date 1 line); the time block is the column that gives.
+   ≥ 600 px only (phones < 600 keep their own rows below). */
+@media (min-width:600px){
+ html body header.hud>.me,html body header.hud>.me .mi{min-width:max-content!important;flex-shrink:0!important}
+ html body header.hud>.me .mi>b,html body header.hud>.me .k3rr,html body header.hud>.me .rk,html body header.hud #me-d{white-space:nowrap!important}
+ html body header.hud{grid-template-columns:auto max-content minmax(0,1fr) auto!important}
+}
+/* two-row bar (600–999 px, and ≥ 1000 px when the one row does not fit: class .khd2 from kitHdFit) —
+   row 1: menu · her block · RIGHT COLUMN (time block; "‹ Nơi" button under it, same left/right edges); row 2: the eight stat cells */
+@media (min-width:600px) and (max-width:999px){
+ html body .game#game header.hud,html body .game#game.k3ph header.hud:has(#k3room:not([hidden])){grid-template-columns:auto max-content minmax(0,1fr) minmax(0,max-content)!important;
+  grid-template-areas:"menu me . tc" "menu me . room" "stats stats stats stats"!important;grid-template-rows:auto auto auto!important;row-gap:0!important}
+ html body header.hud>#k3tc{justify-self:stretch!important;align-self:end!important}
+ html body header.hud:not(:has(#k3room:not([hidden])))>#k3tc{align-self:center!important}
+ html body .game#game header.hud>#k3room:not([hidden]){grid-area:room!important;justify-self:stretch!important;align-self:start!important;margin-top:4px;min-height:32px;padding:0 10px}
+ html body header.hud>#kstrow{margin-top:3px!important}
+ html body header.hud .k3tc .k3tt{grid-template-rows:auto auto!important}
+ html body header.hud .k3tt>.kstl,html body header.hud .k3tt>.kstv{white-space:normal!important;height:auto!important;min-height:var(--kst-l)}
+}
+html body .game#game header.hud.khd2{grid-template-columns:auto max-content minmax(0,1fr) minmax(0,max-content)!important;grid-template-areas:"menu me . tc" "menu me . room" "stats stats stats stats"!important;
+ grid-template-rows:auto auto auto!important;row-gap:0!important}
+html body header.hud.khd2>#k3tc{justify-self:stretch!important;align-self:center!important}
+html body header.hud.khd2>#kstrow{justify-self:stretch!important;border-top:1px solid var(--k-hair,#e6d3ac);padding-top:3px;margin-top:3px!important}
+html body header.hud.khd2>#kstrow>.kstg{flex:1 1 0;grid-auto-columns:minmax(0,1fr);column-gap:4px}
+html body header.hud.khd2 .k3tc .k3tt{grid-template-rows:auto auto!important}
+html body header.hud.khd2 .k3tt>.kstl,html body header.hud.khd2 .k3tt>.kstv{white-space:normal!important;height:auto!important;min-height:var(--kst-l)}
 /* phones < 600 px: the same row, label line = icon only (name in the tooltip), number line below */
 @media (max-width:599px){
  html body header.hud{grid-template-columns:auto minmax(0,1fr)!important;grid-template-areas:"menu me" "tc tc" "stats stats"!important}
@@ -80,6 +107,18 @@ html body .game#game.k3ph header.hud>#k3room:not([hidden]){grid-area:room}
  #kstrow .kst>.kstl{font-size:0;gap:0}#kstrow .kst>.kstl img.ic{width:16px;height:16px}
 }
 `;document.head.appendChild(st)})();
+/* KIT 31.19 kitHdFit: ≥ 1000 px the bar is one row only when it fits (her block, the whole time block and the eight cells side by side);
+   otherwise .khd2 = the two-row bar (same grid as 600–999 px). Measured in the one-row form, in one synchronous pass (no flicker). */
+function kitHdFit(){try{const hd=document.querySelector("header.hud");if(!hd)return;const wide=matchMedia("(min-width:1000px)").matches;
+ if(!wide){hd.classList.remove("khd2");return}const had=hd.classList.contains("khd2");hd.classList.remove("khd2");
+ const tc=document.getElementById("k3tc"),tt=document.getElementById("k3tt");
+ const bad=hd.scrollWidth>hd.clientWidth+1||!!(tc&&tt&&tc.offsetParent&&tt.scrollWidth>tc.clientWidth+1);
+ hd.classList.toggle("khd2",bad);if(had!==bad){try{const hb=hd.getBoundingClientRect();document.documentElement.style.setProperty("--k3hb",Math.round(hb.bottom)+"px");window.j59lay&&j59lay()}catch(e){}}}catch(e){}}
+window.kitHdFit=kitHdFit;
+if(typeof renderHUD==="function"){const r0=renderHUD;renderHUD=function(){const r=r0.apply(this,arguments);kitHdFit();return r}}
+if(typeof render==="function"){const r1=render;render=function(){const r=r1.apply(this,arguments);kitHdFit();return r}}
+addEventListener("resize",()=>{clearTimeout(window.__khdf);window.__khdf=setTimeout(kitHdFit,40)});
+try{document.fonts&&document.fonts.ready.then(kitHdFit)}catch(e){}
 /* a short helper line (".kphelp": "Mới biết tên ⓘ") opens its full text on tap too (touch has no hover tooltip) */
 document.addEventListener("click",e=>{const h=e.target.closest&&e.target.closest(".kphelp");if(!h||!h.title||typeof kpPop!=="function")return;e.stopPropagation();try{kpPop(h,`<div class="kpopt">${kitStatEsc(h.title)}</div>`)}catch(x){}},true);
 
