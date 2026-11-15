@@ -1,4 +1,4 @@
-# Kiểm duyệt: review/brand (bc1c7f324) gộp lên main 70c792d4 — PASS có sửa của người duyệt
+# Kiểm duyệt: review/brand (bc1c7f324) gộp lên main 70c792d4, rồi main ca361b147 — PASS có sửa của người duyệt
 
 Ngày 2026-11-15. Nhánh duyệt: `review/brand-r6`. Gộp: chỉ xung đột `assemble.py` (giữ thứ tự của main, có jwhy/jaudit, thêm jseal sau jk4)
 và các tệp dựng (index.html / sw.js / assets.json dựng lại bằng `dev/site/build_site.sh`).
