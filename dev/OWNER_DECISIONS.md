@@ -230,3 +230,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (04:25Z) Owner: danh sách người (Sổ tuần 'Sổ này ghi') phải thẳng cột dọc → luật kit: mọi danh sách chip người dùng lưới cột đều. review/hau-cung-ui.
 - (04:30Z) Owner: trang người trong Sổ tuần → nhân vật cao full trang (dưới tiêu đề chạy tới trên số trang), chữ cột phải; luật kit §27. review/hau-cung-ui.
 - (04:35Z) Owner: trang 'tiếp theo' trong Sổ tuần cũng phải có hình toàn thân full trang như trang đầu; chỉ sang trang khi thật hết chỗ; dòng '(Đã ghi vào mục Đã biết…)' thành chú thích nhỏ. review/hau-cung-ui.
+- (04:45Z) Owner: hộp thoại có người (vd 'Có người đến') → trái người toàn thân cao hết hộp; phải trên lời sự kiện, phải dưới nút chọn. Luật KIT §32.7 cho hộp thoại có người không tranh cảnh. review/dialog-person.
