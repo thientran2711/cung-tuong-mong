@@ -73,7 +73,7 @@ Went LIVE via session 7: month-calendar r1, chap-label r1, item-events r1 (§64)
 - review/idea-history (aa1714ed) + review/idea-design (17b2ba71) — DONE docs: dev/ideas/HISTORY_IDEAS_1115.md, DESIGN_IDEAS_1115.md.
 
 ### Reviewers running (branch → r1)
-rank-title (+ her-name gold glow, dp caption box removal), face-reveal, night-end (+ painted-only effects, landscape/portrait crops), placeholder-pics, recipes (+ level-up grants a recipe, 4 sub-styles everywhere, Công/Dung/Ngôn/Hạnh sub-styles, Kỳ in sub-style UI), place-colour, outside-r2 (+ age-18 home identity card, pair 2–10 bạc incidentals).
+rank-title (+ her-name gold glow, dp caption box removal, vivid colours, glow only on paintings), night-end (+ painted-only effects, landscape/portrait crops), placeholder-pics, recipes (+ level-up grants a recipe, 4 sub-styles everywhere, Công/Dung/Ngôn/Hạnh sub-styles, Kỳ in sub-style UI), place-colour, outside-r2 (+ age-18 home identity card, pair 2–10 bạc incidentals).
 
 ### READY, reviewer NOT yet spawned
 - review/promo-rules @ 53b0084d0 — son direct promo, daughter grace exam, servant/ma ma exams (exRun), reward chest §65 + kitPersonReveal, demotion FX §66 (glow waits for §68 fxkit); kitReward short-screen fix game-wide; j92 month-end dress gift off. promo-rules.js 29/29, coop 59/59. Art missing: per-rank pendants/bangles/sachets, maid robes per maid rank. Choices to check: her servant cap +1/rank, NPC caps unchanged (face pool full).
@@ -105,3 +105,4 @@ KIT registry additions by session 7: §64 item-events, §65 promo-reward, §66 r
 - (s7 add) Owner 22:35Z: (1) all calendar ideas (a)–(j) = review/cal-plus (in progress); (2) NEW UNASSIGNED: painted 'học thành tài' level-up scene on every art / Công Dung Ngôn Hạnh level-up (gains fly to Tư trang, new recipe lines; uses §68); (3) PERFORMANCE BUDGET now a PREAMBLE kit rule; NEW UNASSIGNED high priority: download-size (129 MB first load) first, then Settings 'Hiệu ứng: Đầy đủ / Gọn' + auto-Gọn, perf test (frame time, memory, bytes per scene).
 - (s7 add) Owner 22:45Z painted animations for ALL moments (15-item list in OWNER_DECISIONS) → sent to fxkit worker (library + red-flash replacement first); wiring into every event = follow-up worker after §68 lands.
 - (s7 add) fxkit INTERIM: §68 API live on review/fxkit @ cdbccc6e8 (jfxkit.js after jfx; img/fx/ 0.42 MB; 17 sprites, 5 screen-blend lights; OPT.fxon Đầy đủ/Gọn + auto-Gọn; all code-drawn Pixi textures removed). promo-rules glow/crack + night-end effects should switch to it when merging.
+- (s7 add) LIVE main = face-reveal r1 (f0d289692): any drawn dialog showing a person reveals face (after evGate; held dialogs don't), her household known, look-only panels (Đã biết / Chứng cứ / Tâm trạng) don't reveal, old-save backfill.
