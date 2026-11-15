@@ -1039,6 +1039,7 @@ ONLY the options list scrolls (flex:1, overflow auto, rows keep their full heigh
 The picture is capped at 28vh (24vh under 1000 px wide); if the fixed part still takes more than 55 % of the dialog, the picture is
 compressed first (down to 14vh, `--kdpic`), figures scale with it. Dialogs without `.opts` (Đã rõ cards, person cards, identity /
 Luân hồi panels with `.kpscopts`) are unchanged. Shots: dev/shots/book-release/dlg/.
+
 ## 34. BOOK UI · kitCurl (page curl) + kitBookSpread (two-page book) — `dev/build/jbook.js` (before j87) — KIT READY: page-curl
 Owner 11/14 (00:15Z, 00:45Z approval + later change): the UI is an open book. **iPad landscape = two-page spread**: LEFT = picture page
 (illustration only: the big full-body figure / scene that goes with the right page; it never takes info away from the right page),
