@@ -205,3 +205,13 @@ quy-xin-giu-con quy-xin-giu-con-h
 quy-xin-tha-cung-nu quy-xin-tha-cung-nu-h
 ra-tay-bi-bat ra-tay-bi-bat-h
 ran-day-pho-ma ran-day-pho-ma-h
+roi-phe roi-phe-h
+rot-ho-nhiem-lanh rot-ho-nhiem-lanh-h
+rot-ruou-nung-niu rot-ruou-nung-niu-h
+rua-tieng-oan-tho rua-tieng-oan-tho-h
+sai-khat-bong sai-khat-bong-h
+sai-nguoi-moi sai-nguoi-moi-h
+sai-nguoi-tang sai-nguoi-tang-h
+sang-tham-di-vang sang-tham-di-vang-h
+sang-tham-hoi sang-tham-hoi-h
+say-thai say-thai-h
