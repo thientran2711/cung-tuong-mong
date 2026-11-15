@@ -58,8 +58,16 @@ function menPlace(){menInit();const W={},Y={};const b=S.buoi||0,night=b===2;let 
 const MEN_NT={box:{x:.445,y:.805,w:.11,h:.12}};
 (function(){try{fetch("img/map-hotspots.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{if(j&&j.outerCourt&&j.outerCourt.box)MEN_NT.box=j.outerCourt.box}).catch(()=>{})}catch(e){}})();
 (function(){const s0=mapSpots;mapSpots=function(){const L=s0.apply(this,arguments);try{if(menRoad())L.push({k:null,box:MEN_NT.box,n:"Ngoại triều",fn:"cấm nữ quyến bước vào",res:[],small:true,empty:true})}catch(e){}return L}})();
-/* the outer court looks like every closed place (j41 grey .agrey + the reason), never clickable */
-(function(){const h0=mapHTML;mapHTML=function(){let h=h0.apply(this,arguments);try{if(menRoad())h=h.replace(/<div class="mspot sm off empty" title="Ngoại triều: ([^"]*)" style="([^"]*)"><span class="mlab">Ngoại triều<\/span><\/div>/,(a,why,st)=>`<div class="mspot agrey kmen-nt" title="Ngoại triều: ${why}" style="${st}"><span class="mlab">Ngoại triều</span><span class="mwhy">${why}</span></div>`)}catch(e){}return h}})();
+/* the outer court: the NORMAL map label + a small lock mark (owner 11/15: no grey overlay on closed places); a tap opens a kit card with the
+   reason and the options. The lock mark is .kmlock so the shared kit label (integrator, review/book-release) can take it over when it lands. */
+(function(){const h0=mapHTML;mapHTML=function(){let h=h0.apply(this,arguments);try{if(menRoad())h=h.replace(/<div class="mspot sm off empty" title="Ngoại triều: ([^"]*)" style="([^"]*)"><span class="mlab">Ngoại triều<\/span><\/div>/,(a,why,st)=>`<button class="mspot sm kmen-nt" data-mennt="1" title="Ngoại triều: ${why}" style="${st}"><span class="mlab"><span class="kmlock" aria-label="cấm vào">🔒</span> Ngoại triều</span><span class="mmeta"><em>${why}</em></span></button>`)}catch(e){}return h}})();
+function menNtCard(){if(!S||S.dead||Q.length)return;const T=(typeof trS==="function"&&typeof tdOn==="function"&&tdOn())?trS():null;const left=Math.max(0,4-used);
+ const opts=[];if(T&&left>=1)opts.push({n:"Hỏi thái giám tin ngoại triều",fx:{bac:-5},x:"Chắc chắn · tốn: 1 khắc",go:()=>{spend(1);const L=Object.keys(S.minW||{}).map(c=>T.H[c]&&`${TDOFF[c]||"Quan"} ${T.H[c].name} (${S.minW[c]==="thu"?"vào chầu ở Ngự thư phòng":"dự yến ở Ngự hoa viên"})`).filter(Boolean);
+  log(L.length?`Thái giám kể: buổi này ${L.join("; ")}.`:"Thái giám kể: buổi này không có vị quan nào vào chầu.")}});
+ opts.push({n:"Thôi",fx:{},x:""});
+ kitModal({kind:"rule",title:"Ngoại triều",showOut:true,sections:[{h:"Vì sao không vào được",rows:[["Luật","Ngoại triều là nơi Hoàng thượng thiết triều với bá quan: nữ quyến hậu cung không được bước vào.","t"],["Ai được vào","Hoàng thượng, quan lại, thị vệ, sứ thần; thái giám đi truyền chỉ.","t"]]}],opts})}
+/* the map's one tap handler (j77 window capture) sends an unnamed spot to j77Tap(k,label): the outer court opens its own card */
+(function(){if(typeof j77Tap!=="function")return;const t0=j77Tap;j77Tap=function(k,empty){if(!k&&/Ngoại triều/.test(empty||"")&&menRoad()){try{menNtCard()}catch(e){console.error("menNt",e)}return}return t0.apply(this,arguments)}})();
 (function(){const p0=placeOf;placeOf=function(k){const P=p0.apply(this,arguments);try{if(P&&k&&menRoad()&&!P.__mz){const z=menZone(k);const t=z==="hc"?"Hậu cung: nam nhân không được vào, trừ Hoàng thượng, thái giám, thái y hay thợ có lệnh.":z==="nd"?"Nội đình: thị vệ canh cửa, quan lại vào chầu.":"";if(t)return Object.assign({},P,{d:((P.d||"")+" "+t).trim(),zone:z,__mz:1})}}catch(e){}return P}})();
 
 /* officials on the stage (kind "min"): face, role, a polite greeting */

@@ -6,7 +6,8 @@
    · child a<18: .55 + .03·a (age 5 ≈ .70, 10 ≈ .85, 15 = 1) — heads always stay under the top label (ribbon) */
 const KIT_FIG={h:.86,man:1.08,men:{emperor:1,eunuch:1,official:1,physician:1,man:1},
  kid(a){return typeof a==="number"&&a<18?Math.min(1,.55+.03*Math.max(1,a)):1},
- fac(src,age){const m=/fig-([a-z]+)-/.exec(src||"");return(m&&this.men[m[1]]?this.man:1)*this.kid(age)}};
+ fac(src,age){const m=/fig-([a-z]+)-/.exec(src||"");const un=/unknown-fig-m\./.test(src||""); /* the unknown-man silhouette is a man too (review/men) */
+  return((m&&this.men[m[1]])||un?this.man:1)*this.kid(age)}};
 window.KIT_FIG=KIT_FIG;
 /* KIT 33.4 · kitImgErr — the ONE null-safe fallback for inline <img onerror>: a picture that fails after a re-render detached it
    does nothing (no "reading 'classList' of null" page errors). o.sel: ancestor to mark (default the parent); o.cls: class to add;

@@ -32,5 +32,8 @@ const [,,BASE,SZ,OUT,TAG]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=
  /* 4. the map: Ngoại triều zone */
  await p.evaluate(()=>{const b=document.querySelector('#tabs [data-tab="map"]')||[...document.querySelectorAll('#tabs [data-tab]')].find(x=>/Dư đồ/.test(x.textContent));if(b)b.click()});await p.waitForTimeout(3000);
  await p.screenshot({path:`${OUT}/${TAG}-map.jpg`,type:'jpeg',quality:80});
- R.map=await p.evaluate(()=>[...document.querySelectorAll('.mspot.empty, .mspot.kmen-nt')].map(e=>e.title).filter(t=>/Ngoại triều/.test(t)));R.mapOvf=await ovf();
+ R.map=await p.evaluate(()=>[...document.querySelectorAll('.mspot.empty, .mspot.kmen-nt')].map(e=>e.title).filter(t=>/Ngoại triều/.test(t)));R.mapOvf=await ovf();R.kfig=await p.evaluate(()=>[KIT_FIG.fac('img/kit/unknown-fig-m.webp',30),KIT_FIG.fac('img/kit/unknown-fig-f.webp',30),KIT_FIG.fac('img/fig-man-thive-1-a26.webp',30)]);
+ await p.evaluate(()=>{const b=document.querySelector('[data-mennt]');if(b)b.click()});await p.waitForTimeout(2000);
+ await p.screenshot({path:`${OUT}/${TAG}-ntcard.jpg`,type:'jpeg',quality:82});
+ R.nt=await p.evaluate(()=>{const M=document.getElementById('modal');return{shown:M&&!M.hidden,title:(document.getElementById('mt')||{}).textContent,opts:M?[...M.querySelectorAll('.opts button')].map(b=>b.innerText.replace(/\s+/g,' ').slice(0,70)):[]}});
  console.log(JSON.stringify({TAG,R,errs}));await b.close()})().catch(e=>{console.error(e);process.exit(1)});
