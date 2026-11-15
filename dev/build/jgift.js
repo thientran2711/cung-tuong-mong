@@ -30,11 +30,11 @@ function giftEval(e,t){const pre="Nắm chắc · tốn: 2 khắc";
 /* the right-hand item panel */
 function giftInfo(e,best){const a=giftArt(e),R=[];
  if(e.wk){const w=e.wk;const art=typeof ARTS!=="undefined"?(ARTS.find(x=>x.k===w.a)||{}).n:"";
-  R.push(["Món",`${WK[w.kind]?WK[w.kind].n:"Tác phẩm"}${art?" · "+art:""}, phẩm ${WTIER[w.ti]} (${w.q} phần)`]);
+  R.push(["Món",`${art?art+", ":""}${w.q} phần`]);
   R.push(["Người làm",w.bn==="ngươi"?"Tự tay ngươi làm":w.bn]);R.push(["Làm lúc",w.d||"—"]);
   if(w.p!=null)R.push(["Lưu ý",w.p<wk()?"đã nguội, không dâng được nữa":"phải dâng trong tuần này, để lâu thì nguội"]);
   R.push(["Khi tặng","Đồ tự tay làm được thêm chân tình với người hiền hậu, thêm hợp ý khi trúng sở thích"])}
- else{const it=IT[e.k]||{};R.push(["Món",`${it.kd||"Vật phẩm"}${it.d?" · "+it.d:""}`]);const fr=typeof kinvFrom==="function"?kinvFrom(e.from):"";R.push(["Nguồn",fr||"Đồ của ngươi"]);
+ else{const it=IT[e.k]||{};if(it.d)R.push(["Dùng",it.d]);const fr=typeof kinvFrom==="function"?kinvFrom(e.from):"";R.push(["Nguồn",fr||"Đồ của ngươi"]);
   if(e.t&&typeof TAINT==="object"&&TAINT[e.t])R.push(["Đã tẩm",TAINT[e.t].n]);R.push(["Khi tặng","Món hợp người nhận thì được nhiều hơn"])}
  if(best)R.push(["Hợp nhất",best]);
  /* reviewer r6 (LUẬT KIT TRƯỚC): the kit item-card head (.kshdt name in its grade colour + kind · grade, as the shop card 28.13d) and kit rows
@@ -198,7 +198,7 @@ function kmEmpAct(a,kind){const why=kmEmpWhy(a,kind);if(why)return null;a.kmEmpD
   return{ok,txt:`Hoàng thượng cười, bảo hôm nay còn bận, hẹn dịp khác.`}}
  if(ok){const g=2+Math.min(2,Math.floor(((a.arts&&a.arts[kind])||0)/2));ap(a,{sung:g,an:1});if(!me)newsAdd(a,"emp",`${nm} ${kind==="ky"?"hầu cờ":"đánh đàn hầu"} Hoàng thượng.`);
   return{ok,g,txt:`${nm} ${kind==="ky"?"hầu Hoàng thượng một ván cờ":"gảy đàn cho Hoàng thượng nghe"}; ngài vui. Sủng +${g} · Ân tình +1.`}}
- ap(a,{sung:-1});return{ok,txt:`Hoàng thượng nghe/xem một lúc rồi ngáp dài, cho lui. Sủng -1.`}}
+ ap(a,{sung:-1});return{ok,txt:`Hoàng thượng ${kind==="ky"?"xem":"nghe"} một lúc rồi ngáp dài, cho lui. Sủng -1.`}}
 /* tonight: the walk raises her tablet chance */
 (function(){const n0=nightCh;nightCh=function(p){const r=n0.apply(this,arguments);try{const q=p||S;if(q&&q.kmWalk===wk()&&r>0)return cl(r+BAL.empDay.walkNight,0,70)}catch(e){}return r}})();
 /* her: buttons in the Emperor card, result + the choice inside it */

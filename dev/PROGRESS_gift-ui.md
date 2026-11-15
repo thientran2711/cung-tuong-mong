@@ -26,7 +26,7 @@
 3. Emperor daytime acts: no balance pass yet (BAL.empDay p .06, suc 5, walkNight 15).
 4. Tư trang shows handmade works as "Tác phẩm tự tay" with no picture (kinvItems → itemArt("tp")); not fixed.
 5. Merge with review/act-pics2: both wrap kitEvArt. Mine only replaces ev-trieu-chinh and yields to their room-scene fallback; check the order in assemble.py after the merge (mine: jplace, jgift, jevban, j84).
-6. **cdn_sync pending AFTER this branch merges** (not before: main's jkpor would read it with zr up to 1.6 = zoom): `cp dev/review/gift-ui-por/POR_FACE.json img/ && python3 dev/site/cdn_sync.py img/POR_FACE.json`.
+6. **cdn_sync pending AFTER this branch merges**: `mkdir -p img && cp dev/review/gift-ui-por/POR_FACE2.json img/ && python3 dev/site/cdn_sync.py img/POR_FACE2.json` (r6: renamed POR_FACE2, v 2; NEVER upload img/POR_FACE.json — older builds with zr up to 1.6 read that name).
 7. kid-a4 boys + big-face consorts/maids need re-cropped art for an equal head (see above).
 
 ## Known bugs
@@ -38,8 +38,17 @@
 - `node dev/tools/pic_usage.js http://localhost:<port>/index.html out.json && python3 dev/tools/pic_usage_report.py out.json dev/review/pic-shared.md`
 
 ## cdn_sync pending
-- img/POR_FACE.json (copy in dev/review/gift-ui-por/) — only after merge, see LEFT 6.
+- img/POR_FACE2.json (copy in dev/review/gift-ui-por/) — only after merge, see LEFT 6.
 
 ## Tests (session 2)
 - `node dev/test/gift-ui-shots.js <url> <W>x<H>@dpr <out> <tag>` (POR_FACE=<file> serves the manifest locally): Emperor card, hầu cờ, Dưỡng Tâm yết kiến reason, own banner, gift dialog, portrait zoom range.
 - `node dev/test/pic-fallback-scan.js <url> 6`
+
+## Review r6 (review/gift-ui-r6, on origin/main f500d0464)
+- Merge: assemble = main order + jgift, jevban after jplace. Site rebuilt (build_site.sh).
+- Reviewer fixes: gift item panel from kit parts (.kshdt head + kitRows; private .kgift-* chip/rows removed); one kit ✕ only (private .kgiftx
+  removed: kitOtherItem showed kit-x AND kgiftx); walk line never "Liều → Liều" (same word → "tối nay dễ được lật thẻ hơn (vẫn Liều)", no
+  clause when she cannot be picked tonight); snow reason "tuyết rơi dày" (was "trời giông bão"); "nghe/xem" → the right verb; face manifest
+  renamed img/POR_FACE2.json and jkpor needs v ≥ 2, so the upload can never reach a build with zr [1, 1.6]; KIT.md 28.13h gift dialog.
+- Known test gap: gift-ui-shots.js step 2 clicks "Xin hầu cờ" while the Phi tần tab is shown (button not in the DOM), so "hauco" is
+  not exercised there; checked separately (button → result card → all three acts and yết kiến locked "hôm nay đã gặp ngài một lần").
