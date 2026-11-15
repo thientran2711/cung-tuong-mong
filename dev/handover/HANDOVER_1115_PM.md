@@ -197,3 +197,4 @@ Worktree thợ ở /home/user/wt/<tên>. Bản tóm tắt luật cho thợ: /hom
 - 17:06Z luật sự kiện chính/phụ tuyến (nhãn + hạn chót + đường không tốn bạc) → event-balance. Chi tiết hộp gấm 17:02Z giữ ở hàng chờ reward-anim (giờ hiện món ~1,2–1,5 s, rà mọi món thiếu hình, nhãn phẩm thật, bỏ dòng không đổi).
 - ~10:00Z ĐĨA: phiên có hạn mức ghi ~39 GB (df không đúng). Đã bắt mọi worktree dùng sparse-checkout (bỏ dev/shots, dev/owner-shots, dev/figwork), cấm clone đầy đủ; trống lại ~19 GB.
 - 17:08Z hội thi lệch chủ đề (Hội Phượng · thi thêu) + 'TỐN không' → close-bugs; ảnh banner → kit-fig2/act-pics2.
+- 17:12Z Cần chip trùng (Múa yến tiệc) → close-bugs. Khối 'Ân sủng' (Có thai/Lật thẻ/Ân tình) bị gập, sếp không thấy → chờ sếp chọn cách hiện.
