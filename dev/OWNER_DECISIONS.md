@@ -203,3 +203,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (01:40Z) Owner: vẽ áo khuê các cho tuyến tiểu thư → thường phục khuê các, a18, mọi gương mặt người chơi (32 phi tần + player nếu dùng), không hoa điền; thử 4 người gửi sếp duyệt trước; ảnh lên Cloudflare. Nhánh review/khuecac.
 - (01:45Z) Owner cho đẩy 2 lô sửa cung nữ (wip/maid-art-fix, wip/maid-art-b-fix). Kiểm lại: cả hai (và 89dd550/7b3f527/212db69, maid-art-c) đã PASS và đã ở main từ 14/11 — ghi chú trong HANDOVER.md đã cũ; không còn gì để đẩy.
 - (01:50Z) Owner: hoạt cảnh lật trang chậm lại (~2×, ~1.1–1.4 s, êm) → thợ review/page-curl.
+- (01:55Z) Owner: áo khuê các (thiếu nữ ngoài cung) vẽ đủ 84 mặt (32 phi tần + 52 cung nữ).
