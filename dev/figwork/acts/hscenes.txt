@@ -133,3 +133,24 @@ sai-theo-doi|1|a consort's hand passing a small silk pouch of silver into a eunu
 theo-doi-duoc|1|a eunuch's hand in a dark sleeve laying a small folded blank note on a lamp-lit table before a consort's waiting hand, night
 theo-doi-trang|0|a eunuch's empty open hands in a damp dark sleeve, rain falling in the grey courtyard beyond an open door, a consort's sleeve on the chair arm
 theo-doi-bi-bat|1|a guard's armoured gauntlet holding up a lantern that lights a dark sleeve and a hand clutching a red pillar in a night corridor, caught hiding
+ghi-ten-du-thi|0|a consort's hand in a pink sleeve laying a small blank wooden name tablet onto a red lacquer tray held by a eunuch's dark sleeve, a guqin and blank paper with brush set out on a table beyond, contest hall doorway
+bat-dau-bay-muu|1|a consort's hand in a deep red sleeve spreading several folded blank letters and an open blank notebook across a dark desk, a single tall candle, a brush resting on an inkstone, night
+ngu-mot-dem|1|a corner of a bed behind half-drawn silk bed curtains, an embroidered quilt drawn up and a relaxed hand resting on a pillow, a small glowing lamp on the bedside stand, moonlight through a lattice window, no face
+giu-kin-co-thai|0|a hand resting lightly on the folds of a wide jade-green cloak at the waist, beside it a maid's hand quietly sliding a lattice door shut, soft daylight, a teacup on a side table
+chai-chuot-gian-di|0|a maid's hand holding up one plain jade hairpin above a dressing table, a bronze mirror and a small open box with only a few plain pins on the dressing table, pale ivory sleeves
+chai-chuot-long-lay|0|two maids' hands lifting an ornate gold phoenix hairpin and a gold flower crown ornament out of an open lacquer jewellery box overflowing with gold pins and pearls on the dressing table before a bronze mirror, a rich red gold-brocade sleeve
+chai-chuot-vua-van|0|a consort's hands straightening a neat blue silk sleeve cuff before a standing bronze mirror, a maid's hand smoothing the fold of the skirt hem below, tidy and modest
+thay-y-phuc|0|behind a painted folding screen, a maid's hands lifting a new pink outer robe draped open, about to settle it on a shoulder seen only as a corner of white under-robe, a folded robe on a stool
+thao-trang-suc|1|a consort's hand in a pink sleeve laying a gold hairpin down into an open red lacquer jewellery box on a dressing table, a bronze mirror edge and a candle glowing, evening
+deo-trang-suc|0|a maid's hand picking a gold hairpin from an open jewellery box on a dressing table beside a bronze mirror, a few loose pins and a jade bangle on silk
+deo-mang-che|0|a consort's hands holding up a thin pale lavender silk veil by its two upper corners with small pearl hooks, beside a bronze mirror, a corridor with red pillars beyond
+tu-choi|0|a consort's hand in a pink sleeve gently pushing back a red-wrapped gift box across a tea table toward a visitor's jade-green sleeve, a teapot and two cups, polite refusal
+khao-hach-tan-phong|0|exam desk on a palace floor, brush on inkstone, sealed rolled exam scroll, embroidery hoop and guqin corner, a hand in a pink sleeve setting the brush down (promo-exam act 'Khảo hạch tấn phong'; plain name)
+van-dong-do-dau|0|a consort's hand in a pink sleeve placing a red-wrapped gift box onto a lacquer tray held by a servant's blue sleeve at the gate of a noble mansion, a second small gift box beside it
+chai-chuot-nhan-sac|0|a maid's hand drawing a jade comb through long glossy black hair that falls over a pink silk shoulder, seen only as flowing hair and comb, bronze mirror edge, cosmetics jars on the dressing table
+nghi-lay-suc|0|a broom leaning against a red corridor pillar, a maid's hand resting loosely on her green skirt hem on the step beside it, quiet afternoon light, a resting moment
+o-yen-nghi|0|a consort's hand turning a page of a blank book beside a glowing brazier, a red New Year scroll without writing on the door frame, tea and dried fruit on a small table, warm winter interior
+tinh-duong|0|a hand resting on an embroidered quilt beside half-drawn bed curtains, a bowl of dark medicine and a spoon on the bedside stand, soft daylight
+ngu-som|1|a dark bed corner behind closed silk curtains, an unlit lamp on the stand, distant small fireworks glowing beyond a lattice window on New Year's Eve night
+o-cung-giu-am|0|a hand in a fur-lined cloak sleeve warming over a bronze charcoal brazier, snow falling beyond an open lattice door, a teacup steaming
+ban-thuong|0|a eunuch's hands in a dark blue sleeve presenting a tray of silver ingots and a silk bolt, a lower consort's pink sleeves receiving it with both hands, a palace floor
