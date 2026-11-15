@@ -25,3 +25,8 @@ Mã: `dev/build/jht.js` (assemble: sau jhc, trước jload). KIT §37.
 - `CTM_IMG_BASE= python3 dev/test/ht-mk.py` (dựng _ht.html + _ht0.html "trước" ở gốc, không commit), `node dev/test/hoang-tu.js <trang> <WxH@dpr> <thư mục> <tag> <kids|nokid|old> [sổ]`.
 - Ảnh: dev/shots/hoang-tu/truoc-* (bản cũ, kid + kid-cuoi), sau-<w>-<kids|nokid|old>-<tab>[-2].jpg, sau-*-banhon.jpg, sau-*-qt-after-ask.jpg.
 - Cân bằng: `node dev/measure/htbal.js <trang> sens <n> <out.json>` rồi `python3 dev/measure/an7.py out.json`.
+
+## Cân bằng (bot inpage5 "sens", dev/measure/htbal.js, cùng bản trước/sau chỉ khác jht.js) — CHƯA ĐỦ MẪU
+- Trước: n=59 · HH 59% · chết sớm 20% · khó sinh 4,6%/lần sinh. Sau: n=80 · HH 52% · chết sớm 24% · khó sinh 6,0%/lần sinh.
+- Sai số chuẩn của hiệu HH ≈ ±8,5 điểm với n này: chưa chứng minh được ±3 (bot ~0,7 kiếp/phút/tiến trình). Cần thợ cân bằng chạy ~1000 kiếp mỗi bên.
+  Nếu HH tụt thật: giảm `HT.back` (nhà vợ chống lưng [14,9,5]) hoặc chỉ cho NPC xin chỉ khi `roll(20)` → `roll(10)` (jht.js đầu tệp).
