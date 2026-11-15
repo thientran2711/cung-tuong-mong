@@ -177,3 +177,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (06:40Z) Owner: no Chinese characters in UI — ngự tứ seal shows Vietnamese 'Ngự' in the red square seal.
 - (07:00Z) Owner: luxury shown as numbers (corner 'Xa xỉ N' per item; header total vs allowance), not words. Ref dev/owner-shots/1115-xaxi-ref.jpg.
 - (07:15Z) Owner: choice cards (e.g. Nam nhân nơi cấm địa) must show each option's full Tốn/Được/Mất (+ odds), like Hành sự cards — not costs only.
+- (07:20Z) Owner: 4 named guards → paint 4 distinct guard looks (thive-3, thive-4 × 4 ages).
