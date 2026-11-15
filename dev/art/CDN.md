@@ -44,22 +44,23 @@ Worker công khai, không tốn hạn mức API.
   onerror riêng của ảnh, không có thì ẩn (visibility) để không hiện biểu tượng vỡ. Đếm: `window.KCDN {rewrites, retries, hidden}`.
 - `jk2b.js` kitMask: `new Image()` thêm `crossOrigin="anonymous"` (đọc alpha từ canvas cần CORS). PIXI 8 tự tải CORS.
 
-## sw.js / PWA (dev/site/build_site.sh)
-- Danh sách lưu trước (như cũ: `img/*.webp` + `img/item512/*.webp`, trừ `fig-/por-/map-fest-/_`; ~900 tệp, ~90 MB) giờ lấy từ
-  `img/_index.json` trên CDN, ghi URL tuyệt đối. `build_site.sh` cần mạng tới CDN.
-- fetch: yêu cầu tới `IMG` (CDN) được lưu đệm như tệp cùng nguồn, khóa = URL không query; tải lại ở chế độ CORS (không lưu phản hồi
-  opaque — Chrome tính mỗi cái ~7 MB hạn mức); `*.json` của CDN: mạng trước, lưu bản sao, ngoại tuyến thì trả bản sao.
-- **Gộp với review/loading (sw.tpl.js + assets.json + jload.js)** — loading sửa sw theo hướng khác; khi gộp (thứ tự book-release → loading
-  → map-anim → cdn-images), giữ bản loading và đổi đúng 3 chỗ:
-  1. `sw.tpl.js` fetch: `if(u.origin!==location.origin)return;` → cho qua cả CDN: `const cdn=u.href.startsWith(IMG);if(!cdn&&u.origin!==location.origin)return;`
-     và `relPath(u)` với CDN = `u.pathname.slice(1)` (khóa `img/…`); `asset()` dựng `key` từ `IMG+p+'?h='+h` khi `p` bắt đầu `img/`
-     (fetch `{mode:'cors',credentials:'omit'}`).
-  2. `assets.py`: không còn `img/` ở máy → lấy danh sách ảnh từ `IMG_BASE img/_index.json` (`files:[[key, md5/16, bytes]]`, băm md5 thay
-     sha256 — chỉ cần là khóa nội dung) cộng `audio/` + `icons/` ở máy như cũ.
-  3. `jload.js` `keyOf`: `new URL(f[0]+"?h="+f[1], f[0].startsWith("img/")?IMG_BASE:location.href)`.
-- Nhánh khác còn mang `img/` (men, palace-map, inventory-origin, loading…): trước khi gộp vào main chạy
-  `python3 dev/site/cdn_sync.py --git origin/review/<nhánh>` (đẩy ảnh của nhánh đó, không cần checkout), gộp, rồi `git rm -r --cached img`
-  nếu ảnh quay lại cây. Ảnh của các nhánh review hiện có đã được đẩy sẵn (`--missing-only`, xem PROGRESS).
+## sw.js / PWA (đã gộp với review/loading: sw.tpl.js + assets.json + jload.js) — chỗ đụng, để gộp
+- `dev/site/sw.tpl.js`: thêm `const IMG='__IMG__'` (build_site điền IMG_BASE); `relPath()` nhận cả URL CDN (khóa `img/…`), `baseOf(p)`;
+  fetch: cho qua nguồn CDN (`cdn`), ảnh CDN khóa ASSETS = `IMG+'img/…?h=<md5/16>'`, tải `{mode:'cors',credentials:'omit'}` (không opaque);
+  manifest CDN `img/*.json`: mạng trước, bản sao trong SHELL theo URL tuyệt đối; yêu cầu `&ctmload=1` = jload tự cất (như header x-ctm-load);
+  `prune()` không xóa mục `img/` cùng nguồn cũ (để jload dời). Phần index/navigate/swreg của loading giữ nguyên.
+- `dev/site/build_site.sh`: SHELLF bỏ `img/*.json` (không còn ở máy), PRE thêm URL CDN của `img/*.json` (không băm vào V — manifest đổi
+  không cần dựng lại), `sed __IMG__`.
+- `dev/site/assets.py`: có IMG_BASE thì danh sách ảnh lấy từ `img/_index.json` trên CDN (md5/16 thay sha256/16; bỏ `_*`, `old*`),
+  audio/icons vẫn quét ở máy. Nhóm core/fig y như cũ (core 83,5 MB — đúng bằng bản main).
+- `dev/build/jload.js` (không qua bộ đổi đường dẫn của assemble): `keyOf` dùng IMG_BASE cho `img/…`; tải CDN bằng `&ctmload=1`
+  (header riêng sẽ tốn preflight CORS mỗi tệp); `moveCdn()`: mục `ctm-assets` cũ dưới `img/` của site → chép sang khóa CDN khi cùng
+  kích thước (không so được băm vì md5 ≠ sha256), rồi xóa mục cũ — máy đã thỉnh ~700 MB không phải tải lại (thử: dev/test/cdn-move.js).
+- Nhánh khác còn mang `img/` (men, palace-map, inventory-origin, routes, wardrobe…): trước khi gộp vào main chạy
+  `python3 dev/site/cdn_sync.py --git origin/review/<nhánh>` (đẩy ảnh của nhánh, không cần checkout), gộp, rồi `git rm -r -q --cached img`
+  nếu ảnh quay lại cây, `bash dev/site/build_site.sh`. KHÔNG đẩy sẵn ảnh của nhánh chưa gộp: assets.json lấy MỌI ảnh trên CDN
+  (ảnh phòng của palace-map sẽ vào nhóm core, chặn màn tải) — em đã thử đẩy sẵn rồi gỡ lại 125 tệp (routes/inventory/palace-map).
+- Ảnh thợ vẽ đẩy thẳng lên CDN trước khi gộp code (m05, khuê các) cũng vào assets.json ngay — nhỏ thì không sao; bộ lớn nên đẩy lúc gộp.
 
 ## Lịch sử git (đề xuất, CHƯA làm)
 img/ cũ vẫn trong lịch sử (~0,7–1 GB). Không viết lại lịch sử (sếp cấm force-push). Nếu sau này muốn kho nhẹ: tạo kho mới từ một commit
@@ -70,3 +71,18 @@ Cần sếp đồng ý. Thợ có thể clone nhẹ ngay bây giờ: `git clone 
 - 01:24Z bucket `ctm-img` tạo; Worker `ctm-img` triển khai (bản afaf6bb3), thử: 200 + CORS + content-type, 304, 206, 404; co-op Worker vẫn 200.
 - 01:40Z cdn_sync.py: lần đầu gặp 429 (16 yêu cầu/giây) → thêm nhịp 3,2/giây + lùi; đang đẩy origin/main img/ (11 673 tệp, 715 MB).
 - jcdn.js + assemble.py (đổi đường dẫn), build_site.sh (sw từ mục lục CDN), make_site.sh/publish.sh không chép img nữa.
+- 02:20Z điều phối báo: thợ m05-huadian (64 tệp fig/por-maid-m05-t1..t8, 02:12Z) và khuecac (FIGURES-kc.json, *-kc-a18, *-ngheo-a18,
+  _kcwork/, 02:03Z) đã đẩy bản MỚI hơn. Dừng đẩy, so toàn bộ CDN với origin/main: 64 tệp m05 khác main = bản của thợ m05 còn nguyên
+  (đẩy sau lúc lượt của em đi qua khóa đó), 0 tệp m05 t1–t8 bị đè; FIGURES*.json của main do em đẩy 01:31Z, trước mọi thợ; 98 khóa
+  chỉ có trên CDN (khuê các…) không đụng. Phần còn lại (546 tệp) đẩy bằng `--missing-only` (không bao giờ ghi đè).
+  Bài học (đã ghi ở trên): đẩy cả kho dùng `--missing-only` khi người khác đã bắt đầu đẩy.
+- 02:40Z gộp origin/main 355d6d58 (đợt 2 + loading), nối sw.tpl.js/assets.py/jload.js với CDN; sửa `/^img\//.test` (figPath j39, j28, j35)
+  để nhận URL tuyệt đối (trước sửa: 164 lần 404 dạng img/https://…). `git rm --cached img` (11 673 tệp).
+- KIỂM (Playwright, máy chậm): Fold 755x1000@2 và iPad 1180x820@2 — sổ cũ (dựng bằng main) nạp được, 8 thẻ + chơi một mình 14 bước:
+  ảnh vỡ 0, HTTP 4xx 0, requestfailed 0 (trừ 1 tải nền bị cắt khi chủ ý ngắt mạng), lỗi trang 0, tràn ngang 0; mọi ảnh/ảnh CSS từ CDN
+  (630–649 yêu cầu, 0 cùng nguồn); màn co-op mở (Mời bạn / Nhập mã). Ngoại tuyến (Fold): SW sẵn sàng, 464 mục CDN trong bộ đệm, mở lại
+  không mạng → màn thỉnh tranh có tranh bìa, "Mạng đứt…", "Vào cung ngay". Dời bộ đệm cũ: moved 1, khóa CDN có.
+- Thời gian tải lần đầu (Fold, không SW, máy chậm nhiều thợ — số dao động mạnh): trước loading, live Pages: load 8,3 s, ảnh trung vị
+  2,4 s/p90 5,9 s (178 ảnh). Sau loading: live Pages load 116 s (jload tải 83 MB cùng lúc) · bản CDN: load 18,8 s, ảnh trung vị 1,8 s,
+  p90 10,3 s (197 ảnh); iPad bản CDN load 18,3 s.
+
