@@ -752,9 +752,9 @@ taller than the person dialog 32.7 — min(100dvh − 32 px, 720 px) — only it
 1. TOP ROW: the small item tile LEFT (kitItem at the bag-grid tile size, 64 px; an empty slot shows its faint ghost; the grade word is not
    repeated under it), its kit rows RIGHT (Phẩm / Được / Mất / Ghi chú) + the "Đã biết: …" chip.
 2. The info lines FULL WIDTH under that row ("Rương chưa có trâm cài nào khác.", "Nhờ thái giám mua đồ, hoặc chờ được ban thưởng."),
-   plain lines without the round fact dots; the pick-a-piece row (`.keqpick`) full width too.
+   plain lines without the round fact dots or faces; the pick-a-piece row (`.keqpick`) full width too.
 3. The acts by the option rule (32.9): a short act (name + one row that does not wrap) is a cell of a 2–3 column grid; an act with two or
-   more rows (Cần / Tốn / Được / Kèm, odds) or a wrapping line is a full-width row. Cards keep every line, sized to their content (no
+   more rows (Cần / Tốn / Được / Kèm, odds) or a wrapping line is a full-width row; the short cells pack together (dense grid). Cards keep every line, sized to their content (no
    stretched cells, no tall empty space).
 4. No "Lui": the header ✕, a tap outside, Esc (32.10).
 Test: `node dev/test/slot-card.js <build page> <outdir> <tag> [sizes]`. Shots before / after: dev/shots/kit-close/slot-before-*, slot-after-*

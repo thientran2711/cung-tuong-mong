@@ -124,10 +124,10 @@ function kinvOpen(x){const g=x.g,it=IT[g.k],i=g.i;const over=it.rk&&it.rk>S.rank
    dialog 32.7: min(100dvh − 32 px, 720 px), only the body scrolls), laid out:
    1. TOP ROW: the small item tile (kitItem at the bag-grid tile size, 64 px; empty slot = its faint ghost) LEFT, its kit rows RIGHT
       (Phẩm / Được / Mất / Ghi chú) + the "Đã biết" chip.
-   2. The info lines FULL WIDTH under that row (Rương chưa có…, Nhờ thái giám mua đồ…), plain lines without the round fact dots;
+   2. The info lines FULL WIDTH under that row (Rương chưa có…, Nhờ thái giám mua đồ…), plain lines without the round fact dots or faces;
       the pick-a-piece row (.keqpick) full width too.
    3. The acts by the option rule (kitOptLayout 32.9): short acts (name + ≤ 1 row) share a 2–3 column grid, an act with two or more rows
-      (Cần / Tốn / Được / Kèm, odds) is a full-width row; every card keeps all its lines, tight (content height, no stretched cells).
+      (Cần / Tốn / Được / Kèm, odds) is a full-width row (short cells pack together first: grid-auto-flow dense); every card keeps all its lines, tight (content height, no stretched cells).
    4. No "Lui": the header ✕ (32.10), a tap outside, Esc. */
 function kitSlotDress(M,body){const dlg=M.querySelector(".dlg");if(!dlg)return;dlg.classList.add("kitslot");const subj=body.querySelector(":scope > .kpsubj.kpitem"),main=body.querySelector(":scope > .kpmain");if(!subj||!main)return;
  const head=document.createElement("div");head.className="kslhead";const info=document.createElement("div");info.className="kslinfo";
@@ -155,9 +155,9 @@ setTimeout(()=>{if(typeof showModal!=="function")return;const s0=showModal;showM
 #modal .dlg.kitslot .kslinfo>p{margin:4px 0 0}
 #modal .dlg.kitslot .kpmain>.kfacts,#modal .dlg.kitslot .kpmain .kfacts{margin:2px 0 6px;gap:2px}
 #modal .dlg.kitslot .kfact{grid-template-columns:minmax(0,1fr)!important;min-height:0;padding:2px 0;border:0}
-#modal .dlg.kitslot .kfact>.kfdot{display:none!important}
+#modal .dlg.kitslot .kfact>:not(.kft){display:none!important}
 #modal .dlg.kitslot .kpmain>p.past{margin:4px 0}
-#modal .dlg.kitslot .kinvacts{grid-template-columns:repeat(auto-fill,minmax(min(100%,180px),1fr));align-items:start;gap:6px;margin-top:8px}
+#modal .dlg.kitslot .kinvacts{grid-template-columns:repeat(auto-fill,minmax(min(100%,180px),1fr));grid-auto-flow:row dense;align-items:start;gap:6px;margin-top:8px}
 #modal .dlg.kitslot .kinvacts>button{height:auto!important;min-height:0!important;align-self:start}
 #modal .dlg.kitslot .kinvacts>button.ksllong{grid-column:1/-1}
 @media (min-width:1000px){#modal .dlg.kitslot .kinvacts{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}}

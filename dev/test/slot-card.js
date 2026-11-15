@@ -24,9 +24,9 @@ const live=p=>cache.has(p)?Promise.resolve(cache.get(p)):new Promise(res=>https.
   const imgs=()=>p.evaluate(()=>Promise.all([...document.querySelectorAll('img')].filter(i=>i.offsetParent).map(i=>i.complete?0:new Promise(r=>{i.onload=i.onerror=r;setTimeout(r,6000)}))));
   const tile=await p.evaluate(()=>{const t=document.querySelector('#panel .kitem');const r=t&&t.getBoundingClientRect();return r?[Math.round(r.width),Math.round(r.height)]:null});
   const R={sz,tile,cards:{}};
-  const slots=await p.evaluate(()=>(KEQ.reg.tutrang&&KEQ.reg.tutrang.slots||[]).map(s=>s.k));
+  const slots=await p.evaluate(()=>{try{keqTT()}catch(e){}return(KEQ.reg.tutrang&&KEQ.reg.tutrang.slots||[]).map(s=>s.k)});
   for(const k of slots.concat(["item"])){
-   const ok=await p.evaluate(k=>{Q.length=0;tab="inv";render();if(k==="item"){const x=kinvItems()[0];if(!x)return false;kinvOpen(x);return true}const s=KEQ.reg.tutrang.slots.find(s=>s.k===k);keqPick(s);return true},k);
+   const ok=await p.evaluate(k=>{Q.length=0;tab="inv";render();if(k==="item"){const x=kinvItems()[0];if(!x)return false;kinvOpen(x);return true}try{keqTT()}catch(e){}const s=KEQ.reg.tutrang.slots.find(s=>s.k===k);keqPick(s);return true},k);
    if(!ok){R.cards[k]="none";continue}await imgs();await sleep(700);
    R.cards[k]=await p.evaluate(()=>{const M=document.getElementById('modal'),d=M.querySelector('.dlg');const r=d.getBoundingClientRect();const vis=e=>e&&e.offsetParent!==null;
     const t=d.querySelector('.kpsubj.kpitem .kitem');const tr=t&&t.getBoundingClientRect();
