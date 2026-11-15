@@ -119,7 +119,7 @@ function kinvOpen(x){const g=x.g,it=IT[g.k],i=g.i;const over=it.rk&&it.rk>S.rank
  kitSlotDress(M,body);
  if(typeof kitFix==="function")kitFix(body)}catch(e){console.error("itemPic",e)}return r}})();
 /* ---------- KIT 28.13f ITEM / EQUIPMENT-SLOT CARD — compact (owner 11/15 "ĐIỀU · Ô cài tóc" far too big) ----------
-   Every item panel (bag tile → kinvOpen / wdOpen / wdFabOpen) and every equipment-slot panel (Đang mang: cài tóc, đeo tay, đeo eo,
+   Every item panel (bag tile → kinvOpen / wdOpen / wdFabOpen) and every equipment-slot panel (Bên mình: cài tóc, đeo tay, đeo eo,
    túi thơm, khăn che mặt, y phục → keqPick / wdSlotOpen) is the standard kit dialog box (kit panel width, never taller than the person
    dialog 32.7: min(100dvh − 32 px, 720 px), only the body scrolls), laid out:
    1. TOP ROW: the small item tile (kitItem at the bag-grid tile size, 64 px; empty slot = its faint ghost) LEFT, its kit rows RIGHT
@@ -170,7 +170,7 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
    Under each: the slot name + what is in it (or "trống"). The header carries the bonus summary of everything worn. Tap → onPick(slot). */
 const KEQ={reg:{}};
 function kitEquipSlots(o){o=o||{};const key=o.key||"eq";KEQ.reg[key]=o;const L=o.slots||[];
- return `<div class="keq" data-keq="${key}" style="--keqn:${L.length}"><div class="keqh"><h4 class="kpst">${o.title||"Đang mang"}</h4><div class="keqsum">${o.sum||""}</div></div><div class="keqs">`+
+ return `<div class="keq" data-keq="${key}" style="--keqn:${L.length}"><div class="keqh"><h4 class="kpst">${o.title||"Bên mình"}</h4><div class="keqsum">${o.sum||""}</div></div><div class="keqs">`+
   L.map((x,i)=>`<div class="keqc">${kitItem(x.item?{src:x.item.src,name:x.item.name,grade:x.item.grade,lux:x.item.lux,size:"slot",tip:x.item.tip||x.item.name,data:`data-keqk="${key}" data-keqi="${i}" role="button" tabindex="0"`}
    :{empty:true,size:"slot",ghost:x.ghost,tip:`${x.label}: trống`,data:`data-keqk="${key}" data-keqi="${i}" role="button" tabindex="0"`})}${x.item?`<b class="keqnm" style="color:${KIT_GRADE[x.item.grade|0].c}">${x.item.name}</b>${x.mini?`<span class="keqfx">${x.mini}</span>`:""}`:`<b class="keql">${x.label}</b>`}</div>`).join("")+`</div></div>`}
 document.addEventListener("click",e=>{const s=e.target.closest&&e.target.closest("[data-keqi]");if(!s)return;e.stopPropagation();const o=KEQ.reg[s.dataset.keqk];const x=o&&o.slots&&o.slots[+s.dataset.keqi];if(x&&o.onPick)o.onPick(x)},true);
@@ -270,7 +270,7 @@ function keqTT(){const wb=wearBonus(S),vp=vpItems(S);const slots=KEQ_TT.map(([sl
   return{k:sl,label,item,note,ix,mini,hint:kitItemHint(sl),ghost:sl==="dress"?`img/wd512/wd-${keqTier()}-y-01.webp`:sl==="veil"?"img/veil-silk-ivory.png":keqArt(gk)}});
  const C=[];if(wb.sac)C.push(["Sắc",wb.sac]);if(wb.danh)C.push(["Danh",wb.danh]);
  const sum=(C.length?kitChips(C):`<span class="past">chưa mang gì: không thêm</span>`)+kitLuxChip(luxOf(S))+(vp.length?kitChip(`${vp.length} món vượt phẩm: dễ bị tố`,"no"):"");
- return kitEquipSlots({key:"tutrang",title:"Đang mang",slots,sum,onPick:keqPick})}
+ return kitEquipSlots({key:"tutrang",title:"Bên mình",slots,sum,onPick:keqPick})}
 function keqPick(x){if(x.k==="veil"){const on=veilOn(S),need=veilNeed(S),has=veilHas(S);
   const rows=kitRows([["Được",need?["che vết trên mặt","Sắc +2"]:[],"g"],["Mất",on&&!need?["mặt đã lành mà vẫn che: dễ bị đồn, Danh -1"]:[],"r"],["Ghi chú",[has?(need?"vết hủy dung còn trên mặt":"mặt đã lành"):"chỉ có khi bị hủy dung hay nổi mẩn"],"n"]]);
   const B=has?[pbtn(`data-keqveil="${on?"off":"on"}"`,on?"Bỏ khăn":"Che mặt",on?(need?"kèm: vết trên mặt lộ ra, Sắc -2":"thành: hết bị đồn che mặt"):(need?"thành: che vết trên mặt, Sắc +2":"kèm: mặt lành mà che, dễ bị đồn"),"")]:[];

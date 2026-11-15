@@ -52,8 +52,8 @@ async function weekBoth(A,B,w){const n=await A.p.evaluate(()=>typeof B4N==='numb
  const A=await mk(b,'fold',[686,880,2.2]),B=await mk(b,'ipad',[1180,820,2]);ALL.push(A,B);
  /* 1 host makes a room */
  await A.page();await A.p.goto(BASE);await A.p.waitForTimeout(3000);await shot(A,'01-title');
- ok(await tapText(A,/^Chơi cùng bạn/),'A taps Chơi cùng bạn');await A.p.waitForTimeout(600);await shot(A,'02-coop-menu');
- ok(await tapText(A,/^Mời bạn/),'A taps Mời bạn');
+ ok(await tapText(A,/^(Chơi cùng bạn|Cùng hảo hữu)/),'A taps Chơi cùng bạn');await A.p.waitForTimeout(600);await shot(A,'02-coop-menu');
+ ok(await tapText(A,/^(Mời bạn|Mời hảo hữu)/),'A taps Mời bạn');
  ok(await until(A,()=>__co().code&&__co().seat==='a'),'A has a room code, seat a');
  const code=(await C(A)).code;console.log('room',code);await clear(A);await shot(A,'03-invite-waiting');
  const w0=await A.p.evaluate(()=>!!(__co().frozen));ok(w0,'A waits for the friend (frozen before join)');

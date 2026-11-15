@@ -746,7 +746,7 @@ chest, Tư trang, wardrobe slots, reward chests, peddler, works, reward panels. 
 - (11/15) The grid GROWS by whole rows into the panel's free height (no big empty gap at the bottom); what is left (< one row) goes to the
   equipment slots below (they grow up to 112 px). Refit on grid width / panel height change (ResizeObserver).
 ### 28.13f ITEM / EQUIPMENT-SLOT CARD — compact (owner 11/15: "ĐIỀU · Ô cài tóc" far too big) — `kitSlotDress` / `kitSlotFit` (jinv)
-Every item panel (bag tile → kinvOpen / wdOpen / wdFabOpen) and every "Đang mang" slot panel (cài tóc, đeo tay, đeo eo, túi thơm, khăn che
+Every item panel (bag tile → kinvOpen / wdOpen / wdFabOpen) and every "Bên mình" slot panel (cài tóc, đeo tay, đeo eo, túi thơm, khăn che
 mặt, y phục → keqPick / wdSlotOpen) is the standard kit dialog box (`.dlg.kitslot`: kit panel width min(560 px, 100vw − 24 px), never
 taller than the person dialog 32.7 — min(100dvh − 32 px, 720 px) — only its body scrolls):
 1. TOP ROW: the small item tile LEFT (kitItem at the bag-grid tile size, 64 px; an empty slot shows its faint ghost; the grade word is not

@@ -34,7 +34,7 @@ function kbkExpand(blocks,skip){const out=[];for(const b of (blocks||[])){if(!b)
  return out}
 
 function kitBook(spec){spec=spec||{};const rm=()=>{try{return reducedMotion()}catch(e){return false}};
- const root=document.createElement("div");root.className="kbk";root.setAttribute("role","dialog");root.setAttribute("aria-label",spec.label||"Sổ tuần");
+ const root=document.createElement("div");root.className="kbk";root.setAttribute("role","dialog");root.setAttribute("aria-label",spec.label||"Tuần lục");
  for(const k of Object.keys(KBK_ART))if(KBK_HAVE[k])root.classList.add("art-"+k);
  root.innerHTML=`<div class="kbk-stage"><div class="kbk-book"></div></div><div class="kbk-bar"><button class="kbk-nav kbk-prev" aria-label="Trang trước">‹</button><span class="kbk-no" aria-live="polite"></span><button class="kbk-nav kbk-next" aria-label="Trang sau">›</button></div><button type="button" class="kit-x kbk-x" aria-label="${spec.closeLabel||"Đóng"}" title="${spec.closeLabel||"Đóng"}">✕</button><div class="kbk-measure" aria-hidden="true"></div>`;
  (spec.host||document.body).appendChild(root);
@@ -44,7 +44,7 @@ function kitBook(spec){spec=spec||{};const rm=()=>{try{return reducedMotion()}ca
  /* ---- page shells ---- */
  const head=spec.head||"";
  const shell=(cls,inner,folio)=>`<div class="kbk-pg ${cls}"><div class="kbk-in">${head&&!/k-cover|k-blank|k-back/.test(cls)?`<div class="kbk-rh">${head}</div>`:""}<div class="kbk-body">${inner}</div>${folio?`<div class="kbk-fo">${folio}</div>`:""}</div></div>`;
- const coverH=p=>`<div class="kbk-cv"><div class="kbk-stitch"></div><div class="kbk-label"><b class="kbk-lt">${String(p.title||"Sổ tuần").split(" ").map(w=>`<span>${w}</span>`).join(" ")}</b></div><div class="kbk-cmeta">${p.sub?`<span class="kbk-ls">${p.sub}</span>`:""}${p.note?`<span class="kbk-cn">${p.note}</span>`:""}</div><b class="kbk-cseal">${p.seal||"TUẦN"}</b><span class="kbk-hint">${p.hint||"Vuốt trang hoặc chạm mép phải để lật"}</span></div>`;
+ const coverH=p=>`<div class="kbk-cv"><div class="kbk-stitch"></div><div class="kbk-label"><b class="kbk-lt">${String(p.title||"Tuần lục").split(" ").map(w=>`<span>${w}</span>`).join(" ")}</b></div><div class="kbk-cmeta">${p.sub?`<span class="kbk-ls">${p.sub}</span>`:""}${p.note?`<span class="kbk-cn">${p.note}</span>`:""}</div><b class="kbk-cseal">${p.seal||"TUẦN"}</b><span class="kbk-hint">${p.hint||"Vuốt trang hoặc chạm mép phải để lật"}</span></div>`;
  const endH=p=>`<div class="kbk-end"><span class="kbk-orn"></span><h3 class="kbk-et">${p.title||"Tuần này đến đây là hết."}</h3><b class="kbk-seal" aria-label="${(p.seal||["HẾT","TUẦN"]).join(" ")}">${(p.seal||["HẾT","TUẦN"]).map(s=>`<i>${s}</i>`).join("")}</b>${p.note?`<p class="kbk-en">${p.note}</p>`:""}<button class="kbtn kbk-go" id="${p.btnId||"kbk-go"}">${p.btn||"Đã hiểu"}</button></div>`;
  const blankH=()=>`<div class="kbk-blank"><span class="kbk-orn"></span></div>`;
  const textTop=(p,cont)=>`<div class="kbk-th"><h3 class="kbk-t">${p.title||""}${cont?` <small class="kbk-cont">tiếp theo</small>`:""}</h3>${p.sub&&!cont?`<small class="kbk-ts">${p.sub}</small>`:""}</div>`;
@@ -233,7 +233,7 @@ function kbkArt(facts,ctx){if(typeof evArtOf!=="function")return facts;let w=0;t
   if(a){f.art=a;f.artT=(typeof evArtTitle==="function"&&evArtTitle(id))||""}}catch(e){}return f})}
 
 function wkBookPages(){const d=wkBookData();const date=kitDate(S.month,S.year,S.tuan);const sea=`${SEASON[S.month-1]}${S.wx?" · "+S.wx.n:""}`;
- const P=[{kind:"cover",title:"Sổ tuần",sub:date,note:sea}];
+ const P=[{kind:"cover",title:"Tuần lục",sub:date,note:sea}];
  const b=[];b.push({rows:[["Ngày",date,"t"],["Tiết",sea,"n"]]});
  if(S.lot){const bad=LVB[S.lot.lv]<0||(S.lot.dom==="Hung"&&S.lot.lv>=3),good=LVB[S.lot.lv]>0;b.push({h:kitGloss("Quẻ tuần")});b.push({rows:[["Quẻ",`<span class="ef t">${LV[S.lot.lv]} · ${S.lot.dom}</span>`],["Lời quẻ",(LOTS[S.lot.i]||[])[2]||"","n"],["Tuần này",String(lotEffect(S.lot)).replace(/…\./," và các việc khác cùng loại."),bad?"r":good?"g":"n"]]})}
  b.push({h:"Ngươi tuần qua"});b.push({chips:d.D.filter(([,v])=>v)});
@@ -248,7 +248,7 @@ function wkBookPages(){const d=wkBookData();const date=kitDate(S.month,S.year,S.
  if(d.world.length)P.push({kind:"text",title:"Triều đình · thiên hạ",blocks:[{facts:kbkArt(d.world.map(f=>Object.assign(f,{kind:"world"})),"world")}]});
  const nf=d.me.length+d.world.length+d.persons.reduce((a,p)=>a+p.n,0);
  P.push({kind:"end",title:"Tuần này đến đây là hết.",seal:["HẾT","TUẦN"],note:nf?`Sổ ghi ${nf} việc${d.persons.length?`, ${d.persons.length} người`:""}.`:"Một tuần yên ả.",btn:"Vào ngày mới",btnId:"dawn-go"});
- return {pages:P,head:`Sổ tuần · ${date}`}}
+ return {pages:P,head:`Tuần lục · ${date}`}}
 
 /* ---------- the dawn: the book replaces the week panel; "Vào ngày mới" closes it and the day goes on ---------- */
 (function(){if(typeof dawn!=="function")return;const old=dawn;
@@ -256,7 +256,7 @@ function wkBookPages(){const d=wkBookData();const date=kitDate(S.month,S.year,S.
   S.wkSnap=wkSnap();try{const rt=$("rtoast");if(rt){rt.classList.remove("on");clearTimeout(window.__rtT)}document.body.classList.add("kbk-open")}catch(e){}let w=$("dawn");if(!w){w=document.createElement("div");w.id="dawn";w.className="dawn";document.body.appendChild(w)}
   w.classList.add("kbkdawn");w.onclick=null;w.innerHTML=`<div class="dsky"><i class="lan l1"></i><i class="lan l2"></i><i class="lan l3"></i><i class="sun"></i></div>`;
   w.hidden=false;w.classList.toggle("rm",reducedMotion());void w.offsetWidth;w.classList.add("on");
-  const tok=w.__kbkTok={};const bk=kitBook({pages:built.pages,head:built.head,host:w,label:"Sổ tuần",onClose:()=>{if(w.__kbkTok!==tok)return;document.body.classList.remove("kbk-open");w.classList.remove("on");setTimeout(()=>{if(w.__kbkTok!==tok)return;w.hidden=true;w.innerHTML=""},reducedMotion()?0:350)}});
+  const tok=w.__kbkTok={};const bk=kitBook({pages:built.pages,head:built.head,host:w,label:"Tuần lục",onClose:()=>{if(w.__kbkTok!==tok)return;document.body.classList.remove("kbk-open");w.classList.remove("on");setTimeout(()=>{if(w.__kbkTok!==tok)return;w.hidden=true;w.innerHTML=""},reducedMotion()?0:350)}});
   window.__kbk=bk;setTimeout(bell,reducedMotion()?0:1400);try{w.querySelector(".kbk-next").focus({preventScroll:true})}catch(e){}}})();
 
 (function(){const st=document.createElement("style");st.id="kbk-css";st.textContent=`
