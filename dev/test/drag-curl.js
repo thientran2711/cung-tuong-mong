@@ -22,7 +22,9 @@ const [,,BASE,SZ,OUT,TAG,OLD,BOOK]=process.argv;const [WH,DPR]=SZ.split('@');con
  /* bend: spread of the strips' rotateY angles (a flat board turning = one angle for every strip) */
  const bend=()=>p.evaluate(()=>{const a=[...document.querySelectorAll('.ksht-st')].map(e=>{const m=/rotateY\((-?[\d.]+)deg/.exec(e.style.transform);return m?-+m[1]:0});
   return a.length?{n:a.length,min:Math.round(Math.min(...a)),max:Math.round(Math.max(...a)),flat:document.querySelectorAll('.ksht-flat').length}:null});
- await click('rv');await p.waitForTimeout(1600);
+ /* two neighbouring page tabs in the visible tab bar (not the map): T1 → T2 forward, T2 → T1 back */
+ const [T1,T2]=await p.evaluate(()=>{const B=[...document.querySelectorAll('#tabs [data-tab]')].filter(b=>b.offsetParent&&!b.disabled).map(b=>b.dataset.tab);for(let i=0;i+1<B.length;i++)if(B[i]!=='go'&&B[i+1]!=='go'&&B[i]!=='act')return[B[i],B[i+1]];return[B[0],B[1]]});
+ await click(T1);await p.waitForTimeout(1600);
  const R=await p.evaluate(()=>{const r=document.getElementById('panel').getBoundingClientRect();return{x:r.left,y:r.top,w:r.width,h:r.height}});
  const y=R.y+R.h*.55,x0=R.x+R.w*.9,span=x0-R.x;
  const res={TAG,old};
@@ -46,7 +48,7 @@ const [,,BASE,SZ,OUT,TAG,OLD,BOOK]=process.argv;const [WH,DPR]=SZ.split('@');con
    ev(ptr?'pointerdown':'touchstart',x);for(let i=1;i<=6;i++)ev(ptr?'pointermove':'touchmove',x+dx*i/6);ev(ptr?'pointerup':'touchend',x+dx);res(1)}),[x,y,dx,ptr]);
  await idle();await flick(x0,y,-150);await idle();res.flick=await audit();
  /* 3. slow drag right past half → back to the previous tab */
- await click('staff');await idle();await p.waitForTimeout(800);
+ await click(T2);await idle();await p.waitForTimeout(800);
  { const xs=R.x+R.w*.12;await T('touchStart',xs,y);let q=xs;const tgt=xs+(R.x+R.w-xs)*.62;while(q<tgt){q=Math.min(tgt,q+20);await T('touchMove',q,y)}
   await p.waitForTimeout(500);res.backHold=await bend();await p.waitForTimeout(300);await T('touchEnd');await idle();res.backPast=await audit()}
  /* 4. vertical drag = the page's own scroll, no turn */
@@ -58,7 +60,7 @@ const [,,BASE,SZ,OUT,TAG,OLD,BOOK]=process.argv;const [WH,DPR]=SZ.split('@');con
   if(bt){await T('touchStart',bt.x,bt.y);await T('touchMove',bt.x+3,bt.y+1);await T('touchEnd');await p.waitForTimeout(700)}
   await p.evaluate(()=>{Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true});const a=await audit();res.tap={button:!!bt,noTurnSheet:a.sheets===0}}
  /* 6. Cảnh động off: the drag still moves the page (flat slide, no bend) */
- await click('rv');await p.waitForTimeout(1500);
+ await click(T1);await p.waitForTimeout(1500);
  { await p.evaluate(()=>{OPT.fxon=false});await T('touchStart',x0,y);let q=x0;while(q>x0-span*.4){q-=20;await T('touchMove',q,y)}await p.waitForTimeout(300);
   res.off=await bend();await T('touchEnd');await p.waitForTimeout(1200);res.offAfter=await audit();await p.evaluate(()=>{OPT.fxon=true})}
  /* 7. week book (dawn): cover = stiff board, a leaf = paper; mouse drag (pointer events) */
@@ -77,5 +79,5 @@ const [,,BASE,SZ,OUT,TAG,OLD,BOOK]=process.argv;const [WH,DPR]=SZ.split('@');con
   res.btn=await p.evaluate(()=>new Promise(r=>{__kbk.go(1);const c0=__kbk.cur;__kbk.next();const t0=performance.now();setTimeout(()=>{const a=[...document.querySelectorAll('.ksht-st')].map(e=>{const m=/rotateY\((-?[\d.]+)deg/.exec(e.style.transform);return m?-+m[1]:0});
    const w=()=>{if(document.querySelector('.ksht')&&performance.now()-t0<30000){setTimeout(w,100);return}r({from:c0,mid:a.length?Math.round(Math.max(...a)-Math.min(...a)):0,cur:__kbk.cur,sheets:document.querySelectorAll('.ksht').length})};w()},KIT_TURN_MS*.45)}));
   await p.evaluate(()=>{try{__kbk.close()}catch(e){}})}
- res.end=await audit();res.ids=await p.evaluate(()=>{const c={};let d=0;document.querySelectorAll('[id]').forEach(e=>{if(c[e.id])d++;c[e.id]=1});return d});res.errs=errs.slice(0,8);
+ res.pair=[T1,T2];res.end=await audit();res.ids=await p.evaluate(()=>{const c={};let d=0;document.querySelectorAll('[id]').forEach(e=>{if(c[e.id])d++;c[e.id]=1});return d});res.errs=errs.slice(0,8);
  console.log(JSON.stringify(res));await b.close()})();
