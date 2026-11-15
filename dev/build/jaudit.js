@@ -122,8 +122,10 @@ function aaNamesFix(){if(!S)return;try{const all=allServ().concat(S.maid?[S.maid
  for(const s of all){if(!/\d/.test(s.name||""))continue;const pool=(s.role==="eunuch"?EUN:MAIDS).filter(n=>!used.has(n));if(!pool.length)continue;const n=pool[Math.floor(Math.random()*pool.length)];used.add(n);s.name=n}}catch(e){}}
 (function(){if(typeof mkServ==="function"){const m0=mkServ;mkServ=function(){const s=m0.apply(this,arguments);try{if(/\d/.test(s.name)){const used=new Set(allServ().map(x=>x.name).concat(S&&S.maid?[S.maid.name]:[]));const pool=(s.role==="eunuch"?EUN:MAIDS).filter(n=>!used.has(n));if(pool.length)s.name=pool[Math.floor(Math.random()*pool.length)]}}catch(e){}return s}}
  if(typeof deser==="function"){const d0=deser;deser=function(){const r=d0.apply(this,arguments);aaNamesFix();return r}}})();
-/* short names on strips: titled people keep their title ("Thái y Trương", not "y Trương") */
-(function(){if(typeof shortN!=="function")return;const s0=shortN;shortN=function(nm){const a=String(nm).split(" ");if(a.length===3&&/^(Thái y|Tổng quản|Nội vụ|Ma ma|Thái giám)$/.test(a[0]+" "+a[1]))return String(nm);return s0.apply(this,arguments)}})();
+/* strip label = the NAME only (owner): a title is dropped ("Thái y Trương" → "Trương Bá"; "Tiểu Ngân Tử" → "Ngân Tử" as before).
+   Someone known only by title + surname gets a fixed given name (same every time). One label function for every strip: shortN. */
+(function(){if(typeof shortN!=="function")return;const s0=shortN;const T=/^(Thái y|Tổng quản|Nội vụ|Ma ma|Thái giám|Ngự y|Thị vệ) /;const G=["Bá","Văn","Đức","Minh","Khải","Trọng"];
+ shortN=function(nm){const n=String(nm||"");const m=T.exec(n);if(m){const rest=n.slice(m[0].length).trim();if(!rest)return n;const w=rest.split(" ");if(w.length>=2)return w.slice(-2).join(" ");let h=0;for(const c of n)h=(h*31+c.charCodeAt(0))>>>0;return `${rest} ${G[h%G.length]}`}return s0.apply(this,arguments)}})();
 
 /* 11. MÀU CHIỀU QUAN HỆ (owner, KIT §11.2): a relation LABEL is coloured by its direction — người khác → ta purple (--rel-them),
    ta → người khác blue (--rel-me). The number keeps its Được/Mất colour. kitRel(dir,text) is the one builder; kitRelPaint(root)
