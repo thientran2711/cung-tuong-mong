@@ -210,3 +210,4 @@ Notes: `cdn_sync.py --pull` does NOT refresh img/_index.json reliably (stale loc
 - Beats batch A (16, session 15/11 late-night): cn_tinh t1 x1, cn_ban (7), cn_than (7) drawn, checked on sheet, live + wired, 0 missing. 80 of 295 done, 215 left. Scenes written, generating: nc_gian, nc_su, nc_tuc, nc_vuong (ids of in-flight gens in tmp/pend*.txt).
 - Beats batch B (16): nc_gian (7), nc_su (7), nc_tuc s1 s2 live + wired, 0 missing. 96 of 295 done, 199 left.
 - Beats batch C (16): nc_tuc c1-x1, nc_vuong (7), ch_co s1-c2 live + wired, 0 missing. 112 of 295 done, 183 left.
+- Beats batch D (16): ch_co c3-x1, ch_benh (7), ch_ho s1-t1 live + wired, 0 missing. 128 of 295 done, 167 left.
