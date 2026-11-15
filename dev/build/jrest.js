@@ -17,7 +17,7 @@ function restDsK(){return Math.max(BAL.restDsMinK,4-(typeof used==="number"?used
 function restDs(a){if(!a||a.rest!=="ds")return a;const T=restTonic(),k=restDsK();a.k=k;a.b=restDsB();a.o=100;a.w={suc:BAL.restDsSuc};a.l={};
  a.c=T?{}:{bac:-BAL.restDsBac};
  a.t=`Uống thuốc bổ, ngủ sớm: ${4-used<BAL.restDsMinK?`cần còn ít nhất ${BAL.restDsMinK} khắc;`:`dùng hết ${k} khắc còn lại,`} hết ${BUOI[restDsB()].toLowerCase()}.${T?"":" Rương không có thuốc bổ: sai người mua một chén."}`;
- a.x=T?`tốn: 1 ${T.it.n} trong rương (thang thuốc bổ rẻ nhất; không mất bạc)`:"";
+ a.x=T?`tốn: 1 ${T.it.n} trong rương`:""; /* review: the card says only what is spent — the "(thang thuốc bổ rẻ nhất; không mất bạc)" aside ran past the card at 844x390 */
  a.go=()=>{const t=restTonic();if(t&&!(a.c&&a.c.bac)){S.inv.splice(t.i,1);log(`Ngươi sắc ${t.it.n} uống rồi ngủ sớm.`)}else log("Ngươi sai người mua chén thuốc bổ, uống rồi ngủ sớm.")};return a}
 function restLat(a){if(!a||a.rest!=="lat")return a;const e=typeof emoGet==="function"?emoGet(S):{k:"binh",v:0};const bad=REST_BAD.includes(e.k)&&e.v>=15;
  a.k=BAL.restLatK;a.c={};a.o=100;a.w={suc:BAL.restLatSuc};a.l={};
