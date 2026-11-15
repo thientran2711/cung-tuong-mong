@@ -1593,6 +1593,13 @@ so two adults still fill the column on Fold 755; only a narrower screen gives th
 painted height ≈ 0.99 of the column under the chips; ≈ 0.93 of the whole column with a two-line chip on top (the chip itself takes the
 rest). Stage figures, 32.6 picture bands and week-book figures keep KIT_FIG (33).
 
+### 32.7c PERSON DIALOG HEIGHT = ITS CONTENT (owner 11/15 "Khung to quá", "VIỆC · Có người đến") — `kitDpFit` (jk4)
+Every person dialog (32.7: visitors, invitations, confrontations, the shop) is as tall as its content — title + event text + options —
+never stretched to the screen: height = clamp(min(100dvh − 32 px, 500 px), natural height, min(100dvh − 32 px, 720 px)). The people are
+scaled to that column (32.7b). Content taller than the cap (many options, the shop grid) keeps the cap and only the options / grid scroll,
+so the shop and a full person dialog share the same box; a two-choice visit is a short card. Options that cannot be taken go last
+(doable first). Test: `dev/test/fig-fill.js` (dialog size + fill), `dev/test/shop-fix.js`.
+
 ## 38. ÂN OÁN · RELATIONS (owner 11/15) — `dev/build/jhc.js`
 ### 38.1 kitRelRow — ONE relation row everywhere
 `kitRelRow({kind:"quy"|"oan"|"pos", a, b, v, what, word, gloss, signed, max, good})` → `.krr`:
@@ -1627,3 +1634,30 @@ and B's rank colour on A's row). The face is mdH(kitFace(p)) = the same por file
 Tests: `node dev/test/rel-row.js <url> <outdir> <tag> [sizes]`; `node dev/test/stranger-sweep.js <url> [outdir]` (one unmet consort through
 every renderer: no real face / figure file, silhouette present; 8 news rows: src + rank colour == her strip tile; met again → face back).
 Shots: dev/shots/kit-fig2/.
+
+## 39. kitActCompact — act cards in a narrow pane beside a person (owner 11/15) — `dev/build/jk4.js`
+Panes with a portrait / figure on the left (person card `.pc > .pcr`: Hậu cung · Thánh thượng / Phi tần / Cung nhân "Việc hôm nay",
+Hoàng tự child cards) are inline-size containers `kpane`; under 640 px every act card (`button.ka.kart`) in them is compact:
+- LEFT: the same act picture as a small square thumbnail (84 px; 72 px when the pane is under 420 px), cover-cropped, 2 px border in its
+  category colour (`--kcc0`); the big slot's frame ornaments and ribbon are hidden (the card keeps its 4 px category edge).
+- RIGHT (≥ 60 % of the card): title + odds ladder on ONE line (the odds never wrap), a ONE-line description (full text in the tooltip),
+  then Cần / Tốn / Được / Mất / Kèm as label + value chips that wrap as whole chips (a chip longer than the line breaks inside itself only).
+- Cards stack, one per row. Test: `node dev/test/act-compact.js <url> <outdir> <tag> [sizes]` (thumb size, text share, odds line,
+  description line, no chip split that could have fitted). Shots: dev/shots/kit-fig2/after/act-*.
+The plain act buttons of the person card (Phi tần: Làm quen · Gặp mặt · Giao thiệp · Dùng chứng cứ · Hại nhỏ / nặng · Sát hại) get the
+same thumbnail (j79 kpActArt via kitActCompactOn) ONLY from their OWN act picture (img/ACTS.json key). Owner 11/15: never a category /
+group picture as a stand-in — no own picture → no thumbnail (`.kanoart`), the text takes the full card width; the same inside every kpane. Acts still without an own picture: dev/review/person-act-pics-missing.md (for act-pics2).
+Not covered: gift-dialog recipient rows and the shop use their own tiles (28.13e), not act cards.
+
+## 40. kitEventDp — THE event-with-a-person dialog (owner 11/15, replaces 32.6 for events with a person) — `dev/build/jk4.js`
+ONE component for every event where a person appears: NPC visits ("Có người đến"), invitations (Đoan ngọ …), confrontations, the
+Emperor's visits. It is the 32.7 person dialog:
+- LEFT: the person full height (32.7b), name + rank ABOVE (37 kitNameRank). Two people stand side by side (32.7 rule).
+- RIGHT, top: the event picture as a landscape BANNER (`.kdlgart.kdpban`, height clamp(96 px, 24vh, 190 px), cover-cropped at the focus
+  point `KIT_FOCUS[file]` (CSS object-position; default 50% 50%; list + crop sheets: dev/review/event-banners.md). No picture → no banner.
+- RIGHT, middle: the event text as kit rows (the empty "world" dot is dropped).
+- RIGHT, bottom: the options as kit option cards (Được / Mất / odds), doable first; TWO per row when every option is short (≤ 2 rows,
+  ≤ 70 characters), else one per row (`.opts.kdpo2`). Only the options scroll.
+- Height = content (32.7c), inside the standard person-dialog box.
+`window.KIT_EVENT_DP=false` restores 32.6 (people on the picture) for a test. Test: `node dev/test/event-dp.js <url> <outdir> <tag> [sizes]
+[kinds]` (mock, long, nopic, emp: banner in the right column, focus, fill, chip above, option columns, empty space under the options).

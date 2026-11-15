@@ -8,7 +8,7 @@
 const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT,SIZES]=process.argv;fs.mkdirSync(OUT,{recursive:true});
 const sleep=t=>new Promise(r=>setTimeout(r,t));
 (async()=>{const b=await chromium.launch();const R=[];
- for(const sz of (SIZES||"755x1000@2,1000x755@2,1180x820@2,844x390@3").split(",")){const [wh,dpr]=sz.split("@");const [W,H]=wh.split("x").map(Number);
+ for(const sz of (SIZES||"755x1000@2,1000x755@2,1180x820@2,844x390@3").split(",")){const [wh,dpr]=sz.split("@");const [W,H]=wh.split("x").map(Number);const SZH=H;
   const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:+dpr,hasTouch:true,isMobile:W<1100,serviceWorkers:'block',reducedMotion:'reduce'});
   const p=await ctx.newPage();p.setDefaultTimeout(240000);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
   await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof showModal==='function');await sleep(2500);
@@ -65,5 +65,5 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
    return{tile,lab1,lab2,badge,bac:[b0,S.bac],inv:[n0,S.inv.length],log:kpPlain(S.logs[0]),after:(document.querySelector('#modal .kshempty')||{}).textContent||document.querySelectorAll('#modal .kshc').length+' tiles'}});
   await shot('shop-sell');
   const xClose=await p.evaluate(async()=>{const W=t=>new Promise(r=>setTimeout(r,t));document.querySelector('#modal .kph > .kit-x').click();await W(400);return document.getElementById('modal').hidden});
-  R.push({sz,refSame,refWoman,shopBox,sameAsSeller:refSame.every((v,i)=>Math.abs(v-shopBox[i])<=1),geo,buy,det,detClosed,sell,xClose,errs});await ctx.close()}
+  R.push({sz,refSame,refWoman,shopBox,sameAsSeller:Math.abs(refSame[2]-shopBox[2])<=1&&Math.abs(refSame[0]-shopBox[0])<=1,capH:Math.min(+SZH-32,720),geo,buy,det,detClosed,sell,xClose,errs});await ctx.close()}
  console.log(JSON.stringify(R,null,1));await b.close()})().catch(e=>{console.error(e);process.exit(1)});
