@@ -784,3 +784,12 @@ All must work in co-op.
 ## 15/11 (late, session 7) — Her face blurry on stage (owner screenshot)
 - Owner screenshot (Ngọc Thanh các, Thường tại, 20 tuổi, chưa điểm trang): HER figure's face is hazy/soft while maid Ngọc Lan beside her is crisp; owner suspects background removal ("tách nền sao mà mặt bị mất nét"). → review/face-sharp worker (find the real cause, whole class).
 - (owner, last message to session 7) The account runs on paid usage: once workers stop reporting, archive this chat. → Session 7 stopped its remaining agents (their WIP is on their branches) and archived itself.
+
+## 15/11 (session 8 start) — Takeover by main session 8 on the new account (owner)
+- Owner's opening order to session 8 (verbatim, Vietnamese): "Việc đầu tiên: đọc dev/handover/HANDOVER_TO_SESSION8.md ... làm đúng mục 0 → 5: dựng máy, kiểm kết nối GitHub/Cloudflare/Magnific, tạo lịch theo dõi mỗi giờ, giao người duyệt cho mọi nhánh 'SẴN SÀNG KIỂM', mở lại MỌI thợ đang dở theo file PROGRESS của nhánh, rồi giao hết việc còn lại trong dev/handover/OWNER_LEDGER.md mục 'UNASSIGNED'. Không được bỏ sót thợ nào hay ý nào của sếp. Ghi mọi lời sếp vào dev/OWNER_DECISIONS.md ngay trong lượt đó."
+- Connectors on the new account (session 8 check): GitHub push OK; Magnific OK (project "Personal" ba4aecfe-efce-47e2-b53f-30d292091886 reachable, ~1.41M credits left); Cloudflare NOT connected — the credential form for api.cloudflare.com was declined by the owner. → CDN uploads are BLOCKED: workers keep new images in their worktree, list them in dev/PROGRESS_<branch>.md under "PENDING CDN UPLOAD", and the coordinator uploads once a Cloudflare token is added to the environment's network secrets.
+- dev/handover/OWNER_LEDGER.md did not exist on the docs branch → ledger sweep worker re-spawned (s7 note 9a).
+
+## 15/11 (session 8) — Rank colour missing in picker rows (owner screenshot)
+- Owner (verbatim): "Phẩm bậc trong mấy ô chọn này chưa theo màu phẩm, màu phẩm xuất hiện mới nơi có tên và phẩm của người."
+- Screenshot dev/handover/refs/owner-rank-colour-picker.jpg: action "Sai Ngọc Lan đi dò la", target picker rows "Hoàng hậu Chu Thục Nghi", "Quý phi Tần Kiều Nguyệt", "Phi Hạ ..." — the rank word is plain text, not in its rank colour. Rule: EVERY place that shows a person's rank with their name (picker rows, cards, dialogs, lists, logs, toasts, popups) shows the rank in its rank colour via the shared kit. → worker review/rank-colour (LUẬT SỬA CẢ NHÓM: scan every name+rank render, before/after table).
