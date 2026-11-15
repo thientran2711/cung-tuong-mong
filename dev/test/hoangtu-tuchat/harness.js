@@ -15,5 +15,5 @@ async function open(W,H,page){const b=await chromium.launch();const ctx=await b.
  await ctx.addInitScript(()=>{setInterval(()=>{document.querySelectorAll(".krskip").forEach(b=>b.click())},300)});
  const p=await ctx.newPage();p.setDefaultTimeout(240000);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,300)));
  await p.goto('http://ht.local/',{waitUntil:'domcontentloaded'});await p.waitForTimeout(3500);return {b,ctx,p,errs}}
-const clean=p=>p.evaluate(()=>{for(let i=0;i<4;i++)document.querySelectorAll('[data-km-close]').forEach(b=>b.click());Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;const w=document.getElementById('dawn');if(w){w.hidden=true;w.innerHTML='';w.classList.remove('on')}document.body.classList.remove('kbk-open');try{render()}catch(e){}});
+const clean=p=>p.evaluate(()=>{try{KMQ.length=0}catch(e){}document.querySelectorAll('.kmov').forEach(o=>o.remove());for(let i=0;i<4;i++)document.querySelectorAll('[data-km-close]').forEach(b=>b.click());Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;const w=document.getElementById('dawn');if(w){w.hidden=true;w.innerHTML='';w.classList.remove('on')}document.body.classList.remove('kbk-open');try{render()}catch(e){}});
 module.exports={open,clean,WT};
