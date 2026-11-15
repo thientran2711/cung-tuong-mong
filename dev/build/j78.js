@@ -75,11 +75,14 @@ function j78mkEvd(v,ctx){const c=ctx||{};const p=c.proves?{proves:c.proves,ref:c
 /* keep S.evd in step with the counters; announce new pieces with what they prove and what they allow now */
 function evdSync(ctx){if(!S||!rivals)return;S.evd=S.evd||{};const legacy=!S.evdV;const fresh=[];
  for(const v of rivals){const L=S.evd[v.id]=S.evd[v.id]||[];const n=Math.max(0,v.ev||0);if(L.length>n)L.splice(0,L.length-n);
-  while(L.length<n){let c=ctx||J78.ctx;if(legacy)c={legacy:1,how:"Đã có từ trước khi sổ chứng cứ được lập"};else if(!c){const nNew=Math.max(0,(S.logSeq||0)-(J78.lseq==null?(S.logSeq||0):J78.lseq));const ln=S.logs.slice(0,nNew).find(x=>x.includes(v.name)&&!x.includes("Chứng cứ về"));c={how:ln?plain(ln):"Tai mắt của ngươi"}}
+  while(L.length<n){let c=ctx||J78.ctx;if(legacy)c={legacy:1,how:"Đã có từ trước khi sổ chứng cứ được lập"};else if(!c){c={how:"Tai mắt của ngươi"}/* owner 16:55Z: never the text of whatever log line last named her (a gift is not evidence) */}
    const e=j78mkEvd(v,c);L.push(e);if(!legacy)fresh.push([v,e])}}
  S.evdV=1;J78.lseq=S.logSeq||0;if(fresh.length&&!S.dead){const by={};for(const [v,e] of fresh)(by[v.id]=by[v.id]||[v,[]])[1].push(e);for(const id in by){const [v,E]=by[id];log(j78gainTxt(v,E))}J78.lseq=S.logSeq||0}}
 function j78gainTxt(v,E){const A=evidenceActs(v);const tw=whyTime(2);const ok=A.filter(a=>!a.why||a.why===tw).map(a=>`${a.n} (${a.gain[0]||""})`);const need=A.filter(a=>a.why&&/chứng cứ/.test(a.why)).map(a=>`${a.n}: ${a.why}`);
- return `<b>Ngươi có thêm chứng cứ về ${j78who(v)}</b> (nay ${v.ev}): ${E.map(e=>e.proves).join("; ")}.`+(ok.length?` Dùng được ở thẻ nàng (${ok.length} cách).`:"")}
+ /* owner 11/15 16:55Z: the line says where the evidence came from (who found what, by which road), one source per piece, never another
+    event's text and never the card's help ("Dùng được ở thẻ nàng …"); no double full stop */
+ const cut=s=>String(s||"").replace(/<[^>]+>/g,"").replace(/[\s.。!?;,]+$/,"");const lc=s=>{s=cut(s);return s?s.charAt(0).toLowerCase()+s.slice(1):""};
+ return `<b>Ngươi có thêm chứng cứ về ${j78who(v)}</b>: `+E.map(e=>`${cut(e.proves)}${e.how?` (nguồn: ${lc(e.how)})`:""}`).join("; ")+"."}
 /* every gain of evidence gets its context */
 (function(){const e0=evA;evA=function(h,t,n){if(h===S&&t&&t!==S&&n>0&&!J78.ctx){const c=J78.cur;let ctx=null;
   if(c&&c.a===t&&c.t===S)ctx={how:`Người của ngươi bắt quả tang ${j78who(t)}`,proves:`${j78Who(t)} định ${j78act(c.k,S)}`,aim:"me"};
