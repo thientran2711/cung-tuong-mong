@@ -1,0 +1,9 @@
+# role id tier gen ref  (8 tiers, refs from CDN t1)
+consort c01 1 w4hapnK7EI nVjsFeuYQD
+consort c01 2 dty4LrGXSL nVjsFeuYQD
+consort c01 3 5jVD2RmKxe nVjsFeuYQD
+consort c01 4 If63USVtvE nVjsFeuYQD
+consort c01 5 O6fEXXbynm nVjsFeuYQD
+consort c01 6 O6fEXB5ynm nVjsFeuYQD
+consort c01 7 YMLlH5lWeC nVjsFeuYQD
+consort c01 8 WDsgq1KcXe nVjsFeuYQD

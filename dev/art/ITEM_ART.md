@@ -34,6 +34,10 @@ Trang phục (trâm cài, y phục: `WD_ITEMS`, `img/wd-*.webp`, j92) do thợ k
 | xahuong | Xạ hương | Hương liệu (cấm) | Tinh phẩm | túi xạ trong hộp sơn mài đen |
 | hacdinh | Hạc đỉnh hồng | Độc dược | Trân phẩm | lọ sứ đỏ son vẽ hạc, nút sáp đen |
 | botngua | Bột ngứa | Độc dược | Thường | gói giấy rơi bột vàng |
+| docngam | Độc ngấm dần | Độc dược (jpoison) | Tinh phẩm | lọ sứ men ngọc nút sáp, dây chàm, gói bột xám |
+| phanhuy | Phấn hủy nhan | Độc dược (jpoison) | Tinh phẩm | hộp phấn men hồng mở nắp, phấn ánh tím, bông phấn |
+| meduoc | Mê dược | Độc dược (jpoison) | Thường | gói giấy đỏ nâu buộc dây, bột trắng, chén rượu sứ |
+| kimbac | Kim bạc thử độc | Tạp vật (jpoison) | Thường | kim bạc dài trong hộp gấm đỏ lót lụa |
 | tranhco | Tranh cổ | Lễ vật | Trân phẩm | trục tranh sơn thủy cổ |
 | nghien | Nghiên mực Đoan Khê | Lễ vật | Tinh phẩm | nghiên chạm rồng, thỏi mực, bút |
 | dancoc | Đàn cổ Tiêu Vĩ | Lễ vật | Trân phẩm | đàn cổ cầm sơn mài, đuôi cháy sém |
