@@ -62,6 +62,8 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 /* §32.1 / §32.12 the top bar's stat row (owner 15/11 ~17:50Z: LEFT Sắc · Tài · Tâm cơ · Đức · Danh · Sủng | RIGHT Bạc · Sức), review/header-danh */
 KIT_SAMPLES.push({id:"§32.1",title:"kitStatRow: thanh đầu trang (trái 6 | phải 2)",html:()=>{const c=(k,ic,l,v,b)=>kitStatCell("img/"+ic+".webp",l,v,{k,bar:b==null?null:b,title:l+" "+v+" · chạm để xem đủ"});
  return kitStatRow([{cells:[c("sac","sac","Sắc",51),c("tai","tai","Tài",87),c("tamco","tam-co","Tâm cơ",12),c("duc","duc","Đức",40),c("danh","danh","Danh",14,14),c("sung","sung","Sủng",22,22)]},{cells:[c("bac","bac","Bạc",120),c("suc","suc","Sức",90,90)]}])}});
+/* §32.1b hot need cell (review/coop-pets): the pet care bar, Đói = hunger (higher = hungrier), warning colour once she is very hungry */
+KIT_SAMPLES.push({id:"§32.1b",title:"kitStatCell hot: thanh chăm thú (Đói cao = đỏ)",html:()=>kitStatRow([{cells:[kitStatCell("","Đói",82,{bar:82,hot:true,warn:"Đói lắm, cho ăn ngay"}),kitStatCell("","Sạch",64,{bar:64}),kitStatCell("","Vui",40,{bar:40}),kitStatCell("","Tình cảm",22,{bar:22})]},{cells:[kitStatCell("","Đói",20,{bar:20}),kitStatCell("","Sạch",90,{bar:90})]}])});
 /* §28.0 / §28.1 portrait frame cell (review/tassel-fix, owner 15/11 06:35Z): the whole frame canvas 550x1037 — crest, photo window, band,
    jade pendant + tassel — in the person-card cell (.pc>.pcl>.pcp.kit, width --kpcw) and in every small frame mdH (xs 26 · sm 38 · 60 · big 84 px
    wide), tops on one line; a list row (xs frame + text) as in Sổ ghi / Tuần lục / gift recipients. */

@@ -1335,7 +1335,10 @@ have their Cần row. Check: `dev/test/sub-odds.js` (order.sorted / order.stable
 ### 32.1 kitStatCell / kitStatRow — THE number cell (owner: "where is the shared kit, why do workers draw their own?")
 `kitStatCell(icon,label,value,{id,k,bar,title,warn,cls,vcls,tag,nobar})` → one cell: `.kstl` label line (icon + name) · `.kstv` number line ·
 optional `.kstb` 0–100 bar (an empty slot is kept in row cells so every cell has the same height). `kitStatSet(cell,value,{bar,title,warn})`
-updates in place. `kitStatRow([{id,cls,title,cells}],{id})` → groups side by side, hairline between groups. Sizes (cls):
+updates in place. `kitStatRow([{id,cls,title,cells}],{id})` → groups side by side, hairline between groups.
+`hot:true` (review/coop-pets, 15/11): a NEED number that is too high — number + bar in the warning colour (`--bad`), toggled live by
+`kitStatSet(cell,v,{hot})`. First user: the pet care bar **Đói** (hunger = 100 − fullness, higher = hungrier; hot from 70 = the neglect line
+BAL.pet.sad), together with the kit `warn` "!". Sample: kit page §32.1b. Sizes (cls):
 - default — top bar: label line 15 px (.7rem), number line 21 px (display face 1.02rem, tabular), bar 4 px. ALL label lines share one baseline
   and ALL number lines one baseline across both groups (owner 15/11 ~17:50Z: LEFT Sắc · Tài · Tâm cơ · Đức · Danh · Sủng/Chủ tin | RIGHT Bạc · Sức). Measured with a text-baseline probe:
   1180x820 labels 29.5 / numbers 49.5 for all 8 cells + the time block; 686x880 82.9 / 102.9 all 8; 390x844 104.9 / 128.9 all 8.
