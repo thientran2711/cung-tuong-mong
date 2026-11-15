@@ -36,7 +36,22 @@ giữ nguyên "đẹp" và "diêm dúa" như hiện tại), 509a2dad5 (phản �
 - Kiểm toilette.js (chơi thật + sổ cũ): 755x1000@2 (cả bản có phản ứng: th-scold bật, sổ cũ nạp, 0 lỗi, không tràn), 1000x755@2, 844x390@3 đạt
   (0 lỗi, không tràn, sổ cũ nạp). 1180x820@2 lần cuối bị ngắt giữa chừng (máy quá tải, lần trước đó đạt trước khi có sổ cũ).
 
+### PHIÊN 6 (15/11 ~10:00–12:00Z, thợ toilette mới)
+- Gộp origin/main 70c792d41 (act-audit đã duyệt + shop-fix) — 87bd738f3. Lấy bản main cho file act-audit, áp lại phần riêng của toilette (jtoil trong assemble.py, j84, KIT, bot-same).
+- leAttire (jaudit §17): khóa ngày `p.toilette.wk===wk()` thay `S.turn*10+S.buoi` (S.turn là tháng → không bao giờ khớp) — bb2e3f3e1. Lỗi này CÓ trên main (jaudit.js:211) → báo điều phối.
+- toil-fit đo lại trên tranh CDN hiện tại: 4262 tranh (trước 3518; thêm áo cung nữ tm0–tm4 + kc/ngheo bằng `--extend --more`), md5 ghi `dev/art/toil-fit-md5.json`
+  (`--stale` giờ dùng được). 18 tranh đã đổi (c01 a18 mọi áo, c16 tcold/t8) được sửa điểm; còn lại trùng bản cũ. ĐÃ ĐẨY img/toil-fit.json lên CDN (4262). Tờ mẫu mới: looks-c05-t1-t5-t8 (giữ dáng đã duyệt).
+- Kit (LUẬT SỬA CẢ NHÓM): lời nói “…” hai câu bị cắt thành 2 dòng ở CẢ HAI bộ tách câu — kitBullets (jk3, thẻ kết quả) và kpSentences (j79, hàng sự việc trong hộp sự kiện).
+  Sửa cả hai, KIT 31.14 ghi luật. Rà `node dev/test/kbl-quote-scan.js 87bd738f3`: 116 lời nói nhiều câu trong game — bullets 115→0, hàng sự việc 115→0.
+- Phản ứng = KHUNG SỰ KIỆN: Q item có `who` + `art` (ev-toil-<key>.webp, đã có trên CDN) → kitEventStage. Trên main hiện tại ra 32.6 (người đứng trên tranh);
+  thử gộp review/kit-fig2 (WIP 3e212597e, không commit, .tmp/kf2) → tự thành kitEventDp (người bên trái, băng tranh phải, lựa chọn 2 cột) — KHÔNG cần sửa gì thêm khi kit-fig2 vào main.
+  Tối đa 2 khung mỗi dịp, còn lại gộp một dòng "Còn: …" (BAL.toil.popMax).
+- Test toilette.js: gặp Thái hậu trước khi chạy runOpt (trong game thật act(i) có hook j61 cho gặp; runOpt bỏ qua → bóng xám chỉ là lỗi bài thử).
+
 ### CÒN LẠI (chính xác)
+- (xem kết quả kiểm + bot trong báo cáo cuối phiên 6)
+
+### CÒN LẠI CŨ (đã làm 1,2,5,6 ở phiên 6)
 1. toil-fit từ tranh CDN HIỆN TẠI (điều phối: tờ mẫu từng dùng tranh c05 hoa điền to cũ). Đã thêm ghi md5 (`dev/art/toil-fit-md5.json`,
    `--stale` liệt kê tranh lệch md5). Việc: chạy lại đủ `python3 -I dev/figwork/toilfit.py` (đo lại por+fig t1–t4, ~70 phút máy bận) rồi
    `python3 -I dev/figwork/toilfit.py --extend` (t5–t8, lãnh cung, ~60 phút; ghi md5), soát `python3 /…/lmview`-kiểu (xem vài tranh), rồi
