@@ -775,6 +775,24 @@ It extends ghen (v.ghen) and itemMonth; vượt phẩm/tố stays j8 vpItems/vpA
 (10 px) above and below, neighbours' own margins zeroed → the row sits centred between the cards above and the list below; (3) sticky ONLY
 when the panel content is > 1.5× the panel height (`kitTabStick()` sets `.kstick`); on short pages it scrolls with the page and never overlaps.
 Test: dev/test/inv-grade.js checks on every panel tab that each act card's bottom edge hits the card itself, and reports the gaps above/below.
+### 28.13d kitShop — THE SHOP (owner 11/15 09:40Z + 10:30Z + 10:45Z markups, review/act-pics) — `dev/build/jinv.js` — KIT READY · THE pattern for EVERY buying screen
+`kitShop({key, title, info, stage:[{__fig, __cap, __role, age}], items:[{k, src, name, grade, lux, price, unit, eff, rows, sub, stock, have, onBuy(x,q)}], money:()=>n, carry:9, btn})`.
+A wuxia-game store built ONLY from the kit, laid out as the PERSON event card (32.2 kitEventStage): LEFT = the seller full-body (`stage` takes a
+pseudo person `{__fig: src, __cap: name, __role}`; kitFigOf / kitName pass it through), NO place background, no band; phone portrait = a 110 px strip on top.
+RIGHT, top = info line + "Ngươi có N bạc". Then the grid `.kshg` (the only thing that scrolls) of SMALL tiles = the Tư trang bag tile (kitItem
+"slot": islot-frame + ground by grade, Xa xỉ tab); under each tile: name (grade colour) · ONE short use/effect line (`eff`, e.g. "cài tóc: Sắc +2",
+"giải độc một lần") · the unit price ONCE. No button on the tile; a tile she cannot afford even once is greyed. NEVER "CẦN ✗ thiếu bạc (cần 20)"
++ "TỐN Bạc −20" twice.
+Tap a tile → selected (red ring) and the BUY PANEL opens under the grid: item picture + name + kind · grade + kitItemRows (Phẩm · Được · Mất ·
+Ghi chú incl. Xa xỉ); quantity row "Số lượng − [q] +1 +2 +3 +4 Tối đa" (Tối đa = as many as she can afford, capped by `stock` and the bag limit
+`carry` per kind minus what she has); live "Tổng: 60 bạc"; one "Mua" `.kbtn` — or the same button greyed "Thiếu bạc" / "Hết hàng" /
+"Rương đã đầy món này". Buying q pushes q items (the bag stacks them ×q), the shop stays open (tiles, money, panel refresh).
+"Thôi" = the panel's plain small button at the bottom. Panel width 760 px (980 px ≥ 1000 px wide); tiles ≥ 96 px (108 px on iPad, 88 px phone).
+Used by: Nội vụ phủ "Nhờ thái giám mua đồ" (`kitShopNvp`, seller `img/fig-eunuch-ndp-tray.webp` = Nội vụ phủ eunuch holding a tray, stock 5, carry 9).
+Next buying screens (Tư trang buy, gifts, peddler) must call kitShop, not dialog option cards. Test: `node dev/test/shop-grid.js <url> <out> [sizes]`.
+Scene rule (same branch, jk2b kitEvArt): a dialog id with NO EVENTS category (plain "Tin trong cung", other pid without a category) gets the room she
+is in (j17 evArt, season × buổi), never the j89 default category (Triều chính, officials kneeling).
+
 ### 28.14 WARDROBE K1 + K2 (review/wardrobe j92)
 - K1 `kitWearSlots(p,{size})`: two kitItem tiles (Trâm cài · Y phục, empty = "Chưa cài" / "Thường phục") right under the portrait on EVERY person
   card (player, consorts, maids, ma ma, Thái hậu…), and on Tư trang. The outfit status chip (Đúng phẩm / Vượt phẩm / Quá giản dị / Phạm tang) shows

@@ -8701,10 +8701,10 @@ function kitBook(spec){spec=spec||{};const rm=()=>{try{return reducedMotion()}ca
  wkSnap=function(){const s=s0.apply(this,arguments);try{s.duc=S.duc;s.th=S.th;s.hh=S.hh;s.mat=S.mat;s.an=S.an||0;s.pp={};
   (typeof rivals!=="undefined"?rivals:[]).forEach(v=>{if(v&&v.id!=null)s.pp[v.id]=[v.rel||0,v.ghen||0,v.oan||0]})}catch(e){}return s}})();
 
-const KBK_DELTA_ONLY=/^(\s*[A-Za-zÀ-ỹĐđ]+(?: [A-Za-zÀ-ỹĐđ]+){0,5} [+\-−]\d+[,;]?)+\s*\.?$/;
+const KBK_DELTA_ONLY=/^(\s*[A-Za-zÀ-ỹĐđ]+(?: [A-Za-zÀ-ỹĐđ]+){0,5} [+\-−]\d+\s*[,;·]?)+\s*\.?$/;
 const KBK_WORLD=/(thế lực|Kho lúa|kho lúa|^Sớ|triều đình|Triều đình|biên ải|Được mùa|Mất mùa|thiên tai|lũ lụt|hạn hán|dịch bệnh|sứ thần|ngoại bang|giặc|khoa cử|Hộ bộ|Binh bộ|Lễ bộ|Lại bộ|Hình bộ|Công bộ|Hàn lâm|thiên hạ|dân gian|kinh thành)/;
 function wkBookData(){const s=S.wkSnap||wkSnap();const n=Math.max(0,Math.min(S.logs.length,(S.logSeq||0)-(s.seq||0)));
- const raw=S.logs.slice(0,n).slice().reverse();const people=kpPeople();const SKIPRE=/^(Xin xăm|Gieo lại|Đến )/;
+ const raw=S.logs.slice(0,n).slice().reverse();const people=kpPeople();const SKIPRE=/^(Xin xăm|Gieo lại|Đến Tẩm cung của ngươi)/;
  const by=new Map(),me=[],world=[];const TH=S.thO||{kind:"th"};let pay="";const key=p=>p;
  const add=(p,text)=>{if(!by.has(key(p)))by.set(key(p),{who:p,F:[]});by.get(key(p)).F.push(text)};
  for(const h of raw){const pl=plain(h);if(!pl||SKIPRE.test(pl))continue;if(/^Bổng lộc tháng/.test(pl)){pay=pl.replace(/^Bổng lộc tháng [^:]*:\s*/,"").replace(/\.$/,"");continue}
@@ -8751,9 +8751,79 @@ const KBK_EVRE=[[/thị tẩm|lật thẻ|ngự giá|ngủ lại/i,"sys:thi-tam"
 function kbkEvId(text,ctx){const t=String(text||"");for(const [re,id] of KBK_EVRE)if(re.test(t))return id;
  if(ctx==="world")return "qs:yen";if(ctx==="emp")return /giận|phiền|trách/i.test(t)?"sys:mood-gian":"sys:mood-vui";if(ctx==="th")return "j24:thai-hau-trieu";
  return "j24:co-nguoi-den"}
-function kbkArt(facts,ctx){if(typeof evArtOf!=="function")return facts;let w=0;try{w=wk()}catch(e){}
- return (facts||[]).map((f,i)=>{if(!f||typeof f!=="object")return f;try{const id=kbkEvId(kpPlain(f.text||""),ctx);const a=evArtOf(id,w+":"+i);
-  if(a){f.art=a;f.artT=(typeof evArtTitle==="function"&&evArtTitle(id))||""}}catch(e){}return f})}
+/* ---- picture of each line (review/act-pics, owner 11/15: "Nhịn." and "Làm thơ dâng lên" had the same brocade chest, "Ngủ đêm hồi sức" and
+   "Đi." the same room): every line gets the picture of ITS meaning, first match wins —
+   1. img/ACTS.json "log": [[regex, key], …] (choice lines, game sentences) · key = act key (img/act-<key>.webp), "ev:<category>" (j89) or "scene:<sc>";
+   2. "Đến <nơi>" → that place's own scene for the season and the buổi of the walk (j94 sceneImg; the log carries the buổi);
+   3. the line starts with an act name → that act's picture (kitActKey, same as the act card);
+   4. the event regexes above (KBK_EVRE) → the event category, every file of it;
+   5. the act's category picture (act-cat-*), then the old page default.
+   Two lines in a row never share a picture when they mean different things: the next candidate is taken. ---- */
+function kbkPlaceArt(t,html){try{if(typeof SCIMG!=="object")return"";const nm=t.replace(/^Đến\s+/,"").replace(/[,.].*$/,"").trim();if(!nm)return"";
+ let sc="";let L=[];try{L=typeof places==="function"?places():[]}catch(e){}L=L.concat([{k:"home",n:"Tẩm cung của ngươi",sc:"home"}]);
+ for(const p of L){let n2="";try{n2=typeof accName==="function"?accName(p.k):""}catch(e){}if(nm===p.n||nm===n2){sc=p.sc;break}}
+ if(!sc&&/cung|điện|các|hiên|viện/i.test(nm))sc="rv";if(!sc)return"";
+ const cur=SCIMG[sc];if(!cur)return"";const base=String(cur).replace(/-(xuan|ha|thu|dong)-(sang|trua|chieu|toi)$/,"");
+ const m=/data-b="(\d)"/.exec(String(html||""));let n=base;
+ if(typeof sceneImg==="function"&&S){const b0=S.buoi;try{if(m)S.buoi=+m[1];n=sceneImg(base)}finally{S.buoi=b0}}
+ return `img/${n}.webp`}catch(e){return""}}
+function kbkEvFiles(id,salt){try{const A=EVART;if(!A)return[];const c=evArtCat(id);const C=c&&A.categories[c];if(!C||!C.files||!C.files.length)return[];
+ const f=evArtOf(id,salt);return [f].concat(C.files.filter(x=>x!==f))}catch(e){return[]}}
+function kbkKeySrc(key,salt,t,html){key=String(key||"");if(!key)return[];
+ if(key.startsWith("ev:")){const c=key.slice(3);const C=EVART&&EVART.categories&&EVART.categories[c];return C&&C.files?C.files.slice():[]}
+ if(key.startsWith("scene:")){const sc=key.slice(6);const cur=typeof SCIMG==="object"&&SCIMG[sc];return cur?[`img/${cur}.webp`]:[]}
+ return [`img/act-${key}.webp`]}
+function kbkCands(f,ctx,salt){const html=String(f.text||"");const t=kpPlain(html).replace(/[\s\u00a0]+/g," ").trim();const C=[];const add=a=>{for(const x of [].concat(a||[]))if(x&&!C.includes(x))C.push(x)};
+ const head=t.split(/[.:·([]/)[0].trim();
+ const R=(typeof KIT_ACTS!=="undefined"&&KIT_ACTS.log)||[];
+ for(const [re,key] of R){let ok=false;try{ok=new RegExp(re,"i").test(t)}catch(e){}if(ok){add(kbkKeySrc(key,salt,t,html));break}}
+ if(/^Đến /.test(t))add(kbkPlaceArt(t,html));
+ let ak="";try{ak=head.length>=3&&typeof kitActKey==="function"?kitActKey(head):""}catch(e){}if(ak)add(`img/act-${ak}.webp`);
+ for(const [re,id] of KBK_EVRE)if(re.test(t)){add(kbkEvFiles(id,salt));break}
+ try{const cat=kitActCat(head||t);if(((KIT_ACTS||{}).have||[]).includes("act-cat-"+cat))add(`img/act-cat-${cat}.webp`)}catch(e){}
+ add(kbkEvFiles(kbkEvId(t,ctx),salt));
+ return C}
+/* a picture made for this very line (ACTS.json log rule or act name), "" when only a general one would fit */
+function kbkSpecific(t){t=kpPlain(t).replace(/[\s\u00a0]+/g," ").trim();const R=(typeof KIT_ACTS!=="undefined"&&KIT_ACTS.log)||[];
+ for(const [re,key] of R){let ok=false;try{ok=new RegExp(re,"i").test(t)}catch(e){}if(ok)return kbkKeySrc(key,"",t,"")[0]||""}
+ const head=t.split(/[.:·([]/)[0].trim();let ak="";try{ak=head.length>=3&&typeof kitActKey==="function"?kitActKey(head):""}catch(e){}return ak?`img/act-${ak}.webp`:""}
+function kbkArtLabel(src){const m=/img\/ev-([a-z-]+?)(?:-\d+)?\.webp/.exec(src||"");if(m&&EVART&&EVART.categories){for(const c in EVART.categories)if((EVART.categories[c].files||[]).includes(src))return EVART.categories[c].title||""}
+ const a=/img\/act-cat-([a-z-]+)\.webp/.exec(src||"");if(a&&typeof KIT_CAT!=="undefined"&&KIT_CAT[a[1]])return KIT_CAT[a[1]][0];return""}
+function kbkArt(facts,ctx){if(typeof evArtOf!=="function")return facts;let w=0;try{w=wk()}catch(e){}let prev="",prevT="";
+ return (facts||[]).map((f,i)=>{if(!f||typeof f!=="object")return f;try{const t=kpPlain(f.text||"");const C=kbkCands(f,ctx,w+":"+i);
+  const same=prevT&&prevT.split(/[.:·([]/)[0].trim()===t.split(/[.:·([]/)[0].trim();
+  const a=same?C[0]:(C.find(x=>x!==prev)||C[0]);if(a){f.art=a;f.artT=kbkArtLabel(a);prev=a;prevT=t}}catch(e){}return f})}
+
+/* ---- choice lines say WHAT and WITH WHOM (owner 11/15: "Nhịn." / "Đi." mean nothing in the books) ----
+   chooseM logs "<option>." — now: a navigation-only choice (Thôi, Đi, Đợi buổi sau) logs nothing (the walk logs "Đến <nơi>." itself);
+   a choice whose effect the game writes as its own sentence logs only that sentence; a short choice gets its context:
+   "Nhịn lời mỉa của <tên>", "Cho <tên> mượn bạc", else "<option> (<first sentence of the question>)". c.lg (option) overrides. */
+const KBK_OPT_DROP=/^(Thôi|Đi|Đợi buổi sau \(Qua buổi\)|Đợi sáng mai \(Qua đêm\))$/;
+const KBK_OPT_NAMES=[[/^(Nhịn|Nhẫn nhịn)$/,/mỉa/,n=>`Nhịn lời mỉa của ${n}`],[/^Đáp trả sắc sảo$/,/mỉa/,n=>`Đáp trả lời mỉa của ${n}`],
+ [/^Cho mượn$/,/mượn/,n=>`Cho ${n} mượn bạc`],[/^Từ chối$/,/mượn/,n=>`Từ chối cho ${n} mượn bạc`],
+ [/^Nhận lời xin lỗi$/,/xin lỗi/,n=>`Nhận lời xin lỗi của ${n}`],[/^Lạnh lùng$/,/xin lỗi/,n=>`Lạnh lùng trước lời xin lỗi của ${n}`]];
+function kbkOptWho(m){try{const w=m&&m.who&&m.who.w;if(w&&w[0]==="r"){const v=RV(+w[1]);if(v&&v.name)return v.name}}catch(e){}return""}
+function kbkOptName(m,c){const n=String(c.n||"");if(c.lg)return c.lg;const ctx=kpPlain(m.h||"").replace(/\s+/g," ").trim();const who=kbkOptWho(m);
+ for(const [a,b,f] of KBK_OPT_NAMES)if(who&&a.test(n)&&b.test(ctx))return f(who);
+ if(n.split(/\s+/).length>3||(who&&n.includes(who)))return n;
+ let s=(ctx.match(/^[^.!?]*/)||[""])[0].trim();if(!s||s.length>90)s=kpPlain(m.t||"").trim();
+ return s&&!s.includes(n)&&!/^(Có người đến|Thông báo|Tin)$/.test(s)?`${n} (${s})`:n}
+(function(){if(typeof chooseM!=="function"||typeof log!=="function")return;let RW=null;
+ const l0=log;log=function(h){const w=RW;if(w&&!w.done&&typeof h==="string"&&h.startsWith(w.n+".")){w.done=true;if(w.nm===null)return;h=w.nm+h.slice(w.n.length);w.seq=(S.logSeq||0)+1}
+  else if(typeof h==="string"&&S&&/^Đến /.test(h))h+=`<i class="kbb" data-b="${S.buoi||0}"></i>`;
+  return l0.apply(this,[h].concat([].slice.call(arguments,1)))};
+ const c0=chooseM;chooseM=function(i){let m=null,c=null;try{m=Q[0];c=m&&m.opts&&m.opts[i]}catch(e){}
+  if(!m||!c||(c.fx&&c.fx.bac&&S.bac+c.fx.bac<0))return c0.apply(this,arguments);
+  const n=String(c.n||"");const noFx=!Object.keys(c.fx||{}).some(k=>c.fx[k]);let nm=n;
+  try{nm=noFx&&KBK_OPT_DROP.test(n)?null:kbkOptName(m,c)}catch(e){nm=n}
+  /* the result card's title (j19 wrapR reads c.n) says the same as the line: the option carries its full name from here on */
+  if(nm&&nm!==n)c.n=nm;
+  /* …and the result card shows this choice's own picture when it has one (jk2b reads __kitLastEvArt), not the question's */
+  try{const sp=nm&&kbkSpecific(nm);if(sp)window.__kitLastEvArt={src:sp,lab:""}}catch(e){}
+  const w=RW={n:c.n,nm,done:false,seq:0};let r;try{r=c0.apply(this,arguments)}finally{RW=null}
+  /* the option only opened what the game then wrote as its own sentence ("Núp nghe lén." + "Núp sau hòn giả sơn, ngươi nghe rõ…"): keep the sentence */
+  try{if(w.seq&&noFx&&!(c.x&&!c.go)&&(S.logSeq||0)>w.seq){const k=(S.logSeq||0)-w.seq;if(S.logs[k]&&kpPlain(S.logs[k]).includes(kpPlain(nm))){S.logs.splice(k,1);S.logSeq--}}}catch(e){}
+  return r}})();
 
 function wkBookPages(){const d=wkBookData();const date=kitDate(S.month,S.year,S.tuan);const sea=`${SEASON[S.month-1]}${S.wx?" · "+S.wx.n:""}`;
  const P=[{kind:"cover",title:"Sổ tuần",sub:date,note:sea}];
@@ -11206,8 +11276,11 @@ try{if(window.VP&&VP.rules){VP.rules.unshift(["BẢNG ĐIỂM","Bảng định t
    (who / subject) keeps the person's portrait (section 8). The frame is kitArtFrame (same frame as act art); the label = the category title. ---------- */
 function kitEvArt(m){try{if(!m||typeof evArtOf!=="function")return null;let src="",lab="";const pp=m.pp||{};const salt=(typeof S!=="undefined"&&S)?(S.year*100+S.month*3+(S.tuan||0)):0;
  if(m.art)src=m.art;else if(m.stArt&&typeof stArtOf==="function")src=stArtOf.apply(null,m.stArt);
- if(!src){const id=m.evId||(m.pid?(m.pid+(pp&&(pp.id||pp.k)?":"+(pp.id||pp.k):"")):"")||(m.kind==="news"||/Tin trong cung/.test(m.t||"")?"news:"+(m.t||""):"");if(id){src=evArtOf(id,salt);lab=typeof evArtTitle==="function"?evArtTitle(id):""}}
- if(!src&&kitIsEventChoice(m)){src=evArtOf("default",salt)}return src?{src,lab:lab||""}:null}catch(e){return null}}
+ if(!src){const id=m.evId||(m.pid?(m.pid+(pp&&(pp.id||pp.k)?":"+(pp.id||pp.k):"")):"")||(m.kind==="news"||/Tin trong cung/.test(m.t||"")?"news:"+(m.t||""):"");
+  /* review/act-pics (owner 11/15 09:40Z): an id with NO event category (e.g. pid "shop") must not fall to the j89 default (Triều chính, officials
+     kneeling): it gets the room she is in, for the season and buổi (j17 evArt / j94); only real event ids use evArtOf */
+  if(id&&(typeof evArtCat!=="function"||evArtCat(id))){src=evArtOf(id,salt);lab=typeof evArtTitle==="function"?evArtTitle(id):""}}
+ if(!src&&(kitIsEventChoice(m)||m.kind==="news"||/Tin trong cung/.test(m.t||""))){try{src=typeof evArt==="function"?evArt():""}catch(e){src=""}if(!src)src=evArtOf("default",salt)}return src?{src,lab:lab||""}:null}catch(e){return null}}
 (function(){const s0=showModal;showModal=function(){const m=Q[0];const r=s0.apply(this,arguments);try{const M=$("modal"),dlg=M&&M.querySelector(".dlg.kpanel");const body=M&&M.querySelector("#mb > .kpb");if(!m||!dlg||!body)return r;
   const kind=dlg.dataset.kind||"";const want=kitIsEventChoice(m)||kind==="news"||m.art||m.stArt||m.evId;if(!want||body.querySelector(":scope > .kpsubj"))return r;
   const a=kitEvArt(Object.assign({kind},m));if(!a)return r;window.__kitLastEvArt=a;body.classList.add("kphas","kpinfo");body.insertAdjacentHTML("afterbegin",`<div class="kpsubj kpiart kpev">${kitSceneArt(a.src,a.lab,{shape:"tall"})}</div>`)}catch(e){console.error("kitEvArt",e)}return r}})();
@@ -12462,6 +12535,111 @@ if(typeof invHTML==="function"){const inv0=invHTML;invHTML=function(){let h=inv0
   const i=h.indexOf('<div class="cards">');if(i>=0)h=h.slice(0,i);h=h.replace(/^<div class="ph">[\s\S]*?<\/div>\s*/,"");
   return h+kitInvGrid({key:"tutrang",tabs:KINV_CATS.map(c=>({k:c[0],label:c[1]})).concat(S.inv.some(e=>!e.h&&IT[e.k]&&kinvCat(IT[e.k].kd)==="tap")?[{k:"tap",label:"Tạp vật"}]:[]),
    items:kinvItems(),minRows:2,onPick:kinvOpen})+keqTT()}catch(e){console.error("kitInvGrid",e);return inv0.apply(this,arguments)}}}
+
+/* ================= KIT 28.13d kitShop — THE SHOP (owner 11/15 09:40Z + 10:30Z + 10:45Z markups, review/act-pics) =================
+   Every buying screen (Nội vụ phủ "Nhờ thái giám mua đồ", later Tư trang buy, gifts) is this one pattern, a wuxia-game store built from the kit:
+   - LEFT column = the seller full-body (kit person event card: kitEventStage via spec.stage; no place background). Phone portrait: short strip on top.
+   - RIGHT, top = info line(s) + "Ngươi có N bạc".
+   - RIGHT = grid of SMALL tiles = the Tư trang bag tiles (kitItem "slot": islot-frame + ground by grade, Xa xỉ tab). Under each tile: name (grade
+     colour) · ONE short use/effect line · the unit price ONCE. A tile she cannot afford even once is greyed. No buy button on the tile.
+   - tap a tile → it is selected and the BUY PANEL opens under the grid: the full item card (picture, Phẩm/Được/Mất/Ghi chú = kitItemRows),
+     quantity row "−  [q]  +1 +2 +3 +4  Tối đa" (Tối đa = as many as she can afford, capped by stock and the bag limit per kind), live
+     "Tổng: 60 bạc", then "Mua" — or the same button greyed "Thiếu bạc" (or the cap reason). Buying N pushes N items (the bag stacks them ×N).
+   - "Thôi" = the panel's plain small button at the bottom. Only the grid scrolls.
+     kitShop({key, title, info, stage:[{__fig, __cap, __role, age}], items:[{k, src, name, grade, lux, price, unit, eff, rows, stock, have, onBuy(x,q)}],
+              money:()=>n, carry:9, btn:"Thôi"})  */
+const KSHOP={reg:{}};
+function kitShopMax(o,x){const money=o.money?o.money():0;const carry=(o.carry||9)-(x.have?x.have():0);return Math.max(0,Math.min(Math.floor(money/Math.max(1,x.price)),x.stock==null?99:x.stock,carry))}
+function kitShopWhyQ(o,x,q){const money=o.money?o.money():0;if(x.why)return x.why;if((x.have?x.have():0)>=(o.carry||9))return"Rương đã đầy món này";if(x.stock!=null&&q>x.stock)return"Hết hàng";if(q*x.price>money)return"Thiếu bạc";return""}
+function kitShopPanel(o){const x=o.items[o.sel];if(!x)return"";const key=o.key||"shop";const q=Math.max(1,o.qty||1);const tot=q*x.price,why=kitShopWhyQ(o,x,q),mx=kitShopMax(o,x);
+ const qb=(v,l)=>`<button class="kbtn alt kshqb" data-kshop="${key}" data-kshq="${v}"${(v==="-"&&q<=1)||(v!=="-"&&mx<1)?" disabled":""}>${l}</button>`;
+ return `<div class="kshbuy" aria-live="polite"><div class="kshbi">${kitItem({src:x.src512||x.src,name:"",grade:x.grade,size:"md",lux:x.lux}).replace('<span class="kitn"></span>','')}`+
+  `<div class="kshbt"><b class="kshbn" style="color:${(KIT_GRADE[x.grade|0]||KIT_GRADE[0]).c}">${x.name}</b>${x.sub?`<span class="kshbs">${x.sub}</span>`:""}<div class="kinvrows">${x.rows||""}</div></div></div>`+
+  `<div class="kshq"><span class="kshql">Số lượng</span>${qb("-","−")}<b class="kshqn">${q}</b>${qb(1,"+1")}${qb(2,"+2")}${qb(3,"+3")}${qb(4,"+4")}${qb("max","Tối đa")}</div>`+
+  `<div class="kshtot"><span>Tổng: <b>${tot} ${x.unit||"bạc"}</b></span><button class="kbtn kshgo" data-kshop="${key}" data-kshbuy="1"${why?" disabled":""}>${why||"Mua"}</button></div></div>`}
+function kitShopBody(o){const key=o.key||"shop";const money=o.money?o.money():0;
+ const cells=(o.items||[]).map((x,i)=>{const g=KIT_GRADE[Math.max(0,Math.min(4,x.grade|0))]||KIT_GRADE[0];const no=kitShopMax(o,x)<1;
+  return `<div class="kshc${no?" kshno":""}${o.sel===i?" kshsel":""}" data-kshop="${key}" data-kshi="${i}" role="button" tabindex="0" aria-pressed="${o.sel===i}">${kitItem({src:x.src,name:x.name,grade:x.grade,lux:x.lux,size:"slot",tip:`${x.name} · chạm để chọn`})}`+
+   `<span class="kshn" style="color:${g.c}">${x.name}</span>${x.eff?`<span class="kshe">${x.eff}</span>`:""}<span class="kshp">${x.price} ${x.unit||"bạc"}</span></div>`}).join("");
+ return `<div class="kshop${o.sel!=null?" kshop-sel":""}" data-kshop="${key}"><div class="kshl">${o.info||""}<span class="kshm">Ngươi có <b>${money}</b> ${o.unit||"bạc"}</span></div>`+
+  `<div class="kshg">${cells}</div>${o.sel!=null?kitShopPanel(o):""}</div>`}
+function kitShop(o){o=o||{};const key=o.key||"shop";o.sel=null;o.qty=1;KSHOP.reg[key]=o;
+ return kitModal({kind:"info",title:o.title||"Mua đồ",html:kitShopBody(o),btn:o.btn||"Thôi",shop:key,stage:o.stage,onClose:o.onClose})}
+function kitShopRefresh(key){const o=KSHOP.reg[key];if(!o)return;const html=kitShopBody(o);
+ try{for(const m of Q)if(m&&m.kit&&m.kit.shop===key)m.kit.html=html}catch(e){}
+ const el=document.querySelector(`.kshop[data-kshop="${key}"]`);if(!el)return;const g=el.querySelector(".kshg"),st=g?g.scrollTop:0;el.outerHTML=html;
+ const g2=document.querySelector(`.kshop[data-kshop="${key}"] .kshg`);if(g2)g2.scrollTop=st}
+document.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest("[data-kshi],[data-kshq],[data-kshbuy]");if(!t)return;
+ e.stopPropagation();const o=KSHOP.reg[t.dataset.kshop];if(!o)return;const key=o.key||"shop";
+ if(t.dataset.kshi!=null){o.sel=+t.dataset.kshi;o.qty=1;kitShopRefresh(key);try{const p=document.querySelector(`.kshop[data-kshop="${key}"] .kshbuy`);p&&p.scrollIntoView({block:"nearest"})}catch(err){}return}
+ const x=o.items[o.sel];if(!x||t.disabled)return;
+ if(t.dataset.kshq!=null){const v=t.dataset.kshq,mx=Math.max(1,kitShopMax(o,x));o.qty=v==="-"?Math.max(1,(o.qty||1)-1):v==="max"?mx:Math.max(1,Math.min(mx,(o.qty||1)+(+v)));kitShopRefresh(key);return}
+ if(t.dataset.kshbuy!=null){const q=Math.max(1,o.qty||1);if(kitShopWhyQ(o,x,q))return;try{x.onBuy&&x.onBuy(x,q)}catch(err){console.error(err)}if(x.stock!=null)x.stock-=q;o.qty=1;kitShopRefresh(key);try{render()}catch(err){}}},true);
+document.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.target.dataset&&e.target.dataset.kshi!=null){e.preventDefault();e.target.click()}});
+/* the seller on the stage: a pseudo person {__fig, __cap} → kitFigOf / kitName use them as is */
+(function(){if(typeof kitFigOf==="function"){const f0=kitFigOf;kitFigOf=function(p){if(p&&p.__fig)return p.__fig;return f0.apply(this,arguments)};window.kitFigOf=kitFigOf}
+ if(typeof kitName==="function"){const n0=kitName;kitName=function(p){if(p&&p.__fig)return p.__cap?`<b class="kname"><span class="kti">${p.__role||""}</span>${p.__cap}</b>`:"";return n0.apply(this,arguments)};window.kitName=kitName}})();
+/* the shop panel: no info / category art (the stage shows the seller), "Thôi" = a plain small button */
+(function(){if(typeof kpBuild!=="function")return;const b0=kpBuild;kpBuild=function(M,m){const r=b0.apply(this,arguments);try{const dlg=M.querySelector(".dlg");if(!dlg)return r;
+ const on=!!(m&&m.kit&&m.kit.shop);dlg.classList.toggle("kshopd",on);if(!on)return r;
+ const body=M.querySelector("#mb > .kpb");if(body){body.querySelectorAll(":scope > .kpsubj").forEach(e=>e.remove());body.classList.remove("kphas","kpinfo")}
+ const b=document.getElementById("mclose");if(b){b.classList.remove("main");b.classList.add("kbtn","alt","kshx")}}catch(e){console.error("kitShop",e)}return r}})();
+(function(){const st=document.createElement("style");st.id="kshop-css";st.textContent=`
+#modal .dlg.kpanel.kshopd.kshopd{max-width:min(760px,calc(100vw - 24px))!important;width:min(760px,calc(100vw - 24px))}
+@media (min-width:1000px){#modal .dlg.kpanel.kshopd.kshopd{max-width:min(980px,calc(100vw - 48px))!important;width:min(980px,calc(100vw - 48px))}}
+.dlg.kshopd #mr{justify-content:flex-end}
+.dlg.kshopd #mclose.kshx{min-height:36px;padding:4px 18px;font-size:.9rem;width:auto;flex:0 0 auto}
+.dlg.kshopd .kpb.kesb{grid-template-columns:clamp(110px,26%,210px) minmax(0,1fr)}
+.kshop{display:flex;flex-direction:column;gap:8px;min-width:0}
+.kshl{display:flex;flex-direction:column;gap:4px;min-width:0}
+.kshl p{margin:0;line-height:1.4}
+.kshm{font-size:.86rem;color:var(--ink2,#6a5040)}
+.kshg{display:grid;grid-template-columns:repeat(auto-fill,minmax(var(--kshsz,96px),1fr));gap:10px 6px;padding:8px;border:1px solid var(--k-hair,#e6d3ac);border-radius:10px;background:#f4ead8;box-shadow:inset 0 1px 3px #5a3a2018;
+ overflow-y:auto;overscroll-behavior:contain;max-height:calc(100dvh - 330px);min-height:120px;align-content:start}
+.kshop-sel .kshg{max-height:max(130px,calc(100dvh - 600px))}
+.kshc{display:flex;flex-direction:column;align-items:center;gap:1px;min-width:0;text-align:center;cursor:pointer;border-radius:8px;padding:3px 2px;outline:none}
+.kshc>.kitem-slot{width:100%;max-width:76px;aspect-ratio:1}
+.kshc.kshsel{background:#fffaf0;box-shadow:0 0 0 2px var(--k-seal,#9a2c1c)}
+.kshc:focus-visible{box-shadow:0 0 0 2px var(--gold,#c9a46a)}
+.kshc.kshno>.kitem-slot{filter:grayscale(.85) brightness(.92);opacity:.7}
+.kshn{font-weight:700;font-size:.8rem;line-height:1.2;overflow-wrap:anywhere}
+.kshe{font-size:.72rem;line-height:1.2;color:var(--ink2,#6a5040);overflow-wrap:anywhere}
+.kshp{font-size:.8rem;font-weight:600;color:var(--ink,#3a2418)}
+.kshbuy{display:flex;flex-direction:column;gap:8px;padding:10px;border:1px solid var(--gold,#c9a46a);border-radius:10px;background:var(--k-card,#fffaf0);box-shadow:0 0 0 3px #f6ead6}
+.kshbi{display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px;align-items:start}
+.kshbt{display:flex;flex-direction:column;gap:2px;min-width:0}
+.kshbn{font-family:var(--display);font-size:1rem}
+.kshbs{font-size:.8rem;color:var(--ink2,#6a5040)}
+.kshq{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.kshql{font-size:.84rem;color:var(--ink2,#6a5040);margin-right:2px}
+.kshqn{min-width:2.2em;text-align:center;font-size:1.05rem}
+.kshq .kbtn.kshqb{min-height:34px;padding:3px 10px;font-size:.84rem}
+.kshq .kbtn.kshqb:disabled,.kshtot .kbtn:disabled{filter:grayscale(1);opacity:.55;cursor:default}
+.kshtot{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.kshtot .kbtn.kshgo{min-height:40px;padding:6px 22px}
+@media (min-width:1000px){.kshg{--kshsz:108px}.kshc>.kitem-slot{max-width:84px}}
+@media (max-width:599px){
+ .dlg.kshopd .kpb.kesb{grid-template-columns:1fr}
+ .dlg.kshopd .kpsubj.kes{position:static;height:110px;overflow:hidden;align-items:flex-start;border-bottom:1px solid var(--k-hair,#e6d3ac)}
+ .dlg.kshopd .kpsubj.kes .kpsn{display:none}
+ .kshg{--kshsz:88px;gap:8px 4px;max-height:calc(100dvh - 420px)}
+ .kshop-sel .kshg{max-height:max(120px,calc(100dvh - 660px))}
+ .kshq{gap:4px}.kshql{flex:1 0 100%}.kshq .kbtn.kshqb{padding:3px 8px;min-height:32px;font-size:.8rem}}
+`;document.head.appendChild(st)})();
+/* Nội vụ phủ: "Nhờ thái giám mua đồ" (j8 PEND.shop items S.shop, price IT[k].pr) through kitShop */
+function kitShopEff(k){const it=IT[k];if(!it)return"";if(it.dr)return `may áo: Sắc +${it.dr}, 3 tháng`;
+ if(it.sl&&it.w){const v={hair:"cài tóc",wrist:"đeo tay",waist:"đeo eo",scent:"đeo"}[it.sl]||"đeo";return `${v}: ${kinvPlain(it.w)}`}
+ if(it.use){const u=kinvPlain(it.use);if(u)return `dùng: ${u}`}if(it.anti)return"giải độc một lần";if(it.ant)return"an thai";if(it.fert)return `${it.fert} tháng dễ thụ thai`;
+ if(it.w){const u=kinvPlain(it.w);if(u)return u}if(it.gv)return"đem tặng: hợp ý";return String(it.d||"").split(/[.;]/)[0].slice(0,40)}
+function kitShopNvp(){const c=S.court&&S.court.ped;const nm=c&&c.name?c.name:"";
+ const items=(S.shop||[]).filter((k,i,a)=>IT[k]&&a.indexOf(k)===i).map(k=>{const it=IT[k];const a=typeof itemArt==="function"?itemArt(k):null;
+  return{k,src:kitItemSrc(k,""),src512:a&&a.src512||"",name:it.n,sub:`${it.kd} · ${KIT_GRADE[a?a.grade|0:0].n}`,grade:a?a.grade|0:0,lux:it.sl||it.dr?luxVal(k):0,price:it.pr||0,
+   eff:kitShopEff(k),rows:kitItemRows(k),stock:5,have:()=>S.inv.filter(e=>e.k===k&&!e.h).length,
+   onBuy:(x,q)=>{apply({bac:-x.price*q});for(let i=0;i<q;i++)S.inv.push({k});log(`Mua ${it.n}${q>1?` ×${q}`:""}. Bạc -${x.price*q}`)}}});
+ return kitShop({key:"nvp",title:"Nhờ thái giám mua đồ",carry:9,
+  info:`<p>Thái giám Nội vụ phủ bưng vào một khay đồ mua từ ngoài cung, dâng lên cho nương nương chọn: “Đồ mới mang vào, xin nương nương xem qua.”</p>`,
+  stage:[{__fig:"img/fig-eunuch-ndp-tray.webp",__cap:nm,__role:"Thái giám Nội vụ phủ",age:28,sex:"m"}],items,money:()=>S.bac})}
+if(typeof invAct==="function"){const ia0=invAct;invAct=function(a){if(a==="shop"&&S&&!S.dead&&!Q.length&&typeof kitShop==="function"){try{kitShopNvp();render();return}catch(e){console.error("kitShop",e)}}return ia0.apply(this,arguments)}}
 
 /* ================= jk4: KIT 4 (kit owner #3, owner 11/14) — ONE STAT CELL + ONE STAT ROW (KIT 32) =================
    Owner: "the shared kit — why do workers draw their own?" Every place a number stat (Sắc · Tài · Tâm cơ · Đức · Bạc · Sức · Sủng · Danh …)

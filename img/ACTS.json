@@ -1,5 +1,5 @@
 {
- "_doc": "Act card illustrations (kit, dev/kit/KIT.md 6.1). acts: act name (exact card title) or slug -> file key, drawn as img/act-<key>.webp. cats: category slug -> label; fallback img/act-cat-<slug>.webp. Art workers add entries here when a picture lands.",
+ "_doc": "Act card illustrations (kit, dev/kit/KIT.md 6.1). acts: act name (exact card title) or slug -> file key, drawn as img/act-<key>.webp. cats: category slug -> label; fallback img/act-cat-<slug>.webp. Art workers add entries here when a picture lands. log: [[regex, key]] for week-book / result lines that are not act names (choices, game sentences); key = act key, \"ev:<EVENTS category>\" or \"scene:<place sc>\" (j87 kbkCands).",
  "acts": {
   "Đánh đàn ở ngự hoa viên": "dan-dem-trang",
   "Đàn khúc Phượng cầu hoàng": "dan-dem-trang",
@@ -17,13 +17,13 @@
   "Nhận bạc, làm tai mắt": "cai-tai-mat",
   "Nghỉ ngơi dưỡng sức": "nghi-ngoi",
   "Nghỉ lấy sức": "nghi-ngoi",
-  "Ngủ sớm": "nghi-ngoi",
+  "Ngủ sớm": "ngu-dem",
   "Ở yên trong cung nghỉ ngơi": "nghi-ngoi",
   "Tĩnh dưỡng": "nghi-ngoi",
   "Thêu khăn bán ra ngoài": "theu-khan-ban",
   "Thêu khăn bán": "theu-khan-ban",
-  "Làm thơ dâng lên": "lam-tho",
-  "Gửi bài thơ cũ": "lam-tho",
+  "Làm thơ dâng lên": "lam-tho-v2",
+  "Gửi bài thơ cũ": "lam-tho-v2",
   "Cầu tự ở Phụng Tiên điện": "cau-tu",
   "Phát chẩn cho cung nhân": "phat-chan",
   "Đưa cơm áo": "phat-chan",
@@ -36,7 +36,7 @@
   "Luyện tập": "luyen-cam-ky",
   "Đọc binh thư, sử sách": "doc-binh-thu",
   "Tụng kinh, làm việc thiện": "tung-kinh",
-  "Thỉnh an, chép kinh": "tung-kinh",
+  "Thỉnh an, chép kinh": "thinh-an-th",
   "Chép kinh, giữ đức": "tung-kinh",
   "Thưởng cung nữ": "thuong",
   "Ban thưởng": "thuong",
@@ -68,10 +68,10 @@
   "Xin Hoàng thượng ân xá": "xin-an-dien",
   "Bàn chuyện triều chính": "ban-trieu-chinh",
   "Xin xăm ở Phật đường": "xin-xam",
-  "Thỉnh an": "thinh-an",
-  "Xin bái kiến": "thinh-an",
-  "Xin yết kiến": "thinh-an",
-  "Chào hỏi đúng lễ": "thinh-an",
+  "Thỉnh an": "thinh-an-hh",
+  "Xin bái kiến": "bai-kien",
+  "Xin yết kiến": "bai-kien",
+  "Chào hỏi đúng lễ": "bai-kien",
   "Xin Thái hậu đỡ lời": "xin-che-cho",
   "Xin Hoàng hậu che chở": "xin-che-cho",
   "Nhờ giúp đỡ": "xin-che-cho",
@@ -118,7 +118,7 @@
   "Mang chăn ấm, thuốc men": "hoi-han",
   "Tạ lỗi": "ta-loi",
   "Nhún nhường": "ta-loi",
-  "Tha lỗi": "ta-loi",
+  "Tha lỗi": "tha-loi",
   "Đẩy nàng xuống hồ sen": "day-ho",
   "Đẩy xuống hồ sen": "day-ho",
   "Đẩy con nàng xuống hồ": "day-ho",
@@ -209,7 +209,21 @@
   "Mời đến cung ta": "den-tham",
   "Đến cung nàng thăm": "den-tham",
   "Đến chỗ hắn": "den-tham",
-  "Lẻn vào": "len-vao"
+  "Lẻn vào": "len-vao",
+  "Thỉnh an Thái hậu": "thinh-an-th",
+  "Thỉnh an Hoàng hậu": "thinh-an-hh",
+  "Hành lễ thỉnh an": "bai-kien",
+  "Làm thơ Trùng cửu": "lam-tho-v2",
+  "Nhận lời xin lỗi": "tha-loi",
+  "Ngủ đêm hồi sức": "ngu-dem",
+  "Cho mượn": "cho-muon",
+  "Từ chối": "tu-choi",
+  "Khéo từ chối": "tu-choi",
+  "Từ chối khéo": "tu-choi",
+  "Tiếp đãi lạnh nhạt": "tu-choi",
+  "Nhịn": "nhin-loi-mia",
+  "Nhẫn nhịn": "nhin-loi-mia",
+  "Đáp trả sắc sảo": "khieu-khich"
  },
  "cats": {
   "hau-ha": "Hầu hạ",
@@ -252,5 +266,83 @@
   "Thôi mời thầy": "day-con-hoc",
   "Hứa gả cho": "hon-su",
   "Đến gặp": "den-tham"
- }
+ },
+ "log": [
+  [
+   "^(Nhịn|Nhẫn nhịn)( lời mỉa|\\.|$)",
+   "nhin-loi-mia"
+  ],
+  [
+   "^Đáp trả lời mỉa",
+   "khieu-khich"
+  ],
+  [
+   "^Cho .+ mượn bạc|^Cho \\d+ lượng|^Cho mượn",
+   "cho-muon"
+  ],
+  [
+   "trả lại \\d+ lượng đã mượn",
+   "cho-muon"
+  ],
+  [
+   "^(Từ chối|Khéo từ chối|Từ chối khéo)|^Đuổi (đi|về)|^Tiếp đãi lạnh nhạt|^Lạnh lùng trước",
+   "tu-choi"
+  ],
+  [
+   "^(Nhận lời xin lỗi|Tha lỗi)",
+   "tha-loi"
+  ],
+  [
+   "^(Ngủ đêm hồi sức|Ngủ sớm)",
+   "ngu-dem"
+  ],
+  [
+   "thẻ bài của .+ được lật",
+   "lat-the"
+  ],
+  [
+   "^Thỉnh an Thái hậu|^Thỉnh an, chép kinh|thấy mặt Thái hậu|trước mặt Thái hậu",
+   "thinh-an-th"
+  ],
+  [
+   "^Thỉnh an Hoàng hậu|^Thỉnh an\\.|thỉnh an ở Càn Ninh",
+   "thinh-an-hh"
+  ],
+  [
+   "^Xin (bái|yết) kiến|^Xin vào .+: bị từ chối|^Chào hỏi đúng lễ|^Bái kiến|^Hành lễ thỉnh an",
+   "bai-kien"
+  ],
+  [
+   "không chào chủ vị|^Vào thẳng",
+   "scene:rv"
+  ],
+  [
+   "^(Bàn thơ văn|Giữ bài thơ|Làm thơ)",
+   "lam-tho-v2"
+  ],
+  [
+   "^(Điểm trang|Để mộc)",
+   "duong-nhan"
+  ],
+  [
+   "^Tập trước",
+   "luyen-cam-ky"
+  ],
+  [
+   "^Xin ân cho",
+   "xin-an-dien"
+  ],
+  [
+   "^(Hội Phượng|Đặt cược tay thiện xạ|Xin thử một mũi tên)",
+   "vo-nghe"
+  ],
+  [
+   "^Thưởng vì",
+   "thuong"
+  ],
+  [
+   "^(Im lặng, tựa vai|Lặng lẽ xoa vai|Rót rượu, nũng nịu|Khen một câu|Thị tẩm)",
+   "ev:hoang-de-dem"
+  ]
+ ]
 }
