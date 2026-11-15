@@ -26790,7 +26790,7 @@ function emoBoxArt(p,m,L){const k=m.known?m.k:"an";const c=m.known?(L.find(x=>x.
  const src=own||`https://ctm-img.victoria-tntt.workers.dev/img/ev-mood-${EMO[k]||k==="an"?k:"binh"}${w%2?"-2":""}.webp`;
  const cap=c?String(c.why).replace(/\s*«[^»]*»/g,"").replace(/[,.]\s*$/,"").trim():m.known?(EMO[k]||""):"Chưa rõ lòng người";
  return{src,label:cap,mark:`https://ctm-img.victoria-tntt.workers.dev/img/kit/emo-${set}${k}.webp`,markAlt:`Tâm trạng: ${m.known?m.name:"chưa rõ"}`}}
-function emoBox(k){const p=emoByKey(k);if(!p||!S||S.dead)return;const m=window.kitEmotion(p);if(!m)return;const nm=p===S?"Ngươi":emoName(p);
+function emoBox(k){const p=emoByKey(k);if(!p||!S||S.dead)return;const m=window.kitEmotion(p);if(!m)return;let nm=p===S?"Ngươi":emoName(p);/* rank + name always together (owner 15/11, OD L820-821): same plain title+name as Đã biết về X */try{if(p!==S&&typeof kitName==="function"&&typeof kpPlain==="function"){const t=kpPlain(kitName(p)).trim();if(t)nm=t}}catch(e){}
  const cls=x=>x==="vui"?"g":["gian","buon","dau","so","lo","ghen"].includes(x)?"r":"";const W=emoW();const ago=w=>W-w<=0?"tuần này":`${W-w} tuần trước`;
  const L=m.known?emoCauses(p):[];
  const rows=m.known?(L.length?L.map(x=>[EMO[x.k]||x.k,`${x.why} · ${ago(x.w)}`,cls(x.k)]):[["Nguyên nhân","không có chuyện gì đáng kể gần đây"]]):[["Nguyên nhân","chưa rõ: ngươi chưa gặp, chưa có tai mắt bên người này"]];
@@ -27989,7 +27989,7 @@ window.kitPhTone=kitPhTone;window.KIT_PH=KIT_PH;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="514a9b664ccc";window.CTM_BUILD=BUILD;
+const BUILD="1b277573603e";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

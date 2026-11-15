@@ -60,7 +60,7 @@ function emoBoxArt(p,m,L){const k=m.known?m.k:"an";const c=m.known?(L.find(x=>x.
  const src=own||`img/ev-mood-${EMO[k]||k==="an"?k:"binh"}${w%2?"-2":""}.webp`;
  const cap=c?String(c.why).replace(/\s*«[^»]*»/g,"").replace(/[,.]\s*$/,"").trim():m.known?(EMO[k]||""):"Chưa rõ lòng người";
  return{src,label:cap,mark:`img/kit/emo-${set}${k}.webp`,markAlt:`Tâm trạng: ${m.known?m.name:"chưa rõ"}`}}
-function emoBox(k){const p=emoByKey(k);if(!p||!S||S.dead)return;const m=window.kitEmotion(p);if(!m)return;const nm=p===S?"Ngươi":emoName(p);
+function emoBox(k){const p=emoByKey(k);if(!p||!S||S.dead)return;const m=window.kitEmotion(p);if(!m)return;let nm=p===S?"Ngươi":emoName(p);/* rank + name always together (owner 15/11, OD L820-821): same plain title+name as Đã biết về X */try{if(p!==S&&typeof kitName==="function"&&typeof kpPlain==="function"){const t=kpPlain(kitName(p)).trim();if(t)nm=t}}catch(e){}
  const cls=x=>x==="vui"?"g":["gian","buon","dau","so","lo","ghen"].includes(x)?"r":"";const W=emoW();const ago=w=>W-w<=0?"tuần này":`${W-w} tuần trước`;
  const L=m.known?emoCauses(p):[];
  const rows=m.known?(L.length?L.map(x=>[EMO[x.k]||x.k,`${x.why} · ${ago(x.w)}`,cls(x.k)]):[["Nguyên nhân","không có chuyện gì đáng kể gần đây"]]):[["Nguyên nhân","chưa rõ: ngươi chưa gặp, chưa có tai mắt bên người này"]];

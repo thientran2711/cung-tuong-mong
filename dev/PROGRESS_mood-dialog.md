@@ -34,3 +34,9 @@ id the visitor picture `j24:co-nguoi-den` ("Có người đến chơi"; Emperor 
 seal top-right inside the picture (64 px), dialog on screen, no horizontal scroll, no page errors. (A cold-cache first load sometimes still
 loading the picture after 8 s in the test — network timing only.)
 Bytes: +0 per dialog open beyond one event picture (≤250 KB) + one seal (~10 KB), loaded on demand.
+
+## Review r1 (reviewer, 15/11)
+- Fix: emoBox title now carries rank + name (owner OD L820-821, ledger 224): `Tâm trạng · Hoàng hậu X` (kpPlain(kitName(p)), same as "Đã biết về X"); Emperor stays "Hoàng thượng", her own box "Ngươi".
+- Cause mapping: 40 cause wordings from jemo/jevb + a 12-step bot run (70 distinct real causes): all map to a fitting picture; only "chuyện riêng", "bị chủ hắt hủi", "Hoàng thượng lạnh nhạt", "chủ nhân đang nổi giận" use the per-mood fallback (no event fits). Recorded cause.a = the picture the event dialog showed.
+- Corner seal checked on the 19 cause-category pictures + recorded ev-night2/ev-hoang-de-vui/ev-tai-mat: never over a face. 20 fallbacks looked at: fit their moods, no people (each -2 is a near-copy of its pair).
+- Known minor: if img/EVENTS.json has not loaded yet (cold CDN, first seconds), the box falls back to the mood scene; the next open is right.
