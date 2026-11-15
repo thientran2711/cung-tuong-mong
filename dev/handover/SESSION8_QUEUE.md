@@ -21,7 +21,7 @@ CDN uploads OK again (owner saved the Cloudflare token; R2 verified). Use CLOUDF
 | A13 | review/recipes-r1 (finish cut review) | QUEUED |
 
 ## B. Workers on FAILED reviews (§3)
-| B1 | review/night-end-r1 FAIL 6 items → worker; then night follow-ups (owner 21:10Z) | QUEUED (after A2 fxkit) |
+| B1 | review/night-end-r1 FAIL 6 items + in-night picture by tone + light night panel (C30 merged) + follow-ups | RUNNING |
 | B2 | review/outside-r2-r1 FAIL 5 items → worker | QUEUED |
 
 ## C. Unfinished workers (§4 + §9)
@@ -72,7 +72,7 @@ Dependencies: D29 before D13 (events/places read the ledger); D30 + D42 share j1
 
 ## E. Open owner questions (§6) — ask one at a time
 j72 bước vs Hồi · stage paper halo · Thái hậu title bronze vs plum · HT vs HH gold alike · Đáp ứng muted on paintings
-| C18 | review/kit-popup-sample (owner s8: show the pop-up kit; add §8 samples to kit page) | RUNNING |
+| C18 | review/kit-popup-sample @ b6242dea (screens sent to owner) | SẴN SÀNG KIỂM → reviewer QUEUED-NEXT |
 | C19 | review/pic-dupes (owner s8: two acts share one picture; scan + redraw) | RUNNING |
 | C20 | review/act-text (owner s8: broken/unclear act card text, whole family) | RUNNING |
 | C21 | review/khac-day (owner s8: khắc check over the whole day; red only if day short or buổi-bound) | RUNNING |
@@ -86,7 +86,7 @@ j72 bước vs Hồi · stage paper halo · Thái hậu title bronze vs plum · 
 | D50 | consorts without full-body figure art show a placeholder frame in the dialog person column (seen 755x1000, mood-dialog worker) → art-complete follow-up | QUEUED |
 | C28 | review/room-btn (owner s8: header '‹ Phòng' bar → painted room icon button) | QUEUED-NEXT |
 | C29 | review/rel-picker (owner s8: Giao tình relation pickers waste space → compact) | QUEUED-NEXT |
-| C30 | review/night-panel (owner s8: ĐÊM panel dark → same light kit panel; scan all dark-themed dialogs) | QUEUED-NEXT |
+| C30 | night-panel → merged into B1 | MERGED |
 | C31 | review/log-sync (owner s8: Sổ ghi Sủng 33→40 vs header 37; audit unlogged stat changes) | RUNNING |
 | C32 | review/page-curl2 (owner s8: Fold page turn stiff → real curl; reuse drag-curl D37) | QUEUED-NEXT |
 | C33 | review/weekbook-entries (owner s8: week book person page shows unrelated raw entry; per-person readable entries) | QUEUED-NEXT |
