@@ -14,7 +14,10 @@
        {kind:"end",   title:"Tuần này đến đây là hết.", seal:["HẾT","TUẦN"], note:"Sổ ghi 12 việc, 4 người.", btn:"Vào ngày mới"}],
        head:"Sổ tuần · Tháng tư · thượng tuần", host:element, onClose:fn})  → {next, prev, go, close}
 */
-const KBK_ART={cover:"img/book-cover.webp",left:"img/book-left.webp",right:"img/book-right.webp",end:"img/book-end.webp"};
+const KBK_ART={cover:"img/book-cover.webp",left:"img/book-left.webp",right:"img/book-right.webp",end:"img/book-end.webp",title:"img/title-tuanluc-d4s.webp"};
+/* KBK_TITLE_IMG: the cover label's written title as a picture (owner 11/15: vertical brush title d4 + the game's Trân nữ seal, KIT §27.1). A cover page whose
+   title has a picture here draws it in the label (art cover only); any other title keeps the text. */
+const KBK_TITLE_IMG={"Tuần lục":KBK_ART.title};
 const KBK_HAVE={};
 (function(){for(const [k,u] of Object.entries(KBK_ART)){try{const im=new Image();im.onload=()=>{KBK_HAVE[k]=true;document.querySelectorAll(".kbk").forEach(r=>{r.classList.add("art-"+k);if(r.__kbk)r.__kbk.relayout()})};im.src=u}catch(e){}}})();
 
@@ -44,7 +47,7 @@ function kitBook(spec){spec=spec||{};const rm=()=>{try{return reducedMotion()}ca
  /* ---- page shells ---- */
  const head=spec.head||"";
  const shell=(cls,inner,folio)=>`<div class="kbk-pg ${cls}"><div class="kbk-in">${head&&!/k-cover|k-blank|k-back/.test(cls)?`<div class="kbk-rh">${head}</div>`:""}<div class="kbk-body">${inner}</div>${folio?`<div class="kbk-fo">${folio}</div>`:""}</div></div>`;
- const coverH=p=>`<div class="kbk-cv"><div class="kbk-stitch"></div><div class="kbk-label"><b class="kbk-lt">${String(p.title||"Tuần lục").split(" ").map(w=>`<span>${w}</span>`).join(" ")}</b></div><div class="kbk-cmeta">${p.sub?`<span class="kbk-ls">${p.sub}</span>`:""}${p.note?`<span class="kbk-cn">${p.note}</span>`:""}</div><b class="kbk-cseal">${p.seal||"TUẦN"}</b><span class="kbk-hint">${p.hint||"Vuốt trang hoặc chạm mép phải để lật"}</span></div>`;
+ const coverH=p=>`<div class="kbk-cv"><div class="kbk-stitch"></div><div class="kbk-label">${(()=>{const t=String(p.title||"Tuần lục"),im=p.titleImg||KBK_TITLE_IMG[t];return (im?`<img class="kbk-ltimg" src="${im}" alt="${t}" draggable="false">`:"")+`<b class="kbk-lt${im?" has-img":""}">${t.split(" ").map(w=>`<span>${w}</span>`).join(" ")}</b>`})()}</div><div class="kbk-cmeta">${p.sub?`<span class="kbk-ls">${p.sub}</span>`:""}${p.note?`<span class="kbk-cn">${p.note}</span>`:""}</div><b class="kbk-cseal">${p.seal||"TUẦN"}</b><span class="kbk-hint">${p.hint||"Vuốt trang hoặc chạm mép phải để lật"}</span></div>`;
  const endH=p=>`<div class="kbk-end"><span class="kbk-orn"></span><h3 class="kbk-et">${p.title||"Tuần này đến đây là hết."}</h3><b class="kbk-seal" aria-label="${(p.seal||["HẾT","TUẦN"]).join(" ")}">${(p.seal||["HẾT","TUẦN"]).map(s=>`<i>${s}</i>`).join("")}</b>${p.note?`<p class="kbk-en">${p.note}</p>`:""}<button class="kbtn kbk-go" id="${p.btnId||"kbk-go"}">${p.btn||"Đã hiểu"}</button></div>`;
  const blankH=()=>`<div class="kbk-blank"><span class="kbk-orn"></span></div>`;
  const textTop=(p,cont)=>`<div class="kbk-th"><h3 class="kbk-t">${p.title||""}${cont?` <small class="kbk-cont">tiếp theo</small>`:""}</h3>${p.sub&&!cont?`<small class="kbk-ts">${p.sub}</small>`:""}</div>`;
@@ -408,6 +411,10 @@ function wkBookPages(){const d=wkBookData();const date=kitDate(S.month,S.year,S.
 .kbk.art-end .kbk-pg.k-end .kbk-seal i{font-size:max(1.1em,24cqh)}
 .kbk.art-cover .kbk-label{position:absolute;left:9.1%;top:3.6%;width:13.8%;height:57.7%;min-width:0;max-width:none;background:none;border:0;outline:0;box-shadow:none;padding:0;container-type:size;justify-content:center;align-items:center}
 .kbk.art-cover .kbk-lt{display:flex;flex-direction:column;align-items:center;gap:.25em;font-size:min(36cqw,13cqh);letter-spacing:0;line-height:1.05}
+.kbk-ltimg{display:none}
+.kbk.art-cover.art-title .kbk-label:has(.kbk-ltimg){justify-content:flex-start}
+.kbk.art-cover.art-title .kbk-ltimg{display:block;flex:0 0 auto;width:calc(100% - 12px);height:calc(100% - 20px);margin:10px auto 0;object-fit:contain;object-position:50% 0;pointer-events:none;-webkit-user-drag:none}
+.kbk.art-cover.art-title .kbk-lt.has-img{display:none}
 .kbk.art-cover .kbk-cmeta{position:absolute;left:28%;right:8%;top:5%;text-align:left;align-items:flex-start}
 .kbk.art-cover .kbk-cn{text-align:left}
 .kbk.art-cover .kbk-hint{left:26%;right:6%}
