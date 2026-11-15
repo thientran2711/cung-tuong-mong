@@ -195,3 +195,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (10:00Z) Owner: page turn = whole sheet swinging around the spine with content attached to the sheet (rotates/tilts with it), like her binder-app reference; not content pinned to the page beneath.
 - (10:05Z) Owner: poison/heavy-harm minigame should be abstract, not explicit → 'Thời cơ' timing/attention game (no method detail).
 - (10:40Z) LIVE: review/coop merged to main 614b00ec (book UI + fold-layout + KIT_FIG + co-op 2 người).
+- (01:20Z, qua phiên cũ) Owner: app cài màn hình chính / điện thoại kẹt bản cũ do sw.js cũ → sw mới phải tự kiểm bản mới khi mở app và khi quay lại, tự chuyển sang bản mới sau 1 lần mở lại; giao thợ review/loading.
