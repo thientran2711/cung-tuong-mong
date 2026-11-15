@@ -575,3 +575,8 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - "Học với thầy" is almost never chosen: low ranks have no bạc for it, and at high ranks the arts are already maxed. Fix: lower the price a lot, or make palace tutoring free / paid in something else (check how learning in the palace should cost).
 - Each art splits into sub-styles like dishes do (cầm: kinds of instruments/pieces; họa: kinds of painting; etc.). Each person has their own taste among them; a gift/performance only pleases when it matches. More variety and choice, and it stops players knowing everything too early/fast.
 - Owner asked to see pet tiers, item/handmade art (sheets sent).
+
+## 15/11 ~20:30Z — Session handover; story chapter labels; bạc-alternative balance (owner)
+- Session 6 is heavy: hand over to a new coordinator session; workers report to the new session. Session 6 stays only until the remaining workers have reported, then is archived.
+- Story quests: instead of only "9 tuyến báo thù cho nhà, bước 2/4", show the CHAPTER/ACT too (e.g. "Chương 1 · Hồi 3") so she knows which chapter she is in.
+- BALANCE RULE for every choice that costs bạc: there is always another road (already a rule), AND that other road must cost an EQUIVALENT value. If 20 bạc buys Danh +1, the non-bạc road (Sức, khắc, favour, risk, items…) must hurt as much as 20 bạc does at that rank (bạc is scarce at low ranks, so value it by how hard it is to earn at her rank). Neither road may be the obvious pick: with only 20 bạc in the pocket she should hesitate between the two. A road that is too cheap makes the bạc road dead, and vice versa.
