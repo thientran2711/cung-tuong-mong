@@ -67,7 +67,7 @@ rules] A character lineup of THREE full-body standing figures ... Signature colo
   demole 0 hits, on CDN with FIGURES-servants.json (2956 records).
 - DONE 15/11 night (worker resume): u02-u10 r0/r2/r3 (ue_bg2..4.txt), all on CDN + FIGURES-servants.json. Helpers: look.py (contact sheet of raw gens),
   chk.sh OUT stem... (cutcheck top-3 + demole dry run + rvsheet). CDN upload works again (coordinator 15/11).
-- DONE u11-u20 (ue_bg5-6.txt). NEXT: u21..u30 x r0/r2/r3 (30 sheets; u30 r2 = ochre-gold): `python3 ue_spec.py ue-u02-r0 ue-u02-r2 ue-u02-r3` -> generate (refs [ref]) -> append ids to
+- DONE u11-u25 (ue_bg5-7.txt). u24: gpt-2-6 added a left-cheek mole on the new ranks (r1 has none) -> inpainted with demole_por.py spot= (new option zone=cheek finds them; noisy on older faces, look before fixing). NEXT: u26..u30 x r0/r2/r3 (15 sheets; u30 r2 = ochre-gold): `python3 ue_spec.py ue-u02-r0 ue-u02-r2 ue-u02-r3` -> generate (refs [ref]) -> append ids to
   ue_gens.txt -> LOOK -> remove_background -> ue_bgN.txt -> pull FIGURES-servants.json -> proc.py ue_jobs.json FIGURES-servants.json
   ue_bgN.txt -> rvsheet + cutcheck + demole_por.py -n --sheet -> cdn_sync -> commit. Batches of ~5 eunuchs (15 sheets, 4050 credits).
 - Picker DONE (jartc.js part 3): f88Best wrapped; staff eunuchs (role eunuch/eun, not S) -> f88Pick base mode with rank who.rk

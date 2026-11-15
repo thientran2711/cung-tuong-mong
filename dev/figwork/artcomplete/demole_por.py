@@ -8,7 +8,7 @@ Usage (run from the worktree root; files or globs, quoted globs are expanded her
   python3 -I dev/figwork/artcomplete/demole_por.py img/por-a.webp img/fig-b.webp               fix in place (webp q86)
   python3 -I dev/figwork/artcomplete/demole_por.py img/por-a.webp spot=195,183                 fix one hand-picked spot (file coords;
                                                                                              darkest pixel within 5px, r=3 inpaint)
-Options: -n dry run | --sheet OUT.jpg (hits only) | th=16 darkness vs local median | DBG=1 env prints the face box.
+Options: -n dry run | zone=cheek (search the cheeks instead of the brow strip) | --sheet OUT.jpg (hits only) | th=16 darkness vs local median | DBG=1 env prints the face box.
 
 How it works: haar frontal face (opencv 4.10 from dev/figwork/artcomplete/.cache/pylib, see PROGRESS "NEW CONTAINER NOTE")
 -> a central strip of the forehead, x .38-.62 of the face box, from just above the box down to .29h (= the brow line) ->
@@ -28,6 +28,7 @@ A = sys.argv[1:]
 DRY = '-n' in A
 TH = int(next((x[3:] for x in A if x.startswith("th=")), "16"))
 SHEET = A[A.index('--sheet') + 1] if '--sheet' in A else None
+ZONE = next((x[5:] for x in A if x.startswith("zone=")), "brow")
 SPOTS = [tuple(map(int, x[5:].split(','))) for x in A if x.startswith('spot=')]
 files = []
 for x in A:
@@ -54,7 +55,9 @@ for f in files:
     if os.environ.get("DBG"): print(x, y, w, h)
     L = g.astype(int); k = max(5, int(w * .12) | 1); med = cv2.medianBlur(g, k).astype(int)
     allow = np.zeros(L.shape, bool)
-    allow[max(0, y - int(.05*h)):y + int(.29*h), x + int(.38*w):x + int(.62*w)] = True   # central forehead strip down to the brow line
+    if ZONE == 'cheek':   # cheeks under the eyes, beside the nose (zone=cheek; added for the u24 eunuch rank faces)
+        allow[y + int(.50*h):y + int(.80*h), x + int(.14*w):x + int(.36*w)] = True; allow[y + int(.50*h):y + int(.80*h), x + int(.64*w):x + int(.86*w)] = True
+    else: allow[max(0, y - int(.05*h)):y + int(.29*h), x + int(.38*w):x + int(.62*w)] = True   # central forehead strip down to the brow line
     cand = ((med - L) > TH) & allow & (a > 200)
     n, lab, st, _ = cv2.connectedComponentsWithStats(cand.astype(np.uint8), 8)
     mask = np.zeros(L.shape, np.uint8); hits = []
