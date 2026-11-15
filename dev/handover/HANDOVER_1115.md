@@ -119,3 +119,4 @@ Nhắc theo dõi: send_later 30 phút, tự đặt lại mỗi lượt (lịch l
 - [x] LIVE 1c7a3fcb2: dialog-person (hộp thoại có người: người toàn thân bên trái, chữ trên phải, lựa chọn dưới phải).
 - [ ] Bảng mua đồ: hình người nhỏ, ô lệch hàng, khung mua lặp lại món → thợ review/shop-fix.
 - [ ] Má nhân vật bị đen trên nền tối (alpha thủng) → scene-light quét + vá mọi ảnh người.
+- [ ] Thẻ thông tin Hoàng thượng (và mọi thẻ người) không theo kit: khung luật trôi góc phải, khoảng trống lớn, nút "Đã hiểu" → gộp một thẻ người kit (giao stage-slots/person-acts).
