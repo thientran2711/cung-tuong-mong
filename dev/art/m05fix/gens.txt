@@ -1,0 +1,11 @@
+# m05 hoa điền: anh đào 5 cánh khía đầu cánh (sếp 15/11 02:35Z). gpt-2-6 edit 2k high, folder ba4aecfe-efce-47e2-b53f-30d292091886
+# lưới 2x2 đầu (a18 a26 / a36 a51) cắt từ fig 900px, sửa một lần cho 4 tuổi, dán lại riêng vùng trán (hg.py paste)
+t1 upload=Do77VUEpcl edit=s7oojmnl8e
+t2 upload=rgeekDnxtc edit=KLMM5jjkqp
+t3 upload=jUXXreDLD0 edit=3zbbin8REY
+t4 upload=KLMMbTVkqp edit=jUXXx74LD0
+t5 upload=s7oojXvl8e edit=ov99BEf829
+t6 upload=1lppKMEr4r edit=CqGGfryEEy
+t7 upload=gOIIsojSXO edit=0eggctOTfW
+t8 upload=SyttlIPUb8 edit=ov99BqF829
+t5 redo (more gold, t4/t5 distinct) edit=MBwwVYZDCm  [t5 v1 ov99BEf829 rejected: like t4]

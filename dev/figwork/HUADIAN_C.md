@@ -12,7 +12,7 @@ Lãnh cung (tcold): KHÔNG hoa điền. Không nốt ruồi, không beauty mark.
 | m02 | a tiny bat (auspicious fu bat) | pale coral | moss green and silver |
 | m03 | a tiny longevity peach | cinnabar red | slate blue and silver |
 | m04 | three tiny dots in a vertical line | soft pink | warm apricot and gold |
-| m05 | two tiny cherries on one stem | rose red | coral red and gold |
+| m05 | a single tiny cherry blossom: five rounded petals, each with a small V-notch at the tip (sếp 15/11: thay "hai quả anh đào", không phải hoa đào c08 / hoa mơ m38 / hoa lê m42) | pinkish rose red | coral red and gold |
 | m06 | a tiny upright narrow jade-tablet shape (a small slim rounded vertical bar) | vermilion | pale blue-grey and silver |
 | m07 | a tiny jade-rabbit silhouette | peach pink | pale jade green and white |
 | m08 | a tiny round coin with a square hole | soft coral | peach-salmon and gold |
