@@ -48,6 +48,8 @@ Thi hành: `dev/build/j84.js` (module cuối trong assemble.py) sửa dữ liệ
 | Người quen thân | người quen, tri kỷ | bạn |
 | Dịp tốt | cơ duyên, dịp | cơ hội |
 | Tình cảm giữa hai người (owner 11/15 09:55Z; một số, một tên) | **thiện cảm**: chip "Nàng → ta: thiện cảm", "Ta → nàng: thiện cảm"; dòng thẻ việc "thiện cảm +10"; mối hận "oán ta +8". Chưa biết thì "chưa rõ nàng nghĩ gì", không hiện số. Hằng chung: `KIT_REL` (jaudit) | quý ngươi, quý ta, thân, thù (khi ý là thiện cảm), "đang −40" khi nàng chưa biết |
+| Kẻ hầu với chủ / chủ với kẻ hầu (owner 11/15 10:10Z) | kẻ hầu đối với ta: **thiện cảm** (thanh "Thiện cảm", dòng thẻ "thiện cảm +6"); ta đối với kẻ hầu: **tin cậy** (thanh "Ta tin cậy", dòng thẻ "tin cậy Tiểu Lộ Tử +3"); nhóm "Cung ta"; người chạy việc ghi trên thẻ chính người ấy ("Đang là người chạy việc"). Chế độ cung nữ giữ "Chủ tin" (chủ tin nàng). `KIT_REL.srvThem/srvTrust/runner` | Lòng, Chủ tin (ngoài chế độ cung nữ), Cung ngươi |
+| Tên kẻ hầu | không trùng trong cả cung, không có số ("Thúy 2") | tên kèm số |
 | Số đo (Sắc, Tài, Sủng…) | gọi đúng tên; khi chung chung: "không đổi gì" | chỉ số, stat, điểm |
 | Điểm thi (tuyển tú, thi tài) | phần: "nàng mất 2 phần" | điểm |
 | Bậc may rủi (CHỈ cơ may thành/hỏng của chính việc làm: một chữ ở góc thẻ / cạnh lựa chọn) | Liều / Khó / Năm ăn năm thua / Khá chắc / Chắc / Rất chắc / Nắm chắc (việc chắc không ghi chữ) | %, Chắc chắn, random |
