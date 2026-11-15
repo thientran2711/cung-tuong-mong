@@ -75,7 +75,7 @@ relHTML=function(){if(!S)return"";if(S.known&&typeof k61Hide==="function"){const
 function mkTab(k,l,s,before){const T0=$("tabs");if(!T0||T0.querySelector(`[data-tab="${k}"]`))return;const b=document.createElement("button");b.dataset.tab=k;b.dataset.s=s;b.setAttribute("role","tab");b.textContent=l;b.dataset.l0=l;b.dataset.s0=s;
  const ref=T0.querySelector(`[data-tab="${before}"]`);if(ref)ref.after(b);else T0.appendChild(b);return b}
 (function(){const T0=$("tabs");if(!T0)return;const rv=T0.querySelector('[data-tab="rv"]');
- if(rv&&!T0.querySelector('[data-tab="court"]')){const b=document.createElement("button");b.dataset.tab="court";b.dataset.s="Thánh thượng";b.setAttribute("role","tab");b.textContent="Hoàng thượng · Thái hậu";b.dataset.l0=b.textContent;b.dataset.s0=b.dataset.s;rv.before(b)}
+ if(rv&&!T0.querySelector('[data-tab="court"]')){const b=document.createElement("button");b.dataset.tab="court";b.dataset.s="Chí tôn";b.setAttribute("role","tab");b.textContent="Chí tôn";b.dataset.l0=b.textContent;b.dataset.s0=b.dataset.s;rv.before(b)}
  mkTab("men","Nam nhân","Nam nhân","rv");
  /* staff (Cung nhân) belongs to Hậu cung: place its button inside the group (after men) so the bar order stays Hậu cung · Giao tình */
  const st=T0.querySelector('[data-tab="staff"]'),mn=T0.querySelector('[data-tab="men"]');if(st&&mn)mn.after(st);
@@ -83,10 +83,10 @@ function mkTab(k,l,s,before){const T0=$("tabs");if(!T0||T0.querySelector(`[data-
  /* servant road: its own tabs (j42 SRVTABS) — the new keys are not servant tabs */
 })();
 try{for(const k in KG)delete KG[k];Object.assign(KG,{hc:{keys:["court","rv","men","staff"],l:"Hậu cung",s:"Hậu cung"},gt:{keys:["rel","fac"],l:"Giao tình",s:"Giao tình"},mt:{keys:["story","nho","quest","req","log"],l:"Mệnh truyện",s:"Mệnh truyện"}})}catch(e){}
-try{if(window.VP&&VP.tabs)Object.assign(VP.tabs,{court:["Hoàng thượng · Thái hậu","Thánh thượng"],men:["Nam nhân","Nam nhân"],rel:["Ân oán","Ân oán"]})}catch(e){}
+try{if(window.VP&&VP.tabs)Object.assign(VP.tabs,{court:["Chí tôn","Chí tôn"],men:["Nam nhân","Nam nhân"],rel:["Ân oán","Ân oán"]})}catch(e){}
 /* the sub-tab label: long on wide panels, short ("Thánh thượng") where four segments are tight */
 (function(){if(typeof kgSub!=="function")return;const k0=kgSub;kgSub=function(){const r=k0.apply(this,arguments);try{const P=$("panel");const b=P&&P.querySelector('.ksub [data-ksub="court"]');
-  if(b){const w=P.clientWidth||innerWidth;b.innerHTML=w<640?"Thánh thượng":"Hoàng thượng · Thái hậu";b.title="Hoàng thượng · Thái hậu"}
+  if(b){const w=P.clientWidth||innerWidth;b.innerHTML=w<640?"Chí tôn":"Chí tôn";b.title="Chí tôn"}
   const r2=P&&P.querySelector('.ksub [data-ksub="rel"]');if(r2&&T(r2.textContent)!=="Ân oán")r2.textContent="Ân oán"}catch(e){}return r}})();
 
 /* court sub-tab: Hoàng thượng + Thái hậu, the same pager + person card; their acts = the day's act cards about them (from the Hành sự deck) */
