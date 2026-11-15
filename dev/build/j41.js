@@ -43,7 +43,7 @@ function accMini(k,st,risk){const L=[];
  return L.length?`<span class="macts">${L.join("")}</span>`:""}
 /* full kit buttons (Danh sách, cards) */
 function accBtns(k,st){const L=[];
- if(st.ask==="yk")L.push(pbtn(`class="btn" data-acask="${k}"`,"Xin yết kiến",accAskLine(k),st.empAway?"Hoàng thượng không có ở đây":!can(1)?"hết khắc":""));
+ if(st.ask==="yk")L.push(pbtn(`class="btn" data-acask="${k}"`,"Xin yết kiến",accAskLine(k),st.askWhy||(st.empAway?"Hoàng thượng không có ở đây":!can(1)?"hết khắc":"")));
  if(st.ask==="bk")L.push(pbtn(`class="btn" data-acask="${k}"`,"Xin bái kiến",accAskLine(k),!can(1)?"hết khắc":""));
  if(st.kind)L.push(pbtn(`class="btn" data-acsneak="${k}"`,"Lẻn vào",accSneakLine(k,st.tc),st.sneakOk?"":"không đủ khắc"));
  return L.join("")}

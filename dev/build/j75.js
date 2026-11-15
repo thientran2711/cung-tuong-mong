@@ -53,6 +53,11 @@ const cm0=chooseM;chooseM=function(i){try{const m=Q[0];const o=m&&m.opts&&m.opts
  window.__ntDone=0;const r=cm0.apply(this,arguments);
  try{if(window.__ntDone&&window.__nsnap&&S&&!S.dead){const b=window.__nsnap;b.seq=window.__ntSeq!=null?window.__ntSeq:b.seq;window.__nsnap=null;window.__ntDone=0;resultShow("Đêm thị tẩm",b,"sure")}}catch(e){}return r};
 
+/* owner 13:30Z "Bạc −5 phải truy nguồn": the night card's "Mất: Bạc 300→295 (−5)" was the price of the PREP choice (Điểm trang lộng lẫy
+   Bạc −5; Tắm cánh hoa Bạc −15; Tập trước Sức −5), already paid and shown as that choice's Tốn — the night snapshot is taken at nightScene,
+   BEFORE prep. Re-base Bạc / Sức when the night itself begins (night1 is built, after the prep cost was applied by chooseM), so the night
+   card shows only what the night did. (Bạc won IN the night — "Xin ân cho gia đình" — still shows.) */
+{const n1=PEND.night1;PEND.night1=function(){try{const b=window.__nsnap;if(b&&S){b.bac=S.bac||0;b.suc=S.suc||0}}catch(e){}return n1.apply(this,arguments)}}
 /* --- the night's true line --- */
 const nf0=nightFx;nightFx=function(s){const b={sung:S.sung,an:S.an||0,inv:S.inv.length,g:{}};for(const v of liveRivals(true))b.g[v.id]=v.ghen||0;
  const L0=log;log=function(h){if(/^Thị tẩm\. Sủng/.test(String(h)))return;return L0.apply(this,arguments)};let r;
@@ -72,7 +77,7 @@ const ng0=night;night=function(p){p=p||S;if(p!==S)return ng0.apply(this,argument
 function pregFind(){if(!S||S.dead)return;if(!S.preg){S.pregUnk=0;return}if(!S.pregUnk)return;if(wk()<(S.pregDisc||0)&&S.preg<4)return;
  S.pregUnk=0;const m=S.preg;const canHide=S.hidden&&S.preg<=3;
  const h=`<p>Mấy hôm nay ${S.maid?`cung nữ ${S.maid.name}`:"cung nữ"} thấy ngươi biếng ăn, hay buồn nôn, liền mời thái y.</p><p><b class="g">Thái y bắt mạch: ngươi đã có thai, đang tháng thứ ${m}.</b></p>${canHide?`<p class="past">Ngươi có thể giấu thai đến hết tháng thứ 3, hoặc báo tin để được sủng ái.</p>`:""}`;
- const card={t:"Thái y bắt mạch",who:pDoc(),h};
+ const card={ev:1,t:"Thái y bắt mạch",who:pDoc(),h};/* ev: keep secret / announce is an EVENT choice (KIT 28.6; reviewer r7: its opts are set after the literal, so it slipped) */
  if(canHide)card.opts=[{n:"Giữ kín, dặn thái y không nói",fx:{},x:"giấu thai đến hết tháng thứ 3 · phi tần chưa biết để nhắm vào thai",go:()=>{S.hidden=true;log("Ngươi giữ kín tin có thai.")}},
   {n:"Báo tin cho Hoàng thượng",fx:{sung:6,th:5},x:"các phi tần ghen +6 · kẻ ác có thể nhắm vào thai",go:()=>{S.hidden=false;ghenAll(6);log("Ngươi báo tin có thai.")}}];
  else card.btn="Đã hiểu";

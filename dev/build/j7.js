@@ -20,7 +20,7 @@ ev("doll",()=>S.rank>=1&&liveRivals(false).length,()=>({v:rvTop((a,b)=>b.ghen-a.
  {n:"Mua chuộc Cung Chính ti",fx:{bac:-60},x:"chuyện chìm xuống"}]}});
 ev("poisongift",()=>liveRivals(false).length&&S.rank>=1,()=>({v:rvAny().id,o:od(40+S.mat*5+S.tamco/4)}),p=>{const v=RV(p.v);if(!v)return null;return{who:pv(v),
  t:`Hộp điểm tâm đề tên ngươi gửi sang cung ${v.name}; cung nữ nếm thử liền thổ huyết.<br>Cả hậu cung xôn xao: ngươi hạ độc.`,o:[
- {n:"Kêu oan, xin tra người đưa quà",fx:{},x:`${word(p.o)} · hỏng: bị phạt nặng`,go:()=>{if(roll(p.o)){apply({danh:3});log("Tra ra tiểu thái giám đưa quà đã bị mua chuộc; ngươi được minh oan.")}else{apply({danh:-6});v.rel-=20;punish("gửi quà có độc",2)}}},
+ {n:"Kêu oan, xin tra người đưa quà",fx:{},x:`${word(p.o)} · thành: được minh oan, Danh +3 · hỏng: bị phạt nặng`,go:()=>{if(roll(p.o)){apply({danh:3});log("Tra ra tiểu thái giám đưa quà đã bị mua chuộc; ngươi được minh oan.")}else{apply({danh:-6});v.rel-=20;punish("gửi quà có độc",2)}}},
  {n:"Nhờ Thái hậu đứng ra",fx:{th:-12},x:"Thái hậu ém chuyện; nàng vẫn nghi ngươi",go:()=>{v.rel-=15}},
  {n:"Đẩy tội cho cung nữ",fx:{maid:-40,duc:-6},x:"nàng bị đánh 30 trượng"}]}});
 /* rumours */
@@ -81,7 +81,7 @@ ev("princefever",()=>S.kids.some(k=>k.alive&&k.age<10)&&(mon(1)||mon(8)),()=>({k
 ev("foreignwed",()=>myDaus().some(k=>k.age>=18),()=>{const d=myDaus().filter(k=>k.age>=18)[0];return d?{k:d.name,o:od(30+S.sung/3+mm())}:null},p=>{const k=KID(p.k);if(!k)return null;return{who:pEmp(),
  t:`Sứ thần Bắc Địch dâng ngựa quý, cầu hôn ${k.name}. Triều thần đều nói: một nàng công chúa đổi mười năm yên biên ải.`,o:[
  {n:"Thuận theo đại cục",fx:{danh:10,th:5,suc:-15},x:`${k.name} xuất giá phương bắc`,go:()=>{k.alive=false;k.wed=1;log(`${k.name} khóc từ biệt mẫu thân, theo đoàn sứ lên phương bắc.`)}},
- {n:"Quỳ xin giữ con lại",fx:{},x:`${word(p.o)} · hỏng: Sủng -10`,go:()=>{if(roll(p.o))log("Hoàng thượng động lòng, gả một tông nữ thay.");else apply({sung:-10,danh:-3})}},
+ {n:"Quỳ xin giữ con lại",fx:{},x:`${word(p.o)} · thành: giữ được con, gả một tông nữ thay · hỏng: Sủng -10`,go:()=>{if(roll(p.o))log("Hoàng thượng động lòng, gả một tông nữ thay.");else apply({sung:-10,danh:-3})}},
  {n:"Tiến cử một tông nữ",fx:{bac:-50,danh:-2}}]}});
 /* servants */
 ev("maidhostage",()=>liveRivals(false).length,()=>({v:rvAny().id,o:od(40+S.tamco/3+S.maid.loyal/5)}),p=>{const v=RV(p.v);if(!v)return null;return{who:pMaid(),
@@ -92,7 +92,7 @@ ev("maidhostage",()=>liveRivals(false).length,()=>({v:rvAny().id,o:od(40+S.tamco
 ev("doctorblack",()=>S.doctor,()=>({o:od(35+S.tamco/3+S.mat*4)}),p=>({who:pDoc(),
  t:"Thái y tâm phúc của ngươi lén báo: có kẻ biết ông từng kê nhầm thuốc cho tiên phi, đòi 50 lượng mỗi tháng.",o:[
  {n:"Trả bạc thay ông",fx:{bac:-50}},
- {n:"Diệt kẻ tống tiền",fx:{duc:-6},x:`${word(p.o)} · hỏng: bị phạt`,go:()=>{S.schemes++;if(!roll(p.o)){apply({danh:-5});punish("giết người diệt khẩu",2)}}},
+ {n:"Diệt kẻ tống tiền",fx:{duc:-6},x:`${word(p.o)} · thành: bịt được miệng kẻ tống tiền · hỏng: bị phạt`,go:()=>{S.schemes++;if(!roll(p.o)){apply({danh:-5});punish("giết người diệt khẩu",2)}}},
  {n:"Để ông tự lo",fx:{},x:"mất thái y tâm phúc",go:()=>{S.doctor=0}}]}));
 /* omens */
 ev("comet",()=>S.year>=2,()=>{const me=roll(40)||!liveRivals(false).length;return{me,v:me?null:rvAny().id}},p=>{const v=p.me?null:RV(p.v);if(!p.me&&!v)return null;
