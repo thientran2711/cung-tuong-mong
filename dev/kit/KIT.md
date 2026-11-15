@@ -1547,4 +1547,16 @@ Tested 755x1000@2, 1180x820@2, 1366x1024@2, 686x880@2.2, 412x1058@2, 390x844@3, 
   z-index 4 (above frame and crest), drop shadow. Giận and Đau khổ pulse softly (off with reduced motion).
 - No ring/aura around the frame (owner 11/14 late: removed); the seal alone shows the feeling.
 - Fog: stranger → nothing; known person, no fresh news → grey "?" seal; her own → always.
-- Data only through `window.kitEmotion(p)` → `{k,name,v,why,known}`; tooltip/alt "Tâm trạng: <tên> (<cause>)". Nobody draws another mood icon; no code-reshaped facial expressions (owner 22:50Z): the seal + ring are the only display of feelings.
+- Tap (owner 11/15): no visible label; TAPPING any seal (hers or an NPC's, any frame size) opens the kit popover `kpPop` (j79) with the mood
+  word + the one-line cause the game knows ("Giận: bị Hoàng hậu trách"; "Tâm trạng chưa rõ" for the grey seal); any other tap closes it; the tap
+  never also opens the card under it (capture handler in jemo). Keyboard: Enter/Space on the focused seal.
+- Art (owner 11/15 v2): same chibi lady, soft watercolour/gongbi, thin gold rim, expressions exaggerated like emoji so each mood reads at 38 px.
+- Data only through `window.kitEmotion(p)` → `{k,name,v,why,known}`; alt "Tâm trạng: <tên> (<cause>)". Nobody draws another mood icon; no code-reshaped facial expressions (owner 22:50Z): the seal + ring are the only display of feelings.
+
+## 37. kitMeMark · dấu "là ngươi" (owner 11/15: she could not tell which figure is HER) — `dev/build/jmark.js` (before j84)
+- `kitMeMark(figEl)`: a small painted palace emblem `img/kit/me-mark.webp` (gpt-2-6, transparent; owner picks 1 of 3, sheet
+  dev/shots/me-mark/options.jpg) floating just above HER head, with a soft warm light disc behind it so it reads on any painting.
+- Where: her stage figure `#mefig` (any slot) and every dialog / event stage figure of her (`kitStageFig` adds `.kesme`). Never on anyone else.
+- Size: 11.5 % of her drawn figure height, 30–76 px; centred on the head (top rows of the opaque art, measured once per picture).
+- Never covers the scene title `#sc-t`, the stage plaques `#kshL/#kshR`, chips or notes: it is nudged down onto the hair instead.
+- Motion: slow 4 px float + glow pulse, only with Cảnh động on and no reduced motion. Data: `KIT_MEMARK {src,h,min,max,ar}`.
