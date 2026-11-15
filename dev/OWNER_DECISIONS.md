@@ -353,3 +353,7 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (06:55Z) Nhịp chơi: chọn GIỮ NGUYÊN tốc độ (16 khắc/tuần, lên Hoàng hậu ~188 tuần, ~2–3 tiếng chơi thật). Không chỉnh nhanh hơn.
 - (07:00Z) Màu chiều quan hệ (kit chung, mọi thợ phải dùng): NGƯỜI KHÁC → TA = TÍM (#7a4fa0); TA → NGƯỜI KHÁC = LAM (#2f6f9f). Không dùng xanh lá/đỏ (dành cho Được/Mất). Tô cả chữ nhãn; con số thay đổi vẫn theo màu được/mất. Hàm kit kitRel(dir,text).
 - (07:05Z) Dải người trong Hậu cung chỉ hiện TÊN (bỏ chức danh như "Thái y"); bấm vào mới biết là ai. Không cắt chữ.
+- (07:10Z) Chữ chỉ NGƯỜI KHÁC phải rõ ngôi ba: nữ "nàng ta", nam "y"/"hắn", Hoàng thượng "bệ hạ", Thái hậu "Thái hậu", chung "vị ấy". "Ta" là người chơi.
+- (07:10Z) Giao tình › Ân oán: ô chọn người dùng tab nhỏ + dải người ngang của kit như Hậu cung, không dùng lưới nút lớn.
+- (07:10Z) Hình người trong hộp thoại có người cao gần hết cột (≥95%), áp cho mọi hộp thoại có người qua kit.
+- [x] LIVE 482a99f97 (07:08Z): balance-unified — 4 buổi, đồ tự tay làm, tủ đồ gộp Tư trang, chơi cùng 4 buổi.
