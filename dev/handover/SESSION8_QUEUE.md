@@ -82,3 +82,4 @@ j72 bước vs Hồi · stage paper halo · Thái hậu title bronze vs plum · 
 | C24 | review/chapter-detail (owner s8: tap chapter shows nothing; detail + inline progress; no dead taps) | QUEUED-NEXT |
 | C25 | review/press-fx (owner s8: whole pane bounces on any tap; press fx only on the tapped control) | QUEUED-NEXT |
 | C26 | review/stat-fx (owner s8: slower readable stat +/- with name, cell glow/pulse/scale) | QUEUED-NEXT |
+| C27 | review/buoi-transition (owner s8: page-flip on buổi change looks odd → ink-wash time-of-day transition; needs A2 fxkit) | QUEUED-NEXT |
