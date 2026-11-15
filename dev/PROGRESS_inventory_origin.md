@@ -29,6 +29,17 @@ Quyết định chủ: OWNER_DECISIONS 11/15 04:00Z + lệnh điều phối (lu�
 - `kitEquipSlots` (KIT 28.13c) "Đang mang" dưới túi: Cài tóc · Đeo tay · Y phục (đúng luật j8: IT.sl hair/wrist, S.dress), ô trống hiện bóng mờ loại đồ,
   chạm ô trống → chọn món trong rương để đeo / may áo; chạm ô đầy → bảng món đồ (Tháo). Tổng cộng thưởng (Sắc/Danh) + cảnh báo vượt phẩm ở đầu.
   Bỏ dòng "Đang đeo: … · áo mới: …".
-- Túi lớn thêm hàng cho kín chiều cao bảng; phần dư (< 1 hàng) cho ô trang bị to lên (≤150px). ResizeObserver tự xếp lại.
+- Túi lớn thêm hàng cho kín chiều cao bảng; phần dư (< 1 hàng) cho ô trang bị to lên (≤112px). ResizeObserver tự xếp lại.
 - Thử: dev/test/inv-grade.js (686x880@2.2 + sổ cũ, 1180x820@2 + sổ cũ, 1366x1024@2): 0 lỗi trang, 0 tràn ngang, 0 chữ cắt, 0 thẻ việc bị che;
   đeo vòng từ ô trống chạy đúng. Ảnh: dev/shots/inv-grade/. (Dư đồ: phần bản đồ rộng hơn màn là có sẵn, không thuộc nhánh này.)
+
+## Vòng 3 (chủ 11/15, nhiều lệnh nối nhau)
+- Ô Y phục hiện ÁO (tranh j92 img/wd512/wd-<bậc>-y-NN, chọn theo bậc + băm khóa vải trong dải phẩm của vải), phụ đề "áo may từ … · còn N tháng";
+  ô trống = bóng áo; bảng chạm cũng hiện áo.
+- kitItemRows (KIT 33c): một khối Phẩm/Được/Mất/Ghi chú dùng cho bảng món đồ (chạm ô túi) và bảng áo. Dưới ô trang bị chỉ 2 dòng gọn
+  (tên màu phẩm + chip hiệu quả + ⚠ nếu vượt phẩm/xa xỉ); tổng + cảnh báo ở đầu khung (chip không bao giờ bị cắt).
+- Thêm ô có luật thật: Đeo eo (ngọc bội ngự ban, Danh +1) · Túi thơm (Sắc +1, đeo thay vì dùng hết). Hoa tai / khăn che mặt / giày hoa: CHƯA
+  thêm vì không có tranh món đồ — chờ chủ duyệt vẽ mới. wearBonus nay cộng mọi chỉ số.
+- Trục XA XỈ (luxOf/luxMonth, qua itemMonth cho cả NPC): Giản dị / Vừa phẩm / Xa hoa / Quá xa xỉ; ghen theo tính, Thái hậu chê, lời đồn; giản dị ở bậc cao được Đức.
+- Đổi "Gánh hàng rong" → "Nhờ thái giám mua đồ" (thẻ việc, tiêu đề, lời thoại Nội vụ phủ, gợi ý rương trống, chức danh thái giám; sổ cũ đổi tên khi vẽ bảng).
+- Hàng tab: cách đều trên/dưới (--k-tabgap 10px), chỉ dính khi trang dài (> 1.5 lần bảng) → Tư trang không bị che khi cuộn.

@@ -742,19 +742,33 @@ chest, Tư trang, wardrobe slots, reward chests, peddler, works, reward panels. 
   Tạp vật (only when such an item exists). The bag starts EMPTY: items are only earned (peddler, gifts, bestowals). When j92 (wardrobe) lands its
   Trâm cài / Y phục chest uses the same kitInvGrid.
 - (11/15) The grid GROWS by whole rows into the panel's free height (no big empty gap at the bottom); what is left (< one row) goes to the
-  equipment slots below (they grow up to 150 px). Refit on grid width / panel height change (ResizeObserver).
+  equipment slots below (they grow up to 112 px). Refit on grid width / panel height change (ResizeObserver).
 ### 28.13c kitEquipSlots — "Đang mang" EQUIPMENT SLOTS (owner 11/15, RPG-style) — `dev/build/jinv.js` — KIT READY
-`kitEquipSlots({key, title, slots:[{k,label,item:{src,name,grade,tip}|null,ghost,note}], sum, onPick:fn(slot)})` → `.keq` under the bag:
-header (kit section title + bonus summary chips) and one column per named slot: kitItem "slot" (same grade ground + frame as the bag; empty =
-recessed square with the slot type as a faint silhouette), slot name, what is in it (or "trống"). Tap → onPick.
-Tư trang uses the slots that EXIST in the rules (j8): Cài tóc (`IT.sl` "hair"), Đeo tay (`IT.sl` "wrist"), Y phục (áo may từ vải, `S.dress`, 3 tháng).
-Summary = `wearBonus` chips (Sắc/Danh) + "vượt phẩm: dễ bị tố" when `vpItems`. It replaces the old line "Đang đeo: Sắc +2 · áo mới: không".
-Filled slot → the item panel (Tháo …); empty slot → kitModal with the bag items that fit (kitItem md + effect chip; tap = Đeo / May áo via j8 itemAct).
-New slot kinds need a real rule first (an `IT.sl` value) — no decorative slots.
-### KIT RULE (11/15): an act-card row is NEVER clipped
-The sticky category tab row (`#panel .kcattabs`, jk3) no longer paints a panel-coloured shadow upward (it cut the bottom border off the act cards
-above it on every tab). It sticks 8 px higher (`top:-8px`) and owns that band with its own top padding. Test: dev/test/inv-grade.js checks, on every
-panel tab, that the bottom edge of each visible act card hits the card itself.
+`kitEquipSlots({key, title, slots:[{k,label,item:{src,name,grade,tip}|null,ghost,mini}], sum, onPick:fn(slot)})` → `.keq` under the bag:
+header = kit section title + ALL totals and warnings (Sắc/Danh chips · luxury level chip · "N món vượt phẩm: dễ bị tố"; chips wrap, never cut).
+Slots auto-fit (≥ 88 px columns, wrap to a 2nd row when needed). Each slot = kitItem "slot" (same grade ground + frame as the bag).
+TIDY RULE (owner): under a FILLED slot at most 2 short lines — item name in its grade colour + main effect chip(s) (+ "N th" for a timed dress)
++ a small red ⚠ if vượt phẩm or xa xỉ (reason in the tooltip). EMPTY slot: the slot name only + the type silhouette (`ghost`). Full facts only on tap.
+Tư trang slots = the rules' wear slots (`IT.sl`, j8 wear()/wearBonus/vpItems/tố vượt phẩm are generic on it):
+Cài tóc (hair) · Đeo tay (wrist) · Đeo eo (waist: ngọc bội ngự ban, Danh +1, still never given/sold) · Túi thơm (scent: túi thơm thêu, Sắc +1,
+worn instead of used up; a tainted sachet keeps hurting via taintHit) · Y phục (áo may từ vải, `S.dress`, 3 tháng; the slot shows the GARMENT:
+j92 painting `img/wd512/wd-<tier>-y-NN.webp` picked by her tier and, inside the fabric grade's band, a stable hash of fabric+rank).
+Hoa tai / Khăn che mặt / Giày hoa: NOT added — no item painting exists (needs owner OK for new art). New slots need a real `IT.sl` rule first.
+### 33c kitItemRows(k, o) — the ONE fact block of an item
+Kit act-card rows (kitRows): Phẩm (grade name in its colour) · Được (effects; worn effects ×1.5 above her rank as wearBonus) · Mất (vượt phẩm,
+xa xỉ, contraband, loss, own taint) · Ghi chú (months left, slot, rank it suits). Used at the top of the item panel (bag slot tap) and the
+equipment slot tap (dress panel). Never re-written per screen.
+### LUXURY axis (owner 11/15) — `luxOf(p)`, `luxMonth(p)` (jinv, via j8 itemMonth: player and every NPC alike)
+Score = Σ worn pieces by grade (Thường 0 · Tinh 1 · Trân 2 · Tuyệt 3 · Ngự tứ 5); budget = 1 + rank (+1 if Sủng ≥ 60).
+Level chip: Giản dị (nothing of note) · Vừa phẩm (≤ budget) · Xa hoa (≤ budget+3) · Quá xa xỉ: dễ bị ghen. Monthly: Xa hoa → others' Ghen +1
+(× trait: Kiêu ngạo/Tham vọng 1.5, Hiểm độc 1.2, Hiền lành/Nhu mì 0.5; half for an NPC wearer); Quá xa xỉ → Ghen +3, Thái hậu may frown
+(chance 50 − Đức/2, 10–50: Thái hậu -3 / NPC Danh -2), gossip 1 in 4: Danh -1; Giản dị from Quý nhân up: 1 in 4 Đức +1.
+It extends ghen (v.ghen) and itemMonth; vượt phẩm/tố stays j8 vpItems/vpAccuse.
+### KIT RULE (11/15): the category tab row — never clips, centred, sticky only on long pages
+`#panel .kcattabs` (jk3): (1) no upward cover shadow, so act cards above it always show their full border; (2) one spacing token `--k-tabgap`
+(10 px) above and below, neighbours' own margins zeroed → the row sits centred between the cards above and the list below; (3) sticky ONLY
+when the panel content is > 1.5× the panel height (`kitTabStick()` sets `.kstick`); on short pages it scrolls with the page and never overlaps.
+Test: dev/test/inv-grade.js checks on every panel tab that each act card's bottom edge hits the card itself, and reports the gaps above/below.
 ### 28.14 WARDROBE K1 + K2 (review/wardrobe j92)
 - K1 `kitWearSlots(p,{size})`: two kitItem tiles (Trâm cài · Y phục, empty = "Chưa cài" / "Thường phục") right under the portrait on EVERY person
   card (player, consorts, maids, ma ma, Thái hậu…), and on Tư trang. The outfit status chip (Đúng phẩm / Vượt phẩm / Quá giản dị / Phạm tang) shows

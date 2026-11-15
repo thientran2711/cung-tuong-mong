@@ -9,11 +9,13 @@ const [,,BASE,SZ,OUT,TAG,OLD]=process.argv;const [WH,DPR]=SZ.split('@');const [W
  const shot=async n=>{await p.screenshot({path:`${OUT}/${TAG}-${n}.jpg`,type:'jpeg',quality:84,animations:'disabled',timeout:120000})};
  /* overflow / ellipsis + act-card clip check: the bottom-centre point just inside each visible act card must hit the card itself */
  const audit=n=>p.evaluate(n=>{const vw=innerWidth,bad=[];document.querySelectorAll('#panel *, #modal .dlg *').forEach(e=>{const r=e.getBoundingClientRect();if(!r.width||e.closest('.kcattabs,.pctabs'))return;
-   if(r.right>vw+1||r.left<-1)bad.push('x:'+(e.className||e.tagName));const cs=getComputedStyle(e);if(cs.textOverflow==='ellipsis'&&e.scrollWidth>e.clientWidth)bad.push('ell:'+e.className)});
+   if(r.right>vw+1||r.left<-1)bad.push('x:'+(e.className||e.tagName));const cs=getComputedStyle(e);if((cs.textOverflow==='ellipsis'||e.classList.contains('kchip')&&cs.overflow!=='visible')&&e.scrollWidth>e.clientWidth+1)bad.push('ell:'+e.className)});
   const clip=[];const P=document.getElementById('panel');const pr=P.getBoundingClientRect();
   P.querySelectorAll('button.ka').forEach(c=>{const r=c.getBoundingClientRect();if(!r.height||r.bottom>pr.bottom-2||r.top<pr.top+2)return;
    for(const x of [r.left+r.width/2,r.left+6,r.right-6]){const h=document.elementFromPoint(x,r.bottom-1.5);if(h&&h.closest&&h.closest('#modal'))break;if(!h||!c.contains(h)&&h!==c){clip.push((c.textContent||'').slice(0,18)+'@'+(h&&h.className));break}}});
-  return{n,ovX:document.documentElement.scrollWidth>vw,bad:[...new Set(bad)].slice(0,6),clip}},n);
+  const gaps=[...P.querySelectorAll('.kcattabs')].filter(r=>r.offsetParent).map(r=>{const rr=r.getBoundingClientRect();let pv=r.previousElementSibling||(r.parentElement.id!=='panel'?r.parentElement.previousElementSibling:null);while(pv&&!pv.getBoundingClientRect().height)pv=pv.previousElementSibling;
+   let nx=r.nextElementSibling;const a=pv?Math.round(rr.top-pv.getBoundingClientRect().bottom):null,b=nx?Math.round(nx.getBoundingClientRect().top-rr.bottom):null;return [a,b,r.classList.contains('kstick')?'stick':'flat',pv&&(pv.tagName+'.'+pv.className).slice(0,40),pv&&getComputedStyle(pv).paddingBottom,pv&&pv.lastElementChild&&Math.round(pv.getBoundingClientRect().bottom-pv.lastElementChild.getBoundingClientRect().bottom)]});
+  return{n,ovX:document.documentElement.scrollWidth>vw,bad:[...new Set(bad)].slice(0,6),clip,gaps}},n);
  const A=[];
  await p.goto(BASE,{waitUntil:'domcontentloaded'});await p.waitForTimeout(3000);
  if(OLD){const d=fs.readFileSync(OLD,'utf8');const r=await p.evaluate(d=>{try{localStorage.setItem('hclh-save-v2-2',d);const x=loadSlot(2);if(!x)return'noload';SLOT=2;quiet=true;deser(x);quiet=false;document.getElementById('title').hidden=true;deal();Q.length=0;showModal();render();return'ok '+S.name+' inv '+S.inv.length}catch(e){return'ERR '+e.message}},d);console.log('oldsave',r);await p.waitForTimeout(1200);
@@ -35,9 +37,16 @@ const [,,BASE,SZ,OUT,TAG,OLD]=process.argv;const [WH,DPR]=SZ.split('@');const [W
  await shot('inv-worn');A.push(await audit('inv-worn'));
  await p.click('.keq [data-keqi="0"]');await p.waitForTimeout(900);await shot('inv-item');A.push(await audit('inv-item'));
  await p.evaluate(()=>{closeModal()});await p.waitForTimeout(300);
+ await p.click('.keq [data-keqi="4"]');await p.waitForTimeout(900);await shot('inv-dress');A.push(await audit('inv-dress'));
+ await p.evaluate(()=>{closeModal()});await p.waitForTimeout(300);
  /* other tabs: act-card rows never clipped (at top, and scrolled so the sticky tab row is stuck) */
  const T=[];for(const t of ['act','go','rv','rel','fac','staff','kid','art','story']){const ok=await p.evaluate(t=>{const b=document.querySelector(`#tabs [data-tab=${t}]`);if(!b||b.offsetParent===null)return false;b.click();return true},t);if(!ok)continue;
-  await p.waitForTimeout(700);const a=await audit('tab-'+t);if(a.clip.length||a.ovX||a.bad.length)T.push(a);else T.push(t+':ok')}
+  await p.waitForTimeout(700);const a=await audit('tab-'+t);if(a.clip.length||a.ovX||a.bad.length)T.push(a);else T.push(t+':ok '+JSON.stringify(a.gaps))}
  await p.evaluate(()=>document.querySelector('#tabs [data-tab=inv]').click());await p.waitForTimeout(600);
  await p.evaluate(()=>{const P=document.getElementById('panel');P.scrollTop=140});await p.waitForTimeout(500);await shot('inv-scrolled');
- console.log(JSON.stringify({TAG,geo,worn,A,T,errs}));await b.close()})();
+ const lux=await p.evaluate(()=>{const out=[];const g0=liveRivals(true).map(v=>v.ghen);S.inv.forEach(e=>{if(IT[e.k]&&IT[e.k].sl)e.w=0});
+  for(const k of ['tramphuong','vongvang','ngocboi','tuithom']){const i=S.inv.findIndex(e=>e.k===k);if(i>=0)wear(S,i);else{S.inv.push({k});wear(S,S.inv.length-1)}}
+  out.push(luxOf(S));const r=itemMonth(S);out.push(r);out.push(liveRivals(true).map((v,i)=>v.ghen-g0[i]).join(','));
+  const v=liveRivals(false)[0];if(v){v.inv=v.inv||[];v.inv.push({k:'tramphuong',w:1},{k:'ngocboi',w:1});out.push(['npc',v.rank,luxOf(v).name]);itemMonth(v)}
+  S.inv.forEach(e=>e.w=0);out.push(luxOf(S).name);return out});
+ console.log(JSON.stringify({TAG,geo,worn,A,T,lux,errs}));await b.close()})();
