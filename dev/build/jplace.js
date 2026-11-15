@@ -6,7 +6,7 @@
    MIDDLE = one info box (walk khắc, khắc left, people, opening hours, the rule / reason lines); BOTTOM = the buttons by the shared rule.
    Vertical on every size (owner 08:58Z replaced "picture left / info right"). */
 function kitPlaceArt(k){try{if(typeof scnSync==="function")scnSync();
- if(k==="home"){const f=typeof sceneImg==="function"?sceneImg("tam-cung-dem"):"tam-cung-dem";return{src:`img/${f}.webp`,label:placeOf(k).n}}
+ if(k==="home"&&placeOf(k).sc!=="maid"){const f=typeof sceneImg==="function"?sceneImg("tam-cung-dem"):"tam-cung-dem";return{src:`img/${f}.webp`,label:placeOf(k).n}}
  const P=placeOf(k);const f=SCIMG[P.sc]||SCIMG.rv;return f?{src:`img/${f}.webp`,label:P.n}:null}catch(e){return null}}
 function kitPlaceHours(k){if(typeof ACC_DAY!=="undefined"&&ACC_DAY[k])return"mở cửa sáng, chiều";if(k==="tn")return"tiếp lúc sáng thỉnh an";
  if(k==="kn")return"sáng thỉnh an, lúc khác phải được mời";if(k==="dtd"||k==="thu")return"chỉ vào khi được triệu";return""}
