@@ -752,3 +752,6 @@ All must work in co-op.
 - "Biếu quà làm lành" (Nguy hiểm chung) costs bạc → also allow giving a handmade WORK (or an item) instead, valued by tastes/fatigue rules (equivalent value rule).
 - DRESS CONTEST (hội phối đồ): every wearable item needs a THEME tag (Thanh nhã / Phú quý / Hương sắc …) shown on the item, AND a LUXURY value (xa xỉ, e.g. up to 200). Scoring needs both: right theme AND luxury fitting her RANK (rank allowance: e.g. 200 only Tần/Phi+). Over her rank's allowance = vượt phẩm penalty even if the theme matches (greedy players who just chase the highest number get punished). Make luxury visible and meaningful (today it's faint). Builds on jaudit/jinv luxMonth + vượt phẩm.
 - WEATHER: redo with Magnific painted effects using the same method (sprites + black-bg screen-blend videos), perf budget.
+
+## 15/11 ~23:10Z — Co-op buổi timer length (owner)
+- Owner worries 2 min is too short because reward/gift animations eat time. Decision (coordinator rec, owner leaning 5): DEFAULT 5 min per buổi; host can pick 3 / 5 / 8 in the co-op lobby. Timer PAUSES during reward/gift/edict/night animations and minigames (with the cap), so animations never eat play time. Both 'Sẵn sàng' → advance immediately. Measure real buổi lengths with bots/e2e and log them (median/p90) to confirm the default.
