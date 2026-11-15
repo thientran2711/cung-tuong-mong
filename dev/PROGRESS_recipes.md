@@ -55,5 +55,16 @@ cut "9ZQrog4NYZ"; cut + itemcut.py clean; on the CDN: img/item-wkbook-<kind|pho>
 book (bạc) ↔ teacher with consort favour / ma ma event with Sức; nữ quan fee (bạc) ↔ consort favour; thái y (bạc, sure, allergy only)
 ↔ maid (khắc + risk, any facet); thái y witness (bạc) ↔ maid takes the blame (Lòng).
 
-## State / todo
-- See the final report in this file's last section for test results.
+## Tests (dev/test/recipes.js, served root index.html after `bash dev/site/build_site.sh`, root files NOT committed)
+755x1000 (old save made on origin/main with a «Bánh hoa quế» in the chest → mon knows s1+s2), 1000x755, 1180x820, 1366x1024, 844x390:
+no page errors, no horizontal overflow, no clipped text, dialogs inside the screen. Checked: Tác phẩm tab chips + Khẩu vị card; teacher picker
+(nữ quan + consort); pick grid "Học lối này" → sub-style learnt, session cost via S.mg.cost (Bạc −fee); shop tiles with book covers; book panel +
+Đọc; Emperor fav unknown shows neutral (Sủng +2), known fav Sủng +4; Thái hậu repeat ladder 4/2/1/0/−4; known dislike refused with reason;
+allergy → illness Sức −15 + "Bị tố mưu hại" dialog (4 options); thái y dialog; bậc-5 "Học lối mới với thầy" + "Các lối, sách phổ" list.
+Shots were kept out of git (dev/shots excluded). Phone landscape 844x390: the pick-grid dialog keeps main's kshop small-height layout (not changed here).
+
+## Open / notes for the next worker
+- "Hỏi thái y kiêng kỵ" act card has no act picture (act-pic map is by act name; the placeholder act pictures are another branch).
+- NPC sub-style knowledge is derived (hash + art level), not stored; NPC books are only gifts.
+- Her own allergy is not modelled.
+- Balance bot: see section below.

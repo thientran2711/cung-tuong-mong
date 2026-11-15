@@ -190,7 +190,9 @@ wkrTile=function(kind,r,l){const ok=r.lv<=l,a=ARTS.find(x=>x.k===WK[kind].a);con
   KWR.run=function(){const x=r0.apply(this,arguments);try{if(S.mg||RCPT.started){const t=rcpGrant(kind,s[0],"thầy dạy");if(t)log(`<span class="g">${t}</span>`)}}catch(e){}RCPT.started=0;return x}}
   try{return m0.apply(this,arguments)}finally{KWR.run=r0}}})();
 /* ---------- teachers ---------- */
-function rcpFeeNq(){return Math.max(BAL.rcp.tFeeMin,Math.round((BAL.pay?BAL.pay[Math.min(7,S.rank|0)]:40)*BAL.rcp.tFeeK))}
+/* the palace teacher's fee: a share of the learner's monthly bổng (same for every consort: j85 npcStudy reads tchFeeOf) */
+function tchFeeOf(p){return Math.max(BAL.rcp.tFeeMin,Math.round((BAL.pay?BAL.pay[Math.min(7,rkOf(p)|0)]:40)*BAL.rcp.tFeeK))}
+function rcpFeeNq(){return tchFeeOf(S)}
 function rcpTchName(k){return k==="cam"||k==="vu"?"Nhạc sư Giáo phường":k==="theu"||k==="nau"?"Ma ma Thượng công cục":"Nữ quan Thượng nghi cục"}
 function rcpTchCons(k){const l=S.arts[k]||0;return liveRivals(true).filter(v=>v.alive&&!v.out&&!v.confined&&v.arts&&((v.arts[k]||0)>l||(v.arts[k]||0)>=4)&&(rel(v,S)||0)>=BAL.rcp.tRel)
  .sort((a,b)=>(b.arts[k]||0)-(a.arts[k]||0)).slice(0,3)}
