@@ -1,4 +1,4 @@
-/* ================= jload: NHẬP CUNG LẦN ĐẦU — thỉnh tranh vẽ, tiếng nhạc về máy (owner 11/14) — KIT.md section 33 =================
+/* ================= jload: NHẬP CUNG LẦN ĐẦU — thỉnh tranh vẽ, tiếng nhạc về máy (owner 11/14) — KIT.md section 35 =================
    assets.json (dev/site/assets.py, built by build_site.sh) lists every image + sound as [path, sha256/16, bytes, group].
    The long-lived cache 'ctm-assets' holds them keyed by content ('<path>?h=<hash>'); sw.js serves it and never wipes it on a build.
    This module fills it:
@@ -21,7 +21,7 @@ const keyOf=f=>new URL(f[0]+"?h="+f[1],location.href).href;
 let el=null,chip=null,shown=false,speed=[],enterCb=[];
 try{KLOAD.paused=localStorage.getItem(LS)==="1"}catch(e){}
 
-/* ---------- kit CSS (section 33) ---------- */
+/* ---------- kit CSS (section 35) ---------- */
 (function(){const st=document.createElement("style");st.id="kit-load";st.textContent=`
 .modal.kload{z-index:9600;transition:opacity .45s ease}
 .modal.kload.out{opacity:0;pointer-events:none}
@@ -44,7 +44,7 @@ try{KLOAD.paused=localStorage.getItem(LS)==="1"}catch(e){}
 @keyframes kloadFade{to{opacity:0;visibility:hidden}}
 `;document.head.appendChild(st)})();
 
-/* ---------- the bar (kit 33): label above, track + "a / b MB" beside, sub line under ---------- */
+/* ---------- the bar (kit 35): label above, track + "a / b MB" beside, sub line under ---------- */
 function kitProgress(o){const v=o.total?Math.min(100,o.have/o.total*100):0;
  return `<div class="kprog">${o.label?`<h4 class="kpst">${o.label}</h4>`:""}<div class="kprog-r"><span class="kprog-t" role="progressbar" aria-valuemin="0" aria-valuemax="${Math.round(o.total/1e6)}" aria-valuenow="${Math.round(o.have/1e6)}"><u style="--v:${v.toFixed(1)}%"></u></span><b class="kprog-n">${mb(o.have)} / ${mb(o.total)} MB</b></div><small class="kprog-s">${o.sub||""}</small></div>`}
 window.kitProgress=kitProgress;
