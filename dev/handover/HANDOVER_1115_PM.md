@@ -320,3 +320,4 @@ Worker worktrees at /home/user/wt/<name>. Rule summaries for workers: /home/user
 - (s7) Owner 20:25Z monthly cycle → review/cycle (new jcycle.js; cycleDaysOf() for cal-plus, cycleLate() for thaiy). Owner 20:30Z dark = gloomy mood not night sky → sent to act-pics2 worker.
 - LIVE main = book-title r6 (41cdf7c3f), pushed by session 6.
 - (s7, fwd) LIVE main = book-title r6 (41cdf7c3f, ff by s6). Main-side small issues → small-bugs-3 items 9–12 (§28.1, §53 seal samples, 'Tuần' fallback 1000x755, 390x844 rotate prompt).
+- (s7) night-end READY ef0582dd5 (fwd; jne.js KIT §62) → reviewer spawned (night-end-r1).
