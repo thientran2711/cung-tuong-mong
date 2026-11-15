@@ -1,4 +1,4 @@
-// Lối riêng (jroute) UI test: node dev/test/routes.js <outdir> [w h dpr]...  (default 686x880@2.2 and 1180x820@2, reducedMotion)
+// Lối riêng (jroute) UI test: node dev/test/routes.js <outdir> [w h dpr]...  (default 686x880@2.2 and 1180x820@2; run with 755 1000 2 1180 820 2; reducedMotion)
 // Needs zz-test.html at the repo root (dev/index.html + <meta charset> wrapper; not committed).
 // Shots: route entry (Hành sự · Lối riêng), a step card list (escape mid-prep), the blood-test dialog, the Mệnh truyện section, an ending card.
 // Prints page errors, horizontal overflow, cut card text per shot.
@@ -13,11 +13,11 @@ const OUT=process.argv[2]||'.';const sizes=[];for(let i=3;i+2<process.argv.lengt
   await p.evaluate(()=>{window.__forceOrigin='tt';document.querySelector('#slots button[data-new="1"]').click()});await p.waitForTimeout(1500);
   
   await p.evaluate(()=>{try{nlAccept()}catch(e){}});await p.waitForTimeout(2500);
-  const clear=async()=>{await p.evaluate(()=>{for(let k=0;k<40&&Q.length;k++)closeModal();const o=document.querySelector('#kmrt,.kmroul');if(o)o.remove()});await p.waitForTimeout(300)};
+  const clear=async()=>{for(let i=0;i<4;i++){const k=await p.evaluate(()=>{const b=document.querySelector('#kroul .krskip');if(b){b.click();return 1}return 0});if(!k)break;await p.waitForTimeout(1200)}await p.evaluate(()=>{for(let k=0;k<40&&Q.length;k++)closeModal();const o=document.querySelector('#kmrt,.kmroul');if(o)o.remove()});await p.waitForTimeout(300)};
   await clear();
   const check=async n=>{const r=await p.evaluate(()=>{const cut=[...document.querySelectorAll('#panel button.ka:not([hidden]) .kan, #modal button .kan, #modal .kr .krv')].filter(e=>e.offsetParent&&e.scrollWidth>e.clientWidth+2&&getComputedStyle(e).overflow!=='visible').map(e=>e.textContent.slice(0,40));
     return{ovf:document.documentElement.scrollWidth>innerWidth+1,cut}});rep.push({W,n,...r})};
-  const shot=async n=>{await p.waitForTimeout(700);await p.evaluate(()=>{try{PX.app.ticker.stop()}catch(e){}});await p.waitForTimeout(250);await p.screenshot({path:`${OUT}/${W}-${n}.png`,timeout:30000}).catch(()=>{});await check(n);try{await p.evaluate(()=>{try{PX.app.ticker.start()}catch(e){}})}catch(e){}};
+  const shot=async n=>{await p.waitForTimeout(700);await p.evaluate(()=>{const b=document.querySelector('#kroul .krskip');if(b)b.click()});await p.evaluate(()=>{try{PX.app.ticker.stop()}catch(e){}});await p.waitForTimeout(250);await p.screenshot({path:`${OUT}/${W}-${n}.png`,timeout:30000}).catch(()=>{});await check(n);try{await p.evaluate(()=>{try{PX.app.ticker.start()}catch(e){}})}catch(e){}};
   const goTab=async t=>{for(let i=0;i<3;i++){const ok=await p.evaluate(t=>{const P=document.getElementById('panel');const r=P&&P.getBoundingClientRect();return !!(P&&P.dataset.tab===t&&r.height>200&&r.width>100&&getComputedStyle(P).visibility!=='hidden'&&P.offsetParent)},t);if(ok&&i)break;await p.evaluate(t=>{const b=document.querySelector(`#tabs [data-tab="${t}"]`);if(b)b.click();else{tab=t;render()}},t);await p.waitForTimeout(1000)}};
   const cat=async()=>{await p.evaluate(()=>{const b=[...document.querySelectorAll('.kcattabs [data-kcat]')].find(x=>/Lối riêng/.test(x.textContent));if(b){b.click();setTimeout(()=>{const c=document.querySelector('.kcattabs [data-kcat="loi-rieng"]');if(c)c.scrollIntoView({inline:"center",block:"nearest"})},100)}});await p.waitForTimeout(600)};
   /* 1. entry: a year without child, low favour, a guard she met */
