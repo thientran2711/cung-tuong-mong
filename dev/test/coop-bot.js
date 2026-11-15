@@ -73,6 +73,8 @@ const WORLD=()=>{const kidsOf=v=>(v.kids||[]).map(k=>k.name+(k.alive?'':'†')).
    for(const o of [A,B]){const r=await o.p.evaluate(STEP).catch(e=>'err:'+e.message);if(r==='act')o.acts++;if(/^meet/.test(r))o.meets++;if(/^harm:/.test(r)){o.harms++;o.hk[r.slice(5)]=(o.hk[r.slice(5)]||0)+1}if(/^harmerr/.test(r))L(o.name+' '+r);if(/^reborn/.test(r)){o.deaths++;L(`week ${w}: ${o.name} died → ${r}`)}}
    const wa=await A.p.evaluate(()=>__co().week),wb=await B.p.evaluate(()=>__co().week);if(wa>wk&&wb>wk)break;await sleep(60)}
   const wa=await A.p.evaluate(()=>__co().week),wb=await B.p.evaluate(()=>__co().week);if(!(wa>wk&&wb>wk)){L(`FAIL week ${w}: stuck (A week ${wa}, B week ${wb})`);
+   for(const o of [A,B])L(o.name+' trace: '+await o.p.evaluate(()=>JSON.stringify({buoi:S&&S.buoi,week:COOP.state.week,bend:COOPW.bend,pendBuoi:COOPW.pendBuoi,pend:COOPW.pend,sent:COOPW.sent,whereKey:COOPW.whereKey,Q:Q.length,Qt:Q.map(x=>x.t+(x.cls?'/'+x.cls:'')),mh:document.getElementById('modal').hidden,book:!!document.querySelector('.kbk-bar'),mg:!!(S&&S.mg),dead:S&&S.dead,next:document.getElementById('next').textContent+(document.getElementById('next').disabled?' (off)':''),tr:COOPW.tr.slice(-25)})).catch(e=>e.message));
+   try{L('room: '+JSON.stringify(await (await fetch(WURL+'/api/room/'+code)).json()))}catch(e){}
    await A.p.screenshot({path:`${OUT}/stuck-A.png`});await B.p.screenshot({path:`${OUT}/stuck-B.png`});break}
   await sleep(400);weeks++;
   const a=await A.p.evaluate(WORLD),c=await B.p.evaluate(WORLD);

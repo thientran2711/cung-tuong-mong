@@ -1,0 +1,14 @@
+room 3JYM
+first buổi: friend known-state A -1 B 0 (0 = Người lạ)
+week 4 ok-ish · date 1,4,1 · A Tống Họa Mi r2 · B Thượng Quan Cẩm Tú r0 · consorts 12
+buổi 7.0 stats: A sees B 60/25/72 (B 70/25/72) · B sees A 18/7/87 (A 18/7/87)
+week 8 ok-ish · date 1,5,2 · A Tống Họa Mi r2 · B Thượng Quan Cẩm Tú r0 · consorts 12
+week 10: forced death of B (buổi 0)
+week 10: B died → reborn:Chuyển kiếp
+buổi 10.0 stats: A sees B 57/29/95 (B 8/28/80) · B sees A 16/15/100 (A 16/15/100)
+FAIL week 11: stuck (A week 11, B week 11)
+
+weeks played 11/52 in 3.2 min · acts A 35 B 45 · deaths A 0 B 1 · weeks with divergence 0
+buổi compared 42 · buổi with NPC places differing 0 · friend-position mismatches 0 · buổi where the friend's Sủng/Danh/Sức shown ≠ her own 2 · meets A 18 B 16 · acts on the friend A 245 {"spy":4,"ally":4,"trip":121,"rumor":116} B 14 {"trip":5,"rumor":4,"spy":1,"frame":2,"ally":2}
+friend known-state A/B per buổi (0 stranger,1 face,3 face+name): {"-1/0":1,"0/0":4,"3/0":7,"3/3":30}
+page errors A 0 B 0

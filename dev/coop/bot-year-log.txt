@@ -1,0 +1,31 @@
+room PSUB
+first buổi: friend known-state A -1 B 0 (0 = Người lạ)
+week 3: B died → reborn:Chuyển kiếp
+week 4 ok-ish · date 1,4,1 · A Từ Nguyệt Hoa r3 · B Hạ Kiều Nguyệt rsrv · consorts 12
+week 8 ok-ish · date 1,5,2 · A Từ Nguyệt Hoa r3 · B Hạ Kiều Nguyệt rsrv · consorts 12
+week 10: forced death of B (buổi 0)
+week 10: B died → reborn:Chuyển kiếp
+week 12 ok-ish · date 1,7,0 · A Từ Nguyệt Hoa r3 · B Thượng Quan Bích Dao r1 · consorts 12
+buổi 15.0 stats: A sees B 10/0/85 (B 9/0/100) · B sees A 56/35/100 (A 56/35/100)
+week 16 ok-ish · date 1,8,1 · A Từ Nguyệt Hoa r3 · B Thượng Quan Bích Dao r1 · consorts 12
+week 20 ok-ish · date 1,9,2 · A Từ Nguyệt Hoa r3 · B Thượng Quan Bích Dao r1 · consorts 13
+week 20: forced death of A (buổi 1)
+week 20: A died → reborn:Chuyển kiếp
+buổi 20.1 stats: A sees B 6/1/98 (B 6/1/100) · B sees A 8/8/80 (A 8/8/80)
+week 24 ok-ish · date 1,11,0 · A Chu Bích Dao r0 · B Thượng Quan Bích Dao r1 · consorts 14
+week 28 ok-ish · date 1,12,1 · A Chu Bích Dao r0 · B Thượng Quan Bích Dao r0 · consorts 14
+week 30: forced death of B (buổi 2)
+week 30: B died → reborn:Chuyển kiếp
+week 32 ok-ish · date 2,1,2 · A Chu Bích Dao r0 · B Đường Hàm Hương r0 · consorts 14
+buổi 34.2 stats: A sees B 18/22/80 (B 18/22/75) · B sees A 28/21/88 (A 28/21/88)
+buổi 34.0 stats: A sees B 23/27/75 (B 19/27/93) · B sees A 30/29/96 (A 30/29/96)
+week 36 ok-ish · date 2,3,0 · A Chu Bích Dao r1 · B Đường Hàm Hương r1 · consorts 14
+week 40 ok-ish · date 2,4,1 · A Chu Bích Dao r0 · B Đường Hàm Hương r1 · consorts 14
+week 44 ok-ish · date 2,5,2 · A Chu Bích Dao r0 · B Đường Hàm Hương r1 · consorts 14
+week 48 ok-ish · date 2,7,0 · A Chu Bích Dao r0 · B Đường Hàm Hương r0 · consorts 14
+week 52 ok-ish · date 2,8,1 · A Chu Bích Dao r0 · B Đường Hàm Hương r0 · consorts 14
+
+weeks played 52/52 in 4.4 min · acts A 173 B 234 · deaths A 1 B 3 · weeks with divergence 0
+buổi compared 178 · buổi with NPC places differing 0 · friend-position mismatches 0 · buổi where the friend's Sủng/Danh/Sức shown ≠ her own 7 · meets A 64 B 84 · acts on the friend A 48 {"ally":8,"trip":6,"rumor":19,"spy":7,"frame":8} B 36 {"rumor":7,"trip":12,"frame":10,"ally":2,"spy":5}
+friend known-state A/B per buổi (0 stranger,1 face,3 face+name): {"-1/0":1,"0/0":16,"3/0":53,"3/3":98,"0/3":10}
+page errors A 0 B 0
