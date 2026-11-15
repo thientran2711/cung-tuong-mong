@@ -26,7 +26,7 @@ function modalStep(sens){
       let pickI;
       if(!sens)pickI=rpick(okIdx)[1];
       else{let best=-1e9;pickI=okIdx[0][1];okIdx.forEach(([o,i])=>{const f=o.fx||{};let v=(f.sung||0)*1.5+(f.danh||0)*1.2+(f.hh||0)*.4+(f.th||0)*.4+(f.maid||0)*.1+(f.suc||0)*.2+(f.tamco||0)*.3+(f.bac||0)*.04;
-        if((f.duc||0)<0)v+=(f.duc||0)*6;else v+=(f.duc||0)*1.5;if(o.x&&/chứng cứ/.test(o.x))v+=2;if(o.x&&/nhân chứng|rửa oan|lật án|phong tước|giữ được/.test(o.x))v+=4;if(/tú nữ/.test(o.n))v-=.5;if(o.x&&/được phong/.test(o.x))v+=20;if(o.x&&/kết thúc kiếp này/.test(o.x))v-=20;if(o.x&&/Hoàng thượng để ý \+/.test(o.x))v+=3;if(o.x&&/bị giết|đánh chết|dìm/.test(o.x))v-=12;v+=(f.tin||0)*.15+(f.nt||0)*.5;v+=Math.random()*.01;if(v>best){best=v;pickI=i}})}
+        if((f.duc||0)<0)v+=(f.duc||0)*6;else v+=(f.duc||0)*1.5;if(o.x&&/chứng cứ/.test(o.x))v+=2;if(o.x&&/nhân chứng|rửa oan|lật án|phong tước|giữ được/.test(o.x))v+=4;if(/tú nữ/.test(o.n))v-=.5;if(o.x&&/được phong/.test(o.x))v+=20;if(o.x&&/kết thúc kiếp này/.test(o.x))v-=20;if(o.x&&/Hoàng thượng để ý \+/.test(o.x))v+=3;if(o.x&&/bị giết|đánh chết|dìm|mất mạng/.test(o.x))v-=12;v+=(f.tin||0)*.15+(f.nt||0)*.5;v+=Math.random()*.01;if(v>best){best=v;pickI=i}})}
       note("dilemma");chooseM(pickI);return true}
     closeModal();return true}
   return false}
