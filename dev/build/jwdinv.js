@@ -99,8 +99,7 @@ function wdFabOpen(x){const g=x.g,it=IT[g.k],gk=wdFabOf(g.k),w=WD_ITEMS[gk];cons
  B.push(pbtn(`data-kinvact="use" data-ix="${i}"`,"May áo",`thành: ${w.n} vào ô Y phục, ${plainFx(w.w)||"giản dị"} · kèm: áo đang mặc cất vào rương`,""));
  B.push(pbtn(`data-kinvact="gift" data-ix="${i}"`,"Tặng","tốn: 2 khắc · thành: chọn người nhận",whyTime(2)));
  if(it.pr)B.push(pbtn(`data-kinvact="sell" data-ix="${i}"`,"Bán",`thành: Bạc +${Math.floor(it.pr/2)}`,""));
- const gr=KIT_GRADE[x.grade|0];const rows=kitRows([["Phẩm",`<span class="ef n" style="color:${gr.c};font-weight:700">${gr.n}</span>`],["Được",[`may thành ${w.n}: ${plainFx(w.w)||"giản dị"}`],"g"],["Ghi chú",[`xa xỉ ${luxVal(g.k)} (vải) · áo may xong: xa xỉ ${wdLux(gk)}`,it.rk?`hợp phẩm từ ${RANKS[Math.min(7,it.rk)].n}`:""].filter(Boolean),"n"]]);
- const fr=kinvFrom(g.from);
+ const gr=KIT_GRADE[x.grade|0];const rows=kitItemRows(g.k,{e:S.inv[i]});const fr="";/* origin: the Lai lịch row (KIT §70) */
  kitModal({kind:"info",title:it.n,sub:`${it.kd} · ${gr.n}`,itemPic:kitItem({src:x.src512||x.src,name:"",grade:x.grade,size:"lg",qty:g.n}).replace('<span class="kitn"></span>',''),
   html:`<div class="kinvrows">${rows}</div>${g.n>1||fr?kitFacts([g.n>1?`Trong rương: ${g.n} món.`:"",fr?fr+".":""].filter(Boolean)):""}<div class="rbtn kinvacts">${B.join("")}</div>`,btn:"Lui"})}
 (function(){const o0=kinvOpen;kinvOpen=function(x){try{if(x&&x.g&&WD_ITEMS[x.g.k])return wdOpen(x);if(x&&x.g&&IT[x.g.k]&&IT[x.g.k].dr&&wdFabOf(x.g.k))return wdFabOpen(x)}catch(e){console.error("wdOpen",e)}return o0.apply(this,arguments)}})();
@@ -121,10 +120,10 @@ function wdStatusChip(){try{const lab=wdKnownStatus(S);if(lab)return kitChip(`Đ
   return kitEquipSlots({key:"tutrang",title:"Đang mang",slots:o.slots,sum,onPick:keqPick})}catch(e){console.error("keqTT wd",e);return html}}})();
 function wdSlotOpen(x){const sl=x.wd;const s=wdSlotItem(sl);const seen=new Set();
  const T=(S.inv||[]).map((e,i)=>[e,i]).filter(([e])=>e&&!e.h&&wdItem(e)&&wdItem(e).sl===sl&&!seen.has(e.k)&&seen.add(e.k)).map(([e,i])=>{const w=wdItem(e);
-  return kitItem({src:w.icon,name:w.n,grade:w.g,size:"md",label:[wdKnowsE(e)?"đồ phẩm "+wdPName(wdP(e,S)):(plainFx(w.w)||"giản dị"),"n"],data:`data-wd="wear" data-ix="${i}" role="button" tabindex="0"`,
+  return kitItem({src:w.icon,name:w.n,grade:w.g,size:"md",label:[wdKnowsE(e)?"đồ phẩm "+wdPName(wdP(e,S)):(plainFx(w.w)||"giản dị"),"n"],data:`data-kid="${e.k}" data-kix="${i}" data-kidpick="wear" role="button" tabindex="0"`,
    tip:`${sl==="tram"?"Cài":"Mặc"}: ${w.n} · ${plainFx(w.w)||"giản dị"} · tốn 1 khắc`})});
  if(sl==="y"){const fs=new Set();(S.inv||[]).forEach((e,i)=>{const it=e&&IT[e.k];if(!it||e.h||!it.dr||fs.has(e.k))return;fs.add(e.k);const g=wdFabOf(e.k);if(!g)return;let a=null;try{a=itemArt(e.k)}catch(x){}
-  T.push(kitItem({src:a?a.src:keqArt(e.k),name:it.n,grade:a?a.grade:0,size:"md",label:["may áo","n"],data:`data-kinvact="use" data-ix="${i}" role="button" tabindex="0"`,tip:`May áo: ${WD_ITEMS[g].n}`}))})}
+  T.push(kitItem({src:a?a.src:keqArt(e.k),name:it.n,grade:a?a.grade:0,size:"md",label:["may áo","n"],data:`data-kid="${e.k}" data-kix="${i}" data-kidpick="use" role="button" tabindex="0"`,tip:`May áo: ${WD_ITEMS[g].n}`}))})}
  const B=[];if(s&&sl==="tram")B.push(pbtn(`data-wd="off" data-sl="tram"`,"Tháo trâm","thành: cất vào rương, để tóc trơn",""));
  B.push(pbtn(`data-wd="auto"`,"Tự chọn đồ",`${word(wdAutoOdds())} · tốn: 0 khắc · thành: thay ngay bộ ngươi cho là hợp phẩm · kèm: có thể trúng bộ sai phẩm (${wdUnknownN()} món chưa rõ phẩm)`,""));
  B.push(pbtn(`data-wd="groom"`,"Chải chuốt",`tốn: 1 khắc · thành: trò chải chuốt ${WD.groomSec} giây, kim dừng giữa là đúng phẩm · kèm: cao quá thành vượt phẩm, thấp quá thành quá giản dị`,whyTime(1)));
@@ -132,7 +131,7 @@ function wdSlotOpen(x){const sl=x.wd;const s=wdSlotItem(sl);const seen=new Set()
  kitModal({kind:"info",title:`Ô ${x.label.toLowerCase()}`,sub:s?s.w.n:"trống",
   itemPic:kitItem(s?{src:s.w.icon,name:"",grade:s.w.g,size:"lg",lux:wdLux(s.w.k)}:{empty:true,ghost:x.ghost,size:"lg",name:""}).replace('<span class="kitn"></span>',''),
   html:(s?`<div class="kinvrows">${wdItemRowsE(s.e)}</div>`:"")+(st?`<p>${st}</p>`:"")+
-   (T.length?`<p class="past">Chạm một món để ${sl==="tram"?"cài":"thay"} (1 khắc).</p><div class="keqpick">${T.join("")}</div>`
+   (T.length?`<p class="past">Chạm một món để xem rồi ${sl==="tram"?"cài":"thay"} (1 khắc).</p><div class="keqpick">${T.join("")}</div>`
     :kitFacts([sl==="tram"?"Rương chưa có trâm cài nào khác.":"Rương chưa có y phục hay vải nào khác.","Nhờ thái giám mua đồ, hoặc chờ được ban thưởng."]))+
    `<div class="rbtn kinvacts">${B.join("")}</div>`,btn:"Lui"})}
 (function(){const p0=keqPick;keqPick=function(x){if(x&&x.wd)return wdSlotOpen(x);return p0.apply(this,arguments)}})();

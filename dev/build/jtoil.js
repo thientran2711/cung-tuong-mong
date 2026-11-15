@@ -181,8 +181,9 @@ function toilPorAt(rank){const f0=figTierOf;try{figTierOf=function(w){return w==
 function toilPor(){let P=0;try{const it=wdItem(wdOf(S).y);P=it?it.P:0}catch(e){}const rank=P>=1?Math.min(7,P-1):S.rank;const me=pMe();const src=toilPorAt(rank)||me.src;return{src,rank}}
 function toilDressUI(){const box=kg82Box();if(!box)return;box.hidden=false;const st=TOIL.st;
  const items=kinvItems().filter(x=>x&&x.g&&(WD_ITEMS[x.g.k]?x.g.wdPawn==null:(IT[x.g.k]&&["wrist","waist","scent"].includes(IT[x.g.k].sl)))).map(x=>Object.assign({},x,{cat:WD_ITEMS[x.g.k]?(WD_ITEMS[x.g.k].sl==="tram"?"tram":"y"):"trang"}));
+ const sel=toilSelFind(items);items.forEach(x=>{x.sel=!!(sel&&sel.x===x)});
  const tabs=[{k:"tram",label:"Trâm cài"},{k:"y",label:"Y phục"},{k:"trang",label:"Trang sức"}];
- const slots=TOIL_SL.map(([k,label,gk])=>({k,label,item:toilWorn(k),ghost:keqArt(gk)||""}));const x=luxOf(S),wb=wearBonus(S);
+ const slots=TOIL_SL.map(([k,label,gk])=>({k,label,item:toilWorn(k),ghost:keqArt(gk)||"",sel:!!(sel&&sel.sl===k)}));const x=luxOf(S),wb=wearBonus(S);
  const sum=kitChips([wb.sac?["Sắc",wb.sac]:null,wb.danh?["Danh",wb.danh]:null].filter(Boolean))+kitLuxChip(x);
  const por=toilPor();const me=pMe();
  const occ=kitFacts(st.occ.map(o=>`${o.n}${o.F===2?" (trang trọng nhất)":o.F===1?" (gặp bề trên)":""}`));
@@ -190,13 +191,34 @@ function toilDressUI(){const box=kg82Box();if(!box)return;box.hidden=false;const
  box.innerHTML=`<div class="toilw"><div class="toilfig">${pcPort(Object.assign({},me,{src:por.src}),me.col)}<h4 class="kpst">Hôm nay</h4>${occ}`+
   (mama?`<p class="past">${mama.name} khẽ nhắc: “Dịp ${st.F===2?"yến lễ phải lộng lẫy mà không vượt phẩm":st.F===1?"thỉnh an nên đoan trang, đủ phẩm":"thường ngày nên nhã nhặn, đừng phô trương"}.”</p>`:"")+`</div>`+
   `<div class="toilinv">${kitEquipSlots({key:"toil",title:"Đang mặc",slots,sum,onPick:toilSlotPick})}${kitInvGrid({key:"toil",tabs,items,minRows:2,minSlots:12,onPick:toilPick})}`+
-  `<p class="past">Chạm một món trong rương để mặc hay cài; chạm ô đang mặc để tháo. Thay đồ ở đây không tốn thêm khắc.</p></div></div>`+
+  `<div class="toildet">${toilDetHTML(sel)}</div></div></div>`+
   `<div class="kg82act"><button class="${kg82Btn()}" id="toilok">Mặc bộ này</button><button class="${kg82Btn(true)}" id="toilkeep">Giữ đồ hôm qua<small>mặc như cũ</small></button></div>`;
  try{kitInvFit()}catch(e){}
  $("toilok").onclick=()=>toilDressDone(false);$("toilkeep").onclick=()=>toilDressDone(true)}
 document.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest('[data-kinvkey="toil"][data-kinvtab]');if(t)setTimeout(()=>{if(TOIL.st&&!TOIL.st.dv)toilDressUI()},0)},true);
-function toilPick(x){try{const g=x.g;if(WD_ITEMS[g.k]){if(g.wdSlot){if(g.wdSlot==="tram")wdTakeOff(S,"tram")}else if(g.i!=null&&g.i>=0)wdWear(S,g.i)}else if(g.i!=null)wear(S,g.i);sfx("tap")}catch(e){console.error(e)}toilDressUI()}
-function toilSlotPick(x){try{if(!x.item)return;if(x.k==="tram")wdTakeOff(S,"tram");else if(x.k!=="y"){const i=(S.inv||[]).findIndex(e=>e&&e.w&&!e.h&&IT[e.k]&&IT[e.k].sl===x.k);if(i>=0)wear(S,i)}sfx("tap")}catch(e){console.error(e)}toilDressUI()}
+/* owner 15/11 "Khi bấm vào món đồ không thấy hiện thông tin món đồ": a tap SELECTS the cell (gold ring, KIT §70) and shows its kitItemDetail
+   under the chest with the act button — Cài / Mặc / Đeo for a piece in the chest, Tháo for one she wears. Nothing is worn on a blind tap. */
+function toilSlotOf(k){const w=WD_ITEMS[k];if(w)return w.sl;const it=IT[k];return it&&it.sl||null}
+function toilSelFind(items){const s=TOIL.st&&TOIL.st.sel;if(!s)return null;
+ if(s.sl){const it=toilWorn(s.sl);return it?{sl:s.sl}:null}
+ const x=items.find(y=>y.g&&y.g.k===s.k&&!!y.g.wdSlot===!!s.wdSlot&&(s.wdSlot||!!y.g.w===!!s.w))||null;return x?{x}:null}
+function toilRefOfSel(sel){if(!sel)return null;if(sel.x)return{g:sel.x.g};const sl=sel.sl;if(sl==="tram"||sl==="y")return{wdSlot:sl};
+ const i=(S.inv||[]).findIndex(e=>e&&e.w&&!e.h&&IT[e.k]&&IT[e.k].sl===sl);return i>=0?{ix:i}:null}
+function toilDetHTML(sel){const ref=toilRefOfSel(sel);if(!ref)return `<p class="past">Chạm một món trong rương hay một ô đang mặc để xem món ấy; mặc, cài hay tháo bằng nút dưới thông tin. Thay đồ ở đây không tốn thêm khắc.</p>`;
+ const R=kitItemRef(ref);if(!R)return"";const sl=toilSlotOf(R.k);const slN=TOIL_SL.find(z=>z[0]===(sl==="hair"?"tram":sl));const fx=R.wd?plainFx(WD_ITEMS[R.k].w):kinvPlain(R.it&&R.it.w);
+ let b;if(R.worn){b=sl==="y"?pbtn(`data-toilact="off"`,"Tháo","thành: cất vào rương","y phục chỉ thay: chọn bộ khác trong rương rồi chạm Mặc"):pbtn(`data-toilact="off"`,"Tháo",`thành: cất vào rương, ô ${slN?slN[1]:""} để trống`,"")}
+ else{const n=sl==="tram"?"Cài":sl==="y"?"Mặc":"Đeo";b=pbtn(`data-toilact="wear"`,n,`thành: vào ô ${slN?slN[1]:""}${fx?", "+fx:""}`,"")}
+ return kitItemDetail(R,{cls:"kidet-strip",acts:[b]})}
+function toilPick(x){try{const g=x&&x.g;if(!g)return;const s=TOIL.st.sel;const same=s&&!s.sl&&s.k===g.k&&!!s.wdSlot===!!g.wdSlot&&(s.wdSlot||!!s.w===!!g.w);
+ TOIL.st.sel=same?null:{k:g.k,wdSlot:g.wdSlot||null,w:!!g.w};sfx("tap")}catch(e){console.error(e)}toilDressUI()}
+function toilSlotPick(x){try{const s=TOIL.st.sel;TOIL.st.sel=x.item&&!(s&&s.sl===x.k)?{sl:x.k}:null;sfx("tap")}catch(e){console.error(e)}toilDressUI()}
+function toilAct(a){try{const s=TOIL.st.sel;if(!s)return;let ref=null;
+  if(s.sl)ref=toilRefOfSel({sl:s.sl});else{const x=kinvItems().find(y=>y.g&&y.g.k===s.k&&!!y.g.wdSlot===!!s.wdSlot&&(s.wdSlot||!!y.g.w===!!s.w));ref=x?{g:x.g}:null}
+  const R=ref&&kitItemRef(ref);if(!R)return;const sl=toilSlotOf(R.k);const tsl=sl==="hair"?"tram":sl;
+  if(a==="off"){if(R.wd){if(sl==="tram")wdTakeOff(S,"tram")}else{const i=S.inv.indexOf(R.e);if(i>=0&&S.inv[i].w)wear(S,i)}TOIL.st.sel=null}
+  else{if(R.wd){const i=S.inv.indexOf(R.e);if(i>=0)wdWear(S,i)}else{const i=S.inv.indexOf(R.e);if(i>=0&&!S.inv[i].w)wear(S,i)}TOIL.st.sel={sl:tsl}}
+  sfx("tap")}catch(e){console.error(e)}toilDressUI()}
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("#kg82 [data-toilact]");if(!b)return;e.stopPropagation();if(b.disabled)return;toilAct(b.dataset.toilact)},true);
 function toilDressDone(keep){const st=TOIL.st;if(keep&&st.start!==wdCur(S)){/* "giữ đồ hôm qua" after trying things on: the first outfit is put back where it can be */}
  const dr=toilDress(S,st.F);st.dv=dr.v;st.style=dr.style;const good=dr.v==="hopdip"||dr.v==="hoppham";try{sfx(good?"learn-good":"learn-bad")}catch(e){}
  const why={hopdip:"Vừa phẩm, vừa dịp: người trọng lễ ưng ý.",hoppham:"Đúng phẩm, chưa thật hợp dịp hôm nay.",giandi:st.F?"Quá giản dị cho dịp gặp bề trên: người trọng lễ coi là thiếu tôn trọng; người chuộng giản dị lại khen.":"Quá giản dị.",
@@ -302,6 +324,7 @@ function toilFinish(made){const st=TOIL.st;if(!st)return;try{if(KG82.run&&KG82.r
 #kg82 .toilw{display:grid;grid-template-columns:minmax(150px,220px) 1fr;gap:10px 14px;align-items:start}
 #kg82 .toilw .toilfig .pcp{max-width:220px;margin:0 auto 6px}
 #kg82 .toilw .kinv .kinvg{grid-template-columns:repeat(auto-fill,minmax(54px,1fr))}
+#kg82 .toilw .toildet{margin-top:8px}#kg82 .toilw .toildet>.past{margin:4px 0}
 @media (max-width:640px){#kg82 .toilw{grid-template-columns:1fr}#kg82 .toilw .toilfig{display:grid;grid-template-columns:110px 1fr;gap:4px 10px;align-items:start}#kg82 .toilw .toilfig .pcp{grid-row:span 3;max-width:110px;margin:0}}`;document.head.appendChild(st)})();
 
 /* ---------- REACTIONS POP UP (owner 15/11): every reaction to her look is an event dialog with the person, never only a log line ----------

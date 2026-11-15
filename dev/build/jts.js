@@ -287,11 +287,18 @@ function tsDressGame(th,done){const T=TS_THEME[th];const P={};const inv=S.inv.ma
  if(tsBot()||typeof kg82Open!=="function"){setTimeout(()=>done(maidPick(),true),0);return}
  const d=kg82Open({art:"Phối đồ",title:`Đề: ${T.n}`,how:`Chạm một món để đặt vào chỗ của nó (chạm lại để bỏ). Đề ${T.n}: ${T.d}. Xong thì chạm "Ra mắt".`});if(!d){done(maidPick(),true);return}const box=kg82Box();
  const grade=k=>typeof kmTierOf==="function"?kmTierOf(k):0;const src=k=>{try{const a=typeof itemArt==="function"?itemArt(k):null;if(a&&a.src)return a.src}catch(e){}return typeof kmItemImg==="function"?kmItemImg(k):""};
+ let selI=null;const detHTML=()=>{const e=selI!=null?S.inv[selI]:null;if(!e||typeof kitItemDetail!=="function")return`<p class="past">Chạm một món để xem; đặt vào hay bỏ ra bằng nút dưới thông tin.</p>`;
+  const s=TS_SLOT.find(([,,fit])=>fit(e.k));const on=s&&P[s[0]]===e.k;const hit=T.tags.includes(e.k);
+  const b=on?pbtn(`data-tsact="off"`,"Bỏ ra",`thành: ô ${s[1]} để trống`,""):pbtn(`data-tsact="on"`,`Đặt vào ${s?s[1].toLowerCase():""}`,`thành: ${hit?`hợp đề ${T.n}`:`không hợp đề ${T.n}`}${P[s&&s[0]]?` · kèm: thay ${IT[P[s[0]]].n}`:""}`,"");
+  return kitItemDetail({e},{cls:"kidet-strip",acts:[b]})};
  const paint=()=>{const pts=tsDressPts(S,P,th).raw;kg82Set("score",`${pts}/10`);kg82Set("round",`đã đặt ${Object.keys(P).filter(k=>P[k]).length}/4`);kg82Set("time","không giới hạn");
   box.innerHTML=`<div class="ts-slots">${TS_SLOT.map(([sl,lab])=>`<div class="ts-slot"><small>${lab}</small>${P[sl]?kitItem({name:IT[P[sl]].n,src:src(P[sl]),grade:grade(P[sl]),size:"sm"}):kitItem({empty:true,name:"trống",size:"sm"})}</div>`).join("")}</div>`+
-   `<div class="ts-items">${inv.length?inv.map(({e,i})=>{const on=Object.values(P).includes(e.k);return `<button type="button" class="ts-it${on?" ts-on":""}" aria-pressed="${on}" data-tsi="${i}">${kitItem({name:IT[e.k].n,src:src(e.k),grade:grade(e.k),size:"sm"})}</button>`}).join(""):`<p class="past">Rương chưa có trang sức, vải vóc hay hương phấn nào.</p>`}</div>`+
+   `<div class="ts-items">${inv.length?inv.map(({e,i})=>{const on=Object.values(P).includes(e.k);return `<button type="button" class="ts-it${on?" ts-on":""}" aria-pressed="${on}" data-tsi="${i}">${kitItem({name:IT[e.k].n,src:src(e.k),grade:grade(e.k),size:"sm",sel:selI===i})}</button>`}).join(""):`<p class="past">Rương chưa có trang sức, vải vóc hay hương phấn nào.</p>`}</div>`+
+   `<div class="ts-det">${detHTML()}</div>`+
    `<div class="kg82act"><button class="kbtn" id="tsdgo">Ra mắt</button><button class="kbtn alt" id="tsdskip">Bỏ qua<small>${S.maid?S.maid.name:"cung nữ"} chọn giúp (theo lòng nàng: ${word(S.maid?S.maid.loyal:50)})</small></button></div>`;
-  box.querySelectorAll("[data-tsi]").forEach(b=>b.onclick=()=>{const e=S.inv[+b.dataset.tsi];if(!e)return;const s=TS_SLOT.find(([,,fit])=>fit(e.k));if(!s)return;P[s[0]]=P[s[0]]===e.k?null:e.k;paint()});
+  /* KIT §70 (owner 15/11): a tap shows the piece (kitItemDetail) with "Đặt vào …" / "Bỏ ra"; nothing is placed on a blind tap */
+  box.querySelectorAll("[data-tsi]").forEach(b=>b.onclick=()=>{const i=+b.dataset.tsi;selI=selI===i?null:i;try{sfx("tap")}catch(x){}paint()});
+  box.querySelectorAll("[data-tsact]").forEach(b=>b.onclick=()=>{if(b.disabled)return;const e=S.inv[selI];if(!e)return;const s=TS_SLOT.find(([,,fit])=>fit(e.k));if(!s)return;P[s[0]]=b.dataset.tsact==="off"?null:e.k;paint()});
   $("tsdgo").onclick=()=>{kg82Close();done(P,false)};$("tsdskip").onclick=()=>{kg82Close();done(maidPick(),true)}};paint()}
 
 /* =============== lịch: các việc theo tuần / tháng (gọi sau endTurn, giống approaches j24) =============== */
@@ -310,6 +317,7 @@ function tsDressGame(th,done){const T=TS_THEME[th];const P={};const inv=S.inv.ma
 #kg82 .ts-slot{display:flex;flex-direction:column;align-items:center;gap:2px;min-width:0}
 #kg82 .ts-slot>small{font-size:.74rem;color:var(--k-lab,#8a7350)}
 #kg82 .ts-items{display:grid;grid-template-columns:repeat(auto-fill,minmax(88px,1fr));gap:6px;max-height:42vh;overflow:auto;padding:2px;align-items:start}
+#kg82 .ts-det{margin:8px 0 4px}#kg82 .ts-det>.past{margin:4px 0}
 /* review ts-a FAIL 1: a <button> centres its content — every tile starts at the top so pictures and names line up across a row */
 #kg82 .ts-it{background:none;border:0;padding:0;cursor:pointer;min-width:0;opacity:.75;align-self:start;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;height:auto}
 #kg82 .ts-it.ts-on{opacity:1}

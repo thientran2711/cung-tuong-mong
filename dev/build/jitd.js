@@ -56,10 +56,13 @@ function kitItemDetailRows(ref,o){o=o||{};const R=kitItemRef(ref);if(!R)return""
    try{if(typeof wkSellVal==="function")D.push(`bán ra ngoài: Bạc +${wkSellVal(w)}`)}catch(x){}
    const A=typeof ARTS!=="undefined"?ARTS.find(a=>a.k===w.a):null;if(w.raw!=null&&A)G.push(`${w.q} phần: chơi ${w.raw} + ${A.n} bậc ${w.lv}${w.m?" + vật liệu":""}`);
    if(w.d)G.push(w.d);if(w.p!=null)G.push("phải dâng trong tuần này");if(w.show)G.push("đã bày ở yến tiệc")}
-  else if(R.wd){const L=wdItemLists(R.e||{k:R.k},{pawn:o.pawn});if(L){gr=L.gr;D=L.D;M=L.M;G=L.G}}
+  else if(R.wd){const L=wdItemLists(R.e||{k:R.k},{pawn:o.pawn});if(L){gr=L.gr;D=L.D;M=L.M;G=L.G}
+   if(R.who){M=M.filter(m=>!/ngươi/.test(m));G=G.filter(g=>!/^(đồ phẩm|chưa rõ phẩm)/.test(g))}}
   else if(R.veil){const e=R.e||{k:R.k};try{const g=typeof vlG==="function"?vlG(e):I.grade;gr=KG[g]||gr;if(typeof VL_COVER!=="undefined")D.push(VL_COVER[g]);
    if(typeof vlKnows==="function")G.push(vlKnows(S,e)?`đồ phẩm ${wdPName(vlP(e,S))}`:"chưa rõ phẩm")}catch(x){}}
   else{const L=kitItemLists(R.k,{ownTaint:R.e&&R.e.t,worn:R.worn,months:o.months,dress:o.dress});if(L){gr=L.gr;D=L.D;M=L.M;G=L.G}
+   /* a fabric under the wardrobe rules (jwdinv): it is sewn into a garment of its own */
+   const fg=R.it&&R.it.dr&&!o.dress&&typeof wdFabOf==="function"?wdFabOf(R.k):null;if(fg&&WD_ITEMS[fg]){const W=WD_ITEMS[fg];D=D.filter(x=>!/^may áo/.test(x));D.unshift(`may thành ${W.n}: ${plainFx(W.w)||"giản dị"}`);G=G.filter(x=>x!=="áo mặc 3 tháng");G.push(`áo may xong: xa xỉ ${wdLux(fg)}`)}
    if(!D.length&&!M.length&&R.it&&R.it.d)G.unshift(R.it.d)}}catch(err){console.error("kitItemDetailRows",err)}
  if(R.qty>1)G.push(`trong rương: ${R.qty} món`);if(o.note)G.push(...[].concat(o.note).filter(Boolean));
  const T=kidThemes(R.k),X=o.noLux?null:kidLux(R),F=kidFrom(R);
@@ -74,20 +77,29 @@ function kitItemDetail(ref,o){o=o||{};const R=kitItemRef(ref);if(!R)return"";con
   `<b class="kidn" style="color:${I.col}">${kidEsc(I.name)}</b><span class="kidsub">${chip}<span class="kidkind">${kidEsc(kind)}</span>${R.worn?(typeof kitChip==="function"?kitChip("Đang mặc","g"):""):""}</span></div></div>`+
   `<div class="kinvrows kidrows">${kitItemDetailRows(R,o)}</div>${acts?`<div class="rbtn kidacts">${acts}</div>`:""}</div>`}
 /* the floating card */
-const KID={card:null};
-function kitItemCardClose(){const f=document.getElementById("kidfl");if(f)f.remove();KID.card=null}
+const KIDC={card:null};
+function kitItemCardClose(){const f=document.getElementById("kidfl");if(f)f.remove();KIDC.card=null}
 function kitItemCard(ref,o){o=o||{};const R=kitItemRef(ref);if(!R)return null;kitItemCardClose();const acts=o.acts||[];
  const f=document.createElement("div");f.id="kidfl";f.className="kidfl";
  f.innerHTML=`<div class="kidc" role="dialog" aria-modal="true" aria-label="${kidEsc(R.I.name)}">${typeof kitXHTML==="function"?kitXHTML('data-kidx="1"'):'<button type="button" class="kit-x" data-kidx="1" aria-label="Lui">✕</button>'}${kitItemDetail(R,Object.assign({},o,{acts,size:o.size||"lg"}))}</div>`;
- document.body.appendChild(f);KID.card={R,o};try{if(typeof kitFix==="function")kitFix(f)}catch(e){}try{const x=f.querySelector(".kit-x");x&&x.focus({preventScroll:true})}catch(e){}
+ document.body.appendChild(f);KIDC.card={R,o};try{if(typeof kitFix==="function")kitFix(f)}catch(e){}try{const x=f.querySelector(".kit-x");x&&x.focus({preventScroll:true})}catch(e){}
  try{if(typeof sfx==="function")sfx("tap")}catch(e){}return f}
 function kitItemTap(ref){const R=kitItemRef(ref);if(!R)return"";const e=R.e,inv=(typeof S!=="undefined"&&S&&S.inv)||[];const ix=e?inv.indexOf(e):-1;
  return `data-kid="${kidEsc(R.k)}"${ix>=0?` data-kix="${ix}"`:""} role="button" tabindex="0"`}
 document.addEventListener("click",ev=>{const t=ev.target;if(!t||!t.closest)return;const f=document.getElementById("kidfl");
- if(f&&f.contains(t)){const b=t.closest("[data-kidact]");if(b&&f.contains(b)){ev.stopPropagation();if(b.disabled)return;const a=KID.card&&(KID.card.o.acts||[]).find(x=>x.id===b.dataset.kidact);kitItemCardClose();try{a&&a.go&&a.go()}catch(err){console.error(err)}return}
+ if(f&&f.contains(t)){const b=t.closest("[data-kidact]");if(b&&f.contains(b)){ev.stopPropagation();if(b.disabled)return;const a=KIDC.card&&(KIDC.card.o.acts||[]).find(x=>x.id===b.dataset.kidact);kitItemCardClose();try{a&&a.go&&a.go()}catch(err){console.error(err)}return}
+  /* a plain act button of the caller (data-kinvact / data-wd …): its own handler runs; the card (and the panel under it) closes */
+  const pb=t.closest(".kidacts button");if(pb&&!pb.disabled){const cm=KIDC.card&&KIDC.card.o.closeModal;kitItemCardClose();if(cm){try{if(typeof Q!=="undefined"&&Q.length)closeModal()}catch(err){}}return}
   if(t.closest("[data-kidx]")||t===f){ev.stopPropagation();kitItemCardClose()}return}
  const c=t.closest("[data-kid]");if(!c)return;ev.stopPropagation();ev.preventDefault();const ix=c.dataset.kix!=null?+c.dataset.kix:-1;
- const e=ix>=0&&typeof S!=="undefined"&&S&&S.inv[ix]&&S.inv[ix].k===c.dataset.kid?S.inv[ix]:null;kitItemCard(e?{e}:{k:c.dataset.kid})},true);
+ const e=ix>=0&&typeof S!=="undefined"&&S&&S.inv[ix]&&S.inv[ix].k===c.dataset.kid?S.inv[ix]:null;
+ const who=c.dataset.kidwho!=null&&typeof rivals!=="undefined"?rivals.find(r=>String(r.id)===c.dataset.kidwho):null;
+ const pick=c.dataset.kidpick;kitItemCard(e?{e}:who&&c.dataset.kidsl?{wdSlot:c.dataset.kidsl,who}:{k:c.dataset.kid,who},pick&&e?{acts:kidPickActs(e,ix,pick),closeModal:true}:{})},true);
+/* a pick tile inside a slot panel (Bên mình: "Chạm một món để cài / đeo / may áo") → the card with the ONE act (no blind wear) */
+function kidPickActs(e,ix,pick){const W=typeof WD_ITEMS==="object"?WD_ITEMS:{};const it=IT[e.k]||{};
+ try{if(W[e.k]){const w=W[e.k];return[pbtn(`data-wd="wear" data-ix="${ix}"`,w.sl==="tram"?"Cài":"Mặc",`tốn: 1 khắc · thành: vào ô ${w.sl==="tram"?"Cài tóc":"Y phục"}, ${plainFx(w.w)||"giản dị"}`,typeof whyTime==="function"?whyTime(1):"")]}
+  if(pick==="use"||it.dr){const g=typeof wdFabOf==="function"?wdFabOf(e.k):null;return[pbtn(`data-kinvact="use" data-ix="${ix}"`,"May áo",g&&W[g]?`thành: ${W[g].n} vào ô Y phục, ${plainFx(W[g].w)||"giản dị"} · kèm: áo đang mặc cất vào rương`:`thành: Sắc +${it.dr} trong 3 tháng`,"")]}
+  const over=it.rk&&it.rk>S.rank;return[pbtn(`data-kinvact="wear" data-ix="${ix}"`,"Đeo",`thành: ${kinvPlain(it.w)}${over?" · kèm: vượt phẩm, dễ bị tố":""}`,"")]}catch(err){return[]}}
 document.addEventListener("keydown",ev=>{const f=document.getElementById("kidfl");if(f&&ev.key==="Escape"){ev.stopPropagation();ev.preventDefault();kitItemCardClose();return}
  if((ev.key==="Enter"||ev.key===" ")&&ev.target&&ev.target.dataset&&ev.target.dataset.kid!=null){ev.preventDefault();ev.target.click()}},true);
 /* older row builders → the one block (same rows everywhere) */
@@ -109,7 +121,8 @@ if(typeof wdItemRowsE==="function")wdItemRowsE=function(e,o){return kitItemDetai
 .kidc{position:relative;width:min(400px,100%);max-height:min(calc(100dvh - 32px),640px);overflow:auto;overscroll-behavior:contain;padding:14px 14px 12px;
  border:1px solid var(--gold,#c9a46a);border-radius:12px;background:var(--k-card,#fffaf0);box-shadow:0 10px 30px #2a1a1250}
 .kidc>.kit-x{position:absolute;top:8px;right:8px;z-index:1}
-.kidc .kidhd{padding-right:40px}
+.kidc .kidhd,.kshdc .kidet .kidhd{padding-right:40px}
+.kmrow[data-kid],.kmsh[data-kid],.kiev [data-kid],[data-kid].kitem{cursor:pointer}
 @media (max-height:500px){.kidc{width:min(560px,100%)}.kidc .kidet-lg .kidpic>.kitem{--isz:72px}}
 `;document.head.appendChild(st)})();
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§70",title:"kitItemDetail · kitItemCard (chạm món đồ: thông tin món đồ)",

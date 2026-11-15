@@ -112,7 +112,7 @@ function kinvOpenWork(x){const g=x.g,w=g.wk,i=g.i,A=typeof ARTS!=="undefined"?AR
  const F=[`${w.bn==="ngươi"?"Tự tay ngươi làm":"Của "+w.bn}${w.d?" · "+w.d:""}.`];if(w.p!=null)F.push("Phải dâng trong tuần này.");if(w.show)F.push("Đã bày ở yến tiệc.");
  kitModal({kind:"info",title:w.n,sub:`Tác phẩm tự tay · ${x.gname}`,
   itemPic:kitItem({src:x.src512||x.src,name:"",grade:x.grade,size:"lg"}).replace('<span class="kitn"></span>',''),
-  html:`<div class="kinvrows">${kitRows([["Phẩm",`<span class="ef n" style="color:${KIT_GRADE[x.grade|0].c};font-weight:700">${x.gname}</span> (${w.q} phần)`],["Ghi chú",[A?A.n:"",w.s?String(w.s):""].filter(Boolean),"n"]])}</div>${kitFacts(F)}<div class="rbtn kinvacts">${B.join("")}</div>`})}
+  html:`<div class="kinvrows">${typeof kitItemDetailRows==="function"?kitItemDetailRows({ix:i}):""}</div>${kitFacts(F.slice(1))}<div class="rbtn kinvacts">${B.join("")}</div>`})}
 function kinvOpen(x){if(x&&x.g&&x.g.wk)return kinvOpenWork(x);const g=x.g,it=IT[g.k],i=g.i;const over=it.rk&&it.rk>S.rank;const B=[];
  if(it.sl)B.push(pbtn(`data-kinvact="wear" data-ix="${i}"`,g.w?"Tháo":"Đeo",g.w?"thành: cất vào rương":`thành: ${kinvPlain(it.w)}${over?" · kèm: vượt phẩm, dễ bị tố":""}`,""));
  if(it.dr)B.push(pbtn(`data-kinvact="use" data-ix="${i}"`,"May áo",`thành: Sắc +${it.dr} trong 3 tháng${over?" · kèm: vượt phẩm, dễ bị tố":""}`,""));
@@ -122,10 +122,10 @@ function kinvOpen(x){if(x&&x.g&&x.g.wk)return kinvOpenWork(x);const g=x.g,it=IT[
  if(typeof TAINT==="object"&&Object.values(TAINT).some(T=>T.on.includes(g.k))&&!g.t)B.push(pbtn(`data-kinvact="taint" data-ix="${i}"`,"Tẩm","thành: chọn cách tẩm, giữ làm mưu kế · kèm: Đức -3",""));
  if(g.from&&g.from!=="me"&&g.from!=="emp"&&g.from!=="th")B.push(pbtn(`data-kinvact="test" data-ix="${i}"`,"Nghiệm độc","tốn: Bạc 10 · thành: Thái y xem đồ có bị tẩm không",S.bac<10?"thiếu bạc (cần 10)":""));
  const F=[];if(g.n>1)F.push(`Trong rương: ${g.n} món.`);if(g.w)F.push(it.sl?"Ngươi đang đeo.":"Ngươi đang dùng.");
- const fr=kinvFrom(g.from);if(fr)F.push(fr+".");
+ /* origin (kinvFrom) is the "Lai lịch" row of the item detail (KIT §70) */
  kitModal({kind:"info",title:it.n,sub:`${it.kd} · ${KIT_GRADE[x.grade|0].n}`,
   itemPic:kitItem({src:x.src512||x.src,name:"",grade:x.grade,size:"lg",qty:g.n,lux:x.lux}).replace('<span class="kitn"></span>',''),
-  html:`<div class="kinvrows">${kitItemRows(g.k,{ownTaint:g.t,worn:g.w})}</div>${F.length?kitFacts(F):""}${B.length?`<div class="rbtn kinvacts">${B.join("")}</div>`:""}`,btn:"Lui"})}
+  html:`<div class="kinvrows">${kitItemRows(g.k,{ownTaint:g.t,worn:g.w,e:S.inv[i]})}</div>${F.length?kitFacts(F):""}${B.length?`<div class="rbtn kinvacts">${B.join("")}</div>`:""}`,btn:"Lui"})}
 /* kit panel: `itemPic` = the panel's subject picture is an ITEM (KIT 8: "picture only if it depicts the subject … or a specific item");
    it takes the left subject column, so no info/category art is added; act cards inside the body get the kit act-card frame. */
 (function(){if(typeof kpBuild!=="function")return;const b0=kpBuild;kpBuild=function(M,m){const r=b0.apply(this,arguments);try{const sp=m&&m.kit;if(!sp||!sp.itemPic)return r;
@@ -306,9 +306,9 @@ function keqPick(x){if(x.k==="veil"){const on=veilOn(S),need=veilNeed(S),has=vei
  const L=S.inv.map((e,i)=>[e,i]).filter(([e])=>!e.h&&IT[e.k]&&(x.k==="dress"?IT[e.k].dr:IT[e.k].sl===x.k));const seen=new Set();
  const T=L.filter(([e])=>{if(seen.has(e.k))return false;seen.add(e.k);return true}).map(([e,i])=>{const it=IT[e.k],a=typeof itemArt==="function"?itemArt(e.k):null;
   const fx=x.k==="dress"?`Sắc +${it.dr}, 3 tháng`:kinvPlain(it.w);return kitItem({src:keqArt(e.k),name:it.n,grade:a?a.grade:0,size:"md",label:[it.rk>S.rank?"vượt phẩm":fx,it.rk>S.rank?"no":"n"],
-   data:`data-kinvact="${x.k==="dress"?"use":"wear"}" data-ix="${i}" role="button" tabindex="0"`,tip:`${x.k==="dress"?"May áo":"Đeo"}: ${it.n} · ${fx}`})});
+   data:`data-kid="${e.k}" data-kix="${i}" data-kidpick="${x.k==="dress"?"use":"wear"}" role="button" tabindex="0"`,tip:`${it.n} · ${fx} · chạm để xem`})});
  kitModal({kind:"info",title:`Ô ${x.label.toLowerCase()}`,sub:"trống",itemPic:kitItem({empty:true,ghost:x.ghost,size:"lg",name:""}).replace('<span class="kitn"></span>',''),
-  html:T.length?`<p class="past">Chạm một món để ${x.k==="dress"?"may áo mặc":"đeo vào"}.</p><div class="keqpick">${T.join("")}</div>`
+  html:T.length?`<p class="past">Chạm một món để xem rồi ${x.k==="dress"?"may áo mặc":"đeo vào"}.</p><div class="keqpick">${T.join("")}</div>`
    :kitFacts([x.k==="dress"?"Rương chưa có vải để may áo.":`Rương chưa có món nào ${({hair:"cài tóc",wrist:"đeo tay",waist:"đeo eo",scent:"đeo bên mình"})[x.k]} được.`,"Nhờ thái giám mua đồ, hoặc chờ được ban thưởng."]),btn:"Lui"})}
 if(typeof invHTML==="function"){const inv0=invHTML;invHTML=function(){let h=inv0.apply(this,arguments);try{
   const i=h.indexOf('<div class="cards">');if(i>=0)h=h.slice(0,i);h=h.replace(/^<div class="ph">[\s\S]*?<\/div>\s*/,"");
@@ -380,6 +380,9 @@ function kitShopTile(o,x,i){const key=o.key||"shop",u=x.unit||"bạc";const g=KI
 /* the kit item card, floating over the dialog (tap a tile picture); ✕ = kit-x */
 function kitShopDet(o){const x=(o.list||[]).find(y=>y.k===o.det);if(!x)return"";const key=o.key||"shop",u=x.unit||"bạc";const g=KIT_GRADE[Math.max(0,Math.min(4,x.grade|0))]||KIT_GRADE[0];
  const cost=x.sell?[["Được",`Bạc +${x.price} mỗi món`,"g"]]:[["Tốn",`Bạc −${x.price} mỗi món`,"r"]];
+ /* KIT §70: the card body is the shared item detail (picture, name, grade, kind, theme, Được / Mất, Xa xỉ…) under the price row */
+ const ref=typeof kitItemRef==="function"&&!x.crafted&&x.rows!==""?kitItemRef({k:x.k}):null;
+ if(ref)return `<div class="kshdet" data-kshop="${key}" data-kshdetx="1"><div class="kshdc" role="dialog" aria-label="${x.name}">${kitXHTML(`data-kshop="${key}" data-kshdetx="1"`)}${kitItemDetail(ref,{lead:cost})}</div></div>`;
  return `<div class="kshdet" data-kshop="${key}" data-kshdetx="1"><div class="kshdc" role="dialog" aria-label="${x.name}">${kitXHTML(`data-kshop="${key}" data-kshdetx="1"`)}`+
   `<div class="kshdi">${kitItem({src:x.src512||x.src,name:"",grade:x.grade,size:"md",lux:x.lux}).replace('<span class="kitn"></span>','')}`+
   `<div class="kshdt"><b class="kshdn" style="color:${g.c}">${x.name}</b>${x.sub?`<span class="kshds">${x.sub}</span>`:""}</div></div>`+
