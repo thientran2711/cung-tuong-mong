@@ -12,7 +12,8 @@
 
 /* ---------- 1. PERSON CARD: ONE portrait cell for every person (owner 11/14, kit 2b) ----------
    The cell is the whole frame canvas from its top (crest room kept: Hoàng hậu's phoenix, the Emperor's dragon, Thái hậu's crest show whole)
-   down to the bottom of the band (canvas x 0–550, y 0–795, aspect 550:795); the pendant/tassel below is not drawn here. Every card on a screen
+   down to the end of the tassel (owner 15/11 06:35Z: the whole canvas x 0–550, y 0–1037, aspect 550:1037; jade pendant + tassel always whole,
+   same cell width as before, so the photo window keeps its size: the cell only grows downwards). Every card on a screen
    uses the SAME cell width (--kpcw), so the photo window (384x506 canvas units) is the same size for every rank and role.
    Layout: portrait left, name / rank / info beside it (float), act groups full width below: the Fold shows portrait + name + rank +
    the first info lines without scrolling. */
@@ -27,8 +28,8 @@
 .pc>.pcl,.pc>.pcr{overflow:visible!important;min-height:auto!important}
 .pc>.pcl{display:block!important;width:auto!important;max-width:none!important}
 .pc>.pcl::after{content:"";display:block;clear:both}
-.pc>.pcl>.pcp.kit{float:left;width:var(--kpcw)!important;height:auto!important;max-height:none!important;min-height:0!important;aspect-ratio:550/795!important;overflow:hidden!important;container-type:normal!important;margin:0 12px 6px 0!important}
-.pc>.pcl>.pcp.kit>.kin{position:absolute!important;left:0!important;top:0!important;width:100%!important;height:130.44%!important;transform:none!important}
+.pc>.pcl>.pcp.kit{float:left;width:var(--kpcw)!important;height:auto!important;max-height:none!important;min-height:0!important;aspect-ratio:550/1037!important;overflow:hidden!important;container-type:normal!important;margin:0 12px 6px 0!important}
+.pc>.pcl>.pcp.kit>.kin{position:absolute!important;left:0!important;top:0!important;width:100%!important;height:100%!important;transform:none!important}
 .pc>.pcl>b,.pc>.pcl>.pcname,.pc>.pcl>p{display:flow-root}
 .pc>.pcl>.pcinfo{font-size:.8rem}
 .pc>.pcl>.pcname,.pc>.pcl>b:first-of-type{font-size:1.12rem}
@@ -423,7 +424,7 @@ function kitCourtChips(){try{const c=$("kcchips");if(c)c.remove();const box=$("k
 
 /* ---------- 9. ONE FRAME (owner 11/14 B + C): every portrait frame in the game — big card, dialog, small frames in strips, HUD, podium, week
    book, chips — is built by ONE function, pcPort (j60 layers on the 550x1037 canvas); mdH(face,size) now calls the same pcPort and shows the
-   same cell (canvas y 0–795: crest room + photo window + band) at a smaller width. So the rank crest (phoenix, dragon, Thái hậu…) shows whole
+   same cell (whole canvas y 0–1037: crest room + photo window + band + jade pendant + tassel, owner 15/11 06:35Z) at a smaller width. So the rank crest (phoenix, dragon, Thái hậu…) shows whole
    at every size, and a change to the frame shows everywhere.
    C: (1) the portrait is cut tighter: the por picture is 1.14x the window, raised 5 % of its height, clipped to the window (head near the top
    edge, person larger); (2) every rank/role has its own crest on the top bar (img/kit/crest-<key>.webp, gpt-2-6, one style reference: the
@@ -451,11 +452,12 @@ window.KIT_CREST={ar:{"consort-0":.329,"consort-1":.337,"consort-2":.538,"consor
 .kfxc>.kfx,span.md .kfxc>.kfx{left:-7%!important;top:-5.7%!important;width:114%!important;height:114%!important}
 /* crest on the top bar */
 .kin>img.kcrest,.pcp.kit .kin>img.kcrest:not(.kfr):not(.kgem):not(.kemb):not(.kpor){position:absolute!important;inset:auto!important;left:var(--cl)!important;top:var(--ct)!important;width:var(--cw)!important;height:var(--ch)!important;max-width:none!important;object-fit:fill!important;border-radius:0!important;z-index:3;pointer-events:none;filter:drop-shadow(0 1px 1px #0004)}
-/* the small frame cell (mdH): same layers as .pcp.kit, cell = canvas y 0–795 */
-span.md.kfc{position:relative!important;display:inline-block;flex:0 0 auto;width:60px!important;height:auto!important;max-height:none!important;aspect-ratio:550/795!important;overflow:hidden!important;background:none!important;border:0!important;box-shadow:none!important;border-radius:0!important;padding:0!important;animation:none!important;transform:none!important;vertical-align:middle;font-size:0}
-span.md.kfc.kfc{position:relative!important;contain:layout paint;width:60px!important;height:auto!important;min-height:0!important;aspect-ratio:550/795!important}
+/* the small frame cell (mdH): same layers as .pcp.kit, cell = the whole canvas y 0–1037 (pendant + tassel whole, owner 15/11 06:35Z) */
+span.md.kfc{position:relative!important;display:inline-block;flex:0 0 auto;width:60px!important;height:auto!important;max-height:none!important;aspect-ratio:550/1037!important;overflow:hidden!important;background:none!important;border:0!important;box-shadow:none!important;border-radius:0!important;padding:0!important;animation:none!important;transform:none!important;vertical-align:middle;font-size:0}
+span.md.kfc.kfc{position:relative!important;contain:layout paint;width:60px!important;height:auto!important;min-height:0!important;aspect-ratio:550/1037!important}
+span.md.kfc.kfc.kfc{box-shadow:none!important}
 span.md.kfc.kfc.xs,button.ka .kan span.md.kfc.kfc.xs{width:26px!important;height:auto!important;position:relative!important;display:inline-block!important}span.md.kfc.kfc.sm{width:38px!important}span.md.kfc.kfc.big{width:84px!important}
-span.md.kfc>.kin{position:absolute!important;left:0!important;top:0!important;width:100%!important;height:130.44%!important;transform:none!important;display:block!important;isolation:isolate}
+span.md.kfc>.kin{position:absolute!important;left:0!important;top:0!important;width:100%!important;height:100%!important;transform:none!important;display:block!important;isolation:isolate}
 span.md.kfc .kin>.kbg{position:absolute;left:14.655%;top:20.289%;width:70.691%;height:49.373%;background:#5a1e16 center/cover no-repeat;z-index:-1}
 span.md.kfc .kin>img{position:absolute!important;right:auto!important;bottom:auto!important;max-width:none!important;max-height:none!important;border-radius:0!important;box-shadow:none!important;animation:none!important}
 span.md.kfc .kin>img.kpor{left:14.655%!important;top:24.733%!important;width:70.691%!important;height:44.930%!important;object-fit:cover!important;object-position:50% 0!important}
@@ -867,7 +869,8 @@ kitPcFix=function(pc){try{if(!pc||pc.dataset.k2==="1")return;const L=pc.querySel
 document.addEventListener("click",e=>{const pp=e.target.closest&&e.target.closest(".pc.kpnar .pcl > .pcp.kpsheet");if(!pp)return;e.stopPropagation();
  try{const pc=pp.closest(".pc");const nm=(pc.querySelector(".pcname")||{}).textContent||"";const parts=[...pc.querySelectorAll(":scope > .pcl > .kwear, :scope > .pcl > .kpfacts")].map(x=>x.outerHTML).join("");
   Q.unshift({t:nm,h:`<div class="kpsheetb">${parts}</div>`});showModal()}catch(x){console.error(x)}},true);
-function kitPcWide(pc){const c=(pc&&pc.closest&&pc.closest("#panel,#stage,#modal .dlg"))||document.getElementById("panel");const w=c&&c.clientWidth;if(pc&&w)pc.style.setProperty("--kpcw",Math.round(Math.max(150,Math.min(240,w*.36)))+"px");return w?w>=440:innerWidth>=600}/* owner 11/14: Fold uses EXACTLY the iPad card (one component) */
+function kitPcWide(pc){const c=(pc&&pc.closest&&pc.closest("#panel,#stage,#modal .dlg"))||document.getElementById("panel");/* tassel-fix: width without the scrollbar's share, so a card that grows tall enough to scroll keeps the same portrait size (no-shrink rule) */
+ let w=c&&c.clientWidth;try{if(w){const cs=getComputedStyle(c);const sb=c.offsetWidth-c.clientWidth-(parseFloat(cs.borderLeftWidth)||0)-(parseFloat(cs.borderRightWidth)||0);if(sb>0)w+=sb}}catch(e){}if(pc&&w)pc.style.setProperty("--kpcw",Math.round(Math.max(150,Math.min(240,w*.36)))+"px");return w?w>=440:innerWidth>=600}/* owner 11/14: Fold uses EXACTLY the iPad card (one component) */
 addEventListener("resize",()=>{const w=kitPcWide();if(window.__kpcW!==undefined&&window.__kpcW!==w){try{render()}catch(e){}}window.__kpcW=w});window.__kpcW=kitPcWide();
 /* the card is at most the panel's height (one scroller inside the panel); a newly opened person is scrolled fully into view */
 function kitPcSize(){try{const P=$("panel");if(!P)return;const cs=getComputedStyle(P);const pb=parseFloat(cs.paddingBottom||0),pt=parseFloat(cs.paddingTop||0);

@@ -12,7 +12,7 @@ const RNG=n=>Math.floor(Math.random()*n),rpick=a=>a[RNG(a.length)];
 function note(k){window.__acts[k]=(window.__acts[k]||0)+1}
 function rvBtns(i){const v=rivals[i];const d=document.createElement('div');d.innerHTML=rvButtons(v,i);return [...d.querySelectorAll('button[data-r]')].filter(b=>!b.disabled).map(b=>b.dataset.a)}
 function modalStep(sens){
-  if(!q('#ov').hidden){const ok=q('#mgok');if(ok){ok.click();return true}const sk=q('#mgskip');if(sk&&!sk.hidden){sk.click();return true}return true}
+  if(!q('#ov').hidden){/* j82 mini-games (current main): skip / close */{const k=q('#kg82skip')||q('#ov .kg82act button:not(#kg82go)')||q('#kg82ok')||q('#ov button.kbtn');if(k){k.click();return true}}const ok=q('#mgok');if(ok){ok.click();return true}const sk=q('#mgskip');if(sk&&!sk.hidden){sk.click();return true}return true}
   if(Q.length){
     const m=Q[0];
     if(m.opts&&m.opts.length){
@@ -79,7 +79,7 @@ function sensibleStep(){
     if(accs.length&&accs[0].o>=60){note("accuse");doAct(accs[0].i,"accuse");return}}
   const opts=[];
   if(qOn()&&S.rank>=5&&can(2)&&S.bac>=20&&rvBtns(0).includes("spy")){const o=ACT.spy.o?ACT.spy.o(S,rivals[0]):50;if(o>=40)opts.push({s:3.6,f:()=>{note("spyQueen");doAct(0,"spy")}})}
-  deck.forEach((a,i)=>{if(!cardOK(a))return;const c=cardCost(a);opts.push({s:scoreAct(a,N,c),f:()=>{note("card");act(i)}})});
+  /* a card that changes nothing is not tried again in the same buổi */{const bk=S.turn+"_"+S.tuan+"_"+S.buoi;window.__cdf=window.__cdf||{};deck.forEach((a,i)=>{if(!cardOK(a)||window.__cdf[a.n]===bk)return;const c=cardCost(a);opts.push({s:scoreAct(a,N,c),f:()=>{note("card");const u0=used,q0=Q.length,s0=S.suc,b0=S.bac;act(i);if(used===u0&&Q.length===q0&&S.suc===s0&&S.bac===b0&&!S.mg)window.__cdf[a.n]=bk}})})}
   talkCands().forEach(t=>{const s=talkScore(t,N);opts.push({s,f:()=>{note("talk");popIdx=t.pi;talk(t.oi)}})});
   const L=lessonCands().filter(a=>S.suc>=45&&S.bac>=5+S.arts[a.k]*5+20).sort((a,b)=>S.arts[a.k]-S.arts[b.k]);
   if(L.length){const x=L[0];opts.push({s:2.0+(S.sung>=40?.5:0)-(S.suc<55?1.5:0),f:()=>{note("lesson");if(S.bac>=150&&!S.master)hireMaster();lesson(x.k)}})}
@@ -93,14 +93,14 @@ function sensibleStep(){
   if(qOn())place("kn",S.hh<20?2.2:.7);
   if(!S.preg&&S.sung<35)place("ksp",.8);
   if(S.arts.y<2)place("tyv",.6);
-  pls.forEach(p=>opts.push({s:p.s,f:()=>{note("go");goTo(p.k)}}));
+  /* a place goTo refuses is not tried again in the same buổi (else the bot loops) */{const bk=S.turn+"_"+S.tuan+"_"+S.buoi;window.__gof=window.__gof||{};pls.forEach(p=>{if(window.__gof[p.k]===bk)return;opts.push({s:p.s,f:()=>{note("go");const was=S.place;goTo(p.k);if(S.place===was&&!Q.length)window.__gof[p.k]=bk}})})}
   opts.sort((a,b)=>b.s-a.s);
   if(opts.length&&opts[0].s>0.35){opts[0].f();return}
   window.__buoi++;if(used<=1)window.__idle++;nextBuoi()}
 window.__bot={step:(mode,n)=>{
   for(let i=0;i<n;i++){window.__iter++;window.__lifeIter++;
     if(S&&!S.dead){window.__maxRank=Math.max(window.__maxRank,S.rank);if(S.rank>=7&&window.__hhTurn==null)window.__hhTurn=S.turn;const t=S.turn+"_"+S.tuan;if(window.__lastT!==t){window.__lastT=t;window.__sucTrace.push(S.suc)}}
-    if(window.__lifeIter>9000){window.__res.push({origin:S.origin.k,rank:S.rank,maxRank:window.__maxRank,turns:S.turn,years:+(S.turn/12).toFixed(2),title:"TIMEOUT",fate:"TIMEOUT",state:JSON.stringify({used,Q:Q.length,mg:!!S.mg,buoi:S.buoi,place:S.place,out:S.out})});window.__maxRank=0;window.__lifeIter=0;start();continue}
+    if(window.__lifeIter>60000){window.__res.push({origin:S.origin.k,rank:S.rank,maxRank:window.__maxRank,turns:S.turn,years:+(S.turn/12).toFixed(2),title:"TIMEOUT",fate:"TIMEOUT",state:JSON.stringify({used,Q:Q.length,mg:!!S.mg,buoi:S.buoi,place:S.place,out:S.out})});window.__maxRank=0;window.__lifeIter=0;start();continue}
     if(S&&S.dead&&!Q.length){start();continue}
     if(S&&!S.dead){for(const k of ['sung','danh','bac','suc','duc','sac','tai','tamco','th','hh','mat','an'])if(typeof S[k]!=='number'||isNaN(S[k])||(k!=='th'&&k!=='hh'&&S[k]<0)||S[k]>(k==='bac'?1e6:100))window.__bad.push(k+'='+S[k]+' '+S.origin.k);
       if(window.__iter%400===0&&!Q.length&&!S.mg){try{const d=JSON.parse(JSON.stringify(ser()));quiet=true;deser(d);quiet=false;deal()}catch(e){window.__saveFail.push(String(e.message).slice(0,80))}}}
