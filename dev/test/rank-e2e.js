@@ -1,0 +1,98 @@
+/* Bảng vinh danh (jrank + Worker logic) end to end, Playwright, one viewport.
+   usage: node dev/test/rank-e2e.js <game URL> <rank URL> <W>x<H>@dpr <outdir> [oldBuildURL]
+   rank URL = local stand-in (node rank/worker/test/local-server.mjs, fresh) or the real Worker.
+   Three fake guests (separate browser contexts = separate devices) end several lives; checks: order of both boards, own rows marked and
+   shown at the bottom even outside the top, rename (+ duplicate + obscene refused), a life ended offline is queued and sent once back
+   online, an old save (published build, no guest id) loads and gets a guest id, no page errors, no horizontal overflow, no clipped text,
+   no "…", no "%", no Han characters. Shots: <outdir>/<n>-<scene>-<W>x<H>_<dpr>.png */
+const {chromium}=require('playwright');
+const [,,BASE,RURL,SZ,OUT,OLD]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=WH.split('x').map(Number);const tag=SZ.replace('@','_');
+const fails=[];const ok=(c,m)=>{console.log((c?'ok   ':'FAIL ')+m);if(!c)fails.push(m)};
+(async()=>{const b=await chromium.launch();const errs=[];process.on('unhandledRejection',e=>{console.log('ABORT',e.message.split('\n')[0],'errors:',JSON.stringify(errs.slice(0,6)));process.exit(2)});
+ const mk=async(name)=>{const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,deviceScaleFactor:+(DPR||1)});
+  await ctx.addInitScript(u=>{window.RANK_URL=u},RURL);const p=await ctx.newPage();p.setDefaultTimeout(60000);
+  p.on('pageerror',e=>errs.push(name+': '+e.message));p.on('console',m=>{if(m.type()==='error'&&!/Failed to load resource|ERR_INTERNET_DISCONNECTED|net::/.test(m.text()))errs.push(name+' console: '+m.text())});
+  await p.goto(BASE,{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);return{ctx,p}};
+ const newLife=async p=>{await p.evaluate(()=>{window.__prevS=S;SLOT=1;document.getElementById('title').hidden=true;try{store.set(NL_KEY,null)}catch(e){}Q.length=0;start()});
+  await p.waitForFunction(()=>(typeof NLP!=='undefined'&&NLP)||(S&&S!==window.__prevS&&!S.dead&&S.rkSeed));
+  await p.evaluate(()=>{if(typeof NLP!=='undefined'&&NLP)nlAccept(false);Q.length=0;$('modal').hidden=true;render()});
+  for(let i=0;i<6;i++){await p.waitForTimeout(300);await p.evaluate(()=>{const k=document.querySelector('#kroul .krskip');if(k)k.click()})}
+  await p.evaluate(()=>{Q.length=0;$('modal').hidden=true});ok(await p.evaluate(()=>!document.getElementById('kroul')&&S&&!S.dead),'new life started')};
+ /* o: {rank, years, sons, danh, duc, end:"die"|"thaihau"} — the life is played by setting the state, then the real ending runs */
+ const endLife=async(p,o)=>{await p.evaluate(o=>{for(let r=S.rank;r<=o.rank;r++){S.rank=r;rkTrack()}S.maxRank=o.rank;
+   for(let y=1;y<o.years;y++){S.year++;S.age++;rkTrack()}S.danh=o.danh||0;S.duc=o.duc||0;
+   for(let i=0;i<(o.sons||0);i++){S.kids.push({name:'Hoàng tử '+['Vĩnh An','Vĩnh Khang','Vĩnh Thọ'][i],sex:'m',age:3,hp:90,fond:50,born:0,alive:true});rkTrack()}
+   if(o.end==='thaihau'){S.heir={k:S.kids[S.kids.length-1]};emperorDies('')}else over('Hồng nhan bạc mệnh','Bệnh nặng không qua khỏi.','Bệnh mà chết')},o);
+  await p.waitForSelector('.krk-end');};
+ const endRank=p=>p.waitForFunction(()=>{const e=document.querySelector('.krk-end');return e&&/đứng hạng/.test(e.textContent)?e.textContent:null},null,{timeout:30000}).then(h=>h.jsonValue());
+ const layout=async(p,scene)=>p.evaluate(scene=>{const vw=innerWidth,vh=innerHeight,bad=[];const root=document.querySelector('#krkov')||document.querySelector('#modal');
+  if(document.documentElement.scrollWidth>vw+1)bad.push('page overflow-x '+document.documentElement.scrollWidth);
+  root.querySelectorAll('*').forEach(e=>{if(e.closest('[aria-hidden="true"]'))return;const q=e.getBoundingClientRect();if(!q.width||!q.height)return;const cs=getComputedStyle(e);if(cs.visibility==='hidden')return;
+   if(q.right>vw+1||q.left<-1)bad.push('out-x:'+e.className+':'+(e.textContent||'').slice(0,24));
+   if(e.children.length===0&&e.textContent.trim()&&e.scrollWidth>e.clientWidth+1&&cs.overflow!=='visible'&&cs.display!=='inline')bad.push('clip:'+e.className+':'+e.textContent.slice(0,24))});
+  const tx=root.innerText;if(/…/.test(tx))bad.push('ellipsis');if(/%/.test(tx))bad.push('percent');if(/[㐀-鿿]/.test(tx))bad.push('han');
+  return{scene,bad:bad.slice(0,8)}},scene);
+ const shot=async(p,n,scene)=>{await p.waitForTimeout(400);await p.evaluate(()=>{const r=document.querySelector('.kpod.krk');if(r)r.classList.add('kpod-skip')});await p.waitForTimeout(150);await p.screenshot({path:`${OUT}/${n}-${scene}-${tag}.png`})};
+ const board=p=>p.evaluate(()=>{const R=[...document.querySelectorAll('#krkov .krk-list .krk-row:not(.krk-hd)')].map(r=>({rk:+r.querySelector('.krk-rk').textContent,s:+r.querySelector('.krk-s b').textContent,pn:r.querySelector('.krk-pn').textContent.replace(/\s*Ngươi$/,''),mine:r.classList.contains('krk-mine')}));
+  const me=document.querySelector('#krkov .krk-me');return{rows:R,me:me&&me.textContent,meRow:!!(me&&me.querySelector('.krk-row')),pod:[...document.querySelectorAll('#krkov .kpod-col')].map(c=>c.className.match(/kpod-p\d/)[0]+':'+c.querySelector('.kname').textContent),
+   figs:[...document.querySelectorAll('#krkov .kpod-img')].map(i=>i.complete&&i.naturalWidth>0),tab:(document.querySelector('#krkov .ksubb.on')||{}).textContent}});
+ const openBoard=async(p,tab)=>{await p.evaluate(t=>rkOpen(t),tab||'lives');await p.waitForFunction(()=>document.querySelector('#krkov .krk-list')||/Chưa có/.test((document.querySelector('#krkov .krk-body')||{}).textContent||''));await p.waitForTimeout(600)};
+ const sorted=rows=>rows.every((r,i)=>!i||rows[i-1].s>=r.s)&&rows.every((r,i)=>r.rk===i+1);
+
+ if(process.env.PART!=='old'){
+ /* guest A: two lives (Hoàng hậu 5 năm; Quý nhân 2 năm) */
+ const A=await mk('A');const idA=await A.p.evaluate(()=>rkIdGet());ok(/^[a-z0-9]{24}$/.test(idA.gid),'first open makes a guest id');
+ await A.p.waitForFunction(()=>rkIdGet().pn,null,{timeout:15000}).catch(()=>{});const nA=await A.p.evaluate(()=>rkIdGet().pn);ok(/^Khách vô danh #\d{4,5}$/.test(nA||''),'guest is remembered by the server: '+nA);
+ await A.p.evaluate(()=>showTitle());await A.p.waitForTimeout(600);ok(await A.p.locator('#modal.kptitle .kpmenu [data-krk-open]').count()===1,'title screen has the Bảng vinh danh button');
+ await shot(A.p,1,'title');
+ await newLife(A.p);ok(await A.p.evaluate(()=>S.rkGid===rkIdGet().gid&&!!S.rkSeed),'guest id and roll seed written into the save');
+ await endLife(A.p,{rank:7,years:5,danh:60,duc:50});const e1=await endRank(A.p);ok(/hạng 1 trên 1/.test(e1),'end card: '+e1);
+ await shot(A.p,2,'endcard');ok((await layout(A.p,'endcard')).bad.length===0,'end card layout '+JSON.stringify((await layout(A.p,'endcard')).bad));
+ await A.p.evaluate(()=>{Q.length=0;$('modal').hidden=true});await A.p.waitForTimeout(1200);
+ await newLife(A.p);await endLife(A.p,{rank:2,years:2,danh:20,duc:20});ok(/hạng 2 trên 2/.test(await endRank(A.p)),'second life of A = its own row, rank 2');
+ /* guest B: Hoàng thái hậu */
+ const B=await mk('B');await newLife(B.p);await endLife(B.p,{rank:7,years:9,sons:2,danh:80,duc:70,end:'thaihau'});ok(/hạng 1 trên 3/.test(await endRank(B.p)),'Hoàng thái hậu takes rank 1');
+ /* guest C: a short life, then rename */
+ const C=await mk('C');await newLife(C.p);await endLife(C.p,{rank:0,years:1});ok(/hạng 4 trên 4/.test(await endRank(C.p)),'short life is last');
+ await C.p.locator('.krk-end .kbtn').click();await C.p.waitForSelector('#krkov .krk-list');await C.p.waitForTimeout(800);
+ let bd=await board(C.p);ok(bd.rows.length===4&&sorted(bd.rows),'Kiếp board: 4 rows in order '+bd.rows.map(r=>r.s).join(' > '));
+ ok(bd.rows[3].mine&&bd.rows.filter(r=>r.mine).length===1,'C: own life marked');ok(bd.meRow&&/Kiếp vừa rồi/.test(bd.me),'C: own row at the bottom');
+ ok(bd.pod.length===3&&bd.pod[1].startsWith('kpod-p1')&&bd.figs.every(Boolean),'podium: three places, Nhất centre, figures loaded '+bd.pod.join(' | '));
+ await shot(C.p,3,'board-lives');ok((await layout(C.p,'board')).bad.length===0,'board layout '+JSON.stringify((await layout(C.p,'board')).bad));
+ await C.p.evaluate(()=>{document.querySelector('#krkov .krk-body').scrollTop=1e6});await shot(C.p,4,'board-lives-list');
+ await C.p.locator('#krkov [data-krt="players"]').click();await C.p.waitForFunction(()=>{const d=RK.data.players;return d&&document.querySelector('#krkov .krk-list')});await C.p.waitForTimeout(600);
+ bd=await board(C.p);ok(bd.rows.length===3&&sorted(bd.rows)&&bd.tab==='Người chơi','Người chơi board: one row per player '+bd.rows.map(r=>r.pn+' '+r.s).join(', '));
+ ok(bd.rows[0].pn===(await B.p.evaluate(()=>rkIdGet().pn))&&bd.rows[1].pn===nA,'players ordered by best life (B, A, C)');
+ const pA=await C.p.evaluate(()=>RK.data.players.rows[1]);ok(pA.k===2&&pA.t>pA.s,'A: 2 lives, total over best');
+ await shot(C.p,5,'board-players');ok((await layout(C.p,'players')).bad.length===0,'players layout '+JSON.stringify((await layout(C.p,'players')).bad));
+ /* rename */
+ await C.p.locator('#krkov [data-krk="name"]').click();await C.p.fill('#krk-in','Đồ đụ');await C.p.locator('#krkov [data-krk="save"]').click();
+ await C.p.waitForFunction(()=>/không nhã/.test((document.querySelector('.krk-msg')||{}).textContent||''));ok(true,'obscene name refused');
+ await B.p.evaluate(async()=>{const r=await rkReq('POST','/name',{gid:rkIdGet().gid,name:'Hoa Phi'});rkIdSet({pn:r.j.me.pn})});await C.p.fill('#krk-in','hoa phi');await C.p.locator('#krkov [data-krk="save"]').click();await C.p.waitForFunction(()=>/đã có người/.test((document.querySelector('.krk-msg')||{}).textContent||''));ok(true,'duplicate name refused');
+ await shot(C.p,6,'rename');ok((await layout(C.p,'rename')).bad.length===0,'rename layout');
+ await C.p.fill('#krk-in','Lan Quý nhân');await C.p.locator('#krkov [data-krk="save"]').click();await C.p.waitForFunction(()=>rkIdGet().pn==='Lan Quý nhân'&&document.querySelector('#krkov .krk-list'));await C.p.waitForTimeout(600);
+ bd=await board(C.p);ok(bd.rows.some(r=>r.pn==='Lan Quý nhân'&&r.mine),'renamed: shown on the board');
+ /* offline: a life ends without network, is queued, then sent */
+ await C.p.evaluate(()=>rkClose());await C.p.waitForTimeout(1200);await C.ctx.setOffline(true);
+ await newLife(C.p);await endLife(C.p,{rank:4,years:3,danh:40,duc:40});await C.p.waitForTimeout(1500);
+ const off=await C.p.evaluate(()=>({q:rkQ().length,t:document.querySelector('.krk-end').textContent}));ok(off.q===1&&/Mạng đứt/.test(off.t),'offline: life queued, end card says so');
+ await shot(C.p,7,'endcard-offline');
+ await C.p.evaluate(()=>rkOpen('lives'));await C.p.waitForTimeout(1500);const ob=await C.p.evaluate(()=>document.querySelector('#krkov').innerText);ok(/Mạng đứt/.test(ob)&&/chờ gửi/.test(ob),'offline board: last board + waiting note');
+ await shot(C.p,8,'board-offline');await C.p.evaluate(()=>rkClose());
+ await C.ctx.setOffline(false);await C.p.evaluate(()=>dispatchEvent(new Event('online')));
+ const sent=await C.p.waitForFunction(()=>!rkQ().length&&/đứng hạng/.test(document.querySelector('.krk-end').textContent)?document.querySelector('.krk-end').textContent:null,null,{timeout:30000}).then(h=>h.jsonValue()).catch(()=>null);
+ ok(!!sent&&/hạng 3 trên 5/.test(sent),'back online: sent, '+sent);
+ /* A sees C's new best life above A's second life; A's own rows marked */
+ await openBoard(A.p,'lives');bd=await board(A.p);ok(bd.rows.length===5&&sorted(bd.rows)&&bd.rows.filter(r=>r.mine).length===2,'A: 5 lives, own two marked');
+ /* own row shown when outside the top (n=2 board) */
+ const outside=await C.p.evaluate(async u=>{const r=await fetch(u+'/top/lives?n=1&gid='+rkIdGet().gid).then(r=>r.json());return r.rows.length===1&&r.mine&&r.mine.r>1},RURL);ok(outside,'own best life returned even outside the top');
+ }
+ /* old save from the published build (no guest id, no S.rk) */
+ if(OLD){const O=await b.newContext({viewport:{width:W,height:H}});const op=await O.newPage();await op.goto(OLD,{waitUntil:'domcontentloaded'});await op.waitForTimeout(3000);
+  const sv=await op.evaluate(()=>{SLOT=2;document.getElementById('title').hidden=true;start();if(typeof nlAccept==='function'&&typeof NLP!=='undefined'&&NLP)nlAccept(false);Q.length=0;save();return localStorage.getItem(SK(2))});await O.close();
+  const N=await mk('old');await N.p.evaluate(s=>{localStorage.clear();localStorage.setItem(SK(2),s)},sv);await N.p.reload({waitUntil:'domcontentloaded'});await N.p.waitForTimeout(2500);
+  const st=await N.p.evaluate(()=>{SLOT=2;const d=loadSlot(2);if(!d)return{none:1};$('slots').querySelector('[data-load="2"]').click();return{had:!!d.S.rkGid}});await N.p.waitForTimeout(1500);
+  const ld=await N.p.evaluate(()=>({name:S&&S.name,gid:rkIdGet().gid,rk:!!S.rk}));ok(!st.had&&ld.name&&/^[a-z0-9]{24}$/.test(ld.gid)&&ld.rk,'old save loads, guest id made, life tracking baseline');
+  await N.p.evaluate(()=>{Q.length=0;$('modal').hidden=true});await endLife(N.p,{rank:3,years:2});ok(/đứng hạng/.test(await endRank(N.p)),'old save life ends and is ranked');await N.ctx.close()}
+ ok(errs.length===0,'no page errors '+JSON.stringify(errs.slice(0,5)));
+ console.log(fails.length?`${fails.length} FAILED`:'ALL OK');await b.close();process.exit(fails.length?1:0)})();

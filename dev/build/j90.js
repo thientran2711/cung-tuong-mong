@@ -10,6 +10,8 @@
      kitPodium(list, o)        -> HTML of the stage (no overlay)
      kitPodiumShow(list, o)    -> mounts the overlay; o = {title, sub, next:"Tiếp", onNext()}; returns the element (null if < 2 entrants)
      list = [{who:person, score:75 | "75 phần", place:1, prize:"Phong Tần" | [["Sủng",8],["Danh",3]], sub:"Xuất sắc"}]  (sorted by place,
+            optional per entry (Bảng vinh danh, jrank: people of other players): fig (full-body src), face (pframe face for the fallback),
+            nameH (plaque name HTML), you (tag text when mine)
             else by score; only the first three stand on the dais; her own place is named under it when she is not in the top three)
      A Q item carrying a podium list (non-enumerable, `kitPodiumTag(item, list, o)`) shows the podium first, then the panel.
    Wired here for the whole group: every contest result of j82 startContest (j71 contests, festivals, lessons with rivals),
@@ -24,14 +26,14 @@ function kpodNorm(list){const L=(list||[]).filter(x=>x&&x.who).map(x=>Object.ass
 function kpodPrize(pz){if(!pz)return"";if(typeof pz==="string")return `<span class="kpod-pz">${pz}</span>`;
  if(Array.isArray(pz))return `<span class="kchips">${pz.filter(x=>x&&x[1]).map(x=>kitChip(x[0],x[1])).join("")}</span>`;return""}
 function kpodName(p){if(!p)return"";if(!kitIsKnown(p))return `<b class="kname" style="--rc:#7a7e84">Người lạ</b>`;return p===S?kitName(S,{named:true}):kitName(p)}
-function kpodCol(x){const p=x.who,i=x.place-1,known=kitIsKnown(p),src=kitFigOf(p);
+function kpodCol(x){const p=x.who,i=x.place-1,own=x.fig!==undefined,known=own||kitIsKnown(p),src=own?x.fig:kitFigOf(p);
  const fig=src?`<img class="kpod-img${known?"":" kpod-unk"}" src="${src}" alt="" draggable="false" onerror="kitImgErr(this,{sel:'.kpod-fig',cls:'kpod-nofig'})">`:"";
- const fb=`<span class="kpod-fb">${kitPortrait(p,{size:"lg"})}</span>`;
+ const fb=`<span class="kpod-fb">${x.face?pframe(x.face):kitPortrait(p,{size:"lg"})}</span>`;
  const sc=x.score==null||x.score===""?"":typeof x.score==="number"?`${x.score} phần`:x.score;
  return `<div class="kpod-col kpod-p${i+1}${p===S||x.mine?" kpod-me":""}" style="--d:${[1.8,1.0,.3][i]}s">`+
-  `<div class="kpod-fig${src?"":" kpod-nofig"}"><span class="kpod-pool" aria-hidden="true"></span>${fig}${fb}<span class="kpod-beam" aria-hidden="true"></span><span class="kpod-motes" aria-hidden="true">${"<i></i>".repeat([5,4,3][i])}</span>${p===S||x.mine?`<span class="kpod-you">${p===S?"Ngươi":"Con ngươi"}</span>`:""}</div>`+
+  `<div class="kpod-fig${src?"":" kpod-nofig"}"><span class="kpod-pool" aria-hidden="true"></span>${fig}${fb}<span class="kpod-beam" aria-hidden="true"></span><span class="kpod-motes" aria-hidden="true">${"<i></i>".repeat([5,4,3][i])}</span>${p===S||x.mine?`<span class="kpod-you">${x.you||(p===S?"Ngươi":"Con ngươi")}</span>`:""}</div>`+
   `<div class="kpod-step"><span class="kpod-medal"><img src="${KIT_DIR}medal-${i+1}.webp" alt="" onerror="this.remove()"><b>${KPOD_WORD[i]}</b></span>`+
-  `<span class="kpod-plq">${kpodName(p)}${x.sub?`<small class="kpod-sub">${x.sub}</small>`:""}${sc?`<small class="kpod-sc">${sc}</small>`:""}${kpodPrize(x.prize)}</span></div></div>`}
+  `<span class="kpod-plq">${x.nameH||kpodName(p)}${x.sub?`<small class="kpod-sub">${x.sub}</small>`:""}${sc?`<small class="kpod-sc">${sc}</small>`:""}${kpodPrize(x.prize)}</span></div></div>`}
 function kitPodium(list,o){o=o||{};const L=kpodNorm(list);const top=L.slice(0,3);const me=L.find(x=>x.who===S);
  const cols=[top[1],top[0],top[2]].filter(Boolean).map(kpodCol).join("");
  const mine=me&&me.place>3?`<div class="kpod-mine">${kitFaceH(S,"xs")}<span>Ngươi đứng thứ ${me.place} trong ${L.length} người${me.score!=null?` · ${typeof me.score==="number"?me.score+" phần":me.score}`:""}</span></div>`:"";
