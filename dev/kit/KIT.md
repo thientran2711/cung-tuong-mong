@@ -1429,3 +1429,36 @@ Tested 755x1000@2, 1180x820@2, 1366x1024@2, 686x880@2.2, 412x1058@2, 390x844@3, 
   waits; if one opens during the 3 s the card goes away and waits again. In the background with nothing open it reopens unseen.
   On the first-entry loading screen it reopens at once (the loading resumes file by file).
 - Wording: "bản mới", "mở bản mới"; never "tải lại trang", "phiên bản", "cập nhật hệ thống" (VANPHONG §3).
+
+## 36. LỜI DẶN TÂN THỦ · kitCoach (spotlight) + kitTip (owner 11/15 03:55Z "hướng dẫn tân thủ") — `dev/build/jtut.js` (before j84) — awaiting kit review
+ONE look for every teaching moment: the kit panel (`.dlg.kpanel[data-kind=guide]`, `kpHeader("guide",…)`, seal **LỜI DẶN** `.kp-guide` in the
+ma ma token colour `#a0584a`), the guide's portrait in the kit frame (`pcPort`, role mama rank 3), body `.ktut-say` (kit text, `kitRows` for
+legends), buttons `.kbtn` / `.kbtn.alt`. No private frame, no new art.
+- **Guide** = Quế ma ma: an existing ma ma painting (`img/FIGURES-servants.json` role mama, age band a51 → a36), the first mama identity nobody
+  in this kiếp wears (`S.fidUsed`, reserved as `S.tutFid`; one face per person). Speech per VANPHONG §2: "nô tỳ" + "tiểu chủ" (Tần and up
+  "nương nương"; cung nữ road "ta" + "ngươi"); "chạm", "mục"; no %, no chữ Hán, no foreign words.
+- `kitCoach({title, sub, html, target, pad, interact, marks:[el|fn], side, big, btns:[{k,t,alt}], on(k)})` → `#ktut` (fixed, z 9300):
+  the target stays bright inside a gold ring (`.ktut-hole`: 3 px `#f0d070` + soft glow, the rest of the screen `rgba(30,18,10,.58)`);
+  `marks` = extra gold rings with no hole (the tab button of the step). The card goes below / above / beside the target (the side with room);
+  a target too big for that (a whole panel) gets the card at its lower edge, above the tab bar. A step that asks for a tap (`interact`) lets
+  taps through the hole only and never puts the card over the target; every other step takes all taps outside the card. Re-measured on
+  resize, rotation, scroll and every 140 ms while open (the hole follows a target that moves: page turn, map unroll, re-render). No target =
+  centred card on a plain dim. Reduced motion / Cảnh động off (`kmReduced`): no slide of the hole, no card rise.
+- `kitTip({id, title, html})` → `.ktip` above the tab bar (`#tabs` / `#next` / `.kloadchip`, like the "Có bản mới" card): small portrait,
+  1–3 sentences, one `.kbtn` "Đã hiểu". Only the card takes taps; it never opens over a dialog, the menu, a motion moment, the week book or a
+  mini game (it waits), and a dialog that opens hides it until the dialog is gone. One at a time, 1.5 s apart, each id once per device.
+- **Lượt dẫn đầu kiếp** (`KTUT_STEPS`, "lời dặn n/12"): 1 Lời chào (centred) · 2 Thanh trên cùng `#kstrow` · 3 Buổi · khắc · quẻ tuần `#k3tt` ·
+  4 Đọc một thẻ việc (a quiet act card she can do now) · 5 Làm thử (tap the lit card; real act) → Thẻ kết quả `#rtoast` (kept open while
+  explained) · 6 Dư đồ (a reachable place label) · 7 Hậu cung `.ksub` (Phi tần · Giao tình · Phe phái) · 8 Cung nhân · 9 Tư trang · 10 Sổ ghi
+  (inside Mệnh truyện) · 11 Ghi sổ · Nạp sổ `#menu` · 12 Qua buổi `#next` ("Đã hiểu"). Steps whose tab is not on screen (cung nữ road) are left out.
+  "Tiếp" / "Bỏ qua lời dặn" on every card; the tour pauses (hides) while a dialog, the menu or a moment is up and resumes after.
+- **When**: the first kiếp on the device starts it after "Nhập cung"; an old player (a Sổ luân hồi entry, another sổ, or a sổ already in play,
+  and nothing recorded on this device) gets ONE question card "Lời dặn tân thủ" (Không cần / Nghe ma ma dặn). ☰ → **Xem lại lời dặn**
+  (`.kbtn.alt.ktutb`, only with a kiếp in play) replays it. Thiết lập → kit switch **Lời dặn tân thủ** (`OPT.tut`, `#o-tut`) turns the tour
+  and the tips on/off. State: device `localStorage hclh-tut` {tour, asked, seen{}} + `S.tutTour` in the sổ (an old sổ loads unchanged).
+- **Lời dặn lần đầu** (`KTUT_TIPS`): first open of Hành sự, Dư đồ, Phi tần, Giao tình, Phe phái, Cung nhân, Hoàng tự, Tư trang, Tài nghệ,
+  Mệnh truyện, Sổ ghi (tabs the tour showed count as seen); quẻ đầu tuần; trò nhỏ; mưu kế (category / person-card harm tabs); thị tẩm;
+  có thai; tuyển tú; tranh ghế; lãnh cung; luân hồi (a new kiếp after a past one); chơi cùng bạn. Facts only from the game (KIT_GLOSS, code).
+- Off for `window.__bot` / `quiet` and for automated browsers (`navigator.webdriver`) unless `localStorage hclh-tut-test = "1"` or `?tut=1`:
+  measure bots and screenshot scripts are never blocked. Co-op: all local to each machine; nothing in the shared world waits for it.
+- Test: `node dev/test/tutorial.js <url> WxH@dpr <outdir>` (whole tour, skip midway, replay from ☰, old sổ). Shots: `dev/shots/tutorial/`.
