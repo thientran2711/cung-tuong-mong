@@ -19,12 +19,12 @@ function menStat(k){if(!S)return;S.menStat=S.menStat||{};S.menStat[k]=(S.menStat
 function menNmFull(m){try{return k61Named(m)?m.name:k61Desc(m)}catch(e){return m.name}}
 function menVT(v){if(!v)return"";if(v===S)return"ngươi";try{return k61Named(v)?`${rkName(v)} ${v.name}`:k61Desc(v)}catch(e){return v.name}}
 const menCap=s=>s?s[0].toUpperCase()+s.slice(1):s;
-/* four named guards share the two guard pictures (coordinator 11/15: many guards may share the 2 looks) */
+/* four named guards, one picture each: guard i -> thive-(i+1) (owner 11/15: 4 looks thive-1..4); index-based so old saves that cached a shared look are re-mapped */
 function menGuards(){return (S.men||[]).filter(m=>m.rw==="thị vệ")}
 (function(){const m0=menInit;menInit=function(){const r=m0.apply(this,arguments);try{if(S&&S.men&&!S.menG2){S.menG2=1;const sur=["Chu","Hà","Lâm","Ninh","Phan","Từ"];
   for(let i=0;i<3;i++){const id="m"+(S.men.length);S.men.push({id,role:"Thị vệ",rw:"thị vệ",haunts:["thu","dtd"],age:20+R(14),name:`Thị vệ ${pick(sur)} ${pick(MALEN)}`,trait:pick(MTR),loyal:40+R(50),af:0,tinh:0,letters:0,trysts:0,alive:true,knowsMe:[]})}}}catch(e){}return r}})();
 (function(){if(typeof figPick!=="function")return;const f0=figPick;figPick=function(who){try{if(S&&who&&who.rw==="thị vệ"&&(S.men||[]).includes(who)){const M=FIGIX.man||{};const ks=Object.keys(M).filter(k=>/thive/.test(k)).sort();
-  if(ks.length){if(who.fid&&M[who.fid])return who.fid;const i=menGuards().indexOf(who);who.fid=ks[Math.max(0,i)%ks.length];return who.fid}}}catch(e){}return f0.apply(this,arguments)}})();
+  if(ks.length){const i=menGuards().indexOf(who);if(i>=0){who.fid=ks[i%ks.length];return who.fid}if(who.fid&&M[who.fid])return who.fid}}}catch(e){}return f0.apply(this,arguments)}})();
 
 /* ---------- 1. who is where this buổi, and why ---------- */
 function menHcPal(v){const k=palaceOf(v);return k==="home"?null:k}
