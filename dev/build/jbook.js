@@ -128,7 +128,7 @@ function kitCurlRun(c,from,to,dur,done,ease){ease=ease||kitCurlEase;const t0=per
    perspective, a small tilt and skew near mid-turn (paper feel), shading on each face, and a soft shadow on the page underneath.
    Per frame only transform/opacity change. */
 function kitSheetTurn(o){o=o||{};const host=o.host,w=Math.max(40,o.w|0),h=Math.max(40,o.h|0),back=(o.dir||1)<0;
- const root=document.createElement("div");root.className="kst";root.style.cssText=`width:${w}px;height:${h}px;perspective:${Math.round(Math.max(1400,w*2.6))}px;perspective-origin:${back?w:0}px 45%`;
+ const root=document.createElement("div");root.className="kst";root.style.cssText=`width:${w}px;height:${h}px;perspective:${Math.round(Math.max(2200,w*4))}px;perspective-origin:${back?w:0}px 45%`;
  const ctxWrap=m=>{if(!o.ctx)return m;const d=document.createElement("div");d.className=o.ctx.className+" kcl-ctx";d.appendChild(m);return d};
  const gs=document.createElement("i");gs.className="kst-gs";if(back){gs.style.left="auto";gs.style.right="0";gs.style.transform="scaleX(-1)"}
  const sheet=document.createElement("div");sheet.className="kst-sheet";sheet.style.cssText=`width:${w}px;height:${h}px;transform-origin:${back?w:0}px 50%`;
@@ -143,7 +143,7 @@ function kitSheetTurn(o){o=o||{};const host=o.host,w=Math.max(40,o.w|0),h=Math.m
  function set(p){p=Math.max(0,Math.min(1,p));last=p;const s=Math.sin(Math.PI*p);
   /* the back face follows the live new page's scroll (it may still settle while the sheet turns) */
   for(const [a,b] of B.lk){if(b.scrollTop!==a.scrollTop)b.scrollTop=a.scrollTop}
-  const ang=sg*180*p,tilt=sg*-5*s,skew=sg*2.6*s,lift=-0.018*h*s;
+  const ang=sg*180*p,tilt=sg*-4*s,skew=sg*2.2*s,lift=-0.012*h*s;
   sheet.style.transform=`translateY(${lift.toFixed(2)}px) rotateZ(${tilt.toFixed(3)}deg) rotateY(${ang.toFixed(3)}deg) skewY(${skew.toFixed(3)}deg)`;
   /* face shading: the front darkens as it turns away from the light, the back lightens as it lands */
   F.sh.style.opacity=Math.min(1,p*1.9).toFixed(3);B.sh.style.opacity=Math.min(1,(1-p)*1.9).toFixed(3);
@@ -372,7 +372,7 @@ html body .kst .kcl-ctx{display:block!important;position:absolute!important;inse
 html body .kst .kcl-ctx>*{position:absolute!important;inset:0!important;width:auto!important;height:auto!important;max-height:none!important;margin:0!important;transform:none!important;visibility:visible!important}
 .kcl-host{position:fixed;z-index:40;pointer-events:none;
  /* the turning page never rises above the page area (stays under the top bar); it may still swing out sideways over the left page */
- clip-path:polygon(-6000px 0,6000px 0,6000px 6000px,-6000px 6000px)}
+ clip-path:polygon(-6000px 0,6000px 0,6000px calc(100% + 3px),-6000px calc(100% + 3px))}
 .kcl-in{animation:kcl-in .3s ease-out}@keyframes kcl-in{from{opacity:0}to{opacity:1}}
 @media (prefers-reduced-motion:reduce){.kleather.kl-unroll,.kl-unroll>.kl-roll,.kcl-in{animation:none}}
 /* ===== the live game as an open BOOK (owner 11/14 approval, 11/15 priority) — kitBookLive =====

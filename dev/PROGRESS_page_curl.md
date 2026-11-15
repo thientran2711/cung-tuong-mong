@@ -42,6 +42,10 @@ Nhánh `review/page-curl` từ origin/review/fold-layout (đã gộp tới e7deb
 - 15/11 (chủ: "chỗ lật trang, ảnh trang sau không hiện lên"): trang mới vẽ sẵn bên dưới, bản chụp trang cũ cong đi ở trên;
   góc nhấc cao hơn (lift .42h, lật tab .5h) và nhịp "búng" kitCurlLift (1−(1−t)^1.6) nên trang sau lộ ngay từ những khung đầu;
   mặt sau tờ giấy trơn có bóng chữ ngược mờ (ghost .075) khi lật tab. Sổ tuần và lật lùi dùng cùng nhịp.
+- 15/11 muộn (chủ chê lật góc, mẫu app binder 1115-turn-ref-*): đổi tab = CẢ TỜ quay quanh gáy (kitSheetTurn: một tờ hai mặt
+  preserve-3d, mặt trước = trang cũ, mặt sau = trang mới, chữ in trên tờ nên quay/nghiêng theo tờ; nghiêng nhẹ + skew giữa lượt,
+  bóng trên trang dưới; 760 ms; cắt trên/dưới khung trang). Bản sao (kclPrep) bỏ mọi id (gộp book-release) và tự mang bố cục tính sẵn.
+  Sổ tuần vẫn dùng kitCurl (góc gấp, mặt sau = trang kế).
 
 ## Kiểm thử (Playwright)
 - page-curl: 1180x820@2, 1366x1024@2, 686x880@2.2, 755x1000@2 — không lỗi trang, không tràn ngang, giảm chuyển động = không cong (mờ chéo).
