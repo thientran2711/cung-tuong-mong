@@ -35,7 +35,7 @@ const fs=require('fs');
    const chipsTop=[...document.querySelectorAll('#k3tt [data-k3="tsnh"],#k3tt [data-k3="tsxp"]')].length;
    /* FAIL 3/4: words and strangers */
    const qm=/\?\?\?/.test(mt),thien=/thiện cảm/.test(mt),lui=[...(M?M.querySelectorAll('button'):[])].filter(b=>b.offsetParent&&/^(Lui|Thôi|Đã hiểu)$/.test(b.textContent.trim())).length;
-   const grey=M&&!M.hidden?[...M.querySelectorAll('img')].filter(i=>i.offsetParent&&/unknown-fig|kit\/unknown/.test(i.src)).length:0;
+   const grey=M&&!M.hidden?[...M.querySelectorAll('img')].filter(i=>i.offsetParent&&/unknown-fig|kit\/unknown/.test(i.src)).map(i=>{const f=i.closest('figure,.kesf,.kpsubj,.kfact,.md');return (f&&f.textContent.trim().slice(0,30))||i.src.split('/').pop()}):[];
    return{overflowX:document.documentElement.scrollWidth>vw,cut:cut.slice(0,5),tileRows,hudH:hud?Math.round(hud.getBoundingClientRect().height):0,dateLines:dl,chipsOnTopBar:chipsTop,qm,thien,lui,grey}});
   await p.screenshot({path:`${OUT}/${TAG}-${k}.jpg`,type:'jpeg',quality:80});R.push(Object.assign({k},r));};
  const R=[];
