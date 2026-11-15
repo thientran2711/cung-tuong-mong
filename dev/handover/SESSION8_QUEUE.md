@@ -6,7 +6,7 @@ CDN uploads OK again (owner saved the Cloudflare token; R2 verified). Use CLOUDF
 ## A. Reviewers (HANDOVER_TO_SESSION8 §2, priority order)
 | # | Branch | Status |
 |---|---|---|
-| A1 | review/j59-fix (+ r1 WIP) | RUNNING wave 1 |
+| A1 | review/j59-fix → r1 PASS 48a1c58d3 | LIVE |
 | A2 | review/fxkit → r1 PASS f012058f3 | LIVE |
 | A3 | review/small-bugs-3 | RUNNING wave 1 |
 | A4 | review/fix-float → r9 PASS 7ba53114d | LIVE (main fast-forwarded) |
@@ -100,3 +100,4 @@ j72 bước vs Hồi · stage paper halo · Thái hậu title bronze vs plum · 
 | D52 | skin-match audit of 7347 never-measured figures (plan in PROGRESS_review-skin-match.md; worktree /home/user/wt/skin cache) | QUEUED |
 | C40 | review/actcard-one (owner s8 APPROVED: tap picture → big + more info; tap odds label or "!" → why-detail; one compact act card, picture RECTANGLE portrait 3:4 left, EQUAL card sizes; tap to enlarge) | QUEUED-NEXT |
 | C41 | review/tuduc-mg (owner s8: Tứ đức minigames missing → 4 games Công/Dung/Ngôn/Hạnh, easy rules) | QUEUED-NEXT |
+| C42 | review/evidence-truth (owner s8: evidence only for real deeds; clean player safe; frame scheme separate; news one fact per line) | QUEUED-NEXT (high) |
