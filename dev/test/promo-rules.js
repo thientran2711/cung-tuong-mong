@@ -76,7 +76,7 @@ const clearOv=p=>p.evaluate(()=>{document.querySelectorAll('.kmov').forEach(e=>e
    ok(ns.pass>0&&ns.fail>0&&ns.same,'NPC servants roll the exam (both outcomes, seeded = same on both co-op clients)',JSON.stringify(ns));
    await boot(p,URL)}
   /* every size: chest, person reveal, rank-down */
-  const shot=async n=>{const m=await p.evaluate(()=>{const o=document.querySelector('.kmov:last-of-type')||document.body;const sw=document.documentElement.scrollWidth-innerWidth;const bt=o.querySelector('[data-km-close]');const br=bt&&bt.getBoundingClientRect();
+  const shot=async n=>{const m=await p.evaluate(()=>{const o=[...document.querySelectorAll('.kmov')].pop()||document.body;const sw=document.documentElement.scrollWidth-innerWidth;const bt=o.querySelector('[data-km-close]');const br=bt&&bt.getBoundingClientRect();
     const clip=[...o.querySelectorAll('b,small,p,button,.kprev-n')].filter(e=>e.offsetParent&&e.scrollWidth>e.clientWidth+2).map(e=>e.textContent.slice(0,24)).slice(0,3);
     const im=o.querySelector('.kprev-img');const fig=o.querySelector('.kprev-fig');const fr=fig&&fig.getBoundingClientRect(),ir=im&&im.getBoundingClientRect();
     return{sw,btn:bt?(br.bottom<=innerHeight+1&&br.top>=0):null,clip,fig:fr?Math.round(fr.height):null,img:ir?Math.round(ir.height):null}});
