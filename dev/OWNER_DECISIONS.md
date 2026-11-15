@@ -831,3 +831,8 @@ All must work in co-op.
 - Screenshot dev/handover/refs/owner-stage-fig-huge.jpg (VIỆC "Thái hậu chê dung nhan", tablet portrait): the left figure column takes ~60 % of the dialog with a huge full-body Thái hậu; KIT §32.2 says figure column 36 % (Fold) / ~170 px of a 470 px dialog (iPad), figure ≤ 40 dvh → the kit cap is not enforced on this dialog.
 - Coordinator answer to "how many shared pop-up kits": ONE panel frame (KIT §8 kpanel) for every pop-up; inside it the subject is shown one of two ways — small 3:4 portrait (.kpsubj) or the event stage full-body figure column (§32.2 kitEventStage); plus the separate person-card modal (pcard), mini-game frame (§13) and scene panel (§14).
 - Decision: enforce §32.2 on EVERY event dialog: figure column capped (36 % / ~170 px), and when height is short CROP the figure (owner: cutting the skirt is fine — show head to knees/waist, face always fully in view) instead of growing the column or shrinking the face. Whole family scan of all dialogs with a stage figure at all viewports. → worker review/stage-fig-size.
+
+## 15/11 (session 8) — Badly drawn hands on the "Thỉnh an Hoàng hậu" act picture (owner screenshot)
+- Owner (verbatim): "Vẽ tay kì vậy."
+- Screenshot dev/handover/refs/owner-bad-hands-thinhan-hh.jpg (Hành sự card "Thỉnh an Hoàng hậu", Lễ nghi picture: folded hands are malformed).
+- Decision: redraw that picture (Magnific gpt-2-6) with clean, natural hands; AND audit EVERY act/event picture for malformed hands/fingers (look at each; list + redraw the bad ones). → added to review/act-pics2 worker scope (it is already redrawing act pictures).

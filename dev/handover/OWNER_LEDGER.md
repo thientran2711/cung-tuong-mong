@@ -2,7 +2,7 @@
 Written by the session-8 ledger sweep (queue item C10), 15/11. Coordinator keeps it current: when a row changes state, edit the row.
 
 ## How to read
-- Source refs: `OD:Lnnn` = line in dev/OWNER_DECISIONS.md (docs branch claude/cung-tuong-mong-handover-hj0h8w, as of commit d0ff440c); `H8` = dev/handover/HANDOVER_TO_SESSION8.md; `H7` = HANDOVER_TO_SESSION7.md; `PM` = HANDOVER_1115_PM.md; `AM` = HANDOVER_1115.md; `HO` = dev/HANDOVER.md; `KR` = dev/kit/KIT_REQUESTS.md; `Q` = dev/handover/SESSION8_QUEUE.md (A/B/C/D ids).
+- Source refs: `OD:Lnnn` = line in dev/OWNER_DECISIONS.md (docs branch claude/cung-tuong-mong-handover-hj0h8w, as of commit 1a898bce); `H8` = dev/handover/HANDOVER_TO_SESSION8.md; `H7` = HANDOVER_TO_SESSION7.md; `PM` = HANDOVER_1115_PM.md; `AM` = HANDOVER_1115.md; `HO` = dev/HANDOVER.md; `KR` = dev/kit/KIT_REQUESTS.md; `Q` = dev/handover/SESSION8_QUEUE.md (A/B/C/D ids).
 - Status:
   - **LIVE** = on origin/main (main = f53bdade0 at sweep time), checked with `git grep` on origin/main (`dev/build/j*.js`, assemble.py list) and the LIVE notes in the handovers. "(verify)" = code present but the exact owner detail was not re-tested by this sweep.
   - **BRANCH** = done or in progress on a review/* branch, not on main. Branch state from `gh api compare main...<branch>` (ahead/behind) + its PROGRESS / last commit.
@@ -358,6 +358,8 @@ Written by the session-8 ledger sweep (queue item C10), 15/11. Coordinator keeps
 | 223 | Label/value rows in one block share one label column | OD:L812–815 | BRANCH review/row-align (Q C14, running) | |
 | 224 | Mood dialog picture per mood + icon corner; title with rank | OD:L817–821 | BRANCH review/mood-dialog (Q C15, running) | |
 | 225 | Tap any item cell → kit item-detail; wear via button | OD:L823–826 | BRANCH review/item-info (Q C16, running) | |
+| 226 | Correction: mood dialog picture = the CAUSE event's picture (e.g. tấn phong), per-mood pictures only as fallback; icon in a corner | OD:L827 | BRANCH review/mood-dialog (Q C15, running) | |
+| 227 | Event dialog figure column capped per KIT §32.2 on every dialog; crop the figure (skirt OK, face always whole) instead of growing | OD:L829–833 | BRANCH review/stage-fig-size (Q C17, running) | |
 
 ## 4. Older / handover-only items still open
 | Ask | Src | Status | Where |
