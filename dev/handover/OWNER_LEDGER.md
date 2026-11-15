@@ -2,7 +2,7 @@
 Written by the session-8 ledger sweep (queue item C10), 15/11. Coordinator keeps it current: when a row changes state, edit the row.
 
 ## How to read
-- Source refs: `OD:Lnnn` = line in dev/OWNER_DECISIONS.md (docs branch claude/cung-tuong-mong-handover-hj0h8w, as of commit 1a898bce); `H8` = dev/handover/HANDOVER_TO_SESSION8.md; `H7` = HANDOVER_TO_SESSION7.md; `PM` = HANDOVER_1115_PM.md; `AM` = HANDOVER_1115.md; `HO` = dev/HANDOVER.md; `KR` = dev/kit/KIT_REQUESTS.md; `Q` = dev/handover/SESSION8_QUEUE.md (A/B/C/D ids).
+- Source refs: `OD:Lnnn` = line in dev/OWNER_DECISIONS.md (docs branch claude/cung-tuong-mong-handover-hj0h8w, as of commit 10cec521); `H8` = dev/handover/HANDOVER_TO_SESSION8.md; `H7` = HANDOVER_TO_SESSION7.md; `PM` = HANDOVER_1115_PM.md; `AM` = HANDOVER_1115.md; `HO` = dev/HANDOVER.md; `KR` = dev/kit/KIT_REQUESTS.md; `Q` = dev/handover/SESSION8_QUEUE.md (A/B/C/D ids).
 - Status:
   - **LIVE** = on origin/main (main = f53bdade0 at sweep time), checked with `git grep` on origin/main (`dev/build/j*.js`, assemble.py list) and the LIVE notes in the handovers. "(verify)" = code present but the exact owner detail was not re-tested by this sweep.
   - **BRANCH** = done or in progress on a review/* branch, not on main. Branch state from `gh api compare main...<branch>` (ahead/behind) + its PROGRESS / last commit.
@@ -11,7 +11,7 @@ Written by the session-8 ledger sweep (queue item C10), 15/11. Coordinator keeps
   - **CLOSED** = dropped, reversed, superseded or answered by the owner.
 - Important finding of this sweep: 14 owner-approved features from 14/11–15/11 were built on branches that were NEVER merged and are in no session-8 list (schedules/roster j95, palace detail map + residence paintings, difficulty modes, succession choice, routes, scheme minigames, tutorial, leaderboard + Bảng vàng podium, drag page-curl, lost items/theft, appearance overlays + allergy, bad-weather risks, places plan, collection milestones). They are now D29–D49. Most branches are ~600–1100 commits behind main and need a re-port (worker on top of the branch, merge current main, re-test), not a plain review.
 
-- Counts (rows of §2–§4, primary status): 337 rows · LIVE 199 · BRANCH 56 · NOT DONE 67 (incl. 2 partial) · CLOSED 9 · RULE 4 · open question 1 · housekeeping 1. Plus 22 standing rules in §1. UNASSIGNED list (§7): 49 items = D1–D28 (already queued) + D29–D49 (new).
+- Counts (rows of §2–§4, primary status): 338 rows · LIVE 199 · BRANCH 57 · NOT DONE 67 (incl. 2 partial) · CLOSED 9 · RULE 4 · open question 1 · housekeeping 1. Plus 22 standing rules in §1. UNASSIGNED list (§7): 49 items = D1–D28 (already queued) + D29–D49 (new).
 
 ## 1. Standing rules (RULE — apply in every task)
 | Rule | Src |
@@ -362,6 +362,7 @@ Written by the session-8 ledger sweep (queue item C10), 15/11. Coordinator keeps
 | 225 | Tap any item cell → kit item-detail; wear via button | OD:L823–826 | BRANCH review/item-info (Q C16, running) | |
 | 226 | Correction: mood dialog picture = the CAUSE event's picture (e.g. tấn phong), per-mood pictures only as fallback; icon in a corner | OD:L827 | BRANCH review/mood-dialog (Q C15, running) | |
 | 227 | Event dialog figure column capped per KIT §32.2 on every dialog; crop the figure (skirt OK, face always whole) instead of growing | OD:L829–833 | BRANCH review/stage-fig-size (Q C17, running) | |
+| 228 | Redraw Thỉnh an Hoàng hậu act picture (bad hands) + audit every act/event picture for malformed hands | OD:L835–838 | BRANCH review/act-pics2 (Q C4) | |
 
 ## 4. Older / handover-only items still open
 | Ask | Src | Status | Where |
