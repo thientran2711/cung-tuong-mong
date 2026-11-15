@@ -36,7 +36,7 @@ function kbkExpand(blocks,skip){const out=[];for(const b of (blocks||[])){if(!b)
 function kitBook(spec){spec=spec||{};const rm=()=>{try{return reducedMotion()}catch(e){return false}};
  const root=document.createElement("div");root.className="kbk";root.setAttribute("role","dialog");root.setAttribute("aria-label",spec.label||"Tuần lục");
  for(const k of Object.keys(KBK_ART))if(KBK_HAVE[k])root.classList.add("art-"+k);
- root.innerHTML=`<div class="kbk-stage"><div class="kbk-book"></div></div><div class="kbk-bar"><button class="kbk-nav kbk-prev" aria-label="Trang trước">‹</button><span class="kbk-no" aria-live="polite"></span><button class="kbk-nav kbk-next" aria-label="Trang sau">›</button><button class="kbtn alt kbk-x">${spec.closeLabel||"Lui"}</button></div><div class="kbk-measure" aria-hidden="true"></div>`;
+ root.innerHTML=`<div class="kbk-stage"><div class="kbk-book"></div></div><div class="kbk-bar"><button class="kbk-nav kbk-prev" aria-label="Trang trước">‹</button><span class="kbk-no" aria-live="polite"></span><button class="kbk-nav kbk-next" aria-label="Trang sau">›</button></div><button type="button" class="kit-x kbk-x" aria-label="${spec.closeLabel||"Đóng"}" title="${spec.closeLabel||"Đóng"}">✕</button><div class="kbk-measure" aria-hidden="true"></div>`;
  (spec.host||document.body).appendChild(root);
  const book=root.querySelector(".kbk-book"),stage=root.querySelector(".kbk-stage"),meas=root.querySelector(".kbk-measure"),noEl=root.querySelector(".kbk-no");
  let mode="single",PW=0,PH=0,leaves=[],sheets=[],cur=0,maxCur=0,busy=false,closed=false,logical=0;
@@ -157,6 +157,9 @@ function kitBook(spec){spec=spec||{};const rm=()=>{try{return reducedMotion()}ca
  book.addEventListener("pointerup",endDrag);book.addEventListener("pointercancel",endDrag);
  root.querySelector(".kbk-next").onclick=e=>{e.stopPropagation();next()};root.querySelector(".kbk-prev").onclick=e=>{e.stopPropagation();prev()};
  root.querySelector(".kbk-x").onclick=e=>{e.stopPropagation();close()};
+ /* KIT 32.10: a tap on the ground around the book closes it (press started there and did not move; a page drag never closes) */
+ {let dn=null;const gr=t=>t===root||t===stage;root.addEventListener("pointerdown",e=>{dn=gr(e.target)?{x:e.clientX,y:e.clientY,t:Date.now()}:null},true);
+  root.addEventListener("click",e=>{const d=dn;dn=null;if(!d||!gr(e.target)||busy)return;if(Math.hypot(e.clientX-d.x,e.clientY-d.y)>10||Date.now()-d.t>900)return;e.stopPropagation();close()})}
  const key=e=>{if(closed||root.offsetParent===null&&!root.getClientRects().length)return;const k=e.key;
   if(k==="ArrowRight"||k==="PageDown"){e.preventDefault();next()}else if(k==="ArrowLeft"||k==="PageUp"){e.preventDefault();prev()}
   else if(k==="Escape"){e.preventDefault();close()}else if((k==="Enter"||k===" ")&&!e.target.closest("button")){e.preventDefault();if(cur>=maxCur)close();else next()}};
@@ -258,12 +261,14 @@ function kbkMeaning(t){t=String(t||"").replace(/[\s\u00a0]+/g," ").trim();for(co
 function kbkCands(f,ctx,salt){const html=String(f.text||"");const t=kbkFirst(html);const C=[];const add=a=>{for(const x of [].concat(a||[]))if(x&&!C.includes(x))C.push(x)};
  const head=t.split(/[.:·([]/)[0].trim();
  const R=(typeof KIT_ACTS!=="undefined"&&KIT_ACTS.log)||[];
- for(const [re,key] of kbkRules()){if(re.test(t)){if(key!=="-")add(kbkKeySrc(key,salt,t,html));break}}
+ for(const [re,key] of kbkRules()){if(re.test(t)){if(key==="-")return[];add(kbkKeySrc(key,salt,t,html));break}}  /* "-" = a line with no meaning: no picture */
  if(/^Đến /.test(t))add(kbkPlaceArt(t,html));
  let ak="";try{ak=head.length>=3&&typeof kitActKey==="function"?kitActKey(head):""}catch(e){}if(ak)add(`img/act-${ak}.webp`);
  for(const [re,id] of KBK_EVRE)if(re.test(t)){add(kbkEvFiles(id,salt));break}
  try{const cat=kitActCat(head||t);if(((KIT_ACTS||{}).have||[]).includes("act-cat-"+cat))add(`img/act-cat-${cat}.webp`)}catch(e){}
- add(kbkEvFiles(kbkEvId(t,ctx),salt));
+ /* the page default only on the Emperor's / Thái hậu's own pages (a picture of that person); her lines, other people's and the world's get
+    NO picture rather than the same "Có người đến" room on every line (act-pics2 a467 / owner: one meaning = one picture) */
+ if(!C.length&&(ctx==="emp"||ctx==="th"))add(kbkEvFiles(kbkEvId(t,ctx),salt));
  return C}
 /* a picture made for this very line (ACTS.json log rule or act name), "" when only a general one would fit */
 function kbkSpecific(t){t=kbkFirst(t);const R=(typeof KIT_ACTS!=="undefined"&&KIT_ACTS.log)||[];
@@ -347,6 +352,7 @@ function wkBookPages(){const d=wkBookData();const date=kitDate(S.month,S.year,S.
 .kbk-measure{position:absolute;left:-99999px;top:0;visibility:hidden;pointer-events:none;contain:layout style}
 .kbk-measure>.kbk-pg{position:relative;width:100%;height:100%}
 .kbk-stage{display:flex;align-items:center;justify-content:center;width:100%;flex:0 0 auto}
+.kbk>.kbk-x{position:absolute;top:max(10px,env(safe-area-inset-top));right:max(12px,env(safe-area-inset-right));z-index:6;box-shadow:0 2px 8px #2a1a1240}
 .kbk-book{position:relative;width:var(--pw);height:var(--ph);transform-style:flat;touch-action:pan-y;user-select:none;-webkit-user-select:none;transition:transform .55s cubic-bezier(.3,.7,.3,1),opacity .16s}
 .kbk.spread .kbk-book{width:calc(var(--pw) * 2)}
 .kbk.spread .kbk-book.closed{transform:translateX(calc(var(--pw) * -.5))}

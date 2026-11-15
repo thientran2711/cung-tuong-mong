@@ -7,7 +7,7 @@
      bar slot (optional 0–100 bar, kept as an empty slot when there is none, so every cell has the same height)
    Because every cell has the same line boxes and every group starts at the same top, ALL label lines share one baseline and ALL number
    lines share one baseline, across groups (measured by dev/test/kit_dupes.js + the kit sweep).
-   The top bar's two groups (Tư chất | Bạc · Sức · Sủng · Danh) are static markup in p1.html written in this exact form (so early renders
+   The top bar's two groups (owner 15/11 ~17:50Z: LEFT Sắc · Tài · Tâm cơ · Đức · Danh · Sủng | RIGHT Bạc · Sức) are static markup in p1.html written in this exact form (so early renders
    find #hud-bac …); the time block (#k3tt, jk3) uses the same two lines: buổi + khắc dots on the label line, weather + Quẻ on the number line. */
 function kitStatEsc(s){return String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
 function kitStatIcon(icon){if(!icon)return"";if(/[\/.]/.test(icon))return `<img class="ic" src="${icon}" width="14" height="14" alt="" onerror="this.remove()">`;return typeof ic==="function"?ic(icon,14):""}
@@ -24,8 +24,9 @@ function kitStatSet(c,v,o){if(!c)return;o=o||{};const s=c.querySelector(".kstv")
  if(o.title!=null&&c.title!==o.title)c.title=o.title;
  let w=c.querySelector(".kstw");if(o.warn&&!w){w=document.createElement("i");w.className="kstw";c.insertBefore(w,c.querySelector(".kstb"));w.textContent="!"}
  if(w){if(o.warn)w.setAttribute("aria-label",o.warn);else w.remove()}}
-/* kitStatRow([{id,cls,title,cells:[html…]}…],{id,cls}) → HTML: groups side by side, divided by a hairline */
-function kitStatRow(groups,o){o=o||{};return `<div class="kstrow${o.cls?" "+o.cls:""}"${o.id?` id="${o.id}"`:""}>${groups.map(g=>`<div class="kstg${g.cls?" "+g.cls:""}"${g.id?` id="${g.id}"`:""}${g.title?` title="${kitStatEsc(g.title)}"`:""}>${g.cells.join("")}</div>`).join("")}</div>`}
+/* kitStatRow([{id,cls,title,cells:[html…]}…],{id,cls}) → HTML: groups side by side, divided by a hairline. Each group carries --kn = its cell
+   count, so where the row is stretched (two-row bar, phones) every CELL gets the same width whatever the group sizes (6 | 2 on the top bar). */
+function kitStatRow(groups,o){o=o||{};return `<div class="kstrow${o.cls?" "+o.cls:""}"${o.id?` id="${o.id}"`:""}>${groups.map(g=>`<div class="kstg${g.cls?" "+g.cls:""}"${g.id?` id="${g.id}"`:""} style="--kn:${g.cells.length}"${g.title?` title="${kitStatEsc(g.title)}"`:""}>${g.cells.join("")}</div>`).join("")}</div>`}
 window.kitStatCell=kitStatCell;window.kitStatSet=kitStatSet;window.kitStatRow=kitStatRow;
 (function(){const st=document.createElement("style");st.id="kit-stat";st.textContent=`
 :root{--kst-l:15px;--kst-n:21px;--kst-b:4px}
@@ -40,6 +41,8 @@ window.kitStatCell=kitStatCell;window.kitStatSet=kitStatSet;window.kitStatRow=ki
 .kst>.kstb{display:block;align-self:center;width:100%;height:3px;margin:0}
 .kst>.kstb0{visibility:hidden}
 .kst-tile>.kstv:not(.kunk){font-weight:700}.kst-tile>.kstl img.ic,.kst-chip>.kstl img.ic{width:13px;height:13px;vertical-align:-2px}
+/* one-row bar (cells sized to content): a cell wearing the "!" keeps the badge inside its own box (owner 15/11: Danh now follows Đức) */
+@media (min-width:1000px){header.hud:not(.khd2) #kstrow .kst:has(>.kstw){padding-right:12px}}
 .kst>.kstw{position:absolute;left:calc(50% + 1.1em);top:calc(var(--kst-l) + (var(--kst-n) - 13px)/2);font-style:normal;font-weight:800;font-size:.62rem;line-height:13px;color:#fff;background:var(--gold);border-radius:50%;width:13px;height:13px;text-align:center}
 /* the time block: same two line boxes as a stat cell */
 .k3tc .k3tt{display:grid!important;grid-template-rows:var(--kst-l) var(--kst-n) var(--kst-b);gap:0!important;min-width:0}
@@ -67,8 +70,38 @@ html body .game#game.k3ph header.hud>#k3room:not([hidden]){grid-area:room}
  html body .game#game.k3ph header.hud:has(#k3room:not([hidden])){grid-template-columns:auto minmax(0,1fr) auto auto!important;grid-template-areas:"menu me room tc" "stats stats stats stats"!important}
  html body header.hud>#kstrow{justify-self:stretch;border-top:1px solid var(--k-hair,#e6d3ac);padding-top:3px}
  html body header.hud>#k3tc{justify-self:end}
- #kstrow>.kstg{flex:1 1 0;grid-auto-columns:minmax(0,1fr);column-gap:4px}
+ #kstrow>.kstg{flex:var(--kn,1) 1 0;grid-auto-columns:minmax(0,1fr);column-gap:4px}
 }
+/* KIT 32.12 TOP BAR GRID (header-fix, owner 11/15 Fold shot: name on 2 lines, chips under "‹ Ngự hoa viên", date on 3 lines).
+   Her block never wraps and never shrinks (name 1 line · rank + age chips 1 line · date 1 line); the time block is the column that gives.
+   ≥ 600 px only (phones < 600 keep their own rows below). */
+@media (min-width:600px){
+ html body header.hud>.me,html body header.hud>.me .mi{min-width:max-content!important;flex-shrink:0!important}
+ html body header.hud>.me .mi>b,html body header.hud>.me .k3rr,html body header.hud>.me .rk,html body header.hud #me-d{white-space:nowrap!important}
+ html body header.hud{grid-template-columns:auto max-content minmax(0,1fr) auto!important}
+ /* her portrait is as tall as her name block (owner 15/11 10:30Z): the frame box stretches to the block's height, width by the frame's ratio */
+ html body header.hud>.me>#me-p{flex:none;line-height:0}
+ html body header.hud[style*="--kmeh"]>.me>#me-p>span.md.kfc.kfc{width:calc(var(--kmeh) * 550 / 795)!important;height:auto!important}
+}
+/* two-row bar (600–999 px, and ≥ 1000 px when the one row does not fit: class .khd2 from kitHdFit) —
+   row 1: menu · her block · RIGHT COLUMN (time block; "‹ Nơi" button under it, same left/right edges); row 2: the eight stat cells */
+@media (min-width:600px) and (max-width:999px){
+ html body .game#game header.hud,html body .game#game.k3ph header.hud:has(#k3room:not([hidden])){grid-template-columns:auto max-content minmax(0,1fr) minmax(0,max-content)!important;
+  grid-template-areas:"menu me . tc" "menu me . room" "stats stats stats stats"!important;grid-template-rows:auto auto auto!important;row-gap:0!important}
+ html body header.hud>#k3tc{justify-self:stretch!important;align-self:end!important}
+ html body header.hud:not(:has(#k3room:not([hidden])))>#k3tc{align-self:center!important}
+ html body .game#game header.hud>#k3room:not([hidden]){grid-area:room!important;justify-self:stretch!important;align-self:start!important;margin-top:4px;min-height:32px;padding:0 10px}
+ html body header.hud>#kstrow{margin-top:3px!important}
+ html body header.hud .k3tc .k3tt{grid-template-rows:auto auto!important}
+ html body header.hud .k3tt>.kstl,html body header.hud .k3tt>.kstv{white-space:normal!important;height:auto!important;min-height:var(--kst-l)}
+}
+html body .game#game header.hud.khd2{grid-template-columns:auto max-content minmax(0,1fr) minmax(0,max-content)!important;grid-template-areas:"menu me . tc" "menu me . room" "stats stats stats stats"!important;
+ grid-template-rows:auto auto auto!important;row-gap:0!important}
+html body header.hud.khd2>#k3tc{justify-self:stretch!important;align-self:center!important}
+html body header.hud.khd2>#kstrow{justify-self:stretch!important;border-top:1px solid var(--k-hair,#e6d3ac);padding-top:3px;margin-top:3px!important}
+html body header.hud.khd2>#kstrow>.kstg{flex:var(--kn,1) 1 0;grid-auto-columns:minmax(0,1fr);column-gap:4px}
+html body header.hud.khd2 .k3tc .k3tt{grid-template-rows:auto auto!important}
+html body header.hud.khd2 .k3tt>.kstl,html body header.hud.khd2 .k3tt>.kstv{white-space:normal!important;height:auto!important;min-height:var(--kst-l)}
 /* phones < 600 px: the same row, label line = icon only (name in the tooltip), number line below */
 @media (max-width:599px){
  html body header.hud{grid-template-columns:auto minmax(0,1fr)!important;grid-template-areas:"menu me" "tc tc" "stats stats"!important}
@@ -80,6 +113,23 @@ html body .game#game.k3ph header.hud>#k3room:not([hidden]){grid-area:room}
  #kstrow .kst>.kstl{font-size:0;gap:0}#kstrow .kst>.kstl img.ic{width:16px;height:16px}
 }
 `;document.head.appendChild(st)})();
+/* KIT 32.12 kitHdFit: ≥ 1000 px the bar is one row only when it fits (her block, the whole time block and the eight cells side by side);
+   otherwise .khd2 = the two-row bar (same grid as 600–999 px). Measured in the one-row form, in one synchronous pass (no flicker).
+   ≥ 600 px it also sets --kmeh = her name block's height: the portrait frame (ratio 550/795) is exactly that tall (owner 15/11 10:30Z). */
+function kitHdMe(hd){try{const mi=hd.querySelector(":scope>.me .mi");const h=mi&&matchMedia("(min-width:600px)").matches?Math.round(mi.getBoundingClientRect().height):0;
+ const v=h>20?h+"px":"";if(hd.style.getPropertyValue("--kmeh")!==v){if(v)hd.style.setProperty("--kmeh",v);else hd.style.removeProperty("--kmeh")}}catch(e){}}
+function kitHdFit(){try{const hd=document.querySelector("header.hud");if(!hd)return;kitHdMe(hd);const wide=matchMedia("(min-width:1000px)").matches;
+ if(!wide){hd.classList.remove("khd2");return}const had=hd.classList.contains("khd2");hd.classList.remove("khd2");
+ /* the one-row bar always wears the seal in its right gutter (KIT 39 .kseal-pad: 1000–1179 px cells icon-only) — measure it in that form */
+ if(hd.classList.contains("has-kseal"))hd.classList.add("kseal-pad");
+ const tc=document.getElementById("k3tc"),tt=document.getElementById("k3tt");
+ const bad=hd.scrollWidth>hd.clientWidth+1||!!(tc&&tt&&tc.offsetParent&&tt.scrollWidth>tc.clientWidth+1);
+ hd.classList.toggle("khd2",bad);try{window.kitSealHud&&kitSealHud()}catch(e){}if(had!==bad){try{const hb=hd.getBoundingClientRect();document.documentElement.style.setProperty("--k3hb",Math.round(hb.bottom)+"px");window.j59lay&&j59lay()}catch(e){}}}catch(e){}}
+window.kitHdFit=kitHdFit;
+if(typeof renderHUD==="function"){const r0=renderHUD;renderHUD=function(){const r=r0.apply(this,arguments);kitHdFit();return r}}
+if(typeof render==="function"){const r1=render;render=function(){const r=r1.apply(this,arguments);kitHdFit();return r}}
+addEventListener("resize",()=>{clearTimeout(window.__khdf);window.__khdf=setTimeout(kitHdFit,40)});
+try{document.fonts&&document.fonts.ready.then(kitHdFit)}catch(e){}
 /* a short helper line (".kphelp": "Mới biết tên ⓘ") opens its full text on tap too (touch has no hover tooltip) */
 document.addEventListener("click",e=>{const h=e.target.closest&&e.target.closest(".kphelp");if(!h||!h.title||typeof kpPop!=="function")return;e.stopPropagation();try{kpPop(h,`<div class="kpopt">${kitStatEsc(h.title)}</div>`)}catch(x){}},true);
 
@@ -149,7 +199,7 @@ window.kitEvCat=kitEvCat;
 .kesf{margin:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;min-width:0;flex:1 1 0}
 .kesf.kesno{display:none}
 .kesfi{position:relative;display:block;max-width:100%}
-.kesfi>.kesimg{display:block;width:auto;height:auto;max-width:100%;max-height:calc(clamp(200px,40dvh,400px)*var(--kfr,1));filter:drop-shadow(0 6px 8px #3a201033)}
+.kesfi>.kesimg{display:block;width:auto;height:auto;max-width:100%;max-height:calc(clamp(200px,40dvh,400px)*var(--kfr,1));filter:var(--klf,brightness(1)) drop-shadow(0 6px 8px #3a201033)}
 .kesfi>.kesfx{position:absolute;inset:0;pointer-events:none;z-index:2}
 .kesf>.kpsn{margin-top:2px;text-align:center}
 /* KIT 33.5: the event-stage / book-page name chip is the same two-line chip as the stage: rank / role small on top, name below, rank-tinted */
@@ -239,7 +289,7 @@ window.kitEsOvFit=kitEsOvFit;
 #mb .kesov{position:absolute;inset:0;pointer-events:none;z-index:2;overflow:hidden}
 #mb .kesov>.kesf{position:absolute;margin:0;display:block}
 #mb .kesov>.kesf .kesfi{display:block;position:relative}
-#mb .kesov>.kesf .kesimg{display:block;max-width:none!important;max-height:none!important;filter:drop-shadow(0 4px 5px #0006)}
+#mb .kesov>.kesf .kesimg{display:block;max-width:none!important;max-height:none!important;filter:var(--klf,brightness(1)) drop-shadow(0 4px 5px #0006)}
 #mb .kesov>.kpsn{position:absolute;bottom:3px;transform:translateX(-50%);z-index:20;white-space:nowrap;background:rgba(255,250,240,.92);border:1px solid var(--line,#e6d3ac);border-radius:6px;padding:0 6px;font-size:.78rem;line-height:1.25;text-align:center}
 #mb .kesov>.kpsn[data-row="1"]{bottom:calc(3px + 2.6em)}
 #mb>.kdlgart.kesonpic .ksart>figcaption,#mb>.kdlgart.kesonpic .ksart>.ksart-chip{top:6px;bottom:auto}
@@ -343,8 +393,9 @@ html body #modal .dlg.kdper>#mb>.opts>*{width:100%!important;max-width:none!impo
    dialog) and makes it close the panel the normal way (#mclose: onClose runs);
    the panel's button row (#mr) is then hidden by the caller's class. Floating cards inside a panel (shop item card) use the same class. */
 function kitXHTML(attrs,label){return `<button type="button" class="kit-x" aria-label="${label||"Lui"}" title="${label||"Lui"}"${attrs?" "+attrs:""}>✕</button>`}
-function kitXAdd(dlg){try{const h=dlg&&dlg.querySelector(":scope > .kph");if(!h||h.querySelector(":scope > .kit-x"))return;h.insertAdjacentHTML("beforeend",kitXHTML('data-kitx="panel"'));
- h.lastElementChild.addEventListener("click",e=>{e.stopPropagation();const c=document.getElementById("mclose");if(c)c.click()})}catch(e){console.error("kitXAdd",e)}}
+function kitXAdd(dlg,close){try{if(!dlg)return null;const h=dlg.querySelector(":scope > .kph");let x=dlg.querySelector(":scope > .kph > .kit-x, :scope > .kit-x.kxabs");if(x)return x;
+ if(h){h.insertAdjacentHTML("beforeend",kitXHTML('data-kitx="panel"'));x=h.lastElementChild}else{dlg.insertAdjacentHTML("afterbegin",kitXHTML('data-kitx="panel"'));x=dlg.firstElementChild;x.classList.add("kxabs")}
+ x.addEventListener("click",e=>{e.stopPropagation();e.preventDefault();if(typeof close==="function")close();else kitModalClose()});return x}catch(e){console.error("kitXAdd",e);return null}}
 window.kitXHTML=kitXHTML;window.kitXAdd=kitXAdd;
 (function(){const st=document.createElement("style");st.id="kit-x";st.textContent=`
 .kit-x{flex:none;margin-left:auto;width:36px;height:36px;min-height:0;padding:0;display:inline-grid;place-items:center;border-radius:8px;cursor:pointer;
@@ -354,4 +405,150 @@ window.kitXHTML=kitXHTML;window.kitXAdd=kitXAdd;
 .kit-x:hover{background:#fff;border-color:var(--gold,#c9a46a)}
 .kit-x:focus-visible{outline:none;box-shadow:0 0 0 2px var(--gold,#c9a46a)}
 .modal.night .kit-x{background:#2a1610;color:#e9c07a;border-color:#4a2a20}
+`;document.head.appendChild(st)})();
+
+/* ================= KIT 32.10 · CLOSING A PANEL — ✕ + tap outside + Esc, once for every panel (owner 11/15: no "Thôi" / "Lui" / "Đóng" /
+   "Đã hiểu" buttons that only close) =================
+   #modal (every dialog / card / place card / person card / shop / Tư trang card / title pages): after each render kitCloseSync() looks for
+   the way this panel closes —
+   · a dialog with options: the option that only closes (j3 kitCancelIx: "Thôi" / "Lui" / "Đóng" / "Đã hiểu", no effect) — j3 never draws
+     it; ✕ runs it through chooseM (its go / wrappers run as before);
+   · a card without options: the button row's close word ("Đã hiểu", "Lui", "‹ Lui", "Đã rõ") — hidden, ✕ clicks it (onClose runs);
+     a card whose only button means something ("Tạ ơn", "Cúi đầu", "Chuyển kiếp", "Tiếp tục"…) keeps it and gets no ✕;
+   · none of these = a FORCED panel (an event that must be chosen): no ✕, a tap outside does nothing, Esc does nothing.
+   Closable → ONE kit-x at the top right of the header (.kph; a card without .kph: the dialog's own top-right corner), a tap on the dimmed
+   ground outside the box closes (only when the press STARTED on the ground and did not move: a drag / scroll that ends outside never
+   closes), Esc closes. kitCloseLayer(root, box, close) gives other overlays (kitBook, game results, the room person card) the same. */
+const KIT_XW=/^(?:✕\s*)?(?:‹\s*)?(Thôi|Lui|Đóng|Đã hiểu|Đã rõ|OK|Xong)$/;
+function kitModalCloser(){const M=document.getElementById("modal");if(!M||M.hidden)return null;
+ const mr=document.getElementById("mr");
+ const rowB=mr?[...mr.querySelectorAll("button")]:[];const xb=rowB.filter(b=>b.dataset.kxw==="1"||KIT_XW.test(kitCloseTxt(b.textContent)));
+ if(xb.length){xb.forEach(b=>{if(!b.hidden)b.hidden=true;if(b.dataset.kxw!=="1")b.dataset.kxw="1"});const b=xb[0];return()=>b.click()}
+ const m=typeof Q!=="undefined"?Q[0]:null;const onQ=m&&!M.classList.contains("kptitle");
+ if(onQ&&m.opts){const i=kitCancelIx(m);if(i>=0)return()=>chooseM(i)}
+ return null}
+function kitModalClose(){const M=document.getElementById("modal");if(!M||M.hidden)return false;const f=M.__kx||kitModalCloser();if(!f)return false;f();return true}
+function kitCloseSync(){try{const M=document.getElementById("modal");if(!M)return;const dlg=M.querySelector(".dlg");if(!dlg)return;
+ const f=M.hidden?null:kitModalCloser();M.__kx=f;const kx=f?"1":"0";if(M.dataset.kx!==kx)M.dataset.kx=kx;
+ const old=dlg.querySelectorAll(".kit-x[data-kitx=panel]");
+ if(!f){old.forEach(x=>x.remove());return}
+ const hasHead=!!dlg.querySelector(":scope > .kph");old.forEach(x=>{if(hasHead?!x.parentElement.matches(".kph"):!x.classList.contains("kxabs"))x.remove()});
+ kitXAdd(dlg)}catch(e){console.error("kitCloseSync",e)}}
+window.kitModalClose=kitModalClose;window.kitCloseSync=kitCloseSync;
+/* the same for any other overlay: root = the dimmed full-screen layer, box = the panel, close = what closing does */
+const KIT_LAYERS=[];
+function kitCloseLayer(root,box,close,o){o=o||{};if(!root||root.__kxl)return;root.__kxl={box,close,pri:o.pri||0};KIT_LAYERS.push(root);
+ let down=null;root.addEventListener("pointerdown",e=>{down=(e.target===root||(o.ground&&e.target.matches(o.ground)))?{x:e.clientX,y:e.clientY,t:Date.now()}:null},true);
+ root.addEventListener("click",e=>{const d=down;down=null;if(!d||!(e.target===root||(o.ground&&e.target.matches(o.ground))))return;
+  if(Math.hypot(e.clientX-d.x,e.clientY-d.y)>10||Date.now()-d.t>900)return;e.stopPropagation();close()})}
+window.kitCloseLayer=kitCloseLayer;
+(function(){const M=document.getElementById("modal");if(!M)return;
+ /* after every render (outermost wrapper: installed once every module has loaded) and whenever the button row / header changes */
+ setTimeout(()=>{const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);kitCloseSync();return r}},0);
+ let q=0;new MutationObserver(()=>{if(q)return;q=1;Promise.resolve().then(()=>{q=0;kitCloseSync()})}).observe(M,{childList:true,subtree:true,attributes:true,attributeFilter:["hidden"]});
+ let down=null;
+ M.addEventListener("pointerdown",e=>{down=e.target===M&&M.__kx?{x:e.clientX,y:e.clientY,t:Date.now()}:null},true);
+ M.addEventListener("click",e=>{const d=down;down=null;if(!d||e.target!==M)return;if(Math.hypot(e.clientX-d.x,e.clientY-d.y)>10||Date.now()-d.t>900)return;e.stopPropagation();kitModalClose()})})();
+/* Esc: the top-most open closable panel (another overlay over the dialog first, then the dialog, then the room person card) */
+document.addEventListener("keydown",e=>{if(e.key!=="Escape")return;setTimeout(()=>{if(e.defaultPrevented||document.body.classList.contains("kbk-open"))return;
+ if([...document.querySelectorAll(".kpod")].some(x=>x.offsetParent))return;
+ const L=KIT_LAYERS.filter(r=>r.isConnected&&!r.hidden&&getComputedStyle(r).display!=="none"&&r.__kxl.box()).sort((a,b)=>b.__kxl.pri-a.__kxl.pri);
+ if(L.length){e.preventDefault();L[0].__kxl.close();return}
+ if(kitModalClose()){e.preventDefault();return}
+ const px=document.getElementById("popx");if(px&&px.offsetParent){e.preventDefault();px.click()}},0)});
+/* game / lesson results in #ov (kg82 "Đã hiểu", j92 Chải chuốt, the old j5 "Xong"): the result card closes with ✕ / tap outside / Esc,
+   which press that button (its own handler applies the result as before); while the game runs there is no ✕ */
+function kitOvBtn(){const ov=document.getElementById("ov");if(!ov||ov.hidden)return null;const b=ov.querySelector("#kg82ok, #kg92ok, #mgok");return b&&b.isConnected?b:null}
+function kitOvSync(){try{const b=kitOvBtn();if(!b)return;if(!b.hidden)b.hidden=true;const row=b.parentElement;if(row&&row!==b.closest(".kpanel,.mg")&&![...row.children].some(c=>!c.hidden)&&!row.hidden)row.hidden=true;
+ const pan=b.closest("#kg82, .mg")||b.closest(".kpanel");if(!pan||pan.querySelector(".kit-x[data-kitx=ov]"))return;const h=pan.querySelector(".kph");
+ const html=kitXHTML('data-kitx="ov"');if(h){if(getComputedStyle(h).position==="static")h.style.position="relative";h.insertAdjacentHTML("beforeend",html)}else{pan.style.position=pan.style.position||"relative";pan.insertAdjacentHTML("afterbegin",html);pan.firstElementChild.classList.add("kxabs")}
+ const x=pan.querySelector(".kit-x[data-kitx=ov]");x.addEventListener("click",e=>{e.stopPropagation();e.preventDefault();const c=kitOvBtn();if(c)c.click()})}catch(e){console.error("kitOvSync",e)}}
+(function(){const ov=document.getElementById("ov");if(!ov)return;let q=0;new MutationObserver(()=>{if(q)return;q=1;Promise.resolve().then(()=>{q=0;kitOvSync()})}).observe(ov,{childList:true,subtree:true});
+ kitCloseLayer(ov,()=>kitOvBtn(),()=>{const c=kitOvBtn();if(c)c.click()},{pri:2})})();
+/* the person card opened from the room (#popw, KIT 28.18): its ✕ is #popx; a tap on the empty scene closes it too */
+(function(){const st=document.getElementById("stage");if(!st)return;let dn=null;const free=t=>!t.closest("button,a,input,.pop,#popw,[data-p],.k3p,.hud2");
+ st.addEventListener("pointerdown",e=>{dn=free(e.target)?{x:e.clientX,y:e.clientY,t:Date.now()}:null},true);
+ st.addEventListener("click",e=>{const d=dn;dn=null;if(!d||!free(e.target))return;if(Math.hypot(e.clientX-d.x,e.clientY-d.y)>10||Date.now()-d.t>900)return;
+  const px=document.getElementById("popx");if(px&&px.offsetParent)px.click()})})();
+(function(){const st=document.createElement("style");st.id="kit-x-close";st.textContent=`
+#modal .dlg:has(>.kit-x.kxabs){position:relative}
+#modal .dlg>.kit-x.kxabs{position:absolute;top:8px;right:8px;z-index:9}
+#modal .dlg.kpanel:has(>.kit-x.kxabs){overflow:auto}
+#modal[data-kx="1"] .dlg>#mr:not(:has(>:not([hidden]))){display:none!important}
+#modal .dlg>#mr>[hidden],#ov [hidden]{display:none!important}
+#ov .kph>.kit-x{position:absolute;right:10px;top:50%;transform:translateY(-50%);margin:0}
+#ov .kit-x.kxabs{position:absolute;top:8px;right:8px;z-index:9}
+`;document.head.appendChild(st)})();
+
+/* ================= KIT 32.10 · THE TAP CATCHER (owner 11/15: "the outside tap closed the result card AND ran the act under it") =================
+   A closable card that floats WITHOUT its own dimmed ground (the act result card #rtoast — THÀNH / HỎNG / BẤT LỢI) gets a full-screen
+   transparent catcher (#kxcatch) right under it while it is open. The first tap outside the card ONLY closes it: pointerdown, touchstart,
+   touchend, mousedown, mouseup and click on the catcher are all swallowed (preventDefault + stopPropagation), nothing underneath fires, and
+   the catcher stays 400 ms after the close to eat a late ghost click. Dialogs (#modal), the book and game results already have their own
+   full-screen ground that closes on a real tap (kitCloseSync / kitCloseLayer) — the same rule: the tap is spent on closing. */
+function kitCatchOn(card,close){let c=document.getElementById("kxcatch");if(!c){c=document.createElement("div");c.id="kxcatch";c.setAttribute("aria-hidden","true");document.body.appendChild(c)
+  const eat=e=>{e.preventDefault();e.stopPropagation();e.stopImmediatePropagation()};
+  /* the close happens on the release (pointerup / touchend), never on the later click: a touch whose touchend is cancelled sends no click;
+     the catcher then stays 400 ms and eats the click / ghost click that may still come */
+  const shut=()=>{if(!c.__close||c.__closing)return;c.__closing=1;try{c.__close()}catch(x){}setTimeout(()=>{c.hidden=true;c.__closing=0;c.__close=null},400)};
+  ["pointerdown","touchstart","mousedown","mouseup","contextmenu","click","dblclick"].forEach(t=>c.addEventListener(t,eat,{passive:false}));
+  c.addEventListener("pointerup",e=>{eat(e);shut()},{passive:false});c.addEventListener("touchend",e=>{eat(e);shut()},{passive:false})}
+ const z=parseInt(getComputedStyle(card).zIndex)||45;c.style.zIndex=String(z-1);c.__close=close;c.__closing=0;c.hidden=false}
+function kitCatchOff(){const c=document.getElementById("kxcatch");if(c&&!c.__closing){c.hidden=true;c.__close=null}}
+window.kitCatchOn=kitCatchOn;window.kitCatchOff=kitCatchOff;
+(function(){let obs=null;const watch=t=>{if(!t||t.__kxw)return;t.__kxw=1;
+  const sync=()=>{const on=t.classList.contains("on")&&!t.hidden&&getComputedStyle(t).visibility!=="hidden";if(on)kitCatchOn(t,()=>{t.classList.remove("on");clearTimeout(window.__rtT)});else kitCatchOff()};
+  new MutationObserver(sync).observe(t,{attributes:true,attributeFilter:["class","hidden"]});sync()};
+ const find=()=>watch(document.getElementById("rtoast"));find();
+ obs=new MutationObserver(()=>{if(document.getElementById("rtoast")){find();obs.disconnect()}});obs.observe(document.body,{childList:true})})();
+(function(){const st=document.createElement("style");st.id="kit-catch";st.textContent=`
+#kxcatch{position:fixed;inset:0;background:transparent;touch-action:none;-webkit-tap-highlight-color:transparent}
+#kxcatch[hidden]{display:none!important}
+`;document.head.appendChild(st)})();
+/* ================= KIT 43 · kitActCompact (cherry-picked from review/kit-fig2 3e212597e by tabs-kit r7; kit-fig2 KIT §39 → §42 → §43, reviewer r7: main close-bugs owns §42) — act cards in a NARROW pane beside a portrait / figure (owner 11/15: "the act picture squeezes the
+   text into a thin column") =================
+   Panes that hold a person on the left (person card `.pc > .pcr`: Hậu cung · Thánh thượng / Phi tần / Cung nhân "Việc hôm nay", Hoàng tự
+   child cards) are inline-size containers named `kpane`. When the pane is under 640 px wide every act card (`button.ka.kart`) inside it
+   takes the compact form — ONE CSS rule set, no other markup:
+   - LEFT: the same act picture as a SMALL SQUARE thumbnail (84 px; 72 px under 420 px), cover-cropped, 2 px border in its category colour
+     (`--kcc0`); the frame ornaments / category ribbon of the big slot are hidden (the card keeps its 4 px category edge).
+   - RIGHT (≥ 60 % of the card): title row = title + odds ladder on ONE line (the title may wrap, the odds never); a ONE-line description
+     (full text on hover / long-press title); the Cần / Tốn / Được / Mất / Kèm rows as compact label + value chips that wrap as WHOLE chips.
+   - Cards stack vertically, one card per row. `kitActCompactOn(root)` adds the description tooltips after a render.
+   (tabs-kit r7) `.kpanec` = any other act area that sits in a narrow column (skill card acts, Việc nhờ) is a kpane too: same rules. */
+/* owner 11/15: the person-card acts (Gặp mặt / Giao thiệp / Hại nhỏ … — plain button.ka) get THEIR OWN act picture (ACTS.json key via
+   kitActKey → kpActArt). No own picture → NO thumbnail (owner: never a category / group picture as a stand-in): the text takes the full width.
+   The same rule for every act card inside a kpane (a deck card whose only picture is its category picture loses the thumbnail there). */
+function kitActCompactOn(root){try{const R0=root||document;
+ R0.querySelectorAll(".pc>.pcr button.ka, .kpanec button.ka").forEach(b=>{try{const kan=b.querySelector(".kan");if(!kan)return;const nm=typeof kpActName==="function"?kpActName(kan):kan.textContent.trim();
+   const key=typeof kitActKey==="function"?kitActKey(nm):"";b.classList.toggle("kanoart",!key);if(key&&!b.classList.contains("kart")&&typeof kpActArt==="function")kpActArt(b)}catch(e){}});
+ R0.querySelectorAll(".pc>.pcr button.ka.kart .klead, .kpanec button.ka.kart .klead").forEach(e=>{if(!e.title)e.title=e.textContent.trim()})}catch(e){}}
+window.kitActCompactOn=kitActCompactOn;
+(function(){if(typeof render!=="function")return;const r0=render;render=function(){const r=r0.apply(this,arguments);try{kitActCompactOn(document.getElementById("panel"))}catch(e){}return r};window.render=render})();
+(function(){const st=document.createElement("style");st.id="kit-act-compact";st.textContent=`
+.pc>.pcr,.kpanec{container:kpane/inline-size}
+@container kpane (max-width:640px){
+ button.ka.kanoart>.kaart{display:none!important}
+ .pcb:has(> button.ka.kart),.cards:has(> button.ka.kart){display:flex!important;flex-direction:column!important;gap:8px!important;grid-template-columns:none!important}
+ button.ka.kart{--kaw:84px!important;--kah:84px!important;display:flex!important;flex-direction:row!important;align-items:flex-start!important;gap:10px!important;width:100%!important;min-width:0!important;max-width:none!important;padding:8px 10px!important}
+ button.ka.kart>.kaart{flex:0 0 84px!important;width:84px!important;height:84px!important;border-radius:6px!important;overflow:hidden!important;box-shadow:0 0 0 2px var(--kcc0,#b08a4a)!important;background:#efe4cc!important}
+ button.ka.kart>.kaart>.ksart{width:100%!important;height:100%!important;margin:0!important;padding:0!important;border:0!important;background:none!important;box-shadow:none!important}
+ button.ka.kart>.kaart>.ksart>:not(img){display:none!important}
+ button.ka.kart>.kaart>.ksart>img{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-fit:cover!important;border:0!important;border-radius:0!important;margin:0!important}
+ button.ka.kart>.kabody{flex:1 1 auto!important;min-width:0!important;gap:3px!important}
+ button.ka.kart .kat{flex-wrap:nowrap!important;align-items:flex-start!important;gap:6px!important}
+ button.ka.kart .kat>.kan{flex:1 1 auto!important;min-width:0!important}
+ button.ka.kart .kat>:not(.kan){flex:0 0 auto!important;white-space:nowrap!important}
+ button.ka.kart .klead{display:-webkit-box!important;-webkit-box-orient:vertical!important;-webkit-line-clamp:1!important;overflow:hidden!important}
+ button.ka.kart small.kb{display:flex!important;flex-wrap:wrap!important;gap:3px 6px!important}
+ button.ka.kart small.kb>.kr{display:inline-flex!important;flex-wrap:wrap!important;align-items:center!important;gap:2px 4px!important;width:auto!important;max-width:100%!important;grid-template-columns:none!important;border:0!important;padding:0!important}
+ button.ka.kart small.kb>.kr>.krl{flex:0 0 auto!important;width:auto!important;min-width:0!important;font-size:.66rem!important}
+ button.ka.kart small.kb>.kr>.krv{display:inline-flex!important;flex-wrap:wrap!important;gap:2px 4px!important;min-width:0!important}
+ button.ka.kart small.kb>.kr>.krv>*{display:inline-block!important;white-space:normal!important;max-width:100%!important;overflow-wrap:anywhere}
+ button.ka.kart small.kb>.kr>.krv>.ksep{display:none!important}
+}
+@container kpane (max-width:420px){
+ button.ka.kart{--kaw:72px!important;--kah:72px!important}
+ button.ka.kart>.kaart{flex-basis:72px!important;width:72px!important;height:72px!important}
+}
 `;document.head.appendChild(st)})();

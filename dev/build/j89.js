@@ -12,9 +12,11 @@ function evArtCat(id){const A=EVART;if(!A||!id)return null;id=String(id);const E
  const ns=id.indexOf(":");if(ns>0&&E[id.slice(0,ns)+":*"])return E[id.slice(0,ns)+":*"];
  if(ns<0){for(const k in E){const i=k.indexOf(":");if(i>0&&k.slice(i+1)===id)return E[k]}}
  return null}
-function evArtOf(id,salt){try{const A=EVART;if(!A)return"";const c=evArtCat(id)||A.default;const C=A.categories[c]||A.categories[A.default];if(!C||!C.files||!C.files.length)return"";
+/* review/gift-ui (owner 11/15 "Sửa ảnh Triều chính"): an id with no category gets NO picture (""), never the default (Triều chính, officials
+   kneeling) as a stand-in; callers then show the room she is in or nothing. evArtOf("default") still names the default on purpose. */
+function evArtOf(id,salt){try{const A=EVART;if(!A)return"";const c=evArtCat(id)||(id==="default"?A.default:"");if(!c)return"";const C=A.categories[c];if(!C||!C.files||!C.files.length)return"";
  const s=String(id)+"|"+(salt==null?"":salt);let h=0;for(let i=0;i<s.length;i++)h=(h*31+s.charCodeAt(i))>>>0;return C.files[h%C.files.length]}catch(e){return""}}
-function evArtTitle(id){const A=EVART;const c=A&&(evArtCat(id)||A.default);return c&&A.categories[c]?A.categories[c].title:""}
+function evArtTitle(id){const A=EVART;const c=A&&(evArtCat(id)||(id==="default"?A.default:""));return c&&A.categories[c]?A.categories[c].title:""}
 /* ---- Mệnh truyện (j67): stArtOf(arcId, beat, ending) -> image path. beat = beat id ("s1","c2","t1","x1"...; "G.x" global beats use ev art),
    ending = ending key ("win","mid","lose",...) or null; with neither -> the arc cover ("bia"). Missing file -> the arc's own cover,
    then the ev-* category that fits (EVENTS.json stories[arc].fb / efb). */
