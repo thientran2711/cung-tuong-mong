@@ -23,6 +23,35 @@
   The fixed pixels are LOST with this container → re-generate them (deterministic): see Resume.
 - Audit of the ~7300 never-rosied figs: 1036 lines in log/all.jsonl (only ~80 random non-rosied so far; 1 natural mismatch per ~80 → expect ~100 more).
 
+
+## Session 8 resume (worker, 15/11 ~22:00Z–23:30Z)
+- Step 1 (missing on CDN): fix list = log/cut.tsv (1500 files). On CDN as fixed: the 234 in the old log/uploaded.txt. The other 1266
+  (750 fig incl. player look1/look3 + 516 por) were still the ORIGINALS on the CDN: proved by re-measuring every CDN file — all 745
+  re-run figs give "before" stats equal to the old log's before (delta < 0.3 a*), identical shifts (max diff 0.00) and identical por pairing.
+  The session-7 upload left nothing half-done.
+- Step 3: all 1266 regenerated (fixrun.py on log list, player.py for look1, logged neck shift for orphan por-consort-c09-t8-a51).
+- Step 2 (soft/hazy check, dev/art/skin-match/sharp.py, log/sharp_q92.tsv → log/sharp.tsv): ratio fixed/original of Laplacian variance
+  and Tenengrad in the head zone (top 22% of the figure, solid alpha). The colour fix itself keeps detail (L* untouched, crops
+  sharp-crops.jpg identical); the loss is WebP q92 RE-ENCODE generation loss, worst on 506x384 por-*:
+    q92 as made: fig head-lap median 0.999 min 0.962 (20 < 0.98); por median 0.997 p5 0.949 min 0.911 (159 < 0.98).
+    Plain re-encode of the untouched original at q92 gives the same drop (por-kid-p18-a4 0.91) → encoder, not the fix.
+  Fix: reenc.py re-encodes those 179 at the first quality in 92/95/98 with both ratios >= 0.98 (176 at q95, 3 at q98).
+    After: fig min 0.980 median 0.999; por min 0.980 median 0.999. Bytes: fig 54.09→53.66 MB, por 24.50→25.38 MB (max por 129 KB).
+  Alpha and size identical on all 1266.
+- RISK (not fixable here): the 234 files uploaded in session 6/7 were q92; 92 of them are por; ~30% of those (~28) plus ~4 figs likely lost 2–9% head detail
+  (originals are gone from the CDN, so it cannot be measured or undone without pre-fix originals).
+- Upload: coordinator unblocked Cloudflare 15/11; all 1266 uploaded with cdn_sync AFTER the check; live _index.json md5 == fixed file for 1266/1266. log/uploaded.txt = 1500/1500. PENDING CDN UPLOAD: none.
+  Encoder rule for any future pass: never re-save at q92 blindly — use reenc.py's adaptive quality (>= 0.98 head detail).
+
+## Step 4 PLAN — audit of the never-rosied figures (not run: ~1 h CPU + ~450 MB download)
+- Scope: 8378 fig-* on CDN; 1031 measured (log/all.jsonl); 1500 fixed; remaining 7347 (maid 4430, consort 2465, kid 159, man 111,
+  eunuch 100, mama 29, official 21, physician 13, thaihau 10, emperor 6, player 3). Expect ~1 mismatch per ~80 → ~90–100 to fix (+ por).
+- Run (4 CPU box, 3 procs nice 19): download fig-* of the list into .ahcache/sm/base (xargs -P8 curl, ~450 MB; delete after);
+  measure.py .ahcache/sm/all.jsonl <chunk> (runm.sh was in the lost .ahcache: just split the list in 3 and loop measure.py; ~1.5 s/fig/proc
+  → ~60 min); select.py all.jsonl base.json dev/art/skin-rosy-fixed.txt flag.txt; download por-* of flagged; fixrun.py on flag.txt
+  (fresh REC); sharp.py → reenc.py for any < 0.98; crops.py sheet and LOOK; cdn_sync (img/ copies), append log/uploaded.txt; table.py.
+- upload.sh hard-codes W=/home/user/wt/skin-match, q92 and cutcheck from dev/figwork (sparse-excluded here): use the steps above instead.
+
 ## Next steps (exact)
 1. Setup (Resume block below), download base: fig-* listed in log/fix.jsonl + their por-*.
 2. Re-run fixes only for the NOT-uploaded names (fixrun skips names already in REC, so use a fresh REC):
