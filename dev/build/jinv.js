@@ -23,17 +23,29 @@ function kitInvFit(){document.querySelectorAll(".kinv .kinvg").forEach(g=>{try{
  /* refit whenever the grid's width or the panel's height changes (late layout, rotation, book page open) */
  if(!g.__kro&&typeof ResizeObserver==="function"){let w0=0,h0=0;g.__kro=new ResizeObserver(()=>{const P=g.closest("#panel");const w=g.clientWidth,h=P?P.clientHeight:0;if(w===w0&&h===h0)return;w0=w;h0=h;
    clearTimeout(g.__kroT);g.__kroT=setTimeout(kitInvFit,40)});g.__kro.observe(g);const P=g.closest("#panel");if(P)g.__kro.observe(P)}
- if(!g.clientWidth)return;const cols=getComputedStyle(g).gridTemplateColumns.split(" ").filter(Boolean).length||1;
+ if(!g.clientWidth)return;g.style.removeProperty("--kinvsz");let cols=getComputedStyle(g).gridTemplateColumns.split(" ").filter(Boolean).length||1;
  const n=+g.dataset.n||0,min=+(g.closest(".kinv").dataset.min||4);const want=Math.max(min*cols,Math.ceil(n/cols)*cols);let have=g.children.length;
  if(have<want){g.insertAdjacentHTML("beforeend",kitInvEmpty(want-have));have=want}else for(let i=have;i>Math.max(want,n);i--){const c=g.lastElementChild;if(c&&c.classList.contains("kitem-empty")){c.remove();have--}else break}
  const P=g.closest("#panel");if(!P||!P.clientHeight||!g.firstElementChild)return;const pr=P.getBoundingClientRect(),cs=getComputedStyle(P);
- let bot=-1e9;for(const c of P.children){const r=c.getBoundingClientRect();if(r.height)bot=Math.max(bot,r.bottom+(parseFloat(getComputedStyle(c).marginBottom)||0))}
- const free=pr.bottom-(parseFloat(cs.borderBottomWidth)||0)-(parseFloat(cs.paddingBottom)||0)-bot-2;
+ /* free height = panel content bottom − bottom of the last IN-FLOW child (absolute decorations such as corner petals do not count) */
+ const freeOf=()=>{let bot=-1e9;for(const c of P.children){const s=getComputedStyle(c);if(s.position==="absolute"||s.position==="fixed"||s.display==="none")continue;const r=c.getBoundingClientRect();if(r.height)bot=Math.max(bot,r.bottom+(parseFloat(s.marginBottom)||0))}
+  return pr.bottom-(parseFloat(cs.borderBottomWidth)||0)-(parseFloat(cs.paddingBottom)||0)-bot-2};const free=freeOf();
  const rh=g.firstElementChild.getBoundingClientRect().height+(parseFloat(getComputedStyle(g).rowGap)||0);const add=rh>8?Math.floor(free/rh):0;
  if(add>0&&P.scrollHeight<=P.clientHeight+1)g.insertAdjacentHTML("beforeend",kitInvEmpty(add*cols));
+ /* still a gap smaller than one row: one more COLUMN (slightly smaller slots), then whole rows again; keep it only if the gap shrinks
+    and nothing scrolls (up to 3 steps) */
+ const colsOf=()=>getComputedStyle(g).gridTemplateColumns.split(" ").filter(Boolean).length||1;
+ const fitRows=c=>{const w=Math.max(min*c,Math.ceil(n/c)*c);for(let i=g.children.length;i>Math.max(w,n);i--){const x=g.lastElementChild;if(x&&x.classList.contains("kitem-empty"))x.remove();else break}
+  if(g.children.length<w)g.insertAdjacentHTML("beforeend",kitInvEmpty(w-g.children.length));if(g.children.length%c)g.insertAdjacentHTML("beforeend",kitInvEmpty(c-g.children.length%c));
+  const r=g.firstElementChild.getBoundingClientRect().height+(parseFloat(getComputedStyle(g).rowGap)||0);const k=r>8?Math.floor(freeOf()/r):0;if(k>0)g.insertAdjacentHTML("beforeend",kitInvEmpty(k*c))};
+ for(let t=0;t<3;t++){const f0=freeOf();if(f0<12||P.scrollHeight>P.clientHeight+1)break;const gap=parseFloat(getComputedStyle(g).columnGap)||0,W=g.clientWidth-(parseFloat(getComputedStyle(g).paddingLeft)||0)-(parseFloat(getComputedStyle(g).paddingRight)||0);
+  const sz=Math.floor((W+gap)/(cols+1)-gap);if(sz<44)break;const prev=g.style.getPropertyValue("--kinvsz"),pc=cols,ph=g.children.length;
+  g.style.setProperty("--kinvsz",sz+"px");const c2=colsOf();if(c2<=pc){if(prev)g.style.setProperty("--kinvsz",prev);else g.style.removeProperty("--kinvsz");break}fitRows(c2);
+  const f1=freeOf();if(P.scrollHeight>P.clientHeight+1||f1<-1||f1>=f0){if(prev)g.style.setProperty("--kinvsz",prev);else g.style.removeProperty("--kinvsz");
+   for(let i=g.children.length;i>ph;i--){const x=g.lastElementChild;if(x&&x.classList.contains("kitem-empty"))x.remove();else break}if(g.children.length<ph)g.insertAdjacentHTML("beforeend",kitInvEmpty(ph-g.children.length));cols=pc;break}
+  cols=c2}
  /* what is left (less than one bag row) goes to the equipment slots, which grow up to 112 px */
- const q=P.querySelector(".keq");if(q){q.style.removeProperty("--keqsz");if(P.scrollHeight<=P.clientHeight+1){let b2=-1e9;for(const c of P.children){const r=c.getBoundingClientRect();if(r.height)b2=Math.max(b2,r.bottom)}
-  const f2=pr.bottom-(parseFloat(cs.paddingBottom)||0)-b2-10;const sl0=q.querySelector(".keqc>.kitem");const s0=sl0?sl0.getBoundingClientRect().width:0;
+ const q=P.querySelector(".keq");if(q){q.style.removeProperty("--keqsz");if(P.scrollHeight<=P.clientHeight+1){const f2=freeOf()-8;const sl0=q.querySelector(".keqc>.kitem");const s0=sl0?sl0.getBoundingClientRect().width:0;
   const c0=q.querySelector(".keqc");const maxW=c0?c0.clientWidth:150;if(f2>4&&s0)q.style.setProperty("--keqsz",Math.round(Math.min(112,maxW,s0+f2))+"px")}
   else{/* a few px too tall: shrink the equipment slots rather than scroll (never below 64 px) */const over=P.scrollHeight-P.clientHeight;const sl0=q.querySelector(".keqc>.kitem");const s0=sl0?sl0.getBoundingClientRect().width:0;
    if(s0&&over>0&&over<=60)q.style.setProperty("--keqsz",Math.max(64,Math.floor(s0-over-2))+"px")}}}catch(e){}});try{kitTabStick()}catch(e){}}

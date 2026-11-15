@@ -29,7 +29,7 @@ Quyết định chủ: OWNER_DECISIONS 11/15 04:00Z + lệnh điều phối (lu�
 - `kitEquipSlots` (KIT 28.13c) "Đang mang" dưới túi: Cài tóc · Đeo tay · Y phục (đúng luật j8: IT.sl hair/wrist, S.dress), ô trống hiện bóng mờ loại đồ,
   chạm ô trống → chọn món trong rương để đeo / may áo; chạm ô đầy → bảng món đồ (Tháo). Tổng cộng thưởng (Sắc/Danh) + cảnh báo vượt phẩm ở đầu.
   Bỏ dòng "Đang đeo: … · áo mới: …".
-- Túi lớn thêm hàng cho kín chiều cao bảng; phần dư (< 1 hàng) cho ô trang bị to lên (≤112px). ResizeObserver tự xếp lại.
+- Túi lớn thêm hàng cho kín chiều cao bảng (đo theo phần tử trong dòng chảy, bỏ hoa trang trí tuyệt đối); còn hở < 1 hàng thì thêm 1 cột (ô nhỏ hơn chút) để vừa thêm 1 hàng; phần dư cho ô trang bị. ResizeObserver tự xếp lại.
 - Thử: dev/test/inv-grade.js (686x880@2.2 + sổ cũ, 1180x820@2 + sổ cũ, 1366x1024@2): 0 lỗi trang, 0 tràn ngang, 0 chữ cắt, 0 thẻ việc bị che;
   đeo vòng từ ô trống chạy đúng. Ảnh: dev/shots/inv-grade/. (Dư đồ: phần bản đồ rộng hơn màn là có sẵn, không thuộc nhánh này.)
 

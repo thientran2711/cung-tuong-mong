@@ -29,14 +29,14 @@ const [,,BASE,SZ,OUT,TAG,OLD]=process.argv;const [WH,DPR]=SZ.split('@');const [W
   S.dress={k:'gamto',until:S.turn+2};S.scar={sev:2,known:1,veil:1};render();document.querySelector('#tabs [data-tab=inv]').click()});
  await p.waitForTimeout(1500);await shot('inv-grades');A.push(await audit('inv-grades'));
  const geo=await p.evaluate(()=>{const g=document.querySelector('.kinvg'),P=document.getElementById('panel');const cols=getComputedStyle(g).gridTemplateColumns.split(' ').length;
-  const eq=document.querySelector('.keq');const last=[...P.children].pop().getBoundingClientRect();
+  const eq=document.querySelector('.keq');const last=eq.getBoundingClientRect();
   const kb=document.querySelector('.kinvg .kig3>.kitb');const cs=kb&&getComputedStyle(kb,'::after');
   return{cols,slots:g.children.length,full:g.children.length%cols===0,gapBelow:Math.round(P.getBoundingClientRect().bottom-last.bottom),scroll:P.scrollHeight>P.clientHeight+1,eqSlots:eq&&eq.querySelectorAll('[data-keqi]').length,
    frame:cs&&cs.borderImageSource.slice(-30),bg:kb&&getComputedStyle(kb).backgroundImage.slice(-30),pad:getComputedStyle(P).paddingTop}});
  /* empty wrist slot → pick list → wear the jade bangle */
  await p.click('.keq [data-keqi="1"]');await p.waitForTimeout(900);await shot('inv-eqpick');A.push(await audit('eqpick'));
  await p.click('#modal [data-kinvact="wear"]');await p.waitForTimeout(900);const worn=await p.evaluate(()=>S.inv.filter(e=>e.w).map(e=>e.k));
- await shot('inv-worn');A.push(await audit('inv-worn'));
+ await shot('inv-worn');const gapWorn=await p.evaluate(()=>{const P=document.getElementById('panel');return Math.round(P.getBoundingClientRect().bottom-document.querySelector('.keq').getBoundingClientRect().bottom)+(P.scrollHeight>P.clientHeight+1?' SCROLL':'')});A.push(await audit('inv-worn'));
  await p.click('.keq [data-keqi="0"]');await p.waitForTimeout(900);await shot('inv-item');A.push(await audit('inv-item'));
  await p.evaluate(()=>{closeModal()});await p.waitForTimeout(300);
  await p.click('.keq [data-keqi="5"]');await p.waitForTimeout(900);await shot('inv-dress');A.push(await audit('inv-dress'));
@@ -51,4 +51,4 @@ const [,,BASE,SZ,OUT,TAG,OLD]=process.argv;const [WH,DPR]=SZ.split('@');const [W
   out.push(luxOf(S));const r=itemMonth(S);out.push(r);out.push(liveRivals(true).map((v,i)=>v.ghen-g0[i]).join(','));
   const v=liveRivals(false)[0];if(v){v.inv=v.inv||[];v.inv.push({k:'tramphuong',w:1},{k:'ngocboi',w:1});out.push(['npc',v.rank,luxOf(v).name]);itemMonth(v)}
   S.inv.forEach(e=>e.w=0);out.push(luxOf(S).name);return out});
- console.log(JSON.stringify({TAG,geo,worn,A,T,lux,errs}));await b.close()})();
+ console.log(JSON.stringify({TAG,geo,gapWorn,worn,A,T,lux,errs}));await b.close()})();
