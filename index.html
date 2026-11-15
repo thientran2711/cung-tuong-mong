@@ -8340,6 +8340,9 @@ html .game .kleather>.maptools>.past,html .game .kleather>.maptools>.fest{displa
    iPad landscape: the room stage = LEFT picture page, the tab panel = RIGHT text page, gutter between, cover board behind.
    Phone / portrait: ONE page (the panel) on the board. Dư đồ is not a page (leather map, .maptab drops the book). */
 .kbk-board{display:none}
+/* phone / portrait shell: when the page (#panel) is hidden (room view k3home, person pop k3pop) the cover board has no page to sit under —
+   hide it too, never a lone band between the stage and the tab row (owner 11/15 "Thanh gì đây") */
+html body .game#game.kbook.k3ph:is(.k3home,.k3pop)>.kbk-board{display:none!important}
 .game.kbook{isolation:isolate}
 .game.kbook>.kbk-board{display:block;position:relative;z-index:-1;pointer-events:none;grid-row:panel-start/panel-end;grid-column:panel-start/panel-end;
  margin:-5px -6px -6px -6px;border-radius:8px;
