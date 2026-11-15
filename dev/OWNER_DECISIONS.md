@@ -443,3 +443,5 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (13:00Z) Hộp thoại sự việc có người (VIỆC · Có người đến…) to quá: dùng cỡ hộp người chuẩn của kit, vừa nội dung; tên + bậc nằm TRÊN hình.
 - (13:00Z) Lời mời Đoan ngọ dùng ảnh Triều chính + người tí hon, nhãn đè đầu → cần ảnh riêng (thuyền rồng), sửa nhãn đè.
 - LIVE CDN (13:00Z) 136 tranh hành sự đợt 3.
+- (13:05Z) Hàng nút lọc (Tất cả/Nghỉ ngơi/…) đang trôi đè lên thẻ khi cuộn → cố định sát ngay dưới khung chỉ số, nằm NGOÀI vùng cuộn; chỉ danh sách bên dưới cuộn. Luật kit cho mọi tab.
+- (13:05Z) Sếp hỏi cân bằng Nhịn/Đáp trả: đã làm trong review/ts-b (cfbffb955), đang duyệt (R2), chưa lên.
