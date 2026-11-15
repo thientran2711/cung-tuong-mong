@@ -181,20 +181,51 @@ window.kitThey=kitThey;
    reacts more. A bestowed rank set (review/gift-chest: p.rankSet === her rank, worn) always satisfies it. Vượt phẩm stays its own
    rule (jinv luxMonth). Same rule for NPCs (j28 serveTH). The card shows it in advance in Kèm; "Vì sao" names it. */
 Object.assign(BAL,{thieuLe:{danh:-2,duc:-1,aff:-3,strict:1.5,frac:.35}});
-function aaThieuLe(p){try{if(!p||p.out)return false;if(p.rankSet!=null&&p.rankSet===rkOf(p)&&p.rankSetWorn)return false;if(typeof luxOf!=="function")return false;const x=luxOf(p);if(x.sc>0)return x.sc<x.bud*BAL.thieuLe.frac;
+function aaThieuLe0(p){try{if(!p||p.out)return false;if(p.rankSet!=null&&p.rankSet===rkOf(p)&&p.rankSetWorn)return false;if(typeof luxOf!=="function")return false;const x=luxOf(p);if(x.sc>0)return x.sc<x.bud*BAL.thieuLe.frac;
  /* nothing worn: thiếu lễ only when she could have dressed (a bestowed rank set, or wearable things in her chest) — nobody is blamed for clothes she does not own */
  return p.rankSet!=null||(p.inv||[]).some(e=>!e.h&&IT[e.k]&&IT[e.k].sl)}catch(e){return false}}
 function aaHostStrict(host){try{if(host==="th"){const t=traitsOf({kind:"th"});return t.includes("Đa nghi")||t.includes("Kiêu ngạo")}if(host&&host.queen)return traitsOf(host).some(t=>t==="Kiêu ngạo"||t==="Ghen tuông")}catch(e){}return false}
 function aaThieuLeFx(host){const B=BAL.thieuLe,m=aaHostStrict(host)?B.strict:1;return{danh:B.danh,duc:B.duc,aff:Math.round(B.aff*m)}}
 function aaThieuLeTxt(host,f0){const f=f0||aaThieuLeFx(host);const who=host==="th"?"Thái hậu":host==="emp"?"Hoàng thượng":host&&host.queen?"Hoàng hậu":"chủ nhà";
  return `thiếu lễ (y phục dưới phẩm): Danh ${f.danh}, Đức ${f.duc}, ${host==="emp"?`Sủng ${f.aff>0?"+":""}${Math.round(f.aff/3)||-1}`:`${who} thiện cảm ${f.aff}`}`}
-function aaThieuLeApply(host,f0){if(!aaThieuLe(S))return;const f=f0||aaThieuLeFx(host);apply({danh:f.danh,duc:f.duc});
+function aaThieuLeApply(host,f0){if(!f0&&!aaThieuLe(S))return;const f=f0||aaThieuLeFx(host);apply({danh:f.danh,duc:f.duc});
  if(host==="th")apply({th:f.aff});else if(host==="emp")apply({sung:Math.round(f.aff/3)||-1});else if(host&&host!==S)affAdd(host,S,f.aff);
  log(`<span class="r">Thiếu lễ: y phục của ngươi dưới phẩm ${RANKS[S.rank]?RANKS[S.rank].n:""}. ${aaThieuLeTxt(host).replace(/^thiếu lễ \(y phục dưới phẩm\): /,"")}.</span>`)}
-(function(){const t0=talkOpts;talkOpts=function(p){const A=t0.apply(this,arguments);try{if(!p||!aaThieuLe(S))return A;const host=p.kind==="th"?"th":p.kind==="emp"?"emp":p.kind==="hh"?p.ref:null;if(!host)return A;
+(function(){const t0=talkOpts;talkOpts=function(p){const A=t0.apply(this,arguments);try{if(!p)return A;const host=p.kind==="th"?"th":p.kind==="emp"?"emp":p.kind==="hh"?p.ref:null;if(!host)return A;const LA=leAttire(S,"thỉnh an",host);if(!LA.delta.danh&&!LA.delta.duc&&!LA.delta.aff)return A;
  return A.map(a=>{if(!a||(p.kind!=="emp"&&!/^Thỉnh an/.test(a.n)))return a;const w0=a.why,go0=a.go,run0=a.run;const FX=aaThieuLeFx(host);const add=aaThieuLeTxt(host,FX);
   const o=Object.assign({},a,{risk:[a.risk,add].filter(Boolean).join(" · "),why:()=>{const F=w0?w0():[];F.push(["Y phục dưới phẩm: thiếu lễ (không đổi cơ may, mất Danh/Đức)",0]);return F}});
   const fail0=a.fail;if(run0)o.run=function(){aaThieuLeApply(host,FX);return run0.apply(this,arguments)};
   else{o.go=function(){aaThieuLeApply(host,FX);return go0?go0.apply(this,arguments):undefined};o.fail=function(){aaThieuLeApply(host,FX);return fail0?fail0.apply(this,arguments):undefined}}return o})}catch(e){console.error(e);return A}}})();
 /* NPCs: the same rule when they wait on Thái hậu */
 (function(){try{if(typeof SOC==="object"&&SOC.serveTH){const r0=SOC.serveTH.run;SOC.serveTH.run=function(v){const r=r0.apply(this,arguments);try{if(aaThieuLe(v)){const f=aaThieuLeFx("th");ap(v,{danh:f.danh});v.th=cl((v.th||0)+f.aff,-100,100)}}catch(e){}return r}}}catch(e){}})();
+
+/* 17. leAttire(p, occasion, host) — ONE judgement of how someone is dressed for a formal moment (owner 11/15), used by Thiếu lễ and
+   by review/toilette (the morning dress-up + makeup game writes p.toilette = {day: S.turn*10+S.buoi day key, score 0–100, makeup: bool}).
+   Returns {state:"ok"|"plain"|"showy"|"overRank", delta:{danh,duc,aff}, why:[…]}. Host reaction by nết:
+   etiquette-minded hosts (Thái hậu Đa nghi/Kiêu ngạo, Hoàng hậu Kiêu ngạo/Ghen tuông) punish "plain" ×BAL.thieuLe.strict;
+   a frugal host (Thái hậu Hiền lành, Hoàng hậu Hiền lành/Nhu mì) approves plain dress (small +). Showy/overRank stay the
+   luxury rules (jinv luxMonth / vượt phẩm) — here they only cost a little host favour with a frugal host. */
+function leHostKind(host){try{const T=host==="th"?traitsOf({kind:"th"}):host&&host!=="emp"?traitsOf(host):[];
+ if(T.some(t=>t==="Hiền lành"||t==="Nhu mì"))return"frugal";if(host==="th"?T.some(t=>t==="Đa nghi"||t==="Kiêu ngạo"):T.some(t=>t==="Kiêu ngạo"||t==="Ghen tuông"))return"strict";}catch(e){}return"normal"}
+function leAttire(p,occasion,host){p=p||S;const why=[];let state="ok";try{
+ const x=typeof luxOf==="function"?luxOf(p):{lv:1,sc:1,bud:1};const tl=p.toilette&&p.toilette.day===(S.turn*10+(S.buoi||0))?p.toilette:null;
+ if(x.lv>=3){state="overRank";why.push("y phục vượt phẩm")}else if(x.lv===2){state="showy";why.push("y phục quá xa hoa")}
+ else if(aaThieuLe0(p)){state="plain";why.push("y phục dưới phẩm")}
+ else if(tl&&(tl.makeup===false||(tl.score|0)<40)){state="plain";why.push(tl.makeup===false?"không điểm trang":"điểm trang qua loa")}}catch(e){}
+ const B=BAL.thieuLe,hk=leHostKind(host);let d={danh:0,duc:0,aff:0};
+ if(state==="plain"){if(hk==="frugal"){d={danh:0,duc:1,aff:2};why.push("chủ nhà chuộng giản dị: hài lòng")}else{const m=hk==="strict"?B.strict:1;d={danh:B.danh,duc:B.duc,aff:Math.round(B.aff*m)};if(hk==="strict")why.push("chủ nhà trọng lễ: phật ý hơn")}}
+ else if((state==="showy"||state==="overRank")&&hk==="frugal"){d={danh:0,duc:0,aff:-2};why.push("chủ nhà chuộng giản dị: không vừa mắt")}
+ return{state,delta:d,why,occasion:occasion||"",host}}
+window.leAttire=leAttire;
+/* Thiếu lễ now reads leAttire (one judgement): the card text and the applied change are its delta */
+aaThieuLeFx=function(host){const r=leAttire(S,"",host);return r.delta};
+function aaThieuLe(p){return aaThieuLe0(p)}
+
+/* the card / log words follow leAttire's verdict (thiếu lễ, or a frugal host pleased, or a frugal host frowning at luxury) */
+aaThieuLeTxt=function(host,f0){const L=leAttire(S,"",host),f=f0||L.delta;const who=host==="th"?"Thái hậu":host==="emp"?"Hoàng thượng":host&&host.queen?"Hoàng hậu":"chủ nhà";
+ const head=f.aff>0?`giản dị hợp ý ${who}`:L.state==="plain"?`thiếu lễ (${L.why[0]||"y phục dưới phẩm"})`:`${L.why[0]||"y phục"}, ${who} không vừa mắt`;
+ const parts=[f.danh?`Danh ${f.danh>0?"+":""}${f.danh}`:"",f.duc?`Đức ${f.duc>0?"+":""}${f.duc}`:"",f.aff?(host==="emp"?`Sủng ${f.aff>0?"+1":Math.round(f.aff/3)||-1}`:`${who} thiện cảm ${f.aff>0?"+":""}${f.aff}`):""].filter(Boolean);
+ return `${head}: ${parts.join(", ")}`};
+aaThieuLeApply=function(host,f0){const L=leAttire(S,"",host),f=f0||L.delta;if(!f.danh&&!f.duc&&!f.aff)return;apply({danh:f.danh,duc:f.duc});
+ if(host==="th")apply({th:f.aff});else if(host==="emp")apply({sung:f.aff>0?1:(Math.round(f.aff/3)||-1)});else if(host&&host!==S)affAdd(host,S,f.aff);
+ const t=aaThieuLeTxt(host,f);log(`${f.aff>0?"":'<span class="r">'}${t[0].toUpperCase()+t.slice(1)}.${f.aff>0?"":"</span>"}`)};
