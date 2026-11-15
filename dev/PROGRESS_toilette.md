@@ -105,3 +105,9 @@ giữ nguyên "đẹp" và "diêm dúa" như hiện tại), 509a2dad5 (phản �
 - Re-merged origin/main afb2676a2 (header-danh top bar groups): built files only. 755x1000@2 + 844x390@3 re-run: 0 errors, no overflow, old save
   loads, chip in the new top bar. (One 755 run hit a game overlay #ov already open on that random new life before the chip tap — test harness
   flake; the re-run passed.)
+- Re-merged origin/main aa9689da5 (kit-fig2 batch 1, promo-exam). Conflict j79 kpSentences: main's new version (cut at tag boundaries, stat-only
+  rows joined to the fact before) + the quote-depth guard on all three cut points; kbl-quote-scan still 115→0 / 115→0 (scan now reads KP_* consts).
+  Reactions now render as kitEventDp by themselves (person left, banner right, options) — checked 755x1000@2 and 844x390@3: 0 errors, no overflow,
+  old save loads. The earlier "tag at the banner top" note is gone with kitEventDp.
+- Harness flakes under load 40–50 (not game bugs): once #ov already open before the chip tap, once "Đánh xong" re-rendered by the round clock
+  during the click; both re-runs passed.
