@@ -385,3 +385,5 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (09:45Z) Trung y: duyệt 4 nhóm phẩm (trắng / ngà / trắng ánh trăng viền bạc / vàng nhạt Hoàng hậu viền rõ), ~32.000 tín dụng; bỏ 4 look cũ; ô y phục trống thật cho tới khi mặc áo khác, Nội vụ phủ cấp lại sau vài tuần bằng rương; cởi áo trong cung mình không phạt.
 - (09:55Z) Khung Đáp ứng: gỗ cành mai vẫn ra màu cam rực → thử (A) khung Đáp ứng CŨ (gỗ nâu xám) + nền trắng ngà, (B) khung cành mai pastel thật nhạt. Chân dung trong khung còn nhỏ (đầu cách mép khung xa) → sửa cách đặt chân dung trong kit cho đầu sát mép trên, mặt to hơn.
 - (09:55Z) 22 thú cưng vẽ lại theo phong cách tranh của game (không tả thực), tư thế tự nhiên, không đệm/không đá/không bệ; chim đậu lồng hoặc giá; cá trong chậu.
+- (10:00Z) Thú cưng: Thường–Tinh phẩm là con vật thật; phẩm càng cao càng huyền thoại (cửu vĩ hồ, kỳ lân con, ngọc thố, phượng hoàng non, linh quy, bạch lộc thần…), không dùng sư tử/hổ/hồ ly thường. Cập nhật cả dữ liệu jpet.
+- (10:00Z) Lô nào xong là có người duyệt riêng ngay, không xếp hàng (mở thêm người duyệt khi cần).
