@@ -216,3 +216,4 @@ Worktree thợ ở /home/user/wt/<tên>. Bản tóm tắt luật cho thợ: /hom
 - ~10:50Z (machine clock) CPU OVERLOAD: load ~60 on 4 cores; bot browsers crash (ts-a balance could not be measured). Rule: do NOT refill slots as they free; target ≤12 running agents, at most ~6 that run Playwright at once. ts-a 0b7e154a2 UI ready; balance (bot fix + 80 lives) pending until load drops.
 - From now on this file and all repo docs are written in English (owner ~18:30Z).
 - LIVE main = 041cdcd1f: kit-close (311260527: Tư trang 2 tabs, news card, no tap-through, ✕ only) + ChatGPT docs (ebbbd9eff) + scene-light colour part (no sepia/brown in her room, warm rain). Not refilling the freed reviewer slot (CPU overload rule).
+- LIVE main = rest-balance (207824297): Rest a moment (+6, 1 khắc) vs Recover (evening only, tonic or 8 silver, +20); tonic shown under Cost.
