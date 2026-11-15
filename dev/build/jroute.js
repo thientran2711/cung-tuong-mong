@@ -8,7 +8,7 @@
    Cùng luật cho phi tần NPC: tư thông (j22), mưu trốn cung (v.rtEsc), xin xuất gia; con riêng (k.tf) cũng có thể bị đồn.
    Tắt khi đo cân bằng: window.__rtOff=1.
    ======================================================================================================================== */
-const RTC={heat:{vuon:14,home:8,tyv:10,tn:24,lc:6,kn:24},decay:6,maxFinal:60,npcEsc:1.2,npcSee:30,kidRoll:3,fire:2.5};
+const RTC={heat:{vuon:14,home:8,tyv:10,tn:24,lc:6,kn:24},decay:6,maxFinal:45,npcEsc:1.2,npcSee:30,kidRoll:3,fire:1.2};
 const RT_ROUTE={tt:"Tư tình",tc:"Trốn khỏi cung",hl:"Rời cung hợp lệ",ad:"Ẩn dật trong cung"};
 const RT_END={tt_lo:["tt","Tư thông bại lộ"],tt_hoa:["tt","Giọt máu vẫn hòa"],ng_oan:["tt","Bị vu oan qua bát nước"],ng_vach:["tt","Vạch mặt kẻ gian lận"],tt_kin:["tt","Một đời giấu kín"],tc_dan:["tc","Trốn khỏi cung, sống đời thường dân"],
  tc_cung:["tc","Cao chạy xa bay cùng người thương"],tc_lien:["tc","Thoát thân, nhà bị liên lụy"],tc_bat:["tc","Bị bắt khi trốn"],
@@ -150,7 +150,7 @@ function rtTcCards(){const T=rtS(),A=[];const tc=T.tc;
    kem:`Lời ra tiếng vào ${rtHeatW(T.heat).toLowerCase()} (cơ may -${Math.round(T.heat/2.5)})`,go:()=>rtFled(k),fail:()=>rtCaughtEsc(k)}))}
  A.push(rtCard({id:"tcstop",r:2,n:"Thôi ý định trốn đi",t:"Đốt hết thư từ, cất yêu bài xuống đáy rương.",art:RT_ART.tc,k:1,x:"lời ra tiếng vào lắng bớt · lối Trốn khỏi cung khép lại",go:()=>{T.tc=null;rtHeat(-8);log("Ngươi đốt hết thư từ. Bức tường son vẫn đứng đó.")}}));
  return A}
-function rtEscO(k){const T=rtS(),P=(T.tc&&T.tc.prep)||{};const base={doan:20,chet:24,hoa:20,theo:30,lc:18}[k]||18;
+function rtEscO(k){const T=rtS(),P=(T.tc&&T.tc.prep)||{};const base={doan:12,chet:16,hoa:12,theo:22,lc:10}[k]||10;
  return cl(base+(P.guard?8:0)+(P.route?6:0)+(P.maid?5:0)+(P.home?4:0)+(P.pass&&k!=="doan"?3:0)-Math.round(T.heat/2.5)-(T.watch>S.turn?15:0)-rtDuc()+rtDf().o,5,RTC.maxFinal)}
 function rtFled(k){const T=rtS(),P=T.tc.prep,m=rtMan();const withM=!!(m&&T.tt&&T.tt.st>=4);rtStat("tc_ok");
  const id=withM?"tc_cung":P.home?"tc_dan":"tc_lien";rtEnd(id);
@@ -166,12 +166,12 @@ function rtCaughtEsc(k){const T=rtS();rtStat("tc_caught");rtEnd("tc_bat");T.tc=n
 /* ---------- 3. RỜI CUNG HỢP LỆ ---------- */
 function rtHlCards(){const T=rtS(),A=[],H=T.hl;const kidsSmall=rtKidsAlive().filter(k=>(k.age||0)<15).length;const cd=k=>H["cd_"+k]&&H["cd_"+k]>S.turn;const cdN=k=>[[`đợi qua cơn giận của Hoàng thượng (còn ${H["cd_"+k]-S.turn} tháng)`,!cd(k)]];
  const nights=(S.nightLog||[]).length;
- if(!S.out){A.push(rtCard({id:"hl_tu",r:3,n:"Dâng biểu xin xuất gia",t:"Xin cạo tóc vào chùa Hộ Quốc, cầu phúc cho xã tắc.",art:RT_ART.tu,o:od(18+(S.th||0)/2+(S.duc-50)/2-S.sung/3+rtDf().o),k:2,
-   need:[["không có con nhỏ dưới 15 tuổi",!kidsSmall],["không mang thai",!S.preg],[`Đức 50 (có ${S.duc})`,S.duc>=50]].concat(cdN("tu")),
+ if(!S.out){A.push(rtCard({id:"hl_tu",r:3,n:"Dâng biểu xin xuất gia",t:"Xin cạo tóc vào chùa Hộ Quốc, cầu phúc cho xã tắc.",art:RT_ART.tu,o:od(5+(S.th||0)/2+(S.duc-50)/2-S.sung/3+(H.plead?10:0)+rtDf().o),k:2,
+   need:[["không có con nhỏ dưới 15 tuổi",!kidsSmall],["không mang thai",!S.preg],[`Đức 50 (có ${S.duc})`,S.duc>=50],[`ở cung đủ 2 năm (đã ${Math.floor(S.turn/12)} năm)`,S.turn>=24],[`Thái hậu thương ngươi (có ${S.th||0}/40)`,(S.th||0)>=40&&!S.thDead]].concat(cdN("tu")),
    x:"kết thúc kiếp này trong cửa Phật",lx:"Hoàng thượng phật ý · Sủng -8 · đợi 6 tháng",go:()=>{rtEnd("hl_tu");over("Dâng biểu xuất gia",`Hoàng thượng phê một chữ «Chuẩn». ${S.name} cạo tóc ở chùa Hộ Quốc, tiếng mõ sớm chiều thay tiếng trống canh trong cung.`,"Xuất gia",true)},
    fail:()=>{apply({sung:-8});H.cd_tu=S.turn+6;rtStat("hl_tu_no");log(`<span class="r">Hoàng thượng ném tấu biểu xuống đất: «Trẫm còn sống, nàng đã muốn bỏ trẫm mà đi?»</span>`)}}));
   A.push(rtCard({id:"hl_plead",r:3,n:"Nhờ Thái hậu nói giúp",t:"Quỳ trước Đức Thọ cung, kể nỗi lòng muốn rời cung.",art:RT_ART.ta,c:{bac:-30},o:od(35+(S.th||0)/2),k:1,need:[[`Thái hậu thương ngươi (có ${S.th||0}/40)`,(S.th||0)>=40&&!S.thDead],["chưa nhờ",!H.plead]],
-   x:"Thái hậu đứng về phía ngươi khi ngươi xin rời cung (cơ may +20)",lx:"Thái hậu không vui · Thái hậu -6",go:()=>{H.plead=1},fail:()=>{apply({th:-6})}}));
+   x:"Thái hậu đứng về phía ngươi khi ngươi xin rời cung (xin ban hôn, về quê dễ hơn nhiều; xuất gia dễ hơn)",lx:"Thái hậu không vui · Thái hậu -6",go:()=>{H.plead=1},fail:()=>{apply({th:-6})}}));
   const vg=(S.men||[]).filter(m=>m.alive&&m.rw==="vương gia"&&((m.tinh||0)>=50||(T.tt&&T.tt.mid===m.id&&T.tt.st>=3)));const v1=vg[0];
   A.push(rtCard({id:"hl_hon",r:3,n:v1?`Xin ban hôn cho ${rtMnm(v1)}`:"Xin ban hôn cho Vương gia",t:"Vương gia dâng sớ xin Hoàng thượng ban ngươi về vương phủ.",art:RT_ART.ta,o:od(22+(S.th||0)/4+(v1?(v1.tinh||0)/5:0)+(H.plead?20:0)-S.sung/2+rtDf().o),k:2,
    need:[["một Vương gia có tình ý với ngươi (tình ý 50+)",!!v1],[`phẩm thấp (Quý nhân trở xuống)`,S.rank<=2],[`ít thị tẩm (có ${nights}/2)`,nights<=2],["không có con",!rtKidsAlive().length]].concat(cdN("hon")),
@@ -197,7 +197,7 @@ function rtAdCards(){const T=rtS(),A=[],ad=T.ad;
  A.push(rtCard({id:"ad_off",r:4,n:"Mở lại thẻ bài",t:"Trở lại đường tranh sủng.",art:RT_ART.an,k:1,x:`thôi ẩn dật (đã ${yrs} năm)`,go:()=>{T.ad.on=0;log("Ngươi xin Kính sự phòng bày lại thẻ bài.")}}));
  return A}
 /* ---------- the deck: «Lối riêng» cards ---------- */
-function rtCards(){if(!rtRoad()||(window.__bot&&!window.__rtPol))return[];/* the balance bots climb; only the route bot (dev/measure/routes.js) takes «Lối riêng» */let A=[];try{A=A.concat(rtNgCards());if(!rtOpen())return A;const T=rtS();if(!S.out)A=A.concat(rtTtCards());else if(T.tt)A=A.concat(rtTtCards());A=A.concat(rtTcCards(),rtHlCards(),rtAdCards())}catch(e){console.error("rtCards",e)}return A}
+function rtCards(){if(!rtRoad()||(window.__bot&&!window.__rtGo))return[];/* the balance bots climb; only the route bot (dev/measure/routes.js) takes «Lối riêng» */let A=[];try{A=A.concat(rtNgCards());if(!rtOpen())return A;const T=rtS();if(!S.out)A=A.concat(rtTtCards());else if(T.tt)A=A.concat(rtTtCards());A=A.concat(rtTcCards(),rtHlCards(),rtAdCards())}catch(e){console.error("rtCards",e)}return A}
 function rtRefresh(){try{if(!S||!Array.isArray(deck))return;const d=deck.filter(a=>!a.rt);deck.length=0;deck.push(...d,...rtCards())}catch(e){console.error(e)}}
 (function(){const d0=deal;deal=function(){const r=d0.apply(this,arguments);try{if(rtRoad()&&Array.isArray(deck)){deck.push(...rtCards());rtNgDue()}}catch(e){console.error(e)}return r}})();
 (function(){const n0=nextBuoi;nextBuoi=function(){const t=S&&S.turn,b=S&&S.buoi;const r=n0.apply(this,arguments);try{if(S&&!S.dead&&(S.turn!==t||S.buoi!==b)){rtRefresh();rtNpcMeet();if(!window.__bot)render()}}catch(e){console.error(e)}return r}})();
@@ -253,14 +253,14 @@ function rtMonth(){if(!rtRoad()||!S.rt)return"";const T=S.rt;let ev="";
  /* quiet life */
  if(T.ad&&T.ad.on){apply({duc:1});for(const v of liveRivals(true))if(v.ghen)v.ghen=Math.max(0,v.ghen-4);if(S.turn-T.ad.since>=36&&S.duc>=60&&!T.ad.harm&&!T.ad.off){T.ad.off=1;rtEnd("ad_an");rtPush("rtAn",{})}}
  /* fire this month (true event; the escape route can use it) */
- if(T.tc&&roll(RTC.fire)){T.fire=S.turn;ev+=`<span class="r">Đêm qua hỏa hoạn ở Ngự thiện phòng; khắp cung chạy loạn suốt nửa đêm.</span> `}
+ if(roll(RTC.fire)){T.fire=S.turn;ev+=`<span class="r">Đêm qua hỏa hoạn ở Ngự thiện phòng; khắp cung chạy loạn suốt nửa đêm.</span> `}
  ev+=rtNpcMonth();return ev}
 (function(){const m0=monthTick;monthTick=function(){let ev=m0.apply(this,arguments);try{if(S&&!S.dead)ev+=rtMonth()}catch(e){console.error(e)}return ev}})();
 /* NPC consorts walk the same roads */
 function rtNpcMonth(){let ev="";for(const v of liveRivals(false)){if(v.queen)continue;const kids=(v.kids||[]).filter(k=>k.alive).length;const weary=(v.sung||0)<20&&!kids&&S.turn>=12;
   if(!v.rtEsc&&(v.affair||v.out)&&weary&&roll(RTC.npcEsc)){v.rtEsc={since:S.turn};rtStat("npc_plan")}
-  else if(v.rtEsc&&S.turn-v.rtEsc.since>=2){const p=v.rtEsc.help?35:20;if(roll(p)){v.alive=false;v.fled=1;v.rtEsc=null;rtStat("npc_fled");ev+=`<span class="r">${rtVn(v)} mất tích trong đêm; người ta nói nàng đã trốn khỏi cung.</span> `}
-   else if(roll(30)){v.rtEsc=null;rtStat("npc_caught");ev+=`<span class="r">${rtVn(v)} trốn khỏi cung không thành, bị bắt ở cổng Thần Vũ.</span> `;if(roll(50))deathSentence(v,"trốn khỏi cung");else{v.out=true}}}
+  else if(v.rtEsc&&S.turn-v.rtEsc.since>=3&&roll(40)){/* same odds as hers: base + the steps an NPC can gather (guard, route; her help = maid + papers) */const p=22+(v.rtEsc.help?11:0);if(roll(p)){v.alive=false;v.fled=1;v.rtEsc=null;rtStat("npc_fled");ev+=`<span class="r">${rtVn(v)} mất tích trong đêm; người ta nói nàng đã trốn khỏi cung.</span> `}
+   else{v.rtEsc=null;rtStat("npc_caught");ev+=`<span class="r">${rtVn(v)} trốn khỏi cung không thành, bị bắt ở cổng Thần Vũ.</span> `;if(roll(50))deathSentence(v,"trốn khỏi cung");else{v.out=true}}}
   if(v.out&&!kids&&(v.sung||0)<10&&roll(.8)){v.alive=false;v.nun=1;rtStat("npc_nun");ev+=`${rtVn(v)} dâng biểu xin xuất gia, được chuẩn. `}
   for(const k of (v.kids||[]))if(k.alive&&!k.tfOk&&(k.age||0)>=3&&roll(k.tf?1:.15)){ev+=rtNgNpcAuto(v,k);break}}
  return ev}
