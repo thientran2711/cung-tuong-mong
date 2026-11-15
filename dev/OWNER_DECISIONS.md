@@ -360,3 +360,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (07:15Z) Dòng quan hệ (thiện cảm/oán) dùng MỘT thành phần kit: nhãn; "chữ · số" một dòng + thanh cùng vị trí/độ dài mọi dòng; thiện cảm có vạch giữa (âm/dương), oán/ghen (không âm) đầy từ trái nhưng cùng cỡ; oán cũng có thang chữ.
 - (07:20Z) Tên + phẩm của nhân vật LUÔN đặt PHÍA TRÊN chân dung/hình người (dòng phẩm nhỏ, rồi dòng tên), ở mọi nơi; một thành phần kit kitNameRank.
 - (07:25Z) Giữ HAI chỉ số riêng: thiện cảm (thích/ghét, quyết định có giúp không) và oán (hận vì việc đã làm, quyết định trả đũa, nguôi dần). Giữ chữ "oán" (không dùng "thù"). Chạm nhãn hiện giải thích ngắn.
+- (07:35Z) Phẩm Đáp ứng: bỏ màu nâu (như nô tài). Đổi nền/khung/ngọc sang trắng ngà ngọc trai, thanh nhã, khác Lãnh cung. Làm mẫu trước.
