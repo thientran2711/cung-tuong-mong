@@ -1,0 +1,342 @@
+{
+ "mp01": {
+  "prompt": "Semi-realistic painterly guofeng portrait style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference image; plain light parchment background, soft even light; fair porcelain skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow, never upturned), closed lips; very handsome refined looks; no moles or marks on the face; faces clearly visible, 3/4 or frontal view; rich clear colours and smooth soft near-3D shading, not a pencil sketch. A character lineup of FOUR full-body standing figures in one row, head to feet with margin, evenly spaced with wide clear empty space between them, all the SAME man (same face, same features, same signature colours), all feet on one baseline. Left to right: (1) about 20, youthful, clean-shaven; (2) about 30, more mature, a faint neat moustache; (3) about 42, dignified, a neat moustache and short refined beard; (4) about 56, distinguished, a longer neat greying beard, some grey in the hair, gentle fine lines. He is a scholar, oval face with a straight nose, wearing an elegant layered silk scholar robe with embroidered borders, a jade belt with pendant, a small jade hair crown; signature colours jade green with ivory; holding a closed folding fan. The outfit stays the same in all four, slightly richer at older ages. Calm composed upright standing poses, still, robes and sleeves hanging straight, no flying sashes. Han/Ming cross-collar robes, no Qing hats or collars. Men never in pink or purple. No text, no frames.",
+  "style": "ksDAApm16B",
+  "figs": [
+   {
+    "file": "fig-man-quytu-1-a18",
+    "role": "man",
+    "sub": "quytu",
+    "identity": "quytu-1",
+    "ageBand": "a18"
+   },
+   {
+    "file": "fig-man-quytu-1-a26",
+    "role": "man",
+    "sub": "quytu",
+    "identity": "quytu-1",
+    "ageBand": "a26"
+   },
+   {
+    "file": "fig-man-quytu-1-a36",
+    "role": "man",
+    "sub": "quytu",
+    "identity": "quytu-1",
+    "ageBand": "a36"
+   },
+   {
+    "file": "fig-man-quytu-1-a51",
+    "role": "man",
+    "sub": "quytu",
+    "identity": "quytu-1",
+    "ageBand": "a51"
+   }
+  ]
+ },
+ "mp02": {
+  "prompt": "Semi-realistic painterly guofeng portrait style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference image; plain light parchment background, soft even light; fair porcelain skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow, never upturned), closed lips; very handsome refined looks; no moles or marks on the face; faces clearly visible, 3/4 or frontal view; rich clear colours and smooth soft near-3D shading, not a pencil sketch. A character lineup of FOUR full-body standing figures in one row, head to feet with margin, evenly spaced with wide clear empty space between them, all the SAME man (same face, same features, same signature colours), all feet on one baseline. Left to right: (1) about 20, youthful, clean-shaven; (2) about 30, more mature, a faint neat moustache; (3) about 42, dignified, a neat moustache and short refined beard; (4) about 56, distinguished, a longer neat greying beard, some grey in the hair, gentle fine lines. He is a noble, refined narrow face with high cheekbones, wearing a rich brocade robe of a great house's young lord with cloud embroidery, a jade belt, a small silver hair crown; signature colours deep sapphire blue with silver-white; hands clasped behind the back. The outfit stays the same in all four, slightly richer at older ages. Calm composed upright standing poses, still, robes and sleeves hanging straight, no flying sashes. Han/Ming cross-collar robes, no Qing hats or collars. Men never in pink or purple. No text, no frames.",
+  "style": "ksDAApm16B",
+  "figs": [
+   {
+    "file": "fig-man-quytu-2-a18",
+    "role": "man",
+    "sub": "quytu",
+    "identity": "quytu-2",
+    "ageBand": "a18"
+   },
+   {
+    "file": "fig-man-quytu-2-a26",
+    "role": "man",
+    "sub": "quytu",
+    "identity": "quytu-2",
+    "ageBand": "a26"
+   },
+   {
+    "file": "fig-man-quytu-2-a36",
+    "role": "man",
+    "sub": "quytu",
+    "identity": "quytu-2",
+    "ageBand": "a36"
+   },
+   {
+    "file": "fig-man-quytu-2-a51",
+    "role": "man",
+    "sub": "quytu",
+    "identity": "quytu-2",
+    "ageBand": "a51"
+   }
+  ]
+ },
+ "mp03": {
+  "prompt": "Semi-realistic painterly guofeng portrait style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference image; plain light parchment background, soft even light; fair porcelain skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow, never upturned), closed lips; very handsome refined looks; no moles or marks on the face; faces clearly visible, 3/4 or frontal view; rich clear colours and smooth soft near-3D shading, not a pencil sketch. A character lineup of FOUR full-body standing figures in one row, head to feet with margin, evenly spaced with wide clear empty space between them, all the SAME man (same face, same features, same signature colours), all feet on one baseline. Left to right: (1) about 20, youthful, clean-shaven; (2) about 30, more mature, a faint neat moustache; (3) about 42, dignified, a neat moustache and short refined beard; (4) about 56, distinguished, a longer neat greying beard, some grey in the hair, gentle fine lines. He is a martial, slightly square jaw, clean-cut features, wearing a fitted dark brocade robe with leather bracers and a broad belt, a dark metal hair crown, upright military bearing; signature colours dark slate with bronze; one hand on a sheathed sword at his side. The outfit stays the same in all four, slightly richer at older ages. Calm composed upright standing poses, still, robes and sleeves hanging straight, no flying sashes. Han/Ming cross-collar robes, no Qing hats or collars. Men never in pink or purple. No text, no frames.",
+  "style": "ksDAApm16B",
+  "figs": [
+   {
+    "file": "fig-man-quytu-3-a18",
+    "role": "man",
+    "sub": "quytu",
+    "identity": "quytu-3",
+    "ageBand": "a18"
+   },
+   {
+    "file": "fig-man-quytu-3-a26",
+    "role": "man",
+    "sub": "quytu",
+    "identity": "quytu-3",
+    "ageBand": "a26"
+   },
+   {
+    "file": "fig-man-quytu-3-a36",
+    "role": "man",
+    "sub": "quytu",
+    "identity": "quytu-3",
+    "ageBand": "a36"
+   },
+   {
+    "file": "fig-man-quytu-3-a51",
+    "role": "man",
+    "sub": "quytu",
+    "identity": "quytu-3",
+    "ageBand": "a51"
+   }
+  ]
+ },
+ "mp04": {
+  "prompt": "Semi-realistic painterly guofeng portrait style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference image; plain light parchment background, soft even light; fair porcelain skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow, never upturned), closed lips; very handsome refined looks; no moles or marks on the face; faces clearly visible, 3/4 or frontal view; rich clear colours and smooth soft near-3D shading, not a pencil sketch. A character lineup of FOUR full-body standing figures in one row, head to feet with margin, evenly spaced with wide clear empty space between them, all the SAME man (same face, same features, same signature colours), all feet on one baseline. Left to right: (1) about 20, youthful, clean-shaven; (2) about 30, more mature, a faint neat moustache; (3) about 42, dignified, a neat moustache and short refined beard; (4) about 56, distinguished, a longer neat greying beard, some grey in the hair, gentle fine lines. He is a scholar, gentle long face with soft dark brows, wearing a light layered scholar robe with a sky-blue sash and a jade pendant, a simple white jade hairpin; signature colours ivory white with sky blue; holding a thin book. The outfit stays the same in all four, slightly richer at older ages. Calm composed upright standing poses, still, robes and sleeves hanging straight, no flying sashes. Han/Ming cross-collar robes, no Qing hats or collars. Men never in pink or purple. No text, no frames.",
+  "style": "ksDAApm16B",
+  "figs": [
+   {
+    "file": "fig-man-quytu-4-a18",
+    "role": "man",
+    "sub": "quytu",
+    "identity": "quytu-4",
+    "ageBand": "a18"
+   },
+   {
+    "file": "fig-man-quytu-4-a26",
+    "role": "man",
+    "sub": "quytu",
+    "identity": "quytu-4",
+    "ageBand": "a26"
+   },
+   {
+    "file": "fig-man-quytu-4-a36",
+    "role": "man",
+    "sub": "quytu",
+    "identity": "quytu-4",
+    "ageBand": "a36"
+   },
+   {
+    "file": "fig-man-quytu-4-a51",
+    "role": "man",
+    "sub": "quytu",
+    "identity": "quytu-4",
+    "ageBand": "a51"
+   }
+  ]
+ },
+ "mp05": {
+  "prompt": "Semi-realistic painterly guofeng portrait style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference image; plain light parchment background, soft even light; fair porcelain skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow, never upturned), closed lips; very handsome refined looks; no moles or marks on the face; faces clearly visible, 3/4 or frontal view; rich clear colours and smooth soft near-3D shading, not a pencil sketch. A character lineup of FOUR full-body standing figures in one row, head to feet with margin, evenly spaced with wide clear empty space between them, all the SAME man (same face, same features, same signature colours), all feet on one baseline. Left to right: (1) about 20, youthful, clean-shaven; (2) about 30, more mature, a faint neat moustache; (3) about 42, dignified, a neat moustache and short refined beard; (4) about 56, distinguished, a longer neat greying beard, some grey in the hair, gentle fine lines. He is a noble, soft round-oval face, wearing a navy brocade robe with gold-trimmed collar and a jade belt, a gold hair crown; signature colours navy blue with gold; holding a jade pendant on a cord. The outfit stays the same in all four, slightly richer at older ages. Calm composed upright standing poses, still, robes and sleeves hanging straight, no flying sashes. Han/Ming cross-collar robes, no Qing hats or collars. Men never in pink or purple. No text, no frames.",
+  "style": "ksDAApm16B",
+  "figs": [
+   {
+    "file": "fig-man-quytu-5-a18",
+    "role": "man",
+    "sub": "quytu",
+    "identity": "quytu-5",
+    "ageBand": "a18"
+   },
+   {
+    "file": "fig-man-quytu-5-a26",
+    "role": "man",
+    "sub": "quytu",
+    "identity": "quytu-5",
+    "ageBand": "a26"
+   },
+   {
+    "file": "fig-man-quytu-5-a36",
+    "role": "man",
+    "sub": "quytu",
+    "identity": "quytu-5",
+    "ageBand": "a36"
+   },
+   {
+    "file": "fig-man-quytu-5-a51",
+    "role": "man",
+    "sub": "quytu",
+    "identity": "quytu-5",
+    "ageBand": "a51"
+   }
+  ]
+ },
+ "mp06": {
+  "prompt": "Semi-realistic painterly guofeng portrait style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference image; plain light parchment background, soft even light; fair porcelain skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow, never upturned), closed lips; very handsome refined looks; no moles or marks on the face; faces clearly visible, 3/4 or frontal view; rich clear colours and smooth soft near-3D shading, not a pencil sketch. A character lineup of FOUR full-body standing figures in one row, head to feet with margin, evenly spaced with wide clear empty space between them, all the SAME man (same face, same features, same signature colours), all feet on one baseline. Left to right: (1) about 20, youthful, clean-shaven; (2) about 30, more mature, a faint neat moustache; (3) about 42, dignified, a neat moustache and short refined beard; (4) about 56, distinguished, a longer neat greying beard, some grey in the hair, gentle fine lines. He is a merchant-noble, oval face with soft features, wearing a fine brown silk robe with cream inner collar and a leather belt with a small purse, a wooden hairpin; signature colours warm brown with cream; holding an abacus-shaped jade token. The outfit stays the same in all four, slightly richer at older ages. Calm composed upright standing poses, still, robes and sleeves hanging straight, no flying sashes. Han/Ming cross-collar robes, no Qing hats or collars. Men never in pink or purple. No text, no frames.",
+  "style": "ksDAApm16B",
+  "figs": [
+   {
+    "file": "fig-man-quytu-6-a18",
+    "role": "man",
+    "sub": "quytu",
+    "identity": "quytu-6",
+    "ageBand": "a18"
+   },
+   {
+    "file": "fig-man-quytu-6-a26",
+    "role": "man",
+    "sub": "quytu",
+    "identity": "quytu-6",
+    "ageBand": "a26"
+   },
+   {
+    "file": "fig-man-quytu-6-a36",
+    "role": "man",
+    "sub": "quytu",
+    "identity": "quytu-6",
+    "ageBand": "a36"
+   },
+   {
+    "file": "fig-man-quytu-6-a51",
+    "role": "man",
+    "sub": "quytu",
+    "identity": "quytu-6",
+    "ageBand": "a51"
+   }
+  ]
+ },
+ "mp07": {
+  "prompt": "Semi-realistic painterly guofeng portrait style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference image; plain light parchment background, soft even light; fair porcelain skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow, never upturned), closed lips; very handsome refined looks; no moles or marks on the face; faces clearly visible, 3/4 or frontal view; rich clear colours and smooth soft near-3D shading, not a pencil sketch. A character lineup of FOUR full-body standing figures in one row, head to feet with margin, evenly spaced with wide clear empty space between them, all the SAME man (same face, same features, same signature colours), all feet on one baseline. Left to right: (1) about 20, youthful, clean-shaven; (2) about 30, more mature, a faint neat moustache; (3) about 42, dignified, a neat moustache and short refined beard; (4) about 56, distinguished, a longer neat greying beard, some grey in the hair, gentle fine lines. He is a martial, strong straight brows, clean-cut jaw, wearing a hunting robe in emerald brocade with leather bracers, a bow case on the back, a dark hair crown; signature colours emerald green with dark leather; holding a hunting bow at his side. The outfit stays the same in all four, slightly richer at older ages. Calm composed upright standing poses, still, robes and sleeves hanging straight, no flying sashes. Han/Ming cross-collar robes, no Qing hats or collars. Men never in pink or purple. No text, no frames.",
+  "style": "ksDAApm16B",
+  "figs": [
+   {
+    "file": "fig-man-quytu-7-a18",
+    "role": "man",
+    "sub": "quytu",
+    "identity": "quytu-7",
+    "ageBand": "a18"
+   },
+   {
+    "file": "fig-man-quytu-7-a26",
+    "role": "man",
+    "sub": "quytu",
+    "identity": "quytu-7",
+    "ageBand": "a26"
+   },
+   {
+    "file": "fig-man-quytu-7-a36",
+    "role": "man",
+    "sub": "quytu",
+    "identity": "quytu-7",
+    "ageBand": "a36"
+   },
+   {
+    "file": "fig-man-quytu-7-a51",
+    "role": "man",
+    "sub": "quytu",
+    "identity": "quytu-7",
+    "ageBand": "a51"
+   }
+  ]
+ },
+ "mp08": {
+  "prompt": "Semi-realistic painterly guofeng portrait style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference image; plain light parchment background, soft even light; fair porcelain skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow, never upturned), closed lips; very handsome refined looks; no moles or marks on the face; faces clearly visible, 3/4 or frontal view; rich clear colours and smooth soft near-3D shading, not a pencil sketch. A character lineup of FOUR full-body standing figures in one row, head to feet with margin, evenly spaced with wide clear empty space between them, all the SAME man (same face, same features, same signature colours), all feet on one baseline. Left to right: (1) about 20, youthful, clean-shaven; (2) about 30, more mature, a faint neat moustache; (3) about 42, dignified, a neat moustache and short refined beard; (4) about 56, distinguished, a longer neat greying beard, some grey in the hair, gentle fine lines. He is a scholar, slender face with a gentle smile line, wearing a teal scholar robe with pale grey layers and a black lacquer hair crown; signature colours teal with pale grey; holding a rolled scroll. The outfit stays the same in all four, slightly richer at older ages. Calm composed upright standing poses, still, robes and sleeves hanging straight, no flying sashes. Han/Ming cross-collar robes, no Qing hats or collars. Men never in pink or purple. No text, no frames.",
+  "style": "ksDAApm16B",
+  "figs": [
+   {
+    "file": "fig-man-quytu-8-a18",
+    "role": "man",
+    "sub": "quytu",
+    "identity": "quytu-8",
+    "ageBand": "a18"
+   },
+   {
+    "file": "fig-man-quytu-8-a26",
+    "role": "man",
+    "sub": "quytu",
+    "identity": "quytu-8",
+    "ageBand": "a26"
+   },
+   {
+    "file": "fig-man-quytu-8-a36",
+    "role": "man",
+    "sub": "quytu",
+    "identity": "quytu-8",
+    "ageBand": "a36"
+   },
+   {
+    "file": "fig-man-quytu-8-a51",
+    "role": "man",
+    "sub": "quytu",
+    "identity": "quytu-8",
+    "ageBand": "a51"
+   }
+  ]
+ },
+ "mp09": {
+  "prompt": "Semi-realistic painterly guofeng portrait style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference image; plain light parchment background, soft even light; fair porcelain skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow, never upturned), closed lips; very handsome refined looks; no moles or marks on the face; faces clearly visible, 3/4 or frontal view; rich clear colours and smooth soft near-3D shading, not a pencil sketch. A character lineup of FOUR full-body standing figures in one row, head to feet with margin, evenly spaced with wide clear empty space between them, all the SAME man (same face, same features, same signature colours), all feet on one baseline. Left to right: (1) about 20, youthful, clean-shaven; (2) about 30, more mature, a faint neat moustache; (3) about 42, dignified, a neat moustache and short refined beard; (4) about 56, distinguished, a longer neat greying beard, some grey in the hair, gentle fine lines. He is a noble, refined oval face with calm eyes, wearing a midnight-blue robe with jade-green embroidered hems and a jade belt, a silver hair crown; signature colours midnight blue with jade; holding a tea cup. The outfit stays the same in all four, slightly richer at older ages. Calm composed upright standing poses, still, robes and sleeves hanging straight, no flying sashes. Han/Ming cross-collar robes, no Qing hats or collars. Men never in pink or purple. No text, no frames.",
+  "style": "ksDAApm16B",
+  "figs": [
+   {
+    "file": "fig-man-quytu-9-a18",
+    "role": "man",
+    "sub": "quytu",
+    "identity": "quytu-9",
+    "ageBand": "a18"
+   },
+   {
+    "file": "fig-man-quytu-9-a26",
+    "role": "man",
+    "sub": "quytu",
+    "identity": "quytu-9",
+    "ageBand": "a26"
+   },
+   {
+    "file": "fig-man-quytu-9-a36",
+    "role": "man",
+    "sub": "quytu",
+    "identity": "quytu-9",
+    "ageBand": "a36"
+   },
+   {
+    "file": "fig-man-quytu-9-a51",
+    "role": "man",
+    "sub": "quytu",
+    "identity": "quytu-9",
+    "ageBand": "a51"
+   }
+  ]
+ },
+ "mp10": {
+  "prompt": "Semi-realistic painterly guofeng portrait style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference image; plain light parchment background, soft even light; fair porcelain skin; serene gentle neutral expression, soft warm round-almond eyes (never slanted, never narrow, never upturned), closed lips; very handsome refined looks; no moles or marks on the face; faces clearly visible, 3/4 or frontal view; rich clear colours and smooth soft near-3D shading, not a pencil sketch. A character lineup of FOUR full-body standing figures in one row, head to feet with margin, evenly spaced with wide clear empty space between them, all the SAME man (same face, same features, same signature colours), all feet on one baseline. Left to right: (1) about 20, youthful, clean-shaven; (2) about 30, more mature, a faint neat moustache; (3) about 42, dignified, a neat moustache and short refined beard; (4) about 56, distinguished, a longer neat greying beard, some grey in the hair, gentle fine lines. He is a steppe prince, strong sun-kissed but fair handsome face, bold straight brows, wearing the son of the northern steppe khan: a fur-trimmed deep crimson-brown riding robe with gold embroidery, a broad belt with a curved dagger in its sheath, leather boots, hair braided with gold beads under a small fur-rimmed cap (not a Qing hat); signature colours deep crimson-brown with gold and dark fur; one hand resting on his belt. The outfit stays the same in all four, slightly richer at older ages. Calm composed upright standing poses, still, robes and sleeves hanging straight, no flying sashes. Han/Ming cross-collar robes, no Qing hats or collars. Men never in pink or purple. No text, no frames.",
+  "style": "ksDAApm16B",
+  "figs": [
+   {
+    "file": "fig-man-bacdich-1-a18",
+    "role": "man",
+    "sub": "bacdich",
+    "identity": "bacdich-1",
+    "ageBand": "a18"
+   },
+   {
+    "file": "fig-man-bacdich-1-a26",
+    "role": "man",
+    "sub": "bacdich",
+    "identity": "bacdich-1",
+    "ageBand": "a26"
+   },
+   {
+    "file": "fig-man-bacdich-1-a36",
+    "role": "man",
+    "sub": "bacdich",
+    "identity": "bacdich-1",
+    "ageBand": "a36"
+   },
+   {
+    "file": "fig-man-bacdich-1-a51",
+    "role": "man",
+    "sub": "bacdich",
+    "identity": "bacdich-1",
+    "ageBand": "a51"
+   }
+  ]
+ }
+}
