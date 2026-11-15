@@ -18,5 +18,7 @@ for l in open(os.path.join(H,'dlg_scenes.txt')):
     if not l.strip():continue
     k,sc,nt=l.strip().split('|')
     if k in done:continue
-    print(k+'|'+('s7o88xTl8e' if nt=='1' else 'cplQijT0eP')+'|'+T.format(sc=sc));c+=1
+    t=T.format(sc=sc)
+    if 'Emperor' not in sc: t=t.replace(sc,sc+'. NO Emperor, nobody in yellow').replace('The Emperor, if present, wears imperial yellow with a small gold crown on his topknot, never a fur hat. ','')
+    print(k+'|'+('s7o88xTl8e' if nt=='1' else 'cplQijT0eP')+'|'+t);c+=1
     if c>=n:break

@@ -52,7 +52,7 @@ tt1|a consort reads a family letter at her desk with a troubled calm face, an en
 tt3|outside the palace at night, ranks of imperial guards in dark armor march with torches toward the palace gate, tense|1
 e68-allyoffer|a maid secretly hands a folded letter to a consort behind a red pillar; in the distance another consort watches from a pavilion|0
 thd1|in the Empress's hall the Empress holds up a poem scroll (blank) accusing a consort who stands before her, other consorts watching|0
-e68-fortunenun|a Taoist priest in grey robe with a whisk presents yellow paper talismans on a tray to consorts at a palace gate|0
+e68-fortunenun|a Taoist priest in grey robe with a whisk presents red paper talismans on a tray to consorts at a palace gate|0
 e68-proudvisit|a haughty visiting consort sits in the host's main seat of a consort's hall, pushing away a teacup, the host's maid kneels to re-serve tea, the host consort stands composed|0
 e68-servhero|at night a palace kitchen fire is being put out, an old eunuch servant with bandaged burned hands sits while a maid tends him, smoke and buckets|1
 e68-servleave|an old eunuch servant in plain white mourning clothes kneels before his consort mistress asking leave to mourn his father|0
@@ -66,8 +66,8 @@ prep|in a consort's chamber, maids prepare her for the night: bathing petals, a 
 q72-dich-thu|in an envoy reception hall, an interpreter lies ill on a couch, a consort sits at a desk helping translate a foreign state letter (blank pages), an official waits|0
 q72-hh-trungcuu|the Empress and a consort prepare chrysanthemum cakes and wine for the elderly on Double Ninth, pots of chrysanthemums|0
 q72-mama-nghi|an elderly court lady of sixty bows before a consort asking to retire, her hands folded, the consort listening kindly|0
-q72-qua-tet|the Emperor in yellow robe with small gold crown shows a consort a table of jade gifts, looking bored, asking her idea for a New Year gift for his mother|0
-q72-su-tet|a foreign envoy in exotic robes and fur cap presents New Year tribute chests to the Empress Dowager's hall, a consort standing by to receive|0
+q72-qua-tet|the Emperor in yellow robe with small gold crown shows a consort a table of jade gifts, both his hands resting on the table, a slightly weary look, asking her idea for a New Year gift for his mother|0
+q72-su-tet|a foreign envoy in exotic robes and a cloth hood presents New Year tribute chests to the Empress Dowager's hall, a consort standing by to receive|0
 shop|a eunuch of the Household Department kneels presenting a tray of items bought outside the palace: fans, combs, trinkets, silk flowers, to a seated consort|0
 vlnvp|a eunuch of the Household Department presents an open sample book of silk veils by rank to a seated consort, veils laid on a tray|0
 e68-borrowdress|a visiting consort asks to borrow a skilled maid; the maid combs and styles the visiting consort's long hair before a mirror, the host consort watching|0
