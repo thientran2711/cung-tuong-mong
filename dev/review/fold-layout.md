@@ -1,3 +1,50 @@
+# Kiểm duyệt kit: review/fold-layout @ 33eb8165 (lượt 3) — FAIL (một điểm chặn)
+
+Ngày 2026-11-14 khuya (đồng hồ máy 23:xx Z). Gộp thử vào origin/main 1ebb0bb6 (có phi tần t5–t8): chỉ xung đột dev/review/LOG.md + sw.js
+(tệp dựng) — lấy main, chạy dev/site/build_site.sh: node --check qua, 3 script trong index.html parse được. `node dev/test/kit_dupes.js` → OK.
+Chơi thật (Playwright, animations tắt) trên bản gộp: 686x880@2.2, 1180x820@2, 1366x1024@2 (+ đo thanh trên 755x1000@2):
+màn thân phận, phòng, chip Thái hậu, Hành sự (tab nhóm + làm một việc → thẻ kết quả), Dư đồ, Hậu cung (dải chọn + thẻ người), Qua buổi ×4,
+đường cung nữ (srvInit: phòng, Phận sự, thẻ). Save cũ (dựng từ index.html của main) nạp được ở 686, chơi tiếp không lỗi.
+0 lỗi trang ở 686/1180 và ở đường cung nữ 1366 (1 lỗi 'reading mp' ở 1366 là do script ép S.srv=null trên nhân vật gốc cung nữ — không tính).
+0 tràn ngang, 0 chữ bị cắt/ellipsis ở mọi màn (chỉ nhãn cung trên Dư đồ nằm ngoài khung xem — bản đồ kéo được, đúng). Ảnh: dev/shots/review/fold-layout/r3-*.
+
+## Các điểm chặn lượt 2 (1bf3f138)
+1. Tư chất thanh trên — ĐẠT. 8 ô đều `.kst` (kitStatCell, jk4), một cỡ chữ (số 16.32 px / nhãn 11.2 px); đo đáy chữ nhãn và đáy chữ số:
+   chênh lệch 0 px ở 686, 755, 1180, 1366, cả đường phi tần lẫn cung nữ. Không còn .st/.k3tcv/#k3ts trong DOM.
+2. Đường cung nữ cắt người — ĐẠT ở 686 (3 người trọn) và 1180 (2 người trọn, tên đủ); KHÔNG ĐẠT ở 1366 (xem chặn mới).
+3. Dải chọn phi tần 686 — ĐẠT: tên cung trên đầu cột, cột cuối không bị "1/18" đè, viền vàng sáng khi chọn, không có dấu tích.
+4. Chip triều cũ .kcchips — ĐẠT: đã gỡ, kit_dupes canh.
+Phụ lượt 2: dòng địa danh không chui dưới chip (1180 xuống hai dòng); dòng nhắc thành "Mới biết tên ⓘ"/"Chưa biết là ai ⓘ"; đều đạt.
+
+## Luật chủ 11/14–11/15 — kiểm trong game
+- Một bộ kit / không tự vẽ: kit_dupes OK; thanh trên = kitStatCell; thẻ người dùng kst-chip.
+- Phòng toàn màn trên Fold; thẻ người kiểu iPad ở cả Fold và iPad (hai cột: chân dung + Ghen/Oán/Thiện cảm/Nàng với ngươi + ô số | nhóm việc).
+- Dải chọn: tên cung + viền vàng, không dấu tích; không có nút "Bảng phẩm vị" (đếm 0 ở mọi màn).
+- Hành sự: tab nhóm có đếm (Tất cả 10/12, Tranh sủng 0/2…), cuộn ngang một hàng; thẻ kết quả gạch đầu dòng + thanh Được/Mất.
+- Một nền sân khấu: chỉ một canvas nền phủ kín khung ở các phòng đã chạy.
+- Tần làm chủ vị: PAL_HEAD=3 dùng chung palHeadOK/palFix/houseOf/assignHouses (đọc mã; không chơi tới Tần).
+- Chip Thái hậu mở thẻ người của Thái hậu (Đức Thọ cung, "Mới biết tên ⓘ"), không mở tab Giao tình — đạt.
+
+## Không đạt (chặn)
+1. iPad 1366x1024 — sân khấu vẫn chuyển sang dải cuộn và CẮT người ở mép dải, người nhỏ:
+   đường cung nữ (srvInit chuẩn, Khải Tường cung, chỉ 3 người): dải dừng ở ~75 % bề ngang sân khấu, người thứ ba chỉ còn một mảnh dọc
+   cạnh nút "› 2" (đo: hộp người thứ ba lố mép phải 12 px CSS khỏi sân khấu, phần thấy < 10 %); người cao chỉ ~30 % chiều cao sân khấu,
+   nửa trên sân khấu trống (r3-1366-srv-strip-cut.jpg). Cùng lỗi ở phòng 5 người (r3-1366-room-strip-cut.jpg: "Cung nữ H…" bị cắt tên).
+   Đây là đúng lỗi chặn #2 của lượt 2 ("dải cuộn luôn hiện trọn một người"), nay còn ở kích thước iPad ưu tiên; và trái luật "người trên sân
+   khấu phải TO". 686 và 1180 không bị. Sửa ở j59 (phép tính free/rightR khi khung sân khấu cao hơn rộng), đo lại 1366 + 1024x768.
+
+## Phụ (không chặn)
+- Thẻ kết quả (bản main, không thuộc nhánh): dấu triện THÀNH đè lên số "Sức 80→70 (-10)" ở 1180 (r3-1180-result-stamp.jpg) — dời triện lên góc
+  tiêu đề như BẠI ở 686. Thẻ Thành không có dòng Được ("chứng cứ án cũ +1" của thẻ việc) — số không khớp thẻ việc.
+- Thẻ Thái hậu khi chưa gặp: nửa phải thẻ trống (686) — nên đặt dòng "Muốn gặp…" hoặc ô số vào cột phải.
+- Dư đồ: ô điện bị khóa (Dưỡng Hòa / Cần Chính) — chữ thang cơ hội ("Khó/Liều") mờ dưới thanh, khó đọc.
+- Còn mở theo KIT 32.4: kitBar, kitTabs, chip trạng thái, .btn cũ.
+
+## Gộp main
+merge origin/main → chỉ LOG.md (giữ cả hai phía) + sw.js (dựng lại). Không xung đột mã. Người gộp chạy dev/site/build_site.sh.
+
+---
+
 # Kiểm duyệt kit: review/fold-layout @ 3e180e2a (lượt đầu trên 3fb60080, kiểm lại phần đổi trên 3e180e2a) — FAIL
 
 Ngày 2026-11-14 tối. Dựng lại site từ nguồn (index.html trên nhánh CHƯA dựng lại với jk3 mới — người gộp phải chạy dev/site/build_site.sh).

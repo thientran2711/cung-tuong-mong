@@ -3,7 +3,7 @@
    page: the big full-body figure / scene that illustrates the right page; RIGHT = the text page the owner already approved),
    phone/portrait = ONE page: the RIGHT (text) page only — no illustration page on phones (owner 11/14, accepted loss). A tab switch
    is a page turn on both devices, and every page turn CURLS like real paper.
-   KIT.md §32. Loaded before j87 (the week book uses kitCurl for its turn).
+   KIT.md §34. Loaded before j87 (the week book uses kitCurl for its turn).
 
    kitCurl({host, front, back, w, h, x, y, dir, shadeR, mirror, vanish, keepId}) → {set(p,dir), destroy(), el}  (v2: corner fold, below)
      host  : positioned element; the turning sheet's SPINE is at (x,y) in host px, the sheet is w × h and lies to the right of it.
@@ -191,12 +191,12 @@ function kitBookSpread(host,spec){spec=spec||{};const root=document.createElemen
      cap  : small caption plaque under the plate (place / name, illustration caption only). slots: try-on slots beside the figure. */
 kitBookSpread.wantsPic=host=>{const W=(host&&host.clientWidth)||innerWidth,H=(host&&host.clientHeight)||innerHeight;return W>=900&&W/H>=1.15};
 function kitBookPic(o){o=o||{};const ax=o.ax!=null?o.ax:.5,feet=o.feet!=null?o.feet:.94;
- const figs=(o.figs||[]).map((f,i)=>`<img class="kbp-fig${f.dim?" dim":""}" src="${f.src}" alt="" decoding="async" style="--fx:${f.x!=null?f.x:.5};--fh:${f.h||.82};--fz:${f.z||i+2}">`).join("");
+ const figs=(o.figs||[]).map((f,i)=>`<img class="kbp-fig${f.dim?" dim":""}" src="${f.src}" alt="" decoding="async" style="--fx:${f.x!=null?f.x:.5};--fh:${f.h||(window.KIT_FIG?KIT_FIG.h:.86)};--fz:${f.z||i+2}">`).join("");
  const slots=o.slots&&o.slots.length?`<div class="kbp-slots">${o.slots.map(s=>`<div class="kbp-slot${s.img?"":" empty"}"><span class="kbp-sim">${s.img?`<img src="${s.img}" alt="">`:""}</span><b>${s.label}</b>${s.n?`<small>${s.n}</small>`:""}</div>`).join("")}</div>`:"";
  return `<div class="kbp${o.plate===false?" bleed":""}" style="--ax:${ax};--feet:${feet}"><div class="kbp-plate"><div class="kbp-scene" style="background-image:url('${o.scene||""}')"></div><div class="kbp-figs">${figs}</div>${slots}</div>${o.cap?`<div class="kbp-cap">${o.cap}</div>`:""}</div>`}
 
 (function(){const st=document.createElement("style");st.id="jbook-css";st.textContent=`
-/* paper skin (KIT §32.1): warm paper, faint fibres, edge tint */
+/* paper skin (KIT §34.1): warm paper, faint fibres, edge tint */
 .kpaper{position:absolute;inset:0;box-sizing:border-box;color:var(--ink,#2a1a12);background:
  radial-gradient(ellipse 70% 50% at 25% 18%,#fbf3dd 0,transparent 70%),radial-gradient(ellipse 60% 45% at 85% 92%,#e8d3a6 0,transparent 70%),
  url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .3 0 0 0 0 .12 0 0 0 .08 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E"),
