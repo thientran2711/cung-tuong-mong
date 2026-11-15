@@ -176,9 +176,11 @@ Notes: `cdn_sync.py --pull` does NOT refresh img/_index.json reliably (stale loc
 - Shots dev/test/a467-book-shots.js <url> <outdir> at 755x1000@2, 1000x755, 1180x820@2, 1366x1024@2, 844x390, 390x844: no overflow, 0 broken images, 0 page errors; the visitor line has no picture, her wardrobe/refusal lines pick deo-trang-suc-h / thao-trang-suc-h / tu-choi-h.
 - Test page note: dev/index.html is a fragment without <meta charset>; serve a wrapped copy (tmp/site/index.html) or the root build, never dev/ raw (Invalid token in Chromium).
 - Main merged in (b5? see git log: "Merge origin/main into review/act-pics2"), assemble.py keeps jct2 after jht.
-### Step 4 IN PROGRESS: dialog banners (89 -> 73 left)
+### Step 4 DONE: dialog banners (89 -> 0 left)
 - 16 drawn, checked on sheets, on the CDN: j71x-tai nc1 news-tin-trong-cung night2 q72-doi-thuoc q72-don-ta q72-hh-trungthu q72-loi-thoi q72-maid-tet q72-mat-tram q72-ns-doi q72-th-aodong q72-th-mai q72-th-thanhminh q72-th-trungcuu q72-tv-mua (ids in gens_dlg.txt).
 - Prompts: dprompt.py template + "NO Emperor, nobody in yellow" for scenes without him; envoy in nc1 wears a hood (no fur hat).
+- Session 15/11 night: the last 73 drawn, every one checked on 4-column sheets, all on the CDN as img/ev-KEY.webp (ids in gens_dlg.txt; local copies deleted). dprompt.py now adds the NO-Emperor line itself and drops the Emperor sentence for those scenes. One redraw: q72-qua-tet (Emperor's hand at his chin -> hands on the table).
+- Pipeline helpers: trxurl.py KEY=ID.. (reads the finished url from the session transcript, TRX=<.jsonl>), dgo.sh KEY=ID.. (fetch + sheet $PREV/sheet.jpg), dgo.sh --push KEY.. (CDN + delete local). hgo.sh is the same for act pictures (-h).
 ### Step 5 STARTED: remaining act pictures (hands-only, -h names)
 - Queue = `python3 dev/figwork/acts/prompts2.py --todo 400` (284 before this batch) = the held keys of mergepatch. Write an English hands-only scene per key in hscenes.txt (Vietnamese scene in meanings.py), `hprompt.py 8`, generate gpt-2-6 3:4 with the style ref it names, `hfetch.py`, sheet-check, cdn_sync, then rerun mergepatch.py (with tmp corpus) to wire them live.
 - Batch 1 (8) on the CDN and wired live: van-dong-do-dau chai-chuot-nhan-sac nghi-lay-suc o-yen-nghi tinh-duong ngu-som o-cung-giu-am ban-thuong. Live ACTS: log 554 -> 562, keys 529 -> 537, 0 missing, corpus: 0 picture lines lost (1 line None -> ban-thuong-h). 276 left.

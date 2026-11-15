@@ -154,3 +154,23 @@ tinh-duong|0|a hand resting on an embroidered quilt beside half-drawn bed curtai
 ngu-som|1|a dark bed corner behind closed silk curtains, an unlit lamp on the stand, distant small fireworks glowing beyond a lattice window on New Year's Eve night
 o-cung-giu-am|0|a hand in a fur-lined cloak sleeve warming over a bronze charcoal brazier, snow falling beyond an open lattice door, a teacup steaming
 ban-thuong|0|a eunuch's hands in a dark blue sleeve presenting a tray of silver ingots and a silk bolt, a lower consort's pink sleeves receiving it with both hands, a palace floor
+an-cu-duoc-lat|0|hands unrolling a blank silk imperial edict scroll before a family ancestral altar, incense smoke curling, candles and offering plates
+an-thuong|0|a carved table with a jade box and folded silk bolts sent as imperial rewards, a consort's hands in pink sleeves lifting the box lid
+ban|0|a maid's hands in green sleeves setting a jewelled hairpin on a storeroom counter, a eunuch's dark blue sleeves weighing silver on a small balance scale
+ban-hon-con|0|hands holding an unrolled blank marriage decree scroll, a red wedding sash and a pair of jade pendants on a tray beside it, red candles
+ban-len|1|a maid's hand passing a gold bracelet through the narrow gap of a heavy palace gate into a merchant's plain brown sleeve outside, dusk
+ban-ra-ngoai|1|a eunuch's dark sleeve handing a wrapped silk bundle across a stone threshold to a merchant's plain brown sleeve outside a great palace gate, dusk sky
+banh-trung-thu|1|hands in pink sleeves presenting an open lacquer box of round mooncakes to a dark brocade sleeve, full moon over a pavilion railing, tea cups
+bao-cho|0|two ladies' sleeves close together by a red pillar in a corridor, one hand pointing discreetly toward a distant doorway
+bat-gap-trao-anh-mat|0|a maid's fingers parting a bead curtain; beyond it, softly blurred, a guard's armored shoulder and a lady's pink sleeve near a garden rock
+bat-thuoc-bi-do|0|a bowl of dark medicine spilled at the roots of a garden tree, a maid's hands in green sleeves holding an empty lacquer tray
+bay-ke-phan-gian|1|a consort's hand in a red sleeve passing a folded blank letter to a maid's hand in a green sleeve, single candle, secretive
+bay-o-yen-tiec|0|at a banquet table, ladies' hands in pink, green and blue sleeves passing an exquisite jade ornament from hand to hand, wine cups and dishes
+benh-chua-giam|0|a physician's fingers in a dark green sleeve taking the pulse of a lady's wrist resting on a small silk pillow, a full untouched bowl of medicine beside
+bi-ban-chet|1|a black lacquer tray holding a wine cup and a folded white silk sash on a table in a dark empty hall, one candle, no people
+bi-bat-buon-lau|0|a guard's armored hand gripping a bundle of smuggled silk at a palace gate, a maid's green sleeves hanging low beside it
+bi-bat-mang-thu-lanh-cung|0|a guard's armored hand snatching a folded letter from a maid's hand at the weathered wooden gate of a cold palace
+bi-bat-tra-khao|1|a maid's wrists bound with soft rope resting on her lap in a dark room, a eunuch's hand holding a lantern close
+bi-cam-tuc|0|a heavy palace gate shut with a wooden bar, a guard's spear shaft leaning beside it, a lone teacup on an empty table seen through the lattice
+bi-day-xuong-ho|0|maids' hands pulling a soaked pink sleeve up from a lotus pond onto stone steps, water dripping, lotus leaves
+bi-giang|0|a consort's hands removing gold hairpins and laying them on a lacquer tray held by a eunuch's dark sleeves
