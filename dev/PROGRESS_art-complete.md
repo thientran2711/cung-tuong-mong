@@ -29,7 +29,8 @@ HOLD (owner): old-save player looks (128), promoted old-love men (56).
 4. `python3 dev/site/cdn_sync.py --pull img/FIGURES-kc.json` then
    `cd dev/figwork/artcomplete && python3 -I proc.py kc_jobs.json FIGURES-kc.json kc_bgN.txt` (cuts, 900px webp, porcrop, manifest).
 5. Look: rvsheet.py (por a18 + new por + figs per identity), cutcheck.py on new files (fig >=8 / por >=20 = re-cut).
-6. `python3 dev/site/cdn_sync.py <new files> img/FIGURES-kc.json`; commit the bg/gens txt files; rerun the audit.
+6. `python3 dev/site/cdn_sync.py <new files> img/FIGURES-kc.json`; commit the bg/gens txt files; rerun the audit
+   (delete dev/figwork/artcomplete/.cache/_index.json + FIGURES*.json first: audit.py caches them).
 
 KC prompt template: "The SAME woman as in the reference images (exactly the same face and features as the young lady in the first
 reference; the second reference shows how this same woman looks at older ages), now a married noblewoman of a great house. [style +

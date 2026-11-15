@@ -6,7 +6,7 @@
 | Maids m01-m52: maid ranks m0-m4 | 52 | m0,base(=m1),m2,m3,m4 | a18/a26/a36/a51 | 1040 | 1040 | **0** | reachable now | base file = rank 1 (Cung nữ) |
 | Maids m01-m52: raised to consort t1-t8 + lãnh cung | 52 | t1,t2,t3,t4,t5,t6,t7,t8,cold | a18/a26/a36/a51 | 1872 | 1872 | **0** | reachable now |  |
 | Maids m01-m52: casual dress ty1-ty8 | 52 | ty1,ty2,ty3,ty4,ty5,ty6,ty7,ty8 | a18/a26/a36/a51 | 1664 | 1664 | **0** | reachable now |  |
-| Quý nữ khuê các - consort faces c01-c32 | 32 | kc | a18/a26/a36/a51 | 128 | 95 | **33** | a18/a26 now; a36/a51 once spouses age | prince's bride pool; chính phi age is frozen at the wedding today |
+| Quý nữ khuê các - consort faces c01-c32 | 32 | kc | a18/a26/a36/a51 | 128 | 128 | **0** | a18/a26 now; a36/a51 once spouses age | prince's bride pool; chính phi age is frozen at the wedding today |
 | Quý nữ khuê các - maid faces m01-m52 | 52 | kc | a18/a26/a36/a51 | 208 | 52 | **156** | a18/a26 now; a36/a51 once spouses age | same pool (KCIX = every kc record) |
 | Công tử congtu-1..10 (suitors / phò mã) | 10 | base | a18/a26/a36/a51 | 40 | 40 | **0** | a18/a26 now; a36/a51 once spouses age | phò mã age frozen at the wedding today |
 | Quý tử quytu-1..9 (suitors) | 9 | base | a18/a26/a36/a51 | 36 | 36 | **0** | reachable now |  |
@@ -26,4 +26,4 @@
 | Player looks look1-4 (OLD saves without S.pid) | 4 | t2-t8,cold (t1 have) | a18/a26/a36/a51 | 128 | 0 | **128** | old saves only | new games use a consort identity (complete); old saves keep look-* faces and only have t1 |
 | Kids prince p01-p24: adult bands | 24 | - | a26/a36/a51 | 72 | 0 | **72** | grown children in long games | child bands [4, 9, 14, 20] drawn; 17+ shows the 20 art for life |
 | Kids princess f01-f24: adult bands | 24 | - | a26/a36/a51 | 72 | 0 | **72** | grown children in long games | child bands [4, 9, 14, 20] drawn; 17+ shows the 20 art for life |
-| **Total** | | | | 8872 | 7867 | **1005** | | |
+| **Total** | | | | 8872 | 7900 | **972** | | |
