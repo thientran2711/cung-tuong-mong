@@ -50,7 +50,7 @@ Main (f500d0464) was already merged; nothing new on main. fix-float kitRelDelta 
 - 1 kitEventDp = ONE template (KIT 50.1, jk4): every event with a person → left = ONE person (main one; `kitStagePeople` slice 1),
   name + rank above (§48), banner top-right for EVERY such event (own picture, else `j24:<title>` = Có người đến / Thái hậu triệu / Hoàng
   thượng đến / Kẻ hầu xin / Một ánh mắt / Việc của kẻ hầu, else the week-book meaning table KBK_EVRE on title + text; herself alone only
-  on a real match), height = content (floor 420 px, was 500; `kitDpNat` measures banner + text + the options' own content — before, the
+  on a real match), height = content (floor 300 px, was 500 — reviewer 1a; `kitDpNat` measures banner + text + the options' own content — before, the
   options were clipped and scrolled), short options 2 per row (32.9 k3long / k3odd no longer break a kdpo2 group).
   Acceptance "Thái hậu triệu" 1180x820: 421 px tall (was 720 on main), banner, chip above, figure 0.98 of the column, 2 options in one row,
   12 px under the options. Scan `dev/test/event-dp-scan.js` (fixture save, 1180x820): 41 j24 dialogs + 22 festival / feast / merit
@@ -76,6 +76,21 @@ Main (f500d0464) was already merged; nothing new on main. fix-float kitRelDelta 
   j67 invitation re-queued in ~1000 dialogs. The only repeats: "Lời cảnh báo" (j70thr) — two identical warnings about the same consort
   already in Q before the choice (duplicate queueing, not a re-push), "Phòng bị" / "Đêm thị tẩm" = next step with the same title. The
   old driver's "Thi tài ngày Thất tịch · Lời mời came back" was the stuck contest overlay (above) seen while the invitation was Q[0].
+
+### r8 after merging main 10043ac2b (batch 1 on main)
+- Reviewer 1a fixed: floor 300 px; every person dialog ends 10–12 px under its options at 755/1000/1180/1366 (scan, fixture save).
+- Main's kitEvArt now gives an id without an event kind the ROOM picture; person events now get their kind first (j24 title, e68:<id>,
+  title meaning, who it is) — "Thái hậu triệu" = ev-thinh-an, j68 "Hoàng thượng" = ev-hoang-de-vui, "Tin đồn" = ev-tin-don.
+- Main's opt-render (§53) replaced the "thiện cảm +3" option rows with hints: the non-kit "thiện cảm" of the acceptance shot is gone.
+- overlay-close.js after the merge: 35/35 ok. Long drive with the new driver (fixture save, 2500 ticks, 1063 dialogs, 132 game
+  screens): 0 stuck, 0 re-queue.
+
+- 5-size run (fixture save; event-dp-scan MAXN=12 at 755x1000@2, 1000x755@2, 1180x820@2, 1366x1024@2, 844x390@3): 12/12 dialogs per size
+  kdper + 1 person + banner + chip above, fill 0.96–0.98, 10–12 px under the options (844x390: dialogs taller than the screen keep the
+  358 px cap and scroll their options, as 32.7c). Place card head + Ân oán tabs (3 X tabs, strips without group labels, not in the
+  pane bar, no horizontal scroll) + "no Thôi" checked at the 5 sizes + 390x844. Hành sự deck (1180): 17 acts, 14 own pictures, 3 no
+  picture, 0 act-cat pictures.
+- Tests: dev/test/event-dp-scan.js, dev/test/overlay-close.js (new); dev/test/fig-fill.js "two"/"mix" kinds now expect ONE person.
 
 ## LEFT (owner requests, exact)
 1. kitEventDp (KIT 45): done in code + test; LEFT: (a) a 2-option visit leaves ~124 px empty under the options because of the 500 px

@@ -2157,11 +2157,11 @@ Emperor's visits. It is the 32.7 person dialog:
 - Festival dialogs (j71 invitations j71i / j71x, the festival day, its contests): `kitFestKey(m)` → evId `fest:<k>` = the festival's own
   picture (Đoan ngọ = ev-le-ha), never the Triều chính default (owner 13:00Z).
 - RIGHT top: a banner for EVERY event with a person: its own event picture, else the picture of its kind — `j24:<slug of the title>`
-  (EVENTS.json: Có người đến, Thái hậu triệu, Hoàng thượng đến, Kẻ hầu xin, Một ánh mắt, Việc của kẻ hầu), else the week-book meaning
-  table `KBK_EVRE` (j87) on title + text, else Hoàng thượng / Thái hậu / visitor by who it is; a dialog about herself alone gets a
+  (EVENTS.json: Có người đến, Thái hậu triệu, Hoàng thượng đến, Kẻ hầu xin, Một ánh mắt, Việc của kẻ hầu), else `e68:<id>`, else the week-book meaning
+  table `KBK_EVRE` (j87) on the TITLE, else Hoàng thượng / Thái hậu / visitor by who it is (never the room picture); a dialog about herself alone gets a
   banner only when the table finds a real meaning.
 - Height = content: `kitDpNat` adds banner + text + the options' own content (not the stretched grid cell, which clipped the options and
-  made them scroll), floor 420 px (was 500: a two-choice summons left ~120 px empty), cap min(100dvh − 32, 720).
+  made them scroll), floor 300 px (was 500: a two-choice summons left 125–340 px empty — reviewer r6 item 1a), cap min(100dvh − 32, 720).
 - Short options (≤ 2 rows, ≤ 70 characters) 2 per row; the 32.9 "long" mark (k3long / k3odd) no longer breaks such a group.
 - Not changed (rule: number chips wait for fix-float `kitRelDelta`): option rows still say "Thái hậu → ta: thiện cảm +3" (NAMES.th / hh).
 Test: `node dev/test/event-dp-scan.js <url> <outdir> <tag> [sizes] [save.json]` — every j24 approach kind + every festival / feast /
