@@ -67,11 +67,16 @@ const HV={};function hudTween(){for(const k of ["bac","suc","sung","danh"]){cons
 let tokPrev=new Set();function tokAnim(){const now=new Set();document.querySelectorAll("#tokens .tok").forEach(b=>{const n=b.textContent;now.add(n);b.classList.add("bob");if(!tokPrev.has(n)&&!RM)b.classList.add("enter")});tokPrev=now}
 /* ---- PixiJS scene layer behind the people; falls back to the static image ---- */
 const PX={app:null,loading:false,failed:false,key:"",bg:null,parts:[],tex:{},layer:null,fxl:null,t:0};
-function pxLoad(){if(PX.loading||PX.app||PX.failed||RM)return;PX.loading=true;const s=document.createElement("script");s.src="https://cdn.jsdelivr.net/npm/pixi.js@8.5.2/dist/pixi.min.js";s.async=true;
- s.onerror=()=>{PX.failed=true;PX.loading=false};s.onload=async()=>{try{const app=new PIXI.Application();const st=$("stage");await app.init({backgroundAlpha:0,resizeTo:st,antialias:false,autoDensity:true,resolution:Math.min(2,devicePixelRatio||1)});
+/* ONE Pixi loader (stage layer here, FX overlay in jfx): the library is bundled with the site (dev/vendor, listed in assets.json → sw.js caches it,
+   so it plays offline) and only fetched when a Pixi layer is first needed — never on the title / loading screen */
+const PIXI_SRC="dev/vendor/pixi-8.5.2.min.js";
+function kitPixi(){if(window.PIXI&&window.PIXI.Application)return Promise.resolve(window.PIXI);if(kitPixi.p)return kitPixi.p;
+ kitPixi.p=new Promise((ok,no)=>{const s=document.createElement("script");s.src=PIXI_SRC;s.async=true;s.onload=()=>window.PIXI?ok(window.PIXI):no(new Error("pixi"));s.onerror=()=>{kitPixi.p=null;s.remove();no(new Error("pixi load"))};document.head.appendChild(s)});return kitPixi.p}
+function pxLoad(){if(PX.loading||PX.app||PX.failed||RM)return;PX.loading=true;
+ kitPixi().then(async()=>{try{const app=new PIXI.Application();const st=$("stage");await app.init({backgroundAlpha:0,resizeTo:st,antialias:false,autoDensity:true,resolution:Math.min(2,devicePixelRatio||1)});
   app.ticker.maxFPS=60;const c=app.canvas;c.className="pxc";st.insertBefore(c,$("stop")&&$("stop").parentNode===st?$("stop"):null);PX.app=app;PX.layer=new PIXI.Container();PX.fxl=new PIXI.Container();app.stage.addChild(PX.layer,PX.fxl);
   const g=new PIXI.Graphics();g.circle(8,8,8).fill(0xffffff);PX.tex.dot=app.renderer.generateTexture(g);const e=new PIXI.Graphics();e.ellipse(10,5,10,5).fill(0xffffff);PX.tex.petal=app.renderer.generateTexture(e);
-  app.ticker.add(pxTick);PX.loading=false;PX.key="";pxScene()}catch(err){PX.failed=true;PX.loading=false}};document.head.appendChild(s)}
+  app.ticker.add(pxTick);PX.loading=false;PX.key="";pxScene()}catch(err){PX.failed=true;PX.loading=false}}).catch(()=>{PX.failed=true;PX.loading=false})}
 function pxCap(){return innerWidth<700?60:120}
 function pxKind(){const P=placeOf(S.place),night=(S.buoi||0)===2,out=["vuon","lc","home"].includes(P.sc),w=S.wx?S.wx.k:"dust";
  if(out){const m={petal:"petal",rain:"rain",mist:"smoke",dust:night?"fly":"dust",sun:"dust",storm:"rain",leaf:"leaf",wind:"leaf",snow:"snow",snowh:"snow",frost:"snow",snowp:"snow"}[w]||"dust";return m}

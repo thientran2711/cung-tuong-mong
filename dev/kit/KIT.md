@@ -1350,7 +1350,7 @@ Code `dev/build/j93.js` (after j86, before j84). Art `img/kit/mo-*.webp` (Magnif
 | 6b | chết | `kitInk({title})` | wraps `over()` | two ink blots `mo-ink` spread over the screen, caption "<title> · Mở Sổ luân hồi", then the Kiếp này panel underneath. |
 | 7 | ban thưởng, quà | `kitReward({kind,title,from,items:[{n,d,img,tier}],bac})` | wraps `bestow()` (every ân thưởng: night → tray, contest/promo/story/accuse/birthday/nurse/dau → chest, son/sinhthan → golden chest); state diff: new chest entries with `from` (Thái hậu/Hoàng hậu → tray, a consort → gift box) | `kind`: `tray` (mâm sơn son phủ khăn gấm `mo-tray` → `mo-tray-open`), `chest` (rương gỗ chạm vàng `mo-chest`), `royal` (rương rồng phượng vàng `mo-chestg`, Ngự tứ), `gift` (hộp gấm `mo-giftbox`). Closed box floats and glows, "Chạm để mở" + who gives. Tap: rattle, lid opens (open art), a soft warm light glows from INSIDE the box (`.kmlight`: radial-gradient, centred on the box mouth per kind via `--gx/--gy`, breathes gently by opacity/scale; centring uses the separate `translate` property so animation never moves it), items leap out in an arc one by one (rarest last), silver coins `mo-coin-silver` bounce out when there is silver; then the list (grade tag · name · use) + "Nhận". Tap during the flight = all at once. |
 | 7b | mua đồ | `kitFlyItem(k)` | state diff: new chest entry without `from` | the item icon flies to the Tư trang tab, which glows. |
-| 8 | panels, buttons | CSS | `.dlg`, `.dlg.kpanel`, `#kpop` open with `kmIn` (rise 14 px + scale .96→1, 0.28 s); result card rises; every button / option / act card / chip presses down (translateY 1px, scale .975) on touch | |
+| 8 | panels, buttons | CSS | `.dlg`, `.dlg.kpanel`, `#kpop` open with `kmIn` (rise 14 px + scale .96→1, 0.28 s); result card rises; every button / option / act card / chip presses in on touch — now the jfx touch kit (§ CẢM GIÁC / FX: scale .96, rim light, ripple, spring back) | |
 | + | nguy hiểm | `kitAlarm()` | wraps `showModal` for threat dialogs (pid items outside the safe list, same list as j11's heartbeat) | red inner edge pulses twice (0.8 s each). |
 | 9 | thời tiết | `kitWxChip()` / `kitWxEffects(w)` | after every `render()` | chip `.hc.kmwx` in the status row (after Quẻ tuần) with the painted icon `mo-wx-<k>` and the weather name; tap = `kpPop` with the weather's REAL effects read from the code (j3 endTurn, j80 sleepRegen, j9 placeWhere/travel, j8 contests, j12 rollWx). |
 | 9b | hạt thời tiết | wraps j11 `mkPart` | same PIXI mechanism (no new rules): rain streaks darker blue-grey and longer, snow/petals/leaves 1.5–1.7× larger, leaves in autumn colours, mist denser; inside her palace (`home`) at 60 % so it reads as "through the window". |
@@ -1359,6 +1359,64 @@ Grade colours (items, rewards): Thường `#9aa3a8`, Tinh phẩm `#5fa58c`, Trâ
 
 Art list (`img/kit/`): mo-tablet-back, mo-tablet-front, mo-xam-tube, mo-xam-stick, mo-seal-thanh, mo-seal-bai, mo-edict-closed, mo-edict-open, mo-leaf-dry, mo-leaf-maple, mo-petal-peach, mo-petal-plum, mo-peony, mo-ink, mo-incense, mo-calendar, mo-tray(-open), mo-chest(-open), mo-chestg(-open), mo-giftbox(-open), mo-ingot-silver, mo-ingot-gold, mo-coin-silver, mo-coin-gold, mo-wx-{hoadao,muaphun,suongsom,troiquang,nanggat,vekeu,giong,domdom,laphong,nangvang,gioheomay,trangram,tuyetnhe,tuyetday,suonggia,maino}.
 Not done here (other owners): kitRoulette (thân phận, review/kit-2b) and the honour podium (j90, section 26); the motion queue waits for them (`#kpodov`, roulette).
+
+## CẢM GIÁC / FX (game feel, jfx) — touch kit · kitFx(kind) · Pixi overlay · numbers fly (owner 11/14–11/15 "chưa có cảm giác game", review/game-feel)
+
+Code `dev/build/jfx.js` (after jload, before j84). One table, one function: no worker shakes the screen, buzzes the phone or spawns particles
+on their own — they call `kitFx(kind,{el}|{x,y})` with a kind from the table below (add a row there when a new moment needs one).
+
+### Touch kit (CSS + one pointer listener; every `button, .btn, .kbtn, .opt, .card, .pct, [role=button|tab], [data-tab]`)
+- Press: `scale:.96` (the individual `scale` property, so an element's own `transform` is never overwritten), shadow pulls in to a 1 px gold rim
+  + soft gold light (`--kf-rim`). Release: springs back .96 → 1.025 → 1 (240 ms). Stage figures (`.tok`) press but don't spring.
+- Ripple: pale-gold radial ripple from the touch point (`.kfrip`, a fixed clip box over the element — the element itself is not touched;
+  skipped on elements bigger than 45 % of the screen).
+- Primary buttons `.kbtn` (not `.alt/.kdone/.ksel`, not disabled): a slow light sheen sweeps across every 7 s.
+- Locked (`:disabled`, `.kdis`, `aria-disabled`): the button shakes ±4 px (300 ms) + buzz `lock`, and its reason (first ✗ `.kwhy`, else `title`)
+  pops as a dark chip `.kflockwhy` just above it for ~2 s. The reason rows on the card stay as they are.
+- Tabs: a 3 px lacquer-red/gold underline `.kftl` slides (320 ms) to the selected tab — main tabs `#tabs`, person-card tabs `.pctabs`, sub-tabs `.ksubs`.
+- Hover (mouse only): faint gold rim.
+
+### kitFx table (`FX` in jfx; buzz patterns in j11 `VIB`, ms)
+| kind | moment (wired at) | screen | light | particles (Pixi overlay) | buzz (`VIB`) |
+|---|---|---|---|---|---|
+| decree | ân thưởng / thánh chỉ (`bestow`, leaving lãnh cung) | light shake | gold rim + soft centre glow | gold spark streaks shoot up | decree [20,40,20] |
+| promote | thăng phẩm, tấn phong (`promoteP`, with the j93 edict) | light shake | gold | gold streaks + twinkling stars | promote [30,30,60] |
+| coin | lĩnh bổng (monthly pay, when the week panel/sổ tuần opens) · any Bạc gain (`apply`) | — | — | silver coins with square holes rain and spin | coin 15 |
+| hit | bị tát / bị phạt / bị hại by a scheme (`punish`, frame/kframe/musk on her) | hard shake | red edge blinks twice | small ink blots | hit 30 |
+| harm | heavy harm (free for new wiring) | hard shake | red | ink spreads | harm [30,30,70] |
+| poison | trúng độc (`ACT.poison` on her) | hard shake | red | ink spreads | poison [80,40,120] |
+| expose | bị phát giác / định tội / phế (`deathSentence`, `fall`; result card text "bị lộ / phát giác") | hard shake | red | ink spreads | expose 120 |
+| verdict | the seal of a sentence (goes with expose) | light shake | — | — | — |
+| ink | someone else falls / her scheme lands | — | — | small ink blots | — |
+| birth | sinh con (`kitBloom` "Hạ sinh…") | — | warm glow | petals + flowers burst | birth [15,30,15,30,15] |
+| preg | có thai (`kitBloom` "Có tin vui") | — | warm | petals fall | preg [15,30,15] |
+| favour | sủng (after the night) | — | — | petals fall | — |
+| night | đêm thị tẩm (`nightFx`) | — | warm dim | warm motes rise | night 10 |
+| death | chết (`kitInk` overlay) | NO shake | screen darkens slowly | — | death 45 (one soft pulse) |
+| demote | giáng phẩm / lãnh cung (`kitGloom`) | — | darkens | grey ash falls | demote [60,50,60] |
+| ash | goes to lãnh cung (`goTo('lc')`) | — | — | ash | — |
+| win | result card THÀNH (`resultShow`) | — | — | stars twinkle over the card | win [12,40,12] |
+| fail | result card HỎNG / BẤT LỢI | — | — | grey smoke puffs from the seal | fail 35 |
+| mgwin / mglose | trò nhỏ thắng / thua (`openMG` grade ≥2 / <2) | — | — | stars / smoke | win / fail |
+| lantern | đêm lễ (festToday() + buổi tối, once per night) | — | — | 9 đèn trời rise slowly with a glow | — |
+| lock | locked button touched | element shake | — | — | lock 14 |
+Ambient: seasonal petals (spring/summer pink-white, winter red plum) or autumn leaves drift over HER palace screen (`S.place==="home"`), 6
+pieces on phones / 10 on iPad, only while no dialog, week panel, motion overlay, podium or title covers the screen.
+Numbers fly: after every result card, each changed stat (Sủng, Danh, Sức, Bạc, Đức, Sắc, Tài, Tâm cơ) leaves the card as a green/red pill
+(`.kfnum`, "Sủng +6") and flies into ITS top-bar cell (`#hud-<k>`), which glows gold (+) or red (−) on arrival (`.kfhit/.kfhit-r`); stats
+without a cell (Thái hậu, Hoàng hậu, Tai mắt, Ân tình) rise and fade. Replaces j93's rising `.kmfls` pills.
+
+### Rules
+- Buzz = `navigator.vibrate` = Android only (owner's Fold). iPhone/iPad have no vibrate: nothing fails, the picture effects carry the moment.
+- "Rung" off (`OPT.vib=false`) → no buzz. "Cảnh động" off (`OPT.fxon=false`) or `prefers-reduced-motion` → buzz only: no shake, flash,
+  particles, ripple, sheen, flying numbers, underline slide (`kfStill()`). Bots / `quiet` → nothing.
+- Pixi: ONE loader `kitPixi()` (j11) shared by the stage layer and the FX overlay; library bundled at `dev/vendor/pixi-8.5.2.min.js`
+  (659 KB, ~183 KB gzip), listed in `assets.json` (group fig, first in line) so sw.js caches it and it plays offline; never fetched on the
+  title/loading screen. Overlay canvas `#kfxcv` fixed full screen, z 9450, `pointer-events:none`, resolution 1; ticker STOPS and the canvas
+  hides when no particle lives. Quality `KFX.q` drops ×0.7 (min .3) after ~0.5 s under 48 fps and climbs back after 4 s at 58+.
+- z order: flashes 9440 < particles 9450 < ripple 9460 < reason chip / flying numbers 9470 (above j93 overlays 9100, under the loader).
+- No fan rays / halo (KIT motion rule): the gold "rays" are short streak particles that fly and fade, never a static fan.
+- Tests: `dev/test/game-feel.js` (755x1000@2, 1180x820@2, 412x1058@2 run direct, CPU 4x); shots `dev/shots/game-feel/`.
 
 ## 33. ONE FIGURE SCALE · KIT_FIG (owner 11/15 "người trên sân khấu quá nhỏ"; review fold-layout r3 FAIL 1366) — `dev/build/jkit.js` (top) + j59 + jk4
 
