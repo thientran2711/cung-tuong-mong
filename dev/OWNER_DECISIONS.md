@@ -194,3 +194,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (09:50Z) Owner: 4 people too crowded → max 3 on iPad, 2 on phone/Fold; less overlap.
 - (10:00Z) Owner: page turn = whole sheet swinging around the spine with content attached to the sheet (rotates/tilts with it), like her binder-app reference; not content pinned to the page beneath.
 - (10:05Z) Owner: poison/heavy-harm minigame should be abstract, not explicit → 'Thời cơ' timing/attention game (no method detail).
+- (10:40Z) LIVE: review/coop merged to main 614b00ec (book UI + fold-layout + KIT_FIG + co-op 2 người).

@@ -5,11 +5,7 @@ Mọi quyết định của sếp ghi ngay vào dev/OWNER_DECISIONS.md trên nh�
 Brief chung cho thợ: dev/handover/WORKER_BRIEF.md (copy của scratchpad/brief.txt — dùng nó khi giao việc).
 
 ## Việc đang dở NGAY LÚC BÀN GIAO
-1. **Gộp main = lên live đợt 1 (giao diện sách + chơi 2 người):** origin/review/coop @ 77913f83 đã PASS kiểm duyệt (dev/review/coop-release.md).
-   Bản gộp thử đã làm trong worktree scratchpad (chưa push). Làm lại: worktree từ origin/main, `git merge --no-ff origin/review/coop`,
-   `bash dev/site/build_site.sh` (BẮT BUỘC, nếu không live không có "Chơi cùng bạn"), kiểm `grep -c "Chơi cùng bạn" index.html` > 0,
-   chơi thử Fold 686x880@2.2 + iPad 1180x820@2 (coord_smoke: Fold đã đạt 0 lỗi, iPad chưa xong), commit, `git push origin HEAD:main`.
-   Báo sếp đã lên live + gửi lại hướng dẫn mời bạn (dev/coop/HUONGDAN.md; sửa câu "chọn ở nhà làm tiểu thư" — tuyến tiểu thư CHƯA gộp).
+1. **ĐÃ LÊN LIVE (10:40Z):** review/coop gộp main = 614b00ec (giao diện sách + chơi 2 người). Chơi thử Fold + iPad 0 lỗi. Sửa câu "chọn ở nhà làm tiểu thư" trong dev/coop/HUONGDAN.md (tuyến tiểu thư CHƯA gộp).
 2. **Đợt 2 (ngay sau):** origin/review/book-release @ 4bbed569 (+ fold-layout 7fbc5b08 đã gộp vào): iPad 3 người / Fold 2 (nàng tính vào),
    KIT_FIG.maxPx 542 (1366 người .61 — có khoảng trống trên, theo dõi sếp có chê không), hộp thoại chỉ cuộn phần lựa chọn (KIT 32.5),
    người đứng trên tranh trong hộp thoại (KIT 32.6), nàng hiện ở mọi nơi, sửa trùng #panel khi lật. Cần kiểm duyệt rồi gộp main (trên đợt 1).
