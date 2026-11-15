@@ -6,7 +6,7 @@ const [,,BASE,SZ]=process.argv;const [WH,DPR]=(SZ||'755x1000@2').split('@');cons
 const T0=Date.now(),lg=m=>console.error('['+Math.round((Date.now()-T0)/1000)+'s] '+m);
 const boot=async(ctx,url,errs)=>{lg('boot '+url);const p=await ctx.newPage();p.setDefaultTimeout(600000);p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
  await p.goto(url,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function');await p.waitForTimeout(1500);lg('ready');return p};
-const fresh=()=>{try{localStorage.clear()}catch(e){}document.getElementById('title').hidden=true;for(let i=0;i<8;i++){start();if(!isSrv())break}Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true};
+const fresh=()=>{try{localStorage.clear()}catch(e){}window.__nlInner=1;for(const id of ['kload','kroul']){const x=document.getElementById(id);if(x)x.remove()}document.getElementById('title').hidden=true;for(let i=0;i<8;i++){start();if(!isSrv())break}Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true};
 (async()=>{const b=await chromium.launch();const R={size:SZ};const errs=[],errsOld=[];
  const mk=()=>b.newContext({viewport:{width:W,height:H},deviceScaleFactor:+(DPR||1),hasTouch:W<1100,isMobile:W<1100,reducedMotion:'reduce',serviceWorkers:'block'});
  /* 1. an old save made by the published build */
