@@ -190,3 +190,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (09:05Z) Coordinator: to let owner play with a friend sooner, ship review/coop (includes book-release 1b90526) as one live release after kit review; iPad 3–4 people, dialog scroll, full flap come in the next update.
 - (09:10Z) Owner: event dialogs put the people standing on the scene picture (not a separate figure column) to save space; text full width below.
 - (09:30Z) Scheme minigames: first worker stopped by a safety classifier (likely the poison-dose game). Scope narrowed to abstract games: Nghe ngóng, Truyền lời, Mặc cả; no poison minigame.
+- (09:40Z) Coordinator decision: the player figure is drawn on the stage at every place she is (not only home/lãnh cung).
