@@ -317,3 +317,6 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 ## 15/11 ~05:15Z (sếp) bổng lộc + bán đồ tự làm
 - Xem lại bổng lộc hằng tháng cho cân bằng với giá đồ; hiện thẻ khi nhận bổng lộc.
 - Đồ tự làm khi học tài (thêu, vẽ tranh, thư pháp…) thành vật phẩm, bán được cho thái giám Nội vụ phủ. Thẻ thái giám có 2 tab kit: Mua | Bán.
+
+## 15/11 ~05:20Z (sếp) kinh tế theo phẩm
+- Lo: Hoàng hậu 320/tháng xài không hết, Đáp ứng 30 mà đồ, học, mưu kế đều 20–30. Hướng điều phối chọn: phẩm cao nhiều tiền nhưng chi phí giữ thể diện/nghĩa vụ/kẻ hầu tăng theo phẩm (bạc dư HH chỉ ~3–4 lần Đáp ứng); phẩm thấp có nguồn thu có lý do (bán đồ tự làm, thưởng, nhà mẹ đẻ, làm việc cho người trên); giá chia bậc (thường 3–15, vừa 20–60, xa xỉ 100–400, đồ vượt phẩm có rủi ro); phẩm thấp có đường không tốn bạc (khắc, Tâm cơ, ân tình) nhưng chậm/rủi ro hơn; thẻ bổng lộc tháng ghi rõ thu chi.
