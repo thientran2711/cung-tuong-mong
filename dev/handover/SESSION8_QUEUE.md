@@ -89,3 +89,4 @@ j72 bước vs Hồi · stage paper halo · Thái hậu title bronze vs plum · 
 | C30 | review/night-panel (owner s8: ĐÊM panel dark → same light kit panel; scan all dark-themed dialogs) | QUEUED-NEXT |
 | C31 | review/log-sync (owner s8: Sổ ghi Sủng 33→40 vs header 37; audit unlogged stat changes) | RUNNING |
 | C32 | review/page-curl2 (owner s8: Fold page turn stiff → real curl; reuse drag-curl D37) | QUEUED-NEXT |
+| C33 | review/weekbook-entries (owner s8: week book person page shows unrelated raw entry; per-person readable entries) | QUEUED-NEXT |
