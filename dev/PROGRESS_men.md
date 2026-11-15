@@ -38,3 +38,15 @@ Kế hoạch: dev/MEN_PLAN.md. Mã: dev/build/jmen.js (assemble: sau jk4, trư�
 - Gộp origin/review/book-release (381b2469: page-curl + fold-layout KIT_FIG + main) — sạch, không xung đột.
 - KIT_FIG.fac (jkit.js): bóng người lạ nam (unknown-fig-m) cũng ×1.08 như đàn ông.
 - Ngoại triều: nhãn + khóa + thẻ kit (xem trên). Ảnh: dev/shots/men/*-ntcard.jpg.
+
+## 15/11 (lượt 3, lệnh điều phối)
+- Thẻ bắt gặp (và thẻ sau nghe lén): lựa chọn = thẻ việc đầy đủ của kit (showOut, optLayout rows): Tốn · Được · Mất · Kèm · Ghi chú + thang may rủi
+  (Báo Cung Chính ti, Giấu giúp, Núp nghe lén có bậc; báo khi bắt quả tang tư tình có bậc). Số trên thẻ = số thật trong menReport/menHide/menChoose.
+- Kẻ lạc có NGUYÊN NHÂN THẬT (MEN_PLAN.md mục 15/11): tư tình j22, thư lén (phi tần cấm túc/toan mưu/giấu thai/thất sủng ghen nặng mua chuộc thị vệ dễ mua),
+  thợ/thái y có lệnh nán lại quá giờ (nết phong lưu/đa tình), nam nhân để ý một phi tần (m.likeV) lẻn đến chỗ nàng. Bỏ hết kẻ lạc vô cớ.
+- KIT 33.6 (jk4 kitFigBody + kitEsFit, KIT.md §33.6): sân khấu sự kiện đo thân người thật (bỏ lề trong, bỏ mũ/trâm trên đầu bằng vị trí trán),
+  nam = nữ × KIT_FIG.man, chân chung một đường. Đo trên ảnh: thị vệ / Quý phi ≈ 1 : 0,91 (đích 0,926).
+- Đo lại (sens, walk=1, 33,8 năm): kẻ lạc 13,5/năm; người chơi gặp 0,59/năm với 24,7 lần đi/năm = 0,024 mỗi lần đi → ~2–3 lần/năm nếu đi mỗi buổi một lần.
+  NPC thấy 1,95/năm, báo 0,24/năm. 0 crash, 0 lỗi trang, ghi/nạp sạch.
+
+## 15/11 (lượt 4): kế hoạch không xúc xắc — xem MEN_PLAN.md "lượt 4". jmen: menDuty/menOrder/menPlace/menPlanWeek/menMakePlans/menTip/menWatch; menDecide/menNpcSee không còn roll.

@@ -248,6 +248,12 @@ html body .kmnote{top:auto!important;bottom:calc(var(--k3nb,60px) + 10px)!import
 /* ---------- 7. kitCatTabs (KIT 31.11, owner 11/14): a long act list (Hành sự, servant Phận sự, Cung nhân, Tài nghệ … any `.cards` grid of
    act cards with 2+ categories and 6+ cards) is split into CATEGORY TABS — the same tab row as the person card's act groups (`.pctabs .pct`,
    count "làm được/tổng"), one sticky row that scrolls sideways on narrow screens. "Tất cả" first; the last choice is remembered per tab. ---------- */
+/* the ONE category-tab row (buttons only; the caller owns the .pctabs.kcattabs row): list [{k,label,n,tip}] → `.pct` tabs with a count
+   `<i>`; used by k3CatTabs (act lists) and kitInvGrid (Tư trang bag). */
+window.kitTabRowHTML=function(list,cur,attr){return list.map(x=>`<button class="pct${x.k===cur?" on":""}" ${attr}="${x.k}" role="tab" aria-selected="${x.k===cur}">${x.label}${x.n!=null?` <i${x.tip?` title="${x.tip}"`:""}>${x.n}</i>`:""}</button>`).join("")};
+/* sticky only where the page is long (see the KIT RULE in the CSS below) */
+function kitTabStick(){try{const P=$$("panel");if(!P)return;const long=P.scrollHeight>P.clientHeight*1.5;P.querySelectorAll(".kcattabs").forEach(r=>r.classList.toggle("kstick",long))}catch(e){}}
+addEventListener("resize",()=>{clearTimeout(window.__ktsT);window.__ktsT=setTimeout(kitTabStick,80)});
 function k3CatTabs(){try{const P=$$("panel");if(!P)return;P.querySelectorAll(".cards").forEach((G,gi)=>{
  const cards=[...G.querySelectorAll(":scope > button.ka")];if(cards.length<6)return;
  const cats=[];cards.forEach(b=>{const c=b.dataset.kart||"khac";if(!cats.includes(c))cats.push(c)});if(cats.length<2){const o=G.previousElementSibling;if(o&&o.classList.contains("kcattabs"))o.remove();return}
@@ -255,16 +261,25 @@ function k3CatTabs(){try{const P=$$("panel");if(!P)return;P.querySelectorAll(".c
  const name=c=>(typeof KIT_CAT!=="undefined"&&KIT_CAT[c]?KIT_CAT[c][0]:c==="khac"?"Khác":c);
  const cnt=c=>{const L=c==="all"?cards:cards.filter(b=>(b.dataset.kart||"khac")===c);return [L.filter(b=>!b.disabled&&!b.classList.contains("kdis")).length,L.length]};
  let row=G.previousElementSibling;if(!row||!row.classList.contains("kcattabs")){row=document.createElement("div");row.className="pctabs kcattabs";row.setAttribute("role","tablist");G.before(row)}
- const h=["all"].concat(cats).map(c=>{const [n,t]=cnt(c);return `<button class="pct${c===cur?" on":""}" data-kcat="${c}" role="tab" aria-selected="${c===cur}">${c==="all"?"Tất cả":name(c)} <i title="làm được ${n} trên ${t} việc">${n}/${t}</i></button>`}).join("");
+ const h=kitTabRowHTML(["all"].concat(cats).map(c=>{const [n,t]=cnt(c);return{k:c,label:c==="all"?"Tất cả":name(c),n:`${n}/${t}`,tip:`làm được ${n} trên ${t} việc`}}),cur,"data-kcat");
  if(row.dataset.h!==h){row.innerHTML=h;row.dataset.h=h}row.dataset.key=key;
- cards.forEach(b=>{b.hidden=!(cur==="all"||(b.dataset.kart||"khac")===cur)})})}catch(e){console.error("k3CatTabs",e)}}
+ cards.forEach(b=>{b.hidden=!(cur==="all"||(b.dataset.kart||"khac")===cur)})});kitTabStick()}catch(e){console.error("k3CatTabs",e)}}
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest(".kcattabs [data-kcat]");if(!b)return;e.stopPropagation();const row=b.closest(".kcattabs");
  try{localStorage.setItem(row.dataset.key,b.dataset.kcat)}catch(x){}k3CatTabs()},true);
 if(typeof renderPanel==="function"){const r0=renderPanel;renderPanel=function(){const r=r0.apply(this,arguments);try{setTimeout(k3CatTabs,0)}catch(e){}return r}}
 try{const P0=$$("panel");if(P0)new MutationObserver(()=>{clearTimeout(window.__k3ct);window.__k3ct=setTimeout(k3CatTabs,30)}).observe(P0,{childList:true,subtree:true,attributes:true,attributeFilter:["data-kart"]})}catch(e){}
 const cssC=document.createElement("style");cssC.id="k3-cattabs";cssC.textContent=`
-#panel .kcattabs{position:sticky;top:0;z-index:6;background:var(--panel);margin:0 -8px 6px;padding:4px 8px 6px;box-shadow:0 -9px 0 0 var(--panel),0 3px 6px -4px #5a3a2040}
-#panel .ksub~* .kcattabs,#panel .ksub~.kcattabs{top:var(--ksubh,44px)}
+/* KIT RULE (owner 11/15, markups 1115-inv-markup + 1115-tabrow-gap): the category tab row
+   - sits CENTRED between what is above and below it: one spacing token --k-tabgap above and below (the neighbours' own margins are zeroed);
+   - NEVER covers anything at rest (no upward cover shadow);
+   - is sticky ONLY on long pages (panel content > 1.5× the panel height, class .kstick set by kitTabStick): there it has a solid ground and
+     the list scrolls beneath it. On short pages (Tư trang, most tabs) it is a plain row that scrolls with the page, so it never overlaps. */
+#panel{--k-tabgap:10px}
+#panel .kcattabs{position:relative;z-index:6;background:var(--panel);margin:var(--k-tabgap) -8px!important;padding:4px 8px}
+#panel .kcattabs.kstick{position:sticky;top:0;box-shadow:0 3px 6px -4px #5a3a2040}
+#panel .ksub~* .kcattabs.kstick,#panel .ksub~.kcattabs.kstick{top:var(--ksubh,44px)}
+#panel *:has(+ .kcattabs),#panel *:has(+ .kinv){margin-bottom:0!important}
+#panel .kcattabs+*{margin-top:0!important}
 #panel .kcattabs .pct{white-space:nowrap}
 #panel .cards>button.ka[hidden]{display:none!important}
 html body #panel .kcattabs{display:flex!important;flex-wrap:nowrap!important;overflow-x:auto!important;scrollbar-width:thin}#panel .kcattabs .pct{flex:0 0 auto}

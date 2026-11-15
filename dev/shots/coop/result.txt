@@ -1,0 +1,59 @@
+ok   01-title fold: no horizontal overflow
+ok   A taps Chơi cùng bạn
+ok   02-coop-menu fold: no horizontal overflow
+ok   A taps Mời bạn
+ok   A has a room code, seat a
+ok   03-invite-waiting fold: no horizontal overflow
+ok   A waits for the friend (frozen before join)
+ok   04-join ipad: no horizontal overflow
+ok   B joined seat b, both online
+ok   A unfrozen when B is in
+ok   both players are in the shared world
+ok   start: same Emperor and same consorts
+ok   start: same date
+ok   start: each sees the other as a person
+ok   fold: friend starts as Người lạ (unknown, like any NPC)
+ok   ipad: friend starts as Người lạ (unknown, like any NPC)
+ok   05-world fold: no horizontal overflow
+ok   05-world ipad: no horizontal overflow
+ok   06-waiting-friend fold: no horizontal overflow
+ok   week 1: fold advanced
+ok   week 1: ipad advanced
+ok   after week 1: same Emperor and same consorts
+ok   after week 1: same date
+ok   after week 1: each sees the other as a person
+ok   week 2: fold advanced
+ok   week 2: ipad advanced
+ok   after week 2: same Emperor and same consorts
+ok   after week 2: same date
+ok   after week 2: each sees the other as a person
+ok   week 3: fold advanced
+ok   week 3: ipad advanced
+ok   after week 3: same Emperor and same consorts
+ok   after week 3: same date
+ok   after week 3: each sees the other as a person
+ok   07-after3 fold: no horizontal overflow
+ok   07-after3 ipad: no horizontal overflow
+ok   A frozen when B left
+ok   08-frozen fold: no horizontal overflow
+ok   A cannot advance while frozen
+ok   B back in same seat and week
+ok   A resumes
+ok   after rejoin: same Emperor and same consorts
+ok   after rejoin: same date
+ok   after rejoin: each sees the other as a person
+ok   09-rejoined ipad: no horizontal overflow
+ok   10-death ipad: no horizontal overflow
+ok   B reborn as a new person in the same world
+ok   A sees the reborn friend by her new name
+ok   reborn friend is a stranger again (Người lạ)
+ok   12-reborn-seen fold: no horizontal overflow
+ok   12-reborn ipad: no horizontal overflow
+ok   week after rebirth advances
+ok   13-title-solo solo: no horizontal overflow
+ok   solo: Chơi một mình
+ok   solo: old save loads, no co-op
+ok   14-solo-game solo: no horizontal overflow
+ok   fold: no page errors
+ok   ipad: no page errors
+ok   solo: no page errors

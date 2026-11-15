@@ -18,9 +18,9 @@ const [,,BASE,SZ,OUT,TAG]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=
  /* 2. the encounter card: a guard and a consort in the garden, afternoon */
  await p.evaluate(()=>{for(let i=0;i<60;i++){start();if(!isSrv())break}Q.length=0;const md=document.getElementById("modal");if(md)md.hidden=true;
   const m=S.men.find(x=>x.rw==="thị vệ");const v=liveRivals(false).find(x=>!x.queen&&x.alive)||liveRivals(false)[0];
-  S.out=0;S.confined=0;S.buoi=1;used=0;S.place="home";S.menMet={};S.menW={[m.id]:"vuon"};S.menWhy={[m.id]:{w:"stray",k:"vuon",r:"letter",v:v.id}};S.where[v.id]="vuon";window.__tv=v.id;window.__tm=m.id;goTo("vuon")});
+  S.out=0;S.confined=0;S.buoi=1;used=0;S.place="home";S.menMet={};S.menW={[m.id]:"vuon"};S.menWhy={[m.id]:{w:"stray",k:"vuon",r:"letter",v:v.id,why:"jealous"}};S.where[v.id]="vuon";window.__tv=v.id;window.__tm=m.id;goTo("vuon")});
  await p.waitForTimeout(2500);
- await p.screenshot({path:`${OUT}/${TAG}-card.jpg`,type:'jpeg',quality:85});
+ await p.screenshot({path:`${OUT}/${TAG}-card.jpg`,type:'jpeg',quality:85});await p.evaluate(()=>{const o=document.querySelector('#modal .opts');if(o)o.scrollIntoView({block:'start'})});await p.waitForTimeout(800);await p.screenshot({path:`${OUT}/${TAG}-card-opts.jpg`,type:'jpeg',quality:85});
  R.card=await p.evaluate(()=>{const M=document.getElementById('modal');const dlg=M&&M.querySelector('.dlg');const cut=[...(M?M.querySelectorAll('button, .kpb p, .kpsn, figcaption'):[])].filter(e=>e.scrollWidth>e.clientWidth+2&&getComputedStyle(e).overflow!=='visible').map(e=>e.textContent.slice(0,40));
   return{shown:M&&!M.hidden,title:(document.getElementById('mt')||{}).textContent,figs:M?M.querySelectorAll('.kesf img').length:0,opts:M?[...M.querySelectorAll('.opts button')].map(b=>b.innerText.replace(/\s+/g,' ').slice(0,60)):[],cut,dlgW:dlg?Math.round(dlg.getBoundingClientRect().width):0}});
  R.cardOvf=await ovf();
