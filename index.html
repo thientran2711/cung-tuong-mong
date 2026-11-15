@@ -22034,7 +22034,11 @@ document.addEventListener("click",e=>{if(e.target&&e.target.closest&&e.target.cl
    lessons / mini-games (cooking, embroidery, painting, calligraphy, music…), purchases, finds, stories, anything else. So no call site
    can add an item silently. Test: dev/test/item-gain.js. Hooks for tests: KFX.gains [{name, grade}], KFX.rewards (kitReward items). */
 function kgInfo(x){const e=x&&typeof x==="object"?x:{k:x};const it=(typeof IT==="object"&&IT[e.k])||{};let a=null;try{a=typeof itemArt==="function"?itemArt(e.wk?e:e.k):null}catch(err){}
- let src=a?(a.src512||a.src):"";if(!src&&typeof kmItemImg==="function")src=kmItemImg(e.k);
+ let src=a?(a.src512||a.src):"";
+ /* garments / hairpins (j92 WD_ITEMS: own icon + grade, as the Tư trang bag draws them) and veils (jveil vlSrc) */
+ const wd=typeof WD_ITEMS==="object"&&WD_ITEMS[e.k];if(wd&&wd.icon){src=wd.icon;a={grade:wd.g|0}}
+ if(!src&&it.vl&&typeof vlSrc==="function")try{src=vlSrc(e.k)}catch(err){}
+ if(!src&&typeof kmItemImg==="function")src=kmItemImg(e.k);
  const KG=typeof KIT_GRADE!=="undefined"?KIT_GRADE:[{n:"Thường",c:"#9a8a78"}];
  if(e.wk){const ti=Math.max(0,Math.min(3,e.wk.ti|0));return{name:e.wk.n||it.n||"",grade:ti,gname:(typeof WTIER!=="undefined"?WTIER[ti]:KG[ti].n),col:KG[ti].c,src,sub:"Tác phẩm tự tay"}}
  const g=a?a.grade|0:0;return{name:it.n||String(e.k||""),grade:g,gname:KG[g].n,col:KG[g].c,src,sub:it.kd||""}}
@@ -22058,11 +22062,39 @@ window.kitGain=kitGain;
  W("kitReward",o=>function(spec){try{KFX.rewards=(KFX.rewards||0)+((spec&&spec.items&&spec.items.length)||1)}catch(e){}return o.apply(this,arguments)});
  /* j93 showed bought items with kitFlyItem from kmDiff: kitGain does that now (reveal + fly), so the old fly is skipped there */
  W("kitFlyItem",o=>function(){if(KFX.inDiff)return;return o.apply(this,arguments)});
- W("kmDiff",o=>function(){let before=null;try{if(typeof KMSNAP!=="undefined"&&KMSNAP&&typeof KMS!=="undefined"&&KMS===S&&S)before=KMSNAP.inv.slice()}catch(e){}
+ /* ROYAL / GIVEN items always come in their box (owner 08:20Z: được thưởng/ban = mâm/rương/rương ngự tứ; được tặng = hộp gấm; nhiều món cùng lúc
+    gộp một rương). bestow() is wrapped by j20, j92 (extra garment), j93 (its chest, LAST item only) and jveil (extra veil): this outermost
+    wrapper holds j93's chest back and shows ONE chest with EVERY item the whole call added (owner 17:24Z: "Hoàng thượng ban thưởng tranh cổ"
+    came with no chest when j92 added a garment after it), with the silver. */
+ W("bestow",o=>function(p,why){if(p!==S||!kfOn()||KFX.inBest)return o.apply(this,arguments);const n0=(S.inv||[]).length,b0=S.bac||0;KFX.inBest={spec:null};let r;
+  try{r=o.apply(this,arguments)}finally{const hold=KFX.inBest;KFX.inBest=null;
+   try{const add=(S.inv||[]).slice(n0).filter(x=>x&&!x.h);if(add.length){try{if(typeof KMSNAP!=="undefined"&&KMSNAP&&KMS===S)for(const x of add)if(!KMSNAP.inv.includes(x))KMSNAP.inv.push(x)}catch(e){}
+     const royal=why==="son"||why==="sinhthan"||add.some(x=>x.nt),sp=hold.spec||{};
+     kitReward({kind:royal?"royal":sp.kind||(why==="night"?"tray":"chest"),title:royal?"Ngự tứ":sp.title||"Rương bảo vật",from:sp.from||"Hoàng thượng ban",items:add.map(x=>kgItem(x,royal)),bac:Math.max(0,(S.bac||0)-b0)})}}catch(e){console.error(e)}}
+  return r});
+ /* kmDiff: j93's own inventory part is replaced here (it showed only 4 adds, a gift box "Có người tặng" for story / Nội vụ phủ / imperial
+    entries and no box at all for imperial ones); every new entry is grouped by who gave it, and each group comes in ONE box */
+ W("kmDiff",o=>function(){let before=null;try{if(typeof KMSNAP!=="undefined"&&KMSNAP&&typeof KMS!=="undefined"&&KMS===S&&S){before=KMSNAP.inv.slice();KMSNAP.inv=(S.inv||[]).slice()}}catch(e){}
   KFX.inDiff=true;let r;try{r=o.apply(this,arguments)}finally{KFX.inDiff=false}
-  try{if(before&&S&&!S.dead&&kfOn()){const add=S.inv.filter(x=>!before.includes(x));
-    if(add.length&&add.length<=6)for(const x of add){if(x.from&&x.from!=="emp"&&x.from!=="me")continue;/* a gift from a person: j93 kitReward */kitGain(x)}}}catch(e){console.error(e)}
+  try{if(before&&S&&!S.dead&&kfOn()){const add=(S.inv||[]).filter(x=>x&&!x.h&&!before.includes(x));if(add.length)kgGroups(add)}}catch(e){console.error(e)}
   return r})})();
+/* one reward item for kitReward from an inventory entry: the same name / painting / grade as the Tư trang bag (kgInfo) */
+function kgItem(x,royal){const I=kgInfo(x),it=(typeof IT==="object"&&IT[x.k])||{};return{n:I.name,d:x.wk?I.gname:(it.d||""),img:I.src,tier:royal?4:Math.max(0,Math.min(4,I.grade|0))}}
+function kgWho(f,x){if(x&&x.giver)return x.giver;if(f==="emp")return"Hoàng thượng";if(f==="th")return"Thái hậu";if(f==="hh")return"Hoàng hậu";if(f==="nvp")return"Nội vụ phủ";
+ try{const v=typeof RV==="function"?RV(f):null;if(v&&v.name)return v.name}catch(e){}return""}
+function kgGroups(add){const G=new Map();
+ for(const x of add){const f=x.from||"";const who=(f&&f!=="me")?kgWho(f,x):"";const key=f==="me"||!f||(!who&&f!=="story"&&f!=="rare")?"self":who||f;
+  if(!G.has(key))G.set(key,{who,f,L:[]});G.get(key).L.push(x)}
+ for(const [key,g] of G){
+  if(key==="self"){/* her own: works, purchases, finds — one glowing reveal each; a burst of 3+ comes in one chest */
+   if(g.L.length<=2)g.L.forEach(x=>kitGain(x));else kitReward({kind:"chest",title:"Rương đồ",from:"Vừa vào Tư trang",items:g.L.map(x=>kgItem(x))});continue}
+  const emp=g.who==="Hoàng thượng",royal=emp&&g.L.some(x=>x.nt),elder=g.f==="th"||g.f==="hh"||g.who==="Thái hậu"||g.who==="Hoàng hậu";
+  const kind=royal?"royal":emp||g.f==="nvp"||g.f==="story"||g.f==="rare"?"chest":elder?"tray":"gift";
+  const title=royal?"Ngự tứ":kind==="tray"?"Mâm thưởng":kind==="gift"?"Hộp gấm":g.f==="nvp"?"Rương Nội vụ phủ":"Rương bảo vật";
+  const from=g.who?(emp||elder?`${g.who} ban`:g.f==="nvp"?"Nội vụ phủ cấp":`${g.who} tặng`):"Phần thưởng";
+  kitReward({kind,title,from,items:g.L.map(x=>kgItem(x,royal))})}}
+/* j93's bestow chest is held while the outer bestow runs (the outer one shows every item) */
+(function(){const o=window.kitReward;if(typeof o!=="function")return;window.kitReward=function(spec){if(KFX.inBest){if(!KFX.inBest.spec)KFX.inBest.spec=spec;return}return o.apply(this,arguments)}})();
 (function(){const st=document.createElement("style");st.textContent=`
 .kmov.kfgain{cursor:pointer}
 .kfg{position:relative;display:flex;flex-direction:column;align-items:center;gap:6px;padding:18px 26px 16px;max-width:min(360px,90vw);text-align:center;color:#fff3dc}
@@ -22217,7 +22249,7 @@ window.VP={fix,date,num,ord,mon,rules:RULES,full:FULL,tabs:TABS,refresh:()=>{pat
      (COOPW.hold freezes Qua buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="afa91530ec0d";window.CTM_BUILD=BUILD;
+const BUILD="e014350cbb85";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
