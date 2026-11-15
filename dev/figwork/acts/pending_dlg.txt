@@ -22,3 +22,13 @@ e68-droughtprayer jUX8JdpLD0
 e68-heatstroke P3EF2uB42C
 e68-letterhome KLMegd0kqp
 e68-spoiledfood Bh46fRIoQR
+toil-th-scold Sytvz4MUb8
+toil-th-praise xSdo3JXjfW
+toil-hh-scold s7ot2NIl8e
+toil-hh-praise p8JPHumehw
+toil-emp-like vQZGss5a47
+toil-emp-dislike SytvzYvUb8
+toil-rival-jealous nVjlhEyYQD
+toil-rival-tease lJ8mAT8gv9
+toil-rival-praise KLMe9T4kqp
+toil-crowd-jealous u5ncwzaQLD
