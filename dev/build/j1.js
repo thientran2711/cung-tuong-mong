@@ -3,7 +3,7 @@ const RANKS=[
  {n:"Phi",s:52,d:42},{n:"Quý phi",s:66,d:55},{n:"Hoàng quý phi",s:78,d:68},{n:"Hoàng hậu",s:85,d:78}];
 /* palace heads (chủ vị): Tần, Phi, Quý phi, Hoàng quý phi (owner 11/14, OWNER_DECISIONS) — rank index ≥ PAL_HEAD */
 const PAL_HEAD=3;
-const RCOL=["#8a7a6a","#a8946a","#6a8aa0","#7aa07a","#a07ab0","#c06a6a","#d98a3a","#f0d070"];
+const RCOL=["#9c8f74","#a8946a","#6a8aa0","#7aa07a","#a07ab0","#c06a6a","#d98a3a","#f0d070"];
 const ORIGINS=[
  {k:"tt",n:"Con gái Tể tướng",r:2,o:{danh:25,bac:150},hh:-15,th:5,art:{cam:1},t:"Nhà quyền thế. Hoàng hậu coi ngươi là mối lo."},
  {k:"dtq",n:"Con gái Đại tướng quân",r:1,o:{danh:15,suc:100,bac:80},hh:0,th:0,t:"Cha giữ binh quyền biên ải. Thân thể khỏe mạnh."},

@@ -38,7 +38,7 @@ Read it live: `RCOL[rank]`, or `KIT_RANK_COL[rank]` / `KIT_RANK_COL.cold` / `kit
 
 | rank | name | colour | gem (`img/kit/gem-N`) | brocade (`img/kit/bg-consort-N`) | frame (`frame-consort-N`) |
 |---|---|---|---|---|---|
-| 0 | Đáp ứng | `#8a7a6a` nâu xám | smoky brown-grey topaz, brass bezel | brown-grey taupe silk, jasmine | carved wood stained brown-grey, brass caps, plum blossom |
+| 0 | Đáp ứng | `#9c8f74` trắng ngà ngọc trai (owner 11/15; chip/text code = champagne-taupe so the 75 % ink mix reads 4.5:1; the ART is light ivory `#e9e3d6`-ish, never pure white, never brown) | lustrous pearl / moonstone cabochon, thin silver bezel, seed pearls, two tiny jasmine | warm ivory pearl silk, tone-on-tone jasmine + faint plum, champagne-pearl sheen | ivory-lacquered wood, thin silver inlay vines, seed-pearl jasmine corners; crest = small ivory jasmine + plum spray on an ivory bar with silver caps |
 | 1 | Thường tại | `#7aa07a` xanh lục | jade, brass bezel | celadon green, plum blossom | dark green lacquer wood, silver/jade inlay, orchid |
 | 2 | Quý nhân | `#6a8aa0` xanh lam | aquamarine, silver bezel | sky blue, orchid | silver filigree, seed pearls, chrysanthemum, small tassel |
 | 3 | Tần | `#d48fa6` hồng phấn | rose quartz, silver-gold bezel | rose pink, orchid | silver + pale gold, lotus, jade insets, pearl drop |
@@ -116,7 +116,7 @@ The old rank grounds `.rk-*`, the gold border and the `rank-*.webp` corner icon 
 ### 4.1b Pendants and tassels (part of each frame picture)
 | frame | pendant (ngọc bội) | tassel |
 |---|---|---|
-| consort-0 Đáp ứng | small carved wooden bead | brown-grey silk |
+| consort-0 Đáp ứng | small round pearl / moonstone bead, silver cap and knot | ivory silk with silver thread |
 | consort-1 Thường tại | small round green jade bead | soft green |
 | consort-2 Quý nhân | silver-capped aquamarine bead | light blue |
 | consort-3 Tần | rose-quartz flower | powder pink |
