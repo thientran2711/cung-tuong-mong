@@ -217,7 +217,7 @@ function honCard(x){const k=x.k,p=x.p,me=p===S;const L=[`Mẹ: <b>${momLab(p)}</
   else if(q)sp=spouseRow(qnFace(q),qLine(q));const b=pkBackOf(k);if(b)chips.push(chip(gl("Nhà vợ chống lưng",`Nhà vợ chống lưng +${b}`),"ok"));
   if(me){const bt=pkBtn(k);if(bt)B=[bt]}}
  if(!me)B=[`<p class="kr3note">Hôn sự của con phi tần khác do mẹ con ấy, Hoàng thượng hoặc Thái hậu định.</p>`];
- return pcard({tabKey:"hon",f:kidFace(k),name:k.sex==="f"?h54Name(k):k.name,rank:`${ic("con",16)}${k.sex==="m"?"Hoàng tử":"Công chúa"} · ${k.age} tuổi${me?" · con ngươi":""}`,lines:L,chips,note:sp?`<span class="khtsph">${k.sex==="f"?"Nhà chồng":"Nhà vợ"}</span>${sp}`:"",groups:[["Việc hôn sự",B]],empty:""})}
+ return pcard({tabKey:"hon",f:kidFace(k),name:k.sex==="f"?h54Name(k):k.name,rank:`${ic("con",16)}${k.sex==="m"?"Hoàng tử":"Công chúa"} · ${k.age} tuổi`,lines:L,chips,note:sp?`<span class="khtsph">${k.sex==="f"?"Nhà chồng":"Nhà vợ"}</span>${sp}`:"",groups:[["Việc hôn sự",B]],empty:""})}
 function honTab(){h54PoolUp();qnPoolUp();const L=honList();
  const head=`<div class="ph"><span>Con từ 16 tuổi được bàn hôn sự, cưới khi tròn 18. Nhà thông gia chống lưng ngươi: <b>${S.hon||0}</b>.</span>${S.hEnv?`<span class="r">Sứ thần Bắc Địch chờ cầu hôn một công chúa từ 18 tuổi.</span>`:""}</div>`;
  if(!L.length)return head+htEmpty("img/act-hon-su.webp","Chưa có hoàng tự nào đến tuổi bàn hôn sự",["Công chúa, hoàng tử từ 14 tuổi hiện ở đây; từ 16 tuổi mẹ được bàn hôn sự, cưới khi tròn 18.","Công chúa gả vào nhà quyền thần: nhà chồng chống lưng người mẹ. Hoàng tử cưới quý nữ: nhà vợ chống lưng người mẹ và cả hoàng tử trong hàng kế vị.","Các mối (công tử, quý nữ) ở mục Quý tộc kén rể · kén dâu."]);
@@ -230,7 +230,7 @@ function qtCard(it){const x=it.x,isQ=it.kind==="q",kn=htKn(x);const f=isQ?qnFace
  const fit=(isQ?S.kids.filter(k=>pkHome(k)&&!k.pB&&k.age>=14).filter(k=>pkCands(S,k).includes(x)):S.kids.filter(k=>h54Home(k)&&!k.hB&&k.age>=14).filter(k=>h54Cands(S,k).includes(x))).map(k=>k.name);
  if(fit.length)L.push(`Hỏi được cho: <b>${fit.join(", ")}</b>`);
  const ask=askBtn(x,it.kind);
- return pcard({tabKey:"qt",f,name:kn?x.name:"Người lạ",rank:`${isQ?"Quý nữ":"Công tử"} · ${x.tier===0?"nhà đứng đầu":x.tier===1?"nhà quyền quý":"nhà quan"} phe ${x.house}`,lines:L,chips:[chip("Chưa hứa hôn","")],
+ return pcard({tabKey:"qt",f,name:kn?x.name:"Người lạ",rank:`${isQ?"Quý nữ":"Công tử"} · ${x.tier===0?"nhà đứng đầu":x.tier===1?"nhà quyền quý":"nhà quan"}`,lines:L,chips:[chip("Chưa hứa hôn","")],
   groups:[["Việc",ask?[ask]:[`<p class="kr3note">Đã biết gia thế. Muốn kết thông gia: vào Hôn sự, chọn con đã đủ 16 tuổi, chạm Bàn hôn sự.</p>`]]],empty:""})}
 function qtTab(){const L=qtList();const head=`<div class="ph"><span>Con các nhà quyền thần chưa hứa hôn: công tử cho công chúa, quý nữ cho hoàng tử. Chưa quen thì là Người lạ: dò hỏi gia thế để biết.</span></div>`;
  if(!L.length)return head+htEmpty("img/act-cat-trieu-chinh.webp","Chưa có mối nào",["Mỗi tháng các nhà quyền thần đưa con đến tuổi vào danh sách kén rể, kén dâu."]);
