@@ -73,7 +73,7 @@ Nhắc theo dõi: send_later 30 phút, tự đặt lại mỗi lượt (lịch l
 - [ ] Thỉnh an Hoàng hậu không cộng quan hệ (báo từ 14/11) — HOTFIX review/hotfix-thinhan
 - [ ] Thẻ phi tần co lại, dải 1 người (Hạ Tố Tâm) — review/hau-cung-ui (đẩy riêng)
 - [ ] Chữ 'Liều' cho khả năng phụ (có thai, ban thưởng, ô trạng thái) — review/sub-odds
-- [ ] Tờ lật trong suốt — page-curl PASS, chờ gộp main mới
+- [x] Tờ lật trong suốt — LIVE 0783ec32a
 - [ ] Chip 'Thỉnh tranh nhân vật' đè chữ; tải lần đầu 83 MB — hau-cung-ui + cdn-images
 - [ ] Nam nhân trong Hậu cung; thiếu Hoàng thượng/Thái hậu; tên trùng — hau-cung-ui
 - [ ] 'Sai đi Tiểu Lâm Tử' khó hiểu — hau-cung-ui
@@ -86,3 +86,4 @@ Nhắc theo dõi: send_later 30 phút, tự đặt lại mỗi lượt (lịch l
 - [ ] Đang chơi không bị tải lại; co-op cập nhật — update-flow
 - [ ] Chơi cùng bạn: kẹt nút Vào phòng, lệch buổi tuần 3 — coop-ui
 - [ ] Kiểm mọi nút ra đúng kết quả (giao từ 14/11, mất khi đổi phiên) — review/act-audit
+- 06:05Z LIVE main=0783ec32a (lật nguyên tờ đục, 1300 ms, vuốt đổi tab; j22 'Đến chỗ hắn' theo luật đi khắc). Lo: vòng Luân hồi có thể trống hình thẻ — đang kiểm.
