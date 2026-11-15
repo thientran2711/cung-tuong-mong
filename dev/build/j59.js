@@ -138,7 +138,10 @@ function j59lay(){const st=document.getElementById("stage");if(!st||!S)return;co
  const size=(tagH)=>{const fo0=Math.max(sH*.03,tagH+8);const foA=KA&&KA.feet?sH-KA.feet:0;
   const fo=Math.max(fo0,Math.min(foA,sH-topR-KF.h*sH));CAP=sH-fo-topR;return{fo,H:Math.max(sH*.2,Math.min(KF.h*sH,CAP,(KF.maxPx&&capOn)?KF.maxPx:1e9))}};
  const maxF=Math.max(1,...F.map(x=>x.f));
- const widthFor=(z)=>{let rr=rightR;try{const kR=document.getElementById("kshR");const head=sH-z.fo-Math.min(z.H*maxF,sH-z.fo-topR);if(gR&&kR&&!kR.hidden&&kR.offsetHeight){const q=kR.getBoundingClientRect();if(q.bottom-R.top+4<head)rr=8}}catch(e){}return rr};
+ const widthFor=(z)=>{let rr=rightR;try{const kR=document.getElementById("kshR");const head=sH-z.fo-Math.min(z.H*maxF,sH-z.fo-topR);/* the right plaque column (court chips, maid, Ân sủng) is reserved when it reaches down to the heads: no face or name is ever under it
+    (coordinator 11/15, supersedes "may stand under it"); a column that ends above the heads leaves the full width. Compact stages
+    (phone landscape, scaled iPad layout later) keep the old rule. */
+   if(!cmp&&kR&&!kR.hidden&&kR.offsetHeight){const q=kR.getBoundingClientRect();if(q.bottom-R.top+4>=head&&q.left>R.left+sW*.5)rr=Math.max(rr,R.right-q.left+6)}}catch(e){}return rr};
  const MAXN=innerWidth>=1000?3:2,M=E.length,nAll=M+(me?1:0);
  const geo=(N,z)=>{const paged=nAll>N;const CW=paged?(innerWidth<600?34:46):0;/* page-chip gutters: 46 px, 34 on phones so two slots still hold a man (KIT 33.7) */const rr=widthFor(z);const x0=8+gL+CW;const avail=Math.max(40,sW-x0-rr-CW);return{N,paged,CW,rr,x0,avail,sw:avail/N}};
  /* a figure fits its slot when its core, less the 20 % a neighbour may step over (KIT 33 rule 4), is within the slot width */
