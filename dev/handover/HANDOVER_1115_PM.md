@@ -318,3 +318,4 @@ Worker worktrees at /home/user/wt/<name>. Rule summaries for workers: /home/user
 - (s7) Owner 20:20Z thái y (all 4 ideas) → review/thaiy worker (exposes thaiyNextVisit() for cal-plus).
 - (s7) idea-history DONE: dev/ideas/HISTORY_IDEAS_1115.md on review/idea-history aa1714ed (33 ideas). Feed into queued workers: Thái hậu archetypes → personality; poison 3 checks (taster/two-pot/touch record) → emperor; charcoal/ice by rank → econ-items; trap dress, Ban Tiệp dư palanquin, hiệp lý lục cung, mother-below-Tần child raising, hidden prince, tùy giá → idea-build workers after design top ideas (memories, hook ledger first).
 - (s7) Owner 20:25Z monthly cycle → review/cycle (new jcycle.js; cycleDaysOf() for cal-plus, cycleLate() for thaiy). Owner 20:30Z dark = gloomy mood not night sky → sent to act-pics2 worker.
+- LIVE main = book-title r6 (41cdf7c3f), pushed by session 6.
