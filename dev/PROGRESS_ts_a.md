@@ -151,3 +151,18 @@ TIMEOUT của ts: kit-close giấu nút "Đã hiểu" (#kg82ok) của kết qu�
 thêm #kg92ok) — CHƯA chạy thử được vì máy. Việc còn: người cân bằng sửa bot cho main mới (con cái, thẻ thân phận) rồi đo ≥80 đời
 `node dev/measure/run_url.js root/dev/index.html sens 40 out.json inpage6.js` (bản main: dựng dev/build của origin/main vào dev/index-main.html).
 Nếu HH ts > main + 5 điểm: hạ tsSummonGain / roll(14) trong jts.js.
+
+## REVIEW r6 (15/11, reviewer) — branch review/ts-a-r6 = origin/main b8a58e873 + review/ts-a 0b7e154a2
+Merge conflicts: jk4 (kept main's KIT 48/50/43 blocks; kitXHTML label kept as main "Lui" — VP maps the aria-label "Đóng"→"Lui" anyway,
+no visible button), jk2b (kept main: no default picture as a stand-in), assemble.py (jts.js before j84). Site rebuilt (build_site.sh).
+Review fixes on r6:
+- Lễ tấn phong guests were still named GREY silhouettes on main: main's stranger rule (KIT §49.3 met61) needs S.met[id]; k61Meet did not set it.
+  Now k61Meet marks a consort met (whole class: every k61Meet caller, incl. main's "Người ấy đến tận nơi" showModal hook).
+- S.met stores wk(); a meeting in week 0 stored 0 = falsy → never "met". Readers now test `!=null` (j21 knows, j61 met61, jwhy spyNewsW).
+- VP j84, same class as "với ngươi": "X quý ngươi hơn" became "X thiện cảm hơn" ("Họ thiện cảm hơn.", "Thái hậu thiện cảm hơn (+1)").
+  New rule → "có thiện cảm với ta hơn"; j67 wx "sứ thần quý ngươi" → "sứ thần có thiện cảm với ta". Scan (.kctmp/scanvp.js, not committed:
+  every string literal with với/quý ngươi|ta through the VP relation rules): main 32 suspicious → r6 8, all 8 are labels followed by a number.
+- dev/measure/run_par.js: P pages in one browser, seeded, pictures blocked, crashed page replaced. Bot: inpage6.js (with the ts-a #kg82ok/#kg92ok fix).
+Tests ts-a.js at 755x1000@2, 1000x755@2, 1180x820@2, 1366x1024@2, 844x390@3: 18 steps each, 0 page errors, 0 overflow, 0 cut, 0 "???",
+0 bare "thiện cảm", 0 "quý ngươi", 0 Lui/Thôi/Đã hiểu buttons, date line 1 row, dressing tiles 0 px offset, old save loads. Grey left: Hoàng thượng
+only (kit-fig2). 390x844: portrait title screen as on main.
