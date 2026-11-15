@@ -368,3 +368,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (07:58Z) Biểu tượng cảm xúc không thêm chữ; chạm vào mới hiện tên cảm xúc (Vui, Buồn, Giận, Hờn…) + lý do nếu có.
 - (08:00Z) Nhãn đồ đang dùng trong Tư trang: chỉ MỘT chữ "Đang mặc" cho mọi món (bỏ "Đang cài", "Đang đeo"…).
 - (08:05Z) Đồ được tặng lúc vào game (gia đình, người thân) phải ra bằng hộp gấm/rương của kitReward (đã có: chạm mở, rương rung, nắp bật, món bay ra theo phẩm). Vào cung được ban phẩm → Nội vụ phủ ban BỘ ĐỒ theo phẩm bằng rương; mỗi lần thăng phẩm cũng ban bộ đồ phẩm mới. NPC cùng luật (không hoạt cảnh).
+- (08:10Z) Bảng ô trang bị (Ô cài tóc…): dùng đúng cỡ hộp thoại chuẩn của kit, không to hơn; trên: ô vật phẩm nhỏ trái + thông tin phải; dòng ghi chú trải ngang; các nút việc gọn (lưới 2–3 cột hoặc hàng dài tùy chỗ); bỏ nút "Lui".
