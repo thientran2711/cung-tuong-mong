@@ -425,3 +425,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (12:10Z) Tác phẩm tự tay đa dạng: mỗi loại (nấu, thêu, tranh, chữ…) khoảng 10 món mỗi phẩm, mỗi món có hình riêng, phẩm cao nhìn sang hơn.
 - LIVE CDN (12:10Z) Khung Đáp ứng A + 8 dấu trên đầu (đổi 6/7). Code nằm ở review/rank0-ivory chờ duyệt.
 - (12:12Z) Tranh Thỉnh an mới: sếp DUYỆT (dùng làm mẫu dáng vạn phúc + áo cung trang cho các tranh vẽ lại).
+- (12:20Z) Ảnh Triều chính hiện lung tung là do nhiều sự việc KHÔNG có ảnh riêng nên rơi về ảnh mặc định. Việc cần: dò mọi ảnh đang được dùng cho 2 sự việc khác nhau trở lên (và mọi chỗ rơi về ảnh mặc định) → vẽ ảnh riêng cho các sự việc còn thiếu.
