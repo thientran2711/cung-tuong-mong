@@ -110,3 +110,4 @@ Nhắc theo dõi: send_later 30 phút, tự đặt lại mỗi lượt (lịch l
 - 09:55Z LIVE main=01c3a5b24 (hau-cung-ui) rồi 3bf16b9b1 (hotfix walk-spill: đi đường tràn sang buổi sau).
 - 10:00Z LIVE main=c5b93e63f rules-one-source (số hiện = số luật; Thái hậu 55; Đức 33 → 28).
 - [x] LIVE df3094e71: update-flow (không tự tải lại lúc đang chơi; chip "Để sau / Mở bản mới"; chơi cùng mở lại đúng phòng) + Ân oán 2 cột, thanh quý có vạch 0.
+- [ ] Thẻ người: dư trống trên chân dung; việc chưa chia tab kit; nút làm được chưa lên đầu mọi nơi; thanh chỉ số đầu trang bị che (giao stage-slots → review/person-acts).

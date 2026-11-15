@@ -308,3 +308,8 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - Chơi cùng bạn / Mời bạn → "Cùng hảo hữu" / "Mời hảo hữu" (tri kỷ quá thân mật). Bảng vàng: ok. Qua đêm → Qua ngày.
 - Chữ "ngươi" chỉ người chơi trên giao diện đổi thành "ta" (ngôi thứ nhất): "Con của ta", "Hoàng hậu với ta". Lời thoại NPC nói với nàng vẫn giữ "ngươi".
 - Cửa hàng kiểu game kiếm hiệp: ô có hình món đồ, tên, công dụng, đơn giá; chọn ô thì hiện hàng số lượng +1/+2/+3/+4/Tối đa, tự cộng tổng tiền, rồi nút Mua.
+
+## 15/11 ~05:10Z (sếp, nhắc nhiều lần)
+- Thẻ người (Hành sự với một người): tên + phẩm sát trên cùng, khung chân dung kéo lên, bỏ khoảng trống phía trên; chỗ dư dành cho thông tin.
+- LUẬT CHUNG: ở mọi danh sách nút/việc trong game, nút làm được nằm trên cùng, nút mờ xuống dưới.
+- Các việc bên phải thẻ người chia theo tab nhỏ của kit chung; bấm tab mới hiện các việc thuộc nhóm đó.
