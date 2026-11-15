@@ -27,7 +27,7 @@ accState=function(k){if(!S||!k)return{why:""};if(S.place===k)return{why:"",here:
  if(k!=="home"&&!j77Kh(tc))return{why:j77WalkWhy(tc),tc,walk:1};
  return{why:"",tc}};
 /* sneaking: 1 khắc at the side gate, then the walk; the Emperor's halls are a serious offence */
-function accSneakPen(k){return typeof ACC_ETQ!=="undefined"&&ACC_ETQ.sneakHeavy[k]?{danh:-15,sev:2,txt:"Danh -15, tội nặng (có thể bị giáng phẩm)"}:{danh:-8,sev:1,txt:"Danh -8, bị phạt"}}
+function accSneakPen(k){return typeof ACC_ETQ!=="undefined"&&ACC_ETQ.sneakHeavy[k]?{danh:-15,sev:2,txt:`Danh -15, ${typeof aaPunishTxt==="function"?aaPunishTxt(2):"tội nặng (có thể bị giáng phẩm)"}`}:{danh:-8,sev:1,txt:`Danh -8, ${typeof aaPunishTxt==="function"?aaPunishTxt(1):"bị phạt"}`}}
 function j77Tc(k){try{return k==="home"?0:travel(S.place,k)}catch(e){return 1}}
 accAskLine=function(k){return `${word(accAskO(k))} · tốn: ${j77Tc(k)+1} khắc · thành: được vào buổi này · hỏng: không mất gì`};
 accMini=function(k,st,risk){const L=[];const t=(st.tc!=null?st.tc:j77Tc(k))+1;
@@ -148,10 +148,11 @@ function accEtqCard(k,then){const h=accEtq(S,k);if(!h){then();return}if(!S||S.de
  opts.push({n:"Thôi",fx:{},x:""});Q.push({t:nm,h:L.join(""),opts});showModal()}
 function accEtqGo(k,h,greet,then){if(!S||S.dead||Q.length)return;const sh=h.name.split(" ").pop();const bf=typeof rsnap==="function"?rsnap():null;
  const C=ACC_ETQ,sg=n=>(n>0?"+":"")+n;
- if(greet){if(!j77Kh(travel(S.place,k)+C.khac))return;spend(C.khac);relAdd(S,h,C.okAff);log(`Ngươi cúi chào, bái kiến ${accRkName(h)} ${h.name} ở ${accName(k)}: thiện cảm ${sg(C.okAff)}.`)}
- else{if(C.mode==="required")return;const a=accSkipAff(h,S);relAdd(S,h,a);if(C.skipDanh)apply({danh:C.skipDanh});log(`<span class="r">Vào ${accName(k)} không chào chủ vị ${h.name}: thiếu lễ, thiện cảm ${sg(a)}${C.skipDanh?`, Danh ${sg(C.skipDanh)}`:""}.</span>`)}
- try{if(bf)resultShow(greet?`Bái kiến ${accRkName(h)} ${h.name}`:`Vào ${accName(k)} không bái kiến`,bf,true)}catch(e){}/* act audit: the change came after the dialog had closed, so no result card showed it */
- accGrant(S,k);then()}
+ if(greet){if(!j77Kh(travel(S.place,k)+C.khac))return;spend(C.khac);relAdd(S,h,C.okAff);log(`Ngươi cúi chào, bái kiến ${accRkName(h)} ${h.name} ở ${accName(k)}: chủ vị quý ngươi ${sg(C.okAff)}.`)}
+ else{if(C.mode==="required")return;const a=accSkipAff(h,S);relAdd(S,h,a);if(C.skipDanh)apply({danh:C.skipDanh});log(`<span class="r">Vào ${accName(k)} không chào chủ vị ${h.name}: thiếu lễ, chủ vị quý ngươi ${sg(a)}${C.skipDanh?`, Danh ${sg(C.skipDanh)}`:""}.</span>`)}
+ accGrant(S,k);then();
+ /* act audit: the change came after the dialog had closed, and the arrival card ("không đổi gì") covered it: show it after arriving */
+ setTimeout(()=>{try{if(bf)resultShow(greet?`Bái kiến ${accRkName(h)} ${h.name}`:`Vào ${accName(k)} không bái kiến`,bf,true)}catch(e){}},30)}
 /* the gate: every way in (map, person card, follow) passes the greeting first */
 (function(){const g0=goTo;goTo=function(k){if(!S||!k||k===S.place||k==="home"||window.__accSilent||window.__j77etq)return g0.apply(this,arguments);
  const h=accEtq(S,k);if(!h||S.dead||Q.length||S.out||S.confined||!accessOf(S,k).ok)return g0.apply(this,arguments);
@@ -196,7 +197,7 @@ function accLead(k){if(!S||S.dead||Q.length||S.out||S.confined)return;const tc=t
 /* TRA CỨU: the rules as they now stand */
 accInfo=function(){if(!S||Q.length)return;const R=n=>`<b>${n}</b>`;
  Q.push({t:"Ra vào cung cấm",h:`<div class="acinfo"><p>Một luật cho mọi người trong cung, cả phi tần khác.</p>
- <p>${R("Cung phi tần")}: ai cũng đến làm khách được.${(()=>{const C=ACC_ETQ,sg=n=>(n>0?"+":"")+n;if(C.mode==="optional")return"";return ` Chủ vị phẩm cao hơn ngươi đang ở cung: theo lệ ${C.mode==="required"?"phải":"nên"} ${R("bái kiến")} trước (${C.khac} khắc, chủ vị thiện cảm ${sg(C.okAff)})${C.invite?"; đến theo lời mời thì khỏi":""}.${C.mode==="expected"?` Không chào: chủ vị phật ý, thiện cảm giảm (phẩm cách càng xa, tính càng kiêu thì càng giảm).`:""}`})()}</p>
+ <p>${R("Cung phi tần")}: ai cũng đến làm khách được.${(()=>{const C=ACC_ETQ,sg=n=>(n>0?"+":"")+n;if(C.mode==="optional")return"";return ` Chủ vị phẩm cao hơn ngươi đang ở cung: theo lệ ${C.mode==="required"?"phải":"nên"} ${R("bái kiến")} trước (${C.khac} khắc, chủ vị quý ngươi ${sg(C.okAff)})${C.invite?"; đến theo lời mời thì khỏi":""}.${C.mode==="expected"?` Không chào: chủ vị phật ý, bớt quý ngươi (phẩm cách càng xa, tính càng kiêu thì càng giảm).`:""}`})()}</p>
  <p>${R("Càn Ninh cung, Đức Thọ cung")}: sáng thỉnh an, hoặc khi được mời, được triệu. Lúc khác: xin bái kiến.</p>
  <p>${R("Dưỡng Hòa điện, Cần Chính điện")}: chỉ khi được triệu. Cách khác: xin yết kiến, hoặc chờ được triệu. Tự ý vào là tội nặng.</p>
  <p>Phẩm thấp gặp phẩm cao thì cúi chào trước.</p>

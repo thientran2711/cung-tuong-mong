@@ -14,3 +14,11 @@ Task (owner 11/14, re-given 11/15 05:40Z): every button must do what its card sa
 3. `node dev/test/act-audit.js http://127.0.0.1:8831/_aa.html out.jsonl 755x1000@2 dau,toi,cao,con,hau,hh`
 4. `python3 dev/test/act-audit-sum.py out.jsonl --md table.md`
 Note: `let S` makes `typeof S` "undefined" before a game starts: wait for `typeof deser==='function'` instead.
+
+## Done (11/15)
+- review/rules-one-source merged to main (5ef8e3f11). review/act-audit rebased on main 14967f899 (fast-forward), pushed.
+- Fixes: see dev/test/ACT_AUDIT.md §4–§11 (jwhy.js, jaudit.js §1–§17, j63, j79, jk3, j77, j84, j15, jinv, j8/j6 wording).
+- Tests: act-audit.js (+ -sum.py), rules-one-source.js (OLD_URL=<older build> for the old save), thieu-le.js, silent-events.js, bot-same.js.
+- Build for local tests with CDN off: `CTM_IMG_BASE= python3 dev/build/assemble.py`.
+## Open
+- See ACT_AUDIT.md §12 "Còn mở" and §11 (numbers for the coordinator).

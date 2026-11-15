@@ -32,7 +32,7 @@ function aaFallenT(){const L=liveRivals(true);if(!L.length)return null;const d=v
  const v=typeof J78==="object"&&J78.cardV;if(!v||!S||v===S||together(S,v)||["accuse","vp","gift","steal","road","takeaway"].includes(k))return h;const sv=bestSent(S);
  const tin=s=>s?String(h).replace(/thành: ([^·]+)/,(m,x)=>`thành: ${x.trim()}, Chủ tin với ${s.name} +3 `):h;/* runAct → servMerit(sv,2) → tinAdd 1.5×2 */
  if(["ally","spy"].includes(k))return tin(sv);
- h=tin(sv);const r=confessRisk(sv);return h+` · kèm: ${sv?`${sv.name} được sai đi`:"người được sai"} bị bắt thì khai ra ngươi (nàng nắm 1 chứng cứ), có khi bị đánh chết: ${word(r)}`}catch(e){}return h}})();
+ h=tin(sv);const r=confessRisk(sv);return h+` · kèm: ${sv?`${sv.name} được sai đi`:"người được sai"} bị bắt thì khai ra ngươi (nàng nắm 1 chứng cứ), có khi bị đánh chết: ${typeof chanceW==="function"?chanceW(r):word(r)}`}catch(e){}return h}})();
 
 /* 4. ĐỀ BẠT (owner): she raises her own servant one tier (SRK), capped by srkMax for her rank; NPC mistresses by the same rule
    (servRanks already promotes by merit; an NPC may also đề bạt a loyal servant early, same numbers). Numbers in BAL (one source).
@@ -229,3 +229,84 @@ aaThieuLeTxt=function(host,f0){const L=leAttire(S,"",host),f=f0||L.delta;const w
 aaThieuLeApply=function(host,f0){const L=leAttire(S,"",host),f=f0||L.delta;if(!f.danh&&!f.duc&&!f.aff)return;apply({danh:f.danh,duc:f.duc});
  if(host==="th")apply({th:f.aff});else if(host==="emp")apply({sung:f.aff>0?1:(Math.round(f.aff/3)||-1)});else if(host&&host!==S)affAdd(host,S,f.aff);
  const t=aaThieuLeTxt(host,f);log(`${f.aff>0?"":'<span class="r">'}${t[0].toUpperCase()+t.slice(1)}.${f.aff>0?"":"</span>"}`)};
+
+/* 18. ONE odds pipeline (coordinator 11/15): the six acts that skipped odA now go through it, so Sức < 30, Quẻ tuần and the
+   sent-servant penalty apply to the roll, and the card (ACT.o + sentPenNow) shows the same number.
+   Ly gián, Hạ độc dần, Tố tội thật, Bóc chuyện tư tình (j30 odT) · Xin Hoàng hậu giáng (j30) · Trình Hoàng hậu (j78). */
+odT=function(a,base){return odA(a,base+(a.tamco||0)/4)};
+(function(){const card=(k,raw)=>(a,t)=>{const v=raw(a,t);if(v==null)return v;const o=odA(a,v);if(a!==S||!t||ACTX.a)return o;const p=typeof sentPenNow==="function"?sentPenNow(a,t,k):0;return p?cl(o-p,5,95):o};
+ const X=ACT.xinhh;if(X){const raw=(a,t)=>{const q=queenP();return q?30+aff(q,a)/2-aff(q,t)/2:null};X.o=card("xinhh",raw);
+  X.f=(a,t)=>{ap(a,{bac:-30});const q=queenP();const o=odA(a,raw(a,t));if(roll(o))return `Hoàng hậu nghe lời ${NM(a)}, tâu xin giáng ${NM(t)}. `+demote(t,"bị Hoàng hậu tâu giáng");affAdd(q,a,-10);return `Hoàng hậu gạt lời ${NM(a)} đi. `}}
+ const T=ACT.trinhhh;if(T){const raw=(a,t)=>{const q=queenP();return q?35+aff(q,a)/2+evG(a,t)*8:null};T.o=card("trinhhh",raw);
+  T.f=(a,t)=>{const q=queenP();const o=odA(a,raw(a,t));evA(a,t,-2);if(roll(o)){punish(t,"bị Hoàng hậu xét tội theo chứng cứ",1);affAdd(t,a,-10);return `${j78Who(a)} trình chứng cứ lên Hoàng hậu: ${j78who(t)} bị xét tội. `}affAdd(q,a,-5);return `Hoàng hậu bác chứng cứ ${j78who(a)} trình về ${j78who(t)}. `}}})();
+
+/* 19. an oán preview when the target is not chosen yet (j55 "Dò la nhà ngoại": relAdd −8 + oán +8 → oán ≈ 12.8 × her nết) */
+function pvOanAny(n){try{const vs=Object.values(PERS).map(P=>P.slight!=null?P.slight:1);const lo=Math.max(1,Math.round(n*Math.min(...vs))),hi=Math.round(n*Math.max(...vs)*Math.max(1,Math.max(...vs)));return lo===hi?`oán ta +${lo}`:`oán ta +${lo} đến +${hi}`}catch(e){return `oán ta +${Math.round(n)}`}}
+
+/* 20. "bị phạt" on cards = what punish() (j8) does: cấm túc N tháng (Hoàng thượng nóng nảy 3, nhân từ 1, thường 2);
+   a grave fault (sev 2) may instead cost one rank (nóng nảy: always, nhân từ: 1 in 4, else half the time) */
+function aaPunishTxt(sev){const m=has("nongnay")?3:has("nhantu")?1:2;return sev>=2?`bị phạt: cấm túc ${m} tháng hoặc giáng một bậc (${word(has("nongnay")?100:has("nhantu")?25:50)})`:`bị phạt: cấm túc ${m} tháng`}
+(function(){if(typeof actLineRaw!=="function")return;const a0=actLineRaw;actLineRaw=function(k){const h=a0.apply(this,arguments);if(typeof h!=="string")return h;const sev={frame:2,ksab:2,accuse:2}[k]||1;return h.replace(/bị phạt(?! ?[:(])/g,aaPunishTxt(sev))}})();
+
+/* 21. Lục rương (j2 + j78): the caught risk now carries the real numbers for this consort (relAdd −15 → thiện cảm −15, oán ta scaled
+   by her nết) and the real punishment (punish sev 1) */
+(function(){const t0=talkOpts;talkOpts=function(p){const A=t0.apply(this,arguments);try{if(p&&p.kind==="chest"&&p.ref){const v=p.ref;const i=A.findIndex(a=>a&&a.n==="Lục rương tìm chứng cứ");
+ if(i>=0)A[i]=Object.assign({},A[i],{risk:`cung nhân của nàng ta bắt gặp: ${pvRel(v,-15)}, ${aaPunishTxt(1)}`})}}catch(e){}return A}})();
+
+/* 22. servant start · Lĩnh đồ ở Nội vụ phủ: srvMeet (j42) has a hidden 1-in-4 "bắt nạt: Sức −5" — now on the card in Kèm */
+(function(){if(typeof srvCards!=="function")return;const c0=srvCards;srvCards=function(){const X=c0.apply(this,arguments);try{for(const a of X||[])if(a&&a.n==="Lĩnh đồ ở Nội vụ phủ"&&!/bắt nạt/.test(a.x||""))a.x=(a.x?a.x+" · ":"")+`kèm: bị thái giám Nội vụ phủ bắt nạt, Sức -5: ${typeof chanceW==="function"?chanceW(25):"khả năng thấp"}`}catch(e){}return X}})();
+
+/* 23. MINI-GAME ACTS — one shared path (owner bug 11/15, live: one tap on the Hành sự card "Tự học Nấu nướng" paid Sức −15, Bạc −6
+   and 2 khắc and showed a BẠI card, and only THEN the game intro opened). Cause: every act that opens a mini-game paid and rolled
+   as a plain act first — the deck card through act() → runOpt (cost, roll, result card), then its go opened the game; the
+   lesson buttons through lessonMode (j23) and the "làm ra tác phẩm gì?" dialog (j83 chooseM, material Bạc); the veil craft
+   (jveil) the same way. The game itself then decides the real outcome.
+   Now, for every act that opens a mini-game (all of them go through openMG or playArt):
+   (a) one tap = one act: a lesson/practice tap is ignored while its dialog or game is open, and for 700 ms after a tap;
+       a deck card is marked done at once and refuses while a game is open;
+   (b) a tap opens only the intro: whatever the act took before the game opened (Sức, Bạc, Thái hậu, khắc) is put back at once and
+       kept as pending; no roll, no result card. The deck card does not go through runOpt at all;
+   (c) the pending cost is paid when the game reports (played or "Để trời định"); closing the game unplayed costs nothing;
+   (d) one result card comes LAST, after the game screen closes: the cost plus what the game gave, sealed by the score
+       (THÀNH from 5 of 10, the 2-point lesson; after "Để trời định" by what the quick lesson gave); none when the game shows its own result dialog
+       (the veil craft). */
+(function(){let lastTap=0;window.__aaL=0;
+ const ovOpen=()=>{const ov=document.getElementById("ov");return !!(ov&&!ov.hidden)||!!document.querySelector("#kg82go,.kg82act")};
+ const busy=()=>!!(S&&(S.mg||window.__aaPend||(Q.length&&Q[0]&&/làm ra tác phẩm gì|^Học |^Tự luyện|mạng che mặt/.test(Q[0].t||""))))||ovOpen();
+ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-learn],[data-wkprac]");if(!b)return;const now=Date.now();
+  if(busy()||now-lastTap<700){e.stopPropagation();e.stopImmediatePropagation();e.preventDefault();return}lastTap=now},true);
+ const KEYS=["suc","bac","th"];const snap=()=>({suc:S.suc,bac:S.bac,th:S.th,used});
+ const diff=(b,extra)=>{const c={khac:used-b.used};KEYS.forEach(k=>c[k]=(S[k]||0)-(b[k]||0)-((extra&&extra[k])||0));return c};
+ const putBack=(b,extra)=>{KEYS.forEach(k=>S[k]=b[k]+((extra&&extra[k])||0));used=b.used};
+ const keep=c=>{window.__aaPend=c;if(S.mg)S.mg.cost=c;try{save()}catch(e){}try{render()}catch(e){}};
+ /* run fn; if it opened a mini-game, undo what it paid and keep that pending (the outermost call does it, once) */
+ window.aaDefer=function(fn,ctx,args,extra){if(!S||window.__aaPend||(S.mg&&S.mg.cost))return fn.apply(ctx,args);const b=snap(),L=window.__aaL;window.__aaL=0;let r;
+  window.__aaIn=(window.__aaIn||0)+1;const rs0=window.__aaRS;window.__aaRS=null;
+  try{r=fn.apply(ctx,args)}finally{window.__aaIn--;const went=window.__aaL;window.__aaL=L||went;const held=window.__aaRS;window.__aaRS=rs0;
+   if(went&&!window.__aaPend&&!(S.mg&&S.mg.cost)){const c=diff(b,extra);putBack(b,extra);keep(c)}
+   /* review 11/15 (veil craft): a result card the act raised while its game was opening is dropped — the one result comes after the game */
+   else if(held&&!went){try{window.__aaR0.apply(held.t,held.a)}catch(e){console.error(e)}}}return r};
+ if(typeof lessonMode==="function"){const l0=lessonMode;lessonMode=function(){let mat=0;try{if(typeof wkPend==="object"&&wkPend&&WK[wkPend.kind])mat=WK[wkPend.kind].mat[wkPend.mat]||0}catch(e){}
+  return window.aaDefer(l0,this,arguments,mat?{bac:mat}:null)}}
+ if(typeof chooseM==="function"){const c0=chooseM;chooseM=function(){return window.aaDefer(c0,this,arguments)}}
+ if(typeof vlCraftRun==="function"){const v0=vlCraftRun;vlCraftRun=function(){window.__aaTitle="Tự tay kết mạng che mặt";return v0.apply(this,arguments)}}
+ /* the Hành sự deck cards that open a game (j83 wkDeckCard): no runOpt — the act() guards, then straight to the game */
+ if(typeof wkDeckCard==="function"){const w0=wkDeckCard;wkDeckCard=function(){const a=w0.apply(this,arguments);if(a)a.aaMG=1;return a}}
+ if(typeof act==="function"){const a0=act;act=function(i){const a=Array.isArray(deck)&&deck[i];if(!a||!a.aaMG||typeof a.go!=="function")return a0.apply(this,arguments);
+  if((a.b!=null&&(S.buoi||0)!==a.b)||!can(cardCost(a))||a.done||S.dead||Q.length||!canPay(a)||busy())return;
+  a.done=1;const c={khac:cardCost(a)};KEYS.forEach(k=>c[k]=(a.c&&a.c[k])||0);window.__aaTitle=a.n;window.__aaL=0;a.go();
+  if(window.__aaL)keep(c);else{a.done=0;window.__aaTitle=null}render()}}
+ /* the one result, after the game screen closes */
+ let fin=null;
+ const showLast=(title,before,ok,q0)=>{let n=0;const t=setInterval(()=>{if(++n>2400||(!ovOpen()&&!(S&&S.mg))){clearInterval(t);fin=null;
+   try{if(S&&!S.dead&&Q.length<=q0)window.__aaR0(title,before,ok)}catch(e){console.error(e)}}},250)};
+ window.aaPayMG=function(score){try{const m=S&&S.mg;const c=(m&&m.cost)||window.__aaPend;if(m)m.cost=null;window.__aaPend=null;if(!c||fin)return;
+  const before=rsnap(),q0=Q.length;apply({suc:c.suc||0,bac:c.bac||0,th:c.th||0});if(c.khac)spend(c.khac);
+  const sc=score||{};const ok=sc.skip?null:sc.raw!=null?sc.raw>=5:sc.g!=null?sc.g>=2:true;
+  const ttl=(window.__aaTitle||sc.title||"Trò tài nghệ")+(sc.skip?" · để trời định":sc.raw!=null?` · phần chơi ${sc.raw}/10`:"");window.__aaTitle=null;
+  fin=1;showLast(ttl,before,ok,q0)}catch(e){console.error(e)}};
+ if(typeof playArt==="function"){const p0=playArt;playArt=function(o){window.__aaL=1;if(o&&typeof o.onDone==="function"){const d0=o.onDone,ttl=o.title;
+  o=Object.assign({},o,{onDone:function(raw,x){const sk=!!(x&&x.skipped);const r1=cl(Math.round(raw||0),0,10);window.aaPayMG({title:ttl,skip:sk,ok:r1>=5,raw:sk?null:r1});return d0.apply(this,arguments)}})}return p0.call(this,o)}}
+ if(typeof openMG==="function"){const o0=openMG;openMG=function(k,lv,cb){window.__aaL=1;let ttl="";try{const m=S.mg,a=ARTS.find(x=>x.k===k);ttl=`${m&&m.mode==="prac"?"Tự luyện":m&&m.mode==="self"?"Tự học":m&&m.mode==="th"?"Học cùng Thái hậu":"Học"} ${a?a.n:""}`}catch(e){}
+  if(ttl&&!window.__aaTitle)window.__aaTitle=ttl;const cb2=typeof cb==="function"?function(g){window.aaPayMG({title:ttl,g});return cb.apply(this,arguments)}:cb;return o0.call(this,k,lv,cb2)}}
+ if(typeof resultShow==="function"){const r0=resultShow;window.__aaR0=r0;resultShow=function(){if(window.__aaPend||fin||(ovOpen()&&S&&S.mg))return;if(window.__aaIn){window.__aaRS={t:this,a:arguments};return}return r0.apply(this,arguments)}}})();

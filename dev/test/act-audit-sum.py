@@ -16,11 +16,12 @@ def tokens(texts):
     """(family, sign, lo, hi, who) from card rows"""
     out=[]
     for t in texts:
-        for m in re.finditer(r'([^·,;:()]{0,40}?)'+NUM,t):
+        for m in re.finditer(r'([^·,;()]{0,40}?)'+NUM,t):
             pre=m.group(1).strip();sg=-1 if m.group(2) in '-−–' else 1;lo=int(m.group(3));hi=int(m.group(4) or lo)
             low=pre.lower();fam=None;who='me'
             if re.search(r'\bnàng\b|\bcon\b|hoàng tử|công chúa',low) and not re.search(r'với ngươi|quý ngươi',low):who='other'
-            if 'chủ tin' in low:fam='loyal'
+            if 'chủ tin với' in low or 'tin cậy' in low:fam='loyal'
+            elif 'chủ tin' in low:fam='S.tin'
             elif 'chứng cứ' in low:fam='ev';who='other'
             elif 'ghen' in low:fam='ghen';who='other'
             elif 'oán' in low or 'thù' in low:fam='oan';who='other'
