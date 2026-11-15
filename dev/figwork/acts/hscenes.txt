@@ -365,3 +365,27 @@ chi-huy-dap-lua|0|a consort's hand pointing commandingly, servants' hands passin
 tra-ke-phong-hoa|0|a eunuch's hand holding a lantern low over a spilled oil stain on a scorched wooden floor
 giup-mot-tay|0|a consort's hand passing a small paper packet of powder to another lady's hand, hidden under the drape of a wide sleeve
 dung-ra-can|0|a consort's hands raised and spread between two other ladies' sleeves tugging toward each other in a quarrel
+dung-ve-phia|0|a consort's hand firmly holding another lady's hand in a blue sleeve, standing beside her against a third lady's red sleeve in a dispute
+mach-hh|0|a consort's hand in a pink sleeve cupped as she whispers, beside the Empress's red phoenix brocade sleeve, two quarrelling ladies' sleeves blurred in the background
+mach|0|two ladies' pink and blue sleeves leaning close in a quiet corner, one hand discreetly gesturing toward a distant third lady's sleeve
+gop-bac-giau-the|0|two ladies' hands laying silver ingots onto a eunuch's tray of green name tablets, the tablets blank
+tuyen-tu|0|rows of candidate maidens' pink sleeves standing in a palace courtyard, seen from above the hands of an elder lady's dark brocade sleeve and the Empress's red phoenix sleeve resting on their chairs
+tau-tuyen-it|0|a consort's hand raising one finger as she advises, beside the Emperor's yellow sleeve on a table
+tau-tuyen-nhieu|0|a consort's hand gesturing toward a row of candidate maidens' pink sleeves in the distance, beside the Emperor's yellow sleeve
+vao-cung-phong|0|a new consort's hands clasped at her right waist in an upright curtsy, crisp new pink sleeves, before the Empress's red phoenix brocade hem
+dau-ba-quan|0|a high minister's hands in a scarlet court robe sleeve holding an ivory tablet at the head of rows of officials' sleeves in a court hall
+so-hac-can-chinh|0|a kneeling censor's hands raising a closed memorial in a court hall, the Emperor's yellow sleeve reaching to take it
+so-khen|0|the Emperor's yellow sleeve holding an open memorial (abstract lines), an official's dark green sleeves bowed respectfully before the desk
+quy-xin-tha|0|a figure's hands pressed to the floor in a kowtow before the Emperor's yellow robe hem and dragon throne steps
+xin-th-do-loi|0|an elder lady's hand in a dark brocade sleeve holding a kneeling consort's pink-sleeved hand kindly
+cau-xin|0|hands in plain undyed sleeves clasped pleading at a weathered cold-palace gate, a eunuch's dark sleeve on the other side
+nho-nguoi-ben-ngoai|0|a hand in a plain undyed sleeve passing a last silver hairpin through the gap of a cold-palace gate into a maid's green-sleeved hand
+nho-cau-xin|0|a consort's pink-sleeved hand held tightly by a hand in a plain undyed sleeve in a bare cold-palace room
+nho-minh-oan|0|a consort's hand handing a poem scroll (blank) to a scholar official's dark blue sleeve, a writing desk with brushes
+dang-bac-n|0|a consort's hands placing two silver ingots on a tray of donations for relief, other offerings of rice sacks nearby
+cat-bong-de-dang|0|an older court lady's hand in a dark brown sleeve holding a ledger and pinching silver out of a servant's wage pouch
+ke-la-vao-phong|1|a dark-sleeved hand sliding open a consort's chamber door at night, a maid's green sleeve hiding behind a screen watching
+thay-dong-tinh|0|a consort's pink sleeve parting bamboo leaves, beyond them two maids' hands exchanging a wrapped bundle in a wall corner
+do-hoi-gia-the|1|a consort's hand turning the pages of a thick register book on a desk, a maid's green-sleeved hand holding a lamp beside
+len-mua-ngoai-cung|1|a eunuch's dark sleeves clutching a wrapped bundle while slipping through a small side gate at dusk
+chuyen-lo-ra|0|two maids' green sleeves leaning together under an eave, one hand pointing toward a distant palace
