@@ -67,25 +67,35 @@ window.KIT_SCENE_TINT=window.KIT_SCENE_TINT==null?0:window.KIT_SCENE_TINT;
  window.kitSceneTag=tag;
  if(typeof renderStage==="function"){const r2=renderStage;renderStage=function(){const r=r2.apply(this,arguments);tag();return r}}
  if(typeof lightTick==="function"){const l0=lightTick;lightTick=function(){const r=l0.apply(this,arguments);tag();return r}}})();
-/* ---- TUẦN LỤC: HÌNH RỘNG KHÔNG BỊ CỘT HẸP CẮT (sếp 13:45Z: Thái hậu fig-thaihau-h1-a51 730×900, áo đuôi dài — sửa CSS, không vẽ thêm) ----
-   Trang người (.kbk-person.kbk-full) có cột hình cố định --porf (vừa hình người thường, tỉ lệ ~0,42). Hình rộng hơn cột:
-   · trang rộng: NỚI cột hình theo bề rộng thật của hình (≤ 66 % trang), chữ dồn sang phần còn lại — không đè lên hình; chỉ khi hình rộng
-     hơn cả 66 % trang mới thu cho vừa cột (chân giữ trên nền, giữa cột);
-   · điện thoại (.kbk.narrow, chữ vốn nằm trên khung giấy mờ đè mép hình): giữ cột, DỜI hình vào trong trang, thu chỉ khi rộng hơn cả trang. */
-(function(){let q=0;
+/* ---- TUẦN LỤC: WIDE FIGURES (owner 13:45Z Thái hậu cut by the column; 03:55Z ONE figure scale: full body ≈85–90 % of picture
+   height, NEVER shrink to fit) — KIT §56.3 ----
+   The person page (.kbk-person.kbk-full) gives the figure a fixed column --porf sized for a normal standing figure. A wider figure
+   (Thái hậu, t7/t8 trains, wide sleeves) keeps its kit height and is never scaled:
+   · wide pages: the figure column widens only as far as the face + torso need (figure centre + 14 % of its height, ≤ 74 % of the
+     page), so the text keeps its room;
+   · whatever is still wider (train / outer sleeve) runs BEHIND the text, which then sits on the kit's soft paper panel
+     (.kbk-figover = the same panel phones use); the figure's left edge is moved inside the page so nothing is cut on the left;
+   · phones (.kbk.narrow): same — figure moved inside the page, never scaled; the text already sits on the paper panel. */
+(function(){let q=0;const AR=window.__figAR=window.__figAR||{};const R=window.__kbkRatio=window.__kbkRatio||{h:.86,w:.9};
+ const st=document.createElement("style");st.textContent=`.kbk-person.kbk-figover>.kbk-phead,.kbk-person.kbk-figover>.kbk-flow{position:relative;z-index:1;background:color-mix(in srgb,var(--paper,#f3e3c0) 86%,transparent);border-radius:6px;padding:.2em .4em}.kbk-person.kbk-figover>.kbk-por{overflow:visible;z-index:0}`;document.head.appendChild(st);
+ /* column width for j87 personBody (called while paginating, so the text is measured in the final column): figure aspect from a
+    cache filled on first sight (a book already open re-lays out once the picture is known); page-body ratios measured on live pages */
+ window.kitBookFigCol=function(fig,PW,PH){try{const m=/src="([^"]+)"/.exec(fig||"");if(!m||!PW||!PH||PW<440)return "";const src=m[1];
+   if(!AR[src]){if(AR[src]!==0){AR[src]=0;const I=new Image();I.onload=()=>{AR[src]=I.naturalWidth/Math.max(1,I.naturalHeight);if(document.querySelector(".kbk"))dispatchEvent(new Event("resize"))};I.src=src}return ""}
+   const kfr=+((/--kfr:([\d.]+)/.exec(fig)||[])[1]||1),H=PH*R.h*kfr,w0=AR[src]*H,base=Math.min(PW*.45,PH*.8*.42);if(w0<=base+1)return "";
+   const col=Math.min(w0/2+.14*H+4,PW*R.w*.74);return col>base+1?`;grid-template-columns:${Math.round(col)}px minmax(0,1fr)`:""}catch(e){return ""}};
  function clamp(){q=0;try{document.querySelectorAll(".kbk-person.kbk-full .kesfi").forEach(f=>{const box=f.closest(".kbk-person");if(!box)return;
-   const narrow=!!box.closest(".kbk.narrow"),por=box.querySelector(":scope>.kbk-por");
-   if(f.style.transform){f.style.transform=""}                                   /* đo lại từ đầu: bề rộng bố cục, không tính transform */
-   if(!narrow&&por){box.style.gridTemplateColumns="";const base=por.getBoundingClientRect().width,w0=f.offsetWidth,bw=box.getBoundingClientRect().width;
-    if(!w0||!bw)return;const want=Math.min(w0+6,bw*.66);
-    if(want>base+1)box.style.gridTemplateColumns=`${Math.round(want)}px minmax(0,1fr)`;
-    const pw=por.getBoundingClientRect().width,s=w0>pw?pw/w0:1;
-    if(s<1){f.style.transformOrigin="50% 100%";f.style.transform=`scale(${s.toFixed(4)})`}return}
-   const par=f.offsetParent;if(!par)return;
-   const pr=par.getBoundingClientRect(),b=box.getBoundingClientRect(),w0=f.offsetWidth,l0=pr.left+f.offsetLeft;if(!w0||!b.width)return;
-   const s=w0>b.width?b.width/w0:1,w=w0*s,l=l0+(w0-w)/2;let dx=0;if(l<b.left)dx=b.left-l;else if(l+w>b.right)dx=b.right-(l+w);
-   const t=(s<1||Math.abs(dx)>0.5)?`translateX(${dx.toFixed(1)}px) scale(${s.toFixed(4)})`:"";
-   if(f.style.transform!==t){f.style.transformOrigin="50% 100%";f.style.transform=t}})}catch(e){}}
+   const por=box.querySelector(":scope>.kbk-por"),pg=box.closest(".kbk-pg");if(!por)return;
+   f.style.transform="";const w0=f.offsetWidth,bw=box.getBoundingClientRect().width;if(!w0||!bw){box.classList.remove("kbk-figover");return}
+   if(pg&&pg.offsetHeight&&pg.offsetWidth){R.h=+(por.getBoundingClientRect().height/pg.offsetHeight/(+getComputedStyle(box).getPropertyValue("--kfr")||1)*(+getComputedStyle(box).getPropertyValue("--kfr")||1)).toFixed(3);R.w=+(bw/pg.offsetWidth).toFixed(3)}
+   const im=f.querySelector("img");if(im&&im.naturalWidth)AR[im.getAttribute("src")]=im.naturalWidth/im.naturalHeight;
+   const b=box.getBoundingClientRect(),pr=por.getBoundingClientRect();
+   if(box.closest(".kbk.narrow")){   /* phones: unchanged from r7 (OPEN: a figure wider than the whole page is still scaled to the page — owner decision pending) */
+    const s=w0>b.width?b.width/w0:1,w=w0*s,l=pr.left+(pr.width-w)/2;let dx=0;if(l<b.left)dx=b.left-l;else if(l+w>b.right)dx=b.right-(l+w);
+    const t=(s<1||Math.abs(dx)>0.5)?`translateX(${dx.toFixed(1)}px) scale(${s.toFixed(4)})`:"";f.style.transformOrigin="50% 100%";if(f.style.transform!==t)f.style.transform=t;return}
+   const l=pr.left+(pr.width-w0)/2;let dx=0;if(l<b.left)dx=b.left-l;
+   box.classList.toggle("kbk-figover",w0>pr.width+1);
+   const t=Math.abs(dx)>0.5?`translateX(${dx.toFixed(1)}px)`:"";if(f.style.transform!==t)f.style.transform=t})}catch(e){}}
  function soon(){if(!q){q=requestAnimationFrame(clamp);setTimeout(clamp,450);setTimeout(clamp,1300)}}
  window.kitBookFigClamp=clamp;
  try{new MutationObserver(ms=>{if(ms.some(m=>[...m.addedNodes].some(n=>n.nodeType===1&&(n.matches(".kbk-person,.kesfi,.kbk")||n.querySelector&&n.querySelector(".kbk-person.kbk-full")))))soon()}).observe(document.body,{childList:true,subtree:true})}catch(e){}

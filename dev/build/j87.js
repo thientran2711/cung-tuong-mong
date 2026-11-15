@@ -53,7 +53,7 @@ function kitBook(spec){spec=spec||{};const rm=()=>{try{return reducedMotion()}ca
  const personTop=(p,cont)=>cont?`<div class="kbk-pname">${kitName(p.who,{cap:true,named:p.who===S})} <small class="kbk-cont">(tiếp theo)</small></div>`
    :`<div class="kbk-pname">${kitName(p.who,{cap:true,named:p.who===S})}${p.sub?`<small class="kbk-ts">${p.sub}</small>`:""}</div>${p.chips&&p.chips.length?`<div class="kbk-pchips">${kitChips(p.chips)}</div>`:""}${p.rows&&p.rows.length&&PW>=440?kitRows(p.rows):""}`;
  const personBody=(p,cont)=>{const fig=typeof kitStageFig==="function"&&kitStageFig(p.who,{cap:false})||"";const kfr=(/--kfr:([\d.]+)/.exec(fig)||[])[1]||"1";
-  return `<div class="kbk-person${fig?" kbk-full":""}" style="--kfr:${kfr}"><div class="kbk-por">${fig||pframe(kitFace(p.who))}</div><div class="kbk-phead">${personTop(p,!!cont)}</div><div class="kbk-flow"></div></div>`};
+  return `<div class="kbk-person${fig?" kbk-full":""}" style="--kfr:${kfr}${typeof kitBookFigCol==="function"?kitBookFigCol(fig,PW,PH):""}"><div class="kbk-por">${fig||pframe(kitFace(p.who))}</div><div class="kbk-phead">${personTop(p,!!cont)}</div><div class="kbk-flow"></div></div>`};
 
  /* ---- pagination: fill each page until it overflows, continue on the next ---- */
  function paginate(){const L=[];meas.style.width=PW+"px";meas.style.height=PH+"px";

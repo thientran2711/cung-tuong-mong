@@ -53,6 +53,13 @@ Luôn bắt đầu từ bản CDN (`https://ctm-img.victoria-tntt.workers.dev/im
   background → tools/ec.py grafts ONLY the new train onto the CDN figure (CDN pixels kept; Lab colour match; premultiplied feather
   over a 90-px band on the train that crosses the old cut; figure rescaled to 900 tall when the train lies below the old floor:
   ×0.975–0.998, m36 ×0.93). cutcheck unchanged, edge-cut 0. Sheet dev/art/scene-light/edge-outpaint.jpg.
+- 13:30Z rework on top of review/scene-light-r7 (coordinator HOLD: wide figures shrank to 57–63 %): wide pages now never scale —
+  kitBookFigCol (j87 personBody hook, paginates in the final column) widens the figure column only for face + torso, the rest runs behind
+  the text on the paper panel (.kbk-figover). Measured 12 Thái hậu h1–h3 + 8 t7/t8 train figs + 1 normal at 755x1000/1000x755/1180x820/
+  1366x1024: height 0.935 everywhere, scale 1, cutL 0, torso clear ≥ 21 px, textCut 0 (tools/bookwide.js). Phones unchanged (open).
+- Smudge detector calibrated (skin-smudge.py blobs_only: men out, line-like marks/wrinkles out, eye band, inner face oval, colourless
+  greys = hair/props out, ring of skin). Result on 6 338 CDN portraits: 0 real smudges left (top hits are 1–3 px jaw-edge specks) →
+  NO smudge batch. Sheet dev/art/scene-light/smudge-calibrated-top12.jpg.
 
 ## LỖI ĐÃ BIẾT
 - Chạy thử trên máy: màn "Luân hồi" phủ sân khấu → script phải ẩn phần tử phủ (book.js đã làm). Máy không WebGL → không thấy vệt mưa.

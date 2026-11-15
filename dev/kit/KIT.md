@@ -2230,11 +2230,15 @@ buổi ∈ sang|trua|chieu|toi) gets `.stage.kown`:
   Characters are never overlaid. Lãnh cung (`.sc-lc`) is excluded and keeps its bleak painting.
 - `window.kitSceneTag()` re-applies the classes (called after `renderStage` and `lightTick`).
 
-**56.3 kitBookFigClamp (Tuần lục person page, wide figures).** `.kbk-person.kbk-full` has a fixed figure column `--porf` sized for a normal
-standing figure (aspect ≈ .42). A wider figure (e.g. Thái hậu `fig-thaihau-h1-a51`, 730×900, long train) used to be cut by the column (owner 13:45Z).
-- wide pages: the figure column widens inline to the figure's real width, capped at **66 % of the page**; the text column takes the rest and
-  never overlaps the figure. Only a figure wider than that cap is scaled (feet stay on the ground line, centred).
-- phones (`.kbk.narrow`, text already sits on the soft paper panel over the figure's edge): the column stays; the figure is shifted inside the
-  page and scaled only if it is wider than the whole page.
-- Runs on DOM insertions of a person page / figure, image load and resize. Measure with `dev/art/scene-light/tools/book.js OUTDIR page.html`
-  (prints overL/overR = overflow past the page, ovText = figure overlap with the text column; 0 / ≤0 = pass).
+**56.3 Wide figures on the Tuần lục person page — NEVER shrink (owner 03:55Z one figure scale; 13:45Z Thái hậu cut).** `.kbk-person.kbk-full`
+has a figure column `--porf` sized for a normal standing figure (aspect ≈ .42). A wider figure (Thái hậu h1–h3, t7/t8 trains, wide a51 sleeves)
+keeps the kit height (≈ 93 % of the picture height, same as everyone) and is never scaled or cut on the left:
+- `kitBookFigCol(figHtml, PW, PH)` (jsl, called by j87 `personBody` while paginating): on wide pages the column becomes just wide enough for
+  the face + torso — figure centre + 14 % of its height (≤ 74 % of the page) — so the text is paginated in its final width ("tiếp theo"
+  pages as usual). Figure aspect comes from a cache filled on first sight; an open book re-lays out once when a new picture's shape arrives.
+- `kitBookFigClamp`: moves the figure's left edge inside the page; whatever is wider than the column (train, outer sleeve) runs BEHIND the
+  text, which then sits on the kit soft paper panel — class `.kbk-figover`, the same panel phones use (`.kbk.narrow`). Text never covers
+  face/torso on wide pages. Phones (`.kbk.narrow`): unchanged from r7 — OPEN owner decision: a figure wider than the whole phone page
+  (Thái hậu, t7/t8 trains) is still scaled to the page (≈ 61–65 % height) and the text panel overlaps its side.
+- Measure: `dev/art/scene-light/tools/bookwide.js PAGE.html OUTDIR` with `FIGS=fig-a.webp,fig-b.webp` (and `SZ`, `SHOTS=1`) prints per size ×
+  figure: hRatio (figure / picture height), scale (must be 1), cutL/cutR (past the person box), torsoClear (≥ 0), textCut (0), textW.
