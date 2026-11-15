@@ -190,12 +190,12 @@ function q72Drop(u){const q=q72();const x=q.a.find(z=>z.u===u);if(!x||Q.length)r
 /* ---------- she calls a favour in (two-way: they owe her) ---------- */
 function q72CallFx(a){const k=a.k;if(k==="emp")return{fx:{sung:3,an:2},t:"Hoàng thượng nhớ ơn, ghé cung ngươi"};if(k==="th")return{fx:{danh:3,duc:2},t:"Thái hậu khen ngươi trước mặt các phi tần"};
  if(k==="hh")return{fx:{danh:3},rel:6,t:"Hoàng hậu cất nhắc ngươi trong buổi thỉnh an"};if(k==="rv")return{fx:{danh:2,sung:2},t:`${a.n} nói tốt cho ngươi trước Hoàng thượng`};
- if(k==="doc")return{fx:{suc:15},t:"thái y gửi thuốc bổ thượng hạng"};if(k==="eun"||k==="ksp"||k==="sv"||k==="maid"||k==="rsv")return{fx:{mat:1},t:`${a.n} báo cho ngươi những tin nghe được`};
- if(k==="man")return a.o.rw==="sứ thần"?{fx:{bac:40},t:"sứ thần biếu ngươi quà quý"}:a.o.rw==="thái y"?{fx:{suc:12},t:"thái y bốc thuốc bổ cho ngươi"}:{fx:{mat:1},t:`${a.n} kể ngươi nghe chuyện ngoài cung`};
+ if(k==="doc")return{fx:{},gi:"yensao",t:"thái y gửi một hộp yến sào bồi bổ"};if(k==="eun"||k==="ksp"||k==="sv"||k==="maid"||k==="rsv")return{fx:{mat:1},t:`${a.n} báo cho ngươi những tin nghe được`};
+ if(k==="man")return a.o.rw==="sứ thần"?{fx:{bac:40},t:"sứ thần biếu ngươi 40 lạng bạc"}:a.o.rw==="thái y"?{fx:{},gi:"yensao",t:"thái y gửi yến sào bồi bổ cho ngươi"}:{fx:{mat:1},t:`${a.n} kể ngươi nghe chuyện ngoài cung`};
  if(k==="off")return{fx:{danh:2},rel:10,t:`${a.o.name} nói tốt cho ngươi ở triều`};if(k==="ak")return{fx:{danh:3},t:`${a.n} khen ngươi trước phụ hoàng`};if(k==="fam")return{fx:{bac:40},t:"nhà gửi bạc vào cho ngươi"};if(k==="fallen")return{fx:{mat:1},t:`${a.n} kể ngươi nghe những chuyện cũ trong cung`};return{fx:{danh:1},t:"người ấy giúp ngươi một việc nhỏ"}}
 function q72Debtors(){const q=q72();const L=[];for(const k in q.d){if(q.d[k]<=0)continue;const [kind,...r]=k.split(":");const id=r.join(":");const a=q72A(kind==="fam"?"fam":kind,kind==="rv"||kind==="hh"||kind==="fallen"||kind==="sv"||kind==="rsv"?+id:id||undefined);if(a)L.push([a,q.d[k],k])}return L}
 function q72Call(k){const q=q72();if(Q.length||!can(1))return;const e=q72Debtors().find(z=>z[2]===k);if(!e)return;const [a]=e;if(!evCooldown("q72call:"+k,Q72CFG.cdCall))return;
- const b=rsnap();spend(1);const r=q72CallFx(a);q72Ap(r.fx);if(r.rel)q72Rel(a,r.rel);q.d[k]--;if(!q.d[k])delete q.d[k];log(`Ngươi nhờ ${a.n} trả ân: ${r.t}. ${q72Fx(r.fx).map(plain).join(", ")}${r.rel?", "+plain(q72Tok(a,r.rel)):""}. Nợ ân của ${q72Short(a)} với ngươi -1.`);resultShow(`Nhờ ${q72Short(a)} trả ân`,b,true);render()}
+ const b=rsnap();spend(1);const r=q72CallFx(a);q72Ap(r.fx);if(r.gi&&typeof goodsGive==="function")goodsGive(S,r.gi,{from:"story",who:a.n});if(r.rel)q72Rel(a,r.rel);q.d[k]--;if(!q.d[k])delete q.d[k];log(`Ngươi nhờ ${a.n} trả ân: ${r.t}. ${q72Fx(r.fx).map(plain).join(", ")}${r.rel?", "+plain(q72Tok(a,r.rel)):""}. Nợ ân của ${q72Short(a)} với ngươi -1.`);resultShow(`Nhờ ${q72Short(a)} trả ân`,b,true);render()}
 /* she asks around at the place she stands: someone here may need help */
 function q72Ask(){const q=q72();if(Q.length||!can(1)||!q72On())return;if(evCooldownLeft("q72ask",Q72CFG.cdAsk)>0)return;evCooldown("q72ask",Q72CFG.cdAsk);
  const b=rsnap();spend(1);let x=null;if(q72CanOffer(true))x=q72Choose(q72Cands(S.place),S.place);
@@ -245,12 +245,12 @@ function q72Role(a){return a.f&&a.f.rw?a.f.rw:a.k==="emp"?"Hoàng thượng":a.k
 function q72Card(x){const X=q72X(x);if(!X)return`<p class="past">Người nhờ không còn ở đây.</p>`;const T=X.T,st=T.s[x.st];const left=Math.max(0,x.dl-wk());
  const ok=q72OutTok(q72OkDef(X),X,"ok"),no=q72OutTok(q72NoDef(X),X,"no"),bad=T.bad?q72OutTok(T.bad,X,"bad"):[];
  let B=[];const pl=q72StepPl(st,X);
- if(st.w)B.push(`<div class="pcrow"><span>${q72Txt(st.n,X)}</span><b>còn ${Math.max(0,(x.wt||wk())-wk())} tuần</b></div>`);
+ if(st.w)B.push([q72Txt(st.n,X),`còn ${Math.max(0,(x.wt||wk())-wk())} tuần`,"t"]);
  else{if(pl&&S.place!==pl&&!S.out){const tc=pl==="home"?0:travel(S.place,pl);const why=S.confined&&pl!=="home"?`đang cấm túc`:Q.length?"đang có việc chờ":pl!=="home"&&!can(tc+1)?"hết khắc":typeof accessOf==="function"&&pl!=="home"&&!q72Host(pl,X)&&!accessOf(S,pl).ok?accessOf(S,pl).why:"";
    B.push(pbtn(`data-q72g="${pl}"`,`Đến ${q72PlN(pl)}`,`tốn: ${tc} khắc đi đường · thành: tới nơi làm bước này`,why))}
   if(st.ch)st.ch.forEach((o,i)=>B.push(pbtn(`data-q72d="${x.u}" data-q72o="${i}"`,q72Txt(o.n,X),q72Line(x,X,st,o),q72Why(x,X,st,o))));
   else B.push(pbtn(`data-q72d="${x.u}"`,q72Txt(st.n,X),q72Line(x,X,st,null),q72Why(x,X,st,null)))}
- const rows=T.s.map((s,i)=>{const p=q72StepPl(s,X);return `<div class="pcrow"><span>${i<x.st?"✓":i===x.st?"▸":"·"} ${q72Txt(s.n,X)}</span><b>${s.w?`đợi ${s.w} tuần`:p?q72PlN(p):s.emp?"cạnh Hoàng thượng":"tùy chọn"}</b></div>`});
+ const rows=T.s.map((s,i)=>{const p=q72StepPl(s,X);return [`${i<x.st?"✓":i===x.st?"▸":"·"} ${q72Txt(s.n,X)}`,s.w?`đợi ${s.w} tuần`:p?q72PlN(p):s.emp?"cạnh Hoàng thượng":"tùy chọn",i===x.st?"t":"n"]});
  const lg=x.log.slice(-3).map(t=>`<div class="pcrow"><span>${t}</span></div>`);
  const drop=pbtn(`data-q72x="${x.u}"`,"Bỏ việc này",`tốn: ${no.join(", ")||"không"}`,Q.length?"đang có việc chờ":"");
  const dt=q72Debt(X.A);
@@ -268,7 +268,7 @@ function q72HTML(){const q=q72();const mo=q.mo[S.turn]||0;
  if(items.length)h+=`<div class="pgwrap">`+pager("q72",items,i=>i<q.a.length?q72Card(q.a[i]):q72HCard(q.h[i-q.a.length]))+`</div>`;
  else h+=`<p class="past">Chưa ai nhờ ngươi việc gì. Người trong cung sẽ tìm đến khi cần (nhiều nhất ${Q72CFG.mo} lời nhờ mỗi tháng); ngươi cũng có thể đến các nơi và hỏi han.</p>`;
  const D=q72Debtors();h+=`<h3>Nợ ân</h3>`;
- if(D.length)h+=`<div class="rbtn">`+D.slice(0,8).map(([a,n,k])=>{const r=q72CallFx(a);const cd=evCooldownLeft("q72call:"+k,Q72CFG.cdCall);const tk=q72Fx(r.fx);if(r.rel)tk.push(q72Tok(a,r.rel));
+ if(D.length)h+=`<div class="rbtn">`+D.slice(0,8).map(([a,n,k])=>{const r=q72CallFx(a);const cd=evCooldownLeft("q72call:"+k,Q72CFG.cdCall);const tk=q72Fx(r.fx);if(r.gi&&IT[r.gi])tk.push(G72(IT[r.gi].n));if(r.rel)tk.push(q72Tok(a,r.rel));
   return pbtn(`data-q72c="${k}"`,`Nhờ ${q72Short(a)} trả ân (còn nợ ${n})`,`tốn: 1 khắc, ${R72(`nợ ân của ${q72Short(a)} -1`)} · thành: ${r.t}, ${tk.join(", ")}`,S.dead?"đã hết kiếp":Q.length?"đang có việc chờ":cd>0?`vừa nhờ, đợi ${cd} tuần`:!can(1)?"hết khắc":"")}).join("")+`</div>`;
  const owe=Object.entries(q.d).filter(([k,v])=>v<0);
  h+=owe.length?`<p class="past">Ngươi đang nợ ân: ${owe.map(([k,v])=>`${(q.dn&&q.dn[k])||k} (${-v})`).join(", ")}. Họ có thể tìm đến nhờ lại; từ chối thì mếch lòng gấp đôi.</p>`:"";
