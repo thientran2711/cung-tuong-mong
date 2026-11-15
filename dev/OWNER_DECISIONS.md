@@ -375,3 +375,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (08:40Z) Khung Đáp ứng: dùng kiểu khung gỗ cành mai + góc vàng (kiểu khung Lãnh cung hiện tại, làm mới, bóng đẹp) với nền gấm trắng ngà bên trong; khung Lãnh cung đổi thành bản héo/xám rõ ràng. Khung Hoàng quý phi phải hoành tráng hơn Quý phi.
 - (08:40Z) Mở rương bước nhận: bỏ ô thông tin trắng; mỗi ô món có tên phẩm trên viền khung, tên món ngay dưới ô (bạc: "Bạc +20").
 - (08:45Z) Âm thanh: mọi khoảnh khắc trong game phải có âm (mua, bán, nhận quà/thưởng/ban, mở rương, thu hồi, mini game, thời tiết, lễ…), phong cách cung đình nhẹ nhàng; kiểm kê + làm bù (review/sfx).
+- (08:55Z) Bục vinh danh (Bảng vàng + mọi cuộc thi): nhân vật to, nổi bật nhất; bục thu nhỏ thành chính ô bảng tên dưới chân; huy chương nhất/nhì/ba ở góc trên phải ô bảng tên (hoặc cạnh nhân vật). Danh sách hạng: khung chân dung theo phẩm cao nhất của kiếp. Bỏ lặp tiêu đề: chỉ "Bảng vàng".
