@@ -293,3 +293,27 @@ do-them-dau|0|a consort's hand fanning with a round silk fan, beside the Empress
 im-lang|0|a consort's hands holding a closed folding fan lowered in front of her pink skirt, still and quiet
 quy-xin-tha-cho-nang|0|a kneeling consort's clasped pleading hands before the Empress's red phoenix brocade hem, another lady's sleeves kneeling in punishment beside
 dung-xem|0|a consort's pink sleeve standing calmly with folded hands, in the background a lady's sleeves kneeling in punishment on stone
+them-loi-buoc-toi|0|a consort's hand in a pink sleeve pointing accusingly, beside the Empress's red phoenix brocade hem, a kneeling figure's bowed blue sleeves on the floor
+len-gui-bac-nha|1|a maid's hands in green sleeves clutching a small pouch of silver to her chest as she slips past a great palace gate at dusk
+khong-can-du|0|a consort's hand in a pink sleeve pouring tea alone at a small table, the palace door closed behind, quiet afternoon light
+quay-lung-bo-di|0|a consort's pink sleeve and skirt hem turning away from the weathered gate of a cold palace, fallen leaves
+truy-ngu-thien|0|a cook's hands in a plain grey sleeve pressed to the floor kneeling in an imperial kitchen, pots and steaming woks, a eunuch's dark sleeve standing over him
+doi-nguoi-nau|0|a new cook's hands in a clean grey sleeve bowing over a chopping board in a palace kitchen, an old cook's sleeve carrying a bundle out the door
+khoc-ke-ht|0|a consort's hand holding a silk handkerchief resting on the Emperor's yellow dragon sleeve, the two sleeves close together on a couch
+dot-ngay-lan-dau|1|footprints pressed in soft earth under an osmanthus tree, a lantern held low by a hand lighting them
+keu-oan|0|a kneeling consort's raised clasped hands before the steps of a hall, a eunuch's dark sleeve being led forward by a guard's armored hand
+nho-th-dung-ra|0|an elder lady's hand in a dark brocade sleeve resting protectively on a consort's pink-sleeved shoulder, facing the Empress's red phoenix brocade hem
+day-toi-cung-nu|0|a consort's hand in a pink sleeve pointing, a eunuch's dark hand dragging a maid away by her green sleeve
+xin-ht-tra-xet|0|a kneeling consort's clasped hands raised toward the Emperor's yellow sleeve, guards' armored arms with halberds standing at both sides
+thu-long|0|a consort's hand setting down a teacup with a small silver piece glinting at its bottom before a eunuch's dark sleeve
+mat-tau|1|a kneeling consort's hands clasped beside the carved arm of a dragon throne, the Emperor's yellow sleeve resting on it, night candles
+theo-cha-muu|1|a consort's hand holding a secret blank letter to a candle flame, the paper catching fire, another sealed envelope on the desk
+cam-quan-vay-cung|1|guards' armored hands raising lanterns and spears around a closed palace gate at night, many torches
+hh-bi-phe|0|a phoenix crown set on a silk tray before the closed doors of the Empress's palace, no people
+vien-co-thoai-thac|0|a consort's hand raised in a gentle apologetic gesture of refusal, pink sleeve, a teacup and closed fan on the table
+bo-bac-lo-lot|0|eunuchs' dark-sleeved hands carrying a heavy chest of silver on a pole out through a palace gate
+vang-menh|0|a consort's hands folded low in obedient acceptance before an elder lady's dark brocade sleeve resting on a carved armrest
+trung-co-quoc|0|a foreign princess's hand in an embroidered southern-style sleeve holding a jade pendant from home by a window, misty southern mountains in the distance
+giau-ong|0|a maid's hand passing a bowl of rice behind a stack of washing basins to an old man's weathered hand in a patched brown sleeve
+tim-chung-cu-cha|0|a consort's hands searching through stacks of old bound files on archive shelves, a dusty letter half pulled out
+dieu-tra-an-cu|1|a consort's hand turning the pages of an old case file on a desk late at night, an oil lamp, pages blank or abstract lines
