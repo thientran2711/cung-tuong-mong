@@ -82,7 +82,7 @@ function kpTitleTail(pre,t){const w=String(t||"").split(" ").filter(Boolean);for
 function kpPeopleIn(html,people){const who=[];let h=html;const plain=kpPlain(html);
  for(const [n,p] of people){if(!plain.includes(n)||who.includes(p))continue;who.push(p);let done=false;
   h=kpMapText(h,s=>{if(done)return s;const i=s.indexOf(n);if(i<0)return s;done=true;const t=kitTitle(p);let pre=s.slice(0,i);if(t&&pre.endsWith(t+" "))pre=pre.slice(0,-(t.length+1));const rest=s.slice(i+n.length);const tr=p===S&&S?(S.out?"Phế phi":RANKS[S.rank].n):t;/* her own rank is drawn by kitName(named) */
-   const own=!!t&&(KP_TITLE_RX.test(pre)||kpTitleTail(pre,t))||!!tr&&/^\s*(?:được\s+)?(?:tấn phong|sắc phong|phong|thăng|làm|lên|thành)\s/.test(rest)&&rest.includes(tr);return pre+kitName(p,{named:p===S,noTitle:own,pre:own?pre:""})+s.slice(i+n.length)})}
+   const own=!!t&&(KP_TITLE_RX.test(pre)||kpTitleTail(pre,t))||!!tr&&/^\s*(?:được\s+)?(?:tấn phong|sắc phong|phong|thăng|làm|lên|thành)\s/.test(rest)&&rest.includes(tr);return pre+kitName(p,{named:p===S,noTitle:own,pre:own||KP_TITLE_RX.test(pre)?pre:""})/* review r6: a name that carries its own title (kitTitle "") after a title in the text: "Tổng quản thái giám Tổng quản X" */+s.slice(i+n.length)})}
  /* owner 11/15 (news rows showed the wrong person): the row's face = the person named FIRST in the sentence (the subject), not the one
     with the longest name — names are matched longest-first (no partial overlaps), then ordered by where they stand in the text */
  if(who.length>1){const at=p=>{const e=people.find(x=>x[1]===p);const i=e?plain.indexOf(e[0]):-1;return i<0?1e9:i};who.sort((a,b)=>at(a)-at(b))}
@@ -107,7 +107,7 @@ window.kitNoChange=kitNoChange;
 /* a row that starts in lower case after a clause was dropped gets a capital first letter */
 function kitCapFirst(h){let done=false;try{return kpMapText(String(h||""),s=>{if(done)return s;const i=s.search(/\S/);if(i<0)return s;done=true;return s.slice(0,i)+s[i].toLocaleUpperCase("vi")+s.slice(i+1)})}catch(e){return h}}
 function kpFactRow(f,people){const SKIP=window.__kpSkip;if(typeof f==="string")f={text:f};let text=kitCapFirst(kitNoChange(kitDedupTitle(f.text||""))),who=f.who?[].concat(f.who):null;
- if(f.auto!==false){let w;[text,w]=kpPeopleIn(text,people);if(!who)who=w;text=kpChipify(text)}
+ if(f.auto!==false){let w;[text,w]=kpPeopleIn(text,people);if(!who)who=w;text=kpChipify(text).replace(/(<b>[^<]*<\/b><\/span>)\s*\.\s*$/,"$1")/* review r6: no lone "." after a row-end chip */}
  const p=who&&who[0];const world=f.kind==="world"||!p;const face=p&&p!==SKIP?kitFaceH(p,"sm"):`<span class="kfdot" aria-hidden="true"></span>`;
  const chips=f.chips&&f.chips.length?kitChips(f.chips):"";
  return `<div class="kfact${world?" kfworld":""}${p===S?" kfme":""}">${face}<span class="kft">${f.when?`<small class="kfwhen">${f.when}</small>`:""}${text}${f.why?`<small class="kfwhy">Vì: ${f.why}</small>`:""}${chips}</span></div>`}

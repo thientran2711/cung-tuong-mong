@@ -86,3 +86,19 @@ the column under the chip, chip above the head, short options 2 per row; mock di
 
 ## cdn_sync pending
 img/fig-eunuch-ndp-tray.webp (committed in git on review/shop-fix; not on the CDN / live site yet).
+
+## REVIEW r6 (reviewer, 11/15) — e68183a1d on origin/main f500d0464 (branch already contained it) → review/kit-fig2-r6
+- KIT numbers OK: main §41 kitMeMark, §42 kitLine/close-bugs, §43 kitActCompact (one copy), §45–47 tabs-kit; this branch §48 kitNameRank, §49 Ân oán, §50 kitEventDp.
+- Fixes made by the reviewer:
+  1. Doubled title still drawn in Sổ ghi ("Tổng quản thái giám Tổng quản Lý Liên Anh", old stored log line of the week-30 fixture): kpPeopleIn only
+     passed the text's title to kitName when the person HAS a kitTitle; the Tổng quản's title is part of his name (kitTitle "") → pre is now passed
+     whenever the text puts a title before the name (j79); kitNames (j65, Sổ ghi) also runs kitDedupTitle on stored lines. Sổ ghi doubled: 1 → 0.
+  2. Lone "." on its own line after a row-end chip ("Tổng quản Lý Liên Anh [mếch lòng −4]" + "."): dropped in kpFactRow (j79).
+  3. Kit sample page: §48 kitNameRank and §49.1 kitRelRow samples registered (jkitpage; rule "new kit parts register a sample"). §50 is a live dialog (event-dp.js).
+- Tests (images served from git objects, IMGREV 3e212597e): news-face-real.js on world30-met.json: 13/13 judged rows = strip tile, 13/13 cards = tiles,
+  stranger rows silhouette, titleUnit 0/56, 0 errors. Review script (fixture + an old save made with main 47e53770d build) at 755x1000@2, 1000x755@2,
+  1180x820@2, 1366x1024@2, 844x390@3: news card + Tuần lục + Hậu cung + Ân oán: 0 h-overflow, 0 clipped, 0 "N → N" rows, 0 doubled titles,
+  0 page errors; 390x844 = portrait game (no rotate prompt; same as main). stranger-sweep: no leaks. event-dp (routed images) 1180/844 banner +
+  figure ok; kit-page 0 bad.
+- Not this batch / left for the worker: kitEventDp 1a (empty space under 2 short options, 125–340 px at 1180x820), wording "mếch lòng" in chips
+  (KIT_REQUESTS kitRelDelta), Sổ ghi old lines "Sủng nàng ta 43 → 46" (stored text, not a fact row).
