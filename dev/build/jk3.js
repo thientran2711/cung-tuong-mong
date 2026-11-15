@@ -385,13 +385,16 @@ function k3Tags(){try{const st=document.getElementById("stage");if(!st)return;co
    news / intel / result kit panels (.kfacts paragraphs) — every generator benefits without changing its text. ---------- */
 function kitBulletsHTML(h){h=String(h||"").trim();if(!h)return h;const txt=h.replace(/<[^>]+>/g,"");if(txt.length<70)return null;
  /* split outside tags only */
- const parts=[];let cur="",depth=0,tag=false;for(let i=0;i<h.length;i++){const c=h[i];cur+=c;if(c==="<")tag=true;else if(c===">"){tag=false;
+ const parts=[];let cur="",depth=0,tag=false,qd=0;for(let i=0;i<h.length;i++){const c=h[i];cur+=c;if(c==="<")tag=true;else if(c===">"){tag=false;
   /* a lone gain/cost chip ("<span class=r>Lòng -5</span> Ngọc Lan …") is its own fact */
   if(/^<span class="(ef )?[rg]">[^<]*<\/span>$/.test(cur.trim())&&/^\s+\S/.test(h.slice(i+1))){const f=h.slice(i+1).trim().charAt(0);if(f===f.toUpperCase()&&f!==f.toLowerCase()){parts.push(cur);cur="";continue}}}if(tag)continue;
   if(c==="(")depth++;else if(c===")")depth=Math.max(0,depth-1);
-  const endP=depth===0&&((/[.!…]/.test(c)||(c==="?"&&h[i-1]!=="?"&&h[i+1]!=="?"))||(c===")"&&cur.trim().replace(/^(<[^>]+>)+/,"").startsWith("(")));
+  /* a quoted speech “…” is ONE fact (review/toilette: "“Mặt mộc mà đến thỉnh an ai gia sao? Thật chẳng ra thể thống.”" was cut in two):
+     no split inside the quotes; after the closing ” when the speech ended a sentence */
+  if(c==="“"&&h.indexOf("”",i)>0)qd++;else if(c==="”")qd=Math.max(0,qd-1);
+  const endP=depth===0&&qd===0&&((/[.!…]/.test(c)||(c==="?"&&h[i-1]!=="?"&&h[i+1]!=="?"))||(c==="”"&&/[.!?…]/.test(h[i-1]||""))||(c===")"&&cur.trim().replace(/^(<[^>]+>)+/,"").startsWith("(")));
   if(endP&&/^\s+/.test(h.slice(i+1))){const rest=h.slice(i+1).replace(/^\s+/,"").replace(/^(<[^>]+>)+/,"");const f=rest.charAt(0);if(/[("“]/.test(f)||(f&&f===f.toUpperCase()&&f!==f.toLowerCase())){parts.push(cur);cur=""}}
-  else if(depth===0&&c===":"&&cur.replace(/<[^>]+>/g,"").length>30&&/^\s+(<[^>]+>)*[A-ZĐÀÁẢÃẠÂẦẤẨẪẬĂẰẮẲẴẶÈÉẺẼẸÊỀẾỂỄỆÌÍỈĨỊÒÓỎÕỌÔỒỐỔỖỘƠỜỚỞỠỢÙÚỦŨỤƯỪỨỬỮỰỲÝỶỸỴ][^:.<()]{0,24}:\s/.test(h.slice(i+1))){parts.push(cur.slice(0,-1));cur=""}}
+  else if(depth===0&&qd===0&&c===":"&&cur.replace(/<[^>]+>/g,"").length>30&&/^\s+(<[^>]+>)*[A-ZĐÀÁẢÃẠÂẦẤẨẪẬĂẰẮẲẴẶÈÉẺẼẸÊỀẾỂỄỆÌÍỈĨỊÒÓỎÕỌÔỒỐỔỖỘƠỜỚỞỠỢÙÚỦŨỤƯỪỨỬỮỰỲÝỶỸỴ][^:.<()]{0,24}:\s/.test(h.slice(i+1))){parts.push(cur.slice(0,-1));cur=""}}
  if(cur.trim())parts.push(cur);const P=parts.map(s=>s.trim().replace(/^(<\/[^>]+>)+/,"").trim()).filter(s=>/[\p{L}\d]/u.test(s.replace(/<[^>]+>/g,"")));/* act audit 08:35Z: a bullet that is only "." (left after a chip) is dropped */
  if(P.length<2)return null;const foot=[],li=[];
  P.forEach(s=>{const t=s.replace(/<[^>]+>/g,"").trim();if(/^\(.*\)\.?$/.test(t)){foot.push(t.replace(/^\(|\)\.?$/g,""));return}
