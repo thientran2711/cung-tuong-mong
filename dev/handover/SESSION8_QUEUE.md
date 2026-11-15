@@ -1,0 +1,44 @@
+# SESSION 8 QUEUE (coordinator's live dispatch list; nothing from HANDOVER_TO_SESSION8 may drop off)
+Status: QUEUED / RUNNING (agent) / SẴN SÀNG KIỂM / REVIEWING / PASS-LIVE / FAIL→worker / BLOCKED(reason)
+Slots: browser-heavy <= 6 at once, total agents <= ~12 (4 CPUs). Hourly watch refills slots in this order.
+CDN uploads BLOCKED (no Cloudflare token on the new account): art workers park files + list them under "PENDING CDN UPLOAD" in their PROGRESS.
+
+## A. Reviewers (HANDOVER_TO_SESSION8 §2, priority order)
+| # | Branch | Status |
+|---|---|---|
+| A1 | review/j59-fix (+ r1 WIP) | RUNNING wave 1 |
+| A2 | review/fxkit | RUNNING wave 1 |
+| A3 | review/small-bugs-3 | RUNNING wave 1 |
+| A4 | review/fix-float (= r8) | RUNNING wave 1 |
+| A5 | review/coop-timer (after A4) | QUEUED |
+| A6 | review/thaiy | QUEUED |
+| A7 | review/cycle (after A6; keep jcycle last) | QUEUED |
+| A8 | review/cal-plus | QUEUED |
+| A9 | review/promo-rules (after A2) | QUEUED |
+| A10 | review/coop-pets | QUEUED |
+| A11 | review/cardflip (after A2) | QUEUED |
+| A12 | review/art-complete (code part: eunuch picker) | QUEUED |
+| A13 | review/recipes-r1 (finish cut review) | QUEUED |
+
+## B. Workers on FAILED reviews (§3)
+| B1 | review/night-end-r1 FAIL 6 items → worker; then night follow-ups (owner 21:10Z) | QUEUED (after A2 fxkit) |
+| B2 | review/outside-r2-r1 FAIL 5 items → worker | QUEUED |
+
+## C. Unfinished workers (§4 + §9)
+| C1 | review/face-sharp (her face hazy on stage; LIVE BUG) | RUNNING wave 1 |
+| C2 | review/rank-colour (owner s8: rank colour in picker rows, whole class) | RUNNING wave 1 |
+| C3 | review/art-complete (eunuch ranks, grown kids, 128 old looks, 56 old-love men, demole) | RUNNING wave 1 |
+| C4 | review/act-pics2 (from key 193 + 3 redraws) | RUNNING wave 1 |
+| C5 | review/skin-match (verify not soft, regenerate missing; upload parked) | RUNNING wave 1 |
+| C6 | review/mk-colour (8+8 presets, 8 vụng, lips QA, then reveal scene) | QUEUED |
+| C7 | review/balance-pass (HH 0%, bạc-equivalence scan) | QUEUED |
+| C8 | review/fig-bg step 2 (silk scroll A) | QUEUED |
+| C9 | review/huadian-size (batch at 8.5%) | QUEUED |
+| C10 | OWNER_LEDGER sweep (docs) | RUNNING wave 1 |
+
+## D. UNASSIGNED owner asks (§5; ledger worker refines into dev/handover/OWNER_LEDGER.md)
+D1 result-sfx · D2 item-art · D3 item-big · D4 NPC death/replacement + Phế phi Lý side story · D5 real side stories (NPC goals→quests) · D6 econ-items · D7 personality + trọng 13 virtues, Thái hậu archetypes, thỉnh an not flat · D8 emperor poison roads + Emperor visits her palace · D9 header only her info + room tabs · D10 update-notes popup + Settings "Thông tin cập nhật" · D11 presentation (sound by event group + voices, frames by event group, §68 into every event, 15-item list 22:45Z) · D12 mood bar · D13 spread events across buổi (cap + histogram) · D14 'học thành tài' level-up scene · D15 download-size 129 MB + perf test CI · D16 Tứ đức sub-styles + CDNH works 10×4 with art · D17 luxury/xa xỉ system + dress-contest themes + range · D18 foreign princess origin visible + one more · D19 "Biếu quà làm lành" accepts works/items · D20 weather redo with §68 · D21 co-op B1–B5 · D22 real-phone UA test mode · D23 whole-game mole audit · D24 consort-c12-ty5-a51 eye patch · D25 veil/scar box follow jkpor zoom · D26 idea builds DESIGN_IDEAS_1115 + HISTORY_IDEAS_1115 (memories + hook ledger first) · D27 extra toilette reaction buttons · D28 makeup final-look reveal (inside C6)
+All QUEUED. Dependencies: D11/D20/D14 after A2 fxkit; D21 after A4/A5; D17+D16+D19 share econ files → one worker at a time.
+
+## E. Open owner questions (§6) — ask one at a time
+j72 bước vs Hồi · stage paper halo · Thái hậu title bronze vs plum · HT vs HH gold alike · Đáp ứng muted on paintings
