@@ -407,3 +407,9 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (11:10Z) Linh thú: được có hào quang nhưng VẼ SẴN trong tranh; mỗi thú có tranh Linh thú riêng. Đổi: Kỳ lân lên Ngự tứ, Thiên mã xuống Tuyệt phẩm.
 - [ ] (11:10Z) Người chưa gặp vẫn lộ mặt ở thẻ tin và trang Tuần lục → kit-fig2 quét toàn bộ chỗ vẽ ảnh người.
 - [ ] (11:20Z) Thẻ tin: ảnh Tịch Nhan/Ngọc Hành sai người, nền ô cùng màu dù khác bậc → kit-fig2 dùng chung ảnh với Hậu cung + màu khung theo bậc hiện tại.
+- (11:30Z) Khung Đáp ứng: DUYỆT A (khung cũ + gấm ngà).
+- (11:30Z) Dấu trên đầu: 8 cái đều đẹp; ĐỔI CHỖ: dấu Hoàng hậu hiện tại giao cho Hoàng quý phi (bậc 6), dấu Hoàng quý phi hiện tại giao cho Hoàng hậu.
+- (11:30Z) Chân dung trong khung: KHÔNG zoom; giữ tỷ lệ như cũ (ngực trở lên), chỉ DỜI ảnh lên sát mép trên khung → thấy thêm xuống gần eo.
+- (11:30Z) Thú cưng: như hiện tại là được; chó nhỏ ok; RIÊNG con mèo còn tả thực → vẽ lại.
+- (11:30Z) ĐẢO QUYẾT ĐỊNH: GIỮ thẻ tin đầu buổi (tin hằng ngày quan trọng; Tuần lục chỉ là tổng kết tuần). Đổi tên rõ hơn: "Tin trong cung hôm nay". Sửa ảnh Triều chính.
+- (11:30Z) Da mặt: ngoài làm sạch, mặt phải hồng hào khoẻ (má hồng nhẹ, không đậm); sửa các mặt tái/nhợt.
