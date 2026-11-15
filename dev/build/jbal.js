@@ -1,5 +1,10 @@
 /* ================= BALANCE KNOBS (measured with the sensible / random bots; see the report) ================= */
-const BAL={outQ:85,hz:3.2,conc:.25,later:6,hhTh:55,birthAdd:4};
+const BAL={outQ:85,hz:3.2,conc:.25,later:6,hhTh:55,birthAdd:4,
+ /* ONE SOURCE for every promotion threshold the player sees (checks in promoReqP/candOK and every text read these) */
+ hhThNoSon:80,hhThNoSonHieu:70,hhDuc:50,hhDucHeir:40,qBlockHh:-40,qBlockTh:50,hiOppHh:-30,hiOppTh:30,hiOppFac:180};
+/* what the Hoàng hậu seat asks of p (the same numbers the checks use) */
+function hhNeed(p){p=p||S;const sn=sonsOf(p).length>0,hieu=typeof has==="function"&&has("hieuthao");const heir=!!(S.heir&&S.heir.k&&S.heir.k.alive&&S.heir.v===(p===S?null:p));
+ return{sons:sn,th:sn?BAL.hhTh:(hieu?BAL.hhThNoSonHieu:BAL.hhThNoSon),duc:heir?BAL.hhDucHeir:BAL.hhDuc,heir}}
 /* an empty Hoàng hậu seat: the Thái hậu may bring in a girl of a great house instead of holding a contest (same for every candidate) */
 (function(){const c0=contestOpen;contestOpen=function(r){if(r===7&&!ct()&&!queenP()&&S.outQv!==S.vacSince&&consorts().some(p=>candOK(p,7))&&(S.outQv=S.vacSince,true)&&roomFor("consort")&&roll(BAL.outQ)){const n=newRival(7,true);Object.assign(n,drawFace());n.rank=6;n.queen=true;n.dad=80;rivals.unshift(n);S.vacSince=null;
   const t=`<b>Thánh chỉ: Thái hậu chọn ${n.name}, con gái danh môn, vào cung lập làm Hoàng hậu.</b> Ghế trống không mở tranh. `;log(t);return t}return c0.apply(this,arguments)}})();
@@ -7,7 +12,6 @@ const BAL={outQ:85,hz:3.2,conc:.25,later:6,hhTh:55,birthAdd:4};
 (function(){const c0=conceiveCh;conceiveCh=function(p){return Math.round(c0.apply(this,arguments)*BAL.conc)}})();
 (function(){const b0=birthRisk;birthRisk=function(p){const r=b0.apply(this,arguments);const n=p===S?(S.kids||[]).length:(p.kids||[]).length;if(n>0&&p===S&&S.birthWhy)S.birthWhy=S.birthWhy.concat([]);return cl(r-(n>0?BAL.later:0)+BAL.birthAdd,1.5,60)}})();
 /* the Hoàng hậu seat asks more: the Thái hậu's favour 55+ to stand as a candidate (same for every candidate) */
-(function(){const c0=candOK;candOK=function(p,r){if(!c0.apply(this,arguments))return false;if(r===7&&(p.th||0)<BAL.hhTh)return false;return true}})();
-(function(){const q0=promoReqP;promoReqP=function(p){const L=q0.apply(this,arguments);try{if(rkOf(p)===6)L.push([(p.th||0)>=BAL.hhTh,`Thái hậu với ${p===S?"ngươi":"nàng"} ${BAL.hhTh}+ (nay ${p.th||0})`])}catch(e){}return L}})();
+/* (since rules-one-source: promoReqP (j8) and candOK (j34) read BAL.hhTh / hhNeed() directly; no second check here) */
 /* every hidden meeting widens the circle that might know: exposure risk grows with the number of trysts (same rule for everyone) */
 (function(){const l0=lộRisk;lộRisk=function(k){const n=(S.men||[]).reduce((a,m)=>a+(m.trysts||0),0);return cl(l0.apply(this,arguments)+Math.min(30,n*4),6,92)}})();
