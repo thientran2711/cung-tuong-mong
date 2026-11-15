@@ -455,3 +455,6 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (13:30Z) LỖI GẤP: nút chọn trong sự việc (gối đầu đêm thị tẩm…) mất Được/Mất dù code có → bộ vẽ lựa chọn làm rơi chữ kết quả. Sửa trước (af76, review/opt-render).
 - (13:30Z) Thị tẩm được Sủng +5, Đức +3, Ân tình +6 mà đóng dấu BẠI → dấu THÀNH/BẠI chỉ theo kết quả thật của việc, không đếm dòng; ghen của người khác là KÈM, gộp 1 dòng; Bạc −5 phải truy nguồn.
 - LIVE CDN (13:30Z) 200 ảnh vật phẩm sửa viền cắt, bỏ chữ Hán, vẽ lại áo múa/điệu múa/thế cờ. j83 đa dạng: chọn phương án A (10 món × 4 phẩm).
+- (13:35Z) Dò ảnh hộp thoại xong: 290 hộp thoại (118 nghĩa) chỉ dùng 23 ảnh; 16 ảnh dùng chung; 121 nghĩa cần ảnh riêng (76 rơi về ảnh mặc định) → act-pics2 vẽ, bố cục cắt ngang được cho khung sự việc.
+- (13:35Z) Điều phối chốt việc ban ngày với Hoàng thượng: Xin hầu cờ (cần Kỳ), Xin đánh đàn (cần Cầm), Mời dạo ngự hoa viên (không bão); mỗi ngày một lần chung với Xin yết kiến; NPC cũng làm được.
+- (13:35Z) Trung y đợt 1 (c01–c12, 8 bậc) đạt; giữ, đẩy CDN khi nhánh qua duyệt.
