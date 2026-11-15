@@ -112,3 +112,4 @@ LEFT (unchanged from the list above unless noted)
 - Audit: dev/test/npc-art-audit.js visits every place in two game states (early game, and a fallen rival) and lists every token without a figure. Before the fix: 1 of 37 tokens had none (Phế phi họ Lý). After: 49 of 49 have one.
 - Side-story speakers in dialogs: the code scan found no bare NPC objects without art. Unknown strangers (j61, jht) show the silhouette on purpose.
 - Edge case, not fixed: h54Face (prince-consort suitors and the Bắc Địch prince) takes FIGIX.man identities. There are only 11 of them, so with many suitors plus S.men they can run out, and those faces would then show initials. Drawing more "man" identities would fix it.
+- (2) The 8 veil/scar/spy keys are DONE as hands-only pictures, on the CDN under plain names act-<key>.webp (the names meanings.py expects; they were never on the CDN before). They still have to be wired into ACTS.json together with the system-line patch.

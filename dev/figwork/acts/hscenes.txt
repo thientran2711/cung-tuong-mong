@@ -124,3 +124,12 @@ xin-hh-giang|0|a hand offering a small gift box before a phoenix throne's arm, a
 xin-thai-hau-hoc-cung|0|a hand presenting a copied orchid painting on a tray before the Empress Dowager's jade rosary
 xin-thuoc-cho|0|a hand receiving a wrapped packet of medicine from a physician's dark sleeve at a medicine cabinet
 xu-toi|0|a hand holding a judgment scroll over a kneeling servant's lowered hands on the floor
+# coordinator 15/11: the 8 veil / scar / spy book lines (meanings.py), hands-only too
+xin-mang-che|0|a maid's hands in plain grey sleeves holding up a lacquered tray on which lies a neatly folded sheer silk face veil, a consort's slender hand reaching down to take it
+thao-mang-che|0|a hand lifting a sheer silk face veil away and laying it into an open carved chest, a bronze mirror on the dressing table beside, bright hopeful morning light
+vet-thuong-lanh|0|a hand setting down a small empty jar of healing ointment beside a round bronze mirror that reflects only spring blossoms, a flawless powder puff and rouge box, radiant light
+lanh-con-seo|0|a round silk fan lying on a dressing table beside a bronze mirror turned half face-down, a small jar of ointment and a folded handkerchief, muted grey-blue overcast light, a hand resting quietly on the fan
+sai-theo-doi|1|a consort's hand passing a small silk pouch of silver into a eunuch's dark blue-grey sleeve across a lamp-lit table, the lattice door closed
+theo-doi-duoc|1|a eunuch's hand in a dark sleeve laying a small folded blank note on a lamp-lit table before a consort's waiting hand, night
+theo-doi-trang|0|a eunuch's empty open hands in a damp dark sleeve, rain falling in the grey courtyard beyond an open door, a consort's sleeve on the chair arm
+theo-doi-bi-bat|1|a guard's armoured gauntlet holding up a lantern that lights a dark sleeve and a hand clutching a red pillar in a night corridor, caught hiding

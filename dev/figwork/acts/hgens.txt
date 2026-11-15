@@ -122,3 +122,11 @@ xin-thuoc-cho JNaudXPOq4
 xu-toi 5jVe2GEKxe
 nhun-nhuong bxTpy385Y2
 tu-hoc-mua LwBtTx2swO
+xin-mang-che 6AHKrJLiJO  (plain name act-xin-mang-che.webp, not -h)
+thao-mang-che 3zb1j4EREY  (plain name act-thao-mang-che.webp, not -h)
+vet-thuong-lanh 79vEFUTJAL  (plain name act-vet-thuong-lanh.webp, not -h)
+lanh-con-seo huRGYhIvqL  (plain name act-lanh-con-seo.webp, not -h)
+sai-theo-doi rgeomsDxtc  (plain name act-sai-theo-doi.webp, not -h)
+theo-doi-duoc s7omfJOl8e  (plain name act-theo-doi-duoc.webp, not -h)
+theo-doi-trang 5jVeolyKxe  (plain name act-theo-doi-trang.webp, not -h)
+theo-doi-bi-bat iGqkjcq3uK  (plain name act-theo-doi-bi-bat.webp, not -h)
