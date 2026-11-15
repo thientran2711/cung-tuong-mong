@@ -337,3 +337,4 @@ Worker worktrees at /home/user/wt/<name>. Rule summaries for workers: /home/user
 - (s7, fwd) por-scale LIVE (data): 3317/8093 portraits re-cropped, per-group spread 5–13%. QUEUED small: consort-c12-ty5-a51 pale patch over eyes → redraw; jk2b §7 veil/scar layer box should follow jkpor zoom. Owner 21:45Z scene orientation rule → night-end reviewer + cardflip.
 - (s7) art-complete 9ece2024: mole sweep part 2 (kc a18 + c01–c10) 6 por + 8 fig fixed; demole_por.py generic. Owner 22:00Z: sounds never sent to her for approval → PREAMBLE rule.
 - (s7) QUEUED (cap): result-sfx — whole-class win/fail sound on every result surface, once, distinct; sound on by default; iPhone Safari unlock.
+- LIVE main = small-bugs-2 r6 (d8b81af9e), pushed by session 6 (final re-test on last merge cut short by usage; none of the 49 merged main commits touch its areas).
