@@ -11,7 +11,10 @@
       frames → one WebP sprite sheet. kitFxSheet(name, target, o) → handle {stop(ms)}. A light can also be played as a sheet.
    target = an element, {x,y} (viewport px) or null (screen centre). Everything auto-cleans: dur / end of sheet / target leaves the page.
    kitFxPreload([names]) warms atlases / posters / clips before a scene (returns a Promise; never rejects).
-   Off switches: same as jfx — bots/quiet → nothing; "Cảnh động" off or prefers-reduced-motion → no particles, lights/sheets show their still.
+   Off switches: same as jfx — bots/quiet → nothing; Thiết lập "Hiệu ứng: Gọn" (OPT.fxon false; auto on weak devices / slow frames) or
+   prefers-reduced-motion → no particles, lights/sheets show their still. Budget (owner 22:35Z): sprite atlas ≤ ~40 KB, light clip ≤ ~400 KB,
+   files on demand only (assets.json group 'fx': jload never pre-downloads, sw.js caches by content once played); ONE Pixi layer, capped
+   (KFK_CAP), paused when hidden; nothing ever waits on an effect (fire and forget; co-op never blocks).
    Test hook: window.KFK {loaded:Set, lights, sheets, pool, made, freed, log}. */
 const KFK_BASE="img/fx/";
 /* d = display px at scale 1 · b:"add" = additive (light) · t:1 = may be tinted (white / neutral art) */
@@ -43,7 +46,8 @@ function kfkLoad(names){names=(Array.isArray(names)?names:[names]).filter(n=>KFK
    for(let i=0;i<K.n;i++)fr.push(new P.Texture({source:base.source,frame:new P.Rectangle(i*K.s,0,K.s,K.s)}));KFK.tex[n]=fr;KFX.tex[n]=fr;KFK.loaded.add(n);return fr})
    .catch(e=>{delete kfkTexP[n];throw e});return kfkTexP[n]})))}
 /* the ONE particle maker (jfx kfSp calls this): pooled Pixi sprite with a painted frame */
-function kfkSp(kind,x,y,v,tint,sc,blend,frame){const P=window.PIXI,K=KFK_SP[kind],fr=KFK.tex[kind];if(!P||!K||!fr||!KFX.root)return null;
+const KFK_CAP=()=>innerWidth<700?140:240;  /* hard cap of live particles on the ONE Pixi layer (owner perf budget 22:35Z) */
+function kfkSp(kind,x,y,v,tint,sc,blend,frame){const P=window.PIXI,K=KFK_SP[kind],fr=KFK.tex[kind];if(!P||!K||!fr||!KFX.root)return null;if(KFX.parts.length>=KFK_CAP())return null;
  let s=KFK.pool.pop();if(!s){s=new P.Sprite(fr[0]);s.anchor.set(.5);KFK.made++}
  s.texture=fr[frame!=null?frame%fr.length:Math.floor(Math.random()*fr.length)];s.x=x;s.y=y;s.rotation=Math.random()*6.28;s.visible=true;
  s.tint=K.t&&tint!=null?tint:0xffffff;s.blendMode=blend||K.b||"normal";const k=(sc||1)*K.d/K.s;s.scale.set(k);
@@ -113,6 +117,14 @@ function kitFxPreload(names){const L=[];for(const n of names||[]){
     v.poster=kfkU(n+".webp");v.innerHTML=`<source src="${kfkU(n+".webm")}" type="video/webm"><source src="${kfkU(n+".mp4")}" type="video/mp4">`;v.loop=true;(KFK_VPOOL[n]||(KFK_VPOOL[n]=[])).push(v)}}}
  return Promise.all(L).then(()=>true)}
 function kitFxClear(){for(const d of [...KFK.live])d.__h&&d.__h.stop(0);for(const s of [...(KFX.parts||[])])kfkFree(s);if(KFX.parts)KFX.parts.length=0}
+/* "Hiệu ứng: Đầy đủ / Gọn" (Thiết lập, OPT.fxon; owner perf budget 22:35Z). Gọn = stills, no particles (kfStill). Until she picks
+   (OPT.fxpick), weak devices start in Gọn (kfkLow: saveData / deviceMemory ≤ 2 / ≤ 2 cores) and slow frames switch to Gọn for the
+   session (KFX.q at its floor with particles on screen, 3 checks in a row). OPT.fxauto marks an automatic Gọn (undone on a strong device). */
+function kfkAuto(){try{if(typeof OPT==="undefined"||OPT.fxpick)return;if(kfkLow()){if(OPT.fxon!==false){OPT.fxon=false;OPT.fxauto=1;KFK.auto="device"}}
+ else if(OPT.fxauto){OPT.fxon=true;OPT.fxauto=0;KFK.auto=""}}catch(e){}}
+kfkAuto();KFK.slowHits=0;
+setInterval(()=>{try{if(typeof OPT==="undefined"||OPT.fxpick||OPT.fxon===false||!KFX.app||document.hidden)return;
+ if(KFX.q<=.31&&KFX.parts.length>8){if(++KFK.slowHits>=3){OPT.fxon=false;OPT.fxauto=1;KFK.auto="slow";kitFxClear()}}else KFK.slowHits=Math.max(0,KFK.slowHits-1)}catch(e){}},2000);
 Object.assign(window,{kitFxSprite,kitFxBurst,kitFxLight,kitFxSheet,kitFxPreload,kitFxClear,KFK_SP,KFK_LIGHT,KFK_SHEET});
 (function(){const st=document.createElement("style");st.textContent=`
 .kfxk{position:fixed;z-index:9445;pointer-events:none;opacity:0;transition:opacity .45s ease;background-repeat:no-repeat;background-position:center;background-size:contain}
