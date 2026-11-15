@@ -8,4 +8,4 @@ Worker reports "KIT REQUEST" in its report → coordinator logs it here → assi
 | 15/11 | owner 17:27Z | Fixed one-column label\|value table (extends kitRows) | LUẬT, item info, Mệnh truyện… | kit-table | in progress |
 | 15/11 | owner 17:16Z | Small grade-based avatar without square frame | every person row | fix-float | in progress |
 | 15/11 | event-balance | window.K3_STATE top-bar state chip hook (KIT 31.2) | deadline countdown chip | event-balance | approved by coordinator, in review |
-| 15/11 | R event-balance | k3 top state row wrap/overflow rule | K3_STATE chips | (queued) | open |
+| 15/11 | R event-balance | k3 top state row wrap [CLOSED s8: KIT §31.2a, small-bugs-3 live]/overflow rule | K3_STATE chips | (queued) | open |

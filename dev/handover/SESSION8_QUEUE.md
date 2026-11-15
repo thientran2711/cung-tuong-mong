@@ -8,7 +8,7 @@ CDN uploads OK again (owner saved the Cloudflare token; R2 verified). Use CLOUDF
 |---|---|---|
 | A1 | review/j59-fix → r1 PASS 48a1c58d3 | LIVE |
 | A2 | review/fxkit → r1 PASS f012058f3 | LIVE |
-| A3 | review/small-bugs-3 | RUNNING wave 1 |
+| A3 | review/small-bugs-3 → r1 PASS d34b5116a | LIVE |
 | A4 | review/fix-float → r9 PASS 7ba53114d | LIVE (main fast-forwarded) |
 | A5 | review/coop-timer (after A4) | QUEUED |
 | A6 | review/thaiy | QUEUED |
@@ -22,7 +22,7 @@ CDN uploads OK again (owner saved the Cloudflare token; R2 verified). Use CLOUDF
 
 ## B. Workers on FAILED reviews (§3)
 | B1 | review/night-end-r1 FAIL 6 items + in-night picture by tone + light night panel (C30 merged) + follow-ups | RUNNING |
-| B2 | review/outside-r2-r1 FAIL 5 items → worker (owner asked s8) | QUEUED-NEXT (TOP) |
+| B2 | review/outside-r2-r1 FAIL 5 items → worker (owner asked s8) | RUNNING |
 
 ## C. Unfinished workers (§4 + §9)
 | C1 | review/face-sharp (her face hazy on stage; LIVE BUG) | RUNNING wave 1 |
@@ -37,7 +37,7 @@ CDN uploads OK again (owner saved the Cloudflare token; R2 verified). Use CLOUDF
 | C10 | OWNER_LEDGER sweep (docs) | DONE (dev/handover/OWNER_LEDGER.md; D29–D49 added) |
 | C11 | review/pick-hint @ 29972cd7 (incl. rank+name together + rank halo) | SẴN SÀNG KIỂM → REVIEWING (pick-hint-r1) |
 | C12 | review/hc-portrait (owner s8: Hậu cung portrait frame top gap + widen) | RUNNING |
-| C13 | review/gift-pick (owner s8: gift picker picture grid + gift animation; animation needs A2 fxkit) | RUNNING |
+| C13 | review/gift-pick @ 6158af34f | REVIEWING (gift-pick-r1) |
 | C14 | review/row-align @ 0886f329b | REVIEWING (row-align-r1) |
 | C15 | review/mood-dialog → r1 PASS f8f51797c | LIVE |
 | C16 | review/item-info @ 50a0f22da (KIT §70 jitd) | REVIEWING (item-info-r1; BAL.itd.allow=false per owner 08:10Z) |
