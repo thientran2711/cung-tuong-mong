@@ -24,7 +24,7 @@ MANI = ["FIGURES", "FIGURES-servants", "FIGURES-others", "FIGURES-ty", "FIGURES-
 def get(name, cache):
     p = os.path.join(cache, name)
     if not os.path.exists(p):
-        with urllib.request.urlopen(BASE + name, timeout=60) as r, open(p, "wb") as f:
+        with urllib.request.urlopen(urllib.request.Request(BASE + name, headers={"User-Agent": "curl/8"}), timeout=60) as r, open(p, "wb") as f:
             f.write(r.read())
     return json.load(open(p))
 

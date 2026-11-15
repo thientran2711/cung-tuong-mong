@@ -1,0 +1,2606 @@
+{
+ "kc-c01": {
+  "ref": "EbzzEBruuO",
+  "ref2": "mE3yQeWhJQ",
+  "pal": "rose red and gold",
+  "figs": [
+   {
+    "file": "fig-consort-c01-kc-a26",
+    "role": "consort",
+    "identity": "c01",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "rose red and gold"
+   },
+   {
+    "file": "fig-consort-c01-kc-a36",
+    "role": "consort",
+    "identity": "c01",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "rose red and gold"
+   },
+   {
+    "file": "fig-consort-c01-kc-a51",
+    "role": "consort",
+    "identity": "c01",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "rose red and gold"
+   }
+  ]
+ },
+ "kc-c02": {
+  "ref": "CqGGf4YEEy",
+  "ref2": "O6f8G8Lynm",
+  "pal": "sapphire blue and silver",
+  "figs": [
+   {
+    "file": "fig-consort-c02-kc-a26",
+    "role": "consort",
+    "identity": "c02",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "sapphire blue and silver"
+   },
+   {
+    "file": "fig-consort-c02-kc-a36",
+    "role": "consort",
+    "identity": "c02",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "sapphire blue and silver"
+   },
+   {
+    "file": "fig-consort-c02-kc-a51",
+    "role": "consort",
+    "identity": "c02",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "sapphire blue and silver"
+   }
+  ]
+ },
+ "kc-c03": {
+  "ref": "ov99BwS829",
+  "ref2": "79vB28AJAL",
+  "pal": "emerald green and cream",
+  "figs": [
+   {
+    "file": "fig-consort-c03-kc-a26",
+    "role": "consort",
+    "identity": "c03",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "emerald green and cream"
+   },
+   {
+    "file": "fig-consort-c03-kc-a36",
+    "role": "consort",
+    "identity": "c03",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "emerald green and cream"
+   },
+   {
+    "file": "fig-consort-c03-kc-a51",
+    "role": "consort",
+    "identity": "c03",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "emerald green and cream"
+   }
+  ]
+ },
+ "kc-c04": {
+  "ref": "SyttgBPUb8",
+  "ref2": "YML5o1yWeC",
+  "pal": "royal purple and lavender",
+  "figs": [
+   {
+    "file": "fig-consort-c04-kc-a26",
+    "role": "consort",
+    "identity": "c04",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "royal purple and lavender"
+   },
+   {
+    "file": "fig-consort-c04-kc-a36",
+    "role": "consort",
+    "identity": "c04",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "royal purple and lavender"
+   },
+   {
+    "file": "fig-consort-c04-kc-a51",
+    "role": "consort",
+    "identity": "c04",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "royal purple and lavender"
+   }
+  ]
+ },
+ "kc-c05": {
+  "ref": "gOIIk8ESXO",
+  "ref2": "5jVzw0kKxe",
+  "pal": "peacock teal and gold",
+  "figs": [
+   {
+    "file": "fig-consort-c05-kc-a26",
+    "role": "consort",
+    "identity": "c05",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "peacock teal and gold"
+   },
+   {
+    "file": "fig-consort-c05-kc-a36",
+    "role": "consort",
+    "identity": "c05",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "peacock teal and gold"
+   },
+   {
+    "file": "fig-consort-c05-kc-a51",
+    "role": "consort",
+    "identity": "c05",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "peacock teal and gold"
+   }
+  ]
+ },
+ "kc-c06": {
+  "ref": "u5nnEzLQLD",
+  "ref2": "Bh4UQPZoQR",
+  "pal": "vermilion and ivory",
+  "figs": [
+   {
+    "file": "fig-consort-c06-kc-a26",
+    "role": "consort",
+    "identity": "c06",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "vermilion and ivory"
+   },
+   {
+    "file": "fig-consort-c06-kc-a36",
+    "role": "consort",
+    "identity": "c06",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "vermilion and ivory"
+   },
+   {
+    "file": "fig-consort-c06-kc-a51",
+    "role": "consort",
+    "identity": "c06",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "vermilion and ivory"
+   }
+  ]
+ },
+ "kc-c07": {
+  "ref": "LwBBj8YswO",
+  "ref2": "lJ8D681gv9",
+  "pal": "lavender and pale pink",
+  "figs": [
+   {
+    "file": "fig-consort-c07-kc-a26",
+    "role": "consort",
+    "identity": "c07",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "lavender and pale pink"
+   },
+   {
+    "file": "fig-consort-c07-kc-a36",
+    "role": "consort",
+    "identity": "c07",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "lavender and pale pink"
+   },
+   {
+    "file": "fig-consort-c07-kc-a51",
+    "role": "consort",
+    "identity": "c07",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "lavender and pale pink"
+   }
+  ]
+ },
+ "kc-c08": {
+  "ref": "yiCClEyPW9",
+  "ref2": "KLMn7p4kqp",
+  "pal": "cherry-blossom pink and pale green",
+  "figs": [
+   {
+    "file": "fig-consort-c08-kc-a26",
+    "role": "consort",
+    "identity": "c08",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "cherry-blossom pink and pale green"
+   },
+   {
+    "file": "fig-consort-c08-kc-a36",
+    "role": "consort",
+    "identity": "c08",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "cherry-blossom pink and pale green"
+   },
+   {
+    "file": "fig-consort-c08-kc-a51",
+    "role": "consort",
+    "identity": "c08",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "cherry-blossom pink and pale green"
+   }
+  ]
+ },
+ "kc-c09": {
+  "ref": "xSddr81jfW",
+  "ref2": "xSd0P8sjfW",
+  "pal": "powder blue and white",
+  "figs": [
+   {
+    "file": "fig-consort-c09-kc-a26",
+    "role": "consort",
+    "identity": "c09",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "powder blue and white"
+   },
+   {
+    "file": "fig-consort-c09-kc-a36",
+    "role": "consort",
+    "identity": "c09",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "powder blue and white"
+   },
+   {
+    "file": "fig-consort-c09-kc-a51",
+    "role": "consort",
+    "identity": "c09",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "powder blue and white"
+   }
+  ]
+ },
+ "kc-c10": {
+  "ref": "N2FF9rG6D9",
+  "ref2": "gOIp388SXO",
+  "pal": "peach and cream",
+  "figs": [
+   {
+    "file": "fig-consort-c10-kc-a26",
+    "role": "consort",
+    "identity": "c10",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "peach and cream"
+   },
+   {
+    "file": "fig-consort-c10-kc-a36",
+    "role": "consort",
+    "identity": "c10",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "peach and cream"
+   },
+   {
+    "file": "fig-consort-c10-kc-a51",
+    "role": "consort",
+    "identity": "c10",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "peach and cream"
+   }
+  ]
+ },
+ "kc-c11": {
+  "ref": "WDsl0tscXe",
+  "ref2": "XmPSQPdBfo",
+  "pal": "lilac and silver",
+  "figs": [
+   {
+    "file": "fig-consort-c11-kc-a26",
+    "role": "consort",
+    "identity": "c11",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "lilac and silver"
+   },
+   {
+    "file": "fig-consort-c11-kc-a36",
+    "role": "consort",
+    "identity": "c11",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "lilac and silver"
+   },
+   {
+    "file": "fig-consort-c11-kc-a51",
+    "role": "consort",
+    "identity": "c11",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "lilac and silver"
+   }
+  ]
+ },
+ "kc-c12": {
+  "ref": "If6imrCtvE",
+  "ref2": "5jVz7DxKxe",
+  "pal": "mint green and white",
+  "figs": [
+   {
+    "file": "fig-consort-c12-kc-a26",
+    "role": "consort",
+    "identity": "c12",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "mint green and white"
+   },
+   {
+    "file": "fig-consort-c12-kc-a36",
+    "role": "consort",
+    "identity": "c12",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "mint green and white"
+   },
+   {
+    "file": "fig-consort-c12-kc-a51",
+    "role": "consort",
+    "identity": "c12",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "mint green and white"
+   }
+  ]
+ },
+ "kc-c13": {
+  "ref": "5jVMk6sKxe",
+  "ref2": "SyteRv1Ub8",
+  "pal": "apricot and cream",
+  "figs": [
+   {
+    "file": "fig-consort-c13-kc-a26",
+    "role": "consort",
+    "identity": "c13",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "apricot and cream"
+   },
+   {
+    "file": "fig-consort-c13-kc-a36",
+    "role": "consort",
+    "identity": "c13",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "apricot and cream"
+   },
+   {
+    "file": "fig-consort-c13-kc-a51",
+    "role": "consort",
+    "identity": "c13",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "apricot and cream"
+   }
+  ]
+ },
+ "kc-c14": {
+  "ref": "1lppEaJr4r",
+  "ref2": "JNaoGQcOq4",
+  "pal": "soft butter yellow and white",
+  "figs": [
+   {
+    "file": "fig-consort-c14-kc-a26",
+    "role": "consort",
+    "identity": "c14",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "soft butter yellow and white"
+   },
+   {
+    "file": "fig-consort-c14-kc-a36",
+    "role": "consort",
+    "identity": "c14",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "soft butter yellow and white"
+   },
+   {
+    "file": "fig-consort-c14-kc-a51",
+    "role": "consort",
+    "identity": "c14",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "soft butter yellow and white"
+   }
+  ]
+ },
+ "kc-c15": {
+  "ref": "rgedjGPxtc",
+  "ref2": "SyteRCkUb8",
+  "pal": "coral pink and ivory",
+  "figs": [
+   {
+    "file": "fig-consort-c15-kc-a26",
+    "role": "consort",
+    "identity": "c15",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "coral pink and ivory"
+   },
+   {
+    "file": "fig-consort-c15-kc-a36",
+    "role": "consort",
+    "identity": "c15",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "coral pink and ivory"
+   },
+   {
+    "file": "fig-consort-c15-kc-a51",
+    "role": "consort",
+    "identity": "c15",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "coral pink and ivory"
+   }
+  ]
+ },
+ "kc-c16": {
+  "ref": "EbznQ9euuO",
+  "ref2": "6AHEHOLiJO",
+  "pal": "sage green and cream",
+  "figs": [
+   {
+    "file": "fig-consort-c16-kc-a26",
+    "role": "consort",
+    "identity": "c16",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "sage green and cream"
+   },
+   {
+    "file": "fig-consort-c16-kc-a36",
+    "role": "consort",
+    "identity": "c16",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "sage green and cream"
+   },
+   {
+    "file": "fig-consort-c16-kc-a51",
+    "role": "consort",
+    "identity": "c16",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "sage green and cream"
+   }
+  ]
+ },
+ "kc-c17": {
+  "ref": "1lpexY8r4r",
+  "ref2": "huRPkchvqL",
+  "pal": "blush pink and pale gold",
+  "figs": [
+   {
+    "file": "fig-consort-c17-kc-a26",
+    "role": "consort",
+    "identity": "c17",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "blush pink and pale gold"
+   },
+   {
+    "file": "fig-consort-c17-kc-a36",
+    "role": "consort",
+    "identity": "c17",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "blush pink and pale gold"
+   },
+   {
+    "file": "fig-consort-c17-kc-a51",
+    "role": "consort",
+    "identity": "c17",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "blush pink and pale gold"
+   }
+  ]
+ },
+ "kc-c18": {
+  "ref": "Do7Jelmpcl",
+  "ref2": "CqG6gLuEEy",
+  "pal": "magenta rose and lilac",
+  "figs": [
+   {
+    "file": "fig-consort-c18-kc-a26",
+    "role": "consort",
+    "identity": "c18",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "magenta rose and lilac"
+   },
+   {
+    "file": "fig-consort-c18-kc-a36",
+    "role": "consort",
+    "identity": "c18",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "magenta rose and lilac"
+   },
+   {
+    "file": "fig-consort-c18-kc-a51",
+    "role": "consort",
+    "identity": "c18",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "magenta rose and lilac"
+   }
+  ]
+ },
+ "kc-c19": {
+  "ref": "79va436JAL",
+  "ref2": "N2FvDVT6D9",
+  "pal": "plum and pink",
+  "figs": [
+   {
+    "file": "fig-consort-c19-kc-a26",
+    "role": "consort",
+    "identity": "c19",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "plum and pink"
+   },
+   {
+    "file": "fig-consort-c19-kc-a36",
+    "role": "consort",
+    "identity": "c19",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "plum and pink"
+   },
+   {
+    "file": "fig-consort-c19-kc-a51",
+    "role": "consort",
+    "identity": "c19",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "plum and pink"
+   }
+  ]
+ },
+ "kc-c20": {
+  "ref": "SytmO3vUb8",
+  "ref2": "huRNZftvqL",
+  "pal": "lotus pink and celadon",
+  "figs": [
+   {
+    "file": "fig-consort-c20-kc-a26",
+    "role": "consort",
+    "identity": "c20",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "lotus pink and celadon"
+   },
+   {
+    "file": "fig-consort-c20-kc-a36",
+    "role": "consort",
+    "identity": "c20",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "lotus pink and celadon"
+   },
+   {
+    "file": "fig-consort-c20-kc-a51",
+    "role": "consort",
+    "identity": "c20",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "lotus pink and celadon"
+   }
+  ]
+ },
+ "kc-c21": {
+  "ref": "SytmO2CUb8",
+  "ref2": "bxTGyyA5Y2",
+  "pal": "ruby and blush pink",
+  "figs": [
+   {
+    "file": "fig-consort-c21-kc-a26",
+    "role": "consort",
+    "identity": "c21",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "ruby and blush pink"
+   },
+   {
+    "file": "fig-consort-c21-kc-a36",
+    "role": "consort",
+    "identity": "c21",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "ruby and blush pink"
+   },
+   {
+    "file": "fig-consort-c21-kc-a51",
+    "role": "consort",
+    "identity": "c21",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "ruby and blush pink"
+   }
+  ]
+ },
+ "kc-c22": {
+  "ref": "tCi3fx9mZJ",
+  "ref2": "xSd0i3XjfW",
+  "pal": "orchid purple and pink",
+  "figs": [
+   {
+    "file": "fig-consort-c22-kc-a26",
+    "role": "consort",
+    "identity": "c22",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "orchid purple and pink"
+   },
+   {
+    "file": "fig-consort-c22-kc-a36",
+    "role": "consort",
+    "identity": "c22",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "orchid purple and pink"
+   },
+   {
+    "file": "fig-consort-c22-kc-a51",
+    "role": "consort",
+    "identity": "c22",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "orchid purple and pink"
+   }
+  ]
+ },
+ "kc-c23": {
+  "ref": "LwBoUGRswO",
+  "ref2": "UPmdzWRwny",
+  "pal": "crimson and gold",
+  "figs": [
+   {
+    "file": "fig-consort-c23-kc-a26",
+    "role": "consort",
+    "identity": "c23",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "crimson and gold"
+   },
+   {
+    "file": "fig-consort-c23-kc-a36",
+    "role": "consort",
+    "identity": "c23",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "crimson and gold"
+   },
+   {
+    "file": "fig-consort-c23-kc-a51",
+    "role": "consort",
+    "identity": "c23",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "crimson and gold"
+   }
+  ]
+ },
+ "kc-c24": {
+  "ref": "xSdXgzsjfW",
+  "ref2": "JNaoWVgOq4",
+  "pal": "scarlet and ivory",
+  "figs": [
+   {
+    "file": "fig-consort-c24-kc-a26",
+    "role": "consort",
+    "identity": "c24",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "scarlet and ivory"
+   },
+   {
+    "file": "fig-consort-c24-kc-a36",
+    "role": "consort",
+    "identity": "c24",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "scarlet and ivory"
+   },
+   {
+    "file": "fig-consort-c24-kc-a51",
+    "role": "consort",
+    "identity": "c24",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "scarlet and ivory"
+   }
+  ]
+ },
+ "kc-c25": {
+  "ref": "aF2AQy3fSh",
+  "ref2": "xSdMXzYjfW",
+  "pal": "deep cherry red and black-gold",
+  "figs": [
+   {
+    "file": "fig-consort-c25-kc-a26",
+    "role": "consort",
+    "identity": "c25",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "deep cherry red and black-gold"
+   },
+   {
+    "file": "fig-consort-c25-kc-a36",
+    "role": "consort",
+    "identity": "c25",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "deep cherry red and black-gold"
+   },
+   {
+    "file": "fig-consort-c25-kc-a51",
+    "role": "consort",
+    "identity": "c25",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "deep cherry red and black-gold"
+   }
+  ]
+ },
+ "kc-c26": {
+  "ref": "MBw7XjQDCm",
+  "ref2": "s7oMGpCl8e",
+  "pal": "burgundy and gold",
+  "figs": [
+   {
+    "file": "fig-consort-c26-kc-a26",
+    "role": "consort",
+    "identity": "c26",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "burgundy and gold"
+   },
+   {
+    "file": "fig-consort-c26-kc-a36",
+    "role": "consort",
+    "identity": "c26",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "burgundy and gold"
+   },
+   {
+    "file": "fig-consort-c26-kc-a51",
+    "role": "consort",
+    "identity": "c26",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "burgundy and gold"
+   }
+  ]
+ },
+ "kc-c27": {
+  "ref": "u5nYbMgQLD",
+  "ref2": "xSd0ZDGjfW",
+  "pal": "cinnabar and cream",
+  "figs": [
+   {
+    "file": "fig-consort-c27-kc-a26",
+    "role": "consort",
+    "identity": "c27",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "cinnabar and cream"
+   },
+   {
+    "file": "fig-consort-c27-kc-a36",
+    "role": "consort",
+    "identity": "c27",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "cinnabar and cream"
+   },
+   {
+    "file": "fig-consort-c27-kc-a51",
+    "role": "consort",
+    "identity": "c27",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "cinnabar and cream"
+   }
+  ]
+ },
+ "kc-c28": {
+  "ref": "4RuQ3Kg9Aa",
+  "ref2": "jUXDBdrLD0",
+  "pal": "celadon and white",
+  "figs": [
+   {
+    "file": "fig-consort-c28-kc-a26",
+    "role": "consort",
+    "identity": "c28",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "celadon and white"
+   },
+   {
+    "file": "fig-consort-c28-kc-a36",
+    "role": "consort",
+    "identity": "c28",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "celadon and white"
+   },
+   {
+    "file": "fig-consort-c28-kc-a51",
+    "role": "consort",
+    "identity": "c28",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "celadon and white"
+   }
+  ]
+ },
+ "kc-c29": {
+  "ref": "mE33eAXhJQ",
+  "ref2": "1lpW3eWr4r",
+  "pal": "ink blue and pale grey",
+  "figs": [
+   {
+    "file": "fig-consort-c29-kc-a26",
+    "role": "consort",
+    "identity": "c29",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "ink blue and pale grey"
+   },
+   {
+    "file": "fig-consort-c29-kc-a36",
+    "role": "consort",
+    "identity": "c29",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "ink blue and pale grey"
+   },
+   {
+    "file": "fig-consort-c29-kc-a51",
+    "role": "consort",
+    "identity": "c29",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "ink blue and pale grey"
+   }
+  ]
+ },
+ "kc-c30": {
+  "ref": "u5nYbDSQLD",
+  "ref2": "s7oMGIbl8e",
+  "pal": "moonlight blue and white",
+  "figs": [
+   {
+    "file": "fig-consort-c30-kc-a26",
+    "role": "consort",
+    "identity": "c30",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "moonlight blue and white"
+   },
+   {
+    "file": "fig-consort-c30-kc-a36",
+    "role": "consort",
+    "identity": "c30",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "moonlight blue and white"
+   },
+   {
+    "file": "fig-consort-c30-kc-a51",
+    "role": "consort",
+    "identity": "c30",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "moonlight blue and white"
+   }
+  ]
+ },
+ "kc-c31": {
+  "ref": "N2FHZxR6D9",
+  "ref2": "79vB0EGJAL",
+  "pal": "pale jade and silver",
+  "figs": [
+   {
+    "file": "fig-consort-c31-kc-a26",
+    "role": "consort",
+    "identity": "c31",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "pale jade and silver"
+   },
+   {
+    "file": "fig-consort-c31-kc-a36",
+    "role": "consort",
+    "identity": "c31",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "pale jade and silver"
+   },
+   {
+    "file": "fig-consort-c31-kc-a51",
+    "role": "consort",
+    "identity": "c31",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "pale jade and silver"
+   }
+  ]
+ },
+ "kc-c32": {
+  "ref": "3zb5GsPREY",
+  "ref2": "lJ8Dzv5gv9",
+  "pal": "ivory and soft grey-blue",
+  "figs": [
+   {
+    "file": "fig-consort-c32-kc-a26",
+    "role": "consort",
+    "identity": "c32",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "ivory and soft grey-blue"
+   },
+   {
+    "file": "fig-consort-c32-kc-a36",
+    "role": "consort",
+    "identity": "c32",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "ivory and soft grey-blue"
+   },
+   {
+    "file": "fig-consort-c32-kc-a51",
+    "role": "consort",
+    "identity": "c32",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "ivory and soft grey-blue"
+   }
+  ]
+ },
+ "kc-m01": {
+  "ref": "jUXB7M0LD0",
+  "ref2": "5jVA5YgKxe",
+  "pal": "sage green and cream",
+  "figs": [
+   {
+    "file": "fig-maid-m01-kc-a26",
+    "role": "maid",
+    "identity": "m01",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "sage green and cream"
+   },
+   {
+    "file": "fig-maid-m01-kc-a36",
+    "role": "maid",
+    "identity": "m01",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "sage green and cream"
+   },
+   {
+    "file": "fig-maid-m01-kc-a51",
+    "role": "maid",
+    "identity": "m01",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "sage green and cream"
+   }
+  ]
+ },
+ "kc-m02": {
+  "ref": "u5nYkAHQLD",
+  "ref2": "ksDz5Wy16B",
+  "pal": "moss green and silver",
+  "figs": [
+   {
+    "file": "fig-maid-m02-kc-a26",
+    "role": "maid",
+    "identity": "m02",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "moss green and silver"
+   },
+   {
+    "file": "fig-maid-m02-kc-a36",
+    "role": "maid",
+    "identity": "m02",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "moss green and silver"
+   },
+   {
+    "file": "fig-maid-m02-kc-a51",
+    "role": "maid",
+    "identity": "m02",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "moss green and silver"
+   }
+  ]
+ },
+ "kc-m03": {
+  "ref": "u5nYkzbQLD",
+  "ref2": "s7oTseMl8e",
+  "pal": "slate blue and silver",
+  "figs": [
+   {
+    "file": "fig-maid-m03-kc-a26",
+    "role": "maid",
+    "identity": "m03",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "slate blue and silver"
+   },
+   {
+    "file": "fig-maid-m03-kc-a36",
+    "role": "maid",
+    "identity": "m03",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "slate blue and silver"
+   },
+   {
+    "file": "fig-maid-m03-kc-a51",
+    "role": "maid",
+    "identity": "m03",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "slate blue and silver"
+   }
+  ]
+ },
+ "kc-m04": {
+  "ref": "xSdXwXPjfW",
+  "ref2": "s7oTsdDl8e",
+  "pal": "warm apricot and gold",
+  "figs": [
+   {
+    "file": "fig-maid-m04-kc-a26",
+    "role": "maid",
+    "identity": "m04",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "warm apricot and gold"
+   },
+   {
+    "file": "fig-maid-m04-kc-a36",
+    "role": "maid",
+    "identity": "m04",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "warm apricot and gold"
+   },
+   {
+    "file": "fig-maid-m04-kc-a51",
+    "role": "maid",
+    "identity": "m04",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "warm apricot and gold"
+   }
+  ]
+ },
+ "kc-m05": {
+  "ref": "9ZQQUCRNYZ",
+  "ref2": "9ZQt9ElNYZ",
+  "pal": "coral red and gold",
+  "figs": [
+   {
+    "file": "fig-maid-m05-kc-a26",
+    "role": "maid",
+    "identity": "m05",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "coral red and gold"
+   },
+   {
+    "file": "fig-maid-m05-kc-a36",
+    "role": "maid",
+    "identity": "m05",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "coral red and gold"
+   },
+   {
+    "file": "fig-maid-m05-kc-a51",
+    "role": "maid",
+    "identity": "m05",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "coral red and gold"
+   }
+  ]
+ },
+ "kc-m06": {
+  "ref": "ksDpgdZ16B",
+  "ref2": "yiCoyfqPW9",
+  "pal": "pale blue-grey and silver",
+  "figs": [
+   {
+    "file": "fig-maid-m06-kc-a26",
+    "role": "maid",
+    "identity": "m06",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "pale blue-grey and silver"
+   },
+   {
+    "file": "fig-maid-m06-kc-a36",
+    "role": "maid",
+    "identity": "m06",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "pale blue-grey and silver"
+   },
+   {
+    "file": "fig-maid-m06-kc-a51",
+    "role": "maid",
+    "identity": "m06",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "pale blue-grey and silver"
+   }
+  ]
+ },
+ "kc-m07": {
+  "ref": "aF2AqYTfSh",
+  "ref2": "eIOLeyudqL",
+  "pal": "pale jade green and white",
+  "figs": [
+   {
+    "file": "fig-maid-m07-kc-a26",
+    "role": "maid",
+    "identity": "m07",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "pale jade green and white"
+   },
+   {
+    "file": "fig-maid-m07-kc-a36",
+    "role": "maid",
+    "identity": "m07",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "pale jade green and white"
+   },
+   {
+    "file": "fig-maid-m07-kc-a51",
+    "role": "maid",
+    "identity": "m07",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "pale jade green and white"
+   }
+  ]
+ },
+ "kc-m08": {
+  "ref": "9ZQFAk9NYZ",
+  "ref2": "If6wIRxtvE",
+  "pal": "peach-salmon and gold",
+  "figs": [
+   {
+    "file": "fig-maid-m08-kc-a26",
+    "role": "maid",
+    "identity": "m08",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "peach-salmon and gold"
+   },
+   {
+    "file": "fig-maid-m08-kc-a36",
+    "role": "maid",
+    "identity": "m08",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "peach-salmon and gold"
+   },
+   {
+    "file": "fig-maid-m08-kc-a51",
+    "role": "maid",
+    "identity": "m08",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "peach-salmon and gold"
+   }
+  ]
+ },
+ "kc-m09": {
+  "ref": "ov9Nfz9829",
+  "ref2": "p8Jjp44ehw",
+  "pal": "rose pink and gold",
+  "figs": [
+   {
+    "file": "fig-maid-m09-kc-a26",
+    "role": "maid",
+    "identity": "m09",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "rose pink and gold"
+   },
+   {
+    "file": "fig-maid-m09-kc-a36",
+    "role": "maid",
+    "identity": "m09",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "rose pink and gold"
+   },
+   {
+    "file": "fig-maid-m09-kc-a51",
+    "role": "maid",
+    "identity": "m09",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "rose pink and gold"
+   }
+  ]
+ },
+ "kc-m10": {
+  "ref": "gOIti03SXO",
+  "ref2": "tCiJvPZmZJ",
+  "pal": "sage green and gold",
+  "figs": [
+   {
+    "file": "fig-maid-m10-kc-a26",
+    "role": "maid",
+    "identity": "m10",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "sage green and gold"
+   },
+   {
+    "file": "fig-maid-m10-kc-a36",
+    "role": "maid",
+    "identity": "m10",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "sage green and gold"
+   },
+   {
+    "file": "fig-maid-m10-kc-a51",
+    "role": "maid",
+    "identity": "m10",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "sage green and gold"
+   }
+  ]
+ },
+ "kc-m11": {
+  "ref": "6AHq0mLiJO",
+  "ref2": "P3EINa042C",
+  "pal": "sky blue and silver",
+  "figs": [
+   {
+    "file": "fig-maid-m11-kc-a26",
+    "role": "maid",
+    "identity": "m11",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "sky blue and silver"
+   },
+   {
+    "file": "fig-maid-m11-kc-a36",
+    "role": "maid",
+    "identity": "m11",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "sky blue and silver"
+   },
+   {
+    "file": "fig-maid-m11-kc-a51",
+    "role": "maid",
+    "identity": "m11",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "sky blue and silver"
+   }
+  ]
+ },
+ "kc-m12": {
+  "ref": "9ZQFWhKNYZ",
+  "ref2": "P3EINfT42C",
+  "pal": "pale golden yellow and ivory",
+  "figs": [
+   {
+    "file": "fig-maid-m12-kc-a26",
+    "role": "maid",
+    "identity": "m12",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "pale golden yellow and ivory"
+   },
+   {
+    "file": "fig-maid-m12-kc-a36",
+    "role": "maid",
+    "identity": "m12",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "pale golden yellow and ivory"
+   },
+   {
+    "file": "fig-maid-m12-kc-a51",
+    "role": "maid",
+    "identity": "m12",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "pale golden yellow and ivory"
+   }
+  ]
+ },
+ "kc-m13": {
+  "ref": "iGqbTum3uK",
+  "ref2": "w4hdOmW7EI",
+  "pal": "lilac and silver",
+  "figs": [
+   {
+    "file": "fig-maid-m13-kc-a26",
+    "role": "maid",
+    "identity": "m13",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "lilac and silver"
+   },
+   {
+    "file": "fig-maid-m13-kc-a36",
+    "role": "maid",
+    "identity": "m13",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "lilac and silver"
+   },
+   {
+    "file": "fig-maid-m13-kc-a51",
+    "role": "maid",
+    "identity": "m13",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "lilac and silver"
+   }
+  ]
+ },
+ "kc-m14": {
+  "ref": "iGqbTHa3uK",
+  "ref2": "ksDnxpw16B",
+  "pal": "ivory white and celadon",
+  "figs": [
+   {
+    "file": "fig-maid-m14-kc-a26",
+    "role": "maid",
+    "identity": "m14",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "ivory white and celadon"
+   },
+   {
+    "file": "fig-maid-m14-kc-a36",
+    "role": "maid",
+    "identity": "m14",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "ivory white and celadon"
+   },
+   {
+    "file": "fig-maid-m14-kc-a51",
+    "role": "maid",
+    "identity": "m14",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "ivory white and celadon"
+   }
+  ]
+ },
+ "kc-m15": {
+  "ref": "8aN6H6wIrU",
+  "ref2": "JNaBPCeOq4",
+  "pal": "blush pink and pearl white",
+  "figs": [
+   {
+    "file": "fig-maid-m15-kc-a26",
+    "role": "maid",
+    "identity": "m15",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "blush pink and pearl white"
+   },
+   {
+    "file": "fig-maid-m15-kc-a36",
+    "role": "maid",
+    "identity": "m15",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "blush pink and pearl white"
+   },
+   {
+    "file": "fig-maid-m15-kc-a51",
+    "role": "maid",
+    "identity": "m15",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "blush pink and pearl white"
+   }
+  ]
+ },
+ "kc-m16": {
+  "ref": "u5nYL0bQLD",
+  "ref2": "1lpYjXIr4r",
+  "pal": "lavender purple and gold",
+  "figs": [
+   {
+    "file": "fig-maid-m16-kc-a26",
+    "role": "maid",
+    "identity": "m16",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "lavender purple and gold"
+   },
+   {
+    "file": "fig-maid-m16-kc-a36",
+    "role": "maid",
+    "identity": "m16",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "lavender purple and gold"
+   },
+   {
+    "file": "fig-maid-m16-kc-a51",
+    "role": "maid",
+    "identity": "m16",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "lavender purple and gold"
+   }
+  ]
+ },
+ "kc-m17": {
+  "ref": "aF2A1WYfSh",
+  "ref2": "4Rut6q59Aa",
+  "pal": "olive green and gold",
+  "figs": [
+   {
+    "file": "fig-maid-m17-kc-a26",
+    "role": "maid",
+    "identity": "m17",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "olive green and gold"
+   },
+   {
+    "file": "fig-maid-m17-kc-a36",
+    "role": "maid",
+    "identity": "m17",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "olive green and gold"
+   },
+   {
+    "file": "fig-maid-m17-kc-a51",
+    "role": "maid",
+    "identity": "m17",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "olive green and gold"
+   }
+  ]
+ },
+ "kc-m18": {
+  "ref": "ksDpOZr16B",
+  "ref2": "huRyEF9vqL",
+  "pal": "powder blue and pearl white",
+  "figs": [
+   {
+    "file": "fig-maid-m18-kc-a26",
+    "role": "maid",
+    "identity": "m18",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "powder blue and pearl white"
+   },
+   {
+    "file": "fig-maid-m18-kc-a36",
+    "role": "maid",
+    "identity": "m18",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "powder blue and pearl white"
+   },
+   {
+    "file": "fig-maid-m18-kc-a51",
+    "role": "maid",
+    "identity": "m18",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "powder blue and pearl white"
+   }
+  ]
+ },
+ "kc-m19": {
+  "ref": "eIOyErDdqL",
+  "ref2": "dtylIvZXSL",
+  "pal": "caramel apricot and gold",
+  "figs": [
+   {
+    "file": "fig-maid-m19-kc-a26",
+    "role": "maid",
+    "identity": "m19",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "caramel apricot and gold"
+   },
+   {
+    "file": "fig-maid-m19-kc-a36",
+    "role": "maid",
+    "identity": "m19",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "caramel apricot and gold"
+   },
+   {
+    "file": "fig-maid-m19-kc-a51",
+    "role": "maid",
+    "identity": "m19",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "caramel apricot and gold"
+   }
+  ]
+ },
+ "kc-m20": {
+  "ref": "s7o86TGl8e",
+  "ref2": "P3EIiAl42C",
+  "pal": "slate blue and gold",
+  "figs": [
+   {
+    "file": "fig-maid-m20-kc-a26",
+    "role": "maid",
+    "identity": "m20",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "slate blue and gold"
+   },
+   {
+    "file": "fig-maid-m20-kc-a36",
+    "role": "maid",
+    "identity": "m20",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "slate blue and gold"
+   },
+   {
+    "file": "fig-maid-m20-kc-a51",
+    "role": "maid",
+    "identity": "m20",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "slate blue and gold"
+   }
+  ]
+ },
+ "kc-m21": {
+  "ref": "s7o86Mnl8e",
+  "ref2": "p8JLoatehw",
+  "pal": "aqua celadon and silver",
+  "figs": [
+   {
+    "file": "fig-maid-m21-kc-a26",
+    "role": "maid",
+    "identity": "m21",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "aqua celadon and silver"
+   },
+   {
+    "file": "fig-maid-m21-kc-a36",
+    "role": "maid",
+    "identity": "m21",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "aqua celadon and silver"
+   },
+   {
+    "file": "fig-maid-m21-kc-a51",
+    "role": "maid",
+    "identity": "m21",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "aqua celadon and silver"
+   }
+  ]
+ },
+ "kc-m22": {
+  "ref": "Do7JflVpcl",
+  "ref2": "6AHv20CiJO",
+  "pal": "dusty rose and taupe",
+  "figs": [
+   {
+    "file": "fig-maid-m22-kc-a26",
+    "role": "maid",
+    "identity": "m22",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "dusty rose and taupe"
+   },
+   {
+    "file": "fig-maid-m22-kc-a36",
+    "role": "maid",
+    "identity": "m22",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "dusty rose and taupe"
+   },
+   {
+    "file": "fig-maid-m22-kc-a51",
+    "role": "maid",
+    "identity": "m22",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "dusty rose and taupe"
+   }
+  ]
+ },
+ "kc-m23": {
+  "ref": "LwBoNdGswO",
+  "ref2": "P3EIiYw42C",
+  "pal": "butter yellow and gold",
+  "figs": [
+   {
+    "file": "fig-maid-m23-kc-a26",
+    "role": "maid",
+    "identity": "m23",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "butter yellow and gold"
+   },
+   {
+    "file": "fig-maid-m23-kc-a36",
+    "role": "maid",
+    "identity": "m23",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "butter yellow and gold"
+   },
+   {
+    "file": "fig-maid-m23-kc-a51",
+    "role": "maid",
+    "identity": "m23",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "butter yellow and gold"
+   }
+  ]
+ },
+ "kc-m24": {
+  "ref": "CqGzjGAEEy",
+  "ref2": "CqGNHsLEEy",
+  "pal": "jade green and gold",
+  "figs": [
+   {
+    "file": "fig-maid-m24-kc-a26",
+    "role": "maid",
+    "identity": "m24",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "jade green and gold"
+   },
+   {
+    "file": "fig-maid-m24-kc-a36",
+    "role": "maid",
+    "identity": "m24",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "jade green and gold"
+   },
+   {
+    "file": "fig-maid-m24-kc-a51",
+    "role": "maid",
+    "identity": "m24",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "jade green and gold"
+   }
+  ]
+ },
+ "kc-m25": {
+  "ref": "lJ8Iitbgv9",
+  "ref2": "6AHv2DFiJO",
+  "pal": "lavender violet and silver",
+  "figs": [
+   {
+    "file": "fig-maid-m25-kc-a26",
+    "role": "maid",
+    "identity": "m25",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "lavender violet and silver"
+   },
+   {
+    "file": "fig-maid-m25-kc-a36",
+    "role": "maid",
+    "identity": "m25",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "lavender violet and silver"
+   },
+   {
+    "file": "fig-maid-m25-kc-a51",
+    "role": "maid",
+    "identity": "m25",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "lavender violet and silver"
+   }
+  ]
+ },
+ "kc-m26": {
+  "ref": "Sytm2BqUb8",
+  "ref2": "4RutRJ79Aa",
+  "pal": "blush pink and gold",
+  "figs": [
+   {
+    "file": "fig-maid-m26-kc-a26",
+    "role": "maid",
+    "identity": "m26",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "blush pink and gold"
+   },
+   {
+    "file": "fig-maid-m26-kc-a36",
+    "role": "maid",
+    "identity": "m26",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "blush pink and gold"
+   },
+   {
+    "file": "fig-maid-m26-kc-a51",
+    "role": "maid",
+    "identity": "m26",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "blush pink and gold"
+   }
+  ]
+ },
+ "kc-m27": {
+  "ref": "XmP4HyIBfo",
+  "ref2": "mE3OE8DhJQ",
+  "pal": "soft spring green and gold",
+  "figs": [
+   {
+    "file": "fig-maid-m27-kc-a26",
+    "role": "maid",
+    "identity": "m27",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "soft spring green and gold"
+   },
+   {
+    "file": "fig-maid-m27-kc-a36",
+    "role": "maid",
+    "identity": "m27",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "soft spring green and gold"
+   },
+   {
+    "file": "fig-maid-m27-kc-a51",
+    "role": "maid",
+    "identity": "m27",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "soft spring green and gold"
+   }
+  ]
+ },
+ "kc-m28": {
+  "ref": "79vazaDJAL",
+  "ref2": "WDs5DYecXe",
+  "pal": "coral pink and ivory",
+  "figs": [
+   {
+    "file": "fig-maid-m28-kc-a26",
+    "role": "maid",
+    "identity": "m28",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "coral pink and ivory"
+   },
+   {
+    "file": "fig-maid-m28-kc-a36",
+    "role": "maid",
+    "identity": "m28",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "coral pink and ivory"
+   },
+   {
+    "file": "fig-maid-m28-kc-a51",
+    "role": "maid",
+    "identity": "m28",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "coral pink and ivory"
+   }
+  ]
+ },
+ "kc-m29": {
+  "ref": "MBw7COuDCm",
+  "ref2": "dtyltdOXSL",
+  "pal": "pale celadon and silver",
+  "figs": [
+   {
+    "file": "fig-maid-m29-kc-a26",
+    "role": "maid",
+    "identity": "m29",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "pale celadon and silver"
+   },
+   {
+    "file": "fig-maid-m29-kc-a36",
+    "role": "maid",
+    "identity": "m29",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "pale celadon and silver"
+   },
+   {
+    "file": "fig-maid-m29-kc-a51",
+    "role": "maid",
+    "identity": "m29",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "pale celadon and silver"
+   }
+  ]
+ },
+ "kc-m30": {
+  "ref": "P3Eucbp42C",
+  "ref2": "Do7xVlXpcl",
+  "pal": "soft lilac and silver",
+  "figs": [
+   {
+    "file": "fig-maid-m30-kc-a26",
+    "role": "maid",
+    "identity": "m30",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "soft lilac and silver"
+   },
+   {
+    "file": "fig-maid-m30-kc-a36",
+    "role": "maid",
+    "identity": "m30",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "soft lilac and silver"
+   },
+   {
+    "file": "fig-maid-m30-kc-a51",
+    "role": "maid",
+    "identity": "m30",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "soft lilac and silver"
+   }
+  ]
+ },
+ "kc-m31": {
+  "ref": "3zb5pLjREY",
+  "ref2": "aF24HChfSh",
+  "pal": "pale buttercup yellow and gold",
+  "figs": [
+   {
+    "file": "fig-maid-m31-kc-a26",
+    "role": "maid",
+    "identity": "m31",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "pale buttercup yellow and gold"
+   },
+   {
+    "file": "fig-maid-m31-kc-a36",
+    "role": "maid",
+    "identity": "m31",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "pale buttercup yellow and gold"
+   },
+   {
+    "file": "fig-maid-m31-kc-a51",
+    "role": "maid",
+    "identity": "m31",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "pale buttercup yellow and gold"
+   }
+  ]
+ },
+ "kc-m32": {
+  "ref": "EbznlpIuuO",
+  "ref2": "LwBT7UBswO",
+  "pal": "pale mint green and ivory",
+  "figs": [
+   {
+    "file": "fig-maid-m32-kc-a26",
+    "role": "maid",
+    "identity": "m32",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "pale mint green and ivory"
+   },
+   {
+    "file": "fig-maid-m32-kc-a36",
+    "role": "maid",
+    "identity": "m32",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "pale mint green and ivory"
+   },
+   {
+    "file": "fig-maid-m32-kc-a51",
+    "role": "maid",
+    "identity": "m32",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "pale mint green and ivory"
+   }
+  ]
+ },
+ "kc-m33": {
+  "ref": "XmP4HnbBfo",
+  "ref2": "Ebz655LuuO",
+  "pal": "lavender blue and silver",
+  "figs": [
+   {
+    "file": "fig-maid-m33-kc-a26",
+    "role": "maid",
+    "identity": "m33",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "lavender blue and silver"
+   },
+   {
+    "file": "fig-maid-m33-kc-a36",
+    "role": "maid",
+    "identity": "m33",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "lavender blue and silver"
+   },
+   {
+    "file": "fig-maid-m33-kc-a51",
+    "role": "maid",
+    "identity": "m33",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "lavender blue and silver"
+   }
+  ]
+ },
+ "kc-m34": {
+  "ref": "s7o8Zp1l8e",
+  "ref2": "w4hd96k7EI",
+  "pal": "peach pink and gold",
+  "figs": [
+   {
+    "file": "fig-maid-m34-kc-a26",
+    "role": "maid",
+    "identity": "m34",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "peach pink and gold"
+   },
+   {
+    "file": "fig-maid-m34-kc-a36",
+    "role": "maid",
+    "identity": "m34",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "peach pink and gold"
+   },
+   {
+    "file": "fig-maid-m34-kc-a51",
+    "role": "maid",
+    "identity": "m34",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "peach pink and gold"
+   }
+  ]
+ },
+ "kc-m35": {
+  "ref": "huRZj6dvqL",
+  "ref2": "XmPgv9mBfo",
+  "pal": "pale jade green and pearl white",
+  "figs": [
+   {
+    "file": "fig-maid-m35-kc-a26",
+    "role": "maid",
+    "identity": "m35",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "pale jade green and pearl white"
+   },
+   {
+    "file": "fig-maid-m35-kc-a36",
+    "role": "maid",
+    "identity": "m35",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "pale jade green and pearl white"
+   },
+   {
+    "file": "fig-maid-m35-kc-a51",
+    "role": "maid",
+    "identity": "m35",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "pale jade green and pearl white"
+   }
+  ]
+ },
+ "kc-m36": {
+  "ref": "79vaYvTJAL",
+  "ref2": "iGqanKa3uK",
+  "pal": "ivory cream and gold",
+  "figs": [
+   {
+    "file": "fig-maid-m36-kc-a26",
+    "role": "maid",
+    "identity": "m36",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "ivory cream and gold"
+   },
+   {
+    "file": "fig-maid-m36-kc-a36",
+    "role": "maid",
+    "identity": "m36",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "ivory cream and gold"
+   },
+   {
+    "file": "fig-maid-m36-kc-a51",
+    "role": "maid",
+    "identity": "m36",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "ivory cream and gold"
+   }
+  ]
+ },
+ "kc-m37": {
+  "ref": "79vaYfMJAL",
+  "ref2": "XmPgviaBfo",
+  "pal": "pale aqua and silver",
+  "figs": [
+   {
+    "file": "fig-maid-m37-kc-a26",
+    "role": "maid",
+    "identity": "m37",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "pale aqua and silver"
+   },
+   {
+    "file": "fig-maid-m37-kc-a36",
+    "role": "maid",
+    "identity": "m37",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "pale aqua and silver"
+   },
+   {
+    "file": "fig-maid-m37-kc-a51",
+    "role": "maid",
+    "identity": "m37",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "pale aqua and silver"
+   }
+  ]
+ },
+ "kc-m38": {
+  "ref": "mE3RxAPhJQ",
+  "ref2": "w4hdNu07EI",
+  "pal": "warm apricot and gold",
+  "figs": [
+   {
+    "file": "fig-maid-m38-kc-a26",
+    "role": "maid",
+    "identity": "m38",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "warm apricot and gold"
+   },
+   {
+    "file": "fig-maid-m38-kc-a36",
+    "role": "maid",
+    "identity": "m38",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "warm apricot and gold"
+   },
+   {
+    "file": "fig-maid-m38-kc-a51",
+    "role": "maid",
+    "identity": "m38",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "warm apricot and gold"
+   }
+  ]
+ },
+ "kc-m39": {
+  "ref": "aF2AsW2fSh",
+  "ref2": "WDs5eJ6cXe",
+  "pal": "sky blue and silver",
+  "figs": [
+   {
+    "file": "fig-maid-m39-kc-a26",
+    "role": "maid",
+    "identity": "m39",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "sky blue and silver"
+   },
+   {
+    "file": "fig-maid-m39-kc-a36",
+    "role": "maid",
+    "identity": "m39",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "sky blue and silver"
+   },
+   {
+    "file": "fig-maid-m39-kc-a51",
+    "role": "maid",
+    "identity": "m39",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "sky blue and silver"
+   }
+  ]
+ },
+ "kc-m40": {
+  "ref": "XmP4bAuBfo",
+  "ref2": "9ZQmA1UNYZ",
+  "pal": "dusty rose and gold",
+  "figs": [
+   {
+    "file": "fig-maid-m40-kc-a26",
+    "role": "maid",
+    "identity": "m40",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "dusty rose and gold"
+   },
+   {
+    "file": "fig-maid-m40-kc-a36",
+    "role": "maid",
+    "identity": "m40",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "dusty rose and gold"
+   },
+   {
+    "file": "fig-maid-m40-kc-a51",
+    "role": "maid",
+    "identity": "m40",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "dusty rose and gold"
+   }
+  ]
+ },
+ "kc-m41": {
+  "ref": "6AHqpl3iJO",
+  "ref2": "1lpYSmtr4r",
+  "pal": "soft willow green and gold",
+  "figs": [
+   {
+    "file": "fig-maid-m41-kc-a26",
+    "role": "maid",
+    "identity": "m41",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "soft willow green and gold"
+   },
+   {
+    "file": "fig-maid-m41-kc-a36",
+    "role": "maid",
+    "identity": "m41",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "soft willow green and gold"
+   },
+   {
+    "file": "fig-maid-m41-kc-a51",
+    "role": "maid",
+    "identity": "m41",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "soft willow green and gold"
+   }
+  ]
+ },
+ "kc-m42": {
+  "ref": "WDslfYTcXe",
+  "ref2": "u5nikdkQLD",
+  "pal": "peach coral and gold",
+  "figs": [
+   {
+    "file": "fig-maid-m42-kc-a26",
+    "role": "maid",
+    "identity": "m42",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "peach coral and gold"
+   },
+   {
+    "file": "fig-maid-m42-kc-a36",
+    "role": "maid",
+    "identity": "m42",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "peach coral and gold"
+   },
+   {
+    "file": "fig-maid-m42-kc-a51",
+    "role": "maid",
+    "identity": "m42",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "peach coral and gold"
+   }
+  ]
+ },
+ "kc-m43": {
+  "ref": "bxTV9Ky5Y2",
+  "ref2": "dtylabnXSL",
+  "pal": "periwinkle and silver",
+  "figs": [
+   {
+    "file": "fig-maid-m43-kc-a26",
+    "role": "maid",
+    "identity": "m43",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "periwinkle and silver"
+   },
+   {
+    "file": "fig-maid-m43-kc-a36",
+    "role": "maid",
+    "identity": "m43",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "periwinkle and silver"
+   },
+   {
+    "file": "fig-maid-m43-kc-a51",
+    "role": "maid",
+    "identity": "m43",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "periwinkle and silver"
+   }
+  ]
+ },
+ "kc-m44": {
+  "ref": "dtyPK87XSL",
+  "ref2": "w4hdiWg7EI",
+  "pal": "ivory and blush pink",
+  "figs": [
+   {
+    "file": "fig-maid-m44-kc-a26",
+    "role": "maid",
+    "identity": "m44",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "ivory and blush pink"
+   },
+   {
+    "file": "fig-maid-m44-kc-a36",
+    "role": "maid",
+    "identity": "m44",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "ivory and blush pink"
+   },
+   {
+    "file": "fig-maid-m44-kc-a51",
+    "role": "maid",
+    "identity": "m44",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "ivory and blush pink"
+   }
+  ]
+ },
+ "kc-m45": {
+  "ref": "ov9NrvA829",
+  "ref2": "w4hdicS7EI",
+  "pal": "pale sky blue and pearl white",
+  "figs": [
+   {
+    "file": "fig-maid-m45-kc-a26",
+    "role": "maid",
+    "identity": "m45",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "pale sky blue and pearl white"
+   },
+   {
+    "file": "fig-maid-m45-kc-a36",
+    "role": "maid",
+    "identity": "m45",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "pale sky blue and pearl white"
+   },
+   {
+    "file": "fig-maid-m45-kc-a51",
+    "role": "maid",
+    "identity": "m45",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "pale sky blue and pearl white"
+   }
+  ]
+ },
+ "kc-m46": {
+  "ref": "Do7JqIjpcl",
+  "ref2": "bxTAl6p5Y2",
+  "pal": "rust red and gold",
+  "figs": [
+   {
+    "file": "fig-maid-m46-kc-a26",
+    "role": "maid",
+    "identity": "m46",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "rust red and gold"
+   },
+   {
+    "file": "fig-maid-m46-kc-a36",
+    "role": "maid",
+    "identity": "m46",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "rust red and gold"
+   },
+   {
+    "file": "fig-maid-m46-kc-a51",
+    "role": "maid",
+    "identity": "m46",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "rust red and gold"
+   }
+  ]
+ },
+ "kc-m47": {
+  "ref": "WDslCX8cXe",
+  "ref2": "0egkoHsTfW",
+  "pal": "pale lilac and mint",
+  "figs": [
+   {
+    "file": "fig-maid-m47-kc-a26",
+    "role": "maid",
+    "identity": "m47",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "pale lilac and mint"
+   },
+   {
+    "file": "fig-maid-m47-kc-a36",
+    "role": "maid",
+    "identity": "m47",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "pale lilac and mint"
+   },
+   {
+    "file": "fig-maid-m47-kc-a51",
+    "role": "maid",
+    "identity": "m47",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "pale lilac and mint"
+   }
+  ]
+ },
+ "kc-m48": {
+  "ref": "WDslCotcXe",
+  "ref2": "cplKBHU0eP",
+  "pal": "warm beige cream and gold",
+  "figs": [
+   {
+    "file": "fig-maid-m48-kc-a26",
+    "role": "maid",
+    "identity": "m48",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "warm beige cream and gold"
+   },
+   {
+    "file": "fig-maid-m48-kc-a36",
+    "role": "maid",
+    "identity": "m48",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "warm beige cream and gold"
+   },
+   {
+    "file": "fig-maid-m48-kc-a51",
+    "role": "maid",
+    "identity": "m48",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "warm beige cream and gold"
+   }
+  ]
+ },
+ "kc-m49": {
+  "ref": "SytmYRTUb8",
+  "ref2": "huRyq7WvqL",
+  "pal": "powder blue and silver",
+  "figs": [
+   {
+    "file": "fig-maid-m49-kc-a26",
+    "role": "maid",
+    "identity": "m49",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "powder blue and silver"
+   },
+   {
+    "file": "fig-maid-m49-kc-a36",
+    "role": "maid",
+    "identity": "m49",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "powder blue and silver"
+   },
+   {
+    "file": "fig-maid-m49-kc-a51",
+    "role": "maid",
+    "identity": "m49",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "powder blue and silver"
+   }
+  ]
+ },
+ "kc-m50": {
+  "ref": "LwBoAayswO",
+  "ref2": "WDs5XbrcXe",
+  "pal": "soft pink and pearl white",
+  "figs": [
+   {
+    "file": "fig-maid-m50-kc-a26",
+    "role": "maid",
+    "identity": "m50",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "soft pink and pearl white"
+   },
+   {
+    "file": "fig-maid-m50-kc-a36",
+    "role": "maid",
+    "identity": "m50",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "soft pink and pearl white"
+   },
+   {
+    "file": "fig-maid-m50-kc-a51",
+    "role": "maid",
+    "identity": "m50",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "soft pink and pearl white"
+   }
+  ]
+ },
+ "kc-m51": {
+  "ref": "jUXB2fVLD0",
+  "ref2": "Do7jvdKpcl",
+  "pal": "pale mint and silver",
+  "figs": [
+   {
+    "file": "fig-maid-m51-kc-a26",
+    "role": "maid",
+    "identity": "m51",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "pale mint and silver"
+   },
+   {
+    "file": "fig-maid-m51-kc-a36",
+    "role": "maid",
+    "identity": "m51",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "pale mint and silver"
+   },
+   {
+    "file": "fig-maid-m51-kc-a51",
+    "role": "maid",
+    "identity": "m51",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "pale mint and silver"
+   }
+  ]
+ },
+ "kc-m52": {
+  "ref": "huRZlDuvqL",
+  "ref2": "5jVGUrWKxe",
+  "pal": "pink lilac and gold",
+  "figs": [
+   {
+    "file": "fig-maid-m52-kc-a26",
+    "role": "maid",
+    "identity": "m52",
+    "tier": "kc",
+    "ageBand": "a26",
+    "palette": "pink lilac and gold"
+   },
+   {
+    "file": "fig-maid-m52-kc-a36",
+    "role": "maid",
+    "identity": "m52",
+    "tier": "kc",
+    "ageBand": "a36",
+    "palette": "pink lilac and gold"
+   },
+   {
+    "file": "fig-maid-m52-kc-a51",
+    "role": "maid",
+    "identity": "m52",
+    "tier": "kc",
+    "ageBand": "a51",
+    "palette": "pink lilac and gold"
+   }
+  ]
+ }
+}

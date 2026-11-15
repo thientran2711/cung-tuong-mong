@@ -38,7 +38,12 @@ KCIX/CTIX loaders, KIDBANDS, TM96V + `m.role=V.up`, pid tier mapping). Each miss
 | Kids princess f01-f24: adult bands | 24 | - | a26/a36/a51 | 72 | 0 | **72** | grown children in long games | child bands [4, 9, 14, 20] drawn; 17+ shows the 20 art for life |
 | **Total** | | | | 8872 | 7784 | **1088** | | |
 
-## Summary
+## Progress (live)
+
+- Batch 1: công tử congtu-1..10 a36+a51 (20) DONE. Batch 2: quý nữ kc consort c01-c10 a26/a36/a51 (30) DONE. Mamas: solved in code (jartc.js), no art.
+- Audit after batch 2: 1038 missing (mama 128 now handled by code; HOLD 184 = player looks 128 + tm96 men 56).
+
+## Summary (at start)
 
 | Group | Sets | Figures to draw |
 |---|---|---:|
