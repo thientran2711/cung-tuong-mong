@@ -1,0 +1,10 @@
+name = "ctm-img"
+main = "src/index.js"
+compatibility_date = "2025-06-01"
+account_id = "7fc1b88a522c6a91b40051536fa02cae"
+workers_dev = true
+preview_urls = false
+
+[[r2_buckets]]
+binding = "IMG"
+bucket_name = "ctm-img"

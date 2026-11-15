@@ -3,5 +3,6 @@ dev/build/all.js
 __pycache__/
 __pycache__/
 dev/site/.assets-cache.json
-img/pet-*.webp
-img/pet512/
+# pictures live on Cloudflare R2 (dev/art/CDN.md): keep local copies here, push with dev/site/cdn_sync.py, never commit
+/img/
+dev/site/.cdn-state.json

@@ -26,3 +26,17 @@ Base origin/main 574f560 + merge origin/review/page-curl (owner rule: shots on t
   main (iPad 1180): sw.js của origin/main → mở lại 1 lần → bản mới (3.3 s, 1 lần điều hướng); STALE=1 (index cũ từ bộ nhớ đệm):
   trang cũ tự mở lại bản mới (2 lần điều hướng, 7 s); ctm-<ts> cũ chuyển sang ctm-assets, sổ y nguyên, nạp được; 0 lỗi.
 - Còn: kiểm duyệt kit §35 + §35.2.
+## 15/11 — review/update-flow: đang chơi thì không tải lại (sếp 03:10Z "tôi đang chơi game thì làm sao")
+- swreg.js viết lại (KIT §35.2 mới): bỏ thẻ 3 giây tự mở. Đang chơi chỉ có chip "Có bản mới" trên thanh trên (cạnh phẩm / tuổi, không che gì);
+  chạm → thẻ kit "Mở bản mới ngay?" Để sau / Mở bản mới. Tự mở ở chỗ ngắt: sau Qua buổi/Qua đêm (buổi mới đã ghi, hộp thoại đã đọc, chưa tiêu
+  khắc nào), mở lại từ nền sau ≥ 10 phút, màn đầu / màn tải. save() → localStorage "ctm-upd-resume" {slot} → tải → tự "Tiếp tục" đúng sổ
+  (cùng buổi, khắc, tab, hộp thoại trong hàng) + dòng "Đã mở bản mới" 4,5 s. window.CTM_BUILD = băm dev/index.html + swreg.js (build_site.sh).
+- Chơi cùng bạn: báo bản qua act relay sẵn có ({t:"act",k:"ctm-upd",mode,v}; khách cũ bỏ qua act không phải mời → KHÔNG đổi Worker, không
+  deploy). Bên nào thấy bản mới → cả hai có chip; cả hai qua buổi (điểm đồng bộ của phòng) → cùng mở; chip → Mở bản mới → bạn được hỏi
+  "Cùng mở / Để sau". Trước khi tải: COOPW.snap() giữ tuần đang chơi; sau khi tải: nút "Trở lại phòng" của sảnh tự vào lại (cùng mã, cùng ghế),
+  COOPW.restore() trả tuần về. Khác bản: COOPW.hold khóa Qua buổi, bên cũ tự mở bản mới ngay (jcoopworld.js: frozen() xét CW.hold; snap/restore).
+- Thử: dev/test/sw-overlays.sh (A/B/main) + sw-serve.js + sw-update.js play (Fold 755) · away (iPad 1180) · main · coop (Worker sống).
+  "0 mất": sổ trước khi tải == sổ sau khi tải, trừ 2 trường "Tiếp tục" của game vốn dựng lại mỗi lần nạp (S.visit.tk, R[].rl — đối chứng: nạp
+  lại không có bản mới cũng đổi y vậy).
+- Kết quả (gộp lên origin/main 312b6b40a, Worker sống): play 24/24 · away 10/10 · main 5/5 · coop 25/25; 0 lỗi trang, 0 tràn ngang.
+  Ảnh + JSON: dev/shots/update-flow/. Qua buổi: đợi buổi mới yên 2 nhịp (móc trễ của buổi đã chạy, sổ đã ghi) rồi mới mở bản mới.

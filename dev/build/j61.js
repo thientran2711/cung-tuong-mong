@@ -100,7 +100,9 @@ function k61Dis(b){if(!b||!/^<button/.test(b)||/data-(see|scout|visit|k61|pct|pg
  if(/<span class="kwhy">/.test(h))h=h.replace(/<span class="kwhy">[\s\S]*?<\/span>/,`<span class="kwhy">${K61WHY}</span>`);else if(/<small>/.test(h))h=h.replace("<small>",`<small><span class="kwhy">${K61WHY}</span> `);else h=h.replace(/<\/button>$/,`<small><span class="kwhy">${K61WHY}</span></small></button>`);return h}
 function k61AskBtn(e){const k=kOf61(e);const o=od(45+(S.mat||0)*8+((S.maid&&S.maid.loyal)||40)/5);
  return pbtn(`data-k61="ask" data-kk="${k}"`,"Hỏi người hầu: đó là ai?",`${word(o)} · tốn: 1 khắc · thành: biết người này là ai (lời thật) · hỏng: người hầu cũng không biết`,whyTime(1))}
-function k61StChip(st){return chip(`${K61STN[st]} · ${st}/3`,st>=3?"ok":"")}
+/* owner 11/15 08:00Z: no "3/3" — a plain level word, tap = what raises it and what it opens (KIT_GLOSS "Quen biết", jhc) */
+const K61STW=["Người lạ","Mới thấy mặt","Biết tên","Đã quen"];
+function k61StChip(st){const w=K61STW[st]||K61STN[st];return chip(typeof kitGloss==="function"?kitGloss("Quen biết",w):w,st>=3?"ok":"")}
 (function(){const c0=pcard;pcard=function(o){try{const e=o&&k61PortEnt(o.f);const st=e?k61St(e):3;if(e&&!k61Named(e)){const pop=!!o.close;
   const G=(o.groups||[]).filter(g=>g&&g[1]).map(([hd,B])=>[hd,B.filter(b=>b&&/^<button/.test(String(b))).map(b=>pop?b:k61Dis(String(b)))]).filter(g=>g[1].length);
   if(!pop)G.unshift(["Làm quen",[k61AskBtn(e)]]);
