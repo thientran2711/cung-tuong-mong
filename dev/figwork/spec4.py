@@ -40,7 +40,7 @@ for k,(cid,tr,mt) in enumerate(CONS):
 json.dump(J,open('jobs.json','w'),indent=0)
 print(J['N-c01-t1']['prompt']); print(); print(J['N-c02-t1']['prompt'][-700:])
 # players
-LOOKF={"look1":"elegant oval face with defined cheekbones, almond eyes, straight dark brows, small straight nose, a tiny beauty mark under her left eye",
+LOOKF={"look1":"elegant oval face with defined cheekbones, almond eyes, straight dark brows, small straight nose, long soft lashes",
 "look2":"heart-shaped face, round gentle eyes, softly arched brows, full rosy lips, a soft side-swept fringe on the right",
 "look3":"slender long face, large soft almond eyes, high cheekbones, fine thin brows, hair parted in the centre",
 "look4":"graceful softly rounded oval face, clear bright eyes, gentle straight brows, a light wispy fringe, a small red huadian mark between her brows"}

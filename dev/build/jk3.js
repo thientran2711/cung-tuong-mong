@@ -80,7 +80,8 @@ if(typeof renderStage==="function"){const r1=renderStage;renderStage=function(){
 function k3Gut(){const st=$$("stage");if(!st)return;const W=st.clientWidth;if(!W)return;
  const g=Math.round(Math.max(W<520?96:116,Math.min(190,W*.2)));st.classList.toggle("k3n",g<116);const L=$$("kshL"),R=$$("kshR");
  st.style.setProperty("--kgw",g+"px");st.style.setProperty("--k3stw",W+"px");
- const need=el=>el&&!el.hidden?Math.ceil(el.getBoundingClientRect().width)+10:0;
+ /* KIT 33: an EMPTY plaque column (no plaques, zero height) reserves no gutter — the floor belongs to the people */
+ const need=el=>{if(!el||el.hidden)return 0;const q=el.getBoundingClientRect();return q.height>2?Math.ceil(q.width)+10:0};
  const gl=Math.max(need(L),0),gr=Math.max(need(R),0);const ol=st.style.getPropertyValue("--kgl"),or=st.style.getPropertyValue("--kgr");
  st.style.setProperty("--kgl",gl+"px");st.style.setProperty("--kgr",gr+"px");
  if((ol!==gl+"px"||or!==gr+"px")&&typeof window.j59lay==="function"){try{window.j59lay()}catch(e){}}}
@@ -145,6 +146,8 @@ html body .stage.k3g.k3n #sc-t h2{font-size:.86rem}
 .ksh{display:flex;flex-direction:column;gap:5px;pointer-events:none;min-width:0}
 .ksh[hidden]{display:none!important}
 .kshR{position:absolute;top:8px;right:8px;width:max-content;min-width:var(--kgw,150px);max-width:46%;z-index:2;align-items:stretch}
+/* owner 11/15: people may stand under the right column — its plaques float on top on a SOLID card */
+.kshR .k3p,.kshR .k3c{background:rgb(255,250,240)!important;backdrop-filter:none}
 .ksh .k3p,.ksh .k3c{pointer-events:auto;background:var(--k3pl);border:1px solid var(--line);border-radius:8px;box-shadow:0 1px 4px #3a20101f;backdrop-filter:blur(2px)}
 .ksh .k3p{display:flex;flex-direction:column;padding:3px 6px;gap:0}
 .ksh .k3h{font-family:var(--display);font-size:.7rem;color:var(--gold);letter-spacing:.03em;border-bottom:1px solid var(--k-hair,#e6d3ac);margin-bottom:1px}
@@ -228,8 +231,12 @@ html body .stage #sc-t h2,html body .stage #sc-t h2 *{white-space:nowrap!importa
 html body .stage.k3g #sc-t{width:max-content!important;max-width:calc(var(--k3stw,100vw) - var(--kgr,0px) - 24px)!important}
 html body .stage.k3g #sc-t h2{white-space:normal!important}html body .stage.k3g #sc-t h2>*:not(:first-child),html body .stage.k3g #sc-t h2>*:not(:first-child) *{white-space:normal!important}
 html body .stage .tok .tag,html body .stage #j59metag .tag{background:none!important;border:0!important;box-shadow:none!important;padding:0!important;white-space:nowrap!important;color:#2a1a12!important;font-weight:600;text-shadow:0 0 2px #fff8ee,0 0 5px #fff8ee,0 0 9px #fff8eecc}
-html body .stage .tok .tag .j59t,html body .stage #j59metag .tag .j59t{display:inline!important;background:none!important;box-shadow:none!important;padding:0!important;margin:0 .35em 0 0!important;color:#7a5530!important;font-size:inherit!important;font-weight:500}
-html body .stage .tok .tag .j59n,html body .stage #j59metag .tag .j59n{display:inline!important}
+/* KIT 33.5 STAGE NAME CHIP (owner 11/15 iPad): TWO lines — rank / role on top (small), name below (bigger); both tinted by the person's
+   rank colour (--tc from j59col = the kit rank palette RCOL / maid MRCOL / eunuch ERCOL / Emperor gold / Thái hậu amber), darkened for legibility */
+html body .stage .tok .tag,html body .stage #j59metag .tag{text-align:center!important}
+html body .stage .tok .tag .j59t,html body .stage #j59metag .tag .j59t{display:block!important;background:none!important;box-shadow:none!important;padding:0!important;margin:0 0 1px!important;font-size:.74rem!important;line-height:1.1!important;font-weight:600;letter-spacing:.02em;color:color-mix(in srgb,var(--tc,#7a5530) 75%,#2a1a12)!important}
+html body .stage .tok .tag .j59n,html body .stage #j59metag .tag .j59n{display:block!important;margin:0!important;font-size:1rem!important;line-height:1.2!important;font-weight:700;color:color-mix(in srgb,var(--tc,#2a1a12) 45%,#2a1a12)!important}
+html body .stage .tok .tag .j59t.j59only,html body .stage #j59metag .tag .j59t.j59only{font-size:1rem!important;font-weight:700}
 /* NON-PERSON PICTURES: kitArtFrame = kitSceneArt (jk2b; simple gold line, no tassel, KIT 31.10); act slot 170 px wide (128 px on phones), 3:4 */
 :root{--kaw:170px}#panel.k3pn .cards{--kaw:128px}
 html body button.ka.kcard.kart{min-height:0!important}

@@ -6,6 +6,6 @@ for c in sys.argv[2:]:
     f=p[p.index('Her own features: ')+18:p.index('. From the identity')]
     o=p[p.index('a NEW outfit, ')+14:p.index('. Poses (NEW')]
     m=re.search(r'(?:borders of|phoenixes and) (.+?) (?:at collar|on|,)',o); col=o[o.index('family ')+7:] if 'family ' in o else o
-    po=p[p.index('left to right: about 19, lively and youthful: ')+46:p.index('; dynamic graceful motion')]
+    po=p[p.index('left to right: about 19, youthful, a gently lively gesture: ')+60:p.index('; all four standing still')]
     po=re.sub(r'; about \d\d, [^:]+: ',' || ',po)
     print(f"{c}|{j['style']}|{rid}|{f}|{m.group(1) if m else '-'}|{col}|{po}")

@@ -5,7 +5,7 @@
                              a changed file gets a new key (only it downloads), a removed/changed file's old key is pruned on activate.
    Filling ASSETS with progress is the page's job (dev/build/jload.js); this worker only serves it and caches what the game asks for.
    Only same-origin GETs are handled: the co-op worker (ctm-coop…workers.dev, fetch + WebSocket) and any other origin go straight to the network. */
-const V='e7ef9de853fa';
+const V='799c8a18204d';
 const SHELL='ctm-shell-'+V, ASSETS='ctm-assets';
 const PRE=["index.html","assets.json","audio/MANIFEST.json","audio/VOICES.json","img/ACTS.json","img/EVENTS.json","img/FIGURES-kids.json","img/FIGURES-others.json","img/FIGURES-servants.json","img/FIGURES.json","img/INFO.json","img/MANIFEST.json","img/map-hotspots.json","img/scar-fit.json","img/veil-fit.json","manifest.webmanifest"];
 let MAN=null;

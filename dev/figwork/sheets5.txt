@@ -204,3 +204,477 @@ N-c32-t4 bxTZj9D5Y2 v5
 N-c01-t4 gOIVyWySXO v5
 N-c07-t4 8aNSfsuIrU v5
 N-c28-t4 XmPshxWBfo v5
+N-c01-t5 gOIV99KSXO v5
+N-c02-t5 gOIV9oZSXO v5
+N-c03-t5 MBw1tUIDCm v5
+N-c04-t5 SytMNI5Ub8 v5
+N-c05-t5 xSdYJdpjfW v5
+N-c06-t5 MBw1t7mDCm v5
+N-c07-t5 xSdYJXxjfW v5
+N-c08-t5 huRJq2BvqL v5
+N-c09-t5 s7o04HPl8e v5
+N-c10-t5 xSdYOufjfW v5
+N-c11-t5 iGqhcwH3uK v5
+N-c12-t5 ksDGwER16B v5
+N-c13-t5 ov9guVw829 v5
+N-c14-t5 ov9guM7829 v5
+N-c15-t5 SytM6x4Ub8 v5
+N-c16-t5 SytM6jOUb8 v5
+# (motion t5 c01-c16 above discarded: owner reversal -> calm standing poses, v6)
+N-c01-t5 yiCBzaoPW9 v6
+N-c02-t5 huRJK3MvqL v6
+N-c03-t5 xSdYPdKjfW v6
+N-c04-t5 6AHm0qLiJO v6
+N-c05-t5 SytM3hFUb8 v6
+N-c06-t5 3zbvVkEREY v6
+N-c07-t5 KLMA7dPkqp v6
+N-c08-t5 VXUkhOiMMU v6
+N-c09-t5 jUXW9qYLD0 v6
+N-c10-t5 SytMRrJUb8 v6
+N-c11-t5 4Ru8WUK9Aa v6
+N-c12-t5 5jV27u4Kxe v6
+N-c13-t5 cplbtGM0eP v6
+N-c14-t5 xSdY45ujfW v6
+N-c15-t5 JNadGSIOq4 v6
+N-c16-t5 79veASvJAL v6
+N-c17-t5 N2FtV5q6D9 v6
+N-c18-t5 JNadnQGOq4 v6
+N-c19-t5 ksDGPBk16B v6
+N-c20-t5 9ZQITK5NYZ v6
+N-c21-t5 p8Jxu6xehw v6
+N-c22-t5 JNadnqYOq4 v6
+N-c23-t5 MBw1C6vDCm v6
+N-c24-t5 eIOjQZtdqL v6
+N-c25-t5 4Ru8T4x9Aa v6
+N-c26-t5 w4hpnJB7EI v6
+N-c27-t5 dtyLqoxXSL v6
+N-c28-t5 yiCB0NlPW9 v6
+N-c29-t5 yiCB06gPW9 v6
+N-c30-t5 dtyLqmlXSL v6
+N-c31-t5 dtyLqhgXSL v6
+N-c32-t5 ksDG9SG16B v6
+N-c28-t5 LwBcZAbswO v6b (redo: first came out cream/gold, celadon lost; yiCB0NlPW9 rejected)
+N-c30-t5 79veWTlJAL v6b (redo: first came out ivory/gold, blue lost; dtyLqmlXSL rejected)
+N-c01-t6 bxTZ4N25Y2 v6
+N-c02-t6 nVjFvCkYQD v6
+N-c03-t6 nVjFvE1YQD v6
+N-c04-t6 jUXWZnHLD0 v6
+N-c05-t6 aF2ygyqfSh v6
+N-c06-t6 TdSKuKRVNR v6
+N-c07-t6 LwBc20xswO v6
+N-c08-t6 s7o0Aeyl8e v6
+N-c09-t6 cplbQmm0eP v6
+N-c10-t6 gOIVWZuSXO v6
+N-c11-t6 jUXWGitLD0 v6
+N-c12-t6 TdSKHCwVNR v6
+N-c13-t6 rgen2idxtc v6
+N-c14-t6 SytMcnWUb8 v6
+N-c15-t6 N2FtBdW6D9 v6
+N-c16-t6 9ZQIXdcNYZ v6
+N-c17-t6 SytMMcAUb8 v6
+N-c18-t6 VXUkkbCMMU v6
+N-c19-t6 huRJJwwvqL v6
+N-c20-t6 lJ8TT03gv9 v6
+N-c21-t6 fHAPPY6CDY v6
+N-c22-t6 3zbvvxBREY v6
+N-c23-t6 w4hppQJ7EI v6
+N-c24-t6 5jV22BuKxe v6
+N-c17-t6 SytMMcAUb8 REJECT cream/gold, pink lost
+N-c20-t6 lJ8TT03gv9 REJECT cream/gold, pink lost
+N-c17-t6 Do7rjrjpcl v6c (strong colour clause)
+N-c20-t6 9ZQImtcNYZ v6c (strong colour clause)
+N-c25-t6 VXUkrrQMMU v6
+N-c26-t6 LwBcTVqswO v6
+N-c27-t6 iGqhaC93uK v6
+N-c28-t6 TdSK1jNVNR v6c (strong colour clause)
+N-c29-t6 0eg5kiwTfW v6
+N-c30-t6 lJ8TMqIgv9 v6c (strong colour clause)
+N-c31-t6 1lpzYEnr4r v6c (strong colour clause)
+N-c32-t6 lJ8TM55gv9 v6c (strong colour clause)
+N-c01-t7 4Ru8aMs9Aa REJECT v7a: SMALL crown, looked poorer than t6 (ladder)
+N-c02-t7 gOIVXzsSXO REJECT v7a: SMALL crown, looked poorer than t6 (ladder)
+N-c03-t7 lJ8Tdn7gv9 REJECT v7a: SMALL crown, looked poorer than t6 (ladder)
+N-c04-t7 SytMBcZUb8 REJECT v7a: SMALL crown, looked poorer than t6 (ladder)
+N-c05-t7 LwBcp8hswO REJECT v7a: SMALL crown, looked poorer than t6 (ladder)
+N-c06-t7 lJ8TdmYgv9 REJECT v7a: SMALL crown, looked poorer than t6 (ladder)
+N-c07-t7 u5nN20zQLD REJECT v7a: SMALL crown, looked poorer than t6 (ladder)
+N-c08-t7 rgenV8Extc REJECT v7a: SMALL crown, looked poorer than t6 (ladder)
+N-c01-t7 jUXWe13LD0 v7b (LARGE crown + cape)
+N-c02-t7 5jV20qkKxe v7b (LARGE crown + cape)
+N-c03-t7 UPmDm9awny v7b
+N-c04-t7 rgenewMxtc v7b
+N-c05-t7 p8JxJhUehw v7b
+N-c06-t7 XmPsPEfBfo v7b
+N-c07-t7 lJ8T867gv9 v7b
+N-c08-t7 6AHmH09iJO v7b
+N-c09-t7 UPmDmERwny v7b
+N-c10-t7 yiCBC5nPW9 v7b
+N-c11-t7 N2FtFxB6D9 v7b
+N-c12-t7 N2FtFjo6D9 v7b
+N-c13-t7 0eg5SuVTfW v7b
+N-c14-t7 9ZQIFePNYZ v7b
+N-c15-t7 KLMAD3Vkqp v7b
+N-c16-t7 79veaMCJAL v7b
+N-c30-t4 ksDG8OJ16B v6t4 (calm redraw, opaque; coordinator smudge bug)
+N-c25-t4 JNadHzTOq4 v6t4 (calm redraw, opaque; sheer sash)
+N-c17-t7 ov9gnBo829 v7c art5 (a48 dark hair, opaque)
+N-c18-t7 bxTZIbD5Y2 v7c art5
+N-c19-t7 SytMqNEUb8 v7c art5
+N-c20-t7 Bh4lnE3oQR v7c art5
+N-c21-t7 YMLH9MUWeC v7c art5
+N-c22-t7 tCiwTE7mZJ v7c art5
+N-c23-t7 O6fXr3Lynm v7c art5
+N-c24-t7 yiCBx2oPW9 v7c art5
+N-c25-t7 Ebz9BXruuO v7c art5
+N-c26-t7 lJ8TqqMgv9 v7c art5
+N-c27-t7 MBw12A6DCm v7c art5
+N-c28-t7 8aNS0VeIrU v7c art5
+N-c30-t7 9ZQISpkNYZ v7c art5
+N-c31-t7 LwBcqzGswO v7c art5
+N-c32-t7 jUXWHzWLD0 v7c art5
+N-c29-t7 rgenQ80xtc v7c art5
+N-c20-t7 1lpzFntr4r v7d art5 (dark-hair test)
+N-c30-t7 nVjFRSIYQD v7e hair-edit of 9ZQISpkNYZ
+N-c02-t7 TdSKnyrVNR v7e hair-edit
+N-c03-t7 mE37BnWhJQ v7e hair-edit
+N-c05-t7 MBw1W6gDCm v7e hair-edit
+N-c06-t7 TdSKnNsVNR v7e hair-edit
+N-c07-t7 huRJoTjvqL v7e hair-edit
+N-c09-t7 XmPsMzsBfo v7e hair-edit
+N-c10-t7 xSdY5uWjfW v7e hair-edit
+N-c11-t7 xSdY5FljfW v7e hair-edit
+N-c12-t7 8aNSdbFIrU v7e hair-edit
+N-c13-t7 LwBc16KswO v7e hair-edit
+N-c14-t7 aF2ytLUfSh v7e hair-edit
+N-c15-t7 s7o0rZZl8e v7e hair-edit
+N-c16-t7 u5nNa78QLD v7e hair-edit
+N-c17-t7 s7o0rG1l8e v7e hair-edit
+N-c18-t7 5jV2FRjKxe v7e hair-edit
+N-c21-t7 3zbv9hFREY v7e hair-edit
+N-c22-t7 YMLHGkGWeC v7e hair-edit
+N-c23-t7 9ZQIyflNYZ v7e hair-edit
+N-c25-t7 mE378NNhJQ v7e hair-edit
+N-c26-t7 8aNSX4JIrU v7e hair-edit
+N-c27-t7 O6fXwaZynm v7e hair-edit
+N-c28-t7 Bh4lePDoQR v7e hair-edit
+N-c31-t7 6AHm4H6iJO v7e hair-edit
+N-c32-t7 fHAPhGmCDY v7e hair-edit
+N-c29-t7 cpl5psZ0eP v7e hair-edit
+N-c18-t7 YMLqMLZWeC v7f hair-edit2 of 5jV2FRjKxe
+N-c01-t8 iGqvzwk3uK v8a art5 trial
+N-c01-t8 w4he3Ez7EI v8b art5
+N-c02-t8 O6fB2b6ynm v8b art5
+N-c03-t8 JNaXZbDOq4 v8b art5
+N-c04-t8 vQZy5T3a47 v8b art5
+N-c05-t8 8aNUqhzIrU v8b art6
+N-c06-t8 EbzNLsLuuO v8b art6 (props varied a24-a48)
+N-c07-t8 Bh4gFswoQR v8b art6 (a32 plum)
+N-c08-t8 ksDzOGH16B v8b art6
+N-c09-t8 iGqvV9k3uK v8b art6
+N-c10-t8 LwB0NxBswO v8b art6 (a32 vase)
+N-c11-t8 LwB062hswO v8b art6
+N-c12-t8 jUXcN2bLD0 v8b art6 (a48 ruyi)
+N-c13-t8 0egKhPiTfW v8b art6 (a32 hand-warmer)
+N-c14-t8 N2FmTxx6D9 v8b art6 (a32 teacup)
+N-c15-t8 yiCoWmpPW9 v8b art6
+N-c16-t8 XmPlH7cBfo v8b art6 (a32 book)
+N-c17-t8 nVjHI1PYQD v8b art6
+N-c18-t8 5jVAyypKxe v8b art6 (a48 book)
+N-c19-t8 huROxjyvqL v8b art6 (a32 ruyi)
+N-c20-t8 bxT2OPA5Y2 v8b art6 (silk fan, a32 vase)
+N-c18-t8 xSdW6xijfW v8b art6 retry (first 5jVAyypKxe failed 520)
+N-c21-t8 vQZyjY7a47 v8b art6
+N-c22-t8 JNaXYHnOq4 v8b art6 (a32 orchids)
+N-c23-t8 cpl5aTd0eP v8b art6
+N-c24-t8 tCi7rS1mZJ v8b art6 (a48 coral beads)
+N-c25-t8 4RuIVon9Aa v8b art6 (a32 parasol)
+N-c26-t8 ksDz9Ir16B v8b art6
+N-c27-t8 P3E8Tkn42C v8b art6
+N-c28-t8 LwB0ZO0swO v8b art6 (a32 teacup)
+N-c29-t8 jUXcRO8LD0 v8b art6 (a19 guqin cradled)
+N-c30-t8 w4heYBS7EI v8b art6 (a32 teacup, a48 book)
+N-c31-t8 ov9SkOI829 v8b art6 (a32 plum)
+N-c32-t8 UPmpn80wny v8b art6
+N-c26-t8 s7oTGM7l8e hair-edit of ksDz9Ir16B
+N-c31-t8 79vd0oyJAL hair-edit of ov9SkOI829
+N-c13-t8 gOIMndwSXO hair-edit of 0egKhPiTfW
+N-c09-t8 ksDzimg16B hair-edit of iGqvV9k3uK
+N-c17-t8 1lpn3vTr4r hair-edit of nVjHI1PYQD
+N-c18-t8 Bh4g1nGoQR hair-edit of xSdW6xijfW
+N-c19-t8 1lpn3CBr4r hair-edit of huROxjyvqL
+N-c01-tcold P3E8dLz42C vcold art6
+N-c02-tcold gOIMc5hSXO vcold art6
+N-c03-tcold P3E8XC742C vcold art6
+N-c04-tcold w4heMvU7EI vcold art6
+N-c05-tcold dtysx40XSL vcold art6
+N-c06-tcold 79vdDEiJAL vcold art6
+N-c07-tcold u5n63cWQLD vcold art7
+N-c08-tcold SytDeaBUb8 vcold art7
+N-c09-tcold lJ8VDvvgv9 vcold art7
+N-c10-tcold 1lpnW82r4r vcold art7
+N-c11-tcold iGqvC2C3uK vcold art7
+N-c12-tcold cpl51DY0eP vcold art7
+N-c13-tcold dtysSmHXSL vcold art7
+N-c14-tcold aF2PNqnfSh vcold art7
+N-c07-tcold ksDzWMv16B mole-edit of u5n63cWQLD art7
+N-c09-tcold Do7xs7Jpcl mole-edit of lJ8VDvvgv9 art7
+HD-c03-n1 rgeYeyixtc huadian sample t1-t2 (edit of uploaded c03 t1 a18 head 1lpnpLXr4r)
+HD-c03-n2 If6w6brtvE huadian sample t3-t4
+HD-c03-n3 LwB0B6iswO huadian sample t5-t6
+HD-c03-n4 cpl5lhV0eP huadian sample t7-t8
+N-c15-tcold nVjHLJsYQD vcold art7
+N-c16-tcold p8JjOZhehw vcold art7
+N-c17-tcold Do7xJZ9pcl vcold art7
+N-c18-tcold vQZy2pKa47 vcold art7
+N-c19-tcold LwB0oHHswO vcold art7
+N-c20-tcold w4hevjO7EI vcold art7
+N-c03-tcold SytDh0PUb8 huadian-removal edit of P3E8XC742C art7
+N-c21-tcold rgeYoMqxtc vcold art7
+N-c22-tcold 0egK7lhTfW vcold art7
+N-c23-tcold O6fBQf8ynm vcold art7
+N-c24-tcold 3zba1K2REY vcold art7
+N-c25-tcold 4RuIqH69Aa vcold art7
+N-c26-tcold gOIMvv6SXO vcold art7
+N-c27-tcold fHA4cNFCDY vcold art7
+N-c28-tcold 6AHh1fWiJO vcold art7
+N-c29-tcold YMLqwk8WeC vcold art7
+N-c30-tcold 6AHh1E0iJO vcold art7
+N-c31-tcold YMLqwrtWeC vcold art7
+N-c32-tcold LwB0hdaswO vcold art7
+N-c22-tcold rgeYIk6xtc hair-edit of 0egK7lhTfW art7
+N-c18-tcold MBwr4VpDCm hair-edit of vQZy2pKa47 art7
+N-c26-tcold w4heuwP7EI hair-edit of gOIMvv6SXO art7
+N-c16-tcold 1lpnIj0r4r hair-edit of p8JjOZhehw art7
+HD8-c03-t1 JNaXHE5Oq4
+HD8-c03-t2 dtys3NPXSL
+HD8-c03-t3 w4heQEH7EI
+HD8-c03-t4 jUXchm5LD0
+HD8-c03-t5 Bh4gZ2koQR
+HD8-c03-t6 lJ8VfEAgv9
+HD8-c03-t7 lJ8VfuGgv9
+HD8-c03-t8 9ZQtkjpNYZ
+HD8-c03-t4 aF2P0ZofSh (redo: thin gold hairline)
+HD8-c03-t5 Bh4g29uoQR (redo: gold dominant)
+HD8-c03-t7 LwB0a8DswO (redo: compact filigree)
+HD8-c03-t8 s7oTftTl8e (redo: compact phoenix ~1.4x)
+HD8v2-c03 painterly redo t1..t8: WDsbPVrcXe xSdWagqjfW SytDFPEUb8 XmPlAvpBfo LwB0COLswO LwB0C4gswO rgeYvyWxtc rgeYvPcxtc; t3 redo YMLqyZrWeC, t8 redo Do7x3c4pcl
+N-c28-tcold rgeYa26xtc hair-edit of 6AHh1fWiJO art7
+HD8 FINAL c03 t1..t8: WDsbPVrcXe xSdWagqjfW SytDFPEUb8 XmPlAvpBfo LwB0COLswO LwB0C4gswO rgeYvyWxtc Do7x3c4pcl
+HD8v3 c03: t2 lines xSdWELCjfW, t5 gold+dark edge jUXcugyLD0, t7 red enamel+deep gold 3zbaUG8REY
+HD8v4 c03: t7 ksDzaEm16B, t8 p8JjA0Iehw
+HD8v5 c03 t8 tiny Do7xA3xpcl
+HD8 FINAL v6 c03 t1..t8: WDsbPVrcXe xSdWELCjfW SytDFPEUb8 XmPlAvpBfo jUXcugyLD0 LwB0C4gswO ksDzaEm16B 8aNUV51IrU (all gpt-2-6 edits of uploaded c03 t1 head 1lpnpLXr4r)
+HD8 FINAL (owner kept t1-t7 of 84a0b5e) t8 slender flat phoenix jUXcb0VLD0 (alt rgeYHWextc); rejected flat-big fHA4ocqCDY huROdnxvqL; v5 t5-t7 redo eIOLWykdqL 1lpnQdbr4r EbzNIWCuuO cancelled
+HD9 c03 owner 11/14: t8 85% Bh4gdXkoQR (edit of jUXcb0VLD0), t7 flat u5n6CuRQLD (edit of ksDzaEm16B), t6 compact ksDzKrd16B (edit of LwB0C4gswO)
+HD9 FINAL c03 t1..t8 (owner 11/14 later: t8 85%, t7 flat redo, t6 compact pearl): WDsbPVrcXe xSdWELCjfW SytDFPEUb8 XmPlAvpBfo jUXcugyLD0 ksDzKrd16B lJ8MSRegv9 Bh4gdXkoQR
+N-c01-t4 rgeWPCdxtc art8 calm+props
+N-c07-t4 Bh4SFWDoQR art8 calm+props
+N-c19-t4 dtyluWbXSL art8 calm+props
+N-c20-t4 1lpYyQhr4r art8 calm+props
+N-c21-t4 P3EIcW142C art8 calm+props
+N-c22-t4 O6foYWaynm art8 calm+props
+N-c23-t4 rgeW9ivxtc art8 calm+props
+N-c24-t4 fHA9LUJCDY art8 calm+props
+N-c26-t4 Bh4SqrsoQR art8 calm+props
+N-c27-t4 LwBTiK3swO art8 calm+props
+N-c28-t4 CqGNsmVEEy art8 calm+props
+N-c29-t4 cplKhnp0eP art8 calm+props (guqin cradled)
+N-c31-t4 If67KogtvE art8 calm+props
+N-c32-t4 79vXzwfJAL art8 calm+props
+HAIR-EDIT t4 art8: N-c20-t4 vQZPSEWa47 hair-edit of 1lpYyQhr4r; N-c07-t4 ksDn3sn16B hair-edit of Bh4SFWDoQR; N-c32-t4 TdS1FXxVNR hair-edit of 79vXzwfJAL; N-c23-t4 vQZPSHVa47 mole-edit of rgeW9ivxtc
+EDIT t4 art8: N-c16-t4 Do7jbjypcl eyes-open edit of 5jV2kEzKxe; N-c04-t4 1lpYRc4r4r mole/hair edit of Ebz4Cc8uuO
+N-c01-t6 gOIDIqTSXO art8 saturated+props
+N-c02-t6 5jVGVvEKxe art8 saturated+props
+N-c03-t6 xSdcdFQjfW art8 saturated+props
+N-c04-t6 xSdcdqWjfW art8 saturated+props
+N-c05-t6 s7oV8p5l8e art8 saturated+props
+N-c06-t6 dtylPO9XSL art8 saturated+props
+N-c07-t6 gOIDttiSXO art8 saturated+props
+N-c08-t6 cplKgSq0eP art8 saturated+props
+N-c09-t6 cplKSfD0eP art8 saturated+props
+N-c10-t6 s7oVIAil8e art8 saturated+props
+N-c11-t6 JNaBCTmOq4 art8 saturated+props
+N-c12-t6 SytphcPUb8 art8 saturated+props
+N-c13-t6 JNaBCUROq4 art8 saturated+props
+N-c14-t6 u5niWCoQLD art8 saturated+props
+N-c15-t6 79vXf7nJAL art8 saturated+props
+N-c16-t6 P3EIFNG42C art8 saturated+props
+N-c01-t5 CqGNDfgEEy hair/mole/huadian edit of yiCBzaoPW9 art8
+N-c02-t5 dtylGumXSL hair/mole/huadian edit of huRJK3MvqL art8
+N-c03-t5 8aNwWbLIrU hair/mole/huadian edit of xSdYPdKjfW art8
+N-c04-t5 UPmebAhwny hair/mole/huadian edit of 6AHm0qLiJO art8
+N-c05-t5 UPmebGvwny hair/mole/huadian edit of SytM3hFUb8 art8
+N-c06-t5 iGqagda3uK hair/mole/huadian edit of 3zbvVkEREY art8
+N-c07-t5 rgeWfR9xtc hair/mole/huadian edit of KLMA7dPkqp art8
+N-c08-t5 MBwxR5qDCm hair/mole/huadian edit of VXUkhOiMMU art8
+N-c09-t5 mE3OTwRhJQ hair/mole/huadian edit of jUXW9qYLD0 art8
+N-c10-t5 Bh4SnY1oQR hair/mole/huadian edit of SytMRrJUb8 art8
+N-c11-t5 eIOsAzNdqL hair/mole/huadian edit of 4Ru8WUK9Aa art8
+N-c12-t5 rgeWfQgxtc hair/mole/huadian edit of 5jV27u4Kxe art8
+N-c13-t5 gOIDHkASXO hair/mole/huadian edit of cplbtGM0eP art8
+N-c14-t5 SytpqrpUb8 hair/mole/huadian edit of xSdY45ujfW art8
+N-c15-t5 Bh4SnpSoQR hair/mole/huadian edit of JNadGSIOq4 art8
+N-c16-t5 SytpqsBUb8 hair/mole/huadian edit of 79veASvJAL art8
+N-c17-t5 XmPgzdzBfo hair/mole/huadian edit of N2FtV5q6D9 art8
+N-c18-t5 jUX0uAALD0 hair/mole/huadian edit of JNadnQGOq4 art8
+N-c19-t5 0egkiFGTfW hair/mole/huadian edit of ksDGPBk16B art8
+N-c20-t5 P3EIjBd42C hair/mole/huadian edit of 9ZQITK5NYZ art8
+N-c21-t5 gOIDqDBSXO hair/mole/huadian edit of p8Jxu6xehw art8
+N-c22-t5 N2Fhlvy6D9 hair/mole/huadian edit of JNadnqYOq4 art8
+N-c23-t5 3zbfUuUREY hair/mole/huadian edit of MBw1C6vDCm art8
+N-c24-t5 u5niBAsQLD hair/mole/huadian edit of eIOjQZtdqL art8
+N-c25-t5 1lpYfM5r4r hair/mole/huadian edit of 4Ru8T4x9Aa art8
+N-c26-t5 xSdcEq8jfW hair/mole/huadian edit of w4hpnJB7EI art8
+N-c27-t5 9ZQmsJBNYZ hair/mole/huadian edit of dtyLqoxXSL art8
+N-c28-t5 MBwxZVcDCm hair/mole/huadian edit of LwBcZAbswO art8
+N-c29-t5 CqGNXulEEy hair/mole/huadian edit of yiCB06gPW9 art8
+N-c30-t5 UPmeKPMwny hair/mole/huadian edit of 79veWTlJAL art8
+N-c31-t5 aF24eqUfSh hair/mole/huadian edit of dtyLqhgXSL art8
+N-c32-t5 ksDnfUj16B hair/mole/huadian edit of ksDG9SG16B art8
+N-c17-t6 vQZPp5Sa47 hair/mole/huadian edit of Do7rjrjpcl art8
+N-c18-t6 VXUrZgXMMU hair/mole/huadian edit of VXUkkbCMMU art8
+N-c19-t6 6AHvSHYiJO hair/mole/huadian edit of huRJJwwvqL art8
+N-c20-t6 79vX1CHJAL hair/mole/huadian edit of 9ZQImtcNYZ art8
+N-c21-t6 4Ruts5O9Aa hair/mole/huadian edit of fHAPPY6CDY art8
+N-c22-t6 LwBTFapswO hair/mole/huadian edit of 3zbvvxBREY art8
+N-c23-t6 gOIDbuqSXO hair/mole/huadian edit of w4hppQJ7EI art8
+N-c24-t6 jUX0QuELD0 hair/mole/huadian edit of 5jV22BuKxe art8
+N-c25-t6 Bh4SWc1oQR hair/mole/huadian edit of VXUkrrQMMU art8
+N-c26-t6 rgeWuyGxtc hair/mole/huadian edit of LwBcTVqswO art8
+N-c27-t6 eIOsnuBdqL hair/mole/huadian edit of iGqhaC93uK art8
+N-c28-t6 VXUr2fiMMU hair/mole/huadian edit of TdSK1jNVNR art8
+N-c29-t6 yiC8L0fPW9 hair/mole/huadian edit of 0eg5kiwTfW art8
+N-c30-t6 4RutlDC9Aa hair/mole/huadian edit of lJ8TMqIgv9 art8
+N-c31-t6 WDs5iCycXe hair/mole/huadian edit of 1lpzYEnr4r art8
+N-c32-t6 VXUr2qzMMU hair/mole/huadian edit of lJ8TM55gv9 art8
+N-c24-t5 gOIDrdeSXO huadian-shrink edits of u5niBAsQLD (via gOIDkb5SXO); N-c24-t6 huRyB6QvqL huadian-shrink edits of jUX0QuELD0 (via N2FhwUT6D9)
+PILOT N-c01-t1 mE3yQeWhJQ art8 calm+props (NOT published; compare with frozen p8Jr7Q4ehw)
+N-c01-t1 mE3yQeWhJQ art9 publish pilot
+N-c02-t1 O6f8G8Lynm art9 calm+props
+N-c03-t1 79vB28AJAL art9 calm+props
+N-c04-t1 YML5o1yWeC art9 calm+props
+N-c05-t1 5jVzw0kKxe art9 calm+props
+N-c06-t1 Bh4UQPZoQR art9 calm+props
+N-c07-t1 lJ8D681gv9 art9 calm+props
+N-c08-t1 KLMn7p4kqp art9 calm+props
+N-c09-t1 xSd0P8sjfW art9 calm+props
+N-c10-t1 gOIp388SXO art9 calm+props
+N-c11-t1 XmPSQPdBfo art9 calm+props
+N-c12-t1 5jVz7DxKxe art9 calm+props
+N-c13-t1 SyteRv1Ub8 art9 calm+props
+N-c14-t1 JNaoGQcOq4 art9 calm+props
+N-c15-t1 SyteRCkUb8 art9 calm+props
+N-c16-t1 jUXT9vZLD0 art9 calm+props
+N-c17-t1 huRPkchvqL art9 calm+props
+N-c18-t1 CqG6gLuEEy art9 calm+props
+N-c19-t1 N2FvDVT6D9 art9 calm+props
+N-c20-t1 LwBVR38swO art9 calm+props
+N-c21-t1 bxTGyyA5Y2 art9 calm+props
+N-c22-t1 xSd0i3XjfW art9 calm+props
+N-c23-t1 UPmdzWRwny art9 calm+props
+N-c24-t1 JNaoWVgOq4 art9 calm+props
+N-c25-t1 w4hXnVL7EI art9 calm+props
+N-c26-t1 s7oMGpCl8e art9 calm+props
+N-c27-t1 xSd0ZDGjfW art9 calm+props
+N-c28-t1 xSd0ZenjfW art9 calm+props
+N-c29-t1 1lpW3eWr4r art9 calm+props
+N-c30-t1 s7oMGIbl8e art9 calm+props
+N-c31-t1 79vB0EGJAL art9 calm+props
+N-c32-t1 lJ8Dzv5gv9 art9 calm+props
+N-c01-t2 p8Jsxa2ehw art9 calm+props
+N-c02-t2 6AHamTciJO art9 calm+props
+N-c03-t2 s7oM0iQl8e art9 calm+props
+N-c04-t2 5jVz2yYKxe art9 calm+props
+N-c05-t2 LwBVcRfswO art9 calm+props
+N-c06-t2 LwBVcZCswO art9 calm+props
+N-c07-t2 xSd0YZTjfW art9 calm+props
+N-c08-t2 tCiOwlumZJ art9 calm+props
+N-c09-t2 1lpWcNqr4r art9 calm+props
+N-c10-t2 gOIpezESXO art9 calm+props
+N-c11-t2 VXUxjHvMMU art9 calm+props
+N-c12-t2 iGqfCtJ3uK art9 calm+props
+N-c13-t2 bxTGzZ35Y2 art9 calm+props
+N-c14-t2 9ZQhvmTNYZ art9 calm+props
+N-c15-t2 KLMnYnCkqp art9 calm+props
+N-c16-t2 s7oMDpsl8e art9 calm+props
+N-c17-t2 MBwjlaxDCm art9 calm+props
+N-c18-t2 xSd0M9qjfW art9 calm+props
+N-c19-t2 ov9wO54829 art9 calm+props
+N-c20-t2 bxTGYP75Y2 art9 calm+props
+N-c21-t2 Bh4UJ1foQR art9 calm+props
+N-c22-t2 O6f8mMeynm art9 calm+props
+N-c23-t2 79vBIVbJAL art9 calm+props
+N-c24-t2 s7oMeYql8e art9 calm+props
+N-c25-t2 0eg1sXzTfW art9 calm+props
+N-c26-t2 fHANZKtCDY art9 calm+props
+N-c27-t2 JNaoh2oOq4 art9 calm+props
+N-c28-t2 N2FvucO6D9 art9 calm+props
+N-c29-t2 ksDYVyA16B art9 calm+props
+N-c30-t2 rgecD9hxtc art9 calm+props
+N-c31-t2 cplkLaX0eP art9 calm+props
+N-c32-t2 w4hXtYI7EI art9 calm+props
+N-c01-t3 mE3yRQ4hJQ art9 calm+props
+N-c02-t3 1lpWewor4r art9 calm+props
+N-c03-t3 nVjbLopYQD art9 calm+props
+N-c04-t3 1lpWePhr4r art9 calm+props
+N-c05-t3 eIOlyFbdqL art9 calm+props
+N-c06-t3 s7oM8Zml8e art9 calm+props
+N-c07-t3 1lpWe6Hr4r art9 calm+props
+N-c08-t3 XmPS4kkBfo art9 calm+props
+N-c09-t3 0eg1wbXTfW art9 calm+props
+N-c10-t3 CqG6Y48EEy art9 calm+props
+N-c11-t3 6AHa5vTiJO art9 calm+props
+N-c12-t3 xSd0oTLjfW art9 calm+props (a48 teacup instead of 2nd fan)
+N-c13-t3 EbziWZKuuO art9 calm+props
+N-c14-t3 lJ8DmBigv9 art9 calm+props
+N-c15-t3 P3EtFCK42C art9 calm+props
+N-c16-t3 s7oMtorl8e art9 calm+props (a48 teacup instead of 2nd fan)
+N-c17-t3 If6JYSstvE art9 calm+props
+N-c18-t3 N2FvjtP6D9 art9 calm+props
+N-c19-t3 vQZ4TPca47 art9 calm+props
+N-c20-t3 gOIpQehSXO art9 calm+props
+N-c21-t3 u5n3e2SQLD art9 calm+props
+N-c22-t3 1lpWhV1r4r art9 calm+props
+N-c23-t3 xSd0aenjfW art9 calm+props
+N-c24-t3 vQZ4T2Xa47 art9 calm+props
+N-c25-t3 rgecfQfxtc art9 calm+props
+N-c26-t3 LwBVu5fswO art9 calm+props
+N-c27-t3 3zbCS4DREY art9 calm+props (a48 teacup instead of 2nd fan)
+N-c28-t3 rgecf5Fxtc art9 calm+props
+N-c29-t3 0eg16WjTfW art9 calm+props
+N-c30-t3 1lpWa1Gr4r art9 calm+props
+N-c31-t3 ov9wWth829 art9 calm+props
+N-c32-t3 Bh4UYt4oQR art9 calm+props
+N-c02-t4 ov9wTUS829 huadian/mole edit of huR7mAEvqL art9
+N-c03-t4 s7oMbDNl8e huadian/mole edit of xSdnr8PjfW art9
+N-c05-t4 79vBx8hJAL huadian/mole edit of s7ocLh8l8e art9
+N-c06-t4 79vBxtaJAL huadian/mole edit of UPmMSE5wny art9
+N-c08-t4 nVjb6jtYQD huadian/mole edit of yiCXObxPW9 art9
+N-c09-t4 1lpWueKr4r huadian/mole edit of yiCXO5jPW9 art9
+N-c10-t4 CqG6oY8EEy huadian/mole edit of 4RuoPrL9Aa art9
+N-c11-t4 If6JM2PtvE huadian/mole edit of vQZOfD0a47 art9
+N-c13-t4 LwBV17SswO huadian/mole edit of aF2yCdefSh art9
+N-c14-t4 VXUxWogMMU huadian/mole edit of jUXWsHvLD0 art9
+N-c15-t4 KLMnHSLkqp huadian/mole edit of MBw1pzSDCm art9
+N-c17-t4 If6JXHotvE huadian/mole edit of LwBclKvswO art9
+N-c18-t4 1lpWbycr4r huadian/mole edit of w4hpJsf7EI art9
+N-c25-t4 s7oMrRAl8e huadian/mole edit of JNadHzTOq4 art9
+N-c01-t7 s7oMjYLl8e huadian-t7/mole edit of jUXWe13LD0 art9
+N-c02-t7 SytelVKUb8 huadian-t7/mole edit of TdSKnyrVNR art9
+N-c03-t7 KLMnbGikqp huadian-t7/mole edit of mE37BnWhJQ art9
+N-c04-t7 1lpWKYIr4r huadian-t7/mole edit of rgenewMxtc art9
+N-c05-t7 vQZ4m9ia47 huadian-t7/mole edit of MBw1W6gDCm art9
+N-c06-t7 cplkYjc0eP huadian-t7/mole edit of TdSKnNsVNR art9
+N-c07-t7 w4hXSmD7EI huadian-t7/mole edit of huRJoTjvqL art9
+N-c08-t7 p8JsMJ4ehw huadian-t7/mole edit of 6AHmH09iJO art9
+N-c16-t4 LwBVrBpswO huadian/mole edit (2nd, stronger pink) of Do7jbjypcl art9
+N-c30-t4 p8JsVBmehw huadian/mole edit of ksDG8OJ16B art9
+N-c12-t4 ksDYKMO16B huadian/mole edit (3 passes: tCiOBfLmZJ->0eg1YsWTfW->this; a51 mark still faint) of P3Eo9Lv42C art9
+N-c09-t7 WDsKWpucXe huadian-t7/mole edit of XmPsMzsBfo art9
+N-c10-t7 ov9wofX829 huadian-t7/mole edit of xSdY5uWjfW art9
+N-c11-t7 lJ8Dl4Mgv9 huadian-t7/mole edit of xSdY5FljfW art9
+N-c12-t7 gOIpg6TSXO huadian-t7/mole edit of 8aNSdbFIrU art9
+N-c13-t7 xSd0xPEjfW huadian-t7/mole edit of LwBc16KswO art9
+N-c14-t7 cplkcmw0eP huadian-t7/mole edit of aF2ytLUfSh art9
+N-c15-t7 VXUxVEOMMU huadian-t7/mole edit of s7o0rZZl8e art9
+N-c16-t7 rgecr3Lxtc huadian-t7/mole edit of u5nNa78QLD art9

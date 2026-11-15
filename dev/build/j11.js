@@ -79,7 +79,9 @@ function pxKind(){const P=placeOf(S.place),night=(S.buoi||0)===2,out=["vuon","lc
 async function pxScene(){if(!S||RM||!OPT.fxon){if(PX.app)PX.app.canvas.style.display="none";return}if(!PX.app){pxLoad();return}PX.app.canvas.style.display="";
  lightTick();const P=placeOf(S.place),k=P.sc+"|"+pxKind()+"|"+(S.wx?S.wx.k:"")+"|"+(S.buoi||0);if(PX.key===k)return;PX.key=k;
  for(const p of PX.parts)p.destroy();PX.parts=[];if(PX.bg){PX.bg.destroy({texture:false});PX.bg=null}
- const src=SCIMG[P.sc]?`img/${SCIMG[P.sc]}.webp`:null;if(src){try{const t=await PIXI.Assets.load(src);if(PX.key!==k)return;const sp=new PIXI.Sprite(t);sp.anchor.set(.5);PX.bg=sp;PX.layer.addChildAt(sp,0);$("scimg").style.opacity="0"}catch(e){$("scimg").style.opacity="1"}}else $("scimg").style.opacity="1";
+ /* ONE backdrop (owner 11/15): the Pixi room copy uses the very picture #scimg shows (kitFloorFit may swap in the portrait painting) */
+ const m0=/url\(["']?([^"')]+)["']?\)/.exec(($("scimg")||{}).style?$("scimg").style.backgroundImage||"":"");
+ const src=SCIMG[P.sc]?(m0?m0[1]:`img/${SCIMG[P.sc]}.webp`):null;PX.bgSrc=src;if(src){try{const t=await PIXI.Assets.load(src);if(PX.key!==k)return;const sp=new PIXI.Sprite(t);sp.anchor.set(.5);PX.bg=sp;PX.layer.addChildAt(sp,0);$("scimg").style.opacity="0"}catch(e){$("scimg").style.opacity="1"}}else $("scimg").style.opacity="1";
  const kind=pxKind(),wk2=S.wx?S.wx.k:"",heavy=wk2==="snowh"||wk2==="storm",n=Math.round(pxCap()*(kind==="smoke"?.3:heavy?1:kind==="rain"?.6:.45));for(let i=0;i<n;i++)PX.parts.push(mkPart(kind,true));
  if(wk2==="snowp")for(let i=0;i<Math.round(n/4);i++)PX.parts.push(mkPart("petal",true));
  if((S.buoi||0)===2){const pts=[[.12,.3],[.88,.3],[.3,.18],[.7,.18]];pts.forEach(([x,y],i)=>{const g=mkPart("dust",true);g.v.kind="lamp";g.v.vx=0;g.v.vy=0;g.tint=0xffb050;g.scale.set(2.2);g.blendMode="add";g.alpha=0;g.v.on=i*40;g.v.fx=x;g.v.fy=y;PX.parts.push(g)});if(["vuon","lc","home"].includes(P.sc))for(let i=0;i<14;i++){const s=mkPart("dust",true);s.v.kind="star";s.v.vx=0;s.v.vy=0;s.tint=0xffffff;s.scale.set(.12);s.v.fy=Math.random()*.25;PX.parts.push(s)}}}
@@ -92,7 +94,16 @@ function mkPart(kind,scatter,x0,y0){const W=PX.app.screen.width,H=PX.app.screen.
  (x0!=null?PX.fxl:PX.layer).addChild(sp);return sp}
 function pxTick(tk){const d=tk.deltaTime,W=PX.app.screen.width,H=PX.app.screen.height;PX.t+=d/60;
  if(PX.bg){const K=window.KIT_PXBG;/* KIT 31.4: the Pixi room copy uses the SAME crop as #scimg (KIT_FANCHOR / KIT_FLOOR), with only a faint breath, so feet stay on the painted floor */
- if(K&&K.dw){const sc=K.dw/PX.bg.texture.width;PX.bg.scale.set(sc*(1+.006*Math.sin(PX.t/9)));PX.bg.x=K.x0+K.dw/2;PX.bg.y=K.y0+K.dh/2}
+ const im=$("scimg"),mu=im&&/url\(["']?([^"')]+)["']?\)/.exec(im.style.backgroundImage||"");
+ const tw=PX.bg.texture.width,th=PX.bg.texture.height;
+ /* ONE backdrop (owner 11/15): the Pixi copy is drawn only when it is exactly the picture and crop #scimg shows; else the CSS backdrop alone */
+ const same=!!(mu&&PX.bgSrc===mu[1]&&K&&K.dw&&K.dh&&Math.abs(K.dw/K.dh-tw/th)<.03);
+ if(PX.bg.visible!==same)PX.bg.visible=same;const op=same?"0":"1";if(im&&im.style.opacity!==op)im.style.opacity=op;
+ if(same){let sc=K.dw/tw,cx=K.x0+K.dw/2,cy=K.y0+K.dh/2;
+  /* KIT_BD rule (owner 11/15 "two backdrops"): ONE picture covers the WHOLE stage box — a stale or short crop never leaves a band where the
+     stage background or another picture shows; grow to cover and keep the edges inside the picture */
+  const need=Math.max(W/tw,H/th);if(sc<need)sc=need;const hw=tw*sc/2,hh=th*sc/2;cx=Math.min(hw,Math.max(W-hw,cx));cy=Math.min(hh,Math.max(H-hh,cy));
+  PX.bg.scale.set(sc*(1.003+.003*Math.sin(PX.t/9)));PX.bg.x=cx;PX.bg.y=cy}
  else{const sc=Math.max(W/PX.bg.texture.width,H/PX.bg.texture.height)*1.08;PX.bg.scale.set(sc*(1+.03*Math.sin(PX.t/9)));PX.bg.x=W/2+Math.sin(PX.t/13)*W*.02;PX.bg.y=H/2+Math.cos(PX.t/17)*H*.015}}
  PX.flash=(PX.flash||0)*.9;if(S&&S.wx&&S.wx.k==="storm"&&Math.random()<.003*d){PX.flash=1;sfx("sfx-thunder")}$("stage").style.setProperty("--fl",PX.flash.toFixed(2));
  for(const p of PX.parts){const v=p.v;if(v.kind==="lamp"){if(v.on>0){v.on-=d}else p.alpha=Math.min(.55,p.alpha+.01*d)*(RM?1:.85+.15*Math.sin(PX.t*9+v.ph));p.x=v.fx*W;p.y=v.fy*H;continue}if(v.kind==="star"){p.y=v.fy*H;p.alpha=.5+.4*Math.sin(PX.t*2+v.ph);continue}v.ph+=.02*d;if(S&&S.wx&&S.wx.k==="wind")p.x+=1.2*d;p.x+=(v.vx+Math.sin(v.ph)*.3)*d;p.y+=v.vy*d;if(v.kind==="fly"){p.alpha=.4+.5*Math.sin(v.ph*3);p.x+=Math.sin(v.ph*1.3)*.4*d;p.y+=Math.cos(v.ph)*.4*d}if(v.kind==="petal"||v.kind==="leaf")p.rotation+=.02*d;

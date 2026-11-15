@@ -25,7 +25,7 @@ function kpodPrize(pz){if(!pz)return"";if(typeof pz==="string")return `<span cla
  if(Array.isArray(pz))return `<span class="kchips">${pz.filter(x=>x&&x[1]).map(x=>kitChip(x[0],x[1])).join("")}</span>`;return""}
 function kpodName(p){if(!p)return"";if(!kitIsKnown(p))return `<b class="kname" style="--rc:#7a7e84">Người lạ</b>`;return p===S?kitName(S,{named:true}):kitName(p)}
 function kpodCol(x){const p=x.who,i=x.place-1,known=kitIsKnown(p),src=kitFigOf(p);
- const fig=src?`<img class="kpod-img${known?"":" kpod-unk"}" src="${src}" alt="" draggable="false" onerror="this.closest('.kpod-fig').classList.add('kpod-nofig')">`:"";
+ const fig=src?`<img class="kpod-img${known?"":" kpod-unk"}" src="${src}" alt="" draggable="false" onerror="kitImgErr(this,{sel:'.kpod-fig',cls:'kpod-nofig'})">`:"";
  const fb=`<span class="kpod-fb">${kitPortrait(p,{size:"lg"})}</span>`;
  const sc=x.score==null||x.score===""?"":typeof x.score==="number"?`${x.score} phần`:x.score;
  return `<div class="kpod-col kpod-p${i+1}${p===S||x.mine?" kpod-me":""}" style="--d:${[1.8,1.0,.3][i]}s">`+
