@@ -69,7 +69,11 @@ async function weekBoth(A,B,w){for(let k=0;k<3;k++)await buoiBoth(A,B,w===0&&k==
    ok(a.era===c.era&&a.R===c.R,tag+': same Emperor and same consorts',[a.era,c.era]);ok(String(a.d)===String(c.d),tag+': same date',[a.d,c.d]);
    ok(a.fr===c.me&&c.fr===a.me,tag+': each sees the other as a person',[a.me,a.fr,c.me,c.fr]);return[a,c]};
  await same('start');
- for(const o of [A,B])ok(await o.p.evaluate(()=>{const f=(rivals.find(v=>v.coop)||rivals.flatMap(v=>v.staff||[]).find(x=>x.coop)||null);return f&&typeof kitKnown==='function'&&!kitKnown(f)&&!kitKnownName(f)}),o.name+': friend starts as Người lạ (unknown, like any NPC)');await shot(A,'05-world');await shot(B,'05-world');
+ for(const o of [A,B]){const r=await o.p.evaluate(()=>{const f=(rivals.find(v=>v.coop)||rivals.flatMap(v=>v.staff||[]).find(x=>x.coop)||null);if(!f)return{ok:false,why:'no friend'};
+   const unk=!kitKnown(f)&&!kitKnownName(f);/* known for a reason any NPC would be: reigning Hoàng hậu, her own mistress, or in the same palace */
+   const why=f.queen?'Hoàng hậu':(S.srv&&!S.srv.risen&&S.srv.mid===f.id)?'chủ nhân':(f.id!=null&&together(S,f))?'cùng chỗ':(f.id==null&&(S.staff||[]).includes(f))?'kẻ hầu của ngươi':'';
+   return{ok:unk||!!why,unk,why,st:k61St(f),srv:!!(S.srv&&!S.srv.risen),fsrv:f.id==null}});
+  ok(r.ok,o.name+': friend starts as Người lạ (unknown, like any NPC)'+(r.unk?'':' — known: '+r.why),r.ok?undefined:r)}await shot(A,'05-world');await shot(B,'05-world');
  /* 3 three weeks */
  for(let w=0;w<3;w++){const wk=(await C(A)).week;
   await weekBoth(A,B,w);
