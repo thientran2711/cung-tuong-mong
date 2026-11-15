@@ -12,5 +12,8 @@ Page = `_t.html` (doctype + dev/index.html after `python3 dev/build/assemble.py`
 | 5 | j82 frame progress cell "HỒI" in exams (rounds = Môn) | round label per game type: exam "Môn" (locked), engines Hồi / Câu, contest result "Hạng" | j82 kg82Frame / kg82Set, jexam |
 
 Before (main, 1180x820): check 1 = 12 hits (srv) + 15 hits (cold); check 2 = blank before manifests; check 3 = Hoàng thượng/Thái hậu silhouettes everywhere on both roads; check 4 = "lc +2: p1 under kshR"; check 5 = 7 wrong labels.
-After: see the report in the coordinator thread (all five checks empty at 755x1000@2, 1000x755, 1180x820@2, 1366x1024@2, 844x390; old save loads).
+After (latest build): all five checks empty at 755x1000@2, 1000x755, 1180x820@2, 1366x1024@2, 844x390, 390x844; old save (main build, cung nữ road) loads with real portrait and chí tôn faces. dev/test/stage-slots.sh 844x390 + 1366x1024: all cases clean.
+Slot rule detail: next to a reserved panel the edge figure is pulled in (j59 inLim) instead of cutting the slot count (a first try that shrank the slots dropped iPad vườn to 1 per page).
+Her mistress on the cung nữ road counts as met (met61) — she was a grey silhouette in the Phận sự row.
+Residual (not fixed, pre-existing on main): 390x844 phone portrait has no rotate prompt; the place subtitle wraps one letter per line on the left edge, which pushes the folded chip row down over the heads (main overlaps too, less).
 KIT.md: §12.1, §13 note, §32.12 note, §33.7 note, §49.3a.

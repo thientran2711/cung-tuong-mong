@@ -64,16 +64,16 @@ const NEW=`window.__sb2new=(o,f)=>{window.__forceOrigin=o;SLOT=3;document.getEle
     R.mdH=src(mdH(face,'xs'));R.pcPort=src(pcPort(face));R.kitPortrait=typeof kitPortrait==='function'?src(kitPortrait(ent)):'';R.stageFig=src(kitStageFig(face));R.kitFigOf=kitFigOf(ent);
     if(k==='th')R.figKind=kitFigOf({kind:'th'});const v=Object.entries(R).filter(([a,b])=>b).map(([a,b])=>[a,sil(b)]);return{v,R}};
    const q=queenP();const run=(tag)=>{const out={};out.emp=look('emp',S.emp,pEmp());if(!S.thDead)out.th=look('th',S.thO,pTH());if(q&&q!==S)out.hh=look('hh',q,pv(q));return out};
-   const before=run('before');if(q&&q!==S){S.met=S.met||{};S.met[q.id]=1;if(typeof k61Know==='function')k61Know(q,'',true,2)}render();await new Promise(r=>setTimeout(r,1200));const after=run('after');
-   const mis=S.srv&&typeof RV==='function'&&RV(S.srv.mid);return{before,after,mis:mis?src(mdH(pv(mis),'xs')):null}},o);
+   const qMis=!!(q&&S.srv&&S.srv.mid===q.id);const before=run('before');if(q&&q!==S){S.met=S.met||{};S.met[q.id]=1;if(typeof k61Know==='function')k61Know(q,'',true,2)}render();await new Promise(r=>setTimeout(r,1200));const after=run('after');
+   const mis=S.srv&&typeof RV==='function'&&RV(S.srv.mid);return{before,after,qMis,mis:mis?src(mdH(pv(mis),'xs')):null}},o);
   if(r.mis&&/unknown-/.test(r.mis))C('3 met',[`${o}: her own mistress is a silhouette`]);
   const L=[];for(const ph of ['before','after'])for(const k in r[ph]){const v=r[ph][k].v;const s=new Set(v.map(x=>x[1]));if(s.size>1)L.push(`${o} ${ph} ${k}: mixed ${JSON.stringify(v)}`);
-   const want=k==='hh'&&ph==='before'?true:false;if(s.size===1&&[...s][0]!==want)L.push(`${o} ${ph} ${k}: ${want?'face shown before meeting':'silhouette'} ${JSON.stringify(r[ph][k].R).slice(0,200)}`)}
+   const want=k==='hh'&&ph==='before'&&!r.qMis?true:false;/* her own mistress (cung nữ road) is met from day one */if(s.size===1&&[...s][0]!==want)L.push(`${o} ${ph} ${k}: ${want?'face shown before meeting':'silhouette'} ${JSON.stringify(r[ph][k].R).slice(0,200)}`)}
   C('3 met',L);OUT.info['met '+o]=Object.fromEntries(['before','after'].map(ph=>[ph,Object.fromEntries(Object.entries(r[ph]).map(([k,x])=>[k,x.v.map(y=>y[0]+(y[1]?':sil':':face')).join(' ')]))]))}
  /* ---------- 4 SLOTS ---------- */
- for(const [where,n] of [["lc",1],["lc",2],["lc",3],["home",2],["vuon",2],["vuon",3]]){const r=await p.evaluate(async([where,n])=>{
-   __sb2new("thd",()=>{if(where==="lc"){const rv=liveRivals(true).filter(v=>!v.queen).slice(0,n);rv.forEach(v=>{v.out=1;S.met=S.met||{};S.met[v.id]=1});cold("thử");coldVisit()}});
-   if(where!=="lc"){const Wh=S.where=S.where||{};for(const v of rivals)if(Wh[v.id]===where)Wh[v.id]="r"+v.id;Wh.emp="tn";S.menW={};S.minW={};liveRivals(true).slice(0,n).forEach(v=>{Wh[v.id]=where;S.met=S.met||{};S.met[v.id]=1});
+ for(const [where,n] of [["srv",0],["lc",1],["lc",2],["lc",3],["home",2],["vuon",2],["vuon",3]]){const r=await p.evaluate(async([where,n])=>{
+   if(where==="srv")__sb2new("cnv");else __sb2new("thd",()=>{if(where==="lc"){const rv=liveRivals(true).filter(v=>!v.queen).slice(0,n);rv.forEach(v=>{v.out=1;S.met=S.met||{};S.met[v.id]=1});cold("thử");coldVisit()}});
+   if(where!=="lc"&&where!=="srv"){const Wh=S.where=S.where||{};for(const v of rivals)if(Wh[v.id]===where)Wh[v.id]="r"+v.id;Wh.emp="tn";S.menW={};S.minW={};liveRivals(true).slice(0,n).forEach(v=>{Wh[v.id]=where;S.met=S.met||{};S.met[v.id]=1});
     S.place="home";used=0;tab="act";goTo(where)}
    render();await new Promise(r=>setTimeout(r,3500));const st=document.getElementById('stage');const Rs=st.getBoundingClientRect();
    const panels=[...st.querySelectorAll('#kshR, #kshL')].filter(e=>e.offsetParent&&!e.hidden&&e.offsetHeight>4).map(e=>({id:e.id,r:e.getBoundingClientRect()}));

@@ -1837,7 +1837,8 @@ Every stage that shows full-body people (room, place, her palace, servant road, 
    only a stage narrower than ONE person scales that one person down. Her idle sway breathes from the feet (no lift).
    **No figure under a stage panel, any size (review/small-bugs-2, supersedes the compact-stage exception above):** the right column
    (#kshR) is reserved on compact stages (844x390 `.j59c`) too, and a left plaque column (#kshL) that reaches the heads moves the first slot
-   to its right edge + 6 px. Test: `dev/test/small-bugs-2.js` check 4 (lãnh cung, home, vườn with 1–3 people).
+   to its right edge + 6 px. A wide robe that steps over its slot (the 20 % neighbour allowance) beside a reserved panel is pulled in
+   so its core ends at the panel edge (j59 `inLim`; the slot count is unchanged). Test: `dev/test/small-bugs-2.js` check 4 (lãnh cung, home, vườn with 1–3 people).
 3. **Never a mini portrait on the stage** (owner 08:00Z): a person without figure art stands as the kit's full-size soft silhouette
    (`img/kit/unknown-fig-f|m|k.webp`, `.j59sil`, man silhouette ×1.07) in a slot, with the real chip; a stranger is the grey silhouette
    with "Người lạ". Only things that are not people (a chest) keep their small token, still in a slot.
