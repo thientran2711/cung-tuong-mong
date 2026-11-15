@@ -2,18 +2,23 @@
    Every por-* picture in a pcPort cell (person card, strips, header, rows…), measured once per picture (canvas, 160 px high):
    1. SIZE (owner 11/15: "never zoom in"; then "kids at different zoom"): the FACE (OpenCV face box per picture, img/POR_FACE.json made by
       dev/tools/por_face.py) is KIT_POR.face of the window height for EVERY portrait — consorts, maids, mamas, eunuchs, men, officials,
-      physicians, the Emperor, Thái hậu, the player, children of every age. z = face target ÷ face height, clamped to KIT_POR.zr; the target
-      (0.319) is the median face at the old 1.14× cut, so a typical picture keeps its old size. KIT_POR.fam can give a family its own target.
+      physicians, the Emperor, Thái hậu, the player, children of every age. z = face target ÷ face height, clamped to KIT_POR.zr = [1, 1.14] (never more zoom
+      than the approved 1.14 cut); the target (.2975) is the small face at 1.14, so no picture needs zooming in. KIT_POR.fam can give a family its own target.
    2. HEAD TOP (hair ornaments included = first opaque row) sits KIT_POR.g of the window under the window's top edge — same gap for all;
       the lift is capped so the picture still covers the window bottom.
    3. BODY (mid-point of the shoulder/chest rows, head ignored) centred in the window, offset capped at KIT_POR.dx — and, when the picture's
       own side edge is painted (garment cut by the picture border), capped so that edge never enters the window (reviewer r6: no hard cut).
    Old face-* art and the grey unknown silhouette keep their own rules; pictures without a family (data: avatars) or without a skin row
    keep z = KIT_POR.z. Window in .kin units (% of the kin box): left 14.655, top 20.289, width 70.691, height 49.373 (j60/jk2b). ========== */
-window.KIT_POR=window.KIT_POR||{z:1.14,g:.03,t0:.10,dx:.18,zr:[1,1.6],face:.319,fam:{}};
+/* NO ZOOM beyond the approved cut (owner 11:30Z, coordinator 11/15): z ∈ [1, 1.14] — a picture can only be shown LESS zoomed than the old
+   1.14 (down to 1.0, where it still covers the window), never more. So the common face size is the one the SMALL faces have at 1.14:
+   face .2975 of the window (5th percentile face 0.261 × 1.14); larger faces are brought down to it (z < 1.14). 5551 of 5744 portraits land
+   within ±3 % (old fixed 1.14: 3973); what is left is faces too big even at z = 1 (kid-a4, a few consorts/maids) — see PROGRESS_gift-ui.
+   A face box over .40 of the picture is a false detection (5 pictures): those keep z = KIT_POR.z. */
+window.KIT_POR=window.KIT_POR||{z:1.14,g:.03,t0:.10,dx:.18,zr:[1,1.14],face:.2975,fbad:.40,fam:{}};
 /* img/POR_FACE.json (dev/tools/por_face.py, OpenCV face boxes of every por picture): {"v":1,"f":{"<name>":[faceTop,faceH,faceX,opaqueTop,bodyX]}} */
 let KPOR_FACE=null;try{fetch("img/POR_FACE.json").then(r=>r.ok?r.json():null).then(j=>{if(j&&j.f){KPOR_FACE=j.f;document.querySelectorAll("img.kpor").forEach(kporApply)}}).catch(()=>{})}catch(e){}
-function kporFace(src){const m=/por-([^/?]+)\.webp/.exec(src||"");const v=m&&KPOR_FACE&&KPOR_FACE[m[1]];return v&&v[1]>0?v:null}
+function kporFace(src){const m=/por-([^/?]+)\.webp/.exec(src||"");const v=m&&KPOR_FACE&&KPOR_FACE[m[1]];return v&&v[1]>0&&v[1]<=(KIT_POR.fbad||1)?v:null}
 const KPOR_T={};
 function kporFam(src){const m=/por-([a-z]+)-[^/]*?(?:-(a\d+))?\.webp/.exec(src||"");if(!m)return"";return m[1]==="kid"?(m[2]?"kid-"+m[2]:""):m[1]}
 /* keep in sync with dev/tools/por_family.py */

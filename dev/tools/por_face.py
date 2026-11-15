@@ -12,11 +12,14 @@ C2 = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_alt2
 def one(p):
     im = Image.open(p).convert('RGBA'); W, H = im.size
     bg = Image.new('RGBA', im.size, (255, 255, 255, 255)); bg.alpha_composite(im)
-    g = cv2.cvtColor(np.array(bg.convert('RGB')), cv2.COLOR_RGB2GRAY)
+    # detection on a half-size copy (faces are ~28 % of the picture height, far above the 24 px Haar window): ~4x faster
+    SC = 2 if H >= 400 else 1
+    sm = bg.convert('RGB').resize((W // SC, H // SC), Image.BILINEAR) if SC > 1 else bg.convert('RGB')
+    g = cv2.cvtColor(np.array(sm), cv2.COLOR_RGB2GRAY)
     face = None
     for c in (C1, C2):
-        F = c.detectMultiScale(g, 1.05, 4, minSize=(int(H * .08), int(H * .08)))
-        if len(F): face = max(F, key=lambda r: r[2] * r[3]); break
+        F = c.detectMultiScale(g, 1.05, 4, minSize=(max(24, int(H / SC * .08)),) * 2)
+        if len(F): face = [int(v * SC) for v in max(F, key=lambda r: r[2] * r[3])]; break
     A = np.array(im)[..., 3]
     trans = (A[0] < 20).sum() > W * .5
     top = 0.0
@@ -38,7 +41,7 @@ def _job(a):
 def main(src, out):
     from multiprocessing import Pool
     fs = sorted(f for f in os.listdir(src) if f.startswith('por-') and f.endswith('.webp'))
-    with Pool(max(1, os.cpu_count() or 1)) as P:
+    with Pool(int(os.environ.get("POR_PROCS") or max(1, os.cpu_count() or 1))) as P:
         R = {k: v for k, v in P.imap_unordered(_job, [(f[4:-5], os.path.join(src, f)) for f in fs], chunksize=16) if v is not None}
     json.dump({"v": 1, "f": R}, open(out, 'w'), separators=(',', ':'))
     print(len(R), 'pictures', sum(1 for v in R.values() if v[1] == 0), 'without a face')
