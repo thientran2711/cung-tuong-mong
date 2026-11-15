@@ -317,3 +317,27 @@ trung-co-quoc|0|a foreign princess's hand in an embroidered southern-style sleev
 giau-ong|0|a maid's hand passing a bowl of rice behind a stack of washing basins to an old man's weathered hand in a patched brown sleeve
 tim-chung-cu-cha|0|a consort's hands searching through stacks of old bound files on archive shelves, a dusty letter half pulled out
 dieu-tra-an-cu|1|a consort's hand turning the pages of an old case file on a desk late at night, an oil lamp, pages blank or abstract lines
+tim-chung-cu-minh-oan|0|hands in plain undyed sleeves rummaging through an old wooden chest in a bare cold-palace room, a bundle of handwritten letters found (abstract lines)
+hoi-chuyen-cu|0|a consort's hand in a pink sleeve offering a cup of tea to an old court lady's wrinkled hand in a dark brown sleeve beside a warm brazier
+dang-thu-ht|0|a consort's hand handing a sealed letter to a eunuch's dark-sleeved hands at the threshold of an imperial study
+nho-dua-thu-keu-oan|0|a hand in a plain undyed sleeve passing a folded letter through the gap of a weathered cold-palace gate into a maid's green-sleeved hand
+lat-an-tien-de|0|memorials scattered on the floor beside the Emperor's yellow robe hem, one yellow-sleeved hand clenched in anger at the edge of a desk
+xu-tram|0|a distant execution ground outside city walls under a grey sky, black banners, a crowd far away, no blood, no weapons shown
+tau-xin-nguoi-cua-cha|0|a consort's hands presenting an unrolled recommendation memorial (abstract lines) to the Emperor's yellow sleeve at a desk
+cam-co|0|a jeweled hairpin laid on a pawnshop counter, a pawnbroker's hand in a plain brown sleeve weighing silver on a small scale
+chuoc-lai|0|a consort's hand placing silver on a pawnshop counter and taking back a small jewelry box from the pawnbroker's brown sleeve
+may-ao|0|a tailor's hands with a measuring cord and chalk at a consort's pink sleeve, bolts of brocade spread on a table
+tam-doc|1|a hand dipping a gold hairpin into a small vial of strange liquid on a tray at night, one candle
+nghiem-doc|1|a physician's hand in a dark green sleeve holding a silver needle and an object under lamplight, a cup of water beside
+thai-y-phat-hien|0|a physician's hand in a dark green sleeve holding up a hairpin, a blackened silver needle beside it, pointing to a faint stain
+thai-y-khong-thay-la|0|a physician's hands in a dark green sleeve returning a jewelry item into its open box, a calm reassuring gesture
+kiem-tra-ruong|0|a maid's hand pulling a strange small object from the bottom of a clothes chest, her mistress's pink sleeve beside watching
+kiem-tra-ruong-sach|0|a maid's hands opening a neatly folded clothes chest, silks in tidy layers, nothing unusual
+tich-thu-co-co|0|a eunuch's dark-sleeved hands carrying away a jewelry box, a consort's pink sleeve standing aside
+tich-thu-vo-co|0|a eunuch's dark hand yanking a jewelry box out of a maid's green-sleeved hands
+hh-ban-cho|0|the Empress's hand in a red phoenix brocade sleeve handing a gift box to a consort's bowed pink-sleeved hands
+duoc-ban|0|a eunuch's dark sleeves holding a brocade tray with a jade pendant, a kneeling consort's pink-sleeved hands raised to receive it
+hh-thuong-hien-thuc|0|the Empress's hand in a red phoenix brocade sleeve giving a pouch of silver to a consort's hands clasped at her waist in a curtsy
+tro-ve-lanh-cung-nuoi|0|maids' green-sleeved hands carrying a wooden chest of belongings through a newly opened palace gate
+tha-toi-chet|0|the Emperor's yellow sleeve waving in a gesture of pardon, before it a figure's sleeves pressed to the floor in a kowtow
+vao-lanh-cung|0|a weathered cold-palace gate creaking open, a hand in a plain undyed sleeve carrying a small cloth bundle stepping inside
