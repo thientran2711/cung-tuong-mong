@@ -9,24 +9,16 @@ const {chromium}=require('playwright');const fs=require('fs');const path=require
 const [,,URL,ST,MODES,SEED,NS]=process.argv;const STEPS=+ST||40;const modes=(MODES||'hint,rand,same').split(',');const seed0=+SEED||1;
 let INP=fs.readFileSync(path.join(__dirname,'inpage4.js'),'utf8');
 const HOOK='if(!sens)pickI=rpick(okIdx)[1];';
-const OVH="const ok=q('#mgok');";if(!INP.includes(OVH))throw new Error('inpage4 ov hook moved');
-const GOH='pls.forEach(p=>opts.push({s:p.s,f:()=>{note("go");goTo(p.k)}}));';if(!INP.includes(GOH))throw new Error('inpage4 go hook moved');
-/* a place goTo refuses (access, time) is not tried again in the same buổi */
-INP=INP.replace(GOH,'{const bk=S.turn+"_"+S.tuan+"_"+S.buoi;window.__gof=window.__gof||{};pls.forEach(p=>{if(window.__gof[p.k]===bk)return;opts.push({s:p.s,f:()=>{note("go");const was=S.place;goTo(p.k);if(S.place===was&&!Q.length)window.__gof[p.k]=bk}})})}');
-const CDH='deck.forEach((a,i)=>{if(!cardOK(a))return;const c=cardCost(a);opts.push({s:scoreAct(a,N,c),f:()=>{note("card");act(i)}})});';if(!INP.includes(CDH))throw new Error('inpage4 card hook moved');
-/* a card that changes nothing (no khắc spent, no dialog) is not tried again in the same buổi */
-INP=INP.replace(CDH,'{const bk=S.turn+"_"+S.tuan+"_"+S.buoi;window.__cdf=window.__cdf||{};deck.forEach((a,i)=>{if(!cardOK(a)||window.__cdf[a.n]===bk)return;const c=cardCost(a);opts.push({s:scoreAct(a,N,c),f:()=>{note("card");const u0=used,q0=Q.length,s0=S.suc,b0=S.bac;act(i);if(used===u0&&Q.length===q0&&S.suc===s0&&S.bac===b0&&!S.mg)window.__cdf[a.n]=bk}})})}');
-INP=INP.replace('window.__lifeIter>9000','window.__lifeIter>60000');/* long lives are real lives, not a stall */
-/* new mini-games (j82): press the skip/close buttons */
-INP=INP.replace(OVH,"{const k=q('#kg82skip')||q('#ov .kg82act button:not(#kg82go)')||q('#kg82ok')||q('#ov button.kbtn');if(k){k.click();return true}}"+OVH);if(!INP.includes(HOOK))throw new Error('inpage4 hook moved');
+if(!INP.includes(HOOK))throw new Error('inpage4 hook moved');
 INP=INP.replace(HOOK,'{const ep=window.__evpick?window.__evpick(m,okIdx):null;if(ep!=null){note("ev_"+window.__evmode);chooseM(ep);return true}}'+HOOK);
+/* inpage4 itself handles the current main (j82 mini-games, refused places, no-op cards, long lives) */
 const PICK=`(function(){
-const W=[[/ân sủng|để mắt|thị tẩm/i,1.6],[/thể diện/i,1.2],[/tiếng hiền|hiền đức/i,1.3],[/người trên hài lòng|Thái hậu hài lòng|Hoàng hậu hài lòng/i,1.1],
+const W=[[/được lòng bề trên/i,1.1],[/hạ được đối thủ|thất sủng/i,.8],[/có phúc con cái|giữ được long thai/i,1.4],[/có lợi cho con/i,1],[/được lòng kẻ hầu|một lòng theo ta/i,.5],[/thêm tình ý|thêm tình riêng/i,.2],[/có thiện cảm/i,.7],[/ân sủng|để mắt|thị tẩm/i,1.6],[/thể diện/i,1.2],[/tiếng hiền|hiền đức/i,1.3],[/người trên hài lòng|Thái hậu hài lòng|Hoàng hậu hài lòng/i,1.1],
  [/tình nghĩa/i,1],[/thất thế/i,.8],[/nắm thêm thóp/i,1],[/được lòng|ưa ngươi hơn|nguôi giận/i,.7],[/con được thương|thương con/i,1],[/được tin|thêm tin/i,1],
  [/bản thân khá lên/i,.6],[/thân thể được giữ/i,1],[/có thêm bạc/i,.4],[/dưỡng sức/i,.3]];
-const L=[[/thất đức/i,2.2],[/sinh nghi|trách phạt|bị nghi|bị phạt/i,2.2],[/lạt lẽo/i,1.6],[/mất thể diện/i,1.2],[/thân thể bị hại/i,2.4],[/con thiệt|con bị lạnh nhạt/i,1.2],
+const L=[[/mất mạng/i,9],[/mất lòng bề trên/i,1.1],[/lỡ phúc con cái|không thể có thai/i,1.2],[/mất thiện cảm/i,.6],[/mất lòng kẻ hầu|kẻ hầu sinh oán/i,.5],[/ghen ghét|sinh oán|kết thêm oán/i,.9],[/thất đức|mang tiếng ác/i,2.2],[/sinh nghi|trách phạt|bị nghi|bị phạt/i,2.2],[/lạt lẽo/i,1.6],[/mất thể diện/i,1.2],[/thân thể bị hại/i,2.4],[/con thiệt|con bị lạnh nhạt/i,1.2],
  [/kết oán|sẽ thù/i,.9],[/phật ý|để bụng/i,1],[/mất lòng|không ưa/i,.6],[/lộ sơ hở/i,1],[/sứt mẻ/i,1],[/được lợi/i,.6],[/bản thân sút/i,.6],[/hao bạc/i,.3],[/hao sức/i,.3],[/có cái giá/i,.8],[/có hại/i,.8]];
-function sc(txt,T){let s=0;for(const [re,w] of T)if(re.test(txt))s+=w;return s}
+function sc(txt,T){let s=0;for(const part of String(txt).split(/[,;]/)){for(const [re,w] of T)if(re.test(part)){s+=w*(/nhiều/.test(part)?1.6:/chút ít/.test(part)?.4:1);break}}return s}
 window.__hintScore=function(h,risk,ton){h=String(h||"");const i=h.search(/;\\s*nhưng|,\\s*nhưng/);const g=i<0?h:h.slice(0,i),l=i<0?"":h.slice(i);
  let s=sc(g,W)-sc(l,L);if(/có lợi về/.test(g)&&!sc(g,W))s+=.5*(g.split(",").length);if(/chẳng được gì|không được gì/.test(g))s-=.2;
  s+=risk==="liều"?-1.6:risk==="có rủi ro"?-.5:0;const b=+(String(ton||"").match(/Bạc\\s*[−-]\\s*(\\d+)/)||[])[1]||0,su=+(String(ton||"").match(/Sức\\s*[−-]\\s*(\\d+)/)||[])[1]||0;
@@ -34,9 +26,9 @@ window.__hintScore=function(h,risk,ton){h=String(h||"");const i=h.search(/;\\s*n
 window.__evpick=function(m,okIdx){const mode=window.__evmode;if(!mode||!m||!(m.pid||m.pp||(m.kit&&m.kit.kind==="choice")))return null;
  const ok=okIdx.filter(([o])=>!(typeof o.lk==="function"&&o.lk()));if(!ok.length)return null;
  if(mode==="same")return ok[0][1];if(mode==="rand")return ok[Math.floor(Math.random()*ok.length)][1];
- const M=document.getElementById("modal");let best=-1e9,bi=ok[0][1];
- for(const [o,i] of ok){const b=M&&M.querySelector('.opt[data-m="'+i+'"]');const h=b?((b.querySelector(".khint")||{}).textContent||""):"";const r=b?((b.querySelector(".krisk")||{}).textContent||""):"";
-  const t=b?((b.querySelector(".kr-ton .krv")||{}).textContent||""):"";const v=window.__hintScore(h,r,t)+Math.random()*.01;if(v>best){best=v;bi=i}}
+ let best=-1e9,bi=ok[0][1];
+ /* review/opt-render 54f3814: kitHint(o,m,lv) is a pure function of the option data at her current clarity level = exactly what the player reads */
+ for(const [o,i] of ok){let H={hint:'',risk:''};try{H=kitHint(o,m)}catch(e){}const h=H.hint,r=H.risk;const f=o.fx||{};const t=(f.bac<0?'Bạc '+f.bac+' ':'')+(f.suc<0?'Sức '+f.suc:'');const v=window.__hintScore(h,r,t)+Math.random()*.01;if(v>best){best=v;bi=i}}
  window.__hintSeen=(window.__hintSeen||0)+1;return bi};
 /* outcome counters for this life (reset by over) */
 window.__pun=0;window.__dem=0;window.__deathWhy="";

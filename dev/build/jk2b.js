@@ -315,10 +315,10 @@ function kitHideOut(b){try{if(!b||!b.classList.contains("ka")||b.dataset.khid===
 (function(){const n0=kaNorm1;kaNorm1=function(b){const r=n0.apply(this,arguments);try{if(b&&b.dataset&&(b.dataset.khide==="1"||b.closest("[data-khide-all]")))kitHideOut(b)}catch(e){}return r}})();
 /* THE KIT SAMPLE PAGE (KIT.md "Trang mẫu kit"): every shared part of this section, drawn by the kit functions themselves (no copy of their
    markup). Open: index.html?kit (after the game has started) or kitSample() in the console. Parts: kitChip tones g / r / n / w / ok / no,
-   kitRisk ×3, an event option in cost mode (Tốn + kitHintRow + kitRisk, no Tốn when free), the result seals kitSeal(true|false|null) and
+   kitRisk ×3, an event option in cost mode (Tốn + kitHintRow + kitRisk, no Tốn when free), the result seals kitResultSeal(true|false|null) and
    kitKemRow. A new shared part is added HERE as well as in KIT.md. */
 function kitSample(){if(typeof S==="undefined"||!S)return false;const opt=(n,ton,hint,risk)=>`<button class="opt ka khideout" data-ka="1" data-khid="1" type="button"><span class="kat"><span class="kan">${n}</span>${kitRisk(risk)}</span><small class="kb">${ton?`<span class="kr kr-ton"><span class="krl">Tốn</span><span class="krv"><span class="ef r">${ton}</span></span></span>`:""}${kitHintRow(hint)}</small></button>`;
- const seal=ok=>{const s=typeof kitSeal==="function"?kitSeal(ok):{cls:"sure",t:"KẾT QUẢ"};return `<span class="rtoast karesult ${s.cls}" style="position:static;transform:none;opacity:1;display:inline-flex;margin:2px;padding:4px 8px"><b class="seal">${s.t}</b></span>`};
+ const seal=ok=>{const s=typeof kitResultSeal==="function"?kitResultSeal(ok):{cls:"sure",t:"KẾT QUẢ"};return `<span class="rtoast karesult ${s.cls}" style="position:static;transform:none;opacity:1;display:inline-flex;margin:2px;padding:4px 8px"><b class="seal">${s.t}</b></span>`};
  const kem=typeof kitKemRow==="function"?kitKemRow(liveRivals(true).slice(0,3).map((v,i)=>({v,k:"ghen",d:4+i*2}))):"";
  const h=`<div class="kpsheetb"><p class="past">Trang mẫu kit — mỗi phần dưới đây do chính hàm kit vẽ (KIT.md).</p>
   <h4>kitChip (g · r · n · w · ok · no)</h4><p>${kitChip("Sủng",3)}${kitChip("Danh",-2)}${kitChip("Thường","n")}${kitChip("có rủi ro","w")}${kitChip("đủ Sức","ok")}${kitChip("thiếu bạc","no")}</p>
