@@ -15,6 +15,14 @@
 - Paid tiers (owner 14:50Z group rule): `dev/review/paid-tiers.md` (before/after), `node dev/test/paid-tiers.js <url>` (0 FAIL), `python3 dev/test/paid-scan.py`.
 - "Thôi": removed from every j83 dialog (gift, đồ cấm, recipe pick, material) and the 4 veil dialogs (✕ kit-x via `KWK_XPID` / `xc:1` in jwkg.js).
   The game-wide removal is review/kit-close (not merged yet) — not duplicated here.
+- CDN: all 440 recipe pictures (img/item-tp-<kind>-r01..r10-b1..4.webp + item512/) and 18 icons (img/kit/mg-banh-*.webp) are UPLOADED (cdn_sync, 15449 objects);
+  local copies deleted. Site rebuilt (index.html, sw.js, assets.json) on the CDN base.
+- Test results (this session): wk-kind-game all 11 kinds OK at 755x1000 and 1180x820 (game = the kind's game, recipe played, product = recipe name +
+  r-picture by tier, ✕ closes without spending, no Thôi, 0 page errors); mon/ao/khuc/tho OK at 1000x755, 1366x1024, 844x390; pick grid no
+  horizontal overflow / no clipped names at 755x1000, 1000x755, 1180x820, 1366x1024, 844x390; paid-tiers.js 0 FAIL; deck card sets the recipe.
+- Open / for the reviewer: art cleanliness — 152 of 400 new 512 px cut-outs were defringed with itemcut clean; ~20 still score "dirty" on the
+  audit's halo metric but look clean on dark / mid / light grounds (checked sheets). The Fold zoom spots, por re-crop and 5,177-figure re-export
+  from the old list are separate tasks (ask the coordinator).
 - Tests: `ONLY=<kinds> node dev/test/wk-kind-game.js <url> <WxH@dpr> <outdir>` (pick grid → material → game kind + recipe → product name/picture).
 
 

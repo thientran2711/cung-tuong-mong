@@ -28,7 +28,7 @@ const WANT={tranh:"ve",theu:"theu",bhoa:"hoa",tho:"tho",kinh:"kinh",khuc:"dan",t
   await p.evaluate(()=>{const B=[...document.querySelectorAll("#modal .opts button")];if(B[2])B[2].click()});
   await p.waitForTimeout(400);
   const lbl=await p.evaluate(()=>{const d=document.getElementById("kg82");return d?d.textContent.replace(/\s+/g," ").trim().slice(0,90):null});
-  await p.evaluate(()=>{const g=document.getElementById("kg82go");if(g)g.click()});await p.waitForTimeout(1500);
+  await p.evaluate(()=>{const g=document.getElementById("kg82go");if(g)g.click()});await p.waitForTimeout(+(process.env.WAIT||1500));
   if(kind==="mon"||process.env.SHOTS)await p.locator('#kg82').screenshot({path:`${OUT}/game-${kind}-${SZ}.jpg`,type:'jpeg',quality:70}).catch(()=>{});
   const k=await p.evaluate(()=>({g:window.__kind,rc:typeof K91_RC!=="undefined"?K91_RC.map(x=>x[0]).join("|"):"",play:typeof kwrPlay!=="undefined"&&kwrPlay?kwrPlay.r:null}));
   const prod=await p.evaluate(([kind,rid])=>{try{kg82Close()}catch(e){}S.mg=null;Q.length=0;showModal();const n0=S.inv.length;wkFinishLesson(WK[kind].a,{kind,mat:2,r:rid},10,"thử");const e=S.inv[S.inv.length-1];
