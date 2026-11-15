@@ -32,14 +32,14 @@ const PET={
  camke:{n:"Cẩm kê",tr:2,st:"danh",pr:0,up:4,dc:8,guard:15,beast:20,noise:1,use:"gáy vang khi có kẻ lạ: canh cung chặt, thú dữ khó lọt vào",bad:"gáy sớm: người ở chung cung dễ oán",d:"gà gấm lông ngũ sắc, đuôi dài như phượng"},
  lyngu:{n:"Long lý vảy vàng",tr:2,st:"tai",pr:0,up:4,dc:7,suc:2,omen:[10,1],easy:1,use:"cá chép sắp hóa rồng: ngắm khuây khỏa Sức +2 mỗi tuần, có khi điềm Danh +1",bad:"kẻ xấu dễ bỏ thuốc vào bồn",d:"cá chép vảy vàng, râu rồng, vây như mây, trong bồn men ngọc"},
  cuuvi:{n:"Cửu vĩ hồ",tr:3,st:"sac",pr:0,up:5,dc:9,sacX:1,fox:1,use:"đẹp lạ thường: theo hầu được Sắc +2 (con khác chỉ +1)",bad:"lời đồn hồ ly tinh: Thái hậu không vừa ý, có khi Danh -1",d:"hồ ly trắng nhỏ, chín đuôi bồng như mây"},
- kylan:{n:"Kỳ lân con",tr:3,st:"danh",pr:0,up:8,dc:8,guard:18,beast:25,omen:[10,1],use:"điềm nhân đức, giữ cung: kẻ lạ, thú dữ khó lọt vào; có khi Danh +1",bad:"ăn cỏ linh chi quý: Bạc -8 mỗi tháng",d:"kỳ lân non vảy ngọc lục, bờm vàng như mây"},
+ thienma:{n:"Thiên mã",tr:3,st:"danh",pr:0,up:8,dc:8,guard:18,beast:25,omen:[10,1],use:"ngựa trời giữ cung: kẻ lạ, thú dữ khó lọt vào; có khi Danh +1",bad:"ăn cỏ linh chi quý: Bạc -8 mỗi tháng",d:"ngựa trời non trắng tuyết, bờm như mây, vó tỏa mây sáng"},
  ngoctho:{n:"Ngọc thố",tr:3,st:"duc",pr:0,up:5,dc:10,sniff:88,soft:2,weak:1,use:"thỏ cung trăng biết mùi thuốc: đánh hơi độc cực tinh; ai thấy cũng mềm lòng (người oán nàng nhất bớt oán 2 mỗi tháng)",bad:"yếu rét: mùa đông dễ ốm",d:"thỏ ngọc trắng muốt, tỏa ánh trăng dịu"},
  phuong:{n:"Phượng hoàng non",tr:3,st:"sac",pr:0,up:8,dc:9,sungN:2,noise:1,use:"múa khi Hoàng thượng ngự: Sủng +2 mỗi đêm thị tẩm",bad:"kêu vang: người ở chung cung dễ oán · Bạc -8 mỗi tháng",d:"phượng non lông đỏ vàng, đuôi dài rực mà dịu"},
  bachloc:{n:"Bạch lộc",tr:4,st:"duc",pr:0,up:0,dc:6,omen:[15,2],rescue:1,use:"thần thú: ĐỠ MỘT MẠNG khi nàng gặp nạn chết người; điềm lành Danh",bad:"ai cũng thèm muốn: rất dễ bị ghen, bị nhắm hại",d:"hươu thần trắng như ngọc, tỏa ánh bạc"},
- thienma:{n:"Thiên mã",tr:4,st:"duc",pr:0,up:0,dc:6,th:1,rescue:1,use:"thần thú: ĐỠ MỘT MẠNG khi nàng gặp nạn chết người; Thái hậu quý nàng +1/tháng",bad:"Thái hậu ban: để mất thì Thái hậu quý nàng -8 · dễ bị ghen",d:"ngựa trời non trắng tuyết, bờm như mây, vó tỏa mây sáng"},
+ kylan:{n:"Kỳ lân",tr:4,st:"duc",pr:0,up:0,dc:6,th:1,rescue:1,use:"thần thú: ĐỠ MỘT MẠNG khi nàng gặp nạn chết người; điềm nhân đức, Thái hậu quý nàng +1/tháng",bad:"Thái hậu ban: để mất thì Thái hậu quý nàng -8 · dễ bị ghen",d:"kỳ lân vảy ngọc lục, bờm vàng như mây"},
  thanhlong:{n:"Thanh long con",tr:4,st:"danh",pr:0,up:0,dc:7,sungN:2,rescue:1,use:"thần thú: ĐỠ MỘT MẠNG khi nàng gặp nạn chết người; bay lượn khi Hoàng thượng ngự (Sủng +2)",bad:"rồng là tượng thiên tử: rất dễ bị ghen, bị nhắm hại",d:"rồng xanh nhỏ vảy lam ngọc, hào quang dịu"}};
 /* sổ cũ: con đã bỏ khỏi danh sách → con gần nhất CÙNG PHẨM (vet, sutu giữ khóa, nay là Tinh phẩm) */
-const PET_OLD={batu:"linhmieu",tekhuyen:"camke",rua:"hac",bachquy:"hac",linhquy:"thienma",ngua:"lyngu",khongtuoc:"phuong",bachac:"kylan",caotuyet:"cuuvi",tuyetdieu:"ngoctho",bachkt:"thanhlong"};
+const PET_OLD={batu:"linhmieu",tekhuyen:"camke",rua:"hac",bachquy:"hac",linhquy:"kylan",ngua:"lyngu",khongtuoc:"phuong",bachac:"thienma",caotuyet:"cuuvi",tuyetdieu:"ngoctho",bachkt:"thanhlong"};
 function petK(k){return PET[k]?k:PET_OLD[k]||k}
 const PETK=Object.keys(PET);
 /* sổ cũ: con đã bỏ → PET_OLD (cùng phẩm); khóa lạ hẳn → coi như mèo mướp */
@@ -123,10 +123,10 @@ function petGive(p,t,from,src){if(petHasFree(p))return petAdd(p,t,from,src);cons
 function petCardQ(pid){return Q.some(m=>m.pid===pid)}
 const PET_SRCN={emp:"Hoàng thượng ban",th:"Thái hậu ban",hh:"Hoàng hậu ban",man:"",hunt:"Thu săn, Hoàng thượng ban",trib:"Cống phẩm, Hoàng thượng ban",buy:"Nhờ thái giám mua"};
 function petMonth(){if(!S||S.dead)return;const on=tsbOn()&&!(typeof isSrv==="function"&&isSrv())&&!S.out,me=[S].concat(liveRivals(true));
- const empPick=sg=>sg>=80?pick(["phuong","ngoctho","kylan"]):sg>=65?pick(["linhmieu","lyngu","vet","meo"]):pick(["meo","sao","uyenuong","cachep","hoami"]);
+ const empPick=sg=>sg>=80?pick(["phuong","ngoctho","thienma"]):sg>=65?pick(["linhmieu","lyngu","vet","meo"]):pick(["meo","sao","uyenuong","cachep","hoami"]);
  for(const p of me){if(p.out)continue;const card=p===S;if(card&&(!on||Q.length>2))continue;
   if((p.sung||0)>=55&&roll(4)){const t=empPick(p.sung||0);if(card){if(!petCardQ("tsbPetGift"))petCard("tsbPetGift",{src:"emp",t},"Ngự ban")}else petGive(p,t,PET_SRCN.emp,"emp");continue}
-  if((p.th||0)>=60&&roll(2.5)){const t=(p.th||0)>=85&&rkOf(p)>=4&&roll(15)?"thienma":"hac";if(tsbPets(p).some(P=>P.t===t))continue;if(card){if(!petCardQ("tsbPetGift"))petCard("tsbPetGift",{src:"th",t},"Thái hậu ban")}else petGive(p,t,PET_SRCN.th,"th");continue}
+  if((p.th||0)>=60&&roll(2.5)){const t=(p.th||0)>=85&&rkOf(p)>=4&&roll(15)?"kylan":"hac";if(tsbPets(p).some(P=>P.t===t))continue;if(card){if(!petCardQ("tsbPetGift"))petCard("tsbPetGift",{src:"th",t},"Thái hậu ban")}else petGive(p,t,PET_SRCN.th,"th");continue}
   if(!p.queen&&rkOf(p)<7&&(p.hh||0)>=60&&queenP()&&queenP()!==p&&roll(2.5)){const t=pick(["sutu","linhmieu"]);if(card){if(!petCardQ("tsbPetGift"))petCard("tsbPetGift",{src:"hh",t},"Hoàng hậu ban")}else petGive(p,t,PET_SRCN.hh,"hh");continue}}
  /* a man who cares for her sends a small animal (her only) */
  if(on&&!petCardQ("tsbPetGift")&&(S.men||[]).some(m=>m.alive&&(m.tinh||0)>=50)&&roll(5)){const m=(S.men||[]).filter(m=>m.alive&&(m.tinh||0)>=50).sort((x,y)=>y.tinh-x.tinh)[0];petCard("tsbPetGift",{src:"man",m:m.id,t:pick(["hoami","uyenuong","meo","sao","tho"])},"Quà gửi lén")}
@@ -136,7 +136,7 @@ function petMonth(){if(!S||S.dead)return;const on=tsbOn()&&!(typeof isSrv==="fun
    if(p===S){if(on&&!petCardQ("tsbPetHunt"))petCard("tsbPetHunt",{ts},"Thu săn")}else petGive(p,ts[0],PET_SRCN.hunt,"hunt")}}
  /* foreign tribute (tháng giêng, once a year, one time in two): the most favoured consort gets a rare animal */
  if(S.month===1&&S.petTrib!==S.year){S.petTrib=S.year;if(roll(50)){const p=me.filter(p=>!p.out).sort((x,y)=>(y.sung||0)-(x.sung||0))[0];
-  if(p){const t=(p.sung||0)>=75&&roll(7)?"thanhlong":pick(["linhmieu","lyngu","camke","cuuvi","kylan","phuong"]);if(p===S){if(on&&!petCardQ("tsbPetGift"))petCard("tsbPetGift",{src:"trib",t},"Cống phẩm")}else petGive(p,t,PET_SRCN.trib,"trib")}}}
+  if(p){const t=(p.sung||0)>=75&&roll(7)?"thanhlong":pick(["linhmieu","lyngu","camke","cuuvi","thienma","phuong"]);if(p===S){if(on&&!petCardQ("tsbPetGift"))petCard("tsbPetGift",{src:"trib",t},"Cống phẩm")}else petGive(p,t,PET_SRCN.trib,"trib")}}}
  /* NPC buys a common pet through the eunuchs when she has silver to spare */
  for(const v of liveRivals(true))if(!tsbPets(v).length&&(v.bac||0)>=150&&roll(3)){const t=pick(petPool(0,1).filter(k=>PET[k].pr));if(roll(70)){ap(v,{bac:-PET[t].pr});petAdd(v,t,PET_SRCN.buy,"buy")}}
  /* monthly effects + upkeep, same rule for everyone */
