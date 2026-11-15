@@ -262,9 +262,13 @@ One short sentence of what happened, from the log of this act, rival names with 
 Mất   Đức 30→26 (−4) · Hoàng hậu Liễu Họa Mi: ghét ngươi hơn (thiện cảm −15), ghen +25, oán +20   red, person name in ink
                                                      Xem đầy đủ ở Nhật ký   (link: opens the Nhật ký tab)
 ```
-- Seal follows the outcome FOR HER, not the branch that fired: THÀNH (green) when things went her way; HỎNG (red) when the act
-  failed; BẤT LỢI (red) when the net result is a loss (no gain and a real loss beyond Sức/Bạc, or the log says she was blamed/
-  punished/exposed), e.g. petition "Trình lên Hoàng thượng… trách ngươi gây chuyện", Danh 52→44 → BẤT LỢI. Never THÀNH on a loss.
+- SEAL (owner 11/15, replaces the old "outcome for her" guess): THÀNH / HỎNG come ONLY from the act's own roll (`resultShow(title,
+  before, true|false)`); an act without a roll ("sure", null) gets NO seal and no stamp: the neutral header "KẾT QUẢ" (`.neu`). Never
+  inferred from log words or from how many lines are Được / Mất (a good night stamped "BẤT LỢI · BẠI" because the option was named
+  "Xin tha cho cung nữ bị phạt" and 12 consorts got jealous).
+- KÈM (owner 11/15): other people's feelings — the consorts' ghen / oán — are not her gains or losses: one collapsed line
+  "Kèm: 12 phi tần ghen thêm 8" (`.kakem`, ranges as "3–8"), a tap opens the names; a person she has not met is "người chưa quen".
+  Their liking FOR HER (quý ngươi hơn / ghét ngươi hơn) and evidence stay in Được / Mất.
 - Values are the REAL changes (snapshot before → now), never the option preview: no ranges, no "có thể", no repeated price line.
 - One group per person; the two-way relation is ONE plain phrase (her feeling toward you; yours only if hers did not move);
   "Hoàng hậu với ngươi" merges into the queen's group. Lines with "→" lists, "thành:/kèm:" previews are never used as the sentence;
@@ -666,9 +670,14 @@ for the figure. Phone portrait: stage 40 % of the screen on scene tabs, 24 % on 
 ### 28.5 "COVERS NO FIGURE" = the painted silhouette
 `kitFigRects()` (j79, replaced in jk2b) returns per figure 24 horizontal bands with the opaque extent of the art (alpha mask read once per picture),
 so stage blocks may stand beside a head or between figures, never over the painted body. Used by #kstat, #kcourt and every later stage overlay.
-### 28.6 OPTION MODE "cost" (hidden outcomes for EVENT choices)
+### 28.6 OPTION MODE "cost" (hidden outcomes for EVENT choices) — RETIRED 11/15 (owner: "event choices show no Được/Mất, she can't decide")
+- Event choices now show the full act card: Cần / Tốn / Được / Mất / Kèm + the odds ladder, parsed from the option's x / j67 text (kaNorm1),
+  like every act card. The mode below is OFF by default (`kitIsEventChoice` no longer sets hideOut); only an item / option that sets
+  `hideOut:true` itself still hides (none does). There is never a "Tốn: không" row: an option that costs nothing has no Tốn row.
+  Test: `dev/test/opt-render.js` (every PEND dialog + visitors: an option whose data has an outcome renders a Được or Mất row with its numbers).
+Old text, kept for history:
 - Event choices (weekly events j68, Mệnh truyện chapters j67, side events, dilemmas) show ONLY the cost: the Tốn row with Sức / khắc / Bạc
-  (`.ka.khideout`); no Được / Mất / Kèm / Ghi chú rows and no odds meter. No cost → "Tốn: không". Conditions (Cần row) stay.
+  (`.ka.khideout`); no Được / Mất / Kèm / Ghi chú rows and no odds meter. Conditions (Cần row) stay.
 - The result card (section 7) is unchanged and shows the true numbers after the choice.
 - ON BY DEFAULT for event choices at the shared builders (`kitIsEventChoice`): every item made by `pushDil` / `pushFront` / `mkP` (it carries
   `pid`/`pp`: j68 weekly events, j67 chapters, side events, j70 dilemmas, j96/j97 story lines, any later module) and every kit choice panel
