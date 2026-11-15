@@ -780,3 +780,6 @@ All must work in co-op.
 ## 15/11 ~21:45Z (session 7 clock) — Move house to a new account (owner)
 - Owner: move now. Session 7 sums up everything and packs the handover so that a NEW main chat (session 8) on a NEW account continues all of it: re-open EVERY unfinished worker; no worker and no owner idea from today may be lost.
 - Owner asked to check which account had its usage limit reset today or yesterday.
+
+## 15/11 (late, session 7) — Her face blurry on stage (owner screenshot)
+- Owner screenshot (Ngọc Thanh các, Thường tại, 20 tuổi, chưa điểm trang): HER figure's face is hazy/soft while maid Ngọc Lan beside her is crisp; owner suspects background removal ("tách nền sao mà mặt bị mất nét"). → review/face-sharp worker (find the real cause, whole class).

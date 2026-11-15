@@ -62,3 +62,5 @@ Session 7 cannot see account usage or reset dates (no tool exposes it). The owne
 
 ## 9. Late notes (s7)
 - coop-timer @ 7c9a5bc2b: built on fix-float-r8 (merged), coop-timer.js 43/43 ×3, lag test 27/27 ×2; small UI notes: chip touches desk calendar at 755, ready kitLine briefly covers a name label; j84 rule ordering after fix-float merge needs a check. Review it after fix-float r8.
+- LIVE BUG (owner screenshot, last message): her stage figure face hazy/soft vs crisp maid → review/face-sharp worker spawned at the very end of s7; check its branch PROGRESS; if empty, re-spawn (candidates: face overlay layer toil/mk/veil misaligned or translucent; figure alpha haze from background removal / low-res; CSS filter on her figure). Screenshot copy: dev/handover/refs/owner-face-blur.jpg.
+- skin-match upload was STOPPED by the coordinator before any extra upload (only the worker's 234 files are on the CDN) — verify skin-match output is not soft before uploading the rest.
