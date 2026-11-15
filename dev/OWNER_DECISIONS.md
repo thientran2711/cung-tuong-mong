@@ -702,3 +702,7 @@ All must work in co-op.
 - Rank-title colours are too pale/dull, hard to read → make every rank colour more SATURATED and vivid (still readable).
 - The GLOW + outline effect only where the name sits ON A PAINTING (stage figures over the scene picture, scroll/figure art). In framed UI (dialogs, cards, name boxes, Tuần lục text, lists — anything with a panel/paper background) use the same vivid colour as PLAIN text: no glow, no outline.
 - Her own name: black + light-gold glow on paintings (per 20:10Z); in framed UI plain black (bold OK).
+
+## 15/11 ~22:30Z — Pet decisions (owner)
+- Ngự tứ pet saves her life only at the LINH THÚ stage (keep as now, coordinator's recommendation).
+- Pet bar label stays "No" (do NOT change to "Đói").
