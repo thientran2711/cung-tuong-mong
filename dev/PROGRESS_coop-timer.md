@@ -18,9 +18,18 @@
   default clock running out during the opening Luân hồi.
 - Run 2: 32/35 (setup did not wait for Luân hồi; case 3 then started at tối; case 5 key check) → test fixed: waits for both in game, prints keys.
 
-## Next steps
-1. Fix case 2 ordering in coop-timer.js; run ≥3 times (one browser pair at a time):
-   `python3 dev/build/assemble.py && node dev/test/coop-timer.js .tmp/rN`
-2. Look at chip shots (755x1000@2, 1180x820, 844x390) in .tmp/rN.
-3. KIT.md §69 section (kitCoopClock); ts-oldsave: `node dev/test/ts-oldsave.js <old url> <new url>`; coop-e2e once for regression.
-4. Rebuild site (dev/site/build_site.sh), commit, push, report "SẴN SÀNG KIỂM".
+## Round 3 (owner ~22:55Z additions)
+- Lag-safe clock: host owns an absolute deadline in host time (the Worker has no time message; host time stands in for server time);
+  the guest keeps an offset to host time from ping pairs over the act relay (tp/tq, min-rtt of 8); start/stop sent at once with rem;
+  graceMs 1500 before the step. Host's clock rides on its `pos` (tm) so the room snapshot restores it; host also keeps localStorage.
+- "Tạm dừng" chip button → hold for both until the pauser presses "Tiếp tục" (kitCoopHold kit panel; friend sees "Hảo hữu xin tạm dừng").
+- Friend busy line: "Hảo hữu đang dở tay, xin đợi" (never what she does). Stopped clock chip: "Đợi · còn …".
+- Clock also stands still while the Luân hồi roulette (#kroul) is up.
+- dev/test/coop-timer-lag.js: routeWebSocket 300–800 ms each way; agree (worst gap 124 ms), mini game mid-countdown, hold, guest reload, time out: 27/27.
+- Earlier: coop-timer.js 42/42 ×3 (r4–r6, before round 3), coop-e2e 59/59 (fix-float-r8 merged), ts-oldsave OK.
+
+## Next steps / commands
+- `python3 dev/build/assemble.py && node dev/test/coop-timer.js .tmp/rN` (≈8 min) · `node dev/test/coop-timer-lag.js .tmp/lN` (≈6 min)
+  · `COOP_OLD_REF=origin/main node dev/test/coop-e2e.js .tmp/e2e` · ts-oldsave: serve .tmp with old.html (git show origin/main:index.html) + new.html
+  on one free port, `node dev/test/ts-oldsave.js http://127.0.0.1:P/old.html http://127.0.0.1:P/new.html`.
+- Site: `bash dev/site/build_site.sh` then commit index.html sw.js assets.json.
