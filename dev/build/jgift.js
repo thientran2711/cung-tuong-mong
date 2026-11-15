@@ -1,0 +1,126 @@
+
+/* ================= jgift: TẶNG QUÀ dialog (owner 11/15, review/gift-ui) =================
+   One dialog for giving ANY item from the chest (bought items, PEND.giftpick with an item; handmade works, PEND.wkgive):
+   · left: the ITEM's own picture in its grade frame (kitItem, j98 itemArt: works use img/item-tp-<kind>-b<tier>) — never an event picture;
+   · right: the item panel — name, grade, what it is, who made it / where it came from and when, its effect when given, who it suits best;
+   · recipients: the kit sub-tabs Chí tôn / Phi tần / Nam nhân / Cung nhân (count "givable/total", only tabs that have people), givable first,
+     each a kit person option (portrait via the j25 face hook, name) with odds · tốn · thành · kèm, or "cần: …" when it cannot be given;
+   · ✕ in the title bar closes (no Lui / Thôi row). The result card after giving shows the same item picture.
+   Dialogs with no picture of their own no longer fall back to "Triều chính" (jk2b kitEvArt default): an unmapped id uses the act category
+   picture of its title (giving → Giao thiệp) and lists itself in window.KIT_PICFALL for the picture audit (dev/tools/pic_usage.js). ===== */
+function giftArt(e){try{const a=typeof itemArt==="function"?itemArt(e&&e.wk?e:e&&e.k):null;if(a)return a}catch(x){}return{src:"",src512:"",grade:0,gradeName:"Thường"}}
+function giftName(e){if(!e)return"";if(e.wk)return e.wk.n;return IT[e.k]?IT[e.k].n:e.k}
+function giftE(s){return String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
+/* every possible recipient: [group, id, target, label]; groups: ct Chí tôn · pt Phi tần · nn Nam nhân · cn Cung nhân */
+function giftPeople(e){const L=[];L.push(["ct","emp","emp","Hoàng thượng"]);if(!S.thDead)L.push(["ct","th","th","Thái hậu"]);
+ for(const v of liveRivals(true)){const nm=typeof kitName==="function"?giftPlain(kitName(v)):`${rkName(v)} ${v.name}`;L.push([v.queen?"ct":"pt",String(v.id),v,nm])}
+ if(e&&e.wk&&S.maid)L.push(["cn","maid","maid",`${S.maid.name} (cung nữ thân tín)`]);return L}
+function giftPlain(h){return String(h||"").replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim()}
+/* what giving THIS item to THIS person does: {ok, why, x (kit line), v (value, for sorting)} */
+function giftEval(e,t){const pre="Nắm chắc · tốn: 2 khắc";
+ if(e.wk){const ev=wkEval(S,e.wk,t);if(!ev.ok)return{ok:false,why:ev.why||"không nhận đồ này",v:-1};const g=typeof wkGainTxt==="function"?wkGainTxt(ev):"";return{ok:true,x:`${pre}${g?" · thành: "+g:""}`,v:ev.v||0}}
+ const it=IT[e.k];if(!it)return{ok:false,why:"",v:-1};
+ if((t==="emp"||t==="th")&&e.t)return{ok:false,why:"không thể dâng đồ đã tẩm",v:-1};
+ const g=giftVal(Object.assign({k:e.k},it),t);
+ if(t==="emp")return{ok:true,x:`${pre} · thành: Sủng +${Math.max(1,Math.round(g/2))}`,v:g};
+ if(t==="th")return{ok:true,x:`${pre} · thành: Thái hậu quý ngươi +${g}`,v:g};
+ let x=`${pre} · thành: nàng quý ngươi +${g+3}${t.queen?` · Hoàng hậu với ngươi +${g}`:""}`;
+ if(e.t){const sp=typeof oSee==="function"?oSee(t,true):30;x+=` · kèm: nàng phát hiện đồ có vấn đề (${word(sp)}): nàng nắm 2 chứng cứ, quý ngươi -25`}
+ if(it.sl&&it.rk>rkOf(t))x+=" · kèm: vượt phẩm của nàng";return{ok:true,x,v:g}}
+/* the right-hand item panel */
+function giftInfo(e,best){const a=giftArt(e),R=[];
+ if(e.wk){const w=e.wk;const art=typeof ARTS!=="undefined"?(ARTS.find(x=>x.k===w.a)||{}).n:"";
+  R.push(["Món",`${WK[w.kind]?WK[w.kind].n:"Tác phẩm"}${art?" · "+art:""}, phẩm ${WTIER[w.ti]} (${w.q} phần)`]);
+  R.push(["Người làm",w.bn==="ngươi"?"Tự tay ngươi làm":w.bn]);R.push(["Làm lúc",w.d||"—"]);
+  if(w.p!=null)R.push(["Lưu ý",w.p<wk()?"đã nguội, không dâng được nữa":"phải dâng trong tuần này, để lâu thì nguội"]);
+  R.push(["Khi tặng","Đồ tự tay làm được thêm chân tình với người hiền hậu, thêm hợp ý khi trúng sở thích"])}
+ else{const it=IT[e.k]||{};R.push(["Món",`${it.kd||"Vật phẩm"}${it.d?" · "+it.d:""}`]);const fr=typeof kinvFrom==="function"?kinvFrom(e.from):"";R.push(["Nguồn",fr||"Đồ của ngươi"]);
+  if(e.t&&typeof TAINT==="object"&&TAINT[e.t])R.push(["Đã tẩm",TAINT[e.t].n]);R.push(["Khi tặng","Món hợp người nhận thì được nhiều hơn"])}
+ if(best)R.push(["Hợp nhất",best]);
+ return `<div class="kgift"><b class="kgift-n">${giftE(giftName(e))}</b> <span class="kgift-g kg${a.grade|0}">${giftE(e.wk?WTIER[e.wk.ti]:a.gradeName)}</span>`+
+  `<dl class="kgift-rows">${R.map(([k,v])=>`<dt>${k}</dt><dd>${giftE(v)}</dd>`).join("")}</dl></div>`}
+const GIFT_TABS=[["ct","Chí tôn"],["pt","Phi tần"],["nn","Nam nhân"],["cn","Cung nhân"]];
+function giftDialog(ix){const e=S.inv[ix];if(!e||e.h)return null;const P=giftPeople(e).map(([g,id,t,lab])=>Object.assign({g,id,t,lab},giftEval(e,t)));
+ P.sort((a,b)=>(b.ok-a.ok)||(b.v-a.v));const bestP=P.find(p=>p.ok);const best=bestP?`${bestP.lab}`:"";
+ const O=P.map(p=>({n:p.lab,kgt:p.t,fx:{},kgift:p.ok?p.x:"",kgwhy:p.ok?"":(p.why||"không nhận đồ này"),kgg:p.g,lock:!p.ok,
+  go:()=>{if(!p.ok)return;spend(2);const t=p.t;const i=S.inv.indexOf(e);window.__kitLastEvArt={src:giftArt(e).src,lab:giftName(e)};log(giveTo(S,t,i))}}));
+ O.push({n:"Thôi",fx:{},kgx:1});
+ return{t:giftInfo(e,best),o:O}}
+(function(){const g0=PEND.giftpick;PEND.giftpick=function(p){if(p&&p.ix!=null&&p.v==null&&S.inv[p.ix]){const d=giftDialog(p.ix);if(d)return d}return g0.apply(this,arguments)}})();
+(function(){if(!PEND.wkgive)return;const w0=PEND.wkgive;PEND.wkgive=function(p){if(p&&p.ix!=null&&S.inv[p.ix]&&S.inv[p.ix].wk){const d=giftDialog(p.ix);
+  /* keep the poisoned-dish options of j83 */try{const o=w0.apply(this,arguments);if(d&&o&&o.o)o.o.filter(x=>/Hạc đỉnh hồng/.test(x.n)).forEach(x=>d.o.splice(d.o.length-1,0,Object.assign(x,{kgg:"pt"})))}catch(x){}
+  if(d)return d}return w0.apply(this,arguments)}})();
+/* the option line: kit parse of our own line, or "cần: reason" */
+(function(){const d0=dilLine;dilLine=function(c){if(c&&c.kgift)return kitParse(c.kgift);if(c&&c.kgwhy)return `<span class="kwhy">${giftE(c.kgwhy)}</span>`;return d0.apply(this,arguments)}})();
+/* which queue items are the gift dialog: pid giftpick / wkgive with an item index and no fixed person */
+function giftIxOf(m){try{if(!m||!(m.pid==='giftpick'||m.pid==='wkgive'))return null;const pp=m.pp||{};if(pp.ix==null||pp.v!=null)return null;return S.inv[pp.ix]?pp.ix:null}catch(e){return null}}
+/* after the dialog is drawn: item picture left, tabs over the options, locked rows, ✕ instead of Thôi */
+let GIFT_TAB=null;
+function giftDecorate(){const M=$("modal");const m=Q[0];const gix=giftIxOf(m);if(gix==null||!M||M.hidden)return;const e=S.inv[gix];if(!e)return;
+ const dlg=M.querySelector(".dlg");dlg.classList.add("kgiftdlg");const body=M.querySelector("#mb > .kpb")||M.querySelector("#mb");
+ /* 1. the item picture replaces any event picture */
+ const a=giftArt(e);const have=body.querySelector(":scope > .kgiftpic");body.querySelectorAll(":scope > .kpsubj:not(.kgiftpic)").forEach(x=>x.remove());
+ const pic=typeof kitItem==="function"?kitItem({src:a.src||a.src512,name:"",grade:a.grade,size:"lg"}).replace('<span class="kitn"></span>',''):`<img src="${a.src}" alt="">`;
+ body.classList.add("kphas");body.classList.remove("kpinfo");if(!have||have.dataset.src!==a.src){if(have)have.remove();body.insertAdjacentHTML("afterbegin",`<div class="kpsubj kpitem kgiftpic" data-src="${a.src}">${pic}</div>`)}
+ window.__kitLastEvArt={src:a.src,lab:giftName(e)};
+ /* 2. options: group, lock, hide Thôi */
+ const B=[...M.querySelectorAll(".opt[data-m]")];const cnt={};let back=null;
+ B.forEach(b=>{const o=m.opts[+b.dataset.m];if(!o)return;if(o.kgx){back=b;b.hidden=true;b.classList.add("kgiftback");return}b.dataset.kgg=o.kgg||"pt";
+  /* the person's kit portrait (Hậu cung source; silhouette while unmet) — the j25 hook only finds faces by visible name */
+  if(o.kgt&&!b.querySelector(".md")){try{const t=o.kgt;const f=t==="emp"?pEmp():t==="th"?pTH():t==="maid"?kitFace(S.maid):pv(t);if(f)b.insertAdjacentHTML("afterbegin",mdH(f,"xs"))}catch(x){}}
+  if(o.lock){b.disabled=true;b.classList.add("kgiftno")}const c=cnt[b.dataset.kgg]||(cnt[b.dataset.kgg]=[0,0]);c[1]++;if(!o.lock)c[0]++});
+ const box=M.querySelector(".opts");if(box&&!M.querySelector(".kgifttabs")){const tabs=GIFT_TABS.filter(([k])=>cnt[k]);
+  if(!tabs.some(([k])=>k===GIFT_TAB))GIFT_TAB=(tabs.find(([k])=>cnt[k][0])||tabs[0]||[])[0];
+  if(typeof kitTabRowHTML==="function"&&tabs.length>1)box.insertAdjacentHTML("beforebegin",`<div class="pctabs kcattabs kgifttabs" role="tablist">${kitTabRowHTML(tabs.map(([k,l])=>({k,label:l,n:`${cnt[k][0]}/${cnt[k][1]}`,tip:`tặng được ${cnt[k][0]} trên ${cnt[k][1]} người`})),GIFT_TAB,"data-kgtab")}</div>`);
+  giftFilter(M)}
+ /* 3. ✕ close in the title bar = the old Thôi */
+ if(back&&!dlg.querySelector(".kgiftx")){const x=document.createElement("button");x.className="kgiftx";x.type="button";x.setAttribute("aria-label","Đóng");x.textContent="✕";
+  x.addEventListener("click",ev=>{ev.stopPropagation();ev.preventDefault();back.hidden=false;back.click()});dlg.appendChild(x)}}
+function giftFilter(M){M.querySelectorAll(".opt[data-kgg]").forEach(b=>{b.hidden=GIFT_TAB&&M.querySelector(".kgifttabs")?b.dataset.kgg!==GIFT_TAB:false})}
+document.addEventListener("click",ev=>{const t=ev.target.closest&&ev.target.closest("[data-kgtab]");if(!t)return;ev.stopPropagation();ev.preventDefault();GIFT_TAB=t.dataset.kgtab;
+ const M=$("modal");M.querySelectorAll("[data-kgtab]").forEach(b=>{const on=b.dataset.kgtab===GIFT_TAB;b.classList.toggle("on",on);b.setAttribute("aria-selected",on)});giftFilter(M)},true);
+(function(){const s0=showModal;showModal=function(){try{if(giftIxOf(Q[0])!=null)Q[0].showOut=true}catch(e){}const r=s0.apply(this,arguments);try{giftDecorate()}catch(e){console.error("gift",e)}return r}})();
+/* the chest's "Tặng" and the works' "Dâng, tặng": same dialog, titled for what it is */
+(function(){const i0=itemAct;itemAct=function(a,ix){if(a==="gift"&&S.inv[ix]&&!S.dead&&!Q.length){if(!can(2))return;GIFT_TAB=null;pushDil(mkP("giftpick",{ix}),"Tặng quà");render();return}return i0.apply(this,arguments)}})();
+/* ---------- no "Triều chính" fallback: an id without its own picture uses its title's act category, and is listed for the audit ---------- */
+window.KIT_PICFALL=window.KIT_PICFALL||{};
+(function(){if(typeof kitEvArt!=="function")return;const k0=kitEvArt;kitEvArt=function(m){if(giftIxOf(m)!=null)return null;const r=k0.apply(this,arguments);try{
+  if(!r||!m||m.art||m.stArt)return r;const pp=m.pp||{};const id=m.evId||(m.pid?(m.pid+(pp&&(pp.id||pp.k)?":"+(pp.id||pp.k):"")):"")||(m.kind==="news"||/Tin trong cung/.test(m.t||"")?"news:"+(m.t||""):"");
+  const mapped=id&&typeof evArtCat==="function"&&evArtCat(id);if(mapped)return r;
+  const t=giftPlain(m.t||"")+" "+giftPlain(m.h||"").slice(0,80);const a=typeof kitActArt==="function"?kitActArt(t):null;
+  const key=id||"title:"+giftPlain(m.t||"");KIT_PICFALL[key]=(KIT_PICFALL[key]||0)+1;
+  return a&&a.src?{src:a.src,lab:a.label||""}:null}catch(e){return r}}})();
+(function(){const st=document.createElement("style");st.id="kgift-css";st.textContent=`
+.kgift{display:flex;flex-direction:column;gap:4px;min-width:0}
+.kgift-n{font-family:var(--display);font-size:1.12rem;color:var(--ink);line-height:1.25}
+.kgift-g{display:inline-block;align-self:flex-start;font-size:.78rem;font-weight:700;padding:1px 9px;border-radius:9px;border:1px solid var(--line);background:var(--panel2);color:var(--gold)}
+.kgift-rows{display:grid;grid-template-columns:auto minmax(0,1fr);gap:3px 10px;margin:4px 0 0}
+.kgift-rows dt{font-size:.74rem;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--dim);padding-top:2px;white-space:nowrap}
+.kgift-rows dd{margin:0;font-size:.9rem;line-height:1.35;overflow-wrap:anywhere}
+.kgiftdlg{position:relative}
+.kgiftx{position:absolute;top:6px;right:8px;z-index:5;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:1.05rem;line-height:1;cursor:pointer}
+.kgiftdlg .kgifttabs{margin:6px 0 4px}
+.kgiftdlg .opt.kgiftno{opacity:.62}
+.kgiftdlg .opt[hidden],.kgiftdlg .opt.kgiftback{display:none!important}
+.kgiftpic .kitem{width:100%;max-width:220px;margin:0 auto}
+`;document.head.appendChild(st)})();
+/* ---------- the item someone else wears / holds (person card slots, K1): the kit ITEM dialog, not an info picture ----------
+   item picture in its grade frame, name + grade, the owner (small portrait + name), the item's kit rows, ✕ close (no "Đã hiểu"). */
+function kitOtherItem(v,x,sl){try{const W=typeof WD_ITEMS==="object"&&WD_ITEMS[x.k];const g=x.grade|0,gr=KIT_GRADE[g]||KIT_GRADE[0];
+ const src=typeof kitItemSrc==="function"?kitItemSrc(x.k,x.icon):(x.icon||"");
+ let rows="";try{rows=W&&typeof wdItemRowsE==="function"?wdItemRowsE({k:x.k},{}):typeof kitItemRows==="function"?kitItemRows(x.k,{}):""}catch(e){rows=""}
+ const own=`<div class="kgiftown">${typeof mdH==="function"?mdH(pv(v),"sm"):""}<span>${sl==="tram"?"Đang cài":"Đang mặc"}: ${typeof kitName==="function"?kitName(v):giftE(v.name)}</span></div>`;
+ const F=[x.label?`Ngươi đã biết: ${x.label}.`:"Đúng phẩm hay không: chưa rõ (chưa ai nhận xét).",x.giver?`${x.giver} ban.`:"","Hặc ăn mặc sai phẩm: thẻ người của nàng, nhóm Hại nặng."].filter(Boolean);
+ kitModal({kind:"info",title:x.name,sub:`${sl==="tram"?"Trâm cài":"Y phục"} · ${gr.n}`,kx:1,
+  itemPic:kitItem({src,name:"",grade:g,size:"lg"}).replace('<span class="kitn"></span>',''),
+  html:`${own}${rows?`<div class="kinvrows">${rows}</div>`:""}${kitFacts(F)}`,btn:"Lui"})}catch(e){console.error("kitOtherItem",e)}}
+addEventListener("click",ev=>{const t=ev.target.closest&&ev.target.closest("[data-kwear]");if(!t||t.dataset.kwho==="me")return;
+ const v=(typeof rivals!=="undefined"&&rivals.find(r=>String(r.id)===t.dataset.kwho))||null;if(!v||typeof wdSlots!=="function")return;const x=wdSlots(v).find(s=>s.slot===t.dataset.kwear);if(!x||x.empty)return;
+ ev.stopPropagation();ev.preventDefault();kitOtherItem(v,x,t.dataset.kwear)},true);
+/* ✕ close for kit panels that ask for it (spec.kx): the bottom "Lui/Đã hiểu" row is hidden, ✕ in the title bar does the same */
+(function(){const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);try{const m=Q[0],M=$("modal");if(m&&m.kit&&m.kit.kx&&M&&!M.hidden){const dlg=M.querySelector(".dlg");dlg.classList.add("kgiftdlg");
+  const mc=$("mclose");if(mc){mc.closest("#mr")&&($("mr").hidden=true);if(!dlg.querySelector(".kgiftx")){const x=document.createElement("button");x.className="kgiftx";x.type="button";x.setAttribute("aria-label","Đóng");x.textContent="✕";
+   x.addEventListener("click",ev=>{ev.stopPropagation();ev.preventDefault();const c=$("mclose");if(c)c.click()});dlg.appendChild(x)}}}else if(M){const r0=$("mr");if(r0)r0.hidden=false;const x=M.querySelector(".dlg > .kgiftx");if(x&&!(giftIxOf(m)!=null))x.remove()}}catch(e){}return r}})();
+/* a gift that ARRIVES (PEND.giftin) shows the item, too */
+(function(){const k0=kitEvArt;kitEvArt=function(m){try{if(m&&m.pid==="giftin"&&m.pp&&m.pp.e){const a=giftArt(m.pp.e);if(a&&a.src)return{src:a.src,lab:giftName(m.pp.e)}}}catch(e){}return k0.apply(this,arguments)}})();
+(function(){const st=document.createElement("style");st.textContent=`.kgiftown{display:flex;align-items:center;gap:8px;margin:0 0 6px;font-weight:600}.kgiftown .md{flex:0 0 auto}`;document.head.appendChild(st)})();
