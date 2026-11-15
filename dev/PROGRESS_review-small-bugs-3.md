@@ -35,3 +35,8 @@ Not changed (noted): "thù −N" strings (j17 AOUT etc.) are mapped by kitParse 
 - After: small-bugs-3.js clean at 755x1000@2, 1000x755, 1180x820@2 (x2 runs + @1), 1366x1024@2, 844x390, 390x844; sb3-scan TOTAL 0;
   kit-page.js bad 0 at 5 sizes; rotate prompt one line on site index.html 390x844 host + direct, gone after turning to 844x390;
   standalone item names keep capitals on all 18 tabs (probe), no item name collides with rank/rival names.
+- Re-merged origin/main 7ba53114 (fix-float r9): j17 AOUT kept main's "quý ngươi / oán ngươi" words + this branch's gift "thiện cảm";
+  j84 QUICK = main's (both added "thân ±"). After: small-bugs-3.js clean at all 6 sizes; kit-page.js bad 0; old save made by main
+  7ba53114 loads in this build (log line reads "tặng trâm gỗ đào …: thiện cảm +5", 3 buổi advance, 0 errors). sb3-scan shows 2 hits that are
+  inside a j87 comment (main's KBK_RELRE note; scanner's comment strip is rough) — not player-visible.
+- KIT_REQUESTS "k3 top state row wrap/overflow rule" is done by KIT §31.2a (can be closed).
