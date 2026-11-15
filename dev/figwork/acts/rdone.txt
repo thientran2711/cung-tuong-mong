@@ -264,3 +264,14 @@ cau-xin-quan-su-h cau-xin-quan-su-g-h
 day-le-nghi-h day-le-nghi-g-h
 dung-ra-can-h dung-ra-can-g-h
 dung-ve-phia-h dung-ve-phia-g-h
+bo-yen-thuc-ben-con-h bo-yen-thuc-ben-con-g-h
+hau-benh-ca-thang-h hau-benh-ca-thang-g-h
+khen-tai-nghe-h khen-tai-nghe-g-h
+mat-tau-h mat-tau-g-h
+nang-so-viec-nguy-h nang-so-viec-nguy-g-h
+nho-cau-xin-h nho-cau-xin-g-h
+trung-doc-h trung-doc-g-h
+trung-doc-thuoc-giai-h trung-doc-thuoc-giai-g-h
+xin-th-do-loi-h xin-th-do-loi-g-h
+xin-che-cho xin-che-cho-h
+sinh-ha-h sinh-ha-g-h

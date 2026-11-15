@@ -241,3 +241,11 @@ Notes: `cdn_sync.py --pull` does NOT refresh img/_index.json reliably (stale loc
 
 - Batch 4a (keys 153-182) LIVE-OK 15/11 ~21:15Z (worker act-pics2 #4): 30 drawn, all looked at on the sheet (+zoom of 4 doubtful tops), 0 faces, 0 redos; dark keys gloomy interiors/overcast, no moon. rwire corpus check passed (set -e, bad 0); all 30 old keys gone from live ACTS, 30 new -h referenced. Night-by-nature ngu-dem / pho-tai-dem drawn light (soft lamp / warm evening hall). Credits 30 x 40 = 1,200.
 - Batch 4b (keys 183-192, roi-phe..say-thai) LIVE-OK 15/11 ~21:20Z: 10 drawn, looked at, 0 faces, 0 redos; rswap 10 keys, 11 entries, 17 corpus lines changed, bad 0. Credits 400. Worker #4 total: 65 pictures (25 dark re-check + 40 new) = 2,600 credits. Stopped at a clean boundary (context).
+### Session 15/11 late (worker act-pics2 #5) - redraw 192 -> 237 of 380 + owner fixes + hand audit
+- CDN upload works again (Cloudflare token): everything drawn this session is uploaded and wired live by rwire.sh. **PENDING CDN UPLOAD: none.**
+- Owner redraws LIVE: say-thai (dark grief mood: empty cradle, physician closing case; live say-thai-h -> say-thai-g-h), sai-khat-bong (eunuch in slate-blue, no pink; -> sai-khat-bong-g-h), bao-cung-chinh-ti (single maid with lantern, no group; bao-cung-chinh-ti-g-h -> bao-cung-chinh-ti-k-h).
+- Owner hand report "Thỉnh an Hoàng hậu": thinh-an-hh-h -> thinh-an-hh-g-h (curtsy, hands lightly over a handkerchief), LIVE.
+- Hand audit of ALL 805 live act keys: list in dev/figwork/acts/hand_audit_1115.txt (24 bad incl. 1 face: sinh-ha baby face). All 24 redrawn with hands hidden in sleeves / back views and LIVE (batches 5c-5e). Rejected-on-sheet first draws: sinh-doi (redone: baby feet only), bo-yen-thuc-ben-con (child face, redone), thay-buot-mieng / thi-tai-nu / thi-tham (redone from behind).
+- Main queue: keys 193..thoat-than-no-ty done (batches 5a-5f); rdone.txt = truth. Scenes for the next keys are written in rscenes.txt through tro-chuyen-voi (thu-cu-lot .. tro-chuyen-voi not yet drawn). Resume = first key of redraw_order.txt not in rdone.txt col 1.
+- New container setup used: tmp/wire/inv_ast.js with B=<wt>/dev/build/ and split('\n')[13]; corpus 1489 lines. TRX = this session's subagent .jsonl (grep -l <creation id>).
+- Credits this session ~ 85 x 40 = 3,400.

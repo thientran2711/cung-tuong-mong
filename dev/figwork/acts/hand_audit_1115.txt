@@ -1,0 +1,27 @@
+# Hand audit 15/11 late (owner: 'Vẽ tay kì vậy', thinh-an-hh). 805 live act keys looked at on 45 labelled 6x3 sheets (+zoomed 4x2 sheets of 43 doubtful). key|problem -> all REDRAWN and live (new CDN name in rdone.txt)
+thinh-an-hh-h|folded hands at waist mushy/interlocked (owner report)
+khoc-xin-tha-h|clasped raised hands, wrist/arm geometry wrong
+quy-xin-tha-cho-nang-h|clasped hands read as a foot, no wrist
+xin-an-dien|folded hands a flat blob
+vao-cung-phong-h|crossed hands, fingers fused/too long
+xin-an-ve-tham-h|clasped hands floating, wrists wrong
+ket-minh-h|two clasping hands, finger mush
+banh-trung-thu-h|three hands around the box, extra receiving hand
+bo-yen-thuc-ben-con-h|holding hands fused into one shape
+cau-xin-h|clasped pleading hands, finger mush
+cau-xin-quan-su-h|clasped pleading hands, finger mush
+day-le-nghi-h|four hands tangled at the waist, extra hands
+dung-ra-can-h|raised hands floating, too many hands for two figures
+dung-ve-phia-h|hand gripping a wrist, fused fingers
+hau-benh-ca-thang-h|third hand on the patient's arm, unclear whose
+khen-tai-nghe-h|two clapping hands floating with no body
+mat-tau-h|clasped hands in the centre, finger mush
+nang-so-viec-nguy-h|self-hug with a third hand, arms tangled
+nho-cau-xin-h|two gripping hands fused at the wrists
+sinh-ha-h|FACE: newborn's face visible (redo, faceless)
+trung-doc-h|three hands at the wrist, extra hand
+trung-doc-thuoc-giai-h|hand/fingers merged with cup and box
+xin-th-do-loi-h|old hand gripping young hand, fingers merged
+xin-che-cho|ringed hand gripping a hand, finger mush
+# checked OK on zoom:  vang-menh-h im-lang-h nhin-loi-mia-h minh-oan-h tao-mo-h nguoi-quen-che-cho-h quoc-tang-h thu-toi an-mac-gian-di-h and bai-kien-h ban-ga-h cai-lai-h chao-hoi-dung-le-h cau-tu chu-nho-on-h chua-nhan-vao-phe-h co-viec-nho-h cui-dau-thua-ten-h dan-di-thinh-an-h dan-con-thinh-an cuoi-chinh-phi-h de-bat-nguoi-hau-h do-la-duoc-h de-nang-chiu-don-h doi-nguoi-nau-h doan-thai-hau-trong-h dung-ra-noi-do-h dung-xem-h duoc-thang-cung-nu-h
+# note: old FACE pictures still in the redraw queue (keys 238+) were not hand-judged; they are replaced by the redraw anyway.

@@ -279,3 +279,6 @@ trung-doc-thuoc-giai|0|a small porcelain antidote vial standing in an open chest
 xin-th-do-loi|0|a consort seen from behind kneeling at the feet of an elder lady seated in a dark brocade robe, the elder's hand resting on the consort's shoulder, bright hall
 xin-che-cho|0|a consort seen from behind kneeling low before the Empress's red phoenix brocade hem, hands hidden in her sleeves, asking for protection, bright hall
 sinh-ha|0|a midwife seen from behind holding a newborn bundle wrapped completely in red cloth, nothing of the baby visible, turning toward a curtained bed, soft daylight
+thay-buot-mieng|0|a guqin on a table in a bright music room, a music teacher in a grey robe seen from behind turning away abruptly, a consort in pink seen from behind seated at the instrument
+thi-tai-nu|0|a consort seen from behind seated at a low examination desk writing on a blank scroll, a row of empty desks blurred beyond, bright hall
+thi-tham|0|two maids seen from behind leaning their heads close together behind a half-closed lattice door, bright corridor, hands hidden in sleeves
