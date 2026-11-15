@@ -1,0 +1,1404 @@
+{
+ "_doc": "act-pics2 step 2: all meanings.py rules merged into the live ACTS.json log in meanings.py order. add = [regex, key, index in the new log]; held = rules left out because their picture is not on the CDN [key, regex, scene].",
+ "add": [
+  [
+   "^Bị bắt và tra khảo",
+   "bi-bat-tra-khao-h",
+   469
+  ],
+  [
+   "bắt gặp .+ lén trao đổi ánh mắt",
+   "bat-gap-trao-anh-mat-h",
+   470
+  ],
+  [
+   "^Dâng bánh trung thu",
+   "banh-trung-thu-h",
+   476
+  ],
+  [
+   "^Bát thuốc bị đổ đi",
+   "bat-thuoc-bi-do-h",
+   488
+  ],
+  [
+   "bị đẩy xuống hồ sen, may được vớt|^Kẻ định đẩy .+ xuống hồ bị bắt",
+   "bi-day-xuong-ho-h",
+   495
+  ],
+  [
+   "^Bày kế phản gián",
+   "bay-ke-phan-gian-h",
+   510
+  ],
+  [
+   "bị bắt vì mang thư lãnh cung",
+   "bi-bat-mang-thu-lanh-cung-h",
+   515
+  ],
+  [
+   "^Án cũ được lật|rửa oan, truy phong",
+   "an-cu-duoc-lat-h",
+   516
+  ],
+  [
+   "^Bị bắt buôn lậu|^Cả cung khinh rẻ",
+   "bi-bat-buon-lau-h",
+   520
+  ],
+  [
+   "^Bán lén",
+   "ban-len-h",
+   521
+  ],
+  [
+   "^Bán(\\.|$| \\()|^Bán .+ ×|^Bán \\S+|^.+ bán ",
+   "ban-h",
+   522
+  ],
+  [
+   "^Ân thưởng",
+   "an-thuong-h",
+   524
+  ],
+  [
+   "bị giáng xuống",
+   "bi-giang-h",
+   525
+  ],
+  [
+   "bị cấm túc",
+   "bi-cam-tuc-h",
+   526
+  ],
+  [
+   "bị ban chết",
+   "bi-ban-chet-h",
+   527
+  ],
+  [
+   "^Bệnh chưa thuyên giảm|^Thang thuốc của thái y làm bệnh nặng",
+   "benh-chua-giam-h",
+   529
+  ],
+  [
+   "^Báo cho ",
+   "bao-cho-h",
+   531
+  ],
+  [
+   "ra cửa Thần Vũ bán",
+   "ban-ra-ngoai-h",
+   576
+  ],
+  [
+   "ở yến tiệc, cả điện truyền tay",
+   "bay-o-yen-tiec-h",
+   577
+  ],
+  [
+   " ban hôn: ",
+   "ban-hon-con-h",
+   578
+  ]
+ ],
+ "held": [
+  [
+   "scene:rv",
+   "^Đến cung nàng thăm",
+   ""
+  ],
+  [
+   "dung-sau-hau-chu",
+   "^Đứng sau hầu chủ|^Lui về sau chủ",
+   "Cung nữ đứng sau lưng chủ, cúi đầu, ở yến tiệc"
+  ],
+  [
+   "day-le-nghi",
+   "^Dạy lễ nghi",
+   "Ma ma dạy một cung nữ trẻ cách vạn phúc, đứng chỉnh tay"
+  ],
+  [
+   "cau-xin-quan-su",
+   "^Cầu xin quản sự",
+   "Cung nữ cúi xin ma ma quản sự đang cầm roi mây"
+  ],
+  [
+   "quan-su-gat-dau",
+   "^Quản sự gật đầu",
+   "Ma ma quản sự gật đầu, cung nữ thở phào"
+  ],
+  [
+   "bi-quan-su-bat-gap",
+   "^Bị quản sự bắt gặp",
+   "Ma ma quản sự bắt gặp cung nữ đang ngồi nghỉ sau chồng chậu"
+  ],
+  [
+   "cui-dau-nhan-loi",
+   "^Cúi đầu nhận lỗi|^Nhận tội, xin tha",
+   "Cung nữ quỳ cúi đầu nhận lỗi trước chủ"
+  ],
+  [
+   "khoc-xin-tha",
+   "^Khóc lóc xin tha",
+   "Cung nữ quỳ chắp tay xin tha (mặt cúi, không thấy nước mắt)"
+  ],
+  [
+   "cai-lai",
+   "^Cãi lại",
+   "Cung nữ ngẩng đầu đáp lời, chủ nhân giận đập bàn"
+  ],
+  [
+   "vang-lenh",
+   "^Vâng lệnh",
+   "Cung nữ cúi đầu nhận lệnh, chủ chỉ tay"
+  ],
+  [
+   "mat-bao-hh",
+   "^Mật báo (cho )?Hoàng hậu",
+   "Cung nữ quỳ thì thầm trước Hoàng hậu trong phòng kín"
+  ],
+  [
+   "mat-bao-cho",
+   "^Mật báo cho",
+   "Cung nữ đưa mảnh giấy gấp cho cung nữ khác qua khe cửa"
+  ],
+  [
+   "len-bao-tin",
+   "^Lén báo tin cho|lén báo cho .+ mưu",
+   "Cung nữ chạy nhanh qua hành lang đêm cầm đèn, báo tin"
+  ],
+  [
+   "thanh-minh",
+   "^Thanh minh",
+   "Cung nữ quỳ thẳng lưng, giơ tay chỉ về phía kẻ vu cáo"
+  ],
+  [
+   "dut-bac-rut-loi",
+   "^Đút bạc cho .+ rút lời",
+   "Cung nữ dúi bạc cho cung nữ khác sau gốc cây"
+  ],
+  [
+   "cui-dau-thua-ten",
+   "^Cúi đầu thưa tên",
+   "Cung nữ cúi đầu thưa tên trước Hoàng thượng đứng hỏi trong vườn"
+  ],
+  [
+   "viec-khong-thanh",
+   "^Việc không thành, may",
+   "Cung nữ cầm gói bột lén quay về, cửa khép, không ai thấy"
+  ],
+  [
+   "nang-so-viec-nguy",
+   "^Nàng sợ vì bị sai việc nguy hiểm",
+   "Cung nữ ôm vai run sợ trong góc, chủ vừa ra lệnh"
+  ],
+  [
+   "doan-ra-do-minh",
+   "đoán ra ngươi sai người dò",
+   "Phi tần đứng trên hiên nhìn thẳng về phía tên thái giám đang rình"
+  ],
+  [
+   "nhan-toi-thay",
+   "^Nhận tội thay nàng",
+   "Phi tần đứng ra trước Hoàng hậu, cung nữ quỳ phía sau"
+  ],
+  [
+   "de-nang-chiu-don",
+   "^Để nàng chịu đòn",
+   "Phi tần quay mặt đi, cung nữ bị thái giám dẫn ra ngoài"
+  ],
+  [
+   "lam-ngo",
+   "^Làm ngơ",
+   "Phi tần cầm quạt đi qua, không nhìn về chuyện bên cạnh"
+  ],
+  [
+   "mua-lay",
+   "^Mua lấy",
+   "Phi tần đưa bạc mua một phong thư từ tay thái giám lén lút"
+  ],
+  [
+   "dua-com-ao",
+   "^Đưa cơm áo",
+   "Cung nữ mang giỏ cơm và áo bông đến cho phế phi ở lãnh cung"
+  ],
+  [
+   "li-xi",
+   "^Lì xì cung nhân",
+   "Phi tần trao bao lì xì đỏ cho các cung nữ quỳ chúc Tết"
+  ],
+  [
+   "nau-chao-phat",
+   "^Tự tay nấu cháo phát",
+   "Phi tần múc cháo từ nồi lớn phát cho cung nhân ngày đông"
+  ],
+  [
+   "nau-che-mung",
+   "^Nấu chè mừng cả cung",
+   "Phi tần nấu nồi chè lớn, cung nữ múc chè ra bát mừng lễ"
+  ],
+  [
+   "chep-kinh",
+   "^Chép kinh, giữ đức",
+   "Phi tần áo trơn chép kinh bên ngọn đèn trong lãnh cung (không chữ đọc được)"
+  ],
+  [
+   "theu-khan-ban-lc",
+   "^Thêu khăn bán(\\.|$| \\()",
+   "Phế phi áo trơn ngồi thêu khăn bên song cửa lãnh cung"
+  ],
+  [
+   "trai-gioi",
+   "^Trai giới cầu đảo",
+   "Phi tần áo trắng quỳ trước bàn thờ cầu mưa, lư hương"
+  ],
+  [
+   "le-tru-ta",
+   "^Mời sư làm lễ trừ tà",
+   "Nhà sư gõ mõ làm lễ trước cung, khói hương, cung nữ đứng xem"
+  ],
+  [
+   "rinh-bat-gia-ma",
+   "^Rình bắt kẻ giả ma",
+   "Thái giám cầm đèn nấp sau cột chờ, bóng trắng giả ma ở góc hành lang"
+  ],
+  [
+   "ke-gia-ma",
+   "^Kẻ giả ma là",
+   "Thái giám kéo tấm vải trắng khỏi một cung nữ, đèn soi"
+  ],
+  [
+   "goi-banh-u",
+   "^Gói bánh ú dâng Thái hậu",
+   "Phi tần gói bánh ú lá tre bên bàn, giỏ bánh dâng Thái hậu"
+  ],
+  [
+   "tui-ngai",
+   "^Đeo túi ngải cho các con",
+   "Phi tần đeo túi ngải thêu lên cổ đứa con nhỏ, Tết Đoan ngọ"
+  ],
+  [
+   "cuoc-thuyen-rong",
+   "^Đặt cược thuyền rồng",
+   "Thuyền rồng đua trên hồ, phi tần trên lầu đặt bạc cược"
+  ],
+  [
+   "thuyen-ve-nhat",
+   "cược về nhất",
+   "Thuyền rồng cắm cờ đỏ về đích, phi tần reo vui trên lầu (mặt thanh thản)"
+  ],
+  [
+   "theo-len-nui",
+   "^Theo ngài lên núi",
+   "Hoàng thượng và phi tần leo bậc đá lên núi mùa thu, lá đỏ"
+  ],
+  [
+   "ruou-cuc",
+   "^Dâng rượu cúc chúc thọ",
+   "Phi tần dâng chén rượu cúc lên Thái hậu, hoa cúc vàng"
+  ],
+  [
+   "tha-den-cau-sieu",
+   "^Thả đèn cầu siêu",
+   "Phi tần thả đèn hoa sen trên sông đêm Vu Lan"
+  ],
+  [
+   "cung-phi-tan-oan",
+   "^Cúng các phi tần (chết oan|bạc mệnh)",
+   "Phi tần thắp hương trước bàn thờ nhỏ ở góc cung, hoa trắng"
+  ],
+  [
+   "muon-le-do-hoi",
+   "^Mượn lễ dò hỏi",
+   "Phi tần trò chuyện với cung nhân già bên mâm cúng, hỏi han"
+  ],
+  [
+   "muon-dip-do-tin",
+   "^Mượn dịp dò tin",
+   "Ngày Thanh minh, phi tần hỏi chuyện thái giám bên đường đi tảo mộ"
+  ],
+  [
+   "theo-hau-le-te",
+   "^Xin theo hầu lễ tế",
+   "Đoàn lễ tế trước Thái miếu, phi tần đi theo sau Hoàng thượng"
+  ],
+  [
+   "dang-ngoc-nhu-y",
+   "^Dâng ngọc Như Ý",
+   "Phi tần dâng ngọc Như Ý trên khay gấm lên Thái hậu mừng thọ"
+  ],
+  [
+   "le-mon",
+   "^Lễ mọn cho phải phép",
+   "Cung nữ dâng một hộp quà nhỏ ở bàn lễ vật mừng thọ"
+  ],
+  [
+   "dang-cau-doi",
+   "^Dâng câu đối chúc Tết",
+   "Phi tần dâng cuộn giấy đỏ chúc Tết (không chữ) lên Hoàng thượng"
+  ],
+  [
+   "giai-cau-do-den",
+   "^Giải câu đố đèn",
+   "Lễ Nguyên tiêu, phi tần đứng dưới dãy đèn lồng có treo câu đố (giấy trơn)"
+  ],
+  [
+   "dao-den",
+   "^Dạo đèn cùng một phi tần",
+   "Hai phi tần cầm đèn lồng dạo vườn đêm Nguyên tiêu"
+  ],
+  [
+   "tha-den-cau-con",
+   "^Thả đèn cầu con",
+   "Phi tần thả đèn lồng giấy đỏ trôi trên hồ cầu con"
+  ],
+  [
+   "tao-mo",
+   "^Xin về tảo mộ",
+   "Phi tần quỳ xin Hoàng hậu cho về tảo mộ, cành liễu Thanh minh"
+  ],
+  [
+   "lam-banh-cho-con",
+   "^Làm bánh cho các con",
+   "Phi tần nặn bánh trung thu cùng các con nhỏ"
+  ],
+  [
+   "don-giao-thua",
+   "^Thức đón giao thừa",
+   "Hoàng thượng và phi tần đứng hiên nhìn pháo hoa giao thừa"
+  ],
+  [
+   "viet-cau-doi",
+   "^Viết câu đối mới",
+   "Phi tần viết lên giấy đỏ (nét trừu tượng, không chữ đọc được), cung nữ dán cửa"
+  ],
+  [
+   "thu-mui-ten",
+   "^Xin thử một mũi tên",
+   "Phi tần giương cung nhắm bia ở trường săn, Hoàng thượng xem"
+  ],
+  [
+   "cuoc-thien-xa",
+   "^Đặt cược tay thiện xạ",
+   "Các phi tần trên đài đặt bạc cược, xa xa thị vệ bắn cung"
+  ],
+  [
+   "hoi-phuong",
+   "^Hội Phượng",
+   "Đài Hội Phượng cờ đỏ, phi tần cưỡi ngựa diễu"
+  ],
+  [
+   "sai-di-do-la",
+   "^Sai đi dò la",
+   "Phi tần dặn tiểu thái giám, chỉ về phía cung khác, hắn cúi đầu"
+  ],
+  [
+   "nho-do-tin",
+   "^Nhờ dò tin",
+   "Cung nữ nhờ thái giám bạn dò tin, đưa một gói bánh"
+  ],
+  [
+   "do-la-duoc",
+   "dò la được chuyện của .+ về bẩm",
+   "Cung nữ quỳ bẩm chủ, chủ nghiêng tai nghe"
+  ],
+  [
+   "nghe-len-duoc",
+   "nghe lén được chuyện|nghe lén chuyện của",
+   "Bóng người áp tai vào cửa giấy, trong phòng đèn có hai bóng nói chuyện"
+  ],
+  [
+   "nap-nghe-bi-bat",
+   "nấp nghe ngoài cửa sổ .+ bị .+ bắt gặp",
+   "Cung nữ nấp nghe ngoài cửa sổ bị một ma ma nắm tay áo kéo ra"
+  ],
+  [
+   "len-cai",
+   "lén cài|^.+ lén .+ vào ",
+   "Bàn tay giấu gói nhỏ vào gối thêu trên giường người khác"
+  ],
+  [
+   "ke-len-cai-bi-bat",
+   "^Kẻ lẻn vào cung .+ cài .+ bị bắt",
+   "Thị vệ bắt tiểu thái giám đang lẻn ra khỏi cung với hòm trống"
+  ],
+  [
+   "tim-thay-hinh-nhan",
+   "tìm thấy hình nhân bùa ngải|^Hình nhân bùa ngải được tìm thấy",
+   "Thái giám lôi hình nhân vải ra từ dưới gầm giường, mọi người lùi lại"
+  ],
+  [
+   "vu-oan-bi-lo",
+   "vu oan .+ bị lộ",
+   "Hoàng hậu giơ hình nhân vải, kẻ vu oan quỳ cúi đầu"
+  ],
+  [
+   "dao-duoc-hinh-nhan-trieu",
+   "đào được hình nhân trù ẻo Hoàng thượng",
+   "Thị vệ đào được hộp gỗ dưới gốc cây trong sân, mở ra có hình nhân vải"
+  ],
+  [
+   "hinh-nhan-lan-goc",
+   "^Hình nhân trù ẻo bị lần ra gốc",
+   "Thái giám cầm hình nhân vải đi theo dấu đến cửa một cung"
+  ],
+  [
+   "khap-cung-don",
+   "^Khắp cung đồn",
+   "Cung nữ khắp các hành lang chụm đầu xì xào, liếc nhìn về một cung"
+  ],
+  [
+   "loi-don-khong-ai-tin",
+   "^Lời đồn .+ tung ra .+ không ai tin",
+   "Hai cung nữ lắc đầu cười, bỏ đi, người tung tin đứng một mình"
+  ],
+  [
+   "loi-don-phung-phi",
+   "^Lời đồn .+ phung phí",
+   "Cung nữ xì xào bên rương gấm vàng tràn đầy"
+  ],
+  [
+   "ly-gian-khong-tin",
+   "^Lời ly gián .+ không ai tin|Mưu ly gián .+ bị .+ nhìn thấu",
+   "Hoàng thượng phẩy tay áo không tin, người ly gián cúi đầu"
+  ],
+  [
+   "ngam-doc-dan",
+   "ngấm độc dần",
+   "Phi tần gầy yếu nằm trên giường, bát thuốc bên cạnh"
+  ],
+  [
+   "trung-doc",
+   "trúng độc, (thập tử nhất sinh|nôn ra máu)",
+   "Thái y quỳ bên giường phi tần trúng độc, cung nữ hoảng hốt (không máu)"
+  ],
+  [
+   "trung-doc-thuoc-giai",
+   "trúng độc, may có thuốc giải",
+   "Cung nữ lấy lọ thuốc giải từ rương, đỡ chủ uống"
+  ],
+  [
+   "thuoc-doc-bi-phat-hien",
+   "^Thuốc độc nhắm vào .+ bị phát hiện|^Thuốc bổ có vị lạ",
+   "Thái y giơ trâm bạc thử độc đã đen trên bát thuốc"
+  ],
+  [
+   "hoang-hau-bang-ha-tra",
+   "băng hà sau chén trà",
+   "Chén trà đổ trên án, rèm vàng buông, cung nhân quỳ khóc (mặt cúi)"
+  ],
+  [
+   "cai-ba-do",
+   "cài bà đỡ vào cung",
+   "Bà đỡ trung niên mang hòm đồ bước vào cổng cung phi tần có thai"
+  ],
+  [
+   "pha-hoc-lo",
+   "^Mưu phá việc học .+ bị lộ|mua chuộc thầy dạy",
+   "Thầy dạy nhận túi bạc ở cửa sau, sách học rơi"
+  ],
+  [
+   "to-giac-truoc-hh",
+   "tố giác .+ trước Hoàng hậu",
+   "Phi tần quỳ trình bằng chứng trước Hoàng hậu ngồi trên ghế phượng"
+  ],
+  [
+   "to-giac-truoc-ht",
+   "tố giác .+ trước Hoàng thượng|^Tố lên Hoàng thượng",
+   "Phi tần quỳ dâng phong thư bằng chứng lên Hoàng thượng trong điện"
+  ],
+  [
+   "to-giac-truoc",
+   "tố giác .+ trước ",
+   "Phi tần quỳ trình bằng chứng trước Thái hậu"
+  ],
+  [
+   "to-giac-khong-thanh",
+   "tố giác .+ không thành|tố .+ nhưng không đủ chứng",
+   "Hoàng hậu gạt bằng chứng sang bên, người tố quỳ cúi đầu"
+  ],
+  [
+   "to-loi-voi-chu",
+   "^Tố lỗi với chủ|tố .+ lười nhác",
+   "Cung nữ bẩm chủ, chỉ về một cung nữ đang ngủ gật"
+  ],
+  [
+   "to-khong-tin",
+   "tố .+ nhưng .+ không tin",
+   "Chủ nhân lắc đầu trách cung nữ tố cáo"
+  ],
+  [
+   "ke-toi",
+   "^Kể tội",
+   "Phi tần kể tội một người với Thái hậu, Thái hậu nghe nghiêm"
+  ],
+  [
+   "hh-nghe-giang",
+   "Hoàng hậu nghe lời .+ tâu xin giáng",
+   "Hoàng hậu ra điện tâu Hoàng thượng, cầm tấu chương"
+  ],
+  [
+   "hh-gat-loi",
+   "^Hoàng hậu gạt lời",
+   "Hoàng hậu phẩy tay, người tâu cúi đầu lui"
+  ],
+  [
+   "hh-bac-chung-cu",
+   "^Hoàng hậu bác chứng cứ|^Thái hậu gạt chứng cứ",
+   "Bằng chứng bị đặt trả lại khay, người trình cúi lui"
+  ],
+  [
+   "trinh-len-ht",
+   "^Trình lên Hoàng thượng|^Tự trình lên Hoàng thượng|^Chứng cứ trình lên",
+   "Phi tần quỳ dâng phong thư lên Hoàng thượng"
+  ],
+  [
+   "so-lo-chuoc-chung-cu",
+   "sợ chuyện lộ, đưa",
+   "Người sợ lộ chuyện dúi bạc chuộc lại phong thư"
+  ],
+  [
+   "khong-chiu-dua-bac",
+   "không chịu đưa bạc",
+   "Người bị uy hiếp xé lá thư đe dọa, quay đi kể"
+  ],
+  [
+   "giu-chung-cu",
+   "giữ tập chứng cứ",
+   "Tập thư buộc dây cất vào hộp bí mật dưới ván sàn"
+  ],
+  [
+   "ghi-nho-chung-cu",
+   "^Ghi nhớ làm chứng cứ",
+   "Phi tần ghi vào cuốn sổ nhỏ dưới đèn"
+  ],
+  [
+   "cat-giu-con-tin",
+   "^Cất giữ làm con tin",
+   "Lá thư tình cất vào hộp khóa"
+  ],
+  [
+   "chung-cu-bi-huy",
+   "^Chứng cứ bị thu hủy",
+   "Tập hồ sơ cháy trong lò, thái giám đứng nhìn"
+  ],
+  [
+   "hop-muu",
+   "hợp mưu hạ(?!.*bị lộ)",
+   "Ba phi tần chụm đầu bàn mưu trong phòng tối"
+  ],
+  [
+   "hop-muu-lo",
+   "hợp mưu hạ .+ bị lộ",
+   "Ba phi tần quỳ trước Hoàng hậu, bằng chứng trên khay"
+  ],
+  [
+   "bi-phat-giac-dinh",
+   "phát giác .+ định .+ nắm \\d+ chứng cứ|chặn kịp và nắm",
+   "Cung nữ chặn tay người đang bỏ đồ vào chén, nắm lấy bằng chứng"
+  ],
+  [
+   "tu-thong-ban-chet",
+   "tư thông bị phát giác, bị ban chết|^Chuyện tư tình bại lộ",
+   "Dải lụa trắng trên khay sơn mài, cửa điện tối (không người)"
+  ],
+  [
+   "dut-bac-bit-mieng",
+   "^Đút bạc bịt miệng|^Bịt miệng thầy tướng",
+   "Phi tần dúi bạc cho người đàn ông, đặt ngón tay lên môi ra hiệu im lặng"
+  ],
+  [
+   "diet-khau",
+   "^Diệt khẩu",
+   "Giếng đá sau cung đêm, chiếc mũ thái giám trôi trên mặt nước (không xác)"
+  ],
+  [
+   "thai-giam-chet-duoi",
+   "chết đuối ở giếng|^Diệt khẩu hỏng",
+   "Thị vệ cầm đèn đứng quanh miệng giếng đêm"
+  ],
+  [
+   "dut-bac-dap-don",
+   "^Đút bạc dập lời đồn",
+   "Phi tần trao bạc cho thái giám đầu bếp để dập lời đồn"
+  ],
+  [
+   "tim-ke-tung-tin",
+   "^Tìm kẻ tung tin|^Kẻ tung tin là",
+   "Phi tần cầm đèn hỏi từng cung nữ đứng hàng"
+  ],
+  [
+   "de-loi-don-lan",
+   "^Để lời đồn lan xa",
+   "Thầy tướng số nói lớn giữa sân, cung nữ vây nghe, phi tần mỉm cười đứng xa"
+  ],
+  [
+   "khiem-nhuong-choi-tu",
+   "^Khiêm nhường chối từ",
+   "Phi tần lắc đầu khiêm nhường trước thầy tướng số"
+  ],
+  [
+   "bo-bac-chuoc",
+   "^Bỏ bạc chuộc người",
+   "Phi tần đưa bạc chuộc cung nữ bị giam ra khỏi Thận Hình ti"
+  ],
+  [
+   "bo-mac",
+   "^Bỏ mặc",
+   "Phi tần đóng cửa sổ, quay lưng"
+  ],
+  [
+   "tra-bac-thay",
+   "^Trả bạc thay ông",
+   "Phi tần đặt túi bạc lên bàn cho thái y già cúi tạ"
+  ],
+  [
+   "diet-ke-tong-tien",
+   "^Diệt kẻ tống tiền",
+   "Bóng người áo choàng chờ trong ngõ tối, đèn tắt"
+  ],
+  [
+   "de-ong-tu-lo",
+   "^Để ông tự lo",
+   "Thái y già bước đi một mình qua sân vắng"
+  ],
+  [
+   "mua-chuoc-khtg",
+   "^Mua chuộc Khâm Thiên giám",
+   "Phi tần gửi bạc cho quan Khâm Thiên giám đứng cạnh thiên cầu"
+  ],
+  [
+   "mua-chuoc-ccti",
+   "^Mua chuộc Cung Chính ti",
+   "Phi tần đưa bạc cho quan Cung Chính ti cầm sổ"
+  ],
+  [
+   "can-rang-chiu",
+   "^Cắn răng chịu tiếng",
+   "Phi tần đứng một mình dưới mưa ở sân, tay nắm quạt"
+  ],
+  [
+   "dung-ra-noi-do",
+   "^Đứng ra nói đỡ",
+   "Phi tần bước lên nói đỡ cho người bị trách"
+  ],
+  [
+   "do-them-dau",
+   "^Đổ thêm dầu vào lửa",
+   "Phi tần phe phẩy quạt nói thêm, Hoàng hậu giận nhìn người bị trách"
+  ],
+  [
+   "im-lang",
+   "^Im lặng(\\.|$| \\()",
+   "Phi tần đứng lặng cúi mắt, quạt khép trong tay"
+  ],
+  [
+   "quy-xin-tha-cho-nang",
+   "^Quỳ xin tha cho nàng",
+   "Phi tần quỳ xin cho phi tần đang bị phạt trước Hoàng hậu"
+  ],
+  [
+   "dung-xem",
+   "^Đứng xem, mặt không đổi",
+   "Phi tần đứng xem người bị phạt quỳ, mặt bình thản"
+  ],
+  [
+   "them-loi-buoc-toi",
+   "^Thêm một lời buộc tội",
+   "Phi tần chỉ tay nói thêm trước Hoàng hậu, người bị tội quỳ"
+  ],
+  [
+   "len-gui-bac-nha",
+   "^Lén gửi bạc cho nhà nàng",
+   "Cung nữ mang túi bạc lẻn ra cổng Thần Vũ"
+  ],
+  [
+   "khong-can-du",
+   "^Không can dự|^Không dính vào|^Đứng ngoài, giữ mình",
+   "Phi tần khép cửa cung, ngồi uống trà một mình"
+  ],
+  [
+   "quay-lung-bo-di",
+   "^Quay lưng bỏ đi",
+   "Phi tần quay lưng rời cổng lãnh cung"
+  ],
+  [
+   "truy-ngu-thien",
+   "^Truy đến cùng Ngự thiện phòng|^Đầu bếp khai ra",
+   "Bếp Ngự thiện phòng, đầu bếp quỳ khai, nồi niêu"
+  ],
+  [
+   "doi-nguoi-nau",
+   "^Đổi người nấu",
+   "Đầu bếp mới cúi chào trong bếp, đầu bếp cũ đi ra"
+  ],
+  [
+   "khoc-ke-ht",
+   "^Khóc kể với Hoàng thượng",
+   "Phi tần tựa vào Hoàng thượng kể lể (mặt nghiêng che khăn, không nước mắt)"
+  ],
+  [
+   "dot-ngay-lan-dau",
+   "^Đốt ngay, lần dấu|^Dấu giày dưới gốc quế",
+   "Dấu giày trên đất dưới gốc quế, đèn soi"
+  ],
+  [
+   "keu-oan",
+   "^Kêu oan, xin tra|^Tra ra tiểu thái giám đưa quà",
+   "Phi tần quỳ kêu oan trước điện, thái giám đưa quà bị dẫn đến"
+  ],
+  [
+   "nho-th-dung-ra",
+   "^Nhờ Thái hậu đứng ra",
+   "Thái hậu đặt tay lên vai phi tần, che chở trước Hoàng hậu"
+  ],
+  [
+   "day-toi-cung-nu",
+   "^Đẩy tội cho cung nữ",
+   "Phi tần chỉ về cung nữ, thái giám kéo cung nữ đi"
+  ],
+  [
+   "xin-ht-tra-xet",
+   "^Xin Hoàng thượng tra xét",
+   "Phi tần quỳ xin Hoàng thượng tra xét, thị vệ đứng hai bên"
+  ],
+  [
+   "thu-long",
+   "^Thử lòng hắn trước",
+   "Phi tần đặt chén trà có chút bạc dưới đáy, quan sát thái giám"
+  ],
+  [
+   "mat-tau",
+   "^Mật tâu Hoàng thượng",
+   "Phi tần quỳ thì thầm mật tâu bên long ỷ, đêm"
+  ],
+  [
+   "theo-cha-muu",
+   "^Theo cha mưu đại sự",
+   "Phi tần đọc mật thư của cha bên ngọn nến rồi đốt"
+  ],
+  [
+   "cam-quan-vay-cung",
+   "^Cấm quân vây cung",
+   "Cấm quân giáp sắt cầm đèn bao vây cổng cung đêm"
+  ],
+  [
+   "hh-bi-phe",
+   "^Hoàng hậu .+ bị phế|^.+ bị phế(\\.|$| \\()|^Ngôi trung cung bỏ trống",
+   "Phượng quan đặt trên khay lụa, cửa Càn Ninh cung khép"
+  ],
+  [
+   "vien-co-thoai-thac",
+   "^Viện cớ thoái thác|^Thoái thác",
+   "Phi tần cúi người viện cớ, giơ tay ra hiệu khó"
+  ],
+  [
+   "bo-bac-lo-lot",
+   "^Bỏ bạc lo lót triều thần",
+   "Rương bạc gửi ra phủ quan ngoài cung, thái giám khiêng"
+  ],
+  [
+   "vang-menh",
+   "^Vâng mệnh",
+   "Phi tần cúi đầu vâng mệnh trước Thái hậu"
+  ],
+  [
+   "trung-co-quoc",
+   "^Trung với cố quốc",
+   "Công chúa Nam Chiếu đứng bên cửa sổ nhìn về phương nam, cầm ngọc bội quê"
+  ],
+  [
+   "giau-ong",
+   "^Giấu ông ở Tân Giả Khố",
+   "Ông lão nhân chứng ngồi khuất sau chồng chậu ở Tân Giả khố, cung nữ đưa cơm"
+  ],
+  [
+   "tim-chung-cu-cha",
+   "^Tìm chứng cứ cha trung thành",
+   "Phi tần lục hồ sơ cũ trong kho sách, tìm thư của cha"
+  ],
+  [
+   "dieu-tra-an-cu",
+   "^Điều tra án cũ",
+   "Phi tần đọc hồ sơ án cũ trên án thư, đèn khuya"
+  ],
+  [
+   "tim-chung-cu-minh-oan",
+   "^Tìm chứng cứ minh oan",
+   "Phế phi trong lãnh cung lục rương tìm thư tay"
+  ],
+  [
+   "hoi-chuyen-cu",
+   "^Hỏi chuyện cũ",
+   "Phi tần ngồi hỏi chuyện cũ với ma ma già bên lò sưởi"
+  ],
+  [
+   "dang-thu-ht",
+   "^Dâng thư lên Hoàng thượng",
+   "Phi tần trao lá thư kêu oan cho thái giám đem vào ngự thư phòng"
+  ],
+  [
+   "nho-dua-thu-keu-oan",
+   "^Nhờ .+ đưa thư kêu oan",
+   "Phế phi đưa lá thư qua khe cổng lãnh cung cho cung nữ"
+  ],
+  [
+   "lat-an-tien-de",
+   "lật án của tiên đế",
+   "Hoàng thượng đứng giận dữ, tấu chương rơi xuống sàn"
+  ],
+  [
+   "xu-tram",
+   "bị xử trảm",
+   "Pháp trường xa ngoài thành dưới trời xám, cờ đen, đám đông (không máu, không chém)"
+  ],
+  [
+   "tau-xin-nguoi-cua-cha",
+   "^Tâu xin cho người của cha",
+   "Phi tần trình tờ tiến cử lên Hoàng thượng, nhắc tên một quan"
+  ],
+  [
+   "cam-co",
+   "^Cầm cố",
+   "Món trang sức đặt trên quầy hiệu cầm đồ, người chủ hiệu cân bạc"
+  ],
+  [
+   "chuoc-lai",
+   "^Chuộc lại",
+   "Phi tần nhận lại hộp trang sức ở hiệu cầm đồ, trả bạc"
+  ],
+  [
+   "may-ao",
+   "^May áo|may áo mới bằng",
+   "Thợ may đo áo cho phi tần, súc gấm trải trên bàn"
+  ],
+  [
+   "tam-doc",
+   "^Tẩm(\\.|$| \\()|^.+ lén .+ vào .+$",
+   "Bàn tay tẩm thứ nước lạ vào cây trâm trên khay trong đêm"
+  ],
+  [
+   "nghiem-doc",
+   "^Nghiệm độc|^Đem đến Thái y viện xét nghiệm|^Thái y xét",
+   "Thái y soi món đồ dưới đèn, kim bạc và chén nước"
+  ],
+  [
+   "thai-y-phat-hien",
+   "^Thái y phát hiện",
+   "Thái y giơ món đồ có độc, trâm bạc đen, chỉ ra dấu vết"
+  ],
+  [
+   "thai-y-khong-thay-la",
+   "^Thái y không thấy gì lạ",
+   "Thái y lắc đầu trả lại món đồ trong hộp"
+  ],
+  [
+   "kiem-tra-ruong",
+   "^Kiểm tra rương đồ, tìm thấy",
+   "Cung nữ lấy ra món lạ từ đáy rương áo, chủ nhìn"
+  ],
+  [
+   "kiem-tra-ruong-sach",
+   "^Kiểm tra rương đồ",
+   "Cung nữ mở rương áo xếp gọn, không có gì lạ"
+  ],
+  [
+   "tich-thu-co-co",
+   "^Tịch thu trang sức \\(có cớ\\)|^Hoàng hậu sai người tịch thu",
+   "Thái giám của Hoàng hậu thu hộp trang sức, phi tần đứng nhìn"
+  ],
+  [
+   "tich-thu-vo-co",
+   "^Tịch thu vô cớ|tịch thu \\S+ của",
+   "Thái giám giằng hộp trang sức từ tay cung nữ"
+  ],
+  [
+   "hh-ban-cho",
+   "^Hoàng hậu ban cho|^Thái hậu ban .+ cho",
+   "Hoàng hậu trao hộp quà cho phi tần đang cúi nhận"
+  ],
+  [
+   "duoc-ban",
+   "^Được ban|được Hoàng thượng ban",
+   "Thái giám tuyên ban thưởng, khay gấm có ngọc bội, phi tần quỳ nhận"
+  ],
+  [
+   "hh-thuong-hien-thuc",
+   "ban thưởng ngươi \\d+ bạc vì hiền thục",
+   "Hoàng hậu trao túi bạc cho phi tần đang vạn phúc"
+  ],
+  [
+   "tro-ve-lanh-cung-nuoi",
+   "^Ngươi dời khỏi|^Dọn sang|^Tâu xin, được dời sang|^.+ dời khỏi",
+   "Cung nữ khiêng rương đồ qua cổng cung mới"
+  ],
+  [
+   "tha-toi-chet",
+   "tha tội chết|^Lần sau sẽ không tha",
+   "Hoàng thượng phẩy tay tha, người có tội dập đầu"
+  ],
+  [
+   "vao-lanh-cung",
+   "vào lãnh cung|đưa vào lãnh cung",
+   "Cổng lãnh cung cũ kỹ mở ra, người áo trơn mang tay nải bước vào"
+  ],
+  [
+   "roi-lanh-cung",
+   "rời lãnh cung|tha khỏi lãnh cung",
+   "Phi tần bước ra khỏi cổng lãnh cung, cung nữ đón với áo mới"
+  ],
+  [
+   "dem-dong-lanh-cung",
+   "lãnh cung không than sưởi",
+   "Phế phi áo trơn ngồi co trong lãnh cung tuyết rơi, lò than nguội"
+  ],
+  [
+   "duoc-an-xa-ve-cung",
+   "được ân xá, về cung",
+   "Thái giám tuyên chỉ ân xá trước cổng lãnh cung, người áo trơn quỳ nhận"
+  ],
+  [
+   "thai-hau-quo-trach",
+   "bị Thái hậu quở trách",
+   "Thái hậu nghiêm nghị quở trách, phi tần quỳ dưới"
+  ],
+  [
+   "vuong-gia-quo-trach",
+   "là vương gia, chỉ bị Hoàng thượng quở trách",
+   "Hoàng thượng quở trách một vương gia đang cúi đầu"
+  ],
+  [
+   "cach-chuc-bien-ai",
+   "cách chức, đày ra biên ải|^Xin cho hắn ra biên ải",
+   "Người đàn ông đội nón lên ngựa ra cửa ải xa"
+  ],
+  [
+   "thai-hau-bang-ha",
+   "^Thái hậu băng hà|băng hà vì bệnh",
+   "Cung điện treo trắng, Hoàng thượng và phi tần áo tang quỳ (mặt cúi)"
+  ],
+  [
+   "nhan-sac-phai",
+   "nhan sắc phai dần",
+   "Phi tần trung niên vẫn đẹp soi gương, mùa xuân ngoài cửa"
+  ],
+  [
+   "gai-ngua-yen-tiec",
+   "gãi ngứa giữa yến tiệc",
+   "Phi tần đứng dậy rời yến, kéo tay áo che cổ tay, khách nhìn"
+  ],
+  [
+   "dich-dau-mua",
+   "^Dịch đậu mùa",
+   "Cổng cung treo vải vàng cách ly, thái y bịt khăn mang thuốc"
+  ],
+  [
+   "nhiem-benh",
+   "nhiễm bệnh|^.+ mắc ",
+   "Phi tần nằm giường sốt, khăn trên trán, cung nữ quạt"
+  ],
+  [
+   "tu-boc-thuoc",
+   "^Tự bốc thuốc",
+   "Phi tần tự cân thuốc trên cân tiểu ly, tủ thuốc nhiều ngăn"
+  ],
+  [
+   "hau-benh-ca-thang",
+   "^Hầu bệnh cả tháng",
+   "Phi tần ngồi bên giường Thái hậu ốm, đút thuốc"
+  ],
+  [
+   "gui-le-van-an",
+   "^Gửi lễ vật vấn an",
+   "Cung nữ mang lễ vật đến cửa cung Thái hậu"
+  ],
+  [
+   "gui-bac-chua-benh",
+   "^Gửi \\d+ lượng chữa bệnh",
+   "Cung nữ gói bạc vào khăn gửi về nhà chữa bệnh cho mẹ"
+  ],
+  [
+   "xin-an-ve-tham",
+   "^Xin ân chuẩn về thăm",
+   "Phi tần quỳ xin Hoàng hậu cho về thăm nhà"
+  ],
+  [
+   "viet-thu-hoi-han",
+   "^Viết thư hỏi han",
+   "Phi tần viết thư nhà bên cửa sổ, bút lông"
+  ],
+  [
+   "bo-yen-thuc-ben-con",
+   "^Bỏ yến, thức trắng bên con",
+   "Phi tần ngồi bên giường con ốm suốt đêm, ngọn nến cháy dở, áo yến vắt ghế"
+  ],
+  [
+   "moi-thai-y-du-yen",
+   "^Mời thái y, vẫn dự yến",
+   "Thái y bắt mạch đứa trẻ, mẹ áo yến đứng ở cửa sắp đi"
+  ],
+  [
+   "lao-vao-cuu",
+   "^Lao vào cứu người",
+   "Phi tần dìu một cung nữ ra khỏi điện đang có khói lửa"
+  ],
+  [
+   "chi-huy-dap-lua",
+   "^Chỉ huy cung nhân dập lửa",
+   "Phi tần đứng chỉ huy, cung nhân xách thùng nước dập lửa ở mái điện"
+  ],
+  [
+   "tra-ke-phong-hoa",
+   "^Ngầm tra kẻ phóng hỏa|^Dấu dầu hỏa",
+   "Thái giám soi đèn vào vết dầu đổ trên sàn gỗ cháy xém"
+  ],
+  [
+   "giup-mot-tay",
+   "^Giúp .+ một tay",
+   "Phi tần đưa gói bột cho phi tần khác, che bằng tay áo"
+  ],
+  [
+   "dung-ra-can",
+   "^Đứng ra can ngăn",
+   "Phi tần đứng giữa hai phi tần đang tranh cãi, giơ tay can"
+  ],
+  [
+   "dung-ve-phia",
+   "^Đứng về phía",
+   "Phi tần đứng cạnh một phi tần trong cuộc tranh chấp, nắm tay nàng"
+  ],
+  [
+   "mach-hh",
+   "^Mách Hoàng hậu",
+   "Phi tần thì thầm với Hoàng hậu, chỉ về hai phi tần đang tranh cãi"
+  ],
+  [
+   "mach",
+   "^Mách ",
+   "Phi tần nói nhỏ với phi tần khác về mưu của người thứ ba"
+  ],
+  [
+   "gop-bac-giau-the",
+   "^Góp bạc, giấu cả thẻ",
+   "Hai phi tần cùng đặt bạc lên khay thẻ bài của thái giám Kính sự phòng"
+  ],
+  [
+   "tuyen-tu",
+   "^Tuyển tú|^Đợt tuyển tú|tuyển thêm tú nữ|^Sớ xin tuyển tú",
+   "Hàng tú nữ áo hồng đứng trong sân điện, Thái hậu và Hoàng hậu ngồi chọn"
+  ],
+  [
+   "tau-tuyen-it",
+   "^Tâu nên tuyển ít",
+   "Phi tần tâu Hoàng thượng, giơ một ngón tay ý ít người"
+  ],
+  [
+   "tau-tuyen-nhieu",
+   "^Tâu nên tuyển nhiều",
+   "Phi tần cười tâu Hoàng thượng, chỉ tay về hàng tú nữ"
+  ],
+  [
+   "vao-cung-phong",
+   "^.+ vào cung, phong|vào cung, khóc suốt đêm",
+   "Tân nhân vạn phúc nhận phong trước Hoàng hậu, áo hồng mới"
+  ],
+  [
+   "dau-ba-quan",
+   "đứng đầu bá quan",
+   "Đại thần áo đỏ đứng đầu hàng bá quan trong triều"
+  ],
+  [
+   "so-hac-can-chinh",
+   "^Sớ hặc|dâng sớ hặc",
+   "Ngự sử quỳ dâng sớ hặc trong triều, Hoàng thượng cầm tấu"
+  ],
+  [
+   "so-khen",
+   "^Sớ khen",
+   "Quan văn dâng sớ khen, Hoàng thượng mỉm cười đọc"
+  ],
+  [
+   "quy-xin-tha",
+   "^Quỳ xin tha(\\.|$| \\()",
+   "Người có tội quỳ dập đầu xin tha trước Hoàng thượng trong điện"
+  ],
+  [
+   "xin-th-do-loi",
+   "^Xin Thái hậu đỡ lời",
+   "Phi tần quỳ bên chân Thái hậu, Thái hậu nắm tay nàng"
+  ],
+  [
+   "cau-xin",
+   "^Cầu xin(\\.|$| \\()",
+   "Phế phi quỳ ở cổng lãnh cung chắp tay cầu xin thái giám truyền lời"
+  ],
+  [
+   "nho-nguoi-ben-ngoai",
+   "^Nhờ người bên ngoài",
+   "Phế phi đưa trâm cuối cùng cho cung nữ qua khe cổng nhờ đưa tin ra ngoài"
+  ],
+  [
+   "nho-cau-xin",
+   "^Nhờ .+ cầu xin",
+   "Phi tần đến lãnh cung thăm, phế phi nắm tay nhờ cầu xin"
+  ],
+  [
+   "nho-minh-oan",
+   "^Nhờ .+ minh oan",
+   "Phi tần nhờ một quan Hàn lâm đọc lại bài thơ để minh oan"
+  ],
+  [
+   "dang-bac-n",
+   "^Dâng \\d+ lượng",
+   "Phi tần dâng hai nén bạc trên khay vào quỹ cứu tế"
+  ],
+  [
+   "cat-bong-de-dang",
+   "^Cắt bổng lộc cung nhân để dâng",
+   "Ma ma cầm sổ bớt bạc trong túi lương của cung nhân"
+  ],
+  [
+   "ke-la-vao-phong",
+   "lén vào phòng ngươi",
+   "Bóng người áo sẫm lén mở cửa phòng phi tần trong đêm, cung nữ nấp nhìn"
+  ],
+  [
+   "thay-dong-tinh",
+   "tình cờ thấy người của .+ có động tĩnh",
+   "Phi tần đứng sau khóm trúc nhìn hai cung nữ cung khác trao gói đồ ở góc tường"
+  ],
+  [
+   "do-hoi-gia-the",
+   "dò hỏi gia thế",
+   "Phi tần lật cuốn sổ hộ tịch dày trên bàn, cung nữ cầm đèn đứng cạnh"
+  ],
+  [
+   "len-mua-ngoai-cung",
+   "lén mua .+ ngoài cung",
+   "Thái giám ôm gói đồ lén đi qua cửa hông Thần Vũ môn lúc chạng vạng"
+  ],
+  [
+   "chuyen-lo-ra",
+   "^Chuyện lộ ra",
+   "Hai cung nữ ghé tai nhau dưới mái hiên, nhìn về phía cung phi tần"
+  ],
+  [
+   "cam-do",
+   "đi cầm|phải cầm đồ",
+   "Thái giám đặt chiếc vòng ngọc lên quầy tiệm cầm đồ, chủ tiệm cân bạc"
+  ],
+  [
+   "chuoc-do",
+   "chuộc lại",
+   "Phi tần nhận lại hộp trang sức từ tay thái giám, túi bạc đặt trên bàn"
+  ],
+  [
+   "dat-noi-vu",
+   "đặt ở Nội vụ phủ",
+   "Quan Nội vụ phủ ghi sổ, phi tần chỉ vào xấp lụa mẫu trên bàn"
+  ],
+  [
+   "giau-trong-ruong",
+   "lén mang .+ về, giấu trong rương",
+   "Cung nữ lén nhét gói đồ xuống đáy rương áo, ngoái nhìn ra cửa"
+  ],
+  [
+   "tu-tay-ket",
+   "tự tay kết",
+   "Phi tần ngồi bên khung kết tơ, tự tay kết tấm mạng lụa mỏng, cuộn chỉ màu"
+  ],
+  [
+   "minh-oan",
+   "minh oan được",
+   "Phi tần đứng thẳng trước Hoàng hậu, kẻ giá họa quỳ cúi đầu, thị vệ đứng sau"
+  ],
+  [
+   "nhan-loi-tra-do",
+   "nhận lỗi, xin khoan hồng",
+   "Phi tần đặt hộp đồ trả lại lên khay trước Hoàng hậu, làm vạn phúc"
+  ],
+  [
+   "kham-phong",
+   "Cung Chính ti khám phòng",
+   "Nữ quan Cung Chính ti mở rương áo khám phòng, phi tần đứng thẳng nhìn"
+  ],
+  [
+   "ngu-tu",
+   "được Hoàng thượng ngự tứ",
+   "Thái giám dâng khay lụa vàng đựng món ngự tứ, phi tần làm vạn phúc nhận"
+  ],
+  [
+   "ngu-tu-tim-lai",
+   "ngự tứ đã (tìm lại|sửa xong)",
+   "Phi tần đón lại hộp ngự tứ từ tay cung nữ, mở nắp thấy món đồ nguyên vẹn"
+  ],
+  [
+   "giau-ngu-tu",
+   "giấu chuyện .+ ngự tứ",
+   "Phi tần khép nắp hộp gỗ cất vào ngăn kín sau bình phong"
+  ],
+  [
+   "cuoi-chinh-phi",
+   "làm chính phi",
+   "Hôn lễ vương phủ: hoàng tử áo đỏ và tân nương khăn đỏ làm lễ bái đường"
+  ],
+  [
+   "doi-cung",
+   "có cung trống, được dời sang",
+   "Thái giám khiêng rương vào cổng cung mới, phi tần đứng nhìn sân rộng"
+  ],
+  [
+   "quoc-tang",
+   "quốc tang",
+   "Cung điện phủ rèm trắng, các phi tần áo trắng đứng lặng trước linh đường"
+  ],
+  [
+   "de-bat-nguoi-hau",
+   "đề bạt .+ lên",
+   "Phi tần trao túi thưởng cho cung nữ đang làm vạn phúc, các cung nữ khác đứng sau"
+  ],
+  [
+   "nhan-nguoi-chay-viec",
+   "lo chạy việc cho ngươi",
+   "Thái giám trẻ cúi chào nhận việc trước phi tần ngồi trong cung"
+  ],
+  [
+   "giao-viec",
+   "^Ngươi giao cho",
+   "Phi tần đưa lá thư gấp cho cung nữ tâm phúc dặn dò"
+  ],
+  [
+   "co-viec-nho",
+   "có người ngỏ lời nhờ",
+   "Cung nữ đứng trước phi tần ngỏ lời nhờ, hai tay nắm khăn trước bụng"
+  ],
+  [
+   "nhan-loi-nho",
+   "^Ngươi nhận lời ",
+   "Phi tần gật đầu nhận lời, người nhờ làm vạn phúc tạ ơn"
+  ],
+  [
+   "nho-tra-an",
+   "trả ân",
+   "Phi tần ngồi, người từng mang ơn đứng hành lễ nhận lời giúp lại"
+  ],
+  [
+   "cung-duong-dau-den",
+   "cúng dường dầu đèn",
+   "Phi tần rót dầu vào đèn trước tượng Phật trong Phật đường, khói hương"
+  ],
+  [
+   "khan-cha-me",
+   "khấn cho cha mẹ",
+   "Phi tần thắp nén hương một mình bên án thờ nhỏ, đêm, ánh nến"
+  ],
+  [
+   "moi-uong-tra",
+   "mời .+ uống trà",
+   "Hai phi tần ngồi đối diện bên bàn trà trong đình, cung nữ rót trà"
+  ],
+  [
+   "du-tiec-nguoi-khac",
+   "sang dự tiệc của",
+   "Phi tần bước vào yến tiệc ở cung khác, chủ nhà đứng dậy đón"
+  ],
+  [
+   "thang-bac",
+   "ngươi thắng .+ ván",
+   "Các phi tần chơi bài lá bên bàn, phi tần thắng kéo đống bạc vụn về phía mình"
+  ],
+  [
+   "thua-bac",
+   "thắng ngươi ván",
+   "Các phi tần chơi bài lá, phi tần đẩy bạc vụn sang cho người thắng, điềm tĩnh"
+  ],
+  [
+   "thang-cuoc",
+   "ngươi thắng cược",
+   "Thuyền rồng về đích, cung nữ dâng túi bạc thắng cược cho phi tần trên lầu"
+  ],
+  [
+   "thua-cuoc",
+   "ngươi cược .+ mất",
+   "Thuyền rồng về đích, phi tần trên lầu đặt túi bạc lên khay trả cược"
+  ],
+  [
+   "le-duoc-khen",
+   "khen lễ của ngươi nhất|hành lễ chu đáo",
+   "Phi tần làm vạn phúc dâng lễ, Thái hậu gật đầu khen"
+  ],
+  [
+   "hanh-le-bi-che",
+   "sơ suất trong lúc hành lễ",
+   "Trong lễ, chén rượu đổ trên khay trước phi tần, ma ma nhìn sang"
+  ],
+  [
+   "tiec-duoc-khen",
+   "tiệc của ngươi được khen",
+   "Yến tiệc ở cung phi tần, Hoàng thượng ghé qua ngồi, khách nâng chén"
+  ],
+  [
+   "tiec-truc-trac",
+   "tiệc của ngươi trục trặc",
+   "Yến tiệc, đĩa thức ăn hỏng bị bưng đi, khách đặt đũa xuống"
+  ],
+  [
+   "tu-dung",
+   "^.+ dùng ",
+   "Phi tần mở hộp thuốc bổ dùng một viên, cung nữ bưng nước"
+  ]
+ ],
+ "heldSteals": [
+  [
+   "-",
+   "^(Thôi|Đi|Đợi buổi sau|Đợi sáng mai|Thôi, ở lại|Ngồi xem|Bỏ qua|Không mua|Mặc kệ|Nhận|N|X|XX)(\\.|$| \\()",
+   [
+    "X",
+    "X (con Lan Tần) theo sứ đoàn sang Bắc Địch hòa thân.",
+    "X (con Lan Tần) được hứa gả cho Lan Tần, con trai X."
+   ]
+  ],
+  [
+   "-",
+   "^\\+\\d+ Phúc duyên|^Đã đổi thân phận|^\\d+ Ứng viên|^Đứng đầu(\\.|$| \\()|^Tháng này(\\.|$| \\()|^Thánh chỉ(\\.|$| \\()|^Có tin(\\.|$| \\()|^Chưa đủ|^Dùng được ngay|^Người cùng cung, .*không thể ra tay|^Gieo lại|^Xin xăm(\\.|$| \\()|^Cưới khi con tròn|^.+, \\d+ tuổi(\\.|$| \\()",
+   [
+    "Cưới khi con tròn 18 tuổi."
+   ]
+  ],
+  [
+   "-",
+   "^(Có tin|Ngươi|Tháng này|Thánh chỉ|Thiện cảm [+\\-−]|Sức [+\\-−])\\S*(\\.|$| \\()|^Thánh chỉ:|^Tháng này:",
+   [
+    "Thánh chỉ: tấn phong 3 làm Lan Tần."
+   ]
+  ],
+  [
+   "-",
+   "^(?!Tiếp đãi).+ (cảm động|tươi cười|lạnh nhạt|dịu nét mặt|khẽ cười|cười lạnh|ghi nhớ|cười nói vui vẻ|gật đầu đáp lễ)(\\.|$| \\()|cho là ngươi giả lả|^Hai người to nhỏ|lảng sang chuyện khác|đem lời ngươi kể lại|cũng kể chuyện riêng|lắng nghe chăm chú|kể cho ngươi một chuyện về|^.+ khéo từ chối(\\.|$| \\()|cho ngươi mượn \\S+ lượng|nghi ngươi gây chia rẽ|^Ngươi hạ mình tạ lỗi|^Ngươi nhún nhường trước|^Ngươi nhắc .+ coi chừng|^Ngươi giúp .+ việc khó|^Ngươi nghe lén .+ nói chuyện",
+   [
+    "Lan Tần kết giao với Lan Tần: bị lạnh nhạt.",
+    "Lan Tần kết giao với ngươi: bị lạnh nhạt.",
+    "Lan Tần tung lời ly gián, Lan Tần bị Hoàng thượng lạnh nhạt (Sủng -10)."
+   ]
+  ],
+  [
+   "-",
+   "^Tay run, trà sóng|^Ngài nhận chén trà|lặng nghe, dúi vào tay|^Hoàng hậu không tin lời một cung nữ|^Ma ma Đức Thọ cung khen|^Hoàng thượng ngẩng lên|^.+ bị xét tội(\\.|$| \\()|^Hắn (không để ý|chần chừ|giấu vội|ngập ngừng)|thề sẽ chờ ngươi|^Ngươi trả lại khăn tay|thành thanh gươm trong tay chủ|chờ ngươi ngoài cửa cung; hai người thành thân",
+   [
+    "X trình chứng cứ lên Hoàng hậu: Hoàng hậu Lan Tần bị xét tội.",
+    "X trình chứng cứ lên Hoàng hậu: Lan Tần Lan Tần bị xét tội.",
+    "X trình chứng cứ lên Hoàng hậu: ngươi bị xét tội."
+   ]
+  ],
+  [
+   "-",
+   "lẻn vào .+ để hẹn hò tư tình|nhận bạc của .+ để lén chuyển thư|nán lại quá giờ|để ý .+ từ lâu, lẻn vào|vào .+ không có lệnh",
+   [
+    "Núp sau hòn giả sơn, ngươi nghe rõ: X lẻn vào X để hẹn hò tư tình với X.",
+    "Núp sau hòn giả sơn, ngươi nghe rõ: X nhận bạc của X để lén chuyển thư ra ngoài cung: nàng X.",
+    "Núp sau hòn giả sơn, ngươi nghe rõ: X nhận bạc của X để lén chuyển thư ra ngoài cung: nàng có chuyện riêng."
+   ]
+  ]
+ ]
+}
