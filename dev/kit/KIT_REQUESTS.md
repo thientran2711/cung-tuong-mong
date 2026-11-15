@@ -7,3 +7,4 @@ Thợ báo "KIT REQUEST" trong báo cáo → điều phối ghi vào đây → g
 | 15/11 | fix-float | kitRelTable (bảng chip quan hệ Tuần lục), KIT §39 | Tuần lục, thẻ tin | fix-float | đang làm |
 | 15/11 | sếp 17:27Z | Bảng nhãn\|giá trị một cột cố định (mở rộng kitRows) | LUẬT, thông tin món, Mệnh truyện… | kit-table | đang làm |
 | 15/11 | sếp 17:16Z | Ảnh nhỏ theo phẩm không khung vuông | mọi dòng người | fix-float | đang làm |
+| 15/11 | game-feel (R6 FAIL 3) | Grade chip (kitGradeChip), item reveal spotlight (kitRevealHTML, kitItem size xl), kitItemInfo, kitLose card + kitCoins — KIT §54.1/§54.2, built by game-feel in jkrev.js | kitGain, kitReward, mất/bán/tặng đồ | game-feel | xong, chờ duyệt |

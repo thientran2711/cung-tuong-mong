@@ -63,8 +63,8 @@ function kitLose(x,o){o=o||{};if(!krOn())return;if(x&&!Array.isArray(x)&&typeof 
  const why=o.why||"lose";try{(window.KFX=window.KFX||{}).loses=(KFX.loses||[]);KFX.loses.push({why,names:L.map(I=>I.name),title:o.title||"",text:o.text||"",bac:o.bac||0})}catch(e){}
  if(why==="sell"||why==="give"||why==="fade"){let last=null;L.forEach((I,i)=>{last=krFly(I,why==="sell"?"away":why,i)||last});
   if(why==="sell"&&o.bac)setTimeout(()=>kitCoins("in",o.bac,last||krBagPt()),last?Math.round(last.d*.55):0);return}
- /* lose: the kit notice card; its picture = the lost item(s), fading and falling (CSS, §54.2) */
- const pic=`<span class="klspic">${L.slice(0,6).map((I,i)=>`<span class="klsfall" style="--i:${i}">${kitItem({src:I.src512||I.src,name:"",grade:I.grade,size:L.length>1?"md":"lg",tip:I.name}).replace('<span class="kitn"></span>','')}</span>`).join("")}</span>`;
+ /* lose: the kit notice card; its picture (the kit item panel picture, itemPic) = the lost item fading and falling (CSS, §54.2); more items are named in the text */
+ const I0=L[0];const pic=kitItem({src:I0.src512||I0.src,name:"",grade:I0.grade,size:"lg",tip:I0.name}).replace('<span class="kitn"></span>','').replace('class="kitem ','class="kitem klsfall ');
  const names=L.map(I=>I.name);const facts=[];if(o.text)facts.push(o.text);facts.push(`Mất khỏi Tư trang: ${names.join(", ")}.`);
  try{const was=document.getElementById("modal");const open=was&&!was.hidden;
   kitPanel({kind:"notice",title:o.title||"Mất đồ",sub:L.length>1?`${L.length} món`:`${L[0].sub?L[0].sub+" · ":""}${L[0].gname}`,itemPic:pic,facts,btn:"Đã hiểu",cls:"klose"});
@@ -98,8 +98,13 @@ window.kitLose=kitLose;window.kitCoins=kitCoins;
 .kcoinfly{position:fixed;left:0;top:0;width:24px;height:auto;z-index:9470;pointer-events:none;will-change:transform,opacity}
 /* §54.2 lose card: the item(s) fade, grey and fall a little inside the notice card */
 .klspic{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
-.klsfall{display:inline-block;animation:klsFall var(--klfall,1.3s) ease-in calc(.35s + var(--i) * .15s) both}
+.klsfall{animation:klsFall var(--klfall,1.3s) ease-in .35s both}
 @keyframes klsFall{0%{transform:none;opacity:1;filter:none}100%{transform:translateY(16px) rotate(7deg);opacity:.42;filter:grayscale(1)}}
 @media (prefers-reduced-motion:reduce){.krev *,.krev,.klsfall,.krevok{animation:none!important}.klsfall{opacity:.5;filter:grayscale(1)}.krevfly,.klsfly,.kcoinfly{display:none!important}}
 .kf-still .krev *,.kf-still .krev,.kf-still .klsfall,.kf-still .krevok{animation:none!important}
 `;document.head.appendChild(st)})();
+/* kit sample page (#kit, jkitpage): §54.1 grade chips + one reveal spotlight, §54.2 the lose card picture */
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push(
+ {id:"§54.1",title:"kitGradeChip · kitRevealHTML (kitGain / kitReward)",html:()=>`<div class="kitpg-row">${[0,1,2,3,4].map(g=>kitGradeChip(g)).join(" ")} ${kitGradeChip(2,{name:"Tinh xảo",extra:"Tác phẩm tự tay"})} ${kitGradeChip(1,{size:"sm"})}</div>`+
+  `<div class="kitpg-row" style="background:#1a0f0acc;padding:14px;border-radius:8px">${kitRevealHTML(kitItemInfo("nhansam"),{from:"Thái hậu ban"})}</div>`},
+ {id:"§54.2",title:"kitLose: thẻ mất đồ (món mờ dần, rơi)",html:()=>`<div class="kitpg-row"><span class="klspic">${["vongngoc","tramngoc"].map((k,i)=>{const I=kitItemInfo(k);return kitItem({src:I.src,name:I.name,grade:I.grade,size:"lg"}).replace('class="kitem ','class="kitem klsfall ')}).join("")}</span></div>`})}catch(e){}

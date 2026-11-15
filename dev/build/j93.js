@@ -388,6 +388,8 @@ window.kitReward=kitReward;window.kitFlyItem=kitFlyItem;window.kitAlarm=kitAlarm
 .km-open .kmshelf{min-height:56px}
 .kmsh{display:inline-block;animation:kmPop .32s var(--km-ease) both}.km-fast .kmsh{animation-delay:calc(var(--i) * 40ms)}
 .kmbox{transition:width .3s ease,opacity .3s}.km-done .kmbox{width:min(30vw,150px);opacity:.6}
+.km-done .kmlist{max-height:calc(100dvh - 120px);overflow:auto}
+@media (max-height:560px){.km-done .kmbox,.km-done .kmshelf{display:none}.km-done .kmlist{max-height:calc(100dvh - 70px)}}
 .km-fast .kmcoins img{animation-delay:0s!important;animation-duration:.15s!important}
 .kmcoins{position:absolute;left:50%;top:55%;width:0;height:0;z-index:3;pointer-events:none}
 .kmcoins img{position:absolute;width:28px;height:auto;left:-14px;top:-14px;opacity:0}
