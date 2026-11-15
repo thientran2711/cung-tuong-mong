@@ -2221,3 +2221,15 @@ Index of the shared parts review/opt-render added (number from the coordinator's
 - `kitResultSeal(ok)` (THÀNH / HỎNG / grey KẾT QUẢ, j63; not `kitSeal`, which is the Trân nữ seal §39), `kitKemRow(K)` (`.kb .kkem`): §7.
 - Samples on the kit page (§47): ids "§53" (chip tones + kitRisk; an event option in cost mode through the real modal markup → kaNorm →
   kitHideOut; kitResultSeal ×3; kitKemRow). Tests: `dev/test/opt-render.js`, `dev/test/opt-scan.py --fail`.
+
+## 55. KHẢO HẠCH TẤN PHONG — promotion exam (owner 15/11 17:20Z, review/promo-exam · `dev/build/jexam.js`)
+No new kit part: the exam is built only from existing parts.
+- Rounds and result: the j82 game frame (`kg82Open` = `kitGameFrame`, `kg82Rows` = `kitRows`, `.kg82act` kit buttons, `kg82Play` engines,
+  `kitGameResult` for the score table). The result's "Đã hiểu" is hidden by KIT 32.10 and the frame closes with the kit ✕ (jk4 kitOvBtn).
+- Quiz rounds (Lễ nghi, Trị cung, Xử án, Thái hậu hỏi) use the j82 quiz engine with new question banks (`EXQ`); no CSS.
+- Act card «Khảo hạch tấn phong» = an ordinary deck card (`cardH`: odds chip, Cần/Tốn/Được/Hỏng rows); the Hỏng row says the wait.
+  Picture: ONLY its own act picture (ACTS.json «Khảo hạch tấn phong» → act-khao-hach-tan-phong.webp); with no own key the card gets no
+  picture slot at all (`data-kexam` + kpActArt guard, `.kanoart`), never the category tile/picture (owner 14:30Z). Category word: Lễ nghi.
+- Mệnh truyện › Sắc phong: the exam row is one more `kitChecks` row; status = `kitChip(text,"g"|"r"|"n")` in the `.ktop` row (as §46 header
+  numbers) next to `kitInfo("Khảo hạch tấn phong")`; cold palace shows `kitEmpty` (no promotion card).
+- Test: `node dev/test/promo-exam.js <url> [oldBuildUrl] [outdir|-] [sizes]`; next-rank scan: `node dev/test/promo-next-rank.js <url>`.
