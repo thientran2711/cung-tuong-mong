@@ -21,6 +21,24 @@ Owner 15/11: scene-light fixed only her room (Ngọc Thanh các) — check every
 - Pixi path (slow in headless, ~1–2 min/state): drop `nopx`, pick states with `PCSTATES=xuan-2-1,ha-3-2`.
 - `node dev/test/life-place.js .ahcache/after.html 755x1000`.
 
+## Results (1180x820, 968 stage states + 16 map + 56 festival-map states, 0 page errors)
+- Flags before → after: cool weather wash 96 → 0; grey cold wash (chroma −3.5 on warm chiều halls in rain) 31 → 0; brightness jump > 8 L*
+  34 → 0; figure tinted 0 → 0 (grey probe = 128/128/128 in every state; 2 "before" hits were the probe removed by a stage re-render);
+  sepia / stacked filters 0 → 0 on the CSS path; Pixi path: before NO grade at all, after the same --kscf (pxf = filter).
+  Left: "night looks like day" 6 (Càn Ninh night L* 52–53, Ngự hoa viên winter-snow night 53) = the paintings (lamp-lit gold screen /
+  snow), no filter — art decision.
+- dev/review/place-colour/: SUMMARY.md (place × buổi × weather class before/after), compare-all-states.md, flags-*.txt,
+  sheet-<place>.jpg (before above, after below), sheet-festival-maps.jpg, onetone-sheet.jpg + onetone-report.txt.
+- Life-state place: dev/test/life-place.js ALL OK at 755x1000, 1000x755, 1180x820, 1366x1024, 844x390 (before: 4 BAD — lãnh cung reload /
+  home → Ngọc Thanh các; Tân Giả khố in session / reload → maid room).
+
+## ONE-TONE PAINTINGS (needs coordinator decision — art, not code)
+- `dev/art/scene-onetone.py <img cache> <out>` measures all 160 graded paintings: 9 trưa paintings are nearly one-tone (cast ≥ .95,
+  colour spread 2.4–7.2 vs 8.5–12.3 for their sáng sibling): tam-cung-dem (Ngọc Thanh các) xuan/ha/thu/dong-trua, tu-ninh-cung (Đức Thọ)
+  ×4 trưa, phi-tan-cung-ha-trua. This is the "her room at trưa all brown" the owner saw — it is IN the picture, no code filter left.
+  The script writes a proposed Lab re-grade (colour spread restored, cast halfway to the sáng sibling, L* untouched) + sheet; NOT uploaded.
+  To ship: look at .ahcache/onetone/*.webp, copy to img/, `python3 dev/site/cdn_sync.py img/<files>`.
+
 ## Known / not code
 - Tân Giả khố and Lãnh cung share the lãnh cung painting (sc "lc"); the cung nữ room uses her room painting (tam-cung). Art gap, not a
   filter: a laundry painting and a maid-room painting would need Magnific art (coordinator decision).
