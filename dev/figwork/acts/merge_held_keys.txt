@@ -1,2 +1,2 @@
-34
-so-khen cam-do chuoc-do dat-noi-vu giau-trong-ruong tu-tay-ket minh-oan nhan-loi-tra-do kham-phong ngu-tu ngu-tu-tim-lai giau-ngu-tu cuoi-chinh-phi doi-cung quoc-tang de-bat-nguoi-hau nhan-nguoi-chay-viec giao-viec co-viec-nho nhan-loi-nho nho-tra-an cung-duong-dau-den khan-cha-me moi-uong-tra du-tiec-nguoi-khac thang-bac thua-bac thang-cuoc thua-cuoc le-duoc-khen hanh-le-bi-che tiec-duoc-khen tiec-truc-trac tu-dung
+1
+nhan-loi-tra-do

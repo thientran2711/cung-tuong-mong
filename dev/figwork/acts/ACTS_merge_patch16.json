@@ -1,0 +1,270 @@
+{
+ "_doc": "act-pics2 step 2: all meanings.py rules merged into the live ACTS.json log in meanings.py order. add = [regex, key, index in the new log]; held = rules left out because their picture is not on the CDN [key, regex, scene].",
+ "add": [
+  [
+   "^Sớ khen",
+   "so-khen-h",
+   729
+  ],
+  [
+   "đi cầm|phải cầm đồ",
+   "cam-do-h",
+   787
+  ],
+  [
+   "chuộc lại",
+   "chuoc-do-h",
+   788
+  ],
+  [
+   "đặt ở Nội vụ phủ",
+   "dat-noi-vu-h",
+   789
+  ],
+  [
+   "lén mang .+ về, giấu trong rương",
+   "giau-trong-ruong-h",
+   790
+  ],
+  [
+   "tự tay kết",
+   "tu-tay-ket-h",
+   791
+  ],
+  [
+   "minh oan được",
+   "minh-oan-h",
+   793
+  ],
+  [
+   "Cung Chính ti khám phòng",
+   "kham-phong-h",
+   794
+  ],
+  [
+   "được Hoàng thượng ngự tứ",
+   "ngu-tu-h",
+   795
+  ],
+  [
+   "ngự tứ đã (tìm lại|sửa xong)",
+   "ngu-tu-tim-lai-h",
+   796
+  ],
+  [
+   "giấu chuyện .+ ngự tứ",
+   "giau-ngu-tu-h",
+   797
+  ],
+  [
+   "làm chính phi",
+   "cuoi-chinh-phi-h",
+   799
+  ],
+  [
+   "có cung trống, được dời sang",
+   "doi-cung-h",
+   800
+  ],
+  [
+   "quốc tang",
+   "quoc-tang-h",
+   801
+  ],
+  [
+   "đề bạt .+ lên",
+   "de-bat-nguoi-hau-h",
+   803
+  ],
+  [
+   "lo chạy việc cho ngươi",
+   "nhan-nguoi-chay-viec-h",
+   804
+  ],
+  [
+   "^Ngươi giao cho",
+   "giao-viec-h",
+   805
+  ],
+  [
+   "có người ngỏ lời nhờ",
+   "co-viec-nho-h",
+   806
+  ],
+  [
+   "^Ngươi nhận lời ",
+   "nhan-loi-nho-h",
+   807
+  ],
+  [
+   "trả ân",
+   "nho-tra-an-h",
+   808
+  ],
+  [
+   "cúng dường dầu đèn",
+   "cung-duong-dau-den-h",
+   811
+  ],
+  [
+   "khấn cho cha mẹ",
+   "khan-cha-me-h",
+   812
+  ],
+  [
+   "mời .+ uống trà",
+   "moi-uong-tra-h",
+   813
+  ],
+  [
+   "sang dự tiệc của",
+   "du-tiec-nguoi-khac-h",
+   814
+  ],
+  [
+   "ngươi thắng .+ ván",
+   "thang-bac-h",
+   815
+  ],
+  [
+   "thắng ngươi ván",
+   "thua-bac-h",
+   816
+  ],
+  [
+   "ngươi thắng cược",
+   "thang-cuoc-h",
+   817
+  ],
+  [
+   "ngươi cược .+ mất",
+   "thua-cuoc-h",
+   818
+  ],
+  [
+   "khen lễ của ngươi nhất|hành lễ chu đáo",
+   "le-duoc-khen-h",
+   819
+  ],
+  [
+   "sơ suất trong lúc hành lễ",
+   "hanh-le-bi-che-h",
+   820
+  ],
+  [
+   "tiệc của ngươi được khen",
+   "tiec-duoc-khen-h",
+   821
+  ],
+  [
+   "tiệc của ngươi trục trặc",
+   "tiec-truc-trac-h",
+   822
+  ],
+  [
+   "^.+ dùng ",
+   "tu-dung-h",
+   823
+  ]
+ ],
+ "held": [
+  [
+   "scene:rv",
+   "^Đến cung nàng thăm",
+   ""
+  ],
+  [
+   "nhan-loi-tra-do",
+   "nhận lỗi, xin khoan hồng",
+   "Phi tần đặt hộp đồ trả lại lên khay trước Hoàng hậu, làm vạn phúc"
+  ]
+ ],
+ "heldSteals": [
+  [
+   "-",
+   "^(Thôi|Đi|Đợi buổi sau|Đợi sáng mai|Thôi, ở lại|Ngồi xem|Bỏ qua|Không mua|Mặc kệ|Nhận|N|X|XX)(\\.|$| \\()",
+   [
+    "X",
+    "X (con Lan Tần) theo sứ đoàn sang Bắc Địch hòa thân.",
+    "X (con Lan Tần) được hứa gả cho Lan Tần, con trai X."
+   ]
+  ],
+  [
+   "-",
+   "^\\+\\d+ Phúc duyên|^Đã đổi thân phận|^\\d+ Ứng viên|^Đứng đầu(\\.|$| \\()|^Tháng này(\\.|$| \\()|^Thánh chỉ(\\.|$| \\()|^Có tin(\\.|$| \\()|^Chưa đủ|^Dùng được ngay|^Người cùng cung, .*không thể ra tay|^Gieo lại|^Xin xăm(\\.|$| \\()|^Cưới khi con tròn|^.+, \\d+ tuổi(\\.|$| \\()",
+   [
+    "Cưới khi con tròn 18 tuổi."
+   ]
+  ],
+  [
+   "-",
+   "^(Có tin|Ngươi|Tháng này|Thánh chỉ|Thiện cảm [+\\-−]|Sức [+\\-−])\\S*(\\.|$| \\()|^Thánh chỉ:|^Tháng này:",
+   [
+    "Thánh chỉ: tấn phong 3 làm Lan Tần."
+   ]
+  ],
+  [
+   "-",
+   "^(?!Tiếp đãi).+ (cảm động|tươi cười|lạnh nhạt|dịu nét mặt|khẽ cười|cười lạnh|ghi nhớ|cười nói vui vẻ|gật đầu đáp lễ)(\\.|$| \\()|cho là ngươi giả lả|^Hai người to nhỏ|lảng sang chuyện khác|đem lời ngươi kể lại|cũng kể chuyện riêng|lắng nghe chăm chú|kể cho ngươi một chuyện về|^.+ khéo từ chối(\\.|$| \\()|cho ngươi mượn \\S+ lượng|nghi ngươi gây chia rẽ|^Ngươi hạ mình tạ lỗi|^Ngươi nhún nhường trước|^Ngươi nhắc .+ coi chừng|^Ngươi giúp .+ việc khó|^Ngươi nghe lén .+ nói chuyện",
+   [
+    "Lan Tần kết giao với Lan Tần: bị lạnh nhạt.",
+    "Lan Tần kết giao với ngươi: bị lạnh nhạt.",
+    "Lan Tần tung lời ly gián, Lan Tần bị Hoàng thượng lạnh nhạt (Sủng -10)."
+   ]
+  ],
+  [
+   "-",
+   "^Tay run, trà sóng|^Ngài nhận chén trà|lặng nghe, dúi vào tay|^Hoàng hậu không tin lời một cung nữ|^Ma ma Đức Thọ cung khen|^Hoàng thượng ngẩng lên|^.+ bị xét tội(\\.|$| \\()|^Hắn (không để ý|chần chừ|giấu vội|ngập ngừng)|thề sẽ chờ ngươi|^Ngươi trả lại khăn tay|thành thanh gươm trong tay chủ|chờ ngươi ngoài cửa cung; hai người thành thân",
+   [
+    "X trình chứng cứ lên Hoàng hậu: Hoàng hậu Lan Tần bị xét tội.",
+    "X trình chứng cứ lên Hoàng hậu: Lan Tần Lan Tần bị xét tội.",
+    "X trình chứng cứ lên Hoàng hậu: ngươi bị xét tội."
+   ]
+  ],
+  [
+   "-",
+   "lẻn vào .+ để hẹn hò tư tình|nhận bạc của .+ để lén chuyển thư|nán lại quá giờ|để ý .+ từ lâu, lẻn vào|vào .+ không có lệnh",
+   [
+    "Núp sau hòn giả sơn, ngươi nghe rõ: X lẻn vào X để hẹn hò tư tình với X.",
+    "Núp sau hòn giả sơn, ngươi nghe rõ: X nhận bạc của X để lén chuyển thư ra ngoài cung: nàng X.",
+    "Núp sau hòn giả sơn, ngươi nghe rõ: X nhận bạc của X để lén chuyển thư ra ngoài cung: nàng có chuyện riêng."
+   ]
+  ],
+  [
+   "to-giac-truoc-hh-h",
+   "tố giác .+ trước Hoàng hậu",
+   [
+    "Ngươi tố giác ngươi trước Hoàng hậu: thành."
+   ]
+  ],
+  [
+   "to-giac-truoc-ht-h",
+   "tố giác .+ trước Hoàng thượng|^Tố lên Hoàng thượng",
+   [
+    "Ngươi tố giác ngươi trước Hoàng thượng: thành."
+   ]
+  ],
+  [
+   "to-giac-truoc-h",
+   "tố giác .+ trước ",
+   [
+    "Ngươi tố giác ngươi trước ngươi (Hoàng hậu): thành."
+   ]
+  ],
+  [
+   "to-giac-khong-thanh-h",
+   "tố giác .+ không thành|tố .+ nhưng không đủ chứng",
+   [
+    "Ngươi tố giác Lan Tần không thành; chứng cứ bị hủy.",
+    "Ngươi tố giác ngươi không thành; chứng cứ bị hủy."
+   ]
+  ],
+  [
+   "tu-thong-ban-chet-h",
+   "tư thông bị phát giác, bị ban chết|^Chuyện tư tình bại lộ",
+   [
+    "Lan Tần tư thông bị phát giác, bị ban chết."
+   ]
+  ]
+ ]
+}
