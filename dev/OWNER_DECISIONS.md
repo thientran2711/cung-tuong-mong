@@ -217,3 +217,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (02:55Z) Owner: 'Đẩy lên live đi' + từ nay bản đã qua kiểm duyệt (PASS của người duyệt kit) được đưa lên live luôn, không cần hỏi. Đã đẩy main = 355d6d58 (loading: app tự về bản mới).
 - (03:05Z) Owner chê 'có thai: Liều · được ban thưởng: Liều' trên thẻ việc. Luật: thang Liều…Nắm chắc chỉ cho cơ may thành/hỏng của chính việc; khả năng phụ (có thai, ban thưởng, lật thẻ…) dùng thang Rất thấp/Thấp/Vừa/Cao/Rất cao như ô trạng thái (hud-chance2). Giao review/sub-odds.
 - (03:10Z) Owner lo bị tải lại giữa lúc chơi. Điều phối: không bao giờ tự tải lại giữa chừng; chỉ chip 'Có bản mới' (chạm: Mở bản mới / Để sau); tự áp dụng khi Qua buổi / mở lại app sau lâu; sau tải TỰ vào lại đúng kiếp đúng chỗ; co-op không rớt. Giao review/update-flow.
+- (03:15Z) Owner: cho phép thường trực tự đẩy ảnh lên Cloudflare (kể cả ghi đè ảnh sửa cùng tên), không cần hỏi.
