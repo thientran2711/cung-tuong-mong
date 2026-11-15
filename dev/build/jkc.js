@@ -498,3 +498,21 @@ function kcStoryHTML(){const k=S.origin.k;const n=[4,10,16].filter(x=>S.turn>=x)
 /* ---------- co-op hook points (OUTSIDE_PLAN §13; no networking: single-player routes them to the log) ---------- */
 const KCHOOK=[];function kcHook(kind,payload){KCHOOK.push({kind,payload,t:S?S.turn:0});if(KCHOOK.length>50)KCHOOK.shift();try{if(typeof window.coopSend==="function")window.coopSend("kc:"+kind,payload)}catch(e){}}
 window.kcHook=kcHook;
+
+/* ---------- home dress (owner 11/15): while she is at home (isKc) she and the daughters of the house wear their own
+   khuê các dress (tier "kc"), or the plain cotton dress of a poor home (tier "ngheo") when the origin is thd or td.
+   img/FIGURES-kc.json is read here only (j39 never loads it), so these tiers can never show inside the palace.
+   A face without home-dress art falls back to the old figure (her rank-1 dress). ---------- */
+let KCFX={};
+function kcFigLoad(){try{fetch("img/FIGURES-kc.json",{cache:"no-cache"}).then(r=>r.ok?r.json():[]).catch(()=>[]).then(j=>{const X={};
+ for(const f of figList(j)){const t=String(f.tier||""),r=norm(f.role);if(!(t==="kc"||t==="ngheo")||!f.identity)continue;const k=r+":"+f.identity;(X[k]=X[k]||{})[t]=f}
+ const n=Object.keys(X).length;const was=Object.keys(KCFX).length;KCFX=X;if(n!==was)try{if(isKc())render()}catch(e){}}).catch(()=>{})}catch(e){}}
+kcFigLoad();setInterval(kcFigLoad,300000);
+function kcDress(){return S&&S.origin&&(S.origin.k==="thd"||S.origin.k==="td")?"ngheo":"kc"}
+function kcDressRec(fid,tier){const X=fid&&KCFX[fid];return X?X[tier]||null:null}
+function kcDressSrc(fid,kind,tier){const f=kcDressRec(fid,tier||kcDress());if(!f)return"";return figPath(kind==="por"?(f.por||f.file):f.file)}
+window.kcDressSrc=kcDressSrc;
+(function(){const g0=figFor;figFor=function(p,kind){try{if(isKc()&&p){const who=p===S?S:typeof figWho==="function"?figWho(p):null;
+  if(who===S){const k=S.pid||S.fid||(typeof figPick==="function"?figPick(S):"");const s=kcDressSrc(k,kind);if(s)return s}}}catch(e){}return g0.apply(this,arguments)}})();
+/* her sister shares her home; the friends are daughters of officials (khuê các) */
+(function(){const k0=kcPor;kcPor=function(m,kind){try{if(isKc()&&m&&m.fid&&(m.r==="muoi"||/^ban/.test(m.r))){const s=kcDressSrc(m.fid,kind==="fig"?"fig":"por",m.r==="muoi"?kcDress():"kc");if(s)return s}}catch(e){}return k0.apply(this,arguments)}})();

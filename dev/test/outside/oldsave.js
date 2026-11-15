@@ -8,7 +8,7 @@ async function serve(c){await c.route('http://game.local/**',r=>{const u=decodeU
  await p.evaluate(()=>document.querySelector('#slots button[data-new="1"]').click());await p.waitForTimeout(1500);
  await p.evaluate(()=>{try{nlAccept()}catch(e){}for(let k=0;k<20&&Q.length;k++)closeModal();for(let i=0;i<5;i++){for(let k=0;k<20&&Q.length;k++)closeModal();nextBuoi()}for(let k=0;k<20&&Q.length;k++)closeModal();save()});
  out.old=await p.evaluate(()=>S.name+' '+S.turn+'/'+S.tuan+'/'+S.buoi);const st=await p.evaluate(()=>{const o={};for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);o[k]=localStorage.getItem(k)}return o});await c.close();
- for(const [W,H,D] of [[686,880,2.2],[1180,820,2]]){const c2=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:D,serviceWorkers:'block'});await serve(c2);
+ for(const [W,H,D] of [[755,1000,2],[1180,820,2]]){const c2=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:D,serviceWorkers:'block'});await serve(c2);
   await c2.addInitScript(o=>{if(!sessionStorage.getItem('x')){sessionStorage.setItem('x',1);localStorage.clear();for(const k in o)localStorage.setItem(k,o[k])}},st);
   const q=await c2.newPage();const e2=[];q.on('pageerror',e=>e2.push(e.message));await q.goto('http://game.local/zz-test.html',{waitUntil:'domcontentloaded'});await q.waitForTimeout(2500);
   const ok=await q.evaluate(()=>{const bt=document.querySelector('#slots button[data-load]');if(!bt)return'no slot';bt.click();return'clicked'});await q.waitForTimeout(1500);
