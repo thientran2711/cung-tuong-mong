@@ -252,14 +252,14 @@ st_the:c1|0|a dignified minister in a dark Ming official robe bows to a consort 
 st_the:c2|0|a consort in rich robes whispers into the ear of another consort's maid in a corridor, the maid looking uneasy
 st_the:c3|0|a consort beside an open chest of silk bolts hands bolts of silk to her maids and eunuchs, all bowing
 st_the:t1|0|a consort stands protectively in front of her kneeling maid in a courtyard, facing a eunuch accuser holding a small silver ingot
-st_the:x1|0|several consorts and a minister stand together behind one consort in a hall, a united faction, the Empress seat empty in the background
+st_the:x1|0|several consorts in pink, green and blue hanfu and a minister in dark green Ming robes stand together behind one consort in a hall, a united faction, an empty carved throne seat in the background
 st_con:s1|0|a consort with her son, a prince of about seven, meets two tutors in the study hall, an elderly stern scholar and a young scholar, both in Ming robes
 st_con:s2|1|a prince of about six sleeps feverish in bed at night, his mother the consort holding a cool cloth, an imperial physician measuring medicine by candlelight
 st_con:c1|0|a prince of about seven plays with a wooden top in a garden while his mother's maid notices a eunuch lurking behind a pillar
 st_con:c2|0|the Emperor in his study listens to a prince of about eight who bows and answers, two other young princes waiting, the consort watching from the side
 st_con:c3|0|two young princes of about seven play together with a kite in the imperial garden, two consorts watching from a pavilion, one smiling
 st_con:t1|0|a consort holds her son, a prince of about seven, close in her hall while maids whisper in the doorway
-st_con:x1|0|several consorts kneel in a hall before the Emperor's dais, each with a young child beside her, princes and princesses of different ages
+st_con:x1|0|several consorts in pink, green and blue hanfu kneel in a hall before the Emperor's dais, each with a young child in blue, green or pink beside her, princes and princesses of different ages; only the Emperor wears yellow
 st_dong:s1|0|the Emperor in his study turns to ask a consort, a minister kneeling with a closed memorial before him
 st_dong:s2|0|a powerful minister in a dark Ming official robe bows to a consort in a reception room, his young daughter of about ten standing behind him
 st_dong:c1|0|a consort in rich robes speaks to a circle of court ladies in a garden, glancing toward a teenage prince of about fourteen passing in the distance
@@ -267,3 +267,29 @@ st_dong:c2|0|the Empress Dowager, an elderly lady in dark brown robes, sits besi
 st_dong:c3|0|princes of about fifteen and sixteen shoot arrows at targets on a palace training ground, the Emperor watching from a pavilion
 st_dong:t1|1|at night in the imperial kitchen a consort's maid catches a eunuch's wrist over a bowl of food, a small paper packet in his hand
 st_dong:x1|0|the Emperor on his throne addresses kneeling ministers in Ming robes in the great hall, a prince of about sixteen kneeling before the dais
+tm96a:a1|1|a young bride-to-be consort in a red-curtained palanquin at night looks back through the parted curtain at a handsome young scholar in dark blue Ming robes standing at a manor gate, a small jade pendant in her hand
+tm96a:a2|0|in a palace corridor a handsome young official in dark green Ming robes bows formally to a consort passing with her maid, their eyes meeting for a moment
+tm96a:a3|0|a palace maid carefully places a small cloth bundle with a jade pendant on a table before a consort seated in her chamber
+tm96a:a4|0|a consort at her desk holds a folded letter without any writing visible, her maid standing at the door keeping watch
+tm96a:a5|0|a palace maid kneels before a consort in her chamber, speaking earnestly and softly, the consort listening calmly
+tm96a:a6|1|the mid-autumn moon festival in the imperial garden at night, rows of lanterns, a consort among the ladies glances toward a handsome young official in dark blue Ming robes standing far behind the Emperor's retinue, the Emperor seen from behind
+tm96b:b1l|0|in a garden pavilion a consort in rich robes smiles sweetly while speaking to another consort who stays composed, teacups between them
+tm96b:b1h|1|a consort at night by candlelight receives from her maid a single dried flower branch, holding it gently
+tm96b:b1d|0|across a palace courtyard a handsome young official in dark green Ming robes pauses his work with scrolls under his arm to watch a consort walking past in the distance
+tm96b:b2a|0|in the great hall a handsome young official in dark blue Ming robes kneels boldly presenting a closed memorial before other ministers, the Emperor on his throne watching
+tm96b:b2b|0|a handsome young official in dark Ming robes walks briskly past a consort's palace gate without looking back, the consort standing quietly in the courtyard
+tm96b:b3a|0|a consort walks in a garden path while a maid of another palace lurks behind a pillar watching her
+tm96b:b3b|0|a eunuch of the household office in grey robes bows with a knowing look to a consort in a corridor, holding out his open palm
+tm96b:b4|0|a palace maid hurries into a consort's chamber while the consort kneels beside an open wooden chest, lifting out a small jade pendant
+tm96b:b5|1|at a palace banquet at night the Emperor gestures to a consort to pour wine for a handsome young official in dark blue Ming robes who bows before the table
+tm96b:b6|0|in a solemn hall the Emperor sits at a desk where a small jade pendant lies, a consort stands before him calm and dignified
+tm96c:c1n|0|a eunuch scribe with a closed record book follows a consort at a distance along a palace walkway, her maid glancing back uneasily
+tm96c:c1o|1|a handsome young man in a plain worn grey scholar robe sits alone at night in a humble room reading an old folded letter by an oil lamp
+tm96c:c1t|0|a handsome young official in dark Ming court robes stands confidently among ministers in the court hall, others turning to listen to him
+tm96c:c2|0|the Empress Dowager, an elderly lady in dark brown robes, and the Emperor discuss a marriage in her palace, a consort standing aside composed
+tm96c:c3a|1|behind a rockery in the palace garden at night a handsome young official in dark blue Ming robes offers his hand to a consort, a lantern at their feet, she hesitates
+tm96c:c3b|0|a palace maid quietly whispers a message to a consort in the shade of a willow by a pond
+tm96c:c4a|0|a consort in rich robes kneels before the Emperor in his hall presenting a stack of papers, another consort standing calm at the side
+tm96c:c4b|0|a handsome young official in dark Ming robes kneels before stern ministers in the court hall, keeping his silence with dignity
+tm96c:c5|1|a palace maid leans close and speaks softly to a consort at night in her chamber, a candle burning low
+tm96c:c6|1|a consort stands before a bronze mirror at night in late autumn, maple leaves outside the window, deep in thought
