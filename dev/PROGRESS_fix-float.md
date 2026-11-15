@@ -52,3 +52,9 @@ Base: origin/main (merged; see git log). In the assemble.py module list keep mai
 - Tests: book-person 5 sizes PASS; kit-page 5 sizes PASS (12 samples incl. §52 ×3, §57); rel-words-scan 0/0; night-day ok; int-stats 5 sizes ok;
   rules-one-source 755/844 ok + old save loads; sheet-turn 5 sizes ok; page-curl 5 sizes ok; coop-e2e 59/59 (incl. old save).
 - Not this branch: page-curl.js screenshots show the Luân hồi screen (test does not dismiss #kroul); load-migrate.js / inv-origin.js stale vs main (Cache.add, #kload).
+- Second merge: origin/main aa9689da5 (kit-fig2, act-pics2, header-danh, promo-exam). j79 kpPeopleIn = main's version + the KP_CONS_RX current-rank rule;
+  KIT.md keeps main §48-§50, §53, §55 and this branch's §52, §57. Extra fix: a "," / "." after an inline change goes inside the nowrap .krd
+  (it started the next line in a Tuần lục fact). Re-run on the final build: book-person, kit-page (15 samples), rel-words-scan, night-day,
+  int-stats, rules-one-source + old save, sheet-turn, page-curl, coop-e2e 59/59 — all pass; no horizontal overflow at the 6 sizes.
+- Observation for the worker (not blocking): a "thân ±N" with no "→ ta"/"với ta" before it is drawn as a bare "thiện cảm ±N" (KIT §57 "between two
+  other people"); after "Nàng oán ta +2," it reads ambiguous (seen: "Phi X nhờ người đưa thư. Nàng oán ta +2, thiện cảm −2.").
