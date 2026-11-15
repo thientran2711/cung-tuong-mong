@@ -52,7 +52,7 @@ function rkQ(){const q=store.get(RK_Q);return Array.isArray(q)?q:[]}
 function rkRes(lid){const r=store.get(RK_RES)||{};return lid?r[lid]:r}
 function rkResSet(lid,v){const r=store.get(RK_RES)||{};r[lid]=v;const ks=Object.keys(r);if(ks.length>30)ks.sort((a,b)=>(r[a].at||0)-(r[b].at||0)).slice(0,ks.length-30).forEach(k=>delete r[k]);store.set(RK_RES,r)}
 let RK_FL=0,RK_RT=0;
-async function rkFlush(){if(RK_FL)return;const q0=rkQ();if(!q0.length)return;RK_FL=1;let wait=0;
+async function rkFlush(){if(RK_FL){RK_FL=2;return}const q0=rkQ();if(!q0.length)return;RK_FL=1;let wait=0;
  try{await rkHello();const d=rkIdGet();
   for(const it of q0){const r=await rkReq("POST","/life",{gid:d.gid,lid:it.lid,life:it.life});
    if(r.st===200&&r.j.ok){rkResSet(it.lid,{score:r.j.score,rank:r.j.rank,of:r.j.of,at:Date.now()});if(r.j.me)rkIdSet({pid:r.j.me.pid,pn:r.j.me.pn})}
@@ -60,7 +60,7 @@ async function rkFlush(){if(RK_FL)return;const q0=rkQ();if(!q0.length)return;RK_
    else if(r.st===0||r.st>=500){wait=60000;break}
    else rkResSet(it.lid,{refused:r.j.why||String(r.st),at:Date.now()});
    store.set(RK_Q,rkQ().filter(x=>x.lid!==it.lid));rkEndPaint(it.lid)}}
- finally{RK_FL=0}
+ finally{const again=RK_FL===2;RK_FL=0;if(again&&!wait)setTimeout(rkFlush,50)}
  if(wait&&rkQ().length){clearTimeout(RK_RT);RK_RT=setTimeout(rkFlush,wait)}
  if(document.getElementById("krkov"))rkLoad(RK.tab,true)}
 function rkPush(sum){const lid=rkRand(16);const q=rkQ();q.push({lid,life:sum,at:Date.now()});store.set(RK_Q,q.slice(-50));return lid}
