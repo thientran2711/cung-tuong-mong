@@ -206,3 +206,6 @@ Worktree thợ ở /home/user/wt/<tên>. Bản tóm tắt luật cho thợ: /hom
 - 17:20Z THĂNG PHẨM PHẢI QUA KHẢO HẠCH (đủ điều kiện chỉ là được thi; trượt thì chờ; NPC cùng luật) → hàng chờ, giao ngay khi có chỗ (thợ promo-exam). Hỏi sếp: đường nô tài/ma ma có cần thi không.
 - 17:24Z phòng trưa vẫn nâu (scene-light tách lô sớm), đom đóm buổi trưa (close-bugs), ban thưởng tranh cổ không có rương (người duyệt game-feel kiểm).
 - 17:27Z bảng nhãn|giá trị lệch cột (LUẬT · Ân thưởng) → kit bảng chung + rà mọi danh sách → fix-float.
+- LIVE main = 114887bc1 (brand: icon app + mộc Trân nữ; người duyệt sửa dấu "NỮ" bị đọc "NƠ" và chip "Có bản mới" đè thẻ Hoàng thượng).
+- 17:27Z bảng nhãn|giá trị tách sang thợ mới review/kit-table (fix-float xin tách).
+- 4 mẫu chữ Tuần lục trên CDN title-tuanluc-v1..v4.webp, đã gửi sếp chọn.
