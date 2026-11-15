@@ -102,3 +102,6 @@ giữ nguyên "đẹp" và "diêm dúa" như hiện tại), 509a2dad5 (phản �
   755x1000 + 844x390 re-run on the merge: 0 errors, no overflow, old save loads.
 - For the coordinator (main, not toilette): in the event frame the person tag ("Thái hậu") now sits at the TOP edge of the banner and is half
   hidden at 755x1000 (before ce840fa84 it was at the bottom) — comes with the banner crop change on main (jevban / gift-ui), affects any `who` event.
+- Re-merged origin/main afb2676a2 (header-danh top bar groups): built files only. 755x1000@2 + 844x390@3 re-run: 0 errors, no overflow, old save
+  loads, chip in the new top bar. (One 755 run hit a game overlay #ov already open on that random new life before the chip tap — test harness
+  flake; the re-run passed.)
