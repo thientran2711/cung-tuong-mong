@@ -28,6 +28,14 @@
 - dev/test/coop-timer-lag.js: routeWebSocket 300–800 ms each way; agree (worst gap 124 ms), mini game mid-countdown, hold, guest reload, time out: 27/27.
 - Earlier: coop-timer.js 42/42 ×3 (r4–r6, before round 3), coop-e2e 59/59 (fix-float-r8 merged), ts-oldsave OK.
 
+## Round 4 (owner ~23:10Z + ~23:20Z)
+- Default 5 phút per buổi (BAL.coopTm.buoiMs 300000); the host picks 3 / 5 / 8 phút on the lobby's "Mời hảo hữu" screen
+  (kitCoopLenRow, one kitRows row of chip buttons; localStorage "ctm-coop-len"; one hook line in jcooplobby body("wait")).
+- 23:20Z override: the clock stops ONLY for mini games (S.mg / #ov), cap BAL.coopTm.pauseCapMs; dialogs / animations do not stop it.
+- Host logs real buổi lengths (COOPW.tm.lens()); coop-e2e prints "buổi lengths (s): n median p90 max timeouts" and writes buoi-lengths.txt.
+  e2e2 (bots pressing at once, loaded machine): n=16 median 1.1 s, p90 15.4 s, max 22.8 s, 0 time outs. Real human lengths need real play.
+- Runs before 23:20Z change: coop-timer r7–r9 42/42 ×3, coop-timer-lag l5–l6 27/27 ×2, coop-e2e 59/59.
+
 ## Next steps / commands
 - `python3 dev/build/assemble.py && node dev/test/coop-timer.js .tmp/rN` (≈8 min) · `node dev/test/coop-timer-lag.js .tmp/lN` (≈6 min)
   · `COOP_OLD_REF=origin/main node dev/test/coop-e2e.js .tmp/e2e` · ts-oldsave: serve .tmp with old.html (git show origin/main:index.html) + new.html
