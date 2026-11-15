@@ -201,3 +201,4 @@ Worktree thợ ở /home/user/wt/<tên>. Bản tóm tắt luật cho thợ: /hom
 - LIVE main = ca361b147 (hoangtu-tuchat, PASS, kèm sửa j53 lời báo tư chất theo tuổi).
 - opt-render FAIL (ghi chú review/opt-render-r6 6f256f7f4): sự kiện dựng thẳng (Thái hậu triệu, 7 lễ hội…) vẫn hiện Được/Mất; gợi ý rơi về "chuyện khác"; CSS riêng .krisk/.khint → thợ mới sửa trên review/opt-render (làm thành kit chung). event-balance giữ phần bot cân bằng.
 - Đã mở người duyệt rank0-ivory + emo-men (gộp chung).
+- 17:14Z chữ tiêu đề 'Tuần lục' vẽ thư pháp Việt (chữ Latin có dấu, không Hán) 3–4 mẫu → act-pics2 làm trước, sếp chọn rồi mới gắn.
