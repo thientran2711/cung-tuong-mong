@@ -755,3 +755,8 @@ All must work in co-op.
 
 ## 15/11 ~23:10Z — Co-op buổi timer length (owner)
 - Owner worries 2 min is too short because reward/gift animations eat time. Decision (coordinator rec, owner leaning 5): DEFAULT 5 min per buổi; host can pick 3 / 5 / 8 in the co-op lobby. Timer PAUSES during reward/gift/edict/night animations and minigames (with the cap), so animations never eat play time. Both 'Sẵn sàng' → advance immediately. Measure real buổi lengths with bots/e2e and log them (median/p90) to confirm the default.
+
+## 15/11 ~23:15Z — CDNH works detail; luxury as a RANGE and a deeper system (owner)
+- Công Dung Ngôn Hạnh works follow the same shape as other works: each work kind has 10 items (e.g. túi thơm = 10 kinds of sachets), each item in 4 grade tiers, with its own art (Magnific).
+- Dress contest luxury is a RANGE per theme/occasion (e.g. 100–150): the outfit's luxury must fall INSIDE the range — below it = too plain (giản dị), above it = phô trương / vượt phẩm. Range also capped by her rank allowance.
+- "Luxury is faint" means the FEATURE is shallow, not the picture: deepen xa xỉ as a real system — every wearable/gift has a visible luxury value; occasions (thỉnh an, yến tiệc, lễ, hội phối đồ, tang, lãnh cung) each expect a luxury range; hosts' tastes (frugal / showy, "trọng") shift reactions; overspending builds a reputation (xa hoa → Thái hậu/Hoàng hậu frown, Danh/Đức effects), under-dressing reads as thiếu lễ; luxury ties to monthly allowance (luxMonth) and rank; NPCs follow the same rules.
