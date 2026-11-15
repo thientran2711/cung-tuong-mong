@@ -1,0 +1,61 @@
+{
+ "scenario": "play",
+ "build": "5f0fce8e2c4a",
+ "before": {
+  "name": "Thẩm Tịch Nhan",
+  "k": "1:3:0:0",
+  "used": 1,
+  "tab": "rv",
+  "title": false
+ },
+ "chip": {
+  "shown": true,
+  "text": "Có bản mới",
+  "inHud": true,
+  "covers": [],
+  "box": [
+   263,
+   30,
+   95,
+   20
+  ]
+ },
+ "card": {
+  "overflowX": false,
+  "bad": [],
+  "pct": false,
+  "text": "Có bản mới Mở bản mới ngay? Sổ đang chơi giữ nguyên, mở lại đúng chỗ. Để sau thì bản mới tự mở khi ngươi qua buổi. Để sau Mở bản mới"
+ },
+ "pressed": "Qua buổi",
+ "after": {
+  "name": "Thẩm Tịch Nhan",
+  "k": "1:3:0:1",
+  "used": 0,
+  "tab": "rv",
+  "title": false
+ },
+ "resumed": {
+  "ok": true,
+  "t": 1794717188466,
+  "why": "buoi",
+  "slot": 1,
+  "k": "1:3:0:1",
+  "u": 0,
+  "was": "1:3:0:1",
+  "wasU": 0
+ },
+ "samePre": {
+  "same": true,
+  "len": [
+   23497,
+   23497
+  ],
+  "diffS": [],
+  "visit": null,
+  "rd": [],
+  "top": []
+ },
+ "lineQB": "Đã mở bản mới",
+ "overflowX": false,
+ "errs": []
+}
