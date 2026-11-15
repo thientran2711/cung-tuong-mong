@@ -78,3 +78,20 @@ giữ nguyên "đẹp" và "diêm dúa" như hiện tại), 509a2dad5 (phản �
 - `toilfit.py --extend --all`: thêm áo cung nữ, kc/ngheo, mặt cung nữ m* (chưa chạy; nàng khi là phi tần không dùng).
 - Báo thợ act-audit: leAttire của jaudit so `p.toilette.day === S.turn*10+S.buoi` (theo buổi, mà S.turn là tháng); jtoil dùng `p.toilette.wk === wk()`
   (một ngày = một tuần-ngày) và gọi jaudit với toilette ẩn đi, rồi cộng phần dung nhan (r.toil). `p.toilette.style` = plain|fit|showy, `.look` = dep|diem|null.
+
+### REVIEW r6 (reviewer, 15/11 ~12:00–13:00Z) — branch review/toilette-r6
+- Merged review/toilette 8742f8abb onto origin/main f500d0464. One conflict: dev/build/assemble.py → main's list + `jtoil.js` after `jkitpage.js`, before `j84.js`
+  (none of jclose/jmark/jkpor/jpane/jtabs/jkitpage/jimg wrap talkOpts/leAttire/kitFxLayers/aaThieuLe*, so the order is safe). Site rebuilt.
+- Fix: the top-bar chip "Hôm nay: …" was hand-written `<button class="k3r">` markup → now the kit row builder `k3row` (jk3 exposes `window.k3row`).
+- Checked: leAttire (jaudit §17) day key = `p.toilette.wk===wk()`; jtoil calls jaudit with p.toilette hidden, adds the face (and the dress only when
+  jaudit's base state is "ok") → no double count with thiếu lễ; `aaThieuLeFx` = leAttire delta, so the thỉnh an card applies ONE delta; repeat
+  meetings the same day see nothing (toilSeen). Reaction frames: kitEventStage with `who` + ev-toil-*.webp (all 10 on CDN), options cost-only
+  (hideOut; "Đáp lại" shows TỐN Sức -2), no Được/Mất. img/toil-fit.json on CDN = dev/art/toil-fit.json (4262). TOIL_LOOKS = a820a52ab presets.
+- kbl-quote-scan vs f500d0464: 116 multi-sentence speeches, bullets 115→0, fact rows 115→0.
+- toilette.js + old save (mk-oldsave2 on f500d0464): see the result table in the reviewer report.
+- Note (not blocking): `#toil-css` (.toilw two-column dress layout) is a small private layout block, documented KIT 13.3 "awaiting kit review".
+- Results (toilette.js, old save from f500d0464): 755x1000@2, 1000x755@2, 1180x820@2, 1366x1024@2, 844x390@3, 390x844@3 — 0 page errors,
+  no horizontal overflow, old save loads (card + chip shown), skip → next buổi with Q empty, face layer in header + stage, reaction th-scold as an
+  event frame. popMax check: 4 reactions → 2 frames, last one ends "Còn: <name> — ghen +2 · <name> — ghen +1."; all options hideOut.
+- Bot balance (bot-same.js 80 steps both builds): NOT run — machine load 41–50 on 4 CPUs (one toilette.js size took ~10 min). Still open.
+- Minor (not blocking): at 1000x755 / 844x390 the dress screen scrolls inside the game box (buttons below the fold), same as other kg82 games.
