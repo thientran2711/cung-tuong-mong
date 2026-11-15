@@ -44,7 +44,7 @@ branch (that would revert ~9.7k lines): only the files the road needs were taken
 | Dịch: uống thuốc phòng (Bạc -20) / phát thuốc (Sức -15 Bạc -30) | Ở yên xông ngải cứu (Sức -20, a bit riskier) / Đi chùa sắc thuốc (Sức -35, riskier) |
 | Thọ tổ mẫu: Mua bức thêu (Bạc -25) | Thức đêm thêu (was Sức -15 = obvious pick → now Sức -30) |
 | Gia nhân: Nghe hắn kể (Bạc -5) / Cho bạc tiễn (Bạc -10) | Nhờ tỳ nữ dò hỏi (Sức -5, tỳ nữ Lòng -6) / Tiễn ra tận cổng (Sức -10) |
-| Small incidental prices on place acts (chùa -3, chợ -10, trà lâu -5, thư phường -5, thăm khuê hữu -5, làm vừa lòng mẹ -10, kết thân -5, ngáng chân -5, dò la -5, giả bệnh -5, thư -2/-3) | NOT paired yet: the price is the thing bought (incense, silk, tea). Coordinator/owner to decide if these need twins too. |
+| Small incidental place-act prices (chùa -3, chợ -10, trà lâu -5, thư phường -5, thăm khuê hữu -5, làm vừa lòng mẹ -10, kết thân -5, ngáng chân -5, dò la -5, giả bệnh -5, thư -2/-3) | r1 reviewer (coordinator decision): each now has a twin card with the same gain: Hầu mẹ trọn buổi (Sức -20, +1 khắc) · Giúp huynh/muội một việc (Sức -10, +1 khắc) · Sai tỳ nữ ngáng chân / nghe ngóng (tỳ nữ thiện cảm -5; no maid → Rình cả đêm Sức -15 +1 khắc) · Lên chùa chép kinh (Sức -20, +1 khắc) · Đi xem chợ, không mua (Sức -20, +1 khắc) · Nghe lỏm ngoài hiên trà lâu (Sức -15, riskier) · Đứng đọc ở thư phường (Sức -15, +1 khắc) · Mang bánh nhà làm thăm khuê hữu (Sức -15, +1 khắc) · Nhịn ăn tránh xem mặt (Sức -15) · Tự tay đưa thư (Sức -5, +1 khắc, riskier) · Gửi thư theo người đi chợ (Sức -5, +1 khắc, riskier). |
 
 ## Tests
 - `node dev/test/outside/route.js <url> <outdir> [sizes] [--origin=tt] [--shots=few|all|none]` — start → enter palace, exits 1 on any fail.
@@ -60,3 +60,6 @@ branch (that would revert ~9.7k lines): only the files the road needs were taken
 - route.js 755x1000@2, 1000x755@2, 1180x820@2, 1366x1024@2, 844x390@2: all PASS (origins tt/cn→eligible re-roll/dtq/nc→re-roll/cn→re-roll; entry ranks 0–1), 0 page errors, no overflow / clipped text / "???", no palace dialog at home, palace tabs back after entry, palace dress (t1) after entry, save+reload OK.
 - oldsave.js 755x1000@2: a save made on origin/main's published index.html loads here (palace life, no S.kc), plays 6 buổi; a home save reloads at home. PASS.
 - opt-scan.py --fail: 3 unclassified = jty.js on main (not this branch); kcE is a PEND event (cost mode).
+
+## Reviewer r1 (review/outside-r2-r1)
+- Merged onto origin/main d51a393e (jkc stays last, after jartc). Identity card with "Ở nhà chờ tuyển tú" picked now shows "Tiểu thư <nhà>", 18 tuổi and the home Danh/Bạc caps (was palace rank + origin age). Bạc twins for the small place acts (table above).
