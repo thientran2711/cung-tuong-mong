@@ -194,7 +194,10 @@ function kitCurlSwap(el,fn,opt){opt=opt||{};const run=()=>{try{fn&&fn()}catch(e)
                     :kitSheetTurn({host,front:null,back:el,under:el,w:r0.width,h:r0.height,ctx:el.closest(".game"),vanish:true,p:1})}catch(e){console.error(e)}
  run();
  const r1=el.getBoundingClientRect();
- if(!c||Math.abs(r1.left-r0.left)>2||Math.abs(r1.top-r0.top)>2||Math.abs(r1.width-r0.width)>2||Math.abs(r1.height-r0.height)>2||!el.getClientRects().length){host.remove();return false}
+ /* the page row may differ a little per tab (iPad 1366: the panel box moves a few px): still a page turn; only another layout
+    (map, panel hidden, a big change of box) skips it */
+ const far=Math.abs(r1.left-r0.left)>40||Math.abs(r1.top-r0.top)>40||Math.abs(r1.width-r0.width)>r0.width*.12||Math.abs(r1.height-r0.height)>r0.height*.12;
+ if(!c||far||!el.getClientRects().length){host.remove();return false}
  /* the new page printed on the sheet: on its back (forward) or on its front (back turn), as in a real book */
  const take=()=>{if(fwd)c.setBack(el);else c.setFront(el)};
  try{take()}catch(e){console.error(e)}
