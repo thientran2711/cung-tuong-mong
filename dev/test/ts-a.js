@@ -27,9 +27,9 @@ const fs=require('fs');
     if((cs.overflow==='hidden'||cs.textOverflow==='ellipsis')&&(e.scrollWidth>e.clientWidth+2||e.scrollHeight>e.clientHeight+3))cut.push(e.className+':'+e.textContent.trim().slice(0,30))});
    const M=document.getElementById('modal');const mt=M&&!M.hidden?M.innerText:"";
    /* FAIL 1: dressing tiles — tops of pictures / names per grid row */
-   const tiles=[...document.querySelectorAll('#kg82 .ts-it')];const rows={};tiles.forEach(t=>{const y=Math.round(t.getBoundingClientRect().top);(rows[y]=rows[y]||[]).push(t)});
+   const tiles=[...document.querySelectorAll('#kg82 .ts-it')];const rows={};tiles.forEach(t=>{const y=Math.round(t.offsetTop);(rows[y]=rows[y]||[]).push(t)});
    const spread=a=>a.length?Math.round(Math.max(...a)-Math.min(...a)):0;
-   const tileRows=Object.values(rows).filter(L=>L.length>1).map(L=>({n:L.length,pic:spread(L.map(t=>(t.querySelector('.kitb')||t).getBoundingClientRect().top)),name:spread(L.map(t=>(t.querySelector('.kitn')||t).getBoundingClientRect().top))}));
+   const tileRows=Object.values(rows).filter(L=>L.length>1).map(L=>({n:L.length,pic:spread(L.map(t=>{const r=(t.querySelector('.kitb')||t).getBoundingClientRect();return (r.top+r.bottom)/2})),name:spread(L.map(t=>(t.querySelector('.kitn')||t).getBoundingClientRect().top))}));
    /* FAIL 2: top bar — the date line on one line, bar height */
    const hud=document.querySelector('.game .hud');const d=document.getElementById('me-d');const dl=d?Math.round(d.getBoundingClientRect().height/(parseFloat(getComputedStyle(d).lineHeight)||16)):0;
    const chipsTop=[...document.querySelectorAll('#k3tt [data-k3="tsnh"],#k3tt [data-k3="tsxp"]')].length;

@@ -126,3 +126,18 @@ Phiên mới: làm tiếp TRÊN nhánh này (đã có kit-close bên trong; khi 
   <url> = http://127.0.0.1:<port>/dev/index.html (máy chủ tĩnh ở gốc worktree sau assemble.py); các bài thử tự phục vụ .html UTF-8.
 - Sổ cũ: dev/test/mk-oldsave.js trên main gãy (start() xong sau màn tải) — dùng mẫu chờ `S&&S.name` như trong các bài thử trên.
 ### cdn_sync: không có ảnh mới nào chờ đẩy.
+
+## PHIÊN 15/11 10:00Z (thợ ts-a vòng 2) — đọc phần này trước
+Nhánh review/ts-a (fix-ts-a chỉ là tên nhánh cục bộ cũ, đã đẩy vào đây). Đã gộp origin/main 70c792d4 (f48d3f32):
+xung đột jk4 (giữ bản kit-close: ✕/chạm ngoài/Esc), jinv (Túi đồ/Việc + kitShop của main), jk2b (kitNewsArtId + luật act-pics: tin không có
+loại tranh → tranh phòng), assemble (jts.js ngay trước j84).
+Sửa:
+- Chữ quan hệ theo VANPHONG §1 mới (owner 09:55Z: một chữ "thiện cảm", KIT_REL; "quý ngươi" là chữ cấm): jts dùng "thiện cảm ±N", "oán ta +3",
+  nhãn kitRel("them", KIT_REL.affThem), chưa biết = KIT_REL.unknown. kitRelPaint (jaudit) tô tím/lam.
+- Lỗi cả nhóm trong VP j84: "với ngươi" + "," / cuối chuỗi / " hơn" bị đổi thành "thiện cảm" ("ra tay thiện cảm, từ 0 đến 100" ở Nguy hiểm chung,
+  "hẹn ước thiện cảm,", "thân thiện cảm hơn"…). Nay "với ngươi" chỉ thành nhãn khi trước số hoặc ":"; quét chuỗi nguồn: 24 câu bị hỏng → 0.
+  "quý ngươi" trước dưới/từ/≥/≤/( (j20, j42×4, j70, j79×2, j9) → nhãn "thiện cảm": còn sót 9 → 0 (.kctmp/scanquy.py, scanvoi.py — không commit).
+- Gặp mặt: k61Meet cho khách lễ / Hoàng hậu báo đề trước đây bị bỏ qua với người công khai (k61Named đúng mà chưa thấy mặt) → Hoàng hậu bóng xám
+  có tên. Nay luôn gọi k61Meet (tự lọc). Riêng Hoàng thượng (triệu riêng) giữ như cũ: hình ngài thuộc kit-fig2 (gặp mặt → khung tranh trống).
+- Bài thử ts-a.js: đếm "thiện cảm" nằm ngoài .krel (phải 0), "quý ngươi"/"ra tay thiện cảm"; clear0(re) đóng thẻ xếp trước (Ngự tứ sau tấn phong).
+Bot: dev/index-main.html (bản dựng main, không commit) vs dev/index.html, `node dev/measure/run_url.js root/dev/index.html sens 40 out.json inpage6.js`.
