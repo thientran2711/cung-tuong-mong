@@ -102,3 +102,4 @@ Nhắc theo dõi: send_later 30 phút, tự đặt lại mỗi lượt (lịch l
 - [ ] NPC không có tên riêng (Tổng quản) — stage-slots
 - [ ] Nền Kính sự phòng tối quá rực — chờ sếp chỉ nơi/ảnh
 - 08:25Z LIVE main=5c1007a69 (Sổ tuần 'Sổ này ghi' thẳng cột). hau-cung-ui còn ~30–40 phút.
+- 08:40Z review/sub-odds 96d7c2df8 SẴN SÀNG KIỂM → hàng duyệt sau hau-cung-ui. Chip phải che đầu người trên điện thoại → stage-slots.
