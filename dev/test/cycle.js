@@ -46,7 +46,7 @@ const LIVE='https://thientran2711.'+'github.io/cung-tuong-mong/';const html=fs.r
     if(cycleDaysOf(S,S.month).length)f.push('days while pregnant');
     /* 4 deck cards */
     deal();const names=deck.map(x=>x.n);if(!names.includes('Sửa sổ nguyệt sự')||!names.includes('Dặn ma ma báo ngày giả'))f.push('hide cards missing');
-    const hc=deck.find(x=>x.n==='Sửa sổ nguyệt sự');hc.go();if(!cyb_ok())f.push('hide not stored');function cyb_ok(){return S.cyb&&S.cyb.hide===S.pregWk}
+    const hc=deck.find(x=>x.n==='Sửa sổ nguyệt sự');if(!hc)f.push('dbg '+JSON.stringify({out:S.out,dead:S.dead,rank:S.rank,preg:S.preg,hid:S.hidden,unk:S.pregUnk,n:names.length}));else hc.go();if(!cyb_ok())f.push('hide not stored');function cyb_ok(){return S.cyb&&S.cyb.hide===S.pregWk}
     S.pregMismatch=true;S.nightLog=[S.pregWk-3];deal();if(!deck.some(x=>x.n==='Khai lùi ngày nguyệt sự'))f.push('back card missing');
     S.preg=0;S.hidden=false;S.pregMismatch=false;S.cyb={};
     /* 5 book */
@@ -81,7 +81,7 @@ const LIVE='https://thientran2711.'+'github.io/cung-tuong-mong/';const html=fs.r
   if(OUT)await p.screenshot({path:`${OUT}/cycle-${SZ}.jpg`,type:'jpeg',quality:60});
   /* the two roads at Kính sự phòng (Tổng quản's talk cards) */
   const k=await p.evaluate(async()=>{const f=[];const sleep=t=>new Promise(r=>setTimeout(r,t));Q.length=0;document.getElementById('modal').hidden=true;used=0;S.bac=Math.max(S.bac,200);
-   goTo('ksp');Q.length=0;document.getElementById('modal').hidden=true;const i=curPeople().findIndex(x=>x.kind==='ksp');if(i<0){f.push('no Tổng quản at ksp');return{f}}popIdx=i;popMsg='';render();await sleep(300);for(let g=0;g<2;g++){const o=talkOpts(curPeople()[i]);if(o[0]&&o[0].k61){talk(0);popIdx=i;render();await sleep(200)}}
+   S.confined=0;S.out=false;goTo('ksp');Q.length=0;document.getElementById('modal').hidden=true;const i=curPeople().findIndex(x=>x.kind==='ksp');if(i<0){f.push('no Tổng quản at ksp '+JSON.stringify({pl:S.place,v:!!S.visit,used,ppl:curPeople().map(x=>x.kind)}));return{f}}popIdx=i;popMsg='';render();await sleep(300);for(let g=0;g<2;g++){const o=talkOpts(curPeople()[i]);if(o[0]&&o[0].k61){talk(0);popIdx=i;render();await sleep(200)}}
    const T2=talkOpts(curPeople()[i]);const r1=T2.find(x=>x.n==='Xem sổ nguyệt sự');if(!r1||r1.lock)f.push('road 1 locked after greeting');await sleep(400);
    const t=document.body.innerText;if(!/Xem sổ nguyệt sự/.test(t))f.push('road 1 not shown');if(!/xem lén sổ nguyệt sự/.test(t))f.push('road 2 not shown');
    if(document.documentElement.scrollWidth>innerWidth+1)f.push('page h-overflow (ksp)');return{f}});
