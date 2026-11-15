@@ -396,3 +396,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (10:30Z) Thanh đầu trang: ô chân dung của nàng to bằng cả khối tên (đang quá nhỏ, phía trên còn trống).
 - (10:40Z) Thú cưng người khác: sang cung người khác (NPC hoặc hảo hữu khi chơi chung) có thể giúp chăm (+thiện cảm), hại (trừu tượng), trộm (thú càng lớn càng khó, có thể bị cắn, bị bắt). NPC cũng làm vậy với thú của nàng. Cùng luật, đủ thẻ.
 - (10:42Z) Thú cưng lớn qua 4 giai đoạn: Non → Thiếu niên → Trưởng thành → Linh thú (tranh cho 3 giai đoạn đầu; Linh thú = tranh trưởng thành + hào quang hiệu ứng).
+- (10:45Z) Mỗi giai đoạn thú cưng một tranh riêng (4 tranh/con, Linh thú cũng có tranh riêng, uy nghi hơn) — 88 tranh.
