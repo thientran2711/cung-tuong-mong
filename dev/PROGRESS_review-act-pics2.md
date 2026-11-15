@@ -104,3 +104,11 @@ LEFT (unchanged from the list above unless noted)
 6. Playwright Tuần lục check after the patch lands (LEFT 7/8).
 
 - dev/site/cdn_sync.py --pull was broken for everyone: the CDN Worker returns 403 when there is no User-Agent, and urllib sends none. Fixed by adding a User-Agent to the download request.
+
+## Coordinator order 15/11 (after the patch was applied)
+(1) Phế phi họ Lý + side-story NPCs without art — DONE for the map:
+- Cause: the cold-palace stand-in {kind:"fallen"} has no ref, so figRoles() returned [] and she had no figure and no portrait (an empty frame).
+- Fix: dev/build/jly.js, loaded right after j88 (added to the module list in assemble.py). She is one persistent person (S.lyF, saved with the game), role consort, tier cold, age 34. f88Wear lets her wear the cold dress, so the existing cold-palace art is used: plain undyed robe, wooden hairpin, no jewellery, no forehead mark. Her talk-panel portrait (pFaceOf) matches. In my run she got fig/por-consort-c06-tcold-a26.
+- Audit: dev/test/npc-art-audit.js visits every place in two game states (early game, and a fallen rival) and lists every token without a figure. Before the fix: 1 of 37 tokens had none (Phế phi họ Lý). After: 49 of 49 have one.
+- Side-story speakers in dialogs: the code scan found no bare NPC objects without art. Unknown strangers (j61, jht) show the silhouette on purpose.
+- Edge case, not fixed: h54Face (prince-consort suitors and the Bắc Địch prince) takes FIGIX.man identities. There are only 11 of them, so with many suitors plus S.men they can run out, and those faces would then show initials. Drawing more "man" identities would fix it.
