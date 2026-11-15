@@ -292,3 +292,14 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (09:30Z) Owner: game thiếu cảm giác (nút lún/phát sáng, hoạt cảnh); muốn PixiJS cho hiệu ứng, RUNG máy, rung màn hình theo sự kiện — đã nói từ 14/11 mà chưa làm (code có VIB nhưng gần như không gọi). → review/game-feel: nút lún/sáng/gợn, lớp Pixi hạt (hoa rơi, tia vàng, bạc rơi, số bay), kitFx(kind) rung màn + rung máy theo sự kiện, tôn trọng Cảnh động/Rung.
 - (09:40Z) Owner: 'Nhờ thái giám mua đồ' — nền triều chính sai (→ phòng của nàng + thái giám bưng khay); làm lưới ô vuông kiểu cửa hàng game kiếm hiệp: ô vật phẩm, dưới là giá + nút Mua; không lặp thông tin (CẦN thiếu bạc + TỐN bạc là trùng) — luật kit: điều kiện chỉ là đủ tiền thì không ghi CẦN. review/act-pics + act-audit.
 - (10:05Z) Owner khoanh face-thaihau-3 (mặt gian, mắt xếch, liếc, nhếch mép, son đậm) → vẽ lại hiền hòa, đúng luật mặt; soát các face-thaihau khác. act-pics. (10:05Z cdn_sync 11 tệp act-pics: thỉnh an TH/HH riêng, bái kiến, nhịn, làm thơ, ngủ đêm, thái giám bưng khay…)
+
+## 15/11 ~05:00Z (sếp)
+- Nền trưa/chiều/tối quá rực, "AI": chỉnh màu bằng code như bản đêm Kính sự phòng/Thái y viện đã duyệt; sáng gốc và Lãnh cung làm mốc. Thêm lớp ánh sáng theo buổi phủ nhân vật. Làm mẫu trước (review/scene-light).
+- Dư đồ phải có buổi trưa (lấy map-*-trua từ review/place-seasons).
+- Nàng tự đề bạt cung nữ/thái giám (Chưởng sự cô cô, Nữ quan, Thủ lĩnh, Tổng quản), giới hạn theo phẩm vị; NPC cùng luật.
+- Thú cưng: bậc dùng y thang phẩm, màu và khung ô của trang bị/vật phẩm, không bảng màu mới.
+- Ảnh cắt nền vật phẩm (nhất là trâm cài) còn bẩn: cắt lại, không vẽ lại.
+- Mọi người đều đẹp, mặt thanh thản; mặt không lộ tính cách (Thái hậu 2/3/5 đã vẽ lại, đã lên CDN).
+- Gộp "Thánh thượng · Thái hậu" thành tab 2 chữ (đề xuất: Chí tôn).
+- "Qua đêm" đổi thành "Qua ngày" (hoặc "Sang ngày mới"); bỏ "Đợi sáng".
+- Bảng "Nhờ thái giám mua đồ": hình thái giám toàn thân bên trái như thẻ sự kiện người, không ảnh nền nơi chốn; trên là lời dẫn, dưới là lưới ô vật phẩm (ô Tư trang), dưới mỗi ô là giá và nút Mua. Dùng kit chung.
