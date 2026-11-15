@@ -15,11 +15,11 @@ L=L+[x for x in old if x not in L]  # keep modules that live only in dev/ (j50+)
 dst=re.sub(r"for f in \[[^\]]*\]","for f in "+repr(L),dst,count=1);open(sys.argv[2],'w').write(dst)
 P
 python3 $D/build/assemble.py
-mkdir -p $R/img $R/audio $R/icons
-find $S/cung-dau/img -maxdepth 1 -type f \( -name '*.webp' -o -name '*.json' \) ! -name '_*' -exec cp {} $R/img/ \;
+mkdir -p $R/audio $R/icons
+# pictures are NOT copied into the repo any more (dev/art/CDN.md): push them with python3 dev/site/cdn_sync.py; the sw.js below is legacy, prefer build_site.sh
 cp $S/cung-dau/audio/*.mp3 $S/cung-dau/audio/*.json $R/audio/ 2>/dev/null || true
 V=$(date +%s)
-FILES=$(cd $R && ls img/*.webp audio/*.mp3 icons/*.png | grep -v -E "img/(fig-|por-|map-fest-|_)" | sed 's/.*/"&"/' | paste -sd,)
+FILES=$(cd $R && ls audio/*.mp3 icons/*.png | sed 's/.*/"&"/' | paste -sd,)
 cat > $R/sw.js <<W
 /* Offline cache for Cung Tường Mộng; version bumps on every build. */
 const C='ctm-$V';

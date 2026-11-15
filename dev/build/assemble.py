@@ -1,10 +1,17 @@
-import base64,subprocess
+import base64,subprocess,re
 import os
 d=os.path.dirname(os.path.abspath(__file__))+'/../'  # dev/: build/ here; writes dev/index.html
-js=''.join(open(d+'build/'+f,encoding='utf-8').read() for f in ['j0.js', 'j1.js', 'j2.js', 'j3.js', 'j4.js', 'j5.js', 'j7.js', 'j8.js', 'j9.js', 'j10.js', 'j6.js', 'j11.js', 'j12.js', 'j13.js', 'j14.js', 'j15.js', 'j16.js', 'j17.js', 'j18.js', 'j19.js', 'j20.js', 'j21.js', 'j22.js', 'j23.js', 'j24.js', 'j25.js', 'j26.js', 'j27.js', 'j28.js', 'j29.js', 'j30.js', 'j31.js', 'j32.js', 'j33.js', 'j34.js', 'j35.js', 'j36.js', 'j37.js', 'j38.js', 'j39.js', 'j40.js', 'jbal.js', 'jkit.js', 'jtin.js', 'j41.js', 'j43.js', 'j42.js', 'j50.js', 'j51.js', 'j52.js', 'j53.js', 'j54.js', 'j55.js', 'j56.js', 'j57.js', 'j58.js', 'j59.js', 'j60.js', 'j61.js', 'j62.js', 'j64.js', 'j66.js', 'j73.js', 'jkitctl.js', 'jbd.js', 'j74.js', 'j77.js', 'j80.js', 'j63.js', 'j78.js', 'j79.js', 'jbook.js', 'j87.js', 'j65.js', 'j88.js', 'j89.js', 'j86.js', 'j82.js', 'j91.js', 'j90.js', 'j93.js', 'j94.js', 'jk2b.js', 'j98.js', 'jk3.js', 'jk4.js', 'j84.js'])
+# Pictures come from Cloudflare (dev/art/CDN.md): IMG_BASE is defined ONCE, in jcdn.js; every "img/…" 'img/…' `img/…` url(img/…) in the
+# other modules and p1.html becomes IMG_BASE+"img/…". CTM_IMG_BASE=<url> overrides it, CTM_IMG_BASE= (empty) keeps relative img/ paths.
+IMG_BASE=re.search(r'^const IMG_BASE="([^"]*)";',open(d+'build/jcdn.js',encoding='utf-8').read(),re.M).group(1)
+IMG_BASE=os.environ.get('CTM_IMG_BASE',IMG_BASE)
+def cdn(f,t):
+  if f=='jcdn.js':return t.replace('const IMG_BASE="'+re.search(r'const IMG_BASE="([^"]*)"',t).group(1)+'"','const IMG_BASE="'+IMG_BASE+'"',1)
+  return re.sub(r'''(["'`(])(?:\./)?img/''',lambda m:m.group(1)+IMG_BASE+'img/',t) if IMG_BASE else t
+js=''.join(cdn(f,open(d+'build/'+f,encoding='utf-8').read()) for f in ['jcdn.js', 'j0.js', 'j1.js', 'j2.js', 'j3.js', 'j4.js', 'j5.js', 'j7.js', 'j8.js', 'j9.js', 'j10.js', 'j6.js', 'j11.js', 'j12.js', 'j13.js', 'j14.js', 'j15.js', 'j16.js', 'j17.js', 'j18.js', 'j19.js', 'j20.js', 'j21.js', 'j22.js', 'j23.js', 'j24.js', 'j25.js', 'j26.js', 'j27.js', 'j28.js', 'j29.js', 'j30.js', 'j31.js', 'j32.js', 'j33.js', 'j34.js', 'j35.js', 'j36.js', 'j37.js', 'j38.js', 'j39.js', 'j40.js', 'jbal.js', 'jkit.js', 'jtin.js', 'j41.js', 'j43.js', 'j42.js', 'j50.js', 'j51.js', 'j52.js', 'j53.js', 'j54.js', 'j55.js', 'j56.js', 'j57.js', 'j58.js', 'j59.js', 'j60.js', 'j61.js', 'j62.js', 'j64.js', 'j66.js', 'j73.js', 'jkitctl.js', 'jbd.js', 'j74.js', 'j77.js', 'j80.js', 'j63.js', 'j78.js', 'j79.js', 'jbook.js', 'j87.js', 'j65.js', 'j88.js', 'j89.js', 'j86.js', 'j82.js', 'j91.js', 'j90.js', 'j93.js', 'j94.js', 'jk2b.js', 'j98.js', 'jk3.js', 'jk4.js', 'j84.js'])
 open(d+'build/all.js','w',encoding='utf-8').write(js)
 subprocess.run(['node','--check',d+'build/all.js'],check=True)
-p1=open(d+'build/p1.html',encoding='utf-8').read()
+p1=cdn('p1.html',open(d+'build/p1.html',encoding='utf-8').read())
 icon='data:image/webp;base64,'+base64.b64encode(open(d+'build/icon.webp','rb').read()).decode()
 p1=p1.replace('__ICON__',icon).rstrip()
 assert p1.endswith('<script>'); p1=p1[:-8]

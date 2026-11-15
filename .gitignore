@@ -2,3 +2,6 @@ dev/index.html
 dev/build/all.js
 __pycache__/
 __pycache__/
+# pictures live on Cloudflare R2 (dev/art/CDN.md): keep local copies here, push with dev/site/cdn_sync.py, never commit
+/img/
+dev/site/.cdn-state.json

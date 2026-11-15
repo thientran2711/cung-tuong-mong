@@ -2,8 +2,9 @@
 # Build the standalone PWA site for Cung Tường Mộng into the GitHub repo.
 set -e
 S=/tmp/claude-0/-home-user-phuong-lenh/1e222f2f-177f-54ad-8b97-a62a9b124c31/scratchpad; R=/home/user/cung-tuong-mong
-mkdir -p $R/icons $R/img $R/audio
-cp $S/cung-dau/img/*.webp $R/img/; rm -f $R/img/_*.webp; cp $S/cung-dau/audio/*.mp3 $R/audio/
+mkdir -p $R/icons $R/audio
+# pictures are NOT copied into the repo any more: they live on Cloudflare (dev/art/CDN.md, push with dev/site/cdn_sync.py)
+cp $S/cung-dau/audio/*.mp3 $R/audio/
 convert $S/icon/icon-a-512.png -resize 512x512 $R/icons/icon-512.png
 convert $S/icon/icon-a-512.png -resize 192x192 $R/icons/icon-192.png
 convert $S/icon/icon-a-512.png -resize 180x180 $R/icons/apple-touch-icon.png
@@ -12,7 +13,7 @@ cat > $R/manifest.webmanifest <<'M'
 {"name":"Cung Tường Mộng","short_name":"Cung Tường Mộng","start_url":"./","scope":"./","display":"standalone","orientation":"any","background_color":"#f6efe2","theme_color":"#8a2a1e","lang":"vi","icons":[{"src":"icons/icon-192.png","sizes":"192x192","type":"image/png","purpose":"any"},{"src":"icons/icon-512.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}]}
 M
 V=$(date +%s)
-FILES=$(cd $R && ls img/*.webp audio/*.mp3 icons/*.png | grep -v -E "img/(fig-|por-|map-fest-|_)" | sed 's/.*/"&"/' | paste -sd,)
+FILES=$(cd $R && ls audio/*.mp3 icons/*.png | sed 's/.*/"&"/' | paste -sd,)
 cat > $R/sw.js <<W
 /* Offline cache for Cung Tường Mộng; version bumps on every build. */
 const C='ctm-$V';
