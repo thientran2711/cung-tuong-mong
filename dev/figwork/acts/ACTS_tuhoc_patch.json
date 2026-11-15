@@ -1,0 +1,129 @@
+{
+ "_doc": "Merge into img/ACTS.json: add these \"acts\" entries and insert these \"log\" rules BEFORE the generic [\"^Tự học\",\"tu-hoc\"] rule (first match wins).",
+ "acts": {
+  "Theo ma ma giáo tập học Công": "mama-cong",
+  "Theo ma ma giáo tập học Dung": "mama-dung",
+  "Theo ma ma giáo tập học Hạnh": "mama-hanh",
+  "Theo ma ma giáo tập học Ngôn": "mama-ngon",
+  "Tự học Cầm": "tu-hoc-khuc",
+  "Tự học Cầm: phổ khúc đàn": "tu-hoc-khuc",
+  "Tự học Họa": "tu-hoc-tranh",
+  "Tự học Họa: cắm hoa": "tu-hoc-bhoa",
+  "Tự học Họa: thêu khăn": "tu-hoc-theu",
+  "Tự học Họa: vẽ tranh thủy mặc": "tu-hoc-tranh",
+  "Tự học Kỳ": "tu-hoc-the",
+  "Tự học Kỳ: soạn thế cờ tàn": "tu-hoc-the",
+  "Tự học Nấu nướng": "tu-hoc-mon",
+  "Tự học Thi": "tu-hoc-tho",
+  "Tự học Thi: chép kinh": "tu-hoc-kinh",
+  "Tự học Thi: viết thơ, thư pháp": "tu-hoc-tho",
+  "Tự học Thêu thùa": "tu-hoc-theu",
+  "Tự học Vũ": "tu-hoc-mua",
+  "Tự học Vũ: biên điệu múa": "tu-hoc-mua",
+  "Tự học Vũ: may áo múa": "tu-hoc-ao",
+  "Tự học Y thuật & điều hương": "tu-hoc-huong",
+  "Tự học Y thuật & điều hương: làm túi hương": "tu-hoc-huong",
+  "Tự học Y thuật & điều hương: nấu món": "tu-hoc-mon",
+  "Tự luyện Cầm": "tu-hoc-khuc",
+  "Tự luyện Cầm: phổ khúc đàn": "tu-hoc-khuc",
+  "Tự luyện Họa": "tu-hoc-tranh",
+  "Tự luyện Họa: cắm hoa": "tu-hoc-bhoa",
+  "Tự luyện Họa: thêu khăn": "tu-hoc-theu",
+  "Tự luyện Họa: vẽ tranh thủy mặc": "tu-hoc-tranh",
+  "Tự luyện Kỳ": "tu-hoc-the",
+  "Tự luyện Kỳ: soạn thế cờ tàn": "tu-hoc-the",
+  "Tự luyện Nấu nướng": "tu-hoc-mon",
+  "Tự luyện Thi": "tu-hoc-tho",
+  "Tự luyện Thi: chép kinh": "tu-hoc-kinh",
+  "Tự luyện Thi: viết thơ, thư pháp": "tu-hoc-tho",
+  "Tự luyện Thêu thùa": "tu-hoc-theu",
+  "Tự luyện Vũ": "tu-hoc-mua",
+  "Tự luyện Vũ: biên điệu múa": "tu-hoc-mua",
+  "Tự luyện Vũ: may áo múa": "tu-hoc-ao",
+  "Tự luyện Y thuật & điều hương": "tu-hoc-huong",
+  "Tự luyện Y thuật & điều hương: làm túi hương": "tu-hoc-huong",
+  "Tự luyện Y thuật & điều hương: nấu món": "tu-hoc-mon",
+  "Tự rèn Công": "ren-cong",
+  "Tự rèn Dung": "ren-dung",
+  "Tự rèn Hạnh": "ren-hanh",
+  "Tự rèn Ngôn": "ren-ngon"
+ },
+ "log": [
+  [
+   "^(?:Tự học|Tự luyện|Buổi tự học|Buổi tự luyện).*(?:vẽ tranh|thủy mặc)|^(?:Tự học|Tự luyện) Họa(?:\\.|$| \\()",
+   "tu-hoc-tranh"
+  ],
+  [
+   "^(?:Tự học|Tự luyện|Buổi tự học|Buổi tự luyện).*thêu|^(?:Tự học|Tự luyện) Thêu thùa",
+   "tu-hoc-theu"
+  ],
+  [
+   "^(?:Tự học|Tự luyện|Buổi tự học|Buổi tự luyện).*(?:cắm hoa|bình hoa)",
+   "tu-hoc-bhoa"
+  ],
+  [
+   "^(?:Tự học|Tự luyện|Buổi tự học|Buổi tự luyện).*(?:viết thơ|thư pháp)|^(?:Tự học|Tự luyện) Thi(?:\\.|$| \\()",
+   "tu-hoc-tho"
+  ],
+  [
+   "^(?:Tự học|Tự luyện|Buổi tự học|Buổi tự luyện).*chép kinh",
+   "tu-hoc-kinh"
+  ],
+  [
+   "^(?:Tự học|Tự luyện|Buổi tự học|Buổi tự luyện).*(?:phổ khúc|khúc đàn)|^(?:Tự học|Tự luyện) Cầm(?:\\.|$| \\()",
+   "tu-hoc-khuc"
+  ],
+  [
+   "^(?:Tự học|Tự luyện|Buổi tự học|Buổi tự luyện).*(?:thế cờ|cờ tàn)|^(?:Tự học|Tự luyện) Kỳ(?:\\.|$| \\()",
+   "tu-hoc-the"
+  ],
+  [
+   "^(?:Tự học|Tự luyện|Buổi tự học|Buổi tự luyện).*điệu múa|^(?:Tự học|Tự luyện) Vũ(?:\\.|$| \\()",
+   "tu-hoc-mua"
+  ],
+  [
+   "^(?:Tự học|Tự luyện|Buổi tự học|Buổi tự luyện).*(?:may áo|áo múa)",
+   "tu-hoc-ao"
+  ],
+  [
+   "^(?:Tự học|Tự luyện|Buổi tự học|Buổi tự luyện).*(?:nấu|món)|^(?:Tự học|Tự luyện) Nấu nướng",
+   "tu-hoc-mon"
+  ],
+  [
+   "^(?:Tự học|Tự luyện|Buổi tự học|Buổi tự luyện).*(?:túi hương|điều hương)|^(?:Tự học|Tự luyện) Y thuật",
+   "tu-hoc-huong"
+  ],
+  [
+   "^Theo ma ma giáo tập học Công",
+   "mama-cong"
+  ],
+  [
+   "^Theo ma ma giáo tập học Dung",
+   "mama-dung"
+  ],
+  [
+   "^Theo ma ma giáo tập học Ngôn",
+   "mama-ngon"
+  ],
+  [
+   "^Theo ma ma giáo tập học Hạnh",
+   "mama-hanh"
+  ],
+  [
+   "^Tự rèn Công",
+   "ren-cong"
+  ],
+  [
+   "^Tự rèn Dung",
+   "ren-dung"
+  ],
+  [
+   "^Tự rèn Ngôn",
+   "ren-ngon"
+  ],
+  [
+   "^Tự rèn Hạnh",
+   "ren-hanh"
+  ]
+ ]
+}
