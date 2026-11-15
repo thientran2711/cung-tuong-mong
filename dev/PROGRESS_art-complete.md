@@ -9,12 +9,16 @@ HOLD (owner): old-save player looks (128), promoted old-love men (56).
 - Audit: dev/figwork/artcomplete/audit.py -> dev/art/ART_COMPLETENESS.md (1088 missing at start).
 - Batch 1 (commit 9882bca50): công tử congtu-1..10 a36+a51 = 20 figs + 20 por on CDN, FIGURES-congtu.json updated.
 - Batch 2: quý nữ khuê các consort c01-c10 a26/a36/a51 = 30 figs + 30 por on CDN, FIGURES-kc.json updated.
+- Batch 3: KC consort c11-c21 a26/a36/a51 = 33 figs + 33 por on CDN (kc_bg2.txt), props varied per identity (kc_props.py, 6 prop sets).
 - Code (dev/build/jartc.js, appended to assemble.py; site rebuilt with dev/site/build_site.sh):
   1. married spouses (k.hW.s phò mã, k.pW.chinh / trac) age +1 each new year (wrap of ageYear);
   2. staff maids whose first face comes at 36+ take a free maid identity (full rank x age), mama pool = fallback.
 - Audit now: 1038 missing (see audit run).
 
 ## Pipeline (how to continue)
+0. NEW CONTAINER NOTE: porcrop needs opencv 4.x haar files; system has 5.x. `pip install --target dev/figwork/artcomplete/.cache/pylib "opencv-python-headless==4.10.0.84"`
+   (proc.py now runs porcrop with -I + that lib on sys.path; dev/figwork/cv2.py shadows cv2 if the script dir is on sys.path).
+   Prompts for kc consorts c11+: `python3 kc_props.py kc-c22 ...` prints the full prompt per identity (template + palette + prop set).
 1. Jobs: kc_jobs.json (84 kc identities: ref = kc a18 sheet, ref2 = same identity's t1 age sheet, palette). ct_* = công tử (done).
 2. Generate: Magnific images_generate mode gpt-2-6, folderReference ba4aecfe-efce-47e2-b53f-30d292091886, resolution 4k,
    extraSettings {"quality":"high"}, aspectRatio 21:9 (3 figures) / 2:1 (2 figures), references [ref, ref2] (type image).
@@ -32,7 +36,7 @@ rules] A character lineup of THREE full-body standing figures ... Signature colo
 ... Right: about 57 ... NO forehead mark, NO huadian ..." (full text: kc_prompt.txt).
 
 ## Remaining (in order)
-- KC consort c11-c32 (66 figs), KC maid m01-m52 (156 figs).
+- KC consort c22-c32 (33 figs), KC maid m01-m52 (156 figs).
 - Eunuch ranks r0/r2/r3 x 4 ages x 30 (360) + picker: pass srk(who) for staff eunuchs, tiers "r0".."r3" (base = r1).
 - Kids adult bands a26/a36/a51 x 48 (144) + picker: kidBandOf beyond 20.
 - HOLD: player looks, tm96 promoted men.
