@@ -26,7 +26,8 @@ function tsbCard(pid,pp,title){const d=mkP(pid,pp);if(!d)return false;Q.push({t:
 /* the Cần row on dialog options: opt.need=[{t,ok}] -> data-kneed (j63 kaNorm1 reads it) */
 function tsbNeedMark(){try{const m=Q[0];if(!m||!m.opts||!m.opts.some(o=>o&&o.need))return;document.querySelectorAll("#modal .opts button[data-m]").forEach(b=>{if(b.dataset.ka==="1")return;const o=m.opts[+b.dataset.m];if(!o||!o.need||!o.need.length)return;b.dataset.kneed=encodeURIComponent(JSON.stringify(o.need));if(o.need.some(n=>!n.ok))b.disabled=true})}catch(e){}}
 (function(){const f0=kitFix;kitFix=function(root){tsbNeedMark();return f0.apply(this,arguments)}})();
-(function(){const c0=chooseM;chooseM=function(i){try{const m=Q[0];const o=m&&m.opts&&m.opts[i];if(o&&o.need&&o.need.some(n=>!n.ok))return}catch(e){}return c0.apply(this,arguments)}})();
+/* an option whose Cần is unmet cannot be taken (its button is disabled); a direct call (bot, co-op) falls back to the first allowed option, never a dead end */
+(function(){const c0=chooseM;chooseM=function(i){try{const m=Q[0];const o=m&&m.opts&&m.opts[i];if(o&&o.need&&o.need.some(n=>!n.ok)){const j=m.opts.findIndex(x=>!x.need||x.need.every(n=>n.ok));if(j>=0)return c0.call(this,j)}}catch(e){}return c0.apply(this,arguments)}})();
 function tsbArt(f,label){return{src:`img/${f}.webp`,label:label||""}}
 function tsbNeedKhac(c){return{t:`${c} khắc (còn ${4-used})`,ok:used+c<=4}}
 function tsbNeedBac(n){return{t:`Bạc ${n} (có ${S.bac})`,ok:S.bac>=n}}
