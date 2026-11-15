@@ -61,7 +61,6 @@ main = d8b81af9e (check `git ls-remote origin main`). Session 7 ran in its own c
 Went LIVE via session 7: month-calendar r1, chap-label r1, item-events r1 (§64), art-complete r1 (jartc + 50 pics), sfx r1.
 
 ### Workers (branch → state)
-- review/promo-rules — son=direct promo, daughter/servant/mama exams, promotion reward chest + new-servant reveal (§65), rank-change FX (§66, painted via §68). In progress.
 - review/coop-pets — co-op pet help/harm/steal relay, "Đói" label, Linh thú life-save, co-op audit table. In progress.
 - review/cal-plus — calendar birthdays/stipend/deadlines/sổ hẹn/prep checklist/quẻ/weather/past-day log/moon/co-op (§58.3+) + Trân nữ seal on every event frame (§39.x). Reads thaiyNextVisit(), cycleDaysOf() if defined.
 - review/cardflip — end-of-day card-flip scene (jflip.js, §67): painted plates, Emperor hand sprite, cards follow HER knowledge, landscape+portrait crops.
@@ -77,6 +76,7 @@ Went LIVE via session 7: month-calendar r1, chap-label r1, item-events r1 (§64)
 rank-title (+ her-name gold glow, dp caption box removal), face-reveal, night-end (+ painted-only effects, landscape/portrait crops), placeholder-pics, recipes (+ level-up grants a recipe, 4 sub-styles everywhere, Công/Dung/Ngôn/Hạnh sub-styles, Kỳ in sub-style UI), place-colour, outside-r2 (+ age-18 home identity card, pair 2–10 bạc incidentals).
 
 ### READY, reviewer NOT yet spawned
+- review/promo-rules @ 53b0084d0 — son direct promo, daughter grace exam, servant/ma ma exams (exRun), reward chest §65 + kitPersonReveal, demotion FX §66 (glow waits for §68 fxkit); kitReward short-screen fix game-wide; j92 month-end dress gift off. promo-rules.js 29/29, coop 59/59. Art missing: per-rank pendants/bangles/sachets, maid robes per maid rank. Choices to check: her servant cap +1/rank, NPC caps unchanged (face pool full).
 - review/cycle @ 578384ce — monthly cycle (jcycle.js last, BAL.cyc; cycleDaysOf/cycleLate/cycOn), Kính sự phòng book (2 roads), NPC read/forge, j19 'nguy' inside 'Nguyệt' red-text fix; cycle.js all sizes, coop-e2e 59/59. Merge note: assemble list clashes with jthaiy — keep both, jcycle last. Balance look needed on its prices/odds.
 - review/thaiy @ 1445f431 — all 4 thái y ideas (jthaiy.js, BAL.thy, thaiyNextVisit()/thaiyVisits()); thaiy.js 49/49; coop-e2e cut off at 34 ok/0 fail by load → re-run in review. Site not rebuilt on branch.
 - review/small-bugs-3 @ f490eb76 — 12 items (thân→thiện cảm, item caps, giver line, toast over dialog, face strip, header clash, subtitles, Bổng lộc kit table, k3 row, §28.1, §53 samples, Tuần fallback, rotate prompt). Close KIT_REQUESTS row "k3 top state row wrap" (now §31.2a).
