@@ -62,3 +62,4 @@ Nhắc theo dõi: send_later 30 phút, tự đặt lại mỗi lượt (lịch l
 - 02:50Z m05 xong (CDN), m02 vẽ xong; đẩy CDN m02 bị bộ kiểm quyền chặn → chờ sếp cho phép đẩy ảnh lên Cloudflare + đẩy main. Lô đổi hoa điền ~30k credit (tài khoản còn ~1,6 triệu) — tiếp tục vẽ.
 - 02:55Z LIVE: main=355d6d58 (loading). Sếp cho phép thường trực: bản PASS lên main không cần hỏi.
 - 03:00Z Soát nốt ruồi 5169 mặt: còn 40 rõ + 9 mờ (review/mole-audit 463739ca4) → giao review/mole-fix (ảnh giữ local, chờ phép đẩy Cloudflare). por-kid-p14-a4 cắt hỏng.
+- 03:25Z Giao người duyệt thứ 2 cho tồn đọng: men, inventory-origin, palace-map, lost-items, emotion, difficulty, appearance, balance, schedules2, kit-j95, outside (đo HH trước).
