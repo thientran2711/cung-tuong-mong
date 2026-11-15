@@ -275,3 +275,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - 08:10Z cdn_sync 216 ảnh thu nhỏ hoa điền cung nữ (đợt 3).
 - (08:15Z) Owner: tranh việc trong Sổ tuần trùng nhau (Nhịn = Làm thơ; Ngủ đêm = Đi) → mỗi việc khác nghĩa một tranh riêng đúng nghĩa (thiếu thì vẽ); 'Đi.' → 'Đến <nơi>'; 'Nhịn.' có ngữ cảnh; nhãn 'X quý ngươi'. review/act-pics.
 - (08:20Z) Owner: tranh Thỉnh an Hoàng hậu và Thỉnh an Thái hậu phải khác nhau (Đức Thọ cung/Thái hậu vs Càn Ninh cung/Hoàng hậu; vạn phúc lễ tay trước, không quay lưng). review/act-pics (thay thinhan-art v2).
+- (08:30Z) Owner: bảng xếp hạng online cho mọi người chơi (đăng nhập hoặc khách vô danh, game nhớ mọi người): xếp hạng KIẾP (mỗi kiếp một dòng, kể cả nhiều kiếp của 1 người) + xếp hạng NGƯỜI CHƠI; hạng nhất/nhì/ba + danh sách. Điều phối: mã khách tự tạo + tên hiệu; điểm 'Công danh' tính từ kết cục thật (Worker tự tính lại); Worker + D1 trên Cloudflare; đăng nhập để sau. review/rank.
