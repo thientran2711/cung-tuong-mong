@@ -124,7 +124,7 @@ html body header.hud>#emp{display:none!important}
 html body header.hud>#hud2,html body #hud2.khud{position:fixed!important;left:0!important;top:0!important;width:0!important;height:0!important;min-height:0!important;padding:0!important;margin:0!important;border:0!important;overflow:visible!important;background:none!important;box-shadow:none!important;z-index:60}
 html body #hud2.hud2>:not(.khg):not(#k3x){display:none!important}
 /* the full status sheet: a centred kit sheet over a dim backdrop, scrolls inside */
-html body #hud2:not(.col)::before{content:"";position:fixed;inset:0;background:#2a1a1266;z-index:0}
+html body #hud2:not(.col):has(.khg)::before{content:"";position:fixed;inset:0;background:#2a1a1266;z-index:0}
 html body #hud2 .khg{position:fixed!important;z-index:1!important;left:50%!important;top:50%!important;transform:translate(-50%,-50%);width:min(760px,calc(100vw - 24px))!important;max-height:calc(100dvh - 32px)!important;overflow:auto!important;overscroll-behavior:contain;box-sizing:border-box}
 html body #hud2 .khg .khsh{position:sticky;top:-8px;z-index:2;background:var(--k-card,#fffaf0);margin:-8px -8px 0;padding:8px}
 html body #hud2 .khg .khc .hc{white-space:normal!important}

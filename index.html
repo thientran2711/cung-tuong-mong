@@ -11863,7 +11863,7 @@ html body header.hud>#emp{display:none!important}
 html body header.hud>#hud2,html body #hud2.khud{position:fixed!important;left:0!important;top:0!important;width:0!important;height:0!important;min-height:0!important;padding:0!important;margin:0!important;border:0!important;overflow:visible!important;background:none!important;box-shadow:none!important;z-index:60}
 html body #hud2.hud2>:not(.khg):not(#k3x){display:none!important}
 /* the full status sheet: a centred kit sheet over a dim backdrop, scrolls inside */
-html body #hud2:not(.col)::before{content:"";position:fixed;inset:0;background:#2a1a1266;z-index:0}
+html body #hud2:not(.col):has(.khg)::before{content:"";position:fixed;inset:0;background:#2a1a1266;z-index:0}
 html body #hud2 .khg{position:fixed!important;z-index:1!important;left:50%!important;top:50%!important;transform:translate(-50%,-50%);width:min(760px,calc(100vw - 24px))!important;max-height:calc(100dvh - 32px)!important;overflow:auto!important;overscroll-behavior:contain;box-sizing:border-box}
 html body #hud2 .khg .khsh{position:sticky;top:-8px;z-index:2;background:var(--k-card,#fffaf0);margin:-8px -8px 0;padding:8px}
 html body #hud2 .khg .khc .hc{white-space:normal!important}
@@ -13079,15 +13079,18 @@ st.textContent=`
 .kcol-act{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:8px 0 4px}
 .kcol-act .kbtn{min-height:46px;white-space:normal}
 .kcol-act .kbtn.k1{grid-column:1/-1}
+@media (max-width:420px){.kcol-act{grid-template-columns:minmax(0,1fr)}}
 .kcol-act .kbtn small{display:block;font-family:var(--body);font-weight:400;font-size:.74rem;opacity:.9}
 #coopfz{z-index:9500}
+#next.kcwait{white-space:normal!important;line-height:1.12!important;font-size:.9em;overflow:hidden}
+.kcol-act .kbtn.kdone{background:var(--k-ok-bg,#e6f2e6)!important;color:var(--g,#2e6b3a)!important}
 /* same spacing as the kit panel's #mb / #mr (j79), which this overlay cannot use by id */
 #coopfz .dlg #mbz{padding:8px 12px 2px}
 #coopfz .dlg #mrz{padding:4px 14px 12px;margin:0;display:flex;justify-content:flex-end;gap:8px}
 `;
 document.head.appendChild(st);
 const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-let LM=null,PG="",ERR="",CODE="";
+let LM=null,PG="",ERR="",CODE="",PEND=false;
 function link(code){const u=new URL(location.href);u.search="";u.hash="";u.searchParams.set("room",code);return u.toString()}
 function drop(){if(!LM)return;const i=Q.indexOf(LM);if(i>=0)Q.splice(i,1);LM=null;const M=$("modal");if(M&&Q.length)showModal();else if(M){M.hidden=true;M.classList.remove("kptitle","kpscene")}}
 function peerWord(){const s=COOP.state,x=COOP.other(),p=s.seats&&x&&s.seats[x];return !p?["chưa vào phòng","n"]:p.online?["đã vào phòng","g"]:["đang vắng","r"]}
@@ -13097,13 +13100,15 @@ function body(pg){const s=COOP.state;
  if(pg==="wait"){const c=s.room||CODE;const pw=peerWord();
   return `<div class="kcol-code">${kitRows([["Mã phòng",esc(c),"t"],["Bạn",pw[0],pw[1]]])}</div>`+
    kitInput({id:"coop-link",label:"Đường dẫn mời",value:link(c),readonly:true})+
-   `<div class="kcol-act"><button class="kbtn" data-coop="copy">Chép đường dẫn</button><button class="kbtn alt" data-coop="share">Gửi cho bạn</button></div>`+
-   `<div class="kpnote">${s.status==="open"?"Đang đợi bạn vào phòng. Bạn vào là cuộc chơi bắt đầu.":"Đang nối với phòng."}</div>`}
+   `<div class="kcol-act"><button class="kbtn k1" data-coop="share">Gửi đường dẫn cho bạn<small>qua Zalo, Messenger, tin nhắn</small></button><button class="kbtn alt" data-coop="copy">Chép đường dẫn</button><button class="kbtn alt" data-coop="copycode">Chép mã ${esc(c)}</button></div>`+
+   `<div class="kpnote">${s.status==="open"?"Bạn chạm vào đường dẫn (hay chọn Chơi cùng bạn, Nhập mã, gõ mã) là vào phòng. Giữ màn này mở: bạn vào là cuộc chơi bắt đầu.":"Đang nối với phòng."}</div>`}
  if(pg==="join")return kitInput({id:"coop-code",label:"Mã phòng",value:CODE,placeholder:"bốn chữ bạn gửi"})+
-   `<div class="kcol-act"><button class="kbtn k1" data-coop="go">Vào phòng</button></div>`+(s.status==="connecting"?`<div class="kpnote">Đang vào phòng ${esc(CODE)}.</div>`:"");
+   `<div class="kcol-act"><button class="kbtn k1" data-coop="go">Vào phòng</button></div>`+(s.status==="connecting"||s.status==="retry"||PEND?`<div class="kpnote">Đang vào phòng ${esc(CODE)}…</div>`:`<div class="kpnote">Mã phòng là bốn chữ hay số bạn gửi, ví dụ K7QD. Có đường dẫn thì chỉ cần chạm vào đường dẫn.</div>`);
  if(pg==="err")return `<div class="kpnote">${esc(ERR)}</div><div class="kcol-act"><button class="kbtn k1" data-coop="co">Thử lại</button></div>`;
+if(pg==="pick"){const c=s.room||CODE;return `<div class="kcol-code">${kitRows([["Mã phòng",esc(c),"t"],["Bạn","đang chọn thân phận","n"],["Ngươi","đã vào phòng","g"]])}</div>`+
+   `<div class="kpnote">Bạn mở phòng nên chọn thân phận trước, hậu cung dựng theo kiếp của bạn. Bạn chọn xong, màn chọn thân phận của ngươi tự hiện ra. Không cần bấm gì.</div><div class="kcol-act"><button class="kbtn alt" data-coop="back">‹ Về màn đầu</button></div>`}
  return ""}
-const HEAD={co:["Chơi cùng bạn","Hai người chung một hậu cung. Cả hai phải cùng ở trong cuộc."],wait:["Mời bạn","Gửi mã hay đường dẫn cho bạn."],join:["Nhập mã","Gõ mã phòng bạn gửi."],err:["Chưa vào được phòng",""]};
+const HEAD={pick:["Đợi bạn chọn thân phận","Hai người đã ở trong phòng."],co:["Chơi cùng bạn","Hai người chung một hậu cung. Cả hai phải cùng ở trong cuộc."],wait:["Mời bạn","Gửi mã hay đường dẫn cho bạn."],join:["Nhập mã","Gõ mã phòng bạn gửi."],err:["Chưa vào được phòng",""]};
 function open(pg){PG=pg;if(T.hidden)return;
  const keep=document.activeElement&&document.activeElement.id==="coop-code"?document.activeElement.value:null;if(keep!=null)CODE=keep;
  drop();const M=$("modal");
@@ -13111,15 +13116,15 @@ function open(pg){PG=pg;if(T.hidden)return;
  for(let i=Q.length-1;i>=0;i--)if(Q[i]&&/kptitle/.test(Q[i].cls||""))Q.splice(i,1);
  LM=kitModal({scene:true,kind:"notice",title:HEAD[pg][0],sub:HEAD[pg][1],html:body(pg),cls:"kptitle kcoop"});
  const s=M.querySelector(".dlg > .kph .kpseal");if(s)s.remove();
- const mr=$("mr");if(mr)mr.innerHTML=`<button class="kbtn alt" data-coop="back">‹ Lui</button>`;
+ const mr=$("mr");if(mr)mr.innerHTML=pg==="pick"?"":`<button class="kbtn alt" data-coop="back">‹ Lui</button>`;
  const c=$("coop-code");if(c){c.setAttribute("autocapitalize","characters");c.setAttribute("autocomplete","off");c.maxLength=8}}
-function back(){const pg=PG;PG="";drop();if(pg==="wait"||pg==="join"||pg==="err")COOP.leave();
+function back(){const pg=PG;PG="";drop();if(pg==="pick"){COOP.leave(true);try{showTitle()}catch(e){}return}if(pg==="wait"||pg==="join"||pg==="err")COOP.leave();
  if(pg&&pg!=="co"){open("co");return}
  try{showTitle()}catch(e){}}
 function toast(msg){try{const n=document.querySelector("#modal.kcoop .kpnote");if(n)n.textContent=msg}catch(e){}}
 async function make(){ERR="";try{open("wait");const r=await COOP.create();CODE=r.room;open("wait")}catch(e){ERR=errText(e);open("err")}}
 async function join(code){code=String(code||"").trim().toUpperCase().replace(/[^A-Z0-9]/g,"");if(!code){toast("Hãy gõ mã phòng.");return}
- CODE=code;try{open("join");await COOP.join(code);open("wait")}catch(e){ERR=errText(e);open("err")}}
+ CODE=code;PEND=true;try{open("join");await COOP.join(code);PEND=false;if(PG==="join")open("wait")}catch(e){PEND=false;ERR=errText(e);open("err")}}
 async function resume(){ERR="";CODE=stored();try{open("join");await COOP.resume();open("wait")}catch(e){ERR=errText(e);open("err")}}
 function errText(e){const c=e&&(e.code||e.message)||"";
  if(/full/i.test(c))return "Phòng này đã đủ hai người.";if(/not.?found|no.?room|404/i.test(c))return "Không thấy phòng mang mã này. Xem lại mã bạn gửi.";
@@ -13129,8 +13134,13 @@ $("modal").addEventListener("click",e=>{const b=e.target.closest("button[data-co
  const a=b.dataset.coop;
  if(a==="co")return open("co");if(a==="resume")return resume();if(a==="make")return make();if(a==="join")return open("join");if(a==="back")return back();
  if(a==="go"){const c=$("coop-code");return join(c?c.value:CODE)}
- if(a==="copy"){const u=link(COOP.state.room||CODE);const done=()=>{b.textContent="Đã chép"};try{navigator.clipboard.writeText(u).then(done,()=>{const i=$("coop-link");if(i){i.select();document.execCommand("copy");done()}})}catch(x){}return}
- if(a==="share"){const u=link(COOP.state.room||CODE);if(navigator.share)navigator.share({title:"Cung Tường Mộng",text:"Vào hậu cung cùng ta. Mã phòng "+(COOP.state.room||CODE),url:u}).catch(()=>{});else{try{navigator.clipboard.writeText(u)}catch(x){}b.textContent="Đã chép"}return}},true);
+ if(a==="copy"||a==="fzcopy"){copy(link(COOP.state.room||CODE),b,"Đã chép đường dẫn");return}
+ if(a==="copycode"){copy(COOP.state.room||CODE,b,"Đã chép mã");return}
+ if(a==="share"){const c=COOP.state.room||CODE,u=link(c);if(navigator.share)navigator.share({title:"Cung Tường Mộng",text:"Vào hậu cung cùng ta. Mã phòng "+c,url:u}).catch(()=>{});else copy(u,b,"Đã chép đường dẫn, dán gửi cho bạn");return}},true);
+/* copy with visible feedback; falls back to a hidden textarea where the clipboard API is missing (http, old phones) */
+function copy(txt,b,msg){const done=()=>{b.innerHTML=msg;b.classList.add("kdone")};
+ const old=()=>{try{const t=document.createElement("textarea");t.value=txt;t.setAttribute("readonly","");t.style.cssText="position:fixed;top:0;left:0;opacity:0";document.body.appendChild(t);t.select();t.setSelectionRange(0,txt.length);const ok=document.execCommand("copy");t.remove();if(ok)done();else b.innerHTML="Giữ ngón tay lên ô đường dẫn để chép"}catch(x){}};
+ try{if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(txt).then(done,old);else old()}catch(x){old()}}
 $("modal").addEventListener("keydown",e=>{if(e.key==="Enter"&&e.target&&e.target.id==="coop-code"){e.preventDefault();join(e.target.value)}});
 /* title home: add the co-op button under the single-player menu */
 function addBtn(){const m=document.querySelector("#modal.kpthome .kpmenu");if(!m||m.querySelector(".kco"))return;
@@ -13152,9 +13162,9 @@ const FZT={me:["Đợi bạn trở lại","Đường mạng của ngươi vừa 
 function fz(on,why){if(!on){if(FZ){FZ.remove();FZ=null}return}
  const [ttl,sub]=FZT[why]||FZT.peer;const pw=peerWord();
  if(!FZ){FZ=document.createElement("div");FZ.id="coopfz";FZ.className="modal kpscene";FZ.setAttribute("role","alertdialog");document.body.appendChild(FZ)}
- FZ.innerHTML=`<div class="dlg kpanel kpsc" data-kind="notice">${kpHeader("notice",ttl,sub)}<div class="body" id="mbz">${kitRows([["Mã phòng",esc(COOP.state.room||""),"t"],["Bạn",why==="week"?"chưa xong tuần":pw[0],why==="week"?"n":pw[1]],["Ngươi",COOP.state.status==="open"?"đang ở trong cuộc":"đang nối lại",COOP.state.status==="open"?"g":"r"]])}</div><div class="row" id="mrz"><button class="kbtn alt" data-cfz="leave">Về màn đầu</button></div></div>`;
+ FZ.innerHTML=`<div class="dlg kpanel kpsc" data-kind="notice">${kpHeader("notice",ttl,sub)}<div class="body" id="mbz">${kitRows([["Mã phòng",esc(COOP.state.room||""),"t"],["Bạn",why==="week"?"chưa xong tuần":pw[0],why==="week"?"n":pw[1]],["Ngươi",COOP.state.status==="open"?"đang ở trong cuộc":"đang nối lại",COOP.state.status==="open"?"g":"r"]])}</div>${why==="peer"?`<div class="kpnote" style="margin:4px 12px 0">Gửi lại đường dẫn cho bạn: bạn chạm vào là trở lại đúng chỗ cũ, không mất gì.</div>`:""}<div class="row" id="mrz">${why==="peer"?`<button class="kbtn" data-coop="fzcopy">Chép đường dẫn</button>`:""}<button class="kbtn alt" data-cfz="leave">Về màn đầu</button></div></div>`;
  const s=FZ.querySelector(".kpseal");if(s)s.remove()}
-document.addEventListener("click",e=>{const b=e.target.closest("[data-cfz]");if(!b)return;e.stopPropagation();fz(false);COOP.leave(true);try{showTitle()}catch(x){}},true);
+document.addEventListener("click",e=>{const c=e.target.closest("#coopfz [data-coop]");if(c){e.stopPropagation();copy(link(COOP.state.room||CODE),c,"Đã chép đường dẫn");return}const b=e.target.closest("[data-cfz]");if(!b)return;e.stopPropagation();fz(false);COOP.leave(true);try{showTitle()}catch(x){}},true);
 function check(){const s=COOP.state;if(!s.playing){fz(false);return}
  const x=COOP.other(),e=s.ended||{};
  if(s.status!=="open")fz(true,"me");else if(!s.peerOnline)fz(true,"peer");else if(e[s.you]&&!e[x])fz(true,"week");else fz(false)}
@@ -13162,9 +13172,11 @@ COOP.on("status",check);
 COOP.on("start",()=>{COOP.state.playing=true;COOP.live();check()});
 COOP.on("week",()=>setTimeout(check,0));
 /* a ?room=XXXX link: open "Nhập mã" with the code and join at once */
-setTimeout(()=>{try{const q=new URLSearchParams(location.search).get("room");if(q){try{const u=new URL(location.href);u.searchParams.delete("room");history.replaceState(null,"",u.toString())}catch(x){}}
- if(q&&!T.hidden){CODE=q.toUpperCase();join(CODE)}}catch(e){console.error(e)}},60);
-window.COOP_LOBBY={open,fz,check};
+(function(){let q="";try{q=new URLSearchParams(location.search).get("room")||"";if(q){const u=new URL(location.href);u.searchParams.delete("room");history.replaceState(null,"",u.toString())}}catch(e){console.error(e)}
+ if(!q)return;const t0=Date.now();const go=()=>{if(COOP.state.status!=="off")return;if(T.hidden&&Date.now()-t0<20000){setTimeout(go,150);return}if(!T.hidden){CODE=q.toUpperCase();join(CODE)}};setTimeout(go,60)})();
+/* guest in, host still choosing her thân phận: keep the title backdrop with a kit panel instead of an empty game frame */
+function hostPick(on){if(on){try{T.hidden=false}catch(e){}LM=null;open("pick")}else if(PG==="pick"){PG="";drop();try{T.hidden=true}catch(e){}}}
+window.COOP_LOBBY={open,fz,check,hostPick};
 }catch(e){console.error(e)}})();
 /* jcoopworld: CO-OP SHARED WORLD (worker C, review/coop). Protocol: dev/coop/PROTOCOL.md. Net client: jcoop.js (COOP).
    Single-player never runs any of this: every hook checks CW.on, which only the lobby's COOP "start" event turns on.
@@ -13319,8 +13331,9 @@ function waiting(){const s=COOP.state;return CW.on&&(CW.sent===wk()||!!(s.ended&
 function frozen(){const s=COOP.state;return CW.on&&(s.status!=="open"||!s.peerOnline)}
 /* touch #next only when its state really changes (j63 observes every "disabled" write) */
 function lockNext(){const n=$("next");if(!n)return;const wb=CW.on&&(CW.bend||needWhere()||!!CW.pendBuoi);const lock=CW.on&&(waiting()||frozen()||CW.pend||!CW.base||wb);
- if(lock){if(!n.disabled)n.disabled=true;if(n.dataset.coopWait!=="1")n.dataset.coopWait="1";const t=wb?(CW.bend?"Đợi bạn xong buổi":"Đợi bạn"):null;if(t&&n.textContent!==t)n.textContent=t}
- else if(n.dataset.coopWait){delete n.dataset.coopWait;n.disabled=!!(S&&(S.dead||Q.length||S.mg));const t=S&&(S.buoi||0)>=2?"Qua đêm":"Qua buổi";if(n.textContent!==t)n.textContent=t}}
+ if(lock){if(!n.disabled)n.disabled=true;if(n.dataset.coopWait!=="1")n.dataset.coopWait="1";const t=wb?(CW.bend?"Đợi bạn xong buổi":"Đợi bạn"):null;if(t&&n.textContent!==t){/* keep the button's own width (the tabs beside it must not shrink): the longer words wrap inside */
+  if(!n.style.maxWidth&&n.offsetWidth)n.style.maxWidth=n.offsetWidth+"px";n.classList.add("kcwait");n.textContent=t}}
+ else if(n.dataset.coopWait){delete n.dataset.coopWait;n.style.maxWidth="";n.classList.remove("kcwait");n.disabled=!!(S&&(S.dead||Q.length||S.mg));const t=S&&(S.buoi||0)>=2?"Qua đêm":"Qua buổi";if(n.textContent!==t)n.textContent=t}}
 /* ---------- phase 2 (PROTOCOL §9): same buổi, same place, acts between the two ---------- */
 Object.assign(CW,{bend:false,whereKey:"",lastWhere:null,fpos:null,posKey:"",p2:true,allow:false,acts:{}});
 const bkey=()=>wk()+":"+((S&&S.buoi)||0);
@@ -13435,17 +13448,17 @@ function onWeek(m){T("week");if(!CW.on||!m.state)return;const C=m.state;CW.base=
  if(host())sendWhere();else if(CW.lastWhere)applyWhere(CW.lastWhere);keepFriendPos();refreshHere();
  showModal();render();lockNext()}
 function onState(m){T("state");if(!CW.on||!m.state)return;const C=m.state;
- if(!CW.base){CW.base=J(C);if(CW.waitWorld){CW.waitWorld=false;newLife()}return}
+ if(!CW.base){CW.base=J(C);if(CW.waitWorld){CW.waitWorld=false;try{COOP_LOBBY.hostPick(false)}catch(e){}newLife()}return}
  /* the friend's character changed (first character / reborn): keep my week, take the new base and her new entry */
  const had=CW.base;CW.base=J(C);if(had&&had.P&&had.P[CW.seat]&&C.P&&!C.P[CW.seat])CW.base.P[CW.seat]=had.P[CW.seat];
  if(S&&!S.dead&&!CW.inLife){const old=friendEntry();placeFriend(C.P[fs()]);
-  const P=C.P[fs()];if(P&&(!old||old.name!==P.name)&&!P.dead)pushModal({t:"Bạn vào cung",h:`<p>Bạn ngươi đã đầu thai, nay ở trong cung${friendSrv(P)?", làm cung nữ":", phong "+esc(RANKS[P.rank]?RANKS[P.rank].n:"")}. Mặt mũi, tên tuổi kiếp này ra sao, phải gặp mới biết.</p>`});
+  const P=C.P[fs()];if(P&&(!old||old.name!==P.name)&&!P.dead)pushModal({t:"Bạn vào cung",h:`<p>Bạn ngươi ${old?"đã đầu thai, ":"đã chọn xong thân phận, "}nay ở trong cung${friendSrv(P)?", làm cung nữ":", phong "+esc(RANKS[P.rank]?RANKS[P.rank].n:"")}. Mặt mũi, tên tuổi kiếp này ra sao, phải gặp mới biết.</p><p class="past">Muốn gặp nhau: hai người cùng đến một nơi trên Dư đồ trong cùng một buổi, rồi chạm vào người kia và chọn Chào hỏi.</p>`});
   showModal();render()}}
 function newLife(){CW.inLife=true;CW.newLife=true;try{start()}catch(e){console.error(e)}}
 function begin(d){T("begin");CW.on=true;CW.seat=d.you||COOP.state.you;const C=d.state||COOP.state.C;CW.base=C?J(C):null;CW.sent=-1;CW.pend=false;
  const s=COOP.state;
- if(C&&C.P&&C.P[CW.seat]&&!C.P[CW.seat].dead){fromCanon(C);if(s.ended&&s.ended[CW.seat])CW.sent=wk();try{$("title").hidden=true}catch(e){}syncRoom(CW.roomMsg);showModal();render();lockNext();return}
- if(!C&&!host()){CW.waitWorld=true;pushModal({t:"Đợi bạn",h:`<p>Bạn đang chọn thân phận. Khi hậu cung đã dựng xong, ngươi sẽ chọn thân phận của mình.</p>`});showModal();return}
+ if(C&&C.P&&C.P[CW.seat]&&!C.P[CW.seat].dead){fromCanon(C);/* a fresh page (came back by link / reload) has no hand of cards yet: deal it, as loading a sổ does */if(!deck||!deck.length)try{deal()}catch(e){console.error(e)}if(s.ended&&s.ended[CW.seat])CW.sent=wk();try{$("title").hidden=true}catch(e){}syncRoom(CW.roomMsg);showModal();render();lockNext();return}
+ if(!C&&!host()){CW.waitWorld=true;/* the lobby keeps the title backdrop up with a kit panel "Đợi bạn chọn thân phận" (no empty game frame) */try{COOP_LOBBY.hostPick(true)}catch(e){console.error(e)}return}
  newLife()}
 COOP.on("start",begin);
 /* leaving the shared game: back to single-player rules (slots untouched; the room keeps the world) */
