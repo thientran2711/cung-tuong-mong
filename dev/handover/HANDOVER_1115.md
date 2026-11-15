@@ -113,7 +113,7 @@ Nhắc theo dõi: send_later 30 phút, tự đặt lại mỗi lượt (lịch l
 - 10:00Z LIVE main=c5b93e63f rules-one-source (số hiện = số luật; Thái hậu 55; Đức 33 → 28).
 - [x] LIVE df3094e71: update-flow (không tự tải lại lúc đang chơi; chip "Để sau / Mở bản mới"; chơi cùng mở lại đúng phòng) + Ân oán 2 cột, thanh quý có vạch 0.
 - [ ] Thẻ người: dư trống trên chân dung; việc chưa chia tab kit; nút làm được chưa lên đầu mọi nơi; thanh chỉ số đầu trang bị che (giao stage-slots → review/person-acts).
-- [ ] "quý" và "thiện cảm" là cùng một số nhưng hai tên → thống nhất "Thiện cảm"; thẻ việc lộ số thiện cảm khi chip còn "?" (giao act-audit).
+- [~] (đã sửa trên review/act-audit, chờ duyệt) "quý" và "thiện cảm" là cùng một số nhưng hai tên → thống nhất "Thiện cảm"; thẻ việc lộ số thiện cảm khi chip còn "?" (giao act-audit).
 - [ ] Đồ tự tay làm (chơi mini game tài nghệ → thành phẩm, tặng bất kỳ ai, bán) ĐÃ CÓ ở j83 trên review/balance-unified nhưng CHƯA LÊN LIVE; điều phối từng nói nhầm "chưa có". Phải đưa balance-unified lên sớm + tab Bán dùng j83.
 - [ ] 4 buổi (có trưa) đã làm ở chuỗi balance (review/balance-unified) nhưng CHƯA LIVE → ưu tiên duyệt balance-unified ngay sau lô đang duyệt.
 - [x] LIVE 1c7a3fcb2: dialog-person (hộp thoại có người: người toàn thân bên trái, chữ trên phải, lựa chọn dưới phải).
@@ -121,4 +121,4 @@ Nhắc theo dõi: send_later 30 phút, tự đặt lại mỗi lượt (lịch l
 - [ ] Má nhân vật bị đen trên nền tối (alpha thủng) → scene-light quét + vá mọi ảnh người.
 - [ ] Thẻ thông tin Hoàng thượng (và mọi thẻ người) không theo kit: khung luật trôi góc phải, khoảng trống lớn, nút "Đã hiểu" → gộp một thẻ người kit (giao stage-slots/person-acts).
 - [ ] Tua rua khung chân dung bị cắt mất; bấm nhân vật mở khung riêng không theo kit (giao stage-slots/person-acts).
-- [ ] Cung nhân: "Thiện cảm" vs "Lòng" vs "Chủ tin" lẫn lộn; "Người chạy việc: Tiểu Lâm Tử" nằm trên thẻ cung nữ Lan; "Cung ngươi"; tên có số (Thúy 2, Vân 2, Lan 2); nhãn "y Trương" bị cắt (giao act-audit).
+- [~] (đã sửa trên review/act-audit b3712f0e8, chờ duyệt) Cung nhân: "Thiện cảm" vs "Lòng" vs "Chủ tin" lẫn lộn; "Người chạy việc: Tiểu Lâm Tử" nằm trên thẻ cung nữ Lan; "Cung ngươi"; tên có số (Thúy 2, Vân 2, Lan 2); nhãn "y Trương" bị cắt (giao act-audit).
