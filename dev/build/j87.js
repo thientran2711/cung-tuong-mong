@@ -117,8 +117,10 @@ function kitBook(spec){spec=spec||{};const rm=()=>{try{return reducedMotion()}ca
   if(el.__curl){el.style.visibility="hidden";return el}el.__dir=dir||1;
   /* one page at a time: the back of the turning sheet shows the next page (owner 11/15), not a blank verso */
   const nx=mode==="single"&&els[i+1]?els[i+1].querySelector(".kbk-front>.kbk-pg"):null;
+  /* the board cover (and the back board) is stiff: it bends far less than a paper leaf (owner 08:10Z) */
+  const sh=sheets[i]||{},board=/cover|end/.test((sh.front&&sh.front.kind)||"")||/cover|end/.test((sh.back&&sh.back.kind)||"");
   el.__curl=kitCurl({host:book,front:el.querySelector(".kbk-front>.kbk-pg"),back:nx||el.querySelector(".kbk-back>.kbk-pg"),w:PW,h:PH,x:mode==="spread"?PW:0,y:0,
-   po:mode==="spread"?0:PW*.5,shadeL:mode==="spread",vanish:mode!=="spread",dir:dir||1,p:i<cur?1:0});
+   shadeL:mode==="spread",vanish:mode!=="spread",p:i<cur?1:0,stiff:board?.7:1.6,flat:rm()});
   el.style.visibility="hidden";el.classList.add("turn");return el}
  const ease=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2,easeOut=t=>1-Math.pow(1-t,3);
  let animId=0;
@@ -139,21 +141,21 @@ function kitBook(spec){spec=spec||{};const rm=()=>{try{return reducedMotion()}ca
  book.addEventListener("pointermove",e=>{if(!drag||e.pointerId!==drag.id)return;const dx=e.clientX-drag.x0,dy=e.clientY-drag.y0;drag.hist.push([performance.now(),e.clientX]);if(drag.hist.length>8)drag.hist.shift();
   if(!drag.dir){if(Math.abs(dx)<8||Math.abs(dx)<Math.abs(dy))return;
    const fwd=mode==="spread"?drag.side>=.5:dx<0;if(fwd&&cur>=maxCur||!fwd&&cur<=0){drag.dir=9;return}
-   drag.dir=fwd?1:-1;try{book.setPointerCapture(e.pointerId)}catch(_){}if(!rm()){drag.i=fwd?cur:cur-1;drag.el=beginTurn(drag.i,drag.dir)}}
-  if(drag.dir===9||!drag.el)return;e.preventDefault();const r=drag.r;
-  /* distance the finger needs to travel for a full turn: to the opposite edge of the book */
-  if(drag.dir===1){const span=Math.max(80,drag.x0-(mode==="spread"?r.left:r.left-r.width*.15));drag.p=Math.max(0,Math.min(1,-dx/span))}
-  else{const span=Math.max(80,(mode==="spread"?r.right:r.right+r.width*.15)-drag.x0);drag.p=1-Math.max(0,Math.min(1,dx/span))}
-  setTurn(drag.el,drag.p)},{passive:false});
+   drag.dir=fwd?1:-1;try{book.setPointerCapture(e.pointerId)}catch(_){}drag.i=fwd?cur:cur-1;drag.el=beginTurn(drag.i,drag.dir);
+   /* the way the finger can go: to the far edge of the book (spread) / to the spine (one page) going forward, to the right edge back */
+   const r=drag.r;drag.span=Math.max(80,fwd?drag.x0-r.left:r.right-drag.x0)}
+  if(drag.dir===9||!drag.el)return;e.preventDefault();
+  /* the sheet bends with the finger bit by bit (the free edge follows it) and stays where the finger stops (owner 08:10Z) */
+  drag.f=Math.max(0,Math.min(1,(drag.dir===1?-dx:dx)/drag.span));const c=drag.el.__curl;if(c){drag.p=c.dragTo(drag.f,drag.dir===1,mode==="spread");c.set(drag.p)}},{passive:false});
  const endDrag=e=>{if(!drag||e.pointerId!==drag.id)return;const d=drag;drag=null;const dx=e.clientX-d.x0;
   if(!d.dir){if(Math.abs(dx)<10&&Math.abs(e.clientY-d.y0)<10&&e.type==="pointerup"){const s=(e.clientX-d.r.left)/d.r.width;
     if(mode==="spread"){if(s>=.62)next();else if(s<=.38)prev()}else{if(s>=.5)next();else if(s<=.3)prev()}}return}
   if(d.dir===9)return;
   if(!d.el){if(d.dir===1&&dx<-40)next();else if(d.dir===-1&&dx>40)prev();return}
-  const h=d.hist,a=h[0],b=h[h.length-1];const v=(b[1]-a[1])/Math.max(1,b[0]-a[0]);
-  const fwdDone=d.dir===1?(d.p>.42||v<-.35)&&!(v>.35):!((1-d.p)>.42||v>.35)||v<-.35;
-  const target=d.dir===1?(fwdDone?1:0):(fwdDone?1:0);const dur=Math.max(140,Math.abs(target-d.p)*520);if(target!==d.p)kbkSfx();
-  animate(d.i,d.p,target,dur,easeOut,()=>{cur=target===1?d.i+1:d.i;paint()})};
+  /* release: past half way or a flick → the page turns on with the finger's momentum; else it returns softly (kitTurnDone) */
+  const h=d.hist.filter(q=>q[0]>=d.hist[d.hist.length-1][0]-110),a=h[0],b=h[h.length-1];const v=(b[1]-a[1])/Math.max(16,b[0]-a[0]);const vt=d.dir===1?-v:v;
+  const turned=kitTurnDone(d.f||0,vt);const target=d.dir===1?(turned?1:0):(turned?0:1);if(turned)kbkSfx();
+  animate(d.i,d.p,target,kitTurnSettleMs(target-d.p,vt),kitSettleEase,()=>{cur=target===1?d.i+1:d.i;paint()})};
  book.addEventListener("pointerup",endDrag);book.addEventListener("pointercancel",endDrag);
  root.querySelector(".kbk-next").onclick=e=>{e.stopPropagation();next()};root.querySelector(".kbk-prev").onclick=e=>{e.stopPropagation();prev()};
  root.querySelector(".kbk-x").onclick=e=>{e.stopPropagation();close()};

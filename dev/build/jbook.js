@@ -125,78 +125,143 @@ function kitCurlRun(c,from,to,dur,done,ease){ease=ease||kitCurlEase;const t0=per
  const step=now=>{if(!alive)return;const t=Math.min(1,(now-t0)/Math.max(1,dur));c.set(from+(to-from)*ease(t),dir);if(t<1)requestAnimationFrame(step);else{alive=false;done&&done()}};
  c.set(from,dir);requestAnimationFrame(step);const cancel=()=>{alive=false};cancel.t0=t0;return cancel}
 
-/* ---------- kitSheetTurn: THE page turn — the WHOLE sheet swings around the spine (owner 11/15 10:00Z; binder reference
-   dev/owner-shots/1115-turn-ref-1.jpg, -2.jpg) ----------
-   kitSheetTurn({host, front, back, under, w, h, x, y, p, ctx, vanish, shadeL, shadeR}) → {el, set(p), setBack(src), setFront(src), rescroll(), destroy()}
-   One sheet with two faces (preserve-3d, backface hidden). front = what the sheet shows lying on the RIGHT of the spine (p 0),
-   back = what it shows once turned onto the LEFT (p 1). Both are printed ON the sheet (kclPrep copies, no ids), so the content
-   rotates, foreshortens and tilts with it — never pinned to the page beneath. The spine is the sheet's LEFT edge, at (x,y) in host px.
-   p 0 → 1 = forward (right → left); a backward turn is the same motion run 1 → 0 (the sheet comes back over the spine).
-   Look: perspective from above the spine (the free edge grows as it rises toward the reader), a slight tilt + skew mid-turn
-   (paper, not a board), face shading by angle, a soft shadow cast on the ground under the lifted sheet on each side.
-   under: an optional still copy laid on the ground beneath the sheet (backward live turn: the old page that the sheet covers).
-   vanish: the sheet lands off this page (phone / single page: beyond the spine): it is CLIPPED at the spine, never faded.
-   The sheet is ALWAYS opaque paper on both faces (owner 11/15 02:40Z: "tờ lật luôn đục, không trong suốt"): no opacity, no blend.
-   Per frame only transform/opacity change (compositor). */
+/* ---------- kitSheetTurn v4: THE page turn — the sheet BENDS like paper and follows the finger (owner 11/15 08:10Z: "Cái tôi muốn là
+   nó phải CONG … đang giữ, kéo từng chút thì tờ phải cong theo từng chút") ----------
+   kitSheetTurn({host, front, back, under, w, h, x, y, p, ctx, vanish, shadeL, shadeR, stiff, flat, n})
+     → {el, set(p), p, tip(p), pAt(edgeX), dragTo(frac, fwd, two), setBack(src), setFront(src), rescroll(), destroy()}
+   The spine is the sheet's LEFT edge at (x,y) in host px; p 0 = lying on the right (front up) … 1 = turned onto the left (back up);
+   a backward turn is the same motion run 1 → 0. front/back are printed ON the sheet (kclPrep still copies, no ids), so the content
+   bends with the paper; both faces are opaque paper (owner 02:40Z), the page underneath shows only beside the sheet.
+   Shape: along its width u (0 at the spine … 1 at the free edge) the paper turns by
+     φ(u) = π · clamp01(C·(u − 1) + p·(1 + C))
+   i.e. it lies flat up to a fold, then curls with ONE constant radius (w / (π·C)): the free edge leads and rolls over, then the root
+   lifts off the spine and the sheet lands on the left. C = stiff: paper 1.6 (default); the board cover ≈ .7 (bends far less).
+   Drawn with n vertical STRIPS fixed on the paper (≈ one per 26 px, 10–32): each strip is a small 3D-placed window onto the same two
+   printed faces (front + back, backface hidden), laid on the chord of its piece of the curve. Per frame only transforms and shading
+   opacities change (compositor work; no layout, no clip-path, no repaint). The shade follows the light on each strip (one solid + one
+   gradient layer per face, so it runs smoothly across the bend); a soft shadow falls on the ground beside the curl (the right page
+   while it rises, the left page of a spread while it lands).
+   tip(p) = projected x of the free edge (spine = 0); pAt(e) = the p whose free edge is at e (the finger holds the edge);
+   dragTo(frac, fwd, two) = p for a drag that has gone frac (0…1) of its way (two = spread: the edge travels to the far left;
+   one page: to the spine).
+   flat (Cảnh động off / reduced motion; owner: "kéo vẫn dời trang, không cong cầu kỳ"): one plain piece — on one page it SLIDES
+   (vanish), on a spread it swings flat (no perspective, no bend).
+   vanish: the sheet leaves this page past the spine (phone / single page, live tab turn): CLIPPED at the spine, never faded. */
+function kitTurnBend(C,p,u){const a=C*(u-1)+p*(1+C);return Math.PI*(a<=0?0:a>=1?1:a)}
 function kitSheetTurn(o){o=o||{};const host=o.host,w=Math.max(40,o.w|0),h=Math.max(40,o.h|0);
- const root=document.createElement("div");root.className="ksht"+(o.cls?" "+o.cls:"");
- root.style.cssText=`left:${o.x||0}px;top:${o.y||0}px;width:${w}px;height:${h}px;perspective:${Math.round(Math.max(1900,w*3.6))}px;perspective-origin:0px 42%`;
- if(o.vanish)root.style.clipPath="inset(-400px -6000px -400px 0)";
+ const flat=!!o.flat,C=o.stiff!=null?Math.max(.3,+o.stiff):1.6;
+ const N=flat?1:Math.max(10,Math.min(32,o.n||Math.round(w/26))),dw=w/N,ov=flat?0:(o.ov!=null?o.ov:1.2);
+ const PERS=Math.round(Math.max(1900,w*3.4));
+ /* win: the curl never grows over the page's top/bottom edge (perspective enlarges the part rising toward the reader); vanish also
+    clips at the spine. An overflow box, NOT a clip-path: a clip-path over the 3D sheet breaks the compositor's depth sort (stair-step
+    edge where the rolled part meets the rising part). */
+ const padL=o.vanish?0:2*w,win=document.createElement("div");win.className="ksht"+(flat?" ksht-flat":"")+(o.cls?" "+o.cls:"");
+ win.style.cssText=`left:${(o.x||0)-padL}px;top:${(o.y||0)-3}px;width:${padL+3*w}px;height:${h+6}px;overflow:hidden`;
+ const root=document.createElement("div");root.className="ksht-in";
+ root.style.cssText=`left:${padL}px;top:3px;width:${w}px;height:${h}px`;win.appendChild(root);
+ const PJ=`translate(0px,${(h*.45).toFixed(1)}px) perspective(${PERS}px) translate(0px,${(-h*.45).toFixed(1)}px) `;
  const ctxWrap=m=>{if(!o.ctx)return m;const d=document.createElement("div");d.className=o.ctx.className+" kcl-ctx";d.appendChild(m);return d};
- const fill=(box,src,keep)=>{
-  const p=src&&src.nodeType===1?kclPrep(src,!!o.ctx):null;
-  if(p){box.insertBefore(ctxWrap(p.m),keep||null);return p}
-  const d=document.createElement("div");d.className="kpaper kcl-blank";if(typeof src==="string"&&src)d.innerHTML=src;box.insertBefore(d,keep||null);return null};
- let U=null;if(o.under){const u=document.createElement("div");u.className="ksht-under";const pu=fill(u,o.under);U={u,sc:pu?pu.sc:[]};root.appendChild(u)}
+ /* one printed face (a still copy of src) → its base node + where its scrolled boxes are (index in document order) */
+ const print=src=>{const p=src&&src.nodeType===1?kclPrep(src,!!o.ctx):null;let base,sc=[];
+  if(p){base=ctxWrap(p.m);if(p.sc.length){const all=[base,...base.querySelectorAll("*")];sc=p.sc.map(([e,t,l])=>[all.indexOf(e),t,l]).filter(q=>q[0]>=0)}}
+  else{base=document.createElement("div");base.className="kpaper kcl-blank";if(typeof src==="string"&&src)base.innerHTML=src}
+  return{base,sc}};
+ let U=null;if(o.under){const u=document.createElement("div");u.className="ksht-under";const pp=document.createElement("div");pp.className="ksht-pp";u.appendChild(pp);
+  const pr=print(o.under);pp.appendChild(pr.base);U={nodes:[pr.base],sc:pr.sc};root.appendChild(u)}
  const gR=document.createElement("i");gR.className="ksht-gs";const gL=document.createElement("i");gL.className="ksht-gs ksht-gl";
- const sheet=document.createElement("div");sheet.className="ksht-sheet";sheet.style.cssText=`width:${w}px;height:${h}px;transform-origin:0 50%`;
- const face=cls=>{const f=document.createElement("div");f.className="ksht-face "+cls;const sh=document.createElement("i");sh.className="ksht-sh";f.appendChild(sh);return{f,sh,sc:[],lk:[]}};
- const F=face("ksht-front"),B=face("ksht-back");
- const put=(Fc,src)=>{[...Fc.f.children].forEach(ch=>{if(ch!==Fc.sh)ch.remove()});const p=fill(Fc.f,src,Fc.sh);Fc.sc=p?p.sc:[];Fc.lk=p?p.lk:[]};
- put(F,o.front);put(B,o.back||null);
- sheet.append(F.f,B.f);root.append(gR,gL,sheet);host.appendChild(root);
- const rescroll=()=>{for(const [e,t,l] of F.sc.concat(B.sc,U?U.sc:[])){e.style.scrollBehavior="auto";e.style.scrollSnapType="none";e.scrollTop=t;e.scrollLeft=l}};rescroll();
+ const sheet=document.createElement("div");sheet.className="ksht-sheet";sheet.style.cssText=`width:${w}px;height:${h}px`;
+ const S=[];
+ for(let i=0;i<N;i++){const st=document.createElement("div");st.className="ksht-st";st.style.cssText=`width:${(dw+ov).toFixed(2)}px;height:${h}px`;
+  const mk=(cls,off)=>{const f=document.createElement("div");f.className="ksht-face "+cls;const pp=document.createElement("div");pp.className="ksht-pp";
+   pp.style.cssText=`width:${w}px;height:${h}px;left:${(-off).toFixed(2)}px`;const sh=document.createElement("i");sh.className="ksht-sh";
+   const gr=document.createElement("i");gr.className="ksht-gr";const cl=document.createElement("div");cl.className="ksht-clip";cl.appendChild(pp);
+   /* the shade layers sit beside the clip box, not inside it (a composited layer under an overflow clip AND a 3D transform is
+      mis-clipped by the compositor → a stair-step edge along the bottom of the curl) */
+   f.append(cl,sh,gr);st.appendChild(f);return{f,pp,sh,gr,a:-1,b:-1,d:0}};
+  S.push({st,F:mk("ksht-front",i*dw),B:mk("ksht-back",w-(i+1)*dw-ov)});sheet.appendChild(st)}
+ const put=(side,src)=>{const pr=print(src);const nodes=[];
+  S.forEach((s,i)=>{const pp=s[side].pp;pp.textContent="";const n=i===S.length-1?pr.base:pr.base.cloneNode(true);pp.appendChild(n);nodes.push(n)});
+  return{nodes,sc:pr.sc}};
+ let RF=put("F",o.front),RB=put("B",o.back||null);
+ root.append(gR,gL,sheet);host.appendChild(win);
+ const rescroll=()=>{for(const R of [RF,RB,U])if(R&&R.sc.length)for(const n of R.nodes){const all=[n,...n.querySelectorAll("*")];
+   for(const [k,t,l] of R.sc){const e=all[k];if(e){e.style.scrollBehavior="auto";e.style.scrollSnapType="none";e.scrollTop=t;e.scrollLeft=l}}}};rescroll();
+ /* the curve: strip ends (x, z) on the paper's cross-section, spine at 0, z toward the reader */
+ const X=new Float64Array(N+1),Z=new Float64Array(N+1),A=new Float64Array(N+1);
+ const geo=p=>{let x=0,z=0;A[0]=kitTurnBend(C,p,0);
+  for(let i=0;i<N;i++){const a=A[i],b=A[i+1]=kitTurnBend(C,p,(i+1)/N),d=b-a;
+   if(Math.abs(d)<1e-5){x+=dw*Math.cos(a);z+=dw*Math.sin(a)}else{x+=dw*(Math.sin(b)-Math.sin(a))/d;z+=dw*(Math.cos(a)-Math.cos(b))/d}X[i+1]=x;Z[i+1]=z}};
+ const proj=(x,z)=>x*PERS/Math.max(1,PERS-z);
+ const tip=p=>{p=Math.max(0,Math.min(1,+p||0));if(flat)return o.vanish?w*(1-p):w*Math.cos(Math.PI*p);geo(p);return proj(X[N],Z[N])};
+ const T0=tip(0),T1=tip(1);
+ const pAt=e=>{if(e>=T0)return 0;if(e<=T1)return 1;let lo=0,hi=1;for(let k=0;k<22;k++){const m=(lo+hi)/2;if(tip(m)>e)lo=m;else hi=m}return (lo+hi)/2};
+ /* light from the front and a little from the spine side: dark = how far a face is turned away from it */
+ const dk=(a,back)=>{const d=back?-.35*Math.sin(a)-.94*Math.cos(a):.35*Math.sin(a)+.94*Math.cos(a);return Math.max(0,Math.min(.62,(.94-d)*.62))};
+ const shade=(Fc,s0,s1)=>{const lo=Math.min(s0,s1),d=Math.abs(s1-s0),dir=s1>=s0?1:-1;
+  if(Math.abs(lo-Fc.a)>.004){Fc.a=lo;Fc.sh.style.opacity=lo.toFixed(3)}
+  if(Math.abs(d-Fc.b)>.004||dir!==Fc.d){Fc.b=d;Fc.d=dir;Fc.gr.style.opacity=d.toFixed(3);Fc.gr.classList.toggle("ksht-rev",dir<0)}};
  let last=0;
- function set(p){p=Math.max(0,Math.min(1,+p||0));last=p;const s=Math.sin(Math.PI*p),c=Math.cos(Math.PI*p);
-  /* a live face follows its page's scroll (the new page may still settle while the sheet turns) */
-  for(const Fc of [F,B])for(const [a,b] of Fc.lk){if(b.scrollTop!==a.scrollTop)b.scrollTop=a.scrollTop}
-  const ang=-180*p,tilt=4.2*s,skew=-2.4*s,lift=-0.014*h*s;
-  sheet.style.transform=`translateY(${lift.toFixed(2)}px) rotateZ(${tilt.toFixed(3)}deg) rotateY(${ang.toFixed(3)}deg) skewY(${skew.toFixed(3)}deg)`;
-  /* the face turning away from the light darkens, the one landing brightens */
-  F.sh.style.opacity=Math.min(1,p*1.9).toFixed(3);B.sh.style.opacity=Math.min(1,(1-p)*1.9).toFixed(3);
-  /* shadow cast under the lifted sheet: on the right ground while it rises, on the left while it lands */
-  gR.style.width=Math.max(24,c*w+24).toFixed(1)+"px";gR.style.opacity=o.shadeR===false||c<=0?"0":(0.85*s).toFixed(3);
-  gL.style.width=Math.max(24,-c*w+24).toFixed(1)+"px";gL.style.opacity=!o.shadeL||c>=0?"0":(0.85*s).toFixed(3);
-  }
+ function set(p){p=Math.max(0,Math.min(1,+p||0));last=p;
+  if(flat){const st=S[0].st;gR.style.opacity="0";gL.style.opacity="0";
+   if(o.vanish)st.style.transform=`translateX(${(-p*w).toFixed(2)}px)`;
+   else{st.style.transform=`rotateY(${(-180*p).toFixed(3)}deg)`;const a=Math.min(.45,p*.8),b=Math.min(.45,(1-p)*.8);shade(S[0].F,a,a);shade(S[0].B,b,b)}
+   return}
+  geo(p);let xmax=-1e9,xmin=1e9,zmax=0,zmin=0;
+  for(let i=0;i<N;i++){const s=S[i],x0=X[i],z0=Z[i],th=Math.atan2(Z[i+1]-z0,X[i+1]-x0);
+   /* each strip is projected on its own (one shared eye above the spine) and the strips are stacked by height (painter's order): no
+      shared 3D context, so the compositor never has to depth-sort intersecting strips (that gave stair-step edges and seams) */
+   s.st.style.transform=`${PJ}translate3d(${x0.toFixed(2)}px,0,${z0.toFixed(2)}px) rotateY(${(-th*180/Math.PI).toFixed(3)}deg)`;
+   const zi=String(10+Math.round((z0+Z[i+1])*2));if(s.z!==zi){s.z=zi;s.st.style.zIndex=zi}
+   if(th<Math.PI/2+.05)shade(s.F,dk(A[i],0),dk(A[i+1],0));
+   if(th>Math.PI/2-.05)shade(s.B,dk(A[i+1],1),dk(A[i],1));
+   const xp=proj(X[i+1],Z[i+1]);if(xp>xmax)xmax=xp;if(xp<xmin){xmin=xp;zmin=Z[i+1]}if(Z[i+1]>zmax)zmax=Z[i+1]}
+  /* shadow on the ground beside the lifted paper */
+  if(o.shadeR!==false&&zmax>.6&&xmax<w-1&&xmax>-4){const band=Math.min(w*.42,14+zmax*.5);gR.style.transform=`translateX(${Math.max(0,xmax).toFixed(1)}px) scaleX(${(band/100).toFixed(3)})`;gR.style.opacity=Math.min(.78,.3+zmax/(w*.35)).toFixed(3)}
+  else gR.style.opacity="0";
+  if(o.shadeL&&xmin<-1){const band=Math.min(w*.3,10+zmin*.6);gL.style.transform=`translateX(${(xmin-band).toFixed(1)}px) scaleX(${(band/100).toFixed(3)})`;gL.style.opacity=(.62*Math.min(1,zmin/(w*.05))).toFixed(3)}
+  else gL.style.opacity="0"}
  set(o.p||0);
- return {el:root,set,rescroll,setBack(src){put(B,src);rescroll();set(last)},setFront(src){put(F,src);rescroll();set(last)},destroy(){root.remove()},sheet:1}}
+ return {el:win,set,tip,pAt,get p(){return last},
+  dragTo(frac,fwd,two){frac=Math.max(0,Math.min(1,+frac||0));const e=fwd?T0+((two?T1:Math.max(T1,0))-T0)*frac:T1+(T0-T1)*frac;return pAt(e)},
+  rescroll,setBack(src){RB=put("B",src);rescroll();set(last)},setFront(src){RF=put("F",src);rescroll();set(last)},destroy(){win.remove()},sheet:1}}
+
+/* finger release (KIT §34.0 rule 5b): a flick (≥ .45 px/ms toward the turn) always turns, a flick back always returns; otherwise the
+   page turns once the drag is past half way. The release runs on with the finger's momentum (ease-out), shorter when flicked. */
+function kitTurnDone(frac,v){return v>.45?true:v<-.45?false:frac>.5}
+function kitTurnSettleMs(dp,v){return Math.round(Math.max(170,Math.min(1000,Math.abs(dp)*KIT_TURN_MS*(Math.abs(v)>.45?.42:.68))))}
+function kitSettleEase(t){return 1-Math.pow(1-t,2.6)}
 
 /* kitCurl = the kit's page turn for every book (week book j87, kitBookSpread): since the owner's 11/15 10:00Z rule it is the WHOLE-SHEET
    turn (kitSheetTurn); the corner-fold engine stays as kitCurlFold (not used for page turns any more). Same call shape:
    kitCurl({host, front, back, w, h, x, y, p, shadeL, shadeR, vanish, ctx}) → {set(p,dir), destroy(), el, rescroll(), setBack()} */
 function kitCurl(o){return kitSheetTurn(o)}
 
-/* ---------- kitCurlSwap: turn a live page (tab switch) with the whole sheet ----------
-   kitCurlSwap(el, fn, {dir, ms}) : copies el as it is now, runs fn() (the game re-renders el in place), then
-   dir 1 (forward): the sheet carrying the OLD page swings over the spine (left edge of el); its back carries the NEW page; the live new
-     page lies underneath from the first frame (owner 06:25Z). The sheet fades as it lands beyond the spine (picture page / off screen).
-   dir −1 (back): the same motion reversed: the sheet carrying the NEW page comes back over the spine (its back = the old page) and lands
-     exactly on the new live page; a still copy of the old page lies underneath until it is covered.
+/* ---------- kitCurlSwap: turn a live page (tab switch) with the bending sheet ----------
+   kitCurlSwap(el, fn, {dir, ms, drag}) : copies el as it is now, runs fn() (the game re-renders el in place), then
+   dir 1 (forward): the sheet carrying the OLD page curls away over the spine (left edge of el); its back carries the NEW page; the live
+     new page lies underneath from the first frame (owner 06:25Z). The sheet is clipped at the spine (vanish).
+   dir −1 (back): the same motion reversed: the sheet carrying the NEW page curls back over the spine (its back = the old page) and
+     lands exactly on the new live page; a still copy of the old page lies underneath until it is covered.
+   drag (owner 08:10Z): no animation — returns a controller the finger drives: ctl.to(frac) (0…1 of the drag's way), ctl.set(p),
+     ctl.settle(done, v, cb) (done: finish the turn; else return the sheet; cb(done) runs while the sheet still covers the page, so a
+     cancelled drag can put the old tab back under it). With "Cảnh động" off the dragged sheet is a flat page that slides.
    The copies drop ids (one #panel only) and carry el's own box layout. No turn when el is not shown, when its box changed (another
-   layout, e.g. the map), or when "Cảnh động" is off / reduced motion (instant swap with a short cross-fade).
+   layout, e.g. the map), or when "Cảnh động" is off / reduced motion (tap: instant swap with a short cross-fade).
    A new turn while one runs ends the old one at once (fast taps never pile up). */
 let kclLive=null;
 function kitCurlSwap(el,fn,opt){opt=opt||{};const run=()=>{try{fn&&fn()}catch(e){console.error(e)}};
  if(kclLive){try{kclLive()}catch(e){}kclLive=null}
+ kitCurlSwap.drag=null;
  const r0=el&&el.getBoundingClientRect();
  if(!el||!r0||r0.width<60||r0.height<60||!el.getClientRects().length){run();return false}
- if(kitCurlOff()){el.classList.add("kcl-fade");run();requestAnimationFrame(()=>requestAnimationFrame(()=>el.classList.remove("kcl-fade")));return false}
+ const off=kitCurlOff();
+ if(off&&!opt.drag){el.classList.add("kcl-fade");run();requestAnimationFrame(()=>requestAnimationFrame(()=>el.classList.remove("kcl-fade")));return false}
  const fwd=(opt.dir||1)>0;
  const host=document.createElement("div");host.className="kcl-host";host.style.cssText=`left:${r0.left}px;top:${r0.top}px;width:${r0.width}px;height:${r0.height}px`;
- /* The sheet is opaque paper on both faces and is CLIPPED at the spine (vanish): it lifts off the page, stands up at the spine and is
-    gone there — it never lies over the picture page (iPad) or off the screen (phone) and never fades (owner 11/15 02:40Z). */
- let c=null;try{c=fwd?kitSheetTurn({host,front:el,back:null,w:r0.width,h:r0.height,ctx:el.closest(".game"),vanish:true,p:0})
-                    :kitSheetTurn({host,front:null,back:el,under:el,w:r0.width,h:r0.height,ctx:el.closest(".game"),vanish:true,p:1})}catch(e){console.error(e)}
+ /* The sheet is opaque paper on both faces and is CLIPPED at the spine (vanish): it curls off the page and is gone over the spine —
+    it never lies over the picture page (iPad) or off the screen (phone) and never fades (owner 11/15 02:40Z). */
+ const base={host,w:r0.width,h:r0.height,ctx:el.closest(".game"),vanish:true,flat:off};
+ let c=null;try{c=fwd?kitSheetTurn(Object.assign({front:el,back:null,p:0},base)):kitSheetTurn(Object.assign({front:null,back:el,under:el,p:1},base))}catch(e){console.error(e)}
  run();
  const r1=el.getBoundingClientRect();
  /* the page row may differ a little per tab (iPad 1366: the panel box moves a few px): still a page turn; only another layout
@@ -206,14 +271,22 @@ function kitCurlSwap(el,fn,opt){opt=opt||{};const run=()=>{try{fn&&fn()}catch(e)
  /* the new page printed on the sheet: on its back (forward) or on its front (back turn), as in a real book */
  const take=()=>{if(fwd)c.setBack(el);else c.setFront(el)};
  try{take()}catch(e){console.error(e)}
- document.body.appendChild(host);c.rescroll();kitCurlSfx();
+ document.body.appendChild(host);c.rescroll();if(!opt.drag)kitCurlSfx();
  /* the new page finishes its layout a moment later (person card sizing, chips): print it again once it has settled */
  let alive=true;const reback=()=>{if(!alive)return;try{take()}catch(e){}};
  const sig=()=>{const q=el.querySelector(".pc,.pgwrap,.kbl,section,div");return el.scrollHeight+"|"+el.scrollTop+"|"+(q?q.getBoundingClientRect().top+":"+q.offsetHeight:"")};
  let s0=sig();const iv=setInterval(()=>{if(!alive){clearInterval(iv);return}const s1=sig();if(s1!==s0){s0=s1;reback()}},70);setTimeout(reback,90);
- const fin=()=>{alive=false;clearInterval(iv);host.remove();if(kclLive===end)kclLive=null};
- const stop=kitCurlRun(c,fwd?0:1,fwd?1:0,opt.ms||KIT_TURN_MS,fin,kitTurnEase);
+ let stop=()=>{},ctl=null;
+ const fin=()=>{if(!alive)return;alive=false;clearInterval(iv);host.remove();if(kclLive===end)kclLive=null;if(ctl&&kitCurlSwap.drag===ctl)kitCurlSwap.drag=null};
+ /* interrupted (a tap while the finger holds or the sheet settles): the turn ends where the tab now is */
  const end=()=>{stop();fin()};kclLive=end;
+ if(opt.drag){ctl={fwd,el:host,
+   set(p){c.set(p)},get p(){return c.p},to(frac){c.set(c.dragTo(frac,fwd,false))},
+   settle(done,v,cb){stop();const p0=c.p,target=fwd===!!done?1:0;let ran=false;if(done)kitCurlSfx();
+    const finish=()=>{if(!ran){ran=true;try{cb&&cb(!!done)}catch(e){console.error(e)}}fin()};
+    stop=kitCurlRun(c,p0,target,kitTurnSettleMs(target-p0,v),finish,kitSettleEase)}};
+  kitCurlSwap.drag=ctl;kitCurlSwap.hold=p=>{stop();c.set(p)};kitCurlSwap.end=end;return ctl}
+ stop=kitCurlRun(c,fwd?0:1,fwd?1:0,opt.ms||KIT_TURN_MS,fin,kitTurnEase);
  /* test hook: hold the running turn at p (kitCurlSwap.hold(.45)) */
  kitCurlSwap.t0=stop.t0;kitCurlSwap.hold=p=>{stop();c.set(p)};kitCurlSwap.end=end;return true}
 
@@ -404,17 +477,23 @@ html .game .kleather>.maptools>.past,html .game .kleather>.maptools>.fest{displa
 .kl-unroll>.kl-l{animation:kl-rl var(--kl-ms,1.15s) var(--kl-ease,ease-in-out) var(--kl-at,0ms) both}.kl-unroll>.kl-r{animation:kl-rr var(--kl-ms,1.15s) var(--kl-ease,ease-in-out) var(--kl-at,0ms) both}
 @keyframes kl-un{from{clip-path:polygon(48.51% 0.36%,48.69% 0.72%,48.9% 0.59%,49.13% 0.06%,49.36% 0.04%,49.57% 0.08%,49.76% 0.47%,50.02% 0.14%,50.2% 0.69%,50.46% 0.63%,50.64% 1.07%,50.83% 0.94%,51.06% 0.16%,51.26% 0.34%,51.48% 0.5%,51.5% 7.31%,51.48% 14.03%,51.49% 20.55%,51.5% 27.98%,51.48% 35.57%,51.49% 43.03%,51.49% 49.6%,51.48% 57.54%,51.49% 64.43%,51.49% 72.18%,51.48% 78.15%,51.48% 84.95%,51.49% 93.37%,51.49% 99.83%,51.29% 99.96%,51.08% 99.16%,50.86% 99.04%,50.63% 99.24%,50.43% 99.36%,50.21% 99.08%,50.03% 99.48%,49.8% 99.93%,49.58% 99.29%,49.39% 99.1%,49.13% 99.58%,48.94% 99.98%,48.71% 99.82%,48.5% 99.5%,48.5% 93.39%,48.5% 85.21%,48.51% 79.31%,48.5% 71.33%,48.51% 65.05%,48.52% 57.87%,48.51% 49.83%,48.51% 43.63%,48.52% 35.02%,48.5% 28.04%,48.51% 21.4%,48.51% 13.81%,48.5% 6.98%)}to{clip-path:polygon(0.4% 0.36%,6.44% 0.72%,13.43% 0.59%,21.16% 0.06%,28.59% 0.04%,35.58% 0.08%,42.04% 0.47%,50.65% 0.14%,56.59% 0.69%,65.18% 0.63%,71.22% 1.07%,77.66% 0.94%,85.29% 0.16%,92.09% 0.34%,99.35% 0.5%,99.86% 7.31%,99.49% 14.03%,99.56% 20.55%,99.95% 27.98%,99.46% 35.57%,99.75% 43.03%,99.64% 49.6%,99.36% 57.54%,99.8% 64.43%,99.58% 72.18%,99.42% 78.15%,99.22% 84.95%,99.67% 93.37%,99.6% 99.83%,92.84% 99.96%,86.05% 99.16%,78.72% 99.04%,71.06% 99.24%,64.47% 99.36%,57.06% 99.08%,50.89% 99.48%,43.19% 99.93%,36.12% 99.29%,29.56% 99.1%,21.0% 99.58%,14.62% 99.98%,7.07% 99.82%,0.09% 99.5%,0.05% 93.39%,0.1% 85.21%,0.31% 79.31%,0.06% 71.33%,0.44% 65.05%,0.66% 57.87%,0.22% 49.83%,0.29% 43.63%,0.77% 35.02%,0.14% 28.04%,0.19% 21.4%,0.47% 13.81%,0% 6.98%)}}
 @keyframes kl-rl{from{left:calc(50% - 16px)}to{left:2px}}@keyframes kl-rr{from{right:calc(50% - 16px)}to{right:2px}}
-/* kitSheetTurn: the whole sheet swings around the spine */
+/* kitSheetTurn v4: the sheet bends (strips on the paper's curve); both faces opaque paper */
 .ksht{position:absolute;left:0;top:0;pointer-events:none;z-index:9999}
-.ksht-sheet{position:absolute;left:0;top:0;transform-style:preserve-3d;-webkit-transform-style:preserve-3d;will-change:transform}
-.ksht-face{position:absolute;inset:0;overflow:hidden;background:#f3e7cc;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:3px;box-shadow:0 0 14px #2a14064d}
+.ksht-in{position:absolute}
+.ksht-sheet{position:absolute;left:0;top:0;isolation:isolate}
+.ksht-st{position:absolute;left:0;top:0;transform-origin:0 0;transform-style:preserve-3d;-webkit-transform-style:preserve-3d;will-change:transform}
+.ksht-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.ksht-clip{position:absolute;inset:0;overflow:hidden;contain:strict}
 .ksht-back{transform:rotateY(180deg)}
-html body .ksht .ksht-face>*:not(.ksht-sh){position:absolute!important;inset:0!important;width:auto!important;height:auto!important;max-height:none!important;margin:0!important;visibility:visible!important;transform:none!important}
-.ksht-sh{position:absolute;inset:0;z-index:60;pointer-events:none;opacity:0}
-.ksht-front>.ksht-sh{background:linear-gradient(90deg,#2a140612,#2a14064d 60%,#2a140685)}
-.ksht-back>.ksht-sh{background:linear-gradient(90deg,#2a140670,#2a140638 40%,#2a140614)}
-.ksht-gs{position:absolute;top:0;bottom:0;left:0;opacity:0;background:linear-gradient(90deg,#1e0f0510,#1e0f0559 calc(100% - 24px),transparent)}
-.ksht-gl{left:auto;right:100%;background:linear-gradient(270deg,#1e0f0510,#1e0f0559 calc(100% - 24px),transparent)}
+.ksht-pp{position:absolute;top:0;overflow:hidden;background:#f3e7cc}
+html body .ksht .ksht-pp>*{position:absolute!important;inset:0!important;width:auto!important;height:auto!important;max-height:none!important;margin:0!important;visibility:visible!important;transform:none!important}
+.ksht-sh,.ksht-gr{position:absolute;inset:0;pointer-events:none;opacity:0;will-change:opacity}
+.ksht-gr.ksht-rev{background:linear-gradient(270deg,#2a140600,#2a1406)}
+.ksht-sh{background:#2a1406}
+.ksht-gr{background:linear-gradient(90deg,#2a140600,#2a1406)}
+.ksht-flat .ksht-st{will-change:transform}
+.ksht-gs{position:absolute;top:0;bottom:0;left:0;width:100px;opacity:0;transform-origin:0 50%;will-change:transform,opacity;background:linear-gradient(90deg,#1e0f0566,#1e0f0526 45%,#1e0f0500)}
+.ksht-gl{background:linear-gradient(270deg,#1e0f0566,#1e0f0526 45%,#1e0f0500)}
 .ksht-under{position:absolute;inset:0;overflow:hidden}
 html body .ksht .ksht-under>*{position:absolute!important;inset:0!important;width:auto!important;height:auto!important;max-height:none!important;margin:0!important;visibility:visible!important;transform:none!important}
 html body .ksht .kcl-ctx{display:block!important;position:absolute!important;inset:0!important;background:none!important;padding:0!important;margin:0!important;border:0!important;max-width:none!important;min-height:0!important;height:auto!important;overflow:hidden!important}
@@ -468,7 +547,7 @@ function kitBookLive(){const g=document.querySelector(".game");if(!g)return;
   const order=t=>{const B=[...document.querySelectorAll("#tabs [data-tab]")].map(b=>b.dataset.tab);const i=B.indexOf(t);return i<0?99:i};
   render=function(){const self=this,args=arguments;let out,done=false;const t1=typeof tab!=="undefined"?tab:null,t0=last;
    const pn=document.getElementById("panel");const call=()=>{done=true;out=r0.apply(self,args)};
-   try{if(pn&&t0!=null&&t1!==t0&&t0!=="go"&&t1!=="go"&&typeof S!=="undefined"&&S&&!S.dead)kitCurlSwap(pn,call,{dir:order(t1)>=order(t0)?1:-1});else call()}
+   try{if(!kclNoTurn&&pn&&t0!=null&&t1!==t0&&t0!=="go"&&t1!=="go"&&typeof S!=="undefined"&&S&&!S.dead)kitCurlSwap(pn,call,{dir:order(t1)>=order(t0)?1:-1,drag:kclDragWant});else call()}
    catch(e){if(done)throw e;console.error(e);call()}
    try{kitBookLive()}catch(e){console.error(e)}
    try{last=t1;const mv=document.querySelector(".game.maptab #panel .mapv");
@@ -479,23 +558,60 @@ function kitBookLive(){const g=document.querySelector(".game");if(!g)return;
    return out};
   window.render=render},0)})();
 
-/* ---------- swipe the page to turn it (like the week book and the owner's binder app): on #panel a quick horizontal swipe = the next /
-   previous tab in the tab bar (left swipe → forward, the sheet swings over the spine; right swipe → back). Not on the map, not in a
-   dialog, not when the swipe starts in something that scrolls sideways (person strip, chips) or in a form control. ---------- */
-(function(){let sw=null;
+/* ---------- hold and drag the page to turn it (owner 11/15 08:10Z): on #panel a HORIZONTAL drag picks up the sheet — left = the next
+   tab in the tab bar (forward), right = the previous one (back). While the finger holds, the sheet bends with it bit by bit and stays
+   where the finger stops (kitCurlSwap drag controller, no animation runs). On release: past half way OR a flick → the page turns on
+   with the finger's momentum; else it returns softly and the old tab is put back under it. A vertical move is the page's own scroll
+   (never a turn); a tap on a button / card is a tap (the turn only starts after a clear sideways move, and then the press is
+   cancelled). Not on the map, in a dialog, in form controls / minigames, or in anything that scrolls sideways (person strip, chips).
+   Touch: touch events (a non-passive touchmove on #panel only, so a sideways drag can stop the scroll; page scrolling elsewhere is
+   untouched); mouse / pen: pointer events. ---------- */
+let kclDragWant=0,kclNoTurn=0;
+(function(){let g=null,raf=0;
  const sideScroll=t=>{for(let e=t;e&&e.id!=="panel"&&e!==document.body;e=e.parentElement){if(e.scrollWidth>e.clientWidth+4){const ox=getComputedStyle(e).overflowX;if(ox==="auto"||ox==="scroll")return true}}return false};
- const down=(t,x,y)=>{sw=null;if(!(t&&t.closest))return;
-  if(!t.closest("#panel")||t.closest("input,textarea,select,canvas,[data-noswipe],.kgl,.mapv")||document.querySelector(".game.maptab"))return;
-  const m=document.getElementById("modal");if(m&&!m.hidden)return;if(sideScroll(t))return;sw={x,y,t:performance.now()}};
- const up=(x,y)=>{const s=sw;sw=null;if(!s)return;const dx=x-s.x,dy=y-s.y,dt=performance.now()-s.t;
-  if(Math.abs(dx)<64||Math.abs(dx)<Math.abs(dy)*1.8||dt>900)return;
-  const B=[...document.querySelectorAll("#tabs [data-tab]")].filter(b=>b.offsetParent&&!b.disabled);const cur=B.findIndex(b=>typeof tab!=="undefined"&&b.dataset.tab===tab);if(cur<0)return;
-  const nb=B[cur+(dx<0?1:-1)];if(!nb)return;nb.click();
-  /* the swipe was a page turn, not a tap: swallow a click that may follow on the panel */
-  const kill=ev=>{ev.stopPropagation();ev.preventDefault()};document.addEventListener("click",kill,{capture:true,once:true});setTimeout(()=>document.removeEventListener("click",kill,{capture:true}),350)};
- /* touch: touch events (a pointer stream is cancelled once the browser starts panning); mouse / pen: pointer events */
- document.addEventListener("touchstart",e=>{if(e.touches.length!==1){sw=null;return}const q=e.touches[0];down(e.target,q.clientX,q.clientY)},{passive:true,capture:true});
- document.addEventListener("touchend",e=>{const q=e.changedTouches[0];if(q)up(q.clientX,q.clientY)},{passive:true,capture:true});
- document.addEventListener("touchcancel",()=>{sw=null},{passive:true,capture:true});
- document.addEventListener("pointerdown",e=>{if(e.pointerType==="touch")return;if(e.button>0||!e.isPrimary){sw=null;return}down(e.target,e.clientX,e.clientY)},{passive:true,capture:true});
- document.addEventListener("pointerup",e=>{if(e.pointerType==="touch")return;up(e.clientX,e.clientY)},{passive:true,capture:true})})();
+ const tabsB=()=>[...document.querySelectorAll("#tabs [data-tab]")].filter(b=>b.offsetParent&&!b.disabled);
+ const down=(t,x,y)=>{g=null;if(!(t&&t.closest))return;
+  if(!t.closest("#panel")||t.closest("input,textarea,select,canvas,[contenteditable],[data-noswipe],.kgl,.mapv")||document.querySelector(".game.maptab"))return;
+  const m=document.getElementById("modal");if(m&&!m.hidden)return;if(sideScroll(t))return;
+  g={x0:x,y0:y,x,y,on:0,h:[[performance.now(),x]]}};
+ const frac=s=>{const dx=s.x-s.x0;return Math.max(0,Math.min(1,(s.fwd?-dx:dx)/s.span))};
+ const apply=()=>{raf=0;if(g&&g.ctl)g.ctl.to(frac(g))};
+ const kill=()=>{const k=ev=>{ev.stopPropagation();ev.preventDefault()};document.addEventListener("click",k,{capture:true,once:true});setTimeout(()=>document.removeEventListener("click",k,{capture:true}),400)};
+ const move=(x,y,ev)=>{if(!g)return;const t=performance.now();g.x=x;g.y=y;g.h.push([t,x]);while(g.h.length>2&&t-g.h[0][0]>110)g.h.shift();
+  const dx=x-g.x0,dy=y-g.y0;
+  if(!g.on){if(Math.abs(dx)<12&&Math.abs(dy)<12)return;
+   if(Math.abs(dx)<Math.abs(dy)*1.3){g=null;return}           /* vertical: the page scrolls, no turn */
+   if(kclLive){g=null;return}                                     /* a turn is still settling */
+   const B=tabsB();const cur=B.findIndex(b=>typeof tab!=="undefined"&&b.dataset.tab===tab);const nb=cur<0?null:B[cur+(dx<0?1:-1)];if(!nb){g=null;return}
+   const pn=document.getElementById("panel");const r=pn.getBoundingClientRect();
+   g.on=1;g.fwd=dx<0;g.old=tab;g.span=Math.max(80,g.fwd?g.x0-r.left:r.right-g.x0);
+   /* the map is not a page (leather, no sheet): a swipe toward it opens it on release, as before */
+   if(nb.dataset.tab==="go"){g.legacy=nb;kill()}else{
+   kclDragWant=1;try{nb.click()}catch(e){console.error(e)}finally{kclDragWant=0}
+   g.ctl=kitCurlSwap.drag||null;kill()}}
+  if(ev&&ev.cancelable)ev.preventDefault();
+  if(g.ctl&&!raf)raf=requestAnimationFrame(apply)};
+ const up=(x,cancel)=>{const s=g;g=null;if(raf){cancelAnimationFrame(raf);raf=0}if(!s||!s.on)return;
+  if(x!=null){s.x=x;s.h.push([performance.now(),x])}
+  if(s.legacy){if(!cancel&&Math.abs(s.x-s.x0)>=64){s.legacy.click();kill()}return}
+  if(!s.ctl)return;
+  const a=s.h[0],b=s.h[s.h.length-1];const v=(b[1]-a[1])/Math.max(16,b[0]-a[0]);const vt=s.fwd?-v:v;
+  const f=frac(s);s.ctl.to(f);const done=!cancel&&kitTurnDone(f,vt);
+  s.ctl.settle(done,vt,ok=>{if(ok)return;/* not turned: the old tab back under the sheet, no new turn */
+   kclNoTurn=1;try{const ob=document.querySelector(`#tabs [data-tab="${s.old}"]`);if(ob)ob.click();else{tab=s.old;render()}}catch(e){console.error(e)}finally{kclNoTurn=0}});
+  kill()};
+ /* the touch target is re-rendered away when the tab changes under the finger, and a detached node's touch events no longer reach
+    #panel / document: the gesture also listens on its own target (each event handled once) */
+ const seen=new WeakSet(),once=e=>{if(seen.has(e))return false;seen.add(e);return true};let tgt=null;
+ const tmove=e=>{if(!once(e)||!g)return;const q=e.touches[0];if(!q||e.touches.length!==1){if(g&&g.on)up(null,true);g=null;return}move(q.clientX,q.clientY,e)};
+ const tend=e=>{if(!once(e))return;unhook();if(!g)return;if(e.type==="touchcancel"){if(g.on)up(null,false);g=null;return}const q=e.changedTouches[0];up(q?q.clientX:null,false)};
+ const unhook=()=>{if(tgt){tgt.removeEventListener("touchmove",tmove);tgt.removeEventListener("touchend",tend);tgt.removeEventListener("touchcancel",tend);tgt=null}};
+ let bound=null;const bind=()=>{const pn=document.getElementById("panel");if(pn&&pn!==bound){bound=pn;pn.addEventListener("touchmove",tmove,{passive:false})}};bind();
+ document.addEventListener("touchstart",e=>{bind();unhook();if(e.touches.length!==1){if(g&&g.on)up(null,true);g=null;return}const q=e.touches[0];down(e.target,q.clientX,q.clientY);
+  if(g&&e.target&&e.target.addEventListener){tgt=e.target;tgt.addEventListener("touchmove",tmove,{passive:false});tgt.addEventListener("touchend",tend);tgt.addEventListener("touchcancel",tend)}},{passive:true,capture:true});
+ document.addEventListener("touchend",tend,{passive:true,capture:true});
+ document.addEventListener("touchcancel",tend,{passive:true,capture:true});
+ document.addEventListener("pointerdown",e=>{if(e.pointerType==="touch")return;if(e.button>0||!e.isPrimary){g=null;return}down(e.target,e.clientX,e.clientY)},{passive:true,capture:true});
+ document.addEventListener("pointermove",e=>{if(e.pointerType==="touch"||!g)return;move(e.clientX,e.clientY,null)},{passive:true,capture:true});
+ document.addEventListener("pointerup",e=>{if(e.pointerType==="touch")return;up(e.clientX,false)},{passive:true,capture:true});
+ document.addEventListener("pointercancel",e=>{if(e.pointerType==="touch")return;if(g&&g.on)up(null,false);g=null},{passive:true,capture:true})})();

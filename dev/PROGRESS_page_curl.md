@@ -72,6 +72,25 @@ Nhánh `review/page-curl` từ origin/review/fold-layout (đã gộp tới e7deb
 - DỪNG (SẴN SÀNG KIỂM). Còn lại nếu sếp muốn: trên Fold (một trang) mặt sau tờ chỉ thấy thoáng qua vì nửa sau đi ra ngoài mép trái màn hình
   (trục gáy = mép trái trang); iPad thấy rõ mặt sau đáp lên trang tranh.
 
+## v4 CONG THEO NGÓN TAY (review/drag-curl, sếp 08:10Z Sổ tuần trên Fold/iPad: "Tại sao trang vẫn lật bị đơ… nó phải CONG")
+- `kitSheetTurn` v4 (jbook): tờ UỐN như giấy, bản lề ở gáy. Góc quay theo bề ngang u: φ(u)=π·clamp01(C(u−1)+p(1+C)) → phẳng tới nếp,
+  rồi cuộn MỘT bán kính (w/πC); mép tự do dẫn và cuộn qua, rồi gốc nhấc khỏi gáy, tờ đáp sang trái. C=`stiff`: giấy 1.6, bìa sổ/bìa sau .7
+  (cứng, cong ít). Vẽ bằng n DẢI dọc cố định trên tờ (~26 px/dải, 10–32), mỗi dải là cửa sổ 3D đặt trên dây cung của đoạn cong, hai mặt
+  (trước = trang cũ, sau = trang mới; cùng bản chụp kclPrep, không id), backface ẩn. Mỗi dải tự chiếu phối cảnh (một mắt trên gáy),
+  xếp chồng theo độ cao (z-index), KHÔNG dùng chung preserve-3d (sắp chiều sâu của trình duyệt làm mép bậc thang + khe sáng giữa dải).
+  Cắt trên/dưới (và gáy khi vanish) bằng hộp overflow, không clip-path. Mỗi khung chỉ đổi transform + opacity bóng
+  (bóng theo góc ánh sáng từng dải: một lớp đặc + một lớp dốc → bóng liền mạch qua chỗ cong; bóng đổ trên trang dưới cạnh chỗ cuộn).
+  Tờ luôn đục (nền giấy `.ksht-pp`), cắt ở gáy (vanish) như cũ. API mới: `tip(p)`, `pAt(edgeX)`, `dragTo(frac,fwd,two)`, `stiff`, `flat`.
+- Giữ + kéo: mép tờ theo ngón từng chút, dừng tay là đứng yên (không chạy hoạt cảnh). Thả: quá nửa đường HOẶC hất (≥ .45 px/ms) → lật hẳn
+  theo đà (`kitTurnSettleMs`, ease-out); chưa → bật về êm (tab cũ được đặt lại dưới tờ). `kitTurnDone/kitTurnSettleMs/kitSettleEase`.
+  - Sổ tuần j87: kéo trên sách (cả bìa: cứng), nút ‹ ›/chạm mép = lật cong KIT_TURN_MS.
+  - Game: kéo NGANG trên #panel = sang tab kế/trước (`kitCurlSwap(...,{drag})` trả bộ điều khiển to/set/settle); dọc = cuộn trang
+    (quyết sau 12 px, ngang khi |dx|>1.3|dy|; touchmove không thụ động CHỈ trên #panel + chính đích chạm, vì đích chạm bị vẽ lại khi đổi tab).
+    Chạm nút/thẻ = bấm (chỉ lật khi đã kéo ngang rõ, rồi nuốt cú bấm). Bỏ qua bản đồ, hộp thoại, ô nhập, minigame, thứ cuộn ngang.
+  - Cảnh động tắt/giảm chuyển động: bấm = đổi ngay (mờ chéo); KÉO vẫn dời trang (`flat`: trượt phẳng một trang / lật phẳng hai trang).
+- KIT.md §34.0 viết lại (luật 1, 4, 5b, 6, 7). Thử: `dev/test/drag-curl.js` (chạm thật qua CDP), ảnh `dev/shots/drag-curl/`.
+- Không sửa mã lưu/nạp.
+
 ## Kiểm thử (Playwright)
 - page-curl: 1180x820@2, 1366x1024@2, 686x880@2.2, 755x1000@2 — không lỗi trang, không tràn ngang, giảm chuyển động = không cong (mờ chéo).
   390x844@3: khung giữa chụp được, trình duyệt thử bị sập ở bước kéo tay (máy thử load ~50, bộ nhớ) — cần chạy lại khi máy rảnh.

@@ -1124,43 +1124,55 @@ RIGHT = the text page exactly as already approved (Hậu cung card with its own 
 page only** (no illustration page on phones, accepted loss; no "Mở trang" button). **A tab switch is a page turn on both devices**, and
 every page turn is the WHOLE SHEET swinging around the spine (§34.0, owner 11/15 10:00Z; supersedes the corner curl). Mockups (not wired yet; the fold-layout kit owner wires it): `dev/shots/book/`.
 
-### 34.0 PAGE-TURN RULE (owner 11/15 06:25Z + 07:50Z + 10:00Z) — `kitSheetTurn` (jbook) — the ONE way any page turns
+### 34.0 PAGE-TURN RULE (owner 11/15 06:25Z + 07:50Z + 10:00Z + 08:10Z "phải CONG") — `kitSheetTurn` v4 (jbook) — the ONE way any page turns
 Owner refs `dev/owner-shots/1115-turn-ref-1.jpg`, `-2.jpg` (her binder app). Binding for every book/page in the game (tab switch,
-week book j87, kitBookSpread, any future book). Never write a private turn.
-1. **Whole sheet, around the spine.** The sheet turns as ONE piece about the spine (the page's left edge: iPad = the gutter between picture
-   page and text page; phone/Fold = the left edge of the single page). No corner fold, no diagonal crease, no strips.
+week book j87 incl. its cover, kitBookSpread, any future book). Never write a private turn.
+1. **The sheet BENDS like paper, hinged at the spine** (08:10Z: "Tại sao trang vẫn lật bị đơ… Cái tôi muốn là nó phải CONG"; replaces the
+   10:00Z rigid board). Along its width u (spine 0 … free edge 1) the paper turns by φ(u) = π·clamp01(C·(u−1) + p·(1+C)): flat up to a
+   fold, then ONE constant-radius curl (w/(π·C)); the free edge leads and rolls over, then the root lifts off the spine and the sheet lands
+   on the left. C = `stiff`: paper 1.6; the week-book cover / back board .7 (a board bends far less). Drawn as n vertical strips fixed on
+   the paper (≈ one per 26 px, 10–32), each laid on the chord of its piece of the curve; every strip is projected on its own from one eye above the spine and the
+   strips are stacked by height (painter's order, z-index) — no shared preserve-3d context (its depth sort of intersecting strips gave
+   stair-step edges / seams); a strip's two faces are backface-hidden. The sheet is clipped by an overflow box (top/bottom of the page;
+   the spine when `vanish`), never by clip-path.
 2. **Content is printed on the sheet.** The front face carries the page being turned away, the back face the new page (07:50Z: never blank
-   paper); both are still copies (kclPrep: no ids → one `#panel` only) that rotate, foreshorten and tilt WITH the sheet (10:00Z). Never pin
-   content to the page beneath while an empty sheet moves.
+   paper); both are still copies (kclPrep: no ids → one `#panel` only; every strip is a window onto the same copy) that bend with the paper.
 3. **The next page is already underneath** (06:25Z): forward = the live new page lies under the lifting sheet from the first frame.
-   Backward = the same motion reversed: the sheet carrying the new page comes back over the spine and lands exactly on it; the old page
-   (still copy) lies underneath until covered.
-4. **Look:** perspective from above the spine (the free edge grows toward the reader at mid-turn), a slight tilt (≈4°) + skew (≈2.4°) at
-   mid-turn so it reads as paper, face shading by angle, a soft shadow cast on the ground under the lifted sheet. The sheet stays inside the
-   page area vertically (never over the top bar / tab bar).
-4b. **Tờ lật luôn đục, không trong suốt** (owner 11/15 02:40Z, Fold Hậu cung → Giao tình: the old corner curl let the old and new text show
-   through each other and the old page's bottom chips poke out under the curl). The turning sheet is fully OPAQUE paper on both faces
-   (solid paper ground `.ksht-face` behind the printed content); no opacity, blend or filter on the sheet or its content, no backdrop show-
-   through; only the page underneath is visible BESIDE the sheet, never through it; nothing of the old page exists outside the sheet.
-   A live page turn (tab switch) and a single-page book turn are CLIPPED at the spine (`vanish`): the sheet lifts, stands up at the spine
-   and is gone there — it never fades and never lies over the picture page (iPad) or off screen (phone). Checked mid-turn at 20/45/70 %
-   on 755x1000@2, 412x1058@2, 1180x820@2, 1366x1024@2 (dev/shots/review/page-curl/).
-5. **Timing — ONE constant `KIT_TURN_MS` = 1300 ms** (jbook; owner 11/15 01:50Z "cho animation lật trang chậm lại": was 680–760 ms) for
-   every turn (tab switch, week book, book swap), ease `kitTurnEase` (slow lift, even swing, long gentle settle as it lands). A finger drag
-   follows the finger; its release finishes in proportion. A new tap while a turn runs makes the running turn jump to its end at once, then
-   the new one starts (fast taps never pile up, jam or leave a sheet behind). Only transforms (and the face shading) change per frame.
-6. **Input:** tab bar buttons, ‹ › buttons, keys, and a horizontal SWIPE on the page (left = forward / next tab, right = back) all turn the
-   page. The page swipe is ignored in the map, dialogs, form controls and anything that scrolls sideways (person strip, chips).
-7. **"Cảnh động" off (`OPT.fxon=false`) or prefers-reduced-motion:** no turn animation at all — the page changes at once (short cross-fade).
+   Backward = the same motion reversed (p 1 → 0): the sheet carrying the new page curls back over the spine and lands exactly on it;
+   the old page (still copy) lies underneath until covered.
+4. **Look:** perspective from above the spine, face shading per strip by its angle to the light (one solid + one gradient layer per face,
+   so the shade runs smoothly round the bend: darker in the curl, light again as the back lands), a soft shadow on the ground beside the
+   curl (right page while it rises, left page of a spread while it lands). The sheet stays inside the page area vertically.
+4b. **Tờ lật luôn đục, không trong suốt** (owner 11/15 02:40Z): both faces are opaque paper (`.ksht-pp` paper ground behind the printed
+   copy); no opacity/blend/filter on the content; the page underneath shows only BESIDE the sheet, never through it. A live page turn and
+   a single-page book turn are CLIPPED at the spine (`vanish`): the sheet curls over the spine and is gone there — never fades, never lies
+   over the picture page (iPad) or off screen (phone).
+5. **Timing — ONE constant `KIT_TURN_MS` = 1300 ms** (owner 01:50Z) for every TAPPED turn (tab bar, ‹ ›, keys, book swap), ease
+   `kitTurnEase`. A new tap while a turn runs makes it jump to its end at once, then the new one starts (no pile-up, no sheet left behind).
+   Per frame only transforms and shading opacities change (no layout, no clip-path, no repaint).
+5b. **Hold and drag (owner 08:10Z):** touching the page and moving SIDEWAYS picks the sheet up; while the finger holds, the free edge
+   follows it bit by bit (`t.dragTo(frac)` / `t.pAt(edgeX)`) and the sheet stays exactly where the finger stops — nothing runs by itself.
+   On release: past half of the way (`kitTurnDone`) OR a flick (≥ .45 px/ms toward the turn) → it turns on with the finger's momentum
+   (`kitTurnSettleMs`, ease-out `kitSettleEase`, shorter when flicked); otherwise (or a flick back) it returns softly and, for a tab, the
+   old tab is put back under it. Week book (j87): drag on the book; live game: drag on `#panel` (left = next tab, right = previous).
+6. **Input:** tab bar buttons, ‹ › buttons, keys, tap on the book edge, and the hold-and-drag on the page all turn the page. A VERTICAL move
+   is the page's own scroll (never a turn; the drag decides after 12 px, sideways only when |dx| > 1.3·|dy|; a non-passive touchmove sits
+   on `#panel` only). A tap on a button/card is a tap (a turn only starts after a clear sideways move; then the press is cancelled).
+   Ignored in the map, dialogs, form controls, minigames (`.kgl`, canvas) and anything that scrolls sideways (person strip, chips).
+7. **"Cảnh động" off (`OPT.fxon=false`) or prefers-reduced-motion:** taps change the page at once (short cross-fade); a DRAG still moves
+   the page (`flat`: one plain piece that slides on one page / swings flat on a spread — no bend, no perspective), release as 5b.
 ```js
-const t=kitSheetTurn({host, front, back, under, w, h, x, y, p:0, ctx, vanish, shadeL, shadeR}); // spine = left edge at (x,y)
+const t=kitSheetTurn({host, front, back, under, w, h, x, y, p:0, ctx, vanish, shadeL, shadeR, stiff, flat}); // spine = left edge at (x,y)
 t.set(p);           // 0 = flat on the right (front up) … 1 = turned onto the left (back up); backward = run 1 → 0
-t.setBack(el); t.setFront(el); t.destroy();
-kitCurl(o)          // = kitSheetTurn(o) (old call shape kept for j87 / kitBookSpread); the corner-fold engine is kept as kitCurlFold, unused
-kitCurlSwap(el, fn, {dir, ms});   // live tab switch (#panel); kitCurlSwap.hold(p) / .end() = test hooks
+t.dragTo(frac, fwd, twoPages) → p;  t.pAt(edgeX) → p;  t.tip(p) → edge x;  t.setBack(el); t.setFront(el); t.destroy();
+kitTurnDone(frac, v) / kitTurnSettleMs(dp, v) / kitSettleEase   // the release rule (5b)
+kitCurl(o)          // = kitSheetTurn(o) (j87 / kitBookSpread); the old corner-fold engine is kept as kitCurlFold, unused
+kitCurlSwap(el, fn, {dir, ms, drag});   // live tab switch (#panel); drag → controller {to(frac), set(p), settle(done, v, cb)}
+                                        // kitCurlSwap.hold(p) / .end() = test hooks
 ```
-Test: `node dev/test/sheet-turn.js <url> WxH@dpr <out> <tag>` (frames held with kitCurlSwap.hold, one #panel, no overflow, fast taps,
-swipe, Cảnh động off). Shots: `dev/shots/page-curl2/`.
+Test: `node dev/test/drag-curl.js <url> WxH@dpr <out> <tag> [oldsave.json] [book]` (real CDP touch: slow drag held at 25/50/75 %,
+bend = spread of strip angles, still while held, release under half → back, flick → turns, vertical scroll, tap, Cảnh động off, week-book
+cover + leaf, ‹ › tap). Shots `dev/shots/drag-curl/`. Older: `dev/test/sheet-turn.js` (held frames, fast taps).
 
 ### 34.1 (HISTORY — superseded by 34.0 for page turns) kitCurl v2 corner fold, now `kitCurlFold` (owner 11/15 03:30Z)
 Owner refs `dev/owner-shots/1115-curl-ref-1.jpg`, `-2.jpg`: the CORNER lifts first and leads, the sheet folds on a DIAGONAL, tilts as it
