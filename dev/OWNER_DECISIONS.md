@@ -269,3 +269,7 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (08:00Z) LIVE main=e659176f0 coop-ui (sửa kẹt nút Vào phòng, Hành sự trống khi vào lại, nút Gửi/Chép đường dẫn, hướng dẫn 6 bước). Lệch buổi tuần 3 chưa tái hiện.
 - (08:00Z) Owner: sân khấu vẽ người thừa thành chân dung nhỏ đứng trên sàn → cấm; người thừa vào '+N', người lạ = hình bóng cỡ thật (stage-slots). 'Quen biết 3/3' khó hiểu → chữ rõ (hau-cung-ui). 'MẤT: không được gì' vô nghĩa → bỏ/thay hậu quả thật (sub-odds).
 - (08:05Z) Owner: chân dung người lạ mờ + phóng to nửa mặt → người lạ dùng hình bóng; soát TOÀN BỘ ảnh hiển thị (mờ, phóng, cắt mặt, ảnh dự phòng) review/img-quality.
+- (08:10Z) Owner: đổi tên 'Sổ tuần' và soát mọi tên gọi cho ra cổ trang, cổ ngữ → thợ văn phong lập bảng đề xuất (khuyến nghị 'Tuần lục'), điều phối duyệt rồi áp.
+- (08:10Z) Owner: lật trang phải CONG theo ngón tay khi giữ-kéo (kéo tới lui, dừng là đứng), thả quá nửa hoặc hất nhanh mới lật hẳn, chưa thì bật về; nút ‹ › cũng lật cong; bìa cũng cong (cứng hơn). review/drag-curl.
+- (08:10Z) Owner hỏi lại thẳng cột 'Sổ này ghi': đã giao review/hau-cung-ui từ 04:25Z, chưa lên live.
+- 08:10Z cdn_sync 216 ảnh thu nhỏ hoa điền cung nữ (đợt 3).
