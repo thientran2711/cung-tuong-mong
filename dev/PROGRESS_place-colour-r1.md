@@ -14,3 +14,12 @@ Checked:
 - FPS: machine load 30–50 on 4 CPUs, swiftshader; numbers meaningless (main 0.2 fps too). Dry states use filter none (no cost); wet/rp2/rp3 add one GPU filter pass on the stage layer.
 
 Left: screenshots 755x1000@2, 1000x755, 1180x820@2, 1366x1024@2, 844x390 (day/night/rain/snow/lãnh cung) via .ahcache/drv.js; night-end not on main (skip).
+
+## Update: review/place-art 83864aa5d merged (clean)
+- Fix on r1: new scene keys "tgk"/"maid" added to j11 pxKind outdoor list + j33 festival particle list (they had them before as lc/home;
+  Tân Giả khố painting is an open courtyard); jplace kitPlaceArt + j9 map tile: maid's "home" shows phong-cung-nu, not tam-cung-dem.
+- life-place.js 755x1000: 13/13 OK with tan-gia-kho / phong-cung-nu, 0 errors.
+- Screenshots (stage) 755x1000@2, 1366x1024@2, 1000x755, 1180x820@2, 844x390: day/night/rain/snow/frost/lãnh cung, no overflow, 0 errors.
+  Night reads as night; afternoon rain warm, not grey; frost no blue wash; lãnh cung grey. (Harness note: the "Luân hồi" picker overlay
+  sometimes reappears in the 2nd state of .ahcache/drv.js — test artefact.)
+- Running: place-colour.js full scan (nopx, 1180x820) to confirm "night looks like day" 6→0.
