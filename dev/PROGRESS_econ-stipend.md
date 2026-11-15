@@ -16,3 +16,10 @@ via jstip table), j72 (favours give yensao), j97 (text matches its reward), j42 
 - node dev/test/stipend.js <url> <outdir> [sizes]   (chest, event dialog, restore after tip, NPC skim + news, EV6 gift, resale price)
 - node dev/test/stipend-oldsave.js <url> <oldsave.json>   (old save from mk-oldsave.js on the live build)
 - python3 dev/test/goods-scan.py --fail
+
+## Results (15/11)
+- stipend.js at 755x1000, 1000x755, 1180x820, 1366x1024, 844x390 (@2): chest shows 3 hàng-kém items + Bạc, event dialog shown in view,
+  5 options, no horizontal scroll, tip restores goods (3 → 0 hàng kém), NPCs skimmed 9–10 with news, EV6 gift gives luahang, no page errors.
+  Note: the j93 chest at 844x390 clips its title row (j93 layout; game-feel reworks kitReward — not touched here).
+- stipend-oldsave.js: an old save from the live build loads; 4 months pass with skimming on, goods arrive, p.stip / S.stipW made lazily, 0 errors.
+- goods-scan.py: origin/main 19 text-only gifts → 0 (table in the report).

@@ -30,7 +30,7 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
    return{shown:!M.hidden,mode:d.className,box:[Math.round(r.left),Math.round(r.top),Math.round(r.width),Math.round(r.height)],inView:r.left>=0&&r.right<=innerWidth+1&&r.top>=0&&r.bottom<=innerHeight+1,
     hint:(M.querySelector('.kr-hint')||{}).textContent||"",opts:[...M.querySelectorAll('#mb .opts > *')].filter(x=>x.offsetParent).map(x=>x.textContent.trim().slice(0,60)),hscroll:document.documentElement.scrollWidth>innerWidth}});
   /* choose "Đút bạc" → goods restored */
-  const r2=await p.evaluate(()=>{const i=Q[0].opts.findIndex(o=>/Đút bạc/.test(o.n));const kem0=S.inv.filter(e=>/hàng kém/.test((IT[e.k]||{}).n||"")).length;S.bac=Math.max(S.bac,100);chooseM(i);
+  const r2=await p.evaluate(()=>{if(!Q[0]||!Q[0].opts)return{noEvent:true,why:JSON.stringify(stipCauses(S,false).C.map(c=>c.k)),ally:stipAlly(S),sung:S.sung};const i=Q[0].opts.findIndex(o=>/Đút bạc/.test(o.n));const kem0=S.inv.filter(e=>/hàng kém/.test((IT[e.k]||{}).n||"")).length;S.bac=Math.max(S.bac,100);chooseM(i);
    const kem1=S.inv.filter(e=>/hàng kém/.test((IT[e.k]||{}).n||"")).length;return{kem0,kem1,tip:stipSt(S).tip===S.turn}});
   /* 2. high favour: no skim; NPCs: the same rule */
   const r3=await p.evaluate(()=>{S.sung=70;const SK=stipSkim(S,100,false);let npc=0,news0=(S.news||[]).length;

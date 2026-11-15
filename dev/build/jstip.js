@@ -117,8 +117,9 @@ function stipRestore(p,G,full){let n=0;for(const g of G||[]){if(!g.kem)continue;
 function stipReportTo(SK){const q=queenP();const hhBehind=q&&q!==S&&SK.sup===q;const thOk=!S.thDead;
  if(q&&q!==S&&!hhBehind&&rel(q,S)>-30)return{k:"hh",n:"Hoàng hậu",v:q};if(thOk)return{k:"th",n:"Thái hậu",v:null};return q&&q!==S?{k:"hh",n:"Hoàng hậu",v:q,risky:1}:null}
 function stipEvent(G,SK){const B=BAL.stip,r=rkOf(S),st=stipSt(S),W=stipW();const tip=B.tip[Math.min(7,r)];const eun=stipEunName();
- const miss=G.filter(g=>g.kem||g.lost).map(g=>g.lost?`thiếu ${stipNm(g.k0,g.n0).replace(/^\d+ \S+ /,"")}`:`${stipNm(g.k,g.n)} thay ${stipNm(g.k0,g.n0)}`);
- const rows=[["Lĩnh được",stipGoodsTxt(G)||"không có đồ","n"]];if(SK.bac)rows.push(["Thiếu bạc",`Bạc −${SK.bac}`,"r"]);if(SK.cut)rows.push(["Khất bổng",`theo ý ${rkName(SK.sup||queenP())}: bớt 3 phần 10 bạc`,"r"]);if(miss.length)rows.push(["Bị đổi, bớt",miss,"r"]);
+ const lc=k=>{const n=(IT[k]?IT[k].n:k).replace(/ \(hàng kém\)$/,"");return n[0].toLowerCase()+n.slice(1)};
+ const kem=G.filter(g=>g.kem&&!g.lost).map(g=>`${lc(g.k)} thay ${lc(g.k0)}`),lost=G.filter(g=>g.lost).map(g=>lc(g.k0));
+ const rows=[];if(SK.bac)rows.push(["Thiếu bạc",`Bạc −${SK.bac}`,"r"]);if(SK.cut)rows.push(["Khất bổng",`theo ý ${rkName(SK.sup||queenP())}: bớt 3 phần 10 bạc`,"r"]);if(kem.length)rows.push(["Hàng kém",kem.join(" · "),"r"]);if(lost.length)rows.push(["Thiếu đồ",lost.join(" · "),"r"]);
  rows.push(["Gợi ý",`<span class="ef i">Vì ${SK.why}.</span>`]);const h=`<p>${eun} đưa bổng lộc tới, mắt không dám nhìn thẳng.</p>${kitRows(rows)}`;
  const back=()=>{if(SK.bac)apply({bac:SK.bac});return stipRestore(S,G)};
  const O=[{n:"Nhịn",fx:{},x:"không được không mất · kèm: tháng sau dễ bị bớt xén nữa",go:()=>{st.meek=S.turn;log("Ngươi nhịn, không nói gì. Nội vụ phủ biết cung ngươi dễ bảo.")}}];
