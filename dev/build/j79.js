@@ -710,8 +710,14 @@ function kitInfoArt(title){const k=kitInfoKey(title);const have=KIT_INFOM.have||
 /* identity: her FULL-BODY figure stands on the origin background, the panel beside her (landscape and wide portrait) or under her (narrow portrait);
    the figure follows her current look, so a face picked in the panel (j86) shows on the standing figure at the next build */
 function kpIdFig(M,tries){let src="";try{src=typeof figFor==="function"?figFor(S):""}catch(e){}let im=M.querySelector(":scope > img.kidfig2");
- if(!src){if(im)im.remove();M.classList.remove("kpfig");if((tries||0)<6)setTimeout(()=>{if(!M.hidden&&M.classList.contains("kpscene")&&$("mb").querySelector(".kpid"))kpIdFig(M,(tries||0)+1)},400);return}
- if(!im){im=document.createElement("img");im.className="kidfig2";im.alt="";M.prepend(im)}if(im.getAttribute("src")!==src)im.src=src;M.classList.add("kpfig");
+ /* review/stage-fig-size (owner 15/11: the identity card showed NO figure): the figure list (FIGURES.json, CDN) can arrive seconds after the
+    card opens — 6 × 400 ms gave up. Now: the kit's unknown-lady silhouette stands in her place while it loads, retried every 400 ms for
+    up to 30 s; a picture that fails to load is retried once, then the silhouette stays. */
+ if(!src){const ph=(typeof KIT_DIR==="string"?KIT_DIR:"img/kit/")+"unknown-fig-f.webp";if((tries||0)<75){src=ph;setTimeout(()=>{if(!M.hidden&&M.classList.contains("kpscene")&&$("mb").querySelector(".kpid"))kpIdFig(M,(tries||0)+1)},400)}
+  else{if(im)im.remove();M.classList.remove("kpfig");return}}
+ if(!im){im=document.createElement("img");im.className="kidfig2";im.alt="";M.prepend(im)}
+if(!im.dataset.kerr){im.dataset.kerr=1;im.addEventListener("error",()=>{if(im.dataset.kerr==="1"){im.dataset.kerr="2";const s0=im.getAttribute("src");setTimeout(()=>{if(im.isConnected)im.src=s0+(s0.includes("?")?"&":"?")+"r=1"},600)}})}
+ if(im.getAttribute("src")!==src)im.src=src;M.classList.add("kpfig");
  const id=$("mb").querySelector(".kpid");if(id)id.classList.add("kpidf");
  const fit=()=>{try{const d=M.querySelector(".dlg");if(!d)return;const r=d.getBoundingClientRect();if(innerWidth<600&&innerHeight>innerWidth){M.style.setProperty("--kidh",Math.max(120,Math.round(r.top-10))+"px")}else M.style.removeProperty("--kidh")}catch(e){}};
  requestAnimationFrame(fit);setTimeout(fit,300)}
