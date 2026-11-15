@@ -32,7 +32,7 @@ const KFK_SP={
 const KFK_EDGE={blood:{},poison:{},ink:{}};
 /* w×h = clip size; f = sheet frames (6×4); r = aspect of the art box (w/h) */
 const KFK_LIGHT={
- candle:{w:320,h:320},"glow-gold":{w:384,h:384},moonlight:{w:288,h:384},"lantern-red":{w:288,h:384},divine:{w:288,h:384}
+ candle:{w:320,h:320},"glow-gold":{w:384,h:384},moonlight:{w:288,h:384},"lantern-red":{w:288,h:384},divine:{w:288,h:384},fireworks:{w:288,h:384}
 };
 const KFK_SHEET={ /* dev/fxwork/sheet.sh: cols×rows frames of w×h (true alpha), fps, played once; poster = last frame (reduced motion) */
  silk:{cols:6,rows:4,n:24,w:120,h:214,fps:5,src:"silk-sheet.webp",poster:"silk.webp"},       /* white silk descends and settles (death) */

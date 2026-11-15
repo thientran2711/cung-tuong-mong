@@ -9,21 +9,29 @@ const L=(...a)=>console.error(new Date().toISOString().slice(11,19),...a);const 
 const NEWLIFE=()=>{try{localStorage.removeItem('hclh-opt')}catch(e){}SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){start();if(!isSrv())break}Q.length=0;
  const m=document.getElementById('modal');if(m)m.hidden=true;['kroul','dawn','kload','kpodov'].forEach(i=>{const e=document.getElementById(i);if(e)e.remove()});document.querySelectorAll('.kmov').forEach(e=>e.remove());render();return S.name};
 const settle=p=>p.waitForFunction(()=>KFX.parts.length===0&&KFK.lights===0&&KFK.sheets===0&&!document.querySelector('.kfxk'),null,{timeout:60000,polling:500}).then(()=>true,()=>false);
-(async()=>{const b=await chromium.launch({args:['--use-gl=swiftshader','--enable-unsafe-swiftshader','--autoplay-policy=no-user-gesture-required']});const R={};let fail=0;
+(async()=>{const b=await chromium.launch({args:['--use-gl=swiftshader','--enable-unsafe-swiftshader','--autoplay-policy=no-user-gesture-required','--js-flags=--expose-gc','--enable-precise-memory-info']});const R={};let fail=0;
  for(const [W,H,D,tag] of VP.filter(v=>!process.env.VPS||process.env.VPS.split(',').includes(v[3]))){L('vp',tag);
   const c=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:D,hasTouch:true,isMobile:W<1100});const p=await c.newPage();const errs=[],bad=[];
   p.on('pageerror',e=>errs.push(e.message));p.on('console',m=>{if(m.type()==='error'&&!/Failed to load resource|net::ERR/.test(m.text()))errs.push('console: '+m.text())});
   p.on('response',q=>{if(/\/img\/fx\//.test(q.url())&&q.status()>=400)bad.push(q.status()+' '+q.url().split('/').pop())});
   await p.goto(BASE,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof kitFxBurst==='function',null,{timeout:180000});await sleep(2000);
-  const r={name:await p.evaluate(NEWLIFE)};OPT_OFF=await p.evaluate(()=>{OPT.fxon=true;KFX.ambOK=false;return 0});
+  const r={name:await p.evaluate(NEWLIFE)};await p.evaluate(()=>{OPT.fxon=true;OPT.fxpick=1;KFX.ambOK=false});
+  /* 0. bytes per scene (cold cache, first size only): what a scene downloads the first time it plays */
+  if(tag==='fold')r.sceneBytes=await p.evaluate(async()=>{const S={promote:()=>kitFx('promote'),slap:()=>kitFx('hit'),danger:()=>kitFx('harm'),poison:()=>kitFx('poison'),
+    death:()=>kitFx('death'),preg:()=>kitFx('preg'),festival:()=>kitFx('festival'),night:()=>{kitFxLight('candle',null,{dur:1500});kitFx('night')},gift:()=>kitFxGift('open',null),letter:()=>kitFxLetter(null)};const out={};await kfApp();
+    for(const [k,f] of Object.entries(S)){performance.clearResourceTimings();f();await new Promise(r=>setTimeout(r,2600));
+     out[k]=Math.round(performance.getEntriesByType('resource').filter(e=>/\/img\/fx\//.test(e.name)).reduce((a,e)=>a+(e.encodedBodySize||e.transferSize||0),0)/1024)+' KB'}
+    kitFxClear();return out});
   /* 1. every sprite kind loads (atlas frames), lights/sheets listed */
   r.kinds=await p.evaluate(async()=>{const n=Object.keys(KFK_SP);await kitFxPreload([...n,...Object.keys(KFK_LIGHT)]);return{sp:n.length,loaded:n.filter(k=>KFK.tex[k]&&KFK.tex[k].length===KFK_SP[k].n).length,lights:Object.keys(KFK_LIGHT).length,sheets:Object.keys(KFK_SHEET).length}});
   /* 2. 50 bursts of mixed kinds, then everything gone + pool reused */
-  r.burst=await p.evaluate(async()=>{const n=Object.keys(KFK_SP);let spawned=0,peak=0;const t0=KFK.made;
+  r.mem0=await p.evaluate(()=>{try{gc()}catch(e){}return performance.memory?Math.round(performance.memory.usedJSHeapSize/1048576*10)/10:null});
+  r.burst=await p.evaluate(async()=>{const n=Object.keys(KFK_SP);let spawned=0,peak=0;const t0=KFK.made;const ft=[];let run=true,lt=performance.now();const fr=()=>{const n2=performance.now();ft.push(n2-lt);lt=n2;if(run)requestAnimationFrame(fr)};requestAnimationFrame(fr);
    for(let i=0;i<50;i++){spawned+=await kitFxBurst(n[i%n.length],{x:innerWidth*(.2+.6*Math.random()),y:innerHeight*.4},10);peak=Math.max(peak,KFX.parts.length);await new Promise(r=>setTimeout(r,60))}
-   return{spawned,peak,made:KFK.made-t0}});
+   run=false;ft.sort((a,b)=>a-b);return{spawned,peak,made:KFK.made-t0,frameAvg:Math.round(ft.reduce((a,b)=>a+b,0)/ft.length*10)/10,frameP95:Math.round(ft[Math.floor(ft.length*.95)]*10)/10}});
   r.burstClean=await p.waitForFunction(()=>KFX.parts.length===0,null,{timeout:90000,polling:500}).then(()=>true,()=>false);
   r.after=await p.evaluate(()=>({parts:KFX.parts.length,root:KFX.root.children.length,pool:KFK.pool.length,made:KFK.made,freed:KFK.freed}));
+  r.mem1=await p.evaluate(()=>{try{gc()}catch(e){}return performance.memory?Math.round(performance.memory.usedJSHeapSize/1048576*10)/10:null});
   /* a second round of 50 must reuse the pool (no new sprites beyond the first peak) */
   r.burst2=await p.evaluate(async()=>{const n=Object.keys(KFK_SP);const m0=KFK.made;for(let i=0;i<50;i++){await kitFxBurst(n[i%n.length],null,10);await new Promise(r=>setTimeout(r,60))}return{newSprites:KFK.made-m0}});
   await p.waitForFunction(()=>KFX.parts.length===0,null,{timeout:90000,polling:500}).catch(()=>{});
@@ -36,6 +44,10 @@ const settle=p=>p.waitForFunction(()=>KFX.parts.length===0&&KFK.lights===0&&KFK.
    const d=document.createElement('div');d.style.cssText='position:fixed;left:10px;top:10px;width:120px;height:120px';document.body.appendChild(d);kitFxLight('candle',d,{});
    const low=kitFxLight('glow-gold',null,{low:1,dur:1200});out.lowSheet=!!(low&&/sheet/.test(low.el.style.backgroundImage));
    await new Promise(r=>setTimeout(r,300));d.remove();return out});
+  /* edges, gift, letter: DOM made, then gone */
+  r.objs=await p.evaluate(async()=>{const e=kitFxEdge('blood');const e2=kitFxEdge('poison');const g=kitFxGift('give',null,{kind:'silk'});const o=kitFxGift('open',{x:innerWidth*.3,y:innerHeight*.5});
+   const f=kitFxGift('refuse',{x:innerWidth*.7,y:innerHeight*.5});const l=kitFxLetter({x:innerWidth/2,y:innerHeight*.3});await new Promise(r=>setTimeout(r,300));const mid=document.querySelectorAll('.kfxk').length;
+   const ok=await Promise.all([g,o,f,l]);return{mid,edge:!!(e&&/edge-blood-(p|l)\.webp/.test(e.el.style.backgroundImage)),done:ok.every(Boolean)}});
   /* sheets */
   r.sheets=await p.evaluate(async()=>{const out={};for(const n of Object.keys(KFK_SHEET)){const h=kitFxSheet(n,null,{});await new Promise(r=>setTimeout(r,700));out[n]=!!(h&&/webp/.test(h.el.style.backgroundImage))}return out});
   if(SHOTS&&['fold','ipad','phone-land'].includes(tag)){await p.evaluate(()=>{['kroul','dawn','kpodov'].forEach(i=>{const e=document.getElementById(i);if(e)e.remove()});const m=document.getElementById('modal');if(m)m.hidden=true;kitFxLight('candle',{x:innerWidth*.25,y:innerHeight*.45},{size:Math.min(innerWidth,innerHeight)*.35,dur:6000});
@@ -43,9 +55,11 @@ const settle=p=>p.waitForFunction(()=>KFX.parts.length===0&&KFK.lights===0&&KFK.
    await sleep(1300);await p.screenshot({path:`${OUT}/fx-${tag}.jpg`,type:'jpeg',quality:60,timeout:120000})}
   r.clean=await settle(p);r.left=await p.evaluate(()=>({parts:KFX.parts.length,lights:KFK.lights,sheets:KFK.sheets,dom:document.querySelectorAll('.kfxk').length,
    overflow:document.documentElement.scrollWidth>innerWidth+1}));
+  if(tag==='fold'){r.autoGon=await p.evaluate(async()=>{OPT.fxpick=0;const t0=Date.now();while(Date.now()-t0<12000&&OPT.fxon!==false){KFX.q=1;await kitFxBurst('snow',null,40);KFX.q=.3;await new Promise(r=>setTimeout(r,500))}
+    const res={fxon:OPT.fxon,auto:KFK.auto};OPT.fxon=true;OPT.fxpick=1;KFX.q=1;return res});if(r.autoGon.fxon!==false)fail++}
   r.errs=errs.slice(0,6);r.bad404=bad;
-  const ok=r.kinds.loaded===r.kinds.sp&&r.burstClean&&r.after.root===0&&r.burst2.newSprites<=5&&r.clean&&!r.left.overflow&&!errs.length&&!bad.length
-   &&Object.keys(r.lights).filter(k=>KFK_LIGHT_NAMES.includes(k)).every(k=>r.lights[k].blend==='screen'&&(r.lights[k].playing||r.lights[k].still))&&r.lights.lowSheet;
+  const ok=r.objs.edge&&r.objs.done&&r.objs.mid>=5&&r.kinds.loaded===r.kinds.sp&&r.burstClean&&r.after.root===0&&r.burst2.newSprites<=5&&r.clean&&!r.left.overflow&&!errs.length&&!bad.length
+   &&Object.keys(r.lights).filter(k=>k!=='lowSheet').every(k=>r.lights[k].blend==='screen'&&(r.lights[k].playing||r.lights[k].still))&&r.lights.lowSheet;
   r.ok=ok;if(!ok)fail++;R[tag]=r;L(tag,JSON.stringify(r));await c.close()}
  /* reduced motion: stills only, no particles */
  {const c=await b.newContext({viewport:{width:755,height:1000},deviceScaleFactor:2,reducedMotion:'reduce'});const p=await c.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));
@@ -54,4 +68,4 @@ const settle=p=>p.waitForFunction(()=>KFX.parts.length===0&&KFK.lights===0&&KFK.
    return{burst:n,still:h.el.classList.contains('kfxk-still'),video:!!h.el.querySelector('video'),parts:KFX.parts.length}});
   r.clean=await settle(p);r.errs=errs;r.ok=r.burst===0&&r.still&&!r.video&&r.clean&&!errs.length;if(!r.ok)fail++;R.reduced=r;L('reduced',JSON.stringify(r));await c.close()}
  fs.writeFileSync(`${OUT}/fxkit.json`,JSON.stringify(R,null,1));console.log(fail?`FAIL ${fail}`:'PASS');await b.close();process.exit(fail?1:0)})();
-const KFK_LIGHT_NAMES=['candle','glow-gold','moonlight','lantern-red','divine'];let OPT_OFF;
+
