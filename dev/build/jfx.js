@@ -292,7 +292,7 @@ const KF_LOSEW=[[/tịch thu|thu hồi|sung công/i,"Bị tịch thu"],[/cướp
 function kfTexts(lg){const L=[];try{const n=Math.max(0,Math.min(40,(S.logSeq||0)-lg));for(let i=0;i<n;i++)L.push(S.logs[i]);for(const q of (typeof Q!=="undefined"?Q:[]))if(q&&typeof q.h==="string")L.push(q.h);
   const t=document.getElementById("rtoast");if(t&&t.classList.contains("on"))L.push(t.innerHTML)}catch(e){}
  return L.map(h=>String(h||"").replace(/<span class="ld">[^<]*<\/span>/g,"").replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim()).filter(Boolean)}
-function kfWhy(e,T){const tag=KFX.lt.get(e);const I=kitItemInfo(e);const nm=I.name,base=(IT[e.k]&&IT[e.k].n)||nm;
+function kfLoseWhy(e,T){const tag=KFX.lt.get(e);const I=kitItemInfo(e);const nm=I.name,base=(IT[e.k]&&IT[e.k].n)||nm;
  let line="";for(const h of T){const ss=h.replace(/([.!?:])\s+/g,"$1\n").split("\n");const s=ss.find(x=>x.includes(nm)||x.includes(base));if(s){line=s.trim();break}}
  if(line.length>170)line=line.slice(0,167).replace(/\s+\S*$/,"")+"…";
  if(tag)return{why:tag.why,to:tag.to,title:tag.title||"",text:line};
@@ -304,7 +304,7 @@ function kfWhy(e,T){const tag=KFX.lt.get(e);const I=kitItemInfo(e);const nm=I.na
  return{why:"fade",text:line}}
 function kfLoss(before,d,lg){const gone=before.filter(x=>x&&typeof x==="object"&&!x.h&&(IT[x.k]||(typeof WD_ITEMS==="object"&&WD_ITEMS[x.k]))&&!S.inv.includes(x));const worn=kfWorn();
  const T=gone.length?kfTexts(lg):[];const G={sell:[],give:[],fade:[],lose:new Map()};
- for(const e of gone){if(worn.includes(e))continue;const w=kfWhy(e,T);KFX.lt.delete(e);if(w.why==="use")continue;
+ for(const e of gone){if(worn.includes(e))continue;const w=kfLoseWhy(e,T);KFX.lt.delete(e);if(w.why==="use")continue;
   if(w.why==="lose"){const k=w.title||"Mất đồ";if(!G.lose.has(k))G.lose.set(k,{L:[],text:w.text});const g=G.lose.get(k);g.L.push(e);if(!g.text&&w.text)g.text=w.text}else G[w.why].push(e)}
  if(G.sell.length)kitLose(G.sell,{why:"sell",bac:Math.max(0,d)});else if(d<0)kitCoins("out",-d);
  if(G.give.length)kitLose(G.give,{why:"give"});if(G.fade.length)kitLose(G.fade,{why:"fade"});

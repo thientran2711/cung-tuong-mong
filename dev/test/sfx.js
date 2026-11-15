@@ -7,7 +7,7 @@ const [,,URL,SZ,OUT]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=WH.sp
 (async()=>{const b=await chromium.launch({args:['--autoplay-policy=no-user-gesture-required']});
  const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,deviceScaleFactor:+(DPR||1),serviceWorkers:'block'});
  const p=await ctx.newPage();p.setDefaultTimeout(120000);const errs=[],bad=[],audio=new Set();
- p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
+ p.on('pageerror',e=>errs.push((e.stack||e.message).slice(0,400)));const ONLY=process.env.ONLY?new RegExp(process.env.ONLY):null;
  p.on('response',r=>{const u=r.url();if(/\/audio\//.test(u))audio.add(u.replace(/^.*\/audio\//,'')+' '+r.status());if(r.status()>=400)bad.push(r.status()+' '+u.slice(0,140))});
  p.on('requestfailed',r=>{const u=r.url(),f=r.failure();if(/\/audio\//.test(u)&&!/ABORTED/.test(f&&f.errorText||''))bad.push('failed '+(f&&f.errorText)+' '+u.slice(0,140))});
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof kitSfx==='function');await p.waitForTimeout(2500);
@@ -23,7 +23,7 @@ const [,,URL,SZ,OUT]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=WH.sp
  const R=[];await p.evaluate(()=>new Promise(r=>setTimeout(r,1500)));
  /* (cards titled "Có người đến" go through the j68 event scheduler, at most one optional card per buổi: the visitor test uses another title) */
  /* step: name, expected files (all must appear), the code to run, wait ms, optional clicks */
- const step=async(name,want,fn,wait,after)=>{console.error(new Date().toISOString().slice(11,19),name);await clean();const n0=await p.evaluate(()=>KSFX.log.length);let e=null;
+ const step=async(name,want,fn,wait,after)=>{if(ONLY&&!ONLY.test(name))return;console.error(new Date().toISOString().slice(11,19),name);await clean();const n0=await p.evaluate(()=>KSFX.log.length);let e=null;
   try{await p.evaluate(fn)}catch(x){e=String(x.message||x).slice(0,160)}
   await p.evaluate(ms=>new Promise(r=>setTimeout(r,ms)),wait||1800);if(after){try{await after()}catch(x){e=(e||"")+" after:"+String(x.message||x).slice(0,120)}}
   const got=await p.evaluate(n0=>KSFX.log.slice(n0).map(x=>x.n),n0);const miss=want.filter(w=>!got.includes(w));const drop=miss.length?await p.evaluate(()=>KSFX.drop.slice(-8)):undefined;R.push({name,want,got,ok:!miss.length&&!e,miss,err:e,drop});};
@@ -32,7 +32,7 @@ const [,,URL,SZ,OUT]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=WH.sp
  await step("chuyển tab",["sfx-page"],`(()=>{const b=document.querySelector("#tabs button,#tabs [data-tab]");if(b)b.click();else throw "no tab"})()`,500);
  await step("nút bị khóa",["sfx-lock"],`(()=>{const b=document.createElement("button");b.disabled=true;b.textContent="khóa";b.style.cssText="position:fixed;left:10px;top:200px;z-index:99999";document.body.appendChild(b);b.dispatchEvent(new PointerEvent("pointerdown",{bubbles:true}));b.remove()})()`,400);
  await step("mở thẻ / đóng thẻ",["sfx-open","sfx-close"],`(()=>{Q.push({t:"Thử",h:"<p>Một lá thư.</p>",btn:"Đã rõ"});showModal();setTimeout(()=>closeModal(),300)})()`,900);
- await step("mua đồ (+ bay vào Tư trang)",["sfx-buy","sfx-item-fly"],`(()=>{S.bac=9999;const k=Object.keys(IT).find(k=>IT[k].pr>0&&IT[k].pr<200&&typeof ITIMG==="object"&&ITIMG[k]);if(!buy(S,k))throw "buy";render()})()`,1400);
+ await step("mua đồ (+ hiện ra: kitGain)",["sfx-buy","sfx-item-pop"],`(()=>{S.bac=9999;const k=Object.keys(IT).find(k=>IT[k].pr>0&&IT[k].pr<200&&typeof ITIMG==="object"&&ITIMG[k]);if(!buy(S,k))throw "buy";render()})()`,1400);
  await step("bán đồ",["sfx-sell","sfx-coin"],`(()=>{const ix=S.inv.findIndex(e=>!e.h&&IT[e.k]&&IT[e.k].pr>=2);if(ix<0)throw "noinv";if(!sellItem(S,ix))throw "sell"})()`,900);
  await step("tặng đồ cho người",["sfx-item-fly"],`(()=>{S.inv.push({k:Object.keys(IT).find(k=>IT[k].pr>0)});const r=liveRivals(false).find(v=>v.alive);if(!giveTo(S,r,S.inv.length-1))throw "give"})()`,900);
  /* KIT §54.2 kitLose: the sound follows WHY the item left (merged main 15/11) */
@@ -40,7 +40,7 @@ const [,,URL,SZ,OUT]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=WH.sp
   await step("kitLose: "+nm,[f],`(()=>{const k=Object.keys(IT).find(k=>IT[k].pr>0);kitLose({k},${JSON.stringify(o)})})()`,900);
  await step("bạc ra (kitCoins out)",["sfx-buy"],`kitCoins("out",5)`,700);
  await step("kitGain: món hiện ra rồi bay vào Tư trang",["sfx-item-pop","sfx-item-fly"],`(()=>{kitGain({k:Object.keys(IT).find(k=>IT[k].pr>0&&IT[k].pr<30)});setTimeout(()=>{const b=document.querySelector(".kfgain .krevok");if(b)b.click()},1500)})()`,2400);
- const reward=async(name,code,want)=>step(name,want,code,1500,async()=>{await tapOv('#kmrew .kmrew');await p.evaluate(()=>new Promise(r=>setTimeout(r,2600)));await tapOv('#kmrew .kmtake');await p.evaluate(()=>new Promise(r=>setTimeout(r,400)))});
+ const reward=async(name,code,want)=>step(name,want,code,1500,async()=>{await tapOv('#kmrew .kmrew');await p.evaluate(()=>new Promise(r=>setTimeout(r,2400)));await tapOv('#kmrew .kmrew');await p.evaluate(()=>new Promise(r=>setTimeout(r,700)));await tapOv('#kmrew .kmtake');await p.evaluate(()=>new Promise(r=>setTimeout(r,400)))});
  await reward("thưởng đêm: mâm sơn son",`bestow(S,"night")`,["sfx-decree","sfx-chest-rattle","sfx-tray-open","sfx-item-pop","sfx-reward-take"]);
  await reward("thưởng lớn: rương gỗ",`(()=>{S.bac=50;bestow(S,"contest")})()`,["sfx-decree","sfx-chest-rattle","sfx-chest-open","sfx-reward-take"]);
  await reward("ngự tứ: rương rồng phượng",`bestow(S,"son")`,["sfx-decree","sfx-chest-rattle","sfx-chest-royal","sfx-reward-take"]);
@@ -65,14 +65,14 @@ const [,,URL,SZ,OUT]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=WH.sp
  await step("quẻ xấu",["sfx-lot-bad"],`(()=>{const d=document.createElement("div");d.innerHTML=kitXamHTML({lv:4,dom:"Hung"});const x=d.firstElementChild;x.classList.add("km-skip");document.body.appendChild(x);ksfxXam(x,{lv:4,dom:"Hung"});setTimeout(()=>x.remove(),500)})()`,700);
  await step("thẻ kết quả THÀNH",["sfx-seal-stamp","sfx-win"],`(()=>{const bf=Object.fromEntries(RKEYS.map(([k])=>[k,S[k]||0]));S.sung=(S.sung||0)+5;resultShow("Dâng trà",bf,true)})()`,1300);
  await step("thẻ kết quả BẠI",["sfx-seal-stamp","sfx-fail"],`(()=>{const bf=Object.fromEntries(RKEYS.map(([k])=>[k,S[k]||0]));S.danh=Math.max(0,(S.danh||0)-5);resultShow("Bày mưu",bf,false)})()`,1300);
- await step("thẻ kết quả: bị phát giác",["sfx-seal-stamp","sfx-expose"],`(()=>{const bf=Object.fromEntries(RKEYS.map(([k])=>[k,S[k]||0]));resultShow("Bỏ độc bị phát giác",bf,false)})()`,1300);
- await step("thẻ kết quả: mưu hạ độc thành (không phát âm thắng sáng)",["sfx-seal-stamp","sfx-scheme"],`(()=>{const bf=Object.fromEntries(RKEYS.map(([k])=>[k,S[k]||0]));resultShow("Hạ độc",bf,true)})()`,1300);
+ await step("thẻ kết quả: bị phát giác",["sfx-seal-stamp","sfx-expose"],`(()=>{const bf=Object.fromEntries(RKEYS.map(([k])=>[k,S[k]||0]));S.sung=(S.sung||0)+1;resultShow("Bỏ độc bị phát giác",bf,false)})()`,1300);
+ await step("thẻ kết quả: mưu hạ độc thành (không phát âm thắng sáng)",["sfx-seal-stamp","sfx-scheme"],`(()=>{const bf=Object.fromEntries(RKEYS.map(([k])=>[k,S[k]||0]));S.tamco=(S.tamco||0)+1;S.sung=(S.sung||0)+2;resultShow("Hạ độc",bf,true)})()`,1300);
  await step("khảo hạch tấn phong: trượt",["sfx-fail"],`exDone(S,{pass:false,total:20,P:{bar:60}})`,800);
  await step("khảo hạch tấn phong: đỗ",["sfx-rank-new"],`exDone(S,{pass:true,total:90,P:{bar:60}})`,1200);
  await step("điểm trang: tên khóa cũ sfx(\"learn-good\") nay kêu",["sfx-learn-good"],`sfx("learn-good")`,500);
  await step("trò nhỏ: lời chấm theo màu (Lem son = hụt)",["sfx-mg-miss"],`kg82Pop([],10,10,"Lem son",kg82Col("--red","#c23b22"))`,500);
  for(const [nm,h,f] of [["kim bạc hóa đen (có độc)","Kim bạc thử vào bát canh liền hóa đen: canh có độc!","sfx-expose"],["trả lại quà","{A} sai người trả lại quà ngươi tặng, nhắn 'không dám nhận'.","sfx-close"],["dâng hương (lễ)","Ngươi theo Thái hậu dâng hương ở Phật đường.","sfx-rite"],["bị tịch thu (thẻ)","Nội vụ phủ tịch thu đồ cấm trong phòng ngươi.","sfx-confiscate"]])
-  await step("chữ trên thẻ: "+nm,[f],`(()=>{const bf=Object.fromEntries(RKEYS.map(([k])=>[k,S[k]||0]));resultShow(${JSON.stringify(h)},bf,false)})()`,1400);
+  await step("chữ trên thẻ: "+nm,[f],`(()=>{const bf=Object.fromEntries(RKEYS.map(([k])=>[k,S[k]||0]));S.sung=(S.sung||0)+1;resultShow(${JSON.stringify(h)},bf,false)})()`,1400);
  await step("qua buổi (chuông khánh)",["sfx-buoi-bell"],`(()=>{S.buoi=1;buoiShift()})()`,800);
  await step("sang buổi tối (mõ canh)",["sfx-night-watch"],`(()=>{S.buoi=B4L;buoiShift()})()`,800);
  await step("qua tuần (trống + lật lịch + quẻ tốt trong Sổ tuần)",["sfx-week-drum","sfx-page","sfx-lot-good"],`(()=>{S.buoi=0;S.lot={lv:1,dom:"Cát",i:0};dawn()})()`,3200);
@@ -89,7 +89,7 @@ const [,,URL,SZ,OUT]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=WH.sp
  await step("thời tiết đổi: tuyết",["sfx-snow"],`(()=>{S.wx={n:"tuyết rơi thử",k:"snow",f:1};render()})()`,1500);
  await step("thời tiết đổi: giông",["sfx-thunder"],`(()=>{S.wx={n:"giông thử",k:"storm",f:1};render()})()`,1500);
  for(const [n,k,f] of [["ve kêu râm ran","sun","sfx-wx-cicada"],["đom đóm","dust","sfx-wx-crickets"],["trời quang","dust","sfx-wx-birds"],["hoa đào bay","petal","sfx-wind"]])
-  await step("thời tiết đổi: "+n,[f],`(()=>{S.wx={n:"x",k:"rain",f:0};render();S.wx={n:"${n}",k:"${k}",f:0};render()})()`,1500);
+  await step("thời tiết đổi: "+n,[f],`(()=>{const b0=S.buoi;if("${n}"==="đom đóm")S.buoi=B4L;S.wx={n:"x",k:"rain",f:0};render();S.wx={n:"${n}",k:"${k}",f:0};render();S.buoi=b0})()`,1500);
  await step("thời tiết đổi: giông (chip)",["sfx-thunder"],`(()=>{S.wx={n:"giông tố",k:"storm",f:3};render()})()`,1500);
  await step("chạm chip thời tiết",["sfx-thunder"],`(()=>{const c=document.querySelector(".kmwx");if(!c)throw "nochip";c.click()})()`,500);
  await step("Tết: pháo",["sfx-firecracker"],`(()=>{S.month=12;S.tuan=2;render();S.month=1;S.tuan=0;render()})()`,2200);
