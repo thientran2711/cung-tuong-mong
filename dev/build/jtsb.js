@@ -238,7 +238,7 @@ function tsbPetHTML(){if(!S||!tsbOn())return"";const L=tsbPets(S);const t1=whyTi
  if(B.length)h+=`<div class="rbtn">${B.join("")}</div>`;
  const D=(S.tsbLog||[]).slice(0,8);if(D.length)h+=`<div class="ph"><span>Sổ đồ mất</span><span>ghi đúng món và nguyên do</span></div><ul class="kbul">${D.map(x=>`<li>${x.when?x.when+": ":""}<b>${x.what}</b> ${x.how}${x.by?` (${x.by})`:""}${x.cause?` · ${x.cause}`:""}${x.back?' · <span class="g">đã lấy lại</span>':""}</li>`).join("")}</ul>`;
  return h}
-(function(){if(typeof invHTML!=="function")return;const i0=invHTML;invHTML=function(){const h=i0.apply(this,arguments);try{const x=tsbPetHTML();if(!x)return h;const k=h.indexOf('</div>',h.indexOf('class="rbtn"'));return k>0?h.slice(0,k+6)+x+h.slice(k+6):x+h}catch(e){console.error("tsbPetHTML",e);return h}}})();
+(function(){if(typeof invHTML!=="function")return;const i0=invHTML;invHTML=function(){const h=i0.apply(this,arguments);try{const x=tsbPetHTML();if(!x)return h;return h+x}catch(e){console.error("tsbPetHTML",e);return h}}})();
 function tsbDo(k,b){if(!S||S.dead||Q.length)return;const i=+b.dataset.i;
  if(k==="care"){const P=tsbPets(S)[i];if(!P||!can(1))return;spend(1);P.care=95;P.warn=0;apply({suc:3});log(`Ngươi chăm ${TSB_PET[P.t].n.toLowerCase()}.`)}
  else if(k==="follow"){tsbPetFollow(S,i);log(`${TSB_PET[tsbPets(S)[i].t].n} theo hầu ngươi.`)}
@@ -264,3 +264,29 @@ try{if(typeof LACK==="object")Object.assign(LACK,{
  phonghoa:t=>t.out?"nàng ở lãnh cung":!tsbBurnable(t).length?"kho nàng không có đồ cháy được (vải, giấy, hương, lễ vật gỗ)":S.bac<30?`Bạc 30 (có ${S.bac})`:"",
  thaopet:t=>!tsbPets(t).length?"nàng không nuôi thú":S.bac<10?`Bạc 10 (có ${S.bac})`:"",
  batnat:t=>rkOf(S)<=rkOf(t)?"phẩm ngươi phải cao hơn nàng":t.out?"nàng ở lãnh cung":"nàng không có bạc hay món quý nào đáng đòi"})}catch(e){}
+
+/* ================= CÂN BẰNG LỰA CHỌN "Có người đến" (điều phối 05:12Z, sếp hỏi "có thật sự cân bằng không") =================
+   Luật 00:35Z: hai bên đều có cái được thật, nguyên nhân thật, NPC cùng luật. Các thẻ approach (j24) không có pid nên hiện đủ
+   Được / Mất / Kèm + cơ may như thẻ việc (sếp 07:15Z), không phải thẻ sự kiện chỉ hiện giá. */
+function tsbLoyal(d){try{if(S.maid)S.maid.loyal=cl((S.maid.loyal||0)+d,0,100);(S.staff||[]).forEach(s=>s.loyal=cl((s.loyal||0)+d,0,100))}catch(e){}}
+function tsbEasy(v){return !!v&&(v.tsbEasy||0)>tsbWk()}
+function tsbMockO(v){const hi=rkOf(v)>rkOf(S);return od(44+(S.tamco||0)/3+(S.tai||0)/8-(hi?(rkOf(v)-rkOf(S))*3:0))}
+function tsbMockOpts(v){const hi=rkOf(v)>rkOf(S);const o=tsbMockO(v);
+ return[{n:"Nhịn",fx:{},x:`Chắc chắn · thành: Đức +2 · nàng không có cớ gây thêm · Mất: Danh -1 (mất mặt trước cung nhân) · kẻ hầu Lòng -2 · kèm: nàng cho ngươi dễ bắt nạt, ba tháng tới dễ bị nàng làm khó lần nữa`,
+   go:()=>{apply({duc:2,danh:-1});tsbLoyal(-2);v.tsbEasy=tsbWk()+9;log(`Ngươi nhịn lời mỉa mai của ${v.name}.`)}},
+  {n:"Đáp trả sắc sảo",fx:{},x:`${word(o)} · thành: Danh +${hi?3:2} · kẻ hầu Lòng +2 · hỏng: Danh -1${hi?" · Đức -1":""} · kèm: nàng oán ngươi +6 · (${hi?"đáp vụng với người phẩm cao hơn thành ra hỗn; ":""}cơ may theo Tâm cơ và Tài)`,
+   go:()=>{oanAdd(v,S,6);v.tsbEasy=0;if(roll(o)){apply({danh:hi?3:2});tsbLoyal(2);log(`<span class="g">Ngươi đáp lại ${v.name} một câu sắc sảo; cung nhân đều phục.</span>`)}else{apply(hi?{danh:-1,duc:-1}:{danh:-1});log(`Ngươi đáp lại ${v.name} nhưng vụng lời, lại thành trò cười.`)}}}]}
+(function(){if(typeof approachOne!=="function")return;const a0=approachOne;approachOne=function(){let m=a0.apply(this,arguments);try{if(!m||!m.opts||!m.who||!m.who.w||m.who.w[0]!=="r")return m;let v=RV(m.who.w[1]);if(!v)return m;const h=String(m.h||"");
+  if(/mỉa mai/.test(h)){const easy=liveRivals(true).filter(x=>tsbEasy(x)&&bandOf(danger(x,S))>=1&&!x.confined);if(easy.length&&!tsbEasy(v)&&roll(60)){v=pick(easy);m.who=pv(v);m.h=`<p>${v.name} lại đến tận cửa cung, buông lời mỉa mai ngươi trước mặt cung nhân.</p>`}m.opts=tsbMockOpts(v);m.optLayout="rows";return m}
+  if(/kết làm chị em/.test(h)){const foes=liveRivals(true).filter(x=>x!==v&&(oan(x,v)>=20||aff(x,v)<=-20));m.opts=[{n:"Nhận lời",fx:{},x:`Chắc chắn · thành: nàng thân +20 · có người đứng về phía ngươi${foes.length?` · kèm: ${foes.length} người vốn thù nàng oán ngươi +5 (ngươi đứng về phe nàng)`:""}`,go:()=>{relAdd(S,v,20);foes.forEach(x=>oanAdd(x,S,5))}},
+    {n:"Khéo từ chối",fx:{},x:`Chắc chắn · thành: không dính vào thù oán của nàng · Mất: nàng thân -5`,go:()=>relAdd(S,v,-5)}];m.optLayout="rows";return m}
+  if(/xin lỗi chuyện cũ/.test(h)){m.opts=[{n:"Nhận lời xin lỗi",fx:{},x:`Chắc chắn · thành: nàng bớt oán 15 · nàng thân +5 · kèm: người khác thấy ngươi dễ bỏ qua`,go:()=>{oanAdd(v,S,-15);relAdd(S,v,5)}},
+    {n:"Lạnh lùng",fx:{},x:`Chắc chắn · thành: Danh +1 (giữ uy, không để ai coi nhẹ) · Mất: nàng thân -3 · nàng vẫn oán như cũ`,go:()=>{apply({danh:1});relAdd(S,v,-3)}}];m.optLayout="rows";return m}
+  }catch(e){console.error("tsb approach",e)}return m}})();
+(function(){if(typeof approachOne!=="function")return;const a0=approachOne;approachOne=function(){const m=a0.apply(this,arguments);try{if(m&&m.opts&&m.t==="Thái hậu triệu"){m.opts=[{n:"Đến ngay",fx:{},x:`Chắc chắn · tốn: 2 khắc · Sức -5 · thành: Thái hậu với ngươi +3`,go:()=>{apply({th:3,suc:-5});spend(Math.min(2,4-used))}},{n:"Cáo bệnh",fx:{},x:`Chắc chắn · thành: giữ trọn khắc và Sức buổi này · Mất: Thái hậu với ngươi -3`,go:()=>apply({th:-3})}];m.optLayout="rows"}
+  else if(m&&m.opts&&/xin theo ngươi/.test(String(m.h||""))){const H=String(m.h);const vic=liveRivals(true).find(v=>(v.staff||[]).some(s=>s.name&&H.includes(s.name)&&H.includes(v.name)));const s=vic&&(vic.staff||[]).find(x=>x.name&&H.includes(x.name));if(s&&vic){
+   m.opts=[{n:"Thu làm tai mắt",fx:{bac:-20},x:`Khá chắc · tốn: Bạc -20 · thành: có tai mắt trong cung ${vic.name} · hỏng: kẻ đã phản chủ cũ cũng bán tin ngươi, ${vic.name} nắm 1 chứng cứ của ngươi`,go:()=>{s.spyFor="me";if(roll(35))evA(vic,S,1)}},{n:"Đuổi về",fx:{},x:`Chắc chắn · thành: không dính líu, không lộ gì`}];m.optLayout="rows"}}}catch(e){console.error("tsb approach2",e)}return m}})();
+/* the cold-palace letter: helping a deposed consort is kind, but the court notices who sides with her (Hoàng hậu) */
+(function(){const p0=PEND.coldletter;if(!p0)return;PEND.coldletter=p=>{const d=p0(p);try{if(d&&d.o&&d.o[0]&&queenP()&&queenP()!==S){const g=d.o[0];g.fx=Object.assign({},g.fx,{hh:-3});g.x=(g.x?g.x+" · ":"")+"Hoàng hậu không vui vì ngươi dính dáng người lãnh cung"}}catch(e){}return d}})();
+/* the mocker's flag: an easy target draws more bullying from her (same rule for everyone through mindMenu) */
+(function(){if(typeof mindMenu!=="function")return;const m0=mindMenu;mindMenu=function(v,t){const O=m0.apply(this,arguments);try{if(Array.isArray(O)&&t===S&&tsbEasy(v))O.forEach(x=>{if(x[0]==="batnat"||x[0]==="rumor")x[1]*=2})}catch(e){}return O}})();
