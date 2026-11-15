@@ -245,12 +245,12 @@ function q72Role(a){return a.f&&a.f.rw?a.f.rw:a.k==="emp"?"Hoàng thượng":a.k
 function q72Card(x){const X=q72X(x);if(!X)return`<p class="past">Người nhờ không còn ở đây.</p>`;const T=X.T,st=T.s[x.st];const left=Math.max(0,x.dl-wk());
  const ok=q72OutTok(q72OkDef(X),X,"ok"),no=q72OutTok(q72NoDef(X),X,"no"),bad=T.bad?q72OutTok(T.bad,X,"bad"):[];
  let B=[];const pl=q72StepPl(st,X);
- if(st.w)B.push(`<div class="pcrow"><span>${q72Txt(st.n,X)}</span><b>còn ${Math.max(0,(x.wt||wk())-wk())} tuần</b></div>`);
+ if(st.w)B.push([q72Txt(st.n,X),`còn ${Math.max(0,(x.wt||wk())-wk())} tuần`,"t"]);
  else{if(pl&&S.place!==pl&&!S.out){const tc=pl==="home"?0:travel(S.place,pl);const why=S.confined&&pl!=="home"?`đang cấm túc`:Q.length?"đang có việc chờ":pl!=="home"&&!can(tc+1)?"hết khắc":typeof accessOf==="function"&&pl!=="home"&&!q72Host(pl,X)&&!accessOf(S,pl).ok?accessOf(S,pl).why:"";
    B.push(pbtn(`data-q72g="${pl}"`,`Đến ${q72PlN(pl)}`,`tốn: ${tc} khắc đi đường · thành: tới nơi làm bước này`,why))}
   if(st.ch)st.ch.forEach((o,i)=>B.push(pbtn(`data-q72d="${x.u}" data-q72o="${i}"`,q72Txt(o.n,X),q72Line(x,X,st,o),q72Why(x,X,st,o))));
   else B.push(pbtn(`data-q72d="${x.u}"`,q72Txt(st.n,X),q72Line(x,X,st,null),q72Why(x,X,st,null)))}
- const rows=T.s.map((s,i)=>{const p=q72StepPl(s,X);return `<div class="pcrow"><span>${i<x.st?"✓":i===x.st?"▸":"·"} ${q72Txt(s.n,X)}</span><b>${s.w?`đợi ${s.w} tuần`:p?q72PlN(p):s.emp?"cạnh Hoàng thượng":"tùy chọn"}</b></div>`});
+ const rows=T.s.map((s,i)=>{const p=q72StepPl(s,X);return [`${i<x.st?"✓":i===x.st?"▸":"·"} ${q72Txt(s.n,X)}`,s.w?`đợi ${s.w} tuần`:p?q72PlN(p):s.emp?"cạnh Hoàng thượng":"tùy chọn",i===x.st?"t":"n"]});
  const lg=x.log.slice(-3).map(t=>`<div class="pcrow"><span>${t}</span></div>`);
  const drop=pbtn(`data-q72x="${x.u}"`,"Bỏ việc này",`tốn: ${no.join(", ")||"không"}`,Q.length?"đang có việc chờ":"");
  const dt=q72Debt(X.A);

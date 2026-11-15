@@ -80,10 +80,10 @@ function fixPanel(){const P=document.getElementById("panel");if(!P)return;const 
  /* Con cái with the succession box (j51): who is heir / where each son stands is said there, once */
  if(tab==="kid"){const kv=P.querySelector(".kvbox");if(kv&&!kv.dataset.nr){kv.dataset.nr=1;const kvt=T(kv.textContent);const inKv=n=>n&&kvt.includes(n+" · ");
   P.querySelectorAll(".ph > span").forEach(s=>{const m=T(s.textContent).match(/^Thái tử: (.+?)\.$/);if(m&&inKv(m[1]))s.textContent=""});
-  const cn=T(P.querySelector(".pc .pcname")?.textContent);const full=[...kv.querySelectorAll(".pcrow")].map(r=>T(r.textContent)).find(t=>t.includes(" "+cn+" · "));
+  const cn=T(P.querySelector(".pc .pcname")?.textContent);const full=[...kv.querySelectorAll(".pcrow,.kr")].map(r=>T(r.textContent)).find(t=>t.includes(" "+cn+" · "));
   if(cn&&full)P.querySelectorAll(".pc .chips .chip").forEach(c=>{if(/^(Đích tử|Trưởng tử|Thái tử|Kế vị thứ \d+)$/.test(T(c.textContent)))c.remove()});
   /* Thượng thư phòng rows: age and mother already in the succession row */
-  P.querySelectorAll(".ktbox .pcrow > span > span:last-child").forEach(s=>{const m=T(s.textContent).match(/^(.+?) · \d+ tuổi · con .+$/);if(m&&inKv(m[1])&&!/con ngươi$/.test(T(s.textContent)))s.textContent=m[1];else if(m&&inKv(m[1]))s.innerHTML=s.innerHTML.replace(/ · \d+ tuổi · /," · ")})}}
+  P.querySelectorAll(".ktbox .pcrow > span > span:last-child,.ktbox .kr > .krl > span:last-child").forEach(s=>{const m=T(s.textContent).match(/^(.+?) · \d+ tuổi · con .+$/);if(m&&inKv(m[1])&&!/con ngươi$/.test(T(s.textContent)))s.textContent=m[1];else if(m&&inKv(m[1]))s.innerHTML=s.innerHTML.replace(/ · \d+ tuổi · /," · ")})}}
  /* Triều đình: the Emperor's mood is on his chip in the top bar */
  if(tab==="fac"){const em=document.getElementById("emp-m");P.querySelectorAll(".ph > span").forEach(s=>{const m=T(s.textContent).match(/^Tâm trạng Hoàng thượng: (.+)$/);if(m&&em&&T(em.textContent)===m[1])s.remove()})}
  /* Bảng phẩm vị: her Sủng/Danh are in the HUD */
@@ -106,22 +106,24 @@ function fixPanel(){const P=document.getElementById("panel");if(!P)return;const 
    if(t!==last){const h=document.createElement("div");h.dataset.nrh=1;h.appendChild(d.cloneNode(true));r.before(h);last=t}d.remove()})}
 }
 function fixModal(){const M=document.getElementById("modal");if(!M||M.hidden)return;
+ /* rows: legacy .pcrow (span | b) or the kit table row .kr (.krl | .krv), KIT §51 */
+ const RWS=()=>[...M.querySelectorAll(".pcrow,.kb>.kr")],RL=x=>x.querySelector(":scope>.krl")||x.querySelector("span"),RV=x=>x.querySelector(":scope>.krv")||x.querySelector("b");
  const nm=M.querySelector(".pcname"),rk=M.querySelector(".pcrk");
  if(nm&&rk){const n=T(nm.textContent),r=T(rk.textContent);
   if(r==="Hoàng thượng"&&n.startsWith("Hoàng thượng niên hiệu "))nm.textContent="Niên hiệu "+n.slice(23);
-  if(typeof S!=="undefined"&&S&&n===S.name&&(S.rank>=7||S.queen))M.querySelectorAll(".pcrow").forEach(x=>{if(T(x.querySelector("span")?.textContent)==="Hoàng hậu")x.remove()})}
+  if(typeof S!=="undefined"&&S&&n===S.name&&(S.rank>=7||S.queen))RWS().forEach(x=>{if(T(RL(x)?.textContent)==="Hoàng hậu")x.remove()})}
  /* end card: caption = highest rank */
- const cap=M.querySelector(".pfwrap .pfrw");if(cap){const row=[...M.querySelectorAll(".pcrow")].find(x=>T(x.querySelector("span")?.textContent)==="Phẩm cao nhất");if(row&&T(row.querySelector("b")?.textContent)===T(cap.textContent))HIDE(cap)}
+ const cap=M.querySelector(".pfwrap .pfrw");if(cap){const row=RWS().find(x=>T(RL(x)?.textContent)==="Phẩm cao nhất");if(row&&T(RV(row)?.textContent)===T(cap.textContent))HIDE(cap)}
  /* portrait captions: "Hoàng thượng / Hoàng thượng" */
  M.querySelectorAll("figcaption").forEach(f=>{const b=f.querySelector("b"),sm=f.querySelector("small");if(b&&sm&&T(b.textContent)===T(sm.textContent))sm.remove()});
  /* identity card */
- const rows=[...M.querySelectorAll(".pcrow")];const rv=l=>rows.find(x=>T(x.querySelector("span")?.textContent)===l);
+ const rows=RWS();const rv=l=>rows.find(x=>T(RL(x)?.textContent)===l);
  const xo=rv("Xuất thân"),vc=rv("Vào cung"),tu=rv("Tuổi");
  if(xo&&tu&&typeof S!=="undefined"&&S){
   const bio=[...M.querySelectorAll("p")].find(p=>p.querySelector("b")&&T(p.querySelector("b").textContent)===S.name&&!p.dataset.nr);
-  if(bio){bio.dataset.nr=1;const o=T(xo.querySelector("b")?.textContent);const t=T(bio.textContent);const pre=`${S.name}, ${S.age} tuổi, ${o}.`;if(t.startsWith(pre)){const rest=t.slice(pre.length).trim();if(rest)bio.textContent=rest;else bio.remove()}}
+  if(bio){bio.dataset.nr=1;const o=T(RV(xo)?.textContent);const t=T(bio.textContent);const pre=`${S.name}, ${S.age} tuổi, ${o}.`;if(t.startsWith(pre)){const rest=t.slice(pre.length).trim();if(rest)bio.textContent=rest;else bio.remove()}}
   const capR=[...M.querySelectorAll(".pcrk,.pfrw,figcaption small")].map(e=>T(e.textContent));
-  if(vc&&capR.includes(T(vc.querySelector("b")?.textContent)))vc.remove();
+  if(vc&&capR.includes(T(RV(vc)?.textContent)))vc.remove();
   M.querySelectorAll("p.past").forEach(p=>{if(/Phúc duyên đang có/.test(p.textContent)&&/đang có/.test(T(M.querySelector("button[disabled]")?.textContent))){p.innerHTML=p.innerHTML.replace(/\s*Phúc duyên đang có: <b>\d+<\/b>\./,"")}})}
 }
 /* result card: title, verdict and numbers are already on the card; the log line keeps only what is new */

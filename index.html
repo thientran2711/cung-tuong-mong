@@ -2210,7 +2210,7 @@ function renderPanel0(){const el=$("panel");let h="";faceInit();const gm=documen
  if(tab==="story"){const s=STORY[S.origin.k];if(s.calc)S.st.step=s.calc();
    h=`<div class="story"><h3>${s.t}</h3><p style="margin:0 0 4px">${s.goal}</p><p style="margin:0">Bước <b>${S.st.step}/${s.n}</b> · ${S.st.done===1?`<span class="g">Thành: ${S.st.tag}</span>`:S.st.done===-1?`<span class="r">Bại: ${S.st.tag}</span>`:s.hint()}</p></div>`;
    const c=(ok,t)=>`<span class="${ok?"y":"n"}">${ok?"✓":"✗"} ${t}</span>`;
-   h+=S.rank>=7?`<div class="req"><h3>Ngươi là Hoàng hậu</h3>Đưa con mình lên ngôi để thành Hoàng thái hậu.</div>`:`<div class="req"><h3>Điều kiện sắc phong ${RANKS[S.rank+1].n}</h3>${promoReq().map(([ok,t])=>c(ok,t)).join("<br>")}<br><span class="past">Ngôi Hoàng hậu về sau cần: ngôi bỏ trống, có hoàng tử và Thái hậu ${BAL.hhTh} (không con trai: Thái hậu ${has("hieuthao")?BAL.hhThNoSonHieu:BAL.hhThNoSon}), và <b class="${S.duc>=hhNeed(S).duc?"g":"r"}">Đức ${S.duc} (cần ${hhNeed(S).duc})</b> (mẹ Thái tử chỉ cần ${BAL.hhDucHeir}). Khi ngôi trống, Hoàng thượng chọn trong những người đủ điều kiện (nặng ở hoàng tử, Thái hậu, Danh).</span><br><span class="past">Đủ điều kiện thì cuối tháng có thánh chỉ. Sinh hoàng tử được thăng thêm một bậc.</span></div>`}
+   h+=S.rank>=7?`<div class="req"><h3>Ngươi là Hoàng hậu</h3>Đưa con mình lên ngôi để thành Hoàng thái hậu.</div>`:`<div class="req"><h3>Điều kiện sắc phong ${RANKS[S.rank+1].n}</h3>${kitReqRows(promoReq())}<span class="past">Ngôi Hoàng hậu về sau cần: ngôi bỏ trống, có hoàng tử và Thái hậu ${BAL.hhTh} (không con trai: Thái hậu ${has("hieuthao")?BAL.hhThNoSonHieu:BAL.hhThNoSon}), và <b class="${S.duc>=hhNeed(S).duc?"g":"r"}">Đức ${S.duc} (cần ${hhNeed(S).duc})</b> (mẹ Thái tử chỉ cần ${BAL.hhDucHeir}). Khi ngôi trống, Hoàng thượng chọn trong những người đủ điều kiện (nặng ở hoàng tử, Thái hậu, Danh).</span><br><span class="past">Đủ điều kiện thì cuối tháng có thánh chỉ. Sinh hoàng tử được thăng thêm một bậc.</span></div>`}
  if(tab==="inv")h=invHTML();
  if(tab==="rel")h=relHTML();
  if(tab==="staff")h=staffTabHTML();
@@ -2528,7 +2528,7 @@ function pcard(o){const f=o.f||{};const L=(o.lines||[]).filter(Boolean);const C=
  const G=(o.groups||[]).filter(g=>g&&g[1]&&g[1].filter(Boolean).length);
  const role=o.tabKey||"p";window.__pcTab=window.__pcTab||{};let act=window.__pcTab[role];if(!G.some(g=>g[0]===act))act=(G.find(g=>g[1].some(b=>/<button(?![^>]*disabled)/.test(b)))||G[0]||[])[0];
  const tabs=G.length>1?`<div class="pctabs">${G.map(([hd,B])=>{const n=B.filter(b=>/<button(?![^>]*disabled)/.test(b)).length,tot=B.filter(b=>/<button/.test(b)).length;return `<button class="pct${hd===act?" on":""}" data-pct="${hd}" data-role="${role}">${hd||"Việc"} <i title="làm được ${n} trên ${tot} việc">${n}/${tot}</i></button>`}).join("")}</div>`:"";
- const right=(o.note?`<p class="pcn">${o.note}</p>`:"")+tabs+(G.length?G.map(([hd,B])=>(G.length>1?`<div class="pcg${hd===act?" on":""}" data-g="${hd}">`:(hd?`<h5>${hd}</h5>`:""))+`<div class="pcb${String(B.filter(Boolean)[0]).startsWith('<div class="pcrow"')?" rows":""}">${B.filter(Boolean).join("")}</div>`+(G.length>1?"</div>":"")).join(""):(o.empty?`<p class="past">${o.empty}</p>`:""));
+ const right=(o.note?`<p class="pcn">${o.note}</p>`:"")+tabs+(G.length?G.map(([hd,B])=>(G.length>1?`<div class="pcg${hd===act?" on":""}" data-g="${hd}">`:(hd?`<h5>${hd}</h5>`:""))+(B.some(Array.isArray)?kitRows(B.filter(Array.isArray)):"")+(B=B.filter(x=>x&&!Array.isArray(x)),B.length?`<div class="pcb${String(B[0]).startsWith('<div class="pcrow"')?" rows":""}">${B.join("")}</div>`:"")+(G.length>1?"</div>":"")).join(""):(o.empty?`<p class="past">${o.empty}</p>`:""));
  return `<div class="pc${o.out?" out":""}" style="--c:${o.col||f.col||"var(--gold)"}"><div class="pcl">${pcPort(f,o.col,o.status)}<b class="pcname">${o.name}</b>${o.rank?`<span class="pcrk">${o.rank}</span>`:""}${o.ghen!=null?ghenBar(o.ghen):""}${L.length?`<div class="pcinfo">${L.map(x=>`<span>${x}</span>`).join("")}</div>`:""}${C.length?`<div class="chips">${C.join("")}</div>`:""}</div><div class="pcr">${o.close||""}${right}</div></div>`}
 /* one button: attrs string, name, small line, disabled reason ("" = enabled) */
 function pbtn(at,n,sm,why){const k=/class="oc/.test(sm||"")?sm:kitParse(sm||"");return `<button ${at}${why?" disabled":""}>${n}<small>${why?`<span class="kwhy">${why}</span> `:""}${k}</small></button>`}
@@ -2601,10 +2601,10 @@ function popCard(p,i){const opts=talkOpts(p),done=S.visit&&(S.visit.talked===tru
 
 /* ---- the Emperor / herself, opened as a card in the dialog ---- */
 function empCardHTML(){const E=S.emp;return pcard({f:pEmp(),col:"#f0d070",name:empName(),rank:"Hoàng thượng",lines:[tuoi(E.age),`Tâm trạng: <b>${MOODS[E.mood][0]}</b>`,`Ngài sủng ngươi <b>${S.sung}</b> · Ân tình <b>${S.an||0}</b>`],
- note:E.traits.map(t=>`<b>${ETRAITS[t][0]}</b>: ${ETRAITS[t][1]}`).join("<br>"),groups:[["Điều ngài thích",Object.keys(LIKES).map(k=>`<div class="pcrow"><span>${LIKEN[k]}</span><b>${E.known[k]?E.likes[k]:"chưa rõ"}</b></div>`)]],empty:""})+`<p class="past">Nói thật lòng với ngài, hoặc hỏi Kính sự phòng, để biết ngài thích gì.</p>`}
+ note:E.traits.map(t=>`<b>${ETRAITS[t][0]}</b>: ${ETRAITS[t][1]}`).join("<br>"),groups:[["Điều ngài thích",Object.keys(LIKES).map(k=>[LIKEN[k],E.known[k]?E.likes[k]:"chưa rõ",E.known[k]?"t":"n"])]],empty:""})+`<p class="past">Nói thật lòng với ngài, hoặc hỏi Kính sự phòng, để biết ngài thích gì.</p>`}
 function selfCardHTML(){const ch=[["Sắc",S.sac],["Tài",S.tai],["Tâm cơ",S.tamco],["Đức",S.duc],["Tai mắt",S.mat],["Thái hậu",S.th],["Hoàng hậu",S.hh]];
  return pcard({f:pMe(),col:RCOL[S.rank],name:S.name,rank:`${ic(RIMG[S.rank],16)}${S.rank>=7?"Hoàng hậu":RANKS[S.rank].n}`,lines:[`${S.origin.n}`,ageLine(S),`Bổng lộc: <b>${S.out?5:BL[Math.min(7,S.rank)]}</b> bạc/tháng · công kẻ hầu -${(S.staff||[]).length*WAGE}`,`Cung nữ ${S.maid.name} · lòng <b>${S.maid.loyal}</b>`],chips:[illOf(S)?chip(illName(S),"hot"):"",S.preg?chip(`${ic("thai",14)}Mang thai tháng ${S.preg}`,"hot"):"",facOf(S)?chip(`Phe ${facOf(S).name}`):""],
- groups:[["Tư chất",ch.map(([a,b])=>`<div class="pcrow"><span>${a}</span><b>${b}</b></div>`)],["Tài nghệ",ARTS.map(a=>`<div class="pcrow"><span>${ic(AIMG[a.k],14)}${a.n}</span><b>${S.arts[a.k]}</b></div>`)]]})}
+ groups:[["Tư chất",ch.map(([a,b])=>[a,b,"t"])],["Tài nghệ",ARTS.map(a=>[`${ic(AIMG[a.k],14)}${a.n}`,S.arts[a.k],"t"])]]})}
 /* ================= EXPORT / IMPORT A SAVE AS A TEXT CODE (title screen = settings) ================= */
 let XIO={m:"",slot:0,code:"",msg:"",imp:null,to:0,ask:0};
 function b64e(u8){let s="";for(let i=0;i<u8.length;i+=0x8000)s+=String.fromCharCode.apply(null,u8.subarray(i,i+0x8000));return btoa(s)}
@@ -2851,7 +2851,7 @@ function stipend(p){const r=rkOf(p),me=p===S,staff=(p.staff||[]).length;let base
 function payCuts(){const q=queenP();if(!q)return;for(const p of consorts()){if(p===q||p.out)continue;if(q!==S&&rel(q,p)<-30&&roll(20)){p.cutPay=Math.max(p.cutPay||0,1);p.cutBy=q.name;if(p===S)log(`<span class="r">Hoàng hậu ${q.name} sai Nội vụ phủ khất bổng lộc của ngươi tháng tới.</span>`)}}}
 /* the NPC Empress rewards her closest ally a little each season (two-way: she, as Empress, has 'Ban thưởng') */
 function queenRewards(){const q=queenP();if(!q||q===S||S.month%3)return;const L=consorts().filter(p=>p!==q&&!p.out).sort((a,b)=>rel(q,b)-rel(q,a));const w=L[0];if(!w||rel(q,w)<20)return;ap(w,{bac:20});w.ghen=cl((w.ghen||0)-5,0,100);if(w===S)log(`Hoàng hậu ${q.name} ban thưởng ngươi 20 bạc vì hiền thục. Bạc +20.`)}
-function blCard(){return `<p>Bổng lộc phát ngày đầu mỗi tháng, theo phẩm vị (mọi phi tần như nhau). Mỗi kẻ hầu ăn công ${WAGE} bạc/tháng.</p><div class="pcb rows">${BL.map((b,i)=>`<div class="pcrow"><span>${i>=7?"Hoàng hậu":RANKS[i].n}</span><b>${b} bạc</b></div><div class="pcrow"><span class="past">${BLG[i]}</span><span></span></div>`).join("")}</div><p class="past">Lãnh cung: chỉ 5 bạc. Cấm túc: nửa bổng. Hoàng hậu ghét ngươi (Hoàng hậu quý ngươi dưới -30): mỗi tháng sai Nội vụ phủ khất bổng (bớt 3 phần 10): ${chanceW(20)}. Sinh con, được ân thưởng: cộng thêm một lần.</p>`}
+function blCard(){return `<p>Bổng lộc phát ngày đầu mỗi tháng, theo phẩm vị (mọi phi tần như nhau). Mỗi kẻ hầu ăn công ${WAGE} bạc/tháng.</p>${kitRows(BL.map((b,i)=>[i>=7?"Hoàng hậu":RANKS[i].n,[`<span class="ef t">${b} bạc</span>`,BLG[i]].filter(Boolean),"n"]))}<p class="past">Lãnh cung: chỉ 5 bạc. Cấm túc: nửa bổng. Hoàng hậu ghét ngươi (Hoàng hậu quý ngươi dưới -30): mỗi tháng sai Nội vụ phủ khất bổng (bớt 3 phần 10): ${chanceW(20)}. Sinh con, được ân thưởng: cộng thêm một lần.</p>`}
 /* ân thưởng: every reward has silver + item + jealousy; recorded */
 const BBAC={night:0,contest:20,son:30,dau:15,promo:20,accuse:10,story:10,birthday:15,sinhthan:20,nurse:15};
 BEST.dau=["tuithom","sonphan","luahang"];BEST.sinhthan=["tramngoc","vongngoc","gamto"];BEST.nurse=["nhansam","yensao","agiao"];
@@ -2861,8 +2861,9 @@ BWHY.dau="mừng công chúa ra đời";BWHY.sinhthan="nhân sinh thần của n
   const m=Q[Q.length-1];if(Q.length>q0&&m&&m.t==="Thánh thượng ban thưởng")m.h+=`<p>${kitParse(`Chắc chắn · thành: ${IT[k].n}${bac?`, Bạc +${bac}`:""} · phi tần ghen +3`)}</p>`;log(`Ân thưởng ${BWHY[why]||""}: ${IT[k].n}${bac?`, Bạc +${bac}`:""}; phi tần ghen +3.`)}
  else{S.pg=0;p.pg=cl((p.pg||0)+3,0,100)}}})();
 const AREASON=[["Đêm thị tẩm vui","night"],["Thắng ở yến tiệc, thi tài","contest"],["Sinh hoàng tử","son"],["Sinh công chúa","dau"],["Được tấn phong","promo"],["Tố giác kẻ gian thành","accuse"],["Tuyến truyện thành","story"],["Tiết Vạn thọ (tháng 8, người được sủng nhất)","birthday"],["Sinh thần của ngươi (Sủng từ 50)","sinhthan"],["Hầu thuốc Hoàng thượng khi ngài bệnh","nurse"]];
-function awCard(){return `<p>Việc được ban thưởng và món được ban (một trong các món; mỗi lần: phi tần khác ghen +3):</p><div class="pcb rows">${AREASON.map(([n,k])=>`<div class="pcrow"><span>${n}</span><b>${(BEST[k]||[]).map(x=>IT[x]?IT[x].n:x).slice(0,3).join(", ")}${BBAC[k]?` · +${BBAC[k]} bạc`:""}</b></div>`).join("")}</div><p class="past">Sinh con, tấn phong, thi tài: được ban hiệu (Danh +5) nếu chưa có hiệu: ${chanceW(30)}. Hoàng hậu ban thưởng người thân cận mỗi mùa.</p>`+
- `<h3>Sổ ân thưởng</h3>${(S.awards||[]).length?`<div class="pcb rows">${S.awards.map(a=>`<div class="pcrow"><span>${a.d} · ${a.why}</span><b>${a.it}${a.bac?` · +${a.bac} bạc`:""}</b></div>`).join("")}</div>`:`<p class="past">Chưa được ban thưởng lần nào.</p>`}`}
+/* KIT §51: the rewards list and the award log are kit tables (kitRows); the jealousy is the kit relation chip (kitRel "them" label, red number) */
+function awCard(){return `<p>Việc được ban thưởng và món được ban (một trong các món; mỗi lần: ${kitChip(kitRel("them","phi tần khác ghen ta"),3,"r")}):</p>${kitRows(AREASON.map(([n,k])=>[n,[(BEST[k]||[]).map(x=>IT[x]?IT[x].n:x).slice(0,3).join(", "),BBAC[k]?kitChip("Bạc",BBAC[k],"g"):""].filter(Boolean),"t"]))}<p class="past">Sinh con, tấn phong, thi tài: được ban hiệu (Danh +5) nếu chưa có hiệu: ${chanceW(30)}. Hoàng hậu ban thưởng người thân cận mỗi mùa.</p>`+
+ `<h3>Sổ ân thưởng</h3>${(S.awards||[]).length?kitRows(S.awards.map(a=>[`${a.d} · ${a.why}`,[a.it,a.bac?kitChip("Bạc",a.bac,"g"):""].filter(Boolean),"t"])):`<p class="past">Chưa được ban thưởng lần nào.</p>`}`}
 /* hook the month: stipends for everyone, cuts, seasonal and calendar rewards */
 function monthPay(){let ev="";payCuts();const l=stipend(S);if(l)log(l);for(const v of liveRivals(true))stipend(v);queenRewards();
  if(S.month===8){const top=consorts().filter(p=>!p.out).sort((a,b)=>b.sung-a.sung)[0];if(top&&top.sung>=40)bestow(top,"birthday")}
@@ -3055,7 +3056,7 @@ function rivalsBuoi(){let ev="";for(const v of liveRivals(true)){if(!v.alive||v.
   const lo=BANDS[b][0],hi=b<3?BANDS[b+1][0]:100;let c=[0,.03,.04,.05][b]+[0,.03,.04,.05][b]*cl((d-lo)/(hi-lo),0,1);if(t.shield)c*=.5;if(t===S&&S.lot&&S.lot.dom==="Hung")c*=1.5;if(t===S&&S.guardWarn){c*=.5}if(t===S)c*=BAL.hz;
   if(Math.random()<c){ev+=seenNPC(v,t,npcAct(v,t));if(S.dead)return ev}}return ev}
 function dangerWord(v){kn();S.dKnown=S.dKnown||{};const k=S.dKnown[v.id];if(!k&&!knows(v))return `Có thể hại ngươi: <span class="ef n">chưa rõ</span>`;const b=bandOf(danger(v,S));if(k||knows(v)){if(!S.dKnown[v.id])S.dKnown[v.id]=wk()}return `Có thể hại ngươi: <span class="ef ${b>=2?"r":b===1?"r":"g"}">${BANDS[b][1]}</span>`}
-function bandCard(){return `<p>Mỗi người với một người khác có mức <b>Nguy hiểm</b> = Ghen hoặc Oán hoặc ghét (lấy cao nhất), cộng tính nết (Hiểm độc +10, Hiền lành -15, Nhu mì -10). Ai cũng theo cùng thang:</p><div class="pcb rows">${BANDS.map((b,i)=>`<div class="pcrow"><span>${i<3?`${b[0]}-${BANDS[i+1][0]-1}`:"80 trở lên"}</span><b>${i?`hại ${b[1]}`:"không ra tay"}</b></div>${i?`<div class="pcrow"><span class="past">${b[2].map(k=>ACT[k]?ACT[k].n:k).join(", ")}</span><span></span></div>`:""}`).join("")}</div><p class="past">Trong mỗi mức, càng gần mức trên càng hay ra tay. Ngươi hại ai thì Oán của họ tăng; Oán đủ cao thì họ lên mức trên.</p>`}
+function bandCard(){return `<p>Mỗi người với một người khác có mức <b>Nguy hiểm</b> = Ghen hoặc Oán hoặc ghét (lấy cao nhất), cộng tính nết (Hiểm độc +10, Hiền lành -15, Nhu mì -10). Ai cũng theo cùng thang:</p>${kitRows(BANDS.map((b,i)=>[i<3?`${b[0]}-${BANDS[i+1][0]-1}`:"80 trở lên",[`<span class="ef t">${i?`hại ${b[1]}`:"không ra tay"}</span>`].concat(i?[b[2].map(k=>ACT[k]?ACT[k].n:k).join(", ")]:[]),"n"]))}<p class="past">Trong mỗi mức, càng gần mức trên càng hay ra tay. Ngươi hại ai thì Oán của họ tăng; Oán đủ cao thì họ lên mức trên.</p>`}
 document.addEventListener("click",e=>{const b=e.target.closest("[data-ladder]");if(b){e.stopPropagation();if(!Q.length){Q.unshift({t:"Thang nguy hiểm",h:bandCard()});showModal()}}},true);
 (function(){const rc=rvCard;rvCard=function(v,i){let h=rc(v,i);if(v.alive&&!v.out)h=h.replace('<div class="pcinfo">',`<div class="pcinfo"><span>${dangerWord(v)} <button class="lnk ladi" data-ladder="1" title="Thang nguy hiểm" aria-label="Xem thang nguy hiểm">ⓘ</button></span>`);return h}})();
 /* B. people come to her: approaches each week by their traits and bonds; counted against what she starts herself */
@@ -3320,7 +3321,7 @@ function palCeremony(){if(!S||!S.palCer||S.dead)return;S.palCer=0;const occ={};[
 const CAPC=16;
 function tuyenTu(){if(!S||S.month!==2||S.tuan!==0||S.ttDone===S.year)return;if(S.year%3!==0&&liveRivals(true).length>=8)return;S.ttDone=S.year;const live=liveRivals(true).length+1;let n=Math.min(3+R(3),CAPC-live);const L=[];
  while(n-->0&&roomFor("consort")){const v=newRival(roll(60)?0:1);Object.assign(v,drawFace());v.age=15+R(4);rivals.push(v);L.push(v)}palFix();
- if(L.length){log(`Tuyển tú: ${L.map(v=>`${v.name} (${RANKS[v.rank].n})`).join(", ")} vào cung.`);if(!quiet)Q.push({t:"Tuyển tú",h:`<p>Mùa xuân năm thứ ${S.year}, cung tuyển tú nữ. ${L.length} người vào cung:</p><div class="pcb rows">${L.map(v=>`<div class="pcrow"><span>${mdH(pv(v),"xs")} ${v.name}</span><b>${RANKS[v.rank].n} · ${houseName(v)}</b></div>`).join("")}</div>`})}}
+ if(L.length){log(`Tuyển tú: ${L.map(v=>`${v.name} (${RANKS[v.rank].n})`).join(", ")} vào cung.`);if(!quiet)Q.push({t:"Tuyển tú",h:`<p>Mùa xuân năm thứ ${S.year}, cung tuyển tú nữ. ${L.length} người vào cung:</p>${kitRows(L.map(v=>[`${mdH(pv(v),"xs")}${v.name}`,`${RANKS[v.rank].n} · ${houseName(v)}`,"t"]))}`})}}
 /* the cap applies to every way a consort enters */
 (function(){const r0=roomFor;roomFor=function(role){if(role==="consort"&&S&&rivals&&liveRivals(true).length+1>=CAPC)return false;return r0.apply(this,arguments)}})();
 /* MAP: every palace hotspot shows its plan name and its residents' faces (residence is public); silhouettes count who is there now */
@@ -3577,8 +3578,8 @@ A("xinhh","Xin Hoàng hậu giáng",{c:{bac:-30},ok:(a,t)=>{const q=queenP();ret
 /* monthly: demotion review, then seats filled by weighing */
 (function(){const e0=endTurn;endTurn=function(){const t0=S&&S.turn;const r=e0.apply(this,arguments);try{if(S&&!S.dead&&S.turn!==t0){const a=demoteReview();const b=fillSeats();palFix&&palFix()}}catch(e){}return r}})();
 /* the rank board: seats used / total and who holds them */
-(function(){const r0=rankBoard;rankBoard=function(){let h=r0.apply(this,arguments);const rows=[7,6,5,4,3].map(r=>{const H=holders(r).concat(r===7?[]:[]);const cap=SEATCAP[r];return `<div class="pcrow"><span>${r>=7?"Hoàng hậu":RANKS[r].n} <b>${H.length}/${cap}</b></span><span>${H.map(p=>mdH(p===S?pMe():pv(p),"xs")).join("")}${H.length<cap?' <span class="ef g">còn ghế</span>':""}</span></div>`}).join("")+`<div class="pcrow"><span>Quý nhân, Thường tại, Đáp ứng</span><span class="past">không giới hạn</span></div>`;
- return h.replace('<div class="rboard">',`<div class="rboard"><h3>Ghế theo phẩm</h3><div class="pcb rows">${rows}</div>`)}})();
+(function(){const r0=rankBoard;rankBoard=function(){let h=r0.apply(this,arguments);const rows=kitRows([7,6,5,4,3].map(r=>{const H=holders(r);const cap=SEATCAP[r];return [`${r>=7?"Hoàng hậu":RANKS[r].n} ${H.length}/${cap}`,`${H.map(p=>mdH(p===S?pMe():pv(p),"xs")).join("")}${H.length<cap?' <span class="ef g">còn ghế</span>':""}`||"-","t"]}).concat([["Quý nhân, Thường tại, Đáp ứng","không giới hạn","n"]]));
+ return h.replace('<div class="rboard">',`<div class="rboard"><h3>Ghế theo phẩm</h3>${rows}`)}})();
 /* her requirement list shows 'Đủ điều kiện · chờ ghế trống' with the holders' faces */
 function seatWait(){const r=S.rank;if(r>=6||SEATCAP[r+1]==null||seatFree(r+1))return"";const rest=promoReqP(S).filter(x=>!x[0]&&!/Chờ ghế/.test(x[1]));if(rest.length)return"";return `<div class="rl"><span class="ef n">Đủ điều kiện · chờ ghế trống (${seatTxt(r+1)})</span> ${holders(r+1).map(p=>mdH(pv(p),"xs")).join("")}</div>`}
 (function(){const r0=rankBoard;rankBoard=function(){const h=r0.apply(this,arguments);const w=seatWait();return w?h.replace('<h3>Ghế theo phẩm</h3>',`${w}<h3>Ghế theo phẩm</h3>`):h}})();
@@ -3628,14 +3629,14 @@ function lifeSave(fate){const p=lifeLog();const kids=S.kids.filter(k=>k.alive).l
 function overAlive(fate,a){if(a===true||a===false)return a;return /thoái vị|xuất cung|ra khỏi cung|xuất gia|về quê|ẩn cư|an hưởng|còn sống|trốn khỏi cung|tự do|nhường ngôi/i.test(String(fate||""))&&!/chết|qua đời|tự vẫn|băng hà|ban chết|xử tử/i.test(String(fate||""))}
 function over(h,t,fate,alive){if(S.dead)return"";const live=overAlive(fate,alive);S.dead=true;S.fate=fate;record(fate);lifeSave(fate);const ms=mySons().length,md=myDaus().length;const ch=deathChain(fate);
  Q=[{t:"Kiếp này",cls:"end",who:pMe(),h:`<h3>${h}</h3><p>${t}</p>${ch.length?`<div class="pcb rows">${ch.map(x=>`<div class="pcrow"><span>${x}</span></div>`).join("")}</div>`:""}
-  <div class="pcb rows"><div class="pcrow"><span>Thân phận</span><b>${S.name} · ${S.origin.n}</b></div><div class="pcrow"><span>Sống trong cung</span><b>${S.year} năm · ${S.age} tuổi</b></div><div class="pcrow"><span>Phẩm cao nhất</span><b>${Math.max(S.rank,S.maxRank||0)>=7?"Hoàng hậu":RANKS[Math.max(S.rank,S.maxRank||0)].n}</b></div><div class="pcrow"><span>Con cái</span><b>${ms} hoàng tử, ${md} công chúa</b></div><div class="pcrow"><span>${live?"Kết cục":"Chết vì"}</span><b>${fate}</b></div></div>
+  ${kitRows([["Thân phận",`${S.name} · ${S.origin.n}`,"t"],["Sống trong cung",`${S.year} năm · ${S.age} tuổi`,"t"],["Phẩm cao nhất",Math.max(S.rank,S.maxRank||0)>=7?"Hoàng hậu":RANKS[Math.max(S.rank,S.maxRank||0)].n,"t"],["Con cái",`${ms} hoàng tử, ${md} công chúa`,"t"],[live?"Kết cục":"Chết vì",fate,"t"]])}
   <p class="past">${live?"Kiếp này khép lại.":"Chết là hết."} Kiếp sau bắt đầu lại từ đầu, chỉ còn tên trong Sổ luân hồi.</p>`,btn:"Chuyển kiếp",onClose:start}];
  showModal();render();return""}
 /* the highest rank this life reached */
 (function(){const e0=endTurn;endTurn=function(){const r=e0.apply(this,arguments);try{if(S)S.maxRank=Math.max(S.maxRank||0,S.rank)}catch(e){}return r}})();
 /* Sổ luân hồi on the title screen and in the log */
 function pastHTML(){const p=lifeLog();if(!p.length){const o=store.get("cung-kiep")||[];return o.length?`<h3>Sổ luân hồi</h3><div class="past">`+o.map((k,i)=>`Kiếp ${o.length-i}: ${k.n}, ${k.o}, ${k.r}, ${k.age} tuổi. ${k.f}.`).join("<br>")+`</div>`:""}
- return `<h3>Sổ luân hồi</h3><div class="pcb rows">${p.slice(0,12).map((k,i)=>`<div class="pcrow"><span><span class="md xs" style="--c:#b08a5a">${k.fc?`<img src="${fsrc(k.fc,"")}" alt="" onerror="this.remove()">`:""}</span> Kiếp ${p.length-i}: <b>${k.n}</b> · ${k.o}</span><span class="past">${k.r} · ${k.y} năm · ${k.kids} con · ${k.f}</span></div>`).join("")}</div>`}
+ return `<h3>Sổ luân hồi</h3>${kitRows(p.slice(0,12).map((k,i)=>[`<span class="md xs" style="--c:#b08a5a">${k.fc?`<img src="${fsrc(k.fc,"")}" alt="" onerror="this.remove()">`:""}</span>Kiếp ${p.length-i}: ${k.n}`,`${k.o} · ${k.r} · ${k.y} năm · ${k.kids} con · ${k.f}`,"n"]))}`}
 /* ================= SEASONAL THEME: tokens only on top of the kit; festivals override; effect colours unchanged ================= */
 function themeTick(){if(!S)return;const sea=SEAK[SEASON[S.month-1]]||"ha";const f=festToday();const b=document.body;if(b.dataset.sea!==sea)b.dataset.sea=sea;const fk=f&&["newyear","trungthu","thattich","giaothua","nguyentieu"].includes(f.k)?f.k:"";if((b.dataset.fest||"")!==fk){if(fk)b.dataset.fest=fk;else delete b.dataset.fest}}
 (function(){const r0=render;render=function(){const r=r0.apply(this,arguments);try{themeTick()}catch(e){}return r}})();
@@ -3651,7 +3652,7 @@ function candOK(p,r){if(p.out||p.confined||(p!==S&&!p.alive))return false;if(rkO
 function contestOpen(r){if(ct())return"";const C=consorts().filter(p=>candOK(p,r));if(!C.length)return"";if(C.length===1&&C[0]!==S){return promoteP(C[0])||""}
  const len=r===7?3:1;S.contest={r,c:C.map(key),t0:wk(),len,round:0,sc:{},bk:{},pr:{},sab:{},dq:[],hint:0};
  const t=`Khuyết ghế ${r>=7?"Hoàng hậu":RANKS[r].n}; trong ${r===7?"một tháng":"hai tuần"} sẽ chọn người.`;log(`<b>${t}</b> Ứng viên: ${C.map(p=>p===S?"ngươi":p.name).join(", ")}.`);
- if(!quiet&&C.includes(S))Q.push({t:"Tranh ghế",who:pEmp(),h:`<p>${t}</p><p>Ba vòng: <b>Tài nghệ</b> trước Hoàng thượng, <b>Đức hạnh</b> trước Thái hậu, <b>Thế lực</b> (ai đứng sau ngươi).${has("trongtai")?" Ngài trọng tài nghệ (vòng 1 ×1,5).":""}${has("hieuthao")?" Ngài hiếu thảo (vòng 2 ×1,5).":""}${has("danghi")?" Ngài đa nghi (vòng 3 ×0,6).":""}</p><div class="pcb rows">${C.map(p=>`<div class="pcrow"><span>${mdH(p===S?pMe():pv(p),"xs")} ${p===S?"Ngươi":p.name}</span><b>${p===S?RANKS[S.rank].n:RANKS[p.rank].n}</b></div>`).join("")}</div><p class="past">Giữa các vòng: luyện tập, vận động, hoặc ra tay với đối thủ (bị lộ là bị loại và bị phạt).</p>`});return ""}
+ if(!quiet&&C.includes(S))Q.push({t:"Tranh ghế",who:pEmp(),h:`<p>${t}</p><p>Ba vòng: <b>Tài nghệ</b> trước Hoàng thượng, <b>Đức hạnh</b> trước Thái hậu, <b>Thế lực</b> (ai đứng sau ngươi).${has("trongtai")?" Ngài trọng tài nghệ (vòng 1 ×1,5).":""}${has("hieuthao")?" Ngài hiếu thảo (vòng 2 ×1,5).":""}${has("danghi")?" Ngài đa nghi (vòng 3 ×0,6).":""}</p>${kitRows(C.map(p=>[`${mdH(p===S?pMe():pv(p),"xs")}${p===S?"Ngươi":p.name}`,p===S?RANKS[S.rank].n:RANKS[p.rank].n,"t"]))}<p class="past">Giữa các vòng: luyện tập, vận động, hoặc ra tay với đối thủ (bị lộ là bị loại và bị phạt).</p>`});return ""}
 /* scoring, one formula for all */
 function bestArtOf(p){const A=p.arts||{};return ["cam","ky","thi","hoa","vu"].sort((a,b)=>(A[b]||0)-(A[a]||0))[0]}
 function tScore(p,art,mini){const g=(p.arts||{})[art]||0;const base=Math.min(10,g*1.6+(mini!=null?mini*1.5:R(4)*1.2)+((ct().pr[key(p)]||0)*1.5)-((ct().sab[key(p)]||0)*2)+((p.suc||60)<40?-2:0));return cl(Math.round(base),0,10)}
@@ -3674,7 +3675,7 @@ function myBetween(){if(quiet)return;const c=ct();const R2=c.c.map(byKey).filter
  Q.push({t:"Tranh ghế: giữa các vòng",who:pMe(),h:`<p>Còn ${3-c.round} vòng. Ngươi dùng mấy ngày này thế nào?</p>${scoreTable()}`,opts:[{n:"Luyện tập",fx:{suc:-10},x:"vòng Tài nghệ +1,5",go:()=>{c.pr.me=(c.pr.me||0)+1}},{n:"Vận động người đỡ đầu",fx:{bac:-30},x:`${word(55)} · thành: thêm một người đứng sau (Thế lực +2)`,go:()=>{if(roll(55))(c.bk.me=c.bk.me||[]).push(pick(["một vị thượng thư","Tổng quản thái giám","một vị vương phi"]))}},top?{n:`Ra tay với ${top.name}`,fx:{},x:`${word(cl(40+S.tamco/4,5,90))} · thành: nàng mất 2 phần · hỏng: bị bắt quả tang, loại khỏi cuộc tranh ghế, Danh -6, Sủng -8: ${chanceW(50)}`,go:()=>sabotage(S,top)}:null].filter(Boolean)})}
 /* talking to the Emperor or the Thái hậu during a contest shows which answer they prize */
 (function(){const t1=talk;talk=function(oi){const p=S&&curPeople()[popIdx];const r=t1.apply(this,arguments);try{if(ct()&&p&&(p.kind==="emp"||p.kind==="th")&&!ct().hint){ct().hint=1;log(`Qua chuyện trò, ngươi đoán được ${p.kind==="emp"?"Hoàng thượng":"Thái hậu"} trọng ${({nhan:"lòng nhân",le:"lễ phép",tri:"sự sáng suốt"})[judgeVirtue()]}.`)}}catch(e){}return r}})();
-function scoreTable(){const c=ct();if(!c)return"";return `<div class="pcb rows">${c.c.map(byKey).filter(Boolean).map(p=>{const s=c.sc[key(p)]||[];const tot=s.reduce((a,b,i)=>a+b*crW(i),0);return `<div class="pcrow"><span>${mdH(p===S?pMe():pv(p),"xs")} ${p===S?"Ngươi":p.name}${c.dq.includes(key(p))?' <span class="ef r">bị loại</span>':""}</span><b>${s.map((x,i)=>`${CR[i][0]}${x}`).join(" · ")||"-"}${s.length?` = ${Math.round(tot*10)/10}`:""}</b></div>`}).join("")}</div>`}
+function scoreTable(){const c=ct();if(!c)return"";return kitRows(c.c.map(byKey).filter(Boolean).map(p=>{const s=c.sc[key(p)]||[];const tot=s.reduce((a,b,i)=>a+b*crW(i),0);return [`${mdH(p===S?pMe():pv(p),"xs")}${p===S?"Ngươi":p.name}${c.dq.includes(key(p))?' <span class="ef r">bị loại</span>':""}`,`${s.map((x,i)=>`${CR[i][0]}${x}`).join(" · ")||"-"}${s.length?` = ${Math.round(tot*10)/10}`:""}`,"t"]}))}
 function runRound(){const c=ct();const i=c.round;const C=c.c.map(byKey).filter(p=>p&&(p===S||p.alive)&&!c.dq.includes(key(p)));
  for(const p of C){if(p===S)continue;const s=c.sc[key(p)]=c.sc[key(p)]||[];s[i]=i===0?tScore(p,bestArtOf(p)):i===1?dScore(p,roll(40+(p.tamco||0)/2)?judgeVirtue():pick(["nhan","le","tri"])):fScore(p)}
  if(C.includes(S)){const s=c.sc.me=c.sc.me||[];
@@ -4516,7 +4517,7 @@ function srvMapFix(){const m=srvM(),mk=m&&palaceOf(m);document.querySelectorAll(
 function srvHead(){const m=srvM();if(!m)return"";const w=srvWhere(m),mk=palaceOf(m);const sn=S.srv.sent&&!S.srv.sent.done&&S.srv.sent.until>=bid()?S.srv.sent:null;
  if(S.srv.lau>0)return `<div class="srvhead">${mdH(pMe(),"sm")}<span><b>Cung nữ Tân Giả khố</b> · <b class="r">còn ${S.srv.lau} tuần</b> · giặt đủ thì được về sớm; hết hạn, Nội vụ phủ chia về hầu chủ mới.</span></div>`;
  return `<div class="srvhead">${mdH(pv(m),"sm")}<span><b>${srvTitle()}</b> · chủ ${m.trait}${m.trait2?", "+m.trait2:""} · ${w===mk?"đang ở cung":"đang ở "+placeOf(w).n} · Chủ tin <b class="${S.tin<30?"r":S.tin>=60?"g":""}">${S.tin}</b>${sn?` · <b class="g">Việc chủ sai: ${sn.n} (đến ${placeOf(sn.k).n})</b>`:""}${S.srv.lau>0?` · <b class="r">Tân Giả khố còn ${S.srv.lau} tuần</b>`:""}</span></div>`}
-function srvRows(){const m=srvM();const need=(S.srv.rk+1)*5,mx=srvMax();const row=(a,b)=>`<div class="pcrow"><span>${a}</span><b>${b}</b></div>`;
+function srvRows(){const m=srvM();const need=(S.srv.rk+1)*5,mx=srvMax();const row=(a,b)=>[a,b,"t"];/* KIT §51: kit table rows (pcard group → kitRows) */
  return [row("Thân phận",srvTitle()),row("Công lao",`${Math.floor(S.srv.mp)}/${need}${S.srv.rk>=mx?` · bậc cao nhất cung ${m?m.name:""} cho phép`:` · đủ thì lên ${SRK.maid[S.srv.rk+1]||""}`}`),row("Lương tháng",`${CNV_WAGE[S.srv.rk]} bạc · đang có ${S.bac}`),
   row("Hoàng thượng để ý",`${S.nt}/100 · từ 45, mỗi lần để ý ngươi ngài hỏi tên, phong ${RANKS[0].n}: ${chanceW(Math.max(0,S.nt/2-10))}`),row("Ban gả",S.srv.rk>=2?`Danh ${S.danh}/20 · đủ thì có người xin cưới`:"cần Đại cung nữ, Danh 20"),
   row("Xuất cung",S.srv.mama?"ma ma: ở đến 45 tuổi":`${S.age}/25 tuổi${S.srv.rk>=3?" · chưởng sự được ở lại làm ma ma":""}`),
@@ -4628,7 +4629,7 @@ PEND.cnvPrince=pp=>{const m=manById(pp.m);if(!isSrv()||!m||!srvAdult(m))return n
 (function(){const a0=PEND.cnvAge;PEND.cnvAge=pp=>{const d=a0(pp);try{const b=srvBond();if(d&&b)d.o.unshift({n:`Xuất cung thành thân với ${b.name}`,fx:{},x:`kết thúc kiếp này · ${b.name} ${tinhW(b.tinh)}`,go:()=>over("Thành thân",`${S.name} ${S.age} tuổi, rời cung theo lệ. Ngoài cửa Thần Vũ, ${b.name} đã đứng chờ. Hai người thành thân, sống nốt đời bên nhau.`,`Xuất cung thành thân với ${b.name}`)})}catch(e){}return d}})();
 (function(){const o0=over;over=function(h,t,fate){if(isSrv()&&h==="Xuất cung"&&/30 tuổi/.test(t)){const b=srvBond();if(b){h="Thành thân";t+=` ${b.name} chờ ngươi ngoài cửa cung; hai người thành thân.`;fate=`Xuất cung thành thân với ${b.name}`}}return o0.call(this,h,t,fate)}})();
 /* her road page shows her bonds */
-(function(){const r0=srvRows;srvRows=function(){const L=r0.apply(this,arguments);try{const row=(a,b)=>`<div class="pcrow"><span>${a}</span><b>${b}</b></div>`;const H=srvMen().filter(m=>m.tinh>=10||m.af>=10);
+(function(){const r0=srvRows;srvRows=function(){const L=r0.apply(this,arguments);try{const row=(a,b)=>[a,b,"t"];/* KIT §51: kit table rows (pcard group → kitRows) */const H=srvMen().filter(m=>m.tinh>=10||m.af>=10);
  L.push(row("Nam nhân",H.length?H.map(m=>`${m.role} ${m.name.split(" ").slice(-2).join(" ")}: ${tinhW(m.tinh)}${S.srv.vow===m.id?" · đã hẹn ước":""}${S.srv.lover===m.id?" · tư tình":""}`).join("; "):"chưa quen ai (gặp ở vườn, điện, Thái y viện)"));
  if(S.srv.rumor||S.srv.leak)L.push(row("Lời đồn",`${S.srv.rumor||0}${S.srv.leak&&RV(S.srv.leak)?" · "+RV(S.srv.leak).name+" biết chuyện":""}`));
  if(S.srv.preg)L.push(row("Mang thai",`tháng ${S.srv.preg?S.srv.pregM+1:0}/3 · tháng thứ 3 thì lộ: bị đánh chết: ${chanceW(50)}, không thì bị đuổi khỏi cung`));
@@ -4727,8 +4728,8 @@ function kvLabels(k,o){o=o||kvOrder();const i=kvPos(o,k);if(i<0)return[];const x
 (function(){const kc=kidCard;kidCard=function(k){window.__kvKid=k&&k.alive&&k.sex==="m"?k:null;try{return kc.apply(this,arguments)}finally{window.__kvKid=null}}})();
 (function(){const rc=rvCard;rvCard=function(v){let h=rc.apply(this,arguments);try{const o=kvOrder();for(const k of (v.kids||[]).filter(k=>k.alive&&k.sex==="m")){const L=kvLabels(k,o).filter(t=>!/^Kế vị/.test(t));if(L.length)h=h.split(`${k.name} · ${k.age} tuổi`).join(`${k.name} · ${k.age} tuổi · ${L.join(" · ")}`)}}catch(e){}return h}})();
 function kvBoxHTML(){const o=kvOrder();if(!o.length)return `<div class="kvbox"><h5>Thứ tự kế vị</h5><p class="past">Trong cung chưa có hoàng tử.</p></div>`;
- const rows=o.slice(0,3).map((x,i)=>`<div class="pcrow"><span>${mdH(kidFace(x.k),"xs")}<span>${i+1}. ${x.k.name} · ${x.k.age} tuổi · con ${x.v?x.v.name:"<b class=\"g\">ngươi</b>"}${x.v&&(!x.v.alive||x.v.out)?(x.v.alive?" (lãnh cung)":" (đã mất)"):""}</span></span><b>${kvWhy(x)}${x.k.age<6?" · chưa đủ 6 tuổi":""}</b></div>`).join("");
- return `<div class="kvbox"><h5>Thứ tự kế vị</h5><div class="pcb rows">${rows}</div><p class="past">Lập đích, lập trưởng, lập hiền: con Hoàng hậu đứng đầu, rồi hoàng tử lớn nhất; tài và lòng thương của Hoàng thượng, phẩm vị mẹ và Thái hậu cũng tính. Băng hà khi chưa lập Thái tử: đích tử lên ngôi, không có thì trưởng tử.${o.length>3?` Còn ${o.length-3} hoàng tử khác.`:""}</p></div>`}
+ const rows=kitRows(o.slice(0,3).map((x,i)=>[`${mdH(kidFace(x.k),"xs")}<span>${i+1}. ${x.k.name} · ${x.k.age} tuổi · con ${x.v?x.v.name:"<b class=\"g\">ngươi</b>"}${x.v&&(!x.v.alive||x.v.out)?(x.v.alive?" (lãnh cung)":" (đã mất)"):""}</span>`,`${kvWhy(x)}${x.k.age<6?" · chưa đủ 6 tuổi":""}`,"t"]));
+ return `<div class="kvbox"><h5>Thứ tự kế vị</h5>${rows}<p class="past">Lập đích, lập trưởng, lập hiền: con Hoàng hậu đứng đầu, rồi hoàng tử lớn nhất; tài và lòng thương của Hoàng thượng, phẩm vị mẹ và Thái hậu cũng tính. Băng hà khi chưa lập Thái tử: đích tử lên ngôi, không có thì trưởng tử.${o.length>3?` Còn ${o.length-3} hoàng tử khác.`:""}</p></div>`}
 (function(){const k0=kidTabHTML;kidTabHTML=function(hl){let h=k0.apply(this,arguments);try{const i=h.indexOf("</span></div>");if(i>=0){const j=i+"</span></div>".length;h=h.slice(0,j)+kvBoxHTML()+h.slice(j)}}catch(e){}return h}})();
 (function(){const st=document.createElement("style");st.textContent=".kvbox{margin:0 0 6px}.kvbox .pcrow{align-items:center}.kvbox .pcrow>span{min-width:0;overflow-wrap:anywhere;display:flex;align-items:center;gap:5px}.kvbox .pcrow>span .md{flex-shrink:0;margin:0}.kvbox .pcrow b{text-align:right;flex-shrink:0;max-width:48%}.kvbox .past{margin:2px 0 0;font-size:.72rem}";document.head.appendChild(st)})();
 /* ================= j52: PHÚC DUYÊN + THÂN PHẬN ĐỊNH SẴN (owner 11/14) =================
@@ -4773,11 +4774,11 @@ function nlFigsReady(){try{return typeof FIGSIG==="undefined"||FIGSIG!==""}catch
 function nlBegin(){const go=()=>{const d=nlGet();NLP={seed:d.seed};nlRun(d);if(d.re)S.nlRe=d.re;nlFaces(d);nlCard()};
  if(nlFigsReady())return go();let n=0;const t=setInterval(()=>{if(nlFigsReady()||++n>=25){clearInterval(t);go()}},100)}
 start=function(){if(window.__nlInner)return _start52.apply(this,arguments);return nlBegin()};
-function nlStat(l,v){return `<div class="pcrow"><span>${l}</span><b>${v}</b></div>`}
+function nlStat(l,v){return [l,v,"t"]}/* KIT §51: a kit table row */
 function nlCardHTML(){const o=S.origin,pts=pdGet(),ok=pts>=PD_COST,srv=typeof isSrv==="function"&&isSrv();
  const pos=srv?"Cung nữ":o.k==="cnv"?"Cung nữ":RANKS[S.rank].n;
  return `<p><b>${S.name}</b>, ${S.age} tuổi, ${o.n}. ${o.t}</p>
- <div class="pcb rows">${nlStat("Xuất thân",o.n)}${nlStat("Vào cung",pos)}${nlStat("Tuổi",S.age)}${nlStat("Tài",S.tai)}${nlStat("Sắc",S.sac)}${nlStat("Tâm cơ",S.tamco)}${nlStat("Đức",S.duc)}${nlStat("Danh",S.danh)}${nlStat("Thái hậu ưa",S.th)}${nlStat("Bạc",S.bac)}${nlStat("Hoàng thượng",`${S.emp.era}, ${S.emp.age} tuổi`)}</div>
+ ${kitRows([nlStat("Xuất thân",o.n),nlStat("Vào cung",pos),nlStat("Tuổi",S.age),nlStat("Tài",S.tai),nlStat("Sắc",S.sac),nlStat("Tâm cơ",S.tamco),nlStat("Đức",S.duc),nlStat("Danh",S.danh),nlStat("Thái hậu ưa",S.th),nlStat("Bạc",S.bac),nlStat("Hoàng thượng",`${S.emp.era}, ${S.emp.age} tuổi`)])}
  <p class="past">Thân phận này đã định sẵn: tải lại trang, chọn ô khác hay bấm Kiếp mới vẫn ra đúng thân phận này. Phúc duyên đang có: <b>${pts}</b>.</p>
  <div class="opts nlopts"><button class="opt" data-nl="ok">Nhận thân phận<small>tốn: không · thành: bắt đầu kiếp này</small></button>
  <button class="opt" data-nl="re" ${ok?"":"disabled"}>Đổi thân phận (−${PD_COST} Phúc duyên)${ok?`<small>tốn: Phúc duyên -${PD_COST} · thành: thân phận mới (cũng định sẵn)</small>`:`<small data-kp="1">Cần ${PD_COST} Phúc duyên, đang có ${pts}</small>`}</button></div>`}
@@ -5056,8 +5057,8 @@ function ktLines(k){ktSync(k);const L=[tcLine(k,true),hienLine(k,true),k.age>=BA
   h=h.replace('<div class="pcr">',`<div class="pcr"><h5>Học hành</h5><div class="pcb">${ktBtns(k).join("")}</div>`)}catch(e){}return h}})();
 (function(){const h0=homePeople;homePeople=function(){const P=h0.apply(this,arguments);try{P.forEach(p=>{if(p.kind==="kid"&&p.ref&&p.info){ktSync(p.ref);p.info=p.info.replace(/ · Tài \d+/,p.ref.age>=BAL.tc.barAge?` · Văn ${ktR(p.ref.tv)} · Võ ${ktR(p.ref.tw)} · Đức ${ktR(p.ref.td)}`:"")}})}catch(e){}return P}})();
 function ktBoxHTML(){const A=allKids().filter(([k])=>k.alive&&k.age>=6);const L=A.filter(([k,v])=>!v||k.lt).sort((a,b)=>(!!a[1])-(!!b[1])||((b[0].lt&&b[0].lt.r==="ex")-(a[0].lt&&a[0].lt.r==="ex")));if(!A.length)return "";const rest=A.length-L.length;
- const rows=L.map(([k,v])=>`<div class="pcrow"><span>${mdH(kidFace(k),"xs")}<span>${k.name} · ${k.age} tuổi · con ${v?v.name:"<strong class=\"g\">ngươi</strong>"}</span></span><b>${ktLast(k)||"chưa thi lần nào"}</b></div>`).join("");
- return `<div class="ktbox"><h5>Thượng thư phòng</h5><div class="pcb rows">${rows}</div><p class="past">${rest?`Còn ${rest} hoàng tự chưa dự kỳ thử tài nào. `:""}Kết quả các kỳ Hoàng thượng thử tài (cả cung đều biết). Câu đối Tết tháng 12, khảo bài tháng 4–5, yến Trung thu tháng 8, thu săn tháng 10.</p></div>`}
+ const rows=kitRows(L.map(([k,v])=>[`${mdH(kidFace(k),"xs")}<span>${k.name} · ${k.age} tuổi · con ${v?v.name:"<strong class=\"g\">ngươi</strong>"}</span>`,ktLast(k)||"chưa thi lần nào",ktLast(k)?"t":"n"]));
+ return `<div class="ktbox"><h5>Thượng thư phòng</h5>${rows}<p class="past">${rest?`Còn ${rest} hoàng tự chưa dự kỳ thử tài nào. `:""}Kết quả các kỳ Hoàng thượng thử tài (cả cung đều biết). Câu đối Tết tháng 12, khảo bài tháng 4–5, yến Trung thu tháng 8, thu săn tháng 10.</p></div>`}
 (function(){const k0=kidTabHTML;kidTabHTML=function(){let h=k0.apply(this,arguments);try{ktSyncAll();const i=h.lastIndexOf("</div>");if(i>=0)h=h.slice(0,i)+ktBoxHTML()+h.slice(i)}catch(e){}return h}})();
 (function(){const st=document.createElement("style");st.textContent=".ktbars{display:flex;flex-wrap:wrap;gap:2px 0}.sbar.kv .sbt u{background:#4a6fa5}.sbar.kw .sbt u{background:#a5583a}.sbar.kd .sbt u{background:#5a9a6a}"+
  ".ktlist{display:flex;flex-direction:column;gap:4px;margin:6px 0}.ktr{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:2px 8px;padding:3px 0;border-bottom:1px solid rgba(0,0,0,.08)}.ktr>span{min-width:0;overflow-wrap:anywhere;display:flex;align-items:center;gap:5px}.ktr>span .md{flex-shrink:0;margin:0}.ktr small{flex-basis:100%;font-size:.75rem}.ktr .md{vertical-align:middle}"+
@@ -9373,12 +9374,12 @@ function q72Role(a){return a.f&&a.f.rw?a.f.rw:a.k==="emp"?"Hoàng thượng":a.k
 function q72Card(x){const X=q72X(x);if(!X)return`<p class="past">Người nhờ không còn ở đây.</p>`;const T=X.T,st=T.s[x.st];const left=Math.max(0,x.dl-wk());
  const ok=q72OutTok(q72OkDef(X),X,"ok"),no=q72OutTok(q72NoDef(X),X,"no"),bad=T.bad?q72OutTok(T.bad,X,"bad"):[];
  let B=[];const pl=q72StepPl(st,X);
- if(st.w)B.push(`<div class="pcrow"><span>${q72Txt(st.n,X)}</span><b>còn ${Math.max(0,(x.wt||wk())-wk())} tuần</b></div>`);
+ if(st.w)B.push([q72Txt(st.n,X),`còn ${Math.max(0,(x.wt||wk())-wk())} tuần`,"t"]);
  else{if(pl&&S.place!==pl&&!S.out){const tc=pl==="home"?0:travel(S.place,pl);const why=S.confined&&pl!=="home"?`đang cấm túc`:Q.length?"đang có việc chờ":pl!=="home"&&!can(tc+1)?"hết khắc":typeof accessOf==="function"&&pl!=="home"&&!q72Host(pl,X)&&!accessOf(S,pl).ok?accessOf(S,pl).why:"";
    B.push(pbtn(`data-q72g="${pl}"`,`Đến ${q72PlN(pl)}`,`tốn: ${tc} khắc đi đường · thành: tới nơi làm bước này`,why))}
   if(st.ch)st.ch.forEach((o,i)=>B.push(pbtn(`data-q72d="${x.u}" data-q72o="${i}"`,q72Txt(o.n,X),q72Line(x,X,st,o),q72Why(x,X,st,o))));
   else B.push(pbtn(`data-q72d="${x.u}"`,q72Txt(st.n,X),q72Line(x,X,st,null),q72Why(x,X,st,null)))}
- const rows=T.s.map((s,i)=>{const p=q72StepPl(s,X);return `<div class="pcrow"><span>${i<x.st?"✓":i===x.st?"▸":"·"} ${q72Txt(s.n,X)}</span><b>${s.w?`đợi ${s.w} tuần`:p?q72PlN(p):s.emp?"cạnh Hoàng thượng":"tùy chọn"}</b></div>`});
+ const rows=T.s.map((s,i)=>{const p=q72StepPl(s,X);return [`${i<x.st?"✓":i===x.st?"▸":"·"} ${q72Txt(s.n,X)}`,s.w?`đợi ${s.w} tuần`:p?q72PlN(p):s.emp?"cạnh Hoàng thượng":"tùy chọn",i===x.st?"t":"n"]});
  const lg=x.log.slice(-3).map(t=>`<div class="pcrow"><span>${t}</span></div>`);
  const drop=pbtn(`data-q72x="${x.u}"`,"Bỏ việc này",`tốn: ${no.join(", ")||"không"}`,Q.length?"đang có việc chờ":"");
  const dt=q72Debt(X.A);
@@ -11055,6 +11056,15 @@ function kitChips(list){return `<span class="kchips">${(list||[]).map(x=>Array.i
 /* kitRows([[label, value(html|array of chips/values), cls]]) cls: g|r|n|t (value colour), "need" for a Cần row of chips */
 function kitRows(rows){return `<span class="kb kpkb">`+(rows||[]).filter(r=>r&&r[1]!=null&&r[1]!==""&&!(Array.isArray(r[1])&&!r[1].length)).map(([l,v,c])=>{const vals=Array.isArray(v)?v:[v];
  return `<span class="kr"><span class="krl">${l}</span><span class="krv">${vals.map(x=>/^\s*<span class="(kchip|ef|kname)/.test(x)||/^\s*<b class="kname/.test(x)?x:`<span class="ef ${c||"n"}">${x}</span>`).join('<span class="ksep">·</span>')}</span></span>`}).join("")+`</span>`}
+/* KIT §51 kitRowsJoin(kitRows(a), kitRows(b), …) -> ONE table: kit tables written one after another (price rows + the item's rows)
+   are merged into a single grid, so their values line up too. Pass only kitRows / kitItemRows output (or ""). */
+function kitRowsJoin(){return [...arguments].filter(Boolean).join("").replace(/(<\/span><\/span>)<\/span>\s*<span class="kb kpkb">/g,"$1")}
+/* KIT §51 kitReqRows([[ok, "Sủng 8 (cần 15)"], ...]) -> a requirement list as ONE kit table: label = what is needed, value = ✓/✗ + the
+   numbers (green met / red unmet). "Sủng 8 (cần 15)" -> Sủng | ✗ 8 (cần 15); "Ghế Phi: còn chỗ" -> Ghế Phi | ✓ còn chỗ;
+   "Hoàng hậu không chặn (Hoàng hậu -5, …)" -> Hoàng hậu không chặn | ✗ Hoàng hậu -5, …; a bare sentence -> sentence | ✓ đủ / ✗ chưa đủ. */
+function kitReqSplit(t){t=String(t||"").trim();let m=t.match(/^([^(\d:]+?)(?::\s*|\s+)(-?\d[\s\S]*)$/);if(m)return [m[1],m[2]];
+ m=t.match(/^([^:(]+?):\s+([\s\S]+)$/);if(m)return [m[1],m[2]];m=t.match(/^([^(]+?)\s*\(([\s\S]+)\)$/);if(m)return [m[1],m[2]];return [t,""]}
+function kitReqRows(list){return kitRows((list||[]).filter(Boolean).map(([ok,t])=>{const [l,v]=kitReqSplit(t);return [l,`${ok?"✓":"✗"} ${v||(ok?"đủ":"chưa đủ")}`,ok?"g":"r"]}))}
 /* tiers / ladders: [{k:"30–59", n:"hại nhỏ", d:"Tung tin đồn, Dò la", on:true, c:"r"}] */
 function kitTiers(list,o){o=o||{};const N=list.length;return `<div class="ktiers">${list.map((t,i)=>`<div class="ktier${t.on?" on":""}" style="--lv:${(i+1)/N}"><span class="ktk">${t.k}</span><span class="ktb"><b class="${t.c||""}">${t.n}</b>${t.d?`<small>${t.d}</small>`:""}</span>${t.on?`<span class="kchip n">${o.here||"đang ở"}</span>`:""}</div>`).join("")}</div>`}
 
@@ -11274,12 +11284,20 @@ function kpBuild(M,m){const dlg=M.querySelector(".dlg"),mb=$("mb"),mt=$("mt");if
 .kfact:last-child{border-bottom:0}
 .kfact>.md{width:34px!important;height:34px!important;margin:0!important;position:static!important}
 .kfdot{width:34px;height:34px;border-radius:50%;background:radial-gradient(circle,#c9a46a 0 4px,transparent 5px),url(https://ctm-img.victoria-tntt.workers.dev/img/kit/bg-default.webp) center/80px;border:1px solid var(--line);box-sizing:border-box}
+/* KIT §51 (owner 11/15 17:27Z): a fact with no person shows NO blank dot (an empty round icon means nothing); the text takes the row.
+   The week book keeps its small diamond bullet (j87 .kbk-pg .kfdot). */
+.kfact>.kfdot{display:none}.kfact:has(>.kfdot){grid-template-columns:minmax(0,1fr)}.kbk-pg .kfact>.kfdot{display:block}
 .kft{font-size:.88rem;color:var(--ink);overflow-wrap:anywhere;align-self:center}.kft p{margin:0}
 .kfwhen{display:block;color:var(--dim);font-size:.7rem}.kfwhy{display:block;color:var(--dim);font-size:.74rem}
 .kintel{display:flex;flex-direction:column}.kint{display:grid;grid-template-columns:34px minmax(0,1fr);gap:8px;padding:5px 0;border-bottom:1px dotted var(--k-hair)}.kint>.md{width:34px!important;height:34px!important;margin:0!important}
 .kisrc{display:block;color:var(--dim);font-size:.72rem}
-/* rows inside panels: same grid as the act card */
-.kpkb{font-size:.84rem}.kpkb .krl{padding-top:.18rem}
+/* rows inside panels: same grid as the act card. KIT §51 KIT TABLE (owner 11/15 17:27Z): every label|value list is ONE kitRows grid;
+   the label column is fixed per table = its longest label, capped at --kt-lab (34% of the table, never under 7rem so a label is never
+   one word per line); labels wrap inside that column, every value starts at the same x. */
+.kpkb{font-size:.84rem;grid-template-columns:fit-content(var(--kt-lab,max(34%,7rem))) minmax(0,1fr)}
+.kpkb .krl{padding-top:.18rem;white-space:normal;overflow-wrap:normal;word-break:normal;hyphens:none;line-height:1.25}
+/* a person label: small face, name beside it (wraps beside the face) */
+.kpkb .krl:has(>.md){display:flex;align-items:center;gap:5px}.kpkb .krl>.md{flex:none;margin:0}
 /* tiers */
 .ktiers{display:flex;flex-direction:column;gap:4px}
 .ktier{display:grid;grid-template-columns:5.2rem minmax(0,1fr) auto;gap:8px;align-items:center;padding:5px 8px;border:1px solid var(--k-hair);border-radius:var(--k-rad);background:linear-gradient(90deg,rgba(194,59,34,calc(var(--lv)*.16)),transparent 70%),var(--k-card)}
@@ -14961,10 +14979,10 @@ function fixPanel(){const P=document.getElementById("panel");if(!P)return;const 
  /* Con cái with the succession box (j51): who is heir / where each son stands is said there, once */
  if(tab==="kid"){const kv=P.querySelector(".kvbox");if(kv&&!kv.dataset.nr){kv.dataset.nr=1;const kvt=T(kv.textContent);const inKv=n=>n&&kvt.includes(n+" · ");
   P.querySelectorAll(".ph > span").forEach(s=>{const m=T(s.textContent).match(/^Thái tử: (.+?)\.$/);if(m&&inKv(m[1]))s.textContent=""});
-  const cn=T(P.querySelector(".pc .pcname")?.textContent);const full=[...kv.querySelectorAll(".pcrow")].map(r=>T(r.textContent)).find(t=>t.includes(" "+cn+" · "));
+  const cn=T(P.querySelector(".pc .pcname")?.textContent);const full=[...kv.querySelectorAll(".pcrow,.kr")].map(r=>T(r.textContent)).find(t=>t.includes(" "+cn+" · "));
   if(cn&&full)P.querySelectorAll(".pc .chips .chip").forEach(c=>{if(/^(Đích tử|Trưởng tử|Thái tử|Kế vị thứ \d+)$/.test(T(c.textContent)))c.remove()});
   /* Thượng thư phòng rows: age and mother already in the succession row */
-  P.querySelectorAll(".ktbox .pcrow > span > span:last-child").forEach(s=>{const m=T(s.textContent).match(/^(.+?) · \d+ tuổi · con .+$/);if(m&&inKv(m[1])&&!/con ngươi$/.test(T(s.textContent)))s.textContent=m[1];else if(m&&inKv(m[1]))s.innerHTML=s.innerHTML.replace(/ · \d+ tuổi · /," · ")})}}
+  P.querySelectorAll(".ktbox .pcrow > span > span:last-child,.ktbox .kr > .krl > span:last-child").forEach(s=>{const m=T(s.textContent).match(/^(.+?) · \d+ tuổi · con .+$/);if(m&&inKv(m[1])&&!/con ngươi$/.test(T(s.textContent)))s.textContent=m[1];else if(m&&inKv(m[1]))s.innerHTML=s.innerHTML.replace(/ · \d+ tuổi · /," · ")})}}
  /* Triều đình: the Emperor's mood is on his chip in the top bar */
  if(tab==="fac"){const em=document.getElementById("emp-m");P.querySelectorAll(".ph > span").forEach(s=>{const m=T(s.textContent).match(/^Tâm trạng Hoàng thượng: (.+)$/);if(m&&em&&T(em.textContent)===m[1])s.remove()})}
  /* Bảng phẩm vị: her Sủng/Danh are in the HUD */
@@ -14987,22 +15005,24 @@ function fixPanel(){const P=document.getElementById("panel");if(!P)return;const 
    if(t!==last){const h=document.createElement("div");h.dataset.nrh=1;h.appendChild(d.cloneNode(true));r.before(h);last=t}d.remove()})}
 }
 function fixModal(){const M=document.getElementById("modal");if(!M||M.hidden)return;
+ /* rows: legacy .pcrow (span | b) or the kit table row .kr (.krl | .krv), KIT §51 */
+ const RWS=()=>[...M.querySelectorAll(".pcrow,.kb>.kr")],RL=x=>x.querySelector(":scope>.krl")||x.querySelector("span"),RV=x=>x.querySelector(":scope>.krv")||x.querySelector("b");
  const nm=M.querySelector(".pcname"),rk=M.querySelector(".pcrk");
  if(nm&&rk){const n=T(nm.textContent),r=T(rk.textContent);
   if(r==="Hoàng thượng"&&n.startsWith("Hoàng thượng niên hiệu "))nm.textContent="Niên hiệu "+n.slice(23);
-  if(typeof S!=="undefined"&&S&&n===S.name&&(S.rank>=7||S.queen))M.querySelectorAll(".pcrow").forEach(x=>{if(T(x.querySelector("span")?.textContent)==="Hoàng hậu")x.remove()})}
+  if(typeof S!=="undefined"&&S&&n===S.name&&(S.rank>=7||S.queen))RWS().forEach(x=>{if(T(RL(x)?.textContent)==="Hoàng hậu")x.remove()})}
  /* end card: caption = highest rank */
- const cap=M.querySelector(".pfwrap .pfrw");if(cap){const row=[...M.querySelectorAll(".pcrow")].find(x=>T(x.querySelector("span")?.textContent)==="Phẩm cao nhất");if(row&&T(row.querySelector("b")?.textContent)===T(cap.textContent))HIDE(cap)}
+ const cap=M.querySelector(".pfwrap .pfrw");if(cap){const row=RWS().find(x=>T(RL(x)?.textContent)==="Phẩm cao nhất");if(row&&T(RV(row)?.textContent)===T(cap.textContent))HIDE(cap)}
  /* portrait captions: "Hoàng thượng / Hoàng thượng" */
  M.querySelectorAll("figcaption").forEach(f=>{const b=f.querySelector("b"),sm=f.querySelector("small");if(b&&sm&&T(b.textContent)===T(sm.textContent))sm.remove()});
  /* identity card */
- const rows=[...M.querySelectorAll(".pcrow")];const rv=l=>rows.find(x=>T(x.querySelector("span")?.textContent)===l);
+ const rows=RWS();const rv=l=>rows.find(x=>T(RL(x)?.textContent)===l);
  const xo=rv("Xuất thân"),vc=rv("Vào cung"),tu=rv("Tuổi");
  if(xo&&tu&&typeof S!=="undefined"&&S){
   const bio=[...M.querySelectorAll("p")].find(p=>p.querySelector("b")&&T(p.querySelector("b").textContent)===S.name&&!p.dataset.nr);
-  if(bio){bio.dataset.nr=1;const o=T(xo.querySelector("b")?.textContent);const t=T(bio.textContent);const pre=`${S.name}, ${S.age} tuổi, ${o}.`;if(t.startsWith(pre)){const rest=t.slice(pre.length).trim();if(rest)bio.textContent=rest;else bio.remove()}}
+  if(bio){bio.dataset.nr=1;const o=T(RV(xo)?.textContent);const t=T(bio.textContent);const pre=`${S.name}, ${S.age} tuổi, ${o}.`;if(t.startsWith(pre)){const rest=t.slice(pre.length).trim();if(rest)bio.textContent=rest;else bio.remove()}}
   const capR=[...M.querySelectorAll(".pcrk,.pfrw,figcaption small")].map(e=>T(e.textContent));
-  if(vc&&capR.includes(T(vc.querySelector("b")?.textContent)))vc.remove();
+  if(vc&&capR.includes(T(RV(vc)?.textContent)))vc.remove();
   M.querySelectorAll("p.past").forEach(p=>{if(/Phúc duyên đang có/.test(p.textContent)&&/đang có/.test(T(M.querySelector("button[disabled]")?.textContent))){p.innerHTML=p.innerHTML.replace(/\s*Phúc duyên đang có: <b>\d+<\/b>\./,"")}})}
 }
 /* result card: title, verdict and numbers are already on the card; the log line keeps only what is new */
@@ -15316,7 +15336,7 @@ if(typeof kpIdentity==="function"&&typeof kitChips==="function")(function(){cons
   d.innerHTML=kitChips([kitChip(`Thân phận ${ow69Rare(k).toLowerCase()}`,"n")]);box.appendChild(d)}}catch(e){console.error(e)}return r}})();
 else if(typeof nlCardHTML==="function")(function(){const c0=nlCardHTML;nlCardHTML=function(){const h=c0.apply(this,arguments);
  try{const k=S&&S.origin&&S.origin.k;if(!k||!OW69[k])return h;const c=`<div class="chips ow69">${chip(`Thân phận ${ow69Rare(k).toLowerCase()}`)}</div>`;
-  return h.replace(/(<div class="pcb rows">)/,c+"$1")}catch(e){return h}}})();
+  return h.replace(/(<div class="pcb rows">|<span class="kb kpkb">)/,c+"$1")}catch(e){return h}}})();
 /* end of life: compensation for hard origins */
 if(typeof pdGet==="function")(function(){const o0=over;over=function(h,t,fate){const was=!S||S.dead;const r=o0.apply(this,arguments);
  try{if(was)return r;const m=Q.find(x=>x&&x.cls==="end"&&x.pd);const k=S.origin&&S.origin.k;const tier=OHARD69[k]||0;const b=OBON69[tier];
@@ -19348,7 +19368,7 @@ function kitShopDet(o){const x=(o.list||[]).find(y=>y.k===o.det);if(!x)return"";
  return `<div class="kshdet" data-kshop="${key}" data-kshdetx="1"><div class="kshdc" role="dialog" aria-label="${x.name}">${kitXHTML(`data-kshop="${key}" data-kshdetx="1"`)}`+
   `<div class="kshdi">${kitItem({src:x.src512||x.src,name:"",grade:x.grade,size:"md",lux:x.lux}).replace('<span class="kitn"></span>','')}`+
   `<div class="kshdt"><b class="kshdn" style="color:${g.c}">${x.name}</b>${x.sub?`<span class="kshds">${x.sub}</span>`:""}</div></div>`+
-  `<div class="kinvrows">${kitRows(cost)}${x.rows||""}</div></div></div>`}
+  `<div class="kinvrows">${kitRowsJoin(kitRows(cost),x.rows||"")}</div></div></div>`}
 function kitShopBody(o){const key=o.key||"shop";const money=o.money?o.money():0;o.list=kitShopList(o);o.q=o.q||{};
  const tabs=o.sell?`<div class="pctabs kcattabs kshtabs" role="tablist">${kitTabRowHTML([{k:"buy",label:"Mua"},{k:"sell",label:"Bán"}],o.mode==="sell"?"sell":"buy",`data-kshop="${key}" data-kshtab`)}</div>`:"";
  const empty=o.mode==="sell"&&!o.list.length?`<p class="past kshempty">${(o.sell&&o.sell.empty)||"Chưa có gì để bán."}</p>`:"";
@@ -21162,7 +21182,7 @@ function thCard(){const known=typeof window.kitCourtKnown!=="function"||window.k
  const acts=deckFor(/Thái hậu|Đức Thọ/);
  return pcard({f:pTH(),col:"#c9a0e0",name:"Thái hậu",rank:"Thái hậu · Đức Thọ cung",lines:L,groups:[["Việc hôm nay",acts.length?acts:[`<p class="kr3note">Hôm nay Hành sự không có việc nào về Thái hậu. Thỉnh an Thái hậu: sang Đức Thọ cung (Dư đồ) buổi sáng.</p>`]]],empty:""})}
 function empCard(){const E=S.emp;const acts=deckFor(/Hoàng thượng|ngự giá|ngự thư phòng|Dưỡng Tâm|thị tẩm/i);
- const likes=Object.keys(LIKES).map(k=>`<div class="pcrow"><span>${LIKEN[k]}</span><b>${E.known[k]?E.likes[k]:"chưa rõ"}</b></div>`);
+ const likes=Object.keys(LIKES).map(k=>[LIKEN[k],E.known[k]?E.likes[k]:"chưa rõ",E.known[k]?"t":"n"]);
  return pcard({f:pEmp(),col:"#f0d070",name:empName(),rank:"Hoàng thượng",lines:[tuoi(E.age),`Tâm trạng: <b>${MOODS[E.mood][0]}</b>`,`Ngài sủng ngươi <b>${S.sung}</b> · Ân tình <b>${S.an||0}</b>`],
   note:E.traits.map(t=>`<b>${ETRAITS[t][0]}</b>: ${ETRAITS[t][1]}`).join("<br>"),
   groups:[["Việc hôm nay",acts.length?acts:[`<p class="kr3note">Hôm nay Hành sự không có việc nào về Hoàng thượng (việc đổi theo buổi và theo quẻ). Gặp ngài: Dư đồ → nơi ngài ngự buổi này; tối: chờ lật thẻ.</p>`]],["Điều ngài thích",likes.concat([`<p class="kr3note">Nói thật lòng với ngài, hoặc hỏi Kính sự phòng, để biết ngài thích gì.</p>`])]],empty:""})}
@@ -22678,7 +22698,7 @@ function ktStoryHTML(){const c=S.st.ch,M=S.st.M,m=S.st.ms,Q0=(typeof QUEST67==="
   if(S.rank>=7)h+=kitEmpty("Sắc phong","Ngươi là Hoàng hậu. Đưa con mình lên ngôi để thành Hoàng thái hậu.");
   else{const R=promoReq();const ok=R.filter(x=>x[0]).length;
    h+=kitSkillCard({kind:"rank",k:String(S.rank+1),kicker:"Điều kiện sắc phong",name:RANKS[S.rank+1].n,level:ok,max:R.length,word:"Đạt",bar:false,next:"",img:kitInfoArt("sắc phong").src||art});
-   R.sort((a,b)=>a[0]-b[0]);h+=kitChecks(R);
+   R.sort((a,b)=>a[0]-b[0]);/* KIT §51 (owner 11/15 17:27Z): the requirement list is ONE kit table (kitReqRows: label | ✓/✗ + numbers), unmet first */h+=kitReqRows(R);
    h+=`<div class="ktop">${kitInfo("Ngôi Hoàng hậu")} <span class="kchip ${S.duc>=hhNeed(S).duc?"g":"r"}">Đức <b>${S.duc}/${hhNeed(S).duc}</b></span> <span class="kchip n">đủ điều kiện: cuối tháng có thánh chỉ</span></div>`}}
  else{const R=past.map(x=>[`Chương ${x.n}`,`${msName67(x)} · <b class="${x.k>0?"g":x.k<0?"r":""}">${x.tag}</b>`]);
   rare.forEach(x=>R.push([`✦ ${ARC67[x.a]?ARC67[x.a].t:x.a}`,x.ti&&x.ti!==x.tag?`${x.tag} · danh hiệu «${x.ti}»`:x.tag]));
@@ -22752,6 +22772,12 @@ KIT_SAMPLES.push(
   kitEmpty("Việc nhờ","Chưa ai nhờ ngươi việc gì.")+`</div>`},
  {id:"§46",title:"kitChecks · kitInfo",html:()=>kitChecks([[false,"Sủng 8 (cần 38)"],[true,"Danh 33 (cần 30)"]])+(typeof kitInfo==="function"?kitInfo("Việc nhờ"):"")},
  {id:"§43",title:"Việc gọn (cột hẹp, kpanec)",html:()=>`<div class="pcb ktacts"><div class="kpanec">${pbtn('data-kitsample="3"',"Hỏi han ở tẩm cung ta: ai cần giúp?","tốn: 1 khắc · thành: người ở đây có việc thì ngỏ lời nhờ","")}</div></div>`});
+/* KIT §51 kit table (review/kit-table): kitRows (one label column per table, values at one x), kitRowsJoin, kitReqRows, relation chip */
+KIT_SAMPLES.push(
+ {id:"§51",title:"kitRows · bảng kit (nhãn dài xuống dòng, giá trị thẳng một cột)",html:()=>kitRows([["Đêm thị tẩm vui",["Trâm ngọc bích, Túi thơm",kitChip("Bạc",20,"g")],"t"],["Sinh hoàng tử",["Ngọc bội ngự ban",kitChip("Bạc",30,"g")],"t"],["Tiết Vạn thọ (tháng 8, người được sủng nhất)","Vòng ngọc","t"],["Chưa biết","chưa rõ","n"]])},
+ {id:"§51",title:"kitRowsJoin · hai bảng nối thành một",html:()=>kitRowsJoin(kitRows([["Giá",kitChip("Bạc",-40,"r"),"t"]]),kitRows([["Phẩm","Thượng phẩm","t"],["Dùng để","dâng, tặng, bày ở yến tiệc","t"]]))},
+ {id:"§51",title:"kitReqRows · điều kiện (✓/✗)",html:()=>kitReqRows([[false,"Sủng 8 (cần 15)"],[true,"Ghế Phi: còn chỗ"],[false,"Hoàng hậu không chặn (Hoàng hậu -5)"],[true,"Đã qua một mùa ở phẩm này"]])},
+ {id:"§51",title:"kitChip(kitRel(...)) · chip quan hệ trong câu luật",html:()=>`<p>mỗi lần: ${kitChip(kitRel("them","phi tần khác ghen ta"),3,"r")}</p>`});
 (function(){const st=document.createElement("style");st.id="kit-page";st.textContent=`
 #kitpage{position:fixed;inset:0;z-index:2147483000;overflow:auto;background:var(--panel,#fffaf0);padding:0 16px 24px;color:var(--ink)}
 #kitpage[hidden]{display:none}
@@ -22956,7 +22982,7 @@ document.head.appendChild(st);
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="162a6df17a84";window.CTM_BUILD=BUILD;
+const BUILD="8027872fe1f8";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
