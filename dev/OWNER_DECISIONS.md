@@ -280,3 +280,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - 08:35Z Thái hậu a51 làm già 55–62 + nền tối Kính sự phòng/Thái y viện chỉnh màu (grade, giữ bố cục) đã lên CDN; review/m05-huadian bca3d5c0d.
 - 08:35Z Bảng đổi tên cổ ngữ: dev/handover/NAMING_PROPOSAL.md (khuyến nghị: Sổ tuần → Tuần lục; Qua buổi → Sang buổi; Qua đêm → Đợi sáng; Chơi cùng bạn → Cùng tri kỷ; …). Điều phối KHÔNG đổi 'Cơ may' → 'Cơ duyên' (khác nghĩa). Chờ sếp xem.
 - 08:35Z review/hau-cung-ui d562fe84e SẴN SÀNG KIỂM → hàng người duyệt 1.
+- (08:45Z) Owner: 'Sai đi dò la' bốc người ngẫu nhiên → luật: mọi việc nhắm người/nơi của nàng phải cho nàng CHỌN đích (bộ chọn kit), cơ may tính theo đích đã chọn; không việc nào của người chơi tự bốc đích ngẫu nhiên; NPC chọn đích theo động cơ thật. act-audit.
