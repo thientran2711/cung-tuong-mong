@@ -26,6 +26,9 @@ const shot=async(o,n)=>{await o.p.waitForTimeout(400);const t0=Date.now();const 
   const ov=await o.p.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1);ok(!ov,`${n} ${o.name}: no horizontal overflow`)};
 const C=o=>o.p.evaluate(()=>__co());
 async function until(o,fn,arg,ms=30000){try{await o.p.waitForFunction(fn,arg,{timeout:ms});return true}catch(e){return false}}
+/* wait for fn while both players read their dialogs (the week's end goes out only once her dialogs are closed) */
+async function untilC(o,fn,arg,ms=40000){const t0=Date.now();while(Date.now()-t0<ms){if(await o.p.evaluate(fn,arg).catch(()=>false))return true;for(const x of ALL)if(x.p&&!x.p.isClosed())await clear(x);await sleep(300)}return false}
+const ALL=[];
 async function tapText(o,re,ms=8000){const t0=Date.now();while(Date.now()-t0<ms){const h=await o.p.evaluateHandle(src=>{const R=new RegExp(src);
   return [...document.querySelectorAll('button,a,[role=button]')].find(b=>b.offsetParent!==null&&!b.disabled&&R.test(b.textContent.trim()))||null},re.source);
   const el=h.asElement();if(el){await el.click();return true}await sleep(250)}return false}
@@ -46,7 +49,7 @@ async function buoiBoth(A,B,shotWait){const k0=await A.p.evaluate(()=>__co().wee
 async function weekBoth(A,B,w){for(let k=0;k<3;k++)await buoiBoth(A,B,w===0&&k===0?'06-waiting-friend':null)}
 
 (async()=>{const b=await chromium.launch();
- const A=await mk(b,'fold',[686,880,2.2]),B=await mk(b,'ipad',[1180,820,2]);
+ const A=await mk(b,'fold',[686,880,2.2]),B=await mk(b,'ipad',[1180,820,2]);ALL.push(A,B);
  /* 1 host makes a room */
  await A.page();await A.p.goto(BASE);await A.p.waitForTimeout(3000);await shot(A,'01-title');
  ok(await tapText(A,/^Chơi cùng bạn/),'A taps Chơi cùng bạn');await A.p.waitForTimeout(600);await shot(A,'02-coop-menu');
@@ -61,16 +64,16 @@ async function weekBoth(A,B,w){for(let k=0;k<3;k++)await buoiBoth(A,B,w===0&&k==
  ok(await until(A,()=>!__co().frozen,null,20000),'A unfrozen when B is in');
  {const t0=Date.now();while(Date.now()-t0<60000){await clear(A);await clear(B);const a=await A.p.evaluate(()=>__co().world),c=await B.p.evaluate(()=>__co().world);if(a&&c)break;await sleep(500)}}
  ok(await A.p.evaluate(()=>__co().world)&&await B.p.evaluate(()=>__co().world),'both players are in the shared world');await clear(A);await clear(B);
- const same=async tag=>{const a=await A.p.evaluate(()=>({era:S.emp.era,d:[S.year,S.month,S.tuan],me:S.name,fr:(rivals.find(v=>v.coop)||{}).name,R:rivals.filter(v=>!v.coop).map(v=>v.id+v.name).join()}));
-   const c=await B.p.evaluate(()=>({era:S.emp.era,d:[S.year,S.month,S.tuan],me:S.name,fr:(rivals.find(v=>v.coop)||{}).name,R:rivals.filter(v=>!v.coop).map(v=>v.id+v.name).join()}));
+ const same=async tag=>{const a=await A.p.evaluate(()=>({era:S.emp.era,d:[S.year,S.month,S.tuan],me:S.name,fr:((rivals.find(v=>v.coop)||rivals.flatMap(v=>v.staff||[]).find(x=>x.coop)||null)||{}).name,R:rivals.filter(v=>!v.coop).map(v=>v.id+v.name).join()}));
+   const c=await B.p.evaluate(()=>({era:S.emp.era,d:[S.year,S.month,S.tuan],me:S.name,fr:((rivals.find(v=>v.coop)||rivals.flatMap(v=>v.staff||[]).find(x=>x.coop)||null)||{}).name,R:rivals.filter(v=>!v.coop).map(v=>v.id+v.name).join()}));
    ok(a.era===c.era&&a.R===c.R,tag+': same Emperor and same consorts',[a.era,c.era]);ok(String(a.d)===String(c.d),tag+': same date',[a.d,c.d]);
    ok(a.fr===c.me&&c.fr===a.me,tag+': each sees the other as a person',[a.me,a.fr,c.me,c.fr]);return[a,c]};
  await same('start');
- for(const o of [A,B])ok(await o.p.evaluate(()=>{const f=rivals.find(v=>v.coop);return f&&typeof kitKnown==='function'&&!kitKnown(f)&&!kitKnownName(f)}),o.name+': friend starts as Người lạ (unknown, like any NPC)');await shot(A,'05-world');await shot(B,'05-world');
+ for(const o of [A,B])ok(await o.p.evaluate(()=>{const f=(rivals.find(v=>v.coop)||rivals.flatMap(v=>v.staff||[]).find(x=>x.coop)||null);return f&&typeof kitKnown==='function'&&!kitKnown(f)&&!kitKnownName(f)}),o.name+': friend starts as Người lạ (unknown, like any NPC)');await shot(A,'05-world');await shot(B,'05-world');
  /* 3 three weeks */
  for(let w=0;w<3;w++){const wk=(await C(A)).week;
   await weekBoth(A,B,w);
-  for(const o of [A,B]){const r=await until(o,x=>__co().week===x+1,wk,30000);ok(r,`week ${w+1}: ${o.name} advanced`,r?undefined:await o.p.evaluate(()=>[__co(),COOPW.sent,COOPW.pend,S.buoi]))}
+  for(const o of [A,B]){const r=await untilC(o,x=>__co().week===x+1,wk,40000);ok(r,`week ${w+1}: ${o.name} advanced`,r?undefined:await o.p.evaluate(()=>[__co(),COOPW.sent,COOPW.pend,S.buoi]))}
   await clear(A);await clear(B);await same('after week '+(w+1))}
  await shot(A,'07-after3');await shot(B,'07-after3');
  /* 4 B leaves → A freezes; B returns */
@@ -90,12 +93,12 @@ async function weekBoth(A,B,w){for(let k=0;k<3;k++)await buoiBoth(A,B,w===0&&k==
   if(i===1)await shot(B,'11-rebirth-choice');await B.p.waitForTimeout(900)}
  const after=await B.p.evaluate(()=>({n:S.name,dead:S.dead,era:S.emp.era}));
  ok(!after.dead&&after.n!==before.n&&after.era===before.era,'B reborn as a new person in the same world',[before,after]);
- {let seen=false;const t0=Date.now();while(Date.now()-t0<40000){await clear(A);seen=await A.p.evaluate(n=>rivals.some(v=>v.coop&&v.name===n),after.n);if(seen)break;await sleep(700)}
-  ok(seen,'A sees the reborn friend by her new name',await A.p.evaluate(()=>(rivals.find(v=>v.coop)||{}).name));}
- ok(await A.p.evaluate(()=>{const f=rivals.find(v=>v.coop);return f&&!kitKnown(f)&&!kitKnownName(f)}),'reborn friend is a stranger again (Người lạ)');
+ {let seen=false;const t0=Date.now();while(Date.now()-t0<40000){await clear(A);await clear(B);seen=await A.p.evaluate(n=>!!(rivals.find(v=>v.coop)||rivals.flatMap(v=>v.staff||[]).find(x=>x.coop))&&(rivals.find(v=>v.coop)||rivals.flatMap(v=>v.staff||[]).find(x=>x.coop)||null).name===n,after.n);if(seen)break;await sleep(700)}
+  ok(seen,'A sees the reborn friend by her new name',await A.p.evaluate(()=>((rivals.find(v=>v.coop)||rivals.flatMap(v=>v.staff||[]).find(x=>x.coop)||null)||{}).name));}
+ ok(await A.p.evaluate(()=>{const f=(rivals.find(v=>v.coop)||rivals.flatMap(v=>v.staff||[]).find(x=>x.coop)||null);return f&&!kitKnown(f)&&!kitKnownName(f)}),'reborn friend is a stranger again (Người lạ)');
  await clear(A);await clear(B);await shot(A,'12-reborn-seen');await shot(B,'12-reborn');
  /* 6 one more week after rebirth */
- {const wk=(await C(A)).week;await weekBoth(A,B,1);ok(await until(B,x=>__co().week===x+1,wk,30000),'week after rebirth advances');}
+ {const wk=(await C(A)).week;await weekBoth(A,B,1);ok(await untilC(B,x=>__co().week===x+1,wk,40000),'week after rebirth advances');}
  /* 7 single player untouched + old save loads */
  const oldHtml=execSync('git -C '+JSON.stringify(ROOT)+' show origin/main:index.html',{maxBuffer:64e6}).toString();
  const D=await mk(b,'solo',[686,880,2.2]);await D.ctx.route(BASE+'old.html',r=>r.fulfill({status:200,contentType:'text/html; charset=utf-8',body:oldHtml.replace(/navigator\.serviceWorker\.register/g,'(()=>Promise.reject())')}));

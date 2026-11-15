@@ -39,15 +39,15 @@ const STEP=()=>{const c=__co();if(c.frozen||c.waiting)return'coop';if(typeof S==
     const t=[...document.querySelectorAll('[data-tab="act"]')].find(x=>x.offsetParent!==null);if(t&&!window.__tabTried){window.__tabTried=1;t.click();return'tab'}}
   const n=document.getElementById('next');if(n&&!n.disabled){window.__actsThis=0;window.__tabTried=0;window.__metThis=0;window.__hitThis=0;n.click();return'next'}return'idle'};
 /* per-buổi view: NPC whereabouts (from the shared state) + where each sees the other */
-const BUOI=()=>{const hm=x=>x==='home'?'r'+(COOPW.seat==='a'?901:902):x;if(typeof S==='undefined'||!S||S.dead)return null;const c=__co();const f=rivals.find(v=>v.coop);
+const BUOI=()=>{const hm=x=>x==='home'?'r'+(COOPW.seat==='a'?901:902):x;if(typeof S==='undefined'||!S||S.dead)return null;const c=__co();const f=(rivals.find(v=>v.coop)||rivals.flatMap(v=>v.staff||[]).find(x=>x.coop)||null);
   return{key:c.week+'.'+(S.buoi||0),ready:!c.waiting&&!c.frozen&&!document.querySelector('#coopfz')&&(COOPW.seat==='a'||COOPW.whereKey===c.week+':'+(S.buoi||0)),where:Object.entries(S.where||{}).filter(([k,v])=>!(+k>=900)&&typeof v==='string').map(([k,v])=>k+'@'+v).sort().join(),
-   fpl:f?hm(whereOf(f)):null,me:hm(S.place||'home'),fst:f?[f.sung,f.danh,f.suc].join('/'):null,fk:f?(kitKnown(f)?1:0)+(kitKnownName(f)?2:0):-1,mst:[S.sung,S.danh,S.suc].join('/')}};
+   fpl:f&&f.id!=null?hm(whereOf(f)):null,me:f&&f.id==null?null:hm(S.place||'home'),fst:f&&f.id!=null?[f.sung,f.danh,f.suc].join('/'):null,fk:f?(kitKnown(f)?1:0)+(kitKnownName(f)?2:0):-1,mst:[S.sung,S.danh,S.suc].join('/')}};
 /* the world as this client sees it (only shared truth, no personal data) */
 const WORLD=()=>{const kidsOf=v=>(v.kids||[]).map(k=>k.name+(k.alive?'':'†')).join('/');
   return{date:[S.year,S.month,S.tuan],emp:[S.emp.era,S.emp.age,(S.emp.traits||[]).join('+'),!!S.emp.dead],th:!!S.thDead,
    R:rivals.filter(v=>!v.coop).map(v=>[v.id,v.name,v.queen?7:v.rank,v.alive?1:0,v.out?1:0,kidsOf(v)].join(':')).sort(),
-   friend:(rivals.find(v=>v.coop)||null)&&(({name,rank,alive,queen})=>({name,rank:queen?7:rank,alive}))(rivals.find(v=>v.coop)),
-   me:{name:S.name,rank:S.rank,dead:!!S.dead,srv:!!S.srv},mst:{sung:S.sung,danh:S.danh,suc:S.suc},fst:(f=>f?{sung:f.sung,danh:f.danh,suc:f.suc}:null)(rivals.find(v=>v.coop)),where:Object.entries(S.where||{}).filter(([k])=>!(+k>=900)).map(([k,v])=>k+'@'+v).sort().join(),buoi:S.buoi||0}};
+   friend:((rivals.find(v=>v.coop)||rivals.flatMap(v=>v.staff||[]).find(x=>x.coop)||null)||null)&&(({name,rank,alive,queen,sid,id})=>({name,rank:id==null?'srv':queen?7:rank,alive}))((rivals.find(v=>v.coop)||rivals.flatMap(v=>v.staff||[]).find(x=>x.coop)||null)),
+   me:{name:S.name,rank:S.srv&&!S.srv.risen?'srv':S.rank,dead:!!S.dead,srv:!!S.srv},mst:{sung:S.sung,danh:S.danh,suc:S.suc},fst:(f=>f&&f.id!=null?{sung:f.sung,danh:f.danh,suc:f.suc}:null)((rivals.find(v=>v.coop)||rivals.flatMap(v=>v.staff||[]).find(x=>x.coop)||null)),where:Object.entries(S.where||{}).filter(([k])=>!(+k>=900)).map(([k,v])=>k+'@'+v).sort().join(),buoi:S.buoi||0}};
 
 (async()=>{const b=await chromium.launch();const A=await mk(b,'A',[755,1000]),B=await mk(b,'B',[1180,820]);
  await A.p.goto(BASE);await A.p.waitForTimeout(3000);await tapText(A,/^Chơi cùng bạn/);await A.p.waitForTimeout(500);await tapText(A,/^Mời bạn/);
@@ -57,7 +57,9 @@ const WORLD=()=>{const kidsOf=v=>(v.kids||[]).map(k=>k.name+(k.alive?'':'†')).
  const div=[];let weeks=0,whereDiff=0,lastKey='',buoiN=0,statLag=0,pend={};const knownLog={};const posDiff=[];const t0=Date.now();
  for(let w=0;w<WEEKS;w++){const wk=(await A.p.evaluate(()=>__co().week));
   const done={A:false,B:false};const t=Date.now();
+  const KILL={10:['B',0],20:['A',1500],30:['B',2500]}[w];let killed=!KILL;  /* forced deaths: guest at buổi start, host and guest mid-week */
   while(Date.now()-t<120000){
+   if(!killed&&Date.now()-t>=KILL[1]){killed=true;const o=KILL[0]==='A'?A:B;const r=await o.p.evaluate(()=>{if(typeof S==='undefined'||!S||S.dead)return'no';const b=S.buoi||0;die('Thử: trúng gió');return 'buổi '+b}).catch(e=>e.message);L(`week ${w}: forced death of ${o.name} (${r})`)}
    const [pa,pb]=[await A.p.evaluate(BUOI).catch(()=>null),await B.p.evaluate(BUOI).catch(()=>null)];
    if(pa&&pb&&pa.key===pb.key&&pa.ready&&pb.ready&&pa.key!==lastKey){
      const pd=[];if(pa.fpl&&pb.me&&pa.fpl!==pb.me)pd.push(`A sees B at ${pa.fpl}, B is at ${pb.me}`);if(pb.fpl&&pa.me&&pb.fpl!==pa.me)pd.push(`B sees A at ${pb.fpl}, A is at ${pa.me}`);
@@ -66,7 +68,7 @@ const WORLD=()=>{const kidsOf=v=>(v.kids||[]).map(k=>k.name+(k.alive?'':'†')).
      if(same||Date.now()-pend.t>5000){lastKey=pa.key;buoiN++;
        if(pa.where!==pb.where){whereDiff++;if(whereDiff<=5)L(`buổi ${pa.key} NPC places differ: A-only [${pa.where.split(',').filter(x=>!pb.where.split(',').includes(x)).slice(0,6)}] B-only [${pb.where.split(',').filter(x=>!pa.where.split(',').includes(x)).slice(0,6)}]`)}
        pd.forEach(x=>posDiff.push(pa.key+' '+x));
-       if(pa.fst!==pb.mst||pb.fst!==pa.mst){statLag++;if(statLag<=4)L(`buổi ${pa.key} stats: A sees B ${pa.fst} (B ${pb.mst}) · B sees A ${pb.fst} (A ${pa.mst})`)}
+       if((pa.fst&&pa.fst!==pb.mst)||(pb.fst&&pb.fst!==pa.mst)){statLag++;if(statLag<=4)L(`buổi ${pa.key} stats: A sees B ${pa.fst} (B ${pb.mst}) · B sees A ${pb.fst} (A ${pa.mst})`)}
        if(buoiN===1)L(`first buổi: friend known-state A ${pa.fk} B ${pb.fk} (0 = Người lạ)`);knownLog[pa.fk+'/'+pb.fk]=(knownLog[pa.fk+'/'+pb.fk]||0)+1;}}
    for(const o of [A,B]){const r=await o.p.evaluate(STEP).catch(e=>'err:'+e.message);if(r==='act')o.acts++;if(/^meet/.test(r))o.meets++;if(/^harm:/.test(r)){o.harms++;o.hk[r.slice(5)]=(o.hk[r.slice(5)]||0)+1}if(/^harmerr/.test(r))L(o.name+' '+r);if(/^reborn/.test(r)){o.deaths++;L(`week ${w}: ${o.name} died → ${r}`)}}
    const wa=await A.p.evaluate(()=>__co().week),wb=await B.p.evaluate(()=>__co().week);if(wa>wk&&wb>wk)break;await sleep(60)}

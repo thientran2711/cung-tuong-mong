@@ -26,8 +26,9 @@ const REFF=["resHead","spyFor","lover","mid","owner","by","who","tgt","from","to
 const STAT=["sung","danh","bac","suc","sac","tai","tamco","duc","th","hh","mat","confined","shield","block"];
 const LOOK=["face","fc","fk","fcKeep","fid","pid","age","sac","tai","tamco","duc","arts","pal","resHead","dress","ill","maid","lot"];
 const J=x=>x==null?x:JSON.parse(JSON.stringify(x));
-const CW=window.COOPW={on:false,seat:"",base:null,pend:false,sent:-1,dying:null,attachC:null,news:"",life:0};
+const CW=window.COOPW={tr:[],on:false,seat:"",base:null,pend:false,sent:-1,dying:null,attachC:null,news:"",life:0};
 const me=()=>CW.seat==="a"?901:902, fp=()=>CW.seat==="a"?902:901, fs=()=>CW.seat==="a"?"b":"a";
+const T=x=>{try{CW.tr.push(x+" f="+(rivals||[]).some(v=>v&&v.coop));if(CW.tr.length>80)CW.tr.shift()}catch(e){}};
 const isF=v=>!!(v&&v.coop);
 const host=()=>CW.seat==="a";
 function wk(){return COOP.state.week||0}
@@ -54,7 +55,7 @@ function buildFriend(P,mine){if(!P||!P.S||P.dead||P.S.dead)return null;const s=J
  return v}
 function buildFriendSrv(P){const s=P.S;return {sid:fp(),coop:true,name:P.name||s.name,role:"maid",fc:s.fc,fk:s.fk,face:0,hue:0,age:s.age||18,tr:"trung",loyal:60,
  spyFor:null,lover:null,af:{},kn:1,imp:"bạn chơi cùng",org:"bạn chơi cùng"}}
-function pullFriend(){const out=[];for(let i=rivals.length-1;i>=0;i--)if(isF(rivals[i]))out.push([i,rivals.splice(i,1)[0]]);
+function pullFriend(){T("pull");const out=[];for(let i=rivals.length-1;i>=0;i--)if(isF(rivals[i]))out.push([i,rivals.splice(i,1)[0]]);
  for(const v of rivals)if(v.staff)for(let i=v.staff.length-1;i>=0;i--)if(isF(v.staff[i]))out.push([-1,v.staff.splice(i,1)[0],v]);return out}
 function pushFriend(L){for(const [i,v,m] of L.reverse()){if(i<0){if(m&&m.staff&&!m.staff.includes(v))m.staff.push(v)}else if(!rivals.includes(v))rivals.splice(Math.min(i,rivals.length),0,v)}}
 function withoutFriend(f){if(!CW.on||!S||CW.pulled)return f();const L=pullFriend();CW.pulled=L;try{return f()}finally{CW.pulled=null;pushFriend(L)}}
@@ -64,7 +65,7 @@ function friendEntry(){return rivals.find(isF)||null}
 function forgetFriend(o){const id=fp(),k="r"+id;if(!o)return;try{if(o.known)delete o.known[k];if(o.nkn)delete o.nkn[k]}catch(e){}
  if(o.rl)delete o.rl[id];if(o.ro)delete o.ro[id];if(o.cev)delete o.cev[id]}
 function freshFriend(P,o){if(!P)return;const key=(P.name||(P.S&&P.S.name)||"")+"#"+(P.life||0);if(CW.fKey!==undefined&&CW.fKey!==key)forgetFriend(o||S);CW.fKey=key}
-function placeFriend(P){pullFriend();if(!P)return;if(S)freshFriend(P,S);
+function placeFriend(P){T("placeFriend "+(P&&P.name));pullFriend();if(!P)return;if(S)freshFriend(P,S);
  if(friendSrv(P)){const m=RV(P.S.srv.mid);if(m){m.staff=m.staff||[];m.staff.push(buildFriendSrv(P))}return}
  const v=buildFriend(P);if(!v)return;try{rstats(v)}catch(e){}
  if(v.queen&&!qOn()){rivals.unshift(v)}else{if(v.queen)v.queen=false,v.rank=Math.min(v.rank,6);rivals.push(v)}}
@@ -113,7 +114,7 @@ function fromCanon(C,opt){opt=opt||{};const mp=me(),Pm=C.P&&C.P[CW.seat];if(!Pm)
  if(friendSrv(fP))placeFriend(fP);CW.life=Pm.life||0;return true}
 
 /* put a freshly built life (S + throwaway world from start()) into the shared world W of C */
-function attach(C){if(!C||!C.W)return;const mp=me();
+function attach(C){T("attach");if(!C||!C.W)return;const mp=me();
  const keep={};for(const k in S)if(!W_KEYS.includes(k))keep[k]=S[k];
  const known=S.emp&&S.emp.known;
  /* the new life knows nobody yet: drop every link into the throwaway world */
@@ -136,7 +137,7 @@ CW.attach=()=>{const C=CW.dying||CW.base;if(C)attach(C)};
 /* ---------- sending ---------- */
 function sendEnd(){if(!CW.on||!S||S.dead||CW.sent===wk())return;const C=toCanon();CW.sent=wk();CW.pend=false;CW.mine=snapStats();
  COOP.send({t:"end",week:wk(),state:C});try{localStorage.setItem("ctm-coop-last",JSON.stringify({room:COOP.state.room,C}))}catch(e){}lockNext()}
-function sendMe(){if(!CW.on||!S||S.dead)return;const C=toCanon();CW.dying=null;
+function sendMe(){T("sendMe "+(S&&S.dead));if(!CW.on||!S||S.dead)return;const C=toCanon();CW.dying=null;
  if(!CW.base){/* host's first world */COOP.send({t:"init",state:C});CW.base=C}else{COOP.send({t:"me",P:C.P[CW.seat]});CW.base.P=CW.base.P||{};CW.base.P[CW.seat]=J(C.P[CW.seat])}
  try{if(CW.base&&CW.base.P&&CW.base.P[fs()]&&!friendEntry())placeFriend(CW.base.P[fs()])}catch(e){console.error(e)}
  /* a new life starts in the room's CURRENT buổi (the friend may already be in buổi chiều / tối) */
@@ -252,7 +253,7 @@ function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","
 function friendName(){const P=CW.base&&CW.base.P&&CW.base.P[fs()];return P?(P.name||(P.S&&P.S.name)||"bạn"):"bạn"}
 function worldNews(C){if(host())return"";const n=C.W&&C.W.S&&C.W.S.cnews;if(!n||!n.h)return"";
  return String(n.h).split(/(?<=\.\s|<\/span>\s?|<\/b>\s?)/).filter(x=>x.trim()&&!/gươi/.test(x)).join(" ")}
-function onWeek(m){if(!CW.on||!m.state)return;const C=m.state;CW.base=J(C);CW.pend=false;
+function onWeek(m){T("week");if(!CW.on||!m.state)return;const C=m.state;CW.base=J(C);CW.pend=false;
  const wasDead=S&&S.dead;const ok=fromCanon(C,{keepQ:true});if(!ok)return;
  const P=C.P[CW.seat];
  if(!wasDead&&S.dead){S.dead=false;try{die(P.S.coopWhy||"Bị hại trong cung")}catch(e){console.error(e)}return}
@@ -261,7 +262,7 @@ function onWeek(m){if(!CW.on||!m.state)return;const C=m.state;CW.base=J(C);CW.pe
  if(h)pushModal({t:"Tuần mới",h:`<p class="past">${when()}</p>${h}`});
  CW.bend=false;CW.posKey="";if(host())sendWhere();else if(CW.lastWhere)applyWhere(CW.lastWhere);keepFriendPos();refreshHere();
  showModal();render();lockNext()}
-function onState(m){if(!CW.on||!m.state)return;const C=m.state;
+function onState(m){T("state");if(!CW.on||!m.state)return;const C=m.state;
  if(!CW.base){CW.base=J(C);if(CW.waitWorld){CW.waitWorld=false;newLife()}return}
  /* the friend's character changed (first character / reborn): keep my week, take the new base and her new entry */
  const had=CW.base;CW.base=J(C);if(had&&had.P&&had.P[CW.seat]&&C.P&&!C.P[CW.seat])CW.base.P[CW.seat]=had.P[CW.seat];
@@ -269,7 +270,7 @@ function onState(m){if(!CW.on||!m.state)return;const C=m.state;
   const P=C.P[fs()];if(P&&(!old||old.name!==P.name)&&!P.dead)pushModal({t:"Bạn vào cung",h:`<p><b>${esc(P.name)}</b> nay ở trong cung${friendSrv(P)?", làm cung nữ":", phong "+esc(RANKS[P.rank]?RANKS[P.rank].n:"")}.</p>`});
   showModal();render()}}
 function newLife(){CW.inLife=true;CW.newLife=true;try{start()}catch(e){console.error(e)}}
-function begin(d){CW.on=true;CW.seat=d.you||COOP.state.you;const C=d.state||COOP.state.C;CW.base=C?J(C):null;CW.sent=-1;CW.pend=false;
+function begin(d){T("begin");CW.on=true;CW.seat=d.you||COOP.state.you;const C=d.state||COOP.state.C;CW.base=C?J(C):null;CW.sent=-1;CW.pend=false;
  const s=COOP.state;
  if(C&&C.P&&C.P[CW.seat]&&!C.P[CW.seat].dead){fromCanon(C);if(s.ended&&s.ended[CW.seat])CW.sent=wk();try{$("title").hidden=true}catch(e){}syncRoom(CW.roomMsg);showModal();render();lockNext();return}
  if(!C&&!host()){CW.waitWorld=true;pushModal({t:"Đợi bạn",h:`<p>Bạn đang chọn thân phận. Khi hậu cung đã dựng xong, ngươi sẽ chọn thân phận của mình.</p>`});showModal();return}
@@ -312,7 +313,8 @@ const mute=n=>{const f=window[n];if(typeof f!=="function")return;window[n]=funct
 (function(){const f=over;over=function(){if(CW.on&&S&&!S.dead){/* keep the world as it stands at her death; the new life is put into it */
   try{S.dead=true;CW.dying=toCanon();S.dead=false}catch(e){console.error(e)}}return f.apply(this,arguments)}})();
 (function(){const f=render;render=function(){const r=f.apply(this,arguments);if(CW.on)try{lockNext();soonEnd();sendPos()}catch(e){}return r}})();
-(function(){const f=closeModal;closeModal=function(){const r=f.apply(this,arguments);if(CW.on)soonEnd();return r}})();
+(function(){const f=closeModal;closeModal=function(){/* the guest's "Đợi bạn" note can be closed before any world exists */
+ if(CW.on&&!S){Q.shift();if(Q.length)showModal();else{const m=$("modal");if(m)m.hidden=true}return}const r=f.apply(this,arguments);if(CW.on)soonEnd();return r}})();
 COOP.on("status",()=>{if(CW.on){lockNext();soonEnd()}});
 /* the rebirth / first-life flow: Luân hồi builds the life (nlRun), she accepts it (nlAccept) */
 if(typeof nlRun==="function"){const f=nlRun;nlRun=function(){const r=f.apply(this,arguments);try{if(CW.on){const C=CW.dying||CW.base;if(C)attach(C);CW.inLife=true}}catch(e){console.error(e)}return r};}
