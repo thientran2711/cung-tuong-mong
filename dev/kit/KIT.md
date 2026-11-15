@@ -1402,7 +1402,7 @@ the SAME large place-event frame as place event dialogs (32.6), VERTICAL on ever
 - MIDDLE = one info box `.kplinfo`: a fact line "Đường đi N khắc · Còn M khắc · K bóng người", a dim hours / entry-rule line (mở cửa sáng,
   chiều · sáng thỉnh an, lúc khác phải được mời · chỉ vào khi được triệu), then the card's own lines (reason, greeting rule, why a way in
   is closed). No empty "world" dot, no repeated "Có N bóng người ở đó" line.
-- BOTTOM = the buttons by 32.9. Waiting: at night "Nghỉ đến sáng mai"; in the day "Đợi đến buổi chiều/tối" only when one buổi helps
+- BOTTOM = the buttons by 32.9. Waiting (owner final names): at night "Qua ngày"; in the day "Sang buổi" only when one buổi helps
   (not for a place that opens only in the morning); a too-long walk gets the spill button instead (34.1d).
 Not yet: the outer-court card (`menNtCard`, a kitModal rule card). Test: `node dev/test/place-card.js <url> WxH@dpr <outdir> <tag>`
 (spill, last, night, rank, etq, sneak). Shots before / after: dev/shots/place-card/ (755x1000, 1180x820, 412x1058).

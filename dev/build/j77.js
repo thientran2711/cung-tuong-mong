@@ -60,8 +60,8 @@ function j77Card(k,empty){if(!S||S.dead||Q.length)return;
   else L.push(`<p class="past">Lẻn vào: cần ${st.tc+1} khắc, còn ${left}.</p>`)}
  if(sp&&sp.ok)opts.push({n:"Đi (đến nơi vào buổi sau)",fx:{},x:`Chắc chắn · tốn: ${sp.now?`${sp.now} khắc ${bu(sp.b-1)} + `:""}${sp.rest} khắc ${bu(sp.b)} · thành: đến nơi ${bu(sp.b)}, thấy ai ở đó`,go:()=>setTimeout(()=>walkSpillGo(k),0)});
  const waitHelps=!sp&&(st.kind==="hour"||st.walk||/sáng|thỉnh an/.test(st.why||"")||(st.ask&&!st.empAway&&!st.askOk)||(st.kind&&!st.sneakOk));
- if(waitHelps&&!S.out&&!S.confined&&!S.mg){const b=S.buoi||0,night=b>=2,morn=st.kind==="hour"||/sáng|thỉnh an/.test(st.why||""); /* VANPHONG: "Nghỉ đến sáng mai" / "Đợi đến buổi chiều"; no daytime wait for a place that only opens in the morning */
-  if(night||!morn)opts.push({n:night?"Nghỉ đến sáng mai":`Đợi đến ${bu(b+1)}`,fx:{},x:morn?"sáng mai mở cửa · thử lại":night?"sáng mai đủ khắc · thử lại":`${bu(b+1)} đủ khắc · thử lại`,go:()=>setTimeout(()=>{try{nextBuoi()}catch(e){}},0)})}
+ if(waitHelps&&!S.out&&!S.confined&&!S.mg){const b=S.buoi||0,night=b>=2,morn=st.kind==="hour"||/sáng|thỉnh an/.test(st.why||""); /* owner final names: "Qua ngày" / "Sang buổi"; no daytime wait for a place that only opens in the morning */
+  if(night||!morn)opts.push({n:night?"Qua ngày":"Sang buổi",fx:{},x:morn?"sáng mai mở cửa · thử lại":night?"sáng mai đủ khắc · thử lại":`${bu(b+1)} đủ khắc · thử lại`,go:()=>setTimeout(()=>{try{nextBuoi()}catch(e){}},0)})}
  if(opts.length){opts.push({n:"Thôi",fx:{},x:""});Q.push({t:nm,h:L.join(""),opts})}else Q.push({t:nm,h:L.join(""),btn:"Đã hiểu"});
  showModal()}
 /* a walk that uses the last khắc: say so plainly, then go (she sees who is there; next buổi she starts there) */
