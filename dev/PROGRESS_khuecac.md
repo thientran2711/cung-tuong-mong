@@ -18,10 +18,33 @@ per face, calm standing pose, a different prop per face. Every face checked at a
 5. gens.txt row with status `final` → `python3 manifest.py dev/figwork/out/khuecac` writes img/FIGURES-kc.json
 6. images + manifest to Cloudflare: cdn_sync.py from origin/review/cdn-images (copy to dev/figwork/out/khuecac/tool/x/ so its root is the work dir)
 Images are NOT in git (dev/figwork/out/ ignored). Separate manifest img/FIGURES-kc.json: j39 does not load it and must not (figTier('kc') = null);
-jkc must read it for her figure while S.kc is active (not wired yet — code task).
+jkc reads it itself (see Code below).
 
 ## State
-- Pilot 4 DONE (c05, c08, c29, m05): dev/shots/khuecac/pilot.jpg, on CDN (img/fig|por-<role>-<face>-kc-a18.webp + img/FIGURES-kc.json).
-  cutcheck: fig 0.9–2.5, por 4.4–8.2 (all pass). WAITING FOR OWNER APPROVAL — do not draw the other 80 before the go.
-- Spare: c14 round-1 gen 1lppEaJr4r (clean, can be used if the look is approved).
-- Remaining after approval: 30 consorts + 51 maids; EXTRA props/motifs per face to be added to mkprompt.py (MPAL from FIGURES-servants t1 a18 palette).
+- Pilot 4 DONE (c05, c08, c29, m05)## Second dress: nhà nghèo (owner 02:30Z, pilot approved)
+Tier `ngheo` in the same manifest: plain cotton/linen jacket + long skirt + plain apron or sash, muted faded tones of her own colours with
+undyed beige, NO patches/rags/dirt, at most one wooden or plain silver hairpin, humble prop (ladle, clay teapot, mending, lantern, hemp
+skeins, books bundle, bamboo fan, herb basket). `mkprompt.py --ngheo <face>`. Used for origins thd and td.
+
+## Pipeline changes after the pilot
+- idref hosting: idref jpgs pushed to the CDN under img/_kcwork/idref-<face>.jpg, then creations_upload_image from that URL (no presigned uploads).
+  img/_kcwork/ is temporary work data (84 small jpgs) — can be pruned from the bucket later.
+- Every cut goes through `retouch.py` (rtall.py sheet; compact dark blobs on forehead / outer cheeks inpainted) and is checked at a large
+  crop; leftover specks by hand with `spot.py` (c09 kc, m41 kc, m52 kc). Cuts failing cutcheck get `harden.py` (alpha curve) and fin again.
+- `fin.py WORKDIR TIER faces` → img/fig|por-...; `ledger2gens.py WORKDIR` → gens.txt batch section; `manifest.py WORKDIR`;
+  `cp img/FIGURES-kc.json WORKDIR/img/` and `python3 tool/x/cdn_sync.py <files> img/FIGURES-kc.json` from WORKDIR.
+- `grid.py WORKDIR TIER OUT.jpg` → contact sheet of all 84.
+
+## State (11/15 ~04:00Z)
+- DONE: 84 faces × 2 dresses = 168 records in img/FIGURES-kc.json; all 336 fig/por webp on the CDN (cdn_sync --check: 0 to upload).
+- Sheets: dev/shots/khuecac/all.jpg (kc, 84) and all-ngheo.jpg (ngheo, 84); pilots pilot.jpg / pilot-ngheo.jpg.
+- cutcheck after harden: all fig < 8, all por < 20. Hardened: c02 kc/ngheo, c06 ngheo, c11 kc, m13 m25 m33 m35 kc.
+
+## Code (dev/build/jkc.js, end of file)
+- KCFX loaded from img/FIGURES-kc.json (only here; re-read every 5 min). kcDress(): `ngheo` for origin thd/td, else `kc`.
+- figFor wrapper: while isKc() (S.kc and not S.kc.inPal) her figure/portrait (S.pid / S.fid, consort or maid face) = the home dress;
+  missing art → the old path (t1). Outside isKc nothing changes, so these tiers never show in the palace.
+- kcPor wrapper: thứ muội wears the same dress as her, the two bạn khuê phòng wear kc.
+- Tests: `node dev/test/outside/dress.js OUTDIR` (Fold 755x1000@2, iPad 1180x820@2; tt + thd; home, Gia tộc, then kcEnter → palace tier):
+  all checks true, 0 page errors, no overflow. `node dev/test/outside/oldsave.js` (now Fold + iPad): old save loads and plays, 0 errors.
+  Both need zz-test.html (dev/index.html with a <meta charset> line) and the kc/ngheo webp copied into img/ (not committed).
