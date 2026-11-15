@@ -94,3 +94,9 @@ b14 https://pikaso.cdnpk.net/tmp/bulk-downloads/a33ae9db-7f34-428b-84b0-fbf5efa0
   Xong vài mặt: `bash .tywork/bin/fin.sh <tag> <role-id...>` → tờ dev/art/trung-y/sheet-<tag>.jpg + por-<tag>.jpg (XEM) →
   `python3 dev/art/trung-y/ty.py publish <ids>` → `python3 dev/site/cdn_sync.py <fig/por của các mặt đó> img/FIGURES-ty.json` → xóa bản trong img/ + out/.
 - img/ ở máy chỉ có FIGURES-ty.json (kéo từ CDN); publish giữ bản ghi cũ dù tệp không ở máy.
+
+## 15/11 ~13:30Z
+- LÊN CDN (refine v6): c13–c32 (đủ 32 phi tần) + m01–m06. FIGURES-ty.json trên CDN: (384 + 26×32) bản ghi. Tờ duyệt: dev/art/trung-y/sheet-g1..g4 + por-g*.
+- refine v7 (lỗ áo ngà phẳng m18 ty1): holes.py → 122 tờ có lỗ kín (redo-v7.txt) đang cắt lại; xong thì cdn_sync các tệp đổi của mặt đã đẩy (md5 tự bỏ qua tệp không đổi), rồi publish m07–m19.
+- Chân dung: cỡ mặt theo trung vị tờ (ty.py portraits()), porcheck.py: 0 lỗi ở c01–c22 đã đẩy.
+- Bước 4 (m20–m52): ĐÃ VẼ từ trước (PROGRESS 09:35Z), nguồn đủ ở máy → chỉ còn cắt + kiểm + đẩy (worker đang chạy tiếp theo thứ tự bg.txt).
