@@ -302,13 +302,13 @@ function kitTabStick(){try{const P=$$("panel");if(!P)return;const long=P.scrollH
 addEventListener("resize",()=>{clearTimeout(window.__ktsT);window.__ktsT=setTimeout(kitTabStick,80)});
 function k3CatTabs(){try{const P=$$("panel");if(!P)return;P.querySelectorAll(".cards").forEach((G,gi)=>{
  const cards=[...G.querySelectorAll(":scope > button.ka")];if(cards.length<6)return;
- const cats=[];cards.forEach(b=>{const c=b.dataset.kart||"khac";if(!cats.includes(c))cats.push(c)});if(cats.length<2){const o=G.previousElementSibling;if(o&&o.classList.contains("kcattabs"))o.remove();return}
+ const cats=[];cards.forEach(b=>{const c=b.dataset.kart||"khac";if(!cats.includes(c))cats.push(c)});if(cats.length<2){const o=P.querySelector(`.kcattabs[data-g="${gi}"]`)||G.previousElementSibling;if(o&&o.classList.contains("kcattabs")&&!o.classList.contains("kinvtabs"))o.remove();return}
  const key="hclh-kcat-"+(typeof tab!=="undefined"?tab:"")+"-"+gi;let cur=null;try{cur=localStorage.getItem(key)}catch(e){}if(cur&&cur!=="all"&&!cats.includes(cur))cur="all";cur=cur||"all";
  const name=c=>(typeof KIT_CAT!=="undefined"&&KIT_CAT[c]?KIT_CAT[c][0]:c==="khac"?"Khác":c);
  const cnt=c=>{const L=c==="all"?cards:cards.filter(b=>(b.dataset.kart||"khac")===c);return [L.filter(b=>!b.disabled&&!b.classList.contains("kdis")).length,L.length]};
- let row=G.previousElementSibling;if(!row||!row.classList.contains("kcattabs")){row=document.createElement("div");row.className="pctabs kcattabs";row.setAttribute("role","tablist");G.before(row)}
+ let row=P.querySelector(`.kcattabs[data-g="${gi}"]`)||G.previousElementSibling;if(!row||!row.classList.contains("kcattabs")||row.classList.contains("kinvtabs")){row=document.createElement("div");row.className="pctabs kcattabs";row.setAttribute("role","tablist");G.before(row)}
  const h=kitTabRowHTML(["all"].concat(cats).map(c=>{const [n,t]=cnt(c);return{k:c,label:c==="all"?"Tất cả":name(c),n:`${n}/${t}`,tip:`làm được ${n} trên ${t} việc`}}),cur,"data-kcat");
- if(row.dataset.h!==h){row.innerHTML=h;row.dataset.h=h}row.dataset.key=key;
+ if(row.dataset.h!==h){row.innerHTML=h;row.dataset.h=h}row.dataset.key=key;row.dataset.g=gi;
  cards.forEach(b=>{b.hidden=!(cur==="all"||(b.dataset.kart||"khac")===cur)})});kitTabStick()}catch(e){console.error("k3CatTabs",e)}}
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest(".kcattabs [data-kcat]");if(!b)return;e.stopPropagation();const row=b.closest(".kcattabs");
  try{localStorage.setItem(row.dataset.key,b.dataset.kcat)}catch(x){}k3CatTabs()},true);
