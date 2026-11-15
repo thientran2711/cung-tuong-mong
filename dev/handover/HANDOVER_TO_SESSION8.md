@@ -38,8 +38,8 @@ Went live today via sessions 6+7: month-calendar, chap-label, item-events (§64)
 ## 4. UNFINISHED WORKERS — re-open each from its branch + PROGRESS file
 | Branch @ sha | Left to do | Resume notes |
 |---|---|---|
-| review/coop-timer @ e0953df30+ | co-op buổi timer §69: default 5 min, host picks 3/5/8, pause ONLY for minigames (cap), "Tạm dừng" pauses both, waiting friend sees only "Hảo hữu đang dở tay, xin đợi", host absolute deadline + clock offset (~0.2 s), 1–2 s grace, reconnect restores; build ON fix-float-r8; latency e2e 300–800 ms + mid-countdown minigame pause; measure buổi lengths | dev/PROGRESS_review-coop-timer.md (worker may still have been running at the move) |
-| review/skin-match @ 6091b098e+ | face vs hand/neck skin-tone audit of all fig-*, player look1 rosy, ref maid m03 Ngọc Lan, player look3 head | dev/PROGRESS_review-skin-match.md |
+| review/coop-timer @ 7c9a5bc2b (DONE, SẴN SÀNG KIỂM — move to section 2) | co-op buổi timer §69: default 5 min, host picks 3/5/8, pause ONLY for minigames (cap), "Tạm dừng" pauses both, waiting friend sees only "Hảo hữu đang dở tay, xin đợi", host absolute deadline + clock offset (~0.2 s), 1–2 s grace, reconnect restores; build ON fix-float-r8; latency e2e 300–800 ms + mid-countdown minigame pause; measure buổi lengths | dev/PROGRESS_review-coop-timer.md (worker may still have been running at the move) |
+| review/skin-match @ 41294be53 | 1500 hand/neck fixes made (892 figs + 609 por, look1 rosy, look3 neck/hands); 234 uploaded by the worker, coordinator started upload.sh for the rest at the move — CHECK log/uploaded.txt vs fix list on the CDN; if short, regenerate with fixrun.py on the not-uploaded list (deterministic) and upload; then audit the ~7300 never-rosy figures (runm.sh → select.py → fixrun.py → look → upload.sh) | dev/PROGRESS_review-skin-match.md |
 | review/art-complete @ c1feba27c | eunuch ranks u02–u30 (87 sheets: ue_spec.py, ue_gens.txt), grown kids a26/a36/a51 (144) + kidBandOf past 20; NOW ALSO (owner 23:05Z) draw 128 old-save player looks + look1–4 as new faces on all roads, and 56 promoted old-love men; run demole_por.py on every new face | dev/PROGRESS_art-complete.md |
 | review/act-pics2 @ f224e35d4 | act redraw 192/380 → continue from key 193 (scenes 193–212 written); redraw sai-khat-bong (pink on a man), bao-cung-chinh-ti (group), say-thai tone → dark | dev/PROGRESS_review-act-pics2.md |
 | review/mk-colour @ 973729653 | --stale re-measure + fixtoil → toil-fit2.json; 8+8 presets (4 cool/4 warm each); 8 VỤNG looks (4 cool/4 warm); lips QA on all player faces; viewport tests; then review; then MAKEUP FINAL-LOOK REVEAL scene (owner 23:30Z) | dev/PROGRESS_mk-colour.md |
@@ -59,3 +59,6 @@ Ngự tứ life-save at Linh thú only; pet label "No" (owner overrode my "Đói
 
 ## 8. Account-usage question
 Session 7 cannot see account usage or reset dates (no tool exposes it). The owner checks each account at claude.ai → Settings → Usage.
+
+## 9. Late notes (s7)
+- coop-timer @ 7c9a5bc2b: built on fix-float-r8 (merged), coop-timer.js 43/43 ×3, lag test 27/27 ×2; small UI notes: chip touches desk calendar at 755, ready kitLine briefly covers a name label; j84 rule ordering after fix-float merge needs a check. Review it after fix-float r8.
