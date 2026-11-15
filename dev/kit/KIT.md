@@ -712,7 +712,24 @@ kitBook({head:"Sổ tuần · Tháng tư · thượng tuần · năm thứ nhấ
 - While the book is open nothing covers it: the floating result card (`#rtoast`) is dismissed when the book opens and hidden while it is open.
 - Re-measured when the web fonts finish loading (no early page break from fallback-font metrics).
 - Book art is published from the 768x1024 originals (no blur at @2/@3).
+- Cover seal vs. hint (review/book-title r6): the cover `.kbk-in` is a size container and `.kbk-cseal` gets `margin-bottom:max(0px,calc(3cqh + 2.2em + 4px - 7cqw))`, so the TUẦN seal always clears the page-turn hint, also when the hint wraps (844x390).
 - Wording (VANPHONG): Sổ tuần, Tổng lược, Bìa sổ, Trang N / M, tiếp theo, Tuần này đến đây là hết., seal HẾT TUẦN, Lui, Vào ngày mới.
+
+### 27.1 COVER TITLE PICTURE · `KBK_TITLE_IMG` (owner 11/15, review/book-title) — `dev/build/j87.js`
+The cover label of the Tuần lục shows the title as a brush-written picture, not as text: `img/title-tuanluc-d4s.webp`
+(https://ctm-img.victoria-tntt.workers.dev/img/title-tuanluc-d4s.webp, 160x1200 RGBA cut-out: T-u-ầ-n-l-ụ-c stacked, aged ink, and at the
+foot the game's own red Trân nữ seal (§39 kitSeal SVG rendered to PNG, 62 px, dulled toward the ink) in place of the plum-blossom seal of the
+owner-picked render d4).
+- `KBK_TITLE_IMG = {"Tuần lục": KBK_ART.title}`: a cover page whose title is a key here (or that passes `titleImg:"img/…"`) gets
+  `<img class="kbk-ltimg" alt="<title>">` in `.kbk-label`; the `.kbk-lt` text stays in the markup (`.has-img`) and is shown instead whenever the
+  cover art or the title picture has not loaded (`KBK_ART.title` is preloaded like the other book art → class `art-title` on `.kbk`).
+- Placement (art cover only, `.kbk.art-cover.art-title`): the picture fills the label slot minus 12 px in width and 20 px in height,
+  top-aligned 10 px inside (`object-fit:contain; object-position:50% 0`), so it scales with the cover at every size.
+- The running header (`Tuần lục · Tháng …`), the dialog label and every other title stay text.
+- New book titles: write/cut the picture (tools: review/act-pics2 `dev/figwork/title/cutout.py`; seal swap
+  `dev/figwork/title/seal_swap.py` + `seal_render.js` on this branch), push with cdn_sync, add one key to `KBK_TITLE_IMG`.
+- Test: `node dev/test/book-title.js <build url> <outdir>` (cover at the 5 sizes; checks picture drawn inside the label, text hidden,
+  header text, overflow, broken images). Kit page sample §27.1.
 
 ## 28. KIT 2b (kit owner #3, owner feedback 11/14) — `dev/build/jk2b.js`, loaded just before j84
 ### 28.1 PERSON CARD PORTRAIT CELL (one cell for everyone)
