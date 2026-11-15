@@ -339,3 +339,5 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (05:50Z) Màn hình hỗ trợ: điện thoại khổ Fold (~755x1000) dọc + ngang; điện thoại ngang; iPad ngang. KHÔNG dùng điện thoại dọc hẹp (kiểu iPhone): game tự hiện xoay ngang sẵn để người chơi xoay máy. Bộ kích thước kiểm mới: 755x1000, 1000x755, 1180x820, 1366x1024, 844x390 (+ kiểm 390x844 hiện xoay).
 - (05:55Z) Bấm ra ngoài khung (nền mờ) ở bất cứ đâu cũng tắt bảng, như nút ✕ (trừ bảng bắt buộc).
 - (05:55Z) Tuần lục: MỖI việc/nghĩa khác nhau một tranh riêng, không chấp nhận dùng chung vì "cùng cảnh"; câu tin cũng có tranh riêng.
+- (06:00Z) Lớp sáng nhân vật: chọn A, KHÔNG phủ; nhân vật giữ màu gốc ở cả 4 buổi. Chỉ chỉnh màu nền.
+- (06:00Z) Má nhân vật bị đen trên nền tối (lỗi tách nền, alpha thủng trong mặt) → quét mọi ảnh người, vá alpha bằng code.
