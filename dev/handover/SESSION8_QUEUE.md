@@ -88,7 +88,7 @@ j72 bước vs Hồi · stage paper halo · Thái hậu title bronze vs plum · 
 | C29 | review/rel-picker (owner s8: Giao tình relation pickers waste space → compact) | QUEUED-NEXT |
 | C30 | night-panel → merged into B1 | MERGED |
 | C31 | review/log-sync (owner s8: Sổ ghi Sủng 33→40 vs header 37; audit unlogged stat changes) | RUNNING |
-| C32 | review/page-curl2 (owner s8: landscape = real finger-following curl; portrait = paper slide swipe, no curl; reuse drag-curl D37) | QUEUED-NEXT |
+| C32 | review/page-curl2 (owner s8 APPROVED: Tuần lục only — landscape curl, portrait paper slide; no swipe elsewhere; tab change animation only on tap) | QUEUED-NEXT |
 | C33 | review/weekbook-entries (owner s8: week book person page shows unrelated raw entry; per-person readable entries) | QUEUED-NEXT |
 | C34 | review/contest-ui (owner s8: REAL PRIZES by place (themed item, bạc, chest, title, Emperor gift) + podium rewards 2nd/3rd, same figure scale, contestants revealed; intro layout picture-left/info-right/scrolling contestant box, no empty counters) | QUEUED-NEXT |
 | C35 | review/pcard-fill (owner s8: person card right side empty → mood, relations, tastes, known facts, recent dealings, quick actions) | QUEUED-NEXT |
