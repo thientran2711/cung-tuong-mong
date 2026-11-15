@@ -1601,6 +1601,10 @@ The lists are ONE table, `KIT_DOABLE`: Hành sự deck (`#panel .cards > button.
 (`#mb .opts > button`), person-card act rows (`.rbtn`), shop / bag action rows (`.kshop`, `.kinvact`), panel option lists, and any
 container with class `.kdoable`. A new list joins by adding its row (or the class), never with its own sort. Runs after every
 stage / panel / dialog render (and on DOM changes, debounced); it only moves nodes when the order is wrong.
+ACT-CARD lists (every child a `button.ka`: Hành sự `.cards`, `.rbtn`, the person view `#popw .pcb`) are owned by `kitActSort` (31.19:
+three groups, order decided once per buổi, an act turning "đã làm" never makes the list jump); `kitDoableFirst` skips them
+(`kitActOwned`) and sorts every other list. Two sorters on one list fought each other forever (reviewer 11/15, after the merge with
+review/sub-odds: ~250 DOM mutations a second after one act) — never add a second sorter to a list kitActSort covers.
 ### 37.2 PERSON VIEW from the stage (`#popw .pc.kpa`, a person tapped on the stage)
 - LEFT: the rank line, then the name, at the very top; her FULL-BODY figure right under them (`kitStageFig`, KIT_FIG ratio of the
   figure, height min(58dvh, 520 px) for a woman; no portrait frame here); worn items under the figure.

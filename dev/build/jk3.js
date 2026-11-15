@@ -536,7 +536,7 @@ function kitActGroup(b){if(!b.disabled&&!b.classList.contains("kdis"))return 0;
  if(x.length&&x.every(t=>/buổi|khắc/i.test(t)&&!/chưa làm|đã làm/i.test(t)))return 1;return 2}
 function kitActKey(b){const h=b.querySelector("h4, .kan");return (b.dataset.i||b.dataset.a||"")+"|"+kasT((h||b).textContent).slice(0,60)}
 function kitActSort(root){try{if(!S)return;const when=[S.year,S.month,S.tuan,S.buoi||0].join(".");
- (root||document).querySelectorAll(".cards, .rbtn").forEach(G=>{const kids=[...G.children];if(kids.length<2||!kids.every(e=>e.matches("button.ka")))return;
+ (root||document).querySelectorAll(".cards, .rbtn, #popw .pcb").forEach(G=>{const kids=[...G.children];if(kids.length<2||!kids.every(e=>e.matches("button.ka")))return;
   /* wait until every greyed card has its Cần row (j63 fills it a frame later): classifying before would freeze a wrong order */
   if(kids.some(b=>(b.disabled||b.classList.contains("kdis"))&&!b.querySelector(".kr-why"))){const n=(KAS_TRY.get(G)||0)+1;KAS_TRY.set(G,n);if(n<4)return}
   const seen={};const keys=kids.map(b=>{const k=kitActKey(b);seen[k]=(seen[k]||0)+1;return k+"#"+seen[k]});

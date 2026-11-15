@@ -20,7 +20,11 @@ const T=s=>String(s==null?"":s).replace(/\s+/g," ").trim();
 /* ---------- 1. DOABLE FIRST (owner 11/15, global rule) ---------- */
 function kitIsOff(e){if(!e||e.nodeType!==1)return false;if(e.disabled||e.classList.contains("kdis")||e.classList.contains("off")||e.getAttribute("aria-disabled")==="true")return true;
  if(!/^(BUTTON|A)$/.test(e.tagName)){const b=e.querySelector("button");return !!(b&&b.disabled)}return false}
-function kitDoableFirst(box,sel){try{if(!box)return false;const L=[...box.children].filter(c=>!sel||c.matches(sel));if(L.length<2)return false;
+/* act-card lists (every child a button.ka: Hành sự .cards, .rbtn, the person view .pcb) belong to kitActSort (KIT 31.19: order decided once per
+   buổi, an act turning "đã làm" never makes the list jump). Sorting them here too made the two observers move the done card back and forth
+   forever (reviewer 11/15: ~250 DOM mutations a second after one act). kitDoableFirst sorts the other lists only. */
+function kitActOwned(box){if(typeof window.kitActSort!=="function"||!box.matches(".cards, .rbtn, #popw .pcb"))return false;const k=[...box.children];return k.length>0&&k.every(e=>e.matches("button.ka"))}
+function kitDoableFirst(box,sel){try{if(!box)return false;if(kitActOwned(box))return false;const L=[...box.children].filter(c=>!sel||c.matches(sel));if(L.length<2)return false;
  const want=L.filter(e=>!kitIsOff(e)).concat(L.filter(kitIsOff));if(want.every((e,i)=>e===L[i]))return false;
  const mark=document.createComment("kd");box.insertBefore(mark,L[0]);want.forEach(e=>box.insertBefore(e,mark));mark.remove();return true}catch(e){return false}}
 /* every list of acts / options: [container, item selector] — add new lists here (or give the container class .kdoable) */
@@ -60,7 +64,7 @@ function kpaPerson(){try{const pc=document.querySelector("#popw .pc");if(!pc||ty
     acts.forEach(b=>{b.hidden=order.length>1&&b.dataset.kpag!==cur})}
    /* section order: Giao tình · Việc làm được · tabs · acts */
    [Rr.querySelector(":scope > .kpaq"),h,Rr.querySelector(":scope > .kpatabs")].forEach(e=>{if(e)Rr.insertBefore(e,pcb)});
-   kitDoableFirst(pcb,".ka")}}}catch(e){console.error("kpaPerson",e)}}
+   if(kitActOwned(pcb))kitActSort(pc);else kitDoableFirst(pcb,".ka")}}}catch(e){console.error("kpaPerson",e)}}
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest(".kpatabs [data-kpag]");if(!b)return;e.stopPropagation();e.preventDefault();
  const row=b.closest(".kpatabs");KPA_TAB[row.dataset.key]=b.dataset.kpag;kpaPerson()},true);
 
