@@ -175,3 +175,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (06:20Z) Owner: no grey boxes over locked places on Dư đồ — same label style + lock mark; actions in a tap card; no cut text.
 - (06:25Z) Owner: during page curl, the next page must already be visible underneath the lifting page (like a real book).
 - (06:40Z) Owner: no Chinese characters in UI — ngự tứ seal shows Vietnamese 'Ngự' in the red square seal.
+- (07:00Z) Owner: luxury shown as numbers (corner 'Xa xỉ N' per item; header total vs allowance), not words. Ref dev/owner-shots/1115-xaxi-ref.jpg.
