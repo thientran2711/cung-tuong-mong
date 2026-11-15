@@ -1733,6 +1733,12 @@ on their own — they call `kitFx(kind,{el}|{x,y})` with a kind from the table b
 ### Touch kit (CSS + one pointer listener; every `button, .btn, .kbtn, .opt, .card, .pct, [role=button|tab], [data-tab]`)
 - Press: `scale:.96` (the individual `scale` property, so an element's own `transform` is never overwritten), shadow pulls in to a 1 px gold rim
   + soft gold light (`--kf-rim`). Release: springs back .96 → 1.025 → 1 (240 ms). Stage figures (`.tok`) press but don't spring.
+- WHO PRESSES (owner 15/11 "Whole tab panel bounces on any tap", review/press-fx): ONLY the real tappable element under the finger —
+  jfx `kfTapOf(target)`: the nearest KF_TAP element that is really tappable (button, a[href], .btn/.kbtn/.opt, role=button|tab, data-tab,
+  onclick, or a pointer cursor); a plain container (`div.card`, a pane, a tab panel) is skipped, and nothing over 30% of the screen (KF_BIG)
+  is ever pressed. The press look is ONLY the `.kfdown` class kfTapOf sets — never CSS `:active` (it matches every ancestor of the finger, so
+  `.card:active` sank the whole panel). Empty space and plain text press nothing. Test: dev/test/press-fx.js (taps empty points of every tab /
+  sub-tab / dialog at the 5 viewports; FAIL on any pressed container or anything >50% of the screen; checks real buttons still press).
 - Ripple: pale-gold radial ripple from the touch point (`.kfrip`, a fixed clip box over the element — the element itself is not touched;
   skipped on elements bigger than 45 % of the screen).
 - Primary buttons `.kbtn` (not `.alt/.kdone/.ksel`, not disabled): a slow light sheen sweeps across every 7 s.

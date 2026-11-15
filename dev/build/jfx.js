@@ -124,12 +124,13 @@ function kfNumbers(card,before){if(!card||!before||kfStill()||typeof S==="undefi
   const an=sp.animate([{transform:`translate(${x0}px,${y0+14}px) scale(.6)`,opacity:0},{transform:`translate(${x0}px,${y0-8}px) scale(1.08)`,opacity:1,offset:.22},{transform:`translate(${x0}px,${y0-12}px) scale(1)`,opacity:1,offset:.4},{transform:`translate(${x1}px,${y1}px) scale(${ok?.72:1})`,opacity:ok?1:0,offset:.94},{transform:`translate(${x1}px,${y1}px) scale(.6)`,opacity:0}],{duration:ok?1300:1500,delay,easing:"cubic-bezier(.45,.05,.4,1)",fill:"both"});
   an.onfinish=()=>{sp.remove();if(ok){cell.classList.remove("kfhit","kfhit-r");void cell.offsetWidth;cell.classList.add(dv>0?"kfhit":"kfhit-r");setTimeout(()=>cell.classList.remove("kfhit","kfhit-r"),700);if(KFX.app)KF_SPAWN.pop&&kfPx("pop",{x:cr.left+cr.width/2,y:cr.top+cr.height/2})}}})}
 /* ---------- touch kit ---------- */
-const KF_TAP='button,.btn,.kbtn,.opt,.card,.pct,[role="button"],[role="tab"],[data-tab]';
+/* no bare [data-tab]: the tab PANEL #panel carries data-tab="<tab>" too (that matched the whole pane: owner 15/11); the tab buttons are <button> */
+const KF_TAP='button,.btn,.kbtn,.opt,.card,.pct,[role="button"],[role="tab"]';
 const KF_FIG="#me,#emp,.tok";
 /* the REAL tappable element under the finger (owner 15/11 "Whole tab panel bounces on any tap"): a .card / .pct / anything in KF_TAP that is
-   only a container (no button, role, data-tab, onclick or pointer cursor) is never pressed — the search goes on to a real tappable ancestor;
+   only a container (no button, role, onclick or pointer cursor) is never pressed — the search goes on to a real tappable ancestor;
    and nothing bigger than KF_BIG of the screen is ever pressed (a pane, a tab panel, a whole-screen catcher). null = no press at all. */
-const KF_REAL='button,a[href],.btn,.kbtn,.opt,[role="button"],[role="tab"],[data-tab],[onclick]',KF_BIG=.3;
+const KF_REAL='button,a[href],.btn,.kbtn,.opt,[role="button"],[role="tab"],[onclick]',KF_BIG=.3;
 function kfTapOf(t){let el=t&&t.closest?t.closest(KF_TAP):null;
  while(el&&!(el.matches(KF_REAL)||typeof el.onclick==="function"||getComputedStyle(el).cursor==="pointer"))el=el.parentElement?el.parentElement.closest(KF_TAP):null;
  if(!el)return null;const r=el.getBoundingClientRect();if(!r.width||r.width*r.height>innerWidth*innerHeight*KF_BIG)return null;return el}
@@ -163,7 +164,7 @@ function kfTabs(){for(const [cs,as] of KF_TABS){document.querySelectorAll(cs).fo
   if(!ln){ln=document.createElement("i");ln.className="kftl";c.appendChild(ln);const p=KF_TPOS[key];if(p){ln.style.transition="none";ln.style.transform=`translate(${p[0]}px,${y}px)`;ln.style.width=p[1]+"px";void ln.offsetWidth;ln.style.transition=""}}
   ln.style.opacity="1";ln.style.transform=`translate(${x}px,${y}px)`;ln.style.width=w+"px";KF_TPOS[key]=[x,w]})}}
 let kfTabQ=0;function kfTabsSoon(){if(kfTabQ)return;kfTabQ=requestAnimationFrame(()=>{kfTabQ=0;try{kfTabs()}catch(e){}})}
-document.addEventListener("click",e=>{if(e.target&&e.target.closest&&e.target.closest("[data-tab],.pct,.ksubb"))setTimeout(kfTabsSoon,30)},true);addEventListener("resize",kfTabsSoon);
+document.addEventListener("click",e=>{if(e.target&&e.target.closest&&e.target.closest("button[data-tab],.pct,.ksubb"))setTimeout(kfTabsSoon,30)},true);addEventListener("resize",kfTabsSoon);
 /* ---------- wiring into the game ---------- */
 (function(){const W=(n,f)=>{const o=window[n];if(typeof o!=="function")return;window[n]=f(o)};
  const MAP={good:"mgwin",bad:"mglose"};
@@ -193,10 +194,10 @@ document.addEventListener("click",e=>{if(e.target&&e.target.closest&&e.target.cl
 :root{--kf-gold:#f0d070;--kf-rim:0 0 0 1px #f0d070b0,0 0 12px #f0d07055}
 /* press: ONLY the .kfdown class that kfTapOf puts on the real tappable element (never CSS :active, which also matches every ancestor of
    the finger, e.g. the whole tab panel); scale .96 (the individual 'scale' property, so an element's own transform is kept), shadow pulls in, gold rim light */
-:is(button,.btn,.kbtn,.opt,.card,.pct,[role="button"],[role="tab"],[data-tab]):not(:disabled):not(.kdis):not(#me):not(#emp):not(.tok){transition:scale .1s ease,filter .1s ease,box-shadow .14s ease}
-:is(button,.btn,.opt,.card,.pct,[role="button"],[role="tab"],[data-tab]):not(:disabled):not(.kdis):not(#me):not(#emp):not(.tok).kfdown{scale:.96;filter:brightness(.97);box-shadow:var(--kf-rim)}
+:is(button,.btn,.kbtn,.opt,.card,.pct,[role="button"],[role="tab"]):not(:disabled):not(.kdis):not(#me):not(#emp):not(.tok){transition:scale .1s ease,filter .1s ease,box-shadow .14s ease}
+:is(button,.btn,.opt,.card,.pct,[role="button"],[role="tab"]):not(:disabled):not(.kdis):not(#me):not(#emp):not(.tok).kfdown{scale:.96;filter:brightness(.97);box-shadow:var(--kf-rim)}
 .kbtn:not(:disabled).kfdown{scale:.96;box-shadow:inset 0 0 0 1px #f0d07099,var(--kf-rim)}
-@media (hover:hover){:is(button,.btn,.kbtn,.opt,.card.ka,.pct,[data-tab]):not(:disabled):not(.kdis):not(#me):not(#emp):not(.tok):hover{box-shadow:0 0 0 1px #f0d07070,0 0 8px #f0d07033}
+@media (hover:hover){:is(button,.btn,.kbtn,.opt,.card.ka,.pct):not(:disabled):not(.kdis):not(#me):not(#emp):not(.tok):hover{box-shadow:0 0 0 1px #f0d07070,0 0 8px #f0d07033}
  .kbtn:not(:disabled):hover{box-shadow:inset 0 0 0 1px #f0d07066,0 0 0 1px #f0d07070,0 0 8px #f0d07033}}
 /* people on the stage (her #me, stage figures .tok, Hoàng thượng #emp): no box press / rim / ripple / tap highlight — a rectangle over a
    figure is wrong (owner 16:40Z); they answer with j59's own figure animation */
