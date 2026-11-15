@@ -457,6 +457,9 @@ window.KIT_CREST={ar:{"consort-0":.329,"consort-1":.337,"consort-2":.538,"consor
 span.md.kfc{position:relative!important;display:inline-block;flex:0 0 auto;width:60px!important;height:auto!important;max-height:none!important;aspect-ratio:550/1037!important;overflow:hidden!important;background:none!important;border:0!important;box-shadow:none!important;border-radius:0!important;padding:0!important;animation:none!important;transform:none!important;vertical-align:middle;font-size:0}
 span.md.kfc.kfc{position:relative!important;contain:layout paint;width:60px!important;height:auto!important;min-height:0!important;aspect-ratio:550/1037!important}
 span.md.kfc.kfc.kfc{box-shadow:none!important}
+/* owner 11/15 17:16Z: the small frame cell is the rank frame alone on a clear ground — the old round-avatar ring (j60 .md.kit.xs box-shadow)
+   drew a thin square box behind it in every list (news rows, Tuần lục, strips, person rows, gift recipients) */
+span.md.kfc.kfc.kit,span.md.kfc.kfc.kit.xs,span.md.kfc.kfc.kit.sm,span.md.kfc.kfc.kit.big{box-shadow:none!important;background:none!important;border:0!important;outline:0!important}
 span.md.kfc.kfc.xs,button.ka .kan span.md.kfc.kfc.xs{width:26px!important;height:auto!important;position:relative!important;display:inline-block!important}span.md.kfc.kfc.sm{width:38px!important}span.md.kfc.kfc.big{width:84px!important}
 span.md.kfc>.kin{position:absolute!important;left:0!important;top:0!important;width:100%!important;height:100%!important;transform:none!important;display:block!important;isolation:isolate}
 span.md.kfc .kin>.kbg{position:absolute;left:14.655%;top:20.289%;width:70.691%;height:49.373%;background:#5a1e16 center/cover no-repeat;z-index:-1}
