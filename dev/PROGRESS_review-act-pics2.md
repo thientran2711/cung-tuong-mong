@@ -169,3 +169,13 @@ Notes: `cdn_sync.py --pull` does NOT refresh img/_index.json reliably (stale loc
 - Held 277 rules (picture not on the CDN): keys in merge_held_keys.txt (this IS the remaining-picture queue, see step 5). Held 6 "-" rules that would steal picture lines (e.g. "Núp sau hòn giả sơn ..." would lose nghe-lom-gia-son): listed under heldSteals in ACTS_merge_patch.json; the meanings.py rules need narrowing before they can go live.
 - Rerun after new pictures land: same command; it adds whatever is now on the CDN.
 - Note: dev/test/act-pics.js is stale against current main (start() not defined) — not used.
+### Step 3 DONE (code, commit f0512cdce + test ab8e03206): a467 Tổng lược fallback
+- Main (ad94afe4e) already had: ACTS log rule first, "-" -> no picture, no "Có người đến" default except on the Emperor's / Thái hậu's pages, kitEvArt without the j89 default.
+- Remaining gap fixed in j87 kbkCands: on ctx "me" (Việc của ngươi) a line with no ACTS rule no longer takes an event-group (KBK_EVRE) or act-category (act-cat-*) stand-in; only a picture made for the line (log rule / its place / its act name), else none.
+- Test dev/test/a467-me-art.js <url> <corpus.txt>: 1477 corpus lines. Old path: 649 own, 186 event-group, 500 act-category (10 "Có người đến"), 142 none. New "me": 649 own, 0 stand-ins, 828 none. 0 page errors.
+- Shots dev/test/a467-book-shots.js <url> <outdir> at 755x1000@2, 1000x755, 1180x820@2, 1366x1024@2, 844x390, 390x844: no overflow, 0 broken images, 0 page errors; the visitor line has no picture, her wardrobe/refusal lines pick deo-trang-suc-h / thao-trang-suc-h / tu-choi-h.
+- Test page note: dev/index.html is a fragment without <meta charset>; serve a wrapped copy (tmp/site/index.html) or the root build, never dev/ raw (Invalid token in Chromium).
+- Main merged in (b5? see git log: "Merge origin/main into review/act-pics2"), assemble.py keeps jct2 after jht.
+### Step 4 IN PROGRESS: dialog banners (89 -> 73 left)
+- 16 drawn, checked on sheets, on the CDN: j71x-tai nc1 news-tin-trong-cung night2 q72-doi-thuoc q72-don-ta q72-hh-trungthu q72-loi-thoi q72-maid-tet q72-mat-tram q72-ns-doi q72-th-aodong q72-th-mai q72-th-thanhminh q72-th-trungcuu q72-tv-mua (ids in gens_dlg.txt).
+- Prompts: dprompt.py template + "NO Emperor, nobody in yellow" for scenes without him; envoy in nc1 wears a hood (no fur hat).
