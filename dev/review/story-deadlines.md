@@ -9,9 +9,9 @@ Script: `dev/review/story_audit.js` (reads ARC67 / GB67 / T72 / j4 PEND in the b
 - Every chapter beat with a Bạc option also offers a route without silver (hand-written in ALT67, else "Nhờ người quen lo liệu, không dùng bạc": Sức −6, odds of the silver route −15 + Tai mắt + Lòng cung nữ).
 
 ## Summary
-- Chính tuyến beats: 365; with a Bạc option: 179; of those with a route without silver BEFORE (a non-give-up option without Bạc): 146; AFTER (native or added): 179.
+- Chính tuyến beats: 365; with a Bạc option: 179; of those with a route without silver BEFORE (a non-give-up option without Bạc): 145; AFTER (native or added): 179.
 - Severity of the 179 silver beats: khẩn 4 · vừa 139 · lớn 34.
-- Phụ tuyến (j72) quests with a Bạc step: 34 (they already have a deadline in tuần, fail only when it passes, countdown in the Việc nhờ tab). Steps with a Bạc cost and a free branch: 34.
+- Phụ tuyến (j72) quests with a Bạc step: 34 (they already have a deadline in tuần, fail only when it passes, countdown in the Việc nhờ tab). Quests whose Bạc step has a branch without silver: 34 (before jstory: none — a Bạc step was a single act, blocked while she lacked the silver).
 - Old story (j4, saves before chapters) beats with Bạc: 2 (td1 lão Vương got a route without silver + rank price).
 - Chapter beats WITHOUT their own banner picture (fall back to the arc cover or a room picture): 305 of 365 (list at the end, for act-pics2).
 
@@ -24,14 +24,14 @@ Script: `dev/review/story_audit.js` (reads ARC67 / GB67 / T72 / j4 PEND in the b
 | Quân cờ trong tay cha (tt_co) | t1 Cha tính đường lui | Tự đứng vững, không cần cha (-30) | Viết thư nhắc cha công lao của ngươi; Để mặc | Nhờ người quen lo liệu, không dùng bạc | lớn → 7 ngày |
 | Quân cờ trong tay cha (tt_co) | x1 Ván cờ lớn của cha | Từ chối, cắt đứt dây cờ (-40) | Đặt điều kiện: cha theo ngươi, không phải ngươi theo cha; Khuyên Hoàng thượng như lời cha | Nhờ người quen lo liệu, không dùng bạc | lớn → 7 ngày |
 | Phủ Tể tướng mắc oan (tt_oan) | s1 Tin dữ từ triều | Lặng lẽ cho người dò sổ sách (-40) | Quỳ xin Hoàng thượng minh xét; Giữ khoảng cách với phủ | Nhờ người quen lo liệu, không dùng bạc | vừa → 3 ngày |
-| Phủ Tể tướng mắc oan (tt_oan) | s2 Thư cầu cứu của mẹ | Gửi bạc cho mẹ lo liệu (-50) | Đến gặp thẳng Liễu Lan Chi; Đốt thư, tránh liên lụy | Nhờ người quen lo liệu, không dùng bạc | vừa → 3 ngày |
+| Phủ Tể tướng mắc oan (tt_oan) | s2 Thư cầu cứu của mẹ | Gửi bạc cho mẹ lo liệu (-50) | Đến gặp thẳng Hàn Uyển Nhi; Đốt thư, tránh liên lụy | Nhờ người quen lo liệu, không dùng bạc | vừa → 3 ngày |
 | Phủ Tể tướng mắc oan (tt_oan) | c1 Một thư lại muốn làm chứng | Cho bạc, giữ hắn làm chứng (-60) | Ép hắn viết lời khai ngay; Không tin hắn | Nhờ người quen lo liệu, không dùng bạc | vừa → 3 ngày |
 | Phủ Tể tướng mắc oan (tt_oan) | c2 Nét chữ trong sổ | Nhờ Hàn lâm viện giám định (-40) | Tự đối chiếu nét chữ; Giữ bản chép, chờ thời | Nhờ người quen lo liệu, không dùng bạc | vừa → 3 ngày |
 | Phủ Tể tướng mắc oan (tt_oan) | x1 Ngày tra án | Theo lời dàn xếp, xin Hoàng thượng khoan hồng (-40) | Dâng chứng cứ trước triều; Xin cho cha cáo lão về quê | — |  →  |
 | Phủ Tể tướng chia đôi (tt_tranh) | s1 Huynh trưởng gặp riêng {v} | Lặng lẽ kết thân với {v} (-40) | Viết thư hỏi thẳng huynh trưởng; Báo cho cha | Nhờ người quen lo liệu, không dùng bạc | vừa → 3 ngày |
 | Phủ Tể tướng chia đôi (tt_tranh) | s2 Gia yến chia phe | Gửi lễ cho cha trước (-30); Gửi hai phần lễ ngang nhau (-50); Gửi lễ cho huynh trưởng (-30) | — (only giving up) | Nhờ người quen lo liệu, không dùng bạc | vừa → 3 ngày |
 | Phủ Tể tướng chia đôi (tt_tranh) | c1 Huynh trưởng đòi chia gia sản | Khuyên cha chia cho êm (-20) | Khuyên cha giữ chặt | Nhờ người quen lo liệu, không dùng bạc | vừa → 3 ngày |
-| Phủ Tể tướng chia đôi (tt_tranh) | c2 Con của {v} được đem ra làm cớ | Đề nghị phủ khen cả con ngươi (-30) | Ngăn sớ ấy lại; Để sớ đi, đổi lấy ơn của Hạ Yên Nhiên | — |  →  |
+| Phủ Tể tướng chia đôi (tt_tranh) | c2 Con của {v} được đem ra làm cớ | Đề nghị phủ khen cả con ngươi (-30) | Ngăn sớ ấy lại; Để sớ đi, đổi lấy ơn của Liễu Thục Nghi | — |  →  |
 | Phủ Tể tướng chia đôi (tt_tranh) | c3 Môn sinh của cha lung lay | Gửi quà giữ chân họ (-50) | Xin Hoàng thượng thăng cho một người; Mặc họ đi | Nhờ người quen lo liệu, không dùng bạc | vừa → 3 ngày |
 | Phủ Tể tướng chia đôi (tt_tranh) | t1 Huynh trưởng sa cơ | Âm thầm trả nợ cho huynh (-60) | Để huynh chịu phạt | Nhờ người quen lo liệu, không dùng bạc | lớn → 7 ngày |
 | Mật ước với Hoàng hậu (tt_mat) | s1 Hộp thư bị đánh tráo | Dò hỏi người đưa lễ (-30) | Đọc kỹ, chép lại; Gửi trả nguyên vẹn | Nhờ người quen lo liệu, không dùng bạc | vừa → 3 ngày |
@@ -71,7 +71,7 @@ Script: `dev/review/story_audit.js` (reads ARC67 / GB67 / T72 / j4 PEND in the b
 | Năm đói ở Giang Nam (muoi_doi) | c2 Đầu cơ của nhà khác | Bảo cha bán rẻ, kéo giá xuống (-50) | Tố với Hộ bộ | Nhờ người quen lo liệu, không dùng bạc | vừa → 3 ngày |
 | Năm đói ở Giang Nam (muoi_doi) | c3 Dịch bệnh sau đói | Gửi thuốc men ra lều (-50) | Tự ra lều phát thuốc | Nhờ người quen lo liệu, không dùng bạc | vừa → 3 ngày |
 | Năm đói ở Giang Nam (muoi_doi) | x1 Hoàng thượng xét công tội | Dâng nốt kho thóc cuối (-100) | Tâu rõ những gì nhà đã làm; Lặng im, không kể công | Nhờ người quen lo liệu, không dùng bạc | lớn → 7 ngày |
-| Món nợ trong cung (muoi_no) | s1 Sổ nợ của hiệu buôn | Xóa nợ, kết ơn (-40) | Nhắc khéo Lâm Linh Lung trả nợ; Giữ sổ, chưa nói | Nhờ người quen lo liệu, không dùng bạc | vừa → 3 ngày |
+| Món nợ trong cung (muoi_no) | s1 Sổ nợ của hiệu buôn | Xóa nợ, kết ơn (-40) | Nhắc khéo Liễu Thục Nghi trả nợ; Giữ sổ, chưa nói | Nhờ người quen lo liệu, không dùng bạc | vừa → 3 ngày |
 | Món nợ trong cung (muoi_no) | s2 {v} vay thêm | Cho vay, kèm điều kiện (-40); Cho vay không điều kiện (-40) | — (only giving up) | Nhờ người quen lo liệu, không dùng bạc | vừa → 3 ngày |
 | Món nợ trong cung (muoi_no) | c3 {v} đề nghị trả nợ bằng tin | Nhận tin thay bạc (-20) | Không cần, cứ giữ nợ | Nhờ người quen lo liệu, không dùng bạc | vừa → 3 ngày |
 | Món nợ trong cung (muoi_no) | t1 Nợ đến hạn cuối | Cho thêm hạn (-20) | Đòi bằng được | Nhờ người quen lo liệu, không dùng bạc | lớn → 7 ngày |
@@ -85,7 +85,7 @@ Script: `dev/review/story_audit.js` (reads ARC67 / GB67 / T72 / j4 PEND in the b
 | Mối tình thuở hầu trà (cn_tinh) | t1 Thư cũ lộ ra | Tìm cách đánh tráo thư (-40) | Chuẩn bị lời giải thích | Nhờ người quen lo liệu, không dùng bạc | lớn → 7 ngày |
 | Tri kỷ ở Tân Giả khố (cn_ban) | s1 Lời nhắn từ Tân Giả khố | Lén gửi thuốc và bạc (-30) | Đến Tân Giả khố gặp nàng; Đốt khăn | Nhờ người quen lo liệu, không dùng bạc | vừa → 3 ngày |
 | Tri kỷ ở Tân Giả khố (cn_ban) | s2 Kẻ đã đày Tố Nga | Biếu chưởng sự để nàng được nhẹ việc (-40) | Tố chưởng sự với Tổng quản | Nhờ người quen lo liệu, không dùng bạc | vừa → 3 ngày |
-| Tri kỷ ở Tân Giả khố (cn_ban) | c2 Tố Nga ốm nặng | Lén mời thái y (-40); Gửi bạc, phó mặc (-20) | Tự bốc thuốc gửi xuống | Nhờ người quen lo liệu, không dùng bạc | vừa → 3 ngày |
+| Tri kỷ ở Tân Giả khố (cn_ban) | c2 Tố Nga ốm nặng | Lén mời thái y (-40); Gửi bạc, phó mặc (-20) | — (only giving up) | Nhờ người quen lo liệu, không dùng bạc | vừa → 3 ngày |
 | Tri kỷ ở Tân Giả khố (cn_ban) | t1 Đưa Tố Nga ra khỏi Tân Giả khố | Xin Tố Nga về hầu (-40) | Chờ thời cơ khác | Nhờ người quen lo liệu, không dùng bạc | lớn → 7 ngày |
 | Tri kỷ ở Tân Giả khố (cn_ban) | x1 Sự thật về cái giếng | Xin cho Tố Nga xuất cung về quê (-40) | Đưa Tố Nga ra làm chứng trước Thái hậu; Giữ bí mật, dùng Tố Nga làm tai mắt | Nhờ người quen lo liệu, không dùng bạc | lớn → 7 ngày |
 | Thân thế thật (cn_than) | s1 Lời trăng trối | Lo hậu sự cho ma ma (-30) | Hỏi thêm chi tiết | Nhờ người quen lo liệu, không dùng bạc | vừa → 3 ngày |
@@ -103,7 +103,7 @@ Script: `dev/review/story_audit.js` (reads ARC67 / GB67 / T72 / j4 PEND in the b
 | Ngai vàng cố quốc (nc_vuong) | c2 Triều đình chia phe | Vận động Lễ bộ (-40); Vận động Binh bộ (-40) | — (only giving up) | Nhờ người quen lo liệu, không dùng bạc | vừa → 3 ngày |
 | Ngai vàng cố quốc (nc_vuong) | c3 Hoàng huynh gặp nguy | Gửi bạc riêng giúp huynh (-60) | Quỳ xin Hoàng thượng cứu | Nhờ người quen lo liệu, không dùng bạc | vừa → 3 ngày |
 | Lật lại án cũ (td_an) | s1 Kho hồ sơ Hình bộ | Bỏ bạc nhờ ông chép lại (-40) | — (only giving up) | Nhờ người quen lo liệu, không dùng bạc | vừa → 3 ngày |
-| Lật lại án cũ (td_an) | c1 Nhân chứng bị truy sát | Giấu ông ở Tân Giả khố (-40); Đưa ông ra khỏi kinh (-60) | — (only giving up) | Nhờ Lam Ngọc giấu ông trong kho củi sau cung; Xin Thái y viện nhận ông làm người sắc thuốc | khẩn → 4 buổi |
+| Lật lại án cũ (td_an) | c1 Nhân chứng bị truy sát | Giấu ông ở Tân Giả khố (-40); Đưa ông ra khỏi kinh (-60) | — (only giving up) | Nhờ Bạch Lan giấu ông trong kho củi sau cung; Xin Thái y viện nhận ông làm người sắc thuốc | khẩn → 4 buổi |
 | Lật lại án cũ (td_an) | c2 Thư tay của {foed} | Mua chuộc gia nhân phủ hắn (-50); Nhờ người trong cung {foe} lục tìm (-30) | — (only giving up) | Nhờ người quen lo liệu, không dùng bạc | vừa → 3 ngày |
 | Lật lại án cũ (td_an) | c3 Phải lên cao mới dâng được sớ | Lấy lòng Thái hậu (-40) | Dồn sức lấy lòng Hoàng thượng | Nhờ người quen lo liệu, không dùng bạc | vừa → 3 ngày |
 | Lật lại án cũ (td_an) | t1 {foed} ra tay trước | Cho người cứu hồ sơ (-40) | — (only giving up) | Nhờ người quen lo liệu, không dùng bạc | lớn → 7 ngày |
@@ -165,7 +165,7 @@ Script: `dev/review/story_audit.js` (reads ARC67 / GB67 / T72 / j4 PEND in the b
 | Lão thái giám (s_thay) | s2 Ông muốn gì | Giúp (-20) | — (only giving up) | Nhờ người quen lo liệu, không dùng bạc | vừa → 3 ngày |
 | Lão thái giám (s_thay) | t1 Ông già yếu | Đến thăm, nhận sổ (-20); Gửi quà tiễn (-30) | — (only giving up) | Nhờ người quen lo liệu, không dùng bạc | lớn → 7 ngày |
 | Kẻ thù hóa tri kỷ (s_ban) | c2 {v2} lại ra tay | Giúp {v} bắt kẻ gài (-30) | — (only giving up) | Nhờ người quen lo liệu, không dùng bạc | vừa → 3 ngày |
-| Kẻ thù hóa tri kỷ (s_ban) | x1 Đối mặt {v2} | Một mình đề phòng (-30) | Cùng Trịnh Tuyết Dao lật ngược đòn; Phản Trịnh Tuyết Dao, bắt tay Lâm Linh Lung | Nhờ người quen lo liệu, không dùng bạc | lớn → 7 ngày |
+| Kẻ thù hóa tri kỷ (s_ban) | x1 Đối mặt {v2} | Một mình đề phòng (-30) | Cùng Liễu Thục Nghi lật ngược đòn; Phản Liễu Thục Nghi, bắt tay Hoa Ngọc Dao | Nhờ người quen lo liệu, không dùng bạc | lớn → 7 ngày |
 | Gây dựng thế lực (st_the) | s1 Lời mời của {v} | Nhận lời kết nghĩa (-30) | Khéo giữ khoảng cách | Nhờ người quen lo liệu, không dùng bạc | vừa → 3 ngày |
 | Gây dựng thế lực (st_the) | s2 Cài tai mắt | Chăm lo cho họ (-40) | Không cần | Nhờ người quen lo liệu, không dùng bạc | vừa → 3 ngày |
 | Gây dựng thế lực (st_the) | c1 Một nhà quyền thần dò ý | Đáp lễ, hứa nâng đỡ người của họ (-40) | Giữ tay sạch, không dính triều chính | Nhờ người quen lo liệu, không dùng bạc | vừa → 3 ngày |
@@ -182,7 +182,7 @@ Script: `dev/review/story_audit.js` (reads ARC67 / GB67 / T72 / j4 PEND in the b
 | Thanh mai trúc mã: Ngày từ biệt (tm96a) | a2 Gặp lại ở {lvp} | Sai cung nữ chuyển lời: “Đừng tìm ta” (-10) | Cúi đầu đi qua như người lạ; Dừng lại hỏi một câu xã giao | Nhờ người quen lo liệu, không dùng bạc | vừa → 3 ngày |
 | Thanh mai trúc mã: Ngày từ biệt (tm96a) | a3 Tín vật trở lại | Gửi trả kèm một câu thật lạnh (-10) | Giữ lại, giấu thật kỹ; Đốt mảnh giấy, cất tín vật vào kho chung | Nhờ người quen lo liệu, không dùng bạc | vừa → 3 ngày |
 | Thanh mai trúc mã: Ngày từ biệt (tm96a) | a5 Người hầu đã biết | Tin nàng, nhờ nàng canh cửa (-20) | Dặn nàng quên chuyện này; Đổi nàng sang việc khác cho yên | Nhờ người quen lo liệu, không dùng bạc | vừa → 3 ngày |
-| Thanh mai trúc mã: Ngày từ biệt (tm96a) | a6 Đêm rằm tháng tám | Gửi trả tín vật, xin chàng quên ta (-10) | Giữ lời hẹn trong tim, không để ai biết | Nhờ người quen lo liệu, không dùng bạc | vừa → 3 ngày |
+| Thanh mai trúc mã: Ngày từ biệt (tm96a) | a6 Đêm rằm tháng tám | Gửi trả tín vật, xin chàng quên ta (-10) | Giữ lời hẹn trong tim, không để ai biết; Lẻn ra sau giả sơn, nói với chàng một lời | Nhờ người quen lo liệu, không dùng bạc | vừa → 3 ngày |
 | Thanh mai trúc mã: Lửa thử vàng (tm96b) | b1l Kẻ nắm thóp đòi giá | Đưa bạc cho nàng ta im miệng (-80) | Giả vờ không hiểu nàng nói gì; Thu thập chứng cứ nàng ta, nắm lại thóp | Nhờ người quen lo liệu, không dùng bạc | vừa → 3 ngày |
 | Thanh mai trúc mã: Lửa thử vàng (tm96b) | b2a Chàng vì ngươi mà liều | Lén gửi lời ngăn chàng lại (-20); Để chàng làm, âm thầm đỡ đòn phía sau (-50) | Đòi chàng cắt hẳn mọi liên lạc | Nhờ người quen lo liệu, không dùng bạc | vừa → 3 ngày |
 | Thanh mai trúc mã: Lửa thử vàng (tm96b) | b3a Kẻ thù để ý | Bỏ bạc mua người của nàng ta (-60) | Tạm ngừng mọi liên lạc với chàng; Đánh lạc hướng: để lộ một chuyện vô hại | Nhờ người quen lo liệu, không dùng bạc | vừa → 3 ngày |
@@ -243,7 +243,7 @@ Script: `dev/review/story_audit.js` (reads ARC67 / GB67 / T72 / j4 PEND in the b
 | beat | Bạc option | other options |
 |---|---|---|
 | tt2 | Bỏ bạc lo lót triều thần (-60) | Đứng ngoài, giữ mình |
-| td1 | Giấu ông ở Tân Giả Khố (-30) | Nhờ Lam Ngọc giấu ông trong kho củi; Mặc kệ |
+| td1 | Giấu ông ở Tân Giả Khố (-30) | Nhờ Bạch Lan giấu ông trong kho củi; Mặc kệ |
 
 ## Banners missing (story events may show people) → act-pics2
 
