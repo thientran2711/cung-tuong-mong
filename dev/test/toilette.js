@@ -5,7 +5,7 @@ const {chromium}=require('playwright');const fs=require('fs');
 const [,,URL,VP,DIR,OLD]=process.argv;const m=/(\d+)x(\d+)@([\d.]+)/.exec(VP||'755x1000@2');const W=+m[1],H=+m[2],DPR=+m[3];const tag=`${W}x${H}`;
 fs.mkdirSync(DIR,{recursive:true});
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:DPR,serviceWorkers:'block'});await ctx.route(u=>/ctmload=1|x-ctm-load/.test(String(u)),r=>r.abort());const p=await ctx.newPage();
- const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));p.setDefaultTimeout(60000);const out={vp:VP};
+ const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));p.setDefaultTimeout(180000);const out={vp:VP};
  await p.goto(URL,{waitUntil:'domcontentloaded',timeout:0});await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function',null,{timeout:0});await p.waitForTimeout(1500);
  await p.evaluate(()=>{try{localStorage.clear()}catch(e){}document.getElementById('title').hidden=true;new MutationObserver(()=>document.querySelectorAll('.kroul,#kload').forEach(e=>e.remove())).observe(document.body,{childList:true})});
  for(let i=0;i<20;i++){await p.evaluate(()=>{window.S0=typeof S!=='undefined'?S:null;try{store.set(NL_KEY,null)}catch(e){}start()});
@@ -34,12 +34,12 @@ fs.mkdirSync(DIR,{recursive:true});
  /* §60 colour pick: the face file's anchors from the local file (before the CDN upload), pick son đỏ thắm + phấn tử vi + mày thanh đại */
  await p.evaluate(()=>{const f=String((document.querySelector('#kg82 .kfzoom-i>img')||document.querySelector('#kg82 img.kpor')||{}).src||'').split('/').pop().split('?')[0];window.__mkf=f});
  try{const f=await p.evaluate(()=>window.__mkf);const g=await p.evaluate(f=>MK_FIT.face(f),f);if(g&&fs.existsSync(`img/mk-fit/${g}.json`))await p.evaluate(([g,j])=>{MK_FIT.g[g]=JSON.parse(j);MK_FIT.ld[g]=1;TOIL.prevUI&&TOIL.prevUI()},[g,fs.readFileSync(`img/mk-fit/${g}.json`,'utf8')])}catch(e){}
- for(const [r,k] of [['son','dotham'],['mat','tuvi'],['may','thanhdai']])await p.click(`#kg82 [data-kswtr="${r}"][data-kswti="${k}"]`);
+ for(const [r,k] of [['son','dotham'],['mat','tuvi'],['may','thanhdai']])await p.$eval(`#kg82 [data-kswtr="${r}"][data-kswti="${k}"]`,e=>e.click());/* DOM click: a loaded machine paints ~2 fps */
  await p.waitForFunction(()=>[...document.querySelectorAll('#kg82 img.kmkc')].every(i=>!/^data:image\/gif/.test(i.src)),null,{timeout:60000}).catch(()=>{});await p.waitForTimeout(500);
  out.palette=await p.evaluate(()=>({rows:document.querySelectorAll('#kg82 .kswt-r').length,sw:document.querySelectorAll('#kg82 .kswt-i').length,on:[...document.querySelectorAll('#kg82 .kswt-i.on')].map(e=>e.title),layer:document.querySelectorAll('#kg82 img.kmkc').length,file:window.__mkf,
   clip:[...document.querySelectorAll('#kg82 .kswt-i small')].some(e=>e.scrollWidth>e.clientWidth+1),hov:(()=>{const d=document.querySelector('#kg82');return d?d.scrollWidth>d.clientWidth+1:false})()}));
  await p.screenshot({path:`${DIR}/toil-${tag}-2b-colour.jpg`,quality:70});
- await p.click('#toilgo');await p.waitForFunction(()=>{const i=kg82Img('chai-bg');return i.complete&&i.naturalWidth},null,{timeout:90000}).catch(()=>{});await p.waitForTimeout(2500);
+ await p.$eval('#toilgo',e=>e.click());await p.waitForFunction(()=>{const i=kg82Img('chai-bg');return i.complete&&i.naturalWidth},null,{timeout:90000}).catch(()=>{});await p.waitForTimeout(2500);
  /* 3. kẻ mày: drag along each guide */
  const geo=await p.evaluate(()=>({b:TOIL.geo.brows()}));
  for(const L of geo.b){await p.mouse.move(L[0].x,L[0].y);await p.mouse.down();for(const q of L.filter((_,i)=>i%2===0||i===L.length-1))await p.mouse.move(q.x,q.y,{steps:2});await p.mouse.up()}

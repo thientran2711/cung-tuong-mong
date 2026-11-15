@@ -31,3 +31,28 @@ onto the lips (mouth + cheeks together, face width rescaled where off by > 25 %)
 (jtoil TOIL_FIT.url) so main keeps the old file until this branch is merged; after merge: copy toil-fit2 → toil-fit, point the url back.
 dev/art/toil-fit.json = the fixed copy. Anchor run: 12960 pictures, 12623 detected on the toil-fit crop, 150 on the free retry (whole
 portrait / figure top), 7 by por↔fig pair transfer, 0 failed. Random audit sheets (24 pictures) checked by eye: all on the lips / lids / brows.
+
+## RESUME NOTES (checkpoint 15/11 ~21:00Z, account move)
+State of branch review/mk-colour:
+- Sample 1 (/home/user/wt/mk-colour-sample.jpg, local only) sent. Owner feedback (via coordinator): "đẹp" faces very pretty; (1) đẹp lipstick
+  slightly softer → DONE (TOIL_MKS.dep.lip .62 → .54); (2) more colours incl. ORANGE/coral → DONE (Phấn hổ phách, Phấn cam quýt, Son cam đào,
+  Son hổ phách); (3) presets 7 đẹp + 7 diêm dúa, 3 cool + 4 warm each, cổ trang names → DONE in code (`TOIL_PRE`, rows "Kiểu thanh nhã" /
+  "Kiểu diêm dúa" above the 4 colour rows in the Chọn màu step; swatch = 4-colour conic dot). RULE TOUCH to flag for review: picking a
+  diêm dúa preset sets col.want="diem" → a made-up face with score ≥ tier[1] shows as diêm dúa (before: only caked powder made diêm dúa).
+- TODO next: sample sheet 2 = all 14 presets on her face → /home/user/wt/mk-colour-sample2.jpg (extend dev/test/mk-colour.js: rows đẹp / diêm,
+  7 columns, face zoom), message coordinator; re-run viewport tests (1180x820 run still flaky under load: DOM clicks used in the palette step).
+- Viewport results before the preset change: 755x1000, 1000x755, 1366x1024, 844x390 PASS (palette 4 rows, layers on header + stage, old save
+  from main loads with look dep + default colours, no overflow, 0 page errors). 1180x820: timed out under load (machine paints ~2 fps;
+  main has the same frame rate) — rerun.
+- ANCHORS: img/mk-fit/*.json for all 12960 pictures are on the CDN (uploaded ~19:50Z) and committed in dev/art/mkfit/.
+  review/por-scale then re-cropped portraits (incl. por-player-look1-t3-a18, look2-t1-a36, look2-t3-a18, look3-t3-a18, look4-t1-a18,
+  look4-t3-a18 + many maid/consort por; list dev/review/por-scale/recrop.json on review/por-scale) and transformed toil-fit.json on the CDN.
+  A `--stale` re-measure was running at the checkpoint (dev/art/toil-fit.json = the NEW CDN toil-fit, not yet fixed). To resume:
+    pip install mediapipe; apt-get install -y libegl1 libgles2; download face_landmarker.task (MediaPipe model storage,
+    face_landmarker/face_landmarker/float16/1) to .mk/ (or pass --model);
+    python3 dev/site/cdn_sync.py --pull 'img/mk-fit/*'   (or copy dev/art/mkfit/*.json except md5.json to img/mk-fit/)
+    curl the CDN img/toil-fit.json → dev/art/toil-fit.json (por-scale version)
+    python3 -I dev/art/mkfit/mkfit.py --stale --jobs 8      (re-measures pictures whose CDN md5 differs from dev/art/mkfit/md5.json)
+    python3 -I dev/art/mkfit/fixtoil.py && cp img/toil-fit.json img/toil-fit2.json && rm img/toil-fit.json
+    python3 dev/site/cdn_sync.py img/toil-fit2.json img/mk-fit ; cp img/mk-fit/*.json dev/art/mkfit/ ; commit.
+  Until then img/toil-fit2.json on the CDN holds the PRE-re-crop points: the re-cropped portraits' blush is off on this branch only.

@@ -26057,7 +26057,7 @@ function toilMakeup(){const st=TOIL.st,box=kg82Box();box.innerHTML="";box.hidden
 function toilFinish(made){const st=TOIL.st;if(!st)return;try{if(KG82.run&&KG82.run.stop)KG82.run.stop()}catch(e){}KG82.run=null;
  const sk=toilSkill();let score=0,raw=0,bonus=0;if(made){const P=st.parts;raw=Math.round(100*(.4*(P.brow||0)+.3*(P.powder||0)+.3*(P.son||0)));bonus=Math.round(BAL.toil.skillShare*sk.sk);score=Math.max(0,Math.min(100,Math.round(raw*(100-BAL.toil.skillShare)/100)+bonus))}
  if(!st.dv){const d=toilDress(S,st.F);st.dv=d.v;st.style=d.style}
- const over=made&&(st.parts.thick||0)>=BAL.toil.diemThick;const look=!made?null:over?"diem":score>=BAL.toil.tier[1]?"dep":null;
+ const over=made&&(st.parts.thick||0)>=BAL.toil.diemThick;const want=made&&st.col&&st.col.want==="diem"&&score>=BAL.toil.tier[1];const look=!made?null:over||want?"diem":score>=BAL.toil.tier[1]?"dep":null;
  S.toilette={day:toilWk()*10,wk:toilWk(),score,makeup:!!made,style:st.style,dv:st.dv,F:st.F,occ:st.occ.map(o=>o.k),look};if(made)S.toilette.col=toilColFix(st.col);TOIL.prev=null;
  const mk=made?(look==="diem"?"diem":toilTier(score)):"moc";const good=mk==="dep"||mk==="tuyet";try{sfx(made?(good?"learn-good":mk==="vung"?"learn-bad":"tap"):"tap")}catch(e){}
  log(`Sáng nay ta điểm trang: y phục ${TOIL_DV[st.dv]}, ${made?`trang điểm ${TOIL_MK[mk]} (${score} phần)`:"để mặt mộc"}.`);
@@ -26170,22 +26170,43 @@ if(typeof kitFxLayers==="function"){const fx0=kitFxLayers;kitFxLayers=function(p
    it is one <img class="kmk kmkc"> over the same box as the picture. A picture without points keeps the older SVG lip oval (never guessed). */
 const TOIL_COL={
  mat:{label:"Phấn mắt",def:"hoadao",L:[["hoadao","Phấn hoa đào","hoa đào",[234,148,146]],["hongmai","Phấn hồng mai","hồng mai",[214,104,128]],["rangchieu","Phấn ráng chiều","ráng chiều",[226,128,96]],
-  ["kimsa","Phấn kim sa","kim sa",[204,160,92]],["nautram","Phấn nâu trầm","nâu trầm",[150,100,82]],["tuvi","Phấn tử vi","tử vi",[170,116,168]]]},
+  ["kimsa","Phấn kim sa","kim sa",[204,160,92]],["nautram","Phấn nâu trầm","nâu trầm",[150,100,82]],["tuvi","Phấn tử vi","tử vi",[170,116,168]],["hophach","Phấn hổ phách","hổ phách",[214,132,62]]]},
  ma:{label:"Phấn má",def:"hongphan",L:[["hongphan","Phấn hồng phấn","hồng phấn",[238,128,144]],["hoadao","Phấn má hoa đào","hoa đào",[242,150,140]],["haiduong","Phấn hải đường","hải đường",[230,110,126]],
-  ["yenchi","Yên chi","yên chi",[214,76,100]],["rangchieu","Phấn ráng chiều","ráng chiều",[240,140,108]],["hongsen","Phấn hồng sen","hồng sen",[226,120,160]]]},
+  ["yenchi","Yên chi","yên chi",[214,76,100]],["rangchieu","Phấn ráng chiều","ráng chiều",[240,140,108]],["hongsen","Phấn hồng sen","hồng sen",[226,120,160]],["camquyt","Phấn cam quýt","cam quýt",[246,150,96]]]},
  son:{label:"Son môi",def:"haiduong",L:[["haiduong","Son hải đường","hải đường",[206,60,80]],["dotham","Son đỏ thắm","đỏ thắm",[176,20,40]],["hongdao","Son hồng đào","hồng đào",[226,104,112]],
-  ["chusa","Son chu sa","chu sa",[204,54,38]],["manchin","Son mận chín","mận chín",[132,36,66]],["sanho","Son san hô","san hô",[232,104,86]]]},
+  ["chusa","Son chu sa","chu sa",[204,54,38]],["manchin","Son mận chín","mận chín",[132,36,66]],["sanho","Son san hô","san hô",[232,104,86]],["camdao","Son cam đào","cam đào",[238,122,74]],["hophach","Son hổ phách","hổ phách",[214,92,40]]]},
  may:{label:"Màu mày",def:"nau",L:[["nau","Mày nâu trầm","nâu trầm",[84,56,42]],["den","Mày đen tuyền","đen tuyền",[34,28,28]],["thanhdai","Mày thanh đại","thanh đại",[46,58,76]],
   ["naunhat","Mày nâu nhạt","nâu nhạt",[122,88,64]],["khoi","Mày khói","khói",[88,82,82]]]}};
 window.TOIL_COL=TOIL_COL;
+/* presets (owner 15/11 on sample 1): 7 "đẹp" + 7 "diêm dúa", each 3 cool-tone + 4 warm-tone, like a modern palette. A diêm dúa preset is her
+   choice to paint boldly: a made-up face (score ≥ tier[1]) then shows as diêm dúa (the same as caked powder) — col.want = "diem". */
+const TOIL_PRE=[
+ ["suongmai","Sương mai","dep","cool",{mat:"tuvi",ma:"hongsen",son:"hongdao",may:"khoi"}],
+ ["hoale","Hoa lê","dep","cool",{mat:"hongmai",ma:"hongphan",son:"haiduong",may:"thanhdai"}],
+ ["tudang","Tử đằng","dep","cool",{mat:"tuvi",ma:"hongsen",son:"manchin",may:"thanhdai"}],
+ ["daohoa","Đào hoa","dep","warm",{mat:"hoadao",ma:"hoadao",son:"hongdao",may:"nau"}],
+ ["rangchieu","Ráng chiều","dep","warm",{mat:"rangchieu",ma:"rangchieu",son:"sanho",may:"naunhat"}],
+ ["hophach","Hổ phách","dep","warm",{mat:"hophach",ma:"camquyt",son:"camdao",may:"nau"}],
+ ["thucuc","Thu cúc","dep","warm",{mat:"kimsa",ma:"hoadao",son:"chusa",may:"nau"}],
+ ["maudon","Mẫu đơn tím","diem","cool",{mat:"tuvi",ma:"hongsen",son:"manchin",may:"den"}],
+ ["hongmai","Hồng mai","diem","cool",{mat:"hongmai",ma:"yenchi",son:"dotham",may:"den"}],
+ ["bangngoc","Băng ngọc","diem","cool",{mat:"hongmai",ma:"hongsen",son:"haiduong",may:"thanhdai"}],
+ ["yenchi","Yên chi","diem","warm",{mat:"hongmai",ma:"yenchi",son:"chusa",may:"den"}],
+ ["luuhong","Lựu hồng","diem","warm",{mat:"rangchieu",ma:"yenchi",son:"dotham",may:"den"}],
+ ["camhoa","Cam hỏa","diem","warm",{mat:"hophach",ma:"camquyt",son:"hophach",may:"nau"}],
+ ["kimtuoc","Kim tước","diem","warm",{mat:"kimsa",ma:"rangchieu",son:"camdao",may:"nautram"}]];
+window.TOIL_PRE=TOIL_PRE;
+function toilPreOf(c){const p=TOIL_PRE.find(x=>(x[2]==="diem")===(c.want==="diem")&&["mat","ma","son","may"].every(k=>x[4][k]===c[k]));return p?p[0]:""}
+function toilPreRows(c){const cur=toilPreOf(c);return [["dep","Kiểu thanh nhã"],["diem","Kiểu diêm dúa"]].map(([lk,label])=>({k:"pre-"+lk,label,sel:cur,
+ items:TOIL_PRE.filter(x=>x[2]===lk).map(x=>({k:x[0],name:`${x[1]} (${x[3]==="cool"?"sắc lạnh":"sắc ấm"})`,short:x[1],cols:["mat","ma","son","may"].map(k=>toilColRGB(k,x[4][k]))}))}))}
 function toilColDef(){const o={};for(const k in TOIL_COL)o[k]=TOIL_COL[k].def;return o}
 function toilColE(part,k){const P=TOIL_COL[part];return P.L.find(x=>x[0]===k)||P.L.find(x=>x[0]===P.def)}
 function toilColRGB(part,k){return toilColE(part,k)[3].slice()}
-function toilColFix(c){const o=toilColDef();if(c&&typeof c==="object")for(const k in o)if(TOIL_COL[k].L.some(x=>x[0]===c[k]))o[k]=c[k];return o}
+function toilColFix(c){const o=toilColDef();if(c&&typeof c==="object"){for(const k in o)if(TOIL_COL[k].L.some(x=>x[0]===c[k]))o[k]=c[k];if(c.want==="diem")o.want="diem"}return o}
 function toilColOfP(p){if(TOIL.prev)return TOIL.prev.col;const r=p===S?toilToday(S):null;return toilColFix(r&&r.col)}
 function toilColText(c){c=toilColFix(c);return ["mat","ma","son","may"].map(k=>toilColE(k,c[k])[1]).join(", ")}
 /* strength by look: lip / eyelid colour share, eyelid height (share of the lid→brow gap), brow tint, outer wing, lower lash line */
-const TOIL_MKS={dep:{lip:.62,eye:.5,eyeH:.5,brow:.45,wing:.08,low:0},diem:{lip:.86,eye:.7,eyeH:.68,brow:.68,wing:.22,low:.4}};
+const TOIL_MKS={dep:{lip:.54,eye:.5,eyeH:.5,brow:.45,wing:.08,low:0},diem:{lip:.86,eye:.7,eyeH:.68,brow:.68,wing:.22,low:.4}};
 const MK_FIT={g:{},ld:{},face(f){const m=/^(?:por|fig)-([a-z]+-[a-z]*\d+)-/.exec(String(f||""));return m?m[1]:null},
  get(f){const g=this.face(f);if(!g)return null;const t=this.g[g];if(t)return t[f]||null;this.load(g);return null},
  load(g){if(this.ld[g])return;this.ld[g]=1;try{fetch("https://ctm-img.victoria-tntt.workers.dev/img/mk-fit/"+g+".json").then(r=>r.ok?r.json():null).then(j=>{if(j){MK_FIT.g[g]=j;try{if(typeof S!=="undefined"&&S&&!Q.length&&!TOIL.st)render();else if(TOIL.st&&TOIL.prev&&TOIL.prevUI)TOIL.prevUI()}catch(e){}}}).catch(()=>{})}catch(e){}}};
@@ -26246,7 +26267,7 @@ const KSWT={reg:{}};
 function kitSwatches(o){o=o||{};const key=o.key||"sw";KSWT.reg[key]=o;const esc=s=>String(s).replace(/[&<>"]/g,"");
  return `<div class="kswt" data-kswt="${key}">`+(o.rows||[]).map(r=>{const cur=r.items.find(i=>i.k===r.sel)||r.items[0];
   return `<div class="kswt-r"><div class="kswt-h"><b>${esc(r.label)}</b><span>${esc(cur?cur.name:"")}</span></div><div class="kswt-g" role="radiogroup" aria-label="${esc(r.label)}">`+
-   r.items.map(i=>`<button type="button" class="kswt-i${i.k===r.sel?" on":""}" role="radio" aria-checked="${i.k===r.sel}" data-kswtk="${key}" data-kswtr="${r.k}" data-kswti="${i.k}" title="${esc(i.name)}" style="--sw:rgb(${i.col.join(",")})"><i></i><small>${esc(i.short||i.name)}</small></button>`).join("")+`</div></div>`}).join("")+`</div>`}
+   r.items.map(i=>`<button type="button" class="kswt-i${i.k===r.sel?" on":""}" role="radio" aria-checked="${i.k===r.sel}" data-kswtk="${key}" data-kswtr="${r.k}" data-kswti="${i.k}" title="${esc(i.name)}" style="--sw:${i.cols?`conic-gradient(${i.cols.map((c,j,A)=>`rgb(${c.join(",")}) ${Math.round(j*100/A.length)}% ${Math.round((j+1)*100/A.length)}%`).join(",")})`:`rgb(${i.col.join(",")})`}"><i></i><small>${esc(i.short||i.name)}</small></button>`).join("")+`</div></div>`}).join("")+`</div>`}
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-kswtk]");if(!b)return;const o=KSWT.reg[b.dataset.kswtk];if(!o||!o.onPick)return;e.preventDefault();try{sfx("tap")}catch(x){}o.onPick(b.dataset.kswtr,b.dataset.kswti)});
 (function(){const st=document.createElement("style");st.id="kswt-css";st.textContent=`
 .kswt{display:grid;gap:8px}
@@ -26279,9 +26300,9 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§60",title:"kitSw
 
 /* (b0) CHỌN MÀU — before the three hồi: her portrait wears the picks live (the same layers as all day, at the "đẹp" strength) */
 function toilColUI(){const st=TOIL.st,box=kg82Box();if(!box||!st)return;box.hidden=false;st.col=toilColFix(st.col||(S.toilette&&S.toilette.col));
- TOIL.prev={look:"dep",col:st.col};TOIL.prevUI=toilColUI;const por=toilPor(),me=pMe();
- box.innerHTML=`<div class="toilw"><div class="toilfig">${kitFaceZoom(S,kitFile(por.src))||pcPort(Object.assign({},me,{src:por.src}),me.col)}<p class="past">Gương đồng soi trước: điểm trang khéo thì dung nhan mang đúng những màu này; phấn đánh quá dày thành diêm dúa, màu càng đậm.</p></div>`+
-  `<div>${kitSwatches({key:"toilcol",rows:toilColRows(st.col),onPick:(r,k)=>{st.col[r]=k;toilColUI()}})}</div></div>`+
+ TOIL.prev={look:st.col.want==="diem"?"diem":"dep",col:st.col};TOIL.prevUI=toilColUI;const por=toilPor(),me=pMe();
+ box.innerHTML=`<div class="toilw"><div class="toilfig">${kitFaceZoom(S,kitFile(por.src))||pcPort(Object.assign({},me,{src:por.src}),me.col)}<p class="past">Gương đồng soi trước: điểm trang khéo thì dung nhan mang đúng những màu này. Kiểu diêm dúa (hay phấn đánh quá dày) thì màu đậm hẳn, người trọng lễ dễ chê.</p></div>`+
+  `<div>${kitSwatches({key:"toilcol",rows:toilPreRows(st.col).concat(toilColRows(st.col)),onPick:(r,k)=>{if(/^pre-/.test(r)){const x=TOIL_PRE.find(y=>y[0]===k&&"pre-"+y[2]===r);if(x){st.col=Object.assign({},x[4]);if(x[2]==="diem")st.col.want="diem"}}else st.col[r]=k;toilColUI()}})}</div></div>`+
   `<div class="kg82act"><button class="${kg82Btn()}" id="toilgo">Trang điểm<small>kẻ mày, đánh phấn, chấm son</small></button><button class="${kg82Btn(true)}" id="toilmoc2">Để mặt mộc</button></div>`;
  $("toilgo").onclick=()=>{TOIL.prev=null;TOIL.prevUI=null;toilMakeup()};$("toilmoc2").onclick=()=>{TOIL.prev=null;TOIL.prevUI=null;toilFinish(false)}}
 window.toilColUI=toilColUI;window.kitSwatches=kitSwatches;
@@ -26859,7 +26880,7 @@ if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§28.13e",title:"Pick 
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="34b07dee71b3";window.CTM_BUILD=BUILD;
+const BUILD="28f3dedfa68c";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
