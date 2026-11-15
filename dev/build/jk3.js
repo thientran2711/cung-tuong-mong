@@ -392,7 +392,7 @@ function kitBulletsHTML(h){h=String(h||"").trim();if(!h)return h;const txt=h.rep
   const endP=depth===0&&((/[.!…]/.test(c)||(c==="?"&&h[i-1]!=="?"&&h[i+1]!=="?"))||(c===")"&&cur.trim().replace(/^(<[^>]+>)+/,"").startsWith("(")));
   if(endP&&/^\s+/.test(h.slice(i+1))){const rest=h.slice(i+1).replace(/^\s+/,"").replace(/^(<[^>]+>)+/,"");const f=rest.charAt(0);if(/[("“]/.test(f)||(f&&f===f.toUpperCase()&&f!==f.toLowerCase())){parts.push(cur);cur=""}}
   else if(depth===0&&c===":"&&cur.replace(/<[^>]+>/g,"").length>30&&/^\s+(<[^>]+>)*[A-ZĐÀÁẢÃẠÂẦẤẨẪẬĂẰẮẲẴẶÈÉẺẼẸÊỀẾỂỄỆÌÍỈĨỊÒÓỎÕỌÔỒỐỔỖỘƠỜỚỞỠỢÙÚỦŨỤƯỪỨỬỮỰỲÝỶỸỴ][^:.<()]{0,24}:\s/.test(h.slice(i+1))){parts.push(cur.slice(0,-1));cur=""}}
- if(cur.trim())parts.push(cur);const P=parts.map(s=>s.trim().replace(/^(<\/[^>]+>)+/,"").trim()).filter(s=>s.replace(/<[^>]+>/g,"").trim());
+ if(cur.trim())parts.push(cur);const P=parts.map(s=>s.trim().replace(/^(<\/[^>]+>)+/,"").trim()).filter(s=>/[\p{L}\d]/u.test(s.replace(/<[^>]+>/g,"")));/* act audit 08:35Z: a bullet that is only "." (left after a chip) is dropped */
  if(P.length<2)return null;const foot=[],li=[];
  P.forEach(s=>{const t=s.replace(/<[^>]+>/g,"").trim();if(/^\(.*\)\.?$/.test(t)){foot.push(t.replace(/^\(|\)\.?$/g,""));return}
   s=s.replace(/\.\s*$/,"").replace(/\(([^()<>]*?)([+−-]\s?\d+)\)/g,(m,a,n)=>`(<span class="ef ${/^\+/.test(n)?"g":"r"}">${a}${n}</span>)`);li.push(s)});
