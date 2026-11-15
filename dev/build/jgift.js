@@ -87,6 +87,9 @@ window.KIT_PICFALL=window.KIT_PICFALL||{};
 (function(){if(typeof kitEvArt!=="function")return;const k0=kitEvArt;kitEvArt=function(m){if(giftIxOf(m)!=null)return null;const r=k0.apply(this,arguments);try{
   if(!r||!m||m.art||m.stArt)return r;const pp=m.pp||{};const id=m.evId||(m.pid?(m.pid+(pp&&(pp.id||pp.k)?":"+(pp.id||pp.k):"")):"")||(m.kind==="news"||/Tin trong cung/.test(m.t||"")?"news:"+(m.t||""):"");
   const mapped=id&&typeof evArtCat==="function"&&evArtCat(id);if(mapped)return r;
+  /* the event's own key without its module prefix (j71f:doanngo → doanngo / fest:doanngo): festivals, invitations… */
+  const salt=(typeof S!=="undefined"&&S)?(S.year*100+S.month*3+(S.tuan||0)):0;
+  for(const k of [pp.k,pp.id,pp.kind].filter(x=>typeof x==="string"&&x)){for(const kk of [k,"fest:"+k]){const c=evArtCat(kk);if(c){KIT_PICFALL["~"+id]=kk;return{src:evArtOf(kk,salt),lab:typeof evArtTitle==="function"?evArtTitle(kk):""}}}}
   const t=giftPlain(m.t||"")+" "+giftPlain(m.h||"").slice(0,80);const a=typeof kitActArt==="function"?kitActArt(t):null;
   const key=id||"title:"+giftPlain(m.t||"");KIT_PICFALL[key]=(KIT_PICFALL[key]||0)+1;
   return a&&a.src?{src:a.src,lab:a.label||""}:null}catch(e){return r}}})();
@@ -124,3 +127,15 @@ addEventListener("click",ev=>{const t=ev.target.closest&&ev.target.closest("[dat
 /* a gift that ARRIVES (PEND.giftin) shows the item, too */
 (function(){const k0=kitEvArt;kitEvArt=function(m){try{if(m&&m.pid==="giftin"&&m.pp&&m.pp.e){const a=giftArt(m.pp.e);if(a&&a.src)return{src:a.src,lab:giftName(m.pp.e)}}}catch(e){}return k0.apply(this,arguments)}})();
 (function(){const st=document.createElement("style");st.textContent=`.kgiftown{display:flex;align-items:center;gap:8px;margin:0 0 6px;font-weight:600}.kgiftown .md{flex:0 0 auto}`;document.head.appendChild(st)})();
+
+/* ---------- every dialog: no empty round dots on plain fact rows, no "Tốn: không" rows ---------- */
+(function(){const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);try{const M=$("modal");if(M&&!M.hidden){
+  M.querySelectorAll(".kfact > .kfdot").forEach(x=>{if(!x.querySelector("img,.md,.kit")){x.parentElement.classList.add("kfnodot");x.remove()}});
+  M.querySelectorAll(".opt .kr-ton").forEach(x=>{const v=(x.querySelector(".krv")||{}).textContent||"";if(/^\s*không\s*$/i.test(v))x.remove()})}}catch(e){}return r}})();
+(function(){const st=document.createElement("style");st.id="kgift-css2";st.textContent=`
+.kfact.kfnodot{grid-template-columns:minmax(0,1fr)!important}
+/* the event banner with people on the picture (KIT 33.6): category chip in the top-left corner, never over a head; name chips clear of the frame */
+html body #mb>.kdlgart.kesonpic .ksart>figcaption,html body #mb>.kdlgart.kesonpic .ksart>.ksart-chip{top:8px!important;bottom:auto!important;left:10px!important;right:auto!important;transform:none!important;z-index:21}
+html body #mb .kesov>.kpsn{bottom:12px!important}
+html body #mb .kesov>.kpsn[data-row="1"]{bottom:calc(12px + 2.6em)!important}
+`;document.head.appendChild(st)})();
