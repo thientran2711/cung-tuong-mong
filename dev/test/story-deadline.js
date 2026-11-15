@@ -1,4 +1,4 @@
-/* jstory check (owner 17:06Z): the witness beat (td_an c1) with Bạc 29 → title "Chính tuyến · … · Bước i/n", the silver route shows the rank
+/* jstory check (owner 17:06Z): the witness beat (td_an c1) with Bạc 29 → title "Chính tuyến · … · Chương c · Hồi i/n", the silver route shows the rank
    price, a pledge option + non-silver routes exist, pledging keeps the beat open, the countdown chip is in the stage plaque and the Mệnh
    truyện tab, paying later from the chip resolves the beat, and an unpaid pledge lapses only after its deadline.
    usage: NODE_PATH=$(npm root -g) node dev/test/story-deadline.js <url> [WxH] [shot.png] */
@@ -16,7 +16,7 @@ const {chromium}=require('playwright');const [,,URL,VP,SHOT]=process.argv;const 
  const out={};const r1=await setup();out.dialog=r1;
  if(SHOT)await p.screenshot({path:SHOT});
  const ok=[];const chk=(n,c)=>ok.push([n,!!c]);
- chk('title Chính tuyến · Báo thù cho nhà · Bước 2/n',/^Chính tuyến · Báo thù cho nhà · Bước 2\/\d$/.test(r1.t));
+ chk('title Chính tuyến · Báo thù cho nhà · Chương 2 · Hồi 2/n (chap-label)',/^Chính tuyến · Báo thù cho nhà · Chương 2 · Hồi 2\/\d$/.test(r1.t));
  chk('silver route priced by rank',r1.fx.includes(r1.exp));chk('no horizontal overflow',r1.ovf<=0);
  chk('pledge option',r1.opts.some(n=>/nhận lời, lo liệu trong/.test(n)));
  chk('non-silver routes (kho củi, Thái y viện)',r1.opts.some(n=>/kho củi/.test(n))&&r1.opts.some(n=>/Thái y viện/.test(n)));
