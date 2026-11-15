@@ -717,3 +717,22 @@ All must work in co-op.
   4. Settings: "Hiệu ứng: Đầy đủ / Gọn" (Gọn = still pictures, no particles/video) + auto-Gọn on weak devices.
   5. Co-op: online messages carry only small game state, never graphics, so animations don't add network lag; each player's effects run locally. Animations must not block or delay sync (they play after the state is applied; tap to skip).
   6. A perf test (frame time + memory + bytes per scene) in CI for 755x1000 and a mid phone profile.
+
+## 15/11 ~22:45Z — Painted animations for ALL events (owner)
+- Animations for every event and game moment, not just nights. Code-drawn weather is tolerated, but other code effects look off-style (e.g. the red screen flash for danger). Replace with painted (Magnific) effects. Owner asked for recommendations; per owner rule build them.
+- Coordinator list (build all, painted sprites/short black-bg screen-blend videos, perf budget applies):
+  1. Danger / harm / punishment: ink-blood spreading from the screen edges (painted ink bleed, dark red), instead of the flat red flash.
+  2. Poison: green-black ink seeping, a cracked tea cup.
+  3. Slap / scolding: brush-stroke impact streak + paper shake.
+  4. Gift giving: the chosen item wrapped in a silk cloth / lacquer gift box (painted), carried by a maid's hands across to the person, ribbon untied on arrival; refused → box returned / set down.
+  5. Receiving a gift: box opens with a soft light + painted sparkles.
+  6. Rumour / gossip: drifting painted ink-whisper wisps / fluttering paper notes.
+  7. Edict / decree: scroll unrolls with gold dust (painted).
+  8. Promotion: gold petals + light rays; demotion: cracked jade + falling grey ash.
+  9. Secret letter / spying: candle-lit paper sliding under a door, wax seal.
+  10. Festival: lanterns rising, fireworks (painted), confetti of petals.
+  11. Exam / contest win: red seal stamp slam + petals; loss: ink blot.
+  12. Death: white silk falling, incense smoke curls.
+  13. Pregnancy / birth: soft pink lotus light, swaddle reveal.
+  14. Love / romance: drifting peach blossom + red thread.
+  15. Weather: keep code, but optionally upgrade rain/snow/petals to painted sprites for style match.
