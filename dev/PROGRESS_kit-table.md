@@ -54,4 +54,6 @@ Status: SẴN SÀNG KIỂM (branch pushed). Worktree deleted after push.
   files rebuilt. The §51 compact-act grid rule in jk4 survived kit-fig2's §43 reference copy. Rerun: kit-table.js 755x1000 1141/0 ·
   1000x755 1121/0 · 1180x820 1156/0 · 1366x1024 1148/0 · 844x390 1144/0 · 390x844 1117/0; pane-bar 48/48; tabs-kit-shots 60/60; old save
   (main 27491781f build) 6 sizes 8/8 tabs, no overflow; 0 page errors.
+- Fourth main merge (main b8a58e87, kit-fig2 r8 + act-pics2 r7): built files only, rebuilt; jk4 §51 rule intact. Spot rerun: kit-table.js
+  755x1000 1102/0, 844x390 1132/0; pane-bar 755x1000/844x390/390x844 24/24; tabs-kit-shots 1180x820/844x390 20/20; 0 page errors.
 - Result: PASS (see report sha).
