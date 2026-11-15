@@ -19,3 +19,8 @@ Build: `python3 dev/build/assemble.py`; site for tests: `bash dev/site/build_sit
   Thái hậu dies, lãnh cung plain, none away from home); 390x844@3 host mode = rotated frame (rotate prompt) ok.
 - Kit page #kit: §58/§58.1/§58.2 render (pre-existing §28.1 sample error is on main too, not from this branch).
 - Old save: a save made by the live main build loads in this build; desk + calendar open, current tuần row correct.
+## Review r1 (15/11, review/month-calendar-r1)
+- Fix: kdcPlace also avoids the stage "+N"/"‹" page chips (.j59more); KIT §58 text updated.
+- Site rebuilt on origin/main 64e91f1ae. month-cal.js bad 0 / 0 errors at 755x1000@2, 1000x755, 1180x820@2, 1366x1024@2, 844x390@3,
+  390x844 rotate prompt. Crowded home (2–3 visitors + page chip): desk 0 overlap at all 5 sizes. #kit: §58/.1/.2 ok (only the old §28.1 error).
+- CDN: desk-cal.webp, desk-cal-plain.webp and all 14 ev-fest-*.webp present.

@@ -2514,7 +2514,7 @@ A wall calendar so she can prepare for the festivals ahead. Registry: §58 (coor
 - **kitDeskCal** (owner update): the painted desk calendar `img/kit/desk-cal.webp` (gpt-2-6, cut out; plain wooden `desk-cal-plain.webp`
   in lãnh cung / as a servant) stands in a corner of HER room's stage (`S.place` "home", or "lc" while `S.out`); never elsewhere. Size
   `KIT_DESKCAL` = 11 % of the stage height, 48–84 px (≥ 44 px tap). Corner order: bottom-right, bottom-left, top-left under the place title,
-  top-right; the first one that covers no name tag, side card, title, chip or figure body (figure box at 60 % width) wins (`kdcPlace`,
+  top-right; the first one that covers no name tag, side card, title, chip, "+N"/"‹" page chip or figure body (figure box at 60 % width) wins (`kdcPlace`,
   re-run after renderStage and on resize). One tap opens `kitMonthCalOpen()`.
 - No save data (old saves load unchanged). Samples on the kit page (#kit): §58 (this month), §58.1 (tháng giêng), §58.2 (both desk calendars).
 - Test: `node dev/test/month-cal.js <index.html> [outdir] [sizes]` (desk present, ≥ 44 px, inside the stage, 0 overlap; 12 tabs; no clipped

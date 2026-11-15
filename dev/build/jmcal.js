@@ -88,7 +88,7 @@ document.addEventListener("mouseover",e=>{try{if(!matchMedia("(hover:hover) and 
 const KIT_DESKCAL={min:48,max:84,frac:.11,pad:8};
 function kdcPlain(){try{return !!(S.out||(typeof isSrv==="function"&&isSrv()))}catch(e){return false}}
 function kdcRects(st){const L=[];const add=(e,sx)=>{const r=e.getBoundingClientRect();if(r.width<2||r.height<2)return;if(sx){const w=r.width*sx;L.push({left:r.left+(r.width-w)/2,right:r.right-(r.width-w)/2,top:r.top,bottom:r.bottom})}else L.push(r)};
- st.querySelectorAll("#sc-t,#stop,.ksh,.k3cs,.tag,#j59metag,#tomap,.kmm,.kchip,.kmnote,.empty").forEach(e=>{if(e.offsetParent)add(e)});
+ st.querySelectorAll("#sc-t,#stop,.ksh,.k3cs,.tag,#j59metag,#tomap,.kmm,.kchip,.kmnote,.empty,.j59more").forEach(e=>{if(e.offsetParent)add(e)});
  st.querySelectorAll("img.figimg,#mefig").forEach(e=>{if(e.offsetParent)add(e,.6)});return L}
 function kdcPlace(){const st=document.getElementById("stage"),b=document.getElementById("kmcdesk");if(!st||!b)return;const R=st.getBoundingClientRect();if(R.width<40)return;
  const sz=Math.round(Math.max(KIT_DESKCAL.min,Math.min(KIT_DESKCAL.max,R.height*KIT_DESKCAL.frac)));const p=KIT_DESKCAL.pad;b.style.setProperty("--kmcd",sz+"px");
