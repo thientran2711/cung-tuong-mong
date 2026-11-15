@@ -6098,6 +6098,13 @@ function pidEnforce(){if(!S||!S.pid)return false;let ch=false;S.fid=S.pid;const 
   if(ch&&NLP&&NLP.seed===d.seed)store.set(NL_KEY,d)}}catch(e){console.error(e)}return r}})();
 /* the identity card: show her portrait as soon as it has loaded (the card is a modal, render() alone does not redraw it) */
 (function(){const c0=nlCard;nlCard=function(){const r=c0.apply(this,arguments);try{const src=figFor(S,"por");if(src&&PORK[src]!==1){const im=new Image();im.onload=()=>{PORK[src]=1;try{const m=Q[0];if(NLP&&m&&m.nl){m.faces=[[pMe(),S.name]];showModal()}}catch(e){}};im.src=src}}catch(e){}return r}})();
+/* review/player-dress: a life started past Luân hồi (window.__nlInner: test drivers, tools) used to get no identity and fell back to the
+   old t1-only player looks (t1 dress on the cung nữ road and in lãnh cung). It now takes a free identity at once, before any picture
+   of her is kept, so every life is one of the 84 faces with all its dresses. Loaded saves are untouched (deser does not call start). */
+(function(){const s0=start;start=function(){const r=s0.apply(this,arguments);try{if(window.__nlInner&&S&&!S.pid&&!S.dead){
+  const used=new Set((S.fidUsed||[]).filter(k=>!/^player:/.test(k)));let K=[];try{K=typeof f88Keys==="function"?f88Keys("consort"):pidKeys()}catch(e){K=pidKeys()}
+  const free=K.filter(k=>!used.has(k));const L=free.length?free:K;if(L.length){S.pid=L[Math.floor(Math.random()*L.length)%L.length];
+   S.fidUsed=(S.fidUsed||[]).filter(k=>!/^player:/.test(k));pidEnforce()}}}catch(e){console.error("pid inner",e)}return r}})();
 
 /* ================= j73: CHILD IDENTITIES (owner 11/14: children drawn as children, not babies at every age) =================
    img/FIGURES-kids.json lists child lineups: role "prince" / "princess", identity pNN / fNN, ageBand 4 / 9 / 14 / 20
@@ -15398,7 +15405,8 @@ function f88TNum(f){return /cold|lanh/i.test(String(f.tier))?-1:parseInt(String(
 /* pick one record of an identity: consort mode = nearest consort tier, then age; base mode = maid art */
 function f88Pick(L,tier,age,base,mrank){if(!L||!L.length)return null;const T=L.filter(f88IsCT),B=L.filter(f=>!f88IsCT(f));
  if(base&&B.length){const N=B.filter(f=>f.tier==null||f.tier==="");if(mrank==null&&N.length)return figBest(N,null,age);
-  let md=1e9;const d=f=>f.tier==null||f.tier===""?0:Math.abs((parseInt(String(f.tier).replace(/\D/g,""),10)||0)-(mrank||0));
+  /* the plain maid art (tier null) is the dress of maid rank 1 (there is no "m1" file for maid faces); m0, m2..m4 are their own ranks */
+  let md=1e9;const d=f=>Math.abs((f.tier==null||f.tier===""?1:(parseInt(String(f.tier).replace(/\D/g,""),10)||0))-(mrank||0));
   for(const f of B)md=Math.min(md,d(f));return figBest(B.filter(f=>d(f)===md),null,age)}
  if(!base&&tier!=null&&T.length){let md=1e9;for(const f of T)md=Math.min(md,Math.abs(f88TNum(f)-tier));return figBest(T.filter(f=>Math.abs(f88TNum(f)-tier)===md),tier,age)}
  if(!base&&T.length&&tier==null)return figBest(T,null,age);
@@ -15406,8 +15414,11 @@ function f88Pick(L,tier,age,base,mrank){if(!L||!L.length)return null;const T=L.f
  return figBest(L,tier,age)}
 /* who wears consort dress */
 function f88Wear(who){try{if(who===S)return !(typeof isSrv==="function"&&isSrv());return (rivals||[]).includes(who)}catch(e){return false}}
+/* her maid dress rank on the cung nữ road (review/player-dress): Tân Giả khố = m0, Ma ma = m4 (the highest maid dress; the mama
+   pictures are other women), else her rank 0..4 (Cung nữ thô sử m0 · Cung nữ m1 · Đại cung nữ m2 · Chưởng sự cô cô m3 · Nữ quan m4) */
+function f88SrvRk(){try{const v=S&&S.srv;if(!v)return 1;if(v.lau>0)return 0;if(v.mama)return 4;return Math.max(0,Math.min(4,v.rk==null?1:v.rk|0))}catch(e){return 1}}
 function f88Best(L,who,kind){const Lp=kind==="por"?L.filter(f=>f.por):L;const W=f88Wear(who);
- const mr=(!W&&who&&who!==S&&who.role==="maid"&&typeof srk==="function")?(()=>{try{return srk(who)}catch(e){return null}})():null;
+ const mr=(!W&&who===S)?f88SrvRk():(!W&&who&&who!==S&&who.role==="maid"&&typeof srk==="function")?(()=>{try{return srk(who)}catch(e){return null}})():null;
  return f88Pick(Lp.length?Lp:L,figTierOf(who),figAgeOf(who),!W,mr)}
 /* j39 figFor with the tier-aware choice */
 figFor=function(p,kind){try{if(!FIGS.length||!p||!S)return"";const who=figWho(p);if(!who)return"";const k=figPick(who);if(!k)return"";
@@ -26716,7 +26727,7 @@ if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§28.13e",title:"Pick 
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="5fc09d6cc088";window.CTM_BUILD=BUILD;
+const BUILD="579877a1bf16";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
