@@ -28,7 +28,7 @@ CDN uploads OK again (owner saved the Cloudflare token; R2 verified). Use CLOUDF
 | C1 | review/face-sharp (her face hazy on stage; LIVE BUG) | RUNNING wave 1 |
 | C2 | review/rank-colour (owner s8: rank colour in picker rows, whole class) | RUNNING wave 1 |
 | C3 | review/art-complete (eunuch ranks, grown kids, 128 old looks, 56 old-love men, demole) | RUNNING wave 1 |
-| C4 | review/act-pics2 (from key 193 + 3 redraws) | RUNNING wave 1 |
+| C4 | review/act-pics2 @ 5f80a2727 (237/380 live; 143 left from thu-cu-lot) | RESUME later (QUEUED) |
 | C5 | review/skin-match (verify not soft, regenerate missing; upload parked) | RUNNING wave 1 |
 | C6 | review/mk-colour (8+8 presets, 8 vụng, lips QA, then reveal scene) | QUEUED |
 | C7 | review/balance-pass (HH 0%, bạc-equivalence scan) | QUEUED |
@@ -92,6 +92,7 @@ j72 bước vs Hồi · stage paper halo · Thái hậu title bronze vs plum · 
 | C33 | review/weekbook-entries (owner s8: week book person page shows unrelated raw entry; per-person readable entries) | QUEUED-NEXT |
 | C34 | review/contest-ui (owner s8: podium rewards 2nd/3rd, same figure scale, contestants revealed; intro layout picture-left/info-right/scrolling contestant box, no empty counters) | QUEUED-NEXT |
 | C35 | review/pcard-fill (owner s8: person card right side empty → mood, relations, tastes, known facts, recent dealings, quick actions) | QUEUED-NEXT |
-| C36 | review/opt-pics (owner s8, repeated: every option card picture LEFT + info RIGHT like act cards; paint missing) | QUEUED-NEXT (top) |
+| C36 | review/opt-pics (option cards picture LEFT + info RIGHT) | RUNNING |
 | C37 | review/panel-size (owner s8: all pop-ups same frame size per viewport) | QUEUED-NEXT |
 | D51 | fxkit follow-ups: cracked tea cup, scroll unroll, red seal slam, swaddle reveal, letter under door + wire call sites (PROGRESS_fxkit.md); clean committed .out/ folder on main | QUEUED |
+| C38 | review/ev-art-fit (owner s8: unrelated event pictures; no generic default; paint missing) | RUNNING |
