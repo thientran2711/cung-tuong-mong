@@ -69,8 +69,8 @@ None pending. Only existing CDN images are used (art-*, vir-*, info-*, act-*).
 2. Picture tiles: `kitSceneArt(src,label,{size:"thumb"})` (jk2b, KIT 28.19) = the one small square picture (64 px / 56 px phones). `.ksk2art`,
    `.ktqart`, `.kemptyart` and the 40 px `::before` act thumbnail are gone.
 3. kitActCompact: own copy deleted; review/kit-fig2's "KIT 39" block (jk4 `kitActCompactOn` + CSS) cherry-picked UNCHANGED to the end of jk4.js
-   as KIT §41, plus one documented extension: `.kpanec` act areas are kpane containers too. Act cards in jtabs are plain `pbtn`; each act sits
-   in its own `.kpanec` cell, so under 640 px it is the compact act with its OWN picture only. When kit-fig2 merges: keep one copy (§41).
+   as KIT §42, plus one documented extension: `.kpanec` act areas are kpane containers too. Act cards in jtabs are plain `pbtn`; each act sits
+   in its own `.kpanec` cell, so under 640 px it is the compact act with its OWN picture only. When kit-fig2 merges: keep one copy (§42).
    Bug found + fixed on the way (whole game): jk3 `kitActKey(b)` shadowed j79 `kitActKey(name)` (same script) → every ACTS.json name lookup threw;
    renamed jk3's to `kitActSortKey`. Acts now get their own pictures (e.g. Tự học, Học với thầy, Tự rèn).
 4. `.ktq` (chapter / sắc phong head) and `.kempty` → the same §21 card (`kitSkillCard` with word Hồi/Bước/Đạt, `bar:false`; `kitEmpty` = card
@@ -79,7 +79,7 @@ None pending. Only existing CDN images are used (art-*, vir-*, info-*, act-*).
 - Merge main 311260527 (kit-close Tư trang sub-tabs): jpane `kitPane` now also takes a page's own nested sub-tab row (`.ksub` → `.kpgsub`, e.g.
   Tư trang Túi đồ · Việc) into the pane bar, skipping rows in hidden panes; j79 kgSub ignores `.kpgsub` (KIT §45 note).
 - Trang mẫu kit (KIT §47, new `dev/build/jkitpage.js`): open the game with `#kit`; `KIT_SAMPLES.push({...})` for each kit part.
-  Samples: §28.19 wide/tall/thumb, §21 (skill + acts, chapter, empty), §46 checks + gloss, §41 compact act. Test `dev/test/kit-page.js`.
+  Samples: §28.19 wide/tall/thumb, §21 (skill + acts, chapter, empty), §46 checks + gloss, §42 compact act. Test `dev/test/kit-page.js`.
 - tabs-kit-shots.js waits for `<img>` pictures too (PICWAIT env, default 8 s; the CDN is slow while the first-run loader pulls ~120 MB).
 - Tests (r7): pane-bar 755x1000, 1000x755, 1180x820, 1366x1024, 844x390, 390x844: 48/48 ok, 0 errs; tabs-kit-shots same 6 sizes 60/60 ok,
   0 errs; kit-page 5 sizes ok, 0 errs; minigame-tap 3/3 ok.

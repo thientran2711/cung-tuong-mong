@@ -38,15 +38,15 @@ Read it live: `RCOL[rank]`, or `KIT_RANK_COL[rank]` / `KIT_RANK_COL.cold` / `kit
 
 | rank | name | colour | gem (`img/kit/gem-N`) | brocade (`img/kit/bg-consort-N`) | frame (`frame-consort-N`) |
 |---|---|---|---|---|---|
-| 0 | Đáp ứng | `#8a7a6a` nâu xám | smoky brown-grey topaz, brass bezel | brown-grey taupe silk, jasmine | carved wood stained brown-grey, brass caps, plum blossom |
+| 0 | Đáp ứng | `#9c8f74` (owner 11/15; chip/text code, champagne-taupe so the 75 % ink mix reads 4.5:1) | lustrous ivory pearl / moonstone cabochon, thin silver bezel, seed pearls | warm ivory pearl silk (never pure white), tone-on-tone jasmine + faint plum | owner 11/15 option A: the ORIGINAL carved wood stained brown-grey, brass caps, plum crest (`frame-consort-0` + `crest-consort-0` unchanged) — only the ground and gem turned ivory/pearl |
 | 1 | Thường tại | `#7aa07a` xanh lục | jade, brass bezel | celadon green, plum blossom | dark green lacquer wood, silver/jade inlay, orchid |
 | 2 | Quý nhân | `#6a8aa0` xanh lam | aquamarine, silver bezel | sky blue, orchid | silver filigree, seed pearls, chrysanthemum, small tassel |
 | 3 | Tần | `#d48fa6` hồng phấn | rose quartz, silver-gold bezel | rose pink, orchid | silver + pale gold, lotus, jade insets, pearl drop |
 | 4 | Phi | `#a07ab0` tím | amethyst, silver bezel, pearls | lavender, chrysanthemum | gold filigree, peonies, coral beads |
 | 5 | Quý phi | `#c06a6a` đỏ | ruby, gold bezel | crimson, peony + clouds (gold thread) | gold, red enamel, rubies, red tassel |
-| 6 | Hoàng quý phi | `#d98a3a` cam | amber, gold bezel with phoenix wings | amber gold, phoenix feathers | gold, twin phoenixes, amber, pearls, jade disc |
+| 6 | Hoàng quý phi | `#d98a3a` cam | amber, gold bezel with phoenix wings | amber gold, phoenix feathers | (owner 11/15: clearly grander than Quý phi; NEW frame drawn on review/rank0-ivory, NOT approved/uploaded yet — live art is still the old twin-phoenix frame) two large gold phoenixes with spread wings at the top corners, wide openwork gold filigree, amber enamel + amber cabochons, pearl strings, amber peonies, large white-amber jade bi with phoenix, full orange-gold tassel |
 | 7 | Hoàng hậu | `#f0d070` vàng | imperial gold + ruby heart, phoenix crown | imperial bright yellow-gold, phoenix + peony (no red) | all-gold phoenix crest, yellow-gold enamel, gold gems, white jade bi, gold tassel (Quý phi keeps the red frame) |
-| cold | Lãnh cung | `#cfd3d8` | (none) | `bg-cold` pale grey worn silk, withered plum | `frame-cold` weathered grey wood |
+| cold | Lãnh cung | `#cfd3d8` | (none) | `bg-cold` pale grey worn silk, withered plum | `frame-cold` (owner 11/15; NEW frame drawn on review/rank0-ivory, NOT approved/uploaded yet — live art is still the old weathered grey wood) ash-grey cracked, peeling lacquer, tarnished pewter caps, BARE plum branch, cracked grey jade, dull pewter tassel |
 
 (`RCOL` values on main before j59: index 1 is still the old `#a8946a`; the frame/gem/brocade art already follows the table above.)
 
@@ -122,7 +122,7 @@ The old rank grounds `.rk-*`, the gold border and the `rank-*.webp` corner icon 
 | consort-3 Tần | rose-quartz flower | powder pink |
 | consort-4 Phi | amethyst in silver filigree | lavender |
 | consort-5 Quý phi | ruby and gold peony | crimson |
-| consort-6 Hoàng quý phi | amber and gold phoenix wing, pearls | orange-gold |
+| consort-6 Hoàng quý phi | large white-amber jade bi with gold phoenix, pearl strings, amber drops | full orange-gold |
 | consort-7 Hoàng hậu | large white jade bi disc with gold phoenix, pearl strings | long golden yellow |
 | emp | the richest: large imperial yellow dragon jade bi set in gold with rubies and pearl strings, big gold knot | long double imperial yellow tassel |
 | thaihau | very rich: white-and-lavender jade phoenix around a shou medallion, antique gold, amethysts, pearl strings | long double tassel, deep plum and gold |
@@ -134,7 +134,7 @@ The old rank grounds `.rk-*`, the gold border and the `rank-*.webp` corner icon 
 | man | round white jade disc | charcoal black |
 | royal | navy-and-gold python jade | navy and gold |
 | guard | bronze tiger tally | dark crimson |
-| cold | cracked pale grey jade | faded grey |
+| cold | cracked pale grey jade | dull faded pewter grey (owner 11/15) |
 | unknown | grey stone disc with mist | soft grey |
 | eunuch-0..3 | jade bead → silver cap → silver + knot → gold-capped jade pendant | ERCOL `#8f9a8a` `#5f8a6a` `#3f6a8a` `#7a4a3a` |
 | maid-0..4 / mama-0..4 | plain jade bead → jade flower → silver flower → silver plum blossom → gold plum blossom with pearl | MRCOL `#9aa3a8` `#5fa39a` `#4f74a8` `#a0584a` `#6a5a8e` |
@@ -540,7 +540,7 @@ ladder words from the real formulas; "có thể gặp người" → real words.
 - RIGHT: kicker (small, e.g. "Chương 2", "Điều kiện sắc phong"), name + **kitSteps** (`max` segments + "<word> l/max"; with `stepsAttr` the steps are a
   button that opens the levels, e.g. `data-v85tab`), one desc line, tiến bộ bar `kitBar` (`.kskp`) or `kchip g "Đã tinh thông"` (`bar:false` = none),
   next unlock `kchip n "<word> n mở"` + what it gives (`next`, else `levels[level]`).
-- BELOW: act cards (`pbtn`) in `.kskacts.pcb`, each in its own `.kpanec` cell (auto-fit grid, min 240 px): narrow cells give the compact act of §41
+- BELOW: act cards (`pbtn`) in `.kskacts.pcb`, each in its own `.kpanec` cell (auto-fit grid, min 240 px): narrow cells give the compact act of §42
   (own act picture only). `can:false` dims a card (nothing to do); lists put doable cards first, mastered last.
 - Deleted: the old per-level list (`.ksls`), the 170 px art column, review/tabs-kit's `kitSkillHead` / `.ksk2` duplicate. Sample: trang mẫu kit (§47).
 
@@ -667,6 +667,11 @@ kitBook({head:"Sổ tuần · Tháng tư · thượng tuần · năm thứ nhấ
   and shows the same cell at a smaller width (`span.md.kit.kfc`, xs 26 px · sm 38 · default 60 · big 84; aspect 550:795). No other frame
   markup exists (the old cropped `.kmini` body frame is gone). A change to the frame shows at every size.
 - Cell = canvas x 0–550, y 0–795: crest room on top, photo window, band; the pendant/tassel below is drawn only where the full canvas shows.
+- Portrait placement (owner 11/15, `dev/build/jkpor.js`, replaces the fixed 5 % raise of C1 below; the 1.14x scale is KEPT, never zoom): per por picture
+  the top of the head (first opaque row, hair ornaments included) is moved to 3 % of the window under its top edge (lift capped at 0.14 so the
+  picture still covers the window bottom; more body shows below), and the BODY (mid-point of the shoulder/chest rows, head ignored) to the
+  window centre (offset capped ±18 % of the picture, and — reviewer r6 — never so far that the picture's own painted side edge comes inside the window). Same rule in every pcPort cell and size (card, strips, header, rows). Measured on all
+  32 consorts: scale 1.14 before = after, head gap 2.9 px at a 96 px window (one capped at 8.5), body centre 0 % (before −16…+11 %).
 - Portrait cut (C1): the por picture is 1.14x the window, raised 5 % of its height and clipped to the window (head near the top edge, the
   person larger); old `face-*` art and the grey silhouette keep the plain window.
 - Crests (C2): every rank and role has its own crest on the top bar, `img/kit/crest-<key>.webp` (gpt-2-6, one style reference = the approved
@@ -675,7 +680,7 @@ kitBook({head:"Sổ tuần · Tháng tư · thượng tuần · năm thứ nhấ
   ONE top ornament per frame, never two: the small motif painted at the top centre of consort-0..5 and unknown frames was removed from the
   frame picture (corners kept) and the crest stands on the bar; frames whose painted top is already a full crest keep it and get no extra crest
   (Hoàng hậu phoenix, Hoàng thượng dragon, Thái hậu, Thái tử, HQP twin phoenixes, guard tiger, prince qilin, princess phoenix + peach, royal python,
-  official crane, physician bamboo, man jade disc, cold plum, head eunuch cloud). maid-0..4: a flower/bell spray standing ON the silk bow painted on
+  official crane, physician bamboo, man jade disc, cold bare plum, head eunuch cloud). maid-0..4: a flower/bell spray standing ON the silk bow painted on
   the maid frame (jasmine + jade bead → jade plum → silver plum + silver bell → silver plum + jade bells → gold plum + pearls); ma ma 0..4: silk
   bows on the cartouche; eunuch 0..2: jade ring above the whisk. Width grows with rank (300→432 canvas units for consorts), base on the top bar (y 172).
   Data: `KIT_CREST` {ar, base, w, key(frameUrl), html(frameUrl)}; a new role adds its crest here.
@@ -1873,7 +1878,13 @@ stranger card is not used for children (their card is drawn by jht). Old saves: 
   z-index 4 (above frame and crest), drop shadow. Giận and Đau khổ pulse softly (off with reduced motion).
 - No ring/aura around the frame (owner 11/14 late: removed); the seal alone shows the feeling.
 - Fog: stranger → nothing; known person, no fresh news → grey "?" seal; her own → always.
-- Data only through `window.kitEmotion(p)` → `{k,name,v,why,known}`; tooltip/alt "Tâm trạng: <tên> (<cause>)". Nobody draws another mood icon; no code-reshaped facial expressions (owner 22:50Z): the seal + ring are the only display of feelings.
+- Tap (owner 11/15): no visible label; TAPPING any seal (hers or an NPC's, any frame size) opens the kit popover `kpPop` (j79) with the mood
+  word + the one-line cause the game knows ("Giận: bị Hoàng hậu trách"; "Tâm trạng chưa rõ" for the grey seal); any other tap closes it; the tap
+  never also opens the card under it (capture handler in jemo). Keyboard: Enter/Space on the focused seal.
+- Art (owner 11/15 v2): same chibi lady, soft watercolour/gongbi, thin gold rim, expressions exaggerated like emoji so each mood reads at 38 px.
+- Data only through `window.kitEmotion(p)` → `{k,name,v,why,known}`; alt "Tâm trạng: <tên> (<cause>)". Nobody draws another mood icon; no code-reshaped facial expressions (owner 22:50Z): the seal + ring are the only display of feelings.
+
+- MEN wear men's seals (owner 11/15, review/emo-men): same 10 moods, same coloured grounds, gold rim and marks (Sợ: pale purple upper face + fear lines; Giận: red flushed face + anger mark). `img/kit/emo-m-<k>.webp` = young man (Hoàng thượng, thái tử/hoàng tử, công tử/nam nhân, vương gia, thái giám, thị vệ); `img/kit/emo-mo-<k>.webp` = mature man with cap and short beard (quan, thái y, any man 45+ except Hoàng thượng). Women and girls keep `img/kit/emo-<k>.webp`. ONE rule `emoArtSet(p)` in jemo (personRoleRank sex/role); art cut from 5x2 chroma sheets by `dev/art/emo_cut.py`; check: `dev/test/emo-men.js`, sheet dev/shots/emo-men/sheet.jpg.
 
 ## 39. ẤN TRÂN NỮ · kitSeal (owner 11/15, review/brand) — `dev/build/jseal.js` (after jk4)
 - Ported from Phượng Lệnh `public/choi/js/kit/seal.js`: square cinnabar seal, TRÂN over NỮ cut white into the cinnabar (bạch văn), Vietnamese
@@ -1902,14 +1913,29 @@ stranger card is not used for children (their card is drawn by jht). Old saves: 
   (purpose maskable, full bleed, round portrait inside the 80 % safe circle), apple-touch-icon.png 180 (opaque), favicon = dev/build/icon.webp
   (inlined) + icons/favicon-48.png. Preview: dev/shots/brand/icon-preview.png. An installed Android PWA may keep the old icon until reinstall.
 
+## 41. kitMeMark · dấu "là ngươi" (owner 11/15) — `dev/build/jmark.js` (before j84)
+- EIGHT markers, one per rank: `img/kit/me-mark-<r>.webp` (gpt-2-6, transparent, NO tassel), growing in grandeur: 0 ivory plum · 1 silver orchid +
+  green jade · 2 silver flower + aquamarine · 3 jade lotus bud · 4 amethyst chrysanthemum + luan · 5 ruby peony · 6 gold phoenix on a jade cloud ·
+  7 amber-gold phoenix with spread wings (Hoàng hậu; owner 11/15 swapped 6↔7). Size factor `KIT_MEMARK.sc[r]` (0.78 → 1.22). Sheet dev/shots/me-mark/ranks8.jpg.
+- Where: her stage figure `#mefig` (any slot) and her figure in dialogs / event stages (`kitStageFig` adds `.kesme`). Never on anyone else.
+- ONE placement rule: marker bottom = top of her head (first opaque row of the figure art, hair ornaments included) − `KIT_MEMARK.gap` (1.2 %)
+  × her drawn figure height. Measured: Fold stage 7.7 px on a 644 px figure, iPad 6.5 px, iPad dialog 6.3 px on 524 px, 390 dialog 3.8 px on
+  320 px (all = rule). Height 8.5 % of the figure × sc[r], 26–72 px; when the room above the head is short (dialog, scene title, plaques,
+  chips) it SHRINKS (down to 12 px), never covers the head or the title.
+- Motion: a gentle 3 px bob only (Cảnh động on, no reduced motion); a very faint soft shadow; no glow.
+- Items: `S.meMarks` (owned ranks), `S.meMark` (chosen; null = highest owned). Every promotion adds that rank's marker; old saves get ranks
+  0..current on load. The rank chest of review/gift-chest (`kitReward({kind:"chest",title:"Phẩm phục …"})`, jrankset `rsChest`) gets the
+  marker as one more item through a `kitReward` wrapper in jmark (no edit in jrankset). Tư trang: tab "Dấu ấn"; tap a marker → "Dùng"
+  (`kitMeMarkUse(r)`), any owned one, older ones too. Servant road: none until she becomes a consort.
+
 > Numbering note (reviewer tabs-kit-r6, 11/15): review/tabs-kit wrote these as §39/§40, which clashed with main (§39 kitSeal,
 > §40 APP ICON) and with open branches (review/kit-fig2 §39 kitActCompact / §40 kitEventDp, review/ts-a §39 TOP 15,
-> review/kit-table / fix-float §39 kitRelTable). Renumbered to §45/§46; §41–§44 are left free for those branches to renumber into.
-> kit-fig2's jk4 `kitActCompactOn` and §46 `kitActCompact` (jtabs) are the same idea — whoever merges second must fold them into one.
+> review/kit-table / fix-float §39 kitRelTable). Renumbered to §45/§46; §41–§44 were left free for those branches; main took §41 (kitMeMark), tabs-kit r7 §42 (kit-fig2's kitActCompact); §43–§44 still free.
+> kit-fig2's jk4 `kitActCompactOn` and §46 `kitActCompact` (jtabs) were the same idea — folded in tabs-kit r7: jtabs uses kit-fig2's part (§42).
 
-## 41. kitActCompact — act cards in a narrow pane (owner 11/15; from review/kit-fig2 KIT §39, cherry-picked by tabs-kit r7) — `dev/build/jk4.js`
+## 42. kitActCompact — act cards in a narrow pane (owner 11/15; from review/kit-fig2 KIT §39, cherry-picked by tabs-kit r7) — `dev/build/jk4.js`
 Copied unchanged from review/kit-fig2 3e212597e (jk4 "KIT 39 · kitActCompact", `kitActCompactOn` + its CSS) because tabs-kit needs it before
-kit-fig2 is merged; when kit-fig2 merges, keep ONE copy (kit-fig2's text is the reference; number it §41). Summary: inside an inline-size
+kit-fig2 is merged; when kit-fig2 merges, keep ONE copy (kit-fig2's text is the reference; number it §42). Summary: inside an inline-size
 container `kpane` under 640 px every act card is compact: the act's OWN picture (ACTS.json key) as an 84 px square thumbnail (72 px under 420 px)
 left, title + odds on one line, one-line description, Cần/Tốn/Được chips; no own picture → no thumbnail (`.kanoart`), never a category / skill
 picture as stand-in. Containers: person card `.pc > .pcr` (kit-fig2) and — tabs-kit r7 extension — any `.kpanec` (skill-card act cells,
@@ -1926,7 +1952,7 @@ Việc nhờ act area, Nợ ân rows). `kitActCompactOn(root)` runs after `rende
 
 ## 46. KIT TABS: SUB-TABS, CHECK ROWS, INFO GLOSS (owner 11/15, review/tabs-kit · `dev/build/jtabs.js`)
 - **Sub-tabs** `kitSubTabs(key,[{k,label,doable,total|n}])`: the same `.pctabs.kcattabs` row as Hành sự, count "làm được/tổng"; it goes into the pane bar (§45); the choice is remembered per tab; the first visit opens the first group with something she can do. No long single scroll of mixed cards.
-- Heads, skill cards, chapter / sắc phong heads and empty states = §21 `kitSkillCard` / `kitEmpty`; pictures = §28.19 thumb; act cards = plain `pbtn` in `.kpanec` cells (§41). A lone act card takes the whole row (auto-fit grid).
+- Heads, skill cards, chapter / sắc phong heads and empty states = §21 `kitSkillCard` / `kitEmpty`; pictures = §28.19 thumb; act cards = plain `pbtn` in `.kpanec` cells (§42). A lone act card takes the whole row (auto-fit grid).
 - **Rules text** never as a paragraph on the page: `kitInfo(term)` = "ⓘ term" gloss (KIT_GLOSS) that opens on tap.
 - **Check rows** `kitChecks([[ok,text]])`: ✓ green / ✗ red chip + text, unmet first.
 - **Person rows**: `kitPersonLine(p,{sub})` (portrait + name + what is owed / what is known) inside `.ktprow`, with the act for that person beside it.
@@ -1938,5 +1964,5 @@ Việc nhờ act area, Nợ ân rows). `kitActCompactOn(root)` runs after `rende
 Open the game with `#kit` at the end of the address (or `kitSamplePage()` in the console): a full-screen page draws every registered kit part
 with the REAL kit functions at the current screen size; ✕ closes. Every new / changed kit part pushes its sample in the same commit as its
 KIT.md section: `KIT_SAMPLES.push({id:"§nn", title, html:()=>…})`. Now: §28.19 wide/tall/thumb, §21 card (skill with acts, chapter, empty),
-§46 kitChecks + kitInfo, §41 compact act in a `.kpanec`. Test: `node dev/test/kit-page.js <url> [outdir] [sizes]` (every sample renders, no
+§46 kitChecks + kitInfo, §42 compact act in a `.kpanec`. Test: `node dev/test/kit-page.js <url> [outdir] [sizes]` (every sample renders, no
 error, no horizontal overflow, 0 page errors).

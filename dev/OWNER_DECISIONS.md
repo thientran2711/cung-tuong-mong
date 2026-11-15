@@ -1,6 +1,9 @@
 # OWNER DECISIONS LOG (Cung Tường Mộng) — newest last. Main session keeps this up to date.
 Older binding rules: see dev/HANDOVER.md (all sections). This log adds every decision from 11/14 (phiên chính 2) on.
 
+
+> **LUẬT ƯU TIÊN SỐ 1 (sếp, 15/11 ~05:25Z):** TRƯỚC KHI GIAO BẤT CỨ VIỆC GÌ cho thợ, điều phối PHẢI kiểm xem việc đó đã có chưa: (1) grep OWNER_DECISIONS + HANDOVER + PROGRESS_*.md; (2) `git grep` trên origin/main VÀ mọi nhánh origin/review/* (tên tính năng, từ khóa); (3) hỏi danh sách thợ đang chạy. Có rồi → dùng lại / đưa nhánh đó lên, KHÔNG làm mới, KHÔNG nói với sếp "chưa có" khi chưa kiểm. Thợ cũng phải làm bước (2) trước khi viết mã mới. (Bài học: đồ tự tay làm j83 và 4 buổi đã có trên nhánh mà điều phối nói "chưa có".)
+
 ## 2026-11-14
 - Faces: pool = 84 women (32 consorts + 52 maids). Part C = 52 maids in consort tiers t1–t8 + cold. NPC consorts only draw a maid face once that face has consort-tier art (F88_NEED_C).
 - Huadian: consorts only (incl. maids promoted to consort). Never on maids (m0–m4), mamas, servants, cold palace. 84 unique styles (HUADIAN.md c01–c32, HUADIAN_C.md m01–m52). Size t1 = c03 t1 red flower; grows ~5%/tier. 8 distinct tiers. Painted on skin (no sticker look). Raised/jewelled styles must stay small; flat gold-leaf styles may be a bit larger. Approved: t1–t6, t8 phoenix (to be ~15% smaller), t7 being redone in flat gold-leaf + red enamel style.
@@ -43,3 +46,474 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - Collection milestones (20/50/100/200 items in a life) also grant Phúc duyên (~+5/+10/+20/+35, once per life; lost if kiếp dở dang).
 - Every item (incl. crafted works from lessons, 4 quality tiers drawn differently: crude → exquisite) gets painted art (gpt-2-6). Items shown in a simple shared kit frame (kitItem) with background colour by grade (Thường/Tinh phẩm/Trân phẩm/Tuyệt phẩm/Ngự tứ).
 - Owner (night of 11/14): art may proceed without waiting for approval; workers self-check and redo bad images; previews saved for later viewing.
+- (16:00Z) Owner complaint, Fold 755x1000 (shots dev/owner-shots/1114-fold-*.jpg): game unplayable, NOT one shared kit. (1) Top bar too tall (~1/3 screen): date wraps over itself, Hoàng thượng chip alone on a row, Thái hậu/Hoàng hậu chips on another row with empty space. (2) Stage height changes per panel: with Hậu cung/Phi tần open the scene shrinks to a strip with tiny figures; must stay one size, figures BIG. (3) Phi tần person card (sticky) overlaps the text under it (duplicated, clipped). (4) Giao tình "Xem quan hệ của" chip rows cut off. Kit-first priority #1: fix as a GROUP for every screen/panel, kit owner first, review gate, test on Fold + iPad before showing her.
+- (16:05Z) Owner: iPad landscape title screen has a blank right half (art only fills the left). Every full-screen backdrop must be made for BOTH portrait and landscape from the start (not portrait-only): title, reincarnation/identity, origin, Sổ luân hồi, minigame/contest/lesson backgrounds, podium, reward/animation screens, scenes. Landscape = its own painted wide composition (gpt-2-6), never a stretched/faded copy or empty panel. Shot: dev/owner-shots/1114-ipad-title-empty.jpg.
+- (16:08Z) Owner: workers waiting on her decision (maid-art A/B → review/*) — go ahead, don't ask. Standing rule: don't ask her for go-aheads; decide and proceed.
+- (16:10Z) Owner: circled spots are only examples; never fix piecemeal. Every fix = the whole group (all screens/modes/elements of that kind) via the kit component; reviewer FAILs spot-only fixes.
+- (16:15Z) Owner shots 1114-fold-giaotinh-scroll.jpg / 1114-fold-tuchat.jpg: list rows scroll up behind the tab bar and show through above it; 'Tư chất' toggle in the top bar dumps its content into the bottom panel (replacing the tab content, clipped, chips vanish) — far from its button and cut off. Group fix: every collapsible/expand toggle opens its content next to its button or as a full kit sheet, never inside another panel; sticky tab bars fully opaque, nothing shows through.
+- (16:20Z) Owner: put info ON the room scene (stage) instead of stacking bars/pushing Tư chất into the bottom panel; drop or relocate what isn't needed. Decided design: slim one-row top bar (menu, mini-portrait, name, rank, Bạc/Sức/Sủng/Danh); stage overlay plaques at edges (place + date/khắc/weather top-left; Hoàng thượng/Thái hậu/Hoàng hậu chips top-right; Tư chất left; Nhân tâm + Quẻ tuần right/bottom); figures stay big in the centre; Tư chất toggle removed; duplicates dropped; tap plaque → full sheet. Same on all screens/modes and iPad.
+- (16:25Z) Owner: Hoàng hậu shown twice (court chip 'chưa rõ' = mood; Nhân tâm 'Hoàng hậu với ngươi -5' = attitude). Rule: one fact, one place. Court chips (Hoàng thượng/Thái hậu/Hoàng hậu) show portrait + title + attitude to player + mood only if known; those rows leave Nhân tâm. Audit all screens for duplicates.
+- (16:30Z) Owner very upset: person card (Phi tần) no longer the layout she approved — sticky header (from kit-2b) drawn over the card's own copy: info twice, overlapping, actions clipped, card at bottom of screen. URGENT hotfix: one sticky header only, no duplicate, opaque, actions scroll beneath, all person-card types. Lesson: main session must play-test inside the game on Fold before merging any kit change.
+- (17:10Z) Owner (phone small): remove the 'Bảng phẩm vị' button row in Phi tần (rank table via rank chip/☰ instead); move the room scene up — no empty band under the top bar. No lone full-row buttons anywhere.
+- (17:20Z) Owner: room scene over-zoomed (only a slice of the room), figures tiny and standing in wrong spots (by/on the bed). Rule: whole room composition visible with floor, figures big with feet on the painted floor in open floor slots, never on furniture; per-scene floor anchors; check every scene×season×buổi on all devices. Top bar empty band still wasteful.
+- (17:45Z) Owner: person card layout (rejects full-width sticky header): LEFT column = big portrait frame (name, rank, stat tiles under it); RIGHT top = info (Ghen, Người với nàng, Oán, Nàng với ngươi, Sủng); directly under it = the action group tabs (Gặp mặt / Giao thiệp / Dùng chứng cứ / Hại nhỏ…) then the act cards. Shots dev/owner-shots/1114-ipad-card-layout-*.webp. Applies to all person cards; on narrow portrait keep the same order (portrait left/top, info, tabs, acts).
+- (17:40Z) Owner refinement, person card on iPad: left = big portrait + name + rank, and ALL info under it (relation bars Ghen/Người với nàng/Oán/Nàng với ngươi/Sủng, stat tiles, tuổi, tính nết); right = action tabs + acts only. Fold portrait: portrait left, relation info at top right, then tabs + acts.
+- (18:00Z) Owner: the consort picker strip must ALWAYS stay visible on Fold (never scrolled away to make room); and she rejects partial deliveries — ship the slim top bar, stage overlays, scene fix, picker and person card together as one build. Lesson: never show her a screenshot that still has a known complaint unaddressed.
+- (18:05Z) Owner: iPad person-card layout APPROVED (left portrait + all info, right action tabs). Phone/Fold version too cluttered → phone design: picker always visible in one compact row; card top = medium portrait left + name/rank + 3 tight relation lines right; stat tiles via tap on portrait (sheet); action tabs one horizontally scrolling row, sticky; helper sentences moved to disabled-reason of acts; acts full width.
+- (18:15Z) Owner: person-card info is too wordy/space-hungry, and stats (Tài, Đức, Sủng, Sắc, Danh, Tâm cơ) must be visible on the card (not hidden). → compact grid of short labelled value chips ('?' for unknown, long text in tooltip), relation row + stats row + small row; same tight grid on iPad left column.
+- (18:30Z) Owner: stage frame on Fold too narrow for the room art; asks about painting phone-specific backgrounds. Decision (ours): yes — after the slim-top-bar layout fixes the stage aspect, add a 'stage-phone' tier to the shared backdrop mechanism (jbd) with per-scene floor anchors, then paint phone-shaped versions of every room × season × buổi with gpt-2-6. Everything kit-first: kit owner builds the component, then all screens use it.
+- (18:45Z) Owner idea, agreed: on phone/Fold portrait the room scene is the full-screen HOME view (slim top bar + bottom tabs stay); each tab opens as a full-screen panel replacing the room; Lui/tap active tab returns to the room; tap a person on the room → card. iPad keeps the approved split layout. Phone room paintings will be made for the full-screen portrait shape (3:2 strip spec voided).
+- (19:10Z) Owner: identity card origin picture should be a wide landscape picture across the card top with a simple frame (current ornate small frame 'màu mè quá'). Group: same simple wide frame for scene pictures inside cards. Also found: player figure has a cheek mole (fix), 'Đổi thân phận (-100' truncated at 686.
+- (18:20Z) Owner: her Tư chất (Sắc/Tài/Tâm cơ/Đức) must be visible at all times on phone too (in the slim top bar), not only on the room home. Always send her BOTH Fold and iPad screenshots together.
+- (18:40Z) Owner (room home): why is Đức red (stats in normal ink; red only for cost/risk, warnings as a small mark+tooltip); 'còn 4 khắc' → 4 round dots; place name text directly on the scene, no frame, one line; figure name labels without background, rank+name one line.
+- (18:45Z) Owner: palace names (Càn Ninh cung…) must stay on the consort picker at all sizes (compact Fold version dropped them — restore).
+- (18:55Z) Owner: tassels (tua rua) only on people portraits; act/event/story/item/place pictures use a simple frame without tassel; act pictures larger in their area. Owner also: person-card portrait bigger, filling from card top to the action-tab row.
+- (19:00Z) Owner: Hành sự split into category tabs (Giao thiệp, Hại người, Buôn bán, Lễ nghi…) instead of one long list; same for other long act lists. Tư chất row goes in the empty band of the top bar (confirmed).
+- (19:05Z) Owner: iPad top bar has empty middle → move info up. Decided: Tư chất (and buổi/khắc/weather/quẻ if it fits) in the top bar on ALL devices (one component); stage keeps only place name + court chips + figures.
+- (19:10Z) Owner: Oán next to Ghen in person info. Reminder: everything via one shared kit component; fix once = fixed everywhere. → kit owner keeps a checklist of all today's owner points in KIT.md.
+- (19:20Z) Owner: iPad top bar middle split into 2 columns: (1) buổi/khắc/weather/quẻ, (2) Tư chất. Removed from stage.
+- (19:25Z) Owner rejected the portrait room pilot (phi-tan-cung -p): 'xấu quá, vẽ lại'. Redo master faithful to the approved landscape room (palette, furniture, soft painterly near-3D), muted natural colours, depth, modest rug; seasons via outside view/flowers/light only; show master before variants.
+- (19:35Z) Owner: act/event pictures must show the act (e.g. Chặn ngự giá shows only a lantern); symbolic people allowed in act pictures. → audit all 108 act-*.webp, redraw unclear ones (review/act-art2).
+- (19:40Z) Owner: don't redraw room backgrounds — keep the old landscape room art; it's fine in the full-screen room view. Portrait -p room set cancelled.
+- (19:55Z) Owner: Chặn ngự giá picture composition OK, but too bright — act is evening-only → night version. Rule: act pictures match the act's time of day.
+- (20:10Z) Owner APPROVED the identity card (wide origin picture, simple frame, pinned choice buttons) — review/identity-card 360f138a; ships with the fold-layout build.
+- (20:15Z) Owner: selected state in face picker ugly (yellow box behind frame + check over crest). Kit: one selected style everywhere — glow following frame outline, slight enlarge, unselected dimmed, small check at bottom-right inside frame; no box.
+- (20:30Z) Owner: selected state = gold glow around the frame is OK; NO check badge.
+- (20:50Z) Owner: map lacks servants' quarters, kitchen, physicians, study rooms etc. Decided to add: Dãy nhà cung nhân, Ngự thiện phòng, Nội vụ phủ, Hoán y cục, Phật đường, học đường/Thượng thư phòng; check Thái y viện + Ngự thư phòng reachable. Plan + pilot scene first (review/places).
+- (21:00Z) Owner: result/report texts (e.g. spy 'dò la' result) as bullet lists, one fact per line; gains/costs coloured; filler as footnote. All result/report/news/event texts.
+- (21:05Z) Owner, final: do NOT redraw act pictures. Keep originals; only the lookup bug fix + Tranh sủng category + night Chặn ngự giá. Rule for coordinator: never start redraws the owner didn't ask for; existing art stays unless she asks.
+- (21:30Z) Owner: add difficulty modes Dễ / Vừa / Khó. Vừa = current balance targets (HH ~32%, early death ~40%). Dễ ≈ HH ~50%, early death ~20%; Khó ≈ HH ~15–20%, early death ~55%, more Phúc duyên. Chosen at new life (kit UI), stored per life, shown in Sổ luân hồi. Also proposed (not yet started): rare 'Nữ đế' ending after Thái hậu regency.
+- (21:40Z) Owner rejected new-place pilot art (Dãy nhà cung nhân): 'looks too AI, not the game style'. Rule: new scenes start as gpt-2-6 EDITS of approved game scenes (inherit texture/palette), painterly, no glossy floors, no dead symmetry; show a side-by-side with an existing scene before variants.
+- (21:50Z) Owner asked where princes/princesses live. Decided: babies with nhũ mẫu in mother's palace; princes 6+ move to A ca sở (study at Thượng thư phòng); crown prince in Đông cung; princesses with mother until married; orphans to Thái hậu/Hoàng hậu (as j95). Added to places plan.
+- (22:00Z) Owner: Nữ đế is NOT a rare ending. At the succession point the player CHOOSES: (a) son becomes emperor (she = Hoàng thái hậu), (b) she rules as regent (nhiếp chính, buông rèm), (c) she takes the throne herself (Nữ đế). Each path needs conditions and has its own consequences/epilogue chapter.
+- (19:20Z) Owner: show her own age in the top bar next to name/rank.
+- (19:25Z) Owner frustrated huadian keeps being redone. Decision: stop all huadian changes; keep the approved marks (t1 small flower per identity motif, NOT a dot); only finish a51 ageing. Huadian is closed — don't reopen.
+- (19:30Z) Owner: items are never free/automatic — must be obtained by crafting, buying or gifts (e.g. the face veil after hủy dung: craft, buy, or be gifted; until then scars show). Same for NPCs. Audit all free grants (review/items-earned).
+- (19:40Z) Owner (c19 sheet): t6–t8 huadian too big, look like scars/birthmarks → shrink t6–t8 marks to ~t4–t5 size on all consorts (grander by material, never larger); fix missing marks. Pilot first.
+- (19:50Z) Owner: redo t8 huadian; pilot first — she approves before it's applied to everyone. (General: any art change = pilot → owner approval → roll out.)
+- (20:10Z) CO-OP design (owner, to build after fold-layout/balance/difficulty): 2 players, one shared palace and timeline, both must be ONLINE together (one leaves → game freezes for both, no AI stand-in). Invite by code/link. Each buổi both act in parallel; "Sẵn sàng" button, ~60s countdown after the first presses; shared events seen by both; mutual acts need the other's accept. Death → reincarnate immediately at the same moment, choosing cung nữ (in palace) or tiểu thư ngoài cung (playable khuê các path until tuyển tú, can still help the friend: letters, gifts, father's faction). No waiting, no time skip for one player, no 'reborn in next generation'. Needs a realtime backend (e.g. Firebase; owner creates the account). Estimate 3–5 days.
+- (20:15Z) Owner: build the 'tiểu thư / life outside the palace' route now — for single-player (new origin/opening path before tuyển tú, and reincarnation option) and later co-op. 
+- (20:30Z) CO-OP rule (owner): ONE shared world state — every fact (who hates whom, ranks, favour, rumours, deaths, events, ledger) is identical for both players; personal story-arc events stay per player but their effects land in the shared world and affect each other. What each player KNOWS may differ (fog of knowledge: spies, 'chưa rõ'), but the underlying truth is one. Implementation: one authoritative world state (host/server), both clients render from it; player-specific data = only her knowledge + her story progress.
+- (20:35Z) Owner APPROVED t8 huadian style = the c26 pilot (small symmetric vertical gold phoenix around her motif), but ~15–20% smaller. Roll out to all 32 consorts × 4 ages (incl. redoing the 4 pilots smaller).
+- (20:45Z) Owner: art previews must be HIGH resolution (native-res crops, one consort per file), not blurry downscaled sheets.
+- (21:10Z) Owner gave Cloudflare Account ID (dev/coop/CLOUDFLARE.md). Co-op backend = Cloudflare Workers + Durable Objects. Token later via secure form.
+- (21:20Z) Owner: Part C a51 hair jet-black and colour off vs a18–a36. Rule for all ageing: keep her warm dark-brown hair with painted highlights (subtle silver OK, never jet-black), colour-match a51 to the same tier's other ages.
+- (21:35Z) Owner: t6 marks (and t7, t8) too big on Part C too. Rule: t6–t8 marks ≈ t1–t4 size, inside the gap between the inner brow ends; tiers differ by material only. Applies to consorts + Part C. Pilot → approval → roll out.
+- (21:40Z) Owner final: huadian t6 stays as is; only t7 and t8 smaller (consorts + Part C).
+- (22:00Z) Owner APPROVED t7/t8 smaller huadian (Part C pilot m08/m33): roll out to Part C 52 and consorts 32 at that size.
+- (22:05Z) Owner APPROVED the Tiểu thư ngoài cung plan (dev/OUTSIDE_PLAN.md on review/outside) — build it. Also fix tuyenTu() ages to 18+.
+- (22:20Z) Owner set GitHub secrets CLOUDFLARE_API_TOKEN + CLOUDFLARE_ACCOUNT_ID; co-op and single-player live in the same app/link (title: Chơi một mình / Chơi cùng bạn).
+- (22:30Z) Coordinator decision: the succession choice card (Hoàng thái hậu/Nhiếp chính/Nữ đế) shows full outcomes + odds like a normal act (it's a deliberate decision, not a hidden event); epilogue chapter choices stay costs-only.
+- (22:45Z) Owner: add allergy (dị ứng) — painted rash overlay on the face (like scars), veil can be used for it too. Two-way; causes incl. rival schemes; heals over weeks / Thái y. Pilot overlay art first.
+- (22:55Z) Owner: item rivalry — people who see/learn you own a fine item may demand/extort it; servants bribed to steal items, then keep or plant them to frame you (or frame others with your item). Two-way, motive-gated. (review/item-conflict)
+- (23:00Z) Owner: dialogs/events use full-width (horizontal) option cards wherever possible, no 2-col gaps (kit group fix). Big events get a painted background/header picture (pilot: Tiên đế băng hà).
+- (23:15Z) Owner: Fold/portrait person card = copy exactly the iPad Hậu cung panel layout (left: name/rank, vertical frame, chips; right: action tabs + acts). One component for both devices.
+- (23:20Z) Owner: act/event pictures must keep a distinct frame per category/type (colour + ornament), no tassel.
+- (23:30Z) Owner principle (binding): iPad landscape = two phone-portrait screens side by side (left: room home, right: open tab panel). Phone shows one half at a time with the SAME components/layout — no separate phone variants.
+- (23:40Z) Owner correction: option-button layout is decided PER SCREEN (some 2-col, some full-width rows) — analyse each screen: long options (Cần/Tốn/Được/odds) → full-width rows; short options → 2-col grid; table in KIT.md for owner review.
+- (23:50Z) Owner: big events and the week book use full-body figures of the involved person standing big beside the text (like the identity card), with a wide scene band on top; replaces small avatars where space allows (kitEventStage).
+- (00:05Z) Owner: why did workers draw their own stat cells instead of the kit? Rule reinforced: ONE component per element kind (kitStatCell etc.); duplicate implementations = review FAIL; kit owner runs a duplicate-UI audit (KIT.md 'Bảng gộp trùng') + dev/test/kit_dupes.js.
+- (00:15Z) Owner: the UI reads like an open book — iPad = two-page spread (left room, right tab), phone = one page; tab switch = page turn on the right; week-book page flip must CURL like real paper (not a rigid card). (kitPageCurl, review/page-curl)
+- (00:25Z) Owner: event art too saturated/'AI' (Tiên đế băng hà) — match the muted, soft palette of the identity/origin pictures; redo. Theft/framing: owner APPROVED building it as pure game rules with a fresh worker. Rash light level too faint (reads as blush) — strengthen slightly.
+- (00:35Z) Owner: 'Vào cung ngay' vs 'Ở nhà chờ tuyển tú' must be a real dilemma with visible gains/losses (balanced so players hesitate; HH% close between paths).
+- (00:45Z) Book-spread mapping proposed (left = picture page: scene/full-body; right = text page: chips/tabs/acts; Dư đồ = double-page map; Tư trang = her full body try-on; phone = right page by default, tap figure to turn). Mockups requested from review/page-curl; awaiting owner choice.
+- (01:00Z) Owner APPROVED the two-page book UI. Left page = illustration only (right page keeps the approved content, e.g. Hậu cung card with avatar). Phone: tab tap shows the left illustration page full screen with a button ('Mở trang ›') that turns (curl) to the right page full screen; back turns to illustration.
+- (01:15Z) Owner APPROVED all 8 appearance conditions: illness, poisoning, slap handprint (faint, aesthetic) + punishment status, glow from dưỡng nhan, early grey strands, smallpox marks (overlays, review/appearance); pregnancy figures (same face/outfit/age, belly; stages — coordinator: 6 & 9 months; ages ≤50; ship as drawn, review/pregnancy-art); nun figure for xuất gia ending (one face, 4 ages). Rash light level approved-pending.
+- (01:25Z) Owner: save credits until the game runs. Do now only illness, poisoning, slap/punishment. Postpone pregnancy art, nun, glow, grey strands, smallpox (and other non-essential art).
+- (01:30Z) Owner change: on phone portrait tabs open the right (info) page directly; no left illustration page on phone (accepted). iPad keeps the two-page spread.
+- (01:35Z) Owner: rash light level OK (all rash overlays approved). Tiên đế băng hà muted version lost the imperial gold (looks like wood) → redo between vivid and muted: soft antique gold must read as gold.
+- (01:55Z) Owner LOVES the Mệnh truyện st-* style (watercolour-painterly, harmonious colour, back-view figures). Rule: event/ceremony art follows the st-* style (fresh gens with st-* refs), not edits of the 3D scenes. Redo Tiên đế băng hà that way.
+- (02:05Z) Owner: slap handprint approved; illness/poison stronger (ốm nhẹ ≈ old ốm nặng). Temporary EXPRESSIONS (buồn/giận/khóc/đau) allowed as states, done in code (landmark mesh warp + tiny tear overlay), no redraws; base art stays serene.
+- (02:20Z) Owner: emotion system — mood per person shown as painted emotion icons on avatar frames; events change moods by personality; moods feed back into decisions (two-way, motive gate). Tiên đế băng hà approved but one side officials, other side harem. Research trungsinhgame.com by bot (respect site rules).
+- (02:45Z) Owner: Độ khó row overlaps the face picker on the identity card (fix). Servant-start (cung nữ) must be shown in maid outfit, not consort dress — figure always matches current role/rank (all origins).
+- (02:50Z) Owner: emotion icons must be human faces showing the emotion (not symbolic objects); readable at small size.
+- (03:00Z) Owner: illness (light/heavy) + poisoning looks approved; code expressions approach OK but emotions must be clearer (stronger).
+- (03:15Z) Owner APPROVED Tiên đế băng hà picture (review/succession2 816d0976).
+- (03:30Z) Owner page-curl reference (dev/owner-shots/1115-curl-ref-*.jpg): the turning page lifts diagonally from the corner, rotates/tilts as it turns (corner leads), with a soft curved bend and a dark gradient shadow along the fold — not a vertical cylinder roll.
+- (04:00Z) Owner on book mockups: Dư đồ is NOT a book page — show it as a leather map (unrolled leather/hide map look, full screen, no gutter) and remove the info strip above the map. Tư trang = game-style inventory grid of empty square slots, split by item-type tabs. Origin roulette (Luân hồi) screen approved; idea: cards face-down, player picks blindly; rarity chips must align on one line per row. Shots dev/owner-shots/1115-*.jpg.
+- (22:15Z) Owner: paint each person's residence (nơi ở) as that person's backdrop on iPad (8 consort palaces currently share phi-tan-cung) — pilot Cảnh Phúc cung (xuân-sáng + tối) first, then rollout after approval. Owner wants 2-player co-op playable ASAP to play with a friend — co-op phase 1 started now (review/coop, Cloudflare Worker+DO).
+- (22:30Z) Owner: face-down origin flow = show all 9 origins face-up first → "Tiếp" → cards flip face-down + shuffle → player taps one → it glows, flips, moves to page centre → "Tiếp" → that origin's picture animates over to the character-selection page. Odds unchanged.
+- (22:35Z) Owner: the 8 palace paintings are for the 8 palace heads (chủ vị); lower consorts living in the same palace get their own different side-room paintings (phối điện/thiên điện), varied so co-residents don't share.
+- (22:40Z) Owner: residence paintings get the full sáng/trưa/chiều/tối × 4 seasons set (16 painted variants each), not season-by-tint.
+- (22:45Z) Owner: speed up co-op with several workers (target: play with a friend tonight). Split: lead/backend (Worker+DO+PROTOCOL), B client+lobby, C shared-world gameplay; MVP first (reborn as cung nữ; tiểu thư later).
+- (22:50Z) Owner: no more code-reshaped facial expressions — feelings are shown by the small mood icons (jexpr/face-lm removed from review/appearance; illness/poison/slap/rash overlays stay). Owner asked to redraw place backdrops' 4 seasons × sáng/trưa/chiều/tối more beautifully — pilot Ngự hoa viên first.
+- (23:00Z) Owner: co-op rebirth = same choice as single player (stay outside as tiểu thư or tiến cung), not forced cung nữ. Residence art: lower consorts sharing a thiên điện may appear together (2–3 people) in one room picture; cung nữ quarters likewise shared.
+- (23:10Z) Owner: too many images/sounds — download images + audio to the device on first entry with a loading screen + loading bar; afterwards play from device; only what truly needs online stays online (co-op). Worker on review/loading (content-hashed long-lived asset cache, no full re-download per build).
+- (23:40Z) Owner approved the residence backdrop look (Cảnh Phúc chính điện pilot: 'Nền ok'). Asked to check whether the Quý phi's outfit is right for her rank (shot dev/owner-shots/1115-residence-quyphi.jpg) — sent to consort-art worker to verify tier/pose.
+- (23:55Z) Owner: the wide sweeping skirt pose is OK — do not raise pose issues she didn't complain about; only answer exactly what she asks (here: is the Quý phi outfit right for her rank).
+- (00:00Z) Owner rejected the seasons redraw pilot (Ngự hoa viên v2): KEEP the old place backdrops. No seasons rollout; review/seasons not merged.
+- (00:05Z) Owner: emotion icons don't look cổ trang — same simple drawing style but faces with ancient hairstyle + hairpins (cài trâm) like consorts; must stay readable small.
+- (00:10Z) Owner angry: I sent emotion shots taken on an OLD base (rejected layout: Bảng phẩm vị button, Tư chất dropdown, small room strip). RULE: every screenshot sent to the owner must be on the approved current layout (review/fold-layout / page-curl base). Workers must base UI work on it; coordinator checks shots before sending.
+- (00:15Z) CORRECTION: owner's 'Vẽ lại 4 mùa…sáng trưa chiều tối' meant the NEW residence paintings (palace main halls/side halls), not redrawing old place backdrops — coordinator misread it (seasons pilot wasted). Residence rooms get full 4 seasons × sáng/trưa/chiều/tối. Old place backdrops stay.
+- (00:25Z) Owner: emotion = icon only, NO colour ring/aura around avatar frames. PRIORITY: finish the new book UI (page-curl, on top of fold-layout) first; all other UI work is then rebuilt/fixed on the new UI (no owner shots from other UI branches until book UI is final).
+- (00:35Z) Owner: audit every place/room backdrop; any without full 4 seasons × 4 times → paint the missing variants now (edits of existing, keep old art). Worker on review/place-seasons.
+- (00:45Z) Owner: as soon as the book UI is finished, put it live immediately (fast kit review + Fold/iPad play-test, then merge fold-layout+page-curl to main).
+- (01:00Z) Owner: hairpin emotion icons look male — must clearly read as ancient-court women (feminine face, lips, fuller hairstyle with flowers/bộ diêu, no single topknot), still legible small.
+- (01:10Z) Owner approved the t7/t8 small huadian rollout on all consorts ('Hoa điền ok').
+- (01:25Z) Co-op: players must see each other live in the same place (e.g. Ngự hoa viên) and see the same NPCs there → sync per buổi, live presence, shared per-buổi seed for NPC whereabouts (coordinator decision answering owner's question).
+- (01:35Z) Co-op release plan: ship week-sync MVP first (after bug fixes + bot year), then per-buổi same-place sync (see each other live, same NPCs via host 'where', player-to-player acts with Nhận/Từ chối) as the next update (~4–5 h more).
+- (01:40Z) Owner approved the residence xuân-sáng sheet (25 rooms) → rollout all 16 variants per room + wire into game.
+- (01:55Z) Owner approved the emotion icon set 'palace lady' (pilot-emo-lady: oval face, red lips, two-bun chignon, flower, bộ diêu).
+- (02:00Z) Owner: co-op players have the FULL interaction set with each other like with NPCs, incl. harm/scheme/sát hại, depending on place/rank/conditions; not a simple Nhận/Từ chối card — only invitation-type acts ask the target; harm resolves with normal odds/detection.
+- (02:30Z) Owner: Dư đồ → tap a palace → palace DETAIL map (like reference game's drawn map) showing Chính điện / Đông viện / Tây viện each with 'N bóng người' (real count this buổi) → tap a part → that room painting with exactly the people there. Pilot Cảnh Phúc detail map first (review/palace-map).
+- (02:50Z) Owner: do not draw new map art — the Phượng Lệnh repo (thientran2711/phuong-lenh-art) already has the full palace map, per-place detail maps, 4 seasons × 4 times and festivals; take them from there.
+- (03:20Z) Owner: like Phượng Lệnh, palace detail art is chosen by the RANK of the palace's chủ vị (PL's per-rank courtyards); our 8 palace names are just labels. Empty palace → spare-cung.
+- (03:30Z) Owner on Tư trang: act cards (Gánh hàng rong / Soát đồ) lost their bottom border (clipped) — fix in kit for all card rows. Item slots must use per-grade backgrounds, stronger than the pale tints: REUSE the existing consort portrait frame/background art per grade (no new drawing).
+- (03:35Z) Owner: Tư trang has empty space below the bag → add equipment slots (ô trang bị, what she wears) like RPG games, filling the page.
+- (03:40Z) Owner: room interiors use OUR own residence paintings (Phượng Lệnh interiors are drawn differently) → continue the 25-room × 16-variant rollout. PL art only for the palace map / detail courtyards.
+- (03:55Z) Owner (repeated, angry): people on stages too small. RULE: ONE kit figure-scale standard for every place figures appear (stage, event, book page, rooms, co-op, podium…): figure ≈85–90% of picture height, same scale for all in a scene, never shrink to fit — extra people via +N; names never cut. Any reused picture must follow it.
+- (04:00Z) Owner: in co-op the friend is 'Người lạ' until met, same knowledge rules as NPCs (no name/face until met); reborn friend = unknown again.
+- (04:10Z) Owner: palace detail courtyards use only Phượng Lệnh grade 'nhat' (most luxurious); no nhi/tam mixing.
+- (04:15Z) Owner: in the kit figure scale, men are a bit taller than women (≈1.08×); children by age.
+- (04:30Z) Owner: on walks she can meet men; zones forbidden to men (inner hậu cung) / women (outer court); seeing a man where he shouldn't be → report to guards / Cung Chính ti, ignore, hide him, hide & eavesdrop, later leverage. Same rules for NPCs. Worker on review/men (existing male art only).
+- (05:10Z) Owner: Tư trang Y phục slot must show the garment (existing wardrobe art img/wd512), not the fabric roll.
+- (05:20Z) Owner: equipped slots must show the item's info inline (Được/Mất/công dụng), not only after tapping; header warning chip must not be cut.
+- (05:25Z) Owner: stage name labels = rank on top line, name below, text coloured by rank (kit rule, all stages).
+- (05:40Z) Owner: no 'Gánh hàng rong' inside the palace — renamed to 'Nhờ thái giám mua đồ' (Nội vụ phủ eunuch buys from outside).
+- (05:45Z) Owner: category tab row must sit centred (equal gaps) between the card row above and the content below; sticky row must not cover content.
+- (05:50Z) Owner: worn items have a luxury axis too: within rank but too luxurious → jealousy/ghen ghét, superiors' disapproval; modest dress small Đức/Danh. Same for NPCs; shown in Đang mang.
+- (06:00Z) Owner: add more wear slots with real rules (hoa tai, ngọc bội, túi thơm, khăn che mặt…), using existing item art; rank + luxury rules per slot.
+- (06:05Z) Owner: stage figures taller still → KIT_FIG woman .92, men ×1.07; don't shrink for 'her+1' — figures may stand behind the plaque column.
+- (06:15Z) Owner approved figure ratio of dev/owner-shots/1115-fig-ok.jpg (iPad 1180 Ngọc Thanh các, ≈.76–.80 of stage) as the standard → KIT_FIG women at that ratio everywhere (supersedes .92).
+- (06:20Z) Owner: no grey boxes over locked places on Dư đồ — same label style + lock mark; actions in a tap card; no cut text.
+- (06:25Z) Owner: during page curl, the next page must already be visible underneath the lifting page (like a real book).
+- (06:40Z) Owner: no Chinese characters in UI — ngự tứ seal shows Vietnamese 'Ngự' in the red square seal.
+- (07:00Z) Owner: luxury shown as numbers (corner 'Xa xỉ N' per item; header total vs allowance), not words. Ref dev/owner-shots/1115-xaxi-ref.jpg.
+- (07:15Z) Owner: choice cards (e.g. Nam nhân nơi cấm địa) must show each option's full Tốn/Được/Mất (+ odds), like Hành sự cards — not costs only.
+- (07:20Z) Owner: 4 named guards → paint 4 distinct guard looks (thive-3, thive-4 × 4 ages).
+- (07:40Z) Owner: wants alternative story routes (not only climbing to Thái hậu): tư tình with another man (incl. for a child), escape the palace, leave legally (xuất gia, ban hôn), follow another man. Worker on review/routes (design + build, tasteful, full option cards, same rules for NPCs).
+- (07:45Z) Owner: iPad stage shows 3–4 people at once (max 4) at the approved scale; Fold 2–3; extra via › N.
+- (07:50Z) Owner: the back of the curling page must show page content (the new page's image), not blank paper.
+- (08:10Z) Owner: don't show the rank luxury allowance — only item 'Xa xỉ N' and the worn total; player learns limits from consequences.
+- (08:20Z) Owner: men's intrusions must not be luck — plan-driven (scheduled meetings/shifts in world state); she sees it only if she is really there at that time; recognition by stats; tai mắt can tip her off in advance.
+- (08:30Z) Coordinator decision for owner's '3–4 people on iPad': allow ~35% overlap on iPad (25% Fold), size by core body width so sleeves don't force the strip; same scale.
+- (08:40Z) Owner: tư tình child → classic 'trích huyết nghiệm thân' blood test (can be tampered by either side; same rules for NPCs). Sent to routes worker.
+- (08:50Z) Owner: in dialogs only the option list scrolls; title/picture/figures/text stay fixed (kit rule for all dialogs).
+- (08:55Z) Owner: blood test gets animation/minigame; scheme acts get minigames (worker review/scheme-games; always option to skip and use plain odds; NPCs plain odds).
+- (09:05Z) Coordinator: to let owner play with a friend sooner, ship review/coop (includes book-release 1b90526) as one live release after kit review; iPad 3–4 people, dialog scroll, full flap come in the next update.
+- (09:10Z) Owner: event dialogs put the people standing on the scene picture (not a separate figure column) to save space; text full width below.
+- (09:30Z) Scheme minigames: first worker stopped by a safety classifier (likely the poison-dose game). Scope narrowed to abstract games: Nghe ngóng, Truyền lời, Mặc cả; no poison minigame.
+- (09:40Z) Coordinator decision: the player figure is drawn on the stage at every place she is (not only home/lãnh cung).
+- (09:50Z) Owner: 4 people too crowded → max 3 on iPad, 2 on phone/Fold; less overlap.
+- (10:00Z) Owner: page turn = whole sheet swinging around the spine with content attached to the sheet (rotates/tilts with it), like her binder-app reference; not content pinned to the page beneath.
+- (10:05Z) Owner: poison/heavy-harm minigame should be abstract, not explicit → 'Thời cơ' timing/attention game (no method detail).
+- (10:40Z) LIVE: review/coop merged to main 614b00ec (book UI + fold-layout + KIT_FIG + co-op 2 người).
+- (01:20Z, qua phiên cũ) Owner: app cài màn hình chính / điện thoại kẹt bản cũ do sw.js cũ → sw mới phải tự kiểm bản mới khi mở app và khi quay lại, tự chuyển sang bản mới sau 1 lần mở lại; giao thợ review/loading.
+- (01:25Z) Owner (ảnh màn nhà, 'Thanh gì đây'): dải tím sọc giữa tranh sân khấu và hàng nút = mép bìa sách (.kbk-board) lộ ra → lỗi, bỏ; bìa không được hiện thành một dải riêng. Giao người duyệt sửa trong đợt 2.
+- (01:30Z) Owner: from now on ALL images go to Cloudflare, not stored in the GitHub repo → worker review/cdn-images (R2 + Worker or Pages; IMG_BASE; cdn_sync for new art; git rm img/ without rewriting history).
+- (01:30Z) Owner: Dư đồ scroll/unroll animation too fast → slow down (~2×, ease, interruptible, off with Cảnh động) → worker review/map-anim.
+- (01:35Z) Owner (Dư đồ, còn 2 khắc mà nơi nào cũng 'hết khắc'): luật cũ đòi đường đi + 1 khắc. Quyết định điều phối: đi được nơi nào đường đi ≤ khắc còn; đến nơi hết buổi vẫn đi được (chỉ kịp xem ai ở đó, buổi sau bắt đầu ở đó); chữ 'hết khắc' chỉ khi thật còn 0, còn lại ghi 'đi N khắc'. Giao review/map-anim.
+- (01:40Z) Owner: vẽ áo khuê các cho tuyến tiểu thư → thường phục khuê các, a18, mọi gương mặt người chơi (32 phi tần + player nếu dùng), không hoa điền; thử 4 người gửi sếp duyệt trước; ảnh lên Cloudflare. Nhánh review/khuecac.
+- (01:45Z) Owner cho đẩy 2 lô sửa cung nữ (wip/maid-art-fix, wip/maid-art-b-fix). Kiểm lại: cả hai (và 89dd550/7b3f527/212db69, maid-art-c) đã PASS và đã ở main từ 14/11 — ghi chú trong HANDOVER.md đã cũ; không còn gì để đẩy.
+- (01:50Z) Owner: hoạt cảnh lật trang chậm lại (~2×, ~1.1–1.4 s, êm) → thợ review/page-curl.
+- (01:55Z) Owner: áo khuê các (thiếu nữ ngoài cung) vẽ đủ 84 mặt (32 phi tần + 52 cung nữ).
+- (02:25Z) Owner DUYỆT áo khuê các (mẫu 4 mặt c05 c08 c29 m05, nét sáng mềm hơn chấp nhận) → vẽ nốt 80 mặt, nối vào tuyến tiểu thư.
+- (02:30Z) Owner: thêm trang phục cô gái nhà nghèo cho tuyến ngoài cung. Điều phối: xuất thân thd (thầy đồ nghèo) và td (tội thần) mặc áo nghèo; tt/dtq/muoi/ch mặc khuê các. Áo nghèo = vải thô/bông màu nhạt, trâm gỗ, gọn sạch xinh — không vá, không rách (giữ luật 'không ai trông thảm'). Thử 4 mặt trước rồi gửi sếp duyệt; 84 mặt.
+- (02:35Z) Owner chê hoa điền m05 'hai quả anh đào' (trông như trái cherry). Đổi m05 sang một bông hoa anh đào nhỏ (5 cánh có khía), mọi bậc t1–t8 × 4 tuổi. Nhánh review/m05-huadian. Chưa đổi các mẫu đồ vật/quả khác (sếp chưa chê) — đã hỏi sếp.
+- (02:00Z, sếp nói ở phiên cũ, phiên cũ chuyển lời) Owner: làm cả 15 ý trong dev/research/TRUNGSINH_COMPARE.md "Đào sâu" → Top 15 (thả thú hủy dung 2 chiều; hội phối đồ theo đề; mini game khi Hoàng thượng triệu riêng: đàn theo nhịp, cờ, du hồ có thể gặp thích khách; lễ tấn phong có khách chúc + phát lì xì; hiện ngưỡng chỉ số trước kỳ thi; thanh nguy hiểm chung gom ghen/oán; thú cưng; ấn tượng đầu khi gặp người ghét mình; bắt nạt đòi bạc 2 nút; hậu quả hẹn hò theo thân phận; mật ước sinh con khi Hoàng thượng vô sinh (nối routes); ân thưởng sau sinh; hỏa hoạn đốt đồ (nối lost-items); ước nguyện/thả đèn; đồ tự tay làm để tặng). Luật: không copy chữ/tranh/tên game đó; kit chung; thẻ đủ Cần/Tốn/Được/Mất + cơ may; mọi việc có nguyên nhân thật + điềm báo; NPC cùng luật; tranh chỉ vẽ khi cần và hỏi sếp trước; phần hại trừu tượng.
+- (02:10Z) Owner DUYỆT áo con nhà nghèo (mẫu 4 mặt) → vẽ đủ 84 mặt; thd/td mặc áo nghèo.
+- (02:15Z) Owner BỎ ý 11 'mật ước sinh con khi Hoàng thượng vô sinh' (hơi tào lao) — không làm; 14 ý còn lại giữ.
+- (02:20Z) Owner: đổi hết hoa điền hình đồ vật/quả/con vật sang hoa lá (giữ dấu cổ điển chấm/giọt/trăng/lửa). Khoảng 23 mặt cung nữ + c17, c27; mỗi mẫu hoa/lá riêng, không trùng; 8 bậc × 4 tuổi. Nhánh review/m05-huadian.
+- (02:25Z) Owner: bắt nạt đòi bạc phải có cả đòi đồ nàng đang có (món thật trong Tư trang). Giao review/ts-b; dùng lại việc 'uyhiep' có sẵn.
+- (02:35Z) Owner (ảnh Hậu cung): còn nền tím dưới trang → bỏ hẳn bìa sách tím tối ở mọi tab/khổ; chỉ viền giấy mảnh cùng tông kit nếu cần. Giao người duyệt mới, gộp vào review/main-next cùng map-anim + page-curl.
+- (02:40Z) Owner: trang đang lật bị trong suốt trên màn dọc điện thoại (chữ hai trang chồng nhau) → tờ lật phải đục hoàn toàn cả hai mặt, không lộ chữ trang dưới xuyên qua; KIT §34.0. Giao người gộp main-next (page-curl).
+- (02:55Z) Owner: 'Đẩy lên live đi' + từ nay bản đã qua kiểm duyệt (PASS của người duyệt kit) được đưa lên live luôn, không cần hỏi. Đã đẩy main = 355d6d58 (loading: app tự về bản mới).
+- (03:05Z) Owner chê 'có thai: Liều · được ban thưởng: Liều' trên thẻ việc. Luật: thang Liều…Nắm chắc chỉ cho cơ may thành/hỏng của chính việc; khả năng phụ (có thai, ban thưởng, lật thẻ…) dùng thang Rất thấp/Thấp/Vừa/Cao/Rất cao như ô trạng thái (hud-chance2). Giao review/sub-odds.
+- (03:10Z) Owner lo bị tải lại giữa lúc chơi. Điều phối: không bao giờ tự tải lại giữa chừng; chỉ chip 'Có bản mới' (chạm: Mở bản mới / Để sau); tự áp dụng khi Qua buổi / mở lại app sau lâu; sau tải TỰ vào lại đúng kiếp đúng chỗ; co-op không rớt. Giao review/update-flow.
+- (03:15Z) Owner: cho phép thường trực tự đẩy ảnh lên Cloudflare (kể cả ghi đè ảnh sửa cùng tên), không cần hỏi.
+- (03:20Z) Co-op cập nhật: cả hai thấy chip; tới Qua buổi (điểm đồng bộ) chủ phòng báo → cả hai ghi sổ, mở bản mới, TỰ vào lại đúng phòng/đúng chỗ; phòng không nhận máy khác bản (máy cũ được dẫn cập nhật rồi vào lại); có thể chủ động 'Mở bản mới ngay' (hỏi người kia). review/update-flow.
+- (03:40Z) Owner: sửa giao diện chơi cùng bạn GẤP để sếp chơi với bạn → thợ review/coop-ui (chơi thử 2 máy trên live, sửa chỗ vướng, ưu tiên cao nhất).
+- (03:45Z) Owner: tranh việc Thỉnh an (váy + giày quỳ trên đệm) giống phạt quỳ → đổi tranh: phi tần hành lễ phúc thân/cúi chào trang nhã trước điện, không quỳ đệm. Ưu tiên tranh có sẵn, không có thì vẽ gpt-2-6. review/thinhan-art.
+- (03:55Z) Owner: cần hướng dẫn tân thủ. Thiết kế: ma ma dẫn đường (tranh có sẵn), lượt dẫn đầu kiếp ≤12 bước có khoanh sáng + làm thử một việc; lời dặn lần đầu theo ngữ cảnh mỗi tính năng; bật/tắt + xem lại trong menu; không ép người chơi cũ; co-op chạy riêng. review/tutorial.
+- (04:05Z) Owner: chuyển Tai mắt + Ân sủng (Có thai, Lật thẻ, Ân tình đêm, Số lần ân thưởng) lên sân khấu, cột phải dưới các chip Hoàng thượng/Thái hậu/Hoàng hậu/kẻ hầu; bỏ hẳn bảng 'Tư chất · trạng thái' (thông tin khác đã có chỗ khác). Có thai/Lật thẻ theo thang Rất thấp…Rất cao. Giao review/sub-odds.
+- (04:15Z) Owner: Giao tình mỗi người chia 3 cột — trái tranh người lớn như chỗ khác, giữa thanh quan hệ, phải "Đã biết" gạch đầu dòng. review/hau-cung-ui.
+- (04:15Z) Owner hỏi "Sai đi Tiểu Lâm Tử là sao" → đổi thành "Người chạy việc: …" có giải thích, chỉ một chỗ, có thể chọn người. Chip "Thỉnh tranh nhân vật" không được đè nội dung. review/hau-cung-ui.
+- (04:20Z) Owner: hoa điền to quá (Hạ Tố Tâm, Phi). Luật mới: t1 = cỡ c03 t1; lớn dần rất ít, tối đa ~1.25× bề ngang t1 tới t6; t7 nửa cỡ, t8 phượng vàng nhỏ. Soát hết phi tần + cung nữ Part C, thu nhỏ cái quá cỡ (review/m05-huadian).
+- (04:20Z) Owner: khung chân dung (Quý phi) phần đỉnh trang trí rời rạc, lệch → sửa trong kit khung theo phẩm, đỉnh gắn liền khung (review/hau-cung-ui).
+- (04:25Z) Owner: danh sách người (Sổ tuần 'Sổ này ghi') phải thẳng cột dọc → luật kit: mọi danh sách chip người dùng lưới cột đều. review/hau-cung-ui.
+- (04:30Z) Owner: trang người trong Sổ tuần → nhân vật cao full trang (dưới tiêu đề chạy tới trên số trang), chữ cột phải; luật kit §27. review/hau-cung-ui.
+- (04:35Z) Owner: trang 'tiếp theo' trong Sổ tuần cũng phải có hình toàn thân full trang như trang đầu; chỉ sang trang khi thật hết chỗ; dòng '(Đã ghi vào mục Đã biết…)' thành chú thích nhỏ. review/hau-cung-ui.
+- (04:45Z) Owner: hộp thoại có người (vd 'Có người đến') → trái người toàn thân cao hết hộp; phải trên lời sự kiện, phải dưới nút chọn. Luật KIT §32.7 cho hộp thoại có người không tranh cảnh. review/dialog-person.
+- (04:50Z) Owner chê tranh Thỉnh an mới (nhìn từ sau, tay như để sau mông) → vẽ lại: vạn phúc lễ, tay chắp phía trước bên hông phải, nhìn nghiêng/3/4 mặt hướng Thái hậu; Thái hậu đúng tuổi, không hoa điền. act-thinh-an-v3.
+- (04:55Z) Owner: Hành sự (và mọi danh sách việc) — việc làm được ngay lên trên cùng, rồi việc chỉ vướng giờ, rồi việc vướng điều kiện khác; thứ tự ổn định. review/sub-odds.
+- (04:55Z) Owner hỏi "tiếng cứng cỏi là sao" → cấm chữ hiệu ứng mơ hồ không có luật thật trong Được/Mất/Kèm; điều tốt không nằm dòng Kèm đỏ. review/sub-odds.
+- (04:55Z) c12 Phi hoa điền đã thu nhỏ (~c03 t1 × 1.2), đẩy CDN.
+- (05:05Z) Owner: nam nhân không thuộc tab Hậu cung → chuyển sang Cung nhân, mục 'Nam nhân đã gặp'; tên nam nhân không trùng; thẻ nam nhân phải có việc hoặc lý do rõ. review/hau-cung-ui.
+- (05:08Z) Owner báo lỗi live: Hậu cung › Phi tần (Hạ Tố Tâm, Dùng chứng cứ) dải người chỉ 1 người, thẻ người co lại ~1/3, cắt tranh và thẻ việc, trống lớn bên dưới → sửa gấp (review/hau-cung-ui, đẩy riêng).
+- (05:12Z) Owner hỏi cân bằng 'Có người đến' (Nhịn: Đức+2, ghen+3 / Đáp trả: Danh+1, oán+10). Điều phối: chưa cân bằng (Nhịn gần như luôn hơn; ghen khi nhịn vô lý). Làm lại thành thế khó xử thật: Nhịn Đức+2, Danh−1, Lòng kẻ hầu −2, kẻ kia lấn tới; Đáp trả Danh+2, Lòng+2, oán+6, Đức−1 nếu người kia phẩm cao, có cơ may hỏng. Soát mọi sự kiện 2–3 lựa chọn có lựa chọn áp đảo. review/ts-b.
+- (05:15Z) Owner báo lỗi: Thỉnh an Hoàng hậu 'thiện cảm +4' mà không đổi gì. Sửa: việc tăng 'Hoàng hậu với ngươi +4' thật; thẻ kết quả hiện số thật. Thuật ngữ thống nhất: 'Ngươi với nàng' / 'Nàng (Hoàng hậu, Hắn…) với ngươi', bỏ chữ 'thiện cảm' trơn. Soát mọi hiệu ứng quan hệ. review/sub-odds + review/hau-cung-ui.
+- (05:18Z) Owner DUYỆT cỡ hoa điền thu nhỏ (c12 Phi) → làm chuẩn cỡ cho mọi bậc.
+- (05:20Z) Owner: tab Hậu cung phải có cả Hoàng thượng, Thái hậu (nhóm đầu dải người, thẻ người + việc có sẵn). review/hau-cung-ui.
+- (05:25Z) Owner: 'Ngươi với nàng / Nàng với ngươi' khó hiểu → nhãn chủ-vị rõ: 'Nàng quý ngươi: <mức> · số', 'Nàng oán ngươi: số', 'Ngươi quý nàng…', 'Hoàng hậu quý ngươi +4'; mức: Ghét/Không ưa/Bình thường/Có cảm tình/Quý mến/Thân thiết. Mọi nơi (thẻ, Giao tình, việc, kết quả, sổ ghi).
+- (05:28Z) Owner bực: lỗi Thỉnh an Hoàng hậu không tăng quan hệ đã báo từ 14/11 mà chưa sửa (phiên cũ không ghi). → HOTFIX ưu tiên số 1 (review/hotfix-thinhan), lên live ngay khi qua kiểm.
+- (05:35Z) Owner: Hậu cung có tab nhỏ riêng cạnh Phi tần cho Hoàng thượng + Thái hậu, và tab nhỏ riêng 'Nam nhân' cũng trong Hậu cung (KHÔNG để ở Cung nhân). Hậu cung: Phi tần | Hoàng thượng · Thái hậu | Nam nhân | Giao tình | Phe phái. (05:35Z máy thợ khởi động lại — mọi thợ dừng, cho chạy tiếp từ worktree.)
+- (05:40Z) Owner: việc kiểm 'mọi nút có ra đúng kết quả như nút ghi' (giao từ 14/11) bị mất khi đổi phiên → giao lại: review/act-audit (bộ kiểm tự động mọi nút, so trước/sau, báo ACT_AUDIT.md, sửa lỗi sai). Đưa vào danh sách lỗi mở.
+- (05:45Z) Owner: khung chân dung — đỉnh trang trí hở khỏi khung; đổi người khung bị nhảy, không mượt; vị trí không theo lề → hộp chân dung cố định một chuẩn, đỉnh gắn khung, đổi người mờ chuyển 150–200 ms không xô lệch (review/hau-cung-ui).
+- (05:45Z) Owner: Hoàng hậu/Hoàng quý phi phải ở một mình (đang thấy người ở chung Càn Ninh) → sửa luật cư trú; Thái hậu tuổi 43 trông trẻ → Thái hậu 50–62 tuổi, tranh đúng tuổi (review/court-rules).
+- (05:50Z) Owner: ghi chú 'còn N: cần 50 mới lên Hoàng hậu' trên thẻ việc vừa thừa vừa lệch số → bỏ khỏi mọi thẻ việc; bỏ ghi chú lặp lại CẦN (review/sub-odds).
+- (05:50Z) Người duyệt 2: balance FAIL (đồ mặc j92 chồng Tư trang mới) → cần thợ hợp nhất đồ WD vào Tư trang rồi mới gộp balance/emotion/difficulty/lost-items/appearance/schedules2/outside. Bot main: HH 54% (cao), chết sớm 29%.
+- (05:55Z) Owner hỏi cơ may 'Sai đi dò la' (Khá chắc) dựa vào đâu hay hên xui → hiện chỉ = 40 + Lòng/3 rồi gieo. Luật: cơ may phải từ yếu tố thật (tài/nết kẻ hầu, Tâm cơ/nết người bị dò, canh gác, quen biết, Tai mắt, quẻ) và chạm vào chữ cơ may hiện 'Vì sao …' liệt kê yếu tố (không %). Áp mọi việc; NPC cùng công thức. review/act-audit.
+- (06:00Z) Owner: tái cấu trúc tab. Hậu cung = người trong cung: [Hoàng thượng · Thái hậu | Phi tần | Nam nhân | Cung nhân]. Tab chính 'Cung nhân' cũ đổi tên thành 'Giao tình' (điều phối đặt tên) gồm [Ân oán | Phe phái]. Thay quyết định 05:35Z. review/hau-cung-ui; báo thợ tutorial.
+- (06:15Z) Owner: không chỉ giấu ghi chú — phải xem luật/công thức có sai. Tra: 'còn N' = Đức sau việc (33−5=28, 33−4=29, 33−3=30) — toán đúng, nhưng VP viết lại mất chữ 'Đức'. LỖI THẬT: chữ hiện 'Thái hậu 50' nhưng luật kiểm BAL.hhTh=55; chú thích code ghi 40. Giao act-audit: mọi con số hiện cho người chơi phải đọc từ cùng hằng luật; liệt kê chỗ lệch.
+- (06:20Z) Owner: 'Sửa luật cho đúng một nguồn luôn, xong báo tôi' → review/rules-one-source ưu tiên đầu của thợ act-audit.
+- (06:35Z) Owner báo lỗi: tới Kính sự phòng lúc còn 1 khắc → hết buổi, game tự sang buổi tối và đá về Dư đồ, không kịp thấy ai. Luật: không tự qua buổi/không dời chỗ; đứng tại nơi đó thấy người buổi này; tự bấm Qua buổi; buổi sau bắt đầu tại đó; chỉ dời khi có lý do thật và ghi rõ. review/court-rules.
+- (06:38Z) Owner báo lỗi: đang ở Kính sự phòng, chạm nơi đó trên Dư đồ thì nhảy sang Hành sự, không vào nơi. Sửa: chạm nơi đang đứng → mở sân khấu nơi đó; nút '‹ Phòng' về đúng nơi đang đứng và ghi tên nơi. review/court-rules.
+- (06:40Z) Owner: giữ cảnh báo trên thẻ việc dạng 'Đức 33 → 28: cần Đức 50 mới lên Hoàng hậu' (không bỏ; không viết 'còn 28'); ngưỡng đọc từ bảng luật.
+- (06:45Z) Owner sửa: hết khắc khi tới nơi VẪN tự sang buổi, nhưng ở lại nơi đó với 4 khắc mới, thấy người buổi mới, làm tiếp. (Thay ý 'không tự sang buổi'.) Owner nói đã báo từ 14/11 — không thấy nhánh nào sửa trong lịch sử git. review/court-rules.
+- 06:45Z LIVE main=f7a9e9880 HOTFIX Thỉnh an Hoàng hậu (thẻ lấy nhầm lựa chọn 'Hỏi han sức khỏe' không chạy; nay Hoàng hậu quý ngươi +4 thật, thẻ kết quả trước→sau).
+- (06:55Z) Owner (Kính sự phòng, 3 bóng): (1) nàng hiện ở cả trang 1 và trang 2 sân khấu → nàng chỉ hiện MỘT lần (trang đầu), các trang sau chỉ người khác; (2) nút trang '1 ‹' / '› 1' khó hiểu → ghi '+N' (N = số người còn lại chưa hiện), nút lùi '‹'; (3) tiêu đề 'Ở đây có 1 người' lệch với Dư đồ '3 bóng' → một nguồn đếm, khớp nhau, nói rõ (vd 'Ở đây có 2 người khác'); (4) vị trí đứng phải theo khuôn chuẩn: ô 1, ô 2, ô 3 cố định, cùng đường chân, căn giữa ô — thị vệ/thái giám đang lệch; tên không chồng nhau. Giao thợ stage-slots (khi đĩa đủ).
+- (07:05Z) Owner: thẻ việc chỉ ghi 'Đức 33 → 28', KHÔNG kèm 'cần Đức 50 mới lên Hoàng hậu'.
+- (07:30Z) Owner: mọi nút/lựa chọn phải có mục đích — lựa chọn không được/không mất gì (vd 'Hỏi han sức khỏe') phải cho tác dụng thật hợp nghĩa hoặc bỏ khỏi game. act-audit liệt kê + sửa.
+- (07:30Z) Owner hỏi vì sao đĩa thợ hay đầy: kho có ~5 GB lịch sử ảnh + mỗi thợ chép ra 1,4 GB (img/ trong cây) × ~13 thợ. Khi cdn-images lên main, img/ rời khỏi cây → mỗi thợ ~0,2 GB. Làm nhẹ lịch sử (tạo kho mới/filter) cần sếp đồng ý.
+- (07:30Z) Owner xem nền 4 buổi, chê Kính sự phòng tối quá rực/AI (đã gửi 11 tờ nền 4 mùa × 4 buổi; chờ sếp chỉ nơi cần làm lại).
+- (07:30Z) Owner: nhãn sân khấu dòng 2 phải là TÊN người, không phải chức ('Thái giám / Tổng quản' sai) → mọi NPC có tên riêng cổ trang, chức ở dòng 1 (review/stage-slots).
+- (07:35Z) Owner: CHO PHÉP THƯỜNG TRỰC vẽ tranh khi thấy thiếu, không cần hỏi — phải đúng phong cách game (gpt-2-6, STYLE_ANCHOR).
+- (07:35Z) Owner: thú cưng vẽ luôn; 4 con quá ít → 18–24 con, có phẩm bậc + Xa xỉ N (luật như đồ mang), mỗi bậc công dụng khác (báo trước bị hại, canh cung, nghe lén, Sủng, Danh…), thần thú hiếm ĐỠ MỘT MẠNG cho chủ; có mặt trái thật; NPC cùng luật. review/pets.
+- (08:00Z) LIVE main=e659176f0 coop-ui (sửa kẹt nút Vào phòng, Hành sự trống khi vào lại, nút Gửi/Chép đường dẫn, hướng dẫn 6 bước). Lệch buổi tuần 3 chưa tái hiện.
+- (08:00Z) Owner: sân khấu vẽ người thừa thành chân dung nhỏ đứng trên sàn → cấm; người thừa vào '+N', người lạ = hình bóng cỡ thật (stage-slots). 'Quen biết 3/3' khó hiểu → chữ rõ (hau-cung-ui). 'MẤT: không được gì' vô nghĩa → bỏ/thay hậu quả thật (sub-odds).
+- (08:05Z) Owner: chân dung người lạ mờ + phóng to nửa mặt → người lạ dùng hình bóng; soát TOÀN BỘ ảnh hiển thị (mờ, phóng, cắt mặt, ảnh dự phòng) review/img-quality.
+- (08:10Z) Owner: đổi tên 'Sổ tuần' và soát mọi tên gọi cho ra cổ trang, cổ ngữ → thợ văn phong lập bảng đề xuất (khuyến nghị 'Tuần lục'), điều phối duyệt rồi áp.
+- (08:10Z) Owner: lật trang phải CONG theo ngón tay khi giữ-kéo (kéo tới lui, dừng là đứng), thả quá nửa hoặc hất nhanh mới lật hẳn, chưa thì bật về; nút ‹ › cũng lật cong; bìa cũng cong (cứng hơn). review/drag-curl.
+- (08:10Z) Owner hỏi lại thẳng cột 'Sổ này ghi': đã giao review/hau-cung-ui từ 04:25Z, chưa lên live.
+- 08:10Z cdn_sync 216 ảnh thu nhỏ hoa điền cung nữ (đợt 3).
+- (08:15Z) Owner: tranh việc trong Sổ tuần trùng nhau (Nhịn = Làm thơ; Ngủ đêm = Đi) → mỗi việc khác nghĩa một tranh riêng đúng nghĩa (thiếu thì vẽ); 'Đi.' → 'Đến <nơi>'; 'Nhịn.' có ngữ cảnh; nhãn 'X quý ngươi'. review/act-pics.
+- (08:20Z) Owner: tranh Thỉnh an Hoàng hậu và Thỉnh an Thái hậu phải khác nhau (Đức Thọ cung/Thái hậu vs Càn Ninh cung/Hoàng hậu; vạn phúc lễ tay trước, không quay lưng). review/act-pics (thay thinhan-art v2).
+- (08:30Z) Owner: bảng xếp hạng online cho mọi người chơi (đăng nhập hoặc khách vô danh, game nhớ mọi người): xếp hạng KIẾP (mỗi kiếp một dòng, kể cả nhiều kiếp của 1 người) + xếp hạng NGƯỜI CHƠI; hạng nhất/nhì/ba + danh sách. Điều phối: mã khách tự tạo + tên hiệu; điểm 'Công danh' tính từ kết cục thật (Worker tự tính lại); Worker + D1 trên Cloudflare; đăng nhập để sau. review/rank.
+- (08:35Z) Owner: sự kiện ảnh hưởng nàng (vd tra xét sớ, Sủng +4, thế lực nhà Tể tướng −5) không báo trong game, chỉ thấy ở Sổ tuần → luật: mọi sự kiện đổi chỉ số/quan hệ/vị thế của nàng hoặc do việc nàng khởi xướng phải báo ngay (thẻ kết quả/toast 'Xem'); Sổ tuần chỉ là tóm lại. act-audit.
+- 08:35Z Thái hậu a51 làm già 55–62 + nền tối Kính sự phòng/Thái y viện chỉnh màu (grade, giữ bố cục) đã lên CDN; review/m05-huadian bca3d5c0d.
+- 08:35Z Bảng đổi tên cổ ngữ: dev/handover/NAMING_PROPOSAL.md (khuyến nghị: Sổ tuần → Tuần lục; Qua buổi → Sang buổi; Qua đêm → Đợi sáng; Chơi cùng bạn → Cùng tri kỷ; …). Điều phối KHÔNG đổi 'Cơ may' → 'Cơ duyên' (khác nghĩa). Chờ sếp xem.
+- 08:35Z review/hau-cung-ui d562fe84e SẴN SÀNG KIỂM → hàng người duyệt 1.
+- (08:45Z) Owner: 'Sai đi dò la' bốc người ngẫu nhiên → luật: mọi việc nhắm người/nơi của nàng phải cho nàng CHỌN đích (bộ chọn kit), cơ may tính theo đích đã chọn; không việc nào của người chơi tự bốc đích ngẫu nhiên; NPC chọn đích theo động cơ thật. act-audit.
+- (08:55Z) Owner: thẻ nơi chốn (chạm nơi trên Dư đồ) phải có tranh nơi đó bên trái (đúng mùa/buổi), phải trên thông tin, phải dưới nút; nút theo kit chung: ngắn → lưới 2 cột, dài → hàng dài; bỏ 'GHI CHÚ không được mất gì' ở nút Thôi. review/place-card (trên dialog-person).
+- (08:58Z) Owner sửa: thẻ nơi chốn dùng lại khung lớn của thẻ sự kiện nơi chốn — trên tranh nơi, giữa ô thông tin, dưới nút (ngắn: 2 cột; dài: hàng). Thay bố cục trái/phải. review/place-card.
+- (09:00Z) Owner hỏi dò la nên ngẫu nhiên hay có chủ đích → điều phối khuyên kết hợp: 'Sai đi dò la <người>' có chủ đích (chính) + 'Nghe ngóng chung' rẻ hơn, tin thật theo trọng số thật (ai đang hoạt động/mưu, quen biết của cung nữ, Tai mắt) để phát hiện người cần để ý. act-audit.
+- (09:05Z) Owner: còn 1 khắc, nơi cách 3 khắc → 'Không vào được' là ngõ cụt. Luật mới: cho 'Đi (đến nơi vào buổi sau)' — dùng nốt khắc còn, sang buổi, trừ phần đường còn lại vào buổi mới, đến nơi buổi sau thấy người buổi đó; thay nút 'Đợi buổi sau'. review/place-card.
+- (09:10Z) Owner: tab Hoàng tự như bảng tường trình chữ → làm theo kit chung, chia tab con (Con của ngươi | Kế vị | Hoàng tự trong cung | Hôn sự | Công tử quyền thần), thẻ người/dải người như Hậu cung. review/hoang-tu.
+- (09:15Z) Owner bực: lỗi 'còn 1 khắc mà không đi được dù cả ngày còn dài' báo từ 14/11 → HOTFIX riêng hotfix/walk-spill, lên live trước place-card.
+- (09:20Z) Owner: hôn sự phải có cả hoàng tử (lo vợ cho con trai), không chỉ công chúa → chính phi/trắc phi từ quý nữ nhà quyền thần, mẹ xin chỉ ban hôn, nhà vợ chống lưng vào phe + kế vị, NPC cùng luật. review/hoang-tu.
+- (09:25Z) Tra: công tử chỉ là dòng dữ liệu trong Hôn sự, chưa có tranh (hình bóng '???'); chưa có quý nữ nhà quyền thần. Kế hoạch: quý nữ dùng lại tranh khuê các 84 mặt (mặt chưa dùng trong kiếp); vẽ mới ~10 công tử × 2 tuổi (gpt-2-6). review/hoang-tu.
+- (09:30Z) Owner: game thiếu cảm giác (nút lún/phát sáng, hoạt cảnh); muốn PixiJS cho hiệu ứng, RUNG máy, rung màn hình theo sự kiện — đã nói từ 14/11 mà chưa làm (code có VIB nhưng gần như không gọi). → review/game-feel: nút lún/sáng/gợn, lớp Pixi hạt (hoa rơi, tia vàng, bạc rơi, số bay), kitFx(kind) rung màn + rung máy theo sự kiện, tôn trọng Cảnh động/Rung.
+- (09:40Z) Owner: 'Nhờ thái giám mua đồ' — nền triều chính sai (→ phòng của nàng + thái giám bưng khay); làm lưới ô vuông kiểu cửa hàng game kiếm hiệp: ô vật phẩm, dưới là giá + nút Mua; không lặp thông tin (CẦN thiếu bạc + TỐN bạc là trùng) — luật kit: điều kiện chỉ là đủ tiền thì không ghi CẦN. review/act-pics + act-audit.
+- (10:05Z) Owner khoanh face-thaihau-3 (mặt gian, mắt xếch, liếc, nhếch mép, son đậm) → vẽ lại hiền hòa, đúng luật mặt; soát các face-thaihau khác. act-pics. (10:05Z cdn_sync 11 tệp act-pics: thỉnh an TH/HH riêng, bái kiến, nhịn, làm thơ, ngủ đêm, thái giám bưng khay…)
+
+## 15/11 ~05:00Z (sếp)
+- Nền trưa/chiều/tối quá rực, "AI": chỉnh màu bằng code như bản đêm Kính sự phòng/Thái y viện đã duyệt; sáng gốc và Lãnh cung làm mốc. Thêm lớp ánh sáng theo buổi phủ nhân vật. Làm mẫu trước (review/scene-light).
+- Dư đồ phải có buổi trưa (lấy map-*-trua từ review/place-seasons).
+- Nàng tự đề bạt cung nữ/thái giám (Chưởng sự cô cô, Nữ quan, Thủ lĩnh, Tổng quản), giới hạn theo phẩm vị; NPC cùng luật.
+- Thú cưng: bậc dùng y thang phẩm, màu và khung ô của trang bị/vật phẩm, không bảng màu mới.
+- Ảnh cắt nền vật phẩm (nhất là trâm cài) còn bẩn: cắt lại, không vẽ lại.
+- Mọi người đều đẹp, mặt thanh thản; mặt không lộ tính cách (Thái hậu 2/3/5 đã vẽ lại, đã lên CDN).
+- Gộp "Thánh thượng · Thái hậu" thành tab 2 chữ (đề xuất: Chí tôn).
+- "Qua đêm" đổi thành "Qua ngày" (hoặc "Sang ngày mới"); bỏ "Đợi sáng".
+- Bảng "Nhờ thái giám mua đồ": hình thái giám toàn thân bên trái như thẻ sự kiện người, không ảnh nền nơi chốn; trên là lời dẫn, dưới là lưới ô vật phẩm (ô Tư trang), dưới mỗi ô là giá và nút Mua. Dùng kit chung.
+
+## 15/11 ~05:05Z (sếp) tên cổ ngữ + cửa hàng
+- Chơi cùng bạn / Mời bạn → "Cùng hảo hữu" / "Mời hảo hữu" (tri kỷ quá thân mật). Bảng vàng: ok. Qua đêm → Qua ngày.
+- Chữ "ngươi" chỉ người chơi trên giao diện đổi thành "ta" (ngôi thứ nhất): "Con của ta", "Hoàng hậu với ta". Lời thoại NPC nói với nàng vẫn giữ "ngươi".
+- Cửa hàng kiểu game kiếm hiệp: ô có hình món đồ, tên, công dụng, đơn giá; chọn ô thì hiện hàng số lượng +1/+2/+3/+4/Tối đa, tự cộng tổng tiền, rồi nút Mua.
+
+## 15/11 ~05:10Z (sếp, nhắc nhiều lần)
+- Thẻ người (Hành sự với một người): tên + phẩm sát trên cùng, khung chân dung kéo lên, bỏ khoảng trống phía trên; chỗ dư dành cho thông tin.
+- LUẬT CHUNG: ở mọi danh sách nút/việc trong game, nút làm được nằm trên cùng, nút mờ xuống dưới.
+- Các việc bên phải thẻ người chia theo tab nhỏ của kit chung; bấm tab mới hiện các việc thuộc nhóm đó.
+
+## 15/11 ~05:15Z (sếp) bổng lộc + bán đồ tự làm
+- Xem lại bổng lộc hằng tháng cho cân bằng với giá đồ; hiện thẻ khi nhận bổng lộc.
+- Đồ tự làm khi học tài (thêu, vẽ tranh, thư pháp…) thành vật phẩm, bán được cho thái giám Nội vụ phủ. Thẻ thái giám có 2 tab kit: Mua | Bán.
+
+## 15/11 ~05:20Z (sếp) kinh tế theo phẩm
+- Lo: Hoàng hậu 320/tháng xài không hết, Đáp ứng 30 mà đồ, học, mưu kế đều 20–30. Hướng điều phối chọn: phẩm cao nhiều tiền nhưng chi phí giữ thể diện/nghĩa vụ/kẻ hầu tăng theo phẩm (bạc dư HH chỉ ~3–4 lần Đáp ứng); phẩm thấp có nguồn thu có lý do (bán đồ tự làm, thưởng, nhà mẹ đẻ, làm việc cho người trên); giá chia bậc (thường 3–15, vừa 20–60, xa xỉ 100–400, đồ vượt phẩm có rủi ro); phẩm thấp có đường không tốn bạc (khắc, Tâm cơ, ân tình) nhưng chậm/rủi ro hơn; thẻ bổng lộc tháng ghi rõ thu chi.
+
+## 15/11 ~05:35Z (sếp)
+- Chỉnh màu nền nơi chốn: DUYỆT (dịu, đỡ AI). Chỉnh hết các nơi (trừ Lãnh cung).
+- Dư đồ: KHÔNG chỉnh. Ảnh Dư đồ sáng/trưa/chiều/tối lấy từ Phượng Lệnh, giữ y nguyên.
+- Lớp sáng cho nhân vật: sếp còn phân vân; chờ tờ so (không phủ / nhẹ / hiện tại). Mặc định tắt.
+- BỎ mọi nút "Thôi" (và Lui/Đóng) khắp game; mỗi bảng đóng được có một nút ✕ góc trên phải.
+- Chữ phải cặp nhau: "Sang buổi" / "Sang ngày mới" (bỏ "Qua ngày").
+- (05:40Z) Đồ tự tay làm: vẽ lại Áo múa tự may cả 4 bậc (áo đứng thẳng thấy trọn từ cổ tới gấu, không gấp, không giá treo); vẽ lại Điệu múa cả 4 bậc thành dáng người múa; vẽ lại Thế cờ tàn Tuyệt phẩm cho khác hẳn Trân phẩm. Thư pháp/khúc phổ/kinh: bỏ chữ Hán. Trong game đồ tự làm dùng khung + nền theo phẩm như trang bị (kitItem).
+
+## 15/11 ~05:45Z (sếp, bực vì thợ không theo kit)
+- Mọi màn PHẢI dùng thành phần kit chung (khung, hình người, tab, nút, ✕); thợ không được tự làm khung/hình riêng. Người duyệt FAIL mọi nhánh làm riêng.
+- Sếp OCD: mọi hàng/cột phải thẳng hàng, theo lề; giá, tên, nút trong lưới cùng một đường ngang.
+- Bảng mua đồ: hình thái giám cao hết khung như hộp thoại có người; bỏ khung mua bên dưới (không lặp món); − số + và nút Mua ngay trên ô.
+- (05:50Z) Màn hình hỗ trợ: điện thoại khổ Fold (~755x1000) dọc + ngang; điện thoại ngang; iPad ngang. KHÔNG dùng điện thoại dọc hẹp (kiểu iPhone): game tự hiện xoay ngang sẵn để người chơi xoay máy. Bộ kích thước kiểm mới: 755x1000, 1000x755, 1180x820, 1366x1024, 844x390 (+ kiểm 390x844 hiện xoay).
+- (05:55Z) Bấm ra ngoài khung (nền mờ) ở bất cứ đâu cũng tắt bảng, như nút ✕ (trừ bảng bắt buộc).
+- (05:55Z) Tuần lục: MỖI việc/nghĩa khác nhau một tranh riêng, không chấp nhận dùng chung vì "cùng cảnh"; câu tin cũng có tranh riêng.
+- (06:00Z) Lớp sáng nhân vật: chọn A, KHÔNG phủ; nhân vật giữ màu gốc ở cả 4 buổi. Chỉ chỉnh màu nền.
+- (06:00Z) Má nhân vật bị đen trên nền tối (lỗi tách nền, alpha thủng trong mặt) → quét mọi ảnh người, vá alpha bằng code.
+- (06:05Z) Bảng mua bán với thái giám dùng ĐÚNG hộp thoại có người (cùng thành phần, cùng kích thước), không to hơn.
+- (06:10Z) Màn ngang: mọi màn hình ngang dùng ĐÚNG bố cục iPad (khung thiết kế 1180x820) phóng to/thu nhỏ đều như kéo cửa sổ, không dàn lại; Fold dọc: khung 755x1000 phóng to/thu nhỏ. Một bố cục cho mỗi chiều màn hình.
+- (06:12Z) Điện thoại ngang chữ nhỏ: chấp nhận, không làm bố cục riêng.
+- (06:20Z) Không xếp hàng duyệt: lô nào xong và qua duyệt trước thì lên live trước; chạy nhiều người duyệt song song, mỗi người gộp lên main mới nhất.
+- (06:25Z) Thời tiết xấu (giông, mưa lớn, tuyết, băng): ra ngoài tốn thêm khắc đi đường + có thể cảm lạnh / trơn trượt (mang thai có rủi ro thật), giảm nhờ dù/áo tơi/kiệu/người che; báo trên thẻ và báo ngay khi xảy ra; NPC cùng luật.
+- (06:35Z) Bấm vào nhân vật trên sân khấu → mở ĐÚNG hộp thoại có người của kit (người toàn thân bên trái, thông tin bên phải), không mở khung riêng.
+- (06:35Z) Khung chân dung phải hiện đủ ngọc bội + tua rua (đang bị cắt mất phía dưới).
+- (06:40Z) Sửa luật thời tiết: KHÔNG thêm khắc đi đường (đã có Sức hồi chậm, không phạt 2 lần). Cảm lạnh/trơn trượt là Mất của việc làm NGOÀI TRỜI (dạo vườn, chặn ngự giá ở vườn, quỳ ngoài sân…), ghi trên thẻ việc đó, không ghi trên thẻ đi đường.
+- (06:50Z) Thái độ của mọi người với nàng (kể cả kẻ hầu) chỉ dùng MỘT chữ "Thiện cảm"; bỏ "Lòng". Tên người không được có số.
+- (06:55Z) Nhịp chơi: chọn GIỮ NGUYÊN tốc độ (16 khắc/tuần, lên Hoàng hậu ~188 tuần, ~2–3 tiếng chơi thật). Không chỉnh nhanh hơn.
+- (07:00Z) Màu chiều quan hệ (kit chung, mọi thợ phải dùng): NGƯỜI KHÁC → TA = TÍM (#7a4fa0); TA → NGƯỜI KHÁC = LAM (#2f6f9f). Không dùng xanh lá/đỏ (dành cho Được/Mất). Tô cả chữ nhãn; con số thay đổi vẫn theo màu được/mất. Hàm kit kitRel(dir,text).
+- (07:05Z) Dải người trong Hậu cung chỉ hiện TÊN (bỏ chức danh như "Thái y"); bấm vào mới biết là ai. Không cắt chữ.
+- (07:10Z) Chữ chỉ NGƯỜI KHÁC phải rõ ngôi ba: nữ "nàng ta", nam "y"/"hắn", Hoàng thượng "bệ hạ", Thái hậu "Thái hậu", chung "vị ấy". "Ta" là người chơi.
+- (07:10Z) Giao tình › Ân oán: ô chọn người dùng tab nhỏ + dải người ngang của kit như Hậu cung, không dùng lưới nút lớn.
+- (07:10Z) Hình người trong hộp thoại có người cao gần hết cột (≥95%), áp cho mọi hộp thoại có người qua kit.
+- [x] LIVE 482a99f97 (07:08Z): balance-unified — 4 buổi, đồ tự tay làm, tủ đồ gộp Tư trang, chơi cùng 4 buổi.
+- (07:15Z) Dòng quan hệ (thiện cảm/oán) dùng MỘT thành phần kit: nhãn; "chữ · số" một dòng + thanh cùng vị trí/độ dài mọi dòng; thiện cảm có vạch giữa (âm/dương), oán/ghen (không âm) đầy từ trái nhưng cùng cỡ; oán cũng có thang chữ.
+- (07:20Z) Tên + phẩm của nhân vật LUÔN đặt PHÍA TRÊN chân dung/hình người (dòng phẩm nhỏ, rồi dòng tên), ở mọi nơi; một thành phần kit kitNameRank.
+- (07:25Z) Giữ HAI chỉ số riêng: thiện cảm (thích/ghét, quyết định có giúp không) và oán (hận vì việc đã làm, quyết định trả đũa, nguôi dần). Giữ chữ "oán" (không dùng "thù"). Chạm nhãn hiện giải thích ngắn.
+- (07:35Z) Phẩm Đáp ứng: bỏ màu nâu (như nô tài). Đổi nền/khung/ngọc sang trắng ngà ngọc trai, thanh nhã, khác Lãnh cung. Làm mẫu trước.
+- (07:45Z) Tranh việc: kiểm kê 713 nghĩa → vẽ thêm ~613 tranh (≈29.500 tín dụng, theo lệnh vẽ không cần hỏi). Mỗi dòng Tuần lục = một việc = một tranh (câu phản ứng sau gộp vào dòng đầu). Hoàng thượng không đội mũ lông kiểu Thanh; trang phục theo phong cách gốc (áo giao lĩnh), không cổ áo kiểu sườn xám.
+- (07:50Z) Đáp ứng: chốt TRẮNG NGÀ (ngà ấm, không trắng tinh); chữ/chip dùng mã ngà-sâm banh đậm hơn cho đọc rõ.
+- (07:50Z) Nhân vật của ta có dấu ấn cung đình (không phải mũi tên thường) trên đầu ở mọi màn, có hiệu ứng nhẹ (lơ lửng + sáng nhẹ), vẽ bằng Magnific; chỉ nàng, không NPC.
+- (07:55Z) Biểu tượng cảm xúc (emo-*): giữ kiểu mặt chibi tròn nhưng vẽ lại theo nét tranh của game (mềm, màu dịu, viền vàng mảnh, không nét đen dày).
+- (07:58Z) Biểu tượng cảm xúc không thêm chữ; chạm vào mới hiện tên cảm xúc (Vui, Buồn, Giận, Hờn…) + lý do nếu có.
+- (08:00Z) Nhãn đồ đang dùng trong Tư trang: chỉ MỘT chữ "Đang mặc" cho mọi món (bỏ "Đang cài", "Đang đeo"…).
+- (08:05Z) Đồ được tặng lúc vào game (gia đình, người thân) phải ra bằng hộp gấm/rương của kitReward (đã có: chạm mở, rương rung, nắp bật, món bay ra theo phẩm). Vào cung được ban phẩm → Nội vụ phủ ban BỘ ĐỒ theo phẩm bằng rương; mỗi lần thăng phẩm cũng ban bộ đồ phẩm mới. NPC cùng luật (không hoạt cảnh).
+- (08:10Z) Bảng ô trang bị (Ô cài tóc…): dùng đúng cỡ hộp thoại chuẩn của kit, không to hơn; trên: ô vật phẩm nhỏ trái + thông tin phải; dòng ghi chú trải ngang; các nút việc gọn (lưới 2–3 cột hoặc hàng dài tùy chỗ); bỏ nút "Lui".
+- (08:20Z) MỌI lần đồ/bạc vào tay nàng đều có hoạt cảnh chạm để mở/nhận: được tặng = hộp gấm; được thưởng/ban = mâm/rương/rương ngự tứ; nhặt/lục được = bọc vải/túi; mua = món bay vào túi đồ, bạc bay ra; bán = món bay đi, bạc bay vào; mất/tịch thu = món mờ rơi + thẻ báo. Nhiều món cùng lúc gộp một rương. Một hàm chung kitGain/kitLose.
+- (08:35Z) Thanh đầu trang: chọn phương án A (nút nơi chốn nằm dưới khối giờ, cột phải).
+- (08:35Z) Bị giáng phẩm/vào lãnh cung: đồ vượt phẩm bị THU HỒI có cảnh — thái giám Nội vụ phủ (hộp thoại có người) lấy từng ô đồ lên khay, báo phụng chỉ thu hồi.
+- (08:40Z) Khung Đáp ứng: dùng kiểu khung gỗ cành mai + góc vàng (kiểu khung Lãnh cung hiện tại, làm mới, bóng đẹp) với nền gấm trắng ngà bên trong; khung Lãnh cung đổi thành bản héo/xám rõ ràng. Khung Hoàng quý phi phải hoành tráng hơn Quý phi.
+- (08:40Z) Mở rương bước nhận: bỏ ô thông tin trắng; mỗi ô món có tên phẩm trên viền khung, tên món ngay dưới ô (bạc: "Bạc +20").
+- (08:45Z) Âm thanh: mọi khoảnh khắc trong game phải có âm (mua, bán, nhận quà/thưởng/ban, mở rương, thu hồi, mini game, thời tiết, lễ…), phong cách cung đình nhẹ nhàng; kiểm kê + làm bù (review/sfx).
+- (08:55Z) Bục vinh danh (Bảng vàng + mọi cuộc thi): nhân vật to, nổi bật nhất; bục thu nhỏ thành chính ô bảng tên dưới chân; huy chương nhất/nhì/ba ở góc trên phải ô bảng tên (hoặc cạnh nhân vật). Danh sách hạng: khung chân dung theo phẩm cao nhất của kiếp. Bỏ lặp tiêu đề: chỉ "Bảng vàng".
+- (09:10Z) Thêm luật THIẾU LỄ: dịp trang trọng (thỉnh an, yến tiệc, lễ tết, gặp/thị tẩm Hoàng thượng, tấn phong) không mặc đồ đúng phẩm → mất chút Đức/Danh + thiện cảm chủ nhà; báo trước trên thẻ; NPC cùng luật.
+- (09:10Z) Khung Đáp ứng: phần vàng quá rực → nhạt, mờ, nhỏ lại (sâm banh/bạc), cho đúng bậc thấp nhất.
+- (09:10Z) Biểu tượng cảm xúc: phải thể hiện RÕ từng cảm xúc (Vui mắt mở sáng, không nheo; Giận rõ giận); vẽ đủ bộ rồi gửi lại.
+- (09:15Z) Ô y phục trống (bị thu hồi/cướp/chưa có) → hình nàng mặc TRUNG Y theo bậc phẩm (thấp: lụa trắng … Hoàng hậu: lụa vàng nhạt), kín đáo. Mặc trung y ra ngoài/gặp người → mất Danh, thiếu lễ nặng; có sự kiện bị cướp y phục khi đi đường (có nguyên nhân, báo ngay) → phải mặc trung y về cung. NPC cùng luật.
+- (09:20Z) Tranh việc: soi kỹ giải phẫu (tay, ngón, tay nối với người) — act-khong-ban-chinh-su sai tay, vẽ lại; soát lại cả đợt 1.
+- (09:30Z) Mỗi buổi sáng có lựa chọn "Điểm trang": mini game chọn y phục (theo dịp trong ngày) + mini game trang điểm (vụng → tuyệt). Kết quả ảnh hưởng ánh nhìn người khác trong ngày theo nết: người chuộng giản dị khen, người trọng lễ coi giản dị/mặt mộc khi gặp bề trên là thiếu tôn trọng; phô trương bị ghen/chê. Bỏ qua không chặn. NPC cùng luật. (review/toilette)
+- (09:45Z) Trung y: duyệt 4 nhóm phẩm (trắng / ngà / trắng ánh trăng viền bạc / vàng nhạt Hoàng hậu viền rõ), ~32.000 tín dụng; bỏ 4 look cũ; ô y phục trống thật cho tới khi mặc áo khác, Nội vụ phủ cấp lại sau vài tuần bằng rương; cởi áo trong cung mình không phạt.
+- (09:55Z) Khung Đáp ứng: gỗ cành mai vẫn ra màu cam rực → thử (A) khung Đáp ứng CŨ (gỗ nâu xám) + nền trắng ngà, (B) khung cành mai pastel thật nhạt. Chân dung trong khung còn nhỏ (đầu cách mép khung xa) → sửa cách đặt chân dung trong kit cho đầu sát mép trên, mặt to hơn.
+- (09:55Z) 22 thú cưng vẽ lại theo phong cách tranh của game (không tả thực), tư thế tự nhiên, không đệm/không đá/không bệ; chim đậu lồng hoặc giá; cá trong chậu.
+- (10:00Z) Thú cưng: Thường–Tinh phẩm là con vật thật; phẩm càng cao càng huyền thoại (cửu vĩ hồ, kỳ lân con, ngọc thố, phượng hoàng non, linh quy, bạch lộc thần…), không dùng sư tử/hổ/hồ ly thường. Cập nhật cả dữ liệu jpet.
+- (10:00Z) Lô nào xong là có người duyệt riêng ngay, không xếp hàng (mở thêm người duyệt khi cần).
+- (10:05Z) Dấu ấn trên đầu nàng: 8 bậc, mỗi phẩm một dấu ấn (phượng vàng trên mây ngọc = Hoàng hậu; nụ sen ngọc = một bậc giữa; bỏ mẫu 1; không tua rua). Chỉ nhún lên xuống nhẹ, không phát sáng. Một tỷ lệ chung: cách đỉnh đầu một khoảng cố định ở mọi hình. Dấu ấn là vật phẩm: có trong rương mỗi lần thăng phẩm, nằm trong Tư trang, bấm Dùng để đổi, giữ được dấu ấn cũ.
+- (10:05Z) Trung y: duyệt kiểu; hoa điền phải là bản đã thu nhỏ (mẫu đang dùng tranh gốc chưa sửa).
+- (10:08Z) Trung y: 8 bậc, màu mỗi bậc = màu phẩm của nền khung chân dung (nhạt, lụa trơn): Đáp ứng ngà, Thường tại lục nhạt, Quý nhân lam nhạt, Tần hồng nhạt, Phi tím nhạt, Quý phi đỏ hồng nhạt, Hoàng quý phi cam hổ phách nhạt, Hoàng hậu vàng nhạt (~64.000 tín dụng).
+- (10:10Z) Biểu tượng cảm xúc: DUYỆT. Sửa "Sợ": mặt tái kiểu anime (nửa trên tím/lam nhạt loang xuống) + dấu sợ trên đầu (như dấu giận).
+- (10:15Z) Chữ quan hệ: "thiện cảm" thắng (bỏ luật "quý ngươi" ở KIT §31.20). Mọi việc phải qua một hàm cơ may odA (một nguồn).
+- (10:20Z) Thú cưng lớn dần: Non → Trưởng thành → Linh thú, mỗi cấp mở thêm hiệu ứng; Ngự tứ chỉ đỡ mạng khi đã lớn hẳn. Chăm kiểu thú ảo: màn hình trọn có hình thú, chỉ số Đói/Sạch/Vui/Tình cảm, mini game cho ăn/tắm/chơi; bỏ bê thì ốm/buồn/bỏ đi (có báo). Tranh: mỗi thú có hình non + lớn.
+- (10:30Z) Thanh đầu trang: ô chân dung của nàng to bằng cả khối tên (đang quá nhỏ, phía trên còn trống).
+- (10:40Z) Thú cưng người khác: sang cung người khác (NPC hoặc hảo hữu khi chơi chung) có thể giúp chăm (+thiện cảm), hại (trừu tượng), trộm (thú càng lớn càng khó, có thể bị cắn, bị bắt). NPC cũng làm vậy với thú của nàng. Cùng luật, đủ thẻ.
+- (10:42Z) Thú cưng lớn qua 4 giai đoạn: Non → Thiếu niên → Trưởng thành → Linh thú (tranh cho 3 giai đoạn đầu; Linh thú = tranh trưởng thành + hào quang hiệu ứng).
+- (10:45Z) Mỗi giai đoạn thú cưng một tranh riêng (4 tranh/con, Linh thú cũng có tranh riêng, uy nghi hơn) — 88 tranh.
+- (10:50Z) Thú cưng: kỳ lân con + bạch lộc đẹp → làm mốc phong cách. Mèo, chó, vẹt còn tả thực → vẽ lại mọi thú thật theo đúng nét kỳ lân/bạch lộc.
+- (10:52Z) Bỏ rùa khỏi thú cưng: Linh quy ngàn năm → Thiên mã (Ngự tứ); Bạch quy → Hạc đỉnh hồng (Trân phẩm).
+- (10:55Z) Hoa văn trên thú theo giai đoạn: non ít/không có, càng lớn càng đẹp, Linh thú đẹp nhất.
+- (10:57Z) Linh thú: khác trưởng thành bằng chính tranh vẽ (dáng uy nghi, bộ lông/hoa văn/trang sức), KHÔNG dùng hiệu ứng phát sáng.
+- (11:05Z) Tư trang chia 2 tab nhỏ: "Việc" và "Túi đồ" (túi + ô Đang mặc thấy ngay, không phải cuộn).
+- (11:05Z) Bỏ khung "Tin trong cung" đầu buổi (trùng Tuần lục, gây rối). Tin người khác chỉ vào Tuần lục (có dấu tin mới). Việc ảnh hưởng tới nàng vẫn báo ngay bằng thẻ ngắn ghi rõ.
+- (11:05Z) Da mặt một số nhân vật bị dơ/vệt tối → quét toàn bộ, đề xuất làm sạch nhẹ (không vẽ lại mặt).
+- (11:10Z) Linh thú: được có hào quang nhưng VẼ SẴN trong tranh; mỗi thú có tranh Linh thú riêng. Đổi: Kỳ lân lên Ngự tứ, Thiên mã xuống Tuyệt phẩm.
+- [ ] (11:10Z) Người chưa gặp vẫn lộ mặt ở thẻ tin và trang Tuần lục → kit-fig2 quét toàn bộ chỗ vẽ ảnh người.
+- [ ] (11:20Z) Thẻ tin: ảnh Tịch Nhan/Ngọc Hành sai người, nền ô cùng màu dù khác bậc → kit-fig2 dùng chung ảnh với Hậu cung + màu khung theo bậc hiện tại.
+- (11:30Z) Khung Đáp ứng: DUYỆT A (khung cũ + gấm ngà).
+- (11:30Z) Dấu trên đầu: 8 cái đều đẹp; ĐỔI CHỖ: dấu Hoàng hậu hiện tại giao cho Hoàng quý phi (bậc 6), dấu Hoàng quý phi hiện tại giao cho Hoàng hậu.
+- (11:30Z) Chân dung trong khung: KHÔNG zoom; giữ tỷ lệ như cũ (ngực trở lên), chỉ DỜI ảnh lên sát mép trên khung → thấy thêm xuống gần eo.
+- (11:30Z) Thú cưng: như hiện tại là được; chó nhỏ ok; RIÊNG con mèo còn tả thực → vẽ lại.
+- (11:30Z) ĐẢO QUYẾT ĐỊNH: GIỮ thẻ tin đầu buổi (tin hằng ngày quan trọng; Tuần lục chỉ là tổng kết tuần). Đổi tên rõ hơn: "Tin trong cung hôm nay". Sửa ảnh Triều chính.
+- (11:30Z) Da mặt: ngoài làm sạch, mặt phải hồng hào khoẻ (má hồng nhẹ, không đậm); sửa các mặt tái/nhợt.
+- (11:35Z) Chân dung trong khung: THÂN người phải nằm giữa khung theo chiều ngang (nhiều ảnh lệch trái, hở mép phải); đầu có thể hơi lệch. Giữ tỷ lệ, chỉ dời.
+- [ ] (11:40Z) Tranh Thỉnh an Thái hậu/Hoàng hậu sai: dáng cúi kiểu hiện đại, váy bó kiểu sườn xám → vẽ lại dáng vạn phúc (tay chụm bên hông, khuỵu gối nhẹ, cúi đầu) + áo cung trang rộng tay, váy suông; rà mọi tranh hành sự có váy bó/cúi kiểu hiện đại.
+- [ ] (11:45Z) Bấm ra ngoài để tắt thẻ kết quả (THÀNH) bị lọt xuống nút bên dưới → chạy luôn hành sự. Luật: mọi thẻ đang mở, cú bấm ngoài đầu tiên CHỈ đóng thẻ, không lọt xuống (kit-close sửa + test).
+- [ ] (11:50Z) Tài nghệ Nấu nướng: chưa chơi đã hiện BẠI, trừ Sức −15, Bạc −6, mất hết khắc buổi → hành sự bị chạy 2 lần (nghi bấm lọt). Luật: mỗi lần bấm chỉ chạy 1 lần; trò chơi chưa chơi thì không trừ, không có kết quả (act-audit sửa + test).
+- (11:55Z) Trang điểm hiện lên mặt nàng: nhạt → mặt bình thường; đẹp → má hồng nhẹ, môi hồng, da sáng hơn; quá đà → diêm dúa, má đỏ tròn quá mức, môi đỏ đậm, phấn trắng (hài hước). Hiện ở mọi chỗ vẽ ảnh nàng trong buổi/ngày đó.
+- (12:00Z) Đính chính lỗi Nấu nướng: KHÔNG phải bấm lọt. Bấm 1 lần là trừ và ra BẠI ngay, rồi mới hiện trò chơi. Đúng thứ tự: bấm → trò chơi → chơi xong mới trừ và hiện thẻ kết quả. Rà mọi hành sự có trò chơi.
+- [ ] (12:05Z) Món tự làm (mứt khá) không có hình, tên chung "Tác phẩm tự tay · Thường" (sai phẩm), không có hoạt cảnh nhận đồ. Luật nhắc lại: MỌI vật phẩm xuất hiện phải hiện ra phát sáng theo màu phẩm, bấm nhận thì bay vào Tư trang (game-feel sửa + test mọi chỗ thêm đồ).
+- LIVE CDN (12:05Z) Thỉnh an Thái hậu/Hoàng hậu vẽ lại (vạn phúc, áo cung trang rộng).
+- (12:10Z) Tặng quà: ô ảnh trái = hình món đồ (không phải Triều chính); khung phải = thông tin món (phẩm, ai làm, ngày giờ, công dụng); danh sách người nhận chia tab như Hậu cung (Chí tôn/Phi tần/Nam nhân/Cung nhân). Rà mọi hộp thoại còn rơi về ảnh Triều chính.
+- (12:10Z) Tác phẩm tự tay đa dạng: mỗi loại (nấu, thêu, tranh, chữ…) khoảng 10 món mỗi phẩm, mỗi món có hình riêng, phẩm cao nhìn sang hơn.
+- LIVE CDN (12:10Z) Khung Đáp ứng A + 8 dấu trên đầu (đổi 6/7). Code nằm ở review/rank0-ivory chờ duyệt.
+- (12:12Z) Tranh Thỉnh an mới: sếp DUYỆT (dùng làm mẫu dáng vạn phúc + áo cung trang cho các tranh vẽ lại).
+- (12:20Z) Ảnh Triều chính hiện lung tung là do nhiều sự việc KHÔNG có ảnh riêng nên rơi về ảnh mặc định. Việc cần: dò mọi ảnh đang được dùng cho 2 sự việc khác nhau trở lên (và mọi chỗ rơi về ảnh mặc định) → vẽ ảnh riêng cho các sự việc còn thiếu.
+- (12:25Z) Trò chơi tự tay phải khớp món: chọn món trước (công thức có hình) → nguyên liệu/bước trong trò chơi là của đúng món đó (canh gà: gà, sâm, lá sen…; chè dưỡng nhan: hạt sen, long nhãn, ngân nhĩ, táo đỏ…) → thành phẩm là món đó, hình đúng món, phẩm theo điểm.
+- (12:25Z) Thêm lựa chọn "Bỏ độc vào" khi tặng món ăn/thức uống/túi thơm (cần có độc dược). Odds theo Tâm cơ, người nhận có thử độc không, thiện cảm, phẩm món. Lộ thì truy ra nàng. NPC cũng làm vậy với nàng; nàng có "Thử độc". MẶC ĐỊNH (sếp có thể đổi): không cho hạ độc Hoàng thượng và Thái hậu (có người thử độc, tội khi quân).
+- (12:35Z) Logo app: lấy cô gái mũ phượng đỏ ở giữa tranh màn tải làm icon app (192/512/maskable/apple).
+- (12:35Z) Mộc đỏ "Trân nữ" (Phượng Lệnh, seal.js, vẽ bằng SVG) gắn vào góc trên bên PHẢI khung đầu trang (chỗ sếp khoanh), không che chữ quẻ.
+- (12:35Z) Thẻ đồ người khác đang dùng: ô ảnh = hình món đồ đó.
+- (12:35Z) Kit mới kitActCompact: khi bên trái là hình người thì thẻ hành động bên phải dùng ảnh nhỏ + thông tin bên cạnh, không để chữ tràn.
+- (12:35Z) Nghỉ dưỡng sức (+20) vs nghỉ một lát (+6) cùng giá → phân biệt: dưỡng sức chỉ buổi tối, hết buổi, cần thuốc bổ/bạc; một lát lúc nào cũng được, 1 khắc.
+- (12:35Z) Phòng chiều mưa mùa xuân u ám như lãnh cung → chỉnh màu thời tiết/buổi cho ấm, sáng dịu.
+- LIVE CDN (12:35Z) 88 ảnh thú cưng mới (22 con × 4 giai đoạn) + 18 tranh hành sự sửa dáng vạn phúc.
+- (12:40Z) Làm lại theo giao diện game (kit, có hình, không như trang chữ): tab Tài nghệ, tab Mệnh truyện, tab Việc nhờ.
+- (12:45Z) Chân dung trẻ con (Hoàng tự) mỗi đứa zoom khác nhau → chuẩn hóa theo cỡ đầu cho MỌI họ chân dung (trẻ, công tử, cung nhân, Hoàng thượng…).
+- (12:45Z) Trẻ sơ sinh không thể có "Hiền tài". Lúc sinh chỉ có TƯ CHẤT (bẩm sinh, ẩn, chỉ lộ qua lời ladder). Văn/Võ/Đức bắt đầu gần 0, tăng qua dạy dỗ (thầy, mẹ, Hoàng thượng), nhân theo tư chất. Hiền tài suy từ Văn/Võ/Đức, chỉ xét từ 6 tuổi. Trước 6 tuổi xếp kế vị theo đích/trưởng + Hoàng thượng thương.
+- (12:50Z) Hoàng tự trong cung (con phi tần khác): phải hiện điều cả cung biết (mẹ là ai, tuổi, thứ bậc, tước, ai nuôi). Trẻ chưa gặp: hiện bóng xám trẻ con ở mọi chỗ.
+- [ ] (12:55Z) Hình Thái hậu (Tuần lục) bị cắt thẳng mất góc trái áo → vẽ nối áo, cắt lại; rà mọi hình toàn thân bị cắt thẳng ở mép.
+- (13:00Z) Hộp thoại sự việc có người (VIỆC · Có người đến…) to quá: dùng cỡ hộp người chuẩn của kit, vừa nội dung; tên + bậc nằm TRÊN hình.
+- (13:00Z) Lời mời Đoan ngọ dùng ảnh Triều chính + người tí hon, nhãn đè đầu → cần ảnh riêng (thuyền rồng), sửa nhãn đè.
+- LIVE CDN (13:00Z) 136 tranh hành sự đợt 3.
+- (13:05Z) Hàng nút lọc (Tất cả/Nghỉ ngơi/…) đang trôi đè lên thẻ khi cuộn → cố định sát ngay dưới khung chỉ số, nằm NGOÀI vùng cuộn; chỉ danh sách bên dưới cuộn. Luật kit cho mọi tab.
+- (13:05Z) Sếp hỏi cân bằng Nhịn/Đáp trả: đã làm trong review/ts-b (cfbffb955), đang duyệt (R2), chưa lên.
+- (13:15Z) Khuôn chung kitEventDp cho MỌI sự việc có người xuất hiện: trái = hình người toàn thân (tên trên); phải trên = ảnh sự việc (ngang); giữa = thông tin; dưới = nút chọn (ngắn đôi một hàng hoặc dài, tùy nội dung). Ảnh ngang: cắt từ ảnh dọc bằng điểm lấy nét nếu được, không được mới vẽ ngang.
+- (13:15Z) Thẻ Hoàng thượng ban ngày phải có việc: xin yết kiến, dâng canh, dâng tranh/thơ/đồ (chọn từ túi), hầu cờ đàn, mời dạo vườn; Thái hậu tương tự.
+- (13:15Z) "Chân tình" đang là phép thử nết ẩn → đổi thành nguyên nhân thật, hiện ở "Vì sao" (tự tay làm cho đúng người + đủ thân). Thêm giải nghĩa Ân tình.
+- (13:15Z) Dò ảnh dùng chung: không làm lại phần tranh hành sự (act-pics2 đã có bản đồ nghĩa), chỉ dò hộp thoại/sự kiện/thẻ tin.
+- (13:20Z) Tự học cắm hoa mà ảnh là cuốn sách → tách ảnh "Tự học" chung thành ảnh riêng từng môn (cắm hoa, thư pháp, đàn, cờ, vẽ, nấu, thêu, múa…), làm trước.
+- (13:20Z) review/kit-close vòng 2 sẵn sàng kiểm (Tư trang 2 tab, thẻ tin giữ + đổi tên "Tin trong cung buổi này", chắn bấm lọt) → R5. ts-a trả về → af76 sửa.
+- (13:25Z) Sự việc trả quà (Khương Lạc Anh) phát tiếng cười vô lý → âm thanh theo ý nghĩa sự việc. Các nút chọn trong sự việc không có Được/Mất → rà TOÀN BỘ sự việc, mọi lựa chọn phải có Cần/Tốn/Được/Mất + mức chắc + Vì sao; bỏ "TỐN không".
+- (13:30Z) LỖI GẤP: nút chọn trong sự việc (gối đầu đêm thị tẩm…) mất Được/Mất dù code có → bộ vẽ lựa chọn làm rơi chữ kết quả. Sửa trước (af76, review/opt-render).
+- (13:30Z) Thị tẩm được Sủng +5, Đức +3, Ân tình +6 mà đóng dấu BẠI → dấu THÀNH/BẠI chỉ theo kết quả thật của việc, không đếm dòng; ghen của người khác là KÈM, gộp 1 dòng; Bạc −5 phải truy nguồn.
+- LIVE CDN (13:30Z) 200 ảnh vật phẩm sửa viền cắt, bỏ chữ Hán, vẽ lại áo múa/điệu múa/thế cờ. j83 đa dạng: chọn phương án A (10 món × 4 phẩm).
+- (13:35Z) Dò ảnh hộp thoại xong: 290 hộp thoại (118 nghĩa) chỉ dùng 23 ảnh; 16 ảnh dùng chung; 121 nghĩa cần ảnh riêng (76 rơi về ảnh mặc định) → act-pics2 vẽ, bố cục cắt ngang được cho khung sự việc.
+- (13:35Z) Điều phối chốt việc ban ngày với Hoàng thượng: Xin hầu cờ (cần Kỳ), Xin đánh đàn (cần Cầm), Mời dạo ngự hoa viên (không bão); mỗi ngày một lần chung với Xin yết kiến; NPC cũng làm được.
+- (13:35Z) Trung y đợt 1 (c01–c12, 8 bậc) đạt; giữ, đẩy CDN khi nhánh qua duyệt.
+- (13:40Z) LỖI: "Nàng oán ta 2.36000…" số lẻ → mọi chỉ số làm tròn khi ghi + sửa sổ cũ; "thù" → "oán"; Tuần lục ghi lại chữ của THẺ thay vì kết quả thật → ghi kết quả thật.
+- (13:45Z) Tuần lục: chữ tràn bị cắt ở đáy trang; chép nguyên chữ hướng dẫn của thẻ (Dùng chứng cứ…) → ghi sự việc ngắn gọn, trang dài thì sang trang; chip không gãy dòng.
+- (13:45Z) Thái hậu bị cắt áo: do bố cục Tuần lục (hình rộng nhất bị cột hẹp cắt), sửa CSS chứ không vẽ thêm. Da nhợt: sửa 807 chân dung (a*<8.0). Hình cắt mép: cắt lại từ tờ gốc trước.
+- (13:55Z) Mệnh truyện giấu nhân chứng tốn 40 bạc vô lý, không có được/mất → thêm được/mất, đường không tốn bạc, giá theo bậc, cho hoãn vài buổi.
+- LIVE CDN (13:55Z) 19 tranh Tự học riêng từng môn (nối mã khi act-pics2 vào main).
+- (14:05Z) ĐẢO luật KIT §28.6 (11/14: lựa chọn sự việc chỉ hiện Tốn): sếp muốn MỌI lựa chọn hiện đủ Được/Mất/mức chắc. review/opt-render.
+- (14:05Z) Sếp dặn đêm: ô cảm xúc cho nhân vật nam; nút việc với phi tần phải có ảnh nhỏ; các tab làm lại phải chia tab con; sự việc thành/bại phải đổi tâm trạng + mặt nàng; trò cắm hoa phải là trò cắm hoa (mỗi món đúng trò); sự việc "trả quà" phải có quà thật; sau tranh sủng + tắm phải sang ngày mới; tiếng khóc nghe như cười → thay; Ân tình/chân tình phải THẤY số; vật liệu đắt phải đáng tiền; gửi mẫu da hồng + mẫu trang điểm.
+- (14:15Z) Tuần lục: mọi dòng đều dùng chung ảnh phòng nàng → mỗi loại dòng có ảnh riêng; không có thì không hiện ảnh, không lặp ảnh phòng. Dòng lựa chọn phải có ngữ cảnh ("Mặc kệ." trơn trụi là sai).
+- (14:30Z) ĐẢO LẠI (sếp nhớ chính sếp đặt luật): lựa chọn trong MỌI sự kiện (chính tuyến, phụ tuyến, lễ hội…) KHÔNG hiện Được/Mất/mức chắc, chỉ hiện giá phải trả (Sức/Bạc/khắc) + điều kiện Cần. KIT §28.6 giữ nguyên. Bù lại: thợ rà cân bằng toàn bộ lựa chọn sự kiện bằng bot, không lựa chọn nào áp đảo/quá thiệt, không làm lệch đường lên Hoàng hậu/Thái hậu/nữ đế.
+- (14:30Z) Ảnh nút việc trong thẻ người: việc nào chưa có ảnh riêng thì VẼ, cấm dùng ảnh nhóm (sếp rất bực). Chưa có thì để trống chứ không ảnh nhóm.
+- (14:30Z) Ô tâm trạng phải hiện các nguyên nhân đang tác động (nàng và mọi NPC).
+- (14:35Z) Trang điểm: "đẹp" giảm má hồng chút; "diêm dúa" = má hồng của bản "đẹp" hiện tại đậm hơn chút (môi đậm hơn, phấn bóng hơn), vẫn đẹp, KHÔNG như hề.
+- (14:40Z) Phản ứng về y phục/trang điểm (chủ tiệc nghiêm phạt mặt mộc, người hay ghen, Hoàng thượng thích/không thích, phi tần trêu diêm dúa…) phải HIỆN KHUNG SỰ KIỆN, không âm thầm trong nhật ký. Mỗi dịp tối đa 1–2 khung, phần còn lại gộp.
+- (14:50Z) LUẬT: sếp báo một lỗi thì sửa CẢ NHÓM (vd. vật liệu đắt không đáng tiền: rà mọi tài nghệ/món + mọi lựa chọn trả thêm tiền để được bản tốt hơn). Ghi vào WORKER_BRIEF; điều phối nhắc trong mỗi lần giao.
+- (15:00Z) DUYỆT: trang điểm bản mới (đẹp + diêm dúa, a820a52ab). DUYỆT mẫu da hồng hào → sửa 807 chân dung. Ô cảm xúc nam: chỉ cần nam/nữ, nhưng bộ nam đứng tuổi đã làm thì dùng luôn.
+- [ ] (15:00Z) Hoa điền mặt c05 ở y phục t5, t8 vẫn to → thu nhỏ + rà mọi chân dung phi tần.
+- (15:05Z) DUYỆT thiết kế lựa chọn sự kiện: hiện giá + Cần; một dòng GỢI Ý bằng lời (không số, đúng sự thật); nhãn an toàn/có rủi ro/liều; gợi ý rõ dần theo Tâm cơ/Tai mắt. Sau khi chọn: thẻ kết quả đủ Được/Mất + Vì sao. Việc chủ động (Hành sự, thẻ người, tiệm, tặng quà) vẫn hiện đủ số.
+- (15:10Z) SỬA LẠI: KHÔNG được "cùng tình huống cùng xu hướng" (người chơi thuộc bài → chán). Kết quả phụ thuộc bối cảnh lúc đó (nết người trong cuộc ngẫu nhiên mỗi đời, tâm trạng, quan hệ, ai đang nhìn, sở thích ẩn), nên lựa chọn tốt nhất đổi theo đời/ngày; gợi ý đúng với bối cảnh hiện tại. Chơi khéo PHẢI hơn hẳn chơi bừa; chơi bừa phải bị phạt, giáng, có khi chết. Mục tiêu cân bằng: không lựa chọn nào luôn đúng mọi bối cảnh; bot đọc gợi ý thắng rõ bot chọn bừa; bot luôn chọn một ô thì thua.
+- [ ] (15:30Z) Tuần lục trang người: hàng chip đầu mỗi người một kiểu, HIỆN NAY lệch cột/cắt chữ/"thiện cảm" trơn/"Nàng ta oán ta 4.24", chip 2 màu, dòng chỉ có tên → một khuôn cố định cho mọi người, số nguyên, chữ theo kitRel (fix-float).
+- LIVE CDN (15:30Z) 17 tranh việc thẻ người + 10 ảnh phản ứng trang điểm + ảnh hộp thoại + 46 tranh còn thiếu; ACTS.json gộp (chỉ trỏ ảnh đã có).
+- [ ] (15:45Z) Sổ tuần: lật trang thì hình nhân vật và cột chữ bên phải bị nháy (flash) → lật trang không được vẽ lại từ đầu/nháy.
+- [ ] (15:45Z) Hộp "VIỆC · <cung>" khi đến cung người khác (Chung Tú cung): GIỮ banner cung + bóng người như hiện tại (sếp OK). Dưới banner: bên TRÁI là chân dung chủ vị (Phi Đoan Mộc Tử Yên; chưa gặp thì bóng xám), bên PHẢI là phần giải thích (đang ở cung, khách phẩm thấp phải bái kiến, cần 2 khắc còn 1…). Dưới cùng là các nút (Vào thẳng không bái kiến…); bỏ nút Thôi (đóng bằng ✕).
+- (15:45Z) Sếp yêu cầu BÀN GIAO sang phiên mới và ĐÓNG phiên này (tốn credit). Lưu đủ mọi lời sếp nói.
+- [ ] (16:40Z) Dư đồ: buổi tối còn 4 khắc mà không có nút Bái kiến (buổi chiều còn 1 khắc thì đúng là không đủ). Phải hiện Bái kiến khi đủ khắc; nếu tối không được bái kiến thì thẻ phải ghi rõ lý do. Rà mọi việc có điều kiện khắc/buổi.
+- [ ] (16:40Z) Trường Môn viện (lãnh cung): "Phế phi họ Lý" hiện khung trống, không có hình người → mọi nhân vật phụ của truyện (phế phi, NPC phụ tuyến) phải có hình (vẽ nếu thiếu); rà cả nhóm NPC không có hình.
+- [ ] (16:40Z) Thời tiết "nắng gắt" lúc buổi tối → thời tiết phải hợp buổi (tối: trời quang/trăng sáng/oi nồng, không nắng). Rà toàn bộ bảng thời tiết × buổi.
+- [ ] (16:40Z) Chạm vào hình nàng trên sân khấu thì hiện một khung chữ nhật xanh mờ đè lên hình (vùng chạm/hiệu ứng nhấn lộ ra) → bỏ; hiệu ứng nhấn phải theo dáng người hoặc không có.
+- [ ] (16:40Z) Nút góc dưới còn ghi "Qua ngày" (phải "Sang ngày mới"); chip "Đã mở bản mới" đè lên tiêu đề cảnh.
+- LIVE CDN (16:40Z) đẩy hết ảnh còn ở máy trước khi đóng phiên: 22 tranh dòng Tổng lược (act-pics2), 384 hình + 384 chân dung trung y c01–c12 + FIGURES-ty.json, fig-eunuch-ndp-tray.
+- (16:50Z) Hoa điền trên CDN (vd. c05 t5 trăng, t8 chim) sếp vẫn thấy TO → thu nhỏ thêm một cỡ nữa: làm mẫu vài mặt cho sếp duyệt trước, rồi mới làm hàng loạt. (Đây là việc mới, không phải làm lại việc cũ.)
+- (16:50Z) LUẬT KIT TRƯỚC (nhắc lại, ưu tiên số 1): MỌI chỗ hiện thông tin (chip, hàng chỉ số, quan hệ, thẻ…) trên toàn game phải lấy từ kit chuẩn. Thợ KHÔNG tự viết/vẽ kiểu riêng. Chưa có kit → thợ dừng, báo điều phối → làm thành phần kit chung, ghi vào trang kit (KIT.md + trang mẫu kit) → rồi thợ mới lấy ra dùng. Sửa Tuần lục phải là đổi sang kit chuẩn và rà cả game, không chỉ Tuần lục.
+- (16:50Z) Tranh HÀNH ĐỘNG (Hành sự, việc thẻ người, tự học…): hạn chế người tối đa, chỉ thấy tay, một góc, đồ vật, như các tranh Hành sự hiện có. Tranh sự kiện chính tuyến/phụ tuyến thì được có người.
+- (16:50Z) Giải thích "thù": game cũ còn sót chữ "thù −15" trong nhật ký (lỗi); bản sửa đổi hết thành "oán". Sếp không đổi luật, "oán" vẫn giữ.
+- [ ] (16:55Z) Tuần lục: "Chứng cứ về Khương Lạc Anh +1: Khương Lạc Anh tặng Trâm gỗ đào cho Tống Cẩm Tú" → tặng quà thường KHÔNG phải chứng cứ; dòng chứng cứ phải ghi nguồn thật (ai, việc gì), không dính vào sự việc khác (nghi j25 ghép dòng thay đổi tuần vào dòng nhật ký). Cùng trang: bậc Đáp ứng/Thường tại lẫn lộn, số lẻ, "Nàng ta oán ta", chip "thân +7" không theo kit, dấu "..". Đã chuyển phiên 6.
+- [ ] (16:58Z) Tuần lục (Mộ Dung Tịch Nhan): "oán ta +3" và "đến +23" bị tách thành 2 chip 2 màu; nhật ký vẫn chép chữ hứa của thẻ (khoảng +3 đến +23) thay vì kết quả thật; chip tên gãy 3 dòng; "6.6" số lẻ. Chuyển phiên 6 (cùng nhóm sửa kit Tuần lục).
+- [ ] (17:00Z) Tuần lục: trang "Triều đình · thiên hạ" chỉ có 1 dòng, còn lại trống cả trang (sếp gửi ảnh không lời; điều phối hiểu là phí trang) → mục ngắn dồn chung trang, chỉ sang trang mới khi không đủ chỗ. Chuyển phiên 6, cần hỏi lại sếp nếu ý khác.
+- [ ] (17:02Z) Hộp gấm quà tặng: đồ bay ra quá nhanh → chậm lại, từng món hiện lên có sáng, dừng ngắm (mọi rương/hộp/túi); ô món chỉ hiện CHỮ CÁI "Á","T" thay hình (Áo lụa Hàng Châu vân thủy, Thoa bạc song điệp) → rà mọi món thiếu hình và vẽ; nhãn phẩm "Thường" sai (món Tinh phẩm); thẻ tin còn dòng "Sủng nàng ta 30 → 30". Chuyển phiên 6.
+- [ ] (17:04Z) Thẻ Tin trong cung (live): MỌI ảnh đại diện trong các dòng đều không phải người thật trong thế giới của sếp, kể cả ảnh của chính nàng → ưu tiên duyệt + gộp phần sửa ảnh tin của kit-fig2, rồi kiểm trên bản lưu thật. Cùng thẻ: dòng TA lặp lý do tấn phong 2 lần; chứng cứ dính vào dòng tấn phong; dòng Triều đình "Sủng nàng ta 30 → 30" icon trống/không rõ ai/không đổi; chip "thân", "Kho lúa", "nhà Hộ bộ thế lực" không theo kit. Chuyển phiên 6.
+- (17:06Z) Sự kiện truyện phải ghi rõ CHÍNH TUYẾN hay PHỤ TUYẾN (kèm tên truyện, bước). Sự kiện đòi tài nguyên (vd. 40 bạc giấu nhân chứng) phải cho THỜI HẠN để gom, dài ngắn theo mức nặng nhẹ; nhận lời trước, hoàn thành khi đủ, có đếm ngược; hết hạn mới tính hỏng. Rà mọi sự kiện truyện. Chuyển phiên 6.
+- [ ] (17:08Z) Lời mời "Hội Phượng (thi cưỡi ngựa bắn cung) · Lời mời thi thêu": tên hội và môn thi không khớp → sửa cho khớp hoặc ghi rõ (thêu cờ phướn cho đội thắng); rà MỌI cặp lễ hội × môn thi. Banner phòng ngủ + Hoàng thượng dán vào + nhãn đè. Chuyển phiên 6.
+- [ ] (17:12Z) Sếp không thấy Có thai / Lật thẻ / Ân tình nữa: vẫn có trong khối "Ân sủng ›" bên phải sân khấu (thu gọn sẵn, không thấy từ tab Hành sự) → đề xuất mở được từ mọi tab (bấm ô Sủng/Ân tình trên đầu), nhớ trạng thái mở. Thẻ "Múa trong yến tiệc" hiện 2 điều kiện Sức trùng (>20 và ≥5) → bỏ trùng. Chuyển phiên 6.
+- (17:14Z) Chữ "Tuần lục" trên đầu sổ: vẽ bằng Magnific thành chữ thư pháp kiểu xưa (chữ Việt, không chữ Hán), đẹp; làm 3–4 mẫu cho sếp chọn rồi gắn vào đầu sổ. Chuyển phiên 6.
+- [ ] (17:16Z) Ảnh đại diện nhỏ (Tuần lục "Sổ này ghi" và mọi chỗ dùng chung) có thêm một ô vuông viền quanh khung → bỏ ô vuông, chỉ giữ khung phẩm. Tên người mỗi người một màu → một kiểu kit. Chuyển phiên 6.
+- (17:20Z) LUẬT MỚI: lên bậc phải THI. Đủ điều kiện (Sủng/Danh/Đức… + đủ thời gian chờ từ lần trước) chỉ là ĐƯỢC DỰ THI. Thi đỗ mới được tấn phong; trượt thì không lên, phải chờ một thời gian mới thi lại. NPC cũng vậy. Chuyển phiên 6 (hỏi sếp: đường cung nữ/ma ma có thi không).
+- [ ] (17:24Z) Phòng buổi trưa vẫn u ám một màu nâu (bản sửa ở review/scene-light chưa lên) → duyệt sớm. Thời tiết "đom đóm" lúc buổi trưa (cùng lỗi thời tiết × buổi). Hoàng thượng ban tranh cổ mà không có rương/hoạt cảnh (bản sửa ở review/game-feel; ban thưởng phải dùng rương/khay). Chuyển phiên 6.
+- [ ] (17:27Z) Hộp LUẬT · Ân thưởng: bảng 2 cột không thẳng hàng (mỗi dòng cột phải bắt đầu một chỗ) → một bảng kit, cột nhãn rộng cố định, cột giá trị thẳng một đường ±1px; rà MỌI danh sách nhãn|giá trị trong game + test đo. Chuyển phiên 6.
+- [ ] (17:30Z) Bổng lộc ghi "1 súc vải, 1 gói trà" mà rương không có; đồ phát hằng tháng theo phẩm cũng không vào rương → mọi đồ được phát/ban phải là vật phẩm thật trong rương (có hình, dùng được) + hoạt cảnh rương bổng lộc; rà mọi chỗ "cho đồ" chỉ bằng chữ. Chuyển phiên 6.
+- (17:33Z) TÍNH NĂNG MỚI: bổng lộc bị cắt xén hằng tháng (như phim cung đấu): do thất sủng, vừa phạm lỗi/bị phạt/giáng, bề trên có oán sai chèn ép, thái giám Nội vụ phủ tham chưa được lót tay… Hiện khung sự kiện khi bổng lộc tới (vải thô, trà mốc, thiếu bạc) kèm lý do; lựa chọn: nhịn / đút lót / sai cung nữ đi đòi / tố lên trên / ghi nhớ. NPC cũng bị. Chuyển phiên 6.
+- (17:36Z) Thanh chỉ số đầu trang: dời DANH sang nhóm trái ngay sau Đức (Sắc · Tài · Tâm cơ · Đức · Danh); nhóm phải chỉ Bạc · Sức · Sủng. Chuyển phiên 6.
+- [ ] (17:40Z) Khối "Ân sủng" bên phải sân khấu bấm mở lại thì phình to, tràn mép phải, cắt chữ → mở tại chỗ, rộng bằng cột, thẳng hàng. Hình nàng (Thường tại) có vết đen ở cổ do tách nền → sửa + rà vết đen quanh cổ/cổ áo mọi hình. Chuyển phiên 6.
+- (17:45Z) SỬA: Tuần lục KHÔNG dồn trang. Mỗi mục/chuyện mới sang trang mới là đúng. Lỗi thật của trang Triều đình · thiên hạ là THIẾU HÌNH TOÀN THÂN; mỗi trang phải có hình toàn thân.
+- (17:45Z) Hoa điền: một số bậc (Thường tại, Tần…) vẫn to → đo theo bậc, đề xuất cỡ nhỏ hơn cho mọi bậc, gửi mẫu trước.
+- (17:45Z) Luật kit-trước phải THỰC THI: dán nguyên văn vào mọi lời giao việc/duyệt; người duyệt đánh rớt chỗ tự chế; thợ ghi yêu cầu kit thiếu vào dev/kit/KIT_REQUESTS.md. Luật nằm ở đầu dev/handover/WORKER_BRIEF.md.
+- (17:45Z) Phiên 5 archive theo lệnh sếp.
+- (≈17:50Z, sếp nói trực tiếp phiên 6) Thanh đầu trang — SỬA 17:36Z: nhóm TRÁI: Sắc · Tài · Tâm cơ · Đức · Danh · Sủng; nhóm PHẢI: chỉ Bạc · Sức. (Hiểu 'Danh sủng' = Danh rồi Sủng.) Giữ thẳng hàng ±1px, thanh dưới Sức/Sủng, giải nghĩa, đích số bay.
+- (≈17:55Z, sếp gửi ảnh dev/owner-shots/1115-an-sung-ok.jpg) Bảng 'Ân sủng' hiện như ảnh này là ĐƯỢC: mở ngay tại chỗ trong cột phải, cùng rộng cột các thẻ người, nhãn trái / giá trị phải (Tai mắt, Có thai, Lật thẻ, Ân tình (đêm), Số lần ân thưởng, Bổng lộc). Đây là chuẩn; lỗi bung khung to 17:40Z phải về đúng như ảnh. Không cần làm lối mở từ tab khác (đề xuất 17:12Z bỏ).
+- (≈18:00Z, sếp) Chữ 'Tuần lục': phải xếp HÀNG DỌC (đúng ô tiêu đề dọc trong tranh sổ), và trông cổ hơn (thư pháp cổ, mực khô, như nhãn sách/cuộn xưa); vẫn chữ Việt, không Hán. 4 mẫu ngang v1–v4 bỏ → act-pics2 vẽ lại bản dọc d1–d4, ướm lên đúng ô trong tranh sổ.
+- (≈18:02Z, sếp) Sếp đi ngủ, dặn phiên 6 cứ tiếp tục làm. (PASS → đẩy main; vẽ/đẩy CDN không cần hỏi; mẫu cần sếp chọn thì gom lại báo sáng mai.)
+- (≈18:05Z, sếp) Nhắc canh thợ: 1 TIẾNG một lần (không 30 phút). Đã xóa nhắc 30 phút, giữ lịch mỗi giờ (phút 32).

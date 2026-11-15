@@ -149,7 +149,7 @@ window.kitEvCat=kitEvCat;
 .kesf{margin:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;min-width:0;flex:1 1 0}
 .kesf.kesno{display:none}
 .kesfi{position:relative;display:block;max-width:100%}
-.kesfi>.kesimg{display:block;width:auto;height:auto;max-width:100%;max-height:calc(clamp(200px,40dvh,400px)*var(--kfr,1));filter:drop-shadow(0 6px 8px #3a201033)}
+.kesfi>.kesimg{display:block;width:auto;height:auto;max-width:100%;max-height:calc(clamp(200px,40dvh,400px)*var(--kfr,1));filter:var(--klf,brightness(1)) drop-shadow(0 6px 8px #3a201033)}
 .kesfi>.kesfx{position:absolute;inset:0;pointer-events:none;z-index:2}
 .kesf>.kpsn{margin-top:2px;text-align:center}
 /* KIT 33.5: the event-stage / book-page name chip is the same two-line chip as the stage: rank / role small on top, name below, rank-tinted */
@@ -239,7 +239,7 @@ window.kitEsOvFit=kitEsOvFit;
 #mb .kesov{position:absolute;inset:0;pointer-events:none;z-index:2;overflow:hidden}
 #mb .kesov>.kesf{position:absolute;margin:0;display:block}
 #mb .kesov>.kesf .kesfi{display:block;position:relative}
-#mb .kesov>.kesf .kesimg{display:block;max-width:none!important;max-height:none!important;filter:drop-shadow(0 4px 5px #0006)}
+#mb .kesov>.kesf .kesimg{display:block;max-width:none!important;max-height:none!important;filter:var(--klf,brightness(1)) drop-shadow(0 4px 5px #0006)}
 #mb .kesov>.kpsn{position:absolute;bottom:3px;transform:translateX(-50%);z-index:20;white-space:nowrap;background:rgba(255,250,240,.92);border:1px solid var(--line,#e6d3ac);border-radius:6px;padding:0 6px;font-size:.78rem;line-height:1.25;text-align:center}
 #mb .kesov>.kpsn[data-row="1"]{bottom:calc(3px + 2.6em)}
 #mb>.kdlgart.kesonpic .ksart>figcaption,#mb>.kdlgart.kesonpic .ksart>.ksart-chip{top:6px;bottom:auto}
@@ -455,7 +455,7 @@ window.kitCatchOn=kitCatchOn;window.kitCatchOff=kitCatchOff;
 #kxcatch{position:fixed;inset:0;background:transparent;touch-action:none;-webkit-tap-highlight-color:transparent}
 #kxcatch[hidden]{display:none!important}
 `;document.head.appendChild(st)})();
-/* ================= KIT 41 · kitActCompact (cherry-picked from review/kit-fig2 3e212597e by tabs-kit r7; kit-fig2 KIT §39 → §41) — act cards in a NARROW pane beside a portrait / figure (owner 11/15: "the act picture squeezes the
+/* ================= KIT 42 · kitActCompact (cherry-picked from review/kit-fig2 3e212597e by tabs-kit r7; kit-fig2 KIT §39 → §42) — act cards in a NARROW pane beside a portrait / figure (owner 11/15: "the act picture squeezes the
    text into a thin column") =================
    Panes that hold a person on the left (person card `.pc > .pcr`: Hậu cung · Thánh thượng / Phi tần / Cung nhân "Việc hôm nay", Hoàng tự
    child cards) are inline-size containers named `kpane`. When the pane is under 640 px wide every act card (`button.ka.kart`) inside it
