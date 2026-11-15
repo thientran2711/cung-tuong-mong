@@ -60,8 +60,10 @@ function econStipend(p){const r=rkOf(p),me=p===S,staff=(p.staff||[]).length;let 
    Q.push(card);try{if(typeof stipShow==="function")stipShow(G,net,SK)}catch(e){console.error("stip show",e)}}else econDoDuty(p,true)}catch(e){console.error("econ card",e)}
  return line};
 blCard=function(){return `<p>Bổng lộc phát ngày đầu mỗi tháng, theo phẩm vị (mọi phi tần như nhau). Mỗi kẻ hầu ăn công ${BAL.wage} bạc/tháng. Phẩm càng cao, lễ nghĩa càng tốn.</p><div class="pcb rows">${BAL.pay.map((b,i)=>`<div class="pcrow"><span>${i>=7?"Hoàng hậu":RANKS[i].n}</span><b>${b} bạc</b></div><div class="pcrow"><span class="past">${typeof stipRankTxt==="function"?stipRankTxt(i):BLG[i]}${BAL.duty[i]?` · lễ nghĩa ${BAL.duty[i]}`:""}${BAL.banThuong[i]?` · ban thưởng ${BAL.banThuong[i]}`:""}</span><span></span></div>`).join("")}</div><p class="past">Lãnh cung: chỉ ${BAL.payCold} bạc. Cấm túc: nửa bổng. Hoàng hậu ghét ngươi (thiện cảm dưới -30): mỗi tháng sai Nội vụ phủ khất bổng (bớt 3 phần 10): ${word(20)}. Sinh con, được ân thưởng: cộng thêm một lần.</p>${typeof stipRuleTxt==="function"?stipRuleTxt():""}`};
-/* a good night: Hoàng thượng's thưởng also brings silver (same for every consort) */
-(function(){const b0=bestow;bestow=function(p,why){const r=b0.apply(this,arguments);try{if(why==="night"&&p&&(p===S||p.alive)){ap(p,{bac:BAL.nightBac});if(p===S)log(`Kèm theo ${BAL.nightBac} bạc thưởng. Bạc +${BAL.nightBac}.`)}}catch(e){}return r}})();
+/* a good night: Hoàng thượng's thưởng also brings silver (same for every consort). It is the night entry of j20's reward silver (BBAC), so it
+   goes through the ONE ân thưởng path: inside bestow, before the tray (j93 kitReward) counts its coins, in the awards ledger (S.awards), the
+   "Ân thưởng …: <món>, Bạc +N" log line and the award card chip — no second silver wrapper, no stray Bạc line of its own. */
+try{Object.defineProperty(BBAC,"night",{get:()=>BAL.nightBac|0,enumerable:true,configurable:true})}catch(e){console.error("nightBac",e)}
 /* ---------- works on the item grade scale + price by grade and skill ---------- */
 function econWkGrade(w){return Math.max(0,Math.min(3,w.ti|0))}
 wkSellVal=function(w){return Math.round((BAL.craftSell[econWkGrade(w)]+BAL.craftLv*(w.lv|0))*Math.sqrt((WK[w.kind]?WK[w.kind].need:2)/2))};
