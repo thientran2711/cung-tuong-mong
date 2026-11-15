@@ -1418,7 +1418,7 @@ Not done here (other owners): kitRoulette (thân phận, review/kit-2b) and the 
 ### 32.7 ONE / TWO PEOPLE WITHOUT A SCENE PICTURE — person column LEFT, text + options RIGHT (owner 11/15 04:45Z, iPad "VIỆC · Có người đến") — `kitDpApply` / `kitDpFit` (jk4)
 Every kitEventStage dialog that names one or two people (`who`, `who2`, `stage:[a,b]`) and has NO place / event picture band — visitors
 ("Có người đến"), people asking something (Thái hậu's questions, Việc khó xử), invite / choice cards with one person, two visitors:
-- LEFT column = the people FULL-BODY, the full height of the dialog (under the title to the bottom). Scale = KIT_FIG of that column
+- (11/15: scale + chips now per 32.7b and 37 — people fill the column, name chips on TOP.) LEFT column = the people FULL-BODY, the full height of the dialog (under the title to the bottom). Scale = KIT_FIG of that column
   (woman body .79 × column height, forehead to feet via kitFigBody; men ×1.07; children by age; never shrunk to fit the text).
   Feet on one line just above the name chips (33.5 two-line chip: rank on top, name below, rank colour). Two people stand side by side,
   packed by their CORE with ≤ 20 % overlap (KIT 33 rule 4); outer sleeves inside; a chip that would touch its neighbour goes up one row
@@ -1571,3 +1571,59 @@ Tested 755x1000@2, 1180x820@2, 1366x1024@2, 686x880@2.2, 412x1058@2, 390x844@3, 
 - No ring/aura around the frame (owner 11/14 late: removed); the seal alone shows the feeling.
 - Fog: stranger → nothing; known person, no fresh news → grey "?" seal; her own → always.
 - Data only through `window.kitEmotion(p)` → `{k,name,v,why,known}`; tooltip/alt "Tâm trạng: <tên> (<cause>)". Nobody draws another mood icon; no code-reshaped facial expressions (owner 22:50Z): the seal + ring are the only display of feelings.
+
+## 37. NAME + RANK ABOVE THE PICTURE · `kitNameRank` (owner 11/15: "people read top to bottom") — `dev/build/jk4.js`
+ONE rule for every person label: the rank on one small line (rank colour), the name under it, THEN the portrait / figure — never under it.
+`kitNameRank(rank, name, col)` → `.knr` (`.knr-r` small rank line, `.knr-n` name). Used by:
+- every person dialog (32.5 / 32.7, the shop seller too): the chip `.kpsn.knr` stands at the TOP of the figure column, centred over its
+  person; two chips that touch → the second goes to a second line, still above the heads (kitDpFit lays the people out again under it);
+- Ân oán (§38): both side blocks;
+- person cards (Hậu cung · Phi tần / Thánh thượng, Cung nhân = the servant card): wide card = rank, name, then the portrait; narrow card
+  (`.kpnar`) = the name block is a full row above the portrait + bars (was beside the portrait).
+NOT moved (reported to the coordinator with shots): stage figures (j59) — their name tags stay at the feet: on the stage the heads reach
+the top edge (KIT 33: figures fill the stage), where the scene title (top left) and the chip column (top right, `#kshR`) already sit;
+a label over the head would cover either. Pets: no pet card exists on main yet.
+Test: `node dev/test/name-rank.js <url> <outdir> <tag> [sizes]` + `dev/test/fig-fill.js` (chip bottom ≤ painted top).
+
+### 32.7b PEOPLE FILL THE COLUMN (owner 11/15, replaces the KIT_FIG .79 scale inside 32.7 columns) — `kitDpFit` (jk4)
+In a 32.7 person column every person stands from just under the name chips (37) down to the column floor: painted top (hair, crown,
+hat) under the chips, feet on the floor, aspect kept. Man and woman alike (no ×1.07 here); children keep their age factor
+(KIT_FIG.fac < 1, feet on the same floor). Two people: packed by core with ≤ 20 % overlap; the right column keeps ≥ 250 px (was 280),
+so two adults still fill the column on Fold 755; only a narrower screen gives them one common factor. Measured (fig-fill.js):
+painted height ≈ 0.99 of the column under the chips; ≈ 0.93 of the whole column with a two-line chip on top (the chip itself takes the
+rest). Stage figures, 32.6 picture bands and week-book figures keep KIT_FIG (33).
+
+## 38. ÂN OÁN · RELATIONS (owner 11/15) — `dev/build/jhc.js`
+### 38.1 kitRelRow — ONE relation row everywhere
+`kitRelRow({kind:"quy"|"oan"|"pos", a, b, v, what, word, gloss, signed, max, good})` → `.krr`:
+- line 1 `.krrl` = "<A> → <B>: thiện cảm" / "…: oán" (player = "ta"), colour `KIT_REL`: purple `#7a4fa0` someone → ta, blue `#3f62a8`
+  ta → someone, ink `#6a5040` between two others; tap = the kit gloss (VANPHONG: Thiện cảm "có chịu giúp, kết giao với ta không",
+  Oán "mối hận vì việc ta đã làm, có muốn trả đũa ta không; nguôi dần mỗi tháng"). Thiện cảm and oán stay TWO stats.
+- line 2 `.krr2` = a grid [word · number (8.2rem, never wraps)] [bar (84 px)] → every row's bar starts and ends at the same x.
+  Thiện cảm (−100..100): `kitSignedBar` — midline at the centre, green fill right / red fill left, marker `.ksb-mk` centred on the bar.
+  Oán (0..100): `kitPosBar` — same size and place, fills from the left, no midline, marker at the value; word ladder `oanW`
+  (BAL.oanLv [5,20,45,75]: Không oán · Chút oán · Oán · Oán sâu · Oán hận). "pos" = sủng / ân tình (number, green).
+  Unknown value → "chưa rõ" + an empty bar in the same place.
+### 38.2 Picker + pair — "Xem quan hệ của X" · "với Y"
+Two strips = the Hậu cung pager strip (`pager`, j15: ‹ ›, N/M, selected highlight), groups Ta · Chí tôn · Phi tần (k61Hide still lists
+only consorts she knows by name), labels = the name only (`PG.rel`, `PG.relY`; an outside link that sets `relSel` still selects X).
+Panel = ONE pair, heading "Quan hệ giữa X và Y": X (kitNameRank + portrait) | the rows both ways | Y; then "Đã biết về X" (facts about
+X only, each with its source · when). Y defaults to Ta (her own relation with X); X = Ta → Y defaults to the first of strip 2. X = Ta →
+the "Đã biết" box is hidden (her own facts are in Tư chất / Mệnh truyện). Hoàng thượng ↔ Z: sủng (+ ân tình for Ta); Thái hậu ↔ Z: thiện cảm.
+A value shows when the one who feels it is Ta, or Ta has met both; else "chưa rõ".
+### 38.3 relPerson + THE STRANGER RULE (owner 11/15) — `isKnown61` / `met61` (j61), `relPerson` (jhc)
+`relPerson(k)` = the ONE helper of Ân oán: person object → face drawn from THAT object, name, rank, colour (`data-pid` / `data-fk` on the
+side block; the test checks face key == person key for every X).
+STRANGER RULE — one gate for every renderer: a consort Ta has NOT MET is the grey kit silhouette of her sex (portrait `img/kit/unknown-f`,
+figure `unknown-fig-f`); her name stays. Met (`met61`) = Ta talked / acted with her (`S.met`, set by talk and every act on her) or she
+lives in the same palace; the k61 "Đã quen" level alone is NOT met (owner case: listed in Ân oán, "Ta chưa gặp …", real face). The gate is
+`isKnown61(e)` (k61 face level ≥ 1 AND, for a consort, met61), which every renderer already reads: mdH (strips, news rows, chips, intel),
+pcPort / pframe (person card, Ân oán), kitFace, kitFigOf / kitStageFig (event dialogs 32.6 / 32.7, the week book Tuần lục person pages,
+place screens). Others (Hoàng thượng, Thái hậu, servants, men) keep the face level. `kitStrangerOf(v)` (j61) = the same silhouette for a
+caller that holds the person, not a face object. "Ta chưa gặp <tên> … Gặp nàng ta …" (VANPHONG).
+NEWS / TUẦN LỤC ROWS (kitFacts, j79 kpPeopleIn): the row's face = the person named FIRST in the sentence (the subject) — names are matched
+longest-first, then ordered by their place in the text (before: the longest name won, so "Thường tại A tặng quà cho Tần B" showed B's face
+and B's rank colour on A's row). The face is mdH(kitFace(p)) = the same por file + current-rank colour as her Hậu cung strip tile.
+Tests: `node dev/test/rel-row.js <url> <outdir> <tag> [sizes]`; `node dev/test/stranger-sweep.js <url> [outdir]` (one unmet consort through
+every renderer: no real face / figure file, silhouette present; 8 news rows: src + rank colour == her strip tile; met again → face back).
+Shots: dev/shots/kit-fig2/.

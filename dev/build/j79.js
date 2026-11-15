@@ -60,6 +60,9 @@ const KP_TITLE_RX=/(Thái tử|Hoàng tử|Công chúa|Hoàng hậu|Hoàng quý 
 function kpPeopleIn(html,people){const who=[];let h=html;const plain=kpPlain(html);
  for(const [n,p] of people){if(!plain.includes(n)||who.includes(p))continue;who.push(p);let done=false;
   h=kpMapText(h,s=>{if(done)return s;const i=s.indexOf(n);if(i<0)return s;done=true;const t=kitTitle(p);let pre=s.slice(0,i);if(t&&pre.endsWith(t+" "))pre=pre.slice(0,-(t.length+1));const own=t&&KP_TITLE_RX.test(pre);return pre+kitName(p,{named:p===S,noTitle:own})+s.slice(i+n.length)})}
+ /* owner 11/15 (news rows showed the wrong person): the row's face = the person named FIRST in the sentence (the subject), not the one
+    with the longest name — names are matched longest-first (no partial overlaps), then ordered by where they stand in the text */
+ if(who.length>1){const at=p=>{const e=people.find(x=>x[1]===p);const i=e?plain.indexOf(e[0]):-1;return i<0?1e9:i};who.sort((a,b)=>at(a)-at(b))}
  const lead=plain.replace(/^[^A-Za-zÀ-ỹĐđ]+/,"");
  if(/^(Hoàng thượng|Thánh thượng)/.test(lead)&&S&&S.emp&&!who.length)who.push(S.emp);
  if(/^Thái hậu/.test(lead)&&S&&!who.length)who.push(S.thO||{kind:"th"});

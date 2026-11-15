@@ -273,28 +273,33 @@ function kitDpFit(){try{const o=kitDpOn();if(!o||!o.d.classList.contains("kdper"
  const L=F.map(f=>{const im=f.querySelector(".kesimg"),src=im&&im.getAttribute("src");const b=src?kitFigBody(src,()=>requestAnimationFrame(kitDpFit)):null;
   if(!b){wait=true}const kfr=parseFloat(im&&im.style.getPropertyValue("--kfr"))||1;return{f,im,b,fac:kfr*(KIT_FIG.man||1),cap:f.querySelector(".kpsn")||col.querySelector(`:scope > .kpsn[data-kdp="${F.indexOf(f)}"]`)}});
  if(wait)return;
- /* name chips live in the column (absolute), measured first so the feet stand above them */
- L.forEach((x,i)=>{if(x.cap){x.cap.dataset.kdp=i;x.cap.classList.add("kdpcap");if(x.cap.parentElement!==col)col.appendChild(x.cap)}});
+ /* KIT 37 (owner 11/15): the name + rank (kitNameRank chip) sit ABOVE the people, at the top of the column; KIT 32.7b (owner 11/15): every
+    person FILLS the column from just under the chips down to the column bottom — the painted top (hair, crown, hat) under the chips, the feet
+    on the column floor; man and woman alike (aspect kept), children by age (KIT_FIG.fac < 1). */
+ L.forEach((x,i)=>{if(x.cap){x.cap.dataset.kdp=i;x.cap.classList.add("kdpcap","knr");if(x.cap.parentElement!==col)col.appendChild(x.cap)}});
  const capH=Math.max(0,...L.map(x=>x.cap?x.cap.offsetHeight:0));
- const H=col.clientHeight;if(H<80)return;const floor=H-capH-6,top=4;
- const sz=L.map(x=>{const bt=x.b.ht>x.b.t?x.b.ht:x.b.t;const body=Math.min(KIT_FIG.h*H*x.fac,floor-top);const ih=body/Math.max(.2,x.b.b-bt);const iw=ih*(x.b.ar||1);
-  const cl=x.b.cl!=null?x.b.cl:x.b.l,cr=x.b.cr!=null?x.b.cr:x.b.r;return{ih,iw,core:iw*(cr-cl),cl,cr,l:x.b.l,r:x.b.r,b:x.b.b}});
- const ov=sz.length>1?.2:0;/* KIT 33 rule 4: each later figure may step back over its neighbour by ≤ 20 % of its core */
- const tot=sz.reduce((a,s,i)=>a+s.core*(i?1-ov:1),0)+sz[0].iw*(sz[0].cl-sz[0].l)+sz[sz.length-1].iw*(sz[sz.length-1].r-sz[sz.length-1].cr);
+ const H=col.clientHeight;if(H<80)return;const floor=H-2;
  const capW=Math.max(0,...L.map(x=>x.cap?x.cap.scrollWidth:0));
- /* column width: the people (or the widest name chip); the right column keeps ≥ 300 px (iPad) — if not, one common factor */
- let need=Math.max(tot,capW)+12,k=1;
- if(narrow){const W=col.clientWidth;if(need>W){k=W/need;need=W}}
- else{const dw=Math.min(innerWidth-24,need+470);const room=dw-280-44;if(need>room){k=room/need;need=room}d.style.setProperty("--kdpw",Math.round(need)+"px")}
- const W=narrow?col.clientWidth:need;let x=(W-tot*k)/2+sz[0].iw*k*(sz[0].cl-sz[0].l);
- L.forEach((it,i)=>{const s=sz[i];const ih=s.ih*k,iw=s.iw*k;if(i)x-=s.core*k*ov;const left=x-iw*s.cl;
-  Object.assign(it.f.style,{left:left.toFixed(1)+"px",top:(floor-ih*s.b).toFixed(1)+"px",width:iw.toFixed(1)+"px",zIndex:String(2+i)});
-  const wr=it.f.querySelector(".kesfi");if(wr)Object.assign(wr.style,{width:iw.toFixed(1)+"px",height:ih.toFixed(1)+"px",margin:"0",maxWidth:"none"});
-  Object.assign(it.im.style,{width:iw.toFixed(1)+"px",height:ih.toFixed(1)+"px"});
-  if(it.cap){it.cap.style.left=(left+iw*(s.cl+s.cr)/2).toFixed(1)+"px";it.cap.style.translate="";it.cap.dataset.row="0"}x+=s.core*k});
- /* chips never cut: clamp inside the column; two that touch → the second one goes up a row (over the hem) */
- const C=col.getBoundingClientRect();let prev=null;L.forEach(it=>{const c=it.cap;if(!c)return;const r=c.getBoundingClientRect();let s=0;if(r.left<C.left+2)s=C.left+2-r.left;else if(r.right>C.right-2)s=C.right-2-r.right;if(s)c.style.translate=s.toFixed(1)+"px 0";
-  const q=c.getBoundingClientRect();if(prev&&q.left<prev.right+4)c.dataset.row="1";prev={right:q.right}});
+ const lay=(top,rows)=>{
+  const sz=L.map(x=>{const rel=Math.min(1,x.fac);const ih=(floor-top)/Math.max(.2,x.b.b-x.b.t)*rel;const iw=ih*(x.b.ar||1);
+   const cl=x.b.cl!=null?x.b.cl:x.b.l,cr=x.b.cr!=null?x.b.cr:x.b.r;return{ih,iw,core:iw*(cr-cl),cl,cr,l:x.b.l,r:x.b.r,b:x.b.b}});
+  const ov=sz.length>1?.2:0;/* KIT 33 rule 4: each later figure may step back over its neighbour by ≤ 20 % of its core */
+  const tot=sz.reduce((a,s,i)=>a+s.core*(i?1-ov:1),0)+sz[0].iw*(sz[0].cl-sz[0].l)+sz[sz.length-1].iw*(sz[sz.length-1].r-sz[sz.length-1].cr);
+  /* column width: the people (or the widest name chip); the right column keeps ≥ 280 px — if not, one common factor */
+  let need=Math.max(tot,capW)+12,k=1;
+  if(narrow){const W=col.clientWidth;if(need>W){k=W/need;need=W}}
+  else{const dw=Math.min(innerWidth-24,need+470);const room=dw-250-44;if(need>room){k=room/need;need=room}d.style.setProperty("--kdpw",Math.round(need)+"px")}
+  const W=narrow?col.clientWidth:need;let x=(W-tot*k)/2+sz[0].iw*k*(sz[0].cl-sz[0].l);
+  L.forEach((it,i)=>{const s=sz[i];const ih=s.ih*k,iw=s.iw*k;if(i)x-=s.core*k*ov;const left=x-iw*s.cl;
+   Object.assign(it.f.style,{left:left.toFixed(1)+"px",top:(floor-ih*s.b).toFixed(1)+"px",width:iw.toFixed(1)+"px",zIndex:String(2+i)});
+   const wr=it.f.querySelector(".kesfi");if(wr)Object.assign(wr.style,{width:iw.toFixed(1)+"px",height:ih.toFixed(1)+"px",margin:"0",maxWidth:"none"});
+   Object.assign(it.im.style,{width:iw.toFixed(1)+"px",height:ih.toFixed(1)+"px"});
+   if(it.cap){it.cap.style.left=(left+iw*(s.cl+s.cr)/2).toFixed(1)+"px";it.cap.style.translate="";it.cap.dataset.row=rows&&i%2?"1":"0";it.cap.style.top=(rows&&i%2?capH+4:0)+"px"}x+=s.core*k});
+  /* chips never cut: clamp inside the column; report whether two touch */
+  const C=col.getBoundingClientRect();let prev=null,touch=false;L.forEach(it=>{const c=it.cap;if(!c)return;const r=c.getBoundingClientRect();let s=0;if(r.left<C.left+2)s=C.left+2-r.left;else if(r.right>C.right-2)s=C.right-2-r.right;if(s)c.style.translate=s.toFixed(1)+"px 0";
+   const q=c.getBoundingClientRect();if(prev&&q.left<prev.right+4&&c.dataset.row===prev.row)touch=true;prev={right:q.right,row:c.dataset.row}});return touch};
+ /* two chips that touch → the second one goes to a second line above the heads and the people start under it */
+ if(lay(capH+6,false))lay(2*capH+10,true);
  col.dataset.kdpfit="1"}catch(e){console.error("kitDpFit",e)}}
 window.kitDpApply=kitDpApply;window.kitDpFit=kitDpFit;
 /* kitEsFit (33.6) sizes figures in the old side column; a 32.7 column is sized by kitDpFit instead */
@@ -318,9 +323,9 @@ html body #modal .dlg.kdper>#mb>.opts>*{width:100%!important;max-width:none!impo
 #modal .dlg.kdper .kes>.kesf{position:absolute;margin:0;display:block;flex:none}
 #modal .dlg.kdper .kes>.kesf .kesfi{display:block;position:relative}
 #modal .dlg.kdper .kes .kesimg{display:block;max-width:none!important;max-height:none!important}
-#modal .dlg.kdper .kes>.kpsn.kdpcap{position:absolute;bottom:2px;transform:translateX(-50%);z-index:20;white-space:nowrap;margin:0;text-align:center;
+#modal .dlg.kdper .kes>.kpsn.kdpcap{position:absolute;top:0;bottom:auto;transform:translateX(-50%);z-index:20;white-space:nowrap;margin:0;text-align:center;
  background:rgba(255,250,240,.92);border:1px solid var(--line,#e6d3ac);border-radius:6px;padding:1px 8px}
-#modal .dlg.kdper .kes>.kpsn.kdpcap[data-row="1"]{bottom:calc(2px + 3em)}
+/* (KIT 37) the second chip line is placed by kitDpFit (style.top) */
 #modal .dlg.kdper .kes>.kpsn .kname{display:flex;flex-direction:column;align-items:center;line-height:1.2;color:color-mix(in srgb,var(--rc,#2a1a12) 45%,#2a1a12);font-size:1rem}
 #modal .dlg.kdper .kes>.kpsn .kname .kti{font-size:.74rem;font-weight:600;letter-spacing:.02em;line-height:1.1;color:color-mix(in srgb,var(--rc,#7a5530) 75%,#2a1a12)}
 #modal .dlg.kdper .kfact.kfnodot{grid-template-columns:minmax(0,1fr)}
@@ -351,4 +356,23 @@ window.kitXHTML=kitXHTML;window.kitXAdd=kitXAdd;
 .kit-x:hover{background:#fff;border-color:var(--gold,#c9a46a)}
 .kit-x:focus-visible{outline:none;box-shadow:0 0 0 2px var(--gold,#c9a46a)}
 .modal.night .kit-x{background:#2a1610;color:#e9c07a;border-color:#4a2a20}
+`;document.head.appendChild(st)})();
+/* ================= KIT 37 · kitNameRank — name + rank ABOVE the picture (owner 11/15: "people read top to bottom") =================
+   ONE block for every portrait / figure label: the rank on one small line (rank colour), the name under it, then the picture below.
+   `kitNameRank(rank, name, col)` → `<div class="knr" style="--rc:col"><small class="knr-r">rank</small><b class="knr-n">name</b></div>`.
+   Used by: Ân oán cards (kitRel3), every person dialog (32.7 chips = `.kpsn.knr` at the column top, kitDpFit), the shop seller, person
+   cards (Hậu cung / Cung nhân: `.pcl` name + rank moved above the portrait). The same look as the 32.7 chip's kitName (rank over name). */
+function kitNameRank(rank,name,col){return `<div class="knr" style="--rc:${col||"#7a5530"}">${rank?`<small class="knr-r">${rank}</small>`:""}<b class="knr-n">${name||""}</b></div>`}
+window.kitNameRank=kitNameRank;
+(function(){const st=document.createElement("style");st.id="kit-nr";st.textContent=`
+.knr{display:flex;flex-direction:column;align-items:center;text-align:center;line-height:1.2;max-width:100%;min-width:0}
+.knr>.knr-r{font-size:.74rem;font-weight:600;letter-spacing:.02em;color:color-mix(in srgb,var(--rc,#7a5530) 75%,#2a1a12)}
+.knr>.knr-n{font-size:.98rem;color:color-mix(in srgb,var(--rc,#7a5530) 45%,#2a1a12);overflow-wrap:anywhere}
+/* person cards (j15 pcard + jk2b layout): the same order — rank line, name, THEN the portrait. Narrow card: the name block is a full row
+   above the portrait and the bars (was beside the portrait); wide card: rank above the name, both above the portrait. */
+.pc.kpnar[data-k2]>.pcl{grid-template-areas:"nm nm" "por bars" "por fx"!important;grid-template-rows:auto auto 1fr!important}
+.pc.kpnar[data-k2]>.pcl>.kpnm{display:flex!important;flex-direction:column!important;align-items:flex-start!important;gap:0!important;margin:0 0 4px}
+.pc.kpnar[data-k2]>.pcl>.kpnm>.pcrk{order:-1}
+html body .pc.kpwide[data-k2]>.pcl>.pcrk{order:-4!important;margin:0!important}
+html body .pc.kpwide[data-k2]>.pcl>.pcname{align-items:flex-start!important}
 `;document.head.appendChild(st)})();
