@@ -36,6 +36,7 @@ Trước: 231 lần hiện ảnh lỗi / 2302 đo. Sau: 9 / 2130, lỗi trang + 
 ## Đã sửa (dev/build/jimg.js, nạp cuối assemble.py)
 
 - Chân dung por-* trả về ngay (trình duyệt tự hiện khi tải xong); face-* cũ chỉ còn khi por thật sự lỗi (onerror) hoặc người đó không có por.
+  Mấy giây đầu khi 3 tệp FIGURES*.json chưa về (mạng chậm): khung hiện chữ đầu tên trên nền gấm, không hiện mặt vuông cũ; manifest về thì vẽ lại chân dung.
 - Có hình bóng ⇒ luôn khung đá frame-unknown + nền bg-unknown + nhãn "Người lạ" (hoặc tước khi đã biết tên, như KIT 4.4); hình bóng đúng giới (nam/nữ/trẻ).
 - Hình bóng người lạ cắt lại (dev/figwork/silpor.py) từ hình bóng sân khấu đã vẽ: 768×1012 (2× ô chân dung), khung bán thân như por (cả đầu + vai, không phóng),
   viền sạch mềm, nền trong suốt; hình bóng sân khấu xuất 1350 px.

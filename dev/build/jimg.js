@@ -19,11 +19,17 @@
       face is never blurred: the figure stays hidden for that moment, and the silhouettes are fetched at start. */
 (function(){
 /* 1 — por at once */
+/* before the three FIGURES manifests have loaded (j39 FIGSIG empty: the first seconds after start on a slow line) nobody's portrait is known
+   yet: the frame shows the initials on its brocade for that moment, never the old square face (j39 re-renders once the manifests arrive) */
+const figReady=()=>{try{return typeof FIGSIG==="undefined"||!!FIGSIG}catch(e){return true}};
+const oldFace=s=>typeof s==="string"&&/(^|\/)face-[^/]*\.webp/.test(s);
 if(typeof porOf==="function"){const p0=porOf;porOf=function(who,fb){const r=p0.apply(this,arguments);try{
+  if(r===fb&&oldFace(fb)&&!figReady())return "";
   if(r===fb&&who&&typeof FIGS!=="undefined"&&FIGS.length&&typeof figFor==="function"){
    const src=figFor(who===S?S:who===S.emp?{kind:"emp"}:who===S.thO?{kind:"th"}:{ref:who},"por");
    if(src&&src!==fb&&PORK[src]!==0)return src}}catch(e){}return r}}
 if(typeof kidPor==="function"){const k0=kidPor;kidPor=function(k,fb){const r=k0.apply(this,arguments);try{
+  if(r===fb&&oldFace(fb)&&!figReady())return "";
   if(r===fb&&typeof kidFigSrc==="function"){const src=kidFigSrc(k,"por");if(src&&src!==fb&&KPORK[src]!==0)return src}}catch(e){}return r}}
 /* a por that fails to load falls back to the old face in place (never a broken frame) */
 document.addEventListener("error",e=>{try{const im=e.target;if(!im||im.tagName!=="IMG")return;const s=im.getAttribute("src")||"";if(!/(^|\/)por-/.test(s)||im.dataset.jimgFb)return;
