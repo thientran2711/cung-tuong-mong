@@ -36,7 +36,7 @@ CDN uploads OK again (owner saved the Cloudflare token; R2 verified). Use CLOUDF
 | C9 | review/huadian-size (batch at 8.5%) | QUEUED |
 | C10 | OWNER_LEDGER sweep (docs) | DONE (dev/handover/OWNER_LEDGER.md; D29–D49 added) |
 | C11 | review/pick-hint @ 29972cd7 (incl. rank+name together + rank halo) | SẴN SÀNG KIỂM → REVIEWING (pick-hint-r1) |
-| C12 | review/hc-portrait (owner s8: Hậu cung portrait frame top gap + widen) | RUNNING |
+| C12 | review/hc-portrait @ db69d7abb (wide frames) | REVIEWING (hc-portrait-r1) |
 | C13 | review/gift-pick @ 6158af34f | REVIEWING (gift-pick-r1) |
 | C14 | review/row-align @ 0886f329b | REVIEWING (row-align-r1) |
 | C15 | review/mood-dialog → r1 PASS f8f51797c | LIVE |
@@ -73,7 +73,7 @@ Dependencies: D29 before D13 (events/places read the ledger); D30 + D42 share j1
 ## E. Open owner questions (§6) — ask one at a time
 j72 bước vs Hồi · stage paper halo · Thái hậu title bronze vs plum · HT vs HH gold alike · Đáp ứng muted on paintings
 | C18 | review/kit-popup-sample @ b6242dea (screens sent to owner) | SẴN SÀNG KIỂM → reviewer QUEUED-NEXT |
-| C19 | review/pic-dupes (owner s8: two acts share one picture; scan + redraw) | RUNNING |
+| C19 | review/pic-dupes @ dcdd16ef4 (37 act pics live, quilt redraw) | REVIEWING (pic-dupes-r1) |
 | C20 | review/act-text (owner s8: broken/unclear act card text, whole family) | RUNNING |
 | C21 | review/khac-day @ 0ce947402 (j76need one source) | REVIEWING (khac-day-r1) |
 | C22 | review/boot-flash (owner s8: raw old skeleton flashes on launch) | RUNNING |
