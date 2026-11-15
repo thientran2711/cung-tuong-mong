@@ -26,8 +26,8 @@ function k3Hud(){try{if(!S)return;const d=$$("me-d");if(d){const t=k3Date();if(d
  /* lãnh cung: the rank chip says what the figure label says (rkOfFace "Phế phi · lãnh cung"), not her old rank (review fold-layout) */
  if(S.out){const r=$$("me-r"),w="Phế phi · lãnh cung";if(r&&r.textContent.trim()!==w)r.textContent=w}
  /* her Tư chất: the kit stat cells in the top bar's kitStatRow (jk4) */
- k3TopRow();if(typeof kitStatSet!=="function")return;const hq=S.rank<7&&S.duc<50;
- [["sac","Sắc"],["tai","Tài"],["tamco","Tâm cơ"],["duc","Đức"]].forEach(([k,l])=>{const c=$$("hud-"+k);if(c)kitStatSet(c,S[k],{title:`${l} ${S[k]}${k==="duc"&&hq?" · Cần Đức 50 mới được lập Hoàng hậu":""} · chạm để xem đủ`,warn:k==="duc"&&hq?"Cần Đức 50 mới được lập Hoàng hậu":""})})}catch(e){}}
+ k3TopRow();if(typeof kitStatSet!=="function")return;const nd=hhNeed(S).duc,hq=S.rank<7&&S.duc<nd,dw=`Cần Đức ${BAL.hhDuc} mới được lập Hoàng hậu (mẹ Thái tử: ${BAL.hhDucHeir})`;
+ [["sac","Sắc"],["tai","Tài"],["tamco","Tâm cơ"],["duc","Đức"]].forEach(([k,l])=>{const c=$$("hud-"+k);if(c)kitStatSet(c,S[k],{title:`${l} ${S[k]}${k==="duc"&&hq?" · "+dw:""} · chạm để xem đủ`,warn:k==="duc"&&hq?dw:""})})}catch(e){}}
 /* the top bar's second row (KIT 31.1): time (buổi, khắc dots, weather, Quẻ tuần) + status chips | her Tư chất. ONE component, every device */
 function k3TopRow(){const hd=document.querySelector("header.hud");let tc=$$("k3tc");if(!tc&&hd){tc=document.createElement("div");tc.id="k3tc";tc.className="k3tc";
  tc.innerHTML=`<span id="k3tt" class="k3tt"></span>`;hd.appendChild(tc);

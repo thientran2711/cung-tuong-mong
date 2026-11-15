@@ -1,0 +1,31 @@
+{
+ "scenario": "main",
+ "oldCtl": true,
+ "oldCaches": [
+  "ctm-shell-a1873980b493",
+  "ctm-assets"
+ ],
+ "savesOld": {
+  "hclh-slot": 1,
+  "hclh-save-v2-1": 22511
+ },
+ "switchMs": 1512,
+ "navigations": 1,
+ "vNew": "a1873980b493",
+ "caches": [
+  "ctm-shell-a1873980b493",
+  "ctm-assets",
+  "ctm-shell-cfee0e578b30"
+ ],
+ "core": {
+  "have": 83599414,
+  "total": 83599414,
+  "files": 1201,
+  "left": 0
+ },
+ "savesNew": {
+  "hclh-slot": 1,
+  "hclh-save-v2-1": 22511
+ },
+ "errs": []
+}
