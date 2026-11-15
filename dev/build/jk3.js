@@ -146,6 +146,8 @@ html body .stage.k3g.k3n #sc-t h2{font-size:.86rem}
 .ksh{display:flex;flex-direction:column;gap:5px;pointer-events:none;min-width:0}
 .ksh[hidden]{display:none!important}
 .kshR{position:absolute;top:8px;right:8px;width:max-content;min-width:var(--kgw,150px);max-width:46%;z-index:2;align-items:stretch}
+/* owner 11/15: people may stand under the right column — its plaques float on top on a SOLID card */
+.kshR .k3p,.kshR .k3c{background:rgb(255,250,240)!important;backdrop-filter:none}
 .ksh .k3p,.ksh .k3c{pointer-events:auto;background:var(--k3pl);border:1px solid var(--line);border-radius:8px;box-shadow:0 1px 4px #3a20101f;backdrop-filter:blur(2px)}
 .ksh .k3p{display:flex;flex-direction:column;padding:3px 6px;gap:0}
 .ksh .k3h{font-family:var(--display);font-size:.7rem;color:var(--gold);letter-spacing:.03em;border-bottom:1px solid var(--k-hair,#e6d3ac);margin-bottom:1px}

@@ -1069,6 +1069,11 @@ map (season · khắc left · travel cost legend · festival chip) is removed; t
 `kitUnroll(el)`: going to the map, it unrolls from the middle (the two rolls slide out), 620 ms; reduced motion: none.
 Live: `.game.maptab #panel .mapv` gets it on every render. kitBookSpread `double` = the leather map over the whole book area.
 
+### 34.1d Map labels — one look for every place, locked or not (owner 11/15 "map grey box", j41 accSpot)
+Every place on Dư đồ wears the SAME label: name + "N bóng · K khắc" (+ silhouettes). A place she cannot enter now adds only a small
+lock mark (`.mlock`, after the name) — no grey box over the map art, no reason line, no buttons on the map, nothing cut. Tapping the
+label opens the kit option card (`j77Card`): the reason, Xin yết kiến / Xin bái kiến, Lẻn vào (odds ladder, khắc, what is lost), wait.
+
 ### 34.1c kitBookLive — the LIVE game is the open book (every tab, both roads; owner 11/15 priority)
 `kitBookLive()` runs after every render (jbook, end): `.game.kbook` + a cover board (`.kbk-board`, grid child behind the page row).
 - iPad landscape (≥ 900 px, landscape): the room stage = LEFT picture page (room painting printed on the page: paper margin, thin red rule,
@@ -1228,30 +1233,31 @@ Not done here (other owners): kitRoulette (thân phận, review/kit-2b) and the 
 
 | who | factor (× adult woman) | ≈ share of the stage / picture height |
 |---|---|---|
-| adult woman | 1 | **KIT_FIG.h = .86** |
-| adult man / eunuch / official / physician (`fig-emperor/eunuch/official/physician/man-*`) | **KIT_FIG.man = 1.08** | ≈ .93 |
+| adult woman | 1 | **KIT_FIG.h = .79** (owner 11/15: the ratio approved in page-curl shot `dev/shots/curl2/ipad1180-tab-45.jpg`, measured .787) |
+| adult man / eunuch / official / physician (`fig-emperor/eunuch/official/physician/man-*`) | **KIT_FIG.man = 1.07** | ≈ .85 (capped under the place ribbon; the cap never shrinks the others) |
 | child, age a < 18 | `.55 + .03·a` (5 → .70, 10 → .85, 15 → 1) | by age |
 
 `KIT_FIG.fac(src, age)` = the factor of one figure file for one person. No other file may keep its own height factor
 (the old j59 `MANF`/`MEN`/child formula and the `.7` "tall stage" strip factor are gone; j59 reads KIT_FIG).
 
 Stage rule (j59 — every room / place / servant road / lãnh cung stage):
-1. Everybody in one scene has ONE scale: woman body height = .86 × stage height (feet on the floor line — the painted floor
-   anchor is honoured only while the kit height still fits — heads under the place ribbon). Men ×1.08, children by age.
-2. People stand in the open floor between the plaque gutters. An EMPTY plaque column (no plaques) reserves no gutter (jk3 k3Gut).
+1. Everybody in one scene has ONE scale: woman body height = .79 × stage height (feet on the floor line — the painted floor
+   anchor is honoured only while the kit height still fits — heads under the place ribbon). Men ×1.07 — a taller figure is CAPPED under the ribbon on its own, it never lowers the women. Children by age.
+2. People use the FULL stage width (owner 11/15): they may stand behind/under the RIGHT plaque column — its plaques float on top on a
+   solid card (`.kshR .k3p` opaque). The left gutter (if any) is kept. An EMPTY plaque column reserves no gutter (jk3 k3Gut).
 3. Widths count the visible body (bbox l..r), not transparent margins.
 4. The size never shrinks to fit more people: if all do not fit, the others stand in a strip of **equal whole-person slots**
    (slot = widest figure or widest name chip), the strip is exactly N slots wide, scrolls with scroll-snap per person, and the
    count chips "› N" / "N ‹" count the rest. When the right plaque column ends high, both chips stand in the empty gutter
    under it (› above, ‹ below) so the strip keeps its width for people.
-5. Only exception: a stage too narrow for her + ONE whole other person at .86 scales down just enough for exactly that pair
-   (measured: 1366x1024 → .62–.69, 1024x768 → .60, 1180x820 → .66 when the other is a wide-robed consort). Never smaller than that pair fit.
+5. No "her + 1" shrink any more (owner 11/15): only the "› N" strip decides who is visible. The one remaining exception is a stage
+   narrower than ONE whole person (without her), which scales down to exactly one person.
 6. Name chips are never cut: in the strip each slot is at least chip width + 8 px.
 
 Event stage (jk4 kitStageFig / kitEventStage, week-book person pages): each figure carries `--kfr = KIT_FIG.fac/KIT_FIG.man`,
 so a man fills the figure box and a woman / child stand at their kit ratio; feet share the bottom line (`.kesf` justify-end).
 
-Measured (dev/shots/review/fold-layout/k33-*.jpg; figure image height / stage height; 0 page errors, 0 horizontal overflow, 0 cut chips):
+Measured BEFORE 11/15 (.86 / ×1.08, superseded — see the book-release table in dev/review/LOG.md) (dev/shots/review/fold-layout/k33-*.jpg; figure image height / stage height; 0 page errors, 0 horizontal overflow, 0 cut chips):
 
 | viewport | consort room (her + 1) | cung nữ, master away (her + 1) | cung nữ, 3 people | cung nữ, 6 people |
 |---|---|---|---|---|

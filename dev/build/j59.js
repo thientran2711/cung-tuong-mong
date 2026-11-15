@@ -96,7 +96,9 @@ function j59lay(force){const st=document.getElementById("stage");if(!st||!S)retu
  const ppl=typeof curPeople==="function"?curPeople():[];
  const it=imgs.map(im=>{const s=im.getAttribute("src"),b=J59BB[s],tok=im.closest(".tok");return{im,tok,tag:tok.querySelector(".tag"),b,f:j59fac(s,ppl[+tok.dataset.p]),ar:im.naturalWidth/im.naturalHeight}});
  const mb=me?J59BB[me.getAttribute("src")]:null,mar=me?me.naturalWidth/me.naturalHeight:0;
- const boxW=(x,h)=>h*x.f/(x.b.b-x.b.t)*x.ar;const gap=6;
+ /* KIT 33 (owner 11/15): women stand KIT_FIG.h; a taller figure (man ×KIT_FIG.man) is CAPPED under the place ribbon (CAP) — it never shrinks the others */
+ let CAP=Infinity;const ef=(x,h)=>Math.min(h*x.f,CAP);
+ const boxW=(x,h)=>ef(x,h)/(x.b.b-x.b.t)*x.ar;const gap=6;
  /* compact stage (phones / narrow): one-line name chips tinted by the title colour */
  const cmp=sH<420||sW<520;st.classList.toggle("j59c",cmp);
  /* KIT 33 · ONE FIGURE SCALE (KIT_FIG, jkit.js): everybody stands KIT_FIG.h of the stage height (feet on the floor line, head under the
@@ -107,7 +109,7 @@ function j59lay(force){const st=document.getElementById("stage");if(!st||!S)retu
  const fxT=tk?[...tk.querySelectorAll(".tok:not(.fig)")]:[];fxT.forEach(t=>{t.style.width=t.style.minWidth=""});let fixed=0,fxMax=0;fxT.forEach(t=>{fixed+=t.offsetWidth+gap;fxMax=Math.max(fxMax,t.offsetWidth)});
  let topR=8;try{const t=document.getElementById("sc-t");if(t&&t.offsetHeight){const q=t.getBoundingClientRect();if(q.bottom>R.top)topR=Math.max(topR,q.bottom-R.top+4)}}catch(e){}
  topR=Math.min(topR,sH*.12);
- const gL=parseFloat(st.style.getPropertyValue("--kgl"))||0,gR=parseFloat(st.style.getPropertyValue("--kgr"))||0;let rightR=Math.max(8,gR);
+ const gL=parseFloat(st.style.getPropertyValue("--kgl"))||0,gR=parseFloat(st.style.getPropertyValue("--kgr"))||0;/* owner 11/15: people use the FULL stage width — they may stand under the right plaque column (plaques float on top, solid card) */let rightR=8;
  try{const h2=document.getElementById("hud2");if(!gR&&h2&&h2.offsetHeight&&!h2.classList.contains("khud")){const q=h2.getBoundingClientRect();if(q.bottom>R.top&&q.top<R.bottom&&q.width<sW*.45)rightR=Math.max(rightR,R.right-q.left+6)}}catch(e){}
  const maxF=Math.max(1,...it.map(x=>x.f));
  /* widths count the VISIBLE body only (bbox l..r): transparent margins of the art may overlap, so nobody is pushed out by empty pixels */
@@ -118,24 +120,25 @@ function j59lay(force){const st=document.getElementById("stage");if(!st||!S)retu
  const tw=it.map(x=>x.tag?x.tag.offsetWidth:0);
  const KA=st.__kfa;/* KIT_FLOOR anchor (jk2b kitFloorFit): feet on the painted floor line while the figure keeps its kit height */
  const size=(rows)=>{const fo0=Math.max(sH*.03,rows*(tagH+3)+6);const foA=KA&&KA.feet?sH-KA.feet:0;
-  const fo=Math.max(fo0,Math.min(foA,sH-topR-KF.h*sH*maxF));return{fo,H:Math.max(sH*.2,Math.min(KF.h*sH,(sH-fo-topR)/maxF))}};
+  const fo=Math.max(fo0,Math.min(foA,sH-topR-KF.h*sH));CAP=sH-fo-topR;return{fo,H:Math.max(sH*.2,Math.min(KF.h*sH,CAP))}};
  /* the plaque column only covers the top of the stage: when it ends above the heads, the people may use the full width under it */
- const headTop=(z)=>sH-z.fo-z.H*maxF;
+ const headTop=(z)=>sH-z.fo-Math.min(z.H*maxF,sH-z.fo-topR);
  const widthFor=(z)=>{let rr=rightR;try{const kR=document.getElementById("kshR");if(gR&&kR&&!kR.hidden&&kR.offsetHeight&&kR.getBoundingClientRect().bottom-R.top+4<headTop(z))rr=8}catch(e){}return{rr,avail:sW-8-rr-gL}};
  let crowd=!!force,Z=size(1),Wd=widthFor(Z);
  let strip=total(Z.H)>Wd.avail&&it.length>0;
  if(!strip){for(let i=1;i<it.length;i++){if((tw[i]+tw[i-1])/2+4>(visW(it[i],Z.H)+visW(it[i-1],Z.H))/2+4+gap)crowd=true}
   if(crowd){const Z2=size(2),W2=widthFor(Z2);if(total(Z2.H)<=W2.avail){Z=Z2;Wd=W2}else{crowd=false;strip=true}}}
- rightR=Wd.rr;const avail=Wd.avail;let {fo,H}=Z;const ov=0;
+ CAP=sH-Z.fo-topR;rightR=Wd.rr;const avail=Wd.avail;let {fo,H}=Z;const ov=0;
  /* strip: equal whole-person slots (figure or name chip, whichever is wider), as many as fit, centred in the open floor */
  let slot=0,nVis=0;const slotOf=(h)=>Math.max(fxMax,...it.map((x,i)=>Math.max(visW(x,h)+4,tw[i]+8)))+gap;
  let CUE=J59CUE;try{const kR=document.getElementById("kshR");const kb=kR&&!kR.hidden&&kR.offsetHeight?kR.getBoundingClientRect().bottom-R.top:0;if(strip&&rightR>=40&&kb<sH*.5){CUE=0;st.dataset.j59cg=String(rightR)}else delete st.dataset.j59cg}catch(e){}
  /* every token of the strip (people and the few non-figure tokens) takes one equal slot, so snapping always lands on whole people */
  const stripRoom=()=>avail-(me?meU*H+gap:0)-2*CUE;
- if(strip&&it.length){slot=slotOf(H);if(stripRoom()<slot-gap){let lo=sH*.15,hi=H;for(let k=0;k<22;k++){const m=(lo+hi)/2;const s=slotOf(m);if(avail-(me?meU*m+gap:0)-2*CUE<s-gap)hi=m;else lo=m}H=lo;slot=slotOf(H)}
+ /* no shrink for "her + 1 other": only a stage narrower than ONE whole person (without her) scales down */
+ if(strip&&it.length){slot=slotOf(H);if(avail-2*CUE<slot-gap){let lo=sH*.15,hi=H;for(let k=0;k<22;k++){const m=(lo+hi)/2;const s=slotOf(m);if(avail-2*CUE<s-gap)hi=m;else lo=m}H=lo;slot=slotOf(H)}
   nVis=Math.max(1,Math.min(it.length+fxT.length,Math.floor((stripRoom()+gap)/slot)))}
  it.forEach((x,i)=>{x.tok.style.minWidth=x.tok.style.width=strip?(slot-gap).toFixed(1)+"px":""});fxT.forEach(t=>{t.style.minWidth=t.style.width=strip?(slot-gap).toFixed(1)+"px":""});
- for(const x of it){x.im.style.setProperty("height",(H*x.f/(x.b.b-x.b.t)).toFixed(1)+"px","important");{const w=boxW(x,H);x.im.style.setProperty("margin-left",(-w*x.b.l).toFixed(1)+"px","important");x.im.style.setProperty("margin-right",(-w*(1-x.b.r)).toFixed(1)+"px","important")}x.im.style.setProperty("width","auto","important");x.im.classList.add("j59sz");x.im.style.translate="";if(x.tag)x.tag.style.translate=""}
+ for(const x of it){x.im.style.setProperty("height",(ef(x,H)/(x.b.b-x.b.t)).toFixed(1)+"px","important");{const w=boxW(x,H);x.im.style.setProperty("margin-left",(-w*x.b.l).toFixed(1)+"px","important");x.im.style.setProperty("margin-right",(-w*(1-x.b.r)).toFixed(1)+"px","important")}x.im.style.setProperty("width","auto","important");x.im.classList.add("j59sz");x.im.style.translate="";if(x.tag)x.tag.style.translate=""}
  let meH=0,meW=0,meV=0,meC=0;if(me){meH=H/(mb.b-mb.t);meW=meH*mar;meV=meW*Math.max(.2,mb.r-mb.l);meC=((mb.l+mb.r)/2-.5)*meW;me.style.setProperty("height",meH.toFixed(1)+"px","important");me.classList.add("j59sz")}
  if(tk){tk.classList.toggle("j59st",crowd);tk.classList.toggle("j59strip",strip);tk.style.setProperty("--j59m1",(tagH+6)+"px");
   if(strip){const sw=nVis*slot-gap,used=(me?meV+gap:0)+2*CUE+sw;const x0=8+gL+Math.max(0,(avail-used)/2);if(me)me.style.left=(x0+meV/2-meC).toFixed(1)+"px";const L0=(me?x0+meV+gap:x0)+CUE;
