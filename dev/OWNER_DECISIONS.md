@@ -242,3 +242,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (05:18Z) Owner DUYỆT cỡ hoa điền thu nhỏ (c12 Phi) → làm chuẩn cỡ cho mọi bậc.
 - (05:20Z) Owner: tab Hậu cung phải có cả Hoàng thượng, Thái hậu (nhóm đầu dải người, thẻ người + việc có sẵn). review/hau-cung-ui.
 - (05:25Z) Owner: 'Ngươi với nàng / Nàng với ngươi' khó hiểu → nhãn chủ-vị rõ: 'Nàng quý ngươi: <mức> · số', 'Nàng oán ngươi: số', 'Ngươi quý nàng…', 'Hoàng hậu quý ngươi +4'; mức: Ghét/Không ưa/Bình thường/Có cảm tình/Quý mến/Thân thiết. Mọi nơi (thẻ, Giao tình, việc, kết quả, sổ ghi).
+- (05:28Z) Owner bực: lỗi Thỉnh an Hoàng hậu không tăng quan hệ đã báo từ 14/11 mà chưa sửa (phiên cũ không ghi). → HOTFIX ưu tiên số 1 (review/hotfix-thinhan), lên live ngay khi qua kiểm.
