@@ -100,7 +100,7 @@ async function plan(){
  if(!r||!r.ok)r=await caches.match("assets.json",{ignoreSearch:true});if(!r)return false;
  MAN=await r.json();const c=await caches.open(AC);HAVE=new Set((await c.keys()).map(q=>q.url));
  await migrate(c);
- coreList=[];figList=[];for(const f of MAN.files){const g=f[3]==="core"?"core":"fig",G=KLOAD[g];G.total+=f[2];
+ coreList=[];figList=[];for(const f of MAN.files){if(f[3]==="fx")continue;/* KIT §68 painted effects: on demand, never ahead */const g=f[3]==="core"?"core":"fig",G=KLOAD[g];G.total+=f[2];
   if(HAVE.has(keyOf(f))){G.have+=f[2];G.files++}else{(g==="core"?coreList:figList).push(f);G.left++}}
  return true}
 /* older builds kept files in 'ctm-<timestamp>' under their plain path: move those whose content still matches, then drop the old cache */
