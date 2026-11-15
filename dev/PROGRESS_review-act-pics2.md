@@ -141,3 +141,11 @@ LEFT (unchanged from the list above unless noted)
 - The 8 veil/scar/spy keys are wired.
 - Note: 23 of the 36 newly referenced pictures (earlier gens2 system-line batch) show full figures. They are book event/result lines, which may show people, so I kept them. Coordinator decides whether to redraw any as hands-only.
 - Also: live ACTS.json has 510 of meanings.py's 837 rules. About 250 other act-pics2 meaning rules have never been merged; that is outside this patch.
+(b) More "man" identities: DONE, live.
+- Finding: suitors and the Bắc Địch prince use jht's private ctFace, which reads img/FIGURES-congtu.json (congtu-1..10, a18 + a26 only), never the men pool. With more than 10 live suitors, the rest fell back to initials.
+- New: quytu-1..9 (young noblemen; scholar, noble, martial, merchant and hunter looks) and bacdich-1 (northern steppe prince, fur-trimmed robe, no Qing hat).
+  - Each has the 4 age bands a18, a26, a36 and a51 (figure + portrait), drawn as one gpt-2-6 lineup of 4 ages, background removed, cut by dev/figwork/menpool2/proc.py, portraits by porcrop.py.
+  - Colours: no pink or purple. 80 files, plus FIGURES-congtu.json (20 identities, 60 entries), on the CDN; every entry checked.
+- Code: dev/build/jct2.js (after jht in assemble.py) wraps window.h54Face. The Bắc Địch prince always gets bacdich-1, and ordinary suitors only take it if every other face is live.
+- Test: dev/test/suitor-faces.js, 18 known suitors. 0 without a portrait, 0 duplicate faces, the prince gets por-man-bacdich-1, no page errors.
+  - Unmet suitors still show the "unknown" silhouette (jht stranger rule, unchanged).
