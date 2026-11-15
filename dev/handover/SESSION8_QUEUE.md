@@ -77,7 +77,7 @@ j72 bước vs Hồi · stage paper halo · Thái hậu title bronze vs plum · 
 | C20 | review/act-text (owner s8: broken/unclear act card text, whole family) | RUNNING |
 | C21 | review/khac-day @ 0ce947402 (j76need one source) | REVIEWING (khac-day-r1) |
 | C22 | review/boot-flash (owner s8: raw old skeleton flashes on launch) | RUNNING |
-| C22 | review/boot-flash (spawn failed: subagent cap 20) | QUEUED-NEXT |
+| C22 | review/boot-flash | RUNNING |
 | C23 | review/mg-easy (owner s8: Thơ minigame too hard; visible rhyme, hints, level-scaled; audit all knowledge minigames) | QUEUED-NEXT |
 | C24 | review/chapter-detail (owner s8: tap chapter shows nothing; detail + inline progress; no dead taps) | QUEUED-NEXT |
 | C25 | review/press-fx (owner s8 URGENT: whole pane bounces on any tap) | RUNNING |
