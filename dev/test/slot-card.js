@@ -3,6 +3,8 @@
    words, and shoots each. usage: node dev/test/slot-card.js <build page url> <outdir> <tag> [WxH@dpr,…]
    (default 755x1000@2,1000x755@2,1180x820@2). Images missing from a sparse checkout come from the live site. */
 const {chromium}=require('playwright');const fs=require('fs');const https=require('https');
+/* start() may finish after the loading screen: wait for the life, and start again while it is a servant life */
+async function kcWait(p){for(let i=0;i<40;i++){await p.waitForFunction(()=>typeof S!=="undefined"&&S&&S.name,null,{timeout:90000});if(!(await p.evaluate(()=>typeof isSrv==="function"&&isSrv())))return;await p.evaluate(()=>{S=null;start()})}}
 const [,,PAGE,OUT,TAG,SIZES]=process.argv;fs.mkdirSync(OUT,{recursive:true});
 const sleep=t=>new Promise(r=>setTimeout(r,t));const LIVE='https://thientran2711.github.io/cung-tuong-mong/';const cache=new Map();
 const live=p=>cache.has(p)?Promise.resolve(cache.get(p)):new Promise(res=>https.get(LIVE+p,r=>{const c=[];r.on('data',d=>c.push(d));r.on('end',()=>{const v={status:r.statusCode,body:Buffer.concat(c),ct:r.headers['content-type']||''};if(cache.size<500)cache.set(p,v);res(v)})}).on('error',()=>res({status:404,body:Buffer.alloc(0),ct:''})));
@@ -16,11 +18,11 @@ const live=p=>cache.has(p)?Promise.resolve(cache.get(p)):new Promise(res=>https.
   const p=await ctx.newPage();p.setDefaultTimeout(120000);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
   await p.goto(PAGE,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof showModal==='function');await sleep(2500);
   await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;
-   for(let i=0;i<60;i++){start();if(!isSrv())break}Q.length=0;const md=document.getElementById("modal");if(md)md.hidden=true;try{NLP=null}catch(e){}
+   start()});await kcWait(p);await p.evaluate(()=>{Q.length=0;const md=document.getElementById("modal");if(md)md.hidden=true;try{NLP=null}catch(e){}
    /* something in each slot to look at: a bracelet worn, a second hairpin in the bag, a sachet */
    for(const k of Object.keys(IT)){const it=IT[k];if(it.sl==="wrist"&&!S.inv.some(e=>IT[e.k]&&IT[e.k].sl==="wrist")){S.inv.push({k,w:1})}if(it.sl==="scent"&&!S.inv.some(e=>IT[e.k]&&IT[e.k].sl==="scent"))S.inv.push({k})}
    S.bac=400;tab="inv";render();const kr=document.getElementById("kroul");if(kr)kr.remove()});
-  await sleep(1000);await p.addStyleTag({content:'#kroul{display:none!important}'});
+  await sleep(1800);await p.addStyleTag({content:'#kroul,#kroulw{display:none!important}'});await p.evaluate(()=>{document.querySelectorAll('#kroul,#kroulw').forEach(e=>e.remove());Q.length=0;const md=document.getElementById('modal');md.hidden=true;md.className='modal';try{NLP=null}catch(e){}if(typeof tab!=='undefined'&&tab==='inv')render();else render()});await sleep(300);
   const imgs=()=>p.evaluate(()=>Promise.all([...document.querySelectorAll('img')].filter(i=>i.offsetParent).map(i=>i.complete?0:new Promise(r=>{i.onload=i.onerror=r;setTimeout(r,6000)}))));
   const tile=await p.evaluate(()=>{const t=document.querySelector('#panel .kitem');const r=t&&t.getBoundingClientRect();return r?[Math.round(r.width),Math.round(r.height)]:null});
   const R={sz,tile,cards:{}};
