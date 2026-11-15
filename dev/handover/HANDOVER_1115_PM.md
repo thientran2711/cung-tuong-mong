@@ -264,3 +264,4 @@ Worker worktrees at /home/user/wt/<name>. Rule summaries for workers: /home/user
 - Repack done: shared .git 18 GB → 2.3 GB, disk 24 GB free. Started: tassel-fix, small-bugs-2, R poison-gift, R ts-a (+bot balance). trung-y art COMPLETE (84 faces × 8 tiers × 4 ages on CDN) → jty.js code review spawned.
 - scene-light af6a7123: wide Tuần lục figures no longer shrunk (train behind paper panel), 8 edge-cut figures outpainted on CDN (~344 credits), smudge detector calibrated → 0 real smudges, no batch. → re-review.
 - scene-light r8 FAIL (51f10427): text cut on figover pages, re-layout jumps reader + global resize, text column ~90–150px. Coordinator decision: min text column ~220px, figure may go to 85% height (never below). Sent back to worker.
+- LIVE main = kit-table (e7148caf9): one kit label|value table everywhere (KIT §51), kitReqRows for Sắc phong, compact act cards keep one table (jk4 — kit-fig2 must keep this). Queued: toast over dialog at 844x390.
