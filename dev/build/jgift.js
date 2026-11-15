@@ -146,7 +146,7 @@ html body #mb .kesov>.kpsn[data-row="1"]{bottom:calc(12px + 2.6em)!important}
    · go where he is this buổi (S.where.emp): walk there (Dư đồ cost), or "Xin yết kiến" at Dưỡng Tâm điện / ngự thư phòng (j41 accAsk, accAskO = odA)
    · "Dâng quà": a picker of her bag — handmade works and bought gifts — each with the same evaluation as the gift dialog (wkEval: one handmade
      work a week, repeats tire him; giftVal for bought items); the Thái hậu card: "Thỉnh an" (Đức Thọ cung, mornings, j41) and "Dâng quà".
-   Not built (no mechanics yet, listed in the report): hầu cờ / đánh đàn on request, mời ngài dạo ngự hoa viên. */
+   Hầu cờ / đánh đàn / dạo ngự hoa viên: KM_EMPACT below (one meeting a day, shared with Xin yết kiến). */
 function giftBagFor(t){return S.inv.map((e,i)=>[e,i]).filter(([e])=>e&&!e.h&&(e.wk||IT[e.k])).map(([e,i])=>Object.assign({e,i},giftEval(e,t)))}
 PEND.giftto=p=>{const t=p.t;const L=giftBagFor(t);if(!L.length)return{t:"<p>Rương trống: chưa có món nào để dâng.</p>",o:[{n:"Thôi",fx:{},kgx:1}]};
  L.sort((a,b)=>(b.ok-a.ok)||(b.v-a.v));const who=t==="emp"?"Hoàng thượng":"Thái hậu";
@@ -156,7 +156,7 @@ PEND.giftto=p=>{const t=p.t;const L=giftBagFor(t);if(!L.length)return{t:"<p>Rư�
 function courtMeet(t){const B=[];try{
  if(t==="emp"){const k=(S.where||{}).emp;const night=(S.buoi||0)>=3;
   if(k&&!night&&S.place!==k){const st=accState(k);const nm=accName(k);
-   if(st.ask==="yk")B.push(pbtn(`data-acask="${k}"`,`Xin yết kiến ở ${nm}`,accAskLine(k),st.empAway?"Hoàng thượng không có ở đây":!can(1)?"hết khắc":""));
+   if(st.ask==="yk")B.push(pbtn(`data-acask="${k}"`,`Xin yết kiến ở ${nm}`,accAskLine(k),st.askWhy||(!can(1)?"hết khắc":"")));
    else if(!st.why)B.push(pbtn(`data-kgmgo="${k}"`,`Đến ${nm} gặp ngài`,`Nắm chắc · tốn: ${st.tc||0} khắc · thành: đến nơi ngài đang ngự, gặp được ngài`,!can(st.tc||0)?"hết khắc":""));
    else B.push(pbtn(`data-kgmgo="${k}" disabled`,`Đến ${nm} gặp ngài`,"",st.why))}
   else if(S.place===k)B.push(`<p class="kr3note">Ngài đang ở đây: chạm vào ngài trên sân khấu để trò chuyện.</p>`)}
@@ -187,11 +187,12 @@ document.addEventListener("click",ev=>{const g=ev.target.closest&&ev.target.clos
 window.BAL=window.BAL||{};BAL.empDay=Object.assign({p:.06,suc:5,walkNight:15},BAL.empDay||{});
 function kmEmpFree(){const k=(S.where||{}).emp;if((S.buoi||0)>=3)return{ok:false,why:"đã tối"};if(!k)return{ok:false,why:"không rõ ngài ở đâu"};
  if(k==="thu")return{ok:false,why:"ngài đang phê tấu ở Cần Chính điện"};if(/^r\d/.test(k)||k==="kn")return{ok:false,why:"ngài đang ở cung phi tần khác"};return{ok:true,k}}
-function kmStorm(){const n=String(S.wx&&S.wx.n||"");return /giông|bão|tuyết dày|mưa to|mưa lớn/i.test(n)}
+function kmStorm(){const f=S.wx&&S.wx.f;return f===3||f===4}  /* j12 weather flags: 3 giông tố, 4 tuyết dày */
 function kmEmpO(a,kind){const sung=a.sung||0;
  if(kind==="ky"||kind==="cam"){const L=(a.arts&&a.arts[kind])||0;return odA(a,25+artW(kind,L)*10+mm()+sung/5)}
  return odA(a,20+sung/3+effSac(a)/6+mm())}
-function kmEmpWhy(a,kind){if(a.kmEmpDay===wk())return"hôm nay đã hầu ngài một lần";const f=kmEmpFree();if(!f.ok)return f.why;
+const KM_DAYWHY="hôm nay đã gặp ngài một lần";
+function kmEmpWhy(a,kind){if(a.kmEmpDay===wk())return KM_DAYWHY;const f=kmEmpFree();if(!f.ok)return f.why;
  if((kind==="ky"||kind==="cam")&&!((a.arts&&a.arts[kind])>=1))return `cần ${kind==="ky"?"Kỳ":"Cầm"} bậc 1`;if(kind==="walk"&&kmStorm())return"trời giông bão";if(a===S&&!can(2))return"hết khắc";if((a.suc||0)<BAL.empDay.suc+5)return"Sức quá thấp";return""}
 const KM_EMPACT={ky:["Xin hầu cờ","Ngươi xin bày bàn cờ, hầu Hoàng thượng một ván."],cam:["Xin đánh đàn hầu ngài","Ngươi mang đàn đến, xin gảy một khúc cho ngài nghe."],
  walk:["Mời ngài dạo ngự hoa viên","Ngươi mời Hoàng thượng thong thả dạo ngự hoa viên."]};
@@ -219,6 +220,13 @@ document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.clos
  else Q.push({t:KM_EMPACT[kind][0],h:`<p>${KM_EMPACT[kind][1]}</p><p class="${r.ok?"g":"r"}">${r.txt}</p>`});
  showModal();render()},true);
 (function(){const c0=courtMeet;courtMeet=function(t){const B=c0.apply(this,arguments);if(t==="emp")try{B.splice(Math.max(0,B.length-1),0,...kmEmpBtns())}catch(e){}return B}})();
+/* Xin yết kiến shares the one-a-day meeting with the three acts (coordinator 13:35Z): accState gives askWhy (the one reason every
+   yết kiến button / card shows), accAsk marks the day. */
+(function(){const s0=accState;accState=function(k){const st=s0.apply(this,arguments);try{if(st&&st.ask==="yk"){
+   if(S.kmEmpDay===wk()&&!st.empAway){st.askOk=false;st.dayDone=1}
+   st.askWhy=st.empAway?"Hoàng thượng không có ở đây":st.dayDone?KM_DAYWHY:!st.askOk?"hết khắc":""}}catch(e){}return st};
+ const a0=accAsk;accAsk=function(k){let yk=false;try{const st=accState(k);if(st.ask==="yk"){if(st.dayDone)return;yk=true}}catch(e){}
+  const c=used;const r=a0.apply(this,arguments);try{if(yk&&S&&used!==c)S.kmEmpDay=wk()}catch(e){}return r}})();
 /* NPC consorts: the same acts, a small chance each tuần (BAL.empDay.p), the one their arts suit */
 (function(){if(typeof nextBuoi!=="function")return;const n0=nextBuoi;nextBuoi=function(){const r=n0.apply(this,arguments);try{if(S&&!S.dead&&(S.buoi||0)===1)for(const v of liveRivals(false)){if(!v||v.out||v.confined||!roll(BAL.empDay.p*100))continue;
    const kind=(v.arts&&v.arts.ky>=1&&roll(40))?"ky":(v.arts&&v.arts.cam>=1&&roll(50))?"cam":"walk";kmEmpAct(v,kind)}}catch(e){}return r}})();

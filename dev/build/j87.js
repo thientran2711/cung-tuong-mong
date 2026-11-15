@@ -250,12 +250,14 @@ function kbkKeySrc(key,salt,t,html){key=String(key||"");if(!key)return[];
 function kbkCands(f,ctx,salt){const html=String(f.text||"");const t=kpPlain(html).replace(/[\s\u00a0]+/g," ").trim();const C=[];const add=a=>{for(const x of [].concat(a||[]))if(x&&!C.includes(x))C.push(x)};
  const head=t.split(/[.:·([]/)[0].trim();
  const R=(typeof KIT_ACTS!=="undefined"&&KIT_ACTS.log)||[];
- for(const [re,key] of R){let ok=false;try{ok=new RegExp(re,"i").test(t)}catch(e){}if(ok){add(kbkKeySrc(key,salt,t,html));break}}
+ for(const [re,key] of R){let ok=false;try{ok=new RegExp(re,"i").test(t)}catch(e){}if(ok){if(key==="-")return[];add(kbkKeySrc(key,salt,t,html));break}}  /* "-" = a line with no meaning: no picture */
  if(/^Đến /.test(t))add(kbkPlaceArt(t,html));
  let ak="";try{ak=head.length>=3&&typeof kitActKey==="function"?kitActKey(head):""}catch(e){}if(ak)add(`img/act-${ak}.webp`);
  for(const [re,id] of KBK_EVRE)if(re.test(t)){add(kbkEvFiles(id,salt));break}
  try{const cat=kitActCat(head||t);if(((KIT_ACTS||{}).have||[]).includes("act-cat-"+cat))add(`img/act-cat-${cat}.webp`)}catch(e){}
- add(kbkEvFiles(kbkEvId(t,ctx),salt));
+ /* the page default only on the Emperor's / Thái hậu's own pages (a picture of that person); her lines, other people's and the world's get
+    NO picture rather than the same "Có người đến" room on every line (act-pics2 a467 / owner: one meaning = one picture) */
+ if(!C.length&&(ctx==="emp"||ctx==="th"))add(kbkEvFiles(kbkEvId(t,ctx),salt));
  return C}
 /* a picture made for this very line (ACTS.json log rule or act name), "" when only a general one would fit */
 function kbkSpecific(t){t=kpPlain(t).replace(/[\s\u00a0]+/g," ").trim();const R=(typeof KIT_ACTS!=="undefined"&&KIT_ACTS.log)||[];
