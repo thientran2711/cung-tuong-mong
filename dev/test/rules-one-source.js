@@ -29,7 +29,7 @@ const fresh=()=>{try{localStorage.clear()}catch(e){}document.getElementById('tit
    for(const q of rivals)if(q.queen){q.queen=false;q.rank=Math.min(q.rank,5)}
    const N=hhNeed(S),O=oldEff(S);out.n++;
    if(N.th!==O.th||N.duc!==O.duc)out.bad.push(['need',N,O]);
-   const L=promoReqP(S),tl=L.find(x=>/Thái hậu/.test(x[1])&&/hoàng tử/.test(x[1])),dl=L.find(x=>/^Đức /.test(x[1]));if(L.some(x=>/\d\/\d/.test(x[1])))out.bad.push(['fraction',L.map(x=>x[1])]);
+   const L=promoReqP(S),tl=L.find(x=>/Thái hậu/.test(x[1])&&/hoàng tử/.test(x[1])),dl=L.find(x=>/^Đức /.test(x[1]));if(L.some(x=>/\\d\\/\\d/.test(x[1])))out.bad.push(['fraction',L.map(x=>x[1])]);
    if(!tl||!tl[1].includes('(cần '+N.th+')'))out.bad.push(['thText',tl&&tl[1],N.th]);
    if(!dl||!dl[1].includes('(cần '+N.duc))out.bad.push(['ducText',dl&&dl[1],N.duc]);
    if(tl&&tl[0]!==(S.th>=O.th))out.bad.push(['thCheck',S.th,O.th]);
