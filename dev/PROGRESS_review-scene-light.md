@@ -28,6 +28,27 @@ Luôn bắt đầu từ bản CDN (`https://ctm-img.victoria-tntt.workers.dev/im
    Mới chạy được 1 tệp (fig-consort-c10-t8-a36: +7 px trái) rồi dừng. Tệp mà nguồn cũng chạm mép canvas (a18-trái, a51-phải; 752×1344 là tách riêng từng hình) → phải mở rộng tranh (gpt-2-6 ~270 tín dụng/tệp): LIỆT KÊ + giá cho điều phối trước khi tiêu.
    URL nguồn: creations_get theo id `bg` trong FIGURES*.json (token hết hạn → lấy lại).
 
+
+## SESSION 15/11 ~10:00–11:30Z (worktree /home/user/wt/scene-light, sparse: no dev/shots, dev/owner-shots)
+- Env note: system opencv is 5.0 (no CascadeClassifier) → tools needing Haar run with `.ahcache/venv/bin/python` (venv with opencv-python-headless<5).
+- DONE (pushed): merge main ca361b147; rain on graded scenes = warm soft light (jsl.js), Ngọc Thanh các checked xuân/hạ × 4 buổi (`.kown` filter none);
+  Tuần lục wide figures: kitBookFigClamp widens the figure column (≤ 66 % of page) on wide pages, phones keep shift-inside; KIT.md §56 (was §41 on the branch; renumbered by reviewer r7).
+- Neck "dark wedge" (owner 17:40Z, black blob on the neck under the ear): `dev/art/dark-residue.py` (Haar face gating + small upright dark
+  triangle under the ear touching transparency) → 795 / 5 750 figs flagged; fix = make the wedge transparent. Work dir .ahcache/hb/neckfix.
+  Portraits scanned too (.ahcache/hb/porneckfix).
+- Edge cuts: `tools/ec.py` re-run with source cut-outs (Magnific creations_get → .ahcache/ec/bg): extended from source = c10-t8-a36 (+7),
+  m01-t8-a26 (+18), m22-t8-a36 (+20), m32-t8-a18 (+3, still at canvas edge). Need OUTPAINT (source sheet itself cut at canvas edge):
+  c10-t8-a18, m12-t7-a18, m15-t8-a18, m17-t7-a18, m30-t8-a18, m33-t7-a18, m36-t6-a18 (+ m32-t8 rest). Others in the list = lantern/box
+  touching the edge, nothing beyond in the source (not a visible cut). physician-p3-a18: no source id.
+- Rosy skin: CDN measure (skin-smudge analyse, a* < 8.0) = 956 por (not 807 — older count); list .ahcache/rosy.txt. Pipeline order per file:
+  ec extension → neck wedge → rosy (hb.py) → cdn_sync in batches, delete local.
+- LIVE CDN (11:40Z): neck wedge fix 792 + 13 figs (men excluded: nape hair/hat ribbons are real) + 155 por; rosy skin 954 por + 939 figs
+  (15 figs MISS = no face box in the fig, por done); 4 figs extended from source sheets. Lists: dev/art/neck-residue-fixed.txt,
+  dev/art/skin-rosy-fixed.txt. Sheets (small): dev/art/scene-light/{neck-wedge,rosy}-before-after.jpg, edge-extend.jpg.
+  Rescan of the fixed figs: 8 / 799 still flag a smaller second wedge (left as is).
+- NOT DONE: smudge clean (skin-smudge fix) — detector still catches wrinkles/beards, not calibrated; rosy uploads did not include it.
+  Edge OUTPAINT for 8 figs (list above) — needs Magnific credits (~270 each per earlier estimate), waiting for coordinator.
+
 ## LỖI ĐÃ BIẾT
 - Chạy thử trên máy: màn "Luân hồi" phủ sân khấu → script phải ẩn phần tử phủ (book.js đã làm). Máy không WebGL → không thấy vệt mưa.
 - skin-smudge: phát hiện "da bẩn" chủ yếu bắt râu/nếp nhăn → đã bỏ nam khỏi xếp hạng; cần hiệu chỉnh.
