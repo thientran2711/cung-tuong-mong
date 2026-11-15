@@ -601,7 +601,7 @@ function kitRoulette(o){const done=()=>{try{o.done&&o.done()}catch(e){}};if(!o||
 `;document.head.appendChild(st)})();
 
 /* ---------- 15. kitItem — ONE item tile for every item anywhere (chest, Tư trang, wardrobe slots K1/K2, reward chests, peddler, works,
-   reward panels). A simple frame (not the portrait frame): border + ground coloured by grade. Sizes sm (44 px) · md (64) · lg (96).
+   reward panels). A simple frame (not the portrait frame): border + ground coloured by grade. Sizes sm (52 px) · md (72) · lg (104) · xl (150, the reveal spotlight KIT §42).
    kitItem({src, name, grade(0..4), qty, label:[text,"ok"|"no"|"n"], on, empty, size, data:"attrs", tip}) → HTML.
    Grades (KIT_GRADE): Thường grey-taupe · Tinh phẩm jade green · Trân phẩm sapphire blue · Tuyệt phẩm amethyst purple · Ngự tứ imperial gold-red.
    Picture: itemArt(k) (j98, review/item-art) when present, else wd-* icons, else the item's own icon; kitItemSrc(k, fallback). ---------- */
@@ -635,7 +635,8 @@ document.addEventListener("click",ev=>{const t=ev.target.closest&&ev.target.clos
 (function(){const st=document.createElement("style");st.id="k2b-item";st.textContent=`
 .kitem{display:inline-flex;flex-direction:column;align-items:center;gap:2px;vertical-align:top;width:var(--isz);cursor:default;text-align:center}
 .kitem[role=button]{cursor:pointer}
-.kitem-sm{--isz:52px}.kitem-md{--isz:72px}.kitem-lg{--isz:104px}
+.kitem-sm{--isz:52px}.kitem-md{--isz:72px}.kitem-lg{--isz:104px}.kitem-xl{--isz:150px}
+.kitem-xl>.kitn{font-size:.9rem}
 .kitem-slot{--isz:100%;width:100%}
 .kitem.kitem-slot.kitem-empty>.kitb{background:linear-gradient(#efe5d2,#e9dcc5);border:1px solid #d6c29c;box-shadow:inset 0 2px 5px #5a3a2030,inset 0 -1px 0 #fff8}
 .kitem .kitm{position:absolute;right:2px;top:2px;font-style:normal;font-size:.58rem;line-height:1.3;border-radius:5px;padding:0 4px;background:#fffaf0e6;border:1px solid}

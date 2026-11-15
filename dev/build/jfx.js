@@ -237,24 +237,16 @@ document.addEventListener("click",e=>{if(e.target&&e.target.closest&&e.target.cl
    (bestow → kitReward chest/tray; a gift from another person → kitReward tray/gift box) goes through kitGain: works from Tài nghệ /
    lessons / mini-games (cooking, embroidery, painting, calligraphy, music…), purchases, finds, stories, anything else. So no call site
    can add an item silently. Test: dev/test/item-gain.js. Hooks for tests: KFX.gains [{name, grade}], KFX.rewards (kitReward items). */
-function kgInfo(x){const e=x&&typeof x==="object"?x:{k:x};const it=(typeof IT==="object"&&IT[e.k])||{};let a=null;try{a=typeof itemArt==="function"?itemArt(e.wk?e:e.k):null}catch(err){}
- let src=a?(a.src512||a.src):"";
- /* garments / hairpins (j92 WD_ITEMS: own icon + grade, as the Tư trang bag draws them) and veils (jveil vlSrc) */
- const wd=typeof WD_ITEMS==="object"&&WD_ITEMS[e.k];if(wd&&wd.icon){src=wd.icon;a={grade:wd.g|0}}
- if(!src&&it.vl&&typeof vlSrc==="function")try{src=vlSrc(e.k)}catch(err){}
- if(!src&&typeof kmItemImg==="function")src=kmItemImg(e.k);
- const KG=typeof KIT_GRADE!=="undefined"?KIT_GRADE:[{n:"Thường",c:"#9a8a78"}];
- if(e.wk){const ti=Math.max(0,Math.min(3,e.wk.ti|0));return{name:e.wk.n||it.n||"",grade:ti,gname:(typeof WTIER!=="undefined"?WTIER[ti]:KG[ti].n),col:KG[ti].c,src,sub:"Tác phẩm tự tay"}}
- const g=a?a.grade|0:0;return{name:it.n||String(e.k||""),grade:g,gname:KG[g].n,col:KG[g].c,src,sub:it.kd||""}}
+/* name / painting / REAL grade of an entry = KIT §54.1 kitItemInfo (jkrev), the same as the Tư trang bag */
+function kgInfo(x){return kitItemInfo(x)}
 function kitGain(x,o){o=o||{};if(!kfOn())return;const I=kgInfo(x);KFX.gains=KFX.gains||[];KFX.gains.push({name:I.name,grade:I.gname,src:I.src});
- const run=done=>{const still=kfStill();const ov=document.createElement("div");ov.className="kmov kfgain"+(still?" km-red":"");ov.setAttribute("role","dialog");ov.setAttribute("aria-label",I.name);
-  ov.style.setProperty("--gc",I.col);
-  ov.innerHTML=`<div class="kfg"><div class="kfgl"></div><div class="kfgi">${I.src?`<img src="${I.src}" alt="" draggable="false">`:""}</div><b class="kfgn">${I.name}</b><span class="kfgg">${I.gname}${I.sub?` · ${I.sub}`:""}</span>${o.from?`<small class="kfgf">${o.from}</small>`:""}<button type="button" class="kbtn kfgok">Nhận</button></div>`;
-  document.body.appendChild(ov);try{sfx("sfx-open")}catch(e){}if(!still){const r=ov.querySelector(".kfgi").getBoundingClientRect();kfPx("stars",{x:r.left+r.width/2,y:r.top+r.height/2,r})}
-  let closed=false;const close=e=>{if(e)e.stopPropagation();if(closed)return;closed=true;const im=ov.querySelector(".kfgi img");
+ const run=done=>{const still=kfStill();const RV=(typeof BAL==="object"&&BAL.reveal)||{};const t0=Date.now();const ov=document.createElement("div");ov.className="kmov kfgain"+(still?" km-red":"");ov.setAttribute("role","dialog");ov.setAttribute("aria-label",I.name);
+  ov.innerHTML=`<div class="kmst">${kitRevealHTML(I,{from:o.from})}<button type="button" class="kbtn krevok" style="--kok:${(RV.rise||550)+400}ms">Nhận</button></div>`;
+  document.body.appendChild(ov);try{sfx("sfx-open")}catch(e){}if(!still){const it=ov.querySelector(".krev>.kitem");const r=it&&it.getBoundingClientRect();if(r)setTimeout(()=>kfPx("stars",{x:r.left+r.width/2,y:r.top+r.height/2,r}),Math.round((RV.rise||550)*.6))}
+  let closed=false;const close=e=>{if(e)e.stopPropagation();if(closed)return;if(!still&&Date.now()-t0<(RV.gainMin||900)&&!(e&&e.target&&e.target.closest&&e.target.closest(".krevok")))return;closed=true;const im=ov.querySelector(".krev .kitb img");
    const tb=[...document.querySelectorAll('#tabs [data-tab="inv"],#tabs [data-kg]')].find(t=>t.offsetWidth&&(t.dataset.tab==="inv"||/Tư trang/.test(t.textContent)))||document.querySelector('[data-tab="inv"]');
    try{sfx("sfx-coin");vib("coin")}catch(err){}
-   if(im&&tb&&!still&&im.animate){const a=im.getBoundingClientRect(),b=tb.getBoundingClientRect();const fl=im.cloneNode();fl.className="kfgfly";fl.style.cssText=`left:${a.left}px;top:${a.top}px;width:${a.width}px;height:${a.height}px`;document.body.appendChild(fl);
+   if(im&&tb&&!still&&im.animate){const a=im.getBoundingClientRect(),b=tb.getBoundingClientRect();const fl=im.cloneNode();fl.className="krevfly";fl.style.cssText=`left:${a.left}px;top:${a.top}px;width:${a.width}px;height:${a.height}px`;document.body.appendChild(fl);
     const dx=b.left+b.width/2-(a.left+a.width/2),dy=b.top+b.height/2-(a.top+a.height/2),sc=Math.max(.12,Math.min(b.width,b.height)/Math.max(1,a.width));
     const an=fl.animate([{transform:"none",opacity:1},{transform:`translate(${dx*.5}px,${dy*.5-60}px) scale(.6)`,opacity:1,offset:.5},{transform:`translate(${dx}px,${dy}px) scale(${sc})`,opacity:.2}],{duration:620,easing:"cubic-bezier(.5,0,.6,1)"});
     an.onfinish=()=>{fl.remove();tb.classList.remove("kfhit");void tb.offsetWidth;tb.classList.add("kfhit");setTimeout(()=>tb.classList.remove("kfhit"),700);kfPx("pop",{x:b.left+b.width/2,y:b.top+b.height/2})}}
@@ -280,18 +272,55 @@ window.kitGain=kitGain;
     entries and no box at all for imperial ones); every new entry is grouped by who gave it, and each group comes in ONE box */
  W("kmDiff",o=>function(){let before=null;try{if(typeof KMSNAP!=="undefined"&&KMSNAP&&typeof KMS!=="undefined"&&KMS===S&&S){before=KMSNAP.inv.slice();KMSNAP.inv=(S.inv||[]).slice()}}catch(e){}
   KFX.inDiff=true;let r;try{r=o.apply(this,arguments)}finally{KFX.inDiff=false}
-  try{if(before&&S&&!S.dead&&kfOn()){const add=(S.inv||[]).filter(x=>x&&!x.h&&!before.includes(x));if(add.length)kgGroups(add)}}catch(e){console.error(e)}
-  return r})})();
+  /* snapshot first (a card opened below may render again) */
+  let same=false,d=0,lg=0,seen=null;try{if(S){same=kfS===S;d=(S.bac||0)-kfBac;lg=kfLog;seen=(S.inv||[]).filter(x=>x&&kfSeen.has(x));kfS=S;kfBac=S.bac||0;kfLog=S.logSeq||0;kfMark()}}catch(e){}
+  try{if(before&&same&&S&&!S.dead&&kfOn()){const add=(S.inv||[]).filter(x=>x&&!x.h&&!before.includes(x)&&!seen.includes(x));if(add.length)kgGroups(add);kfLoss(before,d,lg)}}catch(e){console.error(e)}
+  return r});
+ /* KIT §54.2: who took the item out of her Tư trang. These calls tag each entry they remove; kfLoss (below) reads the tag. */
+ const TAG=(n,why,toIx,title)=>W(n,o=>function(p){if(p!==S||!S||!S.inv)return o.apply(this,arguments);const b=S.inv.slice();const r=o.apply(this,arguments);
+  try{const to=toIx!=null?arguments[toIx]:null;for(const e of b)if(e&&!S.inv.includes(e)&&!KFX.lt.has(e))KFX.lt.set(e,{why,to:to&&to.name||"",title:title||""})}catch(e){}return r});
+ TAG("sellItem","sell");TAG("wkSell","sell");TAG("wdSell","sell");TAG("wdPawn","sell");
+ TAG("giveTo","give",1);TAG("wkGive","give",1);TAG("plantItem","give",1);
+ TAG("useItem","use");TAG("wdWear","use");TAG("vlWear","use");TAG("wkPoison","use");TAG("takeItem","use");TAG("taintItem","use");
+ TAG("inspect","lose",null,"Soát ra đồ bẩn");TAG("search","lose",null,"Bị soát phòng")})();
+/* ---------- KIT §54.2 wiring: every item that leaves S.inv + every drop of S.bac, read in ONE place (kmDiff above) ---------- */
+KFX.lt=new WeakMap();const kfSeen=new WeakSet();let kfS=null,kfBac=0,kfLog=0;
+function kfWorn(){try{const w=typeof wdOf==="function"?wdOf(S):S.wd;return [w&&w.tram,w&&w.y,S.vl,S.dress,...(S.wdPawn||[]).map(p=>p&&p.e)].filter(x=>x&&typeof x==="object")}catch(e){return[]}}
+function kfMark(){for(const x of S.inv||[])if(x&&typeof x==="object")kfSeen.add(x);for(const x of kfWorn())kfSeen.add(x)}
+const KF_LOSEW=[[/tịch thu|thu hồi|sung công/i,"Bị tịch thu"],[/cướp|giật lấy|giật mất/i,"Bị cướp"],[/trộm|lấy cắp/i,"Bị lấy trộm"],[/đòi|bắt nạt|ức hiếp|chèn ép|ép (ngươi|nộp|giao)/i,"Bị ép giao đồ"],
+ [/soát|vứt bỏ|tiêu hủy|đốt bỏ/i,"Bị soát phòng"],[/mất|đánh rơi|lấy đi|lấy mất/i,"Mất đồ"]];
+function kfTexts(lg){const L=[];try{const n=Math.max(0,Math.min(40,(S.logSeq||0)-lg));for(let i=0;i<n;i++)L.push(S.logs[i]);for(const q of (typeof Q!=="undefined"?Q:[]))if(q&&typeof q.h==="string")L.push(q.h);
+  const t=document.getElementById("rtoast");if(t&&t.classList.contains("on"))L.push(t.innerHTML)}catch(e){}
+ return L.map(h=>String(h||"").replace(/<span class="ld">[^<]*<\/span>/g,"").replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim()).filter(Boolean)}
+function kfWhy(e,T){const tag=KFX.lt.get(e);const I=kitItemInfo(e);const nm=I.name,base=(IT[e.k]&&IT[e.k].n)||nm;
+ let line="";for(const h of T){const ss=h.replace(/([.!?:])\s+/g,"$1\n").split("\n");const s=ss.find(x=>x.includes(nm)||x.includes(base));if(s){line=s.trim();break}}
+ if(line.length>170)line=line.slice(0,167).replace(/\s+\S*$/,"")+"…";
+ if(tag)return{why:tag.why,to:tag.to,title:tag.title||"",text:line};
+ if(!line)return{why:"fade",text:""};
+ for(const [re,title] of KF_LOSEW)if(re.test(line)&&!/không (bị )?mất/i.test(line))return{why:"lose",title,text:line};
+ if(/\bbán\b|đem cầm|đi cầm/i.test(line))return{why:"sell",text:line};
+ if(/tặng|dâng|biếu|đưa cho|ban cho/i.test(line))return{why:"give",text:line};
+ if(/uống|dùng|đeo|cài|mặc|may|sắc|ăn|thắp|đốt hương|bôi|xoa/i.test(line))return{why:"use",text:line};
+ return{why:"fade",text:line}}
+function kfLoss(before,d,lg){const gone=before.filter(x=>x&&typeof x==="object"&&!x.h&&(IT[x.k]||(typeof WD_ITEMS==="object"&&WD_ITEMS[x.k]))&&!S.inv.includes(x));const worn=kfWorn();
+ const T=gone.length?kfTexts(lg):[];const G={sell:[],give:[],fade:[],lose:new Map()};
+ for(const e of gone){if(worn.includes(e))continue;const w=kfWhy(e,T);KFX.lt.delete(e);if(w.why==="use")continue;
+  if(w.why==="lose"){const k=w.title||"Mất đồ";if(!G.lose.has(k))G.lose.set(k,{L:[],text:w.text});const g=G.lose.get(k);g.L.push(e);if(!g.text&&w.text)g.text=w.text}else G[w.why].push(e)}
+ if(G.sell.length)kitLose(G.sell,{why:"sell",bac:Math.max(0,d)});else if(d<0)kitCoins("out",-d);
+ if(G.give.length)kitLose(G.give,{why:"give"});if(G.fade.length)kitLose(G.fade,{why:"fade"});
+ for(const [title,g] of G.lose)kitLose(g.L,{why:"lose",title,text:g.text})}
+
 /* one reward item for kitReward from an inventory entry: the same name / painting / grade as the Tư trang bag (kgInfo) */
-function kgItem(x,royal){const I=kgInfo(x),it=(typeof IT==="object"&&IT[x.k])||{};return{n:I.name,d:x.wk?I.gname:(it.d||""),img:I.src,tier:royal?4:Math.max(0,Math.min(4,I.grade|0))}}
+function kgItem(x,royal){const I=kgInfo(x),it=(typeof IT==="object"&&IT[x.k])||{};return{n:I.name,d:x.wk?I.sub:(it.d||I.sub||""),img:I.src,tier:I.grade,gn:x.wk?I.gname:""}}
 function kgWho(f,x){if(x&&x.giver)return x.giver;if(f==="emp")return"Hoàng thượng";if(f==="th")return"Thái hậu";if(f==="hh")return"Hoàng hậu";if(f==="nvp")return"Nội vụ phủ";
  try{const v=typeof RV==="function"?RV(f):null;if(v&&v.name)return v.name}catch(e){}return""}
 function kgGroups(add){const G=new Map();
- for(const x of add){const f=x.from||"";const who=(f&&f!=="me")?kgWho(f,x):"";const key=f==="me"||!f||(!who&&f!=="story"&&f!=="rare")?"self":who||f;
+ for(const x of add){const f=x.from||"";const who=(f&&f!=="me")?kgWho(f,x):"";const key=f==="find"?"find":f==="me"||!f||(!who&&f!=="story"&&f!=="rare")?"self":who||f;
   if(!G.has(key))G.set(key,{who,f,L:[]});G.get(key).L.push(x)}
  for(const [key,g] of G){
   if(key==="self"){/* her own: works, purchases, finds — one glowing reveal each; a burst of 3+ comes in one chest */
    if(g.L.length<=2)g.L.forEach(x=>kitGain(x));else kitReward({kind:"chest",title:"Rương đồ",from:"Vừa vào Tư trang",items:g.L.map(x=>kgItem(x))});continue}
+  if(key==="find"){kitReward({kind:"pouch",title:"Bọc vải",from:"Nhặt được",items:g.L.map(x=>kgItem(x))});continue}
   const emp=g.who==="Hoàng thượng",royal=emp&&g.L.some(x=>x.nt),elder=g.f==="th"||g.f==="hh"||g.who==="Thái hậu"||g.who==="Hoàng hậu";
   const kind=royal?"royal":emp||g.f==="nvp"||g.f==="story"||g.f==="rare"?"chest":elder?"tray":"gift";
   const title=royal?"Ngự tứ":kind==="tray"?"Mâm thưởng":kind==="gift"?"Hộp gấm":g.f==="nvp"?"Rương Nội vụ phủ":"Rương bảo vật";
@@ -301,20 +330,6 @@ function kgGroups(add){const G=new Map();
 (function(){const o=window.kitReward;if(typeof o!=="function")return;window.kitReward=function(spec){if(KFX.inBest){if(!KFX.inBest.spec)KFX.inBest.spec=spec;return}return o.apply(this,arguments)}})();
 (function(){const st=document.createElement("style");st.textContent=`
 .kmov.kfgain{cursor:pointer}
-.kfg{position:relative;display:flex;flex-direction:column;align-items:center;gap:6px;padding:18px 26px 16px;max-width:min(360px,90vw);text-align:center;color:#fff3dc}
-.kfgl{position:absolute;left:50%;top:102px;width:300px;height:300px;margin:-150px 0 0 -150px;border-radius:50%;pointer-events:none;
- background:radial-gradient(circle,color-mix(in srgb,var(--gc) 80%,#fff) 0,color-mix(in srgb,var(--gc) 45%,transparent) 32%,transparent 68%);animation:kfgBurst 1.1s ease-out both,kfgBreath 2.4s ease-in-out 1.1s infinite}
-.kfgi{position:relative;width:168px;height:168px;display:flex;align-items:center;justify-content:center;animation:kfgRise .6s cubic-bezier(.2,.9,.3,1.2) both}
-.kfgi img{max-width:100%;max-height:100%;filter:drop-shadow(0 0 14px var(--gc)) drop-shadow(0 4px 8px #0006)}
-.kfgn{position:relative;font-family:var(--display,serif);font-size:1.18rem;line-height:1.25;animation:kfgUp .4s .35s ease-out both}
-.kfgg{position:relative;font-size:.84rem;font-weight:700;padding:2px 12px;border-radius:999px;background:var(--gc);color:#fff;animation:kfgUp .4s .45s ease-out both}
-.kfgf{position:relative;font-size:.76rem;color:#f6ead6c0}
-.kfgok{position:relative;margin-top:6px;min-width:120px;animation:kfgUp .4s .55s ease-out both}
-.kfgfly{position:fixed;z-index:9470;pointer-events:none;object-fit:contain}
-@keyframes kfgBurst{0%{transform:scale(.2);opacity:0}35%{transform:scale(1.15);opacity:1}100%{transform:scale(1);opacity:.85}}
-@keyframes kfgBreath{0%,100%{opacity:.85;transform:scale(1)}50%{opacity:1;transform:scale(1.06)}}
-@keyframes kfgRise{from{transform:translateY(30px) scale(.4);opacity:0}to{transform:none;opacity:1}}
-@keyframes kfgUp{from{transform:translateY(8px);opacity:0}to{transform:none;opacity:1}}
 .kmov.kfgain.km-red *{animation:none!important}
 @media (prefers-reduced-motion:reduce){.kmov.kfgain *{animation:none!important}}
 `;document.head.appendChild(st)})();
