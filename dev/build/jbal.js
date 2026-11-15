@@ -9,7 +9,11 @@ const BAL={oanLv:[5,20,45,75],/* oán word ladder (VANPHONG): <5 Không oán · 
  /* paid lessons (owner 14:50Z: paying must be worth it): a teacher always gives at least self-study + tchMin */
  tchMin:1,
  /* event-choice hints (KIT 28.6): Tâm cơ below hintMid → a vague hint; from hintMid → plain; from hintSharp (or Tai mắt ≥ hintMat) → names who reacts */
- hintMid:25,hintSharp:45,hintMat:3};
+ hintMid:25,hintSharp:45,hintMat:3,
+ /* TRUNG Y (jty, sếp 15/11 09:15Z): the Y phục slot is empty → she is in her inner robe. ONE source for every number of that rule */
+ ty:{out:2,crowd:3,crowdN:3,royal:6,royalDuc:1,meet:1,reissueWk:2,   /* Danh lost: out of her palace / extra with ≥crowdN people / extra (tai tiếng) before the Emperor or Thái hậu (+ Đức); a visitor at home */
+  robNight:12,robLonely:8,robPlot:45,robThug:3,robDanh:3,robWalk:2,omenWk:2,plotCh:12,plotRel:-30, /* robbery: % parts, Danh lost, omen lasts N weeks, weekly % an enemy plans it, relation that makes an enemy */
+  npcOut:2,npcRob:2}};                                                /* NPC: Danh per week seen out in trung y; weekly % an NPC is robbed (night walks) */
 /* what the Hoàng hậu seat asks of p (the same numbers the checks use) */
 function hhNeed(p){p=p||S;const sn=sonsOf(p).length>0,hieu=typeof has==="function"&&has("hieuthao");const heir=!!(S.heir&&S.heir.k&&S.heir.k.alive&&S.heir.v===(p===S?null:p));
  return{sons:sn,th:sn?BAL.hhTh:(hieu?BAL.hhThNoSonHieu:BAL.hhThNoSon),duc:heir?BAL.hhDucHeir:BAL.hhDuc,heir}}

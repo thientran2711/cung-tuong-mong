@@ -12,7 +12,7 @@
 - 5 poisons: Hạc đỉnh hồng, Độc ngấm dần, Phấn hủy nhan, Xạ hương (pregnant only), Mê dược; + Kim bạc thử độc (shop). 4 new item pictures on CDN.
 
 ## Review r6 (reviewer)
-Merged onto main b8a58e873, then again onto 618fa6db9 (econ-stipend: assemble = main's list + jpoison after jgift; built files rebuilt).
+Merged onto main b8a58e873, then 618fa6db9, then 6e4ec9e12 (trung-y; poison-gift.js 755+844 and header re-run ok) (econ-stipend: assemble = main's list + jpoison after jgift; built files rebuilt).
 Branch was based on main ~218a591fd; main now has gift-ui's own dev/build/jgift.js (add/add conflict).
 - Branch code moved to `dev/build/jpoison.js` (loaded after jgift) and rebuilt on main's kit gift dialog: one row `kgg:"all"` (every tab;
   jgift giftFilter learns "all"), j83's old Hạc đỉnh hồng rows removed. No private CSS (the branch's `.gfmeter` panel is gone; chân tình is

@@ -23,8 +23,11 @@ function earnFromChest(p,sl){const P=Math.min(8,wdPOf(p));const L=(p.inv||[]).fi
    if(p===S&&(S.turn||0)<=1){const P=Math.min(8,wdPOf(S)),wk0=w.y&&w.y.k;let k=null;for(const q of [P,P-1,P-2]){const L=WD_LIST.filter(r=>r[1]==="y"&&r[3]===q&&r[4]===0&&r[0]!==wk0&&r[0]!=="y_tang").map(r=>r[0]);if(L.length){k=L[wdHash(wdKey(S)+"y1")%L.length];break}}if(k){S.inv=S.inv||[];S.inv.push({k,src:"cap",nvp:1});earnK(S,k)}}}
   else for(const sl of ["tram","y"]){const e=w[sl];if(!e||e.from!=="base")continue;
    if(e.k==="y_tang"){w[sl]={k:"y_tang",src:"nvp",nvp:1,giver:"Nội vụ phủ"};continue}
+   /* trung y (jty, sếp 15/11): the player's lost robe leaves the slot EMPTY until she wears another from Tư trang
+      (Nội vụ phủ issues one after BAL.ty.reissueWk weeks); an NPC first wears one from her own chest */
+   if(sl==="y"&&p===S){w.y=null;if(typeof tyLost==="function")tyLost(p,"thu");continue}
    const c=earnFromChest(p,sl);if(c){w[sl]=c;continue}
-   if(sl==="y"){const k=earnPlainY(p)||e.k;w.y={k,src:"nvp",nvp:1,giver:"Nội vụ phủ"};earnK(p,k)}else w.tram=null}}catch(x){console.error(x)}return w}})();
+   if(sl==="y"){w.y=null;if(typeof tyLost==="function")tyLost(p,"thu")}else w.tram=null}}catch(x){console.error(x)}return w}})();
 /* Tự chọn đồ / Chải chuốt choose only among things she really has (+ the mourning issue in quốc tang) */
 (function(){if(typeof wdCands!=="function")return;const c0=wdCands;wdCands=function(p){const C=c0.apply(this,arguments);try{for(const sl of ["tram","y"]){const L=C[sl].filter(x=>!x||x.src!=="base");if(sl==="tram"||L.some(Boolean))C[sl]=L}}catch(e){}return C}})();
 /* taking the y phục off without another to put on is no longer possible (only changing into another one) */
