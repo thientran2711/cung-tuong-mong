@@ -61,7 +61,7 @@ document.addEventListener("click",e=>{const s=e.target.closest("[data-acsneak]")
  const i=e.target.closest("[data-acinfo]");if(i){e.preventDefault();e.stopImmediatePropagation();accInfo();return}
  const g=e.target.closest(".agrey");if(g){e.preventDefault();e.stopImmediatePropagation()}},true);
 /* the gate on goTo: barred places are never entered silently; a tap from elsewhere shows the card with the ways in */
-(function(){const g0=goTo;goTo=function(k){if(!S||k===S.place||k==="home")return g0.apply(this,arguments);
+(function(){const g0=goTo;goTo=function(k){if(!S||k===S.place||k==="home"||window.__accStay)return g0.apply(this,arguments);
  const a=accessOf(S,k);if(!a.ok){if(S.place==="home"&&(!S.visit||S.visit.k!=="home"))S.visit={k:"home",people:homePeople(),talked:false,tk:{}};
   if(!window.__accSilent&&!S.dead&&!Q.length&&!S.out&&!S.confined){const st=accState(k);const opts=[];
    if(st.ask&&!st.empAway)opts.push({n:st.ask==="yk"?"Xin yết kiến":"Xin bái kiến",fx:{},x:accAskLine(k),go:()=>setTimeout(()=>accAsk(k),0)});
@@ -72,7 +72,11 @@ document.addEventListener("click",e=>{const s=e.target.closest("[data-acsneak]")
  try{if(k==="lc"&&S.place==="lc"&&prev!=="lc"&&!S.out){apply({danh:-2});log("Bị thấy lui tới Trường Môn viện: Danh -2.");if(S.visit)S.visit.msg=(S.visit.msg?S.visit.msg+" ":"")+"Có người thấy ngươi ở lãnh cung: Danh -2."}}catch(e){}
  return r}})();
 /* the new buổi re-enters her place quietly (a closed place sends her home without a card) */
-(function(){const n0=nextBuoi;nextBuoi=function(){window.__accSilent=1;try{return n0.apply(this,arguments)}finally{window.__accSilent=0}}})();
+/* owner 11/15 06:35Z: the new buổi starts AT her place (S.place stays) with the new occupants — the gate is not asked again (she is
+   already inside); only a real reason moves her (night / week end, cấm túc, lãnh cung, a summons), and then a line says why */
+(function(){const n0=nextBuoi;nextBuoi=function(){window.__accSilent=1;window.__accStay=1;const k=S&&S.place,b=S&&(S.buoi||0);try{return n0.apply(this,arguments)}finally{window.__accSilent=0;window.__accStay=0;
+ try{if(S&&!S.dead&&k&&k!=="home"&&b<2&&(S.buoi||0)===b+1&&S.place!==k&&S.visit){const why=S.out?"ngươi bị đày vào lãnh cung":S.confined?"ngươi đang bị cấm túc":"";
+  if(why){const nm=typeof accName==="function"?accName(k):k;S.visit.msg=(S.visit.msg?S.visit.msg+" ":"")+`Không ở lại ${nm} được: ${why}.`;log(`Rời ${nm}: ${why}.`);if(typeof render==="function")render()}}}catch(e){}}}})();
 /* a summons from the Thái hậu is a pass to Đức Thọ cung this buổi */
 (function(){const c0=chooseM;chooseM=function(i){try{const m=Q[0];if(m&&/triệu/i.test(m.t||"")&&m.opts&&m.opts[i]&&/^Đến/.test(m.opts[i].n)){if(/Thái hậu/.test(m.t))accGrant(S,"tn");if(/Hoàng thượng/.test(m.t)){accGrant(S,"dtd");accGrant(S,"thu")}if(/Hoàng hậu/.test(m.t))accGrant(S,"kn")}}catch(e){}return c0.apply(this,arguments)}})();
 /* NPC movement keeps the same rule: a consort barred from a place stays in her own palace */

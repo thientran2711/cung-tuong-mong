@@ -2563,11 +2563,15 @@ try{if(!$("title").hidden){wireXio();if(!$("title").querySelector(".optwrap")&&t
 /* ================= AGES: every person has an age, ageing yearly; faces by role and age band, fixed for life ================= */
 function courtSrc(k,c){if(k==="ty")return fsrc(c&&c.fc,"img/face-physician.webp");return fsrc(c&&c.fc,`img/face-eunuch-${(c&&c.fe>=0?c.fe:eunBand(c&&c.age||40))+1}.webp`)}
 function ageInit(){if(!S)return;[S].concat(rivals||[]).forEach(o=>{if(o)delete o.hue});if(typeof allServ==="function")allServ().forEach(s=>delete s.hue);if(!S.wkSnap&&typeof wkSnap==="function"){S.wkSnap=wkSnap();S.lastWk=wkKey()}const m=S.maid;if(m){if(!(m.age>=16))m.age=16+R(7);delete m.face;delete m.hue}
- if(!(S.thAge>0))S.thAge=(S.emp?S.emp.age:30)+18+R(7);
+ /* Thái hậu = the Emperor's mother (owner 11/15): 51–62 at the start (51+ = the a51 art band, band4), and ≥ Emperor + 18;
+    an old save with a younger mother (live showed 43) is brought up to that floor. Her age is also kept on S.thO.age so every
+    portrait / figure picker that reads who.age gets her real age band. */
+ {const ea=S.emp&&S.emp.age>0?S.emp.age:30,lo=Math.max(51,ea+18),hi=Math.max(lo,62);if(!(S.thAge>0))S.thAge=lo+R(hi-lo+1);else if(S.thAge<lo&&!S.thDead)S.thAge=lo+R(Math.min(4,hi-lo+1))}
+ S.thO=S.thO||{};S.thO.age=S.thAge;
  (rivals||[]).forEach(v=>{if(!(v.age>=18))v.age=18+R(8)});
  const C=S.court||{};const base={tq:56,ksp:40,ped:20,ty:50};for(const k in C){const c=C[k];if(!(c.age>0))c.age=(base[k]||35)+R(6);if(k!=="ty"&&!(c.fe>=0))c.fe=eunBand(c.age)}
  if(typeof allServ==="function")allServ().forEach(s=>{if(!(s.age>0))Object.assign(s,servAge(s.role));if(s.role!=="maid"&&!(s.fe>=0))s.fe=eunBand(s.age)});faceInit()}
-function ageYear(){(S.men||[]).forEach(m=>m.age++);if(S.maid)S.maid.age=(S.maid.age||18)+1;S.thAge=(S.thAge||50)+1;(rivals||[]).forEach(v=>{if(v.alive)v.age=(v.age||20)+1});
+function ageYear(){(S.men||[]).forEach(m=>m.age++);if(S.maid)S.maid.age=(S.maid.age||18)+1;S.thAge=(S.thAge||51)+1;if(S.thO)S.thO.age=S.thAge;(rivals||[]).forEach(v=>{if(v.alive)v.age=(v.age||20)+1});
  for(const k in (S.court||{}))S.court[k].age=(S.court[k].age||40)+1;if(typeof allServ==="function")allServ().forEach(s=>s.age=(s.age||20)+1)}
 function tuoi(n){return n>0?`Tuổi <b>${n}</b>`:""}
 /* children: a variant at birth, the face band follows the age (initials if the file is missing) */
@@ -3196,11 +3200,16 @@ function palFix(){if(!S||!rivals)return;rivals.forEach(ensureT2);const occ={};co
  for(const p of heads)if(p.pal!=null){if(occ[p.pal]!=null)p.pal=null;else occ[p.pal]=key(p)}
  for(const p of heads)if(p.pal==null){const f=PALN.findIndex((_,i)=>occ[i]==null);if(f<0)continue;p.pal=f;occ[f]=key(p);if(p===S){S.palCer=1}}
  /* lower ranks live in a head's side hall (thiên điện); never left without a palace when a head exists */
- const hs=[S].concat(rivals).filter(p=>palHeadOK(p)||(p!==S&&p.queen&&p.alive&&!p.out));
+ /* owner 11/14 (OWNER_DECISIONS, Housing): Hoàng hậu lives ALONE in Càn Ninh cung and the Hoàng quý phi ALONE in hers — never a host,
+    for NPCs and for the player alike (palSolo). Anyone found under them (old saves, a host just promoted) moves out with a log line. */
+ const hs=[S].concat(rivals).filter(p=>palHeadOK(p)&&!palSolo(p));
  for(const p of [S].concat(rivals)){if(p!==S&&(!p.alive||p.out))continue;if(rkOf(p)>=PAL_HEAD){p.resHead=null;continue}
   const h=p.resHead!=null&&byKey(p.resHead);const ok=h&&h!==p&&hs.includes(h)&&(h!==S||palHeadOK(S));
   if(p===S){if(!ok)S.resHead=null;continue} /* she keeps Ngọc Thanh các until she is a head herself */
-  if(!ok){const L=hs.filter(x=>x!==p&&x!==S);const c=L.filter(x=>[S].concat(rivals).filter(y=>y.resHead===key(x)).length<3);p.resHead=(c.length?pick(c):L.length?pick(L):null);p.resHead=p.resHead?key(p.resHead):null}}}
+  if(!ok){const was=h&&h!==p&&palSolo(h)&&(h===S||h.alive&&!h.out)?h:null;const L=hs.filter(x=>x!==p&&x!==S);const c=L.filter(x=>[S].concat(rivals).filter(y=>y.resHead===key(x)).length<3);p.resHead=(c.length?pick(c):L.length?pick(L):null);p.resHead=p.resHead?key(p.resHead):null;
+   if(was)try{log(`${p.name} dời khỏi ${was===S?palName("home"):was.queen?"Càn Ninh cung":palName("r"+was.id)} (${was.queen||rkOf(was)>=7?"Hoàng hậu":"Hoàng quý phi"} ở riêng một cung), sang ${houseName(p)}.`)}catch(e){}}}}
+/* Hoàng hậu (NPC queen or the player at rank 7) and Hoàng quý phi (rank 6, not the queen) keep a palace to themselves */
+function palSolo(p){return !!p&&(p.queen||rkOf(p)>=6)}
 (function(){const a0=assignHouses;assignHouses=function(){palFix()}})();
 /* where a house lives on the plan */
 function palSlot(k){if(k==="home")return S.pal!=null?S.pal:null;if(k&&k[0]==="r"){const h=RV(+k.slice(1));return h&&h.pal!=null?h.pal:null}return null}
@@ -3210,7 +3219,8 @@ function residents(k){const L=[];if(k==="kn"){const q=rivals.find(v=>v.queen&&v.
  for(const p of [S].concat(rivals)){if(p!==S&&(!p.alive||p.out))continue;if(k!=="kn"&&p.queen)continue;const pk=palaceOf(p);if(pk===k&&!L.includes(p))L.push(p)}
  return L.sort((a,b)=>rkOf(b)-rkOf(a))}
 /* palaceOf: a lower consort living under the queen is in Càn Ninh */
-(function(){const p0=palaceOf;palaceOf=function(p){if(p!==S&&p&&!p.queen){const h=byKey(houseOf(p));if(h&&h!==S&&h.queen)return"kn"}return p0.apply(this,arguments)}})();
+/* (owner 11/14: nobody lives under the queen any more — palSolo; a stale link from an old save is cut in houseOf below until palFix runs) */
+(function(){const h0=houseOf;houseOf=function(p){const k=h0.apply(this,arguments);try{if(p&&k!==key(p)&&rkOf(p)<PAL_HEAD){const h=byKey(k);if(h&&palSolo(h))return key(p)}}catch(e){}return k}})();
 function houseName(p){const k=palaceOf(p);const hd=byKey(houseOf(p));return k==="home"?(p===S?palName("home"):`thiên điện ${palName("home")} (cung ngươi)`):hd===p?palName(k):`thiên điện ${palName(k)}`}
 /* places carry the plan names; one entry per house */
 (function(){const p0=places;places=function(){const L=p0.apply(this,arguments).filter(x=>!(x.k[0]==="r"));for(const x of L)if(PLNAME[x.k]){x.n=PLNAME[x.k][0];x.fn=PLNAME[x.k][1]}
@@ -3261,6 +3271,8 @@ function mapHTML(){const W=S.where||{};const disR=k=>S.out?"đang ở lãnh cung
  const ord=rivals.map((v,i)=>i).sort((a,b)=>ordG(rivals[a])-ordG(rivals[b])||rkOf(rivals[b])-rkOf(rivals[a]));let last=null;
  const it2=ord.map(i=>{const g=grp(rivals[i]);const x=Object.assign({},items[i]);if(g!==last){x.sep=g;last=g}return x}).concat(items.slice(n));const map=ord.concat(items.slice(n).map((_,j)=>n+j));
  return p0.call(this,key,it2,i=>mk(map[i]))}})();
+/* old saves: anyone living under the Hoàng hậu / Hoàng quý phi is moved out on load (palFix logs each move) */
+(function(){const d0=deser;deser=function(){const r=d0.apply(this,arguments);try{if(S&&rivals&&!S.dead)palFix()}catch(e){console.error("palFix load",e)}return r}})();
 /* ================= FIGURES: full-body art read from img/FIGURES.json when present; faces otherwise ================= */
 /* manifest: an array (or {figures:[...]}) of {file, role, tier, trait, ageBand, look}; fig-* full body, por-* portrait */
 let FIGS=[];
@@ -3269,7 +3281,7 @@ const TRK={"Hiểm độc":"hiemdoc","Kiêu ngạo":"kieungao","Hiền lành":"h
 function figRole(p){if(p===S)return"heroine";const k=p&&p.kind;if(k==="emp"||p===S.emp)return"emperor";if(k==="th")return"thaihau";if(k==="man"||(p&&p.ref&&p.ref.rw))return"man";if(k==="ty")return"physician";if(k==="maid"||k==="serv")return(p.ref&&p.ref.role==="eunuch")?"eunuch":"maid";return"consort"}
 function ageBandOf(a){return a>=36?"old":a>=26?"mid":"young"}
 function norm(x){return String(x==null?"":x).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/đ/g,"d").replace(/[^a-z0-9]/g,"")}
-function figFor(p,kind){if(!FIGS.length||!p)return"";const role=figRole(p),who=p.ref||p;const tier=who===S?(S.out?"cold":S.rank):who.queen?7:who.rank;const tr=TRK[who.trait]||norm(who.trait||who.look||"");const ab=ageBandOf(who.age||20);
+function figFor(p,kind){if(!FIGS.length||!p)return"";const role=figRole(p),who=p.ref||p;const tier=who===S?(S.out?"cold":S.rank):who.queen?7:who.rank;const tr=TRK[who.trait]||norm(who.trait||who.look||"");const ab=ageBandOf(who===S.thO||who.kind==="th"?(S.thAge||55):who.kind==="emp"&&S.emp?S.emp.age:(who.age||20));
  const L=FIGS.filter(f=>norm(f.role)===norm(role)&&(kind!=="por"||/(^|\/)por-/.test(f.file||f.src))&&(kind==="por"||!/(^|\/)por-/.test(f.file||f.src)));if(!L.length)return"";
  const sc=f=>(String(f.tier)===String(tier)||String(f.tier)===String(+tier+1)?4:0)+(norm(f.trait)===tr||norm(f.look)===tr?3:0)+(norm(f.ageBand)===ab?2:0);const best=Math.max(...L.map(sc));const top=L.filter(f=>sc(f)===best);
  const h=String(who.id!=null?who.id:who.name||"me").split("").reduce((a,c)=>a*31+c.charCodeAt(0)>>>0,7);const f=top[h%top.length];const src=f.file||f.src;return /^img\//.test(src)?src:"img/"+src}
@@ -3616,8 +3628,13 @@ function idsFor(role){const m={};for(const f of FIGS)if(norm(f.role)===norm(role
 function identityOf(p,role){const who=p.ref||p;if(who.idn!=null)return who.idn;const M=idsFor(role);const ids=Object.keys(M);if(!ids.length)return null;
  const used=new Set([S].concat(rivals||[]).filter(x=>x&&x!==who&&(x===S||x.alive)&&x.idn!=null).map(x=>String(x.idn)));if(S.emp&&S.emp.idn!=null)used.add(String(S.emp.idn));
  S.idUsed=S.idUsed||{};const U=S.idUsed[role]=S.idUsed[role]||[];let free=ids.filter(i=>!used.has(String(i))&&!U.includes(String(i)));if(!free.length)return null;const want=LOOKFOR[who.trait]||[];const fit=free.filter(i=>M[i].some(f=>want.includes(norm(f.look))));if(fit.length)free=fit;who.idn=pick(free);U.push(String(who.idn));return who.idn}
-(function(){const f0=figFor;figFor=function(p,kind){if(!FIGS.length||!p)return"";const role=figRole(p),who=p.ref||p;const idn=identityOf(who===S.emp?{ref:S.emp,trait:""}:who,role);if(idn==null)return f0.apply(this,arguments);
- const tier=who===S?(S.out?0:S.rank):who.queen?7:(who.rank||0);const ab=band4(who.age||20);const isPor=f=>/(^|\/)por-/.test(f.file||f.src);
+(function(){const f0=figFor;figFor=function(p,kind){if(!FIGS.length||!p)return"";const role=figRole(p);let who=p.ref||p;
+ /* the Thái hậu / Emperor arrive as {kind:"th"} / {kind:"emp"} stubs: use the real records, so the identity sticks and the age band is
+    their REAL age (owner 11/15: Thái hậu showed the a18 picture because the stub had no age) */
+ if(S&&who.kind==="th"&&!who.ref){S.thO=S.thO||{};who=S.thO}else if(S&&who.kind==="emp"&&!who.ref&&S.emp)who=S.emp;
+ const idn=identityOf(who===S.emp?{ref:S.emp,trait:""}:who,role);if(idn==null)return f0.apply(this,arguments);
+ const ag=who===S?(S.age||18):who===S.thO?(S.thAge||55):(who.age||20);
+ const tier=who===S?(S.out?0:S.rank):who.queen?7:(who.rank||0);const ab=band4(ag);const isPor=f=>/(^|\/)por-/.test(f.file||f.src);
  const L=FIGS.filter(f=>String(f.identity)===String(idn)&&norm(f.role)===norm(role)&&(kind==="por"?isPor(f):!isPor(f)));if(!L.length)return f0.apply(this,arguments);
  const tn=f=>{const t=+String(f.tier).replace(/\D/g,"");return isNaN(t)?0:t};const sc=f=>Math.abs(tn(f)-tier)+Math.abs(tagBand(f.ageBand)-ab)*1.5;L.sort((a,b)=>sc(a)-sc(b));const src=L[0].file||L[0].src;return /^img\//.test(src)?src:"img/"+src}})();
 /* age effects, the same for everyone: Sắc -1 a year after 30 (soft floor 35), Tâm cơ +1 a year of court life up to +10 */
@@ -3939,7 +3956,7 @@ document.addEventListener("click",e=>{const s=e.target.closest("[data-acsneak]")
  const i=e.target.closest("[data-acinfo]");if(i){e.preventDefault();e.stopImmediatePropagation();accInfo();return}
  const g=e.target.closest(".agrey");if(g){e.preventDefault();e.stopImmediatePropagation()}},true);
 /* the gate on goTo: barred places are never entered silently; a tap from elsewhere shows the card with the ways in */
-(function(){const g0=goTo;goTo=function(k){if(!S||k===S.place||k==="home")return g0.apply(this,arguments);
+(function(){const g0=goTo;goTo=function(k){if(!S||k===S.place||k==="home"||window.__accStay)return g0.apply(this,arguments);
  const a=accessOf(S,k);if(!a.ok){if(S.place==="home"&&(!S.visit||S.visit.k!=="home"))S.visit={k:"home",people:homePeople(),talked:false,tk:{}};
   if(!window.__accSilent&&!S.dead&&!Q.length&&!S.out&&!S.confined){const st=accState(k);const opts=[];
    if(st.ask&&!st.empAway)opts.push({n:st.ask==="yk"?"Xin yết kiến":"Xin bái kiến",fx:{},x:accAskLine(k),go:()=>setTimeout(()=>accAsk(k),0)});
@@ -3950,7 +3967,11 @@ document.addEventListener("click",e=>{const s=e.target.closest("[data-acsneak]")
  try{if(k==="lc"&&S.place==="lc"&&prev!=="lc"&&!S.out){apply({danh:-2});log("Bị thấy lui tới Trường Môn viện: Danh -2.");if(S.visit)S.visit.msg=(S.visit.msg?S.visit.msg+" ":"")+"Có người thấy ngươi ở lãnh cung: Danh -2."}}catch(e){}
  return r}})();
 /* the new buổi re-enters her place quietly (a closed place sends her home without a card) */
-(function(){const n0=nextBuoi;nextBuoi=function(){window.__accSilent=1;try{return n0.apply(this,arguments)}finally{window.__accSilent=0}}})();
+/* owner 11/15 06:35Z: the new buổi starts AT her place (S.place stays) with the new occupants — the gate is not asked again (she is
+   already inside); only a real reason moves her (night / week end, cấm túc, lãnh cung, a summons), and then a line says why */
+(function(){const n0=nextBuoi;nextBuoi=function(){window.__accSilent=1;window.__accStay=1;const k=S&&S.place,b=S&&(S.buoi||0);try{return n0.apply(this,arguments)}finally{window.__accSilent=0;window.__accStay=0;
+ try{if(S&&!S.dead&&k&&k!=="home"&&b<2&&(S.buoi||0)===b+1&&S.place!==k&&S.visit){const why=S.out?"ngươi bị đày vào lãnh cung":S.confined?"ngươi đang bị cấm túc":"";
+  if(why){const nm=typeof accName==="function"?accName(k):k;S.visit.msg=(S.visit.msg?S.visit.msg+" ":"")+`Không ở lại ${nm} được: ${why}.`;log(`Rời ${nm}: ${why}.`);if(typeof render==="function")render()}}}catch(e){}}}})();
 /* a summons from the Thái hậu is a pass to Đức Thọ cung this buổi */
 (function(){const c0=chooseM;chooseM=function(i){try{const m=Q[0];if(m&&/triệu/i.test(m.t||"")&&m.opts&&m.opts[i]&&/^Đến/.test(m.opts[i].n)){if(/Thái hậu/.test(m.t))accGrant(S,"tn");if(/Hoàng thượng/.test(m.t)){accGrant(S,"dtd");accGrant(S,"thu")}if(/Hoàng hậu/.test(m.t))accGrant(S,"kn")}}catch(e){}return c0.apply(this,arguments)}})();
 /* NPC movement keeps the same rule: a consort barred from a place stays in her own palace */
@@ -6508,7 +6529,7 @@ function j77Card(k,empty){if(!S||S.dead||Q.length)return;
  showModal()}
 /* a walk that uses the last khắc: say so plainly, then go (she sees who is there; next buổi she starts there) */
 function j77LastWalk(k,tc){let n=0;try{n=countAt(k)}catch(e){}
- Q.push({t:accName(k),h:`<p>Đường đi ${tc} khắc · đến nơi là hết buổi, chỉ kịp xem ai ở đó.</p>${n?`<p class="past">Có ${n} bóng người ở đó.</p>`:""}<p class="past">Buổi sau ngươi bắt đầu ở đó.</p>`,
+ Q.push({t:accName(k),h:`<p>Đường đi ${tc} khắc · đến nơi là hết khắc, sang buổi sau.</p>${n?`<p class="past">Có ${n} bóng người ở đó.</p>`:""}<p class="past">Ngươi ở lại đó: buổi sau bắt đầu ngay tại chỗ, thấy ai ở đó.</p>`,
   opts:[{n:"Đi",fx:{},x:`Chắc chắn · tốn: ${tc} khắc · thành: đến nơi, thấy ai ở đó; người ở đó có thể đến gần`,go:()=>setTimeout(()=>{if(S&&!S.dead&&!Q.length)goTo(k)},0)},{n:"Thôi",fx:{},x:""}]});showModal()}
 /* one tap rule for the map and the list */
 function j77Tap(k,empty){if(!S||S.dead||Q.length)return;if(empty||!k)return j77Card(k,empty||"Cung trống");
@@ -6651,6 +6672,12 @@ accInfo=function(){if(!S||Q.length)return;const R=n=>`<b>${n}</b>`;
  for(const v of rivals){if(!v.alive||v.out)continue;const k=W[v.id];if(!k||k==="home"||k[0]!=="r"||palaceOf(v)===k)continue;const h=accHost(k);
   if(!h||h===v||!h.alive||h.out||whereOf(h)!==k||rkOf(h)-rkOf(v)<C.rankGap)continue;
   if(roll(C.npcGreet))relAdd(v,h,C.okAff);else relAdd(v,h,accSkipAff(h,v))}}catch(e){}return r}})();
+
+/* owner 11/15 06:45Z: when the khắc run out the buổi still turns over by itself, but she STAYS where she is (j41 nextBuoi keeps
+   S.place): the stage of that place shows who is there in the new buổi, with one line "Sang buổi tối · ngươi vẫn ở Kính sự phòng" */
+(function(){const n0=nextBuoi;nextBuoi=function(){const k=S&&S.place,b=S?(S.buoi||0):0;const r=n0.apply(this,arguments);
+ try{if(S&&!S.dead&&!S.out&&k&&k!=="home"&&b<2&&(S.buoi||0)===b+1&&S.place===k&&S.visit&&S.visit.k===k){const nm=typeof accName==="function"?accName(k):k;
+  const line=`Sang ${String(BUOI[S.buoi]).toLowerCase()} · ngươi vẫn ở ${nm}.`;if(!(S.visit.msg||"").includes(line)){S.visit.msg=line+(S.visit.msg?" "+S.visit.msg:"");render()}}}catch(e){}return r}})();
 /* j80 — Sức hotfix. Before: +4 Sức per tuần (+1 in harsh weather) while most acts cost 5–20, and every 2-khắc act,
    including "Nghỉ ngơi dưỡng sức" itself, was locked below Sức 20: players got stuck with khắc left and no way to recover.
    Now: (1) a night's sleep restores a real amount, same rule for every consort; (2) acts that restore Sức and cost none
@@ -8868,8 +8895,12 @@ function wkBookPages(){const d=wkBookData();const date=kitDate(S.month,S.year,S.
 .kbk-pg .kname,.kbk-pg .kname .kti{color:color-mix(in srgb,var(--rc,#2a1a12) 50%,#2a1a12)!important}
 .kbk-pg .kfact:has(>.kfdot){grid-template-columns:.6em minmax(0,1fr);gap:.55em}
 .kbk-pg .kfdot{width:.5em;height:.5em;border-radius:1px;background:var(--rule);border:0;transform:rotate(45deg);margin-top:.62em;opacity:.8}
-.kbk-toc{display:flex;flex-wrap:wrap;gap:.3em .9em;font-size:.9em;margin:.1em 0 .2em}
-.kbk-tc{display:inline-flex;align-items:center;gap:.35em}
+/* KIT §36.1 people-chip list (owner 11/15 04:25Z + 08:10Z): ONE grid of equal columns that line up across rows; every portrait the same
+   cell size; the name left beside it, wrapping inside its own cell */
+.kbk-toc{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,11.5em),1fr));gap:.3em .8em;font-size:.9em;margin:.1em 0 .2em}
+.kbk-tc{display:flex;align-items:center;gap:.4em;min-width:0}
+.kbk-tc>span.md,.kbk-tc>.md{flex:0 0 auto;width:26px!important;min-width:26px!important;max-width:26px!important}
+.kbk-tc>:last-child{min-width:0;overflow-wrap:anywhere;line-height:1.2}
 /* person page: large kit portrait (3:4 frame), name + chips + rows beside it, facts below/beside */
 .kbk-person{flex:1 1 auto;min-height:0;display:grid;grid-template-columns:var(--por) minmax(0,1fr);grid-template-rows:auto minmax(0,1fr);grid-template-areas:"por head" "por flow";gap:.2em 1em}
 .kbk-por{grid-area:por;align-self:start}
@@ -11332,6 +11363,15 @@ function kitRoulette(o){const done=()=>{try{o.done&&o.done()}catch(e){}};if(!o||
     setTimeout(()=>fl.remove(),1000)}}catch(e){}T(end,760)};
  go.addEventListener("click",e=>{e.stopPropagation();if(step===0)shuffle();else if(step===3)fly()});
  try{go.focus({preventScroll:true})}catch(e){}}
+/* owner 11/15 (review): the cards are never shown blank — the origin pictures (wide + fallback) and the card back are fetched first.
+   Cached pictures: no wait at all. Otherwise, after 150 ms, a kit wait on the roulette backdrop ("Đang bày các thân phận…"); at most 8 s. */
+(function(){const r0=kitRoulette;kitRoulette=function(o){if(!o||!o.items||!o.items.length)return r0.apply(this,arguments);const args=arguments,self=this;
+ const urls=[...new Set(o.items.map(it=>it.wide||it.src).concat([KIT_CARDBACK]).filter(Boolean))];let fired=false,w=null;
+ const go=()=>{if(fired)return;fired=true;clearTimeout(tw);clearTimeout(tm);if(w)w.remove();r0.apply(self,args)};
+ const tw=setTimeout(()=>{if(fired)return;w=document.createElement("div");w.id="kroulw";w.className="kroul";try{kitBackdrop(w,"roulette")}catch(e){}
+  w.innerHTML=`<div class="krbox"><div class="krhead"><b>Luân hồi</b><small class="krsub">Đang bày các thân phận…</small></div></div>`;document.body.appendChild(w)},150);
+ const tm=setTimeout(go,8000);let n=0;
+ urls.forEach(u=>{const im=new Image();im.decoding="async";const ok=()=>{n++;if(n>=urls.length)(im.decode?im.decode().catch(()=>{}):Promise.resolve()).then(go)};im.onload=ok;im.onerror=ok;im.src=u})}})();
 (function(){if(typeof nlCard!=="function")return;const c0=nlCard;nlCard=function(){const r=c0.apply(this,arguments);try{const o=S&&S.origin;if(!o)return r;const key=(S.name||"")+"|"+o.k+"|"+(typeof NLP!=="undefined"&&NLP?NLP.seed:"");
   if(window.__kroulKey===key)return r;window.__kroulKey=key;
   const items=ORIGINS.filter(x=>KIT_OW[x.k]!=null||x.k===o.k).map(x=>({k:x.k,src:kitOriginArt(x.k),wide:kitOriginWide(x.k),name:x.n,rare:kitRare(x.k)}));
@@ -11563,6 +11603,19 @@ function kitPcSize(){try{const P=$("panel");if(!P)return;const cs=getComputedSty
    else if(c.bottom>a.bottom-pb+1)P.scrollTop+=Math.min(c.bottom-(a.bottom-pb)+2,c.top-sb);else if(c.top<sb)P.scrollTop+=c.top-sb}catch(e){}};
    requestAnimationFrame(()=>{fit();requestAnimationFrame(fit)});const st0={v:null};setTimeout(()=>{st0.v=P.scrollTop;fit()},180);setTimeout(()=>{if(st0.v==null||Math.abs(P.scrollTop-st0.v)<2)fit()},450)}})}catch(e){}}
 addEventListener("resize",()=>{clearTimeout(window.__kpcS);window.__kpcS=setTimeout(kitPcSize,80)});
+/* owner 11/15 05:08Z (Fold, "Lỗi gì đây"): a tab switch renders the new page while #panel still has the OLD tab's size (Hành sự: the short
+   panel under the stage); the card then kept --kpcmax 200 px and the face strip kept one face. The panel's own size is the truth: whenever
+   #panel changes size, the card and the strip measure again. */
+(function(){try{const P=$("panel");if(!P||typeof ResizeObserver!=="function")return;let w=-1,h=-1,t=0;
+ new ResizeObserver(()=>{const r=P.getBoundingClientRect();if(Math.abs(r.width-w)<1&&Math.abs(r.height-h)<1)return;w=r.width;h=r.height;cancelAnimationFrame(t);
+  t=requestAnimationFrame(()=>{try{kitPcSize()}catch(e){}try{if(typeof kitStripFit==="function")kitStripFit()}catch(e){}})}).observe(P)}catch(e){}})();
+/* review 11/15: on the Fold the panel keeps the SAME size from Hành sự to Hậu cung (815 px), so the observer above never fires there and the
+   card measured mid-switch stayed at 200 px / one face. After every tab change, measure the card and the strip again once the new page has
+   laid out (next frame, and again after the page turn has settled). */
+setTimeout(()=>{if(typeof render!=="function")return;const r0=render;let last=null;
+ const again=()=>{try{kitPcSize()}catch(e){}try{if(typeof kitStripFit==="function")kitStripFit()}catch(e){}};
+ render=function(){const out=r0.apply(this,arguments);try{const t=typeof tab!=="undefined"?tab:null;if(t!==last){last=t;requestAnimationFrame(again);setTimeout(again,160);setTimeout(again,480)}}catch(e){}return out};
+ window.render=render},0);
 (function(){const P=$("panel");if(!P)return;const mark=e=>{if(!(e.target.closest&&e.target.closest(".pc")))P.__kpcUser=1};P.addEventListener("touchstart",mark,{passive:true});P.addEventListener("wheel",mark,{passive:true});
  document.addEventListener("click",e=>{if(e.target.closest&&e.target.closest("#panel .pface,#panel .pgf,#panel [data-pg],[data-tab],.ksubb"))P.__kpcUser=0},true)})();
 (function(){const st=document.createElement("style");st.id="k2b-pchead";st.textContent=`
@@ -11850,7 +11903,7 @@ html body header.hud>#emp{display:none!important}
 html body header.hud>#hud2,html body #hud2.khud{position:fixed!important;left:0!important;top:0!important;width:0!important;height:0!important;min-height:0!important;padding:0!important;margin:0!important;border:0!important;overflow:visible!important;background:none!important;box-shadow:none!important;z-index:60}
 html body #hud2.hud2>:not(.khg):not(#k3x){display:none!important}
 /* the full status sheet: a centred kit sheet over a dim backdrop, scrolls inside */
-html body #hud2:not(.col)::before{content:"";position:fixed;inset:0;background:#2a1a1266;z-index:0}
+html body #hud2:not(.col):has(.khg)::before{content:"";position:fixed;inset:0;background:#2a1a1266;z-index:0}
 html body #hud2 .khg{position:fixed!important;z-index:1!important;left:50%!important;top:50%!important;transform:translate(-50%,-50%);width:min(760px,calc(100vw - 24px))!important;max-height:calc(100dvh - 32px)!important;overflow:auto!important;overscroll-behavior:contain;box-sizing:border-box}
 html body #hud2 .khg .khsh{position:sticky;top:-8px;z-index:2;background:var(--k-card,#fffaf0);margin:-8px -8px 0;padding:8px}
 html body #hud2 .khg .khc .hc{white-space:normal!important}
@@ -11919,6 +11972,16 @@ function k3Shell(){try{const gm=document.querySelector(".game");if(!gm)return;tr
 window.k3Shell=k3Shell;
 function k3Home(){K3SH.home=true;try{if(typeof popIdx!=="undefined"&&popIdx!=null){popIdx=null;if(typeof renderStage==="function")renderStage()}}catch(e){}const pw=$$("popw");if(pw&&pw.children.length)pw.innerHTML="";k3Shell();setTimeout(()=>{try{window.j59lay&&j59lay();typeof kitFloorFit==="function"&&kitFloorFit()}catch(e){}},30)}
 window.k3Home=k3Home;
+/* owner 11/15 06:38Z: tapping the place she is AT on Dư đồ opens that place's stage (scene + the people there), like arriving — on the
+   phone shell that is the room view, not the Hành sự panel; arriving from the map lands on the stage too. "‹ Phòng" says where she is
+   ("‹ Kính sự phòng") and returns to that stage (her current place, not home). */
+function k3ShowPlace(){window.__k3quiet=1;clearTimeout(window.__k3qt);window.__k3qt=setTimeout(()=>{window.__k3quiet=0},450);K3SH.home=true;k3Home()}
+function k3PlaceName(){try{if(!S||!S.place||S.place==="home")return"Phòng";return typeof accName==="function"?accName(S.place):(placeOf(S.place).n||"Phòng")}catch(e){return"Phòng"}}
+(function(){if(typeof j77Tap==="function"){const t0=j77Tap;j77Tap=function(k){const here=!!(S&&!S.dead&&!Q.length&&k&&S.place===k);const r=t0.apply(this,arguments);
+  if(here&&k3Phone())k3ShowPlace();return r}}
+ const g0=goTo;goTo=function(k){const fromMap=typeof tab!=="undefined"&&tab==="go";const p0=S&&S.place;const r=g0.apply(this,arguments);
+  try{if(fromMap&&k3Phone()&&S&&!S.dead&&S.place===k&&p0!==k&&!Q.length)k3ShowPlace()}catch(e){}return r};
+ const s0=k3Shell;k3Shell=function(){const r=s0.apply(this,arguments);try{const rb=$$("k3room");if(rb){const t="\u2039 "+k3PlaceName();if(rb.textContent!==t)rb.textContent=t;rb.title=S&&S.place&&S.place!=="home"?"Về "+k3PlaceName():"Về phòng"}}catch(e){}return r};window.k3Shell=k3Shell})();
 document.addEventListener("click",e=>{if(!k3Phone())return;const b=e.target.closest&&e.target.closest("#tabs [data-tab], #tabs [data-kg]");
  if(b){const active=b.classList.contains("on")||b.classList.contains("kgon")||b.getAttribute("aria-selected")==="true";
   if(!K3SH.home&&active&&!b.classList.contains("kghide")){e.preventDefault();e.stopPropagation();k3Home();return}
@@ -13066,15 +13129,18 @@ st.textContent=`
 .kcol-act{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:8px 0 4px}
 .kcol-act .kbtn{min-height:46px;white-space:normal}
 .kcol-act .kbtn.k1{grid-column:1/-1}
+@media (max-width:420px){.kcol-act{grid-template-columns:minmax(0,1fr)}}
 .kcol-act .kbtn small{display:block;font-family:var(--body);font-weight:400;font-size:.74rem;opacity:.9}
 #coopfz{z-index:9500}
+#next.kcwait{white-space:normal!important;line-height:1.12!important;font-size:.9em;overflow:hidden}
+.kcol-act .kbtn.kdone{background:var(--k-ok-bg,#e6f2e6)!important;color:var(--g,#2e6b3a)!important}
 /* same spacing as the kit panel's #mb / #mr (j79), which this overlay cannot use by id */
 #coopfz .dlg #mbz{padding:8px 12px 2px}
 #coopfz .dlg #mrz{padding:4px 14px 12px;margin:0;display:flex;justify-content:flex-end;gap:8px}
 `;
 document.head.appendChild(st);
 const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-let LM=null,PG="",ERR="",CODE="";
+let LM=null,PG="",ERR="",CODE="",PEND=false;
 function link(code){const u=new URL(location.href);u.search="";u.hash="";u.searchParams.set("room",code);return u.toString()}
 function drop(){if(!LM)return;const i=Q.indexOf(LM);if(i>=0)Q.splice(i,1);LM=null;const M=$("modal");if(M&&Q.length)showModal();else if(M){M.hidden=true;M.classList.remove("kptitle","kpscene")}}
 function peerWord(){const s=COOP.state,x=COOP.other(),p=s.seats&&x&&s.seats[x];return !p?["chưa vào phòng","n"]:p.online?["đã vào phòng","g"]:["đang vắng","r"]}
@@ -13084,13 +13150,15 @@ function body(pg){const s=COOP.state;
  if(pg==="wait"){const c=s.room||CODE;const pw=peerWord();
   return `<div class="kcol-code">${kitRows([["Mã phòng",esc(c),"t"],["Bạn",pw[0],pw[1]]])}</div>`+
    kitInput({id:"coop-link",label:"Đường dẫn mời",value:link(c),readonly:true})+
-   `<div class="kcol-act"><button class="kbtn" data-coop="copy">Chép đường dẫn</button><button class="kbtn alt" data-coop="share">Gửi cho bạn</button></div>`+
-   `<div class="kpnote">${s.status==="open"?"Đang đợi bạn vào phòng. Bạn vào là cuộc chơi bắt đầu.":"Đang nối với phòng."}</div>`}
+   `<div class="kcol-act"><button class="kbtn k1" data-coop="share">Gửi đường dẫn cho bạn<small>qua Zalo, Messenger, tin nhắn</small></button><button class="kbtn alt" data-coop="copy">Chép đường dẫn</button><button class="kbtn alt" data-coop="copycode">Chép mã ${esc(c)}</button></div>`+
+   `<div class="kpnote">${s.status==="open"?"Bạn chạm vào đường dẫn (hay chọn Chơi cùng bạn, Nhập mã, gõ mã) là vào phòng. Giữ màn này mở: bạn vào là cuộc chơi bắt đầu.":"Đang nối với phòng."}</div>`}
  if(pg==="join")return kitInput({id:"coop-code",label:"Mã phòng",value:CODE,placeholder:"bốn chữ bạn gửi"})+
-   `<div class="kcol-act"><button class="kbtn k1" data-coop="go">Vào phòng</button></div>`+(s.status==="connecting"?`<div class="kpnote">Đang vào phòng ${esc(CODE)}.</div>`:"");
+   `<div class="kcol-act"><button class="kbtn k1" data-coop="go">Vào phòng</button></div>`+(s.status==="connecting"||s.status==="retry"||PEND?`<div class="kpnote">Đang vào phòng ${esc(CODE)}…</div>`:`<div class="kpnote">Mã phòng là bốn chữ hay số bạn gửi, ví dụ K7QD. Có đường dẫn thì chỉ cần chạm vào đường dẫn.</div>`);
  if(pg==="err")return `<div class="kpnote">${esc(ERR)}</div><div class="kcol-act"><button class="kbtn k1" data-coop="co">Thử lại</button></div>`;
+if(pg==="pick"){const c=s.room||CODE;return `<div class="kcol-code">${kitRows([["Mã phòng",esc(c),"t"],["Bạn","đang chọn thân phận","n"],["Ngươi","đã vào phòng","g"]])}</div>`+
+   `<div class="kpnote">Bạn mở phòng nên chọn thân phận trước, hậu cung dựng theo kiếp của bạn. Bạn chọn xong, màn chọn thân phận của ngươi tự hiện ra. Không cần bấm gì.</div><div class="kcol-act"><button class="kbtn alt" data-coop="back">‹ Về màn đầu</button></div>`}
  return ""}
-const HEAD={co:["Chơi cùng bạn","Hai người chung một hậu cung. Cả hai phải cùng ở trong cuộc."],wait:["Mời bạn","Gửi mã hay đường dẫn cho bạn."],join:["Nhập mã","Gõ mã phòng bạn gửi."],err:["Chưa vào được phòng",""]};
+const HEAD={pick:["Đợi bạn chọn thân phận","Hai người đã ở trong phòng."],co:["Chơi cùng bạn","Hai người chung một hậu cung. Cả hai phải cùng ở trong cuộc."],wait:["Mời bạn","Gửi mã hay đường dẫn cho bạn."],join:["Nhập mã","Gõ mã phòng bạn gửi."],err:["Chưa vào được phòng",""]};
 function open(pg){PG=pg;if(T.hidden)return;
  const keep=document.activeElement&&document.activeElement.id==="coop-code"?document.activeElement.value:null;if(keep!=null)CODE=keep;
  drop();const M=$("modal");
@@ -13098,15 +13166,15 @@ function open(pg){PG=pg;if(T.hidden)return;
  for(let i=Q.length-1;i>=0;i--)if(Q[i]&&/kptitle/.test(Q[i].cls||""))Q.splice(i,1);
  LM=kitModal({scene:true,kind:"notice",title:HEAD[pg][0],sub:HEAD[pg][1],html:body(pg),cls:"kptitle kcoop"});
  const s=M.querySelector(".dlg > .kph .kpseal");if(s)s.remove();
- const mr=$("mr");if(mr)mr.innerHTML=`<button class="kbtn alt" data-coop="back">‹ Lui</button>`;
+ const mr=$("mr");if(mr)mr.innerHTML=pg==="pick"?"":`<button class="kbtn alt" data-coop="back">‹ Lui</button>`;
  const c=$("coop-code");if(c){c.setAttribute("autocapitalize","characters");c.setAttribute("autocomplete","off");c.maxLength=8}}
-function back(){const pg=PG;PG="";drop();if(pg==="wait"||pg==="join"||pg==="err")COOP.leave();
+function back(){const pg=PG;PG="";drop();if(pg==="pick"){COOP.leave(true);try{showTitle()}catch(e){}return}if(pg==="wait"||pg==="join"||pg==="err")COOP.leave();
  if(pg&&pg!=="co"){open("co");return}
  try{showTitle()}catch(e){}}
 function toast(msg){try{const n=document.querySelector("#modal.kcoop .kpnote");if(n)n.textContent=msg}catch(e){}}
 async function make(){ERR="";try{open("wait");const r=await COOP.create();CODE=r.room;open("wait")}catch(e){ERR=errText(e);open("err")}}
 async function join(code){code=String(code||"").trim().toUpperCase().replace(/[^A-Z0-9]/g,"");if(!code){toast("Hãy gõ mã phòng.");return}
- CODE=code;try{open("join");await COOP.join(code);open("wait")}catch(e){ERR=errText(e);open("err")}}
+ CODE=code;PEND=true;try{open("join");await COOP.join(code);PEND=false;if(PG==="join")open("wait")}catch(e){PEND=false;ERR=errText(e);open("err")}}
 async function resume(){ERR="";CODE=stored();try{open("join");await COOP.resume();open("wait")}catch(e){ERR=errText(e);open("err")}}
 function errText(e){const c=e&&(e.code||e.message)||"";
  if(/full/i.test(c))return "Phòng này đã đủ hai người.";if(/not.?found|no.?room|404/i.test(c))return "Không thấy phòng mang mã này. Xem lại mã bạn gửi.";
@@ -13116,8 +13184,13 @@ $("modal").addEventListener("click",e=>{const b=e.target.closest("button[data-co
  const a=b.dataset.coop;
  if(a==="co")return open("co");if(a==="resume")return resume();if(a==="make")return make();if(a==="join")return open("join");if(a==="back")return back();
  if(a==="go"){const c=$("coop-code");return join(c?c.value:CODE)}
- if(a==="copy"){const u=link(COOP.state.room||CODE);const done=()=>{b.textContent="Đã chép"};try{navigator.clipboard.writeText(u).then(done,()=>{const i=$("coop-link");if(i){i.select();document.execCommand("copy");done()}})}catch(x){}return}
- if(a==="share"){const u=link(COOP.state.room||CODE);if(navigator.share)navigator.share({title:"Cung Tường Mộng",text:"Vào hậu cung cùng ta. Mã phòng "+(COOP.state.room||CODE),url:u}).catch(()=>{});else{try{navigator.clipboard.writeText(u)}catch(x){}b.textContent="Đã chép"}return}},true);
+ if(a==="copy"||a==="fzcopy"){copy(link(COOP.state.room||CODE),b,"Đã chép đường dẫn");return}
+ if(a==="copycode"){copy(COOP.state.room||CODE,b,"Đã chép mã");return}
+ if(a==="share"){const c=COOP.state.room||CODE,u=link(c);if(navigator.share)navigator.share({title:"Cung Tường Mộng",text:"Vào hậu cung cùng ta. Mã phòng "+c,url:u}).catch(()=>{});else copy(u,b,"Đã chép đường dẫn, dán gửi cho bạn");return}},true);
+/* copy with visible feedback; falls back to a hidden textarea where the clipboard API is missing (http, old phones) */
+function copy(txt,b,msg){const done=()=>{b.innerHTML=msg;b.classList.add("kdone")};
+ const old=()=>{try{const t=document.createElement("textarea");t.value=txt;t.setAttribute("readonly","");t.style.cssText="position:fixed;top:0;left:0;opacity:0";document.body.appendChild(t);t.select();t.setSelectionRange(0,txt.length);const ok=document.execCommand("copy");t.remove();if(ok)done();else b.innerHTML="Giữ ngón tay lên ô đường dẫn để chép"}catch(x){}};
+ try{if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(txt).then(done,old);else old()}catch(x){old()}}
 $("modal").addEventListener("keydown",e=>{if(e.key==="Enter"&&e.target&&e.target.id==="coop-code"){e.preventDefault();join(e.target.value)}});
 /* title home: add the co-op button under the single-player menu */
 function addBtn(){const m=document.querySelector("#modal.kpthome .kpmenu");if(!m||m.querySelector(".kco"))return;
@@ -13139,9 +13212,9 @@ const FZT={me:["Đợi bạn trở lại","Đường mạng của ngươi vừa 
 function fz(on,why){if(!on){if(FZ){FZ.remove();FZ=null}return}
  const [ttl,sub]=FZT[why]||FZT.peer;const pw=peerWord();
  if(!FZ){FZ=document.createElement("div");FZ.id="coopfz";FZ.className="modal kpscene";FZ.setAttribute("role","alertdialog");document.body.appendChild(FZ)}
- FZ.innerHTML=`<div class="dlg kpanel kpsc" data-kind="notice">${kpHeader("notice",ttl,sub)}<div class="body" id="mbz">${kitRows([["Mã phòng",esc(COOP.state.room||""),"t"],["Bạn",why==="week"?"chưa xong tuần":pw[0],why==="week"?"n":pw[1]],["Ngươi",COOP.state.status==="open"?"đang ở trong cuộc":"đang nối lại",COOP.state.status==="open"?"g":"r"]])}</div><div class="row" id="mrz"><button class="kbtn alt" data-cfz="leave">Về màn đầu</button></div></div>`;
+ FZ.innerHTML=`<div class="dlg kpanel kpsc" data-kind="notice">${kpHeader("notice",ttl,sub)}<div class="body" id="mbz">${kitRows([["Mã phòng",esc(COOP.state.room||""),"t"],["Bạn",why==="week"?"chưa xong tuần":pw[0],why==="week"?"n":pw[1]],["Ngươi",COOP.state.status==="open"?"đang ở trong cuộc":"đang nối lại",COOP.state.status==="open"?"g":"r"]])}</div>${why==="peer"?`<div class="kpnote" style="margin:4px 12px 0">Gửi lại đường dẫn cho bạn: bạn chạm vào là trở lại đúng chỗ cũ, không mất gì.</div>`:""}<div class="row" id="mrz">${why==="peer"?`<button class="kbtn" data-coop="fzcopy">Chép đường dẫn</button>`:""}<button class="kbtn alt" data-cfz="leave">Về màn đầu</button></div></div>`;
  const s=FZ.querySelector(".kpseal");if(s)s.remove()}
-document.addEventListener("click",e=>{const b=e.target.closest("[data-cfz]");if(!b)return;e.stopPropagation();fz(false);COOP.leave(true);try{showTitle()}catch(x){}},true);
+document.addEventListener("click",e=>{const c=e.target.closest("#coopfz [data-coop]");if(c){e.stopPropagation();copy(link(COOP.state.room||CODE),c,"Đã chép đường dẫn");return}const b=e.target.closest("[data-cfz]");if(!b)return;e.stopPropagation();fz(false);COOP.leave(true);try{showTitle()}catch(x){}},true);
 function check(){const s=COOP.state;if(!s.playing){fz(false);return}
  const x=COOP.other(),e=s.ended||{};
  if(s.status!=="open")fz(true,"me");else if(!s.peerOnline)fz(true,"peer");else if(e[s.you]&&!e[x])fz(true,"week");else fz(false)}
@@ -13149,9 +13222,11 @@ COOP.on("status",check);
 COOP.on("start",()=>{COOP.state.playing=true;COOP.live();check()});
 COOP.on("week",()=>setTimeout(check,0));
 /* a ?room=XXXX link: open "Nhập mã" with the code and join at once */
-setTimeout(()=>{try{const q=new URLSearchParams(location.search).get("room");if(q){try{const u=new URL(location.href);u.searchParams.delete("room");history.replaceState(null,"",u.toString())}catch(x){}}
- if(q&&!T.hidden){CODE=q.toUpperCase();join(CODE)}}catch(e){console.error(e)}},60);
-window.COOP_LOBBY={open,fz,check};
+(function(){let q="";try{q=new URLSearchParams(location.search).get("room")||"";if(q){const u=new URL(location.href);u.searchParams.delete("room");history.replaceState(null,"",u.toString())}}catch(e){console.error(e)}
+ if(!q)return;const t0=Date.now();const go=()=>{if(COOP.state.status!=="off")return;if(T.hidden&&Date.now()-t0<20000){setTimeout(go,150);return}if(!T.hidden){CODE=q.toUpperCase();join(CODE)}};setTimeout(go,60)})();
+/* guest in, host still choosing her thân phận: keep the title backdrop with a kit panel instead of an empty game frame */
+function hostPick(on){if(on){try{T.hidden=false}catch(e){}LM=null;open("pick")}else if(PG==="pick"){PG="";drop();try{T.hidden=true}catch(e){}}}
+window.COOP_LOBBY={open,fz,check,hostPick};
 }catch(e){console.error(e)}})();
 /* jcoopworld: CO-OP SHARED WORLD (worker C, review/coop). Protocol: dev/coop/PROTOCOL.md. Net client: jcoop.js (COOP).
    Single-player never runs any of this: every hook checks CW.on, which only the lobby's COOP "start" event turns on.
@@ -13306,8 +13381,9 @@ function waiting(){const s=COOP.state;return CW.on&&(CW.sent===wk()||!!(s.ended&
 function frozen(){const s=COOP.state;return CW.on&&(s.status!=="open"||!s.peerOnline)}
 /* touch #next only when its state really changes (j63 observes every "disabled" write) */
 function lockNext(){const n=$("next");if(!n)return;const wb=CW.on&&(CW.bend||needWhere()||!!CW.pendBuoi);const lock=CW.on&&(waiting()||frozen()||CW.pend||!CW.base||wb);
- if(lock){if(!n.disabled)n.disabled=true;if(n.dataset.coopWait!=="1")n.dataset.coopWait="1";const t=wb?(CW.bend?"Đợi bạn xong buổi":"Đợi bạn"):null;if(t&&n.textContent!==t)n.textContent=t}
- else if(n.dataset.coopWait){delete n.dataset.coopWait;n.disabled=!!(S&&(S.dead||Q.length||S.mg));const t=S&&(S.buoi||0)>=2?"Qua đêm":"Qua buổi";if(n.textContent!==t)n.textContent=t}}
+ if(lock){if(!n.disabled)n.disabled=true;if(n.dataset.coopWait!=="1")n.dataset.coopWait="1";const t=wb?(CW.bend?"Đợi bạn xong buổi":"Đợi bạn"):null;if(t&&n.textContent!==t){/* keep the button's own width (the tabs beside it must not shrink): the longer words wrap inside */
+  if(!n.style.maxWidth&&n.offsetWidth)n.style.maxWidth=n.offsetWidth+"px";n.classList.add("kcwait");n.textContent=t}}
+ else if(n.dataset.coopWait){delete n.dataset.coopWait;n.style.maxWidth="";n.classList.remove("kcwait");n.disabled=!!(S&&(S.dead||Q.length||S.mg));const t=S&&(S.buoi||0)>=2?"Qua đêm":"Qua buổi";if(n.textContent!==t)n.textContent=t}}
 /* ---------- phase 2 (PROTOCOL §9): same buổi, same place, acts between the two ---------- */
 Object.assign(CW,{bend:false,whereKey:"",lastWhere:null,fpos:null,posKey:"",p2:true,allow:false,acts:{}});
 const bkey=()=>wk()+":"+((S&&S.buoi)||0);
@@ -13422,17 +13498,17 @@ function onWeek(m){T("week");if(!CW.on||!m.state)return;const C=m.state;CW.base=
  if(host())sendWhere();else if(CW.lastWhere)applyWhere(CW.lastWhere);keepFriendPos();refreshHere();
  showModal();render();lockNext()}
 function onState(m){T("state");if(!CW.on||!m.state)return;const C=m.state;
- if(!CW.base){CW.base=J(C);if(CW.waitWorld){CW.waitWorld=false;newLife()}return}
+ if(!CW.base){CW.base=J(C);if(CW.waitWorld){CW.waitWorld=false;try{COOP_LOBBY.hostPick(false)}catch(e){}newLife()}return}
  /* the friend's character changed (first character / reborn): keep my week, take the new base and her new entry */
  const had=CW.base;CW.base=J(C);if(had&&had.P&&had.P[CW.seat]&&C.P&&!C.P[CW.seat])CW.base.P[CW.seat]=had.P[CW.seat];
  if(S&&!S.dead&&!CW.inLife){const old=friendEntry();placeFriend(C.P[fs()]);
-  const P=C.P[fs()];if(P&&(!old||old.name!==P.name)&&!P.dead)pushModal({t:"Bạn vào cung",h:`<p>Bạn ngươi đã đầu thai, nay ở trong cung${friendSrv(P)?", làm cung nữ":", phong "+esc(RANKS[P.rank]?RANKS[P.rank].n:"")}. Mặt mũi, tên tuổi kiếp này ra sao, phải gặp mới biết.</p>`});
+  const P=C.P[fs()];if(P&&(!old||old.name!==P.name)&&!P.dead)pushModal({t:"Bạn vào cung",h:`<p>Bạn ngươi ${old?"đã đầu thai, ":"đã chọn xong thân phận, "}nay ở trong cung${friendSrv(P)?", làm cung nữ":", phong "+esc(RANKS[P.rank]?RANKS[P.rank].n:"")}. Mặt mũi, tên tuổi kiếp này ra sao, phải gặp mới biết.</p><p class="past">Muốn gặp nhau: hai người cùng đến một nơi trên Dư đồ trong cùng một buổi, rồi chạm vào người kia và chọn Chào hỏi.</p>`});
   showModal();render()}}
 function newLife(){CW.inLife=true;CW.newLife=true;try{start()}catch(e){console.error(e)}}
 function begin(d){T("begin");CW.on=true;CW.seat=d.you||COOP.state.you;const C=d.state||COOP.state.C;CW.base=C?J(C):null;CW.sent=-1;CW.pend=false;
  const s=COOP.state;
- if(C&&C.P&&C.P[CW.seat]&&!C.P[CW.seat].dead){fromCanon(C);if(s.ended&&s.ended[CW.seat])CW.sent=wk();try{$("title").hidden=true}catch(e){}syncRoom(CW.roomMsg);showModal();render();lockNext();return}
- if(!C&&!host()){CW.waitWorld=true;pushModal({t:"Đợi bạn",h:`<p>Bạn đang chọn thân phận. Khi hậu cung đã dựng xong, ngươi sẽ chọn thân phận của mình.</p>`});showModal();return}
+ if(C&&C.P&&C.P[CW.seat]&&!C.P[CW.seat].dead){fromCanon(C);/* a fresh page (came back by link / reload) has no hand of cards yet: deal it, as loading a sổ does */if(!deck||!deck.length)try{deal()}catch(e){console.error(e)}if(s.ended&&s.ended[CW.seat])CW.sent=wk();try{$("title").hidden=true}catch(e){}syncRoom(CW.roomMsg);showModal();render();lockNext();return}
+ if(!C&&!host()){CW.waitWorld=true;/* the lobby keeps the title backdrop up with a kit panel "Đợi bạn chọn thân phận" (no empty game frame) */try{COOP_LOBBY.hostPick(true)}catch(e){console.error(e)}return}
  newLife()}
 COOP.on("start",begin);
 /* leaving the shared game: back to single-player rules (slots untouched; the room keeps the world) */

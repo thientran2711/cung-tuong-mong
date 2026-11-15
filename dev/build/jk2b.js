@@ -539,6 +539,15 @@ function kitRoulette(o){const done=()=>{try{o.done&&o.done()}catch(e){}};if(!o||
     setTimeout(()=>fl.remove(),1000)}}catch(e){}T(end,760)};
  go.addEventListener("click",e=>{e.stopPropagation();if(step===0)shuffle();else if(step===3)fly()});
  try{go.focus({preventScroll:true})}catch(e){}}
+/* owner 11/15 (review): the cards are never shown blank — the origin pictures (wide + fallback) and the card back are fetched first.
+   Cached pictures: no wait at all. Otherwise, after 150 ms, a kit wait on the roulette backdrop ("Đang bày các thân phận…"); at most 8 s. */
+(function(){const r0=kitRoulette;kitRoulette=function(o){if(!o||!o.items||!o.items.length)return r0.apply(this,arguments);const args=arguments,self=this;
+ const urls=[...new Set(o.items.map(it=>it.wide||it.src).concat([KIT_CARDBACK]).filter(Boolean))];let fired=false,w=null;
+ const go=()=>{if(fired)return;fired=true;clearTimeout(tw);clearTimeout(tm);if(w)w.remove();r0.apply(self,args)};
+ const tw=setTimeout(()=>{if(fired)return;w=document.createElement("div");w.id="kroulw";w.className="kroul";try{kitBackdrop(w,"roulette")}catch(e){}
+  w.innerHTML=`<div class="krbox"><div class="krhead"><b>Luân hồi</b><small class="krsub">Đang bày các thân phận…</small></div></div>`;document.body.appendChild(w)},150);
+ const tm=setTimeout(go,8000);let n=0;
+ urls.forEach(u=>{const im=new Image();im.decoding="async";const ok=()=>{n++;if(n>=urls.length)(im.decode?im.decode().catch(()=>{}):Promise.resolve()).then(go)};im.onload=ok;im.onerror=ok;im.src=u})}})();
 (function(){if(typeof nlCard!=="function")return;const c0=nlCard;nlCard=function(){const r=c0.apply(this,arguments);try{const o=S&&S.origin;if(!o)return r;const key=(S.name||"")+"|"+o.k+"|"+(typeof NLP!=="undefined"&&NLP?NLP.seed:"");
   if(window.__kroulKey===key)return r;window.__kroulKey=key;
   const items=ORIGINS.filter(x=>KIT_OW[x.k]!=null||x.k===o.k).map(x=>({k:x.k,src:kitOriginArt(x.k),wide:kitOriginWide(x.k),name:x.n,rare:kitRare(x.k)}));
@@ -770,6 +779,19 @@ function kitPcSize(){try{const P=$("panel");if(!P)return;const cs=getComputedSty
    else if(c.bottom>a.bottom-pb+1)P.scrollTop+=Math.min(c.bottom-(a.bottom-pb)+2,c.top-sb);else if(c.top<sb)P.scrollTop+=c.top-sb}catch(e){}};
    requestAnimationFrame(()=>{fit();requestAnimationFrame(fit)});const st0={v:null};setTimeout(()=>{st0.v=P.scrollTop;fit()},180);setTimeout(()=>{if(st0.v==null||Math.abs(P.scrollTop-st0.v)<2)fit()},450)}})}catch(e){}}
 addEventListener("resize",()=>{clearTimeout(window.__kpcS);window.__kpcS=setTimeout(kitPcSize,80)});
+/* owner 11/15 05:08Z (Fold, "Lỗi gì đây"): a tab switch renders the new page while #panel still has the OLD tab's size (Hành sự: the short
+   panel under the stage); the card then kept --kpcmax 200 px and the face strip kept one face. The panel's own size is the truth: whenever
+   #panel changes size, the card and the strip measure again. */
+(function(){try{const P=$("panel");if(!P||typeof ResizeObserver!=="function")return;let w=-1,h=-1,t=0;
+ new ResizeObserver(()=>{const r=P.getBoundingClientRect();if(Math.abs(r.width-w)<1&&Math.abs(r.height-h)<1)return;w=r.width;h=r.height;cancelAnimationFrame(t);
+  t=requestAnimationFrame(()=>{try{kitPcSize()}catch(e){}try{if(typeof kitStripFit==="function")kitStripFit()}catch(e){}})}).observe(P)}catch(e){}})();
+/* review 11/15: on the Fold the panel keeps the SAME size from Hành sự to Hậu cung (815 px), so the observer above never fires there and the
+   card measured mid-switch stayed at 200 px / one face. After every tab change, measure the card and the strip again once the new page has
+   laid out (next frame, and again after the page turn has settled). */
+setTimeout(()=>{if(typeof render!=="function")return;const r0=render;let last=null;
+ const again=()=>{try{kitPcSize()}catch(e){}try{if(typeof kitStripFit==="function")kitStripFit()}catch(e){}};
+ render=function(){const out=r0.apply(this,arguments);try{const t=typeof tab!=="undefined"?tab:null;if(t!==last){last=t;requestAnimationFrame(again);setTimeout(again,160);setTimeout(again,480)}}catch(e){}return out};
+ window.render=render},0);
 (function(){const P=$("panel");if(!P)return;const mark=e=>{if(!(e.target.closest&&e.target.closest(".pc")))P.__kpcUser=1};P.addEventListener("touchstart",mark,{passive:true});P.addEventListener("wheel",mark,{passive:true});
  document.addEventListener("click",e=>{if(e.target.closest&&e.target.closest("#panel .pface,#panel .pgf,#panel [data-pg],[data-tab],.ksubb"))P.__kpcUser=0},true)})();
 (function(){const st=document.createElement("style");st.id="k2b-pchead";st.textContent=`

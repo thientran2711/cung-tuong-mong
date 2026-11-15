@@ -336,8 +336,12 @@ function wkBookPages(){const d=wkBookData();const date=kitDate(S.month,S.year,S.
 .kbk-pg .kname,.kbk-pg .kname .kti{color:color-mix(in srgb,var(--rc,#2a1a12) 50%,#2a1a12)!important}
 .kbk-pg .kfact:has(>.kfdot){grid-template-columns:.6em minmax(0,1fr);gap:.55em}
 .kbk-pg .kfdot{width:.5em;height:.5em;border-radius:1px;background:var(--rule);border:0;transform:rotate(45deg);margin-top:.62em;opacity:.8}
-.kbk-toc{display:flex;flex-wrap:wrap;gap:.3em .9em;font-size:.9em;margin:.1em 0 .2em}
-.kbk-tc{display:inline-flex;align-items:center;gap:.35em}
+/* KIT §36.1 people-chip list (owner 11/15 04:25Z + 08:10Z): ONE grid of equal columns that line up across rows; every portrait the same
+   cell size; the name left beside it, wrapping inside its own cell */
+.kbk-toc{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,11.5em),1fr));gap:.3em .8em;font-size:.9em;margin:.1em 0 .2em}
+.kbk-tc{display:flex;align-items:center;gap:.4em;min-width:0}
+.kbk-tc>span.md,.kbk-tc>.md{flex:0 0 auto;width:26px!important;min-width:26px!important;max-width:26px!important}
+.kbk-tc>:last-child{min-width:0;overflow-wrap:anywhere;line-height:1.2}
 /* person page: large kit portrait (3:4 frame), name + chips + rows beside it, facts below/beside */
 .kbk-person{flex:1 1 auto;min-height:0;display:grid;grid-template-columns:var(--por) minmax(0,1fr);grid-template-rows:auto minmax(0,1fr);grid-template-areas:"por head" "por flow";gap:.2em 1em}
 .kbk-por{grid-area:por;align-self:start}
