@@ -433,7 +433,10 @@ PEND.j70thr=pp=>{const v=RV(pp.v);if(!v||!S)return null;const b=bandOf(danger(v,
 /* warnings pushed by older modules (head maid's warning, the old tell) get the same answers */
 function thrify70(){for(let i=0;i<Q.length;i++){const m=Q[i];if(m.opts||m.pid||!/^(Lời cảnh báo|Tai mắt báo tin)$/.test(m.t||""))continue;
   let v=null;if(m.who&&m.who.w&&m.who.w[0]==="r")v=RV(m.who.w[1]);if(!v)v=liveRivals(true).find(x=>String(m.h||"").includes(x.name));if(!v)continue;
-  const d=mkP("j70thr",{v:v.id,h:String(m.h||"").replace(/<p>[^<]*Chắc chắn[^<]*<\/p>/,""),m:m.who&&m.who.w&&m.who.w[0]==="m"?1:0});if(!d)continue;Q[i]={t:m.t,h:d.t,opts:d.o,who:d.who||m.who,pid:d.pid,pp:d.pp};if(d.kit)Q[i].kit=d.kit}}
+  const d=mkP("j70thr",{v:v.id,h:String(m.h||"").replace(/<p>[^<]*Chắc chắn[^<]*<\/p>/,""),m:m.who&&m.who.w&&m.who.w[0]==="m"?1:0});if(!d)continue;Q[i]={t:m.t,h:d.t,opts:d.o,who:d.who||m.who,pid:d.pid,pp:d.pp};if(d.kit)Q[i].kit=d.kit}
+ /* review kit-fig2 r8: one warning per consort in the queue — two "Lời cảnh báo" about the same consort (the maid's tell queued twice, or
+    by two older modules in one turn) became two identical j70thr dialogs; a later one is dropped (Q[0], the dialog on screen, is kept) */
+ const seen=new Set();for(let i=0;i<Q.length;i++){const m=Q[i];if(!m||m.pid!=="j70thr"||!m.pp)continue;const key=String(m.pp.v);if(seen.has(key)&&i>0){Q.splice(i,1);i--;continue}seen.add(key)}}
 (function(){const n0=nextBuoi;nextBuoi=function(){const r=n0.apply(this,arguments);try{if(S&&!S.dead&&!window.__j70off&&Q.length){thrify70();if(!$("modal").hidden)showModal()}}catch(e){console.error(e)}return r}})();
 (function(){const e0=endTurn;endTurn=function(){const r=e0.apply(this,arguments);try{if(S&&!S.dead&&!window.__j70off){thrify70();if(Q.length&&$("modal").hidden===false)showModal()}}catch(e){console.error(e)}return r}})();
 /* the 'seen' dialog also offers standing orders and protection */

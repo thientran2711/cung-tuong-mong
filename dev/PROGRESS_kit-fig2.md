@@ -44,6 +44,54 @@ Continue on this branch (it already contains review/shop-fix). Do not push main;
   "thiện cảm" wording), Ân oán tabs, act cards without own picture, 5-size runs.
 - Test helpers: news-face-real.js serves CDN pictures from git objects of 3e212597e (IMGREV) — no disk, no proxy.
 
+
+## 11/15 r8 (new commit range on top of e68183a1d, which is under review) — owner 13:00Z, 13:15Z, 14:30Z, 15:45Z
+Main (f500d0464) was already merged; nothing new on main. fix-float kitRelDelta is NOT on main → number chips untouched (rule 5).
+- 1 kitEventDp = ONE template (KIT 50.1, jk4): every event with a person → left = ONE person (main one; `kitStagePeople` slice 1),
+  name + rank above (§48), banner top-right for EVERY such event (own picture, else `j24:<title>` = Có người đến / Thái hậu triệu / Hoàng
+  thượng đến / Kẻ hầu xin / Một ánh mắt / Việc của kẻ hầu, else the week-book meaning table KBK_EVRE on title + text; herself alone only
+  on a real match), height = content (floor 300 px, was 500 — reviewer 1a; `kitDpNat` measures banner + text + the options' own content — before, the
+  options were clipped and scrolled), short options 2 per row (32.9 k3long / k3odd no longer break a kdpo2 group).
+  Acceptance "Thái hậu triệu" 1180x820: 421 px tall (was 720 on main), banner, chip above, figure 0.98 of the column, 2 options in one row,
+  12 px under the options. Scan `dev/test/event-dp-scan.js` (fixture save, 1180x820): 41 j24 dialogs + 22 festival / feast / merit
+  dialogs → all kdper, 1 person, banner in the right column, chip above, fill 0.98–0.99, under the options 8–35 px.
+  NOT done (rule 5): "Thái hậu → ta: thiện cảm +3" in option rows = NAMES.th; becomes kitRelDelta when fix-float lands on main.
+- 2 place card head (KIT 32.8b, jplace `kitPlaceHost`): picture band + silhouettes kept; under it head portrait LEFT (relPerson: unmet =
+  grey silhouette, name stays) with kitNameRank above, info box RIGHT; no Thôi (32.10 already hides it). All 4 place-card builders.
+- 3 Ân oán (KIT 49.2b, jhc): each picker = kit sub-tabs (Ta · Chí tôn · Phi tần + counts) + the Hậu cung strip of that group only;
+  `.kpinline` keeps a picker's tab row out of the pane bar (jpane free()). Act cards: no own picture → no picture anywhere (jk4 wrapper
+  on kitActArt / kpActArt, `.kanoart` global).
+- 4b overlays (jk4 + j5): the j5 lesson panel's #mgskip stayed "not hidden" inside the hidden panel and its used "Xong" (#mgok, old
+  callback) stayed in #ov; kitOvBtn (✕ / Esc / tap outside) pressed that stale button during a kg82 result → the kg82 game was never
+  closed (#kg82 left, aaudit busy() → lessons refused) and its result not applied. Fix: #mgskip hidden unless a j5 game is up, #mgok
+  removed after use, kitOvBtn only takes a result button in a panel on screen, #ov hidden when no panel is left, resumeMG that opens
+  nothing clears S.mg. Test `dev/test/overlay-close.js` (35 openers × player path): before 35/35 FAIL (stale #mgskip / #mgok; "j5 then
+  kg82, Esc at result": kg82 result not applied, #kg82 left) → after 35/35 ok.
+  Driver: news-face-real.js workarounds REMOVED (no force-hide #ov, no S.mg=null, no drop/close of a repeating dialog); it presses only
+  visible buttons and stops with window.__stuck {overlay|dialog|requeue}. Old driver on the old build: 14 forced overlay closes / 3000
+  ticks (25 / 6000) — every one a festival contest kg82 intro whose real buttons the driver never pressed (it clicked the stale
+  #mgskip); old driver on the new build: 0 forced closes.
+- 4a invitation re-queue: NOT reproduced. Probe: every j71 invitation (all FV7 contest variants, both feast invitations) × every option →
+  the chosen invitation never comes back; real play (drive2 instrumentation, same pid + same pp or same object after chooseM): no j71 /
+  j67 invitation re-queued in ~1000 dialogs. The only repeats: "Lời cảnh báo" (j70thr) — two identical warnings about the same consort
+  already in Q before the choice (duplicate queueing, not a re-push), "Phòng bị" / "Đêm thị tẩm" = next step with the same title. The
+  old driver's "Thi tài ngày Thất tịch · Lời mời came back" was the stuck contest overlay (above) seen while the invitation was Q[0].
+
+### r8 after merging main 10043ac2b (batch 1 on main)
+- Reviewer 1a fixed: floor 300 px; every person dialog ends 10–12 px under its options at 755/1000/1180/1366 (scan, fixture save).
+- Main's kitEvArt now gives an id without an event kind the ROOM picture; person events now get their kind first (j24 title, e68:<id>,
+  title meaning, who it is) — "Thái hậu triệu" = ev-thinh-an, j68 "Hoàng thượng" = ev-hoang-de-vui, "Tin đồn" = ev-tin-don.
+- Main's opt-render (§53) replaced the "thiện cảm +3" option rows with hints: the non-kit "thiện cảm" of the acceptance shot is gone.
+- overlay-close.js after the merge: 35/35 ok. Long drive with the new driver (fixture save, 2500 ticks, 1063 dialogs, 132 game
+  screens): 0 stuck, 0 re-queue.
+
+- 5-size run (fixture save; event-dp-scan MAXN=12 at 755x1000@2, 1000x755@2, 1180x820@2, 1366x1024@2, 844x390@3): 12/12 dialogs per size
+  kdper + 1 person + banner + chip above, fill 0.96–0.98, 10–12 px under the options (844x390: dialogs taller than the screen keep the
+  358 px cap and scroll their options, as 32.7c). Place card head + Ân oán tabs (3 X tabs, strips without group labels, not in the
+  pane bar, no horizontal scroll) + "no Thôi" checked at the 5 sizes + 390x844. Hành sự deck (1180): 17 acts, 14 own pictures, 3 no
+  picture, 0 act-cat pictures.
+- Tests: dev/test/event-dp-scan.js, dev/test/overlay-close.js (new); dev/test/fig-fill.js "two"/"mix" kinds now expect ONE person.
+
 ## LEFT (owner requests, exact)
 1. kitEventDp (KIT 45): done in code + test; LEFT: (a) a 2-option visit leaves ~124 px empty under the options because of the 500 px
    minimum height (32.7c) — lower the minimum or let the figure set it; (b) "several people → only the main one" in the left column is NOT
@@ -111,3 +159,28 @@ img/fig-eunuch-ndp-tray.webp (committed in git on review/shop-fix; not on the CD
 - NOTE for the coordinator: during this review some other session switched /home/user/wt/kit-fig2-r6 to branch review/kit-fig2 and edited
   j5/jhc/jk4/jplace/KIT.md/news-face-real.js there (uncommitted, 12:25Z). The reviewer's commit 00c72e4e4 therefore also sits on the LOCAL
   review/kit-fig2 ref of that worktree. Review work continued in /home/user/wt/kf2r6.
+
+## REVIEW r8 (reviewer, 11/15) — 196edb362e merged onto origin/main aa9689da5 → review/kit-fig2-r8
+- Merge: only index.html / sw.js conflicted (rebuilt with dev/site/build_site.sh).
+- Reviewer fixes:
+  1. Festival dialogs whose festival has no "fest:<k>" category in EVENTS.json (Vu Lan, Lạp bát, Thánh thọ, Vạn thọ: invitations "· Lời mời",
+     "· Lễ", "· Dâng lễ") fell to the Hoàng thượng / Thái hậu kind picture (ev-hoang-de-dem / ev-thinh-an); they now take the festival's own
+     band img/ev-fest-<k>-b.webp (same picture the festival day shows) — jk4 kitEvArt wrapper. Own banners (jevban) still win.
+  2. `.kpinline` documented as a KIT §45 exception (+ §49.2b markup line); its CSS moved from jhc (private `.krelpk>.kcattabs`) to jpane
+     as the generic kit rule `#panel .kpinline>.kcattabs/.ksub` (static, no shadow). dev/test/pane-bar.js skips rows inside `.kpinline`
+     (it flagged the Ân oán X / Y tab rows as "outside the pane bar" at every size).
+  3. Duplicate "Lời cảnh báo" (j70thr): thrify70 now keeps ONE j70thr warning per consort in Q (later duplicates dropped, Q[0] kept).
+  4. Stale comment "420 px floor" → 300 (KIT_DP_MINH).
+- Tests (images from git objects / CDN): overlay-close 35/35 ok; promo-exam 17/17 (kg82 frames in #ov still close/answer); pane-bar 5 sizes
+  bad 0; tabs-kit-shots 5 sizes bad 0; opt-render 1180 fails [] (7 warnings from main's hint texts); kit-page 5 sizes 11 samples bad 0;
+  event-dp-scan fixture 1180 + PLAY=600 (154 dialogs: all kdper, 1 person, banner, chip above; festival invitations with 3–5 long options hit
+  the 720 cap and scroll their options 13–133 px — 32.7c cap, same on main); event-dp-scan MAXN=12 on an old save (made with origin/main)
+  at 755/1000/1180/1366/844: 0 bad, 10–12 px under options (844x390 taller dialogs scroll), 0 page errors. Acceptance "Thái hậu triệu"
+  1180x820: 408 px (main 500), banner ev-thinh-an (main: room picture), chip above, both options in one row, cost mode.
+  news-face-real (fixture, 12 weeks, strict driver): no stuck / no re-queue, rows 36/36, titleUnit 0/60 (one old stored log line in the
+  fixture still reads "Tổng quản thái giám Tổng quản …" in the raw text scan — stored data, k61Title already uses kitTitled).
+- r8 part 2: origin/main moved to f6d80ae65 (j83-variety, toilette, act-pics2 r7) → merged (built files only), site rebuilt.
+  overlay-close.js: main's j83-variety puts "Học X: làm gì?" (kind picker) + "…: dùng vật liệu gì?" before a lesson game; the driver now
+  taps the first open "Làm" and the first material like a player. Branch 35/35 ok; same driver on origin/main f6d80ae65: 35/35 FAIL.
+  Re-test on the merge: event-dp-scan fixture 1180 + 844 (14 each) 0 bad, Thái hậu triệu 408 px / 314 px, 10–11 px under; pane-bar 5 sizes
+  bad 0; tabs-kit-shots 5 sizes bad 0; kit-page 5 sizes bad 0; opt-render 1180 fails []; 0 page errors.
