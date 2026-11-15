@@ -12,7 +12,7 @@
    (scroll-padding-top = bar height). The bar is built after every panel render from the rows the tabs already draw, so the tab
    code keeps its own rows (k3CatTabs finds its row by data-g, kgSub finds .ksub inside the bar). */
 function kitPane(){try{const P=$("panel");if(!P)return;let bar=P.querySelector(":scope > .kpbar");
- const free=r=>!r.closest(".pc,.kpc,.dlg,#popw,[hidden]");
+ const free=r=>!r.closest(".pc,.kpc,.dlg,#popw,[hidden],.kpinline");/* .kpinline (r8): a picker's own tab row (Ân oán X / Y) stays with its strip */
  const sub=P.querySelector(":scope > .ksub")||(bar&&bar.querySelector(":scope > .ksub:not(.kpgsub)"));
  /* the page's own sub-tab row (e.g. Tư trang "Túi đồ · Việc", jinv .kinvsub) — tabs-kit r7 */
  const pg=[...P.querySelectorAll(".ksub")].find(r=>r!==sub&&free(r)&&(r.parentElement!==P))||null;if(pg)pg.classList.add("kpgsub");

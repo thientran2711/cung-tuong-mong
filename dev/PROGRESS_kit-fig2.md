@@ -44,6 +44,39 @@ Continue on this branch (it already contains review/shop-fix). Do not push main;
   "thiện cảm" wording), Ân oán tabs, act cards without own picture, 5-size runs.
 - Test helpers: news-face-real.js serves CDN pictures from git objects of 3e212597e (IMGREV) — no disk, no proxy.
 
+
+## 11/15 r8 (new commit range on top of e68183a1d, which is under review) — owner 13:00Z, 13:15Z, 14:30Z, 15:45Z
+Main (f500d0464) was already merged; nothing new on main. fix-float kitRelDelta is NOT on main → number chips untouched (rule 5).
+- 1 kitEventDp = ONE template (KIT 50.1, jk4): every event with a person → left = ONE person (main one; `kitStagePeople` slice 1),
+  name + rank above (§48), banner top-right for EVERY such event (own picture, else `j24:<title>` = Có người đến / Thái hậu triệu / Hoàng
+  thượng đến / Kẻ hầu xin / Một ánh mắt / Việc của kẻ hầu, else the week-book meaning table KBK_EVRE on title + text; herself alone only
+  on a real match), height = content (floor 420 px, was 500; `kitDpNat` measures banner + text + the options' own content — before, the
+  options were clipped and scrolled), short options 2 per row (32.9 k3long / k3odd no longer break a kdpo2 group).
+  Acceptance "Thái hậu triệu" 1180x820: 421 px tall (was 720 on main), banner, chip above, figure 0.98 of the column, 2 options in one row,
+  12 px under the options. Scan `dev/test/event-dp-scan.js` (fixture save, 1180x820): 41 j24 dialogs + 22 festival / feast / merit
+  dialogs → all kdper, 1 person, banner in the right column, chip above, fill 0.98–0.99, under the options 8–35 px.
+  NOT done (rule 5): "Thái hậu → ta: thiện cảm +3" in option rows = NAMES.th; becomes kitRelDelta when fix-float lands on main.
+- 2 place card head (KIT 32.8b, jplace `kitPlaceHost`): picture band + silhouettes kept; under it head portrait LEFT (relPerson: unmet =
+  grey silhouette, name stays) with kitNameRank above, info box RIGHT; no Thôi (32.10 already hides it). All 4 place-card builders.
+- 3 Ân oán (KIT 43.2b, jhc): each picker = kit sub-tabs (Ta · Chí tôn · Phi tần + counts) + the Hậu cung strip of that group only;
+  `.kpinline` keeps a picker's tab row out of the pane bar (jpane free()). Act cards: no own picture → no picture anywhere (jk4 wrapper
+  on kitActArt / kpActArt, `.kanoart` global).
+- 4b overlays (jk4 + j5): the j5 lesson panel's #mgskip stayed "not hidden" inside the hidden panel and its used "Xong" (#mgok, old
+  callback) stayed in #ov; kitOvBtn (✕ / Esc / tap outside) pressed that stale button during a kg82 result → the kg82 game was never
+  closed (#kg82 left, aaudit busy() → lessons refused) and its result not applied. Fix: #mgskip hidden unless a j5 game is up, #mgok
+  removed after use, kitOvBtn only takes a result button in a panel on screen, #ov hidden when no panel is left, resumeMG that opens
+  nothing clears S.mg. Test `dev/test/overlay-close.js` (35 openers × player path): before 35/35 FAIL (stale #mgskip / #mgok; "j5 then
+  kg82, Esc at result": kg82 result not applied, #kg82 left) → after 35/35 ok.
+  Driver: news-face-real.js workarounds REMOVED (no force-hide #ov, no S.mg=null, no drop/close of a repeating dialog); it presses only
+  visible buttons and stops with window.__stuck {overlay|dialog|requeue}. Old driver on the old build: 14 forced overlay closes / 3000
+  ticks (25 / 6000) — every one a festival contest kg82 intro whose real buttons the driver never pressed (it clicked the stale
+  #mgskip); old driver on the new build: 0 forced closes.
+- 4a invitation re-queue: NOT reproduced. Probe: every j71 invitation (all FV7 contest variants, both feast invitations) × every option →
+  the chosen invitation never comes back; real play (drive2 instrumentation, same pid + same pp or same object after chooseM): no j71 /
+  j67 invitation re-queued in ~1000 dialogs. The only repeats: "Lời cảnh báo" (j70thr) — two identical warnings about the same consort
+  already in Q before the choice (duplicate queueing, not a re-push), "Phòng bị" / "Đêm thị tẩm" = next step with the same title. The
+  old driver's "Thi tài ngày Thất tịch · Lời mời came back" was the stuck contest overlay (above) seen while the invitation was Q[0].
+
 ## LEFT (owner requests, exact)
 1. kitEventDp (KIT 45): done in code + test; LEFT: (a) a 2-option visit leaves ~124 px empty under the options because of the 500 px
    minimum height (32.7c) — lower the minimum or let the figure set it; (b) "several people → only the main one" in the left column is NOT
