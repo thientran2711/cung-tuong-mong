@@ -76,3 +76,22 @@ Shots were kept out of git (dev/shots excluded). Phone landscape 844x390: the pi
 - Bot smoke (dev/measure run1b.sh, 1 shard, 2 lives, cap 40 min on a loaded machine; .art copy with CAP env): life 1 (dtq) 37 months, rank 4,
   28 lessons, 7 exams, no page errors. Life 2 hit the time cap. A full 5×6 run was not possible under the machine load: please run
   `dev/measure/run5b.sh` when the machine is free.
+
+## Review r1 (review/recipes-r1, on main d51a393e4)
+- Merge: assemble order keeps jrcp.js LAST (after jartc; jsfx stays after jmcal before j84). jrcp makes no sounds of its own; jsfx wraps
+  nothing jrcp replaces (wkrTile/tchFee/tchPaid are not wrapped by jsfx). Site rebuilt; dev/audio/INVENTORY.md regenerated (0 unmapped/missing/mismatch).
+- Owner 15/11 ~21:20Z: every art level-up grants ONE recipe of that art (`rcpLvGift`, `p.rcpR`, `p.rcpLv` = levels already rewarded),
+  log "Học được: <món> (kind, lối «…»)" right after the level-up line. Order: a still-locked recipe of a sub-style she knows (lowest level);
+  then the basic (first) recipe of an unlearnt sub-style; then the lowest other recipe of an unlearnt sub-style. The sub-style itself stays
+  unlearnt (self-study never opens a lối). Player: addArt wrapper; NPCs: addArtP + npcMonthly wrappers (same rule). wkrOpen = granted ∪
+  (level gate ∧ sub-style known). recipes.js case 9.
+- Owner 15/11 ~21:50Z (1): every work kind has exactly 4 sub-styles (mon +Món chua ngọt, theu +Thêu bình phong, bhoa split Hoa xuân hạ /
+  Hoa thu đông, huong +Hương kỳ nam long diên, tho +Thơ đề quạt, kinh +Kinh Quán Âm, the +Thế biến hóa, ao +Áo phượng nghê thường),
+  all on the existing r01..r10 (each recipe in exactly one sub-style; checked by script).
+- Balance (owner 20:30Z rule) fixes: book price = palace teacher fee (8 % bổng) + BAL.rcp.bookAdd [12,20,30] (was flat 18/30/45 = up to
+  113 % of a month's bổng at rank 0 while a teacher session opening the same lối cost 3 bạc); ma ma copy = max(12, 15 % bổng) bạc vs Sức −15
+  (was 3 bạc vs Sức −15 ≈ 25–35 bạc of tonic, and the sheet resold for 4 bạc: profit at rank 0–1).
+- Co-op: the taste seed is kept on S.emp (a WORLD key) so both players' Emperor / Thái hậu / consorts have the same tastes; knowledge
+  (S.rcpK) and learnt sub-styles stay personal.
+- Old saves: a save without S.rcpL keeps every sub-style holding a recipe her art level had opened under the old WKR_LV gate; every
+  save now writes S.rcpL (ser wrapper), so new games never take that road.
