@@ -1287,6 +1287,16 @@ Stage rule (j59 — every room / place / servant road / lãnh cung stage):
 Event stage (jk4 kitStageFig / kitEventStage, week-book person pages): each figure carries `--kfr = KIT_FIG.fac/KIT_FIG.man`,
 so a man fills the figure box and a woman / child stand at their kit ratio; feet share the bottom line (`.kesf` justify-end).
 
+### 33.6 Event stage BODY FIT — `kitFigBody` (jkit, one copy) + `kitEsFit` (jk4, review/men, owner 11/15 "Quý phi ~80% of the guard")
+The `--kfr` cap above limited the CANVAS height and the column width, so wide-robed / tall-headdress consorts came out ~80 % of a man.
+Every kitEventStage row (`.kpsubj.kes`) is now fitted after it is drawn (and on resize):
+- `kitFigBody(src)` (cached): alpha bbox t/b/l/r + **head top** = first rows of fair skin (forehead) − a hair allowance (4.5 % of the
+  body), so crowns, hairpins and phoenix headdresses above the head do not count. Grey silhouettes (no skin) use the bbox top.
+- Body (head top → feet) = .9 × box height (clamp 200–400 px, 40 dvh) × KIT_FIG ratio (man 1 · woman 1/KIT_FIG.man · child by age).
+- Feet on one line: the transparent margin under the feet is pulled out (negative margin); transparent side margins take no room.
+- Row too narrow → every figure scales by the SAME factor (ratios kept). Names never cut (chip max-width = visible body, min 80 px).
+- The rooms / places stage (j59) keep their own bbox fit (§33 rules 1–6); the headdress rule could move there later.
+
 Measured BEFORE 11/15 (.86 / ×1.08, superseded — see the table in dev/PROGRESS_book_release.md) (dev/shots/review/fold-layout/k33-*.jpg; figure image height / stage height; 0 page errors, 0 horizontal overflow, 0 cut chips):
 
 | viewport | consort room (her + 1) | cung nữ, master away (her + 1) | cung nữ, 3 people | cung nữ, 6 people |
