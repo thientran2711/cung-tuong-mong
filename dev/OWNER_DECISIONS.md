@@ -387,3 +387,5 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (09:55Z) 22 thú cưng vẽ lại theo phong cách tranh của game (không tả thực), tư thế tự nhiên, không đệm/không đá/không bệ; chim đậu lồng hoặc giá; cá trong chậu.
 - (10:00Z) Thú cưng: Thường–Tinh phẩm là con vật thật; phẩm càng cao càng huyền thoại (cửu vĩ hồ, kỳ lân con, ngọc thố, phượng hoàng non, linh quy, bạch lộc thần…), không dùng sư tử/hổ/hồ ly thường. Cập nhật cả dữ liệu jpet.
 - (10:00Z) Lô nào xong là có người duyệt riêng ngay, không xếp hàng (mở thêm người duyệt khi cần).
+- (10:05Z) Dấu ấn trên đầu nàng: 8 bậc, mỗi phẩm một dấu ấn (phượng vàng trên mây ngọc = Hoàng hậu; nụ sen ngọc = một bậc giữa; bỏ mẫu 1; không tua rua). Chỉ nhún lên xuống nhẹ, không phát sáng. Một tỷ lệ chung: cách đỉnh đầu một khoảng cố định ở mọi hình. Dấu ấn là vật phẩm: có trong rương mỗi lần thăng phẩm, nằm trong Tư trang, bấm Dùng để đổi, giữ được dấu ấn cũ.
+- (10:05Z) Trung y: duyệt kiểu; hoa điền phải là bản đã thu nhỏ (mẫu đang dùng tranh gốc chưa sửa).
