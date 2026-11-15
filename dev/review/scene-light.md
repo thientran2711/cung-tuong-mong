@@ -66,3 +66,28 @@ Site rebuilt (`dev/site/build_site.sh`).
 - Second main merge aa9689da5 (promo-exam §55, kit-fig2): KIT.md keeps §55 then §56 (also removed a duplicated §38 kitEmotion line the first
   conflict resolution had carried); site rebuilt; Tuần lục measurements and old-save run repeated on the final build: identical, 0 page errors.
 - Third main merge 31907911d (j83-variety): built files only, rebuilt; old save loads ok at all 6 sizes, 0 page errors.
+
+# Review r8: review/scene-light af6a7123 (kitBookFigCol / .kbk-figover, outpaint 8 figs) merged onto main b8a58e87 — FAIL (reviewer R8)
+Branch `review/scene-light-r8` (merge e49f3261; conflicts only in built files assets.json/index.html/sw.js → rebuilt with dev/site/build_site.sh).
+KIT §56.3 documents kitBookFigCol + .kbk-figover (kit-only, no private UI found).
+
+## PASS parts
+- tools/bookwide.js (4 facts) on all 12 Thái hậu h1–h3 + 8 a18 train figs at 755x1000 / 1000x755 / 1180x820 / 1366x1024:
+  hRatio 0.935 everywhere, scale 1, cutL 0, torso clear 15–25 px, 0 h-overflow, 0 page errors (two tool artifacts re-checked by eye: ok).
+- Outpainted 8 a18 figs (CDN vs git 3374e5310): faces/huadian identical (only the earlier rosy pass shows), train joins invisible on parchment;
+  m32-t8-a18 still has 7 opaque px in column 0 (train tip touches the canvas edge, not visible as a cut).
+- Old save (made on origin/main) loads at 755x1000, 1000x755, 1180x820, 1366x1024, 844x390, 390x844: 0 page errors, 0 overflow,
+  .stage.kown on; the real dawn Tuần lục opens. No rotate prompt exists on main or here (390x844 plays portrait) — not this branch.
+
+## FAIL
+1. Text cut on .kbk-figover pages: pagination (j87 paginate, .kbk-measure) runs without .kbk-figover, whose panel padding (.2em .4em on
+   .kbk-phead and .kbk-flow) is added later by kitBookFigClamp → the narrower/taller live column overflows. Repro: Thái hậu h1-a51 person page
+   with 14 facts: 755x1000 page 1 last fact cut ("phải phép." lost, 26 px); 1366x1024 page 4 fact "Mục11x" cut mid-sentence.
+   Fix idea: give the panel no layout cost (e.g. box-shadow spread instead of padding) or emit .kbk-figover from personBody so the measure sees it.
+2. One-time re-layout jumps the reader: when a figure's aspect arrives after the book is open, kitBookFigCol dispatches a window resize →
+   layout(logical) restores by page SPEC (src), i.e. the FIRST page of that person. Repro (fig responses held, reader on a "(tiếp theo)" page):
+   755x1000 "Trang 2 / 4" (Mục7–13) → after load "Trang 1 / 6" (Mục0–3). Also the dispatched global resize runs every game resize handler.
+3. Text column too narrow on wide spreads: 1000x755 Thái hậu h1-a51 text column 90–100 px → words broken mid-word ("thưởn g", "Mục0 x"),
+   ONE fact per page (14 facts → 14–16 pages); after the late re-layout the page-1 heading showed no name. 1180x820/1366x1024: 130–150 px
+   (2–3 facts per page, readable). Needs a minimum text width (coordinator/owner trade-off vs 85–93 % height; 85 % is still in range).
+- Note: phone-width scaling unchanged (narrow portrait not a supported layout per owner 05:50Z) — acceptable.
