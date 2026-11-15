@@ -145,6 +145,9 @@ function kidMeet(L,how){try{if(!S||!S.known)return;L=(L||[]).filter(k=>k&&k.aliv
 (function(){if(typeof festival!=="function")return;const f0=festival;festival=function(title){const r=f0.apply(this,arguments);try{if(r&&S&&S.known)kidMeet(allKids().map(([k])=>k).filter(k=>k.alive&&k.age>=1),` trong ${String(title||"yến tiệc").replace(/<[^>]+>/g,"")}`)}catch(e){}return r}})();
 (function(){if(typeof ktRun!=="function")return;const r0=ktRun;ktRun=function(e){let L=[];try{L=ktList(KTE[e]).map(([k])=>k)}catch(x){}const r=r0.apply(this,arguments);try{kidMeet(L," ở buổi khảo hạch")}catch(x){}return r}})();
 (function(){const a=ACT&&ACT.takeaway;if(!a)return;const f0=a.f;a.f=function(x,t){const B=((t&&t.kids)||[]).slice();const r=f0.apply(this,arguments);try{for(const k of B)if(!(t.kids||[]).includes(k)){if(!k.bm)k.bm={n:t===S?S.name:`${rkName(t)} ${t.name}`};if(x===S&&S.known)k61Know([k],"",true,3)}}catch(e){}return r}})();
+/* children of a consort who shares her palace (side halls): she sees them every day */
+function kidMeetHome(){try{if(S&&!S.dead&&S.known&&!S.out)for(const v of (rivals||[]))if(v.alive&&!v.out&&palaceOf(v)==="home")kidMeet((v.kids||[]).filter(k=>k.alive),` ở cùng cung với ngươi`)}catch(e){}}
+(function(){const m0=monthTick;monthTick=function(){const ev=m0.apply(this,arguments);kidMeetHome();return ev}})();
 function kidMetMig(){try{if(!S||S.kmet||!k61S())return;S.kmet=1;for(const [k,v] of allKids()){if(v)delete S.known[kOf61(k)];else S.known[kOf61(k)]=3}K61VER++}catch(e){}}
 (function(){const d0=deser;deser=function(){const r=d0.apply(this,arguments);kidMetMig();return r}})();
 (function(){const s0=start;start=function(){const r=s0.apply(this,arguments);try{if(S)S.kmet=1}catch(e){}return r}})();
