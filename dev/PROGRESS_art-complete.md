@@ -56,6 +56,18 @@ reference; the second reference shows how this same woman looks at older ages), 
 rules] A character lineup of THREE full-body standing figures ... Signature colour family: <palette>. Left: about 30 ... Middle: about 43
 ... Right: about 57 ... NO forehead mark, NO huadian ..." (full text: kc_prompt.txt).
 
+## Group (b) eunuch ranks - IN PROGRESS (resume here)
+- Spec: dev/figwork/artcomplete/ue_spec.py -> ue_jobs.json (90 jobs ue-uNN-r0/r2/r3, 4 ages each, files fig-eunuch-uNN-rK-aXX,
+  role eunuch, identity uNN, tier "r0"/"r2"/"r3"; the existing tier-null art in FIGURES.json = r1). Ref = that eunuch's own sheet
+  (magnificUrl of FIGURES.json, needs .cache/FIGURES.json: `python3 dev/site/cdn_sync.py --pull img/FIGURES.json` then copy, or
+  run audit.py which caches it). `python3 ue_spec.py ue-u01-r0` prints ref + prompt. Gen: gpt-2-6, 4k, 21:9, quality high, refs [ref].
+- Manifest: FIGURES-servants.json (j39 merges it; holds maid/mama/eunuch). Pull it fresh before proc:
+  `python3 dev/site/cdn_sync.py --pull img/FIGURES-servants.json` then `python3 -I proc.py ue_jobs.json FIGURES-servants.json ue_bgN.txt`.
+- Generated so far (ids in ue_gens.txt): pilot u01 r0/r2/r3 - not yet looked at / cut. Next: look at the pilot, adjust ue_spec.py if
+  needed, then the other 29 x 3; demole_por.py -n --sheet + browsheet on every new face before upload.
+- Code still to do: picker (jartc.js): staff eunuchs pass srk(who) as the rank to f88Pick (base mode), tiers r0..r3 parse to 0..3
+  like maid m0..m4; plan: wrap f88Best: if who.role eunuch/eun and who!==S -> f88Pick(L,null,figAgeOf(who),true,who.rk==null?1:who.rk).
+
 ## Remaining (in order)
 - Eunuch ranks r0/r2/r3 x 4 ages x 30 (360) + picker: pass srk(who) for staff eunuchs, tiers "r0".."r3" (base = r1).
 - Kids adult bands a26/a36/a51 x 48 (144) + picker: kidBandOf beyond 20.
