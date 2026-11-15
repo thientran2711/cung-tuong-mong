@@ -334,3 +334,21 @@ html body #modal .dlg.kdper>#mb>.opts>*{width:100%!important;max-width:none!impo
 #modal .dlg.kdper.kdnarrow>#mb>.opts{grid-column:1;grid-row:-2/-1}
 #modal .dlg.kdper.kdnarrow #mr{padding-left:10px}
 `;document.head.appendChild(st)})();
+/* ================= KIT 32.10 · kit-x — THE close ✕ (owner 11/15: no "Thôi" buttons; a card closes with ONE ✕ at the top right of its header) =================
+   `kitXHTML(attrs, label)` → `<button class="kit-x" aria-label="Đóng">✕</button>` (36 px square, kit ink on the header ground, gold ring on focus).
+   `kitXAdd(dlg)` puts one into a kit panel header (.kph, right end, absolutely placed so the header keeps the height of every other
+   dialog) and makes it close the panel the normal way (#mclose: onClose runs);
+   the panel's button row (#mr) is then hidden by the caller's class. Floating cards inside a panel (shop item card) use the same class. */
+function kitXHTML(attrs,label){return `<button type="button" class="kit-x" aria-label="${label||"Đóng"}" title="${label||"Đóng"}"${attrs?" "+attrs:""}>✕</button>`}
+function kitXAdd(dlg){try{const h=dlg&&dlg.querySelector(":scope > .kph");if(!h||h.querySelector(":scope > .kit-x"))return;h.insertAdjacentHTML("beforeend",kitXHTML('data-kitx="panel"'));
+ h.lastElementChild.addEventListener("click",e=>{e.stopPropagation();const c=document.getElementById("mclose");if(c)c.click()})}catch(e){console.error("kitXAdd",e)}}
+window.kitXHTML=kitXHTML;window.kitXAdd=kitXAdd;
+(function(){const st=document.createElement("style");st.id="kit-x";st.textContent=`
+.kit-x{flex:none;margin-left:auto;width:36px;height:36px;min-height:0;padding:0;display:inline-grid;place-items:center;border-radius:8px;cursor:pointer;
+ border:1px solid var(--k-hair,#e6d3ac);background:#fffaf0cc;color:var(--ink,#3a2418);font:700 1.05rem/1 system-ui,sans-serif;box-shadow:none}
+.kph>.kit-x{position:absolute;right:10px;top:50%;transform:translateY(-50%);margin:0}
+.kph:has(>.kit-x){padding-right:56px!important}
+.kit-x:hover{background:#fff;border-color:var(--gold,#c9a46a)}
+.kit-x:focus-visible{outline:none;box-shadow:0 0 0 2px var(--gold,#c9a46a)}
+.modal.night .kit-x{background:#2a1610;color:#e9c07a;border-color:#4a2a20}
+`;document.head.appendChild(st)})();
