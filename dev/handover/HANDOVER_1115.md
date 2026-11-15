@@ -67,3 +67,4 @@ Nhắc theo dõi: send_later 30 phút, tự đặt lại mỗi lượt (lịch l
 - 04:00Z review/cdn-images @477d2094 SẴN SÀNG KIỂM (R2 bucket ctm-img + Worker ctm-img.victoria-tntt.workers.dev; 11673 ảnh; img/ bỏ khỏi cây). Lo: live có loading tải 83 MB lần đầu (116 s) — người duyệt phải sửa để vào game nhanh. Nhánh còn img/: đẩy CDN bằng cdn_sync --git trước khi gộp (điều phối chạy lệnh vì thợ bị chặn). Đề xuất làm nhẹ lịch sử git (cần sếp).
 - 04:15Z LIVE main=482a310ea (review/men: nam nhân theo lịch, 4 thị vệ). Đã chạy cdn_sync 109 ảnh xóa nốt ruồi (review/mole-fix 50a7a15c0) + 392 ảnh hoa điền.
 - 04:40Z review/thinhan-art @6f027b3d3 (tranh Thỉnh an mới act-thinh-an-v2 trên CDN, 160 credit) → gộp cùng cdn-images.
+- 05:00Z LIVE main=b165b1f71 (Tư trang ô vuông + 6 ô trang bị, Luân hồi thẻ úp; sửa chữ Hán). palace-map chờ cdn-images (ảnh không vào git). Đĩa ~2 GB trống — dọn worktree khi xong.
