@@ -421,3 +421,6 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (12:00Z) Đính chính lỗi Nấu nướng: KHÔNG phải bấm lọt. Bấm 1 lần là trừ và ra BẠI ngay, rồi mới hiện trò chơi. Đúng thứ tự: bấm → trò chơi → chơi xong mới trừ và hiện thẻ kết quả. Rà mọi hành sự có trò chơi.
 - [ ] (12:05Z) Món tự làm (mứt khá) không có hình, tên chung "Tác phẩm tự tay · Thường" (sai phẩm), không có hoạt cảnh nhận đồ. Luật nhắc lại: MỌI vật phẩm xuất hiện phải hiện ra phát sáng theo màu phẩm, bấm nhận thì bay vào Tư trang (game-feel sửa + test mọi chỗ thêm đồ).
 - LIVE CDN (12:05Z) Thỉnh an Thái hậu/Hoàng hậu vẽ lại (vạn phúc, áo cung trang rộng).
+- (12:10Z) Tặng quà: ô ảnh trái = hình món đồ (không phải Triều chính); khung phải = thông tin món (phẩm, ai làm, ngày giờ, công dụng); danh sách người nhận chia tab như Hậu cung (Chí tôn/Phi tần/Nam nhân/Cung nhân). Rà mọi hộp thoại còn rơi về ảnh Triều chính.
+- (12:10Z) Tác phẩm tự tay đa dạng: mỗi loại (nấu, thêu, tranh, chữ…) khoảng 10 món mỗi phẩm, mỗi món có hình riêng, phẩm cao nhìn sang hơn.
+- LIVE CDN (12:10Z) Khung Đáp ứng A + 8 dấu trên đầu (đổi 6/7). Code nằm ở review/rank0-ivory chờ duyệt.
