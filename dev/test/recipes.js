@@ -74,4 +74,11 @@ const [,,BASE,SZ,OUT,TAG,OLD]=process.argv;const [WH,DPR]=SZ.split('@');const [W
  await p.evaluate(()=>{S.arts.cam=5;tab="art";KTSUB.art="cktt";render()});await p.waitForTimeout(900);
  R.mt=await p.evaluate(()=>({btn:!!document.querySelector('[data-rcpmt="cam"]'),ls:!!document.querySelector('[data-rcpls="cam"]')}));
  await p.evaluate(()=>{rcpListOpen("cam")});await p.waitForTimeout(900);R.list=await meas();await shot('list');await close();
+ /* 9. art level-up grants one recipe of that art (owner 15/11 ~21:20Z): player (log "Học được: …", known sub-style first, then the basic
+       recipe of the next sub-style without learning that sub-style) and an NPC (addArtP) alike */
+ R.lvup=await p.evaluate(()=>{const a=WK.mon.a;S.arts[a]=0;S.artp[a]=0;S.rcpL.mon=["s1"];delete S.rcpR;delete S.rcpLv;const out=[];
+  for(let i=0;i<4;i++){const n0=S.logs.length;addArt(a,S.arts[a]+2);const L=S.logs.slice(0,S.logs.length-n0).map(x=>x.replace(/<[^>]+>/g,'')).filter(x=>/Học được:/.test(x));
+   const g=(S.rcpR&&S.rcpR.mon||[]).slice(-1)[0];out.push({lv:S.arts[a],got:g,st:g&&rcpStOf("mon",g)[0],open:g&&wkrOpen(S,"mon").some(r=>r.id===g),log:L[0]||""})}
+  const v=liveRivals(true).find(v=>v.arts);let npc=null;if(v){v.arts[a]=0;v.artp[a]=0;delete v.rcpR;delete v.rcpLv;addArtP(v,a,2);npc={lv:v.arts[a],got:v.rcpR&&v.rcpR.mon,open:v.rcpR&&wkrOpen(v,"mon").some(r=>r.id===v.rcpR.mon[0])}}
+  return{steps:out,s2Learnt:rcpKnown().mon.includes("s2"),npc,ok:out.every(x=>x.got&&x.open&&/Học được:/.test(x.log))&&!!(npc&&npc.got&&npc.open)}});
  R.errs=errs;console.log(JSON.stringify(R));await b.close()})();

@@ -56,7 +56,25 @@ function rcpGrant(kind,sid,how){const L=rcpKnown()[kind];if(!L||L.includes(sid)|
 /* each sub-style's first recipe is open at bậc 0, so a teacher can open any sub-style from the start; the rest keep their level */
 for(const kind in RCP_ST)for(const s of RCP_ST[kind]){const r=wkrOf(kind,s[2][0]);if(r)r.lv=0}
 /* recipes she can make: art level AND a learnt sub-style */
-(function(){const o0=wkrOpen;wkrOpen=function(p,kind){const L=o0.apply(this,arguments);if(!RCP_ST[kind])return L;return L.filter(r=>{const s=rcpStOf(kind,r.id);return !s||rcpKnows(p,kind,s[0])})}})();
+(function(){const o0=wkrOpen;wkrOpen=function(p,kind){const L=o0.apply(this,arguments);if(!RCP_ST[kind])return L;return (WKR[kind]||[]).filter(r=>rcpOpenR(p,kind,r))}})();
+/* ---------- art level-up: one new recipe of that art (owner 15/11 ~21:20Z), the same for every person ----------
+   Each level gained grants ONE recipe of that art (p.rcpR, kept even above her level): a still-locked recipe of a sub-style she already
+   knows (lowest level first); when every recipe of her known sub-styles is open, the basic (first) recipe of the next sub-style she has
+   not learnt (basic recipes first; once every basic is hers, the lowest other recipe of a sub-style she has not learnt); the sub-style itself stays unlearnt (self-study never opens a sub-style). p.rcpLv = the art levels already rewarded. */
+function rcpHasR(p,kind,rid){const G=p&&p.rcpR;return !!(G&&G[kind]&&G[kind].includes(rid))}
+function rcpOpenR(p,kind,r){if(rcpHasR(p,kind,r.id))return true;if(r.lv>wkLv(p,WK[kind].a))return false;const s=rcpStOf(kind,r.id);return !s||rcpKnows(p,kind,s[0])}
+function rcpLvGift(p,k){const kinds=wkKindsOf(k).filter(x=>RCP_ST[x]&&WKR[x]);let C=[];
+ for(const kind of kinds)for(const r of WKR[kind]){const s=rcpStOf(kind,r.id);if(s&&rcpKnows(p,kind,s[0])&&!rcpOpenR(p,kind,r))C.push([kind,r])}
+ if(!C.length)for(const kind of kinds){const s=RCP_ST[kind].find(s=>!rcpKnows(p,kind,s[0])&&!rcpHasR(p,kind,s[2][0]));if(s){const r=wkrOf(kind,s[2][0]);if(r)C.push([kind,r])}}
+ if(!C.length)for(const kind of kinds)for(const s of RCP_ST[kind])if(!rcpKnows(p,kind,s[0]))for(const id of s[2]){const r=wkrOf(kind,id);if(r&&!rcpHasR(p,kind,id))C.push([kind,r])}
+ if(!C.length)return null;const m=Math.min(...C.map(x=>x[1].lv));const [kind,r]=pick(C.filter(x=>x[1].lv===m));p.rcpR=p.rcpR||{};(p.rcpR[kind]=p.rcpR[kind]||[]).push(r.id);return{kind,r}}
+function rcpLvInit(p){if(!p||!p.arts)return;p.rcpLv=p.rcpLv||{};for(const a in p.arts)if(p.rcpLv[a]==null)p.rcpLv[a]=p.arts[a]|0}
+function rcpLvSync(p){const out=[];if(!p||!p.arts||!p.rcpLv)return out;for(const a in p.arts){const now=p.arts[a]|0;let l=p.rcpLv[a];if(l==null){p.rcpLv[a]=now;continue}
+  while(l<now){l++;const g=rcpLvGift(p,a);if(g)out.push(g)}p.rcpLv[a]=now}return out}
+function rcpLvTxt(g){const s=rcpStOf(g.kind,g.r.id);return `<span class="g">Học được: ${g.r.n}</span> (${WK[g.kind].n.toLowerCase()}${s?`, lối «${s[1]}»`:""}).`}
+(function(){const a0=addArt;addArt=function(k,g){try{rcpLvInit(S)}catch(e){}const r=a0.apply(this,arguments);try{for(const x of rcpLvSync(S))log(rcpLvTxt(x))}catch(e){console.error("rcp lv",e)}return r}})();
+(function(){if(typeof addArtP!=="function")return;const a0=addArtP;addArtP=function(p,k,g){if(p===S)return a0.apply(this,arguments);try{rcpLvInit(p)}catch(e){}const r=a0.apply(this,arguments);try{rcpLvSync(p)}catch(e){}return r}})();
+(function(){if(typeof npcMonthly!=="function")return;const m0=npcMonthly;npcMonthly=function(v){try{rcpLvInit(v)}catch(e){}const r=m0.apply(this,arguments);try{rcpLvSync(v)}catch(e){}return r}})();
 /* ---------- persons ---------- */
 function rcpPK(r){return r==="emp"||r==="th"?r:r&&typeof r==="object"?(r===S?"me":"v"+r.id+(r.name||"")):""}
 function rcpWho(r){return r==="emp"?"Hoàng thượng":r==="th"?"Thái hậu":r&&r.name?`${rkName(r)} ${r.name}`:""}
@@ -173,14 +191,14 @@ document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.clos
 /* ---------- the pick grid (jwkr): sub-style on every tile; unknown sub-styles locked, open only with a teacher ---------- */
 const RCPT={k:null,t:null};
 function rcpTchV(){return RCPT.t&&RCPT.t!=="nq"?RV(+RCPT.t):null}
-wkrTile=function(kind,r,l){const ok=r.lv<=l,a=ARTS.find(x=>x.k===WK[kind].a);const s=rcpStOf(kind,r.id);const kn=!s||rcpKnows(S,kind,s[0]);
+wkrTile=function(kind,r,l){const gr=rcpHasR(S,kind,r.id),ok=gr||r.lv<=l,a=ARTS.find(x=>x.k===WK[kind].a);const s=rcpStOf(kind,r.id);const kn=gr||!s||rcpKnows(S,kind,s[0]);
  const tch=KWR.mode==="teacher"&&!kn&&(!rcpTchV()||rcpNpcKnows(rcpTchV(),kind,s[0]));const can2=ok&&(kn||tch);
  const eff=(s?`Lối ${s[1]}`:"")+(r.st?" · "+r.st.map(x=>x[0]).join(", "):"");
  const why=!ok?`Cần ${a.n} bậc ${r.lv}`:!kn&&!tch?`Chưa học lối «${s[1]}»: học với thầy, hoặc đọc ${RCP_BK[kind].toLowerCase()} «${s[1]}»`:"";const A=`data-kwr="${kind}" data-kwri="${r.id}"`;
  return `<div class="kshc kshpick${can2?"":" kshno"}" ${A}>`+
   `<span class="kshpic">${kitItem({src:wkrPic(kind,r,0),name:r.n,grade:0,size:"slot",tip:r.n})}</span>`+
   `<span class="kshn" title="${r.n}">${r.n}</span><span class="kshe" title="${eff}">${eff}</span>`+
-  `<span class="kshp">${r.lv?`${a.n} bậc ${r.lv}`:"mọi bậc"}</span>`+
+  `<span class="kshp">${gr&&(r.lv>l||!rcpKnows(S,kind,s[0]))?"đã học món này":r.lv?`${a.n} bậc ${r.lv}`:"mọi bậc"}</span>`+
   `<button type="button" class="kbtn kshgo" ${A} data-kwrgo="1"${can2?"":` disabled title="${why}"`}>${!ok?"Chưa mở":tch?"Học lối này":kn?"Làm":"Chưa học"}</button></div>`};
 (function(){const b0=wkrBody;wkrBody=function(){const h=b0.apply(this,arguments);try{const kind=KWR.kind;if(!kind||!RCP_ST[kind])return h;const K=rcpKnown()[kind];
   const t=`Lối đã học: ${RCP_ST[kind].filter(s=>K.includes(s[0])).map(s=>s[1]).join(", ")}.${KWR.mode==="teacher"?` Thầy dạy được lối mới: chọn món ghi «Học lối này».`:` Lối mới: học với thầy, hoặc đọc sách phổ.`}`;
@@ -222,7 +240,7 @@ document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.clos
   if(l>=5&&rcpNewSt(k))s.acts.push(pbtn(`data-rcpmt="${k}"`,"Học lối mới với thầy",`tốn: 2 khắc, Sức -10, Bạc -${rcpFeeNq()} hoặc nợ một ân · thành: mở một lối mới, ra một tác phẩm lối ấy`,t2||(S.suc<10?"Sức dưới 10":"")));
   if(wkKindsOf(k).some(x=>RCP_ST[x]))s.acts.push(pbtn(`data-rcpls="${k}"`,"Các lối, sách phổ",`thành: xem lối đã học, lối chưa học và cách học`,""))}}catch(e){console.error("rcp skills",e)}return L}})();
 function rcpListOpen(k){const a=ARTS.find(x=>x.k===k);const R=[];for(const kind of wkKindsOf(k).filter(x=>RCP_ST[x]))RCP_ST[kind].forEach((s,i)=>{const kn=rcpKnows(S,kind,s[0]);
-  const rs=s[2].map(r=>wkrOf(kind,r)).filter(Boolean).map(r=>r.n).join(", ");
+  const rs=s[2].map(r=>wkrOf(kind,r)).filter(Boolean).map(r=>!kn&&rcpHasR(S,kind,r.id)?`${r.n} (đã học món này)`:r.n).join(", ");
   R.push([`${WK[kind].n}: ${s[1]}`,[kn?"đã học":`chưa học: học với thầy, hoặc đọc ${RCP_BK[kind].toLowerCase()} «${s[1]}» (Nội vụ phủ, ${BAL.rcp.bookPr[Math.min(3,i)]} bạc)`,rs],kn?"g":"n"])});
  kitModal({kind:"info",title:`${a.n}: các lối`,sub:"Lối đã học, lối chưa học",html:`<div class="kinvrows">${kitRows(R)}</div>${kitFacts(["Mỗi lối mở vài món; món còn cần đủ bậc tài nghệ.","Mỗi người thích một lối, có người chê một lối: quà đúng lối người ấy thích mới được trọn."])}`})}
 /* ---------- Tác phẩm tab: tastes known so far + the two ways to ask ---------- */
