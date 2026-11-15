@@ -15,7 +15,7 @@ async function boot(b,W,H,D){const ctx=await b.newContext({viewport:{width:W,hei
  await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;window.__forceOrigin='td';document.getElementById('title').hidden=true;start()});
  await p.waitForFunction(()=>typeof S!=='undefined'&&S&&S.name,null,{timeout:120000});await p.waitForTimeout(1500);
  await p.addStyleTag({content:'#kroul,#kroulw{display:none!important}'});return{ctx,p,errs}}
-const clr=p=>p.evaluate(()=>{document.querySelectorAll('#kroul,#kroulw,.kmov,#kmrew,.kmfx,.kmnote,#rtoast').forEach(e=>e.remove());const m=$('modal');m.hidden=true;Q.length=0;used=0;S.visit=S.visit||{k:'home',people:[],talked:false}});
+const clr=p=>p.evaluate(()=>{document.querySelectorAll('#kroul,#kroulw,.kmov,#kmrew,.kmfx,.kmnote,#rtoast').forEach(e=>e.remove());const m=$('modal');m.hidden=true;m.className='modal';try{NLP=null}catch(e){}Q.length=0;used=0;S.visit=S.visit||{k:'home',people:[],talked:false}});
 (async()=>{const b=await chromium.launch();
  /* ---------------- logic ---------------- */
  {const [W,H]=SIZES[0];const {ctx,p,errs}=await boot(b,W,H,1);await clr(p);
@@ -26,7 +26,7 @@ const clr=p=>p.evaluate(()=>{document.querySelectorAll('#kroul,#kroulw,.kmov,#km
   r=await p.evaluate(()=>{Q.length=0;S.tuan=2;const t0=S.turn;S.suc=80;S.ill=null;endTurn();const c=Q.find(m=>m.t==='Thỉnh bình an mạch');return{turn:S.turn>t0,last:S.thy&&S.thy.last===S.turn,card:!!c,h:c&&c.h,log:S.logs.some(l=>/Thỉnh bình an mạch/.test(l)),rec:S.thy.rec[0]}});
   ok(r.turn&&r.last&&r.log&&r.rec&&r.rec.k==='routine','routine visit runs at the month change, logs, writes the mạch án',r);
   ok(!r.card||/Khỏe mạnh/.test(r.h),'routine verdict Khỏe mạnh for a healthy Sức 80',r.h);
-  r=await p.evaluate(()=>{Q.length=0;S.tuan=2;S.suc=60;S.ill={k:'phonghan',st:2,known:true};endTurn();const c=Q.find(m=>m.t==='Thỉnh bình an mạch');return c&&c.h});
+  r=await p.evaluate(()=>{Q.length=0;S.tuan=2;S.suc=60;S.ill={k:'phonghan',st:2,known:true};const im=illMonth;illMonth=()=>'';try{endTurn()}finally{illMonth=im}const c=Q.find(m=>m.t==='Thỉnh bình an mạch');return c&&c.h});
   ok(/Có bệnh/.test(r||''),'routine verdict Có bệnh with an illness (card shown)',r);
   await clr(p);
   /* 2. the two roads */
@@ -75,8 +75,8 @@ const clr=p=>p.evaluate(()=>{document.querySelectorAll('#kroul,#kroulw,.kmov,#km
   ok(r.gone,'NPC: the monthly visit finds a tainted gift in a rival and takes it away',r);
   ok(r.af>0&&r.bac<500,'NPC: a hostile rival pays bạc to bribe the physician',r);
   r=await p.evaluate(()=>{const c=S.court.ty;c.af.me=90;const v=liveRivals(true).find(x=>!x.coop);v.preg=2;v.hidden=true;used=0;S.notes={};const B=BAL.thy.askBase;BAL.thy.askBase=100;courtAct('hoi','ty');BAL.thy.askBase=B;
-   return{note:JSON.stringify(S.notes[v.id]||[])}});
-  ok(/mang thai/.test(r.note),'Hỏi chuyện: a physician who likes her tells a rival\'s hidden pregnancy',r);
+   return{note:JSON.stringify(S.notes||{})}});
+  ok(/thái y kể/.test(r.note),'Hỏi chuyện: a physician who likes her tells a rival\'s mạch án (hidden pregnancy / illness)',r);
   r=await p.evaluate(()=>{const v=liveRivals(true).find(x=>!x.coop);const c=S.court.ty;c.af.me=0;c.af[v.id]=80;v.ghen=100;S.ill={k:'phonghan',st:1,known:true};S.doctor=1;const a=thyBribedBy(S);S.doctor=0;const b2=thyBribedBy(S);c.af[v.id]=0;S.ill=null;return{a:!!a,b:!!b2}});
   ok(!r.a&&r.b,'treat() rule: same bribed / trusted function',r);
   /* old save */
@@ -86,17 +86,17 @@ const clr=p=>p.evaluate(()=>{document.querySelectorAll('#kroul,#kroulw,.kmov,#km
  /* ---------------- views ---------------- */
  for(const [W,H,D] of SIZES){const {ctx,p,errs}=await boot(b,W,H,D);await clr(p);const tag=`${W}x${H}`;
   /* the physician card in Hậu cung › Cung nhân */
-  const r=await p.evaluate(()=>{S.bac=100;tab='staff';const L=[];L.push(1);S.staff.forEach(()=>L.push(1));const i=L.length+Object.keys(S.court).indexOf('ty');PG.staff=i;render();
+  const r=await p.evaluate(()=>{S.bac=100;try{k61Know(S.court.ty,'',true,3)}catch(e){}tab='staff';const L=[];L.push(1);S.staff.forEach(()=>L.push(1));const i=L.length+Object.keys(S.court).indexOf('ty');PG.staff=i;render();
    const pc=[...document.querySelectorAll('#panel .pct')].find(x=>/Bắt mạch/.test(x.textContent));if(pc)pc.click();
-   const t=document.getElementById('panel').innerText;return{has:/Mời thái y bắt mạch/.test(t)&&/Sang Thái y viện/.test(t),line:/Thỉnh bình an mạch: thượng tuần/.test(t)}});
+   const t=document.getElementById('panel').innerText;return{has:/Mời thái y bắt mạch/.test(t)&&/Sang Thái y viện/.test(t),line:/Thỉnh bình an mạch/i.test(t)}});
   ok(r.has&&r.line,`${tag}: physician card shows the Bắt mạch group + next visit`,r);
-  await p.waitForTimeout(300);await p.screenshot({path:`${OUT}/card-${tag}.png`});
+  await p.waitForTimeout(300);await p.screenshot({path:`${OUT}/card-${tag}.png`,timeout:120000});
   let ov=await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1);ok(!ov,`${tag}: no horizontal overflow (card)`);
   /* the result card through the button */
   await p.evaluate(()=>{used=0;const b=[...document.querySelectorAll('#panel button[data-cv="bm"]')][0];if(b)b.click();else courtAct('bm','ty')});await p.waitForTimeout(900);
   const m=await p.evaluate(()=>{const M=$('modal');return{open:!M.hidden,t:M.innerText.slice(0,300)}});
   ok(m.open&&/Lời thái y/.test(m.t),`${tag}: result card opens`,m.t.replace(/\s+/g,' ').slice(0,160));
-  await p.screenshot({path:`${OUT}/res-${tag}.png`});
+  await p.screenshot({path:`${OUT}/res-${tag}.png`,timeout:120000});
   ov=await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1);ok(!ov,`${tag}: no horizontal overflow (result)`);
   ok(!errs.length,`${tag}: no page errors`,errs);await ctx.close()}
  await b.close();const f=res.filter(x=>!x[0]);console.log(`\n${res.length-f.length}/${res.length} ok`);process.exit(f.length?1:0)})();

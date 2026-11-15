@@ -59,7 +59,9 @@ function leak(by,F){if(!by)return"";const L=[];try{
  if(F.ill){const i=illOf(S);if(i){apply({danh:-2});try{newsAdd(by,"ty",`Mạch án của ${S.name} lọt ra ngoài: nàng mắc ${ILL[i.k].n.toLowerCase()}`)}catch(e){}L.push("bệnh")}}
  if(!L.length)noteAdd(by.id,`đọc được mạch án của ngươi qua thái y`);
  if(roll(cl(20+(S.mat||0)*8,5,90)))log(`<span class="r">Tai mắt báo: thái y vừa bắt mạch cho ngươi đã ghé cung ${by.name}.</span>`)}catch(e){console.error(e)}return L.join(", ")}
-function rec(kind,v){const z=thy();z.rec.unshift({t:S.turn,m:S.month,y:S.year,k:kind,v});if(z.rec.length>12)z.rec.length=12}
+/* he comes and names himself: she knows the physician from then on (face reveal rule, j61) */
+function meet(){try{const c=doc();if(c&&typeof k61Know==="function")k61Know(c,"",true,2)}catch(e){}}
+function rec(kind,v){meet();const z=thy();z.rec.unshift({t:S.turn,m:S.month,y:S.year,k:kind,v});if(z.rec.length>12)z.rec.length=12}
 
 /* ---------- 1. Thỉnh bình an mạch (monthly, free) ---------- */
 function routine(){if(off())return;const z=thy();if(z.last===S.turn)return;z.last=S.turn;
@@ -89,7 +91,7 @@ function why(road){if(!S||S.dead)return"không được";if(S.out)return"ở lã
  if(road==="pay"){if((S.bac||0)<cost())return `cần ${cost()} bạc`;if(!can(T().khPay))return"hết khắc";return""}
  if(S.confined)return"đang bị cấm túc";if(!can(T().khSelf))return `cần ${T().khSelf} khắc`;if((S.suc||0)<20)return"Sức không đủ";return""}
 function xLine(road){const tr=trusted(S);const self=road==="self";
- return `thành: rõ Sức, bệnh, có thai hay chưa · thấy mưu hại ngầm (nếu có): ${word(findO(self))}${self?` · kèm: người trong cung thấy ngươi ở Thái y viện`:" · kèm: kín đáo, thái y đến tận cung"}${tr?"":" · kèm: thái y chưa phải người của ngươi, lời có khi không thật"}`}
+ return `thành: rõ Sức, bệnh, có thai hay chưa · thấy mưu hại ngầm (nếu có): ${word(findO(self))} · kèm: ${self?"người trong cung thấy ngươi ở Thái y viện, thái y khó nói sai":"kín đáo, thái y đến tận cung"}${tr?"":", thái y chưa phải người của ngươi nên lời có khi không thật"}`}
 function req(road,paid){const self=road==="self";if(!paid){if(why(road))return"";if(self){spend(T().khSelf);apply({suc:-T().sucSelf})}else{spend(T().khPay);apply({bac:-cost()})}}
  const z=thy();z.req=(z.req||0)+1;const tr=trusted(S),by=bribedBy(S);const lie=!!by&&roll(self?T().lieSelf:T().lie);
  const [vd,cls]=verdict(lie);const P=[];const F={};const who=S.doctor?"Thái y tâm phúc của ngươi":docName();
