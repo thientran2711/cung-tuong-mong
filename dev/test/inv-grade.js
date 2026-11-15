@@ -24,7 +24,7 @@ const [,,BASE,SZ,OUT,TAG,OLD]=process.argv;const [WH,DPR]=SZ.split('@');const [W
  await p.evaluate(()=>{SLOT=3;document.getElementById('title').hidden=true;try{store.set(NL_KEY,null)}catch(e){}start()});await p.waitForTimeout(2500);
  await p.evaluate(()=>{for(let i=0;i<20&&(S.origin.k==='cnv'||(typeof isSrv==='function'&&isSrv()));i++){try{store.set(NL_KEY,null)}catch(e){}start()}const k=document.getElementById('kroul');if(k)k.remove();Q.length=0;showModal();
   S.inv=[{k:'tramngoc',w:1},{k:'vongngoc'},{k:'nhansam'},{k:'nhansam'},{k:'nhansam'},{k:'yensao'},{k:'luahang'},{k:'huongtram'},{k:'tuithom',t:'xa',by:'me'},{k:'tranhco'},{k:'boodieu'},{k:'tramphuong'},{k:'gamvang'},{k:'dancoc'},{k:'ngocboi',from:'emp'},{k:'thunha'}];
-  S.dress={k:'gamto',until:S.turn+2};render();document.querySelector('#tabs [data-tab=inv]').click()});
+  S.dress={k:'gamto',until:S.turn+2};S.scar={sev:2,known:1,veil:1};render();document.querySelector('#tabs [data-tab=inv]').click()});
  await p.waitForTimeout(1500);await shot('inv-grades');A.push(await audit('inv-grades'));
  const geo=await p.evaluate(()=>{const g=document.querySelector('.kinvg'),P=document.getElementById('panel');const cols=getComputedStyle(g).gridTemplateColumns.split(' ').length;
   const eq=document.querySelector('.keq');const last=[...P.children].pop().getBoundingClientRect();
@@ -37,7 +37,7 @@ const [,,BASE,SZ,OUT,TAG,OLD]=process.argv;const [WH,DPR]=SZ.split('@');const [W
  await shot('inv-worn');A.push(await audit('inv-worn'));
  await p.click('.keq [data-keqi="0"]');await p.waitForTimeout(900);await shot('inv-item');A.push(await audit('inv-item'));
  await p.evaluate(()=>{closeModal()});await p.waitForTimeout(300);
- await p.click('.keq [data-keqi="4"]');await p.waitForTimeout(900);await shot('inv-dress');A.push(await audit('inv-dress'));
+ await p.click('.keq [data-keqi="5"]');await p.waitForTimeout(900);await shot('inv-dress');A.push(await audit('inv-dress'));
  await p.evaluate(()=>{closeModal()});await p.waitForTimeout(300);
  /* other tabs: act-card rows never clipped (at top, and scrolled so the sticky tab row is stuck) */
  const T=[];for(const t of ['act','go','rv','rel','fac','staff','kid','art','story']){const ok=await p.evaluate(t=>{const b=document.querySelector(`#tabs [data-tab=${t}]`);if(!b||b.offsetParent===null)return false;b.click();return true},t);if(!ok)continue;

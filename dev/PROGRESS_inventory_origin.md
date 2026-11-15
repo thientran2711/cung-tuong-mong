@@ -43,3 +43,5 @@ Quyết định chủ: OWNER_DECISIONS 11/15 04:00Z + lệnh điều phối (lu�
 - Trục XA XỈ (luxOf/luxMonth, qua itemMonth cho cả NPC): Giản dị / Vừa phẩm / Xa hoa / Quá xa xỉ; ghen theo tính, Thái hậu chê, lời đồn; giản dị ở bậc cao được Đức.
 - Đổi "Gánh hàng rong" → "Nhờ thái giám mua đồ" (thẻ việc, tiêu đề, lời thoại Nội vụ phủ, gợi ý rương trống, chức danh thái giám; sổ cũ đổi tên khi vẽ bảng).
 - Hàng tab: cách đều trên/dưới (--k-tabgap 10px), chỉ dính khi trang dài (> 1.5 lần bảng) → Tư trang không bị che khi cuộn.
+- Ô Khăn che mặt: dùng mạng che hủy dung j70 (p.scar.veil, tranh KIT_VEIL theo bậc). Có vết: che, Sắc +2; mặt lành mà vẫn che: bị đồn, Danh -1.
+  j70 chưa có trên nhánh này: ô đọc/ghi đúng trường p.scar của j70 nên khi gộp sẽ khớp. Hoa tai / giày hoa: chờ chủ duyệt tranh.
