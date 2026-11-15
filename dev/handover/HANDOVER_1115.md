@@ -123,3 +123,4 @@ Nhắc theo dõi: send_later 30 phút, tự đặt lại mỗi lượt (lịch l
 - [ ] Tua rua khung chân dung bị cắt mất; bấm nhân vật mở khung riêng không theo kit (giao stage-slots/person-acts).
 - [~] (đã sửa trên review/act-audit b3712f0e8, chờ duyệt) Cung nhân: "Thiện cảm" vs "Lòng" vs "Chủ tin" lẫn lộn; "Người chạy việc: Tiểu Lâm Tử" nằm trên thẻ cung nữ Lan; "Cung ngươi"; tên có số (Thúy 2, Vân 2, Lan 2); nhãn "y Trương" bị cắt (giao act-audit).
 - [ ] Thanh đầu trang Fold dọc vỡ: tên gãy 2 dòng, chip phẩm/tuổi bị nút nơi chốn đè, ngày gãy 3 dòng (giao review/header-fix).
+- [ ] Ân oán: người chưa gặp vẫn hiện mặt thật (phải là bóng xám, chỉ hiện tên) → kit-fig2 dùng hàm người lạ chung + rà mọi chỗ vẽ ảnh đại diện.
