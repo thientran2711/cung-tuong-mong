@@ -174,3 +174,25 @@ window.kitThey=kitThey;
    lạnh lùng ×0.7 on gains) — "Sủng -8" on a static outcome text is drawn as the real −10 */
 (function(){if(typeof actLineRaw!=="function"||typeof sg!=="function")return;const a0=actLineRaw;actLineRaw=function(){const h=a0.apply(this,arguments);if(typeof h!=="string")return h;
  return h.replace(/(^|[^\p{L}])(Sủng(?: ngươi| ta)?) ([+\-−])(\d+)/gu,(m,p,l,g,n,off,all)=>{if(/nàng(?: ta)?\s*$|nàng ta mất|nàng mất|của nàng/.test(all.slice(Math.max(0,off-14),off+p.length)))return m;const v=sg((g==="+"?1:-1)*+n);return `${p}${l} ${v>0?"+":"-"}${Math.abs(v)}`})}})();
+
+/* 16. THIẾU LỄ (owner): at formal moments (thỉnh an Thái hậu / Hoàng hậu, gặp Hoàng thượng) a consort who wears nothing proper for
+   her rank (nothing worn, or what she wears is clearly below her rank: worn luxury < BAL.thieuLe.frac × her rank's allowance)
+   loses Danh/Đức and the host likes her a little less; a strict host (Thái hậu Đa nghi/Kiêu ngạo, Hoàng hậu Kiêu ngạo/Ghen tuông)
+   reacts more. A bestowed rank set (review/gift-chest: p.rankSet === her rank, worn) always satisfies it. Vượt phẩm stays its own
+   rule (jinv luxMonth). Same rule for NPCs (j28 serveTH). The card shows it in advance in Kèm; "Vì sao" names it. */
+Object.assign(BAL,{thieuLe:{danh:-2,duc:-1,aff:-3,strict:1.5,frac:.35}});
+function aaThieuLe(p){try{if(!p||p.out)return false;if(p.rankSet!=null&&p.rankSet===rkOf(p)&&p.rankSetWorn)return false;if(typeof luxOf!=="function")return false;const x=luxOf(p);return x.sc===0||x.sc<x.bud*BAL.thieuLe.frac}catch(e){return false}}
+function aaHostStrict(host){try{if(host==="th"){const t=traitsOf({kind:"th"});return t.includes("Đa nghi")||t.includes("Kiêu ngạo")}if(host&&host.queen)return traitsOf(host).some(t=>t==="Kiêu ngạo"||t==="Ghen tuông")}catch(e){}return false}
+function aaThieuLeFx(host){const B=BAL.thieuLe,m=aaHostStrict(host)?B.strict:1;return{danh:B.danh,duc:B.duc,aff:Math.round(B.aff*m)}}
+function aaThieuLeTxt(host,f0){const f=f0||aaThieuLeFx(host);const who=host==="th"?"Thái hậu":host==="emp"?"Hoàng thượng":host&&host.queen?"Hoàng hậu":"chủ nhà";
+ return `thiếu lễ (y phục dưới phẩm): Danh ${f.danh}, Đức ${f.duc}, ${host==="emp"?`Sủng ${f.aff>0?"+":""}${Math.round(f.aff/3)||-1}`:`${who} thiện cảm ${f.aff}`}`}
+function aaThieuLeApply(host,f0){if(!aaThieuLe(S))return;const f=f0||aaThieuLeFx(host);apply({danh:f.danh,duc:f.duc});
+ if(host==="th")apply({th:f.aff});else if(host==="emp")apply({sung:Math.round(f.aff/3)||-1});else if(host&&host!==S)affAdd(host,S,f.aff);
+ log(`<span class="r">Thiếu lễ: y phục của ngươi dưới phẩm ${RANKS[S.rank]?RANKS[S.rank].n:""}. ${aaThieuLeTxt(host).replace(/^thiếu lễ \(y phục dưới phẩm\): /,"")}.</span>`)}
+(function(){const t0=talkOpts;talkOpts=function(p){const A=t0.apply(this,arguments);try{if(!p||!aaThieuLe(S))return A;const host=p.kind==="th"?"th":p.kind==="emp"?"emp":p.kind==="hh"?p.ref:null;if(!host)return A;
+ return A.map(a=>{if(!a||(p.kind!=="emp"&&!/^Thỉnh an/.test(a.n)))return a;const w0=a.why,go0=a.go,run0=a.run;const FX=aaThieuLeFx(host);const add=aaThieuLeTxt(host,FX);
+  const o=Object.assign({},a,{risk:[a.risk,add].filter(Boolean).join(" · "),why:()=>{const F=w0?w0():[];F.push(["Y phục dưới phẩm: thiếu lễ (không đổi cơ may, mất Danh/Đức)",0]);return F}});
+  const fail0=a.fail;if(run0)o.run=function(){aaThieuLeApply(host,FX);return run0.apply(this,arguments)};
+  else{o.go=function(){aaThieuLeApply(host,FX);return go0?go0.apply(this,arguments):undefined};o.fail=function(){aaThieuLeApply(host,FX);return fail0?fail0.apply(this,arguments):undefined}}return o})}catch(e){console.error(e);return A}}})();
+/* NPCs: the same rule when they wait on Thái hậu */
+(function(){try{if(typeof SOC==="object"&&SOC.serveTH){const r0=SOC.serveTH.run;SOC.serveTH.run=function(v){const r=r0.apply(this,arguments);try{if(aaThieuLe(v)){const f=aaThieuLeFx("th");ap(v,{danh:f.danh});v.th=cl((v.th||0)+f.aff,-100,100)}}catch(e){}return r}}}catch(e){}})();
