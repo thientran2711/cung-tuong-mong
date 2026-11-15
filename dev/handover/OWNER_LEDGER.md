@@ -11,6 +11,8 @@ Written by the session-8 ledger sweep (queue item C10), 15/11. Coordinator keeps
   - **CLOSED** = dropped, reversed, superseded or answered by the owner.
 - Important finding of this sweep: 14 owner-approved features from 14/11–15/11 were built on branches that were NEVER merged and are in no session-8 list (schedules/roster j95, palace detail map + residence paintings, difficulty modes, succession choice, routes, scheme minigames, tutorial, leaderboard + Bảng vàng podium, drag page-curl, lost items/theft, appearance overlays + allergy, bad-weather risks, places plan, collection milestones). They are now D29–D49. Most branches are ~600–1100 commits behind main and need a re-port (worker on top of the branch, merge current main, re-test), not a plain review.
 
+- Counts (rows of §2–§4, primary status): 337 rows · LIVE 199 · BRANCH 56 · NOT DONE 67 (incl. 2 partial) · CLOSED 9 · RULE 4 · open question 1 · housekeeping 1. Plus 22 standing rules in §1. UNASSIGNED list (§7): 49 items = D1–D28 (already queued) + D29–D49 (new).
+
 ## 1. Standing rules (RULE — apply in every task)
 | Rule | Src |
 |---|---|
@@ -276,7 +278,7 @@ Written by the session-8 ledger sweep (queue item C10), 15/11. Coordinator keeps
 | 141 | Promotion requires an exam; NPCs too | OD:L504 | LIVE (promo-exam) | |
 | 142 | Son = direct promotion; daughter = exam; servant/mama roads = exams | OD:L525, L590 | BRANCH review/promo-rules (Q A9) | |
 | 143 | Midday room brown; fireflies at midday; Emperor painting reward without chest | OD:L505 | LIVE | |
-| 144 | One kit label|value table everywhere | OD:L506 | LIVE (kit-table) | s8 row alignment → Q C14 |
+| 144 | One kit label/value table everywhere | OD:L506 | LIVE (kit-table) | s8 row alignment → Q C14 |
 | 145 | Stipend items real + chest; stipend skimming event | OD:L507, L508 | LIVE (econ-stipend) | item skimming → Q D6 |
 | 146 | Header groups: left Sắc·Tài·Tâm cơ·Đức·Danh·Sủng, right Bạc·Sức | OD:L509, L515 | LIVE (header-danh) | |
 | 147 | Neck black mark on figures | OD:L510 | LIVE (scene-light) | |
@@ -384,7 +386,7 @@ Written by the session-8 ledger sweep (queue item C10), 15/11. Coordinator keeps
 | Maid romance/marriage j42 | HO:L39 | LIVE (j42 'được ban gả') | |
 | KIT_REQUESTS: risk/hint/kèm/seal kit parts | KR:L6 | LIVE (opt-render §53) | |
 | KIT_REQUESTS: kitRelTable §52; small avatar without square frame | KR:L7, L9 | BRANCH fix-float r8 (Q A4) | |
-| KIT_REQUESTS: one-column label|value table | KR:L8 | LIVE (kit-table §51) | |
+| KIT_REQUESTS: one-column label/value table | KR:L8 | LIVE (kit-table §51) | |
 | KIT_REQUESTS: K3_STATE chip hook | KR:L10 | LIVE (event-balance) | |
 | KIT_REQUESTS: k3 top state row wrap rule | KR:L11 | BRANCH small-bugs-3 (Q A3, §31.2a) | close the KR row on PASS |
 | dev/IDEAS_OPEN.md "Open" list is stale: items 1–9 are all decided/built | main dev/IDEAS_OPEN.md | housekeeping | coordinator moves them to Closed before the next "đoạn điều phối tuần này" |
