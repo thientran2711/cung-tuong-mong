@@ -21,3 +21,13 @@ File `dev/build/jitd.js` (assemble: after jitev, before jtoil). Full doc: dev/ki
 
 ## Tests
 `node dev/test/item-info.js <url> <outdir> [sizes]`; scan `node dev/test/item-info-scan.js` (family table dev/review/item-info-table.md).
+
+## Test results (15/11, local build, playwright, dev/test/item-info.js)
+All 5 viewports 755x1000 · 1000x755 · 1180x820 · 1366x1024 · 844x390: no page errors; dress pick tap = select + strip (no blind wear),
+"Mặc" wears, then "Tháo"; slot tap → strip with Tháo; "Mặc bộ này" still gives the verdict; Tư trang bag panel rows = §70 (origin in Lai lịch);
+Bên mình pick tile → card with "Cài" (no blind wear); shop picture → card (Tốn row + §70 rows); reward rows tappable → card; event tag → card;
+Hội phối đồ tap → strip "Đặt vào …"; other consort's worn slot → card; every card inside the viewport; no horizontal overflow; kit sample §70 renders.
+Scan (dev/review/item-info-table.md): before BLIND 5 / NOTAP 3 → after BLIND 0 / NOTAP 0.
+Open notes: gift picker grid (jgift) left to review/gift-pick (it reuses §70); pets have their own panel (not items); girlhood chest not on main yet
+(will be covered automatically if it uses kitInvGrid / kitReward). BAL.itd.allow=true shows the rank allowance (coordinator design) — the
+owner's 08:10Z rule hid it; flip to false if the coordinator prefers.

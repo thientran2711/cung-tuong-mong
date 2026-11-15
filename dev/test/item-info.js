@@ -14,7 +14,7 @@ const R={};
   step(0);await p.goto(URL,{waitUntil:'domcontentloaded',timeout:0});await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function',null,{timeout:0});await p.waitForTimeout(1200);
   await p.evaluate(()=>{try{localStorage.clear()}catch(e){}document.getElementById('title').hidden=true;new MutationObserver(()=>document.querySelectorAll('.kroul,#kload').forEach(e=>e.remove())).observe(document.body,{childList:true})});
   for(let i=0;i<20;i++){await p.evaluate(()=>{window.S0=typeof S!=='undefined'?S:null;try{store.set(NL_KEY,null)}catch(e){}start()});
-   await p.waitForFunction(()=>typeof S!=='undefined'&&S&&S!==window.S0&&S.origin,null,{timeout:30000});
+   await p.waitForFunction(()=>typeof S!=='undefined'&&S&&S!==window.S0&&S.origin,null,{timeout:90000});
    if(await p.evaluate(()=>S.origin.k!=='cnv'&&!isSrv()&&!S.out))break}
   await p.waitForTimeout(1200);
   /* a full chest: hairpins, garments, bracelet, sachet, fabric, tonic, a letter, a gift from Hoàng hậu */
@@ -66,7 +66,7 @@ const R={};
   await p.evaluate(()=>{const r=document.querySelector('.kmrew');r&&r.click()});await p.waitForTimeout(400);await p.evaluate(()=>{const r=document.querySelector('.kmrew');r&&r.click()});await p.waitForTimeout(600);
   out.rewardTap=await p.evaluate(()=>document.querySelectorAll('.kmrew [data-kid]').length);
   await p.evaluate(()=>{const t=document.querySelector('.kmrew .kmrow[data-kid]');t&&t.click()});await p.waitForTimeout(300);out.rewardCard=await card();await shot('5-reward-card');
-  await p.evaluate(()=>{kitItemCardClose();try{closeModal()}catch(e){}Q.length=0;render()});await p.waitForTimeout(200);
+  await p.evaluate(()=>{kitItemCardClose();try{closeModal()}catch(e){}Q.length=0;KMQ.length=0;document.querySelectorAll('.kmov').forEach(e=>e.remove());try{kmBusy=false}catch(e){}render()});await p.waitForTimeout(200);
   step(6);/* 6. event item tag → card */
   await p.evaluate(()=>{Q.push({t:'Bức thư lạ',h:'<p>Có người để một bức thư trên án thư.</p>',item:{key:'thu'},opts:[{n:'Giữ lại',fx:{}},{n:'Đốt đi',fx:{}}]});showModal()});await p.waitForTimeout(500);
   out.tagTap=await p.evaluate(()=>!!document.querySelector('.kiev [data-kid]'));

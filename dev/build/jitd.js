@@ -108,7 +108,7 @@ if(typeof wdItemRowsE==="function")wdItemRowsE=function(e,o){return kitItemDetai
 (function(){const st=document.createElement("style");st.id="kid-css";st.textContent=`
 .kidet{display:flex;flex-direction:column;gap:6px;min-width:0}
 .kidet .kidhd{display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px;align-items:center}
-.kidet .kidpic>.kitem{margin:0}
+.kidet .kidpic>.kitem{margin:0}.kidet .kidpic .kitg{display:none}
 .kidet .kidt{display:flex;flex-direction:column;gap:3px;min-width:0}
 .kidet .kidn{font-family:var(--display);font-size:1.05rem;line-height:1.25;overflow-wrap:anywhere}
 .kidet .kidsub{display:flex;flex-wrap:wrap;align-items:center;gap:4px 6px;font-size:.78rem;color:var(--ink2,#6a5040)}
