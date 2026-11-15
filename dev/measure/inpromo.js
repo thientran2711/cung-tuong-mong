@@ -12,3 +12,11 @@
  const st=start;start=function(){d0=null;return st.apply(this,arguments)};
  const pu=punish;punish=function(p,why,sev){try{if((p===S||p==="me")&&window.__ix){const P=window.__ix.pun=window.__ix.pun||{};const k=key(why).slice(0,50)+" s"+sev;P[k]=(P[k]||0)+1}}catch(e){}return pu.apply(this,arguments)};
 })();
+/* stat flow per rank (balance-pass, bạc ↔ other road): x.ix.flow[stat][rank] = [gained, spent] for bạc / Danh / Đức / Sủng, checked at
+   every log line and buổi change; with x.ix.rkW (tuần per rank, inx.js) → what she earns per tuần (16 khắc) at each rank */
+(function(){const K=["bac","danh","duc","sung"];let b0=null,r0=null;const chk=()=>{try{if(!S||S.dead||!window.__ix||S.srv)return;const r=rkOf(S);
+  if(b0&&r0!=null){const F=window.__ix.flow=window.__ix.flow||{};for(const k of K){const d=(S[k]||0)-b0[k];if(!d)continue;const B=F[k]=F[k]||{};const a=B[r0]=B[r0]||[0,0];if(d>0)a[0]+=d;else a[1]-=d}}
+  b0={};for(const k of K)b0[k]=S[k]||0;r0=r}catch(e){}};
+ const lg=log;log=function(t){chk();const r=lg.apply(this,arguments);chk();return r};
+ const nb=nextBuoi;nextBuoi=function(){chk();const r=nb.apply(this,arguments);chk();return r};
+ const st=start;start=function(){b0=null;r0=null;return st.apply(this,arguments)};})();

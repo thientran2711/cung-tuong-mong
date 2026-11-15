@@ -9,7 +9,7 @@ def wilson(k,n,z=1.96):
     if not n:return (0,0)
     p=k/n;d=1+z*z/n;c=(p+z*z/(2*n))/d;h=z*math.sqrt(p*(1-p)/n+z*z/(4*n*n))/d;return (100*max(0,c-h),100*min(1,c+h))
 def pc(k,n):lo,hi=wilson(k,n);return f"{100*k/max(1,n):.0f}% ({k}/{n}; {lo:.0f}–{hi:.0f})"
-OLD=('HH-STOP','CAP-STOP','Thái phi','Thái hậu','tiên đế','Tuẫn','Vương gia','Xuất gia','Lên ngôi','băng hà')
+OLD=('HH-STOP','CAP-STOP','Thái phi','Thái hậu','tiên đế','Tuẫn','Vương gia','Xuất gia','Lên ngôi','băng hà','ma ma','Xuất cung tuổi')
 def cause(f):
     if any(o in f for o in OLD):return 'old/survived'
     if 'Khó sinh' in f or 'phá thai' in f:return 'childbirth'
