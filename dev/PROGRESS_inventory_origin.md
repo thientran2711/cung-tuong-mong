@@ -45,3 +45,8 @@ Quyết định chủ: OWNER_DECISIONS 11/15 04:00Z + lệnh điều phối (lu�
 - Hàng tab: cách đều trên/dưới (--k-tabgap 10px), chỉ dính khi trang dài (> 1.5 lần bảng) → Tư trang không bị che khi cuộn.
 - Ô Khăn che mặt: dùng mạng che hủy dung j70 (p.scar.veil, tranh KIT_VEIL theo bậc). Có vết: che, Sắc +2; mặt lành mà vẫn che: bị đồn, Danh -1.
   j70 chưa có trên nhánh này: ô đọc/ghi đúng trường p.scar của j70 nên khi gộp sẽ khớp. Hoa tai / giày hoa: chờ chủ duyệt tranh.
+- Xa xỉ bằng SỐ: mỗi món "Xa xỉ N" (phẩm + giá), góc ô túi / ô trang bị / tranh bảng; đầu khung "Xa xỉ tổng / mức được phép" (đỏ khi vượt).
+- Không còn chữ Hán trên giao diện: dấu đỏ ngự tứ "Ngự"; chữ đầu dự phòng (Hoạn/Quan/Y/Đế/Từ/Phượng/Rương/Lý/Vụ/Tử/Nữ, j60 nhận vai theo chữ mới);
+  ống xăm "Xăm"; trò lật hoa chữ Việt; "Chữ Nhân". Thử: quét CJK trong toàn trang (0).
+- "2 th" → "còn 2 tháng" (dòng 2 dưới chip). Mặt người chơi tái xanh (ảnh chủ 1115-pale-face): do TRANH img/fig-consort-c02-t1-a18.webp (da tông lạnh xám),
+  không phải mạng che / bộ lọc; viền sáng quanh người chơi trên sân khấu đổi màu theo ánh sáng (j59), không phủ lên mặt.

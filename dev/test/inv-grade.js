@@ -10,6 +10,8 @@ const [,,BASE,SZ,OUT,TAG,OLD]=process.argv;const [WH,DPR]=SZ.split('@');const [W
  /* overflow / ellipsis + act-card clip check: the bottom-centre point just inside each visible act card must hit the card itself */
  const audit=n=>p.evaluate(n=>{const vw=innerWidth,bad=[];document.querySelectorAll('#panel *, #modal .dlg *').forEach(e=>{const r=e.getBoundingClientRect();if(!r.width||e.closest('.kcattabs,.pctabs'))return;
    if(r.right>vw+1||r.left<-1)bad.push('x:'+(e.className||e.tagName));const cs=getComputedStyle(e);if((cs.textOverflow==='ellipsis'||e.classList.contains('kchip')&&cs.overflow!=='visible')&&e.scrollWidth>e.clientWidth+1)bad.push('ell:'+e.className)});
+  document.querySelectorAll('.keq').forEach(q=>{if(/\d+ th(?!\p{L})/u.test(q.textContent))bad.push('abbr:th')});document.querySelectorAll('.keq .keqc *').forEach(e=>{if(e.scrollWidth>e.clientWidth+1&&getComputedStyle(e).overflow!=='visible')bad.push('cut:'+e.className)});
+  if(/[\u3400-\u9FFF]/.test(document.body.innerText))bad.push('cjk');
   const clip=[];const P=document.getElementById('panel');const pr=P.getBoundingClientRect();
   P.querySelectorAll('button.ka').forEach(c=>{const r=c.getBoundingClientRect();if(!r.height||r.bottom>pr.bottom-2||r.top<pr.top+2)return;
    for(const x of [r.left+r.width/2,r.left+6,r.right-6]){const h=document.elementFromPoint(x,r.bottom-1.5);if(h&&h.closest&&h.closest('#modal'))break;if(!h||!c.contains(h)&&h!==c){clip.push((c.textContent||'').slice(0,18)+'@'+(h&&h.className));break}}});

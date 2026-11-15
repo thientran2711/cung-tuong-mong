@@ -718,7 +718,7 @@ AND at rebirth (hooked on `nlCard`, once per rolled life). The origin is pre-rol
 ### 28.13 kitItem — ONE item tile (KIT READY)
 `kitItem({src, name, grade:0..4, qty, label:[text,"ok"|"no"|"n"], on, empty, size:"sm"|"md"|"lg", data, tip})` → `.kitem` (52 / 72 / 104 px).
 Simple frame (not the portrait frame): square box, 2 px border + radial ground in the grade colour (`KIT_GRADE`): Thường `#9a8a78` · Tinh phẩm
-`#3f8f6a` · Trân phẩm `#3f62a8` · Tuyệt phẩm `#7a4fa0` · Ngự tứ `#b8901c` gold with a red inner ring and a small red "御" seal. Under the box:
+`#3f8f6a` · Trân phẩm `#3f62a8` · Tuyệt phẩm `#7a4fa0` · Ngự tứ `#b8901c` gold with a red inner ring and a small red "Ngự" seal (Vietnamese, no Chinese characters in UI — owner 11/15). Under the box:
 name (wraps, never cut), grade word, optional status chip; `qty>1` → "×N" badge; `on` → "Đang mặc" band; `empty` → dashed empty slot.
 Picture: `kitItemSrc(k, fallback)` = `itemArt(k)` (j98, review/item-art) → `WD_ITEMS[k].icon` (wd-*) → fallback. Use it for every item anywhere:
 chest, Tư trang, wardrobe slots, reward chests, peddler, works, reward panels. Nobody draws another item box.
@@ -728,7 +728,7 @@ chest, Tư trang, wardrobe slots, reward chests, peddler, works, reward panels. 
   ground + frame as the portrait of a matching tier (class `.kigN`, jk2b §15b): ground `img/kit/bg-consort-T.webp` (cover) under a soft light pool,
   frame = `frame-consort-T` cut to the frame only (no tassel) → `img/kit/islot-frame-N.webp`, drawn as a 9-slice `border-image` (corners crisp at
   every size). Thường = t0 wood/taupe · Tinh phẩm = t1 jade · Trân phẩm = t2 pearl-silver on blue · Tuyệt phẩm = t4 gold-peony on lavender ·
-  Ngự tứ = t5 red-gold rubies on the t7 imperial gold ground (+ 御 seal). No new art: crops of existing kit frames only. Picture 76 %, tags above the frame.
+  Ngự tứ = t5 red-gold rubies on the t7 imperial gold ground (+ red "Ngự" seal). No new art: crops of existing kit frames only. Picture 76 %, tags above the frame.
   The old pale tint + 2 px border is gone. `ghost:src` (empty only) = faint silhouette = the TYPE outline of an empty equipment slot.
 ### 28.13b kitInvGrid — THE BAG (owner 11/15 04:00Z, shot 1115-49c7629b) — `dev/build/jinv.js` (after jk3) — KIT READY
 `kitInvGrid({key, tabs:[{k,label}], items:[{cat,src,name,grade,qty,on,onText,mark,tip}], minRows:4, onPick:fn(item)})` → `.kinv`:
@@ -761,11 +761,12 @@ Hoa tai / Giày hoa: NOT added — no item painting exists (held until the owner
 Kit act-card rows (kitRows): Phẩm (grade name in its colour) · Được (effects; worn effects ×1.5 above her rank as wearBonus) · Mất (vượt phẩm,
 xa xỉ, contraband, loss, own taint) · Ghi chú (months left, slot, rank it suits). Used at the top of the item panel (bag slot tap) and the
 equipment slot tap (dress panel). Never re-written per screen.
-### LUXURY axis (owner 11/15) — `luxOf(p)`, `luxMonth(p)` (jinv, via j8 itemMonth: player and every NPC alike)
-Score = Σ worn pieces by grade (Thường 0 · Tinh 1 · Trân 2 · Tuyệt 3 · Ngự tứ 5); budget = 1 + rank (+1 if Sủng ≥ 60).
-Level chip: Giản dị (nothing of note) · Vừa phẩm (≤ budget) · Xa hoa (≤ budget+3) · Quá xa xỉ: dễ bị ghen. Monthly: Xa hoa → others' Ghen +1
-(× trait: Kiêu ngạo/Tham vọng 1.5, Hiểm độc 1.2, Hiền lành/Nhu mì 0.5; half for an NPC wearer); Quá xa xỉ → Ghen +3, Thái hậu may frown
-(chance 50 − Đức/2, 10–50: Thái hậu -3 / NPC Danh -2), gossip 1 in 4: Danh -1; Giản dị from Quý nhân up: 1 in 4 Đức +1.
+### LUXURY axis (owner 11/15) — NUMBERS, never words — `luxVal(k)`, `luxAllow(p)`, `luxOf(p)`, `luxMonth(p)` (jinv, via j8 itemMonth: everyone)
+Every wearable item / garment has "Xa xỉ N" = [8,16,28,44,64][grade] + giá/10. Her allowance = 36 + 16 × rank (+10 if Sủng ≥ 60).
+kitItem `lux:N` → a small dark corner tab "Xa xỉ N" (top-right; "đã tẩm" moves to the left) on bag slots, equipment slots and the panel picture.
+Header chip `kitLuxChip`: "Xa xỉ <total> / <allowance>", red when over. Rules (internal levels): ≤ allowance fine; ≤ 1.5× → others' Ghen +1
+(× trait: Kiêu ngạo/Tham vọng 1.5, Hiểm độc 1.2, Hiền lành/Nhu mì 0.5; half for an NPC wearer); above → Ghen +3, Thái hậu may frown
+(chance 50 − Đức/2, 10–50: Thái hậu -3 / NPC Danh -2), gossip 1 in 4: Danh -1; nothing worn from Quý nhân up: 1 in 4 Đức +1.
 It extends ghen (v.ghen) and itemMonth; vượt phẩm/tố stays j8 vpItems/vpAccuse.
 ### KIT RULE (11/15): the category tab row — never clips, centred, sticky only on long pages
 `#panel .kcattabs` (jk3): (1) no upward cover shadow, so act cards above it always show their full border; (2) one spacing token `--k-tabgap`
