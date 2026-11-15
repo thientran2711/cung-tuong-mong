@@ -37,3 +37,7 @@ second merge onto origin/main b8a58e873.
 assemble = main list + jkrev, jfx after jkitpage; site rebuilt. jstip's goodsGive / monthly stipend use kitReward and push their entries
 into KMSNAP, so jfx kmDiff does not reveal them twice: probe → Thái hậu goods = one tray, story goods = one Hộp gấm, stipend = one chest
 "Bổng lộc tháng ba · Nội vụ phủ phát", all with pictures + real grades, 0 errors. Re-run on this merge: item-lose, reward-box, item-gain PASS.
+
+## Fourth merge: origin/main b0052d607 (poison-gift jpoison, trung-y jty)
+Built files only + assemble list (jkrev, jfx after jkitpage). Re-run: item-lose, reward-box, item-gain, stipend/goodsGive probe PASS, 0 errors.
+Note for the coordinator: the merge commit is the PASS candidate.
