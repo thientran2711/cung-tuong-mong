@@ -40,3 +40,14 @@ the one wrong case: in the cold palace the Sắc phong card offered "Điều ki�
 `dev/test/promo-exam.js` (logic + 6 sizes), `dev/test/promo-next-rank.js`. Build: `python3 dev/build/assemble.py`, wrap dev/index.html as
 _aa.html, serve the worktree root.
 Bot: `dev/measure/inpage6.js` now sits the exam at once (window.__exAuto = rolled at her level) and logs window.__exN in each result.
+
+## Results (15/11)
+- `dev/test/promo-exam.js` on 755x1000, 1000x755, 1180x820, 1366x1024, 844x390 (+390x844): 33/33 PASS, 0 page errors (old save from main
+  f500d0464 loads, gets S.ex, window opens, card dealt). `promo-next-rank.js`: 9/9 ok (before: cold palace FAIL).
+- Balance bot (run1b.sh, inpage6 sensible, HHSTOP): runs on main f500d0464 but at load ~45 on 4 cores it did 1 life in ~40 min, then the
+  shard died with "Target crashed" (the known load failure in BALANCE_REPORT). No usable before/after n. NOT measured.
+- Simulated estimate (pass odds from the in-page draw at bot-level stats: low tier ~66 %, middle ~86 %, high ~40–70 % as Tứ đức/Đức grow;
+  expected extra wait = (1/p − 1) × cd per step): about +1.3 months (3 low steps) + 0.7 (2 middle) + 2–4 (Hoàng quý phi + Hoàng hậu seat)
+  ≈ 4–6 months on a median ~64-month road to Hoàng hậu, while NPC rivals are slowed the same way at the seat. Estimated Hoàng hậu rate
+  33 % → ~30–31 %, inside the ~32 % target band; if a real run shows lower, lower BAL.ex.bar[2] (31) first.
+- Next: rerun `OUT=… bash dev/measure/run5b.sh <game> new` when the machine is quiet (base vs new, 30 lives each).
