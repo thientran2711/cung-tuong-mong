@@ -179,3 +179,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (07:15Z) Owner: choice cards (e.g. Nam nhân nơi cấm địa) must show each option's full Tốn/Được/Mất (+ odds), like Hành sự cards — not costs only.
 - (07:20Z) Owner: 4 named guards → paint 4 distinct guard looks (thive-3, thive-4 × 4 ages).
 - (07:40Z) Owner: wants alternative story routes (not only climbing to Thái hậu): tư tình with another man (incl. for a child), escape the palace, leave legally (xuất gia, ban hôn), follow another man. Worker on review/routes (design + build, tasteful, full option cards, same rules for NPCs).
+- (07:45Z) Owner: iPad stage shows 3–4 people at once (max 4) at the approved scale; Fold 2–3; extra via › N.
