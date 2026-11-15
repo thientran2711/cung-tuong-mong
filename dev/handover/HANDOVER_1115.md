@@ -87,3 +87,4 @@ Nhắc theo dõi: send_later 30 phút, tự đặt lại mỗi lượt (lịch l
 - [ ] Chơi cùng bạn: kẹt nút Vào phòng, lệch buổi tuần 3 — coop-ui
 - [ ] Kiểm mọi nút ra đúng kết quả (giao từ 14/11, mất khi đổi phiên) — review/act-audit
 - 06:05Z LIVE main=0783ec32a (lật nguyên tờ đục, 1300 ms, vuốt đổi tab; j22 'Đến chỗ hắn' theo luật đi khắc). Lo: vòng Luân hồi có thể trống hình thẻ — đang kiểm.
+- 06:10Z hotfix/pc-size 04a204ff6 (ResizeObserver #panel) sẵn → người duyệt 1 gộp lên main 0783ec32a + dựng site, rồi đẩy.
