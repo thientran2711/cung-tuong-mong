@@ -8,7 +8,7 @@ import sys, os, re, json
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 
-Z, G, DX, ZR, FACE = 1.14, .03, .18, (1.0, 1.6), .319
+Z, G, DX, ZR, FACE, FBAD = 1.14, .03, .18, (1.0, 1.14), .2975, .40  # no zoom beyond 1.14 (owner 11:30Z); keep in sync with KIT_POR
 
 def family(name):
     m = re.match(r'([a-z]+)-.*?(?:-(a\d+))?$', name)
@@ -17,7 +17,7 @@ def family(name):
 
 def geo(v):
     ft, fh, fx, top, bx = v
-    z = Z if fh <= 0 else max(ZR[0], min(ZR[1], FACE / fh))
+    z = Z if fh <= 0 or fh > FBAD else max(ZR[0], min(ZR[1], FACE / fh))
     L = min(top * z - G, z - 1); D = max(-DX, min(DX, bx - .5))
     return z, L, D
 
@@ -41,8 +41,8 @@ def main(src, facej, out, maxn=60):
     big = ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf', 20)
     stats = {}
     for fam, L in sorted(fams.items()):
-        old = [F[k][1] * Z for k in L if F[k][1] > 0]
-        new = [F[k][1] * geo(F[k])[0] for k in L if F[k][1] > 0]
+        old = [F[k][1] * Z for k in L if 0 < F[k][1] <= FBAD]
+        new = [F[k][1] * geo(F[k])[0] for k in L if 0 < F[k][1] <= FBAD]
         body = [abs(F[k][4] - .5 - geo(F[k])[2]) * 100 for k in L]
         within = sum(1 for x in new if abs(x - FACE) / FACE <= .03)
         s = dict(n=len(L), no_face=len(L) - len(new),
