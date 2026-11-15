@@ -191,3 +191,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (09:10Z) Owner: event dialogs put the people standing on the scene picture (not a separate figure column) to save space; text full width below.
 - (09:30Z) Scheme minigames: first worker stopped by a safety classifier (likely the poison-dose game). Scope narrowed to abstract games: Nghe ngóng, Truyền lời, Mặc cả; no poison minigame.
 - (09:40Z) Coordinator decision: the player figure is drawn on the stage at every place she is (not only home/lãnh cung).
+- (09:50Z) Owner: 4 people too crowded → max 3 on iPad, 2 on phone/Fold; less overlap.
