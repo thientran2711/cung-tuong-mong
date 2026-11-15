@@ -38,8 +38,8 @@ CDN uploads OK again (owner saved the Cloudflare token; R2 verified). Use CLOUDF
 | C11 | review/pick-hint @ 29972cd7 (incl. rank+name together + rank halo) | SẴN SÀNG KIỂM → REVIEWING (pick-hint-r1) |
 | C12 | review/hc-portrait (owner s8: Hậu cung portrait frame top gap + widen) | RUNNING |
 | C13 | review/gift-pick (owner s8: gift picker picture grid + gift animation; animation needs A2 fxkit) | RUNNING |
-| C14 | review/row-align @ 0886f329b (KIT §51.1 kitRowsAlign) | SẴN SÀNG KIỂM → reviewer QUEUED-NEXT |
-| C15 | review/mood-dialog @ 13d4414a7 (cause-event picture + corner mood seal) | SẴN SÀNG KIỂM → REVIEWING (mood-dialog-r1) |
+| C14 | review/row-align @ 0886f329b | REVIEWING (row-align-r1) |
+| C15 | review/mood-dialog → r1 PASS f8f51797c | LIVE |
 | C16 | review/item-info (owner s8: tap any item cell → kit item-detail; dress pick wears via button) | RUNNING |
 | C17 | review/stage-fig-size (owner s8: event dialog figure column cap + crop skirt) | RUNNING |
 
