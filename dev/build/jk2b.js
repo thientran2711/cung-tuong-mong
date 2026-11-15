@@ -622,32 +622,7 @@ document.addEventListener("click",ev=>{const t=ev.target.closest&&ev.target.clos
 (function(){const k0=kitPcFix;kitPcFix=function(pc){const r=k0.apply(this,arguments);try{if(!pc||pc.querySelector(".kwear"))return r;const nm=(pc.querySelector(".pcname")||{}).textContent;const p=kitPersonByName(nm);
   pc.querySelectorAll(".chip").forEach(c=>{if(/^(Trâm|Y phục):/.test(c.textContent.trim())||(p&&typeof wdSlots==="function"&&/^(Đúng phẩm|Vượt phẩm|Quá giản dị|Phạm tang)$/.test(c.textContent.trim())))c.remove()});
   if(!p||typeof wdSlots!=="function")return r;const h=kitWearSlots(p,{size:"sm"});const pcp=pc.querySelector(".pcl > .pcp");if(h&&pcp)pcp.insertAdjacentHTML("afterend",h)}catch(e){console.error("K1",e)}return r}})();
-/* K2: Rương đồ — the wardrobe block of Tư trang built from kit parts: sub-tabs Trâm cài · Y phục, item grid (kitItem lg) with Mặc / Tặng /
-   Bán lén / Cầm cố act cards under the picked item, Tự chọn đồ + Chải chuốt act cards, pawned items with Chuộc lại. Data and acts: j92. */
-if(typeof wdInvHTML==="function")wdInvHTML=function(){const w=wdOf(S);const lab=wdKnownStatus(S);const self=S.wdSelf&&S.wdSelf.it===wdCur(S)?S.wdSelf:null;const ag=wdAgent(S);
- const tab=window.__kwdTab==="y"?"y":"tram";const pick=window.__kwdPick;const ci=wdColInfo();
- const head=lab?[`Đã biết: ${WD_LABEL[lab]}`,lab==="ok"?"ok":"no"]:self?[`Lời ${self.by}: ${WD_LABEL[self.st]} (chưa chắc)`,"n"]:["Chưa ai nhận xét bộ đang mặc","n"];
- let h=`<div class="kwd"><div class="kpsec"><h4 class="kpst">Đang mặc</h4><div class="kwdnow">${kitWearSlots(S,{size:"md",cls:"kwbig"})}<div class="kwdnote">${kitChip(head[0],head[1])}<span class="past">Sưu tập kiếp này: ${ci.n} món${ci.title?` · «${ci.title}»`:""}${ci.next?` · mốc sau ${ci.next[0]} món (Phúc duyên +${ci.next[1]})`:""}</span></div></div>`;
- const B0=[];for(const sl of ["tram","y"]){const e=w[sl],it=wdItem(e);if(it&&!(sl==="y"&&e.from==="base"))B0.push(pbtn(`data-wd="off" data-sl="${sl}"`,`Tháo ${sl==="tram"?"trâm":"y phục"}`,`thành: ${sl==="y"?"thay về phẩm phục được cấp":"để tóc trơn"}`,""))}
- B0.push(pbtn(`data-wd="auto"`,"Tự chọn đồ",`${word(wdAutoOdds())} · tốn: 0 khắc · thành: thay ngay bộ ngươi cho là hợp phẩm · kèm: có thể trúng bộ sai phẩm (${wdUnknownN()} món chưa rõ phẩm)`,""));
- B0.push(pbtn(`data-wd="groom"`,"Chải chuốt",`tốn: 1 khắc · thành: trò chải chuốt ${WD.groomSec} giây, kim dừng giữa là đúng phẩm · kèm: cao quá thành vượt phẩm, thấp quá thành quá giản dị`,whyTime(1)));
- h+=`<div class="rbtn">${B0.join("")}</div></div>`;
- const L=wdChest(tab),nT=wdChest("tram").length,nY=wdChest("y").length;
- h+=`<div class="kpsec"><h4 class="kpst">Rương đồ</h4><div class="ksub kwdtabs"><button class="ksubb${tab==="tram"?" on":""}" data-kwdtab="tram">Trâm cài ${nT}</button><button class="ksubb${tab==="y"?" on":""}" data-kwdtab="y">Y phục ${nY}</button></div>`;
- if(!L.length)h+=`<p class="past">Chưa có ${tab==="tram"?"trâm cài":"y phục"} nào trong rương.</p>`;
- else{h+=`<div class="kwdgrid">`+L.map(x=>kitItem({src:kitItemSrc(x.k,x.icon),name:x.name,grade:x.grade,size:"lg",on:false,label:x.knownP?["đồ phẩm "+x.knownP,"n"]:null,data:`data-kwdpick="${x.ix}" role="button" tabindex="0"`,tip:`${x.name} · ${x.gradeName} · ${x.fx}`})).join("")+`</div>`;
-  const x=L.find(y=>y.ix===pick)||null;if(x){const e=S.inv[x.ix];const B=[];const ntWhy=x.nt?"đồ ngự tứ: bán, cầm là bất kính":"";const agWhy=ag?"":"chưa có ma ma hay thái giám tin cẩn";
-   const lo=Math.round(x.price*WD.sellLo/100),hi=Math.round(x.price*WD.sellHi/100),pct=ag?wdSellPct(S,ag):0;
-   B.push(pbtn(`data-wd="wear" data-ix="${x.ix}"`,"Mặc",`tốn: 1 khắc · thành: thay vào ô ${x.slot==="tram"?"Trâm cài":"Y phục"}`,whyTime(1)));
-   B.push(pbtn(`data-it="gift" data-ix="${x.ix}"`,"Tặng",`tốn: 2 khắc · thành: chọn người nhận`,x.nt?"đồ ngự tứ: không được đem tặng":whyTime(2)));
-   B.push(pbtn(`data-wd="sell" data-ix="${x.ix}"`,"Bán lén",`${word(100-wdLeak(S,ag))} · tốn: 1 khắc · thành: Bạc +${ag?Math.round(x.price*pct/100):lo+"–"+hi} · kèm: lộ ra thì mang tiếng túng thiếu, Danh -${WD.sellDanh}`,ntWhy||agWhy||whyTime(1)));
-   B.push(pbtn(`data-wd="pawn" data-ix="${x.ix}"`,"Cầm cố",`${word(100-wdLeak(S,ag,true))} · tốn: 1 khắc · thành: Bạc +${Math.round(x.price*WD.pawnPct/100)}, chuộc lại ${Math.round(x.price*WD.redeemPct/100)} bạc trong ${WD.pawnWeeks} tuần · kèm: lộ ra thì Danh -${WD.sellDanh}`,ntWhy||agWhy||whyTime(1)));
-   h+=`<div class="kwdsel">${kitItem({src:kitItemSrc(x.k,x.icon),name:x.name,grade:x.grade,size:"md"})}<div>${kitFacts([`${x.slot==="tram"?"Trâm cài":"Y phục"} · ${x.gradeName} · ${x.fx}`,`${wdSrcTxt(e)}`,x.knownP?`Đồ phẩm ${x.knownP}`:"Chưa rõ phẩm"])}</div></div><div class="rbtn">${B.join("")}</div>`}
-  else h+=`<p class="past">Chạm một món để mặc, tặng, bán lén hay cầm cố.</p>`}
- h+=`</div>`;const PW=S.wdPawn||[];if(PW.length){h+=`<div class="kpsec"><h4 class="kpst">Đang cầm cố (${PW.length})</h4><div class="kwdgrid">`+PW.map((P,i)=>{const it=wdItem(P.e);return `<div class="kwdpw">${kitItem({src:kitItemSrc(it.k,it.icon),name:it.n,grade:it.g,size:"md",label:[`còn ${Math.max(0,P.due-wk())} tuần`,"no"]})}${pbtn(`data-wd="redeem" data-i="${i}"`,"Chuộc lại",`tốn: 1 khắc, Bạc -${P.back} · thành: món đồ về lại rương`,S.bac<P.back?`thiếu bạc (cần ${P.back})`:whyTime(1))}</div>`}).join("")+`</div></div>`}
- return h+`</div>`};
-document.addEventListener("click",ev=>{const a=ev.target.closest&&ev.target.closest("[data-kwdtab],[data-kwdpick]");if(!a)return;ev.stopPropagation();
- if(a.dataset.kwdtab){window.__kwdTab=a.dataset.kwdtab;window.__kwdPick=null}else window.__kwdPick=+a.dataset.kwdpick;try{render()}catch(e){}},true);
+/* K2 (Rương đồ) removed: the wardrobe lives in Tư trang's bag + "Đang mang" (jinv + jwdinv) */
 (function(){const st=document.createElement("style");st.id="k2b-item";st.textContent=`
 .kitem{display:inline-flex;flex-direction:column;align-items:center;gap:2px;vertical-align:top;width:var(--isz);cursor:default;text-align:center}
 .kitem[role=button]{cursor:pointer}

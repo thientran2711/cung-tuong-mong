@@ -47,9 +47,9 @@ function j77Card(k,empty){if(!S||S.dead||Q.length)return;
  if(empty){Q.push({t:empty,h:`<p>Cung trống, chưa có ai ở.</p>`,btn:"Đã hiểu"});showModal();return}
  const st=accState(k);const nm=accName(k);let n=0;try{n=countAt(k)}catch(e){}
  const left=Math.max(0,4-used);const sp=st.walk&&typeof walkSpill==="function"?walkSpill(k):null;const bu=i=>String(BUOI[i]||"").toLowerCase();
- const L=[sp&&sp.ok?`<p>Đường đi ${sp.tc} khắc, còn ${left} khắc: đi bây giờ thì đến nơi vào ${bu(sp.b)}.</p>`:`<p>Không vào được lúc này: <b>${st.why}</b>.</p>`];
+ const L=[sp&&sp.ok?`<p>Đi bây giờ thì đến nơi vào ${bu(sp.b)}.</p>`:`<p>Không vào được lúc này: <b>${st.why}</b>.</p>`];
  if(sp&&!sp.ok)L.push(`<p class="past">Đi đến nơi vào ${bu(sp.b)} cũng không được: ${sp.why}.</p>`);
- if(st.kind==="hour")L.push(`<p class="past">Mở cửa buổi sáng và buổi chiều.</p>`);
+ if(st.kind==="hour")L.push(`<p class="past">Mở cửa buổi sáng, trưa và chiều.</p>`);
  if(n)L.push(`<p class="past">Có ${n} bóng người ở đó.</p>`);
  const opts=[];
  if(st.ask){const nmA=st.ask==="yk"?"Xin yết kiến":"Xin bái kiến";
@@ -60,7 +60,8 @@ function j77Card(k,empty){if(!S||S.dead||Q.length)return;
   else L.push(`<p class="past">Lẻn vào: cần ${st.tc+1} khắc, còn ${left}.</p>`)}
  if(sp&&sp.ok)opts.push({n:"Đi (đến nơi vào buổi sau)",fx:{},x:`Chắc chắn · tốn: ${sp.now?`${sp.now} khắc ${bu(sp.b-1)} + `:""}${sp.rest} khắc ${bu(sp.b)} · thành: đến nơi ${bu(sp.b)}, thấy ai ở đó`,go:()=>setTimeout(()=>walkSpillGo(k),0)});
  const waitHelps=!sp&&(st.kind==="hour"||st.walk||/sáng|thỉnh an/.test(st.why||"")||(st.ask&&!st.empAway&&!st.askOk)||(st.kind&&!st.sneakOk));
- if(waitHelps&&!S.out&&!S.confined&&!S.mg){const night=(S.buoi||0)>=2;opts.push({n:night?"Đợi sáng mai (Qua đêm)":"Đợi buổi sau (Qua buổi)",fx:{},x:st.kind==="hour"||/sáng|thỉnh an/.test(st.why||"")?"sáng mai mở cửa, thử lại":night?"sáng mai đủ khắc, thử lại":"sang buổi sau đủ khắc, thử lại",go:()=>setTimeout(()=>{try{nextBuoi()}catch(e){}},0)})}
+ if(waitHelps&&!S.out&&!S.confined&&!S.mg){const b=S.buoi||0,night=b>=(typeof B4L==="number"?B4L:2),morn=st.kind==="hour"||/sáng|thỉnh an/.test(st.why||""); /* owner final names: "Qua ngày" / "Sang buổi"; no daytime wait for a place that only opens in the morning */
+  if(night||!morn)opts.push({n:night?"Qua ngày":"Sang buổi",fx:{},x:morn?"sáng mai mở cửa · thử lại":night?"sáng mai đủ khắc · thử lại":`${bu(b+1)} đủ khắc · thử lại`,go:()=>setTimeout(()=>{try{nextBuoi()}catch(e){}},0)})}
  if(opts.length){opts.push({n:"Thôi",fx:{},x:""});Q.push({t:nm,h:L.join(""),opts})}else Q.push({t:nm,h:L.join(""),btn:"Đã hiểu"});
  showModal()}
 /* a walk that uses the last khắc: say so plainly, then go (she sees who is there; next buổi she starts there) */
@@ -127,7 +128,7 @@ accessOf=function(p,k){p=p||S;if(!k)return{ok:false,why:"cung trống",kind:"rul
  if(k==="dtd"||k==="thu")return{ok:false,why:k==="dtd"?"tẩm điện Hoàng thượng: chỉ vào khi được triệu":"nơi Hoàng thượng phê tấu: chỉ vào khi được triệu",kind:"rule",ask:"yk",lead:1,heavy:1};
  if(k==="kn"){if(!qOn()||b===0||ctx.r>=7)return{ok:true};return{ok:false,why:"cung Hoàng hậu: ngoài giờ thỉnh an phải được mời",kind:"rule",ask:"bk"}}
  if(k==="tn"){if(S.thDead||b===0)return{ok:true};return{ok:false,why:"Thái hậu chỉ tiếp lúc sáng thỉnh an",kind:"rule",ask:"bk"}}
- if(ACC_DAY[k]){if(b<=1)return{ok:true};return{ok:false,why:"đóng cửa tối",kind:"hour"}}
+ if(ACC_DAY[k]){if(b<B4L)return{ok:true};return{ok:false,why:"đóng cửa tối",kind:"hour"}}
  return{ok:true}};
 /* the chủ vị a guest must greet before entering k now, or null */
 function accEtq(p,k){p=p||S;const C=ACC_ETQ;if(C.mode==="optional")return null;if(!k||k==="home"||accOwn(p,k)||(C.invite&&accHas(p,k)))return null;if(k!=="kn"&&k[0]!=="r")return null;
@@ -198,7 +199,7 @@ accInfo=function(){if(!S||Q.length)return;const R=n=>`<b>${n}</b>`;
  <p>${R("Càn Ninh cung, Đức Thọ cung")}: sáng thỉnh an, hoặc khi được mời, được triệu. Lúc khác: xin bái kiến.</p>
  <p>${R("Dưỡng Hòa điện, Cần Chính điện")}: chỉ khi được triệu. Cách khác: xin yết kiến, hoặc chờ được triệu. Tự ý vào là tội nặng.</p>
  <p>Phẩm thấp gặp phẩm cao thì cúi chào trước.</p>
- <p>${R("Thái y viện, Ngự hoa viên")}: sáng, chiều. Tối đóng cửa.</p>
+ <p>${R("Thái y viện, Ngự hoa viên")}: sáng, trưa, chiều. Tối đóng cửa.</p>
  <p>${R("Kính sự phòng")}: phi tần nào cũng vào. ${R("Trường Môn viện")}: ai cũng vào, bị thấy: Danh -2.</p>
  <p>${R("Cung của ngươi")}: luôn vào được.</p>
  <p>Chỗ có dấu khóa: không vào được lúc này; chạm vào tên để xem lý do và cách vào. <b>Lẻn vào</b>: tốn khắc, bị bắt Danh -8 và bị phạt.</p></div>`,btn:"Đã hiểu"});showModal()};
@@ -212,5 +213,5 @@ accInfo=function(){if(!S||Q.length)return;const R=n=>`<b>${n}</b>`;
 /* owner 11/15 06:45Z: when the khắc run out the buổi still turns over by itself, but she STAYS where she is (j41 nextBuoi keeps
    S.place): the stage of that place shows who is there in the new buổi, with one line "Sang buổi tối · ngươi vẫn ở Kính sự phòng" */
 (function(){const n0=nextBuoi;nextBuoi=function(){const k=S&&S.place,b=S?(S.buoi||0):0;const r=n0.apply(this,arguments);
- try{if(S&&!S.dead&&!S.out&&k&&k!=="home"&&b<2&&(S.buoi||0)===b+1&&S.place===k&&S.visit&&S.visit.k===k){const nm=typeof accName==="function"?accName(k):k;
+ try{if(S&&!S.dead&&!S.out&&k&&k!=="home"&&b<(typeof B4L==="number"?B4L:2)&&(S.buoi||0)===b+1&&S.place===k&&S.visit&&S.visit.k===k){const nm=typeof accName==="function"?accName(k):k;
   const line=`Sang ${String(BUOI[S.buoi]).toLowerCase()} · ngươi vẫn ở ${nm}.`;if(!(S.visit.msg||"").includes(line)){S.visit.msg=line+(S.visit.msg?" "+S.visit.msg:"");render()}}}catch(e){}return r}})();

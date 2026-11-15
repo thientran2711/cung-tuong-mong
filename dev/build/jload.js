@@ -45,6 +45,8 @@ try{KLOAD.paused=localStorage.getItem(LS)==="1"}catch(e){}
 .kloadchip .kprog-t{width:64px;flex:none;height:6px}
 .kloadchip.done{animation:kloadFade 1.2s 1.5s ease forwards}
 body.kload-dock .game{box-sizing:border-box!important;padding-bottom:calc(env(safe-area-inset-bottom,0px) + 30px)!important}
+/* review 11/15 (844x390 place card): the chip never sits over a dialog's text — it steps aside while a dialog / mini game is open */
+body:has(#modal:not([hidden])) .kloadchip,body:has(#ov:not([hidden])) .kloadchip{visibility:hidden}
 body.kload-dock .kloadchip{opacity:1}body.kload-dock .kloadchip .kchip{padding:2px 9px;box-shadow:none}
 @keyframes kloadFade{to{opacity:0;visibility:hidden}}
 `;document.head.appendChild(st)})();

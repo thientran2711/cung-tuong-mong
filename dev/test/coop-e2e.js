@@ -46,7 +46,7 @@ async function press(o){for(let t=0;t<80;t++){await clear(o);const r=await o.p.e
 async function buoiBoth(A,B,shotWait){const k0=await A.p.evaluate(()=>__co().week+':'+(S.buoi||0));await press(A);if(shotWait)await shot(A,shotWait);await press(B);
   for(let t=0;t<80;t++){const a=await A.p.evaluate(()=>__co().week+':'+(S.buoi||0)),b=await B.p.evaluate(()=>__co().week+':'+(S.buoi||0));if(a!==k0&&b!==k0&&a===b)return true;await clear(A);await clear(B);await sleep(250)}
   ok(false,'buổi '+k0+' advanced for both');return false}
-async function weekBoth(A,B,w){for(let k=0;k<3;k++)await buoiBoth(A,B,w===0&&k===0?'06-waiting-friend':null)}
+async function weekBoth(A,B,w){const n=await A.p.evaluate(()=>typeof B4N==='number'?B4N:3);/* buổi per week: 4 since jtime4 */for(let k=0;k<n;k++)await buoiBoth(A,B,w===0&&k===0?'06-waiting-friend':null)}
 
 (async()=>{const b=await chromium.launch();
  const A=await mk(b,'fold',[686,880,2.2]),B=await mk(b,'ipad',[1180,820,2]);ALL.push(A,B);

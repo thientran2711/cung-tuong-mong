@@ -87,7 +87,7 @@ function mkTab(k,l,s,before){const T0=$("tabs");if(!T0||T0.querySelector(`[data-
  const rl=T0.querySelector('[data-tab="rel"]'),fc=T0.querySelector('[data-tab="fac"]');if(rl&&st)st.after(rl);if(fc&&rl)rl.after(fc);
  /* servant road: its own tabs (j42 SRVTABS) — the new keys are not servant tabs */
 })();
-try{for(const k in KG)delete KG[k];Object.assign(KG,{hc:{keys:["court","rv","men","staff"],l:"Hậu cung",s:"Hậu cung"},gt:{keys:["rel","fac"],l:"Giao tình",s:"Giao tình"},mt:{keys:["story","nho","quest","req","log"],l:"Mệnh truyện",s:"Mệnh truyện"}})}catch(e){}
+try{const mt0=KG.mt&&KG.mt.keys?KG.mt.keys.slice():[];for(const k in KG)delete KG[k];Object.assign(KG,{hc:{keys:["court","rv","men","staff"],l:"Hậu cung",s:"Hậu cung"},gt:{keys:["rel","fac"],l:"Giao tình",s:"Giao tình"},mt:{keys:["story","nho","quest","req","log"],l:"Mệnh truyện",s:"Mệnh truyện"}});/* keep Mệnh truyện members other modules added earlier (jbal2 "q72" Việc nhờ) */mt0.forEach((k,i)=>{if(!KG.mt.keys.includes(k)&&!["rv","rel","fac","staff","court","men"].includes(k))KG.mt.keys.splice(Math.min(i,KG.mt.keys.length),0,k)})}catch(e){}
 try{if(window.VP&&VP.tabs)Object.assign(VP.tabs,{court:["Hoàng thượng · Thái hậu","Thánh thượng"],men:["Nam nhân","Nam nhân"],rel:["Ân oán","Ân oán"]})}catch(e){}
 /* the sub-tab label: long on wide panels, short ("Thánh thượng") where four segments are tight */
 (function(){if(typeof kgSub!=="function")return;const k0=kgSub;kgSub=function(){const r=k0.apply(this,arguments);try{const P=$("panel");const b=P&&P.querySelector('.ksub [data-ksub="court"]');
