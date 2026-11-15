@@ -155,7 +155,7 @@ Cách làm (jaudit §1): mỗi lần thời gian trôi ở tầng trên cùng (`
 | Việc có "ban chết" (Hạ độc, Đẩy xuống hồ…) | bậc luôn "Liều", Mất "ban chết" | bậc thật `oPoison`…; `deathSentence`: năm đầu tha một lần (giáng 1 bậc, cấm túc 3 tháng, Danh −10, Sủng −10), Hoàng thượng nhân từ 30 phần trăm đày lãnh cung | **đã sửa**: bậc thật, chữ theo `deathSentence` |
 | Số quan hệ trên mọi thẻ | số gốc | nhân theo nết (`persF`), `relAdd` thêm oán 0,6× | **đã sửa** (§4 #3) |
 | Thỉnh an Hoàng hậu / Xin Thái hậu đỡ lời | "+4" / "+5" | +2…+5 / +3 (S.hh và quan hệ Hoàng hậu lệch nhau) | thợ hotfix-thinhan |
-| Ly gián, Hạ độc dần, Tố tội thật, Bóc tư tình, Xin Hoàng hậu giáng, Trình Hoàng hậu | bậc thẻ = bậc gieo | các việc này **không qua `odA`**: Sức dưới 30 không làm khó hơn, Quẻ tuần không tính, sai người đi không bị phạt — khác luật chung | ghi để điều phối quyết (đổi sẽ làm khó hơn) |
+| Ly gián, Hạ độc dần, Tố tội thật, Bóc tư tình, Xin Hoàng hậu giáng, Trình Hoàng hậu | bậc thẻ = bậc gieo | trước không qua `odA` | **đã sửa**: qua `odA` (jaudit §18, `odT` j30 đọc `odA`) |
 | Bổng lộc, ghế theo phẩm, ngưỡng sắc phong | — | đọc `BL`, `SEATCAP`, `BAL`/`hhNeed` | đúng (§1) |
 | "Chắc chắn" trong vài chữ thẻ (j23 "Xin Thái hậu cho học cùng", j15 Tổng quản "Hỏi chuyện") | chữ "Chắc chắn" trong nguồn | VANPHONG cấm; kitParse bỏ chữ ấy khi vẽ | đúng trên màn hình |
 
@@ -167,10 +167,10 @@ Cách làm (jaudit §1): mỗi lần thời gian trôi ở tầng trên cùng (`
 
 ## 11. Số lệch để điều phối quyết (không tự đổi cân bằng lớn)
 
-- Dò la một công thức (BAL.spyBase 58): bình quân cơ may (mọi cặp phi tần, kẻ hầu thật) trên hai ván mới: ngươi 50 → 46 và 37 → 33; NPC 55,6 → 57 và 46,1 → 51,5; cung nữ dò la ở tẩm cung 67 → 61 và 61 → 47 (cũ chỉ tính Lòng, nay có phạt sai người đi và yếu tố người bị dò). Bình quân gộp theo số cặp: 46,6 → 49,6. Nếu muốn cung nữ giữ mức cũ: giảm `BAL.spySent` (12) hoặc tăng `spyBase` — để điều phối quyết. Khoảng cách theo người bị dò nay rộng hơn (Hoàng hậu đa nghi, nhiều thái giám: khó hơn 1–2 bậc; cung nữ quen người bên ấy: dễ hơn 1 bậc).
+- Dò la một công thức (BAL.spyBase 58, **spySent 0** theo điều phối): bình quân trên 4 ván mới (mọi cặp, kẻ hầu thật): cung nữ dò la 62 → 64 (đúng mức cũ), ngươi 32 → 40, NPC 43 → 50,5 (+7, do có thêm yếu tố người bị dò/quen biết và bỏ phạt sai người).
 - Đề bạt là việc mới: kẻ hầu lên bậc sớm hơn `servRanks` (trước chỉ theo công lao); NPC dùng 15 phần trăm mỗi tháng.
 - "Hỏi han sức khỏe": +4 giảm dần → +2/+1, thêm biết bệnh.
-- Các việc không qua `odA` (§9) — đổi thì khó hơn.
+- Sáu việc không qua `odA` (§9): **đã đưa qua `odA`** (jaudit §18) — Sức dưới 30, Quẻ, phạt sai người nay áp dụng; thẻ = số gieo.
 
 ## 12. Kết quả chạy và bảng mọi nút
 
@@ -188,16 +188,16 @@ Cách làm (jaudit §1): mỗi lần thời gian trôi ở tầng trên cùng (`
 - "Cài người vào cung khác › …: kẻ hầu mất khỏi cung": đúng nghĩa việc.
 - Khi mọi lần gieo bị ép "thành", rủi ro phụ (bị phát giác, kẻ hầu bị bắt) cũng nổ: bộ chấm tính đó là kết quả hỏng.
 
-Còn mở (ghi để điều phối):
-- Chế độ cung nữ › Lĩnh đồ ở Nội vụ phủ: thẻ "Sức −8", thật −13 (j42).
-- Thỉnh an Hoàng hậu / Xin Thái hậu đỡ lời: số "Hoàng hậu quý ngươi" (S.hh và quan hệ Hoàng hậu lệch nhau) — thợ hotfix-thinhan.
-- Học với thầy: "thầy kể một sở thích của Hoàng thượng hoặc chuyện của một phi tần" — có lần không cho tin gì (j23); cần chủ của Tài nghệ xem.
-- Phe phái › Biếu quà, gửi thư cho quan: ngoài "thiện cảm +20" của quan còn làm Hoàng hậu (nhà đối địch) thiện cảm −5 — ẩn (j55).
-- Phe phái › Dò la nhà ngoại phi tần: người bị dò oán ta +7…+22 — ẩn (j55).
-- Đến cung nàng thăm › Lẻn vào (hỏng): cấm túc — ẩn; Đợi sáng mai (Qua đêm): Sủng −1, mọi phi tần ghen −1 — ẩn (j77).
-- Ban thưởng / Khất bổng lộc / Ân xá (quyền Hoàng hậu): Danh nàng +3, thiện cảm cả cung, Đức +2 — ẩn (j8 `empAct`).
-- Lục rương tìm chứng cứ (bị bắt gặp): ngoài "thiện cảm −15" còn oán ta +9…+20.
-- Ly gián, Hạ độc dần, Tố tội thật, Bóc tư tình, Xin Hoàng hậu giáng, Trình Hoàng hậu không qua `odA` (§9).
+Mục còn mở ở lần trước — đã xử lý (điều phối 11/15):
+- Phe phái › Biếu quà, gửi thư: "Hoàng hậu −5" đến từ rủi ro lộ chuyện can chính (`ccStep`) và **đã có** ở Kèm ("lộ chuyện can chính … Hoàng hậu −5"); bộ chấm gán nhầm vào "thiện cảm +20" của quan. Không phải lỗi.
+- Phe phái › Dò la nhà ngoại: Kèm nay ghi "nàng biết chuyện (khả năng): thiện cảm −8, oán ta +X đến +Y" (relAdd −8 và oán +8, nhân nết) (j55 + jaudit §19).
+- Lẻn vào: "bị phạt" nay là "cấm túc N tháng" / tội nặng "hoặc giáng một bậc (bậc khả năng)" theo `punish` (j77 + jaudit §20); "bị phạt" trên mọi thẻ việc phi tần cũng vậy.
+- Đợi sáng mai (Qua đêm): là cho thời gian trôi; Sủng −1, ghen −1 cả cung là việc qua đêm (thường lệ) — nay hiện trong thẻ "Trong cung vừa qua" (§8), không phải hiệu ứng của nút.
+- Quyền Hoàng hậu: Ban thưởng ("thiện cảm +20 …, Danh nàng +3"), Ân xá ("hết cấm túc, thiện cảm +30 …, Đức +2"), Khất bổng lộc / Tịch thu ("thiện cảm −15/−20, oán ta …") ghi số thật (j15).
+- Lục rương bị bắt gặp: "thiện cảm −15, oán ta +X đến +Y, bị phạt: cấm túc N tháng" (jaudit §21).
+- Chế độ cung nữ › Lĩnh đồ: −13 = Sức −8 của việc + 1/4 khả năng "bị thái giám Nội vụ phủ bắt nạt: Sức −5" (j42 `srvMeet`) — nay ghi ở Kèm (jaudit §22).
+- Học với thầy: thẻ ghi đúng "thầy kể …: khả năng thấp" (30); kết quả đến sau trò học (j23) nên bộ kiểm không thấy ngay — không phải lỗi. Người được kể vẫn chọn ngẫu nhiên trong j23 — ghi cho chủ Tài nghệ.
+- Còn lại: Thỉnh an Hoàng hậu (thợ hotfix-thinhan).
 
 Bảng mọi nút (đợt 1, sau sửa; một dòng một nút theo chỗ; "Vì sao" ghi trạng thái:lần):
 | Chỗ | Nút | Kết luận | Vì sao (trạng thái:lần) |
