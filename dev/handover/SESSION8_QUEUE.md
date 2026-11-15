@@ -40,7 +40,7 @@ CDN uploads OK again (owner saved the Cloudflare token; R2 verified). Use CLOUDF
 | C13 | review/gift-pick (owner s8: gift picker picture grid + gift animation; animation needs A2 fxkit) | RUNNING |
 | C14 | review/row-align @ 0886f329b | REVIEWING (row-align-r1) |
 | C15 | review/mood-dialog → r1 PASS f8f51797c | LIVE |
-| C16 | review/item-info (owner s8: tap any item cell → kit item-detail; dress pick wears via button) | RUNNING |
+| C16 | review/item-info @ 50a0f22da (KIT §70 jitd) | REVIEWING (item-info-r1; BAL.itd.allow=false per owner 08:10Z) |
 | C17 | review/stage-fig-size (owner s8: event dialog figure column cap + crop skirt) | RUNNING |
 
 ## D. UNASSIGNED owner asks (§5; ledger worker refines into dev/handover/OWNER_LEDGER.md)
