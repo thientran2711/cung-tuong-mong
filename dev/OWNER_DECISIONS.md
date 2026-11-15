@@ -214,3 +214,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (02:25Z) Owner: bắt nạt đòi bạc phải có cả đòi đồ nàng đang có (món thật trong Tư trang). Giao review/ts-b; dùng lại việc 'uyhiep' có sẵn.
 - (02:35Z) Owner (ảnh Hậu cung): còn nền tím dưới trang → bỏ hẳn bìa sách tím tối ở mọi tab/khổ; chỉ viền giấy mảnh cùng tông kit nếu cần. Giao người duyệt mới, gộp vào review/main-next cùng map-anim + page-curl.
 - (02:40Z) Owner: trang đang lật bị trong suốt trên màn dọc điện thoại (chữ hai trang chồng nhau) → tờ lật phải đục hoàn toàn cả hai mặt, không lộ chữ trang dưới xuyên qua; KIT §34.0. Giao người gộp main-next (page-curl).
+- (02:55Z) Owner: 'Đẩy lên live đi' + từ nay bản đã qua kiểm duyệt (PASS của người duyệt kit) được đưa lên live luôn, không cần hỏi. Đã đẩy main = 355d6d58 (loading: app tự về bản mới).
