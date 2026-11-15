@@ -864,3 +864,8 @@ All must work in co-op.
 - Owner (verbatim): "Phẩm của tôi cũng viền sáng như tên."
 - Screenshot dev/handover/refs/owner-stage-rank-halo.jpg (stage, her tag "Thường tại / Mạnh Mộng Điệp": the name has a light paper halo, the rank line in its rank colour has none and is hard to read on the painting).
 - Rule: on stage/picture name tags the RANK line gets the same light halo/outline as the name (kitNameRank §48), for every person, keeping its rank colour. → added to review/rank-colour scope.
+
+## 15/11 (session 8) — Tapping the Mệnh truyện chapter shows nothing (owner screenshot)
+- Owner (verbatim): "Bấm vào báo thù cho nhà không có thông tin gì hiện ra à."
+- Screenshot dev/handover/refs/owner-chapter-tap-empty.jpg (Mệnh truyện › Chương này: chip "Báo thù cho nhà" + card "Chương 1 · Báo thù cho nhà · Hồi 4/5", MỤC TIÊU / KẾ TIẾP lines, the rest of the page empty; tapping the chip/card does nothing).
+- Decision: tapping the chapter chip or card opens the chapter detail (kit panel): story so far by hồi (with each hồi's picture), the goal broken into steps with live progress (chứng cứ 0/3 with each evidence found/missing and where to look; nhân chứng: who, safe or in danger, how to protect; rank needed: Tần, now Thường tại; dâng sớ step), what to do next with a "Đi làm" link to the act/place, risks. The empty page area under KẾ TIẾP shows this same progress inline. Whole family: every tappable chip/card in Mệnh truyện / Việc nhờ / Sổ ghi / Sắc phong opens its detail; no dead taps anywhere (scan for clickable-looking elements with no handler). → worker review/chapter-detail (QUEUED: subagent cap).
