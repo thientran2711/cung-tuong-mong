@@ -331,3 +331,4 @@ Worker worktrees at /home/user/wt/<name>. Rule summaries for workers: /home/user
 - (s7) Owner painted-only effects (21:00Z method) → review/fxkit worker building shared KIT §68 painted-fx (sprites via remove_background, light videos on black with screen blend, alpha sprite sheets). cardflip, promo-rules, night-end reviewer told.
 - (s7) Owner 21:10Z night follow-ups (morning after mặn nồng / lạnh nhạt mocking / Emperor elsewhere music / rằm & festival night-end variants) → QUEUED to start on top of night-end r1 as soon as it PASSes (uses §62 + §68 fx).
 - (s7) act-pics2 redraw 152/380 live (ce225d1f; ~2.6k credits; 4 night-sky darks redone). Coordinator decision: re-check keys 1–92 darks too. Next worker spawned (from key 153). Owner 21:15Z card-flip follows her knowledge → cardflip; 21:20Z level-up grants a recipe → recipes reviewer.
+- (s7) Owner 21:25Z co-op buổi timer → review/coop-timer worker (KIT §69).
