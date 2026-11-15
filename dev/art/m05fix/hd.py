@@ -40,6 +40,20 @@ def prompt(face,t):
              "and one very tiny ruby-red glint at its centre; completely flat, no raised gems, no pearls, no beads; "+SIZE78)
     return head+orn+"Crisp, elegant, clearly a painted ornament, never a scar or birthmark; no frame. Exactly the same ornament and size on all four faces. No moles, no beauty marks. No text."
 FIX={"fig-maid-m09-t3-a18.webp":(178,88,88)}   # face detector hit the hairpin
+def sprompt(face,t):
+    old,short,mot,col=SW[face]
+    st={1:f"Simplest form: flat {col} paint, no detail, no gold",
+        2:f"Flat {col} paint, crisp clear shape, edges a little lighter, one tiny paler centre; no outline, no gold",
+        3:f"Finely painted {col}: tiny deeper centre and very fine inner veins; no gold",
+        4:f"{col} paint with every edge outlined in a hair-thin shimmering gold line",
+        5:f"Shining flat gold leaf: clear gold rim, fine gold inner lines, little gold centre, filled with {col}; gold and {col} equally",
+        6:f"Flat gold leaf with {col} inlay, compact, ONE minute flat pearl-white dot at its centre",
+        7:"Paper-thin flat gold leaf filled with glossy cinnabar-red enamel, fine gold filigree, two minute gold curls hugging it closely, one tiny ruby glint at its centre; flat, no raised gems or beads"}[t]
+    sz=(f"width about {SZ[t]}% of one eye's length" if t<=6 else "TINY, lentil-sized: height about half an eye's length, narrower than the gap between the inner brow ends")
+    return ("Edit: a 2x2 grid of the same woman at four ages. Keep everything identical: faces, ages, expressions, eyes, brows, hair, ornaments, clothes, colours, light, framing, layout. "
+            f"ONLY change, on all four faces: remove the mark between the brows ({old}, with any gold; clean smooth skin, no trace) and paint instead {mot}. "
+            f"{st}. Painted flat on the skin like rouge, soft natural edges, not a sticker. Small: {sz}; just above the gap between the inner brow ends, clear of brows and hairline. "
+            f"It must read as a {short}. Same ornament and size on all four. No moles. No text.")
 def tile(im,fn=""):
     cx,ey,fw=FIX[fn] if fn in FIX else find_face(im)[:3]; return cx,ey-fw*0.05,fw*2.0,(cx,ey,fw)
 def make(face,tiers):
@@ -105,6 +119,8 @@ if __name__=="__main__":
     c=sys.argv[1]; face=sys.argv[2]
     if c=="make": make(face,[int(x[1:]) for x in sys.argv[3:]] or range(1,8))
     elif c=="prompt": print(prompt(face,int(sys.argv[3][1:])))
+    elif c=="sp":
+        for x in sys.argv[3:]: print(x+": "+sprompt(face,int(x[1:])))
     elif c=="paste":
         for x in sys.argv[3:]: paste(face,int(x[1:]))
     elif c=="ecrop": ecrop(face,sys.argv[3],sys.argv[4:])
