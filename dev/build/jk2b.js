@@ -770,6 +770,12 @@ function kitPcSize(){try{const P=$("panel");if(!P)return;const cs=getComputedSty
    else if(c.bottom>a.bottom-pb+1)P.scrollTop+=Math.min(c.bottom-(a.bottom-pb)+2,c.top-sb);else if(c.top<sb)P.scrollTop+=c.top-sb}catch(e){}};
    requestAnimationFrame(()=>{fit();requestAnimationFrame(fit)});const st0={v:null};setTimeout(()=>{st0.v=P.scrollTop;fit()},180);setTimeout(()=>{if(st0.v==null||Math.abs(P.scrollTop-st0.v)<2)fit()},450)}})}catch(e){}}
 addEventListener("resize",()=>{clearTimeout(window.__kpcS);window.__kpcS=setTimeout(kitPcSize,80)});
+/* owner 11/15 05:08Z (Fold, "Lỗi gì đây"): a tab switch renders the new page while #panel still has the OLD tab's size (Hành sự: the short
+   panel under the stage); the card then kept --kpcmax 200 px and the face strip kept one face. The panel's own size is the truth: whenever
+   #panel changes size, the card and the strip measure again. */
+(function(){try{const P=$("panel");if(!P||typeof ResizeObserver!=="function")return;let w=-1,h=-1,t=0;
+ new ResizeObserver(()=>{const r=P.getBoundingClientRect();if(Math.abs(r.width-w)<1&&Math.abs(r.height-h)<1)return;w=r.width;h=r.height;cancelAnimationFrame(t);
+  t=requestAnimationFrame(()=>{try{kitPcSize()}catch(e){}try{if(typeof kitStripFit==="function")kitStripFit()}catch(e){}})}).observe(P)}catch(e){}})();
 (function(){const P=$("panel");if(!P)return;const mark=e=>{if(!(e.target.closest&&e.target.closest(".pc")))P.__kpcUser=1};P.addEventListener("touchstart",mark,{passive:true});P.addEventListener("wheel",mark,{passive:true});
  document.addEventListener("click",e=>{if(e.target.closest&&e.target.closest("#panel .pface,#panel .pgf,#panel [data-pg],[data-tab],.ksubb"))P.__kpcUser=0},true)})();
 (function(){const st=document.createElement("style");st.id="k2b-pchead";st.textContent=`
