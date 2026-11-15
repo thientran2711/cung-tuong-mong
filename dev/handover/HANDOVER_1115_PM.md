@@ -210,3 +210,4 @@ Worktree thợ ở /home/user/wt/<tên>. Bản tóm tắt luật cho thợ: /hom
 - 17:27Z bảng nhãn|giá trị tách sang thợ mới review/kit-table (fix-float xin tách).
 - 4 mẫu chữ Tuần lục trên CDN title-tuanluc-v1..v4.webp, đã gửi sếp chọn.
 - Hàng chờ (thứ tự): promo-exam (17:20Z), econ-stipend (17:30Z đồ bổng lộc vào Tư trang thật + rương; 17:33Z cắt xén bổng lộc; dựa review/econ), header-danh (17:36Z Danh sang nhóm trái sau Đức; gộp review/header-fix), reward-anim (17:02Z), hoa điền thu nhỏ, R poison-gift, pets-fix, sfx, rank-ui.
+- 17:40Z bảng Ân sủng bung to tràn mép → người duyệt stage-slots tìm/sửa; vết đen ở cổ hình Mạnh Mộng Điệp (Thường tại) + rà mọi hình → scene-light.
