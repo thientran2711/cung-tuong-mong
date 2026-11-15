@@ -24,13 +24,13 @@ fs.mkdirSync(DIR,{recursive:true});
  out.before=await cardTxt();
   await p.screenshot({path:`${DIR}/toil-${tag}-0-morning.jpg`,quality:70});
  /* 2. tap the chip → the dress game */
- await p.click('#k3tt [data-k3="toil"]');await p.waitForSelector('#kg82 .toilw');await p.waitForTimeout(900);
+ await p.click('#k3tt [data-k3="toil"]');await p.waitForSelector('#kg82 .toilw');await p.waitForFunction(()=>[...document.querySelectorAll('#kg82 img')].every(i=>i.complete),null,{timeout:90000}).catch(()=>{});await p.waitForTimeout(600);
  await p.screenshot({path:`${DIR}/toil-${tag}-1-dress.jpg`,quality:70});
  /* put on something from the bag if any (tap the first non-worn item) */
  out.bag=await p.evaluate(()=>document.querySelectorAll('#kg82 [data-kinvkey="toil"][data-kinvi]').length);
  await p.click('#toilok');await p.waitForTimeout(400);out.dress=await p.evaluate(()=>TOIL.st&&TOIL.st.dv);
  await p.screenshot({path:`${DIR}/toil-${tag}-2-verdict.jpg`,quality:70});
- await p.evaluate(()=>{TOIL.clock=+(new URLSearchParams(location.search).get('clock')||12)});await p.click('#toilmk');await p.waitForTimeout(1200);
+ await p.evaluate(()=>{TOIL.clock=+(new URLSearchParams(location.search).get('clock')||12)});await p.click('#toilmk');await p.waitForFunction(()=>{const i=kg82Img('chai-bg');return i.complete&&i.naturalWidth},null,{timeout:90000}).catch(()=>{});await p.waitForTimeout(2500);
  /* 3. kẻ mày: drag along each guide */
  const geo=await p.evaluate(()=>({b:TOIL.geo.brows()}));
  for(const L of geo.b){await p.mouse.move(L[0].x,L[0].y);await p.mouse.down();for(const q of L.filter((_,i)=>i%2===0||i===L.length-1))await p.mouse.move(q.x,q.y,{steps:2});await p.mouse.up()}
@@ -60,6 +60,6 @@ fs.mkdirSync(DIR,{recursive:true});
  /* 5. skipping does not block: next buổi with no toilette */
  out.skip=await p.evaluate(()=>{S.toilette=null;const b=S.buoi;try{nextBuoi()}catch(e){return 'err '+e.message}return {from:b,to:S.buoi,q:Q.length}});
  /* 6. old save loads */
- if(OLD){const txt=fs.readFileSync(OLD,'utf8');out.old=await p.evaluate(t=>{try{deser(t);render();return{ok:!!S,turn:S.turn,chip:typeof toilChip==='function'?toilChip():null,card:deck.some(a=>a.toil)}}catch(e){return 'err '+e.message}},txt)}
+ if(OLD){const txt=fs.readFileSync(OLD,'utf8');out.old=await p.evaluate(t=>{try{quiet=true;deser(JSON.parse(t));quiet=false;Q.length=0;S.buoi=0;used=0;deal();render();return{ok:!!S,turn:S.turn,chip:typeof toilChip==="function"?toilChip():null,card:deck.some(a=>a.toil),look:toilLookOfP(S)}}catch(e){return 'err '+e.message}},txt)}
  out.overflow=await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1);
  out.errs=errs;console.log(JSON.stringify(out,null,1));await b.close()})().catch(e=>{console.error(e);process.exit(1)});

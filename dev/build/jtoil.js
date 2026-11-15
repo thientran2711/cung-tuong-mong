@@ -146,16 +146,17 @@ function toilCard(){const occ=toilOcc().map(o=>o.n.toLowerCase()).join(", ");
 (function(){const d0=deal;deal=function(){const r=d0.apply(this,arguments);try{if(Array.isArray(deck)&&toilOn(S)&&(S.buoi||0)===0&&!toilToday(S)&&!deck.some(a=>a.toil))deck.unshift(toilCard())}catch(e){console.error(e)}return r}})();
 /* the chip "Hôm nay: y phục hợp dịp · trang điểm đẹp" (k3 top bar row, from #hud2) */
 function toilChip(){if(!toilOn(S))return null;const rec=toilToday(S);
- if(!rec)return(S.buoi||0)===0?{t:"Hôm nay: chưa điểm trang",c:""}:{t:"Hôm nay: mặt mộc",c:""};
+ if(!rec)return(S.buoi||0)===0?{t:"Chưa điểm trang",full:"Hôm nay: chưa điểm trang",c:""}:{t:"Hôm nay mặt mộc",full:"Hôm nay: mặt mộc",c:""};
  const bad=rec.dv==="giandi"||rec.dv==="photruong"||rec.dv==="vuot"||rec.dv==="tang"||!rec.makeup||toilTier(rec.score)==="vung";
- const mk=rec.makeup?(rec.look==="diem"?"diem":toilTier(rec.score)):"moc";return{t:`Hôm nay: y phục ${TOIL_DV[rec.dv]||"như hôm qua"} · ${rec.makeup?"trang điểm "+TOIL_MK[mk]:"mặt mộc"}`,c:bad||mk==="diem"?"hot":"ok"}}
+ const mk=rec.makeup?(rec.look==="diem"?"diem":toilTier(rec.score)):"moc";const dv=TOIL_DV[rec.dv]||"như hôm qua";return{t:`Y phục ${dv} · ${rec.makeup?"trang điểm "+TOIL_MK[mk]:"mặt mộc"}`,full:`Hôm nay: y phục ${dv} · ${rec.makeup?"trang điểm "+TOIL_MK[mk]:"mặt mộc"}`,c:bad||mk==="diem"?"hot":"ok"}}
 /* the k3 top row (jk3 k3Stage) rebuilds #k3tt from #hud2's state chips (K3_STATE is private to jk3): the chip joins line 1 after each rebuild */
 function toilChipPaint(){try{const tt=document.getElementById("k3tt");if(!tt)return;const l1=tt.querySelector(".k3l1");const c=S&&toilChip();const old=tt.querySelector('[data-k3="toil"]');
- if(!c||!l1){if(old)old.remove();return}const h=`<button type="button" class="k3r ${c.c}" data-k3="toil" title="${c.t} · chạm để xem"><span class="k3l">${c.t}</span></button>`;
+ if(!c||!l1){if(old)old.remove();return}const h=`<button type="button" class="k3r ${c.c}" data-k3="toil" title="${c.full||c.t} · chạm để xem" aria-label="${c.full||c.t}"><span class="k3l">${c.t}</span></button>`;
  if(old&&old.outerHTML===h)return;if(old)old.remove();l1.insertAdjacentHTML("beforeend",h)}catch(e){}}
 (function(){let mo=null;const hook=()=>{const tt=document.getElementById("k3tt");if(!tt||mo)return;mo=new MutationObserver(()=>{if(!tt.querySelector('[data-k3="toil"]'))toilChipPaint()});mo.observe(tt,{childList:true,subtree:true})};
  if(typeof renderHUD==="function"){const r0=renderHUD;renderHUD=function(){const r=r0.apply(this,arguments);hook();toilChipPaint();return r}}})();
-document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest('[data-k3="toil"],[data-hx="toil"]');if(!b)return;e.stopImmediatePropagation();e.preventDefault();
+/* on window (capture): jk3's own top-row click handler is a document capture listener registered earlier */
+window.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest('[data-k3="toil"],[data-hx="toil"]');if(!b)return;e.stopImmediatePropagation();e.preventDefault();
  if(toilCanStart()){const i=Array.isArray(deck)?deck.findIndex(a=>a&&a.toil&&!a.done):-1;if(i>=0){act(i);return}if(!can(BAL.toil.khac))return;spend(BAL.toil.khac);toilOpen();return}
  const rec=toilToday(S);try{kpPop(b,rec?`<p>Sáng nay ta điểm trang: y phục ${TOIL_DV[rec.dv]}, ${rec.makeup?"trang điểm "+TOIL_MK[toilTier(rec.score)]+" ("+rec.score+" phần)":"để mặt mộc"}.</p><p class="past">Người gặp ta hôm nay nhìn theo nết mình; thẻ việc ghi trước.</p>`
   :`<p>Hôm nay ta chưa điểm trang: mặc như hôm qua, mặt mộc.</p><p class="past">Mỗi buổi sáng có việc “Điểm trang” trong Hành sự (1 khắc).</p>`)}catch(x){}},true);
@@ -311,8 +312,9 @@ window.toilOpen=toilOpen;window.toilDress=toilDress;window.toilFx=toilFx;window.
 const TOIL_FIT={url:"img/toil-fit.json",fit:null,_ld:0,load(){if(this.fit||this._ld)return;this._ld=1;try{fetch(this.url).then(r=>r.ok?r.json():null).then(j=>{if(j){TOIL_FIT.fit=j;try{if(typeof S!=="undefined"&&S&&!Q.length)render()}catch(e){}}}).catch(()=>{})}catch(e){}}};
 try{TOIL_FIT.load()}catch(e){}
 const TOIL_LOOKS={
- dep:{skin:[255,250,244,.17,.62],blush:[238,120,138,.30,.17,.0],lip:[206,52,72,.42,.075,.034],powder:0},
- diem:{skin:[255,255,255,.34,.6],blush:[226,38,62,.78,.15,.55],lip:[196,8,36,.88,.105,.05],powder:1}};
+ /* owner 15/11 on the sheet: "đẹp" subtle and natural; "diêm dúa" = the old đẹp a little stronger (pretty, just noticeably overdone, never a clown) */
+ dep:{skin:[255,250,244,.13,.62],blush:[238,128,144,.21,.165,0],lip:[206,60,80,.33,.072,.032],powder:0},
+ diem:{skin:[255,252,248,.24,.64],blush:[236,104,124,.40,.20,0],lip:[198,40,64,.56,.084,.038],powder:0}};
 function toilLookOfP(p){try{if(p!==S||!S)return null;const r=toilToday(S);return r&&r.makeup&&r.look?r.look:null}catch(e){return null}}
 const TOIL_SVGC={};
 function toilMakeupSvg(file,look){const L=TOIL_LOOKS[look];const v=TOIL_FIT.fit&&TOIL_FIT.fit[file];if(!L||!v)return"";const key=file+"|"+look;if(TOIL_SVGC[key])return TOIL_SVGC[key];

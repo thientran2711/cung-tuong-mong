@@ -132,6 +132,9 @@ def extend():
     idx = json.loads(get(BASE + "_index.json"))
     files = set(f[0][4:] for f in idx["files"])
     pors = sorted(f for f in files if re.match(r"por-(consort|maid)-", f) and f not in out)
+    # the player's own pictures first: consort faces in consort dress (t5–t8 above the measured t1–t4) and lãnh cung; "--all" adds cung nữ dress,
+    # origin pictures (kc/ngheo) and the maid identities
+    if "--all" not in sys.argv: pors = [f for f in pors if re.match(r"por-consort-c\d+-t([5-8]|cold)-a\d+\.webp$", f)]
     only = sys.argv[sys.argv.index("--only") + 1] if "--only" in sys.argv else None
     if only: pors = [f for f in pors if only in f]
     keys0 = [k for k in out if k.startswith("por-")]   # measured portraits (snapshot: the pool threads must not read `out` while it grows)
