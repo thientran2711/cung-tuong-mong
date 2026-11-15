@@ -90,3 +90,18 @@ Phẩm cấp = bậc: b1 Thường · b2 Tinh phẩm · b3 Trân phẩm · b4 Tu
 | traicay | Giỏ trái cây tiến cống | Thường |
 | lanquy | Chậu lan quý | Tinh phẩm |
 Cut: connected components assigned to cells by centroid, 88 % fill, 512 + 256 webp, checked on cream and red. On the CDN (cdn_sync).
+
+## 4. Story items in events (review/item-events, 15/11, KIT §58) — gpt-2-6 sheets TdS42S9VNR (4x2) + N2Fr48P6D9 (1x2), style ref If67SFwtvE, Magnific bg removal, cut 88 %
+| Key | Name | Grade |
+|---|---|---|
+| thu | Bức thư | Thường |
+| matthu | Mật thư | Tinh phẩm |
+| giaymat | Mảnh giấy nhắn | Thường |
+| tinvat | Tín vật | Tinh phẩm |
+| khantay | Khăn tay lụa | Thường |
+| chenthuoc | Chén thuốc | Thường |
+| batcanh | Bát canh | Thường |
+| lenhbai | Lệnh bài | Tinh phẩm |
+| sachchep | Tập sách chép tay | Thường |
+| canhhoa | Cành hoa ép | Thường |
+(hinhnhan already had its picture; it is now an IT item too.) On the CDN (cdn_sync), checked on cream and red.
