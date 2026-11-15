@@ -18,10 +18,15 @@ try{Object.assign(KIT_GLOSS,{
  "Quen biết":"Ngươi biết người này đến đâu: Người lạ → Mới thấy mặt → Biết tên → Đã quen. Gặp mặt trò chuyện, hỏi kẻ hầu, dò la thì quen thêm; đã quen mới thấy tính nết, sủng ái, quan hệ của họ và làm được các việc riêng với họ.",
  "Người chạy việc":"Khi ngươi sai người dò la, đưa thư, mua đồ…, người này đi. Game chọn kẻ hầu có Lòng và tài cao nhất; ngươi có thể đổi người."})}catch(e){}
 const gl=(k,l)=>typeof kitGloss==="function"?kitGloss(k,l):l;
+/* signed bar (owner via review 11/15: "-3" drew half a red bar): a track with a clear midline at 0; the fill grows FROM the midline toward the
+   sign (left red = dislike, right green = liking), length ∝ |v|; "Ghét" / "Thân" end marks are the level words around it */
+function sbar(v,lo,hi){lo=lo==null?-100:lo;hi=hi==null?100:hi;const x=Math.max(lo,Math.min(hi,+v||0));const h=x>=0?x/hi*50:x/lo*50;
+ return `<span class="ksbar" aria-hidden="true"><i class="ksb-mid"></i><u class="${x>=0?"g":"r"}" style="${x>=0?"left:50%":"right:50%"};width:${h.toFixed(1)}%"></u></span>`}
+window.kitSignedBar=sbar;
 /* one bar row: "<subj> quý <obj>: Bình thường · -5 [bar]" / "<subj> oán <obj>: 0 [bar]" */
 function relBar(kind,subj,obj,v){const lab=`${subj} ${kind} ${obj}`;
  if(v==null)return `<div class="kr3b"><span class="kr3k">${gl(kind==="quý"?"Quý":"Oán",lab)}</span><span class="kr3v"><span class="ef n">chưa rõ</span></span></div>`;
- if(kind==="quý")return `<div class="kr3b"><span class="kr3k">${gl("Quý",lab)}</span><span class="kr3v"><span class="ef ${v>10?"g":v<-10?"r":"n"}">${quyW(v)} · ${sg(v)}</span>${fbar(v,-100,100,v>=0)}</span></div>`;
+ if(kind==="quý")return `<div class="kr3b"><span class="kr3k">${gl("Quý",lab)}</span><span class="kr3v"><span class="ef ${v>10?"g":v<-10?"r":"n"}">${quyW(v)} · ${sg(v)}</span>${sbar(v)}</span></div>`;
  return `<div class="kr3b"><span class="kr3k">${gl("Oán",lab)}</span><span class="kr3v"><span class="ef ${v>=30?"r":v>10?"r":"n"}">${Math.round(v)}</span>${fbar(v,0,100,false)}</span></div>`}
 window.kitRelBar=relBar;
 /* who "nàng" is, in words: the Empress by title, others "nàng" */
@@ -47,7 +52,7 @@ function knownCol(v,max){const L=knownList(v);if(!L.length)return `<div class="k
 
 /* ---------- THẺ QUAN HỆ 3 CỘT ---------- */
 function rel3(face,rank,name,col,mid,right,extra){
- return `<div class="krel3"><div class="kr3p"><div class="kr3f">${pcPort(face,col)}</div><span class="kr3nm" style="--rc:${col||"#7a5530"}">${rank?`<small>${rank}</small>`:""}<b>${name}</b></span></div>`+
+ return `<div class="krel3${right==null||right===""?" kr3two":""}"><div class="kr3p"><div class="kr3f">${pcPort(face,col)}</div><span class="kr3nm" style="--rc:${col||"#7a5530"}">${rank?`<small>${rank}</small>`:""}<b>${name}</b></span></div>`+
   `<div class="kr3m">${mid}${extra||""}</div>${right==null?"":right}</div>`}
 window.kitRel3=rel3;
 const fcol=f=>(f&&f.col)||"#7a5530";
@@ -56,7 +61,7 @@ function hcRelHTML(){kn();const P=consorts();const sel=relSel==="emp"||relSel===
  let h=`<div class="relsel kpplist"><span class="past kppl-h">Xem quan hệ của:</span>${chips.map(([k,n,f])=>`<button data-rel="${k}" aria-pressed="${String(k)===String(relSel)}">${mdH(f,"xs")}<span>${n}</span></button>`).join("")}</div>`;
  if(sel==="emp"){const f=pEmp();return h+rel3(f,"Hoàng thượng",empName(),fcol(f),`<div class="kr3b"><span class="kr3k">${gl("Sủng","Ngài sủng ngươi")}</span><span class="kr3v"><span class="ef g">${S.sung}</span>${fbar(S.sung,0,100,true)}</span></div><div class="kr3b"><span class="kr3k">${gl("Ân tình","Ân tình")}</span><span class="kr3v"><span class="ef g">${S.an||0}</span>${fbar(S.an||0,0,100,true)}</span></div>`,"")+
   liveRivals(true).map(v=>{const f=pv(v);return rel3(f,rkName(v),v.name,fcol(f),`<div class="kr3b"><span class="kr3k">Ngài sủng nàng</span><span class="kr3v">${favLine(v)}</span></div>`,knownCol(v))}).join("")}
- if(sel==="th"){const f=pTH();return h+rel3(f,"Thái hậu","Thái hậu",fcol(f),`<div class="kr3b"><span class="kr3k">Thái hậu thương ngươi</span><span class="kr3v"><span class="ef ${S.th>=0?"g":"r"}">${S.th}</span>${fbar(S.th,-100,100,S.th>=0)}</span></div>`,"")+
+ if(sel==="th"){const f=pTH();return h+rel3(f,"Thái hậu","Thái hậu",fcol(f),`<div class="kr3b"><span class="kr3k">Thái hậu thương ngươi</span><span class="kr3v"><span class="ef ${S.th>=0?"g":"r"}">${S.th}</span>${sbar(S.th)}</span></div>`,"")+
   liveRivals(true).map(v=>{const f=pv(v);return rel3(f,rkName(v),v.name,fcol(f),`<div class="kr3b"><span class="kr3k">Thái hậu thương nàng</span><span class="kr3v">${knows(v)?`<span class="ef ${v.th>=0?"g":"r"}">${v.th||0}</span>`:'<span class="ef n">chưa rõ</span>'}</span></div>`,knownCol(v))}).join("")}
  if(sel===S){return h+P.filter(p=>p!==S).map(v=>{const f=pv(v),k=knows(v),sj=subjOf(v),ob=objOf(v);
    const mid=relBar("quý",sj,"ngươi",k?aff(v,S):null)+relBar("oán",sj,"ngươi",k?oan(v,S):null)+relBar("quý","Ngươi",ob,aff(S,v))+relBar("oán","Ngươi",ob,oan(S,v))+
@@ -66,7 +71,7 @@ function hcRelHTML(){kn();const P=consorts();const sel=relSel==="emp"||relSel===
  const sn=shortN(sel.name);
  return h+P.filter(p=>p!==sel).map(p=>{const me=p===S;const f=me?pMe():pv(p);const ob=me?"ngươi":objOf(p);const kp=me||knows(p);
   const mid=relBar("quý",sn,ob,aff(sel,p))+relBar("oán",sn,ob,oan(sel,p))+relBar("quý",me?"Ngươi":subjOf(p),sn,kp?aff(p,sel):null)+relBar("oán",me?"Ngươi":subjOf(p),sn,kp?oan(p,sel):null);
-  return rel3(f,me?(S.out?"Phế phi":RANKS[S.rank].n):rkName(p),me?"Ngươi":p.name,fcol(f),mid,me?`<div class="kr3r"></div>`:knownCol(p))}).join("")}
+  return rel3(f,me?(S.out?"Phế phi":RANKS[S.rank].n):rkName(p),me?"Ngươi":p.name,fcol(f),mid,me?knownCol(sel):knownCol(p))}).join("")}
 window.hcRelHTML=hcRelHTML;
 relHTML=function(){if(!S)return"";if(S.known&&typeof k61Hide==="function"){const h=k61Hide(()=>hcRelHTML(),3);const n=typeof k61Unknown==="function"?k61Unknown(3).length:0;
   return h+(n?`<p class="past">Còn ${n} phi tần ngươi chưa quen biết: chưa xem được quan hệ. Gặp mặt trò chuyện, hỏi người hầu hoặc dò la để biết.</p>`:"")}return hcRelHTML()};
@@ -75,18 +80,18 @@ relHTML=function(){if(!S)return"";if(S.known&&typeof k61Hide==="function"){const
 function mkTab(k,l,s,before){const T0=$("tabs");if(!T0||T0.querySelector(`[data-tab="${k}"]`))return;const b=document.createElement("button");b.dataset.tab=k;b.dataset.s=s;b.setAttribute("role","tab");b.textContent=l;b.dataset.l0=l;b.dataset.s0=s;
  const ref=T0.querySelector(`[data-tab="${before}"]`);if(ref)ref.after(b);else T0.appendChild(b);return b}
 (function(){const T0=$("tabs");if(!T0)return;const rv=T0.querySelector('[data-tab="rv"]');
- if(rv&&!T0.querySelector('[data-tab="court"]')){const b=document.createElement("button");b.dataset.tab="court";b.dataset.s="Thánh thượng";b.setAttribute("role","tab");b.textContent="Hoàng thượng · Thái hậu";b.dataset.l0=b.textContent;b.dataset.s0=b.dataset.s;rv.before(b)}
+ if(rv&&!T0.querySelector('[data-tab="court"]')){const b=document.createElement("button");b.dataset.tab="court";b.dataset.s="Chí tôn";b.setAttribute("role","tab");b.textContent="Chí tôn";b.dataset.l0=b.textContent;b.dataset.s0=b.dataset.s;rv.before(b)}
  mkTab("men","Nam nhân","Nam nhân","rv");
  /* staff (Cung nhân) belongs to Hậu cung: place its button inside the group (after men) so the bar order stays Hậu cung · Giao tình */
  const st=T0.querySelector('[data-tab="staff"]'),mn=T0.querySelector('[data-tab="men"]');if(st&&mn)mn.after(st);
  const rl=T0.querySelector('[data-tab="rel"]'),fc=T0.querySelector('[data-tab="fac"]');if(rl&&st)st.after(rl);if(fc&&rl)rl.after(fc);
  /* servant road: its own tabs (j42 SRVTABS) — the new keys are not servant tabs */
 })();
-try{for(const k in KG)delete KG[k];Object.assign(KG,{hc:{keys:["court","rv","men","staff"],l:"Hậu cung",s:"Hậu cung"},gt:{keys:["rel","fac"],l:"Giao tình",s:"Giao tình"},mt:{keys:["story","nho","quest","req","log"],l:"Mệnh truyện",s:"Mệnh truyện"}})}catch(e){}
-try{if(window.VP&&VP.tabs)Object.assign(VP.tabs,{court:["Hoàng thượng · Thái hậu","Thánh thượng"],men:["Nam nhân","Nam nhân"],rel:["Ân oán","Ân oán"]})}catch(e){}
+try{const mt0=KG.mt&&KG.mt.keys?KG.mt.keys.slice():[];for(const k in KG)delete KG[k];Object.assign(KG,{hc:{keys:["court","rv","men","staff"],l:"Hậu cung",s:"Hậu cung"},gt:{keys:["rel","fac"],l:"Giao tình",s:"Giao tình"},mt:{keys:["story","nho","quest","req","log"],l:"Mệnh truyện",s:"Mệnh truyện"}});/* keep Mệnh truyện members other modules added earlier (jbal2 "q72" Việc nhờ) */mt0.forEach((k,i)=>{if(!KG.mt.keys.includes(k)&&!["rv","rel","fac","staff","court","men"].includes(k))KG.mt.keys.splice(Math.min(i,KG.mt.keys.length),0,k)})}catch(e){}
+try{if(window.VP&&VP.tabs)Object.assign(VP.tabs,{court:["Chí tôn","Chí tôn"],men:["Nam nhân","Nam nhân"],rel:["Ân oán","Ân oán"]})}catch(e){}
 /* the sub-tab label: long on wide panels, short ("Thánh thượng") where four segments are tight */
 (function(){if(typeof kgSub!=="function")return;const k0=kgSub;kgSub=function(){const r=k0.apply(this,arguments);try{const P=$("panel");const b=P&&P.querySelector('.ksub [data-ksub="court"]');
-  if(b){const w=P.clientWidth||innerWidth;b.innerHTML=w<640?"Thánh thượng":"Hoàng thượng · Thái hậu";b.title="Hoàng thượng · Thái hậu"}
+  if(b){const w=P.clientWidth||innerWidth;b.innerHTML=w<640?"Chí tôn":"Chí tôn";b.title="Chí tôn"}
   const r2=P&&P.querySelector('.ksub [data-ksub="rel"]');if(r2&&T(r2.textContent)!=="Ân oán")r2.textContent="Ân oán"}catch(e){}return r}})();
 
 /* court sub-tab: Hoàng thượng + Thái hậu, the same pager + person card; their acts = the day's act cards about them (from the Hành sự deck) */
@@ -165,7 +170,11 @@ const st=document.createElement("style");st.id="kit-hc";st.textContent=`
 .kr3m{display:flex;flex-direction:column;gap:6px;min-width:0;font-size:.82rem}
 .kr3b{display:flex;flex-direction:column;gap:1px;min-width:0}
 .kr3k{color:var(--dim);font-size:.76rem;font-weight:600}
-.kr3v{display:flex;align-items:center;gap:6px;flex-wrap:wrap}.kr3v .fbar{width:70px;flex:0 0 auto}
+.kr3v{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.krel3.kr3two{grid-template-columns:minmax(120px,170px) minmax(0,1fr)}
+.ksbar{position:relative;display:inline-block;width:92px;height:8px;flex:0 0 auto;border-radius:4px;background:var(--k-card2,#efe4cc);box-shadow:inset 0 0 0 1px #b89a6a55;overflow:hidden;vertical-align:middle}
+.ksbar>.ksb-mid{position:absolute;left:calc(50% - 1px);top:-1px;bottom:-1px;width:2px;background:#7a5530;opacity:.7;z-index:1}
+.ksbar>u{position:absolute;top:1px;bottom:1px;border-radius:3px}.ksbar>u.g{background:var(--good,#3d8a5a)}.ksbar>u.r{background:var(--bad,#b0402c)}.kr3v .fbar{width:70px;flex:0 0 auto}
 .kr3note{margin:0;font-size:.74rem;color:var(--dim)}
 .kr3act{margin-top:4px;min-width:0;max-width:100%}
 html body #panel .krel3 .kr3act button.ka,html body #panel .krel3 .kr3act .card,html body #panel .krel3 .kr3act .kcard{width:100%!important;min-width:0!important;max-width:100%!important;box-sizing:border-box!important;flex:1 1 auto!important}
@@ -175,7 +184,7 @@ html body #panel .krel3 .kr3act button.ka,html body #panel .krel3 .kr3act .card,
 .kr3l li{line-height:1.35}.kr3l li small{display:block;font-size:.7rem;color:var(--dim);opacity:.85}
 .kr3none{margin:0;font-size:.76rem;color:var(--dim)}
 .kr3more{margin-top:4px}
-@container (max-width:560px){.krel3{grid-template-columns:1fr;justify-items:stretch}.kr3p{max-width:180px;margin:0 auto}.kr3m,.kr3r{border-top:1px dashed var(--line);padding-top:6px}}
+@container (max-width:560px){.krel3,.krel3.kr3two{grid-template-columns:1fr;justify-items:stretch}.kr3p{max-width:180px;margin:0 auto}.kr3m,.kr3r{border-top:1px dashed var(--line);padding-top:6px}}
 .krun{display:inline-flex;align-items:center;gap:4px;flex-wrap:wrap}
 .kr3empty{margin:12px 4px}
 .pcp.kit>.kin.kpxf{z-index:6;pointer-events:none}
