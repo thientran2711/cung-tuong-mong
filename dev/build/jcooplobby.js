@@ -97,7 +97,7 @@ COOP.on("both",()=>{if(!LM)return;drop();PG="";try{T.hidden=true}catch(e){}const
 /* freeze overlay: kit panel markup (.modal.kpscene > .dlg.kpanel with kpHeader), above everything, no way around it but waiting or leaving */
 let FZ=null;
 const FZT={me:["Đợi bạn trở lại","Đường mạng của ngươi vừa đứt. Đang nối lại."],peer:["Đợi bạn trở lại","Bạn đã rời cuộc. Hậu cung dừng lại cho đến khi bạn trở lại."],
- week:["Đợi bạn xong tuần","Ngươi đã qua đêm. Khi bạn cũng xong tuần, tuần mới bắt đầu cho cả hai."]};
+ week:["Đợi bạn xong tuần","Ngươi đã sang ngày mới. Khi bạn cũng xong tuần, tuần mới bắt đầu cho cả hai."]};
 function fz(on,why){if(!on){if(FZ){FZ.remove();FZ=null}return}
  const [ttl,sub]=FZT[why]||FZT.peer;const pw=peerWord();
  if(!FZ){FZ=document.createElement("div");FZ.id="coopfz";FZ.className="modal kpscene";FZ.setAttribute("role","alertdialog");document.body.appendChild(FZ)}

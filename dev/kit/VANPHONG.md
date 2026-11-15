@@ -14,10 +14,10 @@ Thi hành: `dev/build/j84.js` (module cuối trong assemble.py) sửa dữ liệ
 | Ngày tháng (ngắn, thanh trên cùng, sổ ghi) | Tháng ba · thượng tuần · năm thứ nhất | T3/1 |
 | Tên tháng | giêng, hai, ba, tư, năm, sáu, bảy, tám, chín, mười, mười một, chạp | tháng 1, tháng 12 |
 | Năm | năm thứ nhất, năm thứ hai, … (có thể kèm niên hiệu: "Cảnh Hòa năm thứ hai") | năm 1, Năm 2 |
-| Nút chỉ để xác nhận đã đọc | Đã hiểu | OK, Đã rõ, Xong |
-| Nút khép bảng / thẻ | Lui | Đóng, ✕ Đóng, Thoát |
+| Bảng chỉ để đọc / khép bảng / thẻ | không có nút: một ✕ góc trên phải đầu thẻ, chạm ra ngoài hoặc Esc (KIT 32.10) | Đã hiểu, Đã rõ, OK, Xong, Thôi, Lui, Đóng, ✕ Đóng |
 | Thu / mở bảng | Thu lại / Mở ra | Thu gọn / Mở rộng |
 | Lời dặn bảng nổi | Chạm để lui · đầy đủ trong Sổ ghi | Chạm để đóng · đầy đủ ở Nhật ký |
+| Nút sang buổi / sang ngày (nút lớn đỏ, thẻ nơi chốn, mẹo) | ban ngày: Sang buổi · buổi tối: Sang ngày mới | Qua buổi, Qua đêm, Qua ngày, Đợi sáng, Đợi buổi sau |
 | Nút nhận thánh chỉ, ân thưởng | Tạ ơn / Tuân chỉ / Lĩnh chỉ | OK |
 | Một kiếp chơi | kiếp | ván, game, màn |
 | Chỗ ghi kiếp | sổ: "Sổ một, Sổ hai, Sổ ba"; chỗ chưa ghi: "Chưa ghi" | Ô 1, Trống, slot |
@@ -38,7 +38,7 @@ Thi hành: `dev/build/j84.js` (module cuối trong assemble.py) sửa dữ liệ
 | Tab phe | Phe phái (chữ ngắn "Phe") | — |
 | Tab ở chế độ cung nữ | Phận sự · Dư đồ · Đồng liêu · Thân phận · Sổ ghi; lời dặn "Mục Phận sự" | Việc |
 | Nút thu bảng trên cùng | Tư chất | Chỉ số |
-| Nút dưới (8 nút + Qua buổi) | Hành sự, Dư đồ, Hậu cung, Giao tình, Hoàng tự, Tư trang, Tài nghệ, Mệnh truyện | — |
+| Nút dưới (8 nút + Sang buổi) | Hành sự, Dư đồ, Hậu cung, Giao tình, Hoàng tự, Tư trang, Tài nghệ, Mệnh truyện | — |
 | Chữ ngắn của tab (màn dưới 1280 px) | Hành sự, Dư đồ, Phi tần, Giao tình, Phe, Cung nhân, Hoàng tự, Tư trang, Tài nghệ, Mệnh, Sổ ghi | Việc, Bản đồ, Quan hệ, Kẻ hầu, Con, Rương, Truyện, Nhật ký |
 | Mưu người khác nhắm vào ngươi (sổ ghi) | «Hạ độc» nhắm vào ngươi (việc khó): không thành. | [Hạ độc · Khó · hỏng] |
 | Bảng thi tài | bảng định thứ; "nàng mất 2 phần" | bảng điểm, điểm |
@@ -107,8 +107,8 @@ Quy tắc phẩm: Đáp ứng, Thường tại, Quý nhân = **tiểu chủ**; T
 |---|---|
 | T3/1 · thượng tuần | Tháng ba · thượng tuần |
 | Năm 1, tháng 3, trung tuần (Xuân) | Tháng ba, năm thứ nhất, trung tuần (Xuân) |
-| Đã rõ | Đã hiểu |
-| ✕ Đóng | ✕ Lui |
+| Đã rõ / Đã hiểu (nút đóng) | (bỏ nút; ✕ góc trên phải) |
+| ✕ Đóng / ✕ Lui | ✕ |
 | Ô 1 · Trống | Sổ một · Chưa ghi |
 | Xuất ván · chép ván thành mã chữ | Chép sổ · chép kiếp này thành bản chép |
 | Lượt 2/5: múa lại 4 bước | Hồi 2/5: múa lại 4 bước |
