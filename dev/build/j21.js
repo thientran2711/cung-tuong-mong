@@ -21,7 +21,7 @@ function oanW(v){return v<=10?"Không oán":v<30?"Hơi oán":v<60?"Oán":"Thù s
 function fbar(v,lo,hi,good){const pc=cl((v-lo)/(hi-lo)*100,0,100);return `<span class="fbar"><u class="${good?"g":"r"}" style="width:${pc}%"></u></span>`}
 function feel(a,o){return a==null?`<span class="ef n">chưa rõ</span>`:`<span class="ef ${a>10?"g":a<-10?"r":"n"}">${affW(a)} · ${a>0?"+":""}${a}</span>${fbar(a,-100,100,a>=0)} <span class="ef ${o>=30?"r":o>10?"r":"n"}">${oanW(o)} · ${Math.round(o)}</span>${fbar(o,0,100,false)}`}
 function pron(p){return p==="emp"?"ngài":p==="th"?"người":"nàng"}
-function knows(v){kn();return v===S||!!S.met[v.id]||sameHouse(S,v)||(v.ev||0)>0||(S.mat||0)>=4}
+function knows(v){kn();return v===S||S.met[v.id]!=null||sameHouse(S,v)||(v.ev||0)>0||(S.mat||0)>=4}
 function relLines(v){return [`<span class="rlab">Ngươi với ${pron(v)}:</span> ${feel(aff(S,v),oan(S,v))}`,`<span class="rlab">${pron(v)[0].toUpperCase()+pron(v).slice(1)} với ngươi:</span> ${knows(v)?feel(aff(v,S),oan(v,S)):feel(null)}`]}
 function favLine(v){kn();const k=S.kf[v.id];return k?`${ic("sung",14)}Sủng ${k.s} <span class="past">(biết ${agoW(k.w)})</span>`:`${ic("sung",14)}Sủng: <span class="past">chưa rõ (xem sổ thị tẩm)</span>`}
 function notesLine(v){kn();const L=S.notes[v.id]||[];return L.length?`<span class="past">Đã biết: ${L.slice(0,2).join(" · ")}</span>`:""}
