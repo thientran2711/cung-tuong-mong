@@ -6,5 +6,9 @@ Merge of review/placeholder-pics d70983bb8 onto origin/main 41cdf7c3f; jph.js ap
 - ts-oldsave.js: ok (needed proxy + domcontentloaded waits locally; repo copy unchanged).
 - month-cal.js all 6 sizes: bad 0.
 - kit-page.js: §59 sample renders the 4 pictures; one sample error "§28.1 pcPort" is PRE-EXISTING on origin/main (same on main build), not from this branch.
-## Left
-- item-events.js (running at handover), missing_pics.js re-run on merged build → MISSING_PICS.md, kitEventDp person-dialog band screenshot, 390x844 shot.
+- item-events.js (all sizes): PASS.
+- missing_pics.js re-run on merged build → dev/art/MISSING_PICS.md: events 1/303 (light 1), acts 18/95 (light 12, dark 6), 0 page errors.
+- Person event dialog (kitEventStage band) with forced placeholder at 755x1000@2: band = ph-event-light, figure + options intact, no h-overflow at all 6 sizes.
+- Exam card: ACTS.json has its own key «Khảo hạch tấn phong» → own picture; jexam change only affects the no-key fallback.
+## Result
+PASS (no fixes needed beyond the merge).
