@@ -853,18 +853,19 @@ function kitPcGrid(pc){try{if(!pc||pc.querySelector(".kpgrid"))return;const L=pc
  const rowA=[],rowB=[],rowC=[];
  let PX=null;try{PX=typeof kitPersonByName==="function"?kitPersonByName((pc.querySelector(".pcname")||{}).textContent||""):null}catch(e){}
  const SJ=PX&&PX.queen?"Hoàng hậu":"Nàng",OB=PX&&PX.queen?"Hoàng hậu":"nàng";
+ const KR=(d,t)=>typeof kitRel==="function"?kitRel(d,t):t;/* KIT_REL words + direction colour (act-audit) */
  const QV=n=>(typeof quyW==="function"?quyW(n):"")+" · "+(n>0?"+":"")+n,RG=(k,l)=>typeof kitGloss==="function"?kitGloss(k,l):l;
  const bars=pc.querySelector(".kpbars");
  if(bars)[...bars.children].forEach(r=>{const t=T(r.textContent);
   const sb=[...r.querySelectorAll(".sbar")];if(sb.length){sb.forEach(x=>{const l=T((x.querySelector(".sbl")||{}).textContent),v=T((x.querySelector("b")||{}).textContent);rowA.push(chip(l,v,l+": "+v,[x.querySelector(".sbt")]))});return}
   if(/^Ghen/.test(t)){rowA.push(chip("Ghen",T(t.replace(/^Ghen:?/,"")),t));return}
-  /* owner 11/15 05:25Z: subject + verb + object — "Nàng quý ngươi: Bình thường · -5", "Nàng oán ngươi: 0", "Ngươi quý nàng …", "Ngươi oán nàng …" */
+  /* owner 11/15: KIT_REL words — "Nàng → ta: thiện cảm", "Nàng oán ta", "Ta → nàng: thiện cảm", "Ta oán nàng" (kitRel colours the direction) */
   if(/với nàng/.test(t)){const fb=[...r.querySelectorAll(".fbar")];const nums=[...t.matchAll(/·\s*([+-]?\d+)/g)].map(m=>+m[1]);
-   rowA.push(chip(RG("Quý","Ngươi quý "+OB),nums.length?QV(nums[0]):"?","Ngươi quý "+OB+": "+(nums.length?QV(nums[0]):"chưa rõ"),[fb[0]]));
-   rowA.push(chip(RG("Oán","Ngươi oán "+OB),nums.length>1?String(nums[1]):"?","Ngươi oán "+OB+": "+(nums.length>1?nums[1]:"chưa rõ"),[fb[1]]));return}
+   rowA.push(chip(RG("Quý",KR("me","Ta → "+OB+": thiện cảm")),nums.length?QV(nums[0]):"?","Ta → "+OB+": thiện cảm: "+(nums.length?QV(nums[0]):"chưa rõ"),[fb[0]]));
+   rowA.push(chip(RG("Oán",KR("me","Ta oán "+OB)),nums.length>1?String(nums[1]):"?","Ta oán "+OB+": "+(nums.length>1?nums[1]:"chưa rõ"),[fb[1]]));return}
   if(/^Nàng với ngươi/.test(t)){const fb=[...r.querySelectorAll(".fbar")];const nums=[...t.matchAll(/·\s*([+-]?\d+)/g)].map(m=>+m[1]);
-   rowA.push(chip(RG("Quý",SJ+" quý ngươi"),nums.length?QV(nums[0]):"?",SJ+" quý ngươi: "+(nums.length?QV(nums[0]):"chưa rõ"),[fb[0]]));
-   rowA.push(chip(RG("Oán",SJ+" oán ngươi"),nums.length>1?String(nums[1]):"?",SJ+" oán ngươi: "+(nums.length>1?nums[1]:"chưa rõ"),[fb[1]]));return}
+   rowA.push(chip(RG("Quý",KR("them",SJ+" → ta: thiện cảm")),nums.length?QV(nums[0]):"?",SJ+" → ta: thiện cảm: "+(nums.length?QV(nums[0]):"chưa rõ"),[fb[0]]));
+   rowA.push(chip(RG("Oán",KR("them",SJ+" oán ta")),nums.length>1?String(nums[1]):"?",SJ+" oán ta: "+(nums.length>1?nums[1]:"chưa rõ"),[fb[1]]));return}
   if(/^Sủng/.test(t)){const v=T(t.replace(/^Sủng:?/,""));rowB.push(chip("Sủng",unk(v)?"?":v.replace(/\s*\(.*\)$/,""),t));return}
   if(/^(Lòng|Chủ tin|Thương)/.test(t)){const m=t.match(/^([^:\d]+):?\s*(.*)$/);rowA.push(chip(T(m[1]),T(m[2]).replace(/\s*\(.*\)$/,""),t,[...r.querySelectorAll(".fbar,.mini")]));return}
   const m=t.match(/^([^:]{1,24}):\s*(.*)$/);if(m)rowA.push(chip(T(m[1]),T(m[2]),t,[...r.querySelectorAll(".fbar,.mini")]));else{const c=document.createElement("span");c.className="kst kst-chip";c.appendChild(r);rowA.push(c)}});
@@ -875,8 +876,8 @@ function kitPcGrid(pc){try{if(!pc||pc.querySelector(".kpgrid"))return;const L=pc
   const m=t.match(/^(Tuổi)\s+(\d+)/)||t.match(/^([^:]{1,24}):\s*(.*)$/)||t.match(/^([^\d:·]{2,20}?)\s+(-?\d+)$/);if(m&&T(m[2]).length<=28){rowC.push(chip(T(m[1]),T(m[2]),t,btn?[btn]:null));sp.remove()}});
  try{const nmx=(pc.querySelector(".pcname")||{}).textContent||"";const px=typeof kitPersonByName==="function"?kitPersonByName(nmx):null;
   if(px&&typeof rivals!=="undefined"&&rivals.includes(px)){const have=l=>rowA.some(c=>((c.querySelector("small")||{}).textContent||"").trim()===l);
-   [[SJ+" quý ngươi","Quý"],[SJ+" oán ngươi","Oán"],["Ngươi quý "+OB,"Quý"],["Ngươi oán "+OB,"Oán"],["Ghen","Ghen"]].forEach(([l,g])=>{if(!have(l))rowA.push(chip(RG(g,l),"?",l+": chưa rõ"))})}}catch(e){}
- const ORD=[SJ+" quý ngươi",SJ+" oán ngươi","Ngươi quý "+OB,"Ngươi oán "+OB,"Ghen"],oi=c=>{const l=(c.querySelector("small")||{}).textContent||"";const i=ORD.indexOf(l.trim());return i<0?99:i};rowA.sort((x,y)=>oi(x)-oi(y));
+   [[SJ+" → ta: thiện cảm","Quý","them"],[SJ+" oán ta","Oán","them"],["Ta → "+OB+": thiện cảm","Quý","me"],["Ta oán "+OB,"Oán","me"],["Ghen","Ghen"]].forEach(([l,g,d])=>{if(!have(l))rowA.push(chip(RG(g,d?KR(d,l):l),"?",l+": chưa rõ"))})}}catch(e){}
+ const ORD=[SJ+" → ta: thiện cảm",SJ+" oán ta","Ta → "+OB+": thiện cảm","Ta oán "+OB,"Ghen"],oi=c=>{const l=(c.querySelector("small")||{}).textContent||"";const i=ORD.indexOf(l.trim());return i<0?99:i};rowA.sort((x,y)=>oi(x)-oi(y));
  const SORD=["Sủng","Đức","Danh","Sắc","Tài","Tâm cơ"],si=c=>{const l=((c.querySelector("small")||{}).textContent||"").trim().toLowerCase();const i=SORD.findIndex(x=>x.toLowerCase()===l);return i<0?99:i};rowB.sort((x,y)=>si(x)-si(y));
  const g=document.createElement("div");g.className="kpgrid";[rowA,rowB,rowC].forEach((R,i)=>{if(!R.length)return;const d=document.createElement("div");d.className="kpgr kpgr"+i;R.forEach(c=>d.appendChild(c));g.appendChild(d)});
  if(!g.children.length)return;

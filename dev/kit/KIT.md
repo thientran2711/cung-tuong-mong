@@ -1548,3 +1548,38 @@ Tested 755x1000@2, 1180x820@2, 1366x1024@2, 686x880@2.2, 412x1058@2, 390x844@3, 
 - No ring/aura around the frame (owner 11/14 late: removed); the seal alone shows the feeling.
 - Fog: stranger → nothing; known person, no fresh news → grey "?" seal; her own → always.
 - Data only through `window.kitEmotion(p)` → `{k,name,v,why,known}`; tooltip/alt "Tâm trạng: <tên> (<cause>)". Nobody draws another mood icon; no code-reshaped facial expressions (owner 22:50Z): the seal + ring are the only display of feelings.
+
+## 37. PERSON VIEW · PERSON DIALOG · DOABLE FIRST · WHOLE FRAME (owner 11/15, review/person-acts) — `dev/build/jpa.js` (after jhc, before jload)
+### 37.1 DOABLE FIRST — `kitDoableFirst(box, itemSel)` / `kitSortDoable()` (global rule)
+In every list of acts / options the ones she can do NOW come first, the greyed ones after (stable order inside each part).
+Greyed = `kitIsOff(el)`: `disabled`, `.kdis`, `.off`, `aria-disabled="true"`, or a wrapper whose button is disabled.
+The lists are ONE table, `KIT_DOABLE`: Hành sự deck (`#panel .cards > button.ka`), person acts (`#popw .pcb > .ka`), dialog options
+(`#mb .opts > button`), person-card act rows (`.rbtn`), shop / bag action rows (`.kshop`, `.kinvact`), panel option lists, and any
+container with class `.kdoable`. A new list joins by adding its row (or the class), never with its own sort. Runs after every
+stage / panel / dialog render (and on DOM changes, debounced); it only moves nodes when the order is wrong.
+### 37.2 PERSON VIEW from the stage (`#popw .pc.kpa`, a person tapped on the stage)
+- LEFT: the rank line, then the name, at the very top; her FULL-BODY figure right under them (`kitStageFig`, KIT_FIG ratio of the
+  figure, height min(58dvh, 520 px) for a woman; no portrait frame here); worn items under the figure.
+- RIGHT, kit sections (`.kpsec` + `h4.kpst`, the dialog section style): **Giao tình** (the relation chip grid + "Đã quen" chips) then
+  **Việc làm được**: the act cards in kit sub-tabs (`kitTabRowHTML`, `.pctabs.kpatabs`, sticky with the ✕ in `.kpstick`):
+  Giao hảo (chào hỏi, hỏi han, khen, chia sẻ, nhờ, cảnh báo, giúp đỡ, tặng, thăm, bái kiến…) · Nhún (tạ lỗi, nhún nhường, cầu hòa…) ·
+  Dò xét (dò la, bàn tán, hỏi người hầu, soát…) · Đối đầu (khiêu khích, tung tin, đẩy, ngáng chân, vu oan, hạ độc, tố, vạch tội…) ·
+  Khác (anything not matched). Groups = `KPA_G` (by the act's name). Each tab shows the number of acts doable NOW; the default tab is
+  the first with a doable act; the choice is kept per person for the session. Inside a tab: doable first (37.1).
+- Relation words: KIT_REL (`Nàng → ta: thiện cảm`, `Nàng oán ta`, `Ta → nàng: thiện cảm`, `Ta oán nàng`), coloured by `kitRel`
+  (them purple `--rel-them`, me blue `--rel-me`) — jk2b person grid and jhc Ân oán bars use the same words. Until review/act-audit
+  is merged, jpa defines KIT_REL / kitRel with the same values behind a guard.
+### 37.3 PERSON DIALOG for the court chips — `kitPersonDialog(who, title, sections)`
+Tapping Hoàng thượng / Thái hậu in the stage chip column opens the KIT 32.7 person dialog: full-body figure left (KIT_FIG), seal
+NGƯỜI, kit sections right built by kpBuild (`spec.sections`: `h4.kpst` + `kitRows`): Hoàng thượng = Tính nết · Luật riêng (one row
+per trait, no quote box) / Điều ngài thích (Hoa · Nhạc · Món + how to learn) / Giao tình (Tuổi, Tâm trạng, `Ngài sủng ta`, Ân tình);
+Thái hậu = Giao tình (Tuổi, Tâm trạng, `Thái hậu → ta: thiện cảm`) / Gặp Thái hậu. The dialog size is the 32.7 size. Closing (✕ / tap
+outside, no "Đã hiểu") comes from review/kit-close. A person card's rules note (`.pcn` with "<b>Tên</b>: …" lines) is shown the same
+way: a "Tính nết · Luật riêng" kit section of kit rows (`kpaNotes`).
+### 37.4 WHOLE FRAME — the tassel shows
+The big portrait box (`.pc > .pcl > .pcp.kit`: person view, Hậu cung, Giao tình cards) is the full 550 × 1037 canvas (it used to stop
+at y 795 with overflow hidden, cutting the ngọc bội pendant and the tua rua tassel). The box grows DOWN only: same width, same top,
+the `.kin` stage is 100 % of it, so the portrait opening keeps its size and place (test: ±1 px) and the content under it moves down.
+Small frame cells (`span.md.kfc`, 60 px chips / strips / header avatar) keep the 795 cell by design.
+Test: `node dev/test/person-acts.js <page> WxH@dpr <outdir> <tag> [old page]` (pv, emp, th, deck, rv; old save loads). Shots before
+(main) / after: dev/shots/person-acts/ (755x1000@2, 1180x820@2).
