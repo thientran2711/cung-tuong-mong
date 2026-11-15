@@ -18494,18 +18494,22 @@ function k3AsRows(){if(!S||S.dead||(typeof isSrv==="function"&&isSrv()))return[]
  if(c)L.push(["con","Có thai",c]);if(n)L.push(["dem","Lật thẻ",n]);
  L.push(["an","Ân tình (đêm)",S.an|0]);const aw=hv("aw");if(aw!=="")L.push(["aw","Số lần ân thưởng",aw]);
  const bl=k3hc("bl");if(bl)L.push(["bl",k3lab(bl).replace(/\s*sau$/,"")||"Bổng lộc","sau "+k3val(bl)]);return L}
-function k3AnSung(one){const L=k3AsRows();if(!L.length)return"";
- if(one)return `<div class="k3p kas kas1"><button type="button" class="k3r kas-one" data-kasall="1" title="Ân sủng · chạm để xem"><span class="k3l">Ân sủng</span><b>›</b></button></div>`;
- return `<div class="k3p kas"><span class="k3h">Ân sủng</span>`+L.map(([k,l,v])=>`<button type="button" class="k3r kasr" data-kas="${k}" title="${esc(l)}: ${esc(String(v))} · chạm để xem"><span class="k3l">${esc(l)}</span><b>${esc(String(v))}</b></button>`).join("")+`</div>`}
+function k3AnSung(one,open){const L=k3AsRows();if(!L.length)return"";
+ if(one)return `<div class="k3p kas kas1"><button type="button" class="k3r kas-one" data-kasall="1" title="Ân sủng · chạm để mở"><span class="k3l">Ân sủng</span><b>›</b></button></div>`;
+ return `<div class="k3p kas${open?" kasopen":""}">`+(open?`<button type="button" class="k3h kasfold" data-kasfold="1" title="Ân sủng · chạm để thu lại"><span>Ân sủng</span><b>‹</b></button>`:`<span class="k3h">Ân sủng</span>`)+L.map(([k,l,v])=>`<button type="button" class="k3r kasr" data-kas="${k}" title="${esc(l)}: ${esc(String(v))} · chạm để xem"><span class="k3l">${esc(l)}</span><b>${esc(String(v))}</b></button>`).join("")+`</div>`}
 /* the column is crowded when it runs past the stage floor or touches a figure / name tag (KIT_FIG: chips never cover people) */
 function k3AsCrowded(st,R){try{const s=st.getBoundingClientRect(),r=R.getBoundingClientRect();if(r.bottom>s.bottom-8)return true;
  const hit=q=>Math.min(q.right,r.right)-Math.max(q.left,r.left)>1&&Math.min(q.bottom,r.bottom)-Math.max(q.top,r.top)>1;
  const figs=typeof kitFigRects==="function"?kitFigRects():[];if(figs.some(hit))return true;
  return [...st.querySelectorAll(".tok .nm, .tok .tag, .ftag")].some(e=>e.offsetParent&&!R.contains(e)&&hit(e.getBoundingClientRect()))}catch(e){return false}}
-document.addEventListener("click",e=>{const a=e.target.closest&&e.target.closest("#kshR [data-kas], #kshR [data-kasall]");if(!a)return;e.stopPropagation();
+/* "Ân sủng ›" opens IN PLACE (owner 11/15 17:40Z + reference shot): the folded chip becomes the full Ân sủng card in the right column,
+   column width, label left / value right — never a floating popover; its title "Ân sủng ‹" folds it again */
+document.addEventListener("click",e=>{const a=e.target.closest&&e.target.closest("#kshR [data-kas], #kshR [data-kasall], #kshR [data-kasfold]");if(!a)return;e.stopPropagation();
  if(a.dataset.kas){k3Explain(a.dataset.kas);return}
- if(typeof kpPop==="function")kpPop(a,`<div class="kascard"><div class="kpopt">Ân sủng</div>`+k3AsRows().map(([k,l,v])=>`<div class="kasrow"><span>${esc(l)}</span><b>${esc(String(v))}</b></div>`).join("")+`</div>`)},true);
-function k3Stage(){try{const st=$$("stage");if(!st)return;const stop=st.querySelector(".stop");const gm=document.querySelector(".game");
+ window.__kasOpen=!a.dataset.kasfold;const R=$$("kshR");if(R)R.dataset.full="";k3Stage();
+ /* short stages (844x390): the opened card is scrolled into view inside the column */
+ const R2=$$("kshR");if(R2&&window.__kasOpen)R2.scrollTop=R2.scrollHeight},true);
+function k3Stage(){try{const st=$$("stage");if(!st)return;{const pk=S?(S.place||"")+"|"+(S.buoi|0)+"|"+(S.month|0):"";if(window.__kasKey!==pk){window.__kasKey=pk;if(window.__kasOpen){window.__kasOpen=false;const kr=$$("kshR");if(kr)kr.dataset.full=""}}}const stop=st.querySelector(".stop");const gm=document.querySelector(".game");
  let L=$$("kshL"),R=$$("kshR");const off=!S||S.dead||!stop||(gm&&gm.classList.contains("maptab"));
  if(off){if(L)L.hidden=true;if(R)R.hidden=true;st.classList.remove("k3g");return}
  if(!L){L=document.createElement("div");L.id="kshL";L.className="ksh kshL"}if(L.parentNode!==stop)stop.appendChild(L);
@@ -18526,8 +18530,10 @@ function k3Stage(){try{const st=$$("stage");if(!st)return;const stop=st.querySel
  const hR0=`<div class="k3cs">${k3court()}${k3maid()}</div>`,hY=y?`<div class="k3p k3py">${y}</div>`:"";
  const full=hR0+k3AnSung(false)+hY;
  /* Ân sủng under the court chips; when the column would run past the stage floor or onto a figure / name tag -> ONE "Ân sủng ›" chip */
- if(R.dataset.full!==full||R.dataset.w!==String(st.clientWidth)+"x"+st.clientHeight){R.innerHTML=full;R.dataset.full=full;R.dataset.w=st.clientWidth+"x"+st.clientHeight;R.dataset.h=full;
-  if(k3AsCrowded(st,R)){const one=hR0+k3AnSung(true)+hY;R.innerHTML=one;R.dataset.h=one}}
+ if(R.dataset.full!==full||R.dataset.w!==String(st.clientWidth)+"x"+st.clientHeight){R.classList.remove("kasx");R.innerHTML=full;R.dataset.full=full;R.dataset.w=st.clientWidth+"x"+st.clientHeight;R.dataset.h=full;
+  if(k3AsCrowded(st,R)){const one=hR0+k3AnSung(!window.__kasOpen,true)+hY;R.innerHTML=one;R.dataset.h=one}}
+ /* a tapped-open Ân sủng card stays inside the stage: the column scrolls instead of running past the floor */
+ R.classList.toggle("kasx",!!R.querySelector(".kasopen"));
  k3Gut()}catch(e){console.error("k3Stage",e)}}
 window.k3Stage=k3Stage;
 /* name tags are one-line text now: re-run the stage layout once the tags have their final width (fonts, new labels), so neighbours that
@@ -18643,9 +18649,9 @@ html body .stage.k3g.k3n #sc-t h2{font-size:.86rem}
 .stage.k3n .ksh .k3c .k3v small{font-size:.58rem}
 /* Ân sủng plaque under the court chips (owner 11/15 04:05Z) */
 .ksh .kas .k3r{column-gap:8px}.ksh .kas .k3r>b{color:var(--ink)}
+.ksh .kas .kasfold{all:unset;box-sizing:border-box;display:flex;justify-content:space-between;align-items:baseline;width:100%;cursor:pointer;font-family:var(--display);font-size:.7rem;color:var(--gold);letter-spacing:.03em;border-bottom:1px solid var(--k-hair,#e6d3ac);margin-bottom:1px}
+.kshR.kasx{max-height:calc(100% - 16px);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}
 .ksh .kas1{padding:2px 6px}.ksh .kas-one .k3l{font-weight:700;color:var(--gold)}.ksh .kas-one>b{color:var(--gold)}
-.kascard .kasrow{display:flex;justify-content:space-between;gap:12px;padding:3px 0;border-bottom:1px dotted var(--k-hair,#e6d3ac);font-size:.82rem}
-.kascard .kasrow:last-child{border-bottom:0}.kascard .kasrow b{white-space:nowrap}
 `;document.head.appendChild(css);
 
 /* ---------- 6. kitPhoneShell (KIT 31.7, owner 11/14): portrait screens under 1000 px wide (Fold, phones) work as TWO views.
@@ -22084,7 +22090,7 @@ window.VP={fix,date,num,ord,mon,rules:RULES,full:FULL,tabs:TABS,refresh:()=>{pat
      (COOPW.hold freezes Qua buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="c44603cecf10";window.CTM_BUILD=BUILD;
+const BUILD="14b440d2f455";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
