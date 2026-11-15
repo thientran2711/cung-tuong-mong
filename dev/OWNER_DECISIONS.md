@@ -469,3 +469,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (14:30Z) ĐẢO LẠI (sếp nhớ chính sếp đặt luật): lựa chọn trong MỌI sự kiện (chính tuyến, phụ tuyến, lễ hội…) KHÔNG hiện Được/Mất/mức chắc, chỉ hiện giá phải trả (Sức/Bạc/khắc) + điều kiện Cần. KIT §28.6 giữ nguyên. Bù lại: thợ rà cân bằng toàn bộ lựa chọn sự kiện bằng bot, không lựa chọn nào áp đảo/quá thiệt, không làm lệch đường lên Hoàng hậu/Thái hậu/nữ đế.
 - (14:30Z) Ảnh nút việc trong thẻ người: việc nào chưa có ảnh riêng thì VẼ, cấm dùng ảnh nhóm (sếp rất bực). Chưa có thì để trống chứ không ảnh nhóm.
 - (14:30Z) Ô tâm trạng phải hiện các nguyên nhân đang tác động (nàng và mọi NPC).
+- (14:35Z) Trang điểm: "đẹp" giảm má hồng chút; "diêm dúa" = má hồng của bản "đẹp" hiện tại đậm hơn chút (môi đậm hơn, phấn bóng hơn), vẫn đẹp, KHÔNG như hề.
