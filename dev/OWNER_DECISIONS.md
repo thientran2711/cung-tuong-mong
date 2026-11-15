@@ -536,3 +536,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - Days that hold a festival of the year are marked in their square, so the player can PREPARE AHEAD instead of rushing when the notice comes.
 - Keep it short: just the festival name, what contests it has, or short info about that festival.
 - Only the fixed yearly festivals (common knowledge) go on it. Private contests, tea parties, private palace banquets and other surprise events do NOT appear on the calendar.
+- Calendar entry (owner): a small desk-calendar icon in a corner of her room background picture; tap it to open the calendar.
