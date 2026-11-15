@@ -20,11 +20,13 @@ This file wins over AGENTS.md wherever they differ. Owner = "sếp" (Victoria); 
 - Disk: sparse worktrees, fetch `--depth=30` under `flock /home/user/wt/fetch.lock`, never full-clone.
 - Coordinator watch: one wake per hour (owner 15/11), plus wakes on worker reports.
 
-## CHATGPT IS THE LAST AUDITOR (owner 15/11)
-ChatGPT audit chats (see AGENTS.md) are the last auditor of every rule and number. The gate: no pull request carrying a rule, number, engine or design-file change merges into main before `CHATGPT AUDIT PASSED: <branch> <head>`; the owner's play never waits — an item may go live after Claude's own reviewers and tests, and the audit runs alongside; the item is FINAL only after that line.
-The coordinator:
-- queues every item the moment it is READY: `READY FOR CHATGPT AUDIT: <branch> <head>` in `QUEUE.md` on branch `chatgpt-claims`, plus one file `audit-fast/<branch-dashes>__<head8>.md` (what changed, rules/design files touched, how to test, share A or B);
-- **at every wake**: (1) merges ChatGPT report pull requests (`chatgpt/*` → main, docs only; reject any that touch other files); (2) regenerates `OPEN_AUDITS.md` on `chatgpt-claims` (queued / claimed / PASSED / BLOCKED / RE-AUDIT); (3) names a repair holder (worker + branch) for every BLOCKED verdict that same wake, and queues `RE-AUDIT: <branch> <head>` after the repair.
+## LANGUAGE (owner 15/11)
+All repository work files (docs, rules, progress, reviews, commit messages) are written in ENGLISH to save credits. Player-visible game text stays Vietnamese (VANPHONG.md). Quote the owner's Vietnamese words only where the exact wording matters. To the owner in chat: Vietnamese.
 
-## HER IDEA GOES TO CHATGPT TOO (owner 15/11)
-Every idea, fault or ruling of the owner's on rules or numbers gets ONE whole paste block for the ChatGPT ĐIỀU PHỐI chat in the same reply: her words, Claude's draft, its family of like cases in the game, the open question, and the answer file path `docs/ideas/ChatGPT_S<n>_Answer_VI.md` (next free S<n>). Every paste is logged in `S_LOG.md` on `chatgpt-claims`. At the next wake Claude merges and reads the answer pull request, summarizes it to the owner in Vietnamese in a few lines, and folds what passes Claude's reviewers into the design as PROVISIONAL, telling her in one line. An unanswered S<n> is re-listed in every report.
+## WEEKLY CHATGPT AUDIT (owner's word: "đoạn audit tuần này")
+Only when the owner asks for "đoạn audit tuần này", Claude gives her ONE whole paste block, in English, right the first time, for a NEW ChatGPT chat, following AGENTS.md §1 (role audit-only; read main + CLAUDE.md + every design file + code where unclear + last week's report; check the whole game; report docs/reviews/chatgpt/Weekly_Audit_<mm-dd-yyyy>.md; deliver on chatgpt/weekly-audit-<date> with a PR; Vietnamese to sếp, asks nothing). It never blocks or waits on any of Claude's work: no gate, no schedule, no per-item audit.
+After she says the PR is up: Claude merges it, reads it, answers EVERY finding (ACCEPTED + what changed / REJECTED + reason) in docs/reviews/chatgpt/Weekly_Audit_<date>_RESPONSE.md, fixes BLOCKING ones first, and tells her the result in Vietnamese in a few lines.
+
+## CHATGPT IDEA REVIEW (owner's word: "đoạn điều phối tuần này")
+Only when the owner asks for "đoạn điều phối tuần này" (about weekly), Claude gives her ONE whole paste block, in English, right the first time, for a NEW ChatGPT chat, following AGENTS.md §2, with her OPEN ideas and questions of the week listed inside it (kept in dev/IDEAS_OPEN.md). No schedule, no paste per idea.
+After she says the PR is up: Claude merges it, reads it, gives her a short Vietnamese summary with a recommendation per idea (adopt / park / drop, with why), and asks her only what truly needs her decision.
