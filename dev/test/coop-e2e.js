@@ -33,7 +33,7 @@ const ALL=[];
 const DCL={waitUntil:'domcontentloaded'};
 async function tapText(o,re,ms=8000){const t0=Date.now();while(Date.now()-t0<ms){const h=await o.p.evaluateHandle(src=>{const R=new RegExp(src);
   return [...document.querySelectorAll('button,a,[role=button]')].find(b=>b.offsetParent!==null&&!b.disabled&&R.test(b.textContent.trim()))||null},re.source);
-  const el=h.asElement();if(el){await el.click();return true}await sleep(250)}return false}
+  const el=h.asElement();if(el){/* the click itself is done; a navigation it starts (Chơi một mình → the sổ) is waited for by the caller's own state checks (a slow machine held 'scheduled navigations' past 30 s) */await el.click({noWaitAfter:true});return true}await sleep(250)}return false}
 /* close story/news modals of the normal game (never the co-op waiting/freeze panel) */
 async function clear(o,n=25){for(let i=0;i<n;i++){const st=await o.p.evaluate(()=>{const c=__co();if(c.frozen||c.waiting)return'coop';
    const ov=[...document.querySelectorAll('button')].find(x=>x.offsetParent!==null&&!x.disabled&&!x.closest('#panel,#tabs,#hud,#modal')&&x.parentElement&&x.closest('[class^=km],[class*=" km"]')&&/^(Nhận|Đã hiểu|Tạ ơn|Lĩnh chỉ|Tuân chỉ)$/.test(x.textContent.trim()));if(ov){ov.click();return'x'}
@@ -117,7 +117,9 @@ async function weekBoth(A,B,w){const n=await A.p.evaluate(()=>typeof B4N==='numb
   ok(r.ok,'reborn friend is a stranger again (Người lạ)',r.ok?undefined:r)}
  await clear(A);await clear(B);await shot(A,'12-reborn-seen');await shot(B,'12-reborn');
  /* 6 one more week after rebirth */
- {const wk=(await C(A)).week;await weekBoth(A,B,1);ok(await untilC(B,x=>__co().week===x+1,wk,40000),'week after rebirth advances');}
+ {const wk=(await C(A)).week;await weekBoth(A,B,1);const adv=await untilC(B,x=>__co().week===x+1,wk,40000);
+  const dump=o=>o.p.evaluate(()=>({co:__co(),k:wk()+':'+(S.buoi||0),used,Q:Q.length,mg:!!S.mg,dead:!!S.dead,next:document.getElementById('next').textContent,dis:document.getElementById('next').disabled,bend:COOPW.bend,pend:COOPW.pend,sent:COOPW.sent,rb:[COOPW.rweek,COOPW.rbuoi],tm:S.toMorning,tr:COOPW.tr.slice(-20)})).catch(e=>e.message);
+  ok(adv,'week after rebirth advances',adv?undefined:{w0:wk,A:await dump(A),B:await dump(B)});}
  /* 7 single player untouched + old save loads */
  const oldHtml=execSync('git -C '+JSON.stringify(ROOT)+' show origin/main:index.html',{maxBuffer:64e6}).toString();
  const D=await mk(b,'solo',[686,880,2.2]);await D.ctx.route(BASE+'old.html',r=>r.fulfill({status:200,contentType:'text/html; charset=utf-8',body:oldHtml.replace(/navigator\.serviceWorker\.register/g,'(()=>Promise.reject())')}));

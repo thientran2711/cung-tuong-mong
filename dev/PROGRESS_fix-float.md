@@ -93,3 +93,26 @@ Base: origin/main (merged; see git log). In the assemble.py module list keep mai
 Tests on 505dbad17 (load avg 40–66): coop-e2e 4/4 complete runs 59/59 (5th aborted by the page-load hang above); after the DCL fix 5/5 59/59; COOP_NIGHTS stress 59/59
 (6 forced nights); book-person 5× at 1366x1024 + 1180x820: 0 bad, 0 undecoded (+ 755x1000 ok); kit-page 755x1000 + 1180x820 ok (22 samples);
 rel-words-scan 755/1180: all counts 0; night-day 2× ok (incl. the new buổi-sáng case); sheet-turn 755x1000 + 1180x820: no overflow, no ids, errs 0.
+
+## Review r7 (review/fix-float-r7, on origin/main ed7271deb; reviewer)
+- Merged 0840d01e6 onto main ed7271deb (scene-light r9, tassel-fix, event-balance). Conflicts:
+  - assemble: main list + jkrel after jaudit, jint + jnight after main's new jstory/jevb, before j84.
+  - j87 kitBook: this branch's personTop/personBody (kitRelTable, figure on every page incl. text pages, silhouette) + scene-light's
+    `kitBookFigCol(fig,PW,PH)` in the person style; paginate keeps section titles / k-scroll and adds main's `b0`; the same-key fast
+    path and the full rebuild share one `restore()` honouring keepB; `__kbk.relayout` and the FIGS-arrival relayout pass logicalB.
+  - jk2b: main's small-frame geometry (tassel-fix, canvas 0–1037) + this branch's no-ring rule. KIT.md: main §56, then §57. Site rebuilt.
+- Harness (coop-e2e): tapText clicks with noWaitAfter (load ~60: "waiting for scheduled navigations" aborted runs);
+  "week after rebirth advances" dumps both seats on failure.
+- Results (load avg 44–62):
+  - book-person 5× at 1366x1024 + 1180x820: all ok, 0 undecoded, 0 rebuilt; + 755x1000, 1000x755, 844x390 ok.
+  - book-figwide 1180x820: ALL OK (scene-light wide figures survived). rel-words-scan 755/1180: all counts 0.
+  - night-day: ok (morning case day 0 → 1). sheet-turn 5 sizes: fwd/back ok, no overflow, ids 0.
+  - kitDeltaAuto probe: "Nàng oán ta +2, thân −2" → "Nàng → ta: thiện cảm −2"; Lâm Phi / Các phi tần named; "hai người khác" unchanged.
+  - coop-e2e plain: 59/59 in runs 1, 2, 4, 7; run 3 58/59 (FAIL "week after rebirth advances", no dump then); runs 5, 6 aborted by
+    harness click timeouts under load (no game check failed).
+  - COOP_NIGHTS=1: run 1 59/59 (6 nights); run 2 53/59 (9 nights): "after week 2 same date [[1,3,2],[1,4,0]]", week 3 stalled for both.
+- RESULT r7 = FAIL (co-op nights). Mechanism found: jcoopworld onWeek rebuilds S with fromCanon(C,{keepQ:true}), so a night's
+  dialogs stay open across the merged week; nightFx (j8, called when the night dialog is answered) then stamps
+  S.toMorning = {d: wk() of the NEW day} and jnight spends the new day → that seat ends its day alone (guest at [1,4,0] "Đợi hảo hữu";
+  host later pend with its own toMorning {d:3,b:0}). Fix idea: stamp the night's day when the night is WON (stealWin / S.tonight="me" /
+  nightScene / Kính sự phòng) and let nightFx use that stamp; a night whose day is gone never ends a buổi.
