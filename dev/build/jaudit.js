@@ -107,3 +107,20 @@ function aaHealthO(v){return cl(Math.round(45+aff(v,S)/2-((typeof traitsOf==="fu
 function aaDeathTxt(){if(S.turn<12&&!S.mercy)return"tội chết — năm đầu được tha một lần: giáng một bậc, cấm túc 3 tháng, Danh -10, Sủng -10";return has("nhantu")?"tội chết (Hoàng thượng nhân từ: có khi chỉ đày vào lãnh cung)":"tội chết: mất mạng"}
 (function(){for(const k in ACT){const A=ACT[k];if(A&&typeof A.x==="string"&&/ban chết/.test(A.x)){const x0=A.x;Object.defineProperty(A,"x",{configurable:true,get(){return x0.replace(/ban chết/,aaDeathTxt())},set(v){}})}}
  if(typeof actLineRaw==="function"){const a0=actLineRaw;actLineRaw=function(){const h=a0.apply(this,arguments);return typeof h==="string"?h.replace(/(bị (?:tra ra|lộ)): ban chết/g,(m,p)=>`${p}: ${aaDeathTxt()}`):h}}})();
+
+/* 10. CUNG NHÂN words + names (owner 10:10Z) */
+Object.assign(KIT_REL,{srvThem:"Thiện cảm",srvTrust:"Ta tin cậy",runner:"Đang là người chạy việc"});
+/* the bars on a servant card: her attitude = "Thiện cảm" (was Lòng), her trust in him = "Ta tin cậy" (was Chủ tin); the runner is
+   marked on HIS card, not on the maid's */
+if(typeof bondBars==="function"){bondBars=function(s){let r="";try{const b=bestSent(S);r=b&&b===s?` <span class="past">· ${KIT_REL.runner}</span>`:""}catch(e){}return sbar(KIT_REL.srvThem,s.loyal,"lo")+(s.sid!=null||typeof s.tin==="number"?sbar(KIT_REL.srvTrust,tinOf(s),"ti"):"")+r}}
+function runnerLine(){return ""}
+/* names: unique, never "Thúy 2" — larger pools, and any old numbered name is renamed once */
+(function(){const xm=["Thanh Trúc","Bạch Lan","Tử Đằng","Hải Đường","Lạc Mai","Diệu Âm","Thúy Vi","Như Ý","Bảo Châu","Kim Chi","Ngân Hạnh","Mộc Lan","Uyển Thanh","Tú Cầm","Phương Thảo","Thanh Hà","Tịnh Hương","Vân Anh","Hồng Ngọc","Lam Ngọc","Thu Thủy","Xuân Đào","Liên Hoa","Hạnh Dung","Cẩm Tú","Ngọc Bích","Tố Như","Song Hỷ","Bích Hà","Quỳnh Chi","Tuyết Mai","Hương Lan","Tiểu Nguyệt","Tiểu Cúc","Tiểu Hoa","Tiểu Linh","Nhã Thanh","Ánh Tuyết","Ngọc Nhi","Khánh Vân"];
+ const xe=["Tiểu Hải Tử","Tiểu Toàn Tử","Tiểu Bình Tử","Tiểu Kiệt Tử","Tiểu Minh Tử","Tiểu Ninh Tử","Tiểu Phong Tử","Tiểu Sơn Tử","Tiểu Tường Tử","Tiểu Vinh Tử","Tiểu Lạc Tử","Tiểu Khang Tử","Tiểu Trung Tử","Tiểu Bảo Tử","Tiểu Hưng Tử","Tiểu Cát Tử","Tiểu Long Tử","Tiểu Nghĩa Tử","Tiểu Trí Tử","Tiểu Lễ Tử","Tiểu Thành Tử","Tiểu Đông Tử","Tiểu Thu Tử","Tiểu Hạ Tử","Tiểu Nguyên Tử","Tiểu Quý Tử","Tiểu Hòa Tử","Tiểu Lợi Tử","Tiểu Mãn Tử","Tiểu Tài Tử"];
+ try{for(const n of xm)if(!MAIDS.includes(n))MAIDS.push(n);for(const n of xe)if(!EUN.includes(n))EUN.push(n)}catch(e){}})();
+function aaNamesFix(){if(!S)return;try{const all=allServ().concat(S.maid?[S.maid]:[]);const used=new Set(all.map(s=>s.name));
+ for(const s of all){if(!/\d/.test(s.name||""))continue;const pool=(s.role==="eunuch"?EUN:MAIDS).filter(n=>!used.has(n));if(!pool.length)continue;const n=pool[Math.floor(Math.random()*pool.length)];used.add(n);s.name=n}}catch(e){}}
+(function(){if(typeof mkServ==="function"){const m0=mkServ;mkServ=function(){const s=m0.apply(this,arguments);try{if(/\d/.test(s.name)){const used=new Set(allServ().map(x=>x.name).concat(S&&S.maid?[S.maid.name]:[]));const pool=(s.role==="eunuch"?EUN:MAIDS).filter(n=>!used.has(n));if(pool.length)s.name=pool[Math.floor(Math.random()*pool.length)]}}catch(e){}return s}}
+ if(typeof deser==="function"){const d0=deser;deser=function(){const r=d0.apply(this,arguments);aaNamesFix();return r}}})();
+/* short names on strips: titled people keep their title ("Thái y Trương", not "y Trương") */
+(function(){if(typeof shortN!=="function")return;const s0=shortN;shortN=function(nm){const a=String(nm).split(" ");if(a.length===3&&/^(Thái y|Tổng quản|Nội vụ|Ma ma|Thái giám)$/.test(a[0]+" "+a[1]))return String(nm);return s0.apply(this,arguments)}})();
