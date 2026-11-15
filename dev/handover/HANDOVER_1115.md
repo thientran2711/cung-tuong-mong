@@ -53,3 +53,4 @@ Thợ mới đã giao: người duyệt kit + gộp main + dựng site cho revie
 Nhắc theo dõi: send_later 30 phút, tự đặt lại mỗi lượt (lịch lặp tối thiểu 1 giờ).
 - 01:30Z giao thêm: review/loading (sw tự cập nhật, sếp kẹt bản cũ), review/cdn-images (ảnh lên Cloudflare, bỏ img/ khỏi kho), review/map-anim (Dư đồ cuộn chậm lại). Thứ tự gộp main: book-release → loading → map-anim → cdn-images.
 - 02:00Z review/loading @74c1544e SẴN SÀNG KIỂM (app tự cập nhật; đã gộp book-release) → xếp hàng cho người duyệt sau book-release.
+- 02:10Z review/map-anim @af8f56f7e SẴN SÀNG KIỂM (Dư đồ trải 1150 ms; luật đi ≤ khắc còn) → hàng duyệt #3.
