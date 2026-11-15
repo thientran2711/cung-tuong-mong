@@ -3,12 +3,21 @@
      hint  reads what the player sees: the "Gợi ý" line + the risk tag (an toàn / có rủi ro / liều) + the Tốn row, never the hidden numbers
      rand  picks any affordable option
      same  always takes the first affordable option ("luôn một ô")
-   usage: NODE_PATH=$(npm root -g) node dev/measure/evbot.js <url> [steps=40] [modes=hint,rand,same] [seed=1] > out.json
+   usage: NODE_PATH=$(npm root -g) node dev/measure/evbot.js <url> [steps=40] [modes=hint,rand,same] [seed=1] [seeds=2] > out.json
    Each mode plays the same seeds (Math.random seeded) for `steps` × 300 game iterations. Output: per-mode summary + lives. */
 const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
-const [,,URL,ST,MODES,SEED]=process.argv;const STEPS=+ST||40;const modes=(MODES||'hint,rand,same').split(',');const seed0=+SEED||1;
+const [,,URL,ST,MODES,SEED,NS]=process.argv;const STEPS=+ST||40;const modes=(MODES||'hint,rand,same').split(',');const seed0=+SEED||1;
 let INP=fs.readFileSync(path.join(__dirname,'inpage4.js'),'utf8');
-const HOOK='if(!sens)pickI=rpick(okIdx)[1];';if(!INP.includes(HOOK))throw new Error('inpage4 hook moved');
+const HOOK='if(!sens)pickI=rpick(okIdx)[1];';
+const OVH="const ok=q('#mgok');";if(!INP.includes(OVH))throw new Error('inpage4 ov hook moved');
+const GOH='pls.forEach(p=>opts.push({s:p.s,f:()=>{note("go");goTo(p.k)}}));';if(!INP.includes(GOH))throw new Error('inpage4 go hook moved');
+/* a place goTo refuses (access, time) is not tried again in the same buổi */
+INP=INP.replace(GOH,'{const bk=S.turn+"_"+S.tuan+"_"+S.buoi;window.__gof=window.__gof||{};pls.forEach(p=>{if(window.__gof[p.k]===bk)return;opts.push({s:p.s,f:()=>{note("go");const was=S.place;goTo(p.k);if(S.place===was&&!Q.length)window.__gof[p.k]=bk}})})}');
+const CDH='deck.forEach((a,i)=>{if(!cardOK(a))return;const c=cardCost(a);opts.push({s:scoreAct(a,N,c),f:()=>{note("card");act(i)}})});';if(!INP.includes(CDH))throw new Error('inpage4 card hook moved');
+/* a card that changes nothing (no khắc spent, no dialog) is not tried again in the same buổi */
+INP=INP.replace(CDH,'{const bk=S.turn+"_"+S.tuan+"_"+S.buoi;window.__cdf=window.__cdf||{};deck.forEach((a,i)=>{if(!cardOK(a)||window.__cdf[a.n]===bk)return;const c=cardCost(a);opts.push({s:scoreAct(a,N,c),f:()=>{note("card");const u0=used,q0=Q.length,s0=S.suc,b0=S.bac;act(i);if(used===u0&&Q.length===q0&&S.suc===s0&&S.bac===b0&&!S.mg)window.__cdf[a.n]=bk}})})}');
+/* new mini-games (j82): press the skip/close buttons */
+INP=INP.replace(OVH,"{const k=q('#kg82skip')||q('#ov .kg82act button:not(#kg82go)')||q('#kg82ok')||q('#ov button.kbtn');if(k){k.click();return true}}"+OVH);if(!INP.includes(HOOK))throw new Error('inpage4 hook moved');
 INP=INP.replace(HOOK,'{const ep=window.__evpick?window.__evpick(m,okIdx):null;if(ep!=null){note("ev_"+window.__evmode);chooseM(ep);return true}}'+HOOK);
 const PICK=`(function(){
 const W=[[/ân sủng|để mắt|thị tẩm/i,1.6],[/thể diện/i,1.2],[/tiếng hiền|hiền đức/i,1.3],[/người trên hài lòng|Thái hậu hài lòng|Hoàng hậu hài lòng/i,1.1],
@@ -38,19 +47,21 @@ async function run(b,mode,seed){const ctx=await b.newContext({viewport:{width:39
   try{const g=crypto.getRandomValues.bind(crypto);crypto.getRandomValues=a=>{for(let i=0;i<a.length;i++)a[i]=Math.floor(Math.random()*4294967296)>>>0;return a}}catch(e){}},[seed]);
  const p=await ctx.newPage();p.setDefaultTimeout(0);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,160)));
  await p.goto(URL,{waitUntil:'domcontentloaded',timeout:0});await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function',null,{timeout:0});await p.waitForTimeout(1500);
- await p.evaluate(()=>{try{localStorage.clear()}catch(e){}document.getElementById('title').hidden=true;start()});await p.evaluate(INP);await p.evaluate(PICK);
+ await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;window.__forceOrigin='tt';document.getElementById('title').hidden=true;start()});
+ await p.waitForFunction(()=>typeof S!=='undefined'&&S&&S.name&&S.origin,null,{timeout:120000});await p.evaluate(()=>{document.querySelectorAll('#kroul,#kroulw').forEach(e=>e.remove())});await p.evaluate(INP);await p.evaluate(PICK);
  await p.evaluate(([m])=>{window.__evmode=m;/* lives end: remember the counters of that life */const o0=over;over=function(){const r=o0.apply(this,arguments);return r};},[mode]);
  /* tag each finished life with the counters (__res grows inside over) */
  await p.evaluate(()=>{const push0=window.__res.push.bind(window.__res);window.__res.push=function(x){try{x.pun=window.__pun;x.hintN=window.__hintSeen||0;window.__hintSeen=0}catch(e){}return push0(x)}});
- const t0=Date.now();for(let i=0;i<STEPS;i++){await p.evaluate(([m])=>window.__bot.step(m,300),['sens']);if(i%10===9)console.error(mode,seed,'step',i+1,Math.round((Date.now()-t0)/1000)+'s')}
+ const t0=Date.now();for(let i=0;i<STEPS;i++){await p.evaluate(([m])=>window.__bot.step(m,300),['sens']);if(i%5===4)console.error(mode,seed,'step',i+1,Math.round((Date.now()-t0)/1000)+'s')}
  const res=await p.evaluate(()=>window.__res.map(r=>({o:r.origin,rank:r.rank,max:r.maxRank,yrs:r.years,title:String(r.title||'').slice(0,40),fate:String(r.fate||'').slice(0,70),pun:r.pun||0,hint:r.hintN||0,err:r.err,acts:r.acts?{ev:r.acts['ev_'+window.__evmode]||0,dil:r.acts.dilemma||0}:null})));
- await ctx.close();return{mode,seed,res,errs:errs.slice(0,5)}}
+ const live=await p.evaluate(()=>({turn:S&&S.turn,rank:S&&S.rank,ev:(window.__acts||{})['ev_'+window.__evmode]||0,acts:window.__acts}));
+ await ctx.close();return{mode,seed,res,live,errs:errs.slice(0,5)}}
 const DEATH=/chết|băng|tự vẫn|qua đời|tạ thế|bị giết|ban rượu|treo cổ|xử tử|độc|lìa đời|mất (?:sớm|khi)|đánh chết/i;
 function sum(L){const lives=L.filter(r=>!r.err&&r.title!=='TIMEOUT'&&r.title!=='CRASH');const n=lives.length||1;
  const f=k=>lives.filter(k).length;return{lives:lives.length,avgMax:+(lives.reduce((a,r)=>a+r.max,0)/n).toFixed(2),hh:+(100*f(r=>r.max>=7)/n).toFixed(1),
   phi:+(100*f(r=>r.max>=5)/n).toFixed(1),death:+(100*f(r=>DEATH.test(r.fate+' '+r.title))/n).toFixed(1),early:+(100*f(r=>r.yrs<3)/n).toFixed(1),
   demoted:+(100*f(r=>r.rank<r.max)/n).toFixed(1),pun:+(lives.reduce((a,r)=>a+r.pun,0)/n).toFixed(2),yrs:+(lives.reduce((a,r)=>a+r.yrs,0)/n).toFixed(2),
   evPicks:lives.reduce((a,r)=>a+(r.acts?r.acts.ev:0),0),crash:L.filter(r=>r.title==='CRASH').length}}
-(async()=>{const b=await chromium.launch();const seeds=[seed0,seed0+1];const jobs=[];for(const m of modes)for(const s of seeds)jobs.push(run(b,m,s));
+(async()=>{const b=await chromium.launch();const seeds=[...Array(+NS||2).keys()].map(i=>seed0+i);const jobs=[];for(const m of modes)for(const s of seeds)jobs.push(run(b,m,s));
  const out=await Promise.all(jobs);await b.close();const S={};for(const m of modes)S[m]=sum(out.filter(x=>x.mode===m).flatMap(x=>x.res));
- console.log(JSON.stringify({steps:STEPS,summary:S,errs:out.flatMap(x=>x.errs).slice(0,6),fates:Object.fromEntries(modes.map(m=>[m,out.filter(x=>x.mode===m).flatMap(x=>x.res).map(r=>r.fate||r.title).slice(0,12)]))},null,1))})().catch(e=>{console.error(e);process.exit(1)});
+ console.log(JSON.stringify({steps:STEPS,summary:S,errs:out.flatMap(x=>x.errs).slice(0,6),live:out.map(x=>[x.mode,x.seed,x.live]),fates:Object.fromEntries(modes.map(m=>[m,out.filter(x=>x.mode===m).flatMap(x=>x.res).map(r=>r.fate||r.title).slice(0,12)]))},null,1))})().catch(e=>{console.error(e);process.exit(1)});
