@@ -1,7 +1,7 @@
 # SESSION 8 QUEUE (coordinator's live dispatch list; nothing from HANDOVER_TO_SESSION8 may drop off)
 Status: QUEUED / RUNNING (agent) / SẴN SÀNG KIỂM / REVIEWING / PASS-LIVE / FAIL→worker / BLOCKED(reason)
 Slots: browser-heavy <= 6 at once, total agents <= ~12 (4 CPUs). Hourly watch refills slots in this order.
-CDN uploads BLOCKED (no Cloudflare token on the new account): art workers park files + list them under "PENDING CDN UPLOAD" in their PROGRESS.
+CDN uploads OK again (owner saved the Cloudflare token; R2 verified). Use CLOUDFLARE_API_TOKEN=proxy-injected if a script needs the variable.
 
 ## A. Reviewers (HANDOVER_TO_SESSION8 §2, priority order)
 | # | Branch | Status |
