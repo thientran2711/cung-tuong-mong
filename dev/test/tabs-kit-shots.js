@@ -23,7 +23,7 @@ let SIZES=args.slice(2);if(!SIZES.length)SIZES=['755x1000@2','1180x820@2','412x1
     const f=[];if(m.sw>1)f.push('h-overflow '+m.sw);if(subs.length&&!m.inBar)f.push('sub-tabs not in pane bar');if(m.back)f.push('Thôi/Lui button');if(m.clip.length)f.push('clipped '+m.clip.join());
     bad+=f.length;R[SZ][t+':'+s]=f.length?f:`ok (${m.cards} kit blocks)`;
     /* wait for the painted pictures of this view */
-    await p.evaluate(()=>Promise.race([new Promise(r=>setTimeout(r,8000)),Promise.all([...document.querySelectorAll('#panel [style*="--kth"]')].map(e=>{const m=/url\('([^']+)'\)/.exec(e.getAttribute('style')||'');return m?new Promise(r=>{const i=new Image();i.onload=i.onerror=r;i.src=m[1]}):null}).filter(Boolean))]));
+    await p.evaluate(ms=>Promise.race([new Promise(r=>setTimeout(r,ms)),Promise.all([...[...document.querySelectorAll("#panel img")].map(i=>{i.loading='eager';return i.complete?null:new Promise(r=>{i.onload=i.onerror=r})}),...[...document.querySelectorAll('#panel [style*="--kth"]')].map(e=>{const m=/url\('([^']+)'\)/.exec(e.getAttribute('style')||'');return m?new Promise(r=>{const i=new Image();i.onload=i.onerror=r;i.src=m[1]}):null})].filter(Boolean))]),+(process.env.PICWAIT||8000));
     await p.waitForTimeout(1500);if(OUT)await p.screenshot({path:`${OUT}/${t}-${s}-${SZ}.jpg`,type:'jpeg',quality:72})}}
   await ctx.close()}
  console.log(JSON.stringify({bad,R,errs},null,1));await b.close();process.exit(bad||errs.length?1:0)})();

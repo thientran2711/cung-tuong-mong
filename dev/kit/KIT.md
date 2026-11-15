@@ -531,12 +531,18 @@ ladder words from the real formulas; "có thể gặp người" → real words.
   the bar rule: one font size, 8 columns (2 rows of 4 under 700 px).
 - Person-card group tabs show "làm được / tổng": `Hại nặng 2/5` (title: "làm được 2 trên 5 việc").
 
-## 21. SKILL CARD (kit 2) — Tài nghệ and Tứ đức
-`kitSkillCard({kind:"art"|"vir", k, name, level, max, prog:[cur,need], desc, levels:[text per level], acts:[pbtn…], note})`:
-picture LEFT in the shared portrait frame (`img/art-<k>.webp` / `img/vir-<k>.webp` when listed in `img/INFO.json` have as "art-cam", "vir-cong"…;
-else act-category art), info RIGHT (name, "Bậc l/max", progress bar with numbers, one row per level: ✓ đã có · bậc kế · chưa mở), act buttons BELOW
-(act-card frame). Every art and every Tứ đức course uses it; the arts tab (`artTabHTML`) is built with it. Keys: art cam ky thi hoa vu y theu nau ·
-vir cong dung ngon hanh. No ranges: lesson progress is "the parts scored in the lesson game" (self-study 6 in 10).
+## 21. SKILL CARD = THE ONE HEAD CARD (kit 2; one form since review/tabs-kit r7, owner 11/15) — `dev/build/j79.js`
+`kitSkillCard({kind, k, name, kicker, level, max, word:"Bậc", prog:[cur,need] | prog:cur+need:n, bar:false, desc, next, levels:[text per level], acts:[pbtn…], img, stepsAttr, can})` → `.kskill`
+- ONE card for every art and Tứ đức course (Tài nghệ), every Tác phẩm line, the Mệnh truyện chapter head and the Sắc phong head, and every
+  empty state (`kitEmpty(title,line)` = this card with `max:0`, the topic's kitInfoArt picture and one short line). No other head / empty frame.
+- LEFT: the painted picture as `kitSceneArt(src,name,{size:"thumb"})` (§28.19: 64 px square, 56 px on phones). `img` default = `kitSkillArt(kind,k)`
+  (`img/art-<k>.webp` / `img/vir-<k>.webp` when in INFO.json have; else act-category art).
+- RIGHT: kicker (small, e.g. "Chương 2", "Điều kiện sắc phong"), name + **kitSteps** (`max` segments + "<word> l/max"; with `stepsAttr` the steps are a
+  button that opens the levels, e.g. `data-v85tab`), one desc line, tiến bộ bar `kitBar` (`.kskp`) or `kchip g "Đã tinh thông"` (`bar:false` = none),
+  next unlock `kchip n "<word> n mở"` + what it gives (`next`, else `levels[level]`).
+- BELOW: act cards (`pbtn`) in `.kskacts.pcb`, each in its own `.kpanec` cell (auto-fit grid, min 240 px): narrow cells give the compact act of §41
+  (own act picture only). `can:false` dims a card (nothing to do); lists put doable cards first, mastered last.
+- Deleted: the old per-level list (`.ksls`), the 170 px art column, review/tabs-kit's `kitSkillHead` / `.ksk2` duplicate. Sample: trang mẫu kit (§47).
 
 ## 22. PERSON STATS (kit 2)
 Every consort card shows the player's stat set as kit tiles under the portrait (`kitPersonStats(v)`): Sủng · Đức · Danh · Sắc · Tài · Tâm cơ; unknown
@@ -927,6 +933,8 @@ kitSceneArt(src, label, {shape:"wide"|"tall", fb:"fallback src", col:"#category 
 ```
 - Frame: 1 px `--gold` line + 2 px cream inner line + 1 px `#e6d3ac` hairline, radius 4, ground `#efe4cf`; picture `object-fit:cover` inside a 3 px mat.
 - Shapes: wide 16:9 (a card's top band; the band may be capped in height, the picture then crops top/bottom) · tall 3:4 (ev-* / st-* / act-* / info-*).
+- Size `size:"thumb"` (tabs-kit r7): the same frame as a small SQUARE tile beside text, `--ksth` 64 px (56 px under 600 px), 2 px mat, never
+  stretched by its slot. Used by the §21 card (skills, works, chapter, sắc phong, empty). No other small picture tile (no private `--kth` squares).
   Inside a fixed slot (`.kaart`, `.kpiart`, `.kskart`, `.kpev`) the frame fills the slot.
 - Caption: plain label = dark strip bottom-left (`figcaption`); with `col` = category colour on the frame line + small centred chip (act cards).
 - Never add a crest, tassel, brocade or rank frame to a picture of a place / thing / scene.
@@ -1899,20 +1907,36 @@ stranger card is not used for children (their card is drawn by jht). Old saves: 
 > review/kit-table / fix-float §39 kitRelTable). Renumbered to §45/§46; §41–§44 are left free for those branches to renumber into.
 > kit-fig2's jk4 `kitActCompactOn` and §46 `kitActCompact` (jtabs) are the same idea — whoever merges second must fold them into one.
 
+## 41. kitActCompact — act cards in a narrow pane (owner 11/15; from review/kit-fig2 KIT §39, cherry-picked by tabs-kit r7) — `dev/build/jk4.js`
+Copied unchanged from review/kit-fig2 3e212597e (jk4 "KIT 39 · kitActCompact", `kitActCompactOn` + its CSS) because tabs-kit needs it before
+kit-fig2 is merged; when kit-fig2 merges, keep ONE copy (kit-fig2's text is the reference; number it §41). Summary: inside an inline-size
+container `kpane` under 640 px every act card is compact: the act's OWN picture (ACTS.json key) as an 84 px square thumbnail (72 px under 420 px)
+left, title + odds on one line, one-line description, Cần/Tốn/Được chips; no own picture → no thumbnail (`.kanoart`), never a category / skill
+picture as stand-in. Containers: person card `.pc > .pcr` (kit-fig2) and — tabs-kit r7 extension — any `.kpanec` (skill-card act cells,
+Việc nhờ act area, Nợ ân rows). `kitActCompactOn(root)` runs after `render()` and (jtabs) after `renderPanel()`.
+- Fix that came with it (main bug): jk3's sort helper was also named `kitActKey(b)` and, in the one concatenated script, replaced j79's
+  `kitActKey(name)` (ACTS.json lookup) — every name lookup threw, so acts matched by prefix / wildcard lost their own picture across the game
+  (j79 kitActArt wrapper, j87 news pictures). jk3's helper is now `kitActSortKey`.
+
 ## 45. PANE = FIXED BAR + SCROLL BODY (owner 11/15, review/tabs-kit · `dev/build/jpane.js`)
 - Every tab pane is one layout: the **pane bar** (`.kpbar`) holds the page's sub-tabs (`.ksub`) and its first filter row (`.kcattabs`, Hành sự categories, Tư trang item filters, the jtabs sub-tabs); everything else is the list.
 - The bar sits flush at the top of the pane, directly under the header frame (the pane's own border is the kit gap), full width, opaque, no shadow; it never moves. The list scrolls below it and is cut off at the bar's bottom edge; nothing shows above or behind the bar (pane top padding is 0 while a bar is present). `scroll-padding-top` = bar height, so anchored scrolling stops below it.
 - Tabs keep drawing their own rows where they always did; `kitPane()` (after every panel render, on panel child changes and on resize) moves them into the bar. k3CatTabs finds its row by `data-g`, kgSub finds `.ksub` inside the bar. No other code may make a row sticky.
 - Test: `dev/test/pane-bar.js` (5 sizes, every tab, at rest and scrolled, ±1 px: bar flush, does not move, nothing above, nothing over its edge, opaque, full width; pane ends at the bottom nav).
 
-## 46. KIT TABS: SUB-TABS, SKILL HEAD, COMPACT ACT, CHECK ROWS, EMPTY STATE (owner 11/15, review/tabs-kit · `dev/build/jtabs.js`)
+## 46. KIT TABS: SUB-TABS, CHECK ROWS, INFO GLOSS (owner 11/15, review/tabs-kit · `dev/build/jtabs.js`)
 - **Sub-tabs** `kitSubTabs(key,[{k,label,doable,total|n}])`: the same `.pctabs.kcattabs` row as Hành sự, count "làm được/tổng"; it goes into the pane bar (§45); the choice is remembered per tab; the first visit opens the first group with something she can do. No long single scroll of mixed cards.
-- **Skill head** `kitSkillHead({kind,k,name,level,prog,need,desc,next,acts,img})`: painted picture (64 px, `img/art-*`, `img/vir-*`), name, **kitSteps** (5 segments + "Bậc l/5"; tap = the five levels), tiến bộ bar (`.kskp`), next unlock as `kchip n "Bậc n mở"` + what it gives; acts below. Cards she can act on come first, mastered last.
-- **Compact act** `kitActCompact(attrs,name,sm,why,img)`: the normal act card (Cần/Tốn/Được rows, kaNorm) with a 40 px painted thumbnail on the left (`--kth`): the act's own painting, else the skill's picture, the category painting only as the last resort.
+- Heads, skill cards, chapter / sắc phong heads and empty states = §21 `kitSkillCard` / `kitEmpty`; pictures = §28.19 thumb; act cards = plain `pbtn` in `.kpanec` cells (§41). A lone act card takes the whole row (auto-fit grid).
 - **Rules text** never as a paragraph on the page: `kitInfo(term)` = "ⓘ term" gloss (KIT_GLOSS) that opens on tap.
 - **Check rows** `kitChecks([[ok,text]])`: ✓ green / ✗ red chip + text, unmet first.
-- **Empty state** `kitEmpty(title,line)`: small painted vignette (kitInfoArt) + one short line, no paragraph.
 - **Person rows**: `kitPersonLine(p,{sub})` (portrait + name + what is owed / what is known) inside `.ktprow`, with the act for that person beside it.
 - Tài nghệ = Tứ đức · Cầm kỳ thi họa · Vũ · Y · Nữ công · Tác phẩm; Mệnh truyện = Chương này · Sắc phong · Đã qua; Việc nhờ = Đang làm · Nợ ân · Trong cung. Header numbers are `kchip`s.
-- Tác phẩm (j83 works) = one `kitSkillHead` per art that makes works: what it makes as `kchip`s, "phẩm +bậc", the quality ladder line, and "Tự luyện, làm tác phẩm" (bậc 5) as `kitActCompact`; the rules sit behind `ⓘ Tác phẩm`. Việc nhờ "Đang làm" keeps the kit person card pager (`pcard`, as Hậu cung).
+- Tác phẩm (j83 works) = one §21 card per art that makes works: what it makes as `kchip`s, "phẩm +bậc", the quality ladder line, and "Tự luyện, làm tác phẩm" (bậc 5) as an act card; the rules sit behind `ⓘ Tác phẩm`. Việc nhờ "Đang làm" keeps the kit person card pager (`pcard`, as Hậu cung).
 - Test: `dev/test/tabs-kit-shots.js` (5 sizes, every sub-tab: 0 errors, no horizontal overflow, no clipped card, no Thôi/Lui, sub-tabs in the pane bar).
+
+## 47. TRANG MẪU KIT · the kit sample page (luật KIT TRƯỚC, owner 11/15 16:50Z; tabs-kit r7) — `dev/build/jkitpage.js`
+Open the game with `#kit` at the end of the address (or `kitSamplePage()` in the console): a full-screen page draws every registered kit part
+with the REAL kit functions at the current screen size; ✕ closes. Every new / changed kit part pushes its sample in the same commit as its
+KIT.md section: `KIT_SAMPLES.push({id:"§nn", title, html:()=>…})`. Now: §28.19 wide/tall/thumb, §21 card (skill with acts, chapter, empty),
+§46 kitChecks + kitInfo, §41 compact act in a `.kpanec`. Test: `node dev/test/kit-page.js <url> [outdir] [sizes]` (every sample renders, no
+error, no horizontal overflow, 0 page errors).

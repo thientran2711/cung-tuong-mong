@@ -1,4 +1,6 @@
 /* ================= jpane: KIT PANE = fixed bar + scroll body (owner 11/15, KIT §45) =================
+   (r7) The bar holds, in this order: the group sub-tabs (kgSub, a direct .ksub), the page's own sub-tab row (a nested .ksub, marked
+   .kpgsub, e.g. Tư trang Túi đồ · Việc) and the first visible filter row (.kcattabs); rows inside hidden panes / cards / dialogs are skipped.
    Before: the chip / sub-tab rows (Hành sự "Tất cả · Nghỉ ngơi · Giao thiệp…", Tư trang item filters, Hậu cung / Giao tình /
    Hoàng tử / Mệnh truyện sub-tabs) were position:sticky INSIDE the scrolling panel, below 8 px of panel padding and after whatever
    came first on the page: the bar sat lower than the header at rest, and while scrolling half a card showed above it and its
@@ -10,14 +12,18 @@
    (scroll-padding-top = bar height). The bar is built after every panel render from the rows the tabs already draw, so the tab
    code keeps its own rows (k3CatTabs finds its row by data-g, kgSub finds .ksub inside the bar). */
 function kitPane(){try{const P=$("panel");if(!P)return;let bar=P.querySelector(":scope > .kpbar");
- const sub=P.querySelector(":scope > .ksub")||(bar&&bar.querySelector(":scope > .ksub"));
- const cat=[...P.querySelectorAll(".kcattabs")].find(r=>!r.closest(".pc,.kpc,.dlg,#popw"))||null;
- if(!sub&&!cat){if(bar)bar.remove();P.classList.remove("kpane");P.style.removeProperty("--kpbarh");return}
+ const free=r=>!r.closest(".pc,.kpc,.dlg,#popw,[hidden]");
+ const sub=P.querySelector(":scope > .ksub")||(bar&&bar.querySelector(":scope > .ksub:not(.kpgsub)"));
+ /* the page's own sub-tab row (e.g. Tư trang "Túi đồ · Việc", jinv .kinvsub) — tabs-kit r7 */
+ const pg=[...P.querySelectorAll(".ksub")].find(r=>r!==sub&&free(r)&&(r.parentElement!==P))||null;if(pg)pg.classList.add("kpgsub");
+ const cat=[...P.querySelectorAll(".kcattabs")].find(r=>free(r)&&!r.classList.contains("ksub"))||null;
+ if(!sub&&!pg&&!cat){if(bar)bar.remove();P.classList.remove("kpane");P.style.removeProperty("--kpbarh");return}
  if(!bar){bar=document.createElement("div");bar.className="kpbar";}
  if(P.firstElementChild!==bar)P.prepend(bar);
- if(sub&&sub.parentElement!==bar)bar.prepend(sub);
- if(cat&&cat.parentElement!==bar)bar.appendChild(cat);
- [...bar.children].forEach(c=>{if(c!==sub&&c!==cat)c.remove()});
+ const want=[sub,pg,cat].filter(Boolean);
+ want.forEach((r,i)=>{const w=r.parentElement;if(bar.children[i]!==r)bar.insertBefore(r,bar.children[i]||null);
+  if(w&&w!==bar&&w!==P&&!w.children.length&&!w.textContent.trim())w.remove()});
+ [...bar.children].forEach(c=>{if(!want.includes(c))c.remove()});
  P.classList.add("kpane");const cs=getComputedStyle(P),pl=cs.paddingLeft,pr=cs.paddingRight;bar.style.setProperty("margin-left","-"+pl,"important");bar.style.setProperty("margin-right","-"+pr,"important");bar.style.paddingLeft=pl;bar.style.paddingRight=pr;const h=Math.round(bar.getBoundingClientRect().height);if(h)P.style.setProperty("--kpbarh",h+"px")}catch(e){console.error("kitPane",e)}}
 window.kitPane=kitPane;
 (function(){const r0=renderPanel;renderPanel=function(){const r=r0.apply(this,arguments);kitPane();return r};
