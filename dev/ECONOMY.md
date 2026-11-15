@@ -51,6 +51,20 @@ craftGift, giftLeak, giftHit, priceTier`. j20 (BL, blCard, stipend) và j83 (WVA
   sửa chỗ thẻ đọc và trả ACT.c theo đích. Đề xuất: bạc × (1 + 0,15 × bậc đích + 0,1 × số kẻ hầu trung thành của đích).
 - Đường không tốn bạc cho phẩm thấp (khắc, Tâm cơ, lòng kẻ hầu, ơn người khác nợ) và "phẩm cao bị nhiều mắt nhìn hơn": cần thiết kế thẻ việc.
 
-## Số đo bot
-(xem báo cáo cuối của review/balance-unified; chạy `OUT=dir bash dev/measure/run5e.sh <game> <nhãn> 8`, rồi
-`python3 dev/measure/anecon.py dir/<nhãn>_?.json` và `python3 dev/measure/anx.py <nhãn> dir/<nhãn>_?.json`)
+## Số đo bot (e3: 40 đời, bot sensible, HHSTOP, 15/11)
+HH 45 %, chết sớm 45 % (trong đích); năm tới HH 4,4 / 6,0 / 7,5. Bạc của nàng lúc nhận bổng: trung vị 3 ở mọi bậc (bot tiêu hết, ~13 nghìn bạc
+vào/ra mỗi đời) — tiền không ứ ở bậc cao nữa.
+Tiền rảnh mỗi tháng (bổng − công − lễ nghĩa, tháng không cấm túc), và mua được bao nhiêu mỗi tháng:
+| Bậc | tháng đo | tiền rảnh | đồ thường (10) | đồ vừa (40) | xa xỉ (200) | mưu kế (~30) |
+|---|---|---|---|---|---|---|
+| Đáp ứng | 74 | 40 | 4 | 1 | 0,2 | 1,3 |
+| Thường tại | 150 | 51 | 5 | 1,3 | 0,25 | 1,7 |
+| Quý nhân | 210 | 60 | 6 | 1,5 | 0,3 | 2 |
+| Tần | 309 | 77 | 7,7 | 1,9 | 0,4 | 2,6 |
+| Phi | 237 | 95 | 9,5 | 2,4 | 0,5 | 3,2 |
+| Quý phi | 244 | 117 | 12 | 2,9 | 0,6 | 3,9 |
+| Hoàng quý phi | 234 | 123 | 12 | 3,1 | 0,6 | 4,1 |
+| Hoàng hậu | (2, bot dừng ở HH) | ~140 theo luật | 14 | 3,5 | 0,7 | 4,7 |
+Hoàng hậu / Đáp ứng ≈ 3,5× (trước: 320 / 30 = 10×). Ghi chú: kẻ hầu của nàng trong bot hầu như 0 (S.staff trống; cung nữ thân tín là S.maid,
+không tính công) nên công kẻ hầu gần như không trừ — lễ nghĩa mới là phần tăng theo phẩm. Cấm túc rất hay (bổng nửa) ở bậc thấp.
+Đo lại: `OUT=dir bash dev/measure/run5e.sh <game> <nhãn> 8`, rồi `python3 dev/measure/anecon.py dir/<nhãn>_?.json`, `python3 dev/measure/anx.py <nhãn> dir/<nhãn>_?.json`.
