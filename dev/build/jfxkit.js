@@ -83,8 +83,8 @@ function kitFxBurst(name,at,n,o){o=o||{};if(!KFK_SP[name]||!kfOn()||kfStill())re
 /* ---------- 2. lights + 3. sheets (DOM, screen blend for lights) ---------- */
 const KFK_VPOOL={};
 function kfkBox(target,o,ar){let x,y,w;const r=target&&target.getBoundingClientRect?target.getBoundingClientRect():null;
- if(r&&r.width){x=r.left+r.width*(o.cx!=null?o.cx:.5);y=r.top+r.height*(o.cy!=null?o.cy:.5);w=o.size||Math.max(r.width,r.height/ar)*(o.scale||1.2)}
- else{const p=target&&target.x!=null?target:{x:innerWidth/2,y:innerHeight*.42};x=p.x;y=p.y;w=o.size||Math.min(innerWidth,innerHeight/ar)*(o.scale||.7)}
+ if(r&&r.width){x=r.left+r.width*(o.cx!=null?o.cx:.5);y=r.top+r.height*(o.cy!=null?o.cy:.5);w=o.size||Math.max(r.width,r.height*ar)*(o.scale||1.2)}
+ else{const p=target&&target.x!=null?target:{x:innerWidth/2,y:innerHeight*.42};x=p.x;y=p.y;w=o.size||Math.min(innerWidth,innerHeight*ar)*(o.scale||.7)}
  return{x,y,w,h:w/ar}}
 function kfkPlace(d,b){d.style.cssText+=`;left:${Math.round(b.x-b.w/2)}px;top:${Math.round(b.y-b.h/2)}px;width:${Math.round(b.w)}px;height:${Math.round(b.h)}px`}
 function kfkHandle(d,target,o,kind,onStop){let done=false,iv=0,to=0;KFK.live.add(d);KFK[kind]++;
