@@ -255,3 +255,16 @@ trieu-than-nghi|0|ministers' hands holding court tablets, one official seen from
 trinh-khong-du-chung|0|an official's hand closing a ledger on a desk, a petitioner's empty hands below, bright office
 tro-chuyen-hoang-thuong|0|a consort's hand pouring tea for an imperial yellow sleeve at a small garden table, bright day
 tro-chuyen-voi|0|a maid seen from behind chatting cheerfully with a eunuch seen from behind at a side gate, bright day
+khoc-xin-tha|0|a kneeling maid seen from behind bowing low before the hem of a red robe on a palace floor, her hands hidden inside her long green sleeves pressed to the floor, trembling shoulders
+quy-xin-tha-cho-nang|0|a kneeling consort seen from behind bowing deeply before the Empress's red phoenix brocade hem, her hands hidden inside long pink sleeves on the floor, another kneeling lady's sleeves beside her
+xin-an-dien|0|a consort seen from behind kneeling on a red carpet at the foot of throne steps, hands hidden inside her long sleeves, bowing her head in petition, bright hall
+vao-cung-phong|0|a new consort seen from behind in crisp pink robes making an upright curtsy before the Empress's red phoenix brocade hem, her hands hidden in her long sleeves at her waist, bright hall
+xin-an-ve-tham|0|a kneeling consort seen from behind in pink sleeves bowing before the Empress's red phoenix brocade hem, hands hidden inside her sleeves, a travel bundle beside her, bright hall
+ket-minh|0|two ladies' sleeves side by side before a small altar, each holding one lit incense stick upright over a bronze censer, candles, a pact, bright room
+banh-trung-thu|1|an open lacquer box of round mooncakes on a pavilion table beside tea cups, one hand in a pink sleeve sliding it toward a dark brocade sleeve resting on the table, full moon glow
+bo-yen-thuc-ben-con|1|a small child asleep under a quilt on a sickbed, a mother's hand resting gently on the quilt, a half-burned candle, an elegant banquet robe draped forgotten over a chair
+cau-xin|0|a lady in plain undyed robes seen from behind kneeling at a weathered closed cold-palace gate, her hands hidden in her sleeves, a eunuch's dark sleeve visible through the gap
+cau-xin-quan-su|0|a maid in green seen from behind bowing low before an older court lady holding a rattan cane, the maid's hands hidden in her sleeves, bright courtyard
+day-le-nghi|0|an older court lady in dark brown seen from behind demonstrating the upright curtsy to a young maid in green beside her, both seen from behind, hands hidden in sleeves, bright courtyard
+dung-ra-can|0|a consort seen from behind stepping between two quarrelling ladies, her arms spread wide in long sleeves to separate them, bright courtyard
+dung-ve-phia|0|a consort seen from behind standing shoulder to shoulder beside a lady in blue, facing a lady in red across a courtyard, a dispute, all hands hidden in sleeves

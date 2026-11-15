@@ -246,3 +246,9 @@ thai-y-khac-bat-mach thai-y-khac-bat-mach-h
 thanh-minh-duoc thanh-minh-duoc-h
 thanh-thong-gia thanh-thong-gia-h
 thap-den-hau-ruou thap-den-hau-ruou-h
+thinh-an-hh-h thinh-an-hh-g-h
+thay-mat-chua-biet-ten thay-mat-chua-biet-ten-h
+thay-mat-thai-hau thay-mat-thai-hau-h
+thay-noi-chuyen-rieu-rao thay-noi-chuyen-rieu-rao-h
+theo-ve-vuong-phu theo-ve-vuong-phu-h
+thi-tam thi-tam-h
