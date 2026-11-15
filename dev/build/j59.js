@@ -128,7 +128,7 @@ function j59lay(force){const st=document.getElementById("stage");if(!st||!S)retu
  let tw=it.map(x=>x.tag?x.tag.offsetWidth:0);
  const KA=st.__kfa;/* KIT_FLOOR anchor (jk2b kitFloorFit): feet on the painted floor line while the figure keeps its kit height */
  const size=(rows)=>{const fo0=Math.max(sH*.03,rows*(tagH+3)+6);const foA=KA&&KA.feet?sH-KA.feet:0;
-  const fo=Math.max(fo0,Math.min(foA,sH-topR-KF.h*sH));CAP=sH-fo-topR;return{fo,H:Math.max(sH*.2,Math.min(KF.h*sH,CAP))}};
+  const fo=Math.max(fo0,Math.min(foA,sH-topR-KF.h*sH));CAP=sH-fo-topR;return{fo,H:Math.max(sH*.2,Math.min(KF.h*sH,CAP,KF.maxPx||1e9))}};
  /* the plaque column only covers the top of the stage: when it ends above the heads, the people may use the full width under it */
  const headTop=(z)=>sH-z.fo-Math.min(z.H*maxF,sH-z.fo-topR);
  const widthFor=(z)=>{let rr=rightR;try{const kR=document.getElementById("kshR");if(gR&&kR&&!kR.hidden&&kR.offsetHeight&&kR.getBoundingClientRect().bottom-R.top+4<headTop(z))rr=8}catch(e){}return{rr,avail:sW-8-rr-gL}};
