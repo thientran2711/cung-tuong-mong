@@ -43,5 +43,13 @@ Test: `python3 dev/build/assemble.py && node dev/test/thaiy.js <outdir> [WxHxD,.
 Uses the existing physician portrait/figure (pDoc, img/face-physician / court ty face) — no new picture needed.
 Optional (not required): an event banner for "Thỉnh bình an mạch" (physician kneeling, pulse on a silk-covered wrist) — LIST ONLY.
 
-## Status
-See commit log; test results in the final report.
+## Status (resume notes)
+- DONE and pushed on review/thaiy. Nothing local-only; no art generated (none needed).
+- dev/test/thaiy.js: 49/49 ok at 755x1000@2, 1000x755@2, 1180x820@2, 1366x1024@2, 844x390@2 (logic checks + physician card + result
+  card; no page errors, no horizontal overflow). Screenshots looked at (kit person dialog, existing banner "Ốm đau, thái y", physician figure).
+- dev/test/coop-e2e.js: 34 ok, 0 FAIL, then the browser was closed by the run timeout under load ~40 (4 shared CPUs) before the
+  last steps (B dies / rebirth / old save). Re-run when the machine is quiet: `node dev/test/coop-e2e.js tmp/coop`.
+- Site (root index.html/sw.js) NOT rebuilt on this branch: run `bash dev/site/build_site.sh` at merge time.
+- Resume: `cd <worktree> && python3 dev/build/assemble.py && node dev/test/thaiy.js tmp/thaiy 755x1000x2`.
+- For cal-plus: `thaiyNextVisit()` / `thaiyVisits(n)` (window globals, null/[] in lãnh cung or maid mode).
+- For the cycle worker: jthaiy reads `cycleLate(S)` if defined; j75 untouched.
