@@ -13,8 +13,10 @@ import numpy as np
 HERE = os.path.dirname(os.path.abspath(__file__)); REPO = os.path.dirname(os.path.dirname(os.path.dirname(HERE)))
 W = os.environ.get("TYW", "/tmp/claude-0/-home-user/d64e4822-8005-553d-be5a-3c77c37ea939/scratchpad/ty")
 OUT = W + "/out"; os.makedirs(OUT, exist_ok=True); os.makedirs(W + "/bg", exist_ok=True)
-sys.path.insert(0, REPO + "/dev/figwork"); sys.path.insert(0, REPO + "/dev/figwork/maidC")
-import spfuncs as sp, porcrop
+import importlib.util
+def _load(n, f):
+    sp_ = importlib.util.spec_from_file_location(n, f); m = importlib.util.module_from_spec(sp_); sp_.loader.exec_module(m); return m
+sp = _load("spfuncs", REPO + "/dev/figwork/maidC/spfuncs.py"); porcrop = _load("porcrop", REPO + "/dev/figwork/porcrop.py")
 AG = ["a18", "a26", "a36", "a51"]
 FONT = "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
 
@@ -33,6 +35,8 @@ def urls():
 
 def get(gid, path, preview=False):
     if os.path.exists(path): return path
+    z = glob.glob(f"{W}/zip/*_{gid}.png")
+    if z and not preview: return z[0]
     db = urls()
     if gid not in db: raise SystemExit("NOURL " + gid)
     u = db[gid] + ("&w=1024&preview=1" if preview else "")
@@ -59,6 +63,21 @@ def finish(im, name):
     porcrop.make(fp, OUT, src=im, name=name + ".webp")
     return fp
 
+_RB = None
+def cut(im):
+    global _RB
+    from rembg import remove, new_session
+    if _RB is None: _RB = new_session("isnet-general-use")
+    return remove(im, session=_RB).convert("RGBA")
+
+def load_cut(role, ident, g, gen, bg):
+    global _raw
+    if bg == "-":
+        _raw = get(gen, f"{W}/bg/{gen}.png"); im = Image.open(_raw).convert("RGB")
+        return cut(im.resize((im.width // 2, im.height // 2), Image.LANCZOS) if im.height > 1100 else im)
+    _raw = get(bg, f"{W}/bg/{bg}.png"); return Image.open(_raw).convert("RGBA")
+_raw = None
+
 def proc(only=None):
     R = recs(); done = set(open(W + "/done.txt").read().split()) if os.path.exists(W + "/done.txt") else set()
     for line in open(HERE + "/bg.txt"):
@@ -66,35 +85,38 @@ def proc(only=None):
         if len(p) < 5: continue
         role, ident, g, gen, bg = p[:5]; key = f"{role}-{ident}-ty{g}"
         if only and key not in only: continue
-        if key + ":" + bg in done and not only: continue
-        raw = get(bg, f"{W}/bg/{bg}.png"); im = Image.open(raw).convert("RGBA")
+        if key + ":" + (bg if bg != '-' else gen) in done and not only: continue
+        try:
+            im = load_cut(role, ident, g, gen, bg)
+        except BaseException as ex:
+            print(key, "SKIP", ex); continue
         cols = sp.split(im, 4)
         for (x0, x1), ag in zip(cols, AG):
             name = f"fig-{role}-{ident}-ty{g}-{ag}"
             finish(im.crop((max(0, x0 - 4), 0, min(im.width, x1 + 4), im.height)), name)
             R[f"img/{name}.webp"] = {"role": role, "identity": ident, "ty": int(g), "tier": f"ty{g}", "ageBand": ag,
                                      "file": f"img/{name}.webp", "por": f"img/por-{name[4:]}.webp",
-                                     "magnificUrl": "https://www.magnific.com/app/creation/" + gen, "bg": bg, "sheet": f"TY-{ident}-{g}"}
+                                     "magnificUrl": "https://www.magnific.com/app/creation/" + gen, "bg": bg if bg != "-" else "local-isnet", "sheet": f"TY-{ident}-{g}"}
         print(key, "ok", [x1 - x0 for x0, x1 in cols])
         json.dump(R, open(W + "/recs.json", "w"), indent=0, ensure_ascii=False)
-        open(W + "/done.txt", "a").write(key + ":" + bg + "\n")
-        try: os.remove(raw)
+        open(W + "/done.txt", "a").write(key + ":" + (bg if bg != '-' else gen) + "\n")
+        try: os.remove(_raw)
         except Exception: pass
 
 def sheet(out, keys):
     F = ImageFont.truetype(FONT, 18); R = recs()
     ids = sorted({(r["role"], r["identity"]) for r in R.values()}, key=lambda x: (x[0] != "consort", x[1]))
     if keys: ids = [x for x in ids if f"{x[0]}-{x[1]}" in keys]
-    fw, fh = 70, 225; rowW = 16 * fw + 120
+    fw, fh = 70, 225; rowW = 16 * fw + 160
     S = Image.new("RGB", (rowW, len(ids) * (fh + 6) + 10), (60, 58, 62)); d = ImageDraw.Draw(S)
     for r, (role, ident) in enumerate(ids):
         y = r * (fh + 6) + 5; d.text((4, y + 4), ident, font=F, fill=(255, 255, 255))
-        for g in range(1, 5):
-            for k, ag in enumerate(AG):
+        for g in range(1, 9):
+            for k, ag in enumerate(("a18", "a51")):
                 p = f"{OUT}/fig-{role}-{ident}-ty{g}-{ag}.webp"
                 if not os.path.exists(p): continue
                 im = Image.open(p).convert("RGBA"); im.thumbnail((fw, fh))
-                x = 60 + ((g - 1) * 4 + k) * fw + (g - 1) * 15
+                x = 60 + ((g - 1) * 2 + k) * fw + (g - 1) * 12
                 bgc = (200, 196, 188) if k % 2 else (40, 36, 40)
                 tile = Image.new("RGBA", (fw, fh), bgc + (255,)); tile.alpha_composite(im, ((fw - im.width) // 2, fh - im.height)); S.paste(tile.convert("RGB"), (x, y))
     S.save(out, quality=80); print(out, S.size)
