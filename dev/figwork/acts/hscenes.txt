@@ -375,7 +375,7 @@ tau-tuyen-nhieu|0|a consort's hand gesturing toward a row of candidate maidens' 
 vao-cung-phong|0|a new consort's hands clasped at her right waist in an upright curtsy, crisp new pink sleeves, before the Empress's red phoenix brocade hem
 dau-ba-quan|0|a high minister's hands in a scarlet court robe sleeve holding an ivory tablet at the head of rows of officials' sleeves in a court hall
 so-hac-can-chinh|0|a kneeling censor's hands raising a closed memorial in a court hall, the Emperor's yellow sleeve reaching to take it
-so-khen|0|the Emperor's yellow sleeve holding an open memorial (abstract lines), an official's dark green sleeves bowed respectfully before the desk
+so-khen|0|the Emperor's yellow sleeve resting on a closed memorial folder on his desk with a pleased gentle gesture, an official's dark green sleeves bowed respectfully before the desk
 quy-xin-tha|0|a figure's hands pressed to the floor in a kowtow before the Emperor's yellow robe hem and dragon throne steps
 xin-th-do-loi|0|an elder lady's hand in a dark brocade sleeve holding a kneeling consort's pink-sleeved hand kindly
 cau-xin|0|hands in plain undyed sleeves clasped pleading at a weathered cold-palace gate, a eunuch's dark sleeve on the other side
@@ -389,3 +389,36 @@ thay-dong-tinh|0|a consort's pink sleeve parting bamboo leaves, beyond them two 
 do-hoi-gia-the|1|a consort's hand turning the pages of a thick register book on a desk, a maid's green-sleeved hand holding a lamp beside
 len-mua-ngoai-cung|1|a eunuch's dark sleeves clutching a wrapped bundle while slipping through a small side gate at dusk
 chuyen-lo-ra|0|two maids' green sleeves leaning together under an eave, one hand pointing toward a distant palace
+cam-do|0|a eunuch's dark-sleeved hand laying a jade bangle on a pawnshop counter, the pawnbroker's brown sleeve weighing silver on a small scale
+chuoc-do|0|a consort's hands receiving a jewelry box back from a eunuch's dark-sleeved hands, a pouch of silver set on the table
+dat-noi-vu|0|a Household Department official's dark sleeve writing in a ledger (abstract lines), a consort's hand pointing at a stack of sample silks on the table
+giau-trong-ruong|0|a maid's hands stuffing a small wrapped bundle to the bottom of a clothes chest, her green sleeve turned toward the door
+tu-tay-ket|0|a consort's hands knotting a delicate sheer silk veil on a small netting frame, spools of colored thread beside
+minh-oan|0|a consort's pink sleeve standing upright with calm folded hands before the Empress's red phoenix brocade hem, a kneeling figure's bowed sleeves and a guard's armored arm behind
+nhan-loi-tra-do|0|a consort's hands setting a returned box onto a tray before the Empress's red phoenix brocade hem, then clasped at her waist in an upright curtsy
+kham-phong|0|a female palace official's dark plum-brown sleeves opening a clothes chest to search it, a consort's pink sleeve standing upright nearby
+ngu-tu|0|a eunuch's dark sleeves presenting a brocade tray with an imperial gift jade ornament, a consort's hands clasped at her waist in an upright curtsy to receive it
+ngu-tu-tim-lai|0|a consort's hands lifting the lid of a gift box handed back by a maid's green sleeves, the jade ornament inside intact
+giau-ngu-tu|0|a consort's hands closing the lid of a carved wooden box and sliding it into a hidden compartment behind a folding screen
+cuoi-chinh-phi|0|a prince's hand in a scarlet wedding sleeve and a bride's hand in a red embroidered wedding sleeve holding a red silk ribbon with a silk flower ball between them, red candles, wedding hall
+doi-cung|0|eunuchs' dark-sleeved hands carrying a chest through the gate of a new palace residence, a consort's pink sleeve standing in the wide courtyard
+quoc-tang|0|a palace hall draped with white curtains, ladies' plain white mourning sleeves standing still with folded hands before a memorial altar with white candles
+de-bat-nguoi-hau|0|a consort's hand giving a reward pouch to a maid's hands clasped at her waist in a curtsy, other maids' green sleeves standing behind
+nhan-nguoi-chay-viec|0|a young eunuch's dark-sleeved hands bowed low accepting a task before a seated consort's pink sleeve on a carved armrest
+giao-viec|0|a consort's hand passing a folded letter to a trusted maid's green-sleeved hands, the consort's other hand raised in instruction
+co-viec-nho|0|a maid's hands nervously holding a handkerchief in front of her green skirt, standing before a seated consort's pink sleeve
+nhan-loi-nho|0|a consort's hand raised in a kind accepting gesture, another lady's hands clasped at her waist in a grateful curtsy
+nho-tra-an|0|a seated consort's pink sleeve on an armrest, another lady's hands clasped in a respectful bow before her, a gift box on the table
+cung-duong-dau-den|0|a consort's hand pouring oil from a small ewer into an altar lamp before a serene golden Buddha statue in a palace shrine, incense smoke
+khan-cha-me|1|a consort's hand placing an incense stick at a small private altar alone at night, candlelight, a vase of white flowers
+moi-uong-tra|0|two ladies' hands in pink and blue sleeves holding teacups across a tea table in a garden pavilion, a maid's green sleeve pouring from a teapot
+du-tiec-nguoi-khac|0|a guest consort's pink sleeve stepping into another palace's banquet hall, the host's blue sleeves rising from her seat with an open welcoming hand
+thang-bac|0|ladies' hands around a card table with leaf playing cards (blank faces), one pink-sleeved hand sweeping a pile of silver pieces toward herself
+thua-bac|0|ladies' hands around a card table with leaf playing cards (blank faces), a calm blue-sleeved hand sliding silver pieces across to the winner
+thang-cuoc|0|a maid's green-sleeved hands presenting a pouch of winnings to a consort's pink sleeve on a pavilion railing, a dragon boat finishing on the lake below
+thua-cuoc|0|a consort's hand placing a pouch of silver on a tray to pay a wager at a pavilion railing, a dragon boat finishing on the lake below
+le-duoc-khen|0|a consort's hands presenting a gift tray in an upright curtsy, an elder lady's dark brocade hand raised in an approving gesture
+hanh-le-bi-che|0|a wine cup tipped over on a ceremonial tray before a consort's pink sleeve, an older court lady's dark brown sleeve turning toward it
+tiec-duoc-khen|0|the Emperor's yellow sleeve raising a wine cup at a banquet table in a consort's palace, guests' sleeves raising their cups in toast
+tiec-truc-trac|0|a servant's hands carrying away a spoiled dish from a banquet table, guests' hands setting their chopsticks down
+tu-dung|0|a consort's hand taking a single tonic pill from an open medicine box, a maid's green sleeve offering a cup of water
