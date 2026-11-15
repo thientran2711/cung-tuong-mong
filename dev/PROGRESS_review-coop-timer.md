@@ -55,11 +55,10 @@
 - Runs before 23:20Z change: coop-timer r7–r9 42/42 ×3, coop-timer-lag l5–l6 27/27 ×2, coop-e2e 59/59.
 
 ## Final test state (code bd9e1b0c4 and later)
-- coop-timer.js 43/43 ×3 (r10–r12) · coop-timer-lag.js 27/27 ×2 (l7–l8, l9 was running at hand-off) · coop-e2e (e2e3 was queued at
-  hand-off; previous build 59/59) · ts-oldsave OK. Shots looked at: chip 755x1000@2, 1180x820, 844x390, hold panel 844x390, busy line.
+- coop-timer.js 43/43 ×3 (r10–r12) · coop-timer-lag.js 27/27 ×3 (l7–l9, worst screen gap 96 / 119 / 59 ms) · coop-e2e 59/59 on the final build
+  (e2e3; buổi lengths n=16 median 1.1 s, p90 16.3 s, max 23.9 s, 0 time outs — bots) · ts-oldsave OK. Shots looked at: chip 755x1000@2, 1180x820, 844x390, hold panel 844x390, busy line.
 
 ## Next steps / commands
-- Re-run coop-e2e once on the final build and record "buổi lengths" (median/p90) from its output; re-run coop-timer-lag once more.
 - Real human buổi lengths need real play (bots press at once: e2e2 median 1.1 s, p90 15.4 s).
 - Merge with review/coop-pets when that lands (both touch jcoopworld: mine = one export block after CW.toCanon; pets edits sendPos/onPos —
   my pos `tm` rides on top via a COOP.send wrapper, so no line conflict expected).
