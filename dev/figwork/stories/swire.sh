@@ -10,6 +10,8 @@ python3 - "$W/events.json" "$W/events_out.json" "$@" <<'PY'
 import json,sys; J=json.load(open(sys.argv[1])); S=J['stories']
 for ak in sys.argv[3:]:
     a,k=(ak.split(':')+['bia'])[:2]
+    NEW={'tm96a':'Thanh mai trúc mã: Ngày từ biệt','tm96b':'Thanh mai trúc mã: Lửa thử vàng','tm96c':'Thanh mai trúc mã: Lựa chọn cuối'}
+    if a not in S and a in NEW: S[a]={'title':NEW[a],'o':'tm','fb':'tu-tinh','efb':{},'files':{}}; print('new arc entry',a)
     if a not in S: print('STOP no arc',a); sys.exit(1)
     S[a].setdefault('files',{})[k]='img/st-%s-%s.webp'%(a.replace('_','-'),k)
 json.dump(J,open(sys.argv[2],'w'),ensure_ascii=False,indent=1); print('wired',len(sys.argv)-3)

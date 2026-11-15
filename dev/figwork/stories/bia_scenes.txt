@@ -22,7 +22,7 @@ thd_tho|0|a scholar's daughter consort writes a poem with a brush at a desk unde
 thd_sach|1|a young consort sits among stacks of bound books by lamplight, her hand on an old manuscript wrapped in blue cloth
 thd_tro|0|a poor young scholar in plain blue robe and soft black scholar's cap bows outside a palace gate, a consort listening from behind a half-open screen
 thd_hoc|0|a young consort teaches little princes and princesses to hold brushes at low desks in a bright study room
-cnv_chu|1|a palace maid on night duty peers through a lattice screen as her mistress burns a letter over a brazier and hides a small packet
+cnv_chu|1|a palace maid on night duty stands half hidden behind a lattice screen with both hands folded at her waist, watching her mistress burn a letter over a brazier and hide a small packet
 cnv_ban|0|two young palace maids from the same village, one kneels accused while the other stands protectively beside her, a jade bracelet on the floor
 cnv_mat|0|a rainy afternoon, a palace maid stands under a corridor eave holding a tray, the Emperor in imperial yellow with a small gold crown on his topknot pauses under the eave nearby
 cnv_ma|0|a stern old court matron in dark blue teaches a young palace maid to fold silk garments perfectly in a servants' workroom
@@ -30,10 +30,13 @@ s_than|0|a small young eunuch in grey tugs the sleeve of a consort in a quiet pa
 s_thu|0|a consort picks up a fallen sealed letter from the path in the imperial garden among peonies, no name on it
 s_hoa|1|the west palace burns at night, orange flames over the roofs, a consort in a cloak watches from a nearby courtyard as a dark figure runs away in the distance
 s_su|0|a western envoy with short brown hair in a dark long coat presents a golden mechanical clock and a spyglass to court ladies in a palace hall
-s_dich|0|a closed palace gate sealed with a plain cloth, imperial physicians in masks carrying herb baskets, a consort watching anxiously from a corridor
-s_tinh|1|a consort stands alone by a moonlit lotus pond, a man's shadow on the far bank across the water, a lonely and tempting atmosphere
+s_dich|0|a closed palace gate sealed with a plain cloth, imperial physicians in cloth face masks carrying herb baskets, a consort watching anxiously from a corridor
+s_tinh|1|consort alone by a moonlit lotus pond, a man's dark silhouette standing on the far bank across the water, a lonely and tempting atmosphere
 s_thay|0|an old chief eunuch in dark robes walks with a young consort along a long red palace corridor, he is talking and she listens
 s_ban|0|two rival consorts stand side by side in a courtyard facing a dark storm gathering over the palace roofs, their sleeves almost touching
-st_the|0|a mature consort presides at a tea gathering with allied consorts around a table, a court lady whispering a report to her
+st_the|0|a mature consort presides at a tea gathering with allied consorts around a table, a court lady leaning in to report quietly to her
 st_con|0|a mature consort watches her young son practice archery in a palace courtyard with his tutor
 st_dong|0|a mature consort stands before the closed gates of the Eastern Palace at dawn, holding her young son's hand
+tm96a|0|farewell under a willow at a family gate, a young woman in hanfu hands a carved jade token back to a young man in a plain blue Ming scholar robe, a palace sedan waiting behind her
+tm96b|0|in a palace hall a consort stands composed while a young officer in dark armor kneels at a distance, the Emperor in imperial yellow with a small gold crown on his topknot watches them both from his seat
+tm96c|0|at dusk a consort stands on a palace wall holding a jade token, looking at a lone horseman riding away on the road beyond the wall
