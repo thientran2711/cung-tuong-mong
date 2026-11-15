@@ -43,3 +43,19 @@ may rủi chỉ quyết định hắn có làm việc ấy TRONG BUỔI NÀY kh�
    (thị vệ trực, vương gia thỉnh an / dự lễ, thợ có lệnh) hắn lẻn đến chỗ nàng đang ở (2,2 phần mỗi buổi; ×lễ tết, ×đêm).
 Nghe lén thành công kể đúng nguyên nhân (`menTrue`): ai, vì sao (cấm túc / toan mưu / giấu thai / thất sủng; lệnh gì; để ý ai).
 Thẻ bắt gặp: lựa chọn là thẻ việc đầy đủ của kit (Tốn · Được · Mất · Kèm · Ghi chú + thang may rủi), như Hành sự.
+
+## 15/11 (lượt 4) — KẾ HOẠCH, KHÔNG XÚC XẮC (lệnh chủ: "rolls decide… — that's still luck")
+Ai vào hậu cung, lúc nào, ở đâu, và ngươi có thấy không: không còn tung xúc xắc. (Chỉ kết quả của VIỆC ngươi làm — Báo, Giấu, Nghe lén, Uy hiếp — còn may rủi như mọi thẻ Hành sự.)
+- **Lịch trực, lệnh làm việc theo lịch**: thị vệ trực 2/3 buổi, trạm đổi theo tuần (`menDuty`); thợ Nội vụ phủ có lệnh mỗi hai tuần, theo lượt các cung từ phẩm cao xuống (`menOrder`);
+  thái y vào cung phi tần đang ốm/có thai buổi chiều; vương gia thỉnh an Thái hậu mỗi 4 tuần, dự lễ tết; sứ thần, quan vào chầu theo lượt.
+- **Kế hoạch lưu trong thế giới** (`S.menPlans`, lập đầu mỗi tuần cho tuần sau: ai, tuần, buổi, khắc, nơi, đường đến, độ kín):
+  1. Đôi tư tình (j22): mỗi 2–3 tuần theo nết hắn, đúng đêm lịch trực của hắn để trống; nơi theo nết nàng (đa nghi / hắn cẩn trọng → lãnh cung; kiêu ngạo → cung nàng; khác → vườn).
+  2. Thư lén: phi tần có cớ (cấm túc / toan mưu / giấu thai / thất sủng ghen nặng), mỗi mùa một lần khi cớ còn; thị vệ dễ mua nhất (lòng trung thấp nhất) theo ca trực của hắn; tối đa một lá mỗi tuần.
+  3. Nán lại: thợ phong lưu/đa tình có lệnh thật ở cung một phi tần thất sủng (Sủng < 40) hay người hắn để ý; ở lại tới khắc cuối buổi lệnh.
+  4. Kẻ để ý (`m.likeV` = phi tần đẹp nhất hắn thấy, theo nhan sắc, không xúc xắc): mỗi 9–12 tuần, buổi đầu tiên hắn ở trong cung (trực, thỉnh an, có lệnh) mà nàng đang đứng ở một nơi trong hậu cung.
+- **Ngươi thấy khi và chỉ khi ở đó**: có mặt ở nơi ấy trong khắc của kế hoạch (h−1 … h+1), hoặc đi ngang nơi kề bên lúc hắn đang đi vào (`menWatch`, gọi khi đến nơi, sau mỗi việc tốn khắc, và cuối buổi).
+- **Hiểu ra hay không**: Tai mắt ×8 + Tâm cơ/3 so với độ kín (tư tình 30 + Tâm cơ nàng/3, thư 20 + …, để ý 15, nán lại 10). Không đủ → chỉ thoáng thấy hắn và một bóng áo phi tần lánh đi (Núp nghe lén mới lộ ra ai).
+- **Tai mắt báo trước**: khi lập kế hoạch, Tai mắt đủ sâu (≥ độ kín + 40) → "Tai mắt báo: nghe nói tuần tới, buổi tối, có nam nhân sẽ lẻn vào …" (thật, có khi nói cả là ai) để ngươi tự sắp xếp có mặt.
+- **NPC cũng vậy**: phi tần đứng đúng nơi ấy trong buổi ấy và mắt đủ sâu thì thấy; chọn theo nết + oán (Hiểm độc/Kiêu ngạo/oán > 45 → báo; Tham vọng → giấu lấy chứng cứ; Đa nghi → nghe lén; Hiền/Nhu → làm ngơ hay giấu nếu ghét). Ngươi nói chuyện riêng với nam nhân ở hậu cung mà có phi tần mắt ≥ 20 đứng đó → bị thấy.
+- Đo (sens, đi dạo đầu mỗi buổi, 37,9 năm): kẻ lạc 7,1/năm (để ý 3,9 · tư tình 1,35 · thư 1,3 · nán lại 0,6); ngươi gặp 0,95/năm với 32,8 lần đi → 0,029 mỗi lần đi ≈ 3 lần/năm nếu đi mỗi buổi;
+  tai mắt báo trước 3,7/năm; NPC thấy 4,3/năm, báo 1,3/năm. 0 crash, 0 lỗi trang, ghi/nạp sạch.

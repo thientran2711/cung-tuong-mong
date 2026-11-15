@@ -48,3 +48,5 @@ Kế hoạch: dev/MEN_PLAN.md. Mã: dev/build/jmen.js (assemble: sau jk4, trư�
   nam = nữ × KIT_FIG.man, chân chung một đường. Đo trên ảnh: thị vệ / Quý phi ≈ 1 : 0,91 (đích 0,926).
 - Đo lại (sens, walk=1, 33,8 năm): kẻ lạc 13,5/năm; người chơi gặp 0,59/năm với 24,7 lần đi/năm = 0,024 mỗi lần đi → ~2–3 lần/năm nếu đi mỗi buổi một lần.
   NPC thấy 1,95/năm, báo 0,24/năm. 0 crash, 0 lỗi trang, ghi/nạp sạch.
+
+## 15/11 (lượt 4): kế hoạch không xúc xắc — xem MEN_PLAN.md "lượt 4". jmen: menDuty/menOrder/menPlace/menPlanWeek/menMakePlans/menTip/menWatch; menDecide/menNpcSee không còn roll.
