@@ -17,7 +17,10 @@ const KLOAD=window.KLOAD={phase:"idle",core:{have:0,total:0,files:0,left:0},fig:
 if(!("caches" in window)||!window.fetch||!/^https?:$/.test(location.protocol)||window.__bot)return;
 const AC="ctm-assets",LS="ctm-bgpause";
 const mb=n=>(n/1e6<10?(Math.round(n/1e5)/10):Math.round(n/1e6)).toLocaleString("vi-VN");
-const keyOf=f=>new URL(f[0]+"?h="+f[1],location.href).href;
+/* pictures (img/…) come from Cloudflare (jcdn.js IMG_BASE, dev/art/CDN.md): their key is IMG_BASE+'img/…?h=<md5/16>'; a CDN download is
+   marked with &ctmload=1 instead of the x-ctm-load header (a custom header would cost a CORS preflight per file) */
+const CDNB=(typeof IMG_BASE==="string"&&IMG_BASE)||"";
+const keyOf=f=>new URL(f[0]+"?h="+f[1],CDNB&&f[0].startsWith("img/")?CDNB:location.href).href;
 let el=null,chip=null,shown=false,speed=[],enterCb=[];
 try{KLOAD.paused=localStorage.getItem(LS)==="1"}catch(e){}
 
@@ -75,7 +78,7 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 /* ---------- one file: straight into the cache under its content key; progress counts whole files ---------- */
 async function getOne(c,f,grp){const g=KLOAD[grp];let got=0;
  for(let t=0;t<4;t++){try{
-   const r=await fetch(keyOf(f),{headers:{"x-ctm-load":"1"},cache:"no-cache"});if(!r.ok)throw new Error("http "+r.status);
+   const k=keyOf(f),r=await (CDNB&&k.startsWith(CDNB)?fetch(k+"&ctmload=1",{cache:"no-cache",mode:"cors",credentials:"omit"}):fetch(k,{headers:{"x-ctm-load":"1"},cache:"no-cache"}));if(!r.ok)throw new Error("http "+r.status);
    await c.put(keyOf(f),r);  /* the browser streams it into the cache; no page script per chunk (keeps the game smooth) */
    g.have+=f[2]-got;g.left--;g.files++;tick(grp);return true}
   catch(e){g.have-=got;got=0;if(e&&e.name==="QuotaExceededError"){KLOAD.err="quota";throw e}
@@ -99,13 +102,21 @@ async function plan(){
   if(HAVE.has(keyOf(f))){G.have+=f[2];G.files++}else{(g==="core"?coreList:figList).push(f);G.left++}}
  return true}
 /* older builds kept files in 'ctm-<timestamp>' under their plain path: move those whose content still matches, then drop the old cache */
-async function migrate(c){let olds=[];try{olds=(await caches.keys()).filter(k=>/^ctm-\d+$/.test(k))}catch(e){}if(!olds.length||!crypto.subtle)return;
+async function migrate(c){await moveCdn(c);let olds=[];try{olds=(await caches.keys()).filter(k=>/^ctm-\d+$/.test(k))}catch(e){}if(!olds.length||!crypto.subtle)return;
  const byPath=new Map(MAN.files.map(f=>[new URL(f[0],location.href).href,f]));
  for(const k of olds){const o=await caches.open(k);for(const q of await o.keys()){const f=byPath.get(q.url.split("?")[0]);if(!f||HAVE.has(keyOf(f)))continue;
    try{const r=await o.match(q);const b=await r.arrayBuffer();if(b.byteLength!==f[2])continue;
     const h=[...new Uint8Array(await crypto.subtle.digest("SHA-256",b))].map(x=>x.toString(16).padStart(2,"0")).join("").slice(0,16);
     if(h===f[1]){await c.put(keyOf(f),new Response(b,{headers:{"Content-Type":r.headers.get("content-type")||"application/octet-stream"}}));HAVE.add(keyOf(f))}}catch(e){}}
   await caches.delete(k)}}
+
+/* pictures moved to the CDN (review/cdn-images): 'ctm-assets' entries still under the site's own img/ path move to their CDN key when the
+   size matches (the hash changed from sha256 to md5, so content cannot be compared here; a redraw of the same byte size is very rare
+   and is fixed by the next redraw/rename), then the old entry goes — no second download of ~700 MB */
+async function moveCdn(c){if(!CDNB)return;try{const own=new URL("img/",location.href).href;const byPath=new Map(MAN.files.map(f=>[f[0],f]));let n=0;
+ for(const q of await c.keys()){if(!q.url.startsWith(own))continue;const p=decodeURIComponent(q.url.split("?")[0].slice(own.length-4));const f=byPath.get(p);
+  if(f&&!HAVE.has(keyOf(f))){const r=await c.match(q);const b=r&&await r.blob();if(b&&b.size===f[2]){await c.put(keyOf(f),new Response(b,{headers:{"Content-Type":r.headers.get("content-type")||"application/octet-stream"}}));HAVE.add(keyOf(f));n++}}
+  await c.delete(q)}KLOAD.moved=n}catch(e){}}
 
 async function runCore(){if(!coreList.length){KLOAD.phase="done";close();startBg();return}
  KLOAD.phase="core";screen();paint();
