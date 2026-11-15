@@ -45,7 +45,7 @@ const RULES=[
  ["không đổi chỉ số","không đổi gì"],[R(B+"Bấm"+E),"Chạm"],[R(B+"bấm"+E),"chạm"],
  /* modern words */
  ["Xét nghiệm","Nghiệm độc"],["xét nghiệm","nghiệm độc"],["Kiểm tra","Soát"],["kiểm tra","soát"],["cơ hội được","thêm dịp được"],["cơ hội","cơ duyên"],
- ["bảng điểm","bảng định thứ"],[R(B+"điểm(?! tâm| trang)"+E),"phần"],[R(B+"Điểm(?! trang)"+E),"Phần"],
+ ["bảng điểm","bảng định thứ"],[R(B+"(?<![Tt]rang )điểm(?! tâm| trang)"+E),"phần"],[R(B+"Điểm(?! trang)"+E),"Phần"],
  ["Đến lượt ngươi","Tới phiên ngươi"],["Lật hai ô một lượt, tìm đủ các cặp giống nhau trong số lượt cho phép.","Mỗi hồi lật hai thẻ, tìm đủ các cặp giống nhau trong số hồi cho phép."],
  [R(B+"Lượt"+E),"Hồi"],[R(B+"lượt"+E),"hồi"],
  ["người bạn","người quen"],["Bạn trong cung","Người quen trong cung"],["Bạn (thiện","Người quen (thiện"],["cần bạn ","cần người quen "],

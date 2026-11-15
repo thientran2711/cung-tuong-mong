@@ -54,16 +54,18 @@ function kitTiers(list,o){o=o||{};const N=list.length;return `<div class="ktiers
 /* split an HTML run into sentences, keeping inline tags balanced across the cut */
 const KP_UP="A-ZÀÁẢÃẠĂẮẰẲẴẶÂẤẦẨẪẬĐÈÉẺẼẸÊẾỀỂỄỆÌÍỈĨỊÒÓỎÕỌÔỐỒỔỖỘƠỚỜỞỠỢÙÚỦŨỤƯỨỪỬỮỰỲÝỶỸỴ0-9";
 const KP_ENDS=/[.!?]["”)]?\s+$/,KP_ENDS0=/[.!?]["”)]?\s*$/,KP_STARTS=new RegExp(`^\\s+["“(]?[${KP_UP}]`);
-function kpSentences(html){const toks=String(html||"").split(/(<[^>]+>)/);const out=[];let cur="",stack=[];
+function kpSentences(html){const toks=String(html||"").split(/(<[^>]+>)/);const out=[];let cur="",stack=[],qd=0;const qOn=(String(html).match(/“/g)||[]).length===(String(html).match(/”/g)||[]).length;
+ /* a quoted speech “…” stays ONE row (review/toilette, KIT 31.14): no cut while inside the quotes (qd>0) */
+ const qc=s=>{if(qOn)for(const c of s){if(c==="“")qd++;else if(c==="”")qd=Math.max(0,qd-1)}};
  const cut=()=>{const close=stack.slice().reverse().map(t=>`</${t.n}>`).join("");if(kpPlain(cur))out.push(cur+close);cur=stack.map(t=>t.o).join("")};
  for(const tk of toks){if(!tk)continue;if(tk[0]==="<"){const m=tk.match(/^<\s*(\/)?\s*([a-z0-9]+)/i);if(m){const n=m[2].toLowerCase();if(/^(br|img|hr)$/.test(n)){if(n==="br"){cut();continue}cur+=tk;continue}
     /* owner 11/15 ("chứng cứ dính vào dòng tấn phong"): a sentence that ends right before an opening tag ("… 42. <b>Thánh chỉ …") is a row of its own */
-    if(!m[1]&&KP_ENDS0.test(kpPlain(cur))&&/\s$/.test(cur.replace(/<[^>]*>/g,"")))cut();
+    if(!m[1]&&qd===0&&KP_ENDS0.test(kpPlain(cur))&&/\s$/.test(cur.replace(/<[^>]*>/g,"")))cut();
     if(m[1]){const i=stack.map(x=>x.n).lastIndexOf(n);if(i>=0)stack.splice(i,1)}else if(!/\/>$/.test(tk))stack.push({n,o:tk})}cur+=tk;continue}
   /* … and one that ends inside a tag, the next text starting a new sentence ("…nặng.</span> Hoàng hậu …") */
-  if(KP_ENDS0.test(kpPlain(cur))&&KP_STARTS.test(tk))cut();
+  if(qd===0&&KP_ENDS0.test(kpPlain(cur))&&KP_STARTS.test(tk))cut();
   const parts=tk.split(/(?<=[.!?]["”)]?)\s+(?=["“(]?[A-ZÀÁẢÃẠĂẮẰẲẴẶÂẤẦẨẪẬĐÈÉẺẼẸÊẾỀỂỄỆÌÍỈĨỊÒÓỎÕỌÔỐỒỔỖỘƠỚỜỞỠỢÙÚỦŨỤƯỨỪỬỮỰỲÝỶỸỴ0-9])/);
-  parts.forEach((p,i)=>{cur+=p;if(i<parts.length-1)cut()})}
+  parts.forEach((p,i)=>{cur+=p;qc(p);if(i<parts.length-1){if(qd===0)cut();else cur+=" "}})}
  if(kpPlain(cur))out.push(cur);const R=out.map(s=>s.trim()).filter(s=>kpPlain(s)&&kpPlain(s)!==".");
  /* the reason of a fact ("Lý do: …", "Vì …:") stays on the fact's row */
  /* … and so does a note in brackets right after it ("(Chứng cứ X +1.)" = what that act gave); a reason said twice is kept once */
