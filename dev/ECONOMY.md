@@ -46,10 +46,21 @@ craftGift, giftLeak, giftHit, priceTier`. j20 (BL, blCard, stipend) và j83 (WVA
 - Túi Tư trang: mỗi tác phẩm là một ô riêng (tab "Tác phẩm", nền phẩm Thường · Tinh phẩm · Trân phẩm · Tuyệt phẩm), chạm = khung món với
   Dâng/tặng · Bán cho Nội vụ phủ · Bán ra ngoài cung · Bày ở yến tiệc.
 
-## 5. Chưa làm (cần thợ hành sự / act-pics)
-- Mưu kế tốn bạc theo người bị nhắm (cao phẩm / canh phòng kỹ thì đắt hơn): giá thẻ ACT.c còn cố định (lygian 20, spy 15, bribe 40…); cần
-  sửa chỗ thẻ đọc và trả ACT.c theo đích. Đề xuất: bạc × (1 + 0,15 × bậc đích + 0,1 × số kẻ hầu trung thành của đích).
-- Đường không tốn bạc cho phẩm thấp (khắc, Tâm cơ, lòng kẻ hầu, ơn người khác nợ) và "phẩm cao bị nhiều mắt nhìn hơn": cần thiết kế thẻ việc.
+## 5. Mưu kế theo người bị nhắm · đường không tốn bạc · phẩm cao nhiều mắt nhìn (jecon §5)
+- Mọi việc hại tốn bạc (ACT.c.bac < 0, trừ Giao thiệp) đắt hơn khi người bị nhắm phẩm CAO hơn người làm (+BAL.schemeRk 15 % mỗi bậc) và được canh
+  kỹ (+BAL.schemeGuard 10 % mỗi kẻ hầu trung thành ≥ 70, tối đa 3). Thẻ hiện đúng giá cho người đó (ACT.c đọc theo người trên thẻ), luật trừ
+  đúng số đó; NPC cùng luật. Ví dụ Đáp ứng mua chuộc cung nữ của Hoàng hậu: 90 bạc (Đáp ứng khác: 44).
+- Đường không tốn bạc (rẻ bạc, nhưng dễ hỏng hơn hoặc tốn thứ khác), thẻ riêng đủ Tốn/Được/Mất + khả năng:
+  "Tự đi dò la" (khả năng −BAL.selfMinus 12, lộ: Danh −2) · "Sai cung nữ thân tín lấy lòng" (lòng cung nữ −BAL.loyalCost 10, khả năng −12) ·
+  "Nhờ ơn người quen rút thẻ bài" (cần người quý ngươi ≥ BAL.favorRel 60; người đó thiện cảm −BAL.favorCost 12).
+- Phẩm cao nhiều mắt nhìn: mưu của nàng bị bắt quả tang từ bậc BAL.watchRank (Quý phi) trở lên: thêm Danh −(bậc − 4).
+- Chưa làm: Tâm cơ như một thứ "tốn" riêng; mua sự an toàn bằng bạc (thuê người làm thay chắc hơn) ngoài các thẻ đã có.
+
+## Sinh nở: số hiện = số chết (soát 15/11)
+- Một hàm `birthRisk(p)` (j32 → jbal: −later khi đã có con, +BAL.birthAdd → jbal2: sàn BAL.birthMin) dùng cho CẢ chip "Sinh nở" (j19) lẫn lần
+  đổ xúc xắc (j8 birthP). Không có hệ số ẩn. Thử máy: 400 lần sinh cho nàng → chết 8,3 % (rủi ro tính 10); NPC 14,5 % (rủi ro 13).
+- Bot: 80 lần sinh, 15 chết (18,8 %) trong khi tổng rủi ro lúc sinh dự đoán 9,6 (z ≈ 1,9): lệch do (1) chip hiện rủi ro LÚC XEM (từ tháng 6),
+  còn lúc sinh Sức thường đã tụt dưới 40 (+4) hoặc bà đỡ bị mua (+10) — những lần chết có rủi ro 11–21; (2) độ ồn với n nhỏ. Không chỉnh tỷ lệ.
 
 ## Số đo bot (e3: 40 đời, bot sensible, HHSTOP, 15/11)
 HH 45 %, chết sớm 45 % (trong đích); năm tới HH 4,4 / 6,0 / 7,5. Bạc của nàng lúc nhận bổng: trung vị 3 ở mọi bậc (bot tiêu hết, ~13 nghìn bạc
