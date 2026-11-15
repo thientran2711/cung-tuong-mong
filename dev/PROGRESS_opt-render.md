@@ -54,3 +54,6 @@ kiện (chế độ giá + gợi ý + nhãn rủi ro), 1 là cửa hàng (Hàng 
 - review/event-balance: rà cân bằng bằng bot (sếp 14:30Z / 15:10Z) — dùng `kitHint(o, m, lv)` để bot "đọc gợi ý".
 - Cảnh báo (không phải lỗi): vài hộp có hai lựa chọn cùng gợi ý ở mức mơ hồ (vd. Ban cung "tâu xin cung khác còn trống" ×3; Thanh minh hai
   lựa chọn đều "được tiếng hiền đức" — khác nhau ở Tốn Sức / Bạc).
+
+## Review r7 (review/opt-render-r7)
+PASS with reviewer fixes, see dev/review/opt-render.md (kitSeal -> kitResultSeal, Thái y bắt mạch ev, one kit sample page #kit with §53 samples, KIT §53 index).

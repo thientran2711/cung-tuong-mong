@@ -752,8 +752,8 @@ so stage blocks may stand beside a head or between figures, never over the paint
   classifies every dialog the bot meets) and `dev/test/opt-scan.py` (static: every call site classified).
 - Use (data only): `Q.push({…, ev:1, opts:[…]})` for an event built outside PEND; `act:1` / `shop:1` for an active act's picker / a shop;
   `hideOut:true` on an item or one option hides it too; any other priced button: `data-khide="1"`.
-- KIT SAMPLE PAGE: the one page of §47 (`#kit`, jkitpage.js) — samples "§28.6" (kitChip tones, kitRisk ×3, an event option in cost mode run
-  through the real modal markup + kaNorm → kitHideOut: Tốn + kitHintRow + kitRisk, no Tốn when free) and "§7" (kitResultSeal ×3, kitKemRow).
+- KIT SAMPLE PAGE: the one page of §47 (`#kit`, jkitpage.js) — samples "§53" (kitChip tones, kitRisk ×3, an event option in cost mode run
+  through the real modal markup + kaNorm → kitHideOut: Tốn + kitHintRow + kitRisk, no Tốn when free; kitResultSeal ×3, kitKemRow).
   (The duplicate `?kit` / `kitSample()` page of review/opt-render was dropped by reviewer r7.)
 
 ### 28.7 PERSON CARD: portrait and bars always in view (owner D)
@@ -2029,5 +2029,14 @@ Việc nhờ act area, Nợ ân rows). `kitActCompactOn(root)` runs after `rende
 Open the game with `#kit` at the end of the address (or `kitSamplePage()` in the console): a full-screen page draws every registered kit part
 with the REAL kit functions at the current screen size; ✕ closes. Every new / changed kit part pushes its sample in the same commit as its
 KIT.md section: `KIT_SAMPLES.push({id:"§nn", title, html:()=>…})`. Now: §28.19 wide/tall/thumb, §21 card (skill with acts, chapter, empty),
-§46 kitChecks + kitInfo, §43 compact act in a `.kpanec`, §28.6 kitChip tones + kitRisk + an event option in cost mode, §7 kitResultSeal + kitKemRow. Test: `node dev/test/kit-page.js <url> [outdir] [sizes]` (every sample renders, no
+§46 kitChecks + kitInfo, §43 compact act in a `.kpanec`, §53 kitChip tones + kitRisk + an event option in cost mode + kitResultSeal + kitKemRow. Test: `node dev/test/kit-page.js <url> [outdir] [sizes]` (every sample renders, no
 error, no horizontal overflow, 0 page errors).
+
+## 53. EVENT-CHOICE PARTS · kitHint · kitRisk · kitHintRow · kitKemRow · kitResultSeal (owner 11/15 14:30Z / 15:05Z / 15:10Z, review/opt-render) — `dev/build/jk2b.js`, `dev/build/j63.js`
+Index of the shared parts review/opt-render added (number from the coordinator's registry; the rules live where they apply):
+- `kitIsEventChoice(m)` + `KIT_ACT_PIDS` + data flags `ev` / `act` / `shop` — which dialogs are events (cost mode): §28.6.
+- `kitHint(o, m, lv)` → `{hint, risk}` (pure, bots too), `kitHintLevel()` (Tâm cơ / Tai mắt → vague / plain / sharp): §28.6.
+- `kitHintRow(text)` (`.kr-hint`, `.ef.i` in j63 kit CSS), `kitRisk(word)` (kitChip g / w / r + `.krisk`, j79 kit chip CSS): §28.6.
+- `kitResultSeal(ok)` (THÀNH / HỎNG / grey KẾT QUẢ, j63; not `kitSeal`, which is the Trân nữ seal §39), `kitKemRow(K)` (`.kb .kkem`): §7.
+- Samples on the kit page (§47): ids "§53" (chip tones + kitRisk; an event option in cost mode through the real modal markup → kaNorm →
+  kitHideOut; kitResultSeal ×3; kitKemRow). Tests: `dev/test/opt-render.js`, `dev/test/opt-scan.py --fail`.

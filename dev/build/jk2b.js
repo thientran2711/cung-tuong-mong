@@ -314,7 +314,7 @@ function kitHideOut(b){try{if(!b||!b.classList.contains("ka")||b.dataset.khid===
   const kat=b.querySelector(":scope > .kat");if(kat&&!kat.querySelector(".krisk"))kat.insertAdjacentHTML("beforeend",kitRisk(H.risk))}}catch(e){console.error("kitHideOut",e)}}
 (function(){const n0=kaNorm1;kaNorm1=function(b){const r=n0.apply(this,arguments);try{if(b&&b.dataset&&(b.dataset.khide==="1"||b.closest("[data-khide-all]")))kitHideOut(b)}catch(e){}return r}})();
 /* the kit sample page for this section (kitRisk, kitHintRow, an event option in cost mode, kitResultSeal, kitKemRow) is ONE page: jkitpage.js
-   (#kit, KIT §47), samples "§28.6" and "§7" (reviewer opt-render r7 dropped the duplicate ?kit / kitSample() page). */
+   (#kit, KIT §47), samples "§53" (reviewer opt-render r7 dropped the duplicate ?kit / kitSample() page). */
 /* WHICH dialogs are EVENT choices (owner 14:30Z: every event — main / side stories, festivals, NPC visits, toilette reactions…): ON BY DEFAULT
    for (a) every item made from a PEND entry by pushDil / pushFront / mkP (it carries pid / pp: j68 weekly events, j67 chapters, j70, j96/j97…)
    EXCEPT the active-act pickers listed in KIT_ACT_PIDS (she opened them herself: gift / plant / taint / evidence pickers, the shop, the veil
