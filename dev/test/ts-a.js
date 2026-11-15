@@ -34,12 +34,15 @@ const fs=require('fs');
    const hud=document.querySelector('.game .hud');const d=document.getElementById('me-d');const dl=d?Math.round(d.getBoundingClientRect().height/(parseFloat(getComputedStyle(d).lineHeight)||16)):0;
    const chipsTop=[...document.querySelectorAll('#k3tt [data-k3="tsnh"],#k3tt [data-k3="tsxp"]')].length;
    /* FAIL 3/4: words and strangers */
-   const qm=/\?\?\?/.test(mt),thien=/thiện cảm/.test(mt),lui=[...(M?M.querySelectorAll('button'):[])].filter(b=>b.offsetParent&&/^(Lui|Thôi|Đã hiểu)$/.test(b.textContent.trim())).length;
+   const qm=/\?\?\?/.test(mt),thien=(()=>{if(!M||M.hidden)return 0;let n=0;const W=document.createTreeWalker(M,NodeFilter.SHOW_TEXT);while(W.nextNode()){const x=W.currentNode;if(/thiện cảm/i.test(x.nodeValue)&&x.parentElement&&x.parentElement.offsetParent&&!x.parentElement.closest('.krel'))n++}return n})(),quy=/quý (ngươi|ta)|ra tay thiện cảm/.test(mt),lui=[...(M?M.querySelectorAll('button'):[])].filter(b=>b.offsetParent&&/^(Lui|Thôi|Đã hiểu)$/.test(b.textContent.trim())).length;
    const grey=M&&!M.hidden?[...M.querySelectorAll('img')].filter(i=>i.offsetParent&&/unknown-fig|kit\/unknown/.test(i.src)).map(i=>{const f=i.closest('figure,.kesf,.kpsubj,.kfact,.md');return (f&&f.textContent.trim().slice(0,30))||i.src.split('/').pop()}):[];
-   return{overflowX:document.documentElement.scrollWidth>vw,cut:cut.slice(0,5),tileRows,hudH:hud?Math.round(hud.getBoundingClientRect().height):0,dateLines:dl,chipsOnTopBar:chipsTop,qm,thien,lui,grey}});
+   return{overflowX:document.documentElement.scrollWidth>vw,cut:cut.slice(0,5),tileRows,hudH:hud?Math.round(hud.getBoundingClientRect().height):0,dateLines:dl,chipsOnTopBar:chipsTop,qm,thien,quy,lui,grey}});
   await p.screenshot({path:`${OUT}/${TAG}-${k}.jpg`,type:'jpeg',quality:80});R.push(Object.assign({k},r));};
  const R=[];
- const clear0=async()=>{for(let i=0;i<5;i++){await p.evaluate(()=>document.querySelectorAll('[data-km-close]').forEach(b=>b.click()));await p.waitForTimeout(400)}};
+ const clear0=async(want)=>{for(let i=0;i<8;i++){await p.evaluate(()=>document.querySelectorAll('[data-km-close]').forEach(b=>b.click()));await p.waitForTimeout(400);
+   /* main 11/15: other cards queued before ours (Ngự tứ after a promotion, Thánh chỉ…) — close them the kit way until ours is in front */
+   if(!want)continue;const front=await p.evaluate(re=>{const M=document.getElementById('modal');if(!M||M.hidden)return 'none';const h=(M.querySelector('.kph')||M).textContent;if(new RegExp(re).test(h))return 'ok';
+    if(typeof kitModalClose==='function'&&kitModalClose())return 'closed';const o=M.querySelector('#mr button:not([hidden]), .opts .opt');if(o){o.click();return 'clicked'}return 'stuck'},want);if(front==='ok'||front==='none'||front==='stuck')break}};
  const clear=async()=>{for(let i=0;i<4;i++){await p.evaluate(()=>document.querySelectorAll('[data-km-close]').forEach(b=>b.click()));await p.waitForTimeout(250)}await p.evaluate(()=>{try{kg82Close(true)}catch(e){}try{kitPodiumClose(true)}catch(e){}Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;const t=document.getElementById('rtoast');if(t)t.hidden=true;document.getElementById('ov').hidden=true;render()});await p.waitForTimeout(400)};
  /* 6: danger bar */
  await p.evaluate(()=>{const kn=x=>{S.dKnown=S.dKnown||{};S.dKnown[x.id]=1;try{k61Meet(x,'thử')}catch(e){}};const v=liveRivals(false)[1];v.ghen=75;kn(v);const w=liveRivals(false)[2];oanAdd(w,S,45);kn(w);render();TSA.dangerPanel()});await check('6-nguy-hiem');await clear();
@@ -56,11 +59,11 @@ const fs=require('fs');
  await p.evaluate(()=>{TSA.summonMe('co');showModal()});await p.evaluate(()=>{document.querySelector('#modal .opt[data-m="0"]').click()});await p.waitForTimeout(1500);await p.evaluate(()=>{const g=document.getElementById('kg82go');if(g)g.click()});await p.waitForTimeout(2500);await check('3-co');
  await p.evaluate(()=>{const s=document.getElementById('kg82skip');if(s)s.click()});await clear();
  /* 4: lễ tấn phong (she is host) */
- await p.evaluate(()=>{S.bac=300;S.lastPromo=-99;S.sung=90;S.danh=90;S.rank=Math.min(S.rank,5);const r0=S.rank;promoteP(S);if(S.rank===r0){S.rank++;TSA.leHost(S,S.rank)}showModal()});await clear0();await check('4-le-tan-phong');
+ await p.evaluate(()=>{S.bac=300;S.lastPromo=-99;S.sung=90;S.danh=90;S.rank=Math.min(S.rank,5);const r0=S.rank;promoteP(S);if(S.rank===r0){S.rank++;TSA.leHost(S,S.rank)}showModal()});await clear0('Lễ tấn phong|Lễ mừng');await check('4-le-tan-phong');
  await p.evaluate(()=>{const b=document.querySelector('#modal .opt[data-m="0"]');if(b)b.click()});await p.waitForTimeout(1200);await check('4-le-ket-qua');await clear();await p.evaluate(()=>{const t=document.getElementById('rtoast');if(t){t.hidden=true;t.classList.remove('on','show')}});
- await p.evaluate(()=>{const v=liveRivals(false)[3];TSA.leHost(v,v.rank+1);showModal()});await clear0();await check('4-le-cua-nang');await clear();
+ await p.evaluate(()=>{const v=liveRivals(false)[3];TSA.leHost(v,v.rank+1);showModal()});await clear0('Lễ tấn phong|Lễ mừng');await check('4-le-cua-nang');await clear();
  /* 12: birth reward */
- await p.evaluate(()=>{S.th=40;S.sung=40;const r=birthP(S,false);showModal()});await clear0();await check('12-an-thuong-sinh');await clear();
+ await p.evaluate(()=>{S.th=40;S.sung=40;const r=birthP(S,false);showModal()});await clear0('Ân thưởng');await check('12-an-thuong-sinh');await clear();
  /* 14: lantern */
  await p.evaluate(()=>{S.month=1;S.tuan=(FEST.nguyentieu.t||[0])[0];S.buoi=BUOI.length-1;used=0;deal();render();const f=festToday();TSA.denWish(f||{k:'nguyentieu',name:'Nguyên tiêu'});showModal()});await check('14-tha-den');
  await p.evaluate(()=>{document.querySelector('#modal .opt[data-m="2"]').click()});await p.waitForTimeout(1500);await p.evaluate(()=>{const g=document.getElementById('kg82go');if(g)g.click()});await p.waitForTimeout(4000);await check('14-tha-den-choi');await clear();

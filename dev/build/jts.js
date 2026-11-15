@@ -158,25 +158,25 @@ function tsWish(p,host){const a=aff(p,host),g=p===S?0:(host===S?(p.ghen||0):Math
  if(a>=25)return["thân","chúc tỷ muội phúc lộc dồi dào, mãi được thánh ân"];if(g>=50||a<=-25)return["gượng","nói đôi câu chúc lấy lệ, ánh mắt không vui"];return["lễ","chúc theo lễ, lời lẽ chừng mực"]}
 function tsLeHost(p,to){const me=p===S;if(me){const G=tsGuests(S).filter(x=>x!==S);if(!G.length)return;
   /* review ts-a FAIL 3: the guests come into her palace — she sees each face (k61Meet), so a named guest is never a grey "Người lạ" */
-  G.forEach(v=>{try{if(typeof k61Meet==="function"&&!tsNamed(v))k61Meet(v,"Lễ tấn phong")}catch(e){}});
+  G.forEach(v=>{try{if(typeof k61Meet==="function")k61Meet(v,"Lễ tấn phong")}catch(e){}});
   const W=G.map(v=>[v,tsWish(v,S)]);const warm=W.filter(x=>x[1][0]==="thân"),cold=W.filter(x=>x[1][0]==="gượng"),pol=W.filter(x=>x[1][0]==="lễ");
   const lines=warm.slice(0,2).map(([v,w])=>({who:v,text:`${kitName(v)} ${w[1]}.`})).concat(cold.slice(0,2).map(([v,w])=>({who:v,text:`${kitName(v)} ${w[1]}.`})));
   if(pol.length)lines.push(`${pol.length} vị khác chúc theo lễ, lời lẽ chừng mực.`);if(warm.length+cold.length>4)lines.push(`Còn ${warm.length+cold.length-4} vị nữa, xem trong Sổ ghi.`);
   const gifts=G.filter(v=>aff(v,S)>=30&&v.inv&&v.inv.length).slice(0,2);const gl=[];for(const v of gifts){const k=pick(["tuithom","demgam","sonphan","huongtram"]);S.inv.push({k,from:v.id});gl.push(`${v.name}: ${IT[k].n}`)}
   const n=G.length,hi=8*n,lo=4*n;const s=tsS();s.leN=(s.leN||0)+1;
   tsPanel({t:`Lễ tấn phong · ${RANKS[to].n}`,who:pMe(),h:`<p>Thánh chỉ vừa tuyên, ${n} vị phi tần sang cung ngươi dự lễ chúc mừng.</p>${tsFacts(lines)}${gl.length?tsRows([["Quà mừng",gl.join(" · "),"g"]]):""}<p class="past">Theo lệ, chủ lễ phát lì xì cho khách. Phát hậu thì lòng người êm; không phát dễ mang tiếng keo kiệt.</p>`,
-   opts:[tsOpt({n:"Phát lì xì hậu",fx:{bac:-hi},need:[tsNeedBac(hi)],duoc:[`${n} vị khách bớt ghen 6`,"khách quý ngươi +4","Danh +1"],go:()=>{G.forEach(v=>{v.ghen=cl((v.ghen||0)-6,0,100);tsAff(v,4)});apply({danh:1});log(`Lễ tấn phong: ngươi phát lì xì hậu cho ${n} vị khách.`)}}),
-    tsOpt({n:"Phát lì xì vừa phải",fx:{bac:-lo},need:[tsNeedBac(lo)],duoc:[`${n} vị khách bớt ghen 3`,"khách quý ngươi +2"],go:()=>{G.forEach(v=>{v.ghen=cl((v.ghen||0)-3,0,100);tsAff(v,2)});log(`Lễ tấn phong: ngươi phát lì xì cho ${n} vị khách.`)}}),
+   opts:[tsOpt({n:"Phát lì xì hậu",fx:{bac:-hi},need:[tsNeedBac(hi)],duoc:[`${n} vị khách bớt ghen 6`,"khách: thiện cảm +4","Danh +1"],go:()=>{G.forEach(v=>{v.ghen=cl((v.ghen||0)-6,0,100);tsAff(v,4)});apply({danh:1});log(`Lễ tấn phong: ngươi phát lì xì hậu cho ${n} vị khách.`)}}),
+    tsOpt({n:"Phát lì xì vừa phải",fx:{bac:-lo},need:[tsNeedBac(lo)],duoc:[`${n} vị khách bớt ghen 3`,"khách: thiện cảm +2"],go:()=>{G.forEach(v=>{v.ghen=cl((v.ghen||0)-3,0,100);tsAff(v,2)});log(`Lễ tấn phong: ngươi phát lì xì cho ${n} vị khách.`)}}),
     tsOpt({n:"Không phát",mat:["Danh -2","người đang ghen: ghen +3 (chê keo kiệt)"],go:()=>{apply({danh:-2});G.forEach(v=>{if((v.ghen||0)>=40)v.ghen=cl(v.ghen+3,0,100)});log("Lễ tấn phong: ngươi không phát lì xì; có người xì xào chê keo kiệt.")}})]});
   return}
  /* an NPC host: the same rite, she is a guest */
  if(!tsOn()||S.out||S.confined)return;const s=tsS();if(s.leWk===wk())return;s.leWk=wk();const [k]=tsWish(S,p);
  /* the invitation names the host: she is known from now on (name + face) */
- try{if(typeof k61Meet==="function"&&!tsNamed(p))k61Meet(p,"Lễ tấn phong")}catch(e){}const rich=(p.bac||0)>=40;
- tsPanel({t:`Lễ tấn phong ${p.name}`,who:pv(p),h:`<p>${p.name} vừa được tấn phong ${RANKS[cl(to,0,7)].n}. Cung nàng mở tiệc, mời lục cung sang chúc.</p>${tsRows([["Nàng quý ngươi",knows(p)?`${tsQuy(aff(p,S))} · ${aff(p,S)}`:"chưa rõ",aff(p,S)>=11?"g":aff(p,S)<=-11?"r":"n"],["Lì xì",rich?"nhà nàng có của, hẳn phát cho khách":"nàng không dư dả, chưa chắc có lì xì","n"]])}`,
-  opts:[tsOpt({n:"Đến chúc mừng",fx:{suc:-5},need:[tsNeedSuc(5)],duoc:["nàng quý ngươi +5",rich?"lì xì Bạc +6":"nàng nhớ ngươi đến"],kem:k==="gượng"?["ngươi đang ghen với nàng, khó giấu nét mặt"]:[],go:()=>{tsAff(p,5);if(rich){apply({bac:6});p.bac=(p.bac||0)-6}log(`Ngươi sang dự lễ tấn phong của ${p.name}.`)}}),
-   tsOpt({n:"Gửi lễ mừng",fx:{bac:-15},need:[tsNeedBac(15)],duoc:["nàng quý ngươi +6"],go:()=>{tsAff(p,6);p.bac=(p.bac||0)+15;log(`Ngươi gửi lễ mừng ${p.name}.`)}}),
-   tsOpt({n:"Không đến",mat:["nàng quý ngươi -6","nàng oán ngươi +3"],go:()=>{tsAff(p,-6);oanAdd(p,S,3);log(`Ngươi không sang dự lễ tấn phong của ${p.name}.`)}})]})}
+ try{if(typeof k61Meet==="function")k61Meet(p,"Lễ tấn phong")}catch(e){}const rich=(p.bac||0)>=40;
+ tsPanel({t:`Lễ tấn phong ${p.name}`,who:pv(p),h:`<p>${p.name} vừa được tấn phong ${RANKS[cl(to,0,7)].n}. Cung nàng mở tiệc, mời lục cung sang chúc.</p>${tsRows([[kitRel("them",KIT_REL.affThem),knows(p)?`${tsQuy(aff(p,S))} · ${aff(p,S)}`:KIT_REL.unknown,aff(p,S)>=11?"g":aff(p,S)<=-11?"r":"n"],["Lì xì",rich?"nhà nàng có của, hẳn phát cho khách":"nàng không dư dả, chưa chắc có lì xì","n"]])}`,
+  opts:[tsOpt({n:"Đến chúc mừng",fx:{suc:-5},need:[tsNeedSuc(5)],duoc:["thiện cảm +5",rich?"lì xì Bạc +6":"nàng nhớ ngươi đến"],kem:k==="gượng"?["ngươi đang ghen với nàng, khó giấu nét mặt"]:[],go:()=>{tsAff(p,5);if(rich){apply({bac:6});p.bac=(p.bac||0)-6}log(`Ngươi sang dự lễ tấn phong của ${p.name}.`)}}),
+   tsOpt({n:"Gửi lễ mừng",fx:{bac:-15},need:[tsNeedBac(15)],duoc:["thiện cảm +6"],go:()=>{tsAff(p,6);p.bac=(p.bac||0)+15;log(`Ngươi gửi lễ mừng ${p.name}.`)}}),
+   tsOpt({n:"Không đến",mat:["thiện cảm -6","oán ta +3"],go:()=>{tsAff(p,-6);oanAdd(p,S,3);log(`Ngươi không sang dự lễ tấn phong của ${p.name}.`)}})]})}
 /* other NPC guests at an NPC rite follow the same rule silently: lì xì from a rich host lowers their envy a little */
 function tsLeNpc(p){const G=tsGuests(p).filter(x=>x!==S);if((p.bac||0)<4*G.length)return;p.bac-=4*G.length;for(const v of G){if(v.rl)v.rl[p.id]=cl((v.rl[p.id]||0)+2,-100,100)}}
 (function(){const p0=promoteP;promoteP=function(p){const r0=rkOf(p),al=p===S||p.alive;const r=p0.apply(this,arguments);try{if(al&&rkOf(p)>r0&&!quiet&&!(typeof NLP!=="undefined"&&NLP)){if(p===S){if(tsOn()&&!S.out)tsLeHost(S,S.rank)}else{tsLeNpc(p);tsLeHost(p,rkOf(p))}}}catch(e){console.error("tsLe",e)}return r}})();
@@ -261,12 +261,12 @@ function tsDressTotal(p,raw){return raw*4+Math.round(effSac(p)/5)+Math.round((p.
 function tsNpcDress(p,th){const T=TS_THEME[th];const P={};const inv=(p.inv||[]).map(e=>e.k);const smart=roll(40+(p.tamco||0)/2);
  for(const [sl,,fit] of TS_SLOT){const c=inv.filter(fit);if(!c.length)continue;const sc=k=>(T.tags.includes(k)?2:0)+Math.min(1.5,(IT[k].pr||0)/70)-(IT[k].rk>rkOf(p)&&p.trait!=="Kiêu ngạo"?3:0);P[sl]=smart?c.sort((a,b)=>sc(b)-sc(a))[0]:pick(c)}return P}
 function tsDressAnnounce(){const s=tsS();const th=pick(Object.keys(TS_THEME));s.dress={th,m:S.month%12+1,y:S.month===12?S.year+1:S.year};const T=TS_THEME[th];const H=tsDressHost();
- /* the Hoàng hậu announces it at the morning greeting: she sees her face (no named grey figure) */try{if(H&&typeof k61Meet==="function"&&!tsNamed(H))k61Meet(H,"Thỉnh an")}catch(e){}
+ /* the Hoàng hậu announces it at the morning greeting: she sees her face (no named grey figure) */try{if(H&&typeof k61Meet==="function")k61Meet(H,"Thỉnh an")}catch(e){}
  const have=TS_SLOT.filter(([sl,,fit])=>S.inv.some(e=>fit(e.k)&&T.tags.includes(e.k))).length;
  tsPanel({t:"Hội phối đồ: báo đề",who:H?pv(H):pTH(),art:"img/ev-yen-tiec.webp",h:`<p>${H?`Hoàng hậu ${H.name}`:"Thái hậu"} truyền: trung tuần tháng sau mở hội phối đồ trong ngự hoa viên. Đề năm nay: <b>${T.n}</b> (${T.d}).</p>${tsRows([["Bốn chỗ","Cài tóc · Đeo tay · Áo · Hương, phấn","n"],["Ngươi có",`${have}/4 chỗ có đồ hợp đề`,have>=2?"g":"r"],["Lưu ý","đồ vượt phẩm vị bị trừ nặng nếu bị nhận ra","n"]])}`,
   opts:tsBorrowOpts(th).concat([tsOpt({n:"Đã hiểu, sẽ chuẩn bị",duoc:["mua thêm đồ ở Nội vụ phủ hay mượn của người thân trước hội"]})])})}
 function tsBorrowOpts(th){const T=TS_THEME[th];const s=tsS();if(s.borrow)return[];const F=liveRivals(true).filter(v=>aff(v,S)>=25&&v.inv&&v.inv.some(e=>T.tags.includes(e.k)&&!S.inv.some(x=>x.k===e.k)));
- return F.slice(0,2).map(v=>{const e=v.inv.find(e=>T.tags.includes(e.k)&&!S.inv.some(x=>x.k===e.k));return tsOpt({n:`Mượn ${IT[e.k].n} của ${v.name}`,need:[{t:`nàng thân với ngươi (${aff(v,S)}/25)`,ok:aff(v,S)>=25}],duoc:[`${IT[e.k].n} dùng cho hội, xong thì trả`],mat:[],kem:["nàng quý ngươi -2 (nợ ân tình)","làm mất hay hỏng thì phải đền"],
+ return F.slice(0,2).map(v=>{const e=v.inv.find(e=>T.tags.includes(e.k)&&!S.inv.some(x=>x.k===e.k));return tsOpt({n:`Mượn ${IT[e.k].n} của ${v.name}`,need:[{t:`nàng thân với ngươi (${aff(v,S)}/25)`,ok:aff(v,S)>=25}],duoc:[`${IT[e.k].n} dùng cho hội, xong thì trả`],mat:[],kem:["thiện cảm -2 (nợ ân tình)","làm mất hay hỏng thì phải đền"],
   go:()=>{const i=v.inv.indexOf(e);if(i>=0)v.inv.splice(i,1);S.inv.push({k:e.k,from:v.id,tsB:v.id});s.borrow=1;tsAff(v,-2);log(`Ngươi mượn ${IT[e.k].n} của ${v.name} để dự hội phối đồ.`)}})})}
 function tsDressReturn(){const s=tsS();s.borrow=0;for(let i=S.inv.length-1;i>=0;i--){const e=S.inv[i];if(!e.tsB)continue;const v=RV(e.tsB);S.inv.splice(i,1);if(v&&v.alive){v.inv.push({k:e.k,from:"me"});log(`Ngươi trả ${IT[e.k].n} cho ${v.name}.`)}}}
 function tsDressHold(){const s=tsS();const D=s.dress;if(!D||D.m!==S.month||D.y!==S.year)return;s.dress=null;const th=D.th,T=TS_THEME[th];
