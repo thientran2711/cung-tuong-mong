@@ -11,7 +11,9 @@ def strings(o):
     elif isinstance(o,list):
         for v in o: yield from strings(v)
 def lines(key):
-    for line in open(T,errors="ignore"):
+  for TT in T.split(":"):
+    if not os.path.exists(TT): continue
+    for line in open(TT,errors="ignore"):
         if key not in line: continue
         try: o=json.loads(line)
         except Exception: continue

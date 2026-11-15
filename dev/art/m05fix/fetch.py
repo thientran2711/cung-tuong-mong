@@ -1,7 +1,7 @@
 # fetch.py FACE... : download edits listed in edits.txt (last id per face+tier wins), paste, ecrop + cmp sheets
 import sys,os,subprocess
 H=os.path.dirname(os.path.abspath(__file__))
-os.environ["TX"]="/root/.claude/projects/-home-user-cung-tuong-mong/d64e4822-8005-553d-be5a-3c77c37ea939/subagents/agent-a8fc7f5e0876349f1.jsonl"
+os.environ["TX"]="/root/.claude/projects/-home-user-cung-tuong-mong/d64e4822-8005-553d-be5a-3c77c37ea939/subagents/agent-a8fc7f5e0876349f1.jsonl:/root/.claude/projects/-home-user/d64e4822-8005-553d-be5a-3c77c37ea939/subagents/agent-a8fc7f5e0876349f1.jsonl"
 E={}
 for l in open(f"{H}/edits.txt"):
     p=l.split()

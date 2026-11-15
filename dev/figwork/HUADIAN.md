@@ -29,6 +29,8 @@ người đó ở đỉnh; toàn vàng, KHÔNG xanh thuý lam trên da. Prompt: 
 - t8 (Hoàng hậu): phượng cách điệu MẢNH bằng vàng lá mỏng sát da, thân và đuôi uốn chữ S ôm hoa son nhỏ (hoạ tiết riêng), khảm thuý lam; không khung tròn, không vòng trai; cỡ ≈1.2 lần t1 (85% mẫu cũ). Mọi hoa điền là son VẼ trên da / vàng lá dát mỏng, không phải trâm cài hay huy hiệu.
 Mẫu (sếp duyệt t1–t5; t6 thu gọn, t7 dát phẳng làm lại, t8 thu 85% — art8, chờ sếp xem): dev/figwork/sheets/huadian_c03_face_t1..t8.jpg (toàn mặt), huadian_c03_face_all.jpg, huadian_c03_t1..t8.jpg (cận). Tất cả là gpt-2-6 edit, không ghép bằng code.
 
+Đổi hoa điền đồ vật -> hoa lá (sếp 15/11): c17, c27 (dev/art/m05fix/HUADIAN_SWAP.md).
+
 | ID | Hoạ tiết riêng (giữ suốt đời) | Màu son bậc thấp | Tranh t1 hiện có |
 |---|---|---|---|
 | c01 | a five-petal plum blossom | soft rose pink | chưa có (thêm khi sửa) |
@@ -47,7 +49,7 @@ Mẫu (sếp duyệt t1–t5; t6 thu gọn, t7 dát phẳng làm lại, t8 thu 8
 | c14 | a tiny chrysanthemum | soft orange-red | chưa có (thêm khi sửa) |
 | c15 | a slim vertical willow leaf | rose red | chưa có (thêm khi sửa) |
 | c16 | a six-petal snowflake flower | pale pink | chưa có (thêm khi sửa) |
-| c17 | a tiny red-bean heart | rose red | chưa có (thêm khi sửa) |
+| c17 | a tiny heart-shaped redbud (zijing) leaf with a fine central vein and a few side veins (sếp 15/11: thay "a tiny red-bean heart"; t8 phượng giữ nguyên) | rose red | chưa có (thêm khi sửa) |
 | c18 | a small lozenge diamond | coral red | chưa có (thêm khi sửa) |
 | c19 | a small open lotus flower | cinnabar red | có: chấm son đỏ dạng hoa nhỏ |
 | c20 | a tiny camellia | soft pink | chưa có (thêm khi sửa) |
@@ -57,7 +59,7 @@ Mẫu (sếp duyệt t1–t5; t6 thu gọn, t7 dát phẳng làm lại, t8 thu 8
 | c24 | a small ginkgo leaf | coral red | chưa có (thêm khi sửa) |
 | c25 | a tiny swallow | rose pink | chưa có (thêm khi sửa) |
 | c26 | a crescent with a dot above it | rose red | chưa có (thêm khi sửa) |
-| c27 | a small flaming pearl | vermilion | chưa có (thêm khi sửa) |
+| c27 | a tiny red spider lily: a few slim curling ribbon petals radiating from the centre with long fine curved filaments (sếp 15/11: thay "a small flaming pearl"; t8 phượng giữ nguyên) | vermilion | chưa có (thêm khi sửa) |
 | c28 | a single round pearl dot | soft pink | chưa có (thêm khi sửa) |
 | c29 | a tiny phoenix tail-feather | rose red | chưa có (thêm khi sửa) |
 | c30 | a small wave crest | coral red | chưa có (thêm khi sửa) |
