@@ -206,3 +206,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (01:55Z) Owner: áo khuê các (thiếu nữ ngoài cung) vẽ đủ 84 mặt (32 phi tần + 52 cung nữ).
 - (02:25Z) Owner DUYỆT áo khuê các (mẫu 4 mặt c05 c08 c29 m05, nét sáng mềm hơn chấp nhận) → vẽ nốt 80 mặt, nối vào tuyến tiểu thư.
 - (02:30Z) Owner: thêm trang phục cô gái nhà nghèo cho tuyến ngoài cung. Điều phối: xuất thân thd (thầy đồ nghèo) và td (tội thần) mặc áo nghèo; tt/dtq/muoi/ch mặc khuê các. Áo nghèo = vải thô/bông màu nhạt, trâm gỗ, gọn sạch xinh — không vá, không rách (giữ luật 'không ai trông thảm'). Thử 4 mặt trước rồi gửi sếp duyệt; 84 mặt.
+- (02:35Z) Owner chê hoa điền m05 'hai quả anh đào' (trông như trái cherry). Đổi m05 sang một bông hoa anh đào nhỏ (5 cánh có khía), mọi bậc t1–t8 × 4 tuổi. Nhánh review/m05-huadian. Chưa đổi các mẫu đồ vật/quả khác (sếp chưa chê) — đã hỏi sếp.
