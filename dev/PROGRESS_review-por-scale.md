@@ -32,11 +32,14 @@ Coordinator 15/11: sons and daughters are ONE group (the Hoàng tự list mixes 
   that moved heads sideways person to person). Revert = keep the old bodyX values.
 - Measurement noise: re-measuring the same face after resampling moves fh up to ~±6 % on some crowned/tilted faces → 28/3317 outside ±4 %
   after; not chased further.
-- CDN upload: `python3 dev/site/cdn_sync.py img` (img/ = 3317 por-*.webp + 4 manifests) — see _work/cdn.log.
+- CDN upload DONE 15/11 ~20:45Z: 3317 por-*.webp + POR_FACE2/veil-fit/scar-fit/toil-fit.json (md5 checked), _index v=a36f5709e45f.
+- ROLLBACK copy (originals of every changed picture + the 4 old manifests + measurements m-before/m-after.json):
+  /home/user/wt/porscale-orig/ (150 MB, not in git). Restore = copy into img/ and `cdn_sync.py --force` those files.
+- To redo: fetch.py porlist → measure.py → plan.py → recrop.py → sync_json.py → report.py (all in dev/figwork/porscale/).
 
 ## Notes for others
 - mk-colour worker (img/mk-fit, `mkfit.py --stale`): these player portraits changed crop → rerun `--stale` after the CDN upload:
-  por-player-look1-t3-a18, look2-t1-a36, look2-t3-a18, look3-t3-a18, look4-t1-a18, look4-t3-a18 (and 1166 consort / 1839 maid / 182 kid
+  por-player-look1-t3-a18, look2-t1-a36, look2-t3-a18, look3-t3-a18, look4-t1-a18, look4-t3-a18 (and 1168 consort / 1839 maid / 182 kid
   portraits, full list dev/review/por-scale/recrop.json). Any worker holding a per-por face box: recompute from the CDN after this upload.
 - Existing issue seen (not changed): the veil/scar layer box (.kfx in jk2b §7) is laid at window size, top 9 %, and does not follow jkpor's
   per-picture zoom/lift. After this branch the zoom is constant per group, so the error is at least the same for everyone in a group.
