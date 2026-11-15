@@ -114,7 +114,7 @@ Read it live: `RCOL[rank]`, or `KIT_RANK_COL[rank]` / `KIT_RANK_COL.cold` / `kit
 | modal / dialog / panel | `kitPanel(spec)` / `kitModal(spec)` (j79) → `.dlg.kpanel` | section 8. Legacy `Q.push({t,h,opts,who})` is converted automatically; `pframeArt(placeArt)` / random room art is never shown |
 | facts | `kitFacts(facts)` (j79) | section 9: one fact per row, never a joined string |
 | intel / evidence / threat | `kitIntel(list)` `kitEvidence(e)` `kitThreat(t)` (j79) | section 10 |
-| odds meter | `kitOdds(word|number)`; `oddsChip(w)` now draws it (j79) | section 11: the ONE 7-step scale (acts, HUD chances, risks) |
+| odds meter | `kitOdds(word|number)`; `oddsChip(w)` now draws it (j79) | section 11: the 7-step ladder for the act's own odds only; side chances + HUD use `chanceW`/`chanceLvl` (Rất thấp…Rất cao) |
 | glossary | `kitGloss(term)`, `KIT_GLOSS` (j79) | section 12 |
 | mini-game frame | `kitGameFrame` `kitGameSet` `kitGameResult` (j79) | section 13 |
 | scene panel | `kitPanel({scene:true,…})`, `kitTiles(list)` (j79) | section 14 (identity card, opening story, title screen) |
@@ -359,12 +359,21 @@ Rules
 - `kitThreat({who, how, sure:"Khá chắc", when, defs:[{n, odds, ton, duoc, mat, kem}]})`: red-tinted card; who (face + rank title, or "Kẻ chưa rõ mặt"),
   how, how sure (odds meter), when, then "Cách đỡ" defence options as ACT CARDS.
 
-## 11. ODDS METER (j79) — the ONE chance scale
-`kitOdds(word|percent)` → `.kodm`: 7 segments filled to the level, coloured red → amber → green, plus the word.
-Ladder: Liều < Khó < Năm ăn năm thua < Khá chắc < Chắc < Rất chắc < Nắm chắc (`word()` thresholds 31/46/56/66/81/91). Tap → popover with the whole
-ladder, current step highlighted (never a modal). `oddsChip()` draws it, so every act card / option uses it; the HUD chances (Có thai, Lật thẻ) use it;
-`chanceLvl()` (old Rất thấp…Rất cao) now returns the ladder word. Never %, never "Chắc chắn" (sure acts show nothing). 0 → "Không có".
-Death risks on scheme buttons are computed from the real formula (poison / kpoison / pond) and shown as "nàng chết: <word>".
+## 11. ODDS METER (j79) + CHANCE SCALE (j1) — TWO scales, never mixed (owner 11/14 + 11/15 03:05Z, review/sub-odds)
+**Ladder = the act's own success/failure ONLY.** `kitOdds(word|percent)` → `.kodm`: 7 segments filled to the level, red → amber → green, plus
+the word. Ladder: Liều < Khó < Năm ăn năm thua < Khá chắc < Chắc < Rất chắc < Nắm chắc (`word()` thresholds 31/46/56/66/81/91). Tap → popover
+with the whole ladder. It is the ONE word in the act card's corner / beside a dialog option (`oddsChip()`), and nowhere else.
+**Chance scale = every side chance.** Anything that may come along with an act or stands in her state — có thai, được ban thưởng, lật thẻ,
+bị lộ / bị phát giác, bị phạt, chết, nàng sảy thai… in Được / Mất / Kèm, result cards, Sổ ghi, hints, the stage chips — reads on
+Rất thấp < Thấp < Vừa < Cao < Rất cao (0 → "Không có"), the same scale as the HUD/stage chips:
+- `chanceLvl(n)` → "Thấp" (chips: `Có thai: Thấp`) · `chanceLo(n)` → "thấp" · `chanceW(n)` → "khả năng thấp" (inside a row:
+  `có thai: khả năng thấp · được ban thưởng: khả năng vừa`; 0 → "không có khả năng"). Thresholds 8/18/35/60. All in `j1.js` next to `word()`.
+- Never write `label: ${word(n)}` in a gain/risk/kèm string — write `label: ${chanceW(n)}`. Sổ ghi after the fact: `(khả năng: vừa)`.
+- `kitBranchFx` (dilemma options read from `roll(N)` branches) writes its side rows with `chanceW`; the option's main roll keeps the ladder.
+- `CHW` (j1) recognises a chance phrase so `dilLine` treats a line with side chances like before (no "Khó lường").
+- Death risks on scheme buttons come from the real formula (poison / kpoison / pond): "nàng chết: khả năng thấp" (`kpDeathWord`).
+- Check: `node dev/test/sub-odds.js <site> index.html <out> after` (word detector: no ladder word after ':' or '(').
+Never %, never "Chắc chắn" (sure acts show nothing).
 
 ## 12. GLOSSARY (j79)
 `KIT_GLOSS` holds the plain meaning of every game term; `kitGloss(term)` draws it with a dotted underline, tap = popover. Delta chips and tiles
@@ -937,11 +946,23 @@ Plaques: `--k3pl` = `rgba(255,250,240,.88)`, `1px --line`, radius 8, text ≥ .7
   Mang thai, Lãnh cung, Cấm túc …).
 - RIGHT column: Hoàng thượng (mood) · Thái hậu · Hoàng hậu (`với ngươi ±N` green/red, mood only when known: no "chưa rõ" filler) · her servant
   (`Lòng N`) — tap = that person's card. Servant road: + Hoàng thượng để ý, Lương tháng, Công lao.
+- ÂN SỦNG plaque (owner 11/15 04:05Z, review/sub-odds; `k3AnSung` / `k3AsRows`, jk3) right UNDER the court chips, same solid plaque card and
+  column width: header "Ân sủng", one fact per line, label left / value right, labels never cut: Tai mắt N · Có thai: Rất thấp…Rất cao ·
+  Lật thẻ: Rất thấp…Rất cao (`chanceLvl`, j1 — the chance scale, NEVER the act ladder) · Ân tình (đêm) N · Số lần ân thưởng N ·
+  Bổng lộc: sau N tuần (shown nowhere else). Consort road only (not the servant road). Tap a row = that fact's own card (j19 HX text,
+  Bổng lộc card, Ân thưởng card) via `k3Explain(k)`.
+- CROWDED stage (`k3AsCrowded`: the right column would pass the stage floor − 8 px, or touch a figure body `kitFigRects()` or a name tag):
+  the plaque collapses to ONE chip "Ân sủng ›" (`.kas-one`); tap = a small kit card (`kpPop`, `.kascard`) listing the same rows. Re-checked
+  whenever the content or the stage size changes. Measured at Fold 755x1000, iPad 820x1180 / 1180x820 / 1366x1024, phones 412 / 390.
 - The figures stand BETWEEN the two columns: j59 reads `--kgl/--kgr` (the plaques' real widths) as gutters; measured 0 plaque/figure overlaps.
-- Tap a plaque = the full status SHEET: a centred kit sheet (`#hud2 .khg`, max 760 px, dim backdrop, sticky "Thu lại" header, scrolls inside,
-  tap outside / Esc closes). Never inside the bottom panel, never hides other chips.
-- One fact, one place: date (top bar), khắc + weather + Quẻ (time plaque; the old dots ●●●● are gone), Thái hậu/Hoàng hậu attitude (their chip;
-  rows hidden in the sheet's Nhân tâm), Sủng (top bar), Chủ tin (top bar on the servant road).
+- NO STATUS SHEET (owner 11/15 04:05Z): the "Tư chất · trạng thái" sheet (`#hud2 .khg`) and every opener are gone — `k3Sheet(true)` is a
+  no-op, `#hud2` is kept folded (`hclh-h2c` forced to "1") and stays only as the hidden data source of the plaques. A tap on a plaque row or on
+  a top-bar Tư chất cell opens that fact's own explanation (`k3Explain`), never a sheet. Its rows all live elsewhere: Tư chất (top bar), Tai mắt +
+  Ân sủng + Bổng lộc (Ân sủng plaque), Lòng cung nữ + Trong cung (court chips), Quẻ tuần (top bar time row).
+- One fact, one place: date (top bar), khắc + weather + Quẻ (time plaque; the old dots ●●●● are gone), Thái hậu/Hoàng hậu attitude (their chip),
+  Sủng (top bar), Chủ tin (top bar on the servant road).
+- Check: `node dev/test/an-sung.js <site> index.html <out> after` (column inside the stage, no overlap with figures / name tags, no clipped label,
+  no ladder word, the sheet cannot open, the collapsed chip opens its card).
 
 ### 31.3 ONE STAGE SIZE
 Portrait split (only when the phone shell 31.7 is off): fixed aspect 2:1 (600–999 px) / 3:2 (< 600 px) on EVERY tab (no more 22/24 dvh "card tab" squeeze); the panel below scrolls. Landscape: the left column.
@@ -1062,6 +1083,29 @@ A dialog may carry `headArt:"img/…webp"` or `{src,label}` → wide kitSceneArt
   container (kitBookSpread, review/page-curl) as they are.
 - Card left column: name → rank → frame at full column width, trimmed so the frame's ornament (crest / cloud top, `img.kcrest --ct`) starts
   right under the rank (gap ≤ 12 px, measured 686 + 1180); the trim runs throttled (it starved under constant DOM mutations before).
+
+### 31.19 ACT ORDER — doable first (owner 11/15 04:55Z "Nên để hành động nào làm được ở trên cùng") — `kitActSort` (jk3, end)
+Every act list (Hành sự and each category tab, person-card act groups, Cung nhân, map place acts — any `.cards` / `.rbtn` whose children are
+all act cards `button.ka`) reads: 1) doable now · 2) blocked ONLY by time (every ✗ in Cần is a buổi / khắc item) · 3) blocked by anything else
+(greyed). Source order is kept inside a group. The order is decided once per list per buổi (`KAS_ORD`, keyed by the set of acts + date + buổi)
+and then kept: doing an act (it turns "đã làm") never makes the list jump while she reads. A list is classified only after its greyed cards
+have their Cần row. Check: `dev/test/sub-odds.js` (order.sorted / order.stable).
+
+### 31.20 EFFECT ROWS SAY REAL EFFECTS (owner 11/15 04:55Z–07:05Z)
+- Được / Mất / Kèm carry only real game effects with a number or a concrete consequence. No flavour ("được tiếng cứng cỏi", "giữ lễ",
+  "giữ êm thể diện", "cha mẹ vui lòng", "Thái hậu vui lòng" next to "Thái hậu quý ngươi +3"): map it to its stat or drop it.
+- A positive never sits on the red Kèm line (j63 `kaRows`: a green item written under "kèm:" goes to Được).
+- Relations read subject + verb + object with the number: "Hoàng hậu quý ngươi +4", "Thái hậu quý ngươi +8", "nàng quý ngươi -3",
+  "Hắn quý ngươi +15", "nàng oán ngươi +9". Never the bare word "thiện cảm", never "X với ngươi". `NAMES.th/hh` = "Thái hậu / Hoàng hậu quý
+  ngươi". `S.hh` IS the Hoàng hậu's own regard for her (j24 `hhBind`); the result card shows the real before→after ("quý ngươi hơn (0→4, +4)").
+  Personality can scale a positive regard change (persF trust): the result card shows the true number. Audit: `dev/test/rel-audit.js`
+  (every Hành sự act × 3 origins × 3 buổi + every talk option on 6 consorts: a claimed "quý ngươi ±" must move that field; 0 mismatches).
+- Đức warning on acts that lower Đức below the bar: ONLY "Đức 33 → 28" on the Kèm line (`ducWarnTxt` j19 / `ducWarn` j6), never "còn 28",
+  never a rank-rule suffix; rank requirements live in the rank / promotion screens.
+- No placeholder rows: "không mất gì" / "không được gì" never show in Mất / Được (j63 `kaRows`); a row that would be empty is omitted.
+- A side risk that comes with an act (being seen, a rumour…) is a Kèm item on the chance scale with its real consequence:
+  "bị người thấy, một phi tần nắm 1 chứng cứ: khả năng thấp" — never an odds word glued into Được.
+- GHI CHÚ only when it adds information: a note that repeats Cần ("(chỉ buổi tối)" when Cần shows "Buổi tối") is dropped (`kaNoteDedup`, j63).
 
 ## 32. KIT 4 · ONE STAT CELL · EVENT STAGE · EVENT FRAMES (kit owner #3, owner + review 11/14) — `dev/build/jk4.js` (after jk3, before j84)
 

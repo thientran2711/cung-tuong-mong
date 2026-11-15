@@ -62,6 +62,13 @@ function spend(c){used=Math.max(0,used+c)}
 function pips(n){n=Math.max(0,Math.min(4,n));return `<span class="pip">${"●".repeat(n)}${"○".repeat(4-n)}</span>`}
 
 function word(o){return o>=91?"Nắm chắc":o>=81?"Rất chắc":o>=66?"Chắc":o>=56?"Khá chắc":o>=46?"Năm ăn năm thua":o>=31?"Khó":"Liều"}
+/* TWO scales, never mixed (owner 11/14, coordinator 11/15): word() above = the 7-step ladder, ONLY for the act's own success/failure (the one
+   word in the card corner / beside an option). Every side chance of something that comes along (có thai, được ban thưởng, lật thẻ, bị lộ,
+   chết… in Được / Mất / Kèm, result cards, Sổ ghi, hints, the HUD) reads on the chance scale Rất thấp / Thấp / Vừa / Cao / Rất cao. Same numbers. */
+function chanceLvl(n){return n<=0?"Không có":n<8?"Rất thấp":n<18?"Thấp":n<35?"Vừa":n<60?"Cao":"Rất cao"}
+function chanceLo(n){return chanceLvl(n).toLowerCase()}
+function chanceW(n){return n<=0?"không có khả năng":"khả năng "+chanceLo(n)}
+const CHW=/khả năng (rất thấp|thấp|vừa|cao|rất cao)|không có khả năng/;
 function cl(v,a,b){return Math.max(a,Math.min(b,v))}
 function roll(o){return Math.random()*100<o}
 function has(t){return S.emp.traits.includes(t)}
