@@ -29,7 +29,8 @@ dev/test/coop-pets.js (new), dev/test/coop-audit.py (new) → dev/coop/COOP_AUDI
 ## Tests
 - dev/test/coop-pets.js (live Worker, host 755x1000@2 + guest 1180x820@2): 2 rounds 44/44, 4 rounds 48/48 (pre-gift), 6 rounds 56/56 (pre-gift),
   final build 2 rounds 44/44 (incl. gift). One early run had a week not merging in 60 s under load 14 (not reproduced in 3 later runs).
-- coop-e2e: see final report (box load ~40 on 4 CPUs; page.goto 30 s timeouts at B's rejoin → `E2E_TO=120000`).
+- coop-e2e (E2E_TO=120000, load ~40): 3 runs 59/59 each. pets-fix.js 755x1000@2, 1180x820@2, 844x390@3 + old save (main): pass, 0 errors.
+  Final build (No label) coop-pets 2 rounds 44/44.
 
 ## Open / next
 - Big co-op items (not started): B1 friend's items/kids/servant entry, B2 nights + heir host-authoritative, B3 Emperor death, B4 festivals +
