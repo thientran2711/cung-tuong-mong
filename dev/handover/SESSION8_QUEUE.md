@@ -81,3 +81,4 @@ j72 bước vs Hồi · stage paper halo · Thái hậu title bronze vs plum · 
 | C23 | review/mg-easy (owner s8: Thơ minigame too hard; visible rhyme, hints, level-scaled; audit all knowledge minigames) | QUEUED-NEXT |
 | C24 | review/chapter-detail (owner s8: tap chapter shows nothing; detail + inline progress; no dead taps) | QUEUED-NEXT |
 | C25 | review/press-fx (owner s8: whole pane bounces on any tap; press fx only on the tapped control) | QUEUED-NEXT |
+| C26 | review/stat-fx (owner s8: slower readable stat +/- with name, cell glow/pulse/scale) | QUEUED-NEXT |
