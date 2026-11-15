@@ -452,3 +452,6 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (13:20Z) Tự học cắm hoa mà ảnh là cuốn sách → tách ảnh "Tự học" chung thành ảnh riêng từng môn (cắm hoa, thư pháp, đàn, cờ, vẽ, nấu, thêu, múa…), làm trước.
 - (13:20Z) review/kit-close vòng 2 sẵn sàng kiểm (Tư trang 2 tab, thẻ tin giữ + đổi tên "Tin trong cung buổi này", chắn bấm lọt) → R5. ts-a trả về → af76 sửa.
 - (13:25Z) Sự việc trả quà (Khương Lạc Anh) phát tiếng cười vô lý → âm thanh theo ý nghĩa sự việc. Các nút chọn trong sự việc không có Được/Mất → rà TOÀN BỘ sự việc, mọi lựa chọn phải có Cần/Tốn/Được/Mất + mức chắc + Vì sao; bỏ "TỐN không".
+- (13:30Z) LỖI GẤP: nút chọn trong sự việc (gối đầu đêm thị tẩm…) mất Được/Mất dù code có → bộ vẽ lựa chọn làm rơi chữ kết quả. Sửa trước (af76, review/opt-render).
+- (13:30Z) Thị tẩm được Sủng +5, Đức +3, Ân tình +6 mà đóng dấu BẠI → dấu THÀNH/BẠI chỉ theo kết quả thật của việc, không đếm dòng; ghen của người khác là KÈM, gộp 1 dòng; Bạc −5 phải truy nguồn.
+- LIVE CDN (13:30Z) 200 ảnh vật phẩm sửa viền cắt, bỏ chữ Hán, vẽ lại áo múa/điệu múa/thế cờ. j83 đa dạng: chọn phương án A (10 món × 4 phẩm).
