@@ -584,3 +584,29 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 ## 15/11 ~21:00Z — Pre-palace route status; face reveal when they approach her (owner)
 - Owner asked if the route BEFORE entering the palace (tiểu thư ngoài cung, jkc.js) is done so she can start a new life. Checked: it is built on review/outside @ 0062c04d (owner-approved plan dev/OUTSIDE_PLAN.md) but was NEVER merged; it is based on a much older main (diff vs main: 129 files, −9.7k lines) → must be re-ported onto current main + reviewed before she can play it.
 - FACE REVEAL (fix the whole class): she learns a face not only when she approaches someone, but whenever THAT PERSON appears to her in an event dialog (comes to talk, picks a quarrel, frames/harms her, any event box where the person is shown). From that moment the avatar AND the full-body figure show the real face (no grey silhouette), everywhere that person appears.
+
+## 15/11 ~20:05Z — Big owner batch (recorded by session 6, assigned by session 7)
+ANSWERS to open questions:
+- Son's birth = direct promotion, no exam. Daughter's birth = exam. Servant/mama road (cung nữ road) = exams too.
+- doat-giai pictures with the Emperor handing the prize: KEEP.
+- Huadian size: 8.5%.
+- Ngự tứ pet life-save stage: owner asked coordinator to recommend (Linh thú now vs Trưởng thành) → coordinator decides; pet bar label "No" vs "Đói": owner did not pick → coordinator decides.
+- Co-op: helping/harming/stealing a friend's pet must be wired NOW. RULE: every feature must work in 2-player co-op; no "later".
+- Animation/frames ideas: once ideas are given, BUILD them without waiting for approval. Any future needed animation: just do it.
+
+BALANCE / SYSTEMS:
+1. Thái hậu thỉnh an gives thiện cảm almost every morning (+8, "khá chắc"); she reached 50+ while consorts stay <5–10. Needs events that LOWER Thái hậu's affection, and her reactions must depend on her personality (some Thái hậu are harsh). Thỉnh an gain must not be a flat +8.
+2. PERSONALITY SYSTEM for EVERY character (player included, same feature set for all): personality groups so people treat each other differently (not one colour); each person has a "trọng" (what they value), taken from the 13 virtues (hiếu, lễ, nghĩa…). Every action has a base scale; the gain/cost is scaled by the target's personality and trọng (more or less than base). Audit all people: whatever she has, they have; whatever they have, she has.
+3. MOOD (The Sims-like) separate from the per-event emotion cell: a mood bar that goes up/down with successes/failures, events, needs; mood bands (vui/buồn/giận/hờn…) change success odds of her acts, her choices and how others see her (e.g. sad → someone who loves her comes to comfort her). Applies to NPCs too.
+4. Stipend skimming (cắt xén bổng lộc): check whether only bạc is skimmed; also skim items (fewer items, or a lower grade than due).
+5. Poisoning the Emperor / Thái hậu must be POSSIBLE (now never allowed): e.g. she hates him; story lines like a liaison with a Vương gia → poison the Emperor to put the Vương gia on the throne; kill a harsh Thái hậu. With proper risk/consequences.
+6. Emperor visits in person: besides being carried wrapped to his chamber, sometimes the Emperor comes to HER palace and stays the night (rare; more likely at high Sủng). Gives more Danh/Sủng but more jealousy, Thái hậu may be displeased. Build + ideas.
+7. Stolen clothes (cướp y phục): the theft may target the outfit she wears, an outfit in the wardrobe/mirror, etc. by event; if she loses her only outfit she must get a re-issue (Nội vụ phủ / stipend / family), never stuck in trung y forever. Show the odds when she answers back.
+8. Start of a life as a thiếu nữ: a chest/delivery of her girlhood belongings appears; these clothes and jewellery (gold/jade hairpins, gold bangles, sachets…) fill ALL 6 slots with ordinary girlhood items and she may keep them into the palace (fallback outfit).
+9. PROMOTION REWARDS: every rank-up gives a full set (dress + full jewellery set, plus extras like cloth, food, drink…). Two screens: (1) reward chest with items → Nhận; (2) then the new eunuch/maid assigned appears: full-body transparent figure big in the centre, with a cổ trang line ("Nội vụ phủ phụ cấp thêm …") → Nhận.
+10. Header: the top bar keeps only HER info. Other people's info (Emperor Ân tình/Ân sủng, Thái hậu, Hoàng hậu…) moves to tabs in her room (tap the Emperor tab → his info).
+11. SOUND by event GROUP (not per event): dramatic events → dramatic music, romantic → romantic, etc.; music AND human voices; game must not feel too quiet. Plus animations and screen effects.
+12. Event FRAMES by event group, main story and side story (build).
+13. Animations to build (all approved): people slide in / fade out of the stage; promotion = portrait frame changes to the new rank frame, rank chip text changes, light gold glow; demotion / cold palace = rank chip cracks and falls, frame fades to grey; dragged away for punishment = figure dragged off stage, screen dims; slapped / scolded = one-beat screen shake + brief red flush; death = figure greys, fades, white silk falls over; pregnancy announced = soft pink light around her; birth = swaddled baby appears in her arms / beside her; favoured = petals fall around her; poisoned = figure tints green then blurs; alliance / betrayal = red thread joins two people or snaps.
+14. UPDATE NOTES: after each live update, a small notice (not always shown) — tap it to see what changed in that version; plus a button in Settings ("Thông tin cập nhật") listing each version's changes. Very short: only what went live / what was fixed. No long text.
+15. Spawn a HISTORY expert worker and a GAME-DESIGN expert worker to dig ideas from palace-drama films/history that the game lacks → add them (then build without waiting).
