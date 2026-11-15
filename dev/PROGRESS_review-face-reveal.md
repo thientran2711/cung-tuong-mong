@@ -68,3 +68,15 @@ event-dp.js 1180: unchanged layout numbers.
   are also faces on day one; this branch makes ANY person's first dialog reveal them. Merge: both edit j61 near k61InitNew/normAll
   (different lines).
 - Site rebuilt (dev/site/build_site.sh).
+
+## Review r1 (review/face-reveal-r1, merged onto origin/main e5a327d1)
+Merge: only generated files conflicted (index.html, sw.js, assets.json) -> took main's and rebuilt. small-bugs-2 (k61SeedChiTon) not on main yet.
+Reviewer fixes (dev/build/j61.js, j79.js, jevb.js):
+1. WHEN: j68 `evGate` is assembled BEFORE j61, so it ran INSIDE the j61 showModal wrapper: k61Shown(Q[0]) revealed / met the person of an
+   optional event that evGate then held or dropped (never drawn). Repro: stranger-sweep live dialog was held -> shown:false but met:true.
+   Now the reveal runs right after evGate (wraps evGate), with a fallback in showModal when j68 is absent / an item was missed.
+   Test: stranger-sweep `heldNoReveal` {shown:false, met:false}; `dialogReveal` {shown:true, face:true, met:true}.
+2. Look-up panels she opens herself (kitIntelPanel "Đã biết về X", kitEvidencePanel "Chứng cứ về X", mood box "Tâm trạng · X") went
+   through kitPanel -> Q -> showModal with `subject` = the person: opening one on an unmet stranger made her met + face known.
+   Now these specs carry `look:1` and k61Shown skips them. Test: dev/test/face-reveal-look.js (before: st 0->1, met true; after: unchanged).
+KIT.md §49.3b notes both rules.

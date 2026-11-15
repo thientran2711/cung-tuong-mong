@@ -37,7 +37,7 @@ function lineMap(html){const asm=fs.readFileSync(path.join(__dirname,'../build/a
    const s0=showModal;showModal=function(){const m=Q[0];let rec=null;
     try{if(m&&S&&S.known&&!m.__seen){const E=ents(m);rec={site:m.__site||[],t:String(m.t||'').slice(0,50),p:E.map(e=>({k:kOf61(e),kind:k61Kind(e),face0:isKnown61(e),st0:k61St(e)}))};}}catch(e){}
     const r=s0.apply(this,arguments);
-    try{if(rec){m.__seen=1;const M=document.getElementById('modal');const grey=M&&!M.hidden?M.querySelectorAll('img[src*="unknown-"],image[href*="unknown-"]').length:0;
+    try{const M0=document.getElementById('modal');/* r1: only a dialog really drawn (j68 evGate may hold / drop the optional Q[0]) */if(rec&&(Q[0]!==m||!M0||M0.hidden))rec=null;if(rec){m.__seen=1;const M=M0;const grey=M&&!M.hidden?M.querySelectorAll('img[src*="unknown-"],image[href*="unknown-"]').length:0;
      rec.grey=grey;if(grey)rec.greyCtx=[...M.querySelectorAll('img[src*="unknown-"],image[href*="unknown-"]')].slice(0,3).map(g=>{const c=g.closest('figure,.kfact,.spk,.kitem,li,p,div');return (c?c.className+': ':'')+(c?c.textContent:'').replace(/\s+/g,' ').slice(0,60)});rec.p.forEach(x=>{const e=k61Ent(x.k);x.face1=e?isKnown61(e):null;x.st1=e?k61St(e):null});window.__fr.push(rec)}}catch(e){}return r}});
   for(let i=0;i<STEPS;i++){try{await p.evaluate(()=>window.__bot.step('sens',300))}catch(e){out.errs.push('step '+String(e.message).slice(0,100));break}}
   const R=await p.evaluate(()=>window.__fr);const where=lineMap(html);
