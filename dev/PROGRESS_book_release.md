@@ -24,3 +24,9 @@
 - Lật tab (dev/test/curl-live.js 1180, có chuyển động): lật 25/45/65 %, lật lùi, mở bản đồ — 0 lỗi; tắt hiệu ứng thì không lật.
 - Save cũ (index.html của origin/main) nạp được ở cả 3 cỡ, 0 lỗi.
 - Ngoài phạm vi (có từ trước): góc trên phải Dư đồ ở Fold (Trường Xuân / Hàm An / Trường Môn viện) nhãn chồng nhau ở mức thu phóng mặc định.
+
+## Cập nhật 11/15 (sau kiểm FAIL 013829d0)
+- Sân khấu j59: tối đa 3 người iPad / 2 người Fold (tính cả nàng; chủ: "4 người quá chật"), xếp theo cột thân lõi (kitFigBody cl/cr), chồng ≤ 20 %; quá chỗ thì hiện TRANG người trọn vẹn với › N / N ‹ ở góc dưới. Nàng đứng trên sân khấu ở MỌI nơi (j28), đứng đầu bên trái, nhãn màu phẩm.
+- Đo (Ngự hoa viên, nàng + khách; ảnh dev/shots/book-release/stage/n*): 1180 nàng + 2 (đủ 3) + › N; 1366 nàng + 1 + › N khi khách là bóng người lạ áo rộng (sân khấu cao → người rộng); Fold 686 nàng + 1 + › N. Nữ .792, nam .848; 0 lỗi, 0 cắt tên, 0 tràn.
+- KIT 32.5 hộp thoại chỉ cuộn lựa chọn; KIT 32.6 người đứng trên tranh nơi chốn trong hộp thoại sự kiện (ảnh dev/shots/book-release/dlg/).
+- Lật trang: bản sao bỏ HẾT id (gốc giữ ở data-kclid) — chỉ còn một #panel khi lật (curl-live 686/1180: ids 1, 0 lỗi; ảnh c5-*).
