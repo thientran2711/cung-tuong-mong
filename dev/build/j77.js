@@ -27,7 +27,7 @@ accState=function(k){if(!S||!k)return{why:""};if(S.place===k)return{why:"",here:
  if(k!=="home"&&!j77Kh(tc))return{why:j77WalkWhy(tc),tc,walk:1};
  return{why:"",tc}};
 /* sneaking: 1 khắc at the side gate, then the walk; the Emperor's halls are a serious offence */
-function accSneakPen(k){return typeof ACC_ETQ!=="undefined"&&ACC_ETQ.sneakHeavy[k]?{danh:-15,sev:2,txt:"Danh -15, tội nặng (có thể bị giáng phẩm)"}:{danh:-8,sev:1,txt:"Danh -8, bị phạt"}}
+function accSneakPen(k){return typeof ACC_ETQ!=="undefined"&&ACC_ETQ.sneakHeavy[k]?{danh:-15,sev:2,txt:`Danh -15, ${typeof aaPunishTxt==="function"?aaPunishTxt(2):"tội nặng (có thể bị giáng phẩm)"}`}:{danh:-8,sev:1,txt:`Danh -8, ${typeof aaPunishTxt==="function"?aaPunishTxt(1):"bị phạt"}`}}
 function j77Tc(k){try{return k==="home"?0:travel(S.place,k)}catch(e){return 1}}
 accAskLine=function(k){return `${word(accAskO(k))} · tốn: ${j77Tc(k)+1} khắc · thành: được vào buổi này · hỏng: không mất gì`};
 accMini=function(k,st,risk){const L=[];const t=(st.tc!=null?st.tc:j77Tc(k))+1;
