@@ -257,9 +257,79 @@
     "x": 0.606,
     "y": 0.13
    }
+  },
+  {
+   "slot": 9,
+   "name": "Vĩnh Thọ cung",
+   "box": {
+    "x": 0.303,
+    "y": 0.222,
+    "w": 0.058,
+    "h": 0.105
+   },
+   "anchor": {
+    "x": 0.332,
+    "y": 0.262
+   }
+  },
+  {
+   "slot": 10,
+   "name": "Dực Khôn cung",
+   "box": {
+    "x": 0.368,
+    "y": 0.222,
+    "w": 0.058,
+    "h": 0.105
+   },
+   "anchor": {
+    "x": 0.397,
+    "y": 0.262
+   }
+  },
+  {
+   "slot": 11,
+   "name": "Trữ Tú cung",
+   "box": {
+    "x": 0.303,
+    "y": 0.338,
+    "w": 0.058,
+    "h": 0.105
+   },
+   "anchor": {
+    "x": 0.332,
+    "y": 0.378
+   }
+  },
+  {
+   "slot": 12,
+   "name": "Hàm Phúc cung",
+   "box": {
+    "x": 0.368,
+    "y": 0.338,
+    "w": 0.058,
+    "h": 0.105
+   },
+   "anchor": {
+    "x": 0.397,
+    "y": 0.378
+   }
+  },
+  {
+   "slot": 13,
+   "name": "Thái Cực điện",
+   "box": {
+    "x": 0.368,
+    "y": 0.455,
+    "w": 0.058,
+    "h": 0.105
+   },
+   "anchor": {
+    "x": 0.397,
+    "y": 0.495
+   }
   }
  ],
- "rivalSlotsNote": "rival consorts' own palaces (keys r<id>) take slots in order 1..8 (plan v3c fill order F=3,4,5,6,1,2: Cảnh Phúc, Khải Tường, Chung Tú, Hàm An, Thừa Minh, Diên Huy; then the spare Vĩnh Hòa, Trường Xuân). The queen uses kn, not a slot.",
+ "rivalSlotsNote": "rival consorts' own palaces (keys r<id>) take slots in order 1..8 (plan v3c fill order F=3,4,5,6,1,2: Cảnh Phúc, Khải Tường, Chung Tú, Hàm An, Thừa Minh, Diên Huy; then the spare Vĩnh Hòa, Trường Xuân). The queen uses kn, not a slot. Slots 9-13 (west green-roofed courts beside Ngọc Thanh các) added by jpal for 13 chủ vị (6 Tần + 4 Phi + 2 Quý phi + 1 HQP).",
  "festivals": {
   "newyear": {
    "name": "Tết Nguyên đán",
