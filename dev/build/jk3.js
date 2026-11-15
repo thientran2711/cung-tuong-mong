@@ -56,7 +56,7 @@ function k3maid(){const b=k3hc("maid");if(!b||!S.maid||(typeof isSrv==="function
  const v=k3val(b),n=+v;return `<button type="button" class="k3c" data-k3go="staff" title="Cung nữ thân tín · chạm để xem">${f}<span class="k3ct"><b>${esc(S.maid.name)}</b><span class="k3v"><small>Lòng</small> <span class="ef ${n>=60?"g":n<45?"r":"n"}">${esc(v)}</span></span></span></button>`}
 /* Ân sủng chips (owner 11/15 04:05Z): Tai mắt + the Ân sủng facts under the court chips, same plaque card and column width, one value per line,
    labels never cut. Có thai / Lật thẻ on the chance scale (chanceLvl, j1: Rất thấp…Rất cao), never the act ladder. Bổng lộc lives only here. */
-function k3AsRows(){if(!S||S.dead||(typeof isSrv==="function"&&isSrv()))return[];const L=[];const hv=k=>{const b=k3hc(k);return b?k3val(b):""};
+function k3AsRows(){if(!S||S.dead||(typeof isSrv==="function"&&isSrv())||(typeof isKc==="function"&&isKc()))return[];/* isKc: at home before the palace (jkc) */const L=[];const hv=k=>{const b=k3hc(k);return b?k3val(b):""};
  L.push(["mat","Tai mắt",S.mat|0]);
  let c="",n="";try{c=chanceLvl(conceiveCh())}catch(e){}try{n=chanceLvl(nightCh())}catch(e){}
  if(c)L.push(["con","Có thai",c]);if(n)L.push(["dem","Lật thẻ",n]);
