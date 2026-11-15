@@ -1742,13 +1742,18 @@ can go → dialog (PEND `runner`): choose a servant or "Để game tự chọn" 
 for a living player; nothing is lost: each fact now sits on a person card.
 
 ### 37.1 Every sub-tab = the people strip (`pager`, §36 / j15, `sep` groups) + ONE person card (`pcard`)
-- **Con của ngươi** (`kid`): her children, `kidCard` unchanged (portrait by real age: j73 identities a4/a9/a14/a20; Văn · Võ · Đức, Hiền tài,
-  Hoàng thượng thương, nết học, Thái tử / kế vị chip; groups = the existing acts: Học hành · Chăm con · Thăm con · Tài nghệ · Hôn sự).
+- **Con của ngươi** (`kid`): her children, `kidCard` unchanged (portrait by real age: j73 identities a4/a9/a14/a20; Tư chất (word) · Hiền tài
+  (number from 6) · Văn · Võ · Đức (bars from 3), Hoàng thượng thương, nết học, Thái tử / kế vị chip; groups = the existing acts: Học hành · Chăm con ·
+  Thăm con · Tài nghệ · Hôn sự). See §37.6.
 - **Kế vị** (`kvo`): every prince in `kvOrder()`; strip label "N. <tên>"; card rank "Kế vị thứ N · tuổi"; lines Mẹ · Hiền tài · Văn/Võ/Đức ·
   được thương; chips Thái tử / Đích tử / Trưởng tử / Nhà vợ chống lưng; group "Vì sao đứng thứ N" = one short reason per line (`kvReasons`).
   The rule is ONE line on top: `kitGloss("Lập đích, lập trưởng, lập hiền")` (tap = the full rule). Her own son: "Xem con ở mục Con của ngươi".
 - **Hoàng tự trong cung** (`kin`): the other mothers' children, strip grouped by mother (sep = "<phẩm> <tên>", j61 masks unknown names);
-  card = Mẹ · cung, Hiền tài, được thương, lần thi gần nhất, Hôn sự, Kế vị thứ N. No acts (what the whole palace knows).
+  left = Mẹ · Tư chất / Hiền tài as the palace's word ("lời đồn", from 6) · Được thương (word); RIGHT pane = group "Cả cung đều biết" (owner 11/15):
+  the mother (`kitPersonLine`, stranger rule on her face and name) + `kitRows` Tuổi · Thứ bậc (hoàng tử / công chúa thứ N of the Emperor) ·
+  Tước vị (+ kế vị thứ N) · Nuôi dạy (mother + palace; nhũ mẫu when she is dead / in lãnh cung; "nuôi dưới gối" + mẹ đẻ after a takeaway) ·
+  Sức khỏe (word) · Học (Thượng thư phòng · thầy) · Khảo hạch · Hôn sự. Never Văn / Võ / Đức / Hiền tài / tư chất / thương as numbers.
+  An unmet child adds a note + the mother's "Đến cung nàng thăm" act card.
 - **Hôn sự** (`hon`): princesses then princes (hers first) from 14 or promised / married; card = Mẹ, Hôn sự, the spouse row (face + line),
   chip "Nhà chồng / Nhà vợ chống lưng +b" (gloss); her own child's group "Việc hôn sự" = Bàn hôn sự (+ letters / nhờ con nói giúp for a married
   daughter). Header: rule (16 bàn, 18 cưới) + Nhà thông gia chống lưng ngươi + the Bắc Địch envoy line.
@@ -1773,6 +1778,23 @@ frame-man, quý nữ frame-man (role other), strangers frame-unknown.
 ### 37.5 Marriage talks are acts, not events
 `htban` (princes) and `h54ban` (princesses) open with `showOut` + `optLayout:"rows"`: every option is the full act card (Tốn · Được · Mất ·
 Kèm + odds ladder), restored the same way from a save (`deserQ`).
+
+### 37.6 TƯ CHẤT vs HIỀN TÀI (owner 11/15, review/hoangtu-tuchat) — j53 + `BAL.tc`
+- Birth: `k.tc` tư chất (hidden, fixed) = BAL.tc.base + mom·(Tài, Đức, Tâm cơ, arts of the mother) + emp·(the Emperor's hidden gifts) ± rnd.
+  Văn · Võ · Đức start at 0–2 and grow monthly (`tcGrowCore`, every mother): natural growth by age band, the mother at hand (her Tài → Văn,
+  Đức → Đức), the Emperor's attention (thương), teacher from 6 (`KT` rates), mother's lessons (Dạy chữ / Dạy lễ nghi from 3), all × `tcMul(tư chất)`.
+- Shown: tư chất only as a ladder word (chậm hiểu · tầm thường · khá · thông tuệ · hơn người): her own child once the nhũ mẫu (1 tuổi) or the
+  teacher (6 tuổi) has said (noise nzNurse / nzOwn); another mother's child only as "lời đồn" from 6 (noise nzOther). Hiền tài = ktHien(Văn, Võ, Đức),
+  shown only from 6 (before: "còn nhỏ, chưa rõ"); her own child: the number; others: word vs the age's norm (kém / dưới / ngang / hơn / vượt chúng bạn).
+  Văn · Võ · Đức bars only for her own child from 3.
+- Kế vị: under 6 a son ranks only by đích / trưởng / Hoàng thượng thương; lập hiền counts from 6.
+- Old saves: `ktInit` turns the old talent into tư chất (BAL.tc.old) and refills age-appropriate Văn · Võ · Đức (old leanings kept), `k.tcv = 1`.
+
+### 37.7 CHILD STRANGER RULE (owner 11/15) — jht + j61
+Every child's NAME is public (announced at birth: j61 `k61Pub` / `k61IsKid`); the FACE is the grey child silhouette (`img/kit/unknown-k.webp`,
+frame-unknown, via the usual `k61Sil`) until she has met the child: her own children from birth (stage 3), a visit to the mother's palace
+(`goTo`), a festival banquet, a khảo hạch they sit together, a child she takes in. Strip, card, Kế vị list, exam rows all follow. j61's
+stranger card is not used for children (their card is drawn by jht). Old saves: other mothers' children start unmet once (`S.kmet`).
 
 ## 38. EMOTION SEAL (numbered 36 on main before review/hoang-tu restored §36 Hậu cung) · dấu tâm trạng (review/emotion, `dev/build/jemo.js`, owner 11/14) — one layer of `pcPort`
 - Every frame drawn by `pcPort` (so every size: tall frame, person card cell, `mdH` xs/sm/default/big strips) carries `img.kemo.kemo-<k>`:
