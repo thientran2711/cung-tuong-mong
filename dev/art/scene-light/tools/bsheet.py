@@ -1,6 +1,6 @@
 # bsheet.py RES.json OUT.jpg [first] [n] : por before|after + fig head before|after, labels with what changed
 import sys,os,json,cv2,numpy as np
-W="/home/user/cung-tuong-mong/.claude/worktrees/agent-a4e8c6432e582a50a/.ahcache/hb/"
+W=os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)),"..","..","..",".."))+"/.ahcache/hb/"
 R=json.load(open(sys.argv[1]));a0=int(sys.argv[3]) if len(sys.argv)>3 else 0;n=int(sys.argv[4]) if len(sys.argv)>4 else len(R);R=R[a0:a0+n]
 BG=np.array([52,38,30],np.float32)
 def comp(p,head=False):

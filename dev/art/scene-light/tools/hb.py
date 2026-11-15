@@ -1,7 +1,7 @@
 # hb.py LIST OUT.json : one pass per por+fig pair (CDN copies in .ahcache/hb/img): huadian shrink (consorts t1–t8) then rosy skin (a* < 8.0)
 # writes fixed files to .ahcache/hb/fix/ ; records per file
 import sys,os,re,json,cv2,numpy as np,importlib.util
-W="/home/user/cung-tuong-mong/.claude/worktrees/agent-a4e8c6432e582a50a/";I=W+".ahcache/hb/img/";O=W+".ahcache/hb/fix/";os.makedirs(O,exist_ok=True);T=W+".ahcache/hb/tmp%d/"%os.getpid();os.makedirs(T,exist_ok=True)
+W=os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)),"..","..","..",".."))+"/";I=W+".ahcache/hb/img/";O=W+".ahcache/hb/fix/";os.makedirs(O,exist_ok=True);T=W+".ahcache/hb/tmp%d/"%os.getpid();os.makedirs(T,exist_ok=True)
 def mod(n,p):
     s=importlib.util.spec_from_file_location(n,W+p);m=importlib.util.module_from_spec(s);s.loader.exec_module(m);return m
 sk=mod("sk","dev/art/skin-smudge.py");hd=mod("hd","dev/art/huadian.py")

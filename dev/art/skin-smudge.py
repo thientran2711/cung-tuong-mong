@@ -12,7 +12,7 @@ Dùng: python3 dev/art/skin-smudge.py --json R.json FILE|GLOB|@list.txt
 """
 import sys, os, glob, json, argparse
 import numpy as np, cv2
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", ".ahcache", "tools"))
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "scene-light", "tools"))
 try:
     import face as FACE
 except Exception:
