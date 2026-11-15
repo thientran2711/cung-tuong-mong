@@ -463,3 +463,5 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (13:45Z) Thái hậu bị cắt áo: do bố cục Tuần lục (hình rộng nhất bị cột hẹp cắt), sửa CSS chứ không vẽ thêm. Da nhợt: sửa 807 chân dung (a*<8.0). Hình cắt mép: cắt lại từ tờ gốc trước.
 - (13:55Z) Mệnh truyện giấu nhân chứng tốn 40 bạc vô lý, không có được/mất → thêm được/mất, đường không tốn bạc, giá theo bậc, cho hoãn vài buổi.
 - LIVE CDN (13:55Z) 19 tranh Tự học riêng từng môn (nối mã khi act-pics2 vào main).
+- (14:05Z) ĐẢO luật KIT §28.6 (11/14: lựa chọn sự việc chỉ hiện Tốn): sếp muốn MỌI lựa chọn hiện đủ Được/Mất/mức chắc. review/opt-render.
+- (14:05Z) Sếp dặn đêm: ô cảm xúc cho nhân vật nam; nút việc với phi tần phải có ảnh nhỏ; các tab làm lại phải chia tab con; sự việc thành/bại phải đổi tâm trạng + mặt nàng; trò cắm hoa phải là trò cắm hoa (mỗi món đúng trò); sự việc "trả quà" phải có quà thật; sau tranh sủng + tắm phải sang ngày mới; tiếng khóc nghe như cười → thay; Ân tình/chân tình phải THẤY số; vật liệu đắt phải đáng tiền; gửi mẫu da hồng + mẫu trang điểm.
