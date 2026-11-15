@@ -853,6 +853,16 @@ Tư trang opens with the ONE sub-tab control (§20 `.ksub > .ksubb`, the Hậu c
 **Túi đồ** (default) = the bag grid with its category chips + the "Bên mình" equipment slots, on screen without scrolling past any act ·
 **Việc** = the Tư trang acts (Nhờ thái giám mua đồ, Soát đồ, Sai cung nữ…, Chợ đen, Xin đồng minh), doable ones first (`kitDoableFirst`,
 §37.1 of review/person-acts when merged; jinv carries the same rule until then). The pick is remembered per viewer (`hclh-inv-sub`).
+### 28.13h GIFT DIALOG "Tặng quà" / "Dâng quà" (owner 11/15, review/gift-ui) — `giftDialog` / `giftDecorate` / PEND.giftto (jgift) — kit parts only
+One dialog for giving any chest item (bought goods and handmade works; chest "Tặng", works "Dâng, tặng", Emperor / Thái hậu card "Dâng quà"):
+- LEFT: the ITEM's own picture (kitItem lg in its grade frame, `.kpsubj.kpitem.kgiftpic`), never an event picture; the result card shows it too.
+- RIGHT, top: the kit item-card head of the shop card 28.13d (`.kshdt`: `.kshdn` name in its KIT_GRADE colour + `.kshds` "kind · grade"), then
+  `kitRows` in `.kinvrows` (Dùng / Nguồn / Người làm / Làm lúc / Lưu ý / Đã tẩm / Khi tặng / Hợp nhất). No chip or row style of its own.
+- Recipients: the kit tab row (`kitTabRowHTML`, `.pctabs.kcattabs.kgifttabs`) Chí tôn / Phi tần / Nam nhân / Cung nhân with "givable/total";
+  a tab with nobody in it is NOT drawn (Nam nhân has no gift rules yet, so it never shows; one group only → no tab row). Each person is a kit
+  dialog option (portrait `mdH xs`, name, odds · Tốn · Được · Kèm via kitParse) or a locked option with its reason (`.kwhy`).
+- Close: the kit ✕ only (32.10 turns the "Thôi" option into kit-x). The item someone else wears (`kitOtherItem`, tap a slot on her card) is
+  a kitModal info card: kitItem lg + kitItemRows + the owner line (`mdH sm` + name) + kitFacts, closed by the kit ✕.
 ### 28.13c kitEquipSlots — "Đang mang" EQUIPMENT SLOTS (owner 11/15, RPG-style) — `dev/build/jinv.js` — KIT READY
 `kitEquipSlots({key, title, slots:[{k,label,item:{src,name,grade,tip}|null,ghost,mini}], sum, onPick:fn(slot)})` → `.keq` under the bag:
 header = kit section title + totals (Sắc/Danh chips · "Xa xỉ <total>" neutral · "N món vượt phẩm: dễ bị tố" law notice; chips wrap, never cut).
