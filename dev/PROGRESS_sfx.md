@@ -72,3 +72,10 @@ python3 -m http.server 8781 --bind 127.0.0.1   (ở gốc repo, sau `bash dev/si
 node dev/test/sfx.js http://127.0.0.1:8781/index.html 755x1000@2 out-fold.json
 node dev/test/sfx.js http://127.0.0.1:8781/index.html 1180x820@2 out-ipad.json
 Đo âm: bash dev/audio/meas.sh audio/sfx-*.mp3 · chuẩn hóa: python3 dev/audio/norm.py OUT -16 in.mp3…
+
+## Review r1 (review/sfx-r1, merged onto main 8ee414c1)
+- assemble order: ... jfx, jtoil, jstory, jevb, jts, jmcal, **jsfx**, j84 (jsfx after jstory/jevb so it wraps their showModal).
+- kfWhy bug confirmed live on main (tap on a locked button -> pageerror "T is not iterable"); fixed here (0 errors).
+- Same-class scan (duplicate top-level function declarations in all.js): j10 faction invite(a,t) was shadowed by j21 invite(id) -> "Mời" vào phe spent 2 AP and did nothing; renamed facInvite.
+- Tests: sfx 1180x820@2 104/104; 755x1000@2 103/104 (co-op 'hảo hữu vào phòng' setInterval poll flaky under load 15-18; passes alone 3/3); month-cal all sizes ok; ts-oldsave ok (12 weeks, 0 errors); kit-page: §28.1 pcPort sample throws (pMe with no S) - same on main, pre-existing.
+- 390x844 rotated:false in sfx-smoke is a test artefact (webdriver => direct mode unless ?khost=1); with ?khost=1 rotated:true, frame 1180x820.
