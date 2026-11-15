@@ -100,3 +100,9 @@ b14 https://pikaso.cdnpk.net/tmp/bulk-downloads/a33ae9db-7f34-428b-84b0-fbf5efa0
 - refine v7 (lỗ áo ngà phẳng m18 ty1): holes.py → 122 tờ có lỗ kín (redo-v7.txt) đang cắt lại; xong thì cdn_sync các tệp đổi của mặt đã đẩy (md5 tự bỏ qua tệp không đổi), rồi publish m07–m19.
 - Chân dung: cỡ mặt theo trung vị tờ (ty.py portraits()), porcheck.py: 0 lỗi ở c01–c22 đã đẩy.
 - Bước 4 (m20–m52): ĐÃ VẼ từ trước (PROGRESS 09:35Z), nguồn đủ ở máy → chỉ còn cắt + kiểm + đẩy (worker đang chạy tiếp theo thứ tự bg.txt).
+
+## 15/11 ~14:00Z — BƯỚC 3 XONG
+- CDN: c01–c32 + m01–m19 = 51 mặt × 8 bậc × 4 tuổi = 1632 fig + 1632 por; img/FIGURES-ty.json trên CDN 1632 bản ghi (md5 1966a752…).
+- refine v7 cắt lại 122 tờ có lỗ kín: 15 tệp đổi (c15 ty7, c19 ty1/ty6, c20 ty4…) đã đẩy lại; còn lại trùng byte.
+- Kiểm mỗi nhóm: solid.py 0 bán trong suốt / 1632 fig; porcheck 0; tờ sheet-g1..g5 + por-g1..g4 đã xem.
+- Đang chạy: 3 worker cắt m20–m52 (nguồn đủ). Tiếp: fin.sh → xem → pub.sh theo nhóm ~8 mặt.
