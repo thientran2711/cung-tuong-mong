@@ -8,7 +8,8 @@ for n in sys.argv[4:]:
     b = cv2.imread(os.path.join(bd, n), -1); a = cv2.imread(os.path.join(ad, n), -1)
     if b is None or a is None: continue
     lb = cv2.cvtColor(b[..., :3].astype(np.float32) / 255, cv2.COLOR_BGR2LAB); la = cv2.cvtColor(a[..., :3].astype(np.float32) / 255, cv2.COLOR_BGR2LAB)
-    d = (cv2.GaussianBlur(np.hypot(*(la - lb)[..., 1:].transpose(2, 0, 1)), (0, 0), 2) >= 2.0).astype(np.uint8)
+    d = (cv2.GaussianBlur(np.hypot(*(la - lb)[..., 1:].transpose(2, 0, 1)), (0, 0), 2) >= 2.0) & (b[..., 3] >= 250) & (a[..., 3] >= 250)
+    d = d.astype(np.uint8)
     d = cv2.morphologyEx(d, cv2.MORPH_OPEN, np.ones((5, 5), np.uint8))
     nn, lab, st, cen = cv2.connectedComponentsWithStats(d, 8)
     for i in sorted(range(1, nn), key=lambda i: -st[i, 4])[:2]:

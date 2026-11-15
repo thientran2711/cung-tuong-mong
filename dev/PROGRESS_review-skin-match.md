@@ -17,7 +17,7 @@
 ## State (21:00Z)
 - Audit: rosy-pass figs (959) + 80 random others measured. 899 flagged (consort 438, maid 374+1, eunuch 33, kid 29, man 9, official 6,
   mama 3, emperor 1, player look3 5). Remaining ~7300 non-rosy figs NOT yet audited (runm.sh; ~60/min under load).
-- Fix batch on flag1 running locally → nothing uploaded to CDN yet. Player look1 (5 fig + 5 por) made locally, not uploaded.
+- Fix batch on flag1 running (log/fix.jsonl); uploaded so far = log/uploaded.txt (resume: fixrun skips names in fix.jsonl; upload.sh skips uploaded.txt). cutcheck before/after = log/cut.tsv (no file worse).
 
 ## Resume (fresh container)
   cd <worktree>; mkdir -p .ahcache/sm; python3 -m venv --system-site-packages .ahcache/sm/venv; .ahcache/sm/venv/bin/pip install mediapipe==1.2.3

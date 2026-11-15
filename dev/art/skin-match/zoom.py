@@ -11,7 +11,7 @@ for n in sys.argv[4:]:
     cb, ca = comp(b)[:y1], comp(a)[:y1]
     lb = cv2.cvtColor(b[..., :3].astype(np.float32) / 255, cv2.COLOR_BGR2LAB); la = cv2.cvtColor(a[..., :3].astype(np.float32) / 255, cv2.COLOR_BGR2LAB)
     d = cv2.GaussianBlur(np.hypot(*(la - lb)[..., 1:].transpose(2, 0, 1)), (0, 0), 2)[:y1]   # blur: WebP re-encode noise is sparse
-    m = (cb * 0.45).astype(np.uint8); m[(d >= 2.0) & (b[:y1, :, 3] > 0)] = (0, 0, 255)
+    m = (cb * 0.45).astype(np.uint8); m[(d >= 2.0) & (b[:y1, :, 3] >= 250)] = (0, 0, 255)
     t = np.hstack([cb, ca, m]); t = cv2.resize(t, (int(t.shape[1] * H / t.shape[0]), H), interpolation=cv2.INTER_AREA)
     cv2.putText(t, n[:-5], (3, 14), cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 0, 0), 1); rows.append(t)
 W = max(r.shape[1] for r in rows); per = max(1, 1900 // W); grid = []
