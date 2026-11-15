@@ -1202,7 +1202,7 @@ walk anywhere whose walk cost ≤ khắc left (never walk + 1). Arriving with 0 
 · đến nơi là hết buổi, chỉ kịp xem ai ở đó" (Đi / Thôi, `j77LastWalk`); she sees who is there, next buổi she starts there. A label says
 "hết khắc" ONLY when 0 are left; a walk longer than what is left shows "đi N khắc" (+ lock mark; card reason "đi N khắc, còn M").
 WALK SPILL (owner 11/15 09:05Z, `walkSpill(k)` / `walkSpillGo(k)` in j9): a walk longer than the khắc left is NOT a dead end. The card
-says "Đường đi N khắc, còn M khắc: đi bây giờ thì đến nơi vào buổi chiều" and offers "Đi (đến nơi vào buổi sau)" — "Tốn: M khắc buổi
+says "Đi bây giờ thì đến nơi vào buổi chiều" (N and M in the 32.8 fact line) and offers "Đi (đến nơi vào buổi sau)" — "Tốn: M khắc buổi
 sáng + (N−M) khắc buổi chiều · Thành: đến nơi buổi chiều, thấy ai ở đó" — plus Thôi (no separate "Đợi buổi sau" for this case). Going
 spends the M khắc left, turns the buổi (normal end-of-buổi processing: NPCs move, news cards first), then pays the rest from the new
 buổi and she arrives with 4−(N−M) khắc, seeing who is there then (1 left in the morning, Thái y viện 3 khắc → 1 + 2, arrives in the
@@ -1387,6 +1387,31 @@ Every kitEventStage dialog that names one or two people (`who`, `who2`, `stage:[
 How: `.kpb` becomes display:contents so its figure column and text join #mb's grid next to `.opts` (no DOM move; kitDlgFit / kitEsFit
 still run; kitEsFit hands 32.7 columns to kitDpFit). Test: `node dev/test/dialog-person.js <site url> WxH@dpr <outdir> <tag> [kinds]`
 (kinds host, th, invite, ally2, many, men, pic). Shots before / after: dev/shots/dialog-person/ (755x1000, 1180x820, 1366x1024, 412x1058).
+Options in the right column follow 32.9 (all short → 2-column grid, else rows); the "one per row" above is the long case.
+
+### 32.8 PLACE CARD — the place-event frame for every place card (owner 11/15 08:55Z + 08:58Z) — `kitPlaceDress` / `kitPlaceSil` (jplace)
+Every place card — tap on a place on Dư đồ or in Danh sách nơi (`j77Card`: closed place, Xin bái kiến / Xin yết kiến / Lẻn vào / Nhờ thái
+giám, walk spill 34.1d), the last walk of a buổi (`j77LastWalk`), the greeting card (`accEtqCard`: Bái kiến rồi vào / Vào thẳng) — uses
+the SAME large place-event frame as place event dialogs (32.6), VERTICAL on every size (owner 08:58Z replaced "picture left, info right"):
+- TOP = the place picture of the current season + buổi (`kitPlaceArt(k)`: img/<nơi>-<mùa>-<buổi>.webp via sceneImg; a palace without
+  its own picture uses the shared phi-tan-cung picture, the approved rule; her own palace tam-cung-dem), wide kitSceneArt band with the
+  place name; when people are there, that many grey kit silhouettes (img/kit/unknown-fig-f/m/k, f/m/k by who is really there, ≤ 5 + "+N")
+  stand on its floor — shapes only, no faces.
+- MIDDLE = one info box `.kplinfo`: a fact line "Đường đi N khắc · Còn M khắc · K bóng người", a dim hours / entry-rule line (mở cửa sáng,
+  chiều · sáng thỉnh an, lúc khác phải được mời · chỉ vào khi được triệu), then the card's own lines (reason, greeting rule, why a way in
+  is closed). No empty "world" dot, no repeated "Có N bóng người ở đó" line.
+- BOTTOM = the buttons by 32.9. Waiting: at night "Nghỉ đến sáng mai"; in the day "Đợi đến buổi chiều/tối" only when one buổi helps
+  (not for a place that opens only in the morning); a too-long walk gets the spill button instead (34.1d).
+Not yet: the outer-court card (`menNtCard`, a kitModal rule card). Test: `node dev/test/place-card.js <url> WxH@dpr <outdir> <tag>`
+(spill, last, night, rank, etq, sneak). Shots before / after: dev/shots/place-card/ (755x1000, 1180x820, 412x1058).
+
+### 32.9 ONE OPTION LAYOUT RULE — `kitOptLayout` (jplace, replaces k3IsLong; every dialog incl. 32.6 / 32.7 / 32.8)
+- SHORT option = name + at most ONE effect row; LONG = two or more rows (Cần / Tốn / Được / Mất / Kèm / Ghi chú) or a name over two lines.
+- All short → 2-column grid of equal buttons (3 on ≥ 1000 px with 3+); any long → each long one is a full-width row, short ones share the
+  grid. If a grid cell is too narrow for its own lines (an effect value wraps, a name over two lines — e.g. 32.7 two-person column on Fold,
+  phones) the group goes back to rows (`kitOptCramped`). A Q item may still force optLayout.
+- "Thôi" / "Lui" / "Để sau" / "Bỏ qua" (`kback`): compact secondary button, name only, always last; when every other option is long it is a
+  slim full row under them, otherwise a grid cell. The meaningless "Ghi chú: không được mất gì" line is gone everywhere (j63 drops it).
 
 ## 33. ONE FIGURE SCALE · KIT_FIG (owner 11/15 "người trên sân khấu quá nhỏ"; review fold-layout r3 FAIL 1366) — `dev/build/jkit.js` (top) + j59 + jk4
 

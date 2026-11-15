@@ -6531,7 +6531,7 @@ function j77Card(k,empty){if(!S||S.dead||Q.length)return;
  if(empty){Q.push({t:empty,h:`<p>Cung trống, chưa có ai ở.</p>`,btn:"Đã hiểu"});showModal();return}
  const st=accState(k);const nm=accName(k);let n=0;try{n=countAt(k)}catch(e){}
  const left=Math.max(0,4-used);const sp=st.walk&&typeof walkSpill==="function"?walkSpill(k):null;const bu=i=>String(BUOI[i]||"").toLowerCase();
- const L=[sp&&sp.ok?`<p>Đường đi ${sp.tc} khắc, còn ${left} khắc: đi bây giờ thì đến nơi vào ${bu(sp.b)}.</p>`:`<p>Không vào được lúc này: <b>${st.why}</b>.</p>`];
+ const L=[sp&&sp.ok?`<p>Đi bây giờ thì đến nơi vào ${bu(sp.b)}.</p>`:`<p>Không vào được lúc này: <b>${st.why}</b>.</p>`];
  if(sp&&!sp.ok)L.push(`<p class="past">Đi đến nơi vào ${bu(sp.b)} cũng không được: ${sp.why}.</p>`);
  if(st.kind==="hour")L.push(`<p class="past">Mở cửa buổi sáng và buổi chiều.</p>`);
  if(n)L.push(`<p class="past">Có ${n} bóng người ở đó.</p>`);
@@ -6544,7 +6544,8 @@ function j77Card(k,empty){if(!S||S.dead||Q.length)return;
   else L.push(`<p class="past">Lẻn vào: cần ${st.tc+1} khắc, còn ${left}.</p>`)}
  if(sp&&sp.ok)opts.push({n:"Đi (đến nơi vào buổi sau)",fx:{},x:`Chắc chắn · tốn: ${sp.now?`${sp.now} khắc ${bu(sp.b-1)} + `:""}${sp.rest} khắc ${bu(sp.b)} · thành: đến nơi ${bu(sp.b)}, thấy ai ở đó`,go:()=>setTimeout(()=>walkSpillGo(k),0)});
  const waitHelps=!sp&&(st.kind==="hour"||st.walk||/sáng|thỉnh an/.test(st.why||"")||(st.ask&&!st.empAway&&!st.askOk)||(st.kind&&!st.sneakOk));
- if(waitHelps&&!S.out&&!S.confined&&!S.mg){const night=(S.buoi||0)>=2;opts.push({n:night?"Đợi sáng mai (Qua đêm)":"Đợi buổi sau (Qua buổi)",fx:{},x:st.kind==="hour"||/sáng|thỉnh an/.test(st.why||"")?"sáng mai mở cửa, thử lại":night?"sáng mai đủ khắc, thử lại":"sang buổi sau đủ khắc, thử lại",go:()=>setTimeout(()=>{try{nextBuoi()}catch(e){}},0)})}
+ if(waitHelps&&!S.out&&!S.confined&&!S.mg){const b=S.buoi||0,night=b>=2,morn=st.kind==="hour"||/sáng|thỉnh an/.test(st.why||""); /* VANPHONG: "Nghỉ đến sáng mai" / "Đợi đến buổi chiều"; no daytime wait for a place that only opens in the morning */
+  if(night||!morn)opts.push({n:night?"Nghỉ đến sáng mai":`Đợi đến ${bu(b+1)}`,fx:{},x:morn?"sáng mai mở cửa · thử lại":night?"sáng mai đủ khắc · thử lại":`${bu(b+1)} đủ khắc · thử lại`,go:()=>setTimeout(()=>{try{nextBuoi()}catch(e){}},0)})}
  if(opts.length){opts.push({n:"Thôi",fx:{},x:""});Q.push({t:nm,h:L.join(""),opts})}else Q.push({t:nm,h:L.join(""),btn:"Đã hiểu"});
  showModal()}
 /* a walk that uses the last khắc: say so plainly, then go (she sees who is there; next buổi she starts there) */
@@ -6776,7 +6777,7 @@ const KA_RISK=/^(có thể bị|bị người của nàng phát giác|bị lộ|
 /* place every value in its row by meaning */
 function kaRows(M){const R={why:[],ton:[],duoc:[],mat:[],kem:[],note:[]};const add=(r,h,c)=>{if(!R[r].some(x=>kaPlain(x.h)===kaPlain(h)))R[r].push({h,c})};
  const sure=!M.odds||/^Chắc chắn/.test(M.odds);
- for(const it of M.items){let [h,nt]=kaSplitNote(it.h);if(nt)add("note",nt,"n");const p=kaPlain(h);if(!p)continue;const c=kaSent(h,it.old);const neu=KNEU.test(p);const l=it.l||"";const cont=!!it.cont;
+ for(const it of M.items){let [h,nt]=kaSplitNote(it.h);if(nt)add("note",nt,"n");const p=kaPlain(h);if(!p)continue;if(/^(chắc chắn · )?không được mất gì$/i.test(p))continue; /* owner 11/15: a line that says nothing is not shown */const c=kaSent(h,it.old);const neu=KNEU.test(p);const l=it.l||"";const cont=!!it.cont;
   if(/[+−-]\s?0(?![\d.,])/.test(p)&&!/[+−-]\s?(0[.,]\d*[1-9]|[1-9])/.test(p)){add("note",p.replace(/\s?[+−-]\s?0(?![\d.,])/g," không đổi"),"n");continue}
   if(l==="why"){add("why",h,"r");continue}
   if(/^\(.*\)$/.test(p)){add("note",h,"n");continue}
@@ -12781,6 +12782,93 @@ window.kitEsOvFit=kitEsOvFit;
 #mb>.kpb.kesfull>*{max-width:none!important;width:auto}
 @media (max-width:999px){#mb>.kdlgart.kesonpic>.ksart{height:var(--kdpic,26vh)!important;min-height:130px}}
 `;document.head.appendChild(st)})();
+
+/* ================= KIT 32.7 · ONE / TWO PEOPLE, NO SCENE PICTURE — person column left, text + options right (owner 11/15 04:45Z,
+   iPad shot "VIỆC · Có người đến": "full chân dung bên trái, bên phải trên là thông tin sự kiện, dưới là nút chọn") =================
+   Every kitEventStage dialog WITHOUT a place / event picture band (visitors, people who ask something, choice / invite cards with a
+   person, Thái hậu's questions, two visitors…): the figure column on the LEFT is the full height of the dialog (under the title down to
+   the bottom) and the people stand in it at the KIT_FIG scale of that column (woman body .79 × column, men ×1.07, children by age; feet
+   on one line above the name chips; two people packed by their core with ≤ 20 % overlap, KIT 33 rule 4). RIGHT: the event text on top
+   (the small face of a fact row stays; the empty dot of a "world" row is dropped), the options below, stacked one per row with their
+   full Cần / Tốn / Được / Mất / Kèm lines and the odds; ONLY the options scroll (32.5). Dialogs with a picture band keep 32.6.
+   Phones (< 600 px): figure on top (big: min(48dvh, 460 px)), text, then the options; only the options scroll.
+   No DOM move: .kpb becomes display:contents so its figure column and text join #mb's grid next to .opts (kitDlgFit keeps working). */
+function kitDpOn(){const M=document.getElementById("modal"),mb=document.getElementById("mb");if(!M||M.hidden||!mb)return null;const d=M.querySelector(".dlg.kesdlg");
+ const col=mb.querySelector(":scope > .kpb > .kpsubj.kes");if(!d||!col||mb.querySelector(".kesov"))return null;return{d,mb,col}}
+function kitDpApply(){try{const o=kitDpOn();const d0=document.querySelector("#modal .dlg");if(!o){if(d0&&d0.classList.contains("kdper")){d0.classList.remove("kdper","kdper2","kdnarrow");d0.style.removeProperty("--kdpw")}return}
+ const {d,mb,col}=o;d.classList.add("kdper");d.classList.toggle("kdper2",col.querySelectorAll(":scope > .kesf").length>1);
+ const body=col.parentElement;body.classList.add("kdpb");
+ /* a "world" fact row's empty dot means nothing beside a full figure */
+ body.querySelectorAll(".kfact > .kfdot").forEach(x=>{x.parentElement.classList.add("kfnodot");x.remove()});
+ const kids=[...mb.children].filter(c=>c!==body&&!c.classList.contains("opts"));kids.forEach(c=>c.classList.add("kdpr"));
+ kitDpFit()}catch(e){console.error("kitDpApply",e)}}
+function kitDpFit(){try{const o=kitDpOn();if(!o||!o.d.classList.contains("kdper"))return;const {d,mb,col}=o;
+ const narrow=innerWidth<600;d.classList.toggle("kdnarrow",narrow);
+ const F=[...col.querySelectorAll(":scope > .kesf")].filter(f=>!f.classList.contains("kesno"));if(!F.length)return;let wait=false;
+ const L=F.map(f=>{const im=f.querySelector(".kesimg"),src=im&&im.getAttribute("src");const b=src?kitFigBody(src,()=>requestAnimationFrame(kitDpFit)):null;
+  if(!b){wait=true}const kfr=parseFloat(im&&im.style.getPropertyValue("--kfr"))||1;return{f,im,b,fac:kfr*(KIT_FIG.man||1),cap:f.querySelector(".kpsn")||col.querySelector(`:scope > .kpsn[data-kdp="${F.indexOf(f)}"]`)}});
+ if(wait)return;
+ /* name chips live in the column (absolute), measured first so the feet stand above them */
+ L.forEach((x,i)=>{if(x.cap){x.cap.dataset.kdp=i;x.cap.classList.add("kdpcap");if(x.cap.parentElement!==col)col.appendChild(x.cap)}});
+ const capH=Math.max(0,...L.map(x=>x.cap?x.cap.offsetHeight:0));
+ const H=col.clientHeight;if(H<80)return;const floor=H-capH-6,top=4;
+ const sz=L.map(x=>{const bt=x.b.ht>x.b.t?x.b.ht:x.b.t;const body=Math.min(KIT_FIG.h*H*x.fac,floor-top);const ih=body/Math.max(.2,x.b.b-bt);const iw=ih*(x.b.ar||1);
+  const cl=x.b.cl!=null?x.b.cl:x.b.l,cr=x.b.cr!=null?x.b.cr:x.b.r;return{ih,iw,core:iw*(cr-cl),cl,cr,l:x.b.l,r:x.b.r,b:x.b.b}});
+ const ov=sz.length>1?.2:0;/* KIT 33 rule 4: each later figure may step back over its neighbour by ≤ 20 % of its core */
+ const tot=sz.reduce((a,s,i)=>a+s.core*(i?1-ov:1),0)+sz[0].iw*(sz[0].cl-sz[0].l)+sz[sz.length-1].iw*(sz[sz.length-1].r-sz[sz.length-1].cr);
+ const capW=Math.max(0,...L.map(x=>x.cap?x.cap.scrollWidth:0));
+ /* column width: the people (or the widest name chip); the right column keeps ≥ 300 px (iPad) — if not, one common factor */
+ let need=Math.max(tot,capW)+12,k=1;
+ if(narrow){const W=col.clientWidth;if(need>W){k=W/need;need=W}}
+ else{const dw=Math.min(innerWidth-24,need+470);const room=dw-280-44;if(need>room){k=room/need;need=room}d.style.setProperty("--kdpw",Math.round(need)+"px")}
+ const W=narrow?col.clientWidth:need;let x=(W-tot*k)/2+sz[0].iw*k*(sz[0].cl-sz[0].l);
+ L.forEach((it,i)=>{const s=sz[i];const ih=s.ih*k,iw=s.iw*k;if(i)x-=s.core*k*ov;const left=x-iw*s.cl;
+  Object.assign(it.f.style,{left:left.toFixed(1)+"px",top:(floor-ih*s.b).toFixed(1)+"px",width:iw.toFixed(1)+"px",zIndex:String(2+i)});
+  const wr=it.f.querySelector(".kesfi");if(wr)Object.assign(wr.style,{width:iw.toFixed(1)+"px",height:ih.toFixed(1)+"px",margin:"0",maxWidth:"none"});
+  Object.assign(it.im.style,{width:iw.toFixed(1)+"px",height:ih.toFixed(1)+"px"});
+  if(it.cap){it.cap.style.left=(left+iw*(s.cl+s.cr)/2).toFixed(1)+"px";it.cap.style.translate="";it.cap.dataset.row="0"}x+=s.core*k});
+ /* chips never cut: clamp inside the column; two that touch → the second one goes up a row (over the hem) */
+ const C=col.getBoundingClientRect();let prev=null;L.forEach(it=>{const c=it.cap;if(!c)return;const r=c.getBoundingClientRect();let s=0;if(r.left<C.left+2)s=C.left+2-r.left;else if(r.right>C.right-2)s=C.right-2-r.right;if(s)c.style.translate=s.toFixed(1)+"px 0";
+  const q=c.getBoundingClientRect();if(prev&&q.left<prev.right+4)c.dataset.row="1";prev={right:q.right}});
+ col.dataset.kdpfit="1"}catch(e){console.error("kitDpFit",e)}}
+window.kitDpApply=kitDpApply;window.kitDpFit=kitDpFit;
+/* kitEsFit (33.6) sizes figures in the old side column; a 32.7 column is sized by kitDpFit instead */
+(function(){const e0=kitEsFit;kitEsFit=function(row){if(row&&row.closest&&row.closest(".dlg.kdper"))return kitDpFit();return e0.apply(this,arguments)};window.kitEsFit=kitEsFit})();
+(function(){if(typeof showModal!=="function")return;const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);try{kitDpApply();requestAnimationFrame(kitDpFit)}catch(e){}return r};
+ const d0=kitDlgFit;kitDlgFit=function(){const r=d0.apply(this,arguments);try{kitDpFit()}catch(e){}return r};window.kitDlgFit=kitDlgFit;
+ let t=0;addEventListener("resize",()=>{clearTimeout(t);t=setTimeout(kitDpFit,160)})})();
+(function(){const st=document.createElement("style");st.id="kit-dlgperson";st.textContent=`
+#modal .dlg.kpanel.kdper{display:flex!important;flex-direction:column;overflow:hidden!important;height:min(calc(100dvh - 32px),720px);
+ width:min(calc(var(--kdpw,240px) + 470px),calc(100vw - 24px));max-width:none!important}
+#modal .dlg.kpanel.kdper>*{flex:none}
+#modal .dlg.kdper>#mb,.modal .dlg.kdscroll.kdper>#mb{flex:1 1 auto!important;min-height:0;display:grid!important;overflow:hidden!important;
+ grid-template-columns:var(--kdpw,240px) minmax(0,1fr);grid-template-rows:max-content minmax(0,1fr);column-gap:14px;align-content:stretch}
+#modal .dlg.kdper>#mb>.kpb.kdpb{display:contents!important}
+#modal .dlg.kdper>#mb>.kpb>.kpsubj.kes{grid-column:1;grid-row:1/-1;position:relative!important;display:block!important;top:auto;max-height:none!important;height:auto;min-height:0;overflow:visible;margin:0}
+#modal .dlg.kdper>#mb>.kpb>.kpmain,#modal .dlg.kdper>#mb>.kdpr{grid-column:2;min-width:0}
+#modal .dlg.kdper>#mb>.opts{grid-column:2;grid-row:-2/-1;min-height:0!important;max-height:none;overflow-y:auto!important;align-self:stretch;margin-top:8px;
+ display:flex!important;flex-direction:column!important;gap:8px;grid-template-columns:none!important}
+html body #modal .dlg.kdper>#mb>.opts,html body #modal .dlg.kdper>#mb>.opts.k3grid:has(> button.ka){display:flex!important;flex-direction:column!important;grid-template-columns:none!important}
+html body #modal .dlg.kdper>#mb>.opts>*{width:100%!important;max-width:none!important;flex:none!important;order:0!important;grid-column:auto!important;min-height:max-content!important;height:auto!important}
+#modal .dlg.kdper .kes>.kesf{position:absolute;margin:0;display:block;flex:none}
+#modal .dlg.kdper .kes>.kesf .kesfi{display:block;position:relative}
+#modal .dlg.kdper .kes .kesimg{display:block;max-width:none!important;max-height:none!important}
+#modal .dlg.kdper .kes>.kpsn.kdpcap{position:absolute;bottom:2px;transform:translateX(-50%);z-index:20;white-space:nowrap;margin:0;text-align:center;
+ background:rgba(255,250,240,.92);border:1px solid var(--line,#e6d3ac);border-radius:6px;padding:1px 8px}
+#modal .dlg.kdper .kes>.kpsn.kdpcap[data-row="1"]{bottom:calc(2px + 3em)}
+#modal .dlg.kdper .kes>.kpsn .kname{display:flex;flex-direction:column;align-items:center;line-height:1.2;color:color-mix(in srgb,var(--rc,#2a1a12) 45%,#2a1a12);font-size:1rem}
+#modal .dlg.kdper .kes>.kpsn .kname .kti{font-size:.74rem;font-weight:600;letter-spacing:.02em;line-height:1.1;color:color-mix(in srgb,var(--rc,#7a5530) 75%,#2a1a12)}
+#modal .dlg.kdper .kfact.kfnodot{grid-template-columns:minmax(0,1fr)}
+#modal .dlg.kdper #mr{padding-left:calc(var(--kdpw,240px) + 28px)}
+#modal .dlg.kdper.kdnarrow{width:calc(100vw - 16px);height:calc(100dvh - 24px)}
+#modal .dlg.kdper.kdnarrow>#mb{grid-template-columns:minmax(0,1fr)!important;grid-template-rows:none!important;grid-auto-rows:max-content}
+#modal .dlg.kdper.kdnarrow>#mb:has(>.opts){grid-template-rows:min(48dvh,460px) max-content minmax(0,1fr)!important}
+#modal .dlg.kdper.kdnarrow>#mb:not(:has(>.opts)){grid-template-rows:min(48dvh,460px) max-content!important}
+#modal .dlg.kdper.kdnarrow>#mb>.kpb>.kpsubj.kes{grid-column:1;grid-row:1}
+#modal .dlg.kdper.kdnarrow>#mb>.kpb>.kpmain,#modal .dlg.kdper.kdnarrow>#mb>.kdpr{grid-column:1}
+#modal .dlg.kdper.kdnarrow>#mb>.opts{grid-column:1;grid-row:-2/-1}
+#modal .dlg.kdper.kdnarrow #mr{padding-left:10px}
+`;document.head.appendChild(st)})();
 /* ================= jmen: NAM NHÂN TRONG CUNG — vùng cấm, chỗ theo buổi, bắt gặp nam nhân nơi cấm địa (hai chiều) =================
    Extends j22 (S.men, S.menW, talkOpts, tư tình), j55 (quan), j61 (biết người), j8/j78 (chứng cứ, phạt), jk2b/jk4 (thẻ sự kiện, hình toàn thân).
    Plan: dev/MEN_PLAN.md. Consort road only (the servant road keeps j42's men).
@@ -13737,6 +13825,89 @@ window.kitLoadReady=function(cb){if(!el)cb();else enterCb.push(cb)};
  if(!await plan()){close();return}
  runCore()}catch(e){console.error("jload",e);KLOAD.err=String(e);close()}})();
 })();
+/* ================= jplace: THẺ NƠI CHỐN (KIT 32.8) + ONE OPTION LAYOUT RULE (KIT 32.9) — owner 11/15 08:55Z / 08:58Z =================
+   Every place card (tap a place on Dư đồ or in Danh sách nơi; Xin bái kiến / Xin yết kiến / Lẻn vào; the greeting card; the last walk
+   of a buổi) wears the SAME large place-event frame as place event dialogs (32.6): TOP = the place picture of the current season + buổi
+   (img/<nơi>-<mùa>-<buổi>.webp via sceneImg; a palace without its own picture uses the shared phi-tan-cung picture, the approved rule),
+   kit frame with the place name, and when people are there their number of grey silhouettes standing on the picture (no faces);
+   MIDDLE = one info box (walk khắc, khắc left, people, opening hours, the rule / reason lines); BOTTOM = the buttons by the shared rule.
+   Vertical on every size (owner 08:58Z replaced "picture left / info right"). */
+function kitPlaceArt(k){try{if(typeof scnSync==="function")scnSync();
+ if(k==="home"){const f=typeof sceneImg==="function"?sceneImg("tam-cung-dem"):"tam-cung-dem";return{src:`img/${f}.webp`,label:placeOf(k).n}}
+ const P=placeOf(k);const f=SCIMG[P.sc]||SCIMG.rv;return f?{src:`img/${f}.webp`,label:P.n}:null}catch(e){return null}}
+function kitPlaceHours(k){if(typeof ACC_DAY!=="undefined"&&ACC_DAY[k])return"mở cửa sáng, chiều";if(k==="tn")return"tiếp lúc sáng thỉnh an";
+ if(k==="kn")return"sáng thỉnh an, lúc khác phải được mời";if(k==="dtd"||k==="thu")return"chỉ vào khi được triệu";return""}
+/* the info box: one row of facts, then the card's own lines (reason, rule, why a way in is closed) without the people / hours lines */
+function kitPlaceInfo(k,h){let tc=0,n=0;try{tc=k===S.place?0:travel(S.place,k)}catch(e){}try{n=countAt(k)}catch(e){}const left=Math.max(0,4-used);
+ const F=[];if(tc)F.push(`Đường đi <b>${tc}</b> khắc`);F.push(`Còn <b>${left}</b> khắc`);if(n)F.push(`<b>${n}</b> bóng người`);const hr=kitPlaceHours(k);
+ const t=document.createElement("template");t.innerHTML=String(h||"");const L=[];
+ t.content.querySelectorAll("p").forEach(p=>{const s=p.textContent.trim();if(!s||/bóng người ở đó\.?$/.test(s)||/^Mở cửa buổi sáng/.test(s))return;L.push(`<p class="kplr${p.classList.contains("past")?" kplsm":""}">${p.innerHTML}</p>`)});
+ return `<div class="kplinfo"><div class="kplf">${F.map(x=>`<span>${x}</span>`).join("")}</div>${hr?`<div class="kplh">${hr[0].toUpperCase()+hr.slice(1)}</div>`:""}${L.join("")}</div>`}
+function kitPlaceDress(m,k){if(!m||!k||m.placeK)return;m.placeK=k;const a=kitPlaceArt(k);if(a)m.headArt=a;m.h=kitPlaceInfo(k,m.h);if(m.opts)m.optLayout=undefined}
+/* the people on the picture: grey kit silhouettes (f / m / k by who is really there), feet on the floor line, no faces */
+function kitPlaceSil(){try{const m=Q[0];const d=document.querySelector("#modal .dlg");if(!d)return;d.classList.toggle("kplace",!!(m&&m.placeK));if(!m||!m.placeK)return;
+ const o=d.querySelector("#mb > .opts");if(o){o.style.minHeight="0px";const h=o.scrollHeight;o.style.minHeight=Math.min(96,h)+"px"} /* a short option group keeps no empty band under it */
+ const fr=document.querySelector("#mb > .kdlgart .ksart");if(!fr||fr.querySelector(".kplsil"))return;let n=0;try{n=countAt(m.placeK)}catch(e){}if(!n)return;
+ let L=[];try{L=k61SexAt(m.placeK)}catch(e){}while(L.length<n)L.push("f");L=L.slice(0,Math.min(n,5));
+ const w=document.createElement("div");w.className="kplsil";w.setAttribute("aria-label",`${n} bóng người`);
+ w.innerHTML=L.map((g,i)=>`<img src="img/kit/unknown-fig-${g}.webp" alt="" class="kpls-${g}" style="--i:${i}">`).join("")+(n>5?`<b>+${n-5}</b>`:"");fr.appendChild(w)}catch(e){console.error("kitPlaceSil",e)}}
+/* tag the cards: each builder's own card (after all its wrappers) is dressed once, then shown again */
+(function(){function wrap(name){const f0=window[name];if(typeof f0!=="function")return;
+  window[name]=function(k){const n0=Q.length;const r=f0.apply(this,arguments);try{if(k&&Q.length>n0){const m=Q[Q.length-1];if(m&&!m.placeK&&m.t===accName(k)){kitPlaceDress(m,k);showModal()}}}catch(e){console.error("kitPlace",name,e)}return r}}
+ ["j77Card","j77LastWalk","accEtqCard"].forEach(wrap)})();
+
+/* ---------- KIT 32.9 ONE OPTION LAYOUT RULE (kitOptLayout) — every dialog, 32.6 / 32.7 included ----------
+   SHORT option = its name + at most ONE effect line (Tốn / Được / … row); LONG = two or more rows (Cần / Tốn / Được / Mất / Kèm), or a name
+   over two lines. All short → 2-column grid of equal buttons (3 on ≥ 1000 px with 3+); any long → each long one is a full-width row, the
+   short ones share the grid. "Thôi" / "Lui" / "Để sau" (kback) is a compact secondary button with no effect line, always last; when every
+   other option is long it sits as a slim row under them. A Q item may still force optLayout:'rows'|'grid'. */
+const KIT_BACK=/^(Thôi|Lui|Để sau|Bỏ qua|Không đi)$/;
+function kitOptIsBack(b){const t=b.querySelector(".kan");return KIT_BACK.test(((t||b).textContent||"").trim())}
+function kitOptIsLong(b){if(b.classList.contains("kback"))return false;const rows=b.querySelectorAll(".kr").length;if(rows>=2)return true;
+ const t=b.querySelector(".kan");const lh=parseFloat(t?getComputedStyle(t).lineHeight:0)||20;return !!(t&&t.getBoundingClientRect().height>lh*2.3)}
+function kitOptLayout(B){B.forEach(b=>{if(kitOptIsBack(b)){b.classList.add("kback");b.querySelectorAll(".kb,.kr").forEach(x=>{if(!/[0-9]/.test(x.textContent))x.remove()})}});
+ const L=B.map(kitOptIsLong);const main=B.filter(b=>!b.classList.contains("kback"));const mainLong=main.filter(b=>L[B.indexOf(b)]);
+ return{long:L,mode:!main.length||!mainLong.length?"grid":mainLong.length===main.length?"rows":"mixed"}}
+k3IsLong=function(b){return kitOptIsLong(b)};
+/* a grid cell too narrow for its own lines (an effect line that wraps, a name over two lines): the group goes back to full rows */
+function kitOptCramped(g){return [...g.querySelectorAll(":scope > button.ka:not(.k3long):not(.k3odd):not(.kback)")].some(b=>{const t=b.querySelector(".kan");const lt=parseFloat(t?getComputedStyle(t).lineHeight:0)||20;
+ if(t&&t.getBoundingClientRect().height>lt*2.3)return true;return [...b.querySelectorAll(".krv")].some(v=>{const l=parseFloat(getComputedStyle(v).lineHeight)||18;return v.getBoundingClientRect().height>l*1.6})})}
+(function(){const c0=k3OptCols;k3OptCols=function(){try{document.querySelectorAll("#modal .opts:has(> button.ka), #modal .kpscopts").forEach(g=>{const dl=g.closest(".dlg");if(dl&&dl.querySelector(".kpid"))return;
+  const B=[...g.querySelectorAll(":scope > button.ka")];const R=kitOptLayout(B);g.classList.toggle("kbackrow",R.mode==="rows"&&B.some(b=>b.classList.contains("kback")))})}catch(e){}
+ const r=c0.apply(this,arguments);
+ try{document.querySelectorAll("#modal .opts.k3grid, #modal .kpscopts.k3grid").forEach(g=>{if(!g.classList.contains("kbackrow")&&!kitOptCramped(g))return;g.classList.remove("k3grid","k3g3");g.classList.add("k3rows");
+   g.querySelectorAll(":scope > button.ka").forEach(b=>b.classList.remove("k3long","k3odd"))})}catch(e){}return r}})();
+(function(){const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);try{kitPlaceSil();requestAnimationFrame(()=>{kitPlaceSil();try{kitDlgFit()}catch(e){}})}catch(e){}return r}})();
+(function(){const st=document.createElement("style");st.id="k-place";st.textContent=`
+/* 32.9 back button: compact, last */
+html body #modal .opts>button.ka.kback,html body #modal .kpscopts>button.ka.kback{order:3!important}
+html body #modal .opts.k3rows>button.ka.kback{min-height:0!important;padding-top:7px!important;padding-bottom:7px!important}
+html body #modal .opts>button.ka.kback .kat{justify-content:center;border-bottom:0!important;padding-bottom:0!important;margin-bottom:0!important}
+html body #modal .opts>button.ka.kback .kan{font-weight:600;color:var(--ink2,#6b4a2a)}
+html body #modal .opts.k3grid>button.ka.kback .kat{min-height:100%;align-items:center}
+/* 32.7 person dialogs follow the same rule: short options in the 2-column grid */
+html body #modal .dlg.kdper>#mb>.opts.k3grid:has(> button.ka){display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;align-content:start;gap:8px}
+html body #modal .dlg.kdper>#mb>.opts.k3grid>button.ka.k3long,html body #modal .dlg.kdper>#mb>.opts.k3grid>button.ka.k3odd{grid-column:1/-1!important}
+html body #modal .dlg.kdper>#mb>.opts.k3grid>button.ka.k3long{order:1!important}html body #modal .dlg.kdper>#mb>.opts.k3grid>button.ka.kback{order:3!important}
+/* 32.8 place card */
+#modal .dlg.kplace .kplinfo{border:1px solid var(--gold,#8f5f0c);border-radius:6px;background:#fffaf0;box-shadow:inset 0 0 0 2px #fffaf0,inset 0 0 0 3px #efe2c4;padding:8px 12px;margin:2px 0 0}
+#modal .dlg.kplace .kplf{display:flex;flex-wrap:wrap;gap:2px 0;font-size:.82rem;line-height:1.5;color:var(--ink,#3b2412)}
+#modal .dlg.kplace .kplf>span{white-space:nowrap}#modal .dlg.kplace .kplf>span+span:before{content:"·";margin:0 .45em;color:var(--gold,#8f5f0c)}
+#modal .dlg.kplace .kplf b{font-variant-numeric:tabular-nums}
+#modal .dlg.kplace .kplh{font-size:.8rem;color:var(--ink2,#6b4a2a);margin-top:1px}
+#modal .dlg.kplace .kplf>span+span:before{content:"";margin:0}#modal .dlg.kplace .kplf>span:not(:last-child):after{content:"·";margin:0 .45em;color:var(--gold,#8f5f0c)}
+html body #modal .dlg.kplace>#mb>.opts{flex:0 1 auto!important}
+html body #modal .opts>button.ka.kback .kan{text-align:center;width:100%}
+#modal .dlg.kplace .kplh+p.kplr,#modal .dlg.kplace .kplf+p.kplr{border-top:1px solid #ead9b4;padding-top:6px}
+#modal .dlg.kplace .kplinfo p.kplr{margin:6px 0 0;padding:0;border:0;font-size:.88rem;line-height:1.45}
+#modal .dlg.kplace .kplinfo p.kplr.kplsm{font-size:.8rem;color:var(--ink2,#6b4a2a);margin-top:3px}
+#modal .dlg.kplace .kplf+p.kplr{border-top:1px solid #ead9b4;padding-top:6px}
+#modal .dlg.kplace #mb>.kdlgart{margin-bottom:6px}
+#modal .dlg.kplace .ksart .kplsil{position:absolute;left:0;right:0;bottom:12%;height:58%;display:flex;justify-content:center;align-items:flex-end;pointer-events:none;z-index:2}
+#modal .dlg.kplace .ksart .kplsil img{height:100%;width:auto;max-width:none;margin:0 -1%;opacity:.78;filter:grayscale(1) brightness(.42) blur(.3px);transform:translateY(calc(var(--i) * 2%))}
+#modal .dlg.kplace .ksart .kplsil img.kpls-k{height:62%}
+#modal .dlg.kplace .ksart .kplsil b{align-self:flex-end;margin-left:6px;font-size:.8rem;color:#fffaf0;background:rgba(40,24,12,.55);border-radius:9px;padding:0 6px}
+`;document.head.appendChild(st)})();
 /* j84 — VĂN PHONG: every player-visible word in one classical (cổ trang) register. Style guide: dev/kit/VANPHONG.md.
    Must stay the LAST module. It changes no rule or number: (1) data patches (tab names, tooltips); (2) one replacement
    table window.VP applied to text nodes and to title/aria-label/placeholder/data-s attributes as they appear on screen
