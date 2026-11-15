@@ -2052,10 +2052,17 @@ Emperor's visits. It is the 32.7 person dialog:
 - MEN wear men's seals (owner 11/15, review/emo-men): same 10 moods, same coloured grounds, gold rim and marks (Sợ: pale purple upper face + fear lines; Giận: red flushed face + anger mark). `img/kit/emo-m-<k>.webp` = young man (Hoàng thượng, thái tử/hoàng tử, công tử/nam nhân, vương gia, thái giám, thị vệ); `img/kit/emo-mo-<k>.webp` = mature man with cap and short beard (quan, thái y, any man 45+ except Hoàng thượng). Women and girls keep `img/kit/emo-<k>.webp`. ONE rule `emoArtSet(p)` in jemo (personRoleRank sex/role); art cut from 5x2 chroma sheets by `dev/art/emo_cut.py`; check: `dev/test/emo-men.js`, sheet dev/shots/emo-men/sheet.jpg.
 
 ### 50.1 ONE TEMPLATE FOR EVERY EVENT WITH A PERSON (owner 11/15 13:00Z + 13:15Z; acceptance "VIỆC · Thái hậu triệu") — review kit-fig2 r8
-See PROGRESS_kit-fig2.md "r8" for the scan of every dialog with a person met in a real play (title, layout class, banner, chip above the
-head, dialog height vs content). Rules added in r8: the dialog height is its content (min 300 px, was 500: a two-choice summons is a short
-card), the figure column never leaves empty space above the head, the left column shows ONE person (the main one, `stage[0]` / `who`);
-the second person of a two-person event is named in the text.
+- LEFT: ONE person — the main one (`stage[0]` / `who`); a second person is named in the text (owner "several people → only the main one").
+- RIGHT top: a banner for EVERY event with a person: its own event picture, else the picture of its kind — `j24:<slug of the title>`
+  (EVENTS.json: Có người đến, Thái hậu triệu, Hoàng thượng đến, Kẻ hầu xin, Một ánh mắt, Việc của kẻ hầu), else the week-book meaning
+  table `KBK_EVRE` (j87) on title + text, else Hoàng thượng / Thái hậu / visitor by who it is; a dialog about herself alone gets a
+  banner only when the table finds a real meaning.
+- Height = content: `kitDpNat` adds banner + text + the options' own content (not the stretched grid cell, which clipped the options and
+  made them scroll), floor 420 px (was 500: a two-choice summons left ~120 px empty), cap min(100dvh − 32, 720).
+- Short options (≤ 2 rows, ≤ 70 characters) 2 per row; the 32.9 "long" mark (k3long / k3odd) no longer breaks such a group.
+- Not changed (rule: number chips wait for fix-float `kitRelDelta`): option rows still say "Thái hậu → ta: thiện cảm +3" (NAMES.th / hh).
+Test: `node dev/test/event-dp-scan.js <url> <outdir> <tag> [sizes] [save.json]` — every j24 approach kind + every festival / feast /
+merit invitation, opened for real and measured (layout, one person, banner in the right column, chip above, fill, empty px under the options).
 
 ## 39. ẤN TRÂN NỮ · kitSeal (owner 11/15, review/brand) — `dev/build/jseal.js` (after jk4)
 - Ported from Phượng Lệnh `public/choi/js/kit/seal.js`: square cinnabar seal, TRÂN over NỮ cut white into the cinnabar (bạch văn), Vietnamese
