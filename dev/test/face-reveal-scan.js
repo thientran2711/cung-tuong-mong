@@ -38,11 +38,11 @@ function lineMap(html){const asm=fs.readFileSync(path.join(__dirname,'../build/a
     try{if(m&&S&&S.known&&!m.__seen){const E=ents(m);rec={site:m.__site||[],t:String(m.t||'').slice(0,50),p:E.map(e=>({k:kOf61(e),kind:k61Kind(e),face0:isKnown61(e),st0:k61St(e)}))};}}catch(e){}
     const r=s0.apply(this,arguments);
     try{if(rec){m.__seen=1;const M=document.getElementById('modal');const grey=M&&!M.hidden?M.querySelectorAll('img[src*="unknown-"],image[href*="unknown-"]').length:0;
-     rec.grey=grey;rec.p.forEach(x=>{const e=k61Ent(x.k);x.face1=e?isKnown61(e):null;x.st1=e?k61St(e):null});window.__fr.push(rec)}}catch(e){}return r}});
+     rec.grey=grey;if(grey)rec.greyCtx=[...M.querySelectorAll('img[src*="unknown-"],image[href*="unknown-"]')].slice(0,3).map(g=>{const c=g.closest('figure,.kfact,.spk,.kitem,li,p,div');return (c?c.className+': ':'')+(c?c.textContent:'').replace(/\s+/g,' ').slice(0,60)});rec.p.forEach(x=>{const e=k61Ent(x.k);x.face1=e?isKnown61(e):null;x.st1=e?k61St(e):null});window.__fr.push(rec)}}catch(e){}return r}});
   for(let i=0;i<STEPS;i++){try{await p.evaluate(()=>window.__bot.step('sens',300))}catch(e){out.errs.push('step '+String(e.message).slice(0,100));break}}
   const R=await p.evaluate(()=>window.__fr);const where=lineMap(html);
   for(const r of R){out.totals.dialogs++;const key=r.site.length?where(r.site[0]):'?';const S0=out.sites[key]=out.sites[key]||{n:0,title:r.t,via:r.site.slice(1,3).map(where),shown:0,strangerShown:0,greyDialogs:0,revealedAfter:0,notRevealed:0,kinds:{}};
-   S0.n++;if(r.p.length){out.totals.withPerson++;S0.shown++}if(r.grey){S0.greyDialogs++;out.totals.grey++}
+   S0.n++;if(r.greyCtx&&(S0.greyCtx=S0.greyCtx||[]).length<4)S0.greyCtx.push({p:r.p.map(x=>x.kind+(x.face1?'+':'-')),g:r.greyCtx});if(r.p.length){out.totals.withPerson++;S0.shown++}if(r.grey){S0.greyDialogs++;out.totals.grey++}
    for(const x of r.p){S0.kinds[x.kind]=(S0.kinds[x.kind]||0)+1;if(!x.face0){S0.strangerShown++;out.totals.strangerShown++;if(x.face1){S0.revealedAfter++;out.totals.revealed++}else{S0.notRevealed++;out.totals.notRevealed++}}}}
   await ctx.close()}
  await b.close();console.log(JSON.stringify(out,null,1))})().catch(e=>{console.error(e);process.exit(1)});
