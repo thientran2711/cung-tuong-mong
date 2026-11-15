@@ -458,3 +458,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (13:35Z) Dò ảnh hộp thoại xong: 290 hộp thoại (118 nghĩa) chỉ dùng 23 ảnh; 16 ảnh dùng chung; 121 nghĩa cần ảnh riêng (76 rơi về ảnh mặc định) → act-pics2 vẽ, bố cục cắt ngang được cho khung sự việc.
 - (13:35Z) Điều phối chốt việc ban ngày với Hoàng thượng: Xin hầu cờ (cần Kỳ), Xin đánh đàn (cần Cầm), Mời dạo ngự hoa viên (không bão); mỗi ngày một lần chung với Xin yết kiến; NPC cũng làm được.
 - (13:35Z) Trung y đợt 1 (c01–c12, 8 bậc) đạt; giữ, đẩy CDN khi nhánh qua duyệt.
+- (13:40Z) LỖI: "Nàng oán ta 2.36000…" số lẻ → mọi chỉ số làm tròn khi ghi + sửa sổ cũ; "thù" → "oán"; Tuần lục ghi lại chữ của THẺ thay vì kết quả thật → ghi kết quả thật.
