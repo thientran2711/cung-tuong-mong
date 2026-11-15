@@ -57,6 +57,9 @@ KIT_SAMPLES.push(
 .kitpg-s{margin:14px 0}.kitpg-b{padding:10px;border:1px dashed var(--k-hair,#e6d3ac);border-radius:var(--k-rad,8px)}
 .kitpg-row{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-start}
 .kitpg-seal .rtoast.karesult{position:static;transform:none;opacity:1;display:inline-flex;padding:4px 8px}
+/* review/small-bugs-3: every sample is its own stacking layer under the sticky page header (z 2) — a sample built from a floating part (the
+   result card seals, z 45; stamps; pills) never draws over the header */
+.kitpg-s{position:relative;z-index:0;isolation:isolate}
 `;document.head.appendChild(st)})();
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-kitsample]");if(b){e.stopPropagation();e.preventDefault()}},true);
 /* §32.1 / §32.12 the top bar's stat row (owner 15/11 ~17:50Z: LEFT Sắc · Tài · Tâm cơ · Đức · Danh · Sủng | RIGHT Bạc · Sức), review/header-danh */
