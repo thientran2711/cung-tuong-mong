@@ -303,3 +303,4 @@ Worker worktrees at /home/user/wt/<name>. Rule summaries for workers: /home/user
 - (s7) LIVE main = month-calendar r1 (8ee414c1b): desk calendar on her room stage → 3×10 month grid, fixed FEST festivals only, KIT §58; desk avoids +N chips. Pre-existing #kit §28.1 sample error still open (queue).
 - (s7) item-events READY fc6eb5110 (fwd) → reviewer spawned (review/item-events-r1; renumber KIT §58→§64). Registry: §64 item-events.
 - (s7) sfx READY a7109a003 (fwd; includes live-bug fix: duplicate global kfWhy made locked-button taps throw) → reviewer spawned (review/sfx-r1). act-pics2 redraw batch 1: 60/380 faceless live (data).
+- (s7) chap-label READY 50b9cf202 (lab67 'Chương N · Hồi i/n' on every main/side story label, old-save fallbacks, empty v1 tab fixed) → reviewer spawned (review/chap-label-r1). Open owner question: j72 Việc nhờ cards keep 'bước i/n'?
