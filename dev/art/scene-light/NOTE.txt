@@ -1,23 +1,125 @@
-Cảnh theo buổi (review/scene-light, sếp 11/15 10:10Z) — MẪU 3 nơi + Dư đồ, chờ duyệt rồi mới chỉnh hết + đẩy CDN.
-Cách chỉnh: grade2.py (Lab, không vẽ lại, giữ từng điểm ảnh). Đích lấy từ bản SÁNG cùng nơi: trưa C×1.18, b+5.5, sáng +3;
-chiều C×1.32, b+10, a+3.5, nửa giữ sắc riêng (vàng kim không xám) + lọc giữ cạnh 15 %; tối = đúng cách nightfix đã duyệt
-(co độ rực quanh 0 tới C = C sáng, nén vùng sáng >62 ×0.72, xanh đêm ở bóng, lọc 35 %). Dư đồ: giữ sắc riêng hoàn toàn (nước xanh).
-Giữ nguyên nếu đã trong khoảng đích (C ≤ đích×1.06) hoặc đêm đã lam (b<0, như lãnh cung). KSP/TYV tối: giữ bản nightfix đã duyệt trên CDN.
-Số: S = độ bão hoà HSV TB (0–255), C = độ rực Lab, L = sáng, Ls = tương phản, a/b = đỏ/vàng TB.
+Cảnh theo buổi (review/scene-light) — sếp DUYỆT chỉnh màu nơi chốn (11/15). Dư đồ KHÔNG chỉnh (tranh Phượng Lệnh, giữ nguyên; map-*-trua dùng bản gốc).
+Cách: grade2.py (Lab, không vẽ lại, giữ từng điểm ảnh). Đích theo bản SÁNG cùng nơi: trưa C×1.18 b+5.5 sáng+3; chiều C×1.32 b+10 a+3.5,
+nửa giữ sắc riêng + lọc giữ cạnh 15 %; tối = cách nightfix đã duyệt. Giữ: lãnh cung (mốc), 8 đêm KSP/TYV nightfix đã duyệt, đêm đã lam (b<0).
+S = bão hoà HSV TB (0–255), C = độ rực Lab, L = sáng TB, Ls = tương phản, a/b = đỏ/vàng TB. Trước -> sau.
 
-thai-y-vien-xuan-sang      S 94 C24.2 L59.6 Ls17.4 a+13.2 b+15.7 -> S 94 C24.2 L59.6 Ls17.4 a+13.2 b+15.7  gốc (mốc)
-thai-y-vien-xuan-trua      S122 C34.1 L62.5 Ls18.4 a+17.4 b+25.7 -> S106 C28.5 L62.5 Ls17.8 a+14.2 b+20.6  đã chỉnh
-thai-y-vien-xuan-chieu     S181 C46.7 L49.0 Ls17.8 a+24.9 b+38.0 -> S132 C32.0 L51.7 Ls17.4 a+16.9 b+25.8  đã chỉnh
-thai-y-vien-xuan-toi       S183 C36.9 L32.8 Ls16.1 a+23.0 b+25.5 -> S121 C22.5 L32.4 Ls15.6 a+15.0 b +9.2  đêm đã duyệt (nightfix)
-duong-tam-dien-thu-sang    S 85 C23.3 L60.0 Ls16.3 a+12.4 b+16.1 -> S 85 C23.3 L60.0 Ls16.3 a+12.4 b+16.1  gốc (mốc)
-duong-tam-dien-thu-trua    S126 C38.2 L64.3 Ls16.9 a+17.3 b+30.9 -> S 97 C27.4 L64.2 Ls16.3 a+13.4 b+20.9  đã chỉnh
-duong-tam-dien-thu-chieu   S183 C49.5 L51.1 Ls17.3 a+24.2 b+42.0 -> S125 C30.9 L53.0 Ls16.1 a+15.5 b+25.9  đã chỉnh
-duong-tam-dien-thu-toi     S178 C40.3 L38.4 Ls18.2 a+21.6 b+30.8 -> S113 C22.9 L38.0 Ls17.2 a+13.0 b+12.3  đã chỉnh
-kinh-su-phong-ha-sang      S 91 C20.1 L49.2 Ls17.3 a+11.5 b+11.7 -> S 91 C20.1 L49.2 Ls17.3 a+11.5 b+11.7  gốc (mốc)
-kinh-su-phong-ha-trua      S153 C42.5 L53.2 Ls19.2 a+23.6 b+29.8 -> S101 C23.8 L53.2 Ls17.7 a+12.6 b+16.8  đã chỉnh
-kinh-su-phong-ha-chieu     S194 C45.5 L41.7 Ls16.7 a+25.1 b+36.1 -> S130 C26.7 L42.9 Ls16.9 a+14.6 b+21.1  đã chỉnh
-kinh-su-phong-ha-toi       S189 C33.2 L29.1 Ls15.9 a+19.0 b+23.3 -> S121 C19.8 L28.9 Ls15.3 a+12.3 b +7.2  đêm đã duyệt (nightfix)
-map-thu-sang               S 76 C19.5 L64.5 Ls15.6 a +6.0 b+15.9 -> S 76 C19.5 L64.5 Ls15.6 a +6.0 b+15.9  gốc (mốc)
-map-thu-trua               S 77 C21.8 L69.8 Ls15.7 a +5.5 b+16.4 -> S 77 C21.8 L69.8 Ls15.7 a +5.5 b+16.4  đã trong khoảng đích, giữ
-map-thu-chieu              S115 C30.3 L61.2 Ls15.3 a+10.0 b+27.5 -> S103 C25.8 L60.2 Ls15.6 a +8.6 b+23.5  đã chỉnh
-map-thu-toi                S 63 C10.5 L33.5 Ls10.7 a +1.6 b -3.4 -> S 63 C10.5 L33.5 Ls10.7 a +1.6 b -3.4  đêm đã lam (b<0), giữ
+kinh-su-phong-xuan-trua      S137 C37.6 L55.9 Ls19.7 a+23.3 b+25.8 -> S 93 C22.5 L56.5 Ls19.2 a+12.8 b+14.3  đã chỉnh
+kinh-su-phong-xuan-chieu     S175 C44.5 L47.9 Ls18.3 a+25.8 b+34.8 -> S118 C25.4 L48.2 Ls18.9 a+15.1 b+19.5  đã chỉnh
+kinh-su-phong-xuan-toi       S124 C22.8 L32.0 Ls15.8 a+15.4 b +9.0 -> S124 C22.8 L32.0 Ls15.8 a+15.4 b +9.0  đêm nightfix đã duyệt (CDN), giữ
+kinh-su-phong-ha-trua        S153 C42.5 L53.2 Ls19.2 a+23.6 b+29.8 -> S101 C23.8 L53.2 Ls17.7 a+12.6 b+16.8  đã chỉnh
+kinh-su-phong-ha-chieu       S194 C45.5 L41.7 Ls16.7 a+25.1 b+36.1 -> S130 C26.7 L42.9 Ls16.9 a+14.6 b+21.1  đã chỉnh
+kinh-su-phong-ha-toi         S121 C19.8 L28.9 Ls15.3 a+12.3 b +7.2 -> S121 C19.8 L28.9 Ls15.3 a+12.3 b +7.2  đêm nightfix đã duyệt (CDN), giữ
+kinh-su-phong-thu-trua       S153 C41.7 L53.7 Ls19.1 a+24.7 b+31.2 -> S105 C25.4 L54.1 Ls18.3 a+15.0 b+17.9  đã chỉnh
+kinh-su-phong-thu-chieu      S191 C45.8 L42.7 Ls17.7 a+27.0 b+35.9 -> S136 C28.7 L44.4 Ls18.3 a+17.1 b+22.4  đã chỉnh
+kinh-su-phong-thu-toi        S124 C23.4 L32.4 Ls15.9 a+16.4 b+10.9 -> S124 C23.4 L32.4 Ls15.9 a+16.4 b+10.9  đêm nightfix đã duyệt (CDN), giữ
+kinh-su-phong-dong-trua      S139 C38.3 L56.0 Ls19.0 a+23.6 b+26.4 -> S102 C25.5 L55.9 Ls19.3 a+16.4 b+14.5  đã chỉnh
+kinh-su-phong-dong-chieu     S175 C41.2 L42.3 Ls18.2 a+26.8 b+30.3 -> S134 C28.8 L43.5 Ls19.0 a+19.2 b+20.4  đã chỉnh
+kinh-su-phong-dong-toi       S124 C21.0 L27.9 Ls14.6 a+15.0 b +7.4 -> S124 C21.0 L27.9 Ls14.6 a+15.0 b +7.4  đêm nightfix đã duyệt (CDN), giữ
+tu-ninh-cung-xuan-trua       S123 C33.6 L61.9 Ls18.2 a+16.5 b+27.2 -> S 87 C20.6 L62.7 Ls19.0 a+10.0 b+17.2  đã chỉnh
+tu-ninh-cung-xuan-chieu      S165 C42.3 L51.7 Ls17.8 a+21.7 b+35.2 -> S107 C23.2 L53.2 Ls18.5 a+11.4 b+19.7  đã chỉnh
+tu-ninh-cung-xuan-toi        S169 C37.8 L41.4 Ls18.6 a+21.8 b+28.6 -> S 88 C17.3 L40.8 Ls17.5 a+10.8 b +8.6  đã chỉnh
+tu-ninh-cung-ha-trua         S124 C33.4 L61.3 Ls19.0 a+13.7 b+27.4 -> S101 C23.7 L61.3 Ls18.5 a +8.0 b+22.0  đã chỉnh
+tu-ninh-cung-ha-chieu        S165 C40.8 L49.7 Ls17.2 a+20.0 b+34.3 -> S122 C26.6 L51.0 Ls18.0 a+10.5 b+23.8  đã chỉnh
+tu-ninh-cung-ha-toi          S179 C37.0 L38.3 Ls19.2 a+19.3 b+29.1 -> S104 C19.7 L37.8 Ls18.2 a+11.1 b+10.8  đã chỉnh
+tu-ninh-cung-thu-trua        S126 C33.8 L60.9 Ls18.9 a+16.0 b+27.8 -> S 94 C22.1 L60.8 Ls17.7 a+11.4 b+18.5  đã chỉnh
+tu-ninh-cung-thu-chieu       S183 C44.9 L46.8 Ls17.9 a+23.1 b+37.6 -> S116 C24.7 L49.3 Ls17.4 a+12.5 b+20.9  đã chỉnh
+tu-ninh-cung-thu-toi         S188 C41.5 L40.2 Ls18.2 a+22.2 b+33.7 -> S 95 C18.4 L39.7 Ls17.3 a+11.1 b+11.3  đã chỉnh
+tu-ninh-cung-dong-trua       S123 C32.7 L60.5 Ls19.0 a+17.1 b+25.8 -> S 93 C22.2 L60.4 Ls18.3 a+13.0 b+17.2  đã chỉnh
+tu-ninh-cung-dong-chieu      S156 C37.3 L48.7 Ls18.3 a+20.4 b+30.3 -> S116 C24.9 L49.9 Ls17.9 a+13.9 b+20.2  đã chỉnh
+tu-ninh-cung-dong-toi        S169 C35.9 L38.9 Ls18.1 a+20.5 b+27.3 -> S 96 C18.6 L38.4 Ls17.1 a+11.6 b +9.5  đã chỉnh
+thai-y-vien-xuan-trua        S122 C34.1 L62.5 Ls18.4 a+17.4 b+25.7 -> S106 C28.5 L62.5 Ls17.8 a+14.2 b+20.6  đã chỉnh
+thai-y-vien-xuan-chieu       S181 C46.7 L49.0 Ls17.8 a+24.9 b+38.0 -> S132 C32.0 L51.7 Ls17.4 a+16.9 b+25.8  đã chỉnh
+thai-y-vien-xuan-toi         S121 C22.5 L32.4 Ls15.6 a+15.0 b +9.2 -> S121 C22.5 L32.4 Ls15.6 a+15.0 b +9.2  đêm nightfix đã duyệt (CDN), giữ
+thai-y-vien-ha-trua          S132 C38.1 L62.3 Ls17.9 a+17.4 b+29.7 -> S100 C26.5 L62.2 Ls17.4 a+10.3 b+19.7  đã chỉnh
+thai-y-vien-ha-chieu         S170 C45.7 L52.6 Ls16.3 a+22.6 b+38.0 -> S127 C29.8 L52.2 Ls17.2 a+13.7 b+25.1  đã chỉnh
+thai-y-vien-ha-toi           S121 C21.3 L32.3 Ls15.6 a+12.4 b +8.7 -> S121 C21.3 L32.3 Ls15.6 a+12.4 b +8.7  đêm nightfix đã duyệt (CDN), giữ
+thai-y-vien-thu-trua         S132 C37.5 L61.4 Ls18.2 a+20.7 b+28.6 -> S102 C26.8 L61.4 Ls17.7 a+14.9 b+18.7  đã chỉnh
+thai-y-vien-thu-chieu        S175 C45.9 L49.5 Ls16.8 a+25.6 b+36.9 -> S130 C30.2 L50.2 Ls17.4 a+17.2 b+23.9  đã chỉnh
+thai-y-vien-thu-toi          S127 C23.7 L32.7 Ls15.5 a+16.0 b+12.1 -> S127 C23.7 L32.7 Ls15.5 a+16.0 b+12.1  đêm nightfix đã duyệt (CDN), giữ
+thai-y-vien-dong-trua        S127 C36.3 L62.4 Ls18.0 a+19.3 b+26.3 -> S105 C28.4 L62.3 Ls17.8 a+15.8 b+19.2  đã chỉnh
+thai-y-vien-dong-chieu       S157 C39.8 L50.2 Ls17.6 a+22.5 b+31.3 -> S132 C31.9 L51.3 Ls17.4 a+18.4 b+24.6  đã chỉnh
+thai-y-vien-dong-toi         S124 C23.6 L33.9 Ls15.8 a+15.4 b+10.7 -> S124 C23.6 L33.9 Ls15.8 a+15.4 b+10.7  đêm nightfix đã duyệt (CDN), giữ
+tam-cung-dem-xuan-trua       S118 C30.0 L56.7 Ls18.8 a+19.5 b+20.6 -> S 80 C17.6 L59.8 Ls18.7 a+11.4 b+13.4  đã chỉnh
+tam-cung-dem-xuan-chieu      S163 C40.1 L48.4 Ls18.2 a+24.2 b+31.2 -> S 97 C19.5 L50.2 Ls18.2 a+11.7 b+15.4  đã chỉnh
+tam-cung-dem-xuan-toi        S126 C30.7 L45.6 Ls16.8 a+22.6 b+17.3 -> S 68 C14.6 L45.1 Ls15.8 a+10.9 b +3.0  đã chỉnh
+tam-cung-dem-ha-trua         S111 C28.1 L57.9 Ls19.4 a+15.4 b+20.0 -> S 78 C16.9 L59.5 Ls17.5 a +8.8 b+14.1  đã chỉnh
+tam-cung-dem-ha-chieu        S169 C39.1 L43.4 Ls16.5 a+23.2 b+30.4 -> S 99 C19.0 L47.4 Ls17.2 a+10.0 b+15.8  đã chỉnh
+tam-cung-dem-ha-toi          S124 C27.4 L43.9 Ls17.9 a+18.1 b+17.5 -> S 74 C14.1 L43.4 Ls16.9 a +9.3 b +3.6  đã chỉnh
+tam-cung-dem-thu-trua        S118 C30.0 L56.7 Ls19.1 a+19.3 b+20.8 -> S 85 C20.0 L57.9 Ls17.9 a+13.9 b+13.1  đã chỉnh
+tam-cung-dem-thu-chieu       S170 C41.7 L46.4 Ls17.1 a+25.5 b+32.4 -> S108 C22.5 L48.1 Ls17.5 a+14.6 b+16.8  đã chỉnh
+tam-cung-dem-thu-toi         S133 C31.7 L45.6 Ls17.0 a+22.6 b+20.2 -> S 77 C16.8 L45.1 Ls16.1 a+12.8 b +6.3  đã chỉnh
+tam-cung-dem-dong-trua       S110 C27.8 L57.5 Ls19.5 a+18.4 b+17.7 -> S 80 C18.5 L57.4 Ls18.2 a+14.0 b+11.1  đã chỉnh
+tam-cung-dem-dong-chieu      S143 C33.4 L47.7 Ls18.2 a+21.9 b+24.5 -> S101 C20.7 L48.1 Ls17.8 a+14.4 b+14.6  đã chỉnh
+tam-cung-dem-dong-toi        S125 C29.0 L45.0 Ls17.1 a+20.4 b+16.5 -> S 73 C15.5 L44.5 Ls16.1 a+11.2 b +3.6  đã chỉnh
+phi-tan-cung-xuan-trua       S100 C28.2 L68.4 Ls19.1 a+17.6 b+19.5 -> S 69 C18.4 L69.7 Ls18.0 a+12.3 b+11.5  đã chỉnh
+phi-tan-cung-xuan-chieu      S157 C43.3 L55.5 Ls17.2 a+26.6 b+32.8 -> S 90 C20.8 L58.6 Ls17.6 a+13.3 b+15.4  đã chỉnh
+phi-tan-cung-xuan-toi        S144 C34.1 L44.2 Ls17.6 a+22.8 b+21.7 -> S 76 C15.5 L43.6 Ls16.6 a+10.6 b +4.7  đã chỉnh
+phi-tan-cung-ha-trua         S 78 C22.0 L71.2 Ls18.4 a +8.1 b+16.8 -> S 67 C17.1 L71.1 Ls17.4 a +2.7 b+16.7  đã chỉnh
+phi-tan-cung-ha-chieu        S147 C39.1 L58.7 Ls16.9 a+14.9 b+34.6 -> S 83 C18.9 L60.4 Ls17.1 a +4.9 b+17.8  đã chỉnh
+phi-tan-cung-ha-toi          S126 C24.9 L42.7 Ls18.3 a +9.8 b+18.9 -> S 78 C13.9 L42.1 Ls17.3 a +5.2 b +5.8  đã chỉnh
+phi-tan-cung-thu-trua        S129 C37.3 L66.3 Ls18.1 a+17.7 b+31.0 -> S 96 C26.2 L66.2 Ls17.3 a+14.0 b+20.2  đã chỉnh
+phi-tan-cung-thu-chieu       S181 C50.8 L54.2 Ls15.9 a+27.4 b+41.8 -> S121 C29.4 L56.2 Ls16.9 a+15.8 b+24.3  đã chỉnh
+phi-tan-cung-thu-toi         S184 C42.0 L40.6 Ls17.5 a+23.7 b+32.5 -> S109 C22.0 L40.2 Ls16.6 a+13.5 b+12.8  đã chỉnh
+phi-tan-cung-dong-trua       S118 C33.4 L62.6 Ls18.6 a+21.5 b+22.7 -> S 94 C25.6 L62.5 Ls18.1 a+17.4 b+14.9  đã chỉnh
+phi-tan-cung-dong-chieu      S158 C40.0 L49.9 Ls18.8 a+24.6 b+30.3 -> S121 C28.9 L51.4 Ls18.0 a+19.2 b+20.6  đã chỉnh
+phi-tan-cung-dong-toi        S174 C34.7 L33.4 Ls17.3 a+22.1 b+22.2 -> S117 C21.6 L33.2 Ls16.4 a+14.5 b +6.9  đã chỉnh
+ngu-thu-phong-xuan-trua      S111 C29.9 L61.2 Ls21.6 a+13.5 b+20.6 -> S 89 C22.8 L62.0 Ls20.2 a+10.7 b+15.7  đã chỉnh
+ngu-thu-phong-xuan-chieu     S153 C39.0 L51.5 Ls19.7 a+20.4 b+31.6 -> S111 C25.7 L52.7 Ls19.7 a+13.3 b+20.7  đã chỉnh
+ngu-thu-phong-xuan-toi       S163 C32.3 L36.1 Ls19.2 a+18.2 b+23.1 -> S105 C19.0 L35.7 Ls18.3 a+10.8 b +6.9  đã chỉnh
+ngu-thu-phong-ha-trua        S112 C30.4 L60.8 Ls21.3 a+11.9 b+21.0 -> S 93 C24.0 L61.2 Ls20.3 a +9.8 b+15.9  đã chỉnh
+ngu-thu-phong-ha-chieu       S157 C39.6 L50.2 Ls20.0 a+19.6 b+32.1 -> S115 C27.1 L51.6 Ls20.0 a+12.9 b+21.7  đã chỉnh
+ngu-thu-phong-ha-toi         S164 C29.1 L32.2 Ls18.3 a+16.6 b+22.2 -> S117 C20.0 L32.0 Ls17.6 a+12.0 b +9.0  đã chỉnh
+ngu-thu-phong-thu-trua       S114 C31.3 L61.0 Ls21.2 a+16.1 b+22.8 -> S 85 C21.9 L60.9 Ls20.2 a+11.5 b+13.6  đã chỉnh
+ngu-thu-phong-thu-chieu      S160 C40.8 L50.6 Ls19.8 a+21.1 b+33.4 -> S108 C24.7 L51.3 Ls19.7 a+13.6 b+19.3  đã chỉnh
+ngu-thu-phong-thu-toi        S165 C35.3 L38.0 Ls18.7 a+20.6 b+26.8 -> S 97 C18.1 L37.5 Ls17.8 a+10.9 b +8.1  đã chỉnh
+ngu-thu-phong-dong-trua      S105 C28.3 L61.4 Ls21.1 a+15.5 b+18.5 -> S 86 C22.7 L61.4 Ls20.9 a+13.1 b+10.8  đã chỉnh
+ngu-thu-phong-dong-chieu     S136 C33.6 L51.7 Ls20.1 a+19.4 b+25.6 -> S111 C25.7 L51.0 Ls20.3 a+15.8 b+17.7  đã chỉnh
+ngu-thu-phong-dong-toi       S160 C30.8 L34.5 Ls18.3 a+18.0 b+21.4 -> S106 C19.0 L34.2 Ls17.5 a+11.2 b +6.2  đã chỉnh
+ngu-hoa-vien-xuan-trua       S 90 C26.5 L67.7 Ls17.2 a -0.6 b+15.5 -> S 67 C19.9 L74.2 Ls14.4 a +5.6 b+15.7  đã chỉnh
+ngu-hoa-vien-xuan-chieu      S121 C32.3 L59.4 Ls16.2 a+13.7 b+26.6 -> S 89 C23.0 L62.9 Ls14.1 a +8.7 b+19.6  đã chỉnh
+ngu-hoa-vien-xuan-toi        S107 C22.6 L42.9 Ls18.2 a +8.6 b+10.4 -> S 93 C16.6 L42.3 Ls16.9 a +5.0 b +0.6  đã chỉnh
+ngu-hoa-vien-ha-trua         S110 C31.6 L62.4 Ls18.5 a -3.5 b+18.6 -> S 85 C25.0 L64.7 Ls16.9 a -0.9 b+16.0  đã chỉnh
+ngu-hoa-vien-ha-chieu        S136 C33.1 L51.7 Ls18.3 a +7.3 b+28.0 -> S108 C28.0 L54.2 Ls16.8 a +3.0 b+23.0  đã chỉnh
+ngu-hoa-vien-ha-toi          S122 C23.2 L36.7 Ls17.9 a +5.3 b+10.8 -> S125 C20.1 L36.4 Ls16.7 a +3.4 b +1.2  đã chỉnh
+ngu-hoa-vien-thu-trua        S110 C31.1 L64.6 Ls18.0 a +7.2 b+21.1 -> S 81 C22.0 L67.1 Ls16.7 a +7.8 b+17.2  đã chỉnh
+ngu-hoa-vien-thu-chieu       S143 C38.0 L56.5 Ls17.0 a+16.7 b+32.5 -> S102 C24.9 L57.8 Ls16.4 a+10.2 b+21.6  đã chỉnh
+ngu-hoa-vien-thu-toi         S139 C30.8 L40.8 Ls16.9 a+15.7 b+20.7 -> S 97 C18.3 L40.3 Ls15.8 a +8.9 b +6.1  đã chỉnh
+ngu-hoa-vien-dong-trua       S 55 C15.5 L70.0 Ls17.0 a +6.0 b -3.0 -> S 44 C12.6 L72.6 Ls15.5 a +7.1 b +1.3  đã chỉnh
+ngu-hoa-vien-dong-chieu      S 64 C17.4 L61.8 Ls16.3 a+11.2 b +7.1 -> S 53 C14.1 L63.2 Ls14.9 a +9.1 b +5.8  đã chỉnh
+ngu-hoa-vien-dong-toi        S 83 C20.6 L48.2 Ls18.3 a+11.0 b -4.8 -> S 83 C20.6 L48.2 Ls18.3 a+11.0 b -4.8  đêm đã lam (b<0), giữ
+khon-ninh-cung-xuan-trua     S127 C39.0 L67.2 Ls18.1 a+18.0 b+30.6 -> S101 C29.5 L67.8 Ls18.1 a+13.6 b+22.3  đã chỉnh
+khon-ninh-cung-xuan-chieu    S170 C48.2 L56.8 Ls18.1 a+24.3 b+39.8 -> S128 C33.3 L58.3 Ls17.9 a+16.5 b+27.5  đã chỉnh
+khon-ninh-cung-xuan-toi      S177 C43.7 L44.1 Ls19.7 a+24.0 b+32.6 -> S117 C25.0 L43.4 Ls18.4 a+14.3 b+14.2  đã chỉnh
+khon-ninh-cung-ha-trua       S130 C39.6 L65.6 Ls18.2 a+17.1 b+31.4 -> S104 C29.9 L65.6 Ls18.1 a+11.7 b+23.1  đã chỉnh
+khon-ninh-cung-ha-chieu      S166 C46.2 L56.3 Ls17.3 a+21.4 b+39.0 -> S131 C33.6 L56.9 Ls17.6 a+14.9 b+28.5  đã chỉnh
+khon-ninh-cung-ha-toi        S176 C41.9 L43.0 Ls20.1 a+22.0 b+31.6 -> S122 C25.2 L42.3 Ls18.8 a+13.5 b+14.1  đã chỉnh
+khon-ninh-cung-thu-trua      S130 C39.4 L66.0 Ls18.4 a+19.2 b+31.1 -> S108 C31.7 L65.9 Ls17.4 a+16.4 b+23.3  đã chỉnh
+khon-ninh-cung-thu-chieu     S179 C50.5 L54.5 Ls18.1 a+26.5 b+41.3 -> S136 C35.6 L56.2 Ls17.0 a+19.0 b+28.8  đã chỉnh
+khon-ninh-cung-thu-toi       S183 C44.6 L43.5 Ls19.7 a+24.4 b+34.6 -> S122 C26.7 L42.8 Ls18.4 a+15.6 b+17.0  đã chỉnh
+khon-ninh-cung-dong-trua     S121 C36.4 L65.8 Ls18.2 a+18.5 b+27.0 -> S101 C29.7 L65.7 Ls17.8 a+16.1 b+19.7  đã chỉnh
+khon-ninh-cung-dong-chieu    S157 C42.3 L54.6 Ls18.2 a+22.7 b+34.0 -> S129 C33.6 L55.4 Ls17.6 a+18.9 b+26.0  đã chỉnh
+khon-ninh-cung-dong-toi      S174 C42.1 L42.6 Ls19.4 a+23.7 b+29.8 -> S117 C25.2 L41.9 Ls18.2 a+14.7 b+12.8  đã chỉnh
+duong-tam-dien-xuan-trua     S119 C36.3 L65.2 Ls16.2 a+15.3 b+28.9 -> S 95 C27.2 L66.3 Ls15.5 a +9.1 b+22.4  đã chỉnh
+duong-tam-dien-xuan-chieu    S165 C44.8 L53.7 Ls17.2 a+21.0 b+38.1 -> S121 C30.6 L56.0 Ls15.2 a+12.7 b+26.8  đã chỉnh
+duong-tam-dien-xuan-toi      S162 C37.0 L40.2 Ls18.3 a+19.7 b+27.9 -> S109 C22.8 L39.6 Ls17.3 a+12.7 b+12.1  đã chỉnh
+duong-tam-dien-ha-trua       S119 C35.3 L63.3 Ls17.3 a+14.2 b+28.3 -> S 99 C28.1 L64.3 Ls15.9 a +9.6 b+23.1  đã chỉnh
+duong-tam-dien-ha-chieu      S172 C45.2 L51.6 Ls16.3 a+20.3 b+39.2 -> S127 C31.6 L53.9 Ls15.8 a+12.9 b+27.8  đã chỉnh
+duong-tam-dien-ha-toi        S178 C38.4 L37.6 Ls18.5 a+19.0 b+30.8 -> S119 C23.5 L37.2 Ls17.5 a+12.3 b+14.0  đã chỉnh
+duong-tam-dien-thu-trua      S126 C38.2 L64.3 Ls16.9 a+17.3 b+30.9 -> S 97 C27.4 L64.2 Ls16.3 a+13.4 b+20.9  đã chỉnh
+duong-tam-dien-thu-chieu     S183 C49.5 L51.1 Ls17.3 a+24.2 b+42.0 -> S125 C30.9 L53.0 Ls16.1 a+15.5 b+25.9  đã chỉnh
+duong-tam-dien-thu-toi       S178 C40.3 L38.4 Ls18.2 a+21.6 b+30.8 -> S113 C22.9 L38.0 Ls17.2 a+13.0 b+12.3  đã chỉnh
+duong-tam-dien-dong-trua     S118 C36.3 L66.2 Ls15.9 a+16.9 b+28.2 -> S 95 C27.8 L66.1 Ls15.8 a+13.2 b+20.1  đã chỉnh
+duong-tam-dien-dong-chieu    S155 C41.1 L51.4 Ls17.4 a+21.9 b+33.1 -> S122 C31.4 L53.6 Ls15.4 a+16.3 b+25.2  đã chỉnh
+duong-tam-dien-dong-toi      S175 C39.8 L39.1 Ls18.1 a+21.1 b+30.1 -> S114 C23.5 L38.7 Ls17.1 a+13.1 b+12.7  đã chỉnh
+lanh-cung-xuan-trua          S 60 C13.5 L58.6 Ls20.5 a +5.1 b +8.6 -> S 60 C13.5 L58.6 Ls20.5 a +5.1 b +8.6  lãnh cung = mốc, giữ
+lanh-cung-xuan-chieu         S 92 C17.1 L42.7 Ls16.3 a +8.8 b+13.9 -> S 92 C17.1 L42.7 Ls16.3 a +8.8 b+13.9  lãnh cung = mốc, giữ
+lanh-cung-xuan-toi           S 53 C 6.2 L21.9 Ls 9.7 a +0.9 b -4.8 -> S 53 C 6.2 L21.9 Ls 9.7 a +0.9 b -4.8  lãnh cung = mốc, giữ
+lanh-cung-ha-trua            S 71 C16.1 L51.9 Ls20.7 a +2.2 b+12.8 -> S 71 C16.1 L51.9 Ls20.7 a +2.2 b+12.8  lãnh cung = mốc, giữ
+lanh-cung-ha-chieu           S103 C17.6 L35.7 Ls14.7 a +6.6 b+14.8 -> S103 C17.6 L35.7 Ls14.7 a +6.6 b+14.8  lãnh cung = mốc, giữ
+lanh-cung-ha-toi             S 71 C 6.2 L17.0 Ls 8.6 a -1.2 b -3.4 -> S 71 C 6.2 L17.0 Ls 8.6 a -1.2 b -3.4  lãnh cung = mốc, giữ
+lanh-cung-thu-trua           S 81 C18.5 L53.1 Ls20.0 a +9.3 b +9.2 -> S 81 C18.5 L53.1 Ls20.0 a +9.3 b +9.2  lãnh cung = mốc, giữ
+lanh-cung-thu-chieu          S119 C22.9 L41.4 Ls16.2 a+13.1 b+18.3 -> S119 C22.9 L41.4 Ls16.2 a+13.1 b+18.3  lãnh cung = mốc, giữ
+lanh-cung-thu-toi            S 64 C 9.0 L23.8 Ls10.4 a +4.8 b -3.3 -> S 64 C 9.0 L23.8 Ls10.4 a +4.8 b -3.3  lãnh cung = mốc, giữ
+lanh-cung-dong-trua          S 37 C 8.7 L59.0 Ls21.0 a +5.0 b -0.1 -> S 37 C 8.7 L59.0 Ls21.0 a +5.0 b -0.1  lãnh cung = mốc, giữ
+lanh-cung-dong-chieu         S 60 C12.1 L47.6 Ls17.4 a +8.3 b +6.0 -> S 60 C12.1 L47.6 Ls17.4 a +8.3 b +6.0  lãnh cung = mốc, giữ
+lanh-cung-dong-toi           S 73 C10.6 L23.1 Ls13.5 a +2.8 b -9.7 -> S 73 C10.6 L23.1 Ls13.5 a +2.8 b -9.7  lãnh cung = mốc, giữ
