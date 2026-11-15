@@ -906,3 +906,7 @@ All must work in co-op.
 - Owner (verbatim): "Tại sao + mà màu đỏ."
 - Screenshot dev/handover/refs/owner-kem-plus-red.jpg ("Tự học Thêu thùa: thêu khăn": KÈM "tiến bộ Thêu thùa +1..2" in red).
 - Rule: every value is coloured by its MEANING (gain green, loss red, neutral plain), never by the row it sits in; gains belong in ĐƯỢC, not KÈM. Whole family across all cards → added to review/act-text scope (scan: "+N shown red / −N shown green").
+
+## 15/11 (session 8) — Redraw the thị tẩm quilt-carry picture (owner screenshot)
+- Owner (verbatim): "Vẽ lại, nhìn kì quá."
+- Screenshot dev/handover/refs/owner-night-quilt-redraw.jpg (VIỆC "Đêm thị tẩm": eunuchs carrying her rolled in the phoenix quilt — bloated shapeless bundle, awkward pose, cropped maids at the edges). → redraw (gpt-2-6) + check other night pictures; assigned to review/pic-dupes worker.
