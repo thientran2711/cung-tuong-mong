@@ -43,5 +43,16 @@ Thử: `python3 -m http.server 8765` ở gốc kho, rồi `node dev/test/ts-a.js
 Không bắt buộc — đã dùng tranh có sẵn. Nếu sếp muốn đẹp hơn: (a) nền trò du hồ: mặt hồ sen ban ngày nhìn từ mũi thuyền (mg-duho-bg, ngang + dọc);
 (b) nền trò thả đèn: dòng nước đêm hội hoa đăng, không người (mg-den-bg); (c) mảnh đèn hoa sen trôi nước (mg-den-lotuslamp). Hiện dùng ev-le-ha, ev-le-thu-2, doden-lantern.
 
-## Cân bằng
-(đang đo — xem mục dưới khi xong)
+## Cân bằng (bot inpage5 'sens', máy rất tải, mỗi lượt ≤30 phút nên mẫu nhỏ)
+- Gốc (book-release, không jts): n=19 → HH 53%, chết sớm 5% (bot này trên máy này lệch xa mục tiêu ngay cả ở gốc: hầu hết sống tới già).
+- jts bản đầu: n=19 → HH 79%, chết sớm 5% → Sủng từ triệu riêng quá nhiều. Đã hạ: cơ triệu 26%→14%/tuần, Sủng +1..+4 (trước +1..+7),
+  hộ giá Sủng +4/Danh +3, lì xì hậu Danh +1, nhất hội phối đồ Sủng +3/Danh +3.
+- Sau khi hạ (bản đã gộp main b165b1f7): mới n=4 → HH 50%, chết sớm 0% (dừng vì điều phối bảo tạm nghỉ, đĩa đầy). CHƯA ĐỦ MẪU: đo tiếp khi mở lại.
+- Việc còn lại cho người cân bằng: đo lại với bộ bot chuẩn (inpage6 của review/schedules2) đủ 80+ đời; nếu HH vẫn cao, hạ tiếp tsSummonGain / roll(14).
+
+## Gộp main
+Đã gộp origin/main b165b1f7 (merge, không rebase vì không được đẩy đè). jts.js đứng sau jload, trước j84. Bài thử ts-a.js tự đóng màn luân hồi mới (#kroul).
+Bài thử chạy không cần server: `node dev/test/ts-a.js root 755x1000@2 dev/shots/ts-a fold`; bot: `node dev/measure/run_url.js root/index.html sens 20 out.json`.
+
+## TẠM DỪNG (lệnh điều phối, đĩa đầy)
+Đã đẩy hết. Việc còn: đo bot đủ mẫu (gốc vs jts trên main mới), chỉnh nếu HH > 45%; chụp được khoảnh khắc hộ giá (trò du hồ, giây 12–15).
