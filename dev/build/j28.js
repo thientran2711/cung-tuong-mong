@@ -6,7 +6,7 @@ const TRK={"Hiểm độc":"hiemdoc","Kiêu ngạo":"kieungao","Hiền lành":"h
 function figRole(p){if(p===S)return"heroine";const k=p&&p.kind;if(k==="emp"||p===S.emp)return"emperor";if(k==="th")return"thaihau";if(k==="man"||(p&&p.ref&&p.ref.rw))return"man";if(k==="ty")return"physician";if(k==="maid"||k==="serv")return(p.ref&&p.ref.role==="eunuch")?"eunuch":"maid";return"consort"}
 function ageBandOf(a){return a>=36?"old":a>=26?"mid":"young"}
 function norm(x){return String(x==null?"":x).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/đ/g,"d").replace(/[^a-z0-9]/g,"")}
-function figFor(p,kind){if(!FIGS.length||!p)return"";const role=figRole(p),who=p.ref||p;const tier=who===S?(S.out?"cold":S.rank):who.queen?7:who.rank;const tr=TRK[who.trait]||norm(who.trait||who.look||"");const ab=ageBandOf(who.age||20);
+function figFor(p,kind){if(!FIGS.length||!p)return"";const role=figRole(p),who=p.ref||p;const tier=who===S?(S.out?"cold":S.rank):who.queen?7:who.rank;const tr=TRK[who.trait]||norm(who.trait||who.look||"");const ab=ageBandOf(who===S.thO||who.kind==="th"?(S.thAge||55):who.kind==="emp"&&S.emp?S.emp.age:(who.age||20));
  const L=FIGS.filter(f=>norm(f.role)===norm(role)&&(kind!=="por"||/(^|\/)por-/.test(f.file||f.src))&&(kind==="por"||!/(^|\/)por-/.test(f.file||f.src)));if(!L.length)return"";
  const sc=f=>(String(f.tier)===String(tier)||String(f.tier)===String(+tier+1)?4:0)+(norm(f.trait)===tr||norm(f.look)===tr?3:0)+(norm(f.ageBand)===ab?2:0);const best=Math.max(...L.map(sc));const top=L.filter(f=>sc(f)===best);
  const h=String(who.id!=null?who.id:who.name||"me").split("").reduce((a,c)=>a*31+c.charCodeAt(0)>>>0,7);const f=top[h%top.length];const src=f.file||f.src;return /^img\//.test(src)?src:"img/"+src}
