@@ -49,7 +49,11 @@ giữ nguyên "đẹp" và "diêm dúa" như hiện tại), 509a2dad5 (phản �
 - Test toilette.js: gặp Thái hậu trước khi chạy runOpt (trong game thật act(i) có hook j61 cho gặp; runOpt bỏ qua → bóng xám chỉ là lỗi bài thử).
 
 ### CÒN LẠI (chính xác)
-- (xem kết quả kiểm + bot trong báo cáo cuối phiên 6)
+- Kiểm phiên 6 (toilette.js + sổ cũ từ bản không jtoil): 755x1000@2, 1180x820@2, 1000x755@2, 1366x1024@2, 844x390@3 — 0 lỗi, không tràn, sổ cũ nạp,
+  phản ứng th-scold bật thành khung. 390x844@3: 0 lỗi (game không có màn "xoay ngang" — chơi dọc bình thường, như main).
+- Bot: `node dev/test/bot-same.js <base không jtoil> <toilette> 20 sens` — 0 lỗi cả hai bản, chưa hết đời nào trong 20 bước (máy tải 40–70);
+  hai dòng ngẫu nhiên tách nhau như dự kiến (jtoil dùng Math.random). CÒN: chạy 80+ bước khi máy rảnh để có số đời so sánh.
+- Khi kit-fig2 vào main: không phải làm gì; phản ứng tự thành kitEventDp (đã thử, ảnh toil-755x1000-8-react-kitEventDp-trial.jpg).
 
 ### CÒN LẠI CŨ (đã làm 1,2,5,6 ở phiên 6)
 1. toil-fit từ tranh CDN HIỆN TẠI (điều phối: tờ mẫu từng dùng tranh c05 hoa điền to cũ). Đã thêm ghi md5 (`dev/art/toil-fit-md5.json`,
