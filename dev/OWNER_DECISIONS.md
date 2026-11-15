@@ -374,3 +374,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (08:35Z) Bị giáng phẩm/vào lãnh cung: đồ vượt phẩm bị THU HỒI có cảnh — thái giám Nội vụ phủ (hộp thoại có người) lấy từng ô đồ lên khay, báo phụng chỉ thu hồi.
 - (08:40Z) Khung Đáp ứng: dùng kiểu khung gỗ cành mai + góc vàng (kiểu khung Lãnh cung hiện tại, làm mới, bóng đẹp) với nền gấm trắng ngà bên trong; khung Lãnh cung đổi thành bản héo/xám rõ ràng. Khung Hoàng quý phi phải hoành tráng hơn Quý phi.
 - (08:40Z) Mở rương bước nhận: bỏ ô thông tin trắng; mỗi ô món có tên phẩm trên viền khung, tên món ngay dưới ô (bạc: "Bạc +20").
+- (08:45Z) Âm thanh: mọi khoảnh khắc trong game phải có âm (mua, bán, nhận quà/thưởng/ban, mở rương, thu hồi, mini game, thời tiết, lễ…), phong cách cung đình nhẹ nhàng; kiểm kê + làm bù (review/sfx).
