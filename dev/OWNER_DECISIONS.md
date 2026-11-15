@@ -348,3 +348,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (06:25Z) Thời tiết xấu (giông, mưa lớn, tuyết, băng): ra ngoài tốn thêm khắc đi đường + có thể cảm lạnh / trơn trượt (mang thai có rủi ro thật), giảm nhờ dù/áo tơi/kiệu/người che; báo trên thẻ và báo ngay khi xảy ra; NPC cùng luật.
 - (06:35Z) Bấm vào nhân vật trên sân khấu → mở ĐÚNG hộp thoại có người của kit (người toàn thân bên trái, thông tin bên phải), không mở khung riêng.
 - (06:35Z) Khung chân dung phải hiện đủ ngọc bội + tua rua (đang bị cắt mất phía dưới).
+- (06:40Z) Sửa luật thời tiết: KHÔNG thêm khắc đi đường (đã có Sức hồi chậm, không phạt 2 lần). Cảm lạnh/trơn trượt là Mất của việc làm NGOÀI TRỜI (dạo vườn, chặn ngự giá ở vườn, quỳ ngoài sân…), ghi trên thẻ việc đó, không ghi trên thẻ đi đường.
