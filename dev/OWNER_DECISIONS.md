@@ -372,3 +372,5 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (08:20Z) MỌI lần đồ/bạc vào tay nàng đều có hoạt cảnh chạm để mở/nhận: được tặng = hộp gấm; được thưởng/ban = mâm/rương/rương ngự tứ; nhặt/lục được = bọc vải/túi; mua = món bay vào túi đồ, bạc bay ra; bán = món bay đi, bạc bay vào; mất/tịch thu = món mờ rơi + thẻ báo. Nhiều món cùng lúc gộp một rương. Một hàm chung kitGain/kitLose.
 - (08:35Z) Thanh đầu trang: chọn phương án A (nút nơi chốn nằm dưới khối giờ, cột phải).
 - (08:35Z) Bị giáng phẩm/vào lãnh cung: đồ vượt phẩm bị THU HỒI có cảnh — thái giám Nội vụ phủ (hộp thoại có người) lấy từng ô đồ lên khay, báo phụng chỉ thu hồi.
+- (08:40Z) Khung Đáp ứng: dùng kiểu khung gỗ cành mai + góc vàng (kiểu khung Lãnh cung hiện tại, làm mới, bóng đẹp) với nền gấm trắng ngà bên trong; khung Lãnh cung đổi thành bản héo/xám rõ ràng. Khung Hoàng quý phi phải hoành tráng hơn Quý phi.
+- (08:40Z) Mở rương bước nhận: bỏ ô thông tin trắng; mỗi ô món có tên phẩm trên viền khung, tên món ngay dưới ô (bạc: "Bạc +20").
