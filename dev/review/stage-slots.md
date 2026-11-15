@@ -1,6 +1,6 @@
 # Kiểm duyệt kit: review/stage-slots @ 8034f407 (KIT 33.7 khuôn ô sân khấu, j59 + j38) — PASS sau sửa
 
-Ngày 2026-11-15, người duyệt 3. Gộp lên main d69030384 (cdn-images, naming, place-card, sub-odds…); xung đột chỉ index.html / sw.js (dựng lại
+Ngày 2026-11-15, người duyệt 3. Gộp lên main 6e6c2ae6d (cdn-images, naming, place-card, sub-odds, act-audit…); xung đột chỉ index.html / sw.js (dựng lại
 bằng dev/site/build_site.sh; assets.json lấy mục lục ảnh từ CDN). Nhánh gộp: review/stage-slots-merged.
 
 ## Đạt (đo bằng máy, dev/test/stage-slots.js 5 ca × 5 khổ: 755x1000@2, 1000x755@2, 1180x820@2, 1366x1024@2, 844x390@3)
@@ -12,7 +12,7 @@ bằng dev/site/build_site.sh; assets.json lấy mục lục ảnh từ CDN). Nh
 - Không còn ảnh nhỏ trên sân khấu: người không có tranh = hình bóng cỡ thật (Thị vệ "Mạc Thừa Vũ" trong Kính sự phòng); người lạ = bóng xám
   "Người lạ"; nam ×1,07.
 - Chức vụ có tên riêng (Tổng quản Kính sự phòng / tên cổ trang ở dòng 2; ổn định trong kiếp, lưu theo sổ).
-- Sổ cũ (main) nạp ở cả 5 khổ; kit 14 tab ở 5 khổ: 0 lỗi trang, 0 tràn ngang, 1 #panel, 0 ảnh vỡ. coop-e2e (Worker thật) 59/59.
+- Sổ cũ (main) nạp ở cả 5 khổ; kit 14 tab ở 5 khổ: 0 lỗi trang, 0 tràn ngang, 1 #panel, 0 ảnh vỡ. coop-e2e (Worker thật) 59/59 trên bản gộp d69030384 (máy tải ~50: phải nới hạn chờ mở trang 30 → 120 s trong bản chạy tạm, không đổi tệp thử).
 
 ## Người duyệt đã sửa
 1. **Đường chân nhảy giữa các trang** (844x390, trang 3 của 5 người: chân thấp hơn 19 px, người to hơn 15 %, chip "‹" thò ra ngoài sân khấu):
