@@ -65,25 +65,25 @@ moi-thay-day-nghe|0|a hand setting down a red engagement letter beside a guqin, 
 mua-chuoc|1|a hand slipping a silver ingot into a maid's plain grey sleeve, behind a pillar
 nghe-loi-tai-mat|1|a maid's hand in a plain grey sleeve closing around a small folded note slipped to her at a dark corridor corner, a lantern glow, a promise to report
 nhan-bac-tai-mat|1|a maid's plain grey hand closing over a small purse of silver, half hidden in her sleeve
-nho-con-noi-giup|0|a mother's hand straightening the collar of a young prince's blue robe before he goes, only hands and collar visible
+nho-con-noi-giup|0|a mother's hands smoothing the crossed wrap collar (Han jiaoling, overlapping V-neck, NO buttons, NO stand-up collar) of a young prince's blue robe before he goes, a jade pendant at his sash, only hands and robe front visible
 nho-giup-do|0|a hand gently holding another lady's sleeve in a plea, a teacup and a folded request letter
 nhun-nhuong|0|a hand gently pushing the finer embroidered seat cushion toward another's place at a low table, keeping a plain cushion for herself, fallen petals
 noi-that-long|1|two hands resting near each other on a table by candlelight, an open heart-shaped jade pendant between them
-phat-vi|0|a lady's sleeve beside a stone courtyard step where a pair of plain cloth shoes kneels on the cold grey stone, punishment
+phat-vi|0|a maid's two hands pressed flat on cold grey courtyard paving stones as she kneels, seen close, the brocade hem of a standing lady before her, a punishment for a fault, daylight
 phat-vo-co|1|a long brocade skirt hem sweeping past a maid's lowered hands touching the floor, night lanterns
 pho-tai|0|a painting brush and a half-finished landscape on an easel, an imperial yellow sleeve visible watching at the edge
 phuong-cau-hoang|0|hands playing a pipa beside a lotus pond, a phoenix-shaped hairpin resting on the cushion
 ren-cong|1|hands embroidering by lamplight, a basket of coloured silk threads, the fine work of virtue
-ren-dung|0|hands arranging a simple elegant hairpin in front of a bronze mirror, a neat dressing table
+ren-dung|0|hands smoothing the folds of a plain, neatly pressed robe laid on a bench, a simple wooden comb and a small round mirror beside it, modest tidy grooming
 ren-hanh|0|hands offering a bowl of rice to an old maid's grey sleeve, kindness, a basket of rice
 ren-ngon|0|hands opening a small book of proverbs and a cup of clear water, a quiet room
 rot-ruou-ngu-toa|1|a hand pouring wine from a silver ewer into a cup by an imperial yellow sleeve at a banquet table
 sai-tai-mat-do-noi-o|1|a hand pointing on a small hand-drawn map of palace courtyards, a eunuch's dark sleeve beside it
-tam-su|0|two teacups and a single shared plate of sweets on a bench under a blossoming tree, two hands close together
+tam-su|0|two ladies' hands, one resting gently over the other on a stone bench under a blossoming tree at dusk, a shared embroidered handkerchief between them, a heartfelt confidence
 tang-boc|0|a hand politely raising a wine cup toward an imperial yellow sleeve, a toast of praise
 thai-y-tam-phuc|0|a physician's medicine box opened on a table, a hand passing a jade token to the physician's dark sleeve
 them-cung-nu|0|a hand writing a name on a register beside a row of plain grey maid's name tablets on a tray
-them-thai-giam|0|a hand writing a name on a register beside a row of dark wooden eunuch's name tablets on a tray
+them-thai-giam|0|a hand laying a eunuch's horsetail fly-whisk and a dark wooden name tablet on a register book, a row of dark eunuch hats and tablets on a tray behind
 thinh-an-hh|0|a lady's hands folded at her waist in a curtsy before a phoenix embroidered throne cushion, morning light
 thinh-an-th|0|a lady's hands holding a freshly copied sutra scroll before an old jade rosary on a throne arm
 thoi-hoc-vo|0|a wooden practice sword laid down on a rack beside a bow, a small hand letting go of it
@@ -95,7 +95,7 @@ tiep-dai-lanh-nhat|0|one teacup left untouched and cold on a table, a hand turne
 to-toi-that|0|a hand laying out evidence: a stained cloth and a written confession before a throne's carved arm
 to-vuot-pham|0|a finger pointing at a forbidden phoenix headdress on a tray, an over-rank luxury
 tra-chung-cu|0|a hand returning a bundle of letters tied with a cord to another hand, reconciliation
-tranh-sung|1|a hand turning over a green jade name tablet on a tray at night, an imperial lantern
+tranh-sung|1|a slender hand gently tugging an imperial yellow dragon sleeve toward an open chamber door glowing with red lanterns at night, vying for favour
 trinh-chung-cu-hh|0|two hands kneeling to present a sealed red evidence box before a phoenix throne
 trinh-chung-cu-th|0|two hands kneeling to present a sealed evidence box before the Empress Dowager's carved throne and rosary
 trut-gian|1|a teacup shattered on the floor, a hand clenched in a sleeve above it, candlelight
@@ -108,17 +108,17 @@ tu-hoc-huong|0|hands filling a small embroidered sachet with dried flowers from 
 tu-hoc-khuc|0|hands writing notes on a music score beside a guqin
 tu-hoc-kinh|0|a hand copying sutra lines on paper beside a small censer and a rosary
 tu-hoc-mon|0|hands stirring a small pot of soup over a stove with bowls of ingredients
-tu-hoc-mua|0|a pair of dance slippers and the hem of a swirling skirt on a polished terrace, petals flying
+tu-hoc-mua|0|the swirling hem of a long silk dance skirt and the tips of embroidered Chinese cloth dance shoes with upturned toes (Han style, NO ribbons, NO ballet pointe shoes) turning on a polished terrace, petals flying, long water sleeves trailing
 tu-hoc-the|0|a hand setting a black stone on a go board, an endgame problem
 tu-hoc-theu|0|hands embroidering a pair of mandarin ducks on a round hoop, colourful threads in a basket
 tu-hoc-tho|0|a hand writing calligraphy strokes on paper, an inkstone and a brush rest
 tu-hoc-tranh|0|a hand painting an ink landscape on a long paper, water bowl and brushes
 uy-hiep-doi-bac|1|a hand holding a folded secret letter just out of reach, the other hand open demanding a silver pouch, candle
 viec-chu-sai|0|a maid's hands carrying a stack of folded silks and a basket along a corridor, seen from behind
-vu-oan|1|a hand dropping a small cloth effigy under another lady's bed curtain, night, a candle
+vu-oan|1|a hand writing a false accusation on a petition paper by candlelight, a crumpled draft and a dark inkstone beside it, a sly secret night (the hand only)
 xem-nguoi|0|a hand raising a list of names beside a row of maids' folded hands, only sleeves visible
 xem-so-thi-tam|1|a hand turning the pages of a red-bound bedchamber register beside an oil lamp
-xin-an-xa|0|two hands pressed flat on white marble steps before a closed palace door, a plea
+xin-an-xa|0|two hands raising a folded petition high in both palms before the closed vermilion doors of the imperial study, a plea for mercy, white marble threshold
 xin-dai-hoc-si|0|a hand presenting a petition scroll with a stack of classics books before an imperial yellow sleeve
 xin-hh-giang|0|a hand offering a small gift box before a phoenix throne's arm, a petition
 xin-thai-hau-hoc-cung|0|a hand presenting a copied orchid painting on a tray before the Empress Dowager's jade rosary
