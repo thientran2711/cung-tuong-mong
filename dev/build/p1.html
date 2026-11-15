@@ -432,9 +432,9 @@ body[data-sea] .curtain{background:linear-gradient(var(--sa2),#f5ecdc)}body[data
 /* full-body figures */
 .stage{container-type:size}
 .tok.fig{min-width:0}
-.tok.fig .figimg{display:block;height:58cqh;max-height:420px;width:auto;object-fit:contain;filter:drop-shadow(0 6px 6px #0006);transform-origin:50% 100%;animation:figidle 5s ease-in-out infinite}
+.tok.fig .figimg{display:block;height:58cqh;max-height:420px;width:auto;object-fit:contain;filter:var(--klf,brightness(1)) drop-shadow(0 6px 6px #0006);transform-origin:50% 100%;animation:figidle 5s ease-in-out infinite}
 .tok.fig:hover .figimg{transform:translateY(-3px)}
-#mefig{position:absolute;left:50%;bottom:4cqh;height:80cqh;max-height:640px;width:auto;transform:translateX(-50%);transform-origin:50% 100%;z-index:0;filter:drop-shadow(0 8px 8px #0006);animation:meidle 4.6s ease-in-out infinite;pointer-events:none}
+#mefig{position:absolute;left:50%;bottom:4cqh;height:80cqh;max-height:640px;width:auto;transform:translateX(-50%);transform-origin:50% 100%;z-index:0;filter:var(--klf,brightness(1)) drop-shadow(0 8px 8px #0006);animation:meidle 4.6s ease-in-out infinite;pointer-events:none}
 .stage.hasme .tokens{justify-content:flex-end}
 @keyframes figidle{0%,100%{scale:1 1}50%{scale:1 1.012}}
 @keyframes meidle{0%,100%{transform:translateX(-50%) scale(1,1)}50%{transform:translateX(-50%) translateY(-2px) scale(1,1.012)}}

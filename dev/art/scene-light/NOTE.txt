@@ -1,0 +1,23 @@
+Cảnh theo buổi (review/scene-light, sếp 11/15 10:10Z) — MẪU 3 nơi + Dư đồ, chờ duyệt rồi mới chỉnh hết + đẩy CDN.
+Cách chỉnh: grade2.py (Lab, không vẽ lại, giữ từng điểm ảnh). Đích lấy từ bản SÁNG cùng nơi: trưa C×1.18, b+5.5, sáng +3;
+chiều C×1.32, b+10, a+3.5, nửa giữ sắc riêng (vàng kim không xám) + lọc giữ cạnh 15 %; tối = đúng cách nightfix đã duyệt
+(co độ rực quanh 0 tới C = C sáng, nén vùng sáng >62 ×0.72, xanh đêm ở bóng, lọc 35 %). Dư đồ: giữ sắc riêng hoàn toàn (nước xanh).
+Giữ nguyên nếu đã trong khoảng đích (C ≤ đích×1.06) hoặc đêm đã lam (b<0, như lãnh cung). KSP/TYV tối: giữ bản nightfix đã duyệt trên CDN.
+Số: S = độ bão hoà HSV TB (0–255), C = độ rực Lab, L = sáng, Ls = tương phản, a/b = đỏ/vàng TB.
+
+thai-y-vien-xuan-sang      S 94 C24.2 L59.6 Ls17.4 a+13.2 b+15.7 -> S 94 C24.2 L59.6 Ls17.4 a+13.2 b+15.7  gốc (mốc)
+thai-y-vien-xuan-trua      S122 C34.1 L62.5 Ls18.4 a+17.4 b+25.7 -> S106 C28.5 L62.5 Ls17.8 a+14.2 b+20.6  đã chỉnh
+thai-y-vien-xuan-chieu     S181 C46.7 L49.0 Ls17.8 a+24.9 b+38.0 -> S132 C32.0 L51.7 Ls17.4 a+16.9 b+25.8  đã chỉnh
+thai-y-vien-xuan-toi       S183 C36.9 L32.8 Ls16.1 a+23.0 b+25.5 -> S121 C22.5 L32.4 Ls15.6 a+15.0 b +9.2  đêm đã duyệt (nightfix)
+duong-tam-dien-thu-sang    S 85 C23.3 L60.0 Ls16.3 a+12.4 b+16.1 -> S 85 C23.3 L60.0 Ls16.3 a+12.4 b+16.1  gốc (mốc)
+duong-tam-dien-thu-trua    S126 C38.2 L64.3 Ls16.9 a+17.3 b+30.9 -> S 97 C27.4 L64.2 Ls16.3 a+13.4 b+20.9  đã chỉnh
+duong-tam-dien-thu-chieu   S183 C49.5 L51.1 Ls17.3 a+24.2 b+42.0 -> S125 C30.9 L53.0 Ls16.1 a+15.5 b+25.9  đã chỉnh
+duong-tam-dien-thu-toi     S178 C40.3 L38.4 Ls18.2 a+21.6 b+30.8 -> S113 C22.9 L38.0 Ls17.2 a+13.0 b+12.3  đã chỉnh
+kinh-su-phong-ha-sang      S 91 C20.1 L49.2 Ls17.3 a+11.5 b+11.7 -> S 91 C20.1 L49.2 Ls17.3 a+11.5 b+11.7  gốc (mốc)
+kinh-su-phong-ha-trua      S153 C42.5 L53.2 Ls19.2 a+23.6 b+29.8 -> S101 C23.8 L53.2 Ls17.7 a+12.6 b+16.8  đã chỉnh
+kinh-su-phong-ha-chieu     S194 C45.5 L41.7 Ls16.7 a+25.1 b+36.1 -> S130 C26.7 L42.9 Ls16.9 a+14.6 b+21.1  đã chỉnh
+kinh-su-phong-ha-toi       S189 C33.2 L29.1 Ls15.9 a+19.0 b+23.3 -> S121 C19.8 L28.9 Ls15.3 a+12.3 b +7.2  đêm đã duyệt (nightfix)
+map-thu-sang               S 76 C19.5 L64.5 Ls15.6 a +6.0 b+15.9 -> S 76 C19.5 L64.5 Ls15.6 a +6.0 b+15.9  gốc (mốc)
+map-thu-trua               S 77 C21.8 L69.8 Ls15.7 a +5.5 b+16.4 -> S 77 C21.8 L69.8 Ls15.7 a +5.5 b+16.4  đã trong khoảng đích, giữ
+map-thu-chieu              S115 C30.3 L61.2 Ls15.3 a+10.0 b+27.5 -> S103 C25.8 L60.2 Ls15.6 a +8.6 b+23.5  đã chỉnh
+map-thu-toi                S 63 C10.5 L33.5 Ls10.7 a +1.6 b -3.4 -> S 63 C10.5 L33.5 Ls10.7 a +1.6 b -3.4  đêm đã lam (b<0), giữ
