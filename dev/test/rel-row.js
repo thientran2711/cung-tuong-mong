@@ -1,5 +1,5 @@
 /* review/kit-fig2: Giao tình › Ân oán — two pager strips (X "Xem quan hệ của", Y "với"), heading "Quan hệ giữa X và Y", X | kitRelRow rows | Y,
-   "Đã biết về X"; strangers (not met) = grey silhouette with their name. KIT §43.1 / §43.2 / §43.3.
+   "Đã biết về X"; strangers (not met) = grey silhouette with their name. KIT §49.1 / §49.2 / §49.3.
    usage: node dev/test/rel-row.js <build url> <outdir> <tag> [WxH@dpr,...]
    Views shot: ta (X = Ta, Y = Hoàng thượng), ta-hh (Ta ↔ Hoàng hậu), hh (X = Hoàng hậu, Y = Ta), unmet (X = a consort Ta has not met), emp (X = Hoàng thượng).
    Measures: all rows of a view share bar x / width (±1 px), marker centre-y = bar centre-y, word · number + bar on ONE line, label one line,

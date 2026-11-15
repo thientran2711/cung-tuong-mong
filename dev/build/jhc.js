@@ -29,7 +29,7 @@ window.kitSignedBar=sbar;
 function pbar(v,hi,good){hi=hi||100;const x=Math.max(0,Math.min(hi,+v||0)),w=x/hi*100;
  return `<span class="ksbar ksbp" aria-hidden="true"><u class="${good?"g":"r"}" style="left:0;width:${w.toFixed(1)}%"></u><i class="ksb-mk ${good?"g":"r"}" style="left:${w.toFixed(1)}%"></i></span>`}
 window.kitPosBar=pbar;
-/* KIT §43.1 kitRelRow (owner 11/15): ONE relation row everywhere.
+/* KIT §49.1 kitRelRow (owner 11/15): ONE relation row everywhere.
    line 1 = the label "<A> → <B>: thiện cảm|oán" in the KIT_REL colour (purple: someone → ta, blue: ta → someone, ink: between two others);
    line 2 = "<word> · <number>" then the bar on the SAME line; the word column and the bar have fixed widths, so every row's bar starts and
    ends at the same x. thiện cảm (−100..100) = kitSignedBar (midline at the centre, green right / red left); oán (0..100) = kitPosBar + the
@@ -79,7 +79,7 @@ const fcol=f=>(f&&f.col)||"#7a5530";
 /* who is who in a relation label: the player "ta", the Empress by title, the Emperor / Thái hậu by title, others by their short name */
 const whoL=p=>p===S?"ta":p==="emp"?"Hoàng thượng":p==="th"?"Thái hậu":p&&p.queen?"Hoàng hậu":shortN(p.name);
 const capL=s=>s==="ta"?"Ta":s;
-/* KIT §43.3 relPerson(k): ONE helper — the person object, the face drawn from THAT object, the name, the rank, the colour. Strangers
+/* KIT §49.3 relPerson(k): ONE helper — the person object, the face drawn from THAT object, the name, the rank, the colour. Strangers
    (not met: knows(v) false — the same test that writes "Ta chưa gặp …") get the shared grey silhouette (kitStrangerOf, j61), the name stays. */
 function relPerson(k){
  if(k==="me"){const f=pMe();return{k,p:S,f,name:"Ta",rank:S.out?"Phế phi":RANKS[S.rank].n,col:fcol(f),pid:"me"}}
@@ -88,7 +88,7 @@ function relPerson(k){
  const v=(rivals||[]).find(x=>String(x.id)===String(k));if(!v)return null;const met=typeof isKnown61==="function"?isKnown61(v):knows(v);const f=met?pv(v):kitStrangerOf(v);
  return{k:v.id,p:v,f,name:v.name,rank:rkName(v),col:met?fcol(f):"#8a8a8a",met,pid:typeof kOf61==="function"?kOf61(v):String(v.id)}}
 window.relPerson=relPerson;
-/* KIT §43.2 (owner 11/15): Ân oán = "Xem quan hệ của X" (strip 1) + "với Y" (strip 2) — both the Hậu cung pager strip (pager, j15: ‹ ›,
+/* KIT §49.2 (owner 11/15): Ân oán = "Xem quan hệ của X" (strip 1) + "với Y" (strip 2) — both the Hậu cung pager strip (pager, j15: ‹ ›,
    N/M, selected highlight), grouped Ta · Chí tôn · Phi tần, labels = the name only. The panel shows ONE pair under the heading
    "Quan hệ giữa X và Y": X | the rows both ways | Y, then "Đã biết về X". Y defaults to Ta (her own relation with X); when X = Ta, Y
    defaults to the first person of strip 2. Never a hidden counterpart. PG.rel ↔ relSel (an outside link that sets relSel still works). */
@@ -106,7 +106,7 @@ function hcRelHTML(){kn();const items=relItems().map(x=>Object.assign(x,{q:relPe
  const strip2=pager("relY",Ys2.map(x=>stripItem(x,x.q)),()=>"");
  return `<div class="pgwrap krelpg"><p class="krelst">Xem quan hệ của</p>${strip1}<p class="krelst">với</p>${strip2}${relPair(X,Y)}</div>`}
 function relSide(q){return `<div class="kr3p" data-pid="${q.pid}" data-fk="${q.f&&q.f.kk!=null?q.f.kk:q.pid}">${kitNameRank(q.rank,q.name,q.col)}<div class="kr3f">${pcPort(q.f,q.col)}</div></div>`}
-/* the rows between two people, both ways (KIT §43.1 kitRelRow). A value is shown when the one who feels it is Ta, or Ta has met both. */
+/* the rows between two people, both ways (KIT §49.1 kitRelRow). A value is shown when the one who feels it is Ta, or Ta has met both. */
 function relRows(X,Y){const a=X.p,b=Y.p;const met=p=>p===S||(p!=="emp"&&p!=="th"&&knows(p));
  if(a==="emp"||b==="emp"){const z=a==="emp"?b:a;if(z===S)return kitRelRow({kind:"pos",a:"Hoàng thượng",b:"ta",what:"sủng",gloss:"Sủng",v:S.sung})+kitRelRow({kind:"pos",a:"Hoàng thượng",b:"ta",what:"ân tình",gloss:"Ân tình",v:S.an||0});
   const kf=S.kf&&S.kf[z.id];return kitRelRow({kind:"pos",a:"Hoàng thượng",b:whoL(z),what:"sủng",gloss:"Sủng",v:kf?kf.s:null})}
@@ -225,7 +225,7 @@ const st=document.createElement("style");st.id="kit-hc";st.textContent=`
 .ksbar{position:relative;display:inline-block;width:92px;height:8px;flex:0 0 auto;border-radius:4px;background:var(--k-card2,#efe4cc);box-shadow:inset 0 0 0 1px #b89a6a55;overflow:hidden;vertical-align:middle}
 .ksbar>.ksb-mid{position:absolute;left:calc(50% - 1px);top:-1px;bottom:-1px;width:2px;background:#7a5530;opacity:.7;z-index:1}
 .ksbar>u{position:absolute;top:1px;bottom:1px;border-radius:3px}.ksbar>u.g{background:var(--good,#3d8a5a)}.ksbar>u.r{background:var(--bad,#b0402c)}.kr3v .fbar{width:70px;flex:0 0 auto}
-/* KIT §43.1 kitRelRow: label line (KIT_REL colour) + ONE line "word · number" | bar; fixed word column + fixed bar → equal bar x / width */
+/* KIT §49.1 kitRelRow: label line (KIT_REL colour) + ONE line "word · number" | bar; fixed word column + fixed bar → equal bar x / width */
 .krr{display:flex;flex-direction:column;gap:2px;min-width:0}
 .krrl{color:var(--krc,#6a5040);font-size:.76rem;font-weight:700;line-height:1.25}.krrl *{color:inherit!important}
 .krr2{display:grid;grid-template-columns:var(--krrw,8.2rem) var(--krrbw,84px);column-gap:8px;align-items:center;justify-content:start;min-height:18px}
@@ -235,7 +235,7 @@ const st=document.createElement("style");st.id="kit-hc";st.textContent=`
 .ksbar>.ksb-mk{position:absolute;top:50%;width:3px;height:14px;border-radius:2px;transform:translate(-50%,-50%);background:#5a3a20;z-index:2;box-shadow:0 0 0 1px #fffaf0}
 .ksbar>.ksb-mk.g{background:#2c6a44}.ksbar>.ksb-mk.r{background:#8a2c1c}
 .ksbar.ksbn{opacity:.45}
-/* KIT §43.2 Ân oán pair: two pager strips (X, Y), heading, X | rows | Y, then "Đã biết về X" */
+/* KIT §49.2 Ân oán pair: two pager strips (X, Y), heading, X | rows | Y, then "Đã biết về X" */
 .krelst{margin:6px 0 2px;font-size:.78rem;color:var(--dim);font-weight:600}
 .krelh{margin:10px 0 6px;font-family:var(--display);font-size:1.02rem;color:var(--ink,#3a2418)}
 .krel3.krpair{grid-template-columns:minmax(100px,150px) minmax(0,1fr) minmax(100px,150px);align-items:start}

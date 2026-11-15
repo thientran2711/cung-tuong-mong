@@ -229,7 +229,7 @@ function kitEsOvFit(){try{const ov=document.querySelector("#mb .kesov");if(!ov)r
 window.kitEsOvFit=kitEsOvFit;
 (function(){if(typeof kitEventStage!=="function")return;const k0=kitEventStage;kitEventStage=function(m){const r=k0.apply(this,arguments);
  try{if(r){const mb=document.getElementById("mb");const band=mb&&mb.querySelector(":scope > .kdlgart");const art=band&&band.querySelector(".ksart");const col=mb&&mb.querySelector(":scope > .kpb > .kpsubj.kes");
-  /* KIT 45 kitEventDp (owner 11/15): an event WITH a person keeps the person column (32.7) and the event picture becomes a landscape
+  /* KIT 50 kitEventDp (owner 11/15): an event WITH a person keeps the person column (32.7) and the event picture becomes a landscape
      BANNER at the top of the right column — the people are no longer put on the picture (32.6 is retired for person events) */
   if(art&&col&&window.KIT_EVENT_DP!==false){band.classList.add("kdpban")}
   else if(art&&col&&!art.querySelector(".kesov")){const ov=document.createElement("div");ov.className="kesov";[...col.querySelectorAll(":scope > .kesf")].forEach(f=>ov.appendChild(f));art.appendChild(ov);col.remove();
@@ -269,13 +269,13 @@ function kitDpApply(){try{const o=kitDpOn();const d0=document.querySelector("#mo
  /* a "world" fact row's empty dot means nothing beside a full figure */
  body.querySelectorAll(".kfact > .kfdot").forEach(x=>{x.parentElement.classList.add("kfnodot");x.remove()});
  const kids=[...mb.children].filter(c=>c!==body&&!c.classList.contains("opts"));kids.forEach(c=>c.classList.add("kdpr"));
- /* KIT 45 kitEventDp: banner (event picture) on top of the right column, focus point per picture; short options two per row */
+ /* KIT 50 kitEventDp: banner (event picture) on top of the right column, focus point per picture; short options two per row */
  const ban=mb.querySelector(":scope > .kdlgart.kdpban");d.classList.toggle("kdpbanner",!!ban);
  if(ban){const im=ban.querySelector("img");if(im){const f=(im.getAttribute("src")||"").replace(/^.*\//,"");im.style.setProperty("object-position",(window.KIT_FOCUS||{})[f]||"50% 50%","important")}}
  const op=mb.querySelector(":scope > .opts");if(op){const B=[...op.children].filter(x=>x.matches("button,.opt"));
   const short=B.length>=2&&B.every(b=>b.querySelectorAll(".kr").length<=2&&(b.textContent||"").replace(/\s+/g," ").trim().length<=70);op.classList.toggle("kdpo2",short)}
  kitDpFit()}catch(e){console.error("kitDpApply",e)}}
-/* KIT 45: banner focus points (object-position) for vertical event art; anything not listed = "50% 50%" (chosen from the crop sheets, dev/review/event-banners.md) */
+/* KIT 50: banner focus points (object-position) for vertical event art; anything not listed = "50% 50%" (chosen from the crop sheets, dev/review/event-banners.md) */
 window.KIT_FOCUS=Object.assign({"ev-trieu-chinh-2.webp":"50% 15%","ev-thang-tran.webp":"50% 55%","ev-hoang-de-gian.webp":"50% 15%","ev-di-san.webp":"50% 15%","ev-le-thu.webp":"50% 15%","ev-le-thu-2.webp":"50% 15%","ev-le-thu-3.webp":"50% 15%","ev-le-dong-2.webp":"50% 15%","ev-thoi-tiet-3.webp":"50% 15%","ev-dieu-troi.webp":"50% 15%","ev-dieu-lanh.webp":"50% 15%","ev-mat-uoc.webp":"50% 15%"},window.KIT_FOCUS||{});/* dev/review/event-banners.md */
 function kitDpFit(){try{const o=kitDpOn();if(!o||!o.d.classList.contains("kdper"))return;const {d,mb,col}=o;
  const narrow=innerWidth<600;d.classList.toggle("kdnarrow",narrow);
@@ -289,7 +289,7 @@ function kitDpFit(){try{const o=kitDpOn();if(!o||!o.d.classList.contains("kdper"
  if(!narrow){const cap=Math.min(innerHeight-32,720),lo=Math.min(innerHeight-32,500);const h0=d.style.height;d.style.height="auto";
   const nat=d.scrollHeight;const h=Math.round(Math.max(lo,Math.min(cap,nat)));d.style.height=h+"px";
   if(h0!==h+"px"){d.__kdpN=(d.__kdpN||0)+1;if(d.__kdpN<4)requestAnimationFrame(kitDpFit)}}
- /* KIT 42 (owner 11/15): the name + rank (kitNameRank chip) sit ABOVE the people, at the top of the column; KIT 32.7b (owner 11/15): every
+ /* KIT 48 (owner 11/15): the name + rank (kitNameRank chip) sit ABOVE the people, at the top of the column; KIT 32.7b (owner 11/15): every
     person FILLS the column from just under the chips down to the column bottom — the painted top (hair, crown, hat) under the chips, the feet
     on the column floor; man and woman alike (aspect kept), children by age (KIT_FIG.fac < 1). */
  L.forEach((x,i)=>{if(x.cap){x.cap.dataset.kdp=i;x.cap.classList.add("kdpcap","knr");if(x.cap.parentElement!==col)col.appendChild(x.cap);
@@ -344,7 +344,7 @@ html body #modal .dlg.kdper>#mb>.opts>*{width:100%!important;max-width:none!impo
 #modal .dlg.kdper .kes .kesimg{display:block;max-width:none!important;max-height:none!important}
 #modal .dlg.kdper .kes>.kpsn.kdpcap{position:absolute;top:0;bottom:auto;transform:translateX(-50%);z-index:20;white-space:nowrap;margin:0;text-align:center;
  background:rgba(255,250,240,.92);border:1px solid var(--line,#e6d3ac);border-radius:6px;padding:1px 8px}
-/* (KIT 42) the second chip line is placed by kitDpFit (style.top) */
+/* (KIT 48) the second chip line is placed by kitDpFit (style.top) */
 #modal .dlg.kdper .kes>.kpsn .kname{display:flex;flex-direction:column;align-items:center;line-height:1.2;color:color-mix(in srgb,var(--rc,#2a1a12) 45%,#2a1a12);font-size:1rem}
 #modal .dlg.kdper .kes>.kpsn .kname .kti{font-size:.74rem;font-weight:600;letter-spacing:.02em;line-height:1.1;color:color-mix(in srgb,var(--rc,#7a5530) 75%,#2a1a12)}
 #modal .dlg.kdper .kfact.kfnodot{grid-template-columns:minmax(0,1fr)}
@@ -377,7 +377,7 @@ window.kitXHTML=kitXHTML;window.kitXAdd=kitXAdd;
 .kit-x:focus-visible{outline:none;box-shadow:0 0 0 2px var(--gold,#c9a46a)}
 .modal.night .kit-x{background:#2a1610;color:#e9c07a;border-color:#4a2a20}
 `;document.head.appendChild(st)})();
-/* ================= KIT 42 · kitNameRank — name + rank ABOVE the picture (owner 11/15: "people read top to bottom") ==========   ONE block for every portrait / figure label: the rank on one small line (rank colour), the name under it, then the picture below.
+/* ================= KIT 48 · kitNameRank — name + rank ABOVE the picture (owner 11/15: "people read top to bottom") ==========   ONE block for every portrait / figure label: the rank on one small line (rank colour), the name under it, then the picture below.
    `kitNameRank(rank, name, col)` → `<div class="knr" style="--rc:col"><small class="knr-r">rank</small><b class="knr-n">name</b></div>`.
    Used by: Ân oán cards (kitRel3), every person dialog (32.7 chips = `.kpsn.knr` at the column top, kitDpFit), the shop seller, person
    cards (Hậu cung / Cung nhân: `.pcl` name + rank moved above the portrait). The same look as the 32.7 chip's kitName (rank over name). */
@@ -395,53 +395,7 @@ window.kitNameRank=kitNameRank;
 html body .pc.kpwide[data-k2]>.pcl>.pcrk{order:-4!important;margin:0!important}
 html body .pc.kpwide[data-k2]>.pcl>.pcname{align-items:flex-start!important}
 `;document.head.appendChild(st)})();
-/* ================= KIT 44 · kitActCompact — act cards in a NARROW pane beside a portrait / figure (owner 11/15: "the act picture squeezes the
-   text into a thin column") =================
-   Panes that hold a person on the left (person card `.pc > .pcr`: Hậu cung · Thánh thượng / Phi tần / Cung nhân "Việc hôm nay", Hoàng tự
-   child cards) are inline-size containers named `kpane`. When the pane is under 640 px wide every act card (`button.ka.kart`) inside it
-   takes the compact form — ONE CSS rule set, no other markup:
-   - LEFT: the same act picture as a SMALL SQUARE thumbnail (84 px; 72 px under 420 px), cover-cropped, 2 px border in its category colour
-     (`--kcc0`); the frame ornaments / category ribbon of the big slot are hidden (the card keeps its 4 px category edge).
-   - RIGHT (≥ 60 % of the card): title row = title + odds ladder on ONE line (the title may wrap, the odds never); a ONE-line description
-     (full text on hover / long-press title); the Cần / Tốn / Được / Mất / Kèm rows as compact label + value chips that wrap as WHOLE chips.
-   - Cards stack vertically, one card per row. `kitActCompactOn(root)` adds the description tooltips after a render. */
-/* owner 11/15: the person-card acts (Gặp mặt / Giao thiệp / Hại nhỏ … — plain button.ka) get THEIR OWN act picture (ACTS.json key via
-   kitActKey → kpActArt). No own picture → NO thumbnail (owner: never a category / group picture as a stand-in): the text takes the full width.
-   The same rule for every act card inside a kpane (a deck card whose only picture is its category picture loses the thumbnail there). */
-function kitActCompactOn(root){try{const R0=root||document;
- R0.querySelectorAll(".pc>.pcr button.ka").forEach(b=>{try{const kan=b.querySelector(".kan");if(!kan)return;const nm=typeof kpActName==="function"?kpActName(kan):kan.textContent.trim();
-   const key=typeof kitActKey==="function"?kitActKey(nm):"";b.classList.toggle("kanoart",!key);if(key&&!b.classList.contains("kart")&&typeof kpActArt==="function")kpActArt(b)}catch(e){}});
- R0.querySelectorAll(".pc>.pcr button.ka.kart .klead").forEach(e=>{if(!e.title)e.title=e.textContent.trim()})}catch(e){}}
-window.kitActCompactOn=kitActCompactOn;
-(function(){if(typeof render!=="function")return;const r0=render;render=function(){const r=r0.apply(this,arguments);try{kitActCompactOn(document.getElementById("panel"))}catch(e){}return r};window.render=render})();
-(function(){const st=document.createElement("style");st.id="kit-act-compact";st.textContent=`
-.pc>.pcr{container:kpane/inline-size}
-@container kpane (max-width:640px){
- button.ka.kanoart>.kaart{display:none!important}
- .pcb:has(> button.ka.kart),.cards:has(> button.ka.kart){display:flex!important;flex-direction:column!important;gap:8px!important;grid-template-columns:none!important}
- button.ka.kart{--kaw:84px!important;--kah:84px!important;display:flex!important;flex-direction:row!important;align-items:flex-start!important;gap:10px!important;width:100%!important;min-width:0!important;max-width:none!important;padding:8px 10px!important}
- button.ka.kart>.kaart{flex:0 0 84px!important;width:84px!important;height:84px!important;border-radius:6px!important;overflow:hidden!important;box-shadow:0 0 0 2px var(--kcc0,#b08a4a)!important;background:#efe4cc!important}
- button.ka.kart>.kaart>.ksart{width:100%!important;height:100%!important;margin:0!important;padding:0!important;border:0!important;background:none!important;box-shadow:none!important}
- button.ka.kart>.kaart>.ksart>:not(img){display:none!important}
- button.ka.kart>.kaart>.ksart>img{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-fit:cover!important;border:0!important;border-radius:0!important;margin:0!important}
- button.ka.kart>.kabody{flex:1 1 auto!important;min-width:0!important;gap:3px!important}
- button.ka.kart .kat{flex-wrap:nowrap!important;align-items:flex-start!important;gap:6px!important}
- button.ka.kart .kat>.kan{flex:1 1 auto!important;min-width:0!important}
- button.ka.kart .kat>:not(.kan){flex:0 0 auto!important;white-space:nowrap!important}
- button.ka.kart .klead{display:-webkit-box!important;-webkit-box-orient:vertical!important;-webkit-line-clamp:1!important;overflow:hidden!important}
- button.ka.kart small.kb{display:flex!important;flex-wrap:wrap!important;gap:3px 6px!important}
- button.ka.kart small.kb>.kr{display:inline-flex!important;flex-wrap:wrap!important;align-items:center!important;gap:2px 4px!important;width:auto!important;max-width:100%!important;grid-template-columns:none!important;border:0!important;padding:0!important}
- button.ka.kart small.kb>.kr>.krl{flex:0 0 auto!important;width:auto!important;min-width:0!important;font-size:.66rem!important}
- button.ka.kart small.kb>.kr>.krv{display:inline-flex!important;flex-wrap:wrap!important;gap:2px 4px!important;min-width:0!important}
- button.ka.kart small.kb>.kr>.krv>*{display:inline-block!important;white-space:normal!important;max-width:100%!important;overflow-wrap:anywhere}
- button.ka.kart small.kb>.kr>.krv>.ksep{display:none!important}
-}
-@container kpane (max-width:420px){
- button.ka.kart{--kaw:72px!important;--kah:72px!important}
- button.ka.kart>.kaart{flex-basis:72px!important;width:72px!important;height:72px!important}
-}
-`;document.head.appendChild(st)})();
-/* ================= KIT 45 · kitEventDp — THE event-with-a-person dialog (owner 11/15) =================
+/* ================= KIT 50 · kitEventDp — THE event-with-a-person dialog (owner 11/15) =================
    Every event where a person appears (visits "Có người đến", invitations, confrontations, the Emperor's visits): the 32.7 person dialog
    (LEFT: the people full height, name + rank above — 32.7b / 37; content height — 32.7c) and, when the event has a picture, the picture is a
    landscape BANNER at the top of the RIGHT column (cover-cropped at its focus point KIT_FOCUS[file] || "50% 50%"), then the event text as
@@ -552,4 +506,51 @@ window.kitCatchOn=kitCatchOn;window.kitCatchOff=kitCatchOff;
 (function(){const st=document.createElement("style");st.id="kit-catch";st.textContent=`
 #kxcatch{position:fixed;inset:0;background:transparent;touch-action:none;-webkit-tap-highlight-color:transparent}
 #kxcatch[hidden]{display:none!important}
+`;document.head.appendChild(st)})();
+/* ================= KIT 43 · kitActCompact (cherry-picked from review/kit-fig2 3e212597e by tabs-kit r7; kit-fig2 KIT §39 → §42 → §43, reviewer r7: main close-bugs owns §42) — act cards in a NARROW pane beside a portrait / figure (owner 11/15: "the act picture squeezes the
+   text into a thin column") =================
+   Panes that hold a person on the left (person card `.pc > .pcr`: Hậu cung · Thánh thượng / Phi tần / Cung nhân "Việc hôm nay", Hoàng tự
+   child cards) are inline-size containers named `kpane`. When the pane is under 640 px wide every act card (`button.ka.kart`) inside it
+   takes the compact form — ONE CSS rule set, no other markup:
+   - LEFT: the same act picture as a SMALL SQUARE thumbnail (84 px; 72 px under 420 px), cover-cropped, 2 px border in its category colour
+     (`--kcc0`); the frame ornaments / category ribbon of the big slot are hidden (the card keeps its 4 px category edge).
+   - RIGHT (≥ 60 % of the card): title row = title + odds ladder on ONE line (the title may wrap, the odds never); a ONE-line description
+     (full text on hover / long-press title); the Cần / Tốn / Được / Mất / Kèm rows as compact label + value chips that wrap as WHOLE chips.
+   - Cards stack vertically, one card per row. `kitActCompactOn(root)` adds the description tooltips after a render.
+   (tabs-kit r7) `.kpanec` = any other act area that sits in a narrow column (skill card acts, Việc nhờ) is a kpane too: same rules. */
+/* owner 11/15: the person-card acts (Gặp mặt / Giao thiệp / Hại nhỏ … — plain button.ka) get THEIR OWN act picture (ACTS.json key via
+   kitActKey → kpActArt). No own picture → NO thumbnail (owner: never a category / group picture as a stand-in): the text takes the full width.
+   The same rule for every act card inside a kpane (a deck card whose only picture is its category picture loses the thumbnail there). */
+function kitActCompactOn(root){try{const R0=root||document;
+ R0.querySelectorAll(".pc>.pcr button.ka, .kpanec button.ka").forEach(b=>{try{const kan=b.querySelector(".kan");if(!kan)return;const nm=typeof kpActName==="function"?kpActName(kan):kan.textContent.trim();
+   const key=typeof kitActKey==="function"?kitActKey(nm):"";b.classList.toggle("kanoart",!key);if(key&&!b.classList.contains("kart")&&typeof kpActArt==="function")kpActArt(b)}catch(e){}});
+ R0.querySelectorAll(".pc>.pcr button.ka.kart .klead, .kpanec button.ka.kart .klead").forEach(e=>{if(!e.title)e.title=e.textContent.trim()})}catch(e){}}
+window.kitActCompactOn=kitActCompactOn;
+(function(){if(typeof render!=="function")return;const r0=render;render=function(){const r=r0.apply(this,arguments);try{kitActCompactOn(document.getElementById("panel"))}catch(e){}return r};window.render=render})();
+(function(){const st=document.createElement("style");st.id="kit-act-compact";st.textContent=`
+.pc>.pcr,.kpanec{container:kpane/inline-size}
+@container kpane (max-width:640px){
+ button.ka.kanoart>.kaart{display:none!important}
+ .pcb:has(> button.ka.kart),.cards:has(> button.ka.kart){display:flex!important;flex-direction:column!important;gap:8px!important;grid-template-columns:none!important}
+ button.ka.kart{--kaw:84px!important;--kah:84px!important;display:flex!important;flex-direction:row!important;align-items:flex-start!important;gap:10px!important;width:100%!important;min-width:0!important;max-width:none!important;padding:8px 10px!important}
+ button.ka.kart>.kaart{flex:0 0 84px!important;width:84px!important;height:84px!important;border-radius:6px!important;overflow:hidden!important;box-shadow:0 0 0 2px var(--kcc0,#b08a4a)!important;background:#efe4cc!important}
+ button.ka.kart>.kaart>.ksart{width:100%!important;height:100%!important;margin:0!important;padding:0!important;border:0!important;background:none!important;box-shadow:none!important}
+ button.ka.kart>.kaart>.ksart>:not(img){display:none!important}
+ button.ka.kart>.kaart>.ksart>img{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-fit:cover!important;border:0!important;border-radius:0!important;margin:0!important}
+ button.ka.kart>.kabody{flex:1 1 auto!important;min-width:0!important;gap:3px!important}
+ button.ka.kart .kat{flex-wrap:nowrap!important;align-items:flex-start!important;gap:6px!important}
+ button.ka.kart .kat>.kan{flex:1 1 auto!important;min-width:0!important}
+ button.ka.kart .kat>:not(.kan){flex:0 0 auto!important;white-space:nowrap!important}
+ button.ka.kart .klead{display:-webkit-box!important;-webkit-box-orient:vertical!important;-webkit-line-clamp:1!important;overflow:hidden!important}
+ button.ka.kart small.kb{display:flex!important;flex-wrap:wrap!important;gap:3px 6px!important}
+ button.ka.kart small.kb>.kr{display:inline-flex!important;flex-wrap:wrap!important;align-items:center!important;gap:2px 4px!important;width:auto!important;max-width:100%!important;grid-template-columns:none!important;border:0!important;padding:0!important}
+ button.ka.kart small.kb>.kr>.krl{flex:0 0 auto!important;width:auto!important;min-width:0!important;font-size:.66rem!important}
+ button.ka.kart small.kb>.kr>.krv{display:inline-flex!important;flex-wrap:wrap!important;gap:2px 4px!important;min-width:0!important}
+ button.ka.kart small.kb>.kr>.krv>*{display:inline-block!important;white-space:normal!important;max-width:100%!important;overflow-wrap:anywhere}
+ button.ka.kart small.kb>.kr>.krv>.ksep{display:none!important}
+}
+@container kpane (max-width:420px){
+ button.ka.kart{--kaw:72px!important;--kah:72px!important}
+ button.ka.kart>.kaart{flex-basis:72px!important;width:72px!important;height:72px!important}
+}
 `;document.head.appendChild(st)})();

@@ -1,4 +1,4 @@
-/* review/kit-fig2: KIT §42 kitNameRank — the person's rank + name sit ABOVE the portrait / figure everywhere.
+/* review/kit-fig2: KIT §48 kitNameRank — the person's rank + name sit ABOVE the portrait / figure everywhere.
    usage: node dev/test/name-rank.js <build url> <outdir> <tag> [WxH@dpr,...]
    Shots of Hậu cung › Phi tần, Cung nhân, Hoàng thượng person cards; measures for each visible portrait: name-block bottom ≤ picture top. */
 const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT,TAG,SIZES]=process.argv;fs.mkdirSync(OUT,{recursive:true});

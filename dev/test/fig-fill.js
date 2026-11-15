@@ -1,4 +1,4 @@
-/* review/kit-fig2: KIT 32.7b + KIT 42 — in every person dialog the people FILL the figure column (painted top under the name chips, feet on
+/* review/kit-fig2: KIT 32.7b + KIT 48 — in every person dialog the people FILL the figure column (painted top under the name chips, feet on
    the column floor), name + rank chip ABOVE the head. usage: node dev/test/fig-fill.js <build url> <outdir> <tag> [WxH@dpr,...] [kinds]
    kinds: woman (one visitor), man (eunuch), two (two women), mix (woman + eunuch), shop (Nội vụ phủ shop).
    Per figure: painted height (top of hair/hat → feet) / column height, / the column under the chips; chip bottom ≤ painted top; feet ≤ floor. */

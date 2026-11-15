@@ -1,4 +1,4 @@
-/* review/kit-fig2: KIT 45 kitEventDp — event dialogs with a person: person column left (name + rank above, full height), event picture as a
+/* review/kit-fig2: KIT 50 kitEventDp — event dialogs with a person: person column left (name + rank above, full height), event picture as a
    banner on top of the right column, text, then options (two per row when short). Dialog height = content (32.7c).
    usage: node dev/test/event-dp.js <build url> <outdir> <tag> [WxH@dpr,...] [kinds]   kinds: mock, long, nopic, emp
    Measures: banner inside the right column (left ≥ figure column right), banner height, object-position, painted figure / column under the

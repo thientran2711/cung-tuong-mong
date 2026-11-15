@@ -1,4 +1,4 @@
-/* review/kit-fig2: KIT 44 kitActCompact — act cards inside a person card's right pane (Hậu cung › Thánh thượng "Việc hôm nay").
+/* review/kit-fig2: KIT 43 kitActCompact — act cards inside a person card's right pane (Hậu cung › Thánh thượng "Việc hôm nay").
    usage: node dev/test/act-compact.js <build url> <outdir> <tag> [WxH@dpr,...]
    Injects two Emperor acts into today's deck (one locked to the evening so it shows "Buổi tối (đang …)"), opens the Thánh thượng card and
    measures every act card in the pane: thumbnail square 72–96 px, text column ≥ 60 % of the card, title + odds on one line, description one

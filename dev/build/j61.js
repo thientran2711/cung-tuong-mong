@@ -24,7 +24,7 @@ function k61All(){const L=[];if(!S)return L;const add=e=>{if(e&&typeof e==="obje
  (rivals||[]).forEach(v=>{add(v);add(v.maid);(v.staff||[]).forEach(add);(v.kids||[]).forEach(add)});
  for(const c in (S.court||{}))add(S.court[c]);(S.men||[]).forEach(add);try{const T=S.trieu;if(T&&T.H)for(const c in T.H)add(T.H[c])}catch(e){}return L}
 function k61St(e){if(!e||!S||e===S)return 3;const K=k61S();if(!K)return 3;return +K[kOf61(e)]||0}
-/* owner 11/15 (stranger rule, KIT §43.3): a consort Ta has NOT MET is a grey silhouette everywhere (portraits, strips, news rows, figures,
+/* owner 11/15 (stranger rule, KIT §49.3): a consort Ta has NOT MET is a grey silhouette everywhere (portraits, strips, news rows, figures,
    the week book) — her name may be known, her face is not. Met = she talked / acted with her (S.met), or lives in the same palace
    (the "Đã quen" level alone is not enough: owner case "listed in Ân oán, Ta chưa gặp"). Everyone else keeps the face level (>= 1). */
 function met61(e){try{return !!(S&&S.met&&S.met[e.id])||(typeof sameHouse==="function"&&sameHouse(S,e))}catch(x){return false}}
@@ -95,7 +95,7 @@ const K61U={};["f","m","k","fig-f","fig-m","fig-k"].forEach(g=>{try{const im=new
 function k61G(e){const k=k61Kind(e);return k==="kid"?"k":["emp","man","eun","tq","phys","off"].includes(k)?"m":"f"}
 function k61Sil(p){const e=k61PortEnt(p);if(!e||isKnown61(e))return p;const g=k61G(e);
  return Object.assign({},p,{src:K61U[g]?`img/kit/unknown-${g}.webp`:"",ini:"?",col:"#8a8a8a",rw:p.rw?(k61Named(e)?k61Lab(e):k61Short(e)):p.rw,stranger:1})}
-/* the same grey silhouette for a person Ta has not met (knows(v) false), whatever her face level: Ân oán strips + panel (KIT §43.3) */
+/* the same grey silhouette for a person Ta has not met (knows(v) false), whatever her face level: Ân oán strips + panel (KIT §49.3) */
 function kitStrangerOf(v){const p=pv(v);const g=k61G(v);return Object.assign({},p,{src:K61U[g]?`img/kit/unknown-${g}.webp`:"",ini:"?",col:"#8a8a8a",stranger:1})}
 window.kitStrangerOf=kitStrangerOf;
 (function(){const c0=pcPort;pcPort=function(f,col,status){const g=k61Sil(f||{});return c0.call(this,g,g.stranger?g.col:col,status)}})();
