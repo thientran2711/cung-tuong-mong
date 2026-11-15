@@ -40,7 +40,7 @@ function k3CellKey(k){return k==="sung"&&typeof isSrv==="function"&&isSrv()?"tin
 if(typeof renderHUD==="function"){const r0=renderHUD;renderHUD=function(){const r=r0.apply(this,arguments);k3Hud();return r}}
 
 /* ---------- stage HUD ---------- */
-const K3_TIME=["buoi","lot"],K3_STAT=["sac","tai","tamco","duc"],K3_STATE=["preg","ill","fake","out","block","doc","conf","shield","birth"];
+const K3_TIME=["buoi","lot"],K3_STAT=["sac","tai","tamco","duc"],K3_STATE=["preg","ill","fake","out","block","doc","conf","shield","birth"];window.K3_STATE=K3_STATE;/* other modules add their own state key (e.g. jstory "pl67" = hạn lo liệu) */
 const K3_RIGHT=["srk","nt","chu","wage","merit"];/* "tin" (Chủ tin) is in the top bar on the servant road */
 const K3_ICO={sac:"sac",tai:"tai",tamco:"tam-co",duc:"duc"};
 function k3hc(k){const h=$$("hud2");return h&&h.querySelector(`.hc[data-hx="${k}"]`)}
