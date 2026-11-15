@@ -20,7 +20,7 @@ replaces 17:36Z); merge what is still needed of review/header-fix (unreviewed); 
 `node dev/test/header-danh.js <built index.html> <outdir> 755x1000@2,1000x755@1,1180x820@2,1366x1024@2,844x390@3 <oldsave.json>`
 (old save: `node dev/test/mk-oldsave.js <live url> oldsave.json`).
 
-## Review r6 (review/header-danh-r6, merged onto origin/main 5e491704d)
+## Review r6 (review/header-danh-r6, merged onto origin/main 5e491704d, then ce840fa84; probe re-run after the second merge, same results)
 - Merge: conflicts only in built index.html / sw.js (rebuilt; assets.json kept as main's: no asset changes here). Comments "KIT 31.19" in jk4 → 32.12.
 - header-danh.js at 755x1000@2, 1000x755, 1180x820@2, 1366x1024@2, 844x390@3 + old save (live build): no page errors, groups 6|2, label/number
   spread 0 px, bars Danh/Sủng/Sức, all tooltips, no quẻ/time-vs-cell overlap, seal never over the quẻ line, her block 1 line each, portrait
