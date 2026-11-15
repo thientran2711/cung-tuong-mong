@@ -23,3 +23,13 @@ via jstip table), j72 (favours give yensao), j97 (text matches its reward), j42 
   Note: the j93 chest at 844x390 clips its title row (j93 layout; game-feel reworks kitReward — not touched here).
 - stipend-oldsave.js: an old save from the live build loads; 4 months pass with skimming on, goods arrive, p.stip / S.stipW made lazily, 0 errors.
 - goods-scan.py: origin/main 19 text-only gifts → 0 (table in the report).
+
+## Review r6 (review/econ-stipend-r6, 15/11)
+Merged 961cae455a (incl. review/econ d0c0c7308) onto origin/main e7148caf; assemble.py = main's list + jecon.js, jstip.js after jwdinv.js.
+Reviewer fixes: skim event gets evId "j3:embezzle" (picture "Án tham ô"; before it fell back to the room/visit picture captioned
+"Có người đến chơi"); maid / report hints and log say "bạc" only when silver was actually cut (khất bổng month: goods only);
+jecon month card and jgift KM_EMPACT follow-up flagged ev:1 (both were opt-scan "??"; main already failed --fail on KM_EMPACT).
+Results: stipend.js 5 sizes 0 page errors, event in view, no h-scroll, tip restores 3 → 0 hàng kém, NPC skim 10–11 with news;
+children's fees j53/j54 still charged (tut 2 + princess art: −12 −6 in the line); stipend-oldsave.js (save from the live site) 0 errors;
+goods-scan --fail 18 → 0; opt-scan --fail OK; 16 item pictures on the CDN checked by eye.
+Bot base-vs-branch: NOT measured — load average 40–50 on this machine, one sensible life did not finish in 25 min (time cap).
