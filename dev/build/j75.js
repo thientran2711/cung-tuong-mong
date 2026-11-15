@@ -24,7 +24,13 @@ window.ntTaken=ntTaken;window.ntReason=ntReason;window.ntCan=ntCan;
 
 /* --- stealing: one try each, nothing after the visit is taken (her and NPCs alike) --- */
 const sn0=stealNight;stealNight=function(a,t,mode){if(!ntCan(a))return "";ntTry(a);return sn0.apply(this,arguments)};
-const sw0=stealWin;stealWin=function(a,t,mode){const n=ntTaken();if(n)return `${ntReason(a)}. `;const r=sw0.apply(this,arguments);if(a!==S)ntTake(a);return r};
+const sw0=stealWin;stealWin=function(a,t,mode){const n=ntTaken();if(n)return `${ntReason(a)}. `;
+ /* owner 11/15 16:58Z: the log says what REALLY happened to the one she took the night from (no card range "+3 đến +23") */
+ const me=a===S&&t&&t!==S;const b=me?{f:aff(t,S),o:Math.round(oan(t,S)),g:t.ghen||0}:null;
+ let r=sw0.apply(this,arguments);if(a!==S)ntTake(a);
+ if(me)try{const sg=x=>(x>0?"+":"−")+Math.abs(x);const d=[];const g=(t.ghen||0)-b.g,f=aff(t,S)-b.f,o=Math.round(oan(t,S))-b.o;
+  if(g)d.push(`${t.name} ghen ${sg(g)}`);if(f)d.push(`${t.name} → ta: thiện cảm ${sg(f)}`);if(o)d.push(`${t.name} oán ta ${sg(o)}`);if(d.length)r=r.replace(/\s*$/,"")+" "+d.join(", ")+". "}catch(e){}
+ return r};
 for(const k of ["steal","road"]){const A0=ACT[k];if(!A0)continue;const ok0=A0.ok;A0.ok=function(a,t){return ntCan(a)&&ok0.apply(this,arguments)}}
 if(typeof LACK==="object")for(const k of ["steal","road"]){const l0=LACK[k];LACK[k]=function(v){const w=ntReason(S);return w||(l0?l0.apply(this,arguments):"")}}
 /* the NPC social "steal" used to report a stolen night without moving it; now it is the real act or nothing */
@@ -136,7 +142,7 @@ const QF=["dâng canh sâm lên Dưỡng Hòa điện","chép bài thơ dâng l�
 const nm0=npcMonthly;npcMonthly=function(v){const a0=ap,fi0=v.fakeIll;let seen="";let armed=false;
  const od0=odA;odA=function(p,b){if(p===v&&!armed)armed=Math.abs(b-(55+v.sung/5+mm()))<1e-9;return od0.apply(this,arguments)};
  ap=function(p,o){if(armed&&p===v&&o&&o.sung===3&&Object.keys(o).length===1&&!(v.fakeIll===2&&fi0!==2)){armed=false;if((v.bac||0)<10)return;const b=v.sung;a0(p,{sung:3,bac:-10});
-   if(roll(20+S.mat*10))seen+=`Tai mắt kể: ${v.name} ${pick(QF)}; Hoàng thượng vui lòng. Sủng nàng ${b} → ${v.sung}. `;return}return a0.apply(this,arguments)};
+   if(roll(20+S.mat*10))seen+=`Tai mắt kể: ${v.name} ${pick(QF)}; Hoàng thượng vui lòng.${b!==v.sung?` Sủng của ${v.name} ${b} → ${v.sung}.`:""} `;return}return a0.apply(this,arguments)};
  let r;try{r=nm0.apply(this,arguments)}finally{ap=a0;odA=od0}return (r||"")+seen};
 /* (c) the same weekly decay for everyone (her rule from endTurn: -1, none for Hoàng hậu after the first tuần, none in tuần 2 if he is lạnh lùng) */
 /* NPCs work for Sủng as she does: the same acts as her deck cards (art ≥3: dance, zither, chess; else a small gift), same costs and odds shape */
@@ -149,7 +155,8 @@ function npcEffort(v){if(v.confined||v.out||illOf(v)||(v.preg||0)>=7)return "";c
  else if((v.bac||0)>=10){n=pick(QF);c={bac:-10};o=odA(v,55+v.sung/5+mm());w={sung:3};lose=0}
  else return "";
  ap(v,c);const b=v.sung;const ok=roll(o);ap(v,ok?w:{sung:-lose});
- return roll(20+S.mat*10)?`Tai mắt kể: ${v.name} ${n}: ${ok?"Hoàng thượng vui lòng":"ngài không để ý"}. Sủng nàng ${b} → ${v.sung}. `:""}
+ /* the change names whose Sủng it is; a line with no change says nothing about numbers (owner 11/15: "Sủng nàng 45 → 45") */
+ return roll(20+S.mat*10)?`Tai mắt kể: ${v.name} ${n}: ${ok?"Hoàng thượng vui lòng":"ngài không để ý"}.${b!==v.sung?` Sủng của ${v.name} ${b} → ${v.sung}.`:""} `:""}
 window.npcEffort=npcEffort;
 const rt0=rivalsTurn;rivalsTurn=function(){let ev=rt0.apply(this,arguments)||"";try{if(S.dead)return ev;
  for(const v of liveRivals(true)){if(!v.alive||v.out)continue;ev+=npcEffort(v);const keep=(has("lanhlung")&&S.tuan===1)||(rkOf(v)>=7&&S.tuan!==0);if(!keep)v.sung=cl(v.sung-1,0,100)}
@@ -163,7 +170,7 @@ function monopoly(){const f=favNow();if(!f)return"";const p=f.p,me=p===S,nm=me?"
   if(who&&!(q===S&&!me)){const b=p.sung;ap(p,{sung:-5});p.admonWk=wk();
    const t=`${who} khuyên Hoàng thượng “mưa móc đều khắp”, đừng chỉ sủng ${me?"ngươi":p.name} (${f.n} trong sáu đêm gần đây). Sủng ${me?"ngươi":"nàng"} ${b} → ${p.sung}; hai tuần tới ngài để ý đến người khác.`;
    if(me)Q.push({t:"Mưa móc đều khắp",who:q&&q!==S?pv(q):pTH(),h:`<p>${t}</p>`});ev+=t+" "}}
- if(roll(25)){const L=consorts().filter(x=>x!==p&&(x===S||(x.alive&&!x.out)));const x=pick(L);if(x){const b=x.sung;ap(x,{sung:3});ev+=x===S?`Nhà ngươi thấy ${nm} độc sủng, dâng lễ vật xin Hoàng thượng để mắt đến ngươi. Sủng ${b} → ${S.sung}. `:`Nhà ${x.name} thấy ${nm} độc sủng, dâng lễ vật xin Hoàng thượng để mắt đến con gái. Sủng nàng ${b} → ${x.sung}. `}}
+ if(roll(25)){const L=consorts().filter(x=>x!==p&&(x===S||(x.alive&&!x.out)));const x=pick(L);if(x){const b=x.sung;ap(x,{sung:3});ev+=x===S?`Nhà ngươi thấy ${nm} độc sủng, dâng lễ vật xin Hoàng thượng để mắt đến ngươi.${b!==S.sung?` Sủng của ngươi ${b} → ${S.sung}.`:""} `:`Nhà ${x.name} thấy ${nm} độc sủng, dâng lễ vật xin Hoàng thượng để mắt đến con gái.${b!==x.sung?` Sủng của ${x.name} ${b} → ${x.sung}.`:""} `}}
  return ev}
 window.favNow=favNow;
 function satN(p){return Math.max(0,nightsIn(p,6)-1)}

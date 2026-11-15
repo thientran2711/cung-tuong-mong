@@ -32,8 +32,10 @@ let SIZES=args.slice(1).filter((a,i,A)=>a!=='--shots'&&A[i-1]!=='--shots');if(!S
    /* an old line with the card's range text + fractions + ".." (versions before this fix) */
    log(`Tranh sủng. <span class="g">Thành.</span> · kèm: ${a.name} ghen +25, thiện cảm -15, oán ta +3 đến +23`);
    log(`${c.name} nhờ người đưa thư.. Nàng oán ngươi +2.36, thân -1.76.`);
+   /* Tranh sủng: the real change of the one she took the night from (owner 16:58Z) */
+   let steal='';try{S.tonight=c;S.buoi=B4L;Math.random=()=>0.001;const rr=runAct(S,c,"steal");Math.random=r0;if(rr)log(rr);steal=plain(rr||"");Q.length=0;S.toMorning=0}catch(x){steal='ERR '+x.message;Math.random=r0}
    log(`${a.name}.`);log('Triều đình: Được mùa ở Giang Nam, kho lúa đầy.');a.oan=(a.oan||0)+3;a.ghen=(a.ghen||0)+4;
-   return{giftEv,badEv,seen:plain(seen||""),promo:[r1,e.rank],names:[a.name,c.name,e.name]}});
+   return{steal,giftEv,badEv,seen:plain(seen||""),promo:[r1,e.rank],names:[a.name,c.name,e.name]}});
   const R={setup};
   await p.waitForFunction(()=>typeof FIGS!=='undefined'&&FIGS.length>0,null,{timeout:60000}).catch(()=>{});
   await p.evaluate(()=>{dawn()});await p.waitForTimeout(3500);
@@ -69,7 +71,7 @@ let SIZES=args.slice(1).filter((a,i,A)=>a!=='--shots'&&A[i-1]!=='--shots');if(!S
    const fp=R.pages.pages.findIndex(x=>x.fig&&/(Phi|Tần|Quý nhân|Thường tại|Đáp ứng|Hoàng hậu|Quý phi) /.test(x.title));await p.evaluate(n=>window.__kbk.go(n),fp>=0?fp+1:2);await p.waitForTimeout(600);await p.screenshot({path:`${SHOTS}/book-${wh}-2.jpg`,type:'jpeg',quality:60})}
   /* verdict */
   const P=R.pages.pages;const all=P.map(x=>x.txt).join(' \n ');const bad=[];
-  if(R.setup.giftEv!==0)bad.push('gift gave evidence');if(R.setup.badEv!==1)bad.push('misdeed gave no evidence');
+  if(R.setup.giftEv!==0)bad.push('gift gave evidence');if(!/ghen \+\d+/.test(R.setup.steal)||/đến/.test(R.setup.steal))bad.push('steal log: '+R.setup.steal);if(R.setup.badEv!==1)bad.push('misdeed gave no evidence');
   if(/\d[.,]\d/.test(all.replace(/\d+\/\d+/g,'')))bad.push('fraction: '+(all.match(/.{20}\d[.,]\d.{10}/)||[''])[0]);
   if(/(?<!\.)\.\.(?!\.)/.test(all))bad.push('double stop');if(/[Nn]àng ta (oán|→|ghen)/.test(all))bad.push('Nàng ta oán ta: '+(all.match(/.{0,40}[Nn]àng ta (oán|→|ghen).{0,20}/)||[''])[0]);
   if(/·\s*(kèm|thành|hỏng)\s*:|đến \+\d/.test(all))bad.push('card text: '+(all.match(/.{30}(kèm|đến \+).{20}/)||[''])[0]);
