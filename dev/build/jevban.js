@@ -25,3 +25,9 @@ function kitEvBanner(m){try{const key=kitDlgKey(m);if(key){const f=`img/ev-${key
 window.kitEvBanner=kitEvBanner;window.kitDlgKey=kitDlgKey;
 /* the existing dialog pictures (left picture / band, jk2b kitEvArt) take the banner when it exists */
 (function(){if(typeof kitEvArt!=="function")return;const k0=kitEvArt;kitEvArt=function(m){try{if(m&&!m.art&&!m.stArt){const b=kitEvBanner(m);if(b&&b.own)return{src:b.src,lab:b.lab}}}catch(e){}return k0.apply(this,arguments)}})();
+/* an own banner already paints the people of the scene: the stage figures (kitEventStage → .kesov over the picture, jk4) would stand
+   a second, grey/cut-out person in the middle of it — on such a banner the overlay is dropped (the text and the speaker row name them) */
+(function(){if(typeof kitEventStage!=="function")return;const k0=kitEventStage;kitEventStage=function(m){const r=k0.apply(this,arguments);
+ try{const b=kitEvBanner(m);if(b&&b.own){const mb=document.getElementById("mb");const ov=mb&&mb.querySelector(".kdlgart .ksart > .kesov");if(ov){ov.remove();const band=mb.querySelector(":scope > .kdlgart");if(band)band.classList.add("kevown")}}}catch(e){}return r};window.kitEventStage=kitEventStage})();
+/* 4:3 scene pictures in the wide dialog band: keep the heads (people stand in the upper half of the painting) — crop from near the top */
+(function(){const st=document.createElement("style");st.id="kevban-css";st.textContent=`html body #mb .kdlgart .ksart>img[src*="img/ev-"]{object-position:50% 14%!important}`;document.head.appendChild(st)})();
