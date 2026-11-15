@@ -143,12 +143,12 @@ function menTrue(m,v,y){const nm=m.name,at=placeName(y.k),vn=v?`${rkName(v)} ${v
  if(y.r==="overstay")return `${nm} được lệnh ${MEN_JOB[m.rw]||"làm việc"} ở ${at}, nhưng nán lại quá giờ để trò chuyện riêng với ${vn}.`;
  if(y.r==="seek"){const t=RV(y.likeV)||v;return `${nm} để ý ${t?`${rkName(t)} ${t.name}`:"một phi tần"} từ lâu, lẻn vào ${at} mong được gặp nàng.`}
  return `${nm} vào ${at} không có lệnh.`}
-/* the card (a saveable event: PEND) — full act cards (owner 11/15: Cần/Tốn/Được/Mất/Kèm + odds like Hành sự); result card after. No `who`: a speaker would introduce himself (j61),
+/* the card (a saveable event: PEND) — an EVENT choice: cost mode + kit hint / risk (owner 11/15 14:30Z, KIT 28.6, replaces the 00:26Z full act cards); result card after. No `who`: a speaker would introduce himself (j61),
    a stray man does not; the people stand on the card through `stage`. */
 PEND.menEnc=pp=>{const m=manById(pp.m);if(!m||!S)return null;const v=pp.v?RV(pp.v):null;const y={k:pp.k,r:pp.r,v:pp.v,p:pp.p||0,why:pp.why,likeV:pp.lv,hv:pp.hv};
  const L=[`<p>${pp.h?menTrue(m,v,y):menSeeLine(m,v,y)}</p>`,`<p>${MEN_ZN.hc}: nam nhân không có lệnh không được bước vào. Ai biết mà không báo cũng mang tội.</p>`];
  const o=menOpts(m,v,y,pp.h).map(a=>({n:a.n,fx:{},x:a.x,go:()=>menChoose(m,v,y,a.k)}));
- return{t:L.join(""),o,stage:v?[m,v]:[m],headArt:menArt(y.k),optLayout:"rows",showOut:true}};
+ return{t:L.join(""),o,stage:v?[m,v]:[m],headArt:menArt(y.k),optLayout:"rows"}};
 /* the act-card lines of each choice (same numbers as menReport / menHide / menChoose): Tốn · Được (thành) · Mất (hỏng) · Kèm, odds word on rolls */
 function menOpts(m,v,y,heard){/* items split by " · " so the kit (j63 kaRows) puts each in its row: "nàng …" harm = Được (green), "(…)" = Ghi chú, kèm = red */
  const love=v&&y.r==="tryst";const d=S.danh||0,tc=S.tamco||0;const A=[];const ev=love?2:1;
@@ -167,8 +167,8 @@ function menOpts(m,v,y,heard){/* items split by " · " so the kit (j63 kaRows) p
  return A}
 function menArt(k){try{const P=placeOf(k);const f=SCIMG[P.sc];return f?{src:`img/${f}.webp`,label:P.n}:undefined}catch(e){return undefined}}
 function menCard(m,v,y,heard){try{k61Know(m,"",true,1);if(v)k61Know(v,"",true,1)}catch(e){}const d=mkP("menEnc",{m:m.id,v:v?v.id:null,k:y.k,r:y.r,p:y.p||0,why:y.why||null,lv:y.likeV!=null?y.likeV:null,hv:y.hv!=null?y.hv:null,h:heard?1:0});if(!d)return;
- Q.push({t:heard?"Nghe lén sau hòn giả sơn":"Nam nhân nơi cấm địa",h:d.t,opts:d.o,stage:d.stage,headArt:d.headArt,optLayout:"rows",showOut:true,pid:d.pid,pp:d.pp});if(!window.__bot)showModal()}
-(function(){const d0=deserQ;deserQ=function(L){const out=d0.apply(this,arguments);try{out.forEach(q=>{if(q.pid==="menEnc"){const d=mkP("menEnc",q.pp);if(d){q.stage=d.stage;q.headArt=d.headArt;q.optLayout="rows";q.showOut=true}}})}catch(e){}return out}})();
+ Q.push({t:heard?"Nghe lén sau hòn giả sơn":"Nam nhân nơi cấm địa",h:d.t,opts:d.o,stage:d.stage,headArt:d.headArt,optLayout:"rows",pid:d.pid,pp:d.pp});if(!window.__bot)showModal()}
+(function(){const d0=deserQ;deserQ=function(L){const out=d0.apply(this,arguments);try{out.forEach(q=>{if(q.pid==="menEnc"){const d=mkP("menEnc",q.pp);if(d){q.stage=d.stage;q.headArt=d.headArt;q.optLayout="rows"}}})}catch(e){}return out}})();
 function menKh(n){const c=Math.max(0,Math.min(n,4-used));if(c)spend(c)}
 
 /* ---------- 4. the shared outcomes (the player and NPC consorts use the same ones) ---------- */
