@@ -351,3 +351,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (06:40Z) Sửa luật thời tiết: KHÔNG thêm khắc đi đường (đã có Sức hồi chậm, không phạt 2 lần). Cảm lạnh/trơn trượt là Mất của việc làm NGOÀI TRỜI (dạo vườn, chặn ngự giá ở vườn, quỳ ngoài sân…), ghi trên thẻ việc đó, không ghi trên thẻ đi đường.
 - (06:50Z) Thái độ của mọi người với nàng (kể cả kẻ hầu) chỉ dùng MỘT chữ "Thiện cảm"; bỏ "Lòng". Tên người không được có số.
 - (06:55Z) Nhịp chơi: chọn GIỮ NGUYÊN tốc độ (16 khắc/tuần, lên Hoàng hậu ~188 tuần, ~2–3 tiếng chơi thật). Không chỉnh nhanh hơn.
+- (07:00Z) Màu chiều quan hệ (kit chung, mọi thợ phải dùng): NGƯỜI KHÁC → TA = TÍM (#7a4fa0); TA → NGƯỜI KHÁC = LAM (#2f6f9f). Không dùng xanh lá/đỏ (dành cho Được/Mất). Tô cả chữ nhãn; con số thay đổi vẫn theo màu được/mất. Hàm kit kitRel(dir,text).
