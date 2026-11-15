@@ -70,13 +70,16 @@ function wdBagItem(k,extra){const w=WD_ITEMS[k];return Object.assign({cat:w.sl==
    return W.concat(L,P)}catch(e){console.error(e);return L}}})();
 /* the item panel of a WD item / a fabric */
 function wdEntryOf(g){if(g.wdSlot)return wdOf(S)[g.wdSlot];if(g.wdPawn!=null)return ((S.wdPawn||[])[g.wdPawn]||{}).e;return S.inv[g.i]}
-function wdItemRowsE(e,o){o=o||{};const w=wdItem(e);if(!w)return"";const gr=KIT_GRADE[w.g|0];const D=[],M=[],G=[];const fx=plainFx(w.w);
+/* wdItemLists(e,o) → {gr, D, M, G, lux, from, known} (KIT §70 kitItemDetail composes them; wdItemRowsE = the old 4-row block) */
+function wdItemLists(e,o){o=o||{};const w=wdItem(e);if(!w)return null;const gr=KIT_GRADE[w.g|0];const D=[],M=[],G=[];const fx=plainFx(w.w);
  D.push(`${w.sl==="tram"?"cài":"mặc"}: ${fx||"giản dị, không thêm"}`);
  const known=wdKnowsE(e);if(known&&wdP(e,S)>wdPOf(S)&&!(w.nt&&e.own))M.push("đồ phẩm trên ngươi: dễ bị hặc");if(w.nt)M.push("mất, làm vỡ là tội bất kính");
  if(e.h&&e.gh)M.push("không phải đồ của ngươi");
- G.push(`xa xỉ ${wdLux(w.k)}`);G.push(known?`đồ phẩm ${wdPName(wdP(e,S))}`:"chưa rõ phẩm");const src=wdSrcTxt(e);if(src)G.push(src);
- if(o.pawn)G.push(`cầm cố: còn ${Math.max(0,o.pawn.due-wk())} tuần để chuộc`);
- return kitRows([["Phẩm",`<span class="ef n" style="color:${gr.c};font-weight:700">${gr.n}</span>`],["Được",D,"g"],["Mất",M,"r"],["Ghi chú",G,"n"]])}
+ G.push(known?`đồ phẩm ${wdPName(wdP(e,S))}`:"chưa rõ phẩm");const from=wdSrcTxt(e)||"";
+ if(o.pawn)G.push(`cầm cố: còn ${Math.max(0,o.pawn.due-wk())} tuần để chuộc`);if(w.note)G.push(w.note);
+ return{gr,D,M,G,lux:wdLux(w.k),from,known}}
+function wdItemRowsE(e,o){const L=wdItemLists(e,o);if(!L)return"";const G=[`xa xỉ ${L.lux}`].concat(L.G,L.from?[L.from]:[]);
+ return kitRows([["Phẩm",`<span class="ef n" style="color:${L.gr.c};font-weight:700">${L.gr.n}</span>`],["Được",L.D,"g"],["Mất",L.M,"r"],["Ghi chú",G,"n"]])}
 function wdActBtns(e,g){const w=wdItem(e);if(!w)return[];const B=[];const ag=wdAgent(S);const sl=w.sl;
  if(g.wdPawn!=null){const P=S.wdPawn[g.wdPawn];B.push(pbtn(`data-wd="redeem" data-i="${g.wdPawn}"`,"Chuộc lại",`tốn: 1 khắc, Bạc -${P.back} · thành: món đồ về lại rương`,S.bac<P.back?`thiếu bạc (cần ${P.back})`:whyTime(1)));return B}
  if(g.wdSlot){if(sl==="tram")B.push(pbtn(`data-wd="off" data-sl="tram"`,"Tháo trâm","thành: cất vào rương, để tóc trơn",""));return B}

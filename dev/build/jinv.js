@@ -12,7 +12,7 @@ function kitInvGrid(o){o=o||{};const key=o.key||"bag";KINV.reg[key]=o;
  const L=(o.items||[]).filter(x=>cur==="all"||x.cat===cur);
  const cnt=k=>(o.items||[]).filter(x=>k==="all"||x.cat===k).reduce((a,x)=>a+(x.qty||1),0);
  const row=kitTabRowHTML(tabs.map(t=>{const n=cnt(t.k);return{k:t.k,label:t.label,n,tip:`${n} món`}}),cur,`data-kinvkey="${key}" data-kinvtab`);
- const slots=L.map((x,i)=>kitItem({src:x.src,name:x.name,grade:x.grade,qty:x.qty,on:x.on,onText:x.onText,mark:x.mark,lux:x.lux,size:"slot",
+ const slots=L.map((x,i)=>kitItem({src:x.src,name:x.name,grade:x.grade,qty:x.qty,on:x.on,onText:x.onText,mark:x.mark,lux:x.lux,sel:x.sel,size:"slot",
    tip:x.tip||x.name,data:`data-kinvkey="${key}" data-kinvi="${(o.items||[]).indexOf(x)}" role="button" tabindex="0"`})).join("");
  return `<div class="kinv" data-kinv="${key}" data-min="${o.minRows||4}"><div class="pctabs kcattabs kinvtabs" role="tablist">${row}</div>`+
   `<div class="kinvg" data-n="${L.length}">${slots}${kitInvEmpty(Math.max(0,(o.minSlots||24)-L.length))}</div></div>`}
@@ -89,7 +89,8 @@ function kinvItems(){return kinvGroups().map(g=>{if(g.wk)return kinvWork(g);cons
    Used under every "Đang mang" slot (no tap needed) and at the top of the item panel. o = {months, worn, ownTaint, dress, compact}.
    Được = what it gives (worn effects ×1.5 when above her rank, as j8 wearBonus); Mất = risks (vượt phẩm, contraband, loss);
    Ghi chú = duration / slot / rank it suits. Empty slot: kitItemHint(slot) — one short line on what the slot is for. */
-function kitItemRows(k,o){o=o||{};const it=IT[k];if(!it)return"";const a=typeof itemArt==="function"?itemArt(k):null;const gr=KIT_GRADE[a?a.grade|0:0];
+/* kitItemLists(k,o) → {gr, D, M, G, lux, slot} = the facts as lists (KIT §70 kitItemDetail composes them; kitItemRows = the old 4-row block) */
+function kitItemLists(k,o){o=o||{};const it=IT[k];if(!it)return null;const a=typeof itemArt==="function"?itemArt(k):null;const gr=KIT_GRADE[a?a.grade|0:0];
  const over=!!(it.rk&&it.rk>S.rank),m=over?1.5:1,N=typeof NAMES==="object"?NAMES:{};const eff=w=>Object.entries(w||{}).filter(([x,v])=>v).map(([x,v])=>{const n=Math.round(v*m);return `${N[x]||x} ${n>0?"+":""}${n}`});
  const D=[],M=[],G=[];
  if(o.dress||(!it.sl&&it.dr&&o.worn))D.push(`Sắc +${Math.round(it.dr*m)}`);else if(it.dr)D.push(`may áo: Sắc +${Math.round(it.dr*m)}`);
@@ -99,9 +100,11 @@ function kitItemRows(k,o){o=o||{};const it=IT[k];if(!it)return"";const a=typeof 
  if(it.keep)D.push("Sủng không dưới 15");if(it.gv)D.push("đem tặng: hợp ý");if(k==="botngua")D.push("phi tần trúng: Danh -5");if(it.mat)D.push("trộn vào túi thơm, hương trầm");
  if(over)M.push("vượt phẩm: dễ bị tố");if(it.il)M.push("bị khám ra là có tội");if(it.keep)M.push("mất là đại họa");
  if(o.ownTaint&&typeof TAINT==="object"&&TAINT[o.ownTaint])M.push(`đã ${TAINT[o.ownTaint].n}: ${TAINT[o.ownTaint].hurt}`);
- if(it.sl||it.dr)G.push(`xa xỉ ${luxVal(k)}`);if(o.months!=null)G.push(`còn ${o.months} tháng`);else if(it.dr)G.push("áo mặc 3 tháng");
- if(it.sl)G.push({hair:"cài tóc",wrist:"đeo tay",waist:"đeo eo",scent:"đeo bên mình"}[it.sl]||"");if(it.rk)G.push(`hợp phẩm từ ${RANKS[Math.min(7,it.rk)].n}`);
- return kitRows([["Phẩm",`<span class="ef n" style="color:${gr.c};font-weight:700">${gr.n}</span>`],["Được",D,"g"],["Mất",M,"r"],["Ghi chú",G,"n"]])}
+ const lux=it.sl||it.dr?luxVal(k):0;if(o.months!=null)G.push(`còn ${o.months} tháng`);else if(it.dr)G.push("áo mặc 3 tháng");
+ const slot=it.sl?({hair:"cài tóc",wrist:"đeo tay",waist:"đeo eo",scent:"đeo bên mình"}[it.sl]||""):"";if(it.rk)G.push(`hợp phẩm từ ${RANKS[Math.min(7,it.rk)].n}`);
+ return{gr,D,M,G,lux,slot}}
+function kitItemRows(k,o){const L=kitItemLists(k,o);if(!L)return"";const G=(L.lux?[`xa xỉ ${L.lux}`]:[]).concat(L.G,L.slot?[L.slot]:[]);
+ return kitRows([["Phẩm",`<span class="ef n" style="color:${L.gr.c};font-weight:700">${L.gr.n}</span>`],["Được",L.D,"g"],["Mất",L.M,"r"],["Ghi chú",G,"n"]])}
 function kitItemHint(sl){return sl==="hair"?"cài trâm, bộ diêu: thêm Sắc, có món thêm Danh":sl==="wrist"?"đeo vòng: thêm Sắc, Danh":sl==="waist"?"đeo ngọc bội ngự ban: thêm Danh":sl==="scent"?"đeo túi thơm: thêm Sắc":sl==="veil"?"che vết hủy dung hay mẩn ngứa":sl==="dress"?"may áo từ vải: thêm Sắc trong 3 tháng":""}
 function kinvOpenWork(x){const g=x.g,w=g.wk,i=g.i,A=typeof ARTS!=="undefined"?ARTS.find(a=>a.k===w.a):null;const t2=typeof whyTime==="function"?whyTime(2):"",t1=typeof whyTime==="function"?whyTime(1):"";
  const B=[pbtn(`data-wk="give" data-ix="${i}"`,"Dâng, tặng","tốn: 2 khắc · thành: chọn người, xem được bao nhiêu",t2),pbtn(`data-wk="sell" data-ix="${i}"`,"Bán ra ngoài cung",`tốn: 1 khắc · thành: Bạc +${typeof wkSellVal==="function"?wkSellVal(w):""}`,t1)];
@@ -183,8 +186,8 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 const KEQ={reg:{}};
 function kitEquipSlots(o){o=o||{};const key=o.key||"eq";KEQ.reg[key]=o;const L=o.slots||[];
  return `<div class="keq" data-keq="${key}" style="--keqn:${L.length}"><div class="keqh"><h4 class="kpst">${o.title||"Bên mình"}</h4><div class="keqsum">${o.sum||""}</div></div><div class="keqs">`+
-  L.map((x,i)=>`<div class="keqc">${kitItem(x.item?{src:x.item.src,name:x.item.name,grade:x.item.grade,lux:x.item.lux,size:"slot",tip:x.item.tip||x.item.name,data:`data-keqk="${key}" data-keqi="${i}" role="button" tabindex="0"`}
-   :{empty:true,size:"slot",ghost:x.ghost,tip:`${x.label}: trống`,data:`data-keqk="${key}" data-keqi="${i}" role="button" tabindex="0"`})}${x.item?`<b class="keqnm" style="color:${KIT_GRADE[x.item.grade|0].c}">${x.item.name}</b>${keqMiniSplit(x.mini)}`:`<b class="keql">${x.label}</b>`}</div>`).join("")+`</div></div>`}
+  L.map((x,i)=>`<div class="keqc">${kitItem(x.item?{src:x.item.src,name:x.item.name,grade:x.item.grade,lux:x.item.lux,sel:x.sel,size:"slot",tip:x.item.tip||x.item.name,data:`data-keqk="${key}" data-keqi="${i}" role="button" tabindex="0"`}
+   :{empty:true,size:"slot",ghost:x.ghost,sel:x.sel,tip:`${x.label}: trống`,data:`data-keqk="${key}" data-keqi="${i}" role="button" tabindex="0"`})}${x.item?`<b class="keqnm" style="color:${KIT_GRADE[x.item.grade|0].c}">${x.item.name}</b>${keqMiniSplit(x.mini)}`:`<b class="keql">${x.label}</b>`}</div>`).join("")+`</div></div>`}
 /* ROW ALIGNMENT (owner 15/11 05:45Z OCD rule; review/pets-fix): each slot is 4 fixed rows on a CSS subgrid — picture · name · chips · note line
    (.keql2: "theo hầu · Khỏe", "còn N tháng", ⚠) — so across a row of slots the names, the chip lines and the note lines sit on one line even when
    one slot has a chip and its neighbour has none (was: the followed pet's status line 17 px lower). */
