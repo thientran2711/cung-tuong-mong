@@ -773,3 +773,6 @@ All must work in co-op.
   4. Close card: look tier (vụng/vừa/đẹp/tuyệt/diêm dúa) + preset name + a one-line hint of how people may react today.
 - During the minigame, the mirror already shows her portrait (jtoil) — keep it live-updating with the chosen colours as she picks them (preview).
 - Painted art + Magnific effects rules and perf budget apply; co-op: friend sees only a small notice.
+
+## 15/11 ~23:35Z — Makeup: 8 'vụng' looks (owner)
+- Add 8 VỤNG (clumsy) looks drawn on her face like the other presets: crooked brows, lipstick past the lip line / uneven, smudged eyeshadow, blotchy or patchy powder, uneven blush, smeared mascara-like ink, etc. (4 cool + 4 warm colour variants). Shown when the makeup minigame score is low (vụng tier), using her picked colours where possible. Same exact-anchor QA so the clumsy look reads as intentional, not a rendering bug.
