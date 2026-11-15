@@ -1,0 +1,42 @@
+tho-truyen-ra-ngoai calligraphy on scroll
+thi-tham-noi-xau hand near mouth while whispering
+cung-nu-trom-bac maid may have huadian/looks like consort
+khong-ban-chinh-su hand anatomy (owner)
+ba-do-bi-bat hand check: tangled hands, fearful faces
+noi-trong-yeu-vat hand at mouth, scared
+trieu-than-nghi hand at mouth
+loi-don-ac-y hands at mouth
+gia-thai-bi-lat odd hand
+bat-gap-sat-ben startled faces/hand
+xin-tha-cung-nu hand on chest, sad face
+tho-truyen-ra-ngoai thumb gesture/hands
+xi-xao-che-mat hand at mouth whisper
+ke-chuyen-nghe-tu hand at mouth whisper
+he-lo-so-thich hand at mouth
+co-nguoi-thay-voi hand at mouth
+nang-thay-nghe-len hand at mouth
+nghe-ban-ke hand at cheek, open-mouth laugh
+sai-nguoi-moi consort hand at chin
+fixed: co-nguoi-thay-voi nang-thay-nghe-len nghe-ban-ke sai-nguoi-moi
+chia-se-bi-mat side-eye glare
+dang-hoa hands of maid and Emperor merge on branch
+dan-mat bow not van phuc (deep forward bend)
+chan-ngu-gia-thanh bow not van phuc
+nhan-tong-nu deep forward bow not van phuc
+xin-dai-hoc-si scholar hands clasped at chin
+thoi-hoc-vo child salute odd, hands at face
+ban-hon-su portrait man in lavender robe
+dang-con-hoa-than deep forward bow
+tranh-ghe-xong forward bend bow
+AUDIT(gown/bow, coordinator 11/15): bai-kien thoat-than-no-ty chao-hoi-dung-le cui-dau-tuan-lenh cui-chao-bai-kien hoi-danh-tinh den-gap sang-tham-di-vang nho-giup-do nhun-nhuong tang-boc nhan-tong-nu hoang-thuong-cam-kich hh-tra-thu(back-turned) tai-mat-bao-nam-nhan(hand chin) ke-nho-chuyen-cung(hand cheek)
+redo: tranh-ghe-xong them-cung-nu (forward bow)
+noi-vu-thay-la Chinese chars on plaque
+noi-vu-chua-co-nguoi maid back-turned
+chu-nho-on maid open-mouth smile
+xac-lao-vuong Qing-style hats on guards -> Ming helmets
+giu-kin-co-thai visibly pregnant contradicts hiding
+bieu-bac redo: giver came out in an imperial yellow dragon sleeve
+canh-bao chia-se-bi-mat cho-muon redo: yellow (imperial) sleeve without Emperor; TAIL tightened
+nho-con-noi-giup redo: Qing-style buttoned stand collar
+tu-hoc-mua redo: ballet pointe shoes with ribbons (Western)
+e68-stormnight giftpick redo: Emperor in yellow added though not in the scene; redrawn with 'NO Emperor'

@@ -1,0 +1,135 @@
+# owner 15/11 16:50Z: act pictures (Hành sự, person-card acts, tự học) show as few people as possible: only hands, a corner, objects.
+# key|dark|scene   (dark=1: night palette for schemes / harm). Drawn by hprompt.py -> act-<key>-h.webp
+bai-kien|0|a consort's two hands joined at the right side of her waist in a graceful curtsy gesture, seen close from the side, wide embroidered sleeves falling, the foot of a gilded throne dais and its red carpet steps beyond
+bai-thuoc-thu-thai|0|a physician's hand in a dark green sleeve laying a folded paper of herbs, red dates and goji berries beside an open medical book on a table, a consort's pale hand reaching to receive it
+ban-chung-cu|1|a gloved hand passing a small sealed bundle of letters across a dark lacquered table to another hand that pushes back a pouch of silver ingots, candlelight
+ban-hon-su|0|a row of unrolled portrait scrolls of young noblemen laid on a table, only painted silhouettes without faces visible, two hands in silk sleeves pointing at one of them, a red marriage card nearby
+ban-tan|0|three round silk fans held close together in a garden pavilion, only the hands and sleeves of the ladies holding them, leaning in as if whispering, peony bushes behind
+bieu-bac|0|a consort's hand in a soft jade green and pink embroidered sleeve (no yellow, no dragon) offering a small red silk pouch heavy with silver on an outstretched palm, another hand reaching to accept it, lattice window behind
+bieu-qua|0|two hands presenting a carved lacquer gift box tied with a red silk ribbon, the lid slightly open to show a jade bracelet inside
+boc-tu-tinh|1|a hand lifting a bundle of secret love letters and a pressed flower out of a hidden drawer, a single candle, a lattice screen
+cai-do-ruong|1|a hand slipping a gold hairpin under the folded silks of an open wooden chest in a dark room, a candle flame trembling
+cai-nguoi-vao-cung|1|a hand in a sleeve handing over a small jade token to the open palm of a maid in plain grey cotton sleeves, only hands visible, a far palace gate at dusk
+canh-bao|0|a hand pressing down gently on another lady's hand resting on a garden balustrade, a dropped plum blossom between them, a warning gesture
+cao-benh-dem|1|a bedside at night: a hand drawing the bed curtain closed, a cooling bowl of medicine and a lantern on the side table, a folded excuse note on a tray
+cau-xin-hoang-thuong|0|two hands of a kneeling consort holding the hem of an imperial yellow dragon robe, seen close, polished floor
+cham-soc-con|0|a mother's hand laying a cool folded cloth on a small child's blanket, a basin of water and a bowl of medicine beside the little bed
+chao-hoi-dung-le|0|the folded hands and slightly bent knees of a lady in a polite curtsy seen from the side at waist height, on a garden path with peonies
+che-cho-than-hinh|0|a slender hand in a jade green sleeve raised protectively in front of a kneeling maid's lowered shoulder, the guard's armoured gauntlet stopping before it
+chia-se-bi-mat|0|two hands cupped around a folded small note being passed under a table edge, two teacups above, a lattice window
+cho-con-hoc-chung|0|two small children's hands writing with brushes side by side on the same desk, open primers and an inkstone between them
+cho-muon|0|a hand passing a folded embroidered cloak and a small jewel box to another pair of open hands across a table
+chuong-su-tra-xet|1|a senior maid's hand in a dark sleeve flipping through a register book, a row of small cloth bundles and a lamp, a stern evening interior
+dan-di-thinh-an|0|a mother's hand holding a small child's hand as they walk up white marble steps toward a palace hall, seen from behind at knee height
+dang-chao|0|two hands carrying a covered celadon porridge bowl on a red lacquer tray, steam rising, a yellow silk cushion of the imperial study ahead
+dang-hoa|0|a hand offering a single branch of red plum blossom in snow, toward an imperial yellow sleeve reaching to accept it
+dang-vat|0|two hands presenting a gift on a gold-edged tray toward an imperial yellow sleeve resting on the arm of a throne
+dap-tra-mia|0|a round silk fan held firmly upright in a lady's hand, the fan's edge raised as if parrying, another fan tilted away
+den-cho-han|0|a hand pushing open a bamboo gate in a quiet garden corner, a lantern hanging from the other hand, a pavilion beyond
+den-gap|0|a hand lifting the knocker ring of a red palace door, the edge of a sleeve, peonies at the threshold
+do-la|1|a hand pressed flat against a red pillar, a lantern's glow spilling from a lit window across the courtyard at night, eavesdropping
+doa-to-doi-thuc|1|a hand holding up a torn embroidered handkerchief and a love token in front of a candle, a cold accusing gesture
+doi-nguoi|0|two cloth bundles of belongings and two servant name tablets being exchanged on a table, one hand pushing each across
+doi-thay|0|a hand setting down a new tutor's name card on a desk where an old one is being lifted away, books and brushes
+dut-lot-lat-the|1|a hand slipping a silver ingot under a jade name tablet on a lacquer tray of green consort tablets, lamplight
+ga-quyen-than|0|a red marriage contract with a gold tassel and a pair of red candles on a table, two hands exchanging betrothal gifts
+gia-hoa-trom-do|1|a hand opening someone else's jewel chest and placing a stolen gold bracelet inside, moonlight through lattice
+giup-do-nang|0|a hand reaching down to help pick up a spilled flower basket from the garden path, another hand taking hold of it
+gui-bai-tho-cu|0|a hand slipping a faded old poem written on pale paper into an envelope, a pressed flower and a brush beside
+gui-thu-qua-con|0|a hand tying a ribbon around a parcel of sweets and a small wooden toy on top of a sealed letter
+ha-doc-con|1|a hand sprinkling white powder from a folded paper into a child's small sweet soup bowl, night, a candle
+ha-doc-dan|1|a hand tipping a few drops from a tiny porcelain vial into a teapot, a candle and a tea tray, slow poison
+hac-sai-pham|0|a finger pointing at an over-rank embroidered phoenix on the hem of a lady's skirt, red carpet of a hall
+hau-tra-ngu-gia|0|a hand pouring tea from a celadon pot into a cup set before an imperial yellow sleeve, in a garden pavilion
+hien-khuc-trang|1|hands playing a guqin on a balcony under a full moon, lanterns reflected on the lake
+hoc-voi-thay|0|a tutor's hand in a grey sleeve guiding a young lady's hand on the strings of a guqin, a scroll of notes
+hoc-voi-thay-con|0|an old teacher's hand pointing at an open book, a small boy's hand holding a brush beside it
+hoi-chuyen|0|two teacups and a plate of pastries on a garden table, two hands resting near, a quiet conversation implied
+hoi-danh-tinh|0|a hand politely raised palm-up toward a stranger's sleeve on a garden path, a peony bush between
+hoi-nguoi-hau|0|a lady's hand gesturing toward a distant figure on a corridor, a maid's hand at her side, only sleeves visible
+hoi-so-thich|0|a hand jotting notes in a small book beside an imperial teacup, a go board, and a painted fan: the emperor's favourite things
+ket-minh|0|two ladies' hands clasped together over a censer of incense before small altar candles, a pact
+khat-bong-loc|0|a hand opening an empty silk purse over an account ledger, a few coins, a request note
+khen-tai-nghe|0|a hand gently applauding beside a guqin just played, flower petals on the strings
+kinh-hong-vu|0|a dancer's long water sleeves flying in a swirl over the polished floor, only sleeves and the hem of the skirt in motion
+lam-tho-trung-cuu|0|a brush writing on paper on a terrace table with yellow chrysanthemums and a cup of chrysanthemum wine, autumn mountains
+ly-gian|1|a hand slipping a forged letter between two folded fans on a table, sowing discord, candle
+mama-cong|0|an older governess's weathered hand guiding a young lady's hand pushing a needle through an embroidery hoop
+mama-dung|0|an older governess's hand in a dark sleeve and a young lady's hand together arranging a few simple elegant hairpins and a comb on a tray before a bronze mirror, modest neat beauty
+mama-hanh|0|an older governess's hand placing a book of etiquette in a young lady's open hands, a teapot and cups set in perfect order
+mama-ngon|0|an older governess's hand tapping lightly beside lines in an open book of proper speech, the young lady's hands folded
+mang-chan-thuoc|0|two hands carrying a folded warm quilt and a wrapped box of medicine through falling snow toward a wooden door
+moi-den-cung|0|a hand offering a red invitation card, the edge of a palace gate and blooming peonies
+moi-nang-sang-cung|0|a hand gesturing toward an open moon gate leading into a warmly lit courtyard at sunset, a lantern
+moi-thay-day-nghe|0|a hand setting down a red engagement letter beside a guqin, a pipa and a brush set, inviting a master
+mua-chuoc|1|a hand slipping a silver ingot into a maid's plain grey sleeve, behind a pillar
+nghe-loi-tai-mat|1|a maid's hand in a plain grey sleeve closing around a small folded note slipped to her at a dark corridor corner, a lantern glow, a promise to report
+nhan-bac-tai-mat|1|a maid's plain grey hand closing over a small purse of silver, half hidden in her sleeve
+nho-con-noi-giup|0|a mother's hands smoothing the crossed wrap collar (Han jiaoling, overlapping V-neck, NO buttons, NO stand-up collar) of a young prince's blue robe before he goes, a jade pendant at his sash, only hands and robe front visible
+nho-giup-do|0|a hand gently holding another lady's sleeve in a plea, a teacup and a folded request letter
+nhun-nhuong|0|a hand gently pushing the finer embroidered seat cushion toward another's place at a low table, keeping a plain cushion for herself, fallen petals
+noi-that-long|1|two hands resting near each other on a table by candlelight, an open heart-shaped jade pendant between them
+phat-vi|0|a maid's two hands pressed flat on cold grey courtyard paving stones as she kneels, seen close, the brocade hem of a standing lady before her, a punishment for a fault, daylight
+phat-vo-co|1|a long brocade skirt hem sweeping past a maid's lowered hands touching the floor, night lanterns
+pho-tai|0|a painting brush and a half-finished landscape on an easel, an imperial yellow sleeve visible watching at the edge
+phuong-cau-hoang|0|hands playing a pipa beside a lotus pond, a phoenix-shaped hairpin resting on the cushion
+ren-cong|1|hands embroidering by lamplight, a basket of coloured silk threads, the fine work of virtue
+ren-dung|0|hands smoothing the folds of a plain, neatly pressed robe laid on a bench, a simple wooden comb and a small round mirror beside it, modest tidy grooming
+ren-hanh|0|hands offering a bowl of rice to an old maid's grey sleeve, kindness, a basket of rice
+ren-ngon|0|hands opening a small book of proverbs and a cup of clear water, a quiet room
+rot-ruou-ngu-toa|1|a hand pouring wine from a silver ewer into a cup by an imperial yellow sleeve at a banquet table
+sai-tai-mat-do-noi-o|1|a hand pointing on a small hand-drawn map of palace courtyards, a eunuch's dark sleeve beside it
+tam-su|0|two ladies' hands, one resting gently over the other on a stone bench under a blossoming tree at dusk, a shared embroidered handkerchief between them, a heartfelt confidence
+tang-boc|0|a hand politely raising a wine cup toward an imperial yellow sleeve, a toast of praise
+thai-y-tam-phuc|0|a physician's medicine box opened on a table, a hand passing a jade token to the physician's dark sleeve
+them-cung-nu|0|a hand writing a name on a register beside a row of plain grey maid's name tablets on a tray
+them-thai-giam|0|a hand laying a eunuch's horsetail fly-whisk and a dark wooden name tablet on a register book, a row of dark eunuch hats and tablets on a tray behind
+thinh-an-hh|0|a lady's hands folded at her waist in a curtsy before a phoenix embroidered throne cushion, morning light
+thinh-an-th|0|a lady's hands holding a freshly copied sutra scroll before an old jade rosary on a throne arm
+thoi-hoc-vo|0|a wooden practice sword laid down on a rack beside a bow, a small hand letting go of it
+thoi-moi-thay|0|a hand closing a book and setting a farewell gift beside a tutor's empty seat
+thuong-vi|0|a hand offering a gold bracelet on a small tray to another pair of grateful open hands
+thuong-vo-co|0|a hand carelessly dropping a string of coins onto a tray, a red silk tassel
+tien-cu|0|a hand presenting a folded recommendation letter with a jade token on a tray, an imperial yellow sleeve
+tiep-dai-lanh-nhat|0|one teacup left untouched and cold on a table, a hand turned away, a single wilted flower
+to-toi-that|0|a hand laying out evidence: a stained cloth and a written confession before a throne's carved arm
+to-vuot-pham|0|a finger pointing at a forbidden phoenix headdress on a tray, an over-rank luxury
+tra-chung-cu|0|a hand returning a bundle of letters tied with a cord to another hand, reconciliation
+tranh-sung|1|a slender hand gently tugging an imperial yellow dragon sleeve toward an open chamber door glowing with red lanterns at night, vying for favour
+trinh-chung-cu-hh|0|two hands kneeling to present a sealed red evidence box before a phoenix throne
+trinh-chung-cu-th|0|two hands kneeling to present a sealed evidence box before the Empress Dowager's carved throne and rosary
+trut-gian|1|a teacup shattered on the floor, a hand clenched in a sleeve above it, candlelight
+tu-bao-che-an-thai|0|hands grinding herbs in a mortar beside a clay pot simmering on a small stove, red dates
+tu-day-tai-nghe|0|a mother's hand placing a child's small hand on the strings of a guqin
+tu-hoc|0|a hand turning the page of a book beside an inkstone and a brush on a quiet desk by a window
+tu-hoc-ao|0|hands sewing a flowing dance gown of light silk, scissors and thread on the table
+tu-hoc-bhoa|0|hands arranging a single lotus and leaves in a celadon vase
+tu-hoc-huong|0|hands filling a small embroidered sachet with dried flowers from small dishes of petals and herbs
+tu-hoc-khuc|0|hands writing notes on a music score beside a guqin
+tu-hoc-kinh|0|a hand copying sutra lines on paper beside a small censer and a rosary
+tu-hoc-mon|0|hands stirring a small pot of soup over a stove with bowls of ingredients
+tu-hoc-mua|0|the swirling hem of a long silk dance skirt and the tips of embroidered Chinese cloth dance shoes with upturned toes (Han style, NO ribbons, NO ballet pointe shoes) turning on a polished terrace, petals flying, long water sleeves trailing
+tu-hoc-the|0|a hand setting a black stone on a go board, an endgame problem
+tu-hoc-theu|0|hands embroidering a pair of mandarin ducks on a round hoop, colourful threads in a basket
+tu-hoc-tho|0|a hand writing calligraphy strokes on paper, an inkstone and a brush rest
+tu-hoc-tranh|0|a hand painting an ink landscape on a long paper, water bowl and brushes
+uy-hiep-doi-bac|1|a hand holding a folded secret letter just out of reach, the other hand open demanding a silver pouch, candle
+viec-chu-sai|0|a maid's hands carrying a stack of folded silks and a basket along a corridor, seen from behind
+vu-oan|1|a hand writing a false accusation on a petition paper by candlelight, a crumpled draft and a dark inkstone beside it, a sly secret night (the hand only)
+xem-nguoi|0|a hand raising a list of names beside a row of maids' folded hands, only sleeves visible
+xem-so-thi-tam|1|a hand turning the pages of a red-bound bedchamber register beside an oil lamp
+xin-an-xa|0|two hands raising a folded petition high in both palms before the closed vermilion doors of the imperial study, a plea for mercy, white marble threshold
+xin-dai-hoc-si|0|a hand presenting a petition scroll with a stack of classics books before an imperial yellow sleeve
+xin-hh-giang|0|a hand offering a small gift box before a phoenix throne's arm, a petition
+xin-thai-hau-hoc-cung|0|a hand presenting a copied orchid painting on a tray before the Empress Dowager's jade rosary
+xin-thuoc-cho|0|a hand receiving a wrapped packet of medicine from a physician's dark sleeve at a medicine cabinet
+xu-toi|0|a hand holding a judgment scroll over a kneeling servant's lowered hands on the floor
+# coordinator 15/11: the 8 veil / scar / spy book lines (meanings.py), hands-only too
+xin-mang-che|0|a maid's hands in plain grey sleeves holding up a lacquered tray on which lies a neatly folded sheer silk face veil, a consort's slender hand reaching down to take it
+thao-mang-che|0|a hand lifting a sheer silk face veil away and laying it into an open carved chest, a bronze mirror on the dressing table beside, bright hopeful morning light
+vet-thuong-lanh|0|a hand setting down a small empty jar of healing ointment beside a round bronze mirror that reflects only spring blossoms, a flawless powder puff and rouge box, radiant light
+lanh-con-seo|0|a round silk fan lying on a dressing table beside a bronze mirror turned half face-down, a small jar of ointment and a folded handkerchief, muted grey-blue overcast light, a hand resting quietly on the fan
+sai-theo-doi|1|a consort's hand passing a small silk pouch of silver into a eunuch's dark blue-grey sleeve across a lamp-lit table, the lattice door closed
+theo-doi-duoc|1|a eunuch's hand in a dark sleeve laying a small folded blank note on a lamp-lit table before a consort's waiting hand, night
+theo-doi-trang|0|a eunuch's empty open hands in a damp dark sleeve, rain falling in the grey courtyard beyond an open door, a consort's sleeve on the chair arm
+theo-doi-bi-bat|1|a guard's armoured gauntlet holding up a lantern that lights a dark sleeve and a hand clutching a red pillar in a night corridor, caught hiding
