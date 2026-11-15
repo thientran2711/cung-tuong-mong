@@ -2493,3 +2493,30 @@ figure (Thái hậu h1–h3, t7/t8 trains, wide a51 sleeves) is handled in `dev/
   facts/page, figure height ≥ 0.85, never scaled, page-1 name, torso clear, body never past the left edge. `node dev/test/book-relayout.js
   <url|page.html> <outdir>` — the figure download is held while the reader turns pages, then released: same fact still in view, 0 window
   resize events.
+
+## 58. LỊCH THÁNG · kitMonthCal + kitDeskCal (owner 15/11 ~18:30Z, review/month-calendar) — `dev/build/jmcal.js` (after jevb, before j84)
+A wall calendar so she can prepare for the festivals ahead. Registry: §58 (coordinator).
+- **Source = FEST only** (j31 table + j71 `thanhtho`, hidden while `S.thDead`). Private contests, tea parties, private banquets and every
+  other surprise event are not in FEST and never appear. Nobody adds a calendar entry anywhere else.
+- **Time model:** the game has no day of the month (a turn = one tuần, `S.tuan` 0/1/2). Squares 1–10 = thượng, 11–20 = trung, 21–30 = hạ tuần.
+  A festival sits on its traditional day (`MCAL.days`: Nguyên đán 1–3, Thanh minh 5, Đoan ngọ 5, Thất tịch 7, Lạp bát 8, Trùng cửu 9,
+  Nguyên tiêu / Vu Lan / Trung thu / Thánh thọ / Đông chí 15, Vạn thọ 25, Giao thừa 30) when that day is inside the tuần FEST holds it in
+  (FEST.t, the tuần the festival event really fires); otherwise on the first day of each of its tuần (Hội Phượng 1, 11, 21 — all month).
+- `kitMonthCal({o})` → HTML; `o` = months ahead of the current month (0..11). Parts: 12 month tabs (`kitTabRowHTML` in `.pctabs.kcattabs`,
+  count = festivals in that month; wrapped = the year at a glance; one scrolling row when the screen is under 520 px tall), the month head
+  (`Tháng giêng · năm thứ hai (10 tháng nữa)`), the grid (3 rows × [tuần label + 10 squares]; current tuần row gold + `kchip g` "Tuần này";
+  earlier tuần of this month dimmed), festival squares = the festival painting `img/ev-fest-<k>.webp` (cover) + day number + short name
+  (`MCAL.short`), and under the grid one `kitRows` table (day | name · "còn N tuần" / "tuần này" / "đã qua").
+- A festival square or list name opens the kit popover (`kpPop`, hover too with a mouse): name, day + tuần + time left, one line
+  (`MCAL.line`), "Có thể thi" (the SC7 contests of its j71 pool FV7, same Thái hậu filter as fvPick), "Còn có" (wagers, banquets, gifts,
+  rites), "Thắng thi" (`prize7`). Short; no paragraph.
+- `kitMonthCalOpen()` = `kitModal({kind:"cal"})` (seal "LỊCH", no info picture column; `#modal.kmc-modal` widens the panel to 780 px).
+- **kitDeskCal** (owner update): the painted desk calendar `img/kit/desk-cal.webp` (gpt-2-6, cut out; plain wooden `desk-cal-plain.webp`
+  in lãnh cung / as a servant) stands in a corner of HER room's stage (`S.place` "home", or "lc" while `S.out`); never elsewhere. Size
+  `KIT_DESKCAL` = 11 % of the stage height, 48–84 px (≥ 44 px tap). Corner order: bottom-right, bottom-left, top-left under the place title,
+  top-right; the first one that covers no name tag, side card, title, chip or figure body (figure box at 60 % width) wins (`kdcPlace`,
+  re-run after renderStage and on resize). One tap opens `kitMonthCalOpen()`.
+- No save data (old saves load unchanged). Samples on the kit page (#kit): §58 (this month), §58.1 (tháng giêng), §58.2 (both desk calendars).
+- Test: `node dev/test/month-cal.js <index.html> [outdir] [sizes]` (desk present, ≥ 44 px, inside the stage, 0 overlap; 12 tabs; no clipped
+  text / overflow in any month; only FEST keys; popover on screen; Thánh thọ hides after Thái hậu dies; lãnh cung = plain; none away from home;
+  390x844 = rotate prompt).
