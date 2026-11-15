@@ -237,3 +237,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (04:55Z) c12 Phi hoa điền đã thu nhỏ (~c03 t1 × 1.2), đẩy CDN.
 - (05:05Z) Owner: nam nhân không thuộc tab Hậu cung → chuyển sang Cung nhân, mục 'Nam nhân đã gặp'; tên nam nhân không trùng; thẻ nam nhân phải có việc hoặc lý do rõ. review/hau-cung-ui.
 - (05:08Z) Owner báo lỗi live: Hậu cung › Phi tần (Hạ Tố Tâm, Dùng chứng cứ) dải người chỉ 1 người, thẻ người co lại ~1/3, cắt tranh và thẻ việc, trống lớn bên dưới → sửa gấp (review/hau-cung-ui, đẩy riêng).
+- (05:12Z) Owner hỏi cân bằng 'Có người đến' (Nhịn: Đức+2, ghen+3 / Đáp trả: Danh+1, oán+10). Điều phối: chưa cân bằng (Nhịn gần như luôn hơn; ghen khi nhịn vô lý). Làm lại thành thế khó xử thật: Nhịn Đức+2, Danh−1, Lòng kẻ hầu −2, kẻ kia lấn tới; Đáp trả Danh+2, Lòng+2, oán+6, Đức−1 nếu người kia phẩm cao, có cơ may hỏng. Soát mọi sự kiện 2–3 lựa chọn có lựa chọn áp đảo. review/ts-b.
