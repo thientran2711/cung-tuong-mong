@@ -287,3 +287,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (09:05Z) Owner: còn 1 khắc, nơi cách 3 khắc → 'Không vào được' là ngõ cụt. Luật mới: cho 'Đi (đến nơi vào buổi sau)' — dùng nốt khắc còn, sang buổi, trừ phần đường còn lại vào buổi mới, đến nơi buổi sau thấy người buổi đó; thay nút 'Đợi buổi sau'. review/place-card.
 - (09:10Z) Owner: tab Hoàng tự như bảng tường trình chữ → làm theo kit chung, chia tab con (Con của ngươi | Kế vị | Hoàng tự trong cung | Hôn sự | Công tử quyền thần), thẻ người/dải người như Hậu cung. review/hoang-tu.
 - (09:15Z) Owner bực: lỗi 'còn 1 khắc mà không đi được dù cả ngày còn dài' báo từ 14/11 → HOTFIX riêng hotfix/walk-spill, lên live trước place-card.
+- (09:20Z) Owner: hôn sự phải có cả hoàng tử (lo vợ cho con trai), không chỉ công chúa → chính phi/trắc phi từ quý nữ nhà quyền thần, mẹ xin chỉ ban hôn, nhà vợ chống lưng vào phe + kế vị, NPC cùng luật. review/hoang-tu.
