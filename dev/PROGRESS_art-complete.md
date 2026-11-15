@@ -8,5 +8,5 @@ Task: owner ART COMPLETENESS rule (15/11 19:50Z). Audit every character set for 
 - Next (after go): draw with gpt-2-6 (folderReference ba4aecfe-efce-47e2-b53f-30d292091886), reference = same identity's
   nearest existing age/tier; cutcheck.py; por crop per review/por-scale rule; cdn_sync.py; add manifest records; picker
   changes listed in ART_COMPLETENESS.md (spouse ageing, eunuch rank, kid adult bands, mama rank).
-- Rerun: `python3 -I dev/figwork/artcomplete/audit.py --md dev/art/ART_COMPLETENESS.md` (delete .cache/ to refetch; note the
-  script writes only the table with --md, the doc text around it is hand-written).
+- Rerun: `python3 -I dev/figwork/artcomplete/audit.py --md /tmp/table.md` then paste the table into dev/art/ART_COMPLETENESS.md (delete .cache/ to refetch; --md writes ONLY the table, the
+  doc text around it is hand-written).
