@@ -40,7 +40,7 @@ def urls():
 
 def get(gid, path, preview=False):
     if os.path.exists(path): return path
-    z = glob.glob(f"{W}/zip/*_{gid}.png")
+    z = glob.glob(f"{W}/zip/*_{gid}.png") + glob.glob(f"{W}/src/{gid}.webp")  # src/: zip contents kept as full-res webp q96 (bin/z2src.py)
     if z and not preview: return z[0]
     db = urls()
     if gid not in db: raise SystemExit("NOURL " + gid)
@@ -114,8 +114,9 @@ def proc(only=None):
         print(key, "ok", [x1 - x0 for x0, x1 in cols])
         json.dump(R, open(RECF, "w"), indent=0, ensure_ascii=False)
         open(W + "/done.txt", "a").write(key + ":" + (bg if bg != '-' else gen) + "\n")
-        try: os.remove(_raw)
-        except Exception: pass
+        if "/src/" not in _raw:  # keep the archived sources
+            try: os.remove(_raw)
+            except Exception: pass
 
 def sheet(out, keys):
     F = ImageFont.truetype(FONT, 18); R = recs(True)
