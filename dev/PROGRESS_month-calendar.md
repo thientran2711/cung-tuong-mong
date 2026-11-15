@@ -13,3 +13,9 @@ Owner update (via coordinator): entry = painted DESK CALENDAR in a corner of her
 Squares 1–10 thượng / 11–20 trung / 21–30 hạ tuần; festival on its traditional day inside the tuần FEST.t fires it (see KIT §58).
 ## Resume
 Build: `python3 dev/build/assemble.py`; site for tests: `bash dev/site/build_site.sh` then copy index.html aside and `git checkout assets.json index.html sw.js`.
+## Tests (15/11)
+- `node dev/test/month-cal.js <site index.html>`: bad 0, 0 page errors at 755x1000@2, 1000x755@2, 1180x820@2, 1366x1024@2, 844x390@3
+  (desk 48–84 px, 0 overlap, 12 tabs, no clipped text/overflow in any month, only FEST keys, popover on screen, Thánh thọ hides after
+  Thái hậu dies, lãnh cung plain, none away from home); 390x844@3 host mode = rotated frame (rotate prompt) ok.
+- Kit page #kit: §58/§58.1/§58.2 render (pre-existing §28.1 sample error is on main too, not from this branch).
+- Old save: a save made by the live main build loads in this build; desk + calendar open, current tuần row correct.
