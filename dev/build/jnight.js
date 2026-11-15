@@ -21,9 +21,11 @@
  const f0=nightFx;nightFx=function(){const r=f0.apply(this,arguments);try{if(S&&!S.dead)S.toMorning=tb()}catch(e){}return r};
  let busy=false,asked="";
  const ready=()=>S&&S.toMorning&&!S.dead&&!Q.length&&!S.mg&&live();
- const step=()=>{if(busy||!ready())return;const co=coop();if(!co&&typeof advLock!=="undefined"&&advLock)return;
+ /* a try that cannot run now (a dialog open, the game's own auto-step lock) is tried again a moment later, not only on the next render */
+ let again=0;const later=()=>{if(!again)again=setTimeout(()=>{again=0;step()},1000)};
+ const step=()=>{if(busy)return;if(!ready()){if(S&&S.toMorning&&!S.dead)later();return}const co=coop();if(!co&&typeof advLock!=="undefined"&&advLock){later();return}
   if(co&&asked===COOPW.bkey())return;busy=true;
   setTimeout(()=>{busy=false;try{if(!ready())return;
-   if(coop()){if(asked===COOPW.bkey())return;const k=COOPW.nightEnd();if(k)asked=k;else setTimeout(step,1500);live();return}
+   if(coop()){if(asked===COOPW.bkey())return;const k=COOPW.nightEnd();if(k)asked=k;else later();live();return}
    if(co)return;used=4;nextBuoi();live();try{showModal()}catch(e){}render()}catch(e){console.error("toMorning",e)}},400)};
  const r0=render;render=function(){const r=r0.apply(this,arguments);try{step()}catch(e){}return r}})();

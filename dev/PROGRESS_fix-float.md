@@ -66,3 +66,23 @@ Base: origin/main (merged; see git log). In the assemble.py module list keep mai
      while the friend is mid-day; the next buổi is auto-ended again). Make co-op nights deterministic and re-run coop-e2e ≥3 times.
   2. book-person page turn: 2 of ~7 runs (1366x1024, 1180x820) report a turning sheet copy whose portrait (por-consort-*, por-maid-*) is still
      loading while the live page has it decoded (= a flash). Earlier runs on main 5e491704d / aa9689da5 were clean; load avg was ~34.
+
+## Round r7 (worker, on review/fix-float-r6 6d75eeb57 + origin/main b8a58e87)
+1. Co-op stall (FAIL 1). Root cause: jnight keyed "the night's day" and "asked once per buổi" on S.turn, which is the MONTH counter
+   (a day of play = one tuần, wk() = S.turn*3+S.tuan). So a night stayed "live" for the rest of the month: in co-op a stale night later
+   auto-ended (or, with the per-month "asked" key, never ended) a buổi, and one seat could end its week while the other was mid-day.
+   Same bug in single player: a night at buổi sáng spent 3 days (night-day "morning" case: old build day 0 → 3).
+   - jnight: S.toMorning = {d: wk(), b}; dropped as soon as wk() changes. Old saves ({t,b} or 1) = "this day".
+   - Co-op: jnight never calls nextBuoi; it calls COOPW.nightEnd() (jcoopworld), which ends this seat's current buổi once through the
+     sync path (sáng/chiều → bend → server `buoi`; tối → endTurn → `end`), and does nothing while the buổi is already ended (bend / pend /
+     sent), frozen, a dialog or a room step is pending, needWhere, or the local buổi is not the room's buổi. "Asked" is recorded only
+     when it really ended the buổi; otherwise it retries (render + 1.5 s).
+   - coop-e2e: `COOP_NIGHTS=1` stress (forces a won night on a random seat before ~45% of buổi); press() counts a seat whose buổi is
+     already ended (bend / week pending) as pressed; buoiBoth counts a seat waiting for the merged week as done; a stalled buổi dumps
+     both seats' state + COOPW.tr. Stress before the fix: 53/65 (reproduced both reviewer patterns); after: 59/59 with 10 forced nights.
+2. Page-turn flash (FAIL 2): kclPrep gives each copied <img> the live one's currentSrc; kitImgPending(root); kitSheetTurn returns
+   pending()/ready(ms). kitBook (j87 animate) keeps the live sheet shown and the copy hidden until the copy is decoded (≤350 ms), then turns;
+   flush() unhides. kitCurlSwap (tab turn) hides the sheet until decoded and restarts the turn, or skips it if still not ready. KIT §52.1.
+3. Wording: kitDeltaAuto names the actor of a bare "thân / thiện cảm ±N" right after a change of the same person toward me in the same
+   sentence: "Nàng oán ta +2, thân −2" → "Nàng → ta: thiện cảm −2"; "Lâm Phi oán ta +3, thân −4" → "Lâm Phi → ta: …"; "các phi tần ghen +10,
+   thân −5" → "Các phi tần → ta: …"; "hai người khác: thiện cảm +7" unchanged. KIT §57 note + kit page §57 sample.
