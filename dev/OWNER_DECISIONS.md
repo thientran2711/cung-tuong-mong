@@ -654,3 +654,6 @@ All must work in co-op.
   4. He picks: the chosen card glows and grows to the centre of the screen.
   5. If it is HER card, an extra animation tells her she was chosen.
   Coordinator to propose how (owner asked for the idea) and then build.
+
+## 15/11 ~20:55Z — Painted, never code-drawn (owner)
+- All day-closing / night / bedding / card-flip pictures and scenes must be PAINTED with Magnific gpt-2-6 (folder ba4aecfe…), never drawn with code (CSS/SVG/canvas shapes). Code only animates painted art (move, glow, fade).
