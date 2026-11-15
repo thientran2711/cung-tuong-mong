@@ -49,6 +49,6 @@ const LIVE='https://thientran2711.'+'github.io/cung-tuong-mong/';const html=fs.r
   if(process.env.ALL)res.forEach(r=>console.log("  ",r.ev?"EV":"--",r.src,"|",r.t,"|",r.kind,"|",r.c||"",r.sz||""));
   fails.slice(0,12).forEach(r=>console.log('  FAIL',r.src,'|',r.t,'|',r.kind,'|',r.f.join('; ')));
   if(errs.length)console.log('  page errors',errs.slice(0,5));
-  if(OUT){/* one picture of a seal-wearing event dialog */await p.evaluate(()=>{const x=approachOne()||{t:'Thử',h:'<p>thử</p>',opts:[{n:'Được'}],ev:1};Q.unshift(x);showModal()});await p.waitForTimeout(1200);await p.screenshot({path:`${OUT}/seal-${SZ}.jpg`,type:'jpeg',quality:55})}
+  if(OUT){/* one picture of a seal-wearing event dialog */await p.evaluate(()=>{Q.length=0;S.mg=0;['rtoast','dawn'].forEach(i=>{const e=document.getElementById(i);if(e)e.hidden=true});document.body.classList.remove('kbk-open');let x=null;for(let i=0;i<30&&!x;i++){const y=approachOne();if(y&&y.opts)x=y}x=x||{t:'Thử',h:'<p>thử</p>',opts:[{n:'Được'}],ev:1};Q.unshift(x);showModal()});await p.waitForTimeout(1200);await p.screenshot({path:`${OUT}/seal-${SZ}.jpg`,type:'jpeg',quality:55})}
   await ctx.close()}
  console.log('TOTAL',JSON.stringify(tot),bad?'FAIL':'PASS');await b.close();process.exit(bad?1:0)})();

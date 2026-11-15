@@ -16,10 +16,8 @@
 - Old saves: lazy fields only (S.calNotes, S.calNoteN, rival bmonth, kid bmo; S.bmonth as j20).
 - No private contests / tea parties / surprise events on the calendar (j53 "Khảo bài" surprise test excluded).
 
-## State (resume notes)
-- Last full month-cal run (before 2 small fixes): 755x1000 / 1180x820 / 1366x1024 / 390x844 PASS; 1000x755 + 844x390 failed "popover off screen"
-  (festival tap scrolled the day box into view under the popover) → fixed (no day-box scroll on a festival tap); 844x390 "no servant" → test
-  now adds one. Note day kept inside its tuần (fix). Re-run needed:
-  `bash dev/site/build_site.sh && node dev/test/month-cal.js index.html <outdir>` then `TURNS=10 node dev/test/seal-events.js index.html <outdir>`.
-- seal-events at 1180x820: 27 events, 0 fails (one earlier flaky "outside frame" on "Thái hậu triệu"; the scan now prints rects if it recurs).
-- Site (index.html, sw.js, assets.json) must be rebuilt + committed before review.
+## State (final)
+- month-cal.js all 6 sizes PASS (755x1000, 1000x755, 1180x820, 1366x1024, 844x390, 390x844 rotate prompt), 0 page errors.
+- seal-events.js 5 sizes PASS: 168 event dialogs (choice, notice, news, intel, result, threat, reward, night, stipend notices), 0 covering,
+  corners br / tr / bl at 40 / 34 (phone landscape) px, 5 used the bottom strip fallback; tool panels bare.
+- Festival check list compacted to ≤ 4 lines (contests ready / not ready, gift, wager silver). Site rebuilt and committed.

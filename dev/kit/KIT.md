@@ -2595,7 +2595,7 @@ true and both co-op players see the same weather (S.wx is a world key). Distribu
   `kitToggle` "Cho hảo hữu cùng thấy"). Notes: ≤ 48 characters, ≤ 40 kept, "Bỏ" removes one.
 - Reminder: at the start of the tuần before → kit notice "Sổ hẹn · Tuần sau"; on the tuần → "Tuần này" + a log line "Sổ hẹn: …" (once each).
 ### 58.6 Festival check list `mcPrep(k)`
-From its FV7 pool (Thái hậu variants dropped after her death): each contest → ✓ when her SC7 score ≥ 50 ("phong độ tốt"), text "Thi … : <form7>";
+From its FV7 pool (Thái hậu variants dropped after her death): contests in two lines: ✓ "Thi đã sẵn: …" (her SC7 score ≥ 50, "phong độ tốt") and ✗ "Thi chưa sẵn: …";
 gifts (P) → ✓ when Tư trang holds an item the receiver likes (IT tg), wagers → ✓ with ≥ 20 bạc. Unmet first. The popover adds "Sửa soạn: N/M đã sẵn".
 - Old saves: new fields are lazy (`S.calNotes`, `S.calNoteN`, rival / kid `bmonth` / `bmo`, `S.bmonth` as j20). Samples: §58.3 (this month, a day picked).
 - Test: `node dev/test/month-cal.js …` checks 13 tabs, every square a button, the day box on every size (no overflow / clipping), a note saved

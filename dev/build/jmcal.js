@@ -93,13 +93,15 @@ function mcQue(o,t){const n=mcNow();if(o>0||(o===0&&t>n.t))return null;if(o===0&
  const {m,y}=mcMY(o);for(const x of mcLogsOf(m,y,t)){const r=x.match(/^(?:Xin xăm|Gieo lại): quẻ ([^·.]+?)\s*·\s*([^.]+)\./);if(r){const lv=LV.indexOf(r[1].trim());if(lv>=0)return{lv,dom:r[2].trim()}}}return null}
 function mcQueChip(q){if(!q)return"";const b=LVB[q.lv];return `<span class="kchip ${b>0?"g":b<0?"r":""} kmc-que" title="Quẻ ${LV[q.lv]} · ${mcEsc(q.dom)}">${b>0?"Cát":b<0?"Hung":"Bình"}</span>`}
 /* the festival check list: what can be contested + gifts + wagers, ready ✓ / ✗ from HER stats, arts, bạc and Tư trang */
-function mcPrep(k){const P=(typeof FV7!=="undefined"&&FV7[k])||[];const thD=S&&S.thDead;const L=[],seen=new Set();
+function mcPrep(k){const P=(typeof FV7!=="undefined"&&FV7[k])||[];const thD=S&&S.thDead;const L=[],seen=new Set(),C1=[],C0=[];
  for(const v of P){if(thD&&(v[1]==="th"||/Thái hậu/.test(v[2])))continue;const id=v[0]+v[1];if(seen.has(id))continue;seen.add(id);
-  if(v[0]==="C"&&typeof SC7!=="undefined"&&SC7[v[1]]){let s=0;try{s=SC7[v[1]].f(S)}catch(e){}L.push([s>=50,`Thi ${SC7[v[1]].n}: ${typeof form7==="function"?form7(s):""}`])}
+  if(v[0]==="C"&&typeof SC7!=="undefined"&&SC7[v[1]]){let s=0;try{s=SC7[v[1]].f(S)}catch(e){}(s>=50?C1:C0).push(SC7[v[1]].n)}
   else if(v[0]==="P"){const r=v[1]==="th"?"th":"emp";const inv=(S.inv||[]).filter(e=>e&&!e.h&&(e.wk||(typeof IT!=="undefined"&&IT[e.k])));
    const like=inv.some(e=>{const it=typeof IT!=="undefined"&&IT[e.k];return it&&Array.isArray(it.tg)&&it.tg.includes(r)});
    L.push([like,`Lễ vật dâng ${r==="th"?"Thái hậu":"Hoàng thượng"}: ${like?"có món hợp ý":inv.length?"chưa có món hợp ý":"chưa có"}`])}
   else if(v[0]==="W"&&!seen.has("Wbac")){seen.add("Wbac");L.push([(S.bac||0)>=20,"Bạc đặt cược (20)"])}}
+ /* contests in ONE or two lines (owner: short): in good form ✓ / not yet ✗ */
+ if(C0.length)L.unshift([false,`Thi chưa sẵn: ${C0.join(", ")}`]);if(C1.length)L.unshift([true,`Thi đã sẵn: ${C1.join(", ")}`]);
  return L.sort((a,b)=>(a[0]?1:0)-(b[0]?1:0))}
 /* every short entry of month offset o: {d: [{k, txt}]} (festivals are drawn by kitMonthCal itself) */
 function mcExtra(o){const out={};const n=mcNow();const {m,y}=mcMY(o);const add=(d,k,txt,x)=>{d=Math.max(1,Math.min(30,d|0));(out[d]=out[d]||[]).push(Object.assign({k,txt},x||{}))};
