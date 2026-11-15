@@ -986,3 +986,13 @@ All must work in co-op.
 - Owner (verbatim): "Tôi không có cần thiết tất cả mọi sự kiện đều phải có một cái ảnh riêng. Ví dụ như âm mưu là mình vẽ riêng một cái ảnh âm mưu, thì tất cả những cái sự kiện nào liên quan tới âm mưu thì mình lấy từ cái đó ra ... hạ độc thì mình vẽ riêng, ám sát thì mình vẽ riêng ... tất cả những cái gì mà liên quan tới những nhóm đó thì mình để chung."
   → RULE: pictures are per MEANING GROUP (âm mưu, hạ độc, ám sát, cảnh báo, ghen tuông, ban thưởng, trừng phạt, tang lễ…), shared by every event/option of that group (2–3 variants for frequent groups allowed). Never an UNRELATED picture; never a separate picture per event unless it is a key story beat. Sent to review/ev-art-fit, review/opt-pics, review/pic-dupes (only different-meaning collisions are bugs).
 - (session 8) Owner (verbatim): "Rồi cái thì tự học, cái thì tự rèn, 1 chữ tự học thôi." Screens dev/handover/refs/owner-tu-hoc-wording-1.jpg / -2.jpg (Tài nghệ: Cầm/Kỳ "Tự học", Tứ đức "Tự rèn"). → ONE word "Tự học" everywhere (cards, logs, VANPHONG); teacher option titles follow one pattern. → review/act-text scope. Also spotted: Dung/Ngôn "Tự học" cards reuse Công's embroidery picture → picture per meaning group rule (each art gets its own study picture) → review/opt-pics/ev-art-fit follow-up.
+
+## 15/11 (session 8) — Tứ đức has no minigames (owner)
+- Owner (verbatim): "Mini game học tứ đức đâu? Không thấy."
+- Checked: dev/MINIGAMES.md and main have NO minigame for Công / Dung / Ngôn / Hạnh study (their "Tự học" just adds progress). Ledger had only CDNH sub-styles + works (D16).
+- Coordinator design (build; same easy rules as mg-easy: winnable by visible patterns, no classical knowledge, level-scaled, hints, 1-screen demo):
+  1. Công · Nữ công — Thêu: follow a dotted embroidery pattern with the needle (drag along the path; accuracy + steady speed), colour thread picks shown by swatch match.
+  2. Dung · Dung nghi — Đi đứng: a figure walks across the hall balancing a book/bowl on her head; tap/hold to keep a tilt meter centred while stepping on the rhythm marks.
+  3. Ngôn · Lời nói — Ứng đối: a person says something (plain modern meaning hint shown); pick the reply that fits their visible mood/rank cues (mood icon + rank colour), each reply shows its tone tag; score = fit.
+  4. Hạnh · Đức hạnh — Chép kinh / làm phúc: trace large brush strokes of a simple character shape in order (stroke arrows shown) or share alms fairly among waiting people (drag portions so everyone gets enough).
+  Outputs feed progress + quality of CDNH works (D16). → worker review/tuduc-mg (QUEUED-NEXT, with C23 mg-easy rules; painted backgrounds Magnific gpt-2-6).
