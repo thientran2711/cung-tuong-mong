@@ -449,3 +449,5 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (13:15Z) Thẻ Hoàng thượng ban ngày phải có việc: xin yết kiến, dâng canh, dâng tranh/thơ/đồ (chọn từ túi), hầu cờ đàn, mời dạo vườn; Thái hậu tương tự.
 - (13:15Z) "Chân tình" đang là phép thử nết ẩn → đổi thành nguyên nhân thật, hiện ở "Vì sao" (tự tay làm cho đúng người + đủ thân). Thêm giải nghĩa Ân tình.
 - (13:15Z) Dò ảnh dùng chung: không làm lại phần tranh hành sự (act-pics2 đã có bản đồ nghĩa), chỉ dò hộp thoại/sự kiện/thẻ tin.
+- (13:20Z) Tự học cắm hoa mà ảnh là cuốn sách → tách ảnh "Tự học" chung thành ảnh riêng từng môn (cắm hoa, thư pháp, đàn, cờ, vẽ, nấu, thêu, múa…), làm trước.
+- (13:20Z) review/kit-close vòng 2 sẵn sàng kiểm (Tư trang 2 tab, thẻ tin giữ + đổi tên "Tin trong cung buổi này", chắn bấm lọt) → R5. ts-a trả về → af76 sửa.
