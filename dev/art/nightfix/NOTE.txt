@@ -1,0 +1,2 @@
+Kính sự phòng + Thái y viện buổi tối: chỉnh màu bằng grade.py (Lab: chroma ×0.78, giảm thêm ở chỗ quá rực; nén vùng sáng >62 ×0.72 cho bớt chói; thêm xanh đêm ở bóng tối/trung tính; lọc giữ cạnh 35% cho mềm như tranh). Không dùng AI, bố cục giữ nguyên từng điểm ảnh. Độ bão hoà trung bình: KSP 194→~127, TYV 190→~128 (tam-cung-dem tối 129, phi-tan-cung tối 160).
+Chưa sửa, có thể cùng bệnh nhưng nhẹ hơn (bão hoà 172–191): tu-ninh-cung, khon-ninh-cung, duong-tam-dien, phi-tan-cung thu-toi (186). Chiều: kinh-su-phong ha/thu-chieu (196/193).

@@ -1,0 +1,1 @@
+Thái hậu già đi (gpt-2-6, folder ba4aecfe…): lưới 2x2 h1/h2/h3-a51 + face-thaihau-3 → EbznGlFuuO (nguồn O6fCaGVynm); face-thaihau-6 → mE3Ri1VhJQ (nguồn LwBoX9YswO). Dán riêng vùng mặt (th.py paste), alpha giữ nguyên, por làm lại bằng porcrop.
