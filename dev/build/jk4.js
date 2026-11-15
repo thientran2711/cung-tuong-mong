@@ -378,7 +378,7 @@ window.kitDpApply=kitDpApply;window.kitDpFit=kitDpFit;
    - EVERY event with a person gets the landscape banner: its own event picture, else the picture of its kind — "j24:<title>" (Có người đến,
      Thái hậu triệu, Hoàng thượng đến, Kẻ hầu xin, Một ánh mắt, Việc của kẻ hầu) or the week-book meaning table (KBK_EVRE, j87) read from
      the title + text; a dialog about herself alone (who = Ta) gets a banner only when that table finds a real meaning. */
-var KIT_DP_MINH=420;
+var KIT_DP_MINH=300;
 /* a festival dialog (j71 invitation j71i / feast invitation j71x / the festival day / its contests) → its festival key, so the banner is the
    festival's own picture ("fest:<k>" in EVENTS.json: Đoan ngọ = ev-le-ha) instead of the Triều chính default (owner 13:00Z) */
 function kitFestKey(m){try{if(typeof FEST!=="object")return"";const pp=m.pp||{};if(pp.k&&FEST[pp.k])return pp.k;
@@ -393,7 +393,14 @@ function kitDpNat(d,mb,col){try{const cs=e=>getComputedStyle(e);const items=[...
  const m=cs(mb);sum+=parseFloat(m.paddingTop||0)+parseFloat(m.paddingBottom||0)+(parseFloat(m.rowGap)||0)*Math.max(0,items.length-1);
  return d.offsetHeight-mb.offsetHeight+sum}catch(e){return d.scrollHeight}}
 (function(){const p0=kitStagePeople;kitStagePeople=function(m){const L=p0.apply(this,arguments);return window.KIT_EVENT_DP===false?L:L.slice(0,1)};window.kitStagePeople=kitStagePeople;
- if(typeof kitEvArt!=="function")return;const a0=kitEvArt;kitEvArt=function(m){try{if(m&&!m.evId&&!m.art&&!m.stArt){const f=kitFestKey(m);if(f&&typeof evArtCat==="function"&&evArtCat("fest:"+f))m.evId="fest:"+f}}catch(e){}
+ if(typeof kitEvArt!=="function")return;const a0=kitEvArt;kitEvArt=function(m){try{if(m&&!m.evId&&!m.art&&!m.stArt){const f=kitFestKey(m);if(f&&typeof evArtCat==="function"&&evArtCat("fest:"+f))m.evId="fest:"+f;
+   /* a j24 approach (Có người đến, Thái hậu triệu …) is its own kind even when a later layer would give the room picture */
+   else if(typeof evArtCat==="function"&&typeof kpSlug==="function"&&kitStagePeople(m).length){const sl=kpSlug(String(m.t||"").replace(/<[^>]+>/g," "));if(sl&&evArtCat("j24:"+sl))m.evId="j24:"+sl;
+    /* no event kind of its own (e.g. a j68 "Hoàng thượng" / "Tin đồn" event): e68:<id>, else the meaning of its TITLE (week-book table), else who it is (Hoàng thượng / Thái hậu / visitor) — not the room */
+    else{const pp=m.pp||{};const own=m.pid?m.pid+(pp.id||pp.k?":"+(pp.id||pp.k):""):"";if((!own||!evArtCat(own))&&typeof KBK_EVRE!=="undefined"){const txt=String(m.t||"").replace(/<[^>]+>/g," ");/* the title only: the body matched loosely (a tea chat read as "poison") */
+     const e68=/^e68/.test(m.pid||"")?"e68:"+m.pid.slice(3):"";const hit=KBK_EVRE.find(([re])=>re.test(txt));
+     if(e68&&evArtCat(e68))m.evId=e68;else if(hit&&evArtCat(hit[1]))m.evId=hit[1];
+     else{const P=kitStagePeople(m);const p=P[0];if(p&&p!==S)m.evId=S&&p===S.emp?"j24:hoang-thuong-den":S&&p===S.thO?"j24:thai-hau-trieu":"j24:co-nguoi-den"}}}}}}catch(e){}
   const r=a0.apply(this,arguments);if(r||!window.__kesArt||!m||window.KIT_EVENT_DP===false)return r;
   try{if(typeof evArtCat!=="function"||typeof evArtOf!=="function")return r;const P=kitStagePeople(m);if(!P.length)return r;
    const salt=S?(S.year*100+S.month*3+(S.tuan||0)):0;const t=String(m.t||"").replace(/<[^>]+>/g," ");const slug=typeof kpSlug==="function"?kpSlug(t):"";
