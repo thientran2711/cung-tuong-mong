@@ -132,3 +132,4 @@ Nhắc theo dõi: send_later 30 phút, tự đặt lại mỗi lượt (lịch l
 - [ ] (10:25Z) Hệ thống chăm thú (lớn dần + màn thú ảo) giao cho thợ kinh tế làm sau econ (review/pet-care) vì đã đủ 20 thợ chạy cùng lúc.
 
 - LIVE (11:58Z) review/hoang-tu → main 218a591fd (Hoàng tự §37, Hậu cung §36, khung chân dung không nhảy).
+- LIVE (13:55Z) review/act-audit → main 6e6c2ae6d (trò chơi nhỏ: bấm chỉ mở trò, chơi xong mới trừ + 1 thẻ kết quả; chặn bấm đôi; 6 việc qua odA).

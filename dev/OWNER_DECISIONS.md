@@ -461,3 +461,5 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (13:40Z) LỖI: "Nàng oán ta 2.36000…" số lẻ → mọi chỉ số làm tròn khi ghi + sửa sổ cũ; "thù" → "oán"; Tuần lục ghi lại chữ của THẺ thay vì kết quả thật → ghi kết quả thật.
 - (13:45Z) Tuần lục: chữ tràn bị cắt ở đáy trang; chép nguyên chữ hướng dẫn của thẻ (Dùng chứng cứ…) → ghi sự việc ngắn gọn, trang dài thì sang trang; chip không gãy dòng.
 - (13:45Z) Thái hậu bị cắt áo: do bố cục Tuần lục (hình rộng nhất bị cột hẹp cắt), sửa CSS chứ không vẽ thêm. Da nhợt: sửa 807 chân dung (a*<8.0). Hình cắt mép: cắt lại từ tờ gốc trước.
+- (13:55Z) Mệnh truyện giấu nhân chứng tốn 40 bạc vô lý, không có được/mất → thêm được/mất, đường không tốn bạc, giá theo bậc, cho hoãn vài buổi.
+- LIVE CDN (13:55Z) 19 tranh Tự học riêng từng môn (nối mã khi act-pics2 vào main).
