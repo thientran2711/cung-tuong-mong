@@ -15,7 +15,7 @@ Done
 
 Pre-existing, not touched: at 844x390 the cover hint "Vuốt trang hoặc chạm mép phải để lật" overlaps the TUẦN seal.
 
-## Reviewer r6 (11/15) — branch review/book-title-r6 = e7769dc32 merged onto origin/main 64e91f1ae, site rebuilt
+## Reviewer r6 (11/15) — branch review/book-title-r6 = e7769dc32 merged onto origin/main 64e91f1ae then 8ee414c1b (month-calendar, ts-a), site rebuilt; book-title.js + sheet-turn 844x390 re-run after the 2nd merge: ok
 - Fix (kit §27, j87): cover `.kbk-in` is a size container; `.kbk-cseal` margin-bottom `max(0px,calc(3cqh + 2.2em + 4px - 7cqw))` so the TUẦN
   seal clears the page-turn hint also when the hint wraps (844x390, both art and plain cover). KIT.md §27 line added.
 - dev/test/book-title.js at 755x1000@2, 1000x755, 1180x820@2, 1366x1024@2, 844x390: picture 160x1200 drawn inside the label, aspect kept
