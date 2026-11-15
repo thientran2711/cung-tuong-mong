@@ -808,3 +808,8 @@ All must work in co-op.
 - Owner (verbatim): "Khung tặng quà tôi muốn hiện hình món đồ luôn, xếp theo như kiểu ô tư trang á. Xếp hàng ngang để chọn rồi có animation khi tặng."
 - Screenshot dev/handover/refs/owner-gift-picker.jpg (VIỆC "Tặng quà" to Hoàng hậu: today a text-only vertical list of items with ĐƯỢC lines).
 - Decision: the gift picker shows each item as its PICTURE cell, same kit cell as Tư trang (picture + name + grade colour), laid out in horizontal rows to pick from; selecting a cell shows its ĐƯỢC/MẤT/odds detail (kit rows) and a confirm button. On giving: painted gift animation per 22:45Z list items 4–5 (item wrapped in silk / lacquer box carried across, ribbon untied on arrival; refused → box set down/returned) using §68 painted-fx. Whole family: every "choose an item to give/offer/bribe/use" picker in the game uses the same picture grid. → worker review/gift-pick.
+
+## 15/11 (session 8) — Label/value rows not aligned (owner screenshot)
+- Owner (verbatim): "Hàng trên hàng dưới chưa alignment."
+- Screenshot dev/handover/refs/owner-row-align.jpg (ĐIỀU "Tâm trạng · Chu Thục Nghi", block ĐANG TÁC ĐỘNG): row "LO ÂU | Khương Lạc Anh được tấn phong · 2 tuần trước" and row "ẢNH HƯỞNG | vui thì dễ chịu nghe…" — the value columns start at different x because each label sizes its own width.
+- Rule: inside one block, every label/value row shares ONE label column width (the widest label), so all values start on the same vertical line (same as the TỐN/ĐƯỢC/MẤT/GHI CHÚ rows). Fix in the shared kit row part, whole family across the game. → worker review/row-align.
