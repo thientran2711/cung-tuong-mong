@@ -487,3 +487,7 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - [ ] (16:40Z) Chạm vào hình nàng trên sân khấu thì hiện một khung chữ nhật xanh mờ đè lên hình (vùng chạm/hiệu ứng nhấn lộ ra) → bỏ; hiệu ứng nhấn phải theo dáng người hoặc không có.
 - [ ] (16:40Z) Nút góc dưới còn ghi "Qua ngày" (phải "Sang ngày mới"); chip "Đã mở bản mới" đè lên tiêu đề cảnh.
 - LIVE CDN (16:40Z) đẩy hết ảnh còn ở máy trước khi đóng phiên: 22 tranh dòng Tổng lược (act-pics2), 384 hình + 384 chân dung trung y c01–c12 + FIGURES-ty.json, fig-eunuch-ndp-tray.
+- (16:50Z) Hoa điền trên CDN (vd. c05 t5 trăng, t8 chim) sếp vẫn thấy TO → thu nhỏ thêm một cỡ nữa: làm mẫu vài mặt cho sếp duyệt trước, rồi mới làm hàng loạt. (Đây là việc mới, không phải làm lại việc cũ.)
+- (16:50Z) LUẬT KIT TRƯỚC (nhắc lại, ưu tiên số 1): MỌI chỗ hiện thông tin (chip, hàng chỉ số, quan hệ, thẻ…) trên toàn game phải lấy từ kit chuẩn. Thợ KHÔNG tự viết/vẽ kiểu riêng. Chưa có kit → thợ dừng, báo điều phối → làm thành phần kit chung, ghi vào trang kit (KIT.md + trang mẫu kit) → rồi thợ mới lấy ra dùng. Sửa Tuần lục phải là đổi sang kit chuẩn và rà cả game, không chỉ Tuần lục.
+- (16:50Z) Tranh HÀNH ĐỘNG (Hành sự, việc thẻ người, tự học…): hạn chế người tối đa, chỉ thấy tay, một góc, đồ vật, như các tranh Hành sự hiện có. Tranh sự kiện chính tuyến/phụ tuyến thì được có người.
+- (16:50Z) Giải thích "thù": game cũ còn sót chữ "thù −15" trong nhật ký (lỗi); bản sửa đổi hết thành "oán". Sếp không đổi luật, "oán" vẫn giữ.
