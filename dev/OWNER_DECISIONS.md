@@ -205,3 +205,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (01:50Z) Owner: hoạt cảnh lật trang chậm lại (~2×, ~1.1–1.4 s, êm) → thợ review/page-curl.
 - (01:55Z) Owner: áo khuê các (thiếu nữ ngoài cung) vẽ đủ 84 mặt (32 phi tần + 52 cung nữ).
 - (02:25Z) Owner DUYỆT áo khuê các (mẫu 4 mặt c05 c08 c29 m05, nét sáng mềm hơn chấp nhận) → vẽ nốt 80 mặt, nối vào tuyến tiểu thư.
+- (02:30Z) Owner: thêm trang phục cô gái nhà nghèo cho tuyến ngoài cung. Điều phối: xuất thân thd (thầy đồ nghèo) và td (tội thần) mặc áo nghèo; tt/dtq/muoi/ch mặc khuê các. Áo nghèo = vải thô/bông màu nhạt, trâm gỗ, gọn sạch xinh — không vá, không rách (giữ luật 'không ai trông thảm'). Thử 4 mặt trước rồi gửi sếp duyệt; 84 mặt.
