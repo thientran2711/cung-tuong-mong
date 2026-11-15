@@ -3,7 +3,7 @@
    page: the big full-body figure / scene that illustrates the right page; RIGHT = the text page the owner already approved),
    phone/portrait = ONE page: the RIGHT (text) page only — no illustration page on phones (owner 11/14, accepted loss). A tab switch
    is a page turn on both devices, and every page turn CURLS like real paper.
-   KIT.md §32. Loaded before j87 (the week book uses kitCurl for its turn).
+   KIT.md §34. Loaded before j87 (the week book uses kitCurl for its turn).
 
    kitCurl({host, front, back, w, h, x, y, dir, shadeR, mirror, vanish, keepId}) → {set(p,dir), destroy(), el}  (v2: corner fold, below)
      host  : positioned element; the turning sheet's SPINE is at (x,y) in host px, the sheet is w × h and lies to the right of it.
@@ -31,14 +31,18 @@ function kclMul(A,B){return[A[0]*B[0]+A[2]*B[1],A[1]*B[0]+A[3]*B[1],A[0]*B[2]+A[
 function kclInv(A){const d=A[0]*A[3]-A[1]*A[2]||1e-9,a=A[3]/d,b=-A[1]/d,c=-A[2]/d,e=A[0]/d;return[a,b,c,e,-(a*A[4]+c*A[5]),-(b*A[4]+e*A[5])]}
 function kclM(A){return`matrix(${A.map(v=>(+v).toFixed(4)).join(",")})`}
 function kitCurl(o){o=o||{};const host=o.host,w=Math.max(40,o.w|0),h=Math.max(40,o.h|0);
- const mir=!!o.mirror,BIG=Math.ceil(Math.hypot(w,h)*3)+200,lift=Math.min(h*.3,w*.62);
+ const mir=!!o.mirror,BIG=Math.ceil(Math.hypot(w,h)*2)+40,lift=Math.min(h*.3,w*.62);
  const root=document.createElement("div");root.className="kcl"+(o.cls?" "+o.cls:"");
  root.style.cssText=`left:${o.x||0}px;top:${o.y||0}px;width:${w}px;height:${h}px`+(mir?";transform:scaleX(-1)":"");
  /* a face copy: sticky → relative (one static picture), ids dropped (keepId keeps the root's, so #id styles still apply), scroll kept */
  const prep=(src,keepId)=>{if(!(src&&src.nodeType===1))return null;const m=src.cloneNode(true),A=[src,...src.querySelectorAll("*")],B=[m,...m.querySelectorAll("*")],sc=[];
   for(let i=0;i<A.length;i++){const a=A[i],b=B[i];if(!b)break;if(!(keepId&&i===0))b.removeAttribute("id");
    if(a.scrollTop||a.scrollLeft)sc.push([b,a.scrollTop,a.scrollLeft]);
-   if(i&&getComputedStyle(a).position==="sticky")b.style.position="relative"}
+   const ca=getComputedStyle(a);if(i&&ca.position==="sticky")b.style.position="relative";
+   /* a copied scroller is a still picture: clip it plainly (a live scroll layer inside the moving page is mis-clipped by the compositor) */
+   if(/auto|scroll/.test(ca.overflowY+ca.overflowX))b.style.setProperty("overflow","hidden","important");
+   /* big boxes keep their real size (heights from grid/container units of the old parent would not resolve in the copy) */
+   if(i&&a.firstElementChild){const r=a.getBoundingClientRect();if(r.height>=100&&r.width>=100){const st=b.style;st.setProperty("box-sizing","border-box","important");st.setProperty("height",r.height+"px","important");st.setProperty("min-height","0","important");st.setProperty("max-height","none","important");st.setProperty("flex","none","important")}}}
   /* the copy leaves its parent, so rules like ".game>#panel" stop matching: carry the root's own box layout inline */
   const cs=getComputedStyle(src);for(const k of["display","flexDirection","flexWrap","alignItems","alignContent","justifyContent","gap","gridTemplateRows","gridTemplateColumns","gridAutoRows","paddingTop","paddingRight","paddingBottom","paddingLeft","boxSizing","overflowX","overflowY","backgroundColor","backgroundImage","borderTopWidth","borderRightWidth","borderBottomWidth","borderLeftWidth","borderTopStyle","borderRightStyle","borderBottomStyle","borderLeftStyle","borderTopColor","borderRightColor","borderBottomColor","borderLeftColor","borderRadius","fontSize"])try{m.style[k]=cs[k]}catch(e){}
   if(m.style.display==="none"||m.style.display==="contents")m.style.display="block";
@@ -92,7 +96,7 @@ function kitCurlRun(c,from,to,dur,done,ease){ease=ease||kitCurlEase;const t0=per
 /* ---------- kitCurlSwap: turn a live page (tab switch) ----------
    kitCurlSwap(el, fn, {dir, ms}) : copies el as it is now, runs fn() (the game re-renders el in place), then the copy curls away
    from the corner over the new content (dir 1: bottom-right corner → left; dir −1: bottom-left corner → right) and fades as it leaves.
-   The copy keeps el's id (so #id styles apply) and sits after el inside the same parent (the live el stays first for getElementById).
+   The copy drops ids (no duplicate #panel for the game scripts) but carries el.s own box layout and the real heights of big boxes.
    No turn when el is not shown, when its box changed (another layout, e.g. the map), or with reduced motion (cross-fade instead). */
 let kclLive=null;
 function kitCurlSwap(el,fn,opt){opt=opt||{};const run=()=>{try{fn&&fn()}catch(e){console.error(e)}};
@@ -101,11 +105,11 @@ function kitCurlSwap(el,fn,opt){opt=opt||{};const run=()=>{try{fn&&fn()}catch(e)
  if(!el||!r0||r0.width<60||r0.height<60||!el.getClientRects().length){run();return false}
  if(kitCurlOff()){el.classList.add("kcl-fade");run();requestAnimationFrame(()=>requestAnimationFrame(()=>el.classList.remove("kcl-fade")));return false}
  const host=document.createElement("div");host.className="kcl-host";host.style.cssText=`left:${r0.left}px;top:${r0.top}px;width:${r0.width}px;height:${r0.height}px`;
- let c=null;try{c=kitCurl({host,front:el,back:null,w:r0.width,h:r0.height,x:0,y:0,keepId:true,mirror:(opt.dir||1)<0,vanish:true,cls:"kcl-tab"})}catch(e){console.error(e)}
+ let c=null;try{c=kitCurl({host,front:el,back:null,w:r0.width,h:r0.height,x:0,y:0,keepId:false,mirror:(opt.dir||1)<0,vanish:true,cls:"kcl-tab"})}catch(e){console.error(e)}
  run();
  const r1=el.getBoundingClientRect();
  if(!c||Math.abs(r1.left-r0.left)>2||Math.abs(r1.top-r0.top)>2||Math.abs(r1.width-r0.width)>2||Math.abs(r1.height-r0.height)>2||!el.getClientRects().length){host.remove();return false}
- el.parentNode.insertBefore(host,el.nextSibling);c.rescroll();kitCurlSfx();
+ document.body.appendChild(host);c.rescroll();kitCurlSfx();
  const stop=kitCurlRun(c,0,1,opt.ms||720,()=>{host.remove();if(kclLive===end)kclLive=null},kitCurlEase);
  const end=()=>{stop();host.remove()};kclLive=end;kitCurlSwap.t0=stop.t0;return true}
 
@@ -177,12 +181,12 @@ function kitBookSpread(host,spec){spec=spec||{};const root=document.createElemen
      cap  : small caption plaque under the plate (place / name, illustration caption only). slots: try-on slots beside the figure. */
 kitBookSpread.wantsPic=host=>{const W=(host&&host.clientWidth)||innerWidth,H=(host&&host.clientHeight)||innerHeight;return W>=900&&W/H>=1.15};
 function kitBookPic(o){o=o||{};const ax=o.ax!=null?o.ax:.5,feet=o.feet!=null?o.feet:.94;
- const figs=(o.figs||[]).map((f,i)=>`<img class="kbp-fig${f.dim?" dim":""}" src="${f.src}" alt="" decoding="async" style="--fx:${f.x!=null?f.x:.5};--fh:${f.h||.82};--fz:${f.z||i+2}">`).join("");
+ const figs=(o.figs||[]).map((f,i)=>`<img class="kbp-fig${f.dim?" dim":""}" src="${f.src}" alt="" decoding="async" style="--fx:${f.x!=null?f.x:.5};--fh:${f.h||(window.KIT_FIG?KIT_FIG.h:.86)};--fz:${f.z||i+2}">`).join("");
  const slots=o.slots&&o.slots.length?`<div class="kbp-slots">${o.slots.map(s=>`<div class="kbp-slot${s.img?"":" empty"}"><span class="kbp-sim">${s.img?`<img src="${s.img}" alt="">`:""}</span><b>${s.label}</b>${s.n?`<small>${s.n}</small>`:""}</div>`).join("")}</div>`:"";
  return `<div class="kbp${o.plate===false?" bleed":""}" style="--ax:${ax};--feet:${feet}"><div class="kbp-plate"><div class="kbp-scene" style="background-image:url('${o.scene||""}')"></div><div class="kbp-figs">${figs}</div>${slots}</div>${o.cap?`<div class="kbp-cap">${o.cap}</div>`:""}</div>`}
 
 (function(){const st=document.createElement("style");st.id="jbook-css";st.textContent=`
-/* paper skin (KIT §32.1): warm paper, faint fibres, edge tint */
+/* paper skin (KIT §34.1): warm paper, faint fibres, edge tint */
 .kpaper{position:absolute;inset:0;box-sizing:border-box;color:var(--ink,#2a1a12);background:
  radial-gradient(ellipse 70% 50% at 25% 18%,#fbf3dd 0,transparent 70%),radial-gradient(ellipse 60% 45% at 85% 92%,#e8d3a6 0,transparent 70%),
  url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .3 0 0 0 0 .12 0 0 0 .08 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E"),
@@ -192,7 +196,7 @@ function kitBookPic(o){o=o||{};const ax=o.ax!=null?o.ax:.5,feet=o.feet!=null?o.f
 .kcl{position:absolute;z-index:9999;pointer-events:none;transform-origin:50% 50%}
 .kcl-gnd{position:absolute;inset:0;overflow:hidden}
 .kcl-hp{position:absolute;left:0;top:0;overflow:hidden;transform-origin:0 0;will-change:transform}
-.kcl-face{position:absolute;left:0;top:0;overflow:hidden;transform-origin:0 0;will-change:transform}
+.kcl-face{position:absolute;left:0;top:0;overflow:hidden;transform-origin:0 0}
 .kcl .kcl-face>*:not(.kcl-sh){position:absolute!important;inset:0!important;width:auto!important;height:auto!important;max-height:none!important;margin:0!important;visibility:visible!important;transform:none!important}
 .kcl-fr{box-shadow:0 0 0 1px #8a5a2418}
 /* the flap: its own soft shadow falls on the page below it */
@@ -336,6 +340,8 @@ function kitBookLive(){const g=document.querySelector(".game");if(!g)return;
    try{kitBookLive()}catch(e){console.error(e)}
    try{last=t1;const mv=document.querySelector(".game.maptab #panel .mapv");
     if(mv){kitLeather(mv);if(t0!=null&&t0!=="go"&&t1==="go")kitUnroll(mv)}
-    else if(t0==="go"&&t1!=="go"&&pn&&!kitCurlOff()){pn.classList.remove("kcl-in");void pn.offsetWidth;pn.classList.add("kcl-in");setTimeout(()=>pn.classList.remove("kcl-in"),340)}}catch(e){console.error(e)}
+    else if(t0==="go"&&t1!=="go"&&pn){if(!kitCurlOff()){pn.classList.remove("kcl-in");void pn.offsetWidth;pn.classList.add("kcl-in");setTimeout(()=>pn.classList.remove("kcl-in"),340)}
+     /* the page row changed shape (map → book): let the person card measure its room again once the layout has settled */
+     if(typeof kitPcSize==="function"){requestAnimationFrame(()=>{try{kitPcSize()}catch(e){}});setTimeout(()=>{try{kitPcSize()}catch(e){}},150)}}}catch(e){console.error(e)}
    return out};
   window.render=render},0)})();

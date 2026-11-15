@@ -1,0 +1,244 @@
+C-m15-t2 rgeW6p3xtc hands
+C-m16-t2 eIOsqaSdqL hands (a48 letter->teacup)
+C-m17-t2 UPmenZOwny hands
+C-m18-t2 SytpzZcUb8 hands
+C-m19-t2 ksDnN9816B hands
+C-m20-t2 aF24lgufSh hands
+C-m21-t2 5jVG4NXKxe hands
+C-m22-t2 w4hdY017EI hands
+C-m16-t2 LwBT25cswO hands redo huadian small lattice
+C-m21-t2 CqGNUtYEEy hands redo huadian solid crane
+C-m23-t2 jUX0A89LD0 hands
+C-m24-t2 nVjqfg9YQD hands
+C-m25-t2 YMLbCwyWeC hands
+C-m26-t2 rgeWZmlxtc hands nomole
+C-m01-t3 3zbf8sCREY hands
+C-m02-t3 yiC8DxfPW9 hands
+C-m03-t3 SytpW5KUb8 hands
+C-m04-t3 rgeWZQVxtc hands
+C-m23-t2 xSdczl9jfW redo flat persimmon huadian
+C-m25-t2 yiC8d6xPW9 redo heavy opaque satin
+C-m26-t2 SytpTPOUb8 redo strong nomole
+C-m02-t3 1lpYASqr4r redo jet-black hair a48
+C-m26-t2 gOIDTVrSXO edit remove mole from SytpTPOUb8
+C-m05-t3 cplKbCa0eP hands
+C-m06-t3 bxTAZ9N5Y2 hands
+C-m07-t3 79vXeT1JAL hands
+C-m08-t3 VXUrk5QMMU hands
+C-m09-t3 ov9UglW829 hands
+C-m10-t3 aF24yPufSh hands (a24 letter->lantern)
+C-m11-t3 SytpMppUb8 hands
+C-m12-t3 JNaBdosOq4 hands
+C-m26-t2 SytpTPOUb8 use this (edit failed; mole removed by demole.py retouch)
+C-m13-t3 JNaBodkOq4 hands nomole
+C-m14-t3 vQZP4yma47 hands
+C-m15-t3 fHA9NNgCDY hands
+C-m16-t3 XmPgSU4Bfo hands
+C-m17-t3 lJ8MDdXgv9 hands
+C-m18-t3 ksDnYVo16B hands
+C-m19-t3 SytpetoUb8 hands
+C-m20-t3 Ebz6iYOuuO hands
+C-m05-t3 3zbfQ4CREY redo heavy opaque satin
+C-m14-t3 eIOswp8dqL redo a48 huadian missing
+C-m15-t3 iGqaQit3uK redo huadian smaller, black hair
+C-m20-t3 Sytp8wxUb8 redo a48 huadian missing
+C-m15-t3 ov9U4si829 redo2 huadian on all four
+C-m21-t3 If676kstvE hands
+C-m22-t3 Ebz6z7fuuO hands
+C-m23-t3 eIOsOkxdqL hands
+C-m24-t3 s7oVoWzl8e hands
+C-m25-t3 xSdcdnrjfW hands
+C-m26-t3 0egkgKITfW hands nomole
+C-m01-t4 u5niniOQLD hands
+C-m02-t4 dtylyUyXSL hands
+C-m15-t3 If67iCHtvE edit iGqaQit3uK: add huadian to a48
+C-m21-t3 Bh4SN5XoQR redo solid crane
+C-m24-t3 lJ8MtGNgv9 redo a48 huadian
+C-m25-t3 tCiJRLemZJ redo centred huadian, hair up
+C-m03-t4 CqGNTszEEy hands
+C-m04-t4 SytpEzlUb8 hands
+C-m05-t4 dtyl3KbXSL hands
+C-m06-t4 p8JL654ehw hands
+C-m07-t4 YMLb7uMWeC hands
+C-m08-t4 s7oVaWil8e hands
+C-m09-t4 SytpEMyUb8 hands
+C-m10-t4 xSdcmWRjfW hands
+C-m24-t3 lJ8MC75gv9 edit lJ8MtGNgv9: a48 hair dark
+C-m04-t4 gOIDuhHSXO edit SytpEzlUb8: add huadian a19
+C-m05-t4 Bh4SA3qoQR edit dtyl3KbXSL: smaller flat cherries
+C-m11-t4 N2Fhl0K6D9 hands (a48 scroll->teacup)
+C-m12-t4 P3EIjcY42C hands
+C-m13-t4 fHA9esDCDY hands nomole
+C-m14-t4 Sytpbz1Ub8 hands
+C-m15-t4 XmPgnkvBfo hands
+C-m16-t4 1lpYfRBr4r hands
+C-m17-t4 huRyMUfvqL hands (a32 book->birdcage)
+C-m18-t4 aF24pJzfSh hands (a24 sachet->lantern)
+C-m19-t4 9ZQmg48NYZ hands (a32 scroll->mirror)
+C-m20-t4 rgeWQjyxtc hands
+C-m21-t4 u5niIHTQLD hands
+C-m22-t4 iGqa7Ac3uK hands
+C-m23-t4 rgeWQS6xtc hands
+C-m24-t4 MBwxGIeDCm hands
+C-m25-t4 jUX0HOwLD0 hands (a32 scroll->box)
+C-m26-t4 ksDnE7j16B hands nomole
+C-m13-t4 fHA9otwCDY edit fHA9esDCDY: a48 hair dark + no mole
+C-m23-t4 w4hdLPS7EI edit rgeWQS6xtc: flat persimmon
+C-m01-t5 1lpYqExr4r hands (a48 letter->teacup)
+C-m02-t5 lJ8Mr5Tgv9 hands
+C-m03-t5 w4hdsxH7EI hands
+C-m04-t5 lJ8Mr1Zgv9 hands (a32 scroll->vase)
+C-m05-t5 MBwxWWiDCm hands (a48 letter->lantern)
+C-m06-t5 ov9Upe0829 hands
+C-m07-t5 SytpjgdUb8 hands
+C-m08-t5 9ZQmO6XNYZ hands
+C-m09-t5 0eg1V59TfW hands
+C-m10-t5 lJ8DSVxgv9 hands
+C-m11-t5 ov9wIwK829 hands
+C-m12-t5 s7oMgpSl8e hands
+C-m13-t5 vQZ4f6Na47 hands nomole
+C-m14-t5 ksDYrVU16B hands
+C-m15-t5 UPmd7tuwny hands
+C-m16-t5 ksDYrpJ16B hands
+C-m17-t5 3zbCzmhREY hands
+C-m18-t5 Do7Lo1npcl hands (a48 sachet->teacup)
+C-m19-t5 JNaoNXAOq4 hands
+C-m20-t5 0eg1ekPTfW hands
+C-m21-t5 xSd0S0rjfW hands
+C-m22-t5 xSd0SVdjfW hands (a48 letter->lantern)
+C-m23-t5 XmPSmJIBfo hands
+C-m24-t5 9ZQhZExNYZ hands
+C-m21-t5 mE3yFFmhJQ edit xSd0S0rjfW: solid crane huadian
+C-m18-t5 jUXTJyHLD0 edit Do7Lo1npcl: a48 hair dark
+C-m25-t5 yiCI2VTPW9 hands
+C-m26-t5 4RumGpT9Aa hands nomole
+C-m01-t6 u5n3rOVQLD hands
+C-m02-t6 KLMnSRLkqp hands
+C-m03-t6 u5n3r4pQLD hands
+C-m04-t6 8aN7uSHIrU hands
+C-m05-t6 gOIp9MdSXO hands
+C-m06-t6 MBwjtjBDCm hands
+C-m21-t5 UPmd6sswny edit2 xSd0S0rjfW: soft pink bird huadian
+C-m02-t6 lJ8DN7Ngv9 edit KLMnSRLkqp: a48 hair dark
+C-m05-t6 ov9wQPF829 edit gOIp9MdSXO: flat huadian, no pendant
+C-m06-t6 lJ8DNoagv9 edit MBwjtjBDCm: flat huadian, no pendant
+C-m04-t6 JNao2FVOq4 edit 8aN7uSHIrU: flat huadian, no pendant
+C-m07-t6 4RumYHa9Aa hands (a24 scroll->birdcage, a48 letter->teacup)
+C-m08-t6 xSd0PIljfW hands
+C-m09-t6 gOIpifCSXO hands
+C-m10-t6 bxTGUXH5Y2 hands
+C-m11-t6 yiCIzKHPW9 hands
+C-m12-t6 nVjbByVYQD hands
+C-m13-t6 N2FvcsU6D9 hands nomole
+C-m14-t6 jUXT4QeLD0 hands
+C-m15-t6 XmPSb9pBfo hands
+C-m16-t6 tCiOr2NmZJ hands (a24 letter->lantern)
+C-m17-t6 ov9wKZq829 hands
+C-m18-t6 N2FvDr16D9 hands
+C-m19-t6 UPmdzHvwny hands
+C-m20-t6 yiCI0rQPW9 hands
+C-m21-t6 79vBY1dJAL hands
+C-m22-t6 MBwjuGHDCm hands (a24 book->teacup)
+C-m23-t6 4RumIB69Aa gp
+C-m24-t6 XmPSlLyBfo gp
+C-m25-t6 SyteDD0Ub8 gp
+C-m26-t6 s7oMTVsl8e gp
+C-m01-t7 p8Jsjloehw gp
+C-m02-t7 xSd0WV8jfW gp
+C-m03-t7 xSd0WehjfW gp
+C-m04-t7 9ZQhtFtNYZ gp (a48 scroll->lantern)
+C-m02-t7 JNaooi8Oq4 edit grey hair a48
+C-m26-t6 79vBB3vJAL edit remove forehead chain
+C-m26-t6 WDsKK2wcXe redraw no forehead band
+C-m05-t7 0eg1xdYTfW gp
+C-m06-t7 rgecTwZxtc gp
+C-m07-t7 4RumvG19Aa gp
+C-m08-t7 ov9wJQJ829 gp
+C-m09-t7 TdSrjh1VNR gp
+C-m10-t7 tCiOPKXmZJ gp
+C-m11-t7 cplkrvo0eP gp
+C-m12-t7 dtygUqlXSL gp
+C-m05-t7 xSd0MzcjfW edit remove chain
+C-m12-t7 4RumaoP9Aa edit remove chain
+C-m13-t7 VXUxl4sMMU gp
+C-m14-t7 aF293TjfSh gp
+C-m15-t7 rgecMv5xtc gp
+C-m16-t7 lJ8DXFXgv9 gp
+C-m17-t7 TdSrsRMVNR gp (a32 letter->teacup)
+C-m18-t7 0eg1LRwTfW gp
+C-m19-t7 jUXTpb3LD0 gp
+C-m20-t7 dtyg7V8XSL gp
+C-m21-t7 eIOlODXdqL gp
+C-m22-t7 lJ8D8s1gv9 gp
+C-m23-t7 9ZQhF6kNYZ gp
+C-m24-t7 tCiO3aZmZJ gp
+C-m25-t7 jUXTBUWLD0 gp
+C-m26-t7 5jVzMsUKxe gp (bare forehead)
+C-m01-t8 EbzinkeuuO gp
+C-m02-t8 tCiO3FYmZJ gp
+C-m02-t8 rgec89Xxtc edit grey hair a48
+C-m03-t8 KLMnBdfkqp gp
+C-m04-t8 0eg1OOQTfW gp
+C-m05-t8 lJ8DaCzgv9 gp
+C-m06-t8 fHANcMJCDY gp
+C-m07-t8 s7oMvQml8e gp
+C-m08-t8 1lpW8C3r4r gp
+C-m09-t8 aF29WXrfSh gp
+C-m10-t8 jUXTmbJLD0 gp
+C-m05-t8 aF29Vx3fSh edit remove chain
+C-m08-t8 5jVzIyUKxe edit remove forehead band
+C-m11-t8 jUXTCouLD0 gp (a48 letter->vase)
+C-m12-t8 SyteHaYUb8 gp
+C-m13-t8 WDsK47BcXe gp
+C-m14-t8 Do7LRilpcl gp
+C-m15-t8 rgecavtxtc gp
+C-m16-t8 jUXTCC1LD0 gp
+C-m17-t8 WDsK4NvcXe gp (a48 book->birdcage)
+C-m18-t8 lJ8DQqngv9 gp
+C-m19-t8 rgecQ02xtc gp
+C-m20-t8 xSd0FM6jfW gp
+C-m21-t8 CqG6o2eEEy gp
+C-m22-t8 ov9wT94829 gp
+C-m23-t8 cplkRS80eP gp
+C-m24-t8 iGqf7Ks3uK gp
+C-m25-t8 Do7Lz45pcl gp
+C-m26-t8 ov9wTZR829 gp
+C-m01-tcold iGqfOjS3uK cp
+C-m02-tcold vQZ4B0Xa47 cp
+C-m03-tcold VXUxzifMMU cp
+C-m04-tcold ov9wMYG829 cp
+C-m05-tcold CqG6IdCEEy cp
+C-m06-tcold rgecHurxtc cp
+C-m07-tcold VXUxzGHMMU cp
+C-m08-tcold 4RumUwZ9Aa cp
+C-m19-t8 O6fIeIHynm edit remove pendant
+C-m23-t8 KLMYZWKkqp edit remove pearl strand
+C-m24-t8 xSdTzDajfW edit remove chain
+C-m25-t8 4RuhBEV9Aa edit remove forehead band
+C-m11-t8 lJ8pcIdgv9 edit remove pearl strand
+C-m12-t8 xSdTzoYjfW edit remove pearl strand
+C-m17-t8 mE3PUGxhJQ edit remove pearl strand
+C-m03-t8 p8Jl165ehw edit smaller huadian
+C-m06-t7 JNa8pSpOq4 edit remove chain
+C-m08-t7 ov97sXl829 edit remove chain
+C-m16-t7 p8Jl1Dyehw edit remove chain
+C-m01-tcold ksDWApb16B edit grey hair a48
+C-m09-tcold 1lpczvWr4r cp
+C-m10-tcold P3EmojG42C cp
+C-m11-tcold N2FatgK6D9 cp
+C-m12-tcold aF2NyXNfSh cp
+C-m13-tcold dtySL0aXSL cp
+C-m14-tcold SytdMx1Ub8 cp
+C-m15-tcold 5jVn2FUKxe cp
+C-m16-tcold VXUjkcnMMU cp
+C-m17-tcold cpl1jFv0eP cp
+C-m18-tcold 3zbEFmiREY cp
+C-m19-tcold 5jVnc2TKxe cp
+C-m20-tcold p8JlUjVehw cp
+C-m21-tcold XmPUJSOBfo cp
+C-m22-tcold Do7sSlgpcl cp
+C-m23-tcold eIOgwwNdqL cp
+C-m24-tcold iGqCQqR3uK cp
+C-m25-tcold UPmXIH0wny cp
+C-m26-tcold s7oDXQ6l8e cp
+C-m24-tcold If6OZKxtvE edit-blackhair

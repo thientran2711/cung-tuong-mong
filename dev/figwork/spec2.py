@@ -29,7 +29,7 @@ json.dump(CONS,open("consorts_ids.json","w"))
 AG=["a18","a26","a36","a51"]
 FS=["oval face","heart-shaped face","long slender face","softly round face","diamond face with high cheekbones","face with a petite pointed chin","gentle square-jawed face","wide soft cheeks"]
 EY=["almond eyes","slightly upturned phoenix eyes","large round eyes","long narrow eyes","gentle downturned eyes","deep-set calm eyes"]
-MK=["a tiny beauty mark under her left eye","a small beauty mark above the right corner of her lips","a small mole on her right cheekbone","thick straight brows","thin high-arched brows","a faint dimple in her left cheek","a small red huadian mark between her brows","softly rounded brows"]
+MK=["long soft lashes","a softly defined cupid's-bow upper lip","softly rounded cheekbones","thick straight brows","thin high-arched brows","a faint dimple in her left cheek","a small red huadian mark between her brows","softly rounded brows"]
 IDF={}
 for k,(cid,tr,mt) in enumerate(CONS): IDF[cid]=f"{FS[k%8]}, {EY[(k*5)%6]}, {MK[(k*3+(1 if k>=24 else 0))%8]}"
 json.dump(IDF,open("consorts_feat.json","w"),indent=0)
@@ -48,7 +48,7 @@ for lk in LCOL:
 MT={"trung":"steady upright stance holding a lacquer tray with a teapot","tham":"neutral standing pose, hands relaxed at her sides","nhat":"slightly shy posture, hands clasped before her","lanh":"alert attentive posture, head up","chuyen":"neutral pose, hands tucked into her sleeves"}
 MCOL=["light green","peach","pale pink","pale blue","lilac","apricot","sky blue","jade green","soft rose","lavender","mint","cream and teal","coral","pale yellow","dusty blue","celadon"]
 HAIR=["neat double buns with ribbons","a single low bun with a ribbon","double loops on top","a side bun with a small flower","a braided crown bun","two small buns low at the nape","a high bun with a ribbon","a low braided bun"]
-FACE=["oval face","soft round face","heart-shaped face","slender face","delicate face with willow brows","face with phoenix eyes","face with large calm eyes","face with gently arched brows","face with a small beauty mark on the cheek","face with straight brows","face with soft almond eyes","face with a defined chin","face with high cheekbones"]
+FACE=["oval face","soft round face","heart-shaped face","slender face","delicate face with willow brows","face with phoenix eyes","face with large calm eyes","face with gently arched brows","face with soft smooth cheeks","face with straight brows","face with soft almond eyes","face with a defined chin","face with high cheekbones"]
 TRS=list(MT)
 def mdesc(i,kind):
     tr=TRS[i%5]
