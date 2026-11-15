@@ -1,3 +1,5 @@
+> **LUẬT ƯU TIÊN SỐ 1 (sếp, 15/11 ~05:25Z):** TRƯỚC KHI GIAO BẤT CỨ VIỆC GÌ cho thợ, điều phối PHẢI kiểm xem việc đó đã có chưa: (1) grep OWNER_DECISIONS + HANDOVER + PROGRESS_*.md; (2) `git grep` trên origin/main VÀ mọi nhánh origin/review/* (tên tính năng, từ khóa); (3) hỏi danh sách thợ đang chạy. Có rồi → dùng lại / đưa nhánh đó lên, KHÔNG làm mới, KHÔNG nói với sếp "chưa có" khi chưa kiểm. Thợ cũng phải làm bước (2) trước khi viết mã mới. (Bài học: đồ tự tay làm j83 và 4 buổi đã có trên nhánh mà điều phối nói "chưa có".)
+
 # Bàn giao phiên chính 15/11 (10:30Z) — đọc file này TRƯỚC, rồi TAKEOVER_PROMPT.md, HANDOVER.md, OWNER_DECISIONS.md (mới nhất ở cuối), KIT.md, VANPHONG.md
 
 Gọi chủ là "sếp", xưng "em", tiếng Việt, ngắn. Báo cáo kèm "% xong / % chơi được" (~95% / ~88%).

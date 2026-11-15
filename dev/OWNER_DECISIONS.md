@@ -1,6 +1,9 @@
 # OWNER DECISIONS LOG (Cung Tường Mộng) — newest last. Main session keeps this up to date.
 Older binding rules: see dev/HANDOVER.md (all sections). This log adds every decision from 11/14 (phiên chính 2) on.
 
+
+> **LUẬT ƯU TIÊN SỐ 1 (sếp, 15/11 ~05:25Z):** TRƯỚC KHI GIAO BẤT CỨ VIỆC GÌ cho thợ, điều phối PHẢI kiểm xem việc đó đã có chưa: (1) grep OWNER_DECISIONS + HANDOVER + PROGRESS_*.md; (2) `git grep` trên origin/main VÀ mọi nhánh origin/review/* (tên tính năng, từ khóa); (3) hỏi danh sách thợ đang chạy. Có rồi → dùng lại / đưa nhánh đó lên, KHÔNG làm mới, KHÔNG nói với sếp "chưa có" khi chưa kiểm. Thợ cũng phải làm bước (2) trước khi viết mã mới. (Bài học: đồ tự tay làm j83 và 4 buổi đã có trên nhánh mà điều phối nói "chưa có".)
+
 ## 2026-11-14
 - Faces: pool = 84 women (32 consorts + 52 maids). Part C = 52 maids in consort tiers t1–t8 + cold. NPC consorts only draw a maid face once that face has consort-tier art (F88_NEED_C).
 - Huadian: consorts only (incl. maids promoted to consort). Never on maids (m0–m4), mamas, servants, cold palace. 84 unique styles (HUADIAN.md c01–c32, HUADIAN_C.md m01–m52). Size t1 = c03 t1 red flower; grows ~5%/tier. 8 distinct tiers. Painted on skin (no sticker look). Raised/jewelled styles must stay small; flat gold-leaf styles may be a bit larger. Approved: t1–t6, t8 phoenix (to be ~15% smaller), t7 being redone in flat gold-leaf + red enamel style.

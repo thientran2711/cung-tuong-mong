@@ -1,3 +1,5 @@
+> **LUẬT ƯU TIÊN SỐ 1 (sếp, 15/11 ~05:25Z):** TRƯỚC KHI GIAO BẤT CỨ VIỆC GÌ cho thợ, điều phối PHẢI kiểm xem việc đó đã có chưa: (1) grep OWNER_DECISIONS + HANDOVER + PROGRESS_*.md; (2) `git grep` trên origin/main VÀ mọi nhánh origin/review/* (tên tính năng, từ khóa); (3) hỏi danh sách thợ đang chạy. Có rồi → dùng lại / đưa nhánh đó lên, KHÔNG làm mới, KHÔNG nói với sếp "chưa có" khi chưa kiểm. Thợ cũng phải làm bước (2) trước khi viết mã mới. (Bài học: đồ tự tay làm j83 và 4 buổi đã có trên nhánh mà điều phối nói "chưa có".)
+
 COMMON BRIEF (Cung Tường Mộng, repo thientran2711/cung-tuong-mong, live https://thientran2711.github.io/cung-tuong-mong/)
 Before doing anything: read dev/HANDOVER.md (all, esp. PRIORITY RULES, ONE KIT REVIEW GATE, KIT-FIRST, PRIORITY DEVICES, OWNER RULES ADDED 11/14, TRẠNG THÁI 14/11 + Cập nhật 15:50Z), dev/OWNER_DECISIONS.md, dev/kit/KIT.md, dev/kit/VANPHONG.md, dev/art/STYLE_ANCHOR.md (art), and the PROGRESS file(s) on your branch.
 Binding owner rules that apply to everyone:
