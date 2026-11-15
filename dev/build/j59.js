@@ -302,7 +302,9 @@ function j59srvCount(k){const W=S.where||{},m=srvM();let n=0;if(k==="tgk")return
  if(k[0]==="r"||k==="kn"){const hd=accHostK(k);n+=Math.min(2,(hd&&hd.staff||[]).length)}if(k==="tyv")n++;
  const MW=S.menW||{};for(const x of srvMen())if(MW[x.id]===k)n++;
  try{if(typeof menRoad==="function"&&menRoad())for(const c in (S.minW||{}))if(S.minW[c]===k)n++}catch(e){}return n}
-setTimeout(()=>{try{const c0=countAt;countAt=function(k){try{if(S&&S.visit&&k===S.place&&S.visit.k===k)return kitHereCount();if(typeof isSrv==="function"&&isSrv())return j59srvCount(k)}catch(e){}return c0.apply(this,arguments)}}catch(e){}},0);
+setTimeout(()=>{try{const c0=countAt;countAt=function(k){try{if(S&&S.visit&&k===S.place&&S.visit.k===k)return kitHereCount();if(typeof isSrv==="function"&&isSrv())return j59srvCount(k);
+  /* her palace: arriving there shows homePeople() (maid + children) — a visitor parked on "home" in S.where is not on that stage (reviewer: 2→1) */
+  if(k==="home"&&!S.out&&typeof homePeople==="function")return homePeople().filter(j59person).length}catch(e){}return c0.apply(this,arguments)}}catch(e){}},0);
 try{const st=document.getElementById("stage");if(st&&window.ResizeObserver)new ResizeObserver(j59sched).observe(st)}catch(e){}
 addEventListener("resize",j59sched);
 window.j59lay=j59lay;
