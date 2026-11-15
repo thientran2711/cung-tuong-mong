@@ -85,3 +85,4 @@ Nhắc theo dõi: send_later 30 phút, tự đặt lại mỗi lượt (lịch l
 - [ ] Hộp thoại có người 2 cột — dialog-person
 - [ ] Đang chơi không bị tải lại; co-op cập nhật — update-flow
 - [ ] Chơi cùng bạn: kẹt nút Vào phòng, lệch buổi tuần 3 — coop-ui
+- [ ] Kiểm mọi nút ra đúng kết quả (giao từ 14/11, mất khi đổi phiên) — review/act-audit
