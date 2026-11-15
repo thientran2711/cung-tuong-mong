@@ -793,3 +793,7 @@ All must work in co-op.
 ## 15/11 (session 8) — Rank colour missing in picker rows (owner screenshot)
 - Owner (verbatim): "Phẩm bậc trong mấy ô chọn này chưa theo màu phẩm, màu phẩm xuất hiện mới nơi có tên và phẩm của người."
 - Screenshot dev/handover/refs/owner-rank-colour-picker.jpg: action "Sai Ngọc Lan đi dò la", target picker rows "Hoàng hậu Chu Thục Nghi", "Quý phi Tần Kiều Nguyệt", "Phi Hạ ..." — the rank word is plain text, not in its rank colour. Rule: EVERY place that shows a person's rank with their name (picker rows, cards, dialogs, lists, logs, toasts, popups) shows the rank in its rank colour via the shared kit. → worker review/rank-colour (LUẬT SỬA CẢ NHÓM: scan every name+rank render, before/after table).
+
+## 15/11 (session 8) — Action odds explanation is hard to understand (owner screenshot)
+- Owner (verbatim): "Giải thích khó hiểu quá."
+- Screenshot dev/handover/refs/owner-pick-hint-unclear.jpg, same action "Sai Ngọc Lan đi dò la": the line "Cơ may tính theo người được chọn: tâm cơ và nết của nàng ta, thái giám canh cungCung nữ thân tín Ngọc Lan có quen người bên ấy không, Tai mắt của ta." is a jumbled list (wrong subject, glued words "cungCung", trailing fragment). Rule: every action's "what decides the odds" line must read as one clear, short cổ-trang sentence a player understands at a glance (who/what raises or lowers the odds), names inserted with correct spacing and their kit colour. → worker review/pick-hint (whole family: every action picker hint across the game; scan + before/after table; VANPHONG).
