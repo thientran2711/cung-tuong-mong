@@ -27,7 +27,7 @@ Ngày 2026-11-15. Nhánh: `review/scene-light-r6`. Xung đột duy nhất: `dev/
 3. `.stage.kown .scimg{filter:none}` áp cho MỌI tranh riêng buổi (không chỉ Ngọc Thanh các): mọi nơi có tranh <tên>-<mùa>-<buổi> bỏ lọc cũ
    brightness 1.35/sepia — đúng ý "tranh đã chỉnh màu, sếp duyệt", nhưng cảnh khác chưa được chụp đối chiếu riêng.
 
-# Review r7: review/scene-light f01bae199 (Tuần lục wide figures + CDN art) merged onto main afb2676a2, then aa9689da5 — PASS with notes (reviewer R7)
+# Review r7: review/scene-light f01bae199 (Tuần lục wide figures + CDN art) merged onto main afb2676a2, then aa9689da5, then 31907911d — PASS with notes (reviewer R7)
 
 Branch `review/scene-light-r7`. Only conflict: `dev/kit/KIT.md` (both appended). **Reviewer fix:** the branch's kit text "§41 Scene light"
 clashed with main §41 kitMeMark → renumbered to **§56** (scene-light's registry slot), sub-points 56.1–56.3, note in the section and PROGRESS.
@@ -65,3 +65,4 @@ Site rebuilt (`dev/site/build_site.sh`).
 - Not blocking: §56 has no kit sample page entry (no visual chip; same as other non-visual kit sections).
 - Second main merge aa9689da5 (promo-exam §55, kit-fig2): KIT.md keeps §55 then §56 (also removed a duplicated §38 kitEmotion line the first
   conflict resolution had carried); site rebuilt; Tuần lục measurements and old-save run repeated on the final build: identical, 0 page errors.
+- Third main merge 31907911d (j83-variety): built files only, rebuilt; old save loads ok at all 6 sizes, 0 page errors.
