@@ -206,12 +206,36 @@ function kitGloss(term,label){const t=String(term||"").trim();const k=Object.key
 /* HUD help texts read the glossary too (one source) */
 (function(){try{if(typeof HX==="object"){const map={tamco:"Tâm cơ",an:"Ân tình",mat:"Tai mắt",duc:"Đức",sac:"Sắc",tai:"Tài",sung:"Sủng",danh:"Danh",bac:"Bạc",suc:"Sức"};for(const k in map)HX[k]=`${map[k]}: ${KIT_GLOSS[map[k]].charAt(0).toLowerCase()+KIT_GLOSS[map[k]].slice(1)}`;HX.lot=KIT_GLOSS["Quẻ"]}}catch(e){}})();
 
+/* ---------- ROAD-AWARE GLOSSES (review/small-bugs-2, LUẬT SỬA CẢ NHÓM): a stat's meaning follows her road. On the cung nữ road
+   (isSrv) and in lãnh cung (S.out) the consort-only goals (lập Hoàng hậu, thăng bậc phi tần, thị tẩm, bổng lộc) mean nothing, so every
+   header cell, tap explanation (HX) and glossary popover reads the road's own text. kitGlossText(term) = the one lookup; kitRoad() = the road. */
+function kitRoad(){try{if(typeof isSrv==="function"&&isSrv())return"srv";if(S&&S.out)return"cold"}catch(e){}return""}
+const KIT_GLOSS_ROAD={
+ srv:{"Sủng":"Hoàng thượng thương một phi tần bao nhiêu (0–100). Phận cung nữ chưa có Sủng; điều ngươi có là Hoàng thượng để ý.",
+  "Đức":"Tiếng hiền đức. Đức cao thì chủ nhân và người trong cung dễ tin, việc nhờ cậy dễ thành. Làm việc ác bị lộ thì mất Đức.",
+  "Danh":"Tiếng tăm của ngươi trong đám cung nhân. Danh cao thì được tin cậy, có người để ý xin cưới; mất khi bị bắt quả tang hay bị chê cười.",
+  "Sắc":"Nhan sắc. Giúp được người khác quý, được Hoàng thượng để ý.",
+  "Tài":"Tài học: đàn, thơ, chữ. Giúp làm tròn việc chủ giao, được Hoàng thượng để ý.",
+  "Bạc":"Tiền riêng của ngươi: lương tháng, tiền thưởng. Dùng để mua đồ, đút lót, nhờ người."},
+ cold:{"Sủng":"Hoàng thượng còn thương ngươi bao nhiêu (0–100). Còn sủng thì dễ được nhớ đến, được ân xá ra khỏi lãnh cung.",
+  "Đức":"Tiếng hiền đức. Giữ được Đức thì dễ được minh oan, được ân xá. Làm việc ác bị lộ thì mất Đức.",
+  "Danh":"Tiếng tăm của ngươi trong cung. Ở lãnh cung Danh mòn dần; còn Danh thì người ngoài còn nhớ đến mà nói giúp.",
+  "Sắc":"Nhan sắc. Giúp Hoàng thượng còn nhớ đến ngươi.",
+  "Tài":"Tài học: đàn, thơ, chữ. Thơ văn gửi ra ngoài có thể làm Hoàng thượng động lòng.",
+  "Bạc":"Tiền riêng của ngươi. Ở lãnh cung không còn tiền phát hằng tháng; dùng để đút lót, nhờ người đưa tin."}};
+function kitGlossText(term){const r=kitRoad();const R=r&&KIT_GLOSS_ROAD[r];return R&&R[term]!=null?R[term]:(KIT_GLOSS[term]||"")}
+window.kitRoad=kitRoad;window.kitGlossText=kitGlossText;
+/* HX (header tap texts) follows the road: rebuilt from kitGlossText when the road changes; the consort texts are kept as they were */
+const KIT_HXMAP={tamco:"Tâm cơ",an:"Ân tình",mat:"Tai mắt",duc:"Đức",sac:"Sắc",tai:"Tài",sung:"Sủng",danh:"Danh",bac:"Bạc",suc:"Sức"};let KIT_HX0=null,KIT_HXR="";
+function kitHxRoad(){try{if(typeof HX!=="object")return;const r=kitRoad();if(r===KIT_HXR&&KIT_HX0)return;if(!KIT_HX0){KIT_HX0={};for(const k in KIT_HXMAP)KIT_HX0[k]=HX[k]}KIT_HXR=r;
+ for(const k in KIT_HXMAP){const R=r&&KIT_GLOSS_ROAD[r],t=KIT_HXMAP[k];HX[k]=R&&R[t]!=null?`${t}: ${R[t].charAt(0).toLowerCase()+R[t].slice(1)}`:KIT_HX0[k]}}catch(e){}}
+window.kitHxRoad=kitHxRoad;
 /* ---------- popover (odds ladder, glossary): never a modal, never covers the scene for long; any tap closes ---------- */
 function kpPop(anchor,html){let p=document.getElementById("kpop");if(!p){p=document.createElement("div");p.id="kpop";p.className="kpop";document.body.appendChild(p)}
  p.innerHTML=html;p.hidden=false;const r=anchor.getBoundingClientRect();const W=Math.min(300,innerWidth-24);p.style.width=W+"px";
  let x=Math.max(12,Math.min(innerWidth-W-12,r.left+r.width/2-W/2));p.style.left=x+"px";p.style.top="0px";const h=p.offsetHeight;let y=r.bottom+6;if(y+h>innerHeight-8)y=Math.max(8,r.top-h-6);p.style.top=y+"px"}
 document.addEventListener("click",e=>{const p=document.getElementById("kpop");const od=e.target.closest(".kodm"),gl=e.target.closest(".kgl");
- if(od||gl){e.stopPropagation();e.preventDefault();if(od)kpPop(od,kitOddsLadder(+od.dataset.kodds));else kpPop(gl,`<div class="kpopt">${gl.dataset.kgl}</div><div class="kpopx">${KIT_GLOSS[gl.dataset.kgl]||""}</div>`);return}
+ if(od||gl){e.stopPropagation();e.preventDefault();if(od)kpPop(od,kitOddsLadder(+od.dataset.kodds));else kpPop(gl,`<div class="kpopt">${gl.dataset.kgl}</div><div class="kpopx">${kitGlossText(gl.dataset.kgl)}</div>`);return}
  if(p&&!p.hidden)p.hidden=true},true);
 /* the HUD standing chances (Có thai, Lật thẻ) read on the chance scale Rất thấp…Rất cao (j64 + chanceLvl in j1), never the act ladder */
 
