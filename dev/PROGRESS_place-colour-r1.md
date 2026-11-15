@@ -23,3 +23,10 @@ Left: screenshots 755x1000@2, 1000x755, 1180x820@2, 1366x1024@2, 844x390 (day/ni
   Night reads as night; afternoon rain warm, not grey; frost no blue wash; lãnh cung grey. (Harness note: the "Luân hồi" picker overlay
   sometimes reappears in the 2nd state of .ahcache/drv.js — test artefact.)
 - Running: place-colour.js full scan (nopx, 1180x820) to confirm "night looks like day" 6→0.
+
+## Final (r1)
+- place-colour.js full scan on the combined branch (nopx, 1180x820): 968 states, 0 page errors, place-colour.py flagged 0
+  (was 6 "night looks like day" on place-colour alone → 0 with place-art's night regrade). tgk sheet looked at: new painting, night dark.
+- month-cal.js 755x1000@2 + 844x390@3 bad 0; ts-oldsave ok; kit-page: only the pre-existing §28.1 pcPort sample error (same on main).
+- Re-merged origin/main 43daceaf3 (generated files rebuilt); life-place.js 1180x820 ALL OK after it.
+- FPS: not measurable on this loaded box (load 30–50); dry states have filter none, so no cost on the common path.
