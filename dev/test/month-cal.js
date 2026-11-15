@@ -65,6 +65,11 @@ const LIVE='https://thientran2711.'+'github.io/cung-tuong-mong/';const html=fs.r
    window.thaiyNextVisit=()=>wk()+2;if(!has('thaiy'))f.push('thaiy hook unused');delete window.thaiyNextVisit;
    window.cycleDaysOf=()=>[4,5,6];const h=kitMonthCal({o:0});if((h.match(/kmc-d[^"]* cy/g)||[]).length!==3)f.push('cycle days not marked');delete window.cycleDaysOf;
    if(!has('bong')&&!isSrv())f.push('no stipend day');
+   /* co-op: the friend's days (her blob in the canonical world) + the share switch in the day box */
+   const cw0=window.COOPW;window.COOPW={on:true,seat:'a',base:{P:{b:{name:'Hảo hữu Thử',S:{name:'Hảo hữu Thử',bmonth:mcNow().m,preg:5,calNotes:[{w:wk()+1,d:1,txt:'Hẹn chung',share:1}]}}}}};
+   const fr=[];for(let x=0;x<12;x++){const E=mcExtra(x);for(const dd in E)E[dd].forEach(e=>{if(e.k==='friend')fr.push(e.txt)})}
+   if(!fr.some(t=>/Sinh thần Hảo hữu Thử/.test(t)))f.push('co-op: no friend birthday');if(!fr.some(t=>/lâm bồn/.test(t)))f.push('co-op: no friend due month');if(!fr.some(t=>/Hẹn chung/.test(t)))f.push('co-op: no shared note');
+   if(!/kmc-share/.test(kitMonthCal({o:0,sel:mcNow().t*10+1})))f.push('co-op: no share switch');window.COOPW=cw0;
    kitModalClose&&kitModalClose();Q.length=0;M.hidden=true;
    /* forecast + reminders across two real tuần */
    S.staff=S.staff||[];if(!S.staff.length)f.push('no servant to read the sky');else S.staff[0].age=52;
