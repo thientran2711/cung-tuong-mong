@@ -633,3 +633,6 @@ All must work in co-op.
 - The cycle record is kept by a palace office (Kính sự phòng eunuchs keep the book; a mama/thái giám of each palace reports dates). Whoever can read the book knows everyone's dates.
 - Uses: proves which night a bedding was on and whether a child is the Emperor's (ties into j22 pregMismatch / Kính sự phòng ledger bribe), exposes liaisons (tư thông), and hints pregnancy (a woman who stops reporting her cycle). Bribing / reading / forging the book becomes possible (with risk).
 - Show her own cycle on the calendar; co-op too.
+
+## 15/11 ~20:30Z — What 'dark' means for pictures (owner)
+- DARK picture for scheming/negative events/acts = gloomy, shadowy, ominous mood (âm u, tối tăm) like the first act pictures in Hành sự she liked — NOT simply a night-time sky. A daytime scene can be dark in mood (heavy shadows, cold muted palette, low light). LIGHT = normal mood. Applies to act redraws, placeholders, event backgrounds, everything with light/dark by tone.
