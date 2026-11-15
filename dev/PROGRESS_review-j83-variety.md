@@ -1,5 +1,11 @@
 # PROGRESS: review/j83-variety
 
+## REVIEW r6 (15/11): merged onto origin/main 5e491704d as review/j83-variety-r6 — see dev/review/j83-variety.md
+- Close / "Thôi": main's KIT 32.10 is the one implementation (a plain no-effect "Thôi" option is never drawn; kit ✕ + tap outside + Esc run it).
+  The branch's `xc:1` / `KWK_XPID` ✕ wrapper was removed in the merge and the plain Thôi options restored (j83, jveil, jwkr material dialog).
+- Teacher text now lives in jtabs.js ktArtSkills (main moved the Tài nghệ tab there).
+- jwkr private style removed (kit `.kshl/.kshm` head); kit page sample "§28.13e" for the pick tile.
+
 ## STATE (latest session, 15/11 ~12Z) — read this first
 - Option A is DONE in code and art for all 11 kinds (10 recipes × 4 tiers = 440 pictures + 18 new cooking ingredient icons):
   - `dev/build/jwkr.js` (appended after jwkg.js): `WKR` recipes per kind (`id r01..r10`, name, level to unlock `WKR_LV`, cooking steps, `like` = the j1 LIKES entry).
