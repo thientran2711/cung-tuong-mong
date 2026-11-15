@@ -583,7 +583,7 @@ kitBook({head:"Sổ tuần · Tháng tư · thượng tuần · năm thứ nhấ
 - Layout: two-page spread when the viewport is ≥ 900 px wide and landscape (iPad 1180x820, 1366x1024), the closed cover centred; one page at a
   time otherwise (Fold 755x1000, phones). Person page: portrait column `--por` beside name/chips/facts; under 440 px page width facts run full
   width below the portrait. Font scales with the page (`--fs` 13–17 px).
-- Turning (page-curl kit, §34): drag/swipe follows the finger with a paper CURL (`kitCurl` v2: the corner lifts and folds on a diagonal, the back of the page shows with a curved shading, shadow along the fold; 680 ms);
+- Turning (page-curl kit, §34): drag/swipe follows the finger with the WHOLE-SHEET turn (§34.0 `kitSheetTurn` via `kitCurl`: the sheet swings around the spine, both faces printed with their pages; `KIT_TURN_MS` 1300 ms);
   release past ~40 % or a flick completes, else it falls back. Tap the right/left page edge, the ‹ › buttons, ←/→/PageUp/PageDown, Esc = Lui.
   `prefers-reduced-motion` (or Cảnh động off): cross-fade instead of the turn. Soft paper sound with the Tiếng động slider.
 - Art: `img/book-cover.webp` (indigo thread-bound cover, title label strip: the title is written in it, word per line), `book-right.webp`
@@ -1054,9 +1054,47 @@ Owner 11/14 (00:15Z, 00:45Z approval + later change): the UI is an open book. **
 (illustration only: the big full-body figure / scene that goes with the right page; it never takes info away from the right page),
 RIGHT = the text page exactly as already approved (Hậu cung card with its own frame, chips, tabs, acts…). **Phone / portrait = the RIGHT
 page only** (no illustration page on phones, accepted loss; no "Mở trang" button). **A tab switch is a page turn on both devices**, and
-every page turn CURLS like real paper. Mockups (not wired yet; the fold-layout kit owner wires it): `dev/shots/book/`.
+every page turn is the WHOLE SHEET swinging around the spine (§34.0, owner 11/15 10:00Z; supersedes the corner curl). Mockups (not wired yet; the fold-layout kit owner wires it): `dev/shots/book/`.
 
-### 34.1 kitCurl — the one page-turn engine (week book, tab switch, any future book) — v2 (owner 11/15 03:30Z)
+### 34.0 PAGE-TURN RULE (owner 11/15 06:25Z + 07:50Z + 10:00Z) — `kitSheetTurn` (jbook) — the ONE way any page turns
+Owner refs `dev/owner-shots/1115-turn-ref-1.jpg`, `-2.jpg` (her binder app). Binding for every book/page in the game (tab switch,
+week book j87, kitBookSpread, any future book). Never write a private turn.
+1. **Whole sheet, around the spine.** The sheet turns as ONE piece about the spine (the page's left edge: iPad = the gutter between picture
+   page and text page; phone/Fold = the left edge of the single page). No corner fold, no diagonal crease, no strips.
+2. **Content is printed on the sheet.** The front face carries the page being turned away, the back face the new page (07:50Z: never blank
+   paper); both are still copies (kclPrep: no ids → one `#panel` only) that rotate, foreshorten and tilt WITH the sheet (10:00Z). Never pin
+   content to the page beneath while an empty sheet moves.
+3. **The next page is already underneath** (06:25Z): forward = the live new page lies under the lifting sheet from the first frame.
+   Backward = the same motion reversed: the sheet carrying the new page comes back over the spine and lands exactly on it; the old page
+   (still copy) lies underneath until covered.
+4. **Look:** perspective from above the spine (the free edge grows toward the reader at mid-turn), a slight tilt (≈4°) + skew (≈2.4°) at
+   mid-turn so it reads as paper, face shading by angle, a soft shadow cast on the ground under the lifted sheet. The sheet stays inside the
+   page area vertically (never over the top bar / tab bar).
+4b. **Tờ lật luôn đục, không trong suốt** (owner 11/15 02:40Z, Fold Hậu cung → Giao tình: the old corner curl let the old and new text show
+   through each other and the old page's bottom chips poke out under the curl). The turning sheet is fully OPAQUE paper on both faces
+   (solid paper ground `.ksht-face` behind the printed content); no opacity, blend or filter on the sheet or its content, no backdrop show-
+   through; only the page underneath is visible BESIDE the sheet, never through it; nothing of the old page exists outside the sheet.
+   A live page turn (tab switch) and a single-page book turn are CLIPPED at the spine (`vanish`): the sheet lifts, stands up at the spine
+   and is gone there — it never fades and never lies over the picture page (iPad) or off screen (phone). Checked mid-turn at 20/45/70 %
+   on 755x1000@2, 412x1058@2, 1180x820@2, 1366x1024@2 (dev/shots/review/page-curl/).
+5. **Timing — ONE constant `KIT_TURN_MS` = 1300 ms** (jbook; owner 11/15 01:50Z "cho animation lật trang chậm lại": was 680–760 ms) for
+   every turn (tab switch, week book, book swap), ease `kitTurnEase` (slow lift, even swing, long gentle settle as it lands). A finger drag
+   follows the finger; its release finishes in proportion. A new tap while a turn runs makes the running turn jump to its end at once, then
+   the new one starts (fast taps never pile up, jam or leave a sheet behind). Only transforms (and the face shading) change per frame.
+6. **Input:** tab bar buttons, ‹ › buttons, keys, and a horizontal SWIPE on the page (left = forward / next tab, right = back) all turn the
+   page. The page swipe is ignored in the map, dialogs, form controls and anything that scrolls sideways (person strip, chips).
+7. **"Cảnh động" off (`OPT.fxon=false`) or prefers-reduced-motion:** no turn animation at all — the page changes at once (short cross-fade).
+```js
+const t=kitSheetTurn({host, front, back, under, w, h, x, y, p:0, ctx, vanish, shadeL, shadeR}); // spine = left edge at (x,y)
+t.set(p);           // 0 = flat on the right (front up) … 1 = turned onto the left (back up); backward = run 1 → 0
+t.setBack(el); t.setFront(el); t.destroy();
+kitCurl(o)          // = kitSheetTurn(o) (old call shape kept for j87 / kitBookSpread); the corner-fold engine is kept as kitCurlFold, unused
+kitCurlSwap(el, fn, {dir, ms});   // live tab switch (#panel); kitCurlSwap.hold(p) / .end() = test hooks
+```
+Test: `node dev/test/sheet-turn.js <url> WxH@dpr <out> <tag>` (frames held with kitCurlSwap.hold, one #panel, no overflow, fast taps,
+swipe, Cảnh động off). Shots: `dev/shots/page-curl2/`.
+
+### 34.1 (HISTORY — superseded by 34.0 for page turns) kitCurl v2 corner fold, now `kitCurlFold` (owner 11/15 03:30Z)
 Owner refs `dev/owner-shots/1115-curl-ref-1.jpg`, `-2.jpg`: the CORNER lifts first and leads, the sheet folds on a DIAGONAL, tilts as it
 turns, shows the BACK of the page with a soft curved shading and a dark gradient along the fold — never a vertical cylinder roll.
 ```js
