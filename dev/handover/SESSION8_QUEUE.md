@@ -39,7 +39,7 @@ CDN uploads OK again (owner saved the Cloudflare token; R2 verified). Use CLOUDF
 | C12 | review/hc-portrait (owner s8: Hậu cung portrait frame top gap + widen) | RUNNING |
 | C13 | review/gift-pick (owner s8: gift picker picture grid + gift animation; animation needs A2 fxkit) | RUNNING |
 | C14 | review/row-align (owner s8: label/value rows in one block share one label column) | RUNNING |
-| C15 | review/mood-dialog (owner s8: mood picture per mood + mood icon corner; title with rank) | RUNNING |
+| C15 | review/mood-dialog @ 13d4414a7 (cause-event picture + corner mood seal) | SẴN SÀNG KIỂM → REVIEWING (mood-dialog-r1) |
 | C16 | review/item-info (owner s8: tap any item cell → kit item-detail; dress pick wears via button) | RUNNING |
 | C17 | review/stage-fig-size (owner s8: event dialog figure column cap + crop skirt) | RUNNING |
 
@@ -83,3 +83,4 @@ j72 bước vs Hồi · stage paper halo · Thái hậu title bronze vs plum · 
 | C25 | review/press-fx (owner s8: whole pane bounces on any tap; press fx only on the tapped control) | QUEUED-NEXT |
 | C26 | review/stat-fx (owner s8: slower readable stat +/- with name, cell glow GREEN for +, red for −, pulse/scale) | QUEUED-NEXT |
 | C27 | review/buoi-transition (owner s8: page-flip on buổi change looks odd → ink-wash time-of-day transition; needs A2 fxkit) | QUEUED-NEXT |
+| D50 | consorts without full-body figure art show a placeholder frame in the dialog person column (seen 755x1000, mood-dialog worker) → art-complete follow-up | QUEUED |
