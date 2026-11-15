@@ -1805,3 +1805,32 @@ stranger card is not used for children (their card is drawn by jht). Old saves: 
 - No ring/aura around the frame (owner 11/14 late: removed); the seal alone shows the feeling.
 - Fog: stranger → nothing; known person, no fresh news → grey "?" seal; her own → always.
 - Data only through `window.kitEmotion(p)` → `{k,name,v,why,known}`; tooltip/alt "Tâm trạng: <tên> (<cause>)". Nobody draws another mood icon; no code-reshaped facial expressions (owner 22:50Z): the seal + ring are the only display of feelings.
+
+## 41. SCENE LIGHT · KIT_LIGHT + stage classes `.kown` / `.kwet` + kitBookFigClamp (owner 11/15, review/scene-light) — `dev/build/jsl.js` (after jk4)
+One module owns how light/colour is applied to scene paintings and to characters on them. Nobody adds private `filter:` rules on `.scimg`,
+`#mefig`, `.tok.fig .figimg` or `.kesimg`; change the knobs here instead.
+
+**41.1 KIT_LIGHT (character light per buổi).** One CSS variable `--klf` (a list of interpolable filter functions) set on `:root` from
+`S.buoi` + season by `KIT_LIGHT.sync()` (wrapped around `render`, `renderStage`, `kitEventStage`). Every character filter rule writes
+`filter:var(--klf) drop-shadow(…)` (p1 `.tok.fig .figimg` / `#mefig`, j59 halo keyframes, jk4 `.kesimg`). Knob `BAL.klfStrength`:
+**0 = characters keep their painted colours (owner choice A, default)**, .5 light, 1 full. `KIT_LIGHT.css(buoi, season, k)` returns the string.
+
+**41.2 Graded scene paintings (stage classes).** A place whose painting is one of the per-buổi graded images (j94 `<name>-<season>-<buổi>`,
+buổi ∈ sang|trua|chieu|toi) gets `.stage.kown`:
+- `.stage.kown .scimg{filter:none}` — the old stacked filters (p1 `.sc-home.day` brightness 1.35 + sepia .12, j25 room tiers rp1 sepia .25,
+  rp2/rp3 saturate) are NOT applied on top of graded paintings (owner 17:24Z: "her room at trưa all brown"). rp2/rp3 keep a tiny lift.
+- j12's per-buổi colour wash `b4Light()` returns transparent for graded paintings (`KIT_SCENE_TINT=0`; 1 restores ~¼ of the old wash).
+- `.stage.kown.kwet` = wet weather (`wet()`: drizzle, storm, heavy snow) on a graded painting: **warm, soft light** (owner 12:35Z: spring rainy
+  afternoon must not look like the cold palace) — painting `saturate(.97) contrast(.94) brightness(1.07)`, night `saturate(.95) contrast(.95)
+  brightness(1.01)`; `.light` layer (z-index 0, **below** characters) a faint warm ivory gradient. Rain streaks come from j11 particles.
+  Characters are never overlaid. Lãnh cung (`.sc-lc`) is excluded and keeps its bleak painting.
+- `window.kitSceneTag()` re-applies the classes (called after `renderStage` and `lightTick`).
+
+**41.3 kitBookFigClamp (Tuần lục person page, wide figures).** `.kbk-person.kbk-full` has a fixed figure column `--porf` sized for a normal
+standing figure (aspect ≈ .42). A wider figure (e.g. Thái hậu `fig-thaihau-h1-a51`, 730×900, long train) used to be cut by the column (owner 13:45Z).
+- wide pages: the figure column widens inline to the figure's real width, capped at **66 % of the page**; the text column takes the rest and
+  never overlaps the figure. Only a figure wider than that cap is scaled (feet stay on the ground line, centred).
+- phones (`.kbk.narrow`, text already sits on the soft paper panel over the figure's edge): the column stays; the figure is shifted inside the
+  page and scaled only if it is wider than the whole page.
+- Runs on DOM insertions of a person page / figure, image load and resize. Measure with `dev/art/scene-light/tools/book.js OUTDIR page.html`
+  (prints overL/overR = overflow past the page, ovText = figure overlap with the text column; 0 / ≤0 = pass).

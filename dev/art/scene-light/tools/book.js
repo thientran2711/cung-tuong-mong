@@ -1,6 +1,6 @@
 /* book.js OUTDIR : Tuần lục person page with the widest figure (Thái hậu h1-a51) + event dialog stage, on 6 sizes; measures overflow */
 const {chromium}=require('playwright');const fs=require('fs');
-const OUT=process.argv[2];const WT='/home/user/cung-tuong-mong/.claude/worktrees/agent-a4e8c6432e582a50a/';fs.mkdirSync(OUT,{recursive:true});
+const OUT=process.argv[2];fs.mkdirSync(OUT,{recursive:true});
 const SZ=process.env.SZ?JSON.parse(process.env.SZ):[[755,1000,2],[1180,820,2],[1366,1024,2],[412,1058,2],[390,844,3],[1024,768,2]];
 (async()=>{const b=await chromium.launch();const R=[];
 for(const [W,H,D] of SZ){const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:D,isMobile:W<1100,hasTouch:true});
@@ -25,7 +25,8 @@ for(const [W,H,D] of SZ){const ctx=await b.newContext({viewport:{width:W,height:
   // visible content box with object-fit: contain
   const nw=im.naturalWidth,nh=im.naturalHeight,sc=Math.min(r.width/nw,r.height/nh),cw=nw*sc,ch=nh*sc,cl=r.left+(r.width-cw)/2;
   return{img:[Math.round(cl),Math.round(r.bottom-ch),Math.round(cw),Math.round(ch)],col:[Math.round(col.left),Math.round(col.right)],page:[Math.round(pr.left),Math.round(pr.right),Math.round(pr.bottom)],
-   overL:Math.round(col.left-cl),overR:Math.round(cl+cw-col.right),overB:Math.round(r.bottom-pr.bottom),ovX:document.documentElement.scrollWidth>innerWidth}});
+   overL:Math.round(col.left-cl),overR:Math.round(cl+cw-col.right),overB:Math.round(r.bottom-pr.bottom),ovX:document.documentElement.scrollWidth>innerWidth,
+   narrow:!!im.closest('.kbk.narrow'),ovText:(()=>{const fl=im.closest('.kbk-person').querySelector('.kbk-flow');return fl?Math.round(cl+cw-fl.getBoundingClientRect().left):null})(),figH:Math.round(ch),dbg:[im.naturalWidth,im.complete,im.closest('.kesfi').style.transform,im.closest('.kbk-person').style.gridTemplateColumns,Math.round(im.closest('.kbk-por').getBoundingClientRect().width),im.closest('.kesfi').offsetWidth,im.offsetWidth,im.offsetHeight],bodyH:Math.round(im.closest('.kbk-por').getBoundingClientRect().height)}});
  await p.evaluate(()=>{for(const c of document.body.children)if(c.id!=='dawn')c.style.visibility='hidden'});await p.waitForTimeout(300);
  await p.screenshot({path:`${OUT}/book-${W}x${H}.jpg`,type:'jpeg',quality:78});
  R.push({size:`${W}x${H}@${D}`,...res,errs:errs.slice(0,3)});await ctx.close()}
