@@ -1756,7 +1756,7 @@ function birthP(p,fake){const me=p===S;
    else{ap(p,{danh:-10,sung:-10});punish(p,"bị đồn sinh ra yêu vật",2);return ev+(me?`<span class="r">Ngươi tỉnh lại thì bên cạnh là một con mèo chết lột da. Cả cung đồn ngươi sinh ra yêu vật.</span> Danh -10 · Sủng -10. Đứa trẻ không rõ tung tích. `:`<span class="r">${p.name} lâm bồn, bên cạnh chỉ có một con mèo chết lột da; cả cung đồn nàng sinh yêu vật.</span> `)}}}
  const n=!fake&&roll(4)?2:1;if(n===2)ev+=me?`<b class="g">Song thai!</b> `:`${p.name} sinh đôi. `;let up=false;
  for(let i=0;i<n;i++){const k=mkKid(R(2)?"m":"f",0);p.kids.push(k);
-  if(k.sex==="m"){ev+=me?`<b class="g">Ngươi sinh hạ ${k.name}.</b> `:`${p.name} sinh hạ ${k.name}. `;if(me)ghenAll(15);if(!up&&rkOf(p)<6){if(me)S.rank++;else p.rank++;p.lastPromo=S.turn;up=true;ev+=`${me?"Được":p.name+" được"} tấn phong ${rkName(p)}. `}ap(p,{sung:10,danh:10,th:15});S.emp.mood=0;p.bonusPay=(p.bonusPay||0)+20;if(roll(50))bestow(p,"son")}
+  if(k.sex==="m"){ev+=me?`<b class="g">Ngươi sinh hạ ${k.name}.</b> `:`${p.name} sinh hạ ${k.name}. `;if(me)ghenAll(15);if(!up&&rkOf(p)<6){up=true;if(typeof exGrace==="function")ev+=exGrace(p);else{if(me)S.rank++;else p.rank++;p.lastPromo=S.turn;ev+=`${me?"Được":p.name+" được"} tấn phong ${rkName(p)}. `}}ap(p,{sung:10,danh:10,th:15});S.emp.mood=0;p.bonusPay=(p.bonusPay||0)+20;if(roll(50))bestow(p,"son")}
   else{ev+=me?`Ngươi sinh hạ ${k.name}. `:`${p.name} sinh hạ ${k.name}. `;if(me)ghenAll(8);ap(p,{sung:5,danh:4});p.bonusPay=(p.bonusPay||0)+10;if(roll(50))bestow(p,"dau")}}
  return ev}
 /* months between decrees grow with rank: 3 up to Tần, then 5, 7, 9 */
@@ -2210,7 +2210,7 @@ function renderPanel0(){const el=$("panel");let h="";faceInit();const gm=documen
  if(tab==="story"){const s=STORY[S.origin.k];if(s.calc)S.st.step=s.calc();
    h=`<div class="story"><h3>${s.t}</h3><p style="margin:0 0 4px">${s.goal}</p><p style="margin:0">Bước <b>${S.st.step}/${s.n}</b> · ${S.st.done===1?`<span class="g">Thành: ${S.st.tag}</span>`:S.st.done===-1?`<span class="r">Bại: ${S.st.tag}</span>`:s.hint()}</p></div>`;
    const c=(ok,t)=>`<span class="${ok?"y":"n"}">${ok?"✓":"✗"} ${t}</span>`;
-   h+=S.rank>=7?`<div class="req"><h3>Ngươi là Hoàng hậu</h3>Đưa con mình lên ngôi để thành Hoàng thái hậu.</div>`:`<div class="req"><h3>Điều kiện sắc phong ${RANKS[S.rank+1].n}</h3>${promoReq().map(([ok,t])=>c(ok,t)).join("<br>")}<br><span class="past">Ngôi Hoàng hậu về sau cần: ngôi bỏ trống, có hoàng tử và Thái hậu ${BAL.hhTh} (không con trai: Thái hậu ${has("hieuthao")?BAL.hhThNoSonHieu:BAL.hhThNoSon}), và <b class="${S.duc>=hhNeed(S).duc?"g":"r"}">Đức ${S.duc} (cần ${hhNeed(S).duc})</b> (mẹ Thái tử chỉ cần ${BAL.hhDucHeir}). Khi ngôi trống, Hoàng thượng chọn trong những người đủ điều kiện (nặng ở hoàng tử, Thái hậu, Danh).</span><br><span class="past">Đủ điều kiện thì cuối tháng có thánh chỉ. Sinh hoàng tử được thăng thêm một bậc.</span></div>`}
+   h+=S.rank>=7?`<div class="req"><h3>Ngươi là Hoàng hậu</h3>Đưa con mình lên ngôi để thành Hoàng thái hậu.</div>`:S.out?`<div class="req"><h3>Lãnh cung</h3>Không bàn chuyện sắc phong. Được minh oan thì phục vị ${RANKS[Math.max(0,Math.min(6,S.coldRank||0))].n} (hoặc thấp hơn một bậc).</div>`:`<div class="req"><h3>Điều kiện sắc phong ${RANKS[S.rank+1].n}</h3>${promoReq().map(([ok,t])=>c(ok,t)).join("<br>")}<br><span class="past">Ngôi Hoàng hậu về sau cần: ngôi bỏ trống, có hoàng tử và Thái hậu ${BAL.hhTh} (không con trai: Thái hậu ${has("hieuthao")?BAL.hhThNoSonHieu:BAL.hhThNoSon}), và <b class="${S.duc>=hhNeed(S).duc?"g":"r"}">Đức ${S.duc} (cần ${hhNeed(S).duc})</b> (mẹ Thái tử chỉ cần ${BAL.hhDucHeir}). Khi ngôi trống, Hoàng thượng chọn trong những người đủ điều kiện (nặng ở hoàng tử, Thái hậu, Danh).</span><br><span class="past">Đủ điều kiện thì được dự khảo hạch tấn phong; đỗ thì có thánh chỉ. Sinh hoàng tử: được ân thi khảo hạch ngay.</span></div>`}
  if(tab==="inv")h=invHTML();
  if(tab==="rel")h=relHTML();
  if(tab==="staff")h=staffTabHTML();
@@ -15509,6 +15509,11 @@ if(typeof BUK!=="undefined"&&BUK.length===3)BUK.splice(1,0,window.B4_TRUA_IMG?"t
  return r}})();
 /* ================= jbal2: late balance knobs for the merged logic modules (review/balance). Same rule for every consort; numbers only. ================= */
 Object.assign(BAL,{illAdd:1,illDie:2});
+/* KHẢO HẠCH TẤN PHONG (jexam, owner 15/11 17:20Z): win = tuần she has to sit it once eligible; cd[to] = months before a retry after a fail or a
+   missed window, by the target rank (1 Thường tại … 7 Hoàng hậu); bar[tier] = pass mark out of ~90 (tier 0 low = to 1–3, 1 middle = to 4–5,
+   2 high = to 6–7); score = mean round (0–10) × wPlay + two Tứ đức courses × wVir + one art level (high: Đức/20) × wArt; the examiner's
+   attitude (Hoàng hậu / Thái hậu, −100..100) / attDiv moves the bar by at most attMax; k khắc + suc Sức to sit; mc = draws for the odds word. */
+BAL.ex={win:2,cd:[1,1,1,1,2,2,3,3],bar:[22,27,31],wPlay:6,wVir:2,wArt:2,attDiv:10,attMax:6,k:2,suc:8,mc:240};
 /* sickness in the palace: each month a healthy consort may also fall ill (illAdd %), and a critical illness kills a little more often (illDie × the illness' own death weight) */
 (function(){const i0=illMonthP;illMonthP=function(p){let ev=i0.apply(this,arguments);
  try{if(!p||p.dead||p.alive===false||(p===S&&S.dead))return ev;const i=illOf(p);
@@ -23239,16 +23244,17 @@ function ktStoryHTML(){const c=S.st.ch,M=S.st.M,m=S.st.ms,Q0=(typeof QUEST67==="
   if(c&&c.done)h+=rows67([["Kết cục xuất thân",c.fin,S.st.tag&&c.fin?"g":""]])}
  else if(sub.cur==="rank"){
   if(S.rank>=7)h+=kitEmpty("Sắc phong","Ngươi là Hoàng hậu. Đưa con mình lên ngôi để thành Hoàng thái hậu.");
+  else if(S.out)h+=kitEmpty("Sắc phong",`Ngươi đang ở lãnh cung: không bàn chuyện sắc phong. Được minh oan thì phục vị ${RANKS[Math.max(0,Math.min(6,S.coldRank||0))].n} (hoặc thấp hơn một bậc).`);
   else{const R=promoReq();const ok=R.filter(x=>x[0]).length;
    h+=kitSkillCard({kind:"rank",k:String(S.rank+1),kicker:"Điều kiện sắc phong",name:RANKS[S.rank+1].n,level:ok,max:R.length,word:"Đạt",bar:false,next:"",img:kitInfoArt("sắc phong").src||art});
    R.sort((a,b)=>a[0]-b[0]);h+=kitChecks(R);
-   h+=`<div class="ktop">${kitInfo("Ngôi Hoàng hậu")} <span class="kchip ${S.duc>=hhNeed(S).duc?"g":"r"}">Đức <b>${S.duc}/${hhNeed(S).duc}</b></span> <span class="kchip n">đủ điều kiện: cuối tháng có thánh chỉ</span></div>`}}
+   h+=`<div class="ktop">${kitInfo("Ngôi Hoàng hậu")} <span class="kchip ${S.duc>=hhNeed(S).duc?"g":"r"}">Đức <b>${S.duc}/${hhNeed(S).duc}</b></span> ${typeof exChips==="function"?`${kitInfo("Khảo hạch tấn phong")} ${exChips()}`:`<span class="kchip n">đủ điều kiện: cuối tháng có thánh chỉ</span>`}</div>`}}
  else{const R=past.map(x=>[`Chương ${x.n}`,`${msName67(x)} · <b class="${x.k>0?"g":x.k<0?"r":""}">${x.tag}</b>`]);
   rare.forEach(x=>R.push([`✦ ${ARC67[x.a]?ARC67[x.a].t:x.a}`,x.ti&&x.ti!==x.tag?`${x.tag} · danh hiệu «${x.ti}»`:x.tag]));
   h+=R.length?rows67(R):kitEmpty("Mệnh truyện","Chưa qua chương nào.")}
  return h}
 KIT_GLOSS["Ngôi Hoàng hậu"]="";
-(function(){const t=()=>{try{KIT_GLOSS["Ngôi Hoàng hậu"]=`Ngôi Hoàng hậu cần: ngôi bỏ trống, có hoàng tử và Thái hậu ${BAL.hhTh} (không con trai: Thái hậu ${has("hieuthao")?BAL.hhThNoSonHieu:BAL.hhThNoSon}), và Đức ${hhNeed(S).duc} (mẹ Thái tử: ${BAL.hhDucHeir}). Khi ngôi trống, Hoàng thượng chọn trong những người đủ điều kiện (nặng ở hoàng tử, Thái hậu, Danh). Đủ điều kiện thì cuối tháng có thánh chỉ. Sinh hoàng tử được thăng thêm một bậc.`}catch(e){}};
+(function(){const t=()=>{try{KIT_GLOSS["Ngôi Hoàng hậu"]=`Ngôi Hoàng hậu cần: ngôi bỏ trống, có hoàng tử và Thái hậu ${BAL.hhTh} (không con trai: Thái hậu ${has("hieuthao")?BAL.hhThNoSonHieu:BAL.hhThNoSon}), và Đức ${hhNeed(S).duc} (mẹ Thái tử: ${BAL.hhDucHeir}). Khi ngôi trống, Hoàng thượng chọn trong những người đủ điều kiện (nặng ở hoàng tử, Thái hậu, Danh). Đủ điều kiện thì được dự khảo hạch tấn phong; đỗ mới được chọn. Sinh hoàng tử: được ân thi khảo hạch ngay.`}catch(e){}};
  const r0=renderPanel0;renderPanel0=function(){if(S&&tab==="story"&&!(typeof isSrv==="function"&&isSrv())&&S.st&&typeof panel67==="function"){t();const el=$("panel");try{faceInit()}catch(e){}
    try{const s=STORY[S.origin.k];if(s&&s.calc)S.st.step=s.calc()}catch(e){}el.innerHTML=ktStoryHTML();el.dataset.tab=tab;kitFix(el);return}return r0.apply(this,arguments)}})();
 /* ---------- VIỆC NHỜ ---------- */
@@ -23289,6 +23295,214 @@ if(typeof q72HTML==="function")q72HTML=function(){return ktQ72HTML()};
 `;document.head.appendChild(st)})();
 /* compact acts (KIT §43) after every panel render: the sub-tab click and the Mệnh truyện pane render through renderPanel, not render */
 (function(){const r0=renderPanel;renderPanel=function(){const r=r0.apply(this,arguments);try{if(typeof kitActCompactOn==="function")kitActCompactOn($("panel"))}catch(e){}return r}})();
+/* ================= jexam: KHẢO HẠCH TẤN PHONG (owner 15/11 17:20Z, review/promo-exam) =================
+   Promotion needs an exam. Meeting the conditions (Sủng/Danh/Đức, Hoàng hậu/Thái hậu, the wait since the last decree) only makes her ELIGIBLE.
+   - Player: eligibility opens a window of BAL.ex.win tuần; she takes the exam with the act card «Khảo hạch tấn phong» (Hành sự, honest odds,
+     Cần/Tốn). Missing the window: eligibility lapses for BAL.ex.cd[to] months. Pass: the existing decree (promoteP, edict animation, and the
+     rank chest of review/gift-chest when merged). Fail: no promotion, cooldown BAL.ex.cd[to] months.
+   - Exam = 2–3 rounds of the game's existing mini-games (j82/j91 engines; quiz engine with question banks for lễ nghi / trị cung / xử án /
+     Thái hậu hỏi) chosen by the target rank: low ranks lễ nghi + nữ công, middle cầm kỳ thi họa + câu đối, high trị cung + xử án + Thái hậu hỏi.
+     Score = mean of rounds × BAL.ex.wPlay + two Tứ đức courses × BAL.ex.wVir + one tài nghệ × BAL.ex.wArt. The bar BAL.ex.bar[tier] moves with
+     the examiner's attitude (Hoàng hậu for low/middle ranks, Thái hậu for high ranks; the other one when absent).
+   - NPC consorts: the same rule, rolled with the same per-level mini-game draw as j82 (kg82NpcMean); they fail too (news line).
+   - One gate for every path: promoReqP gets the exam row, so promoteP, fillSeats (j30), candOK / contests (j34), the seat board and every
+     "đủ điều kiện" text read it. Son birth (j8 birthP) no longer promotes on the spot: it grants an exam at once (exGrace).
+   - Servant / ma ma road (j42 srvRise, j97 r97rise/r97srvRk), cold-palace restore (j14), pardon (j7/j8): left automatic (owner question open).
+   - Old saves: p.ex is created on first read; a save made before this rule gets one notice line.
+   State p.ex = {to, pass, cd (turn), w0/w1 (tuần, player), lapse, grace, n, last:{s,b,ok,t}, pend (player, exam in progress)}. */
+const EXK={
+ le:{e:"quiz",b:"le",vir:"dung",n:"Lễ nghi",t:"Vấn lễ",how:"Ma ma Nội vụ phủ hỏi phép tắc trong cung. Chọn lời đáp đúng lễ. 5 câu, mỗi câu 10 giây."},
+ tc:{e:"quiz",b:"tc",vir:"hanh",n:"Trị cung",t:"Việc lục cung",how:"Giám khảo đưa việc của lục cung ra hỏi. Chọn cách xử phải nhất. 5 câu, mỗi câu 10 giây."},
+ xa:{e:"quiz",b:"xa",vir:"ngon",n:"Xử án",t:"Xét án trong cung",how:"Một vụ án trong cung được đem ra. Chọn cách xét đúng lẽ. 5 câu, mỗi câu 10 giây."},
+ thq:{e:"quiz",b:"thq",vir:"ngon",n:"Đối đáp",t:"Thái hậu hỏi",how:"Thái hậu hỏi chuyện lục cung. Chọn lời đáp đúng mực. 5 câu, mỗi câu 10 giây."}};
+const EXQ={
+ le:[{q:"Gặp Thái hậu giữa hành lang, phi tần phải làm gì?",a:"Đứng nép bên đường, cúi mình vấn an",w:["Đi tiếp cho kịp giờ","Gật đầu chào","Hỏi Thái hậu đi đâu"]},
+  {q:"Thỉnh an Hoàng hậu vào lúc nào?",a:"Sáng sớm, theo giờ Hoàng hậu định",w:["Lúc nào rảnh thì sang","Chiều tối trước giờ ngủ","Chỉ ngày lễ Tết"]},
+  {q:"Dâng trà lên bậc trên, tay đặt thế nào?",a:"Hai tay nâng chén, mắt nhìn xuống",w:["Một tay đưa chén","Đặt chén lên bàn rồi lui","Nhìn thẳng mà dâng"]},
+  {q:"Hoàng thượng ban thưởng, phi tần đáp lễ ra sao?",a:"Quỳ tạ ân, xưng thần thiếp",w:["Nhận rồi cất đi","Đứng nhận, cười tươi","Từ chối cho khiêm nhường"]},
+  {q:"Ngày giỗ tiên đế, trong cung phải giữ điều gì?",a:"Mặc đồ nhạt màu, không ca hát",w:["Bày yến cho vui","Cài trâm đỏ lấy may","Mở hội đánh cờ"]},
+  {q:"Đi trong cung gặp phi tần phẩm cao hơn thì sao?",a:"Nhường đường, hành lễ trước",w:["Chờ người kia chào trước","Giả như không thấy","Đi nhanh qua cho xong"]},
+  {q:"Phi tần tự xưng thế nào trước Hoàng thượng?",a:"Thần thiếp",w:["Nô tỳ","Bản cung","Ta"]},
+  {q:"Hầu yến, khi Hoàng thượng chưa động đũa thì?",a:"Ngồi ngay ngắn, chờ ngài dùng trước",w:["Ăn trước cho nóng","Gắp cho mình món ngon","Rót rượu tự uống"]},
+  {q:"Phi tần muốn về thăm nhà phải làm gì?",a:"Dâng lời xin Hoàng hậu, đợi chuẩn",w:["Tự đi rồi về sớm","Nhờ thái giám mở cửa","Sai cung nữ báo sau"]},
+  {q:"Được Hoàng thượng gọi hầu ở Dưỡng Hòa điện, việc đầu tiên?",a:"Tắm gội, thay áo, theo thái giám Kính sự phòng",w:["Đi ngay kẻo ngài đợi","Mang theo cung nữ thân tín vào điện","Sang báo Hoàng hậu trước"]}],
+ tc:[{q:"Bổng lộc lục cung cuối năm bị hụt, việc đầu tiên nên làm?",a:"Đối chiếu sổ sách Nội vụ phủ",w:["Cắt bổng lộc phi tần phẩm thấp","Xin thêm bạc Hộ bộ","Bỏ qua cho êm chuyện"]},
+  {q:"Hai cung nữ cãi nhau ầm ĩ, nên xử thế nào?",a:"Gọi cả hai hỏi rõ rồi mới phạt",w:["Đánh cả hai cho sợ","Đuổi người nói to hơn","Mặc kệ cho tự hết"]},
+  {q:"Mùa đông than sưởi không đủ chia, ưu tiên ai?",a:"Thái hậu, người ốm và trẻ nhỏ trước",w:["Người phẩm cao nhất","Ai đến lấy trước","Chia đều không xét"]},
+  {q:"Kho lụa mất mấy tấm gấm, người giữ kho chối không biết. Nên?",a:"Kiểm sổ nhập xuất, hỏi người canh đêm",w:["Phạt ngay người giữ kho","Lờ đi kẻo mang tiếng","Phạt cả cung nữ quét dọn"]},
+  {q:"Thánh thọ Thái hậu sắp tới, việc chuẩn bị nên giao thế nào?",a:"Chia việc từng cục, hẹn ngày báo lại",w:["Tự tay làm hết","Giao cả cho một người","Để sát ngày mới lo"]},
+  {q:"Dịch bệnh lan ở viện cung nữ, việc trước tiên?",a:"Tách người ốm, mời thái y, đốt ngải",w:["Đóng cửa không cho ai ra","Giấu đi kẻo Hoàng thượng lo","Đuổi người ốm ra ngoài"]},
+  {q:"Phi tần mới vào cung chưa biết lễ, nên làm gì?",a:"Cử ma ma dạy lễ trong mười ngày",w:["Phạt cho nhớ","Bỏ mặc tự học","Không cho ra khỏi cung"]},
+  {q:"Thái giám thu bạc của người hầu để chia việc nhẹ. Xử thế nào?",a:"Tra rõ, trả bạc, giao Thận hình ty",w:["Nhận phần chia cho êm","Đổi việc cho hắn","Chỉ nhắc nhở"]},
+  {q:"Yến Trung thu, chỗ ngồi các phi tần xếp theo gì?",a:"Theo phẩm vị, cùng phẩm theo ngày sắc phong",w:["Theo tuổi","Ai được sủng ngồi gần","Bốc thăm"]},
+  {q:"Cung điện cũ dột nát, bạc sửa chưa đủ. Nên?",a:"Sửa chỗ hỏng nặng trước, tâu xin phần còn lại",w:["Bỏ đó không sửa","Bắt phi tần ở đó tự bỏ bạc","Dời người sang lãnh cung"]}],
+ xa:[{q:"Cung nữ bị tố trộm trâm, chỉ có một người làm chứng. Nên?",a:"Tìm thêm chứng, khám nơi cất giấu",w:["Phạt ngay theo lời chứng","Tha vì chỉ có một người","Hỏi qua loa rồi thôi"]},
+  {q:"Hai người cùng khai, lời lệch nhau về giờ giấc. Nên?",a:"Hỏi riêng từng người, đối chiếu sổ trực",w:["Tin người phẩm cao","Phạt cả hai","Cho hai người cãi trước mặt"]},
+  {q:"Thuốc của phi tần có độc, người sắc thuốc đã chết. Nên?",a:"Tra nguồn thuốc ở Thái y viện và người đưa thuốc",w:["Kết án người sắc thuốc rồi thôi","Đổ cho phi tần tự hại","Giấu đi cho êm"]},
+  {q:"Người tố cáo lại là người được lợi nhất nếu kẻ bị tố ngã. Nên?",a:"Xét kỹ cả lời người tố",w:["Tin ngay vì đã đứng ra tố","Phạt người tố","Bỏ vụ án"]},
+  {q:"Chứng cứ là một bức thư không ký tên. Nên?",a:"So nét chữ, giấy mực, hỏi người chuyển thư",w:["Coi là đủ chứng","Đốt đi","Đọc trước cả cung"]},
+  {q:"Kẻ bị tố quỳ khóc kêu oan, không còn chứng nào khác. Nên?",a:"Chưa kết án, giam lỏng chờ tra thêm",w:["Tha ngay cho nhân từ","Phạt nặng vì khóc là có tật","Giao cho người tố tự xử"]},
+  {q:"Một thái giám nhận tội quá nhanh, lời khai trơn tru. Nên?",a:"Ngờ có người sai khiến, tra thêm",w:["Kết án ngay","Thưởng vì thành thật","Đổi hắn sang cung khác"]},
+  {q:"Cung nữ phạm lỗi nhỏ lần đầu, nên phạt thế nào?",a:"Phạt nhẹ, ghi sổ, răn lần sau",w:["Đánh ba mươi trượng","Đuổi khỏi cung","Bỏ qua không ghi"]},
+  {q:"Vụ án dính đến người nhà của chính mình. Nên?",a:"Tâu xin người khác xét cho công bằng",w:["Tự xét cho nhanh","Bỏ vụ án","Xét nhẹ tay"]},
+  {q:"Vật chứng tìm thấy trong phòng mà ai cũng ra vào được. Nên?",a:"Tra xem ai vào phòng hôm ấy",w:["Kết tội chủ phòng","Bỏ vật chứng","Phạt cả cung"]}],
+ thq:[{q:"«Lục cung đông người, ngươi lấy gì giữ yên?»",a:"Lấy công bằng làm gốc, lấy khoan dung giữ lòng người",w:["Lấy uy mà trị","Mặc họ tự lo","Việc gì cũng tâu Hoàng thượng"]},
+  {q:"«Nếu Hoàng thượng sủng một người quá mức, ngươi làm sao?»",a:"Nhẹ lời khuyên ngài, chăm lo các cung khác",w:["Tìm cách hạ người ấy","Giận dỗi với ngài","Không nói gì"]},
+  {q:"«Ai gia già rồi, ngươi định hiếu thuận thế nào?»",a:"Sớm tối vấn an, thuốc thang tự tay dâng",w:["Sai người hầu lo","Dâng nhiều vàng bạc","Đợi Thái hậu gọi mới đến"]},
+  {q:"«Hoàng tự nhỏ dại phạm lỗi, ngươi dạy ra sao?»",a:"Dạy bằng lời phải, nghiêm mà không ác",w:["Đánh cho nhớ","Chiều cho vui","Để thầy lo hết"]},
+  {q:"«Nhà mẹ đẻ ngươi xin chức, ngươi tính sao?»",a:"Việc triều chính thần thiếp không dám xen",w:["Xin Hoàng thượng ngay","Lén nhờ quan quen","Nài ngài đồng ý"]},
+  {q:"«Phi tần cũ thất sủng, ngươi đối đãi thế nào?»",a:"Vẫn giữ lễ, cấp đủ bổng lộc",w:["Cắt bớt cho đỡ tốn","Không đoái hoài","Đưa vào lãnh cung"]},
+  {q:"«Ngày Tết, việc trước nhất của chủ lục cung là gì?»",a:"Dâng lễ tông miếu, vấn an Thái hậu",w:["Bày yến cho mình","Ban thưởng người thân tín","Nghỉ ngơi cho khỏe"]},
+  {q:"«Người hầu thân tín của ngươi phạm lỗi, ngươi xử sao?»",a:"Xử như người khác, không thiên vị",w:["Che giấu cho nàng","Đuổi ngay không hỏi","Đổ cho người khác"]},
+  {q:"«Ngươi biết chữ, đọc sách gì cho phải đạo?»",a:"Nữ huấn, Nữ giới và sử sách người xưa",w:["Truyện tình","Binh thư","Sách bói"]},
+  {q:"«Hoàng thượng giận một đại thần, hỏi ý ngươi. Ngươi đáp?»",a:"Xin ngài nguôi giận rồi hãy xét",w:["Xin chém ngay","Bênh đại thần","Kể thêm lỗi của đại thần"]}]};
+/* the quiz engine (j82) reads these banks; the kinds join KG82_KIND (they are not festival contest subjects: j71 SC7 is unchanged) */
+(function(){if(typeof KG82_KIND==="undefined")return;for(const k in EXK)if(!KG82_KIND[k])KG82_KIND[k]=EXK[k];
+ if(typeof kg82Bank!=="function")return;const b0=kg82Bank;kg82Bank=function(b){if(EXQ[b])return kg82Shuf(EXQ[b]).slice(0,5).map(x=>({l:"Câu hỏi",q:x.q,a:x.a,w:kg82Shuf(x.w).slice(0,2)}));return b0.apply(this,arguments)}})();
+
+/* ---------- rules (numbers in BAL.ex, jbal2) ---------- */
+const EX_VIR=[["cong","dung"],["dung","ngon"],["ngon","hanh"]];
+const EX_CKTT=[["cam","dan"],["ky","co"],["thi","tho"],["hoa","ve"]];
+function exOn(){return !!(typeof S!=="undefined"&&S&&BAL&&BAL.ex)}
+function exSrv(p){return p===S&&typeof isSrv==="function"&&isSrv()}
+function exRk(to){return to>=7?"Hoàng hậu":RANKS[Math.max(0,to)].n}
+function exTier(to){return to<=3?0:to<=5?1:2}
+function exCd(to){const c=BAL.ex.cd;return c[Math.max(0,Math.min(c.length-1,to))]}
+function exLv(p,k){try{if(EXK[k])return typeof virLv==="function"?virLv(p,EXK[k].vir):0;return kg82LvFor(p,k)}catch(e){return 0}}
+function exArt(p,k){try{return typeof artLv==="function"?artLv(p,k):((p.arts||{})[k]||0)}catch(e){return 0}}
+function exVirN(k){const v=(typeof VIR!=="undefined"?VIR:[]).find(x=>x.k===k);return v?v.n:k}
+function exS(p){if(!p)return{};const to=rkOf(p)+1;let e=p.ex;if(!e||typeof e!=="object"||e.to!==to){const g=e&&e.grace===to?to:null;e=p.ex={to};if(g)e.grace=g}return e}
+/* the rounds for the target rank */
+function exRounds(p,tier){if(tier===0)return["le",exArt(p,"nau")>exArt(p,"theu")?"banh":"theu"];
+ if(tier===1){let b=EX_CKTT[0];for(const x of EX_CKTT)if(exArt(p,x[0])>exArt(p,b[0]))b=x;return[b[1],"doi"]}return["tc","xa","thq"]}
+function exArtPart(p,tier){const w=BAL.ex.wArt;if(tier===0){const t=exArt(p,"theu"),n=exArt(p,"nau");return n>t?{v:n*w,l:`Nấu nướng bậc ${n}`}:{v:t*w,l:`Thêu thùa bậc ${t}`}}
+ if(tier===1){let b=EX_CKTT[0];for(const x of EX_CKTT)if(exArt(p,x[0])>exArt(p,b[0]))b=x;const l=exArt(p,b[0]);const nm=(typeof ARTS!=="undefined"&&(ARTS.find(a=>a.k===b[0])||{}).n)||b[0];return{v:l*w,l:`${nm} bậc ${l}`}}
+ const d=Math.max(0,Math.round(p.duc||0));return{v:Math.floor(d/20)*w,l:`Đức ${d}`}}
+/* the examiner: Hoàng hậu for the low and middle ranks, Thái hậu for the high ranks; the other one when absent */
+function exExaminer(p,tier){const q=typeof queenP==="function"?queenP():null;
+ const hh=q&&q!==p&&!q.out?{k:"hh",who:q,name:`Hoàng hậu ${q.name}`,att:Math.round(p.hh||0)}:null;
+ const th=!S.thDead?{k:"th",who:S.thO||null,name:"Thái hậu",att:Math.round(p.th||0)}:null;return tier===2?(th||hh):(hh||th)}
+function exPlan(p){const e=exS(p),to=e.to,tier=exTier(to);const ex=exExaminer(p,tier);const B=BAL.ex;
+ const sh=ex?cl(Math.round(ex.att/B.attDiv),-B.attMax,B.attMax):0;const V=EX_VIR[tier];const A=exArtPart(p,tier);
+ return{to,tier,rounds:exRounds(p,tier),ex,bar0:B.bar[tier],sh,bar:B.bar[tier]-sh,V,vir:(virLv(p,V[0])+virLv(p,V[1]))*B.wVir,virL:`${exVirN(V[0])} ${virLv(p,V[0])}, ${exVirN(V[1])} ${virLv(p,V[1])}`,art:A.v,artL:A.l}}
+function exScore(P,raws){const avg=raws.reduce((a,b)=>a+b,0)/Math.max(1,raws.length);const play=Math.round(avg*BAL.ex.wPlay);const total=play+P.vir+P.art;return{avg:Math.round(avg*10)/10,play,total,pass:total>=P.bar}}
+/* one round rolled by level: the j82 rule for every person (raw ≈ 4 + 0.4·bậc ± 4) */
+function exRaw(lv,rnd){const r=(rnd()+rnd()+rnd())/3;return cl(Math.round(kg82NpcMean(lv)+(r-.5)*8),0,10)}
+function exSim(p,rnd){rnd=rnd||Math.random;const P=exPlan(p);const raws=P.rounds.map(k=>exRaw(exLv(p,k),rnd));return Object.assign(exScore(P,raws),{P,raws})}
+function exRng(seed){let a=seed>>>0||1;return function(){a=(a+0x6D2B79F5)|0;let t=Math.imul(a^(a>>>15),1|a);t=(t+Math.imul(t^(t>>>7),61|t))^t;return((t^(t>>>14))>>>0)/4294967296}}
+/* the honest chance shown on the card: the same draw, many times (stable between renders) */
+function exChance(p){const P=exPlan(p);const rnd=exRng(((p.id||7)*977+S.turn*131+P.to*17+P.vir*3+P.art)|0);const N=BAL.ex.mc;let ok=0;
+ for(let i=0;i<N;i++){const raws=P.rounds.map(k=>exRaw(exLv(p,k),rnd));if(exScore(P,raws).pass)ok++}return Math.round(100*ok/N)}
+/* the conditions before the exam: every promoReqP row except the seat rows (a seat is waited for after the exam); for the Hoàng hậu seat
+   the wait since the last decree does not count (as candOK, j34) */
+const EX_SKIP=/^Ghế |Chờ ghế|Đang tranh ghế/;let exQ0=null;
+function exBase(p){const to=rkOf(p)+1;return (exQ0?exQ0(p):[]).filter(x=>!EX_SKIP.test(x[1])&&!(to===7&&/Cách lần/.test(x[1])))}
+function exElig(p){if(!exOn()||!p||rkOf(p)>=7||p.out||p.confined||exSrv(p)||(p!==S&&p.alive===false))return false;const e=exS(p);if(e.grace===e.to&&e.to<7)return true;const L=exBase(p);return L.length>0&&L.every(x=>x[0])}
+function exCanSit(p){const e=exS(p);return !e.pass&&!(e.cd>S.turn)&&exElig(p)}
+/* dates in the game's own words (kitDate) */
+function exDateT(turn,tuan){const d=turn-S.turn;const m0=S.month-1+d;const m=((m0%12)+12)%12+1,y=S.year+Math.floor(m0/12);
+ try{if(typeof kitDate==="function")return kitDate(m,y,tuan)}catch(e){}return `tháng ${m}${tuan!=null?" "+TUAN[tuan]:""}`}
+function exDateW(w){return exDateT(Math.floor(w/3),w%3)}
+/* the examiner's name only: how her liking moves the bar is said once, on the «Mức đỗ» row (exBarTxt) — keeps the round frame short on phones */
+function exExTxt(P){return P.ex?P.ex.name:"Quan Nội vụ phủ"}
+function exBarTxt(P){return P.sh?`${P.bar} phần (mức ${P.bar0}, ${P.sh>0?"hạ":"nâng"} ${Math.abs(P.sh)} vì ${P.ex.k==="th"?"Thái hậu":"Hoàng hậu"} ${P.sh>0?"quý":"không ưa"} ngươi)`:`${P.bar} phần`}
+
+/* ---------- the exam row in every requirement list (one gate for every promotion path) ---------- */
+function exRow(p){const e=exS(p),to=e.to,rk=exRk(to);if(e.pass)return[true,`Đã đỗ khảo hạch tấn phong ${rk}`];
+ if(e.cd>S.turn)return[false,`Khảo hạch tấn phong: ${e.lapse?"lỡ hạn thi":"vừa trượt"}, chờ đến ${exDateT(e.cd)} mới được thi lại`];
+ if(p===S&&e.w1!=null)return[false,`Khảo hạch tấn phong ${rk}: được thi, hạn đến hết ${exDateW(e.w1)}`];
+ if(e.grace===to)return[false,`Khảo hạch tấn phong ${rk}: được ân thi ngay (mừng hoàng tử)`];
+ return[false,`Khảo hạch tấn phong ${rk}: đủ các điều kiện trên thì được thi`]}
+(function(){if(typeof promoReqP!=="function")return;exQ0=promoReqP;const q1=promoReqP;promoReqP=function(p){const L=q1.apply(this,arguments);
+ try{if(exOn()&&p&&rkOf(p)<7&&!p.out&&!exSrv(p))L.push(exRow(p))}catch(e){console.error("exam row",e)}return L}})();
+
+/* ---------- son birth: an exam at once instead of a rank on the spot (j8 birthP calls exGrace) ---------- */
+function exGrace(p){const e=exS(p);e.grace=e.to;e.cd=0;e.lapse=0;const me=p===S;
+ return me?`Mừng hoàng tử: Hoàng thượng ân cho ngươi dự khảo hạch tấn phong ${exRk(e.to)} ngay, không cần đủ điều kiện. `:`${p.name} được ân dự khảo hạch tấn phong ${exRk(e.to)}. `}
+function exGraceUp(p){const me=p===S;if(me)S.rank++;else p.rank++;p.lastPromo=S.turn;if(me){try{ghenAll(10)}catch(e){}try{feedback("promote",{t:"Tấn phong"})}catch(e){}}
+ const t=me?`<b class="g">Thánh chỉ: tấn phong ${S.name} làm ${RANKS[S.rank].n}.</b> Lý do: ân điển mừng hoàng tử, đã đỗ khảo hạch. `:`${p.name} được tấn phong ${RANKS[p.rank].n}. Lý do: ân điển mừng hoàng tử, đã đỗ khảo hạch. `;
+ if(!me)try{newsAdd(p,"promo",t,true)}catch(e){}return t}
+
+/* ---------- the result, for her and for every NPC ---------- */
+window.__exN=window.__exN||{sit:0,pass:0,npcSit:0,npcPass:0,lapse:0};
+function exDone(p,r){const e=exS(p),to=e.to,rk=exRk(to),me=p===S;e.n=(e.n||0)+1;e.last={s:r.total,b:r.P.bar,ok:r.pass?1:0,t:S.turn};e.w0=e.w1=null;e.pend=null;
+ const N=window.__exN;if(me){N.sit++;if(r.pass)N.pass++}else{N.npcSit++;if(r.pass)N.npcPass++}
+ if(r.pass){e.pass=true;e.lapse=0;if(!me)return"";log(`<b class="g">Đỗ khảo hạch tấn phong ${rk}</b> (${r.total} phần, mức đỗ ${r.P.bar}).`);exDrop();
+  const t=promoteP(S);if(t)log(t);else log(to>=7?"Đã đỗ: chờ Hoàng thượng chọn người lập Hoàng hậu.":`Đã đỗ: chờ ghế ${rk} trống thì có thánh chỉ.`);return t||""}
+ e.cd=S.turn+exCd(to);e.lapse=0;
+ if(me){log(`<span class="r">Trượt khảo hạch tấn phong ${rk}</span> (${r.total} phần, mức đỗ ${r.P.bar}): chờ đến ${exDateT(e.cd)} mới được thi lại.`);exDrop();return""}
+ try{newsAdd(p,"exam",`${p.name} trượt khảo hạch tấn phong ${rk}.`,true)}catch(x){}return""}
+/* NPCs sit the exam when the month's decree would look at them (rivalsMonth → promoteP); a son's grace raises the rank once passed */
+(function(){if(typeof promoteP!=="function")return;const p0=promoteP;promoteP=function(p){
+ try{if(exOn()&&p&&rkOf(p)<7&&!exSrv(p)){const e=exS(p);if(p!==S&&exCanSit(p))exDone(p,exSim(p));
+   if(e.pass&&e.grace===e.to&&rkOf(p)<6&&!p.out&&!p.confined)return exGraceUp(p)}}catch(x){console.error("exam",x)}
+ return p0.apply(this,arguments)}})();
+
+/* ---------- her window: opens when she becomes eligible, lapses when it runs out ---------- */
+function exTick(){if(!exOn()||S.dead||S.out||exSrv(S)||S.rank>=7)return;const e=exS(S);
+ if(S.exV==null){S.exV=1;if((S.turn||0)>0)log("Luật mới trong cung: từ nay muốn thăng phẩm phải qua khảo hạch tấn phong; đủ điều kiện chỉ là được thi.")}
+ if(e.pend&&!document.getElementById("kg82"))exAbort();
+ if(e.pass||e.pend)return;const w=wk();
+ if(e.w1!=null){if(w>e.w1){e.w0=e.w1=null;e.cd=S.turn+exCd(e.to);e.lapse=1;window.__exN.lapse++;exDrop();
+   log(`<span class="r">Lỡ hạn khảo hạch tấn phong ${exRk(e.to)}</span>: chờ đến ${exDateT(e.cd)} mới được thi.`)}
+  else if(!exElig(S)){e.w0=e.w1=null;exDrop()}return}
+ if(e.cd>S.turn||!exElig(S))return;e.w0=w;e.w1=w+BAL.ex.win-1;e.lapse=0;const P=exPlan(S);
+ log(`<b class="g">Được dự khảo hạch tấn phong ${exRk(e.to)}</b>: ${P.ex?P.ex.name:"Nội vụ phủ"} khảo, hạn đến hết ${exDateW(e.w1)}. Thẻ «Khảo hạch tấn phong» ở Hành sự.`);exAdd()}
+/* the act card: true cost, the honest chance (as one who plays at her own level), what a fail costs */
+function exCard(){const e=exS(S),P=exPlan(S),o=cl(exChance(S),5,95);const names=P.rounds.map(k=>KG82_KIND[k].n.toLowerCase()).join(", ");
+ return{n:"Khảo hạch tấn phong",exam:1,t:`${P.ex?P.ex.name:"Quan Nội vụ phủ"} khảo ngươi trước khi sắc phong ${exRk(e.to)}: ${names}. Cơ may tính như người cùng bậc tài nghệ; tự thi giỏi thì dễ đỗ hơn.`,
+  c:{suc:-BAL.ex.suc},k:BAL.ex.k,o,dom:"Khảo hạch",w:{},l:{},x:`thánh chỉ tấn phong ${exRk(e.to)}`,lock:!exElig(S),go:()=>exStart()}}
+function exAdd(){try{if(Array.isArray(deck)&&!deck.some(a=>a&&a.exam))deck.unshift(exCard())}catch(e){}}
+function exDrop(){try{if(Array.isArray(deck))deck=deck.filter(a=>!(a&&a.exam))}catch(e){}}
+(function(){const d0=deal;deal=function(){const r=d0.apply(this,arguments);try{if(exOn()&&!S.out&&!exSrv(S)&&S.ex&&S.ex.w1!=null&&!S.ex.pass)exAdd()}catch(e){}return r}})();
+(function(){const r0=runOpt;runOpt=function(a){if(a&&a.exam){if(!canPay(a))return null;if(a.c)apply(a.c);log(`Dự khảo hạch tấn phong ${exRk(exS(S).to)}. ${fmt(a.c)||""}`);try{a.go()}catch(e){console.error(e)}return true}return r0.apply(this,arguments)}})();
+(function(){const c0=cardH;cardH=function(a){let h=c0.apply(this,arguments);try{if(a&&a.exam)h=h.split("không mất gì").join(`trượt: chờ ${exCd(exS(S).to)} tháng mới được thi lại`).replace(/<button\b/,'<button data-kexam="1"')}catch(e){}return h}})();
+/* its category word on the picture frame: an exam of etiquette and duties is «Lễ nghi», not the default «Giao thiệp» (same pattern as j79 sung-ai) */
+try{KIT_ACT_CATS.unshift(["le-nghi",/khảo hạch tấn phong/i])}catch(e){}
+/* the act picture (owner 14:30Z: no group images): the exam card shows ONLY its own picture (ACTS.json «Khảo hạch tấn phong»); with no own key
+   (or before ACTS.json arrives) it gets NO picture slot at all — never the category tile / category picture of kitActArt */
+(function(){if(typeof kpActArt!=="function")return;const k0=kpActArt;kpActArt=function(b){try{if(b&&b.dataset&&b.dataset.kexam&&!(typeof kitActKey==="function"&&kitActKey("Khảo hạch tấn phong"))){
+  b.dataset.kart="none";b.classList.remove("kart");b.classList.add("kanoart");const a=b.querySelector(":scope > .kaart");if(a)a.remove();return}if(b&&b.dataset&&b.dataset.kexam)b.classList.remove("kanoart")}catch(e){}return k0.apply(this,arguments)}})();
+(function(){const n0=nextBuoi;nextBuoi=function(){const r=n0.apply(this,arguments);try{exTick()}catch(e){console.error("exam tick",e)}return r}})();
+(function(){const r0=render;render=function(){try{exTick()}catch(e){console.error("exam tick",e)}return r0.apply(this,arguments)}})();
+
+/* ---------- the exam itself: the kit game frame (j82), one round after another, then the result ---------- */
+function exAbort(){const e=exS(S),pd=e.pend;if(!pd)return;const P=exPlan(S);const raws=pd.raws.slice();
+ while(raws.length<P.rounds.length)raws.push(Math.round(kg82NpcMean(exLv(S,P.rounds[raws.length]))));exDone(S,Object.assign(exScore(P,raws),{P,raws}))}
+function exStart(){const e=exS(S);const P=exPlan(S);
+ if(window.__exAuto||typeof kg82Open!=="function"||!document.getElementById("ov")){exDone(S,exSim(S));return}
+ e.pend={raws:[]};const raws=e.pend.raws;let i=0;const n=P.rounds.length;
+ const round=()=>{const k=P.rounds[i],K=KG82_KIND[k];KG82.ctx="thi";const lv=exLv(S,k);KG82.lv=lv;try{kg82Preload(k)}catch(x){}
+  const d=kg82Open({art:"Khảo hạch",title:`Môn ${i+1}/${n} · ${K.n}`,how:K.how});if(!d){exAbort();return}
+  const box=kg82Box();const SK=Math.round(kg82NpcMean(lv));
+  box.innerHTML=`<h4 class="kpst">Khảo hạch tấn phong ${exRk(P.to)}</h4>`+kg82Rows([["Giám khảo",exExTxt(P),"t"],["Môn thi",`${i+1}/${n}: ${K.n} · ${K.t}`,"t"],["Độ khó",`${kg82DiffWord(lv)} · theo bậc ${lv}`,"n"],["Mức đỗ",`${exBarTxt(P)}, tính cả ${n} môn cùng Tứ đức và tài nghệ`,"n"]])+
+   `<div class="kg82act"><button class="${kg82Btn()}" id="kg82go">Bắt đầu thi</button><button class="${kg82Btn(true)}" id="kg82skip">Để tài nghệ quyết định<small>môn này tính ${SK}/10, như người cùng bậc</small></button></div>`;
+  $("kg82go").onclick=()=>kg82Play(k,raw=>after(raw,false));$("kg82skip").onclick=()=>after(SK,true)};
+ const after=(raw,sk)=>{raws.push(raw);i++;const last=i>=n;try{save()}catch(x){}
+  kg82ShowRes(kg82Rows([[`Môn ${i}`,`${raw}/10 · ${kg82Word(raw)}${sk?" (để tài nghệ quyết định)":""}`,"t"]])+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82ok">${last?"Xem kết quả":"Môn kế tiếp"}</button></div>`);
+  kg82Set("score",`${raw}/10`);kg82Set("round",`${i}/${n}`);$("kg82ok").onclick=()=>{if(last)result();else round()}};
+ const result=()=>{const sc=exScore(P,raws);const r=Object.assign(sc,{P,raws});
+  kg82Open({art:"Khảo hạch",title:`Kết quả · ${exRk(P.to)}`,how:"Tổng phần = phần thi các môn + Tứ đức + tài nghệ. Đạt mức đỗ của giám khảo thì đỗ."});
+  const parts=[["Các môn",raws.map((x,j)=>`${KG82_KIND[P.rounds[j]].n} ${x}/10`).join(" · ")],[`Phần thi (trung bình ${String(sc.avg).replace(".",",")} × ${BAL.ex.wPlay})`,`+${sc.play}`],[`Tứ đức (${P.virL})`,`+${P.vir}`],[P.artL,`+${P.art}`],["Mức đỗ","cần "+exBarTxt(P)]];
+  const note=sc.pass?`Đỗ. ${P.to>=7?"Được dự chọn ngôi Hoàng hậu.":`Thánh chỉ tấn phong ${exRk(P.to)}.`}`:`Trượt. Chờ ${exCd(P.to)} tháng mới được thi lại.`;
+  kg82ShowRes(kitGameResult({parts,total:`${sc.total} phần · cần ${P.bar}`,note})+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82ok">Đã hiểu</button></div>`);
+  kg82Set("score",String(sc.total));kg82Set("round",`${n}/${n}`);kg82Set("time","đã hết");try{$("kg82ok").scrollIntoView({block:"nearest"})}catch(x){}
+  $("kg82ok").onclick=()=>{e.pend=null;kg82Close();exDone(S,r);try{save()}catch(x){}render()}};
+ round()}
+
+/* ---------- Mệnh truyện › Sắc phong: the exam chips (kit .kchip) ---------- */
+function exChips(){if(!exOn()||S.rank>=7||S.out)return"";const e=exS(S);const L=[];
+ if(e.pass)L.push(["g",`Đã đỗ khảo hạch ${exRk(e.to)}`]);
+ else if(e.cd>S.turn)L.push(["r",`Thi lại từ ${exDateT(e.cd)}`]);
+ else if(e.w1!=null)L.push(["g",`Khảo hạch: hạn hết ${exDateW(e.w1)}`]);
+ else if(e.grace===e.to)L.push(["g","Được ân thi ngay"]);
+ else L.push(["n","Đủ điều kiện thì được dự khảo hạch"]);
+ if(e.last&&!e.pass)L.push(["n",`Lần trước: ${e.last.s}/${e.last.b} phần`]);
+ return L.map(([c,t])=>kitChip(t,c)).join(" ")}  /* kit status chips (KIT kitChip(text,"g"|"r"|"n")) */
+if(typeof KIT_GLOSS!=="undefined")KIT_GLOSS["Khảo hạch tấn phong"]="";
+(function(){const t=()=>{try{const B=BAL.ex;KIT_GLOSS["Khảo hạch tấn phong"]=`Đủ điều kiện sắc phong chỉ là được thi. Từ lúc đủ, ngươi có ${B.win} tuần để dự khảo hạch (thẻ ở Hành sự); lỡ hạn thì chờ như trượt. Phẩm thấp thi lễ nghi và nữ công; phẩm giữa thi cầm kỳ thi họa và câu đối; phẩm cao thi trị cung, xử án và đối đáp với Thái hậu. Tổng phần = phần thi các môn (mỗi môn 0–10, lấy trung bình nhân ${B.wPlay}) + Tứ đức + tài nghệ; giám khảo (Hoàng hậu, phẩm cao: Thái hậu) quý ngươi thì hạ mức đỗ, ghét thì nâng. Trượt: chờ ${B.cd[1]}–${B.cd[7]} tháng (phẩm càng cao càng lâu). Phi tần khác cũng thi như vậy. Sinh hoàng tử: được ân thi ngay.`}catch(e){}};
+ if(typeof renderPanel0==="function"){const r0=renderPanel0;renderPanel0=function(){t();return r0.apply(this,arguments)}}})();
+window.exPlan=exPlan;window.exChance=exChance;window.exSim=exSim;window.exElig=exElig;window.exS=exS;window.exTick=exTick;window.exStart=exStart;
 /* ================= jkitpage: TRANG MẪU KIT — the kit sample page (luật KIT TRƯỚC, owner 11/15 16:50Z; tabs-kit r7) =================
    Open the game with "#kit" at the end of the address (…/index.html#kit) or call kitSamplePage() in the console: a full-screen page shows
    every registered kit part drawn by the REAL kit functions (no copies), at the current screen size. Close = the kit ✕ or remove "#kit".
@@ -23537,7 +23751,7 @@ document.head.appendChild(st);
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="94016fcf419c";window.CTM_BUILD=BUILD;
+const BUILD="da5baf470fdd";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
