@@ -84,5 +84,7 @@ poison deaths: most are NOT ACT.poison (1 of 18 landed ones killed) but poisoned
 2. evbot on the branch build: `EVLIFE1=1 EVSTOP=1 EVOUT=<dir>/e2 EVPAR=3 node dev/measure/evbot.js <url> 6000 hint,rand,same 21 1`.
    If hint ≈ rand persists, candidate lever: BAL.ctxTaste 12→18 / ctxCap 22→30 (jevb: bigger context swing makes the hint matter).
 3. If early death stays >45 % on the branch: poison is the main cause → candidate BAL.seeMaxP 70→78 (one knob, re-measure).
-4. Tests still to run on the branch build: dev/test/opt-render.js at 755x1000, 1000x755, 1180x820 (done: fails []), 1366x1024, 844x390;
-   story-deadline.js, rest-cards.js, promo-exam.js, event-context.js, hint-dedup.js; old save loads.
+4. Tests on the branch build (done 15/11 ~22Z): opt-render.js fails [] at 755x1000, 1000x755, 1180x820, 1366x1024, 844x390;
+   story-deadline 12/12; event-context 9/9; promo-exam 17/17 (1180x820); opt-scan --fail unclassified 0; rest-cards.js "ok" is falsy on
+   BOTH main and the branch (its "Nghỉ ngơi một lát" morning card lookup returns null — pre-existing test issue); dưỡng sức now Sức +24 / Bạc −6 as set.
+   Not run: hint-dedup.js, old-save load.
