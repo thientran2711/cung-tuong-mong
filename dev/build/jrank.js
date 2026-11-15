@@ -221,5 +221,5 @@ setTimeout(()=>{rkHello().then(()=>rkFlush())},1500);
  .krk-row>.krk-c{display:none}.krk-row>.krk-pe{display:block;grid-area:pe;font-size:.76rem;color:var(--ink);min-width:0;overflow-wrap:anywhere}
  .krk-hd{display:none}.krk-btns .kbtn{flex:1 1 0;padding:6px 8px}
 }
-@media (orientation:landscape) and (max-height:820px){.krk .krk-stage{height:clamp(230px,48vh,400px)}.krk-ft{padding-bottom:8px}}
+@media (orientation:landscape) and (max-height:820px){.krk .krk-stage{height:clamp(260px,60vh,500px)}.krk-ft{padding-bottom:8px}}
 `;document.head.appendChild(st)})();

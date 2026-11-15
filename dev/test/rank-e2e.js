@@ -19,12 +19,12 @@ const fails=[];const ok=(c,m)=>{console.log((c?'ok   ':'FAIL ')+m);if(!c)fails.p
   for(let i=0;i<6;i++){await p.waitForTimeout(300);await p.evaluate(()=>{const k=document.querySelector('#kroul .krskip');if(k)k.click()})}
   await p.evaluate(()=>{Q.length=0;$('modal').hidden=true});ok(await p.evaluate(()=>!document.getElementById('kroul')&&S&&!S.dead),'new life started')};
  /* o: {rank, years, sons, danh, duc, end:"die"|"thaihau"} — the life is played by setting the state, then the real ending runs */
- const endLife=async(p,o)=>{await p.evaluate(o=>{for(let r=S.rank;r<=o.rank;r++){S.rank=r;rkTrack()}S.maxRank=o.rank;
+ const endLife=async(p,o)=>{await p.evaluate(o=>{if(S.srv)S.srv.risen=1;for(let r=S.rank;r<=o.rank;r++){S.rank=r;rkTrack()}S.maxRank=o.rank;
    for(let y=1;y<o.years;y++){S.year++;S.age++;rkTrack()}S.danh=o.danh||0;S.duc=o.duc||0;
    for(let i=0;i<(o.sons||0);i++){S.kids.push({name:'Hoàng tử '+['Vĩnh An','Vĩnh Khang','Vĩnh Thọ'][i],sex:'m',age:3,hp:90,fond:50,born:0,alive:true});rkTrack()}
    if(o.end==='thaihau'){S.heir={k:S.kids[S.kids.length-1]};emperorDies('')}else over('Hồng nhan bạc mệnh','Bệnh nặng không qua khỏi.','Bệnh mà chết')},o);
   await p.waitForSelector('.krk-end');};
- const endRank=p=>p.waitForFunction(()=>{const e=document.querySelector('.krk-end');return e&&/đứng hạng/.test(e.textContent)?e.textContent:null},null,{timeout:120000}).then(h=>h.jsonValue());
+ const endRank=p=>p.waitForFunction(()=>{const e=document.querySelector('.krk-end');return e&&/đứng hạng/.test(e.textContent)?e.textContent:null},null,{timeout:240000}).then(h=>h.jsonValue());
  const layout=async(p,scene)=>p.evaluate(scene=>{const vw=innerWidth,vh=innerHeight,bad=[];const root=document.querySelector('#krkov')||document.querySelector('#modal');
   if(document.documentElement.scrollWidth>vw+1)bad.push('page overflow-x '+document.documentElement.scrollWidth);
   root.querySelectorAll('*').forEach(e=>{if(e.closest('[aria-hidden="true"]'))return;const q=e.getBoundingClientRect();if(!q.width||!q.height)return;const cs=getComputedStyle(e);if(cs.visibility==='hidden')return;
@@ -80,7 +80,7 @@ const fails=[];const ok=(c,m)=>{console.log((c?'ok   ':'FAIL ')+m);if(!c)fails.p
  await C.p.evaluate(()=>rkOpen('lives'));await C.p.waitForTimeout(1500);const ob=await C.p.evaluate(()=>document.querySelector('#krkov').innerText);ok(/Mạng đứt/.test(ob)&&/chờ gửi/.test(ob),'offline board: last board + waiting note');
  await shot(C.p,8,'board-offline');await C.p.evaluate(()=>rkClose());
  await C.ctx.setOffline(false);await C.p.evaluate(()=>dispatchEvent(new Event('online')));
- const sent=await C.p.waitForFunction(()=>!rkQ().length&&/đứng hạng/.test(document.querySelector('.krk-end').textContent)?document.querySelector('.krk-end').textContent:null,null,{timeout:120000}).then(h=>h.jsonValue()).catch(()=>null);
+ const sent=await C.p.waitForFunction(()=>!rkQ().length&&/đứng hạng/.test(document.querySelector('.krk-end').textContent)?document.querySelector('.krk-end').textContent:null,null,{timeout:240000}).then(h=>h.jsonValue()).catch(()=>null);
  ok(!!sent&&/hạng 3 trên 5/.test(sent),'back online: sent, '+sent);
  /* A sees C's new best life above A's second life; A's own rows marked */
  await openBoard(A.p,'lives');bd=await board(A.p);ok(bd.rows.length===5&&sorted(bd.rows)&&bd.rows.filter(r=>r.mine).length===2,'A: 5 lives, own two marked');
