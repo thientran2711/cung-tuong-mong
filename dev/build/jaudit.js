@@ -124,3 +124,20 @@ function aaNamesFix(){if(!S)return;try{const all=allServ().concat(S.maid?[S.maid
  if(typeof deser==="function"){const d0=deser;deser=function(){const r=d0.apply(this,arguments);aaNamesFix();return r}}})();
 /* short names on strips: titled people keep their title ("Thái y Trương", not "y Trương") */
 (function(){if(typeof shortN!=="function")return;const s0=shortN;shortN=function(nm){const a=String(nm).split(" ");if(a.length===3&&/^(Thái y|Tổng quản|Nội vụ|Ma ma|Thái giám)$/.test(a[0]+" "+a[1]))return String(nm);return s0.apply(this,arguments)}})();
+
+/* 11. MÀU CHIỀU QUAN HỆ (owner, KIT §11.2): a relation LABEL is coloured by its direction — người khác → ta purple (--rel-them),
+   ta → người khác blue (--rel-me). The number keeps its Được/Mất colour. kitRel(dir,text) is the one builder; kitRelPaint(root)
+   colours the labels already written as text everywhere (cards, chips, Ân oán, Giao tình, stage, week book, result cards). */
+function kitRel(dir,text){return `<span class="krel krel-${dir==="me"?"me":"them"}">${text}</span>`}
+window.kitRel=kitRel;KIT_REL.paint=null;
+const KREL_RE=new RegExp([
+ "(Ta|ta) → (nàng|hắn|người ấy|[\\p{Lu}][\\p{L}]*(?: [\\p{Lu}][\\p{L}]*){0,2}): thiện cảm","(Ta|ta) tin cậy","tin cậy(?= [\\p{Lu}][\\p{L}]* [\\p{Lu}]?[\\p{L}]*\\s?[+\\-−]?\\d)","tin cậy(?= [+\\-−]?\\d)",
+ "(Nàng|Hắn|Hoàng hậu|Thái hậu|Hoàng thượng|Người ấy|[\\p{Lu}][\\p{L}]*(?: [\\p{Lu}][\\p{L}]*){0,2}) → (ta|người ấy|nàng): thiện cảm","[\\p{Lu}][\\p{L}]*(?: [\\p{Lu}][\\p{L}]*){0,3} với ta","oán ta","bớt oán ta","(?<![\\p{L}])thiện cảm(?= [+\\-−]?\\d|:| của)","(?<![\\p{L}])Thiện cảm(?= [+\\-−]?\\d|:|$| của)","(?<![\\p{L}])ghen(?= [+\\-−]\\d)"].join("|"),"gu");
+function kitRelPaint(root){if(!root||!root.querySelectorAll)return;const W=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:n=>{const p=n.parentElement;if(!p||/^(SCRIPT|STYLE|TEXTAREA|INPUT|OPTION|SELECT)$/.test(p.tagName)||p.closest(".krel,[data-vp-skip]"))return NodeFilter.FILTER_REJECT;KREL_RE.lastIndex=0;return KREL_RE.test(n.nodeValue)?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT}});
+ const L=[];while(W.nextNode())L.push(W.currentNode);
+ for(const n of L){const v=n.nodeValue;KREL_RE.lastIndex=0;let m,last=0;const f=document.createDocumentFragment();
+  while((m=KREL_RE.exec(v))){const t=m[0];const me=/^(Ta|ta)\b|^tin cậy/.test(t)||/^(Ta|ta) /.test(t);if(m.index>last)f.appendChild(document.createTextNode(v.slice(last,m.index)));const sp=document.createElement("span");sp.className="krel krel-"+(me?"me":"them");sp.textContent=t;f.appendChild(sp);last=m.index+t.length}
+  if(last<v.length)f.appendChild(document.createTextNode(v.slice(last)));n.parentNode.replaceChild(f,n)}}
+(function(){const st=document.createElement("style");st.id="krel-css";st.textContent=".krel-them{color:var(--rel-them,#7a4fa0)!important;font-weight:600}.krel-me{color:var(--rel-me,#2f6f9f)!important;font-weight:600}";document.head.appendChild(st);
+ let q=false;const run=()=>{q=false;try{kitRelPaint(document.body)}catch(e){}};const mo=new MutationObserver(()=>{if(!q){q=true;requestAnimationFrame(run)}});
+ const go=()=>{try{mo.observe(document.body,{childList:true,subtree:true,characterData:true})}catch(e){}run()};if(document.body)go();else document.addEventListener("DOMContentLoaded",go)})();
