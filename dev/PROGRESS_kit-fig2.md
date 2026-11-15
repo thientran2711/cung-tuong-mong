@@ -19,13 +19,30 @@ Continue on this branch (it already contains review/shop-fix). Do not push main;
 - Cause (this branch + live before img-quality): `porOf` (j39) returned the person's OLD face (face-consort-NN / inline AV.women avatar = other-looking
   art) until her por-* portrait had loaded in a hidden Image(), then re-rendered only the main panel. A dialog / Sổ tuần opened right after
   loading a save (the morning news card) kept the old faces. Main fixed this in review/img-quality (jimg.js: por-* returned at once, old face
-  only on a load error). Fix here = merge origin/main 1a99caf7d (82f22140b). Conflicts: see that commit; this branch's KIT sections are now 42-45.
+  only on a load error). Fix here = merge origin/main 1a99caf7d (aeeb867c4); later merged main ee5758195 (1ca27858f). Conflicts: see that commit; this branch's KIT sections are now §48 kitNameRank, §49 Ân oán, §50 kitEventDp; kitActCompact = main's §43 (one copy).
 - Real-save check `dev/test/news-face-real.js` (save played to week 30, loaded with the title-screen button, played 5 more weeks; reference =
   the Hậu cung strip tile DOM + card, Ân oán "Ta" tile): news rows 12/12 judged rows = same file + rank colour as her strip tile (Ta 4/4, met
   consorts, unmet consorts = silhouette in both); 13/13 Hậu cung cards = strip tile; Sổ tuần rows on a person's page draw no face (kfdot, the
   page figure is the person) — 19 such rows, none wrong. Before the merge the same save showed 6/13 strip tiles with old fallback art.
 - Seen while testing (not fixed yet): news row "Cung nữ Cung nữ thân tín Tiểu Đào của …" (title doubled); stuck loops for a test driver:
   "Thi tài ngày Thất tịch · Lời mời" first option re-queues itself; a lesson minigame overlay (#ov) whose ok/skip buttons do not close it.
+
+## 11/15 ~13:00Z — news card rows (owner 17:04Z) + doubled titles (class fix)
+- Done (j79, j75, j61): one fact per row (sentence split at tag boundaries / after ".)"); "(Chứng cứ X +1.)" and "Lý do:" stay on the
+  row of the act that gave them; repeated reason kept once; kitNoChange drops every "label N → N" clause (+ j75 names whose Sủng);
+  promotion rows say the rank once ("tấn phong Mạnh Cẩm Tú làm Quý nhân", "Đoan Mộc Hải Đường được tấn phong Quý phi");
+  kitTitled / kitTitledName / kitDedupTitle: no "Cung nữ Cung nữ thân tín", no "Tổng quản thái giám Tổng quản" (KIT §9 notes).
+- Scan (news-face-real.js on dev/test/fixtures/world30-met.json = the week-30 save with 9/13 consorts met):
+  title unit before 1/56 doubled → after 0/56; live dialogs/books before 2 doubled lines → after 0 (1 old stored log line, drawn clean).
+  Faces after both merges: news rows match strip tiles (a row that names a maid first shows the maid; a consort promoted during the run
+  shows her NEW rank outfit — the checker's reference is taken at load), 13/13 cards = tiles, no page errors.
+- NOT done (LUẬT KIT TRƯỚC, stopped): chips "thân +N" (→ fix-float kitRelDelta, not on main yet) and world/family stat chips
+  ("Kho lúa −10", "nhà Hộ bộ thế lực +6") — no shared kit part; filed in dev/kit/KIT_REQUESTS.md.
+- NOT started this session: kitEventDp items 1a–1d, "VIỆC · <cung>" visit dialog (banner + silhouette top, head portrait left or grey
+  silhouette if unmet, text right, buttons below, no "Thôi"), owner acceptance shot "VIỆC · Thái hậu triệu" (figure small bottom-left,
+  name plate under feet → must be above via kitNameRank §48, dialog full height for 2 short choices → fit content, no banner top-right,
+  "thiện cảm" wording), Ân oán tabs, act cards without own picture, 5-size runs.
+- Test helpers: news-face-real.js serves CDN pictures from git objects of 3e212597e (IMGREV) — no disk, no proxy.
 
 ## LEFT (owner requests, exact)
 1. kitEventDp (KIT 45): done in code + test; LEFT: (a) a 2-option visit leaves ~124 px empty under the options because of the 500 px
