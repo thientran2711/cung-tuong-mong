@@ -56,3 +56,9 @@ State of branch review/mk-colour:
     python3 -I dev/art/mkfit/fixtoil.py && cp img/toil-fit.json img/toil-fit2.json && rm img/toil-fit.json
     python3 dev/site/cdn_sync.py img/toil-fit2.json img/mk-fit ; cp img/mk-fit/*.json dev/art/mkfit/ ; commit.
   Until then img/toil-fit2.json on the CDN holds the PRE-re-crop points: the re-cropped portraits' blush is off on this branch only.
+
+## Update ~21:30Z
+- por-scale re-crop handled: `--stale` re-measured 2486 pictures (incl. the 6 re-cropped player-look portraits), 0 failed; fixtoil on the
+  por-scale toil-fit (1400 mouths moved, after: 0 above 0.10 face width); img/toil-fit2.json + img/mk-fit/*.json re-uploaded; dev/art/mkfit synced.
+  Checked by eye: re-cropped player looks + a random 24-picture sheet.
+- Sample 2 (14 presets): /home/user/wt/mk-colour-sample2.jpg (`node dev/test/mk-colour.js <url> <out> consort-c05 t1 a18 presets`).
