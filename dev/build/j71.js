@@ -13,7 +13,7 @@ const G7=t=>`<span class="g">${t}</span>`,R7=t=>`<span class="r">${t}</span>`;
 function j7s(){if(!S)return null;const j=S.j71=S.j71||{};j.fy=j.fy||{};j.vu=j.vu||{};j.n=j.n||0;j.fn=j.fn||0;j.win=j.win||0;j.cong=j.cong||0;j.pd=j.pd||0;j.npc=j.npc||0;if(j.pt==null)j.pt=-99;return j}
 function j7On(){return !!(S&&!S.dead&&!S.out&&!(typeof isSrv==="function"&&isSrv()))}
 /* Thánh thọ Thái hậu joins the calendar (map banner + mini-events); hidden once she is gone */
-if(typeof FEST!=="undefined"&&!FEST.thanhtho)FEST.thanhtho={name:"Thánh thọ Thái hậu",m:10,t:[1]};
+if(typeof FEST!=="undefined"&&!FEST.thanhtho)FEST.thanhtho={name:"Thánh thọ Thái hậu",m:10,t:[1],files:{sang:"img/map-fest-thanhtho-sang.webp"}};
 (function(){const f0=festToday;festToday=function(){const f=f0.apply(this,arguments);if(f&&f.k==="thanhtho"&&S&&S.thDead)return null;return f}})();
 function nm7(p){return p===S?"ngươi":p.name}
 function gn7(p){return p===S?"ngươi":String(p.name).split(" ").pop()}
@@ -78,6 +78,11 @@ function fvPick(k,noC){const j=j7s(),L=FV7[k]||[];const ok=i=>{const t=L[i][0];i
  return cand.length?pick(cand):null}
 /* ---------- festival event builder (PEND j71f; params are saved, so a pending one survives a reload) ---------- */
 function fName7(k){return (FEST[k]&&FEST[k].name)||"Ngày hội"}
+/* one title per festival contest variant (owner 17:08Z: "Hội Phượng · Lời mời thi thêu" read as the wrong contest): the title names
+   the real thing the variant asks for, so a contest that is not the festival's own theme says why it is there. Checked by dev/test/cb-fest.js */
+const FT7={"newyear:0": "Thi câu đối Tết", "newyear:1": "Thi thơ chúc xuân", "newyear:2": "Thi múa chúc thọ Thái hậu", "newyear:3": "Thi đàn bên lò sưởi", "newyear:4": "Thi vẽ tranh Tết", "newyear:5": "Thi làm mâm bánh mứt Tết", "newyear:6": "Thi đấu cờ lấy may đầu năm", "newyear:12": "Thi cắt hoa giấy ngày Nhân nhật", "newyear:13": "Thi cắm hoa mai đào", "nguyentieu:0": "Thi đố đèn ở ngự hoa viên", "nguyentieu:1": "Thi đoán câu đố đèn của Hoàng thượng", "nguyentieu:2": "Thi vẽ đèn lồng", "nguyentieu:3": "Thi thơ “Hoa đăng”", "nguyentieu:4": "Thi hát khúc “Nguyên tiêu”", "nguyentieu:5": "Thi nặn bánh trôi", "nguyentieu:6": "Thi múa đèn hoa sen", "nguyentieu:11": "Thi kết đèn lụa", "nguyentieu:12": "Thi đấu cờ dưới đèn", "thanhminh:0": "Thi thơ “Thanh minh vũ”", "thanhminh:1": "Thi vẽ tranh “Xuân du”", "thanhminh:3": "Thi đầu hồ ngày đạp thanh", "thanhminh:6": "Thi cắm bình hoa lê", "thanhminh:7": "Thi làm bánh thanh đoàn", "thanhminh:10": "Thi hát khúc xuân", "thanhminh:11": "Thi đàn tưởng nhớ tiên đế", "doanngo:2": "Thi thêu túi thơm", "doanngo:3": "Thi gói bánh ú", "doanngo:4": "Thi điều hương xua tà", "doanngo:5": "Thi bắn cung giờ Ngọ", "doanngo:6": "Thi thơ viếng Khuất Nguyên", "doanngo:7": "Thi tết dây ngũ sắc", "doanngo:11": "Thi cắm hoa lựu, xương bồ", "doanngo:12": "Thi hát đò đưa trên thuyền rồng", "phoenix:0": "Thi bắn bia ở sân tàu ngựa", "phoenix:1": "Thi bắn cung trên lưng ngựa", "phoenix:4": "Thi đầu hồ trong lều xem hội", "phoenix:5": "Thi múa kiếm tiệc tối", "phoenix:6": "Thi vẽ tranh “Phượng hội”", "phoenix:7": "Thi thơ tán dương tay thiện xạ", "phoenix:11": "Thi thêu cờ phướn cho đội thắng", "thattich:0": "Thi xâu kim dưới trăng", "thattich:1": "Thi thả kim đoán khéo", "thattich:2": "Thi thêu khăn uyên ương", "thattich:3": "Thi thơ “Ngưu Lang Chức Nữ”", "thattich:4": "Thi đàn khúc “Thước kiều tiên”", "thattich:5": "Thi hát khúc Thất tịch", "thattich:6": "Thi làm bánh xảo quả", "thattich:7": "Thi cắm hoa phượng tiên", "thattich:11": "Thi vẽ quạt Ngưu Lang Chức Nữ", "thattich:12": "Thi múa “Nghê thường” dưới trăng", "vulan:2": "Thi vẽ đèn hoa đăng", "vulan:3": "Thi gấp đèn hoa sen", "vulan:4": "Thi tụng kinh, hát sám", "vulan:5": "Thi làm cỗ chay cúng Vu Lan", "vulan:6": "Thi thơ “Báo hiếu”", "vulan:11": "Thi cắm hoa sen dâng Phật", "vulan:12": "Thi đàn khúc an hồn", "trungthu:0": "Thi thơ “Vọng nguyệt”", "trungthu:1": "Thi đố đèn kéo quân", "trungthu:2": "Thi làm bánh trung thu", "trungthu:3": "Thi đàn dưới trăng", "trungthu:4": "Thi múa “Hằng Nga bôn nguyệt”", "trungthu:5": "Thi hát khúc trăng thu", "trungthu:6": "Thi vẽ tranh “Nguyệt hạ”", "trungthu:7": "Thi bày mâm cỗ, cắm hoa quế", "trungthu:8": "Thi đấu cờ trên thủy tạ", "vantho:1": "Thi múa chúc thọ", "vantho:2": "Thi đàn “Vạn niên hoan”", "vantho:3": "Thi dâng thơ chúc thọ", "vantho:4": "Thi thêu “Bách thọ đồ”", "vantho:5": "Thi vẽ tranh “Tùng hạc”", "vantho:6": "Thi làm bánh thọ đào", "vantho:7": "Thi hát chúc thọ", "vantho:8": "Thi đánh cờ mừng thọ", "vantho:12": "Thi bày chậu cảnh “Phúc Lộc Thọ”", "trungcuu:0": "Thi thơ “Đăng cao”", "trungcuu:1": "Thi cắm hoa cúc", "trungcuu:2": "Thi làm bánh hoa cúc", "trungcuu:3": "Thi ủ rượu cúc, điều túi thù du", "trungcuu:4": "Thi đầu hồ trên đỉnh Cảnh Sơn", "trungcuu:5": "Thi vẽ quạt cúc vàng", "trungcuu:6": "Thi đàn khúc “Cao sơn”", "trungcuu:12": "Thi đấu cờ trên thủy tạ", "thanhtho:1": "Thi thêu chữ “Thọ”", "thanhtho:2": "Thi làm bánh thọ đào", "thanhtho:3": "Thi đàn khúc xưa mừng thọ", "thanhtho:4": "Thi hát chúc thọ Thái hậu", "thanhtho:5": "Thi vẽ tranh “Ma Cô hiến thọ”", "thanhtho:6": "Thi dâng thơ chúc thọ", "thanhtho:7": "Thi bày bồn cảnh chúc thọ", "thanhtho:8": "Thi múa “Trường xuân”", "thanhtho:11": "Thi điều hương an thần", "thanhtho:12": "Thi đấu cờ trước Thái hậu", "dongchi:1": "Thi vẽ cành mai “Cửu cửu tiêu hàn”", "dongchi:2": "Thi thơ “Tuyết dạ”", "dongchi:3": "Thi gói sủi cảo", "dongchi:4": "Thi cắm hoa mai", "dongchi:5": "Thi đàn bên lò than", "dongchi:6": "Thi đấu cờ ở noãn các", "dongchi:7": "Thi may áo bông cho cung nhân già", "dongchi:12": "Thi cắt hoa giấy dán cửa", "lapbat:1": "Thi nấu cháo lạp bát", "lapbat:2": "Thi vẽ tranh Phật", "lapbat:3": "Thi thơ “Lạp nhật”", "lapbat:4": "Thi cắt hoa giấy đón Tết", "lapbat:8": "Thi cắm mai, thủy tiên", "lapbat:9": "Thi đàn khúc thiền", "lapbat:11": "Thi điều trầm hương dâng Phật", "lapbat:12": "Thi tụng kinh, hát kệ", "giaothua:0": "Thi câu đối tiễn năm", "giaothua:1": "Thi thơ tiễn năm", "giaothua:2": "Thi đàn khúc tiễn năm", "giaothua:3": "Thi múa mừng năm mới", "giaothua:4": "Thi gói bánh đón năm mới", "giaothua:5": "Thi đấu cờ thâu đêm", "giaothua:11": "Thi hát khúc mừng xuân", "giaothua:12": "Thi kết túi lì xì"};
+function fShort7(k){return fName7(k).replace(/\s*\([^)]*\)\s*$/,"")}
+function fTitle7(k,vi){const V=(FV7[k]||[])[vi];return FT7[k+":"+vi]||(V&&SC7[V[1]]?"Thi "+SC7[V[1]].n:"Hội thi")}
 function ents7(p){return (p.e||[]).map(id=>RV(id)).filter(v=>v&&present7(v))}
 /* P(she places first) under the shared formula, by deterministic sampling */
 function cOdds7(kind,E,prep,meB,seed){const f=SC7[kind].f;const base=E.map(p=>f(p)+(prep.includes(p.id)?J71.prep:0));const mi=E.indexOf(S);if(mi<0)return 0;base[mi]+=meB;const r=rng7(seed);let w=0;const N=500;
@@ -93,7 +98,7 @@ function cRun7(k,kind,E,prep,meB,meIn,her){const L=cScore7(E.filter(p=>meIn||p!=
  const top=L.slice(0,3).map((x,i)=>`${["Nhất","Nhì","Ba"][i]} ${gn7(x.p)} (${x.s})`).join(", ");const mi=L.findIndex(x=>x.p===S);
  let me="";if(mi>=0){me=mi<3?"":` · ngươi hạng ${mi+1}/${L.length}`;if(mi===1||mi===2){apply({danh:1});me+=` · ngươi hạng ${mi+1}: Danh +1`}if(mi===L.length-1&&L.length>2){apply({danh:-1});me+=", đứng chót: Danh -1"}}
  const head=w===S?G7(`Ngươi đoạt giải ${SC7[kind].n}: ${pz7(pz)}.`):`${meIn?R7("Không thành:")+" ":""}${w.name} đoạt giải ${SC7[kind].n} (${pz7(pz)}).`;
- window.__j71rows=rowsH7(L,`${fName7(k)} · Hội thi ${SC7[kind].n}: kết quả`);
+ window.__j71rows=rowsH7(L,`${fShort7(k)} · Hội thi ${SC7[kind].n}: kết quả`);
  return `${head} Bảng: ${top}${me}.`}
 function fWho7(sub){return sub==="th"&&!S.thDead?pTH():pEmp()}
 PEND.j71f=pp=>{if(!S)return null;const k=pp.k,V=(FV7[k]||[])[pp.vi];if(!V)return null;const [t,sub,txt]=V;const fn=fName7(k);let A=pp.a!=null?RV(pp.a):null;if(pp.a!=null&&(!A||!A.alive))A=null;
@@ -149,8 +154,8 @@ function fMark7(k,vi){const j=j7s();(j.vu["f:"+k]=j.vu["f:"+k]||[]).push(vi);try
 /* a festival modal on the day (non-contest kinds; contests go through the invitation the tuần before) */
 function fMake7(k,force,noC,pp0){const vi=pp0?pp0.vi:force!=null?force:fvPick(k,noC);if(vi==null)return null;const V=FV7[k][vi];const pp=pp0||fPP7(k,vi);if(!pp)return null;if(V[0]==="C")return fInv7(k,pp,true);
  const d=mkP("j71f",pp);if(!d)return null;if(!pp0)fMark7(k,vi);
- const c=V[0]==="C"?` · Hội thi ${SC7[V[1]].n}`:V[0]==="W"?" · Đặt cược":V[0]==="G"?" · Trò vui":V[0]==="B"?" · Yến tiệc":V[0]==="P"?" · Dâng lễ":" · Lễ";
- return{t:fName7(k)+c,h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp,must:1}}
+ const c=V[0]==="C"?` · ${fTitle7(k,vi)}`:V[0]==="W"?" · Đặt cược":V[0]==="G"?" · Trò vui":V[0]==="B"?" · Yến tiệc":V[0]==="P"?" · Dâng lễ":" · Lễ";
+ return{t:fShort7(k)+c,h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp,must:1}}
 /* ---------- merit: shared reward pieces (each a real effect, each shown as a token) ---------- */
 function daiOk7(p){if(rkOf(p)>=7)return false;const t=p===S?j7s().pt:(p.j71pt==null?-99:p.j71pt);return S.turn-t>=J71.promoCd}
 function daiDo7(p){if(!daiOk7(p))return false;p.lastPromo=(p.lastPromo||0)-1;if(p===S)j7s().pt=S.turn;else p.j71pt=S.turn;return true}
@@ -325,7 +330,7 @@ function fInv7(k,pp,view){const V=FV7[k][pp.vi];const c=SC7[V[1]],fn=fName7(k),p
  const gain=`thành: đoạt giải, ${pz7(pz)}, có thể được ban thưởng, hạng nhì hoặc ba: Danh +1`,lose="hỏng: đứng chót thì Danh -1",kem="kèm: ngày hội tốn Sức -6, thắng thì các phi tần ghen +4";
  const set=me=>()=>{const j=j7s();const P=j.plans&&j.plans[k];if(P)P.me=me;log(me?`${fn}: ngươi ghi tên dự thi ${c.n}${me===2?", bỏ bạc mời thầy kèm trước":""}.`:`${fn}: ngươi không ghi tên dự thi ${c.n}.`)};
  const o=[{n:`Ghi tên dự thi ${c.n}`,fx:{},x:`${word(p1)} · ${gain} · ${lose} · ${kem}`,go:set(1)},{n:"Ghi tên, bỏ bạc mời thầy kèm trước",fx:{bac:-20},x:`${word(p2)} · ${gain} · ${lose} · ${kem}`,go:set(2)},{n:"Không dự",fx:{},x:"không được không mất",go:set(0)}];
- if(view)return{t:`${fn} · Lời mời thi ${c.n}`,h,opts:o,who:pEmp(),pid:"j71i",pp,must:1};return{who:pEmp(),t:h,o}}
+ if(view)return{t:`${fShort7(k)} · Lời mời: ${fTitle7(k,pp.vi)}`,h,opts:o,who:pEmp(),pid:"j71i",pp,must:1};return{who:pEmp(),t:h,o}}
 PEND.j71i=pp=>{if(!S||!FV7[pp.k]||!FV7[pp.k][pp.vi])return null;return fInv7(pp.k,pp,false)};
 /* plan the next festival a tuần ahead (variant + entrants fixed now, shown truthfully) */
 function fPlan7(){const n=nextT7();const f=festAt7(n.m,n.t);if(!f||!FV7[f.k])return null;const j=j7s();j.plans=j.plans||{};const P=j.plans[f.k];if(P&&P.y===n.y)return null;
@@ -335,11 +340,11 @@ function fPlan7(){const n=nextT7();const f=festAt7(n.m,n.t);if(!f||!FV7[f.k])ret
 function fDay7(k){const j=j7s();const P=j.plans&&j.plans[k];if(P&&P.y===S.year){const pp=P.pp,V=FV7[k][pp.vi];P.y=-1;
   if(V[0]!=="C")return fMake7(k,null,false,pp);
   const E=[S].concat(ents7(pp));const meIn=P.me>0&&present7(S);const meB=(P.me===2?J71.prep:0)+(P.pb||0);
-  if(meIn&&mgOn7())return{t:`${fName7(k)} · Hội thi ${SC7[V[1]].n}`,h:`<p>${V[2]}</p><p>Ngươi đã ghi tên. Phần của ngươi = phần tự chơi, cộng thêm theo tài nghệ (${det7(V[1],S)}) và chuẩn bị +${meB}.</p>`,who:pEmp(),must:1,
+  if(meIn&&mgOn7())return{t:`${fShort7(k)} · ${fTitle7(k,pp.vi)}`,h:`<p>${V[2]}</p><p>Ngươi đã ghi tên. Phần của ngươi = phần tự chơi, cộng thêm theo tài nghệ (${det7(V[1],S)}) và chuẩn bị +${meB}.</p>`,who:pEmp(),must:1,
    opts:[{n:"Vào thi (tự chơi phần thi)",fx:{suc:-6},x:`đoạt giải, ${pz7(prize7(k))}, hạng nhì hoặc ba: Danh +1 · hỏng: đứng chót thì Danh -1 · kèm: thắng thì các phi tần ghen +4`,go:()=>mgRun7({title:fName7(k),art:V[1],E,kindOf:()=>V[1],pr:pp.pr||[],meB,stakes:stk7(prize7(k),30),done:(L,sh)=>cFin7(k,V[1],L,sh)})},
     {n:"Bỏ thi",fx:{},x:"không được không mất",go:()=>{const L=cScore7(E.filter(p=>p!==S),()=>V[1],pp.pr||[],0);if(L.length)cFin7(k,V[1],L)}}]};
   if(meIn)apply({suc:-6});window.__j71rows="";const r=cRun7(k,V[1],E,pp.pr||[],meB,meIn);if(!r)return null;log(`${fName7(k)}: ${r}`);
-  return{t:`${fName7(k)} · Hội thi ${SC7[V[1]].n}`,h:`<p>${V[2]}</p>${meIn?"":"<p>Ngươi không ghi tên, chỉ đứng xem.</p>"}${window.__j71rows||""}`,who:pEmp(),must:1}}
+  return{t:`${fShort7(k)} · ${fTitle7(k,pp.vi)}`,h:`<p>${V[2]}</p>${meIn?"":"<p>Ngươi không ghi tên, chỉ đứng xem.</p>"}${window.__j71rows||""}`,who:pEmp(),must:1}}
  return fMake7(k,null,true)}
 /* practice between the invitation and the day: each practice act +3 preparation for every contest she entered (max +12) */
 const PRACT7=/^(Luyện cầm kỳ thi họa|Làm thơ dâng lên|Đánh đàn ở ngự hoa viên|Múa trong yến tiệc)/;
@@ -355,7 +360,7 @@ function mgRun7(o){/* o: {title, art, E (incl. S), kindOf, pr, meB, done(L)} */c
 function cFin7(k,kind,L,shown){const w=L[0].p,pz=prize7(k);ap(w,pz);if(w!==S&&roll(30))try{bestow(w,"contest")}catch(e){}const j=j7s();j.fn++;if(w===S){j.win++;ghenAll(4);try{if(roll(30))bestow(S,"contest")}catch(e){}}
  const mi=L.findIndex(x=>x.p===S);let me="";if(mi>0){if(mi<=2){apply({danh:1});me=` Ngươi hạng ${mi+1}: Danh +1.`}else me=` Ngươi hạng ${mi+1}/${L.length}.`;if(mi===L.length-1&&L.length>2){apply({danh:-1});me+=" Đứng chót: Danh -1."}}
  log(`${fName7(k)}: ${w===S?G7(`Ngươi đoạt giải ${SC7[kind].n}: ${pz7(pz)}.`):`${R7("Không thành:")} ${w.name} đoạt giải ${SC7[kind].n} (${pz7(pz)}).`}${me}`);
- if(!shown)Q.push({t:`${fName7(k)} · Hội thi ${SC7[kind].n}: kết quả`,h:rowsH7(L,`${fName7(k)} · bảng phần thi`),who:pEmp(),must:1})}
+ if(!shown)Q.push({t:`${fShort7(k)} · Hội thi ${SC7[kind].n}: kết quả`,h:rowsH7(L,`${fName7(k)} · bảng phần thi`),who:pEmp(),must:1})}
 function fxFin7(title,L,shown){if(!L.length)return;const w=L[0].p;ap(w,{sung:8,danh:3});if(roll(50))try{bestow(w,"contest")}catch(e){}const mi=L.findIndex(x=>x.p===S);
  if(w===S){ghenAll(8);log(`<span class="g">${title}: ${SC7[L[0].kind].n} của ngươi đứng đầu, Hoàng thượng ban thưởng.</span> Sủng +8 · Danh +3.`)}
  else{let r=`${mi>=0?R7("Không thành:")+" ":""}${title}: ${w.name} dâng ${SC7[L[0].kind].n} đứng đầu (Sủng +8, Danh +3).${mi>=0?` Ngươi hạng ${mi+1}/${L.length}.`:""}`;if(mi>=0&&mi===L.length-1&&L.length>2){apply({danh:-1});r+=" Ngươi đứng chót: Danh -1."}log(r)}
@@ -378,7 +383,7 @@ function fxInvite7(){const j=j7s();for(const kk in FX7){const F=FX7[kk];const m0
   const j=j7s();const me=j.fx&&j.fx[F.f]&&j.fx[F.f].y===S.year&&j.fx[F.f].a&&present7(S)?j.fx[F.f]:null;
   const E=liveRivals(true).filter(present7);if(me)E.unshift(S);if(E.length<2)return "";if(me)me.done=1;
   const meB=me?(me.pr?J71.prep:0)+(me.pb||0):0;
-  if(me&&mgOn7()){Q.push({t:`${title}`,h:`<p>Ngày ${title}. Ngươi đã ghi tên dâng ${SC7[me.a].n}; phần của ngươi = phần tự chơi, cộng thêm theo tài nghệ (${det7(me.a,S)}) và chuẩn bị +${meB}.</p>`,who:pEmp(),must:1,
+  if(me&&mgOn7()){Q.push({ev:1,t:`${title}`,h:`<p>Ngày ${title}. Ngươi đã ghi tên dâng ${SC7[me.a].n}; phần của ngươi = phần tự chơi, cộng thêm theo tài nghệ (${det7(me.a,S)}) và chuẩn bị +${meB}.</p>`,who:pEmp(),must:1,
     opts:[{n:"Vào thi (tự chơi phần thi)",fx:{suc:-6},x:"đứng đầu, Sủng +8, Danh +3, có thể được ban thưởng · hỏng: đứng chót thì Danh -1 · kèm: đứng đầu thì các phi tần ghen +8",go:()=>mgRun7({title,art:me.a,E,kindOf:p=>p===S?me.a:fxBest7(p,F.arts),pr:[],meB,stakes:Object.assign(stk7({sung:8,danh:3},50),{top3:[]}),done:(L,sh)=>fxFin7(title,L,sh)})},
      {n:"Bỏ thi",fx:{},x:"không được không mất",go:()=>fxFin7(title,cScore7(E.filter(p=>p!==S),p=>fxBest7(p,F.arts),[],0))}]});return ""}
   if(me)apply({suc:-6});
@@ -408,3 +413,7 @@ window.j71Merit=function(k){if(!S)return false;const m=k?mMake7(k):mFire7(true);
 window.j71Count=function(){const f={};let fv=0;for(const k in FV7){f[k]=FV7[k].length;fv+=FV7[k].length}const m={};let mv=0;for(const k in MF7){m[k]=MF7[k].v.length;mv+=MF7[k].v.length}return{fest:f,festTotal:fv,merit:m,meritTotal:mv}};
 window.j71Day=function(k){if(!S)return false;const m=fDay7(k);if(!m)return false;Q.unshift(m);showModal();return true};
 window.j71FeastInvite=function(kk){if(!S)return false;const d=mkP("j71x",{kk,y:S.year,sd:1+R(1e6)});if(!d)return false;Q.unshift({t:`${FX7[kk].n} · Lời mời`,h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp,must:1});showModal();return true};
+
+/* coordinator 15/11: every festival dialog shows its own festival picture as the wide header band (img/ev-fest-<k>-b.webp, 4:3) and carries
+   evId "fest:<k>" (EVENTS.json → img/ev-fest-<k>.webp, 3:4, for the book). */
+(function(){const d0=fDay7;fDay7=function(k){const m=d0.apply(this,arguments);try{if(m&&typeof m==="object"&&!m.headArt){m.headArt={src:`img/ev-fest-${k}-b.webp`,label:fName7(k)};m.evId=m.evId||("fest:"+k)}}catch(e){}return m}})();

@@ -32,7 +32,7 @@ Luôn bắt đầu từ bản CDN (`https://ctm-img.victoria-tntt.workers.dev/im
 ## SESSION 15/11 ~10:00–11:30Z (worktree /home/user/wt/scene-light, sparse: no dev/shots, dev/owner-shots)
 - Env note: system opencv is 5.0 (no CascadeClassifier) → tools needing Haar run with `.ahcache/venv/bin/python` (venv with opencv-python-headless<5).
 - DONE (pushed): merge main ca361b147; rain on graded scenes = warm soft light (jsl.js), Ngọc Thanh các checked xuân/hạ × 4 buổi (`.kown` filter none);
-  Tuần lục wide figures: kitBookFigClamp widens the figure column (≤ 66 % of page) on wide pages, phones keep shift-inside; KIT.md §41.
+  Tuần lục wide figures: kitBookFigClamp widens the figure column (≤ 66 % of page) on wide pages, phones keep shift-inside; KIT.md §56 (was §41 on the branch; renumbered by reviewer r7).
 - Neck "dark wedge" (owner 17:40Z, black blob on the neck under the ear): `dev/art/dark-residue.py` (Haar face gating + small upright dark
   triangle under the ear touching transparency) → 795 / 5 750 figs flagged; fix = make the wedge transparent. Work dir .ahcache/hb/neckfix.
   Portraits scanned too (.ahcache/hb/porneckfix).

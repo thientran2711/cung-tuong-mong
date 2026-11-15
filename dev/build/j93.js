@@ -79,6 +79,8 @@ function kitXamPlay(el,lot){if(!el||!lot)return null;const d=document.createElem
 /* ================= 3 KẾT QUẢ HÀNH ĐỘNG ================= */
 const KM_BAR=/^(Sủng|Danh|Sức|Đức|Sắc|Tài|Tâm cơ|Tai mắt|Lòng|Thái hậu|Hoàng hậu|Ân tình|Thiện cảm|Tin|Ghen|Oán)/;
 function kitResultFx(card){if(!card)return;const red=kmReduced();const ok=card.classList.contains("ok");
+ /* owner 11/15: no roll → no seal stamp (neutral "KẾT QUẢ" card) */
+ if(!ok&&!card.classList.contains("bad")){card.querySelectorAll(".kmseal").forEach(e=>e.remove());return}
  card.querySelectorAll(".kmseal,.kmfl").forEach(e=>e.remove());
  const seal=document.createElement("img");seal.className="kmseal"+(red?" km-skip":"");seal.src=KM_DIR+(ok?"mo-seal-thanh.webp":"mo-seal-bai.webp");seal.alt=ok?"Thành":"Bại";card.appendChild(seal);
  if(!red){card.classList.remove("km-thump");void card.offsetWidth;card.classList.add("km-thump")}
