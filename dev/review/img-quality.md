@@ -1,6 +1,6 @@
 # Kiểm duyệt: review/img-quality (badc75e45) gộp lên main — PASS có sửa của người duyệt
 
-Ngày 2026-11-15, người duyệt r6. Nhánh gộp: `review/img-quality-r6` trên origin/main **114887bc1** (gộp lần đầu trên 70c792d41, main đổi thì gộp lại).
+Ngày 2026-11-15, người duyệt r6. Nhánh gộp: `review/img-quality-r6` trên origin/main **d50f5f772** (gộp lần đầu trên 70c792d41, rồi 114887bc1, rồi d50f5f772 — có jkpor khung chân dung một luật; jimg không đụng).
 
 ## Gộp
 - `assemble.py`: danh sách module của main, thêm `jimg.js` cuối (sau j84) như nhánh. index.html / sw.js / assets.json dựng lại bằng `dev/site/build_site.sh`.
