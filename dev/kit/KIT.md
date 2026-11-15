@@ -275,6 +275,12 @@ Rules
 - CSS is scoped to `button.ka`, `.kb`, `.kr*`, and to `.cards/.pcb/.opts/.rbtn:has(> button.ka)`; other kit parts are untouched.
 - A gain that rounds to 0 is never shown as a gain: "Sắc +0" becomes "Sắc không đổi" in Ghi chú.
 - Not converted on purpose: the tiny map hotspot chips (`.mspot .acb`, j41) stay chips so the map is not covered; their odds use `oddsChip`.
+- Text integrity (owner 15/11 "act card text broken", review/act-text): values are split at TOP LEVEL only — `kSplitTop(str, /sep/y)` (j19)
+  never splits inside ( ) « » [ ] “ ” or a tag; `effList`, `kaModelStr`, `kaModel` all use it, so "(chơi 5 phần ra Khá, 9 phần ra Tinh xảo)"
+  stays one item. Sentiment words (`KRED/KHOST/KGOOD`, j19) match whole words only (`kWB`): "nguyệt", "thùa", "giữa", "truyện" are not
+  "nguy", "thù", "giữ", "truy". Ranges are words, never code: `kRangeW` (net in `kaRows`) makes "tiến bộ Thi +1..2" → "tiến bộ Thi một hai
+  phần", "Sủng +3..8" → "Sủng +3 đến +8"; producers write them that way (`kStepW(a,b)`). A colour follows the meaning, never the row:
+  a gain never sits in Kèm. Check: `dev/test/act-text-scan.js` (brk, dots, pct, frag, word1, sp2, glue, sign, twice, long).
 
 ---
 

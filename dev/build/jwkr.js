@@ -95,7 +95,7 @@ function wkrMat(kind,rid){const k=KWR.k,mode=KWR.mode,run=KWR.run,K=WK[kind],r=w
  for(let m=0;m<3;m++)O.push({n:`${r.n} · ${K.mn[m]}`,fx:K.mat[m]?{bac:-K.mat[m]}:{},x:`${wkOddsTxt(S,kind,m)}${K.per?" · phải dâng trong tuần":""}${K.fin?" · "+plain(fmt(K.fin)):""}`,
   go:()=>{wkPend={kind,mat:m,r:rid,subj:wkrSubj(kind,r)};run();if(!S.mg){wkPend=null;if(K.mat[m])apply({bac:K.mat[m]})}}});
  O.push({n:"Thôi",fx:{}});
- Q.push({act:1,t:`${r.n}: dùng vật liệu gì?`,who:pMe(),h:`<p>Phẩm = phần chơi (0..10) + ${a.n} bậc ${l}: +${l} + vật liệu (thường +${WMAT[0]}, tốt +${WMAT[1]}, quý +${WMAT[2]}).</p><p class="past">Thường dưới 6 · Khá 6 · Tinh xảo 10 · Tuyệt phẩm 14</p><p>Chỉ vật liệu quý mới thành Tuyệt phẩm. Vật liệu tốt, quý còn làm quà giá trị hơn và bán được giá hơn.${fee?` Phí thầy ${fee} bạc trả riêng.`:""}</p>`,opts:O})}
+ Q.push({act:1,t:`${r.n}: dùng vật liệu gì?`,who:pMe(),h:`<p>Phẩm = phần chơi (từ 0 đến 10) + ${a.n} bậc ${l}: +${l} + vật liệu (thường +${WMAT[0]}, tốt +${WMAT[1]}, quý +${WMAT[2]}).</p><p class="past">Thường dưới 6 · Khá 6 · Tinh xảo 10 · Tuyệt phẩm 14</p><p>Chỉ vật liệu quý mới thành Tuyệt phẩm. Vật liệu tốt, quý còn làm quà giá trị hơn và bán được giá hơn.${fee?` Phí thầy ${fee} bạc trả riêng.`:""}</p>`,opts:O})}
 wkAsk=function(k,mode,run){const a=ARTS.find(x=>x.k===k);if(!wkKindsOf(k).some(x=>WKR[x]))return;Object.assign(KWR,{k,mode,run,kind:KWR.k===k?KWR.kind:null});
  Q.push({t:`${mode==="prac"?"Tự luyện":"Học"} ${a.n}: làm gì?`,kit:{kind:"info",pick:1,html:wkrBody()},btn:"Đã hiểu",cls:"kwrd"});showModal();render()};
 document.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest("[data-kwrtab],[data-kwrgo]");if(!t||!document.querySelector("#modal .kshop.kwr"))return;e.stopPropagation();
@@ -106,7 +106,7 @@ document.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest
   const kind=Object.keys(WK).find(x=>WK[x].n.toLowerCase()===(m&&m[2]));if(!kind)return c;const L=wkrOpen(S,kind);if(!L.length)return c;
   const E=S.emp,lk=kind==="mon"&&E.known.dish?L.find(x=>x.like===E.likes.dish):kind==="bhoa"&&E.known.flower?L.find(x=>x.like===E.likes.flower):null;const r=lk||pick(L);
   c.t=kind==="mon"?`Tự tay nấu ${r.n}${lk?", món ngài thích":""}.`:kind==="bhoa"?`Cắm ${r.n.toLowerCase()}${lk?", loài hoa ngài yêu":""}.`:`${WK[kind].n}: ${r.n}.`;
-  c.x=c.x.replace(/tự tay chơi thì ra [^(]*\(/,`tự tay chơi thì ra ${r.n} (`);
+  /* the work's name is in the lead line; Được says "thành phẩm" (never the same fact twice, §31.21) */
   c.go=function(){const a=g.apply(this,arguments);try{if(S.mg&&S.mg.wk){S.mg.wk.r=r.id;S.mg.wk.subj=wkrSubj(kind,r);save()}}catch(e){}return a}}catch(e){}return c}})();
 /* kit sample page (§47 #kit): the pick tile of KIT 28.13e, drawn by the real wkrTile (one open recipe, one locked by level) */
 if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§28.13e",title:"Pick tile .kshc.kshpick (mở · chưa mở)",html:()=>`<div class="kshop kwr"><div class="kshg">${wkrTile("mon",WKR.mon[0],0)}${wkrTile("mon",WKR.mon[9],0)}</div></div>`});
