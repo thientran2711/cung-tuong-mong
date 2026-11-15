@@ -375,7 +375,8 @@ function wkBookPages(){const d=wkBookData();const date=kitDate(S.month,S.year,S.
 .kbk-measure{position:absolute;left:-99999px;top:0;visibility:hidden;pointer-events:none;contain:layout style}
 .kbk-measure>.kbk-pg{position:relative;width:100%;height:100%}
 .kbk-stage{display:flex;align-items:center;justify-content:center;width:100%;flex:0 0 auto}
-.kbk>.kbk-x{position:absolute;top:max(10px,env(safe-area-inset-top));right:max(12px,env(safe-area-inset-right));z-index:6;box-shadow:0 2px 8px #2a1a1240}
+/* review r6: ✕ above every sheet — kitBook stacks sheets at z = n*2-i (line ~111), so a book of 4+ sheets covered a z-index:6 ✕ */
+.kbk>.kbk-x{position:absolute;top:max(10px,env(safe-area-inset-top));right:max(12px,env(safe-area-inset-right));z-index:999;box-shadow:0 2px 8px #2a1a1240}
 .kbk-book{position:relative;width:var(--pw);height:var(--ph);transform-style:flat;touch-action:pan-y;user-select:none;-webkit-user-select:none;transition:transform .55s cubic-bezier(.3,.7,.3,1),opacity .16s}
 .kbk.spread .kbk-book{width:calc(var(--pw) * 2)}
 .kbk.spread .kbk-book.closed{transform:translateX(calc(var(--pw) * -.5))}

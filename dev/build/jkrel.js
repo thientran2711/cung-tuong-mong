@@ -39,7 +39,7 @@ function kitRelRows(p,snap){const R=[];if(!p)return R;const sj=kitRelSubj(p),ob=
  R.push({dir:"them",label:`${sj} → ta: thiện cảm`,now:null,d:null,kind:"good",unk:"chưa rõ"});return R}
 function kitRelSign(d){return d>0?"+"+d:d<0?"−"+Math.abs(d):"0"}
 function kitRelCls(d,kind){return !d?"n":(kind==="bad"?d<0:d>0)?"g":"r"}
-function kitRelTable(rows,o){o=o||{};if(!rows||!rows.length)return"";const head=o.head!==false;
+function kitRelTable(rows,o){o=o||{};if(!rows||!rows.length)return"";/* review r6: a stranger's table has no numbers → no Hiện nay / Tuần này heads (they sat over the label in the narrow layout) */const head=o.head!==false&&rows.some(r=>r.unk==null);
  return `<div class="krtw"><div class="krt" role="table">${head?`<span class="krt-h" role="columnheader"></span><span class="krt-h krt-n" role="columnheader">Hiện nay</span><span class="krt-h krt-n" role="columnheader">${o.dHead||"Tuần này"}</span>`:""}`+
   rows.map(r=>`<span class="krt-l" role="cell">${kitRelLab(r.dir,r.label)}</span>`+(r.unk!=null?`<span class="krt-u" role="cell">${r.unk}</span>`:
    `<span class="krt-v" role="cell">${r.now==null?"—":r.now<0?"−"+Math.abs(r.now):r.now}</span><span class="krt-d ${kitRelCls(r.d,r.kind)}" role="cell">${r.d?kitRelSign(r.d):"—"}</span>`)).join("")+`</div></div>`}
@@ -51,8 +51,8 @@ function kitRelDelta(label,dir,d,kind){d=KRT_INT(d)||0;return `<span class="krd"
 window.kitRelRows=kitRelRows;window.kitRelTable=kitRelTable;window.kitRelDelta=kitRelDelta;window.kitRelSubj=kitRelSubj;
 (function(){const st=document.createElement("style");st.id="kit-krt";st.textContent=`
 /* KIT §52 relation table: one grid, three aligned columns */
-.krtw{container-type:inline-size;min-width:0;max-width:100%}
-.krt{display:grid;grid-template-columns:minmax(min(8.5em,46%),1fr) max-content max-content;column-gap:.7em;row-gap:.18em;align-items:baseline;
+.krtw{container-type:inline-size;min-width:0;max-width:100%} /* .krt alone is also the origin-roulette tile (jk2b .kroul .krt): always scope through .krtw */
+.krtw>.krt{display:grid;grid-template-columns:minmax(min(8.5em,46%),1fr) max-content max-content;column-gap:.7em;row-gap:.18em;align-items:baseline;
  margin:.2em 0 .45em;padding:.35em .55em;border:1px solid var(--k-hair,#e6d3ac);border-radius:var(--k-rad,8px);background:var(--k-card,#fffaf0);
  font-size:.86em;line-height:1.25;font-variant-numeric:tabular-nums}
 .krt-h{font-size:.68em;font-weight:600;letter-spacing:.02em;text-transform:uppercase;color:var(--k-lab,#8a7350);padding-bottom:.1em;border-bottom:1px solid var(--k-hair,#e6d3ac)}
@@ -62,7 +62,7 @@ window.kitRelRows=kitRelRows;window.kitRelTable=kitRelTable;window.kitRelDelta=k
 .krt-d{font-weight:700}.krt-d.g{color:var(--good,#2f7a46)}.krt-d.r{color:var(--bad,#b0332a)}.krt-d.n{color:var(--k-lab,#8a7350);font-weight:400}
 .krt-u{grid-column:1 / -1;min-width:0;text-align:left;padding-left:.8em;white-space:normal;overflow-wrap:anywhere;color:var(--k-lab,#8a7350);font-style:italic}
 /* a narrow column (phone page, iPad spread): the label takes its own line, the two numbers stay in their aligned columns under it */
-@container (max-width:240px){.krt{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.krt>.krt-h:first-child{display:none}.krt-l{grid-column:1 / -1;padding-top:.15em}.krt-n,.krt-v,.krt-d{text-align:left}.krt-u{grid-column:1 / -1;text-align:left}}
+@container (max-width:240px){.krtw>.krt{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.krtw>.krt>.krt-h:first-child{display:none}.krt-l{grid-column:1 / -1;padding-top:.15em}.krt-n,.krt-v,.krt-d{text-align:left}.krt-u{grid-column:1 / -1;text-align:left}}
 .krd{white-space:nowrap;font-weight:600}.krd .krel{font-weight:600}.krd b.g{color:var(--good,#2f7a46)}.krd b.r{color:var(--bad,#b0332a)}.krd b.n{color:var(--ink,#3a2a1a)}
 `;document.head.appendChild(st)})();
 /* KIT SAMPLE PAGE §47 (jkitpage loads later in the same script): §52 relation table + inline deltas, §57 number deltas */
