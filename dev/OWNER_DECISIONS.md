@@ -471,3 +471,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (14:30Z) Ô tâm trạng phải hiện các nguyên nhân đang tác động (nàng và mọi NPC).
 - (14:35Z) Trang điểm: "đẹp" giảm má hồng chút; "diêm dúa" = má hồng của bản "đẹp" hiện tại đậm hơn chút (môi đậm hơn, phấn bóng hơn), vẫn đẹp, KHÔNG như hề.
 - (14:40Z) Phản ứng về y phục/trang điểm (chủ tiệc nghiêm phạt mặt mộc, người hay ghen, Hoàng thượng thích/không thích, phi tần trêu diêm dúa…) phải HIỆN KHUNG SỰ KIỆN, không âm thầm trong nhật ký. Mỗi dịp tối đa 1–2 khung, phần còn lại gộp.
+- (14:50Z) LUẬT: sếp báo một lỗi thì sửa CẢ NHÓM (vd. vật liệu đắt không đáng tiền: rà mọi tài nghệ/món + mọi lựa chọn trả thêm tiền để được bản tốt hơn). Ghi vào WORKER_BRIEF; điều phối nhắc trong mỗi lần giao.
