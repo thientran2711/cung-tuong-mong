@@ -416,3 +416,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (11:35Z) Chân dung trong khung: THÂN người phải nằm giữa khung theo chiều ngang (nhiều ảnh lệch trái, hở mép phải); đầu có thể hơi lệch. Giữ tỷ lệ, chỉ dời.
 - [ ] (11:40Z) Tranh Thỉnh an Thái hậu/Hoàng hậu sai: dáng cúi kiểu hiện đại, váy bó kiểu sườn xám → vẽ lại dáng vạn phúc (tay chụm bên hông, khuỵu gối nhẹ, cúi đầu) + áo cung trang rộng tay, váy suông; rà mọi tranh hành sự có váy bó/cúi kiểu hiện đại.
 - [ ] (11:45Z) Bấm ra ngoài để tắt thẻ kết quả (THÀNH) bị lọt xuống nút bên dưới → chạy luôn hành sự. Luật: mọi thẻ đang mở, cú bấm ngoài đầu tiên CHỈ đóng thẻ, không lọt xuống (kit-close sửa + test).
+- [ ] (11:50Z) Tài nghệ Nấu nướng: chưa chơi đã hiện BẠI, trừ Sức −15, Bạc −6, mất hết khắc buổi → hành sự bị chạy 2 lần (nghi bấm lọt). Luật: mỗi lần bấm chỉ chạy 1 lần; trò chơi chưa chơi thì không trừ, không có kết quả (act-audit sửa + test).
