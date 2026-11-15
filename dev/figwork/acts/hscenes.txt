@@ -245,3 +245,51 @@ khap-cung-don|0|clusters of maids' green sleeves leaning together in whispers al
 loi-don-khong-ai-tin|0|two maids' sleeves turning away with a dismissive wave of the hand, leaving a lone maid's green sleeve standing in an empty corridor
 loi-don-phung-phi|0|maids' hands pointing at an open brocade chest overflowing with gold jewelry and silks, whispering sleeves around it
 ly-gian-khong-tin|0|the Emperor's yellow sleeve flicked away dismissively, before it a figure's dark sleeves bowed low, a palace study desk
+ngam-doc-dan|0|a thin pale hand resting limply on an embroidered quilt at the edge of a bed, a bowl of dark medicine on the bedside stand, drawn curtains
+trung-doc|0|a court physician's dark green sleeve kneeling at a bedside taking the pulse of a limp hand, a maid's green sleeves clutching a cloth in alarm, an overturned cup (no blood)
+trung-doc-thuoc-giai|0|a maid's hand lifting a small porcelain antidote vial from an open chest, her other hand supporting her mistress's pink-sleeved hand holding a cup
+thuoc-doc-bi-phat-hien|0|a physician's hand in a dark green sleeve holding up a silver hairpin tester turned black over a bowl of medicine
+hoang-hau-bang-ha-tra|1|an overturned teacup spilled across a lacquer table, pale silk curtains let down, kneeling servants' sleeves bowed low on the floor in mourning
+cai-ba-do|0|a middle-aged midwife's hands in a plain brown sleeve carrying a wooden case of tools through a palace gate, red lanterns
+pha-hoc-lo|0|a tutor's hand in a dark grey scholar's sleeve taking a pouch of silver at a back door, a book dropped on the threshold
+to-giac-truoc-hh|0|a kneeling consort's hands raising a folded letter as evidence toward the Empress's red phoenix brocade sleeve on a phoenix-carved chair
+to-giac-truoc-ht|0|a kneeling consort's hands raising a sealed blank envelope toward the Emperor's yellow dragon sleeve in a palace hall
+to-giac-truoc|0|a kneeling consort's hands presenting a small bundle of evidence toward an elder lady's dark brocade sleeve on a carved seat
+to-giac-khong-thanh|0|the Empress's red phoenix brocade sleeve sweeping a letter of evidence aside on a table, a kneeling consort's bowed pink sleeves before her
+to-loi-voi-chu|0|a maid's hand pointing toward another maid's sleeve slumped asleep against a pillar, a mistress's pink sleeve listening
+to-khong-tin|0|a mistress's hand in a pink sleeve raised in a firm refusal, a maid's green sleeves lowered in front of her
+ke-toi|0|a consort's hand in a pink sleeve gesturing as she speaks beside a carved seat, an elder lady's dark brocade sleeve resting sternly on the armrest
+hh-nghe-giang|0|the Empress's hands in red phoenix brocade sleeves carrying a folded memorial along a hall toward the Emperor's yellow sleeve at a desk
+hh-gat-loi|0|the Empress's hand in a red phoenix brocade sleeve waving dismissively, a figure's bowed sleeves backing away
+hh-bac-chung-cu|0|a letter of evidence laid back on a lacquer tray, sleeves withdrawing from it with a bow, the Empress's red brocade hem nearby
+trinh-len-ht|0|a kneeling consort's hands raising a sealed letter toward the Emperor's yellow sleeve
+so-lo-chuoc-chung-cu|1|a nervous hand pushing silver ingots across a table toward another hand that holds a sealed letter, candle
+khong-chiu-dua-bac|0|hands tearing a threatening letter in two, scraps falling, a pink sleeve turning away
+giu-chung-cu|1|hands placing a bundle of letters tied with string into a secret box under a lifted floorboard, candlelight
+ghi-nho-chung-cu|1|a consort's hand writing abstract lines in a small notebook under an oil lamp, pink sleeve
+cat-giu-con-tin|1|a hand closing a small lacquer box with a brass lock over a folded love letter, candle glow
+chung-cu-bi-huy|1|a bundle of papers burning in a bronze brazier, a eunuch's dark sleeve standing beside watching
+hop-muu|1|three ladies' sleeves in pink, red and blue leaning together over a small table in a dark room, hands close around a single candle, plotting
+hop-muu-lo|0|three kneeling ladies' bowed sleeves on the floor before the Empress's red phoenix brocade hem, a lacquer tray of evidence between them
+bi-phat-giac-dinh|0|a maid's hand seizing a wrist in the act of dropping powder into a teacup, the small paper packet caught in the grip
+tu-thong-ban-chet|1|a folded white silk sash on a black lacquer tray before the dark doorway of a silent hall, no people
+dut-bac-bit-mieng|1|a consort's hand pressing silver ingots into a man's rough hand in a plain brown sleeve, her other hand raised in a hushing gesture, candle
+diet-khau|1|a stone well behind a palace at night, a dark eunuch's cap floating on the black water, moonlight, no body
+thai-giam-chet-duoi|1|guards' armored hands holding lanterns around the mouth of a stone well at night, ropes coiled on the ground
+dut-bac-dap-don|0|a consort's hand passing a pouch of silver to a eunuch cook's hand in a dark sleeve and apron beside steaming kitchen pots
+tim-ke-tung-tin|1|a consort's hand raising a lantern along a row of maids' green sleeves standing in line in a dark corridor
+de-loi-don-lan|0|a fortune teller's hand in a grey Taoist sleeve raised in proclamation in a courtyard, maids' green sleeves gathered to listen, a consort's pink sleeve far in the background
+khiem-nhuong-choi-tu|0|a consort's hand in a pink sleeve raised modestly in polite refusal before a fortune teller's grey sleeve holding a bamboo fortune stick
+bo-bac-chuoc|0|a consort's hand handing a pouch of silver across a counter to a jailer's dark sleeve, a maid's thin hands in green sleeves behind iron bars being released
+bo-mac|0|a consort's hand in a pink sleeve pulling a lattice window shut, her sleeve turning away from it
+tra-bac-thay|0|a consort's hand placing a pouch of silver on a table, an old physician's hands in a dark green sleeve folded in a grateful bow
+diet-ke-tong-tien|1|a hooded dark cloak edge waiting in a narrow dark alley between palace walls, a lantern just extinguished, a thin trail of smoke
+de-ong-tu-lo|0|an old physician's dark green sleeve and medicine box crossing an empty courtyard alone, long shadows
+mua-chuoc-khtg|0|a consort's hand sliding silver toward an astronomer official's dark blue sleeve beside a bronze armillary sphere
+mua-chuoc-ccti|0|a consort's hand handing silver to an official's dark sleeve holding a closed ledger book
+can-rang-chiu|0|a consort's hand gripping a closed folding fan tightly, pink sleeve soaked, rain falling in an empty courtyard
+dung-ra-noi-do|0|a consort's pink sleeve stepping forward with an open hand extended in defense, beside another lady's bowed blue sleeves
+do-them-dau|0|a consort's hand fanning with a round silk fan, beside the Empress's red phoenix brocade sleeve clenched on an armrest, a kneeling figure's sleeves below
+im-lang|0|a consort's hands holding a closed folding fan lowered in front of her pink skirt, still and quiet
+quy-xin-tha-cho-nang|0|a kneeling consort's clasped pleading hands before the Empress's red phoenix brocade hem, another lady's sleeves kneeling in punishment beside
+dung-xem|0|a consort's pink sleeve standing calmly with folded hands, in the background a lady's sleeves kneeling in punishment on stone
