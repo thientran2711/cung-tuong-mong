@@ -31,6 +31,8 @@ Reviewed: review/j83-variety a45a12dc1 (rebased on main 70c792d4). Merged onto o
 | art spot-check (16 pictures, 7 kinds) | no Chinese characters (sutra / poem / calligraphy are abstract strokes), calm faces on the dancers, clear grade progression |
 | paid-scan.py | main 94ea008a2: 595 options / 376 lists, 6 dominated paid options → branch: 1 (j96 "Tin nàng, nhờ nàng canh cửa": its `go` also gives the maid loyalty +8 / trust +10, the free option −12 loyalty; not a fault) — numbers confirmed |
 | paid-tiers.js | 0 FAIL, 0 page errors (handmade 11 kinds × 3 levels, lessons, veil 6 bạc, shop groups) |
+| kit-close.js 755x1000@2 (+ old save) | same result as origin/main 5e491704d on every case (158 fields equal), 0 page errors, old save ok |
+| kit-page.js (5 sizes) | 9 samples ok (incl. new §28.13e), 0 page errors |
 | event changes vs cost mode | the 5 j67 event options only change their `w:` numbers; j67 dialogs stay events (pid, cost mode: only Tốn + hint shown), opt-scan: our dialogs classified (works / material = act), the one unclassified (`jgift.js KM_EMPACT`) is the same on main |
 
 ## Notes (not blocking)
@@ -38,3 +40,5 @@ Reviewed: review/j83-variety a45a12dc1 (rebased on main 70c792d4). Merged onto o
   vs "Bộ diêu kim phượng 150 (59)" looks inverted; the real wear stats (j92) rise with price (5/2 → 6/3 → 8/4). A cleaner metric would read
   the j92 stats for every hairpin / robe.
 - No rotate prompt at 390x844 on main either (game draws portrait); not this branch.
+
+Result: **PASS** (see the head commit of review/j83-variety-r6).
