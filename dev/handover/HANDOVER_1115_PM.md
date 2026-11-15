@@ -15,7 +15,7 @@
 - PASS là đẩy main không cần hỏi. Đẩy ảnh lên Cloudflare không cần hỏi. Vẽ ảnh thiếu/sai không cần hỏi.
 - Ảnh: Magnific gpt-2-6 DUY NHẤT, folder ba4aecfe-efce-47e2-b53f-30d292091886, luôn truyền folderReference. Ảnh ở CDN, không vào git.
 - Không có hai người duyệt cùng xếp hàng một nhánh. Nhiều người duyệt chạy song song, nhánh nào qua trước lên trước.
-- Đặt nhắc 30 phút bằng send_later (canh thợ).
+- Nhắc canh thợ 1 tiếng một lần (sếp 15/11 ~18:05Z), không 30 phút.
 - Giới hạn 20 subagent cùng lúc. Khi đầy thì gửi tiếp cho thợ đã xong (SendMessage tự resume).
 
 ## CDN
