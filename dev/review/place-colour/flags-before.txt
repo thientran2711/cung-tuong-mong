@@ -1,0 +1,158 @@
+states 968 flagged 151
+  cool weather wash: 96
+  brightness changed: 34
+  grey cold wash: 31
+  night looks like day: 4
+  figure tinted [np.float64(227.1), np.float64(194.9), np.float64(170.5)]: 2
+
+home-ha-2-2: brightness changed dL +9.3
+home-dong-0-2: cool weather wash
+home-dong-1-2: cool weather wash
+home-dong-2-0: brightness changed dL +9.1
+home-dong-2-2: cool weather wash
+home-dong-3-2: cool weather wash
+vuon-ha-2-2: brightness changed dL +8.2
+vuon-dong-0-2: cool weather wash
+vuon-dong-1-2: cool weather wash
+vuon-dong-2-2: cool weather wash
+vuon-dong-3-0: night looks like day L 52.6
+vuon-dong-3-2: cool weather wash
+thu-ha-2-2: brightness changed dL +8.3
+thu-dong-0-2: cool weather wash
+thu-dong-1-2: cool weather wash
+thu-dong-2-0: brightness changed dL +8.4
+thu-dong-2-2: cool weather wash
+thu-dong-3-2: cool weather wash
+dtd-ha-2-2: grey cold wash (dC -3.6 db -2.8)
+dtd-dong-0-2: cool weather wash
+dtd-dong-1-0: figure tinted [np.float64(227.1), np.float64(194.9), np.float64(170.5)]
+dtd-dong-1-2: cool weather wash
+dtd-dong-2-0: grey cold wash (dC -3.5 db -2.4)
+dtd-dong-2-2: cool weather wash
+dtd-dong-3-2: cool weather wash
+tn-ha-2-2: brightness changed dL +8.4
+tn-dong-0-2: cool weather wash
+tn-dong-1-2: cool weather wash
+tn-dong-2-0: brightness changed dL +8.7
+tn-dong-2-2: cool weather wash
+tn-dong-3-2: cool weather wash
+kn-ha-1-2: grey cold wash (dC -3.4 db -2.1)
+kn-ha-2-2: grey cold wash (dC -3.9 db -2.8)
+kn-ha-3-2: night looks like day L 52.3
+kn-dong-0-2: cool weather wash
+kn-dong-1-0: grey cold wash (dC -3.6 db -1.9)
+kn-dong-1-2: cool weather wash
+kn-dong-2-0: grey cold wash (dC -4.3 db -2.8)
+kn-dong-2-2: cool weather wash
+kn-dong-3-2: cool weather wash
+tyv-ha-2-2: grey cold wash (dC -3.4 db -2.3); brightness changed dL +8.2
+tyv-dong-0-2: cool weather wash
+tyv-dong-1-0: grey cold wash (dC -3.3 db -1.6)
+tyv-dong-1-2: cool weather wash
+tyv-dong-2-0: grey cold wash (dC -4.3 db -2.6); brightness changed dL +8.4
+tyv-dong-2-2: cool weather wash
+tyv-dong-3-2: cool weather wash
+ksp-xuan-2-2: grey cold wash (dC -4.7 db -2.7); brightness changed dL +12.3
+ksp-ha-0-2: brightness changed dL +8.6
+ksp-ha-2-2: grey cold wash (dC -3.0 db -1.6); brightness changed dL +9.8
+ksp-dong-0-0: brightness changed dL +8.8
+ksp-dong-0-2: cool weather wash
+ksp-dong-1-2: cool weather wash
+ksp-dong-2-0: grey cold wash (dC -3.8 db -1.8); brightness changed dL +9.7
+ksp-dong-2-2: cool weather wash
+ksp-dong-3-2: cool weather wash
+rp3-dong-0-2: cool weather wash
+rp3-dong-1-2: cool weather wash
+rp3-dong-2-0: grey cold wash (dC -3.4 db -1.5); brightness changed dL +8.4
+rp3-dong-2-2: cool weather wash
+rp3-dong-3-2: cool weather wash
+rp2-dong-0-2: cool weather wash
+rp2-dong-1-2: cool weather wash
+rp2-dong-2-0: grey cold wash (dC -3.4 db -1.5); brightness changed dL +8.4
+rp2-dong-2-2: cool weather wash
+rp2-dong-3-2: cool weather wash
+rp0-dong-0-2: cool weather wash
+rp0-dong-1-2: cool weather wash
+rp0-dong-2-0: grey cold wash (dC -3.4 db -1.5); brightness changed dL +8.4
+rp0-dong-2-2: cool weather wash
+rp0-dong-3-2: cool weather wash
+rp1-dong-0-2: cool weather wash
+rp1-dong-1-2: cool weather wash
+rp1-dong-2-0: grey cold wash (dC -3.4 db -1.5); brightness changed dL +8.4
+rp1-dong-2-2: cool weather wash
+rp1-dong-3-2: cool weather wash
+home-xuan-2-1: brightness changed dL +8.6
+home-dong-0-3: cool weather wash
+home-dong-1-3: cool weather wash
+home-dong-2-1: brightness changed dL +9.1
+home-dong-2-3: cool weather wash
+home-dong-3-3: cool weather wash
+vuon-dong-0-3: cool weather wash
+vuon-dong-1-3: cool weather wash
+vuon-dong-2-3: cool weather wash
+vuon-dong-3-1: night looks like day L 52.6
+vuon-dong-3-3: cool weather wash
+thu-xuan-2-1: brightness changed dL +8.1
+thu-dong-0-3: cool weather wash
+thu-dong-1-3: cool weather wash
+thu-dong-2-1: brightness changed dL +8.4
+thu-dong-2-3: cool weather wash
+thu-dong-3-3: cool weather wash
+dtd-xuan-2-1: grey cold wash (dC -3.2 db -2.5)
+dtd-dong-0-3: cool weather wash
+dtd-dong-1-1: figure tinted [np.float64(227.1), np.float64(194.9), np.float64(170.5)]
+dtd-dong-1-3: cool weather wash
+dtd-dong-2-1: grey cold wash (dC -3.5 db -2.4)
+dtd-dong-2-3: cool weather wash
+dtd-dong-3-3: cool weather wash
+tn-xuan-2-1: brightness changed dL +8.1
+tn-dong-0-3: cool weather wash
+tn-dong-1-3: cool weather wash
+tn-dong-2-1: brightness changed dL +8.7
+tn-dong-2-3: cool weather wash
+tn-dong-3-3: cool weather wash
+kn-xuan-1-1: grey cold wash (dC -3.6 db -2.3)
+kn-xuan-2-1: grey cold wash (dC -3.9 db -2.7)
+kn-xuan-3-1: night looks like day L 52.8
+kn-dong-0-3: cool weather wash
+kn-dong-1-1: grey cold wash (dC -3.6 db -1.9)
+kn-dong-1-3: cool weather wash
+kn-dong-2-1: grey cold wash (dC -4.3 db -2.8)
+kn-dong-2-3: cool weather wash
+kn-dong-3-3: cool weather wash
+tyv-xuan-1-1: grey cold wash (dC -3.0 db -1.5)
+tyv-xuan-2-1: grey cold wash (dC -4.0 db -2.7); brightness changed dL +8.4
+tyv-dong-0-3: cool weather wash
+tyv-dong-1-1: grey cold wash (dC -3.3 db -1.6)
+tyv-dong-1-3: cool weather wash
+tyv-dong-2-1: grey cold wash (dC -4.3 db -2.6); brightness changed dL +8.4
+tyv-dong-2-3: cool weather wash
+tyv-dong-3-3: cool weather wash
+ksp-xuan-0-1: brightness changed dL +8.1
+ksp-xuan-2-1: brightness changed dL +9.0
+ksp-dong-0-1: brightness changed dL +8.8
+ksp-dong-0-3: cool weather wash
+ksp-dong-1-3: cool weather wash
+ksp-dong-2-1: grey cold wash (dC -3.8 db -1.8); brightness changed dL +9.7
+ksp-dong-2-3: cool weather wash
+ksp-dong-3-3: cool weather wash
+rp3-dong-0-3: cool weather wash
+rp3-dong-1-3: cool weather wash
+rp3-dong-2-1: grey cold wash (dC -3.4 db -1.5); brightness changed dL +8.4
+rp3-dong-2-3: cool weather wash
+rp3-dong-3-3: cool weather wash
+rp2-dong-0-3: cool weather wash
+rp2-dong-1-3: cool weather wash
+rp2-dong-2-1: grey cold wash (dC -3.4 db -1.5); brightness changed dL +8.4
+rp2-dong-2-3: cool weather wash
+rp2-dong-3-3: cool weather wash
+rp0-dong-0-3: cool weather wash
+rp0-dong-1-3: cool weather wash
+rp0-dong-2-1: grey cold wash (dC -3.4 db -1.5); brightness changed dL +8.4
+rp0-dong-2-3: cool weather wash
+rp0-dong-3-3: cool weather wash
+rp1-dong-0-3: cool weather wash
+rp1-dong-1-3: cool weather wash
+rp1-dong-2-1: grey cold wash (dC -3.4 db -1.5); brightness changed dL +8.4
+rp1-dong-2-3: cool weather wash
+rp1-dong-3-3: cool weather wash

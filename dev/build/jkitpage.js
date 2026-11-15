@@ -33,6 +33,10 @@ KIT_SAMPLES.push(
 /* kit-fig2 parts (review r6): §48 kitNameRank, §49.1 kitRelRow (§50 kitEventDp is a live dialog: see dev/test/event-dp.js) */
 KIT_SAMPLES.push(
  {id:"§48",title:"kitNameRank: phẩm + tên trên hình",html:()=>`<div class="kitpg-row">${kitNameRank("Quý nhân","Khương Mạn Châu","#3f62a8")}${kitNameRank("Đáp ứng","Trịnh Ngọc Hành","#9c8f74")}${kitNameRank("","Hoàng thượng","#b08a2a")}</div>`},
+ {id:"§48.1",title:"Danh hiệu phẩm (kitRankTone): mọi phẩm · nền sáng, nền tối, cảnh",html:()=>{const L=[["Đáp ứng","Trịnh Ngọc Hành"],["Thường tại","Lâm Uyển"],["Quý nhân","Khương Mạn Châu"],["Tần","Tô Vân"],["Phi","Mộ Dung Yên"],["Quý phi","Hàn Hồng Diệp"],["Hoàng quý phi","Thẩm Khinh Vũ"],["Hoàng hậu","Phó Thanh"],["Phế phi · lãnh cung","Lục Ca"],["Thái hậu","Thái hậu"],["Hoàng thượng","Hoàng thượng"],["Cung nữ thô sử","Tiểu Đào"],["Cung nữ","Hồng Ngọc"],["Đại cung nữ","Thanh Trúc"],["Chưởng sự cô cô","Tần cô cô"],["Nữ quan","Bạch Lộ"],["Ma ma","Quế ma ma"],["Tiểu thái giám","Tiểu Lộc"],["Thái giám","Phúc An"],["Thủ lĩnh thái giám","Lý Trung"],["Tổng quản thái giám","Lý Liên Anh"],["Thái y","Thẩm Minh"],["Thị vệ","Mạc Thừa Vũ"],["Lễ bộ thượng thư","Vương Tuấn"],["Hoàng tử","Dận Hữu"],["Công chúa","Minh Châu"],["Người lạ","???"]];
+  const row=cls=>`<div class="kitpg-row ${cls}" style="padding:10px;border-radius:8px;${cls==="krs"?"background:linear-gradient(#26304a,#121624)":"background:#fbf3e2"}">${L.map(([r,n])=>kitNameRank(r,r===n?"":n)).join("")}</div>`;
+  const me=cls=>`<div class="kitpg-row ${cls}" style="margin-top:8px;padding:10px;border-radius:8px;${cls==="krs"?"background:linear-gradient(#26304a,#121624)":"background:#fbf3e2"}">${kitNameRank("Tần","Tên của nàng (48.1b)","",true)}${kitNameRank("Tần","Người khác","")}</div>`;
+  return row("")+`<div style="height:8px"></div>`+row("krs")+me("")+me("krs")}},
  {id:"§49.1",title:"kitRelRow: thiện cảm · oán · sủng · chưa rõ",html:()=>`<div style="max-width:320px">${kitRelRow({kind:"quy",a:"Hoàng hậu",b:"ta",v:-24})}${kitRelRow({kind:"oan",a:"Ta",b:"Hoàng hậu",v:12})}${kitRelRow({kind:"pos",a:"Hoàng thượng",b:"ta",what:"sủng",gloss:"Sủng",v:41})}${kitRelRow({kind:"quy",a:"Tô Lan Chi",b:"Ôn Ngưng Sương",v:null})}</div>`});
 /* §53 (KIT 28.6 event options + §7 result card parts) (review/opt-render, moved here by reviewer r7 — ONE kit sample page). The event option is the
    game's own modal option markup (button.opt + dilLine) run through kaNorm → kitHideOut (data-khide), so hint + risk come from the real kitHint. */
@@ -48,6 +52,9 @@ KIT_SAMPLES.push(
  {id:"§53",title:"Event option in cost mode: Tốn + kitHintRow + kitRisk (no Tốn when free)",html:kitPgEvOpts},
  {id:"§53",title:"kitResultSeal: THÀNH · HỎNG · KẾT QUẢ",html:kitPgSeals},
  {id:"§53",title:"kitKemRow (tap for names)",html:kitPgKem});
+/* §27.1 the Tuần lục cover title picture (review/book-title): the real cover label slot of kitBook, at a fixed small size */
+KIT_SAMPLES.push({id:"§27.1",title:"KBK_TITLE_IMG: tên sổ viết tay trên nhãn bìa (ấn Trân nữ)",html:()=>typeof KBK_TITLE_IMG==="undefined"?"":
+ `<div class="kitpg-row">${Object.entries(KBK_TITLE_IMG).map(([t,u])=>`<div class="kitpg-bkl"><img src="${u}" alt="${t}"></div>`).join("")}</div>`});
 (function(){const st=document.createElement("style");st.id="kit-page";st.textContent=`
 #kitpage{position:fixed;inset:0;z-index:2147483000;overflow:auto;background:var(--panel,#fffaf0);padding:0 16px 24px;color:var(--ink)}
 #kitpage[hidden]{display:none}
@@ -57,6 +64,8 @@ KIT_SAMPLES.push(
 .kitpg-s{margin:14px 0}.kitpg-b{padding:10px;border:1px dashed var(--k-hair,#e6d3ac);border-radius:var(--k-rad,8px)}
 .kitpg-row{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-start}
 .kitpg-seal .rtoast.karesult{position:static;transform:none;opacity:1;display:inline-flex;padding:4px 8px}
+.kitpg-bkl{width:64px;height:400px;padding:0;background:linear-gradient(#efe2c4,#e3d1aa);border:2px solid #6b5a44;outline:1px solid #6b5a44;outline-offset:-6px}
+.kitpg-bkl img{display:block;width:calc(100% - 12px);height:calc(100% - 20px);margin:10px auto 0;object-fit:contain;object-position:50% 0}
 `;document.head.appendChild(st)})();
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-kitsample]");if(b){e.stopPropagation();e.preventDefault()}},true);
 /* §32.1 / §32.12 the top bar's stat row (owner 15/11 ~17:50Z: LEFT Sắc · Tài · Tâm cơ · Đức · Danh · Sủng | RIGHT Bạc · Sức), review/header-danh */
@@ -70,3 +79,6 @@ KIT_SAMPLES.push({id:"§28.1",title:"pcPort · mdH: khung chân dung đủ ngọ
  return `<div class="kitpg-row" style="align-items:flex-start"><div class="pc" style="overflow:visible;max-width:240px"><div class="pcl">${pcPort(me)}</div></div>`+
   `<div style="display:flex;gap:10px;align-items:flex-start;flex-wrap:wrap">${mdH(em,"xs")}${mdH(th,"sm")}${mdH(pv0,"")}${mdH(me,"big")}</div></div>`+
   `<div class="pcb rows" style="max-width:360px">${[em,pv0,me].map(f=>`<div class="pcrow"><span>${mdH(f,"xs")} ${f.rw||""}: dòng tin mẫu</span></div>`).join("")}</div>`}});
+
+/* §28.19b corner mark (review/mood-dialog) */
+KIT_SAMPLES.push({id:"§28.19b",title:"kitSceneArt o.mark: dấu tâm trạng ở góc tranh",html:()=>`<div class="kitpg-row">${[["vui","img/ev-mood-vui.webp","Vui"],["lo","img/ev-tan-phong.webp","Khương Lạc Anh được tấn phong"],["m-gian","img/ev-mood-gian.webp","Giận"],["an","img/ev-mood-an.webp","Chưa rõ lòng người"]].map(([k,src,lab])=>`<div style="width:220px">${kitSceneArt(src,lab,{shape:"wide",mark:`img/kit/emo-${k}.webp`,markAlt:lab})}</div>`).join("")}</div>`});

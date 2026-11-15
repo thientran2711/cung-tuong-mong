@@ -25,7 +25,7 @@ Thi hành: `dev/build/j84.js` (module cuối trong assemble.py) sửa dữ liệ
 | Chép kiếp ra ngoài | Chép sổ · "chép kiếp này thành bản chép" | Xuất ván, mã |
 | Nạp kiếp từ ngoài | Nạp sổ · "dán bản chép vào để nạp" | Nhập ván, dán mã |
 | Bảng tùy chỉnh | Thiết lập | Cài đặt, Tùy chọn, Settings |
-| Tiếng | Nhạc · Tiếng động · Giọng · Im tiếng · Rung · Cảnh động; nút: Mở tiếng / Im tiếng | Âm thanh, Hiệu ứng âm, Hiệu ứng hình, Bật/Tắt âm thanh, Tắt tiếng |
+| Tiếng | Nhạc · Tiếng động · Giọng · Im tiếng · Rung · Hiệu ứng: Đầy đủ / Gọn (owner 22:35Z; was Cảnh động); nút: Mở tiếng / Im tiếng | Âm thanh, Hiệu ứng âm, Hiệu ứng hình, Bật/Tắt âm thanh, Tắt tiếng |
 | Tab việc làm | Hành sự | Hành động |
 | Tab bản đồ | Dư đồ (nút quay lại: "‹ Dư đồ") | Bản đồ, map |
 | Tab quan hệ (nút dưới) | Giao tình; mục con: Ân oán · Phe phái (lời chỉ: "Giao tình › Ân oán") | Quan hệ |

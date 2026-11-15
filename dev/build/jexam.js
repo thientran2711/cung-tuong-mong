@@ -164,7 +164,7 @@ function exDrop(){try{if(Array.isArray(deck))deck=deck.filter(a=>!(a&&a.exam))}c
 try{KIT_ACT_CATS.unshift(["le-nghi",/khảo hạch tấn phong/i])}catch(e){}
 /* the act picture (owner 14:30Z: no group images): the exam card shows ONLY its own picture (ACTS.json «Khảo hạch tấn phong»); with no own key
    (or before ACTS.json arrives) it gets NO picture slot at all — never the category tile / category picture of kitActArt */
-(function(){if(typeof kpActArt!=="function")return;const k0=kpActArt;kpActArt=function(b){try{if(b&&b.dataset&&b.dataset.kexam&&!(typeof kitActKey==="function"&&kitActKey("Khảo hạch tấn phong"))){
+(function(){if(typeof kpActArt!=="function")return;const k0=kpActArt;kpActArt=function(b){try{if(b&&b.dataset&&b.dataset.kexam&&!(typeof kitActKey==="function"&&kitActKey("Khảo hạch tấn phong"))&&!(typeof kitPhActReady==="function"&&kitPhActReady())){
   b.dataset.kart="none";b.classList.remove("kart");b.classList.add("kanoart");const a=b.querySelector(":scope > .kaart");if(a)a.remove();return}if(b&&b.dataset&&b.dataset.kexam)b.classList.remove("kanoart")}catch(e){}return k0.apply(this,arguments)}})();
 (function(){const n0=nextBuoi;nextBuoi=function(){const r=n0.apply(this,arguments);try{exTick()}catch(e){console.error("exam tick",e)}return r}})();
 (function(){const r0=render;render=function(){try{exTick()}catch(e){console.error("exam tick",e)}return r0.apply(this,arguments)}})();
@@ -176,7 +176,7 @@ function exStart(){const e=exS(S);const P=exPlan(S);
  if(window.__exAuto||typeof kg82Open!=="function"||!document.getElementById("ov")){exDone(S,exSim(S));return}
  e.pend={raws:[]};const raws=e.pend.raws;let i=0;const n=P.rounds.length;
  const round=()=>{const k=P.rounds[i],K=KG82_KIND[k];KG82.ctx="thi";const lv=exLv(S,k);KG82.lv=lv;try{kg82Preload(k)}catch(x){}
-  const d=kg82Open({art:"Khảo hạch",title:`Môn ${i+1}/${n} · ${K.n}`,how:K.how});if(!d){exAbort();return}
+  const d=kg82Open({art:"Khảo hạch",title:`Môn ${i+1}/${n} · ${K.n}`,how:K.how,round:"Môn",roundV:`${i+1}/${n}`});if(!d){exAbort();return}
   const box=kg82Box();const SK=Math.round(kg82NpcMean(lv));
   box.innerHTML=`<h4 class="kpst">Khảo hạch tấn phong ${exRk(P.to)}</h4>`+kg82Rows([["Giám khảo",exExTxt(P),"t"],["Môn thi",`${i+1}/${n}: ${K.n} · ${K.t}`,"t"],["Độ khó",`${kg82DiffWord(lv)} · theo bậc ${lv}`,"n"],["Mức đỗ",`${exBarTxt(P)}, tính cả ${n} môn cùng Tứ đức và tài nghệ`,"n"]])+
    `<div class="kg82act"><button class="${kg82Btn()}" id="kg82go">Bắt đầu thi</button><button class="${kg82Btn(true)}" id="kg82skip">Để tài nghệ quyết định<small>môn này tính ${SK}/10, như người cùng bậc</small></button></div>`;
@@ -185,7 +185,7 @@ function exStart(){const e=exS(S);const P=exPlan(S);
   kg82ShowRes(kg82Rows([[`Môn ${i}`,`${raw}/10 · ${kg82Word(raw)}${sk?" (để tài nghệ quyết định)":""}`,"t"]])+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82ok">${last?"Xem kết quả":"Môn kế tiếp"}</button></div>`);
   kg82Set("score",`${raw}/10`);kg82Set("round",`${i}/${n}`);$("kg82ok").onclick=()=>{if(last)result();else round()}};
  const result=()=>{const sc=exScore(P,raws);const r=Object.assign(sc,{P,raws});
-  kg82Open({art:"Khảo hạch",title:`Kết quả · ${exRk(P.to)}`,how:"Tổng phần = phần thi các môn + Tứ đức + tài nghệ. Đạt mức đỗ của giám khảo thì đỗ."});
+  kg82Open({art:"Khảo hạch",round:"Môn",title:`Kết quả · ${exRk(P.to)}`,how:"Tổng phần = phần thi các môn + Tứ đức + tài nghệ. Đạt mức đỗ của giám khảo thì đỗ."});
   const parts=[["Các môn",raws.map((x,j)=>`${KG82_KIND[P.rounds[j]].n} ${x}/10`).join(" · ")],[`Phần thi (trung bình ${String(sc.avg).replace(".",",")} × ${BAL.ex.wPlay})`,`+${sc.play}`],[`Tứ đức (${P.virL})`,`+${P.vir}`],[P.artL,`+${P.art}`],["Mức đỗ","cần "+exBarTxt(P)]];
   const note=sc.pass?`Đỗ. ${P.to>=7?"Được dự chọn ngôi Hoàng hậu.":`Thánh chỉ tấn phong ${exRk(P.to)}.`}`:`Trượt. Chờ ${exCd(P.to)} tháng mới được thi lại.`;
   kg82ShowRes(kitGameResult({parts,total:`${sc.total} phần · cần ${P.bar}`,note})+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82ok">Đã hiểu</button></div>`);
