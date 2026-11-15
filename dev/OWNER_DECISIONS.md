@@ -611,3 +611,6 @@ BALANCE / SYSTEMS:
 14. UPDATE NOTES: after each live update, a small notice (not always shown) — tap it to see what changed in that version; plus a button in Settings ("Thông tin cập nhật") listing each version's changes. Very short: only what went live / what was fixed. No long text.
 15. Spawn a HISTORY expert worker and a GAME-DESIGN expert worker to dig ideas from palace-drama films/history that the game lacks → add them (then build without waiting).
 - (coordinator s7 decision, delegated by owner 20:05Z) Ngự tứ pet saves a life only at Linh thú (top stage); Trưởng thành does not. Pet care bar label = "Đói" (owner's word): the bar shows hunger, higher = hungrier, warning colour when high.
+
+## 15/11 ~20:10Z — Her own name (owner)
+- Rank-title look: HER character's name is black ink with a soft light-gold glow/outline, so she can instantly tell which name is hers. Other people's names stay plain black (paper halo on stage only for readability).
