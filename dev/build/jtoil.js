@@ -406,12 +406,13 @@ const TOIL_COL={
  may:{label:"Màu mày",def:"nau",L:[["nau","Mày nâu trầm","nâu trầm",[84,56,42]],["den","Mày đen tuyền","đen tuyền",[34,28,28]],["thanhdai","Mày thanh đại","thanh đại",[46,58,76]],
   ["naunhat","Mày nâu nhạt","nâu nhạt",[122,88,64]],["khoi","Mày khói","khói",[88,82,82]]]}};
 window.TOIL_COL=TOIL_COL;
-/* presets (owner 15/11 on sample 1): 7 "đẹp" + 7 "diêm dúa", each 3 cool-tone + 4 warm-tone, like a modern palette. A diêm dúa preset is her
+/* presets (owner 15/11 on sample 1): 8 "đẹp" + 8 "diêm dúa", each 4 cool-tone + 4 warm-tone, like a modern palette. A diêm dúa preset is her
    choice to paint boldly: a made-up face (score ≥ tier[1]) then shows as diêm dúa (the same as caked powder) — col.want = "diem". */
 const TOIL_PRE=[
  ["suongmai","Sương mai","dep","cool",{mat:"tuvi",ma:"hongsen",son:"hongdao",may:"khoi"}],
  ["hoale","Hoa lê","dep","cool",{mat:"hongmai",ma:"hongphan",son:"haiduong",may:"thanhdai"}],
  ["tudang","Tử đằng","dep","cool",{mat:"tuvi",ma:"hongsen",son:"manchin",may:"thanhdai"}],
+ ["lantuyet","Lan tuyết","dep","cool",{mat:"tuvi",ma:"hongphan",son:"haiduong",may:"khoi"}],
  ["daohoa","Đào hoa","dep","warm",{mat:"hoadao",ma:"hoadao",son:"hongdao",may:"nau"}],
  ["rangchieu","Ráng chiều","dep","warm",{mat:"rangchieu",ma:"rangchieu",son:"sanho",may:"naunhat"}],
  ["hophach","Hổ phách","dep","warm",{mat:"hophach",ma:"camquyt",son:"camdao",may:"nau"}],
@@ -419,6 +420,7 @@ const TOIL_PRE=[
  ["maudon","Mẫu đơn tím","diem","cool",{mat:"tuvi",ma:"hongsen",son:"manchin",may:"den"}],
  ["hongmai","Hồng mai","diem","cool",{mat:"hongmai",ma:"yenchi",son:"dotham",may:"den"}],
  ["bangngoc","Băng ngọc","diem","cool",{mat:"hongmai",ma:"hongsen",son:"haiduong",may:"thanhdai"}],
+ ["tula","Tử la","diem","cool",{mat:"tuvi",ma:"yenchi",son:"manchin",may:"thanhdai"}],
  ["yenchi","Yên chi","diem","warm",{mat:"hongmai",ma:"yenchi",son:"chusa",may:"den"}],
  ["luuhong","Lựu hồng","diem","warm",{mat:"rangchieu",ma:"yenchi",son:"dotham",may:"den"}],
  ["camhoa","Cam hỏa","diem","warm",{mat:"hophach",ma:"camquyt",son:"hophach",may:"nau"}],
