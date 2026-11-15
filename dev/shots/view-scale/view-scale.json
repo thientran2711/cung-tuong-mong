@@ -1,0 +1,216 @@
+{
+ "fold-land": {
+  "krot": {
+   "host": true,
+   "rotated": false,
+   "s": 0.8475,
+   "dw": 1180,
+   "dh": 820
+  },
+  "inner": {
+   "w": 1180,
+   "h": 820,
+   "kv": {
+    "w": 1180,
+    "h": 820,
+    "s": 0.8475,
+    "rot": false,
+    "design": true
+   },
+   "overflowX": false
+  },
+  "sig": "hud-sac:692,18,46,40|hud-tai:748,18,46,40|hud-tamco:804,18,60,40|hud-duc:874,18,46,40|hud-bac:945,18,46,40|hud-suc:1001,18,46,40|hud-sung:1057,18,47,40|hud-danh:1115,18,48,40|act:8,770,129,44|go:140,770,129,44|rv:273,770,129,44|staff:405,770,129,44|kid:538,770,129,44|inv:670,770,129,44|art:803,770,129,44|story:935,770,130,44",
+  "minFont": {
+   "css": 9.92,
+   "screen": 8.4,
+   "at": "kstw:!"
+  },
+  "taps": [
+   "go→go",
+   "rv→rv",
+   "act→act"
+  ],
+  "errs": []
+ },
+ "ipad": {
+  "krot": {
+   "host": true,
+   "rotated": false,
+   "s": 1,
+   "dw": 1180,
+   "dh": 820
+  },
+  "inner": {
+   "w": 1180,
+   "h": 820,
+   "kv": {
+    "w": 1180,
+    "h": 820,
+    "s": 1,
+    "rot": false,
+    "design": true
+   },
+   "overflowX": false
+  },
+  "sig": "hud-sac:692,18,46,40|hud-tai:748,18,46,40|hud-tamco:804,18,60,40|hud-duc:874,18,46,40|hud-bac:945,18,46,40|hud-suc:1001,18,46,40|hud-sung:1057,18,47,40|hud-danh:1115,18,48,40|act:8,770,129,44|go:140,770,129,44|rv:273,770,129,44|staff:405,770,129,44|kid:538,770,129,44|inv:670,770,129,44|art:803,770,129,44|story:935,770,130,44",
+  "minFont": {
+   "css": 9.92,
+   "screen": 9.9,
+   "at": "kstw:!"
+  },
+  "taps": [
+   "go→go",
+   "rv→rv",
+   "act→act"
+  ],
+  "errs": []
+ },
+ "ipad-pro": {
+  "krot": {
+   "host": true,
+   "rotated": false,
+   "s": 1.1576,
+   "dw": 1180,
+   "dh": 820
+  },
+  "inner": {
+   "w": 1180,
+   "h": 820,
+   "kv": {
+    "w": 1180,
+    "h": 820,
+    "s": 1.1576,
+    "rot": false,
+    "design": true
+   },
+   "overflowX": false
+  },
+  "sig": "hud-sac:692,18,46,40|hud-tai:748,18,46,40|hud-tamco:804,18,60,40|hud-duc:874,18,46,40|hud-bac:945,18,46,40|hud-suc:1001,18,46,40|hud-sung:1057,18,47,40|hud-danh:1115,18,48,40|act:8,770,129,44|go:140,770,129,44|rv:273,770,129,44|staff:405,770,129,44|kid:538,770,129,44|inv:670,770,129,44|art:803,770,129,44|story:935,770,130,44",
+  "minFont": {
+   "css": 9.92,
+   "screen": 11.5,
+   "at": "kstw:!"
+  },
+  "taps": [
+   "go→go",
+   "rv→rv",
+   "act→act"
+  ],
+  "errs": []
+ },
+ "phone-land": {
+  "krot": {
+   "host": true,
+   "rotated": false,
+   "s": 0.4756,
+   "dw": 1180,
+   "dh": 820
+  },
+  "inner": {
+   "w": 1180,
+   "h": 820,
+   "kv": {
+    "w": 1180,
+    "h": 820,
+    "s": 0.4756,
+    "rot": false,
+    "design": true
+   },
+   "overflowX": false
+  },
+  "sig": "hud-sac:692,18,46,40|hud-tai:748,18,46,40|hud-tamco:804,18,60,40|hud-duc:874,18,46,40|hud-bac:945,18,46,40|hud-suc:1001,18,46,40|hud-sung:1057,18,47,40|hud-danh:1115,18,48,40|act:8,770,129,44|go:140,770,129,44|rv:273,770,129,44|staff:405,770,129,44|kid:538,770,129,44|inv:670,770,129,44|art:803,770,129,44|story:935,770,130,44",
+  "minFont": {
+   "css": 9.92,
+   "screen": 4.7,
+   "at": "kstw:!"
+  },
+  "taps": [
+   "go→go",
+   "rv→rv",
+   "act→act"
+  ],
+  "errs": []
+ },
+ "fold-port": {
+  "krot": {
+   "host": true,
+   "rotated": false,
+   "s": 1,
+   "dw": 755,
+   "dh": 1000
+  },
+  "inner": {
+   "w": 755,
+   "h": 1000,
+   "kv": {
+    "w": 755,
+    "h": 1000,
+    "s": 1,
+    "rot": false,
+    "design": true
+   },
+   "overflowX": false
+  },
+  "sig": "hud-sac:17,72,84,40|hud-tai:105,72,84,40|hud-tamco:193,72,84,40|hud-duc:281,72,84,40|hud-bac:390,72,84,40|hud-suc:478,72,84,40|hud-sung:566,72,84,40|hud-danh:654,72,84,40|act:8,950,76,44|go:87,950,76,44|rv:167,950,76,44|staff:246,950,76,44|kid:325,950,76,44|inv:405,950,76,44|art:484,950,76,44|story:564,950,76,44",
+  "minFont": {
+   "css": 9.92,
+   "screen": 9.9,
+   "at": "kstw:!"
+  },
+  "taps": [
+   "go→go",
+   "rv→rv",
+   "act→act"
+  ],
+  "errs": []
+ },
+ "narrow": {
+  "krot": {
+   "host": true,
+   "rotated": true,
+   "s": 0.4756,
+   "dw": 1180,
+   "dh": 820
+  },
+  "inner": {
+   "w": 1180,
+   "h": 820,
+   "kv": {
+    "w": 1180,
+    "h": 820,
+    "s": 0.4756,
+    "rot": true,
+    "design": true
+   },
+   "overflowX": false
+  },
+  "sig": "hud-sac:692,18,46,40|hud-tai:748,18,46,40|hud-tamco:804,18,60,40|hud-duc:874,18,46,40|hud-bac:945,18,46,40|hud-suc:1001,18,46,40|hud-sung:1057,18,47,40|hud-danh:1115,18,48,40|act:8,770,129,44|go:140,770,129,44|rv:273,770,129,44|staff:405,770,129,44|kid:538,770,129,44|inv:670,770,129,44|art:803,770,129,44|story:935,770,130,44",
+  "minFont": {
+   "css": 9.92,
+   "screen": 4.7,
+   "at": "kstw:!"
+  },
+  "taps": [
+   "go→go",
+   "rv→rv",
+   "act→act"
+  ],
+  "swipeScrollTop": 0,
+  "turned": {
+   "krot": {
+    "host": true,
+    "rotated": false,
+    "s": 0.4756,
+    "dw": 1180,
+    "dh": 820
+   },
+   "inner": [
+    1180,
+    820
+   ],
+   "sig": true
+  },
+  "errs": []
+ },
+ "sameLandscapeLayout": true
+}
