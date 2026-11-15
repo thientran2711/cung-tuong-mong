@@ -7,7 +7,8 @@ W,T=sys.argv[1],sys.argv[2];H=os.path.dirname(os.path.abspath(__file__));FW=os.p
 new=[]
 for c in sys.argv[3:]:
     role='maid' if c.startswith('m') else 'consort'
-    src=os.path.join(W,'cut',f'{T}-{c}.png')
+    src=os.path.join(W,'cut',f'{T}-{c}-ret.png')   # forehead-blob retouch (retouch.py), checked by eye
+    if not os.path.exists(src):src=os.path.join(W,'cut',f'{T}-{c}.png')
     if not os.path.exists(src):src=os.path.join(W,'cut',f'{c}.png')
     i=Image.open(src).convert('RGBA');a=np.array(i)[:,:,3];ys,xs=np.nonzero(a>8)
     f=i.crop((xs.min(),ys.min(),xs.max()+1,ys.max()+1));f=f.resize((round(f.width*900/f.height),900),Image.LANCZOS)

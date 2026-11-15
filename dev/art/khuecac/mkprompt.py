@@ -46,6 +46,8 @@ def prompt(c):
     else:
         p=J['N-%s-t1'%c]['prompt']
         feat=re.search(r'Her own features: ([^.]*)\.',p).group(1)
+        # owner: NO moles / beauty marks / huadian outside the palace -> drop those traits from the old feature text
+        feat=', '.join(x.strip() for x in feat.split(',') if not re.search(r'mole|beauty mark|huadian|freckle|spot',x,re.I))
         col=re.search(r'clean bright colours: ([^.]*)\.',p).group(1)
     prop,motif=EXTRA[c]
     return (PRE+" ONE single figure only. A young unmarried lady of a noble official's family at home (khue cac tieu thu), about 19 years old, fresh and youthful but clearly adult, a very beautiful woman: luminous porcelain skin, soft rosy blush, large soft bright eyes, delicate small nose, small rosy lips, gentle faint smile. "
@@ -54,7 +56,7 @@ def prompt(c):
      f"Outfit (a simple elegant at-home dress of a well-to-do maiden, clearly simpler and lighter than any palace consort robe, never poor): a fitted cross-collar silk jacket with narrow, softly fitted sleeves ending at the wrists, over a high-waisted pleated silk skirt that falls straight to her feet, a short sleeveless embroidered silk vest, a narrow silk waist ribbon tied in a small neat bow that hangs straight down; fine delicate embroidery of {motif} on the collar band and hem; no wide ceremonial sleeves, no long stole, no layered court robe, little gold. Colours: {col} (her signature colours). "
      "Hair of an unmarried maiden: half-up style, two small neat loops on the crown tied with silk ribbons, the rest of her long black hair falling smoothly down her back; light jewellery only: one or two small pearl or jade hairpins and tiny pearl earrings; no crown, no tall phoenix ornaments, no bead veil, no heavy gold. "
      f"Pose: calm still standing pose, slightly turned at an angle, {prop}; sleeves, ribbons, skirt and hair hang still and straight, nothing flying or floating, no wind. "
-     "Eyes soft, warm and round-almond, never narrow, slanted or upturned; face calm and kind, revealing no personality. Rendering as rich, luminous and detailed as the style reference portrait (near-3D, soft volumetric light on face and silk), not a pale sketch or a light watercolour wash. Plain light parchment background, the whole figure from top of head to feet inside the frame with margin around it.")
+     "Eyes open, looking gently toward the viewer, soft, warm and round-almond, never narrow, slanted, upturned or closed; face calm and kind, revealing no personality. Rendering as rich, luminous and detailed as the style reference portrait (near-3D, soft volumetric light on face and silk), not a pale sketch or a light watercolour wash. Plain light parchment background, the whole figure from top of head to feet inside the frame with margin around it.")
 # tier 'ngheo' (owner 02:30Z): modest outfit of a poor scholar's / fallen family's daughter (origins thd, td) - neat and pretty, never ragged
 NPROPS=['holding a small woven bamboo basket of herbs on her forearm','holding a piece of mending cloth with needle and thread in both hands at her waist',
  'holding a small bundle of books tied with a cloth strap in both hands','holding a wooden water ladle in one hand at her side, the other at her waist',

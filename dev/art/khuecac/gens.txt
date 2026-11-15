@@ -20,4 +20,80 @@ ngheo:c05 fHAAm8JCDY XmPP0LqBfo 8aNsy0CIrU SyttlWrUb8 final
 ngheo:c08 XmPPDeABfo eIOOWxbdqL 3zbtQNvREY jUXXrG2LD0 final
 ngheo:c29 N2FFPih6D9 ksDDuA216B 4RuXEXL9Aa 5jVVqR7Kxe final
 ngheo:m05 JNaaU9NOq4 gOIIkToSXO YMLuxraWeC YMLLzEGWeC final
-# --- KHUÊ CÁC batch (79 faces; idref uploaded from CDN img/_kcwork/idref-<face>.jpg) ---
+# --- KHUÊ CÁC batch + NGHÈO batch (79/80 faces; idref uploaded from CDN img/_kcwork/idref-<face>.jpg; every cut passed retouch.py (forehead/cheek dots), large-crop face check by eye; harden.py on cutcheck fails) ---
+c01 LwBBjYPswO 1lppKnfr4r 8aNsy0CIrU s7ooLrIl8e superseded  # REDO-eyes-closed
+c02 CqGGf4YEEy rgeekWRxtc 3zbtQNvREY gOIIlLGSXO final  # ret
+c03 ov99BwS829 bxTTHGx5Y2 YMLuxraWeC O6ffJwQynm final
+c04 SyttgBPUb8 1lppKWEr4r 4RuXEXL9Aa LwBBjrxswO final
+c06 u5nnEzLQLD 5jVVqn9Kxe 3zbtQNvREY CqGGffrEEy final
+c07 LwBBj8YswO 0eggWr0TfW YMLuxraWeC 4RuuP4W9Aa final
+c09 xSddr81jfW CqGGa3MEEy 8aNsy0CIrU s7ooLsvl8e final
+c10 N2FF9rG6D9 P3EEOvI42C 3zbtQNvREY dtyyednXSL final
+ngheo:c01 0egg0BSTfW 1lppKnfr4r 8aNsy0CIrU rgeeru8xtc superseded  # REDO-eyes-closed
+ngheo:c02 nVjjnd9YQD rgeekWRxtc 3zbtQNvREY 1lpp1ulr4r final
+ngheo:c03 1lpp1yYr4r bxTTHGx5Y2 YMLuxraWeC P3EEPl142C final  # ret
+ngheo:c04 3zbb3eEREY 1lppKWEr4r 4RuXEXL9Aa lJ88lK2gv9 final
+ngheo:c06 aF22agNfSh 5jVVqn9Kxe 3zbtQNvREY MBwwMziDCm final
+ngheo:c07 VXUUVH2MMU 0eggWr0TfW YMLuxraWeC lJ88lkAgv9 final
+ngheo:c09 TdSSTbfVNR CqGGa3MEEy 8aNsy0CIrU LwBBL5IswO final
+ngheo:c10 ksDDkGw16B P3EEOvI42C 3zbtQNvREY xSddxbyjfW final
+c01 EbzzEBruuO 1lppKnfr4r 8aNsy0CIrU u5nYHJvQLD final  # redo
+c11 WDsl0tscXe tCi3hvLmZJ YMLuxraWeC 79vayTTJAL final
+c12 If6imrCtvE P3Eu9N742C 4RuXEXL9Aa YMLs0C3WeC final
+c13 5jVMk6sKxe fHAGEQNCDY 8aNsy0CIrU JNafPMcOq4 final
+c15 rgedjGPxtc u5nYFbTQLD YMLuxraWeC tCi3vlZmZJ final
+c16 EbznQ9euuO gOItUOTSXO 4RuXEXL9Aa XmP48xtBfo final
+c17 1lpexY8r4r rgedjS9xtc 8aNsy0CIrU UPmhJTvwny final
+c18 Do7Jelmpcl w4hvJNJ7EI 3zbtQNvREY ksDpx2l16B final
+ngheo:c11 EbznQfUuuO tCi3hvLmZJ YMLuxraWeC jUXBlcALD0 final
+ngheo:c12 8aN6tB8IrU P3Eu9N742C 4RuXEXL9Aa cplgV5n0eP final
+ngheo:c13 P3Eu9yg42C fHAGEQNCDY 8aNsy0CIrU w4hvOd07EI final
+ngheo:c14 0egSMVkTfW mE3RvCqhJQ 3zbtQNvREY UPmhJeuwny final
+ngheo:c15 p8JOXXhehw u5nYFbTQLD YMLuxraWeC xSdXs0JjfW final
+ngheo:c16 jUXBlgULD0 gOItUOTSXO 4RuXEXL9Aa Sytm7esUb8 final
+ngheo:c17 lJ8IU7Mgv9 rgedjS9xtc 8aNsy0CIrU ksDpxWJ16B final
+ngheo:c18 vQZ2CQKa47 w4hvJNJ7EI 3zbtQNvREY 8aN6mJOIrU final
+ngheo:c01 JNaf4QaOq4 1lppKnfr4r 8aNsy0CIrU 0egSeLnTfW final  # redo
+c19 79va436JAL LwBoS1IswO YMLuxraWeC SytmyD1Ub8 final
+c20 SytmO3vUb8 CqGzFvqEEy 4RuXEXL9Aa MBw7BxEDCm final
+c21 SytmO2CUb8 s7o8UxBl8e 8aNsy0CIrU UPmhPefwny final
+c22 tCi3fx9mZJ mE3RfIvhJQ 3zbtQNvREY xSdXS0UjfW final
+c23 LwBoUGRswO LwBoSxmswO YMLuxraWeC mE3REy4hJQ final
+c24 xSdXgzsjfW cplgMWK0eP 4RuXEXL9Aa VXUwXxzMMU final
+c25 aF2AQy3fSh MBw7dV2DCm 8aNsy0CIrU P3Eu3mM42C final
+c26 MBw7XjQDCm WDslVWfcXe 3zbtQNvREY UPmhPXEwny final
+c27 u5nYbMgQLD ksDpjko16B YMLuxraWeC TdSUdjEVNR final
+c28 4RuQ3Kg9Aa vQZ2ufQa47 4RuXEXL9Aa VXUwXLYMMU final
+c30 u5nYbDSQLD SytmOwBUb8 3zbtQNvREY KLMDLcAkqp final
+c31 N2FHZxR6D9 ov9NhIp829 YMLuxraWeC u5nY5AbQLD final
+c32 3zb5GsPREY UPmhyJAwny 4RuXEXL9Aa CqGzqZWEEy final
+ngheo:c19 9ZQFRgnNYZ LwBoS1IswO YMLuxraWeC UPmhPtqwny final
+ngheo:c20 SytmOr0Ub8 CqGzFvqEEy 4RuXEXL9Aa TdSUdSqVNR final
+ngheo:c21 5jVMxQpKxe s7o8UxBl8e 8aNsy0CIrU UPmhPmbwny final
+ngheo:c22 SytmOlpUb8 mE3RfIvhJQ 3zbtQNvREY rgedgd2xtc final
+ngheo:c23 KLMDjKFkqp LwBoSxmswO YMLuxraWeC Sytmyh7Ub8 final
+ngheo:c24 SytmyJeUb8 cplgMWK0eP 4RuXEXL9Aa MBw7BJ1DCm final
+ngheo:c25 SytmyyIUb8 MBw7dV2DCm 8aNsy0CIrU VXUwXJpMMU final
+ngheo:c26 6AHqAzQiJO WDslVWfcXe 3zbtQNvREY P3Eu3FI42C final
+ngheo:c27 vQZ2QwOa47 ksDpjko16B YMLuxraWeC ksDpsaM16B final
+ngheo:c28 Do7JoKVpcl vQZ2ufQa47 4RuXEXL9Aa s7o87Eul8e final
+ngheo:c30 KLMDLZ9kqp SytmOwBUb8 3zbtQNvREY SytmyHiUb8 final
+ngheo:c31 nVjLVuGYQD ov9NhIp829 YMLuxraWeC TdSUd6lVNR final
+ngheo:c32 1lpelGBr4r UPmhyJAwny 4RuXEXL9Aa CqGzqpIEEy final
+c14 1lppEaJr4r 6AHHUaYiJO YMLuxraWeC WDslehrcXe final  # r1-spare
+m01 jUXB7M0LD0 gOItPGXSXO 8aNsy0CIrU - pending
+m02 u5nYkAHQLD XmP4v5MBfo 3zbtQNvREY - pending
+m03 u5nYkzbQLD tCi3ujPmZJ YMLuxraWeC - pending
+m04 xSdXwXPjfW bxTVL4t5Y2 4RuXEXL9Aa - pending
+m06 ksDpgdZ16B w4hvNc67EI 3zbtQNvREY - pending
+m07 aF2AqYTfSh 1lpeS3Vr4r YMLuxraWeC - pending
+m08 9ZQFAk9NYZ jUXB7AyLD0 4RuXEXL9Aa - pending
+m09 ov9Nfz9829 1lpeSRMr4r 8aNsy0CIrU - pending
+ngheo:m01 If6iEV4tvE gOItPGXSXO 8aNsy0CIrU - pending
+ngheo:m02 9ZQFAwnNYZ XmP4v5MBfo 3zbtQNvREY - pending
+ngheo:m03 XmP4vM7Bfo tCi3ujPmZJ YMLuxraWeC - pending
+ngheo:m04 CqGz5aQEEy bxTVL4t5Y2 4RuXEXL9Aa - pending
+ngheo:m06 s7o8OsXl8e w4hvNc67EI 3zbtQNvREY - pending
+ngheo:m07 0egSBMHTfW 1lpeS3Vr4r YMLuxraWeC - pending
+ngheo:m08 VXUw8dkMMU jUXB7AyLD0 4RuXEXL9Aa - pending
+ngheo:m09 TdSUoX2VNR 1lpeSRMr4r 8aNsy0CIrU - pending
