@@ -110,11 +110,12 @@ function kitSealEvPlace(){const M=document.getElementById("modal");const dlg=M&&
  const z=big[big.length-1];if(!dlg.classList.contains("kseal-room")){dlg.style.setProperty("--ksealroom",(z+P*2)+"px");dlg.classList.add("kseal-room")}
  const ih2=dlg.clientHeight;put(iw-z-P,ih2-z-P,z,"room")}
 window.kitSealEvPlace=kitSealEvPlace;
-(function(){let tm=0;const later=()=>{clearTimeout(tm);tm=setTimeout(()=>{try{kitSealEvPlace()}catch(e){}},90)};window.__ksealLater=later;
+(function(){let tm=0;const later=()=>{if(tm)return;tm=setTimeout(()=>{tm=0;try{kitSealEvPlace()}catch(e){}},90)};window.__ksealLater=later;
  if(typeof showModal==="function"){const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);try{requestAnimationFrame(()=>{try{kitSealEvPlace()}catch(e){}});setTimeout(later,400);setTimeout(later,1200)}catch(e){}return r}}
  addEventListener("resize",later);document.addEventListener("load",e=>{if(e.target&&e.target.tagName==="IMG"&&e.target.closest&&e.target.closest("#modal"))later()},true);
  const hook=()=>{const M=document.getElementById("modal");if(!M||M.__ksObs)return;M.__ksObs=1;
-  try{new MutationObserver(ms=>{if(ms.some(x=>![...x.addedNodes,...x.removedNodes].every(n=>n.nodeType===1&&n.classList&&n.classList.contains("kseal-ev"))))later()}).observe(M,{childList:true,subtree:true,attributes:true,attributeFilter:["hidden","class"]})}catch(e){}
+  try{const mine=n=>n&&n.nodeType===1&&n.closest&&n.closest(".kseal-ev");
+  new MutationObserver(ms=>{if(ms.some(x=>x.type==="attributes"?!mine(x.target):![...x.addedNodes,...x.removedNodes].every(mine)))later()}).observe(M,{childList:true,subtree:true,attributes:true,attributeFilter:["hidden","class","style"]})}catch(e){}
   try{window.__ksRO=new ResizeObserver(later);const d=M.querySelector(".dlg");if(d){d.__ksRO=1;window.__ksRO.observe(d)}}catch(e){}};
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",hook);else hook()})();
 (function(){const st=document.createElement("style");st.id="kseal-ev-css";st.textContent=`
