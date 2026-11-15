@@ -15,6 +15,7 @@ const fs=require('fs');
   for(let i=0;i<80;i++){try{store.set(NL_KEY,null)}catch(e){}start();if(!isSrv())break}try{NLP=null}catch(e){}
   Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;render()});
  await p.waitForTimeout(1500);
+ for(let i=0;i<3;i++){await p.evaluate(()=>{document.querySelectorAll('#kroul,.kroul').forEach(e=>{const b=[...e.querySelectorAll('button')].find(x=>/Bỏ qua/.test(x.textContent));if(b)b.click();else e.remove()});Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;render()});await p.waitForTimeout(700)}
  if(MODE==='smoke'){const r=await p.evaluate(()=>{const out=[];for(let t=0;t<60&&!S.dead;t++){Q.length=0;if(S.mg)S.mg=null;try{endTurn()}catch(e){out.push('ERR '+e.message)}out.push(Q.map(m=>m.t).join('|'))}return{out:out.filter(Boolean),ts:S.ts,dead:S.dead}});
   console.log(JSON.stringify({r,errs}).slice(0,6000));await b.close();return}
  const check=async k=>{for(let i=0;i<3;i++){await p.evaluate(()=>document.querySelectorAll('[data-km-close]').forEach(b=>b.click()));await p.waitForTimeout(300)}await p.waitForTimeout(600);const r=await p.evaluate(()=>{const vw=innerWidth;const cut=[];
