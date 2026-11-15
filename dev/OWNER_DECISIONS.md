@@ -513,3 +513,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (17:45Z) Luật kit-trước phải THỰC THI: dán nguyên văn vào mọi lời giao việc/duyệt; người duyệt đánh rớt chỗ tự chế; thợ ghi yêu cầu kit thiếu vào dev/kit/KIT_REQUESTS.md. Luật nằm ở đầu dev/handover/WORKER_BRIEF.md.
 - (17:45Z) Phiên 5 archive theo lệnh sếp.
 - (≈17:50Z, sếp nói trực tiếp phiên 6) Thanh đầu trang — SỬA 17:36Z: nhóm TRÁI: Sắc · Tài · Tâm cơ · Đức · Danh · Sủng; nhóm PHẢI: chỉ Bạc · Sức. (Hiểu 'Danh sủng' = Danh rồi Sủng.) Giữ thẳng hàng ±1px, thanh dưới Sức/Sủng, giải nghĩa, đích số bay.
+- (≈17:55Z, sếp gửi ảnh dev/owner-shots/1115-an-sung-ok.jpg) Bảng 'Ân sủng' hiện như ảnh này là ĐƯỢC: mở ngay tại chỗ trong cột phải, cùng rộng cột các thẻ người, nhãn trái / giá trị phải (Tai mắt, Có thai, Lật thẻ, Ân tình (đêm), Số lần ân thưởng, Bổng lộc). Đây là chuẩn; lỗi bung khung to 17:40Z phải về đúng như ảnh. Không cần làm lối mở từ tab khác (đề xuất 17:12Z bỏ).
