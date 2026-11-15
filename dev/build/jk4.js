@@ -610,6 +610,26 @@ window.kitCatchOn=kitCatchOn;window.kitCatchOff=kitCatchOff;
   new MutationObserver(sync).observe(t,{attributes:true,attributeFilter:["class","hidden"]});sync()};
  const find=()=>watch(document.getElementById("rtoast"));find();
  obs=new MutationObserver(()=>{if(document.getElementById("rtoast")){find();obs.disconnect()}});obs.observe(document.body,{childList:true})})();
+/* ================= KIT 32.10a · A FLOATING CARD NEVER COVERS A DIALOG (review/small-bugs-3; owner shot 844x390: the result card sat on the
+   dialog's option buttons and its tap catcher ate the first tap) =================
+   While any dialog is open (#modal, every [role=dialog] layer: reward box, game frame, book, item sheet, podium…) the floating cards — the act
+   result card #rtoast and the one-line pill #kupdline (kitLine) — are PARKED: hidden, no tap catcher. When the last dialog closes, a parked
+   result card comes back with a fresh timer (its lines are also in Sổ ghi). One body class `kdlg-on`, set by kitDialogOpen(). */
+function kitDialogOpen(){for(const d of document.querySelectorAll('#modal,[role="dialog"]')){if(d.closest("#rtoast,#kupdline"))continue;
+  if(d.id==="modal"){if(!d.hidden&&getComputedStyle(d).display!=="none")return true;continue}
+  if(d.closest("#modal"))continue;if(!d.getClientRects().length)continue;const cs=getComputedStyle(d);if(cs.visibility==="hidden"||+cs.opacity===0)continue;return true}return false}
+window.kitDialogOpen=kitDialogOpen;
+(function(){let pend=0,on=false;const css=document.createElement("style");css.id="kit-dlg-park";
+ css.textContent="body.kdlg-on #rtoast,body.kdlg-on #kupdline{visibility:hidden!important;pointer-events:none!important;transition:none!important}";document.head.appendChild(css);
+ const sync=()=>{pend=0;const d=kitDialogOpen();if(d===on)return;on=d;document.body.classList.toggle("kdlg-on",d);const t=document.getElementById("rtoast");
+  if(d){if(typeof kitCatchOff==="function")kitCatchOff();return}
+  if(t&&t.classList.contains("on")&&!t.hidden){clearTimeout(window.__rtT);window.__rtT=setTimeout(()=>t.classList.remove("on"),7000);
+   if(typeof kitCatchOn==="function")kitCatchOn(t,()=>{t.classList.remove("on");clearTimeout(window.__rtT)})}};
+ const kick=()=>{if(!pend)pend=requestAnimationFrame(sync)};
+ const go=()=>{new MutationObserver(kick).observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:["hidden","class"]});kick()};
+ if(document.body)go();else document.addEventListener("DOMContentLoaded",go)})();
+/* the result card's own catcher never turns on under an open dialog */
+(function(){const k0=window.kitCatchOn;if(typeof k0!=="function")return;window.kitCatchOn=kitCatchOn=function(card){if(card&&card.id==="rtoast"&&document.body.classList.contains("kdlg-on"))return;return k0.apply(this,arguments)}})();
 (function(){const st=document.createElement("style");st.id="kit-catch";st.textContent=`
 #kxcatch{position:fixed;inset:0;background:transparent;touch-action:none;-webkit-tap-highlight-color:transparent}
 #kxcatch[hidden]{display:none!important}
