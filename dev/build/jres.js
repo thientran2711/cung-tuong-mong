@@ -13,31 +13,31 @@
 const RES_SLUG=["canh-phuc","khai-tuong","chung-tu","ham-an","thua-minh","dien-huy","vinh-hoa","truong-xuan"];
 const RES_PART_N={chinh:"Chính điện",dong:"Đông phối điện",tay:"Tây phối điện",cungnhan:"Dãy nhà cung nhân"};
 /* RES_VAR: bản có thật trong img/ (viết lại bằng dev/art/gen_res_var.py) */
-const RES_VAR={"canh-phuc-cung":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang ha-trua ha-chieu ha-toi",
- "canh-phuc-cung-dong-phoi":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang ha-trua ha-chieu ha-toi",
- "canh-phuc-cung-tay-phoi":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang ha-trua ha-chieu ha-toi",
- "khai-tuong-cung":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang ha-trua ha-chieu ha-toi",
- "khai-tuong-cung-dong-phoi":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang ha-trua ha-chieu ha-toi",
- "khai-tuong-cung-tay-phoi":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang ha-trua ha-chieu ha-toi",
- "chung-tu-cung":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang ha-trua ha-chieu ha-toi",
- "chung-tu-cung-dong-phoi":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang ha-trua ha-chieu ha-toi",
- "chung-tu-cung-tay-phoi":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang ha-trua ha-chieu ha-toi",
- "ham-an-cung":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang ha-trua ha-chieu ha-toi",
- "ham-an-cung-dong-phoi":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang ha-trua ha-chieu ha-toi",
- "ham-an-cung-tay-phoi":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang ha-trua ha-chieu ha-toi",
- "thua-minh-cung":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang ha-trua ha-chieu ha-toi",
- "thua-minh-cung-dong-phoi":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang ha-trua ha-chieu ha-toi",
- "thua-minh-cung-tay-phoi":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang ha-trua ha-chieu ha-toi",
- "dien-huy-cung":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang ha-trua ha-chieu ha-toi",
- "dien-huy-cung-dong-phoi":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang ha-trua ha-chieu ha-toi",
- "dien-huy-cung-tay-phoi":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang ha-trua ha-chieu ha-toi",
- "vinh-hoa-cung":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang ha-trua ha-chieu ha-toi",
- "vinh-hoa-cung-dong-phoi":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang ha-trua ha-chieu ha-toi",
- "vinh-hoa-cung-tay-phoi":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang ha-trua ha-chieu ha-toi",
- "truong-xuan-cung":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang ha-trua ha-chieu ha-toi",
- "truong-xuan-cung-dong-phoi":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang ha-trua ha-chieu ha-toi",
- "truong-xuan-cung-tay-phoi":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang ha-trua ha-chieu ha-toi",
- "cung-nhan":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang ha-trua ha-chieu ha-toi"};/*@RES_VAR*/
+const RES_VAR={"canh-phuc-cung":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang ha-trua ha-chieu ha-toi thu-sang thu-trua",
+ "canh-phuc-cung-dong-phoi":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang ha-trua ha-chieu ha-toi thu-sang thu-trua",
+ "canh-phuc-cung-tay-phoi":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang ha-trua ha-chieu ha-toi thu-sang thu-trua",
+ "khai-tuong-cung":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang ha-trua ha-chieu ha-toi thu-sang thu-trua",
+ "khai-tuong-cung-dong-phoi":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang ha-trua ha-chieu ha-toi thu-sang thu-trua",
+ "khai-tuong-cung-tay-phoi":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang ha-trua ha-chieu ha-toi thu-sang thu-trua",
+ "chung-tu-cung":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang ha-trua ha-chieu ha-toi thu-sang thu-trua",
+ "chung-tu-cung-dong-phoi":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang ha-trua ha-chieu ha-toi thu-sang thu-trua",
+ "chung-tu-cung-tay-phoi":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang ha-trua ha-chieu ha-toi thu-sang thu-trua",
+ "ham-an-cung":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang ha-trua ha-chieu ha-toi thu-sang thu-trua",
+ "ham-an-cung-dong-phoi":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang ha-trua ha-chieu ha-toi thu-sang thu-trua",
+ "ham-an-cung-tay-phoi":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang ha-trua ha-chieu ha-toi thu-sang thu-trua",
+ "thua-minh-cung":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang ha-trua ha-chieu ha-toi thu-sang thu-trua",
+ "thua-minh-cung-dong-phoi":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang ha-trua ha-chieu ha-toi thu-sang thu-trua",
+ "thua-minh-cung-tay-phoi":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang ha-trua ha-chieu ha-toi thu-sang thu-trua",
+ "dien-huy-cung":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang ha-trua ha-chieu ha-toi thu-sang thu-trua",
+ "dien-huy-cung-dong-phoi":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang ha-trua ha-chieu ha-toi thu-sang thu-trua",
+ "dien-huy-cung-tay-phoi":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang ha-trua ha-chieu ha-toi thu-sang thu-trua",
+ "vinh-hoa-cung":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang ha-trua ha-chieu ha-toi thu-sang thu-trua",
+ "vinh-hoa-cung-dong-phoi":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang ha-trua ha-chieu ha-toi thu-sang thu-trua",
+ "vinh-hoa-cung-tay-phoi":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang ha-trua ha-chieu ha-toi thu-sang thu-trua",
+ "truong-xuan-cung":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang ha-trua ha-chieu ha-toi thu-sang thu-trua",
+ "truong-xuan-cung-dong-phoi":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang ha-trua ha-chieu ha-toi thu-sang thu-trua",
+ "truong-xuan-cung-tay-phoi":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang ha-trua ha-chieu ha-toi thu-sang thu-trua",
+ "cung-nhan":"xuan-sang xuan-trua xuan-chieu xuan-toi ha-sang ha-trua ha-chieu ha-toi thu-sang thu-trua"};/*@RES_VAR*/
 const RES_HAVE={};for(const s in RES_VAR)for(const v of RES_VAR[s].split(" "))if(v)RES_HAVE[s+"-"+v]=1;
 function resSeason(){try{return SCN_SEAS[SEASON[(S.month||1)-1]]||"xuan"}catch(e){return"xuan"}}
 function resTime(){try{const four=typeof BUOI!=="undefined"&&BUOI.length>=4;return(four?["sang","trua","chieu","toi"]:["sang","chieu","toi"])[S.buoi||0]||"sang"}catch(e){return"sang"}}
@@ -89,15 +89,20 @@ function resScene(r){if(!r)return null;if(r.part==="ngocthanh"||r.part==="kn"||r
 /* stage: the room where the place's people really live, recomputed at every render */
 (function(){if(typeof renderStage!=="function"||typeof SCIMG!=="object")return;const HOME0="tam-cung-dem",RV0="phi-tan-cung";
  window.resStageRoom=function(){try{if(!S)return null;if(S.place==="home")return residenceOf(S);
-   if(S.place&&/^r\d+$/.test(S.place)){const t=S.visit&&S.visit.room!=null?byKey(S.visit.room):null;if(t&&palaceOf(t)===S.place)return residenceOf(t);
+   if(S.place&&/^r\d+$/.test(S.place)){const rk=S.visit&&S.visit.room!=null?S.visit.room:window.__resPend;const t=rk!=null?byKey(rk):null;if(t&&palaceOf(t)===S.place)return residenceOf(t);
     const h=RV(+S.place.slice(1));return h?residenceOf(h):null}}catch(e){}return null};
- const r0=renderStage;renderStage=function(){try{const r=resStageRoom(),n=resScene(r);
+ function resApply(){try{const r=resStageRoom(),n=resScene(r);
    if(S.place==="home")SCIMG.home=n||HOME0;else if(S.place&&/^r\d+$/.test(S.place))SCIMG.rv=n||RV0;
-   const P=placeOf(S.place);if(r&&n&&P)S.__resName=resRoomName(r);else S.__resName=null}catch(e){}return r0.apply(this,arguments)}})();
+   S.__resName=r&&n?resRoomName(r):null}catch(e){}}
+ window.resApply=resApply;
+ /* every painter of the room (DOM stage, PIXI stage, event art) reads SCIMG: set it first, every time */
+ const r0=renderStage;renderStage=function(){resApply();return r0.apply(this,arguments)};
+ if(typeof pxScene==="function"){const p0=pxScene;pxScene=function(){resApply();return p0.apply(this,arguments)}}
+ if(typeof evArt==="function"){const e0=evArt;evArt=function(){resApply();return e0.apply(this,arguments)}}})();
 /* room label on the stage title follows the real room */
 (function(){if(typeof placeOf!=="function")return;const p0=placeOf;placeOf=function(k){const P=p0.apply(this,arguments);try{if(P&&S&&k===S.place&&S.__resName&&(k==="home"||/^r\d+$/.test(k)))return Object.assign({},P,{n:S.__resName})}catch(e){}return P}})();
 /* "Đến cung nàng thăm": the stage is the TARGET's own room; only the people of that room (+ guests in the main hall) */
-(function(){if(typeof visitPal!=="function")return;const v0=visitPal;visitPal=function(id){const r=v0.apply(this,arguments);try{const v=rivals.find(x=>x.id===id);
+(function(){if(typeof visitPal!=="function")return;const v0=visitPal;visitPal=function(id){window.__resPend=id;let r;try{r=v0.apply(this,arguments)}finally{window.__resPend=null}try{const v=rivals.find(x=>x.id===id);
   if(v&&S.visit&&S.place===palaceOf(v)){S.visit.room=key(v);const T=residenceOf(v);
    S.visit.people=(S.visit.people||[]).filter(p=>{const o=p.ref;if(!o||!(rivals||[]).includes(o))return true;const ro=residenceOf(o);
     return resSame(ro,T)||(T.part==="chinh"&&!(ro.pal===T.pal&&(ro.part==="dong"||ro.part==="tay")))});

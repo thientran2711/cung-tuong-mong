@@ -15,12 +15,12 @@ const MT={html:'text/html; charset=utf-8',js:'text/javascript',json:'application
  await p.goto('http://mock.local/dev/index.html',{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);
  await p.evaluate(()=>{SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<20;i++){try{store.set(NL_KEY,null)}catch(e){}start();if(!(S.origin&&S.origin.k==='cnv')&&!(typeof isSrv==='function'&&isSrv()))break}
   Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;try{const K=k61S();rivals.forEach(v=>K['r'+v.id]=3)}catch(e){}
-  const t=document.querySelector('#tabs button[data-tab=act],#tabs button');t&&t.click();render()});
- await p.waitForTimeout(1500);
+  S.rank=1;S.pal=null;S.resHead=null;palFix();render()});
+ await p.waitForTimeout(6000);
  const A=[];const audit=n=>p.evaluate(n=>{const im=document.getElementById('scimg');const bg=(im&&im.style.backgroundImage)||'';const r=residenceOf(S);
   return{n,scene:(bg.match(/img\/([^"')]+)\.webp/)||[])[1],room:resRoomName(r),part:r.part,pal:r.pal,rank:RANKS[S.rank].n,title:(document.querySelector('#sc-t .rt1')||{}).textContent,
    ppl:curPeople().map(x=>x.name),overflowX:document.documentElement.scrollWidth>innerWidth}},n);
- const shot=async n=>{await p.evaluate(()=>{Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;render()});await p.waitForTimeout(1600);
+ const shot=async n=>{await p.waitForTimeout(2600);await p.evaluate(()=>{Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;document.querySelectorAll('.kmov,.rtoast').forEach(e=>e.remove());popIdx=null;const pw=document.getElementById('popw');if(pw)pw.innerHTML='';render();if(typeof k3Phone==='function'&&k3Phone()&&typeof k3Home==='function')k3Home()});await p.waitForTimeout(1400);await p.evaluate(()=>{document.querySelectorAll('.kmov,.rtoast').forEach(e=>e.remove());if(typeof k3Phone==='function'&&k3Phone()&&typeof k3Home==='function')k3Home()});await p.waitForTimeout(800);
   await p.screenshot({path:`${OUT}/${TAG}-${n}.jpg`,type:'jpeg',quality:84});A.push(await audit(n))};
  /* 1. Thường tại, no palace: Ngọc Thanh các */
  await p.evaluate(()=>{S.rank=1;S.pal=null;S.resHead=null;palFix();S.buoi=0;goTo('home')});await shot('1-thuongtai-home');
@@ -36,5 +36,6 @@ const MT={html:'text/html; charset=utf-8',js:'text/javascript',json:'application
   S.where=S.where||{};mates.forEach(m=>{if(m!==S)S.where[m.id]=palaceOf(m)});
   used=0;S.suc=100;S.place='home';S.confined=0;const e0=window.accEtq;if(e0)window.accEtq=()=>false;try{visitPal(v.id)}finally{if(e0)window.accEtq=e0}return{v:v.name,room:resRoomName(residenceOf(v)),mates:mates.map(m=>m.name),place:S.place,want:palaceOf(v)}});
  await shot('3-phoidien-visit');
- await p.evaluate(()=>{const four=BUOI.length>=4;S.buoi=four?3:2;render()});await shot('4-night');
+ await p.evaluate(()=>{const four=BUOI.length>=4;S.buoi=four?3:2;render()});await p.waitForTimeout(3000);await p.evaluate(()=>{render()});await shot('4-night');
+ const bgs=await p.evaluate(()=>[...document.querySelectorAll('#stage *')].filter(e=>getComputedStyle(e).backgroundImage.includes('url')).map(e=>(e.id||e.className)+' '+getComputedStyle(e).backgroundImage.slice(-80)));console.error(JSON.stringify(bgs));
  console.log(JSON.stringify({TAG,vis,A,errs}));await b.close()})();
