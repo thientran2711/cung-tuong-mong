@@ -126,6 +126,13 @@ function kfNumbers(card,before){if(!card||!before||kfStill()||typeof S==="undefi
 /* ---------- touch kit ---------- */
 const KF_TAP='button,.btn,.kbtn,.opt,.card,.pct,[role="button"],[role="tab"],[data-tab]';
 const KF_FIG="#me,#emp,.tok";
+/* the REAL tappable element under the finger (owner 15/11 "Whole tab panel bounces on any tap"): a .card / .pct / anything in KF_TAP that is
+   only a container (no button, role, data-tab, onclick or pointer cursor) is never pressed — the search goes on to a real tappable ancestor;
+   and nothing bigger than KF_BIG of the screen is ever pressed (a pane, a tab panel, a whole-screen catcher). null = no press at all. */
+const KF_REAL='button,a[href],.btn,.kbtn,.opt,[role="button"],[role="tab"],[data-tab],[onclick]',KF_BIG=.3;
+function kfTapOf(t){let el=t&&t.closest?t.closest(KF_TAP):null;
+ while(el&&!(el.matches(KF_REAL)||typeof el.onclick==="function"||getComputedStyle(el).cursor==="pointer"))el=el.parentElement?el.parentElement.closest(KF_TAP):null;
+ if(!el)return null;const r=el.getBoundingClientRect();if(!r.width||r.width*r.height>innerWidth*innerHeight*KF_BIG)return null;return el}
 function kfDis(el){return el.disabled||el.classList.contains("kdis")||el.getAttribute("aria-disabled")==="true"}
 function kfWhy(el){const w=[...el.querySelectorAll(".kwhy:not(.kok)")].map(x=>x.textContent.replace(/^[✗✓]\s*/,"").trim()).filter(Boolean);return w[0]||el.getAttribute("title")||el.dataset.why||""}
 function kfRipple(el,e){const r=el.getBoundingClientRect();if(!r.width||r.width*r.height>innerWidth*innerHeight*.45)return;const cs=getComputedStyle(el);
@@ -141,7 +148,7 @@ function kfLocked(el,e){const now=Date.now();if(now-kfLastNo<350)return;kfLastNo
  const onDown=e=>{if(e.button>0)return;const t=e.target;if(!t||!t.closest)return;
   /* locked: the event target can be the disabled button itself (Chrome, Safari pointer events) */
   const lk=t.closest('button:disabled,.kdis,[aria-disabled="true"]');if(lk&&lk.closest(KF_TAP)){kfLocked(lk,e);return}
-  const el=t.closest(KF_TAP);if(!el||kfDis(el))return;if(el.matches(KF_FIG))return;down=el;el.classList.add("kfdown");if(!kfStill())kfRipple(el,e)};
+  const el=kfTapOf(t);if(!el||kfDis(el))return;if(el.matches(KF_FIG))return;down=el;el.classList.add("kfdown");if(!kfStill())kfRipple(el,e)};
  const onUp=()=>{const el=down;down=null;if(!el)return;el.classList.remove("kfdown");if(kfStill()||!el.isConnected||!el.animate||el.classList.contains("tok"))return;
   try{el.animate([{scale:".96"},{scale:"1.025",offset:.55},{scale:"1"}],{duration:240,easing:"ease-out"})}catch(x){}};
  document.addEventListener("pointerdown",onDown,{capture:true,passive:true});document.addEventListener("pointerup",onUp,{capture:true,passive:true});document.addEventListener("pointercancel",onUp,{capture:true,passive:true});
@@ -184,10 +191,11 @@ document.addEventListener("click",e=>{if(e.target&&e.target.closest&&e.target.cl
 /* ---------- CSS ---------- */
 (function(){const st=document.createElement("style");st.id="kfx";st.textContent=`
 :root{--kf-gold:#f0d070;--kf-rim:0 0 0 1px #f0d070b0,0 0 12px #f0d07055}
-/* press: scale .96 (the individual 'scale' property, so an element's own transform is kept), shadow pulls in, gold rim light */
+/* press: ONLY the .kfdown class that kfTapOf puts on the real tappable element (never CSS :active, which also matches every ancestor of
+   the finger, e.g. the whole tab panel); scale .96 (the individual 'scale' property, so an element's own transform is kept), shadow pulls in, gold rim light */
 :is(button,.btn,.kbtn,.opt,.card,.pct,[role="button"],[role="tab"],[data-tab]):not(:disabled):not(.kdis):not(#me):not(#emp):not(.tok){transition:scale .1s ease,filter .1s ease,box-shadow .14s ease}
-:is(button,.btn,.opt,.card,.pct,[role="button"],[role="tab"],[data-tab]):not(:disabled):not(.kdis):not(#me):not(#emp):not(.tok):is(:active,.kfdown){scale:.96;filter:brightness(.97);box-shadow:var(--kf-rim)}
-.kbtn:not(:disabled):is(:active,.kfdown){scale:.96;box-shadow:inset 0 0 0 1px #f0d07099,var(--kf-rim)}
+:is(button,.btn,.opt,.card,.pct,[role="button"],[role="tab"],[data-tab]):not(:disabled):not(.kdis):not(#me):not(#emp):not(.tok).kfdown{scale:.96;filter:brightness(.97);box-shadow:var(--kf-rim)}
+.kbtn:not(:disabled).kfdown{scale:.96;box-shadow:inset 0 0 0 1px #f0d07099,var(--kf-rim)}
 @media (hover:hover){:is(button,.btn,.kbtn,.opt,.card.ka,.pct,[data-tab]):not(:disabled):not(.kdis):not(#me):not(#emp):not(.tok):hover{box-shadow:0 0 0 1px #f0d07070,0 0 8px #f0d07033}
  .kbtn:not(:disabled):hover{box-shadow:inset 0 0 0 1px #f0d07066,0 0 0 1px #f0d07070,0 0 8px #f0d07033}}
 /* people on the stage (her #me, stage figures .tok, Hoàng thượng #emp): no box press / rim / ripple / tap highlight — a rectangle over a
