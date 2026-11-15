@@ -548,3 +548,8 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - Draw 4 generic palace-intrigue pictures used whenever an EVENT or an ACT has no picture of its own: event-light, event-dark, act-light, act-dark.
 - Light/dark = tone (positive vs negative/scheming), NOT time of day.
 - Purpose: when the owner sees one of these in play she knows that event/act still lacks its own picture and can report it; the coordinator can also list every event/act that falls back to them (easy to find as the game grows).
+
+## 15/11 ~19:05Z — Portrait scale per group + makeup colours (owner)
+- Young-boy portraits: ~140 are big-face close-ups. Zoom/crop the small-face ones to match the big-face ones instead of redrawing.
+- Not every person in the game needs the same scale, but within EACH GROUP of people (boys, girls, consorts, maids, eunuchs, men...) portraits must share one face scale, so switching person to person never jumps big/small. Fix the whole class (scan all groups).
+- Makeup mini-game, "diêm dúa" side: like modern fashion/makeup games, the colours she picks (eyeshadow, blush, lipstick; eyebrow if any) must show in THOSE EXACT COLOURS on her own character picture (portrait + figure). Today only blush shows; add lips and eyes without making the picture look off. The "đẹp" look already approved stays as is.
