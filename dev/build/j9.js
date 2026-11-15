@@ -93,7 +93,7 @@ function relHTML(){const P=consorts();const sel=relSel==="emp"||relSel==="th"?re
  let h=`<div class="reltab">`+[["me","Ngươi"]].concat(liveRivals(true).map(v=>[v.id,v.name]),[["emp","Hoàng thượng"]],S.thDead?[]:[["th","Thái hậu"]]).map(([k,n])=>`<button data-rel="${k}" aria-pressed="${String(k)===String(relSel)}">${n}</button>`).join("")+`</div>`;
  const row=(n,a,b)=>`<div class="rrow"><span>${n}</span><span>${a}</span><span>${b}</span></div>`;
  if(sel==="emp"){h+=row("<b>Người</b>","<b>Ngài sủng</b>","<b>Ân tình</b>")+P.map(p=>row(p===S?"Ngươi":p.name,p.sung,p.an||0)).join("");return h}
- if(sel==="th"){h+=row("<b>Người</b>","<b>Thái hậu thương</b>","")+P.map(p=>row(p===S?"Ngươi":p.name,p.th,"")).join("");return h}
+ if(sel==="th"){h+=row("<b>Người</b>","<b>Thái hậu → người ấy: thiện cảm</b>","")+P.map(p=>row(p===S?"Ngươi":p.name,p.th,"")).join("");return h}
  h+=row("<b>Với</b>","<b>Thiện cảm (đi · về)</b>","<b>Oán (đi · về)</b>")+P.filter(p=>p!==sel).map(p=>row((p===S?"Ngươi":p.name)+(sameHouse(sel,p)?" · cùng cung":""),`${aff(sel,p)} · ${aff(p,sel)}`,`${oan(sel,p)} · ${oan(p,sel)}`)).join("");
  h+=row("Hoàng thượng",`sủng ${sel.sung}`,`ân tình ${sel.an||0}`)+(S.thDead?"":row("Thái hậu",`thương ${sel.th}`,""));
  return h}

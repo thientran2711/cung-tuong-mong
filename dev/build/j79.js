@@ -253,8 +253,8 @@ if(typeof chanceLvl==="function"){chanceLvl=function(n){return n<=0?"Không có"
 .kname{color:var(--rc,var(--ink));color:color-mix(in srgb,var(--rc,#2a1a12) 62%,#2a1a12);font-weight:700}.kname .kti{font-weight:600;font-size:.92em}
 .kname.kme{color:var(--ink)}
 .kchips{display:inline-flex;flex-wrap:wrap;gap:4px}
-.kchip{display:inline-flex;align-items:baseline;gap:3px;font-size:.76rem;line-height:1.25;padding:1px 7px;border-radius:10px;border:1px solid var(--line);background:#fff;color:var(--dim);white-space:normal;overflow-wrap:anywhere;margin:1px 2px;vertical-align:baseline}
-.kchip b{font-weight:700}.kchip.g{color:var(--good);border-color:#8fbf9f;background:#eef7f0}.kchip.r{color:var(--bad);border-color:#e3a497;background:#fcefeb}.kchip.n{color:var(--ink)}
+.kchip{display:inline-flex;flex-wrap:nowrap;align-items:baseline;gap:3px;font-size:.76rem;line-height:1.25;padding:1px 7px;border-radius:10px;border:1px solid var(--line);background:#fff;color:var(--dim);white-space:normal;overflow-wrap:anywhere;margin:1px 2px;vertical-align:baseline}
+.kchip b{font-weight:700;white-space:nowrap;flex:0 0 auto}.kchip.g{color:var(--good);border-color:#8fbf9f;background:#eef7f0}.kchip.r{color:var(--bad);border-color:#e3a497;background:#fcefeb}.kchip.n{color:var(--ink)}
 .kpl{display:flex;align-items:center;gap:8px}.kplt{display:flex;flex-direction:column;min-width:0}.kplt small{color:var(--dim);font-size:.74rem}
 /* facts */
 .kfacts{display:flex;flex-direction:column}
@@ -787,7 +787,7 @@ if(typeof artTabHTML==="function"){artTabHTML=function(){let h=`<div class="ph">
   const levels=[0,1,2,3,4].map(i=>ms[i]||`${stn} +2`);
   const acts=l>=5?[]:[pbtn(`data-learn="${a.k}" data-mode="self"`,"Tự học",`Chắc chắn · tốn: Sức -15 · thành: tiến bộ bằng 6 phần 10 số phần đạt trong trò học (ít nhất +1)`,t2||(S.suc<25?"Sức dưới 25":"")),
    pbtn(`data-learn="${a.k}" data-mode="teacher"`,"Học với thầy",`Chắc chắn · tốn: Bạc -${cost}, Sức -10 · thành: tiến bộ đủ số phần đạt trong trò học, thầy kể một sở thích của Hoàng thượng hoặc chuyện của một phi tần (chứng cứ +1): ${word(30)}`,t2||(S.bac<cost?`thiếu bạc (cần ${cost})`:"")),
-   S.thDead?"":pbtn(`data-learn="${a.k}" data-mode="th"`,"Xin Thái hậu cho học cùng",`Chắc chắn · tốn: Sức -10 · thành: tiến bộ đủ số phần đạt trong trò học, Thái hậu với ngươi +3`,t2||(S.th<40?"cần Thái hậu thương 40":(S.buoi||0)!==0?"chỉ buổi sáng":""))].filter(Boolean);
+   S.thDead?"":pbtn(`data-learn="${a.k}" data-mode="th"`,"Xin Thái hậu cho học cùng",`Chắc chắn · tốn: Sức -10 · thành: tiến bộ đủ số phần đạt trong trò học, Thái hậu với ngươi +3`,t2||(S.th<40?"cần Thái hậu → ta: thiện cảm 40":(S.buoi||0)!==0?"chỉ buổi sáng":""))].filter(Boolean);
   return kitSkillCard({kind:"art",k:a.k,name:a.n,level:l,max:5,prog:[S.artp[a.k],need],desc:(typeof ARTDO==="object"&&ARTDO[a.k]||"")+` · mỗi bậc: ${stn} +2`,levels,acts})}).join("")+`</div>`;return h}}
 (function(){const st=document.createElement("style");st.id="kit2-skill";st.textContent=`
 .kskills{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,520px),1fr));gap:10px}

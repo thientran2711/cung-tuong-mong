@@ -322,11 +322,11 @@ function birthP(p,fake){const me=p===S;
 /* months between decrees grow with rank: 3 up to Tần, then 5, 7, 9 */
 function promoGap(r){return r<3?3:3+(r-2)*2}
 function promoReqP(p){if(rkOf(p)>=7)return[];const r=rkOf(p),nx=RANKS[r+1],L=[];const me=p===S,qq=queenP();
- if(p.out)return[[false,"Đang ở lãnh cung"]];L.push([p.sung>=nx.s,`Sủng ${p.sung}/${nx.s}`],[p.danh>=nx.d,`Danh ${p.danh}/${nx.d}`],[S.turn-p.lastPromo>=promoGap(r),`Cách lần sắc phong trước ${S.turn-p.lastPromo}/${promoGap(r)} tháng`]);
+ if(p.out)return[[false,"Đang ở lãnh cung"]];L.push([p.sung>=nx.s,`Sủng ${p.sung} (cần ${nx.s})`],[p.danh>=nx.d,`Danh ${p.danh} (cần ${nx.d})`],[S.turn-p.lastPromo>=promoGap(r),`Cách lần sắc phong trước ${S.turn-p.lastPromo} tháng (cần ${promoGap(r)})`]);
  const qBlock=qq&&qq!==p;
  if(qBlock&&r+1>=2&&r+1<7)L.push([p.hh>BAL.qBlockHh||p.th>=BAL.qBlockTh,`Hoàng hậu không chặn (Hoàng hậu ${p.hh}, cần trên ${BAL.qBlockHh}; hoặc Thái hậu ${BAL.qBlockTh})`]);
- if(has("hieuthao"))L.push([p.th>=0,`Thái hậu gật đầu (${p.th}/0), vì Hoàng thượng hiếu thảo`]);
- if(r+1===7){const N=hhNeed(p),tn=N.th,nd=N.duc,sn=N.sons;L.push([S.turn>=(p.seatBan||0),p.seatBan>S.turn?`Vừa tố Hoàng hậu, bị nghi tranh ngôi (còn ${p.seatBan-S.turn} tháng)`:"Không bị nghi tranh ngôi"],[!qq,"Ngôi Hoàng hậu bỏ trống"],[p.th>=tn,sn?`Có hoàng tử và Thái hậu ủng hộ (${p.th}/${tn})`:`Chưa có hoàng tử: cần Thái hậu hết lòng (${p.th}/${tn})`],[p.duc>=nd,`Đức ${p.duc}/${nd}${N.heir?" (mẹ Thái tử)":""}`])}
+ if(has("hieuthao"))L.push([p.th>=0,`Hoàng thượng hiếu thảo: Thái hậu không được ghét ${me?"ngươi":"nàng"} (Thái hậu quý ${me?"ngươi":"nàng"} ${p.th}, cần từ 0)`]);
+ if(r+1===7){const N=hhNeed(p),tn=N.th,nd=N.duc,sn=N.sons;L.push([S.turn>=(p.seatBan||0),p.seatBan>S.turn?`Vừa tố Hoàng hậu, bị nghi tranh ngôi (còn ${p.seatBan-S.turn} tháng)`:"Không bị nghi tranh ngôi"],[!qq,"Ngôi Hoàng hậu bỏ trống"],[p.th>=tn,sn?`Có hoàng tử: Thái hậu quý ${me?"ngươi":"nàng"} ${p.th} (cần ${tn})`:`Chưa có hoàng tử: Thái hậu phải hết lòng, quý ${me?"ngươi":"nàng"} ${p.th} (cần ${tn})`],[p.duc>=nd,`Đức ${p.duc} (cần ${nd}${N.heir?", mẹ Thái tử":""})`])}
  else if(r+1>=5)L.push([p.hh>BAL.hiOppHh||p.th>=BAL.hiOppTh||!qBlock||(facOf(p)&&facStr(facOf(p))>=BAL.hiOppFac),`Hoàng hậu không phản đối, hoặc Thái hậu ${BAL.hiOppTh}, hoặc phe mạnh (thế lực ${BAL.hiOppFac})`]);
  if(p.confined)L.push([false,`Đang cấm túc (${p.confined} tháng)`]);return L}
 function promoReq(){return promoReqP(S)}

@@ -97,7 +97,7 @@ try{if(window.VP&&VP.tabs)Object.assign(VP.tabs,{court:["Chí tôn","Chí tôn"]
 /* court sub-tab: Hoàng thượng + Thái hậu, the same pager + person card; their acts = the day's act cards about them (from the Hành sự deck) */
 function deckFor(re){try{return (deck||[]).map((a,i)=>[a,i]).filter(([a])=>a&&!a.done&&re.test((a.n||"")+" "+(a.x||""))).map(([a,i])=>cardH(a,i))}catch(e){return[]}}
 function thCard(){const known=typeof window.kitCourtKnown!=="function"||window.kitCourtKnown("th")!==false;
- const L=[typeof tuoi==="function"&&S.thAge?tuoi(S.thAge):"",known?`Thái hậu thương ngươi: <b>${S.th|0}</b>`:"Thái hậu thương ngươi: <b>chưa rõ</b>"].filter(Boolean);
+ const L=[typeof tuoi==="function"&&S.thAge?tuoi(S.thAge):"",known?`Thái hậu → ta: thiện cảm: <b>${S.th|0}</b>`:"Thái hậu → ta: thiện cảm: <b>chưa rõ</b>"].filter(Boolean);
  const acts=deckFor(/Thái hậu|Đức Thọ/);
  return pcard({f:pTH(),col:"#c9a0e0",name:"Thái hậu",rank:"Thái hậu · Đức Thọ cung",lines:L,groups:[["Việc hôm nay",acts.length?acts:[`<p class="kr3note">Hôm nay Hành sự không có việc nào về Thái hậu. Thỉnh an Thái hậu: sang Đức Thọ cung (Dư đồ) buổi sáng.</p>`]]],empty:""})}
 function empCard(){const E=S.emp;const acts=deckFor(/Hoàng thượng|ngự giá|ngự thư phòng|Dưỡng Tâm|thị tẩm/i);

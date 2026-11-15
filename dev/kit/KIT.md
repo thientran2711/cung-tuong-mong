@@ -339,6 +339,39 @@ ladder, current step highlighted (never a modal). `oddsChip()` draws it, so ever
 `chanceLvl()` (old Rất thấp…Rất cao) now returns the ladder word. Never %, never "Chắc chắn" (sure acts show nothing). 0 → "Không có".
 Death risks on scheme buttons are computed from the real formula (poison / kpoison / pond) and shown as "nàng chết: <word>".
 
+### 11.2 MÀU CHIỀU QUAN HỆ (owner 11/15) — `kitRel(dir,text)` + `kitRelPaint(root)` (jaudit §11), tokens in `p1.html :root`
+| Chiều | Token | Màu | Ví dụ nhãn |
+|---|---|---|---|
+| Người khác → ta (thiện cảm, oán, ghen, tin… của họ với ta) | `--rel-them` | #7a4fa0 (tím) | "Nàng → ta: thiện cảm", "oán ta", "Hoàng hậu với ta", "Thái hậu → ta: thiện cảm", thẻ việc "thiện cảm +10", "ghen +25" |
+| Ta → người khác | `--rel-me` | #2f6f9f (lam) | "Ta → nàng: thiện cảm", "Ta tin cậy", "tin cậy Tiểu Lộ Tử +3" |
+- Only the LABEL takes the direction colour (weight 600); the number keeps the Được/Mất colour (green/red) where it is a change. Never green/red for a direction.
+- Contrast on paper (#fffaf0): purple 5.8:1, blue 5.2:1 (AA). There is no dark-night UI theme (`color-scheme:light`).
+- New code writes `kitRel("them"|"me", label)`; text already on screen is coloured by `kitRelPaint` (one MutationObserver pass, same as VP). Words come from `KIT_REL` (VANPHONG §1).
+
+### 11.3 THIẾU LỄ on formal act cards (owner 11/15) — jaudit §16, numbers `BAL.thieuLe`
+- Formal acts (Thỉnh an Thái hậu / Hoàng hậu, every talk with Hoàng thượng): when she is underdressed for her rank (nothing worn, or worn
+  luxury < `BAL.thieuLe.frac` of her rank allowance; a worn bestowed rank set always counts as proper), the card shows in **Kèm**:
+  "thiếu lễ (y phục dưới phẩm): Danh −2, Đức −1, Thái hậu thiện cảm −3" (strict host ×1.5), and "Vì sao" lists "Y phục dưới phẩm".
+  The number on the card is the very object the act applies (one source). Same rule for NPCs (SOC serveTH). Test: dev/test/thieu-le.js.
+- ONE judgement: `leAttire(p, occasion, host)` → `{state: "ok"|"plain"|"showy"|"overRank", delta:{danh,duc,aff}, why:[…]}` (jaudit §17).
+  "plain" = dressed below rank, or (review/toilette) the day's `p.toilette = {day, score, makeup}` says no makeup / score < 40.
+  Host by nết: etiquette-minded (Thái hậu Đa nghi/Kiêu ngạo, Hoàng hậu Kiêu ngạo/Ghen tuông) ×1.5; frugal (Hiền lành/Nhu mì) approves
+  plain (Đức +1, thiện cảm +2) and frowns at showy (thiện cảm −2). Card head: "thiếu lễ (…)", "giản dị hợp ý Thái hậu", "y phục quá xa hoa, … không vừa mắt".
+
+### 11.1 "VÌ SAO <bậc>?" — the odds breakdown (owner 11/15 05:55Z: no luck without cause) — `dev/build/jwhy.js`, KIT READY
+- Tapping the odds meter (`.kodm`) on ANY act card, person-card act or option opens the same kit popover (`kpPop`) with:
+  title `Vì sao <bậc>?` (`.kpopt`), one line per factor (`.kpopx > .ef.g` raises / `.ef.r` lowers / `.ef.n` neutral), then the
+  7-step ladder. A factor reads `<who/what> <value>: dễ hơn|khó hơn [chút | N bậc]` — N = round(points/12), never %.
+  Example: "Lòng Ngọc Lan 72: dễ hơn chút · Hoàng hậu đa nghi: khó hơn 1 bậc · Ngọc Lan quen người Càn Ninh: dễ hơn 1 bậc · Quẻ tuần: khó hơn 1 bậc".
+- Factors are the REAL formula's inputs: an act with its own list gives it (`a.why()` on options, `ACT[k].why(a,t)` on consort acts);
+  otherwise `whyDiff()` re-evaluates the act's own odds with each input (her Tai mắt, Tâm cơ, Tài, Sắc, Danh, Sủng, Đức, Thái hậu,
+  Hoàng hậu, Ân tình, Sức, maid's Lòng, Tài nghệ bậc, the target's stats, Hoàng thượng's mood) set to neutral and lists every one
+  that moves it. Quẻ tuần (`lotB`) is always its own line. Hidden facts stay hidden: a target's stats show without numbers; an
+  unknown nết shows as "Nết <người> (ngươi chưa rõ)".
+- The card's odds word = the odds the roll uses (servant sent, Quẻ, Sức included). Never build a second explanation panel.
+- Spy (dò la) has ONE formula for everyone (`spyFactors`/`spyRaw`, knobs in `BAL.spy*`): the player, her maid at home, NPC consorts
+  and their servants (`runAct` spy, j28 "người của X dò hỏi"), and the servant-start order (`ordOdds`).
+
 ## 12. GLOSSARY (j79)
 `KIT_GLOSS` holds the plain meaning of every game term; `kitGloss(term)` draws it with a dotted underline, tap = popover. Delta chips and tiles
 apply it automatically; HUD help (`HX`) reads the same text. Terms: Sủng, Danh, Đức, Sắc, Tài, Tâm cơ, Tai mắt, Ân tình, Sức, Bạc, Chủ tin, Lòng,
@@ -1035,6 +1068,12 @@ A dialog may carry `headArt:"img/…webp"` or `{src,label}` → wide kitSceneArt
   container (kitBookSpread, review/page-curl) as they are.
 - Card left column: name → rank → frame at full column width, trimmed so the frame's ornament (crest / cloud top, `img.kcrest --ct`) starts
   right under the rank (gap ≤ 12 px, measured 686 + 1180); the trim runs throttled (it starved under constant DOM mutations before).
+
+### 31.19 NEVER THE SAME FACT TWICE ON A CARD (owner 11/15 09:40Z) — `kaNorm1` (j63)
+- A Cần item that is only "afford the cost" ("thiếu bạc (cần 20)", "Bạc 20 (có 5)") is dropped when the Tốn row already shows that
+  cost (Bạc −20). When she is short, the Tốn row itself adds a red "thiếu bạc (có N)" and the card is greyed. Cần keeps only the
+  conditions that are NOT the cost: time (khắc, buổi), rank, place, Sức ≥ 20 for long acts, items, people, evidence.
+- Same rule for any row: a value already shown in one row is never repeated in another (Ghi chú that repeats Cần is dropped, j63).
 
 ## 32. KIT 4 · ONE STAT CELL · EVENT STAGE · EVENT FRAMES (kit owner #3, owner + review 11/14) — `dev/build/jk4.js` (after jk3, before j84)
 
