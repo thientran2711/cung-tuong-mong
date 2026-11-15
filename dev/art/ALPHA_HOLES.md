@@ -16,6 +16,19 @@ Lỗi KHÁC sửa bằng code không được (mắt thấy khi soát): **fig-co
 fig-kid-p01-a14: lỗ alpha 0 trong ống quần trắng (lỗ kim, không tự sửa) → cần tách lại.
 Chỉ báo (nhiều lỗ/mảng mờ ngoài da, có thể là khe thật hoặc vải sa): 331.
 
+## Đợt 2 (điều phối duyệt 11/15): fig/por mức ≥ 200 — chỉ lỗ TRONG KHUNG MẶT
+
+Để bỏ cờ nhầm ở hoa/trâm/tua: dò mặt (Haar, dev cache .ahcache/tools/face.py) rồi chỉ sửa lỗ da có tâm trong khung mặt (rộng ra 15 % hai bên, 25 % xuống cằm).
+2 599 tệp ứng viên → 1 819 có lỗ trong mặt → giữ **1 256** tệp có lỗ ≥ 200 px (quy về cỡ 900); các tệp nhỏ hơn là chấm li ti cạnh tai/khuyên, mắt thường không thấy.
+Phần lớn là quai hàm, má sát viền, tai bị trong mờ (nền tối lộ qua cằm/tai). Soát bằng mắt: dev/shots/scene-light/alpha-b2-01.jpg (nặng nhất), -20 (giữa), -38 (gần ngưỡng);
+đủ 56 trang ở cache của thợ. Không thấy ca sửa làm hỏng mặt; vài chấm rơi vào sợi tóc/tua sát má — sau sửa vẫn tự nhiên.
+
+## Tách nền lại (Magnific, cùng tên)
+
+- fig/por-consort-c01-t2-a18: mất nửa má phải (alpha 0). Cắt riêng hình a18 từ bản gốc XmPJOqxBfo, tách nền một mình (Magnific remove-background) → fig cùng chiều cao 900, por khớp khung cũ (khớp mẫu 0,998). Hết lỗ.
+- fig/por-kid-p01-a14: lỗ alpha 0 ở ống quần. Cắt riêng từ jUXW0idLD0, tách nền lại → hết lỗ (cutcheck: ống quần sạch).
+- Tờ cũ | mới: dev/shots/scene-light/recut-c01t2-p01.jpg
+
 ## Bị cờ lỗ trên da (xếp theo mức)
 
 | tệp | mức | px | đợt 1 | lỗ da lớn nhất (vị trí, alpha thấp nhất) |
