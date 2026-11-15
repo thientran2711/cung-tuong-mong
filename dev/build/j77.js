@@ -191,7 +191,7 @@ function accLead(k){if(!S||S.dead||Q.length||S.out||S.confined)return;const tc=t
 /* TRA CỨU: the rules as they now stand */
 accInfo=function(){if(!S||Q.length)return;const R=n=>`<b>${n}</b>`;
  Q.push({t:"Ra vào cung cấm",h:`<div class="acinfo"><p>Một luật cho mọi người trong cung, cả phi tần khác.</p>
- <p>${R("Cung phi tần")}: ai cũng đến làm khách được.${(()=>{const C=ACC_ETQ,sg=n=>(n>0?"+":"")+n;if(C.mode==="optional")return"";return ` Chủ vị phẩm cao hơn ngươi đang ở cung: theo lệ ${C.mode==="required"?"phải":"nên"} ${R("bái kiến")} trước (${C.khac} khắc, chủ vị thiện cảm ${sg(C.okAff)})${C.invite?"; đến theo lời mời thì khỏi":""}.${C.mode==="expected"?` Không chào: chủ vị phật ý, thiện cảm giảm (phẩm cách càng xa, tính càng kiêu thì càng giảm).`:""}`})()}</p>
+ <p>${R("Cung phi tần")}: ai cũng đến làm khách được.${(()=>{const C=ACC_ETQ,sg=n=>(n>0?"+":"")+n;if(C.mode==="optional")return"";return ` Chủ vị phẩm cao hơn ngươi đang ở cung: theo lệ ${C.mode==="required"?"phải":"nên"} ${R("bái kiến")} trước (${C.khac} khắc, chủ vị quý ngươi ${sg(C.okAff)})${C.invite?"; đến theo lời mời thì khỏi":""}.${C.mode==="expected"?` Không chào: chủ vị phật ý, bớt quý ngươi (phẩm cách càng xa, tính càng kiêu thì càng giảm).`:""}`})()}</p>
  <p>${R("Càn Ninh cung, Đức Thọ cung")}: sáng thỉnh an, hoặc khi được mời, được triệu. Lúc khác: xin bái kiến.</p>
  <p>${R("Dưỡng Hòa điện, Cần Chính điện")}: chỉ khi được triệu. Cách khác: xin yết kiến, hoặc chờ được triệu. Tự ý vào là tội nặng.</p>
  <p>Phẩm thấp gặp phẩm cao thì cúi chào trước.</p>

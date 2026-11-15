@@ -25,11 +25,17 @@ function clipCheck(sel){return `(()=>{const bad=[];document.querySelectorAll(${J
   const card=await p.$$('.kcard');let shot=null;for(const c of card){if(/Chặn ngự giá/.test(await c.textContent())&&await c.isVisible()){shot=c;break}}
   if(shot){await shot.scrollIntoViewIfNeeded();await sleep(400);await shot.screenshot({path:`${OUT}/${TAG}-chan-ngu-gia-${W}x${H}.png`,animations:'disabled',timeout:120000})}
   await p.screenshot({path:`${OUT}/${TAG}-hanh-su-toi-${W}x${H}.png`,animations:'disabled',timeout:120000});
+  /* KIT 31.19: doable acts first, then time-blocked, then other-blocked; re-render after an act keeps the order */
+  r.order=await p.evaluate(()=>{const G=[...document.querySelectorAll('#panel .cards')].find(g=>g.offsetParent);if(!G||typeof kitActGroup!=='function')return null;
+   const L=[...G.children].filter(b=>b.matches('button.ka'));const g=L.map(kitActGroup);const keys=L.map(kitActKey);
+   const i=deck.findIndex((a,j)=>!a.done&&(a.b==null||a.b===(S.buoi||0))&&a.n!=="Chặn ngự giá");if(i>=0){deck[i].o=100;act(i);Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;render()}
+   return new Promise(res=>setTimeout(()=>{const G2=[...document.querySelectorAll('#panel .cards')].find(x=>x.offsetParent);const k2=G2?[...G2.children].filter(b=>b.matches('button.ka')).map(kitActKey):[];
+    res({first:L.slice(0,2).map(b=>kitActKey(b)+' :: '+[...b.querySelectorAll('.kr-why .kchip, .kr-why .kwhy')].map(e=>e.textContent).join('|')+' dis='+b.disabled+b.classList.contains('kdis')),groups:g.join(''),sorted:g.every((x,j)=>!j||g[j-1]<=x),stable:JSON.stringify(k2.map(k=>k.split('|').pop()))===JSON.stringify(keys.map(k=>k.split('|').pop())),n:L.length})},1200))});
   r.actText=await p.evaluate(()=>{const e=document.getElementById('panel')||document.body;return e.innerText});
   r.hud=await p.evaluate(()=>{const e=document.getElementById('hud2');return e?[...e.querySelectorAll('.hc[data-hx="con"],.hc[data-hx="dem"],.hc[data-hx="birth"]')].map(x=>x.innerText.replace(/\s+/g,' ')):[]});
   r.clipAct=await p.evaluate(clipCheck('.kcard'));
   /* result card of Chặn ngự giá */
-  await p.evaluate(()=>{const i=deck.findIndex(a=>a.n==="Chặn ngự giá");if(i>=0)act(i)});await sleep(1800);
+  await p.evaluate(()=>{const i=deck.findIndex(a=>a.n==="Chặn ngự giá");used=0;S.suc=80;if(i>=0)act(i)});await sleep(1800);
   r.result=await p.evaluate(()=>{const t=document.getElementById('rtoast'),m=document.getElementById('modal');return (t&&t.offsetParent?t.innerText:'')+(m&&!m.hidden?'\n'+m.innerText:'')});
   await p.screenshot({path:`${OUT}/${TAG}-ket-qua-${W}x${H}.png`,animations:'disabled',timeout:120000});
   /* Đêm thị tẩm: prep options, then night1 */
@@ -46,5 +52,5 @@ function clipCheck(sel){return `(()=>{const bad=[];document.querySelectorAll(${J
  /* static: the built page, every template "<label>: ${word(" left would be a side chance on the ladder */
  const src=fs.readFileSync(require('path').join(__dirname,'../build/all.js'),'utf8');R.staticLeft=(src.match(/: \$\{word\(/g)||[]).length;
  fs.writeFileSync(`${OUT}/${TAG}-report.json`,JSON.stringify(R,null,1));
- for(const W of [755,1180])console.log(W,JSON.stringify({bad:R[W].bad,hasLieu:R[W].hasLieu,errs:R[W].errs,clip:[...R[W].clipAct,...R[W].clipPrep],hud:R[W].hud,save:R[W].save,cards:R[W].cards}));
+ for(const W of [755,1180])console.log(W,JSON.stringify({bad:R[W].bad,hasLieu:R[W].hasLieu,errs:R[W].errs,clip:[...R[W].clipAct,...R[W].clipPrep],hud:R[W].hud,save:R[W].save,order:R[W].order,result:R[W].result.slice(0,300),cards:R[W].cards}));
  console.log('static ": ${word(" left:',R.staticLeft);await b.close()})();

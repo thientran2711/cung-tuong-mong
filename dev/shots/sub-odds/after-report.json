@@ -1,0 +1,75 @@
+{
+ "755": {
+  "cards": [
+   "Tranh sủng\nTranh sủng\nTranh sủng\nNăm ăn năm thua\nTối nay thẻ bài của Hàn Hải Đường được lật. Sai cung nữ giả cớ ngươi đau tim, mời Hoàng thượng sang.\nCẦN\n✓ 2 khắc (còn 4)\n✓ Sức ≥5 (có 80)\n✓ Buổi tối (đang buổi tối)\nTỐN\n2 khắc·Đức -4\nĐƯỢC\nđược thị tẩm đêm nay: ít nhất Sủng +3·Ân tình +2·có thai: khả năng rất thấp·được ban thưởng: khả năng vừa\nMẤT\nSủng -3\nKÈM\nĐức 40 → 36·Hàn Hải Đường ghen +25·oán ngươi +15\nGHI CHÚ\n(thêm nếu đêm vui)",
+   "Tranh sủng\nTranh sủng\nChặn ngự giá\nNăm ăn năm thua\nChờ ở hành lang ngự giá đi qua, múa một khúc dưới đèn lồng, mong ngài dừng bước.\nCẦN\n✓ 2 khắc (còn 4)\n✓ Sức ≥5 (có 80)\n✓ Buổi tối (đang buổi tối)\nTỐN\n2 khắc·Sức -5\nĐƯỢC\nđược thị tẩm đêm nay: ít nhất Sủng +3·Ân tình +2·có thai: khả năng rất thấp·được ban thưởng: khả năng vừa\nMẤT\nSủng -3\nKÈM\nHàn Hải Đường ghen +25·oán ngươi +15\nGHI CHÚ\n(thêm nếu đêm vui)"
+  ],
+  "order": {
+   "first": [
+    "0|Hoàng hậuTranh sủng :: ✓ 2 khắc (còn 4)|✓ Sức ≥5 (có 80)|✓ Buổi tối (đang buổi tối) dis=falsefalse",
+    "1|Hoàng hậuChặn ngự giá :: ✓ 2 khắc (còn 4)|✓ Sức ≥5 (có 80)|✓ Buổi tối (đang buổi tối) dis=falsefalse"
+   ],
+   "groups": "00000000011",
+   "sorted": true,
+   "stable": true,
+   "n": 11
+  },
+  "actText": "Tất cả 8/11\nTranh sủng 1/2\nMưu kế 2/2\nNghỉ ngơi 1/1\nLễ nghi 1/3\nHọc tập · Tài nghệ 3/3\nTranh sủng\nTranh sủng\nTranh sủng\nTối nay thẻ bài của Hàn Hải Đường được lật. Sai cung nữ giả cớ ngươi đau tim, mời Hoàng thượng sang.\nCẦN\n✗ chưa làm trong buổi này\n✓ 2 khắc (còn 2)\n✓ Sức ≥5 (có 80)\n✓ Buổi tối (đang buổi tối)\nTỐN\n2 khắc·Đức -4\nĐƯỢC\nđược thị tẩm đêm nay: ít nhất Sủng +3·Ân tình +2·có thai: khả năng rất thấp·được ban thưởng: khả năng vừa\nGHI CHÚ\n(thêm nếu đêm vui)\nTranh sủng\nTranh sủng\nChặn ngự giá\nNăm ăn năm thua\nChờ ở hành lang ngự giá đi qua, múa một khúc dưới đèn lồng, mong ngài dừng bước.\nCẦN\n✓ 2 khắc (còn 2)\n✓ Sức ≥5 (có 80)\n✓ Buổi tối (đang buổi tối)\nTỐN\n2 khắc·Sức -5\nĐƯỢC\nđược thị tẩm đêm nay: ít nhất Sủng +3·Ân tình +2·có thai: khả năng rất thấp·được ban thưởng: khả năng vừa\nMẤT\nSủng -3\nKÈM\nHàn Hải Đường ghen +25·oán ngươi +15\nGHI CHÚ\n(thêm nếu đêm vui)\nMưu kế\nMưu kế\nHối lộ Kính sự phòng\nĐút lót Tổng quản thái giám giữ thẻ bài.\nCẦN\n✓ 2 khắc (còn 2)\n✓ Sức ≥5 (có 80)\n✓ Bạc 30 (có 80)\nTỐN\n2 khắc·Bạc -30\nĐƯỢC\n2 tuần tới dễ được lật thẻ: khả năng thấp → dễ hơn một bậc\nNghỉ ngơi\nNghỉ ngơi\nGiả bệnh\nCáo bệnh để Hoàng thượng thương xót, tránh việc khó.\nCẦN\n✓ 1 khắc (còn 2)\nTỐN\n1 khắc·Đức -3\nĐƯỢC\nSủng +3·2 tháng: dễ được lật thẻ hơn\nKÈM\nĐức 36 → 33·thái y bắt mạch ra·Danh -6·bị phạt: khả năng vừa\nLễ nghi\nLễ nghi\nCầu tự ở Phụng Tiên điện\nNăm ăn năm thua\nđang có hiệu lực\nCẦN\n✓ 2 khắc (còn 2)\n✓ Sức ≥5 (có 80)\n✓ Bạc 10 (có 80)\nTỐN\n2 khắc·Bạc -10\nĐƯỢC\n2 tháng dễ có thai hơn (nay khả năng rất thấp)\nHọc tập · Tài nghệ\nHọc tập · Tài nghệ\nĐánh đàn ở ngự hoa viên\nKhá chắc\nĐợi Hoàng thượng đi ngang.\nCẦN\n✓ 2 khắc (còn 2)\n✓ Sức ≥5 (có 80)\nTỐN\n2 khắc·Sức -10\nĐƯỢC\nSủng +7\nMẤT\nSủng -1\nMưu kế\nMưu kế\nCài tai mắt\nChắc\nMua chuộc cung nữ các cung khác.\nCẦN\n✓ 2 khắc (còn 2)\n✓ Sức ≥5 (có 80)\n✓ Bạc 25 (có 80)\nTỐN\n2 khắc·Bạc -25\nĐƯỢC\nTai mắt +2\nMẤT\nDanh -3\nHọc tập · Tài nghệ\nHọc tập · Tài nghệ\nThêu khăn bán ra ngoài\nChắc\nLén nhờ cung nữ mang ra cửa Thần Vũ.\nCẦN\n✓ 2 khắc (còn 2)\n✓ Sức ≥5 (có 80)\nTỐN\n2 khắc·Sức -10\nĐƯỢC\nBạc +35\nMẤT\nDanh -4\nHọc tập · Tài nghệ\nHọc tập · Tài nghệ\nĐọc binh thư, sử sách\nHọc mưu kế người xưa, xem lòng người.\nCẦN\n✓ 2 khắc (còn 2)\n✓ Sức ≥5 (có 80)\nTỐN\n2 khắc·Sức -5\nĐƯỢC\nTâm cơ +2\nLễ nghi\nLễ nghi\nThỉnh an Thái hậu\nChắc\nSang Đức Thọ cung vấn an, chép kinh cho Thái hậu.\nCẦN\n✗ Buổi sáng (đang buổi tối)\n✓ 2 khắc (còn 2)\n✓ Sức ≥5 (có 80)\nTỐN\n2 khắc·Sức -5\nĐƯỢC\nThái hậu quý ngươi +8·Danh +2·Đức +1\nLễ nghi\nLễ nghi\nThỉnh an Hoàng hậu\nChắc\nSang Càn Ninh cung vấn an Hoàng hậu Hàn Hải Đường.\nCẦN\n✗ Buổi sáng (đang buổi tối)\n✓ 2 khắc (còn 2)\n✓ Sức ≥5 (có 80)\nTỐN\n2 khắc·Sức -5\nĐƯỢC\nHoàng hậu quý ngươi +4·Danh +2·Đức +1",
+  "hud": [
+   "Có thai: Rất thấp",
+   "Lật thẻ: Thấp"
+  ],
+  "clipAct": [
+   "md  kit kr-unknown xs kfc: Hoàng hậu",
+   "md  kit kr-unknown xs kfc: Hoàng hậu",
+   "md  kit kr-unknown xs kfc: Hoàng hậu"
+  ],
+  "result": "\nVIỆC\nChuẩn bị thị tẩm\nTriều chính\nTriều chính\nNgươi\nKính sự phòng đã báo tin.\nCòn hai canh giờ trước khi kiệu đến.\nTắm cánh hoa, xông hương\nTỐN\nBạc -10\nĐiểm trang lộng lẫy\nTỐN\nkhông\nTập trước Thi\nTỐN\nSức -5\nĐể mộc, tự nhiên\nTỐN\nkhông",
+  "prep": "VIỆC\nChuẩn bị thị tẩm\nTriều chính\nTriều chính\nNgươi\nKính sự phòng đã báo tin.\nCòn hai canh giờ trước khi kiệu đến.\nTắm cánh hoa, xông hương\nTỐN\nBạc -10\nĐiểm trang lộng lẫy\nTỐN\nkhông\nTập trước Thi\nTỐN\nSức -5\nĐể mộc, tự nhiên\nTỐN\nkhông",
+  "clipPrep": [
+   "kesov: Ngươi"
+  ],
+  "night": "VIỆC\nĐêm thị tẩm\nTriều chính\nTriều chính\nHoàng thượng\nCanh một, thái giám Kính sự phòng cởi xiêm ngoài, cuộn ngươi trong tấm chăn gấm thêu phượng, khiêng vào Dưỡng Hòa điện theo lệ cũ.\nMàn vàng rủ thấp.\nHoàng thượng đặt quyển sách xuống, nhìn ngươi.\nBàn thơ văn, cầm kỳ\nTỐN\nkhông\nBàn chuyện thiên hạ\nTỐN\nkhông\nRót rượu, nũng nịu\nTỐN\nkhông\nLặng lẽ xoa vai, nghe ngài kể\nTỐN\nkhông",
+  "save": "ok",
+  "bad": [],
+  "hasLieu": false,
+  "errs": []
+ },
+ "1180": {
+  "cards": [
+   "Tranh sủng\nTranh sủng\nTranh sủng\nKhó\nTối nay thẻ bài của Lý Tịch Nhan được lật. Sai cung nữ giả cớ ngươi đau tim, mời Hoàng thượng sang.\nCẦN\n✗ chưa làm trong buổi này\n✓ 2 khắc (còn 2)\n✓ Sức ≥5 (có 80)\n✓ Buổi tối (đang buổi tối)\nTỐN\n2 khắc·Đức -4\nĐƯỢC\nđược thị tẩm đêm nay: ít nhất Sủng +3·Ân tình +2·có thai: khả năng rất thấp·được ban thưởng: khả năng vừa\nGHI CHÚ\n(thêm nếu đêm vui)",
+   "Tranh sủng\nTranh sủng\nChặn ngự giá\nKhó\nChờ ở hành lang ngự giá đi qua, múa một khúc dưới đèn lồng, mong ngài dừng bước.\nCẦN\n✓ 2 khắc (còn 2)\n✓ Sức ≥5 (có 80)\n✓ Buổi tối (đang buổi tối)\nTỐN\n2 khắc·Sức -5\nĐƯỢC\nđược thị tẩm đêm nay: ít nhất Sủng +3·Ân tình +2·có thai: khả năng rất thấp·được ban thưởng: khả năng vừa\nMẤT\nSủng -3\nKÈM\nLý Tịch Nhan ghen +25·oán ngươi +15\nGHI CHÚ\n(thêm nếu đêm vui)"
+  ],
+  "order": {
+   "first": [
+    "0|Hoàng hậuTranh sủng :: ✗ chưa làm trong buổi này|✓ 2 khắc (còn 2)|✓ Sức ≥5 (có 80)|✓ Buổi tối (đang buổi tối) dis=truetrue",
+    "1|Hoàng hậuChặn ngự giá :: ✓ 2 khắc (còn 2)|✓ Sức ≥5 (có 80)|✓ Buổi tối (đang buổi tối) dis=falsefalse"
+   ],
+   "groups": "2000000011",
+   "sorted": false,
+   "stable": true,
+   "n": 10
+  },
+  "actText": "Tất cả 7/10\nTranh sủng 1/2\nMưu kế 1/1\nNghỉ ngơi 2/2\nHọc tập · Tài nghệ 2/2\nGiao thiệp 1/1\nLễ nghi 0/2\nTranh sủng\nTranh sủng\nTranh sủng\nKhó\nTối nay thẻ bài của Lý Tịch Nhan được lật. Sai cung nữ giả cớ ngươi đau tim, mời Hoàng thượng sang.\nCẦN\n✗ chưa làm trong buổi này\n✓ 2 khắc (còn 2)\n✓ Sức ≥5 (có 80)\n✓ Buổi tối (đang buổi tối)\nTỐN\n2 khắc·Đức -4\nĐƯỢC\nđược thị tẩm đêm nay: ít nhất Sủng +3·Ân tình +2·có thai: khả năng rất thấp·được ban thưởng: khả năng vừa\nGHI CHÚ\n(thêm nếu đêm vui)\nTranh sủng\nTranh sủng\nChặn ngự giá\nKhó\nChờ ở hành lang ngự giá đi qua, múa một khúc dưới đèn lồng, mong ngài dừng bước.\nCẦN\n✓ 2 khắc (còn 2)\n✓ Sức ≥5 (có 80)\n✓ Buổi tối (đang buổi tối)\nTỐN\n2 khắc·Sức -5\nĐƯỢC\nđược thị tẩm đêm nay: ít nhất Sủng +3·Ân tình +2·có thai: khả năng rất thấp·được ban thưởng: khả năng vừa\nMẤT\nSủng -3\nKÈM\nLý Tịch Nhan ghen +25·oán ngươi +15\nGHI CHÚ\n(thêm nếu đêm vui)\nMưu kế\nMưu kế\nHối lộ Kính sự phòng\nĐút lót Tổng quản thái giám giữ thẻ bài.\nCẦN\n✓ 2 khắc (còn 2)\n✓ Sức ≥5 (có 80)\n✓ Bạc 30 (có 80)\nTỐN\n2 khắc·Bạc -30\nĐƯỢC\n2 tuần tới dễ được lật thẻ: khả năng rất thấp → dễ hơn một bậc\nNghỉ ngơi\nNghỉ ngơi\nGiả bệnh\nCáo bệnh để Hoàng thượng thương xót, tránh việc khó.\nCẦN\n✓ 1 khắc (còn 2)\nTỐN\n1 khắc·Đức -3\nĐƯỢC\nSủng +3·2 tháng: dễ được lật thẻ hơn\nKÈM\nĐức 36 → 33·thái y bắt mạch ra·Danh -6·bị phạt: khả năng vừa\nHọc tập · Tài nghệ\nHọc tập · Tài nghệ\nThêu khăn bán ra ngoài\nChắc\nLén nhờ cung nữ mang ra cửa Thần Vũ.\nCẦN\n✓ 2 khắc (còn 2)\n✓ Sức ≥5 (có 80)\nTỐN\n2 khắc·Sức -10\nĐƯỢC\nBạc +35\nMẤT\nDanh -4\nGiao thiệp\nGiao thiệp\nTụng kinh, làm việc thiện\nThắp hương ở Bảo Hoa điện, bố thí kẻ nghèo.\nCẦN\n✓ 2 khắc (còn 2)\n✓ Sức ≥5 (có 80)\n✓ Bạc 10 (có 80)\nTỐN\n2 khắc·Bạc -10\nĐƯỢC\nĐức +3\nNghỉ ngơi\nNghỉ ngơi\nDưỡng nhan\nNắm chắc\nNgọc trai nghiền, sữa dê tắm, ngủ đủ giấc.\nCẦN\n✓ 2 khắc (còn 2)\n✓ Sức ≥5 (có 80)\n✓ Bạc 30 (có 80)\nTỐN\n2 khắc·Bạc -30\nĐƯỢC\nSắc +3\nHọc tập · Tài nghệ\nHọc tập · Tài nghệ\nĐánh đàn ở ngự hoa viên\nKhá chắc\nĐợi Hoàng thượng đi ngang.\nCẦN\n✓ 2 khắc (còn 2)\n✓ Sức ≥5 (có 80)\nTỐN\n2 khắc·Sức -10\nĐƯỢC\nSủng +7\nMẤT\nSủng -1\nLễ nghi\nLễ nghi\nThỉnh an Thái hậu\nChắc\nSang Đức Thọ cung vấn an, chép kinh cho Thái hậu.\nCẦN\n✗ Buổi sáng (đang buổi tối)\n✓ 2 khắc (còn 2)\n✓ Sức ≥5 (có 80)\nTỐN\n2 khắc·Sức -5\nĐƯỢC\nThái hậu quý ngươi +8·Danh +2·Đức +1\nLễ nghi\nLễ nghi\nThỉnh an Hoàng hậu\nChắc\nSang Càn Ninh cung vấn an Hoàng hậu Lý Tịch Nhan.\nCẦN\n✗ Buổi sáng (đang buổi tối)\n✓ 2 khắc (còn 2)\n✓ Sức ≥5 (có 80)\nTỐN\n2 khắc·Sức -5\nĐƯỢC\nHoàng hậu quý ngươi +4·Danh +2·Đức +1",
+  "hud": [
+   "Có thai: Rất thấp",
+   "Lật thẻ: Rất thấp"
+  ],
+  "clipAct": [
+   "md  kit kr-unknown xs kfc: Hoàng hậu",
+   "md  kit kr-unknown xs kfc: Hoàng hậu",
+   "md  kit kr-unknown xs kfc: Hoàng hậu"
+  ],
+  "result": "",
+  "prep": "VIỆC\nChuẩn bị thị tẩm\nTriều chính\nTriều chính\nNgươi\nKính sự phòng đã báo tin.\nCòn hai canh giờ trước khi kiệu đến.\nTắm cánh hoa, xông hương\nTỐN\nBạc -10\nĐiểm trang lộng lẫy\nTỐN\nkhông\nTập trước Thi\nTỐN\nSức -5\nĐể mộc, tự nhiên\nTỐN\nkhông",
+  "clipPrep": [
+   "kesov: Ngươi"
+  ],
+  "night": "VIỆC\nĐêm thị tẩm\nTriều chính\nTriều chính\nHoàng thượng\nCanh một, thái giám Kính sự phòng cởi xiêm ngoài, cuộn ngươi trong tấm chăn gấm thêu phượng, khiêng vào Dưỡng Hòa điện theo lệ cũ.\nMàn vàng rủ thấp.\nHoàng thượng đặt quyển sách xuống, nhìn ngươi.\nBàn thơ văn, cầm kỳ\nTỐN\nkhông\nBàn chuyện thiên hạ\nTỐN\nkhông\nRót rượu, nũng nịu\nTỐN\nkhông\nLặng lẽ xoa vai, nghe ngài kể\nTỐN\nkhông",
+  "save": "ok",
+  "bad": [],
+  "hasLieu": false,
+  "errs": []
+ },
+ "staticLeft": 1
+}

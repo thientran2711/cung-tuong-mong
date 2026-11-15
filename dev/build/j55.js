@@ -65,7 +65,7 @@ function tdProbe(a,t){if(a.bac<30||!tdHouse(t))return"";ap(a,{bac:-30});let r=""
  window.__tdOk=false;if(roll(probeO(a))){window.__tdOk=true;if(tdDadT(t)){deA(a,t,1);r=`Người của ${tdName(a)} dò được sổ sách: cha của ${tdName(t)} (nhà ${tdHouse(t)}) có tham ô. Chứng cứ +1 (có ${deG(a,t)}). `}
   else{if(a===S)trS().clean[key(t)]=S.turn;r=`Người của ${tdName(a)} dò kỹ: cha của ${tdName(t)} thanh liêm, không có gì để hặc. `}}
  else r=`Người của ${tdName(a)} đi dò nhà ngoại ${tdName(t)} nhưng không moi được gì (Bạc -30 mất). `;
- if(roll(25)){relAdd(a,t,-8);oanAdd(t,a,8);r+=`${t===S?"Ngươi":t.name} biết chuyện ${tdName(a)} sai người dò nhà mình: thiện cảm hai bên -8. `}
+ if(roll(25)){relAdd(a,t,-8);oanAdd(t,a,8);r+=`${t===S?"Ngươi":t.name} biết chuyện ${tdName(a)} sai người dò nhà mình: hai bên quý nhau -8. `}
  return r+ccStep(a)}
 function tdLeak(a,t){const n=deG(a,t);if(n<1||a.bac<20)return"";ap(a,{bac:-20});const cA=tdHouse(a),cT=tdHouse(t);let r;
  window.__tdOk=false;if(roll(leakO(a,t))&&tdDadT(t)){window.__tdOk=true;tdPowAdd(cT,-6);t.dad=cl((t.dad||40)-15,0,100);ap(t,{danh:-4});tdDadClear(t);deA(a,t,-n);if(cA)tdRelAdd(cA,cT,-10);
@@ -172,7 +172,7 @@ function tdHTML(){const T=trS();const myC=tdHouse(S),myH=tdHead(myC);const busy=
  const askWhy=!myC?"nhà ngươi không có người ở triều":busy||(S.turn-(S.askT==null?-99:S.askT)<3?"mới nhờ, đợi 3 tháng":"");
  const prT=liveRivals(true).filter(v=>tdHouse(v)&&!sameHouse(S,v));const lkT=consorts().filter(v=>v!==S&&deG(S,v)>=1);
  h+=`<div class="rbtn tdacts">`+tdActBtn(`data-td="ask"`,"Nhờ cha dâng sớ",myC?`${word(askO(S))} · tốn: nhà ${myC} thế lực -3 · thành: Danh +4 · Sủng +2 · hỏng: Danh -2 · kèm: ${ccLine(S)}`:"cần nhà mẹ đẻ có người ở triều",askWhy)
-  +tdActBtn(`data-td="probe"`,"Dò la nhà ngoại phi tần",`tốn: Bạc -30 · thành: biết thật cha nàng có tham ô không; có thì Chứng cứ tham ô +1 · kèm: nàng biết chuyện, thiện cảm hai bên -8: ${chanceW(25)} · kèm: ${ccLine(S)}`,busy||(S.bac<30?"thiếu bạc (cần 30)":!prT.length?"không có phi tần nhà khác":""))
+  +tdActBtn(`data-td="probe"`,"Dò la nhà ngoại phi tần",`tốn: Bạc -30 · thành: biết thật cha nàng có tham ô không; có thì Chứng cứ tham ô +1 · kèm: nàng biết chuyện, hai bên quý nhau -8: ${chanceW(25)} · kèm: ${ccLine(S)}`,busy||(S.bac<30?"thiếu bạc (cần 30)":!prT.length?"không có phi tần nhà khác":""))
   +tdActBtn(`data-td="leak"`,"Tung chứng cứ tham ô",`tốn: Bạc -20 (lót tay ngự sử) · thành: nhà nàng thế lực -6 · nàng mất chỗ dựa, Danh -4 · hỏng: Chứng cứ -1 · kèm: tra ra ngươi thì nàng oán +25 · kèm: ${ccLine(S)}`,busy||(S.bac<20?"thiếu bạc (cần 20)":!lkT.length?"chưa có chứng cứ tham ô của ai (dò la trước)":""))+tdMarryBtn()+`</div>`;
  h+=CLANS.map(c=>{const hd=T.H[c];const f=pMin(hd);const M=tdMembers(c);const af=hd.af.me||0;const gw=busy||(S.bac<40?"thiếu bạc (cần 40)":c===myC&&hd.dadOf==="me"?"là cha ngươi":"");
   const rel=CLANS.filter(x=>x!==c).map(x=>[x,tdRel(c,x)]).filter(z=>Math.abs(z[1])>=25);
@@ -188,7 +188,7 @@ function tdMarryBtn(){try{if(typeof h54Daus!=="function"||typeof h54Name!=="func
 /* in-law ties (from j54, every mother alike): a daughter wed into one of the five houses wins its head; hòa thân truly calms the border */
 function tdKin(){const T=trS();if(!T||typeof allKids!=="function")return"";let ev="";
  for(const [k,v] of allKids()){const p=v||S;const W=k.hB||k.hW;if(!W)continue;const W2=k.hW||{};const hs=(k.hW&&k.hW.s&&k.hW.s.house)||(k.hB&&typeof h54Son==="function"&&h54Son(k.hB.s)?h54Son(k.hB.s).house:null);
-  if(!k.tdB&&W.kind!=="hoa"&&CLANS.includes(hs)){k.tdB=1;const h=T.H[hs];const n=W.kind==="tinh"?12:25;h.af[key(p)]=cl((h.af[key(p)]||0)+n,-100,100);const c=tdHouse(p);if(c&&c!==hs)tdRelAdd(c,hs,10);tdNews(`Công chúa con ${tdName(p)} hứa gả vào nhà ${hs}; ${TDOFF[hs]} ${h.name} đứng sau ${p===S?"ngươi":"nàng"}.`);if(p===S)ev+=`${TDOFF[hs]} ${h.name} thành thông gia: thiện cảm với ngươi +${n}. `}
+  if(!k.tdB&&W.kind!=="hoa"&&CLANS.includes(hs)){k.tdB=1;const h=T.H[hs];const n=W.kind==="tinh"?12:25;h.af[key(p)]=cl((h.af[key(p)]||0)+n,-100,100);const c=tdHouse(p);if(c&&c!==hs)tdRelAdd(c,hs,10);tdNews(`Công chúa con ${tdName(p)} hứa gả vào nhà ${hs}; ${TDOFF[hs]} ${h.name} đứng sau ${p===S?"ngươi":"nàng"}.`);if(p===S)ev+=`${TDOFF[hs]} ${h.name} thành thông gia: quý ngươi +${n}. `}
   if(!k.tdH&&W2.kind==="hoa"){k.tdH=1;T.bien=cl(T.bien+20,0,100);T.hoaT=S.turn;tdNews(`Công chúa con ${tdName(p)} hòa thân Bắc Địch; biên cương +20, ba năm ít giặc.`);ev+=`Hòa thân Bắc Địch: biên cương +20, ba năm tới giặc ít quấy nhiễu. `}}
  return ev}
 /* j54 warms the in-law head only on her own betrothal path; tdKin does it once for every path (her and NPC mothers alike) */
@@ -201,7 +201,7 @@ function tdAct(a,d){if(!S||S.dead||Q.length||!can(2)||S.out||S.confined)return;c
  else if(a==="gift"){const h=T.H[d.tc];if(!h||S.bac<40||h.dadOf==="me")return;spend(2);ttl=`Biếu quà ${h.name}`;r=tdGift(S,h)}
  else if(a==="probe"||a==="leak"){const L=a==="probe"?liveRivals(true).filter(v=>tdHouse(v)&&!sameHouse(S,v)):consorts().filter(v=>v!==S&&deG(S,v)>=1);if(!L.length)return;
   Q.push({t:a==="probe"?"Dò la nhà ngoại ai?":"Tung chứng cứ tham ô của ai?",h:`<p>${a==="probe"?"Sai người ngoài cung dò sổ sách nhà cha nàng. Tin dò được là tin thật.":"Lót tay một ngự sử dâng chứng cứ cha nàng tham ô lên Hoàng thượng."}</p>`,
-   opts:L.slice(0,8).map(v=>({n:`${v.name} (nhà ${tdHouse(v)})`,fx:{},x:a==="probe"?`${word(probeO(S))} · tốn: Bạc -30 · thành: biết thật cha nàng có tham ô không · hỏng: mất bạc · kèm: nàng biết chuyện, thiện cảm hai bên -8: ${chanceW(25)} · kèm: ${ccLine(S)}`:`${word(leakO(S,v))} · tốn: Bạc -20 · thành: nhà ${tdHouse(v)} thế lực -6, nàng nhà mẹ đẻ -15, Danh -4 · hỏng: Chứng cứ -1 · kèm: tra ra ngươi: nàng oán +25 · kèm: ${ccLine(S)}`,
+   opts:L.slice(0,8).map(v=>({n:`${v.name} (nhà ${tdHouse(v)})`,fx:{},x:a==="probe"?`${word(probeO(S))} · tốn: Bạc -30 · thành: biết thật cha nàng có tham ô không · hỏng: mất bạc · kèm: nàng biết chuyện, hai bên quý nhau -8: ${chanceW(25)} · kèm: ${ccLine(S)}`:`${word(leakO(S,v))} · tốn: Bạc -20 · thành: nhà ${tdHouse(v)} thế lực -6, nàng nhà mẹ đẻ -15, Danh -4 · hỏng: Chứng cứ -1 · kèm: tra ra ngươi: nàng oán +25 · kèm: ${ccLine(S)}`,
     go:()=>{spend(2);const b2=rsnap();const r2=a==="probe"?tdProbe(S,v):tdLeak(S,v);if(r2)log(r2);const ok=!!window.__tdOk;setTimeout(()=>{try{resultShow(a==="probe"?`Dò la nhà ngoại ${v.name}`:`Tung chứng cứ: cha ${v.name}`,b2,ok)}catch(e){}},0)}})).concat([{n:"Thôi",fx:{}}])});showModal();return}
  if(r)log(r);resultShow(ttl,b,!!window.__tdOk);render()}
 document.addEventListener("click",e=>{const v=e.target.closest("[data-tdv]");if(v){e.stopPropagation();window.__tdV=v.dataset.tdv;try{render()}catch(x){}return}
