@@ -55,7 +55,7 @@ const measure=()=>{const hd=document.querySelector('header.hud');const R=e=>e.ge
    await p.evaluate(dom=>{S.lot={lv:0,dom};render();try{kitSealHud()}catch(e){}},dom);await p.waitForTimeout(500);
    R0[nm]=await p.evaluate(measure);
    await p.screenshot({path:`${OUT}/${tag}-${nm}.jpg`,type:'jpeg',quality:80,clip:{x:0,y:0,width:W,height:Math.min(H,R0[nm].hd[3]+6)}})}
-  /* away from home with the worst-case strings (header-fix 31.19): long name, Hoàng quý phi, 29 tuổi, longest place button, quẻ (Danh) */
+  /* away from home with the worst-case strings (KIT 32.12): long name, Hoàng quý phi, 29 tuổi, longest place button, quẻ (Danh) */
   await p.evaluate(()=>{S.name="Hoàng Phủ Uyển Nghiêm";S.rank=6;S.age=29;S.month=11;S.year=10;S.tuan=1;S.lot={lv:0,dom:"Danh"};S.wx={n:"mai nở trong tuyết",k:"snowp",f:0};
    const pl=places().map(x=>[x.k,typeof accName==="function"?accName(x.k):x.n]).sort((a,b)=>b[1].length-a[1].length);try{S.place=pl[0][0];goTo(pl[0][0])}catch(e){}});
   await clean();await p.evaluate(()=>{const b=document.querySelector('#tabs [data-tab="act"]');if(b)b.click()});await p.waitForTimeout(800);

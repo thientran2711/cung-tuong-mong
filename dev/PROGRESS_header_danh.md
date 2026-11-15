@@ -19,3 +19,10 @@ replaces 17:36Z); merge what is still needed of review/header-fix (unreviewed); 
 ## Resume
 `node dev/test/header-danh.js <built index.html> <outdir> 755x1000@2,1000x755@1,1180x820@2,1366x1024@2,844x390@3 <oldsave.json>`
 (old save: `node dev/test/mk-oldsave.js <live url> oldsave.json`).
+
+## Review r6 (review/header-danh-r6, merged onto origin/main 5e491704d)
+- Merge: conflicts only in built index.html / sw.js (rebuilt; assets.json kept as main's: no asset changes here). Comments "KIT 31.19" in jk4 → 32.12.
+- header-danh.js at 755x1000@2, 1000x755, 1180x820@2, 1366x1024@2, 844x390@3 + old save (live build): no page errors, groups 6|2, label/number
+  spread 0 px, bars Danh/Sủng/Sức, all tooltips, no quẻ/time-vs-cell overlap, seal never over the quẻ line, her block 1 line each, portrait
+  box height = name block, two-row only when needed (1000/1180 away + 1180 long quẻ), back home → one row, no horizontal overflow. Old save loads.
+- Servant road (1180, 755): Sủng cell reads "Chủ tin" (value S.tin, tooltip "Chủ tin N · chạm để xem đủ"), tap → "Chủ tin" explanation, only ✕.
