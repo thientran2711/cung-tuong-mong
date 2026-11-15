@@ -27,50 +27,59 @@ def scan(path, minarea=30):
     if clear.sum() < 0.02 * H * W:                                      # không phải ảnh tách nền
         return None
     edge = max(4, round(0.006 * H))
-    dist = cv2.distanceTransform((~clear).astype(np.uint8), cv2.DIST_L2, 3)
+    cl = clear.copy(); cl[0, :] = cl[-1, :] = cl[:, 0] = cl[:, -1] = True   # mép ảnh (chân chạm đáy) cũng tính là nền
+    dist = cv2.distanceTransform((~cl).astype(np.uint8), cv2.DIST_L2, 3)
     part = (see > 0.02) & (~clear) & (dist > edge)                      # alpha < 250, xa nền thật
-    n, lab, st, _ = cv2.connectedComponentsWithStats(part.astype(np.uint8), 8)
-    small = max(6, round(minarea * (H / 900) ** 2 / 3))
+    solid = see < 0.02
+    ycc = cv2.cvtColor(im[..., :3], cv2.COLOR_BGR2YCrCb).astype(np.int16)
+    skin = solid & (ycc[..., 0] > 90) & (ycc[..., 1] > 133) & (ycc[..., 1] < 175) & (ycc[..., 2] > 80) & (ycc[..., 2] < 130)
+    def ring_frac(m, x, y, w, h):
+        """phần DA trong vành 3 px quanh lỗ (lỗ trên da mặt/tay = lỗi; lỗ giữa tóc, tua trâm, khe vải = có thể đúng)"""
+        x0, y0, x1, y1 = max(0, x - 4), max(0, y - 4), min(W, x + w + 4), min(H, y + h + 4)
+        mm = m[y0:y1, x0:x1].astype(np.uint8)
+        ring = (cv2.dilate(mm, np.ones((7, 7), np.uint8)) > 0) & (mm == 0)
+        if not ring.any(): return 0.0, 0.0, 99.0
+        Y = ycc[y0:y1, x0:x1, 0][ring & solid[y0:y1, x0:x1]]
+        return float(skin[y0:y1, x0:x1][ring].mean()), float(solid[y0:y1, x0:x1][ring].mean()), float(Y.std()) if Y.size else 99.0
+    small = max(10, round(25 * (H / 900) ** 2))
+    sil = max(1, int((~clear).sum()))
+    def ok(h):
+        """LỖ TRÊN DA = mảng mờ (alpha 20–199, không xuống tới 0 như khe hở thật giữa tua trâm/ngón tay), gọn (≤ 0,4 % thân),
+        vành quanh phần lớn là da. Lỗ kim (alpha 0) và mảng mờ lớn (vải sa) chỉ báo."""
+        return bool(h["kind"] == "partial" and 20 <= h["amin"] < 200 and h["skin"] >= 0.5 and h["area"] <= 0.004 * sil)
     holes = []
     mask = np.zeros((H, W), bool)
+    n, lab, st, _ = cv2.connectedComponentsWithStats(part.astype(np.uint8), 8)
     for i in range(1, n):
-        ar = st[i, cv2.CC_STAT_AREA]
+        x, y, w, h, ar = st[i]
         if ar < small: continue
         m = lab == i
-        holes.append(dict(kind="partial", area=int(ar), x=int(st[i, 0]), y=int(st[i, 1]), w=int(st[i, 2]), h=int(st[i, 3]),
-                          amin=int(255 - see[m].max() * 255)))
-        mask |= m
-    # lỗ kim: vùng trong suốt hẳn, không chạm mép ảnh, nhỏ, bị thân đặc bao quanh
+        sk, so, sd = ring_frac(m, x, y, w, h)
+        holes.append(dict(kind="partial", area=int(ar), x=int(x), y=int(y), w=int(w), h=int(h),
+                          amin=int(255 - see[m].max() * 255), skin=round(sk, 2), sd=round(sd, 1)))
+        holes[-1]["fix"] = ok(holes[-1])
+        if holes[-1]["fix"]: mask |= m
+    # lỗ kim: vùng trong suốt hẳn, không chạm mép ảnh, nhỏ, bao kín bởi phần đặc
     n2, lab2, st2, _ = cv2.connectedComponentsWithStats(clear.astype(np.uint8), 4)
     pin_max = 0.0012 * H * H
-    solid = (see < 0.02).astype(np.uint8)
     for i in range(1, n2):
         x, y, w, h, ar = st2[i]
         if x == 0 or y == 0 or x + w >= W or y + h >= H or ar > pin_max or ar < 4: continue
-        m = (lab2 == i).astype(np.uint8)
-        ring = cv2.dilate(m, np.ones((5, 5), np.uint8)) & (1 - m)
-        if ring.sum() and (solid & ring).sum() / ring.sum() > 0.85:   # bao kín bởi phần đặc
-            holes.append(dict(kind="pin", area=int(ar), x=int(x), y=int(y), w=int(w), h=int(h), amin=0))
-            mask |= m.astype(bool)
-    # vùng ĐẦU/MẶT: fig = 22 % trên của thân; por/face (chân dung) = 70 % trên của ảnh
-    ys = np.where((~clear).any(axis=1))[0]; top, bot = (ys.min(), ys.max()) if len(ys) else (0, H)
+        m = lab2 == i
+        sk, so, sd = ring_frac(m, x, y, w, h)
+        if so > 0.85:
+            holes.append(dict(kind="pin", area=int(ar), x=int(x), y=int(y), w=int(w), h=int(h), amin=0, skin=round(sk, 2), sd=round(sd, 1)))
+            holes[-1]["fix"] = ok(holes[-1])
+            if holes[-1]["fix"]: mask |= m
+    # SỬA chỉ lỗ trên DA (vành quanh lỗ ≥ 50 % là da). Lỗ ở tóc / tua trâm / vải: chỉ báo (thường là khe hở thật hoặc vải sa).
     por = os.path.basename(path).startswith(("por-", "face-"))
-    head_y = top + (0.70 if por else 0.22) * (bot - top)
-    sil = max(1, int((~clear).sum()))
-    fixmask = np.zeros((H, W), bool)
-    for h in holes:
-        h["head"] = h["y"] + h["h"] / 2 < head_y
-        # sửa: mọi lỗ ở đầu/mặt; lỗ kim; lỗ thân thấy rõ (alpha < 128) và gọn (< 1 % thân). Mảng mờ lớn ở thân = có thể là vải sa mỏng → chỉ báo.
-        h["fix"] = bool(h["head"] and h["amin"] < 240 or h["kind"] == "pin" or (h["amin"] < 128 and h["area"] < 0.01 * sil))
-    for h in holes:
-        if h["fix"]:
-            x, y, w, hh = h["x"], h["y"], h["w"], h["h"]
-            fixmask[y:y + hh, x:x + w] |= mask[y:y + hh, x:x + w]
-    fa = sum(h["area"] for h in holes if h["fix"]); ha = sum(h["area"] for h in holes if h["head"])
-    area = sum(h["area"] for h in holes)
-    thr = minarea * (H / 900) ** 2 if not por else max(8, minarea * (H / 900) ** 2 / 2)
-    return dict(file=path, W=W, H=H, area=int(area), head=int(ha), fixarea=int(fa), n=len(holes),
-                holes=sorted(holes, key=lambda h: -h["area"])[:12], bad=fa >= thr, review=area - fa >= 20 * thr), (im, fixmask)
+    fa = sum(h["area"] for h in holes if h["fix"]); area = sum(h["area"] for h in holes)
+    thr = max(15, minarea * (H / 900) ** 2)
+    return dict(file=path, W=W, H=H, area=int(area), fixarea=int(fa), n=len(holes),
+                holes=sorted(holes, key=lambda h: (not h["fix"], -h["area"]))[:12], bad=bool(fa >= thr),
+                review=bool(area - fa >= 30 * thr)), (im, mask)
+
+
 
 def fix(im, mask):
     out = im.copy()
@@ -84,7 +93,7 @@ def fix(im, mask):
 
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument("files", nargs="+"); ap.add_argument("--json"); ap.add_argument("--fix")
-    ap.add_argument("--min", type=int, default=30)
+    ap.add_argument("--min", type=int, default=40)
     o = ap.parse_args()
     files = []
     for f in o.files:
@@ -97,13 +106,13 @@ def main():
         info, (im, mask) = r
         rep.append(info)
         if info["bad"]:
-            print("%-48s sửa %5d px (đầu/mặt %d) · tổng lỗ %d" % (os.path.basename(f), info["fixarea"], info["head"], info["area"]), flush=True)
+            print("%-48s lỗ trên da %5d px · tổng lỗ %d" % (os.path.basename(f), info["fixarea"], info["area"]), flush=True)
             if o.fix:
                 os.makedirs(o.fix, exist_ok=True)
                 cv2.imwrite(os.path.join(o.fix, os.path.basename(f)), fix(im, mask), [cv2.IMWRITE_WEBP_QUALITY, 101] if f.endswith(".png") else [cv2.IMWRITE_WEBP_QUALITY, 95])
     if o.json: json.dump(rep, open(o.json, "w"), ensure_ascii=False)
     bad = [r for r in rep if r["bad"]]
-    print("quét %d ảnh tách nền, %d có lỗ cần sửa, %d có mảng mờ lớn ở thân (chỉ báo)" % (len(rep), len(bad), sum(r["review"] for r in rep)))
+    print("quét %d ảnh tách nền, %d có lỗ trên da (sửa), %d có nhiều lỗ khác ở tóc/trâm/vải (chỉ báo)" % (len(rep), len(bad), sum(r["review"] for r in rep)))
 
 if __name__ == "__main__":
     main()
