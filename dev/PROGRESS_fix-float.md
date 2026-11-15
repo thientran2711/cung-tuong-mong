@@ -9,7 +9,7 @@ Base: origin/main (merged; see git log). In the assemble.py module list keep mai
   - Co-op question ("does jnight call nextBuoi itself?"): yes. It calls the co-op wrapper: sáng/chiều → bend, tối → endTurn → merged week. It now asks only once per buổi.
 - 10e1d3b6b / af7c388cb / d0a6dcc53: logs record the real result, not the card text; choice lines give context.
 - 8a6b53725 and later: Tuần lục on the kit (owner 15:30Z, 15:45Z, 16:50Z, 16:55Z, 16:58Z, 17:16Z, 17:45Z).
-  - New kit part, KIT §51 (jkrel.js): `kitRelTable` / `kitRelRows` / `kitRelDelta`, plus `kitImgSync` (jbook). Documented in KIT.md §51. Sample page: `?kit=sample` (`kitSample()`).
+  - New kit parts (jkrel.js): KIT §51 `kitRelTable` / `kitRelRows` / `kitRelDelta`, KIT §52 `kitNumDelta` / `kitDeltaAuto` (kit-fig2 request; every fact line via kpChipify), plus `kitImgSync` (jbook). Documented in KIT.md §51. Samples on the kit sample page §47 (`#kit`).
   - Person pages use one fixed relation table per kind of person. The private chips `.kbk-rel` / `.kbk-relchips` / `.kbk-pair` are removed.
   - Every page has the full-length figure of its subject:
     - Tổng lược shows her own figure;

@@ -64,20 +64,16 @@ window.kitRelRows=kitRelRows;window.kitRelTable=kitRelTable;window.kitRelDelta=k
 @container (max-width:240px){.krt{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.krt>.krt-h:first-child{display:none}.krt-l{grid-column:1 / -1;padding-top:.15em}.krt-n,.krt-v,.krt-d{text-align:left}.krt-u{grid-column:1 / -1;text-align:left}}
 .krd{white-space:nowrap;font-weight:600}.krd .krel{font-weight:600}.krd b.g{color:var(--good,#2f7a46)}.krd b.r{color:var(--bad,#b0332a)}.krd b.n{color:var(--ink,#3a2a1a)}
 `;document.head.appendChild(st)})();
-/* KIT SAMPLE PAGE (owner 16:50Z: every kit part is shown on the kit sample page) — open the game with ?kit=sample */
-function kitSample(){const R=(dir,label,now,d,kind)=>({dir,label,now,d,kind:kind||"good"});
+/* KIT SAMPLE PAGE §47 (jkitpage loads later in the same script): §51 relation table + inline deltas, §52 number deltas */
+function kitRelSamples(){const R=(dir,label,now,d,kind)=>({dir,label,now,d,kind:kind||"good"});
  const rows={"Phi tần":[R("them","Nàng → ta: thiện cảm",-13,2),R("them","Nàng oán ta",3,3,"bad"),R("them","Nàng ghen",11,-4,"bad"),R("me","Ta → nàng: thiện cảm",0,null)],
   "Hoàng thượng":[R("them","Hoàng thượng → ta: sủng",42,5)],"Thái hậu":[R("them","Thái hậu → ta: thiện cảm",18,-2)],
   "Kẻ hầu":[R("them","Hắn → ta: thiện cảm",64,1),R("me","Ta tin cậy",52,null)],"Người lạ":[{dir:"them",label:"Nàng → ta: thiện cảm",unk:"chưa rõ nàng nghĩ gì"}]};
- const secs=Object.entries(rows).map(([h,r])=>({h:"kitRelTable · "+h,html:kitRelTable(r)}));
- secs.push({h:"kitRelTable · cột hẹp (< 17em)",html:`<div style="max-width:15em">${kitRelTable(rows["Phi tần"])}</div>`});
- secs.push({h:"kitRelDelta · trong dòng sự việc",html:`<p>Phi Tống Phương Hoa nhờ người đưa thư. ${kitRelDelta("Nàng oán ta","them",2,"bad")}, ${kitRelDelta("Nàng → ta: thiện cảm","them",-15)}; hai người khác: ${kitRelDelta("thiện cảm","none",7)}.</p>`});
- secs.push({h:"kitNumDelta · số không phải quan hệ (§52)",html:`<p>Tháng này: Được mùa khắp nơi, ${kitNumDelta("Kho lúa",12)}; nhà Hộ bộ ${kitNumDelta("thế lực",6)}; ${kitNumDelta("Sủng",-3)}.</p>`});
- if(typeof kitPanel==="function"&&typeof S!=="undefined"&&S)return kitPanel({kind:"info",title:"Kit mẫu · Quan hệ (§51) · Số (§52)",sub:"jkrel.js",sections:secs});
- const d=document.createElement("div");d.className="kp-sample";d.style.cssText="position:fixed;inset:20px;z-index:99999;overflow:auto;background:var(--k-card,#fffaf0);padding:16px;border:1px solid #d2b071;border-radius:8px";
- d.innerHTML=secs.map(s=>`<h4 class="kpst">${s.h}</h4>${s.html}`).join("");document.body.appendChild(d);return d}
-window.kitSample=kitSample;
-try{if(/[?&]kit=sample\b/.test(location.search))addEventListener("load",()=>setTimeout(()=>{try{kitSample()}catch(e){console.error(e)}},1500))}catch(e){}
+ return [{id:"§51",title:"kitRelTable · phi tần · Hoàng thượng · Thái hậu · kẻ hầu · người lạ",html:()=>Object.values(rows).map(r=>kitRelTable(r)).join("")},
+  {id:"§51",title:"kitRelTable · cột hẹp (< 240px)",html:()=>`<div style="max-width:220px">${kitRelTable(rows["Phi tần"])}</div>`},
+  {id:"§51",title:"kitRelDelta · trong dòng sự việc",html:()=>`<p>Phi Tống Phương Hoa nhờ người đưa thư. ${kitRelDelta("Nàng oán ta","them",2,"bad")}, ${kitRelDelta("Nàng → ta: thiện cảm","them",-15)}; hai người khác: ${kitRelDelta("thiện cảm","none",7)}.</p>`},
+  {id:"§52",title:"kitNumDelta / kitDeltaAuto · số không phải quan hệ",html:()=>`<p>Tháng này: Được mùa khắp nơi, ${kitNumDelta("Kho lúa",12)}; nhà Hộ bộ ${kitNumDelta("thế lực",6)}; ${kitNumDelta("Sủng",-3)}; ${kitDeltaAuto("nàng oán ngươi",4)}.</p>`}]}
+setTimeout(()=>{try{if(window.KIT_SAMPLES)KIT_SAMPLES.push(...kitRelSamples())}catch(e){console.error(e)}},0);
 /* ---- KIT §52 NUMBER DELTA (kit request from kit-fig2, KIT_REQUESTS.md): one inline change for anything that is not a relation
    ("Kho lúa −10", "nhà Hộ bộ thế lực +6", "Sủng +3"): same family as kitRelDelta — label in ink, the number a whole number in the
    Được/Mất colour (sentiment for her: ghen +, oán + are red; kpSent), no chip box, never wraps.
