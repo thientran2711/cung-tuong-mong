@@ -2572,6 +2572,8 @@ Owner rule: every event where an item could come into her hands shows the ITEM'S
 |---|---|---|
 | keep | rises, arcs into the Tư trang tab, tab glows (the kitGain flight path, §54) — a REAL entry in S.inv | 900 |
 | back / give | arcs to the person (the dialog figure; `to`), shrinks, fades; no figure → off the left edge (back) / up (give) | 1000 |
+| (give target) | give flies to the dialog figure only when the option names that person (`.kpsn` name in the option text); "đem cho cung nữ", "nộp Hàn lâm viện", "dâng Thái hậu" with another person shown → up (r1) | |
+| probe | an option whose outcome decides (giftin "Đem đến Thái y viện"): after the choice, a new entry of the item in S.inv → keep, else give (up) (r1) | |
 | burn | sepia → charred, burn front (`.kievflame`) climbs, the paper is eaten from the bottom, embers rise, ash falls | 1400 |
 | tear | splits along a jagged line, halves tilt apart and fall, paper scraps | 1100 |
 | smash | shakes, 5 shards fly out and fall, dust | 1100 |

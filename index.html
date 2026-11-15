@@ -25840,7 +25840,8 @@ function ievNoun(txt){const s=ievTxt(txt);let best=null,at=1e9;
  return best}
 /* explicit resolvers per saved-dialog id (pid + pp survive a reload, so old saves resolve the same way) */
 const IEV_PID={
- giftin:p=>p&&p.e?{e:p.e,who:p.f,offer:1,own:1}:null,
+ /* "Đem đến Thái y viện": the outcome decides (j8: found tainted → kept as evidence, else back into her chest) → "probe" (§64.2) */
+ giftin:(p,m)=>p&&p.e?{e:p.e,who:p.f,acts:(m.opts||[]).map(o=>/thái y|nghiệm/i.test(ievTxt(o&&o.n))?"probe":"auto"),offer:1,own:1}:null,
  pgin:(p,m)=>p&&p.e?{e:p.e,who:p.f,acts:(m.opts||[]).map(o=>/kim bạc|nếm/i.test(ievTxt(o&&o.n))?"test":"auto"),offer:1,own:1}:null,
  cnvBribe:()=>({key:"vangbac",offer:1}),
  /* a higher consort demands one of HER items (jtsb): "Giao" = it flies to her; the §54.2 loss card still follows */
@@ -25953,10 +25954,15 @@ window.kitItemFx=kitItemFx;
  W("chooseM",o=>function(i){const C=IEV.cur,m=typeof Q!=="undefined"?Q[0]:null;if(!C||C.m!==m||!m||!m.opts||!m.opts[i]||!ievOn())return o.apply(this,arguments);
   const R=C.R;let act=R.acts[i];if(!act)return o.apply(this,arguments);
   const tag=document.querySelector("#mb .kiev .kitb")||document.querySelector("#mb .kiev");const from=tag?tag.getBoundingClientRect():null;
-  const fig=document.querySelector("#mb .kpsubj .kesf .kesimg")||document.querySelector("#mb .kpsubj .kesf");const to=fig?fig.getBoundingClientRect():null;
+  const fig=document.querySelector("#mb .kpsubj .kesf .kesimg")||document.querySelector("#mb .kpsubj .kesf");let to=fig?fig.getBoundingClientRect():null;
+  /* give: to the dialog's person only when the option names that person ("Dâng lại cho Hoàng thượng" with Hoàng thượng shown); "đem cho cung nữ",
+     "nộp Hàn lâm viện"… → the item goes away (up), never to the giver shown */
+  if((act==="give"||act==="probe")&&to){const nm=ievTxt((document.querySelector("#mb .kpsubj .kpsn")||{}).textContent||"").toLowerCase(),on=ievTxt(m.opts[i].n).toLowerCase();
+   const P=nm.split(/\s*[·,]\s*|\s+/).filter(w=>w.length>1);const hit=nm&&(on.includes(nm)||P.length>=2&&P.some((w,j)=>j<P.length-1&&on.includes(w+" "+P[j+1])));if(!hit)to=null}
   const inv0=(S.inv||[]).slice();IEV.hold={key:R.key,e:R.e,got:[],bac0:S.bac||0};let r;
   try{r=o.apply(this,arguments)}finally{const H=IEV.hold;IEV.hold=null;
-   try{/* keep = a REAL entry in Tư trang: the one the choice added, else one made here */
+   try{if(act==="probe")act=(S.inv||[]).some(x=>x&&!inv0.includes(x)&&x.k===R.key)?"keep":"give";
+    /* keep = a REAL entry in Tư trang: the one the choice added, else one made here */
     if(act==="keep"&&R.key==="vangbac"){const fr=from?{x:from.left+from.width/2,y:from.top+from.height/2}:null;try{kitCoins("in",Math.max(10,(S.bac||0)-(H.bac0||0)),fr)}catch(e){}IEV.last={act:"coins",name:R.I.name,key:R.key,opt:m.opts[i].n};return r}
     if(act==="keep"){let got=[...new Set(H.got.concat((S.inv||[]).filter(x=>x&&!inv0.includes(x)&&x.k===R.key)))].filter(x=>(S.inv||[]).includes(x));
      if(!got.length&&R.own)act="use";/* the dialog's own logic decided (a poisoned dish eaten / thrown away): nothing goes to the bag */
@@ -25965,7 +25971,7 @@ window.kitItemFx=kitItemFx;
     else if(IT[R.key]&&IT[R.key].story&&!R.e){/* a story item she kept earlier (letter, token…) that this choice sends back / destroys leaves Tư trang for real */
      const gone=inv0.some(x=>x&&x.k===R.key&&!(S.inv||[]).includes(x));const j=(S.inv||[]).findIndex(x=>x&&x.k===R.key&&!x.h);
      if(!gone&&j>=0){const x=S.inv.splice(j,1)[0];try{KFX.lt.set(x,{why:"use"})}catch(e){}render()}}
-    IEV.last={act,name:R.I.name,key:R.key,opt:m.opts[i].n};kitItemFx(act,R.I,{from,to:act==="back"||act==="give"?to:null});
+    IEV.last={act,name:R.I.name,key:R.key,opt:m.opts[i].n,to:!!(to&&(act==="back"||act==="give"))};kitItemFx(act,R.I,{from,to:act==="back"||act==="give"?to:null});
     if(act==="keep")render()}catch(e){console.error("iev choose",e)}}
   return r})})();
 (function(){const st=document.createElement("style");st.id="kit-itev";st.textContent=`
@@ -25973,7 +25979,8 @@ window.kitItemFx=kitItemFx;
 #mb .ksart>.kiev-ban{position:absolute;right:8px;bottom:8px;z-index:3;padding:5px 5px 3px;border-radius:10px;background:rgba(255,250,240,.93);box-shadow:0 2px 8px #0003;line-height:1}
 #mb .kiev-txt{float:right;margin:0 0 6px 10px;padding:4px 4px 2px;border-radius:10px;background:rgba(255,250,240,.9);box-shadow:0 1px 5px #0002}
 #mb .kiev .kitem{cursor:default}
-@media (max-height:500px){#mb .kiev .kitem-md{--isz:56px}}
+/* short landscape (844x390): the banner is ~95 px tall → a 40 px picture, name + grade on one line each, so the frame stays inside the banner (r1) */
+@media (max-height:500px){#mb .kiev .kitem-md{--isz:40px;width:auto;min-width:40px}#mb .kiev .kitem>.kitn,#mb .kiev .kitem>.kitg{white-space:nowrap}#mb .ksart>.kiev-ban{right:6px;bottom:6px;padding:3px 4px 2px}}
 /* §64.2 animation pieces (WAAPI on fixed clones; particles on the jfx Pixi layer) */
 .kievfx{position:fixed;z-index:9480;pointer-events:none;will-change:transform,opacity}
 .kievfx>img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 4px 6px #0005)}
@@ -27412,7 +27419,7 @@ if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§28.13e",title:"Pick 
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="f475dbf67763";window.CTM_BUILD=BUILD;
+const BUILD="bf93a2316b61";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
