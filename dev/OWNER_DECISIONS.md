@@ -419,3 +419,5 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - [ ] (11:50Z) Tài nghệ Nấu nướng: chưa chơi đã hiện BẠI, trừ Sức −15, Bạc −6, mất hết khắc buổi → hành sự bị chạy 2 lần (nghi bấm lọt). Luật: mỗi lần bấm chỉ chạy 1 lần; trò chơi chưa chơi thì không trừ, không có kết quả (act-audit sửa + test).
 - (11:55Z) Trang điểm hiện lên mặt nàng: nhạt → mặt bình thường; đẹp → má hồng nhẹ, môi hồng, da sáng hơn; quá đà → diêm dúa, má đỏ tròn quá mức, môi đỏ đậm, phấn trắng (hài hước). Hiện ở mọi chỗ vẽ ảnh nàng trong buổi/ngày đó.
 - (12:00Z) Đính chính lỗi Nấu nướng: KHÔNG phải bấm lọt. Bấm 1 lần là trừ và ra BẠI ngay, rồi mới hiện trò chơi. Đúng thứ tự: bấm → trò chơi → chơi xong mới trừ và hiện thẻ kết quả. Rà mọi hành sự có trò chơi.
+- [ ] (12:05Z) Món tự làm (mứt khá) không có hình, tên chung "Tác phẩm tự tay · Thường" (sai phẩm), không có hoạt cảnh nhận đồ. Luật nhắc lại: MỌI vật phẩm xuất hiện phải hiện ra phát sáng theo màu phẩm, bấm nhận thì bay vào Tư trang (game-feel sửa + test mọi chỗ thêm đồ).
+- LIVE CDN (12:05Z) Thỉnh an Thái hậu/Hoàng hậu vẽ lại (vạn phúc, áo cung trang rộng).
