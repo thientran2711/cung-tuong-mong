@@ -106,3 +106,31 @@ nc_vuong:c2|0|ministers in Ming court robes split into two groups arguing in the
 nc_vuong:c3|1|a breathless messenger kneels before a consort at night, she stands up with concern
 nc_vuong:t1|1|the Emperor and a consort sit alone by a lamp at night in his chamber, he leans toward her asking
 nc_vuong:x1|0|the Emperor on his throne in a grand hall with a consort standing at his side, ministers bowing below awaiting his decision
+ch_co:s1|0|the elegant elderly Empress Dowager in dark plum robes, seated in her hall, gives quiet orders to a young consort, her grand-niece, who bows before her
+ch_co:s2|0|a strict elderly matron in dark grey hanfu stands beside a young consort in her chamber, teaching her court etiquette, the consort bowing
+ch_co:c1|0|the elderly Empress Dowager presses a small folded paper packet of medicine into a young consort's hands in a dim side room
+ch_co:c2|0|an imperial physician kneels taking a young consort's pulse at her wrist over a silk cushion, the elderly Empress Dowager watching from a chair, a bowl of tonic on the table
+ch_co:c3|0|the dignified Empress in deep red and gold invites a consort to sit and drink tea with her in a quiet pavilion
+ch_co:t1|1|the elderly Empress Dowager holds a young consort's hand as they sit together by lamplight in her chamber
+ch_co:x1|0|a great palace banquet hall, a consort rises from her seat holding a closed memorial with plain covers, the Emperor on the throne, the Empress and the Empress Dowager seated nearby
+ch_benh:s1|0|closed red doors of the Empress Dowager's palace with guards and a physician carrying a medicine box hurrying in, maids waiting outside
+ch_benh:s2|0|the dignified Empress in deep red sits at a desk with account ledgers and silver ingots, eunuchs and maids bowing to receive orders
+ch_benh:c1|0|a consort examines a bowl of dark herbal medicine and herb dregs in a strainer in a palace medicine room, frowning thoughtfully
+ch_benh:c2|0|a consort in a corridor watches another consort with her maid walking off toward the Empress's palace carrying a gift box
+ch_benh:c3|0|a consort in plain pale robes kneels in prayer before a golden Buddha in a mountain temple hall, incense smoke rising
+ch_benh:t1|1|the elderly Empress Dowager lies unconscious in bed by candlelight, an imperial physician kneeling beside her, a consort standing anxiously at the curtain
+ch_benh:x1|0|the elderly Empress Dowager, recovered, sits propped up in bed with cushions, speaking calmly to a consort seated at her bedside
+ch_ho:s1|0|two young consorts each kneel offering a cup of tea on a tray to the elderly Empress Dowager seated in her hall, who tastes one
+ch_ho:s2|0|two young consorts stand apart in a garden, each holding an opened letter, glancing at each other
+ch_ho:c1|0|the elderly Empress Dowager looks down at a plain small gift box on a tray, a consort beside her surprised, another consort watching from the doorway
+ch_ho:c2|0|a consort kneels before the stern Empress in her hall, another consort standing aside watching thoughtfully
+ch_ho:c3|0|the elderly Empress Dowager sits holding the hand of a small sad little princess about six years old, two young consorts standing before her
+ch_ho:t1|1|a consort arrives at night at another consort's door and the two face each other under a lantern, one extending her hand
+ch_ho:x1|0|two young consorts kneel side by side before the elderly Empress Dowager seated on a raised seat in her grand hall
+ch_bi:s1|0|a palace maid kneeling in a dusty storeroom opens an embroidered brocade box and finds an old yellowed folded letter
+ch_bi:s2|0|an old senior eunuch in dark robes sighs and speaks to a consort beside a palace window
+ch_bi:c1|0|two consorts walk together in a garden by a lotus pond, one leaning to ask the other something quietly
+ch_bi:c2|0|the elderly Empress Dowager gazes searchingly at a consort who sits opposite her across a tea table
+ch_bi:c3|1|the dignified Empress reads a folded letter by lamplight in her chamber, her maid holding the lamp
+ch_bi:t1|1|an old palace maid with white hair sits in a humble room speaking to a young consort by an oil lamp
+ch_bi:x1|0|the Emperor seated in his study with an old letter on his desk looks up at a consort who enters and bows
