@@ -75,3 +75,5 @@ j72 bước vs Hồi · stage paper halo · Thái hậu title bronze vs plum · 
 | C18 | review/kit-popup-sample (owner s8: show the pop-up kit; add §8 samples to kit page) | RUNNING |
 | C19 | review/pic-dupes (owner s8: two acts share one picture; scan + redraw) | RUNNING |
 | C20 | review/act-text (owner s8: broken/unclear act card text, whole family) | RUNNING |
+| C21 | review/khac-day (owner s8: khắc check over the whole day; red only if day short or buổi-bound) | RUNNING |
+| C22 | review/boot-flash (owner s8: raw old skeleton flashes on launch) | RUNNING |

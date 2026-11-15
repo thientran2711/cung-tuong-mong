@@ -845,3 +845,12 @@ All must work in co-op.
 
 ## 15/11 (session 8) — Tài nghệ act card text broken and unclear (owner screenshot)
 - Owner screenshot dev/handover/refs/owner-act-text-jumble.jpg (circled): card "Tự học Thi: viết thơ, thư pháp": ĐƯỢC "tiến bộ Thi +1..2 · Tinh xảo: cần chơi 9 phần · Tuyệt phẩm: chỉ vật liệu quý); dâng · tặng được" (stray ")"), KÈM "tự tay chơi thì ra Thư pháp «Vọng nguyệt» (chơi 5 phần: Khá" (unclosed, cut), "+1..2" is not player wording. Rule: every act card line is complete, short, clear cổ-trang wording (VANPHONG), no broken brackets, no code-like ranges, no truncation. → worker review/act-text: whole family over all act cards (scan every generated card text for unbalanced brackets, "..", cut text, glued words).
+
+## 15/11 (session 8) — Khắc check must use the whole DAY's khắc, not the buổi (owner screenshot)
+- Owner (verbatim): "Tại sao 2 khắc còn 1 lại đỏ, tôi còn cả ngày mà, công thức tính khắc của bạn, phải tính theo tổng số khắc 1 ngày, chứ không phải theo buổi. Chỉ được đỏ, khi còn khắc, khi mà qua buổi mới, không làm được việc đó, hoặc không vào được nơi đó chứ."
+- Screenshot dev/handover/refs/owner-khac-day-budget.jpg ("Tự học Thi": CẦN "✗ 2 khắc (còn 1)" red while GHI CHÚ already says "kéo sang buổi chiều"; same on other cards).
+- Rule: the khắc requirement is checked against ALL khắc left in the DAY (remaining buổi included); an act longer than what is left in this buổi simply spills into the next buổi (as the walk-spill rule 15/11 09:05Z–09:15Z). The khắc chip is red ONLY when (a) the day does not have enough khắc left, or (b) the act/place is tied to this buổi (e.g. thỉnh an = morning only, a place closed next buổi) so spilling makes it impossible — and then the red chip says that reason in words. Whole family: every act, place, Dư đồ walk, servant act, co-op. → worker review/khac-day.
+
+## 15/11 (session 8) — Old unstyled screen flashes for <1 s when opening the game (owner screenshot)
+- Owner (verbatim): "Khi vừa bấm vào game, có chừng ít hơn 1 giây hiện khung này."
+- Screenshot dev/handover/refs/owner-boot-flash.jpg: before the game is ready, a raw skeleton shows (OLD tab names Việc/Bản đồ/Phi tần/Quan hệ/Phe/Kẻ hầu/Con/Rương/Nhật ký, a vertical stat list, empty panels, the app icon in the middle). Rule: from the first paint the player sees only a proper painted loading/title screen (kit style) until the game UI is fully built; no stale markup, no old labels. → worker review/boot-flash (also remove/rename the stale static HTML labels).
