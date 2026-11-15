@@ -49,3 +49,19 @@ window.KIT_LIGHT=KIT_LIGHT;
 window.KIT_SCENE_TINT=window.KIT_SCENE_TINT==null?0:window.KIT_SCENE_TINT;
 (function(){if(typeof b4Light!=="function")return;const b0=b4Light;
  b4Light=window.B4LIGHT=function(b,u,k){if(k!=null&&k<1&&!window.KIT_SCENE_TINT)return "rgba(0,0,0,0)";return b0.apply(this,arguments)}})();
+/* ---- TRANH CẢNH ĐÃ CHỈNH + THỜI TIẾT (sếp 11/15: Ngọc Thanh các chiều mưa tháng tư "nâu sepia, tối như lãnh cung") ----
+   Tranh riêng buổi (j94 <tên>-<mùa>-<buổi>, đã chỉnh màu, sếp duyệt) KHÔNG chồng thêm lọc màu cũ của p1.html/j25
+   (.sc-home.day: brightness 1.35 + sepia .12; rp1: sepia .25; rp2/rp3: saturate 1.3–1.4) → .stage.kown.
+   Trời ướt (mưa phùn, giông, tuyết dày: wet()) trên tranh riêng buổi: ánh sáng tán xạ xám mát nhẹ — bớt rực, bớt tương phản một chút,
+   sáng hơn chút ban ngày; KHÔNG nâu, KHÔNG xỉn (vệt mưa do lớp hạt j11 vẽ). Lãnh cung giữ nguyên vẻ hoang lạnh của tranh. */
+(function(){const css=document.createElement("style");css.textContent=`
+.stage.kown .scimg{filter:none!important}
+.stage.kown.rp2 .scimg{filter:saturate(1.04)!important}.stage.kown.rp3 .scimg{filter:saturate(1.07) brightness(1.02)!important}
+.stage.kown.kwet:not(.sc-lc) .scimg{filter:saturate(.88) contrast(.9) brightness(1.05) hue-rotate(-4deg)!important}
+.stage.kown.kwet.night:not(.sc-lc) .scimg{filter:saturate(.9) contrast(.92) brightness(.98)!important}
+.stage.kown.kwet:not(.sc-lc)>.light{background:linear-gradient(rgba(210,220,232,.10),rgba(190,202,218,.06))!important}`;document.head.appendChild(css);
+ function tag(){try{const st=$("stage");if(!st||!S)return;let own=false;try{own=/-(sang|trua|chieu|toi)$/.test(SCIMG[placeOf(S.place).sc]||"")}catch(e){}
+  st.classList.toggle("kown",own);st.classList.toggle("kwet",own&&typeof wet==="function"&&!!wet())}catch(e){}}
+ window.kitSceneTag=tag;
+ if(typeof renderStage==="function"){const r2=renderStage;renderStage=function(){const r=r2.apply(this,arguments);tag();return r}}
+ if(typeof lightTick==="function"){const l0=lightTick;lightTick=function(){const r=l0.apply(this,arguments);tag();return r}}})();
