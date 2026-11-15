@@ -9,25 +9,40 @@ const fs=require('fs');
  /* BASE "root" = serve the repo root from disk through the browser (no separate server needed) */
  let URL0=BASE;if(BASE==='root'){const R=require('path').resolve(__dirname,'../..');const MT={html:'text/html; charset=utf-8',js:'text/javascript',json:'application/json',webp:'image/webp',png:'image/png',jpg:'image/jpeg',mp3:'audio/mpeg',css:'text/css',webmanifest:'application/json'};
   await ctx.route('http://ts.local/**',r=>{let u=decodeURIComponent(new URL(r.request().url()).pathname);if(u==='/')u='/index.html';const f=R+u;if(!fs.existsSync(f))return r.fulfill({status:404,body:''});r.fulfill({status:200,contentType:MT[f.split('.').pop()]||'application/octet-stream',body:fs.readFileSync(f)})});URL0='http://ts.local/index.html'}
+ /* a build page on a local server (e.g. dev/index.html via python3 -m http.server): serve .html as UTF-8 */
+ await ctx.route(/^http:\/\/(127\.0\.0\.1|localhost)[:/].*\.html$/,r=>{const f=process.cwd()+new URL(r.request().url()).pathname;if(!fs.existsSync(f))return r.continue();r.fulfill({status:200,contentType:'text/html; charset=utf-8',body:fs.readFileSync(f)})});
  const p=await ctx.newPage();p.setDefaultTimeout(240000);const errs=[];p.on('pageerror',e=>errs.push(e.message));
  await p.goto(URL0,{waitUntil:'domcontentloaded'});await p.waitForTimeout(3000);
- await p.evaluate(()=>{SLOT=3;document.getElementById('title').hidden=true;
-  for(let i=0;i<80;i++){try{store.set(NL_KEY,null)}catch(e){}start();if(!isSrv())break}try{NLP=null}catch(e){}
-  Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;render()});
- await p.waitForTimeout(1500);
- for(let i=0;i<3;i++){await p.evaluate(()=>{document.querySelectorAll('#kroul,.kroul').forEach(e=>{const b=[...e.querySelectorAll('button')].find(x=>/Bỏ qua/.test(x.textContent));if(b)b.click();else e.remove()});Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;render()});await p.waitForTimeout(700)}
+ /* current main: start() may finish after the loading screen and opens the Luân hồi roulette (#kroulw) + identity card — wait for the
+    life, start again while it is a servant life, then remove the roulette and the card (review FAIL 5: "Bỏ qua" no longer closes it) */
+ await p.waitForFunction(()=>typeof start==='function',null,{timeout:120000});
+ await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();SLOT=3;document.getElementById('title').hidden=true;try{store.set(NL_KEY,null)}catch(e){}start()});
+ for(let i=0;i<60;i++){await p.waitForFunction(()=>typeof S!=='undefined'&&S&&S.name,null,{timeout:90000});if(!(await p.evaluate(()=>isSrv())))break;await p.evaluate(()=>{S=null;try{store.set(NL_KEY,null)}catch(e){}start()})}
+ await p.waitForTimeout(1800);await p.addStyleTag({content:'#kroul,#kroulw{display:none!important}'});
+ for(let i=0;i<3;i++){await p.evaluate(()=>{document.querySelectorAll('#kroul,#kroulw,.kroul').forEach(e=>e.remove());try{NLP=null}catch(e){}Q.length=0;const m=document.getElementById('modal');if(m){m.hidden=true;m.className='modal'}render()});await p.waitForTimeout(500)}
  if(MODE==='smoke'){const r=await p.evaluate(()=>{const out=[];for(let t=0;t<60&&!S.dead;t++){Q.length=0;if(S.mg)S.mg=null;try{endTurn()}catch(e){out.push('ERR '+e.message)}out.push(Q.map(m=>m.t).join('|'))}return{out:out.filter(Boolean),ts:S.ts,dead:S.dead}});
   console.log(JSON.stringify({r,errs}).slice(0,6000));await b.close();return}
  const check=async k=>{for(let i=0;i<3;i++){await p.evaluate(()=>document.querySelectorAll('[data-km-close]').forEach(b=>b.click()));await p.waitForTimeout(300)}await p.waitForTimeout(600);const r=await p.evaluate(()=>{const vw=innerWidth;const cut=[];
    document.querySelectorAll('#modal:not([hidden]) .kpanel *, #kg82 *, #kpodov *, #k3tc *, #rtoast *').forEach(e=>{if(!e.offsetParent&&e.id!=='kpodov')return;const cs=getComputedStyle(e);if(e.children.length)return;if(!e.textContent.trim())return;
     if((cs.overflow==='hidden'||cs.textOverflow==='ellipsis')&&(e.scrollWidth>e.clientWidth+2||e.scrollHeight>e.clientHeight+3))cut.push(e.className+':'+e.textContent.trim().slice(0,30))});
-   return{overflowX:document.documentElement.scrollWidth>vw,cut:cut.slice(0,5)}});
+   const M=document.getElementById('modal');const mt=M&&!M.hidden?M.innerText:"";
+   /* FAIL 1: dressing tiles — tops of pictures / names per grid row */
+   const tiles=[...document.querySelectorAll('#kg82 .ts-it')];const rows={};tiles.forEach(t=>{const y=Math.round(t.getBoundingClientRect().top);(rows[y]=rows[y]||[]).push(t)});
+   const spread=a=>a.length?Math.round(Math.max(...a)-Math.min(...a)):0;
+   const tileRows=Object.values(rows).filter(L=>L.length>1).map(L=>({n:L.length,pic:spread(L.map(t=>(t.querySelector('.kitb')||t).getBoundingClientRect().top)),name:spread(L.map(t=>(t.querySelector('.kitn')||t).getBoundingClientRect().top))}));
+   /* FAIL 2: top bar — the date line on one line, bar height */
+   const hud=document.querySelector('.game .hud');const d=document.getElementById('me-d');const dl=d?Math.round(d.getBoundingClientRect().height/(parseFloat(getComputedStyle(d).lineHeight)||16)):0;
+   const chipsTop=[...document.querySelectorAll('#k3tt [data-k3="tsnh"],#k3tt [data-k3="tsxp"]')].length;
+   /* FAIL 3/4: words and strangers */
+   const qm=/\?\?\?/.test(mt),thien=/thiện cảm/.test(mt),lui=[...(M?M.querySelectorAll('button'):[])].filter(b=>b.offsetParent&&/^(Lui|Thôi|Đã hiểu)$/.test(b.textContent.trim())).length;
+   const grey=M&&!M.hidden?[...M.querySelectorAll('img')].filter(i=>i.offsetParent&&/unknown-fig|kit\/unknown/.test(i.src)).length:0;
+   return{overflowX:document.documentElement.scrollWidth>vw,cut:cut.slice(0,5),tileRows,hudH:hud?Math.round(hud.getBoundingClientRect().height):0,dateLines:dl,chipsOnTopBar:chipsTop,qm,thien,lui,grey}});
   await p.screenshot({path:`${OUT}/${TAG}-${k}.jpg`,type:'jpeg',quality:80});R.push(Object.assign({k},r));};
  const R=[];
  const clear0=async()=>{for(let i=0;i<5;i++){await p.evaluate(()=>document.querySelectorAll('[data-km-close]').forEach(b=>b.click()));await p.waitForTimeout(400)}};
  const clear=async()=>{for(let i=0;i<4;i++){await p.evaluate(()=>document.querySelectorAll('[data-km-close]').forEach(b=>b.click()));await p.waitForTimeout(250)}await p.evaluate(()=>{try{kg82Close(true)}catch(e){}try{kitPodiumClose(true)}catch(e){}Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;const t=document.getElementById('rtoast');if(t)t.hidden=true;document.getElementById('ov').hidden=true;render()});await p.waitForTimeout(400)};
  /* 6: danger bar */
- await p.evaluate(()=>{const v=liveRivals(false)[1];v.ghen=75;S.met[v.id]=1;const w=liveRivals(false)[2];oanAdd(w,S,45);S.met[w.id]=1;render();TSA.dangerPanel()});await check('6-nguy-hiem');await clear();
+ await p.evaluate(()=>{const kn=x=>{S.dKnown=S.dKnown||{};S.dKnown[x.id]=1;try{k61Meet(x,'thử')}catch(e){}};const v=liveRivals(false)[1];v.ghen=75;kn(v);const w=liveRivals(false)[2];oanAdd(w,S,45);kn(w);render();TSA.dangerPanel()});await check('6-nguy-hiem');await clear();
  /* 5: promotion gate */
  await p.evaluate(()=>{TSA.promoPanel(false)});await check('5-xet-pham');await clear();
  /* 3: summon (đàn) + mini game */
@@ -54,8 +69,9 @@ const fs=require('fs');
  await p.evaluate(()=>{S.month=4;S.tuan=1;S.ts.dress.m=4;S.ts.dress.y=S.year;TSA.dressHold();showModal()});await p.evaluate(()=>{document.querySelector('#modal .opt[data-m="0"]').click()});await p.waitForTimeout(1500);
  await p.evaluate(()=>{const it=[...document.querySelectorAll('[data-tsi]')];if(it[0])it[0].click()});await p.waitForTimeout(300);await p.evaluate(()=>{const it=[...document.querySelectorAll('[data-tsi]')];if(it[1])it[1].click();const it2=[...document.querySelectorAll('[data-tsi]')];if(it2[2])it2[2].click()});await check('2-phoi-do');
  await p.evaluate(()=>{document.getElementById('tsdgo').click()});await p.waitForTimeout(2500);await check('2-buc-vinh-danh');await clear();
- /* HUD chips */
- await check('hud');
+ /* HUD chips: on the Fold panel view ("‹ Phòng" shown) the top bar must keep its height and the date its one line */
+ await p.evaluate(()=>{tab="inv";render()});await p.waitForTimeout(500);await check('hud');
+ await p.evaluate(()=>{tab="act";render()});await p.waitForTimeout(500);await check('hud-room');
  /* old save loads */
  const old=await p.evaluate(()=>{try{const raw=localStorage.getItem('hclh-save-v2-3')||localStorage.getItem('hclh-slot');return !!raw}catch(e){return false}});
  console.log(JSON.stringify({TAG,R,errs:errs.slice(0,8),old}));await b.close()})();

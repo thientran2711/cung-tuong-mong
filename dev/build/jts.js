@@ -4,7 +4,7 @@
    Luật chung: mọi thẻ lựa chọn đủ Cần / Tốn / Được / Mất + chữ cơ may (kit j63); thẻ kết quả sau mỗi việc (resultShow);
    mọi chuyện có nguyên nhân thật trong thế giới (sủng, tâm trạng Hoàng thượng, biên cương, tài nghệ, ghen / oán) và điềm báo trước;
    phi tần khác theo cùng luật (hai chiều). Trò nhỏ dùng khung j82 (kg82Open / kg82Play), luôn có "Bỏ qua" tính cơ may thường.
-   Tranh: chỉ tranh có sẵn (img/kit/mg-*, img/ev-*, img/kit/mo-*). Không CSS riêng ngoài vài dòng xếp ô theo kit (ts-css). KIT.md mục 35. ================= */
+   Tranh: chỉ tranh có sẵn (img/kit/mg-*, img/ev-*, img/kit/mo-*). Không CSS riêng ngoài vài dòng xếp ô theo kit (ts-css). KIT.md mục 39. ================= */
 const TSA={};
 function tsS(){S.ts=S.ts||{};return S.ts}
 function tsOn(){return !!(typeof S!=="undefined"&&S&&!S.dead&&!(typeof isSrv==="function"&&isSrv()))}
@@ -164,7 +164,7 @@ function tsLeHost(p,to){const me=p===S;if(me){const G=tsGuests(S).filter(x=>x!==
   const n=G.length,hi=8*n,lo=4*n;const s=tsS();s.leN=(s.leN||0)+1;
   /* review ts-a FAIL 3: the guests come into her palace — she sees each face (k61Meet), so a named guest is never a grey "Người lạ" */
   G.forEach(v=>{try{if(typeof k61Meet==="function"&&!tsNamed(v))k61Meet(v,"Lễ tấn phong")}catch(e){}});
-  tsPanel({t:`Lễ tấn phong · ${RANKS[to].n}`,art:"img/ev-tan-phong.webp",h:`<p>Thánh chỉ vừa tuyên, ${n} vị phi tần sang cung ngươi dự lễ chúc mừng.</p>${tsFacts(lines)}${gl.length?tsRows([["Quà mừng",gl.join(" · "),"g"]]):""}<p class="past">Theo lệ, chủ lễ phát lì xì cho khách. Phát hậu thì lòng người êm; không phát dễ mang tiếng keo kiệt.</p>`,
+  tsPanel({t:`Lễ tấn phong · ${RANKS[to].n}`,who:pMe(),h:`<p>Thánh chỉ vừa tuyên, ${n} vị phi tần sang cung ngươi dự lễ chúc mừng.</p>${tsFacts(lines)}${gl.length?tsRows([["Quà mừng",gl.join(" · "),"g"]]):""}<p class="past">Theo lệ, chủ lễ phát lì xì cho khách. Phát hậu thì lòng người êm; không phát dễ mang tiếng keo kiệt.</p>`,
    opts:[tsOpt({n:"Phát lì xì hậu",fx:{bac:-hi},need:[tsNeedBac(hi)],duoc:[`${n} vị khách bớt ghen 6`,"khách quý ngươi +4","Danh +1"],go:()=>{G.forEach(v=>{v.ghen=cl((v.ghen||0)-6,0,100);tsAff(v,4)});apply({danh:1});log(`Lễ tấn phong: ngươi phát lì xì hậu cho ${n} vị khách.`)}}),
     tsOpt({n:"Phát lì xì vừa phải",fx:{bac:-lo},need:[tsNeedBac(lo)],duoc:[`${n} vị khách bớt ghen 3`,"khách quý ngươi +2"],go:()=>{G.forEach(v=>{v.ghen=cl((v.ghen||0)-3,0,100);tsAff(v,2)});log(`Lễ tấn phong: ngươi phát lì xì cho ${n} vị khách.`)}}),
     tsOpt({n:"Không phát",mat:["Danh -2","người đang ghen: ghen +3 (chê keo kiệt)"],go:()=>{apply({danh:-2});G.forEach(v=>{if((v.ghen||0)>=40)v.ghen=cl(v.ghen+3,0,100)});log("Lễ tấn phong: ngươi không phát lì xì; có người xì xào chê keo kiệt.")}})]});
