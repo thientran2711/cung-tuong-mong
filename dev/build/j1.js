@@ -23,7 +23,7 @@ const TUAN=["thượng tuần","trung tuần","hạ tuần"];
 const MAIDS=["Tiểu Đào","Bích Ngọc","Xuân Hạnh","Thu Cúc","Hồng Liên","Tiểu Thúy","Lục Châu","Hạ Vân","Tố Cầm","Ngọc Lan"];
 const PRINCE=["Vĩnh Kỳ","Vĩnh Diễm","Hoằng Trú","Vĩnh Thành","Miên Ninh","Vĩnh Tinh","Hoằng Chiêm","Vĩnh Dung","Dận Tường","Vĩnh Lân","Miên Khải","Hoằng Diệu"];
 const PRINCESS=["Hòa Kính","Hòa Gia","Ngọc Dung","Tĩnh An","Hòa Thạc","Ninh Thọ","Thục Thận","Hòa Khác","An Lạc","Vĩnh Gia","Thục Nghi","Uyển Trinh"];
-const NAMES={sung:"Sủng",danh:"Danh",bac:"Bạc",suc:"Sức",mat:"Tai mắt",th:"Thái hậu với ngươi",hh:"Hoàng hậu với ngươi",sac:"Sắc",tai:"Tài",tamco:"Tâm cơ",duc:"Đức",maid:"Lòng cung nữ"};
+const NAMES={sung:"Sủng",danh:"Danh",bac:"Bạc",suc:"Sức",mat:"Tai mắt",th:"Thái hậu quý ngươi",hh:"Hoàng hậu quý ngươi",sac:"Sắc",tai:"Tài",tamco:"Tâm cơ",duc:"Đức",maid:"Lòng cung nữ"};
 const ETRAITS={
  danghi:["Đa nghi","Mưu kế dễ bị lộ hơn, nhưng lời vu cáo khó gỡ hơn."],
  mesac:["Mê sắc","Sắc đẹp và tài múa nặng gấp đôi khi chọn thị tẩm."],
@@ -62,6 +62,13 @@ function spend(c){used=Math.max(0,used+c)}
 function pips(n){n=Math.max(0,Math.min(4,n));return `<span class="pip">${"●".repeat(n)}${"○".repeat(4-n)}</span>`}
 
 function word(o){return o>=91?"Nắm chắc":o>=81?"Rất chắc":o>=66?"Chắc":o>=56?"Khá chắc":o>=46?"Năm ăn năm thua":o>=31?"Khó":"Liều"}
+/* TWO scales, never mixed (owner 11/14, coordinator 11/15): word() above = the 7-step ladder, ONLY for the act's own success/failure (the one
+   word in the card corner / beside an option). Every side chance of something that comes along (có thai, được ban thưởng, lật thẻ, bị lộ,
+   chết… in Được / Mất / Kèm, result cards, Sổ ghi, hints, the HUD) reads on the chance scale Rất thấp / Thấp / Vừa / Cao / Rất cao. Same numbers. */
+function chanceLvl(n){return n<=0?"Không có":n<8?"Rất thấp":n<18?"Thấp":n<35?"Vừa":n<60?"Cao":"Rất cao"}
+function chanceLo(n){return chanceLvl(n).toLowerCase()}
+function chanceW(n){return n<=0?"không có khả năng":"khả năng "+chanceLo(n)}
+const CHW=/khả năng (rất thấp|thấp|vừa|cao|rất cao)|không có khả năng/;
 function cl(v,a,b){return Math.max(a,Math.min(b,v))}
 function roll(o){return Math.random()*100<o}
 function has(t){return S.emp.traits.includes(t)}
@@ -73,6 +80,8 @@ function apply(o){const pops=[];
     if(k==="maid"){S.maid.loyal=cl(S.maid.loyal+v,0,100);pops.push([k,v]);continue}
     if(k==="sung")v=sg(v);S[k]=(S[k]||0)+v;if(NAMES[k])pops.push([k,v])}
   for(const k of ["sung","danh","suc","sac","tai","tamco","duc"])S[k]=cl(S[k],0,100);
+  /* "Hoàng hậu quý ngươi" (S.hh) IS the Hoàng hậu's feeling toward her: her person card ("Nàng với ngươi") moves with it (owner 11/15) */
+  if(o.hh){try{const q=typeof queenP==="function"?queenP():null;if(q&&q!==S&&typeof affAdd==="function")affAdd(q,S,o.hh)}catch(e){}}
   S.th=cl(S.th,-100,100);S.hh=cl(S.hh,-100,100);S.bac=Math.max(0,S.bac);S.mat=cl(S.mat,0,10);
   if(!quiet)pops.forEach(([k,v],i)=>popNum(k,v,i))}
 function popNum(k,v,i){const el=$("hud-"+k)||$("stage");if(!el)return;const r=el.getBoundingClientRect();

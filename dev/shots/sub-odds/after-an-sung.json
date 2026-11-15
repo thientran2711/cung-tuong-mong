@@ -1,0 +1,47 @@
+{
+ "1366x1024": {
+  "state": {
+   "stage": [
+    691,
+    891
+   ],
+   "col": [
+    552,
+    86,
+    138,
+    319
+   ],
+   "text": "Hoàng thượng | Bình thường | Thái hậu | với ngươi 0 | Hoàng hậu | với ngươi -1 | Hồng Liên | Lòng 57 | Ân sủng | Tai mắt | 2 | Có thai | Rất thấp | Lật thẻ | Rất thấp | Ân tình (đêm) | 12 | Số lần ân thưởng | 0 | Bổng lộc | sau 3 tuần",
+   "collapsed": false,
+   "clip": [],
+   "cut": [],
+   "over": [],
+   "figs": 48,
+   "sheetBtn": false,
+   "overflowX": false,
+   "hc": [
+    "date=Tháng ba, năm thứ nhất · thượng tuần",
+    "buoi=còn 4 khắc",
+    "lot=Quẻ tuần: Hạ hạ (Hung)",
+    "undefined=mưa phùn",
+    "sac=Sắc 55",
+    "tai=Tài 70",
+    "tamco=Tâm cơ 25",
+    "duc=Đức 40",
+    "mat=Tai mắt 2",
+    "th=Thái hậu với ngươi 0",
+    "hh=Hoàng hậu với ngươi -1",
+    "maid=Lòng Hồng Liên 57",
+    "con=Có thai: Rất thấp",
+    "dem=Lật thẻ: Rất thấp",
+    "an=Ân tình (đêm) 12",
+    "bl=Bổng lộc sau 3 tuần",
+    "aw=Số lần ân thưởng 0"
+   ]
+  },
+  "sheetOpen": false,
+  "card": null,
+  "ladder": false,
+  "errs": []
+ }
+}

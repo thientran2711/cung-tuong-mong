@@ -34,7 +34,7 @@ function pool(){const L=S.emp.likes,K=S.emp.known,tt=has("trongtai")?2:1;
   {n:"Nghỉ ngơi dưỡng sức",t:"Uống thuốc bổ, ngủ sớm.",c:{},o:100,w:{suc:20},l:{}},
   {n:"Thêu khăn bán ra ngoài",t:"Lén nhờ cung nữ mang ra cửa Thần Vũ.",c:{suc:-10},o:od(75),w:{bac:35},l:{danh:-4}},
   {n:"Làm thơ dâng lên",t:S.tai>=70?"Thơ ngươi đã truyền khắp cung, danh tiếng thêm vang.":"Tài hoa là con đường dài.",c:{suc:-5},o:od(30+S.tai/2+S.arts.thi*4*tt),w:{sung:5,danh:S.tai>=70?6:4},l:{danh:-1}},
-  {n:"Cầu tự ở Phụng Tiên điện",t:"Thắp hương xin một hoàng tử.",c:{bac:-10},o:od(50),w:{},l:{},lock:S.fert>0||S.pray>0,t:"đang có hiệu lực",x:`2 tháng dễ có thai hơn (nay ${word(conceiveCh())})`,go:()=>S.pray=2},
+  {n:"Cầu tự ở Phụng Tiên điện",t:"Thắp hương xin một hoàng tử.",c:{bac:-10},o:od(50),w:{},l:{},lock:S.fert>0||S.pray>0,t:"đang có hiệu lực",x:`2 tháng dễ có thai hơn (nay ${chanceW(conceiveCh())})`,go:()=>S.pray=2},
   {n:"Phát chẩn cho cung nhân",t:"Ban bạc cho kẻ hầu nghèo.",c:{bac:-40},o:od(85),w:{danh:7,mat:1,duc:3},l:{}},
   {n:"Dưỡng nhan",t:"Ngọc trai nghiền, sữa dê tắm, ngủ đủ giấc.",c:{bac:-30},o:od(92),w:{sac:3},l:{}},
   {n:"Luyện cầm kỳ thi họa",t:"Ngày đêm khổ luyện bên án thư.",c:{suc:-10},o:100,w:{tai:2}},
@@ -71,7 +71,7 @@ function deal(){
 /* place acts also offered directly as cards: same option object as at the place (talkOpts), run once by runOpt */
 function directActs(){const A=[],mk=(p,i,n,t)=>{const a=talkOpts(p)[i];if(a)A.push(Object.assign({},a,{n,t}))};
  if(!S.thDead)mk({kind:"th"},0,"Thỉnh an Thái hậu","Sang Đức Thọ cung vấn an, chép kinh cho Thái hậu.");
- if(qOn())mk({kind:"hh",ref:rivals[0]},0,"Thỉnh an Hoàng hậu",`Sang Càn Ninh cung vấn an Hoàng hậu ${rivals[0].name}.`);A.forEach(a=>{a.lock=false;a.b=0});
+ if(qOn())mk({kind:"hh",ref:rivals[0]},Math.max(0,talkOpts({kind:"hh",ref:rivals[0]}).findIndex(a=>a.n==="Thỉnh an")),"Thỉnh an Hoàng hậu",`Sang Càn Ninh cung vấn an Hoàng hậu ${rivals[0].name}.`);A.forEach(a=>{a.lock=false;a.b=0});
  mk({kind:"ksp"},0,"Hối lộ Kính sự phòng","Đút lót Tổng quản thái giám giữ thẻ bài.");
  return A}
 function canPay(a){return !(a.c&&a.c.bac&&S.bac+a.c.bac<0)&&!a.lock}
@@ -117,7 +117,7 @@ function curPeople(){return S.visit?S.visit.people:[]}
 function talkOpts(p){const E=S.emp,K=E.known,L=E.likes,b=bestArt(),v=p.ref;
  if(p.kind==="emp"){const A=[
    {n:"Tâng bốc",o:od(55+S.sung/5+mm()),w:{sung:3},l:{sung:-1},go:()=>{if(roll(25))discover()}},
-   {n:"Nói thật lòng",o:od(45+S.duc/3+mm()+(has("nhantu")?10:0)),w:{sung:2,danh:2},l:{sung:-2},x:`biết thêm một sở thích của ngài: ${word(50)}`,go:()=>{if(roll(50))discover()}},
+   {n:"Nói thật lòng",o:od(45+S.duc/3+mm()+(has("nhantu")?10:0)),w:{sung:2,danh:2},l:{sung:-2},x:`biết thêm một sở thích của ngài: ${chanceW(50)}`,go:()=>{if(roll(50))discover()}},
    {n:`Phô tài: ${b.n}`,c:{suc:-5},o:od(30+b.w*10+mm()),w:{sung:4+b.l,danh:1},l:{danh:-2}},
    {n:K.flower?`Dâng ${L.flower}`:"Dâng một cành hoa",c:{bac:-5},o:K.flower?100:od(50),w:{sung:K.flower?6:2},l:{}}];
   if(S.sung>=30)A.push({n:"Xin ân điển",o:od(35+S.sung/3+mm()),w:{bac:60},l:{sung:-4},fail:()=>{if(E.mood===3&&roll(40))punish("làm phiền lúc thánh thượng nổi giận",1)}});
@@ -143,7 +143,7 @@ function talkOpts(p){const E=S.emp,K=E.known,L=E.likes,b=bestArt(),v=p.ref;
   if(!S.doctor)A.push({n:"Mời làm thái y tâm phúc",c:{bac:-50},o:100,x:"dễ phát hiện xạ hương, độc; bệnh của con nhẹ hơn",go:()=>S.doctor=1});
   const k=S.kids.filter(x=>x.alive&&x.hp<80).sort((a,c)=>a.hp-c.hp)[0];if(k)A.push({n:`Xin thuốc cho ${k.name}`,c:{bac:-30},o:100,x:"Sức khỏe +25",go:()=>{k.hp=Math.min(100,k.hp+25)}});
   A.push({n:"Học hỏi y lý",c:{bac:-10},o:100,x:"Y thuật tiến bộ +1",go:()=>addArt("y",1)});return A}
- if(p.kind==="ksp"){const A=[{n:"Đút lót lật thẻ",c:{bac:-30},o:100,lock:S.tablet>0,t:`đang có hiệu lực ${S.tablet} tuần`,x:`2 tuần tới dễ được lật thẻ: ${word(nightCh())} → dễ hơn một bậc`,go:()=>S.tablet=2}];
+ if(p.kind==="ksp"){const A=[{n:"Đút lót lật thẻ",c:{bac:-30},o:100,lock:S.tablet>0,t:`đang có hiệu lực ${S.tablet} tuần`,x:`2 tuần tới dễ được lật thẻ: ${chanceW(nightCh())} → dễ hơn một bậc`,go:()=>S.tablet=2}];
   if(Object.keys(LIKES).some(k=>!K[k]))A.push({n:"Hỏi sở thích Hoàng thượng",c:{bac:-15},o:od(80),x:"biết thêm một điều ngài thích",go:()=>discover()});
   A.push({n:"Xem sổ thị tẩm",o:100,x:"biết ai đang được sủng",go:()=>log("Sổ thị tẩm: "+liveRivals(true).map(x=>`${x.name} ${x.nights} lần`).join(", ")+`; ngươi ${S.nights} lần.`)});return A}
  if(p.kind==="peddler")return S.shop.slice(0,6).map(k=>({n:`Mua ${IT[k].n}`,c:{bac:-IT[k].pr},o:100,x:IT[k].d,go:()=>S.inv.push({k})}));
@@ -171,4 +171,4 @@ function resumeMG(){const m=S.mg;if(!m)return;const a=ARTS.find(x=>x.k===m.k);op
 function hireMaster(){if(S.bac<60||S.master||S.dead)return;apply({bac:-60});S.master=3;log("Mời danh sư vào cung dạy: 3 tháng tiến bộ gấp đôi.");render()}
 
 /* what a won night is worth, in numbers: a full thị tẩm (Sủng, Ân tình, a chance of a child and of a gift); the cost to the rival on a red 'kèm' line */
-function stealX(v,road){let c=0;try{c=conceiveCh(S)}catch(e){}return `Sủng +3..8 · Ân tình +2..7${S.preg?"":` · thai: ${word(c)}`} · có thể được thưởng · kèm: ${v.name} ghen +25, thù -15`}
+function stealX(v,road){let c=0;try{c=conceiveCh(S)}catch(e){}return `Sủng +3..8 · Ân tình +2..7${S.preg?"":` · thai: ${chanceW(c)}`} · có thể được thưởng · kèm: ${v.name} ghen +25, thù -15`}

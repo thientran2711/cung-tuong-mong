@@ -133,15 +133,15 @@ function accEtqCard(k,then){const h=accEtq(S,k);if(!h){then();return}if(!S||S.de
  const tc=travel(S.place,k);const nm=accName(k);const hn=`${accRkName(h)} ${h.name}`;const left=Math.max(0,4-used);const opts=[];
  const C=ACC_ETQ,sh=h.name.split(" ").pop(),sg=n=>(n>0?"+":"")+n,skA=accSkipAff(h,S);
  const L=[`<p>${hn} là chủ vị ${nm}, đang ở cung. Khách phẩm thấp hơn ${C.mode==="required"?"phải":"theo lệ nên"} vào chào chủ vị trước${C.invite?" (đến theo lời mời thì khỏi)":""}${C.mode==="required"?"":"; ngươi vẫn có thể đi thẳng đến chỗ người ngươi thăm"}.</p>`];
- if(j77Kh(tc+C.khac))opts.push({n:`Bái kiến ${accRkName(h)} rồi vào`,fx:{},x:`Chắc chắn · tốn: ${tc+C.khac} khắc · thành: thiện cảm ${sh} ${sg(C.okAff)} · (gồm ${C.khac} khắc bái kiến)`,go:()=>setTimeout(()=>accEtqGo(k,h,1,then),0)});
+ if(j77Kh(tc+C.khac))opts.push({n:`Bái kiến ${accRkName(h)} rồi vào`,fx:{},x:`Chắc chắn · tốn: ${tc+C.khac} khắc · thành: chủ vị quý ngươi ${sh} ${sg(C.okAff)} · (gồm ${C.khac} khắc bái kiến)`,go:()=>setTimeout(()=>accEtqGo(k,h,1,then),0)});
  else L.push(`<p class="past">Bái kiến: cần ${tc+C.khac} khắc, còn ${left}.</p>`);
- if(C.mode!=="required"&&j77Kh(tc))opts.push({n:"Vào thẳng, không bái kiến",fx:{},x:`Chắc chắn · tốn: ${tc} khắc · thành: vào cung · kèm: thiếu lễ, thiện cảm ${sh} ${sg(skA)}${C.skipDanh?`, Danh ${sg(C.skipDanh)}`:""}`,go:()=>setTimeout(()=>accEtqGo(k,h,0,then),0)});
+ if(C.mode!=="required"&&j77Kh(tc))opts.push({n:"Vào thẳng, không bái kiến",fx:{},x:`Chắc chắn · tốn: ${tc} khắc · thành: vào cung · kèm: thiếu lễ, chủ vị quý ngươi ${sh} ${sg(skA)}${C.skipDanh?`, Danh ${sg(C.skipDanh)}`:""}`,go:()=>setTimeout(()=>accEtqGo(k,h,0,then),0)});
  if(C.invite)L.push(`<p class="past">Đến theo lời mời thì không cần bái kiến: mời nàng sang cung ngươi, hoặc chờ được mời.</p>`);
  opts.push({n:"Thôi",fx:{},x:""});Q.push({t:nm,h:L.join(""),opts});showModal()}
 function accEtqGo(k,h,greet,then){if(!S||S.dead||Q.length)return;const sh=h.name.split(" ").pop();
  const C=ACC_ETQ,sg=n=>(n>0?"+":"")+n;
- if(greet){if(!j77Kh(travel(S.place,k)+C.khac))return;spend(C.khac);relAdd(S,h,C.okAff);log(`Ngươi cúi chào, bái kiến ${accRkName(h)} ${h.name} ở ${accName(k)}: thiện cảm ${sg(C.okAff)}.`)}
- else{if(C.mode==="required")return;const a=accSkipAff(h,S);relAdd(S,h,a);if(C.skipDanh)apply({danh:C.skipDanh});log(`<span class="r">Vào ${accName(k)} không chào chủ vị ${h.name}: thiếu lễ, thiện cảm ${sg(a)}${C.skipDanh?`, Danh ${sg(C.skipDanh)}`:""}.</span>`)}
+ if(greet){if(!j77Kh(travel(S.place,k)+C.khac))return;spend(C.khac);relAdd(S,h,C.okAff);log(`Ngươi cúi chào, bái kiến ${accRkName(h)} ${h.name} ở ${accName(k)}: chủ vị quý ngươi ${sg(C.okAff)}.`)}
+ else{if(C.mode==="required")return;const a=accSkipAff(h,S);relAdd(S,h,a);if(C.skipDanh)apply({danh:C.skipDanh});log(`<span class="r">Vào ${accName(k)} không chào chủ vị ${h.name}: thiếu lễ, chủ vị quý ngươi ${sg(a)}${C.skipDanh?`, Danh ${sg(C.skipDanh)}`:""}.</span>`)}
  accGrant(S,k);then()}
 /* the gate: every way in (map, person card, follow) passes the greeting first */
 (function(){const g0=goTo;goTo=function(k){if(!S||!k||k===S.place||k==="home"||window.__accSilent||window.__j77etq)return g0.apply(this,arguments);
