@@ -141,3 +141,13 @@ Sửa:
   có tên. Nay luôn gọi k61Meet (tự lọc). Riêng Hoàng thượng (triệu riêng) giữ như cũ: hình ngài thuộc kit-fig2 (gặp mặt → khung tranh trống).
 - Bài thử ts-a.js: đếm "thiện cảm" nằm ngoài .krel (phải 0), "quý ngươi"/"ra tay thiện cảm"; clear0(re) đóng thẻ xếp trước (Ngự tứ sau tấn phong).
 Bot: dev/index-main.html (bản dựng main, không commit) vs dev/index.html, `node dev/measure/run_url.js root/dev/index.html sens 40 out.json inpage6.js`.
+Thử 4+ cỡ (ts-a.js, bản 10c0394d / 67294a9a): 755x1000, 1000x755, 1180x820, 1366x1024, 844x390 — mỗi cỡ 18 bước, 0 lỗi trang, 0 tràn ngang, 0 chữ cắt,
+0 "???", 0 "thiện cảm" ngoài .krel, 0 "quý ngươi", 0 nút Lui/Thôi/Đã hiểu, ngày 1 dòng, thanh trên 111 px (Fold/phone) · 65 px (ngang/iPad),
+hàng ô phối đồ lệch 0 px; bóng xám chỉ còn Hoàng thượng (kit-fig2) và người nền ở thẻ phía sau. 390x844: màn tựa đứng (như main).
+CÂN BẰNG — CHƯA ĐO ĐƯỢC (máy): tải ~60 trên 4 nhân, RAM còn ~1 GB → trình duyệt bot "Target crashed" liên tục; 45 phút được 16 đời.
+Mẫu nhỏ (inpage6 sens): main n=7 HH 0% chết sớm 71% (độc 4, khó sinh 1); ts n=4 HH 0% chết sớm 50%; 5 đời ts TIMEOUT.
+Bot inpage6 KHÔNG hợp main hiện tại: 0 con/đời ở cả hai bản, HH 0% (người duyệt đo main HH 54% bằng bot cũ) → số không dùng được.
+TIMEOUT của ts: kit-close giấu nút "Đã hiểu" (#kg82ok) của kết quả tài nghệ sau ✕ → bot kẹt; đã vá inpage6 (bấm nút ẩn khi #ov đang mở,
+thêm #kg92ok) — CHƯA chạy thử được vì máy. Việc còn: người cân bằng sửa bot cho main mới (con cái, thẻ thân phận) rồi đo ≥80 đời
+`node dev/measure/run_url.js root/dev/index.html sens 40 out.json inpage6.js` (bản main: dựng dev/build của origin/main vào dev/index-main.html).
+Nếu HH ts > main + 5 điểm: hạ tsSummonGain / roll(14) trong jts.js.

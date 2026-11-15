@@ -16,8 +16,8 @@ function note(k,d){window.__acts[k]=(window.__acts[k]||0)+1;(window.__ring=windo
 function rvBtns(i){const ck=S.turn+'_'+S.tuan+'_'+(S.buoi||0)+'_'+used+'_'+S.suc+'_'+S.bac+'_'+rivals.length+'_'+i+'_'+(rivals[i]&&rivals[i].id);window.__rvc=window.__rvc||{};if(window.__rvc.k!==S.turn+'_'+S.tuan)window.__rvc={k:S.turn+'_'+S.tuan};if(window.__rvc[ck])return window.__rvc[ck];return window.__rvc[ck]=rvBtns0(i)}
 function rvBtns0(i){const v=rivals[i];const d=document.createElement('div');d.innerHTML=rvButtons(v,i);return [...d.querySelectorAll('button[data-r]')].filter(b=>!b.disabled).map(b=>b.dataset.a)}
 function modalStep(sens){
-  {const k=q('#kg82ok');if(k&&k.offsetParent!==null){k.click();return true}const sk=q('#kg82skip');if(sk&&sk.offsetParent!==null){sk.click();return true}}
-  if(!q('#ov').hidden){const ok=q('#mgok');if(ok){ok.click();return true}const sk=q('#mgskip');if(sk&&!sk.hidden){sk.click();return true}return true}
+  {const k=q('#kg82ok');const ovOn=q('#ov')&&!q('#ov').hidden;/* kit-close (KIT 32.10) hides the result's close-only button behind ✕: press it while the result shows */if(k&&(k.offsetParent!==null||(k.isConnected&&ovOn))){k.click();return true}const sk=q('#kg82skip');if(sk&&sk.offsetParent!==null){sk.click();return true}}
+  if(!q('#ov').hidden){const ok=q('#mgok')||q('#kg92ok');if(ok){ok.click();return true}const sk=q('#mgskip');if(sk&&!sk.hidden){sk.click();return true}return true}
   if(Q.length){
     const m=Q[0];
     if(m.opts&&m.opts.length){
