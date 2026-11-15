@@ -673,3 +673,7 @@ All must work in co-op.
 
 ## 15/11 ~21:20Z — Recipes also from levelling an art (owner)
 - Besides buying/teachers, each time an art goes up one level she ALSO learns one new recipe/pattern of that art (plus the usual level rewards). Not everything must be bought. (Self-study still doesn't open a new sub-style; the level-up recipe comes from sub-styles she already knows, or the next basic one.)
+
+## 15/11 ~21:25Z — Co-op buổi timer (owner)
+- Co-op today (checked): each player presses Sang buổi; the first waits ("Đợi hảo hữu xong buổi") until the other also finishes (jcoopworld bend/onBuoi). No countdown.
+- Owner wants: a SHARED countdown per buổi (e.g. 2 min, in BAL) visible to both = the MAXIMUM length of a buổi. When one player presses "Sẵn sàng" the other sees "Hảo hữu đã sẵn sàng"; if both are ready the buổi advances immediately (no need to wait for the timer). When the timer runs out, the buổi advances for both (open dialogs resolved safely / carried as in the night-desync fix). Pause the timer during forced dialogs/minigames? → coordinator decides sensible rules (e.g. timer pauses while a player is in a minigame, with a cap).
