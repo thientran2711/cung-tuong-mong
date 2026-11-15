@@ -53,6 +53,11 @@ const cm0=chooseM;chooseM=function(i){try{const m=Q[0];const o=m&&m.opts&&m.opts
  window.__ntDone=0;const r=cm0.apply(this,arguments);
  try{if(window.__ntDone&&window.__nsnap&&S&&!S.dead){const b=window.__nsnap;b.seq=window.__ntSeq!=null?window.__ntSeq:b.seq;window.__nsnap=null;window.__ntDone=0;resultShow("Đêm thị tẩm",b,"sure")}}catch(e){}return r};
 
+/* owner 13:30Z "Bạc −5 phải truy nguồn": the night card's "Mất: Bạc 300→295 (−5)" was the price of the PREP choice (Điểm trang lộng lẫy
+   Bạc −5; Tắm cánh hoa Bạc −15; Tập trước Sức −5), already paid and shown as that choice's Tốn — the night snapshot is taken at nightScene,
+   BEFORE prep. Re-base Bạc / Sức when the night itself begins (night1 is built, after the prep cost was applied by chooseM), so the night
+   card shows only what the night did. (Bạc won IN the night — "Xin ân cho gia đình" — still shows.) */
+{const n1=PEND.night1;PEND.night1=function(){try{const b=window.__nsnap;if(b&&S){b.bac=S.bac||0;b.suc=S.suc||0}}catch(e){}return n1.apply(this,arguments)}}
 /* --- the night's true line --- */
 const nf0=nightFx;nightFx=function(s){const b={sung:S.sung,an:S.an||0,inv:S.inv.length,g:{}};for(const v of liveRivals(true))b.g[v.id]=v.ghen||0;
  const L0=log;log=function(h){if(/^Thị tẩm\. Sủng/.test(String(h)))return;return L0.apply(this,arguments)};let r;
