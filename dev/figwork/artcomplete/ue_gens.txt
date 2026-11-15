@@ -1,3 +1,4 @@
 ue-u01-r0 bxT8ZlA5Y2
-ue-u01-r2 fHAMPr7CDY
+ue-u01-r2-rejected fHAMPr7CDY
 ue-u01-r3 UPmHDAAwny
+ue-u01-r2 xSdaWzzjfW (redo: r2 now red robe; first try fHAMPr7CDY looked like r1 - rejected)

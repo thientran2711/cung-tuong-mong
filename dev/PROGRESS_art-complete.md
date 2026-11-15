@@ -65,8 +65,11 @@ rules] A character lineup of THREE full-body standing figures ... Signature colo
   `python3 dev/site/cdn_sync.py --pull img/FIGURES-servants.json` then `python3 -I proc.py ue_jobs.json FIGURES-servants.json ue_bgN.txt`.
 - Generated so far (ids in ue_gens.txt): pilot u01 r0/r2/r3 - not yet looked at / cut. Next: look at the pilot, adjust ue_spec.py if
   needed, then the other 29 x 3; demole_por.py -n --sheet + browsheet on every new face before upload.
-- Code still to do: picker (jartc.js): staff eunuchs pass srk(who) as the rank to f88Pick (base mode), tiers r0..r3 parse to 0..3
-  like maid m0..m4; plan: wrap f88Best: if who.role eunuch/eun and who!==S -> f88Pick(L,null,figAgeOf(who),true,who.rk==null?1:who.rk).
+- Picker DONE (jartc.js part 3): f88Best wrapped; staff eunuchs (role eunuch/eun, not S) -> f88Pick base mode with rank who.rk
+  (null = 1), nearest drawn rank wins, so it is safe before all art lands. vt.js checks it: ranks 0,1,2,3,undefined -> r0,r1,r2,r3,r1.
+- Pilot look: r0 (plain faded robe, cloth cap) good; r3 (gold python robe) good; r2 first try = same as the r1 reference -> spec now
+  makes r2 a deep crimson robe with gold crane badge + "NEW CLOTHES: change the clothing completely" (redo id in ue_gens.txt).
+  TODO: u10/u20/u30 already wear deep crimson at r1 (ECOL idx 7) -> give their r2 another colour (e.g. deep ochre gold).
 
 ## Remaining (in order)
 - Eunuch ranks r0/r2/r3 x 4 ages x 30 (360) + picker: pass srk(who) for staff eunuchs, tiers "r0".."r3" (base = r1).

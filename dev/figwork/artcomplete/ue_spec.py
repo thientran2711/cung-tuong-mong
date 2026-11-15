@@ -11,7 +11,7 @@ for f in F:
 RANK={"r0":("Tiểu thái giám, a junior palace eunuch of the lowest rank",
             "a plain undecorated round-collar cotton robe in a muted, faded version of his robe colour, a plain cloth belt, a simple soft black cloth cap, plain black cloth shoes, no whisk, no ornaments; neat and clean but humble, hands folded in his sleeves"),
       "r2":("Thủ lĩnh thái giám, a head eunuch in charge of a palace",
-            "a rich silk round-collar robe in his own robe colour with a large square embroidered badge (a crane among clouds) on the chest and embroidered cloud borders at the hems, a black gauze hat with a narrow gold band, a belt with jade plaques, black boots, a white horsetail whisk in the crook of his arm; dignified and well-off"),
+            "a deep crimson red silk round-collar robe (head eunuchs wear red) with a large gold-embroidered square badge (a crane among clouds) on the chest, gold-edged collar and cuffs, gold cloud borders at the hems, a black gauze hat with a gold band and a small jade ornament at the front, a belt with jade plaques, black boots, a white horsetail whisk in the crook of his arm; dignified and well-off"),
       "r3":("Tổng quản thái giám, the chief eunuch of the inner palace, the highest eunuch rank",
             "a splendid heavy brocade python robe (mang bào) in a deep rich version of his robe colour, a great coiled python embroidered in gold thread across the chest and shoulders, sea-wave and cloud borders at the hems, a tall black lacquered gauze hat with a gold and jade ornament, a wide belt of gold-set jade plaques, a long string of dark prayer beads, black boots, a white horsetail whisk with a carved jade handle; powerful, grand and very wealthy")}
 T=("The SAME man as in the reference image: exactly the same face and features, the same four ages left to right as in the reference "
@@ -20,7 +20,7 @@ T=("The SAME man as in the reference image: exactly the same face and features, 
    "a handsome, refined palace eunuch, beardless; serene gentle neutral expression, soft warm eyes (never slanted, never narrow), closed lips; "
    "no mole, no forehead mark, no bead between brows, no marks on the face. Age lineup: the SAME man drawn four times side by side in one row, "
    "evenly spaced with wide clear empty space between the figures, each complete from top of head to feet, all feet on one baseline, same height. "
-   "His rank: {rank}. All four wear: {dress}. Keep his own robe colour family from the reference; masculine colour, never purple, violet, lavender or pink. "
+   "His rank: {rank}. NEW CLOTHES: change the clothing completely from the reference (only the face, hair and ages stay). All four wear: {dress}. {col}Masculine colour, never purple, violet, lavender or pink. "
    "Calm still standing poses, sleeves and hems hanging straight, no flying sashes. No text, no labels.")
 AG=["a18","a26","a36","a51"]
 J={}
@@ -30,5 +30,6 @@ for i in range(1,31):
         J[f"ue-{u}-{r}"]=dict(ref=REF[u],rank=r,figs=[dict(file=f"fig-eunuch-{u}-{r}-{a}",role="eunuch",identity=u,tier=r,ageBand=a) for a in AG])
 if len(sys.argv)>1:
     for jid in sys.argv[1:]:
-        j=J[jid];rk,dr=RANK[j["rank"]];print(json.dumps({"jid":jid,"ref":j["ref"],"prompt":T.format(rank=rk,dress=dr)},ensure_ascii=False))
+        j=J[jid];rk,dr=RANK[j["rank"]];col="" if j["rank"]=="r2" else "Keep his own robe colour family from the reference. "
+        print(json.dumps({"jid":jid,"ref":j["ref"],"prompt":T.format(rank=rk,dress=dr,col=col)},ensure_ascii=False))
 else: json.dump(J,open(W+"/ue_jobs.json","w"),indent=0,ensure_ascii=False); print(len(J),"jobs")

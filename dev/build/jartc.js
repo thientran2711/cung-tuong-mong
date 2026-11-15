@@ -12,3 +12,11 @@
  return r}})();
 (function(){if(typeof figRoles!=="function")return;const r0=figRoles;figRoles=function(who){const R=r0.apply(this,arguments);
  try{if(who&&S&&who!==S.maid&&who.role==="maid"&&R[0]==="mama")return["maid","mama"]}catch(e){}return R}})();
+/* 3. Staff eunuchs wear their rank (group b): SRK.eunuch r0 Tiểu thái giám · r1 Thái giám · r2 Thủ lĩnh thái giám · r3 Tổng quản.
+      The old eunuch art (tier null) is the r1 dress; rank art has tier "r0" / "r2" / "r3" (img/FIGURES-servants.json). f88Pick's base mode
+      takes the nearest rank (the same road as maid ranks m0..m4), so a rank with no art yet falls back to the nearest one drawn. */
+(function(){if(typeof f88Best!=="function"||typeof f88Pick!=="function")return;const b0=f88Best;
+ f88Best=function(L,who,kind){try{if(who&&S&&who!==S&&(who.role==="eunuch"||who.role==="eun")){
+  const Lp=kind==="por"?L.filter(f=>f.por):L;const rk=who.rk==null?1:Math.max(0,Math.min(3,who.rk|0));
+  return f88Pick(Lp.length?Lp:L,null,figAgeOf(who),true,rk)}}catch(e){console.error("jartc eunuch rank",e)}
+  return b0.apply(this,arguments)}})();
