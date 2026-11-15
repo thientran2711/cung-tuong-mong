@@ -44,7 +44,7 @@ function emoBox(k){const p=emoByKey(k);if(!p||!S||S.dead)return;const m=window.k
  const cls=x=>x==="vui"?"g":["gian","buon","dau","so","lo","ghen"].includes(x)?"r":"";const W=emoW();const ago=w=>W-w<=0?"tuần này":`${W-w} tuần trước`;
  const L=m.known?emoCauses(p):[];
  const rows=m.known?(L.length?L.map(x=>[EMO[x.k]||x.k,`${x.why} · ${ago(x.w)}`,cls(x.k)]):[["Nguyên nhân","không có chuyện gì đáng kể gần đây"]]):[["Nguyên nhân","chưa rõ: ngươi chưa gặp, chưa có tai mắt bên người này"]];
- kitModal({kind:"info",title:`Tâm trạng · ${nm}`,sub:m.known?`Hiện nay: ${m.name}`:"chưa rõ",subject:p,
+ kitModal({kind:"info",look:1,title:`Tâm trạng · ${nm}`,sub:m.known?`Hiện nay: ${m.name}`:"chưa rõ",subject:p,
   sections:[{h:"Đang tác động",rows},{h:"",rows:[["Ảnh hưởng",p===S?"tâm trạng của ngươi đổi cơ may của mọi việc một chút":"vui thì dễ chịu nghe, giận hay ghen thì khó nói chuyện, dễ ra tay hơn"]]}],btn:"Đã rõ"})}
 window.emoBox=emoBox;
 window.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest("img.kemo[data-emo]");if(!t||(typeof Q!=="undefined"&&Q.length&&!$("modal").hidden&&!t.closest("#modal")))return;e.stopPropagation();e.preventDefault();try{emoBox(t.dataset.emo)}catch(x){console.error(x)}},true);

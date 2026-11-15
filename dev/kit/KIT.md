@@ -2388,6 +2388,14 @@ longest-first, then ordered by their place in the text (before: the longest name
 and B's rank colour on A's row). The face is mdH(kitFace(p)) = the same por file + current-rank colour as her Hậu cung strip tile.
 Tests: `node dev/test/rel-row.js <url> <outdir> <tag> [sizes]`; `node dev/test/stranger-sweep.js <url> [outdir]` (one unmet consort through
 every renderer: no real face / figure file, silhouette present; 8 news rows: src + rank colour == her strip tile; met again → face back).
+49.3b FACE REVEAL BY DIALOG (owner 15/11 ~21:00Z, review/face-reveal): an event dialog that SHOWS a person (the Q item carries her /
+him as `who` / `who2` / `stage` / `faces` / `kit.subject`) reveals that face when it opens (j61 `k61Shown` at showModal: face level ≥ 1, a
+consort also met61), so the dialog and every renderer afterwards draw the real face / figure; name level ≥ 2 when the person speaks to her
+(options + `who`) or the text names them. Hoàng thượng / Thái hậu / Hoàng hậu / children (named from day one) get their face from their first
+dialog. Only MENTIONED people (news lists, tuyển tú roll, marriage-candidate rows, rumours) stay strangers. Only the dialog REALLY DRAWN reveals: the hook runs after
+j68 evGate (an optional event it holds / drops reveals nobody). Look-up panels she opens herself (`kitPanel` spec `look:1`: Đã biết về X,
+Chứng cứ về X, Tâm trạng · X) never reveal / meet — a new look-up panel with a `subject` must carry `look:1`. Check: `node dev/test/face-reveal-look.js <url>`. Scan: `node dev/test/face-reveal-scan.js
+<url> [steps] [seeds]` (every dialog the bot sees: site, people shown, stranger before, revealed after); static list `python3 dev/test/face-reveal-sites.py --md`.
 Shots: dev/shots/kit-fig2/.
 
 ## 50. kitEventDp — THE event-with-a-person dialog (owner 11/15, replaces 32.6 for events with a person) — `dev/build/jk4.js`
@@ -2676,3 +2684,28 @@ Owner rule: every event where an item could come into her hands shows the ITEM'S
   scan `node dev/test/item-events-scan.js <url> dev/review/item-events-table.md [--fail]` (every E68 variant, ARC67 + GB67 beat, j97 rare,
   PEND builder: event → item → choice → act; fails on a destroying/handing choice with no item found, or an item without a picture).
 - Kit page (§47): sample "§64" = every story item tag + one button per act.
+
+## 59. PLACEHOLDER PICTURES · KIT_PH · kitPhTone (owner 15/11 ~18:45Z, review/placeholder-pics) — `dev/build/jph.js` (last module)
+Four generic palace still-lifes (Magnific gpt-2-6, no people, no faces) stand in for every EVENT or ACT that has no picture of its own, so the
+owner recognises "this one still lacks its picture" in play. They are deliberately emblematic (no scene, no people) so they never look like a real picture.
+| file | size | used for |
+|---|---|---|
+| `img/ph-event-light.webp` | 640x480 (as dialog banners `ev-<key>`) | event dialog, normal / positive tone: closed folding screen + sealed scroll, soft daylight |
+| `img/ph-event-dark-v2.webp` | 640x480 | event dialog, negative / scheming tone: same still-life in a gloomy hall on an overcast day — heavy shadow, cold muted slate/grey-green (owner: dark = gloomy mood, NOT night) |
+| `img/ph-act-light.webp` | 384x506 (as act pictures `act-<key>`) | act card, normal tone: blank round fan + lacquer box + jade hairpin, daylight |
+| `img/ph-act-dark-v2.webp` | 384x506 | act card, scheming / harmful tone: same objects in cold grey gloom, box ajar, vial |
+- **Tone rule (`kitPhTone(text,{cat,fam})`)**: DARK when the act category is `hai-nguoi` / `muu-ke`, or the event family (j68) is `rumor` / `myst`,
+  or the id + title + first sentence of the body (event) / the act name (act) match `KIT_PH_NEG` (harm, poison, framing, scheming, spying, rumours, bribery, theft,
+  punishment, jealousy/rivalry, quarrels, resentment, cold palace, demotion, crime, illness, death…); otherwise LIGHT. Tone, never time of day.
+- **Events**: outermost `kitEvArt` wrapper. When the dialog would show nothing, or only the room she stands in (j17 `evArt`, the old generic
+  stand-in), it shows the event placeholder. Never replaces: EVENTS.json category art, own banners `ev-<key>` (jevban), story beats (`stArt`),
+  explicit `art`, festival bands, j24 people pictures. Shop / pick / gift / giftin dialogs keep their rules (no event picture).
+- **Acts**: `kitActArt` returns the placeholder (`r.ph = "light"|"dark"`) when the act has no own key (`kitActKey`) or its `img/act-<key>.webp`
+  is not in the CDN index; j79 `kpActArt` draws it in the normal act-art slot (`kitArtFrame`, category edge colour) of every act card
+  (deck, person cards, panes, exam card): jk4 (`kpActArt` / `kitActCompactOn`) and jexam no longer drop the slot once `kitPhActReady()` —
+  replacing the earlier "no thumbnail" (`.kanoart`) state. Card marked `data-kph="light|dark"` (not observed by j63 kaMO: no render loop).
+- **Not changed**: the week book (Tuần lục) lines — owner 11/15 "no picture rather than a repeated one" still holds there.
+- **Before the manifests load** (EVART / ACTS.json) nothing is replaced and nothing recorded (every id would look unmapped).
+- **Dev list**: `window.CTM_MISSING_PICS` = `[{kind:"event"|"act", id, tone, title}]`, each logged once (`console.info("[CTM missing pic]",…)`).
+  Whole-game list: `node dev/tools/missing_pics.js <build url> <out.json> dev/art/MISSING_PICS.md`.
+- Kit sample page: §59 (four pictures).

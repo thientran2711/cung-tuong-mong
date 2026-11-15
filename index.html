@@ -10559,7 +10559,10 @@ function k61All(){const L=[];if(!S)return L;const add=e=>{if(e&&typeof e==="obje
  add(S.emp);if(!S.thDead){S.thO=S.thO||{};add(S.thO)}add(S.maid);(S.staff||[]).forEach(add);(S.kids||[]).forEach(add);
  (rivals||[]).forEach(v=>{add(v);add(v.maid);(v.staff||[]).forEach(add);(v.kids||[]).forEach(add)});
  for(const c in (S.court||{}))add(S.court[c]);(S.men||[]).forEach(add);try{const T=S.trieu;if(T&&T.H)for(const c in T.H)add(T.H[c])}catch(e){}return L}
-function k61St(e){if(!e||!S||e===S)return 3;const K=k61S();if(!K)return 3;return +K[kOf61(e)]||0}
+/* her own household (maid, servants hired later, her own children born later) lives with her: always fully known (review/face-reveal:
+   new servants were "Thái giám ???" in her own guard-order and spy dialogs) */
+function k61Own(e){try{return e===S.maid||(S.staff||[]).includes(e)||(S.kids||[]).includes(e)}catch(x){return false}}
+function k61St(e){if(!e||!S||e===S)return 3;const K=k61S();if(!K)return 3;if(k61Own(e))return 3;return +K[kOf61(e)]||0}
 /* owner 11/15 (stranger rule, KIT §49.3): a consort Ta has NOT MET is a grey silhouette everywhere (portraits, strips, news rows, figures,
    the week book) — her name may be known, her face is not. Met = she talked / acted with her (S.met), or lives in the same palace
    (the "Đã quen" level alone is not enough: owner case "listed in Ân oán, Ta chưa gặp"). Everyone else keeps the face level (>= 1). */
@@ -10697,8 +10700,38 @@ function k61Unknown(st){return (rivals||[]).filter(v=>v.alive&&!v.out&&k61St(v)<
 (function(){if(typeof facHTML!=="function")return;const f0=facHTML;facHTML=function(){if(!S||!S.known)return f0.apply(this,arguments);return k61Hide(()=>f0.apply(this,arguments),2)}})();
 /* ---- ways she gets to know people ---- */
 /* someone speaking to her in an event (a dialog she must answer) */
-(function(){const s0=showModal;showModal=function(){try{const m=Q[0];if(m&&m.opts&&m.who&&S&&S.known){const e=k61PortEnt(m.who);if(e&&!k61Named(e)&&e!==S.emp)k61Meet(e,"Người ấy đến tận nơi nói chuyện với ngươi.")
-  else if(e===S.emp&&!k61Named(e)&&/Hoàng thượng/.test(m.h||""))k61Meet(e,"Ngài cho gọi ngươi đến hầu chuyện.")}}catch(e){}return s0.apply(this,arguments)}})();
+/* FACE REVEAL (owner 15/11 ~21:00Z, whole class): EVERY event dialog that SHOWS a person to her — comes to talk, picks a quarrel,
+   frames / harms her, summons her, a merit task, a toilette reaction, a j67 arc step, a j68 event, a gift handed over in person: any
+   Q item that carries the person (who / who2 / stage / faces / kit.subject) — reveals that person's FACE (stage >= 1; a consort also
+   counts as met, met61) the moment the dialog opens, so the dialog itself already draws the real face and full-body figure, and so
+   does every other screen afterwards (stage, news, Tuần lục, Ân oán). The NAME (stage >= 2) comes with it when the person speaks to
+   her (a dialog with options and the person as `who`) or the text names her / him. Hoàng thượng / Thái hậu / Hoàng hậu / the
+   Emperor's children are named from day one (k61Pub); the dialog now gives their face too (was: grey in summons, Thái hậu triệu,
+   lake-trip / festival invitations). People only MENTIONED (a name in a news list, a tuyển tú roll, a rumour) stay strangers. */
+function k61ShownEnts(m){const L=[];if(!m||!S)return L;const add=x=>{if(!x||typeof x!=="object")return;let e=null;
+  try{e=k61PortEnt(x)||(x.__kp&&typeof x.__kp==="object"?x.__kp:null)||(k61All().includes(x)?x:null)}catch(er){}if(e&&e!==S&&!L.includes(e))L.push(e)};
+ (Array.isArray(m.stage)?m.stage:[]).forEach(add);add(m.who);add(m.who2);add(m.kit&&m.kit.subject);(Array.isArray(m.kit&&m.kit.stage)?m.kit.stage:[]).forEach(add);
+ (Array.isArray(m.faces)?m.faces:[]).forEach(f=>add(f&&f[0]));return L}
+function k61NameIn(e,txt){return k61Vars(e).some(v=>txt.includes(v))}
+/* panels she opens herself to look something up (Chứng cứ về X, Đã biết về X, Tâm trạng · X) only SHOW what she already has:
+   never a meeting (review face-reveal r1: opening the intel / evidence panel of an unmet consort made her met) */
+function k61Look(m){return !!(m&&m.kit&&m.kit.look)}
+function k61Shown(m){try{if(!m||!S||m.__k61||!k61S()||k61Look(m))return;const E=k61ShownEnts(m);m.__k61=1;if(!E.length)return;
+  const txt=String((m.t||"")+" "+(m.h||"")).replace(/<[^>]+>/g," ");let w=null;try{w=m.who?k61PortEnt(m.who)||m.who.__kp||m.who:null}catch(x){}
+  for(const e of E){const talk=!!(m.opts&&m.opts.length)&&e===w;const st=talk||k61NameIn(e,txt)?2:1;
+   const how=k61Pub(e)?"":talk?"Người ấy đến tận nơi nói chuyện với ngươi.":"Người ấy hiện ra trước mặt ngươi.";
+   if(k61St(e)<st||((rivals||[]).includes(e)&&!met61(e)))k61Meet(e,how,st)}}catch(x){console.error("k61Shown",x)}}
+/* WHEN: only the dialog that is really drawn. j68 evGate (assembled before j61, so it runs INSIDE this wrapper) holds / drops optional
+   events from Q right before drawing; revealing Q[0] before it ran met people whose dialog never opened (review face-reveal r1). So the
+   reveal runs right after evGate; without j68 (or for an item left unrevealed) it runs here, before / after drawing. */
+(function(){if(typeof evGate==="function"){const g0=evGate;evGate=function(){const r=g0.apply(this,arguments);try{k61Shown(Q[0])}catch(e){}return r}}
+ const s0=showModal;showModal=function(){try{if(typeof evGate!=="function")k61Shown(Q[0])}catch(e){}const r=s0.apply(this,arguments);
+  try{const M=document.getElementById("modal");if(M&&!M.hidden&&Q[0]&&!Q[0].__k61)k61Shown(Q[0])}catch(e){}return r}})();
+/* old saves (cheap backfill, once): a consort the old rule named in a dialog ("… đến tận nơi nói chuyện với ngươi") was never marked met,
+   so she stayed a grey silhouette; her logged line marks her met now */
+function k61Backfill(){try{if(!S||!S.known||S.k61bf)return;S.k61bf=1;const T=(S.logs||[]).map(x=>String(x).replace(/<[^>]+>/g," ")).filter(x=>/đến tận nơi nói chuyện với ngươi|tự đến gặp ngươi|tự tìm đến ngươi/.test(x));
+  if(!T.length)return;S.met=S.met||{};for(const v of rivals||[])if(v.id!=null&&S.met[v.id]==null&&k61Named(v)&&T.some(x=>k61Vars(v).some(n=>x.includes(n))))S.met[v.id]=wk()}catch(e){}}
+(function(){const n0=normAll;normAll=function(){const r=n0.apply(this,arguments);try{if(!K61NEW)k61Backfill()}catch(e){}return r}})();
 /* morning audience */
 (function(){const a0=act;act=function(i){const a=deck[i];const was=a&&a.done;const r=a0.apply(this,arguments);try{if(a&&a.done&&!was&&S&&S.known){
   if(/^Thỉnh an Thái hậu/.test(a.n)&&!S.thDead){S.thO=S.thO||{};k61Know(S.thO,"Buổi thỉnh an, ngươi được dẫn đến trước mặt Thái hậu.")}
@@ -11859,11 +11892,11 @@ if(typeof j78when==="function"){j78when=function(){return kitDate(S.month,S.year
 function kitEvidencePanel(v){if(!v||typeof evidenceOf!=="function")return;const E=evidenceOf(v);if(!E)return;
  const items=E.items.length?E.items.map(e=>kitEvidence({what:e.proves,how:e.how,when:e.when})).join(""):`<div class="kpnote">Ngươi chưa giữ chứng cứ nào về nàng.</div>`;
  const acts=(E.acts||[]).map(a=>`<button class="opt" data-kev="${v.id}" data-kevact="${a.k}"${a.why?" disabled":""}>${a.n||(ACT[a.k]?ACT[a.k].n:a.k)}<small>${a.why?`<span class="kwhy">${a.why}</span> `:""}${kitParse(a.line||"")}</small></button>`).join("");
- const m=kitPanel({kind:"evidence",title:`Chứng cứ về ${kpPlain(kitName(v))}`,sub:`Đang giữ: ${E.count}`,subject:v,sections:[{h:`Chứng cứ đang giữ (${E.count})`,html:`<div class="kevs">${items}</div>`},acts?{h:"Dùng chứng cứ",html:`<div class="opts">${acts}</div>`}:null]},true);m.evd=1;showModal()}
+ const m=kitPanel({kind:"evidence",look:1,title:`Chứng cứ về ${kpPlain(kitName(v))}`,sub:`Đang giữ: ${E.count}`,subject:v,sections:[{h:`Chứng cứ đang giữ (${E.count})`,html:`<div class="kevs">${items}</div>`},acts?{h:"Dùng chứng cứ",html:`<div class="opts">${acts}</div>`}:null]},true);m.evd=1;showModal()}
 function kitIntelPanel(v){if(!v)return;const L=typeof intelOf==="function"?intelOf(v):[];const old=(S.notes&&S.notes[v.id])||[];
  const list=L.map(x=>({about:null,fact:x.fact+(x.current===false?` <span class="kchip n">nay đã khác</span>`:""),src:x.by?(typeof x.by==="object"?x.by:String(x.by)):"tai mắt",week:[x.how,x.when].filter(Boolean).join(" · ")}));
  old.forEach(t=>{if(!L.some(x=>kpPlain(x.fact).includes(kpPlain(t))))list.push({fact:t,src:"nghe được",week:""})});
- const m=kitPanel({kind:"intel",title:`Đã biết về ${kpPlain(kitName(v))}`,sub:`${list.length} tin`,subject:v,sections:[{html:kitIntel(list,{empty:"Ngươi chưa biết gì thêm về nàng. Dò la để biết."})}]},true);showModal()}
+ const m=kitPanel({kind:"intel",look:1,title:`Đã biết về ${kpPlain(kitName(v))}`,sub:`${list.length} tin`,subject:v,sections:[{html:kitIntel(list,{empty:"Ngươi chưa biết gì thêm về nàng. Dò la để biết."})}]},true);showModal()}
 /* person card: the evidence chip and the "Đã biết" line open the kit panels */
 (function(){if(typeof rvCard!=="function")return;const r0=rvCard;rvCard=function(v,i){let h=r0.apply(this,arguments);try{
   h=h.replace(/<span class="chip hot">((?:<img[^>]*>)?Chứng cứ \d+)<\/span>/,`<button class="chip hot kchipb" data-kev="${v.id}" title="Xem chứng cứ">$1 ›</button>`);
@@ -21194,7 +21227,7 @@ window.kitCatchOn=kitCatchOn;window.kitCatchOff=kitCatchOff;
    The same rule for every act card inside a kpane (a deck card whose only picture is its category picture loses the thumbnail there). */
 function kitActCompactOn(root){try{const R0=root||document;
  R0.querySelectorAll(".pc>.pcr button.ka, .kpanec button.ka").forEach(b=>{try{const kan=b.querySelector(".kan");if(!kan)return;const nm=typeof kpActName==="function"?kpActName(kan):kan.textContent.trim();
-   const key=typeof kitActKey==="function"?kitActKey(nm):"";b.classList.toggle("kanoart",!key);if(key&&!b.classList.contains("kart")&&typeof kpActArt==="function")kpActArt(b)}catch(e){}});
+   const key=typeof kitActKey==="function"?kitActKey(nm):"";const has=!!key||(typeof kitPhActReady==="function"&&kitPhActReady());/* KIT §59: no own picture → the placeholder (jph) */b.classList.toggle("kanoart",!has);if(has&&!b.classList.contains("kart")&&typeof kpActArt==="function"){delete b.dataset.kart;kpActArt(b)}}catch(e){}});
  R0.querySelectorAll(".pc>.pcr button.ka.kart .klead, .kpanec button.ka.kart .klead").forEach(e=>{if(!e.title)e.title=e.textContent.trim()})}catch(e){}}
 window.kitActCompactOn=kitActCompactOn;
 /* owner 11/15 14:30Z + 15:45Z ("no group images"): EVERY act card (Hành sự deck, person cards, Ân oán, panes) shows its OWN act picture only.
@@ -21202,7 +21235,7 @@ window.kitActCompactOn=kitActCompactOn;
    marked .kanoart and its text takes the full width. (kitActArt keeps returning cat / label for the category edge colour.) */
 (function(){if(typeof kitActArt!=="function")return;const k0=kitActArt;kitActArt=function(name){const r=k0.apply(this,arguments);try{const key=typeof kitActKey==="function"?kitActKey(name):"";if(!key&&r)r.src=""}catch(e){}return r};window.kitActArt=kitActArt;
  if(typeof kpActArt!=="function")return;const p0=kpActArt;kpActArt=function(b){const r=p0.apply(this,arguments);try{const kan=b.querySelector(".kan");const nm=kan?(typeof kpActName==="function"?kpActName(kan):kan.textContent.trim()):"";
-  const own=!!(nm&&typeof kitActKey==="function"&&kitActKey(nm));b.classList.toggle("kanoart",!own);if(!own){const a=b.querySelector(":scope > .kaart");if(a)a.remove();b.classList.remove("kart")}}catch(e){}return r};window.kpActArt=kpActArt})();
+  const own=!!(nm&&typeof kitActKey==="function"&&kitActKey(nm))||(typeof kitPhActReady==="function"&&kitPhActReady());/* KIT §59: the placeholder stands in */b.classList.toggle("kanoart",!own);if(!own){const a=b.querySelector(":scope > .kaart");if(a)a.remove();b.classList.remove("kart")}}catch(e){}return r};window.kpActArt=kpActArt})();
 (function(){if(typeof render!=="function")return;const r0=render;render=function(){const r=r0.apply(this,arguments);try{kitActCompactOn(document.getElementById("panel"))}catch(e){}return r};window.render=render})();
 (function(){const st=document.createElement("style");st.id="kit-act-compact";st.textContent=`
 button.ka.kanoart>.kaart{display:none!important}
@@ -25366,7 +25399,7 @@ function exDrop(){try{if(Array.isArray(deck))deck=deck.filter(a=>!(a&&a.exam))}c
 try{KIT_ACT_CATS.unshift(["le-nghi",/khảo hạch tấn phong/i])}catch(e){}
 /* the act picture (owner 14:30Z: no group images): the exam card shows ONLY its own picture (ACTS.json «Khảo hạch tấn phong»); with no own key
    (or before ACTS.json arrives) it gets NO picture slot at all — never the category tile / category picture of kitActArt */
-(function(){if(typeof kpActArt!=="function")return;const k0=kpActArt;kpActArt=function(b){try{if(b&&b.dataset&&b.dataset.kexam&&!(typeof kitActKey==="function"&&kitActKey("Khảo hạch tấn phong"))){
+(function(){if(typeof kpActArt!=="function")return;const k0=kpActArt;kpActArt=function(b){try{if(b&&b.dataset&&b.dataset.kexam&&!(typeof kitActKey==="function"&&kitActKey("Khảo hạch tấn phong"))&&!(typeof kitPhActReady==="function"&&kitPhActReady())){
   b.dataset.kart="none";b.classList.remove("kart");b.classList.add("kanoart");const a=b.querySelector(":scope > .kaart");if(a)a.remove();return}if(b&&b.dataset&&b.dataset.kexam)b.classList.remove("kanoart")}catch(e){}return k0.apply(this,arguments)}})();
 (function(){const n0=nextBuoi;nextBuoi=function(){const r=n0.apply(this,arguments);try{exTick()}catch(e){console.error("exam tick",e)}return r}})();
 (function(){const r0=render;render=function(){try{exTick()}catch(e){console.error("exam tick",e)}return r0.apply(this,arguments)}})();
@@ -26698,7 +26731,7 @@ function emoBox(k){const p=emoByKey(k);if(!p||!S||S.dead)return;const m=window.k
  const cls=x=>x==="vui"?"g":["gian","buon","dau","so","lo","ghen"].includes(x)?"r":"";const W=emoW();const ago=w=>W-w<=0?"tuần này":`${W-w} tuần trước`;
  const L=m.known?emoCauses(p):[];
  const rows=m.known?(L.length?L.map(x=>[EMO[x.k]||x.k,`${x.why} · ${ago(x.w)}`,cls(x.k)]):[["Nguyên nhân","không có chuyện gì đáng kể gần đây"]]):[["Nguyên nhân","chưa rõ: ngươi chưa gặp, chưa có tai mắt bên người này"]];
- kitModal({kind:"info",title:`Tâm trạng · ${nm}`,sub:m.known?`Hiện nay: ${m.name}`:"chưa rõ",subject:p,
+ kitModal({kind:"info",look:1,title:`Tâm trạng · ${nm}`,sub:m.known?`Hiện nay: ${m.name}`:"chưa rõ",subject:p,
   sections:[{h:"Đang tác động",rows},{h:"",rows:[["Ảnh hưởng",p===S?"tâm trạng của ngươi đổi cơ may của mọi việc một chút":"vui thì dễ chịu nghe, giận hay ghen thì khó nói chuyện, dễ ra tay hơn"]]}],btn:"Đã rõ"})}
 window.emoBox=emoBox;
 window.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest("img.kemo[data-emo]");if(!t||(typeof Q!=="undefined"&&Q.length&&!$("modal").hidden&&!t.closest("#modal")))return;e.stopPropagation();e.preventDefault();try{emoBox(t.dataset.emo)}catch(x){console.error(x)}},true);
@@ -27802,6 +27835,64 @@ if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§28.13e",title:"Pick 
  return r}})();
 (function(){if(typeof figRoles!=="function")return;const r0=figRoles;figRoles=function(who){const R=r0.apply(this,arguments);
  try{if(who&&S&&who!==S.maid&&who.role==="maid"&&R[0]==="mama")return["maid","mama"]}catch(e){}return R}})();
+/* ================= jph: PLACEHOLDER PICTURES — KIT §59 (owner 15/11 ~18:45Z, review/placeholder-pics) =================
+   Four generic palace still-lifes (gpt-2-6, no people) stand in for every EVENT or ACT that has no picture of its own, so the owner sees at
+   a glance "this one still lacks its picture" and reports it:
+     img/ph-event-light.webp / img/ph-event-dark-v2.webp  (640x480, like the dialog banners img/ev-<key>.webp): folding screen + sealed scroll
+     img/ph-act-light.webp   / img/ph-act-dark-v2.webp    (384x506, like act pictures img/act-<key>.webp): blank round fan + lacquer box + hairpin
+   light = normal / positive, dark = negative / scheming: a GLOOMY daytime mood, cold muted, heavy shadow — never night (owner 15/11): kitPhTone(text, hint) below, documented in KIT.md §59.
+   Wiring (wraps only, edits nothing):
+     · events: the OUTERMOST kitEvArt. A dialog that would show nothing, or only the room she is standing in (j17 evArt, the old generic
+       stand-in), now shows the event placeholder. Own pictures (EVENTS.json category, own banner ev-<key>, story beats, festival bands,
+       people pictures j24) are never replaced. Shop / pick / gift dialogs keep their own rule (no event picture).
+     · acts: kitActArt returns the act placeholder when the act has no own key in ACTS.json or its file is not on the CDN (https://ctm-img.victoria-tntt.workers.dev/img/_index.json);
+       the act card (kpActArt, kitActCompactOn) then shows it in the normal act-art slot instead of no thumbnail (.kanoart).
+     · the week book (Tuần lục) is NOT changed: owner 11/15 "no picture rather than a repeated one" for book lines still holds.
+   Dev list: every fallback is recorded once in window.CTM_MISSING_PICS [{kind,id,tone,title}] and logged once (console.info).
+   Full static list: node dev/tools/missing_pics.js <build url> → dev/art/MISSING_PICS.md. ===================================== */
+const KIT_PH={ev:{light:"https://ctm-img.victoria-tntt.workers.dev/img/ph-event-light.webp",dark:"https://ctm-img.victoria-tntt.workers.dev/img/ph-event-dark-v2.webp"},act:{light:"https://ctm-img.victoria-tntt.workers.dev/img/ph-act-light.webp",dark:"https://ctm-img.victoria-tntt.workers.dev/img/ph-act-dark-v2.webp"}};
+/* tone rule (§59): DARK when the act category is Hại người / Mưu kế, or the event family is rumour / mystery (j68 "rumor","myst"),
+   or the id / title / first lines speak of harm, scheming, punishment, rivalry, illness or death (KIT_PH_NEG); else LIGHT */
+const KIT_PH_NEG=/hạ độc|thuốc độc|độc dược|trúng độc|hãm hại|làm hại|hại người|hại nhỏ|vu oan|vu cáo|vu khống|tố giác|tố cáo|mưu|gian kế|kế hiểm|lén|nghe trộm|rình|dò la|do thám|tai mắt|tung tin|tin đồn|lời đồn|đồn đại|đồn rằng|ly gián|mua chuộc|hối lộ|đút lót|uy hiếp|đe dọa|đe doạ|trộm|lục rương|lục soát|bắt gặp|bị phạt|trách phạt|hình phạt|xử phạt|đánh đòn|quỳ phạt|cấm túc|ghen|tranh sủng|chặn ngự giá|cãi|khiêu khích|mỉa|chèn ép|bắt nạt|oán|báo thù|thù hận|kẻ thù|lãnh cung|giáng chức|giáng phẩm|bị giáng|tội|sảy thai|xạ hương|tráo|trù ẻo|yểm bùa|bùa|ám sát|thích khách|phản bội|mưu phản|tạo phản|bí mật|giấu|cắt xén|ăn bớt|bớt xén|tham ô|mất cắp|ốm|bệnh|cái chết|chết oan|chết thảm|đã chết|bị giết|qua đời|tang lễ|quốc tang|nghi ngờ|vạch mặt|hăm dọa|phóng hỏa|phóng hoả|đốt kho|ép nộp|ép buộc|sỉ nhục|nhục mạ|cướp|giết/i;
+const KIT_PH_DARKCAT=/^(hai-nguoi|muu-ke)$/;
+function kitPhTone(text,hint){try{hint=hint||{};if(hint.cat&&KIT_PH_DARKCAT.test(hint.cat))return"dark";if(hint.fam&&/^(rumor|myst)$/.test(hint.fam))return"dark";
+ return KIT_PH_NEG.test(String(text||""))?"dark":"light"}catch(e){return"light"}}
+window.CTM_MISSING_PICS=window.CTM_MISSING_PICS||[];
+const KIT_PH_SEEN={};
+function kitPhNote(kind,id,tone,title){try{const k=kind+"|"+id;if(KIT_PH_SEEN[k])return;KIT_PH_SEEN[k]=1;const e={kind,id,tone,title:String(title||"").slice(0,80)};CTM_MISSING_PICS.push(e);
+ console.info("[CTM missing pic]",kind,id,tone,e.title)}catch(e){}}
+const kitPhPlain=s=>String(s||"").replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim();
+/* manifests ready? (before they arrive every id looks unmapped: no placeholder, no record) */
+function kitPhEvReady(){return typeof EVART!=="undefined"&&!!EVART}
+function kitPhActReady(){try{return typeof KIT_ACTS!=="undefined"&&!!KIT_ACTS&&!!KIT_ACTS.acts&&Object.keys(KIT_ACTS.acts).length>0}catch(e){return false}}
+const kitPhOnCdn=src=>{try{if(typeof KIT_CDNHAVE==="undefined"||!KIT_CDNHAVE)return true;return KIT_CDNHAVE.has(String(src).replace(/^.*?(?=img\/)/,""))}catch(e){return true}};
+/* ---- events ---- */
+function kitPhEvId(m){try{if(typeof kitDlgId==="function"){const i=kitDlgId(m);if(i)return i}}catch(e){}return "title:"+kitPhPlain(m&&m.t)}
+function kitPhEvTone(m){let fam="";try{const pid=String(m.pid||"");if(/^e68[A-Za-z]/.test(pid)&&typeof E68I!=="undefined"&&E68I[pid.slice(3)])fam=E68I[pid.slice(3)].fam||""}catch(e){}
+ /* id + title + the FIRST sentence only (the rest of the body holds option hints such as "phi tần ghen" that are not the event's tone) */
+ const first=(kitPhPlain(m.h).split(/(?<=[.!?…])\s/)[0]||"").slice(0,200);const txt=kitPhEvId(m)+" "+kitPhPlain(m.t)+" "+first;return kitPhTone(txt,{fam})}
+function kitPhEvent(m){const tone=kitPhEvTone(m);kitPhNote("event",kitPhEvId(m),tone,kitPhPlain(m.t));return{src:KIT_PH.ev[tone],lab:"",ph:tone}}
+(function(){if(typeof kitEvArt!=="function")return;const a0=kitEvArt;kitEvArt=function(m){const r=a0.apply(this,arguments);try{
+  if(!m||m.art||m.stArt||!kitPhEvReady())return r;
+  if(m.kit&&(m.kit.shop||m.kit.pick))return r;if(typeof giftIxOf==="function"&&giftIxOf(m)!=null)return r;if(m.pid==="giftin")return r;
+  let room="";try{room=typeof evArt==="function"?evArt():""}catch(e){room=""}
+  if(r&&r.src&&!(room&&r.src===room)&&r.src!==KIT_PH.act.light&&r.src!==KIT_PH.act.dark)return r;
+  return kitPhEvent(m)}catch(e){return r}};window.kitEvArt=kitEvArt})();
+/* ---- acts ---- */
+(function(){if(typeof kitActArt!=="function")return;const k0=kitActArt;kitActArt=function(name){const r=k0.apply(this,arguments);try{
+  if(!r||!kitPhActReady())return r;if(r.src&&!/\/act-cat-/.test(r.src)&&kitPhOnCdn(r.src))return r;
+  const tone=kitPhTone(name,{cat:r.cat});r.src=KIT_PH.act[tone];r.ph=tone}catch(e){}return r};window.kitActArt=kitActArt})();
+/* the act card: j79 kpActArt draws kitActArt's src (the placeholder above) in the normal art slot; jk4 / jexam no longer drop the slot
+   once the manifests are ready (they test kitPhActReady). Here only: mark the card (data-kph, not observed by j63 kaMO) and record it once. */
+(function(){if(typeof kpActArt!=="function")return;const p0=kpActArt;kpActArt=function(b){const r=p0.apply(this,arguments);try{
+  const im=b&&b.querySelector(':scope > .kaart img[src*="/ph-act-"]');if(!im){if(b&&b.dataset.kph)delete b.dataset.kph;return r}
+  const tone=/ph-act-dark/.test(im.getAttribute("src"))?"dark":"light";if(b.dataset.kph!==tone)b.dataset.kph=tone;
+  const kan=b.querySelector(".kan");const name=kan?(typeof kpActName==="function"?kpActName(kan):kitPhPlain(kan.textContent)):"";if(name)kitPhNote("act",name,tone,b.dataset.kart||"")}catch(e){}return r};window.kpActArt=kpActArt})();
+/* kit sample page */
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§59",title:"Tranh tạm (chưa có tranh riêng): sự kiện sáng · tối, việc sáng · tối",html:()=>`<div class="kitpg-row">`+
+ `<div style="width:220px">${kitSceneArt(KIT_PH.ev.light,"",{shape:"wide"})}</div><div style="width:220px">${kitSceneArt(KIT_PH.ev.dark,"",{shape:"wide"})}</div>`+
+ `<div style="width:110px">${kitSceneArt(KIT_PH.act.light,"",{shape:"tall"})}</div><div style="width:110px">${kitSceneArt(KIT_PH.act.dark,"",{shape:"tall"})}</div></div>`})}catch(e){}
+window.kitPhTone=kitPhTone;window.KIT_PH=KIT_PH;
 
 </script>
 
@@ -27828,7 +27919,7 @@ if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§28.13e",title:"Pick 
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="390eba7e7784";window.CTM_BUILD=BUILD;
+const BUILD="37c0f92d7698";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

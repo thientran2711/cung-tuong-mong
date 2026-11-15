@@ -164,7 +164,7 @@ function exDrop(){try{if(Array.isArray(deck))deck=deck.filter(a=>!(a&&a.exam))}c
 try{KIT_ACT_CATS.unshift(["le-nghi",/khảo hạch tấn phong/i])}catch(e){}
 /* the act picture (owner 14:30Z: no group images): the exam card shows ONLY its own picture (ACTS.json «Khảo hạch tấn phong»); with no own key
    (or before ACTS.json arrives) it gets NO picture slot at all — never the category tile / category picture of kitActArt */
-(function(){if(typeof kpActArt!=="function")return;const k0=kpActArt;kpActArt=function(b){try{if(b&&b.dataset&&b.dataset.kexam&&!(typeof kitActKey==="function"&&kitActKey("Khảo hạch tấn phong"))){
+(function(){if(typeof kpActArt!=="function")return;const k0=kpActArt;kpActArt=function(b){try{if(b&&b.dataset&&b.dataset.kexam&&!(typeof kitActKey==="function"&&kitActKey("Khảo hạch tấn phong"))&&!(typeof kitPhActReady==="function"&&kitPhActReady())){
   b.dataset.kart="none";b.classList.remove("kart");b.classList.add("kanoart");const a=b.querySelector(":scope > .kaart");if(a)a.remove();return}if(b&&b.dataset&&b.dataset.kexam)b.classList.remove("kanoart")}catch(e){}return k0.apply(this,arguments)}})();
 (function(){const n0=nextBuoi;nextBuoi=function(){const r=n0.apply(this,arguments);try{exTick()}catch(e){console.error("exam tick",e)}return r}})();
 (function(){const r0=render;render=function(){try{exTick()}catch(e){console.error("exam tick",e)}return r0.apply(this,arguments)}})();
