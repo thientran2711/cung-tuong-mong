@@ -117,3 +117,6 @@ Branch `review/scene-light-r9` (merge cf0aadcfb; conflicts only in built files a
   0 h-overflow, .stage.kown on.
 - sheet-turn.js and page-curl.js at 755x1000, 1000x755, 1180x820, 1366x1024: one #panel, no overflow, no stuck sheet, errs [].
 - Kit: §56.3 documents kitBookFigCol + .kbk-figover; no private UI.
+- Main moved during review → second merge origin/main 888463759 (event-balance, tassel-fix, game-feel; built files only, rebuilt). Re-run on
+  this final build: book-figwide.js all 16 figures × 4 sizes ALL OK (64 ok), book-relayout.js ALL OK, old save (made on 888463759) loads at
+  6 sizes with 0 errors / 0 overflow, sheet-turn + page-curl at 755x1000 and 1366x1024 errs [] / no overflow.
