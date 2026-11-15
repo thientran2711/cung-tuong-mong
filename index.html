@@ -19203,10 +19203,10 @@ addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.closest("[dat
        "Sai cung nữ thân tín lấy lòng" (bribel): no bạc, her cung nữ's loyalty −BAL.loyalCost, odds −BAL.selfMinus;
        "Nhờ ơn người quen ở Kính sự phòng" (blockf): no bạc, an ally with thiện cảm ≥ BAL.favorRel spends it: thiện cảm −BAL.favorCost.
    - Watched more at high rank: when a scheme of hers is caught at rank ≥ BAL.watchRank, Danh −(rank − BAL.watchRank + 1) more. */
-Object.assign(BAL,{schemeRk:.15,schemeGuard:.1,selfMinus:12,loyalCost:10,favorRel:60,favorCost:12,watchRank:5});
+Object.assign(BAL,{schemeRk:.15,schemeGuard:.1,schemeRkNpc:.06,schemeGuardNpc:.04,selfMinus:12,loyalCost:10,favorRel:60,favorCost:12,watchRank:5});
 const ECON_FREE=["ally","gift"];
 function econGuards(t){return Math.min(3,[t.maid].concat(t.staff||[]).filter(s=>s&&(s.loyal||0)>=70).length)}
-function econSchemeMul(a,t){if(!a||!t)return 1;return 1+BAL.schemeRk*Math.max(0,rkOf(t)-rkOf(a))+BAL.schemeGuard*econGuards(t)}
+function econSchemeMul(a,t){if(!a||!t)return 1;const me=a===S;return 1+(me?BAL.schemeRk:BAL.schemeRkNpc)*Math.max(0,rkOf(t)-rkOf(a))+(me?BAL.schemeGuard:BAL.schemeGuardNpc)*econGuards(t)}
 let ECON_AT=[null,null];
 function econSchemePrice(k,a,t){const A0=ACT[k];const base=A0&&A0.__c0&&A0.__c0.bac<0?-A0.__c0.bac:0;return Math.round(base*econSchemeMul(a,t))}
 (function(){for(const k in ACT){const A0=ACT[k];if(!A0||!A0.c||!(A0.c.bac<0)||ECON_FREE.includes(k))continue;const c0=Object.assign({},A0.c);A0.__c0=c0;
@@ -20782,7 +20782,7 @@ window.VP={fix,date,num,ord,mon,rules:RULES,full:FULL,tabs:TABS,refresh:()=>{pat
      (COOPW.hold freezes Qua buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="ace22026b8a0";window.CTM_BUILD=BUILD;
+const BUILD="76fbf7be2ab5";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
