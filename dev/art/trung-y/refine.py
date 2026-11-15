@@ -23,7 +23,7 @@ def refine(rgb, cut, t0=7., t1=16., lo=48):
     lab_,_=ndi.label(a<lo); edge=np.unique(np.concatenate([lab_[0],lab_[-1],lab_[:,0],lab_[:,-1]])); edge=edge[edge>0]
     out0=np.isin(lab_,edge)
     lb2,_=ndi.label(out0|bgish); e2=np.unique(lb2[out0]); bgx=bgish&np.isin(lb2,e2[e2>0])   # backdrop reaching the outside
-    bgish=bgish&(bgx|(a<220))   # enclosed flat paper-coloured areas isnet was sure about stay (ivory robe panels)
+    bgish=bgish&(bgx|(a<120))   # enclosed: only where isnet also says background (real gaps a~0-30; flat ivory robe panels a~210 stay, m18 ty1)
     ext=out0|bgish
     dext=ndi.distance_transform_edt(~ext); deep=dext>2.5*h/960      # keep isnet's own soft rim (no parchment halo)
     ca=np.clip((dE-t0)/(t1-t0),0,1)*255
