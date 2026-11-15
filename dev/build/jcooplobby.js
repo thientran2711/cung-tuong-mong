@@ -38,7 +38,7 @@ function body(pg){const s=COOP.state;
  if(pg==="co"){const r=stored();return `<div class="kcol-act">${r?`<button class="kbtn k1" data-coop="resume">Trở lại phòng ${esc(r)}<small>cuộc chơi chung lần trước</small></button>`:""}<button class="kbtn k1" data-coop="make">Mời hảo hữu<small>lập phòng, gửi ám hiệu cho hảo hữu</small></button><button class="kbtn alt k1" data-coop="join">Nhập ám hiệu<small>hảo hữu đã gửi ám hiệu hay đường dẫn</small></button></div>`}
  if(pg==="wait"){const c=s.room||CODE;const pw=peerWord();
   return `<div class="kcol-code">${kitRows([["Ám hiệu",esc(c),"t"],["Hảo hữu",pw[0],pw[1]]])}</div>`+
-   kitInput({id:"coop-link",label:"Đường dẫn mời",value:link(c),readonly:true})+
+   kitInput({id:"coop-link",label:"Đường dẫn mời",value:link(c),readonly:true})+(s.you!=="b"&&typeof kitCoopLenRow==="function"?kitCoopLenRow():"")+/* the host picks the buổi length (jcooptimer, KIT §69) */
    `<div class="kcol-act"><button class="kbtn k1" data-coop="share">Gửi đường dẫn cho hảo hữu<small>qua Zalo, Messenger, tin nhắn</small></button><button class="kbtn alt" data-coop="copy">Chép đường dẫn</button><button class="kbtn alt" data-coop="copycode">Chép mã ${esc(c)}</button></div>`+
    `<div class="kpnote">${s.status==="open"?"Hảo hữu chạm vào đường dẫn (hay chọn Cùng hảo hữu, Nhập ám hiệu, gõ ám hiệu) là vào phòng. Giữ màn này mở: hảo hữu vào là cuộc chơi bắt đầu.":"Đang nối với phòng."}</div>`}
  if(pg==="join")return kitInput({id:"coop-code",label:"Ám hiệu",value:CODE,placeholder:"bốn chữ hảo hữu gửi"})+

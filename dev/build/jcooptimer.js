@@ -27,7 +27,7 @@
 (function(){try{
 if(typeof COOP!=="object"||!window.COOPW)return;
 const CW=window.COOPW;
-const TB=()=>Object.assign({buoiMs:120000,pauseCapMs:60000,readMs:8000,syncMs:4000,graceMs:1500},(typeof BAL==="object"&&BAL&&BAL.coopTm)||{});
+const TB=()=>Object.assign({buoiMs:300000,lens:[3,5,8],pauseCapMs:60000,readMs:8000,syncMs:4000,graceMs:1500},(typeof BAL==="object"&&BAL&&BAL.coopTm)||{});
 const LSK="ctm-coop-tm";
 const pnow=()=>(typeof performance!=="undefined"&&performance.now)?performance.now():Date.now();
 const host=()=>CW.seat==="a";
@@ -46,7 +46,15 @@ let pingN=0;function ping(){if(host()||!CW.on)return;say("tp",{t0:Date.now(),n:+
 function onTq(m){const t1=Date.now(),rtt=t1-(+m.t0||t1);if(rtt<0||rtt>20000)return;offS.push([rtt,(+m.th||0)+rtt/2-t1]);if(offS.length>8)offS.shift();
  OFF=offS.slice().sort((a,b)=>a[0]-b[0])[0][1]}
 /* ---------- my status ---------- */
-function myPz(){if(!live())return false;return !!(Q.length||S.mg)}
+/* an animation she has to watch (reward / gift / edict / night moments kmStage .kmov, mini game #ov, honour podium, item fx, coins, the week
+   book, the calendar flip) stops the clock too, under the same cap */
+const ANIM=".kmov,#ov,#kpodov,.kievfx,.kcoinfly,.klsfly,.kbk,.kcl-host";
+function anim(){try{for(const m of document.querySelectorAll(ANIM)){const r=m.getBoundingClientRect();if(r.width&&r.height&&getComputedStyle(m).visibility!=="hidden"&&getComputedStyle(m).display!=="none")return true}}catch(e){}return false}
+function myPz(){if(!live())return false;return !!(Q.length||S.mg||anim())}
+/* buổi length: the host's pick in the lobby (3 / 5 / 8 phút, localStorage "ctm-coop-len"), else BAL.coopTm.buoiMs */
+const LENK="ctm-coop-len";
+function lenPick(){try{const n=+localStorage.getItem(LENK);return TB().lens.includes(n)?n:0}catch(e){return 0}}
+function lenMs(){const n=lenPick();return n?n*60000:TB().buoiMs}
 /* choosing a thân phận (first life / rebirth: Luân hồi), a death screen, the title: the clock stands still, no pause budget spent */
 function myLife(){if(!CW.on)return false;if(typeof S==="undefined"||!S||S.dead||CW.inLife)return true;const T=$("title");return !!(T&&!T.hidden)||!!document.getElementById("kroul")}
 function myRd(){if(!live()||S.dead)return false;if(myKey()!==roomKey())return false;return !!(CW.bend||CW.pend||CW.sent===wkN())}
@@ -61,7 +69,7 @@ function frReady(){const k=roomKey(),o=other();if(bkeyB===k&&bended[o])return tr
 let K=null;      /* host: {key, dl (host ms, while running) | rem (ms, while stopped), run, up, cap, pz, hold:"" | seat} */
 let lastSync=0,lastSave=0,lastT=0,HOLD="";       /* HOLD: who holds the game ("a" / "b" / "") as this client knows it */
 const kLeft=()=>!K?0:K.run?Math.max(0,K.dl-hnow()):Math.max(0,K.rem);
-function tmSnap(){return K?{key:K.key,dl:K.run?K.dl:0,rem:Math.round(kLeft()),run:!!K.run,up:!!K.up,cap:Math.round(K.cap),hold:K.hold||"",pz:!!K.pz}:null}
+function tmSnap(){return K?{len:K.len,key:K.key,dl:K.run?K.dl:0,rem:Math.round(kLeft()),run:!!K.run,up:!!K.up,cap:Math.round(K.cap),hold:K.hold||"",pz:!!K.pz}:null}
 function lsGet(){try{return JSON.parse(localStorage.getItem(LSK)||"null")}catch(e){return null}}
 function lsPut(){if(!K)return;try{localStorage.setItem(LSK,JSON.stringify(Object.assign({room:COOP.state.room},tmSnap())))}catch(e){}}
 let snapTm=null;   /* the clock the room snapshot carried (pos.a.tm) */
@@ -69,12 +77,15 @@ function newClock(k){const t=TB(),L=lsGet(),R=snapTm;
  /* own last second (refresh on this device) first: the time the host was away is not counted; else the room snapshot */
  const src=(L&&L.room===COOP.state.room&&L.key===k)?L:(R&&R.key===k)?R:null;
  if(src)K={key:k,rem:Math.max(0,src.run&&src.dl&&src!==L?src.dl-hnow():+src.rem||0),run:false,up:!!src.up,cap:Math.max(0,+src.cap||0),hold:src.hold||"",pz:false};
- else K={key:k,rem:t.buoiMs,run:false,up:false,cap:t.pauseCapMs,hold:"",pz:false};
+ else K={key:k,rem:lenMs(),run:false,up:false,cap:t.pauseCapMs,hold:"",pz:false};
+ K.len=src&&+src.len||lenMs();K.t0=Date.now();
  HOLD=K.hold;sendClk(true)}
 let lastPos=null;
 function sendClk(snap){if(!K)return;lastSync=pnow();say("clk",tmSnap());if(snap&&lastPos)try{S0(Object.assign({},lastPos,{tm:tmSnap()}))}catch(e){}}
 function setRun(on){if(!K||K.run===on)return false;if(on){K.dl=hnow()+Math.max(0,K.rem);K.run=true}else{K.rem=Math.max(0,K.dl-hnow());K.run=false}return true}
-function hostTick(dt){const k=roomKey();if(!K||K.key!==k)newClock(k);
+/* real buổi lengths (wall time from the clock's start to the room's step), for the logs (CW.tm.lens) */
+const LOGL=[];
+function hostTick(dt){const k=roomKey();if(!K||K.key!==k){if(K&&K.t0)LOGL.push({key:K.key,ms:Date.now()-K.t0,up:!!K.up});newClock(k)}
  const was=[K.run,K.pz,K.hold,K.up].join();
  const stopFree=frozenRoom()||K.up||!!K.hold||myLife()||(FS.key===k&&FS.lf);
  const pz=!stopFree&&(myPz()||(FS.key===k&&FS.pz))&&K.cap>0;
@@ -87,10 +98,10 @@ function hostTick(dt){const k=roomKey();if(!K||K.key!==k)newClock(k);
 /* ---------- the clock as this client sees it ---------- */
 let G=null;      /* guest: last clk */
 function view(){const k=roomKey();
- if(host()){if(!K||K.key!==k)return null;return {key:k,left:kLeft(),cap:K.cap,run:K.run,up:K.up,pz:K.pz,hold:K.hold||""}}
+ if(host()){if(!K||K.key!==k)return null;return {key:k,len:K.len,left:kLeft(),cap:K.cap,run:K.run,up:K.up,pz:K.pz,hold:K.hold||""}}
  if(!G||G.key!==k)return null;const left=G.run&&!frozenRoom()?Math.max(0,G.dl-hnow()):Math.max(0,G.rem);
- return {key:k,left,cap:G.cap,run:G.run,up:G.up,pz:G.pz,hold:G.hold||""}}
-function onClk(m){if(host())return;G={key:m.key,dl:+m.dl||0,rem:+m.rem||0,run:!!m.run,up:!!m.up,pz:!!m.pz,hold:m.hold||"",cap:+m.cap||0};
+ return {key:k,len:G.len,left,cap:G.cap,run:G.run,up:G.up,pz:G.pz,hold:G.hold||""}}
+function onClk(m){if(host())return;G={len:+m.len||0,key:m.key,dl:+m.dl||0,rem:+m.rem||0,run:!!m.run,up:!!m.up,pz:!!m.pz,hold:m.hold||"",cap:+m.cap||0};
  setHold(G.hold);if(m.up)timeUp(m.key)}
 /* ---------- Tạm dừng: the game stands still for both until the one who paused goes on ---------- */
 function hold(on){if(!CW.on)return;const by=on?CW.seat:"";if(host()){if(K){K.hold=by;hostTick(0)}}else{say("hold",{on:!!on,by:CW.seat});if(G)G.hold=by}setHold(by)}
@@ -100,7 +111,8 @@ function setHold(by){by=by||"";if(by===HOLD&&(!!HP===!!by))return;HOLD=by;
  if(!HP){HP=document.createElement("div");HP.id="kctmh";HP.className="modal kpscene";HP.setAttribute("role","alertdialog");document.body.appendChild(HP)}
  HP.innerHTML=kitCoopHold(by===CW.seat);const s=HP.querySelector(".kpseal");if(s)s.remove()}
 document.addEventListener("click",e=>{const b=e.target.closest("[data-ctm]");if(!b)return;e.stopPropagation();try{if(typeof sfx==="function")sfx("sfx-tap")}catch(x){}
- if(b.dataset.ctm==="hold")hold(true);else if(b.dataset.ctm==="go")hold(false)},true);
+ if(b.dataset.ctm==="hold")hold(true);else if(b.dataset.ctm==="go")hold(false);
+ else if(b.dataset.ctm==="len"){try{localStorage.setItem(LENK,String(+b.dataset.n))}catch(x){}const r=b.closest(".kctmlen");if(r)r.outerHTML=kitCoopLenRow()}},true);
 /* ---------- time up: end her buổi (carried through any open dialog) ---------- */
 let due="",AR={m:null,t:0};
 function timeUp(k){if(due===k)return;due=k;try{if(live()&&!S.dead&&myKey()===k){
@@ -149,6 +161,7 @@ function css(){if(document.getElementById("kctm-css"))return;const st=document.c
 .kctm .kchip{margin:0;align-items:center;font-weight:600;white-space:nowrap}
 .kctm .kctm-r{flex:0 0 auto;width:12px;height:12px;border-radius:50%;background:conic-gradient(currentColor calc(var(--p,1)*360deg),#0000 0);box-shadow:inset 0 0 0 1.5px currentColor;opacity:.85}
 .kctm .kchip.w .kctm-r{background:none}
+.kctmlen .kctm{justify-content:flex-start}
 .kctm button.kchip{font:inherit;font-size:.76rem;font-weight:600;cursor:pointer;min-height:26px;pointer-events:auto;border-color:var(--gold,#b8892b)}
 #kctm{position:fixed;z-index:24;right:8px;pointer-events:none;max-width:calc(100vw - 16px)}
 #kctm[hidden]{display:none}
@@ -170,7 +183,11 @@ function kitCoopClock(o){css();o=o||{};const p=Math.max(0,Math.min(1,(o.left||0)
 function kitCoopHold(mine){css();const t=mine?["Đang tạm dừng","Hậu cung dừng lại cho cả hai. Ngươi trở lại thì bấm Tiếp tục."]:["Hảo hữu xin tạm dừng","Hảo hữu xin tạm lui chốc lát. Hậu cung dừng lại cho đến khi hảo hữu trở lại."];
  const rows=typeof kitRows==="function"?kitRows([["Hảo hữu",mine?"đang đợi ngươi":"đang tạm lui",mine?"n":"r"],["Đồng hồ buổi","đứng yên","n"]]):"";
  return `<div class="dlg kpanel kpsc" data-kind="notice">${typeof kpHeader==="function"?kpHeader("notice",t[0],t[1]):`<b>${t[0]}</b>`}<div class="body" id="kctmhb">${rows}</div><div class="row" id="kctmhr">${mine?`<button class="kbtn" data-ctm="go">Tiếp tục</button>`:`<button class="kbtn alt" data-cfz="leave">Về màn đầu</button>`}</div></div>`}
-window.kitCoopClock=kitCoopClock;window.kitCoopHold=kitCoopHold;
+/* the host's pick in the lobby (jcooplobby "wait" screen): Mỗi buổi tối đa 3 / 5 / 8 phút, kit chip buttons in one kitRows row */
+function kitCoopLenRow(){css();const cur=lenPick()||Math.round(TB().buoiMs/60000);
+ const B=TB().lens.map(n=>`<button type="button" class="kchip ${n===cur?"g":"n"}" data-ctm="len" data-n="${n}" aria-pressed="${n===cur}">${n===cur?"✓ ":""}${n} phút</button>`).join("");
+ return typeof kitRows==="function"?`<div class="kctmlen">${kitRows([["Mỗi buổi tối đa",`<span class="kchips kctm">${B}</span>`,"t"]])}</div>`:""}
+window.kitCoopClock=kitCoopClock;window.kitCoopHold=kitCoopHold;window.kitCoopLenRow=kitCoopLenRow;
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§69",title:"kitCoopClock · kitCoopHold · đồng hồ buổi khi chơi cùng hảo hữu",
  html:()=>[{left:102000,len:120000,state:"run",btn:true},{left:15000,len:120000,state:"run",fr:"ready"},{left:64000,len:120000,state:"pz",fr:"busy"},{left:0,len:120000,state:"up"}].map(o=>`<div class="kitpg-row">${kitCoopClock(o)}</div>`).join("")+
   `<div class="kitpg-row" style="position:relative">${kitCoopHold(false)}</div>`})}catch(e){}
@@ -181,7 +198,7 @@ function paint(force){if(!live()||S.dead){hideChip();return}const v=view();const
  if(!v||!nx||!nx.offsetParent||(M&&!M.hidden)||(T&&!T.hidden)||document.getElementById("coopfz")||HP){hideChip();return}
  const fr=frReady()?"ready":(FS.key===v.key&&FS.pz)?"busy":"";
  const state=v.up||(v.run&&v.left<=0)?"up":(v.pz||v.hold)?"pz":(!v.run||frozenRoom())?"stop":"run";
- const h=kitCoopClock({left:v.left,len:TB().buoiMs,state,fr,btn:!v.up&&!frozenRoom()});
+ const h=kitCoopClock({left:v.left,len:v.len||lenMs(),state,fr,btn:!v.up&&!frozenRoom()});
  if(!EL){css();EL=document.createElement("div");EL.id="kctm";EL.setAttribute("role","status");EL.setAttribute("aria-live","off");document.body.appendChild(EL)}
  if(h!==lastH||force){EL.innerHTML=h;lastH=h}
  const r=nx.getBoundingClientRect();EL.style.right=Math.max(8,Math.round(innerWidth-r.right))+"px";EL.style.bottom=Math.round(innerHeight-r.top+6)+"px";if(EL.hidden)EL.hidden=false}
@@ -197,5 +214,5 @@ function go(){if(IV)return;lastT=0;IV=setInterval(tick,250)}
 function stop(){if(IV){clearInterval(IV);IV=0}hideChip();K=null;G=null;due="";AR.m=null;setHold("")}
 if(CW.on)go();
 /* test hooks (dev/test/coop-timer*.js) */
-CW.tm={dbg:()=>({lifeW:{S:typeof S!=="undefined"&&!!S,dead:typeof S!=="undefined"&&S&&S.dead,inLife:CW.inLife,title:!!($("title")&&!$("title").hidden),kroul:!!document.getElementById("kroul")},fz:frozenRoom(),K:K&&tmSnap(),life:myLife(),pz:myPz(),FS:Object.assign({},FS),rk:roomKey(),G,HOLD,OFF}),view,roomKey,myKey,due:()=>due,frReady,hold,off:()=>OFF,hnow,reset:()=>{if(host()){try{localStorage.removeItem(LSK)}catch(e){}K=null;snapTm=null;hostTick(0)}},fmtT};
+CW.tm={lens:()=>LOGL.slice(),dbg:()=>({lifeW:{S:typeof S!=="undefined"&&!!S,dead:typeof S!=="undefined"&&S&&S.dead,inLife:CW.inLife,title:!!($("title")&&!$("title").hidden),kroul:!!document.getElementById("kroul")},fz:frozenRoom(),K:K&&tmSnap(),life:myLife(),pz:myPz(),FS:Object.assign({},FS),rk:roomKey(),G,HOLD,OFF}),view,roomKey,myKey,due:()=>due,frReady,hold,off:()=>OFF,hnow,reset:()=>{if(host()){try{localStorage.removeItem(LSK)}catch(e){}K=null;snapTm=null;hostTick(0)}},fmtT};
 }catch(e){console.error(e)}})();

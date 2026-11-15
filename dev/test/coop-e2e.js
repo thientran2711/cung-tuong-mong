@@ -135,6 +135,10 @@ async function weekBoth(A,B,w){const n=await A.p.evaluate(()=>typeof B4N==='numb
  if(!await D.p.evaluate(()=>typeof S!=='undefined'&&!!S&&!!S.name))await tapText(D,/^Tiếp tục kiếp này/,4000);await D.p.waitForTimeout(1500);
  const ld=await D.p.evaluate(()=>({n:typeof S!=='undefined'&&S&&S.name,coop:!!__co().on,fr:typeof rivals!=='undefined'&&(rivals||[]).some(v=>v.coop)}));ok(ld.n===oldName&&!ld.coop&&!ld.fr,'solo: old save loads, no co-op',ld);
  await clear(D);await shot(D,'14-solo-game');
+ /* real buổi lengths (co-op clock, jcooptimer): wall time from a buổi's clock start to the room's step, as the host measured them */
+ try{const L=await A.p.evaluate(()=>window.COOPW&&COOPW.tm&&COOPW.tm.lens?COOPW.tm.lens():[]);const ms=L.map(x=>x.ms).sort((a,b)=>a-b);
+  const q=f=>ms.length?Math.round(ms[Math.min(ms.length-1,Math.floor(f*ms.length))]/100)/10:0;
+  const line=`buổi lengths (s): n=${ms.length} median=${q(.5)} p90=${q(.9)} max=${q(1)} timeouts=${L.filter(x=>x.up).length}`;console.log(line);fs.appendFileSync(OUT+'/buoi-lengths.txt',line+'\n')}catch(e){console.log('buổi lengths: n/a',e.message)}
  for(const o of [A,B,D])ok(!o.errs.length,o.name+': no page errors',o.errs.slice(0,5));
  const bad=res.filter(r=>!r[0]);if(NIGHTS)console.log('forced nights',COOPW_n);console.log(`\n${res.length-bad.length}/${res.length} passed`);fs.writeFileSync(OUT+'/result.txt',res.map(r=>(r[0]?'ok  ':'FAIL')+' '+r[1]).join('\n')+'\n');
  await b.close();process.exit(bad.length?1:0)})().catch(e=>{console.error(e);process.exit(2)});
