@@ -58,3 +58,11 @@ Base: origin/main (merged; see git log). In the assemble.py module list keep mai
   int-stats, rules-one-source + old save, sheet-turn, page-curl, coop-e2e 59/59 — all pass; no horizontal overflow at the 6 sizes.
 - Observation for the worker (not blocking): a "thân ±N" with no "→ ta"/"với ta" before it is drawn as a bare "thiện cảm ±N" (KIT §57 "between two
   other people"); after "Nàng oán ta +2," it reads ambiguous (seen: "Phi X nhờ người đưa thư. Nàng oán ta +2, thiện cảm −2.").
+- Third/fourth merge: origin/main 27491781f (j83-variety, toilette) and f6d80ae65 (act-pics2 r7): assemble only (main list + jkrel, jint, jnight).
+- RESULT r6 = FAIL (see the reviewer report):
+  1. coop-e2e on the merged build: 3 of 5 runs 59/59, 2 runs stall in week 3 (run A: "buổi 2:1 advanced for both", ipad "Đợi hảo hữu xong buổi",
+     week 3 not advanced for either seat; run B: guest already at [buổi 0, next week] "Đợi hảo hữu" while the host was still at buổi 2).
+     origin/main f6d80ae65 alone: 2 of 2 runs 59/59. Suspect: jnight's own nextBuoi in co-op (a night at tối ends the turn for one seat
+     while the friend is mid-day; the next buổi is auto-ended again). Make co-op nights deterministic and re-run coop-e2e ≥3 times.
+  2. book-person page turn: 2 of ~7 runs (1366x1024, 1180x820) report a turning sheet copy whose portrait (por-consort-*, por-maid-*) is still
+     loading while the live page has it decoded (= a flash). Earlier runs on main 5e491704d / aa9689da5 were clean; load avg was ~34.
