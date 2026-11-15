@@ -31,3 +31,15 @@ giấu giúp, núp nghe lén… Cùng luật cho phi tần NPC (ngươi cũng c�
    nơi cấm địa → phi tần có mặt có thể thấy và báo ngươi hay giữ làm chứng cứ.
 5. **Cân bằng**: hiếm — đích vài lần một năm cho người chơi, nhiều hơn vào buổi tối, lễ tết, Ngự hoa viên; đo bằng bot `dev/measure/men.js`.
    Sổ cũ: thêm trường khi nạp, không đổi gì cũ.
+
+## 15/11 — mọi kẻ lạc đều có NGUYÊN NHÂN THẬT (lệnh chủ: không rải ngẫu nhiên)
+Không còn kẻ lạc "vô cớ" (đã bỏ: uống rượu, lạc đường, hái trộm hoa, xem đèn). Một nam nhân chỉ vào hậu cung không có lệnh khi trạng thái thế giới cho hắn một lý do;
+may rủi chỉ quyết định hắn có làm việc ấy TRONG BUỔI NÀY không (và người khác có để ý không):
+1. **Tư tình** — cặp có thật của j22 (`v.affair`): hẹn nhau ban đêm (30 phần mỗi buổi tối) ở vườn, lãnh cung hay cung nàng.
+2. **Thư lén** — một phi tần có cớ cần liên lạc ra ngoài: đang cấm túc, đang toan mưu (`v.plan`), đang giấu thai, thất sủng mà ghen nặng (Sủng < 25, ghen ≥ 50);
+   nàng mua chuộc một thị vệ có nết dễ mua (tham vọng / phong lưu) hay lòng trung dưới 50; hắn đến cung nàng nhận thư (2,5 phần mỗi buổi; ×lễ tết, ×đêm, ×mưa ít).
+3. **Nán lại quá giờ lệnh** — thợ Nội vụ phủ / thái y đang có lệnh THẬT trong cung một phi tần, nết phong lưu / đa tình, ở lại trò chuyện riêng với chủ cung (12 phần).
+4. **Tìm gặp người để ý** — nam nhân nết phong lưu / đa tình để ý một phi tần (`m.likeV`, chọn một lần theo nhan sắc, đổi khi nàng mất); khi hắn ở trong cung
+   (thị vệ trực, vương gia thỉnh an / dự lễ, thợ có lệnh) hắn lẻn đến chỗ nàng đang ở (2,2 phần mỗi buổi; ×lễ tết, ×đêm).
+Nghe lén thành công kể đúng nguyên nhân (`menTrue`): ai, vì sao (cấm túc / toan mưu / giấu thai / thất sủng; lệnh gì; để ý ai).
+Thẻ bắt gặp: lựa chọn là thẻ việc đầy đủ của kit (Tốn · Được · Mất · Kèm · Ghi chú + thang may rủi), như Hành sự.

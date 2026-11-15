@@ -3,7 +3,7 @@
 Kế hoạch: dev/MEN_PLAN.md. Mã: dev/build/jmen.js (assemble: sau jk4, trước j84). Không vẽ tranh mới (chỉ tranh nam có sẵn).
 
 ## Đã xong
-- Chỗ + lý do theo buổi (`menPlace`, wrap placeWhere, chỉ đường phi tần): thị vệ trực (4 người, mỗi người một dáng thive-1..4 theo thứ tự trong menGuards qua figPick),
+- Chỗ + lý do theo buổi (`menPlace`, wrap placeWhere, chỉ đường phi tần): thị vệ trực (4 người, dùng chung 2 dáng thive-1/2 qua figPick),
   Thái y có lệnh truyền vào cung phi tần ốm/có thai, Vương gia (lễ tết ở vườn, thỉnh an Thái hậu), Nhạc sư/Họa sư có lệnh Nội vụ phủ,
   Sứ thần (Ngự thư phòng sáng, yến lễ tết), quan j55 (`S.minW`: chầu sáng ở Ngự thư phòng, yến lễ tết) lên sân khấu (kind "min").
 - Vùng: `menZone` + `zones`/`outerCourt` trong img/map-hotspots.json; Ngoại triều = nhãn thường trên dư đồ + dấu khóa nhỏ (.kmlock, chờ nhãn kit của
@@ -39,9 +39,12 @@ Kế hoạch: dev/MEN_PLAN.md. Mã: dev/build/jmen.js (assemble: sau jk4, trư�
 - KIT_FIG.fac (jkit.js): bóng người lạ nam (unknown-fig-m) cũng ×1.08 như đàn ông.
 - Ngoại triều: nhãn + khóa + thẻ kit (xem trên). Ảnh: dev/shots/men/*-ntcard.jpg.
 
-## 15/11 — 4 dáng thị vệ riêng
-- Vẽ thêm thive-3 (giáp vảy đồng-vàng trên áo lam sẫm, mũ trụ chùm lông đỏ, cầm giáo) và thive-4 (giáp da đen + thép trên áo đỏ thẫm viền chàm,
-  búi nửa đầu, hai tay đặt trên chuôi kiếm), 4 tuổi a18/a26/a36/a51, gpt-2-6 1728x576 2k, style ref = lineup thive-1 (s7ocTncl8e).
-  Gen: ksDDnoL16B (thive-3), Syttpu5Ub8 (thive-4); cắt từng người + Magnific tách nền; fig 900 cao, por 384x506 bằng porcrop.py (chạy `python3 -I`, vì dev/figwork/cv2.py che OpenCV).
-- img/FIGURES-others.json: +8 mục (role man, sub thive, identity thive-3/4). jmen.js: thị vệ thứ i → thive-(i+1), tính lại theo chỉ số nên sổ cũ đã lưu fid dùng chung cũng được chia lại.
-- Bảng: dev/shots/men/thive-all.jpg. cutcheck: fig ≤1.41 (như thive-2), por ghost do chùm lông/tóc (như thive-2).
+## 15/11 (lượt 3, lệnh điều phối)
+- Thẻ bắt gặp (và thẻ sau nghe lén): lựa chọn = thẻ việc đầy đủ của kit (showOut, optLayout rows): Tốn · Được · Mất · Kèm · Ghi chú + thang may rủi
+  (Báo Cung Chính ti, Giấu giúp, Núp nghe lén có bậc; báo khi bắt quả tang tư tình có bậc). Số trên thẻ = số thật trong menReport/menHide/menChoose.
+- Kẻ lạc có NGUYÊN NHÂN THẬT (MEN_PLAN.md mục 15/11): tư tình j22, thư lén (phi tần cấm túc/toan mưu/giấu thai/thất sủng ghen nặng mua chuộc thị vệ dễ mua),
+  thợ/thái y có lệnh nán lại quá giờ (nết phong lưu/đa tình), nam nhân để ý một phi tần (m.likeV) lẻn đến chỗ nàng. Bỏ hết kẻ lạc vô cớ.
+- KIT 33.6 (jk4 kitFigBody + kitEsFit, KIT.md §33.6): sân khấu sự kiện đo thân người thật (bỏ lề trong, bỏ mũ/trâm trên đầu bằng vị trí trán),
+  nam = nữ × KIT_FIG.man, chân chung một đường. Đo trên ảnh: thị vệ / Quý phi ≈ 1 : 0,91 (đích 0,926).
+- Đo lại (sens, walk=1, 33,8 năm): kẻ lạc 13,5/năm; người chơi gặp 0,59/năm với 24,7 lần đi/năm = 0,024 mỗi lần đi → ~2–3 lần/năm nếu đi mỗi buổi một lần.
+  NPC thấy 1,95/năm, báo 0,24/năm. 0 crash, 0 lỗi trang, ghi/nạp sạch.
