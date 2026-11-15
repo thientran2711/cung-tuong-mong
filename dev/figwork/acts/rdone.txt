@@ -275,3 +275,11 @@ trung-doc-thuoc-giai-h trung-doc-thuoc-giai-g-h
 xin-th-do-loi-h xin-th-do-loi-g-h
 xin-che-cho xin-che-cho-h
 sinh-ha-h sinh-ha-g-h
+thay-buot-mieng thay-buot-mieng-h
+thi-tai-nu thi-tai-nu-h
+thi-tham thi-tham-h
+thi-tham-noi-xau thi-tham-noi-xau-h
+thieu-le-y-phuc thieu-le-y-phuc-h
+thinh-an-ban-khong-gap thinh-an-ban-khong-gap-h
+tho-truyen-ra-ngoai tho-truyen-ra-ngoai-h
+thoat-than-no-ty thoat-than-no-ty-h
