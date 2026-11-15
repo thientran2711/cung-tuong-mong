@@ -1698,10 +1698,10 @@ function promoGap(r){return r<3?3:3+(r-2)*2}
 function promoReqP(p){if(rkOf(p)>=7)return[];const r=rkOf(p),nx=RANKS[r+1],L=[];const me=p===S,qq=queenP();
  if(p.out)return[[false,"Đang ở lãnh cung"]];L.push([p.sung>=nx.s,`Sủng ${p.sung}/${nx.s}`],[p.danh>=nx.d,`Danh ${p.danh}/${nx.d}`],[S.turn-p.lastPromo>=promoGap(r),`Cách lần sắc phong trước ${S.turn-p.lastPromo}/${promoGap(r)} tháng`]);
  const qBlock=qq&&qq!==p;
- if(qBlock&&r+1>=2&&r+1<7)L.push([p.hh>-40||p.th>=50,`Hoàng hậu không chặn (Hoàng hậu ${p.hh}, cần trên -40; hoặc Thái hậu 50)`]);
+ if(qBlock&&r+1>=2&&r+1<7)L.push([p.hh>BAL.qBlockHh||p.th>=BAL.qBlockTh,`Hoàng hậu không chặn (Hoàng hậu ${p.hh}, cần trên ${BAL.qBlockHh}; hoặc Thái hậu ${BAL.qBlockTh})`]);
  if(has("hieuthao"))L.push([p.th>=0,`Thái hậu gật đầu (${p.th}/0), vì Hoàng thượng hiếu thảo`]);
- if(r+1===7){const tn=has("hieuthao")?40:50,nd=S.heir&&S.heir.k.alive&&(S.heir.v===(me?null:p))?40:50;const sn=sonsOf(p).length>0;L.push([S.turn>=(p.seatBan||0),p.seatBan>S.turn?`Vừa tố Hoàng hậu, bị nghi tranh ngôi (còn ${p.seatBan-S.turn} tháng)`:"Không bị nghi tranh ngôi"],[!qq,"Ngôi Hoàng hậu bỏ trống"],[sn?p.th>=tn:p.th>=tn+30,sn?`Có hoàng tử và Thái hậu ủng hộ (${p.th}/${tn})`:`Chưa có hoàng tử: cần Thái hậu hết lòng (${p.th}/${tn+30})`],[p.duc>=nd,`Đức ${p.duc}/${nd}${nd<40?" (mẹ Thái tử)":""}`])}
- else if(r+1>=5)L.push([p.hh>-30||p.th>=30||!qBlock||(facOf(p)&&facStr(facOf(p))>=180),"Hoàng hậu không phản đối, hoặc Thái hậu 30, hoặc phe mạnh (thế lực 180)"]);
+ if(r+1===7){const N=hhNeed(p),tn=N.th,nd=N.duc,sn=N.sons;L.push([S.turn>=(p.seatBan||0),p.seatBan>S.turn?`Vừa tố Hoàng hậu, bị nghi tranh ngôi (còn ${p.seatBan-S.turn} tháng)`:"Không bị nghi tranh ngôi"],[!qq,"Ngôi Hoàng hậu bỏ trống"],[p.th>=tn,sn?`Có hoàng tử và Thái hậu ủng hộ (${p.th}/${tn})`:`Chưa có hoàng tử: cần Thái hậu hết lòng (${p.th}/${tn})`],[p.duc>=nd,`Đức ${p.duc}/${nd}${N.heir?" (mẹ Thái tử)":""}`])}
+ else if(r+1>=5)L.push([p.hh>BAL.hiOppHh||p.th>=BAL.hiOppTh||!qBlock||(facOf(p)&&facStr(facOf(p))>=BAL.hiOppFac),`Hoàng hậu không phản đối, hoặc Thái hậu ${BAL.hiOppTh}, hoặc phe mạnh (thế lực ${BAL.hiOppFac})`]);
  if(p.confined)L.push([false,`Đang cấm túc (${p.confined} tháng)`]);return L}
 function promoReq(){return promoReqP(S)}
 /* the vacant seat is contested: every eligible consort (Quý phi and above) weighs in by favour, Thái hậu, sons and name */
@@ -2093,7 +2093,7 @@ const AIMG={cam:"cam",ky:"ky",thi:"thi",hoa:"hoa",vu:"vu",y:"y-thuat"};
 function ic(n,s){s=s||16;return `<img class="ic" src="img/${n}.webp" width="${s}" height="${s}" alt="" onerror="this.remove()">`}
 function chip(t,cls){return `<span class="chip ${cls||""}">${t}</span>`}
 /* warns when an act would drop Đức under the Hoàng hậu bar (40) */
-function ducWarn(c){const d=c&&c.duc;if(!d||d>=0||!S||S.rank>=7)return"";const after=S.duc+d;return after<50?`<span class="fx r"><b>Đức ${S.duc} → ${after}: ${S.duc>=40?"tụt dưới 50, mất đường lên Hoàng hậu":"cần Đức 50 mới lên Hoàng hậu"}</b></span>`:""}
+function ducWarn(c){const t=ducWarnTxt(c);return t?`<span class="fx r"><b>${t}</b></span>`:""}
 function cardH(a,i){const poor=a.c&&a.c.bac&&S.bac+a.c.bac<0,o=a.o==null?100:a.o;const dis=!can(cardCost(a))||a.done||poor||a.lock||S.dead||(a.b!=null&&(S.buoi||0)!==a.b);
  const gain=[fmt(a.w),a.x].filter(Boolean).join(" · ")||"không";
  return `<button class="card" data-i="${i}" ${dis?"disabled":""}><h4>${a.n}</h4><span class="fx">${pips(cardCost(a))} ${cardCost(a)} khắc${a.b!=null?` · <b>Chỉ ${BUOI[a.b].toLowerCase()}</b>`:""}</span><p>${a.t||""}</p>${o<100&&!a.lock?`<span class="odds">${word(cl(o+lotB(S,a.dom),5,95))}${lotTag(a.dom)}</span>`:`<span class="odds">Chắc chắn</span>`}<span class="fx">Tốn: ${fmt(a.c)||"không"}</span>${ducWarn(a.c)}<span class="fx">Thành: ${gain}</span>${o<100&&!a.lock?`<span class="fx">Hỏng: ${fmt(a.l)||"không mất gì"}</span>`:""}</button>`}
@@ -2127,7 +2127,7 @@ function renderPanel0(){const el=$("panel");let h="";faceInit();const gm=documen
  if(tab==="story"){const s=STORY[S.origin.k];if(s.calc)S.st.step=s.calc();
    h=`<div class="story"><h3>${s.t}</h3><p style="margin:0 0 4px">${s.goal}</p><p style="margin:0">Bước <b>${S.st.step}/${s.n}</b> · ${S.st.done===1?`<span class="g">Thành: ${S.st.tag}</span>`:S.st.done===-1?`<span class="r">Bại: ${S.st.tag}</span>`:s.hint()}</p></div>`;
    const c=(ok,t)=>`<span class="${ok?"y":"n"}">${ok?"✓":"✗"} ${t}</span>`;
-   h+=S.rank>=7?`<div class="req"><h3>Ngươi là Hoàng hậu</h3>Đưa con mình lên ngôi để thành Hoàng thái hậu.</div>`:`<div class="req"><h3>Điều kiện sắc phong ${RANKS[S.rank+1].n}</h3>${promoReq().map(([ok,t])=>c(ok,t)).join("<br>")}<br><span class="past">Ngôi Hoàng hậu về sau cần: ngôi bỏ trống, có hoàng tử và Thái hậu 50 (không con trai: Thái hậu 80), và <b class="${S.duc>=50?"g":"r"}">Đức ${S.duc}/50</b> (mẹ Thái tử: 40). Khi ngôi trống, Hoàng thượng chọn trong những người đủ điều kiện (nặng ở hoàng tử, Thái hậu, Danh).</span><br><span class="past">Đủ điều kiện thì cuối tháng có thánh chỉ. Sinh hoàng tử được thăng thêm một bậc.</span></div>`}
+   h+=S.rank>=7?`<div class="req"><h3>Ngươi là Hoàng hậu</h3>Đưa con mình lên ngôi để thành Hoàng thái hậu.</div>`:`<div class="req"><h3>Điều kiện sắc phong ${RANKS[S.rank+1].n}</h3>${promoReq().map(([ok,t])=>c(ok,t)).join("<br>")}<br><span class="past">Ngôi Hoàng hậu về sau cần: ngôi bỏ trống, có hoàng tử và Thái hậu ${BAL.hhTh} (không con trai: Thái hậu ${has("hieuthao")?BAL.hhThNoSonHieu:BAL.hhThNoSon}), và <b class="${S.duc>=hhNeed(S).duc?"g":"r"}">Đức ${S.duc}/${hhNeed(S).duc}</b> (mẹ Thái tử: ${BAL.hhDucHeir}). Khi ngôi trống, Hoàng thượng chọn trong những người đủ điều kiện (nặng ở hoàng tử, Thái hậu, Danh).</span><br><span class="past">Đủ điều kiện thì cuối tháng có thánh chỉ. Sinh hoàng tử được thăng thêm một bậc.</span></div>`}
  if(tab==="inv")h=invHTML();
  if(tab==="rel")h=relHTML();
  if(tab==="staff")h=staffTabHTML();
@@ -2703,7 +2703,7 @@ function cardH(a,i){const poor=a.c&&a.c.bac&&S.bac+a.c.bac<0,o=a.o==null?100:a.o
  return `<button class="card kcard" data-i="${i}" ${dis?"disabled":""}><h4>${a.n}</h4><span class="ktime">${pips(cardCost(a))} ${cardCost(a)} khắc${a.b!=null?` · Chỉ ${BUOI[a.b].toLowerCase()}`:""}</span><p>${a.t||""}</p><span class="krow">${oddsChip(ow)}</span>
  <span class="kgrid"><span class="kl">Tốn</span><span>${effList([fmt(a.c)||"không",ducWarnTxt(a.c)])}</span><span class="kl">Thành</span><span>${effList([fmt(a.w||{}),String(a.x||"").split(/ · kèm: /)[0]],"g")}</span>${/ · kèm: /.test(a.x||"")?`<span class="kl">Kèm</span><span>${effList(String(a.x).split(/ · kèm: /)[1],"r").replace(/class="ef [gn]"/g,'class="ef r"')}</span>`:""}${rolled?`<span class="kl">Hỏng</span><span>${effList(fmt(a.l||{})||"không mất gì","r")}</span>`:""}</span></button>`}
 /* route the older line builders through the kit */
-function ducWarnTxt(c){const d=c&&c.duc;if(!d||d>=0||!S||S.rank>=7)return"";const after=S.duc+d;return after<50?`Đức ${S.duc} → ${after}: ${S.duc>=40?"tụt dưới 50, mất đường lên Hoàng hậu":"cần Đức 50 mới lên Hoàng hậu"}`:""}
+function ducWarnTxt(c){const d=c&&c.duc;if(!d||d>=0||!S||S.rank>=7)return"";const after=S.duc+d,nd=hhNeed(S).duc;return after<nd?`Đức ${S.duc} → ${after}`:""}/* owner 07:05Z: the card shows only "Đức a → b"; the threshold lives in the top-bar Đức chip (jk3), read from BAL */
 let actLineRaw;(function(){const o1=optLine,o2=dilLine,o3=actLine;actLineRaw=o3;optLine=a=>kitParse(o1(a));dilLine=c=>kitParse(o2(c));actLine=(k,w,c)=>kitParse(o3(k,w,c))})();
 function kitFix(root){(root||document).querySelectorAll(".rbtn button small,.btn small,.pcb button small,.opt small").forEach(sm=>{if(sm.dataset.kp||sm.querySelector(".oc,.kl,.ef"))return;sm.dataset.kp=1;sm.innerHTML=kitParse(sm.innerHTML)})}
 /* ONE portrait frame: the tall gold-framed 3:4 box, one size per breakpoint, for every person who is the subject (cards, dialogs, summaries) */
@@ -2739,7 +2739,7 @@ function cardWhy(a){if(S.dead)return"";if(a.done)return"Đã làm trong buổi n
 function rkOfFace(kind,o){if(kind==="consort"){if(o.out)return["cold","Phế phi · lãnh cung"];const r=o===S?S.rank:(o.queen?7:o.rank);return["c"+r,r>=7?"Hoàng hậu":RANKS[r].n]}
  if(kind==="serv"){const r=srk(o);return[(o.role==="maid"?"sv":"eu")+r,srkName(o)]}return[kind,""]}
 /* ===== the always-visible status row (was inside Hành động) ===== */
-const HX={buoi:"Mỗi buổi có 4 khắc. Mỗi việc tốn khắc; hết khắc thì sang buổi sau.",date:"Ngày tháng trong cung. Mỗi tuần có 3 buổi, mỗi tháng 3 tuần.",lot:"Quẻ đầu tuần. Gieo lại tốn 10 bạc và 1 khắc.",sac:"Sắc: nhan sắc. Giúp múa, thị tẩm, được để ý.",tai:"Tài: tài học. Giúp đàn, thơ, nói chuyện với Hoàng thượng.",tamco:"Tâm cơ: mưu trí. Giúp dò la, mưu kế, nhìn thấu.",duc:"Đức: tiếng hiền. Cần 50 để lên Hoàng hậu (mẹ Thái tử 40).",mat:"Tai mắt: người của ngươi khắp cung. Giúp biết tin, phát giác mưu hại.",th:"Thái hậu với ngươi: lòng thương của Thái hậu.",hh:"Hoàng hậu với ngươi: chính là thiện cảm của Hoàng hậu với ngươi (một con số duy nhất).",maid:"Lòng cung nữ thân tín. Dưới 45 dễ bị mua chuộc.",con:"Khả năng có thai mỗi lần thị tẩm.",dem:"Khả năng được lật thẻ bài mỗi tuần.",an:"Ân tình: tình nghĩa với Hoàng thượng, tích qua các đêm."};
+const HX={buoi:"Mỗi buổi có 4 khắc. Mỗi việc tốn khắc; hết khắc thì sang buổi sau.",date:"Ngày tháng trong cung. Mỗi tuần có 3 buổi, mỗi tháng 3 tuần.",lot:"Quẻ đầu tuần. Gieo lại tốn 10 bạc và 1 khắc.",sac:"Sắc: nhan sắc. Giúp múa, thị tẩm, được để ý.",tai:"Tài: tài học. Giúp đàn, thơ, nói chuyện với Hoàng thượng.",tamco:"Tâm cơ: mưu trí. Giúp dò la, mưu kế, nhìn thấu.",duc:"Đức: tiếng hiền. Cần để lên Hoàng hậu (ngưỡng: xem chú giải Đức).",mat:"Tai mắt: người của ngươi khắp cung. Giúp biết tin, phát giác mưu hại.",th:"Thái hậu với ngươi: lòng thương của Thái hậu.",hh:"Hoàng hậu với ngươi: chính là thiện cảm của Hoàng hậu với ngươi (một con số duy nhất).",maid:"Lòng cung nữ thân tín. Dưới 45 dễ bị mua chuộc.",con:"Khả năng có thai mỗi lần thị tẩm.",dem:"Khả năng được lật thẻ bài mỗi tuần.",an:"Ân tình: tình nghĩa với Hoàng thượng, tích qua các đêm."};
 const HXN={sac:"Sắc",tai:"Tài",tamco:"Tâm cơ",duc:"Đức",mat:"Tai mắt",th:"Thái hậu",hh:"Hoàng hậu",maid:"Lòng cung nữ",an:"Ân tình",aw:"Ân thưởng"};
 function renderHud2(){const el=$("hud2");if(!el||!S)return;const prev=window.__h2p||{};const cur={};
  const c=(k,label,val,cls,ico)=>{cls=(cls||"")+(["buoi","lot","date"].includes(k)?" keep":"");cur[k]=val;const ch=prev[k]!=null&&typeof val==="number"&&prev[k]!==val?val-prev[k]:0;return `<button class="hc ${cls||""}${ch?" flash":""}" data-hx="${k}">${ico?ic(ico,12):""}${label}${val!=null&&val!==""?` <b>${val}</b>`:""}${ch?`<i class="${ch>0?"g":"r"}">${ch>0?"+":""}${ch}</i>`:""}</button>`};
@@ -3564,7 +3564,7 @@ function themeTick(){if(!S)return;const sea=SEAK[SEASON[S.month-1]]||"ha";const 
 const CR=["Tài nghệ","Đức hạnh","Thế lực"];
 function crW(i){return i===0?(has("trongtai")?1.5:1):i===1?(has("hieuthao")?1.5:1):(has("danghi")?.6:1)}
 function ct(){return S.contest||null}
-function candOK(p,r){if(p.out||p.confined||(p!==S&&!p.alive))return false;if(rkOf(p)!==r-1)return false;const req=promoReqP(p).filter(x=>!/Chờ ghế|Ghế |bỏ trống/.test(x[1]));if(r===7)return req.filter(x=>!/Cách lần/.test(x[1])).every(x=>x[0])&&(p.th||0)>=40;return req.every(x=>x[0])}
+function candOK(p,r){if(p.out||p.confined||(p!==S&&!p.alive))return false;if(rkOf(p)!==r-1)return false;const req=promoReqP(p).filter(x=>!/Chờ ghế|Ghế |bỏ trống/.test(x[1]));if(r===7)return req.filter(x=>!/Cách lần/.test(x[1])).every(x=>x[0])&&(p.th||0)>=BAL.hhTh;return req.every(x=>x[0])}
 /* a seat opens: decree and candidate list */
 function contestOpen(r){if(ct())return"";const C=consorts().filter(p=>candOK(p,r));if(!C.length)return"";if(C.length===1&&C[0]!==S){return promoteP(C[0])||""}
  const len=r===7?3:1;S.contest={r,c:C.map(key),t0:wk(),len,round:0,sc:{},bk:{},pr:{},sab:{},dq:[],hint:0};
@@ -3826,7 +3826,12 @@ function mindTell(v,t,k){mindLog(v,"_tell");const tc=witOf(v);let c=12+(S.mat||0
 /* someone with a plan in hand waits for it instead of starting another */
 (function(){const n0=npcAct;npcAct=function(v,t){if(v&&v.plan)return"";return n0.apply(this,arguments)}})();
 /* ================= BALANCE KNOBS (measured with the sensible / random bots; see the report) ================= */
-const BAL={outQ:85,hz:2.0,conc:.3/.7,later:6,hhTh:55};
+const BAL={outQ:85,hz:2.0,conc:.3/.7,later:6,hhTh:55,
+ /* ONE SOURCE for every promotion threshold the player sees (checks in promoReqP/candOK and every text read these) */
+ hhThNoSon:80,hhThNoSonHieu:70,hhDuc:50,hhDucHeir:40,qBlockHh:-40,qBlockTh:50,hiOppHh:-30,hiOppTh:30,hiOppFac:180};
+/* what the Hoàng hậu seat asks of p (the same numbers the checks use) */
+function hhNeed(p){p=p||S;const sn=sonsOf(p).length>0,hieu=typeof has==="function"&&has("hieuthao");const heir=!!(S.heir&&S.heir.k&&S.heir.k.alive&&S.heir.v===(p===S?null:p));
+ return{sons:sn,th:sn?BAL.hhTh:(hieu?BAL.hhThNoSonHieu:BAL.hhThNoSon),duc:heir?BAL.hhDucHeir:BAL.hhDuc,heir}}
 /* an empty Hoàng hậu seat: the Thái hậu may bring in a girl of a great house instead of holding a contest (same for every candidate) */
 (function(){const c0=contestOpen;contestOpen=function(r){if(r===7&&!ct()&&!queenP()&&S.outQv!==S.vacSince&&consorts().some(p=>candOK(p,7))&&(S.outQv=S.vacSince,true)&&roomFor("consort")&&roll(BAL.outQ)){const n=newRival(7,true);Object.assign(n,drawFace());n.rank=6;n.queen=true;n.dad=80;rivals.unshift(n);S.vacSince=null;
   const t=`<b>Thánh chỉ: Thái hậu chọn ${n.name}, con gái danh môn, vào cung lập làm Hoàng hậu.</b> Ghế trống không mở tranh. `;log(t);return t}return c0.apply(this,arguments)}})();
@@ -3834,8 +3839,7 @@ const BAL={outQ:85,hz:2.0,conc:.3/.7,later:6,hhTh:55};
 (function(){const c0=conceiveCh;conceiveCh=function(p){return Math.round(c0.apply(this,arguments)*BAL.conc)}})();
 (function(){const b0=birthRisk;birthRisk=function(p){const r=b0.apply(this,arguments);const n=p===S?(S.kids||[]).length:(p.kids||[]).length;if(n>0&&p===S&&S.birthWhy)S.birthWhy=S.birthWhy.concat([]);return n>0?cl(r-BAL.later,1.5,60):r}})();
 /* the Hoàng hậu seat asks more: the Thái hậu's favour 55+ to stand as a candidate (same for every candidate) */
-(function(){const c0=candOK;candOK=function(p,r){if(!c0.apply(this,arguments))return false;if(r===7&&(p.th||0)<BAL.hhTh)return false;return true}})();
-(function(){const q0=promoReqP;promoReqP=function(p){const L=q0.apply(this,arguments);try{if(rkOf(p)===6)L.push([(p.th||0)>=BAL.hhTh,`Thái hậu với ${p===S?"ngươi":"nàng"} ${BAL.hhTh}+ (nay ${p.th||0})`])}catch(e){}return L}})();
+/* (since rules-one-source: promoReqP (j8) and candOK (j34) read BAL.hhTh / hhNeed() directly; no second check here) */
 /* every hidden meeting widens the circle that might know: exposure risk grows with the number of trysts (same rule for everyone) */
 (function(){const l0=lộRisk;lộRisk=function(k){const n=(S.men||[]).reduce((a,m)=>a+(m.trysts||0),0);return cl(l0.apply(this,arguments)+Math.min(30,n*4),6,92)}})();
 /* ================= KIT 33 · ONE FIGURE SCALE — KIT_FIG (owner 11/15 "people on the stage are too small") =================
@@ -7258,7 +7262,7 @@ function kitOddsLadder(lv){return `<div class="kpopt">Thang cơ hội · 7 bậc
 const KIT_GLOSS={
  "Sủng":"Hoàng thượng thương ngươi bao nhiêu (0–100). Cao thì hay được lật thẻ, được ban thưởng, dễ thăng bậc.",
  "Danh":"Tiếng tăm của ngươi trong cung. Cần để thăng bậc; mất khi bị bắt quả tang hay bị chê cười.",
- "Đức":"Tiếng hiền đức. Hoàng hậu cần Đức 50 (mẹ Thái tử 40). Làm việc ác bị lộ thì mất Đức.",
+ "Đức":`Tiếng hiền đức. Hoàng hậu cần Đức ${BAL.hhDuc} (mẹ Thái tử ${BAL.hhDucHeir}). Làm việc ác bị lộ thì mất Đức.`,
  "Sắc":"Nhan sắc. Giúp múa, thị tẩm và được Hoàng thượng để ý.",
  "Tài":"Tài học: đàn, thơ, chữ. Giúp hầu chuyện Hoàng thượng và thi tài.",
  "Tâm cơ":"Mưu trí, sự khôn khéo. Giúp dò la, bày mưu, nhìn thấu mưu của người khác.",
@@ -7282,7 +7286,7 @@ const KIT_GLOSS={
  "Lật thẻ":"Mỗi tối Hoàng thượng lật thẻ bài để chọn người hầu đêm. Khả năng ngươi được chọn mỗi tuần.",
  "Lãnh cung":"Cung lạnh: nơi giam phi tần bị phế. Mất phẩm vị, chỉ còn đường xin phục vị.",
  "Cấm túc":"Bị giữ trong cung của mình một thời gian, không được ra ngoài, không được lật thẻ.",
- "Bổng lộc":"Bạc phát đầu mỗi tháng theo phẩm vị (30–320 bạc).",
+ "Bổng lộc":`Bạc phát đầu mỗi tháng theo phẩm vị (${BL[0]}–${BL[BL.length-1]} bạc).`,
  "Ân thưởng":"Những lần ngươi được Hoàng thượng, Thái hậu ban thưởng và vật đã nhận.",
  "Tranh ghế":"Cuộc thi giành một ghế phẩm vị còn trống: thi tài nghệ rồi xét đức hạnh.",
  "Tuyển tú":"Ba năm một lần, cung đón thêm tú nữ mới.",
@@ -9010,9 +9014,7 @@ const KT=/^(Hoàng tử|Công chúa|Hoàng nữ|Thái tử) /;
 try{const t0=tuoi;tuoi=function(n){const h=t0.apply(this,arguments);return h?h.replace(/\s*<span class="past">\([^)]*\)<\/span>/,""):h}}catch(e){}
 try{const a0=ageLine;ageLine=function(p){const h=a0.apply(this,arguments);try{const ag=p===S?S.age:p.age;const b=BAND4N[band4(ag)];return h.replace(` · ${b}`,"")}catch(e){return h}}}catch(e){}
 /* ---- Đức warning: the cost already says "Đức -n" ---- */
-const dw=s=>String(s).replace(/Đức (\d+) → (-?\d+): /,"còn $2: ").replace("cần Đức 50","cần 50");
-try{const d0=ducWarnTxt;ducWarnTxt=function(){return dw(d0.apply(this,arguments))}}catch(e){}
-try{const d1=ducWarn;ducWarn=function(){return dw(d1.apply(this,arguments))}}catch(e){}
+/* (rules-one-source: the old shortening "Đức 33 → 28: …" → "còn 28: …" dropped the stat name; removed. The note keeps "Đức a → b".) */
 /* ---- consort card: relation chip repeats the "Nàng với ngươi" line ---- */
 try{const r0=rvCard;rvCard=function(){const h=r0.apply(this,arguments);return h.replace(/<span class="chip (hot|ok|)">(Thù ngươi|Thân với ngươi|Bình thường)<\/span>/,"")}}catch(e){}
 /* ---- "Đã biết": one line per distinct report ---- */
@@ -11833,8 +11835,8 @@ function k3Hud(){try{if(!S)return;const d=$$("me-d");if(d){const t=k3Date();if(d
  /* lãnh cung: the rank chip says what the figure label says (rkOfFace "Phế phi · lãnh cung"), not her old rank (review fold-layout) */
  if(S.out){const r=$$("me-r"),w="Phế phi · lãnh cung";if(r&&r.textContent.trim()!==w)r.textContent=w}
  /* her Tư chất: the kit stat cells in the top bar's kitStatRow (jk4) */
- k3TopRow();if(typeof kitStatSet!=="function")return;const hq=S.rank<7&&S.duc<50;
- [["sac","Sắc"],["tai","Tài"],["tamco","Tâm cơ"],["duc","Đức"]].forEach(([k,l])=>{const c=$$("hud-"+k);if(c)kitStatSet(c,S[k],{title:`${l} ${S[k]}${k==="duc"&&hq?" · Cần Đức 50 mới được lập Hoàng hậu":""} · chạm để xem đủ`,warn:k==="duc"&&hq?"Cần Đức 50 mới được lập Hoàng hậu":""})})}catch(e){}}
+ k3TopRow();if(typeof kitStatSet!=="function")return;const nd=hhNeed(S).duc,hq=S.rank<7&&S.duc<nd,dw=`Cần Đức ${BAL.hhDuc} mới được lập Hoàng hậu (mẹ Thái tử: ${BAL.hhDucHeir})`;
+ [["sac","Sắc"],["tai","Tài"],["tamco","Tâm cơ"],["duc","Đức"]].forEach(([k,l])=>{const c=$$("hud-"+k);if(c)kitStatSet(c,S[k],{title:`${l} ${S[k]}${k==="duc"&&hq?" · "+dw:""} · chạm để xem đủ`,warn:k==="duc"&&hq?dw:""})})}catch(e){}}
 /* the top bar's second row (KIT 31.1): time (buổi, khắc dots, weather, Quẻ tuần) + status chips | her Tư chất. ONE component, every device */
 function k3TopRow(){const hd=document.querySelector("header.hud");let tc=$$("k3tc");if(!tc&&hd){tc=document.createElement("div");tc.id="k3tc";tc.className="k3tc";
  tc.innerHTML=`<span id="k3tt" class="k3tt"></span>`;hd.appendChild(tc);
