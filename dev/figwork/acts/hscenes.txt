@@ -197,3 +197,27 @@ de-nang-chiu-don|0|a consort's pink sleeve turned away at a doorway while a eunu
 lam-ngo|0|a consort's hand holding a round silk fan as she walks past, pink sleeve flowing, a blurred cluster of whispering sleeves to one side
 mua-lay|1|a consort's hand in a pink sleeve sliding silver ingots across a table toward a eunuch's dark sleeve that passes back a sealed blank letter, candle
 dua-com-ao|0|a maid's hands carrying a covered bamboo food basket and a folded padded cotton coat to a weathered cold-palace door, a plain undyed sleeve reaching out
+li-xi|0|a consort's hand in a pink sleeve handing small red New Year envelopes into the raised cupped hands of kneeling maids in green sleeves, red lanterns
+nau-chao-phat|0|a consort's hand in a pink sleeve ladling steaming porridge from a huge pot into bowls held out by servants' hands, winter courtyard, light snow
+nau-che-mung|0|a consort's hands stirring a large pot of sweet bean soup, a maid's green sleeve ladling it into small festive bowls lined up on a tray
+chep-kinh|1|a hand in a plain undyed cotton sleeve copying a sutra with a brush by a small oil lamp in a bare cold-palace room, paper blank or abstract lines only
+theu-khan-ban-lc|0|hands in plain undyed sleeves embroidering a small handkerchief on a hoop beside a worn lattice window of a cold palace, faded light
+trai-gioi|0|hands in plain white sleeves pressed together in prayer before an altar with a bronze incense burner, a dry cracked courtyard beyond, praying for rain
+le-tru-ta|0|a monk's hand in a grey sleeve striking a wooden fish drum before a palace gate, incense smoke, maids' green sleeves watching at the edge
+rinh-bat-gia-ma|1|a eunuch's hand holding a lantern from behind a red pillar, at the far end of a dark corridor a white cloth shape posing as a ghost
+ke-gia-ma|1|a eunuch's hand yanking a white sheet away, revealing a maid's green sleeves beneath, lantern light in a dark corridor
+goi-banh-u|0|a consort's hands folding bamboo leaves around sticky rice dumplings tied with string, a basket of finished dumplings ready as an offering
+tui-ngai|0|a consort's hands tying an embroidered mugwort sachet on a red cord around a small child's collar, only the child's tiny hands and little red sleeve visible, Dragon Boat festival calamus leaves
+cuoc-thuyen-rong|0|ladies' hands laying silver ingots as bets on a pavilion railing, dragon boats racing on the lake below, drums
+thuyen-ve-nhat|0|a lady's hand in a pink sleeve waving a silk handkerchief over a pavilion railing as a dragon boat with a red flag crosses the finish on the lake
+theo-len-nui|0|the Emperor's yellow sleeve and a consort's pink sleeve side by side on stone steps climbing a mountain path, red maple leaves, autumn
+ruou-cuc|0|a consort's hands offering a cup of chrysanthemum wine to an elder lady's dark brocade sleeve, pots of yellow chrysanthemums
+tha-den-cau-sieu|1|a consort's hands releasing a glowing paper lotus lantern onto a dark river, other lanterns drifting away, Ghost festival night
+cung-phi-tan-oan|0|a consort's hand lighting incense sticks before a small altar in a quiet corner of a palace, white flowers in a vase
+muon-le-do-hoi|0|a consort's hand in a pink sleeve resting kindly on an old servant's weathered hand beside an offering tray of fruit and cakes
+muon-dip-do-tin|0|a consort's pink sleeve and a eunuch's dark sleeve side by side on a willow-lined road on Qingming, a basket of offerings for tomb sweeping, drizzle
+theo-hau-le-te|0|the Emperor's yellow ceremonial robe hem leading up marble steps of an ancestral temple, a consort's pink sleeves following behind, banners and incense
+dang-ngoc-nhu-y|0|a consort's hands presenting a jade ruyi scepter on a brocade tray to an elder lady's dark brocade sleeve, birthday peaches
+le-mon|0|a maid's hands placing a small wrapped gift box on a crowded table of birthday offerings, longevity peaches and grand gifts around it
+dang-cau-doi|0|a consort's hands presenting a rolled red paper scroll (blank) to the Emperor's yellow sleeve, New Year red lanterns
+giai-cau-do-den|1|a lady's hand reaching up to a blank paper riddle slip hanging under a glowing lantern among a row of lanterns, Lantern Festival night
