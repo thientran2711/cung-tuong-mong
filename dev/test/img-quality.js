@@ -100,7 +100,7 @@ function helpers(){
  W.__iqTab=t=>{W.__iqClean();let b=document.querySelector(`#tabs [data-tab="${t}"]`);
   if(!b){/* sub-tabs (jhc: Hậu cung = Hoàng thượng·Thái hậu | Phi tần | Nam nhân | Cung nhân): open the group, then the sub-tab */
    const g=document.querySelector('#tabs [data-tab="rv"]');if(g)g.click();b=document.querySelector(`[data-ksub="${t}"]`)}
-  if(!b)return 'no tab '+t;b.click();return 'ok'};
+  if(!b)return 'no tab '+t;b.click();const sb=document.querySelector(`[data-ksub="${t}"]`);if(sb&&sb!==b)sb.click();return 'ok'};
  W.__iqStart=()=>{try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;
   for(let i=0;i<60;i++){try{store.set(NL_KEY,null)}catch(e){}start();if(!(typeof isSrv==='function'&&isSrv()))break}W.__iqClean();render()};
  W.__iqKnowAll=st=>{for(const e of k61All())S.known[kOf61(e)]=st;try{for(const s of W.__iqCongtu())S.known[kOf61(s)]=st}catch(e){}K61VER++;render()};
@@ -161,11 +161,11 @@ async function walk(p,SZ,ALL,phase){
  await ev(p,()=>__iqClean());}
 
 (async()=>{
- const b=await chromium.launch();const ALL=[];const ERR=[];
+ const PX=process.env.HTTPS_PROXY||process.env.https_proxy;const b=await chromium.launch(PX?{proxy:{server:PX,bypass:'127.0.0.1,localhost'}}:{}); /* pictures come from the CDN (dev/art/CDN.md) */const ALL=[];const ERR=[];
  for(const SZ of SIZES){
   /* a renderer that crashes on a loaded machine is re-opened (up to 3 tries); screens already measured are skipped (DONE) */
   for(let attempt=1;attempt<=3;attempt++){
-  const ctx=await b.newContext({viewport:{width:SZ.w,height:SZ.h},deviceScaleFactor:SZ.dpr,hasTouch:true,isMobile:SZ.w<1100,serviceWorkers:'block',reducedMotion:'reduce'});
+  const ctx=await b.newContext({viewport:{width:SZ.w,height:SZ.h},deviceScaleFactor:SZ.dpr,hasTouch:true,isMobile:SZ.w<1100,serviceWorkers:'block',ignoreHTTPSErrors:true,reducedMotion:'reduce'});
   await ctx.addInitScript(()=>{window.__bot=1}); /* no background art download (jload) during the audit */
   const p=await ctx.newPage();p.setDefaultTimeout(300000);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
   const bad=[];p.on('response',r=>{if(r.status()>=400&&/\.(webp|png|jpg|json)/.test(r.url()))bad.push(r.status()+' '+r.url().replace(/^.*?\/img\//,'img/'))});
@@ -174,7 +174,11 @@ async function walk(p,SZ,ALL,phase){
   await look(p,SZ,'Trang đầu (Luân hồi)',ALL,800);
   /* co-op lobby from the title screen */
   if(!DONE.has(SZ.tag+'|Chơi cùng bạn (sảnh)')&&await ev(p,()=>{const b=document.querySelector('#modal .kco');if(b){b.click();return 1}return 0}))await look(p,SZ,'Chơi cùng bạn (sảnh)',ALL,900);
-  await ev(p,helpers);await ev(p,()=>__iqStart());await p.waitForTimeout(1200);await ev(p,()=>{__iqClean();render()});
+  await ev(p,helpers);await ev(p,()=>__iqStart());await p.waitForTimeout(3000);
+  /* the origin roulette (jk2b) opens a moment after start(): keep it away for the whole audit; consort road only */
+  await ev(p,()=>{setInterval(()=>{const r=document.getElementById('kroul');if(r){try{const k=r.querySelector('.krskip');k&&k.click()}catch(e){}r.remove()}},150)});
+  for(let i=0;i<20&&await ev(p,()=>typeof isSrv==='function'&&isSrv());i++){await ev(p,()=>{try{store.set(NL_KEY,null)}catch(e){}start()});await p.waitForTimeout(1500)}
+  await p.waitForTimeout(800);await ev(p,()=>{__iqClean();render()});
   await walk(p,SZ,ALL,'lạ');
   /* week book: the next buổi until the book opens */
   if((!ONLY||ONLY.test('Sổ tuần'))&&!DONE.has(SZ.tag+'|Sổ tuần')){await ev(p,()=>{__iqClean();try{for(let i=0;i<4;i++){nextBuoi();if(document.querySelector('.kbook,.kbk'))break}}catch(e){}});await look(p,SZ,'Sổ tuần',ALL,2500);
