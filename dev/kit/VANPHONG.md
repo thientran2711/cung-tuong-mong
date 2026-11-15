@@ -47,6 +47,7 @@ Thi hành: `dev/build/j84.js` (module cuối trong assemble.py) sửa dữ liệ
 | Thái y xem đồ | nghiệm độc | xét nghiệm |
 | Người quen thân | người quen, tri kỷ | bạn |
 | Dịp tốt | cơ duyên, dịp | cơ hội |
+| Tình cảm giữa hai người (owner 11/15 09:55Z; một số, một tên) | **thiện cảm**: chip "Nàng → ta: thiện cảm", "Ta → nàng: thiện cảm"; dòng thẻ việc "thiện cảm +10"; mối hận "oán ta +8". Chưa biết thì "chưa rõ nàng nghĩ gì", không hiện số. Hằng chung: `KIT_REL` (jaudit) | quý ngươi, quý ta, thân, thù (khi ý là thiện cảm), "đang −40" khi nàng chưa biết |
 | Số đo (Sắc, Tài, Sủng…) | gọi đúng tên; khi chung chung: "không đổi gì" | chỉ số, stat, điểm |
 | Điểm thi (tuyển tú, thi tài) | phần: "nàng mất 2 phần" | điểm |
 | Bậc may rủi | Liều / Khó / Năm ăn năm thua / Khá chắc / Chắc / Rất chắc / Nắm chắc (việc chắc không ghi chữ) | %, Chắc chắn, random |

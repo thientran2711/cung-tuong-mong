@@ -56,8 +56,8 @@ function hcRelHTML(){kn();const P=consorts();const sel=relSel==="emp"||relSel===
  let h=`<div class="relsel kpplist"><span class="past kppl-h">Xem quan hệ của:</span>${chips.map(([k,n,f])=>`<button data-rel="${k}" aria-pressed="${String(k)===String(relSel)}">${mdH(f,"xs")}<span>${n}</span></button>`).join("")}</div>`;
  if(sel==="emp"){const f=pEmp();return h+rel3(f,"Hoàng thượng",empName(),fcol(f),`<div class="kr3b"><span class="kr3k">${gl("Sủng","Ngài sủng ngươi")}</span><span class="kr3v"><span class="ef g">${S.sung}</span>${fbar(S.sung,0,100,true)}</span></div><div class="kr3b"><span class="kr3k">${gl("Ân tình","Ân tình")}</span><span class="kr3v"><span class="ef g">${S.an||0}</span>${fbar(S.an||0,0,100,true)}</span></div>`,"")+
   liveRivals(true).map(v=>{const f=pv(v);return rel3(f,rkName(v),v.name,fcol(f),`<div class="kr3b"><span class="kr3k">Ngài sủng nàng</span><span class="kr3v">${favLine(v)}</span></div>`,knownCol(v))}).join("")}
- if(sel==="th"){const f=pTH();return h+rel3(f,"Thái hậu","Thái hậu",fcol(f),`<div class="kr3b"><span class="kr3k">Thái hậu thương ngươi</span><span class="kr3v"><span class="ef ${S.th>=0?"g":"r"}">${S.th}</span>${fbar(S.th,-100,100,S.th>=0)}</span></div>`,"")+
-  liveRivals(true).map(v=>{const f=pv(v);return rel3(f,rkName(v),v.name,fcol(f),`<div class="kr3b"><span class="kr3k">Thái hậu thương nàng</span><span class="kr3v">${knows(v)?`<span class="ef ${v.th>=0?"g":"r"}">${v.th||0}</span>`:'<span class="ef n">chưa rõ</span>'}</span></div>`,knownCol(v))}).join("")}
+ if(sel==="th"){const f=pTH();return h+rel3(f,"Thái hậu","Thái hậu",fcol(f),`<div class="kr3b"><span class="kr3k">Thái hậu → ta: thiện cảm</span><span class="kr3v"><span class="ef ${S.th>=0?"g":"r"}">${S.th}</span>${fbar(S.th,-100,100,S.th>=0)}</span></div>`,"")+
+  liveRivals(true).map(v=>{const f=pv(v);return rel3(f,rkName(v),v.name,fcol(f),`<div class="kr3b"><span class="kr3k">Thái hậu → nàng: thiện cảm</span><span class="kr3v">${knows(v)?`<span class="ef ${v.th>=0?"g":"r"}">${v.th||0}</span>`:'<span class="ef n">chưa rõ</span>'}</span></div>`,knownCol(v))}).join("")}
  if(sel===S){return h+P.filter(p=>p!==S).map(v=>{const f=pv(v),k=knows(v),sj=subjOf(v),ob=objOf(v);
    const mid=relBar("quý",sj,"ngươi",k?aff(v,S):null)+relBar("oán",sj,"ngươi",k?oan(v,S):null)+relBar("quý","Ngươi",ob,aff(S,v))+relBar("oán","Ngươi",ob,oan(S,v))+
     (sameHouse(S,v)?`<p class="kr3note">Cùng ${houseName(v)} với ngươi.</p>`:"");
@@ -92,7 +92,7 @@ try{if(window.VP&&VP.tabs)Object.assign(VP.tabs,{court:["Hoàng thượng · Th�
 /* court sub-tab: Hoàng thượng + Thái hậu, the same pager + person card; their acts = the day's act cards about them (from the Hành sự deck) */
 function deckFor(re){try{return (deck||[]).map((a,i)=>[a,i]).filter(([a])=>a&&!a.done&&re.test((a.n||"")+" "+(a.x||""))).map(([a,i])=>cardH(a,i))}catch(e){return[]}}
 function thCard(){const known=typeof window.kitCourtKnown!=="function"||window.kitCourtKnown("th")!==false;
- const L=[typeof tuoi==="function"&&S.thAge?tuoi(S.thAge):"",known?`Thái hậu thương ngươi: <b>${S.th|0}</b>`:"Thái hậu thương ngươi: <b>chưa rõ</b>"].filter(Boolean);
+ const L=[typeof tuoi==="function"&&S.thAge?tuoi(S.thAge):"",known?`Thái hậu → ta: thiện cảm: <b>${S.th|0}</b>`:"Thái hậu → ta: thiện cảm: <b>chưa rõ</b>"].filter(Boolean);
  const acts=deckFor(/Thái hậu|Đức Thọ/);
  return pcard({f:pTH(),col:"#c9a0e0",name:"Thái hậu",rank:"Thái hậu · Đức Thọ cung",lines:L,groups:[["Việc hôm nay",acts.length?acts:[`<p class="kr3note">Hôm nay Hành sự không có việc nào về Thái hậu. Thỉnh an Thái hậu: sang Đức Thọ cung (Dư đồ) buổi sáng.</p>`]]],empty:""})}
 function empCard(){const E=S.emp;const acts=deckFor(/Hoàng thượng|ngự giá|ngự thư phòng|Dưỡng Tâm|thị tẩm/i);

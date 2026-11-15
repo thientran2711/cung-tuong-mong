@@ -74,7 +74,7 @@ function popCard(p,i){const opts=talkOpts(p),done=S.visit&&(S.visit.talked===tru
  let rank="",lines=[],chips=[],ghen=null,col=p.col;
  if((p.kind==="rival"||p.kind==="hh")&&v){col=RCOL[v.queen?7:v.rank];rank=`${ic(RIMG[v.queen?7:v.rank],16)}${v.queen?"Hoàng hậu":RANKS[v.rank].n}`;ghen=v.ghen;lines=[ageLine(v),`Tính nết: ${trLine(v)}`].concat(relLines(v),[favLine(v)]);chips=["",sameHouse(S,v)?chip("cùng cung"):"",v.ev?chip(`${ic("chung-cu",14)}Chứng cứ ${v.ev}`,"hot"):"",illKnown(v)?chip(illName(v),"hot"):"",v.preg&&!v.hidden?chip(`${ic("thai",14)}Có thai tháng ${v.preg}`):"",facOf(v)?chip(`Phe ${facOf(v).name}`):""]}
  else if(p.kind==="emp"){rank="Hoàng thượng";lines=[tuoi(S.emp.age),`Tâm trạng: <b>${MOODS[S.emp.mood][0]}</b>`,`Ngài sủng ngươi <b>${S.sung}</b>`]}
- else if(p.kind==="th"){rank="Thái hậu";lines=[tuoi(S.thAge),`Thái hậu thương ngươi <b>${S.th}</b>`]}
+ else if(p.kind==="th"){rank="Thái hậu";lines=[tuoi(S.thAge),`Thái hậu → ta: thiện cảm <b>${S.th}</b>`]}
  else{const a=String(p.info||"").split(" · ");rank=a.shift()||"";lines=a;const ag=p.kind==="maid"?S.maid.age:p.kind==="ty"?(S.court&&S.court.ty||{}).age:p.kind==="ksp"?(S.court&&S.court.ksp||{}).age:p.kind==="peddler"?(S.court&&S.court.ped||{}).age:p.kind==="kid"&&p.ref?p.ref.age:p.kind==="fallen"&&v?v.age:0;if(ag&&p.kind!=="kid")lines.unshift(tuoi(ag))}
  const B=opts.map((a,j)=>{const o=a.o==null?100:a.o;const tc=a.act?2:1;const poor=a.c&&a.c.bac&&S.bac+a.c.bac<0;
   const why=a.lock?a.t:poor?"không đủ bạc":whyTime(tc);const sm=optLine(a);

@@ -787,7 +787,7 @@ if(typeof artTabHTML==="function"){artTabHTML=function(){let h=`<div class="ph">
   const levels=[0,1,2,3,4].map(i=>ms[i]||`${stn} +2`);
   const acts=l>=5?[]:[pbtn(`data-learn="${a.k}" data-mode="self"`,"Tự học",`Chắc chắn · tốn: Sức -15 · thành: tiến bộ bằng 6 phần 10 số phần đạt trong trò học (ít nhất +1)`,t2||(S.suc<25?"Sức dưới 25":"")),
    pbtn(`data-learn="${a.k}" data-mode="teacher"`,"Học với thầy",`Chắc chắn · tốn: Bạc -${cost}, Sức -10 · thành: tiến bộ đủ số phần đạt trong trò học, thầy kể một sở thích của Hoàng thượng hoặc chuyện của một phi tần (chứng cứ +1): ${word(30)}`,t2||(S.bac<cost?`thiếu bạc (cần ${cost})`:"")),
-   S.thDead?"":pbtn(`data-learn="${a.k}" data-mode="th"`,"Xin Thái hậu cho học cùng",`Chắc chắn · tốn: Sức -10 · thành: tiến bộ đủ số phần đạt trong trò học, Thái hậu với ngươi +3`,t2||(S.th<40?"cần Thái hậu thương 40":(S.buoi||0)!==0?"chỉ buổi sáng":""))].filter(Boolean);
+   S.thDead?"":pbtn(`data-learn="${a.k}" data-mode="th"`,"Xin Thái hậu cho học cùng",`Chắc chắn · tốn: Sức -10 · thành: tiến bộ đủ số phần đạt trong trò học, Thái hậu với ngươi +3`,t2||(S.th<40?"cần Thái hậu → ta: thiện cảm 40":(S.buoi||0)!==0?"chỉ buổi sáng":""))].filter(Boolean);
   return kitSkillCard({kind:"art",k:a.k,name:a.n,level:l,max:5,prog:[S.artp[a.k],need],desc:(typeof ARTDO==="object"&&ARTDO[a.k]||"")+` · mỗi bậc: ${stn} +2`,levels,acts})}).join("")+`</div>`;return h}}
 (function(){const st=document.createElement("style");st.id="kit2-skill";st.textContent=`
 .kskills{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,520px),1fr));gap:10px}
