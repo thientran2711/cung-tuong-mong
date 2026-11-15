@@ -813,3 +813,9 @@ All must work in co-op.
 - Owner (verbatim): "Hàng trên hàng dưới chưa alignment."
 - Screenshot dev/handover/refs/owner-row-align.jpg (ĐIỀU "Tâm trạng · Chu Thục Nghi", block ĐANG TÁC ĐỘNG): row "LO ÂU | Khương Lạc Anh được tấn phong · 2 tuần trước" and row "ẢNH HƯỞNG | vui thì dễ chịu nghe…" — the value columns start at different x because each label sizes its own width.
 - Rule: inside one block, every label/value row shares ONE label column width (the widest label), so all values start on the same vertical line (same as the TỐN/ĐƯỢC/MẤT/GHI CHÚ rows). Fix in the shared kit row part, whole family across the game. → worker review/row-align.
+
+## 15/11 (session 8) — Mood dialog: picture must match the mood, mood icon on the picture, rank always with name (owner screenshot)
+- Owner (verbatim): "Rồi ảnh sự kiện này không hợp với khung tâm trạng, nên để ảnh sự kiện liên quan tới tâm trạng, và thêm icon tâm trạng 1 góc ở sự kiện. Nên ghi rõ tâm trạng hoàng hậu chu thục nghi, phẩm và tên người lúc nào cũng phải đi chung."
+- Screenshot dev/handover/refs/owner-mood-dialog.jpg (ĐIỀU "Tâm trạng · Chu Thục Nghi", Hiện nay: Lo âu; picture = cheerful tea table "Có người đến chơi").
+- Decisions: (1) the mood dialog picture shows a scene matching the CURRENT mood (lo âu → anxious scene, etc.; each mood gets its own painted picture(s), Magnific gpt-2-6), not an unrelated event picture; (2) a mood icon sits in one corner of the picture (kit part, same icon as the mood elsewhere); (3) title reads "Tâm trạng · Hoàng hậu Chu Thục Nghi".
+- GENERAL RULE (owner): a person's RANK and NAME always go together, everywhere (titles, headers, dialogs, lists, logs, toasts), never the bare name — rank in its rank colour (see rank-colour entry). → worker review/mood-dialog; rule added to review/rank-colour scope.
