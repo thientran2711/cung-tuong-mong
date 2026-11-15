@@ -1509,6 +1509,11 @@ as a small dim line, max 4, then "Xem thêm N điều ›" → the intel panel).
 Labels are `kitGloss("Quý"|"Oán", label)`: a tap shows one line. Person cards (jk2b `kitPcGrid` chips, order: Nàng quý · Nàng oán · Ngươi quý ·
 Ngươi oán · Ghen), Ân oán rows, week-book "Hiện nay" rows and delta chips all use these words; the bare word "Thiện cảm" is never shown.
 
+- **Review 11/15 (signed bar, card columns):** "quý" (−100…100) and "Thái hậu thương" use `kitSignedBar(v)` (`.ksbar`): a track with a clear
+  midline at 0, the fill grows FROM the midline toward the sign (right green = liking, left red = dislike), length ∝ |v|; "oán" (0…100) keeps the
+  one-sided bar. A card with nothing for the right column is TWO columns (`.kr3two`), never an empty third column; the "Ngươi" card in another
+  person's view shows "Đã biết" about that person.
+
 ### 36.4 PORTRAIT BOX (owner 05:45Z "khung nhảy", "muốn đặt đâu là đặt") — person card left column
 - ONE box for every person and rank: the `.pcp.kit` cell at the full left-column width (left edge = the name/rank's left edge, width = the chips
   column), its top headroom trimmed by ONE constant `KIT_PORT_TRIM` (= .015 of the canvas, the tallest painted top: Thái hậu / Hoàng thượng /
