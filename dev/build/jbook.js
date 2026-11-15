@@ -92,7 +92,9 @@ function kitCurl(o){o=o||{};const host=o.host,w=Math.max(40,o.w|0),h=Math.max(40
   root.style.setProperty("--kcl-e",el.toFixed(3));
   if(o.vanish)root.style.opacity=p>.8?Math.max(0,1-(p-.8)/.2).toFixed(3):"1"}
  set(o.p||0);
- return {el:root,set,rescroll,destroy(){root.remove()},n:1}}
+ /* setBack(el): the back of the turning sheet shows a real page (the destination page, read the right way once turned; owner 11/15) */
+ function setBack(src){const p=prep(src,false);if(!p)return;[...BK.f.children].forEach(ch=>{if(ch!==sh)ch.remove()});BK.f.insertBefore(p.m,sh);BK.sc=p.sc}
+ return {el:root,set,rescroll,setBack,destroy(){root.remove()},n:1}}
 
 function kitCurlRun(c,from,to,dur,done,ease){ease=ease||kitCurlEase;const t0=performance.now();let alive=true;const dir=to>=from?1:-1;
  const step=now=>{if(!alive)return;const t=Math.min(1,(now-t0)/Math.max(1,dur));c.set(from+(to-from)*ease(t),dir);if(t<1)requestAnimationFrame(step);else{alive=false;done&&done()}};
@@ -110,10 +112,12 @@ function kitCurlSwap(el,fn,opt){opt=opt||{};const run=()=>{try{fn&&fn()}catch(e)
  if(!el||!r0||r0.width<60||r0.height<60||!el.getClientRects().length){run();return false}
  if(kitCurlOff()){el.classList.add("kcl-fade");run();requestAnimationFrame(()=>requestAnimationFrame(()=>el.classList.remove("kcl-fade")));return false}
  const host=document.createElement("div");host.className="kcl-host";host.style.cssText=`left:${r0.left}px;top:${r0.top}px;width:${r0.width}px;height:${r0.height}px`;
- let c=null;try{c=kitCurl({host,front:el,back:null,w:r0.width,h:r0.height,x:0,y:0,keepId:false,mirror:(opt.dir||1)<0,vanish:true,ghost:true,lift:.5,cls:"kcl-tab"})}catch(e){console.error(e)}
+ let c=null;try{c=kitCurl({host,front:el,back:null,w:r0.width,h:r0.height,x:0,y:0,keepId:false,mirror:(opt.dir||1)<0,vanish:true,lift:.5,cls:"kcl-tab"})}catch(e){console.error(e)}
  run();
  const r1=el.getBoundingClientRect();
  if(!c||Math.abs(r1.left-r0.left)>2||Math.abs(r1.top-r0.top)>2||Math.abs(r1.width-r0.width)>2||Math.abs(r1.height-r0.height)>2||!el.getClientRects().length){host.remove();return false}
+ /* the back of the turning sheet = the new page (as in a real book: the page you turn to is printed on its back) */
+ try{c.setBack(el)}catch(e){console.error(e)}
  document.body.appendChild(host);c.rescroll();kitCurlSfx();
  /* a quick lift then a slower settle (a flick of the page): the new page shows under the corner from the first frames */
  const stop=kitCurlRun(c,0,1,opt.ms||720,()=>{host.remove();if(kclLive===end)kclLive=null},kitCurlLift);

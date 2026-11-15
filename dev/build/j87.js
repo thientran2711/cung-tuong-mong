@@ -110,7 +110,9 @@ function kitBook(spec){spec=spec||{};const rm=()=>{try{return reducedMotion()}ca
   for(let k=i-2;k<=i+2;k++)if(els[k])els[k].style.visibility="visible";if(mode==="single"&&els[i+1]&&i===cur)els[i+1].style.visibility="visible";
   if(mode==="spread")book.classList.remove("closed","atend");
   if(el.__curl){el.style.visibility="hidden";return el}el.__dir=dir||1;
-  el.__curl=kitCurl({host:book,front:el.querySelector(".kbk-front>.kbk-pg"),back:el.querySelector(".kbk-back>.kbk-pg"),w:PW,h:PH,x:mode==="spread"?PW:0,y:0,
+  /* one page at a time: the back of the turning sheet shows the next page (owner 11/15), not a blank verso */
+  const nx=mode==="single"&&els[i+1]?els[i+1].querySelector(".kbk-front>.kbk-pg"):null;
+  el.__curl=kitCurl({host:book,front:el.querySelector(".kbk-front>.kbk-pg"),back:nx||el.querySelector(".kbk-back>.kbk-pg"),w:PW,h:PH,x:mode==="spread"?PW:0,y:0,
    po:mode==="spread"?0:PW*.5,shadeL:mode==="spread",dir:dir||1,p:i<cur?1:0});
   el.style.visibility="hidden";el.classList.add("turn");return el}
  const ease=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2,easeOut=t=>1-Math.pow(1-t,3);
