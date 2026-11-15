@@ -32,3 +32,12 @@
 - Kit page: §62 sample renders (21 samples), 0 errors.
 - Known, pre-existing: kit stages queued in endTurn (stipend chest, flip note) start before the week panel opens; the beats now cover them
   until the book opens. The prep option's own toast ("Tắm cánh hoa… Bạc −15") still shows before the night (it is the prep cost).
+
+## Review r1 (15/11 ~21:50Z, reviewer) — review/night-end-r1 on origin/main 41cdf7c3f
+- Merged: assemble order = main's list + jne.js after jevb (jts, jmcal, j84, jimg, jwkg, jwkr, jartc kept); KIT §58/§64 + §62 kept; site rebuilt.
+- r1 fix: his mood step (BAL.nightEnd.mood) now runs in bot / no-UI paths too (was UI-only, so balance runs and the game differed).
+- KIT §62: owner scene rule (≥1536 px landscape, focal point + portrait crop via object-position) + painted-only effects written in.
+- MANIFEST vs review/sfx: textual conflict when sfx lands; resolve as a JSON union taking review/sfx's values (it only adds "loudness"),
+  plus sfx-zither + sfx-candle-out from here; the 4 shared mp3s are byte-identical.
+- FAIL items for the worker: see the reviewer report (code-drawn light/particles, art 1024 px + no portrait crop, lonely picture is autumn
+  in every season, empty frame when the picture is slow, 844x390 button below the fold, celebratory coin FX over a cold night).
