@@ -29,7 +29,7 @@ CDN uploads OK again (owner saved the Cloudflare token; R2 verified). Use CLOUDF
 | C2 | review/rank-colour (owner s8: rank colour in picker rows, whole class) | RUNNING wave 1 |
 | C3 | review/art-complete (eunuch ranks, grown kids, 128 old looks, 56 old-love men, demole) | RUNNING wave 1 |
 | C4 | review/act-pics2 @ 5f80a2727 (237/380 live; 143 left from thu-cu-lot) | RESUME later (QUEUED) |
-| C5 | review/skin-match (verify not soft, regenerate missing; upload parked) | RUNNING wave 1 |
+| C5 | review/skin-match @ 9bb31ae53 (1500/1500 on CDN) | SẴN SÀNG KIỂM → reviewer QUEUED-NEXT |
 | C6 | review/mk-colour (8+8 presets, 8 vụng, lips QA, then reveal scene) | QUEUED |
 | C7 | review/balance-pass (HH 0%, bạc-equivalence scan) | QUEUED |
 | C8 | review/fig-bg step 2 (silk scroll A) | QUEUED |
@@ -96,3 +96,5 @@ j72 bước vs Hồi · stage paper halo · Thái hậu title bronze vs plum · 
 | C37 | review/panel-size (owner s8: all pop-ups same frame size per viewport) | QUEUED-NEXT |
 | D51 | fxkit follow-ups: cracked tea cup, scroll unroll, red seal slam, swaddle reveal, letter under door + wire call sites (PROGRESS_fxkit.md); clean committed .out/ folder on main | QUEUED |
 | C38 | review/ev-art-fit (owner s8: unrelated event pictures; no generic default; paint missing) | RUNNING |
+| C39 | review/tab-underline (owner s8: stray bar through selected category chip) | QUEUED-NEXT |
+| D52 | skin-match audit of 7347 never-measured figures (plan in PROGRESS_review-skin-match.md; worktree /home/user/wt/skin cache) | QUEUED |
