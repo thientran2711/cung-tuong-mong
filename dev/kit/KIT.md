@@ -1101,11 +1101,11 @@ have their Cần row. Check: `dev/test/sub-odds.js` (order.sorted / order.stable
 - Được / Mất / Kèm carry only real game effects with a number or a concrete consequence. No flavour ("được tiếng cứng cỏi", "giữ lễ",
   "giữ êm thể diện", "cha mẹ vui lòng", "Thái hậu vui lòng" next to "Thái hậu quý ngươi +3"): map it to its stat or drop it.
 - A positive never sits on the red Kèm line (j63 `kaRows`: a green item written under "kèm:" goes to Được).
-- Relations read subject + verb + object with the number: "Hoàng hậu quý ngươi +4", "Thái hậu quý ngươi +8", "nàng quý ngươi -3",
-  "Hắn quý ngươi +15", "nàng oán ngươi +9". Never the bare word "thiện cảm", never "X với ngươi". `NAMES.th/hh` = "Thái hậu / Hoàng hậu quý
-  ngươi". `S.hh` IS the Hoàng hậu's own regard for her (j24 `hhBind`); the result card shows the real before→after ("quý ngươi hơn (0→4, +4)").
-  Personality can scale a positive regard change (persF trust): the result card shows the true number. Audit: `dev/test/rel-audit.js`
-  (every Hành sự act × 3 origins × 3 buổi + every talk option on 6 consorts: a claimed "quý ngươi ±" must move that field; 0 mismatches).
+- Relations (owner 11/15 09:55Z, supersedes the "quý" wording of the sub-odds merge): ONE word, **thiện cảm**, from `KIT_REL`
+  (jaudit, VANPHONG §1): chips "Nàng → ta: thiện cảm" / "Ta → nàng: thiện cảm", card lines "thiện cảm +10", "oán ta +8";
+  unknown value → "chưa rõ nàng nghĩ gì". Labels coloured by direction (§11.2). `S.hh` IS the Hoàng hậu's own regard for her
+  (j24 `hhBind`); the result card shows the real before→after. Personality scales a change (persF trust/slight): the card draws it
+  with the same functions (exact when her nết is known, else a range). Audits: `dev/test/rel-audit.js`, `dev/test/act-audit.js`.
 - Đức warning on acts that lower Đức below the bar: ONLY "Đức 33 → 28" on the Kèm line (`ducWarnTxt` j19 / `ducWarn` j6), never "còn 28",
   never a rank-rule suffix; rank requirements live in the rank / promotion screens.
 - No placeholder rows: "không mất gì" / "không được gì" never show in Mất / Được (j63 `kaRows`); a row that would be empty is omitted.
