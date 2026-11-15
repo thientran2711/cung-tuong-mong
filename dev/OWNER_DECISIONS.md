@@ -376,3 +376,6 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (08:40Z) Mở rương bước nhận: bỏ ô thông tin trắng; mỗi ô món có tên phẩm trên viền khung, tên món ngay dưới ô (bạc: "Bạc +20").
 - (08:45Z) Âm thanh: mọi khoảnh khắc trong game phải có âm (mua, bán, nhận quà/thưởng/ban, mở rương, thu hồi, mini game, thời tiết, lễ…), phong cách cung đình nhẹ nhàng; kiểm kê + làm bù (review/sfx).
 - (08:55Z) Bục vinh danh (Bảng vàng + mọi cuộc thi): nhân vật to, nổi bật nhất; bục thu nhỏ thành chính ô bảng tên dưới chân; huy chương nhất/nhì/ba ở góc trên phải ô bảng tên (hoặc cạnh nhân vật). Danh sách hạng: khung chân dung theo phẩm cao nhất của kiếp. Bỏ lặp tiêu đề: chỉ "Bảng vàng".
+- (09:10Z) Thêm luật THIẾU LỄ: dịp trang trọng (thỉnh an, yến tiệc, lễ tết, gặp/thị tẩm Hoàng thượng, tấn phong) không mặc đồ đúng phẩm → mất chút Đức/Danh + thiện cảm chủ nhà; báo trước trên thẻ; NPC cùng luật.
+- (09:10Z) Khung Đáp ứng: phần vàng quá rực → nhạt, mờ, nhỏ lại (sâm banh/bạc), cho đúng bậc thấp nhất.
+- (09:10Z) Biểu tượng cảm xúc: phải thể hiện RÕ từng cảm xúc (Vui mắt mở sáng, không nheo; Giận rõ giận); vẽ đủ bộ rồi gửi lại.
