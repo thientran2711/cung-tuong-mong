@@ -2,15 +2,14 @@
 # keeps the CURRENT CDN figure pixels as they are (all later fixes) and only ADDS the cut-off part from the source cut-out.
 import os,json,subprocess,io,cv2,numpy as np
 from PIL import Image
-W="/home/user/cung-tuong-mong/.claude/worktrees/agent-a4e8c6432e582a50a/.ahcache/ec/";os.makedirs(W+"bg",exist_ok=True);os.makedirs(W+"old",exist_ok=True);os.makedirs(W+"out",exist_ok=True)
-OFF=json.load(open(W+"off.json"));U=json.load(open(W+"bgurls.json"));res=[]
+R=os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)),"..","..","..",".."));W=R+"/.ahcache/ec/";os.makedirs(W+"bg",exist_ok=True);os.makedirs(W+"old",exist_ok=True);os.makedirs(W+"out",exist_ok=True)
+OFF=json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)),"edge-offenders.json")));res=[]  # source cut-outs: W/bg/<id>.png (download URLs via Magnific creations_get, tokens expire)
 def gray(im):
     a=im[...,3:].astype(np.float32)/255;return cv2.cvtColor((im[...,:3]*a+np.array([195,213,230])*(1-a)).astype(np.uint8),cv2.COLOR_BGR2GRAY)
 for o in OFF:
     n=o["file"];rec=dict(file=n,side=o["side"],run=o["run"])
-    if not o.get("bg") or o["bg"] not in U: rec["result"]="no source cut-out";res.append(rec);continue
+    if not o.get("bg") or not os.path.exists(W+"bg/"+o["bg"]+".png"): rec["result"]="no source cut-out";res.append(rec);continue
     bp=W+"bg/"+o["bg"]+".png"
-    if not os.path.exists(bp): subprocess.run(["curl","-sS","-o",bp,U[o["bg"]][0]],check=True)
     op=W+"old/"+n
     if not os.path.exists(op): subprocess.run(["curl","-sSf","-o",op,"https://ctm-img.victoria-tntt.workers.dev/img/"+n],check=True)
     bg=cv2.imread(bp,cv2.IMREAD_UNCHANGED);old=cv2.imread(op,cv2.IMREAD_UNCHANGED)
