@@ -63,3 +63,4 @@ Nhắc theo dõi: send_later 30 phút, tự đặt lại mỗi lượt (lịch l
 - 02:55Z LIVE: main=355d6d58 (loading). Sếp cho phép thường trực: bản PASS lên main không cần hỏi.
 - 03:00Z Soát nốt ruồi 5169 mặt: còn 40 rõ + 9 mờ (review/mole-audit 463739ca4) → giao review/mole-fix (ảnh giữ local, chờ phép đẩy Cloudflare). por-kid-p14-a4 cắt hỏng.
 - 03:25Z Giao người duyệt thứ 2 cho tồn đọng: men, inventory-origin, palace-map, lost-items, emotion, difficulty, appearance, balance, schedules2, kit-j95, outside (đo HH trước).
+- 03:35Z LIVE main=c30884d9e (bỏ bìa tím + Dư đồ trải chậm + luật đi khắc). Thợ con bị chặn đẩy main → điều phối tự đẩy (sếp cho phép thường trực). Người duyệt 2 đẩy kết quả lên review/main-next2.
