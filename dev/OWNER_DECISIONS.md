@@ -530,3 +530,9 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (~18:25Z, owner) Tuần lục title: picked vertical variant d4 (title-tuanluc-d4.webp). Replace the small plum-blossom seal at the bottom with the 'Trân nữ' seal (the game's own red seal, jseal.js / KIT §39). Then wire it on the book cover label.
 - (~next day, owner) Asked why only Ngọc Thanh các was checked for the brown/sepia wash — every other room/place must be checked too (whole-class rule). → audit worker: every place × 4 buổi × seasons × weather, before/after table, fix any remaining wash.
 - (~owner, next day, reference screenshot of another game: title 'Huyết Mạch Đã Tỉnh' above the character name) The RANK line above names (kitNameRank: her and every character on stage/figures) should look like that: serif title in the RANK'S OWN COLOUR (rank frame colour family) with a soft glow/outline; the NAME line below in plain dark/black. Technique only, no assets copied.
+
+## 15/11 ~18:30Z — Month calendar (owner)
+- Add a CALENDAR like a real wall calendar: a month grid of 3 rows (one row = one tuần: thượng/trung/hạ) x 10 squares (days), with day numbers.
+- Days that hold a festival of the year are marked in their square, so the player can PREPARE AHEAD instead of rushing when the notice comes.
+- Keep it short: just the festival name, what contests it has, or short info about that festival.
+- Only the fixed yearly festivals (common knowledge) go on it. Private contests, tea parties, private palace banquets and other surprise events do NOT appear on the calendar.
