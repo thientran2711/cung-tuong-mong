@@ -185,3 +185,8 @@ Những gì chưa có trên CDN thì lấy lại từ Magnific theo id trong PRO
 - trung-y c13+ (zip hết hạn 16/11 sáng);
 - 8 lượt vẽ act-pics2 đang chờ.
 Ảnh trung y đã lên CDN nhưng code vẫn ở nhánh review/trung-y.
+
+## PHIÊN CHÍNH 6 (nhận lúc đóng phiên 5)
+Đã giao 20 việc (tối đa): trung-y (cắt c13+ trước khi zip hết hạn); fix-float (làm nốt khuôn trang người + lỗi NHÁY khi lật Sổ tuần); người duyệt: opt-render, kit-close, rest-balance, hoangtu-tuchat, stage-slots (chạy thử trên 8b4b51679), game-feel, img-quality, brand; thợ: kit-fig2 (+ hộp "VIỆC · <cung>"), act-pics2 (+ hình Phế phi họ Lý và mọi NPC phụ thiếu hình), scene-light (da hồng 807), tabs-kit, ts-a, event-balance, gift-ui, toilette, j83-variety, close-bugs (nhánh mới review/close-bugs: Bái kiến buổi tối, thời tiết theo buổi, khung xanh khi chạm nàng, "Qua ngày" + chip "Đã mở bản mới").
+Chờ chỗ trống: người duyệt rank0-ivory + emo-men, poison-gift; thợ pets-fix, sfx, rank-ui. Duyệt fix-float sau khi thợ báo xong.
+Worktree thợ ở /home/user/wt/<tên>. Bản tóm tắt luật cho thợ: /home/user/wt/PREAMBLE.txt, REVIEWER.txt.
