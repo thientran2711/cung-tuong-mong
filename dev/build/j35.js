@@ -11,8 +11,13 @@ function idsFor(role){const m={};for(const f of FIGS)if(norm(f.role)===norm(role
 function identityOf(p,role){const who=p.ref||p;if(who.idn!=null)return who.idn;const M=idsFor(role);const ids=Object.keys(M);if(!ids.length)return null;
  const used=new Set([S].concat(rivals||[]).filter(x=>x&&x!==who&&(x===S||x.alive)&&x.idn!=null).map(x=>String(x.idn)));if(S.emp&&S.emp.idn!=null)used.add(String(S.emp.idn));
  S.idUsed=S.idUsed||{};const U=S.idUsed[role]=S.idUsed[role]||[];let free=ids.filter(i=>!used.has(String(i))&&!U.includes(String(i)));if(!free.length)return null;const want=LOOKFOR[who.trait]||[];const fit=free.filter(i=>M[i].some(f=>want.includes(norm(f.look))));if(fit.length)free=fit;who.idn=pick(free);U.push(String(who.idn));return who.idn}
-(function(){const f0=figFor;figFor=function(p,kind){if(!FIGS.length||!p)return"";const role=figRole(p),who=p.ref||p;const idn=identityOf(who===S.emp?{ref:S.emp,trait:""}:who,role);if(idn==null)return f0.apply(this,arguments);
- const tier=who===S?(S.out?0:S.rank):who.queen?7:(who.rank||0);const ab=band4(who.age||20);const isPor=f=>/(^|\/)por-/.test(f.file||f.src);
+(function(){const f0=figFor;figFor=function(p,kind){if(!FIGS.length||!p)return"";const role=figRole(p);let who=p.ref||p;
+ /* the Thái hậu / Emperor arrive as {kind:"th"} / {kind:"emp"} stubs: use the real records, so the identity sticks and the age band is
+    their REAL age (owner 11/15: Thái hậu showed the a18 picture because the stub had no age) */
+ if(S&&who.kind==="th"&&!who.ref){S.thO=S.thO||{};who=S.thO}else if(S&&who.kind==="emp"&&!who.ref&&S.emp)who=S.emp;
+ const idn=identityOf(who===S.emp?{ref:S.emp,trait:""}:who,role);if(idn==null)return f0.apply(this,arguments);
+ const ag=who===S?(S.age||18):who===S.thO?(S.thAge||55):(who.age||20);
+ const tier=who===S?(S.out?0:S.rank):who.queen?7:(who.rank||0);const ab=band4(ag);const isPor=f=>/(^|\/)por-/.test(f.file||f.src);
  const L=FIGS.filter(f=>String(f.identity)===String(idn)&&norm(f.role)===norm(role)&&(kind==="por"?isPor(f):!isPor(f)));if(!L.length)return f0.apply(this,arguments);
  const tn=f=>{const t=+String(f.tier).replace(/\D/g,"");return isNaN(t)?0:t};const sc=f=>Math.abs(tn(f)-tier)+Math.abs(tagBand(f.ageBand)-ab)*1.5;L.sort((a,b)=>sc(a)-sc(b));const src=L[0].file||L[0].src;return /^img\//.test(src)?src:"img/"+src}})();
 /* age effects, the same for everyone: Sắc -1 a year after 30 (soft floor 35), Tâm cơ +1 a year of court life up to +10 */
