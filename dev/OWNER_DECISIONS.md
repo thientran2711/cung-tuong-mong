@@ -413,3 +413,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (11:30Z) Thú cưng: như hiện tại là được; chó nhỏ ok; RIÊNG con mèo còn tả thực → vẽ lại.
 - (11:30Z) ĐẢO QUYẾT ĐỊNH: GIỮ thẻ tin đầu buổi (tin hằng ngày quan trọng; Tuần lục chỉ là tổng kết tuần). Đổi tên rõ hơn: "Tin trong cung hôm nay". Sửa ảnh Triều chính.
 - (11:30Z) Da mặt: ngoài làm sạch, mặt phải hồng hào khoẻ (má hồng nhẹ, không đậm); sửa các mặt tái/nhợt.
+- (11:35Z) Chân dung trong khung: THÂN người phải nằm giữa khung theo chiều ngang (nhiều ảnh lệch trái, hở mép phải); đầu có thể hơi lệch. Giữ tỷ lệ, chỉ dời.
