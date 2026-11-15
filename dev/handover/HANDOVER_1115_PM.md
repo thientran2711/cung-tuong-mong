@@ -284,3 +284,4 @@ Worker worktrees at /home/user/wt/<name>. Rule summaries for workers: /home/user
 - story beats: 192/295 live; fresh worker for the last 103 + 5 order-dependent rules. Coordinator decision: pale cream on women OK; imperial yellow only with the Emperor.
 - fix-float r7 0840d01e6: co-op stall root cause (jnight keyed on month S.turn; also a single-player 3-day skip) fixed, 5/5 coop-e2e; page-turn flash fixed (decode before turn); actor naming in deltas → re-review (must merge scene-light r9's j87 changes).
 - LIVE main = pets-fix + ts-b (17e8fc038): pet kit shop, care screen + 3 minigames, 4 stages, no turtles, help/harm/steal; ts-b Nhịn/Đáp trả real choice. Queued: 'thân ±N' wording sweep (~38 strings).
+- figure-background (owner ~18:00Z) → worker; samples sheet to owner before wiring. Note: her screenshot is the OLD live build (Lui button, 6.6, 'đến +23') — those are fixed in fix-float r7 now in review.
