@@ -19774,10 +19774,10 @@ const KSEAL_G={T:"M0 0L6 0M3 0L3 10",H:"M0 0L0 10M6 0L6 10M0 5L6 5",I:"M0.6 0L5.
  N:"M0 10L0 0L6 10L6 0",U:"M0 0L0 8Q0 10 2 10L4 10Q6 10 6 8L6 0",
  B:"M0 0L0 10L4.6 10Q6 10 6 8.6L6 6.4Q6 5 4.6 5L0 5M0 0L4.2 0Q5.6 0 5.6 1.4L5.6 3.6Q5.6 5 4.2 5",
  O:"M2 0L4 0Q6 0 6 2L6 8Q6 10 4 10L2 10Q0 10 0 8L0 2Q0 0 2 0",Gg:"M6 1.6Q6 0 4.4 0L1.6 0Q0 0 0 1.6L0 8.4Q0 10 1.6 10L4.4 10Q6 10 6 8.4L6 5.4L3.2 5.4"};
-const KSEAL_MARK={"^":"M1.4 -1.2L3 -2.9L4.6 -1.2","~":"M0.6 -1.6Q1.6 -3.1 3 -2.2Q4.4 -1.3 5.4 -2.8","`":"M1.9 -3L3.7 -1.3",horn:"M6 0.2L7.4 0.2L7.4 -1.6"};
+const KSEAL_MARK={"^":"M1.4 -1.2L3 -2.9L4.6 -1.2","~":"M0.6 -3.6Q1.5 -5.9 3 -4.6Q4.5 -3.3 5.4 -5.6","`":"M1.9 -3L3.7 -1.3",horn:"M6 0.2L7.4 0.2L7.4 -1.6"};
 const KSEAL_PARTS={T:["T"],H:["H"],I:["I"],R:["R"],A:["A"],N:["N"],U:["U"],B:["B"],G:["Gg"],"Â":["A","^"],"À":["A","`"],O:["O"],"Ò":["O","`"],"Ạ":["A","dot"],"Ữ":["U","horn","~"]};
 /* a word of seal glyphs filling the box (x, y, bw, bh); sw = the stroke in the seal's own units (room above for marks, below for a dot) */
-function kitSealWord(w,x,y,bw,bh,sw){const ls=[...w],gap=2.6,top=ls.some(c=>/[ÂÀÒỮ]/.test(c))?4:0.8,bot=ls.some(c=>c==="Ạ")?2.6:0.8;
+function kitSealWord(w,x,y,bw,bh,sw){const ls=[...w],gap=2.6,top=ls.includes("Ữ")?6.2:ls.some(c=>/[ÂÀÒ]/.test(c))?4:0.8,bot=ls.some(c=>c==="Ạ")?2.6:0.8;
  const unitsW=ls.length*6+(ls.length-1)*gap+(ls.includes("Ữ")?1.4:0),sx=(bw-sw)/unitsW,sy=(bh-sw)/(10+top+bot);let cx=0,out="";
  for(const c of ls){const X=u=>x+sw/2+(cx+u)*sx,Y=v=>y+sw/2+(v+top)*sy;
   for(const k of KSEAL_PARTS[c]||[]){
@@ -21933,7 +21933,7 @@ window.VP={fix,date,num,ord,mon,rules:RULES,full:FULL,tabs:TABS,refresh:()=>{pat
      (COOPW.hold freezes Qua buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="d77ca7ea5a54";window.CTM_BUILD=BUILD;
+const BUILD="40dd0cd98f0a";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
@@ -22052,7 +22052,12 @@ function place(){const el=$i("kupdchip");if(!el)return;
  const others=[...hud.children].filter(e=>e!==me&&e.getClientRects().length).map(e=>e.getBoundingClientRect()).filter(q=>q.width&&q.height);
  const free=(x,y)=>x>=H.left+2&&x+w<=Math.min(H.right-2,innerWidth-4)&&!others.some(q=>x<q.right+4&&x+w>q.left-4&&y<q.bottom&&y+h>q.top);
  const row=r.closest(".k3rr")||r,rr=[row,...row.querySelectorAll("*")].map(e=>e.getBoundingClientRect()).filter(q=>q.width).reduce((a,q)=>({right:Math.max(a.right,q.right),top:a.top,height:a.height}),row.getBoundingClientRect()),dr=d?d.getBoundingClientRect():rr;
- const at=[[rr.right+8,rr.top+(rr.height-h)/2],[dr.right+8,dr.top+(dr.height-h)/2]].find(([x,y])=>free(x,y))||[Math.max(H.left+4,(H.left+H.right-w)/2),H0.bottom+4];
+ /* 3rd spot (one-row iPad bar, rank row full): right of the "Buổi …" line, checked against every visible leaf of the bar + the seal, so it
+    never lands on the stage under the bar (owner 16:40Z: the update chip must not sit over the scene) */
+ const tm=hud.querySelector("#k3tc .k3time"),lv=[...hud.querySelectorAll("*")].filter(e=>!e.children.length&&e.getClientRects().length).map(e=>e.getBoundingClientRect()).filter(q=>q.width&&q.height);
+ const leafFree=(x,y)=>x>=H.left+2&&x+w<=Math.min(H.right-2,innerWidth-4)&&y>=H0.top&&y+h<=H0.bottom&&!lv.some(q=>x<q.right+6&&x+w>q.left-6&&y<q.bottom+1&&y+h>q.top-1);
+ const tr=tm&&tm.getBoundingClientRect(),c3=tr&&tr.width?[[tr.right+12,tr.top+(tr.height-h)/2]].filter(([x,y])=>leafFree(x,y)):[];
+ const at=[[rr.right+8,rr.top+(rr.height-h)/2],[dr.right+8,dr.top+(dr.height-h)/2]].filter(([x,y])=>free(x,y)).concat(c3)[0]||[Math.max(H.left+4,(H.left+H.right-w)/2),H0.bottom+4];
  el.style.left=Math.round(at[0])+"px";el.style.top=Math.round(at[1])+"px"}
 function chip(){css();let el=$i("kupdchip");
  if(!el){el=document.createElement("button");el.id="kupdchip";el.className="kchip kupdchip";el.type="button";el.textContent="Có bản mới";el.setAttribute("aria-label","Có bản mới · chạm để xem");

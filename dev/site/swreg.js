@@ -139,7 +139,12 @@ function place(){const el=$i("kupdchip");if(!el)return;
  const others=[...hud.children].filter(e=>e!==me&&e.getClientRects().length).map(e=>e.getBoundingClientRect()).filter(q=>q.width&&q.height);
  const free=(x,y)=>x>=H.left+2&&x+w<=Math.min(H.right-2,innerWidth-4)&&!others.some(q=>x<q.right+4&&x+w>q.left-4&&y<q.bottom&&y+h>q.top);
  const row=r.closest(".k3rr")||r,rr=[row,...row.querySelectorAll("*")].map(e=>e.getBoundingClientRect()).filter(q=>q.width).reduce((a,q)=>({right:Math.max(a.right,q.right),top:a.top,height:a.height}),row.getBoundingClientRect()),dr=d?d.getBoundingClientRect():rr;
- const at=[[rr.right+8,rr.top+(rr.height-h)/2],[dr.right+8,dr.top+(dr.height-h)/2]].find(([x,y])=>free(x,y))||[Math.max(H.left+4,(H.left+H.right-w)/2),H0.bottom+4];
+ /* 3rd spot (one-row iPad bar, rank row full): right of the "Buổi …" line, checked against every visible leaf of the bar + the seal, so it
+    never lands on the stage under the bar (owner 16:40Z: the update chip must not sit over the scene) */
+ const tm=hud.querySelector("#k3tc .k3time"),lv=[...hud.querySelectorAll("*")].filter(e=>!e.children.length&&e.getClientRects().length).map(e=>e.getBoundingClientRect()).filter(q=>q.width&&q.height);
+ const leafFree=(x,y)=>x>=H.left+2&&x+w<=Math.min(H.right-2,innerWidth-4)&&y>=H0.top&&y+h<=H0.bottom&&!lv.some(q=>x<q.right+6&&x+w>q.left-6&&y<q.bottom+1&&y+h>q.top-1);
+ const tr=tm&&tm.getBoundingClientRect(),c3=tr&&tr.width?[[tr.right+12,tr.top+(tr.height-h)/2]].filter(([x,y])=>leafFree(x,y)):[];
+ const at=[[rr.right+8,rr.top+(rr.height-h)/2],[dr.right+8,dr.top+(dr.height-h)/2]].filter(([x,y])=>free(x,y)).concat(c3)[0]||[Math.max(H.left+4,(H.left+H.right-w)/2),H0.bottom+4];
  el.style.left=Math.round(at[0])+"px";el.style.top=Math.round(at[1])+"px"}
 function chip(){css();let el=$i("kupdchip");
  if(!el){el=document.createElement("button");el.id="kupdchip";el.className="kchip kupdchip";el.type="button";el.textContent="Có bản mới";el.setAttribute("aria-label","Có bản mới · chạm để xem");

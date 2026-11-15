@@ -1796,7 +1796,11 @@ Kèm + odds ladder), restored the same way from a save (`deserQ`).
   height ≤ 500); one-row bar (≥ 1000 px landscape) → the bar keeps a right gutter (`.kseal-pad`), seal centred in it; 1000–1179 px the stat
   cells use the phone label form (icon only, name in tooltip) and the seal is 34 px, so the longest quẻ "Quẻ Thượng thượng (Giao thiệp)"
   no longer runs into the cells (it did by 58 px at 1000 px before this change).
-- "Có bản mới" chip (swreg.js place()): never on the seal; with no free spot in the bar it sits just under the bar, centred.
+- "Có bản mới" chip (swreg.js place()): never on the seal. Spots in order: right of rank/age, right of the date, right of the "Buổi …"
+  line (one-row iPad bar 1000–1179: checked against every leaf of the bar + the seal); only if none is free, just under the bar, centred
+  (reviewer r6: the under-bar spot at 1000/1180 sat on the stage's "Hoàng thượng" card, owner 16:40Z).
+- Ữ: the tilde is lifted clear of the U's arms (top room 6.2, deeper wave); before r6 the arms + tilde merged under the ink filter and the
+  seal read "TRÂN NƠ".
 - Measured (dev/test/brand-seal.js, ±1 px, dev/shots/brand/seal-measure.jsonl), gap seal→nearest part of the bar / quẻ line / chip:
   755×1000 12 / 12 / 332 · 1000×755 15.9 / 334.6 / 426 · 1180×820 23 / 497.5 / 513 · 1366×1024 23 / 589.3 / 940 · 844×390 12 / 12 / 431;
   time block → stat cells (one-row): 17.6 (1000), 18.7 (1180), 110.5 (1366); 0 overlaps, 0 page errors, no horizontal overflow.

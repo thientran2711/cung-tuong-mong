@@ -9,10 +9,10 @@ const KSEAL_G={T:"M0 0L6 0M3 0L3 10",H:"M0 0L0 10M6 0L6 10M0 5L6 5",I:"M0.6 0L5.
  N:"M0 10L0 0L6 10L6 0",U:"M0 0L0 8Q0 10 2 10L4 10Q6 10 6 8L6 0",
  B:"M0 0L0 10L4.6 10Q6 10 6 8.6L6 6.4Q6 5 4.6 5L0 5M0 0L4.2 0Q5.6 0 5.6 1.4L5.6 3.6Q5.6 5 4.2 5",
  O:"M2 0L4 0Q6 0 6 2L6 8Q6 10 4 10L2 10Q0 10 0 8L0 2Q0 0 2 0",Gg:"M6 1.6Q6 0 4.4 0L1.6 0Q0 0 0 1.6L0 8.4Q0 10 1.6 10L4.4 10Q6 10 6 8.4L6 5.4L3.2 5.4"};
-const KSEAL_MARK={"^":"M1.4 -1.2L3 -2.9L4.6 -1.2","~":"M0.6 -1.6Q1.6 -3.1 3 -2.2Q4.4 -1.3 5.4 -2.8","`":"M1.9 -3L3.7 -1.3",horn:"M6 0.2L7.4 0.2L7.4 -1.6"};
+const KSEAL_MARK={"^":"M1.4 -1.2L3 -2.9L4.6 -1.2","~":"M0.6 -3.6Q1.5 -5.9 3 -4.6Q4.5 -3.3 5.4 -5.6","`":"M1.9 -3L3.7 -1.3",horn:"M6 0.2L7.4 0.2L7.4 -1.6"};
 const KSEAL_PARTS={T:["T"],H:["H"],I:["I"],R:["R"],A:["A"],N:["N"],U:["U"],B:["B"],G:["Gg"],"Â":["A","^"],"À":["A","`"],O:["O"],"Ò":["O","`"],"Ạ":["A","dot"],"Ữ":["U","horn","~"]};
 /* a word of seal glyphs filling the box (x, y, bw, bh); sw = the stroke in the seal's own units (room above for marks, below for a dot) */
-function kitSealWord(w,x,y,bw,bh,sw){const ls=[...w],gap=2.6,top=ls.some(c=>/[ÂÀÒỮ]/.test(c))?4:0.8,bot=ls.some(c=>c==="Ạ")?2.6:0.8;
+function kitSealWord(w,x,y,bw,bh,sw){const ls=[...w],gap=2.6,top=ls.includes("Ữ")?6.2:ls.some(c=>/[ÂÀÒ]/.test(c))?4:0.8,bot=ls.some(c=>c==="Ạ")?2.6:0.8;
  const unitsW=ls.length*6+(ls.length-1)*gap+(ls.includes("Ữ")?1.4:0),sx=(bw-sw)/unitsW,sy=(bh-sw)/(10+top+bot);let cx=0,out="";
  for(const c of ls){const X=u=>x+sw/2+(cx+u)*sx,Y=v=>y+sw/2+(v+top)*sy;
   for(const k of KSEAL_PARTS[c]||[]){
