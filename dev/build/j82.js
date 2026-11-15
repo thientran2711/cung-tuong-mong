@@ -105,8 +105,8 @@ function kg82Pluck(i,ok){try{if(typeof auOk!=="function"||!auOk())return;const C
 /* ---------- the overlay host (the kit frame inside #ov) ---------- */
 const KG82={run:null,peek:()=>null,phase:"",kinds:KG82_KIND};
 window.KG82=KG82;
-function kg82Frame(o){const hud=[["score","Phần","0/10"],["round","Hồi","–"],["time","Còn","–"]];
- if(kg82Kit())return kitGameFrame({art:o.art,title:o.title,how:o.how,hud,id:"kg82box"});
+function kg82Frame(o){const hud=o.hud||[["score","Phần","0/10"],["round","Hồi","–"],["time","Còn","–"]];
+ if(kg82Kit())return kitGameFrame({art:o.art,title:o.title,how:o.how,hud,seal:o.seal,id:"kg82box"});
  return `<div class="kgame"><div class="kph"><b class="kpseal">TÀI NGHỆ</b><span class="kpht"><span class="kptitle">${o.art}: ${o.title}</span></span></div><div class="kghow"><span class="krl">Cách chơi</span><span>${o.how}</span></div>`+
   `<div class="kghud">${hud.map(([k,l,v])=>`<span class="kgc"><small>${l}</small><b data-kg="${k}">${v}</b></span>`).join("")}</div><div class="kgbox" id="kg82box"></div><div class="kgres" id="kg82box-res" hidden></div></div>`}
 /* a HUD count "a/b" (Phần 7/10, Hồi 2/3) never shows above its ceiling; KG82.over counts any engine that tried (tests fail on it) */
@@ -138,11 +138,13 @@ function kg82Blossom(g,x,y,r,col,glow){g.save();g.translate(x,y);if(glow){g.shad
 /* ---------- painted art (gpt-2-6, img/kit/mg-*.webp; KIT.md §13): board backgrounds + transparent sprites ----------
    the canvas only draws small live marks (aim trail, beat line, melody ribbon, ink strokes, threads, gauges) and places these pictures */
 const KG82_IMG={};
-function kg82Img(n){let i=KG82_IMG[n];if(!i){i=new Image();i.decoding="async";i.src=`img/kit/mg-${n}.webp`;KG82_IMG[n]=i}return i}
+function kg82Img(n){let i=KG82_IMG[n];if(!i){i=new Image();i.decoding="async";i.src=n[0]==="@"?`img/${n.slice(1)}.webp`:`img/kit/mg-${n}.webp`;KG82_IMG[n]=i}return i}
 function kg82Ok(n){const i=kg82Img(n);return i.complete&&i.naturalWidth>0}
 /* contest board vs lesson room: KG82.ctx "thi" (startContest) | "hoc" (lessons, practice, works) */
 const KG82_HOC=["dan","co","tho","ve","mua","huong","theu","banh"];
-function kg82BgName(kind){return KG82.ctx==="hoc"&&KG82_HOC.includes(kind)?`${kind}-bg-hoc`:`${kind}-bg`}
+/* KG82_BGX: a board that reuses an existing painting ("@act-binh-phong" = img/act-binh-phong.webp; scheme games jsgame.js) */
+const KG82_BGX={};window.KG82_BGX=KG82_BGX;
+function kg82BgName(kind){if(KG82_BGX[kind])return KG82_BGX[kind];return KG82.ctx==="hoc"&&KG82_HOC.includes(kind)?`${kind}-bg-hoc`:`${kind}-bg`}
 /* cover-fit the board painting; ay = vertical anchor (1 = keep the bottom, where the play surface is); veil = soft wash for legibility */
 const KG82_BGC={};
 function kg82Bg(g,W,H,kind,veil,ay){const n=kg82BgName(kind),im=kg82Img(n);

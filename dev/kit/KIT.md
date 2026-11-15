@@ -392,6 +392,15 @@ HUD: "Phần x/10 · Hồi x/y · Còn …" (every round/throw/vase/lantern = "H
 HUD counts never pass their ceiling: "Phần" is the running share of the WHOLE game (same formula as the final mark), and `env.hud` caps any "a/b" at b (`kg82Cap`, counted in `KG82.over` for tests).
 No text over text: a pop (`kg82Pop`) replaces any live pop it would land on; a round verdict ("Khớp hương mẫu!", "Đối chỉnh!", "Thế hoa cân đối!"…) is drawn IN PLACE of the hint/heading line it would cover (`k91Say`), never floating over other words. `dev/test/minigames91.js` fails on any overlap of canvas or DOM text in `#kg82`.
 
+### 13.2 SCHEME GAMES · trò mưu (review/scheme-games, `dev/build/jsgame.js`) — tiny kit extensions
+- `kitGameFrame({…, seal:"muu"})`: optional seal key (any `KP_SEAL` key; default `"game"` = TÀI NGHỆ). New `KP_SEAL.muu = "MƯU"` (lacquer red `#7a2a22`, also inside `#ov .mg`).
+- `kg82Open({…, seal, hud})`: passes the seal and an optional HUD list (default Phần / Hồi / Còn) to `kitGameFrame`.
+- `kg82Img("@path")`: a name starting with `@` loads an EXISTING painting `img/<path>.webp` (scene/act/event/item art) instead of `img/kit/mg-*.webp`.
+- `KG82_BGX[kind] = "@act-binh-phong"`: a board that reuses an existing painting (no new art); `kg82Bg`/`kg82Preload` follow it.
+- Choice before a scheme game = kit dialog (PEND `sgpick`): «Tự ra tay: <trò>» · «Giao cho người làm» · «Thôi», each an ACT CARD with full rows + odds.
+- Result: `kitGameResult` parts + `kitRows` "Cơ may" `kitOdds(before) → kitOdds(after)`, one button «Ra tay»; the act then shows the normal RESULT CARD (§7).
+Plan + table: `dev/SCHEME_MINIGAMES_PLAN.md`.
+
 ## 14. SCENE PANEL (j79) — identity card, opening story, title screen
 - Compact translucent kit frame (`rgba(255,250,240,.90)` + blur) to one side in landscape (max 440 px / 44vw, vertically centred, right) and in the
   lower part in portrait; the background art stays visible. Fits ONE screen, no scrolling, buttons always visible (tested at the 4 sizes).

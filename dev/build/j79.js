@@ -343,10 +343,10 @@ KP_SEAL.week="TUẦN";
 `;document.head.appendChild(st)})();
 
 /* ---------- MINI-GAME FRAME (for j82 and the lesson games): header + how-to + score/timer + game box + result rows ---------- */
-KP_SEAL.game="TÀI NGHỆ";
+KP_SEAL.game="TÀI NGHỆ";KP_SEAL.muu="MƯU";
 /* kitGameFrame({art:"Cầm", title:"Tấu khúc", how:"Chạm đúng dây khi nốt chạm vạch đỏ.", hud:[["score","Điểm",0],["time","Thời gian","30 giây"]], id:"kgbox"})
    -> HTML of the frame; the game draws into #<id> (.kgbox). Update a HUD cell with kitGameSet("score", 12). */
-function kitGameFrame(g){g=g||{};return `<div class="kgame">${kpHeader("game",`${g.art?g.art+": ":""}${g.title||""}`,"")}`+
+function kitGameFrame(g){g=g||{};return `<div class="kgame">${kpHeader(g.seal&&KP_SEAL[g.seal]?g.seal:"game",`${g.art?g.art+": ":""}${g.title||""}`,"")}`+
  (g.how?`<div class="kghow"><span class="krl">Cách chơi</span><span>${g.how}</span></div>`:"")+
  (g.hud&&g.hud.length?`<div class="kghud">${g.hud.map(([k,l,v])=>`<span class="kgc"><small>${l}</small><b data-kg="${k}">${v==null?"":v}</b></span>`).join("")}</div>`:"")+
  `<div class="kgbox" id="${g.id||"kgbox"}"></div><div class="kgres" id="${(g.id||"kgbox")}-res" hidden></div></div>`}
@@ -379,6 +379,7 @@ function kitGameResult(r){r=r||{};const rows=[];
 #ov .mg.kpanel .kpseal{background:#5a4a7a;border-color:#3a2e52}
 #ov .mg.kpanel #mgb{padding:8px 14px}#ov .mg.kpanel>div:last-child{padding:0 14px 12px}
 .kpseal.kp-game{background:#5a4a7a;border-color:#3a2e52}
+.kpseal.kp-muu,#ov .mg.kpanel .kpseal.kp-muu{background:#7a2a22;border-color:#4a1610}
 @media (max-width:599px){.kgame .kghow,.kghud{padding-left:10px;padding-right:10px}.kgbox{margin:8px 10px}}
 `;document.head.appendChild(st)})();
 
