@@ -183,7 +183,7 @@ function kitCourtStage(){try{const st=$("stage"),ks=$("kstat");let o=$("kcourt")
    the art in each band (alpha mask read once per picture from a small canvas), so the Tư chất / Trong cung blocks may sit beside a figure's
    head or between two figures but never over the painted body. Falls back to the element box while a mask is not ready. ---------- */
 const KIT_MASK={};
-function kitMask(src){if(KIT_MASK[src])return KIT_MASK[src].b?KIT_MASK[src]:null;KIT_MASK[src]={};const I=new Image();I.onload=()=>{try{const N=24,Wc=48;const c=document.createElement("canvas");c.width=Wc;c.height=N*4;const x=c.getContext("2d");x.drawImage(I,0,0,Wc,N*4);const d=x.getImageData(0,0,Wc,N*4).data;const b=[];
+function kitMask(src){if(KIT_MASK[src])return KIT_MASK[src].b?KIT_MASK[src]:null;KIT_MASK[src]={};const I=new Image();I.crossOrigin="anonymous";I.onload=()=>{try{const N=24,Wc=48;const c=document.createElement("canvas");c.width=Wc;c.height=N*4;const x=c.getContext("2d");x.drawImage(I,0,0,Wc,N*4);const d=x.getImageData(0,0,Wc,N*4).data;const b=[];
   for(let r=0;r<N;r++){let lo=1,hi=0;for(let yy=r*4;yy<r*4+4;yy++)for(let xx=0;xx<Wc;xx++){if(d[(yy*Wc+xx)*4+3]>40){lo=Math.min(lo,xx/Wc);hi=Math.max(hi,(xx+1)/Wc)}}b.push(hi>lo?[lo,hi]:null)}
   KIT_MASK[src]={b};setTimeout(()=>{try{khStage()}catch(e){}},30)}catch(e){KIT_MASK[src]={b:null,bad:1}}};I.src=src;return null}
 kitFigRects=function(){const st=$("stage");if(!st)return[];const out=[];st.querySelectorAll("#mefig, #tokens .tok img.figimg, #tokens .tok:not(.fig) .md").forEach(e=>{if(!e.offsetParent&&e.id!=="mefig")return;const r=e.getBoundingClientRect();if(r.width<8||r.height<8)return;
@@ -312,8 +312,11 @@ function kitCourtChips(){try{const c=$("kcchips");if(c)c.remove();const box=$("k
    edge, person larger); (2) every rank/role has its own crest on the top bar (img/kit/crest-<key>.webp, gpt-2-6, one style reference: the
    approved Hoàng hậu frame), smaller for low ranks; Hoàng hậu, Hoàng thượng, Thái hậu and Thái tử keep the crest painted in their frame. ---------- */
 window.KIT_CREST={ar:{"consort-0":.329,"consort-1":.337,"consort-2":.538,"consort-3":.506,"consort-4":.569,"consort-5":.554,"maid-0":.483,"maid-1":.467,"maid-2":.521,"maid-3":.481,"maid-4":.479,"mama-0":.263,"mama-1":.283,"mama-2":.317,"mama-3":.423,"mama-4":.419,"eunuch":.283,"unknown":.254},
- base:{"consort-0":.95,"consort-1":.95,"consort-2":.66,"consort-3":.72,"consort-4":.62,"consort-5":.62,"maid-0":.96,"maid-1":.96,"maid-2":.86,"maid-3":.93,"maid-4":.72,"mama-0":.89,"mama-1":.9,"mama-2":.81,"mama-3":.8,"mama-4":.75,"eunuch":.9,"unknown":.97},
- w:{"consort-0":300,"consort-1":320,"consort-2":344,"consort-3":366,"consort-4":388,"consort-5":410,"maid-0":190,"maid-1":205,"maid-2":220,"maid-3":235,"maid-4":250,"mama-0":250,"mama-1":266,"mama-2":282,"mama-3":298,"mama-4":314,"eunuch":280,"unknown":300},W:380,
+ /* owner 11/15 04:20Z + 05:45Z ("còn nguyên chỗ hở", "mấy góc trên rối"): every crest's SOLID base (measured: the lowest row ≥ 25 % of its
+    widest row) sits 6 canvas units BELOW the bar line, overlapping the frame top like a real crown piece; widths of consort-2..5 stay clear of
+    the frame's own corner ornaments (x 115–435) so crest and corners never pile up */
+ base:{"consort-0":.95,"consort-1":.95,"consort-2":.667,"consort-3":.577,"consort-4":.637,"consort-5":.627,"maid-0":.96,"maid-1":.96,"maid-2":.86,"maid-3":.93,"maid-4":.72,"mama-0":.89,"mama-1":.9,"mama-2":.81,"mama-3":.8,"mama-4":.75,"eunuch":.9,"unknown":.97},
+ w:{"consort-0":300,"consort-1":310,"consort-2":318,"consort-3":322,"consort-4":326,"consort-5":330,"maid-0":190,"maid-1":205,"maid-2":220,"maid-3":235,"maid-4":250,"mama-0":250,"mama-1":266,"mama-2":282,"mama-3":298,"mama-4":314,"eunuch":280,"unknown":300},W:380,
  /* y of the line the crest stands on (canvas units): the frame's top bar; maids: the top of the silk bow painted on their frame */
  bar:{"consort-0":191,"consort-1":189,"consort-2":187,"consort-3":186,"consort-4":182,"consort-5":175,"maid":150,"mama":150,"eunuch":172,"unknown":171},BAR:172,
  key:function(frame){const m=/frame-([a-z0-9-]+)\.webp/.exec(frame||"");if(!m)return null;let k=m[1];if(/^eunuch-[012]$/.test(k))k="eunuch";return this.ar[k]?k:null},
@@ -619,32 +622,7 @@ document.addEventListener("click",ev=>{const t=ev.target.closest&&ev.target.clos
 (function(){const k0=kitPcFix;kitPcFix=function(pc){const r=k0.apply(this,arguments);try{if(!pc||pc.querySelector(".kwear"))return r;const nm=(pc.querySelector(".pcname")||{}).textContent;const p=kitPersonByName(nm);
   pc.querySelectorAll(".chip").forEach(c=>{if(/^(Trâm|Y phục):/.test(c.textContent.trim())||(p&&typeof wdSlots==="function"&&/^(Đúng phẩm|Vượt phẩm|Quá giản dị|Phạm tang)$/.test(c.textContent.trim())))c.remove()});
   if(!p||typeof wdSlots!=="function")return r;const h=kitWearSlots(p,{size:"sm"});const pcp=pc.querySelector(".pcl > .pcp");if(h&&pcp)pcp.insertAdjacentHTML("afterend",h)}catch(e){console.error("K1",e)}return r}})();
-/* K2: Rương đồ — the wardrobe block of Tư trang built from kit parts: sub-tabs Trâm cài · Y phục, item grid (kitItem lg) with Mặc / Tặng /
-   Bán lén / Cầm cố act cards under the picked item, Tự chọn đồ + Chải chuốt act cards, pawned items with Chuộc lại. Data and acts: j92. */
-if(typeof wdInvHTML==="function")wdInvHTML=function(){const w=wdOf(S);const lab=wdKnownStatus(S);const self=S.wdSelf&&S.wdSelf.it===wdCur(S)?S.wdSelf:null;const ag=wdAgent(S);
- const tab=window.__kwdTab==="y"?"y":"tram";const pick=window.__kwdPick;const ci=wdColInfo();
- const head=lab?[`Đã biết: ${WD_LABEL[lab]}`,lab==="ok"?"ok":"no"]:self?[`Lời ${self.by}: ${WD_LABEL[self.st]} (chưa chắc)`,"n"]:["Chưa ai nhận xét bộ đang mặc","n"];
- let h=`<div class="kwd"><div class="kpsec"><h4 class="kpst">Đang mặc</h4><div class="kwdnow">${kitWearSlots(S,{size:"md",cls:"kwbig"})}<div class="kwdnote">${kitChip(head[0],head[1])}<span class="past">Sưu tập kiếp này: ${ci.n} món${ci.title?` · «${ci.title}»`:""}${ci.next?` · mốc sau ${ci.next[0]} món (Phúc duyên +${ci.next[1]})`:""}</span></div></div>`;
- const B0=[];for(const sl of ["tram","y"]){const e=w[sl],it=wdItem(e);if(it&&!(sl==="y"&&e.from==="base"))B0.push(pbtn(`data-wd="off" data-sl="${sl}"`,`Tháo ${sl==="tram"?"trâm":"y phục"}`,`thành: ${sl==="y"?"thay về phẩm phục được cấp":"để tóc trơn"}`,""))}
- B0.push(pbtn(`data-wd="auto"`,"Tự chọn đồ",`${word(wdAutoOdds())} · tốn: 0 khắc · thành: thay ngay bộ ngươi cho là hợp phẩm · kèm: có thể trúng bộ sai phẩm (${wdUnknownN()} món chưa rõ phẩm)`,""));
- B0.push(pbtn(`data-wd="groom"`,"Chải chuốt",`tốn: 1 khắc · thành: trò chải chuốt ${WD.groomSec} giây, kim dừng giữa là đúng phẩm · kèm: cao quá thành vượt phẩm, thấp quá thành quá giản dị`,whyTime(1)));
- h+=`<div class="rbtn">${B0.join("")}</div></div>`;
- const L=wdChest(tab),nT=wdChest("tram").length,nY=wdChest("y").length;
- h+=`<div class="kpsec"><h4 class="kpst">Rương đồ</h4><div class="ksub kwdtabs"><button class="ksubb${tab==="tram"?" on":""}" data-kwdtab="tram">Trâm cài ${nT}</button><button class="ksubb${tab==="y"?" on":""}" data-kwdtab="y">Y phục ${nY}</button></div>`;
- if(!L.length)h+=`<p class="past">Chưa có ${tab==="tram"?"trâm cài":"y phục"} nào trong rương.</p>`;
- else{h+=`<div class="kwdgrid">`+L.map(x=>kitItem({src:kitItemSrc(x.k,x.icon),name:x.name,grade:x.grade,size:"lg",on:false,label:x.knownP?["đồ phẩm "+x.knownP,"n"]:null,data:`data-kwdpick="${x.ix}" role="button" tabindex="0"`,tip:`${x.name} · ${x.gradeName} · ${x.fx}`})).join("")+`</div>`;
-  const x=L.find(y=>y.ix===pick)||null;if(x){const e=S.inv[x.ix];const B=[];const ntWhy=x.nt?"đồ ngự tứ: bán, cầm là bất kính":"";const agWhy=ag?"":"chưa có ma ma hay thái giám tin cẩn";
-   const lo=Math.round(x.price*WD.sellLo/100),hi=Math.round(x.price*WD.sellHi/100),pct=ag?wdSellPct(S,ag):0;
-   B.push(pbtn(`data-wd="wear" data-ix="${x.ix}"`,"Mặc",`tốn: 1 khắc · thành: thay vào ô ${x.slot==="tram"?"Trâm cài":"Y phục"}`,whyTime(1)));
-   B.push(pbtn(`data-it="gift" data-ix="${x.ix}"`,"Tặng",`tốn: 2 khắc · thành: chọn người nhận`,x.nt?"đồ ngự tứ: không được đem tặng":whyTime(2)));
-   B.push(pbtn(`data-wd="sell" data-ix="${x.ix}"`,"Bán lén",`${word(100-wdLeak(S,ag))} · tốn: 1 khắc · thành: Bạc +${ag?Math.round(x.price*pct/100):lo+"–"+hi} · kèm: lộ ra thì mang tiếng túng thiếu, Danh -${WD.sellDanh}`,ntWhy||agWhy||whyTime(1)));
-   B.push(pbtn(`data-wd="pawn" data-ix="${x.ix}"`,"Cầm cố",`${word(100-wdLeak(S,ag,true))} · tốn: 1 khắc · thành: Bạc +${Math.round(x.price*WD.pawnPct/100)}, chuộc lại ${Math.round(x.price*WD.redeemPct/100)} bạc trong ${WD.pawnWeeks} tuần · kèm: lộ ra thì Danh -${WD.sellDanh}`,ntWhy||agWhy||whyTime(1)));
-   h+=`<div class="kwdsel">${kitItem({src:kitItemSrc(x.k,x.icon),name:x.name,grade:x.grade,size:"md"})}<div>${kitFacts([`${x.slot==="tram"?"Trâm cài":"Y phục"} · ${x.gradeName} · ${x.fx}`,`${wdSrcTxt(e)}`,x.knownP?`Đồ phẩm ${x.knownP}`:"Chưa rõ phẩm"])}</div></div><div class="rbtn">${B.join("")}</div>`}
-  else h+=`<p class="past">Chạm một món để mặc, tặng, bán lén hay cầm cố.</p>`}
- h+=`</div>`;const PW=S.wdPawn||[];if(PW.length){h+=`<div class="kpsec"><h4 class="kpst">Đang cầm cố (${PW.length})</h4><div class="kwdgrid">`+PW.map((P,i)=>{const it=wdItem(P.e);return `<div class="kwdpw">${kitItem({src:kitItemSrc(it.k,it.icon),name:it.n,grade:it.g,size:"md",label:[`còn ${Math.max(0,P.due-wk())} tuần`,"no"]})}${pbtn(`data-wd="redeem" data-i="${i}"`,"Chuộc lại",`tốn: 1 khắc, Bạc -${P.back} · thành: món đồ về lại rương`,S.bac<P.back?`thiếu bạc (cần ${P.back})`:whyTime(1))}</div>`}).join("")+`</div></div>`}
- return h+`</div>`};
-document.addEventListener("click",ev=>{const a=ev.target.closest&&ev.target.closest("[data-kwdtab],[data-kwdpick]");if(!a)return;ev.stopPropagation();
- if(a.dataset.kwdtab){window.__kwdTab=a.dataset.kwdtab;window.__kwdPick=null}else window.__kwdPick=+a.dataset.kwdpick;try{render()}catch(e){}},true);
+/* K2 (Rương đồ) removed: the wardrobe lives in Tư trang's bag + "Đang mang" (jinv + jwdinv) */
 (function(){const st=document.createElement("style");st.id="k2b-item";st.textContent=`
 .kitem{display:inline-flex;flex-direction:column;align-items:center;gap:2px;vertical-align:top;width:var(--isz);cursor:default;text-align:center}
 .kitem[role=button]{cursor:pointer}
@@ -873,27 +851,32 @@ function kitPcGrid(pc){try{if(!pc||pc.querySelector(".kpgrid"))return;const L=pc
  const chip=(lab,val,full,extra)=>{lab=String(lab||"");lab=lab.charAt(0).toUpperCase()+lab.slice(1);const u=unk(val);const w=document.createElement("span");
   w.innerHTML=kitStatCell(null,lab,u?"?":val,{tag:"span",cls:"kst-chip"+(u?" kst-unk":""),title:full||(lab+": "+val),nobar:true});const c=w.firstElementChild;if(extra)extra.forEach(x=>x&&c.appendChild(x));return c};
  const rowA=[],rowB=[],rowC=[];
+ let PX=null;try{PX=typeof kitPersonByName==="function"?kitPersonByName((pc.querySelector(".pcname")||{}).textContent||""):null}catch(e){}
+ const SJ=PX&&PX.queen?"Hoàng hậu":"Nàng",OB=PX&&PX.queen?"Hoàng hậu":"nàng";
+ const QV=n=>(typeof quyW==="function"?quyW(n):"")+" · "+(n>0?"+":"")+n,RG=(k,l)=>typeof kitGloss==="function"?kitGloss(k,l):l;
  const bars=pc.querySelector(".kpbars");
  if(bars)[...bars.children].forEach(r=>{const t=T(r.textContent);
   const sb=[...r.querySelectorAll(".sbar")];if(sb.length){sb.forEach(x=>{const l=T((x.querySelector(".sbl")||{}).textContent),v=T((x.querySelector("b")||{}).textContent);rowA.push(chip(l,v,l+": "+v,[x.querySelector(".sbt")]))});return}
   if(/^Ghen/.test(t)){rowA.push(chip("Ghen",T(t.replace(/^Ghen:?/,"")),t));return}
-  if(/với nàng/.test(t)){const fb=[...r.querySelectorAll(".fbar")];const nums=[...t.matchAll(/·\s*(-?\d+)/g)].map(m=>m[1]);
-   const m1=t.match(/với nàng:\s*([^·]+)·\s*(-?\d+)/),m2=t.match(/(Không oán|Oán[^·]*)·\s*(-?\d+)/);
-   rowA.push(chip("Thiện cảm",m1?m1[2]:(nums[0]||"?"),"Ngươi với nàng: "+(m1?T(m1[1])+" · "+m1[2]:t),[fb[0]]));
-   if(m2||fb[1])rowA.push(chip("Oán",m2?m2[2]:(nums[1]||"?"),m2?T(m2[0]):"Oán",[fb[1]]));return}
-  if(/^Nàng với ngươi/.test(t)){const v=T(t.replace(/^Nàng với ngươi:?/,""));const n=v.match(/·\s*(-?\d+)/);rowA.push(chip("Nàng với ngươi",n?n[1]:v,t,[...r.querySelectorAll(".fbar")]));return}
+  /* owner 11/15 05:25Z: subject + verb + object — "Nàng quý ngươi: Bình thường · -5", "Nàng oán ngươi: 0", "Ngươi quý nàng …", "Ngươi oán nàng …" */
+  if(/với nàng/.test(t)){const fb=[...r.querySelectorAll(".fbar")];const nums=[...t.matchAll(/·\s*([+-]?\d+)/g)].map(m=>+m[1]);
+   rowA.push(chip(RG("Quý","Ngươi quý "+OB),nums.length?QV(nums[0]):"?","Ngươi quý "+OB+": "+(nums.length?QV(nums[0]):"chưa rõ"),[fb[0]]));
+   rowA.push(chip(RG("Oán","Ngươi oán "+OB),nums.length>1?String(nums[1]):"?","Ngươi oán "+OB+": "+(nums.length>1?nums[1]:"chưa rõ"),[fb[1]]));return}
+  if(/^Nàng với ngươi/.test(t)){const fb=[...r.querySelectorAll(".fbar")];const nums=[...t.matchAll(/·\s*([+-]?\d+)/g)].map(m=>+m[1]);
+   rowA.push(chip(RG("Quý",SJ+" quý ngươi"),nums.length?QV(nums[0]):"?",SJ+" quý ngươi: "+(nums.length?QV(nums[0]):"chưa rõ"),[fb[0]]));
+   rowA.push(chip(RG("Oán",SJ+" oán ngươi"),nums.length>1?String(nums[1]):"?",SJ+" oán ngươi: "+(nums.length>1?nums[1]:"chưa rõ"),[fb[1]]));return}
   if(/^Sủng/.test(t)){const v=T(t.replace(/^Sủng:?/,""));rowB.push(chip("Sủng",unk(v)?"?":v.replace(/\s*\(.*\)$/,""),t));return}
   if(/^(Lòng|Chủ tin|Thương)/.test(t)){const m=t.match(/^([^:\d]+):?\s*(.*)$/);rowA.push(chip(T(m[1]),T(m[2]).replace(/\s*\(.*\)$/,""),t,[...r.querySelectorAll(".fbar,.mini")]));return}
   const m=t.match(/^([^:]{1,24}):\s*(.*)$/);if(m)rowA.push(chip(T(m[1]),T(m[2]),t,[...r.querySelectorAll(".fbar,.mini")]));else{const c=document.createElement("span");c.className="kst kst-chip";c.appendChild(r);rowA.push(c)}});
  pc.querySelectorAll(".kst-tile").forEach(k=>{if(k.hidden&&!/Sủng/.test(k.textContent))return;const l=T((k.querySelector(".kstl")||{}).textContent),v=T((k.querySelector(".kstv")||{}).textContent);
   if(/^Sủng$/i.test(l)&&rowB.some(c=>/Sủng/.test(c.textContent)))return;rowB.push(chip(l.charAt(0)+l.slice(1).toLowerCase(),v,l+": "+v))});
  const tiles=pc.querySelector(".kstgrid");
- const info=pc.querySelector(".kpfacts .pcinfo");if(info)[...info.children].forEach(sp=>{const t=T(sp.textContent).replace(/\s*ⓘ$/,"");const btn=sp.querySelector("button");
+ const info=pc.querySelector(".kpfacts .pcinfo");if(info)[...info.children].forEach(sp=>{if(sp.classList.contains("krun")||sp.querySelector(".krun"))return;const t=T(sp.textContent).replace(/\s*ⓘ$/,"");const btn=sp.querySelector("button");
   const m=t.match(/^(Tuổi)\s+(\d+)/)||t.match(/^([^:]{1,24}):\s*(.*)$/)||t.match(/^([^\d:·]{2,20}?)\s+(-?\d+)$/);if(m&&T(m[2]).length<=28){rowC.push(chip(T(m[1]),T(m[2]),t,btn?[btn]:null));sp.remove()}});
  try{const nmx=(pc.querySelector(".pcname")||{}).textContent||"";const px=typeof kitPersonByName==="function"?kitPersonByName(nmx):null;
   if(px&&typeof rivals!=="undefined"&&rivals.includes(px)){const have=l=>rowA.some(c=>((c.querySelector("small")||{}).textContent||"").trim()===l);
-   ["Ghen","Oán","Thiện cảm","Nàng với ngươi"].forEach(l=>{if(!have(l))rowA.push(chip(l,"?",l+": chưa rõ"))})}}catch(e){}
- const ORD=["Ghen","Oán","Thiện cảm","Nàng với ngươi"],oi=c=>{const l=(c.querySelector("small")||{}).textContent||"";const i=ORD.indexOf(l.trim());return i<0?99:i};rowA.sort((x,y)=>oi(x)-oi(y));
+   [[SJ+" quý ngươi","Quý"],[SJ+" oán ngươi","Oán"],["Ngươi quý "+OB,"Quý"],["Ngươi oán "+OB,"Oán"],["Ghen","Ghen"]].forEach(([l,g])=>{if(!have(l))rowA.push(chip(RG(g,l),"?",l+": chưa rõ"))})}}catch(e){}
+ const ORD=[SJ+" quý ngươi",SJ+" oán ngươi","Ngươi quý "+OB,"Ngươi oán "+OB,"Ghen"],oi=c=>{const l=(c.querySelector("small")||{}).textContent||"";const i=ORD.indexOf(l.trim());return i<0?99:i};rowA.sort((x,y)=>oi(x)-oi(y));
  const SORD=["Sủng","Đức","Danh","Sắc","Tài","Tâm cơ"],si=c=>{const l=((c.querySelector("small")||{}).textContent||"").trim().toLowerCase();const i=SORD.findIndex(x=>x.toLowerCase()===l);return i<0?99:i};rowB.sort((x,y)=>si(x)-si(y));
  const g=document.createElement("div");g.className="kpgrid";[rowA,rowB,rowC].forEach((R,i)=>{if(!R.length)return;const d=document.createElement("div");d.className="kpgr kpgr"+i;R.forEach(c=>d.appendChild(c));g.appendChild(d)});
  if(!g.children.length)return;

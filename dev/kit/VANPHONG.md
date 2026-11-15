@@ -28,15 +28,17 @@ Thi hành: `dev/build/j84.js` (module cuối trong assemble.py) sửa dữ liệ
 | Tiếng | Nhạc · Tiếng động · Giọng · Im tiếng · Rung · Cảnh động; nút: Mở tiếng / Im tiếng | Âm thanh, Hiệu ứng âm, Hiệu ứng hình, Bật/Tắt âm thanh, Tắt tiếng |
 | Tab việc làm | Hành sự | Hành động |
 | Tab bản đồ | Dư đồ (nút quay lại: "‹ Dư đồ") | Bản đồ, map |
-| Tab quan hệ | Giao tình | Quan hệ |
+| Tab quan hệ (nút dưới) | Giao tình; mục con: Ân oán · Phe phái (lời chỉ: "Giao tình › Ân oán") | Quan hệ |
 | Tab truyện riêng của thân phận | Mệnh truyện | Tuyến truyện, storyline |
 | Tab sổ việc đã qua | Sổ ghi | Nhật ký, log |
-| Tab kẻ hầu | Cung nhân | Kẻ hầu (tên tab; trong câu vẫn dùng "kẻ hầu") |
+| Nút dưới "Hậu cung" = mọi người trong cung | mục con: Hoàng thượng · Thái hậu (chữ ngắn "Thánh thượng") · Phi tần · Nam nhân · Cung nhân; lời chỉ: "Hậu cung › Cung nhân" | "Mục Cung nhân" (cũ) |
+| Tab kẻ hầu | Cung nhân (mục con của Hậu cung) | Kẻ hầu (tên tab; trong câu vẫn dùng "kẻ hầu") |
 | Tab con cái | Hoàng tự | Con cái (tên tab) |
 | Tab rương | Tư trang (chữ ngắn cũng "Tư trang") | Rương đồ, Rương |
 | Tab phe | Phe phái (chữ ngắn "Phe") | — |
 | Tab ở chế độ cung nữ | Phận sự · Dư đồ · Đồng liêu · Thân phận · Sổ ghi; lời dặn "Mục Phận sự" | Việc |
 | Nút thu bảng trên cùng | Tư chất | Chỉ số |
+| Nút dưới (8 nút + Qua buổi) | Hành sự, Dư đồ, Hậu cung, Giao tình, Hoàng tự, Tư trang, Tài nghệ, Mệnh truyện | — |
 | Chữ ngắn của tab (màn dưới 1280 px) | Hành sự, Dư đồ, Phi tần, Giao tình, Phe, Cung nhân, Hoàng tự, Tư trang, Tài nghệ, Mệnh, Sổ ghi | Việc, Bản đồ, Quan hệ, Kẻ hầu, Con, Rương, Truyện, Nhật ký |
 | Mưu người khác nhắm vào ngươi (sổ ghi) | «Hạ độc» nhắm vào ngươi (việc khó): không thành. | [Hạ độc · Khó · hỏng] |
 | Bảng thi tài | bảng định thứ; "nàng mất 2 phần" | bảng điểm, điểm |
@@ -50,7 +52,16 @@ Thi hành: `dev/build/j84.js` (module cuối trong assemble.py) sửa dữ liệ
 | Bậc may rủi | Liều / Khó / Năm ăn năm thua / Khá chắc / Chắc / Rất chắc / Nắm chắc (việc chắc không ghi chữ) | %, Chắc chắn, random |
 | Chạm màn hình (lời dặn) | chạm | bấm, click, nhấn |
 | Mở một tab (lời dặn) | Vào mục Phe phái | Mở tab Phe phái |
+| Quan hệ hai chiều (thẻ người, Giao tình, sổ tuần, kết quả việc) | chủ ngữ + động từ + đối tượng: "Nàng quý ngươi: Bình thường · -5", "Nàng oán ngươi: 0", "Ngươi quý nàng …", "Ngươi oán nàng …"; theo vai khi tự nhiên: "Hoàng hậu quý ngươi", "Hắn quý ngươi"; chưa biết: "Nàng quý ngươi: chưa rõ" | Thiện cảm (đứng trơ), Ngươi với nàng, Nàng với ngươi |
+| Mức "quý" | Ghét (≤ -30) · Không ưa (-29…-11) · Bình thường (-10…10) · Có cảm tình (11…29) · Quý mến (30…59) · Thân thiết (≥ 60) | Lạnh nhạt, Thân |
+| Kẻ hầu được sai đi làm việc | Người chạy việc: <tên> (chạm: "Khi ngươi sai người dò la, đưa thư, mua đồ…, người này đi; chọn theo Lòng và tài"); nút "Đổi ›" | Sai đi: <tên> |
 | Ngày đầu cuộc | Thân phận kiếp này · Nhận thân phận · Nhập cung | — |
+| Chơi chung (sếp 15/11) | Cùng hảo hữu · Mời hảo hữu · hảo hữu (người chơi cùng) · Ám hiệu · Nhập ám hiệu | Chơi cùng bạn, Mời bạn, bạn, tri kỷ, Mã phòng |
+| Sổ tóm tắt tuần | Tuần lục | Sổ tuần |
+| Nút sang buổi / sang ngày | Sang buổi · Qua ngày | Qua buổi, Qua đêm, Đợi sáng |
+| Đồ đang đeo | Bên mình | Đang mang |
+| Bảng xếp hạng | Bảng vàng | Bảng vinh danh, leaderboard |
+| Tab Hoàng thượng + Thái hậu | Chí tôn | Hoàng thượng · Thái hậu, Thánh thượng |
 
 Từ đã cổ trang, giữ nguyên: Bạc, Sức, Sủng, Danh, Sắc, Tài, Tâm cơ, Đức, Tai mắt, Ân tình, Phúc duyên, Lòng, Chủ tin, thiện cảm, oán, ghen, khắc, quẻ, thẻ bài, thị tẩm, tấn phong, sắc phong, lãnh cung, cấm túc, ân thưởng, bổng lộc, Phi tần, Phe phái, Kẻ hầu, Con cái, Rương đồ, Tài nghệ, Bảng phẩm vị.
 
@@ -58,7 +69,7 @@ Từ đã cổ trang, giữ nguyên: Bạc, Sức, Sủng, Danh, Sắc, Tài, T�
 
 | Người nói | Tự xưng | Gọi người chơi |
 |---|---|---|
-| Lời kể (người kể chuyện) | — | ngươi (giữ như hiện có) |
+| Lời kể (người kể chuyện), nhãn, thẻ, chip | — | **ta** (sếp 15/11: người chơi đọc là chính mình — "Con của ta", "Hoàng hậu với ta"; j84 đổi trên màn hình, lời NPC trong “…” vẫn gọi "ngươi") |
 | Người chơi trước Hoàng thượng / Thái hậu / Hoàng hậu | thần thiếp | — |
 | Người chơi (phẩm Tần trở lên) với người dưới | bổn cung | — |
 | Người chơi (dưới Tần) với kẻ hầu | ta | — |

@@ -1,0 +1,107 @@
+{
+ "scenario": "coop",
+ "room": "UX29",
+ "coBefore": [
+  {
+   "room": "UX29",
+   "you": "a",
+   "status": "open",
+   "peer": true,
+   "on": true,
+   "week": 0,
+   "hold": false,
+   "name": "Tần Kiều Nguyệt",
+   "k": "1:3:0:0",
+   "used": 1,
+   "deck": 10,
+   "friend": "Đoan Mộc Bích Dao",
+   "mark": "A",
+   "build": "5f0fce8e2c4a"
+  },
+  {
+   "room": "UX29",
+   "you": "b",
+   "status": "open",
+   "peer": true,
+   "on": true,
+   "week": 0,
+   "hold": false,
+   "name": "Đoan Mộc Bích Dao",
+   "k": "1:3:0:0",
+   "used": 1,
+   "deck": 9,
+   "friend": "Tần Kiều Nguyệt",
+   "mark": "A",
+   "build": "5f0fce8e2c4a"
+  }
+ ],
+ "coAfter": [
+  {
+   "room": "UX29",
+   "you": "a",
+   "status": "open",
+   "peer": true,
+   "on": true,
+   "week": 0,
+   "hold": false,
+   "name": "Tần Kiều Nguyệt",
+   "k": "1:3:0:1",
+   "used": 0,
+   "deck": 10,
+   "friend": "Đoan Mộc Bích Dao",
+   "mark": "B",
+   "build": "b5f0fce8e2c4a"
+  },
+  {
+   "room": "UX29",
+   "you": "b",
+   "status": "open",
+   "peer": true,
+   "on": true,
+   "week": 0,
+   "hold": false,
+   "name": "Đoan Mộc Bích Dao",
+   "k": "1:3:0:1",
+   "used": 0,
+   "deck": 10,
+   "friend": "Tần Kiều Nguyệt",
+   "mark": "B",
+   "build": "b5f0fce8e2c4a"
+  }
+ ],
+ "resumed": [
+  {
+   "ok": true,
+   "coop": true,
+   "why": "buoi",
+   "room": "UX29",
+   "seat": "a",
+   "k": "1:3:0:1",
+   "u": 0,
+   "was": 1
+  },
+  {
+   "ok": true,
+   "coop": true,
+   "why": "buoi",
+   "room": "UX29",
+   "seat": "b",
+   "k": "1:3:0:1",
+   "u": 0,
+   "was": 1
+  }
+ ],
+ "coCard": {
+  "overflowX": false,
+  "bad": [],
+  "pct": false,
+  "text": "Có bản mới Mở bản mới ngay? Bạn chơi cùng sẽ được hỏi. Hai người cùng mở bản mới, vào lại đúng phòng, đúng chỗ. Để sau thì bản mới tự mở khi hai người qua buổi. Để sau Mở bản mới"
+ },
+ "coPeerCard": {
+  "overflowX": false,
+  "bad": [],
+  "pct": false,
+  "text": "Có bản mới Bạn muốn mở bản mới ngay Hai người cùng mở bản mới, vào lại đúng phòng, đúng chỗ. Sổ đang chơi giữ nguyên. Để sau Cùng mở"
+ },
+ "errs": []
+}

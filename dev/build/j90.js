@@ -36,7 +36,7 @@ function kitPodium(list,o){o=o||{};const L=kpodNorm(list);const top=L.slice(0,3)
  const cols=[top[1],top[0],top[2]].filter(Boolean).map(kpodCol).join("");
  const mine=me&&me.place>3?`<div class="kpod-mine">${kitFaceH(S,"xs")}<span>Ngươi đứng thứ ${me.place} trong ${L.length} người${me.score!=null?` · ${typeof me.score==="number"?me.score+" phần":me.score}`:""}</span></div>`:"";
  return `<div class="kpod${me&&me.place<=3?" kpod-mine"+me.place:""}${me&&me.place===1?" kpod-win":""}${top.length<3?" kpod-n"+top.length:""}" role="dialog" aria-label="${KP_SEAL.honor}">`+
-  `<div class="kpod-hd">${kpHeader("honor",o.title||"Bảng vinh danh",o.sub||"")}</div>`+
+  `<div class="kpod-hd">${kpHeader("honor",o.title||"Bảng vàng",o.sub||"")}</div>`+
   `<div class="kpod-stage">${cols}</div>`+
   `<div class="kpod-ft">${mine}<button class="kbtn kpod-next">${o.next||"Tiếp"}</button></div><div class="kpod-fx" aria-hidden="true"></div></div>`}
 function kpodReduced(){try{return matchMedia("(prefers-reduced-motion: reduce)").matches}catch(e){return false}}
@@ -103,7 +103,7 @@ function kpodFromItem(m){if(!m||typeof m.h!=="string"||!/class="(ktlist|h54list)
  const list=[];for(const row of rows){const sp=row.querySelector(":scope > span");const st=row.querySelector(":scope > b");const txt=(sp&&sp.textContent||"");const sw=st?st.textContent.trim():"";
   if(/Ở nhà/.test(sw))continue;const k=K.find(x=>x.name&&txt.includes(x.name)&&!list.some(y=>y.who===x));if(!k)continue;const sm=row.querySelector(":scope > small");
   list.push({who:k,place:list.length+1,mine:/con ngươi/.test(txt),sub:sw.replace(/^Đứng đầu · /,""),prize:sm&&sm.innerHTML.trim()?`<span class="kpod-fx2">${sm.innerHTML}</span>`:null})}
- if(list.length>=2)kitPodiumTag(m,list,{sub:"Bảng vinh danh"})}
+ if(list.length>=2)kitPodiumTag(m,list,{sub:"Bảng vàng"})}
 /* Tranh ghế (j34): the seat goes to Nhất; scores = the three weighted rounds */
 (function(){if(typeof contestEnd!=="function")return;const e0=contestEnd;contestEnd=function(){const c=S&&S.contest;let L=null;try{if(c&&c.c.includes("me")&&!quiet){
   const C=c.c.map(byKey).filter(p=>p&&(p===S||p.alive)&&!p.out&&!c.dq.includes(key(p))&&rkOf(p)===c.r-1);const tot=p=>(c.sc[key(p)]||[]).reduce((a,b,i)=>a+(b||0)*crW(i),0);

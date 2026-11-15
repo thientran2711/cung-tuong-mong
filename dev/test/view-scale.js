@@ -10,7 +10,7 @@ const BASE=BASE0+(BASE0.includes('?')?'&':'?')+'khost=1';
 const sleep=t=>new Promise(r=>setTimeout(r,t));const L=(...a)=>console.error(new Date().toISOString().slice(11,19),...a);
 /* Cảnh động off in this test: the sandbox has no GPU and the animated stage starves the renderer, so real input events would queue for minutes */
 const LIFE=()=>{try{localStorage.setItem('ctm-rot-tip','1')}catch(e){}OPT.fxon=false;SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){start();if(!isSrv())break}Q.length=0;document.getElementById('modal').hidden=true;
- ['kroul','dawn','kload'].forEach(i=>{const e=document.getElementById(i);if(e)e.remove()});document.querySelectorAll('.kmov').forEach(e=>e.remove());if(S.place!=='home'&&typeof goTo==='function'){}render();try{pxScene()}catch(e){}return S.name};
+ document.querySelectorAll('[id^=kroul],#dawn,#kload,.kmov').forEach(e=>e.remove());if(S.place!=='home'&&typeof goTo==='function'){}render();try{pxScene()}catch(e){}return S.name};
 function watch(p,errs){p.on('pageerror',e=>errs.push(e.message));p.on('console',m=>{if(m.type()==='error'&&!/Failed to load resource|net::ERR/.test(m.text()))errs.push('console: '+m.text())})}
 const shot=async(p,n)=>{if(!SHOTS)return;for(let t=0;t<2;t++){try{await p.screenshot({path:`${OUT}/${n}.jpg`,type:'jpeg',quality:55,timeout:150000});return}catch(e){}}};
 const SIG=()=>{const r=e=>{const q=e.getBoundingClientRect();return [q.left,q.top,q.width,q.height].map(Math.round).join(',')};
@@ -23,13 +23,13 @@ async function toOuter(p,lx,ly){return p.evaluate(([lx,ly])=>{const f=document.g
 (async()=>{const b=await chromium.launch();const R={};
  for(const [W,H,D,tag] of [[1000,755,2,'fold-land'],[1180,820,2,'ipad'],[1366,1024,2,'ipad-pro'],[844,390,3,'phone-land'],[755,1000,2,'fold-port'],[390,844,3,'narrow']]){L(tag);
   const c=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:D,hasTouch:true,isMobile:W<1100,serviceWorkers:'block'});const p=await c.newPage();const errs=[];watch(p,errs);
-  await p.goto(BASE,{waitUntil:'commit'});await p.waitForSelector('#krotf',{timeout:60000});const f=await frameOf(p);await sleep(2000);L('frame ok');await f.evaluate(LIFE);await sleep(2500);L('life');
+  await p.goto(BASE,{waitUntil:'commit'});await p.waitForSelector('#krotf',{timeout:60000});const f=await frameOf(p);L('frame ok');await f.waitForFunction(()=>!document.getElementById('kload')||(window.KLOAD&&['done','skipped','all'].includes(KLOAD.phase)),null,{timeout:180000}).catch(()=>L('kload wait timeout'));await sleep(1500);for(let i=0;i<4;i++){try{await f.evaluate(LIFE);break}catch(e){L('life retry',e.message.slice(0,80));await sleep(4000)}}await sleep(2500);L('life');
   const r={krot:await p.evaluate(()=>window.__krot),inner:await f.evaluate(()=>({w:innerWidth,h:innerHeight,kv:kitView(),overflowX:document.documentElement.scrollWidth>innerWidth+1})),sig:await f.evaluate(SIG)};
   L('sig');const mf=await f.evaluate(MINFONT);L('font');r.minFont={css:mf.px,screen:+(mf.px*r.krot.s).toFixed(1),at:mf.at};
   /* taps */
-  await f.evaluate(()=>{window.__tapLog=[];document.addEventListener('click',e=>{const t=e.target.closest&&e.target.closest('[data-tab]');__tapLog.push(t?t.dataset.tab:(e.target.tagName||'?'))},true)});
-  r.taps=[];for(const k of ['go','rv','act']){const q=await f.evaluate(k=>{const t=document.querySelector(`#tabs [data-tab="${k}"]`);if(!t||!t.offsetWidth)return null;const r=t.getBoundingClientRect();return[r.left+r.width/2,r.top+r.height/2]},k);if(!q){r.taps.push(k+':none');continue}
-   const [x,y]=await toOuter(p,q[0],q[1]);await f.evaluate(()=>{['kroul','dawn','kload','kpodov'].forEach(i=>{const e=document.getElementById(i);if(e)e.remove()});document.querySelectorAll('.kmov').forEach(e=>e.remove());Q.length=0;document.getElementById('modal').hidden=true});await p.mouse.click(x,y);await sleep(1000);r.taps.push(k+'→'+await f.evaluate(()=>__tapLog.pop()))}
+  await f.evaluate(()=>{window.__tapLog=[];document.addEventListener('click',e=>{const t=e.target.closest&&e.target.closest('[data-tab]');__tapLog.push(t?t.dataset.tab:((e.target.id||e.target.className||e.target.tagName)+'').slice(0,40))},true)});
+  r.taps=[];for(const k of ['go','inv','act']){const q=await f.evaluate(k=>{const t=document.querySelector(`#tabs [data-tab="${k}"]`);if(!t||!t.offsetWidth)return null;const r=t.getBoundingClientRect();return[r.left+r.width/2,r.top+r.height/2]},k);if(!q){r.taps.push(k+':none');continue}
+   const [x,y]=await toOuter(p,q[0],q[1]);await f.evaluate(()=>{document.querySelectorAll('[id^=kroul],#dawn,#kload,#kpodov,.kmov').forEach(e=>e.remove());Q.length=0;document.getElementById('modal').hidden=true});await p.mouse.click(x,y);await sleep(1000);r.taps.push(k+'→'+await f.evaluate(()=>__tapLog.pop()))}
   L('taps',r.taps.join(' '));await shot(p,`${tag}-${W}x${H}`);L('shot');
   if(tag==='narrow'){/* swipe toward the content's top (outer +x) → the panel scrolls down */
    const sc=await f.evaluate(()=>{const s=[...document.querySelectorAll('*')].filter(e=>/(auto|scroll)/.test(getComputedStyle(e).overflowY)&&e.scrollHeight>e.clientHeight+40&&e.clientHeight>100).sort((a,b)=>b.clientHeight*b.clientWidth-a.clientHeight*a.clientWidth)[0];if(!s)return null;s.id=s.id||'kv-sc';s.scrollTop=0;const r=s.getBoundingClientRect();return{id:s.id,c:[r.left+r.width/2,r.top+r.height/2]}});

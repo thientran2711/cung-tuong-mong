@@ -115,7 +115,7 @@ function kitOddsLadder(lv){return `<div class="kpopt">Thang cơ hội · 7 bậc
 const KIT_GLOSS={
  "Sủng":"Hoàng thượng thương ngươi bao nhiêu (0–100). Cao thì hay được lật thẻ, được ban thưởng, dễ thăng bậc.",
  "Danh":"Tiếng tăm của ngươi trong cung. Cần để thăng bậc; mất khi bị bắt quả tang hay bị chê cười.",
- "Đức":"Tiếng hiền đức. Hoàng hậu cần Đức 50 (mẹ Thái tử 40). Làm việc ác bị lộ thì mất Đức.",
+ "Đức":`Tiếng hiền đức. Hoàng hậu cần Đức ${BAL.hhDuc} (mẹ Thái tử ${BAL.hhDucHeir}). Làm việc ác bị lộ thì mất Đức.`,
  "Sắc":"Nhan sắc. Giúp múa, thị tẩm và được Hoàng thượng để ý.",
  "Tài":"Tài học: đàn, thơ, chữ. Giúp hầu chuyện Hoàng thượng và thi tài.",
  "Tâm cơ":"Mưu trí, sự khôn khéo. Giúp dò la, bày mưu, nhìn thấu mưu của người khác.",
@@ -139,7 +139,7 @@ const KIT_GLOSS={
  "Lật thẻ":"Mỗi tối Hoàng thượng lật thẻ bài để chọn người hầu đêm. Khả năng ngươi được chọn mỗi tuần.",
  "Lãnh cung":"Cung lạnh: nơi giam phi tần bị phế. Mất phẩm vị, chỉ còn đường xin phục vị.",
  "Cấm túc":"Bị giữ trong cung của mình một thời gian, không được ra ngoài, không được lật thẻ.",
- "Bổng lộc":"Bạc phát đầu mỗi tháng theo phẩm vị (30–320 bạc).",
+ "Bổng lộc":`Bạc phát đầu mỗi tháng theo phẩm vị (${BL[0]}–${BL[BL.length-1]} bạc).`,
  "Ân thưởng":"Những lần ngươi được Hoàng thượng, Thái hậu ban thưởng và vật đã nhận.",
  "Tranh ghế":"Cuộc thi giành một ghế phẩm vị còn trống: thi tài nghệ rồi xét đức hạnh.",
  "Tuyển tú":"Ba năm một lần, cung đón thêm tú nữ mới.",
@@ -751,7 +751,7 @@ function kgLabel(k){const b=document.querySelector(`#tabs [data-tab="${k}"]`);if
 function kgBar(){const T=$("tabs");if(!T)return;const on=kgOn();
  for(const g in KG){const ks=kgKeys(g);ks.forEach((k,i)=>{const b=T.querySelector(`[data-tab="${k}"]`);if(!b)return;
   if(!on){if(b.dataset.kg){b.textContent=b.dataset.kl0;b.dataset.s=b.dataset.ks0;delete b.dataset.kg}b.classList.remove("kghide");return}
-  if(i===0){if(!b.dataset.kg){b.dataset.kl0=b.textContent;b.dataset.ks0=b.dataset.s||"";}b.dataset.kg=g;if(b.textContent!==KG[g].l)b.textContent=KG[g].l;b.dataset.s=KG[g].s;b.setAttribute("aria-selected",String(kgOf(tab)===g));b.classList.toggle("kgon",kgOf(tab)===g)}
+  if(i===0){if(!b.dataset.kg){b.dataset.kl0=b.textContent;b.dataset.ks0=b.dataset.s||"";}b.dataset.kg=g;b.classList.remove("kghide");/* a group head is always shown (a key that was a member of another group before KG changed keeps no stale kghide — review 11/15: Giao tình vanished) */if(b.textContent!==KG[g].l)b.textContent=KG[g].l;b.dataset.s=KG[g].s;b.setAttribute("aria-selected",String(kgOf(tab)===g));b.classList.toggle("kgon",kgOf(tab)===g)}
   else b.classList.add("kghide")})}}
 function kgSub(){const P=$("panel");if(!P)return;const g=kgOf(tab);let nav=P.querySelector(":scope > .ksub");if(!g||!kgOn()){if(nav)nav.remove();return}
  try{localStorage.setItem("hclh-kg-"+g,tab)}catch(e){}
