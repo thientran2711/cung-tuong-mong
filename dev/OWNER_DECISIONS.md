@@ -428,3 +428,10 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (12:20Z) Ảnh Triều chính hiện lung tung là do nhiều sự việc KHÔNG có ảnh riêng nên rơi về ảnh mặc định. Việc cần: dò mọi ảnh đang được dùng cho 2 sự việc khác nhau trở lên (và mọi chỗ rơi về ảnh mặc định) → vẽ ảnh riêng cho các sự việc còn thiếu.
 - (12:25Z) Trò chơi tự tay phải khớp món: chọn món trước (công thức có hình) → nguyên liệu/bước trong trò chơi là của đúng món đó (canh gà: gà, sâm, lá sen…; chè dưỡng nhan: hạt sen, long nhãn, ngân nhĩ, táo đỏ…) → thành phẩm là món đó, hình đúng món, phẩm theo điểm.
 - (12:25Z) Thêm lựa chọn "Bỏ độc vào" khi tặng món ăn/thức uống/túi thơm (cần có độc dược). Odds theo Tâm cơ, người nhận có thử độc không, thiện cảm, phẩm món. Lộ thì truy ra nàng. NPC cũng làm vậy với nàng; nàng có "Thử độc". MẶC ĐỊNH (sếp có thể đổi): không cho hạ độc Hoàng thượng và Thái hậu (có người thử độc, tội khi quân).
+- (12:35Z) Logo app: lấy cô gái mũ phượng đỏ ở giữa tranh màn tải làm icon app (192/512/maskable/apple).
+- (12:35Z) Mộc đỏ "Trân nữ" (Phượng Lệnh, seal.js, vẽ bằng SVG) gắn vào góc trên bên PHẢI khung đầu trang (chỗ sếp khoanh), không che chữ quẻ.
+- (12:35Z) Thẻ đồ người khác đang dùng: ô ảnh = hình món đồ đó.
+- (12:35Z) Kit mới kitActCompact: khi bên trái là hình người thì thẻ hành động bên phải dùng ảnh nhỏ + thông tin bên cạnh, không để chữ tràn.
+- (12:35Z) Nghỉ dưỡng sức (+20) vs nghỉ một lát (+6) cùng giá → phân biệt: dưỡng sức chỉ buổi tối, hết buổi, cần thuốc bổ/bạc; một lát lúc nào cũng được, 1 khắc.
+- (12:35Z) Phòng chiều mưa mùa xuân u ám như lãnh cung → chỉnh màu thời tiết/buổi cho ấm, sáng dịu.
+- LIVE CDN (12:35Z) 88 ảnh thú cưng mới (22 con × 4 giai đoạn) + 18 tranh hành sự sửa dáng vạn phúc.
