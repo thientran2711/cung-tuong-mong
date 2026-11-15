@@ -819,3 +819,8 @@ All must work in co-op.
 - Screenshot dev/handover/refs/owner-mood-dialog.jpg (ĐIỀU "Tâm trạng · Chu Thục Nghi", Hiện nay: Lo âu; picture = cheerful tea table "Có người đến chơi").
 - Decisions: (1) the mood dialog picture shows a scene matching the CURRENT mood (lo âu → anxious scene, etc.; each mood gets its own painted picture(s), Magnific gpt-2-6), not an unrelated event picture; (2) a mood icon sits in one corner of the picture (kit part, same icon as the mood elsewhere); (3) title reads "Tâm trạng · Hoàng hậu Chu Thục Nghi".
 - GENERAL RULE (owner): a person's RANK and NAME always go together, everywhere (titles, headers, dialogs, lists, logs, toasts), never the bare name — rank in its rank colour (see rank-colour entry). → worker review/mood-dialog; rule added to review/rank-colour scope.
+
+## 15/11 (session 8) — Tapping an item shows no item info (owner screenshot)
+- Owner (verbatim): "Khi bấm vào món đồ không thấy hiện thông tin món đồ."
+- Screenshot dev/handover/refs/owner-item-info-tap.jpg (TÀI NGHỆ "Điểm trang: Trước gương đồng", Hồi 1 dress pick: ĐANG MẶC slots + chest grid; tapping a chest cell only wears/removes it).
+- Decision (coordinator design): tapping an item cell ALWAYS shows its info via one shared kit item-detail part (picture, name, grade colour, kind/slot, theme tag, xa xỉ value vs her rank allowance, effects ĐƯỢC/MẤT, origin/giver, notes) — in this dress picker as an info strip/panel next to the chest with buttons "Mặc / Cài" or "Tháo"; wearing no longer happens on a blind tap. Whole family: every item cell in the game (Tư trang, dress pick, gift picker, shop, chest, rewards, co-op) uses the same tap → info behaviour. → worker review/item-info (shared kit part; review/gift-pick reuses it).
