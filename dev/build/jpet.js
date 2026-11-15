@@ -226,9 +226,11 @@ function petHTML(){if(!S||!tsbOn()||(typeof isSrv==="function"&&isSrv()))return"
  /* empty slot = the kit's own empty square; the pet tile keeps its grade frame. Grade frames/colours/seal = the item kit (owner 10:10Z) */
  
  return h}
-function petRows(P,i){const T=petT(P);const D=[`${PET_SN[T.st]} +${1+(T.sacX||0)} khi theo hầu`,T.use];const M=[T.bad];if(T.up)M.push(`Bạc -${T.up} mỗi tháng`);M.push("bỏ bê tới kiệt thì mất");
+/* one kit table (KIT §51): petRowsL = the rows, wrappers (jpetcare) add rows to the SAME table, never a 2nd kitRows */
+function petRows(P,i){return kitRows(petRowsL(P,i))}
+function petRowsL(P,i){const T=petT(P);const D=[`${PET_SN[T.st]} +${1+(T.sacX||0)} khi theo hầu`,T.use];const M=[T.bad];if(T.up)M.push(`Bạc -${T.up} mỗi tháng`);M.push("bỏ bê tới kiệt thì mất");
  const G=[`Xa xỉ ${petLux(P.t)} (theo hầu tính đủ, ở tẩm cung tính nửa)`,P.from?P.from:""].filter(Boolean);/* no "khí lực": the care numbers are the Chăm row (jpetcare) */if(T.rescue)G.push("chỉ đỡ được một lần");
- return kitRows([["Phẩm",`<span class="ef n" style="color:${KIT_GRADE[T.tr].c};font-weight:700">${PET_TIER[T.tr]}</span>`],["Được",D,"g"],["Mất",M,"r"],["Ghi chú",G.filter(Boolean),"n"]])}
+ return [["Phẩm",`<span class="ef n" style="color:${KIT_GRADE[T.tr].c};font-weight:700">${PET_TIER[T.tr]}</span>`],["Được",D,"g"],["Mất",M,"r"],["Ghi chú",G.filter(Boolean),"n"]]}
 function petPick(x){if(x.item){const i=x.i,P=tsbPets(S)[i];if(!P)return;const T=petT(P),t1=whyTime(1),B=[];
   B.push(pbtn(`data-pet="care" data-i="${i}"`,`Chăm ${T.n.replace(/^./,c=>c.toLowerCase())}`,`thành: mở màn chăm: cho ăn, tắm chải, chơi (mỗi việc 1 khắc) · No, Sạch, Vui, Tình cảm tăng`,""));
   if(S.petOn!==i){const cur=tsbPetOn(S);B.push(pbtn(`data-pet="follow" data-i="${i}"`,`Cho ${T.n.replace(/^./,c=>c.toLowerCase())} theo hầu`,`thành: ${PET_SN[T.st]} +${1+(T.sacX||0)} · Xa xỉ của nó tính đủ${cur?` · Mất: ${petT(cur).n} về tẩm cung, ${PET_SN[petT(cur).st]} -${1+(petT(cur).sacX||0)}`:""}`,""))}

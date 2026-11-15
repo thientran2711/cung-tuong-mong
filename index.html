@@ -23137,10 +23137,10 @@ function tsbMockOpts(v){const hi=rkOf(v)>rkOf(S);const o=tsbMockO(v);
    go:()=>{oanAdd(v,S,6);v.tsbEasy=0;if(roll(o)){apply({danh:hi?3:2});tsbLoyal(2);log(`<span class="g">Ngươi đáp lại ${v.name} một câu sắc sảo; cung nhân đều phục.</span>`)}else{apply(hi?{danh:-1,duc:-1}:{danh:-1});log(`Ngươi đáp lại ${v.name} nhưng vụng lời, lại thành trò cười.`)}}}]}
 (function(){if(typeof approachOne!=="function")return;const a0=approachOne;approachOne=function(){let m=a0.apply(this,arguments);try{if(!m||!m.opts||!m.who||!m.who.w||m.who.w[0]!=="r")return m;let v=RV(m.who.w[1]);if(!v)return m;const h=String(m.h||"");
   if(/mỉa mai/.test(h)){const easy=liveRivals(true).filter(x=>tsbEasy(x)&&bandOf(danger(x,S))>=1&&!x.confined);if(easy.length&&!tsbEasy(v)&&roll(60)){v=pick(easy);m.who=pv(v);m.h=`<p>${v.name} lại đến tận cửa cung, buông lời mỉa mai ngươi trước mặt cung nhân.</p>`}m.opts=tsbMockOpts(v);m.optLayout="rows";return m}
-  if(/kết làm chị em/.test(h)){const foes=liveRivals(true).filter(x=>x!==v&&(oan(x,v)>=20||aff(x,v)<=-20));m.opts=[{n:"Nhận lời",fx:{},x:`Chắc chắn · thành: nàng thân +20 · có người đứng về phía ngươi${foes.length?` · kèm: ${foes.length} người vốn thù nàng oán ngươi +5 (ngươi đứng về phe nàng)`:""}`,go:()=>{relAdd(S,v,20);foes.forEach(x=>oanAdd(x,S,5))}},
-    {n:"Khéo từ chối",fx:{},x:`Chắc chắn · thành: không dính vào thù oán của nàng · Mất: nàng thân -5`,go:()=>relAdd(S,v,-5)}];m.optLayout="rows";return m}
-  if(/xin lỗi chuyện cũ/.test(h)){m.opts=[{n:"Nhận lời xin lỗi",fx:{},x:`Chắc chắn · thành: nàng bớt oán 15 · nàng thân +5 · kèm: người khác thấy ngươi dễ bỏ qua`,go:()=>{oanAdd(v,S,-15);relAdd(S,v,5)}},
-    {n:"Lạnh lùng",fx:{},x:`Chắc chắn · thành: Danh +1 (giữ uy, không để ai coi nhẹ) · Mất: nàng thân -3 · nàng vẫn oán như cũ`,go:()=>{apply({danh:1});relAdd(S,v,-3)}}];m.optLayout="rows";return m}
+  if(/kết làm chị em/.test(h)){const foes=liveRivals(true).filter(x=>x!==v&&(oan(x,v)>=20||aff(x,v)<=-20));m.opts=[{n:"Nhận lời",fx:{},x:`Chắc chắn · thành: thiện cảm +20 · có người đứng về phía ngươi${foes.length?` · kèm: ${foes.length} người vốn thù nàng oán ngươi +5 (ngươi đứng về phe nàng)`:""}`,go:()=>{relAdd(S,v,20);foes.forEach(x=>oanAdd(x,S,5))}},
+    {n:"Khéo từ chối",fx:{},x:`Chắc chắn · thành: không dính vào thù oán của nàng · Mất: thiện cảm -5`,go:()=>relAdd(S,v,-5)}];m.optLayout="rows";return m}
+  if(/xin lỗi chuyện cũ/.test(h)){m.opts=[{n:"Nhận lời xin lỗi",fx:{},x:`Chắc chắn · thành: nàng bớt oán 15 · thiện cảm +5 · kèm: người khác thấy ngươi dễ bỏ qua`,go:()=>{oanAdd(v,S,-15);relAdd(S,v,5)}},
+    {n:"Lạnh lùng",fx:{},x:`Chắc chắn · thành: Danh +1 (giữ uy, không để ai coi nhẹ) · Mất: thiện cảm -3 · nàng vẫn oán như cũ`,go:()=>{apply({danh:1});relAdd(S,v,-3)}}];m.optLayout="rows";return m}
   }catch(e){console.error("tsb approach",e)}return m}})();
 (function(){if(typeof approachOne!=="function")return;const a0=approachOne;approachOne=function(){const m=a0.apply(this,arguments);try{if(m&&m.opts&&m.t==="Thái hậu triệu"){m.opts=[{n:"Đến ngay",fx:{},x:`Chắc chắn · tốn: 2 khắc · Sức -5 · thành: Thái hậu với ngươi +3`,go:()=>{apply({th:3,suc:-5});spend(Math.min(2,4-used))}},{n:"Cáo bệnh",fx:{},x:`Chắc chắn · thành: giữ trọn khắc và Sức buổi này · Mất: Thái hậu với ngươi -3`,go:()=>apply({th:-3})}];m.optLayout="rows"}
   else if(m&&m.opts&&/xin theo ngươi/.test(String(m.h||""))){const H=String(m.h);const vic=liveRivals(true).find(v=>(v.staff||[]).some(s=>s.name&&H.includes(s.name)&&H.includes(v.name)));const s=vic&&(vic.staff||[]).find(x=>x.name&&H.includes(x.name));if(s&&vic){
@@ -23377,9 +23377,11 @@ function petHTML(){if(!S||!tsbOn()||(typeof isSrv==="function"&&isSrv()))return"
  /* empty slot = the kit's own empty square; the pet tile keeps its grade frame. Grade frames/colours/seal = the item kit (owner 10:10Z) */
  
  return h}
-function petRows(P,i){const T=petT(P);const D=[`${PET_SN[T.st]} +${1+(T.sacX||0)} khi theo hầu`,T.use];const M=[T.bad];if(T.up)M.push(`Bạc -${T.up} mỗi tháng`);M.push("bỏ bê tới kiệt thì mất");
+/* one kit table (KIT §51): petRowsL = the rows, wrappers (jpetcare) add rows to the SAME table, never a 2nd kitRows */
+function petRows(P,i){return kitRows(petRowsL(P,i))}
+function petRowsL(P,i){const T=petT(P);const D=[`${PET_SN[T.st]} +${1+(T.sacX||0)} khi theo hầu`,T.use];const M=[T.bad];if(T.up)M.push(`Bạc -${T.up} mỗi tháng`);M.push("bỏ bê tới kiệt thì mất");
  const G=[`Xa xỉ ${petLux(P.t)} (theo hầu tính đủ, ở tẩm cung tính nửa)`,P.from?P.from:""].filter(Boolean);/* no "khí lực": the care numbers are the Chăm row (jpetcare) */if(T.rescue)G.push("chỉ đỡ được một lần");
- return kitRows([["Phẩm",`<span class="ef n" style="color:${KIT_GRADE[T.tr].c};font-weight:700">${PET_TIER[T.tr]}</span>`],["Được",D,"g"],["Mất",M,"r"],["Ghi chú",G.filter(Boolean),"n"]])}
+ return [["Phẩm",`<span class="ef n" style="color:${KIT_GRADE[T.tr].c};font-weight:700">${PET_TIER[T.tr]}</span>`],["Được",D,"g"],["Mất",M,"r"],["Ghi chú",G.filter(Boolean),"n"]]}
 function petPick(x){if(x.item){const i=x.i,P=tsbPets(S)[i];if(!P)return;const T=petT(P),t1=whyTime(1),B=[];
   B.push(pbtn(`data-pet="care" data-i="${i}"`,`Chăm ${T.n.replace(/^./,c=>c.toLowerCase())}`,`thành: mở màn chăm: cho ăn, tắm chải, chơi (mỗi việc 1 khắc) · No, Sạch, Vui, Tình cảm tăng`,""));
   if(S.petOn!==i){const cur=tsbPetOn(S);B.push(pbtn(`data-pet="follow" data-i="${i}"`,`Cho ${T.n.replace(/^./,c=>c.toLowerCase())} theo hầu`,`thành: ${PET_SN[T.st]} +${1+(T.sacX||0)} · Xa xỉ của nó tính đủ${cur?` · Mất: ${petT(cur).n} về tẩm cung, ${PET_SN[petT(cur).st]} -${1+(petT(cur).sacX||0)}`:""}`,""))}
@@ -23552,14 +23554,14 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
  if(!can(BAL.pet.khac))return;spend(BAL.pet.khac);if(k==="feed")petcFeed();else if(k==="bath")petcBath();else if(k==="play")petcPlay()},true);
 /* "Chăm" on the pet card opens the screen; the card shows stage + effects + next */
 (function(){const d0=petDo;petDo=function(k,b){if(k==="care"){const i=+b.dataset.i;try{closeModal()}catch(e){}petcOpen(i);return}return d0.apply(this,arguments)};window.petDo=petDo})();
-(function(){const r0=petRows;petRows=function(P,i){let h=r0.apply(this,arguments);try{petcInit(P);const s=petStage(P);h=kitRows([["Lớn",`<b>${BAL.pet.stages[s]}</b>`],["Đang có",petcEffects(P).length?petcEffects(P):["làm cung thêm vui"],"g"],["Lớn tiếp",[petcNextTxt(P)],"n"],["Chăm",[`No ${Math.round(P.full)} · Sạch ${Math.round(P.clean)} · Vui ${Math.round(P.joy)} · Tình cảm ${Math.round(P.aff)}`],"n"]])+h}catch(e){}return h}})();
+(function(){const r0=petRowsL;petRowsL=function(P,i){const L=r0.apply(this,arguments);try{petcInit(P);const s=petStage(P);return [["Lớn",`<b>${BAL.pet.stages[s]}</b>`],["Đang có",petcEffects(P).length?petcEffects(P):["làm cung thêm vui"],"g"],["Lớn tiếp",[petcNextTxt(P)],"n"],["Chăm",[`No ${Math.round(P.full)} · Sạch ${Math.round(P.clean)} · Vui ${Math.round(P.joy)} · Tình cảm ${Math.round(P.aff)}`],"n"]].concat(L)}catch(e){}return L}})();
 /* ---------- other palaces: help / steal (harm = jpet thaopet) ---------- */
 function petcBestOf(t){return petTarget(t)}
 function petStealO(a,t){const j=petTarget(t);const P=tsbPets(t)[j];if(!P)return 5;const s=petStage(P),T=petT(P);return cl(Math.round(odA(a,BAL.pet.stealO[s]+(a.tamco||0)/6-T.tr*3)-(typeof tsbGuard==="function"?tsbGuard(t):0)),3,90)}
 function petStealWhy(a,t){const j=petTarget(t);const P=tsbPets(t)[j];if(!P)return"";return `${BAL.pet.stages[petStage(P)]} (càng lớn càng khó), ${PET_TIER[petT(P).tr]}, Tâm cơ ngươi, chó canh cung`}
 A("petcare","Giúp chăm thú nuôi của nàng",{c:{},ok:(a,t)=>tsbPets(t).length>0&&(a===S?true:rel(a,t)>=10),o:()=>null,x:`thiện cảm của nàng +${BAL.pet.helpRel} · thú của nàng khỏe hơn`,f:(a,t)=>{const j=petTarget(t);const P=tsbPets(t)[j];if(!P)return"";petcInit(P);
  P.full=cl(P.full+BAL.pet.helpGain,0,100);P.clean=cl(P.clean+BAL.pet.helpGain,0,100);P.joy=cl(P.joy+BAL.pet.helpGain,0,100);petcSync(P);relAdd(t,a,BAL.pet.helpRel);
- return `${NMc(a)} sang giúp ${NM(t)} chăm ${petT(P).n.toLowerCase()}; ${NM(t)} quý ${a===S?"ngươi":NM(a)} hơn (+${BAL.pet.helpRel}). `}});
+ return `${NMc(a)} sang giúp ${NM(t)} chăm ${petT(P).n.toLowerCase()}; thiện cảm của ${NM(t)} +${BAL.pet.helpRel}. `}});
 A("petsteal","Trộm thú nuôi của nàng",{c:{},ok:(a,t)=>tsbPets(t).length>0&&petHasFree(a),o:(a,t)=>petStealO(a,t),x:`có được con thú (giữ nguyên độ lớn, chưa quen chủ mới) · mất: có thể bị cắn, cào (Sức -${BAL.pet.stealSuc}), làm náo động, bị bắt quả tang (Danh -${BAL.pet.stealCaughtDanh}, nàng thù, nắm chứng cứ)`,f:(a,t)=>{
  const j=petTarget(t);const P=tsbPets(t)[j];if(!P)return"";const T=petT(P),s=petStage(P);a.schemes=(a.schemes||0)+1;let r="";
  if(roll(BAL.pet.stealBite[s])){ap(a,{suc:-BAL.pet.stealSuc});r+=`${T.n} cắn, cào ${a===S?"ngươi":NM(a)} (Sức -${BAL.pet.stealSuc}). `}
@@ -23569,7 +23571,7 @@ A("petsteal","Trộm thú nuôi của nàng",{c:{},ok:(a,t)=>tsbPets(t).length>0
  if(t===S&&tsbOn()&&!tsbBot())Q.push({t:"Thú nuôi bị trộm",who:typeof pMe==="function"?pMe():null,h:`<p class="r">Sáng ra không thấy ${T.n.toLowerCase()} đâu; cửa lồng mở, có dấu người lạ.</p>`});
  return r+`${a===S?"Ngươi":NMc(a)} lén mang ${T.n.toLowerCase()} của ${NM(t)} về cung. `}});
 try{const add=(g,k)=>{const x=RVGRP.find(r=>r[0]===g);if(x&&!x[1].includes(k))x[1].push(k)};add("Giao thiệp","petcare");add("Hại nặng","petsteal");
- AOUT.petcare=[`nàng quý ngươi hơn (+${BAL.pet.helpRel})`,""];AOUT.petsteal=["có con thú của nàng (chưa quen ngươi)","bị bắt quả tang: Danh -6, nàng thù, nắm chứng cứ · bị cắn: Sức -8"];
+ AOUT.petcare=[`thiện cảm +${BAL.pet.helpRel}`,""];AOUT.petsteal=["có con thú của nàng (chưa quen ngươi)","bị bắt quả tang: Danh -6, nàng thù, nắm chứng cứ · bị cắn: Sức -8"];
  ACTDOM.petcare="Giao tình";ACTDOM.petsteal="Mưu kế";J78VERB.petcare="giúp {t} chăm thú nuôi";J78VERB.petsteal="trộm thú nuôi của {t}";if(BANDS[2]&&!BANDS[2][2].includes("petsteal"))BANDS[2][2].push("petsteal");
  LACK.petsteal=t=>!tsbPets(t).length?"nàng không nuôi thú":!petHasFree(S)?"hết ô thú nuôi":"";LACK.petcare=t=>!tsbPets(t).length?"nàng không nuôi thú":""}catch(e){console.error("petcare acts",e)}
 /* NPC minds: friendly ones help (with her too), greedy / hostile ones steal (higher stages less tempting: harder) */
@@ -26674,7 +26676,7 @@ if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§28.13e",title:"Pick 
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="fa0cdac08f56";window.CTM_BUILD=BUILD;
+const BUILD="f32418965511";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

@@ -123,14 +123,14 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
  if(!can(BAL.pet.khac))return;spend(BAL.pet.khac);if(k==="feed")petcFeed();else if(k==="bath")petcBath();else if(k==="play")petcPlay()},true);
 /* "Chăm" on the pet card opens the screen; the card shows stage + effects + next */
 (function(){const d0=petDo;petDo=function(k,b){if(k==="care"){const i=+b.dataset.i;try{closeModal()}catch(e){}petcOpen(i);return}return d0.apply(this,arguments)};window.petDo=petDo})();
-(function(){const r0=petRows;petRows=function(P,i){let h=r0.apply(this,arguments);try{petcInit(P);const s=petStage(P);h=kitRows([["Lớn",`<b>${BAL.pet.stages[s]}</b>`],["Đang có",petcEffects(P).length?petcEffects(P):["làm cung thêm vui"],"g"],["Lớn tiếp",[petcNextTxt(P)],"n"],["Chăm",[`No ${Math.round(P.full)} · Sạch ${Math.round(P.clean)} · Vui ${Math.round(P.joy)} · Tình cảm ${Math.round(P.aff)}`],"n"]])+h}catch(e){}return h}})();
+(function(){const r0=petRowsL;petRowsL=function(P,i){const L=r0.apply(this,arguments);try{petcInit(P);const s=petStage(P);return [["Lớn",`<b>${BAL.pet.stages[s]}</b>`],["Đang có",petcEffects(P).length?petcEffects(P):["làm cung thêm vui"],"g"],["Lớn tiếp",[petcNextTxt(P)],"n"],["Chăm",[`No ${Math.round(P.full)} · Sạch ${Math.round(P.clean)} · Vui ${Math.round(P.joy)} · Tình cảm ${Math.round(P.aff)}`],"n"]].concat(L)}catch(e){}return L}})();
 /* ---------- other palaces: help / steal (harm = jpet thaopet) ---------- */
 function petcBestOf(t){return petTarget(t)}
 function petStealO(a,t){const j=petTarget(t);const P=tsbPets(t)[j];if(!P)return 5;const s=petStage(P),T=petT(P);return cl(Math.round(odA(a,BAL.pet.stealO[s]+(a.tamco||0)/6-T.tr*3)-(typeof tsbGuard==="function"?tsbGuard(t):0)),3,90)}
 function petStealWhy(a,t){const j=petTarget(t);const P=tsbPets(t)[j];if(!P)return"";return `${BAL.pet.stages[petStage(P)]} (càng lớn càng khó), ${PET_TIER[petT(P).tr]}, Tâm cơ ngươi, chó canh cung`}
 A("petcare","Giúp chăm thú nuôi của nàng",{c:{},ok:(a,t)=>tsbPets(t).length>0&&(a===S?true:rel(a,t)>=10),o:()=>null,x:`thiện cảm của nàng +${BAL.pet.helpRel} · thú của nàng khỏe hơn`,f:(a,t)=>{const j=petTarget(t);const P=tsbPets(t)[j];if(!P)return"";petcInit(P);
  P.full=cl(P.full+BAL.pet.helpGain,0,100);P.clean=cl(P.clean+BAL.pet.helpGain,0,100);P.joy=cl(P.joy+BAL.pet.helpGain,0,100);petcSync(P);relAdd(t,a,BAL.pet.helpRel);
- return `${NMc(a)} sang giúp ${NM(t)} chăm ${petT(P).n.toLowerCase()}; ${NM(t)} quý ${a===S?"ngươi":NM(a)} hơn (+${BAL.pet.helpRel}). `}});
+ return `${NMc(a)} sang giúp ${NM(t)} chăm ${petT(P).n.toLowerCase()}; thiện cảm của ${NM(t)} +${BAL.pet.helpRel}. `}});
 A("petsteal","Trộm thú nuôi của nàng",{c:{},ok:(a,t)=>tsbPets(t).length>0&&petHasFree(a),o:(a,t)=>petStealO(a,t),x:`có được con thú (giữ nguyên độ lớn, chưa quen chủ mới) · mất: có thể bị cắn, cào (Sức -${BAL.pet.stealSuc}), làm náo động, bị bắt quả tang (Danh -${BAL.pet.stealCaughtDanh}, nàng thù, nắm chứng cứ)`,f:(a,t)=>{
  const j=petTarget(t);const P=tsbPets(t)[j];if(!P)return"";const T=petT(P),s=petStage(P);a.schemes=(a.schemes||0)+1;let r="";
  if(roll(BAL.pet.stealBite[s])){ap(a,{suc:-BAL.pet.stealSuc});r+=`${T.n} cắn, cào ${a===S?"ngươi":NM(a)} (Sức -${BAL.pet.stealSuc}). `}
@@ -140,7 +140,7 @@ A("petsteal","Trộm thú nuôi của nàng",{c:{},ok:(a,t)=>tsbPets(t).length>0
  if(t===S&&tsbOn()&&!tsbBot())Q.push({t:"Thú nuôi bị trộm",who:typeof pMe==="function"?pMe():null,h:`<p class="r">Sáng ra không thấy ${T.n.toLowerCase()} đâu; cửa lồng mở, có dấu người lạ.</p>`});
  return r+`${a===S?"Ngươi":NMc(a)} lén mang ${T.n.toLowerCase()} của ${NM(t)} về cung. `}});
 try{const add=(g,k)=>{const x=RVGRP.find(r=>r[0]===g);if(x&&!x[1].includes(k))x[1].push(k)};add("Giao thiệp","petcare");add("Hại nặng","petsteal");
- AOUT.petcare=[`nàng quý ngươi hơn (+${BAL.pet.helpRel})`,""];AOUT.petsteal=["có con thú của nàng (chưa quen ngươi)","bị bắt quả tang: Danh -6, nàng thù, nắm chứng cứ · bị cắn: Sức -8"];
+ AOUT.petcare=[`thiện cảm +${BAL.pet.helpRel}`,""];AOUT.petsteal=["có con thú của nàng (chưa quen ngươi)","bị bắt quả tang: Danh -6, nàng thù, nắm chứng cứ · bị cắn: Sức -8"];
  ACTDOM.petcare="Giao tình";ACTDOM.petsteal="Mưu kế";J78VERB.petcare="giúp {t} chăm thú nuôi";J78VERB.petsteal="trộm thú nuôi của {t}";if(BANDS[2]&&!BANDS[2][2].includes("petsteal"))BANDS[2][2].push("petsteal");
  LACK.petsteal=t=>!tsbPets(t).length?"nàng không nuôi thú":!petHasFree(S)?"hết ô thú nuôi":"";LACK.petcare=t=>!tsbPets(t).length?"nàng không nuôi thú":""}catch(e){console.error("petcare acts",e)}
 /* NPC minds: friendly ones help (with her too), greedy / hostile ones steal (higher stages less tempting: harder) */
