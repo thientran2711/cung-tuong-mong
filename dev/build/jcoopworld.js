@@ -118,7 +118,7 @@ function attach(C){T("attach");if(!C||!C.W)return;const mp=me();
  const keep={};for(const k in S)if(!W_KEYS.includes(k))keep[k]=S[k];
  const known=S.emp&&S.emp.known;
  /* the new life knows nobody yet: drop every link into the throwaway world */
- keep.rl={};keep.ro={};keep.tonight=null;keep.heir=null;keep.evd={};keep.chat={};keep.cev={};keep.resHead=null;keep.where=null;keep.dead=false;
+ keep.rl={};keep.ro={};keep.tonight=null;keep.toMorning=0;keep.heir=null;keep.evd={};keep.chat={};keep.cev={};keep.resHead=null;keep.where=null;keep.dead=false;
  S=keep;const sS=J(ser().S);
  const P={pid:mp,ok:S.origin&&S.origin.k,name:S.name,rank:S.rank,dead:false,srv:!!(S.srv&&!S.srv.risen),life:(CW.life||0)+1,S:{}};
  for(const k in sS)if(!W_KEYS.includes(k))P.S[k]=sS[k];P.S.empKnown={};

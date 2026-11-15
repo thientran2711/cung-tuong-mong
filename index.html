@@ -22071,7 +22071,7 @@ function attach(C){T("attach");if(!C||!C.W)return;const mp=me();
  const keep={};for(const k in S)if(!W_KEYS.includes(k))keep[k]=S[k];
  const known=S.emp&&S.emp.known;
  /* the new life knows nobody yet: drop every link into the throwaway world */
- keep.rl={};keep.ro={};keep.tonight=null;keep.heir=null;keep.evd={};keep.chat={};keep.cev={};keep.resHead=null;keep.where=null;keep.dead=false;
+ keep.rl={};keep.ro={};keep.tonight=null;keep.toMorning=0;keep.heir=null;keep.evd={};keep.chat={};keep.cev={};keep.resHead=null;keep.where=null;keep.dead=false;
  S=keep;const sS=J(ser().S);
  const P={pid:mp,ok:S.origin&&S.origin.k,name:S.name,rank:S.rank,dead:false,srv:!!(S.srv&&!S.srv.risen),life:(CW.life||0)+1,S:{}};
  for(const k in sS)if(!W_KEYS.includes(k))P.S[k]=sS[k];P.S.empKnown={};
@@ -25954,7 +25954,22 @@ window.intAll=intAll;
  /* still the same day? (older saves: flag 1 / {t,b} = "this day") */
  const live=()=>{const m=S&&S.toMorning;if(!m)return false;if(m===1||m===true||typeof m.d!=="number"){S.toMorning=tb();return true}
   if(m.d!==day()){S.toMorning=0;return false}return true};
- const f0=nightFx;nightFx=function(){const r=f0.apply(this,arguments);try{if(S&&!S.dead)S.toMorning=tb()}catch(e){}return r};
+ /* review r7 (co-op nights desync): the night's day is stamped when the night is WON, not when its last dialog is answered.
+    Every road into a night (Tranh sủng / Chặn ngự giá → stealWin, Kính sự phòng's summons from flip, the Emperor's own visit
+    "Thắp đèn hầu rượu", j75's lost-tablet summons, the test's forced nights) runs through a night dialog: the summons "ksp" and/or
+    the bath "prep" (nightScene), then "night1" → "night2" → nightFx. Each dialog made by mkP gets pp.nd = the day it was raised
+    (pp is kept by serQ / deserQ, so the stamp survives a save, a load and the co-op week merge that rebuilds S with keepQ).
+    A night dialog raised while answering another dialog takes THAT dialog's day (prep ← ksp / the Emperor's visit, night1 ← prep,
+    night2 ← night1), so the whole chain carries the day the night was won. nightFx reads the stamp of the dialog being answered:
+    a night whose day has already passed (its dialogs stayed open across a co-op week merge or a reload into a later day) still
+    gives its Sủng / Ân tình, but it NEVER ends a buổi: only a night of the current day sets S.toMorning. */
+ const NIGHTP={ksp:1,prep:1,night1:1,night2:1};let cur=null;
+ const ndOf=m=>m&&m.pp&&typeof m.pp.nd==="number"?m.pp.nd:null;
+ if(typeof mkP==="function"){const m0=mkP;mkP=function(id,pp){pp=pp||{};try{if(typeof pp.nd!=="number"){const c=NIGHTP[id]?ndOf(cur):null;pp.nd=c!=null?c:day()}}catch(e){}return m0.call(this,id,pp)}}
+ if(typeof chooseM==="function"){const c0=chooseM;chooseM=function(){const was=cur;try{cur=Q[0]||null}catch(e){cur=null}try{return c0.apply(this,arguments)}finally{cur=was}}}
+ window.__nightStale=0;
+ const f0=nightFx;nightFx=function(){const r=f0.apply(this,arguments);try{if(S&&!S.dead){const d=cur&&NIGHTP[cur.pid]?ndOf(cur):null;
+   if(d==null||d===day())S.toMorning=tb();else{S.toMorning=0;window.__nightStale++;try{if(window.COOPW&&COOPW.tr)COOPW.tr.push("staleNight "+d+" now "+day())}catch(e){}}}}catch(e){}return r};
  let busy=false,asked="";
  const ready=()=>S&&S.toMorning&&!S.dead&&!Q.length&&!S.mg&&live();
  /* a try that cannot run now (a dialog open, the game's own auto-step lock) is tried again a moment later, not only on the next render */
@@ -26319,7 +26334,7 @@ if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§28.13e",title:"Pick 
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="9e7ad535008c";window.CTM_BUILD=BUILD;
+const BUILD="4a71253dea9a";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
