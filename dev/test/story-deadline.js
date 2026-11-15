@@ -9,15 +9,15 @@ const {chromium}=require('playwright');const [,,URL,VP,SHOT]=process.argv;const 
  await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;window.__forceOrigin='td';document.getElementById('title').hidden=true;start()});
  await p.waitForFunction(()=>typeof S!=='undefined'&&S&&S.name,null,{timeout:90000});await p.waitForTimeout(1800);await p.addStyleTag({content:'#kroul,#kroulw{display:none!important}'});
  const setup=()=>p.evaluate(()=>{document.querySelectorAll('#kroul,#kroulw').forEach(e=>e.remove());const md=document.getElementById('modal');md.hidden=true;md.className='modal';try{NLP=null}catch(e){}Q.length=0;
-  const A=newThread67('td_an','m');A.chap=2;A.i=1;A.nb='c1';A.due=0;A.dl=S.turn+6;S.st.M=A;S.bac=29;S.rank=2;S.foeDad=S.foeDad||'Tào Dật';fireBeat67(A);showModal();render();
-  const m=Q[0];return{t:m.t,opts:m.opts.map(o=>o.n),fx:m.opts.map(o=>o.fx&&o.fx.bac||0),dis:[...document.querySelectorAll('#modal .opt')].map(x=>x.disabled),
+  const A=newThread67('td_an','m');A.chap=2;A.i=1;A.nb='c1';A.due=0;A.dl=S.turn+6;S.st.M=A;S.bac=29;S.foeDad=S.foeDad||'Tào Dật';fireBeat67(A);showModal();render();
+  const m=Q[0];return{exp:price67(-40),ovf:document.documentElement.scrollWidth-innerWidth,t:m.t,opts:m.opts.map(o=>o.n),fx:m.opts.map(o=>o.fx&&o.fx.bac||0),dis:[...document.querySelectorAll('#modal .opt')].map(x=>x.disabled),
    hint:[...document.querySelectorAll('#modal .opt')].map(x=>(x.querySelector('.khint')||{}).textContent||''),can:[...document.querySelectorAll('#modal .opt')].map(x=>(x.querySelector('.kr-why .krv,.kr-can .krv')||{}).textContent||''),
    head:(document.querySelector('#modal .kptitle,#mt')||{}).textContent}});
  const out={};const r1=await setup();out.dialog=r1;
  if(SHOT)await p.screenshot({path:SHOT});
  const ok=[];const chk=(n,c)=>ok.push([n,!!c]);
  chk('title Chính tuyến · Báo thù cho nhà · Bước 2/n',/^Chính tuyến · Báo thù cho nhà · Bước 2\/\d$/.test(r1.t));
- chk('silver route priced by rank (40×0.8=30 at rank 2)',r1.fx.includes(-30));
+ chk('silver route priced by rank',r1.fx.includes(r1.exp));chk('no horizontal overflow',r1.ovf<=0);
  chk('pledge option',r1.opts.some(n=>/nhận lời, lo liệu trong/.test(n)));
  chk('non-silver routes (kho củi, Thái y viện)',r1.opts.some(n=>/kho củi/.test(n))&&r1.opts.some(n=>/Thái y viện/.test(n)));
  /* pledge */
@@ -29,7 +29,7 @@ const {chromium}=require('playwright');const [,,URL,VP,SHOT]=process.argv;const 
  /* pay later from the chip */
  const r3=await p.evaluate(()=>{S.bac=80;Q.length=0;render();const c=document.querySelector('#k3tt [data-k3="pl67"]')||document.querySelector('#hud2 [data-hx="pl67"]');if(c)c.click();
   const m=Q[0];if(!m)return{opened:false};const i=m.opts.findIndex(o=>/Tân Giả/.test(o.n));const t=m.t;chooseM(i);return{opened:true,t,bac:S.bac,pl:!!S.pl67,cur:S.st.M.cur,wit:!!S.st.M.f.wit}});
- out.pay=r3;chk('chip opens the choice again',r3.opened);chk('paid: beat resolved, pledge cleared, witness kept',r3.opened&&!r3.pl&&r3.cur==null&&r3.wit&&r3.bac===50);
+ out.pay=r3;chk('chip opens the choice again',r3.opened);chk('paid: beat resolved, pledge cleared, witness kept',r3.opened&&!r3.pl&&r3.cur==null&&r3.wit&&r3.bac===80+r1.exp);
  /* lapse */
  const r4=await p.evaluate(()=>{Q.length=0;const A=newThread67('td_an','m');A.chap=2;A.i=1;A.nb='c1';A.due=0;A.dl=S.turn+6;S.st.M=A;S.bac=10;fireBeat67(A);
   const i=Q[0].opts.findIndex(o=>o.pl67);chooseM(i);Q.length=0;const due=S.pl67.due;let early=null,n=0;

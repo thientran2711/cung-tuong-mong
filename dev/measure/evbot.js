@@ -52,16 +52,18 @@ async function run(b,mode,seed){const ctx=await b.newContext({viewport:{width:39
  await p.evaluate(([m])=>{window.__evmode=m;/* lives end: remember the counters of that life */const o0=over;over=function(){const r=o0.apply(this,arguments);return r};},[mode]);
  /* tag each finished life with the counters (__res grows inside over) */
  await p.evaluate(()=>{const push0=window.__res.push.bind(window.__res);window.__res.push=function(x){try{x.pun=window.__pun;x.hintN=window.__hintSeen||0;window.__hintSeen=0}catch(e){}return push0(x)}});
- const t0=Date.now();for(let i=0;i<STEPS;i++){await p.evaluate(([m])=>window.__bot.step(m,300),['sens']);if(i%5===4)console.error(mode,seed,'step',i+1,Math.round((Date.now()-t0)/1000)+'s')}
- const res=await p.evaluate(()=>window.__res.map(r=>({o:r.origin,rank:r.rank,max:r.maxRank,yrs:r.years,title:String(r.title||'').slice(0,40),fate:String(r.fate||'').slice(0,70),pun:r.pun||0,hint:r.hintN||0,err:r.err,acts:r.acts?{ev:r.acts['ev_'+window.__evmode]||0,dil:r.acts.dilemma||0}:null})));
- const live=await p.evaluate(()=>({turn:S&&S.turn,rank:S&&S.rank,ev:(window.__acts||{})['ev_'+window.__evmode]||0,acts:window.__acts}));
- await ctx.close();return{mode,seed,res,live,errs:errs.slice(0,5)}}
+ const grab=()=>p.evaluate(()=>window.__res.map(r=>({o:r.origin,rank:r.rank,max:r.maxRank,yrs:r.years,title:String(r.title||'').slice(0,40),fate:String(r.fate||'').slice(0,70),pun:r.pun||0,hint:r.hintN||0,err:r.err,acts:r.acts?{ev:r.acts['ev_'+window.__evmode]||0,dil:r.acts.dilemma||0}:null})));
+ let res=[],live=null,crash='';const t0=Date.now();
+ try{for(let i=0;i<STEPS;i++){await p.evaluate(([m])=>window.__bot.step(m,300),['sens']);if(i%5===4){res=await grab();console.error(mode,seed,'step',i+1,Math.round((Date.now()-t0)/1000)+'s','lives',res.length)}}
+  res=await grab();
+  live=await p.evaluate(()=>({turn:S&&S.turn,rank:S&&S.rank,ev:(window.__acts||{})['ev_'+window.__evmode]||0}))}catch(e){crash=String(e.message).slice(0,120);console.error(mode,seed,'CRASH',crash)}
+ try{await ctx.close()}catch(e){}return{mode,seed,res,live,crash,errs:errs.slice(0,5)}}
 const DEATH=/chết|băng|tự vẫn|qua đời|tạ thế|bị giết|ban rượu|treo cổ|xử tử|độc|lìa đời|mất (?:sớm|khi)|đánh chết/i;
 function sum(L){const lives=L.filter(r=>!r.err&&r.title!=='TIMEOUT'&&r.title!=='CRASH');const n=lives.length||1;
  const f=k=>lives.filter(k).length;return{lives:lives.length,avgMax:+(lives.reduce((a,r)=>a+r.max,0)/n).toFixed(2),hh:+(100*f(r=>r.max>=7)/n).toFixed(1),
   phi:+(100*f(r=>r.max>=5)/n).toFixed(1),death:+(100*f(r=>DEATH.test(r.fate+' '+r.title))/n).toFixed(1),early:+(100*f(r=>r.yrs<3)/n).toFixed(1),
   demoted:+(100*f(r=>r.rank<r.max)/n).toFixed(1),pun:+(lives.reduce((a,r)=>a+r.pun,0)/n).toFixed(2),yrs:+(lives.reduce((a,r)=>a+r.yrs,0)/n).toFixed(2),
   evPicks:lives.reduce((a,r)=>a+(r.acts?r.acts.ev:0),0),crash:L.filter(r=>r.title==='CRASH').length}}
-(async()=>{const b=await chromium.launch();const seeds=[...Array(+NS||2).keys()].map(i=>seed0+i);const jobs=[];for(const m of modes)for(const s of seeds)jobs.push(run(b,m,s));
- const out=await Promise.all(jobs);await b.close();const S={};for(const m of modes)S[m]=sum(out.filter(x=>x.mode===m).flatMap(x=>x.res));
- console.log(JSON.stringify({steps:STEPS,summary:S,errs:out.flatMap(x=>x.errs).slice(0,6),live:out.map(x=>[x.mode,x.seed,x.live]),fates:Object.fromEntries(modes.map(m=>[m,out.filter(x=>x.mode===m).flatMap(x=>x.res).map(r=>r.fate||r.title).slice(0,12)]))},null,1))})().catch(e=>{console.error(e);process.exit(1)});
+(async()=>{const b=await chromium.launch();const seeds=[...Array(+NS||2).keys()].map(i=>seed0+i);const todo=[];for(const s of seeds)for(const m of modes)todo.push([m,s]);const out=[];const PAR=+process.env.EVPAR||4;
+ await Promise.all([...Array(PAR)].map(async()=>{while(todo.length){const [m,s]=todo.shift();out.push(await run(b,m,s))}}));await b.close();const S={};for(const m of modes)S[m]=sum(out.filter(x=>x.mode===m).flatMap(x=>x.res));
+ console.log(JSON.stringify({steps:STEPS,summary:S,errs:out.flatMap(x=>x.errs).slice(0,6),live:out.map(x=>[x.mode,x.seed,x.live,x.crash]),lives:out.map(x=>({mode:x.mode,seed:x.seed,res:x.res})),fates:Object.fromEntries(modes.map(m=>[m,out.filter(x=>x.mode===m).flatMap(x=>x.res).map(r=>r.fate||r.title).slice(0,12)]))},null,1))})().catch(e=>{console.error(e);process.exit(1)});
