@@ -36,7 +36,7 @@ function kbkExpand(blocks,skip){const out=[];for(const b of (blocks||[])){if(!b)
 function kitBook(spec){spec=spec||{};const rm=()=>{try{return reducedMotion()}catch(e){return false}};
  const root=document.createElement("div");root.className="kbk";root.setAttribute("role","dialog");root.setAttribute("aria-label",spec.label||"Tuần lục");
  for(const k of Object.keys(KBK_ART))if(KBK_HAVE[k])root.classList.add("art-"+k);
- root.innerHTML=`<div class="kbk-stage"><div class="kbk-book"></div></div><div class="kbk-bar"><button class="kbk-nav kbk-prev" aria-label="Trang trước">‹</button><span class="kbk-no" aria-live="polite"></span><button class="kbk-nav kbk-next" aria-label="Trang sau">›</button><button class="kbtn alt kbk-x">${spec.closeLabel||"Lui"}</button></div><div class="kbk-measure" aria-hidden="true"></div>`;
+ root.innerHTML=`<div class="kbk-stage"><div class="kbk-book"></div></div><div class="kbk-bar"><button class="kbk-nav kbk-prev" aria-label="Trang trước">‹</button><span class="kbk-no" aria-live="polite"></span><button class="kbk-nav kbk-next" aria-label="Trang sau">›</button></div><button type="button" class="kit-x kbk-x" aria-label="${spec.closeLabel||"Đóng"}" title="${spec.closeLabel||"Đóng"}">✕</button><div class="kbk-measure" aria-hidden="true"></div>`;
  (spec.host||document.body).appendChild(root);
  const book=root.querySelector(".kbk-book"),stage=root.querySelector(".kbk-stage"),meas=root.querySelector(".kbk-measure"),noEl=root.querySelector(".kbk-no");
  let mode="single",PW=0,PH=0,leaves=[],sheets=[],cur=0,maxCur=0,busy=false,closed=false,logical=0;
@@ -157,6 +157,9 @@ function kitBook(spec){spec=spec||{};const rm=()=>{try{return reducedMotion()}ca
  book.addEventListener("pointerup",endDrag);book.addEventListener("pointercancel",endDrag);
  root.querySelector(".kbk-next").onclick=e=>{e.stopPropagation();next()};root.querySelector(".kbk-prev").onclick=e=>{e.stopPropagation();prev()};
  root.querySelector(".kbk-x").onclick=e=>{e.stopPropagation();close()};
+ /* KIT 32.10: a tap on the ground around the book closes it (press started there and did not move; a page drag never closes) */
+ {let dn=null;const gr=t=>t===root||t===stage;root.addEventListener("pointerdown",e=>{dn=gr(e.target)?{x:e.clientX,y:e.clientY,t:Date.now()}:null},true);
+  root.addEventListener("click",e=>{const d=dn;dn=null;if(!d||!gr(e.target)||busy)return;if(Math.hypot(e.clientX-d.x,e.clientY-d.y)>10||Date.now()-d.t>900)return;e.stopPropagation();close()})}
  const key=e=>{if(closed||root.offsetParent===null&&!root.getClientRects().length)return;const k=e.key;
   if(k==="ArrowRight"||k==="PageDown"){e.preventDefault();next()}else if(k==="ArrowLeft"||k==="PageUp"){e.preventDefault();prev()}
   else if(k==="Escape"){e.preventDefault();close()}else if((k==="Enter"||k===" ")&&!e.target.closest("button")){e.preventDefault();if(cur>=maxCur)close();else next()}};
@@ -174,17 +177,17 @@ function kitBook(spec){spec=spec||{};const rm=()=>{try{return reducedMotion()}ca
  wkSnap=function(){const s=s0.apply(this,arguments);try{s.duc=S.duc;s.th=S.th;s.hh=S.hh;s.mat=S.mat;s.an=S.an||0;s.pp={};
   (typeof rivals!=="undefined"?rivals:[]).forEach(v=>{if(v&&v.id!=null)s.pp[v.id]=[v.rel||0,v.ghen||0,v.oan||0]})}catch(e){}return s}})();
 
-const KBK_DELTA_ONLY=/^(\s*[A-Za-zÀ-ỹĐđ]+(?: [A-Za-zÀ-ỹĐđ]+){0,5} [+\-−]\d+[,;]?)+\s*\.?$/;
+const KBK_DELTA_ONLY=/^(\s*[A-Za-zÀ-ỹĐđ]+(?: [A-Za-zÀ-ỹĐđ]+){0,5} [+\-−]\d+\s*[,;·]?)+\s*\.?$/;
 const KBK_WORLD=/(thế lực|Kho lúa|kho lúa|^Sớ|triều đình|Triều đình|biên ải|Được mùa|Mất mùa|thiên tai|lũ lụt|hạn hán|dịch bệnh|sứ thần|ngoại bang|giặc|khoa cử|Hộ bộ|Binh bộ|Lễ bộ|Lại bộ|Hình bộ|Công bộ|Hàn lâm|thiên hạ|dân gian|kinh thành)/;
 function wkBookData(){const s=S.wkSnap||wkSnap();const n=Math.max(0,Math.min(S.logs.length,(S.logSeq||0)-(s.seq||0)));
- const raw=S.logs.slice(0,n).slice().reverse();const people=kpPeople();const SKIPRE=/^(Xin xăm|Gieo lại|Đến )/;
+ const raw=S.logs.slice(0,n).slice().reverse();const people=kpPeople();const SKIPRE=/^(Xin xăm|Gieo lại|Đến Tẩm cung của ngươi)/;
  const by=new Map(),me=[],world=[];const TH=S.thO||{kind:"th"};let pay="";const key=p=>p;
  const add=(p,text)=>{if(!by.has(key(p)))by.set(key(p),{who:p,F:[]});by.get(key(p)).F.push(text)};
  for(const h of raw){const pl=plain(h);if(!pl||SKIPRE.test(pl))continue;if(/^Bổng lộc tháng/.test(pl)){pay=pl.replace(/^Bổng lộc tháng [^:]*:\s*/,"").replace(/\.$/,"");continue}
   const html=String(h).replace(/<span class="ld">[^<]*<\/span>/,"").replace(/\s*\(Đã ghi vào mục Đã biết[^)]*\)\.?/g,"");let last=null;
   for(let t of kpSentences(html)){const tp=kpPlain(t);if(!tp||SKIPRE.test(tp)||/^\(?Đã ghi vào mục Đã biết/.test(tp))continue;
    if(/^(Tháng này|Tin triều đình|Triều đình|Thiên hạ)\s*:/.test(tp)){t=t.replace(/^((?:<[^>]+>)*)\s*(Tháng này|Tin triều đình|Triều đình|Thiên hạ)\s*:\s*/,"$1");world.push(t);last="world";continue}
-   if(KBK_DELTA_ONLY.test(tp)&&last){const tgt=last==="world"?world:last===S?me:(by.get(last)||{}).F;if(tgt&&tgt.length){tgt[tgt.length-1]+=" "+t;continue}}
+   if((KBK_DELTA_ONLY.test(tp)||!kbkMeaning(tp))&&last){const tgt=last==="world"?world:last===S?me:(by.get(last)||{}).F;if(tgt&&tgt.length){tgt[tgt.length-1]+=" "+t;continue}}
    const [,w0]=kpPeopleIn(t,people);const w=w0.map(x=>x&&x.kind==="th"&&!rivals.includes(x)?TH:x);let p=w.find(x=>x!==S&&!(S.emp&&x===S.emp))||w[0]||null;
    if(!p&&last&&last!=="world"&&!/^(Được mùa|Mất mùa|Sớ|Kho)/.test(tp))p=last;
    if(!p&&(last==="world"&&/^(Nhà |Kho |.*thế lực)/.test(tp)||KBK_WORLD.test(tp))){world.push(t);last="world";continue}
@@ -225,9 +228,93 @@ const KBK_EVRE=[[/thị tẩm|lật thẻ|ngự giá|ngủ lại/i,"sys:thi-tam"
 function kbkEvId(text,ctx){const t=String(text||"");for(const [re,id] of KBK_EVRE)if(re.test(t))return id;
  if(ctx==="world")return "qs:yen";if(ctx==="emp")return /giận|phiền|trách/i.test(t)?"sys:mood-gian":"sys:mood-vui";if(ctx==="th")return "j24:thai-hau-trieu";
  return "j24:co-nguoi-den"}
-function kbkArt(facts,ctx){if(typeof evArtOf!=="function")return facts;let w=0;try{w=wk()}catch(e){}
- return (facts||[]).map((f,i)=>{if(!f||typeof f!=="object")return f;try{const id=kbkEvId(kpPlain(f.text||""),ctx);const a=evArtOf(id,w+":"+i);
-  if(a){f.art=a;f.artT=(typeof evArtTitle==="function"&&evArtTitle(id))||""}}catch(e){}return f})}
+/* ---- picture of each line (review/act-pics, owner 11/15: "Nhịn." and "Làm thơ dâng lên" had the same brocade chest, "Ngủ đêm hồi sức" and
+   "Đi." the same room): every line gets the picture of ITS meaning, first match wins —
+   1. img/ACTS.json "log": [[regex, key], …] (choice lines, game sentences) · key = act key (img/act-<key>.webp), "ev:<category>" (j89) or "scene:<sc>";
+   2. "Đến <nơi>" → that place's own scene for the season and the buổi of the walk (j94 sceneImg; the log carries the buổi);
+   3. the line starts with an act name → that act's picture (kitActKey, same as the act card);
+   4. the event regexes above (KBK_EVRE) → the event category, every file of it;
+   5. the act's category picture (act-cat-*), then the old page default.
+   Two lines in a row never share a picture when they mean different things: the next candidate is taken. ---- */
+function kbkPlaceArt(t,html){try{if(typeof SCIMG!=="object")return"";const nm=t.replace(/^Đến\s+/,"").replace(/[,.].*$/,"").trim();if(!nm)return"";
+ let sc="";let L=[];try{L=typeof places==="function"?places():[]}catch(e){}L=L.concat([{k:"home",n:"Tẩm cung của ngươi",sc:"home"}]);
+ for(const p of L){let n2="";try{n2=typeof accName==="function"?accName(p.k):""}catch(e){}if(nm===p.n||nm===n2){sc=p.sc;break}}
+ if(!sc&&/cung|điện|các|hiên|viện/i.test(nm))sc="rv";if(!sc)return"";
+ const cur=SCIMG[sc];if(!cur)return"";const base=String(cur).replace(/-(xuan|ha|thu|dong)-(sang|trua|chieu|toi)$/,"");
+ const m=/data-b="(\d)"/.exec(String(html||""));let n=base;
+ if(typeof sceneImg==="function"&&S){const b0=S.buoi;try{if(m)S.buoi=+m[1];n=sceneImg(base)}finally{S.buoi=b0}}
+ return `img/${n}.webp`}catch(e){return""}}
+function kbkEvFiles(id,salt){try{const A=EVART;if(!A)return[];const c=evArtCat(id);const C=c&&A.categories[c];if(!C||!C.files||!C.files.length)return[];
+ const f=evArtOf(id,salt);return [f].concat(C.files.filter(x=>x!==f))}catch(e){return[]}}
+function kbkKeySrc(key,salt,t,html){key=String(key||"");if(!key)return[];
+ if(key.startsWith("ev:")){const c=key.slice(3);const C=EVART&&EVART.categories&&EVART.categories[c];return C&&C.files?C.files.slice():[]}
+ if(key.startsWith("scene:")){const sc=key.slice(6);const cur=typeof SCIMG==="object"&&SCIMG[sc];return cur?[`img/${cur}.webp`]:[]}
+ return [`img/act-${key}.webp`]}
+/* review/act-pics2 (owner 11/15: every meaning its own picture): ACTS.json "log" = every meaning rule of dev/figwork/acts/meanings.py, compiled once;
+   key "-" = a sentence with no meaning of its own (a reaction, a result, a number, a UI word): it joins the line of the sentence before it */
+let KBK_RC=null,KBK_RCsrc=null;
+function kbkRules(){const R=(typeof KIT_ACTS!=="undefined"&&KIT_ACTS.log)||[];if(R!==KBK_RCsrc){KBK_RCsrc=R;KBK_RC=[];for(const [re,key] of R){try{KBK_RC.push([new RegExp(re,"i"),key])}catch(e){}}}return KBK_RC}
+function kbkFirst(html){let s=html;try{const L=kpSentences(String(html||""));if(L.length)s=L[0]}catch(e){}return kpPlain(s).replace(/[\s\u00a0]+/g," ").trim()}
+function kbkMeaning(t){t=String(t||"").replace(/[\s\u00a0]+/g," ").trim();for(const [re,key] of kbkRules())if(re.test(t))return key==="-"?"":key;
+ if(/^Đến /.test(t))return"place";const head=t.split(/[.:·([]/)[0].trim();try{if(head.length>=3&&typeof kitActKey==="function"&&kitActKey(head))return"act"}catch(e){}
+ return kbkRules().length?"":"?"}
+function kbkCands(f,ctx,salt){const html=String(f.text||"");const t=kbkFirst(html);const C=[];const add=a=>{for(const x of [].concat(a||[]))if(x&&!C.includes(x))C.push(x)};
+ const head=t.split(/[.:·([]/)[0].trim();
+ const R=(typeof KIT_ACTS!=="undefined"&&KIT_ACTS.log)||[];
+ for(const [re,key] of kbkRules()){if(re.test(t)){if(key==="-")return[];add(kbkKeySrc(key,salt,t,html));break}}  /* "-" = a line with no meaning: no picture */
+ if(/^Đến /.test(t))add(kbkPlaceArt(t,html));
+ let ak="";try{ak=head.length>=3&&typeof kitActKey==="function"?kitActKey(head):""}catch(e){}if(ak)add(`img/act-${ak}.webp`);
+ /* Tổng lược, every page (act-pics2 a467; owner 14:15Z "no picture rather than a repeated one", 14:30Z group pictures banned; reviewer r7
+    widened it from "Việc của ngươi" to other people's pages and Triều đình · thiên hạ, LUẬT SỬA CẢ NHÓM): a line shows ONLY a picture made
+    for it (ACTS log rule, its place, its act name); no match → NO picture, never an event-group (KBK_EVRE) or act-category stand-in */
+ /* the page default only on the Emperor's / Thái hậu's own pages (a picture of that person); her lines, other people's and the world's get
+    NO picture rather than the same "Có người đến" room on every line (act-pics2 a467 / owner: one meaning = one picture) */
+ if(!C.length&&(ctx==="emp"||ctx==="th"))add(kbkEvFiles(kbkEvId(t,ctx),salt));
+ return C}
+/* a picture made for this very line (ACTS.json log rule or act name), "" when only a general one would fit */
+function kbkSpecific(t){t=kbkFirst(t);const R=(typeof KIT_ACTS!=="undefined"&&KIT_ACTS.log)||[];
+ for(const [re,key] of kbkRules()){if(re.test(t))return key==="-"?"":(kbkKeySrc(key,"",t,"")[0]||"")}
+ const head=t.split(/[.:·([]/)[0].trim();let ak="";try{ak=head.length>=3&&typeof kitActKey==="function"?kitActKey(head):""}catch(e){}return ak?`img/act-${ak}.webp`:""}
+function kbkArtLabel(src){const m=/img\/ev-([a-z-]+?)(?:-\d+)?\.webp/.exec(src||"");if(m&&EVART&&EVART.categories){for(const c in EVART.categories)if((EVART.categories[c].files||[]).includes(src))return EVART.categories[c].title||""}
+ const a=/img\/act-cat-([a-z-]+)\.webp/.exec(src||"");if(a&&typeof KIT_CAT!=="undefined"&&KIT_CAT[a[1]])return KIT_CAT[a[1]][0];return""}
+function kbkArt(facts,ctx){if(typeof evArtOf!=="function")return facts;let w=0;try{w=wk()}catch(e){}let prev="",prevT="";
+ return (facts||[]).map((f,i)=>{if(!f||typeof f!=="object")return f;try{const t=kpPlain(f.text||"");const C=kbkCands(f,ctx,w+":"+i);
+  const same=prevT&&prevT.split(/[.:·([]/)[0].trim()===t.split(/[.:·([]/)[0].trim();
+  /* a picture MADE for this line (log rule / act name / its place) is right even if the line above has it too (same scene: "Thỉnh an Thái hậu" +
+     "được thấy mặt Thái hậu"); only general pictures (event category, act category, page default) step aside for the next candidate */
+  let own=false;try{own=!!C[0]&&(C[0]===kbkSpecific(t)||/^Đến /.test(t))}catch(e){}
+  const a=same||own?C[0]:(C.find(x=>x!==prev)||C[0]);if(a){f.art=a;f.artT=kbkArtLabel(a);prev=a;prevT=t}}catch(e){}return f})}
+
+/* ---- choice lines say WHAT and WITH WHOM (owner 11/15: "Nhịn." / "Đi." mean nothing in the books) ----
+   chooseM logs "<option>." — now: a navigation-only choice (Thôi, Đi, Đợi buổi sau) logs nothing (the walk logs "Đến <nơi>." itself);
+   a choice whose effect the game writes as its own sentence logs only that sentence; a short choice gets its context:
+   "Nhịn lời mỉa của <tên>", "Cho <tên> mượn bạc", else "<option> (<first sentence of the question>)". c.lg (option) overrides. */
+const KBK_OPT_DROP=/^(Thôi|Đi|Đợi buổi sau \(Qua buổi\)|Đợi sáng mai \(Qua đêm\))$/;
+const KBK_OPT_NAMES=[[/^(Nhịn|Nhẫn nhịn)$/,/mỉa/,n=>`Nhịn lời mỉa của ${n}`],[/^Đáp trả sắc sảo$/,/mỉa/,n=>`Đáp trả lời mỉa của ${n}`],
+ [/^Cho mượn$/,/mượn/,n=>`Cho ${n} mượn bạc`],[/^Từ chối$/,/mượn/,n=>`Từ chối cho ${n} mượn bạc`],
+ [/^Nhận lời xin lỗi$/,/xin lỗi/,n=>`Nhận lời xin lỗi của ${n}`],[/^Lạnh lùng$/,/xin lỗi/,n=>`Lạnh lùng trước lời xin lỗi của ${n}`]];
+function kbkOptWho(m){try{const w=m&&m.who&&m.who.w;if(w&&w[0]==="r"){const v=RV(+w[1]);if(v&&v.name)return v.name}}catch(e){}return""}
+function kbkOptName(m,c){const n=String(c.n||"");if(c.lg)return c.lg;const ctx=kpPlain(m.h||"").replace(/\s+/g," ").trim();const who=kbkOptWho(m);
+ for(const [a,b,f] of KBK_OPT_NAMES)if(who&&a.test(n)&&b.test(ctx))return f(who);
+ if(n.split(/\s+/).length>3||(who&&n.includes(who)))return n;
+ let s=(ctx.match(/^[^.!?]*/)||[""])[0].trim();if(!s||s.length>90)s=kpPlain(m.t||"").trim();
+ return s&&!s.includes(n)&&!/^(Có người đến|Thông báo|Tin)$/.test(s)?`${n} (${s})`:n}
+(function(){if(typeof chooseM!=="function"||typeof log!=="function")return;let RW=null;
+ const l0=log;log=function(h){const w=RW;if(w&&!w.done&&typeof h==="string"&&h.startsWith(w.n+".")){w.done=true;if(w.nm===null)return;h=w.nm+h.slice(w.n.length);w.seq=(S.logSeq||0)+1}
+  else if(typeof h==="string"&&S&&/^Đến /.test(h))h+=`<i class="kbb" data-b="${S.buoi||0}"></i>`;
+  return l0.apply(this,[h].concat([].slice.call(arguments,1)))};
+ const c0=chooseM;chooseM=function(i){let m=null,c=null;try{m=Q[0];c=m&&m.opts&&m.opts[i]}catch(e){}
+  if(!m||!c||(c.fx&&c.fx.bac&&S.bac+c.fx.bac<0))return c0.apply(this,arguments);
+  const n=String(c.n||"");const noFx=!Object.keys(c.fx||{}).some(k=>c.fx[k]);let nm=n;
+  try{nm=noFx&&KBK_OPT_DROP.test(n)?null:kbkOptName(m,c)}catch(e){nm=n}
+  /* the result card's title (j19 wrapR reads c.n) says the same as the line: the option carries its full name from here on */
+  if(nm&&nm!==n)c.n=nm;
+  /* …and the result card shows this choice's own picture when it has one (jk2b reads __kitLastEvArt), not the question's */
+  try{const sp=nm&&kbkSpecific(nm);if(sp)window.__kitLastEvArt={src:sp,lab:""}}catch(e){}
+  const w=RW={n:c.n,nm,done:false,seq:0};let r;try{r=c0.apply(this,arguments)}finally{RW=null}
+  /* the option only opened what the game then wrote as its own sentence ("Núp nghe lén." + "Núp sau hòn giả sơn, ngươi nghe rõ…"): keep the sentence */
+  try{if(w.seq&&noFx&&!(c.x&&!c.go)&&(S.logSeq||0)>w.seq){const k=(S.logSeq||0)-w.seq;if(S.logs[k]&&kpPlain(S.logs[k]).includes(kpPlain(nm))){S.logs.splice(k,1);S.logSeq--}}}catch(e){}
+  return r}})();
 
 function wkBookPages(){const d=wkBookData();const date=kitDate(S.month,S.year,S.tuan);const sea=`${SEASON[S.month-1]}${S.wx?" · "+S.wx.n:""}`;
  const P=[{kind:"cover",title:"Tuần lục",sub:date,note:sea}];
@@ -266,6 +353,7 @@ function wkBookPages(){const d=wkBookData();const date=kitDate(S.month,S.year,S.
 .kbk-measure{position:absolute;left:-99999px;top:0;visibility:hidden;pointer-events:none;contain:layout style}
 .kbk-measure>.kbk-pg{position:relative;width:100%;height:100%}
 .kbk-stage{display:flex;align-items:center;justify-content:center;width:100%;flex:0 0 auto}
+.kbk>.kbk-x{position:absolute;top:max(10px,env(safe-area-inset-top));right:max(12px,env(safe-area-inset-right));z-index:6;box-shadow:0 2px 8px #2a1a1240}
 .kbk-book{position:relative;width:var(--pw);height:var(--ph);transform-style:flat;touch-action:pan-y;user-select:none;-webkit-user-select:none;transition:transform .55s cubic-bezier(.3,.7,.3,1),opacity .16s}
 .kbk.spread .kbk-book{width:calc(var(--pw) * 2)}
 .kbk.spread .kbk-book.closed{transform:translateX(calc(var(--pw) * -.5))}

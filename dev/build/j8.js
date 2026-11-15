@@ -163,7 +163,7 @@ const IT={
  botngua:{n:"Bột ngứa",kd:"Độc dược",d:"Dùng với phi tần: nàng Danh -5 · bị khám ra là có tội",pr:30,il:1,tg:[]},
  tranhco:{n:"Tranh cổ",kd:"Lễ vật",d:"Tặng Hoàng thượng, Thái hậu: rất hợp ý",pr:90,gv:10,tg:["emp","th"]},
  nghien:{n:"Nghiên mực Đoan Khê",kd:"Lễ vật",d:"Tặng Hoàng thượng: hợp ý",pr:60,gv:8,tg:["emp"]},
- dancoc:{n:"Đàn cổ Tiêu Vĩ",kd:"Lễ vật",d:"Tặng Hoàng thượng, phi tần mê nhạc",pr:100,gv:10,tg:["emp","rv"]},
+ dancoc:{n:"Đàn cổ Tiêu Vĩ",kd:"Lễ vật",d:"Tặng Hoàng thượng, phi tần mê nhạc",pr:100,gv:12,tg:["emp","rv"]},
  demgam:{n:"Đệm gấm",kd:"Lễ vật",d:"Tặng: êm ấm, ai cũng nhận",pr:20,gv:4,tg:["th","rv","hh"]},
  ngocboi:{n:"Ngọc bội ngự ban",kd:"Kỷ vật",d:"Còn giữ: Sủng không dưới 15 · mất là đại họa",pr:0,keep:1,tg:[]},
  thunha:{n:"Thư nhà",kd:"Thư từ",d:"Đọc: Sức +10, Đức +2",pr:0,use:{suc:10,duc:2},tg:[]},
@@ -250,11 +250,11 @@ function pushFront(d,title){if(!d)return;Q.unshift({t:title||"Việc khó xử",
 function night(p=S){if(p.preg)return;if(roll(conceiveCh(p))){p.preg=1;p.pregWk=wk();if(p===S){S.hidden=true;log(`<span class="g">Thái y bắt mạch: ngươi đã có thai.</span> Ngươi được giấu thai đến hết tháng thứ 3, hoặc báo tin để được sủng ái.`)}else{p.hidden=p.tamco>=40;if(!p.hidden)ap(p,{sung:6,th:5})}}}
 function giuBlocked(p){return rkOf(p)<=1&&(p.th<0||(has("hieuthao")&&p.th<10))&&roll(30)}
 PEND.ksp=()=>({who:pEmp(),t:"<p>Tối nay Hoàng thượng lật thẻ bài của ngươi.</p>",o:[{n:"Tắm gội chờ giá",fx:{},x:"chuẩn bị thị tẩm",go:nightScene},
- {n:`Tiến cử ${S.maid.name} hầu thay`,fx:{},x:`${roomFor("consort")?`nàng được phong ${RANKS[0].n}: ${word(30)}, rồi ${S.maid.loyal>=60?"vẫn là người của ngươi":"trở mặt với ngươi"}`:"không còn ghế để phong: nàng hầu một đêm rồi ra cung"} · kèm: mất ${S.maid.name}, cung nữ mới lòng 45`,go:()=>{log(sendMaid(S))}},
+ {n:`Tiến cử ${S.maid.name} hầu thay`,fx:{},x:`${roomFor("consort")?`nàng được phong ${RANKS[0].n}: ${chanceW(30)}, rồi ${S.maid.loyal>=60?"vẫn là người của ngươi":"trở mặt với ngươi"}`:"không còn ghế để phong: nàng hầu một đêm rồi ra cung"} · kèm: mất ${S.maid.name}, cung nữ mới lòng 45`,go:()=>{log(sendMaid(S))}},
  {n:"Cáo bệnh",fx:{sung:-2},x:"nhường đêm; Ân tình -2",go:()=>{S.an=cl(S.an-2,0,100);S.tonight=null}}]});
 PEND.prep=()=>{const wb=wearBonus(S),vp=vpItems(S).length>0,b=bestArt();return{who:pMe(),t:"<p>Kính sự phòng đã báo tin. Còn hai canh giờ trước khi kiệu đến.</p>",o:[
  {n:"Tắm cánh hoa, xông hương",fx:{bac:-10},x:"đêm nay được ưa hơn",go:()=>pushFront(mkP("night1",{q:2,vp:0}),"Đêm thị tẩm")},
- {n:"Điểm trang lộng lẫy",fx:{},x:`trang sức đang đeo: Sắc +${wb.sac}${vp?` · kèm: đồ vượt phẩm bị Hoàng thượng thu, Danh -4: ${word(40)}`:""}`,go:()=>pushFront(mkP("night1",{q:1+Math.round(wb.sac/3),vp:vp?1:0}),"Đêm thị tẩm")},
+ {n:"Điểm trang lộng lẫy",fx:{},x:`trang sức đang đeo: Sắc +${wb.sac}${vp?` · kèm: đồ vượt phẩm bị Hoàng thượng thu, Danh -4: ${chanceW(40)}`:""}`,go:()=>pushFront(mkP("night1",{q:1+Math.round(wb.sac/3),vp:vp?1:0}),"Đêm thị tẩm")},
  {n:`Tập trước ${b.n}`,fx:{suc:-5},x:`bậc ${b.l}`,go:()=>pushFront(mkP("night1",{q:1+b.l,vp:0}),"Đêm thị tẩm")},
  {n:"Để mộc, tự nhiên",fx:{},go:()=>pushFront(mkP("night1",{q:1,vp:0}),"Đêm thị tẩm")}]}};
 PEND.night1=p=>{const E=S.emp,mood=[1,0,-1,-2][E.mood],go=b=>()=>{let s=p.q+b+mood+R(3),ex="";
@@ -266,7 +266,7 @@ PEND.night1=p=>{const E=S.emp,mood=[1,0,-1,-2][E.mood],go=b=>()=>{let s=p.q+b+mo
  {n:"Rót rượu, nũng nịu",fx:{},x:nx(has("datinh")||has("mesac")?3:has("lanhlung")?-1:0,has("datinh")||has("mesac")?"ngài đa tình, rất hợp":has("lanhlung")?"ngài lạnh lùng, dễ chán":""),go:go(has("datinh")||has("mesac")?3:has("lanhlung")?-1:0)},
  {n:"Lặng lẽ xoa vai, nghe ngài kể",fx:{},x:nx(E.mood>=2?2:1,E.mood>=2?"ngài đang phiền, rất hợp":"an toàn"),go:go(E.mood>=2?2:1)}]}};
 /* the night talk's line: how well it suits him -> ladder word; the night is graded, never empty */
-function nx(b,note){const m=[1,0,-1,-2][S.emp.mood];const v=b+m;const w=v>=3?"Rất chắc":v>=2?"Chắc":v>=1?"Khá chắc":v>=0?"Năm ăn năm thua":"Khó";return `${w} · thành: đêm vui, Sủng +5, Ân tình +5 · hỏng: đêm nhạt, Sủng +3, Ân tình +2${note?" · "+note:""}${vpItems(S).length?` · kèm: đồ vượt phẩm bị thu, Danh -4 (nếu đang đeo): ${word(40)}`:""}`}
+function nx(b,note){const m=[1,0,-1,-2][S.emp.mood];const v=b+m;const w=v>=3?"Rất chắc":v>=2?"Chắc":v>=1?"Khá chắc":v>=0?"Năm ăn năm thua":"Khó";return `${w} · thành: đêm vui, Sủng +5, Ân tình +5 · hỏng: đêm nhạt, Sủng +3, Ân tình +2${note?" · "+note:""}${vpItems(S).length?` · kèm: đồ vượt phẩm bị thu, Danh -4 (nếu đang đeo): ${chanceW(40)}`:""}`}
 function nightFx(s){S.tablet=0;S.nights++;S.nightLog.push(wk());const g=3+Math.max(0,Math.round(s/2));apply({sung:g});S.an=cl(S.an+2+Math.max(0,s),0,100);ghenAll(8);
  if(giuBlocked(S))pushFront(mkP("giu"),"Giữ hay không giữ");else night(S);
  if(roll(10+s*4))bestow(S,"night");log(`Thị tẩm. Sủng +${g} · Ân tình +${2+Math.max(0,s)}.`)}
@@ -280,9 +280,9 @@ PEND.night2=p=>{const s=p.s,v=liveRivals(false).slice().sort((a,b)=>a.rel-b.rel)
  O.push({n:"Im lặng, tựa vai ngài",fx:{},x:"Ân tình +2",go:go(()=>{S.an=cl(S.an+2,0,100)})});
  return{cls:"night",who:pEmp(),t:`${p.ex?`<p class="past">${p.ex}</p>`:""}<p>${txt}</p><p class="past">Gối đầu, nửa đêm. Ngươi muốn nói gì?</p>`,o:O}};
 PEND.giu=()=>{const o1=od(45+S.tamco/3),o2=od(30+S.an/2);return{who:pTH(),t:"<p>Sáng sớm, tổng quản Kính sự phòng quỳ ngoài điện hỏi theo lệ: “Giữ hay không giữ?”</p><p>Lời Thái hậu truyền xuống: phẩm vị thấp, không được giữ long thai.</p>",o:[
- {n:"Cúi đầu tuân lệnh",fx:{th:5},x:"không thể có thai lần này"},
- {n:"Đút bạc xin giữ",fx:{bac:-40},x:`${word(o1)} · hỏng: Thái hậu -10`,go:()=>{if(roll(o1))night(S);else apply({th:-10})}},
- {n:"Cầu xin Hoàng thượng",fx:{},x:`${word(o2)} · hỏng: Sủng -3`,go:()=>{if(roll(o2))night(S);else apply({sung:-3})}}]}};
+ {n:"Cúi đầu tuân lệnh",fx:{th:5},x:"lần này không thể có thai"},
+ {n:"Đút bạc xin giữ",fx:{bac:-40},x:`${word(o1)} · thành: được giữ long thai (nếu có) · hỏng: Thái hậu -10`,go:()=>{if(roll(o1))night(S);else apply({th:-10})}},
+ {n:"Cầu xin Hoàng thượng",fx:{},x:`${word(o2)} · thành: được giữ long thai (nếu có) · hỏng: Sủng -3`,go:()=>{if(roll(o2))night(S);else apply({sung:-3})}}]}};
 /* a rival's night: same formula, no modal */
 function rivalNight(v){v.nights++;v.nightLog.push(wk());const q=Math.round(effSac(v)/20+Math.max(...Object.values(v.arts))+R(4)-1);ap(v,{sung:2+Math.round(q/2),an:2+Math.max(0,q)});v.pg=cl(v.pg+6,0,100);v.tablet=0;
  let r=`Đêm qua thẻ bài của ${v.name} được lật. `;
@@ -316,17 +316,17 @@ function birthP(p,fake){const me=p===S;
    else{ap(p,{danh:-10,sung:-10});punish(p,"bị đồn sinh ra yêu vật",2);return ev+(me?`<span class="r">Ngươi tỉnh lại thì bên cạnh là một con mèo chết lột da. Cả cung đồn ngươi sinh ra yêu vật.</span> Danh -10 · Sủng -10. Đứa trẻ không rõ tung tích. `:`<span class="r">${p.name} lâm bồn, bên cạnh chỉ có một con mèo chết lột da; cả cung đồn nàng sinh yêu vật.</span> `)}}}
  const n=!fake&&roll(4)?2:1;if(n===2)ev+=me?`<b class="g">Song thai!</b> `:`${p.name} sinh đôi. `;let up=false;
  for(let i=0;i<n;i++){const k=mkKid(R(2)?"m":"f",0);p.kids.push(k);
-  if(k.sex==="m"){ev+=me?`<b class="g">Ngươi sinh hạ ${k.name}.</b> `:`${p.name} sinh hạ ${k.name}. `;if(me)ghenAll(15);if(!up&&rkOf(p)<6){if(me)S.rank++;else p.rank++;p.lastPromo=S.turn;up=true;ev+=`${me?"Được":p.name+" được"} tấn phong ${rkName(p)}. `}ap(p,{sung:10,danh:10,th:15});S.emp.mood=0;p.bonusPay=(p.bonusPay||0)+20;if(roll(50))bestow(p,"son")}
+  if(k.sex==="m"){ev+=me?`<b class="g">Ngươi sinh hạ ${k.name}.</b> `:`${p.name} sinh hạ ${k.name}. `;if(me)ghenAll(15);if(!up&&rkOf(p)<6){up=true;if(typeof exGrace==="function")ev+=exGrace(p);else{if(me)S.rank++;else p.rank++;p.lastPromo=S.turn;ev+=`${me?"Được":p.name+" được"} tấn phong ${rkName(p)}. `}}ap(p,{sung:10,danh:10,th:15});S.emp.mood=0;p.bonusPay=(p.bonusPay||0)+20;if(roll(50))bestow(p,"son")}
   else{ev+=me?`Ngươi sinh hạ ${k.name}. `:`${p.name} sinh hạ ${k.name}. `;if(me)ghenAll(8);ap(p,{sung:5,danh:4});p.bonusPay=(p.bonusPay||0)+10;if(roll(50))bestow(p,"dau")}}
  return ev}
 /* months between decrees grow with rank: 3 up to Tần, then 5, 7, 9 */
 function promoGap(r){return r<3?3:3+(r-2)*2}
 function promoReqP(p){if(rkOf(p)>=7)return[];const r=rkOf(p),nx=RANKS[r+1],L=[];const me=p===S,qq=queenP();
- if(p.out)return[[false,"Đang ở lãnh cung"]];L.push([p.sung>=nx.s,`Sủng ${p.sung}/${nx.s}`],[p.danh>=nx.d,`Danh ${p.danh}/${nx.d}`],[S.turn-p.lastPromo>=promoGap(r),`Cách lần sắc phong trước ${S.turn-p.lastPromo}/${promoGap(r)} tháng`]);
+ if(p.out)return[[false,"Đang ở lãnh cung"]];L.push([p.sung>=nx.s,`Sủng ${p.sung} (cần ${nx.s})`],[p.danh>=nx.d,`Danh ${p.danh} (cần ${nx.d})`],[S.turn-p.lastPromo>=promoGap(r),`Cách lần sắc phong trước ${S.turn-p.lastPromo} tháng (cần ${promoGap(r)})`]);
  const qBlock=qq&&qq!==p;
  if(qBlock&&r+1>=2&&r+1<7)L.push([p.hh>BAL.qBlockHh||p.th>=BAL.qBlockTh,`Hoàng hậu không chặn (Hoàng hậu ${p.hh}, cần trên ${BAL.qBlockHh}; hoặc Thái hậu ${BAL.qBlockTh})`]);
- if(has("hieuthao"))L.push([p.th>=0,`Thái hậu gật đầu (${p.th}/0), vì Hoàng thượng hiếu thảo`]);
- if(r+1===7){const N=hhNeed(p),tn=N.th,nd=N.duc,sn=N.sons;L.push([S.turn>=(p.seatBan||0),p.seatBan>S.turn?`Vừa tố Hoàng hậu, bị nghi tranh ngôi (còn ${p.seatBan-S.turn} tháng)`:"Không bị nghi tranh ngôi"],[!qq,"Ngôi Hoàng hậu bỏ trống"],[p.th>=tn,sn?`Có hoàng tử và Thái hậu ủng hộ (${p.th}/${tn})`:`Chưa có hoàng tử: cần Thái hậu hết lòng (${p.th}/${tn})`],[p.duc>=nd,`Đức ${p.duc}/${nd}${N.heir?" (mẹ Thái tử)":""}`])}
+ if(has("hieuthao"))L.push([p.th>=0,`Hoàng thượng hiếu thảo: Thái hậu không được ghét ${me?"ngươi":"nàng"} (Thái hậu quý ${me?"ngươi":"nàng"} ${p.th}, cần từ 0)`]);
+ if(r+1===7){const N=hhNeed(p),tn=N.th,nd=N.duc,sn=N.sons;L.push([S.turn>=(p.seatBan||0),p.seatBan>S.turn?`Vừa tố Hoàng hậu, bị nghi tranh ngôi (còn ${p.seatBan-S.turn} tháng)`:"Không bị nghi tranh ngôi"],[!qq,"Ngôi Hoàng hậu bỏ trống"],[p.th>=tn,sn?`Có hoàng tử: Thái hậu quý ${me?"ngươi":"nàng"} ${p.th} (cần ${tn})`:`Chưa có hoàng tử: Thái hậu phải hết lòng, quý ${me?"ngươi":"nàng"} ${p.th} (cần ${tn})`],[p.duc>=nd,`Đức ${p.duc} (cần ${nd}${N.heir?", mẹ Thái tử":""})`])}
  else if(r+1>=5)L.push([p.hh>BAL.hiOppHh||p.th>=BAL.hiOppTh||!qBlock||(facOf(p)&&facStr(facOf(p))>=BAL.hiOppFac),`Hoàng hậu không phản đối, hoặc Thái hậu ${BAL.hiOppTh}, hoặc phe mạnh (thế lực ${BAL.hiOppFac})`]);
  if(p.confined)L.push([false,`Đang cấm túc (${p.confined} tháng)`]);return L}
 function promoReq(){return promoReqP(S)}

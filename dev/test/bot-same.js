@@ -1,15 +1,17 @@
 /* quick bot check: the sensible bot (dev/measure/inpage4.js) plays N lives with ONE seeded Math.random on two builds;
-   a rule change that keeps the numbers must give the same lives. usage: node dev/test/bot-same.js <urlA> <urlB> [lives] [mode] */
+   a rule change that keeps the numbers must give the same lives. usage: node dev/test/bot-same.js <urlA> <urlB> [steps] [mode] */
 const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
 const [,,A,B,NL,MODE]=process.argv;const N=+NL||12,mode=MODE||'sens';
 const INP=fs.readFileSync(path.join(__dirname,'../measure/inpage4.js'),'utf8');
 async function run(b,url){const ctx=await b.newContext({viewport:{width:390,height:844},serviceWorkers:'block'});
- await ctx.addInitScript(()=>{let s=12345;Math.random=()=>{s|=0;s=s+0x6D2B79F5|0;let t=Math.imul(s^s>>>15,1|s);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296};Date.now=(()=>{let d=1.7e12;return()=>d+=1000})()});
+ await ctx.addInitScript(()=>{let s=12345;Math.random=()=>{s|=0;s=s+0x6D2B79F5|0;let t=Math.imul(s^s>>>15,1|s);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296};Date.now=(()=>{let d=1.7e12;return()=>d+=1000})();window.__bot={pre:1}/* jload (first-entry download) stays out of bot runs */});
  const p=await ctx.newPage();p.setDefaultTimeout(0);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,160)));
  await p.goto(url,{waitUntil:'domcontentloaded',timeout:0});await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function',null,{timeout:0});await p.waitForTimeout(1500);
- await p.evaluate(()=>{try{localStorage.clear()}catch(e){}document.getElementById('title').hidden=true;start()});await p.evaluate(INP);
- let n=0,guard=0;while(n<N&&guard++<400)n=await p.evaluate(([m])=>window.__bot.step(m,300),[mode]);
- const res=await p.evaluate(()=>window.__res.map(r=>({o:r.origin,rank:r.rank,max:r.maxRank,t:r.turns,f:String(r.fate||r.title||'').slice(0,40),err:r.err})));await ctx.close();return{res:res.slice(0,N),errs}}
+ await p.evaluate(()=>{try{localStorage.clear()}catch(e){}document.getElementById('title').hidden=true;start()});await p.waitForFunction(()=>typeof S!=='undefined'&&S&&S.origin,null,{timeout:0});await p.evaluate(()=>document.querySelectorAll('.kroul').forEach(e=>e.remove()));await p.evaluate(INP);await p.evaluate(()=>{/* a lesson / work mini-game (S.mg) the bot opened cannot be played headless: drop it at the buổi change */const n0=nextBuoi;nextBuoi=function(){if(S&&S.mg){S.mg=null;try{if(typeof kg82Close==='function')kg82Close(true)}catch(e){}}return n0.apply(this,arguments)};for(const f of ['act','lesson','talk']){const o=window[f];if(typeof o!=='function')continue;window[f]=function(){const r=o.apply(this,arguments);if(S&&S.mg){S.mg=null;try{kg82Close(true)}catch(e){}const ov=document.getElementById('ov');if(ov)ov.hidden=true}return r}}});
+ /* N = bot steps (300 game iterations each): the same steps on both builds, then the lives so far + the live state */
+ const tS=Date.now();for(let i=0;i<N;i++){await p.evaluate(([m])=>window.__bot.step(m,300),[mode]);console.error(url.slice(-12),'step',i+1,Math.round((Date.now()-tS)/1000)+'s')}
+ const st=await p.evaluate(()=>S?{turn:S.turn,rank:S.rank,sung:S.sung,danh:S.danh,duc:S.duc,th:S.th,hh:S.hh,bac:S.bac,kids:(S.kids||[]).length,riv:rivals.length,logs:S.logSeq||0}:null);
+ const res=await p.evaluate(()=>window.__res.map(r=>({o:r.origin,rank:r.rank,max:r.maxRank,t:r.turns,f:String(r.fate||r.title||'').slice(0,40),err:r.err})));await ctx.close();return{res,st,errs}}
 (async()=>{const b=await chromium.launch();const ra=await run(b,A),rb=await run(b,B);await b.close();
- const same=JSON.stringify(ra.res)===JSON.stringify(rb.res);const hh=r=>r.res.filter(x=>x.max>=7).length;
- console.log(JSON.stringify({lives:[ra.res.length,rb.res.length],same,hhA:hh(ra),hhB:hh(rb),diff:ra.res.map((x,i)=>JSON.stringify(x)!==JSON.stringify(rb.res[i])?[x,rb.res[i]]:null).filter(Boolean).slice(0,4),errsA:ra.errs.slice(0,3),errsB:rb.errs.slice(0,3)}))})().catch(e=>{console.error(e);process.exit(1)});
+ const same=JSON.stringify([ra.res,ra.st])===JSON.stringify([rb.res,rb.st]);const hh=r=>r.res.filter(x=>x.max>=7).length;
+ console.log(JSON.stringify({stA:ra.st,stB:rb.st,lives:[ra.res.length,rb.res.length],same,hhA:hh(ra),hhB:hh(rb),diff:ra.res.map((x,i)=>JSON.stringify(x)!==JSON.stringify(rb.res[i])?[x,rb.res[i]]:null).filter(Boolean).slice(0,4),errsA:ra.errs.slice(0,3),errsB:rb.errs.slice(0,3)}))})().catch(e=>{console.error(e);process.exit(1)});

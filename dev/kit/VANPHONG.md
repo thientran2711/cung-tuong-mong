@@ -14,10 +14,10 @@ Thi hành: `dev/build/j84.js` (module cuối trong assemble.py) sửa dữ liệ
 | Ngày tháng (ngắn, thanh trên cùng, sổ ghi) | Tháng ba · thượng tuần · năm thứ nhất | T3/1 |
 | Tên tháng | giêng, hai, ba, tư, năm, sáu, bảy, tám, chín, mười, mười một, chạp | tháng 1, tháng 12 |
 | Năm | năm thứ nhất, năm thứ hai, … (có thể kèm niên hiệu: "Cảnh Hòa năm thứ hai") | năm 1, Năm 2 |
-| Nút chỉ để xác nhận đã đọc | Đã hiểu | OK, Đã rõ, Xong |
-| Nút khép bảng / thẻ | Lui | Đóng, ✕ Đóng, Thoát |
+| Bảng chỉ để đọc / khép bảng / thẻ | không có nút: một ✕ góc trên phải đầu thẻ, chạm ra ngoài hoặc Esc (KIT 32.10) | Đã hiểu, Đã rõ, OK, Xong, Thôi, Lui, Đóng, ✕ Đóng |
 | Thu / mở bảng | Thu lại / Mở ra | Thu gọn / Mở rộng |
 | Lời dặn bảng nổi | Chạm để lui · đầy đủ trong Sổ ghi | Chạm để đóng · đầy đủ ở Nhật ký |
+| Nút sang buổi / sang ngày (nút lớn đỏ, thẻ nơi chốn, mẹo) | ban ngày: Sang buổi · buổi tối: Sang ngày mới | Qua buổi, Qua đêm, Qua ngày, Đợi sáng, Đợi buổi sau |
 | Nút nhận thánh chỉ, ân thưởng | Tạ ơn / Tuân chỉ / Lĩnh chỉ | OK |
 | Một kiếp chơi | kiếp | ván, game, màn |
 | Chỗ ghi kiếp | sổ: "Sổ một, Sổ hai, Sổ ba"; chỗ chưa ghi: "Chưa ghi" | Ô 1, Trống, slot |
@@ -38,7 +38,7 @@ Thi hành: `dev/build/j84.js` (module cuối trong assemble.py) sửa dữ liệ
 | Tab phe | Phe phái (chữ ngắn "Phe") | — |
 | Tab ở chế độ cung nữ | Phận sự · Dư đồ · Đồng liêu · Thân phận · Sổ ghi; lời dặn "Mục Phận sự" | Việc |
 | Nút thu bảng trên cùng | Tư chất | Chỉ số |
-| Nút dưới (8 nút + Qua buổi) | Hành sự, Dư đồ, Hậu cung, Giao tình, Hoàng tự, Tư trang, Tài nghệ, Mệnh truyện | — |
+| Nút dưới (8 nút + Sang buổi) | Hành sự, Dư đồ, Hậu cung, Giao tình, Hoàng tự, Tư trang, Tài nghệ, Mệnh truyện | — |
 | Chữ ngắn của tab (màn dưới 1280 px) | Hành sự, Dư đồ, Phi tần, Giao tình, Phe, Cung nhân, Hoàng tự, Tư trang, Tài nghệ, Mệnh, Sổ ghi | Việc, Bản đồ, Quan hệ, Kẻ hầu, Con, Rương, Truyện, Nhật ký |
 | Mưu người khác nhắm vào ngươi (sổ ghi) | «Hạ độc» nhắm vào ngươi (việc khó): không thành. | [Hạ độc · Khó · hỏng] |
 | Bảng thi tài | bảng định thứ; "nàng mất 2 phần" | bảng điểm, điểm |
@@ -47,18 +47,29 @@ Thi hành: `dev/build/j84.js` (module cuối trong assemble.py) sửa dữ liệ
 | Thái y xem đồ | nghiệm độc | xét nghiệm |
 | Người quen thân | người quen, tri kỷ | bạn |
 | Dịp tốt | cơ duyên, dịp | cơ hội |
+| Tình cảm giữa hai người (owner 11/15 09:55Z; một số, một tên) | **thiện cảm**: chip "Nàng → ta: thiện cảm", "Ta → nàng: thiện cảm"; dòng thẻ việc "thiện cảm +10"; mối hận "oán ta +8". Chưa biết thì "chưa rõ nàng nghĩ gì", không hiện số. Hằng chung: `KIT_REL` (jaudit) | quý ngươi, quý ta, thân, thù (khi ý là thiện cảm), "đang −40" khi nàng chưa biết |
+| Kẻ hầu với chủ / chủ với kẻ hầu (owner 11/15 10:10Z) | kẻ hầu đối với ta: **thiện cảm** (thanh "Thiện cảm", dòng thẻ "thiện cảm +6"); ta đối với kẻ hầu: **tin cậy** (thanh "Ta tin cậy", dòng thẻ "tin cậy Tiểu Lộ Tử +3"); nhóm "Cung ta"; người chạy việc ghi trên thẻ chính người ấy ("Đang là người chạy việc"). Chế độ cung nữ giữ "Chủ tin" (chủ tin nàng). `KIT_REL.srvThem/srvTrust/runner` | Lòng, Chủ tin (ngoài chế độ cung nữ), Cung ngươi |
+| Ngôi thứ ba (người khác) (owner 11/15) | nữ: **nàng ta** ("Khen tài nghệ nàng ta", "nàng ta nắm 1 chứng cứ của ta"); nam: **y** (trung tính, lễ độ), **hắn** chỉ khi thù địch; Hoàng thượng: **bệ hạ**; Thái hậu: **Thái hậu**; chưa rõ: **vị ấy**. Hàm `kitThey(p)` (jaudit); VP đổi "nàng" trơn thành "nàng ta" trên màn hình | "nàng" trơn khi nói người khác |
+| Y phục dưới phẩm ở lễ (owner 11/15) | **thiếu lễ** ("thiếu lễ (y phục dưới phẩm): Danh −2 …"); khác **vượt phẩm** (mặc quá phẩm) | ăn mặc sai, không hợp |
+| Món đang mang (Tư trang, mọi ô) | **Đang mặc** (một chữ cho trâm, áo, vòng…) | Đang cài, Đang đeo, Đang dùng |
+| Tên kẻ hầu | không trùng trong cả cung, không có số ("Thúy 2") | tên kèm số |
 | Số đo (Sắc, Tài, Sủng…) | gọi đúng tên; khi chung chung: "không đổi gì" | chỉ số, stat, điểm |
 | Điểm thi (tuyển tú, thi tài) | phần: "nàng mất 2 phần" | điểm |
-| Bậc may rủi | Liều / Khó / Năm ăn năm thua / Khá chắc / Chắc / Rất chắc / Nắm chắc (việc chắc không ghi chữ) | %, Chắc chắn, random |
+| Bậc may rủi (CHỈ cơ may thành/hỏng của chính việc làm: một chữ ở góc thẻ / cạnh lựa chọn) | Liều / Khó / Năm ăn năm thua / Khá chắc / Chắc / Rất chắc / Nắm chắc (việc chắc không ghi chữ) | %, Chắc chắn, random |
+| Khả năng của một điều kèm theo (có thai, được ban thưởng, lật thẻ, bị lộ, bị phạt, chết… trong Được / Mất / Kèm, thẻ kết quả, Sổ ghi, lời dặn, ô trạng thái) | Rất thấp / Thấp / Vừa / Cao / Rất cao (không có thì "Không có"); trong dòng: "có thai: khả năng thấp · được ban thưởng: khả năng vừa"; ô: "Có thai: Thấp"; sổ ghi: "(khả năng: vừa)". Hàm `chanceW` / `chanceLvl` (j1) | "có thai: Liều", "được ban thưởng: Khó", "cơ may: …" cho điều kèm theo |
 | Chạm màn hình (lời dặn) | chạm | bấm, click, nhấn |
 | Mở một tab (lời dặn) | Vào mục Phe phái | Mở tab Phe phái |
-| Quan hệ hai chiều (thẻ người, Giao tình, sổ tuần, kết quả việc) | chủ ngữ + động từ + đối tượng: "Nàng quý ngươi: Bình thường · -5", "Nàng oán ngươi: 0", "Ngươi quý nàng …", "Ngươi oán nàng …"; theo vai khi tự nhiên: "Hoàng hậu quý ngươi", "Hắn quý ngươi"; chưa biết: "Nàng quý ngươi: chưa rõ" | Thiện cảm (đứng trơ), Ngươi với nàng, Nàng với ngươi |
+| Quan hệ hai chiều (thẻ người, Giao tình, sổ tuần, kết quả việc) | chủ ngữ + động từ + đối tượng: "Nàng quý ngươi: Bình thường · -5", "Nàng oán ngươi: 0", "Ngươi quý nàng …", "Ngươi oán nàng …"; theo vai khi tự nhiên: "Hoàng hậu quý ngươi", "Hắn quý ngươi"; chưa biết: "Nàng quý ngươi: chưa rõ" | Thiện cảm (đứng trơ), Ngươi với nàng, Nàng với ngươi | (thẻ người, sổ tuần, kết quả việc vẫn dùng lối này)
 | Mức "quý" | Ghét (≤ -30) · Không ưa (-29…-11) · Bình thường (-10…10) · Có cảm tình (11…29) · Quý mến (30…59) · Thân thiết (≥ 60) | Lạnh nhạt, Thân |
+| Hàng quan hệ kitRelRow (Giao tình › Ân oán, owner 11/15) | dòng 1: "<A> → <B>: thiện cảm" / "<A> → <B>: oán" (người chơi = "ta": "Hoàng hậu → ta: oán", "Ta → Hoàng hậu: thiện cảm"); dòng 2: "<mức> · <số>" rồi thanh | "Nàng quý ngươi" trong Ân oán, "thù" |
+| Hai chỉ số quan hệ (giữ riêng, không gộp; owner 11/15) | chạm nhãn: **Thiện cảm**: "có chịu giúp, kết giao với ta không" · **Oán**: "mối hận vì việc ta đã làm, có muốn trả đũa ta không; nguôi dần mỗi tháng" | thù, thù hận |
+| Mức "oán" (0…100, BAL.oanLv) | Không oán (< 5) · Chút oán (5…19) · Oán (20…44) · Oán sâu (45…74) · Oán hận (≥ 75) | Thù, Thù hận |
+| Người chưa gặp (Ân oán) | "Ta chưa gặp <tên>, chưa rõ nàng ta đối với người khác ra sao. Gặp nàng ta, dò la, hoặc có thêm tai mắt." | Ngươi chưa gặp …, Gặp nàng |
+| Tiền của người chơi (cửa hàng) | "Ta có N bạc" | Ngươi có N bạc |
 | Kẻ hầu được sai đi làm việc | Người chạy việc: <tên> (chạm: "Khi ngươi sai người dò la, đưa thư, mua đồ…, người này đi; chọn theo Lòng và tài"); nút "Đổi ›" | Sai đi: <tên> |
 | Ngày đầu cuộc | Thân phận kiếp này · Nhận thân phận · Nhập cung | — |
 | Chơi chung (sếp 15/11) | Cùng hảo hữu · Mời hảo hữu · hảo hữu (người chơi cùng) · Ám hiệu · Nhập ám hiệu | Chơi cùng bạn, Mời bạn, bạn, tri kỷ, Mã phòng |
 | Sổ tóm tắt tuần | Tuần lục | Sổ tuần |
-| Nút sang buổi / sang ngày | Sang buổi · Qua ngày | Qua buổi, Qua đêm, Đợi sáng |
 | Đồ đang đeo | Bên mình | Đang mang |
 | Bảng xếp hạng | Bảng vàng | Bảng vinh danh, leaderboard |
 | Tab Hoàng thượng + Thái hậu | Chí tôn | Hoàng thượng · Thái hậu, Thánh thượng |
@@ -113,8 +124,8 @@ Quy tắc phẩm: Đáp ứng, Thường tại, Quý nhân = **tiểu chủ**; T
 |---|---|
 | T3/1 · thượng tuần | Tháng ba · thượng tuần |
 | Năm 1, tháng 3, trung tuần (Xuân) | Tháng ba, năm thứ nhất, trung tuần (Xuân) |
-| Đã rõ | Đã hiểu |
-| ✕ Đóng | ✕ Lui |
+| Đã rõ / Đã hiểu (nút đóng) | (bỏ nút; ✕ góc trên phải) |
+| ✕ Đóng / ✕ Lui | ✕ |
 | Ô 1 · Trống | Sổ một · Chưa ghi |
 | Xuất ván · chép ván thành mã chữ | Chép sổ · chép kiếp này thành bản chép |
 | Lượt 2/5: múa lại 4 bước | Hồi 2/5: múa lại 4 bước |

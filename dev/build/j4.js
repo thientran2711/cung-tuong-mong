@@ -15,7 +15,7 @@ tt:{t:"Quân cờ của Tể tướng",n:3,goal:"Cha ngươi dùng ngươi làm 
   return""}},
 dtq:{t:"Trung thần nơi biên ải",n:3,goal:"Cha ngươi trấn giữ biên cương; thắng bại ngoài ải là vinh nhục của ngươi. Khi có kẻ vu cha mưu phản, phải tìm đủ chứng cứ trong hạn.",
  init(){S.st.proof=0;S.st.acc=0},
- hint:()=>S.st.acc?`Còn ${Math.max(0,S.st.acc-S.turn)} tháng, chứng cứ ${S.st.proof}/2`:`Tháng 4 hằng năm có tin biên ải (thắng: ${word(55)}); từ năm thứ 3, mỗi tháng có kẻ vu cha: ${word(15)}`,
+ hint:()=>S.st.acc?`Còn ${Math.max(0,S.st.acc-S.turn)} tháng, chứng cứ ${S.st.proof}/2`:`Tháng 4 hằng năm có tin biên ải (thắng: ${chanceW(55)}); từ năm thứ 3, mỗi tháng có kẻ vu cha: ${chanceW(15)}`,
  month(){const st=S.st;let ev="";
   if(S.month===4&&S.turn>1){if(roll(55)){apply({danh:4,sung:3});S.emp.mood=0;ev+=`<span class="g">Tin thắng trận từ biên ải: cha ngươi phá tan quân giặc.</span> Danh +4 · Sủng +3. `}else{apply({danh:-4,sung:-3});S.emp.mood=2;ev+=`<span class="r">Cha ngươi thua một trận ở Nhạn Môn quan.</span> Danh -4 · Sủng -3. `}}
   if(!st.acc&&S.year>=3&&roll(15)){const p=liveRivals(false);if(p.length){const v=p.slice().sort((a,b)=>a.rel-b.rel)[0];st.acc=S.turn+8;st.accuser=v;st.step=1;v.rel-=10;ev+=`<span class="r">${v.name} xúi cha nàng dâng sớ: Đại tướng quân giữ binh không về, có lòng phản.</span> Hoàng thượng cho 8 tháng tra xét. `}}
@@ -104,13 +104,13 @@ PEND.tt2=p=>{const st=S.st;return {t:"Họ ngoại của Hoàng hậu dâng sớ
    {n:"Bỏ bạc lo lót triều thần",fx:{bac:-60,hh:-10},x:"cha thoát nạn",go:()=>{st.loy++;st.step=2}},
    {n:"Đứng ngoài, giữ mình",fx:{danh:2},x:"cha bị phạt bổng, hận ngươi",go:()=>{st.step=2}}]}};
 PEND.tt3=p=>{const st=S.st,son=p.son?mySons().find(k=>k.name===p.son):null,o=p.o;if(p.son&&!son)return null;return {t:son?`Cha ngươi ngầm điều cấm quân, định ép Hoàng thượng lập ${son.name} làm Thái tử.`:"Cha ngươi ngầm điều cấm quân, định ép Hoàng thượng phế Hoàng hậu, lập ngươi thay.",o:[
-    {n:"Theo cha mưu đại sự",fx:{},x:`${word(o)} · hỏng: cả họ bị tru di`,go:()=>{st.step=3;if(roll(o)){if(son)setHeir(son,null);else if(qOn()){rivals[0].out=true;log(`Hoàng hậu ${rivals[0].name} bị phế.`)}apply({danh:5});stEnd(1,"Cùng cha mưu đại sự thành");log(`<b class="g">Cấm quân vây cung. Hoàng thượng đành nghe theo.</b>`)}else{stEnd(-1,"Mưu phản cùng cha");die("Mưu phản cùng cha, cả họ bị tru di")}}},
+    {n:"Theo cha mưu đại sự",fx:{},x:`${word(o)} · thành: ${son?`${son.name} được lập Thái tử`:"Hoàng hậu bị phế"}, Danh +5 · hỏng: cả họ bị tru di`,go:()=>{st.step=3;if(roll(o)){if(son)setHeir(son,null);else if(qOn()){rivals[0].out=true;log(`Hoàng hậu ${rivals[0].name} bị phế.`)}apply({danh:5});stEnd(1,"Cùng cha mưu đại sự thành");log(`<b class="g">Cấm quân vây cung. Hoàng thượng đành nghe theo.</b>`)}else{stEnd(-1,"Mưu phản cùng cha");die("Mưu phản cùng cha, cả họ bị tru di")}}},
     {n:"Mật tâu Hoàng thượng",fx:{danh:12,duc:8,th:10,sung:-5},x:"đại nghĩa diệt thân, nhà ngươi sa sút",go:()=>{st.step=3;stEnd(1,"Đại nghĩa diệt thân, tố giác cha")}}]}};
 PEND.cn1=p=>{const st=S.st,m=st.mis;if(!m)return null;return {who:pv(m),t:`${m.name}, chủ cũ của ngươi, bắt ngươi quỳ dâng trà trước mặt các phi tần, nhắc ngươi từng là nô tỳ.`,o:[
    {n:"Nhẫn nhịn",fx:{duc:3,danh:-2},go:()=>{st.step=1}},{n:"Đáp trả sắc sảo",fx:{danh:2},x:`${m.name} thù ngươi hơn`,go:()=>{m.rel-=20;st.step=1}}]}};
 PEND.cn2=p=>{const st=S.st,m=st.mis,o=p.o;return {t:`${st.guard}, người từng hẹn ước với ngươi thuở còn làm cung nữ, nay gác cửa cung ngươi. Thái giám của ${m.name} đã đánh hơi thấy.`,o:[
    {n:"Đút bạc bịt miệng",fx:{bac:-50},x:"chuyện chưa dứt hẳn",go:()=>{st.secret=1;st.step=2}},
-   {n:"Diệt khẩu tên thái giám",fx:{duc:-8},x:`${word(o)} · hỏng: lộ chuyện`,go:()=>{S.schemes++;st.step=2;if(roll(o)){st.secret=2;apply({tamco:2});log("Tên thái giám chết đuối ở giếng sau.")}else{st.secret=1;apply({danh:-8});log(`<span class="r">Diệt khẩu hỏng, lời đồn đã lan.</span>`)}}},
+   {n:"Diệt khẩu tên thái giám",fx:{duc:-8},x:`${word(o)} · thành: bịt được miệng, Tâm cơ +2 · hỏng: lộ chuyện, Danh -8`,go:()=>{S.schemes++;st.step=2;if(roll(o)){st.secret=2;apply({tamco:2});log("Tên thái giám chết đuối ở giếng sau.")}else{st.secret=1;apply({danh:-8});log(`<span class="r">Diệt khẩu hỏng, lời đồn đã lan.</span>`)}}},
    {n:"Xin cho hắn ra biên ải",fx:{bac:-20,duc:4},go:()=>{st.secret=2;st.step=2}}]}};
 PEND.nc1=p=>{const st=S.st;return {t:"Mật sứ Nam Chiếu trao thư của phụ vương: muốn ngươi dò bố phòng biên ải Đại Hy.",o:[
    {n:"Trung với cố quốc",fx:{},x:"nhận việc mật; lộ là chết",go:()=>{st.path="home";st.step=1}},
@@ -121,8 +121,8 @@ PEND.td1=p=>{const st=S.st;return {t:`Lão thái giám họ Vương, nhân chứ
 PEND.ch1=p=>{const st=S.st,q=rivals[0];return {who:pTH(),t:'Thái hậu gọi ngươi vào Đức Thọ cung: “Hoàng hậu bất tài. Ngươi phải thay nàng. Trước hết, dò xem Càn Ninh cung giấu gì.”',o:[
    {n:"Vâng mệnh cô tổ",fx:{th:8},x:"chứng cứ Hoàng hậu +1",go:()=>{q.ev++;st.tool++;st.step=1}},{n:"Thoái thác",fx:{th:-15,duc:2},go:()=>{st.step=1}}]}};
 PEND.ch2=p=>{const st=S.st,q=rivals[0],o=p.o;return {who:pTH(),t:'Thái hậu dúi vào tay ngươi một gói thuốc: “Bỏ vào trà của Hoàng hậu.”',o:[
-   {n:"Vâng mệnh",fx:{duc:-10},x:`${word(o)} · hỏng: bị ban chết`,go:()=>{S.schemes++;st.tool++;st.step=2;if(roll(o)){q.alive=false;apply({th:10,tamco:2});log(`<span class="r">Hoàng hậu ${q.name} băng hà sau chén trà chiều.</span>`)}else{stEnd(-1,"Bị Thái hậu phủi tay");deathSentence("Hạ độc Hoàng hậu bị bắt, Thái hậu phủi tay không nhận")}}},
+   {n:"Vâng mệnh",fx:{duc:-10},x:`${word(o)} · thành: Hoàng hậu băng hà, Thái hậu +10 · hỏng: bị ban chết`,go:()=>{S.schemes++;st.tool++;st.step=2;if(roll(o)){q.alive=false;apply({th:10,tamco:2});log(`<span class="r">Hoàng hậu ${q.name} băng hà sau chén trà chiều.</span>`)}else{stEnd(-1,"Bị Thái hậu phủi tay");deathSentence("Hạ độc Hoàng hậu bị bắt, Thái hậu phủi tay không nhận")}}},
    {n:"Từ chối, tự gây thế lực",fx:{th:-25,danh:4},go:()=>{st.step=2}}]}};
 PEND.thd1=p=>{const st=S.st,v=RV(p.v),o1=p.o1,o2=p.o2;if(!v)return null;const lose=()=>{apply({danh:-15});st.frames++;if(st.title){st.title=0;st.step=1;log(`<span class="r">Ngươi bị tước danh hiệu Tài nữ.</span>`)}if(st.frames>=2)stEnd(-1,"Mang tiếng đạo thơ");log(`<span class="r">Cả cung tin ngươi đạo thơ.</span> Danh -15.`)};const win=()=>{apply({danh:5});v.rel-=10;log(`<span class="g">Ngươi rửa được tiếng oan, ${v.name} bẽ mặt.</span>`)};return {who:pv(v),t:`${v.name} tố ngươi chép thơ người xưa rồi nhận là của mình.`,o:[
-    {n:"Ứng tác ngay trước mặt Hoàng thượng",fx:{},x:`${word(o1)} · hỏng: Danh -15`,go:()=>roll(o1)?win():lose()},
-    {n:`Nhờ ${st.stu} minh oan`,fx:{bac:-40},x:`${word(o2)} · hỏng: Danh -15`,go:()=>roll(o2)?win():lose()}]}};
+    {n:"Ứng tác ngay trước mặt Hoàng thượng",fx:{},x:`${word(o1)} · thành: rửa được tiếng oan, Danh +5 · hỏng: Danh -15`,go:()=>roll(o1)?win():lose()},
+    {n:`Nhờ ${st.stu} minh oan`,fx:{bac:-40},x:`${word(o2)} · thành: rửa được tiếng oan, Danh +5 · hỏng: Danh -15`,go:()=>roll(o2)?win():lose()}]}};

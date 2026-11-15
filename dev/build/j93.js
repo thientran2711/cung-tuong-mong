@@ -79,6 +79,8 @@ function kitXamPlay(el,lot){if(!el||!lot)return null;const d=document.createElem
 /* ================= 3 KẾT QUẢ HÀNH ĐỘNG ================= */
 const KM_BAR=/^(Sủng|Danh|Sức|Đức|Sắc|Tài|Tâm cơ|Tai mắt|Lòng|Thái hậu|Hoàng hậu|Ân tình|Thiện cảm|Tin|Ghen|Oán)/;
 function kitResultFx(card){if(!card)return;const red=kmReduced();const ok=card.classList.contains("ok");
+ /* owner 11/15: no roll → no seal stamp (neutral "KẾT QUẢ" card) */
+ if(!ok&&!card.classList.contains("bad")){card.querySelectorAll(".kmseal").forEach(e=>e.remove());return}
  card.querySelectorAll(".kmseal,.kmfl").forEach(e=>e.remove());
  const seal=document.createElement("img");seal.className="kmseal"+(red?" km-skip":"");seal.src=KM_DIR+(ok?"mo-seal-thanh.webp":"mo-seal-bai.webp");seal.alt=ok?"Thành":"Bại";card.appendChild(seal);
  if(!red){card.classList.remove("km-thump");void card.offsetWidth;card.classList.add("km-thump")}
@@ -121,24 +123,39 @@ function kitInk(o){o=o||{};const html=`<div class="kmink"><img class="kmblot b1"
  KMQ.length=0;kmPush(done=>kmStage("km-inkov",html,{dur:2000,hold:900,onEnd:done}))}
 
 /* ================= 7 BAN THƯỞNG / QUÀ ================= */
-const KM_TIER=[["Thường","#9aa3a8"],["Tinh phẩm","#5fa58c"],["Trân phẩm","#4f74a8"],["Tuyệt phẩm","#9a5ab8"],["Ngự tứ","#e0a526"]];
-function kmTierOf(k,royal){const it=typeof IT==="object"&&IT[k];if(royal)return 4;const pr=it&&it.pr||0;return pr>=150?3:pr>=80?2:pr>=40?1:0}
-function kmItemImg(k){try{if(typeof ITIMG==="object"&&ITIMG[k])return `img/item-${ITIMG[k]}.webp`}catch(e){}return ""}
-const KM_BOX={tray:["mo-tray","mo-tray-open","Mâm thưởng"],chest:["mo-chest","mo-chest-open","Rương bảo vật"],royal:["mo-chestg","mo-chestg-open","Rương ngự tứ"],gift:["mo-giftbox","mo-giftbox-open","Hộp gấm"]};
-function kitReward(o){o=o||{};const kind=KM_BOX[o.kind]?o.kind:"chest";const B=KM_BOX[kind];
+/* grades = KIT_GRADE (jk2b) everywhere: the tier of a reward item is its REAL grade (kitItemInfo, the same as the Tư trang bag), never a price guess */
+function kmTierOf(k,royal){try{if(typeof kitItemInfo==="function")return kitItemInfo(k).grade}catch(e){}return 0}
+function kmItemImg(k){try{if(typeof kitItemInfo==="function"){const s=kitItemInfo(k).src;if(s)return s}}catch(e){}try{if(typeof ITIMG==="object"&&ITIMG[k])return `img/item-${ITIMG[k]}.webp`}catch(e){}return ""}
+const KM_BOX={tray:["mo-tray","mo-tray-open","Mâm thưởng"],chest:["mo-chest","mo-chest-open","Rương bảo vật"],royal:["mo-chestg","mo-chestg-open","Rương ngự tứ"],gift:["mo-giftbox","mo-giftbox-open","Hộp gấm"],pouch:["mo-pouch","mo-pouch-open","Bọc vải"]};
+/* kitReward({kind, title, from, items:[{n, d, img, tier 0..4, gn}], bac}) — tap the box: it rattles and opens, a pause, then EACH item rises out
+   of it one by one into the spotlight (KIT §54.1 kitRevealHTML: the kit graded frame kitItem "xl", name, grade chip), stays ~1.3 s glowing in its
+   grade colour, and settles on the shelf under the box; the silver comes last; then the list (grade chip · name · note) + Nhận.
+   Tap during the reveal = skip to the end. Timings BAL.reveal (jbal2). Items arrive lowest grade first, the best one last. */
+function kitReward(o){o=o||{};const kind=KM_BOX[o.kind]?o.kind:"chest";const B=KM_BOX[kind];const RV=(typeof BAL==="object"&&BAL.reveal)||{};
+ const KG=typeof KIT_GRADE!=="undefined"?KIT_GRADE:[{n:"Thường",c:"#9a8a78"}];const gOf=t=>Math.max(0,Math.min(4,t|0));
  const items=(o.items||[]).map(x=>Object.assign({tier:0},x)).sort((a,b)=>a.tier-b.tier);const coins=o.bac||0;
- const it=(x,i)=>{const T=KM_TIER[x.tier]||KM_TIER[0];return `<div class="kmit t${x.tier}" style="--tc:${T[1]};--i:${i}">${x.img?`<img src="${x.img}" alt="" draggable="false" onerror="this.remove()">`:`<b class="kmini0">${kmEsc((x.n||"?")[0])}</b>`}</div>`};
- const ct=coins?`<div class="kmit kmcoin t0" style="--tc:#c9a46a;--i:${items.length}"><img src="${KM_DIR}mo-ingot-silver.webp" alt=""></div>`:"";
- const rows=items.map(x=>{const T=KM_TIER[x.tier]||KM_TIER[0];return `<div class="kmrow" style="--tc:${T[1]}"><span class="kmtier">${T[0]}</span><b>${kmEsc(x.n)}</b>${x.d?`<small>${kmEsc(x.d)}</small>`:""}</div>`}).join("")+(coins?`<div class="kmrow" style="--tc:#c9a46a"><span class="kmtier">Bạc</span><b class="g">Bạc +${coins}</b></div>`:"");
+ const seq=items.map(x=>({n:x.n,d:x.d,img:x.img,g:gOf(x.tier),gn:x.gn||""}));if(coins)seq.push({n:`Bạc +${coins}`,img:`${KM_DIR}mo-ingot-silver.webp`,g:0,gn:"Bạc",coin:1});
+ const info=x=>({name:x.n,src:x.img,src512:x.img,grade:x.g,gname:x.gn||KG[x.g].n,col:x.coin?"#c9a46a":KG[x.g].c,sub:""});
+ const tile=(x,i)=>`<span class="kmsh" style="--i:${i}">${kitItem({src:x.img,name:"",grade:x.g,size:"sm",tip:x.n}).replace('<span class="kitn"></span>','')}</span>`;
+ const rows=seq.map(x=>`<div class="kmrow">${typeof kitGradeChip==="function"?kitGradeChip(x.g,{name:x.gn,size:"sm",col:x.coin?"#c9a46a":""}):""}<b${x.coin?' class="g"':""}>${kmEsc(x.n)}</b>${x.d?`<small>${kmEsc(x.d)}</small>`:""}</div>`).join("");
  const html=`<div class="kmrew kmrew-${kind}"><div class="kmrew-h"><b>${kmEsc(o.title||B[2])}</b>${o.from?`<small>${kmEsc(o.from)}</small>`:""}</div>
-  <div class="kmbox"><i class="kmlight km-loop"></i><img class="kmbox-c km-loop" src="${KM_DIR}${B[0]}.webp" alt="" draggable="false"><img class="kmbox-o" src="${KM_DIR}${B[1]}.webp" alt="" draggable="false"><i class="kmlight kmlight-f km-loop"></i><div class="kmitems">${items.map(it).join("")}${ct}</div><div class="kmcoins">${coins?Array.from({length:Math.min(9,3+Math.round(coins/10))},(_,i)=>`<img src="${KM_DIR}mo-coin-silver.webp" alt="" style="--i:${i}">`).join(""):""}</div></div>
-  <div class="kmtap km-loop">Chạm để mở</div><div class="kmlist">${rows}<button class="kbtn kmtake" data-km-close>Nhận</button></div></div>`;
+  <div class="kmbox"><i class="kmlight km-loop"></i><img class="kmbox-c km-loop" src="${KM_DIR}${B[0]}.webp" alt="" draggable="false"><img class="kmbox-o" src="${KM_DIR}${B[1]}.webp" alt="" draggable="false"><i class="kmlight kmlight-f km-loop"></i><div class="kmcoins">${coins?Array.from({length:Math.min(9,3+Math.round(coins/10))},(_,i)=>`<img src="${KM_DIR}mo-coin-silver.webp" alt="" style="--i:${i}">`).join(""):""}</div><div class="kmspot" style="--kshelf:${RV.shelf||380}ms"></div></div>
+  <div class="kmshelf"></div><div class="kmtap km-loop">Chạm để mở</div><div class="kmlist">${rows}<button class="kbtn kmtake" data-km-close>Nhận</button></div></div>`;
  kmPush(done=>{const st=kmStage("km-reward",html,{manual:true,dur:60000,onEnd:done});const root=st.ov.querySelector(".kmrew");st.ov.id="kmrew";let step=0;
-  const open=()=>{if(step)return;step=1;root.classList.add("km-shake");const t=kmReduced()?0:380;setTimeout(()=>{root.classList.remove("km-shake");root.classList.add("km-open");
-   const b=root.querySelector(".kmbox").getBoundingClientRect();const best=items.length?items[items.length-1].tier:0;kmSpark(st.ov,b.left+b.width/2,b.top+b.height*.45,best>=4?40:24,best>=4?["#f0d070","#fff3c4","#e0a526"]:["#fff3c4","#f6ead6","#e0c080"],best>=3?190:140);
-   setTimeout(()=>{step=2;root.classList.add("km-done")},kmReduced()?0:450+180*(items.length+(coins?1:0)))},t)};
-  st.ov.addEventListener("click",e=>{if(e.target.closest("[data-km-close]"))return;if(step===0)open();else if(step===1){step=2;root.classList.add("km-done","km-fast")}},true);
-  if(kmReduced()){open()}else st.later(250,()=>{})})}
+  const spot=root.querySelector(".kmspot"),shelf=root.querySelector(".kmshelf");const T=[];const later=(ms,f)=>T.push(setTimeout(()=>{try{f()}catch(e){console.error(e)}},ms));
+  const fin=()=>{T.forEach(clearTimeout);T.length=0;step=2;spot.innerHTML="";shelf.innerHTML=seq.map(tile).join("");root.classList.add("km-done","km-fast");try{window.__kmRev=(window.__kmRev||0)+1}catch(e){}};
+  const one=i=>{if(step!==1)return;if(i>=seq.length){later(RV.list||350,()=>{step=2;root.classList.add("km-done");try{window.__kmRev=(window.__kmRev||0)+1}catch(e){}});return}
+   const x=seq[i];spot.innerHTML=kitRevealHTML(info(x),{noSub:true});root.dataset.kmi=String(i);
+   try{if(typeof sfx==="function")sfx(x.coin?"sfx-coin":"sfx-open")}catch(e){}
+   if(x.g>=2){const r=spot.getBoundingClientRect();later((RV.rise||550)*.7,()=>kmSpark(st.ov,r.left+r.width/2,r.top+r.height*.4,x.g>=4?34:x.g>=3?26:16,x.g>=4?["#f0d070","#fff3c4","#e0a526"]:["#fff3c4",KG[x.g].c,"#f6ead6"],x.g>=3?170:130))}
+   later((RV.rise||550)+(RV.hold||1300),()=>{const p=spot.firstElementChild;if(p)p.classList.add("krev-out");
+    later(RV.shelf||380,()=>{spot.innerHTML="";shelf.insertAdjacentHTML("beforeend",tile(x,i));one(i+1)})})};
+  const open=()=>{if(step)return;step=1;if(kmReduced()){root.classList.add("km-open");fin();return}root.classList.add("km-shake");
+   later(RV.shake||420,()=>{root.classList.remove("km-shake");root.classList.add("km-open");
+    const b=root.querySelector(".kmbox").getBoundingClientRect();const best=seq.length?Math.max(...seq.map(x=>x.g)):0;kmSpark(st.ov,b.left+b.width/2,b.top+b.height*.45,best>=4?40:24,best>=4?["#f0d070","#fff3c4","#e0a526"]:["#fff3c4","#f6ead6","#e0c080"],best>=3?190:140);
+    later(RV.pause||700,()=>one(0))})};
+  st.ov.addEventListener("click",e=>{if(e.target.closest("[data-km-close]")){T.forEach(clearTimeout);return}if(step===0)open();else if(step===1)fin()},true);
+  if(kmReduced())open()})}
 function kitFlyItem(k){if(kmReduced()||!k)return;const src=kmItemImg(k);const tb=document.querySelector('[data-tab="inv"]');if(!src||!tb)return;const r=tb.getBoundingClientRect();
  const im=document.createElement("img");im.className="kmfly";im.src=src;im.alt="";const x0=innerWidth/2,y0=innerHeight*.45;im.style.left=x0+"px";im.style.top=y0+"px";document.body.appendChild(im);
  im.animate([{transform:"translate(-50%,-50%) scale(.4)",opacity:0},{transform:"translate(-50%,-80%) scale(1.15)",opacity:1,offset:.3},{transform:`translate(${r.left+r.width/2-x0-24}px,${r.top+r.height/2-y0-24}px) scale(.35)`,opacity:.2}],{duration:900,easing:"cubic-bezier(.4,.1,.3,1)",fill:"forwards"}).onfinish=()=>{im.remove();tb.classList.remove("km-pulse");void tb.offsetWidth;tb.classList.add("km-pulse")}}
@@ -224,8 +241,7 @@ window.kitReward=kitReward;window.kitFlyItem=kitFlyItem;window.kitAlarm=kitAlarm
 /* 8: panels and cards open the same way; buttons answer the touch */
 .dlg,.dlg.kpanel,#kpop,.kpop{animation:kmIn .28s var(--km-ease) both}
 .rtoast.karesult.on{animation:kmUp .32s var(--km-ease) both}
-:is(button,.btn,.kbtn,.opt,.card.ka,.hc,[role="button"]):not(:disabled){transition:transform .09s ease,filter .09s ease,box-shadow .12s ease}
-:is(button,.btn,.kbtn,.opt,.card.ka,.hc,[role="button"]):not(:disabled):active{transform:translateY(1px) scale(.975);filter:brightness(.95)}
+/* press / release / ripple / rim light: jfx touch kit (KIT § Cảm giác/FX) — uses the 'scale' property, so an element's own transform stays */
 @keyframes kmIn{from{opacity:0;transform:translateY(14px) scale(.96)}to{opacity:1;transform:none}}
 @keyframes kmUp{from{opacity:0;transform:translate(-50%,24px)}to{opacity:1}}
 /* stage overlay */
@@ -359,7 +375,7 @@ window.kitReward=kitReward;window.kitFlyItem=kitFlyItem;window.kitAlarm=kitAlarm
 .kmbox-o{opacity:0}
 .km-shake .kmbox-c{animation:kmRattle .38s linear both}
 .km-open .kmbox-c{opacity:0;transition:opacity .12s}.km-open .kmbox-o{opacity:1;animation:kmPop .3s var(--km-ease) both}
-.kmrew-chest .kmbox{--gx:50%;--gy:45%}.kmrew-royal .kmbox{--gx:50%;--gy:54%}.kmrew-tray .kmbox{--gx:50%;--gy:51%}.kmrew-gift .kmbox{--gx:55%;--gy:37%}
+.kmrew-chest .kmbox{--gx:50%;--gy:45%}.kmrew-royal .kmbox{--gx:50%;--gy:54%}.kmrew-tray .kmbox{--gx:50%;--gy:51%}.kmrew-gift .kmbox{--gx:55%;--gy:37%}.kmrew-pouch .kmbox{--gx:50%;--gy:48%}
 /* soft light from INSIDE the opened box (owner: no fan rays / halo anywhere): warm radial glow centred on the mouth, breathing gently.
    centring uses the separate translate property, so the scale/opacity animation never moves it */
 .kmlight{position:absolute;left:var(--gx,50%);top:calc(var(--gy,45%) - 10%);width:165%;aspect-ratio:1.2;translate:-50% -50%;scale:.5;opacity:0;border-radius:50%;pointer-events:none;
@@ -368,13 +384,15 @@ window.kitReward=kitReward;window.kitFlyItem=kitFlyItem;window.kitAlarm=kitAlarm
 .kmrew-royal .kmlight{background:radial-gradient(closest-side,#fff8dcff,#ffe08ad8 22%,#f6c45a78 48%,#f0b44a2a 72%,#f0b44a00 100%)}
 .kmrew-royal .kmlight-f,.kmrew-tray .kmlight-f,.kmrew-gift .kmlight-f{background:radial-gradient(closest-side,#fff8e0f0,#ffe4a8a0 34%,#ffd27a40 64%,#ffd27a00 100%)}
 .km-open .kmlight{animation:kmLightIn .6s ease-out forwards,kmBreathe 2.8s ease-in-out .6s infinite}
-.kmitems{position:absolute;left:0;right:0;top:3%;height:60%;display:flex;justify-content:center;align-items:center;gap:8px;pointer-events:none;z-index:4}
-.kmit{width:clamp(52px,13vw,72px);aspect-ratio:1;border-radius:10px;display:flex;align-items:center;justify-content:center;background:radial-gradient(#fffaf0,#f6ead6);border:2px solid var(--tc);box-shadow:0 0 0 2px #fffaf0,0 0 14px 2px color-mix(in srgb,var(--tc) 70%,transparent),0 6px 10px #0007;opacity:0}
-.kmit img{width:82%;height:82%;object-fit:contain}.kmini0{font-family:var(--display);color:var(--gold);font-size:1.4rem}
-.kmit.t3{box-shadow:0 0 0 2px #fffaf0,0 0 20px 5px color-mix(in srgb,var(--tc) 80%,transparent),0 6px 10px #0007}
-.kmit.t4{border-width:3px;box-shadow:0 0 0 2px #fff3c4,0 0 26px 8px #f0d070c0,0 6px 10px #0007}
-.km-open .kmit{animation:kmArc .55s cubic-bezier(.3,1.3,.5,1) calc(.25s + var(--i) * .18s) both}
-.km-fast .kmit,.km-fast .kmcoins img{animation-delay:0s!important;animation-duration:.15s!important}
+/* each item rises into the spotlight over the open box (KIT §54.1 .krev), then settles on the shelf under the box (kitItem sm) */
+.kmspot{position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);z-index:6;pointer-events:none;width:max-content;max-width:92vw}
+.kmshelf{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;min-height:0;max-width:min(92vw,520px)}
+.km-open .kmshelf{min-height:56px}
+.kmsh{display:inline-block;animation:kmPop .32s var(--km-ease) both}.km-fast .kmsh{animation-delay:calc(var(--i) * 40ms)}
+.kmbox{transition:width .3s ease,opacity .3s}.km-done .kmbox{width:min(30vw,150px);opacity:.6}
+.km-done .kmlist{max-height:calc(100dvh - 120px);overflow:auto}
+@media (max-height:560px){.km-done .kmbox,.km-done .kmshelf{display:none}.km-done .kmlist{max-height:calc(100dvh - 70px)}}
+.km-fast .kmcoins img{animation-delay:0s!important;animation-duration:.15s!important}
 .kmcoins{position:absolute;left:50%;top:55%;width:0;height:0;z-index:3;pointer-events:none}
 .kmcoins img{position:absolute;width:28px;height:auto;left:-14px;top:-14px;opacity:0}
 .km-open .kmcoins img{animation:kmCoin .8s cubic-bezier(.3,.8,.4,1) calc(.3s + var(--i) * .06s) both}
@@ -385,7 +403,7 @@ window.kitReward=kitReward;window.kitFlyItem=kitFlyItem;window.kitAlarm=kitAlarm
 .km-done .kmlist{display:flex;animation:kmUp2 .3s var(--km-ease) both}
 .kmrow{display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:8px;align-items:baseline;padding:3px 0;border-bottom:1px dotted var(--k-hair,#e6d3ac)}
 .kmrow small{grid-column:2;font-size:.76rem;color:var(--dim)}.kmrow b{font-size:.9rem}
-.kmtier{grid-row:span 2;align-self:center;font-size:.66rem;font-weight:700;color:#fff;background:var(--tc);border-radius:6px;padding:2px 6px;white-space:nowrap}
+.kmrow>.kgchip{grid-row:span 2;align-self:center}
 .kmtake{align-self:center;min-width:160px;margin-top:4px}
 .kmfly{position:fixed;z-index:9050;width:56px;height:56px;object-fit:contain;pointer-events:none;filter:drop-shadow(0 4px 8px #0007)}
 [data-tab].km-pulse{animation:kmPulse .6s ease}
@@ -407,7 +425,7 @@ window.kitReward=kitReward;window.kitFlyItem=kitFlyItem;window.kitAlarm=kitAlarm
 /* reduced motion: final frames, no travel */
 /* reduced motion (global rule in p1 removes every animation): pin each piece to its final frame */
 @media (prefers-reduced-motion:reduce){.kmcard{transform:rotateY(180deg)}.kmtab-c{transform:translateY(-4%) scale(1.06)}.kmsc-c,.kmfr-old,.kmsweep{display:none}.kmsc-o{clip-path:none}
- .kmit{opacity:1}.km-open .kmlight{opacity:1;scale:1}.kmblot{opacity:.97;transform:translate(-50%,-50%) scale(3.2)}.kmstick{transform:translate(10px,6px) rotate(64deg)}.kmdark{opacity:1}}
+ .km-open .kmlight{opacity:1;scale:1}.kmblot{opacity:.97;transform:translate(-50%,-50%) scale(3.2)}.kmstick{transform:translate(10px,6px) rotate(64deg)}.kmdark{opacity:1}}
 @media (prefers-reduced-motion:reduce){.kmov *,.kmseal,.kmxam *,.kmcal,.kmfl,.kmalarm,.dlg,#kpop,.rtoast.karesult.on{animation-duration:.01s!important;animation-delay:0s!important;animation-iteration-count:1!important}.kmfls,.kmalarm,.kmcal{display:none}}
 @media (max-width:599px){.kmtabs{height:min(46vh,360px)}.kmcap{font-size:.95rem}}
 @media (orientation:landscape) and (max-height:860px){.kmtabs{height:min(50vh,380px)}.kmbloom{height:min(74vh,520px)}.kmbox{width:min(40vw,320px)}}

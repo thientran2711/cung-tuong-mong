@@ -1,0 +1,412 @@
+{
+ "R": {
+  "out": [
+   {
+    "name": "buy sonphan (j8 buy)",
+    "lose": [],
+    "coins": [
+     "out:20"
+    ],
+    "gains": [
+     "Son phấn Dương Châu"
+    ],
+    "card": null,
+    "err": ""
+   },
+   {
+    "name": "sell nhansam (sellItem)",
+    "lose": [
+     {
+      "why": "sell",
+      "n": [
+       "Nhân sâm trăm năm"
+      ],
+      "title": "",
+      "text": "",
+      "bac": 30
+     }
+    ],
+    "coins": [
+     "in:30"
+    ],
+    "gains": [],
+    "card": null,
+    "err": ""
+   },
+   {
+    "name": "give tuithom (giveTo)",
+    "lose": [
+     {
+      "why": "give",
+      "n": [
+       "Túi thơm thêu"
+      ],
+      "title": "",
+      "text": "",
+      "bac": 0
+     }
+    ],
+    "coins": [],
+    "gains": [],
+    "card": null,
+    "err": ""
+   },
+   {
+    "name": "palace search finds hacdinh (search)",
+    "lose": [
+     {
+      "why": "lose",
+      "n": [
+       "Hạc đỉnh hồng"
+      ],
+      "title": "Bị soát phòng",
+      "text": "",
+      "bac": 0
+     }
+    ],
+    "coins": [],
+    "gains": [],
+    "card": {
+     "title": "BÁOBị soát phòngĐộc dược · Trân phẩm✕",
+     "pic": true,
+     "tiles": 1,
+     "fall": "klsFall",
+     "text": "BÁO\nBị soát phòng\nĐộc dược · Trân phẩm\n✕\nMất khỏi Tư trang: Hạc đỉnh hồng."
+    },
+    "err": ""
+   },
+   {
+    "name": "confiscated (story log)",
+    "lose": [
+     {
+      "why": "lose",
+      "n": [
+       "Vòng ngọc Hòa Điền"
+      ],
+      "title": "Bị tịch thu",
+      "text": "Hoàng hậu sai người tịch thu Vòng ngọc Hòa Điền của ngươi vì vượt phẩm.",
+      "bac": 0
+     }
+    ],
+    "coins": [],
+    "gains": [],
+    "card": {
+     "title": "BÁOBị tịch thuTrang sức · Tinh phẩm✕",
+     "pic": true,
+     "tiles": 1,
+     "fall": "klsFall",
+     "text": "BÁO\nBị tịch thu\nTrang sức · Tinh phẩm\n✕\nHoàng hậu sai người tịch thu Vòng ngọc Hòa Điền của ta vì vượt phẩm.\nMất khỏi Tư trang: Vòng ngọc Hòa Điền."
+    },
+    "err": ""
+   },
+   {
+    "name": "robbed (story log)",
+    "lose": [
+     {
+      "why": "lose",
+      "n": [
+       "Trâm ngọc bích"
+      ],
+      "title": "Bị cướp",
+      "text": "Trên đường về cung, ngươi bị kẻ lạ cướp mất Trâm ngọc bích.",
+      "bac": 0
+     }
+    ],
+    "coins": [],
+    "gains": [],
+    "card": {
+     "title": "BÁOBị cướpTrâm cài · Thường✕",
+     "pic": true,
+     "tiles": 1,
+     "fall": "klsFall",
+     "text": "BÁO\nBị cướp\nTrâm cài · Thường\n✕\nTrên đường về cung, ta bị kẻ lạ cướp mất Trâm ngọc bích.\nMất khỏi Tư trang: Trâm ngọc bích."
+    },
+    "err": ""
+   },
+   {
+    "name": "bullied (story log)",
+    "lose": [
+     {
+      "why": "lose",
+      "n": [
+       "Lụa Hàng Châu"
+      ],
+      "title": "Bị ép giao đồ",
+      "text": "Mấy cung nữ cũ bắt nạt, đòi ngươi giao Lụa Hàng Châu ra.",
+      "bac": 0
+     }
+    ],
+    "coins": [],
+    "gains": [],
+    "card": {
+     "title": "Bị ép giao đồ",
+     "queued": true,
+     "pic": true,
+     "tiles": 1,
+     "fall": "klsFall",
+     "text": "Mấy cung nữ cũ bắt nạt, đòi ngươi giao Lụa Hàng Châu ra. Mất khỏi Tư trang: Lụa Hàng Châu."
+    },
+    "err": ""
+   },
+   {
+    "name": "use yensao (useItem): nothing",
+    "lose": [],
+    "coins": [],
+    "gains": [],
+    "card": null,
+    "err": ""
+   },
+   {
+    "name": "gone with no story: fade only",
+    "lose": [
+     {
+      "why": "fade",
+      "n": [
+       "Đệm gấm"
+      ],
+      "title": "",
+      "text": "",
+      "bac": 0
+     }
+    ],
+    "coins": [],
+    "gains": [],
+    "card": null,
+    "err": ""
+   },
+   {
+    "name": "spend silver (apply bạc −30)",
+    "lose": [],
+    "coins": [
+     "out:30"
+    ],
+    "gains": [],
+    "card": null,
+    "err": ""
+   },
+   {
+    "name": "wear tram_ngoclan (wdWear): nothing",
+    "lose": [],
+    "coins": [],
+    "gains": [],
+    "card": null,
+    "err": ""
+   },
+   {
+    "name": "take tram_ngoclan off: no reveal",
+    "lose": [],
+    "coins": [],
+    "gains": [],
+    "card": null,
+    "err": ""
+   }
+  ],
+  "rev": {
+   "want": [
+    "Thường",
+    "Tinh phẩm",
+    "Trân phẩm"
+   ],
+   "rec": [
+    {
+     "t": 288,
+     "i": -1,
+     "frame": false,
+     "chip": "",
+     "done": false
+    },
+    {
+     "t": 544,
+     "i": -1,
+     "frame": false,
+     "chip": "",
+     "done": false
+    },
+    {
+     "t": 1997,
+     "i": -1,
+     "frame": false,
+     "chip": "",
+     "done": false
+    },
+    {
+     "t": 2573,
+     "i": 0,
+     "frame": true,
+     "chip": "Thường",
+     "done": false
+    },
+    {
+     "t": 2944,
+     "i": 0,
+     "frame": true,
+     "chip": "Thường",
+     "done": false
+    },
+    {
+     "t": 3678,
+     "i": 0,
+     "frame": true,
+     "chip": "Thường",
+     "done": false
+    },
+    {
+     "t": 3868,
+     "i": 0,
+     "frame": true,
+     "chip": "Thường",
+     "done": false
+    },
+    {
+     "t": 4526,
+     "i": 0,
+     "frame": true,
+     "chip": "Thường",
+     "done": false
+    },
+    {
+     "t": 4847,
+     "i": 0,
+     "frame": true,
+     "chip": "Thường",
+     "done": false
+    },
+    {
+     "t": 4948,
+     "i": 1,
+     "frame": true,
+     "chip": "Tinh phẩm",
+     "done": false
+    },
+    {
+     "t": 6512,
+     "i": 1,
+     "frame": true,
+     "chip": "Tinh phẩm",
+     "done": false
+    },
+    {
+     "t": 6825,
+     "i": 1,
+     "frame": true,
+     "chip": "Tinh phẩm",
+     "done": false
+    },
+    {
+     "t": 7058,
+     "i": 1,
+     "frame": true,
+     "chip": "Tinh phẩm",
+     "done": false
+    },
+    {
+     "t": 7631,
+     "i": 1,
+     "frame": true,
+     "chip": "Tinh phẩm",
+     "done": false
+    },
+    {
+     "t": 7974,
+     "i": 2,
+     "frame": true,
+     "chip": "Trân phẩm",
+     "done": false
+    },
+    {
+     "t": 8392,
+     "i": 2,
+     "frame": true,
+     "chip": "Trân phẩm",
+     "done": false
+    },
+    {
+     "t": 8492,
+     "i": 2,
+     "frame": true,
+     "chip": "Trân phẩm",
+     "done": false
+    },
+    {
+     "t": 9088,
+     "i": 2,
+     "frame": true,
+     "chip": "Trân phẩm",
+     "done": false
+    },
+    {
+     "t": 9322,
+     "i": 2,
+     "frame": true,
+     "chip": "Trân phẩm",
+     "done": false
+    },
+    {
+     "t": 9796,
+     "i": 2,
+     "frame": true,
+     "chip": "Trân phẩm",
+     "done": false
+    },
+    {
+     "t": 9920,
+     "i": 2,
+     "frame": true,
+     "chip": "Trân phẩm",
+     "done": false
+    },
+    {
+     "t": 10020,
+     "i": 2,
+     "frame": true,
+     "chip": "Trân phẩm",
+     "done": false
+    },
+    {
+     "t": 10121,
+     "i": 2,
+     "frame": true,
+     "chip": "Trân phẩm",
+     "done": false
+    },
+    {
+     "t": 10410,
+     "i": -1,
+     "frame": false,
+     "chip": "",
+     "done": false
+    },
+    {
+     "t": 10798,
+     "i": -1,
+     "frame": false,
+     "chip": "",
+     "done": false
+    },
+    {
+     "t": 10927,
+     "i": -1,
+     "frame": false,
+     "chip": "",
+     "done": true
+    }
+   ],
+   "list": [
+    "Thường",
+    "Tinh phẩm",
+    "Trân phẩm"
+   ],
+   "shelf": 3,
+   "priv": 0
+  },
+  "gi": {
+   "kit": true,
+   "chip": "Tinh phẩm · Thuốc bổ",
+   "priv": 0,
+   "openAfterEarlyTap": true,
+   "closedLater": true
+  }
+ },
+ "errs": [],
+ "F": []
+}

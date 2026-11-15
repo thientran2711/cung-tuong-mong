@@ -24,6 +24,7 @@ def h(p):
 ROLE = ['emperor', 'thaihau', 'player', 'consort', 'eunuch', 'mama', 'official', 'physician', 'man', 'kid', 'maid']
 def bgkey(p):
     b = os.path.basename(p)
+    if b.endswith('.js'): return (-1, 0, 0, b)
     if b.startswith(('ev-', 'st-', 'map-fest-')): return (0, 0, 0, b)
     m = re.match(r'(fig|por)-([a-z]+)-?(.*)\.webp$', b)
     role = m.group(2) if m else ''
@@ -59,6 +60,12 @@ for top in (('audio', 'icons') if IMG_BASE else ('img', 'audio', 'icons')):
             hv, sz = h(os.path.join(R, p))
             g = 'fig' if re.match(r'img/(fig|por|ev|st|map-fest)-', p) else 'core'
             files.append([p, hv, sz, g])
+# the bundled Pixi library (dev/vendor): fetched by the game only when a Pixi layer is first needed; listed here so sw.js caches it by content
+# (plays offline) and jload.js downloads it in the background after entering (group 'fig', first in line), never before the title screen
+VD = os.path.join(R, 'dev', 'vendor')
+for f in (sorted(os.listdir(VD)) if os.path.isdir(VD) else []):
+    if f.endswith('.js'):
+        p = 'dev/vendor/' + f; hv, sz = h(os.path.join(R, p)); files.append([p, hv, sz, 'fig'])
 core = [f for f in files if f[3] == 'core']
 fig = sorted((f for f in files if f[3] == 'fig'), key=lambda f: bgkey(f[0]))
 # the title backdrops first so the loading screen has its painting at once

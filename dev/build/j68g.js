@@ -35,7 +35,7 @@ EV6("doubtVisit","visit",{a:["rv"],pp:()=>{const a=rv6(v=>T6(v,"Đa nghi")||oan(
   c6("Mời nàng tự đến khám xét",{p:od(55+S.duc/4),r:[[X.A,12]],w:{duc:1},l:{danh:-2},lt:[R6("nàng bới ra chuyện khác để nói")]}),
   c6("Mặc kệ nàng",{w:{suc:1},r:[[X.A,-8]],k:[R6("nàng oán thêm")]})]});
 EV6("empWager","emp",{a:["emp"],pp:()=>S.sung>=25?{a0:0}:null,w:C=>(C.sea==="Thu"||C.sea==="Hạ")?1.4:.5,
- v:["Hoàng thượng bày trò chọi dế ở ngự hoa viên, rủ ngươi đặt cược.","Ngài cược với ngươi xem con diều của ai bay cao hơn.","Ngài đố ngươi đoán số hạt sen trong bát, đoán đúng thì ban thưởng.","Ngài mở cuộc thi câu cá, ai câu được con lớn nhất được ngài ban rượu."],
+ v:["Hoàng thượng bày trò chọi dế ở ngự hoa viên, rủ ngươi đặt cược.","Ngài cược với ngươi xem con diều của ai bay cao hơn.","Ngài đố ngươi đoán số hạt sen trong bát, đoán đúng thì ban thưởng.","Ngài mở cuộc thi câu cá, ai câu được con lớn nhất được ngài ban thưởng."],
  o:X=>[c6("Cược lớn cho ngài vui",{c:{bac:-30},p:50,w:{bac:70,sung:2},l:{sung:1},lt:[R6("mất bạc cược")]}),
   c6("Cược nhỏ, giữ chừng mực",{c:{bac:-10},p:50,w:{bac:20,sung:1},lt:[R6("mất bạc cược")],l:{sung:0}}),
   c6("Đứng xem, khen ngài",{w:{sung:1},k:[R6("ngài chê ngươi nhát: Danh -1")],ok:()=>{apply({danh:-1});return "Ngài cười ngươi nhát gan."}})]});
@@ -93,7 +93,7 @@ EV6("envoyGift","court",{a:["emp"],pp:()=>({a0:0}),w:C=>.8,
  v:["Sứ thần nước ngoài dâng ngọc quý; Hoàng thượng chia cho lục cung mỗi nơi một món.","Cống phẩm phương nam về: vải thiều, long nhãn; ngài sai mang sang cung ngươi trước.","Sứ thần tặng một cây đàn lạ, ngài muốn xem phi tần nào gảy được.","Nước chư hầu dâng hai con công trắng, ngài hỏi cung nào muốn nuôi."],
  o:X=>[c6("Tạ ơn, chia cho người hầu",{w:{maid:6,duc:1},k:[R6("không giữ được gì cho mình")]}),
   c6("Thử tài trước sứ thần",{c:{suc:-5},p:od(30+S.tai/2),w:{danh:3,sung:2},l:{danh:-2},lt:[R6("mất mặt trước người ngoài")]}),
-  c6("Xin giữ làm của riêng",{w:{bac:30},k:[R6("phi tần ghen +3")],ok:()=>{ghenAll(3);return "Ngài ban riêng cho ngươi."}})]});
+  c6("Xin giữ làm của riêng",Object.assign({k:[R6("phi tần ghen +3")],ok:()=>{ghenAll(3);return "Ngài ban riêng cho ngươi."}},typeof stipEvItem==="function"&&stipEvItem("envoyGift",X)?{}:{w:{bac:30}}))]});
 /* extra variants for existing templates (more distinct situations per template) */
 [["giftArrive","{A} sai tiểu thái giám mang sang một lồng chim họa mi, nói để ngươi đỡ buồn."],
  ["lostItem","Chiếc khăn tay thêu tên ngươi không thấy đâu; nếu lọt vào tay kẻ xấu thì thành tang vật."],
@@ -103,7 +103,7 @@ EV6("envoyGift","court",{a:["emp"],pp:()=>({a0:0}),w:C=>.8,
  ["brokenHeirloom","{A} làm gãy cây sáo trúc ngươi mang từ nhà vào."],
  ["eunuchSqueeze","Thái giám coi cửa không cho cung nữ của ngươi ra ngoài mua thuốc nếu không có 'lệ phí'."],
  ["proudVisit","{A} sai người mang sang một đĩa bánh thừa từ yến của nàng, 'ban' cho cung ngươi."],
- ["kindVisit","{A} mang sang mấy cuộn chỉ thêu quý, nói dư dùng không hết."],
+ ["kindVisit","{A} sang ngồi thêu cùng ngươi, chỉ cách phối chỉ màu cho đẹp."],
  ["slyVisit","{A} xin vào xem chỗ ngươi cất thuốc an thần, nói muốn học cách bảo quản."],
  ["thMama","Ma ma Đức Thọ cung đến nhắc khéo: dạo này ngươi đến thỉnh an muộn."],
  ["docCheck","{A} nhắc ngươi mùa này dễ nhiễm lạnh, khuyên dùng thang thuốc ôn bổ."],
