@@ -418,3 +418,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - [ ] (11:45Z) Bấm ra ngoài để tắt thẻ kết quả (THÀNH) bị lọt xuống nút bên dưới → chạy luôn hành sự. Luật: mọi thẻ đang mở, cú bấm ngoài đầu tiên CHỈ đóng thẻ, không lọt xuống (kit-close sửa + test).
 - [ ] (11:50Z) Tài nghệ Nấu nướng: chưa chơi đã hiện BẠI, trừ Sức −15, Bạc −6, mất hết khắc buổi → hành sự bị chạy 2 lần (nghi bấm lọt). Luật: mỗi lần bấm chỉ chạy 1 lần; trò chơi chưa chơi thì không trừ, không có kết quả (act-audit sửa + test).
 - (11:55Z) Trang điểm hiện lên mặt nàng: nhạt → mặt bình thường; đẹp → má hồng nhẹ, môi hồng, da sáng hơn; quá đà → diêm dúa, má đỏ tròn quá mức, môi đỏ đậm, phấn trắng (hài hước). Hiện ở mọi chỗ vẽ ảnh nàng trong buổi/ngày đó.
+- (12:00Z) Đính chính lỗi Nấu nướng: KHÔNG phải bấm lọt. Bấm 1 lần là trừ và ra BẠI ngay, rồi mới hiện trò chơi. Đúng thứ tự: bấm → trò chơi → chơi xong mới trừ và hiện thẻ kết quả. Rà mọi hành sự có trò chơi.
