@@ -262,9 +262,9 @@ function wkBookPages(){const d=wkBookData();const date=kitDate(S.month,S.year,S.
 .kbk.spread .kbk-book.closed{transform:translateX(calc(var(--pw) * -.5))}
 .kbk-book.fade{opacity:0}
 /* boards behind the pages: cloth edges + page-stack lines */
-.kbk-book::before{content:"";position:absolute;inset:-7px -7px -7px -7px;border-radius:5px;background:repeating-linear-gradient(45deg,#ffffff07 0 2px,transparent 2px 5px),linear-gradient(var(--cloth),var(--cloth2));box-shadow:0 18px 40px #000b,inset 0 0 0 1px #ffffff14}
+.kbk-book::before{content:"";position:absolute;inset:-2px;border-radius:5px;background:linear-gradient(#e6d3ab,#c9ad7d);box-shadow:0 6px 18px #3a1e0a40}
 .kbk.spread .kbk-book.closed::before{left:calc(50% - 7px)}
-.kbk.single .kbk-book::before{left:-16px}
+.kbk.single .kbk-book::before{left:-4px}
 .kbk-book::after{content:"";position:absolute;top:2px;bottom:2px;right:-4px;width:4px;background:repeating-linear-gradient(90deg,#e9d8b4 0 1px,#bfa679 1px 2px);border-radius:0 2px 2px 0}
 .kbk.single .kbk-book{margin-left:12px}
 .kbk-sheet{position:absolute;top:0;left:0;width:100%;height:100%;transform-origin:0 50%;transform-style:preserve-3d;transition:none}

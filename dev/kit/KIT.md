@@ -1084,19 +1084,34 @@ kitCurlOff();       // true when "Cảnh động" is off (OPT.fxon=false) or pre
 `kitLeather(el)` (CSS only, no new art): tanned hide with grain + burnt edges, uneven hide outline, stitched border, two rolled ends, the
 painting inset with a soft burnt edge and leather tone. Full panel, no gutter, no spine, no paper. The info strip that used to sit over the
 map (season · khắc left · travel cost legend · festival chip) is removed; the map tools (− + ⓘ Ra vào, Danh sách) float on the painting.
-`kitUnroll(el)`: going to the map, it unrolls from the middle (the two rolls slide out), 620 ms; reduced motion: none.
+`kitUnroll(el)`: going to the map, it unrolls from the middle (the two rolls slide out); reduced motion / Cảnh động off: none.
+**KIT_MAP_MS** (jbook, owner 11/15 01:30Z "Dư đồ animation cuộn cho chậm lại") = the ONE map-motion timing: `unroll` 1150 ms (was 620 ms),
+`ease` cubic-bezier(.45,.05,.3,1) (ease-in-out: soft start, soft stop). Any touch / click / wheel / key on the map during the unroll ends
+it at once (final frame), so the player's hand is never fought. A re-render during the unroll (e.g. a portrait finishing loading) that
+replaces the map element continues the unroll at the same point (`kitUnrollKeep`, negative animation-delay) — before, it was cut off at
+~0.3 s, which is the "too fast" the owner saw. Centring the map on her place (j27/j38) is an instant jump, not an animation.
+Any future Dư đồ motion (glide to a place, palace detail map) reads its time from KIT_MAP_MS — no private durations.
 Live: `.game.maptab #panel .mapv` gets it on every render. kitBookSpread `double` = the leather map over the whole book area.
 
 ### 34.1d Map labels — one look for every place, locked or not (owner 11/15 "map grey box", j41 accSpot)
 Every place on Dư đồ wears the SAME label: name + "N bóng · K khắc" (+ silhouettes). A place she cannot enter now adds only a small
 lock mark (`.mlock`, after the name) — no grey box over the map art, no reason line, no buttons on the map, nothing cut. Tapping the
 label opens the kit option card (`j77Card`): the reason, Xin yết kiến / Xin bái kiến, Lẻn vào (odds ladder, khắc, what is lost), wait.
+WALK RULE (owner 11/15 01:35Z, `walkOk(tc)` / `walkWhy(tc)` in j9 — one rule for map, list, person-card visit/see, servant road): she may
+walk anywhere whose walk cost ≤ khắc left (never walk + 1). Arriving with 0 left is allowed: the tap first shows a kit card "Đường đi N khắc
+· đến nơi là hết buổi, chỉ kịp xem ai ở đó" (Đi / Thôi, `j77LastWalk`); she sees who is there, next buổi she starts there. A label says
+"hết khắc" ONLY when 0 are left; a walk longer than what is left shows "đi N khắc" (+ lock mark; card reason "đi N khắc, còn M").
 
 ### 34.1c kitBookLive — the LIVE game is the open book (every tab, both roads; owner 11/15 priority)
-`kitBookLive()` runs after every render (jbook, end): `.game.kbook` + a cover board (`.kbk-board`, grid child behind the page row).
+`kitBookLive()` runs after every render (jbook, end): `.game.kbook` (no cover board).
+- **NO DARK COVER BOARD (owner 11/15 02:35Z, Fold Hậu cung: "Nó có cái nền tím gì ở dưới kìa")** — the purple/indigo cloth board
+  (`.kbk-board`, `.kbs-book::before`, the week book `.kbk-book::before` var(--cloth)) is GONE on every tab, every size, the room view and the
+  week book. The page lies straight on the game background; the only book edge is a thin paper edge / spine in the kit cream-brown
+  (`#e6d3ab → #c9ad7d`, ≤ 4 px, soft brown shadow) — never a dark band, never a thick strip under the page or above the tab row.
+  (The week book's own painted front cover page `k-cover` is a picture of the book's cover, not a board, and stays.)
 - iPad landscape (≥ 900 px, landscape): the room stage = LEFT picture page (room painting printed on the page: paper margin, thin red rule,
   stacked leaves outside, gutter shadow inside), the tab panel = RIGHT text page (paper, crease + gutter shadow on its inner edge, stacked
-  leaves outside), no gap between them, indigo cover board behind both. Phone / portrait: ONE paper page (the panel) on the board.
+  leaves outside), no gap between them, no board behind them. Phone / portrait: ONE paper page (the panel) straight on the game background.
 - Every tab of both roads (Hành sự … Mệnh truyện; cung nữ: Phận sự, Đồng liêu, Thân phận, Sổ ghi) uses it; a tab switch curls the right page
   (§34.1). Not a book: Dư đồ (leather map, §34.1b), title, end screen.
 - Room stage = ONE backdrop: the Pixi room copy (j11) is drawn only when it is the very picture + crop #scimg shows (incl. the portrait
@@ -1111,13 +1126,13 @@ bs.swap(()=>{ /* switch tab: the game re-renders #panel */ bs.set({pic:kitBookPi
 bs.mode   // "spread" (host ≥ 900 px wide and landscape, same rule as kitBook) | "single"
 kitBookSpread.wantsPic(host)              // false on phones: skip building the picture page there
 ```
-- Spread: two `.kpaper` pages, outer page edges (stacked leaves), soft gutter shadow + crease, cover board behind. Forward swap: the old right
+- Spread: two `.kpaper` pages, outer page edges (stacked leaves), soft gutter shadow + crease, a thin cream-brown paper edge (no dark board). Forward swap: the old right
   page curls over to the left, its back already showing the NEW left picture; the new right page lies underneath. dir −1: the new right page
   curls back in from the left over the old spread.
 - Single: only the text page (`.kbs-r`). Forward swap: the old page curls away to the left revealing the new one; dir −1: the new page curls
   back in. Swipes are left to the caller (tab bar / gestures of the live layout).
-- `double`: the Dư đồ map — shown as the leather map (kitLeather) over the whole book area in both modes; pages, gutter and cover
-  board are hidden. Turning to it unrolls the map; leaving it fades (the map is not a page, it never curls).
+- `double`: the Dư đồ map — shown as the leather map (kitLeather) over the whole book area in both modes; pages, gutter and paper
+  edge are hidden. Turning to it unrolls the map; leaving it fades (the map is not a page, it never curls).
 - Paper skin `.kpaper` (warm paper, faint fibres, edge tint) is reusable on its own for any page-like surface.
 
 ### 34.3 kitBookPic — the picture page (illustration only)

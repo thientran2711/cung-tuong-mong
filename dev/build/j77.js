@@ -17,8 +17,8 @@
   try{return g0.apply(this,arguments)}finally{can=c0}};
 })();
 /* what stops the walk itself, in words */
-function j77Kh(n){return !!S&&!S.dead&&used+n<=4}
-function j77WalkWhy(tc){const left=Math.max(0,4-used);if(left<=0)return"hết khắc";return `đi tốn ${tc} khắc, còn ${left}`}
+function j77Kh(n){return walkOk(n)}
+function j77WalkWhy(tc){return walkWhy(tc)}
 /* the map state of a place (same shape as j41's; prices: walk tc, ask 1+tc, sneak 1+tc) */
 accState=function(k){if(!S||!k)return{why:""};if(S.place===k)return{why:"",here:1};
  if(S.out)return{why:"đang ở lãnh cung"};if(S.confined)return{why:`cấm túc ${S.confined} tháng`};
@@ -60,10 +60,14 @@ function j77Card(k,empty){if(!S||S.dead||Q.length)return;
  if(waitHelps&&!S.out&&!S.confined&&!S.mg){const night=(S.buoi||0)>=2;opts.push({n:night?"Đợi sáng mai (Qua đêm)":"Đợi buổi sau (Qua buổi)",fx:{},x:st.kind==="hour"||/sáng|thỉnh an/.test(st.why||"")?"sáng mai mở cửa, thử lại":night?"sáng mai đủ khắc, thử lại":"sang buổi sau đủ khắc, thử lại",go:()=>setTimeout(()=>{try{nextBuoi()}catch(e){}},0)})}
  if(opts.length){opts.push({n:"Thôi",fx:{},x:""});Q.push({t:nm,h:L.join(""),opts})}else Q.push({t:nm,h:L.join(""),btn:"Đã hiểu"});
  showModal()}
+/* a walk that uses the last khắc: say so plainly, then go (she sees who is there; next buổi she starts there) */
+function j77LastWalk(k,tc){let n=0;try{n=countAt(k)}catch(e){}
+ Q.push({t:accName(k),h:`<p>Đường đi ${tc} khắc · đến nơi là hết buổi, chỉ kịp xem ai ở đó.</p>${n?`<p class="past">Có ${n} bóng người ở đó.</p>`:""}<p class="past">Buổi sau ngươi bắt đầu ở đó.</p>`,
+  opts:[{n:"Đi",fx:{},x:`Chắc chắn · tốn: ${tc} khắc · thành: đến nơi, thấy ai ở đó; người ở đó có thể đến gần`,go:()=>setTimeout(()=>{if(S&&!S.dead&&!Q.length)goTo(k)},0)},{n:"Thôi",fx:{},x:""}]});showModal()}
 /* one tap rule for the map and the list */
 function j77Tap(k,empty){if(!S||S.dead||Q.length)return;if(empty||!k)return j77Card(k,empty||"Cung trống");
  if(S.place===k){window.__fromMap=1;tab="act";render();return}
- const st=accState(k);if(!st.why){goTo(k);if(S.place!==k&&!Q.length)j77Card(k);return}
+ const st=accState(k);if(!st.why){if(k!=="home"&&st.tc&&used+st.tc>=4&&!accEtq(S,k))return j77LastWalk(k,st.tc);goTo(k);if(S.place!==k&&!Q.length)j77Card(k);return}
  j77Card(k)}
 window.addEventListener("click",e=>{try{if(typeof tab==="undefined"||tab!=="go"||!S)return;
  const sp=e.target.closest("#panel .mspot, #panel .mtile");if(!sp)return;

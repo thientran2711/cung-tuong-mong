@@ -146,8 +146,17 @@ function kitLeather(el){if(!el)return el;el.classList.add("kleather");
  if(!el.querySelector(":scope>.kl-roll")){for(const s of["l","r"]){const i=document.createElement("i");i.className="kl-roll kl-"+s;i.setAttribute("aria-hidden","true");el.appendChild(i)}
   const t=document.createElement("i");t.className="kl-tone";t.setAttribute("aria-hidden","true");el.appendChild(t)}
  return el}
-function kitUnroll(el){if(!el||kitCurlOff())return;el.classList.remove("kl-unroll");void el.offsetWidth;el.classList.add("kl-unroll");
- setTimeout(()=>el.classList.remove("kl-unroll"),700)}
+/* KIT_MAP_MS (owner 11/15 01:30Z "Dư đồ animation cuộn cho chậm lại"): ONE timing for the map unroll — slow, ease-in-out (soft start,
+   soft stop). A touch / click / wheel / key on the map ends it at once (never fights the player's hand). Cảnh động off / reduced motion: none. */
+const KIT_MAP_MS={unroll:1150,ease:"cubic-bezier(.45,.05,.3,1)"};
+let kitUnrollRun=null;   // {el,t0}: the unroll in progress; a re-render that replaces the map continues it (kitUnroll(newEl, elapsed))
+function kitUnroll(el,at){if(!el||kitCurlOff())return;at=at||0;if(at>=KIT_MAP_MS.unroll)return;if(el.__klStop)el.__klStop();
+ el.style.setProperty("--kl-ms",KIT_MAP_MS.unroll+"ms");el.style.setProperty("--kl-ease",KIT_MAP_MS.ease);el.style.setProperty("--kl-at",(-at)+"ms");
+ el.classList.remove("kl-unroll");void el.offsetWidth;el.classList.add("kl-unroll");
+ const ev=["pointerdown","touchstart","wheel","keydown"];let tm=0;
+ const stop=()=>{clearTimeout(tm);el.classList.remove("kl-unroll");for(const e of ev)el.removeEventListener(e,stop,true);el.__klStop=null;if(kitUnrollRun&&kitUnrollRun.el===el)kitUnrollRun=null};
+ for(const e of ev)el.addEventListener(e,stop,{capture:true,passive:true});el.__klStop=stop;kitUnrollRun={el,t0:performance.now()-at};tm=setTimeout(stop,KIT_MAP_MS.unroll-at+80)}
+function kitUnrollKeep(el){const r=kitUnrollRun;if(el&&r&&r.el!==el){if(r.el.__klStop)r.el.__klStop();kitUnroll(el,performance.now()-r.t0)}}
 
 /* ---------- kitBookSpread: the two-page book container ----------
    kitBookSpread(host, {pic, text, double, mode:"auto"|"spread"|"single"})
@@ -241,7 +250,8 @@ html body .kcl .kcl-ctx>*{position:absolute!important;inset:0!important;width:au
 /* two-page book */
 .kbs{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;box-sizing:border-box;padding:var(--kbs-pad,10px 14px 12px)}
 .kbs-book{position:relative;width:100%;height:100%;display:grid;grid-template-columns:1fr 1fr;transition:opacity .17s}
-.kbs-book::before{content:"";position:absolute;inset:-6px -7px;border-radius:6px;background:repeating-linear-gradient(45deg,#ffffff08 0 2px,transparent 2px 5px),linear-gradient(#3a2a52,#241a36);box-shadow:0 14px 34px #0008,inset 0 0 0 1px #ffffff14}
+/* NO dark cover board (owner 11/15 02:35Z "nền tím gì ở dưới", KIT §34.1c): only a thin paper edge in the kit's cream-brown */
+.kbs-book::before{content:"";position:absolute;inset:-2px;border-radius:5px;background:linear-gradient(#e6d3ab,#c9ad7d);box-shadow:0 4px 12px #3a1e0a2e}
 .kbs-pg{position:relative!important;inset:auto;overflow:hidden;min-width:0;min-height:0}
 .kbs-l{border-radius:4px 0 0 4px}.kbs-r{border-radius:0 4px 4px 0}
 /* page edges: thin stacked leaves on the outer edges */
@@ -311,8 +321,8 @@ html .game .kleather>.maptools>.past,html .game .kleather>.maptools>.fest{displa
 .panel:has(>.kleather){background:transparent!important;border-color:transparent!important;box-shadow:none!important;padding:0!important}
 @media (max-width:760px){.kleather{padding:15px 23px}.kleather::before{inset:6px 17px}.kleather>.kl-tone,html .game .kleather>.maptools{inset:15px 23px}.kl-roll{width:15px}}
 /* unrolling (going to the map) */
-.kleather.kl-unroll{animation:kl-un .62s cubic-bezier(.25,.7,.25,1)}
-.kl-unroll>.kl-l{animation:kl-rl .62s cubic-bezier(.25,.7,.25,1)}.kl-unroll>.kl-r{animation:kl-rr .62s cubic-bezier(.25,.7,.25,1)}
+.kleather.kl-unroll{animation:kl-un var(--kl-ms,1.15s) var(--kl-ease,ease-in-out) var(--kl-at,0ms) both}
+.kl-unroll>.kl-l{animation:kl-rl var(--kl-ms,1.15s) var(--kl-ease,ease-in-out) var(--kl-at,0ms) both}.kl-unroll>.kl-r{animation:kl-rr var(--kl-ms,1.15s) var(--kl-ease,ease-in-out) var(--kl-at,0ms) both}
 @keyframes kl-un{from{clip-path:polygon(48.51% 0.36%,48.69% 0.72%,48.9% 0.59%,49.13% 0.06%,49.36% 0.04%,49.57% 0.08%,49.76% 0.47%,50.02% 0.14%,50.2% 0.69%,50.46% 0.63%,50.64% 1.07%,50.83% 0.94%,51.06% 0.16%,51.26% 0.34%,51.48% 0.5%,51.5% 7.31%,51.48% 14.03%,51.49% 20.55%,51.5% 27.98%,51.48% 35.57%,51.49% 43.03%,51.49% 49.6%,51.48% 57.54%,51.49% 64.43%,51.49% 72.18%,51.48% 78.15%,51.48% 84.95%,51.49% 93.37%,51.49% 99.83%,51.29% 99.96%,51.08% 99.16%,50.86% 99.04%,50.63% 99.24%,50.43% 99.36%,50.21% 99.08%,50.03% 99.48%,49.8% 99.93%,49.58% 99.29%,49.39% 99.1%,49.13% 99.58%,48.94% 99.98%,48.71% 99.82%,48.5% 99.5%,48.5% 93.39%,48.5% 85.21%,48.51% 79.31%,48.5% 71.33%,48.51% 65.05%,48.52% 57.87%,48.51% 49.83%,48.51% 43.63%,48.52% 35.02%,48.5% 28.04%,48.51% 21.4%,48.51% 13.81%,48.5% 6.98%)}to{clip-path:polygon(0.4% 0.36%,6.44% 0.72%,13.43% 0.59%,21.16% 0.06%,28.59% 0.04%,35.58% 0.08%,42.04% 0.47%,50.65% 0.14%,56.59% 0.69%,65.18% 0.63%,71.22% 1.07%,77.66% 0.94%,85.29% 0.16%,92.09% 0.34%,99.35% 0.5%,99.86% 7.31%,99.49% 14.03%,99.56% 20.55%,99.95% 27.98%,99.46% 35.57%,99.75% 43.03%,99.64% 49.6%,99.36% 57.54%,99.8% 64.43%,99.58% 72.18%,99.42% 78.15%,99.22% 84.95%,99.67% 93.37%,99.6% 99.83%,92.84% 99.96%,86.05% 99.16%,78.72% 99.04%,71.06% 99.24%,64.47% 99.36%,57.06% 99.08%,50.89% 99.48%,43.19% 99.93%,36.12% 99.29%,29.56% 99.1%,21.0% 99.58%,14.62% 99.98%,7.07% 99.82%,0.09% 99.5%,0.05% 93.39%,0.1% 85.21%,0.31% 79.31%,0.06% 71.33%,0.44% 65.05%,0.66% 57.87%,0.22% 49.83%,0.29% 43.63%,0.77% 35.02%,0.14% 28.04%,0.19% 21.4%,0.47% 13.81%,0% 6.98%)}}
 @keyframes kl-rl{from{left:calc(50% - 16px)}to{left:2px}}@keyframes kl-rr{from{right:calc(50% - 16px)}to{right:2px}}
 .kcl-host{position:fixed;z-index:40;pointer-events:none;
@@ -323,14 +333,10 @@ html .game .kleather>.maptools>.past,html .game .kleather>.maptools>.fest{displa
 /* ===== the live game as an open BOOK (owner 11/14 approval, 11/15 priority) — kitBookLive =====
    iPad landscape: the room stage = LEFT picture page, the tab panel = RIGHT text page, gutter between, cover board behind.
    Phone / portrait: ONE page (the panel) on the board. Dư đồ is not a page (leather map, .maptab drops the book). */
-.kbk-board{display:none}
-/* phone / portrait shell: when the page (#panel) is hidden (room view k3home, person pop k3pop) the cover board has no page to sit under —
-   hide it too, never a lone band between the stage and the tab row (owner 11/15 "Thanh gì đây") */
-html body .game#game.kbook.k3ph:is(.k3home,.k3pop)>.kbk-board{display:none!important}
+/* NO cover board behind the page (owner 11/15 02:35Z, Fold Hậu cung: "Nó có cái nền tím gì ở dưới kìa"): the page lies straight on the
+   game background on every tab and every size; the page's own thin paper edge (border + stacked leaves) is the only book edge. KIT §34.1c */
+.kbk-board{display:none!important}
 .game.kbook{isolation:isolate}
-.game.kbook>.kbk-board{display:block;position:relative;z-index:-1;pointer-events:none;grid-row:panel-start/panel-end;grid-column:panel-start/panel-end;
- margin:-5px -6px -6px -6px;border-radius:8px;
- background:repeating-linear-gradient(45deg,#ffffff08 0 2px,transparent 2px 5px),linear-gradient(#3a2a52,#241a36);box-shadow:0 12px 30px #0007,inset 0 0 0 1px #ffffff14}
 /* the text page: warm paper, faint fibres, stacked leaves on the outer edge */
 .game.kbook>#panel{border-color:#b89a6a80;
  background:linear-gradient(270deg,#efe0bf 0 1px,#c4aa7c 1px 2px,#efe0bf 2px 3px,#c4aa7c 3px 4px,#efe0bf 4px 5px,transparent 5px),
@@ -340,7 +346,6 @@ html body .game#game.kbook.k3ph:is(.k3home,.k3pop)>.kbk-board{display:none!impor
  box-shadow:inset 0 0 30px #8a5a2426}
 @media (min-aspect-ratio:1/1) and (min-width:900px){
  .game.kbook{column-gap:0!important}
- .game.kbook>.kbk-board{grid-column:stage-start/panel-end}
  /* right page: gutter shadow on its inner (left) edge */
  .game.kbook>#panel{border-radius:0 6px 6px 0;border-left-color:transparent;
   background:linear-gradient(90deg,#2a160870 0 1.5px,transparent 1.5px),linear-gradient(90deg,#4a2c1270,#4a2c1229 16px,transparent 40px),linear-gradient(270deg,#efe0bf 0 1px,#c4aa7c 1px 2px,#efe0bf 2px 3px,#c4aa7c 3px 4px,#efe0bf 4px 5px,transparent 5px),
@@ -360,8 +365,7 @@ html body .game#game.kbook.k3ph:is(.k3home,.k3pop)>.kbk-board{display:none!impor
    Not on the map (leather), the title or the end screen. */
 function kitBookLive(){const g=document.querySelector(".game");if(!g)return;
  const on=!g.classList.contains("maptab")&&!(typeof S==="undefined"||!S)&&!S.dead&&!!document.getElementById("panel");
- g.classList.toggle("kbook",on);let b=g.querySelector(":scope>.kbk-board");
- if(on&&!b){b=document.createElement("i");b.className="kbk-board";b.setAttribute("aria-hidden","true");g.insertBefore(b,g.firstChild)}}
+ g.classList.toggle("kbook",on);const b=g.querySelector(":scope>.kbk-board");if(b)b.remove()}
 
 /* ---------- live game: a tab switch turns #panel with the curl; Dư đồ is the leather map ---------- */
 (function(){if(typeof render!=="function")return;
@@ -374,7 +378,7 @@ function kitBookLive(){const g=document.querySelector(".game");if(!g)return;
    catch(e){if(done)throw e;console.error(e);call()}
    try{kitBookLive()}catch(e){console.error(e)}
    try{last=t1;const mv=document.querySelector(".game.maptab #panel .mapv");
-    if(mv){kitLeather(mv);if(t0!=null&&t0!=="go"&&t1==="go")kitUnroll(mv)}
+    if(mv){kitLeather(mv);if(t0!=null&&t0!=="go"&&t1==="go")kitUnroll(mv);else kitUnrollKeep(mv)}
     else if(t0==="go"&&t1!=="go"&&pn){if(!kitCurlOff()){pn.classList.remove("kcl-in");void pn.offsetWidth;pn.classList.add("kcl-in");setTimeout(()=>pn.classList.remove("kcl-in"),340)}
      /* the page row changed shape (map → book): let the person card measure its room again once the layout has settled */
      if(typeof kitPcSize==="function"){requestAnimationFrame(()=>{try{kitPcSize()}catch(e){}});setTimeout(()=>{try{kitPcSize()}catch(e){}},150)}}}catch(e){console.error(e)}
