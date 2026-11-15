@@ -12,3 +12,10 @@
 ## Notes for whoever resumes
 - The machine is shared and slow (load ~50): tests sample animations by pausing them, never by wall clock.
 - Old saves: nothing new is stored; dialogs resolve from pid + pp (already saved).
+## Results (15/11 ~20:00Z, build in this commit)
+- dev/test/item-events.js at 755x1000, 1000x755, 1180x820, 1366x1024, 844x390, booted from an OLD save made with main's build (+ a queued
+  gift dialog): PASS at every size (old save loads, queued gift shows the frame; 16 dialog cases each: frame + grade, act per option, real entry
+  on keep, no second reveal, animation runs, tap skips, no h-overflow, options in cost mode). One E68 giftArrive variant did not build at two
+  sizes (random actor) and was skipped; the other variant passed.
+- Scan: 837 dialog texts, 65 with an item and choices acting on it, 0 gaps (dev/review/item-events-table.md).
+- Kit page #kit: §58 sample present (8 item tags + 10 act buttons).
