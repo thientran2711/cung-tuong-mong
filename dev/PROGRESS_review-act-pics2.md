@@ -113,3 +113,8 @@ LEFT (unchanged from the list above unless noted)
 - Side-story speakers in dialogs: the code scan found no bare NPC objects without art. Unknown strangers (j61, jht) show the silhouette on purpose.
 - Edge case, not fixed: h54Face (prince-consort suitors and the Bắc Địch prince) takes FIGIX.man identities. There are only 11 of them, so with many suitors plus S.men they can run out, and those faces would then show initials. Drawing more "man" identities would fix it.
 - (2) The 8 veil/scar/spy keys are DONE as hands-only pictures, on the CDN under plain names act-<key>.webp (the names meanings.py expects; they were never on the CDN before). They still have to be wired into ACTS.json together with the system-line patch.
+- (3) Festivals, part 1, DONE:
+  - Each of the 14 festivals now has its own event picture, img/ev-fest-<k>.webp (3:4), and EVENTS.json maps fest:<k> to a new category fest-<k>. Before, 10 festivals shared 5 season groups and vulan, vantho, thanhtho and lapbat had no picture.
+  - Each festival also has a 4:3 dialog banner, img/ev-fest-<k>-b.webp, shown as headArt on the festival dialogs, keeping the Emperor portrait. Wired in j31 (FESTEV push) and j71 (fDay7 wrapper), which also set evId "fest:<k>". This includes the Đoan ngọ banner.
+  - Files: dev/figwork/fest/ (fscenes.txt, fbanner_prompts.txt, ffetch.py, fgens.txt).
+  - Still to do: map-fest pictures for thanhtho, vulan, vantho, lapbat.

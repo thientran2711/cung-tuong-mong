@@ -408,3 +408,7 @@ window.j71Merit=function(k){if(!S)return false;const m=k?mMake7(k):mFire7(true);
 window.j71Count=function(){const f={};let fv=0;for(const k in FV7){f[k]=FV7[k].length;fv+=FV7[k].length}const m={};let mv=0;for(const k in MF7){m[k]=MF7[k].v.length;mv+=MF7[k].v.length}return{fest:f,festTotal:fv,merit:m,meritTotal:mv}};
 window.j71Day=function(k){if(!S)return false;const m=fDay7(k);if(!m)return false;Q.unshift(m);showModal();return true};
 window.j71FeastInvite=function(kk){if(!S)return false;const d=mkP("j71x",{kk,y:S.year,sd:1+R(1e6)});if(!d)return false;Q.unshift({t:`${FX7[kk].n} · Lời mời`,h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp,must:1});showModal();return true};
+
+/* coordinator 15/11: every festival dialog shows its own festival picture as the wide header band (img/ev-fest-<k>-b.webp, 4:3) and carries
+   evId "fest:<k>" (EVENTS.json → img/ev-fest-<k>.webp, 3:4, for the book). */
+(function(){const d0=fDay7;fDay7=function(k){const m=d0.apply(this,arguments);try{if(m&&typeof m==="object"&&!m.headArt){m.headArt={src:`img/ev-fest-${k}-b.webp`,label:fName7(k)};m.evId=m.evId||("fest:"+k)}}catch(e){}return m}})();
