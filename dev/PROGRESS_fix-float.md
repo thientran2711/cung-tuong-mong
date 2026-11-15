@@ -116,3 +116,31 @@ rel-words-scan 755/1180: all counts 0; night-day 2× ok (incl. the new buổi-s�
   S.toMorning = {d: wk() of the NEW day} and jnight spends the new day → that seat ends its day alone (guest at [1,4,0] "Đợi hảo hữu";
   host later pend with its own toMorning {d:3,b:0}). Fix idea: stamp the night's day when the night is WON (stealWin / S.tonight="me" /
   nightScene / Kính sự phòng) and let nightFx use that stamp; a night whose day is gone never ends a buổi.
+
+## Round r8 (worker, on review/fix-float-r7 78c9106d4) — WIP checkpoint, pushed to review/fix-float-r8
+Root causes and fixes (all in dev/build, site rebuilt with dev/site/build_site.sh):
+1. Co-op nights desync (r7 FAIL). jnight: every dialog made by mkP gets `pp.nd` = the day it was raised; a night dialog
+   (ksp / prep / night1 / night2) raised while answering another dialog inherits THAT dialog's day (`cur` = Q[0] captured in a
+   chooseM wrapper). pp survives serQ/deserQ, so the stamp survives saves and the co-op week merge (fromCanon keepQ). nightFx sets
+   S.toMorning only when the answered night dialog's day is today; a stale night still gives Sủng/Ân tình but never ends a buổi
+   (counted in window.__nightStale, traced "staleNight" in COOPW.tr). Class scan of night entries (all reach ksp and/or prep → night1
+   → night2 → nightFx): j8 stealWin, j8 nightScene, j8 PEND.ksp, j8 flip (ksp), j7 empnight "Thắp đèn hầu rượu", j75 nightScene wrapper,
+   j75 lost-tablet ksp (196), j75 prep overrides (night1 106/111), test-forced nights. Before: day taken at nightFx (answer time) for all
+   of them; after: day of the dialog that won the night, for all of them. Stale night dialogs are NOT closed on a merge (the night
+   happened; closing would lose its gains) — they just cannot end a buổi. Also jcoopworld attach(): a new co-op life drops
+   S.toMorning of the dead life.
+2. Plain coop-e2e "week after rebirth advances" / "after week 3 same date [[1,3,2],[1,4,0]]" (reproduced in plain mode with the dump):
+   a websocket reconnect under load. (a) The `room` snapshot handler rebuilt the week from the room base whenever room week > sent
+   week, even when that merge had already been applied → the seat went back to buổi sáng while the server stayed at buổi tối
+   ("badbuoi"), seats split. Fix: CW.wkIn = last merged week applied; onWeek ignores a duplicate ("week dup"), room handler only
+   catches up. (b) A `bend` sent while the socket was down is dropped by COOP.send → both seats "Đợi hảo hữu xong buổi" forever
+   (seen at 0:0 in a run). Fix: syncRoom (room snapshot after reconnect) resends a bend / week end the server does not hold
+   ("rebend" / "re-end" in COOPW.tr).
+3. Harness (coop-e2e): COOP_OLD_REF env for the old-save build (the shared checkout's origin/main ref was moved to an item-events
+   merge; use COOP_OLD_REF=ed7271deb); week-advance wait 90 s; old page waits for its code and uses __nlInner (start() left S unset
+   behind Luân hồi → "reading 'buoi'"); tapText retries a detached button. night-day.js: new 5th case "stale".
+Tests so far (load 37–66): night-day 5 cases ok (stale: day stays, buổi sáng not ended, stale=1). coop-e2e plain on 0ef282c1e:
+run 1 59/59, run 4 59/59; runs 2, 3 aborted by harness (old.html S unset; detached click) — both harness fixes are now in.
+NEXT: finish plain coop-e2e to ≥5 complete runs, COOP_NIGHTS=1 ×2, book-person 5 sizes, sheet-turn 5 sizes; then push
+fast-forward to review/fix-float (it is an ancestor of 78c9106d4) and report. Runner: dev worktree .ce/run.sh (not committed):
+`COOP_OLD_REF=ed7271deb COOP_NIGHTS=0|1 node dev/test/coop-e2e.js <outdir>`.

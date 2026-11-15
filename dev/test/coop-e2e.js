@@ -33,7 +33,8 @@ const ALL=[];
 const DCL={waitUntil:'domcontentloaded'};
 async function tapText(o,re,ms=8000){const t0=Date.now();while(Date.now()-t0<ms){const h=await o.p.evaluateHandle(src=>{const R=new RegExp(src);
   return [...document.querySelectorAll('button,a,[role=button]')].find(b=>b.offsetParent!==null&&!b.disabled&&R.test(b.textContent.trim()))||null},re.source);
-  const el=h.asElement();if(el){/* the click itself is done; a navigation it starts (Chơi một mình → the sổ) is waited for by the caller's own state checks (a slow machine held 'scheduled navigations' past 30 s) */await el.click({noWaitAfter:true});return true}await sleep(250)}return false}
+  const el=h.asElement();if(el){/* the click itself is done; a navigation it starts (Chơi một mình → the sổ) is waited for by the caller's own state checks (a slow machine held 'scheduled navigations' past 30 s) *//* the panel may re-render between finding the button and clicking it (element detached): find it again */
+  try{await el.click({noWaitAfter:true,timeout:15000});return true}catch(e){}}await sleep(250)}return false}
 /* close story/news modals of the normal game (never the co-op waiting/freeze panel) */
 async function clear(o,n=25){for(let i=0;i<n;i++){const st=await o.p.evaluate(()=>{const c=__co();if(c.frozen||c.waiting)return'coop';
    const ov=[...document.querySelectorAll('button')].find(x=>x.offsetParent!==null&&!x.disabled&&!x.closest('#panel,#tabs,#hud,#modal')&&x.parentElement&&x.closest('[class^=km],[class*=" km"]')&&/^(Nhận|Đã hiểu|Tạ ơn|Lĩnh chỉ|Tuân chỉ)$/.test(x.textContent.trim()));if(ov){ov.click();return'x'}
@@ -125,7 +126,9 @@ async function weekBoth(A,B,w){const n=await A.p.evaluate(()=>typeof B4N==='numb
  const oldHtml=execSync('git -C '+JSON.stringify(ROOT)+' show '+(process.env.COOP_OLD_REF||'origin/main')+':index.html',{maxBuffer:64e6}).toString();
  const D=await mk(b,'solo',[686,880,2.2]);await D.ctx.route(BASE+'old.html',r=>r.fulfill({status:200,contentType:'text/html; charset=utf-8',body:oldHtml.replace(/navigator\.serviceWorker\.register/g,'(()=>Promise.reject())')}));
  await D.page();await D.p.goto(BASE+'old.html',DCL);await D.p.waitForTimeout(3500);
- await D.p.evaluate(()=>{SLOT=2;document.getElementById('title').hidden=true;start();Q.length=0;localStorage.setItem(SK(2),JSON.stringify(ser()));localStorage.setItem('hclh-slot','2')});const oldName=await D.p.evaluate(()=>S.name);
+ /* a loaded machine: wait for the old game's code; __nlInner = start() builds the life at once (no Luân hồi screen, which left S unset) */
+ await D.p.waitForFunction(()=>typeof start==='function'&&typeof ser==='function'&&typeof SK==='function',null,{timeout:120000});
+ await D.p.evaluate(()=>{SLOT=2;window.__nlInner=1;document.getElementById('title').hidden=true;for(let i=0;i<20&&!(typeof S!=='undefined'&&S&&S.name);i++)start();Q.length=0;localStorage.setItem(SK(2),JSON.stringify(ser()));localStorage.setItem('hclh-slot','2')});const oldName=await D.p.evaluate(()=>S.name);
  await D.p.goto(BASE,DCL);await D.p.waitForTimeout(3500);await shot(D,'13-title-solo');
  ok(await tapText(D,/^Chơi một mình/),'solo: Chơi một mình');await D.p.waitForTimeout(800);
  /* Chơi một mình = Tiếp tục the last sổ (old save) when there is one */
