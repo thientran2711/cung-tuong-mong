@@ -6,7 +6,7 @@
   Bảng ghép có nhãn: `dev/shots/residence/sheet-xuan-sang.jpg` (3396x7563; dựng lại: `python3 dev/art/residence_sheet.py xuan-sang`).
   Mã Magnific từng ảnh: `dev/shots/residence/gens.txt`. Đã tự xem từng ảnh: không người, đúng nét vẽ, mỗi cung một bản sắc, phối điện nhỏ/giản hơn mà không nghèo, hai phối điện của một cung khác bố cục.
   Tín dụng bước 1: 23 × 80 = 1.840 (cộng thử nghiệm 240 → 2.080).
-- BƯỚC 2 (CHỜ chủ duyệt bảng ghép): 15 bản còn lại mỗi phòng = SỬA từ bản xuân-sáng (1 tham chiếu ảnh = chính nó), 2k (65/ảnh): 25 × 15 = 375 ảnh ≈ 24.400 (+20% ≈ 29.000). Thứ tự: tối → chiều → trưa, rồi Hạ/Thu/Đông.
+- BƯỚC 2 XONG: đủ 400 tranh (25 phòng × 16). Tín dụng: bước 1+thử nghiệm 2.080; bước 2 = 375 × 65 = 24.375 (không vẽ lại). Tổng 26.455.
   Bố cục phối điện (để giữ khác nhau): CP Đ phòng ngủ+bàn trang điểm, T sập cửa sổ+đàn; KT Đ giường trong vòm trăng, T phòng trà; CT Đ phòng nhạc, T phòng ngủ+khung thêu; HA Đ thư phòng nhỏ, T phòng ngủ+bình phong; TM Đ phòng cắm hoa, T phòng ngủ+bàn cờ; DH Đ phòng ngủ+bàn trang điểm, T phòng vẽ; VH Đ phòng trà mở ra rừng trúc, T phòng ngủ sau vách vòm; TX Đ phòng thêu nhìn cầu, T phòng ngủ+góc đọc sách.
 
 ## BƯỚC 2 (chủ duyệt bảng xuân-sáng) — 15 bản còn lại × 25 phòng + gắn vào game
