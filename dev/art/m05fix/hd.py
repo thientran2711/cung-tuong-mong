@@ -39,8 +39,9 @@ def prompt(face,t):
         orn=(f"Rank 7 version: the {short} made of paper-thin gold leaf laid flat on the skin, filled with glossy cinnabar-red enamel, with fine gold filigree lines, two minute flat gold curls hugging it closely "
              "and one very tiny ruby-red glint at its centre; completely flat, no raised gems, no pearls, no beads; "+SIZE78)
     return head+orn+"Crisp, elegant, clearly a painted ornament, never a scar or birthmark; no frame. Exactly the same ornament and size on all four faces. No moles, no beauty marks. No text."
-def tile(im):
-    cx,ey,fw,_=find_face(im); return cx,ey-fw*0.05,fw*2.0,(cx,ey,fw)
+FIX={"fig-maid-m09-t3-a18.webp":(178,88,88)}   # face detector hit the hairpin
+def tile(im,fn=""):
+    cx,ey,fw=FIX[fn] if fn in FIX else find_face(im)[:3]; return cx,ey-fw*0.05,fw*2.0,(cx,ey,fw)
 def make(face,tiers):
     d=D(face)
     for s in ("g","e","out","c","orig"): os.makedirs(f"{d}/{s}",exist_ok=True)
@@ -51,7 +52,7 @@ def make(face,tiers):
             if not os.path.exists(f"{d}/orig/{fn}"): shutil.copy(f"{WT}/img/{fn}",f"{d}/orig/{fn}")
             pn="por"+fn[3:]
             if not os.path.exists(f"{d}/orig/{pn}") and os.path.exists(f"{WT}/img/{pn}"): shutil.copy(f"{WT}/img/{pn}",f"{d}/orig/{pn}")
-            im=Image.open(f"{d}/orig/{fn}").convert("RGBA"); cx,cy,s,f=tile(im); cr,b=ccrop(im,cx,cy,s)
+            im=Image.open(f"{d}/orig/{fn}").convert("RGBA"); cx,cy,s,f=tile(im,fn); cr,b=ccrop(im,cx,cy,s)
             G.paste(cr.resize((T,T),Image.LANCZOS),((k%NC)*T,(k//NC)*T)); meta.append({"file":fn,"box":b,"face":f,"col":k%NC,"row":k//NC})
         G.save(f"{d}/g/t{t}.jpg",quality=95); json.dump(meta,open(f"{d}/g/t{t}.json","w"))
     print("grids",face,tiers)
@@ -65,8 +66,15 @@ def paste(face,t,RX=0.24,RY=0.30,CY=0.36):
         (dx,dy),r=cv2.phaseCorrelate(cv2.cvtColor(o,cv2.COLOR_RGB2GRAY),cv2.cvtColor(ea,cv2.COLOR_RGB2GRAY))
         if abs(dx)>s*0.06 or abs(dy)>s*0.06: dx=dy=0
         ea=cv2.warpAffine(ea,np.float32([[1,0,-dx],[0,1,-dy]]),(s,s),borderMode=cv2.BORDER_REFLECT)
-        mk=np.zeros((s,s),np.float32)
-        cv2.ellipse(mk,(int(cx-b[0]),int(ey-fw*CY-b[1])),(int(fw*RX),int(fw*RY)),0,0,360,1,-1)
+        mk=np.zeros((s,s),np.float32); sr=np.zeros((s,s),np.float32); C=(int(cx-b[0]),int(ey-fw*CY-b[1]))
+        cv2.ellipse(mk,C,(int(fw*RX),int(fw*RY)),0,0,360,1,-1)
+        cv2.ellipse(sr,(C[0],C[1]-int(fw*0.04)),(int(fw*0.42),int(fw*0.36)),0,0,360,1,-1)
+        # also take wherever the edit clearly changed the forehead (old mark off-centre on turned/tilted heads)
+        df=np.abs(cv2.GaussianBlur(o,(0,0),1.2)-cv2.GaussianBlur(ea,(0,0),1.2)).max(2)
+        ch=((df>32)&(sr>0)).astype(np.uint8)
+        ch=cv2.morphologyEx(ch,cv2.MORPH_OPEN,np.ones((2,2),np.uint8))
+        k=max(3,int(fw*0.10)); ch=cv2.dilate(ch,np.ones((k,k),np.uint8)).astype(np.float32)
+        mk=np.maximum(mk,ch*sr)
         mk=cv2.GaussianBlur(mk,(0,0),max(1,fw*0.04))
         arr=np.asarray(im).astype(np.float32).copy()
         x0,y0=max(0,b[0]),max(0,b[1]); x1,y1=min(im.size[0],b[2]),min(im.size[1],b[3])
