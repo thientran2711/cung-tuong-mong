@@ -9,7 +9,7 @@ const {chromium}=require('playwright');
 const [,,BASE,SZ,OUT,RM,KS]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=WH.split('x').map(Number);const tag=SZ+(RM&&RM!=='0'?'-rm':'');
 const KEYS=(KS||'spy,rumor,bribe,poison').split(',');const LAD=["Liều","Khó","Năm ăn năm thua","Khá chắc","Chắc","Rất chắc","Nắm chắc"];
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,deviceScaleFactor:+(DPR||1),reducedMotion:RM&&RM!=='0'?'reduce':'no-preference'});
- const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));p.on('console',m=>{if(m.type()==='error'&&!/Failed to load resource/.test(m.text()))errs.push('console: '+m.text())});
+ const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message+' @ '+String(e.stack).slice(0,400)));p.on('console',m=>{if(m.type()==='error'&&!/Failed to load resource/.test(m.text()))errs.push('console: '+m.text())});
  await p.goto(BASE,{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);
  await p.evaluate(()=>{SLOT=3;document.getElementById('title').hidden=true;start();Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;
   /* spy on doAct: what step was live, and whether an NPC's odds moved while it was */
@@ -40,7 +40,7 @@ const KEYS=(KS||'spy,rumor,bribe,poison').split(',');const LAD=["Liều","Khó",
     setTimeout(tick,30)};tick()},good);
   const t1=Date.now();let did=false;
   while(Date.now()-t1<75000){const ph=await p.evaluate(()=>KG82.phase);if(ph==='result')break;
-   if(!did&&Date.now()-t1>4000){if(shot)await p.locator('#kg82').screenshot({path:`${OUT}/${k}-${tag}.jpg`,type:'jpeg',quality:80,timeout:60000}).catch(e=>fails.push('shot: '+e.message.slice(0,80)));await chk(k+' play');did=true}await p.waitForTimeout(400)}
+   if(!did&&Date.now()-t1>(k==='bribe'?500:2500)){if(shot)await p.locator('#kg82').screenshot({path:`${OUT}/${k}-${tag}.jpg`,type:'jpeg',quality:80,timeout:60000}).catch(e=>fails.push('shot: '+e.message.slice(0,80)));await chk(k+' play');did=true}await p.waitForTimeout(400)}
   return Math.round((Date.now()-t1)/1000)};
  const finishAct=async(k,info,how,expect,b0)=>{const s0=b0||await p.evaluate(()=>({seq:S.logSeq||0,bac:S.bac}));
   if(how!=='skip'){await p.waitForTimeout(300);await chk(k+' '+how+' result');

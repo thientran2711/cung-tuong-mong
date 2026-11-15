@@ -12278,7 +12278,7 @@ function sgGraph(){/* layered: 0 = Ngươi, columns 1–3 two courtiers each, 4 
  const T=N.length-1;const path=[];for(let k=T;k>=0;k=prev[k])path.unshift(k);return{N,E,best:best[T],path,T}}
 function sgTruyen(box,env){const R=sgRM();const C=kg82Canvas(box,.9,420),{g,W,H}=C;const NB=3,LIM=12000;
  const nw=Math.min(78,(W-24)/5-20),nh=32;let b=0,G=null,path=[0],t0=0,phase="play",stop=false,pts=0,anim=null,risk=0;const pops=[];
- const P=i=>{const x=G.N[i];const n=x.c===0||x.c===4?1:2;return{x:12+nw/2+x.c*(W-24-nw)/4,y:n===1?H*.55:(x.j?H*.8:H*.3)+((x.c%2)?-H*.04:H*.04)}};
+ const P=i=>{const x=G.N[i];if(!x)return{x:-999,y:-999};const n=x.c===0||x.c===4?1:2;return{x:12+nw/2+x.c*(W-24-nw)/4,y:n===1?H*.55:(x.j?H*.8:H*.3)+((x.c%2)?-H*.04:H*.04)}};
  const edge=(a,c)=>G.E.find(x=>x.a===a&&x.b===c);const sum=p=>p.slice(1).reduce((s,v,i)=>s+4-edge(p[i],v).t,0);
  const next=()=>{if(b>=NB){stop=true;return setTimeout(()=>env.end(pts,{}),400)}G=sgGraph();path=[0];risk=0;phase="play";t0=performance.now();anim=null};
  const finish=(ok)=>{phase="wait";const T=G.T;let got=0;if(ok){got=10/NB*Math.pow(G.best/Math.max(G.best,risk),1.3);const P0=P(T);kg82Pop(pops,P0.x,P0.y-nh,risk<=G.best?"Kín kẽ!":"Lời đã tới",risk<=G.best?K91C.good():K91C.gold())}
@@ -12299,7 +12299,7 @@ function sgTruyen(box,env){const R=sgRM();const C=kg82Canvas(box,.9,420),{g,W,H}
   const L=path[path.length-1];
   for(let i=0;i<G.N.length;i++){const q=P(i),x=G.N[i];const st=path.includes(i)?(i===L?"on":"ok"):(phase==="play"&&edge(L,i)?"n":"n");
    g.save();if(phase==="play"&&!path.includes(i)&&!edge(L,i)&&i!==0)g.globalAlpha=.7;k91Tile(g,q.x-nw/2,q.y-nh/2,nw,nh,x.n,st,13,i===G.T?"doi-slip":"tho-slip");g.restore()}
-  if(anim&&!R){const k=Math.min(1,(now-anim)/650);const segs=path.length-1;const f=k*segs;const s=Math.min(segs-1,Math.floor(f));const a=P(path[s]),c=P(path[s+1]);const u=f-s;
+  if(anim&&!R&&path.length>1&&path.every(i=>G.N[i])){const k=Math.min(1,(now-anim)/650);const segs=path.length-1;const f=k*segs;const s=Math.min(segs-1,Math.floor(f));const a=P(path[s]),c=P(path[s+1]);const u=f-s;
    g.save();g.fillStyle=K91C.gold();g.shadowColor="#f0d070";g.shadowBlur=12;g.beginPath();g.arc(a.x+(c.x-a.x)*u,a.y+(c.y-a.y)*u,6,0,Math.PI*2);g.fill();g.restore()}
   /* trace gauge (top): how easily the word can be traced back to her */
   const gw=Math.min(220,W*.45),gx=12,gy=H*.055;g.save();k91RR(g,gx,gy-7,gw,14,7);g.fillStyle="rgba(255,250,238,.9)";g.fill();g.strokeStyle=K91C.hair;g.stroke();
@@ -12307,8 +12307,8 @@ function sgTruyen(box,env){const R=sgRM();const C=kg82Canvas(box,.9,420),{g,W,H}
   g.font=k91F(700,12,true);g.fillStyle=K91C.ink;g.textAlign="left";g.textBaseline="middle";kg82Lbl(g,`Dấu vết ${risk}`,gx+gw+8,gy,W-gx-gw-16);g.restore();
   kg82DrawPops(g,pops,now)}
  next();const stopL=k91Loop(now=>{if(stop&&!pops.length)return;if(G){if(phase==="play"){const left=LIM-(now-t0);if(left<=0)finish(false);
-   env.hud({score:`${Math.round(Math.min(10,pts))}/10`,round:`Hồi ${Math.min(b+1,NB)}/${NB}`,time:`${Math.max(0,Math.ceil(left/1000))} giây`})}draw(now)}});
- KG82.peek=()=>{if(stop||phase!=="play"||!G)return null;const ok=path.every((v,k)=>G.path[k]===v);const i=ok?G.path[path.length]:path[path.length-1];const q=P(i);return C.client(q.x,q.y)};
+   env.hud({score:`${Math.round(Math.min(10,pts))}/10`,round:`${Math.min(b+1,NB)}/${NB}`,time:`${Math.max(0,Math.ceil(left/1000))} giây`})}draw(now)}});
+ KG82.peek=()=>{if(stop||phase!=="play"||!G)return null;const ok=path.every((v,k)=>G.path[k]===v);const i=ok?G.path[path.length]:path[path.length-1];if(i==null||!G.N[i])return null;const q=P(i);return C.client(q.x,q.y)};
  return()=>{stop=true;stopL()}}
 
 /* ---------- 3. MẶC CẢ ----------
@@ -12329,7 +12329,7 @@ function sgMac(box,env){const R=sgRM();const C=kg82Canvas(box,.66,300),{g,W,H}=C
  k91Pointer(C,{down:(x,y)=>{if(phase!=="play"||stop)return;if(Math.abs(y-by-bh/2)<=34){drag=true;X=toX(x)}},move:(x)=>{if(drag&&phase==="play")X=toX(x)},up:()=>{drag=false}});
  const Z=d=>d>=0?[3,"Nhận lời"]:d>=-.08?[2,"Ngập ngừng"]:d>=-.2?[1,"Lắc đầu"]:[0,"Phật ý"];
  const give=()=>{if(phase!=="play"||stop)return;const d=X-T;const [z,w]=Z(d);shown=z;mt=performance.now();H0.push(`Hồi ${r+1}: giá ${sgGiaW(X).toLowerCase()} · ${w}`);
-  if(z===3){deal=r+1;phase="wait";stop=true;const over=d>.2;kg82Pop(pops,W/2,H*.3,over?"Nàng nhận, nhưng sinh nghi":"Nàng nhận lời!",over?K91C.gold():K91C.good());kg82Pluck(4,true);
+  if(z===3){deal=r+1;phase="wait";stop=true;env.hud({score:`${deal===1?10:deal===2?8:6}/10`});const over=d>.2;kg82Pop(pops,W/2,H*.3,over?"Nàng nhận, nhưng sinh nghi":"Nàng nhận lời!",over?K91C.gold():K91C.good());kg82Pluck(4,true);
    const raw=over?5:deal<=2?(deal===1?10:8):6;setTimeout(()=>env.end(raw,{deal,over}),R?300:900);return}
   if(z===0){T=Math.min(.95,T+.05);kg82Pop(pops,W/2,H*.3,"Phật ý: nàng đòi thêm",K91C.red())}else kg82Pop(pops,W/2,H*.3,w,"#8a7350");kg82Pluck(0,false);
   r++;phase="wait";if(r>=NR){stop=true;setTimeout(()=>env.end(2,{deal:0}),R?300:900);return}setTimeout(()=>{phase="play";t0=performance.now()},R?150:600)};
@@ -12338,8 +12338,8 @@ function sgMac(box,env){const R=sgRM();const C=kg82Canvas(box,.66,300),{g,W,H}=C
   /* her answer: four marks, the last one lit */
   const zl=["Phật ý","Lắc đầu","Ngập ngừng","Nhận lời"],zc=[K91C.red(),"#d0662a","#c99a1e",K91C.good()];const cw=(W-32)/4;
   g.save();g.font=k91F(700,12,true);g.textAlign="center";g.textBaseline="middle";g.fillStyle=K91C.ink;kg82Lbl(g,"Lời nàng đáp",W/2,H*.08,W-40);
-  for(let i=0;i<4;i++){const x=16+cw*i;const on=shown===i;k91RR(g,x+3,H*.13,cw-6,26,8);g.fillStyle=on?zc[i]:"rgba(255,250,238,.85)";g.fill();g.lineWidth=1;g.strokeStyle=K91C.hair;g.stroke();
-   g.fillStyle=on?"#fffaf0":K91C.ink;kg82Lbl(g,zl[i],x+cw/2,H*.13+13,cw-12)}g.restore();
+  for(let i=0;i<4;i++){const x=16+cw*i;const on=shown===i;k91RR(g,x+3,H*.13,cw-6,26,8);g.fillStyle="rgba(255,250,238,.9)";g.fill();g.lineWidth=on?3:1;g.strokeStyle=on?zc[i]:K91C.hair;g.stroke();
+   g.fillStyle=on?zc[i]:K91C.ink;kg82Lbl(g,zl[i],x+cw/2,H*.13+13,cw-12)}g.restore();
   /* the price bar */
   g.save();k91RR(g,gx,by,gw,bh,11);g.fillStyle="rgba(255,250,238,.92)";g.fill();g.strokeStyle=K91C.hair;g.lineWidth=1.5;g.stroke();
   k91RR(g,gx+2,by+2,Math.max(4,(gw-4)*X),bh-4,9);g.fillStyle=K91C.gold();g.fill();
@@ -12349,7 +12349,7 @@ function sgMac(box,env){const R=sgRM();const C=kg82Canvas(box,.66,300),{g,W,H}=C
   if(H0.length){g.save();g.font=k91F(600,12,true);g.textAlign="center";g.textBaseline="middle";g.fillStyle=K91C.ink;kg82Lbl(g,H0[H0.length-1],W/2,H*.86,W-40);g.restore()}
   kg82DrawPops(g,pops,now)}
  t0=performance.now();const stopL=k91Loop(now=>{if(phase==="play"){const left=LIM-(now-t0);if(left<=0)give();
-   env.hud({score:`${deal?(deal===1?10:deal===2?8:6):0}/10`,round:`Hồi ${Math.min(r+1,NR)}/${NR}`,time:`${Math.max(0,Math.ceil(left/1000))} giây`})}draw(now);if(stop&&!pops.length&&now-mt>500)return});
+   env.hud({score:`${deal?(deal===1?10:deal===2?8:6):0}/10`,round:`${Math.min(r+1,NR)}/${NR}`,time:`${Math.max(0,Math.ceil(left/1000))} giây`})}draw(now);if(stop&&!pops.length&&now-mt>500)return});
  /* test helper: walk the bar up to her threshold */
  KG82.peek=()=>{if(phase!=="play"||stop)return null;return{sel:X<T?"#sgplus":"#sggive"}};
  KG82.peekBad=()=>{if(phase!=="play"||stop)return null;return{sel:X>0?"#sgminus":"#sggive"}};
@@ -12363,7 +12363,7 @@ function sgThoiCo(box,env){const R=sgRM();const C=kg82Canvas(box,.6,300),{g,W,H}
  let r=0,t0=0,ph0=Math.random()*6,sus=0,q=[],phase="play",stop=false,last=0,mark=null;const pops=[];
  const fr=[.9+Math.random()*.4,2.1+Math.random()*.5];
  const att=now=>{const t=(now-t0)/1000;return cl(.5+.32*Math.sin(t*fr[0]+ph0)+.16*Math.sin(t*fr[1]+ph0*2),0,1)};
- const raw=()=>{const a=q.length?q.reduce((s,x)=>s+x,0)/NR:0;return cl(10*a-4*sus,0,10)};
+ const raw=()=>{const a=q.length?q.reduce((s,x)=>s+x,0)/NR:0;return cl(10*a-3*sus,0,10)};
  const tap=()=>{if(phase!=="play"||stop)return;const now=performance.now();const a=att(now);q.push(1-a);if(a>.6)sus=Math.min(1,sus+.2);mark={a,now};
   kg82Pop(pops,W/2,H*.5,a<.25?"Đúng lúc!":a<.5?"Tạm được":"Bị để ý",a<.25?K91C.good():a<.5?K91C.gold():K91C.red());kg82Pluck(a<.25?4:a<.5?2:0,a<.5);
   r++;phase="wait";if(r>=NR){stop=true;setTimeout(()=>env.end(raw(),{}),R?300:800);return}setTimeout(()=>{phase="play";t0=performance.now();ph0=Math.random()*6},R?200:700)};
@@ -12376,9 +12376,9 @@ function sgThoiCo(box,env){const R=sgRM();const C=kg82Canvas(box,.6,300),{g,W,H}
   const a=phase==="play"?att(now):(mark?mark.a:.5);
   bar(H*.24,a,"Người canh chú ý",[K91C.good(),"#c99a1e",K91C.red()]);bar(H*.76,sus,"Nghi ngờ",[K91C.good(),"#d0662a",K91C.red()]);
   kg82DrawPops(g,pops,now)}
- t0=performance.now();const stopL=k91Loop(now=>{if(phase==="play"){const left=LIM-(now-t0);sus=Math.min(1,sus+(now-(last||now))/1000*.025);if(left<=0)tap();
-  env.hud({score:`${Math.round(raw())}/10`,round:`Hồi ${Math.min(r+1,NR)}/${NR}`,time:`${Math.max(0,Math.ceil(left/1000))} giây`})}last=now;draw(now)});
- KG82.peek=()=>{if(phase!=="play"||stop)return null;return att(performance.now())<.2?{sel:"#sgtap"}:null};
+ t0=performance.now();const stopL=k91Loop(now=>{if(phase==="play"){const left=LIM-(now-t0);sus=Math.min(1,sus+(now-(last||now))/1000*.015);if(left<=0)tap();
+  env.hud({score:`${Math.round(raw())}/10`,round:`${Math.min(r+1,NR)}/${NR}`,time:`${Math.max(0,Math.ceil(left/1000))} giây`})}last=now;draw(now)});
+ KG82.peek=()=>{if(phase!=="play"||stop)return null;return att(performance.now())<.22?{sel:"#sgtap"}:null};
  KG82.peekBad=()=>{if(phase!=="play"||stop)return null;return att(performance.now())>.75?{sel:"#sgtap"}:null};
  return()=>{stop=true;stopL()}}
 
@@ -12397,7 +12397,7 @@ SG.K={
   hud:[["score","Phần","0/10"],["round","Bóng","Kín"],["time","Còn","30 giây"]],
   ask:v=>`Dò la ${NM(v)}: tự mình nép sau bình phong nghe ngóng, hay giao cho người làm?`},
  rumor:{g:"truyen",t:"Truyền lời",eng:sgTruyen,dur:"3 hồi, mỗi hồi 12 giây",
-  how:"Chạm lần lượt từng người, từ «Ngươi» tới «Cung nàng». Mỗi chặng có một tới ba chấm tin cậy: ít chấm thì dễ bị lần ra. Chạm lại người cuối để lùi.",
+  how:"Chạm từng người một, từ «Ngươi» tới «Cung nàng». Mỗi chặng có một tới ba chấm tin cậy: ít chấm thì dễ bị lần ra. Chạm lại người cuối để lùi.",
   hud:SG_HUD("12 giây"),ask:v=>`Tung tin đồn về ${NM(v)}: tự chọn người truyền lời, hay giao cho người làm?`},
  bribe:{g:"mac",t:"Mặc cả",eng:sgMac,dur:"3 hồi, mỗi hồi 10 giây",
   how:"Kéo thanh giá hoặc chạm «Thêm» / «Bớt», rồi chạm «Ngỏ giá». Lời nàng đáp cho biết còn xa hay gần giá nàng chịu. Ngỏ quá hậu thì nàng sinh nghi.",

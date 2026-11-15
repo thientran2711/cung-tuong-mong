@@ -394,11 +394,24 @@ No text over text: a pop (`kg82Pop`) replaces any live pop it would land on; a r
 
 ### 13.2 SCHEME GAMES · trò mưu (review/scheme-games, `dev/build/jsgame.js`) — tiny kit extensions
 - `kitGameFrame({…, seal:"muu"})`: optional seal key (any `KP_SEAL` key; default `"game"` = TÀI NGHỆ). New `KP_SEAL.muu = "MƯU"` (lacquer red `#7a2a22`, also inside `#ov .mg`).
-- `kg82Open({…, seal, hud})`: passes the seal and an optional HUD list (default Phần / Hồi / Còn) to `kitGameFrame`.
+- `kg82Open({…, seal, hud})`: passes the seal and an optional HUD list (default Phần / Hồi / Còn) to `kitGameFrame`. HUD values never repeat the label ("Hồi" cell shows `2/3`).
 - `kg82Img("@path")`: a name starting with `@` loads an EXISTING painting `img/<path>.webp` (scene/act/event/item art) instead of `img/kit/mg-*.webp`.
 - `KG82_BGX[kind] = "@act-binh-phong"`: a board that reuses an existing painting (no new art); `kg82Bg`/`kg82Preload` follow it.
-- Choice before a scheme game = kit dialog (PEND `sgpick`): «Tự ra tay: <trò>» · «Giao cho người làm» · «Thôi», each an ACT CARD with full rows + odds.
+- `KG82.peekBad` (optional, next to `KG82.peek`): the test helper for a clumsy player (tests play every game to a win, a loss and a skip).
+- Choice before a scheme game = kit dialog (PEND `sgpick`): «Tự ra tay: <trò>» · «Giao cho người làm» · «Thôi», each an ACT CARD with full Tốn/Được/Mất(/Kèm) + odds word
+  (a free act shows "Tốn: không tốn bạc"); the play option's Ghi chú: "khéo thì lên <bậc>, vụng thì xuống <bậc>".
+- Intro page: `kitRows` (Cơ may now, Mặc cả adds Cung nữ: tính nết + lòng trung, Tốn = card) + «Bắt đầu» / «Giao cho người làm» (skip = plain odds).
 - Result: `kitGameResult` parts + `kitRows` "Cơ may" `kitOdds(before) → kitOdds(after)`, one button «Ra tay»; the act then shows the normal RESULT CARD (§7).
+- ODDS STEP RULE (owner 11/15): a scheme game only moves the player's odds ONE step on the ladder Liều / Khó / Năm ăn năm thua / Khá chắc / Chắc / Rất chắc / Nắm chắc
+  (`sgShift(o, ±1)`; Phần 7+ up, 4–6 same, 0–3 down). Price, detection and every other number stay as on the card. NPCs never play (same price, same odds).
+
+| Trò | Việc | Thao tác | Tranh có sẵn |
+|---|---|---|---|
+| Nghe ngóng | Dò la | giữ bóng trong dải xanh («Nép»), chạm câu thật có từ cần nghe, bỏ lời đồn | act-binh-phong, tho-slip |
+| Truyền lời | Tung tin đồn | chạm chuỗi người từ «Ngươi» tới «Cung nàng», chặng ít chấm tin cậy thì Dấu vết tăng | ev-tin-don, tho-slip, doi-slip |
+| Mặc cả | Mua chuộc cung nữ | thanh giá (Ít → Rất hậu, không số), «Ngỏ giá»; lời đáp Phật ý / Lắc đầu / Ngập ngừng / Nhận lời; ngưỡng ẩn theo tính nết + lòng trung | ev-hoi-lo |
+| Thời cơ | 12 việc Hại nặng / Sát hại có cơ may | chạm «Ra tay» khi «Người canh chú ý» thấp; «Nghi ngờ» tăng khi chờ lâu. Hoàn toàn trừu tượng: màn chơi không nêu tên việc, không cách làm | tam-cung-dem |
+
 Plan + table: `dev/SCHEME_MINIGAMES_PLAN.md`.
 
 ## 14. SCENE PANEL (j79) — identity card, opening story, title screen
