@@ -6,14 +6,14 @@
 N = r"[^.:;,]+?"   # a name / short phrase inside a sentence
 R = [
 # ---------- not book meanings (UI words, items, origins, numbers, fragments that never stand alone) ----------
-("-", r"^(Thôi|Đi|Đợi buổi sau|Đợi sáng mai|Thôi, ở lại|Ngồi xem|Bỏ qua|Không mua|Mặc kệ|Nhận|N|X|XX)(\.|$| \()", ""),
+("-", r"^(Thôi|Đi|Đợi buổi sau|Đợi sáng mai|Thôi, ở lại|Ngồi xem|Bỏ qua|Không mua|Mặc kệ|Nhận)(\.|$| \()", ""),
 ("-", r"^(Con gái Tể tướng|Con gái Đại tướng quân|Con gái nhà buôn muối|Cung nữ được sủng hạnh|Công chúa nước Nam Chiếu hòa thân|Con gái tội thần|Cháu gái Thái hậu|Con gái thầy đồ nghèo|Cung nữ tuyển vào cung)(\.|$| \()", ""),
 ("-", r"^(Trâm ngọc bích|Bộ diêu vàng|Trâm phượng cửu vĩ|Vòng ngọc Hòa Điền|Vòng vàng chạm phượng|Thường|Tinh phẩm|Trân phẩm|Tuyệt phẩm|Ngự tứ|Cùng cung|giọng hát|hại .*|không ra tay|trộn xạ hương|giấu bùa chú|pha chì|nhồi lông mèo|khắc dấu .*|thành ngọc bội .*|không thấy gì lạ|lôi ra .*|nghe ra chuyện .*)(\.|$| \()", ""),
 ("-", r"^(Tháo|Đeo|Mặc|Tháo trâm|Tháo y phục|Tự chọn đồ|Chải chuốt|Dùng|Bỏ khăn|Che mặt)(\.|$| \()", ""),   # wardrobe / bag buttons: no log line of their own
 ("-", r"^(Sủng|Bạc|Danh|Đức|Thái hậu|Tiến bộ|Chứng cứ về .+) [+\-−]", ""),
-("-", r"^\+\d+ Phúc duyên|^Đã đổi thân phận|^\d+ Ứng viên|^Đứng đầu(\.|$| \()|^Tháng này(\.|$| \()|^Thánh chỉ(\.|$| \()|^Có tin(\.|$| \()|^Chưa đủ|^Dùng được ngay|^Người cùng cung, .*không thể ra tay|^Gieo lại|^Xin xăm(\.|$| \()|^Cưới khi con tròn|^.+, \d+ tuổi(\.|$| \()", ""),
+("-", r"^\+\d+ Phúc duyên|^Đã đổi thân phận|^\d+ Ứng viên|^Đứng đầu(\.|$| \()|^Tháng này(\.|$| \()|^Thánh chỉ(\.|$| \()|^Có tin(\.|$| \()|^Chưa đủ|^Dùng được ngay|^Người cùng cung, .*không thể ra tay|^Gieo lại|^Xin xăm(\.|$| \()|^(?!Cưới khi).+, \d+ tuổi(\.|$| \()", ""),
 
-("-", r"^(Có tin|Ngươi|Tháng này|Thánh chỉ|Thiện cảm [+\-−]|Sức [+\-−])\S*(\.|$| \()|^Thánh chỉ:|^Tháng này:", ""),
+("-", r"^(Có tin|Ngươi|Tháng này|Thánh chỉ|Thiện cảm [+\-−]|Sức [+\-−])\S*(\.|$| \()|^Thánh chỉ:(?! tấn phong)|^Tháng này:", ""),
 ("biet-so-thich-ht", r"^Ngươi biết được", "Phi tần đọc mảnh giấy ghi chép sở thích Hoàng thượng, bên cạnh là món điểm tâm và bình hoa ngài thích"),
 ("to-vuot-pham", r"tố .+ vượt phẩm", "Phi tần chỉ chiếc trâm vượt phẩm trên đầu người khác, trước Hoàng hậu"),
 ("say-thai", r"sảy mất đứa bé", "Phi tần nằm giường, thái y lắc đầu, cung nữ cúi đầu, chiếc nôi trống"),
@@ -32,10 +32,10 @@ R = [
 ("su-than-trieu-cong", r"^Sứ thần các nước vào triều cống", "Sứ thần các nước dâng lễ vật quý trước điện, Hoàng thượng ngồi long ỷ hài lòng"),
 ("mang-tin-ve", r"^Mang tin về", "Tiểu thái giám thân tín cúi người báo tin cho chủ bên hiên"),
 # ---------- câu sau trong cùng một dòng nhật ký (phản ứng, kết quả, số): j87 gộp vào dòng trước nên không cần tranh riêng ----------
-("-", r"^(?!Tiếp đãi).+ (cảm động|tươi cười|lạnh nhạt|dịu nét mặt|khẽ cười|cười lạnh|ghi nhớ|cười nói vui vẻ|gật đầu đáp lễ)(\.|$| \()|cho là ngươi giả lả|^Hai người to nhỏ|lảng sang chuyện khác|đem lời ngươi kể lại|cũng kể chuyện riêng|lắng nghe chăm chú|kể cho ngươi một chuyện về|^.+ khéo từ chối(\.|$| \()|cho ngươi mượn \S+ lượng|nghi ngươi gây chia rẽ|^Ngươi hạ mình tạ lỗi|^Ngươi nhún nhường trước|^Ngươi nhắc .+ coi chừng|^Ngươi giúp .+ việc khó|^Ngươi nghe lén .+ nói chuyện", ""),
-("-", r"^Tay run, trà sóng|^Ngài nhận chén trà|lặng nghe, dúi vào tay|^Hoàng hậu không tin lời một cung nữ|^Ma ma Đức Thọ cung khen|^Hoàng thượng ngẩng lên|^.+ bị xét tội(\.|$| \()|^Hắn (không để ý|chần chừ|giấu vội|ngập ngừng)|thề sẽ chờ ngươi|^Ngươi trả lại khăn tay|thành thanh gươm trong tay chủ|chờ ngươi ngoài cửa cung; hai người thành thân", ""),
+("-", r"^(?!Tiếp đãi)(?!.*(kết giao|bị Hoàng thượng lạnh nhạt|: bị lạnh nhạt)).+ (cảm động|tươi cười|lạnh nhạt|dịu nét mặt|khẽ cười|cười lạnh|ghi nhớ|cười nói vui vẻ|gật đầu đáp lễ)(\.|$| \()|cho là ngươi giả lả|^Hai người to nhỏ|lảng sang chuyện khác|đem lời ngươi kể lại|cũng kể chuyện riêng|lắng nghe chăm chú|kể cho ngươi một chuyện về|^.+ khéo từ chối(\.|$| \()|cho ngươi mượn \S+ lượng|nghi ngươi gây chia rẽ|^Ngươi hạ mình tạ lỗi|^Ngươi nhún nhường trước|^Ngươi nhắc .+ coi chừng|^Ngươi giúp .+ việc khó|^Ngươi nghe lén .+ nói chuyện", ""),
+("-", r"^Tay run, trà sóng|^Ngài nhận chén trà|lặng nghe, dúi vào tay|^Hoàng hậu không tin lời một cung nữ|^Ma ma Đức Thọ cung khen|^Hoàng thượng ngẩng lên|^(?!.*trình chứng cứ).+ bị xét tội(\.|$| \()|^Hắn (không để ý|chần chừ|giấu vội|ngập ngừng)|thề sẽ chờ ngươi|^Ngươi trả lại khăn tay|thành thanh gươm trong tay chủ|chờ ngươi ngoài cửa cung; hai người thành thân", ""),
 ("-", r"sai đi bị bắt, khai ra chủ|^Người của ngươi bắt quả tang|thấy rõ .+ ngáng chân|^Đồ bị tịch thu|^Ngươi đã đề phòng|^Các phi tần che miệng cười|^Có thể mời thầy riêng|^Gồm|^Tuần này|^Nên giữ mình|^Chủ vị phẩm cao hơn|^Không chào|^«|^Ngươi ngỏ ý|^Phòng |^Chưa nối được|^Không thấy phòng|^Xem lại|^hỏng|^thành$|^(Nhận|Xin) \S+ \S+ (cung|điện|các|hiên|viện)(\.|$| \()|^\S+( \S+)? kể(\.|$)|^\S+ trở \S+(\.|$| \()", ""),
-("-", r"lẻn vào .+ để hẹn hò tư tình|nhận bạc của .+ để lén chuyển thư|nán lại quá giờ|để ý .+ từ lâu, lẻn vào|vào .+ không có lệnh", ""),
+("-", r"^(?!Núp sau hòn giả sơn).*(lẻn vào .+ để hẹn hò tư tình|nhận bạc của .+ để lén chuyển thư|nán lại quá giờ|để ý .+ từ lâu, lẻn vào|vào .+ không có lệnh)", ""),
 # ---------- câu mở đầu còn lại (tranh riêng) ----------
 ("ba-do-bi-bat", r"^Bà đỡ do .+ (bị bắt quả tang|định tráo hài nhi)", "Thị vệ giữ tay bà đỡ đang ôm chiếc giỏ phủ khăn ở cửa sau phòng sinh, đêm"),
 ("noi-trong-yeu-vat", r"con mèo chết|sinh ra yêu vật|^Đứa trẻ không rõ tung tích", "Chiếc nôi chạm trống phủ khăn đỏ trong phòng sinh tối, các cung nữ lùi lại sợ hãi (không thấy xác vật)"),

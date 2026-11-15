@@ -1,0 +1,80 @@
+{
+ "_doc": "act-pics2 step 2: all meanings.py rules merged into the live ACTS.json log in meanings.py order. add = [regex, key, index in the new log]; held = rules left out because their picture is not on the CDN [key, regex, scene].",
+ "add": [
+  [
+   "^(Thôi|Đi|Đợi buổi sau|Đợi sáng mai|Thôi, ở lại|Ngồi xem|Bỏ qua|Không mua|Mặc kệ|Nhận)(\\.|$| \\()",
+   "-",
+   0
+  ],
+  [
+   "^\\+\\d+ Phúc duyên|^Đã đổi thân phận|^\\d+ Ứng viên|^Đứng đầu(\\.|$| \\()|^Tháng này(\\.|$| \\()|^Thánh chỉ(\\.|$| \\()|^Có tin(\\.|$| \\()|^Chưa đủ|^Dùng được ngay|^Người cùng cung, .*không thể ra tay|^Gieo lại|^Xin xăm(\\.|$| \\()|^(?!Cưới khi).+, \\d+ tuổi(\\.|$| \\()",
+   "-",
+   5
+  ],
+  [
+   "^(Có tin|Ngươi|Tháng này|Thánh chỉ|Thiện cảm [+\\-−]|Sức [+\\-−])\\S*(\\.|$| \\()|^Thánh chỉ:(?! tấn phong)|^Tháng này:",
+   "-",
+   6
+  ],
+  [
+   "^(?!Tiếp đãi)(?!.*(kết giao|bị Hoàng thượng lạnh nhạt|: bị lạnh nhạt)).+ (cảm động|tươi cười|lạnh nhạt|dịu nét mặt|khẽ cười|cười lạnh|ghi nhớ|cười nói vui vẻ|gật đầu đáp lễ)(\\.|$| \\()|cho là ngươi giả lả|^Hai người to nhỏ|lảng sang chuyện khác|đem lời ngươi kể lại|cũng kể chuyện riêng|lắng nghe chăm chú|kể cho ngươi một chuyện về|^.+ khéo từ chối(\\.|$| \\()|cho ngươi mượn \\S+ lượng|nghi ngươi gây chia rẽ|^Ngươi hạ mình tạ lỗi|^Ngươi nhún nhường trước|^Ngươi nhắc .+ coi chừng|^Ngươi giúp .+ việc khó|^Ngươi nghe lén .+ nói chuyện",
+   "-",
+   24
+  ],
+  [
+   "^Tay run, trà sóng|^Ngài nhận chén trà|lặng nghe, dúi vào tay|^Hoàng hậu không tin lời một cung nữ|^Ma ma Đức Thọ cung khen|^Hoàng thượng ngẩng lên|^(?!.*trình chứng cứ).+ bị xét tội(\\.|$| \\()|^Hắn (không để ý|chần chừ|giấu vội|ngập ngừng)|thề sẽ chờ ngươi|^Ngươi trả lại khăn tay|thành thanh gươm trong tay chủ|chờ ngươi ngoài cửa cung; hai người thành thân",
+   "-",
+   25
+  ],
+  [
+   "^(?!Núp sau hòn giả sơn).*(lẻn vào .+ để hẹn hò tư tình|nhận bạc của .+ để lén chuyển thư|nán lại quá giờ|để ý .+ từ lâu, lẻn vào|vào .+ không có lệnh)",
+   "-",
+   27
+  ]
+ ],
+ "held": [
+  [
+   "scene:rv",
+   "^Đến cung nàng thăm",
+   ""
+  ]
+ ],
+ "heldSteals": [
+  [
+   "to-giac-truoc-hh-h",
+   "tố giác .+ trước Hoàng hậu",
+   [
+    "Ngươi tố giác ngươi trước Hoàng hậu: thành."
+   ]
+  ],
+  [
+   "to-giac-truoc-ht-h",
+   "tố giác .+ trước Hoàng thượng|^Tố lên Hoàng thượng",
+   [
+    "Ngươi tố giác ngươi trước Hoàng thượng: thành."
+   ]
+  ],
+  [
+   "to-giac-truoc-h",
+   "tố giác .+ trước ",
+   [
+    "Ngươi tố giác ngươi trước ngươi (Hoàng hậu): thành."
+   ]
+  ],
+  [
+   "to-giac-khong-thanh-h",
+   "tố giác .+ không thành|tố .+ nhưng không đủ chứng",
+   [
+    "Ngươi tố giác Lan Tần không thành; chứng cứ bị hủy.",
+    "Ngươi tố giác ngươi không thành; chứng cứ bị hủy."
+   ]
+  ],
+  [
+   "tu-thong-ban-chet-h",
+   "tư thông bị phát giác, bị ban chết|^Chuyện tư tình bại lộ",
+   [
+    "Lan Tần tư thông bị phát giác, bị ban chết."
+   ]
+  ]
+ ]
+}
