@@ -17,7 +17,7 @@ for r in R:
     cells=[]
     for nm,head in ((r["por"],False),(r.get("fig"),True)):
         if not nm: continue
-        b=comp(W+"img/"+nm,head);f=comp(W+"fix/"+nm,head) if os.path.exists(W+"fix/"+nm) else None
+        b=comp(W+"img/"+nm,head) if os.path.exists(W+"img/"+nm) else comp(W+"fimg/"+nm,head);f=comp(W+"fix/"+nm,head) if os.path.exists(W+"fix/"+nm) else None
         if b is None: continue
         if f is None: f=b
         cells+= [cv2.resize(b,(190,int(190*b.shape[0]/b.shape[1])),interpolation=cv2.INTER_CUBIC),cv2.resize(f,(190,int(190*f.shape[0]/f.shape[1])),interpolation=cv2.INTER_CUBIC)]

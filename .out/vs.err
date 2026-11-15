@@ -1,0 +1,48 @@
+14:15:43 fold-land
+14:15:45 frame ok
+14:18:08 life
+14:18:10 sig
+14:18:10 font
+14:18:16 taps go→go inv→inv act→act
+14:18:19 shot
+14:18:19 fold-land {"s":0.8475,"rot":false,"inner":[1180,820],"minFont":{"css":9.92,"screen":8.4,"at":"kstw:!"},"taps":["go→go","inv→inv","act→act"],"errs":0,"ovf":false}
+14:18:19 ipad
+14:18:21 frame ok
+14:20:49 life
+14:20:49 sig
+14:20:49 font
+14:20:55 taps go→go inv→inv act→act
+14:20:58 shot
+14:20:58 ipad {"s":1,"rot":false,"inner":[1180,820],"minFont":{"css":9.92,"screen":9.9,"at":"kstw:!"},"taps":["go→go","inv→inv","act→act"],"errs":0,"ovf":false}
+14:20:58 ipad-pro
+14:21:00 frame ok
+14:23:27 life
+14:23:30 sig
+14:23:30 font
+14:23:37 taps go→go inv→inv act→act
+14:23:44 shot
+14:23:44 ipad-pro {"s":1.1576,"rot":false,"inner":[1180,820],"minFont":{"css":9.92,"screen":11.5,"at":"kstw:!"},"taps":["go→go","inv→inv","act→act"],"errs":0,"ovf":false}
+14:23:44 phone-land
+14:23:46 frame ok
+14:25:56 life
+14:25:56 sig
+14:25:56 font
+14:25:59 taps go→go inv→inv act→act
+14:26:01 shot
+14:26:01 phone-land {"s":0.4756,"rot":false,"inner":[1180,820],"minFont":{"css":9.92,"screen":4.7,"at":"kstw:!"},"taps":["go→go","inv→inv","act→act"],"errs":0,"ovf":false}
+14:26:01 fold-port
+14:26:02 frame ok
+14:27:48 life
+14:27:48 sig
+14:27:48 font
+14:27:52 taps go→go inv→inv act→act
+14:27:52 shot
+14:27:52 fold-port {"s":1,"rot":false,"inner":[755,1000],"minFont":{"css":9.92,"screen":9.9,"at":"kstw:!"},"taps":["go→go","inv→inv","act→act"],"errs":0,"ovf":false}
+14:27:52 narrow
+14:27:53 frame ok
+14:29:48 life
+14:29:48 sig
+14:29:48 font
+14:29:52 taps go→go inv→inv act→act
+14:29:53 shot
+14:29:56 narrow {"s":0.4756,"rot":true,"inner":[1180,820],"minFont":{"css":9.92,"screen":4.7,"at":"kstw:!"},"taps":["go→go","inv→inv","act→act"],"errs":0,"ovf":false,"swipe":0,"turned":{"s":0.4756,"rot":false,"inner":[1180,820],"same":true}}

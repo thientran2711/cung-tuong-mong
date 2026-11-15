@@ -24,7 +24,8 @@ function f88TNum(f){return /cold|lanh/i.test(String(f.tier))?-1:parseInt(String(
 /* pick one record of an identity: consort mode = nearest consort tier, then age; base mode = maid art */
 function f88Pick(L,tier,age,base,mrank){if(!L||!L.length)return null;const T=L.filter(f88IsCT),B=L.filter(f=>!f88IsCT(f));
  if(base&&B.length){const N=B.filter(f=>f.tier==null||f.tier==="");if(mrank==null&&N.length)return figBest(N,null,age);
-  let md=1e9;const d=f=>f.tier==null||f.tier===""?0:Math.abs((parseInt(String(f.tier).replace(/\D/g,""),10)||0)-(mrank||0));
+  /* the plain maid art (tier null) is the dress of maid rank 1 (there is no "m1" file for maid faces); m0, m2..m4 are their own ranks */
+  let md=1e9;const d=f=>Math.abs((f.tier==null||f.tier===""?1:(parseInt(String(f.tier).replace(/\D/g,""),10)||0))-(mrank||0));
   for(const f of B)md=Math.min(md,d(f));return figBest(B.filter(f=>d(f)===md),null,age)}
  if(!base&&tier!=null&&T.length){let md=1e9;for(const f of T)md=Math.min(md,Math.abs(f88TNum(f)-tier));return figBest(T.filter(f=>Math.abs(f88TNum(f)-tier)===md),tier,age)}
  if(!base&&T.length&&tier==null)return figBest(T,null,age);
@@ -32,8 +33,11 @@ function f88Pick(L,tier,age,base,mrank){if(!L||!L.length)return null;const T=L.f
  return figBest(L,tier,age)}
 /* who wears consort dress */
 function f88Wear(who){try{if(who===S)return !(typeof isSrv==="function"&&isSrv());return (rivals||[]).includes(who)}catch(e){return false}}
+/* her maid dress rank on the cung nữ road (review/player-dress): Tân Giả khố = m0, Ma ma = m4 (the highest maid dress; the mama
+   pictures are other women), else her rank 0..4 (Cung nữ thô sử m0 · Cung nữ m1 · Đại cung nữ m2 · Chưởng sự cô cô m3 · Nữ quan m4) */
+function f88SrvRk(){try{const v=S&&S.srv;if(!v)return 1;if(v.lau>0)return 0;if(v.mama)return 4;return Math.max(0,Math.min(4,v.rk==null?1:v.rk|0))}catch(e){return 1}}
 function f88Best(L,who,kind){const Lp=kind==="por"?L.filter(f=>f.por):L;const W=f88Wear(who);
- const mr=(!W&&who&&who!==S&&who.role==="maid"&&typeof srk==="function")?(()=>{try{return srk(who)}catch(e){return null}})():null;
+ const mr=(!W&&who===S)?f88SrvRk():(!W&&who&&who!==S&&who.role==="maid"&&typeof srk==="function")?(()=>{try{return srk(who)}catch(e){return null}})():null;
  return f88Pick(Lp.length?Lp:L,figTierOf(who),figAgeOf(who),!W,mr)}
 /* j39 figFor with the tier-aware choice */
 figFor=function(p,kind){try{if(!FIGS.length||!p||!S)return"";const who=figWho(p);if(!who)return"";const k=figPick(who);if(!k)return"";

@@ -1,0 +1,234 @@
+{
+ "R": [
+  {
+   "name": "bestow contest + garment",
+   "added": [
+    "Tranh cổ<emp>",
+    "Trâm ngọc như ý ngự tứ<emp>"
+   ],
+   "boxes": [
+    {
+     "kind": "chest",
+     "title": "Rương bảo vật",
+     "from": "Hoàng thượng ban · vì tài nghệ hơn người",
+     "items": [
+      "Tranh cổ|2|pic",
+      "Trâm ngọc như ý ngự tứ|4|pic"
+     ],
+     "bac": 20
+    }
+   ],
+   "gains": [],
+   "err": ""
+  },
+  {
+   "name": "bestow contest",
+   "added": [
+    "Tranh cổ<emp>",
+    "Áo lông chồn ngự tứ<emp>"
+   ],
+   "boxes": [
+    {
+     "kind": "chest",
+     "title": "Rương bảo vật",
+     "from": "Hoàng thượng ban · vì tài nghệ hơn người",
+     "items": [
+      "Tranh cổ|2|pic",
+      "Áo lông chồn ngự tứ|4|pic"
+     ],
+     "bac": 20
+    }
+   ],
+   "gains": [],
+   "err": ""
+  },
+  {
+   "name": "bestow night",
+   "added": [
+    "Hương trầm<emp>",
+    "Trâm ngọc bích<emp>"
+   ],
+   "boxes": [
+    {
+     "kind": "tray",
+     "title": "Mâm thưởng",
+     "from": "Hoàng thượng ban · sau đêm thị tẩm",
+     "items": [
+      "Hương trầm|0|pic",
+      "Trâm ngọc bích|0|pic"
+     ],
+     "bac": 0
+    }
+   ],
+   "gains": [],
+   "err": ""
+  },
+  {
+   "name": "bestow son (ngự tứ)",
+   "added": [
+    "Nhân sâm trăm năm<emp>",
+    "Váy sa xanh ngọc<emp>"
+   ],
+   "boxes": [
+    {
+     "kind": "royal",
+     "title": "Ngự tứ",
+     "from": "Hoàng thượng ban · mừng hoàng tử ra đời",
+     "items": [
+      "Nhân sâm trăm năm|1|pic",
+      "Váy sa xanh ngọc|0|pic"
+     ],
+     "bac": 30
+    }
+   ],
+   "gains": [],
+   "err": ""
+  },
+  {
+   "name": "story reward (reward67 emp)",
+   "added": [
+    "Tranh cổ<story>"
+   ],
+   "boxes": [
+    {
+     "kind": "chest",
+     "title": "Rương bảo vật",
+     "from": "Phần thưởng",
+     "items": [
+      "Tranh cổ|2|pic"
+     ],
+     "bac": 0
+    }
+   ],
+   "gains": [],
+   "err": ""
+  },
+  {
+   "name": "rare (r97give)",
+   "added": [
+    "Tranh cổ<rare>"
+   ],
+   "boxes": [
+    {
+     "kind": "royal",
+     "title": "Ngự tứ",
+     "from": "Hoàng thượng ban",
+     "items": [
+      "Tranh cổ|2|pic"
+     ],
+     "bac": 0
+    }
+   ],
+   "gains": [],
+   "err": ""
+  },
+  {
+   "name": "Thái hậu (from th)",
+   "added": [
+    "Nhân sâm trăm năm<th>"
+   ],
+   "boxes": [
+    {
+     "kind": "tray",
+     "title": "Mâm thưởng",
+     "from": "Thái hậu ban",
+     "items": [
+      "Nhân sâm trăm năm|1|pic"
+     ],
+     "bac": 0
+    }
+   ],
+   "gains": [],
+   "err": ""
+  },
+  {
+   "name": "consort gift",
+   "added": [
+    "Túi thơm thêu<1>"
+   ],
+   "boxes": [
+    {
+     "kind": "gift",
+     "title": "Hộp gấm",
+     "from": "Kiều Thanh Ca tặng",
+     "items": [
+      "Túi thơm thêu|0|pic"
+     ],
+     "bac": 0
+    }
+   ],
+   "gains": [],
+   "err": ""
+  },
+  {
+   "name": "Nội vụ phủ 2 pieces",
+   "added": [
+    "Lụa Hàng Châu<nvp>",
+    "Gấm Tô Châu<nvp>"
+   ],
+   "boxes": [
+    {
+     "kind": "chest",
+     "title": "Rương Nội vụ phủ",
+     "from": "Nội vụ phủ cấp",
+     "items": [
+      "Lụa Hàng Châu|0|pic",
+      "Gấm Tô Châu|2|pic"
+     ],
+     "bac": 0
+    }
+   ],
+   "gains": [],
+   "err": ""
+  },
+  {
+   "name": "own work (cooking)",
+   "added": [
+    "Tác phẩm tự tay<->"
+   ],
+   "boxes": [],
+   "gains": [
+    "Bát gà hấp lá sen"
+   ],
+   "err": ""
+  },
+  {
+   "name": "purchase 1",
+   "added": [
+    "Son phấn Dương Châu<->"
+   ],
+   "boxes": [],
+   "gains": [
+    "Son phấn Dương Châu"
+   ],
+   "err": ""
+  },
+  {
+   "name": "burst of 4",
+   "added": [
+    "Son phấn Dương Châu<->",
+    "Hương trầm<->",
+    "Đệm gấm<->",
+    "Nghiên mực Đoan Khê<->"
+   ],
+   "boxes": [
+    {
+     "kind": "chest",
+     "title": "Rương đồ",
+     "from": "Vừa vào Tư trang",
+     "items": [
+      "Son phấn Dương Châu|0|pic",
+      "Hương trầm|0|pic",
+      "Đệm gấm|0|pic",
+      "Nghiên mực Đoan Khê|1|pic"
+     ],
+     "bac": 0
+    }
+   ],
+   "gains": [],
+   "err": ""
+  }
+ ],
+ "errs": [],
+ "fails": []
+}

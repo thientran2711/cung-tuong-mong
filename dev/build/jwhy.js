@@ -98,7 +98,7 @@ function whyOfBtn(b){if(!b||!S)return null;const d=b.dataset||{};
  try{if(d.r!=null&&d.a){const k=d.a,v=rivals[+d.r],A=ACT[k];if(!A||!v||!A.o)return null;const F=A.why?A.why(S,v):whyDiff(()=>A.o(S,v),[[S,S],[v,v]]);return{F,dom:ACTDOM[k],base:k==="spy"?BAL.spyBase:null,o:A.o(S,v)}}
   if(d.o!=null&&b.classList.contains("opt")&&typeof popIdx!=="undefined"&&popIdx!=null){const p=curPeople()[popIdx];const opts=talkOpts(p);const a=opts[+d.o];if(!a||a.o==null||a.o>=100)return null;
    const F=a.why?a.why():whyDiff(()=>{const x=talkOpts(p).find(y=>y.n===a.n);return x?x.o:null},[[S,S],[p.ref||null,p.ref||null]]);return{F,dom:a.dom,base:a.why?BAL.spyBase:null,o:a.o}}
-  if(d.m!=null&&Q[0]&&Q[0].opts){const a=Q[0].opts[+d.m];if(a&&a.why)return{F:a.why(),dom:a.dom,base:BAL.spyBase,o:a.o}}
+  if(d.m!=null&&Q[0]&&Q[0].opts){const a=Q[0].opts[+d.m];if(a&&a.why)return{F:a.why(),dom:a.dom,base:a.base!==undefined?a.base:BAL.spyBase,o:a.o}}
   if(d.i!=null&&typeof deck!=="undefined"){const a=deck[+d.i];if(!a||a.o==null||a.o>=100)return null;return{F:a.why?a.why():[],dom:a.dom,o:a.o,deck:1}}}catch(e){console.error(e)}return null}
 function kitWhyHtml(b,lv){const W=whyOfBtn(b);if(!W)return"";const q=lotB(S,W.dom);const word=KIT_ODDS[lv]||"";
  const F=W.F.filter(x=>Math.abs(x[1])>=1||/Tự tay/.test(x[0])).sort((x,y)=>Math.abs(y[1])-Math.abs(x[1]));
