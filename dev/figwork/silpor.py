@@ -54,7 +54,7 @@ def make(src, dst, kid=False):
     yy = np.linspace(0, 1, H_OUT)[:, None]
     M *= np.clip((1.0 - yy) / 0.12, 0, 1) * 0.15 + 0.85
     # fill: kit grey, lighter towards the head, faint rim light along the contour
-    g_top, g_bot = np.array([176, 180, 186]), np.array([138, 143, 150])
+    g_top, g_bot = np.array([150, 155, 162]), np.array([112, 117, 126])
     t = np.clip((yy - 0.15) / 0.75, 0, 1)
     rgb = (g_top * (1 - t) + g_bot * t)[..., None, :].repeat(W_OUT, 1).reshape(H_OUT, W_OUT, 3)
     edge = np.asarray(Image.fromarray((M * 255).astype(np.uint8)).filter(ImageFilter.FIND_EDGES).filter(ImageFilter.GaussianBlur(2))).astype(np.float32) / 255

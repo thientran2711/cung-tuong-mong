@@ -97,7 +97,10 @@ function helpers(){
  W.__iqClean=()=>{const r=document.getElementById('kroul');if(r){const k=r.querySelector('.krskip');try{k&&k.click()}catch(e){}r.remove()}try{Q.length=0}catch(e){}
   for(const id of ['modal','kpop','pop']){const m=document.getElementById(id);if(m&&id==='modal')m.hidden=true;else if(m)m.remove()}
   const c=document.getElementById('iqcat');if(c)c.remove();try{popIdx=null}catch(e){}};
- W.__iqTab=t=>{W.__iqClean();const b=document.querySelector(`#tabs [data-tab="${t}"]`);if(!b)return 'no tab '+t;b.click();return 'ok'};
+ W.__iqTab=t=>{W.__iqClean();let b=document.querySelector(`#tabs [data-tab="${t}"]`);
+  if(!b){/* sub-tabs (jhc: Hậu cung = Hoàng thượng·Thái hậu | Phi tần | Nam nhân | Cung nhân): open the group, then the sub-tab */
+   const g=document.querySelector('#tabs [data-tab="rv"]');if(g)g.click();b=document.querySelector(`[data-ksub="${t}"]`)}
+  if(!b)return 'no tab '+t;b.click();return 'ok'};
  W.__iqStart=()=>{try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;
   for(let i=0;i<60;i++){try{store.set(NL_KEY,null)}catch(e){}start();if(!(typeof isSrv==='function'&&isSrv()))break}W.__iqClean();render()};
  W.__iqKnowAll=st=>{for(const e of k61All())S.known[kOf61(e)]=st;try{for(const s of W.__iqCongtu())S.known[kOf61(s)]=st}catch(e){}K61VER++;render()};
@@ -140,7 +143,7 @@ async function walk(p,SZ,ALL,phase){
    await ev(p,()=>{const x=document.getElementById('popx');if(x)x.click();const m=document.getElementById('modal');if(m&&!m.hidden){Q.length=0;m.hidden=true}})}}
  await ev(p,()=>{__iqClean();try{S.place='home';goTo('home')}catch(e){}});
  /* list tabs with a face strip: every person's card */
- for(const [t,lab] of [['rv','Hậu cung'],['staff','Cung nhân']]){
+ for(const [t,lab] of [['court','Hoàng thượng · Thái hậu'],['rv','Phi tần'],['men','Nam nhân'],['staff','Cung nhân']]){
   await ev(p,t=>__iqTab(t),t);await look(p,SZ,`${P} · ${lab}`,ALL,900);
   await ev(p,()=>{const c=document.querySelector('#panel .pc .pcp.kit, .panel .pc .pcp.kit');if(c&&!window.__iqCW)window.__iqCW=c.getBoundingClientRect().width});
   const n=await ev(p,t=>document.querySelectorAll(`.pface[data-pg="${t}"]`).length,t);
