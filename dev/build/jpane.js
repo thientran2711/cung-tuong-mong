@@ -37,4 +37,7 @@ window.kitPane=kitPane;
 #panel.kpane>.kpbar>.ksub{position:static!important;margin:0!important;top:auto!important}
 #panel.kpane>.kpbar>.kcattabs{position:static!important;margin:0!important;padding:0!important;box-shadow:none!important;background:transparent!important;top:auto!important}
 #panel.kpane>.kpbar+*{margin-top:0!important}
+/* §45 exception .kpinline (r8): a tab row inside a picker that lives IN the list (Ân oán X / Y, §49.2b) stays with its strip: not moved
+   into the bar, never sticky, no shadow */
+#panel .kpinline>.kcattabs,#panel .kpinline>.kcattabs.kstick,#panel .kpinline>.ksub{position:static!important;top:auto!important;box-shadow:none!important;margin:2px 0 4px!important}
 `;document.head.appendChild(st)})();

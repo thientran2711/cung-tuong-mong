@@ -1,3 +1,4 @@
+/* (KIT §45 exception: rows inside .kpinline — the Ân oán X / Y pickers — stay with their strip and are not counted) */
 /* kit pane rule (jpane, KIT §45): on every tab pane, the bar (sub-tabs + first filter row) sits flush at the top of the pane, directly
    under the header, and stays there while the list scrolls; nothing shows above it, the list is cut off at its bottom edge, and the
    pane ends at the bottom nav. Measured at rest and after scrolling, ±1 px.
@@ -18,7 +19,7 @@ let SIZES=args.slice(1).filter((a,i)=>/^\d+x\d+@/.test(a));if(!SIZES.length)SIZE
    const m=async()=>p.evaluate(()=>{const P=document.getElementById('panel');const pr=P.getBoundingClientRect();if(!pr.height)return{hidden:1};const cs=getComputedStyle(P);const bt=parseFloat(cs.borderTopWidth),bb=parseFloat(cs.borderBottomWidth);
     const bar=P.querySelector(':scope > .kpbar');const hd=document.querySelector('header.hud');const nav=document.querySelector('nav.bar')||document.getElementById('tabs');
     const o={sh:P.scrollHeight,ch:P.clientHeight,st:Math.round(P.scrollTop),navGap:nav?Math.round(nav.getBoundingClientRect().top-pr.bottom):null,hdGap:hd?Math.round(pr.top-hd.getBoundingClientRect().bottom):null};
-    const stray=[...P.querySelectorAll('.ksub,.kcattabs')].filter(e=>e.offsetParent&&!e.closest('.kpbar')&&!e.closest('.pc,.kpc,.dlg,#popw')).map(e=>e.className);if(stray.length)o.stray=stray;
+    const stray=[...P.querySelectorAll('.ksub,.kcattabs')].filter(e=>e.offsetParent&&!e.closest('.kpbar')&&!e.closest('.pc,.kpc,.dlg,#popw,.kpinline')).map(e=>e.className);if(stray.length)o.stray=stray;
     if(!bar)return o;const br=bar.getBoundingClientRect();o.bar=[Math.round(br.top),Math.round(br.bottom)];o.barTopOff=Math.round((br.top-(pr.top+bt))*10)/10;
     o.barW=Math.round(br.width-(pr.width-parseFloat(cs.borderLeftWidth)-parseFloat(cs.borderRightWidth)-(P.offsetWidth-P.clientWidth-parseFloat(cs.borderLeftWidth)-parseFloat(cs.borderRightWidth))));
     const bs=getComputedStyle(bar);o.opaque=/rgb\(/.test(bs.backgroundColor)||/rgba\([^)]*,\s*1\)/.test(bs.backgroundColor);o.shadow=bs.boxShadow!=='none';

@@ -159,3 +159,23 @@ img/fig-eunuch-ndp-tray.webp (committed in git on review/shop-fix; not on the CD
 - NOTE for the coordinator: during this review some other session switched /home/user/wt/kit-fig2-r6 to branch review/kit-fig2 and edited
   j5/jhc/jk4/jplace/KIT.md/news-face-real.js there (uncommitted, 12:25Z). The reviewer's commit 00c72e4e4 therefore also sits on the LOCAL
   review/kit-fig2 ref of that worktree. Review work continued in /home/user/wt/kf2r6.
+
+## REVIEW r8 (reviewer, 11/15) — 196edb362e merged onto origin/main aa9689da5 → review/kit-fig2-r8
+- Merge: only index.html / sw.js conflicted (rebuilt with dev/site/build_site.sh).
+- Reviewer fixes:
+  1. Festival dialogs whose festival has no "fest:<k>" category in EVENTS.json (Vu Lan, Lạp bát, Thánh thọ, Vạn thọ: invitations "· Lời mời",
+     "· Lễ", "· Dâng lễ") fell to the Hoàng thượng / Thái hậu kind picture (ev-hoang-de-dem / ev-thinh-an); they now take the festival's own
+     band img/ev-fest-<k>-b.webp (same picture the festival day shows) — jk4 kitEvArt wrapper. Own banners (jevban) still win.
+  2. `.kpinline` documented as a KIT §45 exception (+ §49.2b markup line); its CSS moved from jhc (private `.krelpk>.kcattabs`) to jpane
+     as the generic kit rule `#panel .kpinline>.kcattabs/.ksub` (static, no shadow). dev/test/pane-bar.js skips rows inside `.kpinline`
+     (it flagged the Ân oán X / Y tab rows as "outside the pane bar" at every size).
+  3. Duplicate "Lời cảnh báo" (j70thr): thrify70 now keeps ONE j70thr warning per consort in Q (later duplicates dropped, Q[0] kept).
+  4. Stale comment "420 px floor" → 300 (KIT_DP_MINH).
+- Tests (images from git objects / CDN): overlay-close 35/35 ok; promo-exam 17/17 (kg82 frames in #ov still close/answer); pane-bar 5 sizes
+  bad 0; tabs-kit-shots 5 sizes bad 0; opt-render 1180 fails [] (7 warnings from main's hint texts); kit-page 5 sizes 11 samples bad 0;
+  event-dp-scan fixture 1180 + PLAY=600 (154 dialogs: all kdper, 1 person, banner, chip above; festival invitations with 3–5 long options hit
+  the 720 cap and scroll their options 13–133 px — 32.7c cap, same on main); event-dp-scan MAXN=12 on an old save (made with origin/main)
+  at 755/1000/1180/1366/844: 0 bad, 10–12 px under options (844x390 taller dialogs scroll), 0 page errors. Acceptance "Thái hậu triệu"
+  1180x820: 408 px (main 500), banner ev-thinh-an (main: room picture), chip above, both options in one row, cost mode.
+  news-face-real (fixture, 12 weeks, strict driver): no stuck / no re-queue, rows 36/36, titleUnit 0/60 (one old stored log line in the
+  fixture still reads "Tổng quản thái giám Tổng quản …" in the raw text scan — stored data, k61Title already uses kitTitled).
