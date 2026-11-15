@@ -26,3 +26,12 @@ Tests:
 Results (after): dev/test/kit-table.js 1180x820: 1325 lists, 0 fails. small-bugs-3.js all checks empty at 755x1000@2, 1000x755, 1180x820, 1366x1024, 844x390, 390x844; kit-page.js bad 0 at 5 sizes; old save written by main build loads (log line shows "thiện cảm +5", lower-case item).
 KIT.md: §0.1, §15.1, §31.2a, §32.10a, §32.12 note, §42.2 note, §45.1, §51 note. VANPHONG: 2 rows.
 Not changed (noted): "thù −N" strings (j17 AOUT etc.) are mapped by kitParse to "oán ta +N" on cards — a separate wording class, left as is.
+
+## Review r1 (review/small-bugs-3-r1)
+- Merged origin/main f53bdade (conflicts: built files rebuilt; KIT.md §32.12 kept both notes).
+- Found: 1180x820@2 header check failed (Mộ Dung Tuyết Nhi 12/23: date overlapped the weather icon) — kitHdClash was right but kitHdFit
+  only ran inside render(); content written later (date/weather/quẻ, picture load) never re-fitted. Fixed in jk4: rAF-debounced
+  MutationObserver (childList/characterData only, no loop: 0 mutations in 3 s idle) + capture 'load' on header.
+- After: small-bugs-3.js clean at 755x1000@2, 1000x755, 1180x820@2 (x2 runs + @1), 1366x1024@2, 844x390, 390x844; sb3-scan TOTAL 0;
+  kit-page.js bad 0 at 5 sizes; rotate prompt one line on site index.html 390x844 host + direct, gone after turning to 844x390;
+  standalone item names keep capitals on all 18 tabs (probe), no item name collides with rank/rival names.

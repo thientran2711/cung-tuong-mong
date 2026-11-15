@@ -143,6 +143,11 @@ if(typeof renderHUD==="function"){const r0=renderHUD;renderHUD=function(){const 
 if(typeof render==="function"){const r1=render;render=function(){const r=r1.apply(this,arguments);kitHdFit();return r}}
 addEventListener("resize",()=>{clearTimeout(window.__khdf);window.__khdf=setTimeout(kitHdFit,40)});
 try{document.fonts&&document.fonts.ready.then(kitHdFit)}catch(e){}
+/* review/small-bugs-3-r1: the bar re-fits when its CONTENT changes after render (a later module writes the date / weather / quẻ, a picture
+   loads): 1180x820 "Mộ Dung Tuyết Nhi · Tháng chạp · thượng tuần · năm thứ hai mươi ba" stayed one row under the weather icon */
+(function(){let q=0;const kick=()=>{if(!q)q=requestAnimationFrame(()=>{q=0;kitHdFit()})};const go=()=>{const hd=document.querySelector("header.hud");if(!hd)return setTimeout(go,500);
+ new MutationObserver(kick).observe(hd,{subtree:true,childList:true,characterData:true});hd.addEventListener("load",kick,true)};
+ if(document.body)go();else document.addEventListener("DOMContentLoaded",go)})();
 /* a short helper line (".kphelp": "Mới biết tên ⓘ") opens its full text on tap too (touch has no hover tooltip) */
 document.addEventListener("click",e=>{const h=e.target.closest&&e.target.closest(".kphelp");if(!h||!h.title||typeof kpPop!=="function")return;e.stopPropagation();try{kpPop(h,`<div class="kpopt">${kitStatEsc(h.title)}</div>`)}catch(x){}},true);
 
