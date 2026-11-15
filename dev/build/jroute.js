@@ -8,7 +8,7 @@
    Cùng luật cho phi tần NPC: tư thông (j22), mưu trốn cung (v.rtEsc), xin xuất gia; con riêng (k.tf) cũng có thể bị đồn.
    Tắt khi đo cân bằng: window.__rtOff=1.
    ======================================================================================================================== */
-const RTC={heat:{vuon:14,home:8,tyv:10,tn:24,lc:6,kn:24},decay:6,maxFinal:72,npcEsc:1.2,npcSee:30,kidRoll:3,fire:2.5};
+const RTC={heat:{vuon:14,home:8,tyv:10,tn:24,lc:6,kn:24},decay:6,maxFinal:60,npcEsc:1.2,npcSee:30,kidRoll:3,fire:2.5};
 const RT_ROUTE={tt:"Tư tình",tc:"Trốn khỏi cung",hl:"Rời cung hợp lệ",ad:"Ẩn dật trong cung"};
 const RT_END={tt_lo:["tt","Tư thông bại lộ"],tt_hoa:["tt","Giọt máu vẫn hòa"],ng_oan:["tt","Bị vu oan qua bát nước"],ng_vach:["tt","Vạch mặt kẻ gian lận"],tt_kin:["tt","Một đời giấu kín"],tc_dan:["tc","Trốn khỏi cung, sống đời thường dân"],
  tc_cung:["tc","Cao chạy xa bay cùng người thương"],tc_lien:["tc","Thoát thân, nhà bị liên lụy"],tc_bat:["tc","Bị bắt khi trốn"],
@@ -123,15 +123,15 @@ function rtTcCards(){const T=rtS(),A=[];const tc=T.tc;
  const step=(k,o)=>{if(P[k])return;o.id="tc_"+k;o.r=2;if(cool(k))o.need=(o.need||[]).concat([[`đợi tháng sau mới thử lại (còn ${T.cd[k]-S.turn} tháng)`,false]]);const f0=o.fail;o.fail=()=>{T.cd[k]=S.turn+1;if(f0)f0()};A.push(rtCard(o))};
  const gl=lov&&m.rw==="thị vệ";
  step("guard",{n:gl?`Nhờ ${rtMnm(m)} lo cổng`:"Mua chuộc thị vệ gác cổng",t:gl?"Hắn biết phiên gác nào lơi lỏng.":S.out?"Lính gác lãnh cung vốn lơi lỏng, bạc dễ mở cửa.":"Thị vệ gác cổng Thần Vũ, một nén bạc đổi một lần nhắm mắt.",art:RT_ART.lo,
-  c:gl?{}:{bac:S.out?-60:-120},o:gl?100:od((S.out?60:45)+S.tamco/4-rtDuc()+rtDf().o),k:1,x:"đêm trốn: cơ may +10",lx:"hắn nhận bạc rồi báo lên · Cung Chính ti để mắt 3 tháng · Lời ra tiếng vào +20",kem:"Lời ra tiếng vào +5",
+  c:gl?{}:{bac:S.out?-60:-120},o:gl?100:od((S.out?60:45)+S.tamco/4-rtDuc()+rtDf().o),k:1,x:"đêm trốn: cơ may +8",lx:"hắn nhận bạc rồi báo lên · Cung Chính ti để mắt 3 tháng · Lời ra tiếng vào +20",kem:"Lời ra tiếng vào +5",
   go:()=>{P.guard=1;rtHeat(5)},fail:()=>{rtHeat(20);T.watch=S.turn+3;log(`<span class="r">Tên thị vệ nhận bạc rồi bẩm lên. Cung Chính ti bắt đầu để mắt đến ngươi.</span>`)}});
  const mL=S.maid?S.maid.loyal:0;
  step("maid",{n:"Dặn cung nữ tâm phúc",t:S.maid?`${S.maid.name} sẽ đi cùng hay ở lại che mắt cho ngươi.`:"Cần một cung nữ thân cận.",art:RT_ART.tc,k:1,o:od(55+mL/3),need:[[`cung nữ thân cận một lòng (lòng 70+, có ${mL})`,mL>=70]],
-  x:"đêm trốn: cơ may +6 · may được y phục cung nữ",lx:"nàng sợ hãi từ chối · lòng -15",kem:"nàng biết chuyện của ngươi",go:()=>{P.maid=1},fail:()=>{if(S.maid)S.maid.loyal=Math.max(0,S.maid.loyal-15);if(roll(25)){rtHeat(20);log(`<span class="r">${S.maid?S.maid.name:"Cung nữ"} hoảng sợ, lỡ lời với người ngoài.</span>`)}}});
+  x:"đêm trốn: cơ may +5 · may được y phục cung nữ",lx:"nàng sợ hãi từ chối · lòng -15",kem:"nàng biết chuyện của ngươi",go:()=>{P.maid=1},fail:()=>{if(S.maid)S.maid.loyal=Math.max(0,S.maid.loyal-15);if(roll(25)){rtHeat(20);log(`<span class="r">${S.maid?S.maid.name:"Cung nữ"} hoảng sợ, lỡ lời với người ngoài.</span>`)}}});
  step("home",{n:"Gửi thư về nhà",t:"Nhờ người mang mật thư ra cửa cung: người nhà sẵn xe đón và dời nhà đi trước.",art:RT_ART.thu,c:{bac:-40},o:od(55+(S.mat||0)*3+rtDf().o),k:1,
   x:"có người đón · nhà không bị liên lụy",lx:"thư bị chặn giữa đường · chứng cứ về ngươi +2 · Lời ra tiếng vào +15",kem:S.origin&&S.origin.k==="nc"?"nhà ở Nam Chiếu xa xôi, thư đi lâu":"",
   go:()=>{P.home=1},fail:()=>{rtHeat(15);const v=pick(liveRivals(true).filter(x=>(x.mat||0)>=2))||null;if(v){evA(v,S,2);log(`<span class="r">Mật thư của ngươi rơi vào tay ${rtVn(v)}.</span>`)}else log("Mật thư bị chặn ở cửa cung; chưa rõ ai giữ.")}});
- step("route",{n:"Dò đường cổng Thần Vũ",t:"Đi một vòng giờ đổi phiên gác, nhớ từng ngã rẽ.",art:RT_ART.tc,c:{suc:-12},o:od(55+(S.mat||0)*4-rtDuc()+rtDf().o),k:2,x:"đêm trốn: cơ may +8",lx:"bị hỏi han giữa đường · Lời ra tiếng vào +10",go:()=>{P.route=1},fail:()=>{rtHeat(10)}});
+ step("route",{n:"Dò đường cổng Thần Vũ",t:"Đi một vòng giờ đổi phiên gác, nhớ từng ngã rẽ.",art:RT_ART.tc,c:{suc:-12},o:od(55+(S.mat||0)*4-rtDuc()+rtDf().o),k:2,x:"đêm trốn: cơ may +6",lx:"bị hỏi han giữa đường · Lời ra tiếng vào +10",go:()=>{P.route=1},fail:()=>{rtHeat(10)}});
  step("pass",{n:"Làm giả yêu bài xuất cung",t:"Một thái giám Nội vụ phủ nhận khắc yêu bài, giá không rẻ.",art:RT_ART.lo,c:{bac:-80},o:od(42+S.tamco/3+rtDf().o),k:1,x:"có yêu bài xuất cung",lx:"mất bạc · tên thái giám ôm bạc biến mất · Lời ra tiếng vào +12",go:()=>{P.pass=1},fail:()=>{rtHeat(12)}});
  if(P.maid)step("cloth",{n:"May y phục cung nữ",t:"Cung nữ tâm phúc lén may một bộ áo xanh như của nàng.",art:RT_ART.tc,c:{bac:-10},k:1,x:"có y phục cung nữ",go:()=>{P.cloth=1}});
  const ty=T.tt&&m&&m.rw==="thái y"&&T.tt.st>=3,doc=!!S.doctor;
@@ -147,11 +147,11 @@ function rtTcCards(){const T=rtS(),A=[];const tc=T.tc;
  for(const [k,n,t,need,art] of M){const o=od(rtEscO(k));const anyNeed=need.some(x=>x[1]);if(!anyNeed&&k!=="doan"&&k!=="lc")continue;
   A.push(rtCard({id:"tcgo_"+k,r:2,n,t,art,c:{suc:-15},o,k:4,need:need.concat(T.watch>S.turn?[[`Cung Chính ti đang để mắt (còn ${T.watch-S.turn} tháng): cơ may -15`,true]]:[]),
    x:`ra khỏi cung · kết thúc kiếp này${P.home?"":" (nhà bị liên lụy)"}`,lx:`bị bắt · lãnh cung hay ban chết · nhà bị liên lụy${k==="chet"?" · thuốc quá liều có thể chết thật":""}`,
-   kem:`Lời ra tiếng vào ${rtHeatW(T.heat).toLowerCase()} (cơ may -${Math.round(T.heat/3)})`,go:()=>rtFled(k),fail:()=>rtCaughtEsc(k)}))}
+   kem:`Lời ra tiếng vào ${rtHeatW(T.heat).toLowerCase()} (cơ may -${Math.round(T.heat/2.5)})`,go:()=>rtFled(k),fail:()=>rtCaughtEsc(k)}))}
  A.push(rtCard({id:"tcstop",r:2,n:"Thôi ý định trốn đi",t:"Đốt hết thư từ, cất yêu bài xuống đáy rương.",art:RT_ART.tc,k:1,x:"lời ra tiếng vào lắng bớt · lối Trốn khỏi cung khép lại",go:()=>{T.tc=null;rtHeat(-8);log("Ngươi đốt hết thư từ. Bức tường son vẫn đứng đó.")}}));
  return A}
-function rtEscO(k){const T=rtS(),P=(T.tc&&T.tc.prep)||{};const base={doan:28,chet:32,hoa:28,theo:38,lc:26}[k]||25;
- return cl(base+(P.guard?10:0)+(P.route?8:0)+(P.maid?6:0)+(P.home?5:0)+(P.pass&&k!=="doan"?4:0)-Math.round(T.heat/3)-(T.watch>S.turn?15:0)-rtDuc()+rtDf().o,5,RTC.maxFinal)}
+function rtEscO(k){const T=rtS(),P=(T.tc&&T.tc.prep)||{};const base={doan:20,chet:24,hoa:20,theo:30,lc:18}[k]||18;
+ return cl(base+(P.guard?8:0)+(P.route?6:0)+(P.maid?5:0)+(P.home?4:0)+(P.pass&&k!=="doan"?3:0)-Math.round(T.heat/2.5)-(T.watch>S.turn?15:0)-rtDuc()+rtDf().o,5,RTC.maxFinal)}
 function rtFled(k){const T=rtS(),P=T.tc.prep,m=rtMan();const withM=!!(m&&T.tt&&T.tt.st>=4);rtStat("tc_ok");
  const id=withM?"tc_cung":P.home?"tc_dan":"tc_lien";rtEnd(id);
  const how={doan:"lẫn trong đoàn cung nữ xuất cung, cúi đầu đi qua cổng Thần Vũ",chet:"uống thuốc giả chết; quan tài ra cửa sau, người nhà mở nắp giữa đường",hoa:"nhân lúc lửa cháy, khoác áo cung nữ chạy ra cổng",theo:`theo ${m?m.name:"người ấy"} ra cổng lúc đổi phiên gác`,lc:"trèo qua bức tường đổ sau lãnh cung trong đêm"}[k];
@@ -197,7 +197,7 @@ function rtAdCards(){const T=rtS(),A=[],ad=T.ad;
  A.push(rtCard({id:"ad_off",r:4,n:"Mở lại thẻ bài",t:"Trở lại đường tranh sủng.",art:RT_ART.an,k:1,x:`thôi ẩn dật (đã ${yrs} năm)`,go:()=>{T.ad.on=0;log("Ngươi xin Kính sự phòng bày lại thẻ bài.")}}));
  return A}
 /* ---------- the deck: «Lối riêng» cards ---------- */
-function rtCards(){if(!rtRoad())return[];let A=[];try{A=A.concat(rtNgCards());if(!rtOpen())return A;const T=rtS();if(!S.out)A=A.concat(rtTtCards());else if(T.tt)A=A.concat(rtTtCards());A=A.concat(rtTcCards(),rtHlCards(),rtAdCards())}catch(e){console.error("rtCards",e)}return A}
+function rtCards(){if(!rtRoad()||(window.__bot&&!window.__rtPol))return[];/* the balance bots climb; only the route bot (dev/measure/routes.js) takes «Lối riêng» */let A=[];try{A=A.concat(rtNgCards());if(!rtOpen())return A;const T=rtS();if(!S.out)A=A.concat(rtTtCards());else if(T.tt)A=A.concat(rtTtCards());A=A.concat(rtTcCards(),rtHlCards(),rtAdCards())}catch(e){console.error("rtCards",e)}return A}
 function rtRefresh(){try{if(!S||!Array.isArray(deck))return;const d=deck.filter(a=>!a.rt);deck.length=0;deck.push(...d,...rtCards())}catch(e){console.error(e)}}
 (function(){const d0=deal;deal=function(){const r=d0.apply(this,arguments);try{if(rtRoad()&&Array.isArray(deck)){deck.push(...rtCards());rtNgDue()}}catch(e){console.error(e)}return r}})();
 (function(){const n0=nextBuoi;nextBuoi=function(){const t=S&&S.turn,b=S&&S.buoi;const r=n0.apply(this,arguments);try{if(S&&!S.dead&&(S.turn!==t||S.buoi!==b)){rtRefresh();rtNpcMeet();if(!window.__bot)render()}}catch(e){console.error(e)}return r}})();
@@ -247,7 +247,7 @@ function rtMonth(){if(!rtRoad()||!S.rt)return"";const T=S.rt;let ev="";
  const w=watcher();T.heat=cl(T.heat-RTC.decay-(w&&w.loyal>=80?2:0),0,100);if(S.out)T.wasCold=1;
  /* someone hostile pieces it together (two-way: same as NPCs seeing NPCs) */
  const m=rtMan();if(m&&T.heat>=40&&!T.bm&&roll(T.heat/4)){const foes=liveRivals(true).filter(v=>aff(v,S)<0||(v.ghen||0)>=50);if(foes.length){const v=pick(foes);evA(v,S,1);rtCaughtBy(v,m,"gap")}}
- if(T.bm&&!T.bm.paid!==undefined&&T.bm.since<S.turn&&T.bm.paid!==S.turn&&RV(T.bm.v)&&RV(T.bm.v).alive)rtPush("rtBm",{v:T.bm.v});
+ if(T.bm&&T.bm.since<S.turn&&T.bm.paid!==S.turn&&RV(T.bm.v)&&RV(T.bm.v).alive){if((T.bm.k||0)>=8){log(`${RV(T.bm.v).name} đã vơ đủ; nàng thôi đòi bạc.`);T.bm=null}else rtPush("rtBm",{v:T.bm.v})}
  /* her children by the lover */
  for(const k of rtKidsAlive())if(k.tf&&!k.tfOk&&(k.age||0)>=3&&(k.age||0)<=12&&roll(RTC.kidRoll)){rtPush("rtKid",{k:k.name});break}
  /* quiet life */
