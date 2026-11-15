@@ -5,7 +5,8 @@
 (function(){if(typeof nextBuoi!=="function")return;let depth=0;window.__aaNote=null;
  const n0=nextBuoi;nextBuoi=function(){if(depth||!S||S.dead||window.__bot){return n0.apply(this,arguments)}depth++;const b=rsnap();let r;
   try{r=n0.apply(this,arguments)}finally{depth--}
-  try{if(b&&S&&!S.dead){const ch=RKEYS.some(([k])=>(S[k]||0)!==b[k])||(typeof relSnap==="function"&&b.rel&&JSON.stringify(relSnap())!==JSON.stringify(b.rel))||(S.maid&&S.maid.loyal!==b.maidL);
+  try{if(b&&S&&!S.dead){/* not noticed: Sức alone (the nightly rest), a servant's small drift (≤2) — everything else that touched her is */
+   const ch=RKEYS.some(([k])=>k!=="suc"&&(S[k]||0)!==b[k])||(typeof relSnap==="function"&&b.rel&&JSON.stringify(relSnap())!==JSON.stringify(b.rel))||(S.maid&&Math.abs(S.maid.loyal-(b.maidL!=null?b.maidL:S.maid.loyal))>2);
    if(ch){window.__aaNote={b,t:"Trong cung vừa qua"};aaNoteFlush()}}}catch(e){console.error(e)}return r};
  window.aaNoteFlush=function(){const N=window.__aaNote;if(!N||!S||S.dead)return;const m=document.getElementById("modal");if(Q.length||(m&&!m.hidden)){setTimeout(aaNoteFlush,600);return}
   window.__aaNote=null;try{resultShow(N.t,N.b,null)}catch(e){console.error(e)}};
@@ -113,7 +114,8 @@ Object.assign(KIT_REL,{srvThem:"Thiện cảm",srvTrust:"Ta tin cậy",runner:"�
 /* the bars on a servant card: her attitude = "Thiện cảm" (was Lòng), her trust in him = "Ta tin cậy" (was Chủ tin); the runner is
    marked on HIS card, not on the maid's */
 if(typeof bondBars==="function"){bondBars=function(s){let r="";try{const b=bestSent(S);r=b&&b===s?` <span class="past">· ${KIT_REL.runner}</span>`:""}catch(e){}return sbar(KIT_REL.srvThem,s.loyal,"lo")+(s.sid!=null||typeof s.tin==="number"?sbar(KIT_REL.srvTrust,tinOf(s),"ti"):"")+r}}
-function runnerLine(){return ""}
+/* the runner is household info (owner 10:10Z): not a line of the maid's card but "Người chạy việc của cung: X" with the household block; jhc's line (tap = meaning, "Đổi ›") is kept */
+(function(){const r0=window.runnerLine;window.runnerHouse=function(){try{return typeof r0==="function"?String(r0()).replace("Người chạy việc:","Người chạy việc của cung:"):""}catch(e){return""}};window.runnerLine=function(){return""}})();
 /* names: unique, never "Thúy 2" — larger pools, and any old numbered name is renamed once */
 (function(){const xm=["Thanh Trúc","Bạch Lan","Tử Đằng","Hải Đường","Lạc Mai","Diệu Âm","Thúy Vi","Như Ý","Bảo Châu","Kim Chi","Ngân Hạnh","Mộc Lan","Uyển Thanh","Tú Cầm","Phương Thảo","Thanh Hà","Tịnh Hương","Vân Anh","Hồng Ngọc","Lam Ngọc","Thu Thủy","Xuân Đào","Liên Hoa","Hạnh Dung","Cẩm Tú","Ngọc Bích","Tố Như","Song Hỷ","Bích Hà","Quỳnh Chi","Tuyết Mai","Hương Lan","Tiểu Nguyệt","Tiểu Cúc","Tiểu Hoa","Tiểu Linh","Nhã Thanh","Ánh Tuyết","Ngọc Nhi","Khánh Vân"];
  const xe=["Tiểu Hải Tử","Tiểu Toàn Tử","Tiểu Bình Tử","Tiểu Kiệt Tử","Tiểu Minh Tử","Tiểu Ninh Tử","Tiểu Phong Tử","Tiểu Sơn Tử","Tiểu Tường Tử","Tiểu Vinh Tử","Tiểu Lạc Tử","Tiểu Khang Tử","Tiểu Trung Tử","Tiểu Bảo Tử","Tiểu Hưng Tử","Tiểu Cát Tử","Tiểu Long Tử","Tiểu Nghĩa Tử","Tiểu Trí Tử","Tiểu Lễ Tử","Tiểu Thành Tử","Tiểu Đông Tử","Tiểu Thu Tử","Tiểu Hạ Tử","Tiểu Nguyên Tử","Tiểu Quý Tử","Tiểu Hòa Tử","Tiểu Lợi Tử","Tiểu Mãn Tử","Tiểu Tài Tử"];
@@ -167,3 +169,8 @@ window.kitThey=kitThey;
 (function(){if(typeof optLine!=="function")return;const o0=optLine;optLine=function(a){if(!a||!a.tgt||typeof J78!=="object")return o0.apply(this,arguments);const pv=J78.cardV;J78.cardV=a.tgt;try{return o0.apply(this,arguments)}finally{J78.cardV=pv}}})();
 (function(){const t0=talkOpts;talkOpts=function(p){const A=t0.apply(this,arguments);try{const v=p&&p.ref;if(!v||p.kind!=="rival")return A;const i=A.findIndex(a=>a&&a.n==="Khiêu khích");
  if(i>=0)A[i]=Object.assign({},A[i],{x:`${pvRel(v,-15)}, nàng ta ghen +10`})}catch(e){}return A}})();
+
+/* 15. her own Sủng on act-card outcome texts goes through sg() like the real change (j1 apply: Hoàng thượng nóng nảy ×1.3,
+   lạnh lùng ×0.7 on gains) — "Sủng -8" on a static outcome text is drawn as the real −10 */
+(function(){if(typeof actLineRaw!=="function"||typeof sg!=="function")return;const a0=actLineRaw;actLineRaw=function(){const h=a0.apply(this,arguments);if(typeof h!=="string")return h;
+ return h.replace(/(^|[^\p{L}])(Sủng(?: ngươi| ta)?) ([+\-−])(\d+)/gu,(m,p,l,g,n,off,all)=>{if(/nàng(?: ta)?\s*$|nàng ta mất|nàng mất|của nàng/.test(all.slice(Math.max(0,off-14),off+p.length)))return m;const v=sg((g==="+"?1:-1)*+n);return `${p}${l} ${v>0?"+":"-"}${Math.abs(v)}`})}})();
