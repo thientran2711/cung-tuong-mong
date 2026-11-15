@@ -67,7 +67,7 @@ function wkEmpRecent(by){return wkEmpLog().filter(x=>x.by===by)}
 const WFAT=[1,.6,.35];
 /* full evaluation of giving work w from giver a to target r: returns {ok,why,fx,rel,v,notes} */
 function wkEval(a,w,r){const ev=wkEval0(a,w,r);if(!ev.ok)return ev;const m=w.m||0,add=BAL.wk.val[m]+(ev.notes.includes("chân tình")?BAL.wk.tinh[m]:0);if(!add)return ev;
- ev.notes.push(m===2?"vật liệu quý, dụng tâm":"vật liệu tốt");const v=Math.min(WCAP,ev.v+add),d=v-ev.v;if(!d)return ev;ev.v=v;const f=ev.fx;
+ ev.notes.push(m===2?"vật liệu quý, dụng tâm":"vật liệu tốt");const v=Math.min(WCAP+BAL.wk.val[m],ev.v+add),d=v-ev.v;if(!d)return ev;ev.v=v;const f=ev.fx;
  if(r==="emp")f.sung=Math.max(1,Math.round(v/2));else if(r==="th")f.th=v;else if(r==="maid")f.maid=v*2;else{ev.rel=v+2;if(f.hh)f.hh=v}return ev}
 function wkEval0(a,w,r){const notes=[];let v=WVAL[w.ti];
  if(w.p!=null&&w.p<wk())return{ok:false,why:"món đã nguội, hoa đã héo"};

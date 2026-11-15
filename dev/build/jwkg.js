@@ -39,7 +39,7 @@ function wkGameOf(art){const m=typeof S!=="undefined"&&S&&S.mg;const w=(m&&m.wk)
 (function(){const p0=playArt;playArt=function(o){const g=o&&(o.game||wkGameOf(o.art));if(!g)return p0.apply(this,arguments);kwkG=g;try{return p0.apply(this,arguments)}finally{kwkG=null}};window.playArt=playArt})();
 (function(){const o0=openMG;openMG=function(){const m=typeof S!=="undefined"&&S&&S.mg;kwkPick=(m&&(m.wk||wkPend))||wkPend||null;try{return o0.apply(this,arguments)}finally{kwkPick=null}}})();
 /* ✕ close (kit 32.10 kit-x in the panel header) for Q items marked xc and the j83 gift / illicit dialogs: no "Thôi" row */
-const KWK_XPID=["wkgive"];
+const KWK_XPID=["wkgive","vlget","vlcraft","vlnvp","vlout"];
 (function(){const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);try{const M=$("modal"),d=M&&M.querySelector(".dlg");const m=Q[0];
  if(d&&!M.hidden&&m&&(m.xc||KWK_XPID.includes(m.pid))){const h=d.querySelector(":scope > .kph");if(h&&!h.querySelector(":scope > .kit-x")){h.insertAdjacentHTML("beforeend",kitXHTML('data-kitx="wk"',"Đóng"));
   h.lastElementChild.addEventListener("click",e=>{e.stopPropagation();closeModal()})}}}catch(e){}return r}})();
