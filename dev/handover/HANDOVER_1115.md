@@ -87,7 +87,7 @@ Nhắc theo dõi: send_later 30 phút, tự đặt lại mỗi lượt (lịch l
 - [ ] Chơi cùng bạn: kẹt nút Vào phòng, lệch buổi tuần 3 — coop-ui
 - [ ] Kiểm mọi nút ra đúng kết quả (giao từ 14/11, mất khi đổi phiên) — review/act-audit
 - [ ] Luật một nguồn (số hiện = số luật kiểm; Thái hậu 50 vs 55) — review/rules-one-source
-- [ ] Hết khắc khi tới nơi bị đá về Dư đồ — review/court-rules
+- [x] Hết khắc khi tới nơi — LIVE 312b6b40a
 - [ ] Sân khấu: nàng lặp mỗi trang, nút trang khó hiểu, đếm người lệch Dư đồ, vị trí đứng không chuẩn, tên chồng — stage-slots
 - 06:05Z LIVE main=0783ec32a (lật nguyên tờ đục, 1300 ms, vuốt đổi tab; j22 'Đến chỗ hắn' theo luật đi khắc). Lo: vòng Luân hồi có thể trống hình thẻ — đang kiểm.
 - 06:10Z hotfix/pc-size 04a204ff6 (ResizeObserver #panel) sẵn → người duyệt 1 gộp lên main 0783ec32a + dựng site, rồi đẩy.
@@ -103,3 +103,4 @@ Nhắc theo dõi: send_later 30 phút, tự đặt lại mỗi lượt (lịch l
 - [ ] Nền Kính sự phòng tối quá rực — chờ sếp chỉ nơi/ảnh
 - 08:25Z LIVE main=5c1007a69 (Sổ tuần 'Sổ này ghi' thẳng cột). hau-cung-ui còn ~30–40 phút.
 - 08:40Z review/sub-odds 96d7c2df8 SẴN SÀNG KIỂM → hàng duyệt sau hau-cung-ui. Chip phải che đầu người trên điện thoại → stage-slots.
+- 08:50Z LIVE main=312b6b40a court-rules (HH/HQP ở riêng; Thái hậu đúng tuổi; hết khắc ở lại nơi; chạm nơi đang đứng; nút ‹ tên nơi; Luân hồi tải trước hình).
