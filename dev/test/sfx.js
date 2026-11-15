@@ -26,7 +26,7 @@ const [,,URL,SZ,OUT]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=WH.sp
  const step=async(name,want,fn,wait,after)=>{if(ONLY&&!ONLY.test(name))return;console.error(new Date().toISOString().slice(11,19),name);await clean();const n0=await p.evaluate(()=>KSFX.log.length);let e=null;
   try{await p.evaluate(fn)}catch(x){e=String(x.message||x).slice(0,160)}
   await p.evaluate(ms=>new Promise(r=>setTimeout(r,ms)),wait||1800);if(after){try{await after()}catch(x){e=(e||"")+" after:"+String(x.message||x).slice(0,120)}}
-  const got=await p.evaluate(n0=>KSFX.log.slice(n0).map(x=>x.n),n0);const miss=want.filter(w=>!got.includes(w));const drop=miss.length?await p.evaluate(()=>KSFX.drop.slice(-8)):undefined;R.push({name,want,got,ok:!miss.length&&!e,miss,err:e,drop});};
+  const got=await p.evaluate(n0=>KSFX.log.slice(n0).map(x=>x.n),n0);const miss=want.filter(w=>!got.includes(w));const drop=miss.length?await p.evaluate(()=>KSFX.drop.slice(-8)):undefined;R.push({name,want,got,ok:!miss.length&&!e,miss,err:e,drop});try{fs.writeFileSync(OUT+'.partial',JSON.stringify({steps:R.length,pass:R.filter(x=>x.ok).length,fail:R.filter(x=>!x.ok),errs},null,1))}catch(x){}};
  const tapOv=async(sel)=>{const el=await p.$(sel);if(el){await el.click({force:true})}};
  await step("chạm nút",["sfx-tap"],`(()=>{const b=document.createElement("button");b.id="tt";b.textContent="x";document.body.appendChild(b);b.click();b.remove()})()`,400);
  await step("chuyển tab",["sfx-page"],`(()=>{const b=document.querySelector("#tabs button,#tabs [data-tab]");if(b)b.click();else throw "no tab"})()`,500);
