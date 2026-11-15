@@ -271,3 +271,4 @@ Worker worktrees at /home/user/wt/<name>. Rule summaries for workers: /home/user
 - LIVE main = poison-gift (b0052d607): poison in gifts (jpoison.js on the kit gift dialog), honest odds + Vì sao, NPC poisoning, silver needle, chân tình visible condition, 4 new item pictures. Ân tình NOT added to header (stays on Emperor card + Ân sủng panel) — owner may ask for a header cell (needs an icon).
 - tassel-fix ready abfecc6c8 (full pendant+tassel on every frame, KIT §28.1 changed; header +17px on landscape — coordinator accepted) → reviewer spawned.
 - scene-light db2c0efc3 (r8 fixes) → r9 review. Coordinator accepted 182px text at 1000x755 and train-only fade past the left page edge.
+- LIVE main = game-feel (80be56be0): kitLose, slow item reveals, real grades, per-giver boxes, no letter placeholders, Pixi FX, rot.js scaled frame (landscape = 1180x820 design scaled, phone portrait shows rotated). Small open: story-gift box empty 'from' line.
