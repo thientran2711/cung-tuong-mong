@@ -9,8 +9,8 @@ const {chromium}=require('playwright');const [,,URL]=process.argv;
  /* count result cards: every time #rtoast is turned on */
  await p.evaluate(()=>{window.__cards=[];const o=new MutationObserver(()=>{const t=document.getElementById('rtoast');if(t&&t.classList.contains('on')){const s=t.innerText.replace(/\s+/g,' ').slice(0,140);if(window.__cards[window.__cards.length-1]!==s)window.__cards.push(s)}});
   o.observe(document.body,{subtree:true,attributes:true,attributeFilter:['class'],childList:true})});
- const reset=t=>p.evaluate(t=>{try{localStorage.clear()}catch(e){}document.getElementById('title').hidden=true;for(let i=0;i<12;i++){start();if(!isSrv())break}Q.length=0;
-  const m=document.getElementById('modal');if(m)m.hidden=true;S.suc=80;S.bac=100;used=0;S.buoi=0;S.mg=null;for(const k in S.arts)if(S.arts[k]>=5)S.arts[k]=1;tab=t;render();
+ const reset=t=>p.evaluate(t=>{try{localStorage.clear()}catch(e){}window.__nlInner=1;for(const id of ['kload','kroul']){const x=document.getElementById(id);if(x)x.remove()}document.getElementById('title').hidden=true;for(let i=0;i<12;i++){start();if(!isSrv())break}Q.length=0;
+  const m=document.getElementById('modal');if(m)m.hidden=true;S.suc=80;S.bac=100;used=0;S.buoi=0;S.mg=null;for(const k in S.arts)if(S.arts[k]>=5)S.arts[k]=1;tab=t;if(t==='art'){try{localStorage.setItem('ctm-ktsub-art','cktt')}catch(e){}if(typeof KTSUB==='object')KTSUB.art='cktt'}render();
   const r=document.getElementById('rtoast');if(r)r.classList.remove('on');window.__cards=[]},t);
  const snap=()=>p.evaluate(()=>({suc:S.suc,bac:S.bac,used,q:Q.length,qt:Q[0]&&Q[0].t,ov:!document.getElementById('ov').hidden,intro:!!document.getElementById('kg82go'),mg:!!S.mg,cards:window.__cards.slice()}));
  const btns=()=>p.evaluate(()=>[...document.querySelectorAll('#ov button,.kg82act button')].filter(b=>b.offsetParent).map(b=>(b.id||'')+':'+b.innerText.replace(/\s+/g,' ').slice(0,30)));

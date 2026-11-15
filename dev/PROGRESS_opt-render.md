@@ -26,7 +26,7 @@ Không làm rà cân bằng bằng bot (mục 6 của bản duyệt) — review/
 5. **LUẬT KIT**: `.krisk`, `.khint`, `.kakem`, `.neu .seal` thành phần kit chung, có hàm + KIT.md + trang mẫu kit:
    `kitRisk(word)` (kitChip tông g / w / r; thêm tông `.kchip.w` vào CSS kit j79), `kitHintRow(text)` (`.ef.i` trong CSS kit j63),
    `kitKemRow(K)` (`.kb .kkem`, j63), `kitSeal(ok)` (dấu xám "KẾT QUẢ" = `.sure` sẵn có của kit, bỏ màu riêng). Trang mẫu kit:
-   `index.html?kit` hoặc `kitSample()` (jk2b) — vẽ mọi phần bằng chính hàm kit.
+   (reviewer r7: now the one kit sample page `#kit`, jkitpage.js, KIT §47, samples §28.6 / §7) — vẽ mọi phần bằng chính hàm kit.
 6. **Bạc −5 của đêm thị tẩm**: nguồn = giá của bước CHUẨN BỊ ("Điểm trang lộng lẫy" Bạc −5; "Tắm cánh hoa" −15; "Tập trước" Sức −5) —
    ảnh chụp số liệu của đêm lấy ở `nightScene`, TRƯỚC bước chuẩn bị. Sửa ở j75: khi đêm thật sự bắt đầu (dựng night1, sau khi đã trả giá
    chuẩn bị) thì chụp lại Bạc / Sức. Test bỏ chỗ tự trừ Bạc, chạy đêm thật: chuẩn bị → night1 → night2 → thẻ đêm không còn dòng Bạc.
