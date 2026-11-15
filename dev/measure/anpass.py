@@ -24,7 +24,7 @@ def cause(f):
     return 'other: '+f[:30]
 def q(a,p):
     a=sorted(a);return a[min(len(a)-1,int(p*len(a)))] if a else 0
-kind,lab=sys.argv[1],sys.argv[2];F=sys.argv[3:]
+kind,lab=sys.argv[1],sys.argv[2];F=[f for f in sys.argv[3:] if not f.endswith('.ext.json')]
 if kind=='ev':
     by=collections.defaultdict(list)
     for fn in F:
