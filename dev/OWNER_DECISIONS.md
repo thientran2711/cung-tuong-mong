@@ -470,3 +470,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (14:30Z) Ảnh nút việc trong thẻ người: việc nào chưa có ảnh riêng thì VẼ, cấm dùng ảnh nhóm (sếp rất bực). Chưa có thì để trống chứ không ảnh nhóm.
 - (14:30Z) Ô tâm trạng phải hiện các nguyên nhân đang tác động (nàng và mọi NPC).
 - (14:35Z) Trang điểm: "đẹp" giảm má hồng chút; "diêm dúa" = má hồng của bản "đẹp" hiện tại đậm hơn chút (môi đậm hơn, phấn bóng hơn), vẫn đẹp, KHÔNG như hề.
+- (14:40Z) Phản ứng về y phục/trang điểm (chủ tiệc nghiêm phạt mặt mộc, người hay ghen, Hoàng thượng thích/không thích, phi tần trêu diêm dúa…) phải HIỆN KHUNG SỰ KIỆN, không âm thầm trong nhật ký. Mỗi dịp tối đa 1–2 khung, phần còn lại gộp.
