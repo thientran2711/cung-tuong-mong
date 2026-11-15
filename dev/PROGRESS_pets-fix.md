@@ -40,3 +40,14 @@ no overflow. dev/test/pets.js + mk-oldsave-pets.js (main build save): pass, resc
 - `python3 dev/build/assemble.py && bash dev/site/build_site.sh`
 - `git show origin/main:index.html > main.html` (do not commit) then
   `node dev/test/pets-fix.js http://127.0.0.1:<port> 755x1000@2 <outdir> main.html` (local `python3 -m http.server` in the worktree root)
+
+## Reviewer r6 (review/pets-fix-r6, 15/11 ~17:15–18:10Z)
+- ts-b: origin/review/ts-b tip d29e3952c (incl. cfbffb955) is an ancestor of pets-fix c117502be → contained; reviewed with pets.
+- Merged on origin/main 888463759 (already in) then ed7271deb (scene-light r9; only built files conflicted → rebuilt).
+- Reviewer fixes: (1) pet card = ONE kit table (petRowsL; jpetcare adds Lớn/Đang có/Lớn tiếp/Chăm rows to the same kitRows — two stacked
+  tables had value columns 6 px apart, KIT §51); (2) relation wording "thiện cảm ±N" in jtsb approach cards + jpetcare help (VANPHONG);
+  (3) ts-b pid cards keep the speaker face after reload (deserQ sets who); (4) kitHint (jk2b, KIT.md): a "Chắc chắn" option's "Mất:" is a
+  sure price ("nhưng …") — the Nhịn card in hint mode read "hỏng thì mất thể diện".
+- Tests: pets-fix.js 5 sizes + old save, pets.js 5 sizes + mk-oldsave, tassel-scan + kit-table 1180 (their 2 findings identical on main),
+  ts-b card check (Có người đến Nhịn/Đáp trả, Lần đầu gặp mặt who, reload), Trang điểm "Đang mặc" rows 0 px.
+- Main-wide note (not this branch): ~38 card strings still say "nàng thân ±N" (j7, j71, j78, j24 …) — not rewritten to "thiện cảm" by j84.
