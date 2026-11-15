@@ -12705,7 +12705,10 @@ function kitBookLive(){const g=document.querySelector(".game");if(!g)return;
        {kind:"end",   title:"Tuần này đến đây là hết.", seal:["HẾT","TUẦN"], note:"Sổ ghi 12 việc, 4 người.", btn:"Vào ngày mới"}],
        head:"Sổ tuần · Tháng tư · thượng tuần", host:element, onClose:fn})  → {next, prev, go, close}
 */
-const KBK_ART={cover:"https://ctm-img.victoria-tntt.workers.dev/img/book-cover.webp",left:"https://ctm-img.victoria-tntt.workers.dev/img/book-left.webp",right:"https://ctm-img.victoria-tntt.workers.dev/img/book-right.webp",end:"https://ctm-img.victoria-tntt.workers.dev/img/book-end.webp"};
+const KBK_ART={cover:"https://ctm-img.victoria-tntt.workers.dev/img/book-cover.webp",left:"https://ctm-img.victoria-tntt.workers.dev/img/book-left.webp",right:"https://ctm-img.victoria-tntt.workers.dev/img/book-right.webp",end:"https://ctm-img.victoria-tntt.workers.dev/img/book-end.webp",title:"https://ctm-img.victoria-tntt.workers.dev/img/title-tuanluc-d4s.webp"};
+/* KBK_TITLE_IMG: the cover label's written title as a picture (owner 11/15: vertical brush title d4 + the game's Trân nữ seal, KIT §27.1). A cover page whose
+   title has a picture here draws it in the label (art cover only); any other title keeps the text. */
+const KBK_TITLE_IMG={"Tuần lục":KBK_ART.title};
 const KBK_HAVE={};
 (function(){for(const [k,u] of Object.entries(KBK_ART)){try{const im=new Image();im.onload=()=>{KBK_HAVE[k]=true;document.querySelectorAll(".kbk").forEach(r=>{r.classList.add("art-"+k);if(r.__kbk)r.__kbk.relayout()})};im.src=u}catch(e){}}})();
 
@@ -12735,7 +12738,7 @@ function kitBook(spec){spec=spec||{};const rm=()=>{try{return reducedMotion()}ca
  /* ---- page shells ---- */
  const head=spec.head||"";
  const shell=(cls,inner,folio)=>`<div class="kbk-pg ${cls}"><div class="kbk-in">${head&&!/k-cover|k-blank|k-back/.test(cls)?`<div class="kbk-rh">${head}</div>`:""}<div class="kbk-body">${inner}</div>${folio?`<div class="kbk-fo">${folio}</div>`:""}</div></div>`;
- const coverH=p=>`<div class="kbk-cv"><div class="kbk-stitch"></div><div class="kbk-label"><b class="kbk-lt">${String(p.title||"Tuần lục").split(" ").map(w=>`<span>${w}</span>`).join(" ")}</b></div><div class="kbk-cmeta">${p.sub?`<span class="kbk-ls">${p.sub}</span>`:""}${p.note?`<span class="kbk-cn">${p.note}</span>`:""}</div><b class="kbk-cseal">${p.seal||"TUẦN"}</b><span class="kbk-hint">${p.hint||"Vuốt trang hoặc chạm mép phải để lật"}</span></div>`;
+ const coverH=p=>`<div class="kbk-cv"><div class="kbk-stitch"></div><div class="kbk-label">${(()=>{const t=String(p.title||"Tuần lục"),im=p.titleImg||KBK_TITLE_IMG[t];return (im?`<img class="kbk-ltimg" src="${im}" alt="${t}" draggable="false">`:"")+`<b class="kbk-lt${im?" has-img":""}">${t.split(" ").map(w=>`<span>${w}</span>`).join(" ")}</b>`})()}</div><div class="kbk-cmeta">${p.sub?`<span class="kbk-ls">${p.sub}</span>`:""}${p.note?`<span class="kbk-cn">${p.note}</span>`:""}</div><b class="kbk-cseal">${p.seal||"TUẦN"}</b><span class="kbk-hint">${p.hint||"Vuốt trang hoặc chạm mép phải để lật"}</span></div>`;
  const endH=p=>`<div class="kbk-end"><span class="kbk-orn"></span><h3 class="kbk-et">${p.title||"Tuần này đến đây là hết."}</h3><b class="kbk-seal" aria-label="${(p.seal||["HẾT","TUẦN"]).join(" ")}">${(p.seal||["HẾT","TUẦN"]).map(s=>`<i>${s}</i>`).join("")}</b>${p.note?`<p class="kbk-en">${p.note}</p>`:""}<button class="kbtn kbk-go" id="${p.btnId||"kbk-go"}">${p.btn||"Đã hiểu"}</button></div>`;
  const blankH=()=>`<div class="kbk-blank"><span class="kbk-orn"></span></div>`;
  const textTop=(p,cont)=>`<div class="kbk-th"><h3 class="kbk-t">${p.title||""}${cont?` <small class="kbk-cont">tiếp theo</small>`:""}</h3>${p.sub&&!cont?`<small class="kbk-ts">${p.sub}</small>`:""}</div>`;
@@ -13099,6 +13102,10 @@ function wkBookPages(){const d=wkBookData();const date=kitDate(S.month,S.year,S.
 .kbk.art-end .kbk-pg.k-end .kbk-seal i{font-size:max(1.1em,24cqh)}
 .kbk.art-cover .kbk-label{position:absolute;left:9.1%;top:3.6%;width:13.8%;height:57.7%;min-width:0;max-width:none;background:none;border:0;outline:0;box-shadow:none;padding:0;container-type:size;justify-content:center;align-items:center}
 .kbk.art-cover .kbk-lt{display:flex;flex-direction:column;align-items:center;gap:.25em;font-size:min(36cqw,13cqh);letter-spacing:0;line-height:1.05}
+.kbk-ltimg{display:none}
+.kbk.art-cover.art-title .kbk-label:has(.kbk-ltimg){justify-content:flex-start}
+.kbk.art-cover.art-title .kbk-ltimg{display:block;flex:0 0 auto;width:calc(100% - 12px);height:calc(100% - 20px);margin:10px auto 0;object-fit:contain;object-position:50% 0;pointer-events:none;-webkit-user-drag:none}
+.kbk.art-cover.art-title .kbk-lt.has-img{display:none}
 .kbk.art-cover .kbk-cmeta{position:absolute;left:28%;right:8%;top:5%;text-align:left;align-items:flex-start}
 .kbk.art-cover .kbk-cn{text-align:left}
 .kbk.art-cover .kbk-hint{left:26%;right:6%}
@@ -13181,6 +13188,10 @@ body.kbk-open #rtoast,body:has(#dawn.kbkdawn:not([hidden])) #rtoast{opacity:0!im
 .kbk-cn{color:#eadcbf;font-family:var(--display);font-size:.9em;text-align:right}
 .kbk-cseal{margin-top:auto;align-self:flex-end;font-family:var(--display);font-size:1em;color:#fff4dc;background:var(--rule);border:2px solid #fff4dc55;outline:2px solid var(--rule);padding:.45em .5em;letter-spacing:.1em;transform:rotate(-4deg)}
 .kbk-hint{position:absolute;left:18%;right:9%;bottom:3%;text-align:center;color:#eadcbfcc;font-size:.78em}
+/* the cover seal clears the page-turn hint even when the hint wraps to two lines (narrow covers, e.g. 844x390): hint = bottom 3% of the page + up to 2 lines;
+   the seal sits on the 7%-of-width bottom padding, so it is lifted by the difference (cq units of the cover .kbk-in) */
+.kbk .kbk-pg.k-cover .kbk-in{container-type:size}
+.kbk .kbk-pg.k-cover .kbk-cseal{margin-bottom:max(0px,calc(3cqh + 2.2em + 4px - 7cqw))}
 /* closing page */
 .kbk-end{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:1em;padding:0 .5em}
 .kbk-et{margin:0;font-family:var(--display);font-size:1.6em;color:var(--ink);line-height:1.3}
@@ -25318,6 +25329,9 @@ KIT_SAMPLES.push(
  {id:"§53",title:"Event option in cost mode: Tốn + kitHintRow + kitRisk (no Tốn when free)",html:kitPgEvOpts},
  {id:"§53",title:"kitResultSeal: THÀNH · HỎNG · KẾT QUẢ",html:kitPgSeals},
  {id:"§53",title:"kitKemRow (tap for names)",html:kitPgKem});
+/* §27.1 the Tuần lục cover title picture (review/book-title): the real cover label slot of kitBook, at a fixed small size */
+KIT_SAMPLES.push({id:"§27.1",title:"KBK_TITLE_IMG: tên sổ viết tay trên nhãn bìa (ấn Trân nữ)",html:()=>typeof KBK_TITLE_IMG==="undefined"?"":
+ `<div class="kitpg-row">${Object.entries(KBK_TITLE_IMG).map(([t,u])=>`<div class="kitpg-bkl"><img src="${u}" alt="${t}"></div>`).join("")}</div>`});
 (function(){const st=document.createElement("style");st.id="kit-page";st.textContent=`
 #kitpage{position:fixed;inset:0;z-index:2147483000;overflow:auto;background:var(--panel,#fffaf0);padding:0 16px 24px;color:var(--ink)}
 #kitpage[hidden]{display:none}
@@ -25327,6 +25341,8 @@ KIT_SAMPLES.push(
 .kitpg-s{margin:14px 0}.kitpg-b{padding:10px;border:1px dashed var(--k-hair,#e6d3ac);border-radius:var(--k-rad,8px)}
 .kitpg-row{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-start}
 .kitpg-seal .rtoast.karesult{position:static;transform:none;opacity:1;display:inline-flex;padding:4px 8px}
+.kitpg-bkl{width:64px;height:400px;padding:0;background:linear-gradient(#efe2c4,#e3d1aa);border:2px solid #6b5a44;outline:1px solid #6b5a44;outline-offset:-6px}
+.kitpg-bkl img{display:block;width:calc(100% - 12px);height:calc(100% - 20px);margin:10px auto 0;object-fit:contain;object-position:50% 0}
 `;document.head.appendChild(st)})();
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-kitsample]");if(b){e.stopPropagation();e.preventDefault()}},true);
 /* §32.1 / §32.12 the top bar's stat row (owner 15/11 ~17:50Z: LEFT Sắc · Tài · Tâm cơ · Đức · Danh · Sủng | RIGHT Bạc · Sức), review/header-danh */
@@ -27407,6 +27423,20 @@ document.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest
   c.go=function(){const a=g.apply(this,arguments);try{if(S.mg&&S.mg.wk){S.mg.wk.r=r.id;S.mg.wk.subj=wkrSubj(kind,r);save()}}catch(e){}return a}}catch(e){}return c}})();
 /* kit sample page (§47 #kit): the pick tile of KIT 28.13e, drawn by the real wkrTile (one open recipe, one locked by level) */
 if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§28.13e",title:"Pick tile .kshc.kshpick (mở · chưa mở)",html:()=>`<div class="kshop kwr"><div class="kshg">${wkrTile("mon",WKR.mon[0],0)}${wkrTile("mon",WKR.mon[9],0)}</div></div>`});
+/* ================= jartc: ART COMPLETENESS pickers (owner 15/11 19:50Z: every character 4 age bands x every rank they can hold) =================
+   dev/art/ART_COMPLETENESS.md lists the audit (dev/figwork/artcomplete/audit.py).
+   1. Married spouses keep aging: the phò mã copy (k.hW.s) and the chính / trắc phi copies (k.pW.chinh, k.pW.trac[]) stored the age at the
+      wedding and never aged (only the unmarried pools age in h54Month / htMonth). They now age once a year with everyone else (ageYear), so
+      their faces reach the a36 / a51 art (công tử congtu-N, quý nữ khuê các kc). Old saves: they start aging from the next new year.
+   2. Older maids (staff role "maid", first face at 36+) take a free MAID identity, which has every maid rank (m0..m4) x 4 ages, instead of
+      a mama face (one dress, no rank). The mama pool stays the fallback when no maid face is free, and her own mama (S.maid) is unchanged.
+      Faces already given (who.fid) never change. */
+(function(){if(typeof ageYear!=="function")return;const a0=ageYear;ageYear=function(){const r=a0.apply(this,arguments);
+ try{(typeof allKids==="function"?allKids():[]).forEach(([k])=>{if(!k)return;const W=k.hW;if(W&&W.s)W.s.age=(+W.s.age||20)+1;
+  const P=k.pW;if(P){if(P.chinh)P.chinh.age=(+P.chinh.age||18)+1;(P.trac||[]).forEach(t=>{if(t)t.age=(+t.age||18)+1})}})}catch(e){console.error("jartc spouse age",e)}
+ return r}})();
+(function(){if(typeof figRoles!=="function")return;const r0=figRoles;figRoles=function(who){const R=r0.apply(this,arguments);
+ try{if(who&&S&&who!==S.maid&&who.role==="maid"&&R[0]==="mama")return["maid","mama"]}catch(e){}return R}})();
 
 </script>
 
@@ -27433,7 +27463,7 @@ if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§28.13e",title:"Pick 
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="453e41c0bf36";window.CTM_BUILD=BUILD;
+const BUILD="b93aff01c44b";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

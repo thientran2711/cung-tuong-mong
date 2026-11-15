@@ -48,6 +48,9 @@ KIT_SAMPLES.push(
  {id:"§53",title:"Event option in cost mode: Tốn + kitHintRow + kitRisk (no Tốn when free)",html:kitPgEvOpts},
  {id:"§53",title:"kitResultSeal: THÀNH · HỎNG · KẾT QUẢ",html:kitPgSeals},
  {id:"§53",title:"kitKemRow (tap for names)",html:kitPgKem});
+/* §27.1 the Tuần lục cover title picture (review/book-title): the real cover label slot of kitBook, at a fixed small size */
+KIT_SAMPLES.push({id:"§27.1",title:"KBK_TITLE_IMG: tên sổ viết tay trên nhãn bìa (ấn Trân nữ)",html:()=>typeof KBK_TITLE_IMG==="undefined"?"":
+ `<div class="kitpg-row">${Object.entries(KBK_TITLE_IMG).map(([t,u])=>`<div class="kitpg-bkl"><img src="${u}" alt="${t}"></div>`).join("")}</div>`});
 (function(){const st=document.createElement("style");st.id="kit-page";st.textContent=`
 #kitpage{position:fixed;inset:0;z-index:2147483000;overflow:auto;background:var(--panel,#fffaf0);padding:0 16px 24px;color:var(--ink)}
 #kitpage[hidden]{display:none}
@@ -60,6 +63,8 @@ KIT_SAMPLES.push(
 /* review/small-bugs-3: every sample is its own stacking layer under the sticky page header (z 2) — a sample built from a floating part (the
    result card seals, z 45; stamps; pills) never draws over the header */
 .kitpg-s{position:relative;z-index:0;isolation:isolate}
+.kitpg-bkl{width:64px;height:400px;padding:0;background:linear-gradient(#efe2c4,#e3d1aa);border:2px solid #6b5a44;outline:1px solid #6b5a44;outline-offset:-6px}
+.kitpg-bkl img{display:block;width:calc(100% - 12px);height:calc(100% - 20px);margin:10px auto 0;object-fit:contain;object-position:50% 0}
 `;document.head.appendChild(st)})();
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-kitsample]");if(b){e.stopPropagation();e.preventDefault()}},true);
 /* §32.1 / §32.12 the top bar's stat row (owner 15/11 ~17:50Z: LEFT Sắc · Tài · Tâm cơ · Đức · Danh · Sủng | RIGHT Bạc · Sức), review/header-danh */
