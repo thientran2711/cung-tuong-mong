@@ -361,3 +361,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (07:20Z) Tên + phẩm của nhân vật LUÔN đặt PHÍA TRÊN chân dung/hình người (dòng phẩm nhỏ, rồi dòng tên), ở mọi nơi; một thành phần kit kitNameRank.
 - (07:25Z) Giữ HAI chỉ số riêng: thiện cảm (thích/ghét, quyết định có giúp không) và oán (hận vì việc đã làm, quyết định trả đũa, nguôi dần). Giữ chữ "oán" (không dùng "thù"). Chạm nhãn hiện giải thích ngắn.
 - (07:35Z) Phẩm Đáp ứng: bỏ màu nâu (như nô tài). Đổi nền/khung/ngọc sang trắng ngà ngọc trai, thanh nhã, khác Lãnh cung. Làm mẫu trước.
+- (07:45Z) Tranh việc: kiểm kê 713 nghĩa → vẽ thêm ~613 tranh (≈29.500 tín dụng, theo lệnh vẽ không cần hỏi). Mỗi dòng Tuần lục = một việc = một tranh (câu phản ứng sau gộp vào dòng đầu). Hoàng thượng không đội mũ lông kiểu Thanh; trang phục theo phong cách gốc (áo giao lĩnh), không cổ áo kiểu sườn xám.
