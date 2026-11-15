@@ -42,3 +42,11 @@ Base: origin/main 64e91f1a. Status: done, SẴN SÀNG KIỂM.
 
 ## Open decision (for the coordinator)
 - j72 Việc nhờ favours (labelled "Phụ tuyến" in their offer title) still say `bước i/n` on the quest card. They are one-step-chain favours, not chaptered stories, so "Chương 1" on each favour would add noise. Ask the owner if she wants "Hồi" there too.
+
+## Review r1 (reviewer, 15/11)
+- Merged onto origin/main 8ee414c1 as review/chap-label-r1 (index.html/sw.js regenerated; assemble order kept: jts.js, jmcal.js, j84.js).
+- Whole-class fix added: dev/build/j6.js old v1 story panel line "Bước step/n" now shows lab67() ("Chương 1 · Hồi i/n"), fallback to the old text.
+- Tests: chap-label.js 13/13 at 755x1000@2, 1000x755, 1180x820@2, 1366x1024@2, 844x390; chap-label-oldsave PASS; story-deadline 12/12; month-cal ok (all sizes + rotate prompt); ts-oldsave ok.
+  kit-page.js: 1 sample error (§28.1 pcPort: pMe() → rkOfFace reads S.out with no game) — same on origin/main, not from this branch.
+- Long titles (Phụ tuyến · Thanh mai trúc mã: Lựa chọn cuối · Chương 12 · Hồi 10/10) wrap to 2 lines in the kit header, never clipped; Hành sự head wraps, no h-overflow.
+- Still open (coordinator/owner): j72 Việc nhờ favour card keeps "bước i/n".
