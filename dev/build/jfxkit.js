@@ -171,14 +171,15 @@ Object.assign(window,{kitFxSprite,kitFxBurst,kitFxLight,kitFxSheet,kitFxEdge,kit
 .kfxk-l,.kfxk-scr{mix-blend-mode:screen}
 .kfxk-e{inset:0;width:100vw;height:100vh;background-size:100% 100%;z-index:9446;transform-origin:50% 50%}
 .kfxk-o{background-repeat:no-repeat;will-change:transform}
+.kfxk-pgr{flex-wrap:wrap;gap:6px}.kfxk-pgd{background:#1c1820;padding:8px;border-radius:8px}.kfxk-pgi{height:22px;max-width:120px;object-fit:cover;object-position:left;vertical-align:middle}
 .kfxk-l video{width:100%;height:100%;object-fit:contain;display:block;background:#000}
 @media (prefers-reduced-motion:reduce){.kfxk{transition:none}}
 `;document.head.appendChild(st)})();
 /* §47 kit page sample: every painted kind, every light, every sheet (tap to play) */
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§68",title:"painted-fx · kitFxBurst · kitFxLight · kitFxSheet (hiệu ứng vẽ tay)",
- html:()=>`<div class="kitpg-row" style="flex-wrap:wrap;gap:6px">${Object.keys(KFK_SP).map(n=>`<button type="button" class="kbtn alt" onclick="kitFxBurst('${n}',this,14)"><img src="${kfkU(n+".webp")}" alt="" style="height:22px;max-width:120px;object-fit:cover;object-position:left;vertical-align:middle"> ${n}</button>`).join("")}</div>`+
-  `<div class="kitpg-row" style="flex-wrap:wrap;gap:6px;background:#1c1820;padding:8px;border-radius:8px">${Object.keys(KFK_LIGHT).map(n=>`<button type="button" class="kbtn alt" onclick="kitFxLight('${n}',this.parentNode,{dur:3200,scale:.9})">${n}</button>`).join("")}${Object.keys(KFK_SHEET).map(n=>`<button type="button" class="kbtn alt" onclick="kitFxSheet('${n}',this.parentNode,{scale:.9})">${n}</button>`).join("")}</div>`+
-  `<div class="kitpg-row" style="flex-wrap:wrap;gap:6px">${Object.keys(KFK_EDGE).map(n=>`<button type="button" class="kbtn alt" onclick="kitFxEdge('${n}')">edge ${n}</button>`).join("")}`+
+ html:()=>`<div class="kitpg-row kfxk-pgr">${Object.keys(KFK_SP).map(n=>`<button type="button" class="kbtn alt" onclick="kitFxBurst('${n}',this,14)"><img class="kfxk-pgi" src="${kfkU(n+".webp")}" alt=""> ${n}</button>`).join("")}</div>`+
+  `<div class="kitpg-row kfxk-pgr kfxk-pgd">${Object.keys(KFK_LIGHT).map(n=>`<button type="button" class="kbtn alt" onclick="kitFxLight('${n}',this.parentNode,{dur:3200,scale:.9})">${n}</button>`).join("")}${Object.keys(KFK_SHEET).map(n=>`<button type="button" class="kbtn alt" onclick="kitFxSheet('${n}',this.parentNode,{scale:.9})">${n}</button>`).join("")}</div>`+
+  `<div class="kitpg-row kfxk-pgr">${Object.keys(KFK_EDGE).map(n=>`<button type="button" class="kbtn alt" onclick="kitFxEdge('${n}')">edge ${n}</button>`).join("")}`+
   `<button type="button" class="kbtn alt" onclick="kitFxGift('give',this,{kind:'silk'})">gift give</button><button type="button" class="kbtn alt" onclick="kitFxGift('open',this)">gift open</button>`+
   `<button type="button" class="kbtn alt" onclick="kitFxGift('refuse',this)">gift refuse</button><button type="button" class="kbtn alt" onclick="kitFxLetter(this)">letter</button></div>`+
-  `<div class="kitpg-row" style="flex-wrap:wrap;gap:6px">${Object.keys(FX).filter(k=>k!=="lock").map(k=>`<button type="button" class="kbtn alt" onclick="kitFx('${k}',{el:this})">kitFx ${k}</button>`).join("")}</div>`})}catch(e){}
+  `<div class="kitpg-row kfxk-pgr">${Object.keys(FX).filter(k=>k!=="lock").map(k=>`<button type="button" class="kbtn alt" onclick="kitFx('${k}',{el:this})">kitFx ${k}</button>`).join("")}</div>`})}catch(e){}
