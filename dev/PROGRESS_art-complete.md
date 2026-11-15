@@ -36,3 +36,7 @@ rules] A character lineup of THREE full-body standing figures ... Signature colo
 - Eunuch ranks r0/r2/r3 x 4 ages x 30 (360) + picker: pass srk(who) for staff eunuchs, tiers "r0".."r3" (base = r1).
 - Kids adult bands a26/a36/a51 x 48 (144) + picker: kidBandOf beyond 20.
 - HOLD: player looks, tm96 promoted men.
+
+## Tests (head 822de7c79 + this commit), `node dev/figwork/artcomplete/vt.js <worktree>` (in-process server, one browser)
+755x1000, 1000x755, 1180x820, 1366x1024, 844x390, 390x844: new game started, 0 page errors, no horizontal overflow;
+spouse ageing 22/20/19 -> 23/21/20 after ageYear (phò mã, chính phi, trắc phi); figRoles(staff maid age 40) = ["maid","mama"].
