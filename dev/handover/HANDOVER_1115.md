@@ -70,7 +70,7 @@ Nhắc theo dõi: send_later 30 phút, tự đặt lại mỗi lượt (lịch l
 - 05:00Z LIVE main=b165b1f71 (Tư trang ô vuông + 6 ô trang bị, Luân hồi thẻ úp; sửa chữ Hán). palace-map chờ cdn-images (ảnh không vào git). Đĩa ~2 GB trống — dọn worktree khi xong.
 
 ## LỖI SẾP BÁO CÒN MỞ (soát mỗi lượt theo dõi; xong thì gạch)
-- [ ] Thỉnh an Hoàng hậu không cộng quan hệ (báo từ 14/11) — HOTFIX review/hotfix-thinhan
+- [x] Thỉnh an Hoàng hậu không cộng — LIVE f7a9e9880
 - [ ] Thẻ phi tần co lại, dải 1 người (Hạ Tố Tâm) — review/hau-cung-ui (đẩy riêng)
 - [ ] Chữ 'Liều' cho khả năng phụ (có thai, ban thưởng, ô trạng thái) — review/sub-odds
 - [x] Tờ lật trong suốt — LIVE 0783ec32a
