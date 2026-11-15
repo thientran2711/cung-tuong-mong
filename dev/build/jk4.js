@@ -109,6 +109,11 @@ html body header.hud.khd2 .k3tt>.kstl,html body header.hud.khd2 .k3tt>.kstv{whit
  html body .game#game.k3ph header.hud:has(#k3room:not([hidden])){grid-template-columns:auto minmax(0,1fr) auto!important;grid-template-areas:"menu me room" "tc tc tc" "stats stats stats"!important}
  html body header.hud>#k3tc{justify-self:stretch}
  .k3tc .k3tt{grid-template-rows:auto!important;grid-auto-flow:column;justify-content:start;gap:0 12px!important}
+ /* KIT 31.2a (review/small-bugs-3): the state row never runs past the edge — under 600 px both lines flow as ONE wrapping row of whole
+    items (time, toilette, weather, quẻ, every K3_STATE chip): an item is never split, the next one drops to a new line */
+ html body header.hud .k3tc .k3tt{display:flex!important;flex-wrap:wrap;align-items:center;column-gap:12px;row-gap:0;min-width:0;max-width:100%}
+ html body header.hud .k3tt>.kstl,html body header.hud .k3tt>.kstv{display:contents!important}
+ html body header.hud .k3tt .k3r{white-space:nowrap;margin-right:0!important;max-width:100%}
  .k3tt>.kstl,.k3tt>.kstv{height:24px;line-height:24px;font-size:.7rem;font-family:var(--body,inherit)}.k3tc .k3tt .kstl .k3r{height:24px;line-height:24px}
  #kstrow>.kstg+.kstg{padding-left:6px}#kstrow{gap:0 6px}
  #kstrow .kst>.kstl{font-size:0;gap:0}#kstrow .kst>.kstl img.ic{width:16px;height:16px}
@@ -120,12 +125,18 @@ html body header.hud.khd2 .k3tt>.kstl,html body header.hud.khd2 .k3tt>.kstv{whit
    since tassel-fix (owner 15/11 06:35Z) the jade pendant + tassel hang below it whole (cell 550/1037), so the frame is 1037/795 of the name block. */
 function kitHdMe(hd){try{const mi=hd.querySelector(":scope>.me .mi");const h=mi&&matchMedia("(min-width:600px)").matches?Math.round(mi.getBoundingClientRect().height):0;
  const v=h>20?h+"px":"";if(hd.style.getPropertyValue("--kmeh")!==v){if(v)hd.style.setProperty("--kmeh",v);else hd.style.removeProperty("--kmeh")}}catch(e){}}
+/* review/small-bugs-3 (1000x755: a long date "Tháng chạp · trung tuần · năm thứ hai mươi ba" ran under the weather icon): her block and the time
+   block never touch — the right edge of her text + 8 px must stay left of the time block's first text/icon, else the two-row bar */
+function kitHdClash(hd,tc){try{const me=hd.querySelector(":scope>.me");if(!me||!tc||!tc.offsetParent)return false;let r=0,l=1e9;
+ const leaf=(root,f)=>{const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let n;while(n=w.nextNode()){if(!n.nodeValue.trim())continue;const rg=document.createRange();rg.selectNodeContents(n);for(const q of rg.getClientRects())if(q.width)f(q)}
+  root.querySelectorAll("img,svg").forEach(e=>{const q=e.getBoundingClientRect();if(q.width)f(q)})};
+ leaf(me,q=>{r=Math.max(r,q.right)});leaf(tc,q=>{l=Math.min(l,q.left)});return r>0&&l<1e9&&r+8>l}catch(e){return false}}
 function kitHdFit(){try{const hd=document.querySelector("header.hud");if(!hd)return;kitHdMe(hd);const wide=matchMedia("(min-width:1000px)").matches;
  if(!wide){hd.classList.remove("khd2");return}const had=hd.classList.contains("khd2");hd.classList.remove("khd2");
  /* the one-row bar always wears the seal in its right gutter (KIT 39 .kseal-pad: 1000–1179 px cells icon-only) — measure it in that form */
  if(hd.classList.contains("has-kseal"))hd.classList.add("kseal-pad");
  const tc=document.getElementById("k3tc"),tt=document.getElementById("k3tt");
- const bad=hd.scrollWidth>hd.clientWidth+1||!!(tc&&tt&&tc.offsetParent&&tt.scrollWidth>tc.clientWidth+1);
+ const bad=hd.scrollWidth>hd.clientWidth+1||!!(tc&&tt&&tc.offsetParent&&tt.scrollWidth>tc.clientWidth+1)||kitHdClash(hd,tc);
  hd.classList.toggle("khd2",bad);try{window.kitSealHud&&kitSealHud()}catch(e){}if(had!==bad){try{const hb=hd.getBoundingClientRect();document.documentElement.style.setProperty("--k3hb",Math.round(hb.bottom)+"px");window.j59lay&&j59lay()}catch(e){}}}catch(e){}}
 window.kitHdFit=kitHdFit;
 if(typeof renderHUD==="function"){const r0=renderHUD;renderHUD=function(){const r=r0.apply(this,arguments);kitHdFit();return r}}
