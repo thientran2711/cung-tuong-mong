@@ -1,37 +1,42 @@
 {
- "1366x1024": {
+ "390x844": {
   "state": {
    "stage": [
-    691,
-    891
+    374,
+    606
    ],
    "col": [
-    552,
-    86,
-    138,
-    319
+    267,
+    158,
+    106,
+    177
    ],
-   "text": "Hoàng thượng | Bình thường | Thái hậu | với ngươi 0 | Hoàng hậu | với ngươi -1 | Hồng Liên | Lòng 57 | Ân sủng | Tai mắt | 2 | Có thai | Rất thấp | Lật thẻ | Rất thấp | Ân tình (đêm) | 12 | Số lần ân thưởng | 0 | Bổng lộc | sau 3 tuần",
-   "collapsed": false,
+   "text": "Hoàng thượng | Bình thường | Thái hậu | với ngươi 0 | Hoàng hậu | với ngươi 0 | Tiểu Đào | Lòng 60 | Ân sủng | ›",
+   "collapsed": true,
    "clip": [],
    "cut": [],
-   "over": [],
+   "over": [
+    "Hoàng hậuHoàng hậuvới ngươi 0",
+    "Tiểu ĐàoLòng 60",
+    "Ân sủng›",
+    "Ân sủng›"
+   ],
    "figs": 48,
    "sheetBtn": false,
    "overflowX": false,
    "hc": [
     "date=Tháng ba, năm thứ nhất · thượng tuần",
     "buoi=còn 4 khắc",
-    "lot=Quẻ tuần: Hạ hạ (Hung)",
-    "undefined=mưa phùn",
-    "sac=Sắc 55",
-    "tai=Tài 70",
-    "tamco=Tâm cơ 25",
+    "lot=Quẻ tuần: Thượng (Giao thiệp)",
+    "undefined=hoa đào bay",
+    "sac=Sắc 63",
+    "tai=Tài 86",
+    "tamco=Tâm cơ 11",
     "duc=Đức 40",
     "mat=Tai mắt 2",
-    "th=Thái hậu với ngươi 0",
-    "hh=Hoàng hậu với ngươi -1",
-    "maid=Lòng Hồng Liên 57",
+    "th=Thái hậu quý ngươi 0",
+    "hh=Hoàng hậu quý ngươi 0",
+    "maid=Lòng Tiểu Đào 60",
     "con=Có thai: Rất thấp",
     "dem=Lật thẻ: Rất thấp",
     "an=Ân tình (đêm) 12",
@@ -40,7 +45,7 @@
    ]
   },
   "sheetOpen": false,
-  "card": null,
+  "card": "Ân sủng | Tai mắt | 2 | Có thai | Rất thấp | Lật thẻ | Rất thấp | Ân tình (đêm) | 12 | Số lần ân thưởng | 0 | Bổng lộc | sau 3 tuần",
   "ladder": false,
   "errs": []
  }

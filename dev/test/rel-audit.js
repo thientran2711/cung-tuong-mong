@@ -19,7 +19,7 @@ const {chromium}=require('playwright');const sleep=t=>new Promise(r=>setTimeout(
   /* talk options on every consort (person-card Giao thiệp) */
   window.__forceOrigin="thd";window.__nlInner=1;start();window.__nlInner=0;quiet=true;Q.length=0;
   for(const v of liveRivals(true).slice(0,6)){for(const kind of ["rival",v===queenP()?"hh":null].filter(Boolean)){const L=talkOpts({kind,ref:v});
-   for(const a of L){S.bac=900;S.suc=100;Q.length=0;const text=(a.x||"")+" · "+fmt(a.w||{});const b0=snap();const r0=window.roll;window.roll=()=>true;
+   for(const a of L){S.bac=900;S.suc=100;Q.length=0;const text=(a.x||"")+" · "+(a.risk||"")+" · "+fmt(a.w||{});const b0=snap();const r0=window.roll;window.roll=()=>true;
     try{if(a.run)a.run();else{const c=Object.assign({},a,{o:100,lock:false});runOpt(c)}}catch(e){out.bad.push(a.n+": error "+e.message)}finally{window.roll=r0}
     Q.length=0;check(`[talk ${kind}] ${a.n} → ${v.name}`,text,b0,snap(),kind==="rival"?v:null)}}}
   quiet=false;return out});

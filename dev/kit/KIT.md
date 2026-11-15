@@ -1069,6 +1069,9 @@ have their Cần row. Check: `dev/test/sub-odds.js` (order.sorted / order.stable
   (every Hành sự act × 3 origins × 3 buổi + every talk option on 6 consorts: a claimed "quý ngươi ±" must move that field; 0 mismatches).
 - Đức warning on acts that lower Đức below the bar: ONLY "Đức 33 → 28" on the Kèm line (`ducWarnTxt` j19 / `ducWarn` j6), never "còn 28",
   never a rank-rule suffix; rank requirements live in the rank / promotion screens.
+- No placeholder rows: "không mất gì" / "không được gì" never show in Mất / Được (j63 `kaRows`); a row that would be empty is omitted.
+- A side risk that comes with an act (being seen, a rumour…) is a Kèm item on the chance scale with its real consequence:
+  "bị người thấy, một phi tần nắm 1 chứng cứ: khả năng thấp" — never an odds word glued into Được.
 - GHI CHÚ only when it adds information: a note that repeats Cần ("(chỉ buổi tối)" when Cần shows "Buổi tối") is dropped (`kaNoteDedup`, j63).
 
 ## 32. KIT 4 · ONE STAT CELL · EVENT STAGE · EVENT FRAMES (kit owner #3, owner + review 11/14) — `dev/build/jk4.js` (after jk3, before j84)
