@@ -146,8 +146,17 @@ function kitLeather(el){if(!el)return el;el.classList.add("kleather");
  if(!el.querySelector(":scope>.kl-roll")){for(const s of["l","r"]){const i=document.createElement("i");i.className="kl-roll kl-"+s;i.setAttribute("aria-hidden","true");el.appendChild(i)}
   const t=document.createElement("i");t.className="kl-tone";t.setAttribute("aria-hidden","true");el.appendChild(t)}
  return el}
-function kitUnroll(el){if(!el||kitCurlOff())return;el.classList.remove("kl-unroll");void el.offsetWidth;el.classList.add("kl-unroll");
- setTimeout(()=>el.classList.remove("kl-unroll"),700)}
+/* KIT_MAP_MS (owner 11/15 01:30Z "Dư đồ animation cuộn cho chậm lại"): ONE timing for the map unroll — slow, ease-in-out (soft start,
+   soft stop). A touch / click / wheel / key on the map ends it at once (never fights the player's hand). Cảnh động off / reduced motion: none. */
+const KIT_MAP_MS={unroll:1150,ease:"cubic-bezier(.45,.05,.3,1)"};
+let kitUnrollRun=null;   // {el,t0}: the unroll in progress; a re-render that replaces the map continues it (kitUnroll(newEl, elapsed))
+function kitUnroll(el,at){if(!el||kitCurlOff())return;at=at||0;if(at>=KIT_MAP_MS.unroll)return;if(el.__klStop)el.__klStop();
+ el.style.setProperty("--kl-ms",KIT_MAP_MS.unroll+"ms");el.style.setProperty("--kl-ease",KIT_MAP_MS.ease);el.style.setProperty("--kl-at",(-at)+"ms");
+ el.classList.remove("kl-unroll");void el.offsetWidth;el.classList.add("kl-unroll");
+ const ev=["pointerdown","touchstart","wheel","keydown"];let tm=0;
+ const stop=()=>{clearTimeout(tm);el.classList.remove("kl-unroll");for(const e of ev)el.removeEventListener(e,stop,true);el.__klStop=null;if(kitUnrollRun&&kitUnrollRun.el===el)kitUnrollRun=null};
+ for(const e of ev)el.addEventListener(e,stop,{capture:true,passive:true});el.__klStop=stop;kitUnrollRun={el,t0:performance.now()-at};tm=setTimeout(stop,KIT_MAP_MS.unroll-at+80)}
+function kitUnrollKeep(el){const r=kitUnrollRun;if(el&&r&&r.el!==el){if(r.el.__klStop)r.el.__klStop();kitUnroll(el,performance.now()-r.t0)}}
 
 /* ---------- kitBookSpread: the two-page book container ----------
    kitBookSpread(host, {pic, text, double, mode:"auto"|"spread"|"single"})
@@ -311,8 +320,8 @@ html .game .kleather>.maptools>.past,html .game .kleather>.maptools>.fest{displa
 .panel:has(>.kleather){background:transparent!important;border-color:transparent!important;box-shadow:none!important;padding:0!important}
 @media (max-width:760px){.kleather{padding:15px 23px}.kleather::before{inset:6px 17px}.kleather>.kl-tone,html .game .kleather>.maptools{inset:15px 23px}.kl-roll{width:15px}}
 /* unrolling (going to the map) */
-.kleather.kl-unroll{animation:kl-un .62s cubic-bezier(.25,.7,.25,1)}
-.kl-unroll>.kl-l{animation:kl-rl .62s cubic-bezier(.25,.7,.25,1)}.kl-unroll>.kl-r{animation:kl-rr .62s cubic-bezier(.25,.7,.25,1)}
+.kleather.kl-unroll{animation:kl-un var(--kl-ms,1.15s) var(--kl-ease,ease-in-out) var(--kl-at,0ms) both}
+.kl-unroll>.kl-l{animation:kl-rl var(--kl-ms,1.15s) var(--kl-ease,ease-in-out) var(--kl-at,0ms) both}.kl-unroll>.kl-r{animation:kl-rr var(--kl-ms,1.15s) var(--kl-ease,ease-in-out) var(--kl-at,0ms) both}
 @keyframes kl-un{from{clip-path:polygon(48.51% 0.36%,48.69% 0.72%,48.9% 0.59%,49.13% 0.06%,49.36% 0.04%,49.57% 0.08%,49.76% 0.47%,50.02% 0.14%,50.2% 0.69%,50.46% 0.63%,50.64% 1.07%,50.83% 0.94%,51.06% 0.16%,51.26% 0.34%,51.48% 0.5%,51.5% 7.31%,51.48% 14.03%,51.49% 20.55%,51.5% 27.98%,51.48% 35.57%,51.49% 43.03%,51.49% 49.6%,51.48% 57.54%,51.49% 64.43%,51.49% 72.18%,51.48% 78.15%,51.48% 84.95%,51.49% 93.37%,51.49% 99.83%,51.29% 99.96%,51.08% 99.16%,50.86% 99.04%,50.63% 99.24%,50.43% 99.36%,50.21% 99.08%,50.03% 99.48%,49.8% 99.93%,49.58% 99.29%,49.39% 99.1%,49.13% 99.58%,48.94% 99.98%,48.71% 99.82%,48.5% 99.5%,48.5% 93.39%,48.5% 85.21%,48.51% 79.31%,48.5% 71.33%,48.51% 65.05%,48.52% 57.87%,48.51% 49.83%,48.51% 43.63%,48.52% 35.02%,48.5% 28.04%,48.51% 21.4%,48.51% 13.81%,48.5% 6.98%)}to{clip-path:polygon(0.4% 0.36%,6.44% 0.72%,13.43% 0.59%,21.16% 0.06%,28.59% 0.04%,35.58% 0.08%,42.04% 0.47%,50.65% 0.14%,56.59% 0.69%,65.18% 0.63%,71.22% 1.07%,77.66% 0.94%,85.29% 0.16%,92.09% 0.34%,99.35% 0.5%,99.86% 7.31%,99.49% 14.03%,99.56% 20.55%,99.95% 27.98%,99.46% 35.57%,99.75% 43.03%,99.64% 49.6%,99.36% 57.54%,99.8% 64.43%,99.58% 72.18%,99.42% 78.15%,99.22% 84.95%,99.67% 93.37%,99.6% 99.83%,92.84% 99.96%,86.05% 99.16%,78.72% 99.04%,71.06% 99.24%,64.47% 99.36%,57.06% 99.08%,50.89% 99.48%,43.19% 99.93%,36.12% 99.29%,29.56% 99.1%,21.0% 99.58%,14.62% 99.98%,7.07% 99.82%,0.09% 99.5%,0.05% 93.39%,0.1% 85.21%,0.31% 79.31%,0.06% 71.33%,0.44% 65.05%,0.66% 57.87%,0.22% 49.83%,0.29% 43.63%,0.77% 35.02%,0.14% 28.04%,0.19% 21.4%,0.47% 13.81%,0% 6.98%)}}
 @keyframes kl-rl{from{left:calc(50% - 16px)}to{left:2px}}@keyframes kl-rr{from{right:calc(50% - 16px)}to{right:2px}}
 .kcl-host{position:fixed;z-index:40;pointer-events:none;
@@ -371,7 +380,7 @@ function kitBookLive(){const g=document.querySelector(".game");if(!g)return;
    catch(e){if(done)throw e;console.error(e);call()}
    try{kitBookLive()}catch(e){console.error(e)}
    try{last=t1;const mv=document.querySelector(".game.maptab #panel .mapv");
-    if(mv){kitLeather(mv);if(t0!=null&&t0!=="go"&&t1==="go")kitUnroll(mv)}
+    if(mv){kitLeather(mv);if(t0!=null&&t0!=="go"&&t1==="go")kitUnroll(mv);else kitUnrollKeep(mv)}
     else if(t0==="go"&&t1!=="go"&&pn){if(!kitCurlOff()){pn.classList.remove("kcl-in");void pn.offsetWidth;pn.classList.add("kcl-in");setTimeout(()=>pn.classList.remove("kcl-in"),340)}
      /* the page row changed shape (map → book): let the person card measure its room again once the layout has settled */
      if(typeof kitPcSize==="function"){requestAnimationFrame(()=>{try{kitPcSize()}catch(e){}});setTimeout(()=>{try{kitPcSize()}catch(e){}},150)}}}catch(e){console.error(e)}

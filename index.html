@@ -754,7 +754,7 @@ function placeOf(k){if(k==="home")return{k,n:"Tẩm cung của ngươi",d:"Cung 
 function rp(v){return{kind:"rival",ref:v,name:v.name,ini:v.name.split(" ").pop()[0],col:RCOL[v.queen?7:v.rank],info:`${v.queen?"Hoàng hậu":RANKS[v.rank].n} · ${trChip(v)} · Với ngươi: Thiện cảm ${aff(v,S)} · Oán ${oan(v,S)} · Ghen ${v.ghen}${sameHouse(S,v)?" · cùng cung":""}`}}
 function goTo(k){if(S.dead||Q.length||S.out)return;popIdx=null;popMsg="";
  if(k==="home"){S.place="home";S.visit={k,people:homePeople(),talked:false,tk:{}};render();return}
- const tc=travel(S.place,k);if(!can(tc+1)||S.confined)return;const P=placeOf(k);spend(tc);S.place=k;const W=S.where||{};
+ const tc=travel(S.place,k);if(!walkOk(tc)||S.confined)return;const P=placeOf(k);spend(tc);S.place=k;const W=S.where||{};
  const ppl=[];let msg="";const emp={kind:"emp",name:"Hoàng thượng",ini:"帝",col:"#f0d070",info:`${empName()} · ${MOODS[S.emp.mood][0].toLowerCase()}`};
  const here=liveRivals(true).filter(v=>W[v.id]===k);const empHere=W.emp===k;
  if(k==="vuon"){if(empHere){ppl.push(emp);apply({sung:S.emp.mood<=1?3:1});msg="Ngươi tình cờ gặp Hoàng thượng đang dạo bước. Ngài dừng lại nhìn ngươi."}else msg="Hoa nở rộ. Hoàng thượng không ra vườn hôm nay."}
@@ -1938,7 +1938,7 @@ function overhear(k){const here=liveRivals(true).filter(v=>whereOf(v)===k);if(he
 
 /* the palace map */
 const MAPL=[["thu","dtd","tn"],["kn","vuon","ksp"],["tyv","lc","home"]];
-function mapHTMLgrid(){const W=S.where||{};const dis=k=>!can(travel(S.place,k)+1)||S.confined||S.dead||S.place===k;
+function mapHTMLgrid(){const W=S.where||{};const dis=k=>!walkOk(travel(S.place,k))||S.confined||S.dead||S.place===k;
  const tile=(k,n,sc,sub)=>`<button class="mtile" data-go="${k}" ${k==="home"?(S.place==="home"?"disabled":""):(dis(k)?"disabled":"")} style="${(SCIMG[sc]||k==="home")?`background-image:url(img/${k==="home"?"tam-cung-dem":SCIMG[sc]}.webp)`:""}"><span class="mband">${k!=="home"&&S.place!==k&&!can(travel(S.place,k)+1)?`<span class="mchip">hết khắc</span>`:""}<b>${n}</b><span>${countAt(k)?silChip(countAt(k)):"vắng"} · ${k==="home"?"không tốn khắc":travel(S.place,k)+" khắc"}</span>${sub&&k!=="home"?`<small>${sub}</small>`:""}</span></button>`;
  let h=`<div class="ph"><span>Đi gần 1 khắc, xa 2 khắc · còn <b>${4-used}</b> ${pips(4-used)}. Đến nơi phải còn ít nhất 1 khắc để gặp người.</span>${S.confined?`<span class="r">Cấm túc ${S.confined} tháng</span>`:""}</div><div class="pmap">`;
  for(const row of MAPL)for(const k of row){if(k==="kn"&&!qOn()){h+=`<div class="mtile off"><b>Càn Ninh cung</b><span>bỏ trống</span></div>`;continue}const P=placeOf(k);h+=tile(k,k==="home"?"Tẩm cung":P.n,P.sc,k==="home"?"không tốn việc":"")}
@@ -1957,6 +1957,10 @@ function relHTML(){const P=consorts();const sel=relSel==="emp"||relSel==="th"?re
 
 /* moving costs time: near 1 khắc, far 2 */
 function mapPos(k){for(let r=0;r<MAPL.length;r++){const c=MAPL[r].indexOf(k);if(c>=0)return[r,c]}if(k[0]==="r"){const i=liveRivals(false).findIndex(v=>"r"+v.id===k);return[3+Math.floor(Math.max(0,i)/3),Math.max(0,i)%3]}return[2,2]}
+/* the walk rule (owner 11/15 01:35Z): she may go anywhere whose WALK fits in the khắc left (arriving with 0 is fine: she sees who is
+   there, next buổi she starts there). Never "hết khắc" unless 0 are left; otherwise the reason is the walk cost. */
+function walkOk(tc){return !!S&&!S.dead&&used+tc<=4}
+function walkWhy(tc){const left=Math.max(0,4-used);return left<=0?"hết khắc":`đi ${tc} khắc, còn ${left}`}
 function travel(a,b){if(a===b)return 0;const [r1,c1]=mapPos(a||"home"),[r2,c2]=mapPos(b);const far=Math.abs(r1-r2)+Math.abs(c1-c2)>1;return far?(wet()?3:2):1}
 function rivalsBuoi(){let ev="";for(const v of liveRivals(true)){if(!v.alive||v.out)continue;const t=pickTarget(v);if(!t)continue;
   let want=((v.malice/100)*(rel(v,t)<0?1:.25)+hostility(v,t)/200)*(rkOf(t)>=rkOf(v)-1||(t===S&&v.ghen>=60)?1:.4);if(t.shield)want*=.5;
@@ -2827,8 +2831,8 @@ function seenFaces(k){const L=seenAt(k),n=countAt(k);if(!n)return"";return `<spa
 /* walk to a consort and open her card; if she has gone, say where, offer to follow */
 function goSee(id){const v=rivals.find(x=>x.id===id);if(!v||S.dead||Q.length)return;const k=whereOf(v);
  const open=()=>{const i=curPeople().findIndex(p=>p.ref===v&&p.kind!=="chest");if(i>=0){popIdx=i;popMsg=""}else{const now=whereOf(v);S.visit.msg=`${v.name} vừa rời đi, sang ${placeName(now)}. <button class="btn" data-follow="${v.id}">Theo đến<small>${travel(S.place,now)} khắc</small></button>`}renderStage()};
- if(S.place===k){open();return}const tc=travel(S.place,k);if(!can(tc+1)||S.confined||S.out)return;goTo(k);open()}
-function seeBtn(v){if(!v||v===S||!v.alive||v.out||together(S,v)||!locKnown(v))return"";const k=whereOf(v),tc=travel(S.place,k);const why=S.confined?"đang cấm túc":S.out?"đang ở lãnh cung":!can(tc+1)?"đến nơi sẽ hết khắc — chờ buổi sau":"";
+ if(S.place===k){open();return}const tc=travel(S.place,k);if(!walkOk(tc)||S.confined||S.out)return;goTo(k);open()}
+function seeBtn(v){if(!v||v===S||!v.alive||v.out||together(S,v)||!locKnown(v))return"";const k=whereOf(v),tc=travel(S.place,k);const why=S.confined?"đang cấm túc":S.out?"đang ở lãnh cung":!walkOk(tc)?walkWhy(tc):"";
  return pbtn(`data-see="${v.id}" class="seeb"`,`Đến gặp ${v.name.split(" ").pop()}`,`Chắc chắn · tốn: ${tc} khắc · thành: gặp mặt, mọi việc làm tại chỗ, dễ hơn sai người`,why)}
 document.addEventListener("click",e=>{const s=e.target.closest("[data-see]");if(s&&!s.disabled){e.preventDefault();e.stopPropagation();goSee(+s.dataset.see);return}const f=e.target.closest("[data-follow]");if(f){e.preventDefault();e.stopPropagation();goSee(+f.dataset.follow)}},true);
 /* finding someone: send her eyes (1 khắc), or invite her over */
@@ -2844,8 +2848,8 @@ document.addEventListener("click",e=>{const s=e.target.closest("[data-scout]");i
 (function(){const g=goTo;goTo=function(k){const r=g.apply(this,arguments);try{if(S.place===k)curPeople().forEach(p=>{if(p.ref&&p.kind!=="chest"&&p.ref.id!=null)seeLoc(p.ref,k)})}catch(e){}return r}})();
 /* ===== visiting a consort at her own palace: chance she is home; her gatekeeper may tell where she went ===== */
 function visitBtn(v){if(!v||!v.alive||v.out||sameHouse(S,v))return"";const k=palaceOf(v),tc=travel(S.place,k);if(S.place===k)return"";
- return pbtn(`data-visit="${v.id}"`,`Đến cung nàng thăm`,`Chắc chắn · tốn: ${tc} khắc · thành: nếu nàng ở nhà thì gặp mặt · có khi nàng đi vắng`,S.confined?"đang cấm túc":S.out?"đang ở lãnh cung":!can(tc+1)?"đến nơi sẽ hết khắc — chờ buổi sau":"")}
-function visitPal(id){const v=rivals.find(x=>x.id===id);if(!v||S.dead||Q.length)return;const k=palaceOf(v),tc=travel(S.place,k);if(!can(tc+1)||S.confined||S.out)return;goTo(k);if(S.place!==k)return;
+ return pbtn(`data-visit="${v.id}"`,`Đến cung nàng thăm`,`Chắc chắn · tốn: ${tc} khắc · thành: nếu nàng ở nhà thì gặp mặt · có khi nàng đi vắng`,S.confined?"đang cấm túc":S.out?"đang ở lãnh cung":!walkOk(tc)?walkWhy(tc):"")}
+function visitPal(id){const v=rivals.find(x=>x.id===id);if(!v||S.dead||Q.length)return;const k=palaceOf(v),tc=travel(S.place,k);if(!walkOk(tc)||S.confined||S.out)return;goTo(k);if(S.place!==k)return;
  const i=curPeople().findIndex(p=>p.ref===v&&p.kind!=="chest");
  if(i>=0){if(aff(v,S)<=-40){S.visit.tk=S.visit.tk||{};S.visit.tk[i]=1;S.visit.msg=`${v.name} cáo bệnh không tiếp ngươi (nàng ghét ngươi).`}else{popIdx=i;popMsg=""}}
  else{const now=whereOf(v);const friend=aff(v,S)>=20||(v.staff||[]).some(s=>s.spyFor==="me");if(friend){seeLoc(v,now);S.visit.msg=`Cung nữ gác cửa: “Nương nương sang ${placeName(now)} rồi.” <button class="btn" data-follow="${v.id}">Theo đến<small>${travel(S.place,now)} khắc</small></button>`}else S.visit.msg="Cung nữ gác cửa: “Nương nương đi vắng.”"}
@@ -3165,7 +3169,7 @@ const SEAK={"Xuân":"xuan","Hạ":"ha","Thu":"thu","Đông":"dong"},BUK=["sang",
 function mapImg(){return `img/map-${SEAK[SEASON[S.month-1]]||"ha"}-${BUK[S.buoi||0]}.webp`}
 function mapSpots(){const L=[];for(const k in MAPH.places){if(k==="kn"&&!qOn())continue;L.push({k,box:MAPH.places[k].box,n:k==="home"?"Tẩm cung":placeOf(k).n})}
  const pals=[...new Set(liveRivals(false).filter(v=>palaceOf(v)!=="home"&&palaceOf(v)!=="kn").map(v=>palaceOf(v)))];pals.forEach((k,i)=>{const s=MAPH.rivalSlots[i];if(!s)return;const v=RV(+k.slice(1));L.push({k,box:s.box,n:v?`Cung ${v.name.split(" ").pop()}`:s.name,small:true,v})});return L}
-function mapHTML(){const W=S.where||{};const disR=k=>S.out?"đang ở lãnh cung":S.confined?`đang cấm túc (${S.confined} tháng)`:S.place===k?"đang ở đây":k!=="home"&&!can(travel(S.place,k)+1)?"hết khắc":"";
+function mapHTML(){const W=S.where||{};const disR=k=>S.out?"đang ở lãnh cung":S.confined?`đang cấm túc (${S.confined} tháng)`:S.place===k?"đang ở đây":k!=="home"&&!walkOk(travel(S.place,k))?(used>=4?"hết khắc":`đi ${travel(S.place,k)} khắc`):"";
  if(window.__mapList){return `<div class="ph"><button class="btn" data-maplist="0">Xem bản đồ hoàng cung<small>toàn cảnh</small></button></div>`+mapHTMLgrid()}
  const z=window.__mapZ||1;
  return `<div class="mapv"><div class="maptools"><span class="past">${SEASON[S.month-1]} · ${BUOI[S.buoi||0]} · còn ${4-used} khắc · đi gần 1 khắc, xa 2</span><span><button class="btn mz" data-mapz="-1" aria-label="Thu nhỏ">−</button><button class="btn mz" data-mapz="1" aria-label="Phóng to">+</button><button class="btn mz" data-maplist="1">Danh sách</button></span></div>
@@ -3232,7 +3236,7 @@ function mapSpots(){palFix();const L=[];
  PALN.forEach((nm,i)=>{const s=MAPH.rivalSlots[i];const k=houses[i];if(k){L.push({k,box:s.box,n:nm,fn:palFn(k),res:residents(k),small:true})}else L.push({k:null,box:s.box,n:nm,fn:"cung trống",res:[],small:true,empty:true})});
  /* lower consorts whose head has no slot yet (more heads than palaces) live with no plan spot: listed under the nearest head */
  return L}
-function mapHTML(){const W=S.where||{};const disR=k=>S.out?"đang ở lãnh cung":S.confined?`đang cấm túc (${S.confined} tháng)`:S.place===k?"đang ở đây":k!=="home"&&!can(travel(S.place,k)+1)?"hết khắc":"";
+function mapHTML(){const W=S.where||{};const disR=k=>S.out?"đang ở lãnh cung":S.confined?`đang cấm túc (${S.confined} tháng)`:S.place===k?"đang ở đây":k!=="home"&&!walkOk(travel(S.place,k))?(used>=4?"hết khắc":`đi ${travel(S.place,k)} khắc`):"";
  if(window.__mapList){return `<div class="ph"><button class="btn" data-maplist="0">Xem bản đồ hoàng cung<small>toàn cảnh</small></button></div>`+mapHTMLgrid()}
  const z=window.__mapZ||(innerWidth<600?2.5:1);
  return `<div class="mapv"><div class="maptools"><span class="past">${SEASON[S.month-1]} · ${BUOI[S.buoi||0]} · còn ${4-used} khắc<span class="mleg"> · đi gần 1 khắc, xa 2 · mặt nhỏ: người ở cung · bóng: người đang có mặt</span></span><span><button class="btn mz" data-mapz="-1" aria-label="Thu nhỏ">−</button><button class="btn mz" data-mapz="1" aria-label="Phóng to">+</button><button class="btn mz" data-maplist="1">Danh sách</button></span></div>
@@ -3903,7 +3907,7 @@ function accState(k){if(!S||!k)return{why:""};if(S.place===k)return{why:"",here:
  if(S.out)return{why:"đang ở lãnh cung"};if(S.confined)return{why:`cấm túc ${S.confined} tháng`};
  const a=accessOf(S,k);const tc=k==="home"?0:travel(S.place,k);
  if(!a.ok){const st={why:a.why,kind:a.kind,ask:a.ask,tc};st.sneakOk=can(tc+2);if(a.ask==="yk")st.empAway=(S.where||{}).emp!==k;st.askOk=can(1)&&!st.empAway;return st}
- if(k!=="home"&&!can(tc+1))return{why:"hết khắc"};
+ if(k!=="home"&&!walkOk(tc))return{why:walkWhy(tc)};
  return{why:"",tc}}
 function accSneakLine(k,tc){return `${word(accSneakO(k))} · tốn: ${tc+1} khắc · thành: vào được buổi này · hỏng: Danh -8, bị phạt`}
 function accAskLine(k){return `${word(accAskO(k))} · tốn: 1 khắc · thành: được vào buổi này · hỏng: không mất gì thêm`}
@@ -4172,7 +4176,7 @@ function srvGoTo(k){if(!S||S.dead||Q.length)return false;popIdx=null;popMsg="";c
  if(S.srv.lau>0||k==="tgk"){S.place="tgk";S.visit=srvVisitOf("tgk");if(k!=="tgk")srvToast("Đang chịu phạt ở Tân Giả khố");render();return k==="tgk"}
  if(k==="home"){S.place="home";S.visit=srvVisitOf("home");render();return true}
  const h=window.placeEnterHook(S,k);if(h&&!h.ok){if(!S.visit||S.visit.k!==S.place)S.visit=srvVisitOf(S.place);srvToast(`${placeOf(k).n}: ${h.why}`);render();return false}
- const from=S.place==="home"&&m?palaceOf(m):S.place;const tc=travel(from,k);if(!can(tc+1)){if(!S.visit||S.visit.k!==S.place)S.visit=srvVisitOf(S.place);srvToast(whyTime(tc+1)||"Hết khắc buổi này");render();return false}
+ const from=S.place==="home"&&m?palaceOf(m):S.place;const tc=travel(from,k);if(!walkOk(tc)){if(!S.visit||S.visit.k!==S.place)S.visit=srvVisitOf(S.place);srvToast(walkWhy(tc));render();return false}
  spend(tc);S.place=k;S.visit=srvVisitOf(k);log(`Đến ${placeOf(k).n}.`);render();return true}
 (function(){const g0=goTo;goTo=function(k){if(!isSrv())return g0.apply(this,arguments);const wasMap=tab==="go";const ok=srvGoTo(k);if(ok&&wasMap&&!S.dead&&S.place!=="home"){window.__fromMap=1;tab="act";render()}return ok}})();
 
@@ -6453,8 +6457,8 @@ setTimeout(()=>{try{
   try{return g0.apply(this,arguments)}finally{can=c0}};
 })();
 /* what stops the walk itself, in words */
-function j77Kh(n){return !!S&&!S.dead&&used+n<=4}
-function j77WalkWhy(tc){const left=Math.max(0,4-used);if(left<=0)return"hết khắc";return `đi tốn ${tc} khắc, còn ${left}`}
+function j77Kh(n){return walkOk(n)}
+function j77WalkWhy(tc){return walkWhy(tc)}
 /* the map state of a place (same shape as j41's; prices: walk tc, ask 1+tc, sneak 1+tc) */
 accState=function(k){if(!S||!k)return{why:""};if(S.place===k)return{why:"",here:1};
  if(S.out)return{why:"đang ở lãnh cung"};if(S.confined)return{why:`cấm túc ${S.confined} tháng`};
@@ -6496,10 +6500,14 @@ function j77Card(k,empty){if(!S||S.dead||Q.length)return;
  if(waitHelps&&!S.out&&!S.confined&&!S.mg){const night=(S.buoi||0)>=2;opts.push({n:night?"Đợi sáng mai (Qua đêm)":"Đợi buổi sau (Qua buổi)",fx:{},x:st.kind==="hour"||/sáng|thỉnh an/.test(st.why||"")?"sáng mai mở cửa, thử lại":night?"sáng mai đủ khắc, thử lại":"sang buổi sau đủ khắc, thử lại",go:()=>setTimeout(()=>{try{nextBuoi()}catch(e){}},0)})}
  if(opts.length){opts.push({n:"Thôi",fx:{},x:""});Q.push({t:nm,h:L.join(""),opts})}else Q.push({t:nm,h:L.join(""),btn:"Đã hiểu"});
  showModal()}
+/* a walk that uses the last khắc: say so plainly, then go (she sees who is there; next buổi she starts there) */
+function j77LastWalk(k,tc){let n=0;try{n=countAt(k)}catch(e){}
+ Q.push({t:accName(k),h:`<p>Đường đi ${tc} khắc · đến nơi là hết buổi, chỉ kịp xem ai ở đó.</p>${n?`<p class="past">Có ${n} bóng người ở đó.</p>`:""}<p class="past">Buổi sau ngươi bắt đầu ở đó.</p>`,
+  opts:[{n:"Đi",fx:{},x:`Chắc chắn · tốn: ${tc} khắc · thành: đến nơi, thấy ai ở đó; người ở đó có thể đến gần`,go:()=>setTimeout(()=>{if(S&&!S.dead&&!Q.length)goTo(k)},0)},{n:"Thôi",fx:{},x:""}]});showModal()}
 /* one tap rule for the map and the list */
 function j77Tap(k,empty){if(!S||S.dead||Q.length)return;if(empty||!k)return j77Card(k,empty||"Cung trống");
  if(S.place===k){window.__fromMap=1;tab="act";render();return}
- const st=accState(k);if(!st.why){goTo(k);if(S.place!==k&&!Q.length)j77Card(k);return}
+ const st=accState(k);if(!st.why){if(k!=="home"&&st.tc&&used+st.tc>=4&&!accEtq(S,k))return j77LastWalk(k,st.tc);goTo(k);if(S.place!==k&&!Q.length)j77Card(k);return}
  j77Card(k)}
 window.addEventListener("click",e=>{try{if(typeof tab==="undefined"||tab!=="go"||!S)return;
  const sp=e.target.closest("#panel .mspot, #panel .mtile");if(!sp)return;
@@ -8162,8 +8170,17 @@ function kitLeather(el){if(!el)return el;el.classList.add("kleather");
  if(!el.querySelector(":scope>.kl-roll")){for(const s of["l","r"]){const i=document.createElement("i");i.className="kl-roll kl-"+s;i.setAttribute("aria-hidden","true");el.appendChild(i)}
   const t=document.createElement("i");t.className="kl-tone";t.setAttribute("aria-hidden","true");el.appendChild(t)}
  return el}
-function kitUnroll(el){if(!el||kitCurlOff())return;el.classList.remove("kl-unroll");void el.offsetWidth;el.classList.add("kl-unroll");
- setTimeout(()=>el.classList.remove("kl-unroll"),700)}
+/* KIT_MAP_MS (owner 11/15 01:30Z "Dư đồ animation cuộn cho chậm lại"): ONE timing for the map unroll — slow, ease-in-out (soft start,
+   soft stop). A touch / click / wheel / key on the map ends it at once (never fights the player's hand). Cảnh động off / reduced motion: none. */
+const KIT_MAP_MS={unroll:1150,ease:"cubic-bezier(.45,.05,.3,1)"};
+let kitUnrollRun=null;   // {el,t0}: the unroll in progress; a re-render that replaces the map continues it (kitUnroll(newEl, elapsed))
+function kitUnroll(el,at){if(!el||kitCurlOff())return;at=at||0;if(at>=KIT_MAP_MS.unroll)return;if(el.__klStop)el.__klStop();
+ el.style.setProperty("--kl-ms",KIT_MAP_MS.unroll+"ms");el.style.setProperty("--kl-ease",KIT_MAP_MS.ease);el.style.setProperty("--kl-at",(-at)+"ms");
+ el.classList.remove("kl-unroll");void el.offsetWidth;el.classList.add("kl-unroll");
+ const ev=["pointerdown","touchstart","wheel","keydown"];let tm=0;
+ const stop=()=>{clearTimeout(tm);el.classList.remove("kl-unroll");for(const e of ev)el.removeEventListener(e,stop,true);el.__klStop=null;if(kitUnrollRun&&kitUnrollRun.el===el)kitUnrollRun=null};
+ for(const e of ev)el.addEventListener(e,stop,{capture:true,passive:true});el.__klStop=stop;kitUnrollRun={el,t0:performance.now()-at};tm=setTimeout(stop,KIT_MAP_MS.unroll-at+80)}
+function kitUnrollKeep(el){const r=kitUnrollRun;if(el&&r&&r.el!==el){if(r.el.__klStop)r.el.__klStop();kitUnroll(el,performance.now()-r.t0)}}
 
 /* ---------- kitBookSpread: the two-page book container ----------
    kitBookSpread(host, {pic, text, double, mode:"auto"|"spread"|"single"})
@@ -8327,8 +8344,8 @@ html .game .kleather>.maptools>.past,html .game .kleather>.maptools>.fest{displa
 .panel:has(>.kleather){background:transparent!important;border-color:transparent!important;box-shadow:none!important;padding:0!important}
 @media (max-width:760px){.kleather{padding:15px 23px}.kleather::before{inset:6px 17px}.kleather>.kl-tone,html .game .kleather>.maptools{inset:15px 23px}.kl-roll{width:15px}}
 /* unrolling (going to the map) */
-.kleather.kl-unroll{animation:kl-un .62s cubic-bezier(.25,.7,.25,1)}
-.kl-unroll>.kl-l{animation:kl-rl .62s cubic-bezier(.25,.7,.25,1)}.kl-unroll>.kl-r{animation:kl-rr .62s cubic-bezier(.25,.7,.25,1)}
+.kleather.kl-unroll{animation:kl-un var(--kl-ms,1.15s) var(--kl-ease,ease-in-out) var(--kl-at,0ms) both}
+.kl-unroll>.kl-l{animation:kl-rl var(--kl-ms,1.15s) var(--kl-ease,ease-in-out) var(--kl-at,0ms) both}.kl-unroll>.kl-r{animation:kl-rr var(--kl-ms,1.15s) var(--kl-ease,ease-in-out) var(--kl-at,0ms) both}
 @keyframes kl-un{from{clip-path:polygon(48.51% 0.36%,48.69% 0.72%,48.9% 0.59%,49.13% 0.06%,49.36% 0.04%,49.57% 0.08%,49.76% 0.47%,50.02% 0.14%,50.2% 0.69%,50.46% 0.63%,50.64% 1.07%,50.83% 0.94%,51.06% 0.16%,51.26% 0.34%,51.48% 0.5%,51.5% 7.31%,51.48% 14.03%,51.49% 20.55%,51.5% 27.98%,51.48% 35.57%,51.49% 43.03%,51.49% 49.6%,51.48% 57.54%,51.49% 64.43%,51.49% 72.18%,51.48% 78.15%,51.48% 84.95%,51.49% 93.37%,51.49% 99.83%,51.29% 99.96%,51.08% 99.16%,50.86% 99.04%,50.63% 99.24%,50.43% 99.36%,50.21% 99.08%,50.03% 99.48%,49.8% 99.93%,49.58% 99.29%,49.39% 99.1%,49.13% 99.58%,48.94% 99.98%,48.71% 99.82%,48.5% 99.5%,48.5% 93.39%,48.5% 85.21%,48.51% 79.31%,48.5% 71.33%,48.51% 65.05%,48.52% 57.87%,48.51% 49.83%,48.51% 43.63%,48.52% 35.02%,48.5% 28.04%,48.51% 21.4%,48.51% 13.81%,48.5% 6.98%)}to{clip-path:polygon(0.4% 0.36%,6.44% 0.72%,13.43% 0.59%,21.16% 0.06%,28.59% 0.04%,35.58% 0.08%,42.04% 0.47%,50.65% 0.14%,56.59% 0.69%,65.18% 0.63%,71.22% 1.07%,77.66% 0.94%,85.29% 0.16%,92.09% 0.34%,99.35% 0.5%,99.86% 7.31%,99.49% 14.03%,99.56% 20.55%,99.95% 27.98%,99.46% 35.57%,99.75% 43.03%,99.64% 49.6%,99.36% 57.54%,99.8% 64.43%,99.58% 72.18%,99.42% 78.15%,99.22% 84.95%,99.67% 93.37%,99.6% 99.83%,92.84% 99.96%,86.05% 99.16%,78.72% 99.04%,71.06% 99.24%,64.47% 99.36%,57.06% 99.08%,50.89% 99.48%,43.19% 99.93%,36.12% 99.29%,29.56% 99.1%,21.0% 99.58%,14.62% 99.98%,7.07% 99.82%,0.09% 99.5%,0.05% 93.39%,0.1% 85.21%,0.31% 79.31%,0.06% 71.33%,0.44% 65.05%,0.66% 57.87%,0.22% 49.83%,0.29% 43.63%,0.77% 35.02%,0.14% 28.04%,0.19% 21.4%,0.47% 13.81%,0% 6.98%)}}
 @keyframes kl-rl{from{left:calc(50% - 16px)}to{left:2px}}@keyframes kl-rr{from{right:calc(50% - 16px)}to{right:2px}}
 .kcl-host{position:fixed;z-index:40;pointer-events:none;
@@ -8387,7 +8404,7 @@ function kitBookLive(){const g=document.querySelector(".game");if(!g)return;
    catch(e){if(done)throw e;console.error(e);call()}
    try{kitBookLive()}catch(e){console.error(e)}
    try{last=t1;const mv=document.querySelector(".game.maptab #panel .mapv");
-    if(mv){kitLeather(mv);if(t0!=null&&t0!=="go"&&t1==="go")kitUnroll(mv)}
+    if(mv){kitLeather(mv);if(t0!=null&&t0!=="go"&&t1==="go")kitUnroll(mv);else kitUnrollKeep(mv)}
     else if(t0==="go"&&t1!=="go"&&pn){if(!kitCurlOff()){pn.classList.remove("kcl-in");void pn.offsetWidth;pn.classList.add("kcl-in");setTimeout(()=>pn.classList.remove("kcl-in"),340)}
      /* the page row changed shape (map → book): let the person card measure its room again once the layout has settled */
      if(typeof kitPcSize==="function"){requestAnimationFrame(()=>{try{kitPcSize()}catch(e){}});setTimeout(()=>{try{kitPcSize()}catch(e){}},150)}}}catch(e){console.error(e)}
