@@ -34,7 +34,7 @@ function say(mode,o){try{COOP.send(Object.assign({t:"act",k:"ctm-tm",mode},o||{}
 /* ---------- my status ---------- */
 function myPz(){if(!live())return false;return !!(Q.length||S.mg)}
 /* choosing a thân phận (first life / rebirth: Luân hồi) or a death screen: the room's clock stands still, no pause budget spent */
-function myLife(){if(!CW.on)return false;if(typeof S==='undefined'||!S||S.dead||CW.inLife)return true;const T=$("title");return !!(T&&!T.hidden)}
+function myLife(){if(!CW.on)return false;if(typeof S==='undefined'||!S||S.dead||CW.inLife)return true;const T=$("title");return !!(T&&!T.hidden)||!!document.getElementById("kroul")}
 function myRd(){if(!live()||S.dead)return false;if(myKey()!==roomKey())return false;return !!(CW.bend||CW.pend||CW.sent===wkN())}
 const ST={key:"",pz:false,rd:false,lf:false,at:0};          /* what I last told the friend */
 const FS={key:"",pz:false,rd:false,lf:false};               /* the friend's last status */
