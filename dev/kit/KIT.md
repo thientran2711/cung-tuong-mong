@@ -363,6 +363,12 @@ Rules
   ("(Chứng cứ X +1.)" = what that act gave) stay on the row BEFORE them; a reason repeated inside a row is kept once.
 - No-change: `kitNoChange(html)` drops every "label N → N" clause from a fact row (all producers, old saved logs); a row left without
   words is not drawn. Producers name whose number it is ("Sủng của X a → b"), never "Sủng nàng".
+- RANK + NAME TOGETHER (owner 15/11 "phẩm và tên người lúc nào cũng phải đi chung", review/pick-hint, jaudit §17): every full person name
+  on screen comes with its title. `kitRankNamePaint(root, dry)` (MutationObserver on body, like kitRelPaint) replaces a bare known full
+  name (kpPeople, not S, with a kitTitle) in any text node outside `.kname` by `kitName(p)` (title + name, kit colours); a name already
+  after its title (same text, text just before, a title in the same small card, or "title name" earlier in the same block) is left as is.
+  Short names (Hậu cung roster strip under portraits) are not full names and are never touched. Opt out: `[data-krn-skip]`.
+  Scan: `dev/test/rank-name-scan.js` → dev/review/rank-name-scan.md.
 - Titles: `kitTitled(title, name)` / `kitTitledName(title, name)` — the one title + name rule: name words the title already says are
   dropped ("Tổng quản thái giám" + "Tổng quản Lý Liên Anh" → "Tổng quản thái giám Lý Liên Anh"); only title words, never a surname
   that is also a rank (Tần Khinh Vũ). `kpPeopleIn` keeps the text's own title when the text already has ANY title before the name
@@ -2314,6 +2320,9 @@ The rank / role line above every name is a TITLE, the name under it is plain ink
 | Hoàng hậu | gold #8c5f00 | | Hoàng tử · Công chúa · Người lạ | sky #1a6fb8 · coral #bf412b · grey #666666 |
 
 Men are never pink/purple. Unknown title → the caller's colour darkened (80 % + black).
+**48.1d RANK HALO ON A PAINTING (owner 15/11 "Phẩm của tôi cũng viền sáng như tên", review/pick-hint)**: on a painting (stage tag `.j59t`,
+`.kesov` caption title, `.krs`) the RANK line gets the same light paper halo as the name line under it (text-shadow #fff8ee 1/2/5/9px) and
+keeps its full rank tone (`--rt`, KIT_RT); every KIT_RT tone is >= 4.7:1 against the halo. Replaces the old dark outline + tinted glow.
 **48.1c NO BOX (owner 15/11 ~20:40Z)**: person-dialog captions (kitEventDp `.kdpcap`, 32.7 `.kesf>.kpsn`, the event-stage overlay
 `.kesov>.kpsn`) have no box / frame / plate: rank + name sit straight on the dialog background (title colour + outline as above, name plain
 ink, hers gold-glow). Over a picture (`.kesov`) the name keeps the paper halo of scene words for readability.

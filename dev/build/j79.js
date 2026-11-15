@@ -115,7 +115,9 @@ window.kitDedupTitle=kitDedupTitle;
 /* owner 11/15 ("Sủng nàng ta 30 → 30"): a number that did not move says nothing — every "label N → N" clause is dropped from a fact row
    (all producers, old logs too); a row left with no words is not drawn (kitFacts) */
 const KIT_NOCH=/(^|[.;·,:]\s*|\s)((?:[^\s.;·,:<>]+ ){0,5}?)(−?-?\d+(?:[.,]\d+)?)\s*→\s*\3(?=\s*(?:[.;·,]|$))\s*[;·,]?\s*/g;
-function kitNoChange(h){try{return kpMapText(String(h||""),s=>s.replace(KIT_NOCH,(m,a)=>/[.;·,:]/.test(a)?a.replace(/\s+$/,"")+" ":a).replace(/ {2,}/g," ").replace(/\s+\./g,".").replace(/[;·,]\s*(\.|$)/g,"$1"))}catch(e){return h}}
+/* review/pick-hint: the tidy-up runs only on a text piece where a "N → N" clause was really dropped — before, every piece that ended in ", "
+   just before a name/chip tag lost its comma ("thái giám canh cung, <name>" → "canh cungCung nữ …") */
+function kitNoChange(h){try{return kpMapText(String(h||""),s=>{KIT_NOCH.lastIndex=0;if(!KIT_NOCH.test(s))return s;KIT_NOCH.lastIndex=0;return s.replace(KIT_NOCH,(m,a)=>/[.;·,:]/.test(a)?a.replace(/\s+$/,"")+" ":a).replace(/ {2,}/g," ").replace(/\s+\./g,".").replace(/[;·,]\s*(\.|$)/g,"$1")})}catch(e){return h}}
 window.kitNoChange=kitNoChange;
 /* a row that starts in lower case after a clause was dropped gets a capital first letter */
 function kitCapFirst(h){let done=false;try{return kpMapText(String(h||""),s=>{if(done)return s;const i=s.search(/\S/);if(i<0)return s;done=true;return s.slice(0,i)+s[i].toLocaleUpperCase("vi")+s.slice(i+1)})}catch(e){return h}}

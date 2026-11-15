@@ -515,9 +515,9 @@ ${T}{font-family:var(--display,"Noto Serif",Georgia,serif)!important;font-weight
  color:var(--rt,color-mix(in srgb,var(--rc,var(--tc,#7a5a30)) 80%,#000))!important;text-shadow:none!important;
  background:none!important;box-shadow:none!important;line-height:1.2!important;padding:0 2px!important}
 ${N}{color:var(--krt-ink)!important;font-weight:700;text-shadow:none!important}
-${PT}{color:color-mix(in srgb,var(--rt,#7a5a30) 72%,#fff)!important;
- --krt-g:color-mix(in srgb,color-mix(in srgb,var(--rt,#7a5a30) 55%,#fff) 70%,transparent);
- text-shadow:-.7px 0 0 var(--krt-ol),.7px 0 0 var(--krt-ol),0 -.7px 0 var(--krt-ol),0 .7px 0 var(--krt-ol),-.5px -.5px 0 var(--krt-ol),.5px -.5px 0 var(--krt-ol),-.5px .5px 0 var(--krt-ol),.5px .5px 0 var(--krt-ol),0 0 3px var(--krt-g),0 0 8px var(--krt-g)!important}
+${PT}{color:var(--rt,color-mix(in srgb,var(--rc,var(--tc,#7a5a30)) 80%,#000))!important;/* 48.1d (owner 15/11 "Phẩm của tôi cũng viền sáng như tên"): the rank line on a painting gets the SAME light
+ halo as the name line under it (was a dark outline + tinted glow, hard to read), in its full rank tone so it keeps its colour on the light halo */
+ text-shadow:0 0 1px #fff8ee,0 0 2px #fff8ee,0 0 5px #fff8ee,0 0 9px #fff8eecc!important}
 ${PN}{text-shadow:0 0 2px #fff8ee,0 0 5px #fff8ee,0 0 9px #fff8eecc!important}
 html body .kpsn .kname .kti{display:block;font-size:.84rem!important}
 html body .kpstrip .kpsn small{order:-1}
