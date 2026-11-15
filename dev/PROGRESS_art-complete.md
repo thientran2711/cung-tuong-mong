@@ -67,7 +67,7 @@ rules] A character lineup of THREE full-body standing figures ... Signature colo
   demole 0 hits, on CDN with FIGURES-servants.json (2956 records).
 - DONE 15/11 night (worker resume): u02-u10 r0/r2/r3 (ue_bg2..4.txt), all on CDN + FIGURES-servants.json. Helpers: look.py (contact sheet of raw gens),
   chk.sh OUT stem... (cutcheck top-3 + demole dry run + rvsheet). CDN upload works again (coordinator 15/11).
-- DONE u11-u25 (ue_bg5-7.txt). u24: gpt-2-6 added a left-cheek mole on the new ranks (r1 has none) -> inpainted with demole_por.py spot= (new option zone=cheek finds them; noisy on older faces, look before fixing). NEXT: u26..u30 x r0/r2/r3 (15 sheets; u30 r2 = ochre-gold): `python3 ue_spec.py ue-u02-r0 ue-u02-r2 ue-u02-r3` -> generate (refs [ref]) -> append ids to
+- DONE u11-u30 (ue_bg5-8.txt). EUNUCH RANKS COMPLETE: 360/360 (audit). u30 r0 a36/a51 faint forehead dots inpainted. u24: gpt-2-6 added a left-cheek mole on the new ranks (r1 has none) -> inpainted with demole_por.py spot= (new option zone=cheek finds them; noisy on older faces, look before fixing). NEXT: u26..u30 x r0/r2/r3 (15 sheets; u30 r2 = ochre-gold): `python3 ue_spec.py ue-u02-r0 ue-u02-r2 ue-u02-r3` -> generate (refs [ref]) -> append ids to
   ue_gens.txt -> LOOK -> remove_background -> ue_bgN.txt -> pull FIGURES-servants.json -> proc.py ue_jobs.json FIGURES-servants.json
   ue_bgN.txt -> rvsheet + cutcheck + demole_por.py -n --sheet -> cdn_sync -> commit. Batches of ~5 eunuchs (15 sheets, 4050 credits).
 - Picker DONE (jartc.js part 3): f88Best wrapped; staff eunuchs (role eunuch/eun, not S) -> f88Pick base mode with rank who.rk
@@ -76,10 +76,16 @@ rules] A character lineup of THREE full-body standing figures ... Signature colo
   makes r2 a deep crimson robe with gold crane badge + "NEW CLOTHES: change the clothing completely" (redo id in ue_gens.txt).
   TODO: u10/u20/u30 already wear deep crimson at r1 (ECOL idx 7) -> give their r2 another colour (e.g. deep ochre gold).
 
-## Remaining (in order)
-- Eunuch ranks: u02-u30 left (348 figs); picker done.
+## Remaining (in order) - audit 15/11 night: 456 missing
+- Eunuch ranks: DONE (360/360, picker done).
 - Kids adult bands a26/a36/a51 x 48 (144) + picker: kidBandOf beyond 20.
-- HOLD: player looks, tm96 promoted men.
+- Player looks look1-4 t2-t8+cold x 4 ages (128; owner 23:05Z: no longer on hold) + add look1-4 as selectable/NPC faces on all roads.
+- tm96 promoted old-love men 'up' dress (56; owner 23:05Z: no longer on hold).
+- (Not in this task) Mamas k01-k08 maid rank dress 128 - coordinator ruled mamas by CODE.
+- Test note: vt.js sometimes fails to start the new game at one viewport (st=0, "reading 'emp'" in the harness, different viewport each run); 0 page errors everywhere.
+
+## PENDING CDN UPLOAD
+- none (every file above is on the CDN; Cloudflare upload works again 15/11 night).
 
 ## Tests (head 822de7c79 + this commit), `node dev/figwork/artcomplete/vt.js <worktree>` (in-process server, one browser)
 755x1000, 1000x755, 1180x820, 1366x1024, 844x390, 390x844: new game started, 0 page errors, no horizontal overflow;

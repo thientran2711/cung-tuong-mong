@@ -18,7 +18,7 @@
 | Emperor e1 | 1 | base | a18/a26/a36/a51 | 4 | 4 | **0** | reachable now |  |
 | Mamas k01-k08 | 8 | base | a18/a26/a36/a51 | 32 | 32 | **0** | reachable now |  |
 | Eunuchs u01-u30 | 30 | base | a18/a26/a36/a51 | 120 | 120 | **0** | reachable now |  |
-| Eunuchs u01-u30: rank dress (Tiểu thái giám / Thủ lĩnh / Tổng quản) | 30 | r0,r2,r3 (base = r1) | a18/a26/a36/a51 | 360 | 0 | **360** | reachable now | staff eunuchs are promoted r0..r3 (servRanks/srkMax); art has one dress (= r1 Thái giám); picker ignores rank |
+| Eunuchs u01-u30: rank dress (Tiểu thái giám / Thủ lĩnh / Tổng quản) | 30 | r0,r2,r3 (base = r1) | a18/a26/a36/a51 | 360 | 360 | **0** | reachable now | staff eunuchs are promoted r0..r3 (servRanks/srkMax); art has one dress (= r1 Thái giám); picker ignores rank |
 | Mamas k01-k08: maid rank dress | 8 | m0,m1,m2,m3 (base = m4) | a18/a26/a36/a51 | 128 | 0 | **128** | reachable now | a maid who first gets a face at 36+ takes a mama face (figRoles) and keeps maid ranks 0..4; mama art = one dress (taken as m4 Nữ quan) |
 | Old-love men promoted (tm96 'up' rank): official | 5 | up (base = pre) | a18/a26/a36/a51 | 20 | 0 | **20** | 1 ending of 1 story line | one tm96 ending sets m.role=V.up (e.g. Hàn lâm -> Ngự sử đại phu); no 'up' dress drawn |
 | Old-love men promoted (tm96 'up' rank): man | 7 | up (base = pre) | a18/a26/a36/a51 | 28 | 0 | **28** | 1 ending of 1 story line | one tm96 ending sets m.role=V.up (e.g. Hàn lâm -> Ngự sử đại phu); no 'up' dress drawn |
@@ -26,4 +26,4 @@
 | Player looks look1-4 (OLD saves without S.pid) | 4 | t2-t8,cold (t1 have) | a18/a26/a36/a51 | 128 | 0 | **128** | old saves only | new games use a consort identity (complete); old saves keep look-* faces and only have t1 |
 | Kids prince p01-p24: adult bands | 24 | - | a26/a36/a51 | 72 | 0 | **72** | grown children in long games | child bands [4, 9, 14, 20] drawn; 17+ shows the 20 art for life |
 | Kids princess f01-f24: adult bands | 24 | - | a26/a36/a51 | 72 | 0 | **72** | grown children in long games | child bands [4, 9, 14, 20] drawn; 17+ shows the 20 art for life |
-| **Total** | | | | 8872 | 8056 | **816** | | |
+| **Total** | | | | 8872 | 8416 | **456** | | |
