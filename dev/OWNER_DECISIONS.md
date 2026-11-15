@@ -706,3 +706,14 @@ All must work in co-op.
 ## 15/11 ~22:30Z — Pet decisions (owner)
 - Ngự tứ pet saves her life only at the LINH THÚ stage (keep as now, coordinator's recommendation).
 - Pet bar label stays "No" (do NOT change to "Đói").
+
+## 15/11 ~22:35Z — Calendar ideas all; art level-up scene; performance budget (owner)
+- Calendar: build ALL coordinator ideas (a)–(j) from 20:15Z.
+- Art level-up (every art / Công Dung Ngôn Hạnh level): a short "học thành tài" celebration scene (painted, Magnific) that also shows what she gained: items appear (fly to Tư trang), new effects/abilities/recipes shown as info lines.
+- Owner worry: many Magnific animations → heavy game and co-op lag. RULES (performance budget):
+  1. Load art ON DEMAND (only when the scene plays; never preload all); service-worker cache after first use. Fix the 129 MB first-load (download-size task) first.
+  2. WebP at the display size (big centre art ≤ ~250 KB, sprites ≤ ~40 KB); effect videos ≤ ~400 KB short loops, or sprite sheets.
+  3. One shared particle layer (Pixi/jfx) reused by all effects; cap particle counts; pause effects when the tab is hidden.
+  4. Settings: "Hiệu ứng: Đầy đủ / Gọn" (Gọn = still pictures, no particles/video) + auto-Gọn on weak devices.
+  5. Co-op: online messages carry only small game state, never graphics, so animations don't add network lag; each player's effects run locally. Animations must not block or delay sync (they play after the state is applied; tap to skip).
+  6. A perf test (frame time + memory + bytes per scene) in CI for 755x1000 and a mid phone profile.
