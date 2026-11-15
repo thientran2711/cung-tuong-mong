@@ -13,6 +13,7 @@ HOLD (owner): old-save player looks (128), promoted old-love men (56).
 - Batch 4: KC consort c22-c32 = 33 figs + 33 por on CDN (kc_bg3.txt). KC consorts COMPLETE (c01-c32 x a26/a36/a51).
 - Batch 5: KC maid faces m01-m13 = 39 figs + 39 por (kc_bg4.txt). Same noblewoman prompt (kc maids are bride-pool ladies too), prop set = (n-1)%6 of kc_props.py SETS.
 - Batch 6: KC maid faces m14-m26 = 39 figs + 39 por (kc_bg5.txt).
+- Batch 7: KC maid faces m27-m39 = 39 figs + 39 por (kc_bg6.txt).
 - Code (dev/build/jartc.js, appended to assemble.py; site rebuilt with dev/site/build_site.sh):
   1. married spouses (k.hW.s phò mã, k.pW.chinh / trac) age +1 each new year (wrap of ageYear);
   2. staff maids whose first face comes at 36+ take a free maid identity (full rank x age), mama pool = fallback.
@@ -40,7 +41,7 @@ rules] A character lineup of THREE full-body standing figures ... Signature colo
 ... Right: about 57 ... NO forehead mark, NO huadian ..." (full text: kc_prompt.txt).
 
 ## Remaining (in order)
-- KC maid m27-m52 (78 figs).
+- KC maid m40-m52 (39 figs).
 - Eunuch ranks r0/r2/r3 x 4 ages x 30 (360) + picker: pass srk(who) for staff eunuchs, tiers "r0".."r3" (base = r1).
 - Kids adult bands a26/a36/a51 x 48 (144) + picker: kidBandOf beyond 20.
 - HOLD: player looks, tm96 promoted men.
