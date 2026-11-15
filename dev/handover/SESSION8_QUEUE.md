@@ -98,6 +98,6 @@ j72 bước vs Hồi · stage paper halo · Thái hậu title bronze vs plum · 
 | C38 | review/ev-art-fit (owner s8: unrelated event pictures; no generic default; paint missing) | RUNNING |
 | C39 | review/tab-underline (owner s8: stray bar through selected chip + grey scroll track under chip rows, all tab rows) | QUEUED-NEXT |
 | D52 | skin-match audit of 7347 never-measured figures (plan in PROGRESS_review-skin-match.md; worktree /home/user/wt/skin cache) | QUEUED |
-| C40 | review/actcard-one (owner s8 APPROVED: tap picture → big + more info; tap odds label or "!" → why-detail; one compact act card, picture RECTANGLE portrait 3:4 left, EQUAL card sizes; tap to enlarge) | QUEUED-NEXT |
+| C40 | review/actcard-small (owner OVERRIDE: keep big + small cards; small card picture square → portrait rectangle 3:4; equal sizes per grid; tap picture → big + info; odds label or "!" → why-detail) | QUEUED-NEXT |
 | C41 | review/tuduc-mg (owner s8: Tứ đức minigames missing → 4 games Công/Dung/Ngôn/Hạnh, easy rules) | QUEUED-NEXT |
 | C42 | review/evidence-truth (owner s8: evidence only for real deeds; clean player safe; frame scheme separate; news one fact per line) | QUEUED-NEXT (high) |
