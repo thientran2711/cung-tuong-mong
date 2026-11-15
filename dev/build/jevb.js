@@ -91,11 +91,14 @@ function evbDedup(m){try{if(!m||!m.opts||m.opts.length<2||typeof kitHint!=="func
   /* still the same words: add the option's own chance (its ladder word, in words) and then, if needed, how big its gain is next to the others */
   const dup=()=>{const c={};T.forEach(x=>c[x]=(c[x]||0)+1);return T.map(x=>c[x]>1)};
   if(dup().some(Boolean))g.forEach((i,j)=>{if(!dup()[j]||/thành|khó đoán/.test(T[j]))return;const ch=evbChance(O[i]);if(ch)T[j]+=`; ${ch}`});
-  if(dup().some(Boolean)){const G=g.map(i=>evbGain(O[i]));const d=dup();const hi=Math.max(...G),lo=Math.min(...G);
-   if(hi>lo)g.forEach((i,j)=>{if(!d[j])return;if(G[j]===hi)T[j]+="; lợi lớn hơn cả";else if(G[j]===lo)T[j]+="; lợi ít hơn cả"})}
+  /* best / worst are named WITHIN each set of options that still read the same (not the whole group: an option already told apart
+     may hold the group's extreme, review r6) */
+  const clus=()=>{const c={};T.forEach((x,j)=>(c[x]=c[x]||[]).push(j));return Object.values(c).filter(L=>L.length>1)};
+  if(dup().some(Boolean)){const G=g.map(i=>evbGain(O[i]));for(const C of clus()){const V=C.map(j=>G[j]);const hi=Math.max(...V),lo=Math.min(...V);
+   if(hi>lo)C.forEach(j=>{if(G[j]===hi)T[j]+="; lợi lớn hơn cả";else if(G[j]===lo)T[j]+="; lợi ít hơn cả"})}}
   /* same words still: the option's own chance number (option data `od`: night talk fit, contest odds), best and worst named */
-  if(dup().some(Boolean)){const D=g.map(i=>O[i]&&typeof O[i].od==="number"?O[i].od:null);const d=dup();const L=D.filter(x=>x!=null);
-   if(L.length>1&&Math.max(...L)>Math.min(...L)){const hi=Math.max(...L),lo=Math.min(...L);g.forEach((i,j)=>{if(!d[j]||D[j]==null)return;if(D[j]===hi)T[j]+="; cơ may cao hơn cả";else if(D[j]===lo)T[j]+="; cơ may thấp hơn cả"})}}
+  if(dup().some(Boolean)){const D=g.map(i=>O[i]&&typeof O[i].od==="number"?O[i].od:null);for(const C of clus()){const L=C.map(j=>D[j]).filter(x=>x!=null);
+   if(L.length>1&&Math.max(...L)>Math.min(...L)){const hi=Math.max(...L),lo=Math.min(...L);C.forEach(j=>{if(D[j]==null)return;if(D[j]===hi)T[j]+="; cơ may cao hơn cả";else if(D[j]===lo)T[j]+="; cơ may thấp hơn cả"})}}}
   if(T.every((x,j)=>x===raw[g[j]].hint))continue;
   g.forEach((i,j)=>{const t=T[j];if(!t)return;
    const o=O[i],risk=raw[i].risk,l0=lv;o.hint=l=>l===l0?t:(()=>{const c=Object.assign({},o);delete c.hint;delete c.risk;return kitHint(c,m,l).hint})();o.risk=risk;o.__dhA=1;fixed++})}
