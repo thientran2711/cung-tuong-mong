@@ -330,3 +330,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - Lớp sáng cho nhân vật: sếp còn phân vân; chờ tờ so (không phủ / nhẹ / hiện tại). Mặc định tắt.
 - BỎ mọi nút "Thôi" (và Lui/Đóng) khắp game; mỗi bảng đóng được có một nút ✕ góc trên phải.
 - Chữ phải cặp nhau: "Sang buổi" / "Sang ngày mới" (bỏ "Qua ngày").
+- (05:40Z) Đồ tự tay làm: vẽ lại Áo múa tự may cả 4 bậc (áo đứng thẳng thấy trọn từ cổ tới gấu, không gấp, không giá treo); vẽ lại Điệu múa cả 4 bậc thành dáng người múa; vẽ lại Thế cờ tàn Tuyệt phẩm cho khác hẳn Trân phẩm. Thư pháp/khúc phổ/kinh: bỏ chữ Hán. Trong game đồ tự làm dùng khung + nền theo phẩm như trang bị (kitItem).
