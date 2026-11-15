@@ -128,11 +128,15 @@ function j59lay(force){const st=document.getElementById("stage");if(!st||!S)retu
  let tw=it.map(x=>x.tag?x.tag.offsetWidth:0);
  const KA=st.__kfa;/* KIT_FLOOR anchor (jk2b kitFloorFit): feet on the painted floor line while the figure keeps its kit height */
  const size=(rows)=>{const fo0=Math.max(sH*.03,rows*(tagH+3)+6);const foA=KA&&KA.feet?sH-KA.feet:0;
-  const fo=Math.max(fo0,Math.min(foA,sH-topR-KF.h*sH));CAP=sH-fo-topR;return{fo,H:Math.max(sH*.2,Math.min(KF.h*sH,CAP,(KF.maxPx&&innerWidth>=1000)?KF.maxPx:1e9))}};/* maxPx caps wide iPad stages only; Fold / phone room view keeps .79 */
+  const fo=Math.max(fo0,Math.min(foA,sH-topR-KF.h*sH));CAP=sH-fo-topR;return{fo,H:Math.max(sH*.2,Math.min(KF.h*sH,CAP,(KF.maxPx&&capOn)?KF.maxPx:1e9))}};
  /* the plaque column only covers the top of the stage: when it ends above the heads, the people may use the full width under it */
  const headTop=(z)=>sH-z.fo-Math.min(z.H*maxF,sH-z.fo-topR);
  const widthFor=(z)=>{let rr=rightR;try{const kR=document.getElementById("kshR");if(gR&&kR&&!kR.hidden&&kR.offsetHeight&&kR.getBoundingClientRect().bottom-R.top+4<headTop(z))rr=8}catch(e){}return{rr,avail:sW-8-rr-gL}};
+ /* maxPx caps the wide iPad stages (≥ 1000 px). Fold / phones keep the full .79 of their tall room view while she and the next person
+    fit packed; only a stage too narrow for that (Fold cover 412) falls back to the maxPx cap, so the two still stand whole (review 11/15) */
+ let capOn=innerWidth>=1000;
  let crowd=!!force,Z=size(1),Wd=widthFor(Z);
+ if(!capOn&&KF.maxPx&&it.length){const it0=it;it=it.slice(0,me?1:2);const nd=ovNeed(Z.H,Wd.avail);it=it0;if(nd>OVX){capOn=true;Z=size(1);Wd=widthFor(Z)}}
  /* PAGES (owner 11/15): when not everybody fits packed, the stage shows a WINDOW of whole people — as many as fit packed at the kit
     scale (at most MAXN with her) — never a clipped scroll strip; "› N" / "N ‹" in the bottom corners page through the others */
  delete st.dataset.j59pg;
@@ -146,7 +150,7 @@ function j59lay(force){const st=document.getElementById("stage");if(!st||!S)retu
  let ov=it.length?ovNeed(Z.H,Wd.avail):0;let strip=it.length>0&&((it.length+(me?1:0))>MAXN||ov>OVX);
  if(!strip){const ew=(x)=>visW(x,Z.H)*(1-ov);for(let i=1;i<it.length;i++){if((tw[i]+tw[i-1])/2+4>(ew(it[i])+ew(it[i-1]))/2+4+gap)crowd=true}
   if(me&&it.length&&mt&&mt.firstChild&&(mt.firstChild.offsetWidth+tw[0])/2+4>(meU*Z.H+ew(it[0]))/2+gap)crowd=true;
-  if(crowd){const Z2=size(2),W2=widthFor(Z2);const o2=ovNeed(Z2.H,W2.avail);if(o2<=OVX){Z=Z2;Wd=W2;ov=o2}else{crowd=false;strip=true}}}
+  if(crowd){let Z2=size(2),W2=widthFor(Z2);let o2=ovNeed(Z2.H,W2.avail);if(o2>OVX&&!capOn&&KF.maxPx){capOn=true;Z2=size(2);W2=widthFor(Z2);o2=ovNeed(Z2.H,W2.avail);if(o2>OVX){capOn=false;Z2=size(2)}}if(o2<=OVX){Z=Z2;Wd=W2;ov=o2}else{crowd=false;strip=true}}}
  if(strip)ov=0;
  CAP=sH-Z.fo-topR;rightR=Wd.rr;const avail=Wd.avail;let {fo,H}=Z;
  /* strip: equal whole-person slots (figure or name chip, whichever is wider), as many as fit, centred in the open floor */
