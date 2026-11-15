@@ -249,3 +249,4 @@ Worktree thợ ở /home/user/wt/<tên>. Bản tóm tắt luật cho thợ: /hom
 - kit-fig2 r8 ready 196edb362e (kitEventDp for every person event, VIỆC·<cung> place cards, Ân oán sub-tabs, no group pictures, overlay-close fix 35/35) → reviewer spawned.
 - game-feel fixed 5ffbf8b267 (kitLose, slow reveals BAL.reveal, real grades, veils pictures, kit §54) → re-review spawned. Also brings rot.js (rotate on phone portrait).
 - LIVE main = j83-variety (31907911d): 11 kinds × 10 recipes with own pictures + matching minigames, paid tiers worth it (6→1 dominated, the 1 is legit), Thôi via kit ✕.
+- 13:33Z watch: main 31907911d (j83 live). Load 47, disk 11 GB. Started econ-stipend (17:30Z + 17:33Z) and translate-docs (this file and OWNER_DECISIONS will be rewritten in English).
