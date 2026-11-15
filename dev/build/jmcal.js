@@ -122,12 +122,12 @@ function mcExtra(o){const out={};const n=mcNow();const {m,y}=mcMY(o);const add=(
  run(()=>{for(const k of (S.kids||[])){if(!k||!k.alive)continue;if(mcBm(k,"bmo")===m)add(mcBd(k.name||""),"kid",`Sinh nhật ${k.name}`)}});
  run(()=>{if(typeof petcNext!=="function")return;for(const P of (S.pets||[])){if(!P)continue;const nx=petcNext(P);if(!nx)continue;const W=(P.at||0)+nx.age;const T=petT(P);
   const st=BAL.pet.stages[nx.s];const aff=(P.aff||0)<nx.aff?" · cần thêm tình cảm":"";if(W>mcWkNow())atW(W,"pet",`${T.n} đủ ngày thành ${st}${aff}`);else if(o===0&&aff)add(n.t*10+1,"pet",`${T.n} đủ ngày thành ${st}${aff}`)}});
- run(()=>{for(const x of (S.calNotes||[]))if(x&&x.w!=null){const a=mcAt(x.w);if(a.o===o)add(x.d||a.t*10+1,"note",x.txt,{id:x.id})}});
+ run(()=>{for(const x of (S.calNotes||[]))if(x&&x.w!=null){const a=mcAt(x.w);if(a.o===o)add(x.d&&mcTuanOf(x.d)===a.t?x.d:a.t*10+1,"note",x.txt,{id:x.id})}});
  run(()=>{const sr=mcWxSeer();if(!sr)return;const w=mcWxNext();if(w)atW(mcWkNow()+1,"wx",`Thời tiết: ${w[0]} (${sr.name} xem trời)`)});
  run(()=>{const C=window.COOPW;if(!C||!C.on||!C.base||!C.base.P)return;const F=C.base.P[C.seat==="a"?"b":"a"];if(!F||!F.S||F.dead)return;const nm=F.name||F.S.name||"Hảo hữu";
   if(F.S.bmonth!=null&&+F.S.bmonth===m)add(1+mcHash((F.S.name||nm)+"|day")%10,"friend",`Sinh thần ${nm}`);
   if(F.S.preg&&!F.S.pregUnk&&!F.S.hidden&&10-F.S.preg===o)add(1,"friend",`${nm} lâm bồn (dự tính)`);
-  for(const x of (F.S.calNotes||[]))if(x&&x.share&&x.w!=null){const a=mcAt(x.w);if(a.o===o)add(x.d||a.t*10+1,"friend",`${nm}: ${x.txt}`)}});
+  for(const x of (F.S.calNotes||[]))if(x&&x.share&&x.w!=null){const a=mcAt(x.w);if(a.o===o)add(x.d&&mcTuanOf(x.d)===a.t?x.d:a.t*10+1,"friend",`${nm}: ${x.txt}`)}});
  run(()=>{if(typeof cycleDaysOf!=="function")return;const L=cycleDaysOf(S,m);(Array.isArray(L)?L:[]).forEach(d=>{if(+d>=1&&+d<=30)add(+d,"cy","Nguyệt tín")})});
  for(const d in out)out[d].sort((a,b)=>MCX.ord.indexOf(a.k)-MCX.ord.indexOf(b.k));
  return out}
@@ -198,7 +198,7 @@ document.addEventListener("click",e=>{const T=e.target.closest&&e.target;if(!T)r
  const pre=T.closest("[data-kmcpre]");if(pre&&c){e.preventDefault();const i=c.querySelector("#kmc-note");if(i){i.value=pre.dataset.kmcpre;i.focus()}return}
  const sv=T.closest("[data-kmcsave]");if(sv&&c){e.preventDefault();const i=c.querySelector("#kmc-note");const d=+sv.dataset.kmcsave,o=+sv.dataset.kmco;if(i&&mcNoteAdd(o,d,i.value)){const sh=c.querySelector("#kmc-share");if(sh&&sh.checked){const x=S.calNotes[S.calNotes.length-1];if(x)x.share=1}try{if(typeof save==="function")save()}catch(x){}mcRedraw(c,o,d)}return}
  const dl=T.closest("[data-kmcdel]");if(dl&&c){e.preventDefault();e.stopPropagation();mcNoteDel(dl.dataset.kmcdel);const b=c.querySelector(".kmc-day");try{if(typeof save==="function")save()}catch(x){}mcRedraw(c,+c.dataset.kmc,b?+b.dataset.kmcday:0);return}
- const dd=T.closest(".kmc-d[data-kmcd]");if(dd&&c){e.stopPropagation();e.preventDefault();const o=+dd.dataset.kmco||0,d=+dd.dataset.kmcd;const nc=mcRedraw(c,o,d);
+ const dd=T.closest(".kmc-d[data-kmcd]");if(dd&&c){e.stopPropagation();e.preventDefault();const o=+dd.dataset.kmco||0,d=+dd.dataset.kmcd;const nc=mcRedraw(c,o,d,!dd.dataset.kmcf);
   if(dd.dataset.kmcf&&typeof kpPop==="function"){const h=mcPopHTML(dd.dataset.kmcf,o);const a=nc.querySelector(`.kmc-d[data-kmcd="${d}"]`);if(h&&a)kpPop(a,h)}return}
  const f=T.closest("[data-kmcf]");if(f&&typeof kpPop==="function"){e.stopPropagation();e.preventDefault();const h=mcPopHTML(f.dataset.kmcf,+f.dataset.kmco||0);if(h)kpPop(f,h)}});
 document.addEventListener("keydown",e=>{if(e.key!=="Enter"&&e.key!==" ")return;const f=e.target.closest&&e.target.closest(".kmc-lk[data-kmcf]");if(f){e.preventDefault();f.click()}

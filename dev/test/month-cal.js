@@ -72,7 +72,7 @@ const LIVE='https://thientran2711.'+'github.io/cung-tuong-mong/';const html=fs.r
    if(!/kmc-share/.test(kitMonthCal({o:0,sel:mcNow().t*10+1})))f.push('co-op: no share switch');window.COOPW=cw0;
    kitModalClose&&kitModalClose();Q.length=0;M.hidden=true;
    /* forecast + reminders across two real tuần */
-   S.staff=S.staff||[];if(!S.staff.length)f.push('no servant to read the sky');else S.staff[0].age=52;
+   S.staff=S.staff||[];if(!S.staff.length)S.staff.push({sid:9901,name:'Lão Thử',role:'eunuch',fc:0,fk:0,face:0,hue:0,age:52,tr:'trung',loyal:60,spyFor:null,lover:null,af:{},kn:1,imp:'',org:''});else S.staff[0].age=52;
    S.calNotes=[{id:99,w:wk()+2,d:1,txt:'Hẹn hai tuần'}];const fc=mcWxNext();if(!fc)f.push('no forecast');
    const seen=[];for(let i=0;i<2;i++){Q.length=0;M.hidden=true;S.mg=0;const before=wk();try{endTurn()}catch(e){f.push('endTurn '+e.message)}
     if(i===0&&fc&&S.wx&&(S.wx.b||S.wx.n)!==fc[0])f.push(`forecast ${fc[0]} but ${S.wx.b||S.wx.n}`);
