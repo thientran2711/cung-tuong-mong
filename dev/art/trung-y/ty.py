@@ -5,6 +5,8 @@
   python3 ty.py proc                      # every line of bg.txt "role id g gen bg" not yet done -> out/fig+por, recs.json
   python3 ty.py sheet OUT.jpg [role-id...]# contact sheet of finished cut-outs (on dark + light), per identity rows G1..G4
   python3 ty.py manifest                  # out/FIGURES-ty.json from recs.json
+  python3 ty.py complete ROLE-ID...       # which of these have all 8x4 fig+por in out/
+  python3 ty.py publish ROLE-ID...        # copy them to img/ + rebuild img/FIGURES-ty.json (keeps old records)
 Files: img/fig-<role>-<id>-ty<g>-<age>.webp (900 px high) + img/por-<role>-<id>-ty<g>-<age>.webp (384x506, porcrop.py).
 """
 import sys, os, re, json, glob, subprocess, io
@@ -137,6 +139,28 @@ def manifest():
     R = recs(True); L = sorted(R.values(), key=lambda r: (r["role"] != "consort", r["identity"], r["ty"], r["ageBand"]))
     json.dump(L, open(OUT + "/FIGURES-ty.json", "w"), ensure_ascii=False, indent=0); print(len(L))
 
+def complete(ids):
+    """role-id whose 8 tiers x 4 ages fig+por are all in out/"""
+    ok = []
+    for x in ids:
+        role, ident = x.split("-")
+        if all(os.path.exists(f"{OUT}/{k}-{role}-{ident}-ty{g}-{ag}.webp") for g in range(1, 9) for ag in AG for k in ("fig", "por")): ok.append(x)
+    return ok
+
+def publish(ids):
+    """copy out/ fig+por of finished role-ids into img/ and rebuild img/FIGURES-ty.json (old records + recs, only files present in img/)"""
+    import shutil
+    for x in ids:
+        role, ident = x.split("-")
+        for g in range(1, 9):
+            for ag in AG:
+                for k in ("fig", "por"): shutil.copy2(f"{OUT}/{k}-{role}-{ident}-ty{g}-{ag}.webp", f"{REPO}/img/")
+    mp = REPO + "/img/FIGURES-ty.json"; R = {r["file"]: r for r in (json.load(open(mp)) if os.path.exists(mp) else [])}
+    R.update(recs(True))
+    L = sorted((r for r in R.values() if os.path.exists(REPO + "/" + r["file"]) and os.path.exists(REPO + "/" + r["por"])),
+               key=lambda r: (r["role"] != "consort", r["identity"], r["ty"], r["ageBand"]))
+    json.dump(L, open(mp, "w"), ensure_ascii=False, indent=0); print("FIGURES-ty.json", len(L))
+
 def refs():
     """reference sheets from the CURRENT CDN t1 figures (huadian shrink + mole fixes live only there): ref/<role>-<id>.png 2048x1024"""
     os.makedirs(W + "/ref", exist_ok=True); os.makedirs(W + "/cdn", exist_ok=True)
@@ -165,3 +189,5 @@ if __name__ == "__main__":
     elif c == "sheet": sheet(sys.argv[2], set(sys.argv[3:]))
     elif c == "manifest": manifest()
     elif c == "refs": refs()
+    elif c == "complete": print(" ".join(complete(sys.argv[2:])))
+    elif c == "publish": publish(sys.argv[2:])

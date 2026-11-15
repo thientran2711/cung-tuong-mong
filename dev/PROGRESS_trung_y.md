@@ -44,3 +44,40 @@ Tên tệp: img/fig-<role>-<id>-ty<1..8>-<a18|a26|a36|a51>.webp, img/por-…; b�
 - Lệnh đẩy (điều phối chạy, sau kiểm): `python3 dev/site/cdn_sync.py img/fig-*-ty*.webp img/por-*-ty*.webp img/FIGURES-ty.json`.
 - Test Playwright (dev/test/trung-y.js) 755x1000@2 + 1180x820@2: ô trống → ty1/ty4/ty8 đúng bậc ở sân khấu, hộp thoại (ty2), chân dung;
   thẻ ra ngoài "Mất: Danh -5"; tai tiếng trước Hoàng thượng; cướp áo chạy; điềm báo; Nội vụ phủ cấp lại; NPC Danh + tin đồn; sổ cũ (main) nạp; 0 lỗi trang, 0 tràn ngang.
+
+
+## BÀN GIAO 15/11 ~09:35Z (phiên tiếp tục từ git)
+- VẼ: XONG cả 84 mặt (bg.txt 672 dòng = 84×8; m20–m52 vẽ 15/11 08:57–09:17Z, Space a33ac200-206b-4037-b4a6-8ef22bff296b,
+  6 nút ref A..F = 3b202139 d189d91f ab326c81 61b823bd b4cb2f82 f4110233; nút lỗi "credits service" chạy lại `singular`). KHÔNG còn mặt nào chưa vẽ.
+- TRONG img/ + FIGURES-ty.json (384 bản ghi): CHỈ c01–c12.
+- Mẻ 2 c13 c15 c16 c18 c19: đã tách nền + alpha-holes --fix (trong .tywork/out), tờ dev/art/trung-y/batch2-c13-c19.jpg, CHƯA publish vì đáng ngờ:
+  alpha-holes báo 238/320 tệp có lỗ trên da (đã sửa), cutcheck sau sửa vẫn cao ở por-* (ghost 6–9k, điểm 24–39, vd por-consort-c19-ty1-a51, por-consort-c16-ty2-a51).
+  Việc đầu tiên: soi tờ + vài por phóng to; so với c01–c12 (cùng quy trình?) — nếu là áo trắng/nhạt bị rembg để bán trong suốt thì sửa ở ty.py (vd ngưỡng alpha) rồi cắt lại trước khi chạy phần còn lại.
+- ĐÃ TÁCH NỀN Ở MÁY nhưng chưa sửa lỗ / chưa vào img/: c20 c21 (trong .tywork/out, mất nếu .tywork bị xóa — khi đó cắt lại từ zip).
+- CHƯA TÁCH NỀN (đã vẽ): c14 c17 c22–c32, m01–m52. Zip (chỉ zip đã tải: b2 b3 b4 đã giải nén một phần vào .tywork/zip; png trong zip/ bị xóa sau khi cắt):
+  HẠN: b2–b8 ~08:00–08:53Z 16/11, b9–b14 ~09:02–09:19Z 16/11. Quá hạn → `projects_download_zip` lại từ id trong bg.txt (48 id/mẻ, format png).
+  Mẻ zip → mặt: b2–b8 = c13–c32 + m01–m19 (theo thứ tự bg.txt), b9 m20–25, b10 m26–31, b11 m32–37, b12 m38–43, b13 m44–49, b14 m50–52.
+```
+b2 https://pikaso.cdnpk.net/tmp/bulk-downloads/a33ad1b1-034a-4154-8bb6-b9dfb6ff5a97/ty-b2.zip?token=exp=1794816734~hmac=753e6b4ce71be60cb7d8241dbfe076e1db903f9e02425ecd675b92c8c36fe7d9
+b3 https://pikaso.cdnpk.net/tmp/bulk-downloads/a33ad5c9-e015-4cec-8d9b-490866d4c7e8/ty-b3.zip?token=exp=1794817401~hmac=96e1056c48b8c543430e8a240202a95b057e818d45a21ecf2c1a8b700b64b576
+b4 https://pikaso.cdnpk.net/tmp/bulk-downloads/a33ad851-7a54-4477-9d57-f894962ae6fd/ty-b4.zip?token=exp=1794817850~hmac=f12282166a648ea6f69e27f95637b8691786ec246f7d037207db84eb61cd3eaf
+b5 https://pikaso.cdnpk.net/tmp/bulk-downloads/a33adabc-1200-432c-b56e-e22188255714/ty-b5.zip?token=exp=1794818262~hmac=10b18570afffb0d64517a746af182560a74c0270fcffb47e31ec95b2bbce1391
+b6 https://pikaso.cdnpk.net/tmp/bulk-downloads/a33adc6a-7d09-4a81-af44-ba4fbf26d9f4/ty-b6.zip?token=exp=1794818540~hmac=d9aa8af20e8b2a6508852e6e466f21c0c16d171667fb2a101ee7284217bf147f
+b7 https://pikaso.cdnpk.net/tmp/bulk-downloads/a33ade1d-d1b8-4973-a2ca-4d3967f03252/ty-b7.zip?token=exp=1794818815~hmac=08b49cf6f66e0ee1e916b6aa4b945bf7019a0b16690000a82d8143f536f16a86
+b8 https://pikaso.cdnpk.net/tmp/bulk-downloads/a33ae047-41cd-443c-b41d-7c80d7d8382f/ty-b8.zip?token=exp=1794819188~hmac=1ba407d64ae8e8fdd938c5c47753f60f5a61af0272dac07e06d85cf24dfc3849
+b9 https://pikaso.cdnpk.net/tmp/bulk-downloads/a33ae389-44b8-4299-b800-0ce9268ce03e/ty-b9.zip?token=exp=1794819730~hmac=cee534064c97e8ea4fd2eef9f543a791069ac910c157aeeebbacf229d122633b
+b10 https://pikaso.cdnpk.net/tmp/bulk-downloads/a33ae4a2-d7a7-43be-9ff2-6f338606740f/ty-b10.zip?token=exp=1794819931~hmac=8787f9ac3b3e01d68753c3584a10f1a833f2716870a645e69ce1fcfb9320c6f5
+b11 https://pikaso.cdnpk.net/tmp/bulk-downloads/a33ae62e-0b5c-43fb-9613-8f965277f2c8/ty-b11.zip?token=exp=1794820180~hmac=39e70f089e3058cfeda0c4f729a600620588d4b5293b4cfaf46ac964a415d386
+b12 https://pikaso.cdnpk.net/tmp/bulk-downloads/a33ae746-93ff-4c5d-b5bb-ed2ce2edec25/ty-b12.zip?token=exp=1794820360~hmac=aa7afd3e7be989660f2285780089b384ee5faf0de86c3b97f8d79ebbb5430ba5
+b13 https://pikaso.cdnpk.net/tmp/bulk-downloads/a33ae8d1-83a4-4c36-9045-5e00d4ce8882/ty-b13.zip?token=exp=1794820625~hmac=031f9793f03d45d987b8053bb61eb6897f2b5f70df661dda4fb482dd7c32e6bc
+b14 https://pikaso.cdnpk.net/tmp/bulk-downloads/a33ae9db-7f34-428b-84b0-fbf5efa0bbdf/ty-b14.zip?token=exp=1794820731~hmac=c7048a303924a636e8981849995a3d0e6b81fb1b04e06afbfac29d0c356dd6a7
+```
+- Cách tiếp tục:
+  1. `cd <worktree>; mkdir -p .tywork; ` chép khối zip ở trên vào `.tywork/zips.txt`; nếu .tywork mất: `git show origin/review/scene-light:dev/art/alpha-holes.py > .tywork/alpha-holes.py`;
+     `pip install "rembg[cpu]==2.0.67"` nếu thiếu. Nếu .tywork/fetched.txt còn thì b2–b4 đã giải nén (xóa dòng khỏi fetched.txt nếu zip/ trống mà mặt chưa cắt).
+  2. `ps aux | grep run_bg` (đừng chạy hai bản), rồi `bash dev/art/trung-y/run_bg.sh` (1 fetcher + 2 worker; ~2.4 tờ/phút khi máy bận; ~4 h cho phần còn lại).
+  3. Mỗi khi vài mặt xong: `python3 dev/art/trung-y/ty.py complete <role-id...>` → mặt đủ 8×4;
+     `python3 .tywork/alpha-holes.py --fix .tywork/out <fig+por của các mặt đó>`; `python3 dev/figwork/cutcheck.py <các tệp>` (≥3 thì soi bằng mắt, cắt lại nếu tệ);
+     `TYW=.tywork python3 dev/art/trung-y/ty.py sheet dev/art/trung-y/batchN-....jpg <role-id...>` rồi XEM tờ (hoa điền nhỏ, không nốt ruồi, không chữ Hán, tay);
+     `python3 dev/art/trung-y/ty.py publish <role-id...>` (chép vào img/ + dựng lại img/FIGURES-ty.json, giữ bản ghi cũ); commit tờ + code, push review/trung-y.
+  4. Đủ 84 mặt (672×4 fig + por) → báo SẴN SÀNG KIỂM; lệnh đẩy (điều phối chạy): `python3 dev/site/cdn_sync.py img/fig-*-ty*.webp img/por-*-ty*.webp img/FIGURES-ty.json`.
