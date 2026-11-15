@@ -44,8 +44,23 @@ const KCL_FREEZE=["boxSizing","display","width","height","minWidth","minHeight",
  "paddingTop","paddingRight","paddingBottom","paddingLeft","marginTop","marginRight","marginBottom","marginLeft","fontSize","lineHeight","fontWeight","fontFamily","letterSpacing",
  "textAlign","whiteSpace","color","backgroundColor","backgroundImage","borderTopWidth","borderRightWidth","borderBottomWidth","borderLeftWidth","borderTopStyle","borderRightStyle",
  "borderBottomStyle","borderLeftStyle","borderTopColor","borderRightColor","borderBottomColor","borderLeftColor","borderRadius","boxShadow","opacity","overflowX","overflowY","position","top","left","right","bottom","zIndex"];
-function kclPrep(src,keepId){if(!(src&&src.nodeType===1))return null;const m=src.cloneNode(true),A=[src,...src.querySelectorAll("*")],B=[m,...m.querySelectorAll("*")],sc=[],lk=[];
+/* NO FLASH (owner 11/15 15:45Z: turning the Sổ tuần page made the figure and the right column blink): a picture that is shown again —
+   on a turning sheet's copy, on a page that was hidden, on a page the game has just re-rendered — must never paint one empty frame
+   while it decodes. kitImgSync(root) marks every <img> decoding="sync" + eager (the browser paints it decoded, from its cache) and
+   returns a promise that resolves once all of them are decoded; callers start a turn after it (capped) and pre-decode the next pages.
+   Copies too (review r6: under load a turning sheet's copy of a portrait was still loading while the live page had it decoded):
+   kclPrep gives each copied <img> the live one's resolved source (currentSrc: the same decoded bitmap from the memory cache, no
+   second srcset pick) and decodes the copy; kitImgPending(root) tells whether any picture of a copy is not ready yet, and the turns
+   (kitSheetTurn.ready / .pending, j87 kitBook, kitCurlSwap) keep a copy hidden — the live page shown — until it is decoded (capped). */
+function kitImgPending(root){try{return !!root&&[...(root.tagName==="IMG"?[root]:root.querySelectorAll("img"))].some(im=>im.getAttribute("src")&&(!im.complete||!im.naturalWidth))}catch(e){return false}}
+window.kitImgPending=kitImgPending;
+function kitImgSync(root,ms){try{if(!root)return Promise.resolve();const L=root.tagName==="IMG"?[root]:[...root.querySelectorAll("img")];
+ for(const im of L){if(im.getAttribute("decoding")!=="sync")im.setAttribute("decoding","sync");if(im.loading==="lazy")im.loading="eager"}
+ const P=Promise.all(L.map(im=>im.decode?im.decode().catch(()=>0):0));return ms?Promise.race([P,new Promise(r=>setTimeout(r,ms))]):P}catch(e){return Promise.resolve()}}
+window.kitImgSync=kitImgSync;
+function kclPrep(src,keepId){if(!(src&&src.nodeType===1))return null;kitImgSync(src)/* the copies inherit eager + sync */;const m=src.cloneNode(true),A=[src,...src.querySelectorAll("*")],B=[m,...m.querySelectorAll("*")],sc=[],lk=[];
   for(let i=0;i<A.length;i++){const a=A[i],b=B[i];if(!b)break;if(keepId&&i===0&&b.id)b.dataset.kclid=b.id;b.removeAttribute("id");
+   if(a.tagName==="IMG"&&a.complete&&a.naturalWidth&&a.currentSrc&&b.getAttribute("src")!==a.currentSrc){b.removeAttribute("srcset");b.removeAttribute("sizes");b.src=a.currentSrc}
    if(i&&b.nodeType===1&&b.style&&a.getClientRects().length){const c0=getComputedStyle(a);for(const k of KCL_FREEZE){const v=c0[k];if(v)b.style[k]=v}}
    else if(i&&b.style&&getComputedStyle(a).display==="none")b.style.display="none";
    if(a.scrollTop||a.scrollLeft)sc.push([b,a.scrollTop,a.scrollLeft]);
@@ -57,7 +72,7 @@ function kclPrep(src,keepId){if(!(src&&src.nodeType===1))return null;const m=src
   /* the copy leaves its parent, so rules like ".game>#panel" stop matching: carry the root's own box layout inline */
   const cs=getComputedStyle(src);for(const k of["display","flexDirection","flexWrap","alignItems","alignContent","justifyContent","gap","gridTemplateRows","gridTemplateColumns","gridAutoRows","paddingTop","paddingRight","paddingBottom","paddingLeft","boxSizing","overflowX","overflowY","backgroundColor","backgroundImage","borderTopWidth","borderRightWidth","borderBottomWidth","borderLeftWidth","borderTopStyle","borderRightStyle","borderBottomStyle","borderLeftStyle","borderTopColor","borderRightColor","borderBottomColor","borderLeftColor","borderRadius","fontSize"])try{m.style[k]=cs[k]}catch(e){}
   if(m.style.display==="none"||m.style.display==="contents")m.style.display="block";
-  m.setAttribute("aria-hidden","true");m.inert=true;return{m,sc,lk}}
+  m.setAttribute("aria-hidden","true");m.inert=true;kitImgSync(m);return{m,sc,lk}}
 function kitCurlFold(o){o=o||{};const host=o.host,w=Math.max(40,o.w|0),h=Math.max(40,o.h|0);
  const mir=!!o.mirror,BIG=Math.ceil(Math.hypot(w,h)*2)+40,lift=o.lift!=null?o.lift*h:Math.min(h*.42,w*.8);
  const root=document.createElement("div");root.className="kcl"+(o.cls?" "+o.cls:"");
@@ -169,7 +184,9 @@ function kitSheetTurn(o){o=o||{};const host=o.host,w=Math.max(40,o.w|0),h=Math.m
   gL.style.width=Math.max(24,-c*w+24).toFixed(1)+"px";gL.style.opacity=!o.shadeL||c>=0?"0":(0.85*s).toFixed(3);
   }
  set(o.p||0);
- return {el:root,set,rescroll,setBack(src){put(B,src);rescroll();set(last)},setFront(src){put(F,src);rescroll();set(last)},destroy(){root.remove()},sheet:1}}
+ return {el:root,set,rescroll,setBack(src){put(B,src);rescroll();set(last)},setFront(src){put(F,src);rescroll();set(last)},destroy(){root.remove()},sheet:1,
+  /* the copies' pictures: pending() = one is not decoded yet; ready(ms) resolves once all are (capped at ms) */
+  pending(){return kitImgPending(root)},ready(ms){return kitImgSync(root,ms)}}}
 
 /* kitCurl = the kit's page turn for every book (week book j87, kitBookSpread): since the owner's 11/15 10:00Z rule it is the WHOLE-SHEET
    turn (kitSheetTurn); the corner-fold engine stays as kitCurlFold (not used for page turns any more). Same call shape:
@@ -197,7 +214,7 @@ function kitCurlSwap(el,fn,opt){opt=opt||{};const run=()=>{try{fn&&fn()}catch(e)
     gone there — it never lies over the picture page (iPad) or off the screen (phone) and never fades (owner 11/15 02:40Z). */
  let c=null;try{c=fwd?kitSheetTurn({host,front:el,back:null,w:r0.width,h:r0.height,ctx:el.closest(".game"),vanish:true,p:0})
                     :kitSheetTurn({host,front:null,back:el,under:el,w:r0.width,h:r0.height,ctx:el.closest(".game"),vanish:true,p:1})}catch(e){console.error(e)}
- run();
+ run();try{kitImgSync(el)}catch(e){}
  const r1=el.getBoundingClientRect();
  /* the page row may differ a little per tab (iPad 1366: the panel box moves a few px): still a page turn; only another layout
     (map, panel hidden, a big change of box) skips it */
@@ -212,10 +229,14 @@ function kitCurlSwap(el,fn,opt){opt=opt||{};const run=()=>{try{fn&&fn()}catch(e)
  const sig=()=>{const q=el.querySelector(".pc,.pgwrap,.kbl,section,div");return el.scrollHeight+"|"+el.scrollTop+"|"+(q?q.getBoundingClientRect().top+":"+q.offsetHeight:"")};
  let s0=sig();const iv=setInterval(()=>{if(!alive){clearInterval(iv);return}const s1=sig();if(s1!==s0){s0=s1;reback()}},70);setTimeout(reback,90);
  const fin=()=>{alive=false;clearInterval(iv);host.remove();if(kclLive===end)kclLive=null};
- const stop=kitCurlRun(c,fwd?0:1,fwd?1:0,opt.ms||KIT_TURN_MS,fin,kitTurnEase);
+ let stop=kitCurlRun(c,fwd?0:1,fwd?1:0,opt.ms||KIT_TURN_MS,fin,kitTurnEase);
+ /* a copied picture not decoded yet (heavy load): the sheet stays hidden (the live page shows), then turns from the start once the
+    copy is decoded; still not ready after 350 ms → no turn at all (never a blank frame on the sheet) */
+ if(c.pending&&c.pending()){host.style.visibility="hidden";stop();c.set(fwd?0:1);
+  c.ready(350).then(()=>{if(!alive)return;if(c.pending()){end();return}host.style.visibility="";stop=kitCurlRun(c,fwd?0:1,fwd?1:0,opt.ms||KIT_TURN_MS,fin,kitTurnEase);kitCurlSwap.t0=stop.t0})}
  const end=()=>{stop();fin()};kclLive=end;
  /* test hook: hold the running turn at p (kitCurlSwap.hold(.45)) */
- kitCurlSwap.t0=stop.t0;kitCurlSwap.hold=p=>{stop();c.set(p)};kitCurlSwap.end=end;return true}
+ kitCurlSwap.t0=stop.t0;kitCurlSwap.hold=p=>{stop();c.set(p);host.style.visibility=""};kitCurlSwap.end=end;return true}
 
 /* ---------- kitLeather: the unrolled leather map (Dư đồ) — NOT a book page (owner 11/15 04:00Z) ----------
    kitLeather(el) adds the hide surface around el's map painting: tanned leather with grain and burnt edges, an uneven hide outline,
@@ -294,7 +315,7 @@ function kitBookSpread(host,spec){spec=spec||{};const root=document.createElemen
      cap  : small caption plaque under the plate (place / name, illustration caption only). slots: try-on slots beside the figure. */
 kitBookSpread.wantsPic=host=>{const W=(host&&host.clientWidth)||innerWidth,H=(host&&host.clientHeight)||innerHeight;return W>=900&&W/H>=1.15};
 function kitBookPic(o){o=o||{};const ax=o.ax!=null?o.ax:.5,feet=o.feet!=null?o.feet:.94;
- const figs=(o.figs||[]).map((f,i)=>`<img class="kbp-fig${f.dim?" dim":""}" src="${f.src}" alt="" decoding="async" style="--fx:${f.x!=null?f.x:.5};--fh:${f.h||(window.KIT_FIG?KIT_FIG.h:.86)};--fz:${f.z||i+2}">`).join("");
+ const figs=(o.figs||[]).map((f,i)=>`<img class="kbp-fig${f.dim?" dim":""}" src="${f.src}" alt="" decoding="sync" style="--fx:${f.x!=null?f.x:.5};--fh:${f.h||(window.KIT_FIG?KIT_FIG.h:.86)};--fz:${f.z||i+2}">`).join("");
  const slots=o.slots&&o.slots.length?`<div class="kbp-slots">${o.slots.map(s=>`<div class="kbp-slot${s.img?"":" empty"}"><span class="kbp-sim">${s.img?`<img src="${s.img}" alt="">`:""}</span><b>${s.label}</b>${s.n?`<small>${s.n}</small>`:""}</div>`).join("")}</div>`:"";
  return `<div class="kbp${o.plate===false?" bleed":""}" style="--ax:${ax};--feet:${feet}"><div class="kbp-plate"><div class="kbp-scene" style="background-image:url('${o.scene||""}')"></div><div class="kbp-figs">${figs}</div>${slots}</div>${o.cap?`<div class="kbp-cap">${o.cap}</div>`:""}</div>`}
 
