@@ -33,3 +33,5 @@ redo: tranh-ghe-xong them-cung-nu (forward bow)
 noi-vu-thay-la Chinese chars on plaque
 noi-vu-chua-co-nguoi maid back-turned
 chu-nho-on maid open-mouth smile
+xac-lao-vuong Qing-style hats on guards -> Ming helmets
+giu-kin-co-thai visibly pregnant contradicts hiding
