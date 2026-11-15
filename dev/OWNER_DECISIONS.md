@@ -627,3 +627,9 @@ BALANCE / SYSTEMS:
 3. Pregnancy: already found by the thái y 3–6 weeks after conception (j75) — keep; a requested pulse check may find it earlier (from ~1 month), or symptoms (nausea) hint at it.
 4. A bribed thái y (S.court.ty.af bribes exist) may lie or secretly leak news; a trusted thái y avoids this.
 All must work in co-op.
+
+## 15/11 ~20:25Z — Monthly cycle (kỳ nguyệt sự) (owner)
+- Every woman in the palace (her, consorts, maids who can be summoned) has her own monthly cycle. During it her card is taken off the flip (lật thẻ bài): however favoured, she cannot be summoned those days.
+- The cycle record is kept by a palace office (Kính sự phòng eunuchs keep the book; a mama/thái giám of each palace reports dates). Whoever can read the book knows everyone's dates.
+- Uses: proves which night a bedding was on and whether a child is the Emperor's (ties into j22 pregMismatch / Kính sự phòng ledger bribe), exposes liaisons (tư thông), and hints pregnancy (a woman who stops reporting her cycle). Bribing / reading / forging the book becomes possible (with risk).
+- Show her own cycle on the calendar; co-op too.
