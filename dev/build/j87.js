@@ -28,12 +28,12 @@ function kbkSfx(){try{if(typeof auOk!=="function"||!auOk())return;const C=window
 
 /* one block → HTML. string | {h} | {facts} | {rows} | {chips} | {html} ; facts expand into one block per fact so pages can split */
 function kbkExpand(blocks,skip){const out=[];for(const b of (blocks||[])){if(!b)continue;if(typeof b==="string"){out.push({html:b});continue}
-  if(b.h){out.push({html:`<h4 class="kpst kbk-h">${b.h}</h4>`,head:true});continue}
+  if(b.h){out.push({html:`<h4 class="kpst kbk-h">${b.h}</h4>`,head:true,sec:b.sec||null});continue}
   if(b.facts){const prev=window.__kpSkip;window.__kpSkip=skip||prev;try{for(const f of b.facts){const h=kitFacts([f],{group:false});
-    out.push({html:f&&f.art?`<div class="kbk-ev">${h}<img class="kbk-evart" src="${f.art}" alt="${f.artT||""}" title="${f.artT||""}" decoding="async" onerror="this.remove()"></div>`:h})}}finally{window.__kpSkip=prev}continue}
+    out.push({html:f&&f.art?`<div class="kbk-ev">${h}<img class="kbk-evart" src="${f.art}" alt="${f.artT||""}" title="${f.artT||""}" decoding="sync" onerror="this.remove()"></div>`:h})}}finally{window.__kpSkip=prev}continue}
   if(b.rows){out.push({html:kitRows(b.rows)});continue}
   if(b.chips){out.push({html:b.chips.length?kitChips(b.chips):`<span class="kchips"><span class="kchip n">${b.none||"Không đổi gì"}</span></span>`});continue}
-  if(b.html)out.push({html:b.html,head:!!b.head})}
+  if(b.html)out.push({html:b.html,head:!!b.head,sec:b.sec||null})}
  return out}
 
 function kitBook(spec){spec=spec||{};const rm=()=>{try{return reducedMotion()}catch(e){return false}};
@@ -42,7 +42,7 @@ function kitBook(spec){spec=spec||{};const rm=()=>{try{return reducedMotion()}ca
  root.innerHTML=`<div class="kbk-stage"><div class="kbk-book"></div></div><div class="kbk-bar"><button class="kbk-nav kbk-prev" aria-label="Trang trước">‹</button><span class="kbk-no" aria-live="polite"></span><button class="kbk-nav kbk-next" aria-label="Trang sau">›</button></div><button type="button" class="kit-x kbk-x" aria-label="${spec.closeLabel||"Đóng"}" title="${spec.closeLabel||"Đóng"}">✕</button><div class="kbk-measure" aria-hidden="true"></div>`;
  (spec.host||document.body).appendChild(root);
  const book=root.querySelector(".kbk-book"),stage=root.querySelector(".kbk-stage"),meas=root.querySelector(".kbk-measure"),noEl=root.querySelector(".kbk-no");
- let mode="single",PW=0,PH=0,leaves=[],sheets=[],cur=0,maxCur=0,busy=false,closed=false,logical=0,logicalB=null;
+ let mode="single",PW=0,PH=0,leaves=[],sheets=[],cur=0,maxCur=0,busy=false,closed=false,logical=0,logicalB=null,lastKey="";
 
  /* ---- page shells ---- */
  const head=spec.head||"";
@@ -53,23 +53,28 @@ function kitBook(spec){spec=spec||{};const rm=()=>{try{return reducedMotion()}ca
  const textTop=(p,cont)=>`<div class="kbk-th"><h3 class="kbk-t">${p.title||""}${cont?` <small class="kbk-cont">tiếp theo</small>`:""}</h3>${p.sub&&!cont?`<small class="kbk-ts">${p.sub}</small>`:""}</div>`;
  /* KIT §27 person pages (owner 11/15 04:30Z + 04:35Z): EVERY page about a person — continuation pages too — is the same page: the full-body
     figure fills the page body on the left (same scale on every page), the text column on the right; "(tiếp theo)" on the title, no small portrait */
- const personTop=(p,cont)=>cont?`<div class="kbk-pname">${kitName(p.who,{cap:true,named:p.who===S})} <small class="kbk-cont">(tiếp theo)</small></div>`
-   :`<div class="kbk-pname">${kitName(p.who,{cap:true,named:p.who===S})}${p.sub?`<small class="kbk-ts">${p.sub}</small>`:""}</div>${p.chips&&p.chips.length?`<div class="kbk-pchips">${kitChips(p.chips)}</div>`:""}${p.rows&&p.rows.length&&PW>=440?kitRows(p.rows):""}`;
- const personBody=(p,cont)=>{const fig=typeof kitStageFig==="function"&&kitStageFig(p.who,{cap:false})||"";const kfr=(/--kfr:([\d.]+)/.exec(fig)||[])[1]||"1";
-  return `<div class="kbk-person${fig?" kbk-full":""}" style="--kfr:${kfr}${typeof kitBookFigCol==="function"?kitBookFigCol(fig,PW,PH):""}"><div class="kbk-por">${fig||pframe(kitFace(p.who))}</div><div class="kbk-phead">${personTop(p,!!cont)}</div><div class="kbk-flow"></div></div>`};
+ const personTop=(p,cont)=>p.kind!=="person"?textTop(p,cont):cont?`<div class="kbk-pname">${kitName(p.who,{cap:true,named:p.who===S})} <small class="kbk-cont">(tiếp theo)</small></div>`
+   :`<div class="kbk-pname">${kitName(p.who,{cap:true,named:p.who===S})}${p.sub?`<small class="kbk-ts">${p.sub}</small>`:""}</div>${p.rel&&p.rel.length&&PW>=440?kitRelTable(p.rel):""}`;
+ const personBody=(p,cont)=>{const fw=p.kind==="person"?p.who:p.fig;let fig=typeof kitStageFig==="function"&&fw&&kitStageFig(fw,{cap:false})||"";
+  /* owner 17:45Z: every page has its subject's full-length figure; no painting (yet) or the figure list still loading → the kit silhouette */
+  if(!fig&&fw&&typeof kitStageFig==="function"){let sx="f";try{const r=personRoleRank(fw);sx=r.kid?"k":r.sex==="m"?"m":"f"}catch(e){}fig=kitStageFig(fw,{cap:false,src:(typeof KIT_DIR==="string"?KIT_DIR:"img/kit/")+`unknown-fig-${sx}.webp`})||""}const kfr=(/--kfr:([\d.]+)/.exec(fig)||[])[1]||"1";
+  return `<div class="kbk-person${fig?" kbk-full":""}" style="--kfr:${kfr}${typeof kitBookFigCol==="function"?kitBookFigCol(fig,PW,PH):""}"><div class="kbk-por">${fig||(fw?pframe(kitFace(fw)):"")}</div><div class="kbk-phead">${personTop(p,!!cont)}</div><div class="kbk-flow"></div></div>`};
 
  /* ---- pagination: fill each page until it overflows, continue on the next ---- */
  function paginate(){const L=[];meas.style.width=PW+"px";meas.style.height=PH+"px";
   for(const p of (spec.pages||[])){
    if(p.kind==="cover"){L.push({cls:"k-cover",html:coverH(p),kind:"cover"});continue}
    if(p.kind==="end"){L.push({cls:"k-end",html:endH(p),kind:"end",folio:true});continue}
-   const isP=p.kind==="person"&&p.who;const blocks=kbkExpand(p.blocks,isP?p.who:null);let i=0,first=true;
-   if(isP&&PW<440&&p.rows&&p.rows.length)blocks.unshift({html:kitRows(p.rows)});
-   do{const b0=i;meas.innerHTML=shell(isP?"k-person r":"k-text r",isP?personBody(p,!first):`${textTop(p,!first)}<div class="kbk-flow"></div>`,"0");
+   const isP=p.kind==="person"&&p.who||p.kind==="text"&&p.fig;const blocks=kbkExpand(p.blocks,p.kind==="person"?p.who:null);let i=0,first=true;
+   if(isP&&PW<440&&p.rel&&p.rel.length)blocks.unshift({html:kitRelTable(p.rel)});
+   /* a continuation page of a flowing text page is titled by the section it continues (owner 17:00Z: short sections share pages) */
+   const secAt=k=>{for(let q=k-1;q>=0;q--)if(blocks[q]&&blocks[q].sec)return blocks[q].sec;return null};
+   do{const b0=i;const tp=first?p:{title:blocks[i]&&blocks[i].sec?p.title:(secAt(i)||p.title)};meas.innerHTML=shell(isP?"k-person r":"k-text r",isP?personBody(p,!first):`${textTop(tp,!first)}<div class="kbk-flow"></div>`,"0");
     const flow=meas.querySelector(".kbk-flow");const over=()=>flow.scrollHeight>flow.clientHeight+1;let n=0;
     while(i<blocks.length){flow.insertAdjacentHTML("beforeend",blocks[i].html);if(over()&&n>0){flow.lastElementChild.remove();break}i++;n++}
     while(n>1&&i<blocks.length&&blocks[i-1]&&blocks[i-1].head){flow.lastElementChild.remove();i--;n--}
-    L.push({cls:isP?"k-person":"k-text",html:meas.querySelector(".kbk-body").innerHTML,kind:p.kind,folio:true,src:p,b0});first=false}while(i<blocks.length);
+    /* one entry taller than a whole page: never clipped — that page's text column scrolls inside the page */
+    const big=over();L.push({cls:(isP?"k-person":"k-text")+(big?" k-scroll":""),html:meas.querySelector(".kbk-body").innerHTML,kind:p.kind,folio:true,src:p,b0});first=false}while(i<blocks.length);
   }
   meas.innerHTML="";return L}
 
@@ -92,13 +97,21 @@ function kitBook(spec){spec=spec||{};const rm=()=>{try{return reducedMotion()}ca
     for(let i=0;i<P.length;i+=2)sheets.push({front:P[i],back:P[i+1]||{cls:"k-back",html:"",kind:"back"}});
     maxCur=Math.max(0,sheets.length-1);if(sheets.length&&sheets[sheets.length-1].front.kind!=="end"&&sheets[sheets.length-1].back.kind!=="back")maxCur=sheets.length}
   else{for(const l of leaves)sheets.push({front:l,back:{cls:"k-verso",html:blankH(),kind:"verso"}});maxCur=Math.max(0,sheets.length-1)}
-  book.innerHTML=sheets.map((s,i)=>`<div class="kbk-sheet" data-i="${i}"><div class="kbk-face kbk-front">${shell(s.front.cls+" r",s.front.html,s.front.folio?String(s.front.no||""):"")}<i class="kbk-sh"></i></div><div class="kbk-face kbk-back">${shell(s.back.cls+" l",s.back.html,s.back.folio?String(s.back.no||""):"")}<i class="kbk-sh"></i></div></div>`).join("")+`<i class="kbk-cast"></i><i class="kbk-gutter"></i>`;
-  book.querySelectorAll(".kbk-go").forEach(b=>b.onclick=e=>{e.stopPropagation();close()});
-  /* restore position by logical page */
-  cur=0;if(keep!=null){for(let i=0;i<sheets.length;i++){const s=sheets[i];if(s.front.src===keep||s.back.src===keep||s.front.kind===keep||s.back.kind===keep){cur=spread&&s.back.src===keep?i+1:i;break}}
+  /* a relayout that comes out the same (fonts ready, book art loaded, a resize that keeps the page size) keeps the pages that are on screen:
+     the book is never rebuilt from scratch under her eyes (owner 15:45Z: the figure and the right column flashed) */
+  /* restore position by logical page (+ the block the reader was on) */
+  const restore=()=>{cur=0;if(keep!=null){for(let i=0;i<sheets.length;i++){const s=sheets[i];if(s.front.src===keep||s.back.src===keep||s.front.kind===keep||s.back.kind===keep){cur=spread&&s.back.src===keep?i+1:i;break}}
    /* same reading position: the page of that section that holds the first block the reader was on (not the section's first page) */
    if(keepB!=null&&typeof keep==="object"){let best=null;sheets.forEach((s,i)=>{for(const f of [s.front,s.back])if(f.src===keep&&f.b0!=null&&f.b0<=keepB&&(!best||f.b0>=best.b0))best={b0:f.b0,i:spread&&f===s.back?i+1:i}});if(best)cur=best.i}
-   cur=Math.min(cur,maxCur)}
+   cur=Math.min(cur,maxCur)}};
+  const key=mode+"|"+PW+"x"+PH+"|"+sheets.map(s=>s.front.cls+s.front.html+"\u0001"+s.back.cls+s.back.html).join("\u0002");
+  if(key===lastKey&&book.querySelector(".kbk-sheet")){restore();paint();return}
+  lastKey=key;
+  book.innerHTML=sheets.map((s,i)=>`<div class="kbk-sheet" data-i="${i}"><div class="kbk-face kbk-front">${shell(s.front.cls+" r",s.front.html,s.front.folio?String(s.front.no||""):"")}<i class="kbk-sh"></i></div><div class="kbk-face kbk-back">${shell(s.back.cls+" l",s.back.html,s.back.folio?String(s.back.no||""):"")}<i class="kbk-sh"></i></div></div>`).join("")+`<i class="kbk-cast"></i><i class="kbk-gutter"></i>`;
+  book.querySelectorAll(".kbk-go").forEach(b=>b.onclick=e=>{e.stopPropagation();close()});
+  /* no flash on turning (owner 15:45Z): every picture of the book decoded once, painted decoded from then on (kitImgSync, jbook) */
+  try{if(typeof kitImgSync==="function")kitImgSync(book)}catch(e){}
+  restore();
   paint()}
  const sheetEls=()=>book.querySelectorAll(".kbk-sheet");
  function paint(){const els=sheetEls();const n=els.length;els.forEach(el=>{if(el.__curl){el.__curl.destroy();el.__curl=null}});
@@ -129,14 +142,24 @@ function kitBook(spec){spec=spec||{};const rm=()=>{try{return reducedMotion()}ca
   el.style.visibility="hidden";el.classList.add("turn");return el}
  const ease=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2,easeOut=t=>1-Math.pow(1-t,3);
  let animId=0;
- function animate(i,from,to,dur,fn,done){const el=beginTurn(i,to>=from?1:-1);if(!el){done&&done();return}busy=true;const t0=performance.now(),id=++animId;
+ function animate(i,from,to,dur,fn,done){const el=beginTurn(i,to>=from?1:-1);if(!el){done&&done();return}busy=true;
+  /* the sheet's copies of the pictures not decoded yet (kitImgSync / kitImgPending, KIT §52.1): the live sheet stays shown and the copy
+     hidden until they are (at most 350 ms), then the turn starts — never one blank portrait on the turning sheet */
+  const cu=el.__curl;if(cu&&cu.pending&&cu.pending()){const id0=++animId;cu.el.style.visibility="hidden";el.style.visibility="visible";
+   cu.ready(350).then(()=>{if(id0!==animId)return;cu.el.style.visibility="";el.style.visibility="hidden";run()});pend={el,to,done};return}
+  run();function run(){const t0=performance.now(),id=++animId;
   pend={el,to,done};
-  const step=now=>{if(id!==animId)return;const t=Math.min(1,(now-t0)/dur);el.__curl&&el.__curl.set(from+(to-from)*fn(t),el.__dir||1);if(t<1)requestAnimationFrame(step);else{busy=false;pend=null;done&&done()}};requestAnimationFrame(step)}
+  const step=now=>{if(id!==animId)return;const t=Math.min(1,(now-t0)/dur);el.__curl&&el.__curl.set(from+(to-from)*fn(t),el.__dir||1);if(t<1)requestAnimationFrame(step);else{busy=false;pend=null;done&&done()}};requestAnimationFrame(step)}}
  /* a tap while a turn runs: that turn jumps to its end at once, then the new one starts (fast taps never jam; KIT §34.0) */
- let pend=null;function flush(){if(!busy||!pend)return;const f=pend;pend=null;animId++;try{f.el.__curl&&f.el.__curl.set(f.to)}catch(e){}busy=false;f.done&&f.done()}
+ let pend=null;function flush(){if(!busy||!pend)return;const f=pend;pend=null;animId++;try{if(f.el.__curl){f.el.__curl.el.style.visibility="";f.el.__curl.set(f.to)}}catch(e){}busy=false;f.done&&f.done()}
  function fade(nc){busy=true;book.classList.add("fade");setTimeout(()=>{cur=nc;paint();book.classList.remove("fade");setTimeout(()=>{busy=false},160)},160)}
- function next(){flush();if(busy||cur>=maxCur)return;kbkSfx();if(rm()){fade(cur+1);return}const i=cur;animate(i,0,1,KIT_TURN_MS,kitTurnEase,()=>{cur=i+1;paint()})}
- function prev(){flush();if(busy||cur<=0)return;kbkSfx();if(rm()){fade(cur-1);return}const i=cur-1;animate(i,1,0,KIT_TURN_MS,kitTurnEase,()=>{cur=i;paint()})}
+ /* a picture of the sheets about to show that is still on its way (a painting that replaced a silhouette a moment ago): wait for it,
+    at most 350 ms, so the turning sheet never shows it blank (owner 15:45Z) */
+ function ready(i,go){const els=sheetEls();const L=[els[i-1],els[i],els[i+1],els[i+2]].filter(Boolean);
+  if(typeof kitImgSync!=="function"||L.every(s=>[...s.querySelectorAll("img")].every(im=>im.complete&&im.naturalWidth))){go();return}
+  busy=true;Promise.all(L.map(s=>kitImgSync(s,350))).then(()=>{busy=false;if(!closed)go()})}
+ function next(){flush();if(busy||cur>=maxCur)return;kbkSfx();if(rm()){fade(cur+1);return}const i=cur;ready(i,()=>animate(i,0,1,KIT_TURN_MS,kitTurnEase,()=>{cur=i+1;paint()}))}
+ function prev(){flush();if(busy||cur<=0)return;kbkSfx();if(rm()){fade(cur-1);return}const i=cur-1;ready(i,()=>animate(i,1,0,KIT_TURN_MS,kitTurnEase,()=>{cur=i;paint()}))}
  function go(n){animId++;busy=false;drag=null;n=Math.max(0,Math.min(maxCur,n));cur=n;paint()}
 
  /* ---- drag / swipe / tap ---- */
@@ -177,6 +200,11 @@ function kitBook(spec){spec=spec||{};const rm=()=>{try{return reducedMotion()}ca
  /* web fonts that arrive after the first measure change line heights: measure again (keeps the page) */
  try{if(document.fonts&&document.fonts.status!=="loaded")document.fonts.ready.then(()=>{if(!closed&&!busy)layout(logical)})}catch(e){}
  root.__kbk={relayout:()=>{if(!closed&&!busy)layout(logical,logicalB)}};
+ /* the figure list (img/FIGURES.json) may arrive after the book opened: lay out again once, the silhouettes become the paintings */
+ {let nF=typeof FIGS!=="undefined"?FIGS.length:0;const iv=setInterval(()=>{if(closed){clearInterval(iv);return}const n=typeof FIGS!=="undefined"?FIGS.length:0;if(n!==nF){nF=n;if(!busy){clearInterval(iv);
+  /* load the paintings first, then swap them in (never a figure that is still on its way) */
+  const L=(spec.pages||[]).map(p=>p.kind==="person"?p.who:p.fig).filter(Boolean).map(w=>{try{return kitFigOf(w)}catch(e){return""}}).filter(Boolean);
+  Promise.race([Promise.all([...new Set(L)].map(u=>new Promise(r=>{const im=new Image();im.onload=im.onerror=()=>{(im.decode?im.decode().catch(()=>0):Promise.resolve()).then(r)};im.src=u}))),new Promise(r=>setTimeout(r,4000))]).then(()=>{if(!closed&&!busy)layout(logical,logicalB)})}}},500);setTimeout(()=>clearInterval(iv),60000)}
  return {root,next,prev,go,close,get cur(){return cur},get max(){return maxCur},get mode(){return mode},relayout:()=>layout(logical)}}
 
 /* ---------- week data → pages ---------- */
@@ -191,8 +219,10 @@ function wkBookData(){const s=S.wkSnap||wkSnap();const n=Math.max(0,Math.min(S.l
  const by=new Map(),me=[],world=[];const TH=S.thO||{kind:"th"};let pay="";const key=p=>p;
  const add=(p,text)=>{if(!by.has(key(p)))by.set(key(p),{who:p,F:[]});by.get(key(p)).F.push(text)};
  for(const h of raw){const pl=plain(h);if(!pl||SKIPRE.test(pl))continue;if(/^Bổng lộc tháng/.test(pl)){pay=pl.replace(/^Bổng lộc tháng [^:]*:\s*/,"").replace(/\.$/,"");continue}
-  const html=String(h).replace(/<span class="ld">[^<]*<\/span>/,"").replace(/\s*\(Đã ghi vào mục Đã biết[^)]*\)\.?/g,"");let last=null;
+  const html=kbkClean(String(h).replace(/<span class="ld">[^<]*<\/span>/,"").replace(/\s*\(Đã ghi vào mục Đã biết[^)]*\)\.?/g,""));let last=null;
   for(let t of kpSentences(html)){const tp=kpPlain(t);if(!tp||SKIPRE.test(tp)||/^\(?Đã ghi vào mục Đã biết/.test(tp))continue;
+   /* a line that is only a name ("Hoàng hậu Chu Thục Nghi.") says nothing (owner 15:30Z) */
+   {let r=tp;for(const [n] of people)r=r.split(n).join(" ");r=r.replace(/(Thái tử|Hoàng tử|Công chúa|Hoàng hậu|Hoàng quý phi|Quý phi|Phi|Tần|Quý nhân|Thường tại|Đáp ứng|Thái hậu|Hoàng thượng|Phế phi|Thái y|Thị vệ|Ma ma|Cô cô)/g," ");if(!/[\p{L}\d]/u.test(r))continue}
    if(/^(Tháng này|Tin triều đình|Triều đình|Thiên hạ)\s*:/.test(tp)){t=t.replace(/^((?:<[^>]+>)*)\s*(Tháng này|Tin triều đình|Triều đình|Thiên hạ)\s*:\s*/,"$1");world.push(t);last="world";continue}
    if((KBK_DELTA_ONLY.test(tp)||!kbkMeaning(tp))&&last){const tgt=last==="world"?world:last===S?me:(by.get(last)||{}).F;if(tgt&&tgt.length){tgt[tgt.length-1]+=" "+t;continue}}
    const [,w0]=kpPeopleIn(t,people);const w=w0.map(x=>x&&x.kind==="th"&&!rivals.includes(x)?TH:x);let p=w.find(x=>x!==S&&!(S.emp&&x===S.emp))||w[0]||null;
@@ -205,14 +235,10 @@ function wkBookData(){const s=S.wkSnap||wkSnap();const n=Math.max(0,Math.min(S.l
  const D=[["Sủng",S.sung-s.sung],["Danh",S.danh-s.danh],["Sức",S.suc-s.suc],["Bạc",S.bac-s.bac]];
  if(s.duc!=null)D.push(["Đức",S.duc-s.duc]);if(s.mat!=null)D.push(["Tai mắt",S.mat-s.mat]);if(s.an!=null)D.push(["Ân tình",(S.an||0)-s.an]);
  const rank=S.rank!==s.rank?(S.rank>s.rank?"Được thăng ":"Bị giáng xuống ")+(S.rank>=7?"Hoàng hậu":RANKS[S.rank].n):"",kids=S.kids.length-(s.kids||0);
- const persons=[...by.values()].map(x=>{const p=x.who;const chips=[],rows=[];
-  if(typeof rivals!=="undefined"&&rivals.includes(p)){const o=s.pp&&s.pp[p.id];
-   const sj=p.queen?"Hoàng hậu":"Nàng";/* owner 11/15 05:25Z: "Nàng quý ngươi", never the bare "Thiện cảm" */
-   if(o){[[sj+" quý ngươi",(p.rel||0)-o[0]],["Ghen",(p.ghen||0)-o[1]],[sj+" oán ngươi",(p.oan||0)-o[2]]].forEach(([l,v])=>{if(v)chips.push([l,v])})}
-   rows.push(["Hiện nay",[`<span class="ef n kbk-pair">${kitGloss("Quý",sj+" quý ngươi")} ${p.rel||0}</span>`,`<span class="ef n kbk-pair">${kitGloss("Oán",sj+" oán ngươi")} ${p.oan||0}</span>`,`<span class="ef n kbk-pair">${kitGloss("Ghen")} ${p.ghen||0}</span>`]])}
-  else if(S.emp&&p===S.emp){if(S.sung-s.sung)chips.push(["Sủng",S.sung-s.sung])}
-  else if(S.thO&&p===S.thO&&s.th!=null&&S.th-s.th)chips.push(["Thái hậu",S.th-s.th]);
-  return {kind:"person",who:p,chips,rows,blocks:[{facts:dedup(x.F)}],n:x.F.length}});
+ /* KIT §52 (owner 11/15 15:30Z): every person page has the SAME relation table, fixed rows for the kind of person (kitRelRows),
+    with the week's change from the snapshot; no private chips, no "Hiện nay" row of its own */
+ const persons=[...by.values()].map(x=>{const p=x.who;const rel=typeof kitRelRows==="function"?kitRelRows(p,s):[];
+  return {kind:"person",who:p,rel,blocks:[{facts:dedup(x.F)}],n:x.F.length}}).filter(x=>x.n>0||x.rel.some(r=>r.d));
  const rk=p=>S.emp&&p.who===S.emp?0:(S.thO&&p.who===S.thO)||p.who.kind==="th"?1:2;
  persons.sort((a,b)=>rk(a)-rk(b)||b.n-a.n);
  return {D,rank,kids,pay,me:dedup(me),world:dedup(world),persons}}
@@ -305,7 +331,8 @@ function kbkOptName(m,c){const n=String(c.n||"");if(c.lg)return c.lg;const ctx=k
  for(const [a,b,f] of KBK_OPT_NAMES)if(who&&a.test(n)&&b.test(ctx))return f(who);
  if(n.split(/\s+/).length>3||(who&&n.includes(who)))return n;
  let s=(ctx.match(/^[^.!?]*/)||[""])[0].trim();if(!s||s.length>90)s=kpPlain(m.t||"").trim();
- return s&&!s.includes(n)&&!/^(Có người đến|Thông báo|Tin)$/.test(s)?`${n} (${s})`:n}
+ /* the log line already starts with the event's title (j3 logChoice "<việc>: <lựa chọn> → …"): never repeat it in brackets */
+ return s&&!s.includes(n)&&s!==kpPlain(m.t||"").trim()&&!/^(Có người đến|Thông báo|Tin)$/.test(s)?`${n} (${s})`:n}
 (function(){if(typeof chooseM!=="function"||typeof log!=="function")return;let RW=null;
  const l0=log;log=function(h){const w=RW;if(w&&!w.done&&typeof h==="string"&&h.startsWith(w.n+".")){w.done=true;if(w.nm===null)return;h=w.nm+h.slice(w.n.length);w.seq=(S.logSeq||0)+1}
   else if(typeof h==="string"&&S&&/^Đến /.test(h))h+=`<i class="kbb" data-b="${S.buoi||0}"></i>`;
@@ -323,20 +350,30 @@ function kbkOptName(m,c){const n=String(c.n||"");if(c.lg)return c.lg;const ctx=k
   try{if(w.seq&&noFx&&!(c.x&&!c.go)&&(S.logSeq||0)>w.seq){const k=(S.logSeq||0)-w.seq;if(S.logs[k]&&kpPlain(S.logs[k]).includes(kpPlain(nm))){S.logs.splice(k,1);S.logSeq--}}}catch(e){}
   return r}})();
 
+/* one log line → what the book prints (owner 11/15 16:55Z, 16:58Z; also lines written by older versions of the game):
+   - the card's promise text never stands in for the result: " · kèm: …", " · thành: …", "Dùng được ở thẻ nàng (N cách)" are dropped;
+   - "(Chứng cứ X +1.)" glued to the next event by the old "Tai mắt thấy" line is dropped (evidence has its own line with its source);
+   - whole numbers only ("−1.76" → "−2"), never a double full stop. */
+function kbkClean(h){try{h=String(h||"").replace(/\s*·\s*(kèm|thành|hỏng|tốn)\s*:[^·<]*(?=·|<|$)/gi,"").replace(/\s*Dùng được ở thẻ nàng \(\d+ cách\)\.?/g,"")
+  .replace(/\s*\(Chứng cứ [^()]*?[+\-−]\d+\.?\)\s*/g," ");
+  const fx=s=>s.replace(/([+\-−]?)(\d+)[.,](\d+)(?![\d.,]*\d*[:\/])/g,(m,sg,a,b)=>sg+Math.round(+(a+"."+b))).replace(/(?<!\.)\.\s*\.(?!\.)/g,".").replace(/\s+([.,;:])/g,"$1");
+  return typeof kpMapText==="function"?kpMapText(h,fx):fx(h)}catch(e){return h}}
 function wkBookPages(){const d=wkBookData();const date=kitDate(S.month,S.year,S.tuan);const sea=`${SEASON[S.month-1]}${S.wx?" · "+S.wx.n:""}`;
  const P=[{kind:"cover",title:"Tuần lục",sub:date,note:sea}];
  const b=[];b.push({rows:[["Ngày",date,"t"],["Tiết",sea,"n"]]});
- if(S.lot){const bad=LVB[S.lot.lv]<0||(S.lot.dom==="Hung"&&S.lot.lv>=3),good=LVB[S.lot.lv]>0;b.push({h:kitGloss("Quẻ tuần")});b.push({rows:[["Quẻ",`<span class="ef t">${LV[S.lot.lv]} · ${S.lot.dom}</span>`],["Lời quẻ",(LOTS[S.lot.i]||[])[2]||"","n"],["Tuần này",String(lotEffect(S.lot)).replace(/…\./," và các việc khác cùng loại."),bad?"r":good?"g":"n"]]})}
+ if(S.lot){const bad=LVB[S.lot.lv]<0||(S.lot.dom==="Hung"&&S.lot.lv>=3),good=LVB[S.lot.lv]>0;b.push({h:kitGloss("Quẻ tuần")});b.push({rows:[["Quẻ",`<span class="ef t">${LV[S.lot.lv]} · ${S.lot.dom}</span>`],["Lời quẻ",(LOTS[S.lot.i]||[])[2]||"","n"],["Tuần này",String(lotEffect(S.lot)).replace(/\s*Gồm:.*$/,"").replace(/^Tuần này:\s*/,"")/* owner 17:16Z: short, no list of acts */,bad?"r":good?"g":"n"]]})}
  b.push({h:"Ngươi tuần qua"});b.push({chips:d.D.filter(([,v])=>v)});
  const mine=[];if(d.rank)mine.push({text:`<b class="g">${d.rank}</b>`,who:S});if(d.kids>0)mine.push({text:`Thêm ${d.kids} con.`,who:S});if(mine.length)b.push({facts:mine});
  b.push({h:kitGloss("Bổng lộc")});b.push(d.pay?{rows:[["Đã lĩnh",kpChipify(d.pay),"t"]]}:{rows:[["Kỳ tới",`còn ${3-(S.tuan||0)} tuần`,"n"]]});
  if(d.persons.length){b.push({h:"Sổ này ghi"});b.push(`<div class="kbk-toc">${d.persons.map(p=>`<span class="kbk-tc">${kitFaceH(p.who,"xs")}${kitName(p.who,{cap:true})}</span>`).join("")}</div>`)}
  if(d.me.length){b.push({h:"Việc của ngươi"});b.push({facts:kbkArt(d.me.map(f=>Object.assign(f,{who:S})),"me")})}
  if(!d.me.length&&!d.persons.length&&!d.world.length&&!mine.length)b.push({facts:[{text:"Một tuần yên ả.",kind:"world",auto:false}]});
- P.push({kind:"text",title:"Tổng lược",sub:"Những điều chính của tuần qua",blocks:b});
  d.persons.forEach(p=>{const ctx=S.emp&&p.who===S.emp?"emp":(S.thO&&p.who===S.thO)||(p.who&&p.who.kind==="th")?"th":"p";(p.blocks||[]).forEach(b=>{if(b.facts)b.facts=kbkArt(b.facts,ctx)})});
+ /* owner 11/15 17:45Z: every subject keeps its OWN page, and EVERY page carries the full-length figure of its subject (KIT §36.5):
+    Tổng lược → her own figure, a person → that person, Triều đình · thiên hạ → Hoàng thượng */
+ P.push({kind:"text",title:"Tổng lược",sub:"Những điều chính của tuần qua",fig:S,blocks:b});
  P.push(...d.persons);
- if(d.world.length)P.push({kind:"text",title:"Triều đình · thiên hạ",blocks:[{facts:kbkArt(d.world.map(f=>Object.assign(f,{kind:"world"})),"world")}]});
+ if(d.world.length)P.push({kind:"text",title:"Triều đình · thiên hạ",fig:S.emp||null,blocks:[{facts:kbkArt(d.world.map(f=>Object.assign(f,{kind:"world"})),"world")}]});
  const nf=d.me.length+d.world.length+d.persons.reduce((a,p)=>a+p.n,0);
  P.push({kind:"end",title:"Tuần này đến đây là hết.",seal:["HẾT","TUẦN"],note:nf?`Sổ ghi ${nf} việc${d.persons.length?`, ${d.persons.length} người`:""}.`:"Một tuần yên ả.",btn:"Vào ngày mới",btnId:"dawn-go"});
  return {pages:P,head:`Tuần lục · ${date}`}}
@@ -360,7 +397,8 @@ function wkBookPages(){const d=wkBookData();const date=kitDate(S.month,S.year,S.
 .kbk-measure{position:absolute;left:-99999px;top:0;visibility:hidden;pointer-events:none;contain:layout style}
 .kbk-measure>.kbk-pg{position:relative;width:100%;height:100%}
 .kbk-stage{display:flex;align-items:center;justify-content:center;width:100%;flex:0 0 auto}
-.kbk>.kbk-x{position:absolute;top:max(10px,env(safe-area-inset-top));right:max(12px,env(safe-area-inset-right));z-index:6;box-shadow:0 2px 8px #2a1a1240}
+/* review r6: ✕ above every sheet — kitBook stacks sheets at z = n*2-i (line ~111), so a book of 4+ sheets covered a z-index:6 ✕ */
+.kbk>.kbk-x{position:absolute;top:max(10px,env(safe-area-inset-top));right:max(12px,env(safe-area-inset-right));z-index:999;box-shadow:0 2px 8px #2a1a1240}
 .kbk-book{position:relative;width:var(--pw);height:var(--ph);transform-style:flat;touch-action:pan-y;user-select:none;-webkit-user-select:none;transition:transform .55s cubic-bezier(.3,.7,.3,1),opacity .16s}
 .kbk.spread .kbk-book{width:calc(var(--pw) * 2)}
 .kbk.spread .kbk-book.closed{transform:translateX(calc(var(--pw) * -.5))}
@@ -520,3 +558,28 @@ body.kbk-open #rtoast,body:has(#dawn.kbkdawn:not([hidden])) #rtoast{opacity:0!im
 .kbk-no{min-width:8.5em;text-align:center;font-family:var(--display);font-size:.9rem;font-weight:600;color:#fff3d6;background:#1c2439e6;border:1px solid #c9a46a88;border-radius:20px;padding:.45em .9em;white-space:nowrap}
 .kbk-bar .kbtn.alt{min-height:40px;padding:6px 16px}
 `;document.head.appendChild(st)})();
+
+/* owner 11/15 (Tuần lục cut off): no text is ever clipped. Entries flow to the next page; a single entry longer than a page scrolls
+   inside its own text column (k-scroll). Stat chips inside running text never break inside ("Tần Liễu Họa / Mi Sủng −1 0"):
+   they stay on one line, and a long one (a name + a number) reads as plain coloured text instead of a chip. */
+(function(){const st=document.createElement("style");st.id="kbk-noclip";st.textContent=`
+.kbk-pg.k-scroll .kbk-flow{overflow-y:auto!important;overscroll-behavior:contain;touch-action:pan-y;scrollbar-width:thin}
+.kbk .kbk-flow .ef,.kbk .kbk-flow .kchip{white-space:nowrap}
+.kbk .kbk-flow .ef.kbk-long,.kbk .kbk-flow .kchip.kbk-long{white-space:normal;background:none!important;border:0!important;box-shadow:none!important;padding:0!important;display:inline!important;border-radius:0!important}
+`;document.head.appendChild(st)})();
+function kbkLongChips(root){try{(root||document).querySelectorAll(".kbk .kbk-flow .ef:not(.kbk-long),.kbk .kbk-flow .kchip:not(.kbk-long)").forEach(c=>{if((c.textContent||"").trim().length>16)c.classList.add("kbk-long")})}catch(e){}}
+(function(){const k0=kbkExpand;kbkExpand=function(){const out=k0.apply(this,arguments);try{const t=document.createElement("template");for(const b of out){if(!b||!b.html||!/class="(ef|kchip)/.test(b.html))continue;t.innerHTML=b.html;t.content.querySelectorAll(".ef,.kchip").forEach(c=>{if((c.textContent||"").trim().length>16)c.classList.add("kbk-long")});b.html=t.innerHTML}}catch(e){}return out}})();
+
+/* ---- relations inside entries (owner 11/15 15:30Z + 16:50Z: kit only): a relation change written by the log ("Hoàng hậu quý ngươi -3",
+   "nàng oán ngươi +9", "ghen +25", "thân +7") is redrawn by the kit's kitRelDelta (KIT §52) with the KIT_REL words ("Nàng → ta: thiện cảm",
+   "Nàng oán ta", "Nàng ghen"); NPC ↔ NPC ("thân +7") reads "thiện cảm +7". Whole numbers. */
+const KBK_RELRE=/^(.*?)\b(quý ngươi|quý ta|thân|thiện cảm|oán ngươi|oán ta|ghen)\s*([+\-−]\s?\d+(?:[.,]\d+)?)$/i;
+function kbkRelInline(root){root.querySelectorAll(".ef,.kchip").forEach(c=>{const t=(c.textContent||"").replace(/\s+/g," ").trim();const m=KBK_RELRE.exec(t);if(!m)return;
+ const w=m[2].toLowerCase();const v=Math.round(+m[3].replace("−","-").replace(/\s/g,"").replace(",","."));let who=m[1].replace(/[\s:,→]+$/,"").trim();
+ const toMe=/ngươi|ta$/.test(w)||w==="ghen";if(/^(nàng|nàng ta|nàng ấy)$/i.test(who))who="Nàng";
+ let lab;if(!toMe)lab="thiện cảm";else if(/oán/.test(w))lab=`${who||"Nàng"} oán ta`;else if(w==="ghen")lab=`${who||"Nàng"} ghen`;else lab=`${who||"Nàng"} → ta: thiện cảm`;
+ const tmp=document.createElement("template");tmp.innerHTML=kitRelDelta(lab,toMe?"them":"none",v,/oán|ghen/.test(w)?"bad":"good");c.replaceWith(tmp.content.firstChild)})}
+(function(){const k0=kbkExpand;kbkExpand=function(){const out=k0.apply(this,arguments);try{const t=document.createElement("template");for(const b of out){if(!b||!b.html||!/class="(ef|kchip)/.test(b.html))continue;t.innerHTML=b.html;kbkRelInline(t.content);b.html=t.innerHTML}}catch(e){}return out}})();
+/* an entry that is only a name ("Hoàng hậu Chu Thục Nghi.") says nothing: dropped */
+(function(){const k0=kbkExpand;kbkExpand=function(){return k0.apply(this,arguments).filter(b=>{if(!b||!b.html)return !!b;const t=String(b.html).replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim().replace(/[.·:]+$/,"");
+  if(!t)return false;try{const P=[S].concat(typeof rivals!=="undefined"?rivals:[]).filter(Boolean);for(const p of P){const nm=p.name||"";if(nm&&(t===nm||t.endsWith(" "+nm))&&t.split(" ").length<=nm.split(" ").length+2)return false}}catch(e){}return true})}})();
