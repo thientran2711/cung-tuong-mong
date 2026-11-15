@@ -68,3 +68,20 @@ Nhắc theo dõi: send_later 30 phút, tự đặt lại mỗi lượt (lịch l
 - 04:15Z LIVE main=482a310ea (review/men: nam nhân theo lịch, 4 thị vệ). Đã chạy cdn_sync 109 ảnh xóa nốt ruồi (review/mole-fix 50a7a15c0) + 392 ảnh hoa điền.
 - 04:40Z review/thinhan-art @6f027b3d3 (tranh Thỉnh an mới act-thinh-an-v2 trên CDN, 160 credit) → gộp cùng cdn-images.
 - 05:00Z LIVE main=b165b1f71 (Tư trang ô vuông + 6 ô trang bị, Luân hồi thẻ úp; sửa chữ Hán). palace-map chờ cdn-images (ảnh không vào git). Đĩa ~2 GB trống — dọn worktree khi xong.
+
+## LỖI SẾP BÁO CÒN MỞ (soát mỗi lượt theo dõi; xong thì gạch)
+- [ ] Thỉnh an Hoàng hậu không cộng quan hệ (báo từ 14/11) — HOTFIX review/hotfix-thinhan
+- [ ] Thẻ phi tần co lại, dải 1 người (Hạ Tố Tâm) — review/hau-cung-ui (đẩy riêng)
+- [ ] Chữ 'Liều' cho khả năng phụ (có thai, ban thưởng, ô trạng thái) — review/sub-odds
+- [ ] Tờ lật trong suốt — page-curl PASS, chờ gộp main mới
+- [ ] Chip 'Thỉnh tranh nhân vật' đè chữ; tải lần đầu 83 MB — hau-cung-ui + cdn-images
+- [ ] Nam nhân trong Hậu cung; thiếu Hoàng thượng/Thái hậu; tên trùng — hau-cung-ui
+- [ ] 'Sai đi Tiểu Lâm Tử' khó hiểu — hau-cung-ui
+- [ ] Chữ hiệu ứng mơ hồ ('tiếng cứng cỏi'); việc làm được chưa lên đầu — sub-odds
+- [ ] Sự kiện Có người đến chưa cân bằng — ts-b
+- [ ] Tranh Thỉnh an (quỳ / tay sau) — chờ vẽ lại v3 (cần thợ mới khi đĩa đủ)
+- [ ] Hoa điền quá cỡ — m05-huadian
+- [ ] Khung chân dung đỉnh rời; Sổ tuần thẳng cột, người full trang, trang tiếp theo — hau-cung-ui
+- [ ] Hộp thoại có người 2 cột — dialog-person
+- [ ] Đang chơi không bị tải lại; co-op cập nhật — update-flow
+- [ ] Chơi cùng bạn: kẹt nút Vào phòng, lệch buổi tuần 3 — coop-ui
