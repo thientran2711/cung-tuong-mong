@@ -2515,6 +2515,21 @@ label ("Sinh hoàng tử" wrapped to 3 lines, one word per line).
   rule panels, item dialogs, the shop, Sổ luân hồi and the end card; per list it prints the value-x spread, labels standing one word per
   line, and any legacy two-cell `.pcrow` or flex space-between row list. Exit 1 on any fail.
 
+### 51.1 ONE BLOCK = ONE LABEL COLUMN · `kitRowsAlign(root)` (owner 15/11 "Hàng trên hàng dưới chưa alignment", review/row-align) — j79
+Owner bug: mood dialog "Tâm trạng · …", block ĐANG TÁC ĐỘNG: "LO ÂU | …" and "ẢNH HƯỞNG | …" started their values at different x, because
+the 2nd row was a kitPanel section with no heading = a 2nd kitRows grid sizing its own label column.
+- **Rule:** inside one block every label | value row shares ONE label column (the widest label of the block, capped as in §51), so all
+  values start on one vertical line, like TỐN / ĐƯỢC / MẤT / GHI CHÚ in action cards. A heading (`h4.kpst`) starts a new block.
+- **How:** `kpBuild` (every kit panel, spec sections and legacy html) runs `kitRowsAlign(main)`, which joins kit tables (`.kb.kpkb`)
+  that read as one block into ONE grid: (a) a table right after a table; (b) a section with no heading whose first child is a table,
+  after a section / table that ends with a table; (c) a bare table right after such a section (e.g. Xét phẩm "Ghi chú" under
+  "Điều kiện lên …"). Content after the joined rows keeps its order. Callers write nothing special: just don't hand-build rows.
+- Narrow screens: unchanged §51 column cap (`fit-content(max(34%,7rem))`), long labels wrap inside the column.
+- Migrated in the same pass (scan): Bổng lộc (jecon `blCard` override still wrote legacy `.pcrow` rows) → `kitRows` (rank | N bạc · goods).
+- Sample on the kit page: "§51.1". Test: `node dev/test/kit-table.js <url> <W>x<H>@dpr [shots] [steps]` now also measures `kit-block`
+  (kit tables with the same left edge, ≤22 px apart, no heading between = one block; value-x spread must be ≤1 px) and has a `mood`
+  step (emoBox for the player + 3 women).
+
 ## 53. EVENT-CHOICE PARTS · kitHint · kitRisk · kitHintRow · kitKemRow · kitResultSeal (owner 11/15 14:30Z / 15:05Z / 15:10Z, review/opt-render) — `dev/build/jk2b.js`, `dev/build/j63.js`
 Index of the shared parts review/opt-render added (number from the coordinator's registry; the rules live where they apply):
 - `kitIsEventChoice(m)` + `KIT_ACT_PIDS` + data flags `ev` / `act` / `shop` — which dialogs are events (cost mode): §28.6.

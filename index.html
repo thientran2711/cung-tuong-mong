@@ -11530,6 +11530,18 @@ document.addEventListener("click",e=>{const p=document.getElementById("kpop");co
    kind: rule | info | news | notice | choice | result | night | end | intel | threat | evidence | reward.  Returns the queue item. */
 function kitPanel(spec,front){const m={t:spec.title||"",h:"",kit:spec,opts:spec.opts,btn:spec.btn,cls:spec.cls,who:spec.subject&&(spec.subject.src!==undefined?spec.subject:kitFace(spec.subject))||null,onClose:spec.onClose};
  if(front)Q.unshift(m);else Q.push(m);return m}
+/* KIT §51.1 ONE BLOCK = ONE LABEL COLUMN (owner 15/11 "Hàng trên hàng dưới chưa alignment"): kit tables (.kpkb) that read as one block
+   are joined into ONE grid, so the widest label of the block sets the column and every value starts on one vertical line:
+   (a) a kit table right after another kit table; (b) a section with no heading whose first child is a kit table, right after a section
+   (or table) that ends with a kit table; (c) a bare kit table right after such a section. A heading (h4.kpst) always starts a new block.
+   Runs on every kit panel (kpBuild), for spec sections and legacy html alike. */
+function kitRowsAlign(root){if(!root)return;const KB=e=>e&&e.matches&&e.matches(".kb.kpkb")?e:null;
+ const tail=e=>KB(e)||(e&&e.matches&&e.matches(".kpsec")?KB(e.lastElementChild):null);
+ const head=e=>KB(e)||(e&&e.matches&&e.matches(".kpsec")&&!e.querySelector(":scope>.kpst,:scope>h1,:scope>h2,:scope>h3,:scope>h4,:scope>h5,:scope>h6")?KB(e.firstElementChild):null);
+ [...root.querySelectorAll(".kpkb")].map(k=>k.parentElement).filter((p,i,a)=>p&&a.indexOf(p)===i).concat([root]).forEach(par=>{
+  let prev=null;for(const e of [...par.children]){const h=head(e),t0=prev&&tail(prev);
+   if(h&&t0&&t0!==h){while(h.firstChild)t0.appendChild(h.firstChild);h.remove();if(e!==h&&!e.children.length&&!e.textContent.trim()){e.remove();continue}}
+   if(e.parentElement===par)prev=e}})}
 function kitModal(spec){const m=kitPanel(spec,true);showModal();return m}
 function kpKind(m){if(m.kit&&m.kit.kind)return m.kit.kind;const t=String(m.t||""),c=String(m.cls||"");
  if(/night/.test(c))return"night";if(/\bend\b/.test(c))return"end";if(/^Tin trong cung/.test(t))return"news";if(/^Tai mắt|báo tin/.test(t))return"intel";
@@ -11577,6 +11589,7 @@ function kpBuild(M,m){const dlg=M.querySelector(".dlg"),mb=$("mb"),mt=$("mt");if
  if(faces){faces.classList.add("kpfaces");main.appendChild(faces)}
  for(const b of blocks){if(typeof b==="string")main.insertAdjacentHTML("beforeend",b);else main.appendChild(b)}
  body.appendChild(main);mb.innerHTML="";mb.appendChild(body);
+ try{kitRowsAlign(main)}catch(e){}
  if(opts){opts.classList.add("kpopts");mb.appendChild(opts)}
  let ph=dlg.querySelector(":scope > .kph");if(ph)ph.remove();mt.hidden=true;dlg.insertAdjacentHTML("afterbegin",head);
  const mr=$("mr");const cb=mr&&mr.querySelector("#mclose");if(cb){cb.classList.add("kbtn");if(/^\s*(Đã rõ|OK|Xong)\s*$/.test(cb.textContent))cb.textContent="Đã hiểu"}}
@@ -20271,7 +20284,7 @@ function econStipend(p){const r=rkOf(p),me=p===S,staff=(p.staff||[]).length;let 
      {n:"Bớt lễ nghĩa",fx:{danh:-sk},x:`mất: Danh -${sk}, Đức -${BAL.dutySkip.duc} · giữ lại ${d+bt} bạc`,go:()=>{econDoDuty(S,false);log(`Ngươi bớt lễ nghĩa tháng: Danh -${sk}, Đức -${BAL.dutySkip.duc}.`)}}]}
    Q.push(card);try{if(typeof stipShow==="function")stipShow(G,net,SK)}catch(e){console.error("stip show",e)}}else econDoDuty(p,true)}catch(e){console.error("econ card",e)}
  return line};
-blCard=function(){return `<p>Bổng lộc phát ngày đầu mỗi tháng, theo phẩm vị (mọi phi tần như nhau). Mỗi kẻ hầu ăn công ${BAL.wage} bạc/tháng. Phẩm càng cao, lễ nghĩa càng tốn.</p><div class="pcb rows">${BAL.pay.map((b,i)=>`<div class="pcrow"><span>${i>=7?"Hoàng hậu":RANKS[i].n}</span><b>${b} bạc</b></div><div class="pcrow"><span class="past">${typeof stipRankTxt==="function"?stipRankTxt(i):BLG[i]}${BAL.duty[i]?` · lễ nghĩa ${BAL.duty[i]}`:""}${BAL.banThuong[i]?` · ban thưởng ${BAL.banThuong[i]}`:""}</span><span></span></div>`).join("")}</div><p class="past">Lãnh cung: chỉ ${BAL.payCold} bạc. Cấm túc: nửa bổng. Hoàng hậu ghét ngươi (thiện cảm dưới -30): mỗi tháng sai Nội vụ phủ khất bổng (bớt 3 phần 10): ${word(20)}. Sinh con, được ân thưởng: cộng thêm một lần.</p>${typeof stipRuleTxt==="function"?stipRuleTxt():""}`};
+blCard=function(){return `<p>Bổng lộc phát ngày đầu mỗi tháng, theo phẩm vị (mọi phi tần như nhau). Mỗi kẻ hầu ăn công ${BAL.wage} bạc/tháng. Phẩm càng cao, lễ nghĩa càng tốn.</p>${kitRows(BAL.pay.map((b,i)=>[i>=7?"Hoàng hậu":RANKS[i].n,[`<span class="ef t">${b} bạc</span>`,`${typeof stipRankTxt==="function"?stipRankTxt(i):BLG[i]||""}${BAL.duty[i]?` · lễ nghĩa ${BAL.duty[i]}`:""}${BAL.banThuong[i]?` · ban thưởng ${BAL.banThuong[i]}`:""}`.replace(/^ · /,"")].filter(Boolean),"n"]))}<p class="past">Lãnh cung: chỉ ${BAL.payCold} bạc. Cấm túc: nửa bổng. Hoàng hậu ghét ngươi (thiện cảm dưới -30): mỗi tháng sai Nội vụ phủ khất bổng (bớt 3 phần 10): ${word(20)}. Sinh con, được ân thưởng: cộng thêm một lần.</p>${typeof stipRuleTxt==="function"?stipRuleTxt():""}`};
 /* a good night: Hoàng thượng's thưởng also brings silver (same for every consort) */
 (function(){const b0=bestow;bestow=function(p,why){const r=b0.apply(this,arguments);try{if(why==="night"&&p&&(p===S||p.alive)){ap(p,{bac:BAL.nightBac});if(p===S)log(`Kèm theo ${BAL.nightBac} bạc thưởng. Bạc +${BAL.nightBac}.`)}}catch(e){}return r}})();
 /* ---------- works on the item grade scale + price by grade and skill ---------- */
@@ -25506,6 +25519,7 @@ KIT_SAMPLES.push(
 KIT_SAMPLES.push(
  {id:"§51",title:"kitRows · bảng kit (nhãn dài xuống dòng, giá trị thẳng một cột)",html:()=>kitRows([["Đêm thị tẩm vui",["Trâm ngọc bích, Túi thơm",kitChip("Bạc",20,"g")],"t"],["Sinh hoàng tử",["Ngọc bội ngự ban",kitChip("Bạc",30,"g")],"t"],["Tiết Vạn thọ (tháng 8, người được sủng nhất)","Vòng ngọc","t"],["Chưa biết","chưa rõ","n"]])},
  {id:"§51",title:"kitRowsJoin · hai bảng nối thành một",html:()=>kitRowsJoin(kitRows([["Giá",kitChip("Bạc",-40,"r"),"t"]]),kitRows([["Phẩm","Thượng phẩm","t"],["Dùng để","dâng, tặng, bày ở yến tiệc","t"]]))},
+ {id:"§51.1",title:"kitRowsAlign · một khối một cột nhãn (mục không tiêu đề nối vào bảng trên)",html:()=>{const d=document.createElement("div");d.innerHTML=`<div class="kpsec"><h4 class="kpst">Đang tác động</h4>${kitRows([["Lo âu","Khương Lạc Anh được tấn phong · 2 tuần trước","r"]])}</div><div class="kpsec">${kitRows([["Ảnh hưởng","vui thì dễ chịu nghe, giận hay ghen thì khó nói chuyện, dễ ra tay hơn"]])}</div>`;kitRowsAlign(d);return d.innerHTML}},
  {id:"§51",title:"kitReqRows · điều kiện (✓/✗)",html:()=>kitReqRows([[false,"Sủng 8 (cần 15)"],[true,"Ghế Phi: còn chỗ"],[false,"Hoàng hậu không chặn (Hoàng hậu -5)"],[true,"Đã qua một mùa ở phẩm này"]])},
  {id:"§51",title:"kitChip(kitRel(...)) · chip quan hệ trong câu luật",html:()=>`<p>mỗi lần: ${kitChip(kitRel("them","phi tần khác ghen ta"),3,"r")}</p>`});
 /* kit-fig2 parts (review r6): §48 kitNameRank, §49.1 kitRelRow (§50 kitEventDp is a live dialog: see dev/test/event-dp.js) */
@@ -27954,7 +27968,7 @@ window.kitPhTone=kitPhTone;window.KIT_PH=KIT_PH;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="79e571bb13ba";window.CTM_BUILD=BUILD;
+const BUILD="831d88a20fe2";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
