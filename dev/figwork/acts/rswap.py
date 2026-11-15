@@ -3,8 +3,9 @@
 import json,re,sys
 L,I,C,O=sys.argv[1:5]; old=sys.argv[5:]
 A=json.load(open(L)); ix={f[0] for f in json.load(open(I))['files']}
+# OLD=NEW args: explicit mapping (re-redraw of a live key to a fresh CDN name)
 nk=lambda k:k[:-2]+'-r-h' if k.endswith('-h') else k+'-h'
-M={k:nk(k) for k in old}; miss=[v for v in M.values() if 'img/act-%s.webp'%v not in ix]
+M={(a.split('=')[0] if '=' in a else a):(a.split('=')[1] if '=' in a else nk(a)) for a in old}; miss=[v for v in M.values() if 'img/act-%s.webp'%v not in ix]
 if miss: print('STOP missing',miss); sys.exit(1)
 B=json.loads(json.dumps(A)); n=0
 for sec in ('acts','prefix'):

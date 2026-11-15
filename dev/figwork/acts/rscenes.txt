@@ -1,28 +1,28 @@
 # audit 15/11 redraws: KEY|dark|scene (no visible face; hands, feet, back view or silhouette)
 an-mac-gian-di|0|a consort's hands smoothing a plain pale silk robe with simple trim laid on a dressing table, a single plain hairpin beside it
 ba-do-bi-bat|1|a guard's armoured hand gripping the wrist of a midwife holding a cloth-covered basket at a back door of a birthing room at night
-ban-dung|1|a palace maid seen from behind kneeling on the floor of a throne hall, offering a folded note up toward the foot of a dragon throne
-ban-dung-hh|1|a palace maid seen from behind kneeling before a phoenix chair, offering up a folded note with both hands
+ban-dung|1|a palace maid seen from behind kneeling on the floor of a throne hall, offering a folded note up toward the foot of a dragon throne, in a shadowed hall with closed windows
+ban-dung-hh|1|a palace maid seen from behind kneeling before a phoenix chair, offering up a folded note with both hands, in a shadowed hall with closed windows
 ban-dung-ta|1|a maid's hands passing a folded note across a table to a consort's red embroidered sleeve, candlelight
 ban-ga|0|a maid's hands in red sleeves receiving a red wedding bundle from a consort's hands, a guard's boots standing nearby
 ban-thien-ha|0|an imperial yellow sleeve pointing at a large painted landscape map scroll on a wall, a consort's pink sleeve beside it
 ban-tho-van|0|an imperial yellow sleeve and a consort's pink sleeve side by side over an open poem scroll on a desk, brush and inkstone, lamplight
 ban-tin-phat-oan|1|a maid's hand slipping a folded note through the crack of a palace door at night
-bao-cung-chinh-ti|1|lanterns carried by guards seen from behind hurrying along a dark garden path, a maid leading
+bao-cung-chinh-ti|1|lanterns carried by guards seen from behind hurrying along a shadowy garden path under a murky overcast sky, a maid leading
 bao-dau-tim|0|a consort's hand holding a small cup of medicine tea on a bed table, a bright palace bedroom, curtains open
 bat-con-doc-sach|0|a boy prince seen from behind at a desk reading a book in a closed study room, daylight on the paper window
-bat-gap-mot-minh|1|a lone figure in rich robes seen from behind walking down an empty lantern-lit corridor at night
-bat-gap-noi-khe|1|two figures seen from behind under eaves at night, one hand hiding a small object into a sleeve
-bat-gap-sat-ben|1|two shadows standing close behind a rockery at night, the silhouettes cast on the ground
-bi-bat-gap|1|a eunuch's raised lantern lighting two long shadows behind a rockery at night
+bat-gap-mot-minh|1|a lone figure in rich robes seen from behind walking down an empty lantern-lit corridor in heavy shadow
+bat-gap-noi-khe|1|two figures seen from behind under eaves in heavy shadow, one hand hiding a small object into a sleeve
+bat-gap-sat-ben|1|two shadows standing close behind a rockery in heavy shadow, the silhouettes cast on the ground
+bi-bat-gap|1|a eunuch's raised lantern lighting two long shadows behind a rockery in heavy shadow
 bi-bat-gap-luc-ruong|1|a consort's hands frozen inside someone else's open clothing chest, lantern light falling across from a doorway
-bi-danh-truong|1|an empty long punishment bench and wooden staves in a stone courtyard at dusk, a eunuch's boots waiting, no blood
+bi-danh-truong|1|an empty long punishment bench and wooden staves in a stone courtyard under a murky overcast sky, a eunuch's boots waiting, no blood
 bi-day-tan-gia-kho|1|rough hands in coarse cloth sleeves scrubbing laundry in wooden tubs in a grey servants' yard
-bi-duoi-ve-noi-vu|1|a maid seen from behind carrying a small bundle, led by a eunuch out of a palace gate at dusk
-bi-phat-quy|1|a maid seen from behind kneeling alone in the middle of a large stone courtyard, long evening shadows
-bi-thay-truong-mon|1|a consort seen from behind leaving a shabby gate of a deserted courtyard at dusk, a distant maid's silhouette watching
+bi-duoi-ve-noi-vu|1|a maid seen from behind carrying a small bundle, led by a eunuch out of a palace gate under a murky overcast sky
+bi-phat-quy|1|a maid seen from behind kneeling alone in the middle of a large stone courtyard, under a heavy grey overcast sky
+bi-thay-truong-mon|1|a consort seen from behind leaving a shabby gate of a deserted courtyard under a murky overcast sky, a distant maid's silhouette watching
 bi-tuoc-tai-nu|1|an official's hands rolling up an award scroll and taking it away from a consort's hands, dim hall
-biet-bi-do-nha|1|a consort's hands crumpling a family letter on a desk at night, candlelight
+biet-bi-do-nha|1|a consort's hands crumpling a family letter on a desk in heavy shadow, candlelight
 biet-co-thai|0|a consort's hand resting on her belly, the other on a small calendar booklet on a bright table
 biet-danh-tinh|0|a maid seen from behind whispering into a consort's ear in a sunny corridor, a distant noble lady's back far away
 biet-so-thich-ht|0|a consort's hands holding a small note beside a plate of pastries and a vase of flowers, daylight
@@ -41,7 +41,7 @@ chu-nho-on|0|a mistress's hands helping a kneeling maid's hands up, warm dayligh
 chu-sa-sam|0|a consort's red sleeve turned away beside an imperial yellow sleeve, a maid's hands folded behind, bright pavilion
 chua-ban-hon|0|a consort's hands closing an album of portrait paintings and setting it aside on a table
 chua-nhan-vao-phe|1|a consort's hands folded firmly in her sleeves, another lady's pleading hands reaching toward her, dim hall
-co-ke-thay-liec-mat|1|a maid's hand parting a curtain, beyond it a pond and a young man's silhouette on the far bank, dusk
+co-ke-thay-liec-mat|1|a maid's hand parting a curtain, beyond it a pond and a young man's silhouette on the far bank, murky grey overcast gloom
 co-nguoi-thay-voi|1|two maids seen from behind with heads together whispering in a corridor, a consort's figure far away
 con-biet-me-xin|0|a young princess's small hand holding her mother's hand on a sunny veranda
 con-chi-hoi-han|0|a young prince seen from behind standing before a desk where an imperial yellow sleeve waves him off
@@ -54,13 +54,13 @@ con-ve-du-yen|0|a grown prince's hand raising a wine cup at a banquet table besi
 cui-chao-bai-kien|0|a consort seen from behind curtsying before an empty-looking high seat in a bright main hall of another palace
 cui-dau-tuan-lenh|0|a consort seen from behind bowing her head before a standing figure's raised imperial yellow sleeve
 cung-khong-biet-la-ai|1|two maids seen from behind watching a stranger's figure disappear down a dim corridor
-cung-nu-bi-mua-khai|1|a stranger's hand passing silver to a maid's hand behind a pillar at night
+cung-nu-bi-mua-khai|1|a stranger's hand passing silver to a maid's hand behind a pillar in heavy shadow
 cung-nu-hau-thay-mot-dem|0|a maid seen from behind carrying a small bundle out of a palace gate in early morning light
 cung-nu-lot-mat-xanh|0|a maid's hands in new consort sleeves receiving a jade bracelet from an imperial yellow sleeve
-cung-nu-trom-bac|1|a maid's hand stealthily lifting the lid of a silver chest at night
+cung-nu-trom-bac|1|a maid's hand stealthily lifting the lid of a silver chest in heavy shadow
 da-quen-biet|0|two consorts' hands around one tea table, cups and pastries, bright pavilion
 dan-mat|0|a new consort seen from behind curtsying low at the foot of steps, above her only the gold-embroidered hem and folded hands of a senior consort seated high
-dan-ra-cua-ngach|1|a eunuch's raised lantern leading a man in a dark robe seen from behind out through a small side gate in the palace wall at night
+dan-ra-cua-ngach|1|a eunuch's raised lantern leading a man in a dark robe seen from behind out through a small side gate in the palace wall in heavy shadow
 dang-con-hoa-than|0|a princess in a red bridal robe seen from behind bowing to her mother's sleeve beside a northern envoy's carriage at a palace gate
 dang-len-hoang-thuong|0|a consort's hands offering a brocade gift box up toward an imperial yellow sleeve in a bright hall
 dang-len-thai-hau|0|a consort's hands offering a brocade gift box up toward the dark brocade sleeve of the Empress Dowager on a high seat, bright hall
@@ -71,7 +71,7 @@ de-con-thu-tu|0|a princess's hands holding an open letter of blank paper by a br
 de-moc|0|a consort seen from behind with simple hair and one fresh flower pinned in it, sitting by a bright window
 de-y-bay-muu|1|a maid's hands on a broom in a dark courtyard, through a lit window a hand tipping powder into a cup
 dem-cung-khac|0|a consort seen from behind at an open lattice window in soft golden evening light, looking toward a distant palace hung with red lanterns
-den-can-chinh-bi-duoi|1|a guard's halberd crossed in front of palace steps, a consort seen from behind turning away at dusk
+den-can-chinh-bi-duoi|1|a guard's halberd crossed in front of palace steps, a consort seen from behind turning away under a murky overcast sky
 den-ngay|0|a consort seen from behind hurrying along a bright corridor after a maid carrying a lantern
 diem-trang|0|a consort seen from behind before a bronze mirror (mirror showing only blur), a maid's hands pinning a gold hairpin into her hair
 do-duoc-net|0|a maid seen from behind whispering into the ear of her mistress seen from behind, at a bright tea table
@@ -86,11 +86,11 @@ dung-ve-dai-hy|0|a foreign princess in southern dress seen from behind bowing be
 duoc-be-con|0|a senior consort's arms carrying a baby wrapped in red cloth out of a gate, a mother's hand reaching after from the doorway, daylight
 duoc-thang-cung-nu|0|a maid's hands receiving a new wooden rank token from an old nanny's hands, other maids' hands clapping, bright yard
 duoc-thay-mat|0|a consort seen from behind standing in a row below the steps, looking up at a noble lady's train passing above
-duoi-di|1|a consort's hand waving dismissively, a eunuch leading a stranger seen from behind out of a palace gate at dusk
-dut-bac-xin-giu|1|a consort's hand slipping a silk purse of silver into a eunuch's hand outside a bedchamber door at night
-gia-nhap-phe|1|consorts' hands around a shared table in a dim hall, one hand setting a new tea cup in place for a newcomer
-gia-say-thai|1|a maid seen from behind carrying out a bowl of medicine from behind a bed curtain at night, a physician's bowed back
-gia-thai-bi-lat|1|a physician's hand holding up a small cotton pillow in a dim hall, a consort seen from behind kneeling below
+duoi-di|1|a consort's hand waving dismissively, a eunuch leading a stranger seen from behind out of a palace gate under a murky overcast sky
+dut-bac-xin-giu|1|a consort's hand slipping a silk purse of silver into a eunuch's hand outside a bedchamber door in heavy shadow
+gia-nhap-phe|1|consorts' hands around a shared table in a dim hall, one hand setting a new tea cup in place for a newcomer, in a shadowed hall with closed windows
+gia-say-thai|1|a maid seen from behind carrying out a bowl of medicine from behind a bed curtain in heavy shadow, a physician's bowed back
+gia-thai-bi-lat|1|a physician's hand holding up a small cotton pillow in a dim hall, a consort seen from behind kneeling below, in a shadowed hall with closed windows
 gian-la-loi|0|a handkerchief fallen on the floor between a mistress's angry hand on a table and a kneeling maid's hands, daylight
 gianh-dem-khong-thanh|1|the imperial dragon palanquin passing straight by a shadowed palace gate, a consort seen from behind waiting alone in the gloom of the gateway
 giau-bi-thay|1|a consort's hand drawing a curtain closed over a screen at night, a maid's hand pushing the door ajar
