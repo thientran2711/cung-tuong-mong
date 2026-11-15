@@ -1,11 +1,15 @@
 /* ================= AGES: every person has an age, ageing yearly; faces by role and age band, fixed for life ================= */
 function courtSrc(k,c){if(k==="ty")return fsrc(c&&c.fc,"img/face-physician.webp");return fsrc(c&&c.fc,`img/face-eunuch-${(c&&c.fe>=0?c.fe:eunBand(c&&c.age||40))+1}.webp`)}
 function ageInit(){if(!S)return;[S].concat(rivals||[]).forEach(o=>{if(o)delete o.hue});if(typeof allServ==="function")allServ().forEach(s=>delete s.hue);if(!S.wkSnap&&typeof wkSnap==="function"){S.wkSnap=wkSnap();S.lastWk=wkKey()}const m=S.maid;if(m){if(!(m.age>=16))m.age=16+R(7);delete m.face;delete m.hue}
- if(!(S.thAge>0))S.thAge=(S.emp?S.emp.age:30)+18+R(7);
+ /* Thái hậu = the Emperor's mother (owner 11/15): 51–62 at the start (51+ = the a51 art band, band4), and ≥ Emperor + 18;
+    an old save with a younger mother (live showed 43) is brought up to that floor. Her age is also kept on S.thO.age so every
+    portrait / figure picker that reads who.age gets her real age band. */
+ {const ea=S.emp&&S.emp.age>0?S.emp.age:30,lo=Math.max(51,ea+18),hi=Math.max(lo,62);if(!(S.thAge>0))S.thAge=lo+R(hi-lo+1);else if(S.thAge<lo&&!S.thDead)S.thAge=lo+R(Math.min(4,hi-lo+1))}
+ S.thO=S.thO||{};S.thO.age=S.thAge;
  (rivals||[]).forEach(v=>{if(!(v.age>=18))v.age=18+R(8)});
  const C=S.court||{};const base={tq:56,ksp:40,ped:20,ty:50};for(const k in C){const c=C[k];if(!(c.age>0))c.age=(base[k]||35)+R(6);if(k!=="ty"&&!(c.fe>=0))c.fe=eunBand(c.age)}
  if(typeof allServ==="function")allServ().forEach(s=>{if(!(s.age>0))Object.assign(s,servAge(s.role));if(s.role!=="maid"&&!(s.fe>=0))s.fe=eunBand(s.age)});faceInit()}
-function ageYear(){(S.men||[]).forEach(m=>m.age++);if(S.maid)S.maid.age=(S.maid.age||18)+1;S.thAge=(S.thAge||50)+1;(rivals||[]).forEach(v=>{if(v.alive)v.age=(v.age||20)+1});
+function ageYear(){(S.men||[]).forEach(m=>m.age++);if(S.maid)S.maid.age=(S.maid.age||18)+1;S.thAge=(S.thAge||51)+1;if(S.thO)S.thO.age=S.thAge;(rivals||[]).forEach(v=>{if(v.alive)v.age=(v.age||20)+1});
  for(const k in (S.court||{}))S.court[k].age=(S.court[k].age||40)+1;if(typeof allServ==="function")allServ().forEach(s=>s.age=(s.age||20)+1)}
 function tuoi(n){return n>0?`Tuổi <b>${n}</b>`:""}
 /* children: a variant at birth, the face band follows the age (initials if the file is missing) */
@@ -75,7 +79,7 @@ function optLine(a){const o=a.o==null?100:a.o;const rolled=o<100&&!a.lock;const 
  return [rolled?word(o):"Chắc chắn",a.c&&fmt(a.c)?"tốn: "+fmt(a.c):"",gain?"thành: "+gain:"",rolled?"hỏng: "+(fmt(a.l||{})||"không mất gì"):""].filter(Boolean).join(" · ")}
 /* a dilemma option {n, fx, x, go}: x usually already holds 'word · thành · hỏng'; fill what is missing */
 function dilLine(c){const fx=fmt(c.fx||{}),x=c.x||"";const src=String(c.go||"")+String(c.fail||"");let s=x;
- if(!ODDW.test(x)){if(/roll\(/.test(src))s="Khó lường · "+x;else{if(!fx&&!x)return /^Thôi|^Im lặng|^Để /.test(c.n||"")?"Chắc chắn · không được mất gì":c.go||c.open?"Chắc chắn · chọn, xem kết quả ở bước sau":"Chắc chắn · không được mất gì";return ["Chắc chắn",fx?"ngay: "+fx:"",x?"thành: "+x:""].filter(Boolean).join(" · ")}}
+ if(!ODDW.test(x)&&!CHW.test(x)){if(/roll\(/.test(src))s="Khó lường · "+x;else{if(!fx&&!x)return /^Thôi|^Im lặng|^Để /.test(c.n||"")?"Chắc chắn · không được mất gì":c.go||c.open?"Chắc chắn · chọn, xem kết quả ở bước sau":"Chắc chắn · không được mất gì";return ["Chắc chắn",fx?"ngay: "+fx:"",x?"thành: "+x:""].filter(Boolean).join(" · ")}}
  if(!/hỏng/.test(s))s+=" · hỏng: không mất gì";return [fx?"ngay: "+fx:"",s].filter(Boolean).join(" · ")}
 /* the real speaker of an event: a named eunuch of that palace or of the court, a spy of hers; no speaker -> the place art */
 function pEunOf(p){const e=(p&&p.staff||[]).find(s=>s.role!=="maid");return e?Object.assign(pServ(e),{nm:e.name}):pEunCourt("ksp")}

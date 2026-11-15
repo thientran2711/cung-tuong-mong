@@ -15,7 +15,7 @@ tt:{t:"Quân cờ của Tể tướng",n:3,goal:"Cha ngươi dùng ngươi làm 
   return""}},
 dtq:{t:"Trung thần nơi biên ải",n:3,goal:"Cha ngươi trấn giữ biên cương; thắng bại ngoài ải là vinh nhục của ngươi. Khi có kẻ vu cha mưu phản, phải tìm đủ chứng cứ trong hạn.",
  init(){S.st.proof=0;S.st.acc=0},
- hint:()=>S.st.acc?`Còn ${Math.max(0,S.st.acc-S.turn)} tháng, chứng cứ ${S.st.proof}/2`:`Tháng 4 hằng năm có tin biên ải (thắng: ${word(55)}); từ năm thứ 3, mỗi tháng có kẻ vu cha: ${word(15)}`,
+ hint:()=>S.st.acc?`Còn ${Math.max(0,S.st.acc-S.turn)} tháng, chứng cứ ${S.st.proof}/2`:`Tháng 4 hằng năm có tin biên ải (thắng: ${chanceW(55)}); từ năm thứ 3, mỗi tháng có kẻ vu cha: ${chanceW(15)}`,
  month(){const st=S.st;let ev="";
   if(S.month===4&&S.turn>1){if(roll(55)){apply({danh:4,sung:3});S.emp.mood=0;ev+=`<span class="g">Tin thắng trận từ biên ải: cha ngươi phá tan quân giặc.</span> Danh +4 · Sủng +3. `}else{apply({danh:-4,sung:-3});S.emp.mood=2;ev+=`<span class="r">Cha ngươi thua một trận ở Nhạn Môn quan.</span> Danh -4 · Sủng -3. `}}
   if(!st.acc&&S.year>=3&&roll(15)){const p=liveRivals(false);if(p.length){const v=p.slice().sort((a,b)=>a.rel-b.rel)[0];st.acc=S.turn+8;st.accuser=v;st.step=1;v.rel-=10;ev+=`<span class="r">${v.name} xúi cha nàng dâng sớ: Đại tướng quân giữ binh không về, có lòng phản.</span> Hoàng thượng cho 8 tháng tra xét. `}}

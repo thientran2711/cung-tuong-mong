@@ -14,7 +14,7 @@ const KA_TIME=/^(?:[●○]+\s*)?\d+(?:\s*[-–]\s*\d+)?\s*(khắc|việc)$/i;
 const KA_STAT=/^(Bạc|Sức|Sủng|Danh|Đức|Sắc|Tài|Tâm cơ|Tai mắt|Ân tình|Thai)\s*-\s?\d/;
 const kaPlain=h=>String(h||"").replace(/<[^>]+>/g,"").replace(/\s+/g," ").trim();
 /* sentiment of one value for her: g gain, r loss, n neutral word */
-const kaWord=h=>String(h).replace(/(nàng |hắn )?thù -(\d+)/g,(m,p,n)=>`${p||""}oán ngươi +${n}`).replace(/thân -(\d+)/g,"thiện cảm -$1").replace(/thân \+(\d+)/g,"thiện cảm +$1");
+const kaWord=h=>String(h).replace(/(nàng |hắn )?thù -(\d+)/g,(m,p,n)=>`${p||""}oán ngươi +${n}`).replace(/thân -(\d+)/g,"quý ngươi -$1").replace(/thân \+(\d+)/g,"quý ngươi +$1");
 function kaSent(h,old){const s=kaPlain(h);if(!s)return"n";let c="n";try{c=kcls(h)}catch(e){}if(c==="n"&&(old==="g"||old==="r"))c=old;
  /* sign wins: a value whose only number is negative is a loss for her (unless it is harm to a rival or less hostility) */
  if(c!=="r"&&/[-−]\s?\d/.test(s)&&!/\+\s?\d/.test(s)&&!/(^|\s)(nàng|con nàng|của nàng|hắn)(\s|$)/.test(s)&&!/(ghen|oán|thù|nghi)\s*[-−]/.test(s))c="r";return c}
@@ -39,7 +39,7 @@ function kaModel(html){const t=document.createElement("template");t.innerHTML=St
   afterOdds=false;push(n.outerHTML,"n")}};
  walk(t.content.childNodes);return M}
 /* read a raw line 'word · tốn: … · thành: … · hỏng: … · note' (segments keep whether they continue a label) */
-function kaModelStr(str){str=String(str||"").replace(/(nàng |hắn )?thù -(\d+)/g,(m,p,n)=>`${p||""}oán ngươi +${n}`).replace(/thân -(\d+)/g,"thiện cảm -$1").replace(/thân \+(\d+)/g,"thiện cảm +$1").trim();
+function kaModelStr(str){str=String(str||"").replace(/(nàng |hắn )?thù -(\d+)/g,(m,p,n)=>`${p||""}oán ngươi +${n}`).replace(/thân -(\d+)/g,"quý ngươi -$1").replace(/thân \+(\d+)/g,"quý ngươi +$1").trim();
  const M={odds:"",oddsX:"",items:[]};let lab="";const segs=str.split(/ · (?![^<]*>)/);
  for(const s0 of segs){const plain=kaPlain(s0);if(!plain)continue;
   if(!M.odds&&KA_ODDS.test(plain)){M.odds=plain;continue}
@@ -54,7 +54,7 @@ const KA_RISK=/^(có thể bị|bị người của nàng phát giác|bị lộ|
 /* place every value in its row by meaning */
 function kaRows(M){const R={why:[],ton:[],duoc:[],mat:[],kem:[],note:[]};const add=(r,h,c)=>{if(!R[r].some(x=>kaPlain(x.h)===kaPlain(h)))R[r].push({h,c})};
  const sure=!M.odds||/^Chắc chắn/.test(M.odds);
- for(const it of M.items){let [h,nt]=kaSplitNote(it.h);if(nt)add("note",nt,"n");const p=kaPlain(h);if(!p)continue;const c=kaSent(h,it.old);const neu=KNEU.test(p);const l=it.l||"";const cont=!!it.cont;
+ for(const it of M.items){let [h,nt]=kaSplitNote(it.h);if(nt)add("note",nt,"n");const p=kaPlain(h);if(!p)continue;if(/^(chắc chắn · )?không được mất gì$/i.test(p))continue; /* owner 11/15: a line that says nothing is not shown */const c=kaSent(h,it.old);const neu=KNEU.test(p);const l=it.l||"";const cont=!!it.cont;
   if(/[+−-]\s?0(?![\d.,])/.test(p)&&!/[+−-]\s?(0[.,]\d*[1-9]|[1-9])/.test(p)){add("note",p.replace(/\s?[+−-]\s?0(?![\d.,])/g," không đổi"),"n");continue}
   if(l==="why"){add("why",h,"r");continue}
   if(/^\(.*\)$/.test(p)){add("note",h,"n");continue}
@@ -65,20 +65,23 @@ function kaRows(M){const R={why:[],ton:[],duoc:[],mat:[],kem:[],note:[]};const a
   if(l==="thành"){if(neu)add("note",h,"n");else if(c==="r")add(sure?(KA_STAT.test(p)?"ton":/[-−]\s?\d/.test(p)?"mat":"kem"):"kem",h,"r");else if(c==="n"&&cont&&!/\d/.test(p)&&/(nếu|có khi|tang vật)/.test(p))add("note",h,"n");else add("duoc",h,"g");continue}
   if(l==="hỏng"&&!cont){add("mat",h,/^không (được )?mất gì$/i.test(p)?"n":c==="g"&&/\+\s?\d/.test(p)&&!/-\s?\d/.test(p)?"g":"r");continue}
   if(l==="hỏng"&&cont){if(c==="r")add("kem",h,"r");else add("note",h,"n");continue}
-  if(l==="kèm"){add("kem",h,neu?"n":"r");continue}
+  if(l==="kèm"){if(c==="g")add("duoc",h,"g");else add("kem",h,neu?"n":"r");continue}/* owner 11/15: a positive never sits on the red Kèm line */
   /* unlabelled or after tốn */
   if(neu){add("note",h,"n");continue}
   if(c==="g"){add("duoc",h,"g");continue}
   if(c==="r"){add(KA_STAT.test(p)?"ton":"kem",h,"r");continue}
   add("note",h,"n")}
  /* an empty Mất row ("không mất gì") is never shown (kit owner #2): sure acts and safe failures simply have no Mất row */
- R.mat=R.mat.filter(x=>!/^(hỏng:\s*)?không mất gì( thêm)?\.?$/i.test(kaPlain(x.h).trim()));
+ {const E=/^(hỏng:\s*)?không (mất|được|được mất) gì( thêm)?\.?$/i;R.mat=R.mat.filter(x=>!E.test(kaPlain(x.h).trim()));R.duoc=R.duoc.filter(x=>!E.test(kaPlain(x.h).trim()))}/* owner 11/15 08:00Z: "không được gì" is no loss either */
  if(R.ton.length>1)R.ton=R.ton.filter(x=>!/^không(\s|$)/i.test(kaPlain(x.h)));
  R.why=R.why.map(x=>({h:kaWhyCut(x.h),c:"r"}));const wt=R.why.map(x=>kaPlain(x.h).toLowerCase());R.note=R.note.filter(x=>!wt.some(w=>w.includes(kaPlain(x.h).toLowerCase())));
  return R}
 function kaWhyCut(h){return String(h).split(/\s·\s(?=(?:thành|hỏng|kèm|tốn|được)\s*:)/i)[0].replace(/[\s·—-]+$/,"")}
 function kaOdds(M){if(!M.odds||/^Chắc chắn/.test(M.odds))return"";if(M.odds==="Khó lường")return `<span class="oc oc2">Khó lường</span>`;return oddsChip(M.odds)+M.oddsX}
-function kaBody(R,dis){return `<small class="kb${dis?" kbdis":""}">`+KA_ROWS.filter(([k])=>R[k].length).map(([k,lab])=>`<span class="kr kr-${k}"><span class="krl">${lab}</span><span class="krv">${R[k].map(x=>k==="why"?`<span class="kwhy${x.c==="g"?" kok":""}">${x.c==="g"?"✓":"✗"} ${String(x.h).replace(/^[✓✗]\s*/,"")}</span>`:`<span class="ef ${x.c}">${x.h}</span>`).join('<span class="ksep">·</span>')}</span></span>`).join("")+`</small>`}
+/* owner 11/15 05:50Z: a GHI CHÚ that only repeats CẦN ("(chỉ buổi tối)" when CẦN shows "Buổi tối") is dropped — a note must add real information */
+function kaNoteDedup(R){try{if(!R.note||!R.note.length)return;const why=R.why.map(x=>kaPlain(x.h).toLowerCase()).join(" ");
+ R.note=R.note.filter(x=>{const p=kaPlain(x.h).toLowerCase().replace(/^[(\s]+|[)\s.]+$/g,"");const m=p.match(/^(?:chỉ )?(buổi (?:sáng|trưa|chiều|tối))$/);return !(m&&why.includes(m[1]))})}catch(e){}}
+function kaBody(R,dis){kaNoteDedup(R);return `<small class="kb${dis?" kbdis":""}">`+KA_ROWS.filter(([k])=>R[k].length).map(([k,lab])=>`<span class="kr kr-${k}"><span class="krl">${lab}</span><span class="krv">${R[k].map(x=>k==="why"?`<span class="kwhy${x.c==="g"?" kok":""}">${x.c==="g"?"✓":"✗"} ${String(x.h).replace(/^[✓✗]\s*/,"")}</span>`:`<span class="ef ${x.c}">${x.h}</span>`).join('<span class="ksep">·</span>')}</span></span>`).join("")+`</small>`}
 /* kitParse: same input, kit rows out (odds chip first, the frame moves it to the title row) */
 (function(){const kp0=kitParse;kitParse=function(str){const s=String(str||"");if(/class="kb/.test(s))return s;const M=kaModelStr(s);const R=kaRows(M);const o=kaOdds(M);return (o?`<span class="kodds">${o}</span>`:"")+kaBody(R).replace(/^<small class="kb">/,'<span class="kb">').replace(/<\/small>$/,"</span>")}})();
 /* ---------- the frame: rebuild a button into [title + odds] + rows ---------- */
@@ -109,7 +112,11 @@ function kaNorm1(b){if(b.dataset.ka==="1"){const kan=b.querySelector(":scope > .
  if(needs&&needs.length){const kn=t=>kaPlain(t).replace(/^[✓✗]\s*/,"").toLowerCase().replace(/^cần\s+/,"").replace(/\s*\(có [^)]*\)$/,"").trim();const un=needs.filter(n=>!n.ok).map(n=>kn(n.t));const gen=/^(chưa đủ điều kiện|hết khắc|sức dưới 20|chỉ buổi|đã qua|đang cấm túc|đã làm trong buổi|đã mất|ở lãnh cung)/i;
   const extra=R.why.filter(w=>{const x=kn(w.h);if(w.c==="g")return false;if(un.length&&gen.test(x))return false;return !un.some(u=>u.includes(x)||x.includes(u))});
   R.why=[...needs.filter(n=>!n.ok).map(n=>({h:n.t,c:"r"})),...extra.map(w=>({h:w.h,c:"r"})),...needs.filter(n=>n.ok).map(n=>({h:n.t,c:"g"}))]}
- if(dis&&!R.why.some(x=>x.c!=="g")){let w="";try{w=typeof guessWhy==="function"?guessWhy(b):""}catch(e){}if(w)R.why.push({h:w,c:"r"})}
+ /* owner 09:40Z (KIT 31.11): never the same fact twice. A Cần item that is only "afford the cost" (Bạc) goes: the Tốn line already
+    shows the cost; when she is short, Tốn says so in red ("thiếu bạc, có N"). Cần keeps only conditions that are not the cost. */
+ let costOnly=false;{const tb=R.ton.find(x=>/Bạc\s*[-−]\s*\d+/.test(kaPlain(x.h)));if(tb){const isCost=w=>/^(✗\s*)?(thiếu bạc|không đủ bạc|cần bạc|chưa đủ bạc|bạc\s*[-−]?\s*\d+(\s*\(có -?\d+\))?$|cần \d+ bạc)/i.test(kaPlain(w.h).trim());
+   const had=R.why.filter(isCost);if(had.length){R.why=R.why.filter(w=>!isCost(w));if(had.some(w=>w.c!=="g")){R.ton.push({h:`thiếu bạc (có ${typeof S!=="undefined"&&S?S.bac:0})`,c:"r"});costOnly=true}}}}
+ if(dis&&!costOnly&&!R.why.some(x=>x.c!=="g")){let w="";try{w=typeof guessWhy==="function"?guessWhy(b):""}catch(e){}if(w)R.why.push({h:w,c:"r"})}
  const kinfo="";
  b.classList.add("ka");b.classList.toggle("kdis",dis);
  b.innerHTML=`<span class="kat"><span class="kan">${titleH||"&nbsp;"}</span>${odds?`<span class="kodds">${odds}</span>`:""}</span>`+(leadH?`<span class="klead">${leadH}</span>`:"")+kaBody(R,dis)+kinfo}
@@ -192,7 +199,7 @@ resultShow=function(title,before,okHint){if(!S||!before||S.dead)return;
  const [G,B]=kaResultRows(before);const n=Math.max(0,(S.logSeq||0)-before.seq);let sen="";try{sen=kaSentence(before)}catch(e){}if(sen&&kaPlain(sen).replace(/[.!…\s]+$/,"").toLowerCase()===kaPlain(title||"").replace(/[.!…\s]+$/,"").toLowerCase())sen="";
  const why=S.logs.slice(0,Math.min(n,S.logs.length)).map(plain).join(" ");
  /* the seal follows the outcome FOR HER (net real changes + what the log says), not which branch fired */
- const failTxt=/chặn kịp|phát giác|bị lộ|bị bắt|không thành|hỏng|từ chối|không ai tin|trách ngươi|quở|bị phạt|mắng|thư giả|vu khống|thất bại/i.test(why);
+ const failTxt=/chặn kịp|phát giác|bị lộ|bị bắt|không thành|hỏng|từ chối|không ai tin|trách ngươi|quở|bị phạt|mắng|thư giả|vu khống|thất bại|không dò ra|không biết gì|cũng không biết|không thấy gì|không tìm ra|chưa duyệt/i.test(why);/* act audit: a failed search/scout read THÀNH */
  const realLoss=B.some(x=>!/^<span class="ef r">(Sức|Bạc) /.test(x));
  const netBad=!G.length&&realLoss;
  const ok=okHint===false?false:!(failTxt||netBad);const seal=ok?"THÀNH":okHint===false||/hỏng|không thành|thất bại/i.test(why)?"HỎNG":"BẤT LỢI";
@@ -219,7 +226,7 @@ resultShow=function(title,before,okHint){if(!S||!before||S.dead)return;
 `;document.head.appendChild(st)})();
 /* "có thể bị người của nàng phát giác" -> the real chance word for this target (same formula as caught(), j8), never % */
 const KA_PS=["poison","musk","kpoison"];
-function kaCaughtTxt(v,k){try{const n=cl(oSee(v,KA_PS.includes(k))-4*(facN(S)-1),5,95);const lv=typeof chanceLvl==="function"?chanceLvl(n):(n<8?"Rất thấp":n<18?"Thấp":n<35?"Vừa":n<60?"Cao":"Rất cao");return `bị người của nàng phát giác: ${lv} — nàng nắm 2 chứng cứ`}catch(e){return null}}
+function kaCaughtTxt(v,k){try{const n=cl(oSee(v,KA_PS.includes(k))-4*(facN(S)-1),5,95);return `bị người của nàng phát giác: ${chanceW(n)} — nàng nắm 2 chứng cứ`}catch(e){return null}}
 (function(){if(typeof rvGroups!=="function")return;const g0=rvGroups;rvGroups=function(v){const G=g0.apply(this,arguments);try{for(const g of G)g[1]=g[1].map(h=>{const m=String(h).match(/data-a="(\w+)"/);if(!m||!String(h).includes(CAUGHT))return h;const t=kaCaughtTxt(v,m[1]);return t?String(h).split(CAUGHT).join(t):h})}catch(e){}return G}})();
 /* ---------- "Cần" row: every condition an act needs, with its current status, from the real checks (can/whyTime/cardWhy/ok/LACK/evG) ---------- */
 function kaNeedAttr(L){return L&&L.length?` data-kneed="${encodeURIComponent(JSON.stringify(L))}"`:""}

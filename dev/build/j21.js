@@ -41,7 +41,7 @@ function bkey(){return wk()+"-"+(S.buoi||0)}
 function seeLoc(v,k){kn();S.seenLoc=S.seenLoc||{};S.seenLoc[v.id]={k:k||whereOf(v),b:bkey()}}
 function locKnown(v){const s=S.seenLoc&&S.seenLoc[v.id];return s&&s.b===bkey()&&s.k===whereOf(v)?s.k:null}
 /* faces on the map only for the exceptions: her household, public schedules, and people seen/reported this buổi */
-function seenAt(k){const W=S.where||{},L=[];if(W.emp===k&&k==="dtd"&&(S.buoi||0)===2)L.push(pEmp());if(k==="tn"&&!S.thDead&&(S.buoi||0)===0)L.push(pTH());if(k==="home"){L.push(pMaid());S.kids.filter(x=>x.alive).forEach(x=>L.push(kidFace(x)))}
+function seenAt(k){const W=S.where||{},L=[];if(W.emp===k&&k==="dtd"&&((S.buoi||0)===B4L||(S.buoi||0)===1))L.push(pEmp());if(k==="tn"&&!S.thDead&&(S.buoi||0)===0)L.push(pTH());if(k==="home"){L.push(pMaid());S.kids.filter(x=>x.alive).forEach(x=>L.push(kidFace(x)))}
  for(const v of rivals)if(v.alive&&!v.out&&W[v.id]===k&&locKnown(v)===k)L.push(Object.assign(pv(v),{see:v.id}));return L}
 function seenFaces(k){const L=seenAt(k),n=countAt(k);if(!n)return"";return `<span class="mfaces">${L.slice(0,5).map(f=>f.see!=null?`<i data-see="${f.see}">${mdH(f,"xs")}</i>`:mdH(f,"xs")).join("")}${n>L.length?`<span class="mq">+${n-L.length} chưa rõ</span>`:""}</span>`}
 /* walk to a consort and open her card; if she has gone, say where, offer to follow */
