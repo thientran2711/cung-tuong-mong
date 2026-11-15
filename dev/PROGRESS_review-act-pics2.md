@@ -161,3 +161,11 @@ Notes: `cdn_sync.py --pull` does NOT refresh img/_index.json reliably (stale loc
 ### Coordinator add-on DONE: "Khảo hạch tấn phong" (review/promo-exam jexam.js card n:"Khảo hạch tấn phong")
 - Hands-only exam desk picture (brush, inkstone, sealed scroll, embroidery hoop, guqin corner) on the CDN as img/act-khao-hach-tan-phong.webp (plain name; hgens id 1lpoY9Sr4r).
 - Live ACTS.json acts["Khảo hạch tấn phong"] = "khao-hach-tan-phong" (acts 300 -> 301; key verified in the live _index, 0 missing).
+### Step 2 DONE (data only, live): meanings.py rules merged into live ACTS.json
+- Tool: dev/figwork/acts/mergepatch.py LIVE.json INDEX.json PATCH.json OUT.json CORPUS.txt (meanings.py order; live rules keep key + relative order, asserted).
+- Corpus guard: corpus.py builds first sentences from inv_ast.js (static inventory of every log/ret/option template, 1477 lines; tmp copy of inv_ast.js needs B=<worktree>/dev/build/ and the module list taken from the `js=` line). A new rule that would take a line away from a live picture rule is held ("heldSteals").
+- Before: acts 301, prefix 10, log 547, 529 distinct keys. After: 301 / 10 / 554 / 529. 0 keys missing in the live _index.
+- Added 7: six "-" rules (origins, item names, wardrobe buttons, stat deltas, Bổng lộc/Đợi/Mặc kệ, plot-fragment lines) + xac-lao-vuong's "^Xác lão Vương". Corpus effect: 38 lines None -> "-" (no thumbnail), 0 lines lose a picture.
+- Held 277 rules (picture not on the CDN): keys in merge_held_keys.txt (this IS the remaining-picture queue, see step 5). Held 6 "-" rules that would steal picture lines (e.g. "Núp sau hòn giả sơn ..." would lose nghe-lom-gia-son): listed under heldSteals in ACTS_merge_patch.json; the meanings.py rules need narrowing before they can go live.
+- Rerun after new pictures land: same command; it adds whatever is now on the CDN.
+- Note: dev/test/act-pics.js is stale against current main (start() not defined) — not used.
