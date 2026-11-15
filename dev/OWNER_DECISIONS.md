@@ -474,3 +474,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (14:50Z) LUẬT: sếp báo một lỗi thì sửa CẢ NHÓM (vd. vật liệu đắt không đáng tiền: rà mọi tài nghệ/món + mọi lựa chọn trả thêm tiền để được bản tốt hơn). Ghi vào WORKER_BRIEF; điều phối nhắc trong mỗi lần giao.
 - (15:00Z) DUYỆT: trang điểm bản mới (đẹp + diêm dúa, a820a52ab). DUYỆT mẫu da hồng hào → sửa 807 chân dung. Ô cảm xúc nam: chỉ cần nam/nữ, nhưng bộ nam đứng tuổi đã làm thì dùng luôn.
 - [ ] (15:00Z) Hoa điền mặt c05 ở y phục t5, t8 vẫn to → thu nhỏ + rà mọi chân dung phi tần.
+- (15:05Z) DUYỆT thiết kế lựa chọn sự kiện: hiện giá + Cần; một dòng GỢI Ý bằng lời (không số, đúng sự thật); nhãn an toàn/có rủi ro/liều; gợi ý rõ dần theo Tâm cơ/Tai mắt. Sau khi chọn: thẻ kết quả đủ Được/Mất + Vì sao. Việc chủ động (Hành sự, thẻ người, tiệm, tặng quà) vẫn hiện đủ số.
