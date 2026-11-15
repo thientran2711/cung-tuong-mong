@@ -359,7 +359,7 @@ window.toilOpen=toilOpen;window.toilDress=toilDress;window.toilFx=toilFx;window.
    ONE layer in the kit's face-effects slot (jk2b kitFxLayers: tall frame, small avatar, stage figures — same box as the picture), so it lines
    up wherever the scar / veil do. Points per picture: img/toil-fit.json (dev/figwork/toilfit.py: mouth found by colour in the portrait, cheeks
    on the face's own skin line, figures matched to their portrait by template). A picture without points gets nothing (never guessed). */
-const TOIL_FIT={url:"img/toil-fit.json",fit:null,_ld:0,load(){if(this.fit||this._ld)return;this._ld=1;try{fetch(this.url).then(r=>r.ok?r.json():null).then(j=>{if(j){TOIL_FIT.fit=j;try{if(typeof S!=="undefined"&&S&&!Q.length)render()}catch(e){}}}).catch(()=>{})}catch(e){}}};
+const TOIL_FIT={url:"img/toil-fit2.json"/* review/mk-colour: toil-fit.json with 1402 mouths moved onto the face-mesh lips (dev/art/mkfit/fixtoil.py); rename back to toil-fit.json after merge */,fit:null,_ld:0,load(){if(this.fit||this._ld)return;this._ld=1;try{fetch(this.url).then(r=>r.ok?r.json():null).then(j=>{if(j){TOIL_FIT.fit=j;try{if(typeof S!=="undefined"&&S&&!Q.length)render()}catch(e){}}}).catch(()=>{})}catch(e){}}};
 try{TOIL_FIT.load()}catch(e){}
 const TOIL_LOOKS={
  /* owner 15/11 on the sheet: "đẹp" subtle and natural; "diêm dúa" = the old đẹp a little stronger (pretty, just noticeably overdone, never a clown) */
@@ -489,13 +489,26 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 .kswt-i.on{border-color:var(--gold,#c9a227);background:rgba(201,162,39,.12)}
 .kswt-i.on i{box-shadow:0 0 0 2px #fffaf0,0 0 0 4px var(--gold,#c9a227)}
 .kswt-i:focus-visible{outline:2px solid var(--gold,#c9a227);outline-offset:1px}`;document.head.appendChild(st)})();
+/* KIT §60 kitFaceZoom(p, file): her face up close in a round bronze-mirror frame, the picture + the SAME face layers as everywhere (kitFxLayers),
+   centred on the measured face (img/toil-fit.json); "" when the picture has no points */
+function kitFaceZoom(p,file){const v=TOIL_FIT.fit&&TOIL_FIT.fit[file];if(!v)return"";const A=v[8]||1.3,zw=100/(v[6]*1.5)*100;/* picture width in % of the frame */
+ const left=50-v[0]/100*zw,top=60-v[1]/100*zw*A;let fx="";try{fx=kitFxLayers(p,file)}catch(e){}
+ return `<div class="kfzoom" role="img" aria-label="Dung nhan trong gương"><div class="kfzoom-i" style="left:${left.toFixed(2)}%;top:${top.toFixed(2)}%;width:${zw.toFixed(2)}%;height:${(zw*A).toFixed(2)}%">`+
+  `<img src="${IMG_U("img/"+file)}" alt=""><span class="kfxf">${fx}</span></div></div>`}
+window.kitFaceZoom=kitFaceZoom;
+(function(){const st=document.createElement("style");st.id="kfzoom-css";st.textContent=`
+.kfzoom{position:relative;width:min(200px,100%);aspect-ratio:1;margin:0 auto 6px;border-radius:50%;overflow:hidden;background:#efe0c6;box-shadow:0 0 0 3px var(--gold,#c9a227),0 0 0 6px #8a6a2a,0 3px 10px rgba(60,30,10,.35)}
+.kfzoom-i{position:absolute}
+.kfzoom-i>img{position:absolute;left:0;top:0;width:100%;height:100%;max-width:none}
+.kfzoom-i>.kfxf{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none}
+@media (max-width:640px){#kg82 .toilw .toilfig .kfzoom{grid-row:span 3;width:110px;margin:0}}`;document.head.appendChild(st)})();
 function toilColRows(c){return ["mat","ma","son","may"].map(k=>({k,label:TOIL_COL[k].label,sel:c[k],items:TOIL_COL[k].L.map(x=>({k:x[0],name:x[1],short:x[2],col:x[3]}))}))}
-try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§60",title:"kitSwatches · màu trang điểm (phấn mắt, phấn má, son môi, màu mày)",html:()=>kitSwatches({key:"kitpage",rows:toilColRows(toilColDef())})})}catch(e){}
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§60",title:"kitSwatches · màu trang điểm (phấn mắt, phấn má, son môi, màu mày)",html:()=>{let z="";try{if(typeof S!=="undefined"&&S){const f=kitFile(toilPor().src);TOIL.prev={look:"dep",col:toilColDef()};try{z=kitFaceZoom(S,f)}finally{TOIL.prev=null}}}catch(e){}return `<div style="display:grid;grid-template-columns:minmax(110px,200px) 1fr;gap:10px;align-items:start">${z||"<span></span>"}${kitSwatches({key:"kitpage",rows:toilColRows(toilColDef())})}</div>`}})}catch(e){}
 
 /* (b0) CHỌN MÀU — before the three hồi: her portrait wears the picks live (the same layers as all day, at the "đẹp" strength) */
 function toilColUI(){const st=TOIL.st,box=kg82Box();if(!box||!st)return;box.hidden=false;st.col=toilColFix(st.col||(S.toilette&&S.toilette.col));
  TOIL.prev={look:"dep",col:st.col};TOIL.prevUI=toilColUI;const por=toilPor(),me=pMe();
- box.innerHTML=`<div class="toilw"><div class="toilfig">${pcPort(Object.assign({},me,{src:por.src}),me.col)}<p class="past">Gương đồng soi trước: điểm trang khéo thì dung nhan mang đúng những màu này; phấn đánh quá dày thành diêm dúa, màu càng đậm.</p></div>`+
+ box.innerHTML=`<div class="toilw"><div class="toilfig">${kitFaceZoom(S,kitFile(por.src))||pcPort(Object.assign({},me,{src:por.src}),me.col)}<p class="past">Gương đồng soi trước: điểm trang khéo thì dung nhan mang đúng những màu này; phấn đánh quá dày thành diêm dúa, màu càng đậm.</p></div>`+
   `<div>${kitSwatches({key:"toilcol",rows:toilColRows(st.col),onPick:(r,k)=>{st.col[r]=k;toilColUI()}})}</div></div>`+
   `<div class="kg82act"><button class="${kg82Btn()}" id="toilgo">Trang điểm<small>kẻ mày, đánh phấn, chấm son</small></button><button class="${kg82Btn(true)}" id="toilmoc2">Để mặt mộc</button></div>`;
  $("toilgo").onclick=()=>{TOIL.prev=null;TOIL.prevUI=null;toilMakeup()};$("toilmoc2").onclick=()=>{TOIL.prev=null;TOIL.prevUI=null;toilFinish(false)}}

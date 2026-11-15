@@ -495,6 +495,7 @@ No text over text: a pop (`kg82Pop`) replaces any live pop it would land on; a r
   (mouth + both cheeks + face size per por-/fig- picture, `dev/figwork/toilfit.py`). Looks: none (mộc / vụng / vừa), `dep` (rosy feathered cheeks,
   light lip tint, brighter skin), `diem` diêm dúa (owner 15/11: the same painted layer a little stronger — deeper, wider rouge, bolder lip tint, a little more powder sheen;
   pretty, noticeably overdone, never clownish) — presets `TOIL_LOOKS`. Only her face. Sheet: `node dev/test/toil-looks.js`.
+- Since §60 (review/mk-colour): a colour step (Chọn màu) before the skill hồi; blush + lips + eyelids + brows wear HER picked colours (see §60).
 
 ## 14. SCENE PANEL (j79) — identity card, opening story, title screen
 - Compact translucent kit frame (`rgba(255,250,240,.90)` + blur) to one side in landscape (max 440 px / 44vw, vertically centred, right) and in the
@@ -2493,3 +2494,32 @@ figure (Thái hậu h1–h3, t7/t8 trains, wide a51 sleeves) is handled in `dev/
   facts/page, figure height ≥ 0.85, never scaled, page-1 name, torso clear, body never past the left edge. `node dev/test/book-relayout.js
   <url|page.html> <outdir>` — the figure download is held while the reader turns pages, then released: same fact still in view, 0 window
   resize events.
+
+## 60. MAKEUP COLOURS · kitSwatches · kitFaceZoom · colour layer on her pictures (owner 15/11 19:05Z, review/mk-colour) — `dev/build/jtoil.js` §60
+Like modern dress-up / makeup games: the colours she picks at the morning mirror show in EXACTLY those colours on HER OWN pictures (portrait,
+round avatar, stage figure, person dialogs, Tuần lục — every place `kitFxLayers` draws her) for the whole day.
+- **Flow** (13.3): Hồi 1 dress → verdict → "Trang điểm" opens **CHỌN MÀU** (new step, no khắc): left = `kitFaceZoom` (her face live with the
+  picks at the "đẹp" strength), right = `kitSwatches` with 4 rows, then "Trang điểm" (the 3 skill hồi, tools painted in her colours) / "Để mặt mộc".
+- **Palette** `TOIL_COL` (cổ trang names, VANPHONG): Phấn mắt (hoa đào · hồng mai · ráng chiều · kim sa · nâu trầm · tử vi), Phấn má (hồng phấn ·
+  hoa đào · hải đường · yên chi · ráng chiều · hồng sen), Son môi (hải đường · đỏ thắm · hồng đào · chu sa · mận chín · san hô), Màu mày (nâu trầm ·
+  đen tuyền · thanh đại · nâu nhạt · khói). Defaults = the approved "đẹp" blush + lip colours.
+- **Save**: `p.toilette.col = {mat, ma, son, may}` (only when made up). Old saves / bots: no `col` → `toilColFix` gives the defaults; unknown keys
+  fall back too. The look rules are unchanged: a layer only for "đẹp" (score ≥ tier[1]) and "diêm dúa"; diêm dúa = the SAME picks, stronger
+  (`TOIL_MKS`: lip .86 vs .62, lid colour .70 vs .50 and higher toward the brow, outer wing, lower lash line, deeper brows, the round strong blush).
+- **`kitSwatches({key, rows:[{k,label,sel,items:[{k,name,short,col:[r,g,b]}]}], onPick(rowK,itemK)})`**: one row per part — label (display
+  font) + the picked full name (dim), then round colour swatches (30 px, a soft sheen) with the short name under each; picked = gold ring + gold
+  tint (`.kswt-i.on`, `aria-checked`). Grid `auto-fill minmax(54px,1fr)`, wraps on any width. Tap → `onPick`. CSS `#kswt-css`.
+- **`kitFaceZoom(p, file)`**: a round bronze-mirror frame (gold ring) with the face of picture `file` centred from `img/toil-fit.json`, the picture +
+  `kitFxLayers(p,file)` (so the zoom shows exactly what every other place shows). 200 px (110 px beside the facts under 640 px). CSS `#kfzoom-css`.
+- **Colour layer** `toilMkLayer` → `<img class="kmk kmkc">` in the face-effects slot (order: picture < skin/blush SVG `kmk` < colour layer `kmkc`
+  < scar < veil), its box = the face region of the picture. Painted in a canvas FROM THE PICTURE ITSELF (`toilMkDraw`): lips (outer minus mouth
+  opening), eyelids (layers from the lash line toward the brow; the eye stays clear), brows (only hair pixels darker than the skin) are recoloured
+  to the picked colour with each pixel's own light/shade (highlights on the lip keep some shine), soft masks (canvas shadow, works on old Safari);
+  output pixel = what makes mix(picture, layer, α) equal the painted pixel. Cache 80 layers; a not-yet-painted layer is a 1 px blank.
+- **Anchors** `img/mk-fit/<face>.json` (face = `consort-c05`, `maid-m07`, `player-look1`…; loaded only for her face): 60 points per picture
+  (lips 12+8, eye A 7+3, eye B 7+3, brows 10+10) in 1/4000 of the picture, made by `dev/art/mkfit/mkfit.py` (MediaPipe Face Landmarker on a
+  face crop of every por-/fig- picture in toil-fit.json; sanity check against the toil-fit mouth; pair transfer por↔fig when detection fails).
+  `dev/art/mkfit/md5.json` = CDN md5 measured on; after any re-crop/redraw run `python3 -I dev/art/mkfit/mkfit.py --stale` and cdn_sync the
+  changed `img/mk-fit/*.json`. A picture without anchors keeps the older SVG lip oval in her colour (never guessed).
+- Sheet: `node dev/test/mk-colour.js <url> <out.jpg> [face] [tier] [age]`; flow test: `dev/test/toilette.js` (palette step included).
+  Kit page: sample "§60".

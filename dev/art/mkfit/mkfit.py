@@ -72,6 +72,24 @@ def detect(model, data, v):
     if math.hypot(lc[0] - mx, lc[1] - my) > fw * .22 or not (fw * .28 < ed < fw * 1.1): return None, (W, H)
     return pts, (W, H)
 
+def detect_free(model, data):
+    """second try when the toil-fit box is wrong (its mouth off the face): the whole portrait, or the top 40 % of a figure, no toil-fit check"""
+    mp, L = landmarker(model)
+    im = Image.open(io.BytesIO(data)).convert("RGBA")
+    bg = Image.new("RGBA", im.size, (255, 255, 255, 255)); bg.alpha_composite(im); rgb = bg.convert("RGB")
+    W, H = rgb.size
+    y1 = H if H / W < 1.6 else int(H * .4)
+    cr = rgb.crop((0, 0, W, y1)); k = 640 / cr.width
+    cr = cr.resize((640, int(round(cr.height * k))), Image.LANCZOS)
+    r = L.detect(mp.Image(image_format=mp.ImageFormat.SRGB, data=np.ascontiguousarray(np.asarray(cr))))
+    if not r.face_landmarks: return None, (W, H)
+    lm = r.face_landmarks[0]
+    pts = [(lm[i].x * cr.width / k, lm[i].y * cr.height / k) for i in MK_IDX]
+    lc = np.mean(pts[0:12], axis=0); ea, eb = np.mean(pts[20:30], axis=0), np.mean(pts[30:40], axis=0)
+    ed = math.hypot(*(ea - eb))
+    if not (W * .04 < ed < W * .4) or lc[1] < max(ea[1], eb[1]): return None, (W, H)
+    return pts, (W, H)
+
 def enc(pts, W, H):
     out = []
     for x, y in pts: out += [int(round(x / W * U)), int(round(y / H * U))]
@@ -115,7 +133,9 @@ def main():
             datas = dict(zip(todo, ex.map(lambda n: get(BASE + n), todo)))
         res, size = {}, {}
         for n in todo:
-            try: p, size[n] = detect(model, datas[n], fit[n])
+            try:
+                p, size[n] = detect(model, datas[n], fit[n])
+                if not p: p, size[n] = detect_free(model, datas[n])
             except Exception as e: p = None; print("err", n, e, file=sys.stderr)
             if p: res[n] = p
         for n in todo:
