@@ -203,8 +203,8 @@ document.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.tar
 @media (max-width:899px){.keq{--keqsz:76px}.keq .keqs{gap:8px}}
 .keq .keqc{display:flex;flex-direction:column;align-items:center;gap:2px;min-width:0;text-align:center}
 .keq .keqc>.kitem-slot{width:min(var(--keqsz,96px),100%)}
-@supports (grid-template-rows:subgrid){.keq .keqs{grid-auto-rows:auto;align-items:start}.keq .keqc{display:grid;grid-row:span 4;grid-template-rows:subgrid;row-gap:2px;justify-items:center;align-content:start}
- .keq .keqc>.keqfx:empty,.keq .keqc>.keqnote:empty{min-height:0}}
+@supports (grid-template-rows:subgrid){.keq .keqs{grid-auto-rows:auto;align-items:start}.keq .keqc{display:grid;grid-row:span 4;grid-template-rows:subgrid;row-gap:2px;align-items:start;justify-items:center;align-content:start}
+ .keq .keqc>.keqfx:empty,.keq .keqc>.keqnote:empty{min-height:0}.keq .keqc>.keqnm{margin-top:0}}
 .keq .keqnote{display:flex;justify-content:center;min-width:0}.keq .keqnote>.keql2{flex-basis:auto}
 .keq .keqrows{align-self:stretch;text-align:left;margin-top:4px;padding-top:4px;border-top:1px dashed var(--k-hair,#e6d3ac)}
 .keq .keqrows .kpkb{font-size:.74rem}.keq .keqrows .krl{white-space:nowrap}

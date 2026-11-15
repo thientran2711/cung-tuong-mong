@@ -14,7 +14,8 @@ const fresh=`(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();d
  const kr=document.getElementById('kroul');if(kr)kr.remove();const dw=document.getElementById('dawn');if(dw)dw.remove();document.body.classList.remove('kbk-open');window.kmPush=function(){};document.querySelectorAll('.kmov').forEach(e=>e.remove());render()})()`;
 (async()=>{const b=await chromium.launch(prox);const R={size:SZ};const errs=[],errsOld=[];
  const mk=()=>b.newContext(Object.assign({viewport:{width:W,height:H},deviceScaleFactor:+(DPR||1),hasTouch:true,isMobile:W<1100,reducedMotion:'reduce',serviceWorkers:'block',ignoreHTTPSErrors:true}));
- const boot=async(ctx,url,E)=>{const p=await ctx.newPage();p.setDefaultTimeout(240000);p.on('pageerror',e=>E.push(e.message.slice(0,200)));await p.addInitScript(()=>{window.__nlInner=1});
+ const boot=async(ctx,url,E)=>{const p=await ctx.newPage();p.setDefaultTimeout(240000);p.on('pageerror',e=>E.push(e.message.slice(0,200)));await p.addInitScript(()=>{window.__nlInner=1;addEventListener('DOMContentLoaded',()=>{const s=document.createElement('style');s.textContent='#kroul,#kload,.krbox{display:none!important}';document.head.appendChild(s)})});
+  await p.route(/ctmload=1/,r=>r.abort());/* the first-entry asset download (jload) is not part of the test: blocked, its screen hidden */
   await p.goto(url,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof showModal==='function');await sleep(2000);return p};
  /* --- old save (made by an older build) --- */
  let old=null;if(OLD){const c0=await b.newContext({viewport:{width:755,height:1000},deviceScaleFactor:1,serviceWorkers:'block',ignoreHTTPSErrors:true});const p0=await boot(c0,BASE+'/'+OLD,errsOld);
@@ -43,8 +44,8 @@ const fresh=`(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();d
  await sleep(600);await p.evaluate(()=>{const e=document.querySelector('#panel .keq[data-keq="pets"]');if(e)e.scrollIntoView({block:'center'})});
  R.row=await p.evaluate(()=>{const out={};const R=e=>e.getBoundingClientRect();const sp=a=>a.length?+(Math.max(...a)-Math.min(...a)).toFixed(2):0;
   for(const k of ['pets','tutrang']){const q=document.querySelector(`#panel .keq[data-keq="${k}"]`);if(!q)continue;const C=[...q.querySelectorAll('.keqc')];const rows={};C.forEach(c=>{const y=Math.round(R(c).top);(rows[y]=rows[y]||[]).push(c)});
-   out[k]=Object.values(rows).map(cs=>{const part=s=>cs.map(c=>c.querySelector(s)).filter(Boolean).map(e=>R(e).top);return{n:cs.length,pic:sp(part('.kitem')),name:sp(cs.filter(c=>c.querySelector('.keqnm')).map(c=>R(c.querySelector('.keqnm')).top)),
-    chips:sp(part('.keqfx')),note:sp(part('.keqnote')),noteTxt:cs.map(c=>(c.querySelector('.keqnote')||{}).textContent||'')}})}return out});
+   out[k]=Object.values(rows).map(cs=>{const part=s=>cs.map(c=>c.querySelector(s)).filter(Boolean).map(e=>R(e).top);return{n:cs.length,pic:sp(part('.kitem')),name:sp(cs.map(c=>c.querySelector('.keqnm,.keql')).filter(Boolean).map(e=>R(e).top)),
+    chips:sp(cs.map(c=>c.querySelector('.keqfx')).filter(e=>e&&e.children.length).map(e=>R(e).top)),note:sp(part('.keqnote')),noteTxt:cs.map(c=>(c.querySelector('.keqnote')||{}).textContent||'')}})}return out});
  await shot('01-inv-pets');A.push(await audit('inv-pets'));
  /* --- 2. the pet shop (empty slot) --- */
  await p.evaluate(()=>{S.pets=[];S.petOn=-1;render()});await sleep(300);await p.click('#panel [data-keqk="pets"][data-keqi="0"]');await sleep(1500);await imgs();
