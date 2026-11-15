@@ -211,3 +211,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (02:10Z) Owner DUYỆT áo con nhà nghèo (mẫu 4 mặt) → vẽ đủ 84 mặt; thd/td mặc áo nghèo.
 - (02:15Z) Owner BỎ ý 11 'mật ước sinh con khi Hoàng thượng vô sinh' (hơi tào lao) — không làm; 14 ý còn lại giữ.
 - (02:20Z) Owner: đổi hết hoa điền hình đồ vật/quả/con vật sang hoa lá (giữ dấu cổ điển chấm/giọt/trăng/lửa). Khoảng 23 mặt cung nữ + c17, c27; mỗi mẫu hoa/lá riêng, không trùng; 8 bậc × 4 tuổi. Nhánh review/m05-huadian.
+- (02:25Z) Owner: bắt nạt đòi bạc phải có cả đòi đồ nàng đang có (món thật trong Tư trang). Giao review/ts-b; dùng lại việc 'uyhiep' có sẵn.
