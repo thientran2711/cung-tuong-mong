@@ -399,3 +399,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (10:45Z) Mỗi giai đoạn thú cưng một tranh riêng (4 tranh/con, Linh thú cũng có tranh riêng, uy nghi hơn) — 88 tranh.
 - (10:50Z) Thú cưng: kỳ lân con + bạch lộc đẹp → làm mốc phong cách. Mèo, chó, vẹt còn tả thực → vẽ lại mọi thú thật theo đúng nét kỳ lân/bạch lộc.
 - (10:52Z) Bỏ rùa khỏi thú cưng: Linh quy ngàn năm → Thiên mã (Ngự tứ); Bạch quy → Hạc đỉnh hồng (Trân phẩm).
+- (10:55Z) Hoa văn trên thú theo giai đoạn: non ít/không có, càng lớn càng đẹp, Linh thú đẹp nhất.
