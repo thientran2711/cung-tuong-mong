@@ -35,6 +35,6 @@ Base: origin/main 23a8e80e. Worker: promo-rules (coordinator s7).
 - Branch review/promo-rules pushed, all code + site rebuilt committed. No art generated (nothing to download).
 - Tests passed: `node dev/test/promo-rules.js <url> <oldBuild> <out>` 29/29 at 755x1000, 1000x755, 1180x820, 1366x1024, 844x390 (old save = origin/main index.html
   copied to repo root as old.html, NOT committed); item-gain (no fails), reward-box PASS, stipend (errs []), promo-exam 17/18 (the old-save step fails on main too).
-- Co-op: `node dev/test/coop-e2e.js <outdir>` first run timed out on page load (machine load 40); rerun with a local copy that raises
-  p.setDefaultTimeout to 240000 was in progress when the container was moved — RERUN it (one browser at a time).
-- Next: rerun coop-e2e; when review/fxkit (KIT §68) lands, check kitFxLight/kitFxSprite signatures match the calls in j93 kitEdict / kitGloom and jpromo kitPersonReveal.
+- Co-op: `node dev/test/coop-e2e.js <outdir>` 59/59 (run with a local copy raising p.setDefaultTimeout to 240000: machine load 40 made the
+  first page load exceed 30 s). NPC rewards run on the co-op host only; NPC servant exams are seeded (same on both clients).
+- Next: when review/fxkit (KIT §68) lands, check kitFxLight/kitFxSprite signatures match the calls in j93 kitEdict / kitGloom and jpromo kitPersonReveal.
