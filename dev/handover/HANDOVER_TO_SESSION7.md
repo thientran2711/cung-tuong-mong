@@ -61,7 +61,6 @@ main = d8b81af9e (check `git ls-remote origin main`). Session 7 ran in its own c
 Went LIVE via session 7: month-calendar r1, chap-label r1, item-events r1 (§64), art-complete r1 (jartc + 50 pics), sfx r1.
 
 ### Workers (branch → state)
-- review/fxkit — shared painted-effects kit §68 (sprites via remove_background, light videos on black + screen blend, alpha sheets).
 - review/coop-timer — co-op buổi countdown (§69), ready/timeout, host clock, pauses with cap.
 - review/skin-match (art) — face vs hand/neck skin tone audit of all fig-*, player look1 rosy, ref maid m03.
 - review/place-art @ 83864aa5d DONE (on place-colour): 9 trưa regraded, 5 nights darkened, 34 new paintings (tan-gia-kho, phong-cung-nu), j42/j94 wiring → place-colour reviewer asked to merge + review together.
@@ -74,6 +73,7 @@ Went LIVE via session 7: month-calendar r1, chap-label r1, item-events r1 (§64)
 recipes (cut — see below) (+ level-up grants a recipe, 4 sub-styles everywhere, Công/Dung/Ngôn/Hạnh sub-styles, Kỳ in sub-style UI), place-colour.
 
 ### READY, reviewer NOT yet spawned
+- review/fxkit @ 261c7c5f1 — KIT §68 painted-fx (jfxkit.js after jfx; 24 sprite kinds, 6 light loops, 2 alpha sheets, 3 edge overlays; 1.57 MB on CDN, ≤1.1 MB per device, on demand; Settings 'Hiệu ứng: Đầy đủ / Gọn' replaces 'Cảnh động'; red flash → ink-blood edge; all jfx/jitev code shapes → painted). REVIEW THIS FIRST (cardflip, promo-rules, night-end depend on it). Follow-up wiring list in its PROGRESS (harm/poison/rumour/seal/romance/betray/letter/gift steps; jitev burn flame, j93 light/sweep, j90 podium beam, night-end gradients still code-drawn).
 - review/cardflip @ 1daf0d9d4 — card-flip scene §67 (jflip.js after jsfx; j75 2-line flip0 hook; painted plates landscape+portrait, Emperor hand, THỊ TẨM seal; shows real result incl. rằm/steal reasons; her-knowledge cards). Open: co-op pick still local (needs B2 host night), §68 guarded not merged, 844x390 plate edges fade, j93 kmFree doesn't wait for the week book.
 - review/cal-plus @ 08c66800a (base e3fc5f61) — calendar (a)–(j) §58.3–58.6 + Trân nữ seal on every event frame §39.1 (168 dialogs scanned). Coordinator decision: ACCEPT weather from a seed (Emperor name + date) in j12 — needed for a true forecast and co-op sync. Reads thaiyNextVisit/cycleDaysOf if present.
 - review/coop-pets @ 3236348b6 — co-op pet help/harm/steal relay, late-act re-send, gifts to friend reach her, NPC pets host-only, Ngự tứ text fix, label stays 'No'; coop-e2e 3×59/59 (E2E_TO=120000), coop-pets.js 44/44. Audit dev/coop/COOP_AUDIT.md: BROKEN in co-op → B2 nights (host must pick the Emperor's night; shared heir), B4 festivals + NPC schemes skip the guest, B3 Emperor death off in co-op, B1 item/kid steal + servant acts, B5 exam seat caps → co-op worker after review.
