@@ -379,3 +379,4 @@ Older binding rules: see dev/HANDOVER.md (all sections). This log adds every dec
 - (09:10Z) Thêm luật THIẾU LỄ: dịp trang trọng (thỉnh an, yến tiệc, lễ tết, gặp/thị tẩm Hoàng thượng, tấn phong) không mặc đồ đúng phẩm → mất chút Đức/Danh + thiện cảm chủ nhà; báo trước trên thẻ; NPC cùng luật.
 - (09:10Z) Khung Đáp ứng: phần vàng quá rực → nhạt, mờ, nhỏ lại (sâm banh/bạc), cho đúng bậc thấp nhất.
 - (09:10Z) Biểu tượng cảm xúc: phải thể hiện RÕ từng cảm xúc (Vui mắt mở sáng, không nheo; Giận rõ giận); vẽ đủ bộ rồi gửi lại.
+- (09:15Z) Ô y phục trống (bị thu hồi/cướp/chưa có) → hình nàng mặc TRUNG Y theo bậc phẩm (thấp: lụa trắng … Hoàng hậu: lụa vàng nhạt), kín đáo. Mặc trung y ra ngoài/gặp người → mất Danh, thiếu lễ nặng; có sự kiện bị cướp y phục khi đi đường (có nguyên nhân, báo ngay) → phải mặc trung y về cung. NPC cùng luật.
