@@ -359,11 +359,12 @@ function k3CatTabs(){try{const P=$$("panel");if(!P)return;P.querySelectorAll(".c
  let row=P.querySelector(`.kcattabs[data-g="${gi}"]`)||G.previousElementSibling;if(!row||!row.classList.contains("kcattabs")||row.classList.contains("kinvtabs")){row=document.createElement("div");row.className="pctabs kcattabs";row.setAttribute("role","tablist");G.before(row)}
  const h=kitTabRowHTML(["all"].concat(cats).map(c=>{const [n,t]=cnt(c);return{k:c,label:c==="all"?"Tất cả":name(c),n:`${n}/${t}`,tip:`làm được ${n} trên ${t} việc`}}),cur,"data-kcat");
  if(row.dataset.h!==h){row.innerHTML=h;row.dataset.h=h}row.dataset.key=key;row.dataset.g=gi;
- cards.forEach(b=>{b.hidden=!(cur==="all"||(b.dataset.kart||"khac")===cur)})});kitTabStick()}catch(e){console.error("k3CatTabs",e)}}
+ /* act-dedupe UI: in "Tất cả" the usable cards come first, the greyed ones after (CSS order on the grid; every other tab keeps the dealt order) */
+ cards.forEach(b=>{b.hidden=!(cur==="all"||(b.dataset.kart||"khac")===cur);const g=b.disabled||b.classList.contains("kdis");const o=cur==="all"&&g?"1":"";if(b.style.order!==o)b.style.order=o})});kitTabStick()}catch(e){console.error("k3CatTabs",e)}}
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest(".kcattabs [data-kcat]");if(!b)return;e.stopPropagation();const row=b.closest(".kcattabs");
  try{localStorage.setItem(row.dataset.key,b.dataset.kcat)}catch(x){}k3CatTabs()},true);
 if(typeof renderPanel==="function"){const r0=renderPanel;renderPanel=function(){const r=r0.apply(this,arguments);try{setTimeout(k3CatTabs,0)}catch(e){}return r}}
-try{const P0=$$("panel");if(P0)new MutationObserver(()=>{clearTimeout(window.__k3ct);window.__k3ct=setTimeout(k3CatTabs,30)}).observe(P0,{childList:true,subtree:true,attributes:true,attributeFilter:["data-kart"]})}catch(e){}
+try{const P0=$$("panel");if(P0)new MutationObserver(()=>{clearTimeout(window.__k3ct);window.__k3ct=setTimeout(k3CatTabs,30)}).observe(P0,{childList:true,subtree:true,attributes:true,attributeFilter:["data-kart","disabled","class"]})}catch(e){}
 const cssC=document.createElement("style");cssC.id="k3-cattabs";cssC.textContent=`
 /* KIT RULE (owner 11/15, markups 1115-inv-markup + 1115-tabrow-gap): the category tab row
    - sits CENTRED between what is above and below it: one spacing token --k-tabgap above and below (the neighbours' own margins are zeroed);
@@ -420,7 +421,7 @@ html body .pc:has(>.pcr>.pcx)>.pcl>.kpnm{padding-right:46px}
 /* KIT 32.10: the ✕ owns the card's top-right corner — the first act card starts under it, never under the ✕ */
 html body .pc>.pcr>.pcx+*{margin-top:42px!important}
 /* kit panels (report / story / info dialogs): the close row "Đã hiểu" is pinned at the dialog's bottom, the body scrolls under it */
-html body .dlg.kpanel>.mr{position:sticky;bottom:0;z-index:4;background:linear-gradient(rgba(255,250,240,0),var(--k-card,#fffaf0) 10px);padding-top:8px}
+html body .dlg.kpanel>.mr{position:sticky;bottom:0;z-index:9;background:linear-gradient(rgba(255,250,240,0),var(--k-card,#fffaf0) 10px);padding-top:8px}
 `;document.head.appendChild(st)})();
 /* the card's ✕ stays in the card's top-right corner while the card's own body scrolls (owner 16/11 "Nút tắt bị che": on a phone the room card
    .pc scrolls inside itself and the absolute ✕ scrolled away with the acts) — it is moved down by the card's scrollTop (--kpcxy) */
