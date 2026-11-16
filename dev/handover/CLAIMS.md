@@ -369,7 +369,7 @@
 | suc-khoe review r1 (opus, BIG) of 10cba645 | review/suc-khoe-r1 | D | session_01DgYSWnQ5MJS6ViDgFmBeGV | DONE FAIL 8 (3 BLOCKING) @41716164 (archived) | 16/11 19:48Z |
 | coop-name-mask review r1 (sonnet, SMALL) of 48a942b2 | review/coop-name-mask-r1 | D | session_01DgYSWmQ9JPMfwpdYSLALUt | DONE PASS ed8ccb28 (reviewer fix; archived) | 16/11 19:50Z |
 | kit-size phase 2 keeper (opus) | review/kit-size | main s22 | session_01UV1Szir6A61kJEUGvE9Guz | RUNNING | 16/11 19:50Z |
-| stage-pets r6 review (opus, BIG) of 872cbd52 | review/stage-pets-r1 | main s22 | session_01UV1Szj8KTxkyxcVCrbtnwZ | RUNNING | 16/11 19:49Z |
+| stage-pets r6 review (opus, BIG) of 872cbd52 | review/stage-pets-r1 @ cea021e3 | main s22 | session_01UV1Szj8KTxkyxcVCrbtnwZ | FAIL (844x390 shrink + figures under the left rail; 3 reviewer fixes to carry into r7: rail after card close, iPad column width, shots out of git; courtyards NOT live before C paints: gate jpm.js kpmArt) report dev/handover/reports/stage-pets-r1.md | 16/11 20:36Z |
 | coop-contest-check analyst (sonnet) | handover | main s22 | session_01UV1SzktMsycf1QaFC2Gd2G | DONE (reports/coop-contest-check.md) | 16/11 19:46Z |
 | mg-tune LIVE prep (sonnet): merge origin/main into PASS review/mg-tune-r1 859acc68, CHANGE.txt line, build, quickcheck → READY sha; B runs golive --yes | review/mg-tune-live | B | session_01N1tNP4ZB3MEyANJVvpH6Ba | DONE LIVE 7c5523ad (archived) | 16/11 19:52Z |
 | coop-contest-fix (opus, BIG co-op; owner Q 19:52Z) | review/coop-contest | main s23 | session_01UV1SzhQgRNCuk7EHMhqYPi | SẴN SÀNG 73eec76f | 16/11 19:54Z |
