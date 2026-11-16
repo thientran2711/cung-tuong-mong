@@ -89,7 +89,7 @@ j72 bước vs Hồi · stage paper halo · Thái hậu title bronze vs plum · 
 | C28 [→ FOREMAN B] | review/room-btn (owner s8: header '‹ Phòng' bar → painted room icon button) | QUEUED-NEXT |
 | C29 [→ FOREMAN B] | review/rel-picker (owner s8: Giao tình relation pickers waste space → compact) | QUEUED-NEXT |
 | C30 | night-panel → merged into B1 | MERGED |
-| C31 | review/log-sync @ e5189610 (jlogsync.js; night-talk unlogged effect = cause) | SẴN SÀNG KIỂM → reviewer QUEUED-NEXT |
+| C31 | review/log-sync @ e51896108 → review FAIL (week card noise, bổng lộc twice, monthly drift twice, bookkeeping lines, wording) → same worker fixing | RUNNING |
 | C32 [→ FOREMAN B] | review/page-curl2 (owner s8 APPROVED: Tuần lục only — landscape curl, portrait paper slide; no swipe elsewhere; tab change animation only on tap) | QUEUED-NEXT |
 | C33 [→ FOREMAN B] | review/weekbook-entries (owner s8: week book person page shows unrelated raw entry; per-person readable entries) | QUEUED-NEXT |
 | C34 [→ FOREMAN B] | review/contest-ui (owner s8: ALL study/work/minigame frames picture LEFT info RIGHT incl. result panel; REAL PRIZES by place (themed item, bạc, chest, title, Emperor gift) + podium rewards 2nd/3rd, same figure scale, contestants revealed; intro layout picture-left/info-right/scrolling contestant box, no empty counters) | QUEUED-NEXT |
