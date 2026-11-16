@@ -5,7 +5,7 @@
 const {chromium}=require('playwright');const [,,OLD,NEW,SZS,KS]=process.argv;
 const SIZES=(SZS||'755x1000@2,1000x755@1,1180x820@2,1366x1024@2,844x390@2,390x844@2').split(',');
 
-const BOT={rt:40,px:.01,think:250,slip:0,thinkD:300,slipD:0,timing:'dan,ban,duho,hat,den,dauho,banh'};
+const BOT={rt:40,px:.01,think:250,slip:0,thinkD:300,slipD:0,timing:'dan,ban,duho,hat,den,dauho,banh,td_dung,td_ngon'};
 const VCLOCK=()=>{const rP=performance.now.bind(performance),rST=window.setTimeout.bind(window),rCT=window.clearTimeout.bind(window);
  let vt=rP(),seq=1;const T=new Map(),RAF=new Map();const ch=new MessageChannel();let pumping=false;
  const fire=()=>{const due=[...T.entries()].filter(([,t])=>t.at<=vt).sort((a,b)=>a[1].at-b[1].at||a[0]-b[0]);
@@ -40,9 +40,9 @@ const BOTS_SRC=(BOT)=>{
    /* skilled */
    const pk=KG82.peek();
    if(pk&&'hold' in pk){/* continuous hold: follow the wanted state after a reaction delay */
-     if(holdWant!==pk.hold){holdWant=pk.hold;holdAt=now+Math.abs(G())*BOT.rt}
-     if(now>=holdAt){let el=pk.hsel?document.querySelector(pk.hsel):at(pk.x,pk.y),x=pk.x,y=pk.y;if(pk.hsel&&el){const r=el.getBoundingClientRect();x=r.left+r.width/2;y=r.top+r.height/2}
-      if(holdWant&&!hold&&el){pe(el,'pointerdown',x,y,7);hold={el,x,y}}else if(!holdWant&&hold){pe(hold.el,'pointerup',hold.x,hold.y,7);hold=null}}
+     const want=pk.hold?(pk.hsel||'x'+Math.round((pk.x||0)/60)):'';if(holdWant!==want){holdWant=want;holdAt=now+Math.abs(G())*BOT.rt}
+     if(now>=holdAt){let el=pk.hsel?document.querySelector(pk.hsel):pk.x!=null?at(pk.x,pk.y):null,x=pk.x,y=pk.y;if(pk.hsel&&el){const r=el.getBoundingClientRect();x=r.left+r.width/2;y=r.top+r.height/2}
+      if(hold&&hold.k!==holdWant){pe(hold.el,'pointerup',hold.x,hold.y,7);hold=null}if(holdWant&&!hold&&el){pe(el,'pointerdown',x,y,7);hold={el,x,y,k:holdWant}}}
      if(!pk.drag&&!pk.sel){setTimeout(tick,16);return}}
    const timing=BOT.timing.split(',').includes(kind0);
    if(pk&&!busy&&now>nx){busy=true;const slip=Math.random()<(timing?BOT.slip:BOT.slipD);const s=sc()*BOT.px;
@@ -55,7 +55,7 @@ const BOTS_SRC=(BOT)=>{
      else busy=false};
     /* timing moves (taps) fire after a reaction delay; deliberate moves after think time */
     /* timing taps fire after a reaction delay; deliberate moves (drag / button, and every tap of a puzzle or memory game) after think time */
-    setTimeout(go,(pk.drag||pk.sel)?BOT.think*(.3+.4*Math.random()):timing?Math.abs(G())*BOT.rt:BOT.thinkD*(.5+Math.random()))}
+    setTimeout(go,pk.thinkMs>0?Math.min(pk.thinkMs,1500):(pk.drag||pk.sel)?BOT.think*(.3+.4*Math.random()):timing?Math.abs(G())*BOT.rt:BOT.thinkD*(.5+Math.random()))}
    setTimeout(tick,16)};tick()});};
 (async()=>{const b=await chromium.launch();const out=[];
  /* old save on the previous build */

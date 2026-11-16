@@ -13,9 +13,9 @@
      tier spec "e2" = engine ease 2 directly; "hoc/3/2" = mgTier(kind, occ "hoc", rank 3, art level 2) (needs jmgt).                */
 const {chromium}=require('playwright');const fs=require('fs');
 const [,,BASE,KL,TL,BL,NN,PG,OUT]=process.argv;
-const ALL='dan,hat,co,dauho,ban,ve,hoa,theu,kim,mua,banh,huong,kinh,may,duho,den';
+const ALL='dan,hat,co,dauho,ban,ve,hoa,theu,kim,mua,banh,huong,kinh,may,duho,den,td_cong,td_dung,td_ngon,td_hanh';
 const KINDS=(KL&&KL!=='all'?KL:ALL).split(',');const TIERS=(TL||'e2').split(',');const BOTS=(BL||'skilled,random').split(',');const N=+(NN||30);const PAGES=+(PG||3);
-const BOT={rt:70,px:.018,think:450,slip:.06,thinkD:900,slipD:.12,timing:'dan,ban,duho,hat,den,dauho,banh',aim:40};
+const BOT={rt:+(process.env.MGBOT_RT||70),px:+(process.env.MGBOT_PX||.018),think:450,slip:.06,thinkD:900,slipD:.12,timing:'dan,ban,duho,hat,den,dauho,banh,td_dung,td_ngon',aim:40};
 const VCLOCK=()=>{const rP=performance.now.bind(performance),rST=window.setTimeout.bind(window),rCT=window.clearTimeout.bind(window);
  let vt=rP(),seq=1;const T=new Map(),RAF=new Map();const ch=new MessageChannel();let pumping=false;
  const fire=()=>{const due=[...T.entries()].filter(([,t])=>t.at<=vt).sort((a,b)=>a[1].at-b[1].at||a[0]-b[0]);
@@ -53,22 +53,28 @@ const BOTS_SRC=(BOT)=>{
      if(!busy){busy=true;const k=kind==='casual'?2:1;setTimeout(()=>{if(KG82.phase!=='play')return;const q=KG82.peek()||pk;tap(q.x,q.y)},Math.max(0,pk.at+G()*BOT.aim*k))}
      setTimeout(tick,16);return}
    if(pk&&'hold' in pk){/* continuous hold: follow the wanted state after a reaction delay */
-     if(holdWant!==pk.hold){holdWant=pk.hold;holdAt=now+Math.abs(G())*BOT.rt}
-     if(now>=holdAt){let el=pk.hsel?document.querySelector(pk.hsel):at(pk.x,pk.y),x=pk.x,y=pk.y;if(pk.hsel&&el){const r=el.getBoundingClientRect();x=r.left+r.width/2;y=r.top+r.height/2}
-      if(holdWant&&!hold&&el){pe(el,'pointerdown',x,y,7);hold={el,x,y}}else if(!holdWant&&hold){pe(hold.el,'pointerup',hold.x,hold.y,7);hold=null}}
+     /* the wanted state = off, or on at a place (hsel / the board half of x): a change of place = lift and press again (Đi đứng: left / right half) */
+     const want=pk.hold?(pk.hsel||'x'+Math.round((pk.x||0)/60)):'';
+     if(holdWant!==want){holdWant=want;holdAt=now+Math.abs(G())*BOT.rt}
+     if(now>=holdAt){let el=pk.hsel?document.querySelector(pk.hsel):pk.x!=null?at(pk.x,pk.y):null,x=pk.x,y=pk.y;if(pk.hsel&&el){const r=el.getBoundingClientRect();x=r.left+r.width/2;y=r.top+r.height/2}
+      if(hold&&hold.k!==holdWant){pe(hold.el,'pointerup',hold.x,hold.y,7);hold=null}
+      if(holdWant&&!hold&&el){pe(el,'pointerdown',x,y,7);hold={el,x,y,k:holdWant}}}
      if(!pk.drag&&!pk.sel){setTimeout(tick,16);return}}
    const timing=BOT.timing.split(',').includes(kind0);
    if(pk&&!busy&&now>nx){busy=true;const slip=Math.random()<(timing?BOT.slip:BOT.slipD);const s=sc()*BOT.px;
     const go=()=>{if(KG82.phase!=='play'){busy=false;return}
      if(slip){randomMove(()=>{busy=false;nx=performance.now()+BOT.think*(.5+Math.random())});return}
      const q=KG82.peek()||pk;
-     if(q.drag){const D=q.drag.map(([x,y],i)=>[x+(i?G()*s*.8:G()*s*.4),y+(i?G()*s*.8:G()*s*.4)]);drag(D,()=>{busy=false;nx=performance.now()+BOT.think*(.6+.8*Math.random())})}
+     if(q.drag){const sa=q.aim!=null?q.aim:1;/* aim: the engine's own aim aid (dots shown while pulling) shrinks the release scatter */const D=q.drag.map(([x,y],i)=>[x+(i?G()*s*.8:G()*s*.4)*sa,y+(i?G()*s*.8:G()*s*.4)*sa]);drag(D,()=>{busy=false;nx=performance.now()+BOT.think*(.6+.8*Math.random())})}
      else if(q.sel){const el=document.querySelector(q.sel);if(el)el.click();busy=false;nx=performance.now()+BOT.think*(.6+.8*Math.random())}
      else if(q.x!=null){tap(q.x+G()*s,q.y+G()*s);busy=false;nx=performance.now()+120}
      else busy=false};
     /* timing moves (taps) fire after a reaction delay; deliberate moves after think time */
     /* timing taps fire after a reaction delay; deliberate moves (drag / button, and every tap of a puzzle or memory game) after think time */
-    setTimeout(go,(pk.drag||pk.sel)?BOT.think*(.3+.4*Math.random()):timing?Math.abs(G())*BOT.rt:BOT.thinkD*(.5+Math.random()))}
+    /* pk.think (≥1) = how much longer a person needs to SEE the right move on this board (more groups on the Cờ board, a short-portion round of Làm phúc) */
+    const th=pk.think>0?pk.think:1;
+    /* pk.thinkMs = the time a person needs to WORK OUT this move (Làm phúc: the share of a short round), spread ×0.6–1.4 */
+    setTimeout(go,pk.thinkMs>0?pk.thinkMs*(.6+.8*Math.random()):((pk.drag||pk.sel)?BOT.think*(.3+.4*Math.random()):timing?Math.abs(G())*BOT.rt:BOT.thinkD*(.5+Math.random()))*(timing?1:th))}
    setTimeout(tick,16)};tick()});};
 (async()=>{const b=await chromium.launch();const jobs=[];for(const kind of KINDS)for(const tier of TIERS)for(const bot of BOTS)for(let i=0;i<N;i++)jobs.push({kind,tier,bot});
  const out={};const errs=[];let done=0;const t0=Date.now();
