@@ -416,3 +416,4 @@ Self-wake: create_trigger denied twice (s19, s20) — don't retry; rely on notif
 - (18:00Z s21) Owner two-way law → two-way-acts worker; AG1→AG3 sent to Foreman C inbox (treated her message as the go for AG).
 - (18:05Z s21) Owner: Sức khỏe = Sức max ceiling only (falls with age), regen unchanged — recorded in OD; suc-khoe report §4.2 superseded on that point. Bundle build vs park still open.
 - (18:08Z s21) Owner: build health+pregnancy bundle now (+ induced-birth drug) → Foreman D inbox; asking owner Q2–Q4 one at a time.
+- (18:01Z s21) night-steal DONE 4b5919af (her played nights lost 1 % → 19–22 %, tries/10 nights 0.03 → 3–4, by trait) → opus BIG reviewer; worker archived. stage-pets r2 A|B sheets sent to owner (pending her 1/2). Owner answers: Q2 ở cữ = 1 month, drop ×0.7 → D inbox.
