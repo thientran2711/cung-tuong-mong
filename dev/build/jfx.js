@@ -196,7 +196,7 @@ function kfWxSpawn(c,scatter){const sr=c.lay==="wx"?KFX.sr:{x:0,y:0,w:innerWidth
   /* crisp white core on the soft blue body: reads on light AND dark paintings; same path, same sway */
   const t2=z>.4?kfSp(KF_SPR.snow,x,y,Object.assign({},s.v,{a0:Math.min(1,s.v.a0+.1),ph:s.v.ph}),0xffffff,sc*(.14+.34*z),"normal"):null;if(t2&&t2.v&&t2.v.max){t2.rotation=0;t2.v.ph=s.v.ph;if(KFX.wroot&&c.lay==="wx")KFX.wroot.addChild(t2)}}
  else if(c.glow&&!c.rain){/* REAL FIREFLY: z = depth (near = bigger + brighter); halo (green-gold, big, soft) + tiny warm core twin sharing the same path and the same slow blink; additive on the night painting */
-  const z=R01(),b=s.v.sc/sc,add=c.night?"add":"normal",bl=RS(.75,1.25);s.rotation=0;s.scale.set(b*(1.4+2.4*z));s.blendMode=add;s.tint=0xa8ff30;s.v.a0=(add==="add"?.8:.5)*(.65+.35*z);s.v.bl=bl;
+  const z=R01(),b=s.v.sc/sc,add=c.night?"add":"normal",bl=RS(.75,1.25);s.rotation=0;s.scale.set(b*(1.1+1.4*z));s.blendMode=add;s.tint=0xa8ff30;s.v.a0=(add==="add"?.8:.5)*(.65+.35*z);s.v.bl=bl;
   const t2=kfSp(KF_SPR.fly,x,y,Object.assign({},s.v,{a0:1,ph:s.v.ph,bl}),0xfff8b0,b*(.4+.5*z),add);if(t2&&t2.v&&t2.v.max){t2.rotation=0;t2.v.ph=s.v.ph;t2.v.bl=bl;if(KFX.wroot&&c.lay==="wx")KFX.wroot.addChild(t2)}}
 if(c.ray&&k==="glowburst"){s.x=sr.x+sr.w*.9;s.y=sr.y+sr.h*.03;s.scale.set(s.v.sc*3.4);s.v.a0=.5;s.blendMode="normal";s.tint=0xffffff}
  else if(c.ray){s.rotation=2.25+RS(-.12,.12);s.scale.set(s.v.sc*RS(13,18),s.v.sc*RS(7,11));s.blendMode="normal"}
