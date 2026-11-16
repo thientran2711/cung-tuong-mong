@@ -6,14 +6,14 @@ Base main at start: 900ace7fb.
 | Item | Branch | Model | State |
 |---|---|---|---|
 | A6 thaiy review | review/thaiy-r1 | sonnet | LIVE (train-2) |
-| A7 cycle review | review/cycle-r1 @7ea3ec447 → review/cycle-r2 | opus | PASS ON HOLD — owner fixes (FOREMAN_C.md note): (1) Xem sổ / Xem lén sổ nguyệt sự as HÀNH SỰ deck cards; (2) monthly period popup (maid asks: báo đúng / lùi / sớm / giấu). QUEUED-NEXT slot (worker on cycle-r2) |
+| A7 cycle review | review/cycle-r1 @7ea3ec447 → review/cycle-r2 | opus | PASS ON HOLD — owner fixes (FOREMAN_C.md note): (1) Xem sổ / Xem lén sổ nguyệt sự as HÀNH SỰ deck cards; (2) monthly period popup (maid asks: báo đúng / lùi / sớm / giấu). RUNNING (opus worker on cycle-r2) |
 | A8 cal-plus review | review/cal-plus-r1 | sonnet | LIVE (train-2) |
 | A9 promo-rules review | review/promo-rules-r1 | opus | LIVE (train-2) |
 | D46 placeholder pictures | review/placeholder-pics2-r1 | sonnet | PASS 81af8e412 |
 | D47 small-bugs-4 (jaudit 'Vì sao' trung y wording; 'Phi ???' greet/arc tab; VP 'theo lòng nàng'; one kit sample page; 'Đang cài' leftover; servant-road header '!') | review/small-bugs-4 | sonnet | RUNNING (worker) |
 | D53 opt-pics leftovers | review/opt-pics2 @28bef58c3 → review/opt-pics2-r1 | sonnet | REVIEWING (29 new option-card group pictures on CDN; non-person placeholders 45→2; includes placeholder-pics2) |
 | A11 cardflip review | review/cardflip-r1 | sonnet | LIVE (train-2) |
-| D45 small art | review/small-art @7aa5bc832 (art on CDN: earrings, shoes, per-rank pendants/bangles/sachets, 3 maid robes, guard 4 indigo, c02-t1-a18 skin, 2 Emperor Qing-hat pictures redrawn) → review/small-art-wire (code wiring + rebuild, on top of promo-rules-r1) | sonnet | RUNNING (wiring worker) |
+| D45 small art + wiring | review/small-art-wire @d6e63783a (on promo-rules-r1 + main + small-art) | sonnet | WIRED (except earrings/shoes → K7); reviewer QUEUED-NEXT (item-pics.js / inv-grade.js hung >10 min — reviewer to compare vs base) |
 | A13 recipes-r1 review | review/recipes-r2 | sonnet | PASS 9eafa355b |
 | D23 whole-game mole audit + D24 consort-c12-ty5-a51 eye patch | review/mole-audit | sonnet | RUNNING (art worker) |
 | C18 kit-popup-sample review | review/kit-popup-sample-r1 | sonnet | LIVE (train-2) |
@@ -65,6 +65,7 @@ PASS review/update-notes-r1 8cc6ae7c8f63f72436afceed38b4143aa3bc815b (D10; desce
 - Q4 (owner, A7): Kính sự phòng book now costs ~1/4 of monthly bổng vs a risky free peek (Năm ăn năm thua). Right weight, or heavier?
 - NOTE for session 8 (D45 Emperor audit): 2 Qing-hat Emperor pictures fixed (ev-hoang-de-gian, ev-hoang-de-vui). The remaining act pictures still to be drawn on review/act-pics2 (session 8, C4) must follow the same rule: gold hair crown / Ming gauze hat, crossed round collar, never a knobbed Qing cap or queue.
 - Design notes (A13 recipes, not blocking): consort-favour teacher (thiện cảm −4) much cheaper than nữ quan fee at high rank; NPC sub-style knowledge is a hash of art level, not learnt; Tứ đức teacher fee flat 5+5×bậc → Foreman C will fold these into D16 (Tứ đức sub-styles, opus econ).
+- KIT REQUEST K7 (D45 small-art-wire): Hoa tai (earrings) and Giày hoa (embroidered shoes) need two NEW rows in the Tư trang equipment kit (KEQ_TT / kitEquipSlots), suggested slots 'ear' and 'shoe'. Art is on the CDN and itemArt() already resolves hoatai/hoataivang/giayhoa/giaygam; IT rows will be added once the kit keeper adds the slots.
 - K3 (FYI): C18 kit-popup-sample-r1 PASS adds kit page §8 pop-up samples (sample registration only, no new part) — passed before the rule; kit keeper please confirm.
 - Q1 (D1 result-sfx): sound is OFF by default (OPT.snd=false in j11.js), so new players never hear the win/fail sounds. Turn sound ON by default for new games (old saves keep their choice)? Foreman C recommends ON for new games only.
 
