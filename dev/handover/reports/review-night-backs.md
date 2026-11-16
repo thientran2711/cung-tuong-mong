@@ -31,8 +31,12 @@ OK = no clear face. FAIL = a face is visible.
 | act-opt-hau-dem | serve tea at night | OK (hands/lantern) |
 | tam-cung-dem-* (rooms), ne-* rooms | night backdrops | OK (no people, by place scan of names; not all 16 viewed) |
 
-Not yet scanned (say so, owner rule: whole group): other act-*-h variants (…-h.webp) of the FAIL acts above, the 16 tam-cung-dem-<season>-<buổi> rooms and ev-fest-* festival pictures; will scan in STEP 3 with a script + before/after table.
-Out of scope but faces: ev-e68-stormnight (servants, storm).
+## Scan of the rest (done 16/11 after Foreman C's message; 68 more pictures viewed, no generations)
+- 10 act-*-h variants of the night acts (act-cao-benh-dem-h, cung-nu-hau-thay-mot-dem-h, dem-cung-khac-h, dem-dong-lanh-cung-h, gianh-dem-khong-thanh-h, ngu-dem-h, ngu-mot-dem-h, pho-tai-dem-h, tam-doc-h, tam-su-h, thi-tam-h, xem-so-thi-tam-h): all OK (backs / hands / objects). So the -h choice pictures already comply; only the non -h act pictures listed above FAIL.
+- 18 tam-cung-dem-* bedchamber rooms (4 seasons x 4 buoi + base + -p): all OK (empty room, no people).
+- 28 ev-fest-* (+ -b) festival pictures: OK (no couple/night intimacy; people tiny and far, no clear faces). Borderline only: ev-fest-vulan-b (two small figures bottom-right, faces tiny) - left as is.
+- act-xem-so-thi-tam: OK per Foreman C (official, no consort, not an intimate night scene).
+FAIL list to repaint in STEP 3 after the owner's OK (13): ev-night2-tender (sample done), ev-night2-warm, ev-night2, ev-night2-normal, ev-night1, ev-night1-v2, ev-ksp, ev-prep, act-thi-tam, act-ngu-dem, act-ngu-mot-dem, act-dem-cung-khac, act-gianh-dem-khong-thanh, act-cung-nu-hau-thay-mot-dem (14 incl. sample).
 
 ## STEP 2 — SAMPLE
 ev-night2-tender repainted backs-only: Emperor (golden dragon robe, Han-style crossed collar, topknot + small gold guan crown, NO Qing hat / queue per OD:L364) and consort (pale pink hanfu, gold hairpins) seen from behind, hands joined on the bed edge, moonlit lattice window, red curtains, candle, lantern. Magnific gpt-2-6 2k, 3 variants + 1 rejected round (first round had a Qing fur hat + braid → redone). Credits: 6 x 65 = 390.
