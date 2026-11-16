@@ -20,6 +20,8 @@ const dlgCheck=p=>p.evaluate(()=>{const M=document.getElementById('modal');const
    for(let i=0;i<400;i++){KMQ.length=0;start();if(!isSrv())break}
    const w=wdOf(S);const worn=S.inv.filter(e=>e.w&&!e.h&&IT[e.k]&&IT[e.k].sl).map(e=>IT[e.k].sl);
    return{girl:S.girl,worn,y:w.y&&w.y.k,tram:w.tram&&w.tram.k,kq:KMQ.length,khantay:S.inv.some(e=>e.k==="khantay"),kc:S.inv.filter(e=>e.from==="kc").length,lux:luxOf(S)}});
+  /* main 211d22d1 (card flip ends with the kit scene-end button, no auto-close): tap through the night card-flip scene(s) queued before the chest reveal */
+  for(let i=0;i<60&&!(await p.$('#kmrew'));i++){await p.evaluate(()=>{const b=document.querySelector('.kmov .kmend,.kmend');if(b&&!document.getElementById('kmrew'))b.click()});await sleep(400)}
   await p.waitForSelector('#kmrew',{timeout:20000}).catch(()=>{});await p.evaluate(()=>{const o=document.querySelector('#kmrew');if(o)o.click()});
   await p.waitForSelector('#kmrew .km-done',{timeout:30000}).catch(()=>{});await sleep(700);
   r1.chest=await p.evaluate(()=>{const ov=document.querySelector('#kmrew');return ov?{title:(ov.querySelector('.kmrew-h b')||{}).textContent,rows:[...ov.querySelectorAll('.kmrow')].map(r=>r.textContent.trim().slice(0,60))}:null});
