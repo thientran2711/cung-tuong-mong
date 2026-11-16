@@ -1,6 +1,6 @@
-PASS 57af6ff34b6f6ca96325ee0b3c77e40183170554
+PASS 7d4638380a80b60d07c3c260207906fbd69b4637
 
-Branch review/seatcap-r1 (ancestor: origin/main e9c6021d). Reviewer session_01DgYSWoAxb67pTNnGiGEUTw. START_CTX ≈ 4 % of 1M; end ≈ 10 %, no rollover needed.
+Branch review/seatcap-r1 (ancestor: origin/main 0ee35a63; first PASS 57af6ff3 on e9c6021d, re-merged when main moved: scan unchanged, 2-life sim 0 over). Reviewer session_01DgYSWoAxb67pTNnGiGEUTw. START_CTX ≈ 4 % of 1M; end ≈ 10 %, no rollover needed.
 
 # REVIEW review/seatcap-r1 (reviewer opus, game rules/numbers, for Foreman D)
 Result: PASS. Base: review/seatcap @48e5a9c7 merged onto origin/main e9c6021d (only conflicts: assemble.py file list + built index.html/sw.js;
