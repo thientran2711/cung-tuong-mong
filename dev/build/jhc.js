@@ -37,18 +37,7 @@ window.kitPosBar=pbar;
 const KIT_REL={in:"#7a4fa0",out:"#3f62a8",x:"#6a5040"};window.KIT_REL=KIT_REL;
 const OANW=["Không oán","Chút oán","Oán","Oán sâu","Oán hận"];
 window.oanW=function(v){const L=(typeof BAL==="object"&&BAL.oanLv)||[5,20,45,75];let i=0;while(i<L.length&&(+v||0)>=L[i])i++;return OANW[i]};
-function kitRelRow(o){o=o||{};const kind=o.kind||"quy",v=o.v;const dir=o.dir||(/^ta$/i.test(o.b||"")?"in":/^ta$/i.test(o.a||"")?"out":"x");
- const what=o.what||(kind==="oan"?"oán":"thiện cảm");const lab=o.label||`${o.a} → ${o.b}: ${what}`;const gk=o.gloss!=null?o.gloss:(kind==="oan"?"Oán":kind==="quy"?"Thiện cảm":"");
- let val,bar;
- if(v==null){val=`<span class="ef n">chưa rõ</span>`;bar=`<span class="ksbar ksbp ksbn" aria-hidden="true"></span>`}
- else if(kind==="quy"){val=`<span class="ef ${v>10?"g":v<-10?"r":"n"}">${quyW(v)} · ${sg(v)}</span>`;bar=sbar(v)}
- else if(kind==="oan"){val=`<span class="ef ${v>=20?"r":"n"}">${oanW(v)} · ${Math.round(v)}</span>`;bar=pbar(v,100,false)}
- else{const w=o.word?o.word(v):"";val=`<span class="ef ${o.good===false?"r":"g"}">${w?w+" · ":""}${o.signed?sg(v):Math.round(v)}</span>`;bar=o.signed?sbar(v):pbar(v,o.max||100,o.good!==false)}
- return `<div class="krr krr-${dir}" style="--krc:${KIT_REL[dir]}"><span class="krrl">${gk?gl(gk,lab):lab}</span><span class="krr2"><span class="krrv">${val}</span><span class="krrbar">${bar}</span></span></div>`}
-window.kitRelRow=kitRelRow;
-/* old call shape (kind "quý"|"oán", subject, object, value) → kitRelRow; "Ngươi"/"ngươi" = ta */
-function relBar(kind,subj,obj,v){const t=x=>/^ngươi$/i.test(x)?"ta":x;const a=t(subj),b=t(obj);return kitRelRow({kind:kind==="oán"?"oan":"quy",a:a==="ta"?"Ta":a,b,v})}
-window.kitRelBar=relBar;
+/* kitRelRow (bars, mixed rows) is retired: every relation is drawn by kitRel2 (jkrel.js, KIT §52) */
 /* who "nàng" is, in words: the Empress by title, others "nàng" */
 const subjOf=v=>v&&v.queen?"Hoàng hậu":"Nàng";
 const objOf=v=>v&&v.queen?"Hoàng hậu":"nàng";
@@ -118,12 +107,14 @@ function hcRelHTML(){kn();const all=relItems().map(x=>Object.assign(x,{q:relPers
 function relSide(q){return `<div class="kr3p" data-pid="${q.pid}" data-fk="${q.f&&q.f.kk!=null?q.f.kk:q.pid}">${kitNameRank(q.rank,q.name,q.col,q.p===S||q.pid==="me"||undefined)}<div class="kr3f">${pcPort(q.f,q.col)}</div></div>`}
 /* the rows between two people, both ways (KIT §49.1 kitRelRow). A value is shown when the one who feels it is Ta, or Ta has met both. */
 function relRows(X,Y){const a=X.p,b=Y.p;const met=p=>p===S||(p!=="emp"&&p!=="th"&&knows(p));
- if(a==="emp"||b==="emp"){const z=a==="emp"?b:a;if(z===S)return kitRelRow({kind:"pos",a:"Hoàng thượng",b:"ta",what:"sủng",gloss:"Sủng",v:S.sung})+kitRelRow({kind:"pos",a:"Hoàng thượng",b:"ta",what:"ân tình",gloss:"Ân tình",v:S.an||0});
-  const kf=S.kf&&S.kf[z.id];return kitRelRow({kind:"pos",a:"Hoàng thượng",b:whoL(z),what:"sủng",gloss:"Sủng",v:kf?kf.s:null})}
- if(a==="th"||b==="th"){const z=a==="th"?b:a;return kitRelRow({kind:"quy",a:"Thái hậu",b:whoL(z),v:z===S?(S.th||0):(met(z)?(z.th||0):null)})}
- const ok=(p,q)=>p===S||(met(p)&&met(q));
- return kitRelRow({kind:"quy",a:capL(whoL(a)),b:whoL(b),v:ok(a,b)?aff(a,b):null})+kitRelRow({kind:"oan",a:capL(whoL(a)),b:whoL(b),v:ok(a,b)?oan(a,b):null})+
-  kitRelRow({kind:"quy",a:capL(whoL(b)),b:whoL(a),v:ok(b,a)?aff(b,a):null})+kitRelRow({kind:"oan",a:capL(whoL(b)),b:whoL(a),v:ok(b,a)?oan(b,a):null})}
+ /* KIT §52 kitRel2 (owner 11/16 4.6): TWO columns — left = X → Y, right = Y → X; short words, number in its colour, no bars */
+ const R=(w,v,kind,gloss)=>v==null?{w,unk:"chưa rõ",kind,gloss}:{w,now:Math.round(v),kind,gloss};
+ if(a==="emp"||b==="emp"){const z=a==="emp"?b:a;if(z===S)return kitRel2([{head:"Hoàng thượng → ta",dir:"them",rows:[R("Sủng",S.sung,"pos"),R("Ân tình",S.an||0,"pos")]}]);
+  const kf=S.kf&&S.kf[z.id];return kitRel2([{head:`Hoàng thượng → ${whoL(z)}`,dir:"x",rows:[R("Sủng",kf?kf.s:null,"pos")]}])}
+ if(a==="th"||b==="th"){const z=a==="th"?b:a;return kitRel2([{head:`Thái hậu → ${whoL(z)}`,dir:z===S?"them":"x",rows:[R("Thiện cảm",z===S?(S.th||0):(met(z)?(z.th||0):null),"good")]}])}
+ const ok=(p,q)=>p===S||(met(p)&&met(q));const dirOf=(p,q)=>q===S?"them":p===S?"me":"x";
+ const col=(p,q)=>({head:`${capL(whoL(p))} → ${whoL(q)}`,dir:dirOf(p,q),rows:[R("Thiện cảm",ok(p,q)?aff(p,q):null,"good"),R("Oán",ok(p,q)?oan(p,q):null,"bad")]});
+ return kitRel2([col(a,b),col(b,a)])}
 /* "Đã biết về X" = facts about X only (each with its source); X = Ta → the box is hidden (her own facts are in her Tư chất / Mệnh truyện) */
 function relPair(X,Y){const p=X.p,o=Y.p;const strangers=[X,Y].filter(q=>q.met===false);
  const note=strangers.map(q=>`<p class="kr3note">Ta chưa gặp ${q.name}, chưa rõ nàng ta đối với người khác ra sao. Gặp nàng ta, dò la, hoặc có thêm tai mắt.</p>`).join("")+

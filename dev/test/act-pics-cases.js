@@ -2,7 +2,7 @@
    "Có người đến" taunt -> Nhịn; a last-khắc walk -> Đi; Làm thơ dâng lên; Ngủ đêm hồi sức; Thỉnh an Hoàng hậu / Thái hậu; a borrow -> Cho mượn.
    usage: node dev/test/act-pics-cases.js <baseURL> <outdir>  -> prints the "Việc của ngươi" / person lines with their pictures, the Sổ ghi lines,
    the result-card title + picture after "Nhịn", and writes cases-book.jpg (the book page with those lines). */
-const {chromium}=require('playwright');const fs=require('fs');const [,,BASE,OUT]=process.argv;fs.mkdirSync(OUT,{recursive:true});
+const {chromium}=require('./lib/pw-roulette');const fs=require('fs');const [,,BASE,OUT]=process.argv;fs.mkdirSync(OUT,{recursive:true});
 const sleep=t=>new Promise(r=>setTimeout(r,t));
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:755,height:1000},deviceScaleFactor:2,hasTouch:true,isMobile:true});
  const p=await ctx.newPage();p.setDefaultTimeout(240000);const errs=[];p.on('pageerror',e=>errs.push(e.message));
