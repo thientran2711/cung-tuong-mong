@@ -2,7 +2,7 @@
    Why: a plain desktop Chromium with a viewport is not what a player's phone/iPad is. Real devices differ in: user agent (jload.js sniffs
    iPad/iPhone/Mac+touch for the "add to home screen" note), touch + pointer:coarse + hover:none (game text, hover glow), devicePixelRatio,
    and — biggest — the ROT.JS HOST (dev/site/rot.js): in the BUILT root index.html the game runs in ONE scaled iframe (#krotf) at the design
-   size (1180x820 landscape / 755x1000 portrait) and a narrow portrait phone (390x844) gets the sideways frame + "Xoay ngang điện thoại để chơi".
+   size (1180x820 landscape spread / 590x820 portrait ONE PAGE = iPad half, KIT §0) and a narrow portrait phone (390x844) gets the sideways frame + "Xoay ngang điện thoại để chơi".
    Automated browsers (navigator.webdriver) get DIRECT mode by default (no host, no iframe) — that is what dev/index.html tests see.
    API (all async helpers take a Playwright browser/context/page):
      DEVICES                          name -> {w,h,dsf,ua,mobile,touch,platform?,touchPoints?,note}
@@ -31,7 +31,7 @@ const UA={
  ipadOld:'Mozilla/5.0 (iPad; CPU OS 15_8 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.6 Mobile/15E148 Safari/604.1',
  desktop:'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36'};
 
-/* viewport = the CSS size the browser reports to the BUILT page (the host then scales its 755x1000 / 1180x820 design into it).
+/* viewport = the CSS size the browser reports to the BUILT page (the host then scales its 590x820 page / 1180x820 spread design into it).
    Fold inner = 755x1000 (owner's primary device); DSF 2.6 ~ Fold inner (real 2.625). */
 const DEVICES={
  fold:        {w:755, h:1000,dsf:2.625,ua:UA.fold,  mobile:true, touch:true,platform:'Linux armv81',touchPoints:5, note:'Galaxy Z Fold inner screen, portrait (PRIMARY device)'},
@@ -42,7 +42,7 @@ const DEVICES={
  pixel:       {w:412, h:915, dsf:2.625,ua:UA.pixel, mobile:true, touch:true,platform:'Linux armv81',touchPoints:5, note:'Pixel-class Android portrait (narrow -> rotate prompt)'},
  pixelLand:   {w:915, h:412, dsf:2.625,ua:UA.pixel, mobile:true, touch:true,platform:'Linux armv81',touchPoints:5, note:'Pixel-class Android landscape'},
  ipadAir:     {w:1180,h:820, dsf:2,    ua:UA.ipad,  mobile:true, touch:true, platform:'MacIntel',touchPoints:5,note:'iPad Air/Pro 11in landscape (Mac UA + touch, PRIMARY)'},
- ipadAirPort: {w:820, h:1180,dsf:2,    ua:UA.ipad,  mobile:true, touch:true, platform:'MacIntel',touchPoints:5,note:'iPad Air portrait (width/height .69 -> design 755x1000)'},
+ ipadAirPort: {w:820, h:1180,dsf:2,    ua:UA.ipad,  mobile:true, touch:true, platform:'MacIntel',touchPoints:5,note:'iPad Air portrait (width/height .69 -> design one page 590x820)'},
  ipadPro:     {w:1366,h:1024,dsf:2,    ua:UA.ipad,  mobile:true, touch:true, platform:'MacIntel',touchPoints:5,note:'iPad Pro 12.9in landscape'},
  ipadProPort: {w:1024,h:1366,dsf:2,    ua:UA.ipad,  mobile:true, touch:true, platform:'MacIntel',touchPoints:5,note:'iPad Pro 12.9in portrait'},
  ipadOld:     {w:1024,h:768, dsf:2,    ua:UA.ipadOld,mobile:true,touch:true,platform:'iPad',touchPoints:5, note:'old iPad UA (iPad; CPU OS 15), iOS<16.4 regex-lookbehind era'},
