@@ -210,7 +210,7 @@ function rgRes(id,i,od){const b=rgBeatDef(id);if(!b)return;const o=rgOpts(b)[i];
  r.done[id]=(r.done[id]||0)+1;r.last=S.turn;
  if(ok){apply(o.w||{});if(o.pw)rgPush(side,o.pw);if(o.tr)rgTr(o.tr);if(o.lq)rgQAf(o.lq);if(o.lead)rgLead(side,o.lead)}
  else{apply(o.l||{});if(o.pl)rgPush(side,o.pl);if(o.lq)rgQAf(o.lq);
-  if(o.ev){const v=rgFoe(o.ev);if(v){evA(v,S,1);ex.push(`${v.name} nắm Chứng cứ về ngươi.`)}}
+  if(o.ev){const v=rgFoe(o.ev);if(v){evA(v,S,1);ex.push(`${(()=>{try{return typeof kitKnownName!=="function"||kitKnownName(v)}catch(e){return true}})()?v.name:"Một vị phi tần chưa quen biết"} nắm Chứng cứ về ngươi.`)}}
   if(o.pun){try{punish(S,"can dự chuyện triều chính",o.pun)}catch(e){}}}
  if(o.lq0)rgQAf(o.lq0);
  if(o.join)ex.push(rgJoin(o.join,id==="c2a",o.swc));
@@ -387,7 +387,8 @@ function rgPaneHTML(){const W=rgW(),r=rgMe();if(!W)return kitEmpty("Triều cụ
  let h=kitSkillCard({kind:"story",k:"rg",kicker:"Phụ tuyến",name:RGT,level:done,max:tot,word:"Hồi",bar:false,next:"",img:typeof kitOriginArt==="function"?kitOriginArt(S.origin.k):"",
   acts:rgSideNow()&&!W.out?[pbtn(`data-rgsw="1"`,"Đổi phe",`tốn: Danh -${BAL.rg.swDanh}`,rgCanSwitch())]:[]});
  const s=rgSideNow();
- const mem=k=>rgMembers(k).map(v=>`${rkName(v)} ${v.name}`).join(", ")||"chưa ai";
+ /* only people she knows by name (kitKnownName); the rest are counted (same family as the 'Phi ???' fix, owner 16/11) */
+ const mem=k=>kitNameList(rgMembers(k),v=>`${rkName(v)} ${v.name}`,"chưa ai");
  h+=rows67([["Mục tiêu","Hoàng thượng mới đăng cơ, quyền còn trong tay Thái hậu và Tể tướng phụ chính. Ngươi chọn đứng về phía ai, hay đứng ngoài."],
   ["Chương",c?`Chương ${c} «${RGC[c-1].t}»`:"chưa mở"],["Triều cục",W.out?({emp:"Hoàng thượng thân chính",th:"Thái hậu buông rèm nghe chính",quyen:`${rgQN()} nhiếp chính`})[W.out]:rgPWord(W.p),W.out?"g":""],
   ["Phe của ngươi",s?rgSideTag(s):r.side==="ngoai"?"đứng ngoài":"chưa chọn",s?"g":""],s?["Phe tin ngươi",r.tr>=60?"rất tin":r.tr>=35?"tin":r.tr>=15?"còn dè dặt":"chưa tin"]:null,

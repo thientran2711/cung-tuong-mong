@@ -30,10 +30,11 @@ function srk(s){return s.rk==null?(s.rk=1):s.rk}
 function srkName(s){return SRK[s.role][srk(s)]}
 function srkMax(o,s){const r=rkOf(o);if(s.role==="maid")return r>=7?4:r>=4?3:2;return r>=5?3:r>=3?2:1}
 function servMerit(s,n){s.mp=(s.mp||0)+n}
-function servRanks(){let ev="";for(const p of consorts()){const L=p.staff||[];for(const s of L.slice()){const o=p;servMerit(s,1+Math.floor(rkOf(o)/3));
+function servRanks(){let ev="";for(const p of consorts()){/* co-op guest: NPC staff merit / rises / sales roll on the host (review/servant-mline-r2) */if(p!==S&&typeof mlGuest==="function"&&mlGuest())continue;const L=p.staff||[];for(const s of L.slice()){const o=p;servMerit(s,1+Math.floor(rkOf(o)/3));
   if((s.mp||0)>=(srk(s)+1)*5&&srk(s)<srkMax(o,s)&&(typeof exSrvNpc!=="function"||exSrvNpc(s))){s.rk++;s.mp=0;s.loyal=cl(s.loyal+5,0,100);if(p===S)ev+=`${s.name} được thăng ${srkName(s)}. `}
   if(srk(s)>=2)ap(p,{bac:-Math.floor(srk(s)/2)});
-  if(s.role==="maid"&&srk(s)>=2&&roll(1.2)&&roomFor("consort")){p.staff.splice(p.staff.indexOf(s),1);const n=newRival(0);Object.assign(n,drawFace());relAdd(p,n,s.loyal>=60?25:-25);rivals.push(n);ev+=`${s.name}, ${srkName(s).toLowerCase()} của ${NM(p)}, lọt mắt xanh Hoàng thượng, được phong ${RANKS[0].n} ${n.name}${s.loyal>=60?", vẫn nhớ ơn chủ cũ":", quay lưng với chủ cũ"}. `;continue}
+  /* the Emperor's eye: any maid rank, chance by rank / her seeking / the master's favour (jmline mlEye, BAL.mline; was srk>=2 at 1.2 %) */
+  if(s.role==="maid"&&(typeof mlEye==="function"?mlEye(p,s):srk(s)>=BAL.mline.offRank&&roll(BAL.mline.offEye))&&roomFor("consort")){if(typeof mlRose==="function")mlRose(p,s);p.staff.splice(p.staff.indexOf(s),1);const n=newRival(0);Object.assign(n,drawFace());relAdd(p,n,s.loyal>=BAL.mline.riseLoy?BAL.mline.riseRel:-BAL.mline.riseRel);rivals.push(n);ev+=`${s.name}, ${srkName(s).toLowerCase()} của ${NM(p)}, lọt mắt xanh Hoàng thượng, được phong ${RANKS[0].n} ${n.name}${s.loyal>=BAL.mline.riseLoy?", vẫn nhớ ơn chủ cũ":", quay lưng với chủ cũ"}. `;continue}
   if(srk(s)>=2&&roll(1.5)){const big=consorts().find(x=>x!==p&&rkOf(x)>rkOf(p)+1&&(x.bac||0)>=60);if(big){p.staff.splice(p.staff.indexOf(s),1);big.staff.push(s);s.loyal=50;ap(big,{bac:-40});if(p===S||big===S)ev+=`${s.name} bị ${NM(big)} mua về cung mình. `}}}}
  return ev}
 function recommend(id){const s=servById(id);if(!s||ownerOf(s)!==S||S.bac<30)return;apply({bac:-30,danh:-2});servMerit(s,5);log(`Tiến cử ${s.name} lên Nội vụ phủ.`);render()}
