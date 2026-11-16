@@ -65,6 +65,7 @@ Owner verdicts pending: intro-art (vẽ/bỏ), FP v9, map-frame r3, pl-night sam
 - 21:10Z C9 #2 rolled over (72 FAIL por fixed at 0.085, looked at; code e46bef2d, report r5) → ARCHIVED; #3 sonnet session_011xDdVSf31NGbF2kt1tfPq2.
 - 21:12Z fig-cutout helper DONE: 1,662 maid ty1..ty8 halo files, 320 back-turned (m03/08/13/18/23/28/33/38/43/48) need new pose (~108k cr max); eunuch/kid/men/mama/officials clean → passed to lead; helper ARCHIVED.
 - 21:13Z art-complete-p2 DONE: grown kids a26/a36/a51 all 48 ids LIVE (69+69 new fig/por, FIGURES-kids.json 336 recs, 6,210 cr, transparent gen); C looked at sheet reports/art-complete-p2/kd_sheet_left23.jpg (frontal, feet, men no pink/purple) → worker ARCHIVED.
+- 21:14Z fig-cutout-clean scan FINISHED: failing set 2,686 files = consort ty 1,024 (192 back-turned c02/08/14/20/26/32 → new pose) + maid ty 1,662 (320 back-turned); all else clean. ~174,600 cr at 65 each (account ~1.28M); local rim-fix rejected (notches hair) → regenerate transparent. Batch waits owner's Luân hồi verdict.
 
 ## SESSION 7 LOG
 - 19:55Z start (depth 1). Read START set + handover. Session 6 told to stop + ARCHIVED. Its trigger trig_01B8ZVK48GgTwdRJjCS83QdG DISABLED (delete was refused by the permission check). Own hourly wake trig_018LdWFfDWDX4GYybxC2JWX5 (:41 each hour). All 9 running C sessions told C = session 7. buoi-art-r1 PASS be25de29 (on main 0188d595) → reviewer told to re-merge current main + build_site + quick check, give new READY sha; then C fast-forwards main.
