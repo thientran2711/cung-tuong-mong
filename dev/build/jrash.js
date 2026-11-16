@@ -12,12 +12,12 @@
 const RASH={d:[0,5,10,16],wk:[0,1,2,3],spring:4,luck:1,cos:5,actBac:15,actDuc:-4,sevW:[.5,.35,.15],medBac:15,npcMed:30,cd:3};
 const RASH_N=["","nhẹ","vừa","nặng"];
 function rashPick(W){const x=Math.random();return x<W[0]?1:x<W[0]+W[1]?2:3}
-function rashName(p){return p===S?"ngươi":(p&&p.name)||""}
-function rashGive(p,sev,how,by){if(!p||(p!==S&&(!p.alive||p.out)))return"";sev=cl(sev|0,1,3);const w=RASH.wk[sev]+(sev===3&&roll(50)?1:0);
+function rashName(p){return p===S?"ngươi":fxName(p)}
+function rashGive(p,sev,how,by){if(!p||!KIT_FACEFX.live(p))return"";sev=cl(sev|0,1,3);const w=RASH.wk[sev]+(sev===3&&roll(50)?1:0);
  if(p.rash){if(p.rash.sev>=sev){p.rash.until=Math.max(p.rash.until,wk()+w);return""}}
- p.rash={sev,until:wk()+w,how:how||"",by:by?key(by):null,at:wk(),tr:0};
- const t=`${p===S?"Ngươi":p.name} nổi mẩn trên mặt (${RASH_N[sev]}${how?", vì "+how:""}): Sắc -${RASH.d[sev]} khi chưa khỏi.`;
- if(p===S){try{log(t)}catch(e){}}else if(typeof knows!=="function"||knows(p)){try{log(t)}catch(e){}}return t}
+ p.rash={sev,until:wk()+w,how:how||"",by:fxKey(by),at:wk(),tr:0};
+ const sc=["consort","player"].includes(KIT_FACEFX.kind(p));const t=`${p===S?"Ngươi":fxName(p)} nổi mẩn trên mặt (${RASH_N[sev]}${how?", vì "+how:""})${sc?`: Sắc -${RASH.d[sev]} khi chưa khỏi`:""}.`;
+ if(p===S||fxSeen(p)){try{log(t)}catch(e){}}return t}
 function rshOf(p){p=p||S;const r=p&&p.rash;if(!r)return null;const left=Math.max(1,r.until-wk());const vg=p.vl&&typeof vlG==="function"?vlG(p.vl):-1;
  const lost=Math.round(RASH.d[r.sev]*(vg>=0?VL.cover[vg]:1));return{sev:r.sev,name:RASH_N[r.sev],lost,weeksLeft:left,veiled:vg>=0,chip:`Nổi mẩn (${RASH_N[r.sev]}) · còn ${left} tuần`}}
 window.rshOf=rshOf;
@@ -25,8 +25,8 @@ function rashNote(p){const r=rshOf(p);return r?[`Mặt nổi mẩn (${r.name}) �
 /* weekly healing, the same rule for everyone */
 function rashHeal(p){const r=p&&p.rash;if(!r)return;const me=p===S;let fast=false;
  if(r.tr>0){r.tr--;fast=true}else if(me?(S.arts&&S.arts.y>=2):((p.arts&&p.arts.y>=2)||roll(RASH.npcMed)))fast=true;
- if(fast)r.until--;if(wk()>=r.until){p.rash=null;if(me)log("Mẩn đỏ trên mặt ngươi đã lặn hết.");else if(typeof knows!=="function"||knows(p))log(`${p.name} đã khỏi nổi mẩn.`)}}
-(function(){const e0=endTurn;endTurn=function(){const w0=S&&!S.dead?wk():null;const r=e0.apply(this,arguments);try{if(S&&!S.dead&&w0!=null&&wk()!==w0){rashHeal(S);for(const v of rivals)if(v&&v.rash)rashHeal(v);
+ if(fast)r.until--;if(wk()>=r.until){p.rash=null;if(me)log("Mẩn đỏ trên mặt ngươi đã lặn hết.");else if(fxSeen(p))log(`${fxName(p)} đã khỏi nổi mẩn.`)}}
+(function(){const e0=endTurn;endTurn=function(){const w0=S&&!S.dead?wk():null;const r=e0.apply(this,arguments);try{if(S&&!S.dead&&w0!=null&&wk()!==w0){rashHeal(S);for(const v of KIT_FACEFX.everyone())if(v&&v!==S&&v.rash)rashHeal(v);
   if(S.rash&&!Q.some(m=>m.pid==="rashcard")&&(typeof evCooldown!=="function"||evCooldown("rashcard",RASH.cd))){const d=mkP("rashcard",{});if(d){Q.push({t:"Nổi mẩn",h:d.t,opts:d.o,who:pMe(),pid:d.pid,pp:d.pp});if($("modal").hidden)showModal()}}}}catch(x){console.error(x)}return r}})();
 /* her card: medicine, herbs, the veil, or wait */
 PEND.rashcard=pp=>{const r=S&&S.rash;if(!r)return null;const x=rshOf(S);const o=[];const y=(S.arts&&S.arts.y)||0;
@@ -44,7 +44,7 @@ PEND.rashcard=pp=>{const r=S&&S.rash;if(!r)return null;const x=rshOf(S);const o=
   O.forEach((op,i)=>{const g0=op.go;op.go=function(){const r=g0?g0.apply(this,arguments):undefined;try{if(roll(P[Math.min(i,2)]))rashGive(S,i>=2?rashPick([.55,.4,.05]):1,"phấn hoa xuân")}catch(e){}return r}});return O}}catch(e){}})();
 /* monthly: a spring breeze for everyone, and bad luck any time (two-way) */
 (function(){const m0=monthTick;monthTick=function(){const r=m0.apply(this,arguments);try{if(S&&!S.dead){const spring=(S.month||0)>=1&&(S.month||0)<=3;
-  for(const p of [S].concat(liveRivals(true))){if(p.rash)continue;if(spring&&roll(RASH.spring))rashGive(p,rashPick([.75,.22,.03]),"phấn hoa xuân");else if(roll(RASH.luck))rashGive(p,rashPick([.7,.25,.05]),"ăn phải món lạ")}}}catch(e){console.error(e)}return r}})();
+  for(const p of KIT_FACEFX.everyone().filter(x=>KIT_FACEFX.live(x))){if(p.rash)continue;if(spring&&roll(RASH.spring))rashGive(p,rashPick([.75,.22,.03]),"phấn hoa xuân");else if(roll(RASH.luck))rashGive(p,rashPick([.7,.25,.05]),"ăn phải món lạ")}}}catch(e){console.error(e)}return r}})();
 /* son phấn: a tainted box (pha chì) always, an ordinary one sometimes, brings out a rash */
 (function(){const u0=useItem;useItem=function(p,ix,tgt){const e=p&&p.inv&&p.inv[ix];const k=e&&e.k,t=e&&e.t;const r=u0.apply(this,arguments);
   try{if(k==="sonphan"&&r&&(t==="chi"||roll(RASH.cos))){const x=rashGive(p,t==="chi"?rashPick([.3,.45,.25]):1,"son phấn không hợp",t==="chi"&&e.by?byKey(e.by):null);return r+(x?" "+x:"")}}catch(x){}return r}})();
@@ -63,7 +63,7 @@ try{if(!BANDS[1][2].includes("rash"))BANDS[1][2].push("rash");const g=RVGRP.find
 
 /* ---------- picture: KIT_RASH, placed from the veil fit boxes (rash art: nose bridge at RB of a square image) ---------- */
 window.KIT_RASH={ready:true,RB:.47,WX:1.08,src:function(sev){return `img/rash-${cl(sev|0,1,3)}.png`},
- on:function(p){try{return !!(p&&p.rash)&&(p===S||typeof knows!=="function"||!!knows(p))}catch(e){return false}},
+ on:function(p){try{return !!(p&&p.rash)&&fxSeen(p)}catch(e){return false}},
  style:function(file){try{const n=String(file||"").split("/").pop();const r=KIT_VEIL.fit&&KIT_VEIL.fit[n];if(!r)return "";
   const W=r[2]*this.WX,H=W*(r[3]*480)/(r[2]*445),bandY=r[1]+KIT_VEIL.B0*r[3],L=r[0]+r[2]/2-W/2,T=bandY-this.RB*H;
   return `left:${L.toFixed(2)}%;top:${T.toFixed(2)}%;width:${W.toFixed(2)}%;height:${H.toFixed(2)}%;transform:rotate(${r[4]}deg);transform-origin:50% ${(this.RB*100).toFixed(1)}%`}catch(e){return ""}}};
