@@ -1,9 +1,9 @@
 # lag-play-r1 — reviewer report (BIG tier: performance + co-op)
 
 START_CTX ~6 % (est.). Reviewer session session_01UV1Szh3qnjMBBhwLSJrxVX, opened by MAIN s21.
-Reviewed review/lag-play @ 7200e7d2 (base 2232ea32), merged onto origin/main 8f476f6f on review/lag-play-r1.
+Reviewed review/lag-play @ 7200e7d2 (base 2232ea32), merged onto origin/main 8f476f6f, then re-merged onto a0d93ac8 (tab-instant + pixi-tabs re-run PASS after it), on review/lag-play-r1.
 
-## VERDICT: PASS (sha in the commit that adds this file; review/lag-play-r1 head, ancestor = origin/main 8f476f6f)
+## VERDICT: PASS (sha in the commit that adds this file; review/lag-play-r1 head, ancestor = origin/main a0d93ac8)
 
 ## Merge
 - Conflict dev/test/play-perf.js (add/add): main got an A/B tab script of the same name from kit-marks-r1. Kept lag-play's play-perf.js
