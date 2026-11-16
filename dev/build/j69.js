@@ -11,7 +11,7 @@
 /* measured 11/14 (sensible bot, 30-43 lives each; HH reach % / early death %): nc 54/34 (easiest by far), thd 33/49, cn 33/53,
    dtq 31/51, muoi 22/46, ch 20/42, td 23/54, tt 20/57, cnv 0 (never left service; the bot's servant road ends in Xuất cung/ban gả).
    Ordered easiest -> hardest, the approved shape (rare at both ends, common in the middle) gives: */
-const OW69={nc:6,thd:9,cn:13,dtq:17,muoi:17,ch:13,td:9,tt:8,cnv:8};
+const OW69={nc:6,bd:7,thd:9,cn:13,dtq:17,muoi:17,ch:13,td:9,tt:8,cnv:8};
 /* measured difficulty tier: 2 = very hard (+20 Phúc duyên), 1 = hard (+10) */
 const OHARD69={cnv:2,tt:1,td:1};
 const OBON69=[0,10,20];
