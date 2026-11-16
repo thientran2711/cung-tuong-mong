@@ -75,7 +75,7 @@ if(typeof kidAct==="function"){const k0=kidAct;kidAct=function(a,name){if(a!=="h
  if(!k||S.dead||Q.length||!can(2)||S.suc<15||!(S.arts.y>=4))return;const b=rsnap();spend(2);apply({suc:-10});k.hp=Math.min(100,k.hp+30);log(`Ngươi tự bốc thuốc cho ${k.name}: Sức khỏe con +30.`);resultShow("Việc của con",b,"sure");render()}}
 /* ---------- 4. grey card tap = the reason (kit popover). A disabled button gets no click: open on pointerup, and keep the
    click that follows (on touch it can come later) from closing the popover at once. ---------- */
-window.addEventListener("click",e=>{const R=window.__adGreyR;if(R&&Date.now()-(window.__adGreyT||0)<800&&e.clientX>=R.left&&e.clientX<=R.right&&e.clientY>=R.top&&e.clientY<=R.bottom){e.stopPropagation();e.preventDefault()}},true);
+window.addEventListener("click",e=>{const R=window.__adGreyR;if(R&&Date.now()-(window.__adGreyT||0)<1500&&e.clientX>=R.left&&e.clientX<=R.right&&e.clientY>=R.top&&e.clientY<=R.bottom){e.stopPropagation();e.preventDefault()}},true);
 document.addEventListener("pointerup",e=>{try{const b=e.target.closest&&e.target.closest("#panel .kcard[disabled]");if(!b||typeof kpPop!=="function"||!S||S.dead)return;
  const a=deck&&deck[+b.dataset.i];if(!a)return;const w=cardWhy(a)||(a.lock&&a.t)||"Chưa làm được lúc này";window.__adGreyT=Date.now();window.__adGreyR=b.getBoundingClientRect();
  kpPop(b,`<div class="kpopt">${a.n}</div><div class="kpopx"><span class="ef n">${w}</span></div>`)}catch(x){}},true);
