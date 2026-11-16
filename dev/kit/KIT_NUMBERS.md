@@ -44,7 +44,8 @@ Rule: a new kit part gets its number HERE first (ask the coordinator); a worker 
 | **76** | **kitPalaceMap · palace detail map** (was a second "§71") | review/palace-map-port-r1 | RENUMBERED in merge-train-3 |
 | **77** | **kitStageRail · stage icon rail (Lịch · Chat · Mục tiêu)** (owner 16/11) | review/goal-strip-fix-r1 | — |
 | **78** | **PLACE ICON kitPlaceIcon + HAPPENING MARK kitHapMark** (was provisional "§71") | review/act-dedupe-r1 | FINAL (kit keeper 16/11) |
-| 79–80 | free (not used on main) | | |
+| 79 | free (not used on main) | | |
+| **80** | **CO-OP CHAT "Thư từ" (kitChatPanel / kitChatList / kitChatBubble; the icon is the §77 rail)** | review/coop-chat | FINAL (renumbered from §76 in coop-chat-r1) |
 | 81 | SCENE-END BUTTON | main (kit-keeper-2) | done |
 | 82 | TITLE SYSTEM PARTS | main (title-tag) | done |
 | **83** | **KIT MARKS · gold rank, text-line colour, ink-brush ✓/✗, kitRel2 two-column relations (§49.1), KẾT QUẢ seal, place icon above name, grade chip doc, danger button + kitConfirm (83.9)** | review/kit-marks | FINAL (owner 16/11 15:00Z) |
