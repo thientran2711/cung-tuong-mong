@@ -11,3 +11,6 @@ Cost ~ 6x40 + 6x3 = 258 credits.
 Rule: start from the PREVIOUS round's pictures (live on CDN), keep costume/pose/face/colours exactly, change ONLY the proportion. Method: gpt-2-6 edit, image 1 = previous figure (identity, "keep exactly the same picture"), image 2 = approved reference at same scale (c01 / Emperor), prompt "only head ~15-20% larger, shoulders narrower". Sheet: sample-sheet-v2.jpg (ref | previous | fixed, same height, numbers).
 Numbers (face height % / face:shoulder / chin %): f04 9.8/.47/15.9 -> 10.6/.53/17.8; p03 8.1/.33/14.1 -> 10.2/.44/17.6 (Emperor 9.7/.34/16.3); f01 9.4/.44/15.1 -> 10.7/.52/16.9 (c01 9.8/.44/14.0).
 Honest: heads now ~5-10% LARGER than the reference (safe side; could be toned to ~10%), man's shoulders now narrower than Emperor (face:shoulder .44 vs .34). Costume patterns/colours preserved. Cost 6x40+3x3 = 249.
+
+## SAMPLE v3 (owner verdict on v2: heads too big, bodies too small; NO numbers in prompts)
+Method (owner's words): gpt-2-6, image 1 = approved reference figure (c01 / Emperor) = body/height/proportions to copy; image 2 = previous-round figure (face + checked costume); prompt: "draw this person wearing this outfit with exactly the same body, height and proportions as the reference figure". No numbers anywhere. Sheet: sample-sheet-v3.jpg (reference | previous | new, no numbers). Cost 6x40+3x3 = 249.
