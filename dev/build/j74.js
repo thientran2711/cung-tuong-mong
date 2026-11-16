@@ -44,8 +44,8 @@ st.textContent=`
 document.head.appendChild(st);
 /* remove the inline backgrounds of j37/j50 so the rule above decides */
 T.style.removeProperty("background");
-const HEAD={slots:"Chọn sổ",opt:"Thiết lập",past:"Sổ luân hồi"};
-const SUBH={slots:"Ba sổ chơi một mình, ba phòng cùng hảo hữu; hai bên không ghi đè nhau. Phúc duyên ở dưới.",opt:"Tiếng, nhạc, giọng, rung; chép sổ và nạp sổ.",past:"Những kiếp đã qua."};
+const HEAD={slots:"Chọn sổ",opt:"Thiết lập",past:"Sổ luân hồi",notes:"Thông tin cập nhật"};
+const SUBH={slots:"Ba sổ chơi một mình, ba phòng cùng hảo hữu; hai bên không ghi đè nhau. Phúc duyên ở dưới.",opt:"Tiếng, nhạc, giọng, rung; chép sổ và nạp sổ.",past:"Những kiếp đã qua.",notes:"Những điều mới của các lần cập nhật gần đây."};
 const SONO=["một","hai","ba"];
 function slotWho(s){try{if(s.srv&&!s.srv.risen)return s.srv.lau>0?"Cung nữ Tân Giả khố":(typeof SRK!=="undefined"&&SRK.maid&&SRK.maid[s.srv.rk])||"Cung nữ";return (RANKS[Math.min(s.rank,RANKS.length-1)]||{}).n||""}catch(e){return ""}}
 function slotDate(s){try{return kitDate(s.month,s.year,s.tuan)}catch(e){return `Tháng ${s.month}, năm ${s.year}`}}
@@ -91,9 +91,9 @@ function kitBtns(box){const s=box.querySelector("#slots");if(!s)return;s.querySe
  s.querySelectorAll("button.btn").forEach(b=>{b.classList.remove("btn");b.classList.add("kbtn","alt")})}
 function noSeal(M){const s=M.querySelector(".dlg > .kph .kpseal");if(s)s.remove()}
 function mount(){const M=$("modal");if(!SM||Q[0]!==SM||M.hidden)return;const box=M.querySelector(".kpt-mount");if(!box)return;
- if(PG==="past"){box.innerHTML=pastBody()}else partsOf(PG).forEach(n=>{if(n)box.appendChild(n)});
+ if(PG==="past"){box.innerHTML=pastBody()}else if(PG==="notes"){box.innerHTML=window.CTM_NOTES_UI?CTM_NOTES_UI.body():""}else partsOf(PG).forEach(n=>{if(n)box.appendChild(n)});
  kitBtns(box);
- noSeal(M);const mr=$("mr");if(mr)mr.innerHTML=`<button class="kbtn alt" data-tgo="home">‹ Lui</button>`}
+ noSeal(M);const mr=$("mr");if(mr)mr.innerHTML=`<button class="kbtn alt" data-tgo="${PG==="notes"?"opt":"home"}">‹ Lui</button>`}
 function dropAll(){const M=$("modal");park();[HM,SM].forEach(m=>{if(!m)return;const i=Q.indexOf(m);if(i>=0)Q.splice(i,1)});HM=SM=null;
  if(M&&M.classList.contains("kptitle")){M.classList.remove("kptitle","kpthome","kpscene");if(T.hidden&&Q.length)showModal();else M.hidden=true}}
 function homeOpen(){dropAll();HM=kitModal({scene:true,kind:"notice",title:"Cung Tường Mộng",sub:"Mỗi kiếp một thân phận. Leo từ Đáp ứng lên Hoàng hậu, rồi đưa con lên ngôi.",html:homeMenu(),cls:"kptitle kpthome"});noSeal($("modal"))}

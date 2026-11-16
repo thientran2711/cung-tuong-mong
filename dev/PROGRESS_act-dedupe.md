@@ -5,7 +5,7 @@ Rules: OWNER_DECISIONS 16/11 (L1137 Hành sự vs Dư đồ answer, L1146 correc
 1. Dedupe + Tài nghệ removal: no study cards in Hành sự; every pool card dealt (all daily tasks in view); grey card tap = reason popover (kpPop);
    shared doors (Thỉnh an ×2, Kính sự phòng bribe, maid spying/talk) with one lock; removed copies (Phát chẩn, Tụng kinh, Đánh đàn ở ngự hoa viên,
    Chữa bệnh cho con → Hoàng tự, Học hỏi y lý, Đưa cơm áo, maid "Tâm sự" twin); person-act twins renamed to the ACT name.
-2. Place icons: kitPlaceIcon (KIT §71) on map labels, list tiles, stage title.
+2. Place icons: kitPlaceIcon (KIT §78) on map labels, list tiles, stage title.
 3. "!" happenings: S.adHap per buổi (≤2): Hoàng thượng dạo vườn (PEND.adStroll), hai phi tần cãi nhau (j7 rvquarrel), nghe lỏm (j78 intelLearn,
    free), có người nhờ việc (j72 q72Choose/q72Offer at the requester's place). Fired on arrival. j95 secrets is not on main (not reused).
 4. Nội vụ phủ place + kitShopNvp + weekly rare item (S.adRare, stock 1).
@@ -14,7 +14,7 @@ Co-op: S.adDoor / S.adHap / S.adRare are personal keys; no world agency. Old sav
 ## KIT REQUEST (stop-list for the kit keeper)
 - Missing place glyphs in the kit icon set: Kính sự phòng (thẻ bài), Lãnh cung, tẩm cung / cung phi tần. Ngự hoa viên uses `hoa` (plum + brush);
   a garden glyph would read better.
-- KIT section number for kitPlaceIcon + kitHapMark (written as provisional §71) and confirmation of the `.khap` look.
+- KIT section number for kitPlaceIcon + kitHapMark (was provisional §71; FINAL §78 per kit keeper 16/11) and confirmation of the `.khap` look.
 - ART REQUEST: Nội vụ phủ has no scene picture (uses the Kính sự phòng office picture, sc "ksp").
 
 ## Wave 2 design notes (outings, festivals) — separate branch later
