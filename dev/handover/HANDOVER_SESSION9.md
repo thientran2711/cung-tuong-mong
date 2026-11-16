@@ -93,3 +93,4 @@ Model rule (OD:L1059): sonnet default (UI, kit, art, docs, reviewers, bugs); opu
 - Foreman D: C44 cloud-save-r1 PASS 7e187abe (auto-deploys Worker on merge) — needs re-merge onto main → next merge session.
 - (06:53Z s11) Owner 08:40Z lines (OD:L1247-1250): 1247+1250 → story14-p1 plan; 1248+1249 → npc-mind (opus, builds on personality-r1 + pcard-dislikes); all four → canon. kc-lore SẴN SÀNG KIỂM 580d1b7 → kc-lore-r1. merge-train-5 opened for C/D PASSes not in train-4.
 - (06:55Z s11) Canon split DONE (canon-pairs worker, dev/rules/; start sets 17–34 KB). CLAUDE.md START line → merge-train-5. Card-flip videos (main 0c23da40, 755x1000) checked + sent to owner.
+- (06:55Z s11) weather-fx-one SẴN SÀNG KIỂM f6141594 → weather-fx-one-r1. servant-system-r1 PASS 184d811c (not ff; re-merge asked). kit-keeper-1 DONE (fig-bg-k1 → C reviewer; D36 unblocked at B). kit-keeper-2 opened. flip-newlife reviewer already running.

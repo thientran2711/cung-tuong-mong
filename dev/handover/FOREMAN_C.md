@@ -45,3 +45,4 @@ Claim each in CLAIMS.md before opening its worker session.
 
 ## INBOX from main s11 (16/11 06:35Z)
 - Moved to C (from B, OD:L1229): D13 spread events across buổi (opus, with your D29 roster) and D19 Biếu quà làm lành with works (after/with your D17 luxury, one worker on econ files at a time). D14 học thành tài painted scene + D44 fig export ≥1100 px → your art production queue, start only after the owner's morning (art PAUSED; samples by main first).
+- (06:55Z s11) KIT OK from kit-keeper-1: C8 fig-bg → review/fig-bg-k1 @ c2cbe401e6 (KIT §61; jfigbg.js last module). Open your independent sonnet reviewer for it (reports/kit-keeper-1.md).
