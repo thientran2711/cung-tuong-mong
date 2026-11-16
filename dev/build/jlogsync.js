@@ -46,7 +46,7 @@ function repl(L,raw,rep){const h=String(L.get());let j=h.lastIndexOf(raw),len=ra
  if(j<0){const re=new RegExp(raw.split(/\s+/).map(esc).join("(?:\\s|<[^>]*>)+"),"g");let m;while((m=re.exec(h))){j=m.index;len=m[0].length}}
  if(j<0)return false;const tags=(h.slice(j,j+len).match(/<[^>]*>/g)||[]).join("");L.set(h.slice(0,j)+rep+tags+h.slice(j+len));return true}
 /* lines: [{get:()=>html,set:h=>…}] oldest first. Rewrites a wrong stated delta to the real one; returns what is still unexplained. */
-function lsFix(lines,start){const R=lsReplay(lines.map(l=>l.get()),start);const parts=[];
+function lsFix(lines,start,force){const R=lsReplay(lines.map(l=>l.get()),start);const parts=[];
  for(const [k] of LK){const y=val(k);if(R.v[k]===y)continue;const o=R.last[k],[lo,hi]=bd(k),at=y<=lo||y>=hi;let done=false;
   if(o&&o.a==null&&!o.tot){const nd=y-o.before;let rep=null;
    if(at&&nd!==0&&(o.d==null||Math.sign(nd)===Math.sign(o.d)))rep=`${NM(k)} ${o.before} → ${y} (${y>=hi?"đã đầy":"chạm đáy"})`;
@@ -59,7 +59,7 @@ function lsFix(lines,start){const R=lsReplay(lines.map(l=>l.get()),start);const 
     const raw=t.s!=null?t.s:r+t.d,nr=Math.min(hi,Math.max(lo,raw));if(nr!==raw||t.s!=null&&nr!==r+t.d)reps.push([t,nr===r?`${NM(k)} ${nr>=hi?"đã đầy":"chạm đáy"} ${nr}`:`${NM(k)} ${r} → ${nr} (${nr>=hi?"đã đầy":"chạm đáy"})`]);r=nr}
    if(r===y&&reps.length){for(const [t,rp] of reps.reverse())repl(lines[t.li],t.raw,rp);done=true}}
   /* no real change (y = start) and nothing to correct: the token was someone else's — nothing to add */
-  if(!done&&y!==start[k]){const x=Math.min(hi,Math.max(lo,R.v[k]));if(x!==y)parts.push({k,a:x,b:y})}}
+  if(!done&&(y!==start[k]||force&&force.has(k))){const x=Math.min(hi,Math.max(lo,R.v[k]));if(x!==y)parts.push({k,a:x,b:y})}}
  return parts}
 const partH=(p,why)=>`<span class="${(p.b>p.a)?"g":"r"}">${NM(p.k)} ${p.a} → ${p.b}</span>${why&&why[p.k]&&why[p.k].length?` (${why[p.k].join(", ")})`:""}`;
 /* act summary / choice line: the part of the change since b0 that the given lines do not already say */
@@ -86,8 +86,11 @@ function popWhy(){try{const p=typeof popMsg==="string"?popMsg:"";if(!p||p===pm0)
 function lsSync(label,why){try{if(!S||!Array.isArray(S.logs))return;if(!LG||LG.s!==S){reset();return}if(fold)return;
   const w=Object.assign({},ATT);if(why)for(const k in why)if(why[k])(w[k]=w[k]||[]).push(why[k]);
   if(quiet){TICK=new Map();reset();return}/* a death's last act still gets its line (its cost) */
+  /* keys a known code path moved this window (tick deltas, tagged functions): a net-zero mismatch on them is real, not someone else's token */
+  const tkK=new Set(Object.keys(ATT));for(const D of TICK.values())for(const k in D)if(D[k])tkK.add(k);
   const tk=tickFlush(label,(S.logSeq||0)-LG.seq);
-  const n=(S.logSeq||0)-LG.seq;const parts=lsFix(lsLines(n),LG.v).filter(p=>p.a!==p.b&&LG.v[p.k]!==p.b);
+  /* a net-zero change is skipped (a token about someone else), unless a known code path moved that number */
+  const n=(S.logSeq||0)-LG.seq;const parts=lsFix(lsLines(n),LG.v,tkK).filter(p=>p.a!==p.b&&(LG.v[p.k]!==p.b||tkK.has(p.k)));
   let did=tk;if(parts.length){const pw=popWhy();for(const p of parts)if(!(w[p.k]&&w[p.k].length))w[p.k]=[pw||defWhy(p)];
    const P=parts.map(p=>partH(p,w)).join(", ");
    /* fewer lines (reviewer r1): the parts join this action's own newest line when it wrote one; a line only when it wrote none */

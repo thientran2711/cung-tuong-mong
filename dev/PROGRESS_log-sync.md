@@ -136,3 +136,22 @@ subject word before it (e.g. a festival winner "(Sủng +2, Danh +2)"), read as 
   a wording pass ("nàng được Sủng +2 …") would remove the last ambiguity.
 - Relation numbers per consort (ghen / thiện cảm / oán) are not replayed by this audit (only Thái hậu / Hoàng hậu → ta); the
   night line already logs ghen before → after.
+
+## r1 (reviewer FAIL @ e51896108 → fixed)
+1. Week card flooded: tick / catch-all lines carry `<i class="kls" data-ls="t|c">`; jlogsync wraps wkSummary and wkBookData
+   so marked lines are left out (whole family: dawn card, Tuần lục). Test dev/test/log-sync-week.js (bots, 100 weeks): every
+   week's marked lines vs the card text → PASS, 0 leaks. Screens 755x1000 / 1180x820 of Tuần lục: no bookkeeping lines.
+2. Bổng lộc: the parser reads the line's total "… = +57 bạc" (items not counted); stipend no longer tagged (no stray reason).
+   NPC ban thưởng into her purse (jecon econDoDuty) now named ("<name> ban thưởng").
+3. Monthly Thái hậu / Hoàng hậu drift by Đức: j3 monthTick and v85Month write into ONE group with one wording
+   (lsDucWhy "Đức thấp, bị coi nhẹ" / "Đức cao, được quý hơn"); j85's own news text for it removed.
+4. Fewer lines: time ticks are buffered and written once per turn change, folded into the morning line
+   "Ngủ một đêm: Sức +18 · ân sủng nhạt dần: Sủng -1 · …" (that line is then marked bookkeeping); a catch-all joins the action's
+   own newest line ("Đọc sách giải khuây — Tâm cơ 27 → 28 (hiểu thêm lòng người).") and is a separate line only when the action
+   wrote none. Sens bot: 4 catch-all lines / 1309 (the rand bot's are lessons whose mini-game the bot drops; in the game the cost
+   is paid via aaPayMG with its result card).
+5. Every catch-all part has a reason (the action's pop text, else a sign-aware word: tốn bạc / hao sức / Hoàng thượng để mắt …);
+   logChoice joins with " — " (no double arrow); night talk line: "Hỏng: Sủng 37 → 34." / "Sau đó: Ân tình 7 → 9." (no repeated
+   choice name; "Thì thầm nói xấu" forced to fail says Hỏng). Also: "Hoàng thượng đến" card (j24) now logs its Sủng/Ân tình;
+   j70 "Ngươi mất: Sức -43" no longer repeats a loss its body already states.
+Audit (3 seeds × 2500 actions, after merge of origin/main 6298d2f55): see the report; noWhy (catch-all without reason) = 0.
