@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Write assets.json at the repo root: every image and sound the game may load, keyed by content.
    files: [path, hash, size, group]   hash = sha256 hex[:16]   group 'core' = needed before entering (UI, scenes, maps, items, sounds),
+          'lazy' = never fetched ahead, cached by sw.js on first use (see PERFORMANCE BUDGET below),
           'fx' = painted effects (img/fx/, KIT §68): on demand only (jload skips them; sw.js caches them when first played),
           'fig' = figure + portrait sets, event, story and festival-map art (downloaded in the background after entering, rarest roles last).
    A hash cache (dev/site/.assets-cache.json, untracked) skips re-hashing files whose size+mtime did not change.
@@ -67,14 +68,42 @@ VD = os.path.join(R, 'dev', 'vendor')
 for f in (sorted(os.listdir(VD)) if os.path.isdir(VD) else []):
     if f.endswith('.js'):
         p = 'dev/vendor/' + f; hv, sz = h(os.path.join(R, p)); files.append([p, hv, sz, 'fig'])
+# PERFORMANCE BUDGET (owner 15/11 22:35Z, dev/PROGRESS_perf.md): a new player used to wait for EVERY non-figure picture (~890 MB) before the title.
+# Now only the FIRST HOUR is 'core' (blocks entry): dev/site/first-hour.txt (recorded by dev/measure/firsthour.js: every file a few real lives of bot play
+# requested) + ALWAYS (title backdrops, frames, icons, sfx). Everything else is 'fig' (background, in this order, until BG_MB) or 'lazy'
+# (never fetched ahead; sw.js caches it by content the first time the game shows it — offline for what was seen, never a stale copy).
+BG_MB = float(os.environ.get('CTM_BG_MB', '120'))
+ALWAYS = re.compile(r'(img/title-key|img/frame|icons/|audio/sfx-|audio/bgm-day)')
+try: FIRST = {l.strip() for l in open(os.path.join(R, 'dev', 'site', 'first-hour.txt'), encoding='utf-8') if l.strip() and not l.startswith('#')}
+except Exception: FIRST = None   # no list yet: old behaviour (everything non-figure is core)
+def first_ok(k):
+    # identity-specific art (other people's figures/portraits, event + story pictures) differs per life: background / on use, not blocking.
+    # Her own, the Emperor's and the Thái hậu's sets (every life shows them at once) stay in the blocking set.
+    b = os.path.basename(k); m = re.match(r'(fig|por)-([a-z]+)', b)
+    if m: return m.group(2) in ('emperor', 'thaihau', 'player')
+    return not b.startswith(('ev-', 'st-', 'map-fest-'))
+if FIRST is not None:
+    FIRST = {k for k in FIRST if first_ok(k)}
+    for f in files:
+        if f[3] == 'core' and not (f[0] in FIRST or ALWAYS.search(f[0])): f[3] = 'lazy'   # decided below
+        elif f[3] == 'fig' and f[0] in FIRST: f[3] = 'core'
+    lazy_core = [f for f in files if f[3] == 'lazy']
+    figs = sorted((f for f in files if f[3] == 'fig' and not f[0].startswith('dev/vendor/')), key=lambda f: bgkey(f[0]))
+    order = figs + sorted(lazy_core, key=lambda f: f[0])
+    used = 0
+    for f in order:
+        if used + f[2] <= BG_MB * 1e6: f[3] = 'fig'; used += f[2]
+        else: f[3] = 'lazy'
 core = [f for f in files if f[3] == 'core']
 fig = sorted((f for f in files if f[3] == 'fig'), key=lambda f: bgkey(f[0]))
+lazy = [f for f in files if f[3] == 'lazy']
 # group 'fx' (KIT §68 painted effects, img/fx/): never downloaded ahead; listed so sw.js caches each file by content the first time a scene plays it
 fig += [f for f in files if f[3] == 'fx']
+fig += lazy   # on use only (jload.js skips fx + lazy)
 # the title backdrops first so the loading screen has its painting at once
 core.sort(key=lambda f: (0 if re.match(r'img/title-key', f[0]) else 1, f[0]))
 out = {'v': hashlib.sha256(json.dumps(core + fig).encode()).hexdigest()[:12], 'files': core + fig}
 json.dump(out, open(os.path.join(R, 'assets.json'), 'w'), separators=(',', ':'))
 json.dump(new, open(CACHE, 'w'))
 mb = lambda l: round(sum(f[2] for f in l) / 1e6, 1)
-print(f"assets.json v={out['v']} core {len(core)} files {mb(core)} MB · fig {len(fig)} files {mb(fig)} MB")
+print(f"assets.json v={out['v']} core {len(core)} files {mb(core)} MB · background {len([f for f in fig if f[3]=='fig'])} files {mb([f for f in fig if f[3]=='fig'])} MB · lazy {len(lazy)} files {mb(lazy)} MB · fx {len([f for f in fig if f[3]=='fx'])} files")

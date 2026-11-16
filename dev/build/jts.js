@@ -58,8 +58,8 @@ function tsEngPluck(box,env){const C=kg82Canvas(box,1,460),{g,W,H}=C;const N=12,
   for(const s of L){if(s.st)continue;s.x-=spd*16;if(s.x<-40)s.st=2}
   if(risk&&!alarm&&tt>dur*.5){alarm={a:tt,done:false};const b=document.createElement("button");b.className="kgbtn ts-guard";b.type="button";b.textContent="Hộ giá";b.onclick=()=>{if(alarm.done)return;alarm.done=true;KG82.tsGuard=1;b.remove();kg82Pop(pops,W/2,H*.3,"Hộ giá kịp lúc","#2d7a52")};box.appendChild(b);alarm.btn=b}
   if(alarm&&!alarm.done&&tt-alarm.a>3500){alarm.done=true;KG82.tsGuard=0;if(alarm.btn)alarm.btn.remove();kg82Pop(pops,W/2,H*.3,"Cấm quân đã xông tới","#8a7350")}
-  const left=L.filter(s=>!s.st).length;const done=made>=N&&!left;env.hud({score:`${Math.round(10*Math.min(1,credit/(N*.62)))}/10`,round:`Hồi ${Math.min(N,made)}/${N}`,time:`${Math.max(0,Math.ceil((dur-tt)/1000))} giây`});
-  draw(now);if(done||tt>dur+4000){stop=true;if(risk&&KG82.tsGuard==null)KG82.tsGuard=0;return env.end(10*Math.min(1,credit/(N*.62)))}raf=requestAnimationFrame(frame)}
+  const left=L.filter(s=>!s.st).length;const done=made>=N&&!left;env.hud({score:`${Math.round(10*Math.min(1,credit/(N*mgFull(env,.62))))}/10`,round:`Hồi ${Math.min(N,made)}/${N}`,time:`${Math.max(0,Math.ceil((dur-tt)/1000))} giây`});
+  draw(now);if(done||tt>dur+4000){stop=true;if(risk&&KG82.tsGuard==null)KG82.tsGuard=0;return env.end(10*Math.min(1,credit/(N*mgFull(env,.62))))}raf=requestAnimationFrame(frame)}
  C.cv.addEventListener("pointerdown",e=>{e.preventDefault();if(stop)return;const [x,y]=C.at(e);let best=null,bd=1e9;for(const s of L){if(s.st)continue;const d=Math.hypot(s.x-x,s.y-y);if(d<s.r*1.25&&d<bd){bd=d;best=s}}
   if(!best)return;if(best.x>=zx0&&best.x<=zx1){best.st=1;credit+=best.big?1:.45;kg82Pop(pops,best.x,best.y-best.r,best.big?"Sen nở":"Búp sen",best.big?"#2d7a52":"#8f5f0c")}else{credit-=.15;kg82Pop(pops,best.x,best.y-best.r,"Xa quá","#c23b22")}});
  KG82.peek=()=>{const s=L.find(s=>!s.st&&s.x>zx0+10&&s.x<zx1-10);return s?C.client(s.x,s.y):null};
@@ -87,7 +87,7 @@ Object.assign(KG82_ENG,{tspluck:tsEngPluck,tssteer:tsEngSteer});
 /* tsGame({kind, art, title, odds (cơ may thường 0–100), risk, ctx, intro:[rows], onDone(res)}): res {raw 0–10, skipped, guard} */
 function tsGame(o){const odds=cl(Math.round(o.odds||50),5,95);const skipRes=()=>{const ok=roll(odds);return{raw:ok?7:3,skipped:true,ok,guard:o.risk?(roll(odds)?1:0):null}};
  if(tsBot()||typeof kg82Open!=="function"){const r=skipRes();setTimeout(()=>o.onDone(r),0);return}
- const K=KG82_KIND[o.kind];KG82.ctx=o.ctx||"hoc";KG82.tsRisk=o.risk||null;KG82.tsGuard=null;try{KG82.lv=kg82LvFor(S,o.kind)}catch(e){KG82.lv=0}kg82Preload(o.kind);
+ const K=KG82_KIND[o.kind];KG82.ctx=o.ctx||"hoc";KG82.tsRisk=o.risk||null;KG82.tsGuard=null;try{mgSet(o.kind,{occ:o.occ||"trieu"})}catch(e){KG82.lv=0}kg82Preload(o.kind);
  const d=kg82Open({art:o.art||K.n,title:o.title||K.t,how:K.how,pic:typeof kg82Pic==="function"?kg82Pic(o.kind):""});if(!d){o.onDone(skipRes());return}const box=kg82Box();
  const fin=(r)=>{KG82.phase="result";KG82.tsRisk=null;const rows=[["Màn chơi",r.skipped?`Bỏ qua: tính theo cơ may (${word(odds)}) → ${r.ok?"thuận":"không thuận"}`:`${r.raw}/10 · ${kg82Word(r.raw)}`,"t"]];
   if(o.risk)rows.push(["Hộ giá",r.guard?"kịp lúc":"không kịp, cấm quân lo liệu",r.guard?"g":"n"]);if(o.note)rows.push(["Ghi chú",o.note,"n"]);
@@ -119,7 +119,7 @@ function tsDangerPanel(){if(!S||S.dead)return;const D=tsDangerOf(S,true);
 function tsOptGuard(){const s=tsS();if(s.guard>wk())return tsOpt({n:"Đóng cửa giữ mình",need:[{t:`chưa giữ mình (còn ${s.guard-wk()} tuần)`,ok:false}],duoc:["kẻ muốn hại khó ra tay"]});
  return tsOpt({n:"Đóng cửa giữ mình",fx:{sung:-2},need:[{t:"không cấm túc",ok:!S.confined}],duoc:["2 tuần: mưu hại nhắm vào ngươi thành ít đi một nửa"],kem:["ít gặp Hoàng thượng"],go:()=>{s.guard=wk()+2;log("Ngươi đóng cửa cung, dặn kẻ hầu canh giữ nghiêm, hai tuần không ra ngoài nhiều.")}})}
 function tsOptGifts(D){const L=D.top.filter(x=>x.b>=1).slice(0,4);if(!L.length)return null;const c=L.length*12;
- return tsOpt({n:"Biếu quà làm lành",fx:{bac:-c},need:[tsNeedBac(c)],duoc:L.map(x=>`${x.v.name} bớt ghen 8, bớt oán 5`),go:()=>{for(const x of L){x.v.ghen=cl((x.v.ghen||0)-8,0,100);oanAdd(x.v,S,-5);tsAff(x.v,3)}log(`Ngươi sai người mang quà sang ${L.map(x=>x.v.name).join(", ")}, lời lẽ mềm mỏng.`)}})}
+ return tsOpt({n:"Biếu quà làm lành",fx:{bac:-c},need:[tsNeedBac(c)],duoc:L.map(x=>`${x.v.name} bớt ghen 8, bớt oán 5`),go:()=>{for(const x of L){x.v.ghen=cl((x.v.ghen||0)-8,0,100);oanAdd(x.v,S,-5);tsAff(x.v,3)}log(`Ngươi sai người mang quà sang ${kitNameList(L.map(x=>x.v))}, lời lẽ mềm mỏng.`)}})}
 /* the guard: same rule for everyone (a target who keeps to herself is harder to reach) */
 (function(){if(typeof npcAct!=="function")return;const n0=npcAct;npcAct=function(v,t){try{const g=t===S?tsS().guard:t&&t.tsGuard;if(g>wk()&&roll(50))return""}catch(e){}return n0.apply(this,arguments)}})();
 /* NPC side: a consort whom many want to harm closes her doors / sends gifts, by her own nature (same costs) */
@@ -339,7 +339,7 @@ function tsDressGame(th,done){tsTagsFresh();const T=TS_THEME[th];const P={};cons
 #kg82 .ts-slots{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin:4px 0 8px}
 #kg82 .ts-slot{display:flex;flex-direction:column;align-items:center;gap:2px;min-width:0}
 #kg82 .ts-slot>small{font-size:.74rem;color:var(--k-lab,#8a7350)}
-#kg82 .ts-items{display:grid;grid-template-columns:repeat(auto-fill,minmax(88px,1fr));gap:6px;max-height:42vh;overflow:auto;padding:2px;align-items:start}
+#kg82 .ts-items{display:grid;grid-template-columns:repeat(auto-fill,minmax(88px,1fr));gap:6px;max-height:calc(42*var(--kvh,1vh));overflow:auto;padding:2px;align-items:start}
 #kg82 .ts-det{margin:8px 0 4px}#kg82 .ts-det>.past{margin:4px 0}
 /* review ts-a FAIL 1: a <button> centres its content — every tile starts at the top so pictures and names line up across a row */
 #kg82 .ts-it{background:none;border:0;padding:0;cursor:pointer;min-width:0;opacity:.75;align-self:start;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;height:auto}
@@ -348,6 +348,6 @@ function tsDressGame(th,done){tsTagsFresh();const T=TS_THEME[th];const P={};cons
 .ts-it.ts-on .kitb{filter:var(--k-glow,drop-shadow(0 0 5px #ffd66e) drop-shadow(0 0 2px #be8c1ee6));transform:scale(1.06)}
 #kg82 .kgbox{position:relative}
 #kg82 .ts-guard{position:absolute;left:50%;top:38%;transform:translateX(-50%);z-index:2;min-height:44px}
-@media (max-width:420px){#kg82 .ts-slots{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
 `;document.head.appendChild(st)})();
 window.TSA=Object.assign(TSA,{dangerOf:tsDangerOf,dangerPanel:tsDangerPanel,promoPanel:tsPromoPanel,summonMe:tsSummonMe,summonWeek:tsSummonWeek,denWish:tsDenWish,denCard:tsDenCard,dressAnnounce:tsDressAnnounce,dressHold:tsDressHold,leHost:tsLeHost,birthReward:tsBirthReward,festPre:tsFestPre});

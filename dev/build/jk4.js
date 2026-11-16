@@ -42,7 +42,7 @@ window.kitStatCell=kitStatCell;window.kitStatSet=kitStatSet;window.kitStatRow=ki
 .kst>.kstb0{visibility:hidden}
 .kst-tile>.kstv:not(.kunk){font-weight:700}.kst-tile>.kstl img.ic,.kst-chip>.kstl img.ic{width:13px;height:13px;vertical-align:-2px}
 /* one-row bar (cells sized to content): a cell wearing the "!" keeps the badge inside its own box (owner 15/11: Danh now follows Đức) */
-@media (min-width:1000px){header.hud:not(.khd2) #kstrow .kst:has(>.kstw){padding-right:12px}}
+/* kv3:.kv2 */:where(.kv2) header.hud:not(.khd2) #kstrow .kst:has(>.kstw){padding-right:12px}
 .kst>.kstw{position:absolute;left:calc(50% + 1.1em);top:calc(var(--kst-l) + (var(--kst-n) - 13px)/2);font-style:normal;font-weight:800;font-size:.62rem;line-height:13px;color:#fff;background:var(--gold);border-radius:50%;width:13px;height:13px;text-align:center}
 /* the time block: same two line boxes as a stat cell */
 .k3tc .k3tt{display:grid!important;grid-template-rows:var(--kst-l) var(--kst-n) var(--kst-b);gap:0!important;min-width:0}
@@ -66,71 +66,71 @@ html body header.hud{grid-template-columns:auto auto minmax(0,1fr) auto!importan
 html body .game#game.k3ph header.hud:has(#k3room:not([hidden])){grid-template-columns:auto auto auto minmax(0,1fr) auto!important;grid-template-areas:"menu me room tc stats"!important}
 html body .game#game.k3ph header.hud>#k3room:not([hidden]){grid-area:room}
 /* Fold / tablets portrait 600–999 px: row 1 menu · me · time, row 2 all eight cells, both groups share the label and number lines */
-@media (max-width:999px){
- html body header.hud{grid-template-columns:auto minmax(0,1fr) auto!important;grid-template-areas:"menu me tc" "stats stats stats"!important;row-gap:2px!important}
- html body .game#game.k3ph header.hud:has(#k3room:not([hidden])){grid-template-columns:auto minmax(0,1fr) auto auto!important;grid-template-areas:"menu me room tc" "stats stats stats stats"!important}
- html body header.hud>#kstrow{justify-self:stretch;border-top:1px solid var(--k-hair,#e6d3ac);padding-top:3px}
- html body header.hud>#k3tc{justify-self:end}
- #kstrow>.kstg{flex:var(--kn,1) 1 0;grid-auto-columns:minmax(0,1fr);column-gap:4px}
-}
+/* kv3:.kv1 */
+ html:where(.kv1) body header.hud{grid-template-columns:auto minmax(0,1fr) auto!important;grid-template-areas:"menu me tc" "stats stats stats"!important;row-gap:2px!important}
+ html:where(.kv1) body .game#game.k3ph header.hud:has(#k3room:not([hidden])){grid-template-columns:auto minmax(0,1fr) auto auto!important;grid-template-areas:"menu me room tc" "stats stats stats stats"!important}
+ html:where(.kv1) body header.hud>#kstrow{justify-self:stretch;border-top:1px solid var(--k-hair,#e6d3ac);padding-top:3px}
+ html:where(.kv1) body header.hud>#k3tc{justify-self:end}
+ :where(.kv1) #kstrow>.kstg{flex:var(--kn,1) 1 0;grid-auto-columns:minmax(0,1fr);column-gap:4px}
+
 /* KIT 32.12 TOP BAR GRID (header-fix, owner 11/15 Fold shot: name on 2 lines, chips under "‹ Ngự hoa viên", date on 3 lines).
    Her block never wraps and never shrinks (name 1 line · rank + age chips 1 line · date 1 line); the time block is the column that gives.
    ≥ 600 px only (phones < 600 keep their own rows below). */
 /* KIT §0: the one page uses the spread's top bar (same rows, same cells) */
-@media all{
+/* kv3:unwrap */
  html body header.hud>.me,html body header.hud>.me .mi{min-width:max-content!important;flex-shrink:0!important}
  html body header.hud>.me .mi>b,html body header.hud>.me .k3rr,html body header.hud>.me .rk,html body header.hud #me-d{white-space:nowrap!important}
  html body header.hud{grid-template-columns:auto max-content minmax(0,1fr) auto!important}
  /* her portrait is as tall as her name block (owner 15/11 10:30Z): the frame box stretches to the block's height, width by the frame's ratio */
  html body header.hud>.me>#me-p{flex:none;line-height:0}
  html body header.hud[style*="--kmeh"]>.me>#me-p>span.md.kfc.kfc{width:calc(var(--kmeh) * 550 / 795)!important;height:auto!important}
-}
+
 /* two-row bar (600–999 px, and ≥ 1000 px when the one row does not fit: class .khd2 from kitHdFit) —
    row 1: menu · her block · RIGHT COLUMN (time block; "‹ Nơi" button under it, same left/right edges); row 2: the eight stat cells */
-@media (max-width:999px){
- html body .game#game header.hud,html body .game#game.k3ph header.hud:has(#k3room:not([hidden])){grid-template-columns:auto max-content minmax(0,1fr) minmax(0,max-content)!important;
+/* kv3:.kv1 */
+ html:where(.kv1) body .game#game header.hud,html:where(.kv1) body .game#game.k3ph header.hud:has(#k3room:not([hidden])){grid-template-columns:auto max-content minmax(0,1fr) minmax(0,max-content)!important;
   grid-template-areas:"menu me . tc" "menu me . room" "stats stats stats stats"!important;grid-template-rows:auto auto auto!important;row-gap:0!important}
- html body header.hud>#k3tc{justify-self:stretch!important;align-self:end!important}
- html body header.hud:not(:has(#k3room:not([hidden])))>#k3tc{align-self:center!important}
- html body .game#game header.hud>#k3room:not([hidden]){grid-area:room!important;justify-self:end!important;align-self:start!important;margin-top:2px;min-height:34px;padding:0 6px}
- html body header.hud>#kstrow{margin-top:3px!important}
- html body header.hud .k3tc .k3tt{grid-template-rows:auto auto!important}
- html body header.hud .k3tt>.kstl,html body header.hud .k3tt>.kstv{white-space:normal!important;height:auto!important;min-height:var(--kst-l)}
-}
+ html:where(.kv1) body header.hud>#k3tc{justify-self:stretch!important;align-self:end!important}
+ html:where(.kv1) body header.hud:not(:has(#k3room:not([hidden])))>#k3tc{align-self:center!important}
+ html:where(.kv1) body .game#game header.hud>#k3room:not([hidden]){grid-area:room!important;justify-self:end!important;align-self:start!important;margin-top:2px;min-height:34px;padding:0 6px}
+ html:where(.kv1) body header.hud>#kstrow{margin-top:3px!important}
+ html:where(.kv1) body header.hud .k3tc .k3tt{grid-template-rows:auto auto!important}
+ html:where(.kv1) body header.hud .k3tt>.kstl,html:where(.kv1) body header.hud .k3tt>.kstv{white-space:normal!important;height:auto!important;min-height:var(--kst-l)}
+
 /* KIT §0 one page: "Về phòng" sits under the menu button (icon; label = tooltip), so the top bar keeps the spread's height */
-@media (max-width:999px){
- html body .game#game.k3ph header.hud:has(#k3room:not([hidden])){grid-template-areas:"menu me . tc" "room me . tc" "stats stats stats stats"!important;grid-template-rows:auto minmax(0,1fr) auto!important}
- html body .game#game.k3ph header.hud>#k3room:not([hidden]){grid-area:room!important;justify-self:center!important;align-self:start!important;padding:0!important;min-height:0!important;margin-top:2px}
- html body .game#game.k3ph header.hud>#k3room.kbackb:has(.kbi) .kbl{display:none}
-}
+/* kv3:.kv1 */
+ html:where(.kv1) body .game#game.k3ph header.hud:has(#k3room:not([hidden])){grid-template-areas:"menu me . tc" "room me . tc" "stats stats stats stats"!important;grid-template-rows:auto minmax(0,1fr) auto!important}
+ html:where(.kv1) body .game#game.k3ph header.hud>#k3room:not([hidden]){grid-area:room!important;justify-self:center!important;align-self:start!important;padding:0!important;min-height:0!important;margin-top:2px}
+ html:where(.kv1) body .game#game.k3ph header.hud>#k3room.kbackb:has(.kbi) .kbl{display:none}
+/* KIT §0 one page (design-scale p2): the time column is ~40 % narrower than on the spread, so its two lines wrapped and the block grew taller
+   than her name block (top bar 132 vs 129 px, +12 px with a state chip such as "Có thai"). On the one page the time block flows as ONE
+   wrapping row of whole items (time, toilette, weather, quẻ, every K3_STATE chip; an item is never split, the next drops to a new 18 px line),
+   so it stays within her name block's height: the top bar keeps the spread's height and the page box under it = the spread's page box. */
+ html:where(.kv1) body header.hud .k3tc .k3tt{display:flex!important;flex-wrap:wrap;align-items:center;align-content:center;gap:0 6px!important;min-width:0;max-width:100%}
+ html:where(.kv1) body header.hud .k3tt>.kstl,html:where(.kv1) body header.hud .k3tt>.kstv{display:contents!important}
+ html:where(.kv1) body header.hud .k3tc .k3tt .k3r{white-space:nowrap;margin-right:0!important;max-width:100%;height:18px!important;line-height:18px!important;align-items:center}
+ html:where(.kv1) body header.hud .k3tc .k3tt .k3wx img{width:16px!important;height:16px!important}
+
 html body .game#game header.hud.khd2{grid-template-columns:auto max-content minmax(0,1fr) minmax(0,max-content)!important;grid-template-areas:"menu me . tc" "menu me . room" "stats stats stats stats"!important;
  grid-template-rows:auto auto auto!important;row-gap:0!important}
+/* owner 16/11 (Q6): the room button also shows on wide / landscape: two-row bar (.khd2) = under the time block (area room); one-row bar = between the menu button and her name */
+html body header.hud>#k3room:not([hidden]){grid-area:room}
+/* kv (review/mg-train, KIT §0 design scale): was @media (min-width:1000px) = the spread */
+html:where(.kv2) body header.hud:not(.khd2):has(#k3room:not([hidden])){grid-template-columns:auto auto minmax(0,1fr) auto!important;grid-template-areas:"menu room me stats"!important}
+html:where(.kv2) body header.hud.khd2>#k3room:not([hidden]){justify-self:end!important;align-self:start!important;min-height:0!important;height:32px;box-sizing:border-box}/* page-scale-r1: 32 px = the free 2nd row beside her portrait (72 - 39 time block), so the spread bar keeps its height and the right page stays 582x623 = the one page (KIT §0.0a) */
 html body header.hud.khd2>#k3tc{justify-self:stretch!important;align-self:center!important}
 html body header.hud.khd2>#kstrow{justify-self:stretch!important;border-top:1px solid var(--k-hair,#e6d3ac);padding-top:3px;margin-top:3px!important}
 html body header.hud.khd2>#kstrow>.kstg{flex:var(--kn,1) 1 0;grid-auto-columns:minmax(0,1fr);column-gap:4px}
 html body header.hud.khd2 .k3tc .k3tt{grid-template-rows:auto auto!important}
 html body header.hud.khd2 .k3tt>.kstl,html body header.hud.khd2 .k3tt>.kstv{white-space:normal!important;height:auto!important;min-height:var(--kst-l)}
 /* phones < 600 px: the same row, label line = icon only (name in the tooltip), number line below */
-@media (max-width:0px){/* KIT §0: retired — no phone top bar; the one page (590) uses the two-row bar above (phase 3 deletes this block) */
- html body header.hud{grid-template-columns:auto minmax(0,1fr)!important;grid-template-areas:"menu me" "tc tc" "stats stats"!important}
- html body .game#game.k3ph header.hud:has(#k3room:not([hidden])){grid-template-columns:auto minmax(0,1fr)!important;grid-template-areas:"menu me" "room tc" "stats stats"!important;align-items:center}
- html body header.hud>#k3tc{justify-self:stretch}
- .k3tc .k3tt{grid-template-rows:auto!important;grid-auto-flow:column;justify-content:start;gap:0 12px!important}
- /* KIT 31.2a (review/small-bugs-3): the state row never runs past the edge — under 600 px both lines flow as ONE wrapping row of whole
-    items (time, toilette, weather, quẻ, every K3_STATE chip): an item is never split, the next one drops to a new line */
- html body header.hud .k3tc .k3tt{display:flex!important;flex-wrap:wrap;align-items:center;column-gap:12px;row-gap:0;min-width:0;max-width:100%}
- html body header.hud .k3tt>.kstl,html body header.hud .k3tt>.kstv{display:contents!important}
- html body header.hud .k3tt .k3r{white-space:nowrap;margin-right:0!important;max-width:100%}
- .k3tt>.kstl,.k3tt>.kstv{height:24px;line-height:24px;font-size:.7rem;font-family:var(--body,inherit)}.k3tc .k3tt .kstl .k3r{height:24px;line-height:24px}
- #kstrow>.kstg+.kstg{padding-left:6px}#kstrow{gap:0 6px}
- #kstrow .kst>.kstl{font-size:0;gap:0}#kstrow .kst>.kstl img.ic{width:16px;height:16px}
-}
+
 `;document.head.appendChild(st)})();
 /* KIT 32.12 kitHdFit: ≥ 1000 px the bar is one row only when it fits (her block, the whole time block and the eight cells side by side);
    otherwise .khd2 = the two-row bar (same grid as 600–999 px). Measured in the one-row form, in one synchronous pass (no flicker).
    ≥ 600 px it also sets --kmeh = her name block's height: the frame keeps the width it had when its crest+window+band (550/795) was exactly that tall (owner 15/11 10:30Z);
    since tassel-fix (owner 15/11 06:35Z) the jade pendant + tassel hang below it whole (cell 550/1037), so the frame is 1037/795 of the name block. */
-function kitHdMe(hd){try{const mi=hd.querySelector(":scope>.me .mi");const h=mi&&matchMedia("all").matches?Math.round(mi.getBoundingClientRect().height):0;
+function kitHdMe(hd){try{const mi=hd.querySelector(":scope>.me .mi");const h=mi?Math.round(mi.getBoundingClientRect().height):0;
  const v=h>20?h+"px":"";if(hd.style.getPropertyValue("--kmeh")!==v){if(v)hd.style.setProperty("--kmeh",v);else hd.style.removeProperty("--kmeh")}}catch(e){}}
 /* review/small-bugs-3 (1000x755: a long date "Tháng chạp · trung tuần · năm thứ hai mươi ba" ran under the weather icon): her block and the time
    block never touch — the right edge of her text + 8 px must stay left of the time block's first text/icon, else the two-row bar */
@@ -140,8 +140,8 @@ function kitHdClash(hd,tc){try{const me=hd.querySelector(":scope>.me");if(!me||!
  leaf(me,q=>{r=Math.max(r,q.right)});leaf(tc,q=>{l=Math.min(l,q.left)});return r>0&&l<1e9&&r+8>l}catch(e){return false}}
 /* one-row bar only from this width (1366 iPad Pro); 1000–1279 (iPad 1180, split views) = the two-row bar, always */
 const KHD1_MIN=1280;
-function kitHdFit(){try{const hd=document.querySelector("header.hud");if(!hd)return;kitHdMe(hd);const wide=matchMedia("(min-width:1000px)").matches;
- if(!wide){hd.classList.remove("khd2");return}const had=hd.classList.contains("khd2");
+function kitHdFit(){try{const hd=document.querySelector("header.hud");if(!hd)return;kitHdMe(hd);const wide=kitView().pages===2;
+ if(!wide){hd.classList.remove("khd2");kitTcFit(hd);return}const had=hd.classList.contains("khd2");
  /* review/stage-side (owner 16/11 "nó không có giữ cố định một chỗ"): the bar form is FIXED per viewport, never re-decided by content
     (a dialog, a longer clothes / weather line). < KHD1_MIN px wide = always two rows; wider = one row, measured once per viewport size,
     and once it needed two rows it keeps them for that size (one-way latch = hysteresis: it never flips back on shorter text). */
@@ -154,6 +154,11 @@ function kitHdFit(){try{const hd=document.querySelector("header.hud");if(!hd)ret
  bad=hd.scrollWidth>hd.clientWidth+1||!!(tc&&tt&&tc.offsetParent&&tt.scrollWidth>tc.clientWidth+1)||kitHdClash(hd,tc);if(bad)window.__khd2=true}
  hd.classList.toggle("khd2",bad);try{window.kitSealHud&&kitSealHud()}catch(e){}if(had!==bad){try{const hb=hd.getBoundingClientRect();document.documentElement.style.setProperty("--k3hb",Math.round(hb.bottom)+"px");window.j59lay&&j59lay()}catch(e){}}}catch(e){}}
 window.kitHdFit=kitHdFit;
+/* KIT §0 one page (design-scale p2): the time block (one wrapping row of whole items, CSS above) must not be taller than her name block, else
+   the top bar — and so the page box under it — would be taller than the spread's. When a long day (state chips, a long weather or quẻ)
+   still overflows, the whole block is scaled down together (zoom steps of 5 %, never below 80 %), like the tab bar's one font size. */
+function kitTcFit(hd){try{const tc=document.getElementById("k3tc"),me=hd.querySelector(":scope>.me");if(!tc||!me||!tc.offsetParent)return;
+ tc.style.zoom="";const lim=me.offsetHeight+1;let z=1;while(tc.offsetHeight>lim&&z>.8){z=+(z-.05).toFixed(2);tc.style.zoom=String(z)}}catch(e){}}
 if(typeof renderHUD==="function"){const r0=renderHUD;renderHUD=function(){const r=r0.apply(this,arguments);kitHdFit();return r}}
 if(typeof render==="function"){const r1=render;render=function(){const r=r1.apply(this,arguments);kitHdFit();return r}}
 addEventListener("resize",()=>{clearTimeout(window.__khdf);window.__khdf=setTimeout(kitHdFit,40)});
@@ -176,7 +181,7 @@ function kitStageFig(p,o){o=o||{};try{if(!p)return"";const q=p.__kp||p;const src
  let nm="";if(o.cap!==false){try{nm=typeof kitName==="function"?kitName(q,{cap:true,named:typeof S!=="undefined"&&q===S}):(q.name||"")/* owner 15/11: rank + name always together — her own figure too (was "Ngươi") */}catch(e){nm=q.name||""}}
  /* KIT 33 KIT_FIG: one scale for both people of an event — the tallest (an adult man) fills the box, women ×1/man, children by age */
  let kfr=1;try{kfr=KIT_FIG.fac(src,typeof q.age==="number"?q.age:20)/KIT_FIG.man}catch(e){}
- return `<figure class="kesf"><span class="kesfi"><img class="kesimg" style="--kfr:${kfr.toFixed(3)}" data-sil="${typeof kitSilFig==="function"?kitSilFig(q):""}" src="${src}" alt="" crossorigin="anonymous" decoding="sync" onerror="kitStageFigErr(this)">${fx?`<span class="kfxf kesfx">${fx}</span>`:""}</span>${nm?`<figcaption class="kpsn">${nm}</figcaption>`:""}</figure>`}catch(e){return""}}
+ const dh=o.plate&&typeof kitTitlePlate==="function"?kitTitlePlate(kitTitleWorn(q)):"";return `<figure class="kesf"><span class="kesfi"><img class="kesimg" style="--kfr:${kfr.toFixed(3)}" data-sil="${typeof kitSilFig==="function"?kitSilFig(q):""}" src="${src}" alt="" crossorigin="anonymous" decoding="sync" onerror="kitStageFigErr(this)">${fx?`<span class="kfxf kesfx">${fx}</span>`:""}</span>${nm?`<figcaption class="kpsn">${dh}${nm}</figcaption>`:""}</figure>`}catch(e){return""}}
 /* D50: a figure file that fails to load swaps to the kit silhouette once (never an empty column); only a failing silhouette hides the figure */
 function kitStageFigErr(im){try{const sil=im.dataset.sil;if(sil&&(im.getAttribute("src")||"").indexOf("unknown-fig")<0){im.removeAttribute("data-sil");im.src=sil;return}}catch(e){}kitImgErr(im,{sel:".kesf",cls:"kesno"})}
 window.kitStageFigErr=kitStageFigErr;
@@ -191,7 +196,7 @@ window.kitDefaultBanner=kitDefaultBanner;
 function kitEventStage(m){try{const M=$("modal"),mb=$("mb");const dlg=M&&M.querySelector(".dlg.kpanel");const body=mb&&mb.querySelector(":scope > .kpb");
  if(!dlg||!body||body.classList.contains("kpid")||body.querySelector(":scope > .kes"))return false;
  /* owner 16/11 07:35Z (OD:L448): EVERY pop-up with a person — events AND info / rule / person reports — shows the person FULL-BODY on the left; the small 3:4 portrait (.kpsubj) is retired for people (a person pop-up outside #modal: kitPersonDlg, jpdlg.js) */
- const P=kitStagePeople(m);if(!P.length)return false;const figs=P.map(p=>kitStageFig(p)).filter(Boolean);if(!figs.length)return false;
+ const P=kitStagePeople(m);if(!P.length)return false;const figs=P.map(p=>kitStageFig(p,{plate:true})).filter(Boolean);if(!figs.length)return false;
  /* wide band on top: headArt (jk3 .kdlgart) or the event picture moved from the tall left slot */
  if(!mb.querySelector(":scope > .kdlgart")){let a=null;const ev=body.querySelector(":scope > .kpsubj.kpev");
   if(ev){const im=ev.querySelector("img"),fr=ev.querySelector(".ksart");if(im)a={src:im.getAttribute("src"),lab:(fr&&fr.title)||""}}
@@ -254,16 +259,16 @@ window.kitOnePic=kitOnePic;
 .kesf{margin:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;min-width:0;flex:1 1 0}
 .kesf.kesno{display:none}
 .kesfi{position:relative;display:block;max-width:100%}
-.kesfi>.kesimg{display:block;width:auto;height:auto;max-width:100%;max-height:calc(clamp(200px,40dvh,400px)*var(--kfr,1));filter:url(#kfa) var(--klf,brightness(1)) drop-shadow(0 6px 8px #3a201033)}
+.kesfi>.kesimg{display:block;width:auto;height:auto;max-width:100%;max-height:calc(clamp(200px,calc(40*var(--kvh,1dvh)),400px)*var(--kfr,1));filter:url(#kfa) var(--klf,brightness(1)) drop-shadow(0 6px 8px #3a201033)}
 .kesfi>.kesfx{position:absolute;inset:0;pointer-events:none;z-index:2}
 .kesf>.kpsn{margin-top:2px;text-align:center}
 /* KIT 33.5: the event-stage / book-page name chip is the same two-line chip as the stage: rank / role small on top, name below, rank-tinted */
 .kesf .kpsn .kname{display:flex;flex-direction:column;align-items:center;line-height:1.2;color:color-mix(in srgb,var(--rc,#2a1a12) 45%,#2a1a12);font-size:1rem}
 .kesf .kpsn .kname .kti{font-size:.74rem;font-weight:600;letter-spacing:.02em;line-height:1.1;color:color-mix(in srgb,var(--rc,#7a5530) 75%,#2a1a12)}
-#mb>.kdlgart.kesband>.ksart{height:clamp(84px,18dvh,190px)}
+#mb>.kdlgart.kesband>.ksart{height:clamp(84px,calc(18*var(--kvh,1dvh)),190px)}
 /* week book person page: the full-body figure in the portrait column */
-.kbk-por .kesf{align-items:center}.kbk-por .kesfi>.kesimg{width:auto;max-width:100%;height:auto;max-height:calc(min(62dvh,560px)*var(--kfr,1))}
-.kbk.narrow .kbk-por .kesfi>.kesimg{max-height:calc(46dvh*var(--kfr,1))}
+.kbk-por .kesf{align-items:center}.kbk-por .kesfi>.kesimg{width:auto;max-width:100%;height:auto;max-height:calc(min(calc(62*var(--kvh,1dvh)),560px)*var(--kfr,1))}
+.kbk.narrow .kbk-por .kesfi>.kesimg{max-height:calc(calc(46*var(--kvh,1dvh))*var(--kfr,1))}
 `;document.head.appendChild(st)})();
 
 /* ---------- Thái hậu chip opens HER person card (owner: not the Giao tình tab), same pcard component as the Emperor's card (showEmp) ---------- */
@@ -275,8 +280,8 @@ function kitThCardHTML(){try{const R=(typeof kitCourtRows==="function"?kitCourtR
 /* ================= KIT 32.5 · DIALOG: ONLY THE OPTIONS SCROLL (owner 11/15, dev/owner-shots/1115-dlg-scroll-*.jpg) =================
    Every option dialog / event card (showModal with .opts — kitEventStage people, headArt, speaker portrait, story text, notes): the dialog
    is a flex column; the title, the picture / figures and the story text stay FIXED and visible (flex:none); ONLY the options list
-   scrolls (flex:1, overflow auto) with a soft top shadow once it is scrolled. The picture may shrink on short screens (max 28vh;
-   Fold / phones 24vh); if the fixed part still takes more than 55 % of the dialog, the picture is compressed first (down to 14vh),
+   scrolls (flex:1, overflow auto) with a soft top shadow once it is scrolled. The picture may shrink on short screens (max calc(28*var(--kvh,1vh));
+   Fold / phones calc(24*var(--kvh,1vh))); if the fixed part still takes more than 55 % of the dialog, the picture is compressed first (down to calc(14*var(--kvh,1vh))),
    figures scale with it. Dialogs without .opts (Đã rõ cards, person cards, Luân hồi / identity panels .kpscopts) are unchanged. */
 function kitDlgFit(){try{const M=document.getElementById("modal");if(!M||M.hidden)return;const d=M.querySelector(".dlg"),mb=document.getElementById("mb");
  const o=mb&&mb.querySelector(":scope > .opts");if(!d||!o){if(d)d.classList.remove("kdscroll");return}
@@ -317,8 +322,8 @@ window.kitDlgFit=kitDlgFit;
 .modal .dlg.kdscroll.kdtx>#mb>.kpb.kphas{display:grid;grid-template-rows:minmax(0,1fr)}
 .modal .dlg.kdscroll.kdtx>#mb>.kpb>.kpmain{min-height:0;overflow-y:auto;overscroll-behavior:contain;transition:box-shadow .2s;flex:1 1 auto}
 .modal .dlg.kdscroll.kdtx>#mb>.kpb>.kpmain.kdsh{box-shadow:inset 0 10px 8px -8px rgba(58,32,16,.28)}
-.modal .dlg.kdscroll>#mb .kpsubj img,.modal .dlg.kdscroll>#mb .kdlgart .ksart,.modal .dlg.kdscroll>#mb .kpsubj .ksart{max-height:var(--kdpic,28vh)}
-.modal .dlg.kdscroll>#mb .kpsubj.kes{max-height:calc(var(--kdpic,28vh) + 40px)}
+.modal .dlg.kdscroll>#mb .kpsubj img,.modal .dlg.kdscroll>#mb .kdlgart .ksart,.modal .dlg.kdscroll>#mb .kpsubj .ksart{max-height:var(--kdpic,calc(28*var(--kvh,1vh)))}
+.modal .dlg.kdscroll>#mb .kpsubj.kes{max-height:calc(var(--kdpic,calc(28*var(--kvh,1vh))) + 40px)}
 /* kv: dropped @media (max-width:999px) (one page = spread page, KIT §0) */
 `;document.head.appendChild(st)})();
 
@@ -359,7 +364,7 @@ window.kitEsOvFit=kitEsOvFit;
 (function(){if(typeof kitDlgFit!=="function")return;const d0=kitDlgFit;kitDlgFit=function(){const r=d0.apply(this,arguments);try{kitEsOvFit()}catch(e){}return r};window.kitDlgFit=kitDlgFit;
  let t=0;addEventListener("resize",()=>{clearTimeout(t);t=setTimeout(kitEsOvFit,140)})})();
 (function(){const st=document.createElement("style");st.id="kit-esov";st.textContent=`
-#mb>.kdlgart.kesonpic>.ksart{position:relative;height:var(--kdpic,30vh)!important;max-height:none!important;min-height:150px}
+#mb>.kdlgart.kesonpic>.ksart{position:relative;height:var(--kdpic,calc(30*var(--kvh,1vh)))!important;max-height:none!important;min-height:150px}
 #mb>.kdlgart.kesonpic>.ksart>img{object-position:center 60%}
 #mb .kesov{position:absolute;inset:0;pointer-events:none;z-index:2;overflow:hidden}
 #mb .kesov>.kesf{position:absolute;margin:0;display:block}
@@ -381,7 +386,7 @@ window.kitEsOvFit=kitEsOvFit;
    on one line above the name chips; two people packed by their core with ≤ 20 % overlap, KIT 33 rule 4). RIGHT: the event text on top
    (the small face of a fact row stays; the empty dot of a "world" row is dropped), the options below, stacked one per row with their
    full Cần / Tốn / Được / Mất / Kèm lines and the odds; ONLY the options scroll (32.5). Dialogs with a picture band keep 32.6.
-   Phones (< 600 px): figure on top (big: min(48dvh, 460 px)), text, then the options; only the options scroll.
+   Phones (< 600 px): figure on top (big: min(calc(48*var(--kvh,1dvh)), 460 px)), text, then the options; only the options scroll.
    No DOM move: .kpb becomes display:contents so its figure column and text join #mb's grid next to .opts (kitDlgFit keeps working). */
 function kitDpOn(){const M=document.getElementById("modal"),mb=document.getElementById("mb");if(!M||M.hidden||!mb)return null;const d=M.querySelector(".dlg.kesdlg");
  const col=mb.querySelector(":scope > .kpb > .kpsubj.kes");if(!d||!col||mb.querySelector(".kesov"))return null;return{d,mb,col}}
@@ -420,7 +425,15 @@ function kitDpFit(){try{const o=kitDpOn();if(!o||!o.d.classList.contains("kdper"
  const capH=Math.max(0,...L.map(x=>x.cap?x.cap.offsetHeight:0));
  /* reviewer popup-fullbody-r1 / evidence panel: a person panel WITHOUT an options group scrolls as a whole (#mb); the figure column must be the visible height of #mb (sticky at the top), never the whole scroll height (figure 1100 px below the fold) */
  if(!narrow&&!mb.querySelector(":scope > .opts")){col.style.removeProperty("height");col.style.removeProperty("align-self");if(mb.scrollHeight>mb.clientHeight+2){col.style.alignSelf="start";col.style.height=Math.max(200,mb.clientHeight-20)+"px"}}
- const H=col.clientHeight;if(H<80)return;const floor=H-2;
+ const H=col.clientHeight;if(H<80)return;
+ /* KIT 32.2b EQUAL GAPS (owner 16/11 s21, VIỆC "Tiết Thanh minh": "cách cái đường line của cái khung ở trên nó bằng với cái chân, với cái đường
+    line của cái khung ở dưới"): in every frame with a full-body figure the gap from the frame line ABOVE (the header rule under the title, .kph)
+    to the top of the name chip = the gap from the feet to the frame line BELOW (the frame's inner bottom edge). Both gaps are at least
+    KIT_DP_GAP (pct of that height, ≥ min px), so the figure never touches a line; a figure the column width keeps shorter is CENTRED between
+    the two lines (equal gaps), never left standing on the floor with the empty space above it. A figure cut at the floor (short column,
+    32.2a minVis) is not full-body: its painted top stays one gap under the header line. kitFrameGaps(dlg) measures it (tests). */
+ const gl=kitFrameLines(d,col),gA=H+gl.offTop+gl.offBot,gG=Math.max(KIT_DP_GAP.min,KIT_DP_GAP.pct*gA,gl.offTop,gl.offBot);
+ const yTop=Math.min(H/3,Math.max(0,gG-gl.offTop)),floor=Math.max(H*2/3,Math.min(H,H+gl.offBot-gG));
  const capW=Math.max(0,...L.map(x=>x.cap?x.cap.scrollWidth:0));
  /* KIT 32.2 CAP + CROP (owner 15/11 "Sao khung này, khung trái nhân vật to vậy … nếu cắt váy thì cũng ok mà", review/stage-fig-size):
     the column is never wider than KIT_DP_COL (36 % of the dialog, ≤ 264 px) — the people are fitted INTO it, it never grows for them.
@@ -446,16 +459,16 @@ function kitDpFit(){try{const o=kitDpOn();if(!o||!o.d.classList.contains("kdper"
   /* the tallest person sets the chip line: right above the painted top when the people are shorter than the column */
   const gap=Math.max(0,Hu-Math.max(...sz.map(s=>s.ih*s.span)));col.dataset.kdpcrop=sz.some(s=>s.fv<.995)?"1":"0";
   L.forEach((it,i)=>{const s=sz[i];const ih=s.ih,iw=s.iw;const cxs=kitSlotCx(i,kN,6,W-12);const left=cxs-iw*(s.l+s.r)/2;
-   const ftop=s.fv<.995?top-ih*s.t:floor-ih*s.b;/* cropped: painted top under the chips, the rest runs past the floor (cut) */
+   const ftop=s.fv<.995?top-ih*s.t:floor-gap/2-ih*s.b;/* cropped: painted top under the chips, the rest runs past the floor (cut); 32.2b: full figure centred, equal gaps */
    Object.assign(it.f.style,{left:left.toFixed(1)+"px",top:ftop.toFixed(1)+"px",width:iw.toFixed(1)+"px",zIndex:String(2+i),visibility:""});
    const wr=it.f.querySelector(".kesfi");if(wr)Object.assign(wr.style,{width:iw.toFixed(1)+"px",height:ih.toFixed(1)+"px",margin:"0",maxWidth:"none"});
    Object.assign(it.im.style,{width:iw.toFixed(1)+"px",height:ih.toFixed(1)+"px"});
-   if(it.cap){it.cap.style.left=Math.max(0,Math.min(W,cxs)).toFixed(1)+"px";it.cap.style.translate="";it.cap.dataset.row=rows&&i%2?"1":"0";it.cap.style.top=(gap+(rows&&i%2?capH+4:0)).toFixed(1)+"px"}});
+   if(it.cap){it.cap.style.left=Math.max(0,Math.min(W,cxs)).toFixed(1)+"px";it.cap.style.translate="";it.cap.dataset.row=rows&&i%2?"1":"0";it.cap.style.top=(top-(rows?2*capH+10:capH+6)+gap/2+(rows&&i%2?capH+4:0)).toFixed(1)+"px"}});
   /* chips never cut: clamp inside the column; report whether two touch */
   const C=col.getBoundingClientRect();let prev=null,touch=false;L.forEach(it=>{const c=it.cap;if(!c)return;const r=c.getBoundingClientRect();let s=0;if(r.left<C.left+2)s=C.left+2-r.left;else if(r.right>C.right-2)s=C.right-2-r.right;if(s)c.style.translate=s.toFixed(1)+"px 0";
    const q=c.getBoundingClientRect();if(prev&&q.left<prev.right+4&&c.dataset.row===prev.row)touch=true;prev={right:q.right,row:c.dataset.row}});return touch};
  /* two chips that touch → the second one goes to a second line above the heads and the people start under it */
- if(lay(capH+6,false))lay(2*capH+10,true);
+ if(lay(yTop+capH+6,false))lay(yTop+2*capH+10,true);
  col.dataset.kdpfit="1"}catch(e){console.error("kitDpFit",e)}}
 window.kitDpApply=kitDpApply;window.kitDpFit=kitDpFit;
 /* KIT 50.1 (owner 11/15 13:00Z/13:15Z, review r8 acceptance "VIỆC · Thái hậu triệu"):
@@ -470,6 +483,21 @@ var KIT_DP_MINH=300;
    height that must fit the column width), minH (people shorter than this share of the screen height are drawn bigger and cut at the
    floor), minVis (never less than this share of the body in view: head → thighs); knee = .5 (head → waist) */
 var KIT_DP_COL={pct:.36,max:264},KIT_DP_CROP={knee:.5,minH:.40,minVis:.6};
+/* KIT 32.2b equal gaps: the gap above the name chip = the gap under the feet, each ≥ pct of the frame body height (header rule → inner bottom
+   edge) and ≥ min px; with pct .05 the chip + figure fill ≤ 90 % of that height (the kit figure scale, 85–90 %) */
+var KIT_DP_GAP={pct:.05,min:14};
+/* the two frame lines a figure column sits between: the header rule (bottom of .kph) and the frame's inner bottom edge; offsets from the column box */
+function kitFrameLines(d,col){try{const D=d.getBoundingClientRect(),C=col.getBoundingClientRect();const ph=d.querySelector(":scope > .kph");const cs=getComputedStyle(d);
+ const top=ph&&ph.offsetParent?ph.getBoundingClientRect().bottom:D.top+(parseFloat(cs.borderTopWidth)||0);const bot=D.bottom-(parseFloat(cs.borderBottomWidth)||0);
+ return{top,bot,offTop:C.top-top,offBot:bot-C.bottom}}/* signed: a sticky column (kdpall) may run past the frame bottom */catch(e){return{top:0,bot:0,offTop:0,offBot:0}}}
+/* measure (tests, audits): gap from the header rule to the top of the first name chip (or painted head) and from the lowest painted feet to the
+   frame's inner bottom edge, in CSS px; full = no figure cut at the floor */
+function kitFrameGaps(d){try{d=d||document.querySelector("#modal .dlg.kdper");const col=d&&d.querySelector("#mb .kpsubj.kes");if(!col)return null;const L=kitFrameLines(d,col),C=col.getBoundingClientRect();
+ const F=[...col.querySelectorAll(":scope > .kesf:not(.kesno) .kesimg")].filter(im=>im.offsetParent&&getComputedStyle(im.closest(".kesf")).visibility!=="hidden");if(!F.length)return null;
+ let head=1e9,feet=-1e9,full=true;F.forEach(im=>{const r=im.getBoundingClientRect();const b=(window.__KITFB||{})[im.getAttribute("src")];const v=b&&b.v||{t:0,b:1};head=Math.min(head,r.top+v.t*r.height);const f=r.top+v.b*r.height;feet=Math.max(feet,f);if(f>C.bottom+1)full=false});
+ const caps=[...col.querySelectorAll(":scope > .kpsn")].filter(c=>c.offsetParent).map(c=>c.getBoundingClientRect().top);const top=caps.length?Math.min(head,...caps):head;
+ return{top:Math.round(top-L.top),bot:Math.round(L.bot-Math.min(feet,C.bottom)),full,h:Math.round(L.bot-L.top)}}catch(e){return null}}
+window.kitFrameLines=kitFrameLines;window.kitFrameGaps=kitFrameGaps;
 /* a festival dialog (j71 invitation j71i / feast invitation j71x / the festival day / its contests) → its festival key, so the banner is the
    festival's own picture ("fest:<k>" in EVENTS.json: Đoan ngọ = ev-le-ha) instead of the Triều chính default (owner 13:00Z) */
 function kitFestKey(m){try{if(typeof FEST!=="object")return"";const pp=m.pp||{};if(pp.k&&FEST[pp.k])return pp.k;
@@ -489,7 +517,9 @@ function kitDpNat(d,mb,col){try{const cs=e=>getComputedStyle(e);const items=[...
   sum+=h+parseFloat(c.marginTop||0)+parseFloat(c.marginBottom||0)});
  const m=cs(mb);sum+=parseFloat(m.paddingTop||0)+parseFloat(m.paddingBottom||0)+(parseFloat(m.rowGap)||0)*Math.max(0,items.length-1);
  return d.offsetHeight-mb.offsetHeight+sum}catch(e){return d.scrollHeight}}
-(function(){const f0=kitDpFit;kitDpFit=function(){const r=f0.apply(this,arguments);try{kitDpAll()}catch(e){}return r};window.kitDpFit=kitDpFit})();
+(function(){const f0=kitDpFit;kitDpFit=function(){const r=f0.apply(this,arguments);try{const o=kitDpOn(),d=o&&o.d,a0=d&&d.classList.contains("kdpall"),h0=o&&o.col.clientHeight;kitDpAll();
+ /* 32.2b: kdpall (whole right column scrolls, figure column = #mb height) changes the column box → lay the people out again so the gaps stay equal */
+ if(d&&(d.classList.contains("kdpall")!==a0||o.col.clientHeight!==h0))f0.apply(this,arguments)}catch(e){}return r};window.kitDpFit=kitDpFit})();
 (function(){const st=document.createElement("style");st.id="kit-dp-all";st.textContent=`
 html body #modal .dlg.kdper.kdpall>#mb{overflow-y:auto!important;overscroll-behavior:contain;grid-template-rows:max-content max-content!important;align-content:start}
 html body #modal .dlg.kdper.kdpall>#mb>.kpb>.kpsubj.kes{position:sticky!important;top:0;align-self:start;grid-row:1/-1;height:var(--kdpmbh,100%)!important}
@@ -565,8 +595,8 @@ html body #modal .dlg.kdper>#mb>.opts>*{width:100%!important;max-width:none!impo
 html body button.ka .kan>.md.kfc{zoom:.43;margin:0 8px 0 0!important;vertical-align:middle}
 #modal .dlg.kdper #mr{padding-left:calc(var(--kdpw,240px) + 28px)}
 #modal .dlg.kdper.kdnarrow>#mb{grid-template-columns:minmax(0,1fr)!important;grid-template-rows:none!important;grid-auto-rows:max-content}
-#modal .dlg.kdper.kdnarrow>#mb:has(>.opts){grid-template-rows:min(48dvh,460px) max-content minmax(0,1fr)!important}
-#modal .dlg.kdper.kdnarrow>#mb:not(:has(>.opts)){grid-template-rows:min(48dvh,460px) max-content!important}
+#modal .dlg.kdper.kdnarrow>#mb:has(>.opts){grid-template-rows:min(calc(48*var(--kvh,1dvh)),460px) max-content minmax(0,1fr)!important}
+#modal .dlg.kdper.kdnarrow>#mb:not(:has(>.opts)){grid-template-rows:min(calc(48*var(--kvh,1dvh)),460px) max-content!important}
 #modal .dlg.kdper.kdnarrow>#mb>.kpb>.kpsubj.kes{grid-column:1;grid-row:1}
 #modal .dlg.kdper.kdnarrow>#mb>.kpb>.kpmain,#modal .dlg.kdper.kdnarrow>#mb>.kdpr{grid-column:1}
 #modal .dlg.kdper.kdnarrow>#mb>.opts{grid-column:1;grid-row:-2/-1}
@@ -595,7 +625,11 @@ window.kitXHTML=kitXHTML;window.kitXAdd=kitXAdd;
    `kitNameRank(rank, name, col)` → `<div class="knr" style="--rc:col"><small class="knr-r">rank</small><b class="knr-n">name</b></div>`.
    Used by: Ân oán cards (kitRel3), every person dialog (32.7 chips = `.kpsn.knr` at the column top, kitDpFit), the shop seller, person
    cards (Hậu cung / Cung nhân: `.pcl` name + rank moved above the portrait). The same look as the 32.7 chip's kitName (rank over name). */
-function kitNameRank(rank,name,col,me,small){const rt=rank?kitRankTone(rank,col):"";if(me==null)me=kitIsMyName(name);return `<div class="knr${small?" knr-s":""}" style="--rc:${col||"#7a5530"}">${rank?`<small class="knr-r krt" style="--rt:${rt}">${rank}</small>`:""}<b class="knr-n krn${me?" kmy":""}">${name||""}</b></div>`}
+const KIT_TITLE_ONLY=/^(hoàng thượng|hoàng thái hậu|thái hậu|thánh thượng|hoàng đế|hoàng hậu)$/i;
+function kitNameRank(rank,name,col,me,small){const rt=rank?kitRankTone(rank,col):"";if(me==null)me=kitIsMyName(name);
+ /* KIT 48.1i (owner 11/16 15:00Z 2.4): a person whose NAME is the title (Hoàng thượng, Thái hậu) is painted as a rank title (imperial gold), never black ink */
+ if(!rank&&name&&KIT_TITLE_ONLY.test(String(name).replace(/<[^>]*>/g,"").trim()))return `<div class="knr${small?" knr-s":""}" style="--rc:${col||"#7a5530"}"><b class="knr-r krt knr-only" style="--rt:${kitRankTone(name,col)}">${name}</b></div>`;
+ return `<div class="knr${small?" knr-s":""}" style="--rc:${col||"#7a5530"}">${rank?`<small class="knr-r krt" style="--rt:${rt}">${rank}</small>`:""}<b class="knr-n krn${me?" kmy":""}">${name||""}</b></div>`}
 window.kitNameRank=kitNameRank;
 /* ================= KIT 48.1 · RANK TITLE (owner, ref. shot "a title floating above the character's name") ==========
    The rank / role line above every name is a TITLE: serif (var(--display)), bold, in the rank's OWN colour = the colour family of that rank's
@@ -610,15 +644,38 @@ window.kitNameRank=kitNameRank;
    Classes: `.krt` title, `.krn` name (kitNameRank sets both); the same look is given (CSS below) to every rank-over-name block that is built
    elsewhere: stage name tags (.j59t / .j59n), kitEventDp / 32.7 captions (.kpsn .kname .kti — kitName sets --rt on .kti), person cards
    (.pcrk over .pcname), the Tuần lục person heading (.kbk-pname). Inline titles inside sentences (kitName in prose) keep the plain look. */
-const KIT_RT=[[/hoàng quý phi/,"#b04a00"],[/phế phi|lãnh cung/,"#5d6b7a"],[/quý phi/,"#c8102e"],[/hoàng hậu/,"#8c5f00"],[/thái hậu/,"#9c4f12"],
- [/hoàng thượng|hoàng đế|thánh thượng|thiên tử/,"#8f6800"],[/phi$/,"#7e3cc8"],[/(^|\s)tần$/,"#c42a78"],[/quý nhân/,"#1f5fcc"],[/thường tại/,"#1a7f37"],
- [/đáp ứng/,"#876638"],[/thô sử/,"#52746a"],[/chưởng sự|cô cô/,"#b4441e"],[/nữ quan/,"#6a46b8"],[/đại cung nữ/,"#2f5db0"],[/cung nữ|thị nữ/,"#0a7d68"],
- [/ma ma|nhũ mẫu|vú/,"#8f5a24"],[/tổng quản/,"#934414"],[/thủ lĩnh/,"#2a5f92"],[/tiểu thái giám/,"#59743a"],[/thái giám|nội giám/,"#1f7a48"],
- [/thái y|ngự y/,"#0a7d76"],[/hoàng tử|thái tử|vương/,"#1a6fb8"],[/công chúa/,"#bf412b"],[/người lạ/,"#666666"],
- [/tể tướng|tướng quân|thượng thư|học sĩ|quan|thị lang|đại nhân/,"#2f55a4"],[/thị vệ|vệ|lính|tướng/,"#465f80"]];
+/* KIT 48.1f THE TONE (owner 11/16 13:00Z "nhạt nhòa → tươi hơn"): the colour of a title on PAPER is DERIVED from the one palette (RCOL / MRCOL / ERCOL /
+   RCOL_COLD / KIT_ROLE, j1): same hue, saturation kept high, lightness lowered only as far as needed for >= 3.6:1 on parchment #fbf3e2 (jewel tones: framed UI shows the vivid tone as PLAIN text (no edge, owner 11/16 13:50Z); only paintings get the light halo 48.1d/e).
+   No second table of hexes: change a base in j1 and every title, chip, ring, halo and portrait ground changes with it. */
+const KIT_TONE_CACHE={};
+function kitToneOf(base,paper){const key=base+"|"+(paper||"");if(KIT_TONE_CACHE[key])return KIT_TONE_CACHE[key];
+ const rgb=h=>[1,3,5].map(i=>parseInt(h.slice(i,i+2),16)),lin=c=>(c/=255)<=.03928?c/12.92:Math.pow((c+.055)/1.055,2.4),lum=h=>{const[r,g,b]=rgb(h).map(lin);return .2126*r+.7152*g+.0722*b};
+ const P=paper||"#fbf3e2",cr=h=>{const a=lum(h),b=lum(P);return(Math.max(a,b)+.05)/(Math.min(a,b)+.05)};
+ if(typeof KIT_IMP==="string"&&base.toLowerCase()===KIT_IMP)return KIT_TONE_CACHE[key]=KIT_IMP;/* imperial yellow stays bright (owner 16:10Z) */
+ let[r,g,b]=rgb(base).map(x=>x/255);const M=Math.max(r,g,b),m=Math.min(r,g,b);let l=(M+m)/2,s=0,H=0;
+ if(M!==m){const d=M-m;s=l>.5?d/(2-M-m):d/(M+m);H=M===r?(g-b)/d+(g<b?6:0):M===g?(b-r)/d+2:(r-g)/d+4;H*=60}
+ if(s>=.4)s=Math.max(s,.9);/* vivid families stay vivid; steel-grey stays grey */
+ const hx=(H,s,l)=>{const f=n=>{const k=(n+H/30)%12,a=s*Math.min(l,1-l);return Math.round((l-a*Math.max(-1,Math.min(k-3,9-k,1)))*255).toString(16).padStart(2,"0")};return"#"+f(0)+f(8)+f(4)};
+ let x=hx(H,s,l);while(cr(x)<3.6&&l>.04){l-=.005;x=hx(H,s,l)}return KIT_TONE_CACHE[key]=x}
+window.kitToneOf=kitToneOf;
+/* title words -> the BASE colour (read live from the j1 palette), then kitToneOf */
+const KIT_RT=[[/hoàng quý phi/,()=>RCOL[6]],[/phế phi|lãnh cung/,()=>RCOL_COLD],[/quý phi/,()=>RCOL[5]],[/hoàng hậu/,()=>RCOL[7]],[/thái hậu/,()=>KIT_ROLE.th],
+ [/hoàng thượng|hoàng đế|thánh thượng|thiên tử/,()=>KIT_ROLE.emp],[/phi$/,()=>RCOL[4]],[/(^|\s)tần$/,()=>RCOL[3]],[/quý nhân/,()=>RCOL[2]],[/thường tại/,()=>RCOL[1]],
+ [/đáp ứng/,()=>RCOL[0]],[/thô sử/,()=>MRCOL[0]],[/chưởng sự|cô cô/,()=>MRCOL[3]],[/nữ quan/,()=>MRCOL[4]],[/đại cung nữ/,()=>MRCOL[2]],[/cung nữ|thị nữ/,()=>MRCOL[1]],
+ [/ma ma|nhũ mẫu|vú/,()=>KIT_ROLE.mama],[/tổng quản/,()=>ERCOL[3]],[/thủ lĩnh/,()=>ERCOL[2]],[/tiểu thái giám/,()=>ERCOL[0]],[/thái giám|nội giám/,()=>ERCOL[1]],
+ [/thái y|ngự y/,()=>KIT_ROLE.ty],[/hoàng tử|thái tử|vương/,()=>KIT_ROLE.prince],[/công chúa/,()=>KIT_ROLE.princess],[/người lạ/,()=>KIT_ROLE.stranger],
+ [/tể tướng|tướng quân|thượng thư|học sĩ|quan|thị lang|đại nhân/,()=>KIT_ROLE.official],[/thị vệ|vệ|lính|tướng/,()=>KIT_ROLE.guard]];
 function kitRankTone(t,col){const s=String(t==null?"":t).replace(/<[^>]*>/g,"").replace(/\s+/g," ").trim().toLowerCase();
- for(const [re,c] of KIT_RT)if(re.test(s))return c;return col?`color-mix(in srgb,${col} 80%,#000)`:"#7a5a30"}
+ for(const [re,c] of KIT_RT)if(re.test(s))return kitToneOf(c());return /^#[0-9a-f]{6}$/i.test(col||"")?kitToneOf(col):KIT_ROLE.slate}
+/* KIT 48.1g PORTRAIT GROUND .rk-c0..c7 (the round avatar / portrait ground by rank): generated from RCOL (was typed in p1.html + j59, two stale copies) */
+(function(){const m=(c,p)=>`color-mix(in srgb,${c} ${p}%,#fff)`;let css="";
+ RCOL.forEach((c,i)=>{const bg=i===3||i===4?`repeating-linear-gradient(45deg,${m(c,22)} 0 6px,${m(c,38)} 6px 12px)`:i>=5?`radial-gradient(circle at 30% 20%,${m(c,28)},${m(c,66)})`:`linear-gradient(160deg,${m(c,20)},${m(c,52)})`;
+  css+=`.rk-c${i}{background:${bg}!important;border-color:${c}!important${i>=6?`;box-shadow:0 0 0 1px #fff,0 0 0 3px ${m(c,70)},0 3px 10px ${c}55!important`:""}}\n`});
+ const st=document.createElement("style");st.id="kit-rk";st.textContent=css;document.head.appendChild(st)})();
 window.kitRankTone=kitRankTone;window.KIT_RT=KIT_RT;
+/* KIT 48.1h IMPERIAL YELLOW (owner 11/16 16:10Z): the bright yellow of Hoàng thượng / Hoàng thái hậu (KIT_IMP) has no dark twin, so on paper it wears a thin brown ink edge to stay readable (any element whose --rt / --rtn / --tc is the token) */
+(function(){const st=document.createElement("style");st.id="kit-imp";const I=typeof KIT_IMP==="string"?KIT_IMP:"#ffd400";
+ st.textContent=[`--rt:${I}`,`--rtn:${I}`,`--rt: ${I}`,`--rtn: ${I}`].map(a=>{const x=`[style*="${a}"]`;return`html body ${x}${x}${x}${x}`}).join(",")+`{text-shadow:0 0 1px #4a3000,0 0 1px #4a3000,0 1px 1px #4a300099!important}`;document.head.appendChild(st)})();
 /* KIT 48.1b (owner 15/11 ~20:10Z): HER own name (the local player's character only, also in co-op) = black ink + a soft light-gold glow
    (class .kmy on the name line), so she spots herself at once; everybody else's name stays plain ink. kitIsMyName(name) = it is S.name. */
 function kitIsMyName(n){try{const s=String(n==null?"":n).replace(/<[^>]*>/g,"").trim();return !!(s&&typeof S!=="undefined"&&S&&S.name&&s===String(S.name).trim())}catch(e){return false}}
@@ -628,24 +685,20 @@ window.kitIsMyName=kitIsMyName;
  const T=H([".krt",".knr>.knr-r",".stage .tok .tag .j59t",".stage #j59metag .tag .j59t",".kpsn .kname .kti",".pc .pcl .pcrk",".kpstrip .kpsn small",".kbk-pname .kname .kti",".kpod-plq .kname .kti"]);
  const N=H([".krn",".knr>.knr-n",".stage .tok .tag .j59n",".stage #j59metag .tag .j59n",".kpsn .kname",".pc .pcl .pcname",".kpstrip .kpsn b",".kbk-pname .kname",".kpod-plq .kname"]);
  /* ON A PAINTING (owner 22:25Z): stage name tags over the scene, captions laid over a picture (.kesov), the kit sample's scene row (.krs) */
- const PT=H([".stage #j59metag .tag .j59t",".stage .tok .tag.j59mine .j59t","#mb .kesov>.kpsn .kname .kti",".krs .krt",".krs .knr>.knr-r"]);
- const PN=H([".stage #j59metag .tag .j59n","#mb .kesov>.kpsn .kname",".krs .krn",".krs .knr>.knr-n"]);
- /* 48.1e STAGE: ONLY HER TAG GLOWS (owner 15/11 session 8 "chỉ có tôi là mới có chữ phẩm và tên là phát sáng thôi, còn những người khác là
-    bình thường"; overrides 48.1d for the stage). Her tag = #j59metag / any stage tag of S (class .j59mine set by j59tags; co-op: each player's own S, the friend's tag is plain).
-    Everybody else's stage tag: plain rank colour + plain ink name, NO glow (no blurred halo); only a 0.6px hairline paper edge with zero blur
-    (reads as the letter's own edge, not light) so the plain words stay readable on a dark carpet / night scene (OS = other people's tag parts). */
- const OS=H([".stage .tok .tag:not(.j59mine)",".stage .tok .tag:not(.j59mine) .j59t",".stage .tok .tag:not(.j59mine) .j59n"]);
+ const PT=H([".stage .tok .tag .j59t",".stage #j59metag .tag .j59t","#mb .kesov>.kpsn .kname .kti",".krs .krt",".krs .knr>.knr-r"]);
+ const HT=H([".stage #j59metag .tag .j59t",".stage .tok .tag.j59mine .j59t"]);/* HER rank line: brighter than the others */
+ const PN=H([".stage .tok .tag .j59n",".stage #j59metag .tag .j59n","#mb .kesov>.kpsn .kname",".krs .krn",".krs .knr>.knr-n"]);
+ /* 48.1e GLOW ON PAINTINGS ONLY (owner 11/16 13:55Z, option 1): on a painted background (stage tags, .kesov captions, .krs) EVERY person's RANK line glows in its own rank colour, the NAME line gets the light-gold glow, her tag glows brighter than the others; on paper / frames there is NO edge and NO glow (plain vivid text). */
  st.textContent=`
 :root{--krt-ol:#1c100a;--krt-ink:#2a1a12}
 ${T}{font-family:var(--display,"Noto Serif",Georgia,serif)!important;font-weight:700!important;font-style:normal;letter-spacing:.03em!important;
  color:var(--rt,color-mix(in srgb,var(--rc,var(--tc,#7a5a30)) 80%,#000))!important;text-shadow:none!important;
  background:none!important;box-shadow:none!important;line-height:1.2!important;padding:0 2px!important}
 ${N}{color:var(--krt-ink)!important;font-weight:700;text-shadow:none!important}
-${PT}{color:var(--rt,color-mix(in srgb,var(--rc,var(--tc,#7a5a30)) 80%,#000))!important;/* 48.1d (owner 15/11 "Phẩm của tôi cũng viền sáng như tên"): on a painting HER rank line (stage: hers only, 48.1e) gets the SAME light
- halo as the name line under it (was a dark outline + tinted glow, hard to read), in its full rank tone so it keeps its colour on the light halo */
- text-shadow:0 0 1px #fff8ee,0 0 2px #fff8ee,0 0 5px #fff8ee,0 0 9px #fff8eecc!important}
-${PN}{text-shadow:0 0 2px #fff8ee,0 0 5px #fff8ee,0 0 9px #fff8eecc!important}
-${OS}{text-shadow:-.6px 0 0 #fff8ee,.6px 0 0 #fff8ee,0 -.6px 0 #fff8ee,0 .6px 0 #fff8ee!important}
+${PT}{color:var(--rt,color-mix(in srgb,var(--rc,var(--tc,#7a5a30)) 80%,#000))!important;/* 48.1d/e: rank line on a painting = its rank tone; right around the letters the glow is a LIGHT tint of its own rank colour (stacked so letter vs halo >= 3:1, scan stage-tag-contrast.py), then the saturated rank colour further out (the neon); 1 px paper rim (no dark hairline: it darkens the halo behind the letters) */
+ text-shadow:0 0 1px #fff8ee,0 0 3px color-mix(in srgb,var(--tc,var(--rc,var(--rt))) 14%,#fff),0 0 3px color-mix(in srgb,var(--tc,var(--rc,var(--rt))) 14%,#fff),0 0 5px color-mix(in srgb,var(--tc,var(--rc,var(--rt))) 20%,#fff),0 0 5px color-mix(in srgb,var(--tc,var(--rc,var(--rt))) 20%,#fff),0 0 8px color-mix(in srgb,var(--tc,var(--rc,var(--rt))) 30%,#fff),0 0 11px var(--tc,var(--rc,var(--rt)))!important}
+${HT}{text-shadow:0 0 1px #fff8ee,0 0 3px color-mix(in srgb,var(--tc,var(--rc,var(--rt))) 14%,#fff),0 0 3px color-mix(in srgb,var(--tc,var(--rc,var(--rt))) 14%,#fff),0 0 5px color-mix(in srgb,var(--tc,var(--rc,var(--rt))) 20%,#fff),0 0 5px color-mix(in srgb,var(--tc,var(--rc,var(--rt))) 20%,#fff),0 0 8px color-mix(in srgb,var(--tc,var(--rc,var(--rt))) 30%,#fff),0 0 11px var(--tc,var(--rc,var(--rt))),0 0 16px var(--tc,var(--rc,var(--rt)))!important}
+${PN}{text-shadow:0 0 1px #fff8ee,0 0 3px #ffe9a8,0 0 7px #f3cf6a,0 0 11px #e8bd4a99!important}
 html body .kpsn .kname .kti{display:block;font-size:.84rem!important}
 /* stage side cards (.ksh .k3c, review/pick-hint-r1): a person's title + name (kitRankNamePaint / kitName) stack as rank line over name,
    like every other card head (48.1), so the side column keeps its width at 755 / 844 */
@@ -661,12 +714,12 @@ html body .stage.j59 #tokens .tok .tag,html body .stage.j59 #j59metag .tag{backg
 /* 48.1c (owner 15/11 ~20:40Z): person-dialog captions (kitEventDp .kdpcap, event-stage .kesov captions) have NO box */
 html body #mb .kesov>.kpsn,html body #modal .dlg.kdper .kes>.kpsn.kdpcap,html body .kesf>.kpsn{background:none!important;border:0!important;box-shadow:none!important;border-radius:0!important}
 /* 48.3 (owner 15/11 session 8): a title INSIDE a line (kitName in prose, picker rows, lists, logs, toasts; kitRankPaint) is in its rank
-   tone too — plain text, no glow, no outline, the line's own font; lightened on .modal.night (below) */
+   tone too — the line's own font, plain: no glow, no outline, no shadow; lightened on .modal.night (below) */
 html body .kname .kti{color:var(--rt,inherit)!important;text-shadow:none!important}
-html body .modal.night .kname .kti{color:color-mix(in srgb,var(--rt,#7a5a30) 55%,#fff)!important}
+html body .modal.night .kname .kti{color:color-mix(in oklch,var(--rt,#7a5a30) 64%,#fff)!important}
 /* dark panels (.modal.night): name in parchment, title in its lightened tone (plain, no glow) */
 html body .modal.night .kpsn .kname,html body .modal.night .knr>.knr-n,html body .modal.night .krn,html body .modal.night .kbk-pname .kname{color:#f3e6cf!important}
-html body .modal.night .krt,html body .modal.night .knr>.knr-r,html body .modal.night .kpsn .kname .kti,html body .modal.night .kbk-pname .kname .kti{color:color-mix(in srgb,var(--rt,#7a5a30) 55%,#fff)!important}
+html body .modal.night .krt,html body .modal.night .knr>.knr-r,html body .modal.night .kpsn .kname .kti,html body .modal.night .kbk-pname .kname .kti{color:color-mix(in oklch,var(--rt,#7a5a30) 64%,#fff)!important}
 /* 48.1b her own name: black; on a painting + a soft light-gold glow, in framed UI plain black bold */
 html body .kmy,html body .modal.night .kmy{color:#1a0f08!important;font-weight:700!important;text-shadow:none!important}
 html body .stage .tok .tag .j59n.kmy,html body .stage #j59metag .tag .j59n.kmy,html body #mb .kesov>.kpsn .kname.kmy,html body .krs .krn.kmy,html body .krs .knr>.knr-n.kmy{color:#1a0f08!important;
@@ -692,7 +745,7 @@ html body .pc.kpwide[data-k2]>.pcl>.pcname{align-items:flex-start!important}
 (function(){const st=document.createElement("style");st.id="kit-event-dp";st.textContent=`
 #modal .dlg.kdper.kdpbanner>#mb{grid-template-rows:max-content max-content minmax(0,1fr)!important}
 #modal .dlg.kdper>#mb>.kdlgart.kdpban{grid-column:2!important;grid-row:1!important;margin:0 0 8px!important;padding:0!important;min-width:0;width:auto!important;height:auto!important;max-height:none!important}
-html body #modal .dlg.kdper>#mb>.kdlgart.kdpban>.ksart{width:100%!important;height:clamp(96px,24vh,190px)!important;min-height:0!important;max-height:none!important;aspect-ratio:auto!important;margin:0!important}
+html body #modal .dlg.kdper>#mb>.kdlgart.kdpban>.ksart{width:100%!important;height:clamp(96px,calc(24*var(--kvh,1vh)),190px)!important;min-height:0!important;max-height:none!important;aspect-ratio:auto!important;margin:0!important}
 html body #modal .dlg.kdper>#mb>.kdlgart.kdpban>.ksart img{width:100%!important;height:100%!important;object-fit:cover!important}
 #modal .dlg.kdper.kdpbanner>#mb>.kpb>.kpmain,#modal .dlg.kdper.kdpbanner>#mb>.kdpr:not(.kdlgart){grid-column:2}
 html body #modal .dlg.kdper>#mb>.opts.kdpo2,html body #modal .dlg.kdper>#mb>.opts.kdpo2.k3grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;align-content:start;gap:8px}
@@ -778,6 +831,8 @@ function kitOvSync(){try{const b=kitOvBtn();if(!b)return;if(!b.hidden)b.hidden=t
 (function(){const st=document.createElement("style");st.id="kit-x-close";st.textContent=`
 #modal .dlg:has(>.kit-x.kxabs){position:relative}
 #modal .dlg>.kit-x.kxabs{position:absolute;top:8px;right:8px;z-index:9}
+/* the ✕ of a card without a .kph header owns a reserved strip (36 px + 2x6): content and scrollers start under it, so it never overlaps text or a scrolled option list (fold-popw, whole group: every dialog / overlay panel) */
+#modal .dlg:has(>.kit-x.kxabs),#ov .kpanel:has(>.kit-x.kxabs){padding-top:48px!important;box-sizing:border-box}
 #modal .dlg.kpanel:has(>.kit-x.kxabs){overflow:auto}
 #modal[data-kx="1"] .dlg>#mr:not(:has(>:not([hidden]))){display:none!important}
 #modal .dlg>#mr>[hidden],#ov [hidden]{display:none!important}
@@ -897,6 +952,37 @@ function kitCompactCSS(B,w,h){w=w||84;h=h||w;return `
 
 `}
 window.kitCompactCSS=kitCompactCSS;
+/* ================= KIT §6.2b · OPTION / ACT CARD PICTURE FORM BY CONTENT (owner 16/11 s21, VIỆC "Tiết Thanh minh": a tall 3:4 picture beside two short
+   lines left an empty band under the text; RULE verbatim: "Bất kỳ khi nào mà mày cho thợ ráp nút vào á, mà mày thấy có một cái khoảng trống ở dưới thì
+   phải lập tức đổi hình liền, đổi cái hình đại diện liền đó.") =================
+   ONE rule for every compact act card (kitCompactCSS: dialog options `.kopt`, person-card act rows, narrow-pane act cards, the kit page): the card picks
+   its picture form from its own content, automatically, every time it is laid out —
+   - TALL (3:4, w × h, §6.2) when the text block (.kabody) is at least as tall as the tall picture;
+   - SQUARE when the text is shorter: side = the text height, between KIT_OPT_SQ.min × w and w (84 → 38..84 px; 72 → 32..72), so the card is as tall as
+     its text and nothing is left empty under it. The square is cover-cropped from the same picture (same meaning picture, kitOptPic), never a new one.
+   Measured again whenever the card's width or text height changes (ResizeObserver: dialog fit, fonts, rotation), so no screen calls it by hand.
+   Tests: dev/test/kit-fit.js (empty px under the text and figure gaps, Fold + iPad). */
+var KIT_OPT_SQ={min:.45};
+const KIT_OPT_FIT_SEL="button.ka.kart";
+let KIT_OPT_DPQ=0;/* a card that changed height inside a person dialog → the dialog (content height, 32.7c) and its figure (32.2b gaps) are laid out again */
+function kitOptFitDone(b,h0){try{if(Math.abs(b.offsetHeight-h0)>1&&b.closest("#modal .dlg.kdper")&&!KIT_OPT_DPQ){KIT_OPT_DPQ=requestAnimationFrame(()=>{KIT_OPT_DPQ=0;try{kitDpFit()}catch(e){}})}}catch(e){}}
+function kitOptFit(b){const h0=b&&b.offsetHeight||0;kitOptFit0(b);if(b)kitOptFitDone(b,h0)}
+function kitOptFit0(b){try{if(!b||!b.isConnected)return;const art=b.querySelector(":scope > .kaart"),body=b.querySelector(":scope > .kabody");if(!art||!body)return;
+ const set=s=>{if(s){b.style.setProperty("--kah",s+"px","important");b.style.setProperty("--kaw",s+"px","important");["flex-basis","width","height"].forEach(k=>art.style.setProperty(k,s+"px","important"));b.classList.add("kasq")}
+  else{b.style.removeProperty("--kah");b.style.removeProperty("--kaw");["flex-basis","width","height"].forEach(k=>art.style.removeProperty(k));b.classList.remove("kasq")}};
+ set(0);if(getComputedStyle(art).display==="none"||getComputedStyle(b).flexDirection!=="row"){b.dataset.kapic="";return}
+ const a=art.getBoundingClientRect();if(a.width<24||a.width>112||a.height<a.width*1.15){b.dataset.kapic="";return}/* not the compact tall form (the big Hành sự card keeps its own) */
+ const w=a.width,h=a.height,lo=Math.round(w*KIT_OPT_SQ.min);let bh=body.getBoundingClientRect().height;
+ if(bh>=h-2){b.dataset.kapic="tall";b.__kof=b.clientWidth+"x"+Math.round(bh);return}
+ let s=Math.round(Math.max(lo,Math.min(w,bh)));set(s);
+ for(let i=0;i<2;i++){bh=body.getBoundingClientRect().height;const s2=Math.round(Math.max(lo,Math.min(w,bh)));if(s2===s)break;s=s2;set(s)}
+ b.dataset.kapic="sq";b.__kof=b.clientWidth+"x"+Math.round(body.getBoundingClientRect().height)}catch(e){console.error("kitOptFit",e)}}
+let KIT_OPT_RO=null;
+function kitOptFitAll(root){try{root=root&&root.querySelectorAll?root:document;const B=[...root.querySelectorAll(KIT_OPT_FIT_SEL)].filter(b=>b.querySelector(":scope > .kaart")&&b.querySelector(":scope > .kabody"));
+ if(!KIT_OPT_RO&&typeof ResizeObserver==="function")KIT_OPT_RO=new ResizeObserver(E=>{const seen=new Set();E.forEach(e=>{const b=e.target.closest(KIT_OPT_FIT_SEL);if(!b||seen.has(b))return;seen.add(b);
+  const body=b.querySelector(":scope > .kabody");const key=b.clientWidth+"x"+Math.round(body?body.getBoundingClientRect().height:0);if(b.__kof!==key)requestAnimationFrame(()=>kitOptFit(b))})});
+ B.forEach(b=>{kitOptFit(b);if(KIT_OPT_RO&&!b.__kofro){b.__kofro=1;KIT_OPT_RO.observe(b);const body=b.querySelector(":scope > .kabody");if(body)KIT_OPT_RO.observe(body)}})}catch(e){}}
+window.kitOptFit=kitOptFit;window.kitOptFitAll=kitOptFitAll;window.KIT_OPT_SQ=KIT_OPT_SQ;
 (function(){const st=document.createElement("style");st.id="kit-act-compact";st.textContent=`
 button.ka.kanoart>.kaart{display:none!important}
 .pc>.pcr,.kpanec{container:kpane/inline-size}
@@ -928,4 +1014,7 @@ ${kitCompactCSS(".pc>.pcr button.ka.kart",84,112)}
  .pc>.pcr button.ka.kart>.kaart{flex-basis:72px!important;width:72px!important;height:96px!important}
 }
 `;document.head.appendChild(st)})();
-(function(){if(typeof kaNorm!=="function")return;const k0=kaNorm;kaNorm=function(root){const r=k0.apply(this,arguments);try{kitActCompactOn(root&&root.querySelectorAll?root:document)}catch(e){}return r};window.kaNorm=kaNorm})();
+(function(){if(typeof kaNorm!=="function")return;const k0=kaNorm;kaNorm=function(root){const r=k0.apply(this,arguments);try{kitActCompactOn(root&&root.querySelectorAll?root:document)}catch(e){}
+ try{const R=root&&root.querySelectorAll?root:document;requestAnimationFrame(()=>kitOptFitAll(R))}catch(e){}return r};window.kaNorm=kaNorm})();/* §6.2b: picture form by content after every normalisation */
+/* KIT §6.2b: every dialog shown → its option cards pick their picture form (tall / square) once laid out; the ResizeObserver keeps them right after */
+(function(){if(typeof showModal!=="function")return;const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);try{const M=document.getElementById("modal");requestAnimationFrame(()=>requestAnimationFrame(()=>kitOptFitAll(M)))}catch(e){}return r};window.showModal=showModal})();

@@ -39,3 +39,36 @@ Options (2nd/3rd arg `extra`): any Playwright context option (default `serviceWo
 ## What desktop-style tests never exercise (UA / device branches in game code)
 See `dev/PROGRESS_ua-test.md` for the list (iOS "add to home screen" note, hover glow, pointer:coarse hint, vibrate, standalone, safe-area, old-Safari regex).
 Rule: a fix that touches one of these needs one run of the matching profile (`iphone14` / `ipadAir` / `fold`) in HOST mode.
+
+## Performance budget test (D15)
+`node dev/test/perf.js` (see header of the file and dev/PROGRESS_perf.md): first-load bytes / time to title / time to first turn / heap after 10 buổi / long tasks on fold, iphone14, ipadAir; budget in `perf-budget.json`; exit 1 when over. Note: it enables the service worker (unlike the other profile tests).
+
+### First-hour list + fresh-install / offline / update checks (review/perf-r1)
+- `dev/site/first-hour.txt` decides what blocks entry (assets.py group `core`). It is GENERATED: `node dev/measure/firsthour.js fold,ipadAir 0 3`
+  (needs the built root + the CDN; one life per origin incl. the cung nữ road `cnv`, 3 weeks each; the new list is the union with the old one),
+  then `bash dev/site/build_site.sh`. Re-run it whenever a branch adds art that every new life sees in its first weeks (new rooms, act pictures,
+  kit pictures, title/loading art), otherwise that art is `lazy` (fetched when first shown: fine online, missing offline until seen once).
+- `node dev/test/lazy-offline.js --devices fold,iphone14 --lives 2 --weeks 2 --save-data --offline`: fresh install (SW on, host mode, no background
+  set), counts pictures the first weeks needed that were NOT downloaded ahead (group lazy, fetched on use), broken pictures, then offline: every
+  file seen must come from the cache and the saved life's rooms must show. Exit 1 on a broken picture or a seen file not served offline.
+- `node dev/test/upgrade-sw.js --old <root of an older built checkout>`: returning install, old SW + old ctm-assets -> this build (pictures stubbed,
+  keys real): new worker in control, no stale index, one shell cache, still-valid asset keys kept, core complete, offline reload on the new build.
+## PLAY-TIME lag budget (owner 16/11 15:05Z: lag is FIRST PRIORITY, checked on every build without her reporting it)
+`perf.js` measures LOADING; these measure PLAYING. Thresholds live in ONE file: `dev/test/play-perf-budget.json`.
+- `node dev/test/play-perf.js --devices fold,ipadAir --minutes 3` — built site, HOST mode, CPU 4x, real taps (CDP input). Tap → next paint
+  (Event Timing, INP-style) for tabs, Hành sự cards, Sang buổi, Dư đồ; long tasks; fps through the buổi transition and in an idle room;
+  a bot plays N minutes: heap / DOM / listeners / live intervals growth. Exit 1 on any budget miss. `--root <dir>` measures another build
+  (e.g. a worktree of origin/main) for a before/after table. `--loaf` adds the worst frames with the scripts that made them.
+- `node dev/test/coop-lag.js --buoi 8` — two CPU-throttled clients (Fold host + iPad guest) on the LIVE Worker: both pressed Sang buổi →
+  both screens on the new buổi, one seat's message → the friend has it, biggest frame, KB/min, resend storms, guest reload → both
+  playing again. Exit 1 on any `coop*` budget miss.
+- When it FAILS, find the cause: `play-prof.js --acts next,tab,card,idle,soak --tree` (CPU profile per action, call tree),
+  `play-trace.js --act next` (browser work: style / layout / paint / commit), `play-leak.js` (what grows per buổi).
+- Launch flags are in `dev/test/lib/playperf.js` (ANGLE SwiftShader + GPU raster). Do not use `--use-gl=swiftshader` for timing: it reads
+  every WebGL frame back on the main thread (~70 ms/frame of cost a phone never pays).
+- The box is shared and noisy: a single run can swing ±40 %. Compare before/after on the same machine, back to back, and rerun a miss once.
+- REVIEWERS: run `play-perf.js` (fold + ipadAir) on every branch that touches game code, and `coop-lag.js` on every co-op branch; a budget
+  miss that the branch made worse (vs origin/main, same run) = FAIL.
+
+## KIT §81 scene end in tests (`dev/test/lib/kmscene.js`)
+A kit scene (card flip, edict, bloom, gloom, ink…) waits for its end button `.kmov.km-endon > .kmend`. A test that clicks through the motion queue (edict → reward chest → person reveal) must press it: `const KM=require('./lib/kmscene'); await KM.use(ctx)` before goto, then `__kmNext()` in page code. Without it the queue stays on the first scene (e.g. the Kính sự phòng flip at life start).

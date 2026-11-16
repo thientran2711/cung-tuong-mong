@@ -190,7 +190,7 @@ function toilDressUI(){const box=kg82Box();if(!box)return;box.hidden=false;const
  const mama=toilSkill().mama;
  box.innerHTML=`<div class="toilw"><div class="toilfig">${pcPort(Object.assign({},me,{src:por.src}),me.col)}<h4 class="kpst">Hôm nay</h4>${occ}`+
   (mama?`<p class="past">${mama.name} khẽ nhắc: “Dịp ${st.F===2?"yến lễ phải lộng lẫy mà không vượt phẩm":st.F===1?"thỉnh an nên đoan trang, đủ phẩm":"thường ngày nên nhã nhặn, đừng phô trương"}.”</p>`:"")+`</div>`+
-  `<div class="toilinv">${kitEquipSlots({key:"toil",title:"Đang mặc",slots,sum,onPick:toilSlotPick})}${kitInvGrid({key:"toil",tabs,items,minRows:2,minSlots:12,onPick:toilPick})}`+
+  `<div class="toilinv">${kitInvGrid({key:"toil",tabs,items,minRows:2,minSlots:12,onPick:toilPick,side:kitEquipSlots({key:"toil",title:"Đang mặc",slots,sum,onPick:toilSlotPick,col:true}),sum})}`+
   `<div class="toildet">${toilDetHTML(sel)}</div></div></div>`+
   `<div class="kg82act"><button class="${kg82Btn()}" id="toilok">Mặc bộ này</button><button class="${kg82Btn(true)}" id="toilkeep">Giữ đồ hôm qua<small>mặc như cũ</small></button></div>`;
  try{kitInvFit()}catch(e){}
@@ -327,7 +327,7 @@ function toilFinish(made){const st=TOIL.st;if(!st)return;try{if(KG82.run&&KG82.r
 #kg82 .toilw .toilfig .pcp{max-width:220px;margin:0 auto 6px}
 #kg82 .toilw .kinv .kinvg{grid-template-columns:repeat(auto-fill,minmax(54px,1fr))}
 #kg82 .toilw .toildet{margin-top:8px}#kg82 .toilw .toildet>.past{margin:4px 0}
-@media (max-width:640px){#kg82 .toilw{grid-template-columns:1fr}#kg82 .toilw .toilfig{display:grid;grid-template-columns:110px 1fr;gap:4px 10px;align-items:start}#kg82 .toilw .toilfig .pcp{grid-row:span 3;max-width:110px;margin:0}}`;document.head.appendChild(st)})();
+/* kv3:.kv1 */:where(.kv1) #kg82 .toilw{grid-template-columns:1fr}:where(.kv1) #kg82 .toilw .toilfig{display:grid;grid-template-columns:110px 1fr;gap:4px 10px;align-items:start}:where(.kv1) #kg82 .toilw .toilfig .pcp{grid-row:span 3;max-width:110px;margin:0}`;document.head.appendChild(st)})();
 
 /* ---------- REACTIONS POP UP (owner 15/11): every reaction to her look is an event dialog with the person, never only a log line ----------
    Kit event-with-person layout (KIT 32.7: `who` → the person full-body on the left; kitEventDp when kit-fig2 lands). Event choices show the
@@ -571,7 +571,7 @@ window.kitFaceZoom=kitFaceZoom;
 .kfzoom-i{position:absolute}
 .kfzoom-i>img{position:absolute;left:0;top:0;width:100%;height:100%;max-width:none}
 .kfzoom-i>.kfxf{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none}
-@media (max-width:640px){#kg82 .toilw .toilfig .kfzoom{grid-row:span 3;width:110px;margin:0}}`;document.head.appendChild(st)})();
+/* kv3:.kv1 */:where(.kv1) #kg82 .toilw .toilfig .kfzoom{grid-row:span 3;width:110px;margin:0}`;document.head.appendChild(st)})();
 function toilColRows(c){return ["mat","ma","son","may"].map(k=>({k,label:TOIL_COL[k].label,sel:c[k],items:TOIL_COL[k].L.map(x=>({k:x[0],name:x[1],short:x[2],col:x[3]}))}))}
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§60",title:"kitSwatches · màu trang điểm (phấn mắt, phấn má, son môi, màu mày)",html:()=>{let z="";try{if(typeof S!=="undefined"&&S){const f=kitFile(toilPor().src);TOIL.prev={look:"dep",col:toilColDef()};try{z=kitFaceZoom(S,f)}finally{TOIL.prev=null}}}catch(e){}return `<div style="display:grid;grid-template-columns:minmax(110px,200px) 1fr;gap:10px;align-items:start">${z||"<span></span>"}${kitSwatches({key:"kitpage",rows:toilColRows(toilColDef())})}</div>`}})}catch(e){}
 
@@ -609,20 +609,21 @@ function toilReveal(o,done){let fin=false;const end=()=>{if(fin)return;fin=true;
   const hint=document.createElement("div");hint.className="kmhint";hint.textContent="Chạm để bỏ qua";ov.appendChild(hint);
   let ph=0;const T=[];const later=(ms,f)=>{if(!o.manual)T.push(setTimeout(()=>{try{f()}catch(e){console.error(e)}},ms))};
   const closeAll=()=>{if(ph===3)return;ph=3;T.forEach(clearTimeout);try{kitFxClear&&kitFxClear()}catch(e){}ov.classList.add("km-out");setTimeout(()=>ov.remove(),240);end()};
-  const showCard=()=>{R.classList.add("ktrv-zoomed");hint.textContent="Chạm để đóng"};
-  const toZoom=()=>{if(ph>=2)return;ph=2;T.forEach(clearTimeout);T.length=0;R.classList.add("ktrv-zin");showCard();later(red?0:2600,()=>{if(ph===2)hint.textContent="Chạm để đóng"})};
-  ov.addEventListener("click",e=>{e.stopPropagation();if(ph<2)toZoom();else closeAll()});
+  /* KIT 81 scene-end button (owner OD:L1261): the zoomed face ends with ONE kit button; no tap anywhere closes it */
+  const showCard=()=>{R.classList.add("ktrv-zoomed");kitSceneEnd(ov,"Tiếp theo",closeAll)};
+  const toZoom=()=>{if(ph>=2)return;ph=2;T.forEach(clearTimeout);T.length=0;R.classList.add("ktrv-zin");showCard()};
+  ov.addEventListener("click",e=>{e.stopPropagation();if(ph<2)toZoom()});
   R.style.setProperty("--ktpx",v[0]+"%");
   const goZoom=()=>{if(ph>=2)return;ph=1.5;/* face scale: face width fills ~46 % of the short side */const wpx=im.getBoundingClientRect().width||1,fwpx=v[6]/100*wpx;
    const sc=Math.max(1.5,Math.min(7,.46*Math.min(innerWidth,innerHeight)/Math.max(8,fwpx)));R.style.setProperty("--ktsc",sc.toFixed(2));R.classList.add("ktrv-go");later(1100,toZoom)};
   if(red){toZoom();return}
   /* step in, effect, zoom */
   requestAnimationFrame(()=>R.classList.add("ktrv-in"));
-  try{kitFxPreload&&kitFxPreload(look==="vung"?["ink"]:look==="diem"?["spark","petal-gold"]:look==="dep"||look==="tuyet"?["petal-plum","petal-peach"]:[])}catch(e){}
+  try{kitFxPreload&&kitFxPreload(look==="vung"?["ink"]:look==="diem"?["spark","petal-peach"]:look==="dep"||look==="tuyet"?["petal-plum","petal-peach"]:[])}catch(e){}
   const runFx=()=>{if(ph>=2)return;const tg=fw,SF={dep:"favour",tuyet:"favour",diem:"rankNew",vung:"mglose",vua:"mirror",moc:"mirror"}[look]||"mirror";try{kitSfx(SF)}catch(e){}
    const rc=fw.getBoundingClientRect(),fp={x:rc.left+v[0]/100*rc.width,y:rc.top+(v[1]-v[6]*.2/A)/100*rc.height};
    try{if(look==="dep"||look==="tuyet"){kitFxBurst("petal-plum",null,16,{});kitFxBurst("petal-peach",null,10,{});kitFxLight("glow-gold",fw,{opacity:.4,dur:3200,scale:1.5})}
-    else if(look==="diem"){kitFxLight("glow-gold",fw,{opacity:.55,dur:3200,scale:1.6});kitFxBurst("spark",fp,24,{});kitFxBurst("petal-gold",null,14,{})}
+    else if(look==="diem"){kitFxLight("glow-gold",fw,{opacity:.55,dur:3200,scale:1.6});kitFxBurst("spark",fp,24,{});kitFxBurst("petal-peach",null,14,{})}
     else if(look==="vung"){kitFxBurst("ink",fp,3,{scale:.8});R.classList.add("ktrv-wob")}
     else if(look==="vua"){kitFxLight("glow-gold",fw,{opacity:.25,dur:2400,scale:1.3})}}catch(e){}};later(900,runFx);
   later(red?0:3300,goZoom);if(o.manual)window.TOIL_REV={fx:runFx,go:goZoom,zoom:toZoom,close:closeAll,get ph(){return ph}};
@@ -647,10 +648,10 @@ window.toilReveal=toilReveal;
 .ktrv-wob .ktrv-fw{animation:ktWob .9s ease-in-out 2}
 @keyframes ktWob{0%,100%{transform:none;filter:none}20%{transform:rotate(-1.6deg) skewX(2deg);filter:blur(1.4px)}50%{transform:rotate(1.4deg) skewX(-2deg);filter:blur(.8px)}75%{transform:rotate(-.8deg)}}
 .ktrv-zoom{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%) scale(.55);opacity:0;transition:opacity .6s ease,transform .9s cubic-bezier(.2,.8,.2,1);pointer-events:none}
-.ktrv-zoom .kfzoom{width:min(74vw,46vh,340px);margin:0}
+.ktrv-zoom .kfzoom{width:min(74vw,calc(46*var(--kvh,1vh)),340px);margin:0}
 .ktrv-zin .ktrv-zoom{opacity:1;transform:translate(-50%,-50%) scale(1)}
 .ktrv-zin .ktrv-fw{opacity:0;transition:none}
 .ktrv-card{position:absolute;left:50%;bottom:max(34px,env(safe-area-inset-bottom));transform:translate(-50%,12px);width:min(92vw,420px);opacity:0;transition:opacity .5s ease .5s,transform .5s ease .5s}/* frame (background, border, radius, padding, shadow) = the ONE j93 frame rule .kmlist,.kprev-card,.ktrv-card (kit keeper K2) */
 .ktrv-zoomed .ktrv-card{opacity:1;transform:translate(-50%,0)}
-@media (max-height:480px){.ktrv-zoom{left:30%;top:50%}.ktrv-zoom .kfzoom{width:min(60vh,240px)}.ktrv-card{left:auto;right:3%;bottom:auto;top:50%;transform:translate(0,-46%);width:min(52vw,380px)}.ktrv-zoomed .ktrv-card{transform:translate(0,-50%)}}
+
 `;document.head.appendChild(st)})();

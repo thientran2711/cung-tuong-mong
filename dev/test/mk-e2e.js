@@ -1,7 +1,7 @@
 /* Điểm trang buổi sáng (review/toilette, dev/build/jtoil.js): the morning card + top-bar chip, the dress game (kitInvGrid), the makeup game
    played with real pointer moves, the effect on the Thỉnh an Thái hậu / Hoàng hậu cards by nết, skipping does not block, an old save loads.
    (mk-e2e variant: picks the preset Đào hoa and stops at the reveal) usage: node dev/test/mk-e2e.js <url> <WxH@dpr> <shotdir> [oldsave.json] */
-const {chromium}=require('playwright');const fs=require('fs');
+const {chromium}=require('./lib/pw-roulette');const fs=require('fs');
 const [,,URL,VP,DIR,OLD]=process.argv;const m=/(\d+)x(\d+)@([\d.]+)/.exec(VP||'755x1000@2');const W=+m[1],H=+m[2],DPR=+m[3];const tag=`${W}x${H}`;
 fs.mkdirSync(DIR,{recursive:true});
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:DPR,serviceWorkers:'block'});await ctx.route(u=>/ctmload=1|x-ctm-load/.test(String(u)),r=>r.abort());const p=await ctx.newPage();
@@ -11,6 +11,7 @@ fs.mkdirSync(DIR,{recursive:true});
  for(let i=0;i<20;i++){await p.evaluate(()=>{window.S0=typeof S!=='undefined'?S:null;try{store.set(NL_KEY,null)}catch(e){}start()});
   await p.waitForFunction(()=>typeof S!=='undefined'&&S&&S!==window.S0&&S.origin,null,{timeout:120000});
   const ok=await p.evaluate(()=>S.origin.k!=='cnv'&&!isSrv()&&!S.out);if(ok)break}
+ await require('./lib/roulette').dismissRoulette(p);
  await p.waitForTimeout(1500);
  await p.evaluate(()=>{const k=document.getElementById('kroul');if(k)k.remove();Q.length=0;S.buoi=0;used=0;S.suc=90;S.sac=Math.max(S.sac,55);deal();render()});
  await p.evaluate(()=>{while(Q.length){Q.length=0}try{closeModal()}catch(e){}const m=document.getElementById('modal');if(m)m.hidden=true;render()});await p.waitForTimeout(800);
@@ -51,16 +52,18 @@ fs.mkdirSync(DIR,{recursive:true});
  await p.waitForTimeout(200);await p.screenshot({path:`${DIR}/toil-${tag}-4-powder.jpg`,quality:70});
  if(await p.evaluate(()=>!!document.getElementById('toilnx')))await p.click('#toilnx');await p.waitForTimeout(300);
  /* chấm son: tap when the ring closes on the lip */
- for(let k=0;k<3;k++){for(let t=0;t<200;t++){const l=await p.evaluate(()=>TOIL.geo.lip());if(!l)break;if(Math.abs(l.ring-1)<.2){await p.mouse.click(l.x,l.y);break}await p.waitForTimeout(15)}}
+ for(let k=0;k<10&&await p.evaluate(()=>!!TOIL.geo.lip());k++){for(let t=0;t<400;t++){const l=await p.evaluate(()=>TOIL.geo.lip());if(!l)break;if(Math.abs(l.ring-1)<.2){await p.mouse.click(l.x,l.y);break}await p.waitForTimeout(15)}}
  await p.waitForTimeout(1300);await p.screenshot({path:`${DIR}/toil-${tag}-5-result.jpg`,quality:70});
  out.rec=await p.evaluate(()=>S.toilette);
  /* reveal e2e: real minigame -> real preset -> the reveal appears; the close card names the preset; tap skips */
+ /* main's kit scenes now end with the KIT 81 button: tap any .kmend that stands in front of the reveal */
+ for(let i=0;i<60&&!(await p.$('.ktrv'));i++){await p.evaluate(()=>{const b=document.querySelector('.kmov .kmend,.kmend');if(b)b.click()});await p.waitForTimeout(400)}
  await p.waitForSelector('.ktrv',{timeout:60000});out.revShown=true;
  await p.waitForTimeout(1500);await p.screenshot({path:`${DIR}/e2e-${tag}-rev1.jpg`,quality:60});
  await p.click('.ktrv-ov');await p.waitForTimeout(2500);
  out.card=await p.evaluate(()=>{const c=document.querySelector('.ktrv-card');return c?c.innerText.replace(/\n/g,' | '):null});
  await p.screenshot({path:`${DIR}/e2e-${tag}-rev2.jpg`,quality:60});
- for(let i=0;i<3&&await p.$('.ktrv');i++){await p.click('.ktrv-ov').catch(()=>{});await p.waitForTimeout(900)}
+ for(let i=0;i<3&&await p.$('.ktrv');i++){await p.click('.ktrv-ov .kmend').catch(()=>{});await p.waitForTimeout(900)}
  out.revGone=!(await p.$('.ktrv'));
  await p.waitForSelector('#toildone');out.resultCard=await p.evaluate(()=>document.querySelector('#toildone').closest('#kg82,.kg82,body').innerText.slice(0,300));
  await p.screenshot({path:`${DIR}/e2e-${tag}-result.jpg`,quality:60});
