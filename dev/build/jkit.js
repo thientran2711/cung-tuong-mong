@@ -44,6 +44,16 @@ function kitFigBody(src,cb){const KIT_FB=window.__KITFB||(window.__KITFB={});con
    · picture plate (o.stage, = stage rule 33): body = min(KIT_FIG.h × H, KIT_FIG.maxPx) × fac.
    Returns the picture box {ih, iw (true aspect, never stretched), dy (the box hangs this far below the foot line: painted feet b<1 stand ON the line), body}.
    Never scaled to fit a width: a wider figure is cut at its column edge (32.2a). Used by jsl (Tuần lục / Mệnh truyện / Sổ luân hồi person pages) and jbook (kitBookPic). */
+/* KIT 33.7 · THE SLOT FUNCTION (owner 16/11 OD:L1049, review/stage-slots-fix-r1) — the ONE definition of fixed slots for every group of standing people:
+   the room / place stage (j59), the event picture band (kitEsOvFit) and the event person column (kitDpFit) all call it, none has its own numbers.
+   k people stand on the FREE width [x0, x0+avail]: 1 → its centre, k ≥ 2 → centres at 1/(k+1), 2/(k+1) … k/(k+1); the slot spacing is avail/(k+1)
+   (1 person: the whole width). Figures NEVER overlap: each one's whole visible art (kitFigBody l..r, sleeves and hem included) must fit one spacing,
+   else EVERYONE scales down by the same factor (kitSlotScale). */
+function kitSlotSw(k,avail){return k>1?avail/(k+1):avail}
+function kitSlotCx(i,k,x0,avail){return x0+avail*(i+1)/(k+1)}
+function kitSlotScale(vis,avail){const k=vis.length,m=Math.max(0,...vis),sw=kitSlotSw(k,avail);return m>sw&&m>0?sw/m:1}
+function kitSlotNeed(vis){const k=vis.length,m=Math.max(0,...vis);return k>1?m*(k+1):m}
+window.kitSlotSw=kitSlotSw;window.kitSlotCx=kitSlotCx;window.kitSlotScale=kitSlotScale;window.kitSlotNeed=kitSlotNeed;
 function kitBookFig(b,fac,H,o){const bt=b.ht>b.t?b.ht:b.t,span=Math.max(.2,b.b-bt),rel=o&&o.stage?Math.min(KIT_FIG.h*H,KIT_FIG.maxPx):H/KIT_FIG.man,body=Math.min(rel*(fac||1),H*.98),ih=body/span;return{ih,iw:ih*(b.ar||.45),dy:ih*(1-b.b),body,span}}
 window.kitBookFig=kitBookFig;
 /* KIT 33.4 · kitImgErr — the ONE null-safe fallback for inline <img onerror>: a picture that fails after a re-render detached it

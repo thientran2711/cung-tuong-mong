@@ -11,6 +11,7 @@ const CHUNK = 40000;            // chars per storage value (<128 KiB even in 3-b
 const BIG = 200000;             // send gzip binary above this many chars
 const STALE = 45000;            // ms of silence before a socket counts as gone
 const IDLE_DAYS = 30;
+const SEATMAX = 3000000;        // chars of one seat's week copy
 
 const CORS = { "Access-Control-Allow-Origin": "*", "Access-Control-Allow-Methods": "GET,POST,OPTIONS", "Access-Control-Allow-Headers": "content-type" };
 const json = (o, s = 200) => new Response(JSON.stringify(o), { status: s, headers: { "content-type": "application/json", ...CORS } });
@@ -133,7 +134,8 @@ export class Room {
       this.ctx.acceptWebSocket(s2, ["seat-" + seat]);
       s2.serializeAttachment({ seat, last: Date.now() });
       const C = await this.loadC();
-      await this.send(s2, { t: "room", code: m.code, you: seat, seats: this.seatsView(), week: m.week, ended: this.endedView(), state: C, chat: await this.chatLoad(), ...this.buoiView() });
+      const mine = await this.seatCopy(seat);
+      await this.send(s2, { t: "room", code: m.code, you: seat, seats: this.seatsView(), week: m.week, ended: this.endedView(), state: C, chat: await this.chatLoad(), ...this.buoiView(), mine, msv: (m.sv && m.sv[seat]) || 0 });
       await this.presence();
       await this.ctx.storage.setAlarm(Date.now() + 20000);
       return new Response(null, { status: 101, webSocket: c2 });
@@ -169,6 +171,18 @@ export class Room {
     }
     if (t === "act" || t === "actr" || t === "res" || t === "note") { const o = { ...msg, from: seat }; return this.bcast(o, ws); }
     if (t === "chat") return this.chatIn(ws, seat, msg, m);
+    /* per-seat copy of her week (review/coop-rejoin-xdev): the client's rolling snapshot (jcoopworld CW.snap), so a rejoin from ANOTHER
+       device (same pid via Sổ mây) or with cleared storage restores her exact week. Version = server counter m.sv[seat]; a write based on an
+       older version than the stored one is refused (a stale device must not overwrite a newer copy). */
+    if (t === "seat") {
+      const o = msg.o; if (!o || typeof o !== "object" || o.seat !== seat || o.week !== m.week) return this.send(ws, { t: "error", code: "badseat", msg: "tuần " + m.week });
+      m.sv = m.sv || {}; const cur = m.sv[seat] || 0;
+      if ((msg.sv | 0) < cur) return this.send(ws, { t: "error", code: "seatold", sv: cur });
+      if (JSON.stringify(o).length > SEATMAX) return this.send(ws, { t: "error", code: "seatbig" });
+      m.sv[seat] = cur + 1; o.sv = m.sv[seat]; o.sat = Date.now();
+      await this.putBig("seat-" + seat, o); await this.saveMeta();
+      return this.send(ws, { t: "seatok", sv: m.sv[seat] });
+    }
     if (t === "say") { const text = String(msg.text || "").slice(0, 200); return this.bcast({ t: "said", from: seat, text }, ws); }
     if (t === "init") {
       if (seat !== "a") return this.send(ws, { t: "error", code: "notyours", msg: "chỉ chủ phòng" });
@@ -183,7 +197,7 @@ export class Room {
       C.P = C.P || {}; C.P[seat] = msg.P;
       // her new character starts fresh in this week; drop a pending end of hers
       if (m.ended) delete m.ended[seat];
-      await this.delBig("sub-" + seat);
+      await this.delBig("sub-" + seat); await this.delBig("seat-" + seat);
       // the other seat may already have ended with a view of my OLD character: make her view of me the new blob,
       // so the merge sees "no change by her" there and keeps my new character as it is
       const other = seat === "a" ? "b" : "a"; const os = await this.getBig("sub-" + other);
@@ -240,6 +254,7 @@ export class Room {
     const got = await this.ctx.storage.get(keys); let s = ""; for (const k of keys) s += got.get(k) || "";
     try { return JSON.parse(s); } catch (e) { return null; }
   }
+  async seatCopy(seat) { const o = await this.getBig("seat-" + seat); return o && typeof o === "object" && o.week === this.meta.week ? o : null; }
   async delBig(key) { const n = (await this.ctx.storage.get(key)) || 0; const keys = [key]; for (let i = 0; i < n; i++) keys.push(key + ":" + i); await this.ctx.storage.delete(keys); }
 
   async tick() {
@@ -247,8 +262,8 @@ export class Room {
     const A = await this.getBig("sub-a"), B = await this.getBig("sub-b");
     let F;
     if (!base) F = A || B; else if (A && B) F = merge3(base, A, B); else F = A || B || base;
-    m.week = (m.week || 0) + 1; F.week = m.week; m.ended = {}; m.buoi = 0; m.bended = {};
-    await this.saveC(F); await this.delBig("sub-a"); await this.delBig("sub-b"); await this.saveMeta();
+    m.week = (m.week || 0) + 1; F.week = m.week; m.ended = {}; m.buoi = 0; m.bended = {}; m.sv = {};
+    await this.saveC(F); await this.delBig("sub-a"); await this.delBig("sub-b"); await this.delBig("seat-a"); await this.delBig("seat-b"); await this.saveMeta();
     await this.bcast({ t: "week", week: m.week, state: F });
     await this.presence();
   }

@@ -62,7 +62,7 @@ function mmFace(){const g=GD();if(g&&g.face){try{const f=g.face;if(typeof f==="o
     if(k&&!coop()){S.tutFid=k;try{if(!used.has(k))figUsed().push(k)}catch(e){}}}
    const L=M[k]||[];const f=L.find(x=>x.ageBand==="a51")||L.find(x=>x.ageBand==="a36")||L[0];if(f&&f.por)src=figPath(f.por)}}catch(e){}
  return{src,ini:"Quế",col:(typeof kitServCol==="function"?kitServCol("maid",3):"#a0584a"),rw:MMN(),__kr:{role:"mama",rank:3,origin:null,sex:"f",kid:false}}}
-function mmPort(){try{return `<div class="ktut-mm">${pcPort(mmFace())}</div>`}catch(e){return ""}}
+function mmFig(){try{const f=mmFace();const s=String(f.src||"");return s.replace(/\/por-/,"/fig-")}catch(e){return""}}
 
 /* ---------- kit CSS (one look; tokens of KIT.md §1 / §8) ---------- */
 const st=document.createElement("style");st.id="kit-tut";st.textContent=`
@@ -74,34 +74,18 @@ const st=document.createElement("style");st.id="kit-tut";st.textContent=`
 #ktut.ktut-mv .ktut-hole{transition:left .28s ease,top .28s ease,width .28s ease,height .28s ease}
 #ktut .ktut-mark{position:fixed;border-radius:10px;box-shadow:0 0 0 3px #f0d070,0 0 14px 4px #ffd66e99;pointer-events:none}
 #ktut .ktut-blk{position:fixed;pointer-events:auto;background:transparent}
-#ktut .ktut-card{position:fixed;pointer-events:auto;width:min(430px,calc(100vw - 24px));max-width:none;margin:0;box-shadow:0 0 0 3px #f6ead6,0 0 0 4px #c9a46a,0 10px 30px #0008;max-height:calc(100vh - 16px);overflow:auto}
+#ktut .ktut-card{position:fixed;pointer-events:auto;margin:0;box-shadow:0 0 0 3px #f6ead6,0 0 0 4px #c9a46a,0 10px 30px #0008}
 #ktut.ktut-mv .ktut-card{animation:ktutIn .26s ease both}
 @keyframes ktutIn{from{opacity:0;transform:translateY(8px)}}
-.ktut-card .kpb,.ktip .kpb{display:flex;gap:12px;align-items:flex-start;padding:10px 14px 4px;min-height:0;flex:none}
-.ktut-mm{flex:none;width:68px}
-.ktut-mm .pcp{width:100%!important;max-height:none!important;margin:0!important;float:none!important}
-.ktut-big .ktut-mm{width:96px}
-.ktut-card .kpb{align-items:center}
-.ktut-say{flex:1 1 auto;min-width:0;font-size:.88rem;line-height:1.45;color:var(--ink)}
+.ktut-say{min-width:0}
 .ktut-say p{margin:0 0 6px}
 .ktut-say .kb{margin:4px 0 2px}
 .ktut-say .ktut-do{color:var(--gold);font-weight:600}
-.ktut-card .kpopts,.ktip .kpopts{display:flex;justify-content:flex-end;flex-wrap:wrap;gap:8px;padding:6px 14px 12px;margin:0;min-height:0;position:static}
-.ktut-card .kpopts .kbtn,.ktip .kpopts .kbtn{min-height:40px;padding:6px 16px;font-size:.86rem}
-.ktut-pic{height:min(150px,19vh);overflow:hidden;border-radius:var(--k-rad,8px);margin:0 0 8px}
-.ktut-pic>*{width:100%!important;height:100%!important;max-width:none!important;margin:0!important}
-.ktut-pic img{width:100%;height:100%;object-fit:cover}
-.ktut-big .ktut-say{max-height:calc(100vh - 150px);overflow:auto}
-#ktut .ktut-card.ktut-big{width:min(580px,calc(100vw - 24px))}
 .kpseal.kp-guide{background:#a0584a;border-color:#6e3a30}
 .ktip[hidden]{display:none!important}
-.ktip{position:fixed;left:50%;translate:-50% 0;z-index:9200;width:min(420px,calc(100vw - 24px));pointer-events:none}
-.ktip .dlg.kpanel{pointer-events:auto;width:100%;max-width:none;margin:0;box-shadow:0 0 0 3px #f6ead6,0 0 0 4px #c9a46a,0 6px 24px #0006}
-.ktip .ktut-mm{width:52px}
+.ktip{position:fixed;left:50%;translate:-50% 0;z-index:9200;width:var(--kpw);pointer-events:none}
+.ktip .dlg.kpanel{pointer-events:auto;box-shadow:0 0 0 3px #f6ead6,0 0 0 4px #c9a46a,0 6px 24px #0006}
 .ktip.ktut-mv{animation:ktutIn .26s ease both}
-@media (max-width:599px){.ktut-card .kpb,.ktip .kpb{padding:8px 10px 2px;gap:10px}.ktut-mm{width:56px}.ktut-big .ktut-mm{width:76px}.ktip .ktut-mm{width:46px}
- .ktut-say{font-size:.84rem}.ktut-card .kpopts,.ktip .kpopts{padding:6px 10px 10px}}
-@media (max-height:560px){.ktut-mm,.ktut-big .ktut-mm{width:48px}}
 `;document.head.appendChild(st);
 try{if(typeof KP_SEAL==="object")KP_SEAL.guide="LỜI DẶN"}catch(e){}
 
@@ -112,10 +96,9 @@ function rectOf(t){try{const el=typeof t==="function"?t():typeof t==="string"?$q
 function clip(r,pad){const vw=innerWidth,vh=innerHeight;const L=Math.max(4,r.left-pad),Tp=Math.max(4,r.top-pad),R=Math.min(vw-4,r.right+pad),B=Math.min(vh-4,r.bottom+pad);
  return{left:L,top:Tp,right:R,bottom:B,width:Math.max(0,R-L),height:Math.max(0,B-Tp)}}
 function kitCoach(spec){const R0=root();CUR=spec;R0.hidden=false;R0.classList.toggle("ktut-mv",!rm());
- const btns=(spec.btns||[]).map(b=>`<button type="button" class="kbtn${b.alt?" alt":""}" data-ktut="${b.k}">${b.t}</button>`).join("");
- R0.innerHTML=`${spec.target?"":`<div class="ktut-dim"></div>`}<div class="ktut-hole"${spec.target?"":" hidden"}></div><div class="ktut-blks"></div><div class="ktut-marks"></div>
-  <div class="dlg kpanel ktut-card${spec.big?" ktut-big":""}" data-kind="guide" aria-live="polite">${kpHeader("guide",spec.title||MMN(),spec.sub||"")}
-  <div class="kpb">${mmPort()}<div class="ktut-say">${spec.html||""}</div></div>${btns?`<div class="kpopts">${btns}</div>`:""}</div>`;
+ const card=kitPersonDlg({kind:"guide",title:spec.title||MMN(),sub:spec.sub||"",p:mmFace(),fig:mmFig(),name:`<b class="kname" style="--rc:#a0584a">${MMN()}</b>`,pic:spec.pic?{src:spec.pic,lab:""}:null,html:`<div class="ktut-say">${spec.html||""}</div>`,btns:spec.btns,cls:"ktut-card"});
+ R0.innerHTML=`${spec.target?"":`<div class="ktut-dim"></div>`}<div class="ktut-hole"${spec.target?"":" hidden"}></div><div class="ktut-blks"></div><div class="ktut-marks"></div>${card}`;
+ try{kitPersonDlgFit(R0)}catch(e){}
  R0.querySelectorAll("[data-ktut]").forEach(b=>b.addEventListener("click",e=>{e.stopPropagation();try{if(typeof sfx==="function")sfx("sfx-tap")}catch(x){}const k=b.dataset.ktut;if(spec.on)spec.on(k)}));
  place(true);
  const f=R0.querySelector(".ktut-card .kbtn:not(.alt)")||R0.querySelector(".ktut-card .kbtn");if(f)try{f.focus({preventScroll:true})}catch(e){}
@@ -136,6 +119,15 @@ function place(force){const R0=ROOT;if(!R0||!CUR||R0.hidden)return;const s=CUR;c
  const marks=(s.marks||[]).map(m=>rectOf(m)).filter(Boolean).map(m=>clip(m,3));
  const key=[vw,vh,r?[r.left,r.top,r.width,r.height].map(Math.round).join(","):"-",marks.map(m=>[m.left,m.top,m.width].map(Math.round).join(",")).join(";"),card.offsetHeight].join("|");
  if(!force&&key===LAST)return;LAST=key;
+ /* the card keeps the ONE kit frame size (OD:L963); when it fits on no side of the target, the lit hole shrinks to the part of the target that still leaves the card a free side (the target stays tappable there: a card/row is tapped anywhere on it). Only a tap step does this: a look-at step keeps its whole hole (the card then lies where it covers least) */
+ if(r&&s.interact){const cw0=card.offsetWidth,ch0=card.offsetHeight,g0=12,M0=8;
+  const fits=r.bottom+g0+ch0<=vh-M0||r.top-g0-ch0>=M0||r.right+g0+cw0<=vw-M0||r.left-g0-cw0>=M0;
+  if(!fits){const O=[];const mk=(l,t,rr,b)=>{if(rr-l>=56&&b-t>=56)O.push({left:l,top:t,right:rr,bottom:b,width:rr-l,height:b-t})};
+   mk(r.left,r.top,r.right,Math.min(r.bottom,vh-M0-g0-ch0));/* card below */
+   mk(r.left,Math.max(r.top,M0+ch0+g0),r.right,r.bottom);/* card above */
+   mk(Math.max(r.left,M0+cw0+g0),r.top,r.right,r.bottom);/* card at the left */
+   mk(r.left,r.top,Math.min(r.right,vw-M0-g0-cw0),r.bottom);/* card at the right */
+   O.sort((a,b)=>b.width*b.height-a.width*a.height);if(O[0])r=O[0]}}
  const D=R0.querySelector(".ktut-dim");
  if(r){if(D)D.remove();hole.hidden=false;Object.assign(hole.style,{left:r.left+"px",top:r.top+"px",width:r.width+"px",height:r.height+"px"})}
  else{hole.hidden=true;if(!R0.querySelector(".ktut-dim"))R0.insertAdjacentHTML("afterbegin",`<div class="ktut-dim"></div>`)}
@@ -143,20 +135,20 @@ function place(force){const R0=ROOT;if(!R0||!CUR||R0.hidden)return;const s=CUR;c
  const B=R0.querySelector(".ktut-blks");
  B.innerHTML=s.interact&&r?blk(0,0,vw,r.top)+blk(0,r.bottom,vw,vh-r.bottom)+blk(0,r.top,r.left,r.height)+blk(r.right,r.top,vw-r.right,r.height):blk(0,0,vw,vh);
  R0.querySelector(".ktut-marks").innerHTML=marks.map(m=>`<div class="ktut-mark" style="left:${m.left}px;top:${m.top}px;width:${m.width}px;height:${m.height}px"></div>`).join("");
- /* card: below, above, right, left of the target; a target too big for any of these: the card lies at its lower edge (never for a tap step) */
+ /* card: ONE frame size per viewport (owner OD:L963), placed by POSITION only: below, above, right or left of the target where it fits whole (the step's preferred side first). When it fits on no side the card goes to the screen corner/edge that covers the LEAST of the hole (the frame is never shrunk); a step with no hole is centred */
+ card.style.removeProperty("--kph");card.style.removeProperty("--kpw");
  const cw=card.offsetWidth,ch=card.offsetHeight,g=12,M=8;let L,Tp;
  if(!r){L=(vw-cw)/2;Tp=Math.max(M,(vh-ch)/2)}
- else{const cx=r.left+r.width/2,cy=r.top+r.height/2;const hx=Math.min(Math.max(M,cx-cw/2),vw-cw-M),hy=Math.min(Math.max(M,cy-ch/2),vh-ch-M);
-  const C=[];if(r.bottom+g+ch<=vh-M)C.push([hx,r.bottom+g,vh-M-r.bottom-g-ch]);if(r.top-g-ch>=M)C.push([hx,r.top-g-ch,r.top-g-ch-M]);
-  if(r.right+g+cw<=vw-M)C.push([r.right+g,hy,1e3]);if(r.left-g-cw>=M)C.push([r.left-g-cw,hy,1e3]);
-  const pref=s.side==="above"?[1,0]:[0,1];
-  let c=null;if(C.length){/* the side the step prefers when it fits, else the roomiest */c=C.find(x=>x[1]===(s.side==="above"?r.top-g-ch:r.bottom+g))||C.sort((a,b)=>b[2]-a[2])[0]}
-  if(!c&&s.interact){/* a tap step with no room above / below / beside (phone landscape: the act card fills the pane): narrow the card
-     into the wider free side so it never lies over the target */const sl=r.left-g-M,sr=vw-r.right-g-M;const sp=Math.max(sl,sr);
-   if(sp>=240){card.style.width=Math.floor(sp)+"px";const ch2=card.offsetHeight;L=sl>=sr?M:r.right+g;Tp=Math.min(Math.max(M,cy-ch2/2),vh-ch2-M);c=[L,Tp]}}
-  if(c){L=c[0];Tp=c[1]}
-  else{/* too big: inside the target at its bottom (above the tab bar), or at the screen's free edge for a tap step */
-   L=(vw-cw)/2;const tb=$q("#tabs");const tt=tb&&vis(tb)?tb.getBoundingClientRect().top:vh;Tp=Math.min(r.bottom,tt)-ch-g;if(Tp<M)Tp=Math.max(M,vh-ch-M)}}
+ else{const cx=r.left+r.width/2,cy=r.top+r.height/2;
+  const hx=Math.min(Math.max(M,cx-cw/2),vw-cw-M),hy=Math.min(Math.max(M,cy-ch/2),vh-ch-M);
+  const C=[];if(r.bottom+g+ch<=vh-M)C.push(["below",hx,r.bottom+g]);if(r.top-g-ch>=M)C.push(["above",hx,r.top-g-ch]);
+  if(r.right+g+cw<=vw-M)C.push(["right",r.right+g,hy]);if(r.left-g-cw>=M)C.push(["left",r.left-g-cw,hy]);
+  const want=s.side==="above"?"above":"below";
+  const c=C.find(x=>x[0]===want)||C.find(x=>x[0]==="below"||x[0]==="above")||C[0];
+  if(c){L=c[1];Tp=c[2]}
+  else{/* no side fits the whole card: the position that covers the least of the hole */
+   const ov=(l,t)=>Math.max(0,Math.min(l+cw,r.right)-Math.max(l,r.left))*Math.max(0,Math.min(t+ch,r.bottom)-Math.max(t,r.top));
+   const P=[[M,M],[vw-cw-M,M],[M,vh-ch-M],[vw-cw-M,vh-ch-M],[hx,M],[hx,vh-ch-M],[M,hy],[vw-cw-M,hy]].map(x=>[x[0],x[1],ov(x[0],x[1])]).sort((a,b)=>a[2]-b[2]);L=P[0][0];Tp=P[0][1]}}
  card.style.left=Math.round(Math.max(M,Math.min(L,vw-cw-M)))+"px";card.style.top=Math.round(Math.max(M,Math.min(Tp,vh-ch-M)))+"px"}
 addEventListener("resize",()=>{LAST="";if(CUR){place(true);clearTimeout(T.rz);T.rz=setTimeout(()=>{try{if(T.on&&STEPS[T.step]&&STEPS[T.step].prep)STEPS[T.step].prep(true)}catch(e){}LAST="";place(true)},350)}if(T.tip)tipPlace()});
 addEventListener("orientationchange",()=>{LAST="";setTimeout(()=>{if(CUR)place(true);if(T.tip)tipPlace()},250)});
@@ -168,9 +160,9 @@ let TIPEL=null;
 function tipPlace(){if(!TIPEL)return;let top=innerHeight;document.querySelectorAll("#tabs,#next,.kloadchip").forEach(e=>{if(!vis(e))return;const r=e.getBoundingClientRect();if(r.height&&r.top>innerHeight*.5)top=Math.min(top,r.top)});
  TIPEL.style.bottom=Math.max(10,Math.round(innerHeight-top+10))+"px"}
 function kitTip(spec){tipOff();const el=document.createElement("div");el.className="ktip"+(rm()?"":" ktut-mv");el.id="ktip";el.setAttribute("role","status");
- el.innerHTML=`<div class="dlg kpanel" data-kind="guide">${kpHeader("guide",spec.title,MMN()+" dặn")}<div class="kpb">${mmPort()}<div class="ktut-say">${spec.html}</div></div><div class="kpopts"><button type="button" class="kbtn" data-ktip="1">Đã hiểu</button></div></div>`;
- document.body.appendChild(el);TIPEL=el;T.tip=spec.id;tipPlace();
- el.querySelector("[data-ktip]").addEventListener("click",e=>{e.stopPropagation();try{if(typeof sfx==="function")sfx("sfx-tap")}catch(x){}tipOff();T.tipGap=Date.now()+1500})}
+ el.innerHTML=kitPersonDlg({kind:"guide",title:spec.title,sub:MMN()+" dặn",p:mmFace(),fig:mmFig(),name:`<b class="kname" style="--rc:#a0584a">${MMN()}</b>`,pic:spec.pic?{src:spec.pic,lab:""}:(ia("Hành sự")?{src:ia("Hành sự"),lab:""}:null),html:`<div class="ktut-say">${spec.html}</div>`,btns:[{k:"tip",t:"Đã hiểu"}]});
+ document.body.appendChild(el);TIPEL=el;T.tip=spec.id;tipPlace();try{kitPersonDlgFit(el)}catch(e){}
+ el.querySelector("[data-ktut=tip]").addEventListener("click",e=>{e.stopPropagation();try{if(typeof sfx==="function")sfx("sfx-tap")}catch(x){}tipOff();T.tipGap=Date.now()+1500})}
 function tipOff(){if(TIPEL){TIPEL.remove();TIPEL=null}T.tip=null}
 window.kitTip=kitTip;window.kitTipOff=tipOff;
 
@@ -219,33 +211,37 @@ function grpHTML(k){const L=grpKeys(k);if(srv()&&k==="staff")return say(`<p>Đ�
  if(L.length<2)return say(`<p>${rows[0]?rows[0][0]+": "+rows[0][1]+".":""}</p>`);
  return say(`<p>Mục ${grpLabel(k)} có ${L.length} phần, chạm hàng trên cùng để đổi:</p>`)+kitRows(rows)}
 /* ---------- GAME NÀY CHƠI GÌ: the intro pages of step 1 ---------- */
-function pic(src,lab){try{if(!src)return"";return `<div class="ktut-pic">${kitSceneArt(src,lab||"",{shape:"wide",cap:false})}</div>`}catch(e){return""}}
 function ia(k){try{const a=kitInfoArt(k);return a&&a.src||""}catch(e){return""}}
 function owide(){try{return typeof kitOriginWide==="function"?kitOriginWide(S.origin.k):kitOriginArt(S.origin.k)}catch(e){return""}}
 const rows=L=>kitRows(L.map(x=>[x[0],say(x[1]),x[2]||""]));
 const INTRO=[
- {t:"Game này là gì",h:()=>pic(owide(),"")+say(`<p>{M} là ${MMT()}, phụng mệnh dạy lễ cho {x} những ngày đầu trong cung. Trước hết, {m} xin nói rõ {x} đang bước vào chuyện gì.</p>`)+
+ {t:"Game này là gì",p:()=>owide(),h:()=>say(`<p>{M} là ${MMT()}, phụng mệnh dạy lễ cho {x} những ngày đầu trong cung. Trước hết, {m} xin nói rõ {x} đang bước vào chuyện gì.</p>`)+
   rows([["Đây là","một kiếp người trong hậu cung: {x} là một cô gái vừa vào cung, mỗi buổi tự chọn việc mà làm để sống sót và đi lên"],
    ["Mỗi kiếp","một thân phận khác (con nhà quyền thế, nhà buôn, cung nữ…), một Hoàng thượng khác, một hậu cung khác"],
    ["Lựa chọn","không có đường định sẵn; việc nào cũng ghi rõ cái được và cái giá"]])},
- {t:"Mục tiêu",h:()=>pic(ia("Sắc phong"),"")+rows([["Sống sót","trong cung có người thương, có kẻ ghen, kẻ hại; giữ được mạng mình là trước hết"],
+ {t:"Mục tiêu",p:()=>ia("Sắc phong"),h:()=>rows([["Sống sót","trong cung có người thương, có kẻ ghen, kẻ hại; giữ được mạng mình là trước hết"],
    srv()?["Đi lên","từ thân cung nữ, được chủ tin và Hoàng thượng để mắt thì được phong Đáp ứng, rồi leo như phi tần"]
     :["Đi lên",`từ ${RANKS[0].n}, Thường tại, Quý nhân, Tần, Phi, Quý phi, Hoàng quý phi tới Hoàng hậu; con lên ngôi thì thành Hoàng thái hậu`],
    ["Nhà và con","nhà mẹ đẻ có vinh có nhục theo {x}; con được trọng thì mẫu thân được nể"],
    ["Mệnh truyện","truyện riêng của thân phận, mở từng chương; cuộn chiếu Mục tiêu ở cột nút bên trái màn luôn cho biết chương này cần gì"],
    ["Kết cục","mỗi kiếp khép lại bằng một kết: kết hay, kết dở, và những kết hiếm khó gặp"]])},
- {t:"Chơi thế nào",h:()=>pic(ia("Hành sự"),"")+rows([["Buổi · khắc","mỗi tuần bốn buổi (sáng, trưa, chiều, tối), mỗi tháng ba tuần; mỗi buổi 4 khắc, việc nào cũng tốn khắc"],
+ {t:"Chơi thế nào",p:()=>ia("Hành sự"),h:()=>rows([["Buổi · khắc","mỗi tuần bốn buổi (sáng, trưa, chiều, tối), mỗi tháng ba tuần; mỗi buổi 4 khắc, việc nào cũng tốn khắc"],
    [srv()?"Phận sự":"Hành sự","chọn việc mà làm; thẻ ghi cơ may, cái giá, cái được"],["Dư đồ","đi tới các nơi trong cung, gặp người"],
    srv()?["Đồng liêu","người làm cùng: kết bạn, đề phòng kẻ vu cáo"]:["Hậu cung · Giao tình","người trong cung; ai thương, ai ghen, ai oán {x}"],
    srv()?null:["Tài nghệ","học cầm kỳ thi họa, nữ công; mỗi bài là một trò nhỏ"],
    srv()?null:["Tư trang","y phục, trang sức; sáng sáng điểm trang trước khi gặp người"],
    ["Sự việc","tin trong cung, sự kiện, lời mời tự tìm đến; {x} chọn cách đáp"],["Sang buổi","hết khắc thì qua buổi; qua buổi tối là sang ngày mới, cũng là sang tuần mới"]].filter(Boolean))},
- {t:"Được · mất",h:()=>pic(ia("Luân hồi")||ia("Mệnh truyện"),"")+rows([["Mất","bệnh nặng, sinh nở gặp nạn, bị người hại thì hết kiếp","r"],
+ {t:"Được · mất",p:()=>ia("Luân hồi")||ia("Mệnh truyện"),h:()=>rows([["Mất","bệnh nặng, sinh nở gặp nạn, bị người hại thì hết kiếp","r"],
    ["Lãnh cung","bị phế vào lãnh cung là mất phẩm vị; còn sống là còn đường về","r"],
    ["Được",srv()?"được phong vị, có người nâng đỡ, đi tới đâu tùy {x}":"ngôi Hoàng hậu; con lên ngôi thì làm Hoàng thái hậu, buông rèm nhiếp chính, hay tự lên ngôi","g"],
    ["Phúc duyên","kiếp sau không mang theo gì; chỉ Phúc duyên tích được để đổi thân phận"],
    ["Chơi cùng bạn","hai người một hậu cung, mỗi người một thân phận, một mục tiêu riêng"]])+say(`<p>{X} chạm <b>Tiếp</b> để {m} chỉ qua mấy chỗ trên màn.</p>`)}];
 function introHTML(i){const P=INTRO[i];return P.h()}
+function introPic(i){try{return INTRO[i].p()||""}catch(e){return""}}
+/* the event picture (RIGHT TOP) of a spotlight step: the tab / topic it is about, else the Hành sự picture (kitInfoArt keys) */
+const STEP_PIC={chao:"Hành sự",tuchat:"Sắc phong",khac:"Hành sự",the:"Hành sự",thu:"Hành sự",ketqua:"Hành sự",dudo:"Dư đồ",nhom0:"Hậu cung",nhom1:"Giao tình",nhom2:"Hậu cung",tutrang:"Tư trang",muctieu:"Mệnh truyện",so:"Luân hồi",quabuoi:"Hành sự"};
+function stepPic(s){try{return ia(STEP_PIC[s.id]||"Hành sự")||ia("Hành sự")||""}catch(e){return""}}
+
 /* ---------- LƯỢT DẪN ĐẦU KIẾP: 12 steps ---------- */
 const STEPS=[
  /* step 1 = "Game này chơi gì" (owner 16/11: "bạn tôi hỏi ủa game này chơi cái gì? Mục tiêu là gì? Làm gì?"): 4 short pages, each with a
@@ -299,7 +295,7 @@ function show(prep){const s=STEPS[T.step];if(!s)return;if(busy()){T.paused=true;
  const btns=[{k:"skip",t:"Bỏ qua lời dặn",alt:true}];if(!s.noNext)btns.push({k:"next",t:s.last?"Đã hiểu":"Tiếp"});
  setTimeout(()=>{if(!T.on||STEPS[T.step]!==s)return;if(busy()){T.paused=true;coachOff();return}
   const np=s.pages?s.pages():0,pg=T.page||0;
-  kitCoach({title:typeof s.title==="function"?s.title():s.title,sub:np?`Game này chơi gì · trang ${pg+1}/${np} · lời dặn ${n}/${tot}`:`${MMN()} · lời dặn ${n}/${tot}`,html:typeof s.html==="function"?s.html():s.html,target:s.target,pad:s.pad,interact:s.interact,marks:s.marks,side:s.side,big:s.big,btns,
+  kitCoach({title:typeof s.title==="function"?s.title():s.title,sub:np?`Game này chơi gì · trang ${pg+1}/${np} · lời dặn ${n}/${tot}`:`${MMN()} · lời dặn ${n}/${tot}`,html:typeof s.html==="function"?s.html():s.html,target:s.target,pad:s.pad,interact:s.interact,marks:s.marks,side:s.side,big:s.big,btns,pic:np?introPic(pg):stepPic(s),
    on(k){if(k==="skip")return tourEnd("skip");if(k==="next"){if(np&&pg<np-1){T.page=pg+1;show(false);return}T.page=0;next()}}})},prep&&s.prep?560:0)}
 /* the trial act: the step ends when the act's result arrives (result card, or the act opened a dialog of its own) */
 function watchTry(){const s=STEPS[T.step];if(!T.on||!s||s.id!=="thu")return;

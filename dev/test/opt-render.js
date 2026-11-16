@@ -6,8 +6,9 @@
    C  the builders that put an event straight into the queue (approachOne visits incl. Thái hậu triệu / Kẻ hầu xin / Một ánh mắt, all FESTEV
       festivals, servant matters, the palace grant) → cost mode; the act confirms / pickers (Xuất gia?, Nội vụ phủ đưa người) and the shop
       (Hàng chợ đen) → full numbers.
-   D  the real night: nightScene → prep "Điểm trang lộng lẫy" (Bạc −5) → night1 → night2 "Im lặng": the night card shows NO Bạc line (the
-      prep's price was its own Tốn — owner 13:30Z), seal "KẾT QUẢ" (no roll), the consorts' ghen in ONE collapsed Kèm line.
+   D  the real night: nightScene → prep "Điểm trang lộng lẫy" (Bạc −5) → night1 → night2 "Im lặng": the night card shows NO Bạc line from the
+      prep (its price was its own Tốn — owner 13:30Z); the one Bạc line allowed is Được "Bạc +N" when the night brought Hoàng thượng's ân thưởng
+      (j20 BBAC.night = BAL.nightBac, in S.awards — a real reward), seal "KẾT QUẢ" (no roll), the consorts' ghen in ONE collapsed Kèm line.
    E  clarity: the same option at Tâm cơ 5 / 30 / 70 reads vague / plain / sharp; the night talk options are told apart.
    F  the game's own turns: endTurn × 80 (× 240 with --bot) with every module's hooks; each dialog with choices the GAME pushed is classified
       (event / act / shop); one that is neither an event nor flagged act / shop / showOut FAILS (an event that slipped past cost mode).
@@ -81,17 +82,21 @@ async function boot(b,W,H,dpr){const ctx=await b.newContext({viewport:{width:W,h
  { const c=R.C["Hàng chợ đen"]||[];if(!c.some(x=>x.t==="Hàng chợ đen"))R.warn.push(["C:Hàng chợ đen","not produced"]);}
  /* ---- D: the real night, Bạc −5 of the prep ---- */
  R.D=await p.evaluate(async()=>{const W=t=>new Promise(r=>setTimeout(r,t));Q.length=0;document.getElementById('modal').hidden=true;S.tonight=null;S.bac=300;
-  const b0=S.bac;nightScene();if(!Q.length)return{err:"nightScene pushed nothing ("+String(S.logs[0]||"").replace(/<[^>]+>/g,"")+")"};showModal();await W(300);
+  const b0=S.bac,aw0=(S.awards||[]).length;nightScene();if(!Q.length)return{err:"nightScene pushed nothing ("+String(S.logs[0]||"").replace(/<[^>]+>/g,"")+")"};showModal();await W(300);
   const pi=Q[0].opts.findIndex(o=>/^Điểm trang/.test(o.n));if(pi<0)return{err:"no prep option"};chooseM(pi);await W(300);
   if(!Q[0]||Q[0].pid!=="night1")return{err:"night1 not next: "+(Q[0]&&Q[0].pid)};chooseM(3);await W(300);
   if(!Q[0]||Q[0].pid!=="night2")return{err:"night2 not next: "+(Q[0]&&Q[0].pid)};const ii=Q[0].opts.findIndex(o=>/^Im lặng/.test(o.n));chooseM(ii);await W(600);
   const t=document.getElementById('rtoast');if(!t||!t.classList.contains("on"))return{err:"no night card"};
   const k=t.querySelector('.kkem');const lst=k&&k.querySelector('.kkeml');
-  return{paid:b0-S.bac,cls:t.className,seal:(t.querySelector('.seal')||{}).textContent,stamp:!!t.querySelector('.kmseal'),
+  const aw=(S.awards||[]).length>aw0?S.awards[0]:null;
+  return{paid:b0-S.bac+(aw?aw.bac|0:0),award:aw?{why:aw.why,bac:aw.bac|0}:null,nightBac:typeof BBAC==="object"?BBAC.night:null,cls:t.className,seal:(t.querySelector('.seal')||{}).textContent,stamp:!!t.querySelector('.kmseal'),
    duoc:[...t.querySelectorAll('.kr-duoc .kitem')].map(x=>x.textContent),mat:[...t.querySelectorAll('.kr-mat .kitem')].map(x=>x.textContent),
    kem:k?k.querySelector('.kkems').textContent:"",collapsed:!!lst&&getComputedStyle(lst).display==="none"}});
  await p.screenshot({path:`${OUT}/night-result-${wh}.jpg`,type:'jpeg',quality:70});
- { const d=R.D;if(d.err)R.fails.push(["D:night",d.err]);else{if(d.paid!==5)R.warn.push(["D:night","prep cost paid "+d.paid]);if([...d.mat,...d.duoc].some(x=>/^Bạc/.test(x)))R.fails.push(["D:night","Bạc line on the night card",d.mat.join(" / ")]);
+ { const d=R.D;if(d.err)R.fails.push(["D:night",d.err]);else{if(d.paid!==5)R.warn.push(["D:night","prep cost paid "+d.paid]);/* the prep's price is its own Tốn: never a Bạc line in Mất. A Bạc line in Được only as the night's real ân thưởng silver
+     (j20 BBAC.night = BAL.nightBac, recorded in S.awards) and exactly that amount */
+  if(d.mat.some(x=>/^Bạc/.test(x)))R.fails.push(["D:night","Bạc line in Mất on the night card",d.mat.join(" / ")]);
+  {const bd=d.duoc.filter(x=>/^Bạc/.test(x));if(bd.length&&!(d.award&&d.award.bac>0&&bd.length===1&&new RegExp("\\(\\+"+d.award.bac+"\\)|\\+"+d.award.bac+"$").test(bd[0])&&d.award.bac===d.nightBac))R.fails.push(["D:night","Bạc line in Được that is not the night's ân thưởng",bd.join(" / "),JSON.stringify(d.award)])}
   if(d.seal!=="KẾT QUẢ"||!/\bsure\b/.test(d.cls)||d.stamp)R.fails.push(["D:night","seal",d.seal,d.cls]);if(d.mat.some(x=>/ghen/.test(x)))R.fails.push(["D:night","ghen in Mất"]);if(!d.kem||!d.collapsed)R.fails.push(["D:night","no collapsed Kèm line"])}}
  await p.evaluate(()=>{const t=document.getElementById('rtoast');if(t)t.classList.remove('on');__close()});
  /* rolled seals still come from the roll */

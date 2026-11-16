@@ -1,0 +1,223 @@
+/* ================= jmem: KỶ NIỆM (memories) + ÂN OÁN CHƯA DỨT (hook ledger) — item D26, review/memories =================
+   Spec: dev/ideas/DESIGN_IDEAS_1115.md #1 (Kỷ niệm) and #3 (one ledger of hooks). Docs + API: dev/PROGRESS_memories.md. Numbers: BAL.mem / BAL.hook (jbal2).
+
+   1. MEMORIES. A person keeps ≤ BAL.mem.cap records about each person who mattered: {d deed, w week, dt date text, s sign, g weight, g0 first
+      weight, k keep (never fades fully), n times, x extra word}. Stored in S.mem["<holder>|<about>"] (personal state: co-op safe, old saves
+      start empty). Keys: "me" (her), a rival id, "emp", "th".
+      Written by acts that already exist (runAct schemes both ways incl. NPC↔NPC, giveTo gifts, empAct Hoàng hậu powers, talk options,
+      nợ-ân quests q72End, big relation swings inside an event = generic deed named after the event). Never written for a secret act nobody saw.
+      Fade: −BAL.mem.fadeMo weight a month; a "keep" deed (betrayal, poison, rescue…) stops at g0·BAL.mem.keepFloor. A repeated deed reinforces.
+      Recall: (a) the person says it: a quoted line on her talk result (once a month per person) and on top of the person-card block;
+      (b) modifier: memMod(h,a) = Σ s·g / modDiv, capped ±modMax, added to talk-option odds and Kết giao odds with that person, and taken off
+      NPC hostility (NPC minds pick targets with it); (c) "Nhắc lại ân xưa": spend a good memory (weight −invokeCost) → that person owes her
+      one ân in the existing nợ-ân ledger (j72), the non-bạc road.
+   2. HOOK LEDGER. One list of unresolved hooks between two people. It does NOT copy the systems that already keep such things — it MIRRORS
+      them: chứng cứ she holds (v.ev, j8/jtruth) → "proof"; chứng cứ an NPC holds on her (v.evm.me) → "threat"; nợ ân (j72 q.d) → "favour" /
+      "debt"; nợ-ân quests she accepted (j72 q.a) → "promise". Kinds that had no home are stored in S.hooks.L: "secret" (an affair or a false
+      pregnancy she saw — written from the notes that already record it), "promise" made to her, "threat", "favour", "debt", "vow".
+      API (other systems / later events use it):
+        hookAdd(kind, by, on, {t, str:"weak"|"strong", due, src, x}) → id      by/on: person or key; returns null if invalid
+        hookQuery({k, by, on, src, mir:false})                          → array of hooks (own + mirrored), newest first
+        hookPick(filter)                                                → the oldest matching open hook (for an event to pick up) or null
+        hookResolve(id, res, {note, mem:false})                         → true if resolved; res = kept | broken | used | lapsed | faded | lost | paid
+        hookUse(id)                                                     → weak: resolve "used"; strong: uses+1, target Oán +, may be destroyed / strike back
+        hookLabel(h) / hookText(h)                                      → kind word / row text (VANPHONG register)
+      Monthly tick: dead / gone target → "lapsed"; due passed → promise "broken" (memory written); strong secret fades with BAL.hook.fadeCh.
+      Uses: talk option "Lấy chuyện riêng ép nàng" (strong secret → she owes one ân, Oán +, risk) on the rival card.
+   SHOWN (kit parts only): person card (jpcf) blocks "Kỷ niệm" and "Ân oán chưa dứt" = kitRows; strong new memories / hook changes write
+   a Sổ ghi line, so they appear in Tuần lục with the week's other entries. No new component, no CSS.
+   Off switch: window.__memOff=true. Test: dev/test/memories.js. */
+(function(){
+const B=()=>BAL.mem;
+const BH=()=>BAL.hook;
+const off=()=>!!window.__memOff||typeof S!=="object"||!S||typeof BAL!=="object"||!BAL.mem||!BAL.hook;
+const plainT=s=>String(s||"").replace(/<[^>]*>/g,"").replace(/\s+/g," ").trim();
+/* ---------- deeds: [sign, keep, phrase; base weight = BAL.mem.w[deed] (doer is the subject; {o} = the one who remembers, {x} = extra)] ---------- */
+const MEM_DEEDS={
+ ally:[1,0,"chủ động kết giao với {o}"],gift:[1,0,"tặng {o} {x}"],giftbad:[-1,0,"tặng {o} {x}, món quà chẳng vừa ý"],
+ gifttaint:[-1,1,"tặng {o} {x} có tẩm thứ hại người"],secret:[1,0,"tâm sự chuyện riêng với {o}"],care:[1,0,"ân cần hỏi han {o}"],
+ apology:[1,0,"hạ mình tạ lỗi với {o}"],humble:[1,0,"nhún nhường trước {o}"],provoke:[-1,0,"buông lời khiêu khích {o}"],vent:[-1,0,"trút giận lên {o}"],
+ spy:[-1,0,"sai người dò la {o}"],rumor:[-1,0,"tung tin đồn bẩn về {o}"],frame:[-1,1,"vu oan {o} dùng bùa ngải"],
+ poison:[-1,1,"bỏ độc mưu hại {o}"],accuse:[-1,1,"tố giác {o} trước mặt bề trên"],bribe:[-1,0,"mua chuộc cung nữ bên {o}"],
+ block:[-1,0,"đút lót giấu thẻ bài của {o}"],plant:[-1,1,"cài đồ hại {o} vào rương"],steal:[-1,0,"lấy trộm đồ của {o}"],
+ musk:[-1,1,"hại cái thai của {o}"],kidharm:[-1,1,"ra tay với con của {o}"],takeaway:[-1,1,"bế con của {o} về nuôi"],
+ reward:[1,0,"ban thưởng cho {o}"],pardon:[1,1,"ân xá, cứu {o} khỏi cảnh khốn cùng"],conf:[-1,0,"tịch thu trang sức của {o}"],
+ cutpay:[-1,0,"khất bổng lộc của {o}"],judge:[-1,1,"xử phạt {o}"],helped:[1,0,"giúp {o} xong việc khó"],
+ failed:[-1,0,"nhận lời giúp {o} rồi làm hỏng việc"],exposed:[-1,0,"làm lộ chuyện {o} nhờ cậy"],kept:[1,0,"giữ trọn lời hứa với {o}"],
+ broken:[-1,1,"thất hứa với {o}"],pressed:[-1,0,"lấy chuyện riêng ép {o}"],scheme:[-1,0,"giở trò “{x}” với {o}"],
+ good:[1,0,"giúp {o} trong chuyện “{x}”"],bad:[-1,0,"làm {o} phật lòng trong chuyện “{x}”"]};
+window.MEM_DEEDS=MEM_DEEDS;
+const ACT2DEED={spy:"spy",rumor:"rumor",frame:"frame",poison:"poison",accuse:"accuse",bribe:"bribe",block:"block",musk:"musk",catswap:"kidharm",
+ ksab:"kidharm",kpoison:"kidharm",pond:"kidharm",kframe:"kidharm",takeaway:"takeaway",plant:"plant",steal:"steal",ally:"ally"};
+/* ---------- keys and names ---------- */
+function mk(p){try{if(p==null)return null;if(typeof p==="string"||typeof p==="number"){const s=String(p);return s==="S"?"me":s.replace(/^rv:/,"")}
+ if(p===S)return"me";if(S.emp&&p===S.emp)return"emp";if(p.kind==="th"||(S.thO&&p===S.thO))return"th";return p.id!=null?String(p.id):null}catch(e){return null}}
+function mp(k){k=String(k);if(k==="me")return S;if(k==="emp")return S.emp||"emp";if(k==="th")return S.thO||"th";try{return RV(isNaN(+k)?k:+k)||RV(k)||null}catch(e){return null}}
+function mName(k){k=String(k);if(k==="me")return"ngươi";if(k==="emp")return"Hoàng thượng";if(k==="th")return"Thái hậu";const p=mp(k);return p&&p.name?p.name:"người ấy"}
+function mPron(k){k=String(k);return k==="emp"?"ngài":k==="th"?"người":k==="me"?"ngươi":"nàng"}
+function alive(k){k=String(k);if(k==="me")return !S.dead;if(k==="emp")return true;if(k==="th")return !S.thDead;const p=mp(k);return !!(p&&p.alive&&!p.out)}
+/* ---------- store ---------- */
+function memS(){if(!S.mem||typeof S.mem!=="object")S.mem={};return S.mem}
+function dtNow(){try{return `T${S.month}/${S.year} ${TUAN[S.tuan]}`}catch(e){return""}}
+function nowW(){try{return wk()}catch(e){return 0}}
+const NUMW=["","một","hai","ba","bốn","năm","sáu","bảy","tám","chín","mười"];
+function memAgo(w){const d=Math.max(0,nowW()-(w||0));if(d<3)return"mới đây";if(d<36){const m=Math.floor(d/3);return m===1?"tháng trước":`${NUMW[m]||m} tháng trước`}
+ const y=Math.floor(d/36);return y===1?"năm ngoái":`${NUMW[y]||y} năm trước`}
+function phrase(m,o){const D=MEM_DEEDS[m.d]||MEM_DEEDS.good;return D[2].replace(/\{o\}/g,o).replace(/\{x\}/g,m.x||"")}
+function memAdd(h,a,d,o){if(off())return null;o=o||{};const hk=mk(h),ak=mk(a);const D=MEM_DEEDS[d];if(!hk||!ak||hk===ak||!D)return null;
+ if(hk!=="me"&&hk!=="emp"&&hk!=="th"&&!mp(hk))return null;if(ak!=="me"&&ak!=="emp"&&ak!=="th"&&!mp(ak))return null;
+ const C=B();const M=memS();const id=hk+"|"+ak;const L=M[id]=M[id]||[];let g=Math.round(o.g!=null?o.g:((C.w||{})[d]||0));if(g<=0)return null;g=Math.min(100,g);
+ const x=o.x?plainT(o.x).slice(0,60):"";let m=L.find(z=>z.d===d&&(z.x||"")===x);
+ if(m){m.g=Math.min(100,Math.round(m.g+g*C.reinforce),Math.max(m.g,Math.round(((C.w||{})[d]||g)*C.reinforceMax)));m.g0=Math.max(m.g0||0,m.g);m.n=(m.n||1)+1;m.w=nowW();m.dt=dtNow()}
+ else{m={d,s:D[0],g,g0:g,k:D[1]||(o.keep?1:0),n:1,w:nowW(),dt:dtNow()};if(x)m.x=x;L.unshift(m);L.sort((p,q)=>q.g-p.g);if(L.length>C.cap)L.length=C.cap;if(!L.includes(m))return null}
+ memPrune();
+ /* a strong memory about her (or hers about someone) goes into the Sổ ghi → Tuần lục */
+ if(!o.quiet&&(hk==="me"||ak==="me")&&g>=C.logMin){try{const who=hk==="me"?null:mName(hk);
+  log(who?`${who} ${m.s>0?"ghi lòng tạc dạ":"để bụng"}: ngươi đã ${phrase(m,mPron(hk))}.`:`Ngươi ${m.s>0?"ghi nhớ ơn":"ghi nhớ"} ${mName(ak)} đã ${phrase(m,"ngươi")}.`)}catch(e){}}
+ return m}
+function memPrune(){const C=B(),M=memS();const ks=Object.keys(M).filter(k=>k!=="_mo");if(ks.length<=C.pairCap)return;
+ const npc=ks.filter(k=>!/(^|\|)me(\||$)/.test(k)).map(k=>[k,M[k].reduce((s,m)=>s+m.g,0)]).sort((a,b)=>a[1]-b[1]);
+ for(const [k] of npc){if(Object.keys(M).length-1<=C.pairCap)break;delete M[k]}}
+function memList(h,a){if(off())return[];const L=memS()[mk(h)+"|"+mk(a)];return Array.isArray(L)?L.filter(m=>m&&m.g>0):[]}
+function memScore(h,a){return memList(h,a).reduce((s,m)=>s+m.s*m.g,0)}
+function memMod(h,a){if(off())return 0;const C=B();try{return Math.max(-C.modMax,Math.min(C.modMax,Math.round(memScore(h,a)/C.modDiv)))}catch(e){return 0}}
+function memTop(h,a,s){const L=memList(h,a).filter(m=>!s||m.s===s);return L.length?L.slice().sort((p,q)=>q.g-p.g)[0]:null}
+/* the line the person says (holder h speaks to a) */
+function memLine(h,a,m){m=m||memTop(h,a);if(!m)return"";const ak=mk(a),hk=mk(h);const you=ak==="me"?"ngươi":mName(ak);const me="ta";
+ const ago=memAgo(m.w);const A=ago[0].toUpperCase()+ago.slice(1);
+ const C=B();const tail=m.s>0?(m.g>=C.strong?" Ơn ấy ta ghi lòng tạc dạ.":" Ta vẫn còn nhớ."):(m.k&&m.g>=C.hate?" Mối hận ấy ta mang theo suốt đời.":" Chuyện ấy ta chưa quên đâu.");
+ return `${A}, ${you} đã ${phrase(m,me)}.${tail}`}
+function memFadeWord(m){const C=B();return m.g>=C.strong?"nhớ rõ":m.g>=C.faint?"còn nhớ":"đã phai"}
+/* fade once a month */
+function memFade(){if(off())return;const M=memS();if(M._mo===S.turn)return;M._mo=S.turn;const C=B();
+ for(const k of Object.keys(M)){if(k==="_mo")continue;const L=M[k];if(!Array.isArray(L)){delete M[k];continue}
+  for(const m of L){const floor=m.k?Math.round((m.g0||m.g)*C.keepFloor):0;m.g=Math.max(floor,m.g-C.fadeMo)}
+  M[k]=L.filter(m=>m.g>0);if(!M[k].length)delete M[k]}}
+/* "Nhắc lại ân xưa": spend a good memory → the person owes her one ân (j72 ledger) */
+function memInvoke(v){const C=B();const m=memTop(v,S,1);if(!m||m.g<C.invokeMin)return"";m.g=Math.max(0,m.g-C.invokeCost);
+ let owe=false;try{if(typeof q72A==="function"&&typeof q72DebtAdd==="function"){const A=q72A("rv",v.id);if(A){q72DebtAdd(A,1);owe=true}}}catch(e){}
+ if(!owe)try{affAdd(v,S,C.invokeAff)}catch(e){}
+ return `Ngươi nhắc ${v.name} chuyện xưa: ngươi đã ${phrase(m,"nàng")}. ${v.name} cúi đầu: “Ơn ấy ta chưa trả.”${owe?" Nàng nợ ngươi một ân.":""}`}
+Object.assign(window,{memAdd,memList,memScore,memMod,memTop,memLine,memFade,memInvoke,memAgo,memKey:mk});
+
+/* ================= HOOK LEDGER ================= */
+const HK_KIND={promise:"Lời hứa",debt:"Ngươi nợ ân",favour:"Nợ ngươi một ân",secret:"Bí mật nắm được",threat:"Bị nắm thóp",proof:"Chứng cứ trong tay",vow:"Lời thề"};
+function hkS(){if(!S.hooks||typeof S.hooks!=="object")S.hooks={};const H=S.hooks;H.n=H.n||0;H.L=Array.isArray(H.L)?H.L:[];H.done=Array.isArray(H.done)?H.done:[];return H}
+function hookAdd(k,by,on,o){if(off()||!HK_KIND[k])return null;o=o||{};const b=mk(by),t=mk(on);if(!b||!t||b===t)return null;const H=hkS();
+ const txt=plainT(o.t||"").slice(0,120);const dup=H.L.find(h=>h.k===k&&h.by===b&&h.on===t&&(h.t||"")===txt);if(dup){dup.w=nowW();return dup.id}
+ const h={id:"h"+(++H.n),k,by:b,on:t,t:txt,w:nowW(),dt:dtNow(),str:o.str==="strong"?"strong":"weak",uses:0};if(o.due!=null)h.due=o.due;if(o.src)h.src=String(o.src);if(o.x!=null)h.x=o.x;
+ H.L.unshift(h);if(H.L.length>BH().max)H.L.length=BH().max;
+ if(!o.quiet&&(b==="me"||t==="me"))try{log(`Ân oán chưa dứt · ${HK_KIND[k]}: ${hookText(h)}.`)}catch(e){}
+ return h.id}
+/* mirrored hooks: read the systems that already keep these, never copy them */
+function hookMirror(){const R=[];try{for(const v of (typeof rivals!=="undefined"?rivals:[])){if(!v||!v.alive)continue;
+  if((v.ev||0)>0)R.push({id:"ev:"+v.id,k:"proof",by:"me",on:String(v.id),t:`${v.ev} chứng cứ về ${v.name}`,str:v.ev>=2?"strong":"weak",mir:"ev",n:v.ev});
+  const e=(v.evm||{}).me||0;if(e>0)R.push({id:"evm:"+v.id,k:"threat",by:String(v.id),on:"me",t:`${v.name} giữ ${e} chứng cứ về ngươi`,str:e>=2?"strong":"weak",mir:"evm",n:e})}}catch(e){}
+ try{if(typeof q72==="function"){const q=q72();for(const k in q.d){const n=q.d[k];if(!n)continue;const who=k.replace(/^rv:/,"");const nm=(q.dn&&q.dn[k])||mName(who);
+   R.push(n>0?{id:"q72:"+k,k:"favour",by:"me",on:who,t:`${nm} nợ ngươi ${n>1?n+" ân":"một ân"}`,str:"weak",mir:"q72",n}:{id:"q72:"+k,k:"debt",by:who,on:"me",t:`ngươi nợ ${nm} ${-n>1?(-n)+" ân":"một ân"}`,str:"weak",mir:"q72",n})}
+  for(const x of q.a||[]){let X=null;try{X=q72X(x)}catch(e){}if(!X)continue;const who=x.rk==="rv"?String(x.ri):q72Key(X.A);
+   R.push({id:"q72a:"+x.u,k:"promise",by:who,on:"me",t:`ngươi đã nhận lời ${X.A.n}: ${plainT(q72Title(X))}`,str:"weak",mir:"q72a",due:x.dl})}}}catch(e){}
+ return R}
+function hookQuery(f){f=f||{};if(off())return[];const by=f.by!=null?mk(f.by):null,on=f.on!=null?mk(f.on):null,who=f.who!=null?mk(f.who):null;
+ let L=hkS().L.slice();if(f.mir!==false)L=L.concat(hookMirror());
+ return L.filter(h=>(!f.k||(Array.isArray(f.k)?f.k.includes(h.k):h.k===f.k))&&(by==null||h.by===by)&&(on==null||h.on===on)&&(who==null||h.by===who||h.on===who)&&(!f.src||h.src===f.src)&&(!f.str||h.str===f.str))}
+function hookPick(f){const L=hookQuery(Object.assign({},f||{},{mir:f&&f.mir}));return L.length?L.slice().sort((a,b)=>(a.w||0)-(b.w||0))[0]:null}
+function hookFind(id){return hkS().L.find(h=>h.id===id)||null}
+function hookResolve(id,res,o){if(off()||!id)return false;o=o||{};res=res||"lapsed";id=String(id);
+ /* mirrored: act on the owning system */
+ if(/^ev:/.test(id)){const v=mp(id.slice(3));if(!v)return false;try{evA(S,v,-(v.ev||0))}catch(e){return false}return true}
+ if(/^evm:/.test(id)){const v=mp(id.slice(4));if(!v)return false;try{evA(v,S,-((v.evm||{}).me||0))}catch(e){return false}return true}
+ if(/^q72:/.test(id)){const k=id.slice(4);try{const q=q72();const n=q.d[k]||0;if(!n)return false;const A=k.startsWith("rv:")?q72A("rv",k.slice(3)):q72A(k,null);if(A)q72DebtAdd(A,n>0?-1:1);else{q.d[k]=n>0?n-1:n+1;if(!q.d[k])delete q.d[k]}}catch(e){return false}return true}
+ if(/^q72a:/.test(id))return false;/* a quest promise ends through its quest (q72End) */
+ const H=hkS();const i=H.L.findIndex(h=>h.id===id);if(i<0)return false;const h=H.L.splice(i,1)[0];h.res=res;h.rw=nowW();H.done.unshift(h);if(H.done.length>20)H.done.length=20;
+ /* a kept / broken promise is remembered by the one it was made to */
+ if(o.mem!==false&&h.k==="promise"&&(res==="kept"||res==="broken")&&alive(h.on)&&alive(h.by))memAdd(h.on,h.by,res==="kept"?"kept":"broken",{quiet:o.quiet});
+ if(!o.quiet&&(h.by==="me"||h.on==="me"))try{log(`Ân oán chưa dứt · ${HK_KIND[h.k]}: ${hookText(h)} (${HK_RES[res]||"đã xong"}).`)}catch(e){}
+ return true}
+const HK_RES={kept:"đã giữ lời",broken:"đã thất hứa",used:"đã dùng",lapsed:"người đã không còn",faded:"chứng cứ đã phai",lost:"bị hủy mất",paid:"đã trả",expired:"đã quá hạn"};
+function hookUse(id){const h=hookFind(id);if(!h)return null;const C=BH();if(h.str!=="strong"){hookResolve(id,"used");return{used:1}}
+ h.uses=(h.uses||0)+1;const t=mp(h.on);const r={used:1};if(t&&t!==S&&h.by==="me"){try{oanAdd(t,S,C.useOan)}catch(e){}
+  if(roll(C.strikeCh+h.uses*C.useStep)){try{evA(t,S,1)}catch(e){}r.strike=1}else if(roll(C.lostCh+h.uses*C.useStep)){hookResolve(id,"lost",{quiet:1});r.lost=1}}
+ return r}
+function hookLabel(h){return HK_KIND[h&&h.k]||"Chuyện chưa dứt"}
+function hookText(h){const r=hookText0(h);return r?r[0].toUpperCase()+r.slice(1):r}
+function hookText0(h){if(!h)return"";if(h.mir)return h.t;const by=h.by==="me"?"ngươi":mName(h.by),on=h.on==="me"?"ngươi":mName(h.on);
+ const t=h.t?`: ${h.t}`:"";
+ switch(h.k){case"secret":return `${by} biết chuyện riêng của ${on}${t}`;case"promise":return `${by} đã nhận lời ${on}${t}`;case"threat":return `${by} nắm thóp ${on}${t}`;
+  case"favour":return `${on} nợ ${by} một ân${t}`;case"debt":return `${by} nợ ${on} một ân${t}`;case"vow":return `${by} đã thề trước ${on}${t}`;case"proof":return `${by} giữ chứng cứ về ${on}${t}`}
+ return h.t||""}
+function hookTick(){if(off())return;const H=hkS();if(H._mo===S.turn)return;H._mo=S.turn;const C=BH();
+ for(const h of H.L.slice()){if(!alive(h.by)||!alive(h.on)){hookResolve(h.id,"lapsed",{mem:false,quiet:h.by!=="me"&&h.on!=="me"});continue}
+  if(h.due!=null&&nowW()>h.due){hookResolve(h.id,h.k==="promise"?"broken":"expired");continue}
+  if(h.k==="secret"&&h.str==="strong"&&roll(C.fadeCh)){hookResolve(h.id,"faded");continue}}}
+Object.assign(window,{hookAdd,hookQuery,hookPick,hookResolve,hookUse,hookLabel,hookText,hookTick,hookFind,HK_KIND});
+
+/* ================= WRITERS: wrap the acts that already exist ================= */
+let SUP=0,CAUGHT=null,CTX=null;
+const sup=f=>{SUP++;try{return f()}finally{SUP--}};
+if(typeof caught==="function"){const c0=caught;caught=function(a,t){const r=c0.apply(this,arguments);if(r)CAUGHT={a,t};return r}}
+if(typeof runAct==="function"){const r0=runAct;runAct=function(a,t,k){if(off()||!a||!t||a===t)return r0.apply(this,arguments);
+ let af0=0,ev0=0;try{af0=aff(t,a);ev0=evG(t,a)}catch(e){}CAUGHT=null;const r=sup(()=>r0.apply(this,arguments));
+ try{const dAf=aff(t,a)-af0,dEv=evG(t,a)-ev0;const seen=(CAUGHT&&CAUGHT.a===a&&CAUGHT.t===t)||k==="accuse"||dEv>0;
+  if(k==="ally"){if(dAf>0)memAdd(t,a,"ally")}
+  else if(k!=="gift"&&(seen||dAf<=-B().seenAf)){const d=ACT2DEED[k]||"scheme";memAdd(t,a,d,{x:ACT[k]?ACT[k].n.toLowerCase():""})}}catch(e){}
+ CAUGHT=null;return r}}
+if(typeof giveTo==="function"){const g0=giveTo;giveTo=function(a,r,ix){if(off())return g0.apply(this,arguments);let nm="",tn=0,af0=0;const R=r==="emp"?S.emp:r==="th"?"th":r;
+ try{const e=a.inv[ix];nm=e?iname(e):"";tn=e&&e.t?1:0;if(R&&typeof R==="object"&&R!==S.emp)af0=aff(R,a)}catch(x){}
+ const out=sup(()=>g0.apply(this,arguments));
+ try{if(out&&nm&&R){let d="gift";if(typeof R==="object"&&R!==S.emp){const dA=aff(R,a)-af0;d=dA<=-B().taintAf&&tn?"gifttaint":dA<0?"giftbad":"gift"}memAdd(R,a,d,{x:nm})}}catch(x){}
+ return out}}
+if(typeof empAct==="function"){const e0=empAct;empAct=function(i,k){const v=typeof rivals!=="undefined"?rivals[i]:null;const s0=S&&S.logSeq||0;const r=sup(()=>e0.apply(this,arguments));
+ try{if(v&&(S.logSeq||0)>s0&&["cutpay","conf","reward","pardon","judge"].includes(k))memAdd(v,S,k)}catch(e){}return r}}
+const TALK2DEED={"Chia sẻ bí mật":"secret","Hỏi han sức khỏe":"care","Tạ lỗi":"apology","Nhún nhường":"humble","Khiêu khích":"provoke","Trút giận":"vent"};
+if(typeof q72End==="function"){const q0=q72End;q72End=function(x,res,X){let A=null;try{X=X||q72X(x);A=X&&X.A}catch(e){}const r=sup(()=>q0.apply(this,arguments));
+ try{if(A&&A.k==="rv"&&A.o){const d=res==="ok"?"helped":res==="bad"?"exposed":res==="fail"?"failed":null;if(d)memAdd(A.o,S,d)}}catch(e){}return r}}
+/* a big relation swing inside an event (no specific deed above) = a generic memory named after the event */
+if(typeof chooseM==="function"){const c0=chooseM;chooseM=function(i){try{const m=Q[0];if(m&&m.t)CTX={t:plainT(m.t).replace(/[.:]\s*$/,"").slice(0,40),at:Date.now()}}catch(e){}return c0.apply(this,arguments)}}
+if(typeof relAdd==="function"){const l0=relAdd;relAdd=function(x,y,n){const r=l0.apply(this,arguments);
+ try{if(!off()&&!SUP&&n&&Math.abs(n)>=B().relMin&&CTX&&Date.now()-CTX.at<6000&&(x===S||y===S)){const o=x===S?y:x;if(o&&o!==S&&o.id!=null&&o.alive)memAdd(o,S,n>0?"good":"bad",{g:Math.min(B().relCap,Math.abs(n)),x:CTX.t})}}catch(e){}return r}}
+/* secrets she sees are already written as notes (j21 noteAdd): an affair, a pregnancy that matches no night → a strong "secret" hook */
+if(typeof noteAdd==="function"){const n0=noteAdd;noteAdd=function(id,t){const r=n0.apply(this,arguments);
+ try{if(!off()&&/tư thông với|không khớp đêm thị tẩm/.test(String(t||""))){const v=mp(id);if(v&&v!==S)hookAdd("secret","me",v,{t:/tư thông/.test(t)?"chuyện tư thông":"cái thai không khớp sổ Kính sự phòng",str:"strong",src:"note"})}}catch(e){}return r}}
+/* monthly: fade + ledger tick (oanMonth runs once a month on every road) */
+if(typeof oanMonth==="function"){const o0=oanMonth;oanMonth=function(){const r=o0.apply(this,arguments);try{memFade();hookTick()}catch(e){console.error("mem",e)}return r}}
+
+/* ================= RECALL: odds, NPC minds, talk ================= */
+if(typeof oAlly==="function"){const a0=oAlly;oAlly=function(a,t){const o=a0.apply(this,arguments);try{return typeof o==="number"?cl(o+memMod(t,a),5,95):o}catch(e){return o}}}
+if(typeof hostility==="function"){const h0=hostility;hostility=function(v,t){const h=h0.apply(this,arguments);try{return h-memMod(v,t)}catch(e){return h}}}
+if(typeof talkOpts==="function"){const t0=talkOpts;talkOpts=function(p){const A=t0.apply(this,arguments);try{if(off()||!p||!Array.isArray(A))return A;const v=p.ref;
+ if(!(p.kind==="rival"||p.kind==="hh")||!v||v===S)return A;const md=memMod(v,S);
+ if(md)A.forEach(a=>{if(a&&typeof a.o==="number"&&a.o>0&&a.o<100)a.o=cl(a.o+md,5,95)});
+ const C=B();const good=memTop(v,S,1);
+ if(good&&good.g>=C.invokeMin&&!A.some(a=>a&&a.n==="Nhắc lại ân xưa"))A.push({n:"Nhắc lại ân xưa",o:100,x:`nàng nợ ngươi một ân · kỷ niệm ${MEM_DEEDS[good.d]?"“"+phrase(good,"nàng")+"”":""} phai bớt`,run:()=>memInvoke(v)});
+ const sec=hookQuery({k:"secret",by:"me",on:v,mir:false}).find(h=>h.str==="strong");
+ if(sec&&!A.some(a=>a&&a.n==="Lấy chuyện riêng ép nàng")){const H=BH();const o=od(H.pressBase+S.tamco/H.tcDiv);
+  A.push({n:"Lấy chuyện riêng ép nàng",o,x:`nàng nợ ngươi một ân, oán ngươi +${H.useOan} · nàng ra tay trước: ${chanceW(H.strikeCh+(sec.uses+1)*H.useStep)} · bí mật bị hủy: ${chanceW(H.lostCh+(sec.uses+1)*H.useStep)}`,
+   run:()=>{if(!roll(o)){relAdd(S,v,-H.failRel);return `${v.name} cười nhạt, không chịu khuất phục. Nàng quý ngươi -${H.failRel}.`}
+    try{const Aq=q72A("rv",v.id);if(Aq)q72DebtAdd(Aq,1)}catch(e){}const u=hookUse(sec.id)||{};memAdd(v,S,"pressed",{quiet:1});
+    return `${v.name} tái mặt, đành nhận lời. Nàng nợ ngươi một ân, oán ngươi +${H.useOan}.${u.strike?` Nhưng nàng cũng lén nắm lại chứng cứ của ngươi.`:""}${u.lost?" Sau đó nàng tìm cách xóa sạch dấu vết: bí mật không còn dùng được.":""}`}})}}catch(e){console.error("mem talk",e)}return A}}
+if(typeof talk==="function"){const k0=talk;talk=function(oi){let p=null,a=null;try{p=curPeople()[popIdx];a=p&&talkOpts(p)[oi]}catch(e){}const s0=S&&S.logSeq||0;const m0=typeof popMsg==="string"?popMsg:"";
+ const r=sup(()=>k0.apply(this,arguments));
+ try{if(off()||!p||!a||!p.ref||p.ref===S)return r;const v=p.ref;const did=(S.logSeq||0)>s0||popMsg!==m0;if(!did)return r;
+  const d=TALK2DEED[a.n];if(d&&(a.o>=100||/class="g">thành/.test(popMsg||"")))memAdd(v,S,d);
+  /* the person brings up the strongest memory (once a month per person) */
+  const C=B();const M=memS();M._rc=M._rc||{};const top=memTop(v,S);const k=mk(v);
+  if(top&&top.g>=C.recallMin&&a.n!=="Nhắc lại ân xưa"&&(M._rc[k]==null||nowW()-M._rc[k]>=C.recallCd)&&typeof popMsg==="string"&&popMsg){M._rc[k]=nowW();popMsg=`${v.name}: “${memLine(v,S,top)}” `+popMsg}}catch(e){}
+ return r}}
+
+/* ================= PERSON CARD: "Kỷ niệm" + "Ân oán chưa dứt" blocks (kitRows, via jpcf PCF_X) ================= */
+function pcfMem(e){try{if(off()||typeof kitRows!=="function")return"";const k=mk(e);if(!k||k==="me")return"";const pr=mPron(k);
+ const lab=m=>{const a=memAgo(m.w);return a[0].toUpperCase()+a.slice(1)};const theirs=memList(k,"me").map(m=>[lab(m),`${pr[0].toUpperCase()+pr.slice(1)} nhớ: ngươi đã ${phrase(m,pr)} (${memFadeWord(m)})`,m.s>0?"g":"r",m]);
+ const mine=memList("me",k).map(m=>[lab(m),`Ngươi nhớ: ${mName(k)} đã ${phrase(m,"ngươi")} (${memFadeWord(m)})`,m.s>0?"g":"r",m]);
+ const rows=theirs.concat(mine).sort((a,b)=>b[3].g-a[3].g).slice(0,4).map(r=>r.slice(0,3));
+ if(!rows.length)return"";const top=memTop(k,"me");const md=memMod(k,"me");
+ const say=top&&top.g>=B().recallMin?`<div class="kpnote">“${memLine(k,"me",top)}”</div>`:"";
+ const lean=md?[["Lòng nhớ",md>0?`ơn cũ khiến ${pr} dễ nghe ngươi hơn`:`hận cũ khiến ${pr} khó nghe ngươi hơn`,md>0?"g":"r"]]:[];
+ return `<div class="kpsec"><h4 class="kpst">Kỷ niệm</h4>${say}${kitRows(rows.concat(lean))}</div>`}catch(x){return""}}
+function pcfHook(e){try{if(off()||typeof kitRows!=="function")return"";const k=mk(e);if(!k||k==="me")return"";
+ const L=hookQuery({who:k}).filter(h=>h.by==="me"||h.on==="me");if(!L.length)return"";
+ const rows=L.slice(0,4).map(h=>[hookLabel(h),hookText(h)+(h.due!=null?` (còn ${Math.max(0,h.due-nowW())} tuần)`:""),h.by==="me"&&h.k!=="promise"?"g":h.on==="me"&&(h.k==="threat"||h.k==="debt")?"r":"n"]);
+ return `<div class="kpsec"><h4 class="kpst">Ân oán chưa dứt</h4>${kitRows(rows)}</div>`}catch(x){return""}}
+const PX=window.PCF_X=window.PCF_X||[];PX.push(pcfMem,pcfHook);
+window.pcfMem=pcfMem;window.pcfHook=pcfHook;
+})();

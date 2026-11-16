@@ -19,7 +19,7 @@ const [,,URL,SZ,OUT]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=WH.sp
  await p.mouse.click(5,5);await p.evaluate(()=>{OPT.snd=true;OPT.mute=false;OPT.sfx=.7;OPT.fxon=true;AU.unlocked=true;window.__bot=false});
  await p.waitForTimeout(800);
  const clean=async()=>p.evaluate(()=>{document.querySelectorAll(".kmov,[id^=\"kroul\"],.kroul-ov,#kpodov").forEach(e=>e.remove());try{KMQ.length=0;kmBusy=false}catch(e){}Q.length=0;const md=document.getElementById("modal");if(md)md.hidden=true;
-  const dw=document.getElementById("dawn");if(dw)dw.remove();try{kitPodiumClose(true)}catch(e){}KSFX.last={};KSFX.live.forEach(v=>{try{v.a.pause()}catch(e){}});KSFX.live=[]}).then(()=>p.waitForTimeout(250));
+  const dw=document.getElementById("dawn");if(dw)dw.remove();try{kitPodiumClose(true)}catch(e){}KSFX.last={};KSFX.rs=-1e9;KSFX.live.forEach(v=>{try{v.a.pause()}catch(e){}});KSFX.live=[]}).then(()=>p.waitForTimeout(250));
  const R=[];await p.evaluate(()=>new Promise(r=>setTimeout(r,1500)));
  /* (cards titled "Có người đến" go through the j68 event scheduler, at most one optional card per buổi: the visitor test uses another title) */
  /* step: name, expected files (all must appear), the code to run, wait ms, optional clicks */

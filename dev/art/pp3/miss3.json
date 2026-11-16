@@ -1,0 +1,194 @@
+{
+ "eventsChecked": 314,
+ "eventsPh": [],
+ "optPh": [
+  {
+   "kind": "opt",
+   "id": "Hòa giải, mỗi người một phần",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Hoàng hậu Thượng Quan Nguyệt Hoa",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Hồng Liên (cung nữ)",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Lão Lộ Tử (thái giám)",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Lão Trí Tử (thái giám)",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Liên Hoa (cung nữ thân tín)",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Phi ???",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Phi Kiều Mi Trang",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Phi Lục Lan Chi",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Quý nhân ???",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Quý nhân Tô Ngọc Dao",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Quý nhân Vân Cẩm Tú",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Quý phi ???",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Quý phi Trịnh Tú Uyển",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Răn dạy, giữ phép cung",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Tần ???",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Tần Khương Thanh Ca",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Tần Ôn Băng Tâm",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Thăng làm người thân cận",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Thử lòng bằng một tin giả",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Thường tại ???",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Thường tại Tống Tố Tâm",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Tin hắn, thưởng an lòng",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Tra xem có kẻ gây ra không",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Xử nghiêng về Hồng Liên",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Xử nghiêng về Lão Lộ Tử",
+   "tone": "light",
+   "title": ""
+  }
+ ],
+ "actsChecked": 103,
+ "actsPh": [
+  {
+   "name": "Bỏ phấn lạ",
+   "key": "",
+   "ph": "light",
+   "tone": "light",
+   "cat": "giao-thiep"
+  },
+  {
+   "name": "Mời thái y bắt mạch",
+   "key": "",
+   "ph": "light",
+   "tone": "light",
+   "cat": "giao-thiep"
+  },
+  {
+   "name": "Sang Thái y viện xin bắt mạch",
+   "key": "",
+   "ph": "light",
+   "tone": "light",
+   "cat": "di-lai"
+  },
+  {
+   "name": "Tát",
+   "key": "",
+   "ph": "light",
+   "tone": "light",
+   "cat": "giao-thiep"
+  }
+ ],
+ "errs": []
+}

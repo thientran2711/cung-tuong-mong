@@ -1,0 +1,152 @@
+{
+ "eventsChecked": 304,
+ "eventsPh": [],
+ "optPh": [
+  {
+   "kind": "opt",
+   "id": "Hoàng hậu Tống Vân Thường",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Như Ý (cung nữ)",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Phi ???",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Phi Lục Ngưng Sương",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Phi Nhan Thanh Ca",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Quý nhân ???",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Quý nhân Khương Ngọc Hành",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Quý nhân Vân Họa Mi",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Quý phi ???",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Quý phi Âu Dương Mạn Châu",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Răn dạy, giữ phép cung",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Tần ???",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Tần Đoan Mộc Mộng Điệp",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Tần Phùng Bích Dao",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Thường tại ???",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Thường tại Hàn Tú Uyển",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Thường tại Lâm Lăng Vân",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Tiểu Cát Tử (thái giám)",
+   "tone": "light",
+   "title": ""
+  },
+  {
+   "kind": "opt",
+   "id": "Tú Cầm (cung nữ thân tín)",
+   "tone": "light",
+   "title": ""
+  }
+ ],
+ "actsChecked": 103,
+ "actsPh": [
+  {
+   "name": "Bỏ phấn lạ",
+   "key": "",
+   "ph": "light",
+   "tone": "light",
+   "cat": "giao-thiep"
+  },
+  {
+   "name": "Mời thái y bắt mạch",
+   "key": "",
+   "ph": "light",
+   "tone": "light",
+   "cat": "giao-thiep"
+  },
+  {
+   "name": "Sang Thái y viện xin bắt mạch",
+   "key": "",
+   "ph": "light",
+   "tone": "light",
+   "cat": "di-lai"
+  },
+  {
+   "name": "Tát",
+   "key": "",
+   "ph": "light",
+   "tone": "light",
+   "cat": "giao-thiep"
+  }
+ ],
+ "errs": []
+}

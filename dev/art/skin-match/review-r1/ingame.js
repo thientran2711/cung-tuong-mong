@@ -1,0 +1,16 @@
+const {chromium}=require('playwright');const sleep=t=>new Promise(r=>setTimeout(r,t));
+(async()=>{const px=process.env.HTTPS_PROXY;const b=await chromium.launch(px?{proxy:{server:px,bypass:'127.0.0.1,localhost'}}:{});
+ const ctx=await b.newContext({viewport:{width:755,height:1000},deviceScaleFactor:2,hasTouch:true,isMobile:true,serviceWorkers:'block',reducedMotion:'reduce',ignoreHTTPSErrors:true});
+ const p=await ctx.newPage();p.setDefaultTimeout(240000);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
+ await p.goto('http://127.0.0.1:8765/index.html',{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof showModal==='function');await sleep(2500);
+ await p.addStyleTag({content:'#kroul{display:none!important}'});
+ await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;
+   window.__nlInner=1;for(let i=0;i<400;i++){start();if(!isSrv())break}window.__nlInner=0;quiet=false;Q.length=0;const md=document.getElementById('modal');if(md)md.hidden=true;S.th=Math.max(S.th||0,40);S.sung=Math.max(S.sung,65);render()});
+ await sleep(800);
+ const fig=process.argv[2];
+ await p.evaluate(f=>{const c={__fig:'img/'+f,__cap:'Phi tần',__role:'Quý nhân',age:26,sex:'f'};const o=[{n:'Tiếp',fx:{},x:'thân +3',go:()=>{}},{n:'Từ chối',fx:{},x:'thân -3',go:()=>{}}];
+  Q.push({t:'Có người đến',stage:[c],h:'<p>Một vị phi tần đến thăm.</p>',opts:o,must:1});showModal()},fig);
+ await p.evaluate(()=>Promise.all([...document.querySelectorAll('#modal img')].map(i=>i.complete?0:new Promise(r=>{i.onload=i.onerror=r;setTimeout(r,15000)}))));await sleep(2500);
+ await p.screenshot({path:process.argv[3]});
+ console.log('errs',JSON.stringify(errs),'imgs',await p.evaluate(()=>[...document.querySelectorAll('#modal img')].map(i=>i.src.split('/').pop()+' '+i.naturalWidth)));
+ await b.close()})().catch(e=>{console.error(e);process.exit(1)});

@@ -1,0 +1,17 @@
+# night-end r2 redraws (gpt-2-6 2k 4:3, folder ba4aecfe), name -> Magnific id
+ne-night-warm Bh4z9JOoQR
+ne-night-normal 4RuxQra9Aa
+ne-night-cold lJ8QIQugv9
+ne-night-lonely-thu LwBEoQzswO
+ne-night-lonely-xuan w4hbvkY7EI
+ne-night-lonely-ha ksDhpE416B
+ne-night-lonely-dong LwBEobcswO
+ne-dawn-xuan bxTIMkg5Y2
+ne-dawn-ha huRT2CKvqL
+ne-dawn-thu nVjysTtYQD
+ne-dawn-dong Bh4zNvvoQR
+# (unused alternatives, NOT on the game path: rgeaXzCxtc warm, cpl9S5x0eP normal — pic-dupes' ev-night2-warm/-tender are used)
+ne-night-ram-warm lJ8QkDNgv9
+ne-night-ram-normal XmPGTUwBfo
+ne-night-fest-warm LwBE5DQswO
+ne-night-fest-normal SytHroTUb8

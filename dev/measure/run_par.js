@@ -15,7 +15,9 @@ const R=path.resolve(__dirname,'../..');
   await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;const t=document.getElementById('title');if(t)t.hidden=true;try{store.set(NL_KEY,null)}catch(e){}start();try{NLP=null}catch(e){}});
   await p.waitForFunction(()=>typeof S!=='undefined'&&S&&S.name,null,{timeout:120000});
   await p.evaluate(()=>{document.querySelectorAll('#kroul,#kroulw').forEach(e=>e.remove());Q.length=0;render()});
-  await p.evaluate(fs.readFileSync(path.join(__dirname,INP||'inpage6.js'),'utf8'));
+  const IT=fs.readFileSync(path.join(__dirname,INP||'inpage6.js'),'utf8');await p.evaluate(IT);
+  /* every bot dresses (inty.js) unless the INP file already has it (mkinp.sh) or NOTY=1 */
+  if(!process.env.NOTY&&!IT.includes('__tyDress'))await p.evaluate(fs.readFileSync(path.join(__dirname,'inty.js'),'utf8'));
   let last=0;while(done<T){const n=await p.evaluate(([m])=>window.__bot.step(m,300),[mode]);
    if(n!==last){all[key]=await p.evaluate(()=>window.__res);done+=n-last;last=n;save();console.error(`page ${key} lives ${n} total ${done}/${T} ${Math.round((Date.now()-t0)/1000)}s`)}
    if(Date.now()-t0>4*3600e3)break}

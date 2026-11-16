@@ -1,7 +1,7 @@
 /* jmen UI test: old save loads, the encounter card, the stage with a man, the map with the Ngoại triều zone.
    usage: node dev/test/men.js <baseURL dir (serving _mt.html new build + _old.html build without jmen)> <W>x<H>@dpr <outdir> <tag>
    Prints per step: horizontal overflow, cut text in the card, page errors. */
-const {chromium}=require('playwright');
+const {chromium}=require('./lib/pw-roulette');
 const [,,BASE,SZ,OUT,TAG]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=WH.split('x').map(Number);
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,deviceScaleFactor:+(DPR||1),reducedMotion:'reduce'});
  const p=await ctx.newPage();p.setDefaultTimeout(300000);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));

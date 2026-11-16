@@ -3,7 +3,7 @@
    - Player: eligibility opens a window of BAL.ex.win tuần; she takes the exam with the act card «Khảo hạch tấn phong» (Hành sự, honest odds,
      Cần/Tốn). Missing the window: eligibility lapses for BAL.ex.cd[to] months. Pass: the existing decree (promoteP, edict animation, and the
      rank chest of review/gift-chest when merged). Fail: no promotion, cooldown BAL.ex.cd[to] months.
-   - Exam = 2–3 rounds of the game's existing mini-games (j82/j91 engines; quiz engine with question banks for lễ nghi / trị cung / xử án /
+   - Exam = 2–3 rounds of the game's existing mini-games (j82/j91 engines; jnwq skill games for lễ nghi / trị cung / xử án /
      Thái hậu hỏi) chosen by the target rank: low ranks lễ nghi + nữ công, middle cầm kỳ thi họa + câu đối, high trị cung + xử án + Thái hậu hỏi.
      Score = mean of rounds × BAL.ex.wPlay + two Tứ đức courses × BAL.ex.wVir + one tài nghệ × BAL.ex.wArt. The bar BAL.ex.bar[tier] moves with
      the examiner's attitude (Hoàng hậu for low/middle ranks, Thái hậu for high ranks; the other one when absent).
@@ -11,60 +11,20 @@
    - One gate for every path: promoReqP gets the exam row, so promoteP, fillSeats (j30), candOK / contests (j34), the seat board and every
      "đủ điều kiện" text read it. Son birth (j8 birthP) no longer promotes on the spot: it grants an exam at once (exGrace).
    - Owner 15/11 20:05Z (review/promo-rules): a SON's birth = direct promotion, no exam (exSonUp); a DAUGHTER's birth = an exam at once with
-     the conditions waived (exGrace(p,"f")); the servant / ma ma road's merit rises (j42 srvMonth, j14 servRanks for NPC servants, the
+     the conditions waived (exGrace(p,"f")). Owner 16/11 06:20Z (review/promo-skip): every LONG-road reward is a direct decree (exDirectUp:
+     son, Hoàng thượng side winning the reign road, jreign); ordinary promotion by conditions keeps the exam; the servant / ma ma road's merit rises (j42 srvMonth, j14 servRanks for NPC servants, the
      «Ở lại làm ma ma» choice) go through the same exam (exSrv*, below). Imperial picks (srvRise "Hoàng thượng để mắt"), story decrees
      (j97 r97rise/r97srvRk), cold-palace restore (j14) and pardon (j7/j8) stay decrees (no exam).
    - Old saves: p.ex is created on first read; a save made before this rule gets one notice line.
    State p.ex = {to, pass, cd (turn), w0/w1 (tuần, player), lapse, grace, n, last:{s,b,ok,t}, pend (player, exam in progress)}. */
 const EXK={
- le:{e:"quiz",b:"le",vir:"dung",n:"Lễ nghi",t:"Vấn lễ",how:"Ma ma Nội vụ phủ hỏi phép tắc trong cung. Chọn lời đáp đúng lễ. 5 câu, mỗi câu 10–20 giây tùy bậc; không rành thì chạm Gợi ý."},
- tc:{e:"quiz",b:"tc",vir:"hanh",n:"Trị cung",t:"Việc lục cung",how:"Giám khảo đưa việc của lục cung ra hỏi. Chọn cách xử phải nhất. 5 câu, mỗi câu 10–20 giây tùy bậc; không rành thì chạm Gợi ý."},
- xa:{e:"quiz",b:"xa",vir:"ngon",n:"Xử án",t:"Xét án trong cung",how:"Một vụ án trong cung được đem ra. Chọn cách xét đúng lẽ. 5 câu, mỗi câu 10–20 giây tùy bậc; không rành thì chạm Gợi ý."},
- thq:{e:"quiz",b:"thq",vir:"ngon",n:"Đối đáp",t:"Thái hậu hỏi",how:"Thái hậu hỏi chuyện lục cung. Chọn lời đáp đúng mực. 5 câu, mỗi câu 10–20 giây tùy bậc; không rành thì chạm Gợi ý."}};
-const EXQ={
- le:[{q:"Gặp Thái hậu giữa hành lang, phi tần phải làm gì?",a:"Đứng nép bên đường, cúi mình vấn an",w:["Đi tiếp cho kịp giờ","Gật đầu chào","Hỏi Thái hậu đi đâu"]},
-  {q:"Thỉnh an Hoàng hậu vào lúc nào?",a:"Sáng sớm, theo giờ Hoàng hậu định",w:["Lúc nào rảnh thì sang","Chiều tối trước giờ ngủ","Chỉ ngày lễ Tết"]},
-  {q:"Dâng trà lên bậc trên, tay đặt thế nào?",a:"Hai tay nâng chén, mắt nhìn xuống",w:["Một tay đưa chén","Đặt chén lên bàn rồi lui","Nhìn thẳng mà dâng"]},
-  {q:"Hoàng thượng ban thưởng, phi tần đáp lễ ra sao?",a:"Quỳ tạ ân, xưng thần thiếp",w:["Nhận rồi cất đi","Đứng nhận, cười tươi","Từ chối cho khiêm nhường"]},
-  {q:"Ngày giỗ tiên đế, trong cung phải giữ điều gì?",a:"Mặc đồ nhạt màu, không ca hát",w:["Bày yến cho vui","Cài trâm đỏ lấy may","Mở hội đánh cờ"]},
-  {q:"Đi trong cung gặp phi tần phẩm cao hơn thì sao?",a:"Nhường đường, hành lễ trước",w:["Chờ người kia chào trước","Giả như không thấy","Đi nhanh qua cho xong"]},
-  {q:"Phi tần tự xưng thế nào trước Hoàng thượng?",a:"Thần thiếp",w:["Nô tỳ","Bản cung","Ta"]},
-  {q:"Hầu yến, khi Hoàng thượng chưa động đũa thì?",a:"Ngồi ngay ngắn, chờ ngài dùng trước",w:["Ăn trước cho nóng","Gắp cho mình món ngon","Rót rượu tự uống"]},
-  {q:"Phi tần muốn về thăm nhà phải làm gì?",a:"Dâng lời xin Hoàng hậu, đợi chuẩn",w:["Tự đi rồi về sớm","Nhờ thái giám mở cửa","Sai cung nữ báo sau"]},
-  {q:"Được Hoàng thượng gọi hầu ở Dưỡng Hòa điện, việc đầu tiên?",a:"Tắm gội, thay áo, theo thái giám Kính sự phòng",w:["Đi ngay kẻo ngài đợi","Mang theo cung nữ thân tín vào điện","Sang báo Hoàng hậu trước"]}],
- tc:[{q:"Bổng lộc lục cung cuối năm bị hụt, việc đầu tiên nên làm?",a:"Đối chiếu sổ sách Nội vụ phủ",w:["Cắt bổng lộc phi tần phẩm thấp","Xin thêm bạc Hộ bộ","Bỏ qua cho êm chuyện"]},
-  {q:"Hai cung nữ cãi nhau ầm ĩ, nên xử thế nào?",a:"Gọi cả hai hỏi rõ rồi mới phạt",w:["Đánh cả hai cho sợ","Đuổi người nói to hơn","Mặc kệ cho tự hết"]},
-  {q:"Mùa đông than sưởi không đủ chia, ưu tiên ai?",a:"Thái hậu, người ốm và trẻ nhỏ trước",w:["Người phẩm cao nhất","Ai đến lấy trước","Chia đều không xét"]},
-  {q:"Kho lụa mất mấy tấm gấm, người giữ kho chối không biết. Nên?",a:"Kiểm sổ nhập xuất, hỏi người canh đêm",w:["Phạt ngay người giữ kho","Lờ đi kẻo mang tiếng","Phạt cả cung nữ quét dọn"]},
-  {q:"Thánh thọ Thái hậu sắp tới, việc chuẩn bị nên giao thế nào?",a:"Chia việc từng cục, hẹn ngày báo lại",w:["Tự tay làm hết","Giao cả cho một người","Để sát ngày mới lo"]},
-  {q:"Dịch bệnh lan ở viện cung nữ, việc trước tiên?",a:"Tách người ốm, mời thái y, đốt ngải",w:["Đóng cửa không cho ai ra","Giấu đi kẻo Hoàng thượng lo","Đuổi người ốm ra ngoài"]},
-  {q:"Phi tần mới vào cung chưa biết lễ, nên làm gì?",a:"Cử ma ma dạy lễ trong mười ngày",w:["Phạt cho nhớ","Bỏ mặc tự học","Không cho ra khỏi cung"]},
-  {q:"Thái giám thu bạc của người hầu để chia việc nhẹ. Xử thế nào?",a:"Tra rõ, trả bạc, giao Thận hình ty",w:["Nhận phần chia cho êm","Đổi việc cho hắn","Chỉ nhắc nhở"]},
-  {q:"Yến Trung thu, chỗ ngồi các phi tần xếp theo gì?",a:"Theo phẩm vị, cùng phẩm theo ngày sắc phong",w:["Theo tuổi","Ai được sủng ngồi gần","Bốc thăm"]},
-  {q:"Cung điện cũ dột nát, bạc sửa chưa đủ. Nên?",a:"Sửa chỗ hỏng nặng trước, tâu xin phần còn lại",w:["Bỏ đó không sửa","Bắt phi tần ở đó tự bỏ bạc","Dời người sang lãnh cung"]}],
- xa:[{q:"Cung nữ bị tố trộm trâm, chỉ có một người làm chứng. Nên?",a:"Tìm thêm chứng, khám nơi cất giấu",w:["Phạt ngay theo lời chứng","Tha vì chỉ có một người","Hỏi qua loa rồi thôi"]},
-  {q:"Hai người cùng khai, lời lệch nhau về giờ giấc. Nên?",a:"Hỏi riêng từng người, đối chiếu sổ trực",w:["Tin người phẩm cao","Phạt cả hai","Cho hai người cãi trước mặt"]},
-  {q:"Thuốc của phi tần có độc, người sắc thuốc đã chết. Nên?",a:"Tra nguồn thuốc ở Thái y viện và người đưa thuốc",w:["Kết án người sắc thuốc rồi thôi","Đổ cho phi tần tự hại","Giấu đi cho êm"]},
-  {q:"Người tố cáo lại là người được lợi nhất nếu kẻ bị tố ngã. Nên?",a:"Xét kỹ cả lời người tố",w:["Tin ngay vì đã đứng ra tố","Phạt người tố","Bỏ vụ án"]},
-  {q:"Chứng cứ là một bức thư không ký tên. Nên?",a:"So nét chữ, giấy mực, hỏi người chuyển thư",w:["Coi là đủ chứng","Đốt đi","Đọc trước cả cung"]},
-  {q:"Kẻ bị tố quỳ khóc kêu oan, không còn chứng nào khác. Nên?",a:"Chưa kết án, giam lỏng chờ tra thêm",w:["Tha ngay cho nhân từ","Phạt nặng vì khóc là có tật","Giao cho người tố tự xử"]},
-  {q:"Một thái giám nhận tội quá nhanh, lời khai trơn tru. Nên?",a:"Ngờ có người sai khiến, tra thêm",w:["Kết án ngay","Thưởng vì thành thật","Đổi hắn sang cung khác"]},
-  {q:"Cung nữ phạm lỗi nhỏ lần đầu, nên phạt thế nào?",a:"Phạt nhẹ, ghi sổ, răn lần sau",w:["Đánh ba mươi trượng","Đuổi khỏi cung","Bỏ qua không ghi"]},
-  {q:"Vụ án dính đến người nhà của chính mình. Nên?",a:"Tâu xin người khác xét cho công bằng",w:["Tự xét cho nhanh","Bỏ vụ án","Xét nhẹ tay"]},
-  {q:"Vật chứng tìm thấy trong phòng mà ai cũng ra vào được. Nên?",a:"Tra xem ai vào phòng hôm ấy",w:["Kết tội chủ phòng","Bỏ vật chứng","Phạt cả cung"]}],
- thq:[{q:"«Lục cung đông người, ngươi lấy gì giữ yên?»",a:"Lấy công bằng làm gốc, lấy khoan dung giữ lòng người",w:["Lấy uy mà trị","Mặc họ tự lo","Việc gì cũng tâu Hoàng thượng"]},
-  {q:"«Nếu Hoàng thượng sủng một người quá mức, ngươi làm sao?»",a:"Nhẹ lời khuyên ngài, chăm lo các cung khác",w:["Tìm cách hạ người ấy","Giận dỗi với ngài","Không nói gì"]},
-  {q:"«Ai gia già rồi, ngươi định hiếu thuận thế nào?»",a:"Sớm tối vấn an, thuốc thang tự tay dâng",w:["Sai người hầu lo","Dâng nhiều vàng bạc","Đợi Thái hậu gọi mới đến"]},
-  {q:"«Hoàng tự nhỏ dại phạm lỗi, ngươi dạy ra sao?»",a:"Dạy bằng lời phải, nghiêm mà không ác",w:["Đánh cho nhớ","Chiều cho vui","Để thầy lo hết"]},
-  {q:"«Nhà mẹ đẻ ngươi xin chức, ngươi tính sao?»",a:"Việc triều chính thần thiếp không dám xen",w:["Xin Hoàng thượng ngay","Lén nhờ quan quen","Nài ngài đồng ý"]},
-  {q:"«Phi tần cũ thất sủng, ngươi đối đãi thế nào?»",a:"Vẫn giữ lễ, cấp đủ bổng lộc",w:["Cắt bớt cho đỡ tốn","Không đoái hoài","Đưa vào lãnh cung"]},
-  {q:"«Ngày Tết, việc trước nhất của chủ lục cung là gì?»",a:"Dâng lễ tông miếu, vấn an Thái hậu",w:["Bày yến cho mình","Ban thưởng người thân tín","Nghỉ ngơi cho khỏe"]},
-  {q:"«Người hầu thân tín của ngươi phạm lỗi, ngươi xử sao?»",a:"Xử như người khác, không thiên vị",w:["Che giấu cho nàng","Đuổi ngay không hỏi","Đổ cho người khác"]},
-  {q:"«Ngươi biết chữ, đọc sách gì cho phải đạo?»",a:"Nữ huấn, Nữ giới và sử sách người xưa",w:["Truyện tình","Binh thư","Sách bói"]},
-  {q:"«Hoàng thượng giận một đại thần, hỏi ý ngươi. Ngươi đáp?»",a:"Xin ngài nguôi giận rồi hãy xét",w:["Xin chém ngay","Bênh đại thần","Kể thêm lỗi của đại thần"]}]};
-/* the quiz engine (j82) reads these banks; the kinds join KG82_KIND (they are not festival contest subjects: j71 SC7 is unchanged) */
-(function(){if(typeof KG82_KIND==="undefined")return;for(const k in EXK)if(!KG82_KIND[k])KG82_KIND[k]=EXK[k];
- if(typeof kg82Bank!=="function")return;const b0=kg82Bank;kg82Bank=function(b){if(EXQ[b])return kg82Shuf(EXQ[b]).slice(0,5).map(x=>({l:"Câu hỏi",q:x.q,a:x.a,w:kg82Shuf(x.w).slice(0,3)}));return b0.apply(this,arguments)}})();
+ le:{e:"lay",vir:"dung",n:"Lễ nghi",t:"Bày lễ",how:"Ma ma Nội vụ phủ bày một bàn lễ làm mẫu. Kéo từng vật đến đúng chỗ như mẫu. Chưa rõ thì chạm Gợi ý."},
+ tc:{e:"sort",vir:"hanh",n:"Trị cung",t:"Phân kho",how:"Hàng hóa của lục cung về kho. Kéo từng món vào kho có hàng mẫu cùng loại. Chưa rõ thì chạm Gợi ý."},
+ xa:{e:"clue",vir:"ngon",n:"Xử án",t:"Khám vật chứng",how:"Vụ án để lại vật chứng. Chạm vào người có áo và vật mang theo khớp vật chứng. Chưa rõ thì chạm Gợi ý."},
+ thq:{e:"seat",vir:"ngon",n:"Thái hậu hỏi",t:"Xếp chỗ ngồi yến",how:"Thái hậu bảo xếp chỗ ngồi yến. Nhiều ngọc ghim là phẩm cao, ngồi gần Thái hậu. Kéo từng người vào ghế. Chưa rõ thì chạm Gợi ý."}};
+/* family C (owner 16/11 07:20Z, no word games): the exam games are skill games of jnwq (lay / sort / clue / seat); no question banks remain.
+   The kinds join KG82_KIND (they are not festival contest subjects: j71 SC7 is unchanged) */
+(function(){if(typeof KG82_KIND==="undefined")return;for(const k in EXK)if(!KG82_KIND[k])KG82_KIND[k]=EXK[k]})();
 
 /* ---------- rules (numbers in BAL.ex, jbal2) ---------- */
 const EX_VIR=[["cong","dung"],["dung","ngon"],["ngon","hanh"]];
@@ -125,11 +85,65 @@ function exRow(p){const e=exS(p),to=e.to,rk=exRk(to);if(e.pass)return[true,`Đã
  try{if(exOn()&&p&&rkOf(p)<7&&!p.out&&!exSrv(p))L.push(exRow(p))}catch(e){console.error("exam row",e)}return L}})();
 
 /* ---------- births (owner 20:05Z): a son = a decree on the spot (no exam); a daughter = an exam at once, the conditions waived ---------- */
-function exSonUp(p){const me=p===S;if(rkOf(p)>=6||p.out)return"";if(me)S.rank++;else p.rank++;p.lastPromo=S.turn;if(p.ex)p.ex={to:rkOf(p)+1};
- return me?`<b class="g">Thánh chỉ: mừng hoàng tử, tấn phong ${S.name} làm ${RANKS[S.rank].n}</b> (không qua khảo hạch). `:`${p.name} được tấn phong ${RANKS[p.rank].n} (mừng hoàng tử). `}
+/* owner 16/11 06:20Z (review/promo-skip): a reward that ends a LONG road (a son's birth, the Hoàng thượng side winning the reign road)
+   is a decree on the spot, no exam: one helper for every such road. Never past Hoàng quý phi (the Hoàng hậu seat keeps its own rules),
+   never from lãnh cung. o.fx: jealousy + the promote feedback (the son's birth does its own). */
+function exDirectUp(p,why,o){o=o||{};const me=p===S;if(!p||rkOf(p)>=6||p.out)return"";if(me)S.rank++;else p.rank++;p.lastPromo=S.turn;if(p.ex)p.ex={to:rkOf(p)+1};
+ if(me){exDrop();if(o.fx){try{ghenAll(BAL.psk?BAL.psk.ghen:10)}catch(e){}try{feedback("promote",{t:"Tấn phong"})}catch(e){}}}
+ return me?`<b class="g">Thánh chỉ: ${why}, tấn phong ${S.name} làm ${RANKS[S.rank].n}</b> (không qua khảo hạch). `:`${p.name} được tấn phong ${RANKS[p.rank].n} (${why}). `}
+function exSonUp(p){return exDirectUp(p,"mừng hoàng tử")}
+/* the ONE player text of these rules (j6 / jtabs help lines, the «Khảo hạch tấn phong» gloss): reads PROMO_SRC, never typed per place */
+function promoRuleTxt(){const d=k=>PROMO_SRC[k]==="direct";return `Sinh hoàng tử đầu lòng: ${d("son1")?"tấn phong ngay, không phải thi":"được ân thi ngay"}; hoàng tử sau và công chúa: được ân thi ngay, không cần đủ điều kiện. Phe mình thắng cuộc triều cục: tấn phong thẳng, không qua khảo hạch. Ghế trên đã đủ người thì được hậu thưởng thay, muốn lên vẫn phải thi như mọi người.`}
+/* ONE hook for every long-road promotion reward (owner 16/11 06:45Z + 07:15Z). PROMO_SRC = the switch per source: "direct" rank, "grace" =
+   an exam at once with the conditions waived, "none" = no rank. son1 = that mother's FIRST prince; later sons and every princess = grace.
+   Faction road: every winning side = direct (07:15Z). Seats (j30 SEATCAP) still apply: a direct reward that meets a full seat becomes
+   a large one-off compensation (promoFullSeat, owner 07:20Z). EVERY reward has a gain AND a loss (owner 07:15Z): the loss per source is promoCost, numbers BAL.psk (jbal2). */
+const PROMO_SRC={son1:"direct",son:"grace",dau:"grace",emp:"direct",th:"direct",quyen:"direct"};
+const PROMO_WHY={son1:"mừng hoàng tử",emp:"phò tá có công",th:"Thái hậu tâu xin",quyen:"triều thần dâng sớ tiến cử"};
+function promoReward(p,src,o){o=o||{};const m=PROMO_SRC[src]||"none";if(m==="none"||!p||rkOf(p)>=6||p.out)return"";
+ if(m==="grace")return typeof exGrace==="function"?exGrace(p,src==="dau"?"f":"m"):"";
+ const nx=rkOf(p)+1;const r=(typeof seatFree==="function"&&!seatFree(nx))?promoFullSeat(p,src,o):exDirectUp(p,o.why||PROMO_WHY[src]||"ân điển",o);
+ return r?r+promoCost(p,src):""}
+/* the loss that comes with each reward (owner 07:15Z); same rule for an NPC (her rivals feel it the same way) */
+function promoCost(p,src){const B=BAL.psk,me=p===S;let t="";try{
+ if(src==="son1"){const q=typeof queenP==="function"?queenP():null;if(q&&q!==p)oanAdd(q,p,B.son1.hhOan);
+  let n=0;for(const v of liveRivals(true))if(v!==p&&v!==q&&!v.out&&typeof sonsOf==="function"&&sonsOf(v).length){oanAdd(v,p,B.son1.momOan);n++}
+  if(p!==S&&S!==q&&!S.out&&typeof sonsOf==="function"&&sonsOf(S).length)oanAdd(S,p,B.son1.momOan);
+  if(me)t=`Hoàng hậu${n?` và ${n} vị có hoàng tử`:""} thấy ngươi thành mối lo (oán ngươi +${B.son1.hhOan}${n?`, +${B.son1.momOan}`:""}). `}
+ else if(src==="emp"){if(me)apply({th:-B.emp.th});let n=0;
+  for(const v of liveRivals(true)){const s=typeof rgSideOf==="function"?rgSideOf(v):null;if(s&&s!=="emp"){oanAdd(v,p,B.emp.oan);n++}}
+  if(me)t=`Thái hậu lạnh nhạt (Thái hậu quý ngươi −${B.emp.th}); ${n?`${n} phi tần phe thua`:"phe thua"} để bụng ngươi (oán +${B.emp.oan}). `}
+ else if(src==="th"){if(me){apply({sung:-B.th.sung});S.psErr={n:B.th.errN,at:wk()+B.th.errAt};
+  t=`Bệ hạ coi ngươi là người của Thái hậu (Sủng −${B.th.sung}); Thái hậu sẽ còn sai ngươi làm việc (${B.th.errN} việc nhờ). `}}
+ else if(src==="quyen"){if(me){apply({danh:-B.quyen.danh});S.psStrike={at:S.turn+B.quyen.after,p:B.quyen.p,n:0};
+  t=`Thiên hạ chê ngươi dựa thế nhà quyền thần (Danh −${B.quyen.danh}); bệ hạ lớn lên rồi, e có ngày tính sổ. `}}
+ }catch(e){console.error("promoCost",e)}return t}
+/* full seat (owner 07:20Z, replaces «Ân chỉ chờ phong»): a LARGE one-off compensation instead of the rank — big silver, rare gifts (Hoàng
+   thượng's bestow), an honorific name character (phong hiệu, no rank change; silver instead if she already has one), an office / favour for her
+   family (house power). Loss: the other consorts' jealousy. Her rank stays; the next one goes through the normal exam. Numbers BAL.psk.seat. */
+function promoFullSeat(p,src,o){const B=BAL.psk.seat,me=p===S,to=rkOf(p)+1,rk=RANKS[to].n;const parts=[];
+ let bac=Math.round(B.bacM*(BAL.pay[Math.min(7,to)]||100));let hieu="";if(!p.hieu){const used=[S.hieu].concat(rivals.map(v=>v.hieu));const f=(typeof TITLES!=="undefined"?TITLES:[]).filter(x=>!used.includes(x));if(f.length){hieu=pick(f);p.hieu=hieu}}
+ if(!hieu)bac+=B.hieuBac;ap(p,{bac,danh:B.danh});parts.push(`Bạc +${bac}`);if(hieu)parts.push(`phong hiệu «${hieu}»`);
+ for(let i=0;i<B.gifts;i++)try{bestow(p,"promo")}catch(e){}if(B.gifts)parts.push(`${B.gifts} món ngự ban`);
+ try{const c=clanOf(p);if(c&&typeof tdPowAdd==="function"&&typeof CLANS!=="undefined"&&CLANS.includes(c))tdPowAdd(c,B.pow);if(me)S.dad=cl((S.dad||40)+B.dad,0,100)}catch(e){}parts.push("nhà ngoại được ân");
+ let cost="";if(me){ghenAll(B.ghen);cost=`Lục cung ghen với ngươi (ghen +${B.ghen}). `}else{for(const v of consorts())if(v!==p&&!v.out)oanAdd(v,p,B.oan)}
+ const t=me?`<b class="g">Ghế ${rk} đã đủ người</b>: Hoàng thượng ban hậu thưởng thay cho tấn phong: ${parts.join(", ")}. Muốn lên ${rk} vẫn phải qua khảo hạch như mọi người. ${cost}`
+  :`${p.name} được hậu thưởng (ghế ${rk} đã đủ người). `;
+ if(!me)try{newsAdd(p,"promo",t,true)}catch(e){}return t}
+/* monthly: the Thái hậu errands and the quyền thần strike-back (BAL.psk) */
+function promoMonth(){let ev="";try{const B=BAL.psk;
+ const E=S.psErr;if(E&&!S.dead&&!S.out&&!S.thDead&&wk()>=E.at&&typeof q72CanOffer==="function"&&q72CanOffer()&&!(typeof evBusy==="function"&&evBusy())){
+  /* a Thái hậu errand (j72 việc nhờ, requester Thái hậu): the first template of hers that can be built now */
+  const A=typeof q72A==="function"?q72A("th"):null;const L=(typeof T72!=="undefined"?T72:[]).filter(T=>T.r==="th"&&!T.fu);let x=null;
+  for(const T of L.sort(()=>Math.random()-.5)){try{x=A&&q72Make(T,A)}catch(e){x=null}if(x)break}
+  if(x){q72Offer(x,"");E.n--;E.at=wk()+B.th.errGap;if(E.n<=0)S.psErr=null}}
+ const k=S.psStrike;if(k&&!S.dead&&S.turn>=k.at&&!S.empDead){if(k.n>=B.quyen.max){S.psStrike=null}else if(roll(k.p)){k.n++;S.psStrike=null;
+  apply({sung:-B.quyen.hitSung,danh:-B.quyen.hitDanh});log(`<span class="r">Bệ hạ đã lớn, nhớ chuyện cũ nhà quyền thần tiến cử ngươi</span>: Sủng −${B.quyen.hitSung}, Danh −${B.quyen.hitDanh}.`)}}
+ }catch(e){console.error("promoMonth",e)}return ev}
+(function(){if(typeof rivalsMonth!=="function")return;const r0=rivalsMonth;rivalsMonth=function(){const a=promoMonth();return a+(r0.apply(this,arguments)||"")}})();
 function exGrace(p,sex){const e=exS(p);e.grace=e.to;e.gw=sex==="f"?"f":"m";e.cd=0;e.lapse=0;const me=p===S;const why=exGw(e);
  return me?`${why[0].toUpperCase()+why.slice(1)}: Hoàng thượng ân cho ngươi dự khảo hạch tấn phong ${exRk(e.to)} ngay, không cần đủ điều kiện. `:`${p.name} được ân dự khảo hạch tấn phong ${exRk(e.to)} (${why}). `}
-function exGraceUp(p){const me=p===S;const why=exGw(p.ex);if(me)S.rank++;else p.rank++;p.lastPromo=S.turn;if(me){try{ghenAll(10)}catch(e){}try{feedback("promote",{t:"Tấn phong"})}catch(e){}}
+function exGraceUp(p){const me=p===S;const why=exGw(p.ex);if(me)S.rank++;else p.rank++;p.lastPromo=S.turn;if(me){try{ghenAll(BAL.psk?BAL.psk.ghen:10)}catch(e){}try{feedback("promote",{t:"Tấn phong"})}catch(e){}}
  const t=me?`<b class="g">Thánh chỉ: tấn phong ${S.name} làm ${RANKS[S.rank].n}.</b> Lý do: ân điển ${why}, đã đỗ khảo hạch. `:`${p.name} được tấn phong ${RANKS[p.rank].n}. Lý do: ân điển ${why}, đã đỗ khảo hạch. `;
  if(!me)try{newsAdd(p,"promo",t,true)}catch(e){}return t}
 
@@ -145,7 +159,7 @@ function exDone(p,r){const e=exS(p),to=e.to,rk=exRk(to),me=p===S;e.n=(e.n||0)+1;
 /* NPCs sit the exam when the month's decree would look at them (rivalsMonth → promoteP); a son's grace raises the rank once passed */
 (function(){if(typeof promoteP!=="function")return;const p0=promoteP;promoteP=function(p){
  try{if(exOn()&&p&&rkOf(p)<7&&!exSrv(p)){const e=exS(p);if(p!==S&&exCanSit(p))exDone(p,exSim(p));
-   if(e.pass&&e.grace===e.to&&rkOf(p)<6&&!p.out&&!p.confined)return exGraceUp(p)}}catch(x){console.error("exam",x)}
+   if(e.pass&&e.grace===e.to&&rkOf(p)<6&&!p.out&&!p.confined&&(typeof seatFree!=="function"||seatFree(rkOf(p)+1)))return exGraceUp(p)/* seats still apply (owner 06:45Z): a full seat waits */}}catch(x){console.error("exam",x)}
  return p0.apply(this,arguments)}})();
 
 /* ---------- her window: opens when she becomes eligible, lapses when it runs out ---------- */
@@ -191,13 +205,13 @@ function exRun(P,e,done){e.pend={raws:[]};const raws=e.pend.raws;let i=0;const n
    `<div class="kg82act"><button class="${kg82Btn()}" id="kg82go">Bắt đầu thi</button><button class="${kg82Btn(true)}" id="kg82skip">Để tài nghệ quyết định<small>môn này tính ${SK}/10, như người cùng bậc</small></button></div>`;
   $("kg82go").onclick=()=>kg82Play(k,raw=>after(raw,false));$("kg82skip").onclick=()=>after(SK,true)};
  const after=(raw,sk)=>{raws.push(raw);i++;const last=i>=n;try{save()}catch(x){}
-  kg82ShowRes(kg82Rows([[`Môn ${i}`,`${raw}/10 · ${kg82Word(raw)}${sk?" (để tài nghệ quyết định)":""}`,"t"]])+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82ok">${last?"Xem kết quả":"Môn kế tiếp"}</button></div>`);
+  kg82ShowRes(kg82Rows([[`Môn ${i}`,`${raw}/10 · ${kg82Word(raw)}${sk?" (để tài nghệ quyết định)":""}`,"t"]])+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82ok">${last?"Xem kết quả":"Môn kế tiếp"}</button></div>`,raw>=5);
   kg82Set("score",`${raw}/10`);kg82Set("round",`${i}/${n}`);$("kg82ok").onclick=()=>{if(last)result();else round()}};
  const result=()=>{const sc=exScore(P,raws);const r=Object.assign(sc,{P,raws});
   kg82Open({art:"Khảo hạch",round:"Môn",pic:kg82Pic(P.rounds[P.rounds.length-1]||"tho"),title:`Kết quả · ${P.rk}`,how:"Tổng phần = phần thi các môn + Tứ đức + tài nghệ. Đạt mức đỗ của giám khảo thì đỗ."});
   const parts=[["Các môn",raws.map((x,j)=>`${KG82_KIND[P.rounds[j]].n} ${x}/10`).join(" · ")],[`Phần thi (trung bình ${String(sc.avg).replace(".",",")} × ${BAL.ex.wPlay})`,`+${sc.play}`],[`Tứ đức (${P.virL})`,`+${P.vir}`],[P.artL,`+${P.art}`],["Mức đỗ","cần "+exBarTxt(P)]];
   const note=sc.pass?`Đỗ. ${P.passTxt}`:`Trượt. Chờ ${P.cdN} tháng mới được thi lại.`;
-  kg82ShowRes(kitGameResult({parts,total:`${sc.total} phần · cần ${P.bar}`,note})+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82ok">Đã hiểu</button></div>`);
+  kg82ShowRes(kitGameResult({parts,total:`${sc.total} phần · cần ${P.bar}`,note})+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82ok">Đã hiểu</button></div>`,P.srv?!!sc.pass:null);/* final: player exam = null (exDone plays examPass / examFail); servant exam has no exDone sound, so the panel plays it */
   kg82Set("score",String(sc.total));kg82Set("round",`${n}/${n}`);kg82Set("time","đã hết");try{$("kg82ok").scrollIntoView({block:"nearest"})}catch(x){}
   $("kg82ok").onclick=()=>{e.pend=null;kg82Close();done(r);try{save()}catch(x){}render()}};
  round()}
@@ -268,7 +282,7 @@ function exChips(){if(!exOn()||S.rank>=7||S.out)return"";const e=exS(S);const L=
  if(e.last&&!e.pass)L.push(["n",`Lần trước: ${e.last.s}/${e.last.b} phần`]);
  return L.map(([c,t])=>kitChip(t,c)).join(" ")}  /* kit status chips (KIT kitChip(text,"g"|"r"|"n")) */
 if(typeof KIT_GLOSS!=="undefined")KIT_GLOSS["Khảo hạch tấn phong"]="";
-(function(){const t=()=>{try{const B=BAL.ex;KIT_GLOSS["Khảo hạch tấn phong"]=`Đủ điều kiện sắc phong chỉ là được thi. Từ lúc đủ, ngươi có ${B.win} tuần để dự khảo hạch (thẻ ở Hành sự); lỡ hạn thì chờ như trượt. Phẩm thấp thi lễ nghi và nữ công; phẩm giữa thi cầm kỳ thi họa và câu đối; phẩm cao thi trị cung, xử án và đối đáp với Thái hậu. Tổng phần = phần thi các môn (mỗi môn 0–10, lấy trung bình nhân ${B.wPlay}) + Tứ đức + tài nghệ; giám khảo (Hoàng hậu, phẩm cao: Thái hậu) quý ngươi thì hạ mức đỗ, ghét thì nâng. Trượt: chờ ${B.cd[1]}–${B.cd[7]} tháng (phẩm càng cao càng lâu). Phi tần khác cũng thi như vậy. Sinh hoàng tử: tấn phong ngay, không phải thi. Sinh công chúa: được ân thi ngay, không cần đủ điều kiện. Cung nữ lên bậc cũng phải qua khảo hạch của Nội vụ phủ.`}catch(e){}};
+(function(){const t=()=>{try{const B=BAL.ex;KIT_GLOSS["Khảo hạch tấn phong"]=`Đủ điều kiện sắc phong chỉ là được thi. Từ lúc đủ, ngươi có ${B.win} tuần để dự khảo hạch (thẻ ở Hành sự); lỡ hạn thì chờ như trượt. Phẩm thấp thi lễ nghi và nữ công; phẩm giữa thi cầm kỳ thi họa và câu đối; phẩm cao thi trị cung, xử án và đối đáp với Thái hậu. Tổng phần = phần thi các môn (mỗi môn 0–10, lấy trung bình nhân ${B.wPlay}) + Tứ đức + tài nghệ; giám khảo (Hoàng hậu, phẩm cao: Thái hậu) quý ngươi thì hạ mức đỗ, ghét thì nâng. Trượt: chờ ${B.cd[1]}–${B.cd[7]} tháng (phẩm càng cao càng lâu). Phi tần khác cũng thi như vậy. ${promoRuleTxt()} Cung nữ lên bậc cũng phải qua khảo hạch của Nội vụ phủ.`}catch(e){}};
  if(typeof renderPanel0==="function"){const r0=renderPanel0;renderPanel0=function(){t();return r0.apply(this,arguments)}}})();
-window.exSrvPlan=exSrvPlan;window.exSrvGate=exSrvGate;window.exSrvNpc=exSrvNpc;window.exSrvS=exSrvS;window.exSrvStart=exSrvStart;window.exSrvMama=exSrvMama;window.exSonUp=exSonUp;window.exGrace=exGrace;
+window.exSrvPlan=exSrvPlan;window.exSrvGate=exSrvGate;window.exSrvNpc=exSrvNpc;window.exSrvS=exSrvS;window.exSrvStart=exSrvStart;window.exSrvMama=exSrvMama;window.exSonUp=exSonUp;window.exDirectUp=exDirectUp;window.promoRuleTxt=promoRuleTxt;window.promoReward=promoReward;window.promoFullSeat=promoFullSeat;window.PROMO_SRC=PROMO_SRC;window.exGrace=exGrace;
 window.exPlan=exPlan;window.exChance=exChance;window.exSim=exSim;window.exElig=exElig;window.exS=exS;window.exTick=exTick;window.exStart=exStart;

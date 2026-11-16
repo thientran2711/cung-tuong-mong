@@ -1,7 +1,7 @@
 /* review/servant-system (owner 16/11): her WHOLE household stands on her room stage (KIT 33.7 slots, pages "+N"/"‹", her once)
    and each servant's card has the maid's acts + the Cung nhân acts. usage: node dev/test/house-stage.js <url> <WxH@dpr> <outdir> <tag>
    Prints JSON {pages, ck[]}; shots <outdir>/<tag>-<WxH>-p<n>.jpg and -card.jpg (SHOTS=0: none). Pictures via the session proxy. */
-const {chromium}=require('playwright');const fs=require('fs');const [,,URL,VP,OUT,TAG]=process.argv;
+const {chromium}=require('./lib/pw-roulette');const fs=require('fs');const [,,URL,VP,OUT,TAG]=process.argv;
 const m=/^(\d+)x(\d+)@([\d.]+)$/.exec(VP);const W=+m[1],H=+m[2],DPR=+m[3];fs.mkdirSync(OUT,{recursive:true});const sleep=t=>new Promise(r=>setTimeout(r,t));
 (async()=>{const px=process.env.HTTPS_PROXY;const b=await chromium.launch(Object.assign({args:['--disable-dev-shm-usage']},px?{proxy:{server:px,bypass:'127.0.0.1,localhost'}}:{}));
  const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:DPR,hasTouch:true,isMobile:W<1000,serviceWorkers:'block',ignoreHTTPSErrors:true});

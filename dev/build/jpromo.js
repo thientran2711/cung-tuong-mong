@@ -13,13 +13,14 @@
    Nội vụ phủ assigns the new one FREE (prStaff: pool candidate, new face, or moved from the lowest household — faces stay unique). Servant road ranks get no servant (nobody serves a cung nữ): chest only.
    NPC consorts: the same set + servant, data only (no screens), on the co-op host only (world agency, jcoopworld mute rule).
    Old saves: the rank seen so far is set silently on load (no chest for the past). State S.prSeen = {r: consort rank | null, s: servant rank}.
-   Missing art (listed in dev/PROGRESS_review-promo-rules.md, not blocking): per-rank Đeo eo pendants, per-rank Đeo tay bangles for the
-   middle ranks, per-rank Túi thơm. */
+   Per-rank Đeo eo / Đeo tay / Túi thơm pictures (D45 small-art) are wired: BAL.promo.waist / wrist / scent, items in jinv RANKED_*. */
 window.PROMO_SET=1;
 Object.assign(BAL,{promo:{
  /* [maids incl. her own personal maid, eunuchs] per consort rank 0..7: one more servant at every rank */
  cap:[[1,1],[2,1],[2,2],[3,2],[3,3],[4,3],[4,4],[5,4]],
- wrist:["vongngoc","vongngoc","vongngoc","vongngoc","vongngoc","vongvang","vongvang","vongvang"],scent:"tuithom",
+ wrist:["vongngoc","vongngoc_r1","vongngoc_r2","vongngoc_r3","vongngoc_r4","vongvang","vongvang","vongvang"],
+ waist:["ngocboi_r0","ngocboi_r1","ngocboi_r2","ngocboi_r3","ngocboi_r4","ngocboi_r5","ngocboi_r6","ngocboi_r7"],
+ scent:["tuithom","tuithom_r1","tuithom_r2","tuithom_r3","tuithom_r4","tuithom_r5","tuithom_r6","tuithom_r7"],
  extra:[[["luahang",1],["tragoi",1],["banhtrai",1]],
   [["luahang",1],["tragoi",1],["banhtrai",1],["ruoucuc",1]],
   [["luahang",2],["tragoi",1],["banhtrai",1],["ruoucuc",1]],
@@ -30,7 +31,7 @@ Object.assign(BAL,{promo:{
   [["gamvang",1],["gamto",1],["trahop",2],["traicay",1],["ruoucuc",2],["yensao",1],["nhansam",1]]],
  /* servant road: index = SRK.maid rank 1..4, 5 = ma ma; "wd:" = a WD garment / pin */
  srv:[[],[["vaibong",1],["banhtrai",1]],[["wd:y_luamoc",1],["wd:tram_dong",1],["vaibong",1],["tragoi",1],["banhtrai",1]],
-  [["luahang",1],["tragoi",1],["traicay",1],["tuithom",1]],[["luahang",2],["trahop",1],["traicay",1],["ruoucuc",1]],[["luahang",1],["trahop",1],["traicay",1],["ruoucuc",1]]]}});
+  [["wd:y_chuongsu",1],["luahang",1],["tragoi",1],["traicay",1],["tuithom",1]],[["wd:y_nuquan",1],["luahang",2],["trahop",1],["traicay",1],["ruoucuc",1]],[["wd:y_mama",1],["luahang",1],["trahop",1],["traicay",1],["ruoucuc",1]]]}});
 /* ---------- staff capacity: one more servant at every rank ---------- */
 /* HER household only: NPC households keep j10's caps, so the palace's servant count (bounded by the unique face pool) stays as it was */
 (function(){if(typeof capOf!=="function")return;const c0=capOf;capOf=function(p){try{const C=BAL.promo&&BAL.promo.cap;if(C&&p===S&&!(typeof isSrv==="function"&&isSrv()))return C[Math.max(0,Math.min(7,rkOf(p)))].slice()}catch(e){}return c0.apply(this,arguments)}})();
@@ -40,7 +41,7 @@ function prRankName(r){return r>=7?"Hoàng hậu":RANKS[Math.max(0,Math.min(7,r)
 function prSetFor(r){r=Math.max(0,Math.min(7,r|0));const P=Math.min(8,r+1);const L=[];let y=null,t=null;
  try{y=wdPickAt(P,"y",1)||wdPickAt(P,"y",0);const col=y&&WD_ITEMS[y]?WD_ITEMS[y].col:null;const T=WD_LIST.filter(x=>x[1]==="tram"&&x[3]===P&&x[4]!==4);
   const m=T.filter(x=>x[5]===col);const pk=m.length?pick(m):T.length?pick(T):null;t=pk?pk[0]:null}catch(e){}
- if(y)L.push([y,1,"wd"]);if(t)L.push([t,1,"wd"]);const B=BAL.promo;const w=B.wrist[r];if(w&&IT[w])L.push([w,1,"it"]);if(B.scent&&IT[B.scent])L.push([B.scent,1,"it"]);
+ if(y)L.push([y,1,"wd"]);if(t)L.push([t,1,"wd"]);const B=BAL.promo;const w=B.wrist[r];if(w&&IT[w])L.push([w,1,"it"]);const wa=B.waist&&B.waist[r];if(wa&&IT[wa])L.push([wa,1,"it"]);const sc=Array.isArray(B.scent)?B.scent[r]:B.scent;if(sc&&IT[sc])L.push([sc,1,"it"]);
  for(const [k,n] of B.extra[r]||[])if(IT[k])L.push([k,n,"it"]);return L}
 function prSrvSetFor(i){const L=[];for(const [k0,n] of (BAL.promo.srv[i]||[])){const wd=/^wd:/.test(k0),k=k0.replace(/^wd:/,"");if(wd?(typeof WD_ITEMS==="object"&&WD_ITEMS[k]):IT[k])L.push([k,n,wd?"wd":"it"])}return L}
 /* give the set to p (data); returns the new inventory entries */
@@ -106,21 +107,20 @@ function prNpcScan(){if(!S||!prHostOK())return;for(const v of (typeof rivals!=="
 (function(){const st=document.createElement("style");st.textContent=`
 .kprev{display:flex;flex-direction:column;align-items:center;gap:6px;width:100%;max-width:560px;height:min(100dvh - 24px,920px);padding:0 16px;box-sizing:border-box}
 .kprev-h{flex:none}
-.kprev-fig{position:relative;flex:1 1 auto;min-height:180px;width:100%;overflow:visible;animation:kmFade .5s ease .1s both}
+.kprev-fig{position:relative;flex:1 1 auto;min-height:180px;width:100%;overflow:visible;animation:kmFade calc(.5s*var(--pace)) ease calc(.1s*var(--pace)) both}
 /* soft light BEHIND the figure = painted KIT §68 "orb" (frame 3), warmed; never over the face (a screen-blend clip on top would wash the figure) */
 .kprev-fig::before{content:"";position:absolute;left:50%;top:40%;width:min(120%,520px);aspect-ratio:1;translate:-50% -50%;pointer-events:none;
- background:url(img/fx/orb.webp) 100% 0/300% 100% no-repeat;mix-blend-mode:screen;filter:sepia(1) saturate(2.4) brightness(.8);animation:kmFade .8s ease .3s both}
-.kprev-img{position:absolute;left:50%;top:0;height:100%;width:auto;max-width:none;transform:translateX(-50%);filter:drop-shadow(0 6px 14px #000a);animation:kprevIn .7s var(--km-ease,ease) .15s both}
-.kprev-card{flex:none;display:flex;flex-direction:column;align-items:center;gap:6px;animation:kmUp2 .35s var(--km-ease,ease) .5s both} /* frame = j93 .kmlist card (one rule) */
+ background:url(img/fx/orb.webp) 100% 0/300% 100% no-repeat;mix-blend-mode:screen;filter:sepia(1) saturate(2.4) brightness(.8);animation:kmFade calc(.8s*var(--pace)) ease calc(.3s*var(--pace)) both}
+.kprev-img{position:absolute;left:50%;top:0;height:100%;width:auto;max-width:none;transform:translateX(-50%);filter:drop-shadow(0 6px 14px #000a);animation:kprevIn calc(.7s*var(--pace)) var(--km-ease,ease) calc(.15s*var(--pace)) both}
+.kprev-card{flex:none;display:flex;flex-direction:column;align-items:center;gap:6px;animation:kmUp2 calc(.35s*var(--pace)) var(--km-ease,ease) calc(.5s*var(--pace)) both} /* frame = j93 .kmlist card (one rule) */
 .kprev-n{font-weight:700;color:#3a1f10;text-align:center}
 .kprev-l{margin:0;font-size:.9rem;line-height:1.45;color:#3a2a1e;text-align:center}
 @keyframes kprevIn{from{opacity:0;transform:translateX(-50%) translateY(24px)}to{opacity:1;transform:translateX(-50%)}}
-@media (max-height:560px){.kprev{flex-direction:row;flex-wrap:wrap;align-content:center;justify-content:center;height:calc(100dvh - 16px);max-width:900px;gap:4px 14px}
- .kprev-h{width:100%}.kprev-fig{flex:0 0 min(40vw,300px);height:calc(100dvh - 70px)}.kprev-card{flex:0 1 380px}}
+
 `;document.head.appendChild(st)})();
 /* ---------- kit sample page (§65 + §66) ---------- */
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push(
  {id:"§65.2",title:"kitPersonReveal: Nội vụ phủ phụ cấp người hầu",html:()=>{const s=(S&&S.staff&&S.staff[0])||null;if(!s)return"<em>cần một người hầu</em>";
   return `<div class="kitpg-row" style="background:#1a0f0acc;padding:10px;border-radius:8px;height:420px">${kitPersonRevealHTML({who:s,title:"Nội vụ phủ phụ cấp người hầu",sub:prServSub(s),line:prServLine(s,1)}).replace('class="kprev"','class="kprev" style="height:400px"')}</div>`}},
- {id:"§66.2",title:"kitGloom rank down: chip nứt rơi, khung xám",html:()=>`<div class="kitpg-row" style="background:#1a1418;padding:14px;border-radius:8px">${(()=>{const live=typeof S!=="undefined"&&S&&S.name,r=live?Math.max(1,S.rank|0):2;/* #kit opens before any game: no S → chips only */return kmRankDownHTML(live?S:null,r,r-1)})()}</div>`})}catch(e){}
+ {id:"§66.2",title:"kitGloom rank down: chip nứt rơi, khung xám",where:"<b>Demotion scene</b> (kitGloom, panels \"Bị giáng xuống …\" / \"Vào lãnh cung\"): the OLD rank chip cracks and falls, the new lower chip comes up dim, the frame turns grey. Not a status chip — only shown once, in the rank-down screen.",html:()=>`<div class="kitpg-row" style="background:#1a1418;padding:14px;border-radius:8px">${(()=>{const live=typeof S!=="undefined"&&S&&S.name,r=live?Math.max(1,S.rank|0):2;/* #kit opens before any game: no S → chips only */return kmRankDownHTML(live?S:null,r,r-1)})()}</div>`})}catch(e){}
 window.prSetFor=prSetFor;window.prSrvSetFor=prSrvSetFor;window.prGive=prGive;window.prStaff=prStaff;window.prCheck=prCheck;window.prNpcScan=prNpcScan;window.kitPersonReveal=kitPersonReveal;window.kitPersonRevealHTML=kitPersonRevealHTML;

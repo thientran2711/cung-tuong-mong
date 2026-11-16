@@ -64,15 +64,21 @@ for(const k of Object.keys(SFXN))if(/^sfx-pet-/.test(SFXN[k]))SFXL[SFXN[k]]={g:.
 /* ---- the mixer (replaces j11 sfx; same name, every caller keeps working) ---- */
 function ksfxBusy(){const now=performance.now();KSFX.live=KSFX.live.filter(v=>!v.a.ended&&!v.a.paused&&now<v.until);let n=KSFX.live.length;
  try{if(typeof VO!=="undefined"&&VO.cur&&!VO.cur.paused&&!VO.cur.ended)n++}catch(e){}return n}
-sfx=function(n,o){o=o||{};if(!n)return false;n=ksfxFile(n);if(!auOk())return ksfxDrop(n,"off");if(window.__bot||(typeof quiet!=="undefined"&&quiet))return ksfxDrop(n,"quiet");
+sfx=function(n,o){o=o||{};if(!n)return false;n=ksfxFile(n);if(!auOk())return ksfxDrop(n,"off");if(ksfxMgOnce()&&!o.m&&(n==="sfx-learn-good"||n==="sfx-learn-bad"))return ksfxDrop(n,"result-once");if(window.__bot||(typeof quiet!=="undefined"&&quiet))return ksfxDrop(n,"quiet");
  const L=SFXL[n]||{},ui=!!L.ui,now=performance.now();if(now-(KSFX.last[n]||-1e9)<90)return ksfxDrop(n,"twice");
  if(ksfxBusy()>=3){if(ui)return ksfxDrop(n,"full");const v=KSFX.live.find(x=>x.ui)||KSFX.live.find(x=>now-x.t0>500);if(!v)return ksfxDrop(n,"full");try{v.a.pause()}catch(e){}KSFX.live.splice(KSFX.live.indexOf(v),1)}
- try{let a=AU.cache[n];if(a&&a.dead&&now-(a.deadT||(a.deadT=now))>4000){a=null}if(!a){a=AU.cache[n]=mkAudio(n,false)}if(!a||a.dead)return ksfxDrop(n,"dead");const b=a.cloneNode();
-  b.volume=Math.max(0,Math.min(1,OPT.sfx*(ui?.5:1)*(L.g||1)*(o.g||1)));
-  if(o.rate&&o.rate!==1){try{b.preservesPitch=false;b.mozPreservesPitch=false;b.webkitPreservesPitch=false}catch(e){}b.playbackRate=o.rate}
-  KSFX.last[n]=now;const dur=(a.duration&&isFinite(a.duration)?a.duration*1000/(o.rate||1):2200)+80;KSFX.live.push({a:b,ui,t0:now,until:now+dur});
-  KSFX.log.push({n,m:o.m||"",ui:ui?1:0,t:Math.round(now)});if(KSFX.log.length>400)KSFX.log.splice(0,100);
-  const p=b.play();if(p&&p.catch)p.catch(()=>{});
+ try{const vol=Math.max(0,Math.min(1,OPT.sfx*(ui?.5:1)*(L.g||1)*(o.g||1)));let b=null,dur=0,web=0;
+  /* WebAudio first (iPhone ignores element.volume): a decoded buffer through a GainNode; until it is decoded the HTMLAudio clone plays */
+  const cx=AU.ctx,buf=cx&&cx.state==="running"?auBuf(n):null;
+  if(buf){try{const src=cx.createBufferSource(),g=cx.createGain();src.buffer=buf;g.gain.value=vol;if(o.rate&&o.rate!==1)src.playbackRate.value=o.rate;src.connect(g);g.connect(cx.destination);
+   b={ended:false,paused:false,pause(){this.paused=true;try{src.stop()}catch(e){}}};src.onended=()=>{b.ended=true};src.start();web=1;dur=buf.duration*1000/(o.rate||1)+80}catch(e){b=null}}
+  if(!b){let a=AU.cache[n];if(a&&a.dead&&now-(a.deadT||(a.deadT=now))>4000){a=null}if(!a){a=AU.cache[n]=mkAudio(n,false)}if(!a||a.dead)return ksfxDrop(n,"dead");b=a.cloneNode();
+   b.volume=vol;
+   if(o.rate&&o.rate!==1){try{b.preservesPitch=false;b.mozPreservesPitch=false;b.webkitPreservesPitch=false}catch(e){}b.playbackRate=o.rate}
+   dur=(a.duration&&isFinite(a.duration)?a.duration*1000/(o.rate||1):2200)+80}
+  KSFX.last[n]=now;KSFX.live.push({a:b,ui,t0:now,until:now+dur});
+  KSFX.log.push({n,m:o.m||"",ui:ui?1:0,t:Math.round(now),w:web});if(KSFX.log.length>400)KSFX.log.splice(0,100);
+  if(!web){const p=b.play();if(p&&p.catch)p.catch(()=>{})}
   if(!ui){AU.duck=.45;if(AU.cur)AU.cur.volume=musVol();clearTimeout(AU.dt);AU.dt=setTimeout(()=>{AU.duck=1;if(AU.cur)AU.cur.volume=musVol()},Math.min(2200,dur))}
   return true}catch(e){return ksfxDrop(n,"err "+e.message)}};
 function kitSfx(m,o){const f=SFXN[m];if(!f)return false;o=o||{};if(o.at){setTimeout(()=>sfx(f,Object.assign({m},o,{at:0})),o.at);return true}return sfx(f,Object.assign({m},o))}
@@ -102,7 +108,7 @@ const SFXPET={meomuop:"petCat",meo:"petCat",batu:"petCat",cho:"petDog",sutu:"pet
 /* minigame stroke per kind (j82/j91 KG82_KIND keys): the touch that IS the move */
 const SFXMG={co:["down","mgStone"],theu:["down","mgNeedle"],kim:["up","mgNeedle"],ve:["down","mgBrush"],hoa:["down","mgFlower"],mua:["down","mgStep"],hat:["down","mgPluck"],tho:["down","mgBrush"],doi:["down","mgBrush"],kinh:["down","mgBrush"],chai:["down","mgBrush"],huong:["down","mgPuff"],may:["down","mgNeedle"],dauho:["up","mgThrow"],ban:["down","mgArrow"],banh:["down","mgFire"]};
 /* how each minigame kind sounds, by its engine (j82 KG82_KIND[k].e; exam kinds of jexam too): stroke · scored word (kg82Pop by colour) · end */
-const SFXMGE={rhythm:"mgPluck",go:"mgStone",aim:"mgThrow",pattern:"mgBrush",steps:"mgStep",quiz:"tap"};
+const SFXMGE={rhythm:"mgPluck",go:"mgStone",aim:"mgThrow",pattern:"mgBrush",steps:"mgStep",quiz:"tap",lay:"mgStone",sort:"mgStone",seat:"mgStone",clue:"tap"};
 function ksfxMgStroke(k){const m=SFXMG[k];if(m)return m[1];try{const e=KG82_KIND[k]&&KG82_KIND[k].e;return SFXMGE[e]||null}catch(x){return null}}
 window.SFXTXT=SFXTXT;window.SFXWX=SFXWX;window.SFXWXN=SFXWXN;window.SFXFEST=SFXFEST;window.ksfxWx=ksfxWx;window.ksfxFest=ksfxFest;window.SFXPET=SFXPET;window.SFXMG=SFXMG;window.SFXMGE=SFXMGE;window.ksfxMgStroke=ksfxMgStroke;
 /* ---------- wiring ---------- */
@@ -118,8 +124,7 @@ window.SFXTXT=SFXTXT;window.SFXWX=SFXWX;window.SFXWXN=SFXWXN;window.SFXFEST=SFXF
    else if(/km-reward/.test(cls))ksfxReward(st.ov)}catch(e){console.error(e)}return st});
  W("kitFlipNote",o=>function(p){const r=o.apply(this,arguments);try{if(p&&p!==S)kitSfx("notice",{at:120})}catch(e){}return r});
  W("kitXamPlay",o=>function(el,lot){const x=o.apply(this,arguments);try{ksfxXam(x,lot)}catch(e){}return x});
- W("kitResultFx",o=>function(card){const r=o.apply(this,arguments);try{if(card){const ok=card.classList.contains("ok");const red=typeof kmReduced==="function"&&kmReduced();
-   kitSfx("seal",{at:red?0:280});kitSfx(ksfxOutcome(ok,card.textContent),{at:red?60:520});const k=ksfxText(card.textContent);if(k)kitSfx(k,{at:red?120:900})}}catch(e){}return r});
+ /* the result card sound (seal + win / fail / expose / scheme + the card's own word) lives in kitResultSfx below, wrapped on resultShow itself (not on kitResultFx, which only runs when kmOn) */
  W("kitCalendar",o=>function(){const r=o.apply(this,arguments);try{kitSfx("week");kitSfx("turn",{at:350})}catch(e){}return r});
  /* the week book (j87 Sổ tuần) shows the lot as a page, without j93's tube: the lot's bell / wooden fish after the calendar */
  W("dawn",o=>function(){const r=o.apply(this,arguments);try{const w=document.getElementById("dawn");if(w&&S&&S.lot&&!w.querySelector(".kmxam")&&typeof LVB!=="undefined"){
@@ -138,12 +143,12 @@ window.SFXTXT=SFXTXT;window.SFXWX=SFXWX;window.SFXWXN=SFXWXN;window.SFXFEST=SFXF
  W("wkSell",o=>function(p){const r=o.apply(this,arguments);try{if(r&&me(p))kitSfx("sell")}catch(e){}return r});
  W("giveTo",o=>function(a){const r=o.apply(this,arguments);try{if(r&&me(a))kitSfx("give")}catch(e){}return r});
  /* --- podium (j90): the gong, then her place (top three = a new honour) --- */
- W("kitPodiumShow",o=>function(list){const r=o.apply(this,arguments);try{if(r){kitSfx("podium");const L=Array.isArray(list)?list:[];const i=L.findIndex(x=>x&&x.who===S);
+ W("kitPodiumShow",o=>function(list){const r=o.apply(this,arguments);try{if(r){KSFX.podAt=performance.now();kitSfx("podium");const L=Array.isArray(list)?list:[];const i=L.findIndex(x=>x&&x.who===S);
    if(i>=0&&i<3)kitSfx("rankNew",{at:1300})}}catch(e){}return r});
  /* --- page turns of the books (jbook §34) --- */
  W("kitSheetTurn",o=>function(){try{kitSfx("turn")}catch(e){}return o.apply(this,arguments)});
  /* --- minigames: the running kind, notes, hit / miss words, one stroke per move --- */
- W("kg82Play",o=>function(kind){KSFX.mg=kind||"";return o.apply(this,arguments)});
+ W("kg82Play",o=>function(kind){KSFX.mg=kind||"";KSFX.mgShown=0;return o.apply(this,arguments)});
  W("kg82Close",o=>function(){KSFX.mg="";return o.apply(this,arguments)});
  const RATE=[1,1.122,1.26,1.498,1.682,2];
  W("kg82Pluck",o=>function(i,ok){try{if(typeof auOk==="function"&&auOk()&&!(AU.cache["sfx-mg-pluck"]&&AU.cache["sfx-mg-pluck"].dead)){KSFX.mgT=performance.now();
@@ -167,7 +172,7 @@ window.SFXTXT=SFXTXT;window.SFXWX=SFXWX;window.SFXWXN=SFXWXN;window.SFXFEST=SFXF
   W("kitLose",o=>function(x,op){const r=o.apply(this,arguments);try{op=op||{};if(x&&!Array.isArray(x)&&typeof x==="object"&&x.bac!=null&&!x.k){ksfxOnce("coinOut");return r}
     const m=ksfxLoseKey(op);if(m)ksfxOnce(m)}catch(e){}return r});
   W("kitCoins",o=>function(dir){const r=o.apply(this,arguments);try{if(dir==="out")ksfxOnce("coinOut")}catch(e){}return r});
-  W("kitFx",o=>function(kind){const r=o.apply(this,arguments);try{if(SFXN[kind]&&!SFXFX_SKIP.test(kind))kitSfx(kind,{g:kind==="lantern"?.7:1})}catch(e){}return r});
+  W("kitFx",o=>function(kind){const r=o.apply(this,arguments);try{if((kind==="mgwin"||kind==="mglose")&&ksfxMgOnce()){KSFX.mgShown=0;return r}if(SFXN[kind]&&!SFXFX_SKIP.test(kind))kitSfx(kind,{g:kind==="lantern"?.7:1})}catch(e){}return r});
   W("exDone",o=>function(p,res){const r=o.apply(this,arguments);try{if(p===S&&res)kitSfx(res.pass?"examPass":"examFail",{at:200})}catch(e){}return r});
   W("petAdd",o=>function(p,t){const r=o.apply(this,arguments);try{if(r&&me(p)&&SFXPET[t])kitSfx(SFXPET[t],{at:400})}catch(e){}return r})};
  late();KSFX.late=late;
@@ -181,6 +186,31 @@ window.SFXTXT=SFXTXT;window.SFXWX=SFXWX;window.SFXWXN=SFXWXN;window.SFXFEST=SFXF
    if(on&&KSFX.coop===false)kitSfx("join");KSFX.coop=on}catch(e){}},1000);
  /* --- render: state diff (her own state only; a loaded save only takes a snapshot) --- */
  W("render",o=>function(){const r=o.apply(this,arguments);try{ksfxDiff()}catch(e){console.error(e)}if(!KSFX.lateDone){KSFX.lateDone=1;try{late()}catch(e){}}return r})})();
+/* ============ ONE RESULT SOUND (review/result-sfx) ============
+   Every result the player sees plays exactly ONE result sound, once, whatever path made it:
+   - result card (resultShow, all wrappers j19/j25/j63/j65/jaudit/...): seal stamp, then win / fail / expose / scheme (+ the card's own word) — on resultShow itself, independent of kmOn;
+   - minigame result panel (kg82ShowRes(html, ok): contest j82, lesson/work j82 playArt, grooming j92, exam round jexam, toilette jtoil, tsGame jts):
+     ok=true -> mgwin, ok=false -> mglose, ok=null/undefined -> no sound (exam final: exDone owns it; contest podium: kitPodiumShow owns it);
+   kitResultSfx(ok,o) drops a second call within 1.5 s (KSFX.rsDrop counts them), so no path can double. Legacy j11 openMG feedback(good/bad) right after a panel is dropped too. */
+KSFX.rs=-1e9;KSFX.rsDrop=0;KSFX.rsLog=[];
+function kitResultSfx(ok,o){o=o||{};const now=performance.now();
+ if(ok!==true&&ok!==false)return false;
+ if(now-KSFX.rs<1500){KSFX.rsDrop++;return false}KSFX.rs=now;KSFX.rsLog.push({ok,src:o.src||"",t:Math.round(now)});if(KSFX.rsLog.length>200)KSFX.rsLog.splice(0,50);
+ const red=typeof kmReduced==="function"&&kmReduced();
+ if(o.mg){kitSfx(ok?"mgwin":"mglose",{m:"result"});return true}
+ kitSfx("seal",{at:red?0:280,m:"result"});kitSfx(ksfxOutcome(ok,o.text),{at:red?60:520,m:"result"});const k=ksfxText(o.text);if(k)kitSfx(k,{at:red?120:900,m:"result"});return true}
+/* a minigame panel sounded < 2 min ago: the old openMG feedback("good"/"bad") that follows the "Đã hiểu" tap (sfx + kitFx mgwin / mglose) must stay silent; consumed by kitFx */
+function ksfxMgOnce(){return KSFX.mgShown&&performance.now()-KSFX.mgShown<120000}
+window.kitResultSfx=kitResultSfx;
+(function(){const W=(n,f)=>{const o=window[n];if(typeof o!=="function"||o.__ksfx)return false;const w=f(o);w.__ksfx=1;window[n]=w;return true};
+ const RS=o=>function(){const t0=window.__rtT;const r=o.apply(this,arguments);try{const t=document.getElementById("rtoast");
+   if(t&&t.classList.contains("on")&&window.__rtT!==t0&&!window.__bot)kitResultSfx(t.classList.contains("ok"),{text:t.textContent,src:"card"})}catch(e){console.error(e)}return r};
+ W("resultShow",RS);
+ /* jaudit (loaded before this file) replays a held / late result card through window.__aaR0 = the resultShow it wrapped, i.e. BELOW the wrapper above: wrap that entry too (its own closure keeps the unwrapped one, so no card is wrapped twice) */
+ W("__aaR0",RS);
+ W("kg82ShowRes",o=>function(html,ok){const p0=KSFX.podAt||0;const r=o.apply(this,arguments);try{if(ok===true||ok===false){if((KSFX.podAt||0)!==p0)KSFX.rs=performance.now();/* the podium sounded: it is this contest's result sound */
+    else if(kitResultSfx(ok,{mg:1,src:"mg"}))KSFX.mgShown=performance.now()}}catch(e){console.error(e)}return r});
+})();
 /* one sound for a moment that two paths announce (sellItem then kitLose "sell"; buy then kitCoins "out"): skip when the same file played < 1.5 s ago */
 /* kitFx kinds whose sound another path owns: the result card (kitResultFx: seal + outcome), the locked button (pointerdown) */
 const SFXFX_SKIP=/^(win|fail|expose|verdict|lock)$/;

@@ -66,9 +66,18 @@ function kitGoalDetail(){const G=kitGoalNow();if(!G)return;const C=G.C;
  if(C.kind==="ms")sec.push({h:C.any?"Tiến độ · xong một điều là đủ":"Tiến độ",html:typeof kitChecks==="function"?kitChecks(C.steps.map(x=>[x.ok,esc(x.t)])):""});
  if(C.kind==="ms"&&C.id==="nhap"&&!isS()&&!S.out&&S.rank<7&&typeof promoReq==="function"){try{const R=promoReq();R.sort((a,b)=>a[0]-b[0]);
   sec.push({h:`Muốn lên ${RANKS[S.rank+1].n}`,html:typeof kitReqRows==="function"?kitReqRows(R):""})}catch(e){}}
+ /* C24 (review/chapter-detail): the same panel grown with the whole progress (chapModel, jchap.js): steps with how/where, the hồi so far with their pictures, risks */
+ const CM=typeof chapModel==="function"?chapModel():null;
+ if(CM&&(CM.mode==="arc"||CM.mode==="v1")){
+  sec.push({h:CM.mode==="arc"?"Các hồi":"Tiến độ",html:CM.steps.length&&typeof kitChecks==="function"?kitChecks(CM.steps.map(x=>[x.ok,`${esc(x.t)}${x.d?`<small class="past"> · ${esc(x.d)}</small>`:""}`])):""});
+  if(!CM.steps.length||CM.mode==="arc")sec.push({h:"Kế tiếp",rows:[["Kế tiếp",esc(plain(CM.next||C.next||"")),C.wait?"g":""]]});
+  if(CM.past.length&&typeof kitSkillCard==="function")sec.push({h:"Chuyện đã qua",html:CM.past.map(x=>kitSkillCard({kind:"hoi",name:x.t,max:0,img:x.img,desc:x.d})).join("")});
+  else if(CM.mode==="arc")sec.push({h:"Chuyện đã qua",html:`<p class="kpnote">Chương này chưa có hồi nào khép lại.</p>`});
+  if(CM.risks.length)sec.push({h:"Cần lưu ý",rows:CM.risks.map(r=>[r[0],r[1],r[2]||""])})}
+ else{
  if(C.kind==="arc"){const R=[["Hồi",`${C.act}/${C.acts}`],["Kế tiếp",esc(plain(C.next)),C.wait?"g":""],["Lợi thế",`${C.sc} · mỗi phần thêm cơ may ở hồi cao trào`]];
   if(C.dl!=null)R.push(["Hạn",`còn ${Math.max(0,C.dl-S.turn)} tháng`,C.dl-S.turn<=1?"r":""]);if(C.hist.length)R.push(["Đã qua",C.hist.map(esc).join("<br>")]);sec.push({h:"Tiến độ",rows:R})}
- if(C.kind==="v1"&&C.next)sec.push({h:"Tiến độ",rows:[["Kế tiếp",esc(plain(C.next))]]});
+ if(C.kind==="v1"&&C.next)sec.push({h:"Tiến độ",rows:[["Kế tiếp",esc(plain(C.next))]]})}
  sec.push({h:"Việc nên làm",rows:nextRows(G.next)});
  kitPanel({kind:"info",title:`${G.kicker} · ${C.t}`,sub:G.road?`Mệnh truyện: ${G.road}`:"",headArt:art(),sections:sec,opts:nextOpts(G.next).concat([{n:"Đóng",fx:{},go:()=>{}}])},true);showModal()}  /* "Đóng" = the close option → kit ✕ + tap outside + Esc (32.10) */
 /* ---------- "Mệnh truyện kiếp này": right after Nhập cung ---------- */
