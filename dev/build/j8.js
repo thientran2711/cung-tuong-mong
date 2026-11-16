@@ -268,8 +268,11 @@ PEND.night1=p=>{const E=S.emp,mood=[1,0,-1,-2][E.mood],go=b=>()=>{let s=p.q+b+mo
  {n:"Rót rượu, nũng nịu",fx:{},od:(has("datinh")||has("mesac")?3:has("lanhlung")?-1:0),x:nx(has("datinh")||has("mesac")?3:has("lanhlung")?-1:0,has("datinh")||has("mesac")?"ngài đa tình, rất hợp":has("lanhlung")?"ngài lạnh lùng, dễ chán":""),go:go(has("datinh")||has("mesac")?3:has("lanhlung")?-1:0)},
  {n:"Lặng lẽ xoa vai, nghe ngài kể",fx:{},od:(E.mood>=2?2:1),x:nx(E.mood>=2?2:1,E.mood>=2?"ngài đang phiền, rất hợp":"an toàn"),go:go(E.mood>=2?2:1)}]}};
 /* the night talk's line: how well it suits him -> ladder word; the night is graded, never empty */
-function nx(b,note){const m=[1,0,-1,-2][S.emp.mood];const v=b+m;const w=v>=3?"Rất chắc":v>=2?"Chắc":v>=1?"Khá chắc":v>=0?"Năm ăn năm thua":"Khó";return `${w} · thành: đêm vui, Sủng +5, Ân tình +5 · hỏng: đêm nhạt, Sủng +3, Ân tình +2${note?" · "+note:""}${vpItems(S).length?` · kèm: đồ vượt phẩm bị thu, Danh -4 (nếu đang đeo): ${chanceW(40)}`:""}`}
-function nightFx(s){S.tablet=0;S.nights++;S.nightLog.push(wk());const g=3+Math.max(0,Math.round(s/2));apply({sung:g});S.an=cl(S.an+2+Math.max(0,s),0,100);ghenAll(8);
+function nx(b,note){const m=[1,0,-1,-2][S.emp.mood];const v=b+m;const w=v>=3?"Rất chắc":v>=2?"Chắc":v>=1?"Khá chắc":v>=0?"Năm ăn năm thua":"Khó";return `${w} · thành: đêm vui, Sủng +${nightG(3)}, Ân tình +${nightA(3)} · hỏng: đêm nhạt, Sủng +${nightG(0)}, Ân tình +${nightA(0)}${note?" · "+note:""}${vpItems(S).length?` · kèm: đồ vượt phẩm bị thu, Danh -4 (nếu đang đeo): ${chanceW(40)}`:""}`}
+/* a night's gains by its score s (one rule for her and every NPC, j75 rivalNight): base BAL.night (one-core) */
+function nightG(s){return BAL.night.sung+Math.max(0,Math.round(s/2))}
+function nightA(s){return BAL.night.an+Math.max(0,s)}
+function nightFx(s){S.tablet=0;S.nights++;S.nightLog.push(wk());const g=nightG(s);apply({sung:g});S.an=cl(S.an+nightA(s),0,100);ghenAll(8);
  if(giuBlocked(S))pushFront(mkP("giu"),"Giữ hay không giữ");else night(S);
  if(roll(10+s*4))bestow(S,"night");log(`Thị tẩm. Sủng +${g} · Ân tình +${2+Math.max(0,s)}.`)}
 PEND.night2=p=>{const s=p.s,v=liveRivals(false).slice().sort((a,b)=>a.rel-b.rel)[0],son=mySons()[0],o1=od(30+S.an/2+s*4),o2=od(30+S.an/2+s*3-(DG()?10:0)),o3=od(40+S.an/2+s*3);

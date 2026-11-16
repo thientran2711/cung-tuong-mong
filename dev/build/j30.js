@@ -1,5 +1,6 @@
 /* ================= SEAT CAPS PER RANK, PUSH-DOWN ROADS, DEMOTION REVIEW (one rule for every consort) ================= */
-const SEATCAP={7:1,6:1,5:2,4:4,3:6};
+/* seats per rank: BAL.seat (jbal) is the one table; SEATCAP is its mirror, filled by jbal (one-core) */
+const SEATCAP={};
 function holders(r){return consorts().filter(p=>rkOf(p)===r)}
 function seatFree(r){return SEATCAP[r]==null||holders(r).length<SEATCAP[r]}
 function seatTxt(r){return SEATCAP[r]==null?"":`${RANKS[r].n} ${holders(r).length}/${SEATCAP[r]}`}

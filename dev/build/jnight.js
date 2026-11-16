@@ -42,5 +42,5 @@
   if(co&&asked===COOPW.bkey())return;busy=true;
   setTimeout(()=>{busy=false;try{if(!ready())return;
    if(coop()){if(asked===COOPW.bkey())return;const k=COOPW.nightEnd();if(k)asked=k;else later();live();return}
-   if(co)return;used=4;nextBuoi();live();try{showModal()}catch(e){}render()}catch(e){console.error("toMorning",e)}},400)};
+   if(co)return;used=BAL.time.khac;nextBuoi();live();try{showModal()}catch(e){}render()}catch(e){console.error("toMorning",e)}},400)};
  const r0=render;render=function(){const r=r0.apply(this,arguments);try{step()}catch(e){}return r}})();

@@ -1,5 +1,6 @@
 /* ================= BALANCE KNOBS (measured with the sensible / random bots; see the report) ================= */
-const BAL={oanLv:[5,20,45,75],/* oán word ladder (VANPHONG): <5 Không oán · <20 Chút oán · <45 Oán · <75 Oán sâu · else Oán hận */outQ:85,hz:3.2,conc:.25,later:6,hhTh:55,birthAdd:4,
+const BAL={oanLv:[5,20,45,75],/* oán word ladder (VANPHONG): <5 Không oán · <20 Chút oán · <45 Oán · <75 Oán sâu · else Oán hận */
+ /* outQ = % an empty Hoàng hậu seat goes to an outsider girl (one-core: was 85 here and 60 in jbal2; 60 is the measured v12 value) */outQ:60,hz:3.2,conc:.25,later:6,hhTh:55,birthAdd:4,
  /* ONE SOURCE for every promotion threshold the player sees (checks in promoReqP/candOK and every text read these) */
  hhThNoSon:80,hhThNoSonHieu:70,hhDuc:50,hhDucHeir:40,qBlockHh:-40,qBlockTh:50,hiOppHh:-30,hiOppTh:30,hiOppFac:180,
  /* handmade works (j83), by material 0 thường / 1 tốt / 2 quý: matQ = phần added to the score; cap = highest tier it can reach (only quý makes a
@@ -36,6 +37,19 @@ const BAL={oanLv:[5,20,45,75],/* oán word ladder (VANPHONG): <5 Không oán · 
     momAge = youngest age of a mother (and the Emperor) at a seeded child's birth (review r1). */
  ps:{harem:[[7,1],[5,0],[4,0],[3,0],[3,0],[2,0],[1,0],[1,0],[0,0],[0,0]],consAge:[18,4,2],kidN:[0,0,0,30,50,20],kidAge:[1,4],sonP:.5,sonMom:[1,5],dauMom:[1,7],
   empAge:[19,6],power0:30,npcConc:[.9],truongW:8,momAge:17}};
+/* ================= ONE CORE (owner 16/11 07:25Z, review/one-core): rule numbers that used to be typed in several modules.
+   Every check and every player-visible text reads these; dev/test/one-core-guard.js fails on a new typed copy.
+   time.khac = khắc in one buổi (4 buổi a tuần = B4N, jtime4); time.sucMin = an act of 2+ khắc needs Sức at least this.
+   lot = re-draw of the weekly lot (Gieo lại quẻ): bac bạc + k khắc.  walk = khắc to walk to a near / far place (j9 travel); farWet = far on a wet day (rain, snow).
+   sneak = Danh lost when caught sneaking in (danh; the Emperor's halls: heavy, a heavy offence) / when seen at Trường Môn viện (seen).
+   srvAge = servant start (cnv): age she is asked about leaving (ask), age a maid must leave (out), age a ma ma retires (mama).
+   age.sac* = once she is older than sacFrom her Sắc falls sacLoss a year, never below sacMin (everyone); age.betroth / wed = a child may be promised /
+   is married (princes and princesses alike); matchShow = a child shows in the match lists from this age; matchMax = oldest prince offered as a match; age.reign = the young Emperor rules alone from this age (no regency).
+   seat = seats per rank (7 Hoàng hậu, 6 Hoàng quý phi, 5 Quý phi, 4 Phi, 3 Tần); SEATCAP (j30) is this table.
+   night = the least a night with the Emperor gives: Sủng +sung, Ân tình +an (the night's score adds more, j8 nightFx). */
+Object.assign(BAL,{time:{khac:4,sucMin:20},lot:{bac:10,k:1},walk:{near:1,far:2,farWet:3},sneak:{danh:8,heavy:15,seen:2},srvAge:{ask:25,out:30,mama:45},
+ age:{sacFrom:25,sacLoss:2,sacMin:10,betroth:16,wed:18,matchShow:14,matchMax:21,reign:16},seat:{7:1,6:1,5:2,4:4,3:6},night:{sung:3,an:2}});
+try{Object.assign(SEATCAP,BAL.seat)}catch(e){}
 /* what the Hoàng hậu seat asks of p (the same numbers the checks use) */
 function hhNeed(p){p=p||S;const sn=sonsOf(p).length>0,hieu=typeof has==="function"&&has("hieuthao");const heir=!!(S.heir&&S.heir.k&&S.heir.k.alive&&S.heir.v===(p===S?null:p));
  return{sons:sn,th:sn?BAL.hhTh:(hieu?BAL.hhThNoSonHieu:BAL.hhThNoSon),duc:heir?BAL.hhDucHeir:BAL.hhDuc,heir}}
