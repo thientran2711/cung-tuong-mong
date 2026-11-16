@@ -15,7 +15,7 @@ const [,,URL,OUT,...A]=process.argv;const SHOTS=A.includes('--shots');const SZ=A
   const rows=[];let shot=0;
   for(const c of cats){
    const r=await p.evaluate(async(c)=>{Q.length=0;document.querySelectorAll('.kmov').forEach(e=>e.remove());const md=document.getElementById('modal');if(md)md.hidden=true;
-    const n0=KSFX.log.length,k0=KPRES_LOG.length;Q.push({t:'Việc thử · '+c,h:'<p>Một việc thử trong cung.</p>',btn:'Đã rõ',evId:'cat:'+c});showModal();await new Promise(r=>setTimeout(r,420));
+    KPRES_LOG.length=0;KSFX.log.length=0;const n0=0,k0=0;Q.push({t:'Việc thử · '+c,h:'<p>Một việc thử trong cung.</p>',btn:'Đã rõ',evId:'cat:'+c});showModal();await new Promise(r=>setTimeout(r,420));
     const d=document.querySelector('#modal .dlg');const L=KPRES_LOG.slice(k0)[0]||null;
     return{c,log:L,sfx:KSFX.log.slice(n0).map(x=>x.n),attr:d?{g:d.dataset.kpresGrp||'',c:d.dataset.kpresCat||''}:null,mus:musicCtx(),vis:!!d&&!md.hidden}},c);
    rows.push(r);
