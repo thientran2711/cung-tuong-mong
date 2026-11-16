@@ -9,7 +9,8 @@ Base main at start: 900ace7fb.
 | A7 cycle review | review/cycle @578384ce9 merged onto review/thaiy-r1 → review/cycle-r1 (jcycle last) | opus | RUNNING (reviewer) |
 | A8 cal-plus review | review/cal-plus-r1 | sonnet | PASS a151b4939 |
 | A9 promo-rules review | review/promo-rules-r1 | opus | PASS 0d425b5a8 — CONDITIONAL on kit keeper sign-off (K4) |
-| D46 placeholder pictures (acts/events on placeholder, e68 flowerBloom, LUẬT Bổng lộc, Đoan ngọ banner check) | review/placeholder-pics2 | sonnet | RUNNING (art worker) |
+| D46 placeholder pictures | review/placeholder-pics2 @ea2a1777b → -r1 | sonnet | REVIEWING (short; only e68 flowerBloom was missing → drawn + CDN; acts 0/98 placeholder; Bổng lộc + Đoan ngọ already fine on main) |
+| D53 opt-pics leftovers (option cards on act placeholder, 62–68 per life; meaning-group choices e.g. 'Ngắt hoa dâng Thái hậu', 'Hẹn hôm khác', 'Cáo bận việc cung'; list in dev/art/MISSING_PICS.md on placeholder-pics2) | review/opt-pics2 | sonnet | QUEUED (next art slot; check review/opt-pics (session 8) first) |
 | A11 cardflip review | review/cardflip-r1 | sonnet | PASS 6452171fc — CONDITIONAL on kit keeper sign-off (K5) |
 | D45 small art (earrings + embroidered shoes, guard 4 indigo, c02-t1-a18 grey skin, Emperor costume audit no Qing hat; + A9 follow-ups: per-rank Đeo eo pendants, mid-rank bangles, per-rank Túi thơm, maid robes per maid rank) | review/small-art | sonnet | RUNNING (art worker) |
 | A13 recipes-r1 review | review/recipes-r1 @edf6a92b0 (finish cut review) → review/recipes-r2 | sonnet | RUNNING (reviewer) |
