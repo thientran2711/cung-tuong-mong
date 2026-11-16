@@ -59,7 +59,7 @@ function note(p,why,K){try{const g=p===S?"me":p===S.emp?"emp":p===S.thO?"th":K.h
  (S.mort.dl=S.mort.dl||[]).push({g,a:ageOf(p),c,y:S.year});if(S.mort.dl.length>300)S.mort.dl.shift()}catch(e){}}
 function kill(p,why,K){let ev="";note(p,why,K);
  if(p===S){S.mort.cause=why;die(why);return ""}
- if(p===S.emp){S.mort.empDue=why;return ""}
+ if(p===S.emp){S.mort.empDue=why||(p.thoO?"Ngài lâm trọng bệnh đã lâu, thuốc thang vô hiệu":"Ngài trúng phong đột ngột giữa đêm");return ""}
  if(p===S.thO){if(!S.thDead){S.thDead=true;S.th=0;S.thIll=null;ev+=`<b>Thái hậu băng hà, thọ ${S.thAge} tuổi.</b> ${why?why+". ":""}`}return ev}
  if(K.has(p)){const mine=(S.kids||[]).includes(p);return kidDie(p,why||(p.nb?"yểu mệnh khi chưa đầy tháng":p.age<6?pick(["mất vì đậu mùa","mất vì sốt cao","nhiễm dịch mà mất"]):"lâm bệnh mà mất"),mine)}
  if(rivals.includes(p)){p.alive=false;if(p.queen){p.queen=false;if(S.vacSince==null)S.vacSince=S.turn}return `<span class="r">${p.name} ${why||"lâm trọng bệnh qua đời"}, ${p.age} tuổi.</span> `}
