@@ -24,7 +24,7 @@ Base main at start: 900ace7fb.
 | C7 balance-pass | review/balance-pass @d02658a9d | opus | RUNNING (worker) |
 | C8 fig-bg step 2 | review/fig-bg @acc254846 | sonnet | BUILT, BLOCKED on KIT KEEPER (K1): 14 painted scrolls on CDN, jfigbg.js, KIT §61; tests 6 viewports (390x844 rival dialog img height 0 not investigated; 2-person dialog shows one scroll) |
 | C9 huadian-size | review/huadian-size @230e3cf25 | sonnet | RUNNING (worker #2; + URGENT owner: replace every fruit/grape/object huadian motif → flowers/leaves/butterfly/phoenix only, sent 02:55Z; det2.py ~85% boxes; hand-fix ~100 a18 boxes → mask shrink to 8.5% → sheets per tier/age → CDN; ~5700 files) |
-| D1 result-sfx | review/result-sfx @41899d048 | sonnet | RUNNING (resumed worker) |
+| D1 result-sfx | review/result-sfx @58982a4f9 → review/result-sfx-r1 | sonnet | REVIEWING (worker SẴN SÀNG KIỂM; central kitResultSfx, kg82ShowRes ok-arg 7/7, iOS WebAudio unlock + GainNode; SND_DEFAULT still false pending Q1) |
 | D7 personality + 13 virtues + Thái hậu archetypes | review/personality @6f1ca343a | opus | RUNNING (resumed worker) |
 | D29 schedules/roster re-port | review/schedules3 (from review/schedules2 + wip/kit-j95) | opus | RUNNING (worker) |
 | D-list rest (D3, D6, D9, D11–D20, D22–D27, D44, D48–D52) | — | per item | QUEUED (D30–D34, D36, D38–D42 moved to Foreman B — not ours) |
