@@ -1332,7 +1332,7 @@ ch:{t:"Quân cờ của Thái hậu",n:3,goal:"Thái hậu đưa ngươi vào cu
  init(){S.st.tool=0},
  hint:()=>["Thái hậu sắp giao việc","Thái hậu sẽ đòi hỏi hơn","Thái hậu tuổi đã cao"][S.st.step]||"",
  month(){const st=S.st,q=rivals[0];
-  if(S.rank>=7){st.step=3;stEnd(1,st.tool>=2?"Thay cô tổ đoạt ngôi trung cung":"Tự mình lên ngôi trung cung");return""}
+  if(S.rank>=7){st.step=3;stEnd(1,st.tool>=2?"Thay cô mẫu đoạt ngôi trung cung":"Tự mình lên ngôi trung cung");return""}
   if(st.step<2&&!qOn())st.step=2;
   if(S.year>=8||(st.step>=1&&S.year>=5&&roll(4))){st.step=3;S.th=0;S.thDead=true;apply({hh:-20});
    if(S.rank>=5){stEnd(1,st.tool>=2?"Quân cờ đắc lực của Thái hậu":"Tự đứng vững khi Thái hậu mất");return `<b>Thái hậu băng hà.</b> Ngươi đã là ${RANKS[S.rank].n}, đứng vững được. Hoàng hậu hận ngươi hơn. Hoàng hậu -20. `}
@@ -1350,7 +1350,7 @@ thd:{t:"Tài nữ nhà nho",n:3,goal:"Thơ ngươi sẽ làm rạng danh cha. Đ
   return""},
  acts(){const st=S.st;
   if(st.step===1){const ok=S.arts.thi>=3||S.tai>=70;return[{n:"Dự thi Tài nữ ở Hàn lâm viện",t:ok?"Cùng các khuê tú đối thơ trước Hoàng thượng.":"Cần Thi bậc 3 hoặc Tài 70.",c:{suc:-10},o:ok?od(35+S.tai/3+artW("thi",S.arts.thi)*6):0,w:{danh:8,sung:3},l:{danh:-3},lock:!ok,x:"danh hiệu Tài nữ",go:()=>{st.title=1;st.step=2}}]}
-  if(st.step===2){const ok=S.danh>=40;return[{n:"Xin khắc in sách của cha",t:ok?"Dâng di cảo của cha lên Hoàng thượng.":`Cần Danh 40 (nay ${S.danh}).`,c:{suc:-5},o:ok?od(45+S.danh/4):0,w:{danh:10,duc:5},l:{danh:-3},lock:!ok,x:"sách cha được khắc in",go:()=>{st.step=3;stEnd(1,"Tài nữ, sách cha được khắc in");fx("gold")}}]}
+  if(st.step===2){const ok=S.danh>=40;return[{n:"Xin khắc in sách của cha",t:ok?"Dâng bản thảo của cha lên Hoàng thượng.":`Cần Danh 40 (nay ${S.danh}).`,c:{suc:-5},o:ok?od(45+S.danh/4):0,w:{danh:10,duc:5},l:{danh:-3},lock:!ok,x:"sách cha được khắc in",go:()=>{st.step=3;stEnd(1,"Tài nữ, sách cha được khắc in");fx("gold")}}]}
   return[]}}
 };
 
@@ -1377,7 +1377,7 @@ PEND.td1=p=>{const st=S.st;return {t:`Lão thái giám họ Vương, nhân chứ
    {n:"Giấu ông ở Tân Giả Khố",fx:{bac:-40},x:"giữ được nhân chứng",go:()=>{st.wit=1}},
    {n:"Mặc kệ",fx:{},x:"chứng cứ -1",go:()=>{S.caseEv=Math.max(0,S.caseEv-1);log(`<span class="r">Xác lão Vương nổi trên sông Kim Thủy.</span>`)}}]}};
 PEND.ch1=p=>{const st=S.st,q=rivals[0];return {who:pTH(),t:'Thái hậu gọi ngươi vào Đức Thọ cung: “Hoàng hậu bất tài. Ngươi phải thay nàng. Trước hết, dò xem Càn Ninh cung giấu gì.”',o:[
-   {n:"Vâng mệnh cô tổ",fx:{th:8},x:"chứng cứ Hoàng hậu +1",go:()=>{evStory(q,1,"giấu chuyện riêng trong Càn Ninh cung");st.tool++;st.step=1}},{n:"Thoái thác",fx:{th:-15,duc:2},go:()=>{st.step=1}}]}};
+   {n:"Vâng mệnh cô mẫu",fx:{th:8},x:"chứng cứ Hoàng hậu +1",go:()=>{evStory(q,1,"giấu chuyện riêng trong Càn Ninh cung");st.tool++;st.step=1}},{n:"Thoái thác",fx:{th:-15,duc:2},go:()=>{st.step=1}}]}};
 PEND.ch2=p=>{const st=S.st,q=rivals[0],o=p.o;return {who:pTH(),t:'Thái hậu dúi vào tay ngươi một gói thuốc: “Bỏ vào trà của Hoàng hậu.”',o:[
    {n:"Vâng mệnh",fx:{duc:-10},x:`${word(o)} · thành: Hoàng hậu băng hà, Thái hậu +10 · hỏng: bị ban chết`,go:()=>{S.schemes++;st.tool++;st.step=2;if(roll(o)){q.alive=false;apply({th:10,tamco:2});log(`<span class="r">Hoàng hậu ${q.name} băng hà sau chén trà chiều.</span>`)}else{stEnd(-1,"Bị Thái hậu phủi tay");deathSentence("Hạ độc Hoàng hậu bị bắt, Thái hậu phủi tay không nhận")}}},
    {n:"Từ chối, tự gây thế lực",fx:{th:-25,danh:4},go:()=>{st.step=2}}]}};
@@ -1638,7 +1638,7 @@ ev("taster",()=>S.rank>=2&&liveRivals(false).length,()=>({v:rvTop((a,b)=>b.malic
  {n:"Đổi người nấu, giấu chuyện",fx:{bac:-30},x:"2 tháng phi tần khó hại ngươi",go:()=>{S.shield=Math.max(S.shield,2)}},
  {n:"Khóc kể với Hoàng thượng",fx:{sung:3},x:"cả hậu cung bị tra, ai cũng ghen +5",go:()=>ghenAll(5)}]}});
 ev("letterhome",()=>S.turn>=3,()=>({o:od(30+S.sung/3)}),p=>({
- t:`Thư nhà giấu trong giỏ trái cây: ${S.origin.k==="td"?"vú nuôi năm xưa":"mẹ già"} lâm bệnh nặng, chỉ mong gặp mặt ngươi lần cuối.`,o:[
+ t:`Thư nhà giấu trong giỏ trái cây: ${S.origin.k==="td"?"vú nuôi năm xưa":S.kc&&S.kc.fam&&!S.kc.fam.some(m=>m.r==="me")?"tổ mẫu":"mẹ già"} lâm bệnh nặng, chỉ mong gặp mặt ngươi lần cuối.`,o:[
  {n:"Gửi 50 lượng chữa bệnh",fx:{bac:-50,duc:3}},
  {n:"Xin ân chuẩn về thăm",fx:{},x:`${word(p.o)} · thành: Đức +4, Sức +10 · hỏng: Sủng -4`,go:()=>apply(roll(p.o)?{duc:4,suc:10}:{sung:-4})},
  {n:"Viết thư hỏi han",fx:{suc:-5,duc:1}}]}));
@@ -1988,8 +1988,8 @@ function birthP(p,fake){const me=p===S;
    else{ap(p,{danh:-10,sung:-10});punish(p,"bị đồn sinh ra yêu vật",2);return ev+(me?`<span class="r">Ngươi tỉnh lại thì bên cạnh là một con mèo chết lột da. Cả cung đồn ngươi sinh ra yêu vật.</span> Danh -10 · Sủng -10. Đứa trẻ không rõ tung tích. `:`<span class="r">${p.name} lâm bồn, bên cạnh chỉ có một con mèo chết lột da; cả cung đồn nàng sinh yêu vật.</span> `)}}}
  const n=!fake&&roll(4)?2:1;if(n===2)ev+=me?`<b class="g">Song thai!</b> `:`${p.name} sinh đôi. `;let up=false;
  for(let i=0;i<n;i++){const k=mkKid(R(2)?"m":"f",0);p.kids.push(k);
-  if(k.sex==="m"){ev+=me?`<b class="g">Ngươi sinh hạ ${k.name}.</b> `:`${p.name} sinh hạ ${k.name}. `;if(me)ghenAll(15);if(!up&&rkOf(p)<6){up=true;if(typeof promoReward==="function")ev+=promoReward(p,p.kids.filter(x=>x.sex==="m").length===1?"son1":"son");else{if(me)S.rank++;else p.rank++;p.lastPromo=S.turn;ev+=`${me?"Được":p.name+" được"} tấn phong ${rkName(p)}. `}}ap(p,{sung:10,danh:10,th:15});S.emp.mood=0;p.bonusPay=(p.bonusPay||0)+20;if(roll(50))bestow(p,"son")}
-  else{ev+=me?`Ngươi sinh hạ ${k.name}. `:`${p.name} sinh hạ ${k.name}. `;if(me)ghenAll(8);if(!up&&rkOf(p)<6&&typeof promoReward==="function"&&!(n===2&&i===0)){up=true;ev+=promoReward(p,"dau")}ap(p,{sung:5,danh:4});p.bonusPay=(p.bonusPay||0)+10;if(roll(50))bestow(p,"dau")}}
+  if(k.sex==="m"){ev+=me?`<b class="g">Ngươi sinh hạ ${k.name}.</b> `:`${p.name} sinh hạ ${k.name}. `;if(me)ghenAll(15);if(!up&&rkOf(p)<6){up=true;if(typeof exSonUp==="function")ev+=exSonUp(p);else{if(me)S.rank++;else p.rank++;p.lastPromo=S.turn;ev+=`${me?"Được":p.name+" được"} tấn phong ${rkName(p)}. `}}ap(p,{sung:10,danh:10,th:15});S.emp.mood=0;p.bonusPay=(p.bonusPay||0)+20;if(roll(50))bestow(p,"son")}
+  else{ev+=me?`Ngươi sinh hạ ${k.name}. `:`${p.name} sinh hạ ${k.name}. `;if(me)ghenAll(8);if(!up&&rkOf(p)<6&&typeof exGrace==="function"&&!(n===2&&i===0)){up=true;ev+=exGrace(p,"f")}ap(p,{sung:5,danh:4});p.bonusPay=(p.bonusPay||0)+10;if(roll(50))bestow(p,"dau")}}
  return ev}
 /* months between decrees grow with rank: 3 up to Tần, then 5, 7, 9 */
 function promoGap(r){return r<3?3:3+(r-2)*2}
@@ -2447,7 +2447,7 @@ function renderPanel0(){const el=$("panel");let h="";faceInit();const gm=documen
  if(tab==="story"){const s=STORY[S.origin.k];if(s.calc)S.st.step=s.calc();
    h=`<div class="story"><h3>${s.t}</h3><p style="margin:0 0 4px">${s.goal}</p><p style="margin:0"><b>${typeof lab67==="function"&&lab67()||`Bước ${S.st.step}/${s.n}`}</b> · ${S.st.done===1?`<span class="g">Thành: ${S.st.tag}</span>`:S.st.done===-1?`<span class="r">Bại: ${S.st.tag}</span>`:s.hint()}</p></div>`;
    const c=(ok,t)=>`<span class="${ok?"y":"n"}">${ok?"✓":"✗"} ${t}</span>`;
-   h+=S.rank>=7?`<div class="req"><h3>Ngươi là Hoàng hậu</h3>Đưa con mình lên ngôi để thành Hoàng thái hậu.</div>`:S.out?`<div class="req"><h3>Lãnh cung</h3>Không bàn chuyện sắc phong. Được minh oan thì phục vị ${RANKS[Math.max(0,Math.min(6,S.coldRank||0))].n} (hoặc thấp hơn một bậc).</div>`:`<div class="req"><h3>Điều kiện sắc phong ${RANKS[S.rank+1].n}</h3>${kitReqRows(promoReq())}<span class="past">Ngôi Hoàng hậu về sau cần: ngôi bỏ trống, có hoàng tử và Thái hậu ${BAL.hhTh} (không con trai: Thái hậu ${has("hieuthao")?BAL.hhThNoSonHieu:BAL.hhThNoSon}), và <b class="${S.duc>=hhNeed(S).duc?"g":"r"}">Đức ${S.duc} (cần ${hhNeed(S).duc})</b> (mẹ Thái tử chỉ cần ${BAL.hhDucHeir}). Khi ngôi trống, Hoàng thượng chọn trong những người đủ điều kiện (nặng ở hoàng tử, Thái hậu, Danh).</span><br><span class="past">Đủ điều kiện thì được dự khảo hạch tấn phong; đỗ thì có thánh chỉ. ${typeof promoRuleTxt==="function"?promoRuleTxt():""}</span></div>`}
+   h+=S.rank>=7?`<div class="req"><h3>Ngươi là Hoàng hậu</h3>Đưa con mình lên ngôi để thành Hoàng thái hậu.</div>`:S.out?`<div class="req"><h3>Lãnh cung</h3>Không bàn chuyện sắc phong. Được minh oan thì phục vị ${RANKS[Math.max(0,Math.min(6,S.coldRank||0))].n} (hoặc thấp hơn một bậc).</div>`:`<div class="req"><h3>Điều kiện sắc phong ${RANKS[S.rank+1].n}</h3>${kitReqRows(promoReq())}<span class="past">Ngôi Hoàng hậu về sau cần: ngôi bỏ trống, có hoàng tử và Thái hậu ${BAL.hhTh} (không con trai: Thái hậu ${has("hieuthao")?BAL.hhThNoSonHieu:BAL.hhThNoSon}), và <b class="${S.duc>=hhNeed(S).duc?"g":"r"}">Đức ${S.duc} (cần ${hhNeed(S).duc})</b> (mẹ Thái tử chỉ cần ${BAL.hhDucHeir}). Khi ngôi trống, Hoàng thượng chọn trong những người đủ điều kiện (nặng ở hoàng tử, Thái hậu, Danh).</span><br><span class="past">Đủ điều kiện thì được dự khảo hạch tấn phong; đỗ thì có thánh chỉ. Sinh hoàng tử: được ân thi khảo hạch ngay.</span></div>`}
  if(tab==="inv")h=invHTML();
  if(tab==="rel")h=relHTML();
  if(tab==="staff")h=staffTabHTML();
@@ -7708,35 +7708,35 @@ ARC67.td_tha={o:"td",t:"Thù hay tha",w:"foe",sj:"mối thù với nhà {foe}",g
   mid:{k:0,tag:"Buông bỏ thù xưa",t:"Ngươi chọn buông bỏ. Lòng nhẹ đi, nhưng nhà ngươi vẫn mang tiếng tội thần.",fx:{duc:5}},
   lose:{k:-1,tag:"Mang tiếng thù dai",t:"Ngươi tố mà không thành, cả cung cho rằng ngươi thù dai, Hoàng thượng lạnh nhạt.",fx:{sung:-8,danh:-8},go:()=>e67foe(foe67(),15)}}};
 /* ================= CHÁU GÁI THÁI HẬU ================= */
-ARC67.ch_co={o:"ch",t:"Quân cờ của cô tổ",w:"th",sj:"những việc Thái hậu giao",g:"Thái hậu đưa ngươi vào cung để đối trọng với Hoàng hậu. Mệnh lệnh của bà ngày một nặng. Làm con cờ ngoan, hay thành người đánh cờ cùng bà.",
+ARC67.ch_co={o:"ch",t:"Quân cờ của cô mẫu",w:"th",sj:"những việc Thái hậu giao",g:"Thái hậu đưa ngươi vào cung để đối trọng với Hoàng hậu. Mệnh lệnh của bà ngày một nặng. Làm con cờ ngoan, hay thành người đánh cờ cùng bà.",
  p:[["s1","s2"],["c1","c2","c3","G.hh","G.emp"],["t1"],["x1"]],
  B:{
  s1:{h:"Việc đầu tiên",w:"th",t:"Thái hậu gọi ngươi vào Đức Thọ cung: “Dò xem Càn Ninh cung dạo này qua lại với ai.”",o:[
-  {n:"Vâng mệnh",c:{suc:-3},o:()=>45+S.mat*5,w:{th:8},sc:1,f:"obey",wx:"cô tổ hài lòng",l:{hh:-8},lx:"Hoàng hậu biết bị dò",rt:"Ngươi biết Hoàng hậu hay mời nhà ngoại vào cung.",rf:"Người của Hoàng hậu bắt gặp ngươi."},
+  {n:"Vâng mệnh",c:{suc:-3},o:()=>45+S.mat*5,w:{th:8},sc:1,f:"obey",wx:"cô mẫu hài lòng",l:{hh:-8},lx:"Hoàng hậu biết bị dò",rt:"Ngươi biết Hoàng hậu hay mời nhà ngoại vào cung.",rf:"Người của Hoàng hậu bắt gặp ngươi."},
   {n:"Thưa khéo: con còn non, sợ hỏng việc",c:{th:-6},w:{duc:3},f:"own",wx:"không dính vào",rt:"Thái hậu nhìn ngươi lạnh lùng."}]},
- s2:{h:"Cô tổ chọn người hầu cho ngươi",w:"th",t:"Thái hậu ban cho ngươi một ma ma, nói là để dạy lễ. Ai cũng biết bà ta báo hết về Đức Thọ cung.",o:[
-  {n:"Kính trọng ma ma",c:{},w:{th:5},f:"obey",wx:"cô tổ yên tâm",lx:"mọi việc đến tai bà",rt:"Ma ma khen ngươi với Thái hậu."},
+ s2:{h:"Cô mẫu chọn người hầu cho ngươi",w:"th",t:"Thái hậu ban cho ngươi một ma ma, nói là để dạy lễ. Ai cũng biết bà ta báo hết về Đức Thọ cung.",o:[
+  {n:"Kính trọng ma ma",c:{},w:{th:5},f:"obey",wx:"cô mẫu yên tâm",lx:"mọi việc đến tai bà",rt:"Ma ma khen ngươi với Thái hậu."},
   {n:"Lấy lòng ma ma, kéo về phe mình",c:{bac:-40},o:45,sc:1,f:"own",wx:"tin gửi về là tin ngươi chọn",l:{th:-5},rt:"Ma ma thành người của ngươi.",rf:"Ma ma báo với Thái hậu."}]},
  c1:{h:"Gói thuốc",w:"th",t:"Thái hậu dúi vào tay ngươi một gói thuốc: “Hoàng hậu đang uống thuốc cầu tự. Thêm cái này vào, nàng sẽ hiếm muộn thêm vài năm.”",need:["hh"],o:[
   {n:"Từ chối thẳng",c:{th:-12},w:{duc:6},f:"own",wx:"tay sạch",rt:"Thái hậu đập bàn, nhưng không ép."},
-  {n:"Nhận thuốc rồi lén đổ đi",c:{},o:()=>50+S.tamco/4,w:{th:5,duc:3},sc:1,wx:"cô tổ tưởng ngươi đã làm",l:{th:-10},lx:"Thái hậu biết ngươi lừa",rt:"Không ai biết.",rf:"Thái hậu biết gói thuốc nằm dưới gốc mai."}]},
- c2:{h:"Cô tổ muốn ngươi có con",w:"th",t:"Thái hậu sốt ruột: ngươi phải sinh hoàng tử. Bà sai thái y bắt mạch, ban thuốc bổ.",o:[
-  {n:"Uống thuốc của cô tổ",c:{suc:-3},w:{th:5},wx:"cô tổ vui",lx:"thuốc mạnh, mệt người",rt:"Thái hậu gật đầu."},
+  {n:"Nhận thuốc rồi lén đổ đi",c:{},o:()=>50+S.tamco/4,w:{th:5,duc:3},sc:1,wx:"cô mẫu tưởng ngươi đã làm",l:{th:-10},lx:"Thái hậu biết ngươi lừa",rt:"Không ai biết.",rf:"Thái hậu biết gói thuốc nằm dưới gốc mai."}]},
+ c2:{h:"Cô mẫu muốn ngươi có con",w:"th",t:"Thái hậu sốt ruột: ngươi phải sinh hoàng tử. Bà sai thái y bắt mạch, ban thuốc bổ.",o:[
+  {n:"Uống thuốc của cô mẫu",c:{suc:-3},w:{th:5},wx:"cô mẫu vui",lx:"thuốc mạnh, mệt người",rt:"Thái hậu gật đầu."},
   {n:"Khéo xin tự lo",c:{},o:50,w:{tamco:2},sc:1,f:"own",wx:"tự chủ",l:{th:-5},rt:"Thái hậu chiều ngươi.",rf:"Thái hậu phật lòng."}]},
  c3:{h:"Hoàng hậu cầu hòa",w:"hh",need:["hh"],t:"Hoàng hậu {hh} mời riêng ngươi: “Thái hậu già rồi. Sau này muội dựa vào ai?”",o:[
   {n:"Ngầm bắt tay Hoàng hậu",c:{th:-5},o:45,w:{hh:15},sc:1,f:"own",wx:"có đường lui",l:{hh:-6},lx:"Thái hậu biết",rt:"Hoàng hậu cười, rót trà mời ngươi.",rf:"Thái hậu biết chuyện, giận lắm."},
-  {n:"Báo lại với Thái hậu",c:{hh:-10},w:{th:8},f:"obey",wx:"cô tổ tin ngươi hơn",rt:"Thái hậu cười nhạt về phía Càn Ninh cung."}]},
- t1:{h:"Cô tổ hỏi lòng ngươi",w:"th",t:"Thái hậu cầm tay ngươi: “Ai gia không sống mãi. Ngươi là cháu ai gia, hay là người của chính ngươi?”",o:[
-  {n:"Thưa: cháu của cô tổ",c:{},w:{th:6},f:"obey",wx:"bà yên lòng",lx:"ràng buộc thêm",rt:"Thái hậu gật đầu."},
-  {n:"Thưa: con muốn tự đứng được để báo đáp cô tổ",c:{},o:45,sc:2,f:"own",wx:"bà nể ngươi",l:{th:-6},rt:"Thái hậu cười lần đầu tiên: ‘Giống ai gia hồi trẻ.’",rf:"Thái hậu cho là ngươi lớn gan."}]},
- x1:{h:"Ván cờ cuối của cô tổ",w:"th",t:"Thái hậu muốn ngươi dâng sớ hặc họ ngoại Hoàng hậu trong buổi yến lớn.",o:[
+  {n:"Báo lại với Thái hậu",c:{hh:-10},w:{th:8},f:"obey",wx:"cô mẫu tin ngươi hơn",rt:"Thái hậu cười nhạt về phía Càn Ninh cung."}]},
+ t1:{h:"Cô mẫu hỏi lòng ngươi",w:"th",t:"Thái hậu cầm tay ngươi: “Ai gia không sống mãi. Ngươi là cháu ai gia, hay là người của chính ngươi?”",o:[
+  {n:"Thưa: cháu của cô mẫu",c:{},w:{th:6},f:"obey",wx:"bà yên lòng",lx:"ràng buộc thêm",rt:"Thái hậu gật đầu."},
+  {n:"Thưa: con muốn tự đứng được để báo đáp cô mẫu",c:{},o:45,sc:2,f:"own",wx:"bà nể ngươi",l:{th:-6},rt:"Thái hậu cười lần đầu tiên: ‘Giống ai gia hồi trẻ.’",rf:"Thái hậu cho là ngươi lớn gan."}]},
+ x1:{h:"Ván cờ cuối của cô mẫu",w:"th",t:"Thái hậu muốn ngươi dâng sớ hặc họ ngoại Hoàng hậu trong buổi yến lớn.",o:[
   {n:"Đánh cờ theo cách của mình: gom chứng cứ rồi mới dâng",c:{suc:-4},o:A=>35+(A.f.own?20:0)+S.tamco/6,e:["win","mid"],rt:"Chứng cứ vững, họ ngoại Hoàng hậu bị phạt, Thái hậu khen ngươi cao tay.",rf:"Chứng cứ chưa đủ, ngươi xin hoãn."},
-  {n:"Làm đúng như cô tổ dặn",c:{hh:-12},o:A=>40+(A.f.obey?20:0),e:["win2","lose"],rt:"Sớ hặc thành công, Thái hậu ban thưởng.",rf:"Sớ hặc thất bại, Thái hậu phủi tay."},
-  {n:"Từ chối, đứng ngoài",c:{th:-10},w:{duc:4},e:"mid",lx:"cô tổ thất vọng",rt:"Ngươi cáo bệnh không dự yến."}]}},
+  {n:"Làm đúng như cô mẫu dặn",c:{hh:-12},o:A=>40+(A.f.obey?20:0),e:["win2","lose"],rt:"Sớ hặc thành công, Thái hậu ban thưởng.",rf:"Sớ hặc thất bại, Thái hậu phủi tay."},
+  {n:"Từ chối, đứng ngoài",c:{th:-10},w:{duc:4},e:"mid",lx:"cô mẫu thất vọng",rt:"Ngươi cáo bệnh không dự yến."}]}},
  E:{win:{k:1,tag:"Người đánh cờ cùng Thái hậu",w:"th",t:"Thái hậu coi ngươi là người kế thừa thế lực của bà. Bà dạy ngươi những ván cờ của cả đời mình.",fx:{th:15,danh:8,tamco:3}},
   win2:{k:1,tag:"Quân cờ đắc lực",w:"th",t:"Thái hậu hài lòng, che chở ngươi hết mức. Nhưng Hoàng hậu hận ngươi.",fx:{th:12,hh:-10,danh:4}},
   mid:{k:0,tag:"Cô cháu giữ lễ",t:"Thái hậu vẫn thương, nhưng không còn giao việc lớn. Ngươi tự đi đường mình.",fx:{duc:3}},
-  lose:{k:-1,tag:"Bị cô tổ phủi tay",w:"th",t:"Thái hậu phủi tay, nói ngươi vô dụng. Hoàng hậu biết ngươi mất chỗ dựa.",fx:{th:-15,hh:-10,danh:-5}}}};
+  lose:{k:-1,tag:"Bị cô mẫu phủi tay",w:"th",t:"Thái hậu phủi tay, nói ngươi vô dụng. Hoàng hậu biết ngươi mất chỗ dựa.",fx:{th:-15,hh:-10,danh:-5}}}};
 ARC67.ch_benh={o:"ch",t:"Thái hậu lâm bệnh",w:"th",sj:"bệnh tình của Thái hậu",g:"Thái hậu ngã bệnh. Cả hậu cung rục rịch: ai cũng muốn biết Đức Thọ cung còn đứng được bao lâu. Ngươi là cháu bà, chỗ dựa của ngươi đang lung lay.",
  ok:()=>!S.thDead,
  p:[["s1","s2"],["c1","c2","c3","G.hh","G.rumor"],["t1"],["x1"]],
@@ -7761,9 +7761,9 @@ ARC67.ch_benh={o:"ch",t:"Thái hậu lâm bệnh",w:"th",sj:"bệnh tình của 
   {n:"Quỳ ngoài điện suốt đêm",c:{suc:-8},w:{th:5,duc:3},sc:1,wx:"ai cũng thấy lòng hiếu của ngươi",rt:"Ngươi quỳ đến sáng."}]},
  x1:{h:"Thái hậu tỉnh dậy",w:"th",t:"Thái hậu qua được cơn nguy. Bà hỏi ngươi: “Lúc ai gia nằm, những ai trung, những ai không?”",o:[
   {n:"Tâu rõ chuyện thuốc và kẻ hai lòng",c:{},o:A=>35+(A.f.poison?25:0)+S.th/6,e:["win","lose"],rt:"Thái hậu nổi giận, cho tra Thái y viện, ghi ơn ngươi.",rf:"Thái hậu cho là ngươi nói quá, còn trách ngươi gây chia rẽ."},
-  {n:"Chỉ nói: con đã ở bên cô tổ",c:{},w:{th:6},e:"mid",lx:"kẻ hại bà còn đó",rt:"Thái hậu xoa đầu ngươi."},
+  {n:"Chỉ nói: con đã ở bên cô mẫu",c:{},w:{th:6},e:"mid",lx:"kẻ hại bà còn đó",rt:"Thái hậu xoa đầu ngươi."},
   {n:"Xin bà nghỉ ngơi, đừng lo việc cung",c:{},o:55,e:["win2","mid"],rt:"Thái hậu giao một phần việc lục cung cho ngươi.",rf:"Thái hậu không muốn buông quyền."}]}},
- E:{win:{k:1,tag:"Cứu cô tổ, vạch kẻ gian",w:"th",t:"Thái hậu khỏe lại, Thái y viện bị tra, kẻ hai lòng bị bà ghi nhớ. Bà thương ngươi hơn hết thảy.",fx:{th:20,danh:6}},
+ E:{win:{k:1,tag:"Cứu cô mẫu, vạch kẻ gian",w:"th",t:"Thái hậu khỏe lại, Thái y viện bị tra, kẻ hai lòng bị bà ghi nhớ. Bà thương ngươi hơn hết thảy.",fx:{th:20,danh:6}},
   win2:{k:1,tag:"Được giao việc lục cung",t:"Thái hậu giao cho ngươi phụ việc lục cung. Ngươi có tiếng nói trong hậu cung.",fx:{th:10,danh:8}},
   mid:{k:0,tag:"Bà khỏe lại",t:"Thái hậu khỏe lại. Mọi chuyện như cũ.",fx:{th:4}},
   lose:{k:-1,tag:"Bị trách gây chia rẽ",t:"Thái hậu trách ngươi gieo nghi kỵ lúc bà bệnh. Bà lạnh nhạt, Hoàng hậu đắc ý.",fx:{th:-12,danh:-5}}}};
@@ -7822,7 +7822,7 @@ ARC67.ch_bi={o:"ch",t:"Bí mật năm xưa",w:"th",sj:"bí mật năm xưa của
   {n:"Đưa nhân chứng nói rõ sự thật",c:{suc:-4},o:A=>30+(A.f.wit?25:0)+(A.f.tell?10:0),e:["win","lose"],rt:"Sự thật sáng tỏ: Thái hậu bị hại trước. Kẻ trình thư bị phạt.",rf:"Không ai tin lời lão cung nữ. Thái hậu bị Hoàng thượng xa lánh, ngươi liên lụy."},
   {n:"Nhận là thư giả, xin tra nét chữ",c:{},o:A=>45+(A.f.burn?10:0),e:["mid","lose"],rt:"Thư bị coi là giả, chuyện chìm xuống.",rf:"Nét chữ là thật."},
   {n:"Dùng bản gốc mặc cả với Thái hậu",if:A=>A.f.hold,c:{duc:-4},o:55,e:["win2","lose"],rt:"Thái hậu dẹp chuyện, và từ nay phải nghe ngươi một phần.",rf:"Thái hậu giận dữ cắt đứt với ngươi."}]}},
- E:{win:{k:1,tag:"Minh oan cho cô tổ",w:"th",t:"Thái hậu được minh oan, nhìn ngươi như con ruột. Bà dồn hết thế lực cho ngươi.",fx:{th:20,danh:8}},
+ E:{win:{k:1,tag:"Minh oan cho cô mẫu",w:"th",t:"Thái hậu được minh oan, nhìn ngươi như con ruột. Bà dồn hết thế lực cho ngươi.",fx:{th:20,danh:8}},
   win2:{k:1,tag:"Nắm thóp Đức Thọ cung",w:"th",t:"Thái hậu phải nể ngươi. Bà không thương ngươi hơn, nhưng không dám bỏ ngươi.",fx:{th:8,tamco:4,danh:4}},
   mid:{k:0,tag:"Bí mật chìm xuống",t:"Chuyện cũ chìm xuống đáy giếng. Không ai được, không ai mất.",fx:{duc:2}},
   lose:{k:-1,tag:"Liên lụy chuyện cũ",t:"Hoàng thượng xa lánh Thái hậu, kéo theo cả ngươi. Đức Thọ cung không còn đủ sức che chở.",fx:{th:-10,sung:-6,danh:-6}}}};
@@ -7857,14 +7857,14 @@ ARC67.thd_tho={o:"thd",t:"Danh hiệu Tài nữ",w:"emp",sj:"thơ của ngươi"
   win2:{k:1,gi:["nghien","emp"],tag:"Đứng nhì kỳ thi",t:"Ngươi đứng nhì, được ban bút nghiên. Không rực rỡ, nhưng đủ để cả cung biết tên.",fx:{danh:7,sung:3}},
   mid:{k:0,tag:"Lỡ hẹn với danh hiệu",t:"Không đứng đầu, nhưng ai đọc thơ ngươi cũng nhớ.",fx:{danh:2,tai:2}},
   lose:{k:-1,tag:"Mang tiếng sáo rỗng",t:"Thơ ngươi bị chê, {v} được dịp chế giễu. Danh tài nữ trôi xa.",fx:{danh:-8}}}};
-ARC67.thd_sach={o:"thd",t:"Di cảo của cha",w:"maid",sj:"di cảo của cha",g:"Cha để lại một bộ sách bàn chính sự, chỉ thẳng tệ tham nhũng của một nhà quyền thế. In ra thì danh cha vang dội, mà kẻ bị chỉ mặt sẽ không ngồi yên.",
+ARC67.thd_sach={o:"thd",t:"Bản thảo của cha",w:"maid",sj:"bản thảo của cha",g:"Cha viết một bộ sách bàn chính sự, chỉ thẳng tệ tham nhũng của một nhà quyền thế. In ra thì danh cha vang dội, mà kẻ bị chỉ mặt sẽ không ngồi yên.",
  cast(A){A.n1=pk67(["Hộ bộ thượng thư","Lễ bộ thượng thư","Công bộ thượng thư"]);return true},
  p:[["s1","s2"],["c1","c2","c3","G.gift","G.th"],["t1"],["x1"]],
  B:{
  s1:{h:"Rương sách cũ",w:"maid",t:"Mẹ gửi vào rương sách của cha. Trong có bộ ‘Trị quốc sách’, chương cuối chỉ đích danh {n1} tham ô đê điều.",o:[
   {n:"Đọc kỹ, chép thêm bản",c:{suc:-4},w:{tai:3},sc:1,wx:"hiểu sâu sách cha",lx:"giữ sách là giữ lửa",rt:"Ngươi chép xong một bản."},
   {n:"Cất kỹ, chưa đọc",c:{},w:{tamco:2},wx:"chưa vướng",lx:"chưa biết hết",rt:"Rương sách nằm dưới gầm giường."}]},
- s2:{h:"{n1} nghe phong thanh",w:"maid",t:"Phủ {n1} gửi quà: ‘Nghe nói cha {xung} để lại sách quý, xin được mua lại.’",o:[
+ s2:{h:"{n1} nghe phong thanh",w:"maid",t:"Phủ {n1} gửi quà: ‘Nghe nói cha {xung} viết được sách quý, xin được mua lại.’",o:[
   {n:"Từ chối",c:{},w:{duc:4},f:"firm",wx:"giữ sách",lx:"{n1} để ý",rt:"Quà bị trả lại."},
   {n:"Nhận quà, nói sách đã mất",c:{duc:-3},o:50,w:{bac:60},wx:"bạc và yên thân",l:{},lx:"họ không tin",rt:"Phủ {n1} yên tâm.",rf:"Họ biết ngươi nói dối."}]},
  c1:{h:"Hàn lâm viện muốn xem sách",w:"maid",t:"Một học sĩ Hàn lâm muốn xem sách cha để bàn chuyện in.",o:[
@@ -7946,11 +7946,6 @@ ARC67.thd_hoc={o:"thd",t:"Thầy giáo trong cung",w:"emp",sj:"việc ngươi d�
   mid:{k:0,tag:"Công dạy lặng lẽ",t:"Không ai khen to, nhưng bọn trẻ nhớ ngươi.",fx:{duc:3}},
   lose:{k:-1,tag:"Khảo hạch thất bại",t:"Khảo hạch hỏng, các mẹ đổ lỗi cho ngươi. Hoàng thượng thôi giao việc dạy.",fx:{danh:-6,sung:-4}}}};
 /* ================= CUNG NỮ TUYỂN VÀO CUNG (đang là kẻ hầu: Chủ tin, Hoàng thượng để ý) ================= */
-/* owner 16/11 06:20Z (review/promo-skip): an arc ending that SAYS she is raised a bậc gives the servant rank at once, no Nội vụ phủ exam
-   (cap srvMax, the mistress's palace; at the cap it falls back to Công lao) */
-function e67srvUp(n){try{if(S.srv&&!S.srv.risen&&typeof isSrv==="function"&&isSrv()){const mx=typeof srvMax==="function"?srvMax():2;
-  if((S.srv.rk||0)<mx){S.srv.rk=(S.srv.rk||0)+1;S.srv.mp=0;S.srv.ex={};try{if(typeof exSrvDrop==="function")exSrvDrop()}catch(e){}
-   log(`<b class="g">Được thăng ${SRK.maid[S.srv.rk]}</b> (không qua khảo hạch).`);return `Được thăng ${SRK.maid[S.srv.rk]}, không qua khảo hạch.`}}}catch(e){console.error(e)}return e67merit(n)}
 function e67merit(n){try{if(S.srv&&!S.srv.risen&&typeof srvMerit==="function"){srvMerit(n);return `Công lao +${n}.`}}catch(e){}return""}
 ARC67.cnv_chu={o:"cnv",t:"Bí mật của chủ nhân",w:"mis",sj:"bí mật của {mis}",g:"Đêm trực, ngươi thấy {mis} lén đốt một bức thư và giấu một gói thuốc. Biết bí mật của chủ là cầm dao hai lưỡi: giữ thì được tin, lộ thì mất mạng nghề.",
  p:[["s1","s2"],["c1","c2","c3","G.srv","G.spy"],["t1"],["x1"]],
@@ -8064,8 +8059,8 @@ ARC67.cnv_ma={o:"cnv",t:"Ma ma dạy việc",w:"maid",sj:"chuyện Lưu ma ma",g
   {n:"Làm hết sức, không cầu cạnh",c:{suc:-6},o:A=>40+(A.f.hard?15:0)+(A.f.honest?10:0),e:["win","mid"],rt:"Ma ma chấm ngươi đứng đầu.",rf:"Ngươi làm tốt, nhưng chưa đứng đầu."},
   {n:"Nhờ ma ma nâng đỡ",c:{bac:-10},o:A=>45+(A.f.loyal?20:0),e:["win2","lose"],rt:"Ma ma nâng ngươi lên.",rf:"Ma ma ghét kẻ cầu cạnh, đánh trượt ngươi."},
   {n:"Xin hoãn khảo",c:{},w:{suc:4},e:"mid",lx:"chờ thêm một năm",rt:"Ngươi xin hoãn."}]}},
- E:{win:{k:1,tag:"Học trò giỏi của Lưu ma ma",t:"Ngươi đứng đầu kỳ khảo, được ma ma tiến cử lên một bậc. Cả Nội vụ phủ biết tên ngươi.",fx:{danh:6,tin:10},go:()=>e67srvUp(10)},
-  win2:{k:1,tag:"Được ma ma nâng đỡ",t:"Ma ma nâng ngươi lên một bậc. Ngươi có một chỗ dựa trong Nội vụ phủ.",fx:{tin:8,danh:3},go:()=>e67srvUp(6)},
+ E:{win:{k:1,tag:"Học trò giỏi của Lưu ma ma",t:"Ngươi đứng đầu kỳ khảo, được ma ma tiến cử lên làm đại cung nữ. Cả Nội vụ phủ biết tên ngươi.",fx:{danh:6,tin:10},go:()=>e67merit(10)},
+  win2:{k:1,tag:"Được ma ma nâng đỡ",t:"Ma ma nâng ngươi lên một bậc. Ngươi có một chỗ dựa trong Nội vụ phủ.",fx:{tin:8,danh:3},go:()=>e67merit(6)},
   mid:{k:0,tag:"Chờ dịp khác",t:"Ngươi chưa được thăng, nhưng tay nghề đã khác hẳn.",fx:{suc:3,duc:2}},
   lose:{k:-1,tag:"Bị ma ma đánh trượt",t:"Ma ma đánh trượt ngươi. Ngươi phải làm lại từ đầu.",fx:{danh:-4,tin:-8}}}};
 /* ================= SHARED ARCS (any origin, drawn later in the life) ================= */
@@ -9155,7 +9150,7 @@ function rsn6(rows){return rows.map(r=>String(r[1]).replace(/\s*\(.*\)\s*/,"").r
   const add=` Lý do: ${[rsn6(rows.filter(x=>x[0])),why].filter(Boolean).join(" · ")}.`;return r.replace(/\s*$/,"")+add+" "}}catch(e){}return r}})();
 (function(){if(typeof fillSeats!=="function")return;const f0=fillSeats;fillSeats=function(){window.__fill6=0;try{for(const r of [6,5,4,3]){if(!seatFree(r))continue;const C=consorts().filter(p=>rkOf(p)===r-1&&!p.out&&!p.confined&&promoReqP(p).every(x=>x[0]));if(C.length>=2){window.__fill6=C.length;break}}}catch(e){}
  try{return f0.apply(this,arguments)}finally{window.__fill6=0}}})();
-(function(){if(typeof birthP!=="function")return;const b0=birthP;birthP=function(p){const r=b0.apply(this,arguments);try{if(typeof r==="string")return r.replace(/((?:Được|[^.]* được) tấn phong [^.]+)\. /,"$1. Lý do: sinh hạ hoàng tử đầu lòng (thăng một bậc, không qua khảo hạch). ")}catch(e){}return r}})();
+(function(){if(typeof birthP!=="function")return;const b0=birthP;birthP=function(p){const r=b0.apply(this,arguments);try{if(typeof r==="string")return r.replace(/((?:Được|[^.]* được) tấn phong [^.]+)\. /,"$1. Lý do: sinh hạ hoàng tử (mẹ có hoàng tử, dưới bậc Quý phi, được thăng một bậc). ")}catch(e){}return r}})();
 (function(){if(typeof wkSummary!=="function")return;wkSummary=function(){const s=S.wkSnap||wkSnap();const n=Math.max(0,Math.min(S.logs.length,(S.logSeq||0)-(s.seq||0)));
  const L0=S.logs.slice(0,n).map(plain).filter(x=>x&&!/^Xin xăm|^Gieo lại|^Đến /.test(x));const SEN=[];
  for(const x of L0)for(const t of x.split(kRx("(?<=[.!?])\\s+",""))){const u=t.trim();if(!u)continue;if(/^Lý do:/.test(u)&&SEN.length){SEN[SEN.length-1].why=u;continue}if(!SEN.some(o=>o.t===u))SEN.push({t:u})}
@@ -16649,22 +16644,12 @@ Object.assign(BAL,{itd:{allow:false}});
    Biên cương or Kho lúa < 40, ±npcP per sided consort with Sủng ≥ npcS. Outcome: p ≥ B Hoàng thượng thân chính, p < A quyền thần nhiếp chính,
    else Thái hậu buông rèm. thK = weight of a Thái hậu push (toward the middle). tr0 trust on joining; switch: Danh −swDanh, leader −swLead,
    the old side's consorts −swRel, trust → swTr, cooldown swCd months, at most swMax. Errand every erCd months (erP %). Outcome for her:
-   winner emp Sủng +winSung×(.5+tr/100), Danh +winDanh, below rankCap and above the Sủng floor +1 rank at once, no exam (jexam exDirectUp; owner 16/11 06:20Z: long-road rewards skip the exam); th Thái hậu +winTh×k, che chở winShield months;
+   winner emp Sủng +winSung×(.5+tr/100), Danh +winDanh, below rankCap an exam at once with the conditions waived (jexam exGrace; never a free rank, owner 15/11 17:20Z); th Thái hậu +winTh×k, che chở winShield months;
    quyen Bạc bacWin×rank price×k, Tai mắt +1; losers mirror (loseSung / loseTh / loseDanh). Houses: loseHouse / winHouse.
    Tâm nguyện lines: a line start every lnCd months, a failed step retried after lnRetry months. */
 Object.assign(BAL,{rg:{at:[1,5,10,18,27,37],decideAfter:2,decideWait:3,catchUp:2,drift:.65,noise:[40,3],qs:.4,npcS:45,npcP:.08,A:48,B:60,thK:.1,pk:.46,pkQ:1.25,tr0:30,
  swDanh:5,swLead:8,swRel:8,swTr:10,swCd:6,swMax:2,joinRel:4,famAf:12,erCd:3,erP:30,ngoai:3,winSung:14,winDanh:6,rankCap:6,rankSung:0,
  winTh:24,winShield:6,bacWin:160,loseSung:8,loseTh:12,loseDanh:6,loseHouse:30,winHouse:15,npcWin:6,npcLose:8,lnCd:2,lnRetry:4}});
-/* BAL.psk = PROMO-SKIP (jexam promoReward, owner 16/11 06:20Z/06:45Z/07:15Z): long-road rewards = direct rank; every reward has a gain AND a loss.
-   son1 (first prince): Hoàng hậu oán +hhOan, every other mother of a prince oán +momOan.
-   emp (Hoàng thượng side wins): Thái hậu quý −th; every consort of a losing side oán +oan.
-   th (Thái hậu side): Sủng −sung; errN Thái hậu errands (any j72 Thái hậu template that can be built then), the first after errAt tuần, then every errGap tuần.
-   quyen (quyền thần side): Danh −danh; after `after` months, each month p % (once): the grown Emperor strikes back Sủng −hitSung, Danh −hitDanh.
-   seat (full seat, owner 07:20Z): one-off Bạc +bacM × the next rank's monthly stipend (BAL.pay), Danh +danh, gifts × Hoàng thượng's bestow, a phong hiệu (or Bạc +hieuBac if she has one),
-   her house power +pow (and her father's dad +dad); loss: every consort ghen +ghen (an NPC winner: the others oán +oan). Rank unchanged.
-   psk.ghen = the jealousy of the other consorts when she is raised by a direct decree or a passed grace exam (jexam exDirectUp / exGraceUp). */
-Object.assign(BAL,{psk:{ghen:10,son1:{hhOan:15,momOan:8},emp:{th:8,oan:10},th:{sung:6,errN:2,errAt:3,errGap:6},
- quyen:{danh:6,after:24,p:6,max:1,hitSung:10,hitDanh:6},seat:{bacM:4,hieuBac:120,danh:6,gifts:2,pow:8,dad:5,ghen:10,oan:6}}});
 /* ================= j92: VẬT PHẨM · TRANG PHỤC · MẠNG CHE MẶT (logic + data only; UI through kit components) ================= */
 /* ---- KIT_VEIL: pearl-strand face veils by rank (hủy dung, j70 scarOf(p).veil / p.scar.veil) ----
    img/veil-t1..t8.png (480x445, transparent, gpt-2-6): one per consort rank 0..7 (Đáp ứng → Hoàng hậu), richer each step:
@@ -17419,8 +17404,8 @@ const R97L=[
  t:"{foe} thắp hương trước bài vị cha mẹ ngươi, rồi về khuyên cha tự thú. {foed} dâng sớ nhận tội, xin minh oan cho nhà ngươi trước khi chịu phạt. Hai người con gái của hai nhà thù kết làm tỷ muội. Hoàng thượng nói: “Trẫm chưa thấy ai trả thù đẹp như thế.”",
  fx:{duc:8,danh:10,sung:4},go:()=>{const v=foe67();if(v){v.enemy=false;return e67ally(v,50)}return""},rw:"bienngu",ti:"Người cởi oan nghiệt"},
 /* ===== Cháu Thái hậu ===== */
-{a:"ch_co",tag:"Nghĩa nữ của Thái hậu",w:"th",need:"th",p:.15,n:"Quỳ thưa với cô tổ: con không muốn làm quân cờ, con muốn làm con",c:{suc:-3},
- path:["Thưa khéo: con còn non","Lấy lòng ma ma","Từ chối thẳng","Nhận thuốc rồi lén đổ","Khéo xin tự lo","Ngầm bắt tay Hoàng hậu","con muốn tự đứng được"],np:2,bad:["Uống thuốc của cô tổ"],sc:2,x:[()=>!S.thDead&&(S.th||0)>=50,"Thái hậu còn sống, với ngươi từ 50"],
+{a:"ch_co",tag:"Nghĩa nữ của Thái hậu",w:"th",need:"th",p:.15,n:"Quỳ thưa với cô mẫu: con không muốn làm quân cờ, con muốn làm con",c:{suc:-3},
+ path:["Thưa khéo: con còn non","Lấy lòng ma ma","Từ chối thẳng","Nhận thuốc rồi lén đổ","Khéo xin tự lo","Ngầm bắt tay Hoàng hậu","con muốn tự đứng được"],np:2,bad:["Uống thuốc của cô mẫu"],sc:2,x:[()=>!S.thDead&&(S.th||0)>=50,"Thái hậu còn sống, với ngươi từ 50"],
  t:"Thái hậu lặng đi, rồi kéo ngươi vào lòng như ngày ngươi còn bé. Hôm sau bà ra ý chỉ: nhận ngươi làm nghĩa nữ, ghi vào ngọc điệp, đổi theo họ của bà. Từ đó ngươi gọi bà là mẫu hậu, và cả hậu cung hiểu Đức Thọ cung chỉ có một người con gái.",
  fx:{th:30,danh:12},rw:"nt_dongchau",ti:"Nghĩa nữ của Thái hậu"},
 {a:"ch_benh",tag:"Tạm cầm phượng ấn",w:"th",need:"th",p:.15,n:"Dâng chén thuốc đã cho lương y thử trước mặt cả cung",c:{suc:-5},
@@ -28126,7 +28111,7 @@ function ktStoryHTML(){const c=S.st.ch,M=S.st.M,m=S.st.ms,Q0=(typeof QUEST67==="
   h+=R.length?rows67(R):kitEmpty("Mệnh truyện","Chưa qua chương nào.")}
  return h}
 KIT_GLOSS["Ngôi Hoàng hậu"]="";
-(function(){const t=()=>{try{KIT_GLOSS["Ngôi Hoàng hậu"]=`Ngôi Hoàng hậu cần: ngôi bỏ trống, có hoàng tử và Thái hậu ${BAL.hhTh} (không con trai: Thái hậu ${has("hieuthao")?BAL.hhThNoSonHieu:BAL.hhThNoSon}), và Đức ${hhNeed(S).duc} (mẹ Thái tử: ${BAL.hhDucHeir}). Khi ngôi trống, Hoàng thượng chọn trong những người đủ điều kiện (nặng ở hoàng tử, Thái hậu, Danh). Đủ điều kiện thì được dự khảo hạch tấn phong; đỗ mới được chọn. ${typeof promoRuleTxt==="function"?promoRuleTxt():""}`}catch(e){}};
+(function(){const t=()=>{try{KIT_GLOSS["Ngôi Hoàng hậu"]=`Ngôi Hoàng hậu cần: ngôi bỏ trống, có hoàng tử và Thái hậu ${BAL.hhTh} (không con trai: Thái hậu ${has("hieuthao")?BAL.hhThNoSonHieu:BAL.hhThNoSon}), và Đức ${hhNeed(S).duc} (mẹ Thái tử: ${BAL.hhDucHeir}). Khi ngôi trống, Hoàng thượng chọn trong những người đủ điều kiện (nặng ở hoàng tử, Thái hậu, Danh). Đủ điều kiện thì được dự khảo hạch tấn phong; đỗ mới được chọn. Sinh hoàng tử: được ân thi khảo hạch ngay.`}catch(e){}};
  const r0=renderPanel0;renderPanel0=function(){if(S&&tab==="story"&&!(typeof isSrv==="function"&&isSrv())&&S.st&&typeof panel67==="function"){t();const el=$("panel");try{faceInit()}catch(e){}
    try{const s=STORY[S.origin.k];if(s&&s.calc)S.st.step=s.calc()}catch(e){}el.innerHTML=ktStoryHTML();el.dataset.tab=tab;kitFix(el);return}return r0.apply(this,arguments)}})();
 /* ---------- VIỆC NHỜ ---------- */
@@ -28180,8 +28165,7 @@ if(typeof q72HTML==="function")q72HTML=function(){return ktQ72HTML()};
    - One gate for every path: promoReqP gets the exam row, so promoteP, fillSeats (j30), candOK / contests (j34), the seat board and every
      "đủ điều kiện" text read it. Son birth (j8 birthP) no longer promotes on the spot: it grants an exam at once (exGrace).
    - Owner 15/11 20:05Z (review/promo-rules): a SON's birth = direct promotion, no exam (exSonUp); a DAUGHTER's birth = an exam at once with
-     the conditions waived (exGrace(p,"f")). Owner 16/11 06:20Z (review/promo-skip): every LONG-road reward is a direct decree (exDirectUp:
-     son, Hoàng thượng side winning the reign road, jreign); ordinary promotion by conditions keeps the exam; the servant / ma ma road's merit rises (j42 srvMonth, j14 servRanks for NPC servants, the
+     the conditions waived (exGrace(p,"f")); the servant / ma ma road's merit rises (j42 srvMonth, j14 servRanks for NPC servants, the
      «Ở lại làm ma ma» choice) go through the same exam (exSrv*, below). Imperial picks (srvRise "Hoàng thượng để mắt"), story decrees
      (j97 r97rise/r97srvRk), cold-palace restore (j14) and pardon (j7/j8) stay decrees (no exam).
    - Old saves: p.ex is created on first read; a save made before this rule gets one notice line.
@@ -28295,65 +28279,11 @@ function exRow(p){const e=exS(p),to=e.to,rk=exRk(to);if(e.pass)return[true,`Đã
  try{if(exOn()&&p&&rkOf(p)<7&&!p.out&&!exSrv(p))L.push(exRow(p))}catch(e){console.error("exam row",e)}return L}})();
 
 /* ---------- births (owner 20:05Z): a son = a decree on the spot (no exam); a daughter = an exam at once, the conditions waived ---------- */
-/* owner 16/11 06:20Z (review/promo-skip): a reward that ends a LONG road (a son's birth, the Hoàng thượng side winning the reign road)
-   is a decree on the spot, no exam: one helper for every such road. Never past Hoàng quý phi (the Hoàng hậu seat keeps its own rules),
-   never from lãnh cung. o.fx: jealousy + the promote feedback (the son's birth does its own). */
-function exDirectUp(p,why,o){o=o||{};const me=p===S;if(!p||rkOf(p)>=6||p.out)return"";if(me)S.rank++;else p.rank++;p.lastPromo=S.turn;if(p.ex)p.ex={to:rkOf(p)+1};
- if(me){exDrop();if(o.fx){try{ghenAll(BAL.psk?BAL.psk.ghen:10)}catch(e){}try{feedback("promote",{t:"Tấn phong"})}catch(e){}}}
- return me?`<b class="g">Thánh chỉ: ${why}, tấn phong ${S.name} làm ${RANKS[S.rank].n}</b> (không qua khảo hạch). `:`${p.name} được tấn phong ${RANKS[p.rank].n} (${why}). `}
-function exSonUp(p){return exDirectUp(p,"mừng hoàng tử")}
-/* the ONE player text of these rules (j6 / jtabs help lines, the «Khảo hạch tấn phong» gloss): reads PROMO_SRC, never typed per place */
-function promoRuleTxt(){const d=k=>PROMO_SRC[k]==="direct";return `Sinh hoàng tử đầu lòng: ${d("son1")?"tấn phong ngay, không phải thi":"được ân thi ngay"}; hoàng tử sau và công chúa: được ân thi ngay, không cần đủ điều kiện. Phe mình thắng cuộc triều cục: tấn phong thẳng, không qua khảo hạch. Ghế trên đã đủ người thì được hậu thưởng thay, muốn lên vẫn phải thi như mọi người.`}
-/* ONE hook for every long-road promotion reward (owner 16/11 06:45Z + 07:15Z). PROMO_SRC = the switch per source: "direct" rank, "grace" =
-   an exam at once with the conditions waived, "none" = no rank. son1 = that mother's FIRST prince; later sons and every princess = grace.
-   Faction road: every winning side = direct (07:15Z). Seats (j30 SEATCAP) still apply: a direct reward that meets a full seat becomes
-   a large one-off compensation (promoFullSeat, owner 07:20Z). EVERY reward has a gain AND a loss (owner 07:15Z): the loss per source is promoCost, numbers BAL.psk (jbal2). */
-const PROMO_SRC={son1:"direct",son:"grace",dau:"grace",emp:"direct",th:"direct",quyen:"direct"};
-const PROMO_WHY={son1:"mừng hoàng tử",emp:"phò tá có công",th:"Thái hậu tâu xin",quyen:"triều thần dâng sớ tiến cử"};
-function promoReward(p,src,o){o=o||{};const m=PROMO_SRC[src]||"none";if(m==="none"||!p||rkOf(p)>=6||p.out)return"";
- if(m==="grace")return typeof exGrace==="function"?exGrace(p,src==="dau"?"f":"m"):"";
- const nx=rkOf(p)+1;const r=(typeof seatFree==="function"&&!seatFree(nx))?promoFullSeat(p,src,o):exDirectUp(p,o.why||PROMO_WHY[src]||"ân điển",o);
- return r?r+promoCost(p,src):""}
-/* the loss that comes with each reward (owner 07:15Z); same rule for an NPC (her rivals feel it the same way) */
-function promoCost(p,src){const B=BAL.psk,me=p===S;let t="";try{
- if(src==="son1"){const q=typeof queenP==="function"?queenP():null;if(q&&q!==p)oanAdd(q,p,B.son1.hhOan);
-  let n=0;for(const v of liveRivals(true))if(v!==p&&v!==q&&!v.out&&typeof sonsOf==="function"&&sonsOf(v).length){oanAdd(v,p,B.son1.momOan);n++}
-  if(p!==S&&S!==q&&!S.out&&typeof sonsOf==="function"&&sonsOf(S).length)oanAdd(S,p,B.son1.momOan);
-  if(me)t=`Hoàng hậu${n?` và ${n} vị có hoàng tử`:""} thấy ngươi thành mối lo (oán ngươi +${B.son1.hhOan}${n?`, +${B.son1.momOan}`:""}). `}
- else if(src==="emp"){if(me)apply({th:-B.emp.th});let n=0;
-  for(const v of liveRivals(true)){const s=typeof rgSideOf==="function"?rgSideOf(v):null;if(s&&s!=="emp"){oanAdd(v,p,B.emp.oan);n++}}
-  if(me)t=`Thái hậu lạnh nhạt (Thái hậu quý ngươi −${B.emp.th}); ${n?`${n} phi tần phe thua`:"phe thua"} để bụng ngươi (oán +${B.emp.oan}). `}
- else if(src==="th"){if(me){apply({sung:-B.th.sung});S.psErr={n:B.th.errN,at:wk()+B.th.errAt};
-  t=`Bệ hạ coi ngươi là người của Thái hậu (Sủng −${B.th.sung}); Thái hậu sẽ còn sai ngươi làm việc (${B.th.errN} việc nhờ). `}}
- else if(src==="quyen"){if(me){apply({danh:-B.quyen.danh});S.psStrike={at:S.turn+B.quyen.after,p:B.quyen.p,n:0};
-  t=`Thiên hạ chê ngươi dựa thế nhà quyền thần (Danh −${B.quyen.danh}); bệ hạ lớn lên rồi, e có ngày tính sổ. `}}
- }catch(e){console.error("promoCost",e)}return t}
-/* full seat (owner 07:20Z, replaces «Ân chỉ chờ phong»): a LARGE one-off compensation instead of the rank — big silver, rare gifts (Hoàng
-   thượng's bestow), an honorific name character (phong hiệu, no rank change; silver instead if she already has one), an office / favour for her
-   family (house power). Loss: the other consorts' jealousy. Her rank stays; the next one goes through the normal exam. Numbers BAL.psk.seat. */
-function promoFullSeat(p,src,o){const B=BAL.psk.seat,me=p===S,to=rkOf(p)+1,rk=RANKS[to].n;const parts=[];
- let bac=Math.round(B.bacM*(BAL.pay[Math.min(7,to)]||100));let hieu="";if(!p.hieu){const used=[S.hieu].concat(rivals.map(v=>v.hieu));const f=(typeof TITLES!=="undefined"?TITLES:[]).filter(x=>!used.includes(x));if(f.length){hieu=pick(f);p.hieu=hieu}}
- if(!hieu)bac+=B.hieuBac;ap(p,{bac,danh:B.danh});parts.push(`Bạc +${bac}`);if(hieu)parts.push(`phong hiệu «${hieu}»`);
- for(let i=0;i<B.gifts;i++)try{bestow(p,"promo")}catch(e){}if(B.gifts)parts.push(`${B.gifts} món ngự ban`);
- try{const c=clanOf(p);if(c&&typeof tdPowAdd==="function"&&typeof CLANS!=="undefined"&&CLANS.includes(c))tdPowAdd(c,B.pow);if(me)S.dad=cl((S.dad||40)+B.dad,0,100)}catch(e){}parts.push("nhà ngoại được ân");
- let cost="";if(me){ghenAll(B.ghen);cost=`Lục cung ghen với ngươi (ghen +${B.ghen}). `}else{for(const v of consorts())if(v!==p&&!v.out)oanAdd(v,p,B.oan)}
- const t=me?`<b class="g">Ghế ${rk} đã đủ người</b>: Hoàng thượng ban hậu thưởng thay cho tấn phong: ${parts.join(", ")}. Muốn lên ${rk} vẫn phải qua khảo hạch như mọi người. ${cost}`
-  :`${p.name} được hậu thưởng (ghế ${rk} đã đủ người). `;
- if(!me)try{newsAdd(p,"promo",t,true)}catch(e){}return t}
-/* monthly: the Thái hậu errands and the quyền thần strike-back (BAL.psk) */
-function promoMonth(){let ev="";try{const B=BAL.psk;
- const E=S.psErr;if(E&&!S.dead&&!S.out&&!S.thDead&&wk()>=E.at&&typeof q72CanOffer==="function"&&q72CanOffer()&&!(typeof evBusy==="function"&&evBusy())){
-  /* a Thái hậu errand (j72 việc nhờ, requester Thái hậu): the first template of hers that can be built now */
-  const A=typeof q72A==="function"?q72A("th"):null;const L=(typeof T72!=="undefined"?T72:[]).filter(T=>T.r==="th"&&!T.fu);let x=null;
-  for(const T of L.sort(()=>Math.random()-.5)){try{x=A&&q72Make(T,A)}catch(e){x=null}if(x)break}
-  if(x){q72Offer(x,"");E.n--;E.at=wk()+B.th.errGap;if(E.n<=0)S.psErr=null}}
- const k=S.psStrike;if(k&&!S.dead&&S.turn>=k.at&&!S.empDead){if(k.n>=B.quyen.max){S.psStrike=null}else if(roll(k.p)){k.n++;S.psStrike=null;
-  apply({sung:-B.quyen.hitSung,danh:-B.quyen.hitDanh});log(`<span class="r">Bệ hạ đã lớn, nhớ chuyện cũ nhà quyền thần tiến cử ngươi</span>: Sủng −${B.quyen.hitSung}, Danh −${B.quyen.hitDanh}.`)}}
- }catch(e){console.error("promoMonth",e)}return ev}
-(function(){if(typeof rivalsMonth!=="function")return;const r0=rivalsMonth;rivalsMonth=function(){const a=promoMonth();return a+(r0.apply(this,arguments)||"")}})();
+function exSonUp(p){const me=p===S;if(rkOf(p)>=6||p.out)return"";if(me)S.rank++;else p.rank++;p.lastPromo=S.turn;if(p.ex)p.ex={to:rkOf(p)+1};
+ return me?`<b class="g">Thánh chỉ: mừng hoàng tử, tấn phong ${S.name} làm ${RANKS[S.rank].n}</b> (không qua khảo hạch). `:`${p.name} được tấn phong ${RANKS[p.rank].n} (mừng hoàng tử). `}
 function exGrace(p,sex){const e=exS(p);e.grace=e.to;e.gw=sex==="f"?"f":"m";e.cd=0;e.lapse=0;const me=p===S;const why=exGw(e);
  return me?`${why[0].toUpperCase()+why.slice(1)}: Hoàng thượng ân cho ngươi dự khảo hạch tấn phong ${exRk(e.to)} ngay, không cần đủ điều kiện. `:`${p.name} được ân dự khảo hạch tấn phong ${exRk(e.to)} (${why}). `}
-function exGraceUp(p){const me=p===S;const why=exGw(p.ex);if(me)S.rank++;else p.rank++;p.lastPromo=S.turn;if(me){try{ghenAll(BAL.psk?BAL.psk.ghen:10)}catch(e){}try{feedback("promote",{t:"Tấn phong"})}catch(e){}}
+function exGraceUp(p){const me=p===S;const why=exGw(p.ex);if(me)S.rank++;else p.rank++;p.lastPromo=S.turn;if(me){try{ghenAll(10)}catch(e){}try{feedback("promote",{t:"Tấn phong"})}catch(e){}}
  const t=me?`<b class="g">Thánh chỉ: tấn phong ${S.name} làm ${RANKS[S.rank].n}.</b> Lý do: ân điển ${why}, đã đỗ khảo hạch. `:`${p.name} được tấn phong ${RANKS[p.rank].n}. Lý do: ân điển ${why}, đã đỗ khảo hạch. `;
  if(!me)try{newsAdd(p,"promo",t,true)}catch(e){}return t}
 
@@ -28369,7 +28299,7 @@ function exDone(p,r){const e=exS(p),to=e.to,rk=exRk(to),me=p===S;e.n=(e.n||0)+1;
 /* NPCs sit the exam when the month's decree would look at them (rivalsMonth → promoteP); a son's grace raises the rank once passed */
 (function(){if(typeof promoteP!=="function")return;const p0=promoteP;promoteP=function(p){
  try{if(exOn()&&p&&rkOf(p)<7&&!exSrv(p)){const e=exS(p);if(p!==S&&exCanSit(p))exDone(p,exSim(p));
-   if(e.pass&&e.grace===e.to&&rkOf(p)<6&&!p.out&&!p.confined&&(typeof seatFree!=="function"||seatFree(rkOf(p)+1)))return exGraceUp(p)/* seats still apply (owner 06:45Z): a full seat waits */}}catch(x){console.error("exam",x)}
+   if(e.pass&&e.grace===e.to&&rkOf(p)<6&&!p.out&&!p.confined)return exGraceUp(p)}}catch(x){console.error("exam",x)}
  return p0.apply(this,arguments)}})();
 
 /* ---------- her window: opens when she becomes eligible, lapses when it runs out ---------- */
@@ -28492,9 +28422,9 @@ function exChips(){if(!exOn()||S.rank>=7||S.out)return"";const e=exS(S);const L=
  if(e.last&&!e.pass)L.push(["n",`Lần trước: ${e.last.s}/${e.last.b} phần`]);
  return L.map(([c,t])=>kitChip(t,c)).join(" ")}  /* kit status chips (KIT kitChip(text,"g"|"r"|"n")) */
 if(typeof KIT_GLOSS!=="undefined")KIT_GLOSS["Khảo hạch tấn phong"]="";
-(function(){const t=()=>{try{const B=BAL.ex;KIT_GLOSS["Khảo hạch tấn phong"]=`Đủ điều kiện sắc phong chỉ là được thi. Từ lúc đủ, ngươi có ${B.win} tuần để dự khảo hạch (thẻ ở Hành sự); lỡ hạn thì chờ như trượt. Phẩm thấp thi lễ nghi và nữ công; phẩm giữa thi cầm kỳ thi họa và câu đối; phẩm cao thi trị cung, xử án và đối đáp với Thái hậu. Tổng phần = phần thi các môn (mỗi môn 0–10, lấy trung bình nhân ${B.wPlay}) + Tứ đức + tài nghệ; giám khảo (Hoàng hậu, phẩm cao: Thái hậu) quý ngươi thì hạ mức đỗ, ghét thì nâng. Trượt: chờ ${B.cd[1]}–${B.cd[7]} tháng (phẩm càng cao càng lâu). Phi tần khác cũng thi như vậy. ${promoRuleTxt()} Cung nữ lên bậc cũng phải qua khảo hạch của Nội vụ phủ.`}catch(e){}};
+(function(){const t=()=>{try{const B=BAL.ex;KIT_GLOSS["Khảo hạch tấn phong"]=`Đủ điều kiện sắc phong chỉ là được thi. Từ lúc đủ, ngươi có ${B.win} tuần để dự khảo hạch (thẻ ở Hành sự); lỡ hạn thì chờ như trượt. Phẩm thấp thi lễ nghi và nữ công; phẩm giữa thi cầm kỳ thi họa và câu đối; phẩm cao thi trị cung, xử án và đối đáp với Thái hậu. Tổng phần = phần thi các môn (mỗi môn 0–10, lấy trung bình nhân ${B.wPlay}) + Tứ đức + tài nghệ; giám khảo (Hoàng hậu, phẩm cao: Thái hậu) quý ngươi thì hạ mức đỗ, ghét thì nâng. Trượt: chờ ${B.cd[1]}–${B.cd[7]} tháng (phẩm càng cao càng lâu). Phi tần khác cũng thi như vậy. Sinh hoàng tử: tấn phong ngay, không phải thi. Sinh công chúa: được ân thi ngay, không cần đủ điều kiện. Cung nữ lên bậc cũng phải qua khảo hạch của Nội vụ phủ.`}catch(e){}};
  if(typeof renderPanel0==="function"){const r0=renderPanel0;renderPanel0=function(){t();return r0.apply(this,arguments)}}})();
-window.exSrvPlan=exSrvPlan;window.exSrvGate=exSrvGate;window.exSrvNpc=exSrvNpc;window.exSrvS=exSrvS;window.exSrvStart=exSrvStart;window.exSrvMama=exSrvMama;window.exSonUp=exSonUp;window.exDirectUp=exDirectUp;window.promoRuleTxt=promoRuleTxt;window.promoReward=promoReward;window.promoFullSeat=promoFullSeat;window.PROMO_SRC=PROMO_SRC;window.exGrace=exGrace;
+window.exSrvPlan=exSrvPlan;window.exSrvGate=exSrvGate;window.exSrvNpc=exSrvNpc;window.exSrvS=exSrvS;window.exSrvStart=exSrvStart;window.exSrvMama=exSrvMama;window.exSonUp=exSonUp;window.exGrace=exGrace;
 window.exPlan=exPlan;window.exChance=exChance;window.exSim=exSim;window.exElig=exElig;window.exS=exS;window.exTick=exTick;window.exStart=exStart;
 /* ================= jkitpage: TRANG MẪU KIT — the kit sample page (luật KIT TRƯỚC, owner 11/15 16:50Z; tabs-kit r7) =================
    Open the game with "#kit" at the end of the address (…/index.html#kit) or call kitSamplePage() in the console: a full-screen page shows
@@ -30937,7 +30867,7 @@ function alt72(s,n){return{n:`${n} (nhờ người, không dùng bạc)`,p:Math.
        Clear moment: Chương 2 "Ba ngả đường" (and again Chương 4 Hồi 2 "Lối rẽ"); any time after: Mệnh truyện › Triều cục › "Đổi phe"
        (a price: the side left behind turns on her, Danh, trust starts low; cooldown BAL.rg.swCd months, at most BAL.rg.swMax).
        Each side: its own errands between chapters (power push, trust, own gains), its own enemies (the other sides' consorts and houses),
-       its own ending (winner: Hoàng thượng = tấn phong thẳng, không khảo hạch (owner 16/11 06:20Z) / Thái hậu = che chở + Thái hậu quý ngươi / quyền thần = bạc + nhà ngoại thế lực;
+       its own ending (winner: Hoàng thượng = tấn phong / Thái hậu = che chở + Thái hậu quý ngươi / quyền thần = bạc + nhà ngoại thế lực;
        loser: the mirror loss). Family: tt = the regent's daughter, ch = the Thái hậu's kin, dtq = the general's house (backs the Thái hậu),
        thd = Hàn lâm (the Emperor's scholars); going against the father's side costs his favour.
    (3) NPC consorts belong to sides by their house (rgSideOf): Tể tướng → quyền thần; Đại tướng quân / Thái hậu kin → Thái hậu;
@@ -31169,11 +31099,10 @@ function rgDecide(){const W=rgW();if(!W||W.out)return;const p=W.p;W.out=p>=BAL.r
 function rgMine(){const r=rgMe(),W=rgW();if(!W||!W.out||r.res)return"";const o=W.out,s=rgSideNow();const k=.5+r.tr/100;const Bg=BAL.rg;let t="";const b0=Math.round(Bg.bacWin*(typeof rkMul67==="function"?rkMul67():1));
  if(!s){apply({danh:Bg.ngoai});r.res="ngoai";t="Đứng ngoài cuộc, giữ được mình.";return t}
  if(s===o){r.res="win";
-  if(s==="emp"){apply({sung:Math.round(Bg.winSung*k),danh:Bg.winDanh});/* owner 16/11 06:20Z/06:45Z: a long road's reward = DIRECT rank, no exam, through the one hook jexam promoReward (seats apply); cap Bg.rankCap + the Sủng floor guard the jump */
-   const d=S.rank<Bg.rankCap&&typeof promoReward==="function"&&S.sung>=(typeof sungFloor==="function"?sungFloor(S.rank+1):0)+Bg.rankSung?promoReward(S,"emp",{fx:1}):"";
-   t=d?`Bệ hạ nhớ công phò tá. ${d}`:"Bệ hạ nhớ công, ban thưởng hậu hĩnh."}
-  else if(s==="th"){apply({th:Math.round(Bg.winTh*k),danh:Bg.winDanh});S.shield=Math.max(S.shield||0,Bg.winShield);t=`Thái hậu nhớ công, che chở ngươi ${Bg.winShield} tháng: phi tần khó hại ngươi.`;const d=S.rank<Bg.rankCap&&typeof promoReward==="function"?promoReward(S,"th",{fx:1}):"";if(d)t+=` ${d}`}
-  else{apply({bac:Math.round(b0*k),danh:Bg.winDanh,mat:1});const h=rgFamH();if(h&&rgFam()==="quyen")tdPowAdd(h.c,8);rgQAf(20);t="Nhà Tể tướng nhớ công, đưa bạc vào cung, tai mắt khắp nơi.";const d=S.rank<Bg.rankCap&&typeof promoReward==="function"?promoReward(S,"quyen",{fx:1}):"";if(d)t+=` ${d}`}
+  if(s==="emp"){apply({sung:Math.round(Bg.winSung*k),danh:Bg.winDanh});/* owner 15/11 17:20Z: promotion needs the EXAM → the reward is an exam at once with the conditions waived (jexam exGrace), never a free rank */
+   if(S.rank<Bg.rankCap&&typeof exGrace==="function"&&S.sung>=(typeof sungFloor==="function"?sungFloor(S.rank+1):0)+Bg.rankSung){exGrace(S,"m");const e=exS(S);e.gw="rg";t=`Bệ hạ nhớ công phò tá, ân cho ngươi dự khảo hạch tấn phong ${exRk(e.to)} ngay, không cần đủ điều kiện.`}else t="Bệ hạ nhớ công, ban thưởng hậu hĩnh."}
+  else if(s==="th"){apply({th:Math.round(Bg.winTh*k),danh:Bg.winDanh});S.shield=Math.max(S.shield||0,Bg.winShield);t=`Thái hậu nhớ công, che chở ngươi ${Bg.winShield} tháng: phi tần khó hại ngươi.`}
+  else{apply({bac:Math.round(b0*k),danh:Bg.winDanh,mat:1});const h=rgFamH();if(h&&rgFam()==="quyen")tdPowAdd(h.c,8);rgQAf(20);t="Nhà Tể tướng nhớ công, đưa bạc vào cung, tai mắt khắp nơi."}
   rgLead(s,0)}
  else{r.res="lose";
   if(s==="emp"){apply({sung:-Bg.loseSung,th:-Bg.loseTh});t="Phe bệ hạ thua, nhà Tể tướng và Thái hậu đều để ý ngươi."}
@@ -35629,7 +35558,10 @@ const KC={ok:["tt","dtq","muoi","thd","ch","td"],ty:3,tm:2,
  cut:[50,80,100],selMax:80,      /* Điện tuyển score: below [0] = trả thẻ bài, [1] Thường tại, [2] Quý nhân, else Đáp ứng */
  so:{sac:30,suc:25,ld:70,gt:15},ev:38,apM:2,sch:22,ill:3,dowry:.6};
 const KCDAD={tt:["Tể tướng","phủ Tể tướng"],dtq:["Đại tướng quân","phủ Tướng quân"],muoi:["Đại thương muối","Diêm thương phủ"],thd:["Thầy đồ","nhà thầy đồ"],ch:["Quốc cữu","phủ Quốc cữu"],td:["Thị lang bộ Lễ","phủ Thị lang"]};
-const KCCLAN={tt:"Tể tướng",dtq:"Đại tướng quân",muoi:"Hộ bộ",thd:"Hàn lâm",td:"Lễ bộ"};
+/* KC LORE (coordinator 16/11, review/kc-lore): muoi has no clan (a salt merchant is no minister's kin: the Hộ bộ official only squeezes the house, KCOB muoi 2); same as clanOf() in the palace */
+const KCCLAN={tt:"Tể tướng",dtq:"Đại tướng quân",thd:"Hàn lâm",td:"Lễ bộ"};
+/* KC LORE: new games run lore v2 (the td house falls only when she leaves for the palace; one father, one brother, one dress). Old saves (S.kc.v 1) keep their old rules. At the identity card S.kc does not exist yet: that is always a new game. */
+function kcLore(){return !S||!S.kc||(S.kc.v||1)>=2}
 const KCMN=["Đức Minh","Hữu Chính","Kính Đường","Bác Văn","Thế Khanh","Trọng Lễ","Hoài An","Tư Viễn","Thừa Tông","Bảo Thành","Gia Mậu","Duy Nhạc"];
 const KCFN=["Ngọc Nhu","Tĩnh Uyển","Bích Hà","Thu Thủy","Minh Châu","Lạc Yên","Hoài Ngọc","Tuyết Nhạn","Vân Khanh","Mộ Tình","Thanh Đại","Liên Kiều"];
 const KCGTU={tt:80,dtq:65,muoi:90,thd:25,ch:75,td:55};
@@ -35684,6 +35616,8 @@ function kcFix(){if(!S||!S.kc)return;S.kgt=cl(Math.round(S.kgt||0),0,100);S.kap=
 function kcAf(m,n){if(m){m.af+=n;if(n<0)m.oan=(m.oan||0)+Math.round(-n/2)}}
 function kcMonthsLeft(){return (KC.ty-S.year)*12+(KC.tm-S.month)}
 function kcTitle(){return `Tiểu thư ${KCDAD[S.origin.k][1]}`}
+/* KC LORE: at home she is a Tiểu thư in every dialog and card (pMe() said "Đáp ứng", the palace rank she does not hold yet) */
+(function(){const p0=pMe;pMe=function(){const f=p0.apply(this,arguments);try{if(isKc()&&kcLore())f.rw="Tiểu thư"}catch(e){}return f}})();
 
 /* ---------- faces: every family member carries a figure identity (fid) from the existing pools (placeholders; §14 art list) ---------- */
 function kcPor(m,kind){try{const r=m.fid.split(":")[0];const L=(FIGIX[r]||{})[m.fid];if(!L||!L.length)return"";const f=figBest(L,r==="consort"?0:null,m.age);return f?figPath(kind==="fig"?(f.file||f.src):f.por):""}catch(e){return""}}
@@ -35696,6 +35630,7 @@ function kcPick(){return (S&&S.kcPick)||"cung"}
 function kcPathHTML(){const k=kcPick();const lock=!!window.__kcO;const r0=RANKS[(S.origin&&S.origin.r)||0].n;
  const O=[["cung","Vào cung ngay",`thành: vào cung ngay, phong ${r0} theo thân phận; thêm khoảng hai năm trong cung để leo · hỏng: không hồi môn, không biết trước gì về các phi tần, không có cơ duyên ngoài cung`],
   ["nha","Ở nhà chờ tuyển tú",`thành: hai năm học tài nghệ, nâng Tư chất; hồi môn và tỳ nữ hồi môn một lòng; thế lực nhà cha; tin về các phi tần trong cung; qua tuyển tú có thể phong tới Quý nhân; Thanh mai trúc mã, kết hiếm ngoài cung; Phúc duyên khi qua tuyển tú · hỏng: vào cung muộn hai năm, lúc hai mươi tuổi · kèm: có thể bị trả thẻ bài hay bị ép gả; kế mẫu, thứ muội ngáng chân; có thể chết ở nhà`]];
+ if(S.origin&&S.origin.k==="td"&&kcLore())O[1][2]=O[1][2].replace("hồi môn và tỳ nữ hồi môn một lòng; thế lực nhà cha;","thế lực nhà cha, nhưng nhà ngươi sụp đổ đúng ngày ngươi rời nhà vào cung (hồi môn bị tịch thu); tỳ nữ hồi môn một lòng;");
  return `<div class="kpsec kkcp"><h4 class="kpst">${typeof kitGloss==="function"?kitGloss("Con đường"):"Con đường"}</h4><div class="opts kcpo">`+
   O.map(([x,n,l])=>`<button type="button" class="opt${x===k?" ksel":""}" data-kcp="${x}" aria-pressed="${x===k}"${lock?" disabled":""}>${n}<small>${l}</small></button>`).join("")+`</div></div>`}
 try{KIT_GLOSS["Con đường"]="Vào cung ngay: kiếp bắt đầu trong cung. Ở nhà chờ tuyển tú: sống ở nhà cha khoảng hai năm (học tài nghệ, lo chuyện gia đình, hôn sự, tình riêng), rồi qua ba vòng tuyển tú mới vào cung; có thể không vào cung mà xuất giá. Chỉ con nhà quan, nhà buôn, nhà thầy đồ, cháu Thái hậu, con nhà Thị lang mới có đường này."}catch(e){}
@@ -35725,6 +35660,8 @@ function kcInit(){const k=S.origin.k;const sur=tdSur(S.name);const nm=g=>`${sur}
  const ag=a=>a;const T=(r,t,name,age,role,pref,tr,af)=>({id:"f"+r,r,t,name,age,fid:kcFreeFid(role,pref),tr:tr||pick(["Hiền lành","Nhu mì","Tham vọng","Đa nghi","Kiêu ngạo"]),af:af==null?30+R(25):af,me:30+R(20),oan:0,alive:1});
  const fam=[];const gl=shuf(KCMN.slice());const g=()=>gl.pop();
  fam.push(T("cha","Phụ thân",nm(g()),48+R(8),"official",[],pick(["Tham vọng","Cương trực","Cẩn trọng"]),35+R(25)));
+ /* KC LORE: the father of tt / dtq is the head of that house in the court (j55 trS, j67 {dad}): one name, one age, in the home and in the palace */
+ try{const hd=(k==="tt"||k==="dtq")?tdHead(KCCLAN[k]):null;if(hd&&hd.dadOf==="me"){fam[0].name=hd.name;fam[0].age=Math.min(56,Math.max(46,hd.age||50));if(hd.tr&&/^(Tham vọng|Cương trực|Cẩn trọng)$/.test(hd.tr))fam[0].tr=hd.tr}}catch(e){console.error("kc lore dad",e)}
  const momAlive=roll(60);
  if(momAlive)fam.push(T("me","Mẫu thân",`${pick(SURN)} thị`,38+R(6),"mama",[],pick(["Hiền lành","Nhu mì","Đa nghi"]),55+R(25)));
  fam.push(T("di",momAlive?"Di nương":"Kế mẫu",`${pick(SURN)} thị`,33+R(6),"mama",[],pick(["Hiểm độc","Tham vọng","Kiêu ngạo","Hiền lành"]),R(25)));
@@ -35733,7 +35670,7 @@ function kcInit(){const k=S.origin.k;const sur=tdSur(S.name);const nm=g=>`${sur}
  const sis=T("muoi","Thứ muội",kcFreeName(()=>nm(pick(KCFN)),fam),18,"consort",[],pick(["Kiêu ngạo","Tham vọng","Nhu mì","Hiểm độc","Hiền lành"]),R(30));
  sis.sac=40+R(50);sis.tai=30+R(50);sis.danh=4+R(8);fam.push(sis);
  for(let i=0;i<2;i++){const f=T("ban"+i,"Khuê hữu",kcFreeName(()=>`${pick(SURN)} ${pick(KCFN)}`,fam),18+R(2),"consort",[],pick(["Hiền lành","Nhu mì","Kiêu ngạo","Tham vọng"]),30+R(30));f.sac=40+R(50);f.tai=30+R(50);f.danh=4+R(8);fam.push(f)}
- S.kc={v:1,fam,at:{},once:{},ev:{},ch:{o:0,tm:0,ke:0,hon:0},suit:[],intel:[],proof:{},le:0,ds:0,g7:-99,ldSeen:0,r0:S.rank,staff0:S.staff||[],y0:S.year,end:null,tt:null,log:[]};
+ S.kc={v:2,fam,at:{},once:{},ev:{},ch:{o:0,tm:0,ke:0,hon:0},suit:[],intel:[],proof:{},le:0,ds:0,g7:-99,ldSeen:0,r0:S.rank,staff0:S.staff||[],y0:S.year,end:null,tt:null,log:[]};
  S.kgt=40+R(20)+(k==="tt"||k==="ch"?10:k==="td"?-10:0);S.kap=10+R(10);S.khm=Math.round((KCGTU[k]||50)*1.2);S.kld=0;S.kgtu=KCGTU[k]||50;
  S.age=18;S.rank=0;S.sung=0;S.danh=Math.min(S.danh,8);S.bac=Math.min(S.bac,40+Math.round(S.kgtu/2));S.staff=[];S.place="kc_khue";S.pal=null;S.tonight=null;
  if(S.maid){S.maid.kcTy=1}
@@ -35747,6 +35684,7 @@ function kcInit(){const k=S.origin.k;const sur=tdSur(S.name);const nm=g=>`${sur}
  const d=kcR("cha"),di=kcR("di");
  Q.push({t:"Khuê các",who:pMe(),h:`<p>Ngươi mười tám tuổi, con gái ${KCDAD[k][1]}. Chiếu tuyển tú ba năm một lần; kỳ tới vào mùa xuân năm thứ ba.</p>`+
   `<p>Từ nay đến đó còn hơn hai năm: học tài nghệ, giữ lòng cha mẹ, coi chừng ${di.t.toLowerCase()}, và giữ cho danh tiếng trong sạch. Nhà cũng có thể gả ngươi đi trước kỳ tuyển.</p>`+
+  (k==="td"&&kcLore()?`<p>Cha ngươi vẫn là Thị lang bộ Lễ, cả nhà còn đủ mặt. Nhưng trong triều đã có kẻ gom chứng cứ để hặc ông, và ngươi chưa biết đến bao giờ.</p>`:"")+
   kitRows([["Phụ thân",`${KCDAD[k][0]} ${d.name}`,"t"],["Gia thanh",S.kgt,"t"],["Hồi môn cha mẹ hứa",kitChip("Bạc",S.khm,"n"),"t"],["Kỳ tuyển tú",`còn ${kcMonthsLeft()} tháng`,"t"]])});
  kcSnapReset();tab="act";S.visit=kcVisit(S.place);deal();log(`Kiếp này ngươi ở nhà chờ tuyển tú (${kcTitle()}).`);kcChestShow(chest)}
 /* the girlhood chest: Cài tóc · Y phục (j92 WD slots) · Đeo tay · Đeo eo · Túi thơm (jinv slots), all worn, all ordinary (Thường; the jade
@@ -35768,13 +35706,14 @@ function kcChestShow(c){if(!c||!c.L.length)return;try{if(typeof kitReward!=="fun
 const KCHAB={cha:[["kc_thu",4],["kc_sanh",2],["",3]],me:[["kc_me",4],["kc_sanh",2],["kc_vuon",2]],di:[["kc_di",4],["kc_vuon",2],["kc_sanh",1],["kc_me",1]],to:[["kc_sanh",3],["kc_tu",2],["kc_me",1]],
  huynh:[["",3],["kc_thu",2],["kc_vuon",2],["kc_sanh",1]],muoi:[["kc_di",3],["kc_hoc",2],["kc_vuon",2]]};
 function kcWhere(){if(!S||!S.kc)return;const b=S.buoi||0;S.kc.at={};for(const m of S.kc.fam){if(!m.alive)continue;if(/^ban/.test(m.r)){S.kc.at[m.id]="kc_hau";continue}if(m.r==="tm"){continue}
+  if(m.r==="huynh"&&S.kc.lost)continue;/* KC LORE: dtq brother lost at Nhạn Môn */
   const H=KCHAB[m.r]||[["",1]];let L=H;if(b===3&&m.r!=="huynh")L=L.filter(x=>x[0]&&x[0]!=="kc_thu"||m.r==="cha");
   if(m.r==="cha"&&b===0)L=[["",1]];/* buổi sáng cha vào triều */
   const tot=L.reduce((a,x)=>a+x[1],0);let r=Math.random()*tot,p="";for(const [k,w] of L){r-=w;if(r<0){p=k;break}}
   if(p)S.kc.at[m.id]=p}
  if(S.tm96){const man=manById(S.tm96.mid);if(man&&man.alive)S.kc.at.ftm=b===3?"":pick(["kc_chua","kc_sach","kc_tra","","",""])}}
 function kcHere(k){k=k||S.place;return S.kc.fam.filter(m=>m.alive&&S.kc.at[m.id]===k)}
-function kcAt(m){const p=S.kc.at[m.id];return p?KCPL[p][0]:"ra ngoài"}
+function kcAt(m){const p=S.kc.at[m.id];return p?KCPL[p][0]:m.r==="huynh"&&S.kc.lost?"mất tin ở Nhạn Môn":"ra ngoài"}
 function kcTmMan(){return S.tm96?manById(S.tm96.mid):null}
 function kcVisit(k){const ppl=[];for(const m of kcHere(k)){if(/^ban/.test(m.r)&&k!=="kc_hau")continue;ppl.push({kind:"kc",fid:m.id,name:m.name,ini:(m.name||"?").split(" ").pop()[0],col:"#b08a8a",info:`${m.t} · ${m.tr}`,ref:m})}
  const tm=kcTmMan();if(tm&&S.kc.at.ftm===k)ppl.push({kind:"kc",fid:"ftm",name:tm.name,ini:tm.name.split(" ").pop()[0],col:"#6a8aa0",info:"người ấy",man:tm.id});
@@ -35878,7 +35817,7 @@ function kcCards(){const X=[];if(!S||!S.kc)return X;const P=S.place;const mz=S.m
  try{if(isKc()&&a&&a.done&&!was&&!S.dead){if(a.onceM)S.kc.once[a.onceM]=S.turn;kcFix();if(a.rep)a.done=0;deal();render()}}catch(e){console.error(e)}return r}})();
 (function(){const a0=addArt;addArt=function(k,g){if(isKc()&&S.kc.ds)g=Math.round(g*1.5);return a0.call(this,k,g)}})();
 function kcPow(){const c=KCCLAN[S.origin.k];try{return c?tdPow(c):S.origin.k==="ch"?70:40}catch(e){return 40}}
-function kcContact(){if(S.origin.k==="ch")return"Thái hậu (cô tổ)";try{const c=KCCLAN[S.origin.k];const v=c&&liveRivals(true).find(x=>tdHouse(x)===c);if(v){/* r2: a woman of her own clan is no stranger to her (j61 name rule) */try{if(typeof k61Know==="function")k61Know(v,"người trong họ",true,2)}catch(e){}return `${rkName(v)} ${v.name}, người trong họ`}}catch(e){}return""}
+function kcContact(){if(S.origin.k==="ch")return"Thái hậu (cô mẫu)";try{const c=KCCLAN[S.origin.k];const v=c&&liveRivals(true).find(x=>tdHouse(x)===c);if(v){/* r2: a woman of her own clan is no stranger to her (j61 name rule) */try{if(typeof k61Know==="function")k61Know(v,"người trong họ",true,2)}catch(e){}return `${rkName(v)} ${v.name}, người trong họ`}}catch(e){}return""}
 function kcIntel1(v,st){try{k61Know(v,"thư nhà",true,st)}catch(e){}if(!S.kc.intel.includes(v.id))S.kc.intel.push(v.id)}
 function kcIntel(n,st){const L=shuf(liveRivals(true).filter(v=>!S.kc.intel.includes(v.id)));const got=L.slice(0,n);for(const v of got)kcIntel1(v,st);
  if(got.length)log(`Ngươi biết thêm về ${got.map(v=>`${rkName(v)} ${v.name} (tính ${v.trait}${v.preg?", đang mang thai":""}, sủng ${v.sung>=60?"rất cao":v.sung>=30?"khá":"ít"})`).join("; ")}.`);else log("Không có tin gì mới.")}
@@ -35943,7 +35882,7 @@ function kcO(n,cost,go,more){const c=cost||{};const s=fmt(c);/* r2: go is wrappe
  const g=function(){return go.apply(this,arguments)};return Object.assign({n,fx:c,x:"",j67:s?"tốn: "+s:"tốn: không",go:g},more||{})}
 function kcRes(t,b,txt){if(txt)log(txt);kcFix();try{resultShow(t,b,true)}catch(e){}}
 function kcDo(t,f){const b=rsnap();const r=f();kcRes(t,b,r)}
-const KCO={tt:{t:"Quân cờ đầu tiên"},dtq:{t:"Tin dữ Nhạn Môn"},muoi:{t:"Sổ muối"},thd:{t:"Tài nữ kinh thành"},ch:{t:"Thư của cô tổ"},td:{t:"Đêm trước tịch biên"}};
+const KCO={tt:{t:"Quân cờ đầu tiên"},dtq:{t:"Tin dữ Nhạn Môn"},muoi:{t:"Sổ muối"},thd:{t:"Tài nữ kinh thành"},ch:{t:"Thư của cô mẫu"},td:{t:"Án đang dựng"}};
 const KCE={
  doc:{t:"Chén canh lạ",b:()=>{const d=kcR("di");S.kc.ev.doc=1;const real=roll(d.tr==="Hiểm độc"?75:45);const mz=S.maid?S.maid.name:"tỳ nữ";return{who:kcFace(d),t:`<p>Đêm khuya, người của ${d.t.toLowerCase()} mang sang một chén canh sâm, nói ${d.t.toLowerCase()} thương ngươi học khuya. ${mz} đứng sau lưng, khẽ lắc đầu.</p>`,o:[
   kcO("Lấy trâm bạc thử",{},()=>kcDo("Chén canh lạ",()=>{if(real&&roll(80)){S.kc.proof[d.id]=(S.kc.proof[d.id]||0)+2;d.oan+=5;return"Trâm bạc đen lại. Ngươi giữ chén canh làm chứng."}return"Trâm bạc không đổi màu. Ngươi vẫn đổ chén canh đi."})),
@@ -36044,18 +35983,19 @@ const KCOB={
  dtq:[["Thư biên ải: huynh trưởng lạc trong trận ở Nhạn Môn. Cha giữ kín, sợ triều đình mượn cớ.","Giúp cha giữ kín","Xin cha dâng sớ cầu viện"],
   ["Một tên lính cũ về kể: huynh trưởng có thể còn sống, bị giữ ở trại giặc.","Gom bạc chuộc người","Chờ triều đình"],
   ["Cha nói muốn tự mình dẫn quân đi, để mặc lời gièm pha trong triều.","Khuyên cha ở lại kinh thành","Ủng hộ cha"]],
- muoi:[["Cha muốn bỏ nửa gia sản mua một chức quan, để nhà buôn thành nhà quan trước kỳ tuyển tú.","Ủng hộ cha","Khuyên cha giữ bạc"],
+ muoi:[["Cha muốn bỏ nửa gia sản dâng quốc khố để xin một tước vị, để nhà buôn thành nhà có tước trước kỳ tuyển tú.","Ủng hộ cha","Khuyên cha giữ bạc"],
   ["Sổ muối có chỗ thiếu: người của quan Hộ bộ đòi chia phần.","Giúp cha chép lại sổ","Khuyên cha khai thật"],
   ["Thuyền muối đêm cập bến, chở thứ không phải muối.","Giả như không biết","Lén báo quan"]],
  thd:[["Cha mở lớp dạy học cho con nhà nghèo, thiếu bạc mua sách.","Bán trâm mua sách cho cha","Mặc cha lo"],
   ["Hội thơ kinh thành: danh hiệu Tài nữ đang chờ người tranh.","Dốc sức tranh","Nhường bạn khuê phòng"],
-  ["Một học trò của cha xin chép di cảo của ông để dâng lên Hàn lâm viện, ghi tên mình.","Bằng lòng","Đòi ghi tên cha"]],
- ch:[["Thái hậu, cô tổ của ngươi, gửi thư hỏi ngươi đã học Nữ tắc đến đâu.","Chép Nữ tắc gửi vào cung","Viết thư kể chuyện nhà"],
-  ["Cô tổ cũng gửi thư cho một người cháu gái khác trong họ: hai người, một chỗ bên cạnh bà.","Kết thân với người kia","Lấn lướt người kia"],
+  ["Một học trò của cha xin chép bản thảo của ông để dâng lên Hàn lâm viện, ghi tên mình.","Bằng lòng","Đòi ghi tên cha"]],
+ ch:[["Thái hậu, cô mẫu của ngươi, gửi thư hỏi ngươi đã học Nữ tắc đến đâu.","Chép Nữ tắc gửi vào cung","Viết thư kể chuyện nhà"],
+  ["Cô mẫu cũng gửi thư cho một người cháu gái khác trong họ: hai người, một chỗ bên cạnh bà.","Kết thân với người kia","Lấn lướt người kia"],
   ["Thái hậu cho người ra xem mặt ngươi trước kỳ tuyển.","Ra mắt khiêm nhường","Ra mắt rực rỡ"]],
- td:[["Cha bị hặc tội tham ô ở bộ Lễ. Ngươi biết sổ sách thật nằm trong thư phòng.","Giấu sổ sách thật","Đưa sổ cho ngự sử"],
-  ["Một người lạ đề nghị: nhận tội thay cha, đổi lấy mạng cả nhà.","Gạt đi, tìm chứng cứ","Khuyên cha nhận"],
-  ["Đêm trước ngày khám nhà. Còn kịp làm một việc.","Đốt thư từ của cha","Trốn sang nhà thế giao"]]};
+ /* KC LORE: the house still stands all the way to the palace gate; these three chapters only foreshadow the case the enemy is building (the fall is the card kcEnter shows when she leaves) */
+ td:[["Trong triều có kẻ đang dựng một vụ án tham ô nhắm vào bộ Lễ. Cha ngươi chưa bị hặc, nhưng ngươi biết sổ sách thật nằm trong thư phòng.","Giấu sổ sách thật","Đưa sổ cho ngự sử"],
+  ["Một người lạ tìm đến, nói khẽ: án đã dựng gần xong; nhận tội thay cha thì đổi được mạng cả nhà.","Gạt đi, tìm chứng cứ","Khuyên cha nhận"],
+  ["Cha gọi ngươi vào thư phòng dặn khẽ: dù ngày nào nhà có biến, ngươi cứ đi con đường của mình. Còn kịp làm một việc.","Đốt thư từ của cha","Gửi sổ sao sang nhà thế giao"]]};
 function kcOrigin(i){const k=S.origin.k;const B=KCOB[k]&&KCOB[k][i];if(!B)return null;const c=kcR("cha");
  const opts=[kcO(B[1],{suc:-5},()=>kcDo(KCO[k].t,()=>kcOriginFx(k,i,1))),kcO(B[2],{suc:-5},()=>kcDo(KCO[k].t,()=>kcOriginFx(k,i,0)))];
  if(i===2&&k==="dtq"&&S.suc>=90&&(S.kc.oc||0)<=1&&kcRare("kcR4",.6))opts.push(kcO("✦ Cải trang nam nhi, theo quân ra Nhạn Môn",{suc:-30},()=>kcEnd("kcR4"),{r97:1,j67:"tốn: Sức -30 · (Cơ duyên hiếm)"}));
@@ -36063,7 +36003,9 @@ function kcOrigin(i){const k=S.origin.k;const B=KCOB[k]&&KCOB[k][i];if(!B)return
  return{who:c?kcFace(c):pMe(),t:`<p class="past">${KCO[k].t} · hồi ${i+1}/3</p><p>${B[0]}</p>`,o:opts}}
 function kcOriginFx(k,i,a){S.kc.oc=(S.kc.oc||0)+a;const c=kcR("cha");let t="";const cl0=KCCLAN[k];
  if(a){if(c)kcAf(c,6);try{if(cl0)tdPowAdd(cl0,3)}catch(e){}apply({tamco:1});t="Cha gật đầu hài lòng."}else{if(c)kcAf(c,-4);apply({duc:2});t="Cha nhìn ngươi rất lâu."}
- if(k==="td"&&i===2){if(a||S.kc.oc>=2){S.kc.tdSafe=1;t+=" Án của cha được xét lại; nhà giữ được."}else{S.kc.tdFall=1;t+=" Nhà bị khám. Cha bị bắt giam; ngươi được thế giao che giấu, chờ kỳ tuyển dưới tên khác."}}
+ if(k==="td"&&i===2){if(kcLore()){t+=a?" Thư từ của cha thành tro; kẻ lục soát sau này sẽ chẳng có gì để dựa vào.":" Bản sao sổ sách nằm lại nhà thế giao, chờ ngày cần đến."}
+  else if(a||S.kc.oc>=2){S.kc.tdSafe=1;t+=" Án của cha được xét lại; nhà giữ được."}else{S.kc.tdFall=1;t+=" Nhà bị khám. Cha bị bắt giam; ngươi được thế giao che giấu, chờ kỳ tuyển dưới tên khác."}}
+ if(k==="dtq"&&i===0&&kcLore())S.kc.lost=1;/* KC LORE: from this chapter the brother is lost at Nhạn Môn: he is no longer at home (j67 dtq_huynh) */
  if(k==="thd"&&i===1&&a)apply({danh:5});if(k==="muoi"&&i===0&&a){S.kgtu=Math.max(10,S.kgtu-20);S.kgt+=8}
  if(k==="ch"&&i===2){S.th=(S.th||0)+(a?8:3)}
  try{const L=S.st&&S.st.ch;if(L)S.kc.seed=(S.kc.seed||[]).concat([k+i+a])}catch(e){}return t}
@@ -36129,9 +36071,15 @@ function kcTraveD(){const tm=kcTmMan();const r=!!(S.tm96&&S.tm96.h>=80&&S.tm96.r
  kcO("Cắt tóc đi tu",{},()=>kcEnd("tu"))].concat(r?[kcO(`✦ Gả cho ${tm.name}`,{},()=>kcEnd("kcR2"),{r97:1,j67:"tốn: không · (Cơ duyên hiếm)"})]:[]).concat(r5?[kcO("✦ Nhận làm nghĩa nữ, đi hòa thân",{},()=>kcEnd("kcR5"),{r97:1,j67:"tốn: không · (Cơ duyên hiếm)"})]:[])}}
 /* entry: she becomes a consort; the carry-over table of OUTSIDE_PLAN §9 */
 function kcEnter(rank){const b=rsnap();const K=S.kc;K.inPal=1;K.r=rank;K.yIn=S.year;S.kpTron=1;
+ /* KC LORE (coordinator 16/11): td. The house stood until now; the day she leaves for the palace it falls (father framed, the family executed). Dowry confiscated, no house behind her, entry as Đáp ứng exactly like the palace road (j1 td / j4 td). Old saves (S.kc.v 1) keep the old rules. */
+ const fall=S.origin.k==="td"&&kcLore();let fallCard=null;
+ if(fall){rank=0;K.r=0;K.fell=1;K.tdFall=1;K.hidden=1;const gone=K.fam.filter(x=>x.alive&&x.r!=="ty"&&!/^ban/.test(x.r));K.famGone=gone.map(x=>[x.t,x.name]);gone.forEach(x=>{x.alive=0});
+  try{const e=rivals.find(x=>x.enemy);if(e&&typeof k61Know==="function")k61Know(e,"con gái kẻ vu cha",true,2)}catch(e){}
+  fallCard={t:"Nhà ngươi bị xử trảm",who:(()=>{try{return kcFace(K.fam.find(x=>x.r==="cha"))}catch(e){return pMe()}})(),h:`<p>Ngày ngươi sắp nhập cung, Hình bộ mang chỉ đến phủ Thị lang. ${S.foeDad||"Kẻ thù của cha ngươi"} đã dâng sớ vu ông mưu phản; chứng cứ dựng xong từ lâu. Phủ bị niêm phong, cha ngươi bị xử trảm cùng cả nhà. </p><p>Em trai út lạc trong đêm khám phủ, không ai biết sống chết.</p><p>Người thế giao đổi tên ngươi trong sổ tuyển để giữ một đường sống. Ngươi vào cung một mình, mang theo mối thù.</p>`+
+   kitRows(gone.map(x=>[x.t,"bị xử trảm","r"]).concat([["Em trai út","lạc trong đêm khám phủ","t"],["Hồi môn","bị tịch thu","r"],["Thế lực nhà","không còn","r"]]))}}
  /* r2-r1 (FAIL 3): home dialogs still queued (Phúc tuyển, family events …) never follow her into the palace, and an open mini-game card closes */
  for(let i=Q.length-1;i>=0;i--){const m=Q[i];if(m&&m.pid==="kcE"&&!(m.pp&&m.pp.e==="dien"))Q.splice(i,1)}try{if(typeof kg82Close==="function"&&document.getElementById("kg82"))kg82Close(true)}catch(e){}
- S.rank=rank;S.sung=8+rank*5;S.lastPromo=S.turn;S.danh=Math.min(30,Math.round(S.danh*.6));S.bac=Math.min(400,S.bac+Math.round(S.khm*KC.dowry));
+ S.rank=rank;S.sung=8+rank*5;S.lastPromo=S.turn;S.danh=Math.min(30,Math.round(S.danh*.6));S.bac=Math.min(400,S.bac+(fall?0:Math.round(S.khm*KC.dowry)));
  S.staff=K.staff0||[];S.place="home";if(S.maid)S.maid.loyal=cl(S.maid.loyal+15,0,100);kcPd(rank>=2?10:5,`vào cung, phong ${RANKS[rank].n}`);S.out=0;S.pal=null;
  if(S.kc.tdFall){S.kc.hidden=1}
  /* the sister and friends who also passed enter as consorts (same score rule) */
@@ -36139,8 +36087,8 @@ function kcEnter(rank){const b=rsnap();const K=S.kc;K.inPal=1;K.r=rank;K.yIn=S.y
   if(sc>=KC.cut[0]&&roomFor("consort")){try{const v=newRival(sc>=KC.cut[2]?2:sc>=KC.cut[1]?1:0);v.name=m.name;v.age=Math.max(18,m.age);v.fid=m.fid;v.sac=m.sac;v.tai=m.tai;v.trait=m.tr;if(m.danh)v.danh=m.danh;
    rivals.push(v);try{affAdd(v,S,Math.round(m.af/2))}catch(e){}try{k61Know(v,"người nhà",true,3)}catch(e){}m.pal=v.id;L.push(v)}catch(e){console.error(e)}}}
  try{palFix()}catch(e){}deal();
- const rk=RANKS[rank].n;Q.push({t:"Nhập cung",who:pMe(),h:`<p>Điện tuyển: Hoàng thượng giữ thẻ bài, ban hoa. ${S.name} vào cung, phong <b>${rk}</b>.</p>`+
-  kitRows([["Mang theo",[kitChip("Bạc",S.bac,"n")+" (có hồi môn)",`Danh ${S.danh}`],"t"],["Tỳ nữ hồi môn",S.maid?S.maid.name:"không","t"],["Đã biết trong cung",`${S.kc.intel.length} phi tần`,"t"]].concat(L.map(v=>[v.name,`cũng vào cung, ${RANKS[v.rank].n}`,"t"])))});
+ const rk=RANKS[rank].n;if(fallCard)Q.push(fallCard);Q.push({t:"Nhập cung",who:pMe(),h:`<p>Điện tuyển: Hoàng thượng giữ thẻ bài, ban hoa. ${S.name} vào cung, phong <b>${rk}</b>.</p>`+
+  kitRows([["Mang theo",[kitChip("Bạc",S.bac,"n")+(fall?" (hồi môn bị tịch thu)":" (có hồi môn)"),`Danh ${S.danh}`],"t"],[fall?"Tỳ nữ thân tín":"Tỳ nữ hồi môn",S.maid?S.maid.name:"không","t"],["Đã biết trong cung",`${S.kc.intel.length} phi tần`,"t"]].concat(L.map(v=>[v.name,`cũng vào cung, ${RANKS[v.rank].n}`,"t"])))});
  log(`<b class="g">Vào cung theo kỳ tuyển tú: ${rk}.</b>`);kcSnapReset();try{if(typeof kcHook==="function")kcHook("enter",{rank})}catch(e){}tab="act";render()}
 
 /* ---------- UI: tabs, top bar, panels, plaques, map (r2: rebuilt on today's kit: kitSubTabs §46, pager + pcard §37.1, kitRelRow §49.1,
@@ -36248,7 +36196,7 @@ function kcFigLoad(){try{fetch("https://ctm-img.victoria-tntt.workers.dev/img/FI
  for(const f of figList(j)){const t=String(f.tier||""),r=norm(f.role);if(!(t==="kc"||t==="ngheo")||!f.identity)continue;const k=r+":"+f.identity;const T=(X[k]=X[k]||{});(T[t]=T[t]||[]).push(f)}/* r2: the CDN list now also has a26/a36/a51 khuê các dresses for some faces: keep every band */
  const n=Object.keys(X).length;const was=Object.keys(KCFX).length;KCFX=X;if(n!==was)try{if(isKc())render()}catch(e){}}).catch(()=>{})}catch(e){}}
 kcFigLoad();setInterval(kcFigLoad,300000);
-function kcDress(){return S&&S.origin&&(S.origin.k==="thd"||S.origin.k==="td")?"ngheo":"kc"}
+function kcDress(){return S&&S.origin&&(S.origin.k==="thd"||(S.origin.k==="td"&&!kcLore()))?"ngheo":"kc"}/* KC LORE: td is a Thị lang's daughter until the day she leaves home: khuê các dress; only thd is poor */
 const KC_AB=["a18","a26","a36","a51"];function kcBand(age){return age>=51?3:age>=36?2:age>=26?1:0}
 function kcDressRec(fid,tier,age){const X=fid&&KCFX[fid];const L=X&&X[tier];if(!L||!L.length)return null;const w=kcBand(age==null?18:age);/* the band of her age, else the nearest one */
  let b=null,bd=9;for(const f of L){const d=Math.abs(KC_AB.indexOf(f.ageBand||"a18")-w);if(d<bd){bd=d;b=f}}return b}
@@ -36436,7 +36384,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="d4485e2c1f86";window.CTM_BUILD=BUILD;
+const BUILD="54486dab865f";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
