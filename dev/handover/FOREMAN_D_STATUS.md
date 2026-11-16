@@ -1,6 +1,6 @@
 # FOREMAN D STATUS
 ORDER 16/11 applied (separate worker sessions, repo reports, hourly self-wake, claims).
-last wake: 16/11 10:05Z (s3 = session_01DgYSWmJqZEbu2bHw5WQjne; hourly wake trig_01PRsThQpzLFrogWwG2N6DLK at :28)
+last wake: 16/11 10:08Z (s3 = session_01DgYSWmJqZEbu2bHw5WQjne; hourly wake trig_01PRsThQpzLFrogWwG2N6DLK at :28)
 s3 START_CTX ≈ 6 % of 1M window (get_session 08:30Z: 11.8 % used); rollover at 31 % (START_CTX + 25 %), ceiling 60 %.
 s2 start context ≈ 45k tokens; budget ≈ 56k → rollover per FOREMAN_D.md.
 Session start 16/11. Starting context ≈ 60k tokens after the required reading; budget (start + 25%) ≈ 75k → rollover per FOREMAN_D.md when reached or on compaction.
@@ -41,7 +41,7 @@ main at start = eba64ead4.
 | unmet-name leak residue (log lines, palName, ??? rows) | review/name-mask | sonnet | worker session_01DgYSWoDkH3BjgWkcd7Y4Cg RUNNING |
 | D4 NPC death/new faces + Phế phi Lý (orphan #18) | — | opus | WAITING: mortality-r1 (PASS 2d3428f8) on main |
 | D57 preg-rate (orphan #2) | review/preg-rate | opus | WAITING: mortality + cycle-r3 on main |
-| kc-roads-cn-nc round 3 review (main s14 08:41Z) | review/kc-roads-cn-nc-r1 | opus | reviewer session_01DgYSWnY5pFVmEYGWvruZFs RUNNING (FAIL list → main s14) |
+| kc-roads-cn-nc round 3 review (main s14 08:41Z) | review/kc-roads-cn-nc-r1 @ef6e7a05 | opus | FAIL 4 (1 BLOCKING) → FOR MAIN s14 (see QUESTIONS) |
 | scene-end button sweep (KIT §81 live 9a4da876) | review/scene-end-sweep @67db47f6 | sonnet | PASS 67db47f6 (whole-game rescan: no scene closes by itself; buổi transition = not a scene) |
 | coop-rejoin-xdev review | — | — | CANCELLED for D (main s13 has it) |
 
@@ -61,6 +61,7 @@ main at start = eba64ead4.
 ## PENDING CDN UPLOAD
 
 ## QUESTIONS
+- FOR MAIN s14 (08:42Z order: FAIL list goes to you, you open a fresh kc-roads worker): review/kc-roads-cn-nc round 3 793cd37 = FAIL, 4 items, full list dev/handover/reports/review-kc-roads-cn-nc-r1.md; start the fixer FROM review/kc-roads-cn-nc-r1 @ef6e7a05 (main 18fb8252 + reviewer fixes: direct-entry ceiling vs real rank, name case, doubled rank, 'Vào cung ngay' cards promising the ceiling). (1) BLOCKING OD:L1288: 'Chờ' worth more than 'Vào cung ngay' (fresh palace arm 8 lives V 225, 3/8 'kém' → Tân Giả khố, vs home 309) → re-measure ≥8 lives/arm, retune BAL.kcv; (2) losses listed under ĐƯỢC (x: family, jkc+jkc2, OD:L908); (3) her own family shown as strangers in the Gia đình pager, all 9 home roads; (4) exam hook one seam: tiểu thư Phúc tuyển must call window.kcEntryExam(kind, done, info{art,origin,title,note}). D's entry-exam worker was told the contract. D can run the fixer if you prefer: write 'kc-roads fix → D' in FOREMAN_D.md.
 - BALANCE (for main chat, from balance-after-truth 14fdce0c, measures only): HH 34% (target ~32 ✔); early death 38% (target 40–45, low edge); childbirth death 5%/birth (target 8–12; worker shows the mechanism is exact at 11% and calls the gap chance); median weeks to HH ~285 vs target ~188 (too slow on both builds). Next: re-measure after review/mortality merges, then consider seeMaxP 70→65. The slow pace depends on review/balance-pass (ex.bar), not merged; after it merges check HH does not overshoot (ex.bar[2] 28→30). Numbers change needs owner OK.
 - ART NEEDED (for Foreman C, art owner since Q-D1; from D50): full-body figures for Phế phi họ Lý, Quản sự Tân Giả khố, Thầy dạy Thượng thư phòng — 4 age bands each (they now show the kit silhouette).
 - (resolved by C44 r1: 8 chars + miss guard) C44 (a): the worker made the Sổ mây code 26 chars (130 bits) with Chép/Gửi buttons. OWNER_DECISIONS l.1016 (coordinator design, owner did not object) says 8 chars; the ≥128-bit rule came from D s1's brief, not the owner. Default = keep 8 chars + strong server-side rate limit/lockout, unless the main chat asks the owner once and she wants the long code. The reviewer is told to judge 8-char + lockout.
