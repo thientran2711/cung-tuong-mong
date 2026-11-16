@@ -489,6 +489,16 @@ HUD: "Phần x/10 · Hồi x/y · Còn …" (every round/throw/vase/lantern = "H
 HUD counts never pass their ceiling: "Phần" is the running share of the WHOLE game (same formula as the final mark), and `env.hud` caps any "a/b" at b (`kg82Cap`, counted in `KG82.over` for tests).
 No text over text: a pop (`kg82Pop`) replaces any live pop it would land on; a round verdict ("Khớp hương mẫu!", "Đối chỉnh!", "Thế hoa cân đối!"…) is drawn IN PLACE of the hint/heading line it would cover (`k91Say`), never floating over other words. `dev/test/minigames91.js` fails on any overlap of canvas or DOM text in `#kg82`.
 
+### 13.2 TỨ ĐỨC MINI-GAMES (owner 15/11, review/tuduc-mg, C41) — `dev/build/jtd.js` (after j85, before j65)
+The four courses of j85 `lessonVir` (Tự học / Theo ma ma giáo tập) each play one easy mini-game in the SAME frame (`kg82Open` -> `kitGameFrame`, HUD Phần / Hồi·Bước·Lượt·Câu / Còn, `kg82ShowRes` rows). Intro = "Cách chơi" with 3 numbered steps + Bắt đầu / Để trời định (5/10) / Thôi, để lúc khác (costs nothing: time, Sức and bạc are paid only when the game result is accepted).
+| Course (`S.vir` key) | Kind `KG82_KIND` | Engine | Control | Score 0–10 | Level (0–5) makes it easier by |
+|---|---|---|---|---|---|
+| Công (`cong`) | `td_cong` Thêu theo nét | `kgTdThread` | tap the thread swatch that matches the sample, then DRAG the needle along the dotted pattern (glowing dot = next stitch) | 3 pieces: 0.2 right colour + 0.8 progress × steadiness | thread path tolerance +0.6 %/level; 2 swatches from level 3 |
+| Dung (`dung`) | `td_dung` Đi đứng giữ bát | `kgTdWalk` | HOLD left / right half to push the bowl back; floor marks with an arrow tell which way the next step leans it | share of the 20 s the needle stays in the green band (spill = pause 1 s) | green band wider 4 %/level |
+| Ngôn (`ngon`) | `td_ngon` Ứng đối | `kgTdTalk` | pick the reply with the tone the "Phép ứng đối" line names (cung kính / ôn hòa / thân mật / thẳng thắn tags) | 5 questions: fit 2 / 1 / 0 | 2 choices instead of 3 from level 3, +1 s per level |
+| Hạnh (`hanh`) | `td_hanh` Làm phúc | `kgTdAlms` | + / − buttons share the portions among 3–4 waiting people, then Phát xong | 3 rounds: 0.5 worst-off + 0.5 average − waste, ÷ best possible | no shortage round from level 3 |
+Progress: `tdPoints(mode, raw)` self 1 (raw ≥ 9: 2), teacher 2 (raw ≥ 7: 3); Công raw also feeds `S.vpf.cong` (last 3) -> handmade quality +0..2 via `virtueBonus(S,"cong").q`. Boards = existing painted study rooms (`theu/mua/tho/ve` `-bg-hoc`) + existing sprites; no new CSS but two layout lines (`.kg82ar`, option wrap). Test: `node dev/test/tuduc-mg.js <root> <WxH@dpr> <outdir> [cong,dung,ngon,hanh]`.
+
 ### 13.3 ĐIỂM TRANG BUỔI SÁNG (owner 15/11 09:30Z, review/toilette) — `dev/build/jtoil.js` (after jaudit, before j84) — awaiting kit review
 - Entry: act card "Điểm trang" at the top of Hành sự every buổi sáng (deck card, b:0, 1 khắc `BAL.toil.khac`, sure act, Kèm + Ghi chú say what
   skipping means) AND the top-bar chip (k3 row line 1, `[data-k3="toil"]`): "Hôm nay: chưa điểm trang" → tap starts it; after: "Hôm nay: y phục
