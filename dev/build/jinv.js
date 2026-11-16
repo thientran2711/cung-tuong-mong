@@ -26,15 +26,16 @@ function kitInvEmpty(n){let h="";for(let i=0;i<n;i++)h+=kitItem({empty:true,size
    any free height left at the bottom of the panel (owner 11/15: no big empty gap under the bag; equipment panel stays below it). */
 function kitInvFit(){document.querySelectorAll(".kinv .kinvg").forEach(g=>{try{
  /* refit whenever the grid's width or the panel's height changes (late layout, rotation, book page open) */
- if(!g.__kro&&typeof ResizeObserver==="function"){let w0=0,h0=0;g.__kro=new ResizeObserver(()=>{const P=g.closest("#panel");const w=g.clientWidth,h=P?P.clientHeight:0;if(w===w0&&h===h0)return;w0=w;h0=h;
-   clearTimeout(g.__kroT);g.__kroT=setTimeout(kitInvFit,40)});g.__kro.observe(g);const P=g.closest("#panel");if(P)g.__kro.observe(P)}
+ if(!g.__kro&&typeof ResizeObserver==="function"){let w0=0,h0=0;g.__kro=new ResizeObserver(()=>{const P=g.closest("#panel");const kv=g.closest(".kinv"),sd=kv&&kv.querySelector(".kinvside");const w=g.clientWidth,h=(P?P.clientHeight:0)+(sd?sd.offsetHeight*1e4:0);if(w===w0&&h===h0)return;w0=w;h0=h;
+   clearTimeout(g.__kroT);g.__kroT=setTimeout(kitInvFit,40)});g.__kro.observe(g);const P=g.closest("#panel");if(P)g.__kro.observe(P);/* page-scale-r1: the wear column grows late (pet picture, fonts): refit then too, else the bag kept its 2 minimum rows */const sd0=g.closest(".kinv")&&g.closest(".kinv").querySelector(".kinvside");if(sd0)g.__kro.observe(sd0)}
  if(!g.clientWidth)return;g.style.removeProperty("--kinvsz");let cols=getComputedStyle(g).gridTemplateColumns.split(" ").filter(Boolean).length||1;
  /* wear column (kinvside): its slot = one bag cell, shrunk so the 6 slots + names fit the panel height (never below 44 px); sized BEFORE the free height is measured */
- try{const sd=g.closest(".kinv").querySelector(".kinvside");if(sd){const P0=g.closest("#panel"),cs0=getComputedStyle(P0),n0=sd.querySelectorAll(".keqc").length||6,h4=(sd.querySelector(".kpst")||{offsetHeight:0}).offsetHeight+4;
+ try{const sd=g.closest(".kinv").querySelector(".kinvside");if(sd){/* page-scale-r1: size with the titles shown (tight off) every time, else tight flip-flopped between fits and the bag stayed at 2 rows */g.closest(".kinv").classList.remove("kinvtight");const P0=g.closest("#panel"),cs0=getComputedStyle(P0),n0=sd.querySelectorAll(".keqc").length||6,h4=(sd.querySelector(".kpst")||{offsetHeight:0}).offsetHeight+4;
    const avail=P0.getBoundingClientRect().bottom-(parseFloat(cs0.paddingBottom)||0)-(sd.getBoundingClientRect().top-(parseFloat(getComputedStyle(sd.querySelector(".keq")).paddingTop)||0)*0)-6;
    const pi=[...sd.querySelectorAll(".keqpi")].reduce((a,e)=>a+e.offsetHeight,0),nk=sd.querySelectorAll(".keq").length;g.__kper=Math.floor((avail-h4*nk-12*nk-pi)/n0-5-13);const kv0=sd.parentElement.parentElement;let ks=Math.max(40,Math.min(72,g.__kper));kv0.style.setProperty("--kside",ks+"px");
    /* measured pass: the column must end inside the panel (labels may wrap); shrink the slot by the overflow, never below 40 px */
-   const lim=P0.getBoundingClientRect().bottom-(parseFloat(cs0.paddingBottom)||0)-14;for(let it=0;it<14;it++){const ov=sd.getBoundingClientRect().bottom-lim;if(ov<=1||ks<=40)break;ks=Math.max(40,ks-Math.max(1,Math.ceil(ov/n0)));kv0.style.setProperty("--kside",ks+"px")}
+   /* page-scale-r1: the exact limit = panel content bottom minus every bottom margin/padding/border between the column and the panel (was a 14 px guess: the column ended 1-2 px past it, the page scrolled and the bag never filled) */let xb=0;for(let x=sd;x&&x!==P0;x=x.parentElement){const c=getComputedStyle(x);xb+=(parseFloat(c.marginBottom)||0)+(x===sd?0:(parseFloat(c.paddingBottom)||0)+(parseFloat(c.borderBottomWidth)||0))}
+   const lim=P0.getBoundingClientRect().bottom-(parseFloat(cs0.paddingBottom)||0)-(parseFloat(cs0.borderBottomWidth)||0)*0-xb-1;for(let it=0;it<14;it++){const ov=sd.getBoundingClientRect().bottom-lim;if(ov<=1||ks<=40)break;ks=Math.max(40,ks-Math.max(1,Math.ceil(ov/n0)));kv0.style.setProperty("--kside",ks+"px")}
    /* still too tall at the 40 px floor (short iPad page + pets): the pet box drops its title and spare lines (the slot + name already say what it is) */
    kv0.classList.toggle("kinvtight",sd.getBoundingClientRect().bottom-lim>1);g.__kper=ks}}catch(e){}
  const n=+g.dataset.n||0,min=+(g.closest(".kinv").dataset.min||4);const want=Math.max(min*cols,Math.ceil(n/cols)*cols);let have=g.children.length;
@@ -246,7 +247,7 @@ document.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.tar
 .keq.keqv .keqc>.kitem-slot{width:var(--kside,72px)}.keq.keqv .keql{font-size:.58rem;line-height:1.1;color:var(--ink2,#7a6a58);font-weight:600;overflow-wrap:anywhere;max-width:100%}
 .keq.keqv+.keq.keqv{margin-top:6px}.keq.keqv .keqpi{display:flex;flex-direction:column;gap:1px;font-size:.56rem;line-height:1.15;color:var(--ink2,#7a6a58);overflow-wrap:anywhere;max-width:100%}
 .keq.keqv .keqpi .kchip{font-size:.56rem;padding:0 4px;margin:0;white-space:nowrap}.keq.keqv .keql[style]{font-size:.62rem}
-.kinvtight .keq.keqv+.keq.keqv>.kpst,.kinvtight .keq.keqv .keqpi>span:nth-child(n+3){display:none}
+.kinvtight .keq.keqv>.kpst,.kinvtight .keq.keqv .keqpi>span:nth-child(n+3){display:none}
 .kinvsum{margin:6px 0 0;padding:0 2px}
 `;document.head.appendChild(st)})();
 /* ---------- new wear slots (owner 11/15): EXTEND j8 IT, no new item list. Only items that have a painting get a slot:

@@ -117,7 +117,7 @@ html body .game#game header.hud.khd2{grid-template-columns:auto max-content minm
 html body header.hud>#k3room:not([hidden]){grid-area:room}
 /* kv (review/mg-train, KIT §0 design scale): was @media (min-width:1000px) = the spread */
 html:where(.kv2) body header.hud:not(.khd2):has(#k3room:not([hidden])){grid-template-columns:auto auto minmax(0,1fr) auto!important;grid-template-areas:"menu room me stats"!important}
-html:where(.kv2) body header.hud.khd2>#k3room:not([hidden]){justify-self:end!important;align-self:start!important}
+html:where(.kv2) body header.hud.khd2>#k3room:not([hidden]){justify-self:end!important;align-self:start!important;min-height:0!important;height:32px;box-sizing:border-box}/* page-scale-r1: 32 px = the free 2nd row beside her portrait (72 - 39 time block), so the spread bar keeps its height and the right page stays 582x623 = the one page (KIT §0.0a) */
 html body header.hud.khd2>#k3tc{justify-self:stretch!important;align-self:center!important}
 html body header.hud.khd2>#kstrow{justify-self:stretch!important;border-top:1px solid var(--k-hair,#e6d3ac);padding-top:3px;margin-top:3px!important}
 html body header.hud.khd2>#kstrow>.kstg{flex:var(--kn,1) 1 0;grid-auto-columns:minmax(0,1fr);column-gap:4px}

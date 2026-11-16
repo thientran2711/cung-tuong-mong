@@ -827,6 +827,8 @@ document.addEventListener("click",ev=>{const t=ev.target.closest&&ev.target.clos
 .kitem.kitem-on[class*=" kig"]>.kitb{outline:2px solid #2d7a52;outline-offset:1px}
 .kitem .kitx{position:absolute;right:7%;top:7%;z-index:2;font-style:normal;font-size:.56rem;line-height:1.3;white-space:nowrap;padding:0 4px;border-radius:0 6px 0 6px;background:#4a2c1ee0;color:#ffe9b0;font-weight:700;letter-spacing:.01em}
 .kitem-lg .kitx,.kpsubj .kitx{font-size:.72rem;padding:1px 6px}
+/* page-scale-r1: the wear column (kitEquipSlots col:true, 40-72 px slots: Tư trang, Chọn y phục, pet box) never shows the Xa xỉ tag: wider than a 40 px slot it was cut ("a xỉ 33") and hid the picture; the same items show it in the bag and the tap panel, the total stays on the sum line */
+.keq.keqv .kitem .kitx{display:none}
 /* corner plan when the luxury tab sits top-right: seal "Ngự" and the "đã tẩm" tag go bottom-left (above the worn band) */
 .kitem[class*=" kig"]:has(.kitx)>.kitb .kits{top:auto;bottom:8%;left:7%}.kitem[class*=" kig"]:has(.kitx)>.kitb .kitm{top:auto;right:auto;bottom:8%;left:7%}
 .kitem[class*=" kig"]:has(.kitx)>.kitb .kits~.kitm{bottom:30%}
