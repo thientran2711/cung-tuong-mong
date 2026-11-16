@@ -479,4 +479,4 @@
 | origin intro pictures ~45 panels + G2–G7 (VẼ by main s26 23:05Z; ch1–4 first; samples first) (sonnet art) | review/intro-art | C | session_011xDdVQJPz4LjYQi4oTALJR | RUNNING | 16/11 23:22Z |
 | road-onecore (opus): B1 road files jrd_cn/tt/muoi/dtq 303 typed numbers → BAL (one-core-guard 0), from PASS c012bf32 | review/road-onecore | B | session_01N1tNP2CnQZTs1376PcZZun | RUNNING | 16/11 23:25Z |
 | tut-followups review r1 (opus, BIG) of aa391edf | review/tut-followups-r1 | B | session_01N1tNP54HW3RMjDu7rXSHce | RUNNING | 16/11 23:26Z |
-| emotion-acts-3 review r1 (opus, BIG) of 99a7eb84 | review/emotion-acts-3-r1 | B | (opening) | RUNNING | 16/11 23:31Z |
+| emotion-acts-3 review r1 (opus, BIG) of 99a7eb84 | review/emotion-acts-3-r1 | B | session_01N1tNP2S1tTXpLvLnFrpHP2 | RUNNING | 16/11 23:31Z |
