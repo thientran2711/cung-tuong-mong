@@ -16,7 +16,7 @@ const RT_END={tt_lo:["tt","Tư thông bại lộ"],tt_hoa:["tt","Giọt máu v�
  ad_an:["ad","Một đời an nhiên"]};
 /* every act on main that harms another person breaks the quiet-life vow (LUẬT SỬA CẢ NHÓM 16/11: list re-scanned against every A("…") on main) */
 const RT_HARM=["rumor","frame","poison","block","musk","ksab","kpoison","pond","kframe","pushp","trip","provoke","humiliate","plant","catswap","steal","accuse",
- "lygian","slowpoison","huydung","uyhiep","giahoa","blockf","pgift","thathu","phonghoa","batnat","thaopet","petsteal","expose","xinhh","vp"];
+ "lygian","slowpoison","huydung","uyhiep","giahoa","blockf","pgift","thathu","phonghoa","batnat","thaopet","petsteal","expose","xinhh","vp","tat","phatquy","rash","takeaway"];
 const RT_ART={tt:"img/ev-tu-tinh.webp",hen:"img/ev-mat-uoc.webp",tc:"img/ev-cung-nu.webp",thu:"img/ev-thu-nha.webp",lo:"img/ev-hoi-lo.webp",hoa:"img/ev-hoa-hoan.webp",
  bat:"img/ev-hinh-phat.webp",lc:"img/ev-lanh-cung.webp",tu:"img/act-xuat-gia.webp",ta:"img/ev-thinh-an.webp",an:"img/ev-te-le.webp",con:"img/ev-con-tre.webp",don:"img/ev-tin-don.webp"};
 try{Object.assign(PD_END,{"Trốn khỏi cung":12,"Cao chạy xa bay":15,"Xuất cung về quê":10,"Phế làm thứ dân":6,"Một đời an nhiên":15,"Dâng biểu xuất gia":10})}catch(e){}
