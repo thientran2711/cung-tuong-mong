@@ -100,7 +100,7 @@ async function plan(){
  if(!r||!r.ok)r=await caches.match("assets.json",{ignoreSearch:true});if(!r)return false;
  MAN=await r.json();const c=await caches.open(AC);HAVE=new Set((await c.keys()).map(q=>q.url));
  await migrate(c);
- coreList=[];figList=[];for(const f of MAN.files){if(f[3]==="fx")continue;/* KIT §68 painted effects: on demand, never ahead */const g=f[3]==="core"?"core":"fig",G=KLOAD[g];G.total+=f[2];
+ coreList=[];figList=[];for(const f of MAN.files){if(f[3]==="fx"||f[3]==="lazy")continue;/* KIT §68 painted effects + "lazy" (perf budget, assets.py): on demand, never ahead; sw.js caches them when first shown */const g=f[3]==="core"?"core":"fig",G=KLOAD[g];G.total+=f[2];
   if(HAVE.has(keyOf(f))){G.have+=f[2];G.files++}else{(g==="core"?coreList:figList).push(f);G.left++}}
  return true}
 /* older builds kept files in 'ctm-<timestamp>' under their plain path: move those whose content still matches, then drop the old cache */
@@ -129,7 +129,7 @@ async function runCore(){if(!coreList.length){KLOAD.phase="done";close();startBg
    KLOAD.err==="offline"?"Mạng đứt. Có mạng lại sẽ thỉnh tiếp phần còn thiếu.":"Mạng chập chờn. Thỉnh tiếp, hoặc vào cung ngay.")}}
 /* after a cut: re-read the cache so the next run only asks for what is still missing */
 async function refresh(grp){const c=await caches.open(AC);HAVE=new Set((await c.keys()).map(q=>q.url));const G=KLOAD[grp];G.have=0;G.files=0;G.left=0;
- const l=[];for(const f of MAN.files){if((f[3]==="core")!==(grp==="core"))continue;if(HAVE.has(keyOf(f))){G.have+=f[2];G.files++}else{l.push(f);G.left++}}
+ const l=[];for(const f of MAN.files){if(f[3]==="fx"||f[3]==="lazy"||(f[3]==="core")!==(grp==="core"))continue;if(HAVE.has(keyOf(f))){G.have+=f[2];G.files++}else{l.push(f);G.left++}}
  if(grp==="core")coreList=l;else figList=l}
 addEventListener("online",()=>{if(KLOAD.err==="offline"){KLOAD.err="";if(KLOAD.phase==="core")runCore();else if(bgOn)runBg()}});
 
@@ -165,7 +165,8 @@ KLOAD.testChip=(have,total)=>{bgOn=true;KLOAD.fig.total=total||635e6;KLOAD.fig.h
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-klc]");if(!b)return;e.stopPropagation();if(!KLOAD.fig.left)return;
  KLOAD.paused=!KLOAD.paused;try{localStorage.setItem(LS,KLOAD.paused?"1":"0")}catch(x){}paintChip();if(!KLOAD.paused)runBg()},true);
 async function startBg(){if(bgOn||!MAN)return;if(!figList.length){KLOAD.phase="all";return}
- const sd=navigator.connection&&navigator.connection.saveData;if(sd)return;
+ const cn=navigator.connection;/* perf budget: no background set on Data-saver, a mobile-data line or a slow line (the pictures the game shows still cache on use) */
+ if(cn&&(cn.saveData||cn.type==="cellular"||/^(slow-2g|2g|3g)$/.test(cn.effectiveType||"")))return;
  try{if(navigator.storage&&navigator.storage.estimate){const q=await navigator.storage.estimate();const need=figList.reduce((s,f)=>s+f[2],0);
    if(q&&q.quota&&q.quota-q.usage<need*1.1+50e6){KLOAD.err="quota";bgOn=true;paintChip();return}}}catch(e){}
  bgOn=true;setTimeout(()=>{paintChip();runBg()},2500)}
