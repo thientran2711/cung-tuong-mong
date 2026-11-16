@@ -48,3 +48,9 @@ Batch waits for the owner's verdict on luanhoi-sample-c20-c02-ty3-*.jpg.
 - v2: canvas 1024x2048 (hem + wide sleeves inside, margin L/R/bottom), 2 references per generation: [old figure to redraw] + [c01-ty3-a18 as SKIN-TONE ONLY reference], prompt "same fair porcelain skin as image 2, copy nothing else". Painted, no code tint.
 - Sheet (full width, no cell crop): c20 | c02 | c08 | c14 (new) | c01 (skin reference, old). Files luanhoi-sample-v2-c20-c02-c08-c14-{dark,light}.jpg. QA edge check on the 4 files: alpha>20 on L/R/top/bottom edge = 0 px each.
 - NEW BATCH QA RULE: alpha touching any canvas edge = FAIL (regenerate wider). Cost 65 each, 4 files = 260 credits. Not uploaded to CDN.
+
+## IN-GAME TEST + SKIN CHOICE (16/11 ~22:20Z, owner request after v2)
+- REAL game built from main (dev/site/build_site.sh in a scratch copy), Playwright, real room (Thừa Minh cung stage), CDN fig-consort-* requests intercepted and answered with the v2 PNGs (tools/ingame_probe.js). ingame-v2-ipad-1180x820.jpg / ingame-v2-fold-755x1000.jpg: columns c20,c02,c08,c14; TOP = same screen with the real current figure, BOTTOM = new figure in the same slot (her figure, left, beside her maid). ingame-v2-c20-identity-card-ipad.jpg = big identity card.
+- Caveat: only HER figure (player) is a consort on the stage; the stage gives one consort per shot, not two; the "old" is her real current outfit (not the old ty3 sprite), so top vs bottom differs in outfit too — compare scale/pose/skin, not gown.
+- Read: new figure keeps the stage display size, hem fully inside, skin matches the maid beside her; on Fold the whole body fits.
+- skin-choice-{light,dark}.jpg: the 4 faces she confirmed (face-consort-01/05/12/18, 256px, labelled 1–4). c01 was our pick, NOT hers -> ask her which tone, then use THAT face as the one skin reference.
