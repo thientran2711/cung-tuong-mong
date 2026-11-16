@@ -69,7 +69,7 @@ Object.assign(BAL,{ea:{
         to chant with her (Sức −, Thái hậu +);
     act = share of the outburst numbers an emotion ACT costs (a calmer vent the person chooses); one = the small step of a light price (ministers / court / children); sick = % a sad / anxious outburst ends in
     illness (the everyone-illness of jface: heals / worsens by the same monthly rule). */
- nk:{m:{loy:6,tinh:5,away:1,xAway:3},o:{af:5},q:{pow:3,rel:6,dPow:5,vMax:55},k:{hp:6,fond:4,tal:2},e:{sung:3,ill:10,away:.7,kho:1},t:{th:3,ill:10,suc:5,thUp:2},act:.5,sick:15,one:1},
+ nk:{m:{loy:6,tinh:5,away:1,xAway:3},o:{af:5},q:{pow:3,rel:6,dPow:5,vMax:55},k:{hp:6,fond:4,tal:2},e:{sung:3,ill:10,away:.7,kho:1,khoMin:50},t:{th:3,ill:10,suc:5,thUp:2},act:.5,sick:15,one:1},
  /* (6) QUỞ TRÁCH BY TEMPER + MOOD (audit row built): the Emperor's own feeling when he punishes (cấm túc): angry AT THIS PERSON or at no one (emo gian ≥ v; bot at v 60 with any
     target: +1 on 95 % of all cấm túc, far too many) → +mo month,
     joyful (vui ≥ v) → −mo (never under 1); his words follow his nết. Thái hậu's scolding (outburst quo) hits ×hot / ×timid by her nết;
@@ -227,12 +227,15 @@ const R_=[
  {k:"tiec",g:"vui",who:"c",n:"Bày tiệc trà",art:"dang-tra",ok:(p,T)=>!T.stingy&&(p===S||(p.bac||0)>=BAL.ea.fx.tiec.bac),w:T=>T.gen?1.5:1},
  {k:"hat",g:"vui",who:"c",n:"Ca hát thâu đêm",art:"dan-dem-trang",ok:()=>true,w:T=>T.k==="timid"?2:1},
  /* the Emperor */
- {k:"ban",g:"vui",who:"e",n:"Ban thưởng hậu cung",ok:(p,T)=>!T.tr.includes("lanhlung"),w:T=>T.gen?3:1},
+ /* emotion-acts-3 (review r1 FAIL #2): a bestowal is paid from the realm treasury (its loss), so it happens only while the treasury stays at or
+    above BAL.ea.nk.e.khoMin after paying (j55 / jreign: a treasury under 40 weakens the throne every month → more plots on the Emperor; r1
+    let frequent joy drain it); otherwise the joy finds another outlet (Mở yến ngắm hoa) */
+ {k:"ban",g:"vui",who:"e",n:"Ban thưởng hậu cung",ok:(p,T)=>!T.tr.includes("lanhlung")&&eaKhoOk(),w:T=>T.gen?3:1},
  {k:"noi",g:"gian",who:"e",n:"Long nhan đại nộ",ok:p=>!!eaTargetET(p),w:T=>T.k==="hot"?3:T.k==="timid"?.3:1},
  {k:"eruou",g:"buon",who:"e",n:"Một mình uống rượu",ok:()=>true,w:()=>1},{k:"emat",g:"so",who:"e",n:"Mất ngủ, thức phê tấu chương",ok:()=>true,w:()=>1},
  {k:"nghi",g:"ghen",who:"e",n:"Nghi kỵ",ok:p=>!!eaTargetET(p),w:()=>1},{k:"eyen",g:"vui",who:"e",n:"Mở yến ngắm hoa",ok:()=>true,w:()=>1},
  /* Thái hậu */
- {k:"ban",g:"vui",who:"t",n:"Thái hậu ban thưởng",ok:()=>true,w:T=>T.gen?3:1},
+ {k:"ban",g:"vui",who:"t",n:"Thái hậu ban thưởng",ok:()=>eaKhoOk(),w:T=>T.gen?3:1},
  {k:"quo",g:"gian",who:"t",n:"Thái hậu quở trách",ok:p=>!!eaTargetET(p),w:()=>2},{k:"quo",g:"ghen",who:"t",n:"Thái hậu lạnh nhạt",ok:p=>!!eaTargetET(p),w:()=>1},
  {k:"tkinh",g:"buon",who:"t",n:"Tụng kinh suốt đêm",ok:()=>true,w:()=>1},{k:"tkinh",g:"so",who:"t",n:"Mất ngủ, tụng kinh cầu an",ok:()=>true,w:()=>1},
  /* servants */
@@ -256,6 +259,7 @@ const R_=[
  {k:"kbo",g:"so",who:"k",n:"Gặp ác mộng, sốt nhẹ",ok:()=>true,w:()=>1},{k:"khon",g:"ghen",who:"k",n:"Hờn dỗi huynh đệ",ok:()=>true,w:()=>1},
  {k:"kvui",g:"vui",who:"k",n:"Nô đùa làm Hoàng thượng cười",ok:()=>true,w:()=>1}];
 window.EA_REACT=R_;
+function eaKhoOk(){try{const T=S.trieu,N=BAL.ea.nk.e;return !(T&&T.kho!=null)||T.kho-N.kho>=N.khoMin}catch(e){return true}}
 /* who the person is: c consort (her too), e Emperor, t Thái hậu, s servant, m man of the palace, o court eunuch / Thái y viện, q minister, k child */
 function eaKind(p){if(p===S)return"c";if(S.emp&&p===S.emp)return"e";if(p===S.thO)return"t";if((rivals||[]).includes(p))return"c";if(p&&(p.role==="maid"||p.role==="eunuch"||p.sid!=null||p===S.maid))return"s";
  if(p&&p.isMin)return"q";if(S.court&&Object.values(S.court).includes(p))return"o";if((S.men||[]).includes(p))return"m";try{if(allKids().some(a=>a[0]===p))return"k"}catch(e){}return"m"}
@@ -305,7 +309,7 @@ function eaDo(p,r){const F=BAL.ea.fx[r.k]||{vent:10},me=p===S,res=[];let h="",ta
  case"tiec":{pay({bac:-Math.min(F.bac,me?S.bac:(p.bac||0))});const fr=liveC().filter(x=>x!==p).sort(()=>Math.random()-.5).slice(0,2);for(const x of fr)affAdd(x,p,F.aff);if(me&&fr.length)add(`${fr.map(x=>nm(x)).join(", ")} thiện cảm +${F.aff}`);
   h=me?"Lòng vui, ngươi bày tiệc trà, mời mấy vị tỷ muội sang ngắm hoa, chuyện trò đến chiều.":`${Nm(p)} bày tiệc trà mời các phi tần.`;break}
  case"hat":pay({suc:-F.suc,tai:F.tai});h=me?"Vui quá, ngươi ôm đàn ca hát đến tận khuya, sáng ra mệt rã rời.":`${Nm(p)} ca hát thâu đêm.`;break;
- case"ban":{const L=liveC();for(const x of L)ap(x,{bac:F.bac});try{const T=S.trieu;if(T&&T.kho!=null){T.kho=clp(T.kho-NK().e.kho,0,100);add(`quốc khố −${NK().e.kho}`)}}catch(x){}
+ case"ban":{const L=liveC();for(const x of L)ap(x,{bac:F.bac});try{const T=S.trieu,N=NK().e;if(T&&T.kho!=null){T.kho=clp(T.kho-N.kho,0,100);add(`quốc khố −${N.kho}`)}}catch(x){}
   if(!S.out){apply({bac:F.bac});eaHitMe(p,"ban");add(`Bạc +${F.bac}`)}h=`${Nm(p)} vui, ban thưởng khắp hậu cung${S.out?"":", ngươi cũng có phần"}.`;break}
  case"noi":{const t=eaTargetET(p);if(!t)return null;target=t;if(t===S){apply({sung:-F.sung});eaHitMe(p,"noi")}else ap(t,{sung:-F.sung});add(eaN(t,"Sủng",-F.sung));h=`Hoàng thượng nổi giận với ${t===S?"ngươi":t.name}.`;break}
  case"quo":{const t=eaTargetET(p);if(!t)return null;target=t;const Tq=eaTemper(p),Qm=Tq.k==="hot"?Q6().hot:Tq.k==="timid"?Q6().timid:1,th=Math.max(1,Math.round(F.th*Qm)),dn=Math.max(1,Math.round(F.danh*Qm));
