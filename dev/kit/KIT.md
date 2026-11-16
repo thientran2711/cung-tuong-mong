@@ -3664,3 +3664,8 @@ The person is painted ON a vertical silk hanging scroll: roller rod with knob en
 | man | Vương gia / official / guard / physician / prince / công tử | grey-green ink wash | bamboo, misty mountains |
 | unk | stranger (unknown silhouette) | warm stone-beige | mist |
 The rank colours follow the portrait-frame / trung y colours (OWNER_DECISIONS 15/11 10:08Z). Sample: kit page `#kit` § 61 (one scroll per key).
+
+### 61.1 reviewer fixes (review/fig-bg-k1-r1)
+- The dialog name chip (`.kdpcap`) wraps INSIDE the silk window (white-space normal, max-width = window) and kitDpFit clamps it to the window, not the border box (a long name was cropped by the scroll).
+- Book: a column with a silk scroll keeps its normal width (`kitBookFigCol` returns "" for `data-fb`) — the scroll window crops a wide robe; it never widens the column (text ≥ 220 px kept). The book figure keeps main's KIT 34.6 vertical offset.
+- The dialog column's border is INSIDE the capped column (kit keeper change); the older sentence "the dialog column widens by the border" above no longer applies.

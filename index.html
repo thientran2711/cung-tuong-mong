@@ -22764,7 +22764,7 @@ function kitDpFit(){try{const o=kitDpOn();if(!o||!o.d.classList.contains("kdper"
    Object.assign(it.im.style,{width:iw.toFixed(1)+"px",height:ih.toFixed(1)+"px"});
    if(it.cap){it.cap.style.left=Math.max(0,Math.min(W,left+iw*(s.cl+s.cr)/2)).toFixed(1)+"px";it.cap.style.translate="";it.cap.dataset.row=rows&&i%2?"1":"0";it.cap.style.top=(gap+(rows&&i%2?capH+4:0)).toFixed(1)+"px"}x+=s.core});
   /* chips never cut: clamp inside the column; report whether two touch */
-  const C=col.getBoundingClientRect();let prev=null,touch=false;L.forEach(it=>{const c=it.cap;if(!c)return;const r=c.getBoundingClientRect();let s=0;if(r.left<C.left+2)s=C.left+2-r.left;else if(r.right>C.right-2)s=C.right-2-r.right;if(s)c.style.translate=s.toFixed(1)+"px 0";
+  const C0=col.getBoundingClientRect(),cb=col.querySelector(":scope > .kesf[data-fb]")?(col.clientLeft||0):0,C={left:C0.left+cb,right:C0.right-cb};let prev=null,touch=false;L.forEach(it=>{const c=it.cap;if(!c)return;const r=c.getBoundingClientRect();let s=0;if(r.left<C.left+2)s=C.left+2-r.left;else if(r.right>C.right-2)s=C.right-2-r.right;if(s)c.style.translate=s.toFixed(1)+"px 0";
    const q=c.getBoundingClientRect();if(prev&&q.left<prev.right+4&&c.dataset.row===prev.row)touch=true;prev={right:q.right,row:c.dataset.row}});return touch};
  /* two chips that touch → the second one goes to a second line above the heads and the people start under it */
  if(lay(capH+6,false))lay(2*capH+10,true);
@@ -23588,7 +23588,7 @@ window.KIT_LIGHT=KIT_LIGHT;
  function learn(src,then){if(AR[src]!=null)return;AR[src]=0;const I=new Image();I.crossOrigin="anonymous";
    I.onload=()=>{AR[src]=I.naturalWidth/Math.max(1,I.naturalHeight);HX[src]=headX(I);then&&then()};I.onerror=()=>{delete AR[src]};I.src=src}
  /* column width + figure height for j87 personBody — called WHILE PAGINATING, so the text is measured in its final column */
- window.kitBookFigCol=function(fig,PW,PH){try{const m=/src="([^"]+)"/.exec(fig||"");if(!m||!PW||!PH||PW<440)return "";const src=m[1];
+ window.kitBookFigCol=function(fig,PW,PH){try{const m=/src="([^"]+)"/.exec(fig||"");if(!m||!PW||!PH||PW<440)return "";if(/data-fb=/.test(fig))return "";/* KIT 61: on the silk scroll the column keeps its normal width; a wide robe is cropped by the scroll window, never widens the column */const src=m[1];
    if(!AR[src]){learn(src,()=>document.querySelectorAll(".kbk").forEach(r=>{try{r.__kbk&&r.__kbk.relayout()}catch(e){}}));return ""}   /* the book's own re-layout, same reading position */
    const kfr0=+((/--kfr:([\d.]+)/.exec(fig)||[])[1]||1),pic=PH*R.h,ar=AR[src],hx=HX[src]!=null?HX[src]:.5,base=Math.min(PW*.45,PH*.8*.42);
    const bb=kitFigBody(src,()=>document.querySelectorAll(".kbk").forEach(r=>{try{r.__kbk&&r.__kbk.relayout()}catch(e){}}));if(!bb)return "";   /* KIT 34.6: sized by its BODY (kitBookFig), same as the stage and the dialogs */
@@ -23611,7 +23611,7 @@ window.KIT_LIGHT=KIT_LIGHT;
      const ar1=i1.naturalWidth&&i1.naturalHeight?i1.naturalWidth/i1.naturalHeight:b1.ar,g=kitBookFig(Object.assign({},b1,{ar:ar1}),kf*KIT_FIG.man,Hc);dyF=g.dy*kk;
      f.style.height=(g.ih*kk).toFixed(1)+"px";f.style.width=(g.iw*kk).toFixed(1)+"px";f.style.visibility="";f.dataset.kbody=(g.body*kk).toFixed(1)}}
    const w0=f.offsetWidth,H=f.offsetHeight,bw=box.offsetWidth,pw=por.offsetWidth;if(!w0||!bw){box.classList.remove("kbk-figover");return}
-   if(por.querySelector(":scope>.kesf[data-fb]")){box.classList.remove("kbk-figover");return}/* KIT 61: on the silk scroll the figure stays centred and a wide robe is cropped by the scroll window (no slide, no fade) */
+   if(por.querySelector(":scope>.kesf[data-fb]")){box.classList.remove("kbk-figover");const t0=dyF>0.5?`translate(0px,${dyF.toFixed(1)}px)`:"";f.style.transformOrigin="50% 100%";if(f.style.transform!==t0)f.style.transform=t0;return}/* KIT 61: on the silk scroll the figure stays centred and a wide robe is cropped by the scroll window (no slide, no fade) */
    if(pg&&pg.offsetHeight&&pg.offsetWidth&&!box.closest(".kbk.narrow")){R.h=+(por.offsetHeight/pg.offsetHeight).toFixed(3);R.w=+(bw/pg.offsetWidth).toFixed(3)}
    const im=f.querySelector("img"),src=im&&im.getAttribute("src");if(src&&AR[src]==null)learn(src,soon);const hx=src&&HX[src]!=null?HX[src]:.5;
    /* KIT 32.2a (owner 15/11, "Tuần lục p.6 Thái hậu": the robe spread under the text): the figure stays INSIDE its own column on every
@@ -36279,6 +36279,8 @@ window.kitFigBgKey=kitFigBgKey;
 .kbk.narrow .kbk-person.kbk-full>.kbk-por:has(>.kesf[data-fb]){overflow:hidden}
 @media (max-height:520px){.kbk-por:has(>.kesf[data-fb]){--fbt:11px;--fbs:12px}.kes:has(>.kesf[data-fb]){--fbt:10px;--fbs:11px}}
 .kbk-por:has(>.kesf[data-fb])>.kesf>.kpsn{display:none}
+.kes:has(>.kesf[data-fb])>.kpsn.kdpcap{white-space:normal!important;max-width:calc(100% - 6px);width:max-content;line-height:1.15}
+.kes:has(>.kesf[data-fb])>.kpsn.kdpcap .kname{white-space:normal!important;max-width:100%;text-align:center;justify-content:center}/* KIT 61: a long name wraps INSIDE the silk window (the column crops what passes it) */
 .kes:has(>.kesf[data-fb])>.kpsn .kname,.kes:has(>.kesf[data-fb])>.kpsn .kti,.kes:has(>.kesf[data-fb]) .kesf>.kpsn .kname,.kes:has(>.kesf[data-fb]) .kesf>.kpsn .kti{text-shadow:0 0 2px #fff6e0,0 0 5px #fff6e0,0 0 9px #fff6e0cc}
 `+Object.keys(KIT_FIGBG).map(k=>`${sel(k)}{border-image-source:url(https://ctm-img.victoria-tntt.workers.dev/img/kit/figbg-${k}.webp);background:none}`).join("\n");
  document.head.appendChild(st)})();
@@ -36313,7 +36315,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="90c3cb5077b9";window.CTM_BUILD=BUILD;
+const BUILD="80b695241229";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

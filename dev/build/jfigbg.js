@@ -27,6 +27,8 @@ window.kitFigBgKey=kitFigBgKey;
 .kbk.narrow .kbk-person.kbk-full>.kbk-por:has(>.kesf[data-fb]){overflow:hidden}
 @media (max-height:520px){.kbk-por:has(>.kesf[data-fb]){--fbt:11px;--fbs:12px}.kes:has(>.kesf[data-fb]){--fbt:10px;--fbs:11px}}
 .kbk-por:has(>.kesf[data-fb])>.kesf>.kpsn{display:none}
+.kes:has(>.kesf[data-fb])>.kpsn.kdpcap{white-space:normal!important;max-width:calc(100% - 6px);width:max-content;line-height:1.15}
+.kes:has(>.kesf[data-fb])>.kpsn.kdpcap .kname{white-space:normal!important;max-width:100%;text-align:center;justify-content:center}/* KIT 61: a long name wraps INSIDE the silk window (the column crops what passes it) */
 .kes:has(>.kesf[data-fb])>.kpsn .kname,.kes:has(>.kesf[data-fb])>.kpsn .kti,.kes:has(>.kesf[data-fb]) .kesf>.kpsn .kname,.kes:has(>.kesf[data-fb]) .kesf>.kpsn .kti{text-shadow:0 0 2px #fff6e0,0 0 5px #fff6e0,0 0 9px #fff6e0cc}
 `+Object.keys(KIT_FIGBG).map(k=>`${sel(k)}{border-image-source:url(img/kit/figbg-${k}.webp);background:none}`).join("\n");
  document.head.appendChild(st)})();
