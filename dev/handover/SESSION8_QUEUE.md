@@ -75,7 +75,7 @@ Dependencies: D29 before D13 (events/places read the ledger); D30 + D42 share j1
 j72 bước vs Hồi · stage paper halo · Thái hậu title bronze vs plum · HT vs HH gold alike · Đáp ứng muted on paintings
 | C18 | review/kit-popup-sample @ b6242dea (screens sent to owner) | SẴN SÀNG KIỂM → reviewer QUEUED-NEXT |
 | C19 | review/pic-dupes → r1 FAIL (hanh-le picture) → worker fixing on pic-dupes-r1 | RUNNING |
-| C20 | review/act-text (owner s8: broken/unclear act card text, whole family) | RUNNING |
+| C20 | review/act-text @ 593e66b3a (PAUSED for slot; left: full after-scan 6 states, 755 panel scan fix, long rows) | QUEUED (resume) |
 | C21 | review/khac-day @ 0ce947402 (j76need one source) | REVIEWING (khac-day-r1) |
 | C22 | review/boot-flash (owner s8: raw old skeleton flashes on launch) | RUNNING |
 | C22 | review/boot-flash | RUNNING |
@@ -107,4 +107,4 @@ j72 bước vs Hồi · stage paper halo · Thái hậu title bronze vs plum · 
 | C45 | review/newgame-ui (owner s8 frustrated: identity screen figure heights, panel covering, paging/pick lag, Nhập cung event frame + picture) | RUNNING |
 | C46 [→ FOREMAN B] | review/map-labels (owner s8: Dư đồ labels tiny/faint/cut → readable kit name tags) | QUEUED-NEXT |
 | C47 | review/stage-side (owner s8: iPad stage side cards → one narrow vertical column like phone) | QUEUED-NEXT |
-| C48 | review/save-slots (owner s8 HIGH: co-op overwrote solo slots; ≥3 solo + ≥3 co-op rooms; recover) | QUEUED-NEXT (TOP) |
+| C48 | review/save-slots (owner s8 HIGH: co-op overwrote solo slots; ≥3 solo + ≥3 co-op rooms; recover) | RUNNING |
