@@ -307,3 +307,4 @@
 | stage-pets r3 successor (sonnet): 3 people + pets at KIT figure scale 85–90 %, stagger/overlap, fold column | review/stage-pets | main s21 | session_01UV1SzhWwh7s4pLGFcFfgmo | RUNNING | 16/11 18:06Z |
 | tut-replay review r1 (sonnet, BIG save) of ecd2ffb3 | review/tut-replay-r1 | main s21 | session_01UV1SzhK2qhxKezAoaM3cbk | RUNNING | 16/11 18:11Z |
 | ios-install-first (sonnet; owner bug: iPad downloads twice Safari → Home Screen app): ask to install before downloading on iOS Safari; save visibility check | review/ios-install-first | main s21 | session_01UV1SzkVWhwwYTAq3Q6ketP | RUNNING | 16/11 18:13Z |
+| chonso-tabs (sonnet; owner UI): Chọn sổ → kit tabs Một mình | Cùng hảo hữu | review/chonso-tabs | main s21 | session_01UV1SzkgJM7jCMrRJK7gSaG | RUNNING | 16/11 18:14Z |
