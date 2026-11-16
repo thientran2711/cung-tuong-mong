@@ -156,7 +156,24 @@ function kgTdAlms(box,env){const lv=tdEase(env.lv);const wrap=document.createEle
  KG82.peek=()=>{if(lock||stop)return null;const R=rounds[r];let i=R.need.findIndex((d,k)=>give[k]<tdAlmsBestGive(R)[k]);if(i<0||left()<=0)return{sel:"#tdadone"};return{sel:`#${box.id||"kg82box"} button[data-p="${i}"][data-d="1"]`}};
  render();return()=>{stop=true}}
 function tdAlmsBestGive(R){let best=-1,bg=null;const give=R.need.map(()=>0);(function rec(i,left){if(i===R.need.length){const s=tdAlmsScore(R.need,give,R.pool);if(s>best){best=s;bg=give.slice()}return}for(let a=0;a<=left;a++){give[i]=a;rec(i+1,left-a)}give[i]=0})(0,R.pool);return bg}
-Object.assign(KG82_ENG,{tdthread:kgTdThread,tdwalk:kgTdWalk,tdtalk:kgTdTalk,tdalms:kgTdAlms});
+/* ---------- easy-rules layer (same pattern as review/mg-easy): Gợi ý button, quiet idle hint, first-time example card ---------- */
+const TD_HINT={tdthread:"Viền vàng chỉ sợi chỉ đúng màu, hoặc chấm kế tiếp để kéo kim tới.",tdwalk:"Viền vàng ở nửa khung nên giữ lúc này.",tdtalk:"Viền vàng ở lời có giọng hợp với phép ứng đối.",tdalms:"Viền vàng ở nút cần bấm tiếp (hoặc nút Phát xong)."};
+const TD_EX={cong:"Chỉ mẫu màu lục thì chạm sợi chỉ lục, rồi kéo kim từ chấm xanh men theo nét chấm.",dung:"Dấu sàn ghi “◀ trái” thì bát sắp nghiêng trái: giữ nửa phải để đỡ lại.",ngon:"Thái hậu vui, phép ghi “bề trên: cung kính” thì chọn lời mang nhãn cung kính.",hanh:"Người ghi cần 2 phần: bấm + hai lần cho người ấy, rồi làm vậy với mọi người, bấm Phát xong."};
+function tdIdle(lv){lv=+lv||0;return lv<=1?6500:lv<=3?10500:0}
+function tdSeen(k,set){try{if(KG82.noDemo||!S)return true;const m=S.mgSeen||(S.mgSeen={});if(set){m["td_"+k]=1;return true}return !!m["td_"+k]}catch(e){return true}}
+function tdRing(pt,ms){const r=document.createElement("div");r.className="tdring ksel";r.style.cssText=`position:fixed;left:${pt.x-26}px;top:${pt.y-26}px;width:52px;height:52px;border-radius:50%;pointer-events:none;z-index:99999`;document.body.appendChild(r);setTimeout(()=>r.remove(),ms||2600);return r}
+function tdWrap(eng,ek){return function(box,env){let hints=0,last=performance.now(),dead=false;const tipId="tdtip",IDLE=tdIdle(env.lv),end0=env.end;
+ const act=document.createElement("div");act.className="kg82act";act.innerHTML=`<button class="${kg82Btn(true)}" id="tdhint">Gợi ý<small>chỉ chỗ đúng, bớt một ít phần</small></button>`;
+ const tip=document.createElement("div");tip.id=tipId;const say=t=>{tip.innerHTML=t?kg82Rows([["Ma ma",t,"n"]]):""};say(IDLE?"Chưa rõ thì chạm Gợi ý, ma ma sẽ chỉ cho.":"");box.appendChild(act);box.appendChild(tip);
+ const show=auto=>{if(dead||!KG82.peek)return;const p=KG82.peek();if(!p)return;hints+=auto?.3:.7;last=performance.now();let pt=p.x!=null?p:p.drag&&p.drag[0]?{x:p.drag[0][0],y:p.drag[0][1]}:null;
+  if(p.sel){const e=document.querySelector(p.sel);if(e){e.classList.add("ksel");setTimeout(()=>e.classList.remove("ksel"),2600);pt=null}}
+  say((auto?"Khẽ nhắc: ":"")+TD_HINT[ek]);if(pt)tdRing(pt);if(p.drag&&p.drag.length>1){const q=p.drag[Math.min(p.drag.length-1,3)];tdRing({x:q[0],y:q[1]})}};
+ act.querySelector("button").onclick=()=>show(false);
+ const act0=()=>{last=performance.now()};box.addEventListener("pointerdown",act0);box.addEventListener("pointermove",act0);
+ const iv=IDLE?setInterval(()=>{if(dead)return;if(performance.now()-last>IDLE)show(true)},800):0;
+ env.end=raw=>end0(Math.max(0,Math.round(raw-Math.min(2,hints))));
+ const stop=eng(box,env);return()=>{dead=true;clearInterval(iv);document.querySelectorAll(".tdring").forEach(e=>e.remove());if(stop)stop()}}}
+Object.assign(KG82_ENG,{tdthread:tdWrap(kgTdThread,"tdthread"),tdwalk:tdWrap(kgTdWalk,"tdwalk"),tdtalk:tdWrap(kgTdTalk,"tdtalk"),tdalms:tdWrap(kgTdAlms,"tdalms")});
 
 /* ---------- layout only (colours and chrome come from the kit) ---------- */
 (function(){const st=document.createElement("style");st.id="td-css";st.textContent=`
@@ -181,8 +198,9 @@ function tdPlay(k,mode){if(!S||S.dead||Q.length||S.mg||TDS.busy)return;vNorm(S);
   kg82ShowRes(kg82Rows([["Màn chơi",`${raw}/10 · ${kg82Word(raw)}${skipped?" (để trời định)":""}`,"t"],["Mục đích",TD_GOAL[k],"n"],["Tiến bộ",kg82Chip(`${V.n} tiến bộ`,gain,"g")]].concat(k==="cong"?[["Đồ thủ công",`phẩm +${q} (luyện tay ${raw>=5?"khéo":"còn vụng"})`,"n"]]:[]))+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82ok">Đã hiểu</button></div>`);
   kg82Set("score",`${raw}/10`);kg82Set("time","đã hết");KG82.last={raw,skipped,gain};
   $("kg82ok").onclick=()=>{kg82Close();TDS.busy=false;tdFinish(k,mode,raw,skipped)}};
- KG82.phase="intro";box.innerHTML=`<h4 class="kpst">Cách chơi</h4>`+kg82Rows(TD_RULES[k].map(([n,t])=>[`Bước ${n}`,t,"t"]))+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82go">Bắt đầu</button><button class="${kg82Btn(true)}" id="kg82skip">Để trời định<small>tính 5/10</small></button><button class="${kg82Btn(true)}" id="tdcancel">Thôi, để lúc khác<small>không tốn gì</small></button></div>`;
- $("kg82go").onclick=()=>kg82Play(kind,raw=>result(raw,false));$("kg82skip").onclick=()=>result(5,true);$("tdcancel").onclick=cancel}
+ KG82.phase="intro";const first=!tdSeen(k),HOWL=["Chơi dễ: ở bậc thấp có Gợi ý và chỉ dẫn hiện sẵn; bậc càng cao càng rộng tay."];
+ box.innerHTML=`<h4 class="kpst">Cách chơi${first?" · lần đầu":""}</h4>`+kg82Rows(first?TD_RULES[k].map(([n,t])=>[`Bước ${n}`,t,"t"]).concat([["Ví dụ",TD_EX[k],"n"]]):[["Luật",K.how,"t"]])+kg82Rows([["Gợi ý",HOWL[0],"n"]])+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82go">Bắt đầu</button><button class="${kg82Btn(true)}" id="kg82skip">Để trời định<small>tính 5/10</small></button><button class="${kg82Btn(true)}" id="tdcancel">Thôi, để lúc khác<small>không tốn gì</small></button></div>`;
+ $("kg82go").onclick=()=>{tdSeen(k,1);kg82Play(kind,raw=>result(raw,false))};$("kg82skip").onclick=()=>result(5,true);$("tdcancel").onclick=cancel}
 function tdFinish(k,mode,raw,skipped){if(!S||S.dead)return;vNorm(S);const l=S.vir[k],cost=virCost(l),V=VIR.find(x=>x.k===k);if(!V||l>=5)return;
  if(mode==="self"){if(!can(2)||S.suc<25)return}else if(!can(2)||S.bac<cost)return;
  const b=typeof rsnap==="function"?rsnap():null,g=tdPoints(mode,raw);

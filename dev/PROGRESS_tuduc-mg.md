@@ -17,3 +17,13 @@ Owner: "Mini game học tứ đức đâu? Không thấy." Spec: OWNER_DECISIONS
 - Boards reuse existing study-room paintings (theu/mua/tho/ve -bg-hoc) and sprites (kim-needle, mua-mat, banh-pot). Dedicated Magnific gpt-2-6 backgrounds mg-td{cong,dung,ngon,hanh}-bg-hoc not generated (none in this branch; no CDN upload needed).
 - Owner rule "LEFT picture of what she does, RIGHT info" for the mini-game frame (intro/play/result) is a frame-level change (C34 contest-ui, kitGameFrame). Not done here to avoid a private layout; needs a kit part.
 - "Tự rèn" button label still pending the act-text branch ("Tự học").
+
+
+## Engine table
+See header comment of dev/build/jtd.js (course / game / control / score / level effect for Công, Dung, Ngôn, Hạnh). Test: `node dev/test/tuduc-mg.js <root> <WxH@dpr> <outdir> [cong,dung,ngon,hanh] [quick|none]`.
+
+## Easy-rules layer (added, same pattern as review/mg-easy)
+`tdWrap` in jtd.js around every engine: "Gợi ý" button (kit `kg82Btn`), shows the kit `.ksel` outline on the right target (peek) + a kit row line; quiet auto-hint after 6.5 s (level 0-1) / 10.5 s (2-3) idle, none at 4+ (button only); each hint costs 0.7 (auto 0.3) of the 10 points, max 2. First-time example card (`S.mgSeen["td_"+k]`, `KG82.noDemo` skips), later intros show the one-line rule.
+## KIT REQUEST
+- Hint marker for canvas games: currently a `.ksel` ring div (kit outline) positioned over the target; a kit-owned "hint ring" part would be cleaner.
+- Owner rule "LEFT picture / RIGHT info" for the mini-game frame: frame-level, not done.
