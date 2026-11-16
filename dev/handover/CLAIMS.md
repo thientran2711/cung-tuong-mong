@@ -323,7 +323,7 @@
 | chonso-cloud (sonnet; owner UI): Sổ mây row in Chọn sổ (Một mình tab), same jcloud flows; base chonso-tabs | review/chonso-cloud | main s21 | session_01UV1SzhtbwfLqLoE2yRviHi | RUNNING | 16/11 18:28Z |
 | pl-courtyards review r1 (sonnet) of d98df6602 (+ exact MISSING table = C paint order) | review/pl-courtyards-r1 | main s21 | session_01UV1SzicVqzEzvngQp4ujo4 | RUNNING | 16/11 18:30Z |
 | go-live-kit review r2 (sonnet, BIG) of 35d6206c | review/go-live-kit-r2 | main s21 | session_01UV1Szh1sDq4htTKesRN96t | DONE PASS a7029a88 (review/go-live-kit-r2) | 16/11 18:31Z |
-| page-scale review r1 (opus, BIG) of 1f4912486 + re-merge tutrang-layout c39139e51 | review/page-scale-r1 | main s21 | session_01UV1SzkGZ6JD6JjaGpLMDdF | RUNNING | 16/11 18:32Z |
+| page-scale review r1 (opus, BIG) of 1f4912486 + re-merge tutrang-layout c39139e51 | review/page-scale-r1 | main s22 | session_01UV1SzkGZ6JD6JjaGpLMDdF | PASS 9736c445ba3e7d18b009cdb3b736763a40c5ebde (report dev/handover/reports/page-scale-r1.md on review/page-scale-r1) | 16/11 20:25Z |
 | two-way-acts r2 successor (sonnet): shots of new options, OPEN rows, ECONOMY.md canon fix | review/two-way-acts | main s21 | session_01UV1SzkuSsv7KHqJJgVJZY6 | RUNNING | 16/11 18:32Z |
 | night-steal reviewer (BIG: odds/rules + co-op) | review/night-steal-r1 | main s21 | session_01UV1Szh5bhLhRARVvmvaD6C | FAIL 86e0a5f4 (her nights stolen ≈ 30 % pooled, 7 runs; report dev/handover/reports/night-steal-r1.md on review/night-steal-r1) | 16/11 18:40Z |
 | chonso-tabs reviewer r1 (SMALL) | review/chonso-tabs-r1 | main s21 | session_01UV1Szh5bhLhRARVvmvaD6C | PASS c4f80b7f98a45d5dced890f0c3e3b2f2995bcb01 | 16/11 |
