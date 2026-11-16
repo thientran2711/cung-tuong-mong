@@ -59,6 +59,7 @@ Owner verdicts pending: intro-art (vẽ/bỏ), FP v9, map-frame r3, pl-night sam
 - 21:01Z map C sample (review/map-frame-c b1814442) looked at → SENT to owner for style verdict; worker fixing label overlap + top-edge clipping in the shared label code meanwhile.
 - 21:00Z art-complete-p2 rolled over (act-pics2 complete; transparent gen confirmed; grown kids 25/48 live) → ARCHIVED; successor sonnet session_011xDdVP4ubNQKsfSxyuBKZR (23 ids left).
 - 21:01Z FP v15 (NC skirts straight like BD Tần, no numbers) checked vs OD:L1207/1212/1256 → SENT to owner.
+- 21:02Z C9 huadian worker rolled over (handover reports/huadian-size-finish.md, code review/huadian-size 91f4077c) → ARCHIVED; successor sonnet session_011xDdVNEdTzMY68gU17VFea.
 
 ## SESSION 7 LOG
 - 19:55Z start (depth 1). Read START set + handover. Session 6 told to stop + ARCHIVED. Its trigger trig_01B8ZVK48GgTwdRJjCS83QdG DISABLED (delete was refused by the permission check). Own hourly wake trig_018LdWFfDWDX4GYybxC2JWX5 (:41 each hour). All 9 running C sessions told C = session 7. buoi-art-r1 PASS be25de29 (on main 0188d595) → reviewer told to re-merge current main + build_site + quick check, give new READY sha; then C fast-forwards main.
