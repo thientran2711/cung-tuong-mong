@@ -327,3 +327,4 @@
 | road-b1 + road-map-next review r1 (opus, BIG): review/road-b1 5dbacee3 merged with road-map-next eeb80516 (pilot fix of road-map-r1 FAIL 1–5) | review/road-b1-r1 | B | session_01N1tNP3fSoLdBHWrbfv8fCH | RUNNING | 16/11 18:36Z |
 | HEALTH + PREGNANCY BUNDLE (opus; main s21 18:08Z/18:10Z/18:17Z/19:00Z; suc-khoe.md §4.1–4.7) | review/suc-khoe | D | session_01DgYSWmn1SNsxewKAaDLZjN | RUNNING | 16/11 18:35Z |
 | fest-fx (sonnet; owner bug: fireworks in her room on chiều): festival FX only tối + outdoor + fitting festivals; audit 3-buổi index leftovers | review/fest-fx | main s21 | session_01UV1Szk4mBQYLcS8DPSeeBv | RUNNING | 16/11 18:37Z |
+| pl-courtyards review r1 (sonnet, SMALL): PASS fae6bcbce | review/pl-courtyards-r1 | reviewer | session_01UV1SzicVqzEzvngQp4ujo4 | DONE | 16/11 |
