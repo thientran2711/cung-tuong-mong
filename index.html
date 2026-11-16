@@ -18553,8 +18553,10 @@ Object.assign(BAL,{nroad:{
  d0:[2,6],gap:[4,7],
  /* her chapter odds = odA(her, base + her test stat / div + sc after a won chapter + help when the player helped) */
  base:30,div:3,sc:8,help:15,
- /* real gains and losses of a chapter end (her own fields; pow = her house's power, j55) */
- fx:{win:{danh:4,sung:3,suc:-6,pow:2},mid:{danh:1,suc:-4},lose:{danh:-4,sung:-3,suc:-3,pow:-2}},
+ /* real gains and losses of a chapter end (her own fields; pow = her house's power, j55). U4 balance (npc-roads-bal.js): her odds give more
+    won than lost chapters (≈ 50 : 37), so a win pays less than a loss costs — the expected Danh/Sủng of a chapter is about zero and NPC
+    roads do not inflate the harem (first numbers 4/3 vs −4/−3 doubled the lives with an NPC Hoàng hậu, 17.5 % → 42.5 %) */
+ fx:{win:{danh:3,sung:2,suc:-4,pow:2},mid:{suc:-2,danh:-1},lose:{danh:-4,sung:-3,suc:-2,pow:-2}},
  /* the loser's grudge toward the winner (oán), and the player's share when SHE is the NPC's rival */
  oan:{win:8,lose:5},onMe:{win:{danh:-2,sung:-2},lose:{danh:1}},
  /* the help hồi: the chapter index range it may fall on (one per road per life), the bond or shared side she needs to ask,
@@ -18569,7 +18571,20 @@ Object.assign(BAL,{nroad:{
  /* one father = one record: these origins are never given to an NPC when the player has them */
  uniq:["tt","dtq"],
  /* at most this many NPC roads have the player as their rival at one time */
- meMax:3}});
+ meMax:3,
+ /* U2 maids (cnv roads): her test stat = st + her trait (j10 STR keys) + rk per servant rank (srk); her chapter end on her own fields
+    (mp = merit toward the next servant rank, j14; loyal = to her mistress: a maid who wins her own fight leans a little less on her
+    mistress), her mistress's share (Danh), the grudge (af) between her and the rival maid, the loyalty her own maid needs to ask */
+ m:{st:40,tr:{lanh:15,trung:8,tham:5,nhat:-5,chuyen:0},rk:5,
+  fx:{win:{mp:4,loyal:-2},mid:{mp:1,loyal:-1},lose:{mp:-2,loyal:-4}},mis:{win:{danh:1},lose:{danh:-1}},af:8,askLoy:60},
+ /* U3 men (jnroadm.js; staff eunuchs use m above): st = test stat of a man with none (court men); kidAge = a son of an NPC consort gets
+    his road from this age; S.men loyal (jmen bribe odds) and the rival man's share; court men lean (af) toward their patron consort
+    and away from the other side, a lost chapter costs the patron Danh; house heads pow (j55) + the rival house's share + the house
+    relation (rel: enmity of every fight, ally: the marriage road binds or splits); princes fond/tal/hp + the rival prince's fond;
+    the bond a man / court man / allied house needs to ask the player */
+ men:{st:40,kidAge:15,men:{fx:{win:{loyal:3},mid:{loyal:-1},lose:{loyal:-4}},rv:{win:-2,lose:1}},court:{af:4,danh:1},
+  off:{pow:{win:2,lose:-2},rv:{win:-1,lose:1},rel:3,ally:5},hz:{fx:{win:{fond:3,tal:2,hp:-2},mid:{tal:1,hp:-1},lose:{fond:-3,hp:-1}},rv:{win:-1,lose:1}},
+  askTinh:30,askAf:10,askRel:25}}});
 /* ================= jnwq: NO WORD GAMES, family C (owner 16/11 07:20Z + 07:25Z, s11, review/nw-quiz) =================
    The four vấn đáp / quiz kinds of the promotion exam (jexam EXK: le, tc, xa, thq) are now SKILL games of the same subject, winnable by what is SHOWN
    (same easy rules as mg-easy: Gợi ý button, first-time demo card, tier by level, wrong tries bounce back, quiet auto-hint when she stalls):
@@ -35128,21 +35143,25 @@ function nrGuest(){const C=window.COOPW;return !!(C&&C.on&&C.seat&&C.seat!=="a")
 function nrOn(){return !!(typeof S==="object"&&S&&!S.dead&&!window.__nroff&&typeof ARC67==="object")}
 const nrB=()=>BAL.nroad;
 const nrR=a=>a[0]+R(a[1]-a[0]+1);
-/* the four roads of an origin (j67 premise arcs) */
-function nrRoads(o){return Object.keys(ARC67).filter(id=>ARC67[id]&&ARC67[id].o===o&&!ARC67[id].fu)}
+/* men road templates (U3, jnroadm.js): NRM[id] = {k kind, t title, sk test stat, c: {4..11: chapter {t, w, sk, E}}} */
+const NRM={};
+/* the four roads of an origin (j67 premise arcs); a man's kind → his templates */
+function nrRoads(o){const M=Object.keys(NRM).filter(id=>NRM[id].k===o);if(M.length)return M;/* a man's kind reads only men templates (kind "st" ≠ j67 o:"st") */
+ return Object.keys(ARC67).filter(id=>ARC67[id]&&ARC67[id].o===o&&!ARC67[id].fu)}
 /* chapter n of a road: .4 = the premise arc, .5–.11 = jroad chapters registered in this build (null = not built yet → skipped) */
-function nrCh(r,n){if(n===BAL.road.first-1)return ARC67[r]||null;const R0=typeof ROAD14==="object"&&ROAD14[r];const id=R0&&R0[n];return id&&ARC67[id]||null}
+function nrCh(r,n){if(NRM[r])return NRM[r].c[n]||null;if(n===BAL.road.first-1)return ARC67[r]||null;const R0=typeof ROAD14==="object"&&ROAD14[r];const id=R0&&R0[n];return id&&ARC67[id]||null}
 function nrNext(r,n){for(let i=n;i<=BAL.road.last;i++)if(nrCh(r,i))return i;return 0}
 /* origin of an NPC woman (canon ROAD_MAP §5.2: one father = one record) */
-function nrOrigin(v){if(v.fromMaid)return "cn";let c="";try{c=clanOf(v)}catch(e){}const me=S.origin&&S.origin.k;
+function nrOrigin(v){if(v.fromMaid||v.wasMaid)return "cn";let c="";try{c=clanOf(v)}catch(e){}const me=S.origin&&S.origin.k;
  let L=(nrB().org[c]||nrB().org[""]).filter(([o])=>!(nrB().uniq.includes(o)&&o===me));if(!L.length)L=nrB().org[""];
  const tot=L.reduce((a,z)=>a+z[1],0);let x=Math.random()*tot;for(const [o,w] of L){if((x-=w)<0)return o}return L[0][0]}
 /* a road of that origin: avoid the player's road and roads other NPCs of the same origin already live (variety) */
-function nrPickRoad(o){const L=nrRoads(o);if(!L.length)return "";const mine=S.st&&S.st.f14&&S.st.f14.road;
- const held=rivals.filter(x=>x.nr&&x.nr.r).map(x=>x.nr.r);const free=L.filter(r=>r!==mine&&!held.includes(r));const L2=free.length?free:L.filter(r=>r!==mine);return pick(L2.length?L2:L)}
-function nrInit(v){if(v.nr||!v.alive||v.out)return v.nr||null;const o=nrOrigin(v),r=nrPickRoad(o);if(!r)return null;
- const n=nrNext(r,BAL.road.first-1);const H=nrB().helpN;const h=nrNext(r,H[0]+R(H[1]-H[0]+1))||0;
- v.nr={o,r,n,k:0,t:S.turn+nrR(nrB().d0),h:h&&h<=H[1]?h:0,hs:0,hb:0,c:null,e:"",x:0,l:[]};return v.nr}
+function nrPickRoad(o,held){const L=nrRoads(o);if(!L.length)return "";const mine=S.st&&S.st.f14&&S.st.f14.road;
+ held=held||rivals.filter(x=>x.nr&&x.nr.r).map(x=>x.nr.r);const free=L.filter(r=>r!==mine&&!held.includes(r));const L2=free.length?free:L.filter(r=>r!==mine);return pick(L2.length?L2:L)}
+function nrInit(v){if(v.nr||!v.alive||v.out)return v.nr||null;const o=nrOrigin(v),r=nrPickRoad(o);if(!r)return null;v.nr=nrNew(o,r);return v.nr}
+/* a fresh road state (consorts, maids, men): chapter .4 due BAL.nroad.d0 months from now; the help chapter rolled per life (OD:L1252) */
+function nrNew(o,r){const n=nrNext(r,BAL.road.first-1);const H=nrB().helpN;const h=nrNext(r,H[0]+R(H[1]-H[0]+1))||0;
+ return {o,r,n,k:0,t:S.turn+nrR(nrB().d0),h:h&&h<=H[1]?h:0,hs:0,hb:0,c:null,e:"",x:n?0:1,l:[]}}
 /* the rival of her road: a REAL person kept for the whole road; the one she is coldest with (the player counts like any consort) */
 function nrRival(v){const N=v.nr;const ok=p=>p===S?!S.dead&&!S.out:p&&p.alive&&!p.out&&p!==v;
  if(N.c!=null){const p=N.c==="me"?S:RV(N.c);if(ok(p))return p;const old=N.c==="me"?null:p;N.c=null;N.rc=old?old.name:""}
@@ -35152,11 +35171,11 @@ function nrRival(v){const N=v.nr;const ok=p=>p===S?!S.dead&&!S.out:p&&p.alive&&!
  L.sort((a,b)=>aff(v,a)-aff(v,b));const p=L[Math.min(L.length-1,R(Math.min(3,L.length)))];N.c=key(p);return p}
 /* the stat the chapter's climax rewards (tamco, danh, duc, tai, sac, sung …) — read from the chapter data */
 const NRSK={tamco:"tamco",mat:"tamco",danh:"danh",duc:"duc",an:"duc",tai:"tai",thi:"tai",cam:"tai",ky:"tai",hoa:"tai",vu:"sac",sac:"sac",sung:"sung"};
-function nrStat(A){const cnt={};try{const P=A.p&&A.p[A.p.length-1]||[];for(const b of P){const d=A.B&&A.B[b];for(const o of(d&&d.o||[]))for(const k in(o.w||{})){const s=NRSK[k];if(s)cnt[s]=(cnt[s]||0)+1}}}catch(e){}
+function nrStat(A){if(A&&A.sk)return A.sk;const cnt={};try{const P=A.p&&A.p[A.p.length-1]||[];for(const b of P){const d=A.B&&A.B[b];for(const o of(d&&d.o||[]))for(const k in(o.w||{})){const s=NRSK[k];if(s)cnt[s]=(cnt[s]||0)+1}}}catch(e){}
  const k=Object.keys(cnt).sort((a,b)=>cnt[b]-cnt[a])[0];return k||"tamco"}
 /* the ending of a chapter by its sign: the arc's own ending tag (E[*].tag) */
 function nrEnd(A,k){const E=A&&A.E||{};const ks=Object.keys(E).filter(x=>(E[x].k||0)===k);const x=ks.length?E[pick(ks)]:null;return x&&x.tag?plain(x.tag):""}
-function nrTitle(r){const A=ARC67[r];return A?plain(A.t):""}
+function nrTitle(r){const A=NRM[r]||ARC67[r];return A?plain(A.t):""}
 /* play one chapter off-screen (same odds shape as the player's climax: base + stat/div, Lợi thế only after a won chapter like hers — a lost chapter
    gives no malus, so no losing spiral — and her help) */
 function nrPlay(v){const N=v.nr,A=nrCh(N.r,N.n);if(!A){N.n=nrNext(N.r,N.n+1);return""}const B=nrB();const sk=nrStat(A);
@@ -35197,6 +35216,8 @@ function nrMonth(){if(!nrOn()||nrGuest())return"";const B=nrB();let news=0,ev=""
   const line=`<span class="past">Tin trong cung · ${v.name} · «${nrTitle(N.r)}» chương ${r.n}: «${r.t}»${r.tag?` — ${r.tag}`:""}.${r.rc}${r.me}</span>`;
   if(r.riv===S||news<B.newsMo){log(line);news++}
   if(N.x)log(`<span class="past">${v.name} khép lại tuyến «${nrTitle(N.r)}»${N.e?`: ${N.e}`:""}.</span>`)}catch(e){console.error(e)}}
+ try{news=nrMMonth(news)}catch(e){console.error(e)}
+ try{if(typeof nrMenMonth==="function")nrMenMonth(news)}catch(e){console.error(e)}
  return ev}
 (function(){if(typeof monthTick!=="function")return;const m0=monthTick;monthTick=function(){let ev=m0.apply(this,arguments)||"";try{if(S&&!S.dead)ev+=nrMonth()}catch(e){console.error(e)}return ev}})();
 /* a maid raised to consort keeps who she was: a raised maid's road is a cn road (Cung nữ được sủng hạnh) */
@@ -35209,43 +35230,262 @@ window.nrRoads=nrRoads;window.nrCh=nrCh;window.nrInit=nrInit;window.nrMonth=nrMo
  const nr=X=>{const v=X.A&&X.A.o;return v&&v.nr?v.nr:null};
  const head=X=>{const N=nr(X);const n=X.p&&X.p.nn||N&&N.n;const A=N&&nrCh(N.r,n);return N?`${X.A.n}: «${nrTitle(N.r)}» · Chương ${n} «${A?plain(A.t):""}»`:X.A.n};
  head.toString=()=>"Tuyến truyện riêng của một người trong cung";/* j72 logs plain(T.t) when the asker is gone */
- const call=X=>{const v=X.A&&X.A.o;return v&&v.rank>S.rank?"muội muội":"tỷ tỷ"};
+ /* who speaks (VANPHONG §2): a consort says ta and calls the player tỷ tỷ / muội muội; a maid (sv/rsv/maid) says nô tỳ and calls her
+    tiểu chủ / nương nương by rank (tsGoi); a man (U3) says thần / nô tài by his kind (nrVoice) */
+ const mv=X=>typeof nrVoice==="function"?nrVoice(X):null;
+ const cap=t=>t.charAt(0).toUpperCase()+t.slice(1);
+ const call=X=>{const m=mv(X);if(m)return cap(m.call);const v=X.A&&X.A.o;return v&&v.rank>S.rank?"Muội muội":"Tỷ tỷ"};
+ const me=X=>{const m=mv(X);return m?m.me:"ta"};
  const ok={r:0,d:1,fn:X=>nrHelped(X,1)},bad={fn:X=>nrHelped(X,-1)};
  const def=(k,h,steps)=>T7("nr_"+k,"social",{fu:1,r:"rv",t:head,h,dl:B().dl,s:[steps],ok:Object.assign({},ok,{r:B().rel}),no:{r:-4},bad:Object.assign({},bad,{r:B().relBad,rb:B().relB})});
  const betray=O("Đem chuyện mách cho {B}",{t:X=>!!X.B,tw:"không có ai để mách",c:{duc:-3},k:1,to:"bad",rb:0});
- def("emp",X=>`“Việc của ta đến tai Hoàng thượng rồi. ${call(X)} được gần thánh giá, xin nói giúp ta một lời.”`,C("Nói giúp trước mặt Hoàng thượng",
+ def("emp",X=>`“Việc của ${me(X)} đến tai Hoàng thượng rồi. ${call(X)} được gần thánh giá, xin nói giúp ${me(X)} một lời.”`,C("Nói giúp trước mặt Hoàng thượng",
   O("Nhân lúc hầu Hoàng thượng, khéo nhắc đến nàng",{c:{suc:-B().suc},p:55,sk:"sung",l:{sung:-3},lx:"Hoàng thượng phật ý vì ngươi xen vào",to:"ok"}),
   O("Dâng lễ nhờ người thân cận đỡ lời",{c:{get bac(){return bac()}},p:75,sk:"tamco",l:{danh:-2},lx:"lễ bị trả về, người ta bàn tán",to:"ok"}),betray));
- def("th",X=>`“Thái hậu đang nghe lời gièm về ta. ${call(X)} thường đến Đức Thọ cung, xin đỡ cho ta.”`,C("Đỡ lời trước Thái hậu",
+ def("th",X=>`“Thái hậu đang nghe lời gièm về ${me(X)}. ${call(X)} thường đến Đức Thọ cung, xin đỡ cho ${me(X)}.”`,C("Đỡ lời trước Thái hậu",
   O("Hầu Thái hậu một buổi, nói đỡ cho nàng",{c:{suc:-B().suc},p:55,sk:"duc",l:{duc:-2},lx:"Thái hậu chê ngươi lắm lời",to:"ok"}),
   O("Dâng Thái hậu một lễ thay lời",{c:{get bac(){return bac()}},p:75,sk:"duc",l:{danh:-2},lx:"Thái hậu cho là ngươi mua lòng",to:"ok"}),betray));
- def("hh",X=>`“Trung cung đang để mắt đến ta. ${call(X)} nói được với Hoàng hậu, xin nói giúp một câu.”`,C("Đỡ lời trước Hoàng hậu",
+ def("hh",X=>`“Trung cung đang để mắt đến ${me(X)}. ${call(X)} nói được với Hoàng hậu, xin nói giúp một câu.”`,C("Đỡ lời trước Hoàng hậu",
   O("Thỉnh an Hoàng hậu, khéo nhắc đến nàng",{c:{suc:-B().suc},p:55,sk:"duc",l:{duc:-2},lx:"Hoàng hậu nghi ngươi kết bè",to:"ok"}),
   O("Dâng lễ Khôn Ninh cung",{c:{get bac(){return bac()}},p:75,sk:"tamco",l:{danh:-2},lx:"lễ bị trả về",to:"ok"}),betray));
- def("thu",X=>`“Ta có một lá thư phải đến tay người nhà, không được qua tay Kính sự phòng. ${call(X)} giúp ta.”`,C("Đưa thư ra ngoài cung",
+ def("thu",X=>`“${cap(me(X))} có một lá thư phải đến tay người nhà, không được qua tay Kính sự phòng. ${call(X)} giúp ${me(X)}.”`,C("Đưa thư ra ngoài cung",
   O("Nhờ thái giám của mình mang ra",{c:{get bac(){return bac()}},p:75,sk:"mat",l:{danh:-3},lx:"thư bị chặn, tên ngươi dính vào",to:"ok"}),
   O("Gửi theo người nhà mình vào thăm",{c:{suc:-B().suc},p:55,sk:"tamco",l:{danh:-3},lx:"người nhà bị khám, thư bị lộ",to:"ok"}),betray));
- def("do",X=>`“Ta cần biết ${X.B?X.B.n:"kẻ kia"} đang tính gì. ${call(X)} có tai mắt, giúp ta dò một chuyện.”`,C("Dò la giúp nàng",
+ def("do",X=>`“${cap(me(X))} cần biết ${X.B?X.B.n:"kẻ kia"} đang tính gì. ${call(X)} có tai mắt, giúp ${me(X)} dò một chuyện.”`,C("Dò la giúp nàng",
   O("Sai người dò la",{c:{get bac(){return bac()}},p:70,sk:"mat",l:{danh:-2},lx:"người của ngươi bị bắt gặp",to:"ok",rb:-4}),
   O("Tự đi hỏi chuyện",{c:{suc:-B().suc},p:55,sk:"tamco",l:{danh:-2},lx:"ngươi bị nghi là tai mắt",to:"ok",rb:-4}),betray));
- def("y",X=>`“Bệnh này không thể để Thái y viện ghi sổ. ${call(X)} quen thái y, xin mời người đến xem kín cho ta.”`,C("Mời thái y xem kín",
+ def("y",X=>`“Bệnh này không thể để Thái y viện ghi sổ. ${call(X)} quen thái y, xin mời người đến xem kín cho ${me(X)}.”`,C("Mời thái y xem kín",
   O("Mời thái y quen, trả công hậu",{c:{get bac(){return bac()}},p:75,sk:"y",l:{danh:-2},lx:"Thái y viện ghi tên ngươi",to:"ok"}),
   O("Tự sắc thuốc mang sang",{c:{suc:-B().suc},p:50,sk:"y",l:{duc:-2},lx:"thuốc không hợp, nàng trách ngươi",to:"ok"}),betray));
- def("che",X=>`“Người của ta đang gặp nạn, không còn chỗ nương. ${call(X)} che chở cho nàng ấy ít hôm.”`,C("Che chở người của nàng",
+ def("che",X=>mv(X)&&mv(X).sv?`“${cap(me(X))} đang gặp nạn, không còn chỗ nương. ${call(X)} che chở cho ${me(X)} ít hôm.”`:`“Người của ${me(X)} đang gặp nạn, không còn chỗ nương. ${call(X)} che chở cho nàng ấy ít hôm.”`,C("Che chở người của nàng",
   O("Cho ở nhờ cung mình",{c:{suc:-B().suc},p:60,sk:"tamco",l:{danh:-3},lx:"người ta bàn ngươi chứa kẻ có tội",to:"ok"}),
   O("Bỏ bạc lo chỗ khác",{c:{get bac(){return bac()}},p:75,sk:"mat",l:{danh:-2},lx:"chỗ ấy không kín",to:"ok"}),betray));
- def("bac",X=>`“Ta đang cần bạc gấp, việc nhà không thể nói ra. ${call(X)} giúp ta lần này, ta không quên.”`,C("Giúp nàng việc bạc",
+ def("bac",X=>`“${cap(me(X))} đang cần bạc gấp, việc nhà không thể nói ra. ${call(X)} giúp ${me(X)} lần này, ${me(X)} không quên.”`,C("Giúp nàng việc bạc",
   O("Cho mượn bạc",{c:{get bac(){return bac()}},k:1,to:"ok",l:{},lx:"bạc ra khỏi tay ngươi"}),
   O("Góp công thay bạc: đi lo liệu giúp",{c:{suc:-B().suc},p:55,sk:"tamco",l:{danh:-2},lx:"việc không xong, nàng mất lòng tin",to:"ok"}),betray));
 })();
 
 /* ---------- her road on her person card (Hậu cung): one more row of the kit person card (.pcinfo span, the j85/j24 pattern) ---------- */
-function nrLine(v){const N=v&&v.nr;if(!N||!N.r||!ARC67[N.r])return"";const T=nrTitle(N.r);
+function nrLine(v){const N=v&&v.nr;if(!N||!N.r||!(ARC67[N.r]||NRM[N.r]))return"";const T=nrTitle(N.r);
  if(N.x)return `Tuyến truyện: «${T}» <span class="past">· đã khép${N.e?`: ${N.e}`:""}</span>`;
  const n=N.l.length?N.l[N.l.length-1][0]:0;return n?`Tuyến truyện: «${T}» <span class="past">· qua chương ${n}${N.e?`: ${N.e}`:""}</span>`:`Tuyến truyện: «${T}» <span class="past">· chưa mở</span>`}
 (function(){if(typeof rvCard!=="function")return;const c0=rvCard;/* same row pattern as j85 ducLine / j24 danger line: one <span> in the card's .pcinfo */
  rvCard=function(v){let h=c0.apply(this,arguments);try{if(v&&!window.__nroff){const l=nrLine(v);if(l)h=h.replace('<div class="pcinfo">',`<div class="pcinfo"><span>${l}</span>`)}}catch(e){console.error(e)}return h}})();
 window.nrLine=nrLine;
+
+/* ================= U2 MAIDS: cnv roads (Cung nữ tuyển vào cung) for every maid of the palace =================
+   Who: every staff maid of every consort (allServ role maid, the player's own household included) + the player's trusted maid S.maid.
+   Road: one of the 4 cnv premises (cnv_chu/ban/mat/ma, j67) + its .5–.11 chapters (jrd_cnv when built); her {mis} is her REAL mistress
+   (ownerOf; S for her own maids). Same engine as the consorts: due chapter → her own odds (BAL.nroad.m: her trait and servant rank),
+   gain AND loss on her real fields (mp merit → servant rank, j14 servRanks; loyal to her mistress) + a small share for her mistress,
+   real rival = the maid of another house she is coldest with (af both ways). A maid raised to consort (j8 sendMaid, j14/jmline eye; both
+   go through j88 f88Carry) keeps her road state and goes on as origin cn (Cung nữ được sủng hạnh) from her next chapter. */
+function nrMaidL(){return nrServL("maid")}
+/* staff servants of one role (maid: + the trusted maid S.maid; eunuch: staff eunuchs, U3 «Từ tiểu thái giám đi lên») */
+function nrServL(role){const L=[];try{for(const s of allServ())if(s&&s.role===role)L.push(s)}catch(e){}if(role==="maid"&&S.maid&&S.maid.name&&!L.includes(S.maid))L.push(S.maid);return L}
+const nrRole=s=>s===S.maid?"maid":s.role||"maid";
+function nrMis(s){if(s===S.maid)return S;try{return ownerOf(s)}catch(e){return null}}
+const nrMid=s=>s===S.maid?"pm":s.sid;
+/* her j72 asker kind: own staff sv, another house's staff rsv, the trusted maid maid (q72A) */
+function nrMK(s){return s===S.maid?["maid",null]:nrMis(s)===S?["sv",s.sid]:["rsv",s.sid]}
+function nrMInit(s){if(s.nr)return s.nr;const role=nrRole(s),o=role==="maid"?"cnv":"eun";const held=nrServL(role).filter(x=>x!==s&&x.nr&&!x.nr.x).map(x=>x.nr.r);const r=nrPickRoad(o,held);if(!r)return null;s.nr=nrNew(o,r);return s.nr}
+function nrMStat(s){const M=nrB().m;let rk=0;try{if(s.sid!=null&&typeof srk==="function")rk=srk(s)}catch(e){}return M.st+(M.tr[s.tr]||0)+rk*M.rk}
+function nrAf(x,y,n){if(!x||!y||y.sid==null||!n)return;x.af=x.af||{};x.af[y.sid]=cl(Math.round((x.af[y.sid]||0)+n),-100,100)}
+function nrMRival(s){const N=s.nr;const ms=nrMis(s);const L=nrServL(nrRole(s)).filter(x=>x!==s&&nrMis(x)!==ms);
+ if(N.c!=null){const p=L.find(x=>nrMid(x)===N.c);if(p)return p;N.rc=N.cn||"";N.c=null}
+ if(!L.length)return null;const af=x=>(s.af&&x.sid!=null&&s.af[x.sid])||0;L.sort((a,b)=>af(a)-af(b));
+ const p=L[Math.min(L.length-1,R(Math.min(3,L.length)))];N.c=nrMid(p);N.cn=p.name;return p}
+function nrMPlay(s){const N=s.nr,A=nrCh(N.r,N.n);if(!A){N.n=nrNext(N.r,N.n+1);if(!N.n)N.x=1;return null}const B=nrB(),M=B.m;
+ const p=cl(Math.round(B.base+nrMStat(s)/B.div+(N.k>0?B.sc:0)+(N.hb||0)),5,95);
+ const k=roll(p)?1:roll(p/2)?0:-1;const riv=nrMRival(s);const fx=k>0?M.fx.win:k<0?M.fx.lose:M.fx.mid;
+ for(const z in fx){if(z==="mp"&&s.sid==null)continue;s[z]=cl((s[z]||0)+fx[z],0,100)}
+ const ms=nrMis(s);const mf=k>0?M.mis.win:k<0?M.mis.lose:null;if(ms&&mf)ap(ms,mf);
+ if(riv){if(k>0)nrAf(riv,s,-M.af);else if(k<0)nrAf(s,riv,-M.af)}
+ const tag=nrEnd(A,k);N.e=tag;N.k=k;N.l.push([N.n,k]);N.hb=0;const n0=N.n;N.n=nrNext(N.r,N.n+1);if(!N.n)N.x=1;
+ N.t=S.turn+nrR(B.gap);if(N.h&&N.h<=n0)N.hs=N.hs||-1;
+ const rc=N.rc?` ${N.rc} nay không còn ở đây, kẻ đứng đối mặt nàng là ${riv?riv.name:"người khác"}.`:"";N.rc="";
+ return {n:n0,t:plain(A.t),tag,k,rc,riv,ms}}
+/* motive to ask the player: her own maid asks when her loyalty is high; another house's maid only when the player is close to her
+   mistress (bond or a shared side) — never for a maid whose mistress is cold to the player */
+function nrMAsk(s){try{if(isSrv()||S.out)return false;const ms=nrMis(s);if(!ms)return false;if(ms===S)return (s.loyal||0)>=nrB().m.askLoy;
+ if(aff(ms,S)>=nrB().askRel)return true;const f=facOf(ms);return !!(f&&f===facOf(S))}catch(e){return false}}
+function nrMOffer(s){const N=s.nr,A=nrCh(N.r,N.n);if(!A||typeof q72!=="function")return false;const hk=nrKind(A);if(!T72I["nr_"+hk])return false;const q=q72();if(!q)return false;
+ const [rk,ri]=nrMK(s);if(q.ch.concat(q.a).some(c=>c.rk===rk&&c.ri===ri&&/^nr_/.test(c.tid)))return false;
+ const riv=nrMRival(s);const bb=riv?nrMK(riv):[null,null];
+ q.ch.push({tid:"nr_"+hk,at:wk(),rk,ri,bk:bb[0],bi:bb[1],p:{nr:N.r,nn:N.n}});N.hk=hk;N.hs=1;N.t=Math.max(N.t,S.turn+Math.ceil((nrB().dl+2)/3));return true}
+function nrMMonth(news){const B=nrB();let n=news||0;
+ for(const s of nrMaidL().concat(nrServL("eunuch"))){try{const N=s.nr||nrMInit(s);if(!N||N.x||!N.n||S.turn<N.t)continue;
+  if(N.h&&N.n===N.h&&!N.hs&&nrMAsk(s)&&nrMOffer(s))continue;
+  const r=nrMPlay(s);if(!r)continue;const mine=r.ms===S;
+  const who=mine?`${s.name}, người hầu của ngươi`:r.ms?`${s.name}, người hầu của ${r.ms.name}`:s.name;
+  const line=`<span class="past">Tin trong cung · ${who} · «${nrTitle(N.r)}» chương ${r.n}: «${r.t}»${r.tag?` — ${r.tag}`:""}.${r.rc}</span>`;
+  if(mine||n<B.newsMo){log(line);n++}}catch(e){console.error(e)}}
+ return n}
+/* the voice of the asker in the help hồi (VANPHONG §2): maids nô tỳ + tiểu chủ/nương nương; men are added by U3 (nrVoiceM) */
+function nrVoice(X){const k=X&&X.A&&X.A.k;const goi=()=>{try{return tsGoi(S)}catch(e){return S.rank>=3?"nương nương":"tiểu chủ"}};
+ if(k==="sv"||k==="rsv"||k==="maid")return{me:X.A.o&&X.A.o.role==="eunuch"?"nô tài":"nô tỳ",call:goi(),sv:1};
+ if(typeof nrVoiceM==="function")return nrVoiceM(X,goi);return null}
+/* a maid raised to consort keeps who she was: her road state goes on as a cn road from her next chapter (same help chapter, same log) */
+(function(){if(typeof f88Carry!=="function")return;const c0=f88Carry;
+ f88Carry=function(n,m){const r=c0.apply(this,arguments);try{if(n&&m&&typeof m==="object"){n.wasMaid=1;const N=m.nr;
+  if(N&&N.r&&!n.nr){const r2=nrPickRoad("cn");const nn=r2&&!N.x?nrNext(r2,Math.max(BAL.road.first-1,N.n||0)):0;
+   n.nr={o:"cn",r:r2||N.r,n:nn,k:N.k,t:Math.max(N.t||0,S.turn+1),h:N.h,hs:N.hs,hb:N.hb,c:null,e:N.e,x:nn?0:1,l:N.l.slice(),pr:N.r}}}}catch(e){console.error(e)}return r}})();
+window.nrMaidL=nrMaidL;window.nrMInit=nrMInit;window.nrMPlay=nrMPlay;
+/* her road on her card (Kẻ hầu tab): one more line of the kit person card (pcard lines → .pcinfo spans; the j70 staff-tab pattern) */
+(function(){if(typeof pcard!=="function")return;const p0=pcard;pcard=function(o){try{if(S&&!window.__nroff&&o&&o.name&&typeof tab!=="undefined"&&tab==="staff"){
+  const s=nrMaidL().concat(nrServL("eunuch")).find(x=>x.nr&&(x.name===o.name||(typeof shortN==="function"&&shortN(x.name)===o.name)));
+  if(s){const l=nrLine(s);if(l){o=Object.assign({},o);o.lines=(o.lines||[]).concat([l])}}}}catch(e){console.error(e)}return p0.call(this,o)}})();
+/* ================= jnroadm: U3 MEN ROADS (owner OD:L1243/L1252/L1386; ROAD_MAP §4.10 PROPOSED by Foreman D, canon check = Foreman B) =================
+   20 road templates × 8 chapters (.4–.11) for the REAL men of a life: S.men (Thị vệ, Thái y, Vương gia, Nhạc sư, Sứ thần, Họa sư; the
+   Thanh mai trúc mã man m96 is excluded — his story owns him), the court men (S.court: Tổng quản tq, Kính sự phòng ksp, Thái y ty,
+   Nội vụ phủ ped), every staff eunuch (allServ role eunuch), the five house heads (trS().H; the player's own father excluded — her road
+   owns him) and the sons of NPC consorts old enough (BAL.nroad.men.kidAge; the player's own children are her story, ch12).
+   Same engine as the women (jnroad.js): due chapter → his own odds (base + his stat / div + Lợi thế after a won chapter + help),
+   gain AND loss on his REAL fields (BAL.nroad.men.fx): S.men loyal (jmen bribe odds), court men af (their lean toward a consort or the
+   player: ksp af.me = night-register odds, jcycle), house heads pow + house relations (j55), princes fond/tal/hp (j1 kids), staff
+   eunuchs mp/loyal (j14). A real rival kept for the whole road (another man of his kind / another house / another prince / another
+   house's eunuch), recast and told when gone. Help hồi = the same 8 nr_* j72 follow-ups (asker kinds man/doc/eun/ksp/off/sv/rsv).
+   Chapter tags are story words only: they never claim a rank, a death, a dismissal or an heir (real state stays with its own systems).
+   Row format: [title, cast key w, win tag, lose tag]; .11 row: [title, w, win, middle, lose]. */
+(function(){const MID="việc còn dở dang";
+ const def=(id,k,t,sk,rows)=>{const c={};rows.forEach((r,i)=>{const n=BAL.road.first-1+i;const last=i===rows.length-1;
+   c[n]={t:r[0],w:r[1],sk,mk:k,E:{a:{k:1,tag:r[2]},m:{k:0,tag:last?r[3]:MID},b:{k:-1,tag:last?r[4]:r[3]}}}});NRM[id]={k,t,sk,c}};
+ /* gd — Thị vệ */
+ def("gd_tl","gd","Đường lên Thống lĩnh","loyal",[["Ca trực đêm mưa","gd","giữ vững cổng cung","để lọt kẻ lạ"],["Kẻ đứng trên","gd","được Thống lĩnh để mắt","bị Thống lĩnh quở"],
+  ["Đồng liêu ghen","gd","êm chuyện với đồng liêu","bị đồng liêu gài"],["Bạc lót tay","bac","từ chối bạc bẩn","dính tiếng nhận bạc"],["Hộ giá đi săn","emp","hộ giá chu toàn","để ngựa kinh trước thánh giá"],
+  ["Kỳ khảo võ","gd","đứng đầu kỳ khảo","thua kém người sau"],["Lời tiến cử","off","được tiến cử","lời tiến cử bị gác lại"],["Đường lên Thống lĩnh","emp","được Hoàng thượng nhớ tên","giữ được chỗ đứng","lỡ đường thăng tiến"]]);
+ def("gd_tinh","gd","Mối tình bên cổng cung","loyal",[["Chiếc khăn rơi","gd","trả khăn kín đáo","bị người khác trông thấy"],["Lời hẹn dưới cây hòe","gd","giữ được lời hẹn","lỡ hẹn"],
+  ["Kẻ dòm ngó","eun","qua mắt kẻ dòm ngó","bị kẻ dòm ngó ghi tên"],["Thư tay","man","thư đến tay người nhận","thư lạc đường"],["Lệnh đổi ca","gd","vẫn được trực chỗ cũ","bị đổi đi xa"],
+  ["Tin đồn trong cung","eun","tin đồn lắng xuống","tin đồn lan rộng"],["Chọn giữa tình và chức","gd","giữ được cả hai","phải buông một"],["Mối tình bên cổng cung","gd","hẹn ngày nàng ra cung","giữ trong lòng, không nói","dứt tình cho yên thân"]]);
+ def("gd_kho","gd","Án mất trộm ngự khố","loyal",[["Đêm ngự khố mất đồ","eun","báo kịp lúc","bị nghi đầu tiên"],["Dấu chân bên tường","gd","lần ra dấu vết","dấu vết bị xóa"],
+  ["Kẻ tình nghi","eun","tìm ra kẻ đáng ngờ","bị đổ oan một phần"],["Thận Hình ti tra hỏi","eun","khai rõ ràng, được thả","chịu đòn tra"],["Món đồ trở lại","bac","tìm lại món đồ","món đồ bặt tăm"],
+  ["Kẻ đứng sau","off","lần ra kẻ đứng sau","bị chặn đường tra xét"],["Trình án","emp","án được trình lên","án bị dìm"],["Án mất trộm ngự khố","emp","rửa sạch tiếng, được thưởng","án khép lại, không ai được gì","mang tiếng mãi"]]);
+ /* ty — Thái y (S.men Thái y and the court Thái y) */
+ def("ty_thu","ty","Y thư thất truyền","loyal",[["Cuốn sách nát","man","giữ được cuốn sách","sách mất mấy trang"],["Phương thuốc lạ","man","đọc ra phương thuốc","đọc sai một vị"],
+  ["Thử thuốc","bac","thuốc có hiệu","thuốc vô hiệu"],["Đồng liêu dị nghị","off","thuyết phục được Thái y viện","bị chê là tà thuật"],["Bệnh dịch ngoài thành","emp","cứu được nhiều người","dịch lan rộng"],
+  ["Tranh công","off","giữ được công lao","bị kẻ khác nhận công"],["Dâng sách","emp","sách được dâng lên","sách bị gác xó"],["Y thư thất truyền","emp","y thư được chép vào Thái y viện","giữ riêng một bản","sách cháy, chỉ còn trong trí nhớ"]]);
+ def("ty_tra","ty","Đơn thuốc bị tráo","loyal",[["Thang thuốc khác màu","man","nhận ra kịp","không nhận ra"],["Ai chạm vào thuốc","eun","lần ra người chạm thuốc","dấu vết đứt"],
+  ["Lời đe dọa","v","đứng vững trước lời dọa","im lặng vì sợ"],["Bệnh nhân trở nặng","bac","cứu được bệnh nhân","bệnh nhân nguy kịch"],["Thái y viện xét việc","off","được tin","bị nghi"],
+  ["Chứng cứ","v","giữ được chứng cứ","chứng cứ bị lấy mất"],["Trước mặt Hoàng hậu","hh","lời khai được tin","bị buộc tội"],["Đơn thuốc bị tráo","hh","rửa oan, kẻ tráo thuốc lộ mặt","giữ được tiếng, mất lòng tin","mang tiếng oan, vẫn bị nghi"]]);
+ /* vg — Vương gia */
+ def("vg_dat","vg","Đất phong","loyal",[["Chiếu ban đất","emp","nhận đất màu mỡ","nhận đất cằn"],["Mùa màng","bac","mùa được","mất mùa"],
+  ["Quan địa phương","off","quan địa phương phục","quan địa phương chống"],["Lời gièm vào kinh","emp","lời gièm bị gạt","lời gièm lọt tai Hoàng thượng"],["Thuế đất","bac","nộp đủ thuế","thiếu thuế"],
+  ["Thái hậu hỏi han","th","được Thái hậu khen","bị Thái hậu trách"],["Dâng biểu","emp","biểu được chuẩn","biểu bị bác"],["Đất phong","emp","đất phong yên ổn, dân quý","giữ được đất, mất lòng triều","đất phong lụn bại"]]);
+ def("vg_bien","vg","Lòng người ngoài biên","loyal",[["Tin biên ải","emp","được đi trấn biên","bị giữ lại kinh"],["Quân lương","bac","đủ quân lương","thiếu quân lương"],
+  ["Tướng dưới quyền","gd","tướng dưới quyền phục","tướng dưới quyền ngờ vực"],["Sứ giặc đến","envoy","giữ thể diện triều đình","để sứ giặc lấn lời"],["Trận đầu","gd","thắng trận đầu","thua trận đầu"],
+  ["Lời đồn mưu phản","emp","lời đồn tan","lời đồn bám theo"],["Về kinh","emp","về kinh trong vinh dự","về kinh lặng lẽ"],["Lòng người ngoài biên","emp","biên ải yên, lòng người theo","giữ được biên, mất lòng triều","bị Hoàng thượng nghi kỵ"]]);
+ /* ns — Nhạc sư · st — Sứ thần · hs — Họa sư */
+ def("ns_tho","ns","Khúc nhạc mừng thọ","loyal",[["Lệnh soạn khúc","th","nhận lệnh vui vẻ","nhận lệnh trong lo âu"],["Bản phổ cũ","man","tìm được bản phổ cũ","bản phổ thiếu trang"],
+  ["Đàn bị hỏng","bac","sửa được đàn","đàn hỏng hẳn"],["Nhạc công bỏ đi","man","giữ được nhạc công","thiếu người tấu"],["Tập trước Thái hậu","th","Thái hậu gật đầu","Thái hậu nhíu mày"],
+  ["Kẻ chép trộm","man","giữ được khúc nhạc","khúc nhạc bị chép trộm"],["Đêm trước tiệc thọ","th","mọi thứ sẵn sàng","còn dở dang"],["Khúc nhạc mừng thọ","th","khúc nhạc vang khắp Đức Thọ cung","tấu xong, không ai nhắc","lạc một nhịp trước Thái hậu"]]);
+ def("st_uoc","st","Điều ước hai nước","loyal",[["Quốc thư","envoy","trao quốc thư đúng lễ","sai lễ khi trao quốc thư"],["Lễ bộ tiếp sứ","off","được tiếp đãi chu đáo","bị Lễ bộ làm khó"],
+  ["Điều khoản đầu","off","giữ được lợi cho bản quốc","phải nhượng một điều"],["Quà dâng Thái hậu","th","quà được nhận","quà bị trả lại"],["Tai mắt quanh sứ quán","gd","thoát được tai mắt","bị theo dõi sát"],
+  ["Hội đàm","emp","hội đàm êm thấm","hội đàm căng thẳng"],["Đóng ấn","emp","ấn được đóng","việc đóng ấn bị hoãn"],["Điều ước hai nước","emp","điều ước thành, hai nước giao hảo","điều ước tạm hoãn","hội đàm đổ vỡ"]]);
+ def("hs_hoa","hs","Bức họa mỹ nhân","loyal",[["Lệnh vẽ chân dung","emp","nhận lệnh vẽ","nhận lệnh trong lo sợ"],["Phi tần ngồi họa","v","nét vẽ được khen","bị chê vẽ không giống"],
+  ["Bạc lót tay","bac","từ chối bạc lót tay","nhận bạc, vẽ đẹp thêm"],["Bức họa bị đổi","eun","giữ được bức thật","bức họa bị tráo"],["Hoàng thượng xem tranh","emp","Hoàng thượng khen","Hoàng thượng phật ý"],
+  ["Lời vu","v","gạt được lời vu","mang tiếng vu"],["Bức họa cuối","emp","hoàn thành bức họa","bức họa dang dở"],["Bức họa mỹ nhân","emp","bức họa treo ở Càn Ninh cung","tranh cất vào kho","bị cấm cầm cọ một thời"]]);
+ /* tq — Tổng quản · ksp — Kính sự phòng · eun — tiểu thái giám (staff eunuchs, Nội vụ phủ) */
+ def("tq_an","tq","Ấn Tổng quản","loyal",[["Ấn bị dời chỗ","eun","tìm lại ấn","ấn trễ một ngày"],["Kẻ nhòm ngó ghế","eun","dẹp được kẻ nhòm ngó","kẻ nhòm ngó lớn mạnh"],
+  ["Sổ chi tiêu","bac","sổ sách sạch","sổ sách hụt"],["Phe phi tần","v","giữ được thế đứng giữa","bị kéo vào một phe"],["Hoàng thượng hỏi tội","emp","được tha","bị quở"],
+  ["Thái hậu ra mặt","th","Thái hậu che chở","Thái hậu lạnh nhạt"],["Người nối tay","eun","chọn được người tin cẩn","người nối tay trở mặt"],["Ấn Tổng quản","emp","giữ ấn vững vàng","giữ ấn, mất lòng người dưới","suýt mất ấn"]]);
+ def("tq_que","tq","Đường về quê","loyal",[["Thư từ quê","man","thư báo bình an","thư báo tin dữ"],["Xin phép về thăm","emp","được chuẩn","bị bác"],
+  ["Gửi bạc về quê","bac","bạc đến nơi","bạc bị chặn"],["Họ hàng tìm đến","man","giúp được họ hàng","họ hàng làm khó"],["Người cũ trong làng","man","gặp lại người cũ","người cũ đã khuất"],
+  ["Lời đồn ăn bớt","eun","lời đồn bị bác","lời đồn bám theo"],["Ngôi mộ tổ","bac","sửa được mộ tổ","không kịp sửa mộ"],["Đường về quê","emp","lo xong việc quê, lòng nhẹ nhõm","lo được một nửa","quê nhà xa mãi"]]);
+ def("ksp_so","ksp","Sổ ghi Kính sự phòng","loyal",[["Một dòng bị tẩy","eun","phát hiện kịp","không ai hay"],["Thẻ bài lật sai","emp","sửa được sai sót","sai sót đến tai bề trên"],
+  ["Phi tần đút lót","v","từ chối khéo","nhận bạc, mang nợ"],["Hoàng hậu xem sổ","hh","sổ sạch","sổ có chỗ lạ"],["Kẻ chép sổ","eun","giữ được sổ","sổ bị chép ra ngoài"],
+  ["Tin có thai","man","ghi đúng ngày","ghi lệch ngày"],["Sổ được trình","emp","sổ khớp từng dòng","sổ lệch một dòng"],["Sổ ghi Kính sự phòng","emp","sổ được tin như vàng","giữ được sổ, người ghi bị nghi","sổ thành mối họa"]]);
+ def("eun_len","eun","Từ tiểu thái giám đi lên","loyal",[["Việc nặng đầu tiên","eun","làm xong chu toàn","làm hỏng việc"],["Sư phụ","eun","được sư phụ nhận dạy","bị sư phụ bỏ"],
+  ["Đồng liêu chèn ép","eun","qua được chèn ép","bị chèn ép"],["Việc kín của chủ","mis","giữ kín việc của chủ","để lộ việc của chủ"],["Bạc đầu tiên","bac","để dành được bạc","mất bạc"],
+  ["Được giao việc lớn","mis","việc lớn thành","việc lớn hỏng"],["Lời tiến cử","eun","được tiến cử","bị gạt tên"],["Từ tiểu thái giám đi lên","mis","thành người tin cẩn của chủ","vẫn là kẻ hầu lặng lẽ","bị chủ ghẻ lạnh"]]);
+ /* off — the five house heads (j55) */
+ def("off_ghe","off","Giữ ghế trong triều","sk",[["Tờ biểu đầu năm","emp","biểu được khen","biểu bị chê"],["Kẻ dòm ghế","off","dẹp được kẻ dòm ghế","kẻ dòm ghế lớn mạnh"],
+  ["Việc trong bộ","off","việc trong bộ trôi chảy","việc trong bộ ách tắc"],["Ngự sử xét sổ","off","qua được kỳ xét","bị bắt lỗi"],["Lòng Hoàng thượng","emp","Hoàng thượng tin","Hoàng thượng ngờ"],
+  ["Môn sinh","off","môn sinh đắc lực","môn sinh phản thầy"],["Buổi chầu lớn","emp","đứng vững trước triều","bị triều thần vây"],["Giữ ghế trong triều","emp","ghế vững như bàn thạch","giữ được ghế, mất bè cánh","ghế lung lay"]]);
+ def("off_dan","off","Lời đàn hặc","sk",[["Tấu đàn hặc","off","tấu bị gạt","tấu được đem ra nghị"],["Ngự sử tra xét","off","sổ sách sạch","sổ sách có vết"],
+  ["Đồng minh trong triều","off","đồng minh đứng ra","đồng minh im lặng"],["Chứng cứ","off","chứng cứ bị bác","chứng cứ được tin"],["Lời trong hậu cung","hh","hậu cung nói đỡ","hậu cung im lặng"],
+  ["Đại Lý tự xét","off","được minh oan một phần","bị kết một tội nhẹ"],["Hoàng thượng định đoạt","emp","được tha","bị phạt bổng"],["Lời đàn hặc","emp","rửa sạch, kẻ đàn hặc mất mặt","qua được, tiếng còn vương","mang tội, phủ suy"]]);
+ def("off_thong","off","Thông gia với phủ khác","sk",[["Lời ngỏ","off","lời ngỏ được nhận","lời ngỏ bị từ chối"],["Xem tuổi","off","tuổi hợp","tuổi xung"],
+  ["Sính lễ","bac","sính lễ xứng","sính lễ thiếu"],["Kẻ chen ngang","off","gạt được kẻ chen ngang","bị kẻ chen ngang phá"],["Hoàng thượng hỏi đến","emp","Hoàng thượng chuẩn","Hoàng thượng chần chừ"],
+  ["Lời đồn trong kinh","off","lời đồn tan","lời đồn làm hai phủ ngờ nhau"],["Ngày cưới","off","lễ cưới linh đình","lễ cưới lặng lẽ"],["Thông gia với phủ khác","emp","hai phủ kết thành một khối","thông gia mà không thân","hôn sự đổ vỡ, hai phủ thành thù"]]);
+ NRM.off_thong.ally=1;/* this road's other house is the partner, not the foe: a win binds the two houses (j55 rel +), a loss splits them */
+ /* hz — sons of NPC consorts (BAL.nroad.men.kidAge) */
+ def("hz_hoc","hz","Thái phó và học vấn","tal",[["Ngày đầu ở Thượng thư phòng","off","được Thái phó khen","bị Thái phó phạt"],["Kinh sử","off","thuộc làu kinh sử","học trước quên sau"],
+  ["Đồng môn","off","kết thân với đồng môn","bất hòa với đồng môn"],["Phụ hoàng khảo bài","emp","trả lời trôi chảy","ấp úng trước phụ hoàng"],["Cưỡi ngựa bắn cung","gd","bắn trúng hồng tâm","ngã ngựa"],
+  ["Bài văn đầu tay","off","bài văn được truyền tay","bài văn bị chê"],["Kỳ khảo cuối","emp","đứng đầu các hoàng tử","đứng sau các hoàng tử"],["Thái phó và học vấn","emp","văn võ song toàn, phụ hoàng đẹp lòng","học hành bình thường","bị phụ hoàng chê lười"]]);
+ def("hz_le","hz","Lễ trưởng thành","tal",[["Lễ đội mũ","emp","được ban áo mũ","lễ bị hoãn"],["Phủ đệ đầu tiên","bac","phủ đệ chu toàn","phủ đệ thiếu thốn"],
+  ["Người hầu cận","eun","chọn được người hầu tin cẩn","người hầu ăn bớt"],["Ra mắt tông thân","th","tông thân khen","tông thân chê"],["Việc triều đầu tiên","off","làm tròn việc","làm hỏng việc"],
+  ["Lời khuyên của mẫu phi","mom","nghe lời mẫu phi","trái ý mẫu phi"],["Phụ hoàng ban thưởng","emp","được ban thưởng","không được nhắc tên"],["Lễ trưởng thành","emp","được phụ hoàng tin giao việc","trưởng thành lặng lẽ","bị chê chưa ra dáng"]]);
+ def("hz_tran","hz","Ra trận lập công","tal",[["Xin ra trận","emp","được chuẩn","bị giữ lại"],["Tướng già dạy việc","gd","được tướng già nhận dạy","bị tướng già coi thường"],
+  ["Quân lương","bac","quân lương đủ","quân lương thiếu"],["Trận đầu","gd","thắng trận đầu","thua trận đầu"],["Thư mẫu phi","mom","thư đến kịp","thư thất lạc"],
+  ["Công và tội","off","công được ghi","tội bị kể"],["Khải hoàn","emp","khải hoàn trong tiếng reo","trở về lặng lẽ"],["Ra trận lập công","emp","lập công lớn, phụ hoàng ban thưởng","về bình an, công nhỏ","bại trận, mang tiếng"]]);
+})();
+
+/* ---------- the men of this life (real people only) ---------- */
+const NRMR={"Thị vệ":"gd","Thái y":"ty","Vương gia":"vg","Nhạc sư":"ns","Sứ thần":"st","Họa sư":"hs"};
+function nrMenL(){const L=[];const B=nrB().men;
+ for(const m of(S.men||[]))if(m&&m.alive!==false&&m.id!=="m96"&&NRMR[m.role])L.push({p:m,k:NRMR[m.role],a:["man",m.id],g:"men",n:m.name});
+ const C=S.court||{};for(const [c,k,a] of [["tq","tq",["eun",null]],["ksp","ksp",["ksp",null]],["ty","ty",["doc",null]],["ped","eun",null]])if(C[c]&&C[c].name)L.push({p:C[c],k,a,g:"court",n:C[c].name});
+ try{const T=trS();if(T)for(const c in T.H){const h=T.H[c];if(h&&h.dadOf!=="me")L.push({p:h,k:"off",a:["off",c],g:"off",c,n:`${TDOFF[c]||c} ${h.name}`})}}catch(e){}
+ try{for(const [kd,mo] of allKids())if(mo&&kd&&kd.sex==="m"&&kd.alive&&(kd.age||0)>=B.kidAge)L.push({p:kd,k:"hz",a:null,g:"hz",mo,n:kd.name})}catch(e){}
+ return L}
+function nrMenInit(e){const p=e.p;if(p.nr)return p.nr;const held=nrMenL().filter(x=>x.k===e.k&&x.p!==p&&x.p.nr&&!x.p.nr.x).map(x=>x.p.nr.r);const r=nrPickRoad(e.k,held);if(!r)return null;p.nr=nrNew(e.k,r);return p.nr}
+/* his test stat: the template's stat on him (S.men loyal, house head sk, prince tal); court men have none → BAL.nroad.men.st */
+function nrMenStat(e){const T=NRM[e.p.nr.r];const v=T&&e.p[T.sk];return typeof v==="number"?v:nrB().men.st}
+const nrCKey=p=>p===S?"me":p.id;
+function nrCWho(k){return k==="me"?S:RV(k)}
+/* his rival (kept for the whole road; recast and told when gone) */
+function nrMenRival(e){const N=e.p.nr;const B=nrB().men;
+ if(e.g==="men"){const L=(S.men||[]).filter(m=>m!==e.p&&m.alive!==false&&m.id!=="m96");const p=N.c!=null&&L.find(m=>m.id===N.c);if(p)return p;if(N.c!=null){N.rc=N.cn||"";N.c=null}if(!L.length)return null;const q=pick(L);N.c=q.id;N.cn=q.name;return q}
+ if(e.g==="off"){const T=trS();const L=Object.keys(T.H).filter(c=>c!==e.c);if(N.c&&L.includes(N.c))return N.c;if(!L.length)return null;
+  L.sort((a,b)=>NRM[N.r].ally?tdRel(e.c,b)-tdRel(e.c,a):tdRel(e.c,a)-tdRel(e.c,b));N.c=L[Math.min(L.length-1,R(Math.min(2,L.length)))];return N.c}
+ if(e.g==="hz"){const L=allKids().map(z=>z[0]).filter(k=>k!==e.p&&k.sex==="m"&&k.alive);const p=N.c&&L.find(k=>k.name===N.c);if(p)return p;if(N.c){N.rc=N.c;N.c=null}if(!L.length)return null;const q=pick(L);N.c=q.name;return q}
+ /* court men: the consort he leans toward (patron pk) and the one he leans against (c), from his af (key "me" = the player) */
+ const C=liveRivals(true).concat(S.out||S.dead?[]:[S]);const af=p=>(e.p.af&&e.p.af[nrCKey(p)])||0;
+ const ok=k=>{const p=k!=null&&nrCWho(k);return p&&(p===S||p.alive&&!p.out)};
+ if(!ok(N.pk)||!ok(N.c)){if(N.c!=null&&!ok(N.c)){const o=RV(N.c);N.rc=o?o.name:""}if(C.length<2)return null;C.sort((a,b)=>af(b)-af(a));N.pk=nrCKey(C[0]);N.c=nrCKey(C[C.length-1])}
+ return nrCWho(N.c)}
+const nrMy=k=>allKids().some(z=>z[0]===k&&!z[1]);
+function nrMenPlay(e){const p=e.p,N=p.nr,A=nrCh(N.r,N.n);if(!A){N.n=nrNext(N.r,N.n+1);if(!N.n)N.x=1;return null}const B=nrB(),M=B.men;
+ const pr=cl(Math.round(B.base+nrMenStat(e)/B.div+(N.k>0?B.sc:0)+(N.hb||0)),5,95);const k=roll(pr)?1:roll(pr/2)?0:-1;
+ const riv=nrMenRival(e);let me="",hit=false;const w=k>0?"win":"lose";
+ if(e.g==="men"){const fx=k>0?M.men.fx.win:k<0?M.men.fx.lose:M.men.fx.mid;for(const z in fx)p[z]=cl((p[z]||50)+fx[z],0,100);
+  if(riv&&k!==0)riv.loyal=cl((riv.loyal||50)+M.men.rv[w],0,100)}
+ else if(e.g==="off"){const ally=NRM[N.r].ally;if(k!==0){tdPowAdd(e.c,M.off.pow[w]);if(riv){tdPowAdd(riv,M.off.rv[w]);tdRelAdd(e.c,riv,ally?(k>0?M.off.ally:-M.off.ally):-M.off.rel)}}
+  if(riv&&riv===tdHouse(S)&&k!==0){hit=true;me=ally?(k>0?" Nhà ngươi thêm một chỗ dựa.":" Nhà ngươi với phủ ấy thêm hiềm khích."):(k>0?" Nhà ngươi bị lấn một bước.":" Nhà ngươi bớt một mối lo.")}}
+ else if(e.g==="hz"){const fx=k>0?M.hz.fx.win:k<0?M.hz.fx.lose:M.hz.fx.mid;for(const z in fx)p[z]=cl((p[z]||0)+fx[z],0,100);
+  if(riv&&k!==0){riv.fond=cl((riv.fond||0)+M.hz.rv[w],0,100);if(nrMy(riv)){hit=true;me=k>0?` ${riv.name} bị lép một phần trước phụ hoàng.`:` ${riv.name} được phụ hoàng để mắt hơn.`}}}
+ else{/* court */const pk=N.pk,ck=N.c;p.af=p.af||{};if(pk!=null&&k!==0){p.af[pk]=cl((p.af[pk]||0)+(k>0?M.court.af:-M.court.af),-100,100);
+   if(k>0&&ck!=null)p.af[ck]=cl((p.af[ck]||0)-M.court.af,-100,100);if(k<0){const pp=nrCWho(pk);if(pp)ap(pp,{danh:-M.court.danh})}}
+  if(k!==0&&(pk==="me"||ck==="me")){hit=true;me=pk==="me"?(k>0?" Hắn nghiêng về phía ngươi thêm một phần.":" Hắn vấp ngã, ngươi mang tiếng lây."):(k>0?" Hắn càng xa ngươi.":"")}}
+ const tag=nrEnd(A,k);N.e=tag;N.k=k;N.l.push([N.n,k]);N.hb=0;const n0=N.n;N.n=nrNext(N.r,N.n+1);if(!N.n)N.x=1;
+ N.t=S.turn+nrR(B.gap);if(N.h&&N.h<=n0)N.hs=N.hs||-1;
+ const rn=riv&&typeof riv==="object"?(riv===S?"ngươi":riv.name):typeof riv==="string"?(TDOFF[riv]||riv):"người khác";
+ const rc=N.rc?` ${N.rc} nay không còn, kẻ đứng đối mặt hắn là ${rn}.`:"";N.rc="";
+ return {n:n0,t:plain(A.t),tag,k,rc,me,hit}}
+/* motive to ask the player (real reasons only): a man fond of her (tinh), a court man / house head who leans to her (af.me), a house
+   allied with hers; princes and the Nội vụ phủ buyer never ask (their mother / their master does) */
+function nrMenAsk(e){try{if(isSrv()||S.out||!e.a)return false;const M=nrB().men,p=e.p;
+ if(e.g==="men")return (p.tinh||0)>=M.askTinh;const af=(p.af&&p.af.me)||0;if(af>=M.askAf)return true;
+ if(e.g==="off"){const h=tdHouse(S);return !!(h&&tdRel(e.c,h)>=M.askRel)}return false}catch(x){return false}}
+function nrMenOffer(e){const N=e.p.nr,A=nrCh(N.r,N.n);if(!A||!e.a||typeof q72!=="function")return false;const hk=nrKind(A);if(!T72I["nr_"+hk])return false;const q=q72();if(!q)return false;
+ const [rk,ri]=e.a;if(q.ch.concat(q.a).some(c=>c.rk===rk&&c.ri===ri&&/^nr_/.test(c.tid)))return false;
+ const riv=nrMenRival(e);let bk=null,bi=null;if(e.g==="men"&&riv){bk="man";bi=riv.id}else if(e.g==="off"&&riv){bk="off";bi=riv}else if(e.g==="court"&&riv&&riv!==S){bk=riv.queen?"hh":"rv";bi=riv.id}
+ q.ch.push({tid:"nr_"+hk,at:wk(),rk,ri,bk,bi,p:{nr:N.r,nn:N.n}});N.hk=hk;N.hs=1;N.t=Math.max(N.t,S.turn+Math.ceil((nrB().dl+2)/3));return true}
+function nrMenMonth(news){const B=nrB();let n=news||0;
+ for(const e of nrMenL()){try{const N=e.p.nr||nrMenInit(e);if(!N||N.x||!N.n||S.turn<N.t)continue;
+  if(N.h&&N.n===N.h&&!N.hs&&nrMenAsk(e)&&nrMenOffer(e))continue;
+  const r=nrMenPlay(e);if(!r)continue;
+  const line=`<span class="past">${e.g==="off"?"Tin trong triều":"Tin trong cung"} · ${e.n} · «${nrTitle(N.r)}» chương ${r.n}: «${r.t}»${r.tag?` — ${r.tag}`:""}.${r.rc}${r.me}</span>`;
+  if(r.hit||n<B.newsMo){log(line);n++}}catch(x){console.error(x)}}
+ return n}
+/* the voice of a man in the help hồi (VANPHONG §2): eunuchs nô tài, a Vương gia bản vương, other men and officials thần */
+function nrVoiceM(X,goi){const k=X&&X.A&&X.A.k;if(k==="eun"||k==="ksp")return{me:"nô tài",call:goi()};
+ if(k==="man")return{me:X.A.o&&X.A.o.role==="Vương gia"?"bản vương":"thần",call:goi()};if(k==="doc"||k==="off")return{me:"thần",call:goi()};return null}
+/* his road on his card (Nam nhân / Kẻ hầu / Triều đình / con cái cards): one more line of the kit person card (pcard lines, j70 pattern) */
+(function(){if(typeof pcard!=="function")return;const p0=pcard;pcard=function(o){try{if(S&&!window.__nroff&&o&&o.name&&!(o.lines||[]).some(l=>/Tuyến truyện:/.test(l))){
+  const sn=x=>typeof shortN==="function"?shortN(x):x;const e=nrMenL().find(z=>z.p.nr&&(z.n===o.name||z.p.name===o.name||sn(z.p.name)===o.name));
+  if(e){const l=nrLine(e.p);if(l){o=Object.assign({},o);o.lines=(o.lines||[]).concat([l])}}}}catch(x){console.error(x)}return p0.call(this,o)}})();
+window.nrMenL=nrMenL;window.nrMenInit=nrMenInit;window.nrMenPlay=nrMenPlay;
 /* ================= jevb: EVENT BALANCE · CONTEXT · MOOD CAUSES · REAL PRECONDITIONS (owner 15/11 14:05Z, 14:30Z, 15:10Z) =================
    Wraps only; loaded after jstory. Numbers in BAL (ctx*, moodEv*). Audit: dev/review/event-balance.md (bots: dev/measure/evbot.js).
    (1) CONTEXT, not a fixed answer: the odds of a rolled event option depend on the people in it AT THAT MOMENT —
@@ -42840,7 +43080,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="f64fb5d90a62";window.CTM_BUILD=BUILD;
+const BUILD="8477d18580ad";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
