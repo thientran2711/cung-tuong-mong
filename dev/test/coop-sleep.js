@@ -73,7 +73,7 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
   ok(await until(A,()=>document.getElementById('next').textContent==='Chờ hảo hữu…'&&/Trong lúc đợi/.test((document.getElementById('kctm')||{}).textContent||''),null,8000),'1: A waits: "Chờ hảo hữu…" + "Trong lúc đợi…" chip',await K(A));
   await shot(A,'sl-wait-755x1000');
   await sleep(5000);const t0=Date.now();await wakeB();
-  ok(await until(B,n0=>true,n0,100)&&await (async()=>{const t=Date.now();while(Date.now()-t<6000){if(B.conns.length>n0)return true;await sleep(200)}return false})(),'1: B reconnects at once on return',B.conns.length-n0);
+  ok(await (async()=>{const t=Date.now();while(Date.now()-t<6000){if(B.conns.length>n0)return true;await sleep(200)}return false})(),'1: B reconnects at once on return',B.conns.length-n0);
   const ms=await bothPast(A,B,k,20000);ok(ms>=0&&ms<12000,'1: the lost bend is resent → both step',ms)}
  for(let i=0;i<3;i++){await clear(A);await clear(B);await sleep(300)}
  /* 2 the room steps while she is away, she returns with a dialog open */
@@ -95,6 +95,9 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
   ok(await until(B,()=>/Đang làm việc/.test((document.getElementById('kctmf')||{}).textContent||''),null,8000),'4: B top chip: "… Đang làm việc"',await fr(B));
   const ba=await box(A),bb=await box(B);ok(ba&&ba.r<=ba.w&&ba.l>=0&&bb&&bb.r<=bb.w,'4: chip inside the screen',[ba,bb]);
   await shot(A,'f-work-755x1000');await shot(B,'f-work-1180x820');
+  for(const [w,h] of [[1366,1024],[1000,755],[844,390],[390,844]]){await B.p.setViewportSize({width:w,height:h});await sleep(4000);await shot(B,`f-work-${w}x${h}`);
+   const bx=await box(B);const ov=await B.p.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1);ok(!ov&&(w<h||bx&&bx.r<=bx.w+1&&bx.l>=0),`4: ${w}x${h} chip inside the screen, no overflow`,bx)}
+  await B.p.setViewportSize({width:1180,height:820});await sleep(1500);
   await B.p.evaluate(()=>{Q.push({t:'Thư nhà',b:'Một lá thư nhà.'});showModal()});
   ok(await until(A,()=>/Đang bận/.test((document.getElementById('kctmf')||{}).textContent||''),null,5000),'4: B reads a dialog → A sees "! Đang bận" (pushed at once)',await fr(A));
   await shot(A,'f-busy-755x1000');await clear(B);

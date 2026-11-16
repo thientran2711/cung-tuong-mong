@@ -2942,3 +2942,13 @@ Tests: `node dev/test/item-info.js <url> <outdir> [sizes]`. Kit page: sample §7
   ready / her week end is out), "Đợi hảo hữu" (host's places / a step after a dialog), "Hảo hữu đang vắng", "Đang nối lại…", "Đợi cùng bản mới".
   Khắc spent and she can still press "Sẵn sàng": #next gets the kit selected look `.ksel` (§31.13).
   Freeze panel (#coopfz, peer): "Hảo hữu đang vắng (máy ngủ hay chuyển sang việc khác). Hảo hữu mở lại trò chơi là tự vào lại; …".
+- §69.2 FRIEND CHIP · kitCoopFriend(o) · kitCoopFriendPanel(o) (owner 16/11 "Đồng hồ count down cho 2 người chơi đâu? Nút sẵn sàng của hảo hữu
+  đâu…", coordinator spec): `#kctmf`, top of the screen, always on in co-op (hidden only under the title, the freeze panel, the hold panel).
+  `button.kchips.kctmf[data-ctm=fr]` = her face `kitFaceH(friend,"xs")` (grey silhouette until met: stranger rule §49.3) + name (`k61Named`,
+  else "Hảo hữu của ta") + ONE status chip + the shared countdown chip (`Còn m:ss` / `Đợi m:ss` while stopped / `.r` "Hết buổi").
+  Status (o.st): ready `.g` "✓ Đã sẵn sàng" · busy `.w` "! Đang bận" (a dialog / event / mini game open: generic, never what) · work `.n`
+  "… Đang làm việc" (still has khắc) · away `.r` "✕ Đang vắng" · hold `.w` "⏸ Tạm dừng". Pushed at once: each client sends {mode:"st",bz,kh,…}
+  on change (checked every 250 ms). Place: in the bar right-aligned on the "Buổi …" line when free (checked against every leaf of the bar and the
+  seal), else just under the bar at the right edge. Tap → `#kctmp` kit panel (`kpHeader("notice",name,"Hảo hữu cùng chơi")` + kitRows Hảo hữu /
+  Buổi này / Ngươi + one kpnote saying what she can do) with `.kbtn` "Đóng". The bottom strip (#kctm) keeps the clock, Tạm dừng and the
+  waiting notice only. Samples on the kit page "§69".

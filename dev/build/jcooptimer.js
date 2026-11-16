@@ -167,18 +167,19 @@ function css(){if(document.getElementById("kctm-css"))return;const st=document.c
 .kctm .kchip.w .kctm-r{background:none}
 .kctmlen .kctm{justify-content:flex-start}
 .kctm button.kchip{font:inherit;font-size:.76rem;font-weight:600;cursor:pointer;min-height:26px;pointer-events:auto;border-color:var(--gold,#b8892b)}
-#kctm{position:fixed;z-index:24;right:8px;pointer-events:none;max-width:calc(100vw - 16px)}
+#kctm{position:fixed;z-index:24;right:8px;pointer-events:none;max-width:min(400px,calc(100vw - 16px))}
 #kctm[hidden]{display:none}
 #kctm .kchip{background:#fffaf0f2;box-shadow:0 2px 8px #0002}
 #kctmh,#kctmp{z-index:9400}
 #kctmp .dlg #kctmpb{padding:8px 12px 2px}#kctmp .dlg #kctmpb .kpnote{margin:6px 0 0}
 #kctmp .dlg #kctmpr{padding:4px 14px 12px;margin:0;display:flex;justify-content:flex-end;gap:8px}
-.kctmf{display:inline-flex;align-items:center;flex-wrap:nowrap;gap:5px;margin:0;padding:2px 6px 2px 2px;border:1px solid var(--gold,#b8892b);border-radius:16px;background:#fffaf0f2;box-shadow:0 2px 8px #0002;font:inherit;color:var(--ink,#3a2418);cursor:pointer;min-height:30px;max-width:100%}
-.kctmf .kctmf-f{flex:0 0 auto;display:inline-flex;width:26px;height:26px;border-radius:50%;overflow:hidden}
-.kctmf .kctmf-f>*{width:26px!important;height:26px!important;min-width:0!important;margin:0!important}
+.kctmf{display:inline-flex;align-items:center;flex-wrap:nowrap;gap:5px;margin:0;padding:2px 6px 2px 2px;border:1px solid var(--gold,#b8892b);border-radius:16px;background:#fffaf0f2;box-shadow:0 2px 8px #0002;font:inherit;color:var(--ink,#3a2418);cursor:pointer;min-height:24px;max-width:100%;line-height:1.2}
+.kctmf .kctmf-f{flex:0 0 auto;display:inline-flex;width:20px;height:20px;border-radius:50%;overflow:hidden}
+.kctmf .kctmf-f>*{width:20px!important;height:20px!important;min-width:0!important;margin:0!important}
 .kctmf .kctmf-n{font-size:.74rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:9em}
-.kctmf .kchip{margin:0;white-space:nowrap;font-size:.72rem}
+.kctmf .kchip{margin:0;white-space:nowrap;font-size:.7rem;padding-top:0;padding-bottom:0}
 #kctmf{position:fixed;z-index:24;max-width:calc(100vw - 16px)}
+header.hud.kctm-pad{padding-bottom:calc(var(--kctm-pb,6px) + 28px)!important}
 #kctmf[hidden]{display:none}
 @media (max-width:599px),(max-height:430px){.kctmf .kctmf-n{max-width:5.5em}.kctmf .kctmf-s{font-size:.68rem}}
 #kctmh .dlg #kctmhb{padding:8px 12px 2px}
@@ -192,11 +193,11 @@ function kitCoopClock(o){css();o=o||{};const p=Math.max(0,Math.min(1,(o.left||0)
  else L.push(`<span class="kchip ${(o.left||0)<=20000?"r":"n"}">${ring}Còn ${fmtT(o.left)}</span>`);
  /* the friend's status, always shown (owner 16/11: "không biết hảo hữu đang tới đâu hay sẵn sàng chưa"): name + one word */
  const nm=o.name?esc(String(o.name).slice(0,16))+" ":"";
- if(o.fr==="ready")L.push(kitChip(`${nm||"Hảo hữu "}đã sẵn sàng`,"ok"));
+ if(o.fr||o.me){if(o.fr==="ready")L.push(kitChip(`${nm||"Hảo hữu "}đã sẵn sàng`,"ok"));
  else if(o.fr==="busy")L.push(kitChip(o.me?"Hảo hữu đang dở tay, xin đợi":`${nm||"Hảo hữu "}đang dở tay`,"w"));
  else if(o.fr==="hold")L.push(kitChip(`${nm||"Hảo hữu "}xin tạm dừng`,"w"));
  else if(o.fr==="away")L.push(kitChip(`${nm||"Hảo hữu "}đang vắng`,"r"));
- else L.push(kitChip(o.me?"Hảo hữu đang dở tay, xin đợi":`${nm||"Hảo hữu "}đang hành sự`,o.me?"w":"n"));
+ else L.push(kitChip(o.me?"Hảo hữu đang dở tay, xin đợi":`${nm||"Hảo hữu "}đang hành sự`,o.me?"w":"n"));}
  /* she is ready, the friend not yet: what she can still do meanwhile */
  if(o.me&&o.fr!=="ready")L.push(kitChip("Trong lúc đợi: xem các tab, Tư trang, Sổ ghi","n"));
  if(o.btn)L.push(`<button type="button" class="kchip n" data-ctm="hold" aria-label="Tạm dừng cuộc chơi cho cả hai">Tạm dừng</button>`);
@@ -230,7 +231,9 @@ window.kitCoopFriend=kitCoopFriend;window.kitCoopFriendPanel=kitCoopFriendPanel;
 window.kitCoopClock=kitCoopClock;window.kitCoopHold=kitCoopHold;window.kitCoopLenRow=kitCoopLenRow;
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§69",title:"kitCoopClock · kitCoopHold · đồng hồ buổi khi chơi cùng hảo hữu",
  html:()=>[{left:102000,len:120000,state:"run",btn:true,name:"Lan"},{left:15000,len:120000,state:"run",fr:"ready",name:"Lan"},{left:64000,len:120000,state:"pz",fr:"busy",name:"Lan"},{left:80000,len:120000,state:"run",me:true,name:"Lan"},{left:50000,len:120000,state:"stop",fr:"away",name:"Lan"},{left:0,len:120000,state:"up"}].map(o=>`<div class="kitpg-row">${kitCoopClock(o)}</div>`).join("")+
-  `<div class="kitpg-row" style="position:relative">${kitCoopHold(false)}</div>`})}catch(e){}
+  `<div class="kitpg-row" style="position:relative">${kitCoopHold(false)}</div>`+
+  ["work","busy","ready","hold","away"].map((st,i)=>`<div class="kitpg-row">${kitCoopFriend({st,name:i%2?"Lan":"",face:"",left:194000-i*40000,clock:i===4?"pz":"run"})}</div>`).join("")+
+  `<div class="kitpg-row" style="position:relative">${kitCoopFriendPanel({st:"work",name:"",left:194000,clock:"run",kh:2,myKh:1})}</div>`})}catch(e){}
 /* ---------- the chip over #next ---------- */
 let EL=null,lastH="",waitKey="",FE=null,lastF="",FP=null;
 function hideChip(){if(EL&&!EL.hidden)EL.hidden=true;if(FE&&!FE.hidden)FE.hidden=true}
@@ -242,15 +245,23 @@ function frInfo(){const v=view();const f=typeof CW.friend==="function"?CW.friend
  if(!name){try{const so=(COOP.state.seats||{})[other()];void so}catch(e){}}
  const clock=!v?null:(v.up||(v.run&&v.left<=0))?"up":(v.pz||v.hold||!v.run||frozenRoom())?"pz":"run";
  return {name,face,st:frSt(v),left:v?v.left:0,clock,kh:FS.kh,meRd:myRd(),myKh:myKh()}}
-/* top of the screen: right of the buổi line in the bar when there is room, else just under the bar at the right */
+/* top of the screen, INSIDE the bar (never over the stage or the panel): the first free spot of the bar (scanned top → bottom, right → left,
+   checked against every visible leaf of the bar and the seal); when the bar has none (iPad portrait, phones), the bar gets a strip of its own
+   (class kctm-pad = padding-bottom) and the chip sits in it at the right. */
+const PADH=28;
+let PK="",PT=0;
 function placeF(){const hud=document.querySelector("header.hud");if(!hud||!FE)return;const H=hud.getBoundingClientRect(),w=FE.offsetWidth,h=FE.offsetHeight;
- const sl=hud.querySelector(".kseal-hud");const R0=Math.min(innerWidth-6,sl?sl.getBoundingClientRect().left-4:H.right-4);
- const lv=[...hud.querySelectorAll("*")].filter(e=>!e.children.length&&e.getClientRects().length&&!FE.contains(e)).map(e=>e.getBoundingClientRect()).filter(q=>q.width&&q.height);
- const free=(x,y)=>x>=H.left+2&&x+w<=R0&&y>=H.top&&y+h<=H.bottom&&!lv.some(q=>x<q.right+6&&x+w>q.left-6&&y<q.bottom+1&&y+h>q.top-1);
- const tm=hud.querySelector("#k3tc .k3time"),tr=tm&&tm.getBoundingClientRect();
- const C=[];if(tr&&tr.width){C.push([R0-w,tr.top+(tr.height-h)/2]);C.push([tr.right+10,tr.top+(tr.height-h)/2])}
- const at=C.find(([x,y])=>free(x,y))||[Math.max(8,innerWidth-8-w),H.bottom+4];
+ const pk=[innerWidth,innerHeight,Math.round(H.top),Math.round(H.bottom),w,h,hud.textContent.length].join(),t0=pnow();if(pk===PK&&t0-PT<3000)return;PK=pk;PT=t0;
+ const pad=hud.classList.contains("kctm-pad")?PADH:0,B=H.bottom-pad-2;
+ const sl=hud.querySelector(".kseal-hud");const R0=Math.min(innerWidth-6,H.right-4);
+ const lv=[...hud.querySelectorAll("*")].filter(e=>!e.children.length&&e.getClientRects().length&&!FE.contains(e)&&getComputedStyle(e).visibility!=="hidden").map(e=>e.getBoundingClientRect()).filter(q=>q.width&&q.height);
+ if(sl)lv.push(sl.getBoundingClientRect());
+ const free=(x,y)=>x>=H.left+2&&x+w<=R0&&y>=H.top+2&&y+h<=B&&!lv.some(q=>x<q.right+6&&x+w>q.left-6&&y<q.bottom+2&&y+h>q.top-2);
+ let at=null;for(let y=H.top+2;y+h<=B&&!at;y+=3)for(let x=R0-w;x>=H.left+2;x-=6)if(free(x,y)){at=[x,y];break}
+ if(at){if(pad)hud.classList.remove("kctm-pad")}
+ else{if(!pad){hud.classList.add("kctm-pad");try{if(typeof k3Shell==="function")k3Shell()}catch(e){}}const H2=hud.getBoundingClientRect();at=[Math.max(H2.left+4,R0-w),H2.bottom-PADH+(PADH-h)/2-2]}
  FE.style.left=Math.round(at[0])+"px";FE.style.top=Math.round(at[1])+"px"}
+function unpad(){const hud=document.querySelector("header.hud.kctm-pad");if(hud)hud.classList.remove("kctm-pad")}
 function paintF(){const T=$("title");if(!live()||S.dead||(T&&!T.hidden)||document.getElementById("coopfz")||HP){if(FE&&!FE.hidden)FE.hidden=true;return}
  const o=frInfo();const h=kitCoopFriend(o);
  if(!FE){css();FE=document.createElement("div");FE.id="kctmf";FE.setAttribute("role","status");document.body.appendChild(FE)}
@@ -277,7 +288,7 @@ function tick(){try{if(!CW.on){stop();return}const t=pnow(),dt=lastT?Math.min(20
  if(host())hostTick(dt);else{if(t-lastPing>5000){lastPing=t;ping()}if(G&&G.hold!==HOLD)setHold(G.hold)}
  sendSt(false);dueTick();paint(false)}catch(e){console.error("coop clock",e)}}
 function go(){if(IV)return;lastT=0;IV=setInterval(tick,250)}
-function stop(){if(IV){clearInterval(IV);IV=0}hideChip();frPanel(false);K=null;G=null;due="";AR.m=null;setHold("")}
+function stop(){if(IV){clearInterval(IV);IV=0}hideChip();frPanel(false);unpad();K=null;G=null;due="";AR.m=null;setHold("")}
 if(CW.on)go();
 /* test hooks (dev/test/coop-timer*.js) */
 CW.tm={lens:()=>LOGL.slice(),dbg:()=>({lifeW:{S:typeof S!=="undefined"&&!!S,dead:typeof S!=="undefined"&&S&&S.dead,inLife:CW.inLife,title:!!($("title")&&!$("title").hidden),kroul:!!document.getElementById("kroul")},fz:frozenRoom(),K:K&&tmSnap(),life:myLife(),pz:myPz(),FS:Object.assign({},FS),rk:roomKey(),G,HOLD,OFF}),view,roomKey,myKey,due:()=>due,frReady,hold,off:()=>OFF,hnow,reset:()=>{if(host()){try{localStorage.removeItem(LSK)}catch(e){}K=null;snapTm=null;hostTick(0)}},fmtT};
