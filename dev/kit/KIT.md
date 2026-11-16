@@ -351,6 +351,19 @@ Rules
 - One button style (`.kbtn`). Width 560 px (620 ≥1200 px), full width under 600 px; scrolls inside, header stays.
 - Night (`.modal.night`) and end (`.modal.end`) keep their mood colours, same structure.
 
+### 8.1 ONE FRAME SIZE per viewport (owner 15/11 session 8: "kích thước khung khác nhau mà"; review/panel-size) — `j79` tokens `--kpw` / `--kph`
+Every `#modal .dlg.kpanel` (info, rule, news, notice, result, reward, night, end, intel, evidence, mood, item slot, place, calendar, choice,
+every PEND event dialog with or without a stage figure, identity card) and the week panel `.dawn .dbox.kpanel` has the SAME width and the SAME height
+at a given viewport; only the seal word and the content differ. Nothing sizes the frame by its content any more.
+- Width `--kpw` = `min(560px, 100vw - 28px)` (`620px` from 1200 px wide). Height `--kph` = `min(100dvh - 32px, max(420px, 70dvh), 720px)`.
+  Design sizes: 755x1000 → 560 x 700; 1180x820 → 560 x 574 (the game only ever sees these two, KIT §0; direct-mode sizes: 1000x755 560 x 529, 1366x1024 620 x 717, 844x390 560 x 358).
+- Structure (flex column): `.kph` fixed on top, `#mb` = the text / option area, takes the rest and scrolls inside (rule L191: in event dialogs only
+  the option list scrolls, `kdscroll`), `#mr` button row fixed at the bottom. A short panel leaves quiet paper; a long one scrolls.
+- Event dialogs with a stage figure (`kdper`): the figure column (`--kdpw`) is cut to fit INSIDE the frame (kitDpFit reads the frame width); the frame never grows with the people.
+- Nobody may set `width` / `max-width` / `height` on `.dlg.kpanel` or its variants (`kesdlg`, `kdper`, `kslot`, `kmc-modal`, `kpsc`); change the tokens.
+  Exempt: the person card (`.modal.pcm`, `pcard` §3), the picture zoom lightbox, mini-game frame `#ov .mg` (§13), the week flip-book (§27).
+- Scan: `node dev/test/panel-size.js <url> <out.json> [WxH@dpr,...]` opens 51 panel cases (every kind + every PEND dialog) and reports width / height per viewport; FAIL when they differ.
+
 ## 9. FACTS, ROWS, CHIPS, PEOPLE (j79)
 - `kitFacts(facts,{group})`: `facts` = array of strings (split into sentences) or objects `{who, text, chips:[[label,n]], why, when, kind:"me"|"person"|"world"}`.
   Row = small face (or a gold dot for court/world facts) + the fact, the first mention of each person drawn as **rank title + name in rank colour**
@@ -926,8 +939,8 @@ so stage blocks may stand beside a head or between figures, never over the paint
   hairpins above the head not counted) on the same floor line for every face: portrait 80 % / landscape 84 % of the screen height, floor
   1.2 % above the bottom. Never object-fit:contain in a box (a wide robe used to come out shorter). Phones (< 600 px portrait) keep the
   figure-on-top layout (--kidh).
-- FIXED COLUMN: the panel has a fixed width per viewport (portrait 58 % · landscape min(560 px, 54 %), inline, so a tab with more cells can
-  never widen it); the figure column is the space left of it (minus 8 px). The whole painted figure is centred in the column when it fits;
+- FIXED COLUMN: the panel is the ONE frame size of KIT 8.1 (`--kpw` / `--kph`; kpIdLay never sets its width); the figure column is the
+  space left of the panel (its left edge minus 8 px). The whole painted figure is centred in the column when it fits;
   wider → body core centred, robe/sleeves cut at the column edge with a 24 px fade (mask). The panel never covers her.
 - `kitTn(src)` = the small pre-sized copy `img/tn/por-…webp` (128 px wide, ~7 KB; was the 384x506 portrait, 30–55 KB) / `img/tn/fig-…webp`
   (240 px tall, ~7 KB) when `img/TN.json` lists it (`dev/art/tn_make.py`, list from `dev/test/newgame-ui-enum.js`: every face the picker can
