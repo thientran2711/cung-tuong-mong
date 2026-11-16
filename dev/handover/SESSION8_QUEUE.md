@@ -102,7 +102,7 @@ j72 bước vs Hồi · stage paper halo · Thái hậu title bronze vs plum · 
 | D52 | skin-match audit of 7347 never-measured figures (plan in PROGRESS_review-skin-match.md; worktree /home/user/wt/skin cache) | QUEUED |
 | C40 [→ FOREMAN B] | review/actcard-small (owner OVERRIDE: keep big + small cards; small card picture square → portrait rectangle 3:4; equal sizes per grid; tap picture → big + info; odds label or "!" → why-detail) | QUEUED-NEXT |
 | C41 [→ FOREMAN B] | review/tuduc-mg (owner s8: Tứ đức minigames missing → 4 games Công/Dung/Ngôn/Hạnh, easy rules) | QUEUED-NEXT |
-| C42 | review/evidence-truth (owner s8: evidence only for real deeds; clean player safe; frame scheme separate; news one fact per line) | QUEUED-NEXT (high) |
+| C42 | review/evidence-truth @ 353c17048 (jtruth.js; clean player 0 true evidence) | REVIEWING (opus) |
 | C43 | review/coop-invite-ux (owner s8 'Rồi sao nữa': waiting state, 1-2-3 steps, auto-continue on join) | QUEUED |
 | C44 | review/cloud-save (owner s8: same character on phone + iPad, solo + co-op; sync code, auto upload, conflict pick, 10 versions) | QUEUED-NEXT |
 | C45 | review/newgame-ui @ f4ddeefeb (lag fixes, same heights, Nhập cung event frame) | REVIEWING (opus) |
