@@ -88,3 +88,6 @@
 | D41 review (opus) | review/promote-servants-r1 | C | session_011xDdVRpL5fTu1nJk5T2Xgz | RUNNING | 07:26Z 16/11 |
 | C8 fig-bg-k1 review (sonnet) | review/fig-bg-k1-r1 | C | session_011xDdVSK9SWpuBJGX5bSxtc | RUNNING | 07:26Z 16/11 |
 | orphan-audit: every dropped branch/claim/queue item across old sessions (owner 07:44Z) | (report only) | main s11→s12 | session_01UV1SzhYyEjF9w3R6uZtPwu (sonnet) | RUNNING | 16/11 07:40Z |
+| person-popup template + one frame size per event (OD 07:35Z, 07:37Z) whole family + kit-conform FAIL rule | review/popup-fullbody | main s12 | (opening, sonnet) | RUNNING | 16/11 07:30Z |
+| stage slot overlap j59 / kit §33 (OD 07:39Z) | review/stage-slots-fix | main s12 | (opening, sonnet) | RUNNING | 16/11 07:30Z |
+| ONE design frame + uniform scale; Fold portrait = iPad half (OD 07:47Z, 07:50Z) — plan + phase 1 | review/design-scale | main s12 | (opening, opus) | RUNNING | 16/11 07:30Z |
