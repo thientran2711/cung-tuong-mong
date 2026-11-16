@@ -254,3 +254,4 @@ Self-wake: s15 trigger trig_01QtP4CohaEq6uN3d5auPm7Q is DELETED at handover → 
 - (12:25Z s16) fp v6 (bd-v6, nc-v6) sent to owner; ART fp session archived (any next pass = fresh worker from reports/foreign-princess-samples.md).
 - (12:29Z s16) skin-light SẴN SÀNG KIỂM b6147b82 (kitFigLight §82, per-picture tone curves). NOT reviewed yet: owner wants test image first (A live / B no rosy layer / C kitFigLight, maid beside, on Ngọc Thanh các WITH background) → asked worker for reports/skin-light/owner-test-ngocthanh.jpg; send to owner, she picks, then reviewer.
 - (12:36Z s16) promo-reveal-fix: NOT a game regression — KIT §81 kitSceneEnd makes kit scenes wait for «Tiếp theo»; ~46 tests click only the overlay → test family fix + shared helper in review/promo-reveal-fix (tests only). merge-train-6 told.
+- (12:37Z s16) promo-skip-r1 SMOKE PASS live b85cdb1e; same session continues promo-reveal-fix (tests).
