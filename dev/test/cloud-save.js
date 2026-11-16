@@ -19,7 +19,7 @@ const freePort=()=>new Promise(r=>{const s=net.createServer();s.listen(0,'127.0.
   await ctx.addInitScript(([u,init])=>{window.COOP_URL=u;window.CTM_CLOUD_GAP=0;if(init&&!sessionStorage.getItem('i')){sessionStorage.setItem('i',1);for(const k in init)localStorage.setItem(k,init[k])}},['http://cloud.local',init||null]);
   const p=await ctx.newPage();p.errs=[];p.on('pageerror',e=>p.errs.push(e.message));p.k=k;p.ctx=ctx;
   await p.goto(BASE,{waitUntil:'domcontentloaded',timeout:120000});await p.waitForFunction(()=>window.CTM_CLOUD&&document.querySelector('#modal.kpthome'),null,{timeout:90000});
-  await p.addStyleTag({content:'#kroul,#kroulw{display:none!important}'});return p};
+  await p.addStyleTag({content:'#kroul,#kroulw{display:none!important}#dawn,.kmov.kcf{display:none!important;pointer-events:none!important}'});return p};
  const shot=async(p,n)=>{const r=await p.evaluate(()=>{const vw=innerWidth;const bad=[];document.querySelectorAll('#modal:not([hidden]) *').forEach(e=>{const q=e.getBoundingClientRect();if(!q.width)return;if(q.right>vw+1||q.left<-1)bad.push('out:'+e.className)});
    const M=document.querySelector('#modal:not([hidden])');return {ovx:document.documentElement.scrollWidth>vw,bad:bad.slice(0,4),ell:/…(?!$)/.test(M?M.innerText.replace(/Đang [^\n]*…/g,''):'')}});
   ok(!r.ovx&&!r.bad.length,`${p.k} ${n}: nothing off screen`,r);
