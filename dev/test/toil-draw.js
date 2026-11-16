@@ -23,7 +23,10 @@ const res=[];const ok=(c,msg,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' 
   const ch=await p.evaluate(()=>TOIL.geo.cheeks());
   for(const q of [ch[0],ch[7]]){await p.mouse.move(q.x+hand.cheek[0],q.y+hand.cheek[1]);await p.mouse.down();for(let k=0;k<hand.n;k++){const a=k/hand.n*Math.PI*6;await p.mouse.move(q.x+hand.cheek[0]+Math.cos(a)*hand.rub,q.y+hand.cheek[1]+Math.sin(a)*hand.rub,{steps:3});await p.waitForTimeout(70)}await p.mouse.up()}
   await p.waitForTimeout(300);await p.screenshot({path:`${DIR}/${tag}-2-powder.jpg`,quality:70});
-  await p.evaluate(()=>TOIL.test.next());
+  await p.evaluate(()=>TOIL.test.next());await p.waitForTimeout(400);await p.screenshot({path:`${DIR}/${tag}-2b-lip.jpg`,quality:70});
+  /* the lip dots sit on THIS mouth (owner 16/11: the old dot sat above the nose / near the chin) */
+  /* lip dot on THIS mouth: the target is the mk-fit lip outline (one anchor table per face) */
+  const lipOk=await p.evaluate(()=>{const I=TOIL.test.I,L=TOIL.test.lips;return !!(I&&I.mesh&&L.length===3)});ok(lipOk,tag+': lip dots from this face')
   for(let k=0;k<3;k++){for(let t=0;t<400;t++){const l=await p.evaluate(()=>TOIL.geo.lip());if(!l)break;if(Math.abs(l.ring-1)<.15){await p.mouse.click(l.x+hand.lip,l.y);break}await p.waitForTimeout(10)}}
   await p.waitForFunction(()=>S.toilette,null,{timeout:20000}).catch(()=>{});await p.waitForTimeout(800);
   const r=await p.evaluate(()=>({parts:Object.fromEntries(Object.entries(TOIL.st&&TOIL.st.parts||{}).map(([k,v])=>[k,Math.round(v*100)/100])),t:S.toilette&&{score:S.toilette.score,look:S.toilette.look,slip:S.toilette.slip,mk:toilMk(S.toilette)}}));
