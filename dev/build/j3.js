@@ -44,8 +44,8 @@ function chooseM(i){const m=Q[0];if(!m||!m.opts)return;const c=m.opts[i];if(c.fx
 /* the log keeps one line per choice: "<event>: <choice> → <what really happened>" (owner 11/15: bare "Mặc kệ." lines with no context).
    The lines the choice's own effects wrote are folded into it, and the real changes of her numbers are added (before → after). */
 function logChoice(m,c,b0,s0){const n=Math.max(0,Math.min((S.logSeq||0)-s0,S.logs.length));const L=S.logs.splice(0,n).reverse().map(x=>String(x).replace(/^<span class="ld">[^<]*<\/span>/,"").trim()).filter(Boolean);S.logSeq=s0;
- const d=logReal(b0);const ttl=plain(m.t||"").replace(/[.:]\s*$/,"");const ch=String(c.n||"").replace(/[.]\s*$/,"");const res=L.join(" ")+(d?`${L.length?" ":""}${d}.`:"");
- log(`${ttl?`<b>${ttl}</b>: `:""}${ch}${res?" → "+res:"."}`)}
+ const d=typeof lsRest==="function"?lsRest(b0,lsArr(L)):logReal(b0);const ttl=plain(m.t||"").replace(/[.:]\s*$/,"");const ch=String(c.n||"").replace(/[.]\s*$/,"");const res=L.join(" ")+(d?`${L.length?" ":""}${d}.`:"");
+ log(`${ttl?`<b>${ttl}</b>: `:""}${ch}${res?" — "+res:"."}`)}/* "—", not "→": the result itself has "Sủng a → b" (log-sync r1) */
 
 /* nights */
 /* rivals */
@@ -85,9 +85,10 @@ function makeDil(){const pool=liveRivals(false),L=[];
 
 /* the turn */
 function endTurn(){
-  if(S.dead||Q.length||S.mg)return;S.buoi=0;const qStart=Q.length;let ev=resolveTonight();
+  if(S.dead||Q.length||S.mg)return;S.buoi=0;const qStart=Q.length;let ev=resolveTonight();const lsB=typeof lsSnap==="function"?lsSnap():null;
   S.sung=cl(S.sung-((has("lanhlung")&&S.tuan===1)||(S.rank>=7&&S.tuan!==0)?0:1),0,100);
   const rg=harsh()?1:4;S.suc=cl(S.suc+rg,0,100);liveRivals(true).forEach(v=>v.suc=cl(v.suc+rg,0,100));if(S.tablet)S.tablet--;
+  if(lsB)lsNote(lsB,{sung:"ân sủng nhạt dần",suc:"nghỉ ngơi qua tuần"},true)/* Sức: dropped again when folded into j76 "Ngủ một đêm: Sức +N", which already counts this +4 */;
   ev+=rivalsTurn();if(S.dead)return;
   if(S.suc<=0)return die("Bệnh nặng, không qua khỏi");
   if(S.tuan===2){ev+=monthTick();if(S.dead)return}else S.tuan++;
@@ -101,9 +102,9 @@ function endTurn(){
 function monthTick(){let ev="";
   S.turn++;ev+=monthPay();
   if(S.pray)S.pray--;if(S.fert)S.fert--;if(S.master)S.master--;if(S.confined)S.confined--;if(S.shield)S.shield--;
-  if(S.arts.thi>=3)S.sung=cl(S.sung+(S.arts.thi>=5?2:1),0,100);
+  {const b=typeof lsSnap==="function"?lsSnap():null;if(S.arts.thi>=3)S.sung=cl(S.sung+(S.arts.thi>=5?2:1),0,100);if(b)lsNote(b,{sung:"thơ hay được truyền tụng"},true)}
   ev+=maidMonth();ev+=pregMonth();if(S.dead)return ev;S.anthai=0;ev+=itemMonth(S);anMonth(S);restock();oanMonth();assignHouses();S.chat={};ev+=illMonth();ev+=coldMonth();if(S.dead)return ev;ev+=servRanks();ev+=servMonth();ev+=facMonth();
-  const dd=has("nhantu")?2:1;if(S.duc>=60)S.th=cl(S.th+dd,-100,100);else if(S.duc<20)S.th=cl(S.th-dd,-100,100);
+  {const b=typeof lsSnap==="function"?lsSnap():null;const dd=has("nhantu")?2:1;if(S.duc>=60)S.th=cl(S.th+dd,-100,100);else if(S.duc<20)S.th=cl(S.th-dd,-100,100);if(b)lsNote(b,{th:lsDucWhy()},true)}
   if(S.moreRivals&&!roomFor("consort"))S.moreRivals=0;if(S.moreRivals){S.moreRivals=0;const n=newRival(R(3));Object.assign(n,drawFace());rivals.push(n);ev+=`Theo lời ngươi tâu, cung tuyển thêm tú nữ: ${n.name} vào cung, phong ${RANKS[n.rank].n}. `}
   ev+=kidsMonth();S.storms=0;ev+=rivalsMonth();ev+=storyMonth();if(S.dead)return ev;ev+=heirMonth();
   if(!S.out&&S.sung<=0&&S.danh<=5&&S.rank<=1){cold("Bị bỏ quên, đưa vào lãnh cung");return ev}
