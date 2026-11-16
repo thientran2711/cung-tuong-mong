@@ -28,3 +28,16 @@ Biggest Danh loss: "Sổ Kính sự phòng ghi tháng trước ngươi không b�
 The pop-up's 4 options carry hidden outcomes (fx {} on "Báo đúng" and "Giấu"); the old bot scored only fx and tied → picked
 "Giấu, không báo" about half the time (its BAD regex is lowercase "giấu"). A player reads the card: "kèm: … mừng hụt: Sủng -3 Danh -2" + label "liều".
 Fix (harness only, inpage6.js): side costs after "kèm:" / "hỏng:" count at half weight; risk label liều −1, có rủi ro −0.3.
+
+### Finding 3 — the GAME regression: act-dedupe w1 removed the main Danh source (fixed bd887323)
+Bisect with the fixed bot (Vừa, n per arm): main eba64ead4 (this morning) HH 9/12 (75 %); 92668096 0/7; 0af9dedd 2/6; e9c6021d 1/5;
+ee5d33de 0/15. Danh-by-cause (indanh.js): on eba64ead4 "Phát chẩn cho cung nhân" (Hành sự card, Bạc −40 → Danh +7, Đức +3, any week)
+gave ≈0.70 Danh a tuần at ranks 0–3 — the whole margin between climbing and stalling (gain 3.54 vs loss 3.26 a tuần; after: 3.22 vs 3.16).
+act-dedupe w1 (jact AD_OUT, before 92668096) moved it to Tài nghệ Tứ đức "Phát bạc cứu giúp" with HARD-CODED Bạc −20 → Đức +3, Danh +1,
+once a month (j85; also a ONE CORE breach). Fix: `BAL.charity = {bac:40, duc:3, danh:7}` (the old card's numbers, once a month ≈ the
+Danh a month the card used to give), j85 act + NPC copy + Tứ đức table + button text all read it. Bot (inpage6) uses the act when
+it has Bạc ≥ cost + 20 (a sensible player would).
+
+### Mortality (owner rule OD:L1116, NOT changed)
+On ee5d33de stalled lives, the lifespan dice ended 4/15 lives before HH (she reaches her 30s while stuck); Emperor death ended
+others as Thái phi / xuất gia / tuẫn táng. Shares on the fixed build: see the final table.
