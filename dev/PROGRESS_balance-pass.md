@@ -105,6 +105,26 @@ poison deaths: most are NOT ACT.poison (1 of 18 landed ones killed) but poisoned
   Giúp đỡ nàng). j68 residue: silver options that buy information (wt tokens) vs free options giving Đức (8 khắc a point) stay
   "other road obvious" even at half price — that is an event-dilemma issue (Đức-giving free options dominate), not only a price.
 
+### Thái y "Mời thái y bắt mạch" (review/thaiy-r1 @ f7c61f829, NOT on main → not applied here) — verified row (coordinator 16/11)
+Model = bacroad.js: 1 bạc = 16/BAL.bacTuan[rank] khắc (bạc she KEEPS per tuần at that rank, sensible-bot flow: duty, ban thưởng and wages
+rise with rank, so pay alone overstates how cheap bạc is up high). Bạc road = 1 khắc + price. Own road = 3 khắc + Sức 5 (0.83 khắc) + 40 % a
+rival hears × 3 khắc (one word-only cost, BAL.bacVal.tok) = 5.0 khắc. gap = (bạc road − own road) / max(price, 4 khắc); + = own road obvious.
+| rank | BAL.pay | bacTuan | current cost | gap | proposed | gap | fair (gap 0) |
+|---|---|---|---|---|---|---|---|
+| 0 | 40 | 17 | 6 | +0.29 | 7 | +0.39 | 4 |
+| 1 | 55 | 20 | 8 | +0.37 | 10 | +0.50 | 5 |
+| 2 | 70 | 25 | 10 | +0.37 | 14 | +0.55 | 6 |
+| 3 | 95 | 40 | 12 | +0.16 | 19 | +0.47 | 10 |
+| 4 | 125 | 45 | 15 | +0.24 | 26 | +0.56 | 11 |
+| 5 | 165 | 51 | 20 | +0.36 | 38 | +0.66 | 13 |
+| 6 | 215 | 60 | 25 | +0.40 | 52 | +0.71 | 15 |
+| 7 | 280 | 70 | 35 | +0.50 | 75 | +0.76 | 18 |
+Verdict: the claim "bạc obvious at high ranks" does not hold once bạc is valued by what she keeps; the current table is already a bit DEAR
+(own road slightly obvious, worst at rank 7), and the proposal [7,10,14,19,26,38,52,75] (18–27 of 100 of pay) makes the bạc road dead
+at every rank. Recommend instead fair ≈ (own road − 1) × bacTuan/16: [4,5,6,10,11,13,15,18], or [5,6,8,11,13,16,20,25] as a halfway step.
+Sensitive input: the price of "a rival hears" — if a guessed hidden pregnancy is worth ~10 khắc (not 3), the own road is ~7.8 khắc and fair
+becomes [7,8,11,17,19,22,26,30] ≈ the CURRENT table. Either way the proposal is too dear.
+
 ## NEXT (resume here)
 1. Rerun both arms longer (≥40 lives each): `bash dev/measure/pass/mkinp.sh` then
    `node dev/measure/run_par.js http://127.0.0.1:<port>/<main build>.html sens 80 out_main.json ../tmp/sensall.js 5 <seed>` and the same
