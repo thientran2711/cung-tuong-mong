@@ -78,7 +78,7 @@ if(typeof kidAct==="function"){const k0=kidAct;kidAct=function(a,name){if(a!=="h
 window.addEventListener("click",e=>{const R=window.__adGreyR;if(R&&Date.now()-(window.__adGreyT||0)<1500&&e.clientX>=R.left&&e.clientX<=R.right&&e.clientY>=R.top&&e.clientY<=R.bottom){e.stopPropagation();e.preventDefault()}},true);
 document.addEventListener("pointerup",e=>{try{const b=e.target.closest&&e.target.closest("#panel .kcard[disabled]");if(!b||typeof kpPop!=="function"||!S||S.dead)return;
  const a=deck&&deck[+b.dataset.i];if(!a)return;const w=cardWhy(a)||(a.lock&&a.t)||"Chưa làm được lúc này";window.__adGreyT=Date.now();window.__adGreyR=b.getBoundingClientRect();
- kpPop(b,`<div class="kpopt">${a.n}</div><div class="kpopx"><span class="ef n">${w}</span></div>`)}catch(x){}},true);
+ kpPop(b,`<div class="kpopt">${a.n}</div><div class="kpopx"><span class="ef n">${w}</span></div>`,{inside:true})}catch(x){}},true);
 /* ---------- 5. Nội vụ phủ: a place (map spot on the office court west of the inner palace; scene = the office picture) ---------- */
 try{PLNAME.nvp=["Nội vụ phủ","mua sắm, đồ dùng"];if(typeof MAPH==="object"&&MAPH.places&&!MAPH.places.nvp)MAPH.places.nvp={box:{x:.085,y:.575,w:.13,h:.075},anchor:{x:.15,y:.6}};if(typeof ACC_DAY==="object")ACC_DAY.nvp=1}catch(e){}
 (function(){const p0=places;places=function(){const L=p0.apply(this,arguments);try{if(Array.isArray(L)&&!L.some(x=>x.k==="nvp")&&!adSrv())L.push({k:"nvp",n:"Nội vụ phủ",fn:"mua sắm, đồ dùng",d:"Thái giám Nội vụ phủ lo đồ dùng các cung, nhận mua đồ ngoài cung.",sc:"ksp"})}catch(e){}return L}})();
@@ -94,7 +94,7 @@ function adRare(){if(!S||adSrv())return null;const w=wk();if(S.adRare&&S.adRare.
  S.adRare={w,k:L.length?pick(L):null,sold:0};return S.adRare.k?S.adRare:null}
 if(typeof kitShop==="function"){const ks0=kitShop;kitShop=function(o){try{const R=o&&o.key==="nvp"&&S&&S.place==="nvp"?adRare():null;
   if(R&&Array.isArray(o.items)&&!o.items.some(x=>x.k===R.k)&&IT[R.k]){const k=R.k,it=IT[k];const a=typeof itemArt==="function"?itemArt(k):null;
-   o.items.unshift({k,src:kitItemSrc(k,""),src512:a&&a.src512||"",name:it.n,sub:`Hàng hiếm tuần này · ${it.kd||""}`,grade:a?a.grade|0:0,lux:it.sl||it.dr?luxVal(k):0,price:it.pr||0,
+   o.items.unshift({k,src:kitItemSrc(k,""),src512:a&&a.src512||"",name:it.n,sub:`Hàng hiếm tuần này · ${it.kd||""}`,grade:a?a.grade|0:0,lux:it.sl||it.dr?luxVal(k):0,price:it.pr||0,mark:["hàng hiếm","g"],/* kitItem corner tag on the tile (KIT §28.13) */
     eff:kitShopEff(k),rows:kitItemRows(k),stock:1,have:()=>S.inv.filter(e=>e.k===k&&!e.h).length,
     onBuy:(x,q)=>{if(!S.adRare||S.adRare.sold)return;apply({bac:-x.price});S.inv.push({k});S.adRare.sold=1;x.stock=0;x.why="Đã mua; tuần sau có món khác";log(`Mua ${it.n} (hàng hiếm). Bạc -${x.price}`)}})}}catch(e){console.error("jact rare",e)}
  return ks0.apply(this,arguments)}}
