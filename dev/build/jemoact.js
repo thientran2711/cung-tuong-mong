@@ -174,13 +174,14 @@ window.eaPick=eaPick;
 /* ======================= (3) OUTBURSTS: what each reaction does ======================= */
 /* returns {h: story lines, past: the real numbers} for her event; NPC: applies and returns a news line */
 function eaDo(p,r){const F=BAL.ea.fx[r.k]||{vent:10},me=p===S,res=[];let h="",target=null;const add=(t)=>res.push(t);
- const vent=()=>{if(me){const d=ventMe(F.vent,r.n.toLowerCase());if(d)add(`tâm trạng ${sgn(d)}`)}else ventNpc(p,F.vent)};
+ /* the outburst spends the feeling: her bar moves toward calm (down from joy, up from a low mood) */
+ const vent=()=>{if(me){const d=ventMe((S.mood&&S.mood.v>0?-1:1)*F.vent,r.n.toLowerCase());if(d)add(`tâm trạng ${sgn(d)}`)}else ventNpc(p,F.vent)};
  const pay=(o)=>{if(me){apply(o)}else ap(p,o);for(const k in o){if(o[k]&&typeof NAMES!=="undefined"&&NAMES[k])add(`${NAMES[k]} ${sgn(o[k])}`)}};
  const ml=maidOf(p);const M=ml.length?pick(ml):null;
  switch(r.k){
  case"dapdo":pay({bac:-Math.min(F.bac,me?S.bac:(p.bac||0)),danh:-F.danh});h=me?"Cơn giận dồn nén mấy hôm bỗng trào lên. Ngươi hất tay, chén trà, bình hoa vỡ tan dưới đất; cung nhân sợ hãi quỳ rạp thu dọn.":`${Nm(p)} nổi giận đập vỡ đồ trong cung.`;break;
- case"mang":loyAdd(M,-F.loy);add(`lòng ${M.name} −${F.loy}`);h=me?`Một chuyện nhỏ cũng khiến ngươi phát cáu. Ngươi quát mắng ${M.name} một trận; nàng cúi đầu, mắt đỏ hoe.`:`${Nm(p)} quát mắng cung nữ ${M.name} một trận.`;try{emoEv(M,"loyalDown","bị chủ nhân quát mắng")}catch(e){}break;
- case"danh":loyAdd(M,-F.loy);add(`lòng ${M.name} −${F.loy}`);pay({duc:-F.duc,danh:-F.danh});h=me?`Cơn giận không kìm nổi, ngươi sai người đánh ${M.name} mấy roi vì một lỗi nhỏ. Chuyện lọt ra ngoài, cung nhân các cung bàn tán.`:`${Nm(p)} nổi giận, sai đánh cung nữ ${M.name}.`;try{emoEv(M,"punished","bị chủ nhân đánh")}catch(e){}break;
+ case"mang":loyAdd(M,-F.loy);add(`lòng cung nữ −${F.loy}`);h=me?`Một chuyện nhỏ cũng khiến ngươi phát cáu. Ngươi quát mắng ${M.name} một trận; nàng cúi đầu, mắt đỏ hoe.`:`${Nm(p)} quát mắng cung nữ ${M.name} một trận.`;try{emoEv(M,"loyalDown","bị chủ nhân quát mắng")}catch(e){}break;
+ case"danh":loyAdd(M,-F.loy);add(`lòng cung nữ −${F.loy}`);pay({duc:-F.duc,danh:-F.danh});h=me?`Cơn giận không kìm nổi, ngươi sai người đánh ${M.name} mấy roi vì một lỗi nhỏ. Chuyện lọt ra ngoài, cung nhân các cung bàn tán.`:`${Nm(p)} nổi giận, sai đánh cung nữ ${M.name}.`;try{emoEv(M,"punished","bị chủ nhân đánh")}catch(e){}break;
  case"khac":{const o=eaOtherMaid(p);if(!o)return null;target=o.who;const hi=rkOf(o.who)>rkOf(p);try{emoEv(o.m,"punished",`bị ${nm(p)} mắng`)}catch(e){}
   if(o.who===S){eaHitMine(p,o.m);h=`${Nm(p)} mắng cung nữ ${o.m.name} của cung ngươi.`;break}
   if(hi){if(me){eaS().hoi.push({id:o.who.id,m:o.m.name,w:W()});add(`${nm(o.who)} sẽ đến hỏi tội`)}else{oanAdd(o.who,p,F.oan*2);if(o.who.queen||rkOf(o.who)>=rkOf(p)+2)punish(p,`mắng cung nữ của ${o.who.name}`,1)}}
@@ -234,7 +235,7 @@ function eaMeOut(g){const P=eaPick(S,g);if(!P)return false;const r=P.r;const o=e
 /* hỏi tội: the higher-rank mistress whose maid she scolded comes the next tuần (a real choice, gain and loss each) */
 function eaHoi(){const A=eaS();if(!A.hoi.length)return;const x=A.hoi.shift();const v=(rivals||[]).find(r=>r.id===x.id&&r.alive&&!r.out);if(!v||S.out)return;const H=E().hoi;EA_N.hoi++;
  const o=clp(H.try+(S.rank-rkOf(v))*H.rk+Math.round((S.danh||0)/H.dn),5,95);const ttl=v.queen?"Hoàng hậu":nm(v);
- const opts=S.bac<H.bac?[]:[{n:"Tạ lỗi, đền bạc",risk:"an toàn",hint:"êm chuyện, nhưng mất thể diện",x:`Chắc chắn · tốn: Bạc −${H.bac} · thành: ${ttl} thiện cảm +${H.aff} · kèm: Danh −${H.danh}`,fx:{bac:-H.bac,danh:-H.danh},go:()=>{affAdd(v,S,H.aff);oanAdd(v,S,-H.oan);log(`Ngươi tạ lỗi với ${ttl}, đền bạc cho cung nữ của nàng.`)}}];
+ const opts=S.bac<H.bac?[]:[{n:"Tạ lỗi, đền bạc",risk:"an toàn",hint:"êm chuyện, nhưng mất thể diện",x:`Chắc chắn · thành: ${ttl} thiện cảm +${H.aff}, nguôi giận`,fx:{bac:-H.bac,danh:-H.danh},go:()=>{affAdd(v,S,H.aff);oanAdd(v,S,-H.oan);log(`Ngươi tạ lỗi với ${ttl}, đền bạc cho cung nữ của nàng.`)}}];
  if(S.maid)opts.push({n:"Đổ lỗi cho cung nữ hỗn hào",risk:"an toàn",hint:"giữ thể diện, cung nữ chịu tội thay",x:`Chắc chắn · thành: giữ thể diện · kèm: lòng ${S.maid.name} −${H.loy}`,fx:{},go:()=>{loyAdd(S.maid,-H.loy);log(`Ngươi đổ cho ${S.maid.name} hỗn hào; ${S.maid.name} quỳ chịu tội thay.`)}});
  opts.push({n:"Cãi lý",risk:"liều",hint:"có thể giữ được thể diện, có thể chuốc họa",x:`${word(o)} · thành: Danh +${H.win} · hỏng: Danh −${H.lose}, ${ttl} oán +${H.oan}`,fx:{},go:()=>{if(roll(o)){apply({danh:H.win});log(`Ngươi cãi lý với ${ttl}: cung nữ kia hỗn trước. ${ttl} đành bỏ qua.`)}else{apply({danh:-H.lose});oanAdd(v,S,H.oan);log(`<span class="r">Ngươi cãi lý với ${ttl}, không ai bênh; chuyện lan khắp hậu cung.</span>`)}}});
  Q.push({ev:1,t:`${ttl} đến hỏi tội`,who:eaWho(v),art:"img/act-xu-toi-h.webp",h:`<p>${ttl} dẫn theo cung nữ hôm trước đến cung ngươi: “Đánh chó còn phải nhìn mặt chủ. Người của bản cung, muội muội cũng dám mắng?”</p><p>Cung nữ kia đứng sau, mắt còn đỏ.</p>`,opts})}
