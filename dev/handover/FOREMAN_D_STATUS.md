@@ -1,13 +1,13 @@
 # FOREMAN D STATUS
 ORDER 16/11 applied (separate worker sessions, repo reports, hourly self-wake, claims).
-last wake: 16/11 05:27Z (s2 = session_01DgYSWq6iuqbu5Vkmq1qN59; hourly wake trig_01GyzifNPR5nRN45YRj4LXdb at :24)
+last wake: 16/11 05:57Z (s2 = session_01DgYSWq6iuqbu5Vkmq1qN59; hourly wake trig_01GyzifNPR5nRN45YRj4LXdb at :24)
 s2 start context ≈ 45k tokens; budget ≈ 56k → rollover per FOREMAN_D.md.
 Session start 16/11. Starting context ≈ 60k tokens after the required reading; budget (start + 25%) ≈ 75k → rollover per FOREMAN_D.md when reached or on compaction.
 main at start = eba64ead4.
 
 | Item | Branch | Model | State |
 |---|---|---|---|
-| D-R1 newgame-ui-r2 review | review/newgame-ui-r2 @70119a805 → review/newgame-ui-r3 | sonnet | RUNNING (reviewer) |
+| D-R1 newgame-ui-r2 review | review/newgame-ui-r3 @f484d226 | sonnet | PASS (see ## PASS) |
 | D-R2 row-align re-review (C14) | review/row-align @0886f329b (old WIP review/row-align-r1 a26ec441) → review/row-align-r2 | sonnet | s1 agent stalled (interim a603afd0) → reviewer session_01DgYSWo7Zwjc5NpAfhvZGHV RUNNING |
 | C43 coop-invite-ux | review/coop-invite-ux @cb77dda4 → reviewer review/coop-invite-ux-r1 | sonnet | SẴN SÀNG KIỂM → reviewer session_01DgYSWo9bFK5NRcy5Hrr3UX RUNNING |
 | C44 cloud-save (Sổ mây) | review/cloud-save | opus | RUNNING (client + Worker code + local tests; DEPLOY → Foreman C) |
@@ -26,10 +26,13 @@ main at start = eba64ead4.
 | act-split waves 2–3 | — | opus | WAITING: GO from main coordinator after act-dedupe lands |
 
 ## PASS (for the main coordinator to fast-forward)
+- PASS review/newgame-ui-r3 f484d226ff5bcf856735be4931bba4cac9d87133 (D-R1; on main 0a311183f; lag: long tasks 45.5 s→8.3 s, face tap 2.7–3.8 s→0.1–0.65 s; small fixes j86 .kpmbw, j2 psOpenText row; report reports/review-newgame-ui-r3.md)
 
 ## PENDING CDN UPLOAD
 
 ## QUESTIONS
+- KIT REQUEST (for the kit keeper, from D-R1 review): the event-frame body #mb is overflow:hidden, so long text is clipped (also on main: Nhập cung "Hậu cung" row at 1366x1024, any long event dialog) → the kit event-frame body needs a scroll area.
+- UX note (not blocking, for main chat): on the new-game screen the face picker starts below the fold (≈25 px visible at 755x1000, none at 1180x820 / 844x390).
 - (answered, see HANDOVER) Q-D1.
 - FOR MAIN CHAT, BEFORE MERGING review/reign-road-r1 (fa201bbe0/0a311183): D's duplicate reviewer found 2 FAILs r1 misses (reports/reign-road-r1b.md): (1) Triều cục faction rows show unknown consorts as "Quý phi ???" → cherry-pick the jreign.js hunk of 3eb2c956d + rebuild site; (2) at 755x1000, 26/153 option hints overflow the fixed 130px .opts.k3rows card → shorten hints or KIT REQUEST (k3rows rows grow with content). Kit keeper decides (2).
 - (resolved) review/reign-road-r1 was claimed twice in CLAIMS.md (main s8 subagent AND D s1 agent). Whoever pushes first wins; the other should stop. D will not re-open it.

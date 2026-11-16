@@ -20,7 +20,7 @@
 | C41b tuduc-pic | review/tuduc-pic | B | session_01N1tNP49iueFUdHKedRCLBF (B1 in-session agent) | DONE 2954ff9f | 16/11 05:20Z |
 | C41b review | review/tuduc-pic-r1 | B | session_01N1tNP4dwJ1QEvs8oHcaKvZ | RUNNING | 16/11 05:25Z |
 | D34 review | review/scheme-games-port-r1 | B | session_01N1tNP49iueFUdHKedRCLBF (B1 in-session agent) | PASS e25486e0 | 16/11 05:19Z |
-| D-R1 newgame-ui-r2 review | review/newgame-ui-r3 | D | in-session agent of Foreman D s1 (started 05:1xZ, before the separate-session rule) | RUNNING | 05:19Z |
+| D-R1 newgame-ui-r2 review | review/newgame-ui-r3 | D | in-session agent of Foreman D s1 | PASS f484d226 | 16/11 05:57Z |
 | D-R2 row-align re-review | review/row-align-r2 | D | s1 agent stopped (interim a603afd0); reviewer session_01DgYSWo7Zwjc5NpAfhvZGHV | RUNNING | 16/11 05:41Z |
 | C43 coop-invite-ux | review/coop-invite-ux | D | in-session agent of Foreman D s1 | DONE cb77dda4 (SẴN SÀNG KIỂM) | 16/11 05:40Z |
 | C44 cloud-save | review/cloud-save | D | in-session agent of Foreman D s1 (started 05:1xZ, before the separate-session rule) | RUNNING | 05:19Z |
