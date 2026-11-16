@@ -32,4 +32,7 @@ ok(r.qud===1&&r.quD>0&&r.strike,'quyền thần side → direct rank; loss: Danh
 ok(!r.free&&r.fulld===0&&r.bacUp>=4*r.payN&&r.gifts>=1&&!!r.hieu&&r.dadUp>0&&/khảo hạch như mọi người/.test(r.full),'full seat → large compensation (Bạc, gifts, phong hiệu, family), no rank');
 ok(r.ghenUp&&r.exTo===4&&r.exGrace!==4,'compensation loss: jealousy; the next rank still needs the normal exam');
 ok(r.gfull===0&&r.gfree===1,'passed grace exam waits for a free seat, then the decree');ok(r.hit>0,'strike-back hits once when due');
+const tx=await p.evaluate(()=>{const o={};
+ o.rule=promoRuleTxt();try{tab="story";renderPanel0()}catch(e){}o.gl=[KIT_GLOSS["Khảo hạch tấn phong"]||"",KIT_GLOSS["Ngôi Hoàng hậu"]||""];return o});
+ok(/đầu lòng/.test(tx.rule)&&/hoàng tử sau/.test(tx.rule)&&tx.gl[0].includes(tx.rule)&&!/Sinh hoàng tử: (được ân thi|tấn phong ngay)/.test(tx.gl.join(' ')),'help texts read the one rule text (first prince direct, later prince / princess exam, faction win direct, full seat)');
 ok(!errs.length,'no page errors '+errs.slice(0,2));console.log(F.length?'FAIL':'PASS');await b.close();process.exit(F.length?1:0)})();
