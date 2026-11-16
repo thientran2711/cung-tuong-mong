@@ -33,11 +33,18 @@ function adMaidCards(){if(!S||S.out||!S.maid)return[];const A=[];let O=[];try{O=
  if(sp)A.push({n:"Sai cung nữ đi dò la",t:`Sai ${S.maid.name} đi dò la một phi tần (chọn người khi sai đi).`,k:2,c:{},o:sp.o==null?100:sp.o,dom:sp.dom||"Mưu kế",x:sp.x||"",lock:!!sp.lock,adT:sp.t,why:sp.why,adOpen:sp.open,ad:1});
  if(ng)A.push({n:"Nghe ngóng chung",t:`${S.maid.name} đi một vòng nghe ngóng chuyện trong cung.`,k:1,c:{},o:100,dom:"Giao thiệp",x:ng.x||"",adRun:ng.run,ad:1});
  return A}
+/* the Tài nghệ charity as a Hành sự card (danh-p1, owner P1 16/11: "shared Hành sự door"): the same act (j85 charityFx), the same
+   monthly lock (S.charM); khắc spent by the card path above, like the maid cards */
+function adCharityCard(){if(!S||S.out||typeof charityFx!=="function")return null;const C=BAL.charity;
+ return {n:"Phát bạc cứu giúp cung nhân nghèo",get t(){return S&&S.charM===S.turn?"Tháng này đã làm":"Ban bạc cho cung nhân nghèo khó; mỗi tháng một lần (cùng việc ở mục Tài nghệ · Tứ đức)."},k:C.khac,
+  c:{bac:-C.bac},o:100,dom:"Đức",w:{duc:C.duc,danh:C.danh},l:{},get lock(){return charityLocked()},
+  adRun:()=>{charityFx();return ""},ad:1}}
 (function(){const d0=deal;deal=function(){const r=d0.apply(this,arguments);try{if(!S||S.dead||!Array.isArray(deck)||adSrv())return r;
   /* every pool card is dealt (no random five): same objects, same wrappers (j83 WFOLD, jrest) */
   let P=[];try{P=pool()||[]}catch(e){}const have=new Set(deck.map(a=>a&&a.n));
   for(const a of P){if(a&&!have.has(a.n)){try{if(typeof vOddsFor==="function"){const b=vOddsFor(a);if(b&&a.o!=null&&a.o<100)a.o=cl(a.o+b,5,95)}}catch(e){}deck.push(a);have.add(a.n)}}
   for(const a of adMaidCards())if(!have.has(a.n)){deck.push(a);have.add(a.n)}
+  {const a=adCharityCard();if(a&&!have.has(a.n)){deck.push(a);have.add(a.n)}}
   deck=deck.filter(a=>!(a&&AD_OUT.test(a.n||"")));
   for(const a of deck){if(!a||!AD_DOOR[a.n]||a.__adDoor)continue;a.__adDoor=1;const L0=a.lock,T0=a.t;
    Object.defineProperty(a,"lock",{get:()=>!!(typeof L0==="function"?L0():L0)||adDoorUsed(a.n),set:()=>{},enumerable:true,configurable:true});

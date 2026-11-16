@@ -28,6 +28,7 @@ function modalStep(sens){
       else{let best=-1e9;pickI=okIdx[0][1];okIdx.forEach(([o,i])=>{const f=o.fx||{};let v=(f.sung||0)*1.5+(f.danh||0)*1.2+(f.hh||0)*.4+(f.th||0)*.4+(f.maid||0)*.1+(f.suc||0)*.2+(f.tamco||0)*.3+(f.bac||0)*.04;
         if((f.duc||0)<0)v+=(f.duc||0)*6;else v+=(f.duc||0)*1.5;if(o.x&&/chứng cứ/.test(o.x))v+=2;if(o.x&&/nhân chứng|rửa oan|lật án|phong tước|giữ được/.test(o.x))v+=4;if(/tú nữ/.test(o.n))v-=.5;if(o.x&&/được phong/.test(o.x))v+=20;if(o.x&&/kết thúc kiếp này/.test(o.x))v-=20;if(o.x&&/Hoàng thượng để ý \+/.test(o.x))v+=3;if(o.x&&/bị giết|đánh chết|dìm|mất mạng/.test(o.x))v-=12;v+=(f.tin||0)*.15+(f.nt||0)*.5;v+=Math.random()*.01;if(v>best){best=v;pickI=i}})}
       note("dilemma");chooseM(pickI);return true}
+    try{if(window.__xModal&&window.__xModal(m))return true}catch(e){}/* danh-p1 intn.js: work picker (no opts) */
     closeModal();return true}
   return false}
 function cardOK(a){return !a.done&&!S.dead&&canPay(a)&&!a.lock&&(typeof j76win==='function'?j76win(a,()=>can(cardCost(a))):can(cardCost(a)))&&!(a.b!=null&&(S.buoi||0)!==a.b)}
@@ -109,12 +110,13 @@ function sensibleStep(){
   if(S.arts.y<2)place("tyv",.6);
   if(window.__aff)for(const id in (S.menW||{})){place(S.menW[id],2.5)}
   if(!HS)pls.forEach(p=>opts.push({L:"g"+p.k,s:p.s,f:()=>{note("go",p.k);goTo(p.k)}}));
+  try{if(window.__xOpts)for(const o of window.__xOpts(N))opts.push(o)}catch(e){}/* danh-p1 intn.js: Tài nghệ options */
   const tk=S.turn+'_'+S.tuan+'_'+(S.buoi||0)+'_'+used+'_'+S.place;if(window.__btk!==tk){window.__btk=tk;window.__ban={}}
   const op2=opts.filter(o=>!o.L||(window.__ban[o.L]||0)<3);op2.sort((a,b)=>b.s-a.s);
   if(op2.length&&op2[0].s>0.35){if(op2[0].L)window.__ban[op2[0].L]=(window.__ban[op2[0].L]||0)+1;op2[0].f();return}
   window.__buoi++;if(used<=1)window.__idle++;nextBuoi()}
 window.__bot={step:(mode,n)=>{
-  for(let i=0;i<n;i++){window.__iter++;window.__lifeIter++;
+  for(let i=0;i<n;i++){if(window.__vtPump)window.__vtPump(5);/* run_rep.js virtual clock (vclock.js): game timers advance 5 ms per bot step */window.__iter++;window.__lifeIter++;
     if(S&&!S.dead){window.__maxRank=Math.max(window.__maxRank,S.rank);if(S.rank>=7&&window.__hhTurn==null){window.__hhTurn=S.turn;window.__hhWk=S.turn*3+S.tuan;window.__hhB=window.__lifeB}const t=S.turn+"_"+S.tuan;if(window.__lastT!==t){window.__lastT=t;window.__sucTrace.push(S.suc)}}
     {const tk=S?S.turn+'_'+S.tuan+'_'+(S.buoi||0)+'_'+used:'';if(tk!==window.__stk){window.__stk=tk;window.__stn=0}else window.__stn++}
     if(window.__lifeIter>60000||window.__stn>400){window.__res.push({ex:JSON.parse(JSON.stringify(window.__exN||{})),origin:S.origin.k,rank:S.rank,maxRank:window.__maxRank,turns:S.turn,years:+(S.turn/12).toFixed(2),title:"TIMEOUT",fate:"TIMEOUT",stuck:window.__stn>400,ring:(window.__ring||[]).slice(),acts:window.__acts,state:JSON.stringify({used,Q:Q.length,mg:!!S.mg,buoi:S.buoi,place:S.place,out:S.out,q0:Q[0]&&{t:strip(Q[0].t||Q[0].title||"").slice(0,160),opts:(Q[0].opts||[]).map(o=>o.n+"|"+JSON.stringify(o.fx||{}))},modalHidden:q("#modal").hidden,ov:q("#ov").hidden?"":strip(q("#ov").innerHTML).slice(0,200),logs:(S.logs||[]).slice(0,3).map(strip)})});window.__maxRank=0;window.__lifeIter=0;window.__stn=0;window.__acts={};start();continue}

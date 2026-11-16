@@ -16204,7 +16204,11 @@ function lessonVir(k,mode){if(!S||S.dead||Q.length||S.mg)return;vNorm(S);const l
  else{if(!can(2)||S.bac<cost)return;apply({suc:-10,bac:-cost});spend(2);const g=2+R(2);addVir(S,k,g);log(`Học ${V.n} với ma ma giáo tập. Tiến bộ +${g}.`)}
  save();render()}
 window.lessonVir=lessonVir;
-function charity(){const C=BAL.charity;if(!S||S.dead||Q.length||!can(C.khac)||S.bac<C.bac||S.charM===S.turn)return;S.charM=S.turn;withDeed("phát bạc cứu giúp cung nhân nghèo",()=>apply({bac:-C.bac,duc:C.duc,danh:C.danh}));spend(C.khac);save();render()}
+/* ONE act, two doors (danh-p1, owner P1 16/11): Tài nghệ · Tứ đức button (here) and the Hành sự card (jact adCharityCard);
+   one lock S.charM (once a month), one effect body charityFx; numbers BAL.charity */
+function charityLocked(){return !S||S.charM===S.turn||S.bac<BAL.charity.bac}
+function charityFx(){const C=BAL.charity;S.charM=S.turn;withDeed("phát bạc cứu giúp cung nhân nghèo",()=>apply({bac:-C.bac,duc:C.duc,danh:C.danh}))}
+function charity(){const C=BAL.charity;if(!S||S.dead||Q.length||!can(C.khac)||charityLocked())return;charityFx();spend(C.khac);save();render()}
 window.charity=charity;
 try{wrapR("lessonVir",(k,m)=>`${m==="self"?"Tự học":"Học"} ${(VIR.find(x=>x.k===k)||{}).n||""}`);wrapR("charity",()=>"Phát bạc cứu giúp cung nhân")}catch(e){}
 document.addEventListener("click",e=>{const b=e.target.closest("[data-vlearn],[data-charity],[data-v85tab]");if(!b||b.disabled)return;e.stopPropagation();
@@ -17258,7 +17262,7 @@ Object.assign(BAL,{mline:{eye:[.1,.25,.6,1,1.2],eyeSung:.5,eyeAge:[16,29],seekSt
    kcVihanh / kcR5: jkc outside-palace rare endings. succN.b* = Thái hậu buông rèm (p b), c* = Nhiếp chính (p c), th*: Thái hậu
    support / opposition, npc* = an NPC dowager's claim, rareCDanh: the rare end check of succRareOK. */
 Object.assign(BAL,{danhG:{forget:5,fatherBook:40,thdBook:40,srvWed:20,kcVihanh:60,kcR5:50},
- charity:{khac:1,bac:20,duc:3,danh:1},/* Tài nghệ · Tứ đức "Phát bạc cứu giúp cung nhân nghèo" (j85 charity, once a month; jtabs/j85 card text) */
+ charity:{khac:1,bac:35,duc:3,danh:5},/* "Phát bạc cứu giúp cung nhân nghèo" (j85 charity, once a month; two doors: Tài nghệ · Tứ đức button + Hành sự card jact adCharityCard, one lock S.charM). danh-p1 (owner P1 16/11 12:55Z): bac 20→35, danh 1→5 */
  succN:{bAge:16,bDanh:50,bTam:35,bBac:100,cRank:4,cDanh:70,cTam:60,cTh:60,cBac:300,thB:50,thOpp:20,npcDanh:50,npcTam:35,rareCDanh:80}});
 /* CLOSE MAID BY ORIGIN (jcmaid.js, D58 review/close-maid, owner approved table v2 16/11). % per month unless named; loy = loyalty range at
    arrival by source; pickN candidates, the picked one's talent works after pickAlone months, pickKeep % a month her decay is undone;
@@ -39285,11 +39289,18 @@ function adMaidCards(){if(!S||S.out||!S.maid)return[];const A=[];let O=[];try{O=
  if(sp)A.push({n:"Sai cung nữ đi dò la",t:`Sai ${S.maid.name} đi dò la một phi tần (chọn người khi sai đi).`,k:2,c:{},o:sp.o==null?100:sp.o,dom:sp.dom||"Mưu kế",x:sp.x||"",lock:!!sp.lock,adT:sp.t,why:sp.why,adOpen:sp.open,ad:1});
  if(ng)A.push({n:"Nghe ngóng chung",t:`${S.maid.name} đi một vòng nghe ngóng chuyện trong cung.`,k:1,c:{},o:100,dom:"Giao thiệp",x:ng.x||"",adRun:ng.run,ad:1});
  return A}
+/* the Tài nghệ charity as a Hành sự card (danh-p1, owner P1 16/11: "shared Hành sự door"): the same act (j85 charityFx), the same
+   monthly lock (S.charM); khắc spent by the card path above, like the maid cards */
+function adCharityCard(){if(!S||S.out||typeof charityFx!=="function")return null;const C=BAL.charity;
+ return {n:"Phát bạc cứu giúp cung nhân nghèo",get t(){return S&&S.charM===S.turn?"Tháng này đã làm":"Ban bạc cho cung nhân nghèo khó; mỗi tháng một lần (cùng việc ở mục Tài nghệ · Tứ đức)."},k:C.khac,
+  c:{bac:-C.bac},o:100,dom:"Đức",w:{duc:C.duc,danh:C.danh},l:{},get lock(){return charityLocked()},
+  adRun:()=>{charityFx();return ""},ad:1}}
 (function(){const d0=deal;deal=function(){const r=d0.apply(this,arguments);try{if(!S||S.dead||!Array.isArray(deck)||adSrv())return r;
   /* every pool card is dealt (no random five): same objects, same wrappers (j83 WFOLD, jrest) */
   let P=[];try{P=pool()||[]}catch(e){}const have=new Set(deck.map(a=>a&&a.n));
   for(const a of P){if(a&&!have.has(a.n)){try{if(typeof vOddsFor==="function"){const b=vOddsFor(a);if(b&&a.o!=null&&a.o<100)a.o=cl(a.o+b,5,95)}}catch(e){}deck.push(a);have.add(a.n)}}
   for(const a of adMaidCards())if(!have.has(a.n)){deck.push(a);have.add(a.n)}
+  {const a=adCharityCard();if(a&&!have.has(a.n)){deck.push(a);have.add(a.n)}}
   deck=deck.filter(a=>!(a&&AD_OUT.test(a.n||"")));
   for(const a of deck){if(!a||!AD_DOOR[a.n]||a.__adDoor)continue;a.__adDoor=1;const L0=a.lock,T0=a.t;
    Object.defineProperty(a,"lock",{get:()=>!!(typeof L0==="function"?L0():L0)||adDoorUsed(a.n),set:()=>{},enumerable:true,configurable:true});
@@ -41379,7 +41390,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="2d6d4eb4f348";window.CTM_BUILD=BUILD;
+const BUILD="2c00a8da8c36";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
