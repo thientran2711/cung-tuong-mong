@@ -230,5 +230,5 @@ document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.clos
  const a0=accAsk;accAsk=function(k){let yk=false;try{const st=accState(k);if(st.ask==="yk"){if(st.dayDone)return;yk=true}}catch(e){}
   const c=used;const r=a0.apply(this,arguments);try{if(yk&&S&&used!==c)S.kmEmpDay=wk()}catch(e){}return r}})();
 /* NPC consorts: the same acts, a small chance each tuần (BAL.empDay.p), the one their arts suit */
-(function(){if(typeof nextBuoi!=="function")return;const n0=nextBuoi;nextBuoi=function(){const r=n0.apply(this,arguments);try{if(S&&!S.dead&&(S.buoi||0)===1)for(const v of liveRivals(false)){if(!v||v.out||v.confined||!roll(BAL.empDay.p*100))continue;
+(function(){if(typeof nextBuoi!=="function")return;const n0=nextBuoi;nextBuoi=function(){const r=n0.apply(this,arguments);try{if(S&&!S.dead&&(S.buoi||0)===1&&worldOn()/* one world (coop-one-world-r1): NPCs' day with the Emperor rolls on the host only */)for(const v of liveRivals(false)){if(!v||v.coop||v.out||v.confined||!roll(BAL.empDay.p*100))continue;
    const kind=(v.arts&&v.arts.ky>=1&&roll(40))?"ky":(v.arts&&v.arts.cam>=1&&roll(50))?"cam":"walk";kmEmpAct(v,kind)}}catch(e){}return r}})();
