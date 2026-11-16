@@ -6,7 +6,7 @@ Connectors (account B): GitHub push OK · Magnific OK (project "Personal" ba4aec
 |---|---|---|---|
 | C23 mg-easy | review/mg-easy-r1 | sonnet | PASS 94644c1e6342eb7ea1003aae090cd5310a9597e5 |
 | C41 tuduc-mg | review/tuduc-mg | sonnet | RUNNING (resumed) |
-| C24 chapter-detail | review/chapter-detail | sonnet | RUNNING (resumed) |
+| C24 chapter-detail | review/chapter-detail | sonnet | RUNNING (resumed; told to GROW kitGoalDetail from review/tutorial-r2 per coordinator note) |
 | C26 stat-fx | review/stat-fx-r1 | sonnet | PASS 0eb3e4b4a41a9123ad7181b39fc14afc60f8ab11 (follow-up C26b QUEUED) |
 | C27 buoi-transition | review/buoi-transition-r1 | sonnet | PASS c91bfdc4629fbf4ebf84307f543d44a394ff138b (images on CDN) |
 | C39 tab-underline | review/tab-underline-r1 | sonnet | PASS d8b54d0970ac8591d07163650058485f4bceb818 |
@@ -20,7 +20,7 @@ Connectors (account B): GitHub push OK · Magnific OK (project "Personal" ba4aec
 | C37 panel-size | review/panel-size-r1 | sonnet | PASS a523531da8bbf3944c8f0afd2c122176405d4e88 (KIT KEEPER: §8.1) |
 | C26b stat-fx follow-up | review/stat-fx-2 | sonnet | RUNNING (also pcard-fill nits: 'Dạo này' log line may end with a stray word like 'gặp'; Phi tần tab mood tile shows a placeholder when no cause event — person card + status tiles re-render with innerHTML so they never glow; add diff-glow on re-render; also make the number turn red on a loss like green on a gain) |
 | C46 map-labels | review/map-labels | sonnet | RUNNING |
-| D32 succession-port | review/succession-port-r1 | opus | PASS 0d9b49b9202c663ef4151c01e890a05ffd62aa30 |
+| D32 succession-port | review/succession-port-r1 | opus | PASS 0d9b49b9202c663ef4151c01e890a05ffd62aa30 — hook for review/mortality: j99succ.js wraps emperorDies() (j99succ.js ~line 56; skipped when COOPW.on) |
 | D38 lost-items-port | review/lost-items-port @92ed78f6 | opus | REVIEWING (review/lost-items-port-r1, sonnet) |
 | D30 palace-map-port | review/palace-map-port-r1 | sonnet | PASS 306de247abcc3c9cf0bbab9fbddb91e6946131c3 |
 | D31 difficulty-port | review/difficulty-port | opus | QUEUED (re-measure with Foreman C's C7) |
@@ -64,6 +64,7 @@ All 6 pending images UPLOADED by Foreman B (11/16): img/fx/buoi-{wash,mist,hills
 - contest-ui (reviewing): kitGameFrame({pic}) picture-left/info-right (.kgbody/.kgpic/.kginfo, CSS in jcui.js #kcu-css), kg82Open/kg82Pic, #kg82.kg-idle, .kgrv self-scrolling list, podium equal figure heights + kpodPrize chips, KIT_BD.podium → new shared art img/kit/podium-bg2(-p).webp. KIT REQUEST: pet-care game box (jpetcare) needs a board painting (e.g. mg-chamthu-bg) + pic in petcGameBox.
 - lost-items-port (reviewing): no new kit parts. Note: live j92 Giá họa hearing choices say "an toàn · không được mất gì" though the hearing can go against her — kit-wide wording fix for the keeper.
 - (found by succession reviewer, exists on main today) the sticky .kpbar kcattabs strip ("Tất cả 0/16 …") draws on top of the modal on the 1180x820 end card ("Kiếp này") — z-index/stacking, kit keeper.
+- §72 CLASH: review/room-btn-r1 (PASS c80e5df9) used KIT §72 for kitBackBtnHtml, and review/tutorial-r2's kitGoalDetail (jgoal.js) is also §72 — keeper please assign one of them a new number.
 From now on Foreman B workers only use existing kit parts and file KIT REQUESTs here.
 
 ## QUESTIONS
