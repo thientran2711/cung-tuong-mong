@@ -30,7 +30,7 @@ Connectors (account B): GitHub push OK · Magnific OK (project "Personal" ba4aec
 | D39 appearance-port | review/appearance-port-r1 | sonnet | LIVE (main 4f5e5f3b, train 1/2) — was PASS 86234a24c53da664bd75f34b34444751cd7c0e9f |
 | D40 weather-risk-port | review/weather-port-r1 | sonnet | PASS 100bf8809a77b5a8f381ffac6e426a0c0d2b8a5f |
 | D41 promote-servants | review/promote-servants | opus | QUEUED (after Foreman C's D29 roster) |
-| D42 places-leftovers | review/places-port (built on review/palace-map-port-r1) | sonnet | RUNNING |
+| D42 places-leftovers | review/places-port @6169b031 (on palace-map-port-r1) | sonnet | REVIEWING (review/places-port-r1, sonnet); 51 new paintings on CDN |
 
 ## PASS (for the main coordinator to fast-forward)
 PASS review/tab-underline-r1 d8b54d0970ac8591d07163650058485f4bceb818 (C39; descends from main 2d038139; reviewer added KIT §46 edge-fade docs + observer throttle)
@@ -75,6 +75,7 @@ All 6 pending images UPLOADED by Foreman B (11/16): img/fx/buoi-{wash,mist,hills
 - page-curl2 (reviewing): portrait paper slide kitSlideSheet = new variant of the page-turn kit part (§34, reuses .ksht*); global swipe-to-change-tab removed; keeper may add a line to KIT.md §34.
 - KIT REQUEST (C41 tuduc-mg): a kit-owned "hint ring" part for canvas mini-games (Gợi ý marker is now a position-fixed div with .ksel); mini-game frame picture-left/info-right is a frame-level change (contest-ui's kitGameFrame({pic}) covers it once approved).
 - KIT REQUEST (D36 rank-port, blocks it): (1) podium j90 per owner 08:55Z — characters big/most prominent, podium shrunk to the name-plate under the feet, medal at the plate's top-right, "Ta" tag, optional entry fields fig/face/nameH/you; used by Bảng vàng and other podium users; must match C34 contest-ui podium + KIT_FIG (old implementation: origin/review/rank-ui 895c898ef j90 diff); (2) person dialog jk4: her own chip shows rank+name via kitName(q,{cap:true,named:q===S}) in kitStageFig; figure column sticky for dialogs without options so the full figure shows at 844x390 (895c898ef jk4 + CSS `#modal .dlg.kdper:not(.kdnarrow)>#mb:not(:has(>.opts))`); (3) KIT.md text podium §26 and 32.7b from that commit.
+- places-port (reviewing): new shared art thuong-thu-phong-*, a-ca-so-*, dong-cung-* (16 season/buổi + fallback each, gpt-2-6 edits of approved scenes); no kit parts changed.
 From now on Foreman B workers only use existing kit parts and file KIT REQUESTs here.
 
 ## QUESTIONS
@@ -104,3 +105,4 @@ From now on Foreman B workers only use existing kit parts and file KIT REQUESTs 
 - Q18 (C32 page-curl2): in landscape the ‹ › buttons keep the slow 1.3 s curl (unchanged) — keep or speed up? Portrait slide is 300 ms.
 - Q19 (C41 Tứ đức minigames): in these 4 games a higher level makes the game EASIER (wider bands, fewer wrong choices) — opposite of mg-easy's knowledge games (harder at higher level). OK? And "Để trời định" (skip) counts as 5/10 — fine?
 - Q20 (D36 leaderboard): login is guest-only (random code + chosen display name; server stores only a hash). Owner wants a recovery code or email magic link (LEADERBOARD.md; email needs a privacy policy)? Anti-cheat is basic (server recomputes score + sanity checks). The old Worker ctm-rank.victoria-tntt.workers.dev is live (/health ok, board empty).
+- Q21 (D42 places): owner has not seen the new Thượng thư phòng / A ca sở / Đông cung paintings (her rule: side-by-side with an existing scene before variants; worker picked the base) — please show her dev/art/places_work/sheet-*.jpg on branch review/places-port. Also: Ngự thiện phòng, Phật đường, Nội vụ phủ are NOT on the map and have no art (OWNER_LEDGER row 40 says live — wrong); want them as a follow-up? "Thăm con / Cho gọi con về", mother–child estrangement, Thái tử prestige, orphans → Thái hậu/Hoàng hậu wait for D29 (j95 ledger).
