@@ -180,7 +180,7 @@
 | coop-b1b5-fix review (opus) | review/coop-b1b5-fix-r1 | D | session_01DgYSWn4KTZXiGjQcE6uwsQ | DONE (PASS 287a7010) | 16/11 12:58Z |
 | D4 NPC death + new faces + Phế phi Lý (orphan #18) | review/npc-death | D | session_01DgYSWoy8UWVPrve6HEjZfR | DONE (PASS, READY in FOREMAN_D_STATUS) | 16/11 12:58Z |
 | D57 preg-rate option 4 (orphan #2) | review/preg-rate | D | session_01DgYSWnxBe741HPgNbrkYjF | DONE (PASS, READY in FOREMAN_D_STATUS) | 16/11 12:58Z |
-| Danh P1 apply (owner-approved via s16) + P2 Tài-nghệ bot | review/danh-p1 | D | session_01DgYSWmtmVG7yFfTVZxCumE | RUNNING | 16/11 12:58Z |
+| Danh P1 apply (owner-approved via s16) + P2 Tài-nghệ bot | review/danh-p1 | D | session_01DgYSWmtmVG7yFfTVZxCumE | DONE (SẴN SÀNG KIỂM 98d7acc4) | 16/11 12:58Z |
 | C44 'Xóa sổ trên mây' button (kit danger button + confirm) | review/cloud-del | D | session_01DgYSWnuoGnBrzpLuCRGnpy | BLOCKED KIT REQUEST (danger button + confirm dialog; worker archived, base review/cloud-save-r1 @7e187abe, plan in reports/cloud-del.md) | 16/11 13:10Z |
 | seatcap review | review/seatcap-r1 | D | session_01DgYSWoAxb67pTNnGiGEUTw | PASS 7d463838 | 16/11 14:06Z |
 | foreign-princess v7 (BD hair Đáp ứng/Phi/Quý phi ×2 options, NC back to v5 slight slim) | review/foreign-princess-samples | main s16 | session_01UV1SzhXgLn4WHG9rL1BT7L (sonnet) | RUNNING | 16/11 13:10Z |
@@ -238,3 +238,5 @@
 | kit-marks (sonnet; OD 15:00Z): gold Emperor/Thái hậu, text-line rank+name one colour, bare ink ✓/✗, relations two columns no bars, no ± boxes, KẾT QUẢ seal orange, place icon above name, fix empty samples 2.2/3.6, one 'Tinh phẩm' chip; sample sheet first | review/kit-marks | main s18 | session_01UV1SzjfpYasXCkBCSB3ais | RUNNING | 16/11 15:25Z |
 | figure-proportion audit + backs-only night/transition art (OD 15:00Z 1.1/1.7) | (Foreman C) | C | — | INBOX 15:25Z | 16/11 15:25Z |
 | tham-flip-ui review (sonnet; a27f525b2; merge main 5682ce6f; reviewer may fix) | review/tham-flip-ui-r1 | main s18 | session_01UV1SzhgZtmqQ7d2jmf5wDs | RUNNING | 16/11 15:28Z |
+
+| danh-p1 review (opus) | review/danh-p1-r1 | D | session_01DgYSWna77N83b6631fN1Li | RUNNING | 16/11 15:24Z |

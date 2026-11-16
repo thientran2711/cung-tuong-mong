@@ -47,7 +47,7 @@ main at start = eba64ead4.
 | unmet-name leak family residue | review/name-mask @8b911c73 | sonnet | PASS 571dc15e (review/name-mask-r1; reviewer archived) |
 | D4 NPC death/new faces + Phế phi Lý (orphan #18) | review/npc-death @84b184c4 | opus | PASS 5f58a715 (review/npc-death-r1; reviewer archived) |
 | D57 preg-rate (orphan #2) | review/preg-rate @911dc478 | opus | PASS 1c31bd79 (review/preg-rate-r1; reviewer archived) |
-| Danh P1 apply + P2 Tài-nghệ bot (s16 answers) | review/danh-p1 | opus | worker session_01DgYSWmtmVG7yFfTVZxCumE RUNNING (P3 = NO) |
+| Danh P1 apply + P2 Tài-nghệ bot (s16 answers) | review/danh-p1 | opus | SẴN SÀNG KIỂM 98d7acc4 (P1: Danh hold hs 51→12 %, mix 72→47 %; P2 Tài-nghệ bot report only; worker archived) → reviewer danh-p1-r1 session_01DgYSWna77N83b6631fN1Li RUNNING 15:24Z |
 | C44 'Xóa sổ trên mây' button | review/cloud-del | sonnet | BLOCKED: KIT REQUEST kit DANGER button + kit confirm dialog (dev/kit/KIT_REQUESTS.md "KIT REQUEST — cloud-del"); worker archived 13:10Z; no Worker change needed (POST /api/vault/drop exists); resume with a fresh sonnet worker on KIT READY |
 | kc-roads-cn-nc round 3 review (main s14 08:41Z) | review/kc-roads-cn-nc-r1 @ef6e7a05 | opus | FAIL 4 (1 BLOCKING) → FOR MAIN s14 (see QUESTIONS) |
 | scene-end button sweep (KIT §81 live 9a4da876) | review/scene-end-sweep @67db47f6 | sonnet | PASS 67db47f6 (whole-game rescan: no scene closes by itself; buổi transition = not a scene) |
