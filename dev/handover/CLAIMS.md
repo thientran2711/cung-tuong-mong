@@ -296,3 +296,4 @@
 | status-icons r2 review (sonnet, SMALL) of 0613ec0a5 | review/status-icons-r1 | main s21 | session_01UV1Szkts9Mdx3Ydnpyf3No | RUNNING | 16/11 17:44Z |
 | care-overlap (sonnet, UI bug on live): Chăm screen act picture covers top bars — whole group via kit | review/care-overlap | main s21 | session_01UV1SzhZKa3YaPKzy8XgdPe | RUNNING | 16/11 17:44Z |
 | go-live-kit fix r1 (opus): rollback previous blocker, perf gate, tier dev/tools BIG | review/go-live-kit | main s21 | session_01UV1SzkxXfGxNEF3Kw47KCq | RUNNING | 16/11 17:45Z |
+| PET 'Già' pictures pet-<key>-gia all 22 species + keepsake painting 'Túi kỷ vật' (FOREMAN_C 17:36Z s21; OD 16/11 18:50Z; same worker as pet-stage cut-outs, OD:L1229) (sonnet art) | review/pet-stage-art | C | session_011xDdVQmHkEoHRLjnTR3KPB | RUNNING | 16/11 17:55Z |

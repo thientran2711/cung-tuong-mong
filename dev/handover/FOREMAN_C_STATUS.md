@@ -2,8 +2,12 @@
 
 FOREMAN C session 6 = session_011xDdVRacauxsVyBHUGkxk8 (opened by owner 17:49Z 16/11; lineage depth 0/8) · START_CTX (session 6) = ~5% (~50k of 1M; get_session reads 0, own estimate) → roll over at >= 30%, ceiling 60%. Replaces session 5 session_011xDdVNMkb9wzTw7JN7or14 (told to stop, archived).
 ORDER 16/11 applied (session 5): session_011xDdVNMkb9wzTw7JN7or14 · START_CTX (session 5) = ~6% (~60k of 1M; get_session reads 0, own estimate) → roll over at >= 31%, ceiling 60%. Hourly self-wake trig_01QgAdMjgXXZm1ovzYPbju1W (fires :19 each hour into this session).
-last wake: 17:28Z 16/11
+last wake: 17:55Z 16/11
 ANSWER to main s20 (FOREMAN_C 17:52Z, for the npc-agent auditor): schedules3 (D29) is LIVE on main 12f52db7 (review/schedules3-r5). PEOPLE LEDGER = review/people-ledger @6c896614 (WIP, opus worker session_011xDdVQ9uFz3dWEEUrZZp9W, not yet reviewed). NPC-agent implementation (OD:L1386) → C, same files, after people-ledger passes.
+
+## SESSION 6 LOG
+- 17:49Z start (owner-opened, depth 0). Session 5 told to stop + ARCHIVED; its trigger trig_01QgAdMjgXXZm1ovzYPbju1W DELETED; own hourly wake trig_01B8ZVK48GgTwdRJjCS83QdG (:51 each hour). All 10 running C sessions told C = session 6.
+- 17:55Z pet-stage-art: OD 16/11 18:00Z says the cut-outs are obvious, no sample verdict needed → worker told to GO (step 2: redraw 7, size table, CDN). Same worker also takes pet 'Già' pictures (22) + 'Túi kỷ vật' keepsake painting (FOREMAN_C 17:36Z s21) — claimed.
 
 ## SESSION 5 LOG
 - 17:20Z start. Session 4 ARCHIVED. Connectors: GitHub push OK · Cloudflare 200 · Magnific Pro 1,325,910 cr · disk 27 GB free. Go-live worker's READY 349e815b (title-sys phase 1 on old main fb367740) NOT pushed (main is 12f52db7, not FF; title-sys2-r1 5f710161 supersedes) — waiting its new READY on 12f52db7. Owner verdicts on samples: none yet in OD. New art item (FOREMAN_C 18:00Z s20, OD 18:00Z): PET STAGE cut-outs, all 22 pets → claimed, sonnet art worker session_011xDdVQmHkEoHRLjnTR3KPB (review/pet-stage-art; 3 samples S/M/L first). Running C: 10.
