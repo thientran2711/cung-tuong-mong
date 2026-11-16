@@ -186,7 +186,7 @@ function toilDressUI(){const box=kg82Box();if(!box)return;box.hidden=false;const
  const slots=TOIL_SL.map(([k,label,gk])=>({k,label,item:toilWorn(k),ghost:keqArt(gk)||"",sel:!!(sel&&sel.sl===k)}));const x=luxOf(S),wb=wearBonus(S);
  const sum=kitChips([wb.sac?["Sắc",wb.sac]:null,wb.danh?["Danh",wb.danh]:null].filter(Boolean))+kitLuxChip(x);
  const por=toilPor();const me=pMe();
- const occ=kitFacts(st.occ.map(o=>`${o.n}${o.F===2?" (trang trọng nhất)":o.F===1?" (gặp bề trên)":""}`));
+ const occ=kitFacts(st.occ.map(o=>kitAgendaFact(o,`${o.n}${o.F===2?" (trang trọng nhất)":o.F===1?" (gặp bề trên)":""}`)),{group:false});/* every row with its picture (owner 16/11 21:18Z, KIT §84 agenda rows) */
  const mama=toilSkill().mama;
  box.innerHTML=`<div class="toilw"><div class="toilfig"><h4 class="kpst">Hôm nay</h4>${occ}`+
   (mama?`<p class="past">${mama.name} khẽ nhắc: “Dịp ${st.F===2?"yến lễ phải lộng lẫy mà không vượt phẩm":st.F===1?"thỉnh an nên đoan trang, đủ phẩm":"thường ngày nên nhã nhặn, đừng phô trương"}.”</p>`:"")+`</div>`+
