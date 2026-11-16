@@ -79,10 +79,15 @@ function toilHostKind(host){if(host==="emp")return toilEmpTaste();let k="normal"
 function toilHostKey(host){return host==="th"?"th":host==="emp"?"emp":host&&host.id!=null?"v"+host.id:"x"}
 function toilSeen(host){const s=S.toilSeen;return !!(s&&s.wk===toilWk()&&s.h&&s.h[toilHostKey(host)])}
 function toilMark(host){if(!S.toilSeen||S.toilSeen.wk!==toilWk())S.toilSeen={wk:toilWk(),h:{}};S.toilSeen.h[toilHostKey(host)]=1}
+/* CO-OP (diemtrang-coop-look, CO-OP FIRST OD 16/11 ~20:32Z): the friend (a rival entry with coop:true) is judged by the look SHE made
+   today (her S.toilette, carried by jcoopworld LOOK at the week merge and live by her pos relay), never by the toilNpc roll. No sitting
+   today = mặt mộc; her dress verdict is toilDress on her real clothes (wd), as on her own seat. Both seats therefore read the same look. */
+function toilFriendRec(p){if(!p||!p.coop)return null;const t=p.toilette;if(t&&t.wk===toilWk())return t;let d={v:"hoppham",style:"fit"};try{d=toilDress(p,toilMaxF())}catch(e){}
+ return{wk:toilWk(),makeup:false,score:0,dv:d.v,style:d.style,coop:1}}
 /* {aff, danh, duc, why:[[text,n]…], words} or null — baseState: jaudit's own verdict (luxury / thiếu lễ); the dress part only when that is "ok" */
 function toilFx(p,host,F,baseState){if(!toilOn(p))return null;if(p===S&&toilSeen(host))return null;
- const rec=p===S?toilToday(S):toilNpc(p);const mk=rec&&rec.makeup?(rec.look==="diem"?"diem":toilTier(rec.score|0)):"moc";
- const dr=baseState&&baseState!=="ok"?null:p===S?toilDress(S,F):{v:rec.dv};
+ const rec=p===S?toilToday(S):toilFriendRec(p)||toilNpc(p);const mk=rec&&rec.makeup?(rec.look==="diem"?"diem":toilTier(rec.score|0)):"moc";
+ const dr=baseState&&baseState!=="ok"?null:p===S||p.coop?toilDress(p,F):{v:rec.dv};/* the friend: her real clothes (wd live via jcoopworld pos), the same call as on her seat */
  const hk=toilHostKind(host),R=BAL.toil.react[hk]||BAL.toil.react.normal;const C=BAL.toil.cap;
  const a1=dr?(R[dr.v]||0):0,a2=R[mk]||0;const aff=Math.max(C[0],Math.min(C[1],a1+a2));
  const danh=hk==="strict"&&dr&&dr.v==="giandi"&&F>=1?BAL.toil.strictPlainDanh:0;if(!aff&&!danh)return null;
@@ -499,7 +504,7 @@ const TOIL_LOOKS={
  /* owner 15/11 22:xxZ: "vụng" = deliberate clumsy makeup in her colours: uneven blotchy blush, a powder patch (the colour layer adds lips past the line, smudged lids, crooked brows, smeared ink) */
  vung:{skin:[255,252,248,.08,.6],blush:[236,112,130,.30,.17,0],lip:[206,60,80,.4,.08,.036],powder:0,vung:1},
  diem:{skin:[255,252,248,.24,.64],blush:[236,104,124,.40,.20,0],lip:[198,40,64,.56,.084,.038],powder:0}};
-function toilLookOfP(p){try{if(p!==S||!S)return null;if(TOIL.prev)return TOIL.prev.look;const r=toilToday(S);return r&&r.makeup&&r.look?r.look:null}catch(e){return null}}
+function toilLookOfP(p){try{if(!S)return null;if(p&&p!==S&&p.coop){const r=toilFriendRec(p);return r&&r.makeup&&r.look?r.look:null}if(p!==S)return null;if(TOIL.prev)return TOIL.prev.look;const r=toilToday(S);return r&&r.makeup&&r.look?r.look:null}catch(e){return null}}
 const TOIL_SVGC={};
 function toilRnd(seed){let a=(seed*2654435761)>>>0||1;return()=>{a=(a+0x6D2B79F5)>>>0;let t=a;t=Math.imul(t^t>>>15,t|1);t^=t+Math.imul(t^t>>>7,t|61);return((t^t>>>14)>>>0)/4294967296}}
 /* col = her picks (toilColOf): the blush disc and the fallback lip oval take HER colours; noLip = the lips come from the colour layer (§60) */
@@ -571,7 +576,7 @@ function toilColDef(){const o={};for(const k in TOIL_COL)o[k]=TOIL_COL[k].def;re
 function toilColE(part,k){const P=TOIL_COL[part];return P.L.find(x=>x[0]===k)||P.L.find(x=>x[0]===P.def)}
 function toilColRGB(part,k){return toilColE(part,k)[3].slice()}
 function toilColFix(c){const o=toilColDef();if(c&&typeof c==="object"){for(const k in o)if(TOIL_COL[k].L.some(x=>x[0]===c[k]))o[k]=c[k];if(c.want==="diem")o.want="diem";if(c.seed!=null&&isFinite(c.seed))o.seed=c.seed|0}return o}
-function toilColOfP(p){if(TOIL.prev)return TOIL.prev.col;const r=p===S?toilToday(S):null;return toilColFix(r&&r.col)}
+function toilColOfP(p){if(p&&p!==S&&p.coop){const r=toilFriendRec(p);return toilColFix(r&&r.col)}if(TOIL.prev)return TOIL.prev.col;const r=p===S?toilToday(S):null;return toilColFix(r&&r.col)}
 function toilColText(c){c=toilColFix(c);return ["mat","ma","son","may"].map(k=>toilColE(k,c[k])[1]).join(", ")}
 /* strength by look: lip / eyelid colour share, eyelid height (share of the lid→brow gap), brow tint, outer wing, lower lash line */
 const TOIL_MKS={vung:{lip:.62,eye:.5,eyeH:.62,brow:.5,wing:0,low:0,vung:1},dep:{lip:.54,eye:.5,eyeH:.5,brow:.45,wing:.08,low:0},diem:{lip:.86,eye:.7,eyeH:.68,brow:.68,wing:.22,low:.4}};
