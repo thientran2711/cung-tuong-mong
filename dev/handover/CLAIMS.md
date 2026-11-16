@@ -470,3 +470,8 @@
 | ART: por-vacant-hh (kit-size #7 empty Empress seat 3:4 portrait) + minigame-frame 'hands on the instrument' figure poses (sample first) (sonnet art; main s25 INBOX 21:58Z) | review/toil-room-art | C | session_011xDdVQYXHozUcGDzx2ZoV3 | RUNNING | 16/11 23:09Z |
 | WAITING BATCH 00:32: kit-size-8-r1 PASS 61c3283d (nit: kit-conform.js:83 accEtqCard no then) · minigame-frame-r1 PASS 9e856a4d (ONE tài nghệ frame for 30 mini-games; keeper archived) · origin-intros (batch-2300-oi after BAL fix) | — | main s26 | — | QUEUED | 16/11 23:09Z |
 | ART successor: đàn pose real shot + por-vacant-hh live upload after owner OK (sonnet art; prev session_011xDdVQYXHozUcGDzx2ZoV3 rolled over) | review/toil-room-art | C | session_011xDdVQJPz4LjYQi4oTALJR | RUNNING | 16/11 23:15Z |
+| WHOLE FIGURE REPAINT pilot consort-ty (sonnet art, 8–12 files a18, no upload; opened by lead #3) | review/fig-cutout-clean | C | session_011xDdVSwe9QkM3wQy68q8kW | RUNNING | 16/11 23:16Z |
+| WHOLE FIGURE REPAINT pilot consort-rest (sonnet art, 8–12 files a18, no upload; opened by lead #3) | review/fig-cutout-clean | C | session_011xDdVStNhTvqiYzrTkyv2p | RUNNING | 16/11 23:16Z |
+| WHOLE FIGURE REPAINT pilot maid (sonnet art, 8–12 files a18, no upload; opened by lead #3) | review/fig-cutout-clean | C | session_011xDdVP57zPp4r9Gi61fiKp | RUNNING | 16/11 23:16Z |
+| WHOLE FIGURE REPAINT pilot eunuch-kid-mama-man (sonnet art, 8–12 files a18, no upload; opened by lead #3) | review/fig-cutout-clean | C | session_011xDdVPRFDEZZgSVGj5StKL | RUNNING | 16/11 23:16Z |
+| WHOLE FIGURE REPAINT pilot hero-4k-test (sonnet art, 8–12 files a18, no upload; opened by lead #3) | review/fig-cutout-clean | C | session_011xDdVQK3g91ieUt2tJBYy7 | RUNNING | 16/11 23:16Z |
