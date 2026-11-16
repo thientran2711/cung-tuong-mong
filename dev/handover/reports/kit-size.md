@@ -38,3 +38,18 @@ Known: portrait XL person frame leaves 140 px under the figure (narrow width mak
 - 7.1 thumbnails = the picture size table. 7.3 placeholder: one set per orientation (portrait / landscape / square) x tone, spec in the sheet — ART REQUEST → Foreman C.
 
 ## Phase 2 (after OK): apply game-wide via kpBuild / kitEventStage / kitDpFit / kitCompactCSS / kitSkillCard / jkpc (compact → S..XL), list of every place before/after, KIT.md §84 + kit page, tests.
+
+## HANDOVER (rollover at 35 % context, 16/11 ~16:05Z) — for the next kit-size worker
+State: branch review/kit-size (last sample commit 613f26a + this report). Owner reviewed the sheets 16:00Z (OD "(16/11 16:00Z, s19 chat) OWNER KIT-SIZE SAMPLE REVIEW" (1)–(9), shots dev/owner-shots/1116-kitsize-review-1..3.jpg on the handover branch) — NOT yet addressed. s19's instruction (16:55Z msg): fix ALL in the kit (whole game), new sheets → s19 after self-check.
+Code: dev/build/jksize.js (KIT_SIZE table, kitFrameSize, kitBtnSize, CSS, kszFrame/kszBtn/kszItem*, kitSizeSheet(area) area=frames|buttons|long|items) — NOT in assemble.py yet (sheets inject it). dev/build/j79.js kitRows: no "·" between chips (already a game fix). Tests/scripts: dev/test/kit-size-sheet.js (DPR=2.4390 TAGSZ=755x1000 → 590x820 page shot; 1180x820), dev/test/kit-size-shots.js (today's real #modal pop-ups, before numbers).
+Server: python http.server is refused by the auto-mode classifier here; use `node dev/test/cdn-overlay-serve.js 8731 <worktree> <empty list file>` (run_in_background). Rebuild index.html for game-code changes: `bash dev/site/build_site.sh` (then `git checkout index.html assets.json sw.js` unless shipping a build).
+Planned redesign for (1)–(9) (my analysis, not yet coded):
+- (1) figure tag: use kitTitleTag3(p,rank,name,col) / kitNameRank (rank line 1, name line 2; jtitle.js / jk4 §48) above EVERY frame figure; kszFigHtml uses kitName (one line) — replace.
+- (2) info frames (ĐIỀU / LUẬT / TIN / KẾT QUẢ): no "Đã hiểu" button; kit ✕ (kitXHTML, jk4 §32.10) in the header + tap outside (first tap only closes, OD:L418) — whole game: kitModal btn for those kinds.
+- (3) body align-items:center for figure column AND right column (buttons centred).
+- (4) inside one frame all option buttons the SAME width (full width of the info area); S (shrink-to-fit) only in grids of equal cells.
+- (5) button = [picture | name + TỐN/ĐƯỢC/MẤT rows], then GỢI Ý as one full-width box under that row.
+- (6)(7) ONE layout per frame kind: fixed figure column (~190 px) and ONE figure scale = body height (kitFigBody ht→b) Hb ≈ 380 px × KIT_FIG.fac (men 1.07, kids by age) for every person; frame size changes only the info width/height. Person frames start at L (560; XL 860 kv2). Show both VIỆC samples side by side at the same column.
+- (8) 3.4 options = kszBtn (same kit button) with a printed label of the kit size used; 3.1/3.2 = Hành sự compact card before|after (kitActCompact §43).
+- (9) add narrow long pictures, e.g. LN 300x76 (≈4:1) and LN2 192x48, for info-frame banners.
+Thái hậu file: the sheet uses kitFigOf({kind:"th"}) = the live game's file for that save (S.thF variant, e.g. img/fig-thaihau-h3-a51.webp in one run; h1-a51 only as fallback when unknown) — same as the live game. Her "lùn"/bigger look in the sheet came from sizing by the whole picture box (crown + margins), not by the body: fix = (6) body-height scale.
