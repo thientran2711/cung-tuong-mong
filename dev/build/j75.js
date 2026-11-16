@@ -153,18 +153,21 @@ const nm0=npcMonthly;npcMonthly=function(v){const a0=ap,fi0=v.fakeIll;let seen="
 /* NPCs work for Sủng as she does: the same acts as her deck cards (art ≥3: dance, zither, chess; else a small gift), same costs and odds shape */
 const EFF={"Tham vọng":.35,"Ghen tuông":.25,"Kiêu ngạo":.25,"Hiền lành":.1,"Nhu mì":.1};
 /* the act she would do now (her best art, else a small gift) — read by the weekly pass below and by the NPC agent loop (jagent, AG1) */
+/* ONE table (BAL.deck, jbal2) and ONE odds formula for her cards (j2 artActs) and the NPC's same act (r1 fault 7) */
+function deckOdds(p,k){const D=BAL.deck[k];const l=typeof artW2==="function"&&p&&p.arts?artW2(p,k):(p.arts&&p.arts[k]||0);return D.o[0]+l*D.o[1]+(D.st?(+p[D.st[0]]||0)/D.st[1]:0)+mm()}
+function deckGain(k){const D=BAL.deck[k];return k==="ky"?Object.assign({},D.w,{danh:BAL.tw.g.ky[0],tamco:BAL.tw.g.ky[1]}):Object.assign({},D.w)}
+function deckLoss(k){return k==="vu"?{danh:-BAL.tw.g.vu[2]}:Object.assign({},BAL.deck[k].l||{})}
+const DECKN={vu:"múa Kinh hồng vũ trong yến tiệc",cam:"đàn khúc Phượng cầu hoàng vọng sang Dưỡng Hòa điện",ky:"đánh cờ cùng Hoàng thượng"};
 function npcEffortKind(v){if(v.confined||v.out||illOf(v)||(v.preg||0)>=7)return null;
- const A=v.arts||{};let n,c,o,w,lose=2;
- let kd="";if((A.vu||0)>=3&&v.suc>=40){kd="vu";n="múa Kinh hồng vũ trong yến tiệc";c={suc:-20};o=odA(v,40+A.vu*8+effSac(v)/5+mm());w={sung:15,danh:3}}
- else if((A.cam||0)>=3&&v.suc>=30){kd="cam";n="đàn khúc Phượng cầu hoàng vọng sang Dưỡng Hòa điện";c={suc:-10};o=odA(v,40+A.cam*8+(v.tai||0)/5+mm());w={sung:12}}
- else if((A.ky||0)>=3&&v.suc>=25){kd="ky";n="đánh cờ cùng Hoàng thượng";c={suc:-5};o=odA(v,45+A.ky*8+mm());w={sung:5,danh:BAL.tw.g.ky[0],tamco:BAL.tw.g.ky[1]};lose=1}
- else if((v.bac||0)>=10){kd="qf";n=pick(QF);c={bac:-10};o=odA(v,55+v.sung/5+mm());w={sung:3};lose=0}
- else return null;
- return {kd,n,c,o,w,lose}}
+ const A=v.arts||{},B=BAL.deck;let kd="";for(const k of ["vu","cam","ky"])if((A[k]||0)>=B[k].lv&&v.suc>=B[k].sucMin){kd=k;break}
+ if(kd){const l=deckLoss(kd);return{kd,n:DECKN[kd],c:Object.assign({},B[kd].c),o:odA(v,deckOdds(v,kd)),w:deckGain(kd),lose:-(l.sung||0),l}}
+ if((v.bac||0)>=B.qf.bac)return{kd:"qf",n:pick(QF),c:{bac:-B.qf.bac},o:odA(v,B.qf.o),w:{sung:B.qf.w},lose:0,l:{}};
+ return null}
+window.deckOdds=deckOdds;window.deckGain=deckGain;window.deckLoss=deckLoss;
 /* force = the agent loop chose it (no weekly trait frequency) */
 function npcEffort(v,force){const K=npcEffortKind(v);if(!K)return "";const pt=EFF[v.trait]!=null?EFF[v.trait]:.18;if(!force&&Math.random()>pt*FAIRN.eff)return "";
  const {kd,n,c,o,w,lose}=K;
- ap(v,c);const b=v.sung;const ok=roll(o);ap(v,ok?w:kd==="vu"?{danh:-BAL.tw.g.vu[2]}:{sung:-lose});
+ ap(v,c);const b=v.sung;const ok=roll(o);ap(v,ok?w:K.l);
  /* two-way (owner 16/11 s21): her Kinh hồng vũ card also stirs the others (ghen +10, liking −5); an NPC dance does the same */
  if(kd==="vu"){liveRivals(true).forEach(x=>{if(x!==v){x.ghen=cl((x.ghen||0)+BAL.tw.g.vu[0],0,100);affAdd(x,v,-BAL.tw.g.vu[1])}});affAdd(S,v,-BAL.tw.g.vu[1])}
  /* the change names whose Sủng it is; a line with no change says nothing about numbers (owner 11/15: "Sủng nàng 45 → 45") */

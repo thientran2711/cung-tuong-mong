@@ -105,7 +105,7 @@ function agOpts(v,N,need){const O=[];
   const o=TW[k].o?TW[k].o(v,t):100;const u=agU(v,N2,o,{g:gf(BAL.tw.g),l:{}},twCost(k),tag);if(u<=0)continue;
   O.push({k,t:k==="follow"?twFollowT(v):t,u,tag,at:(kh,vv,tt)=>tt===S?"home":agAt(tt,kh),act:AGACTW[k]||k,mot:g.why})}
  /* her Sủng deck act (the player's dance / zither / chess / small gift cards) */
- if(!need||need==="sung"||need==="danh")try{const K=window.npcEffortKind&&window.npcEffortKind(v);if(K){const gl={g:K.w,l:K.kd==="vu"?{danh:BAL.tw.g.vu[2]}:{sung:K.lose}};const tag=K.kd==="qf"?"greet":"art";const u=agU(v,N,K.o,gl,K.c,tag);
+ if(!need||need==="sung"||need==="danh")try{const K=window.npcEffortKind&&window.npcEffortKind(v);if(K){const gl={g:K.w,l:Object.fromEntries(Object.entries(K.l||{}).map(([f,x])=>[f,-x]))};/* the deck act's own loss (BAL.deck via j75) */const tag=K.kd==="qf"?"greet":"art";const u=agU(v,N,K.o,gl,K.c,tag);
   if(u>0)O.push({k:"effort",kd:K.kd,t:null,u,tag,act:K.n,at:kh=>K.kd==="cam"?palaceOf(v):K.kd==="qf"?(/ngự hoa viên/.test(K.n)?"vuon":"dtd"):agEmpAt(kh)})}}catch(e){agErr("effort",e)}
  return O}
 
