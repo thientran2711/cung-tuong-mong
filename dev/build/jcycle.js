@@ -103,6 +103,8 @@ const fl0=flip;flip=function(){const r=fl0.apply(this,arguments);try{if(!S||S.de
 function cyPhase(p){try{p=p||S;if(!S||!p||!cyHas(p,cyCur()))return"";const d=(((S.tuan||0)-cyBase(p).t)%3+3)%3;return d===1?"peak":d===0?"cyc":"low"}catch(e){return""}}
 window.cyPhase=cyPhase;
 const cc0=conceiveCh;conceiveCh=function(p){const c=cc0.apply(this,arguments);try{const h=cyPhase(p||S),F=B().fert||{};if(h&&F[h]!=null)return Math.round(c*F[h])}catch(e){}return c};
+/* a tryst / affair (trystCh, jbal): the BAL.trystC floor/cap bound the chance BEFORE the cycle factor, so her cycle tuần stays near nil and the peak still rises */
+trystCh=function(p){p=p||S;const T=BAL.trystC,v=cl_(cc0(p),T[0],T[1]);try{const h=cyPhase(p),F=B().fert||{};if(h&&F[h]!=null)return Math.min(T[1],Math.round(v*F[h]))}catch(e){}return v};
 const flF=flip;flip=function(){const r=flF.apply(this,arguments);try{if(!S||S.dead||(typeof isSrv==="function"&&isSrv()))return r;const c=cyb();
   if(!S.preg&&cyPhase(S)==="peak"&&c.ft!==wk()){c.ft=wk();let w="";try{w=chanceLvl(conceiveCh(S))}catch(e){}log(`Ma ma dặn nhỏ: qua kỳ nguyệt sự chừng mươi ngày, tuần này là lúc dễ đậu thai nhất${w?` (có thai mỗi lần thị tẩm: ${w})`:""}.`)}
  }catch(e){console.error(e)}return r};

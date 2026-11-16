@@ -3260,12 +3260,12 @@ function affairExposed(m,how){/* full weight: the man dies; she faces death (fir
  A.push({n:"Chào hỏi đúng lễ",o:100,w:{danh:1},x:"hắn quý ngươi +5",go:()=>{m.af+=5}});
  A.push({n:"Liếc mắt đưa tình",o:od(55+S.sac/5),x:`tình ý của hắn +12 · có thể bị người thấy, một phi tần nắm 1 chứng cứ của ngươi: ${chanceW(Math.round(risk/3))}`,l:{},go:()=>{m.tinh+=12+(m.trait==="đa tình"?6:0);deedAdd(S,"flirt",null,1,`liếc mắt đưa tình với ${m.name}`);if(roll(risk/3)){const v=pick(liveRivals(true));if(v){/*evok: flirt deed written just before*/evA(v,S,1);log(`Có kẻ thấy ngươi liếc mắt với ${m.name}.`)}}}});
  if(m.tinh>=30)A.push({n:"Trao khăn tay",o:od(60+S.tamco/5),x:`hắn giữ khăn tay của ngươi (là tang vật nếu bị lục) · tình ý +15`,go:()=>{m.tinh+=15;m.letters++;S.aff=S.aff||{};S.aff[m.id]=(S.aff[m.id]||0)+1}});
- if(m.tinh>=50){const w=watcher();A.push({n:"Hẹn gặp riêng",o:w?cl(100-risk,5,95):0,lock:!w,t:"cần một người hầu trung thành (lòng 60+) canh cửa",act:1,x:`đêm ấy kín đáo: Sức +12, hắn thành người che chở · có thai: ${chanceW(conceiveCh(S))} · hỏng: bị bắt gặp, tội chết`,run:()=>tryst(m,risk)})}
+ if(m.tinh>=50){const w=watcher();A.push({n:"Hẹn gặp riêng",o:w?cl(100-risk,5,95):0,lock:!w,t:"cần một người hầu trung thành (lòng 60+) canh cửa",act:1,x:`đêm ấy kín đáo: Sức +12, hắn thành người che chở · có thai: ${chanceW(trystCh(S))} · hỏng: bị bắt gặp, tội chết`,run:()=>tryst(m,risk)})}
  if(m.tinh>=30)A.push({n:"Cắt đứt",o:100,x:"hắn thôi tơ tưởng; giảm hẳn rủi ro",go:()=>{m.tinh=0}});
  return A}})();
 function tryst(m,risk){if(roll(risk)){affairExposed(m,`Đêm ${S.name} hẹn ${m.name} bị bắt gặp.`);return "Bị bắt gặp."}
  m.trysts++;m.tinh+=10;S.lastTryst=wk();apply({suc:12});S.protector=m.id;S.an=S.an||0;let r=`Đêm ấy trôi qua kín đáo. Sức +12. ${m.name} nguyện che chở ngươi. Người dễ biết chuyện: ${whoMayKnow()}.`;
- if(!S.preg&&roll(15)){S.preg=1;S.hidden=true;S.pregWk=wk();S.trueFather=m.id;const ok=(S.nightLog||[]).some(w=>Math.abs(w-wk())<=1);S.pregMismatch=!ok;r+=ok?" Mấy hôm sau ngươi biết mình có thai; ngày tháng trùng đêm thị tẩm.":` <b class="r">Ngươi có thai, mà sổ Kính sự phòng không có đêm thị tẩm nào khớp ngày.</b>`}
+ if(!S.preg&&roll(trystCh(S))){S.preg=1;S.hidden=true;S.pregWk=wk();S.trueFather=m.id;const ok=(S.nightLog||[]).some(w=>Math.abs(w-wk())<=1);S.pregMismatch=!ok;r+=ok?" Mấy hôm sau ngươi biết mình có thai; ngày tháng trùng đêm thị tẩm.":` <b class="r">Ngươi có thai, mà sổ Kính sự phòng không có đêm thị tẩm nào khớp ngày.</b>`}
  return r}
 /* pregnancy that the book cannot cover: her roads, each with its odds and cost */
 (function(){const d0=deal;deal=function(){d0.apply(this,arguments);if(!S||!S.preg||!S.pregMismatch||S.out)return;
@@ -3294,7 +3294,7 @@ function manCard(m){const f=pMan(m);const known=m.seen===bkey();
 /* two-way: a consort with a lover may conceive by him; the Kính sự phòng book can expose her the same way it exposes the player */
 (function(){const a0=affairMonth;affairMonth=function(){let ev=a0.apply(this,arguments);try{if(!S||S.dead)return ev;
  for(const v of liveRivals(false)){const m=v.affair&&manById(v.affair);
-  if(m&&!v.preg&&!(v.lastBirth!=null&&S.turn-v.lastBirth<6)&&roll(5)){v.preg=1;v.hidden=true;v.pregWk=wk();v.trueFather=m.id;v.pregMismatch=!(v.nightLog||[]).some(w=>Math.abs(w-wk())<=1)&&roll(70)}
+  if(m&&!v.preg&&!(v.lastBirth!=null&&S.turn-v.lastBirth<6)&&roll(trystCh(v))){v.preg=1;v.hidden=true;v.pregWk=wk();v.trueFather=m.id;v.pregMismatch=!(v.nightLog||[]).some(w=>Math.abs(w-wk())<=1)&&roll(70)}
   if(v.preg&&v.pregMismatch){const foes=others(v).filter(x=>x!==S&&x.alive&&rel(x,v)<-20);if(foes.length&&roll(10)){const x=pick(foes);evA(x,v,3)}
    if(roll(8+(S.mat||0)*5)){/*evok: pregMismatch (deedSync)*/evA(S,v,2);v.pregMismatch=false;noteAdd(v.id,`Tai mắt: ngày ${v.name} có thai không khớp đêm thị tẩm nào trong sổ Kính sự phòng (chứng cứ +2)`);ev+=`Tai mắt báo: ngày ${v.name} có thai không khớp sổ Kính sự phòng. `}}
   if(!v.preg){v.pregMismatch=false;v.trueFather=null}}}catch(e){}return ev}})();
@@ -4225,7 +4225,7 @@ function mindTell(v,t,k){mindLog(v,"_tell");const tc=witOf(v);let c=12+(S.mat||0
 /* someone with a plan in hand waits for it instead of starting another */
 (function(){const n0=npcAct;npcAct=function(v,t){if(v&&v.plan)return"";return n0.apply(this,arguments)}})();
 /* ================= BALANCE KNOBS (measured with the sensible / random bots; see the report) ================= */
-const BAL={wkFinCap:1,/* Đức from handmade works (kinh, vật cầu phúc): at most this many per month (j83 wkFinLeft) */ oanLv:[5,20,45,75],/* oán word ladder (VANPHONG): <5 Không oán · <20 Chút oán · <45 Oán · <75 Oán sâu · else Oán hận */outQ:85,hz:3.2,conc:.5,/* conception per night × (D57 owner 16/11: doubled from .25 for everyone; the cycle peak/low is BAL.cyc.fert in jcycle.js) */later:6,hhTh:55,birthAdd:2,
+const BAL={wkFinCap:1,/* Đức from handmade works (kinh, vật cầu phúc): at most this many per month (j83 wkFinLeft) */ oanLv:[5,20,45,75],/* oán word ladder (VANPHONG): <5 Không oán · <20 Chút oán · <45 Oán · <75 Oán sâu · else Oán hận */outQ:85,hz:3.2,conc:.5,/* conception per night × (D57 owner 16/11: doubled from .25 for everyone; the cycle peak/low is BAL.cyc.fert in jcycle.js) */trystC:[5,60],/* a tryst / affair conception = trystCh(p) = conceiveCh(p) kept within [lo,hi] (her Hẹn gặp riêng j22, Tư thông jroute, an NPC consort's affair month j22) */later:6,hhTh:55,birthAdd:2,
  /* ONE SOURCE for every promotion threshold the player sees (checks in promoReqP/candOK and every text read these) */
  hhThNoSon:80,hhThNoSonHieu:70,hhDuc:50,hhDucHeir:40,qBlockHh:-40,qBlockTh:50,hiOppHh:-30,hiOppTh:30,hiOppFac:180,
  /* handmade works (j83), by material 0 thường / 1 tốt / 2 quý: matQ = phần added to the score; cap = highest tier it can reach (only quý makes a
@@ -4270,6 +4270,7 @@ function hhNeed(p){p=p||S;const sn=sonsOf(p).length>0,hieu=typeof has==="functio
   const t=`<b>Thánh chỉ: Thái hậu chọn ${n.name}, con gái danh môn, vào cung lập làm Hoàng hậu.</b> Ghế trống không mở tranh. `;log(t);return t}return c0.apply(this,arguments)}})();
 /* fewer births per life: conception (after the ×0.7) scaled; a woman who has borne before is a little safer in labour (everyone alike) */
 (function(){const c0=conceiveCh;conceiveCh=function(p){return Math.round(c0.apply(this,arguments)*BAL.conc)}})();
+function trystCh(p){return cl(conceiveCh(p),BAL.trystC[0],BAL.trystC[1])}
 /* palace-start: NPC conception slowed in the first game years of a NEW game (S.ps), BAL.ps.npcConc; the player is never scaled here */
 (function(){const c0=conceiveCh;conceiveCh=function(p){p=p||S;const r=c0.apply(this,[p].concat([].slice.call(arguments,1)));try{if(p===S||!S||!S.ps)return r;const y=Math.floor((S.turn||0)/12),m=BAL.ps.npcConc[y];return m==null?r:Math.round(r*m*10)/10}catch(e){return r}}})();
 (function(){const b0=birthRisk;birthRisk=function(p){const r=b0.apply(this,arguments);const n=p===S?(S.kids||[]).length:(p.kids||[]).length;if(n>0&&p===S&&S.birthWhy)S.birthWhy=S.birthWhy.concat([]);return cl(r-(n>0?BAL.later:0)+BAL.birthAdd,1.5,60)}})();
@@ -24943,14 +24944,14 @@ function rtTtCards(){const T=rtS(),A=[],tt=T.tt,ducK=S.duc>=60?"lương tâm c�
   if(tt.st>=3){const sp2=night&&sp&&(sp.k==="vuon"||sp.k==="lc"||sp.k==="home")?sp:null;const o=sp2?rtSeeO(sp2.k,8):25;
    A.push(rtCard({id:"tt3",n:`Đêm riêng với ${rtMnm(m)}`,t:"Đêm khuya, đèn tắt, cửa cài. Chuyện sau đó không ai được biết.",art:RT_ART.hen,c:{suc:-10,duc:-3},o,k:3,
     need:[["buổi tối",night],[sp2?`y ở chỗ hẹn được (${rtPlace(sp2.k)})`:"y lẻn đến được đêm nay",!!sp2],[`kẻ hầu ngươi tin cẩn canh cửa (lòng 60+, Chủ tin 60+)`,!!w]],
-    x:`Sức +12 · tình ý +10 · có thai: ${word(cl(conceiveCh(S),5,60))}`,lx:"bị bắt gặp giữa đêm · tội tư thông",kem:`con sinh ra có cha thật là y (lớn lên có thể giống y) · Lời ra tiếng vào +${Math.round(18*rtDf().h)}${ducK?" · "+ducK:""}`,
+    x:`Sức +12 · tình ý +10 · có thai: ${word(trystCh(S))}`,lx:"bị bắt gặp giữa đêm · tội tư thông",kem:`con sinh ra có cha thật là y (lớn lên có thể giống y) · Lời ra tiếng vào +${Math.round(18*rtDf().h)}${ducK?" · "+ducK:""}`,
     go:()=>rtNightOk(m,sp2.k),fail:()=>{rtStat("tt_nightseen");rtSeen(m,sp2?sp2.k:"vuon","dem")}}))}}
  if((m.rw==="họa sư"||m.rw==="nhạc sư")&&!rtNight()&&T.order!==wk())A.push(rtCard({id:"ttord",n:`Truyền ${m.rw} vào cung`,t:m.rw==="họa sư"?"Xin Nội vụ phủ cho họa sư vào vẽ một bức chân dung.":"Xin Nội vụ phủ cho nhạc sư vào dạy đàn.",art:RT_ART.ta,c:{bac:-30},k:1,x:"y vào cung ngươi suốt tuần này (có cớ gặp)",kem:"Lời ra tiếng vào +3",go:()=>{T.order=wk();rtHeat(3);log(`${rtMnm(m)} vào cung ngươi theo lệnh Nội vụ phủ.`)}}));
  A.push(rtCard({id:"ttcut",n:`Cắt đứt với ${rtMnm(m)}`,t:"Trả lại tín vật, coi như chưa từng quen.",art:RT_ART.tt,k:1,w:{duc:2},x:"lời ra tiếng vào lắng bớt · lối Tư tình khép lại",kem:"y đau lòng",go:()=>{m.tinh=0;T.tt=null;rtHeat(-10);rtEmo("buon",40,`cắt đứt với ${m.name}`);log(`Ngươi trả lại tín vật cho ${rtMnm(m)}. Từ nay mỗi người một ngả.`)}}));
  return A}
 function rtNightOk(m,k){const T=rtS(),tt=T.tt;m.trysts=(m.trysts||0)+1;m.tinh=(m.tinh||0)+10;S.lastTryst=wk();apply({suc:12});rtHeat(18);tt.night=(tt.night||0)+1;rtEmo("vui",50,`đêm với ${m.name}`);rtStat("tt_night");
  let r=`Đêm ấy trôi qua kín đáo ở ${rtPlace(k)}.`;
- if(!S.preg&&roll(cl(conceiveCh(S),5,60))){S.preg=1;S.hidden=true;S.pregWk=wk();S.trueFather=m.id;const ok=(S.nightLog||[]).some(x=>Math.abs(x-wk())<=1);S.pregMismatch=!ok;rtStat("tt_preg");
+ if(!S.preg&&roll(trystCh(S))){S.preg=1;S.hidden=true;S.pregWk=wk();S.trueFather=m.id;const ok=(S.nightLog||[]).some(x=>Math.abs(x-wk())<=1);S.pregMismatch=!ok;rtStat("tt_preg");
   r+=ok?" Mấy hôm sau ngươi biết mình có thai; ngày tháng trùng đêm thị tẩm.":` <b class="r">Ngươi có thai, mà sổ Kính sự phòng không có đêm thị tẩm nào khớp ngày.</b>`}
  log(r);if((m.tinh||0)>=80&&!tt.prom&&["thị vệ","vương gia","thái y"].includes(m.rw)){tt.prom=1;tt.st=4;rtPush("rtPromise",{m:m.id})}}
 /* seen while meeting: the witness decides by her nature (same rule as an NPC seeing an NPC) */
@@ -38304,6 +38305,8 @@ const fl0=flip;flip=function(){const r=fl0.apply(this,arguments);try{if(!S||S.de
 function cyPhase(p){try{p=p||S;if(!S||!p||!cyHas(p,cyCur()))return"";const d=(((S.tuan||0)-cyBase(p).t)%3+3)%3;return d===1?"peak":d===0?"cyc":"low"}catch(e){return""}}
 window.cyPhase=cyPhase;
 const cc0=conceiveCh;conceiveCh=function(p){const c=cc0.apply(this,arguments);try{const h=cyPhase(p||S),F=B().fert||{};if(h&&F[h]!=null)return Math.round(c*F[h])}catch(e){}return c};
+/* a tryst / affair (trystCh, jbal): the BAL.trystC floor/cap bound the chance BEFORE the cycle factor, so her cycle tuần stays near nil and the peak still rises */
+trystCh=function(p){p=p||S;const T=BAL.trystC,v=cl_(cc0(p),T[0],T[1]);try{const h=cyPhase(p),F=B().fert||{};if(h&&F[h]!=null)return Math.min(T[1],Math.round(v*F[h]))}catch(e){}return v};
 const flF=flip;flip=function(){const r=flF.apply(this,arguments);try{if(!S||S.dead||(typeof isSrv==="function"&&isSrv()))return r;const c=cyb();
   if(!S.preg&&cyPhase(S)==="peak"&&c.ft!==wk()){c.ft=wk();let w="";try{w=chanceLvl(conceiveCh(S))}catch(e){}log(`Ma ma dặn nhỏ: qua kỳ nguyệt sự chừng mươi ngày, tuần này là lúc dễ đậu thai nhất${w?` (có thai mỗi lần thị tẩm: ${w})`:""}.`)}
  }catch(e){console.error(e)}return r};
@@ -40112,7 +40115,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="efd968ea43ba";window.CTM_BUILD=BUILD;
+const BUILD="491e116c65ca";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
