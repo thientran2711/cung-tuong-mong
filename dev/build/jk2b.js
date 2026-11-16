@@ -297,7 +297,7 @@ function kitHint(o,m,lv){if(lv==null)lv=kitHintLevel();if(!o)return{hint:"",risk
  return{hint:parts.join("; "),risk}}
 /* the DOM fallback (a hidden-outcome button with no option object): its rows as a pseudo option */
 function kitHintOf(b,o){if(o)return kitHint(o,typeof Q!=="undefined"?Q[0]:null);const rows={};b.querySelectorAll(".kb .kr").forEach(r=>{const l=((r.querySelector(".krl")||{}).textContent||"").trim();const v=r.querySelector(".krv");if(v)(rows[l]=rows[l]||[]).push(...[...v.querySelectorAll(".ef")].map(e=>e.textContent.trim()))});
- const odd=((b.querySelector(":scope > .kat > .kodds")||{}).textContent||"").match(KIT_HINT_LADDER);
+ const odd=((b.querySelector(":scope > .kat > .kodds, :scope > .kabody > .kat > .kodds")||{}).textContent||"").match(KIT_HINT_LADDER);
  const j67=[odd?odd[1]:"",rows["Được"]&&"thành: "+rows["Được"].join(", "),rows["Mất"]&&"hỏng: "+rows["Mất"].join(", "),rows["Kèm"]&&"kèm: "+rows["Kèm"].join(", ")].filter(Boolean).join(" · ");
  return kitHint({j67},null)}
 /* KIT PARTS (KIT 28.6, kit sample page): the hint row and the risk chip — every hidden-outcome option uses these, nothing private */
@@ -307,13 +307,13 @@ function kitRisk(word){const r=KIT_RISK[word]||KIT_RISK["có rủi ro"];return `
 function kitHideOut(b){try{if(!b||!b.classList.contains("ka")||b.dataset.khid==="1")return;b.dataset.khid="1";b.classList.add("khideout");
  /* the hint + risk chip, read from the option's data before its outcome rows go */
  let H=null;try{const M=b.closest("#modal");const o=M&&typeof Q!=="undefined"&&Q[0]&&Q[0].opts&&b.dataset.m!=null?Q[0].opts[+b.dataset.m]:null;H=kitHintOf(b,o)}catch(e){console.error("kitHint",e)}
- const od=b.querySelector(":scope > .kat > .kodds");if(od&&b.dataset.kodds!=="1")od.remove();b.querySelectorAll(".kb .kr").forEach(r=>{if(!r.classList.contains("kr-ton")&&!r.classList.contains("kr-why"))r.remove()});
+ const od=b.querySelector(":scope > .kat > .kodds, :scope > .kabody > .kat > .kodds");if(od&&b.dataset.kodds!=="1")od.remove();b.querySelectorAll(".kb .kr").forEach(r=>{if(!r.classList.contains("kr-ton")&&!r.classList.contains("kr-why"))r.remove()});
  let ton=b.querySelector(".kr-ton");if(ton){const v=ton.querySelector(".krv");[...v.children].forEach(e=>{if(e.classList.contains("ksep"))return;if(!KIT_COSTRE.test(e.textContent))e.remove()});
   [...v.children].forEach((e,i,a)=>{if(e.classList.contains("ksep")&&(!e.previousElementSibling||e.previousElementSibling.classList.contains("ksep")||!e.nextElementSibling))e.remove()});
   if(!v.querySelector(".ef"))ton.remove()}/* owner 13:25Z: no cost → no Tốn row at all (never "Tốn: không") */
  let kb=b.querySelector(".kb");if(!kb){b.insertAdjacentHTML("beforeend",`<small class="kb"></small>`);kb=b.querySelector(".kb")}
  if(H){if(H.hint)kb.insertAdjacentHTML("beforeend",kitHintRow(H.hint));
-  const kat=b.querySelector(":scope > .kat");if(kat&&!kat.querySelector(".krisk"))kat.insertAdjacentHTML("beforeend",kitRisk(H.risk))}}catch(e){console.error("kitHideOut",e)}}
+  const kat=b.querySelector(":scope > .kat, :scope > .kabody > .kat");/* review/opt-pics: an option card with its picture holds .kat inside .kabody (KIT 6.2) */if(kat&&!kat.querySelector(".krisk"))kat.insertAdjacentHTML("beforeend",kitRisk(H.risk))}}catch(e){console.error("kitHideOut",e)}}
 (function(){const n0=kaNorm1;kaNorm1=function(b){const r=n0.apply(this,arguments);try{if(b&&b.dataset&&(b.dataset.khide==="1"||b.closest("[data-khide-all]")))kitHideOut(b)}catch(e){}return r}})();
 /* the kit sample page for this section (kitRisk, kitHintRow, an event option in cost mode, kitResultSeal, kitKemRow) is ONE page: jkitpage.js
    (#kit, KIT §47), samples "§53" (reviewer opt-render r7 dropped the duplicate ?kit / kitSample() page). */
@@ -887,11 +887,16 @@ addEventListener("resize",()=>{const w=kitPcWide();if(window.__kpcW!==undefined&
 /* the card is at most the panel's height (one scroller inside the panel); a newly opened person is scrolled fully into view */
 function kitPcSize(){try{const P=$("panel");if(!P)return;const cs=getComputedStyle(P);const pb=parseFloat(cs.paddingBottom||0),pt=parseFloat(cs.paddingTop||0);
  const sub=P.querySelector(".ksub");const subOn=!!(sub&&sub.offsetParent);
+ /* KIT 45.2 (owner 16/11 "Mất chữ", review/hc-portrait-r1): since KIT §45 the sub-tabs sit INSIDE the pane bar (.kpbar: + its bottom padding,
+    hair line and the kit gap under it), so the sticky edge is the BAR's bottom + its gap, not the .ksub row's bottom — measuring the row
+    scrolled the face strip 17 px under the bar (palace labels cut in half under Chí tôn / Phi tần / Nam nhân / Cung nhân) */
+ const kbar=P.querySelector(":scope>.kpbar"),kbarOn=!!(kbar&&kbar.offsetParent);const kbarGap=()=>kbarOn?parseFloat(getComputedStyle(kbar).marginBottom)||0:0;
+ const subH=kbarOn?kbar.offsetHeight+kbarGap():subOn?sub.offsetHeight:0;
  P.querySelectorAll(".pc[data-k2]").forEach(pc=>{const pr=P.getBoundingClientRect();const bt=parseFloat(cs.borderTopWidth||0),bb=parseFloat(cs.borderBottomWidth||0);
   /* the sub-tab bar is sticky at the same place it rests (first child): the card's room is from its bottom to the panel's inner bottom */
   /* T = whatever follows the card inside the panel (wrapper padding): the card's room shrinks by it so the card can sit flush under the bar */
   let T=0;{let e=pc;while(e&&e!==P){let n=e.nextElementSibling;while(n){if(n.offsetParent)T+=n.getBoundingClientRect().height;n=n.nextElementSibling}const ps=e.parentElement;if(ps&&ps!==P){const c2=getComputedStyle(ps);T+=parseFloat(c2.paddingBottom||0)+parseFloat(c2.borderBottomWidth||0)}e=ps}}
-  const full=Math.floor((pr.bottom-bb)-(subOn?(pr.top+bt+pt+sub.offsetHeight):(pr.top+bt+pt))-T);
+  const full=Math.floor((pr.bottom-bb)-(pr.top+bt+pt+subH)-T);
   /* portrait screens under 1000 px (Fold, phones): the card takes the WHOLE panel under the sticky sub-tabs and the panel scrolls the
      face strip up out of the way, so the header + at least one whole act card are in view; wide screens keep strip + card together */
   const top0=pc.getBoundingClientRect().top+P.scrollTop-pr.top;const rest=P.clientHeight-pb-top0-4;
@@ -901,7 +906,7 @@ function kitPcSize(){try{const P=$("panel");if(!P)return;const cs=getComputedSty
   const h=narrow?full-stripH:(rest<Math.min(320,full)?full:rest);
   pc.style.setProperty("--kpcmax",Math.max(200,Math.round(h))+"px");pc.classList.toggle("kpcfull",h===full);
   const nm=(pc.querySelector(".pcname")||{}).textContent||"";if(P.__kpcN!==nm||narrow||!P.__kpcUser){const fresh=P.__kpcN!==nm;P.__kpcN=nm;if(!fresh&&P.__kpcUser)return;const fit=()=>{try{const q=P.querySelector(".pc[data-k2]");if(!q)return;const a=P.getBoundingClientRect(),c=q.getBoundingClientRect();const sub2=P.querySelector(".ksub");
-   const sb=sub2&&sub2.offsetParent?sub2.getBoundingClientRect().bottom:a.top+pt;
+   const kb2=P.querySelector(":scope>.kpbar");const sb=kb2&&kb2.offsetParent?kb2.getBoundingClientRect().bottom+(parseFloat(getComputedStyle(kb2).marginBottom)||0):sub2&&sub2.offsetParent?sub2.getBoundingClientRect().bottom:a.top+pt;
    if(narrow){const st2=P.querySelector(".pstrip");const tgt=st2&&st2.offsetParent?st2.getBoundingClientRect().top:c.top;const d=tgt-sb;if(Math.abs(d)>1)P.scrollTop+=d}
    else if(c.bottom>a.bottom-pb+1)P.scrollTop+=Math.min(c.bottom-(a.bottom-pb)+2,c.top-sb);else if(c.top<sb)P.scrollTop+=c.top-sb;
    /* KIT 45.1 (review/small-bugs-3): a face strip is never left HALF under the pane bar (its palace labels clipped, frames cut): when the scroll
