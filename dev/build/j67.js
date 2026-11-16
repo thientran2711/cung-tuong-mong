@@ -692,7 +692,7 @@ ARC67.cn_chu={o:"cn",t:"Chủ cũ",w:"v",sj:"chuyện ngươi từng hầu {v}",
   mid:{k:0,tag:"Nước sông không phạm nước giếng",t:"Ngươi và {v} giữ lễ với nhau, không hơn.",fx:{duc:2}},
   lose:{k:-1,tag:"Mang tiếng hẹp lượng",t:"Người ta nói ngươi lên cao rồi quay lại trả thù chủ cũ. Thái hậu lạnh nhạt, {v} hận ngươi đến xương.",fx:{danh:-6,th:-8},go:A=>e67foe(rv67(A,"v"),20)}}};
 ARC67.cn_tinh={o:"cn",t:"Mối tình thuở hầu trà",w:"maid",sj:"mối tình cũ của ngươi",g:"Thuở còn hầu trà, ngươi từng hẹn ước với một thị vệ. Nay hắn gác cửa cung ngươi, và vài bức thư cũ vẫn còn đâu đó. Chôn quá khứ cho sạch, trước khi kẻ khác đào nó lên.",
- cast(A){A.n1="thị vệ "+pick(SURN)+" "+pick(MALEN);return true},
+ cast(A){A.n1="thị vệ "+nmNew("m");return true},
  p:[["s1","s2"],["c1","c2","c3","G.spy","G.ill"],["t1"],["x1"]],
  B:{
  s1:{h:"Người cũ gác cửa",w:"maid",t:"{maid} tái mặt: {n1}, người năm xưa hẹn ước với ngươi, vừa được đổi về gác cửa cung ngươi.",o:[
@@ -1138,7 +1138,7 @@ ARC67.ch_bi={o:"ch",t:"Bí mật năm xưa",w:"th",sj:"bí mật năm xưa của
   lose:{k:-1,tag:"Liên lụy chuyện cũ",t:"Hoàng thượng xa lánh Thái hậu, kéo theo cả ngươi. Đức Thọ cung không còn đủ sức che chở.",fx:{th:-10,sung:-6,danh:-6}}}};
 /* ================= CON GÁI THẦY ĐỒ ================= */
 ARC67.thd_tho={o:"thd",t:"Danh hiệu Tài nữ",w:"emp",sj:"thơ của ngươi",g:"Thơ ngươi có thể làm rạng danh người cha nghèo. Hàn lâm viện sắp mở kỳ thi Tài nữ trong cung, và có kẻ đang chờ vu ngươi đạo thơ.",
- cast(A){A.n1="Hàn lâm "+pick(SURN)+" "+pick(MALEN);castRv67(A,"v");return true},
+ cast(A){A.n1="Hàn lâm "+nmNew("m");castRv67(A,"v");return true},
  p:[["s1","s2"],["c1","c2","c3","G.rival","G.night"],["t1"],["x1"]],
  B:{
  s1:{h:"Bài thơ lọt ra ngoài",w:"maid",t:"Một bài thơ ngươi viết trên quạt lọt ra ngoài cung. {n1}, học trò cũ của cha, đem bình khắp kinh thành.",o:[
@@ -1197,7 +1197,7 @@ ARC67.thd_sach={o:"thd",t:"Bản thảo của cha",w:"maid",sj:"bản thảo c�
   mid:{k:0,tag:"Sách cha còn một nửa",t:"Sách cha còn lại một nửa trên đời. Ngươi giữ được mình.",fx:{danh:4}},
   lose:{k:-1,tag:"Sách bị cấm",t:"Sách bị cấm, ngươi bị Hoàng thượng trách là để sách phỉ báng triều thần lọt vào cung.",fx:{danh:-8,sung:-6}}}};
 ARC67.thd_tro={o:"thd",t:"Học trò của cha",w:"maid",sj:"chuyện khoa thi và học trò của cha",g:"Một học trò nghèo của cha thi Hội đỗ đầu, rồi bị đánh trượt vì có kẻ mua đề. Hắn xin ngươi giúp. Chuyện khoa cử là việc lớn, chạm vào là chạm đến cả triều.",
- cast(A){A.n1=pick(SURN)+" "+pick(MALEN);return true},
+ cast(A){A.n1=nmNew("m");return true},
  p:[["s1","s2"],["c1","c2","c3","G.spy","G.emp"],["t1"],["x1"]],
  B:{
  s1:{h:"Lá thư của học trò",w:"maid",t:"Thư của {n1}: ‘Con đỗ đầu mà bị đánh trượt. Bài của con bị đổi tên.’",o:[
@@ -1381,7 +1381,7 @@ ARC67.cnv_ma={o:"cnv",t:"Ma ma dạy việc",w:"maid",sj:"chuyện Lưu ma ma",g
 /* ================= SHARED ARCS (any origin, drawn later in the life) ================= */
 const nsrv67=()=>!(typeof isSrv==="function"&&isSrv());
 ARC67.s_than={o:"*",ok:nsrv67,t:"Người thân thất lạc",w:"eun",sj:"chuyện người tự nhận là thân thích",g:"Một tiểu thái giám mới vào cung lén tìm ngươi, nói hắn là em họ thất lạc từ nạn lụt năm xưa. Thật hay giả, ơn hay họa, chưa ai biết.",
- cast(A){A.n1="Tiểu "+pick(["Lục","An","Phúc","Thuận","Hỉ"])+" Tử";return true},
+ cast(A){A.n1=nmNew("eun");return true},
  p:[["s1","s2"],["c1","c2","c3","G.spy","G.rumor"],["t1"],["x1"]],
  B:{
  s1:{h:"Một tiểu thái giám tìm ngươi",w:"eun",t:"{n1} quỳ trước ngươi, nước mắt lưng tròng, đọc đúng tên làng quê mẹ ngươi.",o:[

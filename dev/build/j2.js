@@ -3,7 +3,7 @@ function start(){
   try{if(typeof kmReset==="function")kmReset()}catch(e){}/* a new life starts with no scene / overlay / queued job of the last one (j93 kmReset) */
   const o=(window.__forceOrigin&&ORIGINS.find(x=>x.k===window.__forceOrigin))||pick(ORIGINS);quiet=true;Q=[];popIdx=null;popMsg="";
   S={year:1,month:3,tuan:0,age:18+R(3),rank:o.r,sung:8,danh:8,bac:60,suc:80,mat:0,th:o.th,hh:o.hh,tai:30+R(50),sac:40+R(55),tamco:10+R(20),duc:30,thu:0,
-     schemes:0,moreRivals:0,maid:newMaid(pick(MAIDS),50+R(31)),origin:o,name:"",
+     schemes:0,moreRivals:0,maid:newMaid(nmNew("maid"),50+R(31)),origin:o,name:"",
      preg:0,hidden:false,fake:0,fert:0,anthai:0,doctor:0,pray:0,kids:[],heir:null,lastPromo:0,turn:0,dead:false,
      arts:{cam:0,ky:0,thi:0,hoa:0,vu:0,y:0},artp:{cam:0,ky:0,thi:0,hoa:0,vu:0,y:0},master:0,confined:0,shield:0,tablet:0,
      place:"home",visit:null,tonight:null,inv:[],an:0,nightLog:[],evm:{},rl:{},hieu:"",block:0,dress:null,asthma:false,shop:[],seen:{},emp:mkEmp(),st:{step:0,done:0,tag:""},recorded:false,nights:0,thDead:false,logs:[],caseEv:0,avenged:false};
@@ -118,7 +118,7 @@ function goTo(k){if(S.dead||Q.length||S.out)return;popIdx=null;popMsg="";
  if(P.v&&!here.includes(P.v)&&P.v.alive&&!P.v.out){ppl.push({kind:"chest",ref:P.v,name:`Rương của ${P.v.name}`,ini:"Rương",col:"#8a6a4a",info:"Chủ nhân đi vắng"});msg=`${P.v.name} không có ở cung.`}
  if(k==="tyv")ppl.push({kind:"ty",name:"Thái y Trương",ini:"Y",col:"#8fc38a",info:"Thái y viện"});
  if(k==="ksp")ppl.push({kind:"ksp",name:"Tổng quản",ini:"Hoạn",col:"#b9a48a",info:"Giữ thẻ bài các phi tần"});
- if(k==="lc"){const f=rivals.filter(v=>v.alive&&v.out);(f.length?f.slice(0,3):[null]).forEach(v=>ppl.push(v?{kind:"fallen",ref:v,name:v.name,ini:v.name.split(" ").pop()[0],col:"#6a7a8a",info:"Phế phi"}:{kind:"fallen",name:"Phế phi họ Lý",ini:"Lý",col:"#6a7a8a",info:"Phế phi"}))}
+ if(k==="lc"){const f=rivals.filter(v=>v.alive&&v.out);(f.length?f.slice(0,3):[null]).forEach(v=>ppl.push(v?{kind:"fallen",ref:v,name:v.name,ini:v.name.split(" ").pop()[0],col:"#6a7a8a",info:"Phế phi"}:{kind:"fallen",name:"Phế phi họ Tần",ini:"Lý",col:"#6a7a8a",info:"Phế phi"}))}
  if(!msg)msg=ppl.length?`Ở đây có ${ppl.length} người.`:"Không gặp ai.";
  S.visit={k,people:ppl,talked:false,tk:{},msg};log(`Đến ${P.n}.`);render()}
 function curPeople(){return S.visit?S.visit.people:[]}

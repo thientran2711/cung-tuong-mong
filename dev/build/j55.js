@@ -10,7 +10,7 @@ function trS(){if(!S)return null;if(S.trieu&&S.trieu.H)return S.trieu;
  const T={H:{},rel:{},bien:58+R(10),kho:58+R(10),news:[],de:{},clean:{},soT:-9,tyY:-9,praise:null};S.trieu=T;
  const usedS=new Set([S].concat(rivals||[]).map(p=>tdSur(p.name)));const sur=shuf(SURN.filter(x=>!usedS.has(x)));const giv=shuf(MALEN.slice());const trs=Object.keys(TDTR);
  CLANS.forEach((c,i)=>{const mine=(c==="Tể tướng"&&S.origin.k==="tt")||(c==="Đại tướng quân"&&S.origin.k==="dtq");
-  const h={c,isMin:1,name:(mine?tdSur(S.name):(sur[i]||pick(SURN)))+" "+(giv[i]||pick(MALEN)),age:46+R(20),tr:pick(trs),pow:mine?55+R(16):38+R(30),sk:35+R(35),af:{},dadOf:mine?"me":null};
+  const h={c,isMin:1,name:nmNew("m",mine?{sur:tdSur(S.name)}:{avoidSur:usedS}),age:46+R(20),tr:pick(trs),pow:mine?55+R(16):38+R(30),sk:35+R(35),af:{},dadOf:mine?"me":null};
   h.corrupt=roll(25+(h.tr==="Tham lam"?25:h.tr==="Cương trực"?-15:0));T.H[c]=h});
  const k=(a,b)=>[a,b].sort().join("|");T.rel[k("Tể tướng","Đại tướng quân")]=-30;T.rel[k("Lễ bộ","Hàn lâm")]=30;
  for(let i=0;i<5;i++)for(let j=i+1;j<5;j++){const kk=k(CLANS[i],CLANS[j]);if(T.rel[kk]==null)T.rel[kk]=R(41)-20}

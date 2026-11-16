@@ -161,12 +161,12 @@ window.courtTabHTML=function(){const L=[{f:pEmp(),name:"Hoàng thượng",mk:emp
 
 /* ---------- 5. men: unique names, only the ones she has met ---------- */
 /* (MALEN "Lục Trường", "Tiêu Viễn" carry a surname: "Lục Lục Trường" is renamed too) */
-const MALEN2=["Cảnh Hoài","Tĩnh An","Dật Thanh","Mặc Trần","Quân Hạo","Thanh Diễn","Hựu Ninh","Tấn Lương","Cẩn Du","Hoằng Nghị","Thiệu Khang","Diệp Tùng"];
-function menUnique(){try{if(!S||!S.men)return;const used=new Set();const pool=MALEN.concat(MALEN2);
- for(const m of S.men){const w=m.name.split(" ");const giv=w.slice(-2).join(" "),last=w[w.length-1];
-  if(!used.has(last)&&w[w.length-3]!==w[w.length-2]){used.add(last);continue}
-  const nw=pool.find(g=>!used.has(g.split(" ").pop())&&g.split(" ")[0]!==w[w.length-3]&&!S.men.some(x=>x!==m&&x.name.endsWith(" "+g)));if(!nw){continue}
-  m.name=w.slice(0,-2).concat([nw]).join(" ");used.add(nw.split(" ").pop())}}catch(e){}}
+const MALEN2=[];/* retired: one name core (jname.js); jnamefix renames any clash */
+function menUnique(){try{if(!S||!S.men)return;const used=new Set();/* the last word of a man's name stays unique among the men; new names from the one name core */
+ for(const m of S.men){const raw=String(m.name||"");const b=nmBare(raw);const pre=raw.slice(0,raw.length-b.length);const last=b.split(" ").pop();
+  if(!used.has(last)&&nmTwice(b)){used.add(last);continue}
+  let nb="";for(let t=0;t<40;t++){const c=nmNew("m",{reg:false});if(!used.has(c.split(" ").pop())){nb=c;break}}if(!nb)continue;
+  const R=nmReg();if(R&&nmOwner())R[nb]="m";m.name=pre+nb;used.add(nb.split(" ").pop())}}catch(e){}}
 window.menUnique=menUnique;
 if(typeof menInit==="function"){const m0=menInit;menInit=function(){const r=m0.apply(this,arguments);menUnique();return r}}
 function menMet(m){try{if(S.known&&typeof k61St==="function")return k61St(m)>=1;if(S.menMet&&S.menMet[m.id])return true;if(m.af||m.tinh||m.letters||m.trysts)return true;if(typeof k61St==="function"&&k61St(m)>=1)return true;if(m.seen)return true}catch(e){}return false}

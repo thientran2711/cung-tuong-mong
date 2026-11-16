@@ -22,8 +22,8 @@ function menVT(v){if(!v)return"";if(v===S)return"ngươi";try{return k61Named(v)
 const menCap=s=>s?s[0].toUpperCase()+s.slice(1):s;
 /* four named guards share the two guard pictures (coordinator 11/15: many guards may share the 2 looks) */
 function menGuards(){return (S.men||[]).filter(m=>m.rw==="thị vệ")}
-(function(){const m0=menInit;menInit=function(){const r=m0.apply(this,arguments);try{if(S&&S.men&&!S.menG2){S.menG2=1;const sur=["Chu","Hà","Lâm","Ninh","Phan","Từ"];
-  for(let i=0;i<3;i++){const id="m"+(S.men.length);S.men.push({id,role:"Thị vệ",rw:"thị vệ",haunts:["thu","dtd"],age:20+R(14),name:`Thị vệ ${pick(sur)} ${pick(MALEN)}`,trait:pick(MTR),loyal:40+R(50),af:0,tinh:0,letters:0,trysts:0,alive:true,knowsMe:[]})}}}catch(e){}return r}})();
+(function(){const m0=menInit;menInit=function(){const r=m0.apply(this,arguments);try{if(S&&S.men&&!S.menG2){S.menG2=1;
+  for(let i=0;i<3;i++){const id="m"+(S.men.length);S.men.push({id,role:"Thị vệ",rw:"thị vệ",haunts:["thu","dtd"],age:20+R(14),name:`Thị vệ ${nmNew("m")}`,trait:pick(MTR),loyal:40+R(50),af:0,tinh:0,letters:0,trysts:0,alive:true,knowsMe:[]})}}}catch(e){}return r}})();
 /* who a man fancies: set once from his nature (phong lưu / đa tình) and the consorts' looks; renewed if she is gone */
 (function(){const m0=menInit;menInit=function(){const r=m0.apply(this,arguments);try{if(S&&S.men)for(const m of S.men){const v=m.likeV!=null?RV(m.likeV):null;if(v&&v.alive&&!v.out)continue;m.likeV=null;
   if(!MEN_FANCY.includes(m.trait))continue;const C=liveRivals(false).filter(x=>!x.queen&&(x.age||20)>=18&&!x.affair);if(!C.length)continue;
