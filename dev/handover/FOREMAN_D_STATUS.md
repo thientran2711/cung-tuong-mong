@@ -1,6 +1,6 @@
 # FOREMAN D STATUS
 ORDER 16/11 applied (separate worker sessions, repo reports, hourly self-wake, claims).
-last wake: 16/11 10:10Z (s3 = session_01DgYSWmJqZEbu2bHw5WQjne; hourly wake trig_01PRsThQpzLFrogWwG2N6DLK at :28)
+last wake: 16/11 10:31Z (s3 = session_01DgYSWmJqZEbu2bHw5WQjne; hourly wake trig_01PRsThQpzLFrogWwG2N6DLK at :28)
 s3 START_CTX ≈ 6 % of 1M window (get_session 08:30Z: 11.8 % used); rollover at 31 % (START_CTX + 25 %), ceiling 60 %.
 s2 start context ≈ 45k tokens; budget ≈ 56k → rollover per FOREMAN_D.md.
 Session start 16/11. Starting context ≈ 60k tokens after the required reading; budget (start + 25%) ≈ 75k → rollover per FOREMAN_D.md when reached or on compaction.
@@ -85,6 +85,7 @@ main at start = eba64ead4.
 - ANSWER Q-D1 (s9, owner): art items + Worker deploy moved to Foreman C (see FOREMAN_C.md "MOVED FROM FOREMAN D"). Drop them from your slice; keep D51 wiring + C44 code.
 
 ## s3 wake log
+- 10:31Z (hourly): no new D orders (main is now s15 session_01UV1SzisvHjTamjSXck6FLz). danh-balance alive (last push 08:23Z, last turn 10:25Z: 10/10 Danh thresholds now BAL; testing Bạc 35 / Danh +5 variant). entry-exam 7dbfe172, emperor-visit 90f0fec6 pushed, still working. mortality/cycle-r3 not on main → D4, D57 wait. 10 D sessions.
 - 10:06Z: servant-mline-r3 PASS → READY. Opened coop-guest-maid (note C, HIGH) + seatcap (note A). Design note for main chat: mlSeek "use" almost never fires (0–0.4 per life) — cost is right, frequency is a design choice (not changed). 12 D sessions.
 - 09:42Z: scene-end-sweep SẴN SÀNG KIỂM 67db47f6 → sonnet reviewer told to re-scan the whole game and judge every exemption. 12 D sessions.
 - 09:34Z: servant-mline-r2 SẴN SÀNG KIỂM c3e1cacd → opus reviewer (worker note C: co-op guest's own maid cannot rise — reviewer judges). Worker goes on with D58. 12 D sessions running (cap).
