@@ -11,8 +11,12 @@ Owner's order (15/11, last message to session 7): "move house; the new main chat
 6. The container has 4 CPUs in session 7's case: keep browser-heavy agents ≤ ~6 at once; art workers are mostly API-bound. Subagent cap is 20.
 
 ## 1. Live
-main = f53bdade0 (place-colour r1 + place-art). Fast-forward recipe on reviewer PASS (no asking):
-`S=<sha>; M=$(git ls-remote origin main|cut -f1); flock /home/user/wt/fetch.lock git fetch --depth=30 origin $S main && git merge-base --is-ancestor $M $S && flock /home/user/wt/fetch.lock git push origin $S:refs/heads/main`
+main = f53bdade0 at the s7 move (now moving every push). PUSH RECIPE (owner OD:L1370 option 1 + tiered checks; go-live kit, branch review/go-live-kit, full doc dev/tools/GO_LIVE.md). One branch per push, right after its reviewer PASS, by the foreman who owns it; no merge trains:
+1. Branch: merge origin/main, write ONE player-facing line of what changed in dev/site/CHANGE.txt (Vietnamese, VANPHONG), `bash dev/site/build_site.sh`, commit = READY sha.
+2. TIER: `node dev/tools/tier.js <sha>` (exit 0 SMALL, 2 BIG; the script decides). SMALL = touched-part tests it lists + `node dev/tools/shots.js <dir>` (Fold 755x1000 + iPad 1180x820, look at every shot) + old-save load (in quickcheck), ~15–25 min. BIG = full review as before.
+3. QUICKCHECK + PUSH: `bash dev/tools/golive.sh <sha>` (FF check, tier, `dev/tools/quickcheck.sh` on that exact sha, ~40 s), then `bash dev/tools/golive.sh <sha> --yes` = FF-only push `sha:main` under /home/user/wt/fetch.lock + tag `live/<UTC>-<sha>`. quickcheck FAIL = it does not go live.
+4. BUILD LINE: title or ☰ → Thiết lập → "Thông tin cập nhật" shows `mã <sha> · <time>`; its page lists "Lần cập nhật đang chơi" (Mã, Lúc, Điều mới) + "Các lần trước" (10).
+ROLLBACK: `bash dev/tools/rollback.sh previous --yes` (FF commit with the good build's files on top of main + live tag; never a force-push, no commit lost; site back in ~1–2 min). NIGHTLY: `bash dev/tools/nightly.sh` (full suites on live main, report in /home/user/wt/nightly/; scheduling = coordinator).
 Went live today via sessions 6+7: month-calendar, chap-label, item-events (§64), art-complete jartc + 50 pics, sfx, book-title, ts-a, small-bugs-2, face-reveal, placeholder-pics (§59), rank-title (§48.1), place-colour + place-art, por-scale (data), act art batches (data).
 
 ## 2. SPAWN REVIEWERS FIRST (branches done, "SẴN SÀNG KIỂM", never reviewed) — priority order
