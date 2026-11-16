@@ -32114,7 +32114,7 @@ function chapter(){try{/* a road with its own chapter (jkc at home before the tu
  const s=typeof STORY==="object"&&S.origin&&STORY[S.origin.k];if(s){let hn="";try{hn=s.hint?s.hint():""}catch(e){}return{kind:"v1",n:1,max:s.n||0,t:s.t,g:plain(s.goal),next:hn}}}catch(e){console.error("goal",e)}return null}
 /* act: matched anywhere in the card title (.kan may start with a small portrait label, e.g. "Hoàng hậu")
    the 2–3 concrete things to do next, each with where to tap (tab + act card) */
-function nextSteps(C){if(C&&C.todo)return C.todo.slice(0,3).map(x=>Object.assign({},x,{where:tabName(x.tab)+(x.card?` › thẻ ${x.card}`:"")}));const L=[];const when=(S.buoi||0)===0?"sáng nay":"sáng mai";
+function nextSteps(C){if(C&&C.todo)return C.todo.slice(0,3).map(x=>Object.assign({},x,{where:(x.tl||tabName(x.tab))+(x.card?` › thẻ ${x.card}`:"")}));const L=[];const when=(S.buoi||0)===0?"sáng nay":"sáng mai";
  const hh=(()=>{try{return typeof qOn==="function"&&qOn()&&rivals[0]&&rivals[0].alive}catch(e){return false}})();
  if(C&&C.kind==="arc"&&C.wait)L.push({t:"Quyết hồi truyện đang chờ",why:"hồi truyện chờ lựa chọn của ngươi",tab:"story"});
  if(isS()){
@@ -35062,9 +35062,9 @@ const KCO_H=[["cha hài lòng, thế lực nhà thêm chút ít","an toàn"],["c
 /* r2-r2: the goal strip / chapter detail (jgoal, KIT §72) at home shows the home chapter (tuyển tú), never the palace chapter of S.st */
 window.kitGoalAlt=function(){try{if(typeof S==="undefined"||!S||S.dead||!isKc())return null;const n=kcMonthsLeft();
  return{kind:"v1",home:1,n:1,max:1,t:"Chờ kỳ tuyển tú",road:"Khuê các",g:"Qua Sơ tuyển, Phúc tuyển, Điện tuyển thì vào cung",next:`Kỳ tuyển tú còn ${n} tháng`,
-  todo:[{t:"Học một môn tài nghệ",why:"tuyển tú xét tài lẫn sắc; tài cao thì Điện tuyển dễ lọt mắt",tab:"art"},
-   {t:"Giữ lòng cha mẹ",why:"cha mẹ thương thì được gửi đi tuyển, hồi môn hậu",tab:"rv"},
-   {t:"Giữ danh tiếng trong sạch",why:"tiếng xấu ngoài phố thì Sơ tuyển đã bị gạt",tab:"go"}]}}catch(e){console.error("kitGoalAlt",e);return null}};
+  todo:[{t:"Học một môn tài nghệ",why:"tuyển tú xét tài lẫn sắc; tài cao thì Điện tuyển dễ lọt mắt",tab:"art",tl:KCTABS.art},
+   {t:"Giữ lòng cha mẹ",why:"cha mẹ thương thì được gửi đi tuyển, hồi môn hậu",tab:"rv",tl:KCTABS.rv},
+   {t:"Giữ danh tiếng trong sạch",why:"tiếng xấu ngoài phố thì Sơ tuyển đã bị gạt",tab:"go",tl:KCTABS.go}]}}catch(e){console.error("kitGoalAlt",e);return null}};
 
 window.__ctmBuilt=1;
 </script>
@@ -35093,7 +35093,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="b06df7889357";window.CTM_BUILD=BUILD;
+const BUILD="597f57cb559d";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

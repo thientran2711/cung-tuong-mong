@@ -29,7 +29,7 @@ function chapter(){try{/* a road with its own chapter (jkc at home before the tu
  const s=typeof STORY==="object"&&S.origin&&STORY[S.origin.k];if(s){let hn="";try{hn=s.hint?s.hint():""}catch(e){}return{kind:"v1",n:1,max:s.n||0,t:s.t,g:plain(s.goal),next:hn}}}catch(e){console.error("goal",e)}return null}
 /* act: matched anywhere in the card title (.kan may start with a small portrait label, e.g. "Hoàng hậu")
    the 2–3 concrete things to do next, each with where to tap (tab + act card) */
-function nextSteps(C){if(C&&C.todo)return C.todo.slice(0,3).map(x=>Object.assign({},x,{where:tabName(x.tab)+(x.card?` › thẻ ${x.card}`:"")}));const L=[];const when=(S.buoi||0)===0?"sáng nay":"sáng mai";
+function nextSteps(C){if(C&&C.todo)return C.todo.slice(0,3).map(x=>Object.assign({},x,{where:(x.tl||tabName(x.tab))+(x.card?` › thẻ ${x.card}`:"")}));const L=[];const when=(S.buoi||0)===0?"sáng nay":"sáng mai";
  const hh=(()=>{try{return typeof qOn==="function"&&qOn()&&rivals[0]&&rivals[0].alive}catch(e){return false}})();
  if(C&&C.kind==="arc"&&C.wait)L.push({t:"Quyết hồi truyện đang chờ",why:"hồi truyện chờ lựa chọn của ngươi",tab:"story"});
  if(isS()){

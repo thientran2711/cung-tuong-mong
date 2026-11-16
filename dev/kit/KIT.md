@@ -3506,7 +3506,7 @@ legends), buttons `.kbtn` / `.kbtn.alt`. No private frame, no new art.
   Next things (2–3, plain words): thỉnh an Hoàng hậu (else Thái hậu) sáng nay / sáng mai · in Chương 1 "Làm Hoàng thượng để mắt tới" ·
   học một môn tài nghệ · kết giao một người; cung nữ road: phận sự · làm quen các nơi (Dư đồ) · kết thân đồng liêu (tab names from
   SRVTABS: Phận sự · Đồng liêu · Thân phận); a story act waiting → "Quyết hồi truyện".
-- Road hook (review/outside-r2-r2): `window.kitGoalAlt()` → a chapter object (kind v1 + optional `road`, `todo:[{t,why,tab}]`) or null.
+- Road hook (review/outside-r2-r2): `window.kitGoalAlt()` → a chapter object (kind v1 + optional `road`, `todo:[{t,why,tab,tl?}]` (tl = the tab label on that road)) or null.
   When it returns one, strip / detail / card use it instead of the palace chapter of `S.st`. jkc sets it at home before the tuyển tú
   ("Chờ kỳ tuyển tú", next = months left, todo = tài nghệ · lòng cha mẹ · danh tiếng on the home tabs).
 

@@ -729,6 +729,6 @@ const KCO_H=[["cha hài lòng, thế lực nhà thêm chút ít","an toàn"],["c
 /* r2-r2: the goal strip / chapter detail (jgoal, KIT §72) at home shows the home chapter (tuyển tú), never the palace chapter of S.st */
 window.kitGoalAlt=function(){try{if(typeof S==="undefined"||!S||S.dead||!isKc())return null;const n=kcMonthsLeft();
  return{kind:"v1",home:1,n:1,max:1,t:"Chờ kỳ tuyển tú",road:"Khuê các",g:"Qua Sơ tuyển, Phúc tuyển, Điện tuyển thì vào cung",next:`Kỳ tuyển tú còn ${n} tháng`,
-  todo:[{t:"Học một môn tài nghệ",why:"tuyển tú xét tài lẫn sắc; tài cao thì Điện tuyển dễ lọt mắt",tab:"art"},
-   {t:"Giữ lòng cha mẹ",why:"cha mẹ thương thì được gửi đi tuyển, hồi môn hậu",tab:"rv"},
-   {t:"Giữ danh tiếng trong sạch",why:"tiếng xấu ngoài phố thì Sơ tuyển đã bị gạt",tab:"go"}]}}catch(e){console.error("kitGoalAlt",e);return null}};
+  todo:[{t:"Học một môn tài nghệ",why:"tuyển tú xét tài lẫn sắc; tài cao thì Điện tuyển dễ lọt mắt",tab:"art",tl:KCTABS.art},
+   {t:"Giữ lòng cha mẹ",why:"cha mẹ thương thì được gửi đi tuyển, hồi môn hậu",tab:"rv",tl:KCTABS.rv},
+   {t:"Giữ danh tiếng trong sạch",why:"tiếng xấu ngoài phố thì Sơ tuyển đã bị gạt",tab:"go",tl:KCTABS.go}]}}catch(e){console.error("kitGoalAlt",e);return null}};

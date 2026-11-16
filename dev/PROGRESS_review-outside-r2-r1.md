@@ -75,3 +75,9 @@ assemble: main's list + jkc.js LAST (after jtruth). New-main interactions found 
   danh tiếng). After the tuyển tú the palace chapter is back.
 Final results on this build: route.js 755x1000@2 / 844x390@2 / 1366x1024@2 PASS (1000x755@1, 1180x820@2 PASS on the first merge) · kc-end PASS ·
 oldsave PASS · coop-home 51/51 · coop-e2e 59/59 · coop-timer 43/43 · 390x844 rotate prompt OK. 0 page errors.
+### r2-r2 third merge (main a363cc14: goal-strip-fix → goal in the stage rail §77, merge train 3, outside-art D48)
+jgoal conflict: main's strip removal taken, the kitGoalAlt hook kept (chapter()/nextSteps/road); todo rows carry `tl` (the road's tab label:
+tabName() read the palace label "Phi tần" for rv at home). Rail "Mục tiêu chương" at home opens "Chương 1 · Chờ kỳ tuyển tú" (looked at).
+assemble: main's list + jkc.js last (after jkpc). Results: route.js 755x1000@2 + 844x390@2 PASS · kc-end PASS · oldsave PASS ·
+coop-home 51/51 · coop-e2e 59/59 · coop-timer 43/43 · 2 home weeks: 0 card-flip scenes. Note (main, not this branch): the palace start's
+card-flip scene for week 0 plays during the Luân hồi identity card of every new life, before the road is chosen.
