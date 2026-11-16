@@ -69,11 +69,14 @@ document.addEventListener("load",e=>{const t=e.target;if(t&&t.tagName==="IMG"&&(
 try{new MutationObserver(ms=>{if(ms.every(m=>m.target.closest&&m.target.closest(".kmemark")))return;if(document.getElementById("mefig")||document.querySelector(".kesme"))kmmSched();else kmmSweep()})
  .observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:["src","hidden"]})}catch(e){}
 (function(){const st=document.createElement("style");st.id="kmm-css";st.textContent=`
-.kmemark{position:absolute;z-index:6;pointer-events:none;display:block;filter:drop-shadow(0 1px 1.5px #2a1a1238)}
+.kmemark{position:absolute;z-index:6;pointer-events:none;display:block;filter:drop-shadow(0 1px 1.5px #2a1a1238) drop-shadow(0 0 3px #ffd77acc) drop-shadow(0 0 7px #f2b93b99)}
 .kmemark>img{display:block;width:100%;height:100%;object-fit:contain;object-position:50% 100%}
 .kesme .kesfi{position:relative}
-@media (prefers-reduced-motion:no-preference){.kmemark.kmmove>img{animation:kmmBob 3.4s ease-in-out infinite}}
-@keyframes kmmBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+/* owner 16/11 (review/face-sharp): the "this is me" mark bobs SLOWLY with a clearly visible travel (7 px / 2.4 s) and glows gold (static glow).
+   Only this small mark moves (its own layer, will-change) — never the figure image (KIT motion rule STILL PEOPLE). Reduced motion / Hiệu ứng
+   Gọn (OPT.fxon false): kmmMotion() drops .kmmove → still mark, same gold glow. */
+@media (prefers-reduced-motion:no-preference){.kmemark.kmmove>img{animation:kmmBob 2.4s ease-in-out infinite;will-change:transform}}
+@keyframes kmmBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
 `;document.head.appendChild(st)})();
 /* ---------- markers are items: promotion gives the new rank's marker; the rank chest shows it ---------- */
 let kmmLast=null;
