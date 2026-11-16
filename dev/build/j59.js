@@ -297,7 +297,10 @@ window.j59CourtNames=j59CourtNames;
    Dư đồ counts other people only (her own place wears her own mark). ---------- */
 function kitHereCount(){try{const V=S&&S.visit;if(!V||V.k!==S.place)return 0;return (V.people||[]).filter(j59person).length}catch(e){return 0}}
 window.kitHereCount=kitHereCount;
-function kitHereMsg(){try{const V=S&&S.visit;if(!V)return;const m=String(V.msg||"").trim();if(m&&!/^(Ở đây (có|còn) \d+ người\.?|Không gặp ai\.?)$/.test(m))return;const n=kitHereCount();
+function kitHereMsg(){try{const V=S&&S.visit;if(!V)return;const m=String(V.msg||"").trim();const n=kitHereCount();
+ /* a longer stage line that starts with the count ("Ở đây còn N người. Càn Ninh cung: …") keeps its text, its count follows the stage (people ledger:
+    the record can bring people in after the line was written) */
+ if(m&&!/^(Ở đây (có|còn) \d+ người\.?|Không gặp ai\.?)$/.test(m)){if(/^Ở đây (có|còn) \d+ người\./.test(m)&&n)V.msg=m.replace(/^Ở đây (có|còn) \d+ người\./,`Ở đây còn ${n} người.`);return}
  V.msg=n?`Ở đây còn ${n} người.`:"Không gặp ai."}catch(e){}}
 const r0=renderStage;renderStage=function(){j59CourtNames();kitHereMsg();const r=r0.apply(this,arguments);try{j59lay()}catch(e){}return r};
 /* every module has wrapped countAt by the time the game runs: the outermost wrap answers her own place from the stage itself */

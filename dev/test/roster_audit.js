@@ -26,7 +26,7 @@ const HOOK=`(function(){const A=window.__aud={checks:0,lives:0,khac:0,err:{a:0,b
   for(const p of [S].concat(rivals)){if(p!==S&&!p.alive)continue;const pk=p===S?"me":p.id;if(p.maid&&p.maid.name&&!(p===S&&typeof isSrv==="function"&&isSrv()))ids.add("mm:"+pk);for(const s of p.staff||[])if(s&&s.sid!=null)ids.add("s"+s.sid)}
   for(const c in (S.court||{}))if(S.court[c]&&S.court[c].name)ids.add("c:"+c);if(typeof plxPeople==="function"){ids.add("c:tgk");ids.add("c:ttp")}/* jplx place fixtures */
   try{for(const x of (S.thO&&S.thO.staff)||[])if(x&&x.sid!=null)ids.add("s"+x.sid)}catch(e){}
-  const jm=typeof menRoad==="function"&&menRoad();for(const m of S.men||[]){if(!m.alive)continue;if(jm?((S.menWhy||{})[m.id]&&!(typeof menBanned==="function"&&menBanned(m))):(m.rw==="thái y"||m.rw==="thị vệ"||(S.menW&&S.menW[m.id])))ids.add(m.id)}
+  const jm=typeof menSchedRoad==="function"?menSchedRoad():typeof menRoad==="function"&&menRoad();/* people ledger: the fixed men's schedule on both roads */for(const m of S.men||[]){if(!m.alive)continue;if(jm?((S.menWhy||{})[m.id]&&!(typeof menBanned==="function"&&menBanned(m))):(m.rw==="thái y"||m.rw==="thị vệ"||(S.menW&&S.menW[m.id])))ids.add(m.id)}
   if(jm)try{const H=trS().H||{};for(const c in (S.minW||{}))if(H[c])ids.add("q:"+c)}catch(e){}
   for(const [k,mo] of allKids())if(k&&k.alive)ids.add("k:"+(mo?mo.id:"me")+":"+(mo?mo.kids:S.kids).indexOf(k));return ids}
  function check(where){if(!S||S.dead||window.__j95off)return;const R=S.roster;if(!R||R.key!==j95key())return;const kh=j95kh();A.checks++;

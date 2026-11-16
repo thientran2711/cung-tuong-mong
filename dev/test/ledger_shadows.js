@@ -28,10 +28,13 @@ const {chromium}=require('playwright');const [,,URL,NM,SZ,ORIG]=process.argv;con
     if(shown[k]!==rec[k].length)out.diff=(out.diff||[]).concat(k+" hiện "+shown[k]+" sổ "+rec[k].length);
     for(const id of rec[k])if(!(vis[k]||[]).includes(id))out.hidden.push(k+":"+kind[id]+":"+((who[id]||[])[0]||id))}
    for(const k in shown){const now=rec[k]||[];const ex=(vis[k]||[]).filter(id=>!now.includes(id));for(const id of ex)out.extra.push(k+":"+kind[id]+" (đến khắc khác)");if(shown[k]!==(vis[k]||[]).length)out.extra.push(k+": hiện "+shown[k]+" ≠ đếm "+(vis[k]||[]).length)}
-   /* the stage at her place = the record there now */try{if(S.visit&&S.visit.k===S.place){const st=kitHereCount();const rh=(rec[HERE]||[]).length;if(st!==rh)out.stage=S.place+" sân khấu "+st+" sổ "+rh+" ["+S.visit.people.map(p=>p.kind).join(",")+"]"}}catch(e){out.stage="lỗi "+e.message}
+   /* the stage at her place = the record there now */try{if(S.visit&&S.visit.k===S.place){const st=kitHereCount();const rh=(rec[HERE]||[]).length;
+     /* the stage title's number ("Ở đây còn N người") = the people standing there (a hall of a palace counts its own hall) */
+     const tm=document.querySelector('#sc-t .rmsg');const mt=tm&&/Ở đây (?:có|còn) (\d+) người/.exec(tm.textContent);const hall=typeof kpmHall==="function"&&kpmHall()&&!kpmHall().place;
+     if(mt&&+mt[1]!==(hall?curPeople().length:st))out.title=(out.title||[]).concat(S.place+" tiêu đề "+mt[1]+" sân khấu "+st);if(st!==rh)out.stage=S.place+" sân khấu "+st+" sổ "+rh+" ["+S.visit.people.map(p=>p.kind).join(",")+"]"}}catch(e){out.stage="lỗi "+e.message}
    return out});
   if(m.dead||m.norec){rep.push(m);if(m.dead)break;continue}
-  agg.moments++;agg.sumShown+=m.tot;agg.sumRec+=m.rec;if(m.hidden.length||m.extra.length||m.twice.length||m.offmap.length||m.diff||m.stage)agg.bad++;if(m.stage)agg.stage=(agg.stage||[]).concat(m.stage).slice(0,12);
+  agg.moments++;agg.sumShown+=m.tot;agg.sumRec+=m.rec;if(m.hidden.length||m.extra.length||m.twice.length||m.offmap.length||m.diff||m.stage||m.title)agg.bad++;if(m.title)agg.title=(agg.title||[]).concat(m.title).slice(0,8);if(m.stage)agg.stage=(agg.stage||[]).concat(m.stage).slice(0,12);
   for(const h of m.hidden){const k=h.split(':').slice(0,2).join(':');agg.hidden[k]=(agg.hidden[k]||0)+1}
   for(const h of m.extra){agg.extra[h.replace(/\d+/g,'#')]=(agg.extra[h.replace(/\d+/g,'#')]||0)+1}agg.twice+=m.twice.length;for(const h of m.offmap)agg.offmap[h]=(agg.offmap[h]||0)+1;
   rep.push({i,place:m.place,kh:m.kh,diff:m.diff,tot:m.tot,rec:m.rec,h:m.hidden.length,x:m.extra.length,t:m.twice.length,o:m.offmap.length})}
