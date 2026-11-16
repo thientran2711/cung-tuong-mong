@@ -14,7 +14,7 @@ const settle=p=>p.waitForFunction(()=>KFX.parts.length===0&&KFK.lights===0&&KFK.
   const c=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:D,hasTouch:true,isMobile:W<1100});const p=await c.newPage();const errs=[],bad=[];
   p.on('pageerror',e=>errs.push(e.message));p.on('console',m=>{if(m.type()==='error'&&!/Failed to load resource|net::ERR/.test(m.text()))errs.push('console: '+m.text())});
   p.on('response',q=>{if(/\/img\/fx\//.test(q.url())&&q.status()>=400)bad.push(q.status()+' '+q.url().split('/').pop())});
-  await p.goto(BASE,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof kitFxBurst==='function',null,{timeout:180000});await sleep(2000);
+  await p.goto(BASE,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof kitFxBurst==='function'&&(typeof nlFigsReady!=='function'||nlFigsReady()),null,{timeout:180000});await sleep(2000);
   const r={name:await p.evaluate(NEWLIFE)};await p.evaluate(()=>{OPT.fxon=true;OPT.fxpick=1;KFX.ambOK=false});
   /* 0. bytes per scene (cold cache, first size only): what a scene downloads the first time it plays */
   if(tag==='fold')r.sceneBytes=await p.evaluate(async()=>{const S={promote:()=>kitFx('promote'),slap:()=>kitFx('hit'),danger:()=>kitFx('harm'),poison:()=>kitFx('poison'),
@@ -63,7 +63,7 @@ const settle=p=>p.waitForFunction(()=>KFX.parts.length===0&&KFK.lights===0&&KFK.
   r.ok=ok;if(!ok)fail++;R[tag]=r;L(tag,JSON.stringify(r));await c.close()}
  /* reduced motion: stills only, no particles */
  {const c=await b.newContext({viewport:{width:755,height:1000},deviceScaleFactor:2,reducedMotion:'reduce'});const p=await c.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));
-  await p.goto(BASE,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof kitFxBurst==='function',null,{timeout:180000});await sleep(1500);await p.evaluate(NEWLIFE);
+  await p.goto(BASE,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof kitFxBurst==='function'&&(typeof nlFigsReady!=='function'||nlFigsReady()),null,{timeout:180000});await sleep(1500);await p.evaluate(NEWLIFE);
   const r=await p.evaluate(async()=>{const n=await kitFxBurst('petal-plum',null,10);const h=kitFxLight('candle',null,{dur:800});await new Promise(r=>setTimeout(r,300));
    return{burst:n,still:h.el.classList.contains('kfxk-still'),video:!!h.el.querySelector('video'),parts:KFX.parts.length}});
   r.clean=await settle(p);r.errs=errs;r.ok=r.burst===0&&r.still&&!r.video&&r.clean&&!errs.length;if(!r.ok)fail++;R.reduced=r;L('reduced',JSON.stringify(r));await c.close()}

@@ -590,6 +590,9 @@ header.hud>.hud2.khud .hc[data-hx="date"]{display:none!important}
 header.hud>.hud2.khud .h2t{top:3px;right:0}
 .stop .scene-t{flex:0 1 auto!important;max-width:60%}
 .stop .scene-t .rmsg{font-size:.7rem}
+/* KIT 15.1 (review/small-bugs-3): the place subtitle ("· Ở đây còn 1 người.") never shrinks under its longest word (390x844 showed one letter per
+   line); when the title row is too narrow it drops under the place name */
+.stop .scene-t{flex-wrap:wrap}.stop .scene-t .rmsg{min-width:min-content;flex:1 1 auto}
 /* no truncation anywhere: names, date line, stage tags wrap */
 .me b,#me-d,.dt,.emp b,.pface span,.tok .tag,.stop .scene-t .rmsg{white-space:normal!important;overflow:visible!important;text-overflow:clip!important;-webkit-line-clamp:unset!important;display:block}
 .tok .tag{max-width:140px}

@@ -158,13 +158,14 @@ function vlInvHTML(){if(!S||S.dead)return"";const L=vlChest(S);if(!S.scar&&!L.le
  const B0=[];if(S.vl)B0.push(pbtn(`data-vl="off"`,"Tháo mạng",`tốn: không tốn gì · thành: cất vào rương · kèm: Sắc mất trở lại ${S.scar?S.scar.d:0}`,""));
  B0.push(pbtn(`data-vl="get"`,"Tìm mạng che mặt",`thành: tự tay kết, đặt ở Nội vụ phủ, mua lén ngoài cung hay xin ban`,Q.length?"đang có việc chờ":""));
  h+=`<div class="rbtn">${B0.join("")}</div>`;
- if(L.length){h+=`<div class="kwdgrid">`+L.map(x=>kitItem({src:vlSrc(x.e.k),name:IT[x.e.k].n,grade:vlG(x.e),size:"lg",on:x.ix===pick,label:vlKnows(S,x.e)?["đồ phẩm "+wdPName(vlP(x.e,S)),"n"]:null,data:`data-vlpick="${x.ix}" role="button" tabindex="0"`,tip:IT[x.e.k].d})).join("")+`</div>`;
+ if(L.length){h+=`<div class="kwdgrid">`+L.map(x=>kitItem({src:vlSrc(x.e.k),name:IT[x.e.k].n,grade:vlG(x.e),size:"lg",sel:x.ix===pick,label:vlKnows(S,x.e)?["đồ phẩm "+wdPName(vlP(x.e,S)),"n"]:null,data:`data-vlpick="${x.ix}" role="button" tabindex="0"`,tip:IT[x.e.k].d})).join("")+`</div>`;
   const x=L.find(y=>y.ix===pick);if(x){const e=x.e,it=IT[e.k],g=vlG(e);const B=[];
    B.push(pbtn(`data-vl="wear" data-ix="${x.ix}"`,"Đeo mạng",`tốn: không tốn gì · thành: ${S.scar?`Sắc mất còn ${Math.round(S.scar.d*VL.cover[g])}`:"che vết thương"}${vlKnows(S,e)?"":" · kèm: chưa rõ phẩm, có thể vượt phẩm"}`,S.scar?"":"mặt lành, chưa cần đeo"));
    B.push(pbtn(`data-it="gift" data-ix="${x.ix}"`,"Tặng",`tốn: 2 khắc · thành: chọn người nhận`,e.k==="mcnt"?"đồ ngự tứ: không được đem tặng":whyTime(2)));
    B.push(pbtn(`data-it="sell" data-ix="${x.ix}"`,"Bán",`thành: Bạc +${Math.floor((it.pr||0)/2)}`,e.k==="mcnt"?"đồ ngự tứ: bán là bất kính":""));
-   h+=`<div class="kwdsel">${kitItem({src:vlSrc(e.k),name:it.n,grade:g,size:"md"})}<div>${kitFacts([`Mạng che mặt · ${WD_GRADE[g]} · ${VL_COVER[g]}`,typeof wdSrcTxt==="function"?vlSrcTxt(e):"",vlKnows(S,e)?`Đồ phẩm ${wdPName(vlP(e,S))}`:"Chưa rõ phẩm"].filter(Boolean))}</div></div><div class="rbtn">${B.join("")}</div>`}
-  else h+=`<p class="past">Chạm một chiếc mạng để đeo, tặng hay bán.</p>`}
+   /* KIT §70: the picked veil = the shared item detail (picture, name, grade, Được, Lai lịch, Ghi chú) with its acts */
+   h+=typeof kitItemDetail==="function"?kitItemDetail({e},{cls:"kidet-strip",acts:B}):`<div class="kwdsel">${kitItem({src:vlSrc(e.k),name:it.n,grade:g,size:"md"})}<div>${kitFacts([`Mạng che mặt · ${WD_GRADE[g]} · ${VL_COVER[g]}`,typeof wdSrcTxt==="function"?vlSrcTxt(e):"",vlKnows(S,e)?`Đồ phẩm ${wdPName(vlP(e,S))}`:"Chưa rõ phẩm"].filter(Boolean))}</div></div><div class="rbtn">${B.join("")}</div>`}
+  else h+=`<p class="past">Chạm một chiếc mạng để xem; đeo, tặng hay bán bằng nút dưới thông tin.</p>`}
  return h+`</div></div>`}
 function vlSrcTxt(e0){if(!e0)return"";const e=Object.assign({},e0,{from:e0.src||e0.from});if(e.from&&!VL_OWN[e.from]&&!e.giver&&e.from!=="emp"&&e.from!=="hh"&&e.from!=="th"){const v=typeof byKey==="function"?byKey(e.from):null;if(v&&v.name)return `${v.name} tặng`}if(e.from==="tay")return`tự tay kết${e.d?", "+e.d:""}`;if(e.from==="nvp")return`đặt ở Nội vụ phủ${e.d?", "+e.d:""}`;if(e.from==="ngoai")return`mua lén ngoài cung${e.d?", "+e.d:""}`;if(e.from==="cu")return"mạng đang đeo từ trước";if(e.giver)return`${e.giver} ban${e.d?", "+e.d:""}`;
  const v=typeof byKey==="function"&&e.from?byKey(e.from):null;return v&&v.name?`${v.name} tặng`:"đồ trong rương"}
