@@ -2,7 +2,7 @@
    lạc lối." + "Không bấm xem được" on the Hành sự goal strip) — KIT.md §72. One data source, three kit pieces:
    - kitGoalNow(): the main road of this life (QUEST67 + milestone chapters of j67), the current chapter goal in plain words, its steps with
      live progress, and 2–3 concrete next things to do, each with WHERE to tap ({tab, act} → "Đi làm").
-   - kitGoalStrip(): THE goal strip = the old Hành sự line ".obj67" (j67) made a real button (kit seal edge + "›"); also laid on the main
+   - (16/11) the goal strip is gone: the goal is the "Mục tiêu chương" icon of the stage rail (kitStageRail, KIT §77, jrail). Was laid on the main
      stage (room view) under the scene title. Tap → kitGoalDetail().
    - kitGoalDetail(): chapter detail (kit panel, event frame: origin picture band + her figure): goal, steps ✓/✗, tấn phong requirements for
      the rank chapter, acts of a story chapter, next things with "Đi làm" options. MINIMAL view of review/chapter-detail (C24, queued):
@@ -47,11 +47,6 @@ function nextSteps(C){const L=[];const when=(S.buoi||0)===0?"sáng nay":"sáng m
 function kitGoalNow(){if(typeof S==="undefined"||!S||S.dead)return null;const C=chapter();if(!C)return null;
  let step="";if(C.kind==="ms"){const nx=C.steps.find(x=>!x.ok);step=nx?nx.t:"sắp xong"}else step=plain(C.next||C.g);
  return{road:road(),C,kicker:`Chương ${C.n}`,title:C.t,goal:C.g,step,next:nextSteps(C)}}
-/* ---------- THE goal strip (kit part) ---------- */
-function kitGoalStrip(o){o=o||{};const G=o.G||kitGoalNow();if(!G)return"";const nx=G.next&&G.next[0];
- return `<button type="button" class="kgoal${o.cls?" "+o.cls:""}" data-kgoal="1" title="Chạm để xem chi tiết chương">`+
-  `<span class="kgoal-k">Mệnh truyện · ${esc(G.kicker)} «${esc(G.title)}»</span><span class="kgoal-t">${esc(G.step)}</span>`+
-  `${nx&&o.next!==false?`<span class="kgoal-n">Việc kế: ${esc(nx.t)}</span>`:""}<span class="kgoal-go" aria-hidden="true">›</span></button>`}
 /* ---------- "Đi làm": open the tab, ring the act card with the guide's spotlight (kitCoach, jtut) when it is on screen ---------- */
 function goWhere(x){try{if(!x||!x.tab)return;const b=document.querySelector(`#tabs [data-tab="${x.tab}"]`);
  /* tapping the tab that is already open sends a phone back to the room (jk3), so only tap another tab */
@@ -81,7 +76,7 @@ function kitGoalCard(){const G=kitGoalNow();if(!G)return null;const C=G.C;
  const life=isS()?"Từ thân cung nữ, đi lên bằng lòng tin của chủ và ánh mắt của Hoàng thượng.":`Từ ${RANKS[S.rank].n} leo dần lên Hoàng hậu, rồi Hoàng thái hậu; giữ mình, giữ nhà.`;
  const sec=[{h:"Đường đời kiếp này",rows:[["Đường lớn",life],G.road?["Truyện riêng",`«${esc(G.road)}» · từng chương mở dần theo thời gian`]:null,["Chương này",`${G.kicker} · ${esc(C.t)}`],["Mục tiêu",esc(C.g)]].filter(Boolean)},
   {h:"Việc nên làm trước",rows:nextRows(G.next)},
-  {h:"Xem lại",rows:[["Dải mục tiêu",`ở đầu mục ${tabName("act")} và trên màn chính; chạm vào để xem chi tiết chương`],["Mệnh truyện",`mục ${tabName("story")} ở hàng dưới`]]}];
+  {h:"Xem lại",rows:[["Mục tiêu chương","cuộn chiếu ở cột nút bên trái màn; chạm vào để xem chi tiết chương"],["Mệnh truyện",`mục ${tabName("story")} ở hàng dưới`]]}];
  return {kind:"notice",title:"Mệnh truyện kiếp này",sub:`${G.kicker} · ${C.t}`,headArt:art(),sections:sec,btn:"Đã hiểu"}}
 /* queued right after the Nhập cung card of a new life (each machine, own life; co-op guest too). The new life is made inside Luân hồi
    (j52 nlBegin → the inner start, maybe after the figures load), so this watches the queue: a "Nhập cung" card with no goal card yet. */
@@ -91,24 +86,11 @@ function queueCard(){try{if(bot()||typeof S==="undefined"||!S||S.dead||S.goalCar
 setInterval(queueCard,300);
 try{const sm0=showModal;showModal=function(){queueCard();return sm0.apply(this,arguments)};window.showModal=showModal}catch(e){}
 /* owner 16/11 (shot 1b571e3a): the goal strip is REPLACED by the goal icon of the stage rail (kitStageRail §77, jrail): no strip on the
-   stage, none on top of Hành sự. kitGoalStrip stays only as markup for old callers; a stale #kgoalst is removed. */
+   stage, none on top of Hành sự (the strip and its CSS are deleted); a stale #kgoalst is removed. */
 try{const r0=render;render=function(){const r=r0.apply(this,arguments);try{const el=document.getElementById("kgoalst");if(el)el.remove()}catch(e){}return r};window.render=render}catch(e){}
-document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-kgoal]");if(!b)return;e.stopPropagation();e.preventDefault();
- try{if(typeof sfx==="function")sfx("sfx-tap")}catch(x){}kitGoalDetail()},true);
 /* the chapter card on Mệnh truyện › Chương này opens the same detail (no dead taps) */
 document.addEventListener("click",e=>{try{if(typeof tab==="undefined"||tab!=="story")return;const c=e.target.closest&&e.target.closest('#panel .kskill[data-skill^="story-"]');if(!c||e.target.closest("button,a,[data-v85tab]"))return;kitGoalDetail()}catch(x){}});
-/* ---------- kit CSS (tokens KIT §1/§8) ---------- */
-const css=document.createElement("style");css.id="kit-goal";css.textContent=`
-.kgoal{display:grid;grid-template-columns:1fr auto;grid-template-areas:"k go" "t go" "n go";gap:1px 10px;align-items:center;width:100%;box-sizing:border-box;margin:0 0 8px;padding:6px 8px 7px 12px;
- text-align:left;font:inherit;color:var(--ink,#3a2a1a);background:var(--k-card,#fffaf0);border:1px solid var(--k-hair,#e6d3ac);border-left:4px solid var(--k-seal,#9a2c1c);border-radius:var(--k-rad,8px);
- box-shadow:0 1px 3px #0001;cursor:pointer;min-height:44px}
-.kgoal:hover{background:var(--k-card2,#f6ead6)}.kgoal:active{transform:translateY(1px)}
-.kgoal-k{grid-area:k;font-size:.7rem;color:var(--k-lab,#8a7350);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.kgoal-t{grid-area:t;font-size:.88rem;font-weight:600;line-height:1.3;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
-.kgoal-n{grid-area:n;font-size:.76rem;color:var(--k-lab,#8a7350)}
-.kgoal-go{grid-area:go;display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:var(--k-seal,#9a2c1c);color:#fff6e0;font-size:1.15rem;line-height:1;font-weight:700}
-@media (max-width:599px){.kgoal-t{font-size:.8rem}`;document.head.appendChild(css);
-try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§72",title:"kitGoalStrip · kitGoalDetail · kitGoalCard (mục tiêu chương, việc kế, chạm xem)",
- html:()=>`<div class="kitpg-row" style="max-width:480px">${kitGoalStrip()||kitGoalStrip({G:{kicker:"Chương 1",title:"Nhập cung, đứng vững",step:"Được tấn phong một bậc (nay Đáp ứng)",next:[{t:"Đi thỉnh an Hoàng hậu sáng mai"}]}})}</div>`})}catch(e){}
-window.kitGoalNow=kitGoalNow;window.kitGoalStrip=kitGoalStrip;window.kitGoalDetail=kitGoalDetail;window.kitGoalCard=kitGoalCard;window.kitGoalGo=goWhere;
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§72",title:"kitGoalDetail · chi tiết chương (khung sự kiện: tranh trái, hàng kit phải) — mở từ nút Mục tiêu của cột §77",
+ html:()=>`<div class="kitpg-row"><button type="button" class="kbtn" onclick="kitGoalDetail()">Mở chi tiết chương</button></div>`})}catch(e){}
+window.kitGoalNow=kitGoalNow;window.kitGoalDetail=kitGoalDetail;window.kitGoalCard=kitGoalCard;window.kitGoalGo=goWhere;
 }catch(e){console.error("jgoal",e)}})();

@@ -7,7 +7,7 @@
    The guide = staffGuide() of review/elder-staff (a real named palace elder: name, title, the same face); fallback Quế ma ma (a ma ma portrait already drawn, img/FIGURES-servants.json role mama; never a new drawing, never a face used by
    someone in this kiếp). She says "nô tỳ" and calls the player "tiểu chủ" (Tần and up: "nương nương"; cung nữ road: "ta" / "ngươi").
    Lượt dẫn đầu kiếp (KTUT_STEPS, ≤12 steps): first kiếp on this device, or "Xem lại lời dặn" in ☰. It starts after the Nhập cung card and the
-   "Mệnh truyện kiếp này" goal card (jgoal), and one step shows the goal strip (kitGoalStrip). Old players (an older sổ or a Sổ luân hồi
+   "Mệnh truyện kiếp này" goal card (jgoal), and one step shows the goal icon of the stage rail (§77). Old players (an older sổ or a Sổ luân hồi
    entry, no record on this device) are asked once; a sổ past its 2nd week never starts the tour nor asks, and gives no tips (S.tutOld)
    unless she turns "Lời dặn tân thủ" on again in Thiết lập or picks "Xem lại lời dặn". State: device `hclh-tut` {tour, asked, seen{}} + OPT.tut (Thiết lập "Lời dặn tân thủ")
    + S.tutTour in the sổ (a sổ copied to another device does not start the tour again).
@@ -181,7 +181,7 @@ function goRoom(){try{if($q(".game.k3ph")&&!$q(".game.k3home")&&typeof k3Home===
 function shown(k){const b=tabBtn(k);return !!b&&vis(b)}
 /* the group button that holds a hidden member tab (Sổ ghi is inside Mệnh truyện) */
 function groupBtn(k){const b=tabBtn(k);if(b&&vis(b))return b;try{for(const g in KG)if(KG[g].keys.includes(k)){const gb=KG[g].keys.map(tabBtn).find(x=>x&&vis(x));if(gb)return gb}}catch(e){}return null}
-function goalEl(){const L=[...document.querySelectorAll("#krail [data-rail=goal], #panel .kgoal")].filter(e=>{if(!vis(e))return false;const r=e.getBoundingClientRect();return r.width>40&&r.height>20&&r.bottom>0&&r.top<innerHeight});return L[0]||null}
+function goalEl(){const L=[...document.querySelectorAll("#krail [data-rail=goal]")].filter(e=>{if(!vis(e))return false;const r=e.getBoundingClientRect();return r.width>=24&&r.height>=24&&r.bottom>0&&r.top<innerHeight});return L[0]||null}
 function panelBox(){const p=$q("#panel");return p&&vis(p)?p:null}
 /* the act card for the "đọc thẻ / làm thử" steps: a quiet act she can do now (no harm, no scheme) */
 let PICK=null;
@@ -232,7 +232,7 @@ const INTRO=[
    srv()?["Đi lên","từ thân cung nữ, được chủ tin và Hoàng thượng để mắt thì được phong Đáp ứng, rồi leo như phi tần"]
     :["Đi lên",`từ ${RANKS[0].n}, Thường tại, Quý nhân, Tần, Phi, Quý phi, Hoàng quý phi tới Hoàng hậu; con lên ngôi thì thành Hoàng thái hậu`],
    ["Nhà và con","nhà mẹ đẻ có vinh có nhục theo {x}; con được trọng thì mẫu thân được nể"],
-   ["Mệnh truyện","truyện riêng của thân phận, mở từng chương; dải mục tiêu trên màn luôn cho biết chương này cần gì"],
+   ["Mệnh truyện","truyện riêng của thân phận, mở từng chương; cuộn chiếu Mục tiêu ở cột nút bên trái màn luôn cho biết chương này cần gì"],
    ["Kết cục","mỗi kiếp khép lại bằng một kết: kết hay, kết dở, và những kết hiếm khó gặp"]])},
  {t:"Chơi thế nào",h:()=>pic(ia("Hành sự"),"")+rows([["Buổi · khắc","mỗi tuần bốn buổi (sáng, trưa, chiều, tối), mỗi tháng ba tuần; mỗi buổi 4 khắc, việc nào cũng tốn khắc"],
    [srv()?"Phận sự":"Hành sự","chọn việc mà làm; thẻ ghi cơ may, cái giá, cái được"],["Dư đồ","đi tới các nơi trong cung, gặp người"],

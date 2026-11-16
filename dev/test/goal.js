@@ -1,4 +1,4 @@
-/* KIT §72 goal (jgoal) + tutorial start: new life → "Mệnh truyện kiếp này" card right after Nhập cung; goal strip in Hành sự + on the stage;
+/* KIT §72 goal (jgoal) + tutorial start: new life → "Mệnh truyện kiếp này" card right after Nhập cung; goal icon in the stage rail (§77);
    tap → chapter detail; "Đi làm" → tab + ring; old save past week 2 → no goal card, no tour, no tips.
    usage: node dev/test/goal.js <url> <W>x<H> [shotdir] [origin=tt]   (prints JSON; exit 1 on a FAIL) */
 const {chromium}=require('playwright');
@@ -18,8 +18,8 @@ const fails=[];const F=(m)=>fails.push(m);
   if(!r){if(seen.length>1)break;continue}
   if(seen[seen.length-1]!==r.t)seen.push(r.t);
   if(/Mệnh truyện kiếp/.test(r.t)&&!goalShot){goalShot=true;await p.waitForTimeout(1500);await p.evaluate(()=>document.querySelectorAll('.kroul,#kroul,#kroulw').forEach(e=>e.remove()));
-   const g=await p.evaluate(()=>{const d=document.querySelector('#modal .dlg.kpanel');const r=d.getBoundingClientRect();return{art:!!document.querySelector('#modal .kdlgart img'),fig:!!document.querySelector('#modal .kesimg'),rows:document.querySelectorAll('#modal .kpsec').length,inView:r.top>=0&&r.bottom<=innerHeight+1&&r.left>=0&&r.right<=innerWidth+1,ox:document.documentElement.scrollWidth>innerWidth}});
-   if(!g.art)F('goal card: no picture band');if(!g.fig)F('goal card: no figure');if(g.rows<3)F('goal card: sections '+g.rows);if(g.ox)F('goal card: horizontal overflow');
+   const g=await p.evaluate(()=>{const d=document.querySelector('#modal .dlg.kpanel');const r=d.getBoundingClientRect();return{art:!!document.querySelector('#modal .kpsubj.kpiart img'),band:!!document.querySelector('#modal #mb > .kdlgart'),fig:!!document.querySelector('#modal .kesimg'),rows:document.querySelectorAll('#modal .kpsec').length,inView:r.top>=0&&r.bottom<=innerHeight+1&&r.left>=0&&r.right<=innerWidth+1,ox:document.documentElement.scrollWidth>innerWidth}});
+   if(!g.art)F('goal card: no picture left (event frame §8.2)');if(g.band)F('goal card: band on top (two pictures)');if(g.fig)F('goal card: loose figure column');if(g.rows<3)F('goal card: sections '+g.rows);if(g.ox)F('goal card: horizontal overflow');
    await shot('1-goalcard')}
   await p.evaluate(()=>{const b=[...document.querySelectorAll('#modal button.opt:not(.kdis), #modal #mr .kbtn, #modal .kph button')].find(b=>b.offsetParent);if(b)b.click()})}
  const iN=seen.findIndex(t=>/^Nhập cung/.test(t)),iG=seen.findIndex(t=>/Mệnh truyện kiếp/.test(t));
@@ -30,12 +30,12 @@ const fails=[];const F=(m)=>fails.push(m);
  await shot('2-tour');
  await p.evaluate(()=>{const s=document.querySelector('#ktut [data-ktut="skip"]');if(s)s.click()});await p.waitForTimeout(700);
  const st=await p.evaluate(()=>{const R=e=>{if(!e)return null;const r=e.getBoundingClientRect();return r.width?{x:Math.round(r.left),y:Math.round(r.top),w:Math.round(r.width),h:Math.round(r.height)}:null};
-  return{home:!!document.querySelector('.game.k3home'),stage:R(document.querySelector('#kgoalst .kgoal')),panel:R(document.querySelector('#panel .kgoal')),txt:(document.querySelector('.kgoal')||{}).innerText}});
- if(!st.stage&&!st.panel)F('no goal strip on screen');if(st.stage&&st.panel)F('two goal strips at once');
+  return{home:!!document.querySelector('.game.k3home'),rail:R(document.querySelector('#krail [data-rail=goal]')),strips:document.querySelectorAll('#kgoalst,.kgoal').length}});
+ if(!st.rail)F('no goal icon in the stage rail (§77)');if(st.strips)F('a goal strip is still on screen');
  await shot('3-main');
- await p.evaluate(()=>{const g=[...document.querySelectorAll('.kgoal')].find(e=>e.getClientRects().length);g.click()});await p.waitForTimeout(1500);
+ await p.evaluate(()=>{Q.length=0;document.getElementById('modal').hidden=true});await p.click('#krail [data-rail=goal]');await p.waitForTimeout(1500);
  const d=await p.evaluate(()=>({t:(document.querySelector('#modal .kptitle')||{}).textContent,opts:[...document.querySelectorAll('#modal .opts button')].map(b=>b.innerText.split('\n')[0]),fig:!!document.querySelector('#modal .kesimg'),art:!!document.querySelector('#modal .kdlgart img')}));
- if(!/^Chương/.test(d.t||''))F('strip tap did not open chapter detail: '+d.t);if(!d.opts.length)F('detail: no Đi làm');
+ if(!/^Chương/.test(d.t||''))F('goal icon tap did not open chapter detail: '+d.t);if(!d.opts.length)F('detail: no Đi làm');
  await shot('4-detail');
  const okThinh=await p.evaluate(()=>{const b=[...document.querySelectorAll('#modal .opts button')].find(b=>/thỉnh an/i.test(b.innerText));if(b){b.click();return true}const a=document.querySelector('#modal .opts button');if(a)a.click();return false});
  await p.waitForFunction(()=>!!document.querySelector('#ktut:not([hidden]) .ktut-hole:not([hidden])'),null,{timeout:12000}).catch(()=>{});
