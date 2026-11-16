@@ -36,10 +36,11 @@ Base main at start: 900ace7fb.
 | D1 result-sfx | review/result-sfx-r1 | sonnet | PASS 18926abcc |
 | D48 outside-route art | review/outside-art-r1 | sonnet | PASS 9b4a257d0 (art on CDN; maps recompressed to 1536x857, 385/408 KB; wiring = session 8 B2) |
 | D49 collection milestones | review/collect-ms-r1 | sonnet | PASS 94591de58 (per-life count, titles persist in the book — matches OD L45–46; reviewer added unique S.colLid per life) |
-| D22 real-phone UA test mode | review/ua-test @89ba6983e (dev/test/lib/device.js: 13 device profiles + serveRoot/openHost host mode; rotate-prompt.js; book-title.js + boot-flash.js migrated; dev/test/README.md) → review/ua-test-r1 | sonnet | REVIEWING |
+| D22 real-phone UA test mode | review/ua-test-r1 | sonnet | PASS cad6e04c0 (test infra only; 13 device profiles verified; rotate-prompt 18/18) |
+| D15 download-size (129 MB first load) + perf test | review/perf | sonnet | RUNNING (worker) |
 | D7 personality + 13 virtues + Thái hậu archetypes | review/personality @6f6da49b3 (jtrong.js after jaudit, BAL.trong; 5 archetypes; trGreet one greeting rule; trThDeed whole-group fix) → review/personality-r1 | opus | REVIEWING (bot HH 6/28=21% vs main ~27–32%, small n) |
 | D29 schedules/roster re-port | review/schedules3 (from review/schedules2 + wip/kit-j95) | opus | RUNNING (worker) |
-| D-list rest (D3, D9, D11–D15, D17, D19, D20, D25, D26, D44, D51) | — | per item | QUEUED (D30–D34, D36, D38–D42 moved to Foreman B — not ours) |
+| D-list rest (D3, D9, D11–D14, D17, D19, D20, D25, D26, D44, D51) | — | per item | QUEUED (D30–D34, D36, D38–D42 moved to Foreman B — not ours) |
 
 ## PASS (for the main coordinator to fast-forward)
 PASS review/pic-dupes-r2 bc0a1ba24ad4eba5ee186b110191ab3c4c3fdf56 (C19; descends from main 900ace7f; hanh-le-v2 on CDN, 0 different-act dupes; only generated index.html/sw.js/assets.json conflicts, rebuilt)
@@ -62,6 +63,7 @@ PASS review/small-bugs-4-r1 42e4038f7104e451f4a940e7c536e3bf5deb8ebe (D47; desce
 PASS review/collect-ms-r1 94591de586789e65d2dad905f9874cf2390b87e0 (D49; descends from main 7f20b751b; collect-ms.js 6 viewports; jcol.js after jearn.js in assemble; note: reward text 'Trong rương đã có N món' also counts worn trâm/y)
 PASS review/act-text-r1 fe15a6d54e03ec71389875d71284fe41d333026d (C20; descends from main eba64ead4; CONDITIONAL K8; NOTE the worker's scan numbers did not reproduce on the merged build: long rows 90 (dau) / 110 (hh), mostly material-dialog tier Ghi chú 4–5 lines → K8 layout; kemgain 3 left on 2 place cards (K8 item 1))
 PASS review/cycle-r3 d9c47fad1c671907c6a83e294fedc0e50ad23a39 (A7 incl. thaiy; SUPERSEDES the held cycle-r1; descends from main eba64ead4; jcycle.js LAST after jtruth/jkpc; cycle.js ALL OK 5 viewports + rotate, thaiy 29/29, coop-e2e 59/59 on the 2nd merge)
+PASS review/ua-test-r1 cad6e04c0529267566f038b020520f6867c57f8e (D22; clean merge of main eba64ead4; dev/ only, no game code; UA versions a bit old (Chrome 130, iOS 17.5) — nothing reads versions)
 PASS review/update-notes-r1 8cc6ae7c8f63f72436afceed38b4143aa3bc815b (D10; descends from main a523531da; update-notes.js 13/13 at 6 viewports; COORDINATOR: next merged release needs a NEW id in dev/build/jnotes.js CTM_NOTES (e.g. '2026-11-17'), never extra lines under an already-seen id; recipe in dev/PROGRESS_update-notes.md)
 
 ## NOTES for session 8 (found by C18 reviewer, outside Slice C)
