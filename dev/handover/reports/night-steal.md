@@ -1,4 +1,4 @@
-# night-steal — fix round 2 (review/night-steal-2)
+# night-steal — fix round 2 (review/night-steal-2) — SẴN SÀNG KIỂM 609c1bdd0
 
 Worker: session_01UV1SzgwHdcVz2uVRLdV3SN, opened by MAIN s21 (session_01UV1SzkBh9FhY36EqiUowuZ). START_CTX ≈ 3 % of the window.
 Base: review/night-steal-r1 @ 86e0a5f4 (reviewer FAIL: her played nights stolen ≈ 30 % pooled vs NPC nights 16–23 %).
