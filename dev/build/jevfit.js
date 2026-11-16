@@ -84,6 +84,10 @@ const KIT_EVFIT=[
  ["doctor","benh-tat",/^Thái y bắt mạch$/i,null],
  ["poison","dau-doc",/^(Trúng độc|Phát hiện có độc)$/i,null],
  /* guilt, punishment, pardon */
+ ["mistress-order","am-muu",/^Lệnh của /i,null],
+ ["mistress-scold","hinh-phat",/ quở mắng$|^Tân Giả khố$/i,null],
+ ["selection","tuyen-tu",/^Tuyển tú$/i,null],
+ ["old-colleague","cung-nhan",/Đồng liêu cũ/i,null],
  ["punish","hinh-phat",/^(Tội bất kính|Mang tội ăn trộm|Nhận lỗi|Tự thú)$/i,null],
  ["pardon","dai-xa",/^Minh oan$/i,null],
  ["mourning","quoc-tang",/^Quốc tang$/i,null],

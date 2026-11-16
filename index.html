@@ -20826,6 +20826,10 @@ const KIT_EVFIT=[
  ["doctor","benh-tat",/^Thái y bắt mạch$/i,null],
  ["poison","dau-doc",/^(Trúng độc|Phát hiện có độc)$/i,null],
  /* guilt, punishment, pardon */
+ ["mistress-order","am-muu",/^Lệnh của /i,null],
+ ["mistress-scold","hinh-phat",/ quở mắng$|^Tân Giả khố$/i,null],
+ ["selection","tuyen-tu",/^Tuyển tú$/i,null],
+ ["old-colleague","cung-nhan",/Đồng liêu cũ/i,null],
  ["punish","hinh-phat",/^(Tội bất kính|Mang tội ăn trộm|Nhận lỗi|Tự thú)$/i,null],
  ["pardon","dai-xa",/^Minh oan$/i,null],
  ["mourning","quoc-tang",/^Quốc tang$/i,null],
@@ -28969,7 +28973,7 @@ window.kitPhTone=kitPhTone;window.KIT_PH=KIT_PH;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="6672e689f513";window.CTM_BUILD=BUILD;
+const BUILD="22525b7241e2";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
