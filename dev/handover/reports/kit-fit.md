@@ -1,7 +1,7 @@
 SẴN SÀNG KIỂM __SHA__ (ROUND 2, one sha for all items; round 1 e383a4dd7 is included)
 
 # ROUND 2 — kit keeper successor for MAIN s22 (16/11)
-START_CTX ≈ 6 % (estimate). Branch review/kit-fit: 28828f29 + merge origin/main 86229158 + round-2 kit changes + merge origin/main 7b5e5e49 (KIT.md: kept both slot paragraphs, dropped a duplicate §77.1 main had moved; site files from a fresh build); site rebuilt + committed.
+START_CTX ≈ 6 % (estimate). Branch review/kit-fit: 28828f29 + merge origin/main 86229158 + round-2 kit changes + merge origin/main 7b5e5e49 (KIT.md: kept both slot paragraphs, dropped a duplicate §77.1 main had moved) + merge origin/main 23595c37 (fold-popw-r1; only built files conflicted); site rebuilt + committed. Tests re-run after the last merge: kit-fit2 / kit-fit same results.
 
 ## What changed (kit parts only)
 1. **§32.2b equal gaps, whole group** (owner s21/s22: every full figure in a frame):
@@ -24,7 +24,7 @@ START_CTX ≈ 6 % (estimate). Branch review/kit-fit: 28828f29 + merge origin/mai
 ## Measurements (dev/test/kit-fit2.js, CSS px) — BEFORE (this branch before round 2) → AFTER
 | case | 755x1000 before | 755x1000 after | 1180x820 before | 1180x820 after |
 |---|---|---|---|---|
-| book gap top/bot | 57/38 | 49/47 | 47/35 | 40/41 |
+| book gap top/bot | 57/38 | 49/47 | 47/35 | 37/37 |
 | id gap top/bot | 812/−696 (176 px figure in a strip) | 15/14 (above panel) | 121/10 | 66/65 |
 | slots (Một mình) panel scroll | 0 (row 144) | 0 (row 83) | 99 px (panel 574, no Sổ mây yet) | 0 (panel 560 of 574 incl. Sổ mây card) |
 | slotsco (Cùng hảo hữu) scroll | 97 px (row 186) | 0 (row 102) | 223 px (no join card yet) | 54 px incl. Nhập ám hiệu card (542 without it) |
