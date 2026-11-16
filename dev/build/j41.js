@@ -125,6 +125,8 @@ function accInfo(){if(!S||Q.length)return;const R=n=>`<b>${n}</b>`;
 (function(){const st=document.createElement("style");st.textContent=`
 .mspot.agrey,.mspot.awalk{cursor:pointer;pointer-events:auto}
 .mspot.agrey .mlab{opacity:1!important}
+/* owner 16/11 "chỗ không đủ khắc thì cho nút màu xám" (review/map-labels-2): ONE kit state for an open place that is farther than the khắc left (.awalk): the same label, greyed; still tappable (walk spill). Map label + Danh sách tile both. Real rule locks (.agrey) keep the normal label + lock mark. */
+.mspot.awalk .mlab{background:#d3d0c6f5;color:#6e6c63;border-color:#a9a698;box-shadow:0 1px 3px #3a2a1e40}.mspot.awalk .mlab i{background:#c2bfb3;color:#6e6c63}.mspot.awalk .mlab em{color:#8a3a2c}.mspot.awalk .mres{filter:grayscale(1);opacity:.75}
 .mspot .mlab .mlock{flex:none;display:block;margin-left:0;opacity:1;color:#6b4a1c}.mspot .mlab .kmlock{flex:none}
 .mspot .mwhy{display:block;background:#2b2b28d9;color:#c9c9c0;font-size:.55rem;line-height:1.2;border-radius:6px;padding:0 5px;margin-top:1px;white-space:nowrap;pointer-events:none}
 .mspot.sm .mwhy{font-size:.5rem;padding:0 3px}
@@ -134,7 +136,7 @@ function accInfo(){if(!S||Q.length)return;const R=n=>`<b>${n}</b>`;
 .mspot .acb i,.mtile .acb i{font-style:normal;color:#f3e6cf;font-weight:400}
 .mspot .acb:disabled,.mtile .acb:disabled{opacity:.5;cursor:default;filter:grayscale(1)}
 /* kv3:.kv1 */:where(.kv1) .mspot .mwhy{font-size:.5rem}:where(.kv1) .mspot .acb,:where(.kv1) .mtile .acb{font-size:.5rem;min-height:18px}
-.mtile.awalk{cursor:pointer}
+.mtile.awalk{cursor:pointer;background-color:#6d6d68!important;background-blend-mode:luminosity;border-color:#77776f}.mtile.awalk .mband{filter:grayscale(1);opacity:.8}
 .mtile.agrey{background-color:#6d6d68!important;background-blend-mode:luminosity;cursor:default;border-color:#77776f}
 .mtile.agrey .mband{filter:grayscale(1);opacity:.8}
 .mtile .mchip.agw{background:#3a3a36;color:#d8d8cf;border:1px solid #77776f}
