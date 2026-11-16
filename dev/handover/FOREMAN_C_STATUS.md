@@ -28,7 +28,7 @@ Base main at start: 900ace7fb.
 | C19 pic-dupes-r1 re-review | review/pic-dupes-r2 | sonnet | LIVE (train-2) |
 | D10 update-notes popup + Settings "Thông tin cập nhật" | review/update-notes-r1 | sonnet | PASS 8cc6ae7c8 |
 | D2 item-art | review/item-art-r5 | sonnet | PASS aedcca1ed (all 44 poems read word by word; r08-b2/b3/b4 'triêu' + r02-b1, r07-b1 redone) |
-| D27 extra toilette reaction buttons | review/toil-react @d644bee7c (new jtoilr.js after jtoil.js; BAL.toil.rx) → review/toil-react-r1 | sonnet | REVIEWING |
+| D27 extra toilette reaction buttons | review/toil-react-r1 | sonnet | PASS 75bd0eb78 |
 | C20 act-text resume | review/act-text-r1 | sonnet | PASS fe15a6d54 — CONDITIONAL on kit keeper (K8 kit-helper list); reviewer fixed 2 costs shown green in ĐƯỢC (Điểm trang, Liếc mắt) |
 | D6 econ-items (item skimming by servants + charcoal/ice allowance, stolen-clothes re-issue, girlhood chest 6 slots) | review/econ-items | opus | RUNNING (worker) |
 | C6 mk-colour + D28 reveal | review/mk-colour-r1 | sonnet | PASS b9e201845 — CONDITIONAL on kit keeper (K2: whole §60 + §60.5 new vs main) |
@@ -71,6 +71,7 @@ PASS review/cycle-r3 d9c47fad1c671907c6a83e294fedc0e50ad23a39 (A7 incl. thaiy; S
 PASS review/ua-test-r1 cad6e04c0529267566f038b020520f6867c57f8e (D22; clean merge of main eba64ead4; dev/ only, no game code; UA versions a bit old (Chrome 130, iOS 17.5) — nothing reads versions)
 PASS review/tuduc-sub-r1 adeb7de66543c1100f46f819f3dcd05a9d88bcf2 (D16; descends from main eba64ead4; jtds.js LAST after jtruth/jkpc; tuduc-sub.js 5 viewports, recipes.js, ts-oldsave, coop-e2e 59/59; Đức farm closed via 1/month cap; art: phanson r03/r07 tier 1 look a bit like stained paper (minor))
 PASS review/balance-pass-r1 89ea80f78c8a8b64bbb1df2c5bebc144ec72e98a (C7; descends from main eba64ead4; jbac.js right after jevb.js; 2058 cards probed: no NaN/0/negative prices, shown = charged, co-op deterministic; opt-render, story-deadline, event-context, promo-exam 17/17, coop-e2e 59/59; follow-ups: free roads that are clear losses need content work; BAL.bacVal.duc (1 Đức = 8 khắc) vs bacroad ~5.3 — re-check; HH 45% = Q6)
+PASS review/toil-react-r1 75bd0eb78fec8106b35156c770f5a15578eab603 (D27; descends from main eba64ead4; jtoilr.js right after jtoil.js; reviewer fixed odds hint mapping to the ladder via word(odds), item road priced by sell value + no royal/keepsake gifts; toil-react.js 755/1180 + toilette.js pass; optional KIT REQUEST: a kit 'Tốn: <item>' row)
 PASS review/update-notes-r1 8cc6ae7c8f63f72436afceed38b4143aa3bc815b (D10; descends from main a523531da; update-notes.js 13/13 at 6 viewports; COORDINATOR: next merged release needs a NEW id in dev/build/jnotes.js CTM_NOTES (e.g. '2026-11-17'), never extra lines under an already-seen id; recipe in dev/PROGRESS_update-notes.md)
 
 ## NOTES for session 8 (found by C18 reviewer, outside Slice C)
