@@ -8,7 +8,7 @@ const SC={bloom:["kitBloom({title:'Có hỷ',sub:'Thái y báo tin mừng'})","T
 (async()=>{const b=await chromium.launch();let bad=0;
  for(const sz of (SIZES||"755x1000@2,1000x755@2,1180x820@2,1366x1024@2,844x390@2").split(",")){const [wh,dpr]=sz.split("@");const [W,H]=wh.split("x").map(Number);const errs=[];
   const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:+(dpr||1),hasTouch:true,isMobile:W<1100,serviceWorkers:'block'});
-  await ctx.addInitScript(()=>{setInterval(()=>{document.querySelectorAll(".krskip").forEach(b=>b.click());document.querySelectorAll(".kroul").forEach(e=>e.remove());const kl=document.getElementById("kload");if(kl)kl.remove()},250)});
+  await ctx.addInitScript(()=>{window.__km={};new MutationObserver(ms=>{for(const m of ms)for(const n of m.addedNodes){if(n.nodeType!==1)continue;if(n.classList&&n.classList.contains('kmov'))n.__t0=performance.now();const e=n.classList&&n.classList.contains('kmend')?n:(n.querySelector&&n.querySelector('.kmend'));if(e){const o=e.closest('.kmov');if(o&&o.__t0&&!o.__te)o.__te=performance.now()}}}).observe(document,{childList:true,subtree:true});setInterval(()=>{document.querySelectorAll(".krskip").forEach(b=>b.click());document.querySelectorAll(".kroul").forEach(e=>e.remove());const kl=document.getElementById("kload");if(kl)kl.remove()},250)});
   const p=await ctx.newPage();p.setDefaultTimeout(60000);p.on('pageerror',e=>errs.push(e.message.slice(0,160)));
   await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof kmStage==='function');await sleep(2500);await p.addStyleTag({content:'.kroul{display:none!important}'});
   await p.evaluate(()=>{SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<400;i++){try{store.set(NL_KEY,null)}catch(e){}start();if(!(typeof isSrv==='function'&&isSrv()))break}});
@@ -19,7 +19,8 @@ const SC={bloom:["kitBloom({title:'Có hỷ',sub:'Thái y báo tin mừng'})","T
    const K='.kmov.'+({bloom:'km-bloom',edict:'km-edict','flip-me':'km-tablet','flip-other':'km-tablet',gloom:'km-gloom',ink:'km-inkov'}[name]);
    await p.evaluate(c=>{(0,eval)(c)},code);await p.waitForSelector(K,{timeout:10000}).catch(()=>{});await sleep(500);
    const r={name};
-   r.early=await p.evaluate(k=>!!document.querySelector(k+' .kmend'),K);
+   /* r.early = the button appeared before the animation could have ended (kmStage dur >= 1.8 s); measured from the scene's own creation time, so a slow first paint cannot fake it; Gọn / reduced motion (km-red) shows it at once by design */
+   r.early=await p.evaluate(k=>{const o=document.querySelector(k);if(!o||o.classList.contains('km-red'))return false;const b=o.querySelector('.kmend');return !!b&&!!o.__t0&&!!o.__te&&(o.__te-o.__t0)<1200},K);
    await p.locator(K).first().click({position:{x:20,y:20},timeout:5000}).catch(()=>{});await sleep(500);
    r.btn=await p.evaluate(k=>{const o=document.querySelector(k);const b=o&&o.querySelector('.kmend');if(!b)return null;const q=b.getBoundingClientRect();return{t:b.textContent.trim(),n:o.querySelectorAll('.kbtn').length,inside:q.left>=0&&q.right<=innerWidth&&q.top>=0&&q.bottom<=innerHeight,hint:!!o.querySelector('.kmhint'),ov:[...o.querySelectorAll('.kmst *')].filter(e=>!e.children.length&&e.textContent.trim()&&!e.closest('[aria-hidden=true]')&&(g=>g.width>0&&Math.min(g.right,q.right)-Math.max(g.left,q.left)>2&&Math.min(g.bottom,q.bottom)-Math.max(g.top,q.top)>2)(e.getBoundingClientRect())).length,w:Math.round(q.width),h:Math.round(q.height)}},K);
    if(name==='flip-me'||H<500)await p.screenshot({path:`${OUT}/${wh}-${name}.png`});
