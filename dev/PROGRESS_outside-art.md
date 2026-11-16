@@ -37,3 +37,8 @@ Hotspot JSON uses the palace map-hotspots.json schema (box x,y,w,h + anchor, nor
 3. Dư đồ: show map picture + hotspots (kit map hotspot part used for the palace map) instead of the pbtn list, or above it; sub-tabs Trong phủ / Kinh thành.
 4. Not drawn (not asked): bến sông and ngoại ô scenes, Thần Võ môn scene, grandmother/mother/di nương portraits.
 ## KIT REQUEST: none (content art only).
+
+## Review r1 (art reviewer)
+- 13 scenes, 2 maps + hotspot boxes (drawn on maps, all on the right buildings), Huynh trưởng 2 identities x 4 ages: all looked at, PASS.
+- Huynh: same man across a18..a51 (hair greying, beard, stick), civilian blue/green dress, no pink/purple, fig 900 px tall like bacdich men; cutcheck figs <=0.34, portraits <=4.3 (existing congtu portraits score ~9); FIGURES-huynh.json keys match FIGURES-congtu (same set, order differs only).
+- Maps recompressed 1792x1000 -> 1536x857 q72 (440/467 KB -> 385/408 KB); hotspot JSON image.w/h updated; re-uploaded to CDN (normalised boxes unchanged).
