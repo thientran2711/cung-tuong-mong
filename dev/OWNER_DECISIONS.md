@@ -1124,3 +1124,7 @@ All must work in co-op.
 - Owner: if the map keeps only shortcuts it is useless; if everything moves to the map, Hành sự is useless. Each must have its own purpose. Tài nghệ study is duplicated between Hành sự and the Tài nghệ tab and still has no fix. Owner wants the IDEA shown to her first, before a worker builds it.
 - Owner asked what the frame-defence odds depend on (answered from BAL.truth: base 20 + Tai mắt×5 + Kính sự phòng night 25 + loyal maid witness 15 + Thái y 20 + evidence on the framer 10 each (max 2), within 10–85; failure = real punishment).
 - Coordinator: act-dedupe worker put on HOLD (bug fixes only) until the owner approves the split.
+
+## 16/11 (session 8) — Rolled lifespan (thọ số) for everyone (owner)
+- Owner: at game start EVERYONE (player, NPCs, maids, eunuchs, Emperor, Thái hậu…) rolls a lifespan die. Example: she rolls 68, so she lives to 68, then dies of illness, the life ends and a new life starts. A roll of 24 at age 20 gives only 4 years. No reroll. Children born in game (princes, crown prince, princesses) roll too; some get 1–5 and die young of smallpox or an epidemic.
+- → review/mortality told: the age core = a rolled lifespan per person (saved), shortened by poison, assassination, illness and childbirth. Pending owner answers: visible vs hidden roll; dice curve and floors (player, Emperor); whether care can lengthen it.
