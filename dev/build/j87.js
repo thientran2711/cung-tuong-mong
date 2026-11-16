@@ -214,31 +214,103 @@ function kitBook(spec){spec=spec||{};const rm=()=>{try{return reducedMotion()}ca
 
 const KBK_DELTA_ONLY=/^(\s*[A-Za-zÀ-ỹĐđ]+(?: [A-Za-zÀ-ỹĐđ]+){0,5} [+\-−]\d+\s*[,;·]?)+\s*\.?$/;
 const KBK_WORLD=/(thế lực|Kho lúa|kho lúa|^Sớ|triều đình|Triều đình|biên ải|Được mùa|Mất mùa|thiên tai|lũ lụt|hạn hán|dịch bệnh|sứ thần|ngoại bang|giặc|khoa cử|Hộ bộ|Binh bộ|Lễ bộ|Lại bộ|Hình bộ|Công bộ|Hàn lâm|thiên hạ|dân gian|kinh thành)/;
+/* ===== review/weekbook-entries (owner 15/11: "Giải thích gì mà không liên quan tới hoàng thượng vậy.") =====
+   Every person page lists ONLY what happened with THAT person this week: one entry per log unit, the unit's cause + the effect sentence
+   + only the numbers that belong to that person (Sủng → Hoàng thượng, "Thái hậu quý ngươi" → Thái hậu, "<tên> oán/ghen" → that
+   person, Danh/Sức/Bạc/Đức… → her own page). The numbers of the page's relation table equal the sum of the entries (a small
+   "chuyện nhỏ khác" entry carries what no line explained). Card promise text is never an entry. */
+const WKE_NAME="[A-ZÀ-ỸĐ][\\p{L}]*(?: [A-ZÀ-ỸĐ][\\p{L}]*){0,3}";
+const WKE_TOK=new RegExp("(?<![\\p{L}\\d])((?:Thái hậu|Hoàng hậu|phi tần|các phi tần|mọi phi tần|kẻ khác|người khác|"+WKE_NAME+")\\s+)?(Sủng(?: của "+WKE_NAME+")?|quý ngươi|quý ta|thiện cảm|oán ngươi|oán ta|ghen|Danh|Sức|Bạc|Đức|Tai mắt|Ân tình|Tài|Sắc|Tâm cơ)\\s+(-?\\d+\\s*(?:→|->)\\s*-?\\d+|[+\\-−]\\d+)(?![\\d])","gu");
+const WKE_CARD=/(^|\s)·\s*(kèm|thành|hỏng)\s*:|\b(Liều|Khó|Năm ăn năm thua|Khá chắc|Chắc chắn|Rất chắc|Nắm chắc|Chắc)\s*·|ai gặp ta cũng nhìn|\(thẻ [^)]*\)|chọn món trong rương|Dùng được ở thẻ|^Xem sổ thị tẩm|Sổ thị tẩm:/;
+function wkeDelta(v){v=String(v).replace(/−/g,"-");const m=/^(-?\d+)\s*(?:→|->)\s*(-?\d+)$/.exec(v);return m?+m[2]-+m[1]:parseInt(v,10)}
+function wkeNorm(h){return kpMapText(String(h||""),s=>s.replace(/\b(Thái hậu|Hoàng hậu)\s+(?=[+\-−]\d)/g,"$1 thiện cảm "))}
+/* every number of a unit: {m:[start,end] in the plain segment, who: person | "me" | null, row:"sung"|"aff"|"oan"|"ghen"|"", d, label} */
+function wkeTokens(html,people,nodup){const out=[];const TH=S.thO||{kind:"th"};
+ kpMapText(wkeNorm(html),s=>{WKE_TOK.lastIndex=0;let m;while((m=WKE_TOK.exec(s))){let [all,pre,lab,val]=m;pre=(pre||"").trim();const d=wkeDelta(val);if(!d)continue;let who=null,row="";
+  const byName=n=>{const e=people.find(x=>x[0]===n||x[0].endsWith(" "+n)||n.endsWith(" "+x[0]));return e?e[1]:null};
+  const pers=n=>/^(phi tần|các phi tần|mọi phi tần|kẻ khác|người khác)$/.test(n)?"grp":n==="Thái hậu"?TH:n==="Hoàng hậu"?((typeof rivals!=="undefined"&&rivals.find(v=>v.queen))||null):byName(n);
+  if(/^Sủng/.test(lab)){const o=/^Sủng của (.+)$/.exec(lab);if(o){who=byName(o[1]);if(who===S)who="me"}else{who=S.emp||null;row="sung"}}
+  else if(/^(quý|thiện|oán|ghen)/.test(lab)){row=/^oán/.test(lab)?"oan":lab==="ghen"?"ghen":"aff";if(pre)who=pers(pre)}
+  else{if(pre)who=pers(pre);else who="me"}
+  const ab=/→|->/.test(val)?val.replace(/\s|−/g,m=>m==="−"?"-":"").replace("->","→"):"";
+  if(!nodup&&ab&&out.some(x=>x.ab===ab&&x.row===row&&x.lab===lab&&x.pre===pre))continue;/* the same "a → b" said twice in one unit counts once */
+  out.push({who,row,d,pre,lab,ab,all:m[0],at:m.index,seg:s});}return s});return out}
+/* remove tokens that do not satisfy keep(tok) from the html, tidy the punctuation they leave */
+function wkeStrip(html,people,keep){const toks=wkeTokens(html,people,true);if(!toks.length)return html;let h=wkeNorm(html);
+ h=kpMapText(h,s=>{WKE_TOK.lastIndex=0;return s.replace(WKE_TOK,(all,pre,lab,val)=>{const t=toks.find(x=>x.all===all.trim()||x.all===all);return t&&!keep(t)?"":all})});
+ return h.replace(/<(span|b|i)[^>]*>\s*<\/\1>/g,"").replace(/(\s*[,;·]\s*)+(?=\.|$)/g,"").replace(/([.:;])\s*,\s*/g,"$1 ").replace(/,\s*,/g,",").replace(/\s+([.,;:])/g,"$1").replace(/\.\s*\./g,".").replace(/^\s*[,;·.]\s*/,"").replace(/(^|[.:;>]\s*)vì [^.<]*\.?/g,"$1").replace(/(\s*·\s*){2,}/g," · ").replace(/\s*·\s*(?=[,;.]|$)/g,"").replace(/(^|[.:;]\s+)·\s*/g,"$1").replace(/\s{2,}/g," ").replace(/(^|[.!?]\s+)([a-zà-ỹđ])/g,(m,a,b)=>a+b.toUpperCase()).trim()}
+function wkeTrim(h){let p;h=String(h||"");do{p=h;h=h.replace(/(?:[\s,;·:.]|→)+((?:<\/[a-z]+>)*)$/,"$1")}while(h!==p);return h.trim()}
+function wkeSign(d){return d>0?"+"+d:"-"+Math.abs(d)}
+/* the entry of one owner: the unit's cause (numbers removed) + why it moved + the owner's own numbers */
+function wkeEntry(html,people,p,toks){const mine=toks.filter(t=>t.who===p);let cause=wkeTrim(wkeStrip(html,people,()=>false));
+ if(!kpPlain(cause)||/^[\s.]*$/.test(kpPlain(cause)))cause="";
+ const net={};mine.forEach(t=>{const k=t.row||t.lab;net[k]=(net[k]||0)+t.d});
+ const sj=(typeof kitRelSubj==="function"?kitRelSubj(p):"Nàng"),sjl=sj==="Nàng"||sj==="Hắn"?sj.toLowerCase():sj;
+ const why=[],chips=[];
+ for(const k of Object.keys(net)){const d=net[k];if(!d)continue;
+  if(k==="sung"){why.push(d>0?"Hoàng thượng để tâm đến ta hơn":"Hoàng thượng nhạt lòng với ta");chips.push(`Sủng ${wkeSign(d)}`)}
+  else if(k==="aff"){why.push(d>0?`${sjl} thêm quý mến ta`:`${sjl} bớt vừa lòng về ta`);chips.push(`${sj} thiện cảm ${wkeSign(d)}`)}
+  else if(k==="oan"){why.push(d>0?`${sjl} thêm oán ta`:`${sjl} bớt oán ta`);chips.push(`${sj} oán ta ${wkeSign(d)}`)}
+  else if(k==="ghen"){why.push(d>0?`${sjl} thêm ghen ghét ta`:`${sjl} bớt ghen`);chips.push(`${sj} ghen ${wkeSign(d)}`)}
+  else chips.push(`${k} ${wkeSign(d)}`)}
+ const w0=why.length&&!(cause&&why.every(x=>kpPlain(cause).toLowerCase().includes(x.toLowerCase())))?why:[];
+ return `${cause?cause+(w0.length?", ":""):""}${w0.length?w0.join("; "):""}${cause||w0.length?". ":""}${chips.join(", ")}${chips.length?".":""}`.replace(/\.{2,}/g,".").replace(/^\s*,\s*/,"").trim()}
 function wkBookData(){const s=S.wkSnap||wkSnap();const n=Math.max(0,Math.min(S.logs.length,(S.logSeq||0)-(s.seq||0)));
  const raw=S.logs.slice(0,n).slice().reverse();const people=kpPeople();const SKIPRE=/^(Xin xăm|Gieo lại|Đến Tẩm cung của ngươi)/;
- const by=new Map(),me=[],world=[];const TH=S.thO||{kind:"th"};let pay="";const key=p=>p;
- const add=(p,text)=>{if(!by.has(key(p)))by.set(key(p),{who:p,F:[]});by.get(key(p)).F.push(text)};
+ const TH=S.thO||{kind:"th"};let pay="";const U=[];let last=null;
+ /* the person a sentence is about = the one named FIRST outside brackets (never "Hoàng thượng" only because a hint in brackets names him) */
+ const homeOf=t=>{try{const [,w0]=kpPeopleIn(kpMapText(t,x=>x.replace(/\([^)]*\)/g,"")),people);const w=w0.map(x=>x&&x.kind==="th"&&!rivals.includes(x)?TH:x);const p=w.find(x=>x!==S&&!(S.emp&&x===S.emp))||w[0]||null;
+  /* Hoàng thượng / Thái hậu are "the person it is about" only when the sentence opens with them ("Được Hoàng thượng ban…", "Thái hậu triệu…"), not when a hint names them later */
+  if(p&&(p===S.emp||p===TH)&&!people.some(x=>x[1]===p)){const q=kpPlain(t).replace(/\([^)]*\)/g,"");const i=q.search(p===S.emp?/Hoàng thượng|Thánh thượng/:/Thái hậu/);if(i<0||i>12)return null}
+  return p}catch(e){return null}};
  for(const h of raw){const pl=plain(h);if(!pl||SKIPRE.test(pl))continue;if(/^Bổng lộc tháng/.test(pl)){pay=pl.replace(/^Bổng lộc tháng [^:]*:\s*/,"").replace(/\.$/,"");continue}
-  const html=kbkClean(String(h).replace(/<span class="ld">[^<]*<\/span>/,"").replace(/\s*\(Đã ghi vào mục Đã biết[^)]*\)\.?/g,""));let last=null;
+  const html=kbkClean(String(h).replace(/<span class="ld">[^<]*<\/span>/,"").replace(/\s*\(Đã ghi vào mục Đã biết[^)]*\)\.?/g,""));last=null;
   for(let t of kpSentences(html)){const tp=kpPlain(t);if(!tp||SKIPRE.test(tp)||/^\(?Đã ghi vào mục Đã biết/.test(tp))continue;
+   /* the card's own promise / hint text is not an event (owner 15/11: Điểm trang entry on Hoàng thượng's page) */
+   if(WKE_CARD.test(tp))continue;
    /* a line that is only a name ("Hoàng hậu Chu Thục Nghi.") says nothing (owner 15:30Z) */
    {let r=tp;for(const [n] of people)r=r.split(n).join(" ");r=r.replace(/(Thái tử|Hoàng tử|Công chúa|Hoàng hậu|Hoàng quý phi|Quý phi|Phi|Tần|Quý nhân|Thường tại|Đáp ứng|Thái hậu|Hoàng thượng|Phế phi|Thái y|Thị vệ|Ma ma|Cô cô)/g," ");if(!/[\p{L}\d]/u.test(r))continue}
-   if(/^(Tháng này|Tin triều đình|Triều đình|Thiên hạ)\s*:/.test(tp)){t=t.replace(/^((?:<[^>]+>)*)\s*(Tháng này|Tin triều đình|Triều đình|Thiên hạ)\s*:\s*/,"$1");world.push(t);last="world";continue}
-   if((KBK_DELTA_ONLY.test(tp)||!kbkMeaning(tp))&&last){const tgt=last==="world"?world:last===S?me:(by.get(last)||{}).F;if(tgt&&tgt.length){tgt[tgt.length-1]+=" "+t;continue}}
-   const [,w0]=kpPeopleIn(t,people);const w=w0.map(x=>x&&x.kind==="th"&&!rivals.includes(x)?TH:x);let p=w.find(x=>x!==S&&!(S.emp&&x===S.emp))||w[0]||null;
-   if(!p&&last&&last!=="world"&&!/^(Được mùa|Mất mùa|Sớ|Kho)/.test(tp))p=last;
-   if(!p&&(last==="world"&&/^(Nhà |Kho |.*thế lực)/.test(tp)||KBK_WORLD.test(tp))){world.push(t);last="world";continue}
-   if(!p)p=S;
-   if(p===S)me.push(t);else add(p,t);last=p}}
+   if(/^(Tháng này|Tin triều đình|Triều đình|Thiên hạ)\s*:/.test(tp)){t=t.replace(/^((?:<[^>]+>)*)\s*(Tháng này|Tin triều đình|Triều đình|Thiên hạ)\s*:\s*/,"$1");last={t,world:true};U.push(last);continue}
+   const hm=homeOf(t);
+   /* a result / reaction / bare number joins the unit before it, but only when it is about the same person (no more "last" glued across people) */
+   if(last&&(KBK_DELTA_ONLY.test(tp)||!/[\p{L}\d]/u.test(tp.replace(WKE_TOK,"").replace(/[+\-−→>]|\d/g,""))||(!kbkMeaning(tp)&&(!hm||hm===last.home||(last.home==null&&hm===S))))){last.t+=" "+t;continue}
+   let p=hm;
+   if(!p&&(last&&last.world&&/^(Nhà |Kho |.*thế lực)/.test(tp)||KBK_WORLD.test(tp))){last={t,world:true};U.push(last);continue}
+   last={t,home:p&&p!==S?p:null};U.push(last)}}
+ /* ---- units → pages: by the owner of each number, then by the person the unit is about ---- */
+ const by=new Map(),me=[],world=[];const add=(p,e)=>{if(!by.has(p))by.set(p,{who:p,F:[],tk:[]});const x=by.get(p);if(e)x.F.push(e)};
+ const SEEN=new Map();const meKeep=t=>t.who==="me"||t.who==="grp"||t.who===S.emp&&t.row==="sung";
+ for(const u of U){if(u.world){world.push(u.t);continue}
+  const toks=wkeTokens(u.t,people).filter(t=>{if(!t.ab||!t.who)return true;const k=(t.row||t.lab)+"|"+t.ab;let m=SEEN.get(t.who);if(!m)SEEN.set(t.who,m=new Set());if(m.has(k))return false;m.add(k);return true});const owners=new Set();
+  toks.forEach(t=>{if(t.who&&t.who!=="me"&&t.who!=="grp")owners.add(t.who)});
+  /* an unattributed relation number ("nàng quý ngươi +2") belongs to the person the unit is about */
+  toks.forEach(t=>{if(!t.who&&t.row&&u.home){t.who=u.home;owners.add(u.home)}});
+  if(u.home)owners.add(u.home);
+  for(const p of owners){if(p===S)continue;const mine=toks.filter(t=>t.who===p);
+   /* a person is listed only for something that happened WITH them: their own number, or the sentence is about them */
+   if(!mine.length&&p!==u.home)continue;
+   const e=wkeEntry(u.t,people,p,toks);if(e&&kpPlain(e))add(p,e);by.get(p)&&by.get(p).tk.push(...mine)}
+  const hasMe=toks.some(meKeep);
+  if(hasMe||(!u.home&&!owners.size)||(!toks.length&&!u.home))me.push(hasMe?wkeStrip(u.t,people,meKeep):u.t)}
  /* duplicates: one row, "2 lần" */
  const dedup=L=>{const m=new Map();for(const t of L){const k=kpPlain(t);if(m.has(k))m.get(k).n++;else m.set(k,{t,n:1})}return [...m.values()].map(x=>x.n>1?{text:x.t,chips:[[`${x.n} lần`,"n"]]}:{text:x.t})};
  const D=[["Sủng",S.sung-s.sung],["Danh",S.danh-s.danh],["Sức",S.suc-s.suc],["Bạc",S.bac-s.bac]];
  if(s.duc!=null)D.push(["Đức",S.duc-s.duc]);if(s.mat!=null)D.push(["Tai mắt",S.mat-s.mat]);if(s.an!=null)D.push(["Ân tình",(S.an||0)-s.an]);
  const rank=S.rank!==s.rank?(S.rank>s.rank?"Được thăng ":"Bị giáng xuống ")+(S.rank>=7?"Hoàng hậu":RANKS[S.rank].n):"",kids=S.kids.length-(s.kids||0);
  /* KIT §52 (owner 11/15 15:30Z): every person page has the SAME relation table, fixed rows for the kind of person (kitRelRows),
-    with the week's change from the snapshot; no private chips, no "Hiện nay" row of its own */
+    with the week's change from the snapshot; no private chips, no "Hiện nay" row of its own.
+    owner 15/11 (weekbook-entries): the table's change = the sum of the entries listed; what no line explained is one more entry. */
  const persons=[...by.values()].map(x=>{const p=x.who;const rel=typeof kitRelRows==="function"?kitRelRows(p,s):[];
-  return {kind:"person",who:p,rel,blocks:[{facts:dedup(x.F)}],n:x.F.length}}).filter(x=>x.n>0||x.rel.some(r=>r.d));
+  const F=x.F.slice();
+  if(p===S.emp||(p===TH)||p===S.thO||p.kind==="th"||true){
+   const sj=typeof kitRelSubj==="function"?kitRelSubj(p):"Nàng",sjl=sj==="Nàng"||sj==="Hắn"?sj.toLowerCase():sj;
+   for(const r of rel){if(!r.d||/^Ta /.test(r.label)||r.unk!=null)continue;
+    const k=p===S.emp?"sung":/oán/.test(r.label)?"oan":/ghen/.test(r.label)?"ghen":/tin cậy/.test(r.label)?"":"aff";if(!k)continue;
+    const got=x.tk.filter(t=>(t.row||"")===k).reduce((a,t)=>a+t.d,0);const rest=r.d-got;if(!rest)continue;
+    const lab=k==="sung"?"Sủng":k==="aff"?`${sj} thiện cảm`:k==="oan"?`${sj} oán ta`:`${sj} ghen`;
+    const why=k==="sung"?(rest>0?"Hoàng thượng để tâm đến ta hơn":"Hoàng thượng nhạt lòng với ta"):k==="aff"?(rest>0?`${sjl} thêm quý mến ta`:`${sjl} bớt vừa lòng về ta`):k==="oan"?(rest>0?`${sjl} thêm oán ta`:`${sjl} bớt oán ta`):(rest>0?`${sjl} thêm ghen ghét ta`:`${sjl} bớt ghen`);
+    F.push(`Mấy việc vặt trong tuần chưa ghi riêng, ${why}. ${lab} ${wkeSign(rest)}.`)}}
+  return {kind:"person",who:p,rel,blocks:[{facts:dedup(F)}],n:F.length}}).filter(x=>x.n>0||x.rel.some(r=>r.d));
  const rk=p=>S.emp&&p.who===S.emp?0:(S.thO&&p.who===S.thO)||p.who.kind==="th"?1:2;
  persons.sort((a,b)=>rk(a)-rk(b)||b.n-a.n);
  return {D,rank,kids,pay,me:dedup(me),world:dedup(world),persons}}
