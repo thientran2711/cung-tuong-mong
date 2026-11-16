@@ -30,3 +30,5 @@ Moved to Foreman D: slap-mg (§79), coop-chat (§80), act waves 2–3, HD upscal
 - The #kload first-run panel is wider than 560 (kpanel-compact note).
 - The disk on this box is tight; git prune + old worktrees removed (owner allowed cleanup).
 - (16/11 05:12Z) Main session 9 created (session_01UV1SziGvry1bKMUgXYLvuE). Session 8 = relay only (writes reports/), its hourly watch cron removed; it archives itself when its agents are done.
+
+- (16/11) OWNER RULE (angry; credits): workers and reviewers are opened as SEPARATE cloud sessions (create_session, same environment, prompt = the task brief), NOT as in-session subagents. Each worker writes its result to the repo (branch + PROGRESS + a short report file under dev/handover/reports/<branch>.md on the handover branch). The coordinator reads the repo on each hourly wake, so the main chat context stays small and any new main session can take over without losing workers. Applies to the main chat and every foreman.

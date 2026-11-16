@@ -32,3 +32,5 @@ Main coordinator keeps: all co-op (D21, A10, C43, C44), side stories D4/D5 + Emp
 
 ## COORDINATOR ORDER (owner 16/11): HOURLY SELF-WAKE
 Every foreman must keep a recurring hourly self-wake in its own session (CronCreate / scheduled check-in, re-created after any restart or rollover). Each wake: pull the handover branch, re-read this file + your STATUS + OWNER_DECISIONS (new 16/11 entries), take new items of your slice from the repo, spawn reviewers for SẴN SÀNG KIỂM, refill slots, push your STATUS. Write the time of the last wake at the top of your STATUS ("last wake: <UTC>") so the main chat can see you are alive.
+
+- (16/11) OWNER RULE (angry; credits): workers and reviewers are opened as SEPARATE cloud sessions (create_session, same environment, prompt = the task brief), NOT as in-session subagents. Each worker writes its result to the repo (branch + PROGRESS + a short report file under dev/handover/reports/<branch>.md on the handover branch). The coordinator reads the repo on each hourly wake, so the main chat context stays small and any new main session can take over without losing workers. Applies to the main chat and every foreman.
