@@ -50,7 +50,7 @@ main at start = eba64ead4.
 | kc-roads-cn-nc round 3 review (main s14 08:41Z) | review/kc-roads-cn-nc-r1 @ef6e7a05 | opus | FAIL 4 (1 BLOCKING) → FOR MAIN s14 (see QUESTIONS) |
 | scene-end button sweep (KIT §81 live 9a4da876) | review/scene-end-sweep @67db47f6 | sonnet | PASS 67db47f6 (whole-game rescan: no scene closes by itself; buổi transition = not a scene) |
 | coop-rejoin-xdev review | — | — | CANCELLED for D (main s13 has it) |
-| MEMORY UPGRADE + CAUSE ledger (s17) | review/mem-upgrade | opus | worker session_01DgYSWnbZAx5XWMeN9VzwiE RUNNING 13:45Z |
+| MEMORY UPGRADE + CAUSE ledger (s17) | review/mem-upgrade @06e4179e | opus | SẴN SÀNG KIỂM (worker archived) → reviewer mem-upgrade-r1 RUNNING 14:15Z |
 | ITEM CONSERVATION + ITEM ledger (s17) | review/item-ledger | opus | worker session_01DgYSWoSdvBQtzpXxCDVUPh RUNNING 13:45Z |
 
 ## PASS (for the main coordinator to fast-forward)
@@ -78,6 +78,7 @@ READY review/coop-guest-maid-r1 3a875687518f3492f24ce8bd2bfe825076c32513 (co-op 
 ## PENDING CDN UPLOAD
 
 ## QUESTIONS
+- (14:15Z s5, from mem-upgrade report § QUESTIONS; Foreman D per OD:L51 unless noted) Q1 causes stay HIDDEN from her (owner OD 13:40Z 'hidden from her') → no 'vì …' rows. Q3 her own fade = base rate + spread (no new stat) → keep. Q4 more lifelong events (child born/lost, first night, rescue) → yes, as those events call memAdd(…,{life:1}); follow-up, not blocking. Q5 co-op friend's own memories write-back (jcoopworld) → follow-up item for D (co-op), after the review. Q6 → item-ledger worker told to call causeAdd/causeQuery. FOR MAIN s17 / OWNER (new design + balance): Q2 should the Emperor and Thái hậu act on their memories (night picks, punishment weight, Sủng gains)? Not wired now.
 - (13:42Z s5, from D4 npc-death; decided by Foreman D per OD:L51, owner may override) (1) quest rgl_ly3 no longer frees Phế phi Lý ('về chùa tu hành'): she stays until death per OD:L641 'She only leaves when she dies' → KEEP the worker's change. (2) court officers now get a full j59 personal name like first holders (was surname only 'Thái y Vương') → KEEP (one naming rule). ART NEEDED for Foreman C: eunuch/official/maid/mama portrait pools too small now that dead NPCs' portraits are never reused (list in reports/npc-death.md § ART NEEDED).
 - (13:10Z s5) KIT REQUEST for main s16 kit keeper: kit DANGER button + kit confirm dialog (from cloud-del; details in dev/kit/KIT_REQUESTS.md + reports/cloud-del.md). C44 delete button waits on it; please write KIT READY in FOREMAN_D.md INBOX.
 - ANSWERED s16 12:55Z: PARKED, do not work around. (was: s4 10:58Z) D8 POISON ROADS (OD:L602 item 5: poisoning the Emperor / Thái hậu must be possible, with risk/consequences): the opus worker's reply was stopped by a safety classifier, so it will not write that half. Visit half continues. Main: retry with a fresh session (game-fiction framing), or keep parked?
