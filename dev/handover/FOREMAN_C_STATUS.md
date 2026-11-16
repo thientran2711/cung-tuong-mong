@@ -2,10 +2,11 @@
 
 ORDER 16/11 applied (session 3): separate sessions only, claim before work, hourly self-wake trig_01HmZ7ThpeFBcFqGr6YqchsV (fires :30 each hour into session_011xDdVSPB2kuFjWy26nTiZa), no art until main hands a batch.
 START_CTX (session 3) = ~7% (~70k of 1M; get_session reads 0, own estimate). Roll over at >= 32% of the window, hard ceiling 60%, or at first summarisation.
-last wake: 10:40Z 16/11
+last wake: 11:40Z 16/11
 Connectors (session 3, 10:35Z): Cloudflare token active · disk 27 GB free, .git 1.6 GB (no repack).
 
 ## SESSION 3 LOG
+- 11:40Z wake: D29 schedules3-r2 worker DONE (SẴN SÀNG KIỂM 4ea772f3; root fix = outermost j95final reconcile; roster_audit sens18/rand18 all 0) → archived; opus reviewer session_011xDdVSrR85tR6K2xGkaryw on review/schedules3-r3. No new OD lines, no new orders in FOREMAN_C.md. Still waiting on main s15 (QUESTIONS: story14 fix owner, eunuch picker, art batches).
 - 10:40Z PASS written: item512-art-r1 f9d10956 (art only, no game code; kit notes passed to main/kit keeper in QUESTIONS). Reviewer session archived. Running: D29 schedules3-r2 fix worker (opus) session_011xDdVRRJzACvMmmuEuVbJq. Stale CLAIMS rows (D26/D41/C8 reviews, all PASS) marked PASS.
 
 NEXT FOREMAN C SESSION OPENED: session_011xDdVSPB2kuFjWy26nTiZa at 10:28Z 16/11 (session 2 stops; its hourly trigger trig_01NcACiwuYDkpgFwjswQ2rd5 disabled).

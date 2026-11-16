@@ -158,4 +158,4 @@
 | D36 rank-port reviewer | review/rank-port-r1 | B | (session id: see FOREMAN_B_STATUS) | RUNNING | 16/11 11:38Z |
 | D11 presentation reviewer | review/presentation-r1 | B | (session id: see FOREMAN_B_STATUS) | RUNNING | 16/11 11:38Z |
 | D13 spread-events reviewer | review/spread-events-r1 | B | (session id: see FOREMAN_B_STATUS) | RUNNING | 16/11 11:38Z |
-| D29 review (opus) of schedules3-r2 @4ea772f3 | review/schedules3-r3 | C | (opening) | RUNNING | 16/11 11:40Z |
+| D29 review (opus) of schedules3-r2 @4ea772f3 | review/schedules3-r3 | C | session_011xDdVSrR85tR6K2xGkaryw | RUNNING | 16/11 11:40Z |
