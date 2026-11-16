@@ -59,7 +59,8 @@ function classifyFile(f,patch,oldRev,newRev){const base=path.basename(f);
  M.forEach((a,i)=>{if(!used.has(i))pairs.push([a,''])});
  let big=null;const kinds=new Set(),cats=new Set();const cut=x=>x.trim().slice(0,90);
  for(const [a,b] of pairs){
-  if(a&&b&&noStr(a)===noStr(b)){kinds.add('text');continue}                       /* only words inside strings changed */
+  if(a&&b&&noStr(a)===noStr(b)){const d=x=>(x.match(/\d+/g)||[]).join(',');                /* only words inside strings changed */
+   if(d(a)!==d(b)){big=big||('number inside text (one-core rule: numbers come from BAL): '+cut(b));cats.add('bal');continue}kinds.add('text');continue}
   if(a&&b&&noNum(noStr(a))===noNum(noStr(b))){                                    /* only numbers changed */
    if(LAYOUTNUM.test(a+'\n'+b)&&!BIGWORD.test(noStr(a+'\n'+b))){kinds.add('layout numbers');continue}
    big=big||('game number changed: '+cut(b||a));cats.add('bal');continue}
