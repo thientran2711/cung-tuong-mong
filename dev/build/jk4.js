@@ -173,16 +173,21 @@ function kitStageFig(p,o){o=o||{};try{if(!p)return"";const q=p.__kp||p;const src
 function kitStagePeople(m){if(!m)return[];let L=[];const sp=m.stage||(m.kit&&m.kit.stage);
  if(Array.isArray(sp))L=sp;else{const w=m.who||(m.kit&&m.kit.subject);const p=w&&(w.__kp||(w.alive!==undefined||w.name&&w.rank!==undefined?w:null));if(p)L=[p];const w2=m.who2;if(w2)L.push(w2.__kp||w2)}
  return L.filter(p=>p&&typeof p==="object").slice(0,2)}
+/* KIT 50.3 default banner (OD:L448): the picture of a person pop-up whose event has none — the info picture of its title (kitInfoArt: info-*.webp / act-cat-*), else one per kind */
+const KIT_KIND_BANNER={info:"giao-thiep",rule:"hoc-tap",notice:"giao-thiep",result:"le-nghi",night:"sung-ai",intel:"muu-ke",end:"le-nghi",news:"giao-thiep",choice:"giao-thiep",reward:"ban-thuong",guide:"hoc-tap"};
+function kitDefaultBanner(m,kind){try{const ia=typeof kitInfoArt==="function"?kitInfoArt(m&&m.t||""):null;if(ia&&ia.src)return{src:ia.src,lab:""};
+ const have=(typeof KIT_ACTS==="object"&&KIT_ACTS.have)||[];const c=KIT_KIND_BANNER[kind]||"giao-thiep";const k=have.includes("act-cat-"+c)?c:(have.includes("act-cat-giao-thiep")?"giao-thiep":"");return k?{src:`img/act-cat-${k}.webp`,lab:""}:null}catch(e){return null}}
+window.kitDefaultBanner=kitDefaultBanner;
 function kitEventStage(m){try{const M=$("modal"),mb=$("mb");const dlg=M&&M.querySelector(".dlg.kpanel");const body=mb&&mb.querySelector(":scope > .kpb");
  if(!dlg||!body||body.classList.contains("kpid")||body.querySelector(":scope > .kes"))return false;
- /* KIT §8 / 32.2 (coordinator 15/11, kit-sample audit): an INFO panel about a person (ĐIỀU · info / LUẬT · rule / NGƯỜI · person report)
-    keeps the small 3:4 portrait (.kpsubj); the full-body stage column is for EVENTS with a main actor (VIỆC, BÁO, ĐÊM, KẾT QUẢ …) */
- if(/^(info|rule|person)$/.test(dlg.dataset.kind||"")&&!Array.isArray(m&&(m.stage||(m.kit&&m.kit.stage))))return false;/* a panel that names its stage itself (the Nội vụ phủ shop, pet care) keeps it */
+ /* owner 16/11 07:35Z (OD:L448): EVERY pop-up with a person — events AND info / rule / person reports — shows the person FULL-BODY on the left; the small 3:4 portrait (.kpsubj) is retired for people (a person pop-up outside #modal: kitPersonDlg, jpdlg.js) */
  const P=kitStagePeople(m);if(!P.length)return false;const figs=P.map(p=>kitStageFig(p)).filter(Boolean);if(!figs.length)return false;
  /* wide band on top: headArt (jk3 .kdlgart) or the event picture moved from the tall left slot */
  if(!mb.querySelector(":scope > .kdlgart")){let a=null;const ev=body.querySelector(":scope > .kpsubj.kpev");
   if(ev){const im=ev.querySelector("img"),fr=ev.querySelector(".ksart");if(im)a={src:im.getAttribute("src"),lab:(fr&&fr.title)||""}}
   if(!a&&typeof kitEvArt==="function")a=kitEvArt(m);
+  /* owner 16/11 07:35Z (OD:L448) + reviewer popup-fullbody-r1 #2: EVERY person pop-up has the event picture RIGHT TOP — a kind without its own picture (ĐIỀU / LUẬT / BÁO / KẾT QUẢ / ĐÊM / tai mắt) gets its default banner by kind */
+  if(!a||!a.src)a=kitDefaultBanner(m,dlg.dataset.kind||"");
   if(a&&a.src){const d=document.createElement("div");d.className="kdlgart kesband";d.innerHTML=kitSceneArt(a.src,a.lab,Object.assign({shape:"wide",cap:!!a.lab},kitEvCat(m,a),a.mark?{mark:a.mark,markAlt:a.markAlt||""}:{}));mb.prepend(d)}}
  body.querySelectorAll(":scope > .kpsubj").forEach(e=>e.remove());
  const s=document.createElement("div");s.className="kpsubj kes kes"+figs.length;s.innerHTML=figs.join("");body.prepend(s);body.classList.add("kphas","kesb");dlg.classList.add("kesdlg");return true}catch(e){console.error("kitEventStage",e);return false}}
@@ -405,6 +410,8 @@ function kitDpFit(){try{const o=kitDpOn();if(!o||!o.d.classList.contains("kdper"
   /* review shop-fix (main): kitEsFit (33.6) may have left position:relative + a narrow max-width inline on a cached figure; clear them */
   x.cap.style.removeProperty("position");x.cap.style.removeProperty("z-index");x.cap.style.removeProperty("max-width")}});
  const capH=Math.max(0,...L.map(x=>x.cap?x.cap.offsetHeight:0));
+ /* reviewer popup-fullbody-r1 / evidence panel: a person panel WITHOUT an options group scrolls as a whole (#mb); the figure column must be the visible height of #mb (sticky at the top), never the whole scroll height (figure 1100 px below the fold) */
+ if(!narrow&&!mb.querySelector(":scope > .opts")){col.style.removeProperty("height");col.style.removeProperty("align-self");if(mb.scrollHeight>mb.clientHeight+2){col.style.alignSelf="start";col.style.height=Math.max(200,mb.clientHeight-20)+"px"}}
  const H=col.clientHeight;if(H<80)return;const floor=H-2;
  const capW=Math.max(0,...L.map(x=>x.cap?x.cap.scrollWidth:0));
  /* KIT 32.2 CAP + CROP (owner 15/11 "Sao khung này, khung trái nhân vật to vậy … nếu cắt váy thì cũng ok mà", review/stage-fig-size):
