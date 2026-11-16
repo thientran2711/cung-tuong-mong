@@ -3690,6 +3690,7 @@ gold hairline, inner hair ring, soft shadow, painted icon; a kit seal-red dot = 
 
 ### Dialog sticky bottom bar vs sticky strips (review/flip-newlife-r1)
 The pinned bottom action bar of a kit dialog (`.dlg.kpsc>#mb>.kpscopts`, `.dlg.kpanel>.mr`) is z-index 9, ABOVE every sticky strip that scrolls in the dialog body (`.ksub` 5/7, `.kpstick` 6). Before r1 the identity card face-pick strip painted over "Nhận thân phận / Đổi thân phận" at 1180x820. New sticky parts inside a dialog body must stay below 9.
+
 ## 81. SCENE-END BUTTON — every animation scene ends with ONE short button (owner OD:L1261, 16/11 07:20Z; review/kit-keeper-2) — `dev/build/j93.js` (`kitSceneEnd`, `kitSceneEndLabel`, `kmStage`)
 RULE: no animation / scene closes by itself, and no scene closes by a tap anywhere. The scene plays (a tap during it = skip to its final frame, hint "Chạm để bỏ qua"); at the final frame the hint
 disappears and ONE kit button `.kbtn.kmend` (bottom centre of the scene, safe-area aware, 140 px min width, fades in) shows words that fit the event. ONLY that button closes the scene
@@ -3699,8 +3700,8 @@ Parts: `kmStage(cls,html,{end:"…"})` does it for every scene built on it (no `
 Words (VANPHONG register): card flip lands on HER → "Chuẩn bị thị tẩm"; another consort picked → "Ta biết rồi"; promotion edict / demotion → "Đã hiểu"; birth / pregnancy → "Tiếp theo"; death → "Tiếp theo";
 anything else → "Tiếp theo" (information) or "Đã hiểu" (a rule / consequence). The caller may pass its own short words (`end`).
 Reduced motion / Gọn: the scene is shown at its final frame at once, the button is the same. The queue safety timer is now 10 min (a scene waits for her button).
-SCENES THAT MUST USE IT (list for the sweep, state at this commit): ON kmStage = DONE (button automatic): card flip km-tablet (j93 kitFlipTablet) · promotion edict km-edict (kitEdict) · demotion / cold palace km-gloom (kitGloom) · pregnancy / birth km-bloom (kitBloom) · death km-inkov (kitInk).
-STILL TO SWEEP (call `kitSceneEnd`, remove their own auto-close timer / tap-to-close): `jflip.js` kitCardFlip (the big flip scene: CF.hold auto-close, "Chạm để đóng") · `jtoil.js` toilReveal (§60.5, auto zoom + "Chạm để đóng") ·
+SCENES THAT MUST USE IT (list for the sweep, state at this commit): ON kmStage = DONE (button automatic): card flip km-tablet (j93 kitFlipTablet) · promotion edict km-edict (kitEdict) · demotion / cold palace km-gloom (kitGloom) · pregnancy / birth km-bloom (kitBloom) · death km-inkov (kitInk) · the big card flip scene `jflip.js` kitCardFlip (r1: `kitSceneEnd`, "Chuẩn bị thị tẩm" when it lands on HER, "Ta biết rồi" otherwise; CF.hold auto-close removed).
+STILL TO SWEEP (call `kitSceneEnd`, remove their own auto-close timer / tap-to-close): `jtoil.js` toilReveal (§60.5, auto zoom + "Chạm để đóng") ·
 `jpromo.js` kitPersonReveal + `kitReward` chest (manual: own "Nhận" — check wording per event) · item fly / reveal (`jitev.js` kitItemFx, `jkrev.js`) · level-up / skill reveal · festival and place-day scenes ·
 night end / new day (`jnight.js` kitNightEnd, kitNewDay) · week change calendar (`kitCalendar`, dawn) · co-op scenes (`jcoop*`: buổi clock end, waiting-strip results) · the card-flip VIDEOS (`cardflip-videos`) · a `kitFlipNote`-like note is NOT a scene (no tap) and stays.
 The sweep worker finds the rest with `grep -n "Chạm để đóng\|Chạm để bỏ qua\|later(.*close" dev/build/*.js`.
