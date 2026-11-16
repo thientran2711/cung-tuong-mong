@@ -16,8 +16,8 @@ const OR=(process.argv[5]||'tt,dtq,muoi,cn,nc,thd,ch,td,cnv').split(',');const s
   await p.evaluate(()=>document.querySelector('#modal button[data-nl="ok"]').click());await sleep(1200);
   const R={o};const f=[];
   R.q0=await p.evaluate(()=>Q.map(m=>m.t));
-  R.intro=await p.evaluate(()=>{const m=Q[0];return m&&m.entI?{t:m.t,art:m.art,btn:document.getElementById('mclose')&&document.getElementById('mclose').textContent}:null});
-  if(!R.intro)f.push('no intro');else{if(SH)await p.screenshot({path:`${SH}/intro-${o}-${W}.jpg`,type:'jpeg',quality:55});await p.evaluate(()=>document.getElementById('mclose').click());await sleep(600)}
+  R.intro=await p.evaluate(()=>{const m=Q[0];return m&&(m.entI||m.oiP)?{t:m.t,art:m.art,btn:document.getElementById('mclose')&&document.getElementById('mclose').textContent}:null});
+  if(!R.intro)f.push('no intro');else{if(SH)await p.screenshot({path:`${SH}/intro-${o}-${W}.jpg`,type:'jpeg',quality:55});for(let i=0;i<6&&await p.evaluate(()=>{const m=Q[0];return !!(m&&(m.entI||m.oiP))});i++){await p.evaluate(()=>document.getElementById('mclose').click());await sleep(700)}}
   const sel=await p.evaluate(()=>{const m=Q[0];if(!m||m.pid!=='kc2Sel')return null;return m.opts.map(x=>x.n)});R.opts=sel;
   if(!sel)f.push('no selection card');else{
    /* pick the first art option (a real game) → the exam frame */

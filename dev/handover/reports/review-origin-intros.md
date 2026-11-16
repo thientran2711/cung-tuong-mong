@@ -1,4 +1,5 @@
-NOT YET READY — rolled over at context ~33 % (Foreman C 16:55Z); successor finishes the test re-run, then writes SẴN SÀNG KIỂM <sha>.
+SẴN SÀNG KIỂM __SHA__ (origin/main 2e9615fb is an ancestor; depends on review/kc-roads-cn-nc-fix-r1 3dba018d, merge that first)
+
 
 # review/origin-intros — ORIGIN INTROS (Foreman C worker, opus) — 16/11
 
@@ -137,17 +138,19 @@ The intro is not a chapter: it plays before chapter 1 ("Nhập cung, đứng v�
 | 51 intro pictures + 7 gate pictures | ART LIST above → Foreman C art workers | sample tt set ~1 h after approval, rest ~3–4 h |
 | entry animation `kitEntryGate` | KIT REQUEST K-OI-1 → kit keeper | caller ready; plays once registered |
 
-## Tests
-Local server, this branch (before the last two wording fixes, see HANDOVER), 0 page errors in every run.
+## Tests (final build, merged origin/main 2e9615fb, local server, ONE browser at a time, 0 page errors everywhere)
 | test | size | result |
 |---|---|---|
-| dev/test/origin-intros/flow.js, direct road, 10 origin keys (intro panels 4/4, scene panel, picture frame, narration, last kitTiles 4, buttons, selection title per road, exam frame head, "Vì sao" row on the Nhập cung card, entry scene, 2 buổi of the first day) | 755x1000 | logic 10/10 OK; 6 runs flagged only "picture not shown" = the placeholder still loading at the 5 s check (CDN through the proxy, three browsers at once). Fixed since: keys not on the CDN index use the §59 placeholder at once (kitPhOnCdn), test waits 12 s |
-| same | 1180x820 | logic 10/10 OK; same picture-timing flags only |
-| flow.js road=nha, 9 home-road origins (3 panels, then the home road's own card; reason computed on forced entry incl. returned tablet) | 755x1000 | logic 9/9 OK (3 picture-timing flags) |
-| dev/test/origin-intros/oldsave.js (save on origin/main build → load here: nc direct, muoi home, cnv) | 755x1000 | PASS 3/3 (no intro, no selection, no S.oiV, 2 buổi played) |
-| dev/test/entry-exam/direct.js (regression, tt, nc) | 755x1000 | PASS 2/2 |
-NOT RUN (successor): a clean re-run of flow.js on the final build at 755x1000, 1180x820, 1366x1024 (+ host sizes via dev/test/lib/device.js),
-dev/test/kc-roads/coop-together.js + dev/test/coop-e2e.js (live Worker; co-op code is untouched, the intro is per-player Q cards).
+| origin-intros/flow.js direct, 10 origin keys | 755x1000 | logic 10/10 OK; 3 runs flagged only "placeholder picture not shown" (CDN through the proxy, timing) |
+| same | 1180x820 | 10/10 PASS |
+| flow.js road=nha, 9 home-road origins | 755x1000 | 9/9 logic OK (2 picture-timing flags) |
+| origin-intros/oldsave.js (old main build → this build: nc, muoi home, cnv) | 755x1000 | PASS 3/3 |
+| entry-exam/direct.js (tt, nc) | 755x1000 | PASS 2/2 (run singly; the test now clicks through every intro panel, `entI` or `oiP` — it expected the old single card; two runs lost the browser to CPU timeout, re-run passed) |
+| kc-roads/coop-together.js (live Worker) | Fold+iPad | 26/26 |
+| coop-e2e.js (live Worker) | Fold+iPad | 58/59; the one FAIL = WebSocket handshake 502 from the live Worker/proxy (infra, not game code) |
+| host mode (device.js openHost) fold 755x1000, ipadAir 1180x820 | | intro panel 1/4 shown, no overflow, 0 errors |
+Not run: 1366x1024 (not asked in this round).
+Dependency: ships AFTER review/kc-roads-cn-nc-fix-r1 (3dba018d is in this branch); origin/main is an ancestor.
 
 ## HANDOVER (16:55Z, worker rolled over at ~33 % context — Foreman C opens the successor)
 Done: everything in "What this branch adds", ART LIST, KIT REQUEST K-OI-1, tests above. Last two fixes (placeholder at once via kitPhOnCdn;
