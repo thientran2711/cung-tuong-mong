@@ -162,7 +162,8 @@ function census(){/* never two: one piece per owner and kind, wherever they sit 
  for(const q of people())for(const e of slots(q).slice()){if(!isDh(e))continue;const id=e.own+"|"+e.k;if(seen[id])drop(q,e);else seen[id]=1}
  for(const x of box().slice()){if(!isDh(x.e))continue;const id=x.e.own+"|"+x.e.k;if(seen[id]){const b=box();b.splice(b.indexOf(x),1)}else seen[id]=1}
  for(const p of people()){const h=p.hieu||(p.dhConf&&p.dhConf.hieu);if(!h)continue;if(p!==S&&!npcOK())continue;const own=pk(p);
- for(const k of DK){const L=findAll(own,k);if(!L.length){if(!alive(p))continue;const e=mk(p,k,h);toStore(p,e,p.dhConf&&p.dhConf.hieu?"conf":"net",{back:p.dhConf&&p.dhConf.hieu?0:wk()+I().backW[0]+R(I().backW[1]-I().backW[0]+1)});continue}
+ for(const k of DK){const L=findAll(own,k);if(!L.length){const e=mk(p,k,h);/* a dead owner's piece stays in the store as di vật (never vanishes) */
+   toStore(p,e,!alive(p)?"dead":p.dhConf&&p.dhConf.hieu?"conf":"net",{back:!alive(p)||(p.dhConf&&p.dhConf.hieu)?0:wk()+I().backW[0]+R(I().backW[1]-I().backW[0]+1)});continue}
   for(const y of L.slice(1)){if(y.p){const i=y.p.inv.indexOf(y.e);if(i>=0)y.p.inv.splice(i,1)}else if(y.x){const b=box(),i=b.indexOf(y.x);if(i>=0)b.splice(i,1)}}}}
  /* a piece the Nội vụ phủ found goes home after it.backW weeks (owner alive, nothing confiscated) */
  for(const x of box().slice()){if(!isDh(x.e)||x.why!=="net"||!x.back||wk()<x.back)continue;const o=byK(x.e.own);if(!o||!alive(o)||o.dhConf||o.out)continue;

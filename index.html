@@ -37961,7 +37961,7 @@ for(const [nm,fn] of [["punish",(p,why)=>{if(typeof p==="string")stamp(S,p);else
 function snap(p){return[typeof rkOf==="function"?rkOf(p):p.rank|0,p.out?1:0,(p.confined||0)>0?1:0]}
 function dhCheck(p){if(!p||!alive(p))return;const n=snap(p),o=p.dhSn;p.dhSn=n;if(!Array.isArray(o))return;
  const why=p.dhWhy;delete p.dhWhy;let kind=null;if(n[1]&&!o[1])kind="cold";else if(!n[1]&&!o[1]&&n[0]<o[0])kind="giang";else if(n[2]&&!o[2])kind="cam";
- if(kind)dhConfiscate(p,kind,why?`${KIND[kind]} (${why})`:KIND[kind])}
+ if(kind)window.dhConfiscate(p,kind,why?`${KIND[kind]} (${why})`:KIND[kind])}
 window.dhCheck=dhCheck;
 /* ---------- 4. ATONEMENT ---------- */
 function kinhN(p){const e=p&&p.dh&&p.dh.m_kinh;return e?(e.n|0):0}
@@ -37986,11 +37986,11 @@ window.dhRestore=dhRestore;
 PEND.dhatone=pp=>{const st=confState(S);if(!st||!st.open||!st.done)return null;const c=S.dhConf;const road=st.kn>=st.kNeed?"kinh":"cong";
  const what=[c.hieu?`hiệu «${c.hieu}», Sắc phong, Ngọc ấn`:"",(c.titles||[]).map(k=>window.DH_CAT&&DH_CAT[k]?`«${DH_CAT[k].n}»`:"").filter(Boolean).join(", ")].filter(Boolean).join(" · ");
  return{who:typeof pEunCourt==="function"?pEunCourt("ped"):null,t:`<p>${road==="kinh"?`Ngươi đã chép đủ ${st.kNeed} quyển kinh sám hối.`:`Thanh danh của ngươi đã khá lên (Danh thêm ${st.dn}).`} Thái giám Nội vụ phủ khuyên dâng biểu tạ tội, xin lại ${what}.</p>`,o:[
-  {n:"Dâng biểu sám hối",fx:{},j67:`thành: ${what} về lại`,go:()=>{dhRestore(S,road==="kinh"?"dâng kinh sám hối":"dâng biểu tạ tội nhờ có công")}},
+  {n:"Dâng biểu sám hối",fx:{},j67:`thành: ${what} về lại`,go:()=>{window.dhRestore(S,road==="kinh"?"dâng kinh sám hối":"dâng biểu tạ tội nhờ có công")}},
   {n:"Để sau",fx:{},j67:"kèm: còn ở Nội vụ phủ, lần sau lại xin được",go:()=>{c.ask=wk()+3}}]}};
 function confTick(p){const c=p.dhConf;if(!c)return;if(!c.open){if(confOpenOK(p))confOpen(p);return}
  if(p.out||(p.confined||0)>0)return;const st=confState(p);if(!st.done)return;
- if(p===S){if((c.ask|0)>wk()||Q.length)return;c.ask=wk()+3;pushDil(mkP("dhatone"),"Dâng biểu sám hối")}else dhRestore(p)}
+ if(p===S){if((c.ask|0)>wk()||Q.length)return;c.ask=wk()+3;pushDil(mkP("dhatone"),"Dâng biểu sám hối")}else window.dhRestore(p)}
 /* ---------- 5. LOSS / THEFT (jlost case for that piece) ---------- */
 let FORCE=null;
 (function(){if(typeof loOk!=="function")return;const o0=loOk;loOk=function(e){if(FORCE)return e===FORCE;if(isDh(e))return false;return o0.apply(this,arguments)}})();
@@ -38005,7 +38005,7 @@ PEND.dhlost=pp=>{const c=typeof loGet==="function"?loGet(pp.id):null;if(!c||c.st
  add("cct","Báo Cung Chính ti tra xét","chứng cứ thật mới thành án; báo lên thì ai cũng biết");add("ask","Lặng lẽ hỏi cung nhân","kín đáo, có khi dò ra dấu vết");
  O.push({n:"Để sau",fx:{},j67:`kèm: tra xét sau ở Tư trang › Việc › Đồ thất lạc; không tìm lại được thì Danh -${I().lostDanh}`,go:()=>{}});
  return{who:typeof pMe==="function"?pMe():null,t:`<p><b>${nm}</b> ngự ban của ngươi không còn trong rương.</p><p>Mất ấn tín Hoàng thượng ban là tội không nhỏ. Tra xét ngay, hay âm thầm tìm?</p>`,o:O}};
-function lostTick(){for(const p of people()){if(!alive(p))continue;if(p!==S&&!npcOK())continue;for(const e of slots(p))if(isDh(e)&&e.own===pk(p)&&!e.lo&&roll(I().lose)){dhLose(p,e);break}}}
+function lostTick(){for(const p of people()){if(!alive(p))continue;if(p!==S&&!npcOK())continue;for(const e of slots(p))if(isDh(e)&&e.own===pk(p)&&!e.lo&&roll(I().lose)){window.dhLose(p,e);break}}}
 /* a case closed and the piece not back with its owner → Danh −lostDanh once (the piece still sits somewhere: conservation) */
 function lostPenalty(){for(const c of S.lost||[]){if(!c||!c.dh||c.st!=="done"||c.dhPen)continue;const o=byK(c.own);c.dhPen=1;if(!o||!alive(o))continue;
  const back=slots(o).some(e=>isDh(e)&&e.dhid===c.e.dhid);if(back)continue;const d=I().lostDanh;ap(o,{danh:-d});
@@ -38017,7 +38017,8 @@ function census(){/* never two: one piece per owner and kind, wherever they sit 
  for(const q of people())for(const e of slots(q).slice()){if(!isDh(e))continue;const id=e.own+"|"+e.k;if(seen[id])drop(q,e);else seen[id]=1}
  for(const x of box().slice()){if(!isDh(x.e))continue;const id=x.e.own+"|"+x.e.k;if(seen[id]){const b=box();b.splice(b.indexOf(x),1)}else seen[id]=1}
  for(const p of people()){const h=p.hieu||(p.dhConf&&p.dhConf.hieu);if(!h)continue;if(p!==S&&!npcOK())continue;const own=pk(p);
- for(const k of DK){const L=findAll(own,k);if(!L.length){if(!alive(p))continue;const e=mk(p,k,h);toStore(p,e,p.dhConf&&p.dhConf.hieu?"conf":"net",{back:p.dhConf&&p.dhConf.hieu?0:wk()+I().backW[0]+R(I().backW[1]-I().backW[0]+1)});continue}
+ for(const k of DK){const L=findAll(own,k);if(!L.length){const e=mk(p,k,h);/* a dead owner's piece stays in the store as di vật (never vanishes) */
+   toStore(p,e,!alive(p)?"dead":p.dhConf&&p.dhConf.hieu?"conf":"net",{back:!alive(p)||(p.dhConf&&p.dhConf.hieu)?0:wk()+I().backW[0]+R(I().backW[1]-I().backW[0]+1)});continue}
   for(const y of L.slice(1)){if(y.p){const i=y.p.inv.indexOf(y.e);if(i>=0)y.p.inv.splice(i,1)}else if(y.x){const b=box(),i=b.indexOf(y.x);if(i>=0)b.splice(i,1)}}}}
  /* a piece the Nội vụ phủ found goes home after it.backW weeks (owner alive, nothing confiscated) */
  for(const x of box().slice()){if(!isDh(x.e)||x.why!=="net"||!x.back||wk()<x.back)continue;const o=byK(x.e.own);if(!o||!alive(o)||o.dhConf||o.out)continue;
@@ -38027,7 +38028,7 @@ window.dhCensus=census;
 function seed(){for(const p of people()){if(p.hieu&&!p.dhSeed){p.dhSeed=1;giveItems(p,p.hieu,true)}if(!Array.isArray(p.dhSn))p.dhSn=snap(p)}}
 /* ---------- the turn: weekly state check + census; monthly grant / atonement / loss ---------- */
 function dhMonth(){for(const p of people()){if(!alive(p))continue;if(p!==S&&!npcOK())continue;
- if(dhHieuOK(p).ok&&roll(H().p))dhHieuGrant(p,"month");confTick(p)}lostTick()}
+ if(dhHieuOK(p).ok&&roll(H().p))window.dhHieuGrant(p,"month");confTick(p)}lostTick()}
 function dhWeek(){seed();for(const p of people()){if(p!==S&&!npcOK())continue;dhCheck(p)}lostPenalty();census()}
 window.dhMonth=dhMonth;window.dhWeek=dhWeek;
 (function(){if(typeof endTurn!=="function")return;const e0=endTurn;endTurn=function(){const t0=S&&S.turn,w0=S&&wk();const r=e0.apply(this,arguments);
@@ -41816,7 +41817,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="e8c744f90728";window.CTM_BUILD=BUILD;
+const BUILD="b376634bce37";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
