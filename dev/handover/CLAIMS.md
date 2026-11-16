@@ -83,7 +83,7 @@
 | servant-system part C (jmline.js, BAL.mline) review | review/servant-mline-r1 | D | session_01DgYSWnPWsFwg4R6LHZTKjr | DONE FAIL → r2 | 16/11 07:27Z |
 | slap-mg review (§79) | review/slap-mg-r1 | D | session_01DgYSWpbGcGGy33MK9zBq4u | DONE FAIL → r2 | 16/11 07:27Z |
 | act-split waves 2–3 + Emperor-stroll first "!" slot | review/act-split-w2 | D | session_01DgYSWkZteXgU6WAkpJc2qr | DONE SẴN SÀNG KIỂM 30c0931d | 16/11 07:27Z |
-| Danh balance recheck (Hành-sự-only vs promotion gates; audit + proposal only) | review/danh-balance | D | session_01DgYSWoB9ztxCwmdBUbbxDS | RUNNING | 16/11 07:27Z |
+| Danh balance recheck (Hành-sự-only vs promotion gates; audit + proposal only) | review/danh-balance | D | session_01DgYSWoB9ztxCwmdBUbbxDS | DONE SẴN SÀNG KIỂM 319dce59 | 16/11 07:27Z |
 | D26 review (opus) | review/memories-r1 | C | session_011xDdVQLaxDb8JUtETpVAYr | PASS 99c069578 | 07:26Z 16/11 |
 | D41 review (opus) | review/promote-servants-r1 | C | session_011xDdVRpL5fTu1nJk5T2Xgz | PASS 81deb15f7 | 07:26Z 16/11 |
 | C8 fig-bg-k1 review (sonnet) | review/fig-bg-k1-r1 | C | session_011xDdVSK9SWpuBJGX5bSxtc | PASS c8734770b | 07:26Z 16/11 |
@@ -147,3 +147,4 @@
 | test-drift-roulette REVIEW (sonnet; tests only + tutorial first-run check) | review/test-drift-roulette-r1 | main s15 | session_01UV1SzhniUmWP7bnY8M4Lgu | RUNNING | 16/11 10:34Z |
 | entry-exam review (opus) | review/entry-exam-r1 | D | session_01DgYSWp7SJ7frNoZUnBtM7q | RUNNING | 16/11 10:48Z |
 | kc-roads-cn-nc fix (4-item FAIL list r1 + entry-bot note; main s15 10:52Z → D) | review/kc-roads-cn-nc-fix | D | session_01DgYSWng42neb9J7kedxhVp (opus) | RUNNING | 16/11 10:55Z |
+| danh-balance review (opus) | review/danh-balance-r1 | D | (s4 opening reviewer) | RUNNING | 16/11 10:58Z |

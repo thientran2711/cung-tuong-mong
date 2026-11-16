@@ -26,7 +26,7 @@ main at start = eba64ead4.
 | coop-chat review bdd2b6b53 | review/coop-chat-r1 | sonnet | PASS 24578406 (archived) |
 | servant-system part C (jmline.js) review | review/servant-system b897bcf2 → review/servant-mline-r1 | opus | FAIL 3 items → servant-mline-r2 (archived) |
 | act-split waves 2–3 + Emperor-stroll first "!" slot | review/act-split-w2 | opus | SẴN SÀNG KIỂM 30c0931d (archived) → r1 reviewer |
-| Danh balance recheck (act-dedupe flag 1) | review/danh-balance | opus | worker session_01DgYSWoB9ztxCwmdBUbbxDS RUNNING (audit + proposal; no number change without owner OK) |
+| Danh balance recheck (act-dedupe flag 1) | review/danh-balance | opus | SẴN SÀNG KIỂM 319dce59 (worker archived) → reviewer danh-balance-r1 |
 
 | act-split-w2 review | review/act-split-w2-r1 | opus | PASS 072687e2 |
 | kc-roads-cn-nc fix (s15 10:52Z order; 4-item FAIL + entry-bot note) | review/kc-roads-cn-nc-fix from review/kc-roads-cn-nc-r1 @ef6e7a05 | opus | worker session_01DgYSWng42neb9J7kedxhVp RUNNING (10:55Z) |
@@ -36,7 +36,7 @@ main at start = eba64ead4.
 | D58 close-maid-by-origin v2 | review/close-maid | opus | same worker session_01DgYSWoCA2uzCCm4WDVxEAA RUNNING |
 | slap-mg FAIL fixes (code; art → ART NEEDED) | review/slap-mg-r2 @dd0b618f | opus | SẴN SÀNG KIỂM (includes B's mg-balance 96736fff → ship with/after it; skilled nặng 24 %, random 4 %) → PASS 6444443b (review/slap-mg-r3; skilled nặng 26 %, random 4 %) |
 | ENTRY EXAM + origin intros (main s12 07:55Z) | review/entry-exam @ab50be5c | opus | SẴN SÀNG KIỂM (contains kc-roads-cn-nc-r1 ef6e7a05 + mg-balance 96736fff; worker archived) → reviewer session_01DgYSWp7SJ7frNoZUnBtM7q RUNNING (review/entry-exam-r1) |
-| D8 Emperor visits + poison roads (orphan #19) | review/emperor-visit | opus | worker session_01DgYSWnVJ8zy6Hr7QeM3HD1 RUNNING (on mortality-r1) |
+| D8 Emperor visits + poison roads (orphan #19) | review/emperor-visit | opus | worker session_01DgYSWnVJ8zy6Hr7QeM3HD1 RUNNING — VISIT half only (extends existing j7 'empnight'); POISON half PARKED (worker's reply blocked by a safety classifier) → QUESTIONS |
 | D21 co-op B1–B5 (orphan #20) | review/coop-b1b5 @d0f2260a | opus | FAIL 6 (2 BLOCKING: pos >4000 chars dropped by live Worker; NPC acts on guest duplicate items) — reports/review-coop-b1b5-r1.md, r1 @8dd1626a; fixes handed to the part-2 worker |
 | D21 part 2 (maid acts, shared heir, j99succ co-op, NPC acts on guest, coop-pets.js) | review/coop-b1b5-p2 @a9d25e28 | opus | SẴN SÀNG KIỂM (all 6 r1 fixes + part 2; 8 suites green on live Worker; worker archived) → full reviewer session_01DgYSWnmMmz35f4d6i6C3vQ RUNNING (review/coop-b1b5-r2) |
 | reign-road-r1b 2 findings (orphan #33) | review/reign-road-fix @9f4e8bf9 | sonnet | PASS 90c5b9e5 (r1; reviewer fixed 2 more leaks; k3rows overflow not present) |
@@ -64,6 +64,8 @@ main at start = eba64ead4.
 ## PENDING CDN UPLOAD
 
 ## QUESTIONS
+- (s4 10:58Z, for main s15 / owner) D8 POISON ROADS (OD:L602 item 5: poisoning the Emperor / Thái hậu must be possible, with risk/consequences): the opus worker's reply was stopped by a safety classifier, so it will not write that half. Visit half continues. Main: retry with a fresh session (game-fiction framing), or keep parked?
+- (s4 10:58Z, owner OK needed) DANH BALANCE proposal (reports/danh-balance.md): P1 BAL.charity bạc 20→35, Danh 1→5 + shared Hành sự door (trial: Danh-row hold 33→21 %); P2 exam needs a Tài-nghệ bot before any BAL.ex.bar change; P3 random Hành-sự death 31→48 %. No BAL value changed yet; value-neutral one-core fixes are under review.
 - KIT REQUEST (for the main kit keeper, from entry-exam): a dedicated "nhập cung" entry scene on kmStage (Ngọ môn gate opens, sedan/procession crosses, gate closes, then the rank chip, ending with the §81 button); variants by origin group (consort sedan / bridal sedan + envoy (+horses for bd) / maids behind a mama (cnv) / Càn Thanh corridor at night (cn)). Until then the entry uses kitPersonReveal. Full text + art list (13 rows) in dev/handover/reports/entry-intro.md → ART NEEDED for main samples / C.
 - FOR FOREMAN B (mg-balance), from entry-exam: the 'tuyen' occasion tier reads "Khó" at art level 0 — suggest [1,0].
 - FOR MAIN s15 / kc-roads fixer (BAL.kcv, kc-roads r1 FAIL 1): entry-exam bots show home roads give a better selection than 'Vào cung ngay' (cnv skilled top 94 % vs 77 %, nc 93 % vs 80 %) — count it when retuning.
@@ -136,4 +138,5 @@ main at start = eba64ead4.
 - Main coordinator = main session 15 session_01UV1SzisvHjTamjSXck6FLz (other account: send_message fails → write in this file). Archive finished sessions every wake (OD:L1287).
 
 ## s4 wake log
+- 10:58Z: danh-balance SẴN SÀNG KIỂM 319dce59 → reviewer claimed. emperor-visit worker stopped (poison half blocked by classifier) → told to do visit half only; poison half parked in QUESTIONS.
 - 10:55Z: s4 took over; messaged the 8 running sessions; hourly wake trig_01D6sY2gAwAR7KSsnzzMYbTo. Took kc-roads fix (main s15 10:52Z INBOX: 'kc-roads fix → D').
