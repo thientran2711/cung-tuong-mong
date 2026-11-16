@@ -101,6 +101,12 @@ Count: 27 sites in 1a–1c are ROLL/GATE/SHORT; 2 are OK.
 - S.nt ("Hoàng thượng để ý", j42.js:10) = the Emperor's regard for her while she is a maid; `S.sung` is the Emperor's regard for her as a consort, and srvRise already converts nt → sung (j42.js:295 `S.sung=15+nt/5`). Two numbers for one relation.
 - Fold: maids carry `sung` from day one (0 at start); srvNotice adds to `sung`; HX/HXN label for a maid reads "Ân sủng"; the 45 gate and the cnvName dice go. Save migration: `S.sung=max(S.sung, S.nt)` once, delete S.nt. NPC maids get `sung` too (staff objects), so the night pool reads one value for everyone.
 
+### 3.5 She witnesses the real act (OD 18:20Z, added after the first push)
+- Every agent act is written into the people ledger at its place and khắc (j95 roster `acts` + `P[id][kh]`, branch people-ledger) BEFORE its effect lands; the act's place = where the player act would happen (tea → the Emperor's place, errand → its place, feast → the hall).
+- When she goes to that place in that buổi/khắc (Dư đồ / goTo), the ledger has a live act there → an event frame (kit card) shows the real scene with reactions: Nghe lén / Bỏ đi / Mặc kệ / Tham gia nói chuyện, plus the act's own counter-acts (e.g. step in to serve the tea herself = the same "Quỳ dâng trà" act with its od()). Each reaction has real odds and consequences; what she sees is true (truth rule).
+- Two-way: an NPC agent at the place where she acts witnesses her act the same way (this is j95b roles/witnesses, already on the branch).
+- Existing partial pieces: Nghe lén câu chuyện (j2.js:147, ≥2 rivals at the place), trysts (j22), servant sees affairs (j42:387), j95 secret meetings/catches. AG1 must build on these, not add a second witness system. → adds item AG1b below.
+
 ## 4. Perf (owner first priority: no lag, co-op too)
 - Estimate per buổi (host): ~12 consorts + Emperor + Thái hậu + ~30 servants/elders ≈ 45–50 agents. Options per agent after `ok()` filter: consort ~25, maid ~8, Emperor ~15 (rest/custom + pool ≤ 15). Each option = a few multiplies + one odA() call → ~1 µs desktop, ~5 µs phone. 50 × 25 × 5 µs ≈ **6 ms phone worst case, ~1 ms desktop**; the act effect itself only for the chosen one (50 runs, most are stat adds). Comparable data point: j95final 0.003–0.10 ms per call (review-schedules3-r3.md:29).
 - Budget: ≤ 8 ms per buổi on the Fold (it runs at the buổi transition, which already animates ~1 s, jbuoi; work runs before the animation, never during).
@@ -113,6 +119,7 @@ Base: review/people-ledger (has j95 + schedules3-r4 fixes) + review/npc-mind (jm
 | item | scope | replaces (§1 rows) | size |
 |---|---|---|---|
 | AG1 agent core | `agTick()` per buổi, host-only; needs, road field (`p.road`, seeded from ORIGINS + maid), utility × mindW × mindPick; options = existing act lists; perf counters | framework only | 1 opus worker |
+| AG1b witness the real act (OD 18:20Z) | agent acts land in the ledger at place/khắc; arriving there opens the kit event frame with reactions (real odds); NPCs witness her the same way; reuse j2.js:147 / j22 / j95b | (makes every row visible) | 1 opus (with AG1) |
 | AG2 Emperor agent + nights | `S.emp.met` memory, needs, night choice incl. rest/custom/pool; flip() becomes his choice; nightWhy shows his reason | 1, 2 (pool), 4, 5, 25 | 1 opus |
 | AG3 maids reach him | maid options (dâng trà, errand, feast, hầu trà khi ngự giá) for NPC maids; Tiến cử as consort option; maid night → child → normal rank / unranked favoured mother / low-born child; S.nt → `sung` migration | 3, 6–12 | 1 opus (after AG2) |
 | AG4 consorts work by acts | npcEffort, quiet favour, TH/HH regard, art practice, shop/gifts, fake ill/preg as agent options; remove drips | 13–19, 23 | 1 opus |
