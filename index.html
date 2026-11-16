@@ -16640,6 +16640,15 @@ Object.assign(BAL,{itd:{allow:false}});
 Object.assign(BAL,{rg:{at:[1,5,10,18,27,37],decideAfter:2,decideWait:3,catchUp:2,drift:.65,noise:[40,3],qs:.4,npcS:45,npcP:.08,A:48,B:60,thK:.1,pk:.46,pkQ:1.25,tr0:30,
  swDanh:5,swLead:8,swRel:8,swTr:10,swCd:6,swMax:2,joinRel:4,famAf:12,erCd:3,erP:30,ngoai:3,winSung:14,winDanh:6,rankCap:6,rankSung:0,
  winTh:24,winShield:6,bacWin:160,loseSung:8,loseTh:12,loseDanh:6,loseHouse:30,winHouse:15,npcWin:6,npcLose:8,lnCd:2,lnRetry:4}});
+/* TÁT, three tiers (owner 16/11; jface act "tat", jslap game). Index 1..3 = nhẹ / vừa / nặng. sac = Sắc the target loses while the mark lasts; wk = weeks the mark stays
+   (+0/1 random); duc = the slapper's Đức; rel / oan = grudge (relAdd / extra oán on the target); hoang/sung = Hoàng thượng hears (chance, Sủng); thau = Thái hậu rebukes a nặng slap
+   (chance, Danh); evT = the target keeps evidence against the slapper, evW = a witness does (chance per slap); rep = weekly chance a passer-by reports a mark that is still on (needs vừa+);
+   def = tier of a slap with no game ("Tát luôn" and old callers). bar = the power bar: speed (rad/ms), zone half-width as a share of the bar by tier 0/1/2 of her Sắc-less skill, red/amber widths;
+   NPC: npc = rolled tier weights by rank gap (1, 2, 3+); dodge = how wide the safe window is (share), dodgeMs = time to react. */
+BAL.slap={nm:["","nhẹ","vừa","nặng"],def:1,sac:[0,2,3,5],wk:[0,2,4,7],duc:[0,-2,-4,-7],rel:[0,-15,-25,-40],oan:[0,0,8,18],
+ hoang:[0,20,30,55],sung:[0,-2,-4,-7],thau:40,thauDanh:-4,evT:[0,0,35,70],evW:[0,10,30,55],rep:[0,0,12,30],
+ bar:{w:.0026,red:.16,amber:.38,ms:3200},
+ npc:[[0,60,32,8],[0,45,38,17],[0,30,42,28]],dodge:{w:.0024,safe:.2,ms:3200}};
 /* ================= j92: VẬT PHẨM · TRANG PHỤC · MẠNG CHE MẶT (logic + data only; UI through kit components) ================= */
 /* ---- KIT_VEIL: pearl-strand face veils by rank (hủy dung, j70 scarOf(p).veil / p.scar.veil) ----
    img/veil-t1..t8.png (480x445, transparent, gpt-2-6): one per consort rank 0..7 (Đáp ứng → Hoàng hậu), richer each step:
@@ -19871,7 +19880,8 @@ KIT_FACEFX.person=function(ref){try{if(ref==null||typeof S==="undefined"||!S)ret
 .kff>b.tn{background:radial-gradient(42% 44% at 52% 48%,var(--tint) 0%,transparent 100%)}
 .kff>b.ey{background:radial-gradient(11% 3.6% at 33% 20.5%,var(--eye) 0%,transparent 100%),radial-gradient(10% 3.4% at 72.5% 20.5%,var(--eye) 0%,transparent 100%)}
 .kff>b.lp{background:radial-gradient(12.5% 3.6% at 56% 55.5%,var(--lip) 0%,var(--lip) 35%,transparent 100%)}
-.kfx>img.kslap,.kfxf>img.kslap{opacity:.5}.kfx>img.kslap[data-sev="2"],.kfxf>img.kslap[data-sev="2"]{opacity:.7}.kfx>img.kslap[data-sev="3"],.kfxf>img.kslap[data-sev="3"]{opacity:.88}`;document.head.appendChild(st)})();
+.kfx>img.kslap,.kfxf>img.kslap{opacity:.5}
+.kfx>img.kslap.s1,.kfxf>img.kslap.s1{opacity:.42}.kfx>img.kslap.s2,.kfxf>img.kslap.s2{opacity:.68;filter:saturate(1.3) brightness(.93)}.kfx>img.kslap.s3,.kfxf>img.kslap.s3{opacity:.88;filter:saturate(1.55) brightness(.8)}.kfx>img.kswell,.kfxf>img.kswell{opacity:.85;filter:none}`;document.head.appendChild(st)})();
 
 /* ---------- shared helpers ---------- */
 const FXF={ill:[0,2,4,6],weakSuc:25,kidHp:[35,20],doc:[0,4,7],docWk:[0,3,4],slowWk:9,docMed:40,docNpcHeal:35,docNotice:30,
@@ -19937,14 +19947,15 @@ PEND.pzcard=pp=>{const z=S&&S.pz;if(!z||z.until<=wk())return null;const o=[];con
  return{who:pMe(),t:`<p>Môi ngươi tím tái, da xám đi${z.dx?" — thái y nói là trúng độc":", người lả đi không rõ vì sao"}: Sắc đang mất ${FXF.doc[z.sev]}; còn chừng ${fxLeft(z.until)} tuần.</p>`,o}};
 
 /* ---------- 3. BỊ TÁT: a faint soft handprint on the cheek for a few tuần (https://ctm-img.victoria-tntt.workers.dev/img/fx-slap.png on the scar-fit cheek box) ---------- */
-function slapGive(p,by,why,sev){if(!p||!fxLive(p)||KIT_FACEFX.deny.tat[KIT_FACEFX.kind(p)])return"";sev=cl(sev|0||1,1,3);p.slap={until:wk()+FXF.tatWk+(roll(30)?1:0)+(sev-1),by:fxKey(by),at:wk(),sev};
- const t=`${fxWho(p)} bị ${by?(by===S?"ngươi":fxName(by)):"người ta"} tát${why?" vì "+why:""}: má in dấu tay${["consort","player"].includes(KIT_FACEFX.kind(p))?`, Sắc -${FXF.tat}`:""} vài tuần.`;fxLog(p,t);return t}
+function slapSev(p){const z=p&&p.slap;return z?cl(z.sev|0||2,1,3):0}   /* old saves without sev = vừa */
+function slapGive(p,by,why,sev){sev=cl(sev|0||BAL.slap.def,1,3);if(!p||!fxLive(p)||KIT_FACEFX.deny.tat[KIT_FACEFX.kind(p)])return"";p.slap={sev,until:wk()+BAL.slap.wk[sev]+(roll(30)?1:0),by:fxKey(by),at:wk()};
+ const t=`${fxWho(p)} bị ${by?(by===S?"ngươi":fxName(by)):"người ta"} tát${why?" vì "+why:""}: má in dấu tay ${BAL.slap.nm[sev]}${["consort","player"].includes(KIT_FACEFX.kind(p))?`, Sắc -${BAL.slap.sac[sev]}`:""} vài tuần.`;fxLog(p,t);return t}
 KIT_FACEFX.add({id:"tat",z:30,ready:true,                  /* owner approved the handprint (pilot 11/14) */
  state:p=>{if(!p||!p.slap||p.slap.until<=wk())return null;if(!p.slap.sev)p.slap.sev=1;return p.slap},   /* old slaps default to sev 1 (nhẹ); tiers 1..3 = nhẹ/vừa/nặng */
  seen:(p,st)=>fxSeen(p),
- sac:(p,st)=>{const vg=p.vl&&typeof vlG==="function"?vlG(p.vl):-1;return Math.round(FXF.tat*(vg>=0&&window.VL?VL.cover[vg]:1))},
- chip:(p,st)=>[`Má in dấu tay · còn ${fxLeft(st.until)} tuần`,"hot"],
- html:(p,file,st)=>{const s=KIT_FACEFX.cheekBox(file,{dx:.04,dy:.17,sw:.9,sh:.9});return s?`<img class="kslap" data-sev="${cl(st.sev|0||1,1,3)}" src="https://ctm-img.victoria-tntt.workers.dev/img/fx-slap.png" alt="" aria-hidden="true" style="${kitFxVars(s)}" onerror="this.remove()">`:""}});
+ sac:(p,st)=>{const vg=p.vl&&typeof vlG==="function"?vlG(p.vl):-1;return Math.round(BAL.slap.sac[slapSev(p)||2]*(vg>=0&&window.VL?VL.cover[vg]:1))},
+ chip:(p,st)=>[`Má in dấu tay ${BAL.slap.nm[slapSev(p)||2]} · còn ${fxLeft(st.until)} tuần`,"hot"],
+ html:(p,file,st)=>{const s=KIT_FACEFX.cheekBox(file,{dx:.04,dy:.17,sw:.9,sh:.9});if(!s)return"";const v=slapSev(p)||2,sv=kitFxVars(s);return `<img class="kslap s${v}" src="https://ctm-img.victoria-tntt.workers.dev/img/fx-slap.png" alt="" aria-hidden="true" style="${sv}" onerror="this.remove()">`+(v>=3?`<img class="kslap kswell" src="https://ctm-img.victoria-tntt.workers.dev/img/fx-slap-swell.png" alt="" aria-hidden="true" style="${sv}" onerror="this.remove()">`:"")}});
 
 /* ---------- 4. BỊ PHẠT QUỲ / ĐÁNH TRƯỢNG: a status chip (no art); walking costs one more khắc while it lasts (her), NPCs scheme less ---------- */
 function penGive(p,k,why,by){if(!p||!fxLive(p)||KIT_FACEFX.deny.phat[KIT_FACEFX.kind(p)])return;const sev=k==="truong"?2:1;const u=wk()+FXF.penWk[sev];p.pen={k,until:Math.max(u,p.pen&&p.pen.until||0),why:why||"",by:fxKey(by)}}
@@ -19963,13 +19974,23 @@ KIT_FACEFX.add({id:"phat",z:90,ready:true,                 /* no picture: chip a
 (function(){if(typeof srvMoodEvent!=="function")return;const s0=srvMoodEvent;srvMoodEvent=function(){const n=Q.length;const r=s0.apply(this,arguments);try{if(Q.length>n&&Q[Q.length-1]&&Q[Q.length-1].t==="Bị đánh đòn"&&!S.dead)penGive(S,"truong","bị chủ sai đánh")}catch(e){}return r}})();
 /* the acts, two-way (same rules for her and every consort): Tát (higher rank, same place) and Phạt quỳ (Hoàng hậu, or three ranks above) */
 function fxAuth(a,t){try{return !!a&&!!t&&a!==t&&(a.queen||(a===S&&S.rank>=7)||rkOf(a)>=rkOf(t)+3)}catch(e){return false}}
-A("tat","Tát",{c:{duc:FXF.tatDuc},ok:(a,t)=>together(a,t)&&rkOf(a)>rkOf(t)&&!(t.slap&&t.slap.until>wk()),o:()=>100,x:"nàng in dấu tay trên má, Sắc giảm vài tuần · nàng oán ngươi",f:(a,t)=>{
- if(typeof ducAdd==="function")ducAdd(a,FXF.tatDuc,"tát người");else ap(a,{duc:FXF.tatDuc});relAdd(t,a,FXF.tatRel);slapGive(t,a,"");let r=`${NMc(a)} giáng một cái tát lên má ${NM(t)}. `;
- if((t.sung||0)>=60&&roll(30)){ap(a,{sung:-4});r+=`Hoàng thượng nghe chuyện, không vui (Sủng ${a===S?"ngươi":NM(a)} -4). `}return `<span class="${t===S?"r":"g"}">${r}</span>`}});
+/* Tát, three tiers (owner 16/11): her tier comes from the power-bar game (jslap) or "Tát luôn" = nhẹ; an NPC's tier is rolled (jslap) and her dodge lowers it by one.
+   SLAP.next = the tier chosen for the very next tat (consumed here). A harder slap costs more Đức, leaves a deeper grudge and a darker mark that others can report. */
+const SLAP={next:0};window.SLAP=SLAP;
+function slapEvidence(a,t,sev){try{const B=BAL.slap;let r="";if(a!==S&&a.alive===false)return r;
+ if(B.evT[sev]&&roll(B.evT[sev])&&t!==a){evA(t,a,1);r+=`${NMc(t)} ghi nhớ cái tát này (chứng cứ về ${NM(a)} +1). `}
+ const W=(typeof liveRivals==="function"?liveRivals(true):[]).filter(x=>x!==a&&x!==t);
+ if(B.evW[sev]&&W.length&&roll(B.evW[sev])){const w=W[Math.floor(Math.random()*W.length)];evA(w,a,1);if(a===S)r+="Có kẻ trông thấy, ghi lại chuyện này. "}return r}catch(e){return""}}
+A("tat","Tát",{c:{},ok:(a,t)=>together(a,t)&&rkOf(a)>rkOf(t)&&!(t.slap&&t.slap.until>wk()),o:()=>100,x:"đánh nhẹ, vừa hay nặng tùy tay: nàng in dấu tay trên má, Sắc giảm vài tuần · Đức ngươi giảm theo độ nặng · nàng oán ngươi",f:(a,t)=>{
+ const B=BAL.slap;let sev=cl(SLAP.next|0||B.def,1,3);SLAP.next=0;const dc=B.duc[sev];
+ if(typeof ducAdd==="function")ducAdd(a,dc,"tát người");else ap(a,{duc:dc});relAdd(t,a,B.rel[sev]);if(B.oan[sev])oanAdd(t,a,B.oan[sev]);slapGive(t,a,"",sev);let r=`${NMc(a)} giáng một cái tát ${B.nm[sev]} lên má ${NM(t)}. `;
+ if(sev>=3&&roll(B.thau)){ap(a,{danh:B.thauDanh});r+=`Thái hậu nghe chuyện, quở trách nặng lời (Danh ${a===S?"ngươi":NM(a)} ${B.thauDanh}). `}
+ if((t.sung||0)>=60&&roll(B.hoang[sev])){ap(a,{sung:B.sung[sev]});r+=`Hoàng thượng nghe chuyện, không vui (Sủng ${a===S?"ngươi":NM(a)} ${B.sung[sev]}). `}
+ r+=slapEvidence(a,t,sev);return `<span class="${t===S?"r":"g"}">${r}</span>`}});
 A("phatquy","Phạt quỳ",{c:{duc:FXF.phatDuc},ok:(a,t)=>fxAuth(a,t)&&!(t.pen&&t.pen.until>wk()),o:()=>100,x:"nàng quỳ nửa ngày ngoài sân: Sức -8, đi lại chậm một tuần · nàng oán ngươi",f:(a,t)=>{
  if(typeof ducAdd==="function")ducAdd(a,FXF.phatDuc,"phạt quỳ");else ap(a,{duc:FXF.phatDuc});relAdd(t,a,FXF.phatRel);if(t===S)apply({suc:FXF.penQuy});else ap(t,{suc:FXF.penQuy});penGive(t,"quy","bị phạt",a);
  if(t.schemes>0)ap(a,{danh:1});return `<span class="${t===S?"r":"g"}">${NMc(a)} phạt ${NM(t)} quỳ nửa ngày ngoài sân: Sức -${-FXF.penQuy}, gối đau, đi lại chậm.</span> `}});
-try{AOUT.tat=["nàng in dấu tay trên má, Sắc -3 vài tuần; nàng oán ngươi",""];AOUT.phatquy=["nàng quỳ phạt: Sức -8, đi lại chậm một tuần; nàng oán ngươi",""]}catch(e){}
+try{AOUT.tat=["nàng in dấu tay trên má, Sắc giảm vài tuần; nàng oán ngươi",""];AOUT.phatquy=["nàng quỳ phạt: Sức -8, đi lại chậm một tuần; nàng oán ngươi",""]}catch(e){}
 try{LACK.tat=t=>!together(S,t)?"nàng ở cùng chỗ với ngươi":rkOf(S)<=rkOf(t)?"phẩm ngươi cao hơn nàng":t.slap&&t.slap.until>wk()?"má nàng còn in dấu tay":"";
  LACK.phatquy=t=>!fxAuth(S,t)?"ngươi là Hoàng hậu, hoặc trên nàng ba phẩm":t.pen&&t.pen.until>wk()?"nàng đang chịu phạt":""}catch(e){}
 try{ACTDOM.tat="Mưu kế";ACTDOM.phatquy="Mưu kế";J78VERB.tat="tát {t}";J78VERB.phatquy="phạt {t} quỳ";HARMK["Tát"]="tat";HARMK["Phạt quỳ"]="phatquy"}catch(e){}
@@ -20039,9 +20060,14 @@ function fxServMonth(){const all=fxServants();for(const s of all){if(!KIT_FACEFX
   if(hot>=40&&roll(6)){const t=pick((S.staff||[]).concat(S.maid&&typeof S.maid==="object"?[S.maid]:[]));if(t&&KIT_FACEFX.live(t)){fxHarm(v,t,"");if(roll(40)){try{evA(S,v,1);if(fxSeen(t))log(`Ngươi lần ra dấu vết: người của ${v.name} ra tay với ${fxName(t)}: Chứng cứ về ${v.name} +1.`)}catch(e){}}}}
   const v2=pick(liveRivals(true).filter(x=>x!==v&&(x.staff||[]).length));if(v2&&roll(2+(typeof hostility==="function"?(()=>{try{return hostility(v,v2)>=40?3:0}catch(e){return 0}})():0))){const t=pick(v2.staff);if(t&&KIT_FACEFX.live(t))fxHarm(v,t,"")}}}
 (function(){if(typeof monthTick!=="function")return;const m0=monthTick;monthTick=function(){const r=m0.apply(this,arguments);try{if(S&&!S.dead)fxServMonth()}catch(e){console.error(e)}return r}})();
+/* a mark still on the cheek (vừa / nặng) may be seen and reported: one witness keeps evidence against whoever slapped, once per mark */
+function slapReport(p){const z=p&&p.slap;if(!z||z.rep||z.until<=wk())return;const c=BAL.slap.rep[slapSev(p)];if(!c||!roll(c))return;
+ const who=z.by==="me"?S:(rivals||[]).find(v=>v.id===z.by);if(!who||who===p)return;
+ const W=(liveRivals(true)||[]).filter(x=>x!==who&&x!==p);if(!W.length)return;z.rep=1;const w=W[Math.floor(Math.random()*W.length)];evA(w,who,1);
+ if(who===S)log("Dấu tay trên má "+fxWho(p)+" lọt vào mắt người ngoài: có kẻ ghi nhớ chuyện ngươi ra tay (chứng cứ về ngươi +1).")}
 /* ---------- weekly pass, the same for everyone ---------- */
 (function(){const e0=endTurn;endTurn=function(){const w0=S&&!S.dead?wk():null;const r=e0.apply(this,arguments);try{if(S&&!S.dead&&w0!=null&&wk()!==w0){
-  for(const p of KIT_FACEFX.everyone()){if(!p)continue;if(p.pz)pzWeek(p);if(p.ill&&p.ill.until!=null&&p!==S&&p.ill.until<=wk()){p.ill=null;fxLog(p,`${fxName(p)} đã khỏi bệnh.`)}if(p.slap&&p.slap.until<=wk()){p.slap=null;if(p===S)log("Dấu tay trên má ngươi đã lặn.")}if(p.pen&&p.pen.until<=wk())p.pen=null;if(p.expr&&p.expr.until<=wk())p.expr=null}
+  for(const p of KIT_FACEFX.everyone()){if(!p)continue;if(p.pz)pzWeek(p);try{slapReport(p)}catch(e){}if(p.ill&&p.ill.until!=null&&p!==S&&p.ill.until<=wk()){p.ill=null;fxLog(p,`${fxName(p)} đã khỏi bệnh.`)}if(p.slap&&p.slap.until<=wk()){p.slap=null;if(p===S)log("Dấu tay trên má ngươi đã lặn.")}if(p.pen&&p.pen.until<=wk())p.pen=null;if(p.expr&&p.expr.until<=wk())p.expr=null}
   if(S.pz&&S.pz.until>wk()&&!Q.some(m=>m.pid==="pzcard")&&(typeof evCooldown!=="function"||evCooldown("pzcard",FXF.cd))){const d=mkP("pzcard",{});if(d){Q.push({t:"Trúng độc",h:d.t,opts:d.o,who:pMe(),pid:d.pid,pp:d.pp});if($("modal").hidden)showModal()}}}}catch(x){console.error(x)}return r}})();
 window.faceExpr=faceExpr;window.pzGive=pzGive;window.slapGive=slapGive;window.penGive=penGive;
 /* ================= jrash: NỔI MẨN (dị ứng) — a timed face condition for everyone (owner 11/14, review/items-earned) =================
@@ -31715,6 +31741,83 @@ function tsDressGame(th,done){const T=TS_THEME[th];const P={};const inv=S.inv.ma
 @media (max-width:420px){#kg82 .ts-slots{grid-template-columns:repeat(2,minmax(0,1fr))}}
 `;document.head.appendChild(st)})();
 window.TSA=Object.assign(TSA,{dangerOf:tsDangerOf,dangerPanel:tsDangerPanel,promoPanel:tsPromoPanel,summonMe:tsSummonMe,summonWeek:tsSummonWeek,denWish:tsDenWish,denCard:tsDenCard,dressAnnounce:tsDressAnnounce,dressHold:tsDressHold,leHost:tsLeHost,birthReward:tsBirthReward,festPre:tsFestPre});
+/* ================= jslap: TÁT AS A SHORT GAME (owner 16/11, review/slap-mg) — KIT §79 =================
+   Her slap (jface act "tat") = a power bar of about 3 s on the shared j82 mini-game frame (kg82Open / kg82Play / kg82Canvas / tsRows / .kbtn): a needle swings, one tap.
+   Tap in the red zone = nặng, in the amber = vừa, anywhere else (or too late) = nhẹ. "Tát luôn" skips the game and gives nhẹ (see BAL.slap.def: a lazy slap is a light one,
+   so a harder slap is something she CHOOSES to risk for its cost; a random tier would make skipping a free gamble and the game pointless).
+   An NPC's slap on her: the tier is rolled (BAL.slap.npc by rank gap); she gets a card "Né đòn" -> a quick dodge game (the same needle engine, a green zone to hit)
+   that lowers the tier by one (a nhẹ slap misses altogether); "Chịu đòn" / closing = no dodge. Numbers: BAL.slap (jbal2). Effects: jface (slapGive, act tat, marks).
+   Co-op: an act on the friend goes through the existing runAct path (jcoopworld sends the number deltas); the mark tier rides on the same "res" message. */
+const SLAPG={busy:0};window.SLAPG=SLAPG;
+KG82_KIND.tat={e:"slapbar",n:"Tát",t:"Giáng tay",how:"Kim chạy qua lại trên thước. Chạm khi kim vào vùng đỏ: tay càng trúng giữa, đòn càng nặng. Chỉ một lần chạm, chừng ba giây."};
+KG82_KIND.ne={e:"slapbar",n:"Né",t:"Né đòn",how:"Kim chạy qua lại trên thước. Chạm khi kim vào vùng xanh để né kịp. Chỉ một lần chạm, chừng ba giây."};
+KG82_SPR.tat=[];KG82_SPR.ne=[];
+(function(){const p0=kg82Preload;kg82Preload=function(kind){return kind==="tat"||kind==="ne"?Promise.resolve():p0.apply(this,arguments)}})();
+function slapTierOf(raw){return raw>=9?3:raw>=5?2:1}
+/* the engine: ONE needle, ONE tap. tat: raw 10 red / 6 amber / 2 else / 0 too late; ne: raw 10 inside the green zone, else 0 */
+function kg82SlapBar(box,env){const dodge=env.kind==="ne",B=BAL.slap,D=dodge?B.dodge:B.bar;const C=kg82Canvas(box,(innerHeight||800)<520?.3:.46,250),{g,W,H}=C;
+ const A=W*.42,cx=W/2,by=H*.52,bh=Math.max(26,H*.16);const t0=performance.now(),ph=Math.random()*6.283;const zx=dodge?cx+A*(Math.random()*1.1-.55):cx;
+ let stop=false,raf=0,lock=false,hitX=0;const pops=[];const pos=now=>cx+A*Math.sin(ph+(now-t0)*D.w);
+ const red=kg82Col("--red","#c23b22"),gold=kg82Col("--gold","#b8872a"),good=kg82Col("--good","#2d7a52");
+ const zoneOf=x=>dodge?(Math.abs(x-zx)<=A*D.safe?10:0):(Math.abs(x-cx)/A<=B.bar.red?10:Math.abs(x-cx)/A<=B.bar.amber?6:2);
+ function draw(now){kg82Silk(g,W,H,"#f6ead6","#ead6b4");
+  g.fillStyle="rgba(120,86,40,.18)";g.fillRect(cx-A,by-bh/2,A*2,bh);
+  if(dodge){g.fillStyle=good;g.globalAlpha=.55;g.fillRect(zx-A*D.safe,by-bh/2,A*D.safe*2,bh);g.globalAlpha=1}
+  else{g.fillStyle=gold;g.globalAlpha=.5;g.fillRect(cx-A*B.bar.amber,by-bh/2,A*B.bar.amber*2,bh);g.fillStyle=red;g.globalAlpha=.75;g.fillRect(cx-A*B.bar.red,by-bh/2,A*B.bar.red*2,bh);g.globalAlpha=1}
+  g.strokeStyle="#8a6a30";g.lineWidth=2;g.strokeRect(cx-A,by-bh/2,A*2,bh);
+  const x=lock?hitX:pos(now);g.fillStyle="#3a2412";g.beginPath();g.moveTo(x,by-bh/2-2);g.lineTo(x-9,by-bh/2-18);g.lineTo(x+9,by-bh/2-18);g.closePath();g.fill();g.fillRect(x-1.5,by-bh/2-2,3,bh+4);
+  g.font=`700 13px ${kg82Col("--display","serif")}`;g.textAlign="center";g.fillStyle="#5a3a14";kg82Lbl(g,dodge?"Chạm khi kim vào vùng xanh":"Chạm khi kim vào vùng đỏ",W/2,H*.2);kg82DrawPops(g,pops,now)}
+ function end(raw,txt,col){if(stop)return;lock=true;draw(performance.now());kg82Pop(pops,W/2,H*.82,txt,col);draw(performance.now());stop=true;setTimeout(()=>env.end(raw),750)}
+ function tap(){if(lock||stop)return;const now=performance.now();hitX=pos(now);const raw=zoneOf(hitX);lock=true;
+  if(dodge)end(raw,raw?"Né kịp!":"Không kịp",raw?good:red);else end(raw,raw>=9?"Nặng tay!":raw>=5?"Vừa tay":"Nhẹ tay",raw>=9?red:raw>=5?gold:"#5a3a14")}
+ function frame(now){if(stop)return;if(lock){draw(now);raf=requestAnimationFrame(frame);return}const tt=now-t0;
+  if(tt>D.ms){lock=true;hitX=pos(now);end(0,dodge?"Không kịp":"Chậm quá, tay nhẹ",red);return}
+  env.hud({score:"–/10",round:"Hồi 1/1",time:`${Math.max(0,Math.ceil((D.ms-tt)/1000))} giây`});draw(now);raf=requestAnimationFrame(frame)}
+ C.cv.addEventListener("pointerdown",e=>{e.preventDefault();tap()});const kd=e=>{if(e.key===" "||e.key==="Enter"){e.preventDefault();tap()}};document.addEventListener("keydown",kd);
+ KG82.peek=()=>{if(lock||stop)return null;const x=pos(performance.now());return zoneOf(x)===10?C.client(x,by):null};
+ window.__slapTap=tap;raf=requestAnimationFrame(frame);return()=>{stop=true;cancelAnimationFrame(raf);document.removeEventListener("keydown",kd);if(window.__slapTap===tap)window.__slapTap=null}}
+KG82_ENG.slapbar=kg82SlapBar;
+/* slapGame({dodge, rows, go, skip, skipSub, onDone({raw, skipped})}) — intro card with two buttons, the game, then straight on (no result card: the act's own card follows) */
+function slapGame(o){const kind=o.dodge?"ne":"tat",skipRes={raw:0,skipped:true};
+ if(typeof window.__bot!=="undefined"||typeof kg82Open!=="function"){setTimeout(()=>o.onDone(skipRes),0);return}
+ KG82.ctx="hoc";KG82.lv=0;const K=KG82_KIND[kind];const d=kg82Open({art:o.dodge?"Né":"Tát",title:o.title,how:K.how});if(!d){o.onDone(skipRes);return}const box=kg82Box();
+ KG82.phase="intro";box.innerHTML=tsRows(o.rows)+`<div class="kg82act"><button class="kbtn" id="kg82go">${o.go}</button><button class="kbtn alt" id="kg82skip">${o.skip}<small>${o.skipSub}</small></button></div>`;
+ $("kg82go").onclick=()=>kg82Play(kind,raw=>{kg82Close();try{o.onDone({raw,skipped:false})}catch(e){console.error(e)}});
+ $("kg82skip").onclick=()=>{kg82Close();try{o.onDone(skipRes)}catch(e){console.error(e)}}}
+window.slapGame=slapGame;
+/* ---------- her slap: the game decides the tier ---------- */
+(function(){const d0=doAct;doAct=function(i,k){
+ if(k!=="tat"||SLAPG.busy||typeof window.__bot!=="undefined"||typeof kg82Open!=="function")return d0.apply(this,arguments);
+ const v=rivals[i],a=ACT.tat,self=this,args=arguments;if(!v||!a||!can(2)||S.dead||Q.length||!v.alive||v.out||!a.ok(S,v))return d0.apply(this,arguments);
+ const B=BAL.slap;SLAPG.busy=1;
+ slapGame({title:"Giáng tay",go:"Giơ tay",skip:"Tát luôn",skipSub:"không chơi: tay nhẹ",rows:[
+  ["Vùng đỏ",`tay nặng: Đức ${B.duc[3]}, oán sâu, dấu tay đậm sưng đỏ ${B.wk[3]} tuần, dễ bị tố giác, Thái hậu có thể quở`,"r"],
+  ["Vùng vàng",`tay vừa: Đức ${B.duc[2]}, dấu tay đậm ${B.wk[2]} tuần`,"t"],
+  ["Ngoài vùng",`tay nhẹ: Đức ${B.duc[1]}, dấu tay mờ ${B.wk[1]} tuần`,"g"]],
+  onDone:res=>{SLAPG.busy=0;SLAP.next=res.skipped?B.def:slapTierOf(res.raw);try{d0.apply(self,args)}finally{SLAP.next=0}}})}})();
+/* ---------- an NPC slaps her: tier rolled, she may dodge ---------- */
+function slapNpcTier(a){const gap=Math.max(1,(typeof rkOf==="function"?rkOf(a)-rkOf(S):1)),w=BAL.slap.npc[Math.min(gap,3)-1];let r=Math.random()*(w[1]+w[2]+w[3]);for(let i=1;i<=3;i++){if(r<w[i])return i;r-=w[i]}return 1}
+window.slapNpcTier=slapNpcTier;
+(function(){const r0=runAct;runAct=function(a,t,k,extra){
+ if(k!=="tat"||t!==S||!a||a===S||SLAPG.npcDone)return r0.apply(this,arguments);
+ const sev=slapNpcTier(a),self=this,B=BAL.slap;
+ const bot=typeof window.__bot!=="undefined"||typeof kg82Open!=="function"||typeof pushModal!=="function"||typeof tsRows!=="function";
+ const fin=(s)=>{let r="";SLAPG.npcDone=1;try{if(s<=0){if(typeof ducAdd==="function")ducAdd(a,B.duc[1],"tát hụt");r=`<span class="g">${NMc(a)} giơ tay tát ngươi nhưng ngươi né kịp, cái tát hụt.</span> `;relAdd(S,a,-5)}
+   else{SLAP.next=s;try{r=r0.call(self,a,t,k,extra)}finally{SLAP.next=0}}}finally{SLAPG.npcDone=0}return r};
+ if(bot)return fin(sev);
+ const show=r=>{if(r){log(r);pushModal({t:"Bị tát",h:`<p>${r}</p>`});showModal();render()}};
+ const nm=a.name||"Nàng";
+ pushModal({t:"Bị tát",who:typeof pv==="function"?pv(a):undefined,h:`<p>${nm} bước tới, giơ cao bàn tay. Ngươi có kịp né không?</p>`,opts:[
+  Object.assign(tsOpt({n:"Né đòn",odds:50,later:1,duoc:["cái tát nhẹ đi một bậc","tát nhẹ thì hụt hẳn"],mat:["chịu trọn cái tát"],kem:["một ván ngắn chừng ba giây"],go:()=>{
+    slapGame({dodge:true,title:"Né đòn",go:"Né",skip:"Chịu đòn",skipSub:"không né",rows:[["Né kịp","cái tát nhẹ đi một bậc; tát nhẹ thì hụt hẳn","g"],["Không né","nhận trọn cái tát","r"]],
+     onDone:res=>show(fin(res.skipped||res.raw<9?sev:sev-1))})}}),{}),
+  tsOpt({n:"Chịu đòn",odds:null,kem:["không né, nhận trọn cái tát"],go:()=>{const r=fin(sev);if(r){log(r);pushModal({t:"Bị tát",h:`<p>${r}</p>`})}}})]});
+ return""}})();
+/* ---------- co-op: the tier of a slap on the friend rides on the existing "res" message ---------- */
+(function(){try{if(typeof COOP==="undefined"||!COOP.send||!COOP.on)return;const s0=COOP.send;
+ COOP.send=function(m){try{if(m&&m.t==="res"&&m.k==="tat"&&window.__slapLast)m.slap=window.__slapLast}catch(e){}return s0.apply(this,arguments)};
+ COOP.on("res",m=>{try{const W=window.COOPW;if(!W||!W.on||m.from===W.seat||m.k!=="tat"||!m.slap||!S||S.dead)return;slapGive(S,null,"",m.slap)}catch(e){console.error(e)}})}catch(e){}})();
+(function(){const f=ACT.tat.f;ACT.tat.f=function(a,t){const r=f.apply(this,arguments);try{window.__slapLast=t&&t.slap?t.slap.sev:null}catch(e){}return r}})();
 /* ================= jmcal: LỊCH THÁNG · kitMonthCal + kitDeskCal (owner 15/11 ~18:30Z, KIT §58) =================
    A wall calendar: one month = 3 rows (thượng / trung / hạ tuần) x 10 squares (days 1-30). Only the FIXED YEARLY festivals of the game
    calendar (FEST, j31 + j71 Thánh thọ Thái hậu while she lives) are marked; private contests, tea parties, private banquets and every other
@@ -36275,7 +36378,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="b6f29305696c";window.CTM_BUILD=BUILD;
+const BUILD="a21a3049ccec";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
