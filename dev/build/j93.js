@@ -428,7 +428,9 @@ window.kitReward=kitReward;window.kitFlyItem=kitFlyItem;window.kitAlarm=kitAlarm
 .kmcoins img:nth-child(odd){--cx:-1}.kmcoins img:nth-child(even){--cx:1}
 .kmtap{font-family:var(--display);font-weight:700;color:#fff3c4;font-size:1rem;letter-spacing:.08em;animation:kmBlink 1.4s ease-in-out infinite}
 .km-open .kmtap{display:none}
-.kmlist{display:none;flex-direction:column;gap:5px;width:100%;max-width:440px;background:#fffaf0f4;border:1px solid var(--gold);border-radius:var(--k-rad,8px);padding:8px 10px;box-shadow:0 0 0 3px #f6ead6,0 10px 26px #0008}
+/* ONE paper card for the motion screens: the reward list and the person reveal (KIT §65.2) share this frame */
+.kmlist,.kprev-card{width:100%;max-width:440px;background:#fffaf0f4;border:1px solid var(--gold);border-radius:var(--k-rad,8px);padding:8px 10px;box-shadow:0 0 0 3px #f6ead6,0 10px 26px #0008;box-sizing:border-box}
+.kmlist{display:none;flex-direction:column;gap:5px}
 .km-done .kmlist{display:flex;animation:kmUp2 .3s var(--km-ease) both}
 .kmrow{display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:8px;align-items:baseline;padding:3px 0;border-bottom:1px dotted var(--k-hair,#e6d3ac)}
 .kmrow small{grid-column:2;font-size:.76rem;color:var(--dim)}.kmrow b{font-size:.9rem}

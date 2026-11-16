@@ -2738,7 +2738,7 @@ Every rank-up, on every road, gives the new rank's FULL SET as real items (conso
   «Dấu ấn»), servant road kind `pouch` «Đồ thưởng <rank>». Rows merge duplicates («Lụa Hàng Châu ×2»). No new CSS.
 - **65.2 `kitPersonReveal({who, title, sub, line, btn})`** — one person presented: the full-body transparent figure (`kitFigOf`) big in the
   centre, body-fitted by `kitFigBody` (body = 90 % of the figure box, feet on its bottom line, KIT 33), the kit name (`kitName`), one cổ trang line,
-  the kit button (`.kbtn.kmtake`, "Nhận"). Card = the kitReward list card look (`.kprev-card`). Short landscape (≤560 px): figure left, card right.
+  the kit button (`.kbtn.kmtake`, "Nhận"). Card = the SAME frame rule as the kitReward list (`.kmlist,.kprev-card` in j93, one rule). Short landscape (≤560 px): figure left, card right.
   Light behind the figure: the painted KIT §68 `orb` light (atlas frame 3, warmed by filter) under the figure, never over the face. HTML: `kitPersonRevealHTML(o)`.
   Used for «Nội vụ phủ phụ cấp người hầu» (the servant assigned at the rank-up: `prStaff`); reusable for any "a person is presented" moment.
 - Sample page: §65.2. Test: `node dev/test/promo-rules.js <url> [oldBuildUrl|-] [outdir|-] [sizes]`.

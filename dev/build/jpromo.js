@@ -111,7 +111,7 @@ function prNpcScan(){if(!S||!prHostOK())return;for(const v of (typeof rivals!=="
 .kprev-fig::before{content:"";position:absolute;left:50%;top:40%;width:min(120%,520px);aspect-ratio:1;translate:-50% -50%;pointer-events:none;
  background:url(img/fx/orb.webp) 100% 0/300% 100% no-repeat;mix-blend-mode:screen;filter:sepia(1) saturate(2.4) brightness(.8);animation:kmFade .8s ease .3s both}
 .kprev-img{position:absolute;left:50%;top:0;height:100%;width:auto;max-width:none;transform:translateX(-50%);filter:drop-shadow(0 6px 14px #000a);animation:kprevIn .7s var(--km-ease,ease) .15s both}
-.kprev-card{flex:none;display:flex;flex-direction:column;align-items:center;gap:6px;width:100%;max-width:440px;background:#fffaf0f4;border:1px solid var(--gold);border-radius:var(--k-rad,8px);padding:8px 12px 10px;box-shadow:0 0 0 3px #f6ead6,0 10px 26px #0008;box-sizing:border-box;animation:kmUp2 .35s var(--km-ease,ease) .5s both}
+.kprev-card{flex:none;display:flex;flex-direction:column;align-items:center;gap:6px;animation:kmUp2 .35s var(--km-ease,ease) .5s both} /* frame = j93 .kmlist card (one rule) */
 .kprev-n{font-weight:700;color:#3a1f10;text-align:center}
 .kprev-l{margin:0;font-size:.9rem;line-height:1.45;color:#3a2a1e;text-align:center}
 @keyframes kprevIn{from{opacity:0;transform:translateX(-50%) translateY(24px)}to{opacity:1;transform:translateX(-50%)}}

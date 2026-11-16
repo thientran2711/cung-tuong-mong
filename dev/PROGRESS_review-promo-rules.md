@@ -53,3 +53,8 @@ Base: origin/main 23a8e80e. Worker: promo-rules (coordinator s7).
   390x844 rotate prompt, no overflow.
 - Follow-ups (art, not blocking): per-rank Đeo eo pendants, middle-rank Đeo tay bangles (now vongngoc r0–4 repeats each rank), per-rank Túi thơm,
   maid robes per maid rank; servant-road edict animation.
+- r1 (after main 2afdafc39): kit consistency — kitPersonReveal's card copied the reward-list frame values privately; now ONE rule
+  `.kmlist,.kprev-card` (j93). Re-run: promo-rules 23/23 (755, 844x390, 1366), kit-page 39 samples 0 bad, painted-FX run 0 errors.
+- KIT REQUEST (ONE KIT KEEPER, owner 16/11): kit parts added/changed by this branch + review need the kit keeper's sign-off — §65 (rank chest use
+  of kitReward, kitPersonReveal + .kprev), §66 (kitGloom rank-down kmRankDownHTML, kitEdict glow), j93 shared motion kit (kmSpark → painted,
+  .kmlight/.kmglow/.kmember/.kmsmoke → painted atlases, .kmlist frame shared with .kprev-card, kitReward .km-long), BAL.ex.srvBar/srvCd, BAL.promo.
