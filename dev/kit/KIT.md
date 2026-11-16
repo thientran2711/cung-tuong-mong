@@ -3129,6 +3129,35 @@ Owner rule: every event where an item could come into her hands shows the ITEM'S
   PEND builder: event → item → choice → act; fails on a destroying/handing choice with no item found, or an item without a picture).
 - Kit page (§47): sample "§64" = every story item tag + one button per act.
 
+## 67. LẬT THẺ BÀI · kitCardFlip — the end-of-day card-flip scene (owner 15/11 20:50Z, review/cardflip) — `dev/build/jflip.js` (after jsfx, before j84)
+Replaces j93 piece 1 (kitFlipTablet / kitFlipNote: muted while `flip()` runs). Played once per week after the tablet is decided
+(j8 `flip` → j75 `S.nightWhy` → j93), through the kit motion queue `kmPush`, after the week panel / Tuần lục book / title (never over them).
+- Painted art only (gpt-2-6, folder ba4aecfe, CDN `img/kit/`): `cf-plate-ksp` (Kính sự phòng, empty lacquer tray, lamplight) → `cf-plate-emp`
+  (same tray on the Emperor's desk), each as a landscape 1600x1200 and a portrait 1200x1600 picture (`-p`, used when screen w/h < .95);
+  `cf-hand-emp` (his hand, yellow dragon sleeve, no face, cut out); `cf-seal-thitam` (cinnabar seal THỊ TẨM). Code only moves / fades / filters them.
+- Geometry: `BAL.cardFlip.plates.{l,p}` = per picture the tray FLOOR (measured from the pixels) + the tray RIM (safe zone). The plate box is
+  fitted so the rim stays on screen; card slots are computed in the same box → cards sit on the floor at every aspect (2..20+ cards: the
+  biggest card that fits in 1–5 rows). The plate's own picture lies over the cards in soft-light (painted lamplight on them) + a soft shadow.
+- Cards = each eligible woman's OWN kit frame (`mdH` → pcPort cell: frame, portrait, jade pendant, tassel) by HER knowledge (j61: unknown =
+  grey silhouette, name "???"). Deck = j75 `S.nightWhy.rows` (alive, in the palace) + the co-op friend; sorted by rank.
+- Beats (`BAL.cardFlip.t`, others' nights ×`other`): all lit → barred cards (nightCh 0; monthly cycle via `inCycle(p)` / `cycleDaysOf(p,month)`
+  when review/cycle is in) grey and are lifted out → the rest re-arrange → "carried to the Emperor": plate A cross-fades to B under a slow
+  drift, cards glide to B's floor → his hand reaches in, the card he turned lifts, glows (filter glow + §68 `kitFxLight("glow-gold")`) and
+  grows to the centre, the others dim → result chip (j93 `.kmres`). Hers: seal stamped on her card, §68 `kitFxBurst("glowburst"/"spark"/
+  "petal-peach")` (fallback: jfx `kitFx("decree")` + painted mo-petal-peach), sfx-win + bell.
+- Truth: the scene shows j75's result, never changes it. `S.nightWhy.flip0` (j75, 2 lines) = the card he turned; a steal inside j8 flip is
+  recorded by a `stealNight` wrapper. Turned ≠ final night → the chip says why (custom: nightWhy text "Hôm nay là rằm: theo lệ…"; stolen:
+  "Giữa đường, Hoàng thượng bị mời sang cung khác.") and who has the night. No flip → "Đêm nay Hoàng thượng không lật thẻ bài nào."
+- Wording (VANPHONG): Kính sự phòng dâng thẻ bài · Thẻ bài người không thể hầu giá được rút ra · Thẻ bài được dâng lên Hoàng thượng ·
+  Hoàng thượng lật thẻ bài · Đêm nay ngươi được thị tẩm. · Thẻ bài của ngươi được lật. · Tối nay: <bậc> <tên> / được chọn hầu đêm nay.
+- Tap = final still, second tap = close; closes by itself (`hold`). Reduced motion / Cảnh động off = the final still only. Phone landscape
+  (h < 560, w/h > 1.5): card left of centre, chip on the right. Servant road, bots, `quiet`: no scene. No save state (old saves load).
+- Co-op: the friend's card is on the tray (her real eligibility); the scene waits while `COOPW.pend` so both players see it when the merged
+  week arrives. Each player's pick is still rolled locally (protocol unchanged).
+- API: `kitCardFlip({deck:[{id,p,bar}],pick,turned,resHTML,onEnd})`, `cfDemo(n,barred,who)` (kit page §67 "Xem lật thẻ"), `cfGrid(n,W,H)`.
+- Test: `node dev/test/cardflip.js <url> <outdir> 755x1000,1000x755,1180x820,1366x1024,844x390 2 few|all` (real week end, beats measured in
+  page time, cards inside the floor, picked card on screen, chip never over it, 22 + 2 cards, reduced motion, old save, page errors).
+
 ## 59. PLACEHOLDER PICTURES · KIT_PH · kitPhTone (owner 15/11 ~18:45Z, review/placeholder-pics) — `dev/build/jph.js` (last module)
 Four generic palace still-lifes (Magnific gpt-2-6, no people, no faces) stand in for every EVENT or ACT that has no picture of its own, so the
 owner recognises "this one still lacks its picture" in play. They are deliberately emblematic (no scene, no people) so they never look like a real picture.
