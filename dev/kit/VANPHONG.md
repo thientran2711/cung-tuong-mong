@@ -25,7 +25,7 @@ Thi hành: `dev/build/j84.js` (module cuối trong assemble.py) sửa dữ liệ
 | Chép kiếp ra ngoài | Chép sổ · "chép kiếp này thành bản chép" | Xuất ván, mã |
 | Nạp kiếp từ ngoài | Nạp sổ · "dán bản chép vào để nạp" | Nhập ván, dán mã |
 | Bảng tùy chỉnh | Thiết lập | Cài đặt, Tùy chọn, Settings |
-| Tiếng | Nhạc · Tiếng động · Giọng · Im tiếng · Rung · Cảnh động; nút: Mở tiếng / Im tiếng | Âm thanh, Hiệu ứng âm, Hiệu ứng hình, Bật/Tắt âm thanh, Tắt tiếng |
+| Tiếng | Nhạc · Tiếng động · Giọng · Im tiếng · Rung · Hiệu ứng: Đầy đủ / Gọn (owner 22:35Z; was Cảnh động); nút: Mở tiếng / Im tiếng | Âm thanh, Hiệu ứng âm, Hiệu ứng hình, Bật/Tắt âm thanh, Tắt tiếng |
 | Tab việc làm | Hành sự | Hành động |
 | Tab bản đồ | Dư đồ (nút quay lại: "‹ Dư đồ") | Bản đồ, map |
 | Tab quan hệ (nút dưới) | Giao tình; mục con: Ân oán · Phe phái (lời chỉ: "Giao tình › Ân oán") | Quan hệ |
@@ -52,6 +52,8 @@ Thi hành: `dev/build/j84.js` (module cuối trong assemble.py) sửa dữ liệ
 | Ngôi thứ ba (người khác) (owner 11/15) | nữ: **nàng ta** ("Khen tài nghệ nàng ta", "nàng ta nắm 1 chứng cứ của ta"); nam: **y** (trung tính, lễ độ), **hắn** chỉ khi thù địch; Hoàng thượng: **bệ hạ**; Thái hậu: **Thái hậu**; chưa rõ: **vị ấy**. Hàm `kitThey(p)` (jaudit); VP đổi "nàng" trơn thành "nàng ta" trên màn hình | "nàng" trơn khi nói người khác |
 | Y phục dưới phẩm ở lễ (owner 11/15) | **thiếu lễ** ("thiếu lễ (y phục dưới phẩm): Danh −2 …"); khác **vượt phẩm** (mặc quá phẩm) | ăn mặc sai, không hợp |
 | Món đang mang (Tư trang, mọi ô) | **Đang mặc** (một chữ cho trâm, áo, vòng…) | Đang cài, Đang đeo, Đang dùng |
+| Tên món đồ trong câu (review/small-bugs-3) | danh từ chung: giữa câu viết thường ("Khương Lạc Anh tặng trâm gỗ đào cho …", "Phần thưởng: vòng ngọc Hòa Điền vào rương."); đứng một mình (ô đồ, tên thẻ, chip, đầu câu / đầu dòng) viết hoa chữ đầu; tên riêng trong tên món giữ hoa (Hòa Điền, Hàng Châu). VP làm trên màn hình: `VP.itemLow` (j84, tên từ IT + WD_ITEMS) | "tặng Trâm gỗ đào cho" |
+| Thay đổi thiện cảm (review/small-bugs-3) | "thiện cảm +20", "<tên> thiện cảm +25" | "thân +20", "nàng thân +20" (VP đổi cả dòng sổ cũ) |
 | Tên kẻ hầu | không trùng trong cả cung, không có số ("Thúy 2") | tên kèm số |
 | Số đo (Sắc, Tài, Sủng…) | gọi đúng tên; khi chung chung: "không đổi gì" | chỉ số, stat, điểm |
 | Điểm thi (tuyển tú, thi tài) | phần: "nàng mất 2 phần" | điểm |
