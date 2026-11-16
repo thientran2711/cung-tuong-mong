@@ -29,6 +29,7 @@ KIT_SAMPLES.push(
 KIT_SAMPLES.push(
  {id:"§51",title:"kitRows · bảng kit (nhãn dài xuống dòng, giá trị thẳng một cột)",html:()=>kitRows([["Đêm thị tẩm vui",["Trâm ngọc bích, Túi thơm",kitChip("Bạc",20,"g")],"t"],["Sinh hoàng tử",["Ngọc bội ngự ban",kitChip("Bạc",30,"g")],"t"],["Tiết Vạn thọ (tháng 8, người được sủng nhất)","Vòng ngọc","t"],["Chưa biết","chưa rõ","n"]])},
  {id:"§51",title:"kitRowsJoin · hai bảng nối thành một",html:()=>kitRowsJoin(kitRows([["Giá",kitChip("Bạc",-40,"r"),"t"]]),kitRows([["Phẩm","Thượng phẩm","t"],["Dùng để","dâng, tặng, bày ở yến tiệc","t"]]))},
+ {id:"§51.1",title:"kitRowsAlign · một khối một cột nhãn (mục không tiêu đề nối vào bảng trên)",html:()=>{const d=document.createElement("div");d.innerHTML=`<div class="kpsec"><h4 class="kpst">Đang tác động</h4>${kitRows([["Lo âu","Khương Lạc Anh được tấn phong · 2 tuần trước","r"]])}</div><div class="kpsec">${kitRows([["Ảnh hưởng","vui thì dễ chịu nghe, giận hay ghen thì khó nói chuyện, dễ ra tay hơn"]])}</div>`;kitRowsAlign(d);return d.innerHTML}},
  {id:"§51",title:"kitReqRows · điều kiện (✓/✗)",html:()=>kitReqRows([[false,"Sủng 8 (cần 15)"],[true,"Ghế Phi: còn chỗ"],[false,"Hoàng hậu không chặn (Hoàng hậu -5)"],[true,"Đã qua một mùa ở phẩm này"]])},
  {id:"§51",title:"kitChip(kitRel(...)) · chip quan hệ trong câu luật",html:()=>`<p>mỗi lần: ${kitChip(kitRel("them","phi tần khác ghen ta"),3,"r")}</p>`});
 /* kit-fig2 parts (review r6): §48 kitNameRank, §49.1 kitRelRow (§50 kitEventDp is a live dialog: see dev/test/event-dp.js) */
