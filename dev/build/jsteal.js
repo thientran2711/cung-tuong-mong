@@ -56,5 +56,5 @@ for(const k of ["steal","road"]){const A0=typeof ACT==="object"&&ACT[k];if(A0)Ob
 /* the weekly social menu's old "steal" (j28 SOC, made a real act by j75) is folded into this one choice: one path, not two */
 if(typeof SOC==="object"&&SOC.steal)SOC.steal.ok=()=>false;
 /* the flip: after the tablet and the custom night are decided (j8 → j75), the consorts choose */
-const f0=flip;flip=function(){const r=f0.apply(this,arguments);try{if(S&&!S.dead&&S.tonight)stealPass(tonightOf(),{live:true})}catch(e){console.error(e)}return r};
+const f0=flip;flip=function(){const r=f0.apply(this,arguments);try{if(S&&!S.dead&&S.tonight&&!(typeof nfOn==="function"&&nfOn()))stealPass(tonightOf(),{live:true})}catch(e){console.error(e)}return r};
 })();
