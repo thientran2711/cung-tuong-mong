@@ -706,7 +706,7 @@ function kitInfoKey(title){const t=kpPlain(String(title||"")).trim();for(const [
 function kitInfoArt(title){const k=kitInfoKey(title);const have=KIT_INFOM.have||[];const cat=KIT_INFO_CAT[k]||kitActCat(kpPlain(String(title||"")));const ah=(KIT_ACTS.have||[]);
  const src=k&&have.includes(k)?`img/info-${k}.webp`:ah.includes("act-cat-"+cat)?`img/act-cat-${cat}.webp`:"";return{key:k,src,label:kpPlain(String(title||"")).replace(/\s*[·:].*$/,"")}}
 (function(){const b0=kpBuild;kpBuild=function(M,m){b0.apply(this,arguments);try{const dlg=M.querySelector(".dlg");if(!dlg||!/^(rule|info)$/.test(dlg.dataset.kind||""))return;
- const body=M.querySelector("#mb > .kpb");if(!body||body.querySelector(":scope > .kpsubj"))return;const a=kitInfoArt(m.t);
+ const body=M.querySelector("#mb > .kpb");if(!body||body.querySelector(":scope > .kpsubj"))return;const a=m.kit&&m.kit.art?{key:"",src:m.kit.art,label:m.kit.artLabel||""}:kitInfoArt(m.t);/* spec.art = the picture of THIS subject (e.g. a chapter cover, review/chapter-detail), else the topic picture */
  body.classList.add("kphas","kpinfo");body.insertAdjacentHTML("afterbegin",`<div class="kpsubj kpiart" data-info="${a.key}">${kitArtFrame(a.src,a.label)}</div>`)}catch(e){console.error("kpInfo",e)}}})();
 /* the HUD help panels use the same structured layout as the rule panel: what it is · what you have now */
 (function(){const s0=showModal;showModal=function(){try{const m=Q[0];if(m&&!m.kit&&!m.opts&&typeof m.h==="string"&&/^<p>[^<]*<\/p>$/.test(m.h)&&typeof HX==="object"){
