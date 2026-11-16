@@ -62,3 +62,12 @@ State of branch review/mk-colour:
   por-scale toil-fit (1400 mouths moved, after: 0 above 0.10 face width); img/toil-fit2.json + img/mk-fit/*.json re-uploaded; dev/art/mkfit synced.
   Checked by eye: re-cropped player looks + a random 24-picture sheet.
 - Sample 2 (14 presets): /home/user/wt/mk-colour-sample2.jpg (`node dev/test/mk-colour.js <url> <out> consort-c05 t1 a18 presets`).
+
+## Update 16/11 (worker C6 resume)
+- Merged origin/main (conflicts in jtoil.js sfx lines, KIT.md, built files; site rebuilt). Stale re-measure: 55 faces re-measured (md5 changed after other re-crops), fixtoil rerun
+  on the CURRENT CDN toil-fit (1400 moved, after: 0 above 0.10), img/toil-fit2.json + img/mk-fit/*.json re-uploaded, dev/art/mkfit synced.
+- Presets: 8 đẹp (4 cool + 4 warm) + 8 diêm dúa (4+4) in TOIL_PRE; 8 vụng looks = seeded clumsy variants of the player's picked colours (4 cool / 4 warm by her palette) in jtoil (commit 973729653).
+- Lips QA on all player faces (player-look1..4, 40 pictures, `lipqa.py --only player-look<n> --sheets all`): looked at every outline; look2/3/4 median iou .73-.78 shift .01-.04;
+  look1 is flagged only by the pale-lip metric (iou .44-.60) - outlines checked by eye sit on the lips (lower lip slightly loose on t1 figures, within the soft mask).
+- D28 reveal scene done (KIT.md 60.5), plate `img/toil-mirror-room.webp` on CDN (Magnific 1lpaElvr4r, chosen of 2). Sounds: existing moments only (favour, rankNew, mglose, mirror).
+- Test: dev/test/mk-reveal.js.

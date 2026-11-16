@@ -19,11 +19,12 @@ fs.mkdirSync(DIR,{recursive:true});
  for(const lk of looks){
   await p.evaluate(()=>{window.__done=0;kmBusy=false;OPT.fxon=!/still/.test(location.hash);OPT.fxpick=1});
   await p.evaluate(([lk])=>{const made=lk!=='moc';S.toilette={day:toilWk()*10,wk:toilWk(),score:made?80:0,makeup:made,style:'fit',dv:'chinh',F:0,occ:[],look:lk==='dep'||lk==='diem'||lk==='vung'?lk:null,col:toilColFix(null)};if(made)S.toilette.col.seed=toilWk();
-   const col=toilColFix(null);TOIL.test_rev=1;toilReveal({look:lk,made,score:80,good:lk==='dep'||lk==='tuyet',pre:made?toilPreName(S.toilette.col,S.toilette.look):''},()=>{window.__done=1})},[lk]);
+   const col=toilColFix(null);TOIL.test_rev=1;toilReveal({manual:1,look:lk,made,score:80,good:lk==='dep'||lk==='tuyet',pre:made?toilPreName(S.toilette.col,S.toilette.look):''},()=>{window.__done=1})},[lk]);
   await p.waitForSelector('.ktrv',{timeout:20000});
-  const r={};await p.waitForTimeout(1500);await p.screenshot({path:`${DIR}/rev-${tag}-${lk}-1.jpg`,quality:60});
-  await p.waitForTimeout(2200);await p.screenshot({path:`${DIR}/rev-${tag}-${lk}-2fx.jpg`,quality:60});
-  await p.click('.ktrv-ov');await p.waitForTimeout(1600);await p.screenshot({path:`${DIR}/rev-${tag}-${lk}-3zoom.jpg`,quality:60});
+  const r={};await p.waitForFunction(()=>document.querySelector('.ktrv.ktrv-in'));await p.waitForTimeout(1300);await p.screenshot({path:`${DIR}/rev-${tag}-${lk}-1.jpg`,quality:60});
+  await p.evaluate(()=>TOIL_REV.fx());await p.waitForTimeout(1200);await p.screenshot({path:`${DIR}/rev-${tag}-${lk}-2fx.jpg`,quality:60});
+  await p.evaluate(()=>TOIL_REV.go());await p.waitForTimeout(500);await p.screenshot({path:`${DIR}/rev-${tag}-${lk}-2b.jpg`,quality:60});
+  await p.evaluate(()=>TOIL_REV.zoom());await p.waitForTimeout(1800);await p.screenshot({path:`${DIR}/rev-${tag}-${lk}-3zoom.jpg`,quality:60});
   r.card=await p.evaluate(()=>{const c=document.querySelector('.ktrv-card');const r=c.getBoundingClientRect();const z=document.querySelector('.ktrv-zoom .kfzoom').getBoundingClientRect();return{card:[r.left|0,r.top|0,r.right|0,r.bottom|0],zoom:[z.left|0,z.top|0,z.right|0,z.bottom|0],op:getComputedStyle(c).opacity,txt:c.innerText.replace(/\n/g,' | '),over:c.scrollWidth>c.clientWidth+1,vw:[innerWidth,innerHeight],layers:document.querySelectorAll('.ktrv-zoom .kfxf img,.ktrv-zoom .kfxf svg,.ktrv-fw .kfxf *').length}});
   r.hov=await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1);
   await p.click('.ktrv-ov');await p.waitForFunction(()=>window.__done===1,null,{timeout:8000}).catch(()=>{});r.done=await p.evaluate(()=>window.__done);await p.waitForTimeout(400);

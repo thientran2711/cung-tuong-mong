@@ -54,7 +54,9 @@ fs.mkdirSync(DIR,{recursive:true});
  for(let k=0;k<3;k++){for(let t=0;t<200;t++){const l=await p.evaluate(()=>TOIL.geo.lip());if(!l)break;if(Math.abs(l.ring-1)<.2){await p.mouse.click(l.x,l.y);break}await p.waitForTimeout(15)}}
  await p.waitForTimeout(1300);await p.screenshot({path:`${DIR}/toil-${tag}-5-result.jpg`,quality:70});
  out.rec=await p.evaluate(()=>S.toilette);
- await p.click('#toildone');await p.waitForTimeout(600);
+ /* D28: the final-look reveal comes first: tap through it (skip to zoom, close) */
+ for(let i=0;i<3&&await p.$('.ktrv');i++){await p.click('.ktrv-ov').catch(()=>{});await p.waitForTimeout(700)}
+ await p.waitForSelector('#toildone');await p.click('#toildone');await p.waitForTimeout(600);
  out.chip2=await p.evaluate(()=>{const c=document.querySelector('#k3tt [data-k3="toil"]');return c?c.textContent:null});
  out.after=await cardTxt();
  /* 4. by nết: the same look judged by a frugal and a strict Thái hậu */

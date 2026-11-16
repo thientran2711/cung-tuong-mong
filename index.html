@@ -27552,7 +27552,7 @@ function toilReveal(o,done){let fin=false;const end=()=>{if(fin)return;fin=true;
    `<div class="ktrv-zoom">${kitFaceZoom(S,pf)}</div><div class="ktrv-card kgr">${kitRows(rows)}</div></div>`;
   const rt=kmStage("ktrv-ov",html,{manual:true});const ov=rt.ov,R=ov.querySelector(".ktrv"),fw=ov.querySelector(".ktrv-fw"),zm=ov.querySelector(".ktrv-zoom"),im=fw.querySelector("img");
   const hint=document.createElement("div");hint.className="kmhint";hint.textContent="Chạm để bỏ qua";ov.appendChild(hint);
-  let ph=0;const T=[];const later=(ms,f)=>T.push(setTimeout(()=>{try{f()}catch(e){console.error(e)}},ms));
+  let ph=0;const T=[];const later=(ms,f)=>{if(!o.manual)T.push(setTimeout(()=>{try{f()}catch(e){console.error(e)}},ms))};
   const closeAll=()=>{if(ph===3)return;ph=3;T.forEach(clearTimeout);try{kitFxClear&&kitFxClear()}catch(e){}ov.classList.add("km-out");setTimeout(()=>ov.remove(),240);end()};
   const showCard=()=>{R.classList.add("ktrv-zoomed");hint.textContent="Chạm để đóng"};
   const toZoom=()=>{if(ph>=2)return;ph=2;T.forEach(clearTimeout);T.length=0;R.classList.add("ktrv-zin");showCard();later(red?0:2600,()=>{if(ph===2)hint.textContent="Chạm để đóng"})};
@@ -27563,13 +27563,14 @@ function toilReveal(o,done){let fin=false;const end=()=>{if(fin)return;fin=true;
   if(red){toZoom();return}
   /* step in, effect, zoom */
   requestAnimationFrame(()=>R.classList.add("ktrv-in"));
-  try{kitFxPreload&&kitFxPreload(look==="vung"?["ink"]:look==="diem"?["spark","petal-gold","glowburst"]:look==="dep"||look==="tuyet"?["petal-plum","petal-peach","glowburst"]:["glowburst"])}catch(e){}
-  later(900,()=>{if(ph>=2)return;const tg=fw,SF={dep:"favour",tuyet:"favour",diem:"rankNew",vung:"mglose",vua:"mirror",moc:"mirror"}[look]||"mirror";try{kitSfx(SF)}catch(e){}
-   try{if(look==="dep"||look==="tuyet"){kitFxBurst("petal-plum",null,16,{});kitFxBurst("petal-peach",null,10,{});kitFxBurst("glowburst",tg,1,{})}
-    else if(look==="diem"){kitFxBurst("glowburst",tg,2,{});kitFxBurst("spark",tg,26,{});kitFxBurst("petal-gold",null,14,{})}
-    else if(look==="vung"){kitFxBurst("ink",tg,5,{});R.classList.add("ktrv-wob")}
-    else if(look==="vua"){kitFxBurst("glowburst",tg,1,{})}}catch(e){}});
-  later(red?0:3300,goZoom);
+  try{kitFxPreload&&kitFxPreload(look==="vung"?["ink"]:look==="diem"?["spark","petal-gold"]:look==="dep"||look==="tuyet"?["petal-plum","petal-peach"]:[])}catch(e){}
+  const runFx=()=>{if(ph>=2)return;const tg=fw,SF={dep:"favour",tuyet:"favour",diem:"rankNew",vung:"mglose",vua:"mirror",moc:"mirror"}[look]||"mirror";try{kitSfx(SF)}catch(e){}
+   const rc=fw.getBoundingClientRect(),fp={x:rc.left+v[0]/100*rc.width,y:rc.top+(v[1]-v[6]*.2/A)/100*rc.height};
+   try{if(look==="dep"||look==="tuyet"){kitFxBurst("petal-plum",null,16,{});kitFxBurst("petal-peach",null,10,{});kitFxLight("glow-gold",fw,{opacity:.4,dur:3200,scale:1.5})}
+    else if(look==="diem"){kitFxLight("glow-gold",fw,{opacity:.55,dur:3200,scale:1.6});kitFxBurst("spark",fp,24,{});kitFxBurst("petal-gold",null,14,{})}
+    else if(look==="vung"){kitFxBurst("ink",fp,3,{scale:.8});R.classList.add("ktrv-wob")}
+    else if(look==="vua"){kitFxLight("glow-gold",fw,{opacity:.25,dur:2400,scale:1.3})}}catch(e){}};later(900,runFx);
+  later(red?0:3300,goZoom);if(o.manual)window.TOIL_REV={fx:runFx,go:goZoom,zoom:toZoom,close:closeAll,get ph(){return ph}};
  }catch(e){console.error(e);end()}}
 window.toilReveal=toilReveal;
 (function(){const st=document.createElement("style");st.id="ktrv-css";st.textContent=`
@@ -27587,7 +27588,7 @@ window.toilReveal=toilReveal;
 .ktrv-fw img{display:block;height:100%;width:auto;max-width:none}
 .ktrv-fw .kfxf{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none}
 .ktrv-in .ktrv-fw{opacity:1;transform:none}
-.ktrv-go .ktrv-fw{transform:scale(var(--ktsc,3));transition:transform 1.1s cubic-bezier(.55,0,.25,1),opacity .5s ease .7s;opacity:0}
+.ktrv-go .ktrv-fw{transform:scale(var(--ktsc,3));transition:transform 1.1s cubic-bezier(.55,0,.25,1),opacity .4s ease .8s;opacity:0}
 .ktrv-wob .ktrv-fw{animation:ktWob .9s ease-in-out 2}
 @keyframes ktWob{0%,100%{transform:none;filter:none}20%{transform:rotate(-1.6deg) skewX(2deg);filter:blur(1.4px)}50%{transform:rotate(1.4deg) skewX(-2deg);filter:blur(.8px)}75%{transform:rotate(-.8deg)}}
 .ktrv-zoom{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%) scale(.55);opacity:0;transition:opacity .6s ease,transform .9s cubic-bezier(.2,.8,.2,1);pointer-events:none}
@@ -29236,7 +29237,7 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.2",title:"Th�
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="185a15990be9";window.CTM_BUILD=BUILD;
+const BUILD="cb31b379bd7c";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
