@@ -82,7 +82,7 @@ Object.assign(BAL,{ea:{
 }});
 (function(){
 const E=()=>BAL.ea;
-window.EA_N={cards:{},play:{},out:{},outT:{},npcAct:{},npcOut:{},npcOutT:{},ext:{},npcExt:{},hoi:0,hoiMe:0,wk:0,outWk:0};
+window.EA_N={cards:{},play:{},out:{},outT:{},npcAct:{},npcOut:{},npcOutT:{},ext:{},npcExt:{},hitMe:{},hoi:0,hoiMe:0,wk:0,outWk:0};
 const eaOn=()=>!!(typeof S!=="undefined"&&S&&!S.dead&&!window.__eaOff);
 const eaHost=()=>{try{const C=window.COOPW;return !(C&&C.on&&C.seat&&C.seat!=="a")}catch(e){return true}};
 const W=()=>{try{return wk()}catch(e){return 0}};
@@ -294,7 +294,10 @@ function eaDo(p,r){const F=BAL.ea.fx[r.k]||{vent:10},me=p===S,res=[];let h="",ta
  case"thu":pay({bac:-Math.min(F.bac,me?S.bac:(p.bac||0))});h=me?"Ngươi ngồi viết một lá thư dài gửi về nhà, kể hết nỗi khổ trong cung, đút bạc cho thái giám mang ra ngoài.":`${Nm(p)} gửi thư về nhà kể khổ.`;break;
  case"soat":for(const s of staffOf(p))loyAdd(s,-F.loy);add(`lòng cung nhân −${F.loy}`);h=me?"Lòng bất an, ngươi sai lục soát khắp tẩm cung, hỏi han từng cung nhân. Ai nấy đều thấy mình bị nghi.":`${Nm(p)} sai lục soát khắp cung mình.`;break;
  case"cau":pay({bac:-Math.min(F.bac,me?S.bac:(p.bac||0))});h=me?"Ngươi sai người mang lễ đi khắp các chùa miếu, cầu khấn cho được bình an.":`${Nm(p)} sai người đi cầu khấn khắp nơi.`;break;
- case"cham":{const t=eaRival(p);if(!t)return null;target=t;relAdd(p,t,-F.rel);oanAdd(t,p,F.oan);if(me)add(`${nm(t)} thiện cảm −${F.rel}`);else if(t===S)add(eaN(p,"thiện cảm",-F.rel));pay({danh:-F.danh});
+ /* emotion-acts-3 (review r1 FAIL #2): the one MOCKED likes the mocker less and bears a grudge; the mocker's own regard does not sink (the
+     mocking vents it). r1 used relAdd(mocker, mocked) both ways: every jealous rival who mocked HER (≈3.5 a 100 tuần, she is the favourite they
+     envy) liked her 10 less each time → more hatred → more mocking, a loop the OFF arm never had. Gain: vent; loss: Danh + an enemy made. */
+  case"cham":{const t=eaRival(p);if(!t)return null;target=t;affAdd(t,p,-F.rel);oanAdd(t,p,F.oan);if(me)add(`${nm(t)} thiện cảm −${F.rel}`);pay({danh:-F.danh});
   h=me?`Gặp ${nm(t)} ở ngự hoa viên, cơn ghen trào lên, ngươi buông mấy câu châm chọc. Người xung quanh nghe rõ cả.`:`${Nm(p)} châm chọc ${t===S?"ngươi":t.name} trước mặt mọi người.`;
   if(t===S&&!me)eaHitMe(p,"cham");break}
  case"thuong":{const st=staffOf(p);const b=Math.min(F.bac,me?S.bac:(p.bac||0));pay({bac:-b});for(const s of st)loyAdd(s,F.loy);add(`lòng cung nhân +${F.loy}`);h=me?"Lòng vui như mở hội, ngươi mở rương, thưởng bạc cho cả cung. Cung nhân mừng rỡ tạ ơn.":`${Nm(p)} vui vẻ thưởng bạc cho cung nhân.`;break}
@@ -365,10 +368,10 @@ function eaHitMine(p,m){try{if(!m)return;const lower=rkOf(p)<S.rank&&!S.out;loyA
    opts:[{n:`Sang hỏi tội ${nm(p)}`,risk:"an toàn",hint:"giữ thể diện cho cung mình",x:`Chắc chắn · thành: Danh +${E().hoi.go.danh}, lòng ${m.name} +${E().hoi.go.loy} · kèm: ${nm(p)} oán ngươi +${E().hoi.go.oan}`,fx:{danh:E().hoi.go.danh},go:()=>{loyAdd(m,E().hoi.go.loy);oanAdd(p,S,E().hoi.go.oan);log(`Ngươi sang hỏi tội ${nm(p)}; nàng đành cúi đầu nhận lỗi.`)}},
     {n:"Bỏ qua",risk:"an toàn",hint:"giữ hòa khí",x:`Chắc chắn · thành: Đức +${E().hoi.let.duc} · kèm: lòng ${m.name} −${E().hoi.let.loy}`,fx:{duc:E().hoi.let.duc},go:()=>{loyAdd(m,-E().hoi.let.loy);log(`Ngươi bảo ${m.name} nhịn đi cho êm chuyện.`)}}]})}
   else{log(`${Nm(p)} mắng cung nữ ${m.name} của ngươi; ${Nm(p)} phẩm vị cao hơn, ngươi đành nuốt giận.`);try{emoEv(S,"slight",`${nm(p)} mắng cung nữ của ngươi`,emoKey(p))}catch(e){}}}catch(e){}}
-function eaHitMe(p,k,o){try{o=o||{};const F=BAL.ea.fx[k]||{};const tk=o.tk||"even";
+function eaHitMe(p,k,o){try{o=o||{};cnt(EA_N.hitMe,k);const F=BAL.ea.fx[k]||{};const tk=o.tk||"even";
  if(!eaMeSlot())return;
  const quoH={hot:"Thái hậu đang giận, lúc thỉnh an đập tay xuống án, quở mắng ngươi nặng lời trước mặt mọi người.",even:"Thái hậu đang không vui, lúc thỉnh an nghiêm giọng quở trách ngươi mấy câu trước mặt mọi người.",timid:"Thái hậu đang không vui, lúc thỉnh an thở dài, khẽ trách ngươi mấy câu."}[tk];
- const T={cham:["Bị châm chọc",`<p>${Nm(p)} gặp ngươi ở ngự hoa viên, buông mấy câu châm chọc chua cay. Người xung quanh nghe rõ cả.</p>`,`${nm(p)} thiện cảm −${F.rel}`,"img/act-dap-tra-mia-h.webp"],
+ const T={cham:["Bị châm chọc",`<p>${Nm(p)} gặp ngươi ở ngự hoa viên, buông mấy câu châm chọc chua cay. Người xung quanh nghe rõ cả.</p>`,`${Nm(p)} mất mặt (Danh −${F.danh}); ngươi để bụng`,"img/act-dap-tra-mia-h.webp"],
   ban:[p===S.thO?"Thái hậu ban thưởng":"Hoàng thượng ban thưởng",`<p>${p===S.thO?"Thái hậu":"Hoàng thượng"} đang vui, ban thưởng khắp hậu cung. Thái giám mang bạc đến cung ngươi.</p>`,`Bạc +${F.bac}`,"img/act-thuong.webp"],
   noi:["Long nhan đại nộ",`<p>Hoàng thượng đang giận, một lời của ngươi chạm đúng chỗ phật ý. Ngài phất tay áo bỏ đi.</p>`,`Sủng −${F.sung}`,"img/act-xu-toi-h.webp"],
   quo:["Thái hậu quở trách",`<p>${quoH}</p>`,`Thái hậu thiện cảm −${o.n||F.th}`,"img/act-xu-toi-h.webp"],
