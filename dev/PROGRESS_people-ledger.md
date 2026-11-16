@@ -28,7 +28,7 @@ vs the record at the current khắc: hidden / extra / counted twice / place miss
 
 | run (consort road unless said) | moments | map sum | record | hidden | extra | twice | stage ≠ record |
 |---|---|---|---|---|---|---|---|
-| BEFORE (schedules3-r4), 1180x820 | 25 | 364* | 1503 | 434 | 25 | 1 | – |
+| BEFORE (schedules3-r4), 1180x820 | 25 | 364* | 1503 | 409 (+755 at places not read) | 25 | 1 | – |
 | AFTER, 1180x820 | 25 | 1462 | 1462 | 0 | 0 | 0 | – |
 | AFTER + party rule, 1180x820 | 30 | 1711 | 1711 | 0 | 0 | 0 | 0 |
 | AFTER, maid road (cnv) 1180x820 | 25 | 720 | 1433 | many | many | 1 | 12 (see open 1) |
