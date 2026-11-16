@@ -23,13 +23,13 @@ r = await call("new", {}, { method: "GET", raw: "" }).catch(() => ({ s: 0 }));
 t(r.s === 405 || r.s === 0, "GET refused");
 r = await call("new", {}, { type: "text/plain" }); t(r.s === 415, "non-JSON refused");
 
-/* code: 26 chars, 130 bits, unique, server-made */
-r = await call("new", {}); t(r.s === 200 && r.j.k.length === 26 && [...r.j.k].every(c => VAULT.ALPH.includes(c)), "new code");
+/* code: 8 chars (40 bits, owner design), unique, server-made */
+r = await call("new", {}); t(r.s === 200 && r.j.k.length === VAULT.LEN && VAULT.LEN === 8 && [...r.j.k].every(c => VAULT.ALPH.includes(c)), "new code");
 t(r.h.get("access-control-allow-origin") === O && r.h.get("cache-control") === "no-store", "cors + no-store on reply");
 const k = r.j.k; const codes = new Set(); for (let i = 0; i < 50; i++) codes.add((await call("new", {})).j.k); t(codes.size === 50, "codes unique");
 t(normCode(k.toLowerCase().replace(/(.{4})/g, "$1-")) === k, "typed code normalised");
 t(!env.VAULT._objs.has(k) && [...env.VAULT._objs.keys()].every(n => /^[0-9a-f]{64}$/.test(n)), "the code is never the storage name (sha-256)");
-r = await call("head", { k: "0".repeat(26) }); t(r.s === 404, "unknown code = 404, nothing created");
+r = await call("head", { k: "0".repeat(VAULT.LEN) }); t(r.s === 404, "unknown code = 404, nothing created");
 r = await call("head", { k: "abc" }); t(r.s === 404, "malformed code = 404");
 
 /* round trip */
@@ -71,6 +71,23 @@ const rr = await worker.fetch(new Request("https://w/api/vault/head", { method: 
 t(rr.status === 429, "per-IP limit binding honoured");
 /* drop */
 r = await call("drop", { k: k2 }); t(r.j.ok, "drop"); r = await call("head", { k: k2 }); t(r.s === 404, "dropped vault gone");
+/* GUARD (r1): per-network miss lockout, works without the [[ratelimits]] binding */
+import { netKey } from "../src/vault.js";
+t(netKey("1.2.3.4") === "4:1.2.3.4" && netKey("2001:db8:1:2a00::5") === netKey("2001:db8:1:2aff:ffff::9") && netKey("2001:db8:1:2a00::5") !== netKey("2001:db8:1:2b00::5") && netKey("") === "" && netKey("::ffff:1.2.3.4") === "4:1.2.3.4", "net key: IPv4 address, IPv6 /56");
+const ipCall = (op, body, ip) => worker.fetch(new Request("https://w/api/vault/" + op, { method: "POST", headers: { "content-type": "application/json", Origin: O, "CF-Connecting-IP": ip }, body: JSON.stringify(body) }), env);
+const live = (await ipCall("new", {}, "5.5.5.5")).status === 200;
+const kG = (await call("new", {})).j.k; const rnd = i => ("ZZZZZZZ" + "0123456789ABCDEFGHJKMNPQRSTVWXYZ"[i % 32]);
+let st = []; for (let i = 0; i < VAULT.G.MISS_H; i++) st.push((await ipCall("head", { k: rnd(i) }, "7.7.7.7")).status);
+t(live && st.every(x => x === 404), "misses under the limit answer 404");
+t((await ipCall("head", { k: rnd(99) }, "7.7.7.7")).status === 429 && (await ipCall("head", { k: kG }, "7.7.7.7")).status === 429, "after MISS_H misses every lookup from that network is refused (even a real code)");
+t((await ipCall("head", { k: kG }, "7.7.7.8")).status === 200, "other networks unaffected");
+const par = await Promise.all(Array.from({ length: 40 }, (_, i) => ipCall("head", { k: rnd(i + 40) }, "6.6.6.6").then(x => x.status)));
+t(par.filter(x => x === 404).length <= VAULT.G.MISS_H, "parallel guesses cannot pass the limit (in-flight count)");
+let hits = 0; for (let i = 0; i < 25; i++) if ((await ipCall("head", { k: kG }, "8.8.4.4")).status === 200) hits++; t(hits === 25, "real-code lookups never count as misses");
+let nn = 0; for (let i = 0; i < VAULT.G.NEW_H + 3; i++) if ((await ipCall("new", {}, "4.4.4.4")).status === 200) nn++; t(nn === VAULT.G.NEW_H, "new codes per network capped");
+const gobj = [...env.VAULT._objs.values()].find(x => x.st.storage._m.get("g") && x.st.storage._m.get("g").hm >= VAULT.G.MISS_H);
+t(gobj && !gobj.st.storage._m.has("meta") && !JSON.stringify([...gobj.st.storage._m.values()]).includes("7.7.7.7"), "guard state persisted; no IP stored");
+gobj.inst.g = null; gobj.inst.fly = 0; t((await ipCall("head", { k: kG }, "7.7.7.7")).status === 429, "lockout survives eviction (persisted)");
 /* co-op rooms endpoints untouched */
 const h = await worker.fetch(new Request("https://w/api/health"), env); t(h.status === 200, "health still ok");
 console.log("vault ok", ok);

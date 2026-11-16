@@ -1,6 +1,6 @@
 /* ================= jcloud: SỔ MÂY — one character on phone AND iPad (owner 15/11, C44, review/cloud-save) =================
    Thiết lập › Sổ mây: "Giữ sổ trên mây" asks the Worker (coop/worker/src/vault.js, same ctm-coop Worker) for a private
-   26-letter ám hiệu sổ (130 bits); "Nối sổ" + that ám hiệu links another device. Local-first: the sổ stay in localStorage
+   8-letter ám hiệu sổ (owner design; Crockford base32, guessing stopped by the Worker's per-network miss guard); "Nối sổ" + that ám hiệu links another device. Local-first: the sổ stay in localStorage
    (j6 SK(n)), the cloud is a copy.
    SYNC (run): base = the cloud version this device last matched (C.rev + per-sổ hashes C.h). For each sổ one/hai/ba:
      only this device changed it → send; only the cloud changed it → take it; both → CONFLICT: a kit panel shows both copies
@@ -109,7 +109,7 @@ function refreshTitle(){try{if(!T.hidden&&window.CTM_ROOMS){const s=$("slots");i
 /* ---------- words ---------- */
 function fmtAt(t){if(!t)return "";const d=new Date(t);const p=x=>String(x).padStart(2,"0");return `${p(d.getHours())}:${p(d.getMinutes())} ngày ${d.getDate()}/${d.getMonth()+1}`}
 const ERR={net:"Chưa nối được mây; có đường mạng là tự gửi lại.",gone:"Không thấy sổ mây mang ám hiệu này (bỏ đã lâu hay gõ sai).",slow:"Gửi dày quá, đợi chốc lát rồi gửi lại.",
- big:"Sổ quá lớn, mây không nhận.",srv:"Mây chưa nhận; chốc nữa tự gửi lại.",old:"Bản này do bản trò chơi khác ghi, máy này chưa đọc được."};
+ big:"Sổ quá lớn, mây không nhận.",many:"Gõ sai nhiều lần quá; đợi một lúc lâu rồi gõ lại.",srv:"Mây chưa nhận; chốc nữa tự gửi lại.",old:"Bản này do bản trò chơi khác ghi, máy này chưa đọc được."};
 function stateWord(){if(STATE==="busy")return ["Đang gửi, đang lấy…","n"];if(C.pend)return ["Hai bản sổ khác nhau, chờ ngươi chọn","r"];if(C.err)return [ERR[C.err]||ERR.srv,"r"];return C.rev?["Khớp với mây","g"]:["Chưa gửi lần nào","n"]}
 const group=k=>String(k||"").replace(/(.{4})(?=.)/g,"$1-");
 function slotLine(s){return s?[`${s.w||""} ${s.n||""}`.trim(),s.d||""].filter(Boolean).join(" · "):"Chưa ghi"}
@@ -137,7 +137,7 @@ function body(pg){
   `<div class="kslot-a"><button class="kbtn" data-cl="copy">Chép ám hiệu</button><button class="kbtn alt" data-cl="share">Gửi sang máy kia</button></div>`+
   `<div class="kslot"><h4 class="kpst">Thôi nối trên máy này</h4>${kitRows([["Sổ trên máy","vẫn giữ nguyên","n"],["Sổ trên mây","vẫn còn, nối lại bằng ám hiệu","n"]])}<div class="kslot-a"><button class="kbtn alt" data-cl="unlink">${ASK?"Chắc chắn?<small>máy này thôi gửi sổ lên mây</small>":"Thôi nối"}</button></div></div>`+
   (MSG?`<div class="kpnote">${esc(MSG)}</div>`:"");
- if(pg==="link")return kitInput({id:"cl-in",label:"Ám hiệu sổ mây",value:"",placeholder:"hai mươi sáu chữ và số, như ABCD-EFGH-…"})+
+ if(pg==="link")return kitInput({id:"cl-in",label:"Ám hiệu sổ mây",value:"",placeholder:"tám chữ và số, như ABCD-EFGH"})+
   `<div class="kslot-a"><button class="kbtn" data-cl="go"${STATE==="busy"?" disabled":""}>Nối sổ</button></div>`+
   `<div class="kpnote">${esc(MSG||"Sổ trên máy này và sổ trên mây được gộp lại. Sổ nào cả hai nơi đều đã chơi tiếp thì ngươi chọn bản giữ lại; bản kia vẫn được giữ trên mây.")}</div>`;
  if(pg==="pick"){const P=C.pend;if(!P)return `<div class="kpnote">Hai bên đã khớp.</div>`;let h="";
@@ -166,9 +166,9 @@ async function make(b){if(STATE==="busy")return;STATE="busy";if(b){b.disabled=tr
  const r=await api("new",{});STATE="";if(r.s!==200||!r.j.k){C.err=r.s===0?"net":r.s===429?"slow":"srv";wire();MSG=ERR[C.err];if(b)b.disabled=false;return}
  C={k:r.j.k,rev:0,h:{},dev:devLabel()};saveC();MSG="";open("code");await sync();redraw()}
 async function link(v){const k=String(v||"").toUpperCase().replace(/[\s-]/g,"").replace(/O/g,"0").replace(/[IL]/g,"1");
- if(!/^[0-9A-HJKMNP-TV-Z]{26}$/.test(k)){MSG="Ám hiệu sổ mây có hai mươi sáu chữ và số. Xem lại rồi gõ lại.";redraw();return}
+ if(!/^[0-9A-HJKMNP-TV-Z]{8}$/.test(k)){MSG="Ám hiệu sổ mây có tám chữ và số. Xem lại rồi gõ lại.";redraw();return}
  STATE="busy";MSG="Đang nối…";redraw();const h=await api("head",{k});STATE="";
- if(h.s!==200){MSG=h.s===404?ERR.gone:h.s===429?ERR.slow:ERR.net;redraw();return}
+ if(h.s!==200){MSG=h.s===404?ERR.gone:h.s===429?ERR.many:ERR.net;redraw();return}
  C={k,rev:0,h:{},dev:devLabel()};saveC();MSG="";const r=await sync();
  if(r==="conflict"){PICK={};open("pick");return}
  MSG=r==="ok"||r==="same"?"Đã nối sổ. Sổ trên máy này đã khớp với mây.":ERR[C.err]||"";back()}

@@ -41,7 +41,7 @@ const freePort=()=>new Promise(r=>{const s=net.createServer();s.listen(0,'127.0.
  await title(P);await toOpt(P);
  await P.click('#modal [data-cl="make"]');await P.waitForSelector('#modal.kcloud #cl-key',{timeout:15000});
  await P.waitForFunction(()=>CTM_CLOUD.state.rev>0,null,{timeout:20000});
- const c1=await C(P);ok(/^[0-9A-HJKMNP-TV-Z]{26}$/.test(c1.k)&&c1.rev===1,'phone: sync code made (26 chars, 130 bits) and Sổ 1 sent',{rev:c1.rev});
+ const c1=await C(P);ok(/^[0-9A-HJKMNP-TV-Z]{8}$/.test(c1.k)&&c1.rev===1,'phone: sync code made (8 chars, owner design) and Sổ 1 sent',{rev:c1.rev});
  ok(await P.inputValue('#cl-key')===c1.k.replace(/(.{4})(?=.)/g,'$1-'),'code shown grouped in the kit text box');
  await shot(P,'2-code');
  await P.click('#modal .kit-x');await P.waitForSelector('#modal .cloudwrap .kslot');await idle(P);await shot(P,'3-settings-on');

@@ -1,23 +1,28 @@
 /* Cung Tường Mộng · Sổ mây (cloud save, C44, review/cloud-save). Same Worker as co-op rooms (ctm-coop).
    API (all POST, JSON body, CORS only for the game origin): dev/review/cloud-save-SECURITY.md + dev/PROGRESS_review-cloud-save.md.
-     /api/vault/new   {}                         → {k}                  new sync code (130-bit, server-made)
+     /api/vault/new   {}                         → {k}                  new sync code (8 chars Crockford base32 = 40 bits, server-made)
      /api/vault/head  {k}                        → {rev,at,dev,sum}     404 {error:"nocode"} if the code was never made
      /api/vault/get   {k, rev?}                  → {rev,at,dev,sum,keep,slots,rooms}
      /api/vault/put   {k, base, keep?, b}        → {rev,head}           409 {error:"conflict",rev,at,dev,sum} if base ≠ head (keep=1 never conflicts)
      /api/vault/list  {k}                        → {head, versions:[{rev,at,dev,sum,keep}]}   newest first, max KEEP
      /api/vault/drop  {k}                        → {ok}                 wipes the vault
    Storage: one Durable Object "Vault" per code, named sha256("ctm-vault:"+code): the code itself is never stored.
-   The DO is single-threaded and strongly consistent, so the base/head compare-and-set cannot race (KV could). */
+   The DO is single-threaded and strongly consistent, so the base/head compare-and-set cannot race (KV could).
+   GUARD (review/cloud-save-r1): the code is 8 chars (owner design), so guessing is stopped by a per-network miss guard that does not
+   depend on the [[ratelimits]] binding: one Vault-class object per IPv4 address / IPv6 /56, named sha256("ctm-guard:"+net), counts
+   lookups of codes that do not exist (persisted, survives eviction) and refuses every code lookup from that network once it has
+   G.MISS_H misses in the hour or G.MISS_D in the day; it also caps new codes per network. Numbers: dev/review/cloud-save-r1-SECURITY.md. */
 
 export const VAULT = {
   ALPH: "0123456789ABCDEFGHJKMNPQRSTVWXYZ",   // Crockford base32 (no I L O U)
-  LEN: 26,                                   // 26 × 5 = 130 bits
+  LEN: 8,                                    // 8 × 5 = 40 bits (owner design "8-char like ám hiệu"); safe only with the GUARD below
   KEEP: 10,                                  // versions kept
   MAX_BODY: 2600000,                         // bytes per request
   MAX_SLOT: 900000,                          // chars per sổ (compressed CTM2 text; a 40-week life ≈ 37 KB)
   CHUNK: 100000,                             // chars per storage value
   WIN: 600000, MAX_PUT: 40, MAX_READ: 200,   // per vault per 10 min
-  IDLE_DAYS: 180
+  IDLE_DAYS: 180,
+  G: { MISS_H: 10, MISS_D: 30, NEW_H: 10, NEW_D: 30 }   // per IPv4 address / IPv6 /56
 };
 const ORIGINS = ["https://thientran2711.github.io"];
 
@@ -47,9 +52,29 @@ export function normCode(k) {
   for (const ch of s) if (!VAULT.ALPH.includes(ch)) return "";
   return s;
 }
-async function nameOf(code) {
-  const h = await crypto.subtle.digest("SHA-256", new TextEncoder().encode("ctm-vault:" + code));
+async function sha(t) {
+  const h = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(t));
   return [...new Uint8Array(h)].map(x => x.toString(16).padStart(2, "0")).join("");
+}
+const nameOf = code => sha("ctm-vault:" + code);
+/* network key for the guard: IPv4 as is, IPv6 cut to its /56 (one home / one phone line), "" when unknown (local tests only:
+   Cloudflare always sets CF-Connecting-IP) */
+export function netKey(ip) {
+  ip = String(ip || "").trim().replace(/^::ffff:(?=[0-9.]+$)/i, ""); if (!ip) return "";
+  if (!ip.includes(":")) return /^[0-9.]{7,15}$/.test(ip) ? "4:" + ip : "";
+  const [a, b] = ip.split("::"); const L = a ? a.split(":") : [], R = b != null ? (b ? b.split(":") : []) : [];
+  const full = b != null ? L.concat(Array(Math.max(0, 8 - L.length - R.length)).fill("0"), R) : L;
+  if (full.length !== 8 || !full.every(x => /^[0-9a-f]{1,4}$/i.test(x))) return "6:?";
+  const w = full.map(x => parseInt(x, 16));
+  return "6:" + [w[0], w[1], w[2], w[3] & 0xff00].map(x => x.toString(16)).join(":");
+}
+async function guard(env, net, g, miss) {
+  if (!net) return true;
+  try {
+    const st = env.VAULT.get(env.VAULT.idFromName(await sha("ctm-guard:" + net)));
+    const r = await st.fetch("https://vault/guard", { method: "POST", body: JSON.stringify({ g, miss: !!miss }), headers: { "content-type": "application/json" } });
+    return r.status === 200;
+  } catch (e) { return false; }                       // fail closed
 }
 async function readCapped(req, max) {
   const cl = +req.headers.get("content-length");
@@ -114,8 +139,10 @@ export async function vaultRoute(req, env) {
   if (txt == null) return out({ error: "big" }, 413, c);
   let body; try { body = JSON.parse(txt || "{}"); } catch (e) { return out({ error: "json" }, 400, c); }
   if (!body || typeof body !== "object" || Array.isArray(body)) return out({ error: "json" }, 400, c);
+  const net = netKey(ip);
   if (op === "new") {
     if (env.VAULT_NEW_RL && ip) { try { const r = await env.VAULT_NEW_RL.limit({ key: ip }); if (!r.success) return out({ error: "slow" }, 429, c); } catch (e) {} }
+    if (!(await guard(env, net, "new"))) return out({ error: "slow" }, 429, c);
     for (let i = 0; i < 4; i++) {
       const k = mkCode(); const stub = env.VAULT.get(env.VAULT.idFromName(await nameOf(k)));
       const r = await stub.fetch("https://vault/init", { method: "POST" });
@@ -131,14 +158,32 @@ export async function vaultRoute(req, env) {
     const cb = cleanBundle(body.b); if (cb.err) return out({ error: cb.err }, 400, c);
     fwd.base = body.base; fwd.keep = body.keep ? 1 : 0; fwd.b = cb.b;
   }
-  const stub = env.VAULT.get(env.VAULT.idFromName(await nameOf(k)));
-  const r = await stub.fetch("https://vault/op", { method: "POST", body: JSON.stringify(fwd), headers: { "content-type": "application/json" } });
+  if (!(await guard(env, net, "try"))) return out({ error: "slow" }, 429, c);
+  let r, miss = false;
+  try {
+    const stub = env.VAULT.get(env.VAULT.idFromName(await nameOf(k)));
+    r = await stub.fetch("https://vault/op", { method: "POST", body: JSON.stringify(fwd), headers: { "content-type": "application/json" } });
+    if (r.status === 404) miss = (await r.clone().json().catch(() => ({}))).error === "nocode";
+  } finally { await guard(env, net, "done", miss); }
   return new Response(r.body, { status: r.status, headers: { ...SEC, ...c } });
 }
 
 /* ---------- Durable Object: one sổ mây ---------- */
 export class Vault {
-  constructor(state, env) { this.ctx = state; this.env = env; this.rl = { w: 0, put: 0, read: 0 }; }
+  constructor(state, env) { this.ctx = state; this.env = env; this.rl = { w: 0, put: 0, read: 0 }; this.g = null; this.fly = 0; }
+  /* guard object (named from a network, never from a code): {g:"try"} reserves one lookup, {g:"done",miss} settles it,
+     {g:"new"} counts one new code. The in-flight count closes the race of many parallel guesses. */
+  async guardOp(q) {
+    const G = VAULT.G, now = Date.now(), H = 3600000, D = 86400000;
+    if (!this.g) this.g = (await this.ctx.storage.get("g")) || { h: 0, hm: 0, hn: 0, d: 0, dm: 0, dn: 0 };
+    const g = this.g; if (now - g.h >= H) { g.h = now; g.hm = 0; g.hn = 0; } if (now - g.d >= D) { g.d = now; g.dm = 0; g.dn = 0; }
+    const save = async () => { g.at = now; await this.ctx.storage.put("g", g); try { if (!(await this.ctx.storage.getAlarm())) await this.ctx.storage.setAlarm(now + 2 * D); } catch (e) {} };
+    const no = () => new Response("no", { status: 429 }), yes = () => new Response("ok");
+    if (q.g === "try") { if (g.hm + this.fly >= G.MISS_H || g.dm + this.fly >= G.MISS_D) return no(); this.fly++; return yes(); }
+    if (q.g === "done") { this.fly = Math.max(0, this.fly - 1); if (q.miss) { g.hm++; g.dm++; await save(); } return yes(); }
+    if (q.g === "new") { if (g.hn >= G.NEW_H || g.dn >= G.NEW_D) return no(); g.hn++; g.dn++; await save(); return yes(); }
+    return new Response("op", { status: 400 });
+  }
   async meta() { return (await this.ctx.storage.get("meta")) || null; }
   async put(m) { await this.ctx.storage.put("meta", m); }
   async readV(e) {
@@ -160,6 +205,7 @@ export class Vault {
   }
   async fetch(req) {
     const u = new URL(req.url); const J = (o, s) => new Response(JSON.stringify(o), { status: s || 200, headers: { "content-type": "application/json" } });
+    if (u.pathname === "/guard") return this.guardOp(await req.json());
     if (u.pathname === "/init") {
       if (await this.meta()) return new Response("taken", { status: 409 });
       const now = Date.now(); await this.put({ created: now, seen: now, head: 0, next: 1, idx: [] });
@@ -198,7 +244,8 @@ export class Vault {
     } finally { if (dirty) await this.put(m); }
   }
   async alarm() {
-    const m = await this.meta(); if (!m) return;
+    const m = await this.meta();
+    if (!m) { const g = await this.ctx.storage.get("g"); if (g && Date.now() - (g.at || 0) > 2 * 86400000) await this.ctx.storage.deleteAll(); else if (g) await this.ctx.storage.setAlarm(Date.now() + 2 * 86400000); return; }
     if (Date.now() - (m.seen || m.created) > VAULT.IDLE_DAYS * 86400000) { await this.ctx.storage.deleteAll(); return; }
     await this.ctx.storage.setAlarm(Date.now() + 86400000 * 30);
   }
