@@ -1,5 +1,5 @@
 # FOREMAN_C_STATUS (written ONLY by Foreman C)
-Updated: 11/16/2026 — Foreman C started (account C). Owner (16/11, FOREMAN_C.md 65f316ff): max 12 agents, each ≤2 browsers; art workers fill free slots. Went to 15 briefly → paused D1, D7 (WIP pushed), D10 stopped at start.
+Updated: 11/16/2026 ~02:20Z — 12 agents running (cap 12). Owner (16/11, FOREMAN_C.md 65f316ff): max 12 agents, each ≤2 browsers; art workers fill free slots. Went to 15 briefly → paused D1, D7 (WIP pushed), D10 stopped at start.
 Connectors (account C): GitHub push OK · Magnific OK (project "Personal" ba4aecfe…) · Cloudflare OK (owner saved token 16/11; verified active, R2 ctm-img listing OK) → workers upload with cdn_sync.py.
 Base main at start: 900ace7fb.
 
@@ -20,7 +20,7 @@ Base main at start: 900ace7fb.
 | C8 fig-bg step 2 | review/fig-bg @21eb452d3 | sonnet | RUNNING (worker, silk scroll A) |
 | C9 huadian-size | review/huadian-size @cb36de68b | sonnet | RUNNING (worker) |
 | D1 result-sfx | review/result-sfx @41899d048 | sonnet | PAUSED (research + PROGRESS only; plan: central result sound, kg82ShowRes ok-arg, iOS WebAudio unlock; resume next) |
-| D7 personality + 13 virtues + Thái hậu archetypes | review/personality | opus | PAUSED (cap 12; WIP + PROGRESS pushed, resume next) |
+| D7 personality + 13 virtues + Thái hậu archetypes | review/personality @6f1ca343a | opus | PAUSED (design + measure tools in PROGRESS; builds on j28 PERS; plan jtrong.js + BAL.trong, 5 Thái hậu archetypes, one greeting rule; resume next) |
 | D29 schedules/roster re-port | review/schedules3 (from review/schedules2 + wip/kit-j95) | opus | RUNNING (worker) |
 | D-list rest (D2, D3, D6, D9, D11–D20, D22–D27, D44–D53) | — | per item | QUEUED (D30–D34, D36, D38–D42 moved to Foreman B — not ours) |
 
