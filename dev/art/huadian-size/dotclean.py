@@ -12,7 +12,9 @@ def clean(orig,path,fw):
     big=1+int(np.argmax(stt[1:,4])); ys,xs=np.nonzero(lb==big)
     if len(ys)<20: return None,0
     cx=(xs.min()+xs.max())/2; bot=ys.max()
-    R=(int(cx-0.15*fw),int(ys.min()-0.03*fw),int(cx+0.15*fw),int(bot+0.14*fw))
+    R=(int(cx-0.15*fw),int(ys.min()-0.03*fw),int(cx+0.15*fw),int(bot+0.2*fw))
+    H,W=rgb.shape[:2]; R=(max(R[0],0),max(R[1],0),min(R[2],W),min(R[3],H))
+    if R[2]-R[0]<20 or R[3]-R[1]<20: return None,0
     sub=rgb[R[1]:R[3],R[0]:R[2]]
     mk=cv2.dilate((lb==big).astype(np.uint8),np.ones((9,9),np.uint8))[R[1]:R[3],R[0]:R[2]]
     bg=cv2.medianBlur(np.ascontiguousarray(sub),9)
@@ -23,7 +25,7 @@ def clean(orig,path,fw):
     for i in range(1,n):
         x,y,cw,chh,ar=st[i]
         if x<=0 or x+cw>=w or y+chh>=h or y<=0: continue
-        if ar<=60 and cw<=0.08*fw and chh<=0.08*fw: rm[lab==i]=1; k+=1
+        if ar<=60*(fw/130.0)**2 and cw<=0.08*fw and chh<=0.08*fw: rm[lab==i]=1; k+=1
     if not k: return None,0
     full=np.zeros(rgb.shape[:2],np.uint8); full[R[1]:R[3],R[0]:R[2]]=cv2.dilate(rm,np.ones((5,5),np.uint8))
     out=cv2.inpaint(np.ascontiguousarray(rgb),full,4,cv2.INPAINT_TELEA)
@@ -32,6 +34,7 @@ def clean(orig,path,fw):
 if __name__=='__main__':
     od,d=sys.argv[1:3]
     for n in sys.argv[3:]:
-        im,k=clean(f'{od}/{n}.webp',f'{d}/{n}.webp',130)
+        try: im,k=clean(f'{od}/{n}.webp',f'{d}/{n}.webp',int(os.environ.get('FW','130')))
+        except Exception as e: print(n,'ERR',e); continue
         if im is not None: im.save(f'{d}/{n}.webp','WEBP',quality=90,method=4)
         print(n,k)

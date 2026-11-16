@@ -1,7 +1,7 @@
 import sys,json,re,os
 from PIL import Image,ImageDraw
-BOX=json.load(open('/home/user/cung-tuong-mong/dev/art/huadian-size/a18_boxes.json'))
-REF=json.load(open('/home/user/cung-tuong-mong/dev/art/huadian-size/ref.json'))
+BOX=json.load(open('/home/user/wt/hd/dev/art/huadian-size/a18_boxes.json'))
+REF=json.load(open('/home/user/wt/hd/dev/art/huadian-size/ref.json'))
 def cell(path,name,S=3,hw=95):
     pid=re.match(r'por-((?:consort|maid)-[cm]\d\d|player-look\d)-t(\d)',name).group(1)
     b=BOX[re.sub(r'-a\d+$','-a18',name)]; cx0,ey0,fw0=REF[pid]
