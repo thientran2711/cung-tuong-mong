@@ -304,7 +304,7 @@
 | spread-events LIVE prep (sonnet): merge origin/main 8f476f6f into READY review/spread-events-r3 1c4ea581, re-test, READY sha → B fast-forwards | review/spread-events-live | B | session_01N1tNP69fjejDfHnC3a2Zmt | DONE LIVE 2934bede (archived) | 16/11 17:58Z |
 | two-way-acts (opus; law HANDOVER:L46 + OD:L1386, owner 18:00Z): audit both ways, NPC pay same costs, player gets NPC-only acts | review/two-way-acts | main s21 | session_01UV1SzmD2Yq9WV4t1YpXjQ6 | RUNNING | 16/11 17:54Z |
 | night-steal review r1 (opus, BIG) of 4b5919af | review/night-steal-r1 | main s21 | session_01UV1Szh5bhLhRARVvmvaD6C | FAIL 86e0a5f4 (her nights stolen ≈ 30 % pooled over 7 runs, not 19-22 %; report dev/handover/reports/night-steal-r1.md on review/night-steal-r1) | 16/11 18:01Z |
-| lag-play review r1 (opus, BIG perf) of 7200e7d2 | review/lag-play-r1 | main s21 | session_01UV1Szh3qnjMBBhwLSJrxVX | RUNNING | 16/11 18:02Z |
+| lag-play review r1 (opus, BIG perf) of 7200e7d2 | review/lag-play-r1 | main s21 | session_01UV1Szh3qnjMBBhwLSJrxVX | PASS f89c5635 (on main a0d93ac8; report dev/handover/reports/lag-play-r1.md on that branch) | 16/11 19:45Z |
 | lag-play-2 (opus): render chain split, co-op seat delta, leak, Pixi preload | review/lag-play-2 | main s21 | session_01UV1Szkd2Q5KusFL1heLce8 | RUNNING | 16/11 18:02Z |
 | care-overlap review r1 (sonnet, SMALL) of 7c02ff56 | review/care-overlap-r1 | main s21 | session_01UV1SzhEkrfs7MvRDaDQHp8 | RUNNING | 16/11 18:04Z |
 | origin-intros review r1 (opus, BIG: entry flow) of 30b37ea0 on main + review/kc-roads-cn-nc-fix2 (D; ships after it) | review/origin-intros-r1 | C | session_011xDdVRKUzkmr3cK3M5QXvn | RUNNING | 16/11 18:06Z |
