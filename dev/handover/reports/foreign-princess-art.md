@@ -108,3 +108,12 @@ ONE generation (s784iuul8e = z2, uncropped) + c01 size check at left. Prompt (wo
 Honest: restrained, tall, small heads, 4 different hairstyles; but the silver Nam Chiếu collar/bells/pleated skirt of earlier rounds is largely gone (looks more generic hanfu blue), Đáp ứng is plain, rank steps are subtle. Her hairstyles are different but similar in family (all buns/knots).
 Credits: 6 x 40 = 240 (v8-v19 total 3,760).
 STATUS: WAIT.
+
+## OWNER on v19 (via Foreman C): Quý phi too rich / not like the game's current Quý phi; Đáp ứng looks like a maid; the earlier costumes (v16b silver) were OK, only proportion wrong; wants to see figures at true scale next to the game figures. v19 deleted.
+## v20 SAMPLE READY (sample-v20.jpg)
+ONE generation (u5YxUziQLD = a1, uncropped) for NC Đáp ứng | Tần | Phi | Quý phi; v19 body/proportion wording kept; costumes back to the v16b silver look (Đáp ứng pearl-blue + silver collar/chain/bells; Tần deep blue + big collar + bell headdress; Phi deep azure long coat + tall silver crown) in words only; Quý phi = classic palace court-consort robe (crossed collar, wide sleeves, draped trimmed outer robe, deep teal + gold phoenix/flowers, gold flower crown) "not more lavish than a normal consort"; hair differs per rank.
+Sheet: c01 and c05-t4 (game consorts) + the 4 NC figures all at the SAME height (720 px each, feet on one red baseline), side by side. NC upscaled x1.38 from the 520 px lineup (slightly soft); game figures x0.8.
+6 lineups (u5YxUziQLD LwoPRXqswO UPhizmNwny 6AqWpH8iJO O6C2cfvynm dtPfqy6XSL), all similar; picked a1 (cleanest). No in-room game screenshot made.
+Honest: face now looks consistent; NC figures read similar in height but their bodies are slimmer than c05 and the Quý phi robe is still plainer than c05-t4 but richer than v19; all four smile lightly.
+Credits: 6 x 40 = 240 (v8-v20 total 4,000).
+STATUS: WAIT.
