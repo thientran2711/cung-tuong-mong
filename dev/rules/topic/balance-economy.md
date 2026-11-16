@@ -27,6 +27,7 @@ Format: [source:Lnn] = line in the source file (OD = dev/OWNER_DECISIONS.md on t
 [OD:L379] - (09:10Z) Add a BREACH-OF-ETIQUETTE rule: formal occasions (thỉnh an, banquets, festivals, meeting/serving the Emperor at night, investiture) without rank-correct dress → lose some Đức/Danh + host's thiện cảm; warned on the card beforehand; NPCs same rules.
 [OD:L464] - (13:55Z) Mệnh truyện hiding a witness costs 40 silver for no reason, no gains/losses → add gains/losses, a silver-free path, price by rank, allow postponing a few buổi.
 [OD:L478] - (15:10Z) CORRECTION: NO "same situation, same tendency" (players memorise → boring). Outcomes depend on the context at the time (randomised natures of the people involved each life, mood, relations, who is watching, hidden preferences), so the best choice changes by life/day; hints are true for the current context. Skilful play MUST clearly beat random play; random play must be punished, demoted, sometimes killed. Balance goals: no choice always right in every context; a hint-reading bot clearly beats a random bot; a bot always picking one slot loses.
+[OD:L1253] - (16/11 07:00Z, s11) OWNER RULE (no memorised outcomes, main story too): the same identity + same road + same option chosen must NOT always give the same result across lives. Outcomes depend on the context of that life (people's traits, relations, abilities, who is watching, earlier choices), so players cannot learn the story by heart and always pick "the best". Reaffirms OD:L478 for EVERY story choice (main road, NPC requests, events).
 ### OD:L566 15/11 ~19:50Z — Art completeness rule + handmade recipes (owner)
 [OD:L566] ## 15/11 ~19:50Z — Art completeness rule + handmade recipes (owner)
 ### OD:L574 15/11 ~20:15Z — Teacher learning + sub-styles per art (owner)
@@ -40,7 +41,6 @@ Format: [source:Lnn] = line in the source file (OD = dev/OWNER_DECISIONS.md on t
 ### OD:L624 15/11 ~20:20Z — Thái y: build all 4 ideas (owner)
 [OD:L626] 2. "Mời thái y bắt mạch" anytime, small bạc cost (with an equivalent non-bạc road): clearer health state, can detect slow poison, musk (xạ hương) and other hidden harm already in the game (j40 plots).
 ### OD:L640 15/11 ~20:40Z — NPC deaths/replacement, Phế phi họ Lý story, real side stories, fig-bg pick, event name tag (owner)
-[OD:L644] - SIDE STORIES must be real stories: every NPC carries a life goal / ambition / personal story; helping them fulfil it completes a side quest with rewards. Today's "phụ tuyến" are only small daily events (someone comes, frames her…) — real side lines need their own plot, like in games where a side line is the story of a secondary character.
 ### OD:L746 15/11 ~23:05Z — Owner batch: makeup 8, CDNH works, old player looks as new faces, lover art, gifts from works, dress contest themes + luxury, weather painted (owner)
 [OD:L752] - "Biếu quà làm lành" (Nguy hiểm chung) costs bạc → also allow giving a handmade WORK (or an item) instead, valued by tastes/fatigue rules (equivalent value rule).
 ### OD:L858 15/11 (session 8) — Thơ minigame too hard for players who don't know classical verse (owner screenshot)

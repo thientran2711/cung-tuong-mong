@@ -130,3 +130,10 @@ Topic routing was by old section + keywords; a few lines may sit in a near topic
 ## Follow-up 2 (s11: OD:L1247-1250)
 - No older line on entry rank per origin exists in the canon (grep of dev/rules and OWNER_DECISIONS.md for entry/start rank, origin rank, Cháu gái, tuyển tú found none), so OD:L1250 is added, nothing overwritten.
 - Added verbatim: OD:L1247 + OD:L1250 -> dev/rules/topic/story-roads.md (end); OD:L1248 + OD:L1249 -> dev/rules/topic/people-life.md right after [HANDOVER.md:L46] ("NPCs act by traits, human not optimal"), which L1248 sharpens (both stand). Indexes regenerated. Check: 0 duplicate tags, 0 mismatches.
+
+## Follow-up 3 (s11: OD:L1251-1253 + gap fill)
+- OD:L1252 (NPC roads, varied requests per life) REPLACES OD:L1072 item 4 ("EVERY named character has their own side quest line") IN ITS SLOT (topic/story-roads.md); OD:L644 (side stories = side quest per NPC life goal, topic/balance-economy.md) DELETED as superseded by the same line.
+- OD:L1253 (no memorised outcomes) added right after OD:L478 (topic/balance-economy.md); both stand (L1253 reaffirms L478 for every story choice).
+- OD:L1251 replaces only the "no home road" half of OD:L1244; the rest of L1244 (intros, illustrations, entry animation, selection minigame) still stands, so both are kept, L1251 directly after L1244 (b*, mixed line, no rewording).
+- Gap found: owner lines after OD:L1232 were never in the rule files. Added verbatim: OD:L1241 (low context) -> START_CORE after L1232; OD:L1233, L1234, L1242, L1243, L1244, L1251 -> topic/story-roads.md (before L1247/L1250); OD:L1240 (place glyphs approved) -> topic/art-other.md. Note: OD:L1234's side-quest half is superseded by L1252 (b*, kept for its story-only-NPC rule). Not added (not rules: coordinator decisions/findings/asks): OD:L1235, L1236, L1245, L1246, L1249 is an ask but already added earlier.
+- Check: 0 duplicate tags, 0 mismatches. Indexes regenerated.

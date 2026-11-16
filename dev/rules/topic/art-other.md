@@ -82,3 +82,4 @@ Format: [source:Lnn] = line in the source file (OD = dev/OWNER_DECISIONS.md on t
 [OD:L750] - Foreign princess origin: owner hadn't seen it. Checked: origin "nc" = "Công chúa nước Nam Chiếu hòa thân" exists in j1. Make it visible/clear in the identity pick; consider more foreign-princess origins/variants (e.g. Bắc Địch) — coordinator: add at least one more with its own story line.
 ### OD:L888 15/11 (session 8) — Owner rulings: stage glow only for HER; stat glow green; buổi transition approved (owner)
 [OD:L889] - Owner (verbatim): "Cái chữ phẩm ở trên sân khấu á, là chỉ có tôi là mới có chữ phẩm và tên là phát sáng thôi, còn những người khác là bình thường. ... Bây giờ phẩm của tôi và tên của tôi là phát sáng, còn của những người khác trên sân khấu là không phát sáng đi."
+[OD:L1240] - (16/11 08:20Z, s10) Owner APPROVED the 9 place glyphs (review/place-glyphs): "Các biểu tượng nơi chốn thì ok, bỏ vô đi." → finish tests, review, ship (s11).
