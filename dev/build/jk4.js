@@ -76,7 +76,8 @@ html body .game#game.k3ph header.hud>#k3room:not([hidden]){grid-area:room}
 /* KIT 32.12 TOP BAR GRID (header-fix, owner 11/15 Fold shot: name on 2 lines, chips under "‹ Ngự hoa viên", date on 3 lines).
    Her block never wraps and never shrinks (name 1 line · rank + age chips 1 line · date 1 line); the time block is the column that gives.
    ≥ 600 px only (phones < 600 keep their own rows below). */
-@media (min-width:600px){
+/* KIT §0: the one page uses the spread's top bar (same rows, same cells) */
+@media all{
  html body header.hud>.me,html body header.hud>.me .mi{min-width:max-content!important;flex-shrink:0!important}
  html body header.hud>.me .mi>b,html body header.hud>.me .k3rr,html body header.hud>.me .rk,html body header.hud #me-d{white-space:nowrap!important}
  html body header.hud{grid-template-columns:auto max-content minmax(0,1fr) auto!important}
@@ -86,7 +87,7 @@ html body .game#game.k3ph header.hud>#k3room:not([hidden]){grid-area:room}
 }
 /* two-row bar (600–999 px, and ≥ 1000 px when the one row does not fit: class .khd2 from kitHdFit) —
    row 1: menu · her block · RIGHT COLUMN (time block; "‹ Nơi" button under it, same left/right edges); row 2: the eight stat cells */
-@media (min-width:600px) and (max-width:999px){
+@media (max-width:999px){
  html body .game#game header.hud,html body .game#game.k3ph header.hud:has(#k3room:not([hidden])){grid-template-columns:auto max-content minmax(0,1fr) minmax(0,max-content)!important;
   grid-template-areas:"menu me . tc" "menu me . room" "stats stats stats stats"!important;grid-template-rows:auto auto auto!important;row-gap:0!important}
  html body header.hud>#k3tc{justify-self:stretch!important;align-self:end!important}
@@ -96,6 +97,12 @@ html body .game#game.k3ph header.hud>#k3room:not([hidden]){grid-area:room}
  html body header.hud .k3tc .k3tt{grid-template-rows:auto auto!important}
  html body header.hud .k3tt>.kstl,html body header.hud .k3tt>.kstv{white-space:normal!important;height:auto!important;min-height:var(--kst-l)}
 }
+/* KIT §0 one page: "Về phòng" sits under the menu button (icon; label = tooltip), so the top bar keeps the spread's height */
+@media (max-width:999px){
+ html body .game#game.k3ph header.hud:has(#k3room:not([hidden])){grid-template-areas:"menu me . tc" "room me . tc" "stats stats stats stats"!important;grid-template-rows:auto minmax(0,1fr) auto!important}
+ html body .game#game.k3ph header.hud>#k3room:not([hidden]){grid-area:room!important;justify-self:center!important;align-self:start!important;padding:0!important;min-height:0!important;margin-top:2px}
+ html body .game#game.k3ph header.hud>#k3room.kbackb:has(.kbi) .kbl{display:none}
+}
 html body .game#game header.hud.khd2{grid-template-columns:auto max-content minmax(0,1fr) minmax(0,max-content)!important;grid-template-areas:"menu me . tc" "menu me . room" "stats stats stats stats"!important;
  grid-template-rows:auto auto auto!important;row-gap:0!important}
 html body header.hud.khd2>#k3tc{justify-self:stretch!important;align-self:center!important}
@@ -104,7 +111,7 @@ html body header.hud.khd2>#kstrow>.kstg{flex:var(--kn,1) 1 0;grid-auto-columns:m
 html body header.hud.khd2 .k3tc .k3tt{grid-template-rows:auto auto!important}
 html body header.hud.khd2 .k3tt>.kstl,html body header.hud.khd2 .k3tt>.kstv{white-space:normal!important;height:auto!important;min-height:var(--kst-l)}
 /* phones < 600 px: the same row, label line = icon only (name in the tooltip), number line below */
-@media (max-width:599px){
+@media (max-width:0px){/* KIT §0: retired — no phone top bar; the one page (590) uses the two-row bar above (phase 3 deletes this block) */
  html body header.hud{grid-template-columns:auto minmax(0,1fr)!important;grid-template-areas:"menu me" "tc tc" "stats stats"!important}
  html body .game#game.k3ph header.hud:has(#k3room:not([hidden])){grid-template-columns:auto minmax(0,1fr)!important;grid-template-areas:"menu me" "room tc" "stats stats"!important;align-items:center}
  html body header.hud>#k3tc{justify-self:stretch}
@@ -123,7 +130,7 @@ html body header.hud.khd2 .k3tt>.kstl,html body header.hud.khd2 .k3tt>.kstv{whit
    otherwise .khd2 = the two-row bar (same grid as 600–999 px). Measured in the one-row form, in one synchronous pass (no flicker).
    ≥ 600 px it also sets --kmeh = her name block's height: the frame keeps the width it had when its crest+window+band (550/795) was exactly that tall (owner 15/11 10:30Z);
    since tassel-fix (owner 15/11 06:35Z) the jade pendant + tassel hang below it whole (cell 550/1037), so the frame is 1037/795 of the name block. */
-function kitHdMe(hd){try{const mi=hd.querySelector(":scope>.me .mi");const h=mi&&matchMedia("(min-width:600px)").matches?Math.round(mi.getBoundingClientRect().height):0;
+function kitHdMe(hd){try{const mi=hd.querySelector(":scope>.me .mi");const h=mi&&matchMedia("all").matches?Math.round(mi.getBoundingClientRect().height):0;
  const v=h>20?h+"px":"";if(hd.style.getPropertyValue("--kmeh")!==v){if(v)hd.style.setProperty("--kmeh",v);else hd.style.removeProperty("--kmeh")}}catch(e){}}
 /* review/small-bugs-3 (1000x755: a long date "Tháng chạp · trung tuần · năm thứ hai mươi ba" ran under the weather icon): her block and the time
    block never touch — the right edge of her text + 8 px must stay left of the time block's first text/icon, else the two-row bar */
@@ -275,7 +282,7 @@ function kitDlgFit(){try{const M=document.getElementById("modal");if(!M||M.hidde
  const o=mb&&mb.querySelector(":scope > .opts");if(!d||!o){if(d)d.classList.remove("kdscroll");return}
  d.classList.add("kdscroll");d.style.removeProperty("--kdpic");o.classList.remove("kdsh");
  const fixedH=()=>{let h=0;[...d.children].forEach(c=>{if(c!==mb&&c.offsetParent)h+=c.offsetHeight});[...mb.children].forEach(c=>{if(c!==o&&c.offsetParent)h+=c.offsetHeight});return h};
- const D=d.clientHeight||innerHeight;let vh=innerWidth<1000?24:28;
+ const D=d.clientHeight||innerHeight;let vh=28;/* KIT §0: same in the page and the spread */
  while(vh>14&&fixedH()>D*.55&&o.scrollHeight>o.clientHeight+2){vh-=2;d.style.setProperty("--kdpic",vh+"vh")}
  if(!o.dataset.kdsh){o.dataset.kdsh=1;o.addEventListener("scroll",()=>o.classList.toggle("kdsh",o.scrollTop>2),{passive:true})}
  kitDlgText(d,mb,o);
@@ -312,13 +319,13 @@ window.kitDlgFit=kitDlgFit;
 .modal .dlg.kdscroll.kdtx>#mb>.kpb>.kpmain.kdsh{box-shadow:inset 0 10px 8px -8px rgba(58,32,16,.28)}
 .modal .dlg.kdscroll>#mb .kpsubj img,.modal .dlg.kdscroll>#mb .kdlgart .ksart,.modal .dlg.kdscroll>#mb .kpsubj .ksart{max-height:var(--kdpic,28vh)}
 .modal .dlg.kdscroll>#mb .kpsubj.kes{max-height:calc(var(--kdpic,28vh) + 40px)}
-@media (max-width:999px){.modal .dlg.kdscroll>#mb .kpsubj img,.modal .dlg.kdscroll>#mb .kdlgart .ksart,.modal .dlg.kdscroll>#mb .kpsubj .ksart{max-height:var(--kdpic,24vh)}}
+/* kv: dropped @media (max-width:999px) (one page = spread page, KIT §0) */
 `;document.head.appendChild(st)})();
 
 /* ================= KIT 32.6 · PEOPLE ON THE PICTURE (owner 11/15, dev/owner-shots/1115-figs-on-scene.jpg) =================
    Event dialogs (kitEventStage): when there is a place / event picture band, the people stand ON it — feet on the picture's floor
    line (86 % of its height), body height KIT_FIG.h × picture height (kitFigBody: forehead to feet; men ×KIT_FIG.man, capped under the
-   top edge; children by age), packed side by side by their core width (overlap ≤ 25 %), name chips inside the picture's bottom edge.
+   top edge; children by age), standing in the kit's fixed slots (kitSlotCx, never overlapping), name chips inside the picture's bottom edge.
    No separate figure column: the story text runs full width under the picture, then the options (KIT 32.5: picture + people + text
    fixed, only the options scroll). Without a picture band the old figure column stays. kitEsOvFit re-lays the figures whenever the
    picture height changes (kitDlgFit compresses the picture on short screens; figures scale with it). */
@@ -330,15 +337,13 @@ function kitEsOvFit(){try{const ov=document.querySelector("#mb .kesov");if(!ov)r
  const floor=H*.86,top=H*.03;
  const sz=L.map(x=>{const bt=x.b.ht>x.b.t?x.b.ht:x.b.t;const body=Math.min(KIT_FIG.h*H*x.fac,floor-top);const ih=body/Math.max(.2,x.b.b-bt);const iw=ih*(x.b.ar||x.im.naturalWidth/x.im.naturalHeight);
   const cl=x.b.cl!=null?x.b.cl:x.b.l,cr=x.b.cr!=null?x.b.cr:x.b.r;return{ih,iw,core:iw*(cr-cl),cl,cr,l:x.b.l,r:x.b.r,b:x.b.b}});
- /* pack: core widths with up to 25 % overlap, outer sleeves inside the picture */
- const tot=o=>sz.reduce((a,s,i)=>a+s.core*(i?1-o:1),0)+sz[0].iw*(sz[0].cl-sz[0].l)+sz[sz.length-1].iw*(sz[sz.length-1].r-sz[sz.length-1].cr);
- let o=0;const av=W-16;if(tot(0)>av){const v=sz.slice(1).reduce((a,s)=>a+s.core,0);o=Math.min(.25,v?(tot(0)-av)/v:0)}
- let k=1;const t=tot(o);if(t>av)k=av/t;/* still too wide (very narrow picture): one common factor */
- let x=(W-t*k)/2+sz[0].iw*k*(sz[0].cl-sz[0].l);
- L.forEach((it,i)=>{const s=sz[i];const ih=s.ih*k,iw=s.iw*k;if(i)x-=s.core*k*o;const left=x-iw*s.cl;
+ /* review/stage-slots-fix-r1 (owner OD:L1049, whole group): people on the picture stand in the SAME fixed slots as a room stage (kitSlotCx / kitSlotScale, jkit):
+    1 → centre, 2 → 1/3 · 2/3 of the picture's free width; the whole visible art (l..r) fits its slot, never overlapping; one common scale-down when too wide */
+ const k=sz.length,av=W-16,k0=kitSlotScale(sz.map(s=>s.iw*(s.r-s.l)),av);
+ L.forEach((it,i)=>{const s=sz[i];const ih=s.ih*k0,iw=s.iw*k0;const cx=kitSlotCx(i,k,8,av);const left=cx-iw*(s.l+s.r)/2;
   it.f.style.left=left.toFixed(1)+"px";it.f.style.width=iw.toFixed(1)+"px";it.im.style.height=ih.toFixed(1)+"px";it.im.style.width=iw.toFixed(1)+"px";
-  it.f.style.top=(floor-ih*s.b).toFixed(1)+"px";it.f.style.zIndex=String(2+i);x+=s.core*k;
-  const cap=it.f.querySelector(".kpsn");if(cap){cap.style.left=(left+iw*(s.cl+s.cr)/2).toFixed(1)+"px";cap.dataset.row="0"}});
+  it.f.style.top=(floor-ih*s.b).toFixed(1)+"px";it.f.style.zIndex=String(2+i);it.f.style.visibility="";/* a figure kitDpFit hid while unmeasured must show once placed */
+  const cap=it.f.querySelector(".kpsn");if(cap){cap.style.left=cx.toFixed(1)+"px";cap.dataset.row="0"}});
  /* name chips: inside the picture bottom, never cut; neighbours that touch go to a second row */
  const caps=L.map(it=>it.f.querySelector(".kpsn")).filter(Boolean);caps.forEach(c=>{c.style.translate="";ov.appendChild(c)});
  let prev=null;caps.forEach(c=>{const r=c.getBoundingClientRect(),A=art.getBoundingClientRect();let s=0;if(r.left<A.left+4)s=A.left+4-r.left;else if(r.right>A.right-4)s=A.right-4-r.right;if(s)c.style.translate=s.toFixed(1)+"px 0";
@@ -365,7 +370,7 @@ window.kitEsOvFit=kitEsOvFit;
 #mb>.kdlgart.kesonpic .ksart>figcaption,#mb>.kdlgart.kesonpic .ksart>.ksart-chip{top:6px;bottom:auto}
 #mb>.kpb.kesfull{display:block!important;grid-template-columns:none!important}
 #mb>.kpb.kesfull>*{max-width:none!important;width:auto}
-@media (max-width:999px){#mb>.kdlgart.kesonpic>.ksart{height:var(--kdpic,26vh)!important;min-height:130px}}
+/* kv: dropped @media (max-width:999px) (one page = spread page, KIT §0) */
 `;document.head.appendChild(st)})();
 
 /* ================= KIT 32.7 · ONE / TWO PEOPLE, NO SCENE PICTURE — person column left, text + options right (owner 11/15 04:45Z,
@@ -395,7 +400,7 @@ function kitDpApply(){try{const o=kitDpOn();const d0=document.querySelector("#mo
 /* KIT 50: banner focus points (object-position) for vertical event art; anything not listed = "50% 50%" (chosen from the crop sheets, dev/review/event-banners.md) */
 window.KIT_FOCUS=Object.assign({"ev-trieu-chinh-2.webp":"50% 15%","ev-thang-tran.webp":"50% 55%","ev-hoang-de-gian.webp":"50% 15%","ev-di-san.webp":"50% 15%","ev-le-thu.webp":"50% 15%","ev-le-thu-2.webp":"50% 15%","ev-le-thu-3.webp":"50% 15%","ev-le-dong-2.webp":"50% 15%","ev-thoi-tiet-3.webp":"50% 15%","ev-dieu-troi.webp":"50% 15%","ev-dieu-lanh.webp":"50% 15%","ev-mat-uoc.webp":"50% 15%"},window.KIT_FOCUS||{});/* dev/review/event-banners.md */
 function kitDpFit(){try{const o=kitDpOn();if(!o||!o.d.classList.contains("kdper"))return;const {d,mb,col}=o;
- const narrow=innerWidth<600;d.classList.toggle("kdnarrow",narrow);
+ const narrow=false;d.classList.toggle("kdnarrow",narrow);/* KIT §0: dialogs are the same in the page and the spread */
  const F=[...col.querySelectorAll(":scope > .kesf")].filter(f=>!f.classList.contains("kesno"));if(!F.length)return;let wait=false;
  const L=F.map(f=>{const im=f.querySelector(".kesimg"),src=im&&im.getAttribute("src");let b=src?kitFigBody(src,()=>requestAnimationFrame(kitDpFit)):null;if(im&&!im.complete&&!im.dataset.kdpl){im.dataset.kdpl=1;im.addEventListener("load",()=>requestAnimationFrame(kitDpFit),{once:true})}
   if(!b){wait=true}else if(im&&im.naturalWidth&&im.naturalHeight&&Math.abs(b.ar-im.naturalWidth/im.naturalHeight)>.005)b=Object.assign({},b,{ar:im.naturalWidth/im.naturalHeight});/* the true aspect always (never squash a person) */const kfr=parseFloat(im&&im.style.getPropertyValue("--kfr"))||1;return{f,im,b,fac:kfr*(KIT_FIG.man||1),cap:f.querySelector(".kpsn")||col.querySelector(`:scope > .kpsn[data-kdp="${F.indexOf(f)}"]`)}});
@@ -429,23 +434,23 @@ function kitDpFit(){try{const o=kitDpOn();if(!o||!o.d.classList.contains("kdper"
  const prof=(b,f)=>{if(!b.wl)return[b.l,b.r];const k=Math.max(0,Math.min(20,Math.ceil(f*20-1e-6)));return[b.wl[k],b.wr[k]]};
  const lay=(top,rows)=>{const Hu=floor-top;if(Hu<40)return false;
   const at=m=>{const sz=L.map(x=>{const rel=Math.min(1,x.fac);const span=Math.max(.2,x.b.b-x.b.t);const ih=Hu/span*rel*m;const iw=ih*(x.b.ar||1);
-    const fv=Math.min(1,Hu/(ih*span));const [vl,vr]=prof(x.b,Math.min(fv,KIT_DP_CROP.knee));
+    const fv=Math.min(1,Hu/(ih*span));const [vl,vr]=prof(x.b,Math.min(fv,L.length>1?1:KIT_DP_CROP.knee));/* two people: the whole visible part counts (review/stage-slots-fix-r1: no overlap); one person: the column edge may cut a hem */
     const cl=x.b.cl!=null?x.b.cl:x.b.l,cr=x.b.cr!=null?x.b.cr:x.b.r;return{ih,iw,span,fv,core:iw*(cr-cl),cl,cr,l:Math.min(vl,cl),r:Math.max(vr,cr),t:x.b.t,b:x.b.b}});
-   const ov=sz.length>1?.2:0;/* KIT 33 rule 4: each later figure may step back over its neighbour by ≤ 20 % of its core */
-   const tot=sz.reduce((a,s,i)=>a+s.core*(i?1-ov:1),0)+sz[0].iw*(sz[0].cl-sz[0].l)+sz[sz.length-1].iw*(sz[sz.length-1].r-sz[sz.length-1].cr);return{sz,ov,tot}};
+   /* review/stage-slots-fix-r1 (owner OD:L1049): fixed slots (kitSlot*, jkit), no overlap: the column must be as wide as the widest visible art × (k+1) for k ≥ 2 people */
+   const tot=kitSlotNeed(sz.map(s=>s.iw*(s.r-s.l)));return{sz,tot}};
   /* target scale: 1 = the tallest person fills the column; a short column zooms (crop at the floor) up to minVis of the body in view */
   const minFull=KIT_DP_CROP.minH*innerHeight;const mT=Hu<minFull?Math.min(minFull/Hu,1/KIT_DP_CROP.minVis):1;
   let m=mT,A=at(m);if(A.tot+12>Wmax){let lo=.1,hi=mT;for(let i=0;i<22;i++){const md=(lo+hi)/2;if(at(md).tot+12<=Wmax)lo=md;else hi=md}m=lo;A=at(m)}
-  const {sz,ov,tot}=A;const need=Math.min(Wmax,Math.max(tot,capW)+12);if(!narrow)d.style.setProperty("--kdpw",Math.round(need)+"px");
-  const W=narrow?col.clientWidth:need;let x=(W-tot)/2+sz[0].iw*(sz[0].cl-sz[0].l);
+  const {sz,tot}=A;const need=Math.min(Wmax,Math.max(tot,capW)+12);if(!narrow)d.style.setProperty("--kdpw",Math.round(need)+"px");
+  const W=narrow?col.clientWidth:need;const kN=sz.length;
   /* the tallest person sets the chip line: right above the painted top when the people are shorter than the column */
   const gap=Math.max(0,Hu-Math.max(...sz.map(s=>s.ih*s.span)));col.dataset.kdpcrop=sz.some(s=>s.fv<.995)?"1":"0";
-  L.forEach((it,i)=>{const s=sz[i];const ih=s.ih,iw=s.iw;if(i)x-=s.core*ov;const left=x-iw*s.cl;
+  L.forEach((it,i)=>{const s=sz[i];const ih=s.ih,iw=s.iw;const cxs=kitSlotCx(i,kN,6,W-12);const left=cxs-iw*(s.l+s.r)/2;
    const ftop=s.fv<.995?top-ih*s.t:floor-ih*s.b;/* cropped: painted top under the chips, the rest runs past the floor (cut) */
    Object.assign(it.f.style,{left:left.toFixed(1)+"px",top:ftop.toFixed(1)+"px",width:iw.toFixed(1)+"px",zIndex:String(2+i),visibility:""});
    const wr=it.f.querySelector(".kesfi");if(wr)Object.assign(wr.style,{width:iw.toFixed(1)+"px",height:ih.toFixed(1)+"px",margin:"0",maxWidth:"none"});
    Object.assign(it.im.style,{width:iw.toFixed(1)+"px",height:ih.toFixed(1)+"px"});
-   if(it.cap){it.cap.style.left=Math.max(0,Math.min(W,left+iw*(s.cl+s.cr)/2)).toFixed(1)+"px";it.cap.style.translate="";it.cap.dataset.row=rows&&i%2?"1":"0";it.cap.style.top=(gap+(rows&&i%2?capH+4:0)).toFixed(1)+"px"}x+=s.core});
+   if(it.cap){it.cap.style.left=Math.max(0,Math.min(W,cxs)).toFixed(1)+"px";it.cap.style.translate="";it.cap.dataset.row=rows&&i%2?"1":"0";it.cap.style.top=(gap+(rows&&i%2?capH+4:0)).toFixed(1)+"px"}});
   /* chips never cut: clamp inside the column; report whether two touch */
   const C=col.getBoundingClientRect();let prev=null,touch=false;L.forEach(it=>{const c=it.cap;if(!c)return;const r=c.getBoundingClientRect();let s=0;if(r.left<C.left+2)s=C.left+2-r.left;else if(r.right>C.right-2)s=C.right-2-r.right;if(s)c.style.translate=s.toFixed(1)+"px 0";
    const q=c.getBoundingClientRect();if(prev&&q.left<prev.right+4&&c.dataset.row===prev.row)touch=true;prev={right:q.right,row:c.dataset.row}});return touch};
