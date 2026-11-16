@@ -65,9 +65,9 @@ const M70={
   {id:"den",n:"Chờ đêm hội đèn",tl:["hỏi đường đi của các cung trong đêm hội","sai người tắt bớt đèn bên hồ"],pl:"vuon",vis:5,need:3,bac:10,gd:"Đi hội có thị vệ đi kèm",st:"Nhờ thị vệ thắp đèn suốt bờ hồ"},
   {id:"tsv",n:"Mua cung nữ dẫn nàng ra hồ",tl:["gặp riêng cung nữ hầu nàng đi dạo","cung nữ ấy hay rủ chủ ra hồ sen ngắm trăng"],pl:null,vis:2,need:2,bac:30,acc:"tsv",gd:"Không theo lời rủ ra hồ lúc vắng",st:"Gọi cung nữ ấy ra hỏi chuyện"}]},
  kframe:{k:"kframe",band:3,n:"Vu con nàng trù ẻo",opp:["lonely","night","fest"],R:[
-  {id:"bup",n:"May búp bê trù ẻo",tl:["mua vải vàng và kim bạc, đóng cửa may vá ban đêm","hỏi ngày sinh tháng đẻ của hoàng tử"],pl:null,vis:5,need:3,bac:20,gd:"Lục soát phòng con mỗi tối",st:"Cho người lục và đốt búp bê trước"},
-  {id:"thay",n:"Mua chuộc thầy dạy",tl:["mời thầy dạy của hoàng tử đến uống rượu","thầy dạy ấy bỗng hay hỏi chuyện chữ viết của hoàng tử"],pl:null,vis:3,need:3,bac:40,gd:"Đổi thầy dạy cho con",st:"Nói chuyện riêng với thầy dạy, cho hắn đường lui"},
-  {id:"chu",n:"Giả chữ viết của hoàng tử",tl:["thu gom giấy viết bỏ của hoàng tử","thuê người khéo tay nhại chữ"],pl:null,vis:3,need:3,bac:30,gd:"Đốt hết giấy nháp của con",st:"Tìm người nhại chữ, bắt hắn khai"}]},
+  {id:"bup",n:"May búp bê trù ẻo",tl:["mua vải vàng và kim bạc, đóng cửa may vá ban đêm","hỏi ngày sinh tháng đẻ của hoàng tự"],pl:null,vis:5,need:3,bac:20,gd:"Lục soát phòng con mỗi tối",st:"Cho người lục và đốt búp bê trước"},
+  {id:"thay",n:"Mua chuộc thầy dạy",tl:["mời thầy dạy của hoàng tự đến uống rượu","thầy dạy ấy bỗng hay hỏi chuyện chữ viết của hoàng tự"],pl:null,vis:3,need:3,bac:40,gd:"Đổi thầy dạy cho con",st:"Nói chuyện riêng với thầy dạy, cho hắn đường lui"},
+  {id:"chu",n:"Giả chữ viết của hoàng tự",tl:["thu gom giấy viết bỏ của hoàng tự","thuê người khéo tay nhại chữ"],pl:null,vis:3,need:3,bac:30,gd:"Đốt hết giấy nháp của con",st:"Tìm người nhại chữ, bắt hắn khai"}]},
  frame:{k:"frame",band:2,n:"Vu oan bùa ngải",opp:["lonely","night","fest"],R:[
   {id:"bup",n:"May búp bê chôn trong vườn nàng",tl:["mua vải vàng và kim bạc, đóng cửa may vá ban đêm","sai người đêm đêm lảng vảng quanh vườn cung khác"],pl:null,vis:5,need:2,bac:20,gd:"Cho người đào xới, lục soát vườn",st:"Đào búp bê lên trước, giữ làm tang chứng"},
   {id:"tsv",n:"Mua cung nữ giấu bùa trong phòng",tl:["gặp riêng một cung nữ bên cung nạn nhân","cung nữ ấy hay vào phòng chủ lúc không ai gọi"],pl:null,vis:2,need:2,bac:40,acc:"tsv",gd:"Khóa phòng ngủ, tự giữ chìa",st:"Gọi cung nữ ấy ra tra hỏi"},
@@ -197,8 +197,8 @@ function exec70(p,opp){const a=pa70(p),t=pt70(p),M=pm70(p);const O=OPP70[opp]||O
  if(a!==S&&a.plan&&a.plan.j70===p.id)a.plan=null;
  if(!okAct70(a,t,M.k)&&M.k!=="joint"){p.end="miss";try{mindLog(a,"_abandon")}catch(e){}if(p.kn&&a!==S)log(`${a.name} bày mưu ${M.n.toLowerCase()} nhưng thời cơ đã qua, đành thôi.`);return ""}
  let r="";const bonus=J70CFG.prep+O.b+(p.bonus||0);const err=(p.err||0)+p.g-bonus;
- if(p.foil){/* cut at the root earlier */evA(t===S?S:t,a,1);r=`${a===S?"Ngươi":a.name} định ra tay (${M.n.toLowerCase()}) ${O.n}, nhưng đường dây đã bị cắt từ trước. ${t===S?`Ngươi nắm thêm 1 chứng cứ về ${a.name}.`:""}`;try{if(a!==S){a.fails=a.fails||{};a.fails[M.k]=(a.fails[M.k]||0)+1}}catch(e){}}
- else if(p.trap){evA(S,a,2);try{punish(a,`bị bắt quả tang ${M.n.toLowerCase()} nhắm vào ${nm70(t)}`,2)}catch(e){}relAdd(a,S,-10);r=`Bẫy của ngươi sập đúng lúc: người của ${a.name} bị bắt quả tang ${M.n.toLowerCase()} ${O.n}. Chứng cứ +2.`}
+ if(p.foil){/* cut at the root earlier *//*evok: plot deed (newPlot70)*/evA(t===S?S:t,a,1);r=`${a===S?"Ngươi":a.name} định ra tay (${M.n.toLowerCase()}) ${O.n}, nhưng đường dây đã bị cắt từ trước. ${t===S?`Ngươi nắm thêm 1 chứng cứ về ${a.name}.`:""}`;try{if(a!==S){a.fails=a.fails||{};a.fails[M.k]=(a.fails[M.k]||0)+1}}catch(e){}}
+ else if(p.trap){/*evok: plot deed*/evA(S,a,2);try{punish(a,`bị bắt quả tang ${M.n.toLowerCase()} nhắm vào ${nm70(t)}`,2)}catch(e){}relAdd(a,S,-10);r=`Bẫy của ngươi sập đúng lúc: người của ${a.name} bị bắt quả tang ${M.n.toLowerCase()} ${O.n}. Chứng cứ +2.`}
  else{window.__j70exec=1;try{
    if(M.k==="joint"){const f=facOf(a);r=f&&jointScheme0?jointScheme0(f,t):""}
    else if(a===S){S.__err=err;try{r=runAct(S,t,M.k)}finally{S.__err=0}}
@@ -224,7 +224,7 @@ function know70(p){const M=pm70(p),r=pr70(p);const a=pa70(p);const ev=a?evG(S,a)
  return `<p class="past">Từ dấu vết ấy: mưu <b>${M.n.toLowerCase()}</b>${p.dig?` (cách: ${r.n.toLowerCase()}; nàng sẽ chờ ${M.opp.map(k=>OPP70[k].n).slice(0,2).join(" hoặc ")})`:""}, vì ${mot70(p)}. Đã chuẩn bị ${Math.min(p.pg,p.need)}/${p.need} bước. Chứng cứ về ${a?a.name:"nàng"}: ${ev}${ev>=2?"":" (cần 2 để tố giác)"}.</p>`}
 function optsSeen70(p){const a=pa70(p),M=pm70(p),r=pr70(p);const mat=S.mat||0,tc=S.tamco||0;const o=[];const A={o:a,n:a.name,k:"rv"};
  o.push(ch70(`Đề phòng: ${r.gd.toLowerCase()}`,{c:{bac:-10},wt:[G70("mưu của nàng khó thành hơn nhiều (giữ được mình)")],k:[R70("nàng vẫn còn ý hại")],ok:()=>{p.g+=25;p.pend=0;return `Ngươi ${r.gd.toLowerCase()}. Mưu của ${a.name} khó thành hơn.`}}));
- if(!p.dig)o.push(ch70("Cho người dò tiếp",{c:{bac:-15},p:40+mat*7+tc/6,wt:[G70(`chứng cứ về ${a.name} +1`),G70("biết rõ cách và thời cơ nàng chờ")],lt:[R70("nàng biết bị dò, ra tay sớm hơn")],ok:()=>{evA(S,a,1);p.dig=1;p.pend=0;return `Người của ngươi lần ra: ${a.name} ${r.n.toLowerCase()}, chờ ${OPP70[M.opp[0]].n}. Chứng cứ +1.`},no:()=>{p.pg=Math.max(p.pg,p.need);p.pend=0;return `${a.name} biết mình bị dò, gấp rút ra tay.`}}));
+ if(!p.dig)o.push(ch70("Cho người dò tiếp",{c:{bac:-15},p:40+mat*7+tc/6,wt:[G70(`chứng cứ về ${a.name} +1`),G70("biết rõ cách và thời cơ nàng chờ")],lt:[R70("nàng biết bị dò, ra tay sớm hơn")],ok:()=>{/*evok: plot deed*/evA(S,a,1);p.dig=1;p.pend=0;return `Người của ngươi lần ra: ${a.name} ${r.n.toLowerCase()}, chờ ${OPP70[M.opp[0]].n}. Chứng cứ +1.`},no:()=>{p.pg=Math.max(p.pg,p.need);p.pend=0;return `${a.name} biết mình bị dò, gấp rút ra tay.`}}));
  o.push(ch70(`Chặn từ gốc: ${r.st.toLowerCase()}`,{c:{bac:-30},p:42+mat*5+tc/5+(p.dig?12:0),wt:[G70("mưu bị cắt đứt"),G70(`chứng cứ về ${a.name} +1`)],lt:[R70(`${a.name} oán ngươi +5`),R70("mưu vẫn tiếp tục")],ok:()=>{p.foil=1;p.pend=0;return `Ngươi ${r.st.toLowerCase()}. Đường dây của ${a.name} đã đứt.`},no:()=>{oanAdd(a,S,5);p.pend=0;return `Việc chặn không thành, ${a.name} sinh nghi.`}}));
  if(evG(S,a)>=2&&ACT.accuse&&accOK(S,a)){const c=ch70(`Tố giác ${a.name} ngay`,{p:oAccuse(S,a),wt:[G70("nàng bị xử theo chứng cứ, mưu tan")],lt:[R70("tố hụt: mất chứng cứ, Danh giảm")]});c.go=()=>{p.pend=0;const x=runAct(S,a,"accuse");if(!alive70(a)||a.confined)abandon70(p,"exposed");log(x||"Ngươi tố giác.")};o.push(c)}
  o.push(ch70("Lấy kế trả kế: để nàng ra tay rồi bắt quả tang",{c:{suc:-5},p:32+mat*6+tc/4+(p.dig?15:0),wt:[G70("nàng bị bắt quả tang, bị phạt"),G70(`chứng cứ về ${a.name} +2`)],lt:[R70("bẫy hở: nàng ra tay dễ hơn")],ok:()=>{p.trap=1;p.pend=0;return `Ngươi giăng sẵn người, chờ ${a.name} ra tay.`},no:()=>{p.g-=10;p.pend=0;return `Bẫy của ngươi bị lộ, lại khiến mình lơ là.`}}));
@@ -233,10 +233,10 @@ function optsSeen70(p){const a=pa70(p),M=pm70(p),r=pr70(p);const mat=S.mat||0,tc
  o.push(ch70("Mặc kệ, đợi xem",{wt:[G70("không tốn gì")],k:[R70("mưu vẫn tiến hành")],ok:()=>{p.pend=0;return "Ngươi lặng im chờ xem."}}));return o}
 function optsNpc70(p){const a=pa70(p),t=pt70(p),M=pm70(p),mat=S.mat||0;return[
  ch70(`Lén báo cho ${t.name}`,{c:{bac:-5},wt:[G70(`${t.name} thiện cảm +12`),G70("mưu khó thành")],k:[R70(`nếu lộ, ${a.name} oán ngươi`)],ok:()=>{p.g+=25;relAdd(S,t,12);p.pend=0;duc70(S,2,"báo tin cứu người");if(roll(30)){oanAdd(a,S,8);return `${t.name} cảm kích. Nhưng ${a.name} biết là ngươi mách.`}return `${t.name} cảm kích, đã đề phòng.`}}),
- ch70("Gom chứng cứ, để dành",{c:{bac:-15},p:45+mat*7,wt:[G70(`chứng cứ về ${a.name} +1`)],lt:[R70("mất bạc")],ok:()=>{evA(S,a,1);p.pend=0;return `Ngươi nắm thêm 1 chứng cứ về ${a.name}.`},no:()=>{p.pend=0;return "Người của ngươi không lấy được gì."}}),
+ ch70("Gom chứng cứ, để dành",{c:{bac:-15},p:45+mat*7,wt:[G70(`chứng cứ về ${a.name} +1`)],lt:[R70("mất bạc")],ok:()=>{/*evok: plot deed*/evA(S,a,1);p.pend=0;return `Ngươi nắm thêm 1 chứng cứ về ${a.name}.`},no:()=>{p.pend=0;return "Người của ngươi không lấy được gì."}}),
  ch70("Ngồi xem hai bên sứt mẻ",{wt:[G70("không dính líu")],k:[R70(`${t.name} có thể gặp nạn`)],ok:()=>{p.pend=0;return "Ngươi đứng ngoài."}})]}
 function optsAft70(p){const a=pa70(p),M=pm70(p),mat=S.mat||0;const o=[];const ev=evG(S,a);
- o.push(ch70("Tra xét đến cùng",{c:{bac:-20},p:30+mat*8+(p.trail||0)*12+(p.dig?10:0),wt:[G70("lần ra kẻ chủ mưu thật"),G70("chứng cứ +2")],lt:[R70("dấu vết đứt, không biết là ai")],ok:()=>{evA(S,a,2);p.pend=0;const s=p.acc?servById(p.acc):null;noteAdd(a.id,`đứng sau vụ ${M.n.toLowerCase()} nhắm vào ngươi${s?` (đồng lõa: ${s.name})`:""}`);return `Tra ra rồi: chính ${a.name} đứng sau${s?`, ${s.name} trong cung ngươi là đồng lõa`:""}. Chứng cứ +2.`},no:()=>{p.pend=0;return "Dấu vết đứt giữa chừng; ngươi chưa biết là ai."}}));
+ o.push(ch70("Tra xét đến cùng",{c:{bac:-20},p:30+mat*8+(p.trail||0)*12+(p.dig?10:0),wt:[G70("lần ra kẻ chủ mưu thật"),G70("chứng cứ +2")],lt:[R70("dấu vết đứt, không biết là ai")],ok:()=>{/*evok: plot deed*/evA(S,a,2);p.pend=0;const s=p.acc?servById(p.acc):null;noteAdd(a.id,`đứng sau vụ ${M.n.toLowerCase()} nhắm vào ngươi${s?` (đồng lõa: ${s.name})`:""}`);return `Tra ra rồi: chính ${a.name} đứng sau${s?`, ${s.name} trong cung ngươi là đồng lõa`:""}. Chứng cứ +2.`},no:()=>{p.pend=0;return "Dấu vết đứt giữa chừng; ngươi chưa biết là ai."}}));
  const s=p.acc?servById(p.acc):null;if(s&&(S.staff||[]).includes(s)&&p.dig)o.push(ch70(`Giao ${s.name} cho Thận Hình ti`,{wt:[G70("bớt một kẻ phản trong cung")],k:[R70("kẻ hầu khác run sợ")],ok:()=>{S.staff.splice(S.staff.indexOf(s),1);(S.staff||[]).forEach(x=>x.loyal=cl(x.loyal-2,0,100));p.pend=0;return `${s.name} bị giải đi.`}}));
  if(ev>=2&&accOK(S,a)){const c=ch70(`Tố giác ${a.name}`,{p:oAccuse(S,a),wt:[G70("nàng bị xử theo chứng cứ")],lt:[R70("tố hụt: mất chứng cứ, Danh giảm")]});c.go=()=>{p.pend=0;log(runAct(S,a,"accuse")||"Ngươi tố giác.")};o.push(c)}
  o.push(ch70("Nuốt giận, đợi thời",{wt:[G70("Đức +1")],k:[R70(`${a.name} vẫn nhởn nhơ`)],ok:()=>{apply({duc:1});p.pend=0;return "Ngươi nén giận, chờ thời cơ."}}));return o}
@@ -370,15 +370,20 @@ function note70(o){const z=j70();const a=o.a,A=ACT[o.k];const who=o.known?title7
  const N={wk:wk(),id:o.known?a.id:null,who,rank:o.known?rkName(a):null,act:o.k,actName:A?A.n:"",ok:o.ok,why:o.known?o.mo.t:null,whyK:o.known?o.mo.k:null,whyV:o.known?o.mo.v:null,by:o.ok?[]:o.by,gainEv:o.gain>0?o.gain:0,evNow:o.known?ev:null,evNeed:need,lost,body:String(o.body||"").replace(/<[^>]+>/g,"").trim()};
  z.nt=(z.nt||[]);z.nt.unshift(N);if(z.nt.length>20)z.nt.length=20;
  N.self=(o.self||[]).map(x=>x.t);const sent=/\(sai ([^)]+) đi\)/.exec(N.body);let body=String(o.body||"").replace(/\s*\(sai ([^)]+) đi\)/,"");N.sentBy=sent?sent[1]:null;
- const rows=[];rows.push(`<b>${who}</b>${o.known?` (vì ${o.mo.t})`:" (chưa rõ là ai)"} ${o.ok?"đã":"định"} <b>${what}</b> nhắm vào ngươi${sent?`; kẻ được ${o.known?a.name:"hắn"} sai đi: ${sent[1]}`:""}.`);
- rows.push((o.ok?R70("Kết quả: mưu ấy đã thành."):G70("Kết quả: không thành."))+" "+body);
+ /* owner 15/11 ("Gì mà viết liên tục vậy"): one fact per row — who · what, who was sent, the result, then each detail as its own sentence;
+    every row ends with a full stop so the kit (kpSentences) cuts it into its own line, never glued to the next name */
+ const rows=[];rows.push(`<b>${who}</b>${o.known?"":" (chưa rõ là ai)"} ${o.ok?"đã":"định"} <b>${what}</b> nhắm vào ngươi.`);
+ if(o.known)rows.push(`Vì sao: nàng ${o.mo.t}.`);
+ if(sent)rows.push(`Người được sai đi ${what} ngươi: ${sent[1]}.`);
+ const clean=/không tìm ra điều gì sai trái; chỉ biết ([^.<]+)/.exec(String(body).replace(/<[^>]+>/g,""));
+ if(clean){rows.push(G70("Kết quả: không tìm ra điều gì sai trái của ngươi."));rows.push(`${o.known?"Nàng":"Kẻ ấy"} chỉ biết thêm ${clean[1].trim()}.`)}
+ else{rows.push(o.ok?R70("Kết quả: mưu ấy đã thành."):G70("Kết quả: không thành."));
+  const bd=String(body).trim();if(bd)rows.push(/[.!?](<\/span>)?$/.test(bd)?bd:bd+".")}
  for(const x of (o.self||[]))rows.push(`Tự ý giúp ngươi: ${x.t}${o.ok?", nhưng không ngăn được":""}.`);
  if(!o.ok&&o.by.length)rows.push(`Phòng bị đã chặn: ${o.by.join(", ")}.`);else if(!o.ok&&!(o.self||[]).length)rows.push("Không có lệnh phòng bị nào của ngươi dính vào; kẻ ấy tự hỏng việc.");
  if(o.gain>0)rows.push(G70(`Ngươi được: ${o.gain} chứng cứ về ${who} (chứng minh nàng ${what}); nay có ${ev}${ev>=need?", đủ để tố giác":`, cần ${need} để tố giác`}.`));
  if(lost.length)rows.push(R70(`Ngươi mất: ${lost.join(", ")}.`));
- /* one notice = one fact for the kit (it splits facts at sentence ends): inner sentence ends become semicolons */
- const h=rows.map(r=>r.replace(/\.(?=\s*(<\/span>)?\s*$)/,"").replace(/\.(<\/span>)?(\s)/g,";$1$2").trim()).filter(Boolean).join("; ")+".";
- return h.trim()+" "}
+ return rows.join(" ").trim()+" "}
 (function(){const r0=runAct;runAct=function(a,t,k){const r=r0.apply(this,arguments);try{if(r&&a&&a!==S&&t!==S)return String(r).replace(/\(sai ([^)]+) đi\)/,`(${a.name} sai $1 đi)`)}catch(e){}return r}})();
 /* ---------- data for the kit ---------- */
 window.defenceOrders=function(){if(!S)return[];const L=ords70().map(o=>{const s=sv70(o.sid),O=ORD70[o.k];return{k:o.k,name:O.n,desc:O.d,servant:{sid:o.sid,name:s?s.name:"",loyal:s?s.loyal:0},target:o.tgt!=null&&RV(o.tgt)?{id:o.tgt,name:title70(RV(o.tgt))}:null,costMonth:{bac:O.bac,loyal:O.lo},busy:true,standing:!!o.std,since:o.since,power:o.k==="canh"?canhB70(o):null}});

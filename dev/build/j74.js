@@ -26,13 +26,15 @@ st.textContent=`
 .kpmenu.n4{grid-template-columns:repeat(3,minmax(0,1fr))}
 /* Chọn sổ: one kit section per sổ (h4.kpst label + kitRows + .kbtn) */
 #modal .kpt-mount #slots{display:flex;flex-direction:column;gap:6px;margin:0 0 6px}
-.kslot{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;align-items:center;padding:2px 0 6px;border-bottom:1px solid var(--k-hair,#e6d3ac)}
-.kslot>.kpst{grid-column:1/-1;margin:0}
-.kslot .kb{margin:0}
-.kslot-a{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
-.kslot-a .kbtn{min-height:40px;padding:6px 14px;font-size:.84rem}
+/* KIT slot card (owner 16/11 "info on top, buttons below"): ONE part for every sổ / room slot (solo 1-3, co-op rooms 1-3, any similar list):
+   h4.kpst, the kit info rows FULL WIDTH on top, the kit buttons in ONE row below (equal width); short values never wrap word by word */
+.kslot{display:flex;flex-direction:column;align-items:stretch;gap:6px;padding:2px 0 8px;border-bottom:1px solid var(--k-hair,#e6d3ac)}
+.kslot>.kpst{margin:0}
+.kslot .kb{margin:0;width:100%}
+.kslot .kb .krv{overflow-wrap:normal;word-break:normal;text-wrap:balance}
+.kslot-a{display:flex;gap:8px;flex-wrap:nowrap;justify-content:stretch}
+.kslot-a .kbtn{flex:1 1 0;min-width:0;min-height:40px;padding:6px 10px;font-size:.84rem;white-space:normal}
 .kslot-a .kbtn small{display:block;font-family:var(--body);font-weight:400;font-size:.7rem}
-@media (max-width:599px),(max-height:500px){.kslot{grid-template-columns:1fr}.kslot-a{justify-content:stretch}.kslot-a .kbtn{flex:1 1 0}}
 /* Thiết lập: kit controls (KIT.md 28) */
 .optwrap .optbox.kctls{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:0 18px;justify-content:stretch;align-items:stretch;font-size:inherit;margin:0 0 6px}
 .optwrap .optbox.kctls label{display:grid}
@@ -44,8 +46,8 @@ st.textContent=`
 document.head.appendChild(st);
 /* remove the inline backgrounds of j37/j50 so the rule above decides */
 T.style.removeProperty("background");
-const HEAD={slots:"Chọn sổ",opt:"Thiết lập",past:"Sổ luân hồi"};
-const SUBH={slots:"Ba sổ chơi một mình, ba phòng cùng hảo hữu; hai bên không ghi đè nhau. Phúc duyên ở dưới.",opt:"Tiếng, nhạc, giọng, rung; chép sổ và nạp sổ.",past:"Những kiếp đã qua."};
+const HEAD={slots:"Chọn sổ",opt:"Thiết lập",past:"Sổ luân hồi",notes:"Thông tin cập nhật"};
+const SUBH={slots:"Ba sổ chơi một mình, ba phòng cùng hảo hữu; hai bên không ghi đè nhau. Phúc duyên ở dưới.",opt:"Tiếng, nhạc, giọng, rung; chép sổ và nạp sổ.",past:"Những kiếp đã qua.",notes:"Những điều mới của các lần cập nhật gần đây."};
 const SONO=["một","hai","ba"];
 function slotWho(s){try{if(s.srv&&!s.srv.risen)return s.srv.lau>0?"Cung nữ Tân Giả khố":(typeof SRK!=="undefined"&&SRK.maid&&SRK.maid[s.srv.rk])||"Cung nữ";return (RANKS[Math.min(s.rank,RANKS.length-1)]||{}).n||""}catch(e){return ""}}
 function slotDate(s){try{return kitDate(s.month,s.year,s.tuan)}catch(e){return `Tháng ${s.month}, năm ${s.year}`}}
@@ -91,9 +93,9 @@ function kitBtns(box){const s=box.querySelector("#slots");if(!s)return;s.querySe
  s.querySelectorAll("button.btn").forEach(b=>{b.classList.remove("btn");b.classList.add("kbtn","alt")})}
 function noSeal(M){const s=M.querySelector(".dlg > .kph .kpseal");if(s)s.remove()}
 function mount(){const M=$("modal");if(!SM||Q[0]!==SM||M.hidden)return;const box=M.querySelector(".kpt-mount");if(!box)return;
- if(PG==="past"){box.innerHTML=pastBody()}else partsOf(PG).forEach(n=>{if(n)box.appendChild(n)});
+ if(PG==="past"){box.innerHTML=pastBody()}else if(PG==="notes"){box.innerHTML=window.CTM_NOTES_UI?CTM_NOTES_UI.body():""}else partsOf(PG).forEach(n=>{if(n)box.appendChild(n)});
  kitBtns(box);
- noSeal(M);const mr=$("mr");if(mr)mr.innerHTML=`<button class="kbtn alt" data-tgo="home">‹ Lui</button>`}
+ noSeal(M);const mr=$("mr");if(mr)mr.innerHTML=`<button class="kbtn alt" data-tgo="${PG==="notes"?"opt":"home"}">‹ Lui</button>`}
 function dropAll(){const M=$("modal");park();[HM,SM].forEach(m=>{if(!m)return;const i=Q.indexOf(m);if(i>=0)Q.splice(i,1)});HM=SM=null;
  if(M&&M.classList.contains("kptitle")){M.classList.remove("kptitle","kpthome","kpscene");if(T.hidden&&Q.length)showModal();else M.hidden=true}}
 function homeOpen(){dropAll();HM=kitModal({scene:true,kind:"notice",title:"Cung Tường Mộng",sub:"Mỗi kiếp một thân phận. Leo từ Đáp ứng lên Hoàng hậu, rồi đưa con lên ngôi.",html:homeMenu(),cls:"kptitle kpthome"});noSeal($("modal"))}
