@@ -270,7 +270,7 @@
 | road-map review (opus; 240c68a7 jroad engine + tt pilot) | review/road-map-r1 | B | session_01N1tNP4jWtq6Qf3eWpQ7krw | DONE FAIL 5 (archived) | 16/11 16:47Z |
 | road B1 chapters dtq+muoi+cn .5–.11 (lead continues) | review/road-b1 | B | session_01N1tNP2sDgtu4GovRB3yT4X (successor of lead) | RUNNING | 16/11 16:47Z |
 | road B2 chapters nc(+bd)+td+ch .5–.11 (opus helper) | review/road-b2 | B | session_01N1tNP4zDh6M8kQNxdcYKvM | RUNNING | 16/11 16:47Z |
-| road B3 chapters thd+cnv .5–.11 + endgame ch12–14 (opus helper) | review/road-b3 | B | session_01N1tNP3uKUEBnyjuk4bnC7X | RUNNING | 16/11 16:47Z |
+| road B3 chapters thd+cnv .5–.11 + endgame ch12–14 (opus helper) | review/road-b3 | B | session_01N1tNP3uKUEBnyjuk4bnC7X | DONE SẴN SÀNG bcc79551 (archived) | 16/11 16:47Z |
 | page-scale (opus; OD 17:00Z + OD:L345/L1278): phone portrait page = iPad right page scaled uniformly — root cause + whole-group fix for every tab panel (bag 7 vs 4 rows first) + comparison test | review/page-scale | main s20 | session_01UV1SzibwMrHrCm5SBrYNJR | RUNNING | 16/11 17:00Z |
 | C GO-LIVE prep (sonnet; OD:L1370): re-merge C PASS branches not on main (title-sys-r1 ced2edc6, b-answers-art-r1 82756a80) onto latest main, quick check, READY sha each → Foreman C fast-forwards | review/title-sys-live, review/b-answers-art-live | C | session_011xDdVSCv8mDYUgLi7Fk1U6 | DONE (both live c19b25eb, e987508d; archived) | 16/11 16:57Z |
 | ORIGIN INTROS successor (sonnet: final re-runs + coop tests + SẴN SÀNG KIỂM) from review/origin-intros @ef815769 | review/origin-intros | C | session_011xDdVSzL8F7w8e9XVKKjR4 | RUNNING | 16/11 16:55Z |
@@ -330,4 +330,4 @@
 | pl-courtyards review r1 (sonnet, SMALL): PASS fae6bcbce | review/pl-courtyards-r1 | reviewer | session_01UV1SzicVqzEzvngQp4ujo4 | DONE | 16/11 |
 | map-labels-2-b review r1 (sonnet) of 1deaf9cb (on dudo-lock) | review/map-labels-2-b-r1 | main s21 | session_01UV1SzgbfBnvY6mdGxcr9VN | RUNNING | 16/11 18:38Z |
 | single-hall direct (sonnet): single-hotspot places skip the courtyard step (owner rule), on pl-courtyards-r1 | review/single-hall | main s21 | (see HANDOVER) | RUNNING | 16/11 18:40Z |
-| road-b3 review r1 (opus, BIG): review/road-b3 bcc79551 (thd+cnv 56 ch + endgame jend14) | review/road-b3-r1 | B | (opening) | RUNNING | 16/11 18:42Z |
+| road-b3 review r1 (opus, BIG): review/road-b3 bcc79551 (thd+cnv 56 ch + endgame jend14) | review/road-b3-r1 | B | session_01N1tNP5xkQQ97yrv7pUMVL9 | RUNNING | 16/11 18:42Z |
