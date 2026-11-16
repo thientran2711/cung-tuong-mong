@@ -1175,3 +1175,4 @@ All must work in co-op.
 - (16/11) Owner asked to open a 4th account. → dev/handover/FOREMAN_D.md (slice: newgame-ui-r2 review, row-align re-review, C43 coop-invite-ux, C44 cloud-save, C3 art-complete p2, D50, D51, D52; act waves 2–3 on GO).
 - (16/11) Owner: places already have 4-buổi paintings, so remove the CSS buổi tint overlay and keep only weather overlays. Fix any room whose buổi painting is not used (e.g. Ngọc Thanh các looking brown). Places without a 4-buổi set get no tint and their art is ordered. → review/postmerge-fix-1.
 - (16/11) Owner: paint a buổi set for every place that lacks one → FOREMAN_D D54. Owner says the pregnancy rate is too low; proposal pending.
+- (16/11) Owner bug: co-op room slot card puts info and buttons side by side, and the values wrap word by word. Must be kit: info rows on top, buttons below, one slot-card part for all save and room slots. → review/kpanel-compact.
