@@ -114,9 +114,9 @@ rdDef("cnv_chu",7,{t:"Chủ thử lòng",w:"mis",sj:"phép thử của {mis}",ca
   lose:{k:-1,tag:"Trượt phép thử",w:"mis",t:"{mis} cho là ngươi rắp tâm lấy gói thuốc. Nàng chuyển ngươi ra xa, và đổi người giữ chìa khóa.",fx:{danh:-2},go:()=>CHU_MIS(-12)}}});
 
 rdDef("cnv_chu",8,{t:"Bí mật lộ một nửa",w:"eun",sj:"lời đồn về xạ hương ở cung {mis}",cast(A){return rdCast(A,["v"])},
- g:"Lời đồn đến tai Trung cung: «cung {mis} có xạ hương». Chỉ một nửa sự thật lọt ra, nửa tệ nhất. Trước khi trời sáng, Nội vụ phủ sẽ khám cung.",
+ g:"Lời đồn đến tai Trung cung: «cung {mis} có xạ hương». Chỉ một nửa sự thật lọt ra, nửa tệ nhất. Trước khi trời sáng, Nội vụ phủ sẽ khám cung, có ý chỉ Trung cung và Thái hậu chuẩn.",
  p:[["s1","s2"],["c1","c2"],["t1"],["x1"]],
- B:{s1:{h:"Tin báo nửa đêm",w:"eun",if:RDW(1),t:()=>`{mis} đã tin ngươi trọn. Nửa đêm, một tiểu thái giám chạy đến báo: sáng mai Nội vụ phủ khám cung {mis}, theo lệnh ${CHU_Q()}. Gói thuốc vẫn ở chỗ cũ.`,o:[
+ B:{s1:{h:"Tin báo nửa đêm",w:"eun",if:RDW(1),t:()=>`{mis} đã tin ngươi trọn. Nửa đêm, một tiểu thái giám chạy đến báo: sáng mai Nội vụ phủ khám cung {mis}, ${CHU_Q()==="Hoàng hậu"?"có ý chỉ Hoàng hậu, Thái hậu chuẩn":"theo lệnh Thái hậu"}. Gói thuốc vẫn ở chỗ cũ.`,o:[
   {n:"Mang gói thuốc ra khỏi cung",c:{suc:-3},o:()=>40+S.mat*5,w:{tamco:2},sc:1,f:"hide",wx:"gói thuốc không còn ở cung {mis}",l:{danh:-3},lx:"bị bắt đang mang xạ hương, tiếng ngươi sút nặng",rt:"Ngươi giấu gói thuốc trong giỏ đồ giặt, đưa ra khỏi cung trước canh tư.",rf:"Thị vệ gác cửa nhìn giỏ đồ rất lâu, nhớ mặt ngươi."},
   {n:"Giấu vào chỗ không ai khám",c:{},o:()=>45+S.tamco/4,w:{mat:1},sc:1,f:"hide",wx:"gói thuốc vẫn trong tầm tay",l:{danh:-2},lx:"chỗ giấu bị lộ, tiếng ngươi sút",rt:"Ngươi nhét gói thuốc vào ruột chiếc gối thêu của {mis}.",rf:"Chỗ giấu ngươi chọn, Nội vụ phủ nào cũng biết."},
   {n:"Khuyên {mis} tự đem nộp trước",c:{},o:()=>35+S.duc/4,w:{duc:3},sc:1,f:"clean",wx:"không còn gì để bị khám ra",l:{danh:-2},lx:"{mis} cho là ngươi bỏ nàng, bớt tin; tiếng ngươi sút",go:(A,ok)=>CHU_MIS(ok?2:-6),rt:"{mis} nghĩ rất lâu: “Nếu nộp, ta phải nói nó từ đâu.”",rf:"{mis} hất tay ngươi ra."}]},
@@ -248,7 +248,7 @@ RD97L.push({a:"cnv_chu_11",tag:"Việc thiện trong bóng tối",w:"emp",p:.12,
    Getters keep strings as strings (arcReveal67 and rare-path matching still see text). Shared by the four cnv roads. */
 var CNV_QFIX=typeof CNV_QFIX==="function"?CNV_QFIX:function(road){
  const W=/Hoàng hậu|Càn Ninh cung|Trung cung/,qn=()=>{try{return qOn()}catch(e){return true}};
- const sub=s=>typeof s!=="string"||!W.test(s)?s:s.replace(/“Bản cung/g,"“Ai gia").replace(/Càn Ninh cung/g,"Đức Thọ cung").replace(/Trung cung/g,"Thái hậu").replace(/Hoàng hậu/g,"Thái hậu").replace(/Thái hậu đã cho người tra, và Thái hậu đã nghe/g,"Thái hậu đã cho người tra").replace(/đi hầu Thái hậu ở hành cung/g,"đi hầu người ở hành cung").replace(/“Người hầu cũ của muội, nay là tiểu chủ\. Muội thấy/g,"“Người hầu cũ của ngươi, nay là tiểu chủ. Ngươi thấy");
+ const sub=s=>typeof s!=="string"||!W.test(s)?s:s.replace(/“Bản cung/g,"“Ai gia").replace(/Càn Ninh cung/g,"Đức Thọ cung").replace(/Trung cung/g,"Thái hậu").replace(/Hoàng hậu/g,"Thái hậu").replace(/Thái hậu và Thái hậu chuẩn/g,"Thái hậu").replace(/Thái hậu đã cho người tra, và Thái hậu đã nghe/g,"Thái hậu đã cho người tra").replace(/đi hầu Thái hậu ở hành cung/g,"đi hầu người ở hành cung").replace(/“Người hầu cũ của muội, nay là tiểu chủ\. Muội thấy/g,"“Người hầu cũ của ngươi, nay là tiểu chủ. Ngươi thấy");
  const th=o=>{const r={};for(const k in o){const j=k==="hh"?"th":k;r[j]=(r[j]||0)+o[k]}return r};
  const fix=(ob,keys)=>{if(!ob)return;for(const k of keys){if(!Object.prototype.hasOwnProperty.call(ob,k))continue;const v=ob[k];
   if(k==="w"&&typeof v==="string"){if(v==="hh")Object.defineProperty(ob,k,{get:()=>qn()?"hh":"th",enumerable:true,configurable:true});continue}

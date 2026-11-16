@@ -18,6 +18,8 @@ function egSeatRv(A){try{const L=liveRivals(false).filter(v=>!v.queen);if(!L.len
 /* the mother of the prince who stands nearest the throne after hers (kvOrder j51), else any mother of a prince */
 function egMomRv(A){try{const mine=new Set(mySons());const L=liveRivals(true).filter(v=>(v.kids||[]).some(k=>k.alive&&k.sex==="m"&&!mine.has(k)));
  if(L.length)A.act.v=L.sort((a,b)=>(typeof seatW==="function"?seatW(b)-seatW(a):0))[0].id}catch(e){}return true}
+/* cast guards (review road-b3-r1: beat text must match the cast person): v has a living child / a living son */
+const egKid=v=>!!(v&&(v.kids||[]).some(k=>k.alive)),egSon=v=>!!(v&&(v.kids||[]).some(k=>k.alive&&k.sex==="m"));
 const egQueen=()=>S.rank>=7,egHeirMine=()=>!!(S.heir&&S.heir.k&&S.heir.k.alive&&!S.heir.v),egHeirNone=()=>!(S.heir&&S.heir.k&&S.heir.k.alive);
 /* ch13 win: one real step toward the seat. Below Phi-level seats: an ân thi at once (jexam exGrace, conditions waived; she still sits it);
    at the top seat below Hoàng hậu: Thái hậu and court weight for the lập hậu choice; already Hoàng hậu: the seat holds (che chở months). */
@@ -38,7 +40,7 @@ ARC67.noi14={o:"eg",ok:()=>nsrv67()&&!S.kids.some(k=>k.alive),t:"Người nối 
   {n:"Xin bài thuốc dài ngày",c:{bac:-50},w:{},wx:"dễ thụ thai hơn trong mấy tháng tới",lx:"thuốc đắng, tốn bạc",go:()=>{S.fert=Math.max(S.fert||0,BAL.road.end.fertM)},rt:"Thái y kê đơn, dặn uống đủ ba tháng."},
   {n:"Giữ kín bệnh mạch",c:{suc:-3},o:()=>45+S.mat*5,w:{danh:2},sc:1,wx:"không ai biết ngươi lo",l:{danh:-3},lx:"chuyện lộ ra thì thành chuyện cười",rt:"Thái y hứa không ghi vào sổ mạch.",rf:"Sổ mạch đến tay người khác."},
   {n:"Cảm tạ, không chữa",c:{th:-2},w:{duc:3},wx:"lòng yên, không tốn bạc",lx:"Thái hậu trách ngươi không lo hương hỏa",rt:"Ngươi đóng hộp thuốc, bảo thái y lui."}]},
- s2:{h:"Lời bàn sau lưng",w:"v",need:["v"],t:"Ở tiệc thưởng hoa, {v} bế con ngồi cạnh Thái hậu, cười: “Cung của tỷ tỷ yên tĩnh thật, chẳng như cung muội, cả ngày ồn tiếng trẻ.”",o:[
+ s2:{h:"Lời bàn sau lưng",w:"v",need:["v"],vf:egKid,if:A=>!rv67(A,"v")||egKid(rv67(A,"v")),t:"Ở tiệc thưởng hoa, {v} bế con ngồi cạnh Thái hậu, cười: “Cung của tỷ tỷ yên tĩnh thật, chẳng như cung muội, cả ngày ồn tiếng trẻ.”",o:[
   {n:"Cười đáp, khen đứa trẻ",c:{suc:-2},w:{duc:3},wx:"giữ thể diện",lx:"{v} được thế lấn tới",rt:"Thái hậu gật gù: ngươi biết điều."},
   {n:"Đáp trả một câu",c:{},o:()=>40+S.tamco/3,w:{danh:2},sc:1,wx:"{v} cứng họng",l:{danh:-3},lx:"thành kẻ ghen con người",go:(A,ok)=>{if(ok)rdOan(A,"v",6)},rt:"Cả bàn tiệc lặng đi, {v} đỏ mặt.",rf:"Thái hậu nhíu mày: ngươi hẹp lượng."},
   {n:"Cáo bệnh rời tiệc",c:{sung:-2},w:{suc:4},wx:"khỏi chịu nhục",lx:"vắng mặt thì người khác nói thay",rt:"Ngươi về cung, đóng cửa nghỉ."}]},
@@ -56,7 +58,7 @@ ARC67.noi14={o:"eg",ok:()=>nsrv67()&&!S.kids.some(k=>k.alive),t:"Người nối 
   {n:"Khuyên ngài thăm cung khác",c:{sung:-3},w:{duc:4},wx:"lục cung khen ngươi rộng lượng",lx:"ngài đi thật",rt:"Hoàng thượng cười, rồi sang cung khác."}]},
  t1:{h:"Chọn đường cho mình",w:"me",t:"Đêm ấy ngươi ngồi một mình. Không con, thì lấy gì mà đứng? Lấy đức, lấy người, hay cứ chờ trời?",o:[
   {n:"Lấy đức làm gốc",c:{suc:-2},w:{duc:5,danh:2},wx:"tiếng hiền đức",lx:"đức không thay được Sủng",rt:"Từ đó cung ngươi mở cửa cho người cần giúp."},
-  {n:"Kết thân một bà mẹ có hoàng tử",c:{bac:-30},o:()=>40+S.tamco/3,if:A=>!!rv67(A,"v"),w:{danh:2},sc:1,wx:"có một đồng minh có con",l:{duc:-2},lx:"bị coi là đi cửa sau",go:(A,ok)=>{rdRel(A,"v",ok?12:-5)},rt:"{v} nhận lễ, hẹn từ nay có nhau.",rf:"{v} lạnh nhạt nhận lễ, không hứa gì."},
+  {n:"Kết thân một bà mẹ có hoàng tử",c:{bac:-30},o:()=>40+S.tamco/3,if:A=>egSon(rv67(A,"v")),w:{danh:2},sc:1,wx:"có một đồng minh có con",l:{duc:-2},lx:"bị coi là đi cửa sau",go:(A,ok)=>{rdRel(A,"v",ok?12:-5)},rt:"{v} nhận lễ, hẹn từ nay có nhau.",rf:"{v} lạnh nhạt nhận lễ, không hứa gì."},
   {n:"Kiên trì cầu con",c:{bac:-30},w:{},wx:"dễ thụ thai hơn",lx:"tốn bạc, lòng nặng",go:()=>{S.fert=Math.max(S.fert||0,BAL.road.end.fertM)},rt:"Ngươi lại nhờ thái y kê đơn."}]},
  x1:{h:"Hương hỏa",w:"th",t:"Thái hậu cho gọi ngươi: “Ai gia không trách ngươi chuyện con cái. Ai gia chỉ hỏi: không có con, ngươi lấy gì để lục cung nể?”",o:[
   {n:"Thưa: lấy lòng đối đãi với mọi đứa trẻ",c:{suc:-4},o:()=>40+S.duc/3+S.th/5,e:["win","mid"],rt:"Thái hậu nắm tay ngươi rất lâu.",rf:"Thái hậu gật đầu, nhưng không nói gì thêm."},
@@ -114,7 +116,7 @@ ARC67.ke14={o:"eg",ok:()=>nsrv67(),t:"Mẫu nghi thiên hạ",w:"emp",sj:"ngôi 
   {n:"Đổi hết người hầu Đông cung",c:{bac:-40,suc:-3},w:{mat:1},wx:"Đông cung kín kẽ hơn",lx:"người vô tội cũng bị đuổi",rt:"Đông cung thay người mới, toàn người ngươi chọn."},
   {n:"Lần theo món điểm tâm",c:{suc:-4},o:()=>45+S.mat*5,if:A=>!!rv67(A,"v"),w:{danh:3},sc:1,wx:"tìm ra kẻ ra tay",l:{danh:-3},lx:"đánh động mà không bắt được ai",go:(A,ok)=>{if(ok)rdOan(A,"v",10)},rt:"Dấu vết dẫn về cung {v}.",rf:"Kẻ đưa điểm tâm đã bị diệt khẩu."},
   {n:"Tâu Hoàng thượng xin thêm thị vệ",c:{sung:-2},w:{},wx:"Thái tử được canh gác",lx:"ngài nghĩ ngươi lo xa",go:()=>{S.shield=Math.max(S.shield||0,BAL.road.end.keShield)},rt:"Hoàng thượng sai thêm thị vệ canh Đông cung."}]},
- s2:{h:"Ngôi Đông cung còn ngỏ",w:"emp",if:()=>!egHeirMine()&&mySons().length>0,t:"Triều thần lại dâng sớ xin lập Thái tử. Trong sớ nhắc đến {k}, cũng nhắc đến con của {v}.",o:[
+ s2:{h:"Ngôi Đông cung còn ngỏ",w:"emp",if:()=>!egHeirMine()&&mySons().length>0,t:A=>egSon(rv67(A,"v"))?"Triều thần lại dâng sớ xin lập Thái tử. Trong sớ nhắc đến {k}, cũng nhắc đến con của {v}.":"Triều thần lại dâng sớ xin lập Thái tử. Trong sớ nhắc đến {k}, nhưng Hoàng thượng chưa phê.",o:[
   {n:"Mời thầy giỏi dạy {k}",c:{bac:-50},w:{},wx:"con tiến bộ, Hoàng thượng để ý",lx:"tốn bạc",go:()=>e67heir(6),rt:"Thầy mới khen {k} sáng dạ."},
   {n:"Cho {k} theo Hoàng thượng đi săn",c:{suc:-3},o:()=>40+S.sung/4,sc:1,w:{danh:2},wx:"con được ngài để mắt",l:{sung:-3},lx:"con ngã ngựa thì ngươi mang tiếng",go:(A,ok)=>ok?e67heir(8):"",rt:"{k} bắn trúng một con nai, Hoàng thượng cười lớn.",rf:"{k} sợ ngựa, Hoàng thượng nhíu mày."},
   {n:"Dặn con giữ mình, chưa tranh",c:{danh:-2},w:{duc:3},wx:"con không thành bia",lx:"Hoàng thượng bớt để ý con",go:()=>{const s=son67();if(s)s.fond=cl((s.fond||0)-4,0,100)},rt:"{k} gật đầu, lặng lẽ học bài."}]},
@@ -126,7 +128,7 @@ ARC67.ke14={o:"eg",ok:()=>nsrv67(),t:"Mẫu nghi thiên hạ",w:"emp",sj:"ngôi 
   {n:"Đứng ra lo cho họ",c:{suc:-5,bac:-30},w:{th:4,danh:3},wx:"cả cung gọi ngươi là mẹ hiền",lx:"mệt và tốn",rt:"Tây sở ấm lửa suốt mùa đông."},
   {n:"Tâu Nội vụ phủ cấp thêm",c:{suc:-2},o:()=>40+S.danh/4,w:{danh:2},sc:1,wx:"việc công lo việc công",l:{danh:-2},lx:"Nội vụ phủ chối, ngươi mất mặt",rt:"Nội vụ phủ phát thêm than củi.",rf:"Nội vụ phủ đáp: không có lệ ấy."},
   {n:"Gửi chút bạc rồi thôi",c:{bac:-10},w:{duc:1},wx:"đỡ được phần nào",lx:"tốn chút bạc, người ta chê qua loa",rt:"Bạc đến tay họ, nhưng không đủ."}]},
- c1:{h:"Bà mẹ của hoàng tử khác",w:"v",need:["v"],t:"{v} đến cung ngươi, nụ cười rất ngọt: “Bọn trẻ lớn cả rồi. Tỷ tỷ với muội nên cùng một lòng, đừng để người ngoài chia rẽ.”",o:[
+ c1:{h:"Bà mẹ của hoàng tử khác",w:"v",need:["v"],vf:egSon,if:A=>!rv67(A,"v")||egSon(rv67(A,"v")),t:"{v} đến cung ngươi, nụ cười rất ngọt: “Bọn trẻ lớn cả rồi. Tỷ tỷ với muội nên cùng một lòng, đừng để người ngoài chia rẽ.”",o:[
   {n:"Bắt tay với {v}",c:{duc:-2},o:()=>40+S.tamco/3,w:{danh:2},sc:1,wx:"bớt một phe chống",l:{danh:-3},lx:"{v} lợi dụng ngươi",go:(A,ok)=>{rdRel(A,"v",ok?12:-6)},rt:"Hai cung từ nay qua lại.",rf:"{v} đem chuyện hai người kể với triều thần."},
   {n:"Từ chối khéo",c:{danh:-1},w:{tamco:2},wx:"không bị ràng buộc",lx:"{v} oán ngươi đề phòng",go:A=>{rdOan(A,"v",4)},rt:"Ngươi rót trà, nói chuyện hoa cỏ."},
   {n:"Dò ý nàng ta",c:{suc:-3},o:()=>45+S.mat*5,w:{mat:1},sc:1,wx:"biết {v} đang tính gì",l:{danh:-2},lx:"{v} nhận ra",rt:"{v} lỡ lời nhắc đến một nhà quyền thần.",rf:"{v} cười, không để lộ gì."}]},

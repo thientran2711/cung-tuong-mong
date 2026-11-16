@@ -18,9 +18,9 @@ function thdHocCast(A){const vf=v=>(v.kids||[]).some(k=>k.alive);
 const thdHocOk=()=>thdHocKids().length>0;
 
 rdDef("thd_hoc",5,{t:"Học trò nhỏ",w:"emp",sj:"hai học trò nhỏ ở Thượng thư phòng",ok:thdHocOk,cast:thdHocCast,
- g:"Thượng thư phòng có hai đứa trẻ khiến ngươi mất ngủ: {n1}, con của {v}, sáng dạ mà lười; và {n2}, chăm đến mức các anh em ganh. Dạy được một đứa đã khó; dạy cả hai mà không ai oán còn khó hơn.",
+ g:"Theo chỉ của Hoàng thượng, ngươi làm giáo tập buổi sáng nhỏ ở Thượng thư phòng: dạy vỡ lòng các hoàng tử chưa vào học chính; kinh sử vẫn do các sư phó Hàn lâm giảng. Có hai đứa trẻ khiến ngươi mất ngủ: {n1}, con của {v}, sáng dạ mà lười; và {n2}, chăm đến mức các anh em ganh. Dạy được một đứa đã khó; dạy cả hai mà không ai oán còn khó hơn.",
  p:[["s1","s2","s3"],["c1","c2"],["t1"],["x1"]],
- B:{s1:{h:"Học trò trốn học",w:"emp",if:RDW(1),t:"Sau kỳ khảo hạch, Hoàng thượng giao hẳn buổi sáng ở Thượng thư phòng cho ngươi. Ngay hôm đầu, {n1} trốn học ra Ngự hoa viên bắt dế.",o:[
+ B:{s1:{h:"Học trò trốn học",w:"emp",if:RDW(1),t:"Sau kỳ khảo hạch, Hoàng thượng giao hẳn buổi học vỡ lòng sáng sớm ở Thượng thư phòng cho ngươi. Ngay hôm đầu, {n1} trốn học ra Ngự hoa viên bắt dế.",o:[
   {n:"Ra vườn bắt dế cùng nó",c:{suc:-2},w:{duc:2},f:"gentle",wx:"nó chịu theo ngươi về lớp",lx:"chạy theo trò khắp vườn, hao sức; các thầy khác chê ngươi chiều trò",rt:"Bắt được con dế, {n1} ngoan ngoãn theo ngươi về, tay còn nắm ống tre."},
   {n:"Phạt nó chép bài",c:{},o:()=>45+S.danh/5,w:{danh:2},sc:1,f:"strict",wx:"cả lớp biết phép",l:{duc:-1},lx:"{v} nghe con bị phạt, kể khắp cung thầy khắt khe, tổn đức",go:(A,ok)=>{if(!ok)rdOan(A,"v",3)},rt:"{n1} chép xong mười trang, mắt đỏ mà không khóc.",rf:"{n1} xé giấy, chạy về mách mẹ."},
   {n:"Cho người báo {v} đến đón con",c:{duc:-2},w:{tamco:1},wx:"không gánh trách một mình",lx:"đứa trẻ giận ngươi mách mẹ, thấy thầy không giữ lời, tổn đức",go:A=>{rdRel(A,"v",2)},rt:"{v} đến, kéo con đi, ngoái lại nhìn ngươi một cái."}]},
@@ -115,7 +115,7 @@ rdDef("thd_hoc",7,{t:"Kỳ khảo hạch",w:"emp",sj:"kỳ khảo hạch hoàng 
   lose:{k:-1,tag:"Khảo hạch rối loạn",t:"Một Thượng thư bật cười giữa điện. {v} đổ lỗi cho ngươi, và lần này các mẹ khác cũng gật đầu theo.",fx:{danh:-4,sung:-2},go:A=>{rdOan(A,"v",8);return""}}}});
 
 rdDef("thd_hoc",8,{t:"Đứa trẻ bị phạt",w:"v",sj:"đứa trẻ bị phạt trong giờ ngươi dạy",ok:thdHocOk,cast:thdHocCast,
- g:"Một đứa trẻ bị phạt trong giờ ngươi dạy. Ở Thượng thư phòng, thước của thầy là phép; ra khỏi cửa lớp, thước ấy là chuyện của mẹ nó.",
+ g:"Một đứa trẻ bị phạt trong giờ ngươi dạy. Ở Thượng thư phòng, phép phạt của thầy là phép; ra khỏi cửa lớp, phép phạt ấy là chuyện của mẹ nó.",
  p:[["s1","s2"],["c1","c2"],["t1"],["x1"]],
  B:{s1:{h:"Đứa trẻ sinh kiêu",w:"v",if:RDW(1),t:"Được khen trước điện, {n1} sinh kiêu. Giữa lớp, nó xé vở của {n2}, cười: “Phụ hoàng khen ta, không khen ngươi.”",o:[
   {n:"Bắt nó xin lỗi trước lớp",c:{},o:()=>45+S.danh/5,w:{danh:2},sc:1,f:"strict",wx:"phép lớp còn",l:{duc:-1},lx:"nó thấy bị làm nhục, tổn đức",rt:"{n1} lí nhí xin lỗi, mặt đỏ tía.",rf:"{n1} chạy ra khỏi lớp."},
@@ -125,10 +125,10 @@ rdDef("thd_hoc",8,{t:"Đứa trẻ bị phạt",w:"v",sj:"đứa trẻ bị ph�
   {n:"Can ra, băng bó cho cả hai",c:{bac:-10},w:{duc:2},wx:"không đứa nào nặng thêm",lx:"tốn bạc thuốc men; chuyện vẫn lan ra",rt:"Hai đứa ngồi hai đầu lớp, mắt còn tóe lửa."},
   {n:"Phạt cả hai đứng góc lớp",c:{sung:-1},w:{danh:2},f:"strict",wx:"giữ phép",lx:"hai mẹ đều giận, kêu lên Hoàng thượng, ân sủng nhạt đi",go:A=>{rdOan(A,"v",3)},rt:"Hai đứa đứng đến trưa, không đứa nào chịu khóc."},
   {n:"Hỏi rõ ai gây trước",c:{suc:-2},o:()=>40+S.mat*5,w:{mat:1},sc:1,wx:"biết đầu đuôi",l:{danh:-1},lx:"bọn trẻ bao che nhau, người ta bảo thầy tra trò như tra tội, tiếng tăm sứt mẻ",rt:"Hoàng tự lớn chọc trước: “Con của {v} dốt.”",rf:"Không đứa nào chịu nói."}]},
- c1:{h:"Phép của Thượng thư phòng",w:"emp",t:"Phép cũ của Thượng thư phòng: trò phạm lỗi thì thầy đánh thước vào tay, mười cái. Thầy không phạt thì thầy mang lỗi.",o:[
-  {n:"Đánh đủ mười thước",c:{sung:-1},w:{danh:3},f:"strict",wx:"giữ phép như thầy đồ",lx:"tay đứa trẻ sưng, Hoàng thượng xót con, ân sủng nhạt đi; {v} thêm oán",go:A=>{rdOan(A,"v",6)},rt:"Mỗi thước, {n1} cắn môi không kêu. Ngươi đau hơn nó."},
-  {n:"Đánh nhẹ ba thước",c:{},o:()=>45+S.tamco/4,w:{duc:2},sc:1,wx:"giữ phép mà không đau",l:{danh:-2},lx:"bị nói là sợ mẹ trò, tiếng tăm sứt mẻ",rt:"Ba thước khẽ, {n1} hiểu thầy nương tay.",rf:"Có người tâu thầy không giữ phép."},
-  {n:"Phạt chép bài thay đòn",c:{suc:-2},w:{duc:3},f:"gentle",wx:"đứa trẻ khỏi đau",lx:"ngồi kèm trò chép bài đến tối, hao sức; không đúng phép cũ",rt:"{n1} chép một trăm lần chữ “Nhẫn”, đến chữ cuối viết đẹp nhất."}]},
+ c1:{h:"Phép của Thượng thư phòng",w:"emp",t:"Phép cũ của Thượng thư phòng: không ai được đánh hoàng tự; trò phạm lỗi thì quỳ chép sách, mười lượt. Thầy không phạt thì thầy mang lỗi.",o:[
+  {n:"Bắt quỳ chép đủ mười lượt",c:{sung:-1},w:{danh:3},f:"strict",wx:"giữ phép như thầy đồ",lx:"đứa trẻ quỳ đến tê chân, Hoàng thượng xót con, ân sủng nhạt đi; {v} thêm oán",go:A=>{rdOan(A,"v",6)},rt:"Quỳ đến lượt cuối, {n1} cắn môi không kêu. Ngươi đau hơn nó."},
+  {n:"Cho ngồi chép ba lượt",c:{},o:()=>45+S.tamco/4,w:{duc:2},sc:1,wx:"giữ phép mà nương tay",l:{danh:-2},lx:"bị nói là sợ mẹ trò, tiếng tăm sứt mẻ",rt:"Ba lượt chép, {n1} hiểu thầy nương tay.",rf:"Có người tâu thầy không giữ phép."},
+  {n:"Ngồi kèm trò chép bài",c:{suc:-2},w:{duc:3},f:"gentle",wx:"đứa trẻ khỏi phải quỳ",lx:"ngồi kèm trò chép bài đến tối, hao sức; không đúng phép cũ",rt:"{n1} chép một trăm lần chữ “Nhẫn”, đến chữ cuối viết đẹp nhất."}]},
  c2:{h:"{v} xông vào lớp",w:"v",need:["v"],t:"{v} xông vào Thượng thư phòng, kéo con ra sau lưng: “Ai cho ngươi động vào con ta?”",o:[
   {n:"Quỳ xuống thưa rõ đầu đuôi",c:{danh:-2},o:()=>40+S.duc/4,w:{duc:3},sc:1,wx:"{v} nghe được lẽ phải",lx:"thầy quỳ trước mẹ trò, mất mặt",go:(A,ok)=>{rdRel(A,"v",ok?8:-4)},rt:"{v} nghe xong, buông tay con.",rf:"{v} không nghe, dắt con đi."},
   {n:"Đứng thẳng: đây là lớp, không phải cung nàng",c:{},o:()=>40+S.danh/4,w:{danh:3},sc:1,wx:"giữ uy thầy",l:{danh:-2},lx:"{v} thấy bị khinh trước con, kể khắp cung, tiếng tăm sứt mẻ",go:A=>{rdOan(A,"v",8)},rt:"{v} lùi ra cửa, không nói được lời nào.",rf:"{v} hét lên trước mặt cả lớp."},
@@ -137,13 +137,13 @@ rdDef("thd_hoc",8,{t:"Đứa trẻ bị phạt",w:"v",sj:"đứa trẻ bị ph�
   {n:"Sang thức trông nó",c:{suc:-4},w:{duc:4},wx:"đứa trẻ nắm tay thầy",lx:"thức trông trò cả đêm, kiệt sức",go:A=>{rdRel(A,"v",6)},rt:"Gần sáng, {n1} hạ sốt, mở mắt gọi: “Thầy.”"},
   {n:"Mời thái y giỏi nhất xem bệnh",c:{bac:-30},o:()=>50+S.mat*3,w:{danh:2},sc:1,wx:"thái y nói không phải do bị phạt",l:{danh:-2},lx:"thái y nói mập mờ, người ta bảo ngươi mời thái y để chạy tội, tiếng tăm sứt mẻ",rt:"Thái y nói: trẻ bị cảm từ ba hôm trước.",rf:"Thái y chỉ nói: “Trẻ con yếu.”"},
   {n:"Ở yên trong cung mình",c:{duc:-2},w:{tamco:1},wx:"không cho {v} cớ",lx:"người ta nói thầy vô tình, tổn đức",rt:"Ngươi chỉ gửi sang một bát cháo."}]},
- x1:{h:"Ai chịu lỗi",w:"emp",t:"Chuyện đến tai Hoàng thượng. Ngài cho gọi ngươi và {v}: “Con trẫm bị đánh trong lớp, sốt trong cung. Lỗi ở ai?”",o:[
+ x1:{h:"Ai chịu lỗi",w:"emp",t:"Chuyện đến tai Hoàng thượng. Ngài cho gọi ngươi và {v}: “Con trẫm bị phạt quỳ trong lớp, về cung thì sốt. Lỗi ở ai?”",o:[
   {n:"Thầy chịu lỗi thay trò",c:{suc:-4},o:A=>40+(A.f.gentle?10:0)+S.duc/6,e:["win","mid"],rt:"Ngươi quỳ nhận hết. {n1} chạy ra quỳ cạnh: “Là con sai.” Hoàng thượng phẩy tay tha cả hai.",rf:"Hoàng thượng phạt bổng ngươi ba tháng, chuyện khép lại."},
   {n:"Tâu thật: trò sai, thầy giữ phép",c:{},o:A=>40+(A.f.strict?15:0)+S.danh/5,e:["win","lose"],lx:"{v} bị bẽ trước vua",rt:"Hoàng thượng gật đầu: “Thầy nghiêm thì trò nên người.”",rf:"Hoàng thượng thấy ngươi cứng, {v} khóc to."},
   {n:"Xin ngài tha cho cả lớp",c:{sung:-2},w:{duc:2},e:"mid",lx:"xin tha mà chẳng rõ trắng đen, Hoàng thượng phật ý",rt:"Hoàng thượng cho lui, không nói thêm."}]}},
  E:{win:{k:1,tag:"Thầy chịu thay trò",w:"v",t:"{n1} từ hôm ấy gọi ngươi là thầy bằng cả tấm lòng. {v} không còn cớ để trách, và lần đầu nàng sai người mang trà sang cảm ơn.",fx:{danh:4,duc:4},go:A=>{rdRel(A,"v",10);return""}},
   mid:{k:0,tag:"Chuyện khép mà chưa lành",t:"Không ai bị phạt nặng. {n1} vẫn đến lớp, nhưng {v} dặn con đừng thân thầy quá.",fx:{duc:1}},
-  lose:{k:-1,tag:"{v} tố ngươi đánh con nàng",t:"{v} kể khắp hậu cung rằng ngươi đánh con nàng đến sốt. Có người tin. Nàng thề không bỏ qua.",fx:{danh:-4,sung:-3},go:A=>{rdOan(A,"v",12);return""}}}});
+  lose:{k:-1,tag:"{v} tố ngươi hành con nàng",t:"{v} kể khắp hậu cung rằng ngươi phạt con nàng đến sốt. Có người tin. Nàng thề không bỏ qua.",fx:{danh:-4,sung:-3},go:A=>{rdOan(A,"v",12);return""}}}});
 
 rdDef("thd_hoc",9,{t:"Bài học đạo lý",w:"emp",sj:"bài giảng Mạnh Tử của ngươi",ok:thdHocOk,cast:thdHocCast,
  g:"Ngươi dạy bọn trẻ một câu của Mạnh Tử: “Dân là quý, xã tắc thứ hai, vua là nhẹ.” Đến bữa tối, {n1} đem câu ấy đọc trước mặt Hoàng thượng. Một câu chữ trong lớp, nay thành chuyện ngoài triều.",
