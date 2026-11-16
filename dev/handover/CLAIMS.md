@@ -38,7 +38,7 @@
 | D53b review | review/opt-pics3-r1 | C | session_011xDdVPyoY1HQLa11JfUnXa | PASS f02abdc41 | 05:45Z 16/11 |
 | D29 finish re-runs | review/schedules3 | C | session_011xDdVRcAbEJXh2PekTYPF4 | RUNNING | 05:50Z 16/11 |
 | servant-system A reviewer (LIVE BUG: household on her room stage) | review/servant-system-r1 | main s10 | (opening) | RUNNING | 16/11 06:00Z |
-| weather-fx-one finisher (shots, FPS, tests → SẴN SÀNG KIỂM) | review/weather-fx-one | main s10 | session_01UV1SzjUEYLKCbbxAiZmT48 | RUNNING | 16/11 06:00Z |
+| weather-fx-one finisher (shots, FPS, tests → SẴN SÀNG KIỂM) | review/weather-fx-one | main s10 | session_01UV1SzjUEYLKCbbxAiZmT48 | READY-FOR-REVIEW f6141594 (worker, this session) | 16/11 07:10Z |
 | scheme-games-port-r1 kit sign-off (jopic grid-auto-rows:max-content) | review/scheme-games-port-r1 | main s10 | — | KIT OK → merge-train-4 | 16/11 06:00Z |
 | owner chat-history search (4 roads per origin, 12–14 chapters) | (report only) | main s9→s10 | session_01UV1SzjEdjQ8f47FqGmmgP3 | RUNNING | 16/11 05:54Z |
 | C44 cloud-save review + SECURITY | review/cloud-save-r1 | D | session_01DgYSWq1uCD8NVh8dB3LBba | PASS 7e187abe | 16/11 06:26Z |
