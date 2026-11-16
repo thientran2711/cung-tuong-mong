@@ -541,7 +541,7 @@ try{if(window.VP&&VP.rules){VP.rules.unshift(["BẢNG ĐIỂM","Bảng định t
    to a scene by the week book's table (j87 KBK_EVRE: thị tẩm, có thai, tin đồn, ốm, ban thưởng…); none → people visiting (kbkEvId default) */
 function kitNewsArtId(m){try{const t=String(m.h||"").replace(/<p class="past">[\s\S]*?<\/p>/,"");const plain=typeof kpPlain==="function"?kpPlain(t):t.replace(/<[^>]+>/g," ");
  if(typeof kbkEvId!=="function"||typeof KBK_EVRE==="undefined")return "news:"+(m.t||"");
- for(const s0 of plain.split(/(?<=[.!?])\s+/)){const s=s0.replace(/^\s*Tai mắt (kể|thấy):\s*/i,"");if(!s.trim())continue;if(/thẻ bài[^.]*lật/i.test(s))return "sys:thi-tam";for(const [re,id] of KBK_EVRE)if(re.test(s))return id}
+ for(const s0 of plain.split(kRx("(?<=[.!?])\\s+",""))){const s=s0.replace(/^\s*Tai mắt (kể|thấy):\s*/i,"");if(!s.trim())continue;if(/thẻ bài[^.]*lật/i.test(s))return "sys:thi-tam";for(const [re,id] of KBK_EVRE)if(re.test(s))return id}
  return kbkEvId("",null)}catch(e){return "news:"+(m.t||"")}}
 function kitEvArt(m){try{if(!m||typeof evArtOf!=="function")return null;let src="",lab="";const pp=m.pp||{};const salt=(typeof S!=="undefined"&&S)?(S.year*100+S.month*3+(S.tuan||0)):0;
  if(m.art)src=m.art;else if(m.stArt&&typeof stArtOf==="function")src=stArtOf.apply(null,m.stArt);

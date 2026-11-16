@@ -367,7 +367,7 @@ function npcAct(v,t){const O=[];const add=(k,w)=>{const a=ACT[k];if(a&&a.ok(v,t)
 /* what her spies see between two other people (owner 11/15 16:55Z "why is a hairpin gift evidence?"): only a MISDEED is evidence
    (poison, musk, charms, framing, bribes, planting, rumours, a tainted gift…); a plain gift, a visit, a quarrel is news only.
    Evidence gets its own line from j78 with its source ("nguồn: tai mắt của ngươi thấy tận mắt"); nothing is glued to the next event. */
-const SEEN_BAD=/(?<![\p{L}])(độc|xạ hương|bùa|hình nhân|vu oan|vu cáo|vu khống|hối lộ|đút lót|cài|lén|tráo|ám hại|hãm hại|làm hại|hại|tung tin|tin đồn|đồn|xô ngã|đẩy|giấu|trộm|giả mạo|tư thông|âm mưu|mưu|kết bè|nói xấu|xúi|phá|cắt xén|bôi nhọ|ám toán|cướp|bán đứng|uy hiếp|tống tiền|bỏ thuốc|ngáng|gièm|chèn ép|bắt nạt|đe dọa|dọa|khai man|phao tin|làm nhục|tố giác|cáo giác|bị lộ|bị bắt|đồ có vấn đề)(?![\p{L}])/iu;
+const SEEN_BAD=kRx("(?<![\\p{L}])(độc|xạ hương|bùa|hình nhân|vu oan|vu cáo|vu khống|hối lộ|đút lót|cài|lén|tráo|ám hại|hãm hại|làm hại|hại|tung tin|tin đồn|đồn|xô ngã|đẩy|giấu|trộm|giả mạo|tư thông|âm mưu|mưu|kết bè|nói xấu|xúi|phá|cắt xén|bôi nhọ|ám toán|cướp|bán đứng|uy hiếp|tống tiền|bỏ thuốc|ngáng|gièm|chèn ép|bắt nạt|đe dọa|dọa|khai man|phao tin|làm nhục|tố giác|cáo giác|bị lộ|bị bắt|đồ có vấn đề)(?![\\p{L}])","iu");
 function seenBad(txt){return SEEN_BAD.test(String(txt||"").replace(/<[^>]+>/g,""))||(/tặng|dâng/.test(String(txt||""))&&!!window.__giftTaint)}
 function seenNPC(v,t,txt){const bad=seenBad(txt);window.__giftTaint=0;if(!txt)return"";if(t===S||v===S)return txt;if(roll(15+S.mat*6)){if(!bad)return `Tai mắt thấy: ${txt}`;evA(S,v,1);return""}return""}
 function npcMonthly(v){let ev="";const cost=k=>5+v.arts[k]*5;

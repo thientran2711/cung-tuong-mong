@@ -542,6 +542,26 @@ Categories (`kitActCat(name)`): hau-ha Hầu hạ · hoc-tap Học tập · giao
 buon-ban Buôn bán · le-nghi Lễ nghi · di-lai Đi lại. Art: square, painterly, same style anchor as portraits, ≤ 60 KB webp.
 Grid rows: every card in a row has the row's height (fitted to content, `grid-auto-rows:auto` + stretch), no empty space from a taller row.
 
+### 14.1 BOOT COVER (`dev/site/kboot.js`, owner 15/11 "Khi vừa bấm vào game, có chừng ít hơn 1 giây hiện khung này")
+- The ONLY screen before the kit exists. From the first paint until the game is built the player sees the title backdrop (KIT §30
+  `KIT_BD.title` art, same positions/veil) with ONE scene panel (§14 frame values) "Cung Tường Mộng" · "Cửa cung đang mở" + a moving bar in
+  the §35 progress-track look; then a .35 s fade to the title / loading screen. Never the bare static markup of p1.html.
+- Inlined at the top of `<head>` by build_site.sh (before rot.js); its small CSS mirrors the kit values because no kit CSS/JS exists yet.
+  If `KIT_BD.title` (jbd.js) or the §14 frame changes, change kboot.js too.
+- Host page (rot.js design canvas): the same cover in the design box until the frame has painted its own.
+- Let go by `kbootDone()` (last `<script>`, assemble.py) only when the game script ran to its end (`window.__ctmBuilt`).
+- WATCHDOG (owner iPad 15/11 "Bị gì đây mới vào game"): script not finished (`data-why=broken`) → failure card "Cửa cung chưa mở được"
+  with "Tải lại" and "Xóa bộ nhớ đệm rồi tải lại" (drops shell caches + service worker; keeps pictures and saves; reloads the whole page, query
+  such as `?room=` kept) and the last error, small. A SLOW open is not a failure (review r1): 15 s → the cover keeps its bar and says
+  "Đường xa, cung đang dựng dần…"; 30 s → the same card with the slow text (`data-why=slow`), and it still lets go the moment the game is ready.
+  Boot errors are kept in localStorage `ctm-boot-err` (last 8).
+- Test: `dev/test/boot-flash.js` (first-paint states + screencast, CPU 4x, slow network), `dev/test/webkit-boot.js`,
+  `dev/test/boot-slow.js` (throttled cold open: never a broken card, cover gone when ready), `dev/test/krx-diff.js` (kRx emulation = native).
+
+### 14.2 OLD-SAFARI RULE — no regex lookbehind literals
+- iPad/iPhone Safari < 16.4 cannot PARSE `(?<=` / `(?<!` in a regex literal: one such literal anywhere = the whole game script dead.
+  Write `kRx("pattern","flags")` (j0): native RegExp where lookbehind works, an emulation elsewhere. `dev/test/webkit-syntax.js` FAILs a literal.
+
 ## 6.2 OPTION CARD = SMALL ACT CARD WITH ITS PICTURE LEFT (owner 15/11 "Hình minh họa cho từng hành động bên trái. Bên phải là thông tin. Tôi nói hoài vậy."; review/opt-pics) — `dev/build/jopic.js` (after jph) + jk4 `kitCompactCSS`
 Markup: dev/handover/refs/owner-option-picture-left.jpg (docs branch). Owner rulings 15/11: keep BOTH act-card forms — the big Hành sự card
 (§6 / §6.1) unchanged; the SMALL card (§43) gets a 3:4 PORTRAIT RECTANGLE picture (never a square crop); every dialog option card is that small card.

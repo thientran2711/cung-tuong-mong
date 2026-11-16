@@ -63,7 +63,7 @@ function knownList(v){const out=[],seen=new Set();if(!v||v===S)return out;
  try{const L=typeof intelOf==="function"?intelOf(v):[];for(let i=L.length-1;i>=0;i--){const x=L[i];if(x.current===false)continue;add(x.fact,x.by&&typeof x.by==="object"?x.by.name:x.by,x.when)}}catch(e){}
  try{kn();for(const n of (S.notes[v.id]||[])){let t=T(n),when="",src="";const m=t.match(/^(T\d+\/\d+ \S+ tuần):\s*/);if(m){when=m[1];t=t.slice(m[0].length)}
    const s2=t.match(/^([^:]{2,30}?) (dò được|kể|báo|nghe được):\s*/);if(s2){src=s2[1]+" "+s2[2];t=t.slice(s2[0].length)}
-   t.split(/(?<=\.)\s+/).forEach(x=>add(x.replace(/\.$/,""),src,when))}}catch(e){}
+   t.split(kRx("(?<=\\.)\\s+","")).forEach(x=>add(x.replace(/\.$/,""),src,when))}}catch(e){}
  return out}
 window.kitKnownList=knownList;
 function knownCol(v,max){const L=knownList(v);if(!L.length)return `<div class="kr3r"><b class="kr3h">Đã biết về ${v.name}</b><p class="kr3none">Chưa biết gì thêm. Dò la, hỏi kẻ hầu để biết.</p></div>`;
