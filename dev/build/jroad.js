@@ -26,9 +26,15 @@ function rdPrev(){try{const r=S.st.f14.re;return r?r.end:""}catch(e){return""}}
 /* the ending key of a given chapter of this road (n = 4..11) */
 function rdEnd(n){try{return (S.st.f14.ends||{})[n]||""}catch(e){return""}}
 /* cast keeper: reuse the road's people; recast only the ones gone (castRv67 picks a new live consort; f = filter) */
-function rdCast(A,keys,f){const K=S.st&&S.st.f14&&S.st.f14.act||{};for(const k of keys){const id=K[k];
-  if(id!=null){A.act[k]=id;if(rv67(A,k))continue;delete A.act[k]}
-  if(!castRv67(A,k,f&&f[k]))return false}return true}
+function rdCast(A,keys,f){const K=S.st&&S.st.f14&&S.st.f14.act||{};for(const k of keys){const id=K[k];let old=null;
+  if(id!=null){A.act[k]=id;if(rv67(A,k))continue;delete A.act[k];try{old=RV(id)}catch(e){}}
+  if(!castRv67(A,k,f&&f[k]))return false;
+  if(old)try{const nv=rv67(A,k);if(nv){const L=`${old.name} ${old.alive?"đã rời cung":"nay đã khuất"}, kẻ nối tay là ${nv.name}.`;(A.rc=A.rc||[]).push(L);log(`<i>${L}</i>`)}}catch(e){}}
+ return true}
+/* a recast person is told to the player (ROAD_MAP §5.2, review road-map-r1 item 4): the line above goes to the log when the chapter opens
+   and heads the chapter's first hồi card ("… nay đã khuất, kẻ nối tay là …") */
+(function(){const p0=PEND.j67;if(!p0)return;PEND.j67=function(p){const r=p0.apply(this,arguments);try{const A=r&&th67(p.t);
+  if(A&&A.rc&&A.rc.length&&!A.i&&typeof r.t==="string"){const i=r.t.indexOf("<br>");if(i>=0)r.t=r.t.slice(0,i+4)+`<i>${A.rc.join(" ")}</i><br>`+r.t.slice(i+4)}}catch(e){console.error(e)}return r}})();
 /* a new life: Phần giữa = the full road when it exists */
 (function(){if(typeof a67init!=="function")return;const i0=a67init;a67init=function(k){const r=i0.apply(this,arguments);
  try{if(!f14())return r;const c=S.st.ch,rd=S.st.f14.road;if(!rd||!rdFull(rd))return r;
@@ -38,10 +44,13 @@ function rdCast(A,keys,f){const K=S.st&&S.st.f14&&S.st.f14.act||{};for(const k o
 /* carry the road's people into the next chapter */
 (function(){const n0=newThread67;newThread67=function(id,kind){const a=ARC67[id];
  if(rdOn()&&a&&(a.o==="rd"||id===S.st.f14.rd)&&a.road!==undefined&&!a.cast){const A=n0.apply(this,arguments);if(A)Object.assign(A.act,S.st.f14.act);return A}
- return n0.apply(this,arguments)}})();
+ const A=n0.apply(this,arguments);
+ /* story names of the .4 arc ({n1}/{n2}, e.g. thd_tho's student) carried across the road (B3 request) */
+ try{if(A&&rdOn()&&a&&a.o==="rd"&&a.road===S.st.f14.rd){const f=S.st.f14;if(!A.n1&&f.n1)A.n1=f.n1;if(!A.n2&&f.n2)A.n2=f.n2}}catch(e){console.error(e)}
+ return A}})();
 /* keep the ending + the cast; chapter .11 closes the origin story */
 (function(){const e0=chEnd67;chEnd67=function(A,E,ign){try{if(rdOn()){const a=ARC67[A.a],rd=S.st.f14.rd;
-  if(a&&(A.a===rd||a.road===rd)){const n=a.rn||BAL.road.first-1;S.st.f14.re={n,end:A.end,k:E.k};S.st.f14.ends[n]=A.end;Object.assign(S.st.f14.act,A.act||{});
+  if(a&&(A.a===rd||a.road===rd)){const n=a.rn||BAL.road.first-1;S.st.f14.re={n,end:A.end,k:E.k};S.st.f14.ends[n]=A.end;Object.assign(S.st.f14.act,A.act||{});if(A.n1)S.st.f14.n1=A.n1;if(A.n2)S.st.f14.n2=A.n2;
    if(n===BAL.road.last)rdFinale(A,E)}}}catch(e){console.error(e)}
  return e0.apply(this,arguments)}})();
 /* the road's finale = the origin's ending of this life (j67 chFinale67 is not run for a full road: its last chapter tells it) */
@@ -65,7 +74,7 @@ setTimeout(()=>{try{if(window.RARE97)for(const d of RD97L)if(!RARE97.defs[d.a])R
   for(let i=P.length-1;i>c.i;i--)if(/^st:tm96[abc]$/.test(P[i])){q.unshift(P[i].slice(3));P.splice(i,1)}q.sort()}}catch(e){console.error(e)}
  return a0.apply(this,arguments)}})();
 (function(){if(typeof a67Month!=="function")return;const m0=a67Month;a67Month=function(){try{if(rdOn()&&!S.dead){const f=S.st.f14,q=f.tmq||[];
-  const X=S.st.X||(S.st.X=[]);const busy=X.some(t=>!t.done&&ARC67[t.a]&&ARC67[t.a].o==="tm");const i=3-q.length;
+  const X=S.st.X||(S.st.X=[]);const busy=X.some(t=>!t.done&&ARC67[t.a]&&ARC67[t.a].o==="tm");const i=BAL.road.tm.length-q.length;
   if(q.length&&!busy&&S.st.ch.n>=BAL.road.tm[Math.min(i,BAL.road.tm.length-1)]){const id=q[0];if(ARC67[id]&&arcOk67(ARC67[id])){const A=newThread67(id,"tm");
     if(A){q.shift();A.due=S.turn+1;pickNext67(A);X.push(A)}}else q.shift()}}}catch(e){console.error(e)}
  return m0.apply(this,arguments)}})();
