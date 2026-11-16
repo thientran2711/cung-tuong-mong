@@ -233,7 +233,7 @@ function rgSwitchOpen(){if(rgCanSwitch()||!rgOn())return;const s=rgSideNow();
  O.push({n:"Thôi",fx:{}});pushModal({t:`Phụ tuyến · ${RGT} · Đổi phe`,who:pMe(),h:`<p>Ngươi đang ${rgSideTag(s)}. Đổi phe thì phe cũ thành kẻ thù, Danh giảm, phe mới phải lấy lòng lại từ đầu.</p>`,opts:O,act:1});showModal()}
 /* outcome effects on the court (host computes; personal effects per player) */
 function rgAmnesty(){for(const v of rgMembers("quyen"))relAdd(v,S,10);rgQAf(15);return "Bệ hạ ân xá cho nhà Tể tướng."}
-function rgPurge(){let n=0;for(const v of rgMembers("quyen")){if(v.queen||rkOf(v)<=0)continue;v.rank=Math.max(0,v.rank-1);relAdd(v,S,-15);n++}return n?`${n} phi tần nhà Tể tướng bị giáng một bậc.`:""}
+function rgPurge(){let n=0;for(const v of rgMembers("quyen")){if(v.queen||rkOf(v)<=0)continue;v.rank=seatDown(v,v.rank-1);relAdd(v,S,-15);n++}return n?`${n} phi tần nhà Tể tướng bị giáng một bậc.`:""}
 function rgDecide(){const W=rgW();if(!W||W.out)return;const p=W.p;W.out=p>=BAL.rg.B?"emp":p<BAL.rg.A?"quyen":"th";if(W.out==="th"&&S.thDead)W.out=p>=(BAL.rg.A+BAL.rg.B)/2?"emp":"quyen";W.at=S.turn;
  const o=W.out;try{if(o==="emp"){tdPowAdd(RGQC,-BAL.rg.loseHouse);tdPowAdd("Hàn lâm",8);tdPowAdd("Lễ bộ",8);if(S.emp)S.emp.mood=Math.max(0,(S.emp.mood||1)-1)}
   else if(o==="quyen"){tdPowAdd(RGQC,BAL.rg.winHouse);tdPowAdd("Hàn lâm",-10);tdPowAdd("Lễ bộ",-10);if(S.emp)S.emp.mood=Math.min(3,(S.emp.mood||1)+1)}
