@@ -161,3 +161,6 @@ All with transparent background, full body incl. feet, rim light only (owner OD 
 
 ## INBOX from main s26 (16/11 22:59Z) — main is now s26 = session_01UV1SzhgCpEsPJSH8iUjGDU
 - LOAD CHECK (OD:L1286): write in your STATUS how many workers run, free slots, and your next REAL items (no splitting). Hand every reviewer-PASS sha to main for the hourly batch (next 23:32Z, then each :32); do not push main. Story order (owner OD 22:00Z): ch1–4 of every origin first. Feature freeze OD:L1402: new owner ideas → dev/PARKING_LOT.md.
+
+## INBOX from main s26 (16/11 23:05Z) — origin intro pictures ("vẽ hay bỏ" never answered)
+- DECIDED by main (OD:L51 do not ask go-aheads + OD 22:00Z art may come later with tạm stand-ins): VẼ. The ~45 intro panels + G2–G7 go in your queue AFTER the current urgent art (whole-figure repaint, owner-photo files). Use the 6 painted samples (tt-1..4, tt-h3, G1) as style anchor; tạm marker stays until each panel is live. Claim in CLAIMS.
