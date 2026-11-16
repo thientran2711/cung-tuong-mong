@@ -4330,11 +4330,15 @@ window.KIT_FIG=KIT_FIG;
    Size = the shared kit CLASS per species (S small / M medium / L large) × the woman body height H of the stage: h = KIT_PET.h[class] (visible height / H).
    Art: img/pet-stage/pet-<key>.webp (cut-out, Foreman C); while a species has none, PLACEHOLDER = the existing transparent pet picture of the pet's growth stage (marked data-ph="1" / class ph).
    kitPetOf(person) reads the already-synced follow data (p.pets / p.petOn) — co-op sends nothing new. Static picture; the only motion is a 1.5 px idle bob under Hiệu ứng "Đầy đủ". */
-const KIT_PET={h:{S:.18,M:.26,L:.34},ov:.5,
+const KIT_PET={h:{S:.24,M:.30,L:.34},ov:.5,
  cls:{meomuop:"S",hoami:"S",tho:"S",cavang:"S",meo:"S",sao:"S",uyenuong:"S",cachep:"S",vet:"S",lyngu:"S",ngoctho:"S",
   cho:"M",sutu:"M",linhmieu:"M",camke:"M",cuuvi:"M",phuong:"M",
   hac:"L",thienma:"L",bachloc:"L",kylan:"L",thanhlong:"L"},img:{}};
 window.KIT_PET=KIT_PET;
+/* KIT 33.9 · 3 PEOPLE + 3 PETS ON ONE STAGE — SAMPLES ONLY, owner has not chosen (review/stage-pets r2). KIT_STAGE3.v: null = today's layout (2 per page + "+N"), "A" = when 3 people stand
+   on the page the right plaque column folds to portrait icons (KIT_STAGE3.colA px wide, text hidden, tap = card) so 3 fit at a readable size, "B" = the column stays and everyone shrinks together
+   down to KIT_STAGE3.hmin (.25) of the full height; in both samples the page keeps 3 slots whenever 3 fit at that floor. Page switch: ?st3=A / ?st3=B or KIT_STAGE3.v = "A" | "B" then j59lay(). */
+const KIT_STAGE3={v:(function(){try{const m=/[?&]st3=([AB])(?:&|$)/.exec(location.search);return m?m[1]:null}catch(e){return null}})(),colA:56,hmin:.25};window.KIT_STAGE3=KIT_STAGE3;
 function kitPetClass(k){try{k=typeof petK==="function"?petK(k):k}catch(e){}return KIT_PET.cls[k]||"M"}
 function kitPetOf(who){try{if(!who)return null;for(const w of [typeof figWho==="function"?figWho(who):null,who.ref,who,who.__kp]){if(w&&typeof w==="object"&&Array.isArray(w.pets)&&typeof tsbPetOn==="function"){const P=tsbPetOn(w);if(P)return P}}}catch(e){}return null}
 function kitPetLoad(src,cb){const c=KIT_PET.img;if(c[src]!==undefined)return c[src];c[src]=null;const im=new Image();im.crossOrigin="anonymous";im.onload=()=>{c[src]={ar:im.naturalWidth/Math.max(1,im.naturalHeight)};if(cb)cb()};im.onerror=()=>{c[src]=false;if(cb)cb()};im.src=src;return null}
@@ -6244,6 +6248,7 @@ function j59lay(){const st=document.getElementById("stage");if(!st||!S)return;co
       no figure is ever placed under a stage panel, at any size, in any place */
    if(kR&&!kR.hidden&&kR.offsetHeight){const q=kR.getBoundingClientRect();/* review/stage-side (owner 16/11 fixed slots): the stage area for people = the stage minus the side column, ALWAYS (not only when the column reaches the heads), so the slots never move when the column grows or folds */if((q.left+q.right)/2>R.left+sW*.5){rr=Math.max(rr,R.right-q.left+6);z.rsv=q.bottom-R.top+4<sH-z.fo}}}catch(e){}return rr};
  const MAXN=3,M=E.length,nAll=M+(me?1:0);
+ {const S3=window.KIT_STAGE3,ico=!!(S3&&S3.v==="A"&&nAll>=3);if(st.classList.contains("k3ico")!==ico){st.classList.toggle("k3ico",ico);if(ico)st.style.setProperty("--kcola",S3.colA+"px");void st.offsetWidth}}
  const leftFor=(z)=>{let ll=8+gL;try{const kL=document.getElementById("kshL");const head=sH-z.fo-Math.min(z.H*maxF,sH-z.fo-topR);
    if(kL&&!kL.hidden&&kL.offsetHeight>4){const q=kL.getBoundingClientRect();if(q.bottom-R.top+4>=head&&(q.left+q.right)/2<R.left+sW*.5)ll=Math.max(ll,q.right-R.left+6)}}catch(e){}return ll};
  const geo=(N,z)=>{const paged=nAll>N;const CW=paged?46:0;/* page-chip gutters: 46 px, 34 on phones so two slots still hold a man (KIT 33.7) */const rr=widthFor(z);const lf=leftFor(z);const pL=lf>8+gL,pR=rr>rightR;const x0=lf+CW;/* a reserved right column that ends above the name row holds the "+N" chip under it: no second gutter */const CWR=paged&&z.rsv&&rr>=CW+8?0:CW;const avail=Math.max(40,sW-x0-rr-CWR);/* review/stage-side (owner 16/11): k people stand at 1/(k+1), 2/(k+1)… of the free width, so N people per page need a spacing of avail/(N+1) (1 person = the whole width) */const sw=kitSlotSw(N,avail);/* KIT 33.7 slot function (jkit) */return{N,paged,CW,rr,xl:lf,pL,pR,limL:x0,limR:x0+avail,x0R:CWR?rr:rr-CW,x0,avail,sw}};
@@ -6260,7 +6265,8 @@ function j59lay(){const st=document.getElementById("stage");if(!st||!S)return;co
     when they do not fit at full height, EVERYONE is scaled down together (same scale, J59HMIN at least) before the page drops a slot */
  let Z=size(tagH),N=Math.max(1,Math.min(MAXN,nAll)),G=geo(N,Z);
  if(!fits(G,Z.H)&&!capOn&&KF.maxPx){capOn=true;Z=size(tagH);G=geo(N,Z)}
- const J59HMIN=()=>N<=2?.32:.62;/* two slots are kept (owner: phone shows 2) by scaling everyone down together further than for 3 */
+ const J59HMIN=()=>N<=2?.32:(window.KIT_STAGE3&&KIT_STAGE3.v?KIT_STAGE3.hmin:.62);/* two slots are kept (owner: phone shows 2) by scaling everyone down together further than for 3 */
+
  while(N>1&&!fits(G,Z.H)){if(fits(G,Z.H*J59HMIN())){let lo=Z.H*J59HMIN(),hi=Z.H;for(let k=0;k<18;k++){const m=(lo+hi)/2;if(fits(G,m))lo=m;else hi=m}Z.H=lo;break}N--;G=geo(N,Z)}
  if(!fits(G,Z.H,1)){/* a stage narrower than ONE whole person: that one person scales down to fit */
   let lo=sH*.15,hi=Z.H;for(let k=0;k<22;k++){const m=(lo+hi)/2;if(fits(G,m,1))lo=m;else hi=m}Z.H=lo}
@@ -22271,6 +22277,9 @@ html body .stage.k3g #sc-t h2{display:block!important;font-size:1.05rem;line-hei
 html body .stage.k3g.k3n #sc-t h2{font-size:.86rem}
 .ksh{display:flex;flex-direction:column;gap:5px;pointer-events:none;min-width:0}
 .ksh[hidden]{display:none!important}
+.stage.k3ico .kshR .k3ct,.stage.k3ico .kshR .k3p,.stage.k3ico .kshR .k3r{display:none!important}
+.stage.k3ico .kshR .k3c{padding:2px;justify-content:center;gap:0}
+html body .stage.k3ico .kshR{width:var(--kcola,56px)!important}
 .kshR{position:absolute;top:8px;right:8px;width:var(--kgrw,150px);min-width:0;max-width:none;z-index:2;align-items:stretch;box-sizing:border-box}
 /* review/stage-side: one narrow column; every plaque is the column width (border-box), names / labels wrap, nothing runs past its edge */
 .kshR *{box-sizing:border-box}.kshR .k3c .k3ct>b{white-space:normal!important;overflow-wrap:anywhere}.kshR .k3c .k3ct{flex:1 1 auto}
@@ -41566,7 +41575,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="19ec8a2edb7e";window.CTM_BUILD=BUILD;
+const BUILD="9e3821052cdb";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

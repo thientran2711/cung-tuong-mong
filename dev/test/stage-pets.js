@@ -19,9 +19,10 @@ const CASES=JSON.parse(process.env.CASES||'[["n1S","vuon",["meomuop"]],["n1M","v
  await sleep(1500);
  await p.evaluate(()=>{window.__forceOrigin='thd';SLOT=3;document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;quiet=false;Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;S.buoi=0;deal();render();
   const kl=document.getElementById('kload');if(kl)kl.remove();document.querySelectorAll('.krbox,#kroul').forEach(e=>e.remove())});
+ await p.evaluate(v=>{if(v)KIT_STAGE3.v=v},process.env.STAGE3||null);
  await sleep(1500);
  await p.addStyleTag({content:'img.figimg,#mefig,#tokens .tok,.kspet{animation:none!important}#kroul,#kload,.kmov,.kmfls,#kpodov,#dawn{display:none!important}'});
- const OUTR={vp:VP,cases:{}};
+ const OUTR={vp:VP,cases:{}};if(process.env.J59DBG){await p.evaluate(()=>{window.__j59dbg=1});p.on('console',m=>{if(/J59TRY/.test(m.text()))console.log(m.text())})}
  const ALL=[];for(const [n,k,pp] of CASES){ALL.push([n+'-base',k,pp.map(()=>null)]);ALL.push([n,k,pp])}
  for(const [name,k,pets] of ALL){const base=/-base$/.test(name);
   const nr=pets.length-1;lg('case '+name);
@@ -31,7 +32,7 @@ const CASES=JSON.parse(process.env.CASES||'[["n1S","vuon",["meomuop"]],["n1M","v
    for(const v of rivals){v.pets=[];v.petOn=-1}S.pets=pets[0]?[mk(pets[0])]:[];S.petOn=pets[0]?0:-1;
    const L=liveRivals(true).slice(0,nr);L.forEach((v,i)=>{Wh[v.id]=k;v.pets=pets[i+1]?[mk(pets[i+1])]:[];v.petOn=pets[i+1]?0:-1});
    S.place="home";used=0;tab="act";goTo(k);await new Promise(r=>setTimeout(r,2500));return true},[k,nr,pets]);
-  await p.waitForFunction(n=>document.querySelectorAll('#stage .kspet').length>=n,base?0:1,{timeout:20000}).catch(()=>lg('no pets after 20s'));await sleep(base?4000:3500);
+  await p.waitForFunction(n=>{if(!n)return true;const v=e=>e&&e.offsetParent!==null&&e.getBoundingClientRect().width>2;const f=[...document.querySelectorAll('#mefig,#tokens .tok img.figimg')].filter(v).length;return document.querySelectorAll('#stage .kspet').length>=Math.min(n,f)},base?0:3,{timeout:30000}).catch(()=>lg('no pets after 20s'));await sleep(base?4000:3500);
   const r=await p.evaluate(async()=>{const st=document.getElementById('stage'),R=st.getBoundingClientRect();
    const vis=e=>e&&e.offsetParent!==null&&getComputedStyle(e).display!=='none'&&e.getBoundingClientRect().width>2;
    const ld=src=>new Promise(res=>{const im=new Image();im.crossOrigin='anonymous';im.onload=()=>res(im);im.onerror=()=>res(null);im.src=src});
@@ -55,6 +56,7 @@ const CASES=JSON.parse(process.env.CASES||'[["n1S","vuon",["meomuop"]],["n1M","v
     res.people.push(rec)}
    return res});
   if(process.env.DBG)console.error(JSON.stringify(await p.evaluate(()=>({img:Object.keys(KIT_PET.img).length,ppl:curPeople().map(x=>x.kind+':'+(x.id||x.name)),vk:S.visit&&S.visit.k,L:liveRivals(true).slice(0,3).map(v=>v.id+'@'+S.where[v.id]),pet:(()=>{try{const P=kitPetOf(S);return P&&P.t}catch(e){return 'ERR '+e.message}})(),kids:[...document.getElementById('stage').children].map(e=>e.id||e.className).slice(0,12),pg:document.getElementById('stage').dataset.j59n,dbg:document.getElementById('stage').dataset.j59dbg,free:document.getElementById('stage').dataset.j59free,errs:window.__e}))));
+  if(process.env.DUMPCOL)console.log('COL',await p.evaluate(()=>{const k=document.getElementById('kshR');return JSON.stringify(window.KIT_STAGE3)+document.getElementById('stage').className+' kgrw='+document.getElementById('stage').style.getPropertyValue('--kgrw')+' n='+curPeople().length+' '+(k?k.getBoundingClientRect().width+'x'+k.getBoundingClientRect().height+' '+k.innerHTML.slice(0,0):'none')}));
   const ck=[];if(base){OUTR.cases[name]={res:r,ck};console.log(name,'N/H/sw/maxW:',r.dbg);continue}const pk=r.people.filter(x=>x.pet);if(pk.length!==r.pets)ck.push(`pets drawn ${r.pets} vs people-with-pet ${pk.length}`);
   r.people.forEach((x,i)=>{if(!x.pet){ck.push(`${x.who} has no pet`);return}
    if(x.pet.coverFace>0.5)ck.push(`${x.who} pet covers FACE band ${x.pet.coverFace}%`);if(x.pet.coverTorso>8)ck.push(`${x.who} pet covers TORSO ${x.pet.coverTorso}%`);
@@ -62,7 +64,8 @@ const CASES=JSON.parse(process.env.CASES||'[["n1S","vuon",["meomuop"]],["n1M","v
    const nx=r.people[i+1];if(nx&&x.pet.vr>nx.vis.l+0.5)ck.push(`${x.who} pet right ${x.pet.vr} reaches neighbour ${nx.vis.l.toFixed(1)}`);
    if(x.pet.vr>r.stage.w+0.5)ck.push(`${x.who} pet outside stage`);if(r.col!=null&&x.pet.vr>r.col+0.5)ck.push(`${x.who} pet under side column ${r.col}`)});
   OUTR.cases[name]={res:r,ck};
+  if(process.env.SHOTS!=='0'){await p.evaluate(async()=>{const i=document.getElementById('scimg');if(!i)return;const m=/url\(["']?([^"')]+)["']?\)/.exec(i.style.backgroundImage||getComputedStyle(i).backgroundImage||'');if(m)await new Promise(r=>{const im=new Image();im.onload=im.onerror=r;im.src=m[1];if(im.complete)r()});for(let k=0;k<60&&!(window.PX&&PX.bg)&&getComputedStyle(i).opacity==='0';k++)await new Promise(r=>setTimeout(r,500))}).catch(()=>lg('scimg not loaded'));await sleep(800)}
   if(process.env.SHOTS!=='0')await p.screenshot({path:`${OUT}/${TAG||'sp'}-${W}x${H}-${name}.jpg`,type:'jpeg',quality:70,timeout:240000})}
  OUTR.errs=errs;fs.writeFileSync(`${OUT}/${TAG||'sp'}-${W}x${H}.json`,JSON.stringify(OUTR,null,1));
- for(const [n,c] of Object.entries(OUTR.cases))if(!/-base$/.test(n))console.log(n,'people',c.res.n,'pets',c.res.pets,c.ck.length?'FAIL '+c.ck.join(' | '):'pass','N/H/sw/maxW/petEx:'+c.res.dbg,c.res.people.map(x=>x.pet?`${x.pet.k}/${x.pet.cls}/h${x.pet.h}/cov${x.pet.cover}%/face${x.pet.coverFace}%/torso${x.pet.coverTorso}%`:'-').join(' '));
+ for(const [n,c] of Object.entries(OUTR.cases))if(!/-base$/.test(n))console.log(n,'people',c.res.n,'pets',c.res.pets,c.ck.length?'FAIL '+c.ck.join(' | '):'pass','body(px):'+c.res.people.map(x=>x.body).join('/'),'col:'+(c.res.col==null?'-':Math.round(c.res.stage.w-c.res.col)),'petpx:'+c.res.people.map(x=>x.pet?Math.round((x.pet.vb-x.pet.vt)):'-').join('/'),'N/H/sw/maxW/petEx:'+c.res.dbg,c.res.people.map(x=>x.pet?`${x.pet.k}/${x.pet.cls}/h${x.pet.h}/cov${x.pet.cover}%/face${x.pet.coverFace}%/torso${x.pet.coverTorso}%`:'-').join(' '));
  console.log('errs',JSON.stringify(errs));await b.close()})();

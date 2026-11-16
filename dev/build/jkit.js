@@ -16,11 +16,15 @@ window.KIT_FIG=KIT_FIG;
    Size = the shared kit CLASS per species (S small / M medium / L large) × the woman body height H of the stage: h = KIT_PET.h[class] (visible height / H).
    Art: img/pet-stage/pet-<key>.webp (cut-out, Foreman C); while a species has none, PLACEHOLDER = the existing transparent pet picture of the pet's growth stage (marked data-ph="1" / class ph).
    kitPetOf(person) reads the already-synced follow data (p.pets / p.petOn) — co-op sends nothing new. Static picture; the only motion is a 1.5 px idle bob under Hiệu ứng "Đầy đủ". */
-const KIT_PET={h:{S:.18,M:.26,L:.34},ov:.5,
+const KIT_PET={h:{S:.24,M:.30,L:.34},ov:.5,
  cls:{meomuop:"S",hoami:"S",tho:"S",cavang:"S",meo:"S",sao:"S",uyenuong:"S",cachep:"S",vet:"S",lyngu:"S",ngoctho:"S",
   cho:"M",sutu:"M",linhmieu:"M",camke:"M",cuuvi:"M",phuong:"M",
   hac:"L",thienma:"L",bachloc:"L",kylan:"L",thanhlong:"L"},img:{}};
 window.KIT_PET=KIT_PET;
+/* KIT 33.9 · 3 PEOPLE + 3 PETS ON ONE STAGE — SAMPLES ONLY, owner has not chosen (review/stage-pets r2). KIT_STAGE3.v: null = today's layout (2 per page + "+N"), "A" = when 3 people stand
+   on the page the right plaque column folds to portrait icons (KIT_STAGE3.colA px wide, text hidden, tap = card) so 3 fit at a readable size, "B" = the column stays and everyone shrinks together
+   down to KIT_STAGE3.hmin (.25) of the full height; in both samples the page keeps 3 slots whenever 3 fit at that floor. Page switch: ?st3=A / ?st3=B or KIT_STAGE3.v = "A" | "B" then j59lay(). */
+const KIT_STAGE3={v:(function(){try{const m=/[?&]st3=([AB])(?:&|$)/.exec(location.search);return m?m[1]:null}catch(e){return null}})(),colA:56,hmin:.25};window.KIT_STAGE3=KIT_STAGE3;
 function kitPetClass(k){try{k=typeof petK==="function"?petK(k):k}catch(e){}return KIT_PET.cls[k]||"M"}
 function kitPetOf(who){try{if(!who)return null;for(const w of [typeof figWho==="function"?figWho(who):null,who.ref,who,who.__kp]){if(w&&typeof w==="object"&&Array.isArray(w.pets)&&typeof tsbPetOn==="function"){const P=tsbPetOn(w);if(P)return P}}}catch(e){}return null}
 function kitPetLoad(src,cb){const c=KIT_PET.img;if(c[src]!==undefined)return c[src];c[src]=null;const im=new Image();im.crossOrigin="anonymous";im.onload=()=>{c[src]={ar:im.naturalWidth/Math.max(1,im.naturalHeight)};if(cb)cb()};im.onerror=()=>{c[src]=false;if(cb)cb()};im.src=src;return null}
