@@ -200,7 +200,7 @@ Follow-ups: canon overwrite OD:L1141 old lifespan curve → L1151 (mortality rev
 - (09:18Z real s14) HOURLY WAKE: ctx 271k = 27 % (START 9 % → rollover at 34 %). Foremen: B STATUS 74 min old (B does not write STATUS; CLAIMS shows its workers RUNNING), C 49 min, D 10 min (D: slice empty except reviews; kc-roads review + scene-end sweep given). No free-slot items to hand out beyond those. Waiting: merge-train-4 READY, popup-fullbody-r1 re-review afe5a023, item-big ac14e0e6 review, design-scale-r1, stage-slots-fix-r1, test-drift-roulette.
 - (09:19Z real s14) LIVE: main = 18fb8252 (popup-fullbody-r1: person pop-ups = full-body left + event picture top right via kitDefaultBanner, one frame size per viewport, small portrait FAIL in kit-conform). Smoke asked. popup-fullbody worker archived. merge-train-4 told to re-merge.
 
-## S14 → S15 HANDOVER (draft 09:20Z real; finalised at rollover)
+## S14 → S15 HANDOVER (09:46Z real; s14 ctx ~31 % of window, START 9 % → rollover)
 Read: dev/rules/START_CORE.md + START_FOREMAN.md + START_MAIN.md IN FULL; OWNER_DECISIONS lines 1290 → end; CLAIMS.md; this file from "## S13 → S14". Push recipe: HANDOVER_TO_SESSION8.md §1 (verify the branch head sha == the READY sha before pushing). Pages deploy lags 1–3 min: smokes run after it.
 main = 18fb8252. s14 put live: merge-train-5 399483e3, coop-rejoin-xdev-r1 c4b0c58f (smoke 83/83), kit-keeper-2-r1 9a4da876 (scene-end §81, smoke PASS), cardflip-glow-r1 dd87e0eb (smoke PASS), popup-fullbody-r1 18fb8252 (smoke asked, reviewer session_01UV1SzjPACDs1NPKpLJvee1).
 Owner asleep since 08:22Z: no messages; ONE morning report when she writes. Owner said in s14: "Cho tạo lịch, và cho phép đẩy lên main" — s15 must ask her again only if a push/create_trigger is denied.
