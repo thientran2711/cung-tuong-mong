@@ -49,12 +49,13 @@ const IEV_NOUN=[
  [/tập chứng cứ|xấp chứng cứ|cuốn sổ|sổ sách|sổ nợ|giấy nợ|văn tự/i,"chungcu"],
  [/(đốt|giữ|dâng|xé|trả|nhận|cất|đọc|mở|gửi|trình|nộp) (lại |hết |cả )?(bức |lá |phong )?thư|thư từ/i,"thu"],[/(đốt|giữ|cất|trả|ném|giặt) (lại |chiếc )?khăn|chiếc khăn/i,"khantay"],[/túi bạc|nén bạc|thỏi bạc|hộp vàng bạc|đút lót|hối lộ/i,"vangbac"]];
 /* ---------- option name → what it does to the item (earliest verb in the name wins) ---------- */
-const IEV_VERB=[["burn",/(?<!đã )(đốt|thiêu|châm lửa|hơ (lên )?lửa)/i],["tear",/(^|\s)xé(?=\s|,|$)/i],["smash",/đập (vỡ|nát|bỏ|tan)|bẻ gãy|bẻ đôi|nghiền nát|đánh vỡ|ném vỡ/i],
+const IEV_VERB=[["burn",kRx("(?<!đã )(đốt|thiêu|châm lửa|hơ (lên )?lửa)","i")],["tear",/(^|\s)xé(?=\s|,|$)/i],["smash",/đập (vỡ|nát|bỏ|tan)|bẻ gãy|bẻ đôi|nghiền nát|đánh vỡ|ném vỡ/i],
  ["pour",/đổ (đi|bỏ|xuống|ra)|hắt (đi|bỏ)/i],["well",/giếng|(ném|thả|vứt) (xuống|vào) (hồ|sông|ao)|xuống hồ|xuống sông/i],["bury",/chôn(?! chặt)/i],
  ["back",/trả (lại|về)(?! cho)|gửi trả|đưa trả|hoàn trả/i],["refuse",/từ chối|khước từ|không nhận|chối từ/i],
  ["give",/dâng|trình (lên|với)?|(^|\s)nộp|giao (cho|nộp|lại|ra)|đưa (cho|lên|tới|đến)|chuyển (cho|tới)|tặng lại|đem (đến|tới|cho|lên)|mang (đến|tới|lên|cho)|chia cho|trả (\S+ ){0,2}cho/i],
  ["use",/(^|\s)uống|ăn (ngay|hết|thử|luôn)|nếm|thoa lên|dùng ngay/i],
- ["keep",/(^|\s)(?<!vờ )nhận(?! (lỗi|tội|sai|phạt|việc|lời|lệnh|thật|ra|nuôi|xét))|(^|\s)giữ(?! (kín|phép|mình|lễ|lời|khoảng|bí mật|miệng|im|thể diện|đèn|gìn|ý|chừng|nghiêm))|(^|\s)cất(?! (lời|tiếng|bước))|mở (thư|ra|xem)|(^|\s)đọc|nhặt|cầm lấy|lấy (thư|lại|về|sổ|khăn)|xem thư|đeo|cài lên/i]];
+ ["keep",kRx("(?<!vờ)(?:^|\\s)nhận(?! (lỗi|tội|sai|phạt|việc|lời|lệnh|thật|ra|nuôi|xét))","i")],/* lookbehind leading (kRx, Safari < 16.4) */
+ ["keep",kRx("(^|\\s)giữ(?! (kín|phép|mình|lễ|lời|khoảng|bí mật|miệng|im|thể diện|đèn|gìn|ý|chừng|nghiêm))|(^|\\s)cất(?! (lời|tiếng|bước))|mở (thư|ra|xem)|(^|\\s)đọc|nhặt|cầm lấy|lấy (thư|lại|về|sổ|khăn)|xem thư|đeo|cài lên","i")]];
 /* option names whose first verb is not what happens to the item shown (the token is kept away, only the note burns) */
 const IEV_OPT=[[/đốt mảnh giấy, cất tín vật/i,"give"]];
 const IEV_DESTROY=["burn","tear","smash","pour","well","bury"];

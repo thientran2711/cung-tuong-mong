@@ -75,7 +75,7 @@ function kpSentences(html){const toks=String(html||"").split(/(<[^>]+>)/);const 
     if(m[1]){const i=stack.map(x=>x.n).lastIndexOf(n);if(i>=0)stack.splice(i,1)}else if(!/\/>$/.test(tk))stack.push({n,o:tk})}cur+=tk;continue}
   /* … and one that ends inside a tag, the next text starting a new sentence ("…nặng.</span> Hoàng hậu …") */
   if(qd===0&&KP_ENDS0.test(kpPlain(cur))&&KP_STARTS.test(tk))cut();
-  const parts=tk.split(/(?<=[.!?]["”)]?)\s+(?=["“(]?[A-ZÀÁẢÃẠĂẮẰẲẴẶÂẤẦẨẪẬĐÈÉẺẼẸÊẾỀỂỄỆÌÍỈĨỊÒÓỎÕỌÔỐỒỔỖỘƠỚỜỞỠỢÙÚỦŨỤƯỨỪỬỮỰỲÝỶỸỴ0-9])/);
+  const parts=tk.split(kRx("(?<=[.!?][\"”)]?)\\s+(?=[\"“(]?[A-ZÀÁẢÃẠĂẮẰẲẴẶÂẤẦẨẪẬĐÈÉẺẼẸÊẾỀỂỄỆÌÍỈĨỊÒÓỎÕỌÔỐỒỔỖỘƠỚỜỞỠỢÙÚỦŨỤƯỨỪỬỮỰỲÝỶỸỴ0-9])",""));
   parts.forEach((p,i)=>{cur+=p;qc(p);if(i<parts.length-1){if(qd===0)cut();else cur+=" "}})}
  if(kpPlain(cur))out.push(cur);const R=out.map(s=>s.trim()).filter(s=>kpPlain(s)&&kpPlain(s)!==".");
  /* the reason of a fact ("Lý do: …", "Vì …:") stays on the fact's row */

@@ -356,7 +356,7 @@ function kbkOptName(m,c){const n=String(c.n||"");if(c.lg)return c.lg;const ctx=k
    - whole numbers only ("−1.76" → "−2"), never a double full stop. */
 function kbkClean(h){try{h=String(h||"").replace(/\s*·\s*(kèm|thành|hỏng|tốn)\s*:[^·<]*(?=·|<|$)/gi,"").replace(/\s*Dùng được ở thẻ nàng \(\d+ cách\)\.?/g,"")
   .replace(/\s*\(Chứng cứ [^()]*?[+\-−]\d+\.?\)\s*/g," ");
-  const fx=s=>s.replace(/([+\-−]?)(\d+)[.,](\d+)(?![\d.,]*\d*[:\/])/g,(m,sg,a,b)=>sg+Math.round(+(a+"."+b))).replace(/(?<!\.)\.\s*\.(?!\.)/g,".").replace(/\s+([.,;:])/g,"$1");
+  const fx=s=>s.replace(/([+\-−]?)(\d+)[.,](\d+)(?![\d.,]*\d*[:\/])/g,(m,sg,a,b)=>sg+Math.round(+(a+"."+b))).replace(kRx("(?<!\\.)\\.\\s*\\.(?!\\.)","g"),".").replace(/\s+([.,;:])/g,"$1");
   return typeof kpMapText==="function"?kpMapText(h,fx):fx(h)}catch(e){return h}}
 function wkBookPages(){const d=wkBookData();const date=kitDate(S.month,S.year,S.tuan);const sea=`${SEASON[S.month-1]}${S.wx?" · "+S.wx.n:""}`;
  const P=[{kind:"cover",title:"Tuần lục",sub:date,note:sea}];

@@ -9,6 +9,84 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
+/* KBOOT — BOOT COVER (owner 15/11 "Khi vừa bấm vào game, có chừng ít hơn 1 giây hiện khung này"; KIT §14.1).
+   Before: while the 4 MB page parsed, the browser painted the bare static markup of p1.html (HUD box, a vertical stat label list, empty
+   panels, the old 11-tab bar) for ~1 s on a warm open and many seconds on a cold one, before any kit CSS/JS existed.
+   Now: from the FIRST paint the player sees only the title backdrop (KIT §30 KIT_BD.title art) with ONE kit scene panel (KIT §14 frame:
+   rgba(255,250,240,.90) + blur, gold hairline, right column in landscape / lower part in portrait): "Cung Tường Mộng" + "Cửa cung đang mở"
+   + a quiet moving bar in the kit progress track (KIT §35 .kprog look). It needs no kit JS: this file is inlined at the top of <head>
+   (build_site.sh, right after rot.js) with its own small CSS that mirrors those kit values — the only screen that exists before the kit.
+   - HOST page (rot.js design canvas): the cover is drawn at once in the design box (same size + transform as the game frame), so the
+     long first download shows the cover, not an empty paper; it is dropped (no fade) the moment the frame has painted its own cover.
+   - GAME document (in the frame, or direct mode): the cover is added before <body> exists, so nothing of the game ever paints first.
+     kbootDone() (called by the last <script> of the page, dev/build/assemble.py) waits two frames (title built; on a device with no picture
+     cache yet, until jload's #kload loading screen is up, at most 1.5 s), then fades the cover out (.35 s) and removes it.
+   - WATCHDOG (owner iPad 15/11 "Bị gì đây mới vào game": stuck on the skeleton): if the game script did not run to its end
+     (window.__ctmBuilt, set by assemble.py) or the game is not ready after 15 s, the panel turns into a failure card: "Cửa cung chưa mở
+     được", buttons "Tải lại" and "Xóa bộ nhớ đệm rồi tải lại" (drops the shell caches + service worker, keeps pictures and saves), and the
+     last error text, small. Errors before the game is ready are kept in localStorage "ctm-boot-err" (last 8) for the coordinator.
+   - automated direct mode (navigator.webdriver, no host, no ?kboot=1): removed at once, no fade, so old tests see the game as before.
+   Backdrop values = KIT_BD.title in dev/build/jbd.js (change both together). Test: dev/test/boot-flash.js. Hook: window.__kbootDone. */
+(function(){var d=document,IMG="https://ctm-img.victoria-tntt.workers.dev/",T=IMG+"img/title-key",inFrame;try{inFrame=window.top!==window}catch(e){inFrame=true}
+ var css="#kboot{position:fixed;top:0;right:0;bottom:0;left:0;z-index:2147483000;overflow:hidden;transition:opacity .35s ease;font-family:'Be Vietnam Pro',system-ui,sans-serif;color:#2a1a12;"+
+  "background:linear-gradient(rgba(245,236,220,0) 56%,rgba(245,236,220,.72)),url("+T+".webp) center top/cover no-repeat,#f3e6d6}"+
+  "#kboot[data-o=l]{background:linear-gradient(90deg,rgba(245,236,220,0) 58%,rgba(245,236,220,.18)),url("+T+"-l.webp) left 25%/cover no-repeat,#f3e6d6}"+
+  "#kboot[data-o=m]{background:linear-gradient(90deg,rgba(245,236,220,0) 58%,rgba(245,236,220,.18)),url("+T+"-m.webp) left center/cover no-repeat,#f3e6d6}"+
+  "#kboot.out{opacity:0;pointer-events:none}"+
+  "#kboot .kbp{position:absolute;left:50%;bottom:6%;transform:translateX(-50%);width:min(440px,86%);box-sizing:border-box;padding:14px 18px 16px;"+
+  "background:rgba(255,250,240,.90);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);border:1px solid #c9a46a;border-radius:14px;box-shadow:0 10px 32px rgba(60,25,10,.28)}"+
+  "#kboot:not([data-o=p]) .kbp{left:auto;right:4%;bottom:auto;top:50%;transform:translateY(-50%);width:min(440px,44%)}"+
+  "#kboot b{display:block;font:700 22px/1.25 'Noto Serif',Georgia,serif;color:#8f5f0c}"+
+  "#kboot small{display:block;margin-top:2px;font-size:13px;color:#6b5643}"+
+  "#kboot i{display:block;position:relative;margin-top:10px;height:8px;border-radius:6px;border:1px solid #d2b071;background:#f6ead6;overflow:hidden;box-shadow:inset 0 1px 2px #3a210f22}"+
+  "#kboot i:after{content:'';position:absolute;top:0;bottom:0;left:0;width:35%;border-radius:6px;background:linear-gradient(90deg,#b0402c,#c98a2a);transform:translateX(-100%);will-change:transform;animation:kbootRun 1.6s ease-in-out infinite}"+
+  /* transform only: runs on the compositor, never makes the busy parser re-layout */
+  /* failure card (watchdog): the kit button look (.kbtn / .kbtn.alt, j79) mirrored, since the kit may never have loaded */
+  "#kboot .kbx{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}#kboot .kbx button{flex:1 1 150px;min-height:42px;padding:8px 14px;border-radius:8px;cursor:pointer;"+
+  "font:700 15px/1.2 'Noto Serif',Georgia,serif;letter-spacing:.02em;color:#fff8e6;background:linear-gradient(#b0402c,#8a2a1e);border:1px solid #6e1d12;box-shadow:inset 0 0 0 1px #f0d07066,0 1px 0 #d9c49a}"+
+  "#kboot .kbx button.alt{background:#fffaf0;color:#2a1a12;border-color:#d2b071;box-shadow:none}"+
+  "#kboot .kbe{margin-top:8px;font:11px/1.35 ui-monospace,monospace;color:#6b5643;max-height:4.2em;overflow:hidden;word-break:break-word}#kboot.fail i{display:none}"+
+  "@keyframes kbootRun{to{transform:translateX(286%)}}@media (prefers-reduced-motion:reduce){#kboot i:after{animation:none;transform:none;width:30%}#kboot{transition:none}}";
+ function shape(w,h){return w<h?"p":w/h<=1.4?"m":"l"}
+ function make(w,h){if(!d.getElementById("kboot-css")){var s=d.createElement("style");s.id="kboot-css";s.textContent=css;(d.head||d.documentElement).appendChild(s)}
+  var c=d.createElement("div");c.id="kboot";c.setAttribute("aria-busy","true");c.setAttribute("data-o",shape(w,h));
+  c.innerHTML='<div class="kbp" role="status"><b>Cung Tường Mộng</b><small>Cửa cung đang mở</small><i></i></div>';return c}
+ /* HOST (rot.js calls this with the design box it fits like the frame) */
+ window.__kbootHost=function(box,w,h){var c=make(w,h);box.appendChild(c);window.__kbootHostDrop=function(){if(c.parentNode)c.parentNode.removeChild(c);window.__kbootHostDrop=null}};
+ var q=location.search||"";
+ if(!inFrame&&!(/[?&]khost=0/.test(q)||(navigator.webdriver&&!/[?&]khost=1/.test(q))))return;  /* host page: rot.js mounts it */
+ if(!inFrame&&navigator.webdriver&&!/[?&]kboot=1/.test(q)){window.__kbootDone=1;window.kbootDone=function(){};return}
+ var c=make(innerWidth,innerHeight);d.documentElement.appendChild(c);
+ /* errors while booting: kept (localStorage ctm-boot-err, last 8, for the coordinator) and shown small on the failure card */
+ var ERR=[];function keep(t){t=String(t||"").slice(0,300);if(!t)return;ERR.push(t);try{var L=JSON.parse(localStorage.getItem("ctm-boot-err")||"[]");
+   L.push({t:t,at:new Date().toISOString(),ua:navigator.userAgent.slice(0,160),done:!!window.__kbootDone});localStorage.setItem("ctm-boot-err",JSON.stringify(L.slice(-8)))}catch(e){}}
+ window.addEventListener("error",function(e){if(!window.__kbootDone)keep((e.message||"error")+(e.filename?" @"+String(e.filename).split("/").pop().split("?")[0]+":"+e.lineno+":"+e.colno:""))});
+ window.addEventListener("unhandledrejection",function(e){if(!window.__kbootDone){var r=e.reason;keep("promise: "+(r&&(r.message||r.name)||r))}});
+ /* WATCHDOG: never leave the player on the cover (or the bare skeleton): the game script did not finish, or 15 s passed → a failure card */
+ function fail(why){if(window.__kbootDone||c.classList.contains("fail"))return;c.classList.add("fail");c.setAttribute("aria-busy","false");
+  var p=c.querySelector(".kbp");p.innerHTML='<b>Cửa cung chưa mở được</b><small>'+(why==="slow"?"Đường xa, cung chưa dựng xong. Có thể đợi thêm, hoặc tải lại.":"Máy này chưa mở được bản game. Xin tải lại; nếu vẫn vậy, xóa bộ nhớ đệm rồi tải lại (sổ đã ghi vẫn giữ nguyên).")+'</small>'+
+   '<div class="kbx"><button type="button" data-kb="re">Tải lại</button><button type="button" class="alt" data-kb="clr">Xóa bộ nhớ đệm rồi tải lại</button></div>'+
+   (ERR.length?'<div class="kbe"></div>':"");var e=p.querySelector(".kbe");if(e)e.textContent=ERR.slice(-2).join(" · ");
+  p.addEventListener("click",function(ev){var b=ev.target.closest&&ev.target.closest("[data-kb]");if(!b)return;b.disabled=true;
+   if(b.getAttribute("data-kb")==="re")return location.reload();
+   /* the stale-shell risk: drop the app-shell caches and the service worker; pictures (ctm-assets, content-keyed) and saves stay */
+   var jobs=[];try{if(window.caches)jobs.push(caches.keys().then(function(K){return Promise.all(K.filter(function(k){return k!=="ctm-assets"}).map(function(k){return caches.delete(k)}))}))}catch(x){}
+   try{if(navigator.serviceWorker)jobs.push(navigator.serviceWorker.getRegistrations().then(function(R){return Promise.all(R.map(function(r){return r.unregister()}))}))}catch(x){}
+   Promise.all(jobs).then(null,function(){}).then(function(){var u=location.href.replace(/([?&])kfresh=\d+&?/,"$1").replace(/[?&]$/,"");location.replace(u+(u.indexOf("?")<0?"?":"&")+"kfresh="+Date.now())})})}
+ var dog=setTimeout(function(){fail("slow")},15000);
+ /* the host may drop its copy once this one has painted */
+ if(inFrame)requestAnimationFrame(function(){requestAnimationFrame(function(){try{parent.__kbootHostDrop&&parent.__kbootHostDrop()}catch(e){}})});
+ var done=false;
+ window.kbootDone=function(){if(done)return;done=true;
+  /* the game script stopped before its end (a parse error on an older browser, or a throw): fail now, never show the half-built page */
+  if(!window.__ctmBuilt){keep("bản game dừng giữa chừng (game script did not finish)");return fail("broken")}var t0=Date.now(),first=false,asked=false;
+  /* a device with no picture cache yet gets the loading screen (jload #kload) right after its own caches.has(): wait for it (max 1.5 s)
+     so the title never flashes in between; a returning player goes straight on */
+  try{var K0=window.KLOAD;if(K0&&K0.phase==="check"&&window.caches){asked=true;caches.has("ctm-assets").then(function(h){first=!h;asked=false},function(){asked=false})}}catch(e){asked=false}
+  (function wait(){var K=window.KLOAD;
+   if((asked||first&&K&&K.phase==="check")&&!d.getElementById("kload")&&Date.now()-t0<1500)return requestAnimationFrame(wait);
+   requestAnimationFrame(function(){requestAnimationFrame(function(){if(c.classList.contains("fail"))return;window.__kbootDone=1;clearTimeout(dog);c.classList.add("out");
+    try{parent.__kbootHostDrop&&parent.__kbootHostDrop()}catch(e){}setTimeout(function(){if(c.parentNode)c.parentNode.removeChild(c)},450)})})})()}})();
 /* ONE LAYOUT PER ORIENTATION, SCALED (owner 11/15) — the design canvas. Inlined at the TOP of <head> by build_site.sh, runs before the game.
    The page is a thin HOST: the game runs inside ONE frame (#krotf) whose size is the DESIGN size, scaled uniformly to the screen like a
    resized window, centred, with paper-coloured bars:
@@ -46,24 +124,30 @@
  function narrow(w,h){return w>0&&w<h&&w/h<0.62}
  function lock(){try{var o=screen.orientation,pwa=matchMedia("(display-mode: standalone)").matches||matchMedia("(display-mode: fullscreen)").matches||!!d.fullscreenElement;
   if(o&&o.lock&&pwa&&narrow(innerWidth,innerHeight))o.lock("landscape").catch(function(){})}catch(e){}}
+ /* boot cover (kboot.js, KIT §14.1) in the design box, from the first paint until the frame has painted its own copy */
+ var cw=d.createElement("div");cw.id="kbootw";cw.style.cssText="position:fixed;top:0;left:0;transform-origin:0 0;overflow:hidden;z-index:4";
+ function geo(){var w=window.innerWidth,h=window.innerHeight;if(!w||!h)return null;
+  var nr=narrow(w,h),land=nr||w>=h,DW=land?1180:755,DH=land?820:1000,AW=nr?h:w,AH=nr?w:h,s=Math.min(AW/DW,AH/DH),ox=(AW-DW*s)/2,oy=(AH-DH*s)/2;
+  return{w:w,h:h,nr:nr,DW:DW,DH:DH,s:s,tf:(nr?"translateX("+w+"px) rotate(90deg) ":"")+"translate("+ox.toFixed(2)+"px,"+oy.toFixed(2)+"px) scale("+s.toFixed(4)+")"}}
+ function place(el,g){if(el.style.width!==g.DW+"px")el.style.width=g.DW+"px";if(el.style.height!==g.DH+"px")el.style.height=g.DH+"px";el.style.transform=g.tf}
+ (function(){var g=geo();if(!g||!window.__kbootHost)return;place(cw,g);d.documentElement.appendChild(cw);window.__kbootHost(cw,g.DW,g.DH);
+  var keep=window.__kbootHostDrop;window.__kbootHostDrop=function(){if(keep)keep();if(cw.parentNode)cw.parentNode.removeChild(cw)};
+  window.addEventListener("resize",function(){var g2=geo();if(g2&&cw.parentNode)place(cw,g2)})})();
  function go(){if(!d.body)d.documentElement.appendChild(d.createElement("body"));
   var f=d.createElement("iframe");f.id="krotf";f.title="Cung Tường Mộng";f.setAttribute("allow","fullscreen; autoplay; screen-wake-lock");
   f.src=location.pathname+(q?q+"&":"?")+"krot=1"+location.hash;
   var lastW=0,lastH=0;
   function typing(){try{var a=f.contentDocument&&f.contentDocument.activeElement;return a&&/^(INPUT|TEXTAREA|SELECT)$/.test(a.tagName)&&!/range|checkbox|radio|button/.test(a.type||"")}catch(e){return false}}
-  function fit(){var w=window.innerWidth,h=window.innerHeight;if(!w||!h)return;
+  function fit(){var g=geo();if(!g)return;var w=g.w,h=g.h;
    /* the on-screen keyboard shrinks the height while typing: keep the scale (same width) so the page does not jump */
    if(typing()&&w===lastW&&h<lastH)return;lastW=w;lastH=h;
-   var nr=narrow(w,h),land=nr||w>=h,DW=land?1180:755,DH=land?820:1000,AW=nr?h:w,AH=nr?w:h,s=Math.min(AW/DW,AH/DH),ox=(AW-DW*s)/2,oy=(AH-DH*s)/2;
-   K.rotated=nr;K.s=+s.toFixed(4);K.dw=DW;K.dh=DH;
-   if(f.style.width!==DW+"px")f.style.width=DW+"px";if(f.style.height!==DH+"px")f.style.height=DH+"px";
-   f.style.transform=(nr?"translateX("+w+"px) rotate(90deg) ":"")+"translate("+ox.toFixed(2)+"px,"+oy.toFixed(2)+"px) scale("+s.toFixed(4)+")";
-   if(nr)tip()}
+   K.rotated=g.nr;K.s=+g.s.toFixed(4);K.dw=g.DW;K.dh=g.DH;place(f,g);
+   if(g.nr)tip()}
   var tipped=false;function tip(){if(tipped)return;tipped=true;var seen=false;try{seen=localStorage.getItem("ctm-rot-tip")==="1";localStorage.setItem("ctm-rot-tip","1")}catch(e){}if(seen)return;
    var t=d.createElement("div");t.id="krottip";t.innerHTML="<i>⟳</i>Xoay ngang điện thoại để chơi";d.body.appendChild(t);setTimeout(function(){t.style.opacity="0";setTimeout(function(){t.remove()},600)},4200)}
   fit();d.body.appendChild(f);var rq=0,re=function(){cancelAnimationFrame(rq);rq=requestAnimationFrame(fit)};
   window.addEventListener("resize",re);window.addEventListener("orientationchange",function(){setTimeout(fit,250)});if(window.visualViewport)window.visualViewport.addEventListener("resize",re);
-  lock();d.addEventListener("fullscreenchange",lock);f.addEventListener("load",function(){try{f.contentWindow.focus()}catch(e){}})}
+  lock();d.addEventListener("fullscreenchange",lock);f.addEventListener("load",function(){try{f.contentWindow.focus()}catch(e){}if(window.__kbootHostDrop)window.__kbootHostDrop()})}
  d.addEventListener("DOMContentLoaded",function(){var x=d.getElementById("krotx");if(x)x.remove();go()})})();
 </script>
 </head>
@@ -570,7 +654,8 @@ body[data-sea] .curtain{background:linear-gradient(var(--sa2),#f5ecdc)}body[data
   <section class="panel" id="panel"></section>
   <nav class="bar">
     <div class="tabs" role="tablist" id="tabs">
-      <button data-tab="act" data-s="Việc" role="tab">Hành động</button><button data-tab="go" data-s="Bản đồ" role="tab">Bản đồ</button><button data-tab="rv" data-s="Phi tần" role="tab">Phi tần</button><button data-tab="rel" data-s="Quan hệ" role="tab">Quan hệ</button><button data-tab="fac" data-s="Phe" role="tab">Phe phái</button><button data-tab="staff" data-s="Kẻ hầu" role="tab">Kẻ hầu</button><button data-tab="kid" data-s="Con" role="tab">Con cái</button><button data-tab="inv" data-s="Rương" role="tab">Rương đồ</button><button data-tab="art" data-s="Tài nghệ" role="tab">Tài nghệ</button><button data-tab="story" data-s="Truyện" role="tab">Tuyến truyện</button><button data-tab="log" data-s="Nhật ký" role="tab">Nhật ký</button>
+      <!-- labels = the final names (j84 TABS); the boot cover (KIT §14.1) hides this markup until the kit has built the bar -->
+      <button data-tab="act" data-s="Hành sự" role="tab">Hành sự</button><button data-tab="go" data-s="Dư đồ" role="tab">Dư đồ</button><button data-tab="rv" data-s="Phi tần" role="tab">Phi tần</button><button data-tab="rel" data-s="Ân oán" role="tab">Ân oán</button><button data-tab="fac" data-s="Phe" role="tab">Phe phái</button><button data-tab="staff" data-s="Cung nhân" role="tab">Cung nhân</button><button data-tab="kid" data-s="Hoàng tự" role="tab">Hoàng tự</button><button data-tab="inv" data-s="Tư trang" role="tab">Tư trang</button><button data-tab="art" data-s="Tài nghệ" role="tab">Tài nghệ</button><button data-tab="story" data-s="Mệnh" role="tab">Mệnh truyện</button><button data-tab="log" data-s="Sổ ghi" role="tab">Sổ ghi</button>
     </div>
     <button class="main" id="next">Sang buổi</button>
   </nav>
@@ -616,6 +701,46 @@ document.addEventListener("error",e=>{const el=e.target;if(!el||el.tagName!=="IM
  if(!el.__cdnTry){el.__cdnTry=1;e.stopImmediatePropagation();K.retries++;setTimeout(()=>{el.src=s+(s.includes("?")?"&":"?")+"r=1"},1500);return}
  if(!el.onerror&&!el.hasAttribute("onerror")){K.hidden++;el.style.visibility="hidden"}},true);
 })();
+/* kRx(src, flags) — a RegExp that may use LOOKBEHIND (?<= (?<! and still runs on older iPad/iPhone Safari (< 16.4), which cannot even PARSE
+   a lookbehind (owner iPad 15/11 "Bị gì đây mới vào game": one lookbehind literal anywhere in the one game <script> = the whole game dead,
+   the raw skeleton stays). RULE: never write a lookbehind as a /literal/ — write kRx("…","flags") (dev/test/webkit-syntax.js FAILs a literal).
+   Where the browser supports lookbehind kRx returns the native RegExp (identical behaviour). Elsewhere:
+   - lookbehinds only at the START of the pattern → an object with exec / test / [Symbol.replace|split|match] that runs the rest of the pattern
+     and keeps a match only when the text before it passes each lookbehind (tested as (?:X)$ on the text before the match);
+   - lookbehinds elsewhere → the same pattern with them removed (close enough for those rare word checks). */
+const KRX_LB=(()=>{try{return new RegExp("(?<=a)b").test("ab")}catch(e){return false}})();
+function kRxStrip(p){let out="",st=[],cls=false;const inLB=()=>st.includes(true);
+ for(let i=0;i<p.length;i++){const c=p[i];
+  if(c==="\\"){if(!inLB())out+=c+(p[i+1]||"");i++;continue}
+  if(cls){if(c==="]")cls=false;if(!inLB())out+=c;continue}
+  if(c==="["){cls=true;if(!inLB())out+=c;continue}
+  if(c==="("){st.push(/^\(\?<[=!]/.test(p.slice(i)));if(!inLB())out+=c;continue}
+  if(c===")"){const lb=st.pop();if(!lb&&!inLB())out+=c;continue}
+  if(!inLB())out+=c}
+ return out}
+function kRx(src,flags){return KRX_LB?new RegExp(src,flags||""):kRxEmu(src,flags)}
+function kRxEmu(src,flags){flags=flags||"";
+ const lbs=[];let rest=src,m;
+ while((m=/^\(\?<([=!])/.exec(rest))){let d=0,i=0,cls=false;for(;i<rest.length;i++){const c=rest[i];if(c==="\\"){i++;continue}if(cls){if(c==="]")cls=false;continue}if(c==="[")cls=true;else if(c==="(")d++;else if(c===")"&&--d===0)break}
+  lbs.push({neg:m[1]==="!",re:new RegExp("(?:"+rest.slice(4,i)+")$",flags.replace(/[gy]/g,""))});rest=rest.slice(i+1)}
+ if(/\(\?<[=!]/.test(rest))rest=kRxStrip(rest);
+ if(!lbs.length)return new RegExp(rest,flags);
+ const G=flags.includes("g"),core=new RegExp(rest,flags.replace(/[gy]/g,"")+"g");
+ const ok=(s,i)=>{const pre=s.slice(0,i);return lbs.every(l=>l.re.test(pre)!==l.neg)};
+ const R={source:src,flags,global:G,lastIndex:0,
+  exec(s){s=String(s);core.lastIndex=G?R.lastIndex:0;let x;while((x=core.exec(s))){if(ok(s,x.index)){if(G)R.lastIndex=core.lastIndex;return x}core.lastIndex=x.index+1}if(G)R.lastIndex=0;return null},
+  test(s){return !!R.exec(s)},
+  all(s){const L=[];core.lastIndex=0;let x;while((x=core.exec(s))){if(ok(s,x.index)){L.push(x);if(!x[0].length)core.lastIndex++}else core.lastIndex=x.index+1}return L},
+  [Symbol.replace](s,rep){s=String(s);const L=G?R.all(s):[R.exec(s)].filter(Boolean);if(!G)R.lastIndex=0;let out="",at=0;
+   for(const x of L){const g=x.slice(1);let r;
+    if(typeof rep==="function")r=String(rep(x[0],...g,x.index,s));
+    else r=String(rep).replace(/\$(\$|&|`|'|\d{1,2})/g,(t,k)=>k==="$"?"$":k==="&"?x[0]:k==="`"?s.slice(0,x.index):k==="'"?s.slice(x.index+x[0].length):(+k>0&&+k<=g.length?(g[+k-1]==null?"":g[+k-1]):t));
+    out+=s.slice(at,x.index)+r;at=x.index+x[0].length}
+   return out+s.slice(at)},
+  [Symbol.split](s,lim){s=String(s);const out=[];let at=0;for(const x of R.all(s)){if(!x[0].length&&(x.index===0||x.index>=s.length))continue;if(x.index<at)continue;out.push(s.slice(at,x.index),...x.slice(1));at=x.index+x[0].length}out.push(s.slice(at));return lim==null?out:out.slice(0,lim)},
+  [Symbol.match](s){s=String(s);if(!G)return R.exec(s);const L=R.all(s).map(x=>x[0]);return L.length?L:null}};
+ return R}
+
 /* ===================== ONE UI KIT (every screen builds from these pieces only) =====================
    portrait frame ...... pcPort(f,col,status) / pframe(f) / pframeArt(src)   rank ground by f.rk (rk-c0..c7, th, emp, sv0-4, eu0-3, off, kid, cold)
    face + name chip .... mdH(face,"xs|sm|big")  (small round avatar, also rank ground)
@@ -1873,7 +1998,7 @@ function npcAct(v,t){const O=[];const add=(k,w)=>{const a=ACT[k];if(a&&a.ok(v,t)
 /* what her spies see between two other people (owner 11/15 16:55Z "why is a hairpin gift evidence?"): only a MISDEED is evidence
    (poison, musk, charms, framing, bribes, planting, rumours, a tainted gift…); a plain gift, a visit, a quarrel is news only.
    Evidence gets its own line from j78 with its source ("nguồn: tai mắt của ngươi thấy tận mắt"); nothing is glued to the next event. */
-const SEEN_BAD=/(?<![\p{L}])(độc|xạ hương|bùa|hình nhân|vu oan|vu cáo|vu khống|hối lộ|đút lót|cài|lén|tráo|ám hại|hãm hại|làm hại|hại|tung tin|tin đồn|đồn|xô ngã|đẩy|giấu|trộm|giả mạo|tư thông|âm mưu|mưu|kết bè|nói xấu|xúi|phá|cắt xén|bôi nhọ|ám toán|cướp|bán đứng|uy hiếp|tống tiền|bỏ thuốc|ngáng|gièm|chèn ép|bắt nạt|đe dọa|dọa|khai man|phao tin|làm nhục|tố giác|cáo giác|bị lộ|bị bắt|đồ có vấn đề)(?![\p{L}])/iu;
+const SEEN_BAD=kRx("(?<![\\p{L}])(độc|xạ hương|bùa|hình nhân|vu oan|vu cáo|vu khống|hối lộ|đút lót|cài|lén|tráo|ám hại|hãm hại|làm hại|hại|tung tin|tin đồn|đồn|xô ngã|đẩy|giấu|trộm|giả mạo|tư thông|âm mưu|mưu|kết bè|nói xấu|xúi|phá|cắt xén|bôi nhọ|ám toán|cướp|bán đứng|uy hiếp|tống tiền|bỏ thuốc|ngáng|gièm|chèn ép|bắt nạt|đe dọa|dọa|khai man|phao tin|làm nhục|tố giác|cáo giác|bị lộ|bị bắt|đồ có vấn đề)(?![\\p{L}])","iu");
 function seenBad(txt){return SEEN_BAD.test(String(txt||"").replace(/<[^>]+>/g,""))||(/tặng|dâng/.test(String(txt||""))&&!!window.__giftTaint)}
 function seenNPC(v,t,txt){const bad=seenBad(txt);window.__giftTaint=0;if(!txt)return"";if(t===S||v===S)return txt;if(roll(15+S.mat*6)){if(!bad)return `Tai mắt thấy: ${txt}`;evA(S,v,1);return""}return""}
 function npcMonthly(v){let ev="";const cost=k=>5+v.arts[k]*5;
@@ -5705,7 +5830,7 @@ if(typeof porOf==="function")(function(){const p0=porOf;porOf=function(who,fb){c
 /* audit j54: the round face in the princess / suitor rows is a block (display:grid) and sat on a line of its own; inline like j53's rows */
 (function(){const st=document.createElement("style");st.textContent=".h54r>span>.md,.h54box .h54r .md{display:inline-grid;vertical-align:middle}.h54r>span{line-height:1.5}";document.head.appendChild(st)})();
 /* bottom tabs, no truncated text and one treatment for all: every label on ONE line at every width. Below 1280px every tab shows
-   its short label (data-s: Việc, Bản đồ, Phi tần, Quan hệ, Phe, Kẻ hầu, Con, Rương, Tài nghệ, Truyện, Nhật ký; servant mode sets
+   its short label (data-s: Hành sự, Dư đồ, Phi tần, Ân oán, Phe, Cung nhân, Hoàng tự, Tư trang, Tài nghệ, Mệnh, Sổ ghi (j84 TABS); servant mode sets
    its own), at full width the long label. One font size for the whole bar: shrunk together (never per tab) until the widest label
    fits its column (columns = number of visible tabs, two rows on phones), re-measured on resize and whenever the labels change. */
 (function(){const X="html body #tabs.tabs button";const st=document.createElement("style");st.textContent=
@@ -6275,6 +6400,7 @@ document.addEventListener("change",e=>{const t=e.target;if(!t||!t.classList||!t.
    Entry: p / l = portrait / wide-landscape art; m = 4:3 art (optional, else l); pos / posl = background-position; grad / gradl = soft veil over the art (optional); col = ground colour.
    posm / gradm = the 4:3 tier's own position / veil (else those of l). Nobody else writes `background:url(...)` for a backdrop: add an entry here. */
 const KIT_BD={
+ /* title: the boot cover dev/site/kboot.js (KIT §14.1, painted before any script) mirrors these values: change both together */
  title:{sel:"#title.title",p:"https://ctm-img.victoria-tntt.workers.dev/img/title-key.webp",l:"https://ctm-img.victoria-tntt.workers.dev/img/title-key-l.webp",m:"https://ctm-img.victoria-tntt.workers.dev/img/title-key-m.webp",pos:"center top",posl:"left 25%",posm:"left center",col:"#f3e6d6",
   grad:"linear-gradient(rgba(245,236,220,0) 56%,rgba(245,236,220,.72))",gradl:"linear-gradient(90deg,rgba(245,236,220,0) 58%,rgba(245,236,220,.18))"},
  reborn:{p:"https://ctm-img.victoria-tntt.workers.dev/img/bg-reborn-p.webp",l:"https://ctm-img.victoria-tntt.workers.dev/img/bg-reborn-l.webp",col:"#e9dcc8",
@@ -8900,7 +9026,7 @@ function rsn6(rows){return rows.map(r=>String(r[1]).replace(/\s*\(.*\)\s*/,"").r
 (function(){if(typeof birthP!=="function")return;const b0=birthP;birthP=function(p){const r=b0.apply(this,arguments);try{if(typeof r==="string")return r.replace(/((?:Được|[^.]* được) tấn phong [^.]+)\. /,"$1. Lý do: sinh hạ hoàng tử (mẹ có hoàng tử, dưới bậc Quý phi, được thăng một bậc). ")}catch(e){}return r}})();
 (function(){if(typeof wkSummary!=="function")return;wkSummary=function(){const s=S.wkSnap||wkSnap();const n=Math.max(0,Math.min(S.logs.length,(S.logSeq||0)-(s.seq||0)));
  const L0=S.logs.slice(0,n).map(plain).filter(x=>x&&!/^Xin xăm|^Gieo lại|^Đến /.test(x));const SEN=[];
- for(const x of L0)for(const t of x.split(/(?<=[.!?])\s+/)){const u=t.trim();if(!u)continue;if(/^Lý do:/.test(u)&&SEN.length){SEN[SEN.length-1].why=u;continue}if(!SEN.some(o=>o.t===u))SEN.push({t:u})}
+ for(const x of L0)for(const t of x.split(kRx("(?<=[.!?])\\s+",""))){const u=t.trim();if(!u)continue;if(/^Lý do:/.test(u)&&SEN.length){SEN[SEN.length-1].why=u;continue}if(!SEN.some(o=>o.t===u))SEN.push({t:u})}
  const H=[["Thăng giáng",/tấn phong|sắc phong|được phong|lập .* Hoàng hậu|bị giáng|bị phế|lãnh cung|cấm túc/i,4],["Sinh tử",/sinh hạ|sinh đôi|băng hà|qua đời|chết|sảy thai|khó sinh/i,3],
   ["Kẻ nhắm vào ngươi",/ngươi.*(bị|trúng)|định .*(ngươi|của ngươi)|tố giác ngươi|vu .*ngươi|nhắm vào ngươi/i,3],["Ban thưởng, đồ vật",/ban thưởng|ban cho|nhận được|được tặng|mua /i,2]];
  const groups=H.map(h=>[h[0],[]]);const other=[];
@@ -11011,7 +11137,7 @@ function kaTitled(s){for(const v of (typeof rivals!=="undefined"?rivals:[])){if(
 const kaN=n=>(n>0?"+":"−")+Math.abs(n);
 function kaSentence(before){const n=Math.max(0,Math.min(S.logs.length,(S.logSeq||0)-before.seq));const L=S.logs.slice(0,n).reverse().map(h=>plain(String(h).replace(/<span class="ld">[^<]*<\/span>/,"")));
  const ok=L.filter(t=>t&&!/→/.test(t)&&!/(thành|hỏng|kèm|tốn|được ngay)\s*:/i.test(t)&&!/\+\d+\.\.\d/.test(t)&&!/^\[/.test(t)&&!/\b(Thành|Hỏng)\.\s*·/.test(t)&&!/(^|\s)có thể\s/.test(t));
- if(!ok.length)return"";const P=ok[0].split(/(?<=[.!?…])\s+(?=[A-ZÀ-Ỹ"“])/);let s=P[0];if(s.length<40&&P[1])s+=" "+P[1];return kaTitled(s)}
+ if(!ok.length)return"";const P=ok[0].split(kRx("(?<=[.!?…])\\s+(?=[A-ZÀ-Ỹ\"“])",""));let s=P[0];if(s.length<40&&P[1])s+=" "+P[1];return kaTitled(s)}
 /* owner 11/15: other people's feelings (ghen / oán of the consorts) are not HER gains or losses — they go to a separate KÈM line,
    collapsed ("12 phi tần ghen thêm 8"), tap to see who; a person she has not met is "người chưa quen" (no name) */
 function kaNamed(v){try{return v===S||typeof k61Named!=="function"||k61Named(v)}catch(e){return true}}
@@ -11197,7 +11323,7 @@ function j78gainTxt(v,E){const A=evidenceActs(v);const tw=whyTime(2);const ok=A.
   if(c&&!prev)J78.ctx={how:`${m.t}: ${plain(c.n)}`,__t:plain(m.h||"")};
   try{return c0.apply(this,arguments)}finally{try{evdSync()}finally{J78.ctx=prev}}}})();
 /* event text is the proof when it names her */
-(function(){const m0=j78mkEvd;j78mkEvd=function(v,c){if(c&&c.__t&&!c.proves){const s=c.__t.split(/(?<=[.!?])\s+/).find(x=>x.includes(v.name));if(s)c=Object.assign({},c,{proves:s.replace(/[.!?]$/,"")})}return m0.call(this,v,c)}})();
+(function(){const m0=j78mkEvd;j78mkEvd=function(v,c){if(c&&c.__t&&!c.proves){const s=c.__t.split(kRx("(?<=[.!?])\\s+","")).find(x=>x.includes(v.name));if(s)c=Object.assign({},c,{proves:s.replace(/[.!?]$/,"")})}return m0.call(this,v,c)}})();
 (function(){const t0=talk;talk=function(oi){const p=S&&curPeople()[popIdx];let a=null;try{a=p&&talkOpts(p)[oi]}catch(e){}const prev=J78.ctx;
   if(a)J78.ctx={how:p.kind==="maid"?`${S.maid.name} được sai đi dò la`:p.kind==="fallen"?`${j78Who(p.ref)} (phế phi) kể chuyện cũ`:a.n};
   try{return t0.apply(this,arguments)}finally{J78.ctx=prev;evdSync()}}})();
@@ -11379,7 +11505,7 @@ function kpSentences(html){const toks=String(html||"").split(/(<[^>]+>)/);const 
     if(m[1]){const i=stack.map(x=>x.n).lastIndexOf(n);if(i>=0)stack.splice(i,1)}else if(!/\/>$/.test(tk))stack.push({n,o:tk})}cur+=tk;continue}
   /* … and one that ends inside a tag, the next text starting a new sentence ("…nặng.</span> Hoàng hậu …") */
   if(qd===0&&KP_ENDS0.test(kpPlain(cur))&&KP_STARTS.test(tk))cut();
-  const parts=tk.split(/(?<=[.!?]["”)]?)\s+(?=["“(]?[A-ZÀÁẢÃẠĂẮẰẲẴẶÂẤẦẨẪẬĐÈÉẺẼẸÊẾỀỂỄỆÌÍỈĨỊÒÓỎÕỌÔỐỒỔỖỘƠỚỜỞỠỢÙÚỦŨỤƯỨỪỬỮỰỲÝỶỸỴ0-9])/);
+  const parts=tk.split(kRx("(?<=[.!?][\"”)]?)\\s+(?=[\"“(]?[A-ZÀÁẢÃẠĂẮẰẲẴẶÂẤẦẨẪẬĐÈÉẺẼẸÊẾỀỂỄỆÌÍỈĨỊÒÓỎÕỌÔỐỒỔỖỘƠỚỜỞỠỢÙÚỦŨỤƯỨỪỬỮỰỲÝỶỸỴ0-9])",""));
   parts.forEach((p,i)=>{cur+=p;qc(p);if(i<parts.length-1){if(qd===0)cut();else cur+=" "}})}
  if(kpPlain(cur))out.push(cur);const R=out.map(s=>s.trim()).filter(s=>kpPlain(s)&&kpPlain(s)!==".");
  /* the reason of a fact ("Lý do: …", "Vì …:") stays on the fact's row */
@@ -13190,7 +13316,7 @@ function kbkOptName(m,c){const n=String(c.n||"");if(c.lg)return c.lg;const ctx=k
    - whole numbers only ("−1.76" → "−2"), never a double full stop. */
 function kbkClean(h){try{h=String(h||"").replace(/\s*·\s*(kèm|thành|hỏng|tốn)\s*:[^·<]*(?=·|<|$)/gi,"").replace(/\s*Dùng được ở thẻ nàng \(\d+ cách\)\.?/g,"")
   .replace(/\s*\(Chứng cứ [^()]*?[+\-−]\d+\.?\)\s*/g," ");
-  const fx=s=>s.replace(/([+\-−]?)(\d+)[.,](\d+)(?![\d.,]*\d*[:\/])/g,(m,sg,a,b)=>sg+Math.round(+(a+"."+b))).replace(/(?<!\.)\.\s*\.(?!\.)/g,".").replace(/\s+([.,;:])/g,"$1");
+  const fx=s=>s.replace(/([+\-−]?)(\d+)[.,](\d+)(?![\d.,]*\d*[:\/])/g,(m,sg,a,b)=>sg+Math.round(+(a+"."+b))).replace(kRx("(?<!\\.)\\.\\s*\\.(?!\\.)","g"),".").replace(/\s+([.,;:])/g,"$1");
   return typeof kpMapText==="function"?kpMapText(h,fx):fx(h)}catch(e){return h}}
 function wkBookPages(){const d=wkBookData();const date=kitDate(S.month,S.year,S.tuan);const sea=`${SEASON[S.month-1]}${S.wx?" · "+S.wx.n:""}`;
  const P=[{kind:"cover",title:"Tuần lục",sub:date,note:sea}];
@@ -18148,7 +18274,7 @@ try{if(window.VP&&VP.rules){VP.rules.unshift(["BẢNG ĐIỂM","Bảng định t
    to a scene by the week book's table (j87 KBK_EVRE: thị tẩm, có thai, tin đồn, ốm, ban thưởng…); none → people visiting (kbkEvId default) */
 function kitNewsArtId(m){try{const t=String(m.h||"").replace(/<p class="past">[\s\S]*?<\/p>/,"");const plain=typeof kpPlain==="function"?kpPlain(t):t.replace(/<[^>]+>/g," ");
  if(typeof kbkEvId!=="function"||typeof KBK_EVRE==="undefined")return "news:"+(m.t||"");
- for(const s0 of plain.split(/(?<=[.!?])\s+/)){const s=s0.replace(/^\s*Tai mắt (kể|thấy):\s*/i,"");if(!s.trim())continue;if(/thẻ bài[^.]*lật/i.test(s))return "sys:thi-tam";for(const [re,id] of KBK_EVRE)if(re.test(s))return id}
+ for(const s0 of plain.split(kRx("(?<=[.!?])\\s+",""))){const s=s0.replace(/^\s*Tai mắt (kể|thấy):\s*/i,"");if(!s.trim())continue;if(/thẻ bài[^.]*lật/i.test(s))return "sys:thi-tam";for(const [re,id] of KBK_EVRE)if(re.test(s))return id}
  return kbkEvId("",null)}catch(e){return "news:"+(m.t||"")}}
 function kitEvArt(m){try{if(!m||typeof evArtOf!=="function")return null;let src="",lab="";const pp=m.pp||{};const salt=(typeof S!=="undefined"&&S)?(S.year*100+S.month*3+(S.tuan||0)):0;
  if(m.art)src=m.art;else if(m.stArt&&typeof stArtOf==="function")src=stArtOf.apply(null,m.stArt);
@@ -22463,7 +22589,7 @@ function newsHTML(){const P=CW.base&&CW.base.P&&CW.base.P[CW.seat];if(!CW.mine||
 function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
 function friendName(){const P=CW.base&&CW.base.P&&CW.base.P[fs()];return P?(P.name||(P.S&&P.S.name)||"hảo hữu"):"hảo hữu"}
 function worldNews(C){if(host())return"";const n=C.W&&C.W.S&&C.W.S.cnews;if(!n||!n.h)return"";
- return String(n.h).split(/(?<=\.\s|<\/span>\s?|<\/b>\s?)/).filter(x=>x.trim()&&!/gươi/.test(x)).join(" ")}
+ return String(n.h).split(kRx("(?<=\\.\\s|<\\/span>\\s?|<\\/b>\\s?)","")).filter(x=>x.trim()&&!/gươi/.test(x)).join(" ")}
 /* review r7 (coop-e2e "week after rebirth advances" / "after week 3 same date"): a socket that drops under load reconnects and gets a
    `room` snapshot; the room handler took "room week > my sent week" as "the merge happened while I was away" and rebuilt the week from
    the room's base even when that merge had ALREADY been applied here (sent = w, merged week w+1 received, then the reconnect): her whole
@@ -22625,7 +22751,7 @@ function knownList(v){const out=[],seen=new Set();if(!v||v===S)return out;
  try{const L=typeof intelOf==="function"?intelOf(v):[];for(let i=L.length-1;i>=0;i--){const x=L[i];if(x.current===false)continue;add(x.fact,x.by&&typeof x.by==="object"?x.by.name:x.by,x.when)}}catch(e){}
  try{kn();for(const n of (S.notes[v.id]||[])){let t=T(n),when="",src="";const m=t.match(/^(T\d+\/\d+ \S+ tuần):\s*/);if(m){when=m[1];t=t.slice(m[0].length)}
    const s2=t.match(/^([^:]{2,30}?) (dò được|kể|báo|nghe được):\s*/);if(s2){src=s2[1]+" "+s2[2];t=t.slice(s2[0].length)}
-   t.split(/(?<=\.)\s+/).forEach(x=>add(x.replace(/\.$/,""),src,when))}}catch(e){}
+   t.split(kRx("(?<=\\.)\\s+","")).forEach(x=>add(x.replace(/\.$/,""),src,when))}}catch(e){}
  return out}
 window.kitKnownList=knownList;
 function knownCol(v,max){const L=knownList(v);if(!L.length)return `<div class="kr3r"><b class="kr3h">Đã biết về ${v.name}</b><p class="kr3none">Chưa biết gì thêm. Dò la, hỏi kẻ hầu để biết.</p></div>`;
@@ -24774,7 +24900,7 @@ function aaNamesFix(){if(!S)return;try{const all=allServ().concat(S.maid?[S.maid
    colours the labels already written as text everywhere (cards, chips, Ân oán, Giao tình, stage, week book, result cards). */
 function kitRel(dir,text){return `<span class="krel krel-${dir==="me"?"me":"them"}" data-vp-skip>${text}</span>`/* final words already: the word fixer keeps "Nàng oán ta" as is */}
 window.kitRel=kitRel;KIT_REL.paint=null;
-const KREL_RE=new RegExp([
+const KREL_RE=kRx([
  "(Ta|ta) → (nàng(?: ta)?|hắn|y|người ấy|[\\p{Lu}][\\p{L}]*(?: [\\p{Lu}][\\p{L}]*){0,2}): thiện cảm","(Ta|ta) tin cậy","tin cậy(?= [\\p{Lu}][\\p{L}]* [\\p{Lu}]?[\\p{L}]*\\s?[+\\-−]?\\d)","tin cậy(?= [+\\-−]?\\d)",
  "(Nàng(?: ta)?|Hắn|Y|Hoàng hậu|Thái hậu|Hoàng thượng|Người ấy|[\\p{Lu}][\\p{L}]*(?: [\\p{Lu}][\\p{L}]*){0,2}) → (ta|người ấy|nàng): thiện cảm","[\\p{Lu}][\\p{L}]*(?: [\\p{Lu}][\\p{L}]*){0,3} với ta","(?:(?:[Nn]àng(?: ta)?|Hoàng hậu|Thái hậu|[Hh]ắn) )?(?:bớt )?oán ta","(?<![\\p{L}])thiện cảm(?= [+\\-−]?\\d|:| của)","(?<![\\p{L}])Thiện cảm(?= [+\\-−]?\\d|:|$| của)","(?<![\\p{L}])(?:[Nn]àng(?: ta)? )?ghen(?= [+\\-−]\\d)"].join("|"),"gu");
 function kitRelPaint(root){if(!root||!root.querySelectorAll)return;const W=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:n=>{const p=n.parentElement;if(!p||/^(SCRIPT|STYLE|TEXTAREA|INPUT|OPTION|SELECT)$/.test(p.tagName)||p.closest(".krel,[data-vp-skip]"))return NodeFilter.FILTER_REJECT;KREL_RE.lastIndex=0;return KREL_RE.test(n.nodeValue)?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT}});
@@ -26506,12 +26632,13 @@ const IEV_NOUN=[
  [/tập chứng cứ|xấp chứng cứ|cuốn sổ|sổ sách|sổ nợ|giấy nợ|văn tự/i,"chungcu"],
  [/(đốt|giữ|dâng|xé|trả|nhận|cất|đọc|mở|gửi|trình|nộp) (lại |hết |cả )?(bức |lá |phong )?thư|thư từ/i,"thu"],[/(đốt|giữ|cất|trả|ném|giặt) (lại |chiếc )?khăn|chiếc khăn/i,"khantay"],[/túi bạc|nén bạc|thỏi bạc|hộp vàng bạc|đút lót|hối lộ/i,"vangbac"]];
 /* ---------- option name → what it does to the item (earliest verb in the name wins) ---------- */
-const IEV_VERB=[["burn",/(?<!đã )(đốt|thiêu|châm lửa|hơ (lên )?lửa)/i],["tear",/(^|\s)xé(?=\s|,|$)/i],["smash",/đập (vỡ|nát|bỏ|tan)|bẻ gãy|bẻ đôi|nghiền nát|đánh vỡ|ném vỡ/i],
+const IEV_VERB=[["burn",kRx("(?<!đã )(đốt|thiêu|châm lửa|hơ (lên )?lửa)","i")],["tear",/(^|\s)xé(?=\s|,|$)/i],["smash",/đập (vỡ|nát|bỏ|tan)|bẻ gãy|bẻ đôi|nghiền nát|đánh vỡ|ném vỡ/i],
  ["pour",/đổ (đi|bỏ|xuống|ra)|hắt (đi|bỏ)/i],["well",/giếng|(ném|thả|vứt) (xuống|vào) (hồ|sông|ao)|xuống hồ|xuống sông/i],["bury",/chôn(?! chặt)/i],
  ["back",/trả (lại|về)(?! cho)|gửi trả|đưa trả|hoàn trả/i],["refuse",/từ chối|khước từ|không nhận|chối từ/i],
  ["give",/dâng|trình (lên|với)?|(^|\s)nộp|giao (cho|nộp|lại|ra)|đưa (cho|lên|tới|đến)|chuyển (cho|tới)|tặng lại|đem (đến|tới|cho|lên)|mang (đến|tới|lên|cho)|chia cho|trả (\S+ ){0,2}cho/i],
  ["use",/(^|\s)uống|ăn (ngay|hết|thử|luôn)|nếm|thoa lên|dùng ngay/i],
- ["keep",/(^|\s)(?<!vờ )nhận(?! (lỗi|tội|sai|phạt|việc|lời|lệnh|thật|ra|nuôi|xét))|(^|\s)giữ(?! (kín|phép|mình|lễ|lời|khoảng|bí mật|miệng|im|thể diện|đèn|gìn|ý|chừng|nghiêm))|(^|\s)cất(?! (lời|tiếng|bước))|mở (thư|ra|xem)|(^|\s)đọc|nhặt|cầm lấy|lấy (thư|lại|về|sổ|khăn)|xem thư|đeo|cài lên/i]];
+ ["keep",kRx("(?<!vờ)(?:^|\\s)nhận(?! (lỗi|tội|sai|phạt|việc|lời|lệnh|thật|ra|nuôi|xét))","i")],/* lookbehind leading (kRx, Safari < 16.4) */
+ ["keep",kRx("(^|\\s)giữ(?! (kín|phép|mình|lễ|lời|khoảng|bí mật|miệng|im|thể diện|đèn|gìn|ý|chừng|nghiêm))|(^|\\s)cất(?! (lời|tiếng|bước))|mở (thư|ra|xem)|(^|\\s)đọc|nhặt|cầm lấy|lấy (thư|lại|về|sổ|khăn)|xem thư|đeo|cài lên","i")]];
 /* option names whose first verb is not what happens to the item shown (the token is kept away, only the note burns) */
 const IEV_OPT=[[/đốt mảnh giấy, cất tín vật/i,"give"]];
 const IEV_DESTROY=["burn","tear","smash","pour","well","bury"];
@@ -27861,7 +27988,7 @@ function kitSfx(m,o){const f=SFXN[m];if(!f)return false;o=o||{};if(o.at){setTime
 window.kitSfx=kitSfx;window.SFXN=SFXN;window.SFXL=SFXL;
 /* words on a card the player reads → the matching sound (first match; one per card). Sounds only, never a voice: voices follow the card's
    tone in j36 (voTone). Whole words where a syllable also lives inside other words (tát ≠ Bồ tát, trượng ≠ trượng phu). */
-const SFXTXT=[[/bị phạt quỳ|phạt quỳ|quỳ ngoài sân|quỳ trước|quỳ suốt|quỳ đến/i,"kneel"],[/\d+ trượng|(đánh|ăn|chịu|phạt)[^.]{0,14}trượng|đánh đòn|ăn roi|vả miệng|(?<!\p{L})(?<!bồ\s)tát(?!\p{L})/iu,"cane"],
+const SFXTXT=[[/bị phạt quỳ|phạt quỳ|quỳ ngoài sân|quỳ trước|quỳ suốt|quỳ đến/i,"kneel"],[/\d+ trượng|(đánh|ăn|chịu|phạt)[^.]{0,14}trượng|đánh đòn|ăn roi|vả miệng/iu,"cane"],[kRx("(?<!\\p{L})(?<!bồ\\s)tát(?!\\p{L})","iu"),"cane"],
  [/cấm túc/i,"doorShut"],[/tịch thu|sung công/i,"confiscate"],[/soát phòng|lục soát|soát quà|khám xét/i,"search"],[/bị cướp|giật lấy|giật mất|bị trộm|lấy cắp/i,"rob"],
  [/thu hồi|lấy mất|đánh mất|mất món/i,"itemLose"],[/sảy thai|mất con|hư thai/i,"wither"],[/kim bạc (hóa |chuyển |đổi )?(đen|màu)|có độc|bị bỏ độc|phát hiện (ra )?độc|thử độc thấy/i,"poisonFound"],
  [/trả lại quà|gửi trả|không dám nhận|khước từ món quà/i,"giftBack"],[/cắt xén|bớt xén|ăn bớt|cắt bớt bổng/i,"skim"],
@@ -28086,7 +28213,7 @@ function mon(m){m=+m;return MON[m-1]||String(m)}
 function cap(s){return s.charAt(0).toUpperCase()+s.slice(1)}
 function date(m,y,tuan,buoi){let s=`Tháng ${mon(m)}, năm thứ ${ord(y)}`;if(tuan!=null&&typeof TUAN!=="undefined")s+=", "+TUAN[tuan];if(buoi!=null&&typeof BUOI!=="undefined")s+=", "+String(BUOI[buoi]).toLowerCase();return s}
 const B="(?<![\\p{L}\\d])",E="(?![\\p{L}\\d])";
-const R=(src,f="g")=>new RegExp(src,f+"u");
+const R=(src,f="g")=>kRx(src,f+"u");/* kRx: lookbehind that also runs on Safari < 16.4 (j0) */
 const srvMode=()=>{try{return typeof isSrv==="function"&&!!S&&isSrv()}catch(e){return false}};/* servant start: "Chủ tin" is the mistress's trust in HER — keep the word */
 /* ordered phrase rules: [regex, replacement|function] */
 const RULES=[
@@ -28131,22 +28258,22 @@ const RULES=[
  /* review 11/15 (sub-odds): relation lines in old event cards "Thái hậu với ngươi -3" read as the one relation word "quý" (KIT §36.3) */
  /* owner 09:55Z (supersedes "quý"): one relation word, "thiện cảm" (KIT_REL): "X với/quý ngươi|ta ±N" → "X → ta: thiện cảm ±N", a bare "nàng quý ngươi" → "thiện cảm" */
  /* review ts-a r6 (same class as j84 "với ngươi"): "X quý ngươi hơn" is a sentence, not a label: "Họ thiện cảm hơn" → "Họ có thiện cảm với ta hơn" */
- [/(?<![\p{L}])quý (?:ngươi|ta) hơn(?![\p{L}])/gu,"có thiện cảm với ta hơn"],
+ [kRx("(?<![\\p{L}])quý (?:ngươi|ta) hơn(?![\\p{L}])","gu"),"có thiện cảm với ta hơn"],
  [/(Thái hậu|Hoàng hậu|Hoàng thượng|Hắn|hắn) (?:với|quý) (?:ngươi|ta)(?=\s*(?:[-+−]?\d|$|:|,|≥|≤| dưới| từ| \())/g,"$1 → ta: thiện cảm"],
  /* owner 15:30Z ("thiện cảm" trơn): with its subject the label keeps it — "Nàng quý ngươi" → "Nàng → ta: thiện cảm"; "Ngươi quý nàng" → "Ta → nàng: thiện cảm"
     (review fix-float r9: same label-only lookaheads as ts-a 11/15 below — "với ngươi" only before a number or ":") */
- [/(?<![\p{L}])([Nn])àng(?: ta)? (?:quý (?:ngươi|ta)(?=\s*(?:[-+−]?\d|$|:|,|≥|≤| dưới| từ| \())|với (?:ngươi|ta)(?=\s*(?:[-+−]?\d|:)))/gu,"$1àng → ta: thiện cảm"],
- [/(?<![\p{L}])(?:[Nn]gươi|Ta) (?:quý nàng(?: ta)?(?=\s*(?:[-+−]?\d|$|:|,|≥|≤| dưới| từ| \())|với nàng(?: ta)?(?=\s*(?:[-+−]?\d|:)))/gu,"Ta → nàng: thiện cảm"],
+ [kRx("(?<![\\p{L}])([Nn])àng(?: ta)? (?:quý (?:ngươi|ta)(?=\\s*(?:[-+−]?\\d|$|:|,|≥|≤| dưới| từ| \\())|với (?:ngươi|ta)(?=\\s*(?:[-+−]?\\d|:)))","gu"),"$1àng → ta: thiện cảm"],
+ [kRx("(?<![\\p{L}])(?:[Nn]gươi|Ta) (?:quý nàng(?: ta)?(?=\\s*(?:[-+−]?\\d|$|:|,|≥|≤| dưới| từ| \\())|với nàng(?: ta)?(?=\\s*(?:[-+−]?\\d|:)))","gu"),"Ta → nàng: thiện cảm"],
  /* ts-a 11/15: "với ngươi" is a relation label only before a number or ":" — "ra tay với ngươi, …", "hẹn ước với ngươi, …",
     "thân với ngươi hơn" are sentences (they became "ra tay thiện cảm," before) and only get "ngươi" → "ta" below */
- [/(?<![\p{L}])(?:[Nn]àng(?: ta)? )?(?:quý (?:ngươi|ta)(?=\s*(?:[-+−]?\d|$|:|,|≥|≤| dưới| từ| \())|với (?:ngươi|ta)(?=\s*(?:[-+−]?\d|:)))/gu,"thiện cảm"],
+ [kRx("(?<![\\p{L}])(?:[Nn]àng(?: ta)? )?(?:quý (?:ngươi|ta)(?=\\s*(?:[-+−]?\\d|$|:|,|≥|≤| dưới| từ| \\())|với (?:ngươi|ta)(?=\\s*(?:[-+−]?\\d|:)))","gu"),"thiện cảm"],
  /* NPC ↔ NPC "thân +7" (j8 giveTo, old logs): the one relation word */
- [/(?<![\p{L}])thân ([+\-−]\s?\d)/gu,"thiện cảm $1"],
- [/^[^“”]*”|“[^”]*(?:”|$)|(?<![\p{L}\p{M}])([Nn])gươi(?![\p{L}\p{M}])/gu,(m,n)=>n?(n==="N"?"Ta":"ta"):m],
+ [kRx("(?<![\\p{L}])thân ([+\\-−]\\s?\\d)","gu"),"thiện cảm $1"],
+ [kRx("^[^“”]*”|“[^”]*(?:”|$)|(?<![\\p{L}\\p{M}])([Nn])gươi(?![\\p{L}\\p{M}])","gu"),(m,n)=>n?(n==="N"?"Ta":"ta"):m],
  /* servant words (owner 11/15 10:10Z, VANPHONG §1; KIT_REL): one word for the servant's attitude to her, one for her trust in him */
  /* another person is "nàng ta", never a bare "nàng" (owner 11/15: a bare "nàng" reads as the player) — kitThey(p) in jaudit */
  [R("(?<!(?:→|oán|quý|với|ghen) )"+B+"([Nn])àng"+E+"(?! ta"+E+")(?! ấy"+E+")(?! (?:oán|ghen|→|quý|thương)"+E+")"),"$1àng ta"],/* "Nàng oán ta", "Nàng → ta", "Ta → nàng" stay (owner 15:30Z: never "Nàng ta oán ta") */
- [/(?<![\p{L}])([Nn])àng ta (?=(?:oán ta|→ ta|ghen)(?![\p{L}]))/gu,"$1àng "],
+ [kRx("(?<![\\p{L}])([Nn])àng ta (?=(?:oán ta|→ ta|ghen)(?![\\p{L}]))","gu"),"$1àng "],
  [R(B+"cần Chủ tin"),m=>srvMode()?m:"cần tin cậy"],[R(B+"Chủ tin với "),m=>srvMode()?m:"tin cậy "],[R(B+"Chủ tin"+E),m=>srvMode()?m:"Ta tin cậy"],[R(B+"chủ tin"+E),m=>srvMode()?m:"tin cậy"],
  ["Lòng cung nữ","Thiện cảm của cung nữ"],[R(B+"Lòng(?= [+\\-−]?\\d)"),"Thiện cảm"],[R(B+"Lòng(?= \\p{Lu}[\\p{L}]*( \\p{Lu}[\\p{L}]*)? [+\\-−]?\\d)"),"Thiện cảm"],
  [R(B+"lòng(?= [+\\-−]\\d)"),"thiện cảm"],[R(B+"lòng (còn )?dưới (?=\\d)"),"thiện cảm $1dưới "],[R(B+"Lòng"+E+"(?=\\s*$)"),"Thiện cảm"]
@@ -28463,7 +28590,7 @@ const kitPhOnCdn=src=>{try{if(typeof KIT_CDNHAVE==="undefined"||!KIT_CDNHAVE)ret
 function kitPhEvId(m){try{if(typeof kitDlgId==="function"){const i=kitDlgId(m);if(i)return i}}catch(e){}return "title:"+kitPhPlain(m&&m.t)}
 function kitPhEvTone(m){let fam="";try{const pid=String(m.pid||"");if(/^e68[A-Za-z]/.test(pid)&&typeof E68I!=="undefined"&&E68I[pid.slice(3)])fam=E68I[pid.slice(3)].fam||""}catch(e){}
  /* id + title + the FIRST sentence only (the rest of the body holds option hints such as "phi tần ghen" that are not the event's tone) */
- const first=(kitPhPlain(m.h).split(/(?<=[.!?…])\s/)[0]||"").slice(0,200);const txt=kitPhEvId(m)+" "+kitPhPlain(m.t)+" "+first;return kitPhTone(txt,{fam})}
+ const first=(kitPhPlain(m.h).split(kRx("(?<=[.!?…])\\s",""))[0]||"").slice(0,200);const txt=kitPhEvId(m)+" "+kitPhPlain(m.t)+" "+first;return kitPhTone(txt,{fam})}
 function kitPhEvent(m){const tone=kitPhEvTone(m);kitPhNote("event",kitPhEvId(m),tone,kitPhPlain(m.t));return{src:KIT_PH.ev[tone],lab:"",ph:tone}}
 (function(){if(typeof kitEvArt!=="function")return;const a0=kitEvArt;kitEvArt=function(m){const r=a0.apply(this,arguments);try{
   if(!m||m.art||m.stArt||!kitPhEvReady())return r;
@@ -28487,7 +28614,9 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§59",title:"Tranh
  `<div style="width:110px">${kitSceneArt(KIT_PH.act.light,"",{shape:"tall"})}</div><div style="width:110px">${kitSceneArt(KIT_PH.act.dark,"",{shape:"tall"})}</div></div>`})}catch(e){}
 window.kitPhTone=kitPhTone;window.KIT_PH=KIT_PH;
 
+window.__ctmBuilt=1;
 </script>
+<script>try{kbootDone()}catch(e){}</script>
 
 <script>
 /* New builds for Cung Tường Mộng (inlined at the end of index.html by dev/site/build_site.sh; KIT.md §35.2).
@@ -28512,7 +28641,7 @@ window.kitPhTone=kitPhTone;window.KIT_PH=KIT_PH;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="79e215eeedbe";window.CTM_BUILD=BUILD;
+const BUILD="7b15244170ea";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

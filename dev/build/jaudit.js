@@ -134,7 +134,7 @@ function aaNamesFix(){if(!S)return;try{const all=allServ().concat(S.maid?[S.maid
    colours the labels already written as text everywhere (cards, chips, Ân oán, Giao tình, stage, week book, result cards). */
 function kitRel(dir,text){return `<span class="krel krel-${dir==="me"?"me":"them"}" data-vp-skip>${text}</span>`/* final words already: the word fixer keeps "Nàng oán ta" as is */}
 window.kitRel=kitRel;KIT_REL.paint=null;
-const KREL_RE=new RegExp([
+const KREL_RE=kRx([
  "(Ta|ta) → (nàng(?: ta)?|hắn|y|người ấy|[\\p{Lu}][\\p{L}]*(?: [\\p{Lu}][\\p{L}]*){0,2}): thiện cảm","(Ta|ta) tin cậy","tin cậy(?= [\\p{Lu}][\\p{L}]* [\\p{Lu}]?[\\p{L}]*\\s?[+\\-−]?\\d)","tin cậy(?= [+\\-−]?\\d)",
  "(Nàng(?: ta)?|Hắn|Y|Hoàng hậu|Thái hậu|Hoàng thượng|Người ấy|[\\p{Lu}][\\p{L}]*(?: [\\p{Lu}][\\p{L}]*){0,2}) → (ta|người ấy|nàng): thiện cảm","[\\p{Lu}][\\p{L}]*(?: [\\p{Lu}][\\p{L}]*){0,3} với ta","(?:(?:[Nn]àng(?: ta)?|Hoàng hậu|Thái hậu|[Hh]ắn) )?(?:bớt )?oán ta","(?<![\\p{L}])thiện cảm(?= [+\\-−]?\\d|:| của)","(?<![\\p{L}])Thiện cảm(?= [+\\-−]?\\d|:|$| của)","(?<![\\p{L}])(?:[Nn]àng(?: ta)? )?ghen(?= [+\\-−]\\d)"].join("|"),"gu");
 function kitRelPaint(root){if(!root||!root.querySelectorAll)return;const W=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:n=>{const p=n.parentElement;if(!p||/^(SCRIPT|STYLE|TEXTAREA|INPUT|OPTION|SELECT)$/.test(p.tagName)||p.closest(".krel,[data-vp-skip]"))return NodeFilter.FILTER_REJECT;KREL_RE.lastIndex=0;return KREL_RE.test(n.nodeValue)?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT}});

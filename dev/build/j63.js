@@ -178,7 +178,7 @@ function kaTitled(s){for(const v of (typeof rivals!=="undefined"?rivals:[])){if(
 const kaN=n=>(n>0?"+":"−")+Math.abs(n);
 function kaSentence(before){const n=Math.max(0,Math.min(S.logs.length,(S.logSeq||0)-before.seq));const L=S.logs.slice(0,n).reverse().map(h=>plain(String(h).replace(/<span class="ld">[^<]*<\/span>/,"")));
  const ok=L.filter(t=>t&&!/→/.test(t)&&!/(thành|hỏng|kèm|tốn|được ngay)\s*:/i.test(t)&&!/\+\d+\.\.\d/.test(t)&&!/^\[/.test(t)&&!/\b(Thành|Hỏng)\.\s*·/.test(t)&&!/(^|\s)có thể\s/.test(t));
- if(!ok.length)return"";const P=ok[0].split(/(?<=[.!?…])\s+(?=[A-ZÀ-Ỹ"“])/);let s=P[0];if(s.length<40&&P[1])s+=" "+P[1];return kaTitled(s)}
+ if(!ok.length)return"";const P=ok[0].split(kRx("(?<=[.!?…])\\s+(?=[A-ZÀ-Ỹ\"“])",""));let s=P[0];if(s.length<40&&P[1])s+=" "+P[1];return kaTitled(s)}
 /* owner 11/15: other people's feelings (ghen / oán of the consorts) are not HER gains or losses — they go to a separate KÈM line,
    collapsed ("12 phi tần ghen thêm 8"), tap to see who; a person she has not met is "người chưa quen" (no name) */
 function kaNamed(v){try{return v===S||typeof k61Named!=="function"||k61Named(v)}catch(e){return true}}

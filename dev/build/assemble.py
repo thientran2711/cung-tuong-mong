@@ -19,6 +19,9 @@ icon='data:image/webp;base64,'+base64.b64encode(open(d+'build/icon.webp','rb').r
 p1=p1.replace('__ICON__',icon).rstrip()
 assert p1.endswith('<script>'); p1=p1[:-8]
 av=open(d+'build/avatars.js',encoding='utf-8').read()
-out=p1+'<script>\n'+av+'\n</script>\n<script>\n'+js+'\n</script>\n'
+# window.__ctmBuilt: the game script ran to its end (the boot cover lets go only then; else it shows its failure card)
+out=p1+'<script>\n'+av+'\n</script>\n<script>\n'+js+'\nwindow.__ctmBuilt=1;\n</script>\n'
+# boot cover (dev/site/kboot.js, KIT §14.1): its own last script, so it runs even if the game script threw
+out+='<script>try{kbootDone()}catch(e){}</script>\n'
 open(d+'index.html','w',encoding='utf-8').write(out)
 print('built',len(out))
