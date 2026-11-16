@@ -16,6 +16,15 @@ Owner 15/11: "Phẩm bậc trong mấy ô chọn này chưa theo màu phẩm, m�
   person × picker act, every tab, synthetic log lines, 4 tuần of bot play; each visible pair OK/PLAIN), `dev/test/rank-colour.py` (before/after
   table). Results: dev/review/rank-colour.md.
 
+- List form "name (title, …)" (stage place line "Thừa Minh cung · Mạnh Bích Dao (Tần, chủ vị), …") painted too; `kitRankText(html)` for
+  HTML strings (kpFactRow: before kpChipify — a chip "Thục Nghi thiện cảm +8" ate the end of a name and left the title plain).
+
+## Compatibility with review/pick-hint @29972cd7 (coordinator note)
+- pick-hint adds `kitRankNamePaint` (jaudit §17: bare names get kitName) + 48.1d stage halo (jk4 PT rule) + KIT §9/§48.1d. This branch
+  does not re-implement either; both passes skip `.kname`, so they do not fight: theirs titles a bare name, mine colours a title written
+  as text. Shared files: jk4.js (different hunks: mine adds the 48.3 rule before the `.modal.night` block; theirs edits the PT rule),
+  KIT.md (different sections). `git merge-tree` HEAD vs origin/review/pick-hint: clean.
+
 ## Notes / open
 - Stranger rows in the spy picker ("Quý phi ở <cung> (chưa quen)") have a rank but no name: not painted (rule = rank WITH name).
 - Found while scanning (not fixed here, other family): two global `function kitNames` (j59 court-officer naming, j65 log names); the later

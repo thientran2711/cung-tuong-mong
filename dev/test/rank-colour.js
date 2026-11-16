@@ -24,13 +24,13 @@ const TITLES="Hoàng quý phi|Hoàng hậu|Quý phi|Quý nhân|Thường tại|�
   const rgb=c=>{const d=document.createElement('i');d.style.color=c;document.body.appendChild(d);const v=getComputedStyle(d).color;d.remove();return window.__C(v)};
   const C=v=>{const n=(String(v).match(/[\d.]+/g)||[]).map(Number);return /^color\(/.test(v)?n.slice(0,3).map(x=>x*255):n.slice(0,3)};window.__C=C;const dist=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1],a[2]-b[2]);
   window.__rcScan=function(surface){const people=(typeof kpPeople==='function'?kpPeople():[]);if(!people.length)return 0;
-   const names=people.map(x=>x[0].replace(/[.*+?^${}()|[\]\\]/g,'\\$&')).join('|');const re=new RegExp(`(?<![\\p{L}])(${T})\\s*(${names})(?![\\p{L}])`,'gu');
+   const names=people.map(x=>x[0].replace(/[.*+?^${}()|[\]\\]/g,'\\$&')).join('|');const re=new RegExp(`(?<![\\p{L}])(?:(${T})\\s*(${names})|(${names}) \\((${T})(?=[,;)·]))(?![\\p{L}])`,'gu');
    /* visible text nodes in DOM order, joined */
    const tw=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,{acceptNode:n=>{const e=n.parentElement;if(!e||/^(SCRIPT|STYLE|TEXTAREA|TITLE|OPTION)$/.test(e.tagName))return 2;
     if(e.checkVisibility&&!e.checkVisibility({opacityProperty:true,visibilityProperty:true}))return 2;const r=e.getBoundingClientRect();if(!r.width||!r.height)return 2;return 1}});
    const N=[];let s='';while(tw.nextNode()){const n=tw.currentNode;N.push([s.length,n]);s+=n.nodeValue}
    const at=i=>{let lo=0,hi=N.length-1;while(lo<hi){const m=(lo+hi+1)>>1;if(N[m][0]<=i)lo=m;else hi=m-1}return N[lo]};
-   let k=0;let m;re.lastIndex=0;while((m=re.exec(s))){const [o,n]=at(m.index);const e=n.parentElement;const cs=getComputedStyle(e);const got=C(cs.color);
+   let k=0;let m;re.lastIndex=0;while((m=re.exec(s))){if(m[3]){const ti=m.index+m[3].length+2;m=Object.assign([m[0],m[4],m[3]],{index:ti});m[0]=m[1]+' '+m[2]}const [o,n]=at(m.index);const e=n.parentElement;const cs=getComputedStyle(e);const got=C(cs.color);
     const tone=typeof kitRankTone==='function'?kitRankTone(m[1]):'';const want=tone?rgb(tone):[0,0,0];const kitEl=!!e.closest('.kti,.krt,.knr-r,.j59t,.pcrk,.kpstrip small');
     const nameEl=(()=>{const [o2,n2]=at(m.index+m[0].length-1);return n2.parentElement})();const ink=C(getComputedStyle(nameEl).color);
     const ok=dist(got,want)<36||(kitEl&&(e.closest('.modal.night,.stage,.kesov,.krs')!=null)&&dist(got,ink)>30);

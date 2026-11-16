@@ -2337,7 +2337,10 @@ targets, gift / plant / visit pickers), cards, dialogs, lists, logs, Tuần lụ
 - New code writes `kitName(p)` (or `kitRankNameH(p, title, name)` = the kitName block with the text's own title).
 - Plain words "title name" already written by any builder are painted by `kitRankPaint(root)`: one MutationObserver pass (same model as
   kitRelPaint §11.2) wraps each visible "title name" run of a KNOWN person (`kpPeople()`) into `<b class="kname"><span class="kti"
-  style="--rt">title</span> name</b>`. Words never change (textContent equal). Titles: consort ranks, Phế phi, Thái tử / Hoàng tử / Công chúa,
+  style="--rt">title</span> name</b>`; the list form "name (title, …)" ("Mạnh Bích Dao (Tần, chủ vị)") gets the name block and the
+  title in its tone. Words never change (textContent equal). `kitRankText(html)` does the same on an HTML string (kpFactRow runs it before
+  kpChipify, so a delta chip never eats the end of a name). Works beside review/pick-hint's `kitRankNamePaint` (jaudit §17: a BARE name gets
+  its title via kitName; "title name" written as text is left to this pass). Titles: consort ranks, Phế phi, Thái tử / Hoàng tử / Công chúa,
   servants (Cung nữ [thân tín / thô sử], Đại cung nữ, Chưởng sự cô cô, Ma ma, Thái giám, Tổng quản, Nữ quan, Nhũ mẫu), Thái y, Thị vệ,
   officials, Công tử. Skipped: existing kit name blocks (.kname .knr .krt .krn .kpsn .pcrk .pcname .j59t/.j59n .kpod-plq .kbk-pname),
   `[data-vp-skip]`, `[data-norank]` (opt-out), form fields.
