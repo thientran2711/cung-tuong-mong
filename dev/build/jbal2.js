@@ -117,4 +117,4 @@ Object.assign(BAL,{rg:{at:[1,5,10,18,27,37],decideAfter:2,decideWait:3,catchUp:2
 
 /* D13 spread events across buổi (jspread, owner 15/11 23:20Z): world cards shown per buổi at most cap; a card waits at most maxWait buổi
    (then shown even in a full buổi); a card whose options run code (cannot be saved; autosave held while it waits) at most codeWait buổi. */
-Object.assign(BAL,{spread:{cap:2,maxWait:4,codeWait:1}});
+Object.assign(BAL,{spread:{cap:2,maxWait:4,codeWait:2}});

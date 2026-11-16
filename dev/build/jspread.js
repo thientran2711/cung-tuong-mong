@@ -9,7 +9,7 @@
      oldest first. No card is ever dropped: after BAL.spread.maxWait buổi it is shown even if the buổi is full.
    - Never moved: must / ending / forced cards, the buổi's own news card, warnings and plots (time matters), festival-day flows, j68 cards it already held.
    - Saving: waiting cards made of data (pid cards, notices, data-only choices — the same rule as jqsave) are written into S.sp13.q and come back on
-     load. A card whose options run code cannot be written down: it may wait at most BAL.spread.codeWait buổi, and while it waits the autosave is
+     load. A card whose options run code cannot be written down: it may wait at most BAL.spread.codeWait (2) buổi, and while it waits the autosave is
      held (as jqsave does for an open code card), so a reload lands before it, never after a lost card.
    - People in a card are placed at the buổi it is SHOWN: the D29 ledger (j95b) records actors and places when the card is on screen. Before a waiting
      card is shown, its actor is checked in the ledger (S.roster via j95 API): a consort no longer alive / no longer in the record makes the card
@@ -60,7 +60,7 @@ function sp13Release(){if(SP13.off()||!SP13.L.length)return 0;const now=SP13.now
  SP13.L.sort((a,b)=>(b.code?1:0)-(a.code?1:0)||a.due-b.due||a.b0-b.b0);/* code cards first: they cannot be saved, so they never wait long */const keep=[];
  for(const x of SP13.L){if(x.due>now){keep.push(x);continue}
   if(!sp13Alive(x.m)){x.m.__sp13r="void";SP13.stat.void++;try{if(typeof evDropInfo==="function")evDropInfo(x.m)}catch(e){}continue}
-  const lim=x.code?(B.codeWait!=null?B.codeWait:1):(B.maxWait||4);const force=now-x.b0>=lim||(x.end!=null&&now>=x.end);
+  const lim=x.code?(B.codeWait!=null?B.codeWait:2):(B.maxWait||4);const force=now-x.b0>=lim||(x.end!=null&&now>=x.end);
   if(z.n<cap||force){if(force&&z.n>=cap)SP13.stat.forced++;if(now>x.slotDue)SP13.stat.carried++;x.m.__sp13c=now;x.m.__sp13r="rel"+now;z.n++;Q.push(x.m);SP13.stat.released++;n++}
   else{x.due=now+1;keep.push(x)}}
  SP13.L=keep;sp13Sync();return n}
@@ -71,7 +71,7 @@ function sp13Plan(){if(SP13.off())return;const now=SP13.now(),cs=S.buoi||0,cap=s
  for(let i=0;i<Q.length;i++){const m=Q[i];if(!m||typeof m!=="object"||m.__sp13||m===shown)continue;m.__sp13={b0:now};SP13.stat.plan++;
   if(!sp13Movable(m)){sp13Count(m);SP13.stat.keep++;continue}
   const ps=sp13Slot(m);const due=ps!=null&&ps>cs?now+(ps-cs):now;
-  const code=sp13Code(m);const lim=code?((BAL.spread&&BAL.spread.codeWait!=null)?BAL.spread.codeWait:1):((BAL.spread&&BAL.spread.maxWait)||4);
+  const code=sp13Code(m);const lim=code?((BAL.spread&&BAL.spread.codeWait!=null)?BAL.spread.codeWait:2):((BAL.spread&&BAL.spread.maxWait)||4);
   if(due===now&&z.n<cap){sp13Count(m);continue}
   const d=due===now?now+1:Math.min(due,now+lim);if(d<=now){sp13Count(m);continue}
   out.push(i);m.__sp13.due=d;SP13.L.push({m,b0:now,due:d,slotDue:d,code,ser:code?null:sp13Ser(m)});SP13.stat.moved++}
