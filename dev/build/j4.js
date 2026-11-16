@@ -92,7 +92,7 @@ thd:{t:"Tài nữ nhà nho",n:3,goal:"Thơ ngươi sẽ làm rạng danh cha. Đ
   return""},
  acts(){const st=S.st;
   if(st.step===1){const ok=S.arts.thi>=3||S.tai>=70;return[{n:"Dự thi Tài nữ ở Hàn lâm viện",t:ok?"Cùng các khuê tú đối thơ trước Hoàng thượng.":"Cần Thi bậc 3 hoặc Tài 70.",c:{suc:-10},o:ok?od(35+S.tai/3+artW("thi",S.arts.thi)*6):0,w:{danh:8,sung:3},l:{danh:-3},lock:!ok,x:"danh hiệu Tài nữ",go:()=>{st.title=1;st.step=2}}]}
-  if(st.step===2){const ok=S.danh>=40;return[{n:"Xin khắc in sách của cha",t:ok?"Dâng bản thảo của cha lên Hoàng thượng.":`Cần Danh 40 (nay ${S.danh}).`,c:{suc:-5},o:ok?od(45+S.danh/4):0,w:{danh:10,duc:5},l:{danh:-3},lock:!ok,x:"sách cha được khắc in",go:()=>{st.step=3;stEnd(1,"Tài nữ, sách cha được khắc in");fx("gold")}}]}
+  if(st.step===2){const ok=S.danh>=BAL.danhG.fatherBook;return[{n:"Xin khắc in sách của cha",t:ok?"Dâng bản thảo của cha lên Hoàng thượng.":`Cần Danh ${BAL.danhG.fatherBook} (nay ${S.danh}).`,c:{suc:-5},o:ok?od(45+S.danh/4):0,w:{danh:10,duc:5},l:{danh:-3},lock:!ok,x:"sách cha được khắc in",go:()=>{st.step=3;stEnd(1,"Tài nữ, sách cha được khắc in");fx("gold")}}]}
   return[]}}
 };
 

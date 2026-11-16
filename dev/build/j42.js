@@ -203,7 +203,7 @@ function srvMonth(){let ev="";S.turn++;const rk=S.srv.rk;apply({bac:CNV_WAGE[rk]
   if(S.srv.spyFor!=null){const v=RV(S.srv.spyFor);if(!v||!v.alive||v.out)S.srv.spyFor=null;else{apply({bac:8});if(d>0)evA(v,mm2,1);
    if(roll(mm2.trait==="Đa nghi"?25:8)){S.srv.spyFor=null;if(roll(30)){die(`Bị ${mm2.name} phát hiện làm tai mắt cho ${v.name}, sai đánh chết`);return ev}srvLaundry(`${mm2.name} phát hiện ngươi làm tai mắt cho ${v.name}.`,10);S.tin=10}}}
   if(isSrv()&&S.srv.betray&&roll(mm2.trait==="Đa nghi"?25:10)){S.srv.betray=null;if(roll(30)){die(`${mm2.name} biết ngươi phản chủ, sai người dìm ngươi xuống giếng sau Ngự hoa viên`);return ev}srvLaundry(`${mm2.name} biết ngươi mật báo chuyện của nàng.`,12);S.tin=10}
-  if(isSrv()&&!S.srv.lau&&S.srv.rk>=2&&S.age>=18&&S.danh>=20&&roll(2+S.danh/15))pushDil(mkP("cnvWed",{w:R(WEDW.length)}),"Ban gả")}
+  if(isSrv()&&!S.srv.lau&&S.srv.rk>=2&&S.age>=18&&S.danh>=BAL.danhG.srvWed&&roll(2+S.danh/15))pushDil(mkP("cnvWed",{w:R(WEDW.length)}),"Ban gả")}
  S.nt=Math.max(0,S.nt-2);
  S.month++;S.tuan=0;
  if(S.month>12){S.month=1;S.year++;S.age++;S.emp.age++;try{ageYear()}catch(e){}allKids().forEach(([k])=>{if(k.alive)k.age++});if(S.age>25)S.sac=Math.max(10,S.sac-2)}

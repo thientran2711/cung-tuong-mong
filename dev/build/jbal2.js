@@ -146,3 +146,11 @@ Object.assign(BAL,{mline:{eye:[.1,.25,.6,1,1.2],eyeSung:.5,eyeAge:[16,29],seekSt
  frameCatch:30,poisonCatch:40,hitCatch:30,caughtDuc:3,caughtDanh:2,caughtOan:10,useBac:20,useTurn:35,riseLoy:60,riseRel:25,seekCd:6,
  /* review/servant-mline-r3 (ONE CORE, same values): fightLose = % that the scuffle loser is the maid who started it; poisonW = deed weight of a caught poisoning (frame / beat = 1) */
  fightLose:50,poisonW:2}});
+/* danh-balance (ONE CORE, owner 16/11 07:25Z): every Danh gate that was a typed number now reads BAL.danhG, and the succession
+   condition rows read BAL.succN; values unchanged. forget: j3 "Bị bỏ quên" (Sủng ≤0 and Danh ≤ forget at the two lowest ranks →
+   lãnh cung); fatherBook: j4 thầy đồ road "Xin khắc in sách của cha"; thdBook: j97 rare thd_sach; srvWed: j42 servant wedding offer;
+   kcVihanh / kcR5: jkc outside-palace rare endings. succN.b* = Thái hậu buông rèm (p b), c* = Nhiếp chính (p c), th*: Thái hậu
+   support / opposition, npc* = an NPC dowager's claim, rareCDanh: the rare end check of succRareOK. */
+Object.assign(BAL,{danhG:{forget:5,fatherBook:40,thdBook:40,srvWed:20,kcVihanh:60,kcR5:50},
+ charity:{khac:1,bac:20,duc:3,danh:1},/* Tài nghệ · Tứ đức "Phát bạc cứu giúp cung nhân nghèo" (j85 charity, once a month; jtabs/j85 card text) */
+ succN:{bAge:16,bDanh:50,bTam:35,bBac:100,cRank:4,cDanh:70,cTam:60,cTh:60,cBac:300,thB:50,thOpp:20,npcDanh:50,npcTam:35,rareCDanh:80}});
