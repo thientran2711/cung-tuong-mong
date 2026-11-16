@@ -74,3 +74,18 @@ Exam pass: Vừa 247/258, Dễ 254/264, Khó 369/376. Tests: dev/test/difficulty
 re-run clean), dev/test/wx-gear.js ALL OK (6 sizes). Site rebuilt.
 Open (proposal, not applied — Dễ mortality knobs are the owner's mortality rules): Dễ early death 0 % vs ~20 % (DIFF.de illDie ×0.5,
 poisonNow off); Dễ HH 67 % vs ~50 % (DIFF.de hhTh −5 could go to 0).
+
+### Main moved (0488c57a: danh hiệu jdh/jdh2, jspread, mg-balance j82/j91 …) → merged, re-measured, Vừa tuned
+- Vừa on 0488c57a, hhTh 55: HH 53 % (16/30; 36–70), early death 33 %. hhTh 65: 26 % (8/31; 14–43), death 45 %.
+- APPLIED: BAL.hhTh 55 → 60 (jbal.js; Thái hậu favour for the HH seat with a son; world rule; texts print BAL).
+  Final (hhTh 60, n=30 each; data dr2/final_hh60_<mode>.json):
+| mode | HH | early death | HH among survivors | HH pace (median tuần) |
+|---|---|---|---|---|
+| Dễ | 76 % (22/29; 58–88) | 10 % | 85 % | 235 |
+| Vừa | 47 % (14/30; 30–64) | 23 % (lucky sample) | 61 % | 290 |
+| Khó | 33 % (10/30; 19–51) | 37 % | 53 % | 256 |
+  Vừa normalised: HH among survivors 55 → ~77 %, 60 → 61 %, 65 → 47 % (pooled runs); × (1 − ~42 % early death) → hhTh 60 ≈ 35 %.
+- OPEN for the coordinator: on the newest main early death fell (Vừa pooled 38 %, Khó 37 % vs 53 % on fb367740) and Dễ / Khó are both
+  easier than OD:L85 (Dễ HH ~50 / death ~20; Khó HH 15–20 / death ~55). Fix = the jdiff DIFF layer (Dễ hhTh −5 → 0, Khó hhTh +5..10,
+  Dễ illDie / poisonNow) — mortality knobs are the owner's rules, so not applied here.
+- Tests: rules-one-source.js 755x1000@2 ok (old save loads, 0 page errors); difficulty.js + wx-gear.js ALL OK (run on fb367740 merge).
