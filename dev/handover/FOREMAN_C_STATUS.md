@@ -44,7 +44,7 @@ Base main at start: 900ace7fb.
 | D22 real-phone UA test mode | review/ua-test-r1 | sonnet | PASS cad6e04c0 (test infra only; 13 device profiles verified; rotate-prompt 18/18) |
 | D15 download-size (129 MB first load) + perf test | review/perf | sonnet | RUNNING (worker) |
 | D7 personality + 13 virtues + Thái hậu archetypes | review/personality @6f6da49b3 (jtrong.js after jaudit, BAL.trong; 5 archetypes; trGreet one greeting rule; trThDeed whole-group fix) → review/personality-r1 | opus | REVIEWING (bot HH 6/28=21% vs main ~27–32%, small n) |
-| D29 schedules/roster re-port | review/schedules3 (from review/schedules2 + wip/kit-j95) | opus | RUNNING (worker) |
+| D29 schedules/roster re-port | review/schedules3 @10517412e (85%: ported, merged-build re-runs left) | opus | RUNNING (finishing worker session) |
 | D26 idea builds: memories + hook ledger first (dev/ideas/DESIGN_IDEAS_1115.md + HISTORY_IDEAS_1115.md) | review/memories | opus | RUNNING (session session_011xDdVPYyJVKrkdKtDKo6f9) |
 | D20 weather redo with §68 | — | — | NOT TAKEN: session 8 runs review/weather-fx-one (claimed) — D20 folded into it unless the coordinator says otherwise |
 | D-list rest (D3, D9, D11–D14, D19, D25, D44, D51) | — | per item | QUEUED (D30–D34, D36, D38–D42 moved to Foreman B — not ours) |
@@ -121,6 +121,9 @@ PASS review/update-notes-r1 8cc6ae7c8f63f72436afceed38b4143aa3bc815b (D10; desce
 - Art follow-up (D16 reviewer): material-choice dialogs for Tứ đức/arts show the generic Tài nghệ picture instead of embroidery/makeup/letters/charms → next opt-pics round (Foreman C art slot).
 - KIT REQUEST K13 (C7 reviewer, from main): opt-render 755x1000 'A:giftto not in cost mode' — the empty-bag gift picker id 'giftto' is missing from KIT_ACT_PIDS in jk2b.js.
 - COORD with Foreman D (D50): Foreman C already finished D50 as an audit (no art missing; code causes: placeholder shown before figure load + S.fidUsed never released) — see NOTE above; Foreman D's review/dlg-fig-ph should use it. D52 stays with Foreman C (review/skin-audit RUNNING), as FOREMAN_D_STATUS notes.
+- KIT REQUEST K14 (D29 schedules3): map mark 'two shadows close together' for a secret meeting (data: j95mapSigns()); stage name-tag second line 'N người theo hầu' (data: j95followers(p)); please confirm jk95's two person-card sections built from kpsec/kpst/kitRows/kitChip/kpnote.
+- NOTE for session 8 (main bugs found by D29): jmen still assumes 3 buổi — 'night' = buổi 2 (now Chiều), tryst plans b:2, guard roster w*3+b → lovers' trysts happen in the afternoon (owner: mostly night); jstaff shows Thái hậu's elder at both Đức Thọ cung and Tân Giả khố on the maid road.
+- Q15 (owner, D29): co-op — share the NPC location ledger S.roster as world state (host decides, guest reads)? Now the ledger is off in co-op rooms. Q16: maid road shows at most 4 consorts per place while the ledger may hold more — keep the cap?
 - K3 (FYI): C18 kit-popup-sample-r1 PASS adds kit page §8 pop-up samples (sample registration only, no new part) — passed before the rule; kit keeper please confirm.
 - Q1 (D1 result-sfx): sound is OFF by default (OPT.snd=false in j11.js), so new players never hear the win/fail sounds. Turn sound ON by default for new games (old saves keep their choice)? Foreman C recommends ON for new games only.
 

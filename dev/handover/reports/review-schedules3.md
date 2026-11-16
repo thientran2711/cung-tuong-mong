@@ -1,0 +1,6 @@
+# review/schedules3 (D29, Foreman C) — worker report
+Verdict: NOT READY (85%) · sha 10517412e · ported from review/schedules2 + wip/kit-j95 onto main eba64ead4 (no blind merge).
+Ported: j95/j95b/j95c/jqsave ledger (S.roster), jk95 person-card sections (Thói quen, Nơi ngươi hay đến; existing kit pieces only), roster tools/audits. Fitted to main: jmen owns men/trysts (j95 trysts off on consort road), ledger off in co-op rooms (S.roster not shared yet), one arrival rule j95vis for map counts, motive gate covers all RVGRP harm acts, odds words + Tốn/Được/Mất on catch/bribe/rumour options, jstaff staff in the ledger, servant names from the pool. API for D13/D30 in dev/PROGRESS_schedules3.md.
+Left: re-run merged-build bot audit, run roster_oldsave.js, roster_dom at viewports + rotate prompt, rebuild site → finishing worker session opened by Foreman C.
+KIT REQUESTs: map 'two shadows' secret-meeting mark (j95mapSigns), stage name-tag line 'N người theo hầu' (j95followers), confirm jk95 sections.
+Main bugs found (not fixed, session 8): jmen assumes 3 buổi ('night' = buổi 2 = now Chiều; trysts b:2; guard roster w*3+b) → trysts in the afternoon vs owner's 'mostly night'; jstaff shows Thái hậu's elder at both Đức Thọ cung and Tân Giả khố on the maid road.
