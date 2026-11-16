@@ -27,8 +27,14 @@ Cause: after start() the new-life roulette (#kroul/#kroulw) intercepted the firs
 ## 4. Person card at short landscape (844x390) — KIT 6.3b (jk2b `kitPcWide`)
 Before (`dev/test/pcard-land.js`, new): the card was the stacked card: picture 230x433 + info, first act at y=495 in a 179 px high panel → clipped, 800 px of scroll (pop-maid, pop-elder, tab-rv, tab-court all FAIL). Fix: in landscape ≤ 520 px high `kitPcWide` returns true with `--kpcw`=92 px → the existing two-column card (picture + name + info left, sticky; acts right). One place, every card host. After: see section 6.
 
-## 5. Scene-end button (OD:L1261) — queued
-Plan: kit part in j93 `kmStage` (`o.endBtn` / `kitSceneEnd`), no auto-close after the final frame, label from `kitSceneEndLabel`.
+## 5. Scene-end button (OD:L1261) — KIT 81 (j93 `kitSceneEnd` / `kitSceneEndLabel` / `kitSceneFit`, `kmStage`) — KIT READY
+Every kmStage scene (card flip km-tablet, edict, gloom, bloom, ink) now ends with ONE `.kbtn.kmend`: no auto-close, a tap on the scene never closes it, only the button; words: flip lands on HER "Chuẩn bị thị tẩm", another consort "Ta biết rồi", edict/gloom "Đã hiểu", others "Tiếp theo" (`o.end` overrides). Short screens: a scene taller than the room above the button is scaled (`kitSceneFit`, CSS zoom ≥ .55) so nothing runs under the button. `kitSceneEnd(ov,label,onClick)` = the same button for scenes NOT on kmStage (the sweep uses it). Full list of scenes still to sweep: KIT.md §81. Kit page sample §81. Test `dev/test/scene-end.js`: 6 scenes × 5 sizes = 30/30 PASS (no button while playing, right words, one kbtn, inside screen, no text under it, still open after 3.5 s, tap on scene keeps it open, button closes). Looked at 844x390 flip / edict / gloom shots.
 
-## 6. Test results
-(filled at the end)
+## 6. Test results (build of the branch head; server on a free port)
+- `dev/test/dlg-clip.js` 5 sizes: 0 clipped, 39/39 long dialogs scroll (table in section 1).
+- `dev/test/kit-conform.js` 755x1000 / 1000x755 / 1180x820 / 1366x1024 / 844x390: CONFORMS 82, MISSING 15 (cases not openable in the test game, same as before the change), floats none. (run on the build with items 1-2; items 4-5 do not touch dialog frames.)
+- `dev/test/panel-size.js` 5 sizes (+390x844... not run: rotate prompt): one width per viewport, no nofit / xOut / btnOut, 0 page errors.
+- `dev/test/pcard-land.js`: 844x390 pop-maid / pop-elder / tab-rv / tab-court / tab-staff PASS (acts beside the picture, first act fully visible; before: all FAIL, first act at y=495 of a 179 px panel); 755x1000, 1000x755, 1180x820, 1366x1024: same hosts PASS (acts beside picture, no horizontal overflow).
+- `dev/test/podium.js` (fixed) at 755x1000, 1000x755, 1180x820, 1366x1024, 844x390: runs to the end at all 5 sizes without a timeout (before: stopped at the first tap); my log cut each size's JSON at 600 chars, so only the first two checks per size (win, lose-4th-stranger) were read: `bad` empty at all 5 sizes; the tranh-ghe / kid-exam / old-save checks were not read — re-run `node dev/test/podium.js <url> WxH@2 <out>` to see them.
+- `dev/test/scene-end.js` 30/30.
+- No page errors at any of the 5 sizes in any run.

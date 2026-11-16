@@ -15,17 +15,18 @@ const SC={bloom:["kitBloom({title:'Có hỷ',sub:'Thái y báo tin mừng'})","T
   await p.waitForFunction(()=>typeof S!=='undefined'&&S&&typeof rivals!=='undefined'&&rivals&&rivals.length>0,null,{timeout:60000});
   const clear=async()=>{await p.evaluate(()=>{KMQ.length=0;document.querySelectorAll('.kmov,#kmrew').forEach(e=>e.remove());kmBusy=false;Q.length=0;document.getElementById('modal').hidden=true});await sleep(300)};
   await clear();
-  for(const [name,[code,want]] of Object.entries(SC)){await clear();
-   await p.evaluate(c=>{(0,eval)(c)},code);await p.waitForSelector('.kmov',{timeout:10000}).catch(()=>{});await sleep(500);
+  for(const [name,[code,want]] of Object.entries(SC)){await clear();await clear();
+   const K='.kmov.'+({bloom:'km-bloom',edict:'km-edict','flip-me':'km-tablet','flip-other':'km-tablet',gloom:'km-gloom',ink:'km-inkov'}[name]);
+   await p.evaluate(c=>{(0,eval)(c)},code);await p.waitForSelector(K,{timeout:10000}).catch(()=>{});await sleep(500);
    const r={name};
-   r.early=await p.evaluate(()=>!!document.querySelector('.kmov .kmend'));
-   await p.locator('.kmov').first().click({position:{x:20,y:20},timeout:5000}).catch(()=>{});await sleep(500);
-   r.btn=await p.evaluate(()=>{const o=document.querySelector('.kmov');const b=o&&o.querySelector('.kmend');if(!b)return null;const q=b.getBoundingClientRect();return{t:b.textContent.trim(),n:o.querySelectorAll('.kbtn').length,inside:q.left>=0&&q.right<=innerWidth&&q.top>=0&&q.bottom<=innerHeight,hint:!!o.querySelector('.kmhint'),w:Math.round(q.width),h:Math.round(q.height)}});
-   if(name==='flip-me')await p.screenshot({path:`${OUT}/${wh}-${name}.png`});
-   await sleep(3500);r.stillOpen=await p.evaluate(()=>!!document.querySelector('.kmov:not(.km-out)'));
-   await p.mouse.click(Math.round(W/2),Math.round(H/3));await sleep(500);r.tapKeeps=await p.evaluate(()=>!!document.querySelector('.kmov:not(.km-out)'));
-   await p.locator('.kmov .kmend').first().click({timeout:5000}).catch(()=>{});await sleep(700);r.closed=await p.evaluate(()=>!document.querySelector('.kmov'));
-   const ok=!r.early&&r.btn&&r.btn.t===want&&r.btn.n===1&&r.btn.inside&&!r.btn.hint&&r.stillOpen&&r.tapKeeps&&r.closed;if(!ok)bad++;
+   r.early=await p.evaluate(k=>!!document.querySelector(k+' .kmend'),K);
+   await p.locator(K).first().click({position:{x:20,y:20},timeout:5000}).catch(()=>{});await sleep(500);
+   r.btn=await p.evaluate(k=>{const o=document.querySelector(k);const b=o&&o.querySelector('.kmend');if(!b)return null;const q=b.getBoundingClientRect();return{t:b.textContent.trim(),n:o.querySelectorAll('.kbtn').length,inside:q.left>=0&&q.right<=innerWidth&&q.top>=0&&q.bottom<=innerHeight,hint:!!o.querySelector('.kmhint'),ov:[...o.querySelectorAll('.kmst *')].filter(e=>!e.children.length&&e.textContent.trim()&&!e.closest('[aria-hidden=true]')&&(g=>g.width>0&&Math.min(g.right,q.right)-Math.max(g.left,q.left)>2&&Math.min(g.bottom,q.bottom)-Math.max(g.top,q.top)>2)(e.getBoundingClientRect())).length,w:Math.round(q.width),h:Math.round(q.height)}},K);
+   if(name==='flip-me'||H<500)await p.screenshot({path:`${OUT}/${wh}-${name}.png`});
+   await sleep(3500);r.stillOpen=await p.evaluate(k=>!!document.querySelector(k+':not(.km-out)'),K);
+   await p.mouse.click(Math.round(W/2),Math.round(H/3));await sleep(500);r.tapKeeps=await p.evaluate(k=>!!document.querySelector(k+':not(.km-out)'),K);
+   await p.locator(K+' .kmend').first().click({timeout:5000}).catch(()=>{});await sleep(700);r.closed=await p.evaluate(k=>!document.querySelector(k),K);
+   const ok=!r.early&&r.btn&&r.btn.t===want&&r.btn.n===1&&r.btn.inside&&!r.btn.hint&&r.btn.ov===0&&r.stillOpen&&r.tapKeeps&&r.closed;if(!ok)bad++;
    console.log(wh,name.padEnd(11),ok?'PASS':'FAIL',JSON.stringify(r))}
   if(errs.length){bad++;console.log(wh,'PAGE ERRORS',errs)}
   await ctx.close()}
