@@ -24,7 +24,7 @@ Connectors (account B): GitHub push OK · Magnific OK (project "Personal" ba4aec
 | D38 lost-items-port | review/lost-items-port @92ed78f6 | opus | REVIEWING (review/lost-items-port-r1, sonnet) |
 | D30 palace-map-port | review/palace-map-port @e1e15a4b | sonnet | REVIEWING (review/palace-map-port-r1, sonnet); 675 images uploaded to CDN; D42 must build on this branch |
 | D31 difficulty-port | review/difficulty-port | opus | QUEUED (re-measure with Foreman C's C7) |
-| D33 routes-port | review/routes-port | opus | QUEUED (re-measure with C7) |
+| D33 routes-port | review/routes-port | opus | RUNNING (route numbers within spec; bot table for C7) |
 | D34 scheme-games-port | review/scheme-games-port | sonnet | RUNNING |
 | D36 leaderboard + Bảng vàng | review/rank-port | sonnet | RUNNING |
 | D39 appearance-port | review/appearance-port-r1 | sonnet | PASS 86234a24c53da664bd75f34b34444751cd7c0e9f |
