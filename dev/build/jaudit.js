@@ -40,27 +40,30 @@ function aaFallenT(){const L=liveRivals(true);if(!L.length)return null;const d=v
    opens "Chưởng sự tra xét cung nữ"; a Thủ lĩnh/Tổng quản thái giám (eunuch tier ≥ 3) helps her be chosen at night (+4);
    tier ≥ 2 draws a monthly allowance from her purse (Bạc −tier/2 a month). No thị vệ servants exist: thị vệ are palace men (MROLES),
    not a household tier — nothing to promote there. */
-Object.assign(BAL,{dbLoyal:55,dbMerit:3,dbCost:[0,20,40,80,120],dbGain:8,dbEnvy:3,dbBase:70});
+Object.assign(BAL,{dbLoyal:55,dbMerit:3,dbCost:[0,20,40,80,120],dbGain:8,dbEnvy:3,dbBase:70,dbFail:2});
 function dbCost(s){return BAL.dbCost[Math.min(BAL.dbCost.length-1,srk(s)+1)]||100}
 function dbOdds(o,s){return cl(Math.round(BAL.dbBase+((s.loyal||0)-50)/5+((s.mp||0)-BAL.dbMerit)*2-(srk(s)-1)*8),5,95)}
 function dbNeed(o,s){const L=[];const mx=srkMax(o,s);L.push({ok:srk(s)<mx,t:srk(s)<mx?`Phẩm đủ đến ${SRK[s.role][mx]}`:`Phẩm chỉ đủ đến ${SRK[s.role][mx]}`});
  L.push({ok:(s.loyal||0)>=BAL.dbLoyal,t:`Lòng ${s.loyal} (cần ${BAL.dbLoyal})`});L.push({ok:(s.mp||0)>=BAL.dbMerit,t:`Công lao ${s.mp||0} (cần ${BAL.dbMerit})`});return L}
-function dbDo(o,s){const c=dbCost(s);if((o.bac||0)<c||!dbNeed(o,s).every(x=>x.ok))return null;ap(o,{bac:-c});const ok=roll(dbOdds(o,s));const nm=s.name;
+function dbDo(o,s,road,paid){const c=dbCost(s);const fav=road==="fav";/* D41: two roads of equal worth — bạc (lót tay) or favour (spFav, jpromsv) */
+ const fv=fav&&typeof spFav==="function"?spFav(o,s):null;if(!paid&&(fav?!fv||!fv.ok:(o.bac||0)<c))return null;if(!dbNeed(o,s).every(x=>x.ok))return null;
+ if(!paid){if(fav)spPayFav(o,fv);else ap(o,{bac:-c})}const ok=roll(dbOdds(o,s));const nm=s.name;const r0=srk(s);
  const others=(o.staff||[]).filter(x=>x!==s);
  if(ok){s.rk=srk(s)+1;s.mp=0;s.loyal=cl(s.loyal+BAL.dbGain,0,100);others.forEach(x=>x.loyal=cl(x.loyal-BAL.dbEnvy,0,100));
-  if(o===S)log(`Ngươi đề bạt ${nm} lên ${srkName(s)}: lòng +${BAL.dbGain}; kẻ hầu khác ghen tị (lòng -${BAL.dbEnvy}).`);return true}
- s.loyal=cl(s.loyal-2,0,100);if(o===S)log(`Nội vụ phủ chưa duyệt việc đề bạt ${nm}: tiền lót tay mất, ${nm} hơi thất vọng (lòng -2).`);return false}
+  if(o===S)log(`Ngươi đề bạt ${nm} lên ${srkName(s)}${fav&&fv?` (${fv.how})`:""}: lòng +${BAL.dbGain}; kẻ hầu khác ghen tị (lòng -${BAL.dbEnvy}).`);try{if(typeof spAfter==="function")spAfter(o,s,r0)}catch(e){console.error(e)}return true}
+ s.loyal=cl(s.loyal-BAL.dbFail,0,100);if(o===S)log(`Nội vụ phủ chưa duyệt việc đề bạt ${nm}: ${fav?"lời xin đã mất":"tiền lót tay mất"}, ${nm} hơi thất vọng (lòng -${BAL.dbFail}).`);return false}
 (function(){if(typeof servJudgeBtns!=="function")return;const j0=servJudgeBtns;servJudgeBtns=function(s){const B=j0.apply(this,arguments);try{if(ownerOf(s)!==S)return B;
  const mx=srkMax(S,s),nx=SRK[s.role][srk(s)+1];if(!nx)return B;const c=dbCost(s);const N=dbNeed(S,s);const t2=whyTime(1);
- const un=N.filter(x=>!x.ok).map(x=>x.t);const why=t2||(un.length?un[0]:"")||(S.bac<c?`thiếu bạc (cần ${c})`:"");
+ const un=N.filter(x=>!x.ok).map(x=>x.t);const fv=typeof spFav==="function"?spFav(S,s):null;const why=t2||(un.length?un[0]:"")||(S.bac<c&&!(fv&&fv.ok)?`thiếu bạc (cần ${c})${fv?` hoặc ${fv.lbl} ${fv.n}`:""}`:"");
  const eff=s.role==="maid"?(srk(s)+1>=3?"mở việc Chưởng sự tra xét cung nữ":"sai việc dễ hơn"):(srk(s)+1>=3?"đêm được chọn dễ hơn chút, sai việc dễ hơn":"sai việc dễ hơn");
- const btn=pbtn(`data-dbsv="${s.sid}"`,`Đề bạt lên ${nx}`,`${word(dbOdds(S,s))} · tốn: Bạc -${c} (lót tay Nội vụ phủ), 1 khắc · thành: thăng bậc, lòng +${BAL.dbGain}, ${eff} · hỏng: mất bạc, lòng -2 · kèm: kẻ hầu khác ghen tị (lòng -${BAL.dbEnvy})${srk(s)+1>=2?` · (từ bậc này, thưởng tháng Bạc -${Math.floor((srk(s)+1)/2)})`:""}`,why);
+ const btn=pbtn(`data-dbsv="${s.sid}"`,`Đề bạt lên ${nx}`,`${word(dbOdds(S,s))} · tốn: 1 khắc, chọn một đường: Bạc -${c} (lót tay Nội vụ phủ)${fv?` hoặc ${fv.lbl} -${fv.n} (${fv.how})`:""} · thành: thăng bậc, lòng +${BAL.dbGain}, ${eff} · hỏng: mất ${fv?"bạc hoặc lời xin":"bạc"}, lòng -${BAL.dbFail} · kèm: kẻ hầu khác ghen tị (lòng -${BAL.dbEnvy})${typeof spKemTxt==="function"?spKemTxt(S,s):""}${srk(s)+1>=2?` · (từ bậc này, thưởng tháng Bạc -${Math.floor((srk(s)+1)/2)})`:""}`,why);
  return B.concat([btn.replace("<button ",`<button data-kneed="${encodeURIComponent(JSON.stringify(N))}" `)])}catch(e){console.error(e);return B}}})();
 document.addEventListener("click",e=>{const b=e.target.closest("[data-dbsv]");if(!b||b.disabled||!S||S.dead||Q.length)return;e.stopPropagation();const s=servById(+b.dataset.dbsv);if(!s||!can(1))return;
+ if(typeof spOpen==="function"){spOpen(s);return}/* D41: the two-road card (jpromsv) */
  const bf=rsnap();spend(1);const r=dbDo(S,s);if(r==null)return;try{resultShow(`Đề bạt ${s.name}`,bf,r)}catch(x){}render()},true);
 /* NPC mistresses: the same act, by motive — a loyal, deserving servant, a purse that can pay, once in a while */
 (function(){if(typeof servRanks!=="function")return;const r0=servRanks;servRanks=function(){const ev=r0.apply(this,arguments);try{if(typeof mlGuest==="function"&&mlGuest())return ev;/* co-op guest: NPC promotions roll on the host */for(const p of liveRivals(true)){for(const s of (p.staff||[])){
- if(dbNeed(p,s).every(x=>x.ok)&&(p.bac||0)>=dbCost(s)*2&&s.loyal>=70&&roll(15))dbDo(p,s)}}}catch(e){console.error(e)}return ev}})();
+ if(!dbNeed(p,s).every(x=>x.ok)||s.loyal<70||!roll(15))continue;if((p.bac||0)>=dbCost(s)*2)dbDo(p,s);else if(typeof spFav==="function"&&spFav(p,s).ok)dbDo(p,s,"fav")}}}catch(e){console.error(e)}return ev}})();
 
 /* 5. RELATION NUMBERS ON CARDS = THE REAL CHANGE (owner: "a card must show what will really happen").
    The real change goes through affAdd/oanAdd, which scale a rise by the target's nết (persF "trust" for quý ta, "slight" for oán ta;
