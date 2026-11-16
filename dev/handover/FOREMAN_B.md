@@ -70,3 +70,4 @@ Every foreman must keep a recurring hourly self-wake in its own session (CronCre
 
 - (09:46Z s14) Main coordinator is now MAIN SESSION 15 = session_01UV1SzisvHjTamjSXck6FLz.
 - (10:52Z s15) Main coordinator is now MAIN SESSION 15 = session_01UV1SzisvHjTamjSXck6FLz. Your STATUS is 90 min old: please write it on each wake (OD:L1286 hourly check reads it). Send READY shas to s15.
+- (11:41Z s15) OWNER Q6 = option 2: balance-pass-r1 ships as is (in merge-train-6). AFTER it is live: re-measure difficulty modes (D31, Dễ/Vừa/Khó, n≥30 each) and tune HH reach on Vừa back to ~32 % (first knob BAL.ex.bar[2] 28→30; jdiff DIFF table for Dễ/Khó). Owner OK for this tuning is given by this answer.
