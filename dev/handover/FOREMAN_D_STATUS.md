@@ -1,6 +1,6 @@
 # FOREMAN D STATUS
 ORDER 16/11 applied (separate worker sessions, repo reports, hourly self-wake, claims).
-last wake: 16/11 14:00Z (s5 = session_01DgYSWow5x77Z2u52vVJQ9f; Foreman D is s5 — workers send result lines here) · s5 wake trig_01F8KntmXAMD8Qv2nmzjZDMf (hourly :58)
+last wake: 16/11 14:32Z (s5 handing over → s6 = <filled below>; s5 wake deleted, s6 creates its own)
 s5 START_CTX ≈ 5 % of 1M window (get_session reads 0; own estimate ~50k after start reading); rollover at 30 %, ceiling 60 %.
 s4 START_CTX ≈ 5 % of 1M window (get_session reads 0; own estimate ~50k after start reading); rollover at 30 %, ceiling 60 %.
 s3 START_CTX ≈ 6 % of 1M window (get_session 08:30Z: 11.8 % used); rollover at 31 % (START_CTX + 25 %), ceiling 60 %.
@@ -185,3 +185,14 @@ READY review/coop-guest-maid-r1 3a875687518f3492f24ce8bd2bfe825076c32513 (co-op 
 - READY for main this session (all under ## PASS): coop-guest-maid-r1 3a875687, danh-balance-r1 9a1133f0, close-maid-r1 ebc85f78, entry-exam-r1 d7364cb2 (ship order note).
 - PARKED: D8 poison roads (s16: do not work around the classifier). ART NEEDED (for C): 'Sáng hôm sau' banner for the Emperor-visit morning.
 - Main coordinator = MAIN SESSION 16 session_01UV1SzhWSw7EETVzp3xX5hi (other account: send_message fails → write in this file). Archive finished sessions every wake (OD:L1287).
+
+## HANDOVER (Foreman D s5 → s6, 16/11 14:32Z; reason: context 39 % ≥ START_CTX 5 % + 25 % budget (30 %)) — s6 = <filled below>
+- s5 hourly wake trig_01F8KntmXAMD8Qv2nmzjZDMf is DELETED at handover; s6 creates its own.
+- RUNNING D sessions (reports land in dev/handover/reports/<name>.md; they read Foreman D's id from the "last wake" line at the top of this file):
+  reviewers: emperor-visit-r1 session_01DgYSWoamKdMf5ewt8WHax6 · coop-b1b5-fix-r1 session_01DgYSWn4KTZXiGjQcE6uwsQ (long co-op re-run) · item-ledger-r1 session_01DgYSWmMK8v6NhgpHp4fg8k (must close 6 missing ids + 2 net kinds; wire cause field to mem-upgrade once live)
+  workers: danh-p1 session_01DgYSWmtmVG7yFfTVZxCumE (opus, balance sweep) · kc-roads-cn-nc-fix2 session_01DgYSWoQg78D5zyhdSa6uoH (opus, Chờ value OD:L1288; entry-exam ships with this chain)
+- s6 FIRST: send_message each of these 5: "Foreman D is now s6 = <id>; send your result line there".
+- READY this session (under ## PASS): name-mask-r1 571dc15e, preg-rate-r1 1c31bd79, npc-death-r1 5f58a715, seatcap-r1 7d463838, mem-upgrade-r1 64b40270.
+- BLOCKED: C44 cloud-del (KIT REQUEST danger button + confirm dialog → main kit keeper; resume with a sonnet worker on KIT READY, base review/cloud-save-r1).
+- FOLLOW-UPS (open when real, not now): co-op friend memory write-back (mem-upgrade Q5, co-op → D); scold/deathSentence causes (with B forced events). OWNER Q pending: Emperor/Thái hậu act on memories (mem-upgrade Q2).
+- Main coordinator = MAIN SESSION 17 (see latest FOREMAN_D.md INBOX). Archive finished sessions every wake (OD:L1287).
