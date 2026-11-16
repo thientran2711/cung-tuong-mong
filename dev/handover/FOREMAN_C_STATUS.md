@@ -115,6 +115,7 @@ Owner verdicts pending: intro-art (vẽ/bỏ), FP v9, map-frame r3, pl-night sam
 - 22:19Z urgent 5 @a18 (2ebad5c0): c30/c26/m22/m47 looked at OK → SENT to owner (large native crops); c28 FAIL (huadian still a teardrop) → lead redoes with tiny flower + motif rule in every prompt/QA. Dressing-room per-rank sample (4 of 13; approved room = Phi) → SENT to owner; told worker lowest maid room must not look poor.
 - 22:21Z lead #3 in-room shot (iPad Pro, c30 new) HELD by C: new figure shorter than maid/ma ma beside her (canvas margin shrinks her) → crop+re-pad to old figure ratio, qa height check ±2 %, redo shot.
 - 22:23Z c28 flower huadian redo OK → SENT. Height fix (tools/fit_fig.py: crop + scale to old figure height, 8 % side pad; qa_fig --old ±2 %) → in-room shot v2 equal heights, looked at → SENT to owner. Upload of the 5 waits her OK.
+- 22:34Z npc-agent AG1 r1 FAIL (7 families incl. PERF blocking p95 9.5 ms at Fold x4; report reports/npc-agent-ag1-r1.md) → worker fixes on review/npc-agent-r1 @2298416f; reviewer keeps bot run + re-checks.
 - 22:07Z npc-jealousy r2 PASS 7389d8ec → handed to main (ANSWER line). Reviewer + worker ARCHIVED.
 - 22:03Z courtyard samples (Tần cac 3 halls + home Ngọc Thanh các w/ cung nhân row; beside nhat-phi-cung) looked at → SENT to owner.
 - 21:51Z npc-jealousy r2 SẴN SÀNG KIỂM 7ba04507 → same reviewer. FP NC v20 (v16b silver costumes + game-style QP + v19 proportion, true scale beside c01/c05) looked at → SENT to owner.
