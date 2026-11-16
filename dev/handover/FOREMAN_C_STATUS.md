@@ -9,6 +9,7 @@ Connectors (session 4, 15:50Z): GitHub push OK · Cloudflare token verify 200 ·
 - 15:50Z TITLE SYSTEM phase 2 opus session_011xDdVQSRBz9pNSrPaW5KF5 (review/title-sys2 on ced2edc6; plan PROGRESS_title-sys.md PHASE 2). Running C total: 8.
 - 15:55Z SAMPLES: icon-art SAMPLE READY (dev/handover/reports/icon-art/sample-contact.jpg: hoàng lịch calendar, edict scroll, letter box, placeholder 3:4 + 2:1) → looked at, SENT to the owner (SendUserFile); 皇曆 kept. buoi-art SAMPLE READY → bands xuan + giaothua OK, but the 4 buổi icons were ROUND → sent back for SQUARE (OD 15:05Z (1)) before showing her.
 - 15:56Z buoi-art SAMPLE v2 (square buổi icons) looked at → SENT to the owner. icon-art: 4 buổi icons removed from its list (belong to buoi-art).
+- 15:57Z night-backs SAMPLE READY (ev-night2-tender backs-only; list: ~16 FAIL pictures incl. 3 Gối đầu, night1, ksp, prep, 6 night acts) → looked at, SENT to the owner.
 - PENDING for next wake: schedules3-r4 stage-1 report → opus reviewer review/schedules3-r5 + opus successor for PEOPLE LEDGER (review/people-ledger @afcac6cb); story14-p1-r2 report → opus reviewer review/story14-p1-r3; owner verdicts on the 15:45Z samples (title plates, item art audit, cắm hoa) → mass-production workers.
 
 ## HANDOVER (Foreman C session 3 → session 4, 15:50Z 16/11)
