@@ -254,3 +254,4 @@
 | TITLE SYSTEM phase 2 (opus; plan dev/PROGRESS_title-sys.md PHASE 2: emperor hiệu by BAL thresholds, sắc phong book+seal items, confiscation, atonement, theft via Foreman D item ledger) | review/title-sys2 | C | session_011xDdVQSRBz9pNSrPaW5KF5 | RUNNING | 16/11 15:52Z |
 | STORY ROADS PLAN OWNER (s19 15:45Z): master road map dev/story/ROAD_MAP.md first (for C + D), then B's full player roads (opus lead) | review/road-map | B | session_01N1tNP4TguHSiLpDgAN6EDF | RUNNING | 16/11 15:58Z |
 | ghen-shown review (opus) | review/ghen-shown-r1 | D | session_01DgYSWow8vFRane8N6zVBKh | RUNNING | 16/11 15:57Z |
+| kit-size #2 (opus, kit keeper; OD 16:00Z (1)–(9)) | review/kit-size | main s19 | session_01UV1SzhfEWsjainSgb3FHP9 | RUNNING | 16/11 15:57Z |
