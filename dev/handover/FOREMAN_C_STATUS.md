@@ -28,6 +28,7 @@ Owner verdicts pending: intro-art (vẽ/bỏ), FP v9, map-frame r3, pl-night sam
 
 ## SESSION 7 LOG
 - 19:55Z start (depth 1). Read START set + handover. Session 6 told to stop + ARCHIVED. Its trigger trig_01B8ZVK48GgTwdRJjCS83QdG DISABLED (delete was refused by the permission check). Own hourly wake trig_018LdWFfDWDX4GYybxC2JWX5 (:41 each hour). All 9 running C sessions told C = session 7. buoi-art-r1 PASS be25de29 (on main 0188d595) → reviewer told to re-merge current main + build_site + quick check, give new READY sha; then C fast-forwards main.
+- 19:46Z pl-night sample + map-frame r3 (a/b/c) sent to owner. people-ledger-r1 PASS 44355544 (BIG) but main moved to 9fc1ac33 → reviewer re-merges + quick check → new READY sha → C FF. buoi-art-r1 re-merged 42ff535b, also behind main now → waiting reviewer's READY.
 
 ## SESSION 6 LOG
 - 17:49Z start (owner-opened, depth 0). Session 5 told to stop + ARCHIVED; its trigger trig_01QgAdMjgXXZm1ovzYPbju1W DELETED; own hourly wake trig_01B8ZVK48GgTwdRJjCS83QdG (:51 each hour). All 10 running C sessions told C = session 6.
