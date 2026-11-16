@@ -1,0 +1,3 @@
+{"_note":"Max allowed per metric (dev/test/perf.js; exit code 1 when any is over). Owner 15/11 22:35Z performance budget, ledger D15. MB = wire megabytes (gzip as Pages serves it). Times are on the emulated line (20 Mbit/s, 60 ms RTT) with 4x CPU throttle on a shared 4-CPU box, so they are ceilings ~25% above what D15 measured, to catch regressions, not targets. Tighten when measured on quiet hardware.",
+ "_target":{"firstLoadMB":"<= 30 (D15 got 43.5: 31.7 MB first-hour pictures + 11 MB shell/JSON, 1.9 MB of it the index.html fetched 3x on a first visit, see dev/PROGRESS_perf.md)"},
+ "default":{"firstLoadMB":50,"afterTitleMB":160,"timeToTitleMs":45000,"timeToPlayableMs":15000,"heapMB":80,"longTasks200":80,"warmMB":5,"warmTitleMs":10000}}

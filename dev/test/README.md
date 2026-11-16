@@ -39,3 +39,6 @@ Options (2nd/3rd arg `extra`): any Playwright context option (default `serviceWo
 ## What desktop-style tests never exercise (UA / device branches in game code)
 See `dev/PROGRESS_ua-test.md` for the list (iOS "add to home screen" note, hover glow, pointer:coarse hint, vibrate, standalone, safe-area, old-Safari regex).
 Rule: a fix that touches one of these needs one run of the matching profile (`iphone14` / `ipadAir` / `fold`) in HOST mode.
+
+## Performance budget test (D15)
+`node dev/test/perf.js` (see header of the file and dev/PROGRESS_perf.md): first-load bytes / time to title / time to first turn / heap after 10 buổi / long tasks on fold, iphone14, ipadAir; budget in `perf-budget.json`; exit 1 when over. Note: it enables the service worker (unlike the other profile tests).
