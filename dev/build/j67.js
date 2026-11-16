@@ -51,7 +51,9 @@ const TOK67={
  eun:()=>eun67(),k:()=>{const s=son67();return s?s.name:"hoàng tử"},d:()=>{const d=dau67();return d?d.name:"công chúa"},
  mis:()=>{const m=srvMis67();return m?m.name:"chủ nhân"},foe:()=>S.foe||"kẻ thù",foed:()=>S.foeDad||"kẻ thù của cha",
  sj:A=>A.sj||"chuyện này",xung:()=>S.rank>=3?"nương nương":"tiểu chủ",Xung:()=>S.rank>=3?"Nương nương":"Tiểu chủ",n1:A=>A.n1||"",n2:A=>A.n2||"",emp:()=>"Hoàng thượng"};
-function fill67(s,A){return String(typeof s==="function"?s(A):s||"").replace(/\{(\w+)\}/g,(m,k)=>TOK67[k]?TOK67[k](A):m)}
+/* a goal / step text that names the arc's people tells HER who they are (D47: the Mục tiêu row showed "Quý nhân ???" for the very woman the chapter says she found out): name + face known (j61 stage 2), nothing logged */
+function arcReveal67(t,A){try{if(typeof k61Know!=="function"||!A||typeof t!=="string")return;const L=[];for(const k of ["v","v2"])if(t.includes("{"+k+"}")){const v=rv67(A,k);if(v)L.push(v)}if(t.includes("{foe}")){const v=foe67();if(v)L.push(v)}if(L.length)k61Know(L,"",true,2)}catch(e){}}
+function fill67(s,A){if(typeof s==="string")arcReveal67(s,A);return String(typeof s==="function"?s(A):s||"").replace(/\{(\w+)\}/g,(m,k)=>TOK67[k]?TOK67[k](A):m)}
 function who67(w,A){try{switch(w){
  case"v":case"v2":{const v=rv67(A,w);return v?pv(v):null}
  case"th":return S.thDead?null:pTH();case"emp":return pEmp();case"hh":return qOn()?pv(rivals[0]):null;case"maid":return S.maid?pMaid():null;case"me":return pMe();

@@ -470,7 +470,7 @@ function invAct(a){if(S.dead||Q.length)return;
 function invHTML(){const wb=wearBonus(S),vp=vpItems(S);const vis=S.inv.map((e,i)=>[e,i]).filter(([e])=>!e.h);
  const groups=[];for(const [e,i] of vis){const g=groups.find(x=>x.k===e.k&&!!x.t===!!(e.by==="me"&&e.t)&&!x.w&&!e.w);if(g)g.n++;else groups.push({k:e.k,t:e.by==="me"?e.t:null,w:e.w,i,n:1,ext:e.t&&e.by!=="me",from:e.from})}
  const dress=S.dress&&S.dress.until>S.turn?`${IT[S.dress.k].n} (đến tháng ${S.dress.until-S.turn} nữa)`:"không";
- let h=`<div class="ph"><span>Đang đeo: Sắc +${wb.sac}${wb.danh?`, Danh +${wb.danh}`:""} · áo mới: ${dress}${vp.length?` · <span class="r">vượt phẩm!</span>`:""}</span><span>Bạc ${S.bac}</span></div>
+ let h=`<div class="ph"><span>Đang mặc: Sắc +${wb.sac}${wb.danh?`, Danh +${wb.danh}`:""} · áo mới: ${dress}${vp.length?` · <span class="r">vượt phẩm!</span>`:""}</span><span>Bạc ${S.bac}</span></div>
  <div class="rbtn" style="margin-bottom:6px"><button data-inv="shop">Nhờ thái giám mua đồ<small>thành: xem hàng, mua đồ từ ngoài cung qua thái giám Nội vụ phủ</small></button><button data-inv="inspect" ${!can(2)?"disabled":""}>Kiểm tra đồ<small>${word(oSee(S,true))} · tốn: 2 khắc · thành: tìm ra đồ bị tẩm, cài · hỏng: không thấy gì</small></button></div>`;
  if(!groups.length)return h+`<p class="past">Rương trống. Nhờ thái giám mua đồ, hoặc chờ được ban thưởng.</p>`;
  h+=`<div class="cards">`+groups.map(g=>{const it=IT[g.k],i=g.i;const B=[];
@@ -481,7 +481,7 @@ function invHTML(){const wb=wearBonus(S),vp=vpItems(S);const vis=S.inv.map((e,i)
   if(it.pr)B.push(`<button data-it="sell" data-ix="${i}">Bán<small>Bạc +${Math.floor(it.pr/2)}</small></button>`);
   if(Object.values(TAINT).some(T=>T.on.includes(g.k))&&!g.t)B.push(`<button data-it="taint" data-ix="${i}">Tẩm<small>mưu kế</small></button>`);
   if(g.from&&g.from!=="me"&&g.from!=="emp"&&g.from!=="th")B.push(`<button data-it="test" data-ix="${i}" ${S.bac<10?"disabled":""}>Xét nghiệm<small>Bạc -10</small></button>`);
-  return `<div class="card"><h4>${iic(g.k)}${it.n}${g.n>1?` ×${g.n}`:""}${g.w?" · đang đeo":""}</h4><p>${it.kd} · ${it.d}${g.t?` · <span class="r">đã ${TAINT[g.t].n}</span>`:""}${it.rk?` · bậc ${RANKS[Math.min(7,it.rk)].n}`:""}</p><div class="rbtn">${B.join("")}</div></div>`}).join("")+`</div>`;return h}
+  return `<div class="card"><h4>${iic(g.k)}${it.n}${g.n>1?` ×${g.n}`:""}${g.w?" · Đang mặc":""}</h4><p>${it.kd} · ${it.d}${g.t?` · <span class="r">đã ${TAINT[g.t].n}</span>`:""}${it.rk?` · bậc ${RANKS[Math.min(7,it.rk)].n}`:""}</p><div class="rbtn">${B.join("")}</div></div>`}).join("")+`</div>`;return h}
 /* the tablet: every consort weighted by the same night formula; others may steal it by the same act */
 function flip(){S.tonight=null;if(S.dead)return;if(!roll(has("chamchinh")?65:90))return;
  const C=consorts().filter(p=>nightCh(p)>0);if(!C.length)return;const w=C.map(p=>nightCh(p));let r=Math.random()*w.reduce((a,b)=>a+b),i=0;while(r>w[i]&&i<w.length-1){r-=w[i];i++}let t=C[i];
