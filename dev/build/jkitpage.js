@@ -23,7 +23,8 @@ KIT_SAMPLES.push(
   kitSkillCard({kind:"story",k:"x",kicker:"Chương 2",name:"Tên chương",level:1,max:4,word:"Hồi",bar:false,next:"",img:kitInfoArt("Mệnh truyện").src})+
   kitEmpty("Việc nhờ","Chưa ai nhờ ngươi việc gì.")+`</div>`},
  {id:"§46",title:"kitChecks · kitInfo",html:()=>kitChecks([[false,"Sủng 8 (cần 38)"],[true,"Danh 33 (cần 30)"]])+(typeof kitInfo==="function"?kitInfo("Việc nhờ"):"")},
- {id:"§43",title:"Việc gọn (cột hẹp, kpanec)",html:()=>`<div class="pcb ktacts"><div class="kpanec">${pbtn('data-kitsample="3"',"Hỏi han ở tẩm cung ta: ai cần giúp?","tốn: 1 khắc · thành: người ở đây có việc thì ngỏ lời nhờ","")}</div></div>`});
+ {id:"§43",title:"Việc gọn (cột hẹp, kpanec)",html:()=>`<div class="pcb ktacts"><div class="kpanec">${pbtn('data-kitsample="3"',"Hỏi han ở tẩm cung ta: ai cần giúp?","tốn: 1 khắc · thành: người ở đây có việc thì ngỏ lời nhờ","")}</div></div>`},
+ {id:"§43.1",title:"Việc gọn: dấu ! mở chi tiết (kitActZoom)",html:()=>`<div class="pcb ktacts"><div class="kpanec">${pbtn('data-kitsample="3"',"Hỏi han ở tẩm cung ta: ai cần giúp?","tốn: 1 khắc · thành: người ở đây có việc thì ngỏ lời nhờ","")}</div></div>`});
 /* KIT §51 kit table (review/kit-table): kitRows (one label column per table, values at one x), kitRowsJoin, kitReqRows, relation chip */
 KIT_SAMPLES.push(
  {id:"§51",title:"kitRows · bảng kit (nhãn dài xuống dòng, giá trị thẳng một cột)",html:()=>kitRows([["Đêm thị tẩm vui",["Trâm ngọc bích, Túi thơm",kitChip("Bạc",20,"g")],"t"],["Sinh hoàng tử",["Ngọc bội ngự ban",kitChip("Bạc",30,"g")],"t"],["Tiết Vạn thọ (tháng 8, người được sủng nhất)","Vòng ngọc","t"],["Chưa biết","chưa rõ","n"]])},
