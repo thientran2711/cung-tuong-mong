@@ -11,3 +11,4 @@ dev/site/.cdn-state.json
 /dev/fxwork/cut/
 /dev/fxwork/vid/
 /dev/fxwork/*.jpg
+dev/test/_out/
