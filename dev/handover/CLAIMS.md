@@ -341,3 +341,6 @@
 | DƯ ĐỒ MAP FRAME painted (sonnet art; FOREMAN_C 18:45Z s21; 3 style samples, 9-slice, mocked on iPad 1180x820 + Fold 755x1000 → owner; chosen one → KIT READY to main) | review/map-frame-art | C | session_011xDdVQTc7r6hnCLcZWWdgm | RUNNING | 16/11 18:55Z |
 | mg-tune review r1 (opus, BIG): review/mg-tune 96131b41 (mgPace time part, BAL.mgTier.pace) | review/mg-tune-r1 | B | session_01N1tNP6N19V74jBmPimyvBU | RUNNING | 16/11 19:03Z |
 | img-cleanup (owner OD 18:40Z/18:50Z): images out of git, check, briefs | review/img-cleanup | B | (B opens) | INBOX | 16/11 19:05Z |
+| fest-fx review r1 (opus, BIG: buổi/save migration) of a114024a3 | review/fest-fx-r1 | main s22 | session_01UV1Szm757NUrANyodNJyo2 | RUNNING | 16/11 19:06Z |
+| pl-courtyards r2 review (sonnet) of pl-courtyards-r1 8b4a2160 + single-hall ff05f03d | review/pl-courtyards-r2 | main s22 | session_01UV1SzjAzD5HAahkBznYHxb | RUNNING | 16/11 19:06Z |
+| stage-pets r6: Hành sự = her room only; Dư đồ → courtyard → full-screen place (reuse palace-map*) | review/stage-pets | main s22 | session_01UV1SzhWwh7s4pLGFcFfgmo | RUNNING | 16/11 19:06Z |
