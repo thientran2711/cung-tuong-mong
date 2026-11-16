@@ -2,21 +2,21 @@
 | item | branch | owner (main/B/C/D) | session id | state | UTC |
 |---|---|---|---|---|---|
 | merge-train-4 (12 PASSes → main) | review/merge-train-4 | main s9 | session_01UV1SzkP9E6Y2WTYPMnL4C9 | RUNNING | 16/11 05:18Z |
-| coop-night-sync | review/coop-night-sync | main s8 (subagent, relays to reports/) | session_01UV1SzjqkbFYiPYgkC2jdvx | RUNNING | 16/11 05:19Z |
-| modal-scroll reviewer | review/modal-scroll-r1 | main s8 (subagent, relays to reports/) | session_01UV1SzjqkbFYiPYgkC2jdvx | RUNNING | 16/11 05:19Z |
-| an-tinh-fix + log-sync reviewer | review/an-tinh-fix-r1 | main s8 (subagent, relays to reports/) | session_01UV1SzjqkbFYiPYgkC2jdvx | RUNNING | 16/11 05:19Z |
-| pcard-actrow reviewer | review/pcard-actrow-r1 | main s8 (subagent, relays to reports/) | session_01UV1SzjqkbFYiPYgkC2jdvx | RUNNING | 16/11 05:19Z |
+| coop-night-sync | review/coop-night-sync | main s8 (subagent, relays to reports/) | session_01UV1SzjqkbFYiPYgkC2jdvx | ENDED (session gone; live or handed on — s13 08:08Z) | 16/11 05:19Z |
+| modal-scroll reviewer | review/modal-scroll-r1 | main s8 (subagent, relays to reports/) | session_01UV1SzjqkbFYiPYgkC2jdvx | ENDED (session gone; live or handed on — s13 08:08Z) | 16/11 05:19Z |
+| an-tinh-fix + log-sync reviewer | review/an-tinh-fix-r1 | main s8 (subagent, relays to reports/) | session_01UV1SzjqkbFYiPYgkC2jdvx | ENDED (session gone; live or handed on — s13 08:08Z) | 16/11 05:19Z |
+| pcard-actrow reviewer | review/pcard-actrow-r1 | main s8 (subagent, relays to reports/) | session_01UV1SzjqkbFYiPYgkC2jdvx | ENDED (session gone; live or handed on — s13 08:08Z) | 16/11 05:19Z |
 | goal-strip-fix + kit-sweep | review/kit-sweep | main s8 (subagent, relays to reports/) | session_01UV1SzjqkbFYiPYgkC2jdvx | goal-strip LIVE a363cc14a; kit-sweep RUNNING | 16/11 05:19Z |
-| facefx-all reviewer | review/facefx-all-r2 | main s8 (subagent, relays to reports/) | session_01UV1SzjqkbFYiPYgkC2jdvx | RUNNING | 16/11 05:19Z |
-| book-fig reviewer | review/book-fig-r1 | main s8 (subagent, relays to reports/) | session_01UV1SzjqkbFYiPYgkC2jdvx | RUNNING | 16/11 05:19Z |
-| cardflip-smooth reviewer | review/cardflip-smooth-r1 | main s8 (subagent, relays to reports/) | session_01UV1SzjqkbFYiPYgkC2jdvx | RUNNING | 16/11 05:19Z |
+| facefx-all reviewer | review/facefx-all-r2 | main s8 (subagent, relays to reports/) | session_01UV1SzjqkbFYiPYgkC2jdvx | ENDED (session gone; live or handed on — s13 08:08Z) | 16/11 05:19Z |
+| book-fig reviewer | review/book-fig-r1 | main s8 (subagent, relays to reports/) | session_01UV1SzjqkbFYiPYgkC2jdvx | ENDED (session gone; live or handed on — s13 08:08Z) | 16/11 05:19Z |
+| cardflip-smooth reviewer | review/cardflip-smooth-r1 | main s8 (subagent, relays to reports/) | session_01UV1SzjqkbFYiPYgkC2jdvx | ENDED (session gone; live or handed on — s13 08:08Z) | 16/11 05:19Z |
 | weather-fx-one | review/weather-fx-one | main s8 (subagent, relays to reports/) | session_01UV1SzjqkbFYiPYgkC2jdvx | WIP-PUSHED (handed to s9) | 16/11 05:19Z |
-| act-dedupe w1 reviewer | review/act-dedupe-r1 | main s8 (subagent, relays to reports/) | session_01UV1SzjqkbFYiPYgkC2jdvx | RUNNING | 16/11 05:19Z |
-| postmerge-fix-1 | review/postmerge-fix-1 | main s8 (subagent, relays to reports/) | session_01UV1SzjqkbFYiPYgkC2jdvx | RUNNING | 16/11 05:19Z |
-| servant-system | review/servant-system | main s8 (subagent, relays to reports/) | session_01UV1SzjqkbFYiPYgkC2jdvx | RUNNING | 16/11 05:19Z |
+| act-dedupe w1 reviewer | review/act-dedupe-r1 | main s8 (subagent, relays to reports/) | session_01UV1SzjqkbFYiPYgkC2jdvx | ENDED (session gone; live or handed on — s13 08:08Z) | 16/11 05:19Z |
+| postmerge-fix-1 | review/postmerge-fix-1 | main s8 (subagent, relays to reports/) | session_01UV1SzjqkbFYiPYgkC2jdvx | ENDED (session gone; live or handed on — s13 08:08Z) | 16/11 05:19Z |
+| servant-system | review/servant-system | main s8 (subagent, relays to reports/) | session_01UV1SzjqkbFYiPYgkC2jdvx | ENDED (session gone; live or handed on — s13 08:08Z) | 16/11 05:19Z |
 | reign-road reviewer | review/reign-road-r1 | main s8 (subagent, relays to reports/) | session_01UV1SzjqkbFYiPYgkC2jdvx | LIVE 0a311183f | 16/11 05:19Z |
-| mortality | review/mortality | main s8 (subagent, relays to reports/) | session_01UV1SzjqkbFYiPYgkC2jdvx | RUNNING | 16/11 05:19Z |
-| outside-r2-r2 reviewer | review/outside-r2-r2 | main s8 (subagent, relays to reports/) | session_01UV1SzjqkbFYiPYgkC2jdvx | RUNNING | 16/11 05:19Z |
+| mortality | review/mortality | main s8 (subagent, relays to reports/) | session_01UV1SzjqkbFYiPYgkC2jdvx | ENDED (session gone; live or handed on — s13 08:08Z) | 16/11 05:19Z |
+| outside-r2-r2 reviewer | review/outside-r2-r2 | main s8 (subagent, relays to reports/) | session_01UV1SzjqkbFYiPYgkC2jdvx | ENDED (session gone; live or handed on — s13 08:08Z) | 16/11 05:19Z |
 | C41b tuduc-pic | review/tuduc-pic | B | session_01N1tNP49iueFUdHKedRCLBF (B1 in-session agent) | DONE 2954ff9f | 16/11 05:20Z |
 | C41b review | review/tuduc-pic-r1 | B | session_01N1tNP4dwJ1QEvs8oHcaKvZ | PASS 2954ff9f | 16/11 06:20Z |
 | D34 review | review/scheme-games-port-r1 | B | session_01N1tNP49iueFUdHKedRCLBF (B1 in-session agent) | PASS e25486e0 | 16/11 05:19Z |
@@ -40,7 +40,7 @@
 | servant-system A reviewer (LIVE BUG: household on her room stage) | review/servant-system-r1 | main s10 | (opening) | DONE PASS e82a9bcf79 (session_01UV1SzgqoV1xrEjLJsbAr1p) | 16/11 06:00Z |
 | weather-fx-one finisher (shots, FPS, tests → SẴN SÀNG KIỂM) | review/weather-fx-one | main s10 | session_01UV1SzjUEYLKCbbxAiZmT48 | READY-FOR-REVIEW f6141594 (worker, this session) | 16/11 07:10Z |
 | scheme-games-port-r1 kit sign-off (jopic grid-auto-rows:max-content) | review/scheme-games-port-r1 | main s10 | — | KIT OK → merge-train-4 | 16/11 06:00Z |
-| owner chat-history search (4 roads per origin, 12–14 chapters) | (report only) | main s9→s10 | session_01UV1SzjEdjQ8f47FqGmmgP3 | RUNNING | 16/11 05:54Z |
+| owner chat-history search (4 roads per origin, 12–14 chapters) | (report only) | main s9→s10 | session_01UV1SzjEdjQ8f47FqGmmgP3 | ENDED (session gone; live or handed on — s13 08:08Z) | 16/11 05:54Z |
 | C44 cloud-save review + SECURITY | review/cloud-save-r1 | D | session_01DgYSWq1uCD8NVh8dB3LBba | PASS 7e187abe | 16/11 06:26Z |
 | D50 dlg-fig-ph review | review/dlg-fig-ph-r1 | D | session_01DgYSWnFEYrjgcFbBRjAWyc | PASS fd7768b3 | 16/11 07:17Z |
 | promo-skip audit + fix (long-road rewards → direct rank; first prince rank, later sons/princess waived exam; gain+loss; full-seat compensation) | review/promo-skip | main s10 → s11 | session_01UV1SzhzQSFQc43nUVdpwAi | SẴN SÀNG KIỂM 7f655c55 | 16/11 07:55Z |
@@ -59,8 +59,8 @@
 | coop-chat review | review/coop-chat-r1 | D | session_01DgYSWnc7QSik7k9buMTQwK | RUNNING | 16/11 06:26Z |
 | cardflip-smooth-r1 re-merge on main | review/merge-hot-3 | main s11 | session_01UV1SzhTBy9XN8Ebp4ao4yp (sonnet) | LIVE feba37e5 | 16/11 06:29Z |
 | canon-pairs: decide 57 old→new rule pairs in PRIORITY/ART rule files | claude/cung-tuong-mong-handover-hj0h8w | main s11 | session_01UV1SzgjGLkdeoiUTB6qRdG (opus, rules) | DONE | 16/11 06:29Z |
-| kc-lore: td home road vs "cả nhà bị xử trảm" (+ scan all 6 home-road origins) | review/kc-lore | main s11 | session_01UV1SzifvyTS1XcBknF7tFA (sonnet) | RUNNING | 16/11 06:30Z |
-| flip-newlife reviewer (+ .ksub overlap fix on identity card) | review/flip-newlife-r1 | main s11 | session_01UV1SzhzxBjcTWbAts1faFn (sonnet) | RUNNING | 16/11 06:35Z |
+| kc-lore: td home road vs "cả nhà bị xử trảm" (+ scan all 6 home-road origins) | review/kc-lore | main s11 | session_01UV1SzifvyTS1XcBknF7tFA (sonnet) | ENDED (session gone; live or handed on — s13 08:08Z) | 16/11 06:30Z |
+| flip-newlife reviewer (+ .ksub overlap fix on identity card) | review/flip-newlife-r1 | main s11 | session_01UV1SzhzxBjcTWbAts1faFn (sonnet) | ENDED (session gone; live or handed on — s13 08:08Z) | 16/11 06:35Z |
 | place-glyphs reviewer (glyphs only; NVP scene stays unwired) | review/place-glyphs-r1 | main s11 | session_01UV1SzknxC4i1bfnzo28AyP (sonnet) | LIVE 11100a99 | 16/11 06:41Z |
 | postmerge-fix-1 reviewer (buổi tint removal + kpshort test) | review/postmerge-fix-1-r1 | main s11 | session_01UV1Szgd8jzCKaWt4HRS5Am sonnet | LIVE a942395b | 16/11 06:44Z |
 | story-roads 14 chapters: plan + phase 1 (frame + j67 port) | review/story14-p1 | main s11 | session_01UV1SzkHMTxeSLrXW9U3BdC (opus, structure) | RUNNING | 16/11 06:46Z |
@@ -87,7 +87,7 @@
 | D26 review (opus) | review/memories-r1 | C | session_011xDdVQLaxDb8JUtETpVAYr | RUNNING | 07:26Z 16/11 |
 | D41 review (opus) | review/promote-servants-r1 | C | session_011xDdVRpL5fTu1nJk5T2Xgz | RUNNING | 07:26Z 16/11 |
 | C8 fig-bg-k1 review (sonnet) | review/fig-bg-k1-r1 | C | session_011xDdVSK9SWpuBJGX5bSxtc | RUNNING | 07:26Z 16/11 |
-| orphan-audit: every dropped branch/claim/queue item across old sessions (owner 07:44Z) | (report only) | main s11→s12 | session_01UV1SzhYyEjF9w3R6uZtPwu (sonnet) | RUNNING | 16/11 07:40Z |
+| orphan-audit: every dropped branch/claim/queue item across old sessions (owner 07:44Z) | (report only) | main s11→s12 | session_01UV1SzhYyEjF9w3R6uZtPwu (sonnet) | ENDED (session gone; live or handed on — s13 08:08Z) | 16/11 07:40Z |
 | person-popup template + one frame size per event (OD 07:35Z, 07:37Z) whole family + kit-conform FAIL rule | review/popup-fullbody | main s12 | session_01UV1Szh9gWrn3DgqoTxQvpj (sonnet) | RUNNING | 16/11 07:30Z |
 | stage slot overlap j59 / kit §33 (OD 07:39Z) | review/stage-slots-fix | main s12 | session_01UV1SzjNqbWfsrMRmdkvDkt (sonnet) | RUNNING | 16/11 07:30Z |
 | ONE design frame + uniform scale; Fold portrait = iPad half (OD 07:47Z, 07:50Z) — plan + phase 1 | review/design-scale | main s12 | session_01UV1SzjmR9rHoafmnuNS1KA (opus) | RUNNING | 16/11 07:30Z |
