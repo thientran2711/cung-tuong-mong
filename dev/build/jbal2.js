@@ -114,6 +114,14 @@ Object.assign(BAL,{itd:{allow:false}});
 Object.assign(BAL,{rg:{at:[1,5,10,18,27,37],decideAfter:2,decideWait:3,catchUp:2,drift:.65,noise:[40,3],qs:.4,npcS:45,npcP:.08,A:48,B:60,thK:.1,pk:.46,pkQ:1.25,tr0:30,
  swDanh:5,swLead:8,swRel:8,swTr:10,swCd:6,swMax:2,joinRel:4,famAf:12,erCd:3,erP:30,ngoai:3,winSung:14,winDanh:6,rankCap:6,rankSung:0,
  winTh:24,winShield:6,bacWin:160,loseSung:8,loseTh:12,loseDanh:6,loseHouse:30,winHouse:15,npcWin:6,npcLose:8,lnCd:2,lnRetry:4}});
+/* MINIGAME DIFFICULTY TIERS (mg-balance, owner 16/11 07:10Z / 07:25Z "mức vừa"; read by jmgt mgTier, j82, j83 works, jexam, jts, review/nw-*):
+   occ = [base, perRank] stake of each occasion (stake = base + perRank × rank 0..7, + big for a big contest; exam: rank = the target rank);
+   mid/slope = board ease at the matching level and its change per level of gap (ease 0..5, engines: higher = easier); band = gap that turns Vừa
+   into Dễ / Khó; kAdj = per-engine ease trim from the bot calibration (dev/PROGRESS_mg-balance.md); word = raw thresholds Tạm được/Khá/Giỏi/Xuất sắc;
+   aid = ease thresholds of the aid tiers (hints on the board / fewer / on the button); lesson = raw for lesson grade 2 / 3;
+   wk = works (j83): lvQ[art level] added to the play, th = Khá / Tinh xảo / Tuyệt phẩm score thresholds (material bonus BAL.wk.matQ, cap BAL.wk.cap). */
+Object.assign(BAL,{mgTier:{occ:{hoc:[0,.5],hoi:[1,.5],trieu:[1.5,.5],exam:[1,.5],tuyen:[1.5,0]},big:1,stakeMax:6,mid:2,slope:.8,band:1.5,kAdj:{},
+ word:[3,5,7,9],aid:[3.5,1.5],lesson:[5,8],lessonPts:[2,5,8],wk:{lvQ:[0,0,1,1,2,2],th:[6,10,14]}}});
 /* TÁT, three tiers (owner 16/11; jface act "tat", jslap game). Index 1..3 = nhẹ / vừa / nặng. sac = Sắc the target loses while the mark lasts; wk = weeks the mark stays
    (+0/1 random); duc = the slapper's Đức; rel / oan = grudge (relAdd / extra oán on the target); hoang/sung = Hoàng thượng hears (chance, Sủng); thau = Thái hậu rebukes a nặng slap
    (chance, Danh); evT = the target keeps evidence against the slapper, evW = a witness does (chance per slap); rep = weekly chance a passer-by reports a mark that is still on (needs vừa+);
