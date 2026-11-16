@@ -151,7 +151,7 @@
 | merge-train-7 | review/merge-train-7 | main s15 | session_01UV1SzhPJZQY22jVeExSgVk | RUNNING | 16/11 10:53Z |
 | close-maid review (opus) | review/close-maid-r1 | D | session_01DgYSWpkGbZi35U4djYBBCe | PASS ebc85f78 | 16/11 11:06Z |
 | D21 coop-b1b5 fix (jcycle guest answer → host; r2 FAIL) | review/coop-b1b5-fix | D | session_01DgYSWnyGPZR3V86DPDjc32 (opus) | DONE SẴN SÀNG KIỂM 7c7fcc45 | 16/11 11:16Z |
-| design-scale-p2 REVIEW (opus; phase 2/3 + live maptab/cardtab reset bug + toilette KIT REQUEST verdict) | review/design-scale-p2-r1 | main s15 | session_01UV1Szgio4EjKLQKSt3ZP8j | RUNNING | 16/11 11:22Z |
+| design-scale-p2 REVIEW (opus; phase 2/3 + live maptab/cardtab reset bug + toilette KIT REQUEST verdict) | review/design-scale-p2-r1 | main s15 | session_01UV1Szgio4EjKLQKSt3ZP8j | PASS d8950434 | 16/11 14:30Z |
 | D12 mood-bar reviewer | review/mood-bar-r1 | B | session_01N1tNP2tDyXgEkNtxUKNKVN (opus) | DONE PASS ce43d3b5 (archived) | 16/11 11:38Z |
 | nw-lantern reviewer | review/nw-lantern-r1 | B | session_01N1tNP2zeRSySKE8su2oinU (sonnet) | DONE PASS 9696bc72 (archived) | 16/11 11:38Z |
 | nw-quiz reviewer | review/nw-quiz-r1 | B | session_01N1tNP4LSL2zPmYsMcPsjMh (sonnet) | DONE PASS 33730518 (archived) | 16/11 11:38Z |
