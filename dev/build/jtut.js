@@ -157,7 +157,7 @@ window.kitCoach=kitCoach;window.kitCoachOff=coachOff;
 
 /* ---------- kitTip: small lời dặn card, never blocks, once each ---------- */
 let TIPEL=null;
-function tipPlace(){if(!TIPEL)return;let top=innerHeight;document.querySelectorAll("#tabs,#next,.kloadchip").forEach(e=>{if(!vis(e))return;const r=e.getBoundingClientRect();if(r.height&&r.top>innerHeight*.5)top=Math.min(top,r.top)});
+function tipPlace(){if(!TIPEL)return;let top=innerHeight;document.querySelectorAll("#tabs,#next").forEach(e=>{if(!vis(e))return;const r=e.getBoundingClientRect();if(r.height&&r.top>innerHeight*.5)top=Math.min(top,r.top)});
  TIPEL.style.bottom=Math.max(10,Math.round(innerHeight-top+10))+"px"}
 function kitTip(spec){tipOff();const el=document.createElement("div");el.className="ktip"+(rm()?"":" ktut-mv");el.id="ktip";el.setAttribute("role","status");
  el.innerHTML=kitPersonDlg({kind:"guide",title:spec.title,sub:MMN()+" dặn",p:mmFace(),fig:mmFig(),name:`<b class="kname" style="--rc:#a0584a">${MMN()}</b>`,pic:spec.pic?{src:spec.pic,lab:""}:(ia("Hành sự")?{src:ia("Hành sự"),lab:""}:null),html:`<div class="ktut-say">${spec.html}</div>`,btns:[{k:"tip",t:"Đã hiểu"}]});
