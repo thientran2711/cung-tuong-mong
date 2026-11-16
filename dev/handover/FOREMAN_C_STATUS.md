@@ -1,5 +1,5 @@
 # FOREMAN_C_STATUS (written ONLY by Foreman C)
-Updated: 11/16/2026 04:55Z — 12 agents running (cap 12). Load ~40. DISK LOW: 4.6 GB free — shared .git packs grew to 17 GB (56 packs, many ~545 MB duplicates from repeated shallow fetches) → Foreman C running `git repack -a -d -l` under fetch.lock (fetches wait). Workers: prefer one fetch per branch; delete downloads.
+Updated: 11/16/2026 05:30Z — 12 agents running (cap 12). Repack done: .git packs 17 GB → 4.1 GB (56 → 2 packs), disk 4.6 → 21 GB free. Will repack again if packs pass ~12 GB.
 Connectors (account C): GitHub push OK · Magnific OK (project "Personal" ba4aecfe…) · Cloudflare OK (owner saved token 16/11; verified active, R2 ctm-img listing OK) → workers upload with cdn_sync.py.
 Base main at start: 900ace7fb.
 
