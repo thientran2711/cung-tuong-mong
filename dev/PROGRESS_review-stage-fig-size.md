@@ -29,3 +29,9 @@ Owner: "Sao khung này, khung trái nhân vật to vậy … nếu cắt váy th
   shrunk to her full robe width (310–351 px tall in a 437–495 px column, ~125–178 px empty above). Fixed: crossOrigin="anonymous" on both
   (CDN sends ACAO *, SW fetches CDN in CORS mode). After: Thái hậu fills the column height (~451 px in 477), sleeves cut at the column edge,
   face whole, aspect true. Also: a not-yet-measured figure is hidden instead of drawn at raw picture size.
+- Stage <img class="kesimg"> also crossorigin="anonymous" (one shared download with the kitFigBody CORS read).
+- Merged origin/main 2d038139e. Scan after (stage-fig-size.js, 7 sizes): every column ≤ 36 %, face true, sq true, distorted 0, over 0, no page
+  errors; Thái hậu chê dung nhan / Thái hậu triệu: 411–469 px tall in 437–495 px columns (was 303–351), sleeves cut at the column edge.
+  book-figwide.js 755x1000/1180x820/820x1180/686x880 × 3 Thái hậu figures: ALL OK. Identity card figure loads at all 4 sizes.
+  Rows measured mid-download (figH 0 / 900 raw) are this sandbox's saturated CDN link (first-run 211 MB preload, SW blocked); the figure is
+  now hidden until measured instead of drawn at raw size.
