@@ -420,7 +420,7 @@ picture rows by hand inside a dialog. Pick by the rule; never add a per-place / 
 | PERSON CARD (`pcard` §3 / 28.17 / 31.9) | `.modal.pcm` | the person card only (exempt from T1–T5) |
 | SLOT / ITEM CARD (28.13f `kitSlotDress`) | T2 inside the panel | an equipment slot / item detail |
 | NOTICE (42.2 `kitLine`) | one pill | a one-line passing notice; never a floating chip strip over the stage or the tab bar |
-| STAGE RAIL (§77 `kitStageRail`) | round icons, left edge of the stage | every shortcut button on the stage (Lịch, Chat, Mục tiêu); nothing else floats on the stage or over the tabs |
+| STAGE RAIL (§77 `kitStageRail`) | square icons, left edge of the stage | every shortcut button on the stage (Lịch, Chat, Mục tiêu) and every status icon (§77.1 `kitStatusIcon`: download, …); nothing else floats on the stage or over the tabs |
 Second-layer panels that must open OVER a #modal (item card `#kidfl`, co-op friend panel `#kctmp`, load panel) use the same `.dlg.kpanel`
 markup (kpHeader + kit ✕ + T1/T2 body) in their own layer. Scan: `node dev/test/kit-conform.js <url> <out.json> [WxH,...] [maxPend]` opens every
 panel kind + place cards + chapter detail + item card + every PEND dialog, classifies each CONFORMS / MIXED / CUSTOM by template, flags any loose
@@ -2433,8 +2433,7 @@ Owner 11/14: images + sounds are downloaded to the device on first entry with a 
 - `kitProgress({label,have,total,sub})` → `.kprog`: `h4.kpst` label · track `.kprog-t` (12 px, `--line` border, `--k-card2` ground, fill
   lacquer red → amber `#b0402c → #c98a2a` like the kit slider) · number `.kprog-n` "26 / 83 MB" (display font, `--gold`) · sub line `.kprog-s`
   (time left in words: "còn chừng nửa phút / một phút / N phút", "sắp xong"). Never "%" (VANPHONG); MB is the only unit.
-- Background indicator `.kloadchip` (bottom-left, z 8700, above nothing important): one `.kchip` button with a 64 px `.kprog-t` + MB;
-  tap = "Tạm ngưng thỉnh tranh · chạm để thỉnh tiếp" (remembered); fades when done.
+- Background indicator = the status icon `dl` (§36.6 / §77.1, no chip): tap → info panel with `kitProgress` + "Tạm ngưng / Thỉnh tiếp" (remembered); still ✓ then gone when done.
 - Wording: "thỉnh" (bring in) for downloading; no tải/dữ liệu/phiên bản (VANPHONG §3).
 Mechanics (not visual): assets.json (dev/site/assets.py) = [path, sha256/16, bytes, core|fig]; cache `ctm-assets` keyed `path?h=hash`,
 never wiped by a build (sw.js prunes only keys no longer in assets.json); app shell in `ctm-shell-<content hash>`; co-op worker and every
@@ -2525,10 +2524,11 @@ every page), the text column on the right with the name (continuation: "(tiếp 
 (`paginate`, real heights) and continues on the next page only when really full; the figure never shrinks. Phones (page < 440 px): same, the
 text sits on a soft paper panel over the figure's edge. The filler "(Đã ghi vào mục Đã biết …)" never becomes a fact in the book.
 
-### 36.6 BACKGROUND DOWNLOAD CHIP (amends §35, owner 04:15Z) — never over the game
-While a life is on screen the chip lives in a reserved strip UNDER the tab bar: `body.kload-dock .game{padding-bottom:30px}` and the chip at
-the bottom-left inside it; only a dialog's own buttons lift it; it hides while the week book is open; when done it fades and the strip is
-given back. Title screen: the old placement. (Touches jload `placeChip`/CSS only; the first-load flow of review/cdn-images is untouched.)
+### 36.6 BACKGROUND DOWNLOAD = STATUS ICON (owner 16/11 16:25Z; overwrites the old chip / strip under the tab bar) — see §77.1
+No chip and no reserved strip any more (`body.kload-dock`, `.kloadchip` are gone: the game frame keeps its full height). The "Thỉnh tranh nhân vật" background
+download is ONE `kitStatusIcon` ("dl"): a small SQUARE icon in the stage rail (title screen: the same button in a bottom-left dock), a calm bobbing ↓ while it
+runs, still ✓ for 5 s when it is finished and then gone, a red dot when it is paused / cut. Tap → kit info panel (progress bar, what is coming, "Tạm ngưng /
+Thỉnh tiếp"; ✕ top-right, tap outside, Esc). (Touches jload `paintChip`; the first-load flow of review/cdn-images is untouched.)
 
 ### 36.7 NGƯỜI CHẠY VIỆC (owner item 2, was "Sai đi: …")
 One line on the cung nữ thân tín card only: `runnerLine()` → "Người chạy việc: <tên>" (tap: what it means) + "Đổi ›" when two or more servants
@@ -3713,7 +3713,7 @@ legends), buttons `.kbtn` / `.kbtn.alt`. No private frame, no new art.
   taps through the hole only and never puts the card over the target; every other step takes all taps outside the card. Re-measured on
   resize, rotation, scroll and every 140 ms while open (the hole follows a target that moves: page turn, map unroll, re-render). No target =
   centred card on a plain dim. Reduced motion / Cảnh động off (`kmReduced`): no slide of the hole, no card rise.
-- `kitTip({id, title, html})` → `.ktip` above the tab bar (`#tabs` / `#next` / `.kloadchip`, like the "Có bản mới" card): small portrait,
+- `kitTip({id, title, html})` → `.ktip` above the tab bar (`#tabs` / `#next`, like the "Có bản mới" card): small portrait,
   1–3 sentences, one `.kbtn` "Đã hiểu". Only the card takes taps; it never opens over a dialog, the menu, a motion moment, the week book or a
   mini game (it waits), and a dialog that opens hides it until the dialog is gone. One at a time, 1.5 s apart, each id once per device.
 - **Lượt dẫn đầu kiếp** (`KTUT_STEPS`, "lời dặn n/12"): 1 **Game này chơi gì** (owner 16/11: "bạn tôi hỏi ủa game này chơi cái gì? Mục tiêu là gì?"):
@@ -3786,6 +3786,23 @@ SHAPE RULE (owner 16/11 15:05Z, "game của mình đa số các nút là hình v
 - The chapter detail closes like every kit modal: ✕ in the header, tap outside, Esc (a "Đóng" close option → 32.10 kit ✕).
 - Sample: kit page §77. Test: `node dev/test/stage-rail.js <url> <outdir> [WxH,...]` (rail inside the stage, no button over a face box,
   no goal strip, no desk calendar, goal → detail with ✕ / Esc / outside close, calendar → LỊCH panel).
+
+### 77.1 kitStatusIcon · ONE status icon (owner 16/11 16:25Z, review/status-icons) — `dev/build/jstatus.js` (after jrail) on top of `kitStageRail`
+Owner: "nhiều game bây giờ … chỉ là một cái icon biểu tượng download nằm ở một cái góc nhỏ … có animation sao đó để cho người chơi biết là có cái gì đó đang
+download về. Người nào muốn biết thông tin thì bấm vô cái nút đó thì nó sẽ hiện những cái thông tin … Cái nào bỏ vô trong cái icon được thì mình cứ việc bỏ thôi."
+RULE: a status that only says "something is running / done / needs you" is NEVER a chip, strip or reserved band on screen. It is a status icon = the §77 square
+rail button + (optional) activity animation + tap → a kit info panel with the details.
+- API: `kitStatusIcon.set(id,{title, glyph, busy:()=>bool, done:()=>bool, badge:()=>bool, show:()=>bool, panel:()=>kitPanelSpec, order})` · `.refresh()` · `.remove(id)`.
+  It registers a rail item `st-<id>` (rail extras: `glyph` text instead of a painted `icon`, `busy`, `done`, `onTitle`). Old saves: nothing stored.
+- Look/motion: the rail button as §77. busy = the glyph bobs ±3 px with opacity .55→1 (transform + opacity only, `calc(1.8s*var(--pace))`, no layout, no
+  JS timer; off under reduced motion / Hiệu ứng Gọn via `reducedMotion()` — static glyph then); done = still, green; badge = the seal-red dot (needs her).
+  No @media (KIT §0). While no game is on screen the rail items with `onTitle` sit in a fixed bottom-left dock (`.krail.kstdock`; hidden behind dialogs / the book).
+- Panel: `kitPanel({kind:"info",look:1,…})`; the only options are real actions (e.g. "Tạm ngưng / Thỉnh tiếp"); closing = ✕ / tap outside / Esc, never "Đã hiểu".
+- PLACEHOLDER GLYPH (text ↓ ✓) until Foreman C paints the icon: ART REQUEST: download icon (then `icon:"img/kit/….webp"`, no code change elsewhere).
+- Users: `dl` (Thỉnh tranh nhân vật, jload). Candidates that are the same kind but NOT converted yet (list in dev/handover/reports/status-icons.md): co-op buổi clock `#kctm`
+  + friend chip `#kctmf` (jcooptimer: the number must stay glanceable — coordinator decides), Sổ mây sync result (jcloud, panel only).
+- Sample: kit page §77.1. Test: `node dev/test/status-icon.js <url> <outdir> [WxH,...]` (idle → none; busy; paused dot; done ✓ then gone; panel ✕ / Esc / no "Đã hiểu";
+  no old chip / dock band; game padding-bottom unchanged; icon 44 px inside the stage, over no face).
 
 ### Dialog sticky bottom bar vs sticky strips (review/flip-newlife-r1)
 The pinned bottom action bar of a kit dialog (`.dlg.kpsc>#mb>.kpscopts`, `.dlg.kpanel>.mr`) is z-index 9, ABOVE every sticky strip that scrolls in the dialog body (`.ksub` 5/7, `.kpstick` 6). Before r1 the identity card face-pick strip painted over "Nhận thân phận / Đổi thân phận" at 1180x820. New sticky parts inside a dialog body must stay below 9.
