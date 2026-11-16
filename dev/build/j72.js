@@ -523,8 +523,8 @@ window.q72Bot=function(){if(!S||S.dead||Q.length||!q72On())return false;const q=
   s:[G("home","Khâu túi ngũ sắc","tai",65,2,{bac:-10}),G("A","Mang sang Càn Ninh cung","",100,1)],ok:{r:8,fn:()=>{let n=0;for(const [k] of allKids())if(k.alive&&k.age<12){k.hp=cl((k.hp||80)+3,0,100);n++}return `${n} đứa trẻ đeo túi trừ tà (thể trạng +3).`}},no:{r:-4}});
  T7("th_aodong","craft",{r:"th",w:c=>c.sea==="Đông"?2:0,t:"May áo bông cho cung nhân già",h:"“Trời trở rét, mấy ma ma già trong Đức Thọ cung áo mỏng. Ai gia muốn các phi tần góp tay may áo bông.”",dl:6,
   s:[G("home","Cắt may áo","tai",65,2,{bac:-20}),G("A","Mang áo sang Đức Thọ cung","",100,1)],ok:{fx:{duc:3},r:6},no:{r:-5}});
- T7("akf_den","craft",{r:"akf",w:fest(12,1),t:"Làm đèn câu đố Nguyên tiêu cùng {A}",h:"“Tết Nguyên tiêu con muốn treo đèn câu đố cho phụ hoàng đoán. {Nc} nghĩ giúp con mấy câu đố hay.”",dl:3,
-  s:[G("home","Nghĩ câu đố, dán đèn","thi",55,1)],ok:{fx:{danh:2},fn:X=>{X.A.o.tal=cl((X.A.o.tal||40)+2,0,100);return `${X.A.n} tài cán +2.`}},no:{}});
+ T7("akf_den","craft",{r:"akf",w:fest(12,1),t:"Làm đèn lồng Nguyên tiêu cùng {A}",h:"“Tết Nguyên tiêu con muốn treo đèn lồng cho phụ hoàng ngắm. {Nc} giúp con chọn dáng đèn, chọn màu cho đẹp.”",dl:3,
+  s:[G("home","Chọn dáng, dán đèn","thi",55,1)],ok:{fx:{danh:2},fn:X=>{X.A.o.tal=cl((X.A.o.tal||40)+2,0,100);return `${X.A.n} tài cán +2.`}},no:{}});
  T7("tv_mua","craft",{r:"man:thị vệ",w:fest(6,7),t:"Xin thuốc trị thương sau Hội Phượng",h:"“Hội Phượng thi cưỡi ngựa bắn cung, đội thần bị thương mấy người, thuốc ở Thái y viện phải có phi tần xin mới cấp. {Nc} thương giúp.”",dl:3,
   s:[G("tyv","Xin thuốc trị thương","danh",65,1,{bac:-15})],ok:{r:12},no:{r:-4}});
  T7("maid_tet","social",{r:"maid",w:fest(12),t:"Gửi quà Tết về nhà cho {A}",h:"“Tết sắp đến, nô tỳ muốn gửi ít quà về cho mẹ mà không có đường ra. {Nc} cho nô tỳ gửi theo người của cung mình.”",dl:2,
