@@ -384,3 +384,4 @@
 | D GO-LIVE prep successor (opus; handover reports/d-golive.md) | review/<each>-golive | D | session_01DgYSWnR8rVEcaej6KJZLQG | RUNNING | 16/11 20:27Z |
 | names-unique (opus): ONE name core, unique full names for everyone, ancient Chinese court names, no VN-style surnames; history expert first; old-save migration (OD 20:20Z) | review/names-unique | main s23 | session_01UV1Szgg373UqQQZzKsCM7H | RUNNING | 16/11 20:27Z |
 | one-core LAND (opus, BIG): re-merge review/one-core 7b9d022f onto main, extend guard to code added since, wire one-core-guard + kit-conform into dev/tools/quickcheck.sh (go-live gate) (owner 20:32Z) | review/one-core-land | main s23 | (opening) | RUNNING | 16/11 20:29Z |
+| figure cut-out clean + hi-res (URGENT owner bug 20:35Z; Luân hồi neck streak/warped face; resumes paused face-sharp/fig-hd-upscale) | review/fig-cutout-clean | C | (C opens) | INBOX | 16/11 20:29Z |
