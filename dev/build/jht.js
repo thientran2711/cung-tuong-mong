@@ -113,7 +113,7 @@ PEND.htban=pp=>{const k=S.kids.find(x=>x.name===pp.k&&pkHome(x));if(!k||k.pB)ret
  const rows=C.map(q=>`<div class="h54c">${mdH(qnFace(q),"sm")}<span>${qLine(q)}</span></div>`).join("");const O=[];
  for(const q of C){const d=HT.dow[q.tier],b=pkBack(k,q),o=pkO(S,k,q),R2=q.tier<=1?pkRivals(S,k):[];const hi=R2.filter(m=>rkOf(m)>rkOf(S));
   O.push({n:`Xin chỉ ban hôn: ${q.name}${S.bac<d?` (thiếu bạc: cần ${d})`:""}`,fx:{bac:-d},x:[word(o),`thành: hứa hôn; nhà ${q.off} chống lưng ngươi và con +${b} (thế lực phe, tranh ghế, thứ tự kế vị của con), các phi tần phe ${q.house} thiện cảm +${HT.clanRel}`,
-   `hỏng: Hoàng thượng chưa chuẩn, Sủng ${HT.fail.sung}, lễ vật mất`,hi.length?`kèm: ${hi.map(m=>m.name).join(", ")} cũng nhắm mối này cho con mình (khó hơn)`:"",R2.length?`kèm: ${R2.length} phi tần có con trai đến tuổi ghen (thiện cảm ${HT.envy})`:""].filter(Boolean).join(" · "),
+   `hỏng: Hoàng thượng chưa chuẩn, Sủng ${HT.fail.sung}, lễ vật mất`,hi.length?`kèm: ${kitNameList(hi)} cũng nhắm mối này cho con mình (khó hơn)`:"",R2.length?`kèm: ${R2.length} phi tần có con trai đến tuổi ghen (thiện cảm ${HT.envy})`:""].filter(Boolean).join(" · "),
    go:()=>{if(roll(o))log(pkBetroth(k,S,q));else{apply(HT.fail);log(`Hoàng thượng chưa chuẩn mối ${q.name} cho ${k.name}.`)}}})}
  O.push({n:"Chưa bàn vội",fx:{},x:`con ở cạnh ngươi thêm · kèm: phi tần khác có thể hỏi trước các mối tốt`,go:()=>log(`Ngươi chưa vội bàn hôn sự cho ${k.name}.`)});
  return{who:kidFace(k),t:`Bàn hôn sự cho ${k.name}, ${k.age} tuổi${k.age<18?" (hứa hôn trước, cưới khi tròn 18)":""}. Các mối hỏi được (tùy phẩm vị ngươi, lòng thương của Hoàng thượng, tài của con${k.heir?", ngôi Thái tử":""}):<div class="h54cl">${rows||'<p class="past">Chưa có mối nào.</p>'}</div>`,o:O}};
