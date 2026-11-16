@@ -1,1 +1,1 @@
-| FOREIGN PRINCESS art (sonnet art; OD:L1345 drawing → C; continues main s16 v7 on review/foreign-princess-samples): v8 lighter high-rank costumes → then full set 3+3 princesses × ranks + maids | review/foreign-princess-art | C | (opening) | RUNNING | 16/11 19:22Z |
+| FOREIGN PRINCESS art (sonnet art; OD:L1345 drawing → C; continues main s16 v7 on review/foreign-princess-samples): v8 lighter high-rank costumes → then full set 3+3 princesses × ranks + maids | review/foreign-princess-art | C | session_011xDdVQLEsBhwiabQcVkHJN | RUNNING | 16/11 19:22Z |
