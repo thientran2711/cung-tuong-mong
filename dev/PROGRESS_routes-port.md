@@ -33,7 +33,17 @@ provoke/humiliate (old list) are not acts on main; kept, harmless. Not harm (lef
 - Old save: dev/test/ts-oldsave.js (main build → this build, same origin): loads, 12 weeks played, 0 errors.
 
 ## Bot measurement (for C7) — see table below (dev/measure/routes.js, sens bot inpage6 + route policy)
-MEASURE_TABLE
+Runs on this branch 16/11 (60000 bot iterations each, sens bot, careful route player; small n — the machine is shared):
+| route | lives | tries | result | per try | spec | verdict |
+|---|---|---|---|---|---|---|
+| Trốn cung (tc, careful: goes at Năm ăn năm thua+ or after 18 months) | 11 | 21 escape nights | 3 out (all «sống đời thường dân»), 18 caught | **14 %** (27 % of lives) | 10–25 % per try | in spec, unchanged numbers (bases 12/16/10/22/8, cap 45) |
+| Rời cung hợp lệ (hl) | 6 | xuất gia 23 · phế 6 · ban hôn 1 · về quê 1 | 1 · 1 · 0 · 0 | xuất gia **4 %**, phế 17 % | rare, 5–20 % | in spec (old branch n=65: 6 %); vows stay hard |
+| Tư tình (tt, meets whenever possible) | 5 | 11 meetings, 1 night | 8 seen, 10 caught by a consort, 6 reports, 5 exposed | exposed in 5/5 lives | reckless lover is mostly exposed | as designed |
+| Ẩn dật (ad, never harms anyone) | 8 | — | 8/8 «Một đời an nhiên» (after 76–208 months) | — | 3 years, Đức 60, no harm | reachable; costs Sủng / no tablet / no rank-up |
+Old branch (before main merge): tc careful 19 %/try, careless 9 %; xuất gia 6 %; tư tình exposed 54 % of lives.
+Bot leaks: before the __rtAct guard, tc and hl runs each had 1 stray ẩn dật start by the balance bot; after it, tt and ad runs show
+bot_leak=1 each (blocked, nothing ran). No global economy numbers touched; route numbers unchanged from the approved branch.
+Raw: dev/measure/routes.js <tc|tt|hl|ad> 60000 (needs zz-test.html = dev/index.html with <meta charset>).
 
 ## Main bug seen (not in this branch's scope, ONE KIT KEEPER)
 - On the Mệnh truyện tab the sub-tab row (.ktsub.kcattabs, z-index 6) is drawn ON TOP of the end-of-life «Kiếp này» dialog
