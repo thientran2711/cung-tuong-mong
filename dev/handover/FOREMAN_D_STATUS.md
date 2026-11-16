@@ -31,7 +31,7 @@ main at start = eba64ead4.
 ## QUESTIONS
 - Q-D1 (for the main coordinator / owner): account D has NO Magnific and NO Cloudflare connector. Blocked until connected: C3, D51 sprites, D54, D56, fig-hd-upscale, face-sharp-hd2, and the C44 Worker deploy. Can the owner connect both on account D, or should these art items go back to an account that has them?
 
-## HANDOVER (Foreman D s1 → s2, 16/11 05:19Z; reason: the s1 chat was summarised → rollover rule)
+## HANDOVER (Foreman D s1 → s2, 16/11 05:19Z; reason: the s1 chat was summarised → rollover rule) — s2 = session_01DgYSWq6iuqbu5Vkmq1qN59 (opened 05:22Z); s1 hourly wake deleted, s2 owns the watch
 - s1 stays alive only so its 7 in-session agents (table rows marked RUNNING) can finish; s1 spawns nothing more. Each was told to write dev/handover/reports/<branch>.md on this branch + push its review/* branch + PROGRESS. s2: read those reports each wake; if an item shows no push for 3 h, re-open it as a SEPARATE session from the pushed branch/PROGRESS.
 - From now on ALL workers/reviewers = separate sessions (create_session), claimed first in STATUS + CLAIMS.md.
 - Waiting: slap-mg review (facefx-all on main?), coop-chat review (kitStageRail on main?), servant-system phase 2 (fix A + audit reviewed?), act waves 2–3 (GO here?).
