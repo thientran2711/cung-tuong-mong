@@ -19,7 +19,7 @@ def hs(im):
     return s.mean(), mx.mean(), L.std(), (a[..., 0]-a[..., 2]).mean()*255, ((s > .6) & (mx > .6)).mean()*100, L.mean()
 
 def targets(adir, t, prefix=''):
-    R = [hs(Image.open(f)) for f in glob.glob(f'{adir}/{prefix}*-*-*-{t}.webp')]
+    R = [hs(Image.open(f)) for f in glob.glob(f'{adir}/{prefix}*-{t}.webp')]
     return [sum(r[i] for r in R)/len(R) for i in range(6)]
 
 def tone(im, tg):
