@@ -921,6 +921,29 @@ so stage blocks may stand beside a head or between figures, never over the paint
   frame left, facts right; portrait/Fold: frame on top, facts below. Her full-body figure still stands on the background.
 - One shared background for every reincarnation screen: `img/bg-reborn-p.webp` (portrait 1200x1602) / `img/bg-reborn-l.webp` (landscape 1920x1080),
   gpt-2-6, no people (moon with the wheel of rebirth, jade bridge, lotus lanterns).
+#### 28.11a IDENTITY CARD — one figure tier, fixed column, fast face picker (owner 15/11 "mỗi người 1 chiều cao … che cả nhân vật … quá lag"; review/newgame-ui) — `kpIdFig` / `kpIdLay` / `kitTn` / `kitPickerGo` (j79), j86
+- ONE STANDARD FIGURE TIER: her standing figure is drawn with the same BODY height (head top → feet, `kitFigBody` .ht → .b, as 33.6; crowns /
+  hairpins above the head not counted) on the same floor line for every face: portrait 80 % / landscape 84 % of the screen height, floor
+  1.2 % above the bottom. Never object-fit:contain in a box (a wide robe used to come out shorter). Phones (< 600 px portrait) keep the
+  figure-on-top layout (--kidh).
+- FIXED COLUMN: the panel has a fixed width per viewport (portrait 58 % · landscape min(560 px, 54 %), inline, so a tab with more cells can
+  never widen it); the figure column is the space left of it (minus 8 px). The whole painted figure is centred in the column when it fits;
+  wider → body core centred, robe/sleeves cut at the column edge with a 24 px fade (mask). The panel never covers her.
+- `kitTn(src)` = the small pre-sized copy `img/tn/por-…webp` (128 px wide, ~7 KB; was the 384x506 portrait, 30–55 KB) / `img/tn/fig-…webp`
+  (240 px tall, ~7 KB) when `img/TN.json` lists it (`dev/art/tn_make.py`, list from `dev/test/newgame-ui-enum.js`: every face the picker can
+  show at a new game = 420). The picker cells use it; a pick shows the low-res figure AT ONCE (prefetched for the page in view) and swaps in
+  the crisp one when decoded (`decode()`); body measured on the small copy.
+- PICKER (kitPicker, every picker): page turns never re-measure the layout (`root.__kpc`), the next page's pictures are decoded before the
+  swap (≤ 80 ms wait), the pages either side decoded in idle time; `onPage(cells)` hook. A pick changes the selected cell IN PLACE (no rebuild),
+  the small portrait and the figure; no game `render()` while the identity card covers the screen (it renders once when the card closes).
+- Under any full-screen scene panel (.modal.kpscene with its painted backdrop) or the Luân hồi deck the stage Pixi layer and the FX layer stop
+  (`kitStagePause`), restart when the stage shows again.
+- CORS (all pixel reads): every `new Image()` whose pixels are read on a canvas sets `crossOrigin="anonymous"` (CDN pictures; without it the
+  canvas is tainted and every measure silently fell back to the whole picture — kitFigBody, jk3 topOf were affected; jsl headX, jkpor, jmark, jk2b already had it).
+- Opening card "Nhập cung" / "Nhập cung làm cung nữ": EVENT frame (32.2) — `stage:[S]` + headArt `img/ev-nhap-cung.webp` (consort road) /
+  `img/ev-nhap-cung-cn.webp` (palace-maid road), gpt-2-6 1280x716 (181 / 206 KB); facts as kit rows (kitRows); no portrait strip.
+  `kpIsScene` treats a "Nhập cung" card that names its stage as an event panel.
+- Test: `node dev/test/newgame-ui.js <url> <WxH> [shot]` (tier/column/timings/Nhập cung), THR=4 / TRACE=page|pick for traces.
 ### 28.12 kitRoulette — LUÂN HỒI, face-down pick (owner 11/14 item 6b approved; owner 11/15 04:00Z face-down idea + exact flow) — KIT READY
 `kitRoulette({items:[{k,src,wide,name,rare}], target, toEl, done})` on the reincarnation background (`kitBackdrop(ov,"roulette")`), at a new game
 AND at rebirth (hooked on `nlCard`, once per rolled life). The origin is pre-rolled (j52 seed + j69 weights): the cards only SHOW it, odds unchanged.
@@ -1446,7 +1469,7 @@ page shows `kitStageFig(p,{cap:false})` (full-body figure) instead of the portra
 
 | screen | Fold 686x880 | iPad 1180x820 | how |
 |---|---|---|---|
-| Event / dialog with a person (`who`) | yes: figure column 36 % of the dialog, figure ≤ 40 dvh | yes: dialog 470 px, figure ≈ 170 px wide | kitEventStage (auto) |
+| Event / dialog with a person (`who`) | yes: figure column ≤ 36 % of the dialog (32.2a: cap + crop) | yes: column ≤ 36 % / 264 px, figure cut below the waist when wider | kitEventStage → kitDpFit (auto) |
 | Succession card (Tiên đế băng hà) | yes, `stage:[her, son]` + headArt band, options as rows | yes | kitEventStage + optLayout rows |
 | Two people (night: Hoàng thượng + her; duel events) | yes, column 46 %, two figures side by side | yes | `stage:[a,b]` |
 | Week book person page | yes (one page at a time) | yes (spread, figure in the left column of the page) | kitStageFig in j87 |
@@ -1454,6 +1477,40 @@ page shows `kitStageFig(p,{cap:false})` (full-body figure) instead of the portra
 | Person card (Hậu cung, room card) | no — rank frame portrait (owner-approved card) | no | 28.17 / 31.17 |
 | Identity card | already a full-body figure (approved) | same | 28.11 |
 | News / event without a person | no figure: the event picture in its type frame | same | 32.3 |
+
+#### 32.2a CAP + CROP — the figure column never grows for the people (owner 15/11, "Sao khung này, khung trái nhân vật to vậy … nếu cắt váy thì cũng ok mà"; review/stage-fig-size) — `kitDpFit` (jk4) + `kitFigBody` width profile (jkit)
+Cause of the owner shot (VIỆC "Thái hậu chê dung nhan", tablet portrait = 755x1000 design canvas): 32.7b / 50 sized the column BY the people
+(full column height, column as wide as the painted figure), so a wide-robed Thái hậu made the column 49 % of the dialog (42 % on 1180x820).
+Rule, for EVERY dialog with a person column (32.7 / 50 / 50.1: events, visits, summons, toilette reactions, Mệnh truyện / night / succession
+cards with a person, the Nội vụ phủ shop, pet care):
+- Column width ≤ `KIT_DP_COL` = min(36 % of the dialog, 264 px) (and the right column keeps ≥ 250 px). The people are fitted INTO it.
+- Width test = the figure from the painted top down to `KIT_DP_CROP.knee` (.5 = head → waist, sleeves included; `kitFigBody(src).wl/wr`,
+  21-step width profile). Anything wider below that line (skirt hem, train, lower sleeves) is CUT by the column edge (column `overflow:clip`).
+- Height: the tallest person fills the column (feet on the floor) as before (32.7b) when that fits the width test; if not, the people are
+  scaled down until it does, still standing on the floor, and the name chip moves down to sit right above the head (no chip floating at
+  the top of an empty column).
+- Short column (people under `KIT_DP_CROP.minH` = 40 % of the screen height): the people are drawn bigger and CUT AT THE FLOOR instead of
+  shrinking the face — the painted top stays under the chip, at least `minVis` = 60 % of the body (head → thighs) stays in view.
+- The face is never cut and never squashed (aspect kept); the chip is never cut. Phones (< 600 px) use the same rule in the top row.
+Measured (`node dev/test/stage-fig-size.js <url> <outdir> <tag> [sizes] [kinds]`, before → after, column % of the dialog):
+Thái hậu chê dung nhan 755x1000 49 % → 36 %, 1180x820 42 % → 36 %; Thái hậu triệu 49 % / 42 % → 36 %; every kind ≤ 36 % at every size.
+- Week book (Tuần lục) person page (j87 `kitStageFig` + jsl `kitBookFigClamp`, owner 15/11 "p.6 Thái hậu: the robe spreads under the text"):
+  same rule — the figure stays INSIDE its column (`.kbk-por` clips) on every screen, phones included, never scaled; the body (head centre)
+  is centred in the column; train / hem / outer sleeve wider than the column is cut at the column edge with a 24 px soft fade. The old
+  "train runs behind the text on a paper panel" (.kbk-figover) is retired. Test: `dev/test/book-figwide.js` (+ overText = figure px under the text, faceIn).
+- INFO panels about a person (kind info ĐIỀU / rule LUẬT / person NGƯỜI) keep the small 3:4 portrait (§8 .kpsubj); the stage column is for
+  EVENTS with a main actor (VIỆC, BÁO, ĐÊM, KẾT QUẢ …) — kitEventStage returns early on those kinds unless the panel names its stage itself (`stage:[…]`: the Nội vụ phủ shop, pet care).
+- MAIN ACTOR: the column shows the first person who is not the player (stage / who); the player stands there only when the event is about her
+  alone (then as rank + name, never "Ngươi" — owner rule: rank and name always together).
+- TRUE PROPORTIONS (owner 15/11 "figure squashed"): a person picture is never scaled differently in X and Y. kitDpFit takes the aspect from
+  the loaded picture itself (naturalWidth / naturalHeight) when it differs from the kitFigBody cache; a picture that failed to load is no
+  longer cached with the .45 fallback aspect (measured again on the next call). Wide robes are CUT (column clip), never squeezed.
+  Scan: `stage-fig-size.js` checks every fig-/por- picture on screen (rendered w/h vs natural w/h, object-fit fill only) after each dialog.
+- LATE FIGURE LIST (kit-sample race "1180 run drew no figure"): kitFigOf needs FIGS (j28 FIGURES.json, then j39 merged list incl. Thái hậu);
+  a person dialog opened earlier is drawn again whenever the list changes (≤ 60 s); the dialog keeps its content height while a figure loads.
+  Identity card (§14 / 28.11, kpIdFig): the unknown-lady silhouette stands in while the list / picture loads (retry 400 ms, ≤ 30 s; one reload on error).
+- Option / act card title portrait (j25 tiny face before "Thưa rằng do Hoàng thượng định"): the framed mini portrait `.kan>.md.kfc` is zoomed
+  to one text line (zoom .43 ≈ 21 px) so the title stays on its line and the card keeps its neighbours' height.
 
 ### 32.3 Event / news pictures framed by TYPE (owner 23:20Z)
 `kitEvCat(m,{src})` maps the j89 event category (from the `ev-<cat>.webp` file or `evArtCat`) to a kit category frame (31.17: colour +
@@ -2444,7 +2501,7 @@ tags `.j59t`/`.j59n` (j59 sets `--rt`), 32.7 / kitEventDp captions `.kpsn .kname
 Test: `node dev/test/rank-title.js <url> <outdir> <tag> [sizes] [day,night,rain,cold,dp,kit,old]` (colours, serif, title above name,
 no tag overlap / cut; OLDURL=<old build> for the old-save case).
 
-### 32.7b PEOPLE FILL THE COLUMN (owner 11/15, replaces the KIT_FIG .79 scale inside 32.7 columns) — `kitDpFit` (jk4)
+### 32.7b PEOPLE FILL THE COLUMN (owner 11/15, replaces the KIT_FIG .79 scale inside 32.7 columns) — `kitDpFit` (jk4) — CAPPED by 32.2a (15/11): the column never grows for the people; wide figures are cut below the waist or scaled to fit
 In a 32.7 person column every person stands from just under the name chips (37) down to the column floor: painted top (hair, crown,
 hat) under the chips, feet on the floor, aspect kept. Man and woman alike (no ×1.07 here); children keep their age factor
 (KIT_FIG.fac < 1, feet on the same floor). Two people: packed by core with ≤ 20 % overlap; the right column keeps ≥ 250 px (was 280),

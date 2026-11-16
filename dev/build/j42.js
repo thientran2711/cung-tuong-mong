@@ -43,9 +43,9 @@ function srvInit(){const L=liveRivals(true);if(!L.length)return;const m=pick(L.f
  for(const s of m.staff)S.srv.af[s.sid]=R(21)-5;
  for(const s of allServ().filter(x=>ownerOf(x)!==m&&ownerOf(x)!==S).sort(()=>Math.random()-.5).slice(0,3)){S.srv.met.push(s.sid);S.srv.af[s.sid]=R(41)-20}
  S.place="home";S.visit=srvVisitOf("home");tab="act";
- Q=[{t:"Nhập cung làm cung nữ",faces:[[pMe(),S.name],[pv(m),m.name]],h:`<p>${S.name}, ${S.age} tuổi, con nhà thường dân. Qua kỳ tuyển cung nữ, Nội vụ phủ chia ngươi về hầu <b>${rkName(m)} ${m.name}</b> ở ${palName(palaceOf(m))}.</p>
-  <p>Tính chủ: <b>${m.trait}${m.trait2?", "+m.trait2:""}</b>. Chủ tin ngươi: <b>${S.tin}</b>. Lương tháng ${CNV_WAGE[1]} bạc.</p>
-  <p><b>Đường lên:</b> được Hoàng thượng để mắt mà phong Đáp ứng; lên Chưởng sự cô cô; được ban gả. <b>Đường xuống:</b> bị phạt, đày Tân Giả khố, chết trong mưu của người khác.</p>
+ /* review/newgame-ui: event frame — palace-maid entering picture + her figure (KIT 32.2) */Q=[{t:"Nhập cung làm cung nữ",stage:[S],headArt:{src:"img/ev-nhap-cung-cn.webp",label:"Nhập cung"},h:`<p>${S.name}, ${S.age} tuổi, con nhà thường dân. Qua kỳ tuyển cung nữ, Nội vụ phủ chia ngươi về hầu <b>${rkName(m)} ${m.name}</b> ở ${palName(palaceOf(m))}.</p>
+  ${kitRows([["Tính chủ",`${m.trait}${m.trait2?", "+m.trait2:""}`,"t"],["Chủ tin ngươi",S.tin,"t"],["Lương tháng",`${CNV_WAGE[1]} bạc`,"t"],
+   ["Đường lên","được Hoàng thượng để mắt mà phong Đáp ứng; lên Chưởng sự cô cô; được ban gả","t"],["Đường xuống","bị phạt, đày Tân Giả khố, chết trong mưu của người khác","t"]])}
   <p class="past">Mỗi buổi 4 khắc. Mục Việc: việc nặng và việc chủ sai. Bản đồ: chỉ nơi cung nữ được đến. Đồng liêu: kết bạn, đề phòng kẻ vu cáo.</p>`}];
  log(`Ngươi vào cung làm cung nữ, hầu ${rkName(m)} ${m.name}.`)}
 (function(){const s0=start;start=function(){const r=s0.apply(this,arguments);try{if(S&&S.origin&&S.origin.k==="cnv"&&!S.srv){quiet=true;srvInit();quiet=false;deal();showModal();render()}}catch(e){console.error(e)}return r}})();
