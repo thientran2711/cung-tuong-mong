@@ -11,3 +11,4 @@ Resume: server = `python3 -m http.server <port>` in the worktree after `bash dev
 `git checkout index.html sw.js assets.json`). Test: `node dev/test/kit-fit.js http://127.0.0.1:<port>/index.html <out> <tag> 755x1000,1180x820 [shots]` (ONLY=a,b env limits cases).
 Open: week book person page + identity card not changed (no header/frame-bottom pair) — ask MAIN if the owner wants the rule there.
 HANDOVER: none needed (finished in one session; START_CTX ≈ 5 %, end ≈ 25 %).
+SẴN SÀNG KIỂM e383a4dd7 (code + tests + report; this line added after)

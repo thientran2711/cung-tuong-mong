@@ -1,3 +1,5 @@
+SẴN SÀNG KIỂM e383a4dd7
+
 # kit-fit (kit keeper, opus) — owner bugs 16/11 s21 (2) figure gaps + (3) option empty space
 START_CTX ≈ 5 % (context_usage read 0; estimate). Branch review/kit-fit off origin/main b7c5d787e. Owner screen: dev/handover/refs/owner-viec-thanhminh.jpg (docs branch).
 
