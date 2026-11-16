@@ -400,3 +400,4 @@ Self-wake: create_trigger denied twice (s19, s20) — don't retry; rely on notif
 - (17:13Z s21) vượt phẩm ANSWERED in s20 (OD 18:30Z) → dress-offence worker; Dư đồ all-locked owner bug → dudo-lock worker. Owner queue now: npc-agent go → Q1–Q3 → pet lifespan.
 - (17:15Z s21) OD 18:40Z (extra nights = notices) → night analyst; OD 18:45Z Sức khỏe → suc-khoe analyst. Owner queue adds: cycle half-tuần block (1/2, asked in s20 Lượt 30).
 - (17:16Z s21) pet lifespan APPROVED (OD 18:50Z) → pet-lifespan worker. Owner queue: npc-agent go → Q1–Q3; cycle half-tuần 1/2.
+- (17:18Z s21) night-steal build worker (owner angry: ruled 14:10Z/14:45Z, never built). LESSON: before presenting any finding, grep OD and say 'sếp đã chốt lúc …, chưa làm/đang làm'; 90 %/65 % flip = owner keep (OD 18:10Z), not a finding — AG2 must keep it.
