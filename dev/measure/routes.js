@@ -20,7 +20,7 @@ const MT={html:'text/html',js:'text/javascript',json:'application/json'};
   const PRI={tc:["tc0","tc_guard","tc_maid","tc_home","tc_route","tc_pass","tc_cloth","tc_drug"],tt:null,hl:["hl_plead","hl_tu","hl_hon","hl_que","hl_phe"],ad:["ad0","ad_kinh","ad_che"]};
   /* __rtGo is on ONLY while the route policy looks at the deck; it is off again before act() runs, so nested time steps (nextBuoi inside
      act) and the inpage6 sensible bot never see «Lối riêng» cards (old bug: the sens bot started ẩn dật / tư tình in other modes) */
-  const go=a=>{const i=deck.indexOf(a);if(i<0)return;window.__rtGo=0;window.__rtActs=(window.__rtActs||0)+1;act(i);if(typeof rtStat==='function')rtStat('bot_'+String(a.rtId).replace(/\d+$/,''))};
+  const go=a=>{const i=deck.indexOf(a);if(i<0)return;window.__rtGo=0;window.__rtActs=(window.__rtActs||0)+1;window.__rtAct=1;try{act(i)}finally{window.__rtAct=0}if(typeof rtStat==='function')rtStat('bot_'+String(a.rtId).replace(/\d+$/,''))};
   const ok=a=>a&&a.rt&&!a.lock&&!a.done&&can(cardCost(a))&&canPay(a);
   window.__rtPol=()=>{if(mode==='off'||!S||S.dead||Q.length||(typeof isSrv==='function'&&isSrv()))return;if(window.__rtIn)return;window.__rtIn=1;try{pol()}finally{window.__rtIn=0;window.__rtGo=0;try{if(S&&!S.dead)rtRefresh()}catch(e){}}};
   const pol=()=>{for(let g=0;g<4;g++){window.__rtGo=1;rtRefresh();const C=deck.filter(ok);window.__rtGo=0;if(!C.length)return;let a=null;

@@ -52,7 +52,7 @@ function rtBook(){try{return JSON.parse(localStorage.getItem("ctm-routes")||"{}"
 function rtEnd(id){const T=rtS();if(T.ends.includes(id))return;T.ends.push(id);rtStat("end_"+id);try{const b=rtBook();const e=b[id]||{n:0};e.n++;if(!e.first)e.first={who:S.name,o:S.origin&&S.origin.n,y:S.year};b[id]=e;localStorage.setItem("ctm-routes",JSON.stringify(b))}catch(e){}}
 /* ---------- one card = one step: the kit act card (Cần / Tốn / Được / Mất / Kèm + odds) ---------- */
 function rtCard(o){const need=(o.need||[]).map(([t,ok])=>({t,ok:!!ok}));const lock=o.lock!=null?o.lock:need.some(x=>!x.ok);
- const id=o.id||o.n;const T=rtS();const once=g=>()=>{T.dn[id]=wk();try{if(g)g()}finally{rtRefresh()}};
+ const id=o.id||o.n;const T=rtS();const once=g=>()=>{if(window.__bot&&!window.__rtAct){rtStat("bot_leak");return}/* a balance bot's stale deck index never runs a route step */T.dn[id]=wk();try{if(g)g()}finally{rtRefresh()}};
  window.__rtArt[o.n]=o.art||RT_ART.tt;
  return {n:o.n,t:o.t||"",c:o.c||{},o:o.o==null?100:o.o,k:o.k||1,w:o.w||{},l:o.l||{},x:(o.x||"")+(o.kem?` · kèm: ${o.kem}`:""),lx:String(o.lx||"").split(" · ").join(" — "),dom:o.dom||"Mưu kế",
   lock,rtNeed:need,rt:o.r||1,rtId:id,done:T.dn[id]===wk(),go:once(o.go),fail:once(o.fail)}}
