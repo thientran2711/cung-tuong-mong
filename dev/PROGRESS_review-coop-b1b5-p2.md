@@ -20,12 +20,13 @@ Numbers: BAL.coopBribe {pay, tin} (jbal2.js); J71.cost (festival Sức, j71 — 
 
 ## Tests (LIVE Worker, 2 browsers, host 755x1000@2 + guest 1180x820@2, one at a time)
 - dev/test/coop-p2.js (NEW): 45/45 — see the report for the per-item list.
-- coop-b1 / coop-b2b5 / coop-e2e / coop-pets: see dev/handover/reports/coop-b1b5-p2.md.
+- coop-b1 41/41 (after fix 5), coop-b2b5 30/30, coop-e2e 59/59 (E2E_TO=120000), coop-pets 46/48 (FAIL: 'B ended the week (end sent)' + 'merged week keeps the late help' — the harness's week end predates the night gate (nightReady/go); update its toLast/press flow to coop-b2b5's week()).
+- Reviewer branch review/coop-b1b5-r1 @8dd1626a merged (oldroom-r1 / oldsave-r1 tests: not re-run here).
 
 ## r1 fix list status
 1. pos > 4000 chars dropped by the Worker (BLOCKING): NOT DONE.
 2. NPC acts on her entry (gain without loss): DONE for rivalsTurn / rivalsMonth / festival (items, kids, pregnancy, pets via res ops). Needs its own per-act test (NPC takeaway / petsteal / musk / kpoison with forced dice).
 3. B5 seat card = banned waiting claim (OD:L1228): NOT DONE (needs the large compensation, numbers in BAL).
 4. B2 in-week night relay not host-authoritative (crossing relays): NOT DONE.
-5. coop-b1.js determinism: NOT DONE.
-6. coop-pets harness: harness updated (result in report).
+5. coop-b1.js determinism: DONE (runner refusal roll neutralised for forced acts: no trung runner during the act) → 41/41. Vacuous check in case 5 not yet tightened.
+6. coop-pets harness: setup fixed (46/48); week-end flow still old (see Tests).
