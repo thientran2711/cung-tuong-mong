@@ -324,7 +324,7 @@
 | two-way-acts r2 successor (sonnet): shots of new options, OPEN rows, ECONOMY.md canon fix | review/two-way-acts | main s21 | session_01UV1SzkuSsv7KHqJJgVJZY6 | RUNNING | 16/11 18:32Z |
 | night-steal reviewer (BIG: odds/rules + co-op) | review/night-steal-r1 | main s21 | session_01UV1Szh5bhLhRARVvmvaD6C | FAIL 86e0a5f4 (her nights stolen ≈ 30 % pooled, 7 runs; report dev/handover/reports/night-steal-r1.md on review/night-steal-r1) | 16/11 18:40Z |
 | chonso-tabs reviewer r1 (SMALL) | review/chonso-tabs-r1 | main s21 | session_01UV1Szh5bhLhRARVvmvaD6C | PASS c4f80b7f98a45d5dced890f0c3e3b2f2995bcb01 | 16/11 |
-| road-b1 + road-map-next review r1 (opus, BIG): review/road-b1 5dbacee3 merged with road-map-next eeb80516 (pilot fix of road-map-r1 FAIL 1–5) | review/road-b1-r1 | B | session_01N1tNP3fSoLdBHWrbfv8fCH | RUNNING | 16/11 18:36Z |
+| road-b1 + road-map-next review r1 (opus, BIG): review/road-b1 5dbacee3 merged with road-map-next eeb80516 (pilot fix of road-map-r1 FAIL 1–5) | review/road-b1-r1 | B | session_01N1tNP3fSoLdBHWrbfv8fCH | DONE FAIL 9 (archived) | 16/11 18:36Z |
 | HEALTH + PREGNANCY BUNDLE (opus; main s21 18:08Z/18:10Z/18:17Z/19:00Z; suc-khoe.md §4.1–4.7) | review/suc-khoe | D | session_01DgYSWmn1SNsxewKAaDLZjN | RUNNING | 16/11 18:35Z |
 | fest-fx (sonnet; owner bug: fireworks in her room on chiều): festival FX only tối + outdoor + fitting festivals; audit 3-buổi index leftovers | review/fest-fx | main s21 | session_01UV1Szk4mBQYLcS8DPSeeBv | RUNNING | 16/11 18:37Z |
 | pl-courtyards review r1 (sonnet, SMALL): PASS fae6bcbce | review/pl-courtyards-r1 | reviewer | session_01UV1SzicVqzEzvngQp4ujo4 | DONE | 16/11 |
@@ -335,3 +335,5 @@
 | emotion-acts-2 review r1 (opus, BIG): review/emotion-acts-2 7b959216 (r1 FAIL fix) | review/emotion-acts-2-r1 | B | session_01N1tNP2srtKZR7hefwMpYME | RUNNING | 16/11 18:50Z |
 | npc-roads review r1 (opus, BIG) of f699bbf4 (U0 core + U1 consorts) | review/npc-roads-r1 | D | session_01DgYSWnawxUrsTQBmbc3jg7 | RUNNING | 16/11 18:50Z |
 | NPC ROADS successor U2 maids + U3 men (opus; design = reports/npc-roads.md NEXT) | review/npc-roads | D | session_01DgYSWnAp8mvj9ZAfXiKrhf | RUNNING | 16/11 18:50Z |
+| road-b1 FAIL fix A (opus): engine item 1 (RD97L/E.r97) + all items in jrd_tt + jrd_dtq; merges fix B at the end → SẴN SÀNG | review/road-b1-fixa | B | (opening) | RUNNING | 16/11 18:55Z |
+| road-b1 FAIL fix B (opus): items 2–9 + smaller in jrd_muoi + jrd_cn | review/road-b1-fixb | B | (opening) | RUNNING | 16/11 18:55Z |
