@@ -153,10 +153,11 @@ const KF_FIG="#me,#emp,.tok";
 /* the REAL tappable element under the finger (owner 15/11 "Whole tab panel bounces on any tap"): a .card / .pct / anything in KF_TAP that is
    only a container (no button, role, onclick or pointer cursor) is never pressed — the search goes on to a real tappable ancestor;
    and nothing bigger than KF_BIG of the screen is ever pressed (a pane, a tab panel, a whole-screen catcher). null = no press at all. */
-const KF_REAL='button,a[href],.btn,.kbtn,.opt,[role="button"],[role="tab"],[onclick]',KF_BIG=.3;
+/* KF_BIGR (r1): a REAL button may be big — an act card on a phone in landscape (844x390) is ~45% of the screen and must still press */
+const KF_REAL='button,a[href],.btn,.kbtn,.opt,[role="button"],[role="tab"],[onclick]',KF_BIG=.3,KF_BIGR=.7;
 function kfTapOf(t){let el=t&&t.closest?t.closest(KF_TAP):null;
  while(el&&!(el.matches(KF_REAL)||typeof el.onclick==="function"||getComputedStyle(el).cursor==="pointer"))el=el.parentElement?el.parentElement.closest(KF_TAP):null;
- if(!el)return null;const r=el.getBoundingClientRect();if(!r.width||r.width*r.height>innerWidth*innerHeight*KF_BIG)return null;return el}
+ if(!el)return null;const r=el.getBoundingClientRect();if(!r.width||r.width*r.height>innerWidth*innerHeight*(el.matches(KF_REAL)?KF_BIGR:KF_BIG))return null;return el}
 function kfDis(el){return el.disabled||el.classList.contains("kdis")||el.getAttribute("aria-disabled")==="true"}
 function kfWhy(el){const w=[...el.querySelectorAll(".kwhy:not(.kok)")].map(x=>x.textContent.replace(/^[✗✓]\s*/,"").trim()).filter(Boolean);return w[0]||el.getAttribute("title")||el.dataset.why||""}
 function kfRipple(el,e){const r=el.getBoundingClientRect();if(!r.width||r.width*r.height>innerWidth*innerHeight*.45)return;const cs=getComputedStyle(el);

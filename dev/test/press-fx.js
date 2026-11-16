@@ -49,7 +49,7 @@ const HELP=()=>{window.__pf={
   const enter=async s=>p.evaluate(s=>{Q.length=0;showModal();document.querySelectorAll('.kmov,.kflockwhy,[id^=kroul],#dawn').forEach(e=>e.remove());
    if(s.dlg){Q.push(s.dlg==='text'?{t:'Thử khung',h:'<p>Một đoạn chữ dài để chạm vào chỗ trống trong khung hộp thoại. '.repeat(4)+'</p>'}:{t:'Thử chọn',h:'<p>Chọn một đường.</p>',opts:[{n:'Đường một',fx:{}},{n:'Đường hai',fx:{}}],mustChoose:1});showModal();return 'dlg:'+s.dlg}
    const tb=document.querySelector(`button[data-tab="${s.tab}"]`);if(!tb)return null;tb.click();if(s.sub>=0){const L=[...document.querySelectorAll('#panel [role="tab"],#panel .pct,#panel [data-ksub]')];const x=L[s.sub];if(!x)return null;x.click();return s.tab+'/'+(x.textContent||'').trim().slice(0,14)}return s.tab},s);
-  for(const s of states){const nm=await enter(s);if(!nm)continue;await sleep(250);
+  for(const s of (process.env.SCAN==='0'?[]:states)){const nm=await enter(s);if(!nm)continue;await sleep(250);
    const pts=[];const NX=6,NY=8;for(let i=0;i<NX;i++)for(let j=0;j<NY;j++)pts.push([Math.round((i+.5)*W/NX),Math.round((j+.5)*H/NY)]);
    const R=await p.evaluate(pts=>__pf.probe(pts),pts);const tested=R.tested;const hits=new Map(R.hits.map(o=>[o.el,o]));
    await p.evaluate(()=>{document.querySelectorAll('.kfdown').forEach(e=>e.classList.remove('kfdown'))});
@@ -65,9 +65,6 @@ const HELP=()=>{window.__pf={
    return [x,y]},sel);
    if(!r){ok.push({vp,label,res:'not found'});return}await p.mouse.move(r[0],r[1]);await p.mouse.down();await sleep(70);const d=await p.evaluate(([x,y])=>{const e=document.querySelector('.kfdown');return e?__pf.name(e):null},r);
    const why=d?'':await p.evaluate(([x,y])=>{const e=document.elementFromPoint(x,y);return e?__pf.name(e):'-'},r);await p.mouse.up();ok.push({vp,label,res:d||('NO PRESS under '+why)})};
-  await chk('#tabs [data-tab]','main tab button',()=>{Q.length=0;showModal()});
-  await chk('#modal .opt','dialog option',()=>{Q.length=0;Q.push({t:'Thử chọn',h:'<p>x</p>',opts:[{n:'Đường một',fx:{}},{n:'Đường hai',fx:{}}],mustChoose:1});showModal()});
-  await chk('#panel button.card.ka:not(.kdis),#panel button.ka:not(.kdis)','act card',()=>{Q.length=0;showModal();document.querySelector('button[data-tab="act"]').click()});
   /* r1 (owner 16/11 "Nút tắt bị che"): the room person card's ✕ (#popx) is on top in every tab, panel and card scrolled to the end */
   for(const t of tabs){const r=await p.evaluate(async t=>{const sl=ms=>new Promise(r=>setTimeout(r,ms));Q.length=0;showModal();document.querySelector(`button[data-tab="${t}"]`).click();await sl(200);
    popIdx=null;renderStage();await sl(100);const ps=document.querySelector('#stage [data-p]');if(!ps)return null;popIdx=+ps.dataset.p;renderStage();await sl(700);
@@ -75,6 +72,9 @@ const HELP=()=>{window.__pf={
    const x=document.getElementById('popx');if(!x||!x.offsetParent)return null;const r=x.getBoundingClientRect();const top=document.elementFromPoint(r.left+r.width/2,r.top+r.height/2);
    const res=top&&x.contains(top)?'on top':'NO PRESS: ✕ covered by '+(top?__pf.name(top):'-');popIdx=null;renderStage();return res},t);
    if(r)ok.push({vp,label:'✕ on top · '+t,res:r})}
+  await chk('#tabs [data-tab]','main tab button',()=>{Q.length=0;showModal()});
+  await chk('#modal .opt','dialog option',()=>{Q.length=0;Q.push({t:'Thử chọn',h:'<p>x</p>',opts:[{n:'Đường một',fx:{}},{n:'Đường hai',fx:{}}],mustChoose:1});showModal()});
+  await chk('#panel button.card.ka:not(.kdis),#panel button.ka:not(.kdis)','act card',()=>{Q.length=0;showModal();document.querySelector('button[data-tab="act"]').click();const all=document.querySelector('#panel .kcattabs [data-kcat="all"]');if(all)all.click()});
   if(errs.length)ok.push({vp,label:'page errors',res:errs.slice(0,3).join(' | ')});
   await c.close()}
  await b.close();const bad=rows.filter(r=>r.bad);
