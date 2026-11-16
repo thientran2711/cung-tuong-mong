@@ -42,7 +42,7 @@ npcAct=function(v,t){try{if(!v||!t)return"";const T=traitsOf(v);const tc=witOf(v
   /* Đa nghi wastes effort on a false suspicion */
   if(T.includes("Đa nghi")&&roll(22)){const L=others(v).filter(x=>x!==t&&(x===S||x.alive&&!x.out)&&danger(x,v)<30);if(L.length){const u=pick(L);mindLog(v,"_wrongBelief");mindLog(v,"_mistake");evA(v,u,0);newsAdd(v,"spy",`Người của ${v.name} dò xét ${NM(u)} vì một mối ngờ không có thật`,u===S);return""}}
   /* Tham vọng overreaches: aims at the highest seat */
-  let err=0;if(T.includes("Tham vọng")&&roll(20)){const L=others(v).filter(x=>(x===S||x.alive&&!x.out));const hi=L.sort((a,b)=>rkOf(b)-rkOf(a))[0];if(hi&&hi!==t&&bandOf(danger(v,hi))>=1){t=hi;err+=10;mindLog(v,"_overreach");mindLog(v,"_mistake")}}
+  let err=0;if(T.includes("Tham vọng")&&roll(20)){const L=others(v).filter(x=>(x===S||x.alive&&!x.out));const hi=mindPickBy(L,x=>1+rkOf(x)*rkOf(x)+Math.max(0,hostility(v,x))/5,v);/* npc-mind: was ARGMAX rank */if(hi&&hi!==t&&bandOf(danger(v,hi))>=1){t=hi;err+=10;mindLog(v,"_overreach");mindLog(v,"_mistake")}}
   /* rash: slighted Kiêu ngạo, or a bad week for anyone */
   const rash=rashOf(v);if(rash){err+=10;mindLog(v,"_rash");mindLog(v,"_mistake")}
   /* low wit: clumsy */

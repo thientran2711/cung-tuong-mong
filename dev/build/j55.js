@@ -145,7 +145,7 @@ function tdMonth(){if(!tdOn())return"";const T=trS();let ev="";
  for(const p of consorts())if(p.cc&&S.turn-(p.ccT||0)>=4){p.cc--;p.ccT=S.turn}
  if(TD.npc)for(const v of liveRivals(true)){if(v.confined||S.dead)continue;const w=TD.npc*traitsOf(v).reduce((m,t)=>m*(TDAMB[t]||1),1);let r="";
   const tg=consorts().filter(t=>t!==v&&tdHouse(t)&&!sameHouse(v,t));
-  const leakT=tg.find(t=>deG(v,t)>=1);
+  const leakT=mindPickBy(tg.filter(t=>deG(v,t)>=1),t=>deG(v,t)+Math.max(0,hostility(v,t))/20,v);/* npc-mind: was FIRST */
   if(leakT&&v.bac>=20&&roll(22*w))r=tdLeak(v,leakT);
   else if(v.bac>=60&&roll(3*w)){const H=CLANS.map(c=>T.H[c]).filter(h=>!tdBacks(h,v)&&h.c!==tdHouse(v));const h=H.sort((a,b)=>b.pow-a.pow)[R(Math.min(3,H.length))];if(h)r=tdGift(v,h)}
   else if(tg.length&&v.bac>=50&&roll(2*w)){const t=pickTarget(v);if(t&&tg.includes(t))r=tdProbe(v,t)}
