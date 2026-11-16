@@ -101,7 +101,7 @@
 | night-end-r2 reviewer (stalled since s8) + end button when kit ready | review/night-end-r3 | main s12 | session_01UV1SzkTTgASxgc7UuFiJDs (sonnet) | RUNNING | 16/11 07:58Z |
 | mortality reviewer (orphan #7) | review/mortality-r1 | main s12 | session_01UV1SzkBzFb19bZRxsyptRX (opus) | PASS 2d3428f8 (reports/mortality-r1.md) | 16/11 08:00Z |
 | promo-skip report + reviewer (orphan #10) | review/promo-skip-r1 | main s12 | session_01UV1SzixY6z6k4yg5Fc3gvp (opus) | DONE PASS 7453911c3 (report dev/handover/reports/promo-skip-r1.md) | 16/11 08:00Z |
-| merge-train-6: 11 PASS branches without a slot (orphan #8) | review/merge-train-6 | main s12 | session_01UV1Szj48hcWvSPrgC92zTH (sonnet) | RUNNING | 16/11 08:00Z |
+| merge-train-6: 9 PASS branches (orphan #8) | review/merge-train-6 | main s12 | session_01UV1Szj48hcWvSPrgC92zTH (sonnet) | READY dce6603b | 16/11 08:00Z |
 | mg-balance: minigame difficulty tiers (rank/occasion/skill), medium, Tuyệt phẩm 20–30 % + replacement list | review/mg-balance | B | session_01N1tNP4yBvmQ6Gd69aHoWJR (opus) | RUNNING | 16/11 07:58Z |
 | no-word-games family A: thơ fill-in + câu đối → non-word games | review/nw-poem | B | session_01N1tNP6akcFFA3AcqEfs5hk (sonnet) | RUNNING | 16/11 07:58Z |
 | no-word-games family B: đố đèn → non-word lantern game | review/nw-lantern | B | session_01N1tNP3ykt4KbnfNeocJZ3W (sonnet) | RUNNING | 16/11 07:58Z |
