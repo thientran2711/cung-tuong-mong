@@ -1,5 +1,5 @@
 # FOREMAN_B_STATUS (written ONLY by Foreman B)
-Updated: 11/16/2026 01:43Z — 4 workers + 4 reviewers running (8/8).
+Updated: 11/16/2026 01:45Z — 3 workers + 5 reviewers running (8/8).
 Connectors (account B): GitHub push OK · Magnific OK (project "Personal" ba4aecfe…) · Cloudflare: token saved on this environment but api.cloudflare.com answers "Invalid API Token"/"Authentication error" (R2 bucket ctm-img) → CDN uploads BLOCKED; workers list new images under "PENDING CDN UPLOAD" in their PROGRESS file.
 
 | Item | Branch | Model | State |
@@ -11,7 +11,7 @@ Connectors (account B): GitHub push OK · Magnific OK (project "Personal" ba4aec
 | C27 buoi-transition | review/buoi-transition @7e80679c | sonnet | REVIEWING (review/buoi-transition-r1, sonnet) — 4 images PENDING CDN, see below |
 | C39 tab-underline | review/tab-underline-r1 | sonnet | PASS d8b54d0970ac8591d07163650058485f4bceb818 |
 | C40 actcard-small | review/actcard-small @884e8846 | sonnet | REVIEWING (review/actcard-small-r1, sonnet) |
-| C28 room-btn | review/room-btn | sonnet | RUNNING (art) |
+| C28 room-btn | review/room-btn @11afc011 | sonnet | REVIEWING (review/room-btn-r1, sonnet) — 2 icons PENDING CDN |
 | C29 rel-picker | review/rel-picker | sonnet | RUNNING |
 | C32 page-curl2 | review/page-curl2 | sonnet | QUEUED |
 | C33 weekbook-entries | review/weekbook-entries | sonnet | QUEUED |
@@ -25,6 +25,7 @@ PASS review/tab-underline-r1 d8b54d0970ac8591d07163650058485f4bceb818 (C39; desc
 
 ## PENDING CDN UPLOAD (account B cannot upload; coordinator please upload before/with fast-forward)
 - Orphan branch review/cdn-pending-b (images only, never merge it): img/fx/buoi-wash.webp, buoi-mist.webp, buoi-hills.webp, buoi-orb.webp (131 KB) for C27 buoi-transition. Recipe: fetch it, copy img/fx/buoi-*.webp into a main worktree, `python3 dev/site/cdn_sync.py img/fx/buoi-*.webp && bash dev/site/build_site.sh`.
+- C28 room-btn: img/kit/ico-room.webp, img/kit/ico-map.webp (7.5 KB each) — only in account B's container (/home/user/wt/room-btn/img/kit/); a second push to review/cdn-pending-b was refused by the permission check. Until uploaded, the button shows its label only (no break).
 
 ## QUESTIONS
 - Q1 (Cloudflare): the token saved for api.cloudflare.com on account B's environment is rejected ("Invalid API Token"). Owner please re-save a valid R2-edit token for api.cloudflare.com in account B's environment network secrets (Settings), or confirm the coordinator (account A) does all CDN uploads from the PENDING CDN UPLOAD lists.
@@ -32,3 +33,5 @@ PASS review/tab-underline-r1 d8b54d0970ac8591d07163650058485f4bceb818 (C39; desc
 - Q3 (C27 buoi-transition): night→morning uses a dawn variant (mist + first light). Should a NEW WEEK also get the sky-band overlay on top of the dawn() week-summary screen, or keep dawn() alone?
 - Q4 (C27): KIT section §71 used provisionally for the buổi transition (jbuoi.js) — coordinator please confirm/assign the number.
 - Q5 (C23 mg-easy): knowledge minigames (Thơ, Câu đối, Đố đèn, Cờ, khảo hạch quiz) now scale with the player's level — low level = Dễ with many aids, high level = harder (more blanks, fewer aids); rewards unchanged. OK with the owner? Also rival NPC scores unchanged, so low-level players clear these more easily (balance look later).
+- Q6 (C28 room-btn): under 600 px the room button is icon-only (label in tooltip; a label didn't fit). OK? And should it also appear on landscape/wide screens (it never existed there)?
+- Q7 (CDN): how should account B hand over new images while its Cloudflare token fails — a valid token for account B (preferred), or an images-only branch like review/cdn-pending-b (needs owner OK)?
