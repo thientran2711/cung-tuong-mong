@@ -1,5 +1,5 @@
 # merge-hot-1 — SẴN SÀNG KIỂM (supersedes earlier version of this file)
-Branch review/merge-hot-1, final sha 5b8195e0c30e29db4ee7f66f9f315aadc4b4c251 (descends from main 0c23da40; main has since moved to a942395b, not included).
+Branch review/merge-hot-1, final sha bad941b49b10fbe940fde82556b337e9edbb0f2b (descends from main bd6342c7, ff-able when checked).
 In (--no-ff): review/modal-scroll-r1 f6cddf761d, review/book-fig-r1 251d62276, review/log-sync-r2 deabc2aa32 (an-tinh fix + 5 log fixes; an-tinh-fix-r1 not needed). Also merged origin/main feba37e5 (includes reign-road, cardflip-smooth, facefx-all, merge-hot-2/3).
 Conflicts: generated files (index.html, sw.js, assets.json) rebuilt with dev/site/build_site.sh, never hand-merged. dev/build/assemble.py conflicted twice: took main's module list + jlogsync.js after jtruth.js (jrail.js kept; main's jreign/jact kept).
 Tests (5 sizes 755x1000/1000x755/1180x820/1366x1024/844x390 unless noted): modal-swipe 0 STUCK (Hoc Cam picker swipes on touch); stage-rail 5/5 PASS; book-fig-scale ALL OK; book-figwide ALL OK incl. 844x390; panel-size errs 0 (run on the c4e89f89 merge; btnOut PEND:plantpick pre-existing on some sizes); log-sync-night 4/4 PASS; log-sync-week 0 leaks and log-sync audit drift 2 (log-sync-r2 alone 28) on the 02a0d3f1 merge. coop-e2e not run. Boot: every test boots clean; boot-flash not run.
