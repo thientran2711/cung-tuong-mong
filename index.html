@@ -14678,7 +14678,7 @@ const kg82Box=()=>document.getElementById("kg82box");
 function kg82ShowRes(html){{const d=kg82El();if(d){d.classList.remove("kg-run");d.classList.add("kg-idle")}}const bx=kg82Box(),res=$("kg82box-res");if(res){bx.innerHTML="";bx.hidden=true;res.innerHTML=html;res.hidden=false}else bx.innerHTML=html}
 
 /* ---------- canvas helper ---------- */
-function kg82Canvas(box,hRatio,hMax){const W=Math.max(240,Math.floor(box.clientWidth||300));const H=Math.round(Math.min(W*hRatio,hMax||520,Math.max(260,(innerHeight||800)*.56)));
+function kg82Canvas(box,hRatio,hMax,hMin){const W=Math.max(240,Math.floor(box.clientWidth||300));const H=Math.round(Math.min(W*hRatio,hMax||520,Math.max(hMin||260,(innerHeight||800)*.56)));
  const cv=document.createElement("canvas");const r=Math.min(3,window.devicePixelRatio||1);cv.width=W*r;cv.height=H*r;cv.style.width=W+"px";cv.style.height=H+"px";cv.className="kg82cv";
  const g=cv.getContext("2d");g.setTransform(r,0,0,r,0,0);box.appendChild(cv);
  const at=e=>{const b=cv.getBoundingClientRect();return[(e.clientX-b.left)*W/b.width,(e.clientY-b.top)*H/b.height]};
@@ -16951,7 +16951,8 @@ Object.assign(BAL,{rg:{at:[1,5,10,18,27,37],decideAfter:2,decideWait:3,catchUp:2
    Uses only existing kit parts: j82 game frame + canvas, k91Btns / k91DemoCard / k91Pointer / k91Loop, the doden-bg painting. KIT REQUEST: none.
    Registers KG82_ENG.lamp; KG82_KIND.doden (j82) points at it. Old saves: key "doden" unchanged; the demo flag is the new key "doden2". */
 BAL.lantern={field:[8,10,12],same:[3,3,4],lit:[3,4,5],rows:[2,3,3],seq:[3,4,5],lim:[32000,28000,24000],idle:[9000,14000,0],
- pts:[3,3.5,3.5],miss:.18,speed:.3,hint:.3,tier:null};
+ pts:[3,3.5,3.5],miss:.18,speed:.3,hint:.3,tier:null,
+ timeout:.6,autoHint:.5,bad:[1300,1300,500],glow:3500,pause:[900,1100],short:{h:520,min:240}};
 const LM_COL=[["#c23b22","#ff8a6a","#6e1608"],["#d99a1b","#ffe08a","#7a5206"],["#2f9d78","#8ff0c8","#0f5a40"]];
 function lmTier(env){const T=BAL.lantern.tier;if(T!=null)return cl(+T||0,0,2);
  try{if(typeof window.mgTier==="function"){const t=window.mgTier(env.kind||"doden",env.ctx||KG82.ctx);if(typeof t==="number"&&isFinite(t))return cl(Math.round(t),0,2)}}catch(e){}
@@ -16973,9 +16974,9 @@ function lmDraw(g,cx,cy,w,h,shape,col,lit,st,sway){const C=LM_COL[col];g.save();
  g.fillStyle="#b8862a";const cw=Math.min(bw*.42,w*.4);g.fillRect(-cw/2,by-bh*.02-3,cw,5);g.fillRect(-cw/2,by+bh*.97,cw,5);
  g.strokeStyle=C[0];g.lineWidth=2;g.beginPath();g.moveTo(0,by+bh*.97+5);g.lineTo(0,by+bh*.97+h*.16);g.stroke();g.restore()}
 function lmShuf(a){return kg82Shuf(a.slice())}
-function k92Lamp(box,env){const C=kg82Canvas(box,1.25,560),{g,W,H}=C;const tier=lmTier(env),B=BAL.lantern,LIM=B.lim[tier],IDLE=B.idle[tier];
+function k92Lamp(box,env){const C=kg82Canvas(box,1.25,560,innerHeight<BAL.lantern.short.h?BAL.lantern.short.min:0),{g,W,H}=C;const tier=lmTier(env),B=BAL.lantern,LIM=B.lim[tier],IDLE=B.idle[tier];
  let rd=-1,pts=0,R=null,t0=0,tAct=0,done=false,wait=0;const pops=[];const hb=k91Btns(box,[["k92hint","Gợi ý","bớt một ít phần"]]);
- const dm=k91DemoCard(box,"doden2",{title:"CÁCH CHƠI: THẮP ĐÈN",done:()=>{hb.hidden=false;t0=tAct=performance.now()},
+ const dm=k91DemoCard(box,"doden2",{title:"CÁCH CHƠI: THẮP ĐÈN",done:()=>{hb.hidden=false;t0=tAct=performance.now();setTimeout(fit,50)},
   lines:["Ba hồi, hồi nào cũng làm theo cái đang hiện sẵn trên màn.","Hồi 1: chạm mọi chiếc đèn giống đèn mẫu (cùng dáng, cùng màu). Hồi 2: chạm để thắp đèn cho giống hình mẫu. Hồi 3: chạm đèn theo đúng thứ tự dải mẫu.","Chạm nhầm thì đèn tối đi, chạm lại. Chưa rõ thì chạm Gợi ý, chỉ tốn một ít phần."]});
  if(dm)hb.hidden=true;
  const TZ=()=>Math.round(H*.3);
@@ -16994,13 +16995,13 @@ function k92Lamp(box,env){const C=kg82Canvas(box,1.25,560),{g,W,H}=C;const tier=
  function next(){rd++;if(rd>=3){done=true;return setTimeout(()=>env.end(Math.round(cl(pts,0,10))),400)}R=mk(rd);t0=tAct=performance.now()}
  function fin(timeout){if(R.fin)return;const now=performance.now(),sp=cl(1-(now-t0)/LIM,0,1),base=B.pts[R.type];let p;
   const frac=R.type===0?R.found/R.need:R.type===1?R.P.filter((v,i)=>v===R.T[i]).length/R.P.length:R.k/R.need;
-  p=timeout?base*frac*.6:base*(1-B.speed+B.speed*sp);p=Math.max(0,p-R.miss*base*B.miss-R.cost);if(timeout)p=Math.min(p,base*frac*.6);pts+=p;R.fin=now;
-  kg82Pop(pops,W/2,H*.5,timeout?"Hết giờ":"Đèn đã sáng!",timeout?K91C.gold():K91C.good());kg82Pluck(3,!timeout);setTimeout(next,timeout?1100:900)}
+  p=timeout?base*frac*B.timeout:base*(1-B.speed+B.speed*sp);p=Math.max(0,p-R.miss*base*B.miss-R.cost);if(timeout)p=Math.min(p,base*frac*B.timeout);pts+=p;R.fin=now;
+  kg82Pop(pops,W/2,H*.5,timeout?"Hết giờ":"Đèn đã sáng!",timeout?K91C.gold():K91C.good());kg82Pluck(3,!timeout);setTimeout(next,B.pause[timeout?1:0])}
  function nextTarget(){if(!R||R.fin)return null;
   if(R.type===0){const i=R.L.findIndex(x=>x.ok&&!x.on);return i<0?null:{i}}
   if(R.type===1){const i=R.P.findIndex((v,k)=>v!==R.T[k]);return i<0?null:{i}}
   const want=R.S[R.k];const i=R.tray.findIndex(x=>!x.used&&x.s===want.s&&x.c===want.c);return i<0?null:{i}}
- function hint(auto){if(!R||R.fin||done||(dm&&dm.on))return;tAct=performance.now();const t=nextTarget();if(!t)return;R.glow=t.i;R.glowAt=tAct;R.cost+=auto?B.hint/2:B.hint}
+ function hint(auto){if(!R||R.fin||done||(dm&&dm.on))return;tAct=performance.now();const t=nextTarget();if(!t)return;R.glow=t.i;R.glowAt=tAct;R.cost+=auto?B.hint*B.autoHint:B.hint}
  hb.querySelector("#k92hint").onclick=()=>hint(false);
  /* geometry of the current round (same function for drawing and hit-testing) */
  function geo(){const tz=TZ(),fy=tz+14,fh=H-fy-6;
@@ -17010,11 +17011,11 @@ function k92Lamp(box,env){const C=kg82Canvas(box,1.25,560),{g,W,H}=C;const tier=
   const n=R.S.length,sw=(W-16)/n,s=Array.from({length:n},(_,i)=>({x:8+i*sw,y:20,w:sw,h:tz-22}));return{s,f:cells(n,Math.min(n,5),fy,fh)}}
  function tapAt(x,y){if(!R||R.fin||(dm&&dm.on))return;tAct=performance.now();const G=geo();const i=G.f.findIndex(c=>x>=c.x&&x<=c.x+c.w&&y>=c.y&&y<=c.y+c.h);if(i<0)return;
   if(R.type===0){const L=R.L[i];if(L.on)return;if(L.ok){L.on=1;R.found++;kg82Pluck(R.found,true);if(R.found>=R.need)fin(false)}
-   else{R.miss++;L.bad=performance.now()+(tier<2?1300:500);kg82Pluck(0,false);if(tier<2)kg82Pop(pops,G.f[i].x+G.f[i].w/2,G.f[i].y+8,"Chưa giống, thử đèn khác",K91C.red())}}
+   else{R.miss++;L.bad=performance.now()+B.bad[tier];kg82Pluck(0,false);if(tier<2)kg82Pop(pops,G.f[i].x+G.f[i].w/2,G.f[i].y+8,"Chưa giống, thử đèn khác",K91C.red())}}
   else if(R.type===1){const was=R.P[i]===R.T[i];R.P[i]^=1;const now=R.P[i]===R.T[i];kg82Pluck(i,now);if(was&&!now){R.miss++;kg82Pop(pops,G.f[i].x+G.f[i].w/2,G.f[i].y+8,"Chưa đúng hình",K91C.red())}
    if(R.P.every((v,k)=>v===R.T[k]))fin(false)}
   else{const t=R.tray[i];if(t.used)return;const want=R.S[R.k];if(t.s===want.s&&t.c===want.c){t.used=1;R.k++;kg82Pluck(R.k,true);if(R.k>=R.need)fin(false)}
-   else{R.miss++;t.bad=performance.now()+(tier<2?1300:500);kg82Pluck(0,false);if(tier<2)kg82Pop(pops,G.f[i].x+G.f[i].w/2,G.f[i].y+8,"Chưa tới đèn này",K91C.red())}}}
+   else{R.miss++;t.bad=performance.now()+B.bad[tier];kg82Pluck(0,false);if(tier<2)kg82Pop(pops,G.f[i].x+G.f[i].w/2,G.f[i].y+8,"Chưa tới đèn này",K91C.red())}}}
  const TXT=["Chạm mọi chiếc đèn giống đèn mẫu","Chạm để thắp đèn cho giống hình mẫu","Chạm đèn theo thứ tự dải mẫu"];
  const stop=k91Loop(now=>{if(!R)return;kg82Bg(g,W,H,"doden",0,.6);
   if(dm&&dm.on){dm.draw(g,W,H,now);env.hud({score:"0/10",round:"Hồi 1/3",time:"–"});return}
@@ -17037,12 +17038,15 @@ function k92Lamp(box,env){const C=kg82Canvas(box,1.25,560),{g,W,H}=C;const tier=
    else if(R.type===1){sh=R.sc;co=1;lit=!!R.P[i];if(!lit)st="off"}
    else{const t=R.tray[i];sh=t.s;co=t.c;if(t.used)st="dim";else if(t.bad>now)st="bad"}
    if(R.type===0&&R.L[i].bad>now)st="dim";lmDraw(g,c.x+c.w/2,c.y+c.h*.5,w,h,sh,co,lit,st,sy);
-   if(R.glow===i&&now-R.glowAt<3500&&!R.fin)k91Glow(g,c.x+c.w*.12,c.y+c.h*.06,c.w*.76,c.h*.88,now)});
+   if(R.glow===i&&now-R.glowAt<B.glow&&!R.fin)k91Glow(g,c.x+c.w*.12,c.y+c.h*.06,c.w*.76,c.h*.88,now)});
   kg82DrawPops(g,pops,now);env.hud({score:`${Math.round(pts)}/10`,round:`Hồi ${Math.min(rd+1,3)}/3`,time:R.fin?"–":`${Math.max(0,Math.ceil(left/1000))} giây`})});
  k91Pointer(C,{down:(x,y)=>tapAt(x,y)});
  KG82.peek=()=>{if(!R||R.fin||(dm&&dm.on))return null;const t=nextTarget();if(!t)return null;const c=geo().f[t.i];return C.client(c.x+c.w/2,c.y+c.h/2)};
  /* test oracle for the random-play measure: every cell centre of the round */
  KG82.cells=()=>{if(!R||R.fin)return[];return geo().f.map(c=>C.client(c.x+c.w/2,c.y+c.h/2))};
+ /* short screens (844x390): the dialog scrolls, so bring the board to the top of the scroll area where it fits whole above the Gợi ý button */
+ const fit=()=>{if(innerHeight>=BAL.lantern.short.h)return;const sc=C.cv.closest(".kginfo");if(!sc)return;sc.scrollTop+=C.cv.getBoundingClientRect().top-sc.getBoundingClientRect().top-2};
+ setTimeout(fit,60);
  next();return()=>{done=true;stop()}}
 KG82_ENG.lamp=k92Lamp;
 Object.assign(KG82_KIND.doden,{e:"lamp"});
@@ -38542,7 +38546,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="deeaf7286338";window.CTM_BUILD=BUILD;
+const BUILD="c95c0a8f3b32";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
