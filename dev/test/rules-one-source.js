@@ -1,5 +1,6 @@
 /* rules-one-source check: every promotion threshold the player sees is the number the game checks (BAL / hhNeed), the Đức note
-   keeps the stat name, an old save (published build) loads, 0 page errors.
+   keeps the stat name, the ONE CORE constants (BAL.time/lot/walk/sneak/age/night, mirrors BL/SEATCAP/WVAL) are what texts and rules
+   print and check (§2b, perturbation), an old save (published build) loads, 0 page errors. Static half: dev/test/one-core-guard.js.
    usage: node dev/test/rules-one-source.js <base url dir> <W>x<H>@dpr   (serves <base>/_aa.html = new build, <base>/index.html = published main) */
 const {chromium}=require('playwright');
 const [,,BASE,SZ]=process.argv;const [WH,DPR]=(SZ||'755x1000@2').split('@');const [W,H]=WH.split('x').map(Number);
