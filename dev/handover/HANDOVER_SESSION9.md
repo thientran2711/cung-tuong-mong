@@ -105,3 +105,4 @@ Model rule (OD:L1059): sonnet default (UI, kit, art, docs, reviewers, bugs); opu
 - (07:05Z s11) MAIN FREEZE: no other ff until merge-hot-1 lands (it re-merges a942395b now).
 - (07:09Z s11) ff QUEUE (main frozen): 1 merge-hot-1 → 2 flip-newlife-r1 (PASS 4c14d7f8, waits for go) → 3 servant-system-r1 (PASS e82a9bcf, waits for go). 844x390 pcard acts clipped → kit-keeper-2 item 4.
 - (07:16Z s11) Owner 07:15Z: NVP redo with palette guide (place-glyphs worker); 38 festival buổi pictures → Foreman C tonight (~2,500 cr) after the palette guide; tutorial-in-story → story14 plan. Co-op night-sync reviewer still re-testing (not live).
+- (07:12Z s11) fp v3 (355 cr; total 955) looked at + sent. kc-lore-r1 PASS a44fa8a6 (thd 'bản thảo của cha' reword asked; joins ff queue #4).
