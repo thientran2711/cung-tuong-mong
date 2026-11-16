@@ -1,0 +1,4 @@
+# local wrangler dev state + deps: never commit
+.wrangler/
+node_modules/
+package-lock.json

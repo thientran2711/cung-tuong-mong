@@ -44,7 +44,12 @@ Rule: a new kit part gets its number HERE first (ask the coordinator); a worker 
 | **76** | **kitPalaceMap · palace detail map** (was a second "§71") | review/palace-map-port-r1 | RENUMBERED in merge-train-3 |
 | **77** | **kitStageRail · stage icon rail (Lịch · Chat · Mục tiêu)** (owner 16/11) | review/goal-strip-fix-r1 | — |
 | **78** | **PLACE ICON kitPlaceIcon + HAPPENING MARK kitHapMark** (was provisional "§71") | review/act-dedupe-r1 | FINAL (kit keeper 16/11) |
-| 79+ | free | | next free number is 79 |
+| 79 | free (not used on main) | | |
+| **80** | **CO-OP CHAT "Thư từ" (kitChatPanel / kitChatList / kitChatBubble; the icon is the §77 rail)** | review/coop-chat | FINAL (renumbered from §76 in coop-chat-r1) |
+| 81 | SCENE-END BUTTON | main (kit-keeper-2) | done |
+| 82 | TITLE SYSTEM PARTS | main (title-tag) | done |
+| **83** | **KIT MARKS · gold rank, text-line colour, ink-brush ✓/✗, kitRel2 two-column relations (§49.1), KẾT QUẢ seal, place icon above name, grade chip doc, danger button + kitConfirm (83.9)** | review/kit-marks | FINAL (owner 16/11 15:00Z) |
+| 84+ | free | | next free number is 84 |
 
 Why this order: face-sharp (§71) and tutorial (§72) were already registered by the coordinator in their own branch text ("§72 = coordinator registry; §71 = kitFigHD"), pcard-fill moved itself to §73 to get out of the way; buoi-transition and room-btn only had "to confirm / provisional" labels, so they move.
 
@@ -53,7 +58,7 @@ Why this order: face-sharp (§71) and tutorial (§72) were already registered by
 |---|---|---|
 | §39 (on main!) | TOP 15 lô A  ×  ẤN TRÂN NỮ kitSeal | Top 15 → §44 |
 | §71 | kitFigHD (face-sharp-r1)  ×  buoiShift (buoi-transition-r1) | kitFigHD keeps §71, buoi → §74 |
-| §72 | tutorial goal strip (tutorial-r2)  ×  kitBackBtnHtml (room-btn-r1) | tutorial keeps §72, room-btn → §75 |
+| §72 | tutorial goal strip (tutorial-r2)  ×  kitBackBtnHtml (room-btn-r1) | tutorial keeps §72, room-btn → §75 — CHECKED 16/11 (kit-marks): main KIT.md has §72 = tutorial / §75 = kitBackBtnHtml and the kit-page sample id of kitBackBtnHtml is §75; RESOLVED |
 | §48 | kitNameRank (main)  ×  promo exam (old promo-exam branch text) | main wins; promo exam is §55 (already) |
 | §46 | kit tabs (main)  ×  stale copy in tabs-kit-r6 | none, stale |
 | §20 / §28 / §31 / §33 / §36 / §37 / §40 / §41 / §42 | stale copies on unmerged old branches (kit-podium, title-screen, emotion, kit-j95, palace-map, tutorial, person-acts, rank0-ivory, close-bugs, kit-table, tabs-kit) | not on main; renumber to §76+ at merge time (see KIT_REQUESTS.md) |
