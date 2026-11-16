@@ -351,3 +351,4 @@
 | buoi-art review r1 (sonnet, SMALL: art + band/moon wiring) of 70fcddac | review/buoi-art-r1 | C | session_011xDdVP1UyUGDme7dK1Zmpy | RUNNING | 16/11 19:24Z |
 | road-b3 FAIL fix (opus): items 1–9 of review-road-b3-r1 in jrd_thd/jrd_cnv/jend14 (engine items → fix A) | review/road-b3-fix | B | session_01N1tNP3QtT2AK9LY7dLU2E4 | RUNNING | 16/11 19:28Z |
 | two-way-acts r1 BIG review (rules/costs/BAL) of b74af30c2 | review/two-way-acts-r1 @ 7e2ed179b | reviewer s22 | PASS 7e2ed179b (reviewer one-core fixes a89dc674; quickcheck PASS; report reports/two-way-acts-r1.md) | 16/11 |
+| fest-fx review r1 (opus, BIG): review/fest-fx a114024a -> PASS b6d05b2d (r1 fix: jfx kfWxCfg reads FESTFX; shots out of git) | review/fest-fx-r1 | main s22 | session_01UV1Szm757NUrANyodNJyo2 | PASS b6d05b2d (report reports/fest-fx-r1.md) | 16/11 19:55Z |
