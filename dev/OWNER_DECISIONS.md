@@ -1055,3 +1055,4 @@ All must work in co-op.
   - sonnet (DEFAULT): normal workers (one feature or one UI family), all reviewers, art workers (Magnific generation + look + upload), small bug fixes.
   - opus: only hard cross-system work — co-op sync / netcode, save/migration/data-loss, performance root-cause (load/lag/WebKit), big multi-module refactors, or a task that already failed twice on sonnet.
   - Never fable for routine work. Log the chosen model in SESSION8_QUEUE / FOREMAN_B_STATUS next to the item.
+- (16/11, session 8) Owner (verbatim): "Các cái ván nào mà chơi một mình bị mất rồi thôi kệ đi, khỏi đi." → no recovery of lost solo saves; save-slots worker focuses on cause + separate slots only.
