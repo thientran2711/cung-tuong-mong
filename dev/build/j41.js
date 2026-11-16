@@ -121,7 +121,7 @@ function accInfo(){if(!S||Q.length)return;const R=n=>`<b>${n}</b>`;
 (function(){const st=document.createElement("style");st.textContent=`
 .mspot.agrey{cursor:pointer;pointer-events:auto}
 .mspot.agrey .mlab{opacity:1!important}
-.mspot .mlab .mlock{display:inline-block;vertical-align:-1px;margin-left:4px;opacity:.85}
+.mspot .mlab .mlock{flex:none;display:block;margin-left:0;opacity:1;color:#6b4a1c}.mspot .mlab .kmlock{flex:none}
 .mspot .mwhy{display:block;background:#2b2b28d9;color:#c9c9c0;font-size:.55rem;line-height:1.2;border-radius:6px;padding:0 5px;margin-top:1px;white-space:nowrap;pointer-events:none}
 .mspot.sm .mwhy{font-size:.5rem;padding:0 3px}
 .mspot .macts{display:flex;flex-direction:column;gap:2px;margin-top:2px;align-items:center;z-index:3}

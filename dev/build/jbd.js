@@ -15,8 +15,8 @@ const KIT_BD={
  reborn:{p:"img/bg-reborn-p.webp",l:"img/bg-reborn-l.webp",col:"#e9dcc8",
   grad:"linear-gradient(rgba(40,20,12,.10),rgba(40,20,12,.04) 40%,rgba(40,20,12,.18))"},
  roulette:{p:"img/bg-reborn-p.webp",l:"img/bg-reborn-l.webp",col:"#e9dcc8",grad:"linear-gradient(rgba(40,20,12,.12),rgba(40,20,12,.22))"},
- podium:{sel:".kpod",box:true,p:"img/kit/podium-bg-p.webp",l:"img/kit/podium-bg.webp",pos:"center top",col:"var(--bg)",
-  grad:"linear-gradient(#fffaf022,#f5ecdc55 70%,#f5ecdcd0)"},
+ podium:{sel:".kpod",box:true,p:"img/kit/podium-bg2-p.webp",l:"img/kit/podium-bg2.webp",pos:"center bottom",col:"var(--bg)",
+  grad:"linear-gradient(#fffaf000,#f5ecdc22 60%,#f5ecdcb0)"},
  night:{sel:".modal.night",p:"img/tam-cung-dem-p.webp",l:"img/tam-cung-dem.webp",col:"#000"}
 };
 function kitBdCss(){const T="linear-gradient(transparent,transparent)";
