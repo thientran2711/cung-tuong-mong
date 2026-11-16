@@ -234,119 +234,121 @@ Rule learnt from the pilot: `.4` already closes its own first conflict (its 3–
 - .10 Minh oan cho cha ruột — petition [emp, off]
 - .11 Họ thật — endings: name restored, family title back / name restored quietly / the claim fails; rare: her real father's old friend at court becomes her ally [off, emp]
 
-### 4.5 nc — Công chúa hòa thân ({land} = Nam Chiếu / Bắc Địch)
+### 4.5 nc — Công chúa hòa thân ({land} = Nam Chiếu / Bắc Địch) — BUILT (review/road-b2, dev/build/jrd_nc.js; all .5–.11 + one rare finale per road)
+- Bắc Địch branch plays the same chapters under bd_hoa→nc_su, bd_ngua→nc_gian, bd_tuc→nc_tuc, bd_hoang→nc_vuong (land tokens {land} {pv} {mh} {quan} {pa} {pb}; .5 has NCW/BDW openings). Note: bd lives do not run the 14-chapter frame yet (STORY.bd is defined after the j67 wrapper; engine request sent).
 **nc_gian · Mật lệnh cố quốc**
 - .4 Mật lệnh cố quốc — {dad} orders her to spy on Đại Hy's border defences [emp, envoy]
-- .5 Bản đồ biên ải — where the map is, who guards it [off, gd]
-- .6 Người liên lạc — the go-between: a merchant or eunuch of {land} [man, eun]
-- .7 Đại Hy nghi ngờ — the Emperor's men watch her [emp, gd]
-- .8 Hai lòng — she sends true, false or nothing [emp, envoy]
-- .9 Gián điệp bị bắt — the go-between is caught [off, man]
-- .10 Đường cùng — confess, deny, or turn the plot [emp]
-- .11 Trung với ai — endings: loyal to Đại Hy (home angry) / loyal to {land} (exposed risk) / both kept in balance; rare: she brokers a lasting treaty [emp, {dad}]
+- .5 Đường thư qua Hội Đồng quán — lão Kha, a {land} merchant at Hội Đồng quán, becomes her go-between; who holds the channel [maid, v, emp]
+- .6 Tấm lộ dẫn — Kha's caravan is held at Chính Dương gate without a Lễ bộ pass, a letter of {pv} in one chest; deadline the full moon [maid, v, emp]
+- .7 Mắt của Hoàng thượng — {v} reports letters to {land}; guards at her door and the Emperor tests her himself [emp, maid, v, hh]
+- .8 Hai lòng — {land} raids the border and {pv} wants Đại Hy's route; she sends true, false or nothing [emp, maid, v]
+- .9 Lão Kha bị bắt — Binh bộ traces the caravan and Kha sits in the Đại Lý tự jail; the hearing is in ten days [maid, emp, v]
+- .10 Đường cùng — all the evidence on the Emperor's desk; confess, deny or turn the channel to Đại Hy [emp, v]
+- .11 Trung với ai — the {land} envoy asks whose she is. Endings: Một lòng, hai nước / Người của Đại Hy / Cái bóng gián điệp; rare: Trung hiếu lưỡng toàn [emp, maid, v]
 **nc_su · Sứ đoàn cố quốc**
 - .4 Sứ đoàn cố quốc — her royal brother leads the tribute mission; every banquet a game [emp, bro]
-- .5 Lễ nghi hai nước — a rite clash at the welcome [off, th]
-- .6 Quà cống — a tribute gift goes missing [eun, v]
-- .7 Hoàng huynh phạm cấm — her brother breaks a palace rule [bro, gd]
-- .8 Yến tiệc ngoại giao — the great banquet [emp, th, bro]
-- .9 Điều ước thương mại — a trade treaty she can shape [off, emp]
-- .10 Sứ đoàn lên đường — departure; what goes home with them [bro]
-- .11 Chiếc cầu hai nước — endings: bridge between two lands (both honour her) / mission shamed / mission recalled in anger; rare: her brother makes her the guarantor of the treaty [bro, emp]
+- .5 Lễ bái trước điện — {pa} leads the mission again and refuses the full kowtow before the audience [emp, v]
+- .6 Bức gấm Bách thọ — {mh}'s woven birthday gift is ink-stained at Hội Đồng quán; deadline Vạn thọ tiết in ten days [maid, v, emp]
+- .7 Huynh trưởng phạm cấm — drunk {pa} hunts in the forbidden Thượng Lâm park; plead, prove or let the law act [emp, v]
+- .8 Đại yến các nước — the banquet for all envoys: seating, toasts and where she sits [emp, v]
+- .9 Điều ước chợ biên — the border-market treaty (salt, tea, iron for horses, hides) before Sương giáng closes the passes [emp, v]
+- .10 Sứ đoàn lên đường — gifts for {mh} and a charge of forbidden goods in the envoy carts at the gate [emp, maid, v]
+- .11 Chiếc cầu hai nước — {quan}'s state letter has a line about her. Endings: Cầu nối hai triều / Hai nước yên, ngươi đứng giữa / Sứ tiết thưa dần; rare: Hai triều cùng sắc phong [emp, maid, v]
 **nc_tuc · Người ngoại tộc**
 - .4 Người ngoại tộc — the Thái hậu dislikes foreigners; her dress, food and dances are watched [th]
-- .5 Áo váy cố hương — wear home dress or palace dress (costume rules) [th, v]
-- .6 Món ăn lạ — a dish of {land} makes someone ill [doc, v]
-- .7 Điệu múa — a dance at the Thái hậu's birthday [th]
-- .8 Kẻ châm chọc — a rival leads the mockery [v]
-- .9 Học lễ Đại Hy — she learns, and keeps something of her own [th, mama]
-- .10 Đức Thọ cung chấp nhận — the Thái hậu's judgement [th]
-- .11 Hai nửa một người — endings: accepted as she is / accepted by giving up her ways / never accepted; rare: the Thái hậu adopts a {land} custom [th]
+- .5 Áo váy cố hương — New Year audience in Đại Hy court dress; home dress, palace dress or her mother's kerchief in the sleeve [th, v, maid]
+- .6 Món ăn lạ — {v} falls ill after a sour {land} soup at her palace; "bùa ngải" rumour, Thận hình ty gives ten days [doc, v, th]
+- .7 Bàn thờ cố hương — the Emperor's bad dreams are blamed on her home altar; a palace search is coming [emp, v, th, maid]
+- .8 Tờ sớ người ngoại tộc — a censor of {v}'s kin memorialises that foreign consorts should not hold high rank or raise heirs [emp, v, th]
+- .9 Học lễ Đại Hy — she runs the hậu cung's Phật đản rite, to the letter, with or without her land's lanterns [th, maid, v]
+- .10 Nghĩa nữ nhà ai — Đức Thọ cung offers to enter her as adopted daughter of a Đại Hy house, erasing her {land} name [th, maid, v]
+- .11 Hai nửa một người — the Vạn thọ banquet with the {land} mission. Endings: Được chấp nhận như chính mình / Thành người Đại Hy / Mãi là người ngoài; rare: Lễ cố hương vào lịch cung [th, emp, v]
 **nc_vuong · Ngai vàng cố quốc**
 - .4 Ngai vàng cố quốc — {dad} dies; brother and uncle fight for the throne, both seek Đại Hy and her [emp, bro]
-- .5 Thư hai phe — letters from both claimants [bro, envoy]
-- .6 Triều đình Đại Hy chia phe — ministers back different claimants [off, emp]
-- .7 Mẫu hậu cầu cứu — her mother writes from {land} [mom]
-- .8 Binh Đại Hy xuất ải — Đại Hy sends troops, or not [emp, off]
-- .9 Tin bại trận — her side loses a battle [bro]
-- .10 Lời quyết — she speaks to the Emperor for one side [emp]
-- .11 Ngôi vua cố quốc — endings: her side wins (her standing rises) / the other side wins (she is a hostage of sorts) / {land} splits; rare: she brings both to a peace and is honoured in both lands [emp, bro]
+- .5 Ấn sách phong — the new ruler needs Đại Hy's investiture seal; Lễ bộ stalls and the losing side sends gold [emp, maid, v]
+- .6 Triều đình chia phe — Binh bộ (backed by {v}'s house) wants two border towns, Lễ bộ wants peace; she is caught between [emp, v]
+- .7 Thư cầu cứu của mẹ — rebels trap {mh} in an old city; help must pass before the pass closes at month's end [maid, emp, v]
+- .8 Binh Đại Hy xuất ải — the rebels take three border towns; send troops or not, and under whom [emp, v]
+- .9 Tin bại trận — a column is ambushed in a gorge and the court blames the {land} woman in the palace [emp, v, maid]
+- .10 Lời quyết — the losing side asks to split {land}; the Emperor will follow her one word [emp, v, maid]
+- .11 Ngai vàng sau cùng — both missions meet at Hồng Lô tự. Endings: Cố quốc một lòng / Cố quốc chia đôi / Cố quốc thành nước thù; rare: Hai nhà thề hòa bằng rượu của ngươi [emp, v]
 
-### 4.6 td — Con gái tội thần
+### 4.6 td — Con gái tội thần — BUILT (review/road-b2, dev/build/jrd_td.js; all .5–.11 + one rare finale per road)
 **td_an · Lật lại án cũ**
 - .4 Lật lại án cũ — the family accused of treason by {foed}; his daughter {foe} is in the palace [foe, foed]
-- .5 Chứng cứ thứ nhất — the forged memorial's copy [eun, off]
-- .6 Nhân chứng — the old steward (story-only) and a clerk; keep them alive [steward, off]
-- .7 {foe} ra tay — the enemy daughter acts against her (real oán) [foe]
-- .8 Đủ chứng cứ — the third proof; now the rank she needs to petition (BAL) [emp]
-- .9 Dâng sớ — the petition [emp, off]
-- .10 Tam ty xét lại — the retrial (HISTORY CHECK) [off, foed]
-- .11 Án cũ sáng tỏ — endings: family cleared, {foed} punished / cleared, {foed} untouched / retrial fails (she lives on); rare: the Emperor restores her family title [foed, foe, emp]
+- .5 Bản sớ gốc — get {foed}'s original memorial with the forged Binh bộ seal out of the Nội các archive [eun, v, maid, foe]
+- .6 Nhân chứng — keep the old steward and the old Hình bộ clerk alive and take their words before the clerk leaves in three months [maid, v, foe]
+- .7 Nhà kẻ thù ra tay — {foed}'s house strikes first through {v} and {foe} [v, foe, emp, th]
+- .8 Đủ chứng cứ — the third proof (the Binh bộ seal register, burned at year end) and a petitioner from rank RANKS[BAL.road.td_an.rank] [emp, v, th]
+- .9 Dâng sớ — the petition for a chỉ sending the case to the Tam ty, against the filial-piety objection [emp, th, v, foe]
+- .10 Tam ty xét lại — the retrial; she acts only through witnesses and petitions (HISTORY CHECK) [emp, v, foed]
+- .11 Án cũ sáng tỏ — the Emperor's final ruling. Endings: Nhà ngươi rạng danh / Rửa oan, không trị tội / Án không lật được; rare: Ngự bút phục tước, biển Trung hiếu [emp, foe, v]
 **td_ke · Kẻ đứng sau màn**
 - .4 Kẻ đứng sau màn — {foed} was only the knife; the hand is higher [foed]
-- .5 Lần theo bạc — the money trail [off, eun]
-- .6 Kẻ cầm dao — a powerful prince or minister appears in the trail (cast from real officials/vương gia) [off]
-- .7 Bị phát hiện — the hand learns she is looking [eun, gd]
-- .8 Đồng minh bất ngờ — someone else he wronged [v, off]
-- .9 Bẫy ngược — she sets a trap [off, emp]
-- .10 Lộ mặt — the mastermind exposed or not [emp]
-- .11 Trả thù kẻ nào — endings: the mastermind falls / only the knife falls / she lets both go for safety; rare: she turns the mastermind into her tool [off, foed]
+- .5 Lần theo bạc — follow {foed}'s bribe money to {n1} before the ledgers burn [maid, eun, v]
+- .6 Con dao còn sống — keep {foed} alive as the only witness against {n1} [maid, foe, v]
+- .7 Bị phát hiện — {n1} plants a eunuch and a guard in her palace and waits for one slip [eun, maid, v, emp]
+- .8 Đồng minh bất ngờ — others {n1} wronged (Trịnh phu nhân, a censor, even {foe}) join or use her [foe, v, maid]
+- .9 Bẫy ngược — bait a trap that closes before the New Year audience [emp, v, foe, eun]
+- .10 Lộ mặt — the spring audience; her proof reaches the throne only through the censor and witnesses [emp, v, foe]
+- .11 Trả thù kẻ nào — the Emperor rules on both. Endings: Kẻ chủ mưu đền tội / Chỉ con dao ngã / Buông cả hai để giữ mình; rare: Nắm thóp kẻ chủ mưu [emp, foed, foe, v]
 **td_song · Người em còn sống**
 - .4 Người em còn sống — her youngest brother lives as a border conscript under a false name [bro2]
-- .5 Chiếc vòng bạc — who sent the bracelet [eun, man]
-- .6 Thư qua biên ải — send word without exposing him [gd]
-- .7 Kẻ nghi ngờ — someone recognizes the family face [off, foe]
-- .8 Em bị thương — he is hurt in a skirmish; medicine and silver (deadline) [doc]
-- .9 Đổi tên — a new identity paper [off, eun]
-- .10 Đưa em về — bring him nearer, or keep him far and safe [gd, emp]
-- .11 Máu mủ — endings: brother safe under a new name / brother joins the army openly / lost again; rare: he earns rank on merit and clears the name later [bro2, emp]
+- .5 Tin lan về kinh — word that he lives reaches the capital; learn who knows and find him a protector [maid, foe, emp]
+- .6 Thư qua biên ải — keep the letter line safe while {v} hunts her letters to sell [maid, v]
+- .7 Kẻ nghi ngờ — an old Lễ bộ official knows his face and a revenge rumour heads for the throne [foe, v, emp]
+- .8 Em bị thương — his unit is pushed to the front; medicine within one month, and who signed the order [doc, maid, foe]
+- .9 Đổi tên — a new household paper before the Hộ bộ census in two months, or his true surname [eun, v, emp]
+- .10 Đưa em về — the palace guard in the capital or the far border [emp, foe, maid]
+- .11 Máu mủ — {foed}'s last memorial calls him a seed of revolt. Endings: Chị em đoàn tụ / Em theo quân phương xa / Lạc mất em lần nữa; rare: Em lập công, rửa tên cha [emp, foe, v]
 **td_tha · Thù hay tha**
 - .4 Thù hay tha — {foe} is the enemy's daughter but did nothing; now she is in trouble [foe]
-- .5 Nạn của {foe} — the trouble: a false charge by a third consort [foe, v]
-- .6 Đứng nhìn hay ra tay — watching costs conscience; helping costs face [foe]
-- .7 Lời thú nhận — {foe} learns who she is [foe]
-- .8 Cha nàng — {foed} offers a deal [foed]
-- .9 Hai người con gái — the two daughters meet alone [foe]
-- .10 Lựa chọn — revenge on the father through the daughter or another way [foe, foed]
-- .11 Cởi nút thắt — endings: sworn sisters / revenge taken (real oán for life) / parted without peace; rare: {foe} testifies against her own father [foe, foed]
+- .5 Búp bê trù ếm — {v} frames {foe} with a curse doll; speak for her, against her, or stay silent [foe, v, emp]
+- .6 Đứng nhìn hay ra tay — {v}'s house impeaches {foed} and asks her to join [v, foe, emp]
+- .7 Lời thú nhận — {foe} once saw the forged memorial's draft; turn it into a signed statement [foe, v]
+- .8 Cha nàng — {foed} offers land, graves and silver for the statement before the autumn assizes [maid, foe, v]
+- .9 Hai người con gái — on her parents' death anniversary {foe} asks to light incense [foe, v]
+- .10 Nước cờ cuối của nhà kia — {foed} accuses her of khi quân for entering the palace under a changed name [emp, foe, v, th]
+- .11 Cởi nút thắt — the Emperor's chỉ opens a Tam ty review of {foed}. Endings: Kết nghĩa tỷ muội / Thù trả, nghĩa tuyệt / Đường ai nấy đi; rare: Con gái làm chứng cho cha [foe, emp, v]
 
-### 4.7 ch — Cháu gái Thái hậu
+### 4.7 ch — Cháu gái Thái hậu — BUILT (review/road-b2, dev/build/jrd_ch.js; all .5–.11 + one rare finale per road)
+Every chapter has an S.thDead branch (openings, turning beat, climax) for a Thái hậu who died by the j13 roll; ch_benh .10/.11 can kill her itself.
 **ch_co · Quân cờ của cô mẫu**
 - .4 Quân cờ của cô mẫu — the Thái hậu placed her to balance the Hoàng hậu; orders grow heavier [th, hh]
-- .5 Nhiệm vụ đầu — spy on the Hoàng hậu's palace [th, hh]
-- .6 Hoàng hậu biết — the Hoàng hậu suspects [hh]
-- .7 Hai chủ — the Thái hậu and the Emperor want different things [th, emp]
-- .8 Lệnh khó — an order she finds wrong [th, v]
-- .9 Từ chối — refuse and lose the shelter, or obey and lose herself [th]
-- .10 Người đánh cờ — she plays her own move [th, hh]
-- .11 Cô cháu — endings: partner of the Thái hậu / obedient piece / break with the Thái hậu; rare: the Thái hậu names her heir of the Đức Thọ cung faction [th]
+- .5 Tai mắt Đức Thọ cung — the Thái hậu's spies (a mama, a ledger eunuch) must learn to obey her [th, hh, v, eun]
+- .6 Hoàng hậu sinh nghi — the Hoàng hậu (or Nội vụ phủ, if no queen) catches a Đức Thọ cung spy and asks her [hh, v, emp]
+- .7 Hai chủ — the Thái hậu wants her cousin as Cửu môn đề đốc, the Emperor wants his own man [th, emp, v]
+- .8 Lệnh khó — an order to bury a cloth doll in {v}'s palace [th, v, maid, hh]
+- .9 Từ chối — an oath to obey for life, or lose the shelter [th, v, emp]
+- .10 Người đánh cờ — at the Thái hậu's birthday Càn Ninh cung asks her to "rest"; she plays her own move [th, hh, v, emp]
+- .11 Cô cháu — who takes over the Thái hậu's game. Endings: Người nối ván cờ Đức Thọ cung / Cháu ngoan giữ lễ / Đức Thọ cung quay lưng; rare: Cô mẫu trao ấn Đức Thọ cung [th, v, emp]
 **ch_benh · Thái hậu lâm bệnh**
 - .4 Thái hậu lâm bệnh — the Thái hậu falls ill; the harem stirs [th, doc]
-- .5 Thuốc thang — the physicians disagree; who doctors her [doc, th]
-- .6 Kẻ rục rịch — consorts court other patrons [v, hh]
-- .7 Đầu độc? — a poisoned medicine suspicion [doc, eun]
-- .8 Hầu bệnh — nights at the sickbed (cost: favour with the Emperor) [th, emp]
-- .9 Bệnh trở nặng — the crisis [th, doc]
-- .10 Hồi phục hay băng hà — the outcome (context-driven, OD:L1253) [th]
-- .11 Chỗ dựa mới — endings: the Thái hậu recovers and rewards her / dies and she inherits her people / dies and the faction scatters; rare: she exposes the poisoner [th, doc, v]
+- .5 Thuốc thang — the Viện phán and lương y họ Tôn give opposite diagnoses; she picks who treats her [doc, th, emp, v, hh]
+- .6 Kẻ rục rịch — consorts drift to Càn Ninh cung and someone must stand in at the ancestor rite [v, hh, emp]
+- .7 Đầu độc? — a decoction eunuch adds a herb to her medicine; get the dregs before they are thrown out [doc, eun, v]
+- .8 Hầu bệnh — nights at the sickbed cost nights with the Emperor [th, emp, v, maid]
+- .9 Bệnh trở nặng — tuyết liên within ten days from Ngự dược khố or a merchant [th, doc, v, eun]
+- .10 Hồi phục hay băng hà — the night that decides, read from her earlier choices (context-driven, OD:L1253) [th, doc, v, emp]
+- .11 Chỗ dựa mới — who she becomes once the crisis is over. Endings: Cô mẫu khỏe lại, trọng thưởng ngươi / Nối người của cô mẫu / Đức Thọ cung tan đàn; rare: Vạch mặt kẻ dâng thuốc độc [th, doc, v, hh]
 **ch_ho · Hai người cháu**
 - .4 Hai người cháu — another of the Thái hậu's kin came first; one chair beside the Thái hậu [v]
-- .5 Ai được gọi trước — the morning audience [th, v]
-- .6 Quà mừng thọ — the birthday gift contest [th, v]
-- .7 Lời gièm — the cousin whispers [v]
-- .8 Nhà ngoại — the clan elders pick a favourite [off, th]
-- .9 Đồng minh hay đối thủ — a common enemy appears [v, hh]
-- .10 Chiếc ghế — the Thái hậu decides [th]
-- .11 Họ ngoại — endings: she wins the chair / they share / the cousin wins; rare: both cousins rise together as one faction [v, th]
+- .5 Ai được gọi trước — whose name the Thái hậu calls first each morning [th, v, maid]
+- .6 Quà mừng thọ — the birthday gift contest, one month away [th, v, maid]
+- .7 Lời gièm — a rumour that she speaks ill of the Thái hậu; trace it to {v}'s palace [v, th, maid]
+- .8 Nhà ngoại — the clan elders meet at the phủ Quốc cữu; she can reach them only by letter [th, maid, emp, v]
+- .9 Kẻ thù chung — the censors impeach the Thái hậu's kin; stand with {v} or let her house take it [emp, v, hh]
+- .10 Chiếc ghế — the Thái hậu will give her private seal to one niece after Phật đản [th, v]
+- .11 Họ ngoại — who heads the clan in the palace. Endings: Người đứng đầu họ ngoại / Hai người cháu chia ghế / {v} đứng đầu họ ngoại; rare: Hai người cháu cùng cầm họ ngoại [th, v, maid]
 **ch_bi · Bí mật năm xưa**
 - .4 Bí mật năm xưa — an old letter: the Thái hậu once destroyed a consort to keep the throne [th]
-- .5 Người cầm thư — who holds it [v, eun]
-- .6 Phi tần năm ấy — who the victim was, and her kin alive now [off, man]
-- .7 Cô mẫu hỏi — the Thái hậu asks what she knows [th]
-- .8 Thư bị đánh cắp — the letter changes hands [eun, v]
-- .9 Bảo vệ hay dùng — protect the Thái hậu or use the letter [th, emp]
-- .10 Ngọn lửa — the letter burns or reaches the Emperor [emp]
-- .11 Bí mật được chôn — endings: secret buried, the Thái hậu in her debt / secret out, the Thái hậu falls, she survives / secret used as her own power; rare: the victim's kin is rewarded quietly and peace is made [th, emp]
+- .5 Người trình thư — find who brought the copy of the letter into the palace [eun, v, th, emp]
+- .6 Người nhà họ Lâm — Lâm Khải, nephew of the dead consort, wants her name back before Thanh minh or goes to the Ngự sử đài [maid, v, th]
+- .7 Cô mẫu hỏi — the Thái hậu tells her own story of that night and wants every copy [th, v, eun]
+- .8 Thư bị đánh cắp — the brocade box with the copy and Đàm ma ma's testimony is stolen [maid, eun, v, hh]
+- .9 Bảo vệ hay dùng — protect the Thái hậu, use the secret, or give the Lâm house justice [emp, th, v]
+- .10 Đêm Thanh minh — the deadline night; the letter burns or reaches the Emperor [emp, th, v, maid, eun]
+- .11 Bí mật được chôn — the old story gets its end. Endings: Bí mật được chôn, cô mẫu mang ơn / Bí mật thành quyền của ngươi / Bí mật ra ánh sáng; rare: Họ Lâm phục danh, hai nhà giải oán [th, emp, v]
 
 ### 4.8 thd — Con gái thầy đồ nghèo
 **thd_tho · Danh hiệu Tài nữ**
@@ -435,6 +437,10 @@ OD:L1327 history/drama questions → expert check (marked "HISTORY CHECK" in §4
 ### 5.2 Names, places, family
 - Dynasty: Đại Hy. Emperor = «Hoàng thượng» (no personal name in story text). Palaces: Đức Thọ cung (Thái hậu), Càn Ninh cung,
   Tân Giả khố, Nội vụ phủ, Kính sự phòng, Thái y viện, Hàn lâm viện, Đại Lý tự. New place names: register here first.
+- B2 places (jrd_nc/td/ch): Hội Đồng quán (foreign envoys' and merchants' lodging), cửa Chính Dương, cửa Tây Hoa, cửa Đông Hoa, vườn Thượng Lâm,
+  hồ Thái Dịch, Hồng Lô tự (office for foreign envoys), Thượng tứ viện (imperial stables), Thượng y cục, Ngự thiện phòng, Ngự dược phòng,
+  Ngự dược khố, Phụng Tiên điện (ancestor rite, also j97), Thọ Khang cung, kho Nội các (archive), Thận hình ty, Ngự sử đài, phủ Quốc cữu
+  (ch: her father's house), chùa Hộ Quốc (also j67); outside: Giang Nam, Lĩnh Nam (exile).
 - Her father/brother/clan = the ONE family record of this life (jkc fam + KCDAD, kc-lore rule: one father/brother/dress/clan across the
   home roads and the palace road). A road chapter reads that record; it never invents a second father or brother. td's family is
   fallen (fall card at entry); td_song's brother is the same family record's youngest son.
@@ -457,6 +463,37 @@ OD:L1327 history/drama questions → expert check (marked "HISTORY CHECK" in §4
 | old steward | td_an (+ P2 td tutorial) | her ruined house's steward | elder servant pool |
 | envoy of {land} | nc_* | {dad}'s envoy | S.men envoy role |
 | mama (dying) | cn_than .4 | knows her birth | mama pool |
+| lão Kha | nc_gian (+bd_ngua) | {land} merchant at Hội Đồng quán, her go-between | merchant |
+| {land} groom of Thượng tứ viện | nc_gian .5 (Bắc Địch opening) | carries the first silk order | eunuch |
+| Hội Đồng quán interpreter | nc_su .6 | Đại Hy interpreter paid by {v}'s house | official |
+| ma ma giáo tập of Đức Thọ cung | nc_tuc .5, .9 | teaches her palace rites (unnamed) | mama |
+| {v}'s cousin (Thị lang Lễ bộ, later Phó tướng) | nc_vuong .5–.9 | rival's relative, never named | official |
+| old border general | nc_vuong .8 | the other choice of commander (unnamed) | S.men |
+| Giang Nam abbot (sư trụ trì) | td_an .6 | keeps lão thái giám Vương's written deposition | elder servant |
+| seal carver Lý | td_an .10 | carved the forged Binh bộ seal | merchant |
+| Nội các archive eunuch | td_an .5 | keeper of the archive | eunuch |
+| Trịnh phu nhân | td_ke .8 | widow of a Thị lang {n1} ruined | mama |
+| money-house owner (tiền trang) | td_ke .5 | holds the bribe trail outside the west gate | merchant |
+| censor, her father's old student | td_ke, td_tha .11 | carries her memorials at court (from j67) | official |
+| her youngest brother «Tiểu Thạch» | td_song | the family record's youngest son, never given a real name | S.men |
+| bracelet merchant | td_song | dad's old acquaintance, carries letters | merchant |
+| deputy general (later Tổng binh) | td_song | the officer the brother saved, his protector | official |
+| old Lễ bộ official | td_song .7, .11 | dad's colleague, knows the face | official |
+| Binh bộ Lang trung | td_song .8 | {foed}'s client who signs the order | official |
+| Nội vụ phủ census clerk | td_song .9 | writes the new household paper | eunuch |
+| {foe}'s mother (phu nhân nhà {foed}) | td_tha .5–.11 | bargains; stands in when {foe} is gone | mama |
+| Thượng y cục seamstress | td_tha .5 | sewed the curse doll | maid |
+| family friend (người thế giao) | td_tha .10 | changed her name in the selection roll | elder servant |
+| biểu ca (Thái hậu's nephew) | ch_co .7 | Cửu môn đề đốc candidate, offstage | none |
+| Càn Ninh cung spy mama / old Đức Thọ cung mama | ch_co, ch_benh, ch_ho | the Thái hậu's people | mama |
+| Nội vụ phủ ledger eunuch | ch_co .5–.6 | the Thái hậu's man in Nội vụ phủ | eunuch |
+| lương y họ Tôn | ch_benh .4–.11 | outside physician (from j67) | official (thái y face) |
+| Viện phán of Thái y viện | ch_benh .5–.10 | head physician | official (thái y face) |
+| decoction eunuch of Ngự dược phòng | ch_benh .7 | adds the herb | eunuch |
+| {v}'s uncle, East-gate herb shop owner | ch_benh .7–.11 | poison supplier, named only | none |
+| Lâm Khải | ch_bi | nephew of the dead consort, Biên tu Hàn lâm viện | official |
+| Lâm thị | ch_bi | the late emperor's consort who died (named only) | none |
+| Đàm ma ma | ch_bi | old cung nữ of Thọ Khang cung (from .4) | mama |
 ### 5.5 Rewards and UI
 - Each chapter end: gain AND loss rows (kit result card), reward item by outcome (j67 rw), Danh/Sủng/oán from BAL.road.
 - Road endings (.11) never kill her, never send her to lãnh cung, never close the Hoàng hậu road.
@@ -479,6 +516,7 @@ Each helper builds on the engine branch, one origin per review branch `review/ro
 ## 7. Change log
 - 11/16/2026 created (opus lead of Foreman B): 288-chapter catalogue, code-key fix (cn/cnv), data shape, canon rules, split.
 - 11/16/2026 tt built (28 chapters); §4.1 rewritten to the built chapters (the .4 arcs already close their first conflict); tm96 = side story.
+- 11/16/2026 B2 built nc (+bd aliases), td, ch (84 chapters); §4.5–4.7 rewritten to the built chapters.
 
 ## 8. Open questions for Foreman B / main (not for the owner unless main decides so)
 1. DONE: Thanh mai trúc mã is a side story in full-road lives (jroad.js; BAL.road.tm).
@@ -487,3 +525,10 @@ Each helper builds on the engine branch, one origin per review branch `review/ro
 2. tt_mat .6 rank cap value goes in BAL.road (not typed); reversible.
 3. HISTORY CHECK items (tt_oan .9, dtq_vu .9, dtq_binh .7, muoi_lau .7, td_an .10, thd_sach .9) → one history/drama expert pass (OD:L1327)
    before those chapters' text is final; structure can be built first.
+   B2 adds: nc_gian (Hội Đồng quán lodging, Lễ bộ lộ dẫn, Đại Lý tự spy case, night search of a consort's palace); nc_su (kowtow of a prince-envoy,
+   Thượng Lâm offence, iron ban, envoy seating); nc_tuc (.8 consort behind a screen at court, .10 nghĩa nữ into a noble genealogy, .7 altar search);
+   nc_vuong (consort behind a screen with envoys, Thân vương title for the loser); td_an .10 Tam ty retrial of the late emperor's case, .8 petition
+   rank rule; td_ke .9–.10 forged search order, censor's memorial; td_song (restoring a convict's son's surname, pardoned son in the guard, census);
+   td_tha (phản tọa vs tự thú, autumn assizes, witness from lãnh cung, khi quân, vu cổ inquiry); ch_co (Cửu môn đề đốc, yếm thắng doll, private seal);
+   ch_benh (outside physician, stand-in at the ancestor rite, mourning rules, seal after death); ch_ho (clan meeting, ngoại thích impeachment);
+   ch_bi (a late emperor's consort ban chết, Hàn lâm cart in the inner palace, censors petitioned against the Thái hậu).
