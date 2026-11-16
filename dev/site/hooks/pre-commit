@@ -1,0 +1,5 @@
+#!/bin/bash
+# Rejects staged image files outside dev/site/img-allowlist.txt. Install once per clone/worktree: bash dev/site/hooks/install.sh
+R=$(git rev-parse --show-toplevel) || exit 0
+[ -f "$R/dev/test/img-allowlist.py" ] || exit 0
+exec python3 "$R/dev/test/img-allowlist.py" --staged
