@@ -317,3 +317,4 @@ Self-wake: s17 trigger trig_01BRGhrPtrU9hJda11i33Cts DELETED at handover → s18
 - (14:30Z) MAIN SESSION 18 = session_01UV1SzhRRojptjZWR5RnAy3 · START_CTX ≈ 6 % of window (est.; get_session reads 0) → rollover at ≈ 31 %, ceiling 60 %.
 - (14:45Z s18) LIVE: merge-train-8 2232ea32 (veil-zoom + fig-bg out; promo-reveal-fix in). Next: design-scale-p2-r1 (PASS, re-merging) → phone-bars-r1 (in review) → title-tag-r1 (FAIL fix in progress).
 - (15:12Z s18) LIVE: title-tag-r1 5d6de0d9 (rank-bright + title-tag; glow-aware contrast). rank-bright worker archived. Queue: design-scale-p2-r1 (re-merging) → phone-bars-r1 (reviewing) → tut-place (option c). New s18 workers: history-maid-nights, square-icons, anim-pace, lag-play (CLAIMS).
+- (15:20Z s18) LIVE: design-scale-p2-r1 5682ce6f. history-maid-nights report in (ed5bbd113), expert archived; owner told summary + 2-step build, final numbers with night-time report.
