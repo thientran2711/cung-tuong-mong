@@ -425,7 +425,15 @@ function kitDpFit(){try{const o=kitDpOn();if(!o||!o.d.classList.contains("kdper"
  const capH=Math.max(0,...L.map(x=>x.cap?x.cap.offsetHeight:0));
  /* reviewer popup-fullbody-r1 / evidence panel: a person panel WITHOUT an options group scrolls as a whole (#mb); the figure column must be the visible height of #mb (sticky at the top), never the whole scroll height (figure 1100 px below the fold) */
  if(!narrow&&!mb.querySelector(":scope > .opts")){col.style.removeProperty("height");col.style.removeProperty("align-self");if(mb.scrollHeight>mb.clientHeight+2){col.style.alignSelf="start";col.style.height=Math.max(200,mb.clientHeight-20)+"px"}}
- const H=col.clientHeight;if(H<80)return;const floor=H-2;
+ const H=col.clientHeight;if(H<80)return;
+ /* KIT 32.2b EQUAL GAPS (owner 16/11 s21, VIỆC "Tiết Thanh minh": "cách cái đường line của cái khung ở trên nó bằng với cái chân, với cái đường
+    line của cái khung ở dưới"): in every frame with a full-body figure the gap from the frame line ABOVE (the header rule under the title, .kph)
+    to the top of the name chip = the gap from the feet to the frame line BELOW (the frame's inner bottom edge). Both gaps are at least
+    KIT_DP_GAP (pct of that height, ≥ min px), so the figure never touches a line; a figure the column width keeps shorter is CENTRED between
+    the two lines (equal gaps), never left standing on the floor with the empty space above it. A figure cut at the floor (short column,
+    32.2a minVis) is not full-body: its painted top stays one gap under the header line. kitFrameGaps(dlg) measures it (tests). */
+ const gl=kitFrameLines(d,col),gA=H+gl.offTop+gl.offBot,gG=Math.max(KIT_DP_GAP.min,KIT_DP_GAP.pct*gA,gl.offTop,gl.offBot);
+ const yTop=Math.min(H/3,Math.max(0,gG-gl.offTop)),floor=Math.max(H*2/3,Math.min(H,H+gl.offBot-gG));
  const capW=Math.max(0,...L.map(x=>x.cap?x.cap.scrollWidth:0));
  /* KIT 32.2 CAP + CROP (owner 15/11 "Sao khung này, khung trái nhân vật to vậy … nếu cắt váy thì cũng ok mà", review/stage-fig-size):
     the column is never wider than KIT_DP_COL (36 % of the dialog, ≤ 264 px) — the people are fitted INTO it, it never grows for them.
@@ -451,16 +459,16 @@ function kitDpFit(){try{const o=kitDpOn();if(!o||!o.d.classList.contains("kdper"
   /* the tallest person sets the chip line: right above the painted top when the people are shorter than the column */
   const gap=Math.max(0,Hu-Math.max(...sz.map(s=>s.ih*s.span)));col.dataset.kdpcrop=sz.some(s=>s.fv<.995)?"1":"0";
   L.forEach((it,i)=>{const s=sz[i];const ih=s.ih,iw=s.iw;const cxs=kitSlotCx(i,kN,6,W-12);const left=cxs-iw*(s.l+s.r)/2;
-   const ftop=s.fv<.995?top-ih*s.t:floor-ih*s.b;/* cropped: painted top under the chips, the rest runs past the floor (cut) */
+   const ftop=s.fv<.995?top-ih*s.t:floor-gap/2-ih*s.b;/* cropped: painted top under the chips, the rest runs past the floor (cut); 32.2b: full figure centred, equal gaps */
    Object.assign(it.f.style,{left:left.toFixed(1)+"px",top:ftop.toFixed(1)+"px",width:iw.toFixed(1)+"px",zIndex:String(2+i),visibility:""});
    const wr=it.f.querySelector(".kesfi");if(wr)Object.assign(wr.style,{width:iw.toFixed(1)+"px",height:ih.toFixed(1)+"px",margin:"0",maxWidth:"none"});
    Object.assign(it.im.style,{width:iw.toFixed(1)+"px",height:ih.toFixed(1)+"px"});
-   if(it.cap){it.cap.style.left=Math.max(0,Math.min(W,cxs)).toFixed(1)+"px";it.cap.style.translate="";it.cap.dataset.row=rows&&i%2?"1":"0";it.cap.style.top=(gap+(rows&&i%2?capH+4:0)).toFixed(1)+"px"}});
+   if(it.cap){it.cap.style.left=Math.max(0,Math.min(W,cxs)).toFixed(1)+"px";it.cap.style.translate="";it.cap.dataset.row=rows&&i%2?"1":"0";it.cap.style.top=(top-(rows?2*capH+10:capH+6)+gap/2+(rows&&i%2?capH+4:0)).toFixed(1)+"px"}});
   /* chips never cut: clamp inside the column; report whether two touch */
   const C=col.getBoundingClientRect();let prev=null,touch=false;L.forEach(it=>{const c=it.cap;if(!c)return;const r=c.getBoundingClientRect();let s=0;if(r.left<C.left+2)s=C.left+2-r.left;else if(r.right>C.right-2)s=C.right-2-r.right;if(s)c.style.translate=s.toFixed(1)+"px 0";
    const q=c.getBoundingClientRect();if(prev&&q.left<prev.right+4&&c.dataset.row===prev.row)touch=true;prev={right:q.right,row:c.dataset.row}});return touch};
  /* two chips that touch → the second one goes to a second line above the heads and the people start under it */
- if(lay(capH+6,false))lay(2*capH+10,true);
+ if(lay(yTop+capH+6,false))lay(yTop+2*capH+10,true);
  col.dataset.kdpfit="1"}catch(e){console.error("kitDpFit",e)}}
 window.kitDpApply=kitDpApply;window.kitDpFit=kitDpFit;
 /* KIT 50.1 (owner 11/15 13:00Z/13:15Z, review r8 acceptance "VIỆC · Thái hậu triệu"):
@@ -475,6 +483,21 @@ var KIT_DP_MINH=300;
    height that must fit the column width), minH (people shorter than this share of the screen height are drawn bigger and cut at the
    floor), minVis (never less than this share of the body in view: head → thighs); knee = .5 (head → waist) */
 var KIT_DP_COL={pct:.36,max:264},KIT_DP_CROP={knee:.5,minH:.40,minVis:.6};
+/* KIT 32.2b equal gaps: the gap above the name chip = the gap under the feet, each ≥ pct of the frame body height (header rule → inner bottom
+   edge) and ≥ min px; with pct .05 the chip + figure fill ≤ 90 % of that height (the kit figure scale, 85–90 %) */
+var KIT_DP_GAP={pct:.05,min:14};
+/* the two frame lines a figure column sits between: the header rule (bottom of .kph) and the frame's inner bottom edge; offsets from the column box */
+function kitFrameLines(d,col){try{const D=d.getBoundingClientRect(),C=col.getBoundingClientRect();const ph=d.querySelector(":scope > .kph");const cs=getComputedStyle(d);
+ const top=ph&&ph.offsetParent?ph.getBoundingClientRect().bottom:D.top+(parseFloat(cs.borderTopWidth)||0);const bot=D.bottom-(parseFloat(cs.borderBottomWidth)||0);
+ return{top,bot,offTop:C.top-top,offBot:bot-C.bottom}}/* signed: a sticky column (kdpall) may run past the frame bottom */catch(e){return{top:0,bot:0,offTop:0,offBot:0}}}
+/* measure (tests, audits): gap from the header rule to the top of the first name chip (or painted head) and from the lowest painted feet to the
+   frame's inner bottom edge, in CSS px; full = no figure cut at the floor */
+function kitFrameGaps(d){try{d=d||document.querySelector("#modal .dlg.kdper");const col=d&&d.querySelector("#mb .kpsubj.kes");if(!col)return null;const L=kitFrameLines(d,col),C=col.getBoundingClientRect();
+ const F=[...col.querySelectorAll(":scope > .kesf:not(.kesno) .kesimg")].filter(im=>im.offsetParent&&getComputedStyle(im.closest(".kesf")).visibility!=="hidden");if(!F.length)return null;
+ let head=1e9,feet=-1e9,full=true;F.forEach(im=>{const r=im.getBoundingClientRect();const b=(window.__KITFB||{})[im.getAttribute("src")];const v=b&&b.v||{t:0,b:1};head=Math.min(head,r.top+v.t*r.height);const f=r.top+v.b*r.height;feet=Math.max(feet,f);if(f>C.bottom+1)full=false});
+ const caps=[...col.querySelectorAll(":scope > .kpsn")].filter(c=>c.offsetParent).map(c=>c.getBoundingClientRect().top);const top=caps.length?Math.min(head,...caps):head;
+ return{top:Math.round(top-L.top),bot:Math.round(L.bot-Math.min(feet,C.bottom)),full,h:Math.round(L.bot-L.top)}}catch(e){return null}}
+window.kitFrameLines=kitFrameLines;window.kitFrameGaps=kitFrameGaps;
 /* a festival dialog (j71 invitation j71i / feast invitation j71x / the festival day / its contests) → its festival key, so the banner is the
    festival's own picture ("fest:<k>" in EVENTS.json: Đoan ngọ = ev-le-ha) instead of the Triều chính default (owner 13:00Z) */
 function kitFestKey(m){try{if(typeof FEST!=="object")return"";const pp=m.pp||{};if(pp.k&&FEST[pp.k])return pp.k;
@@ -494,7 +517,9 @@ function kitDpNat(d,mb,col){try{const cs=e=>getComputedStyle(e);const items=[...
   sum+=h+parseFloat(c.marginTop||0)+parseFloat(c.marginBottom||0)});
  const m=cs(mb);sum+=parseFloat(m.paddingTop||0)+parseFloat(m.paddingBottom||0)+(parseFloat(m.rowGap)||0)*Math.max(0,items.length-1);
  return d.offsetHeight-mb.offsetHeight+sum}catch(e){return d.scrollHeight}}
-(function(){const f0=kitDpFit;kitDpFit=function(){const r=f0.apply(this,arguments);try{kitDpAll()}catch(e){}return r};window.kitDpFit=kitDpFit})();
+(function(){const f0=kitDpFit;kitDpFit=function(){const r=f0.apply(this,arguments);try{const o=kitDpOn(),d=o&&o.d,a0=d&&d.classList.contains("kdpall"),h0=o&&o.col.clientHeight;kitDpAll();
+ /* 32.2b: kdpall (whole right column scrolls, figure column = #mb height) changes the column box → lay the people out again so the gaps stay equal */
+ if(d&&(d.classList.contains("kdpall")!==a0||o.col.clientHeight!==h0))f0.apply(this,arguments)}catch(e){}return r};window.kitDpFit=kitDpFit})();
 (function(){const st=document.createElement("style");st.id="kit-dp-all";st.textContent=`
 html body #modal .dlg.kdper.kdpall>#mb{overflow-y:auto!important;overscroll-behavior:contain;grid-template-rows:max-content max-content!important;align-content:start}
 html body #modal .dlg.kdper.kdpall>#mb>.kpb>.kpsubj.kes{position:sticky!important;top:0;align-self:start;grid-row:1/-1;height:var(--kdpmbh,100%)!important}
@@ -927,6 +952,37 @@ function kitCompactCSS(B,w,h){w=w||84;h=h||w;return `
 
 `}
 window.kitCompactCSS=kitCompactCSS;
+/* ================= KIT §6.2b · OPTION / ACT CARD PICTURE FORM BY CONTENT (owner 16/11 s21, VIỆC "Tiết Thanh minh": a tall 3:4 picture beside two short
+   lines left an empty band under the text; RULE verbatim: "Bất kỳ khi nào mà mày cho thợ ráp nút vào á, mà mày thấy có một cái khoảng trống ở dưới thì
+   phải lập tức đổi hình liền, đổi cái hình đại diện liền đó.") =================
+   ONE rule for every compact act card (kitCompactCSS: dialog options `.kopt`, person-card act rows, narrow-pane act cards, the kit page): the card picks
+   its picture form from its own content, automatically, every time it is laid out —
+   - TALL (3:4, w × h, §6.2) when the text block (.kabody) is at least as tall as the tall picture;
+   - SQUARE when the text is shorter: side = the text height, between KIT_OPT_SQ.min × w and w (84 → 38..84 px; 72 → 32..72), so the card is as tall as
+     its text and nothing is left empty under it. The square is cover-cropped from the same picture (same meaning picture, kitOptPic), never a new one.
+   Measured again whenever the card's width or text height changes (ResizeObserver: dialog fit, fonts, rotation), so no screen calls it by hand.
+   Tests: dev/test/kit-fit.js (empty px under the text and figure gaps, Fold + iPad). */
+var KIT_OPT_SQ={min:.45};
+const KIT_OPT_FIT_SEL="button.ka.kart";
+let KIT_OPT_DPQ=0;/* a card that changed height inside a person dialog → the dialog (content height, 32.7c) and its figure (32.2b gaps) are laid out again */
+function kitOptFitDone(b,h0){try{if(Math.abs(b.offsetHeight-h0)>1&&b.closest("#modal .dlg.kdper")&&!KIT_OPT_DPQ){KIT_OPT_DPQ=requestAnimationFrame(()=>{KIT_OPT_DPQ=0;try{kitDpFit()}catch(e){}})}}catch(e){}}
+function kitOptFit(b){const h0=b&&b.offsetHeight||0;kitOptFit0(b);if(b)kitOptFitDone(b,h0)}
+function kitOptFit0(b){try{if(!b||!b.isConnected)return;const art=b.querySelector(":scope > .kaart"),body=b.querySelector(":scope > .kabody");if(!art||!body)return;
+ const set=s=>{if(s){b.style.setProperty("--kah",s+"px","important");b.style.setProperty("--kaw",s+"px","important");["flex-basis","width","height"].forEach(k=>art.style.setProperty(k,s+"px","important"));b.classList.add("kasq")}
+  else{b.style.removeProperty("--kah");b.style.removeProperty("--kaw");["flex-basis","width","height"].forEach(k=>art.style.removeProperty(k));b.classList.remove("kasq")}};
+ set(0);if(getComputedStyle(art).display==="none"||getComputedStyle(b).flexDirection!=="row"){b.dataset.kapic="";return}
+ const a=art.getBoundingClientRect();if(a.width<24||a.width>112||a.height<a.width*1.15){b.dataset.kapic="";return}/* not the compact tall form (the big Hành sự card keeps its own) */
+ const w=a.width,h=a.height,lo=Math.round(w*KIT_OPT_SQ.min);let bh=body.getBoundingClientRect().height;
+ if(bh>=h-2){b.dataset.kapic="tall";b.__kof=b.clientWidth+"x"+Math.round(bh);return}
+ let s=Math.round(Math.max(lo,Math.min(w,bh)));set(s);
+ for(let i=0;i<2;i++){bh=body.getBoundingClientRect().height;const s2=Math.round(Math.max(lo,Math.min(w,bh)));if(s2===s)break;s=s2;set(s)}
+ b.dataset.kapic="sq";b.__kof=b.clientWidth+"x"+Math.round(body.getBoundingClientRect().height)}catch(e){console.error("kitOptFit",e)}}
+let KIT_OPT_RO=null;
+function kitOptFitAll(root){try{root=root&&root.querySelectorAll?root:document;const B=[...root.querySelectorAll(KIT_OPT_FIT_SEL)].filter(b=>b.querySelector(":scope > .kaart")&&b.querySelector(":scope > .kabody"));
+ if(!KIT_OPT_RO&&typeof ResizeObserver==="function")KIT_OPT_RO=new ResizeObserver(E=>{const seen=new Set();E.forEach(e=>{const b=e.target.closest(KIT_OPT_FIT_SEL);if(!b||seen.has(b))return;seen.add(b);
+  const body=b.querySelector(":scope > .kabody");const key=b.clientWidth+"x"+Math.round(body?body.getBoundingClientRect().height:0);if(b.__kof!==key)requestAnimationFrame(()=>kitOptFit(b))})});
+ B.forEach(b=>{kitOptFit(b);if(KIT_OPT_RO&&!b.__kofro){b.__kofro=1;KIT_OPT_RO.observe(b);const body=b.querySelector(":scope > .kabody");if(body)KIT_OPT_RO.observe(body)}})}catch(e){}}
+window.kitOptFit=kitOptFit;window.kitOptFitAll=kitOptFitAll;window.KIT_OPT_SQ=KIT_OPT_SQ;
 (function(){const st=document.createElement("style");st.id="kit-act-compact";st.textContent=`
 button.ka.kanoart>.kaart{display:none!important}
 .pc>.pcr,.kpanec{container:kpane/inline-size}
@@ -958,4 +1014,7 @@ ${kitCompactCSS(".pc>.pcr button.ka.kart",84,112)}
  .pc>.pcr button.ka.kart>.kaart{flex-basis:72px!important;width:72px!important;height:96px!important}
 }
 `;document.head.appendChild(st)})();
-(function(){if(typeof kaNorm!=="function")return;const k0=kaNorm;kaNorm=function(root){const r=k0.apply(this,arguments);try{kitActCompactOn(root&&root.querySelectorAll?root:document)}catch(e){}return r};window.kaNorm=kaNorm})();
+(function(){if(typeof kaNorm!=="function")return;const k0=kaNorm;kaNorm=function(root){const r=k0.apply(this,arguments);try{kitActCompactOn(root&&root.querySelectorAll?root:document)}catch(e){}
+ try{const R=root&&root.querySelectorAll?root:document;requestAnimationFrame(()=>kitOptFitAll(R))}catch(e){}return r};window.kaNorm=kaNorm})();/* §6.2b: picture form by content after every normalisation */
+/* KIT §6.2b: every dialog shown → its option cards pick their picture form (tall / square) once laid out; the ResizeObserver keeps them right after */
+(function(){if(typeof showModal!=="function")return;const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);try{const M=document.getElementById("modal");requestAnimationFrame(()=>requestAnimationFrame(()=>kitOptFitAll(M)))}catch(e){}return r};window.showModal=showModal})();

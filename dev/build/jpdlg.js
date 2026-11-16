@@ -25,12 +25,18 @@ function kitPersonDlgFit(root){try{const R=root||document;R.querySelectorAll(".k
  if(!im.complete&&!im.dataset.kpdl){im.dataset.kpdl=1;im.addEventListener("load",again,{once:true})}
  const b=src?kitFigBody(src,again):null;if(!b)return;
  const kfr=parseFloat(im.style.getPropertyValue("--kfr"))||1;const rel=Math.min(1,kfr*(KIT_FIG.man||1));
+ /* KIT 32.2b EQUAL GAPS (owner 16/11 s21): frame line above = the header rule (.kph bottom), frame line below = the bottom of the figure area (.kpdb,
+    the button band starts there); gap above the name chip = gap under the feet = KIT_DP_GAP (≥ 5 % of that height, ≥ 14 px) */
+ let fl=null;try{const dl=col.closest(".kpdlg"),db=col.closest(".kpdb"),ph=dl&&dl.querySelector(":scope > .kph");if(dl&&db&&typeof KIT_DP_GAP!=="undefined"){
+  const lt=ph?ph.getBoundingClientRect().bottom:dl.getBoundingClientRect().top,lb=db.getBoundingClientRect().bottom;const G=Math.max(KIT_DP_GAP.min,KIT_DP_GAP.pct*(lb-lt));
+  col.style.paddingTop="0px";const pt=Math.max(0,G-(col.getBoundingClientRect().top-lt));col.style.paddingTop=pt.toFixed(1)+"px";fl={lb,G}}}catch(e){}
  const H=box.clientHeight,W=box.clientWidth;if(H<60||W<40)return;
  const ar=im.naturalWidth&&im.naturalHeight?im.naturalWidth/im.naturalHeight:(b.ar||.45);
- const span=Math.max(.2,b.b-b.t);let ih=H/span*rel,iw=ih*ar;/* the painted body (head-top .. feet) fills the column; a wide hem / sleeve is cut by the column edge */
+ const Hf=fl?Math.max(40,Math.min(H,fl.lb-fl.G-box.getBoundingClientRect().top)):H;/* feet one gap above the lower line */
+ const span=Math.max(.2,b.b-b.t);let ih=(Hf-4)/span*rel,iw=ih*ar;/* the painted body (head-top .. feet) fills the column between the gaps; a wide hem / sleeve is cut by the column edge */
  const cx=((b.cl!=null?b.cl:b.l)+(b.cr!=null?b.cr:b.r))/2;
  f.style.cssText="position:absolute;left:0;top:0;width:100%;height:100%;margin:0";
- const wr=f.querySelector(".kesfi");if(wr)wr.style.cssText=`position:absolute;left:${(W/2-iw*cx).toFixed(1)}px;top:${(H-ih*b.b).toFixed(1)}px;width:${iw.toFixed(1)}px;height:${ih.toFixed(1)}px;margin:0;max-width:none`;
+ const wr=f.querySelector(".kesfi");if(wr)wr.style.cssText=`position:absolute;left:${(W/2-iw*cx).toFixed(1)}px;top:${(Hf-ih*b.b).toFixed(1)}px;width:${iw.toFixed(1)}px;height:${ih.toFixed(1)}px;margin:0;max-width:none`;
  im.style.cssText=`width:${iw.toFixed(1)}px;height:${ih.toFixed(1)}px;max-width:none;max-height:none`;col.dataset.kpdfit="1"})}catch(e){console.error("kitPersonDlgFit",e)}}
 window.kitPersonDlg=kitPersonDlg;window.kitPersonDlgFit=kitPersonDlgFit;
 (function(){let t=0;addEventListener("resize",()=>{clearTimeout(t);t=setTimeout(()=>kitPersonDlgFit(),140)})})();
