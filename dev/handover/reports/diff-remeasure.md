@@ -33,3 +33,36 @@ Next: name the merge, find the line, fix (code bug) or BAL number, re-measure V�
   "Nhún nhường"); next step = bisect merge-train-4 merges between eba64ead4 and 92668096 with BAL.charity applied. Details + commands:
   dev/PROGRESS_diff-remeasure.md "ROLLOVER HANDOVER". Raw lives: dev/measure/pass/data/dr/.
 - Not ready for review (no SẴN SÀNG KIỂM): Vừa not at ~32 % yet, Dễ/Khó not re-measured.
+
+## Successor (session_01N1tNP3F65YoGjUoBixheuW, opus) — 16/11 ~17:10–20:30Z
+### SECOND drain = promotion exams (bot/harness; no game bug)
+- Arm "head + the old Phát chẩn card back in Hành sự (any week)": HH 0/8 → charity was not the remaining gap.
+- Exam recorder dev/measure/inexam.js: eba64ead4 exam pass 86–91 %, her arts sum at the exams 13–26; head pass ~50 %, arts sum ~2.
+- Cause: since merge-train-4 (tuduc-sub-r1) every lesson opens a kit pick dialog ("Học X: làm gì?" → material); the bot closed it, so it
+  never studied. On eba64ead4 it studied via the Hành sự card "Tự học X: <work>" (j83, no dialog), removed by act-dedupe w1 (AD_OUT).
+  A player studies in Tài nghệ → not a game bug. Same two causes as review/danh-balance (Foreman D, on main; its P2 "needs a Tài nghệ bot").
+- Harness fix (inpage6): taps kit pick dialogs (window.__noPick off); self-studies arts + Tứ đức in Tài nghệ when Sức ≥ 60 (window.__noSelf off).
+### Merge with main fb367740 (and 0488c57a)
+- ONE BAL.charity = main's (danh-balance) {khac:1,bac:20,duc:3,danh:1}; my 40/7 dropped; danh-balance P1 (35/5 + Hành sự door) still waits for the owner.
+### Before / after (sensible bot; before = main ee5d33de old bot, after = merged build + fixed bot; n ≥ 30 each after)
+| mode | HH before | HH after | early death before | early death after | owner target (OD:L85) |
+|---|---|---|---|---|---|
+| Dễ | 0 % (0/8) | 67 % (20/30; 49–81) | 25 % (2/8) | 0 % (0/30; 0–11) | HH ~50 %, death ~20 % → TOO EASY |
+| Vừa | 0 % (0/28) | 37 % (11/30; 22–54) | ~35 % | 50 % (15/30; 33–67) | HH ~32 %, death ~40–45 % → OK |
+| Khó | 0 % (0/7) | 16 % (5/32; 7–32) | 29 % (2/7) | 53 % (17/32; 36–69) | HH 15–20 %, death ~55 % → OK |
+Rank curve, median tuần from life start to reach rank r (Thường tại r1 … Hoàng hậu r7), after:
+| mode | r1 | r2 | r3 | r4 | r5 | r6 | r7 |
+|---|---|---|---|---|---|---|---|
+| Vừa before (old bot) | 80 | 166 | 219 | 191 | 303 | 323 | – |
+| eba64ead4 (this morning) | 10 | 24 | 40 | 86 | 120 | 201 | 247 |
+| Dễ after | 5 | 26 | 60 | 90 | 117 | 142 | 196 |
+| Vừa after | 11 | 25 | 54 | 83 | 115 | 167 | 229 |
+| Khó after | 18 | 40 | 82 | 130 | 187 | 325 | 355 |
+Early-death causes after: Vừa poison 7, lifespan dice 4, childbirth 2, illness 1, expelled 1; Khó poison 10, lifespan 4, other 3.
+Emperor-death endings (Thái phi / xuất gia / về quê): Vừa 3, Dễ 8, Khó 5 of ~30. Mortality rules untouched.
+No BAL value changed for Vừa: with the bot fixed, Vừa is on target. Exam pass after: Vừa 96 %, Dễ 96 %, Khó 98 %.
+OPEN (proposal, not applied; Dễ knobs touch the owner's mortality rules → coordinator/owner): Dễ early death 0 % vs ~20 %
+(DIFF.de illDie ×0.5, poisonNow off), Dễ HH 67 % vs ~50 % (DIFF.de hhTh −5 → 0 would cut it).
+Tests (merged build): dev/test/difficulty.js ALL OK at 755x1000, 1180x820, 1366x1024, 1000x755, 844x390 (one flaky FAIL under bot CPU load,
+re-run clean); dev/test/wx-gear.js ALL OK at 755x1000@2, 1000x755, 1180x820@2, 1366x1024@2, 844x390, 390x844. Site rebuilt.
+Data: dev/measure/pass/data/dr2/ on the branch; tools rankcurve.py, exr.py, inexam.js, indanhlog.js.
