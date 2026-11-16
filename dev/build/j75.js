@@ -154,12 +154,14 @@ const nm0=npcMonthly;npcMonthly=function(v){const a0=ap,fi0=v.fakeIll;let seen="
 const EFF={"Tham vọng":.35,"Ghen tuông":.25,"Kiêu ngạo":.25,"Hiền lành":.1,"Nhu mì":.1};
 function npcEffort(v){if(v.confined||v.out||illOf(v)||(v.preg||0)>=7)return "";const pt=EFF[v.trait]!=null?EFF[v.trait]:.18;if(Math.random()>pt*FAIRN.eff)return "";
  const A=v.arts||{};let n,c,o,w,lose=2;
- if((A.vu||0)>=3&&v.suc>=40){n="múa Kinh hồng vũ trong yến tiệc";c={suc:-20};o=odA(v,40+A.vu*8+effSac(v)/5+mm());w={sung:15,danh:3}}
+ let kd="";if((A.vu||0)>=3&&v.suc>=40){kd="vu";n="múa Kinh hồng vũ trong yến tiệc";c={suc:-20};o=odA(v,40+A.vu*8+effSac(v)/5+mm());w={sung:15,danh:3}}
  else if((A.cam||0)>=3&&v.suc>=30){n="đàn khúc Phượng cầu hoàng vọng sang Dưỡng Hòa điện";c={suc:-10};o=odA(v,40+A.cam*8+(v.tai||0)/5+mm());w={sung:12}}
- else if((A.ky||0)>=3&&v.suc>=25){n="đánh cờ cùng Hoàng thượng";c={suc:-5};o=odA(v,45+A.ky*8+mm());w={sung:5};lose=1}
+ else if((A.ky||0)>=3&&v.suc>=25){n="đánh cờ cùng Hoàng thượng";c={suc:-5};o=odA(v,45+A.ky*8+mm());w={sung:5,danh:2,tamco:1};lose=1}
  else if((v.bac||0)>=10){n=pick(QF);c={bac:-10};o=odA(v,55+v.sung/5+mm());w={sung:3};lose=0}
  else return "";
- ap(v,c);const b=v.sung;const ok=roll(o);ap(v,ok?w:{sung:-lose});
+ ap(v,c);const b=v.sung;const ok=roll(o);ap(v,ok?w:kd==="vu"?{danh:-4}:{sung:-lose});
+ /* two-way (owner 16/11 s21): her Kinh hồng vũ card also stirs the others (ghen +10, liking −5); an NPC dance does the same */
+ if(kd==="vu"){liveRivals(true).forEach(x=>{if(x!==v){x.ghen=cl((x.ghen||0)+10,0,100);affAdd(x,v,-5)}});affAdd(S,v,-5)}
  /* the change names whose Sủng it is; a line with no change says nothing about numbers (owner 11/15: "Sủng nàng 45 → 45") */
  return roll(20+S.mat*10)?`Tai mắt kể: ${v.name} ${n}: ${ok?"Hoàng thượng vui lòng":"ngài không để ý"}.${b!==v.sung?` Sủng của ${v.name} ${b} → ${v.sung}.`:""} `:""}
 window.npcEffort=npcEffort;
