@@ -336,7 +336,7 @@
 | map-labels-2-b review r1 (sonnet, SMALL): PASS 30f499cc (go live AFTER or with dudo-lock-r1; KIT.md fixed by reviewer) | review/map-labels-2-b-r1 | main s21 | session_01UV1SzgbfBnvY6mdGxcr9VN | DONE | 16/11 |
 | people-ledger review r1 (opus, BIG: people record/time) of 4bdb8672 | review/people-ledger-r1 | C | session_011xDdVS8Lo33pXoMsuqijxj | LIVE caa73a87 (20:07Z) | 16/11 18:48Z |
 | emotion-acts-2 review r1 (opus, BIG): review/emotion-acts-2 7b959216 (r1 FAIL fix) | review/emotion-acts-2-r1 | B | session_01N1tNP2srtKZR7hefwMpYME | DONE FAIL 2 (archived) | 16/11 18:50Z |
-| npc-roads review r1 (opus, BIG) of f699bbf4 (U0 core + U1 consorts) | review/npc-roads-r1 | D | session_01DgYSWnawxUrsTQBmbc3jg7 | RUNNING | 16/11 18:50Z |
+| npc-roads review r1 (opus, BIG) of f699bbf4 (U0 core + U1 consorts) | review/npc-roads-r1 | D | session_01DgYSWnawxUrsTQBmbc3jg7 | DONE PASS 83d84225 (f699 + 6 BLOCKING fixed by reviewer; archived) | 16/11 18:50Z |
 | NPC ROADS successor U2 maids + U3 men (opus; design = reports/npc-roads.md NEXT) | review/npc-roads | D | session_01DgYSWnAp8mvj9ZAfXiKrhf | DONE SẴN SÀNG KIỂM 02405da5 (archived; reviewer npc-roads-r1 now covers U0–U4) | 16/11 18:50Z |
 | road-b1 FAIL fix A (opus): engine item 1 (RD97L/E.r97) + all items in jrd_tt + jrd_dtq; merges fix B at the end → SẴN SÀNG | review/road-b1-fixa | B | session_01N1tNP2G4bsFxWrsbzomkzU | RUNNING | 16/11 18:55Z |
 | road-b1 FAIL fix B (opus): items 2–9 + smaller in jrd_muoi + jrd_cn | review/road-b1-fixb | B | session_01N1tNP2czBg1KKfRHBThvj3 | DONE 70a43f49 merged by fix A (archived) | 16/11 18:55Z |
@@ -394,3 +394,4 @@
 | kit-fit ROUND 3 keeper (sonnet): Luân hồi cards bigger + face picker one list (reports/kit-fit.md §HANDOVER) | review/kit-fit-r3 | main s23 | session_01UV1SzkDzZdLkrtJC5W6o5T | RUNNING | 16/11 20:32Z |
 | P2 tutorial quests ch1–3 (opus; main s23 20:10Z; ROAD_MAP Part 1; OD:L1233/L1242/L1259; story14 frame live) | review/tut-quests | B | session_01N1tNP3J9spJbci5SDSfsaU | RUNNING | 16/11 20:40Z |
 | ROAD_MAP §4.10 men-road canon check (opus; Foreman D 20:05Z, reports/npc-roads.md 'proposed ROAD_MAP §4.10') | review/road-map-410 | B | session_01N1tNP5MEELAspgvPEdzAdh | RUNNING | 16/11 20:40Z |
+| npc-roads merge-fix (opus): merge r1 83d84225 into U2–U4 02405da5, apply the 6 r1 fault families to maids/eunuchs/men | review/npc-roads-fix | D | (opening) | RUNNING | 16/11 20:37Z |
