@@ -6907,8 +6907,11 @@ PEND.j67=p=>{if(!v267())return null;const A=th67(p.t);if(!A||A.a!==p.a||A.cur!==
  const O=opts67(A,b);const step=A.i+1,n=A.seq.length;
  return {who:who67(b.w,A),t:`<b>${a.t}</b> <span class="past">· hồi ${step}/${n}</span><br>${fill67(b.t,A)}`,o:O.map((o,i)=>{const od0=p.o[i]==null?100:p.o[i],sure=od0>=100;
   const cm=t=>String(t).replace(/, /g," – "),G=t=>t?`<span class="g">${cm(t)}</span>`:"",Rd=t=>t?`<span class="r">${cm(t)}</span>`:"";const gain=[fmt(o.w||{}),G(fill67(o.wx||"",A)),o.sc>0?`Lợi thế +${o.sc}`:""].filter(Boolean).join(" · ");
-  const end=o.e?(Array.isArray(o.e)?o.e:[o.e,o.e]):null;/* an ending no roll decides (sure option, or the same ending either way) can still turn in a 14-chapter life (jst14 f14Hold, OD:L1253): the odds word says how sure it is */
-  const sh=sure||(end&&end[0]===end[1]);const eT=k=>{const E=a.E[k];if(!E)return"";const w=sh&&typeof f14Hold==="function"?f14Hold(A,k):100;return (E.k<0?Rd:G)(`kết: ${fill67(E.tag,A)}${w<100?` · ${word(w)}`:""}`)};
+  const end=o.e?(Array.isArray(o.e)?o.e:[o.e,o.e]):null;/* an ending no roll decides (sure option, or the same ending either way) can still turn in a 14-chapter life (jst14 f14Hold, OD:L1253).
+     VANPHONG: the act ladder (Liều…Nắm chắc) is ONLY the act's own success odds (a sure act carries no word); the chance that the ending turns is a side
+     chance → the chance scale Rất thấp…Rất cao (chanceLvl, j1), labelled with the result card's row name «Xoay chiều»; kept in brackets INSIDE the ending phrase so the kit hint
+     of the story dialog (kitHint/kitOptModel, jk2b: splits on " · ") shows it with the ending (review/story14-p1-r3) */
+  const sh=sure||(end&&end[0]===end[1]);const eT=k=>{const E=a.E[k];if(!E)return"";const w=sh&&typeof f14Hold==="function"?f14Hold(A,k):100;return (E.k<0?Rd:G)(`kết: ${fill67(E.tag,A)}${w<100?` (có thể xoay chiều: ${chanceLvl(100-w)})`:""}`)};
   const x=sure?[gain||(end?eT(end[0]):""),o.lx?"kèm: "+Rd(fill67(o.lx,A)):""].filter(Boolean).join(" · ")
    :`${word(od0)} · thành: ${[gain,end?eT(end[0]):""].filter(Boolean).join(" · ")||"qua được"} · hỏng: ${[fmt(o.l||{}),Rd(fill67(o.lx||"",A)),end&&end[1]!==end[0]?eT(end[1]):"",o.sf<0?`Lợi thế ${o.sf}`:""].filter(Boolean).join(" · ")||"không mất gì thêm"}`;
   const fx=txt67(o.c);
@@ -36285,7 +36288,7 @@ function nextSteps(C){if(C&&C.todo)return C.todo.slice(0,3).map(x=>Object.assign
  else{
   if(hh)L.push({t:`Đi thỉnh an Hoàng hậu ${when}`,why:"Hoàng hậu thương thì được che chở; Danh, Đức tăng",tab:"act",act:/Thỉnh an Hoàng hậu/,card:"Thỉnh an Hoàng hậu"});
   else if(!S.thDead)L.push({t:`Đi thỉnh an Thái hậu ${when}`,why:"Thái hậu thương thì đường tấn phong rộng mở",tab:"act",act:/Thỉnh an Thái hậu/,card:"Thỉnh an Thái hậu"});
-  if(C&&C.kind==="ms"&&C.id==="nhap")L.push({t:"Làm Hoàng thượng để mắt tới",why:"đủ Sủng, đủ Danh thì được tấn phong một bậc",tab:"act",act:/Múa trong yến tiệc|Dưỡng nhan|Điểm trang|Đánh đàn|Dâng canh/,card:"Múa trong yến tiệc, Dưỡng nhan"});
+  if(C&&C.kind==="ms"&&/^(nhap|nhap14|sung14)$/.test(C.id))/* the 14-chapter tutorial (jst14 nhap14 / sung14, r3) is the same goal */L.push({t:"Làm Hoàng thượng để mắt tới",why:"đủ Sủng, đủ Danh thì được tấn phong một bậc",tab:"act",act:/Múa trong yến tiệc|Dưỡng nhan|Điểm trang|Đánh đàn|Dâng canh/,card:"Múa trong yến tiệc, Dưỡng nhan"});
   L.push({t:"Học một môn tài nghệ",why:"bậc cao mở việc mới, thắng thi tài, được để mắt",tab:"art"});
   L.push({t:"Kết giao một người",why:"có chị em che chở thì bớt bị hãm hại",tab:"rv"})}
  return L.slice(0,3).map(x=>Object.assign(x,{where:tabName(x.tab)+(x.card?` › thẻ ${x.card}`:"")}))}
@@ -36311,7 +36314,7 @@ function kitGoalDetail(){const G=kitGoalNow();if(!G)return;const C=G.C;
  /* the 14-chapter frame of a new life (jst14): which part she is in, chapters left */
  try{const F=typeof f14Info==="function"?f14Info():null;if(F)sec.push({h:`Đời người · ${F.max} chương`,rows:F.rows.concat([["Còn lại",F.left?`${F.left} chương`:"đã đi hết các chương"]])})}catch(e){}
  if(C.kind==="ms")sec.push({h:C.any?"Tiến độ · xong một điều là đủ":"Tiến độ",html:typeof kitChecks==="function"?kitChecks(C.steps.map(x=>[x.ok,esc(x.t)])):""});
- if(C.kind==="ms"&&C.id==="nhap"&&!isS()&&!S.out&&S.rank<7&&typeof promoReq==="function"){try{const R=promoReq();R.sort((a,b)=>a[0]-b[0]);
+ if(C.kind==="ms"&&/^nhap(14)?$/.test(C.id)&&!isS()&&!S.out&&S.rank<7&&typeof promoReq==="function"){try{const R=promoReq();R.sort((a,b)=>a[0]-b[0]);
   sec.push({h:`Muốn lên ${RANKS[S.rank+1].n}`,html:typeof kitReqRows==="function"?kitReqRows(R):""})}catch(e){}}
  /* C24 (review/chapter-detail): the same panel grown with the whole progress (chapModel, jchap.js): steps with how/where, the hồi so far with their pictures, risks */
  const CM=typeof chapModel==="function"?chapModel():null;
@@ -41638,7 +41641,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="53b5e3a55f74";window.CTM_BUILD=BUILD;
+const BUILD="0b6fb283e2a3";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

@@ -118,12 +118,12 @@ const INP=fs.readFileSync(path.join(__dirname,'../measure/inpage4.js'),'utf8');
    for(const bid in (a.B||{})){A.cur=bid;let O=[];try{O=opts67(A,beatDef67(A,bid))}catch(e){continue}
     const p={t:'x',a:id,b:bid,o:O.map(o=>{try{return oOf67(A,o,a.B[bid])}catch(e){return NaN}})};const th=th67;th67=()=>A;let d=null;try{d=PEND.j67(p)}catch(e){}th67=th;if(!d)continue;
     d.o.forEach((x,i)=>{const o=O[i];const e=o.e?(Array.isArray(o.e)?o.e:[o.e,o.e]):null;if(!Number.isFinite(p.o[i]))return;/* odds read outside a real beat */if(!e||e[0]!==e[1]&&p.o[i]<100)return;if(!/kết:/.test(x.j67||''))return;
-     out.words.push([id,bid,i,/kết: [^·<]*(<[^>]*>)?[^·<]*· (Liều|Khó|Năm ăn năm thua|Khá chắc|Chắc|Rất chắc|Nắm chắc)/.test(String(x.j67).replace(/<\/?span[^>]*>/g,''))||f14Hold(A,e[0])>=100])})}}
+     out.words.push([id,bid,i,/kết: [^·<]*\(có thể xoay chiều: (Rất thấp|Thấp|Vừa|Cao|Rất cao)\)/.test(String(x.j67).replace(/<\/?span[^>]*>/g,''))&&/xoay chiều/.test(kitHint({j67:x.j67},null,0).hint)&&!/kết: [^·<]*· (Liều|Khó|Năm ăn năm thua|Khá chắc|Chắc|Rất chắc|Nắm chắc)/.test(String(x.j67).replace(/<\/?span[^>]*>/g,''))||f14Hold(A,e[0])>=100])})}}
   /* a turned ending: force the roll */
   const A=newThread67('tt_oan','m');S.st.M=A;A.s14=1;const r0=rnd67;rnd67=()=>0;const cards=[];const c0=card67;card67=function(kind,t,rows){cards.push([kind,t,rows]);return c0.apply(this,arguments)};
   try{end67(A,'win')}finally{rnd67=r0;card67=c0}const rc=cards.find(c=>c[0]==='result');out.turned={end:A.end,row:rc&&rc[2].find(x=>x&&x[0]==='Xoay chiều')};Q.length=0;return out});
  const wBad=pv.words.filter(x=>!x[3]);console.log('preview fixed endings:',pv.words.length,'missing word:',JSON.stringify(wBad.slice(0,5)),'turned:',JSON.stringify(pv.turned));
- chk('r1 item 5: every fixed-ending option preview shows how sure the ending is (odds ladder)',pv.words.length>0&&!wBad.length,wBad.slice(0,8));
+ chk('r1 item 5: every fixed-ending option preview shows the chance it turns (chance scale Rất thấp…Rất cao, never the act ladder: VANPHONG; and the story dialog's kit hint keeps it, r3)',pv.words.length>0&&!wBad.length,wBad.slice(0,8));
  chk('r1 item 5: an ending that turned says why on the result card',pv.turned.end!=='win'&&pv.turned.row&&/Tưởng đã định/.test(pv.turned.row[1]),pv.turned);
  chk('r1 item 5: neutral context leans neither way (BAL.st14.shift.base both ways)',await p.evaluate(()=>{const Z=BAL.st14.shift;return Z.base-0*Z.slope===Z.base+0*Z.slope}),null);
  await p.context().close();
