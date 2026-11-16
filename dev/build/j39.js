@@ -1,3 +1,7 @@
+/* lag-play (owner 16/11 15:05Z): ONE coalesced late render for every "a picture arrived, redraw" case (portraits, kid portraits, unknown
+   silhouettes, por fallbacks). Each used to run its own full render() — a whole-game redraw per picture (~0.5 s on a slow phone). */
+function kitRenderSoon(ms){clearTimeout(kitRenderSoon.t);kitRenderSoon.t=setTimeout(()=>{try{if(typeof S!=="undefined"&&S)render()}catch(e){}},ms==null?250:ms)}
+window.kitRenderSoon=kitRenderSoon;
 
 /* ================= FIGURES v2: every manifest merged; one identity per person for life, never reused in a game ================= */
 /* img/FIGURES.json (consorts, player, emperor, eunuchs), img/FIGURES-servants.json (maid, mama, eunuch), img/FIGURES-others.json
@@ -44,7 +48,7 @@ figFor=function(p,kind){try{if(!FIGS.length||!p||!S)return"";const who=figWho(p)
 /* round portraits: the identity's por-*.webp once it has loaded; the old face until then (or if it fails) */
 const PORK={};
 function porOf(who,fb){try{if(!who||!FIGS.length)return fb;const src=figFor(who===S?S:who===S.emp?{kind:"emp"}:who===S.thO?{kind:"th"}:{ref:who},"por");if(!src)return fb;
- if(PORK[src]===1)return src;if(PORK[src]===0)return fb;if(PORK[src]==null){PORK[src]=2;const im=new Image();im.onload=()=>{PORK[src]=1;clearTimeout(window.__porT);window.__porT=setTimeout(()=>{try{if(S)render()}catch(e){}},250)};im.onerror=()=>{PORK[src]=0};im.src=src}return fb}catch(e){return fb}}
+ if(PORK[src]===1)return src;if(PORK[src]===0)return fb;if(PORK[src]==null){PORK[src]=2;const im=new Image();im.onload=()=>{PORK[src]=1;kitRenderSoon(250)};im.onerror=()=>{PORK[src]=0};im.src=src}return fb}catch(e){return fb}}
 (function(){const W=(name,get)=>{const f0=window[name];if(typeof f0!=="function")return;window[name]=function(){const r=f0.apply(this,arguments);try{const who=get.apply(this,arguments);if(r&&typeof r==="object"&&who)r.src=porOf(who,r.src);else if(typeof r==="string"&&who)return porOf(who,r)}catch(e){}return r}};
  W("pv",v=>v);W("pMe",()=>S);W("pEmp",()=>S.emp);W("pTH",()=>{S.thO=S.thO||{};return S.thO});W("pDoc",()=>S.court&&S.court.ty);W("pServ0",s=>s);W("maidSrc",m=>m);W("courtSrc",(k,c)=>c);W("pMan",m=>m)})();
 /* place screens: every person present stands full-body when art exists (servants, physician and eunuchs too) */

@@ -40,11 +40,12 @@ function menGuards(){return (S.men||[]).filter(m=>m.rw==="thị vệ")}
 function menH(x){let h=7;for(const c of String(x))h=(h*31+c.charCodeAt(0))%100003;return h}
 function menHcPal(v){const k=palaceOf(v);return k==="home"?null:k}
 function menGi(m){return Math.max(0,menGuards().indexOf(m))}
-/* the guards' roster: 2 buổi of 3 on duty, the post turns with the week */
-function menDuty(m,w,b){if(m.rw!=="thị vệ")return null;const i=menGi(m);if((w*3+b+i)%3===0)return null;return["thu","dtd","ksp"][(w+i)%3]}
+/* the guards' roster keeps its 3 shifts (old balance): buổi -> shift index [sáng, trưa, chiều, tối] = [0,0,1,2] (trưa rides the morning shift); 2 shifts of 3 on duty, the post turns with the week */
+const MEN_SHIFT=[0,0,1,2];
+function menDuty(m,w,b){if(m.rw!=="thị vệ")return null;const i=menGi(m);if((w*3+MEN_SHIFT[b]+i)%3===0)return null;return["thu","dtd","ksp"][(w+i)%3]}
 /* craftsmen's work orders (Nội vụ phủ): every other tuần, in the morning or afternoon, at the palaces in turn (highest rank first) */
 function menOrder(m,w){if(m.rw!=="nhạc sư"&&m.rw!=="họa sư")return null;const i=+m.id.slice(1)||0;if((w+i)%2)return null;
- const C=liveRivals(true).filter(menHcPal).sort((a,b)=>rkOf(b)-rkOf(a)||menH(a.id)-menH(b.id));const v=C.length&&(w>>1)%3!==2?C[((w>>1)+i)%C.length]:null;return{b:(w+i)%2?1:(w>>1)%2,k:v?menHcPal(v):"vuon",v:v?v.id:null}}
+ const C=liveRivals(true).filter(menHcPal).sort((a,b)=>rkOf(b)-rkOf(a)||menH(a.id)-menH(b.id));const v=C.length&&(w>>1)%3!==2?C[((w>>1)+i)%C.length]:null;return{b:(w+i)%2?2:(w>>1)%2?2:0,k:v?menHcPal(v):"vuon",v:v?v.id:null}}
 function menFestOn(){try{return festToday()}catch(e){return null}}
 /* the fixed schedule (duty rosters, work orders, festivals, visits, the morning audience): the same on BOTH roads (people ledger, owner 16/11
    13:40Z: "people outside the palace leave only at their set hours", no random presence); the maid road takes this instead of j22's dice.
@@ -83,7 +84,7 @@ function menMakePlans(t){const add=P=>{P.id=(S.menPS=(S.menPS||0)+1);P.w=t;S.men
     one letter a tuần goes out at most (the guards can carry only one safely) */
  let lt=0;for(const v of C.slice().sort((a,b)=>menH(a.id+":"+t)-menH(b.id+":"+t))){if(lt||v.queen||!menHcPal(v))continue;const why=v.confined?"confined":v.plan?"plan":(v.preg&&v.hidden)?"preg":((v.sung||0)<25&&(v.ghen||0)>=50)?"jealous":"";if(!why||(t+menH(v.id))%12)continue;
   const G=menGuards().filter(g=>g.alive&&!menBanned(g)&&(MEN_BRIBE.includes(g.trait)||(g.loyal||50)<50)).sort((a,b)=>(a.loyal||50)-(b.loyal||50));if(!G.length)continue;
-  const g=G[0];const bb=[B4L,2,1,0].find(x=>menDuty(g,t,x));if(bb==null)continue;add({m:g.id,v:v.id,r:"letter",why,b:bb,h:2,k:menHcPal(v),from:menDuty(g,t,bb),hide:20+(v.tamco||0)/4});lt=1}
+  const g=G[0];const bb=[B4L,2,0].find(x=>menDuty(g,t,x));if(bb==null)continue;add({m:g.id,v:v.id,r:"letter",why,b:bb,h:2,k:menHcPal(v),from:menDuty(g,t,bb),hide:20+(v.tamco||0)/4});lt=1}
  /* 3. overstay: a craftsman of a roving nature on a real order in a palace whose mistress is out of favour or the one he fancies */
  for(const m of S.men){const o=menOrder(m,t);if(!m.alive||!o||o.v==null||!MEN_ROVE.includes(m.trait))continue;const v=RV(o.v);if(!v||v.queen||!((v.sung||0)<40||m.likeV===v.id))continue;
   add({m:m.id,v:v.id,r:"overstay",job:m.rw,b:o.b,h:4,k:o.k,from:o.k,hide:10})}

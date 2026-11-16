@@ -8,7 +8,7 @@ const OUT=process.argv[2]||'/tmp/ledger_stage';const DEV=process.argv.slice(3).l
  for(const dv of DEV)for(const o of ['thd','cnv']){const ctx=await D.newDeviceContext(b,dv);const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));
   const g=await D.openHost(p,srv.url);await p.waitForTimeout(1500);
   /* the first-visit download cover (kload): skip like dev/test/stage-counts.js */
-  for(let i=0;i<240;i++){const s=await g.evaluate(()=>{const b=document.querySelector('#kload [data-kl="go"]');if(b){b.click();return ''}return window.KLOAD&&['done','skipped','all'].includes(KLOAD.phase)&&!document.getElementById('kload')?'ok':''}).catch(()=>'');if(s)break;await p.waitForTimeout(500)}
+  for(let i=0;i<240;i++){const s=await g.evaluate(()=>{const b=document.querySelector('#kload [data-kl="go"], #kload [data-kl="web"]');if(b){b.click();return ''}return window.KLOAD&&['done','skipped','all'].includes(KLOAD.phase)&&!document.getElementById('kload')?'ok':''}).catch(()=>'');if(s)break;await p.waitForTimeout(500)}
   const r=await g.evaluate(async o=>{const W=t=>new Promise(r=>setTimeout(r,t));localStorage.clear();SLOT=4;document.getElementById('title').hidden=true;window.__forceOrigin=o;window.__nlInner=1;start();window.__nlInner=0;quiet=false;Q.length=0;try{deal()}catch(e){}render();await W(600);
    const clear=()=>{let n=0;while(Q.length&&n++<30){const m=Q[0];if(m.opts&&m.opts.length){try{chooseM(m.opts.length-1)}catch(e){Q.shift()}}else{try{closeModal()}catch(e){Q.shift()}}}};clear();
    const R=S.roster,kh=j95kh();const LK=j95lk;const cnt={};for(const id in R.P){const k=LK(R.P[id][kh][0]);if(id!=="me")cnt[k]=(cnt[k]||0)+1}
