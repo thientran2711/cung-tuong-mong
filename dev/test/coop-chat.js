@@ -69,7 +69,7 @@ await inRoomWorld(A,B);for(let i=0;i<60;i++){const ra=await rstep(A),rb=await rs
  for(const o of[A,B]){const i=await ICON(o);ok(i&&i.left&&i.vis&&i.badge==='','icon on the LEFT of the room scene, no badge yet ('+o.name+')',i)}
  await shot(A,'01-icon');await shot(B,'01-icon');
  /* A writes through the UI while closed→open */
- await dismiss(A);await A.p.click('#krail [data-rail="chat"]',{noWaitAfter:true});ok(await until(A,()=>!!document.getElementById('kchatp')),'A: tap icon opens the frame');
+ await dismiss(A);await A.p.evaluate(()=>document.querySelector('#krail [data-rail="chat"]').click());ok(await until(A,()=>!!document.getElementById('kchatp')),'A: tap icon opens the frame');
  ok(await A.p.evaluate(()=>/Thư từ/.test(document.querySelector('#kchatp .kptitle').textContent)&&!!document.querySelector('#kchatp .kit-x')&&!!document.querySelector('#kchatp .kchat-empty')),'frame: title Thư từ, kit ✕, empty note');
  await shot(A,'02-open-empty');
  const nasty='Chào <b>muội</b> & <img src=x onerror=window.__xss=1> ơi';
@@ -81,9 +81,10 @@ await inRoomWorld(A,B);for(let i=0;i<60;i++){const ra=await rstep(A),rb=await rs
  
  ok(await B.p.evaluate(()=>COOPCHAT.sounds===1&&(KSFX.log.concat(KSFX.drop).some(x=>x.m==='notice'||/notice/.test(x.n||'')))),'B: notification sound requested (kit sfx notice)',await B.p.evaluate(()=>({s:COOPCHAT.sounds,l:KSFX.log.concat(KSFX.drop).slice(-3)})));
  await shot(B,'03-unread');
- await dismiss(B);await B.p.click('#krail [data-rail="chat"]',{noWaitAfter:true});await B.p.waitForSelector('#kchatp .kcm');
+ await dismiss(B);await B.p.evaluate(()=>document.querySelector('#krail [data-rail="chat"]').click());await B.p.waitForSelector('#kchatp .kcm');
  const bub=await B.p.evaluate(()=>{const x=document.querySelector('#kchatp .kcm.fr');return{t:x.querySelector('.kcm-x').textContent,html:x.querySelector('.kcm-x').children.length,n:x.querySelector('.kcm-h b').textContent,w:x.querySelector('.kcm-h span').textContent,xss:!!window.__xss,un:COOPCHAT.unread}});
- ok(bub.t===nasty&&bub.html===0&&!bub.xss,'B: text shown as plain text (HTML escaped)',bub);ok(bub.n==='Hảo hữu'&&/tháng/.test(bub.w),'unmet friend: signature = the header chip label "Hảo hữu" (OD:L165), game-style time',[bub.n,bub.w]);
+ ok(bub.t===nasty&&bub.html===0&&!bub.xss,'B: text shown as plain text (HTML escaped)',bub);ok(bub.n==='Hảo hữu của ta'&&/tháng/.test(bub.w),'unmet friend: signature = the header chip label "Hảo hữu của ta" (OD:L165), game-style time',[bub.n,bub.w]);
+ await shot(B,'04a-open-friend-UNMET');ok(await B.p.evaluate(()=>{const c=document.querySelector('.kctmf .kctmf-n');return !!c&&[...c.querySelectorAll('span')].filter(s=>s.offsetParent).map(s=>s.textContent).join('')===document.querySelector('#kchatp .kcm.fr .kcm-h b').textContent}),'guest: visible header chip label == chat label');await B.p.evaluate(()=>document.querySelector('#kchatp .kit-x').click());await B.p.waitForTimeout(500);await shot(B,'04a2-chip-UNMET');await B.p.evaluate(()=>document.querySelector('#krail [data-rail="chat"]').click());await B.p.waitForSelector('#kchatp .kcm');
  /* met friend (j61 stage 2): her real name, panel header too (reopen), kitRankNamePaint leaves it alone */
  await B.p.evaluate(()=>{k61Know(k61CoopEnt(),'test',true,2)});
  await B.p.evaluate(s=>document.querySelector(s).click(),'#kchatp .kit-x');await until(B,()=>!document.getElementById('kchatp'));
@@ -97,7 +98,7 @@ await inRoomWorld(A,B);for(let i=0;i<60;i++){const ra=await rstep(A),rb=await rs
  /* A has the frame open: the reply shows at once, no badge */
  ok(await until(A,()=>COOPCHAT.msgs.length===2&&document.querySelectorAll('#kchatp .kcm').length===2),'A (frame open): reply appears in the list, in order');
  const aU=await A.p.evaluate(()=>({n:document.querySelector('#kchatp .kcm.fr .kcm-h b').textContent,h:document.querySelector('#kchatp .kpsub,#kchatp .kptitle+*').textContent}));
- ok(aU.n==='Hảo hữu'&&/hảo hữu/i.test(aU.h),'host, unmet friend: signature + header = "Hảo hữu" (same label as the header chip)',aU);
+ ok(aU.n==='Hảo hữu của ta'&&/hảo hữu/i.test(aU.h),'host, unmet friend: signature + header = "Hảo hữu của ta" (same label as the header chip)',aU);
  await shot(A,'05-two-lines');
  /* host, friend met: real name */
  const nB=await B.p.evaluate(()=>S.name);await A.p.evaluate(()=>{k61Know(k61CoopEnt(),'test',true,2)});
@@ -125,7 +126,7 @@ await inRoomWorld(A,B);for(let i=0;i<60;i++){const ra=await rstep(A),rb=await rs
  ok(await until(B,n=>COOPCHAT.msgs.length===n,seenB+1,25000),'rejoin: history reloaded (all lines, in order) incl. the line sent while away',await B.p.evaluate(()=>COOPCHAT.msgs.map(m=>m.i)));
  const bi2=await ICON(B);ok(bi2&&bi2.badge==='2'||bi2&&bi2.badge==='1'||bi2&&+bi2.badge>=1,'rejoin: unread badge counts what she missed',bi2);
  await shot(B,'07-rejoined');
- await dismiss(B);await B.p.click('#krail [data-rail="chat"]',{noWaitAfter:true});await B.p.waitForSelector('#kchatp .kcm');await shot(B,'08-history');
+ await dismiss(B);await B.p.evaluate(()=>document.querySelector('#krail [data-rail="chat"]').click());await B.p.waitForSelector('#kchatp .kcm');await shot(B,'08-history');
  ok(await B.p.evaluate(()=>document.querySelectorAll('#kchatp .kcm').length===COOPCHAT.msgs.length&&COOPCHAT.msgs.length>=5),'history list shows every line');
  /* other places: the rail is on every stage */
  await B.p.click('#kchatp .kit-x',{noWaitAfter:true});const s0=await B.p.evaluate(()=>COOPCHAT.sounds);

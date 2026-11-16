@@ -46,8 +46,8 @@ function k61IsKid(e){return !!(e&&typeof e==="object"&&(e.sex==="m"||e.sex==="f"
 function k61SeedChiTon(){try{if(!S||!S.known)return;if(S.emp){const k=kOf61(S.emp);if((+S.known[k]||0)<2)S.known[k]=2}if(!S.thDead){S.thO=S.thO||{};const k=kOf61(S.thO);if((+S.known[k]||0)<2)S.known[k]=2}}catch(e){}}
 function k61Named(e){return k61St(e)>=2||k61Pub(e)}
 /* co-op friend (owner OD:L165: "Người lạ" until met, reborn = unknown again; OD:L1061 header chip): while she has not met the friend, ONE label everywhere —
-   the word the header friend chip (jcooptimer) and the chat panel already print, "Hảo hữu" (no rank, no "???"); met -> her real name (k61Named) */
-const K61FR="Hảo hữu";
+   the owner's wording (OD:L1060 "hảo hữu của ta", = the header chip + panel title in jcooptimer): "Hảo hữu của ta" (no rank, no "???"); met -> her real name (k61Named) */
+const K61FR="Hảo hữu của ta";
 function k61Coop(e){try{return !!(e&&e.coop&&!k61Named(e))}catch(x){return false}}
 /* the friend can sit in rivals OR in a consort's staff (guest maid): look in the whole world, not only rivals */
 function k61CoopEnt(){try{return k61All().find(e=>e&&e.coop)||null}catch(x){return null}}
