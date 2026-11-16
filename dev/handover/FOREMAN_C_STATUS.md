@@ -28,7 +28,7 @@ RUNNING C sessions (12):
 - foreign-princess sonnet session_011xDdVQLEsBhwiabQcVkHJN: BD APPROVED (Quý phi B); NC Quý phi OK (B); NC home ranks v13 (slim) SENT 20:57Z → on OK: STEP 2 full set (both countries all ranks + home maids, OD:L1210).
 - map frame C sonnet session_011xDdVS2U5Q68ctTWkApNxe: sample done but in its own /tmp → told to push to dev/handover/reports/map-frame-c/ → send to owner; after OK: CDN + KIT REQUEST (yellow slip labels) for main's keeper.
 - cf-tray-style sonnet session_011xDdVRQpDpbTu7wkBFFQMT: A/B/C SENT 21:00Z (C recommends B) → relay pick → emp/emp-p + CDN swap.
-- fig-cutout-clean lead sonnet session_011xDdVQi9izFkArmuejM2aM (near its rollover → open successor from its report handover): transparent gen = YES (told main); ty-look halo ~1,024 consort files (~67k cr); back-turned flags c02/c08/c20-ty*, c02-ngheo/t1, c06-t3. Owner Luân hồi before/after sample first, then failing set only.
+- fig-cutout-clean lead #1 session_011xDdVQi9izFkArmuejM2aM ROLLED OVER + archived → lead #2 sonnet session_011xDdVRgfTY3mVhDG1HsYkg opened by s7 21:07Z (Luân hồi before/after sample first; back-turned confirmed c02/c08/c14/c20/c26 all ty looks): transparent gen = YES (told main); ty-look halo ~1,024 consort files (~67k cr); back-turned flags c02/c08/c20-ty*, c02-ngheo/t1, c06-t3. Owner Luân hồi before/after sample first, then failing set only.
 - fig-cutout helper sonnet session_011xDdVNeDXtnshFoPTHBjHg (maid/eunuch/kid scan only).
 - huadian C9 finish sonnet session_011xDdVRtVMfTs3c4LPGswkr (8.5 % of face width = owner's '0.85'; r3 FAIL list + 22 by hand + Luân hồi).
 - art-complete-p2 sonnet session_011xDdVQfAeMXrKX9oPJQyhe (act-pics2 already complete; grown-kid a26/a36/a51 for 40 ids, transparent).
