@@ -11,7 +11,7 @@ Base main at start: 900ace7fb.
 | A9 promo-rules review | review/promo-rules-r1 | opus | PASS 0d425b5a8 — CONDITIONAL on kit keeper sign-off (K4) |
 | D46 placeholder pictures | review/placeholder-pics2-r1 | sonnet | PASS 81af8e412 |
 | D47 small-bugs-4 (jaudit 'Vì sao' trung y wording; 'Phi ???' greet/arc tab; VP 'theo lòng nàng'; one kit sample page; 'Đang cài' leftover; servant-road header '!') | review/small-bugs-4 | sonnet | RUNNING (worker) |
-| D53 opt-pics leftovers (option cards on act placeholder, 62–68 per life; meaning-group choices e.g. 'Ngắt hoa dâng Thái hậu', 'Hẹn hôm khác', 'Cáo bận việc cung'; list in dev/art/MISSING_PICS.md on placeholder-pics2) | review/opt-pics2 | sonnet | RUNNING (art worker; check review/opt-pics (session 8) first) |
+| D53 opt-pics leftovers | review/opt-pics2 @28bef58c3 → review/opt-pics2-r1 | sonnet | REVIEWING (29 new option-card group pictures on CDN; non-person placeholders 45→2; includes placeholder-pics2) |
 | A11 cardflip review | review/cardflip-r1 | sonnet | PASS 6452171fc — CONDITIONAL on kit keeper sign-off (K5) |
 | D45 small art | review/small-art @7aa5bc832 (art on CDN: earrings, shoes, per-rank pendants/bangles/sachets, 3 maid robes, guard 4 indigo, c02-t1-a18 skin, 2 Emperor Qing-hat pictures redrawn) → review/small-art-wire (code wiring + rebuild, on top of promo-rules-r1) | sonnet | RUNNING (wiring worker) |
 | A13 recipes-r1 review | review/recipes-r2 | sonnet | PASS 9eafa355b |
