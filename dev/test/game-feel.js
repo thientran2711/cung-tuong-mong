@@ -7,7 +7,7 @@ const [,,BASE,OUT,SHOTS]=process.argv;fs.mkdirSync(OUT,{recursive:true});
 const VP=[[755,1000,2,'fold'],[1180,820,2,'ipad'],[412,1058,2,'phone']];
 const PH=(process.env.PH||'1234').split('');const L=(...a)=>console.error(new Date().toISOString().slice(11,19),...a);
 const sleep=t=>new Promise(r=>setTimeout(r,t));
-const NEWLIFE=()=>{try{localStorage.removeItem('hclh-opt')}catch(e){}SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){start();if(!isSrv())break}Q.length=0;document.getElementById('modal').hidden=true;
+const NEWLIFE=()=>{try{localStorage.removeItem('hclh-opt')}catch(e){}SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<200;i++){start();if(!isSrv()&&!(window.isKc&&isKc()))break}Q.length=0;document.getElementById('modal').hidden=true;
  ['kroul','dawn','kload'].forEach(i=>{const e=document.getElementById(i);if(e)e.remove()});document.querySelectorAll('.kmov').forEach(e=>e.remove());render();return S.name};
 function watch(p,errs,reqs){p.on('pageerror',e=>errs.push(e.message));p.on('console',m=>{if(m.type()==='error'&&!/Failed to load resource|net::ERR/.test(m.text()))errs.push('console: '+m.text())});
  p.on('request',q=>{if(/pixi/.test(q.url()))reqs.push({t:Date.now(),u:q.url().split('/').slice(-2).join('/')})})}
@@ -66,10 +66,10 @@ const shot=async(p,n)=>{if(!SHOTS)return;for(let t=0;t<2;t++){try{await p.screen
   await p.evaluate(()=>{S.place='home';S.month=8;render()});await p.waitForFunction(()=>window.KFX&&KFX.amb>=3,null,{timeout:30000}).catch(()=>{});await sleep(4000);await clearOv(p);await shot(p,'3-home-autumn-leaves-fold');
   await p.evaluate(()=>{const before={};for(const [k] of RKEYS)before[k]=S[k]||0;S.sung+=6;S.danh+=3;S.duc-=2;resultShow('Dâng trà',before,true)});await sleep(1150);await shot(p,'4-result-numbers-fly-fold');await c.close()}
  /* ---- 4. old save (made by main) loads in this build; offline after the first visit ---- */
- if(PH.includes('4')){L('old/offline');const c=await ctx(b,755,1000,2,true);const p=await c.newPage();const errs=[],reqs=[];watch(p,errs,reqs);
-  await fetch(BASE+'__ver/main');await p.goto(BASE,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function');await sleep(2000);
+ if(PH.includes('4')){L('old/offline');const c=await ctx(b,755,1000,2,true);await c.addInitScript(()=>{window.__nlInner=1});const p=await c.newPage();const errs=[],reqs=[];watch(p,errs,reqs);
+  await fetch(BASE+'__ver/main');await p.goto(BASE,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&document.readyState==='complete');await sleep(2000);
   R.oldSave=await p.evaluate(()=>{SLOT=3;document.getElementById('title').hidden=true;start();Q.length=0;quiet=false;S.inv.push({k:'nhansam'});localStorage.setItem(SK(3),JSON.stringify(ser()));return{name:S.name,key:SK(3)}});
-  await fetch(BASE+'__ver/none');await p.goto(BASE,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&window.KFX);await sleep(2000);
+  await fetch(BASE+'__ver/none');await p.goto(BASE,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&window.KFX&&document.readyState==='complete');await sleep(2000);
   R.oldLoad=await p.evaluate(()=>{try{const d=loadSlot(3);if(!d)return{ok:'NO SAVE'};SLOT=3;document.getElementById('title').hidden=true;deser(d);try{deal()}catch(e){}Q.length=0;document.getElementById('modal').hidden=true;render();return{ok:true,name:S.name,inv:S.inv.length}}catch(e){return{ok:'ERR '+e.message}}});
   await p.waitForFunction(()=>window.PIXI,null,{timeout:60000}).catch(()=>{});await sleep(3000);
   R.swCached=await p.evaluate(async()=>{const c=await caches.open('ctm-assets');return (await c.keys()).filter(k=>/pixi/.test(k.url)).map(k=>k.url.split('/').pop())});

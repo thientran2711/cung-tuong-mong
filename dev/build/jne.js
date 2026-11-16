@@ -19,7 +19,7 @@ Object.assign(BAL,{nightEnd:{
  /* his mood after the night (S.emp.mood 0 vui … 3 giận dữ): warm → one step better; cold → one step worse (never to giận dữ) */
  mood:{warm:-1,normal:0,cold:1},moodCap:2,
  /* lonely beat + dawn picture timings (ms); night card list shows after `list` */
- lonelyMs:2200,dawnMs:2400,list:900,
+ lonelyMs:Math.round(2200*BAL.pace),dawnMs:Math.round(2400*BAL.pace),list:Math.round(900*BAL.pace),  /* x the ONE kit pace (BAL.pace, KIT §83) */
  /* longest wait for a picture before the card / beat shows anyway (its painted 32x24 thumbnail shows blurred meanwhile) */
  wait:700}});
 (function(){
@@ -230,11 +230,11 @@ window.kneNightTone=NT_TONE;
 /* ---------- CSS ---------- */
 const st=document.createElement("style");st.id="kne-css";st.textContent=`
 .kne{position:relative;display:flex;flex-direction:column;align-items:center;gap:10px;width:100%;max-width:600px}
-.kne-pic{position:relative;width:100%;aspect-ratio:4/3;max-height:min(62dvh,450px);border-radius:var(--k-rad,8px);overflow:hidden;border:1px solid var(--gold);box-shadow:0 0 0 3px #f6ead6,0 12px 30px #000a;background:#f6ead6;container-type:size}
+.kne-pic{position:relative;width:100%;aspect-ratio:4/3;max-height:min(calc(62*var(--kvh,1dvh)),450px);border-radius:var(--k-rad,8px);overflow:hidden;border:1px solid var(--gold);box-shadow:0 0 0 3px #f6ead6,0 12px 30px #000a;background:#f6ead6;container-type:size}
 .kne-lq,.kne-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:var(--fx,50%) var(--fy,50%)}
 .kne-lq{filter:blur(10px);transform:scale(1.08)}
-.kne-img{opacity:0;transition:opacity .5s ease}.kne-img.ld{opacity:1;animation:kneZoom 6s ease-out both}
-.kne-cap{display:flex;flex-direction:column;align-items:center;text-align:center;gap:2px;animation:kmFade .45s ease .25s both}
+.kne-img{opacity:0;transition:opacity .5s ease}.kne-img.ld{opacity:1;animation:kneZoom calc(6s*var(--pace)) ease-out both}
+.kne-cap{display:flex;flex-direction:column;align-items:center;text-align:center;gap:2px;animation:kmFade calc(.45s*var(--pace)) ease calc(.25s*var(--pace)) both}
 .kne-cap b{font-family:var(--display);font-size:1.3rem;color:#f6e3b4;letter-spacing:.05em}
 .kne-cap small{color:#e9d6b0;font-size:.86rem;max-width:34rem;line-height:1.35}
 .kne-side{display:flex;flex-direction:column;align-items:center;gap:8px;width:100%;max-width:460px;min-height:0}
@@ -260,23 +260,23 @@ const st=document.createElement("style");st.id="kne-css";st.textContent=`
 .dawn.kne-day.km-endon{box-sizing:border-box;padding-bottom:calc(68px + env(safe-area-inset-bottom,0px))}
 .dawn.kne-day.km-endon .kne-beat .kne-pic{max-height:calc(100dvh - 200px)}
 .kne-beat{position:relative;width:100%;max-width:820px;display:grid;place-items:center}
-.kne-b{grid-area:1/1;display:flex;flex-direction:column;align-items:center;gap:10px;width:100%;opacity:0;transition:opacity .6s ease;pointer-events:none}
+.kne-b{grid-area:1/1;display:flex;flex-direction:column;align-items:center;gap:10px;width:100%;opacity:0;transition:opacity calc(0.6s*var(--pace,1)) ease;pointer-events:none}
 .kne-b.on{opacity:1}
 .kne-beat .kne-pic{max-height:calc(100dvh - 130px)}
 .kne-beat .kmhint{position:static;margin-top:8px}
 .dawn.rm .kne-b{transition:none}
 /* landscape up to 900 px high (phone 844x390, 1000x755, iPad 1180x820): picture left, words right; the button never leaves the screen */
-@media (orientation:landscape) and (max-height:900px){
- .kne-ov .kmst{max-width:96vw}.kne-ov .kne{flex-direction:row;align-items:center;max-width:96vw;width:96vw;gap:14px}
- .kne-ov .kne-pic{width:min(54vw,calc((100dvh - 40px)*1.333));height:auto;max-height:none;flex:0 0 auto}
- .kne-ov .kne-side{justify-content:center;max-width:420px;flex:1 1 300px;max-height:calc(100dvh - 24px)}
- .kne-ov .kne-side .kmlist{flex:0 1 auto;min-height:0;max-height:none;overflow:auto}
- .kne-beat .kne-b{flex-direction:row}.kne-beat .kne-pic{width:min(66vw,calc((100dvh - 60px)*1.333));height:auto;max-height:none}.kne-beat .kne-cap{max-width:28vw}}
-@media (orientation:landscape) and (max-height:500px){.kne-ov .kne-cap small{display:none}.kne-ov .kne-cap b{font-size:1.1rem}}
+/* kv3:.kv2 */
+ :where(.kv2) .kne-ov .kmst{max-width:96vw}:where(.kv2) .kne-ov .kne{flex-direction:row;align-items:center;max-width:96vw;width:96vw;gap:14px}
+ :where(.kv2) .kne-ov .kne-pic{width:min(54vw,calc((100dvh - 40px)*1.333));height:auto;max-height:none;flex:0 0 auto}
+ :where(.kv2) .kne-ov .kne-side{justify-content:center;max-width:420px;flex:1 1 300px;max-height:calc(100dvh - 24px)}
+ :where(.kv2) .kne-ov .kne-side .kmlist{flex:0 1 auto;min-height:0;max-height:none;overflow:auto}
+ :where(.kv2) .kne-beat .kne-b{flex-direction:row}:where(.kv2) .kne-beat .kne-pic{width:min(66vw,calc((100dvh - 60px)*1.333));height:auto;max-height:none}:where(.kv2) .kne-beat .kne-cap{max-width:28vw}
+
 /* portrait: the full-scene beats fill a tall frame cropped around the focal point; the card keeps 4:3 above its list */
-@media (orientation:portrait){.kne-ov .kne-pic{max-height:min(46dvh,450px)}
- .kne-ov .kne-side{max-height:calc(100dvh - min(46dvh,450px) - 40px)}.kne-ov .kne-side .kmlist{flex:0 1 auto;min-height:0;max-height:none;overflow:auto}
- .kne-beat .kne-pic{aspect-ratio:3/4;width:min(100%,calc((100dvh - 170px)*.75));max-height:none}}
+/* kv3:.kv1 */:where(.kv1) .kne-ov .kne-pic{max-height:min(calc(46*var(--kvh,1dvh)),450px)}
+ :where(.kv1) .kne-ov .kne-side{max-height:calc(100dvh - min(calc(46*var(--kvh,1dvh)),450px) - 40px)}:where(.kv1) .kne-ov .kne-side .kmlist{flex:0 1 auto;min-height:0;max-height:none;overflow:auto}
+ :where(.kv1) .kne-beat .kne-pic{aspect-ratio:3/4;width:min(100%,calc((100dvh - 170px)*.75));max-height:none}
 .kne-sample{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:6px}.kne-sample figure{margin:0}.kne-sample img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:6px;border:1px solid var(--gold)}
 .kne-sample figcaption{font-size:.75rem;text-align:center}
 @media (prefers-reduced-motion:reduce){.kne *{animation:none!important;transition:none!important}.kne-sp{display:none}}

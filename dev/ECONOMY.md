@@ -50,10 +50,7 @@ craftGift, giftLeak, giftHit, priceTier`. j20 (BL, blCard, stipend) và j83 (WVA
 - Mọi việc hại tốn bạc (ACT.c.bac < 0, trừ Giao thiệp) đắt hơn khi người bị nhắm phẩm CAO hơn người làm (+BAL.schemeRk 15 % mỗi bậc) và được canh
   kỹ (+BAL.schemeGuard 10 % mỗi kẻ hầu trung thành ≥ 70, tối đa 3). Thẻ hiện đúng giá cho người đó (ACT.c đọc theo người trên thẻ), luật trừ
   đúng số đó. Ví dụ Đáp ứng mua chuộc cung nữ của Hoàng hậu: 90 bạc (Đáp ứng khác: 44).
-  NPC cùng cách tính nhưng núm riêng (owner 11/15: giữ giá cao cho nàng, chỉnh NPC tới khi chết sớm ~40–43 %, HH giữ nguyên):
-  BAL.schemeRkNpc 6 % mỗi bậc, BAL.schemeGuardNpc 4 % mỗi kẻ hầu. Đo bot (smart, 1 năm 16 khắc): .05/.03 → chết sớm 47 %, HH 31 % (32 đời);
-  .06/.04 → 35 %, 42 % (26 đời, chạy dở); .09/.05 → 21 %, 53 % (38 đời); .15 → 32 %, 37 % (38 đời). Nhiễu lớn; gộp .05–.06: chết sớm ~41 %,
-  HH ~36 % (gần mức trước khi tăng giá) → chọn .06/.04. Cần đo lại với n ≥ 80 trước khi chốt.
+  NPC dùng đúng cùng giá, cùng núm BAL.schemeRk / BAL.schemeGuard (luật hai chiều, owner 16/11 s21: một giá cho mọi người, NPC không được giảm giá). Đo lại chết sớm / HH bằng bot khi chỉnh.
 - Đường không tốn bạc (rẻ bạc, nhưng dễ hỏng hơn hoặc tốn thứ khác), thẻ riêng đủ Tốn/Được/Mất + khả năng:
   "Tự đi dò la" (khả năng −BAL.selfMinus 12, lộ: Danh −2) · "Sai cung nữ thân tín lấy lòng" (lòng cung nữ −BAL.loyalCost 10, khả năng −12) ·
   "Nhờ ơn người quen rút thẻ bài" (cần người quý ngươi ≥ BAL.favorRel 60; người đó thiện cảm −BAL.favorCost 12).

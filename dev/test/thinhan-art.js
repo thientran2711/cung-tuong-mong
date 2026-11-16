@@ -1,7 +1,7 @@
 /* review/thinhan-art: "Thỉnh an Thái hậu / Hoàng hậu" act cards show the new standing-curtsy picture (img/act-thinh-an-v2.webp on the CDN).
    usage: node dev/test/thinhan-art.js <URL> <W>x<H>@dpr <outdir> [before <old ACTS.json>]   ("before" serves the old manifest = old kneeling picture)
    Prints one JSON line: Lễ nghi greeting cards found with their picture, page errors. */
-const {chromium}=require('playwright');const fs=require('fs');
+const {chromium}=require('./lib/pw-roulette');const fs=require('fs');
 const [,,URL,SZ,OUT,MODE,OLD]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=WH.split('x').map(Number);const tag=(MODE||'after')+'-'+WH;
 (async()=>{const b=await chromium.launch();
  const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,deviceScaleFactor:+(DPR||1),reducedMotion:'reduce'});

@@ -20,7 +20,7 @@ const [,,BASE,SZ,OUT,TAG,ONLY]=process.argv;const [WH,DPR]=SZ.split('@');const [
  const shot=n=>p.screenshot({path:`${OUT}/${TAG}-${n}.jpg`,type:'jpeg',quality:80});
  const R={};const meas=async k=>{R[k]=await p.evaluate(()=>{const vw=innerWidth;
   const cut=[...document.querySelectorAll('#panel *, .kbk *')].filter(e=>e.offsetParent&&e.children.length===0&&e.scrollWidth>e.clientWidth+2&&['hidden','clip'].includes(getComputedStyle(e).overflowX)).slice(0,8).map(e=>e.className+':'+e.textContent.slice(0,30));
-  const c=document.querySelector('.kloadchip');let cov=[];if(c&&!c.hidden&&getComputedStyle(c).visibility!=='hidden'){const r=c.getBoundingClientRect();
+  const c=document.querySelector('#krail [data-rail="st-dl"]');let cov=[];if(c&&!c.hidden&&getComputedStyle(c).visibility!=='hidden'){const r=c.getBoundingClientRect();
    cov=[...document.querySelectorAll('#panel *, #tabs *, #stage *')].filter(e=>{if(e.children.length||!e.textContent.trim()||!e.offsetParent)return false;const q=e.getBoundingClientRect();const pr=document.getElementById('panel').getBoundingClientRect();if(e.closest('#panel')&&(q.bottom<=pr.top||q.top>=pr.bottom))return false;return q.width&&q.right>r.left&&q.left<r.right&&q.bottom>r.top&&q.top<r.bottom}).slice(0,5).map(e=>e.textContent.trim().slice(0,30))}
   const sub=[...document.querySelectorAll('.ksubb')].filter(e=>e.scrollWidth>e.clientWidth+1).map(e=>e.textContent);
   return{ovf:document.documentElement.scrollWidth>vw+1,cut,cov,subCut:sub}})};

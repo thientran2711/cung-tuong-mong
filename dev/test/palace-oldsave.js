@@ -1,6 +1,6 @@
 /* Old save -> new build (review/palace-map-port): plays 2 buổi on the previous main build, saves slot 3, loads it in the new build, then
    Dư đồ -> a palace detail -> a hall room. usage: node dev/test/palace-oldsave.js <oldBuildUrl> <newBuildUrl> <W>x<H>@dpr <outdir> */
-const {chromium}=require('playwright');const [,,OLD,NEW,SZ,OUT]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=WH.split('x').map(Number);
+const {chromium}=require('./lib/pw-roulette');const [,,OLD,NEW,SZ,OUT]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=WH.split('x').map(Number);
 (async()=>{const px=process.env.HTTPS_PROXY?{server:process.env.HTTPS_PROXY,bypass:'127.0.0.1,localhost'}:undefined;const b=await chromium.launch(px?{proxy:px}:{});
  const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,deviceScaleFactor:+(DPR||1),ignoreHTTPSErrors:true});const p=await ctx.newPage();p.setDefaultTimeout(240000);const errs=[];p.on('pageerror',e=>errs.push(e.message));
  const boot=async u=>{await p.goto(u,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&document.getElementById('title'),null,{timeout:180000});await p.waitForTimeout(2500)};
