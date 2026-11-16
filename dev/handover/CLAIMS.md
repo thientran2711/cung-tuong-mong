@@ -29,7 +29,7 @@
 | reign-road review | review/reign-road-r1b | D | in-session agent of Foreman D s1 | STOPPED (duplicate of main's r1; 2 extra findings in reports/reign-road-r1b.md) | 16/11 05:40Z |
 | C35b pcard-dislikes | review/pcard-dislikes | B | session_01N1tNP6oudZkvfTX5H98ZMF | DONE 6eaca058 | 16/11 05:27Z |
 | D26 memories + hook ledger | review/memories | C | session_011xDdVPYyJVKrkdKtDKo6f9 | RUNNING | 05:29Z 16/11 |
-| coop-night-sync REVIEW (urgent) | review/coop-night-sync-r1 | main s9 | session_01UV1SzhQrqEEYDtLXNUvhdo | RUNNING | 16/11 05:31Z |
+| coop-night-sync REVIEW (urgent) | review/coop-night-sync-r1 | main s9 | session_01UV1SzhQrqEEYDtLXNUvhdo | LIVE bd6342c7 | 16/11 05:31Z |
 | modal-scroll-r1 + log-sync-r2 (an-tinh) + book-fig-r1 re-merge on main | review/merge-hot-1 | main s9 | session_01UV1Szkb26qWiEe1bacAQvL | RUNNING | 16/11 05:36Z |
 | kit-sweep REVIEW (owner-urgent) | review/kit-sweep-r1 | main s9 | session_01UV1SziYTkPQjJKnWcb8GoX | LIVE 0c23da40 | 16/11 05:39Z |
 | C43 coop-invite-ux review | review/coop-invite-ux-r1 | D | session_01DgYSWo9bFK5NRcy5Hrr3UX | RUNNING | 16/11 05:41Z |

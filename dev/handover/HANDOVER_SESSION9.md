@@ -117,3 +117,4 @@ Foremen inbox written: B (Q24 answered, D5 cancelled → NPC roads, mg-balance H
 Owner questions OPEN: NVP glossy floor (superseded by her 07:15Z redo order); fp v3 verdict; glyph v2 verdict. Percent "xong / chơi được" never measured in s11 — measure (bot/feature checklist) and report real numbers.
 - (07:12Z) MAIN SESSION 12 = session_01UV1SzjAp352g6XsaH4f3YB (opened by s11). Workers report there from now on.
 - (07:13Z) MAIN SESSION 12 = session_01UV1SzjAp352g6XsaH4f3YB took over. Hourly self-wake trig_01HGkAgurzHcaQzWo7uFLLfT (:12, human_request); s11 trigger trig_018KeLcdXKabaXpFYzAiCYxf DISABLED. All running main-s9/s11 workers messaged to report to s12.
+- (07:13Z s11 final) LIVE: main = bd6342c7 (coop-night-sync-r1: friend no longer jumps to the new day while she is in buổi tối). s12 informed; merge-hot-1 re-merging bd6342c7.
