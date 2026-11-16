@@ -116,7 +116,7 @@ const KIT_EVFIT=[
  ["b-doctor","benh-tat",null,/thái y|bắt mạch|ốm nặng|phát sốt/i]
 ];
 function kitEvFitText(m){const P=s=>String(s||"").replace(/<p class="past">[\s\S]*?<\/p>/g," ").replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim();
- return {t:P(m&&(m.t||m.kit&&m.kit.title)).replace(/^(Chính tuyến|Phụ tuyến) · /,"").replace(/ · Lời nhờ.*$/,""),b:P(m&&m.h).split(/(?<=[.!?…”])\s+/).slice(0,2).join(" ")}}
+ return {t:P(m&&(m.t||m.kit&&m.kit.title)).replace(/^(Chính tuyến|Phụ tuyến) · /,"").replace(/ · Lời nhờ.*$/,""),b:P(m&&m.h).split(kRx("(?<=[.!?…”])\\s+","")).slice(0,2).join(" ")}}
 function kitEvFit(m){try{if(!m||typeof evArtCat!=="function")return null;const {t,b}=kitEvFitText(m);
  for(const [rule,g,tr,br] of KIT_EVFIT){if(tr&&!tr.test(t))continue;if(br&&!br.test(b))continue;if(!tr&&!br)continue;
   const G=typeof g==="function"?g(m):g;if(G&&typeof G==="object"&&G.src)return{art:G,rule};if(G&&evArtCat("cat:"+G))return{id:"cat:"+G,rule}}

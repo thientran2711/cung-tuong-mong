@@ -21032,7 +21032,7 @@ const KIT_EVFIT=[
  ["b-doctor","benh-tat",null,/thái y|bắt mạch|ốm nặng|phát sốt/i]
 ];
 function kitEvFitText(m){const P=s=>String(s||"").replace(/<p class="past">[\s\S]*?<\/p>/g," ").replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim();
- return {t:P(m&&(m.t||m.kit&&m.kit.title)).replace(/^(Chính tuyến|Phụ tuyến) · /,"").replace(/ · Lời nhờ.*$/,""),b:P(m&&m.h).split(/(?<=[.!?…”])\s+/).slice(0,2).join(" ")}}
+ return {t:P(m&&(m.t||m.kit&&m.kit.title)).replace(/^(Chính tuyến|Phụ tuyến) · /,"").replace(/ · Lời nhờ.*$/,""),b:P(m&&m.h).split(kRx("(?<=[.!?…”])\\s+","")).slice(0,2).join(" ")}}
 function kitEvFit(m){try{if(!m||typeof evArtCat!=="function")return null;const {t,b}=kitEvFitText(m);
  for(const [rule,g,tr,br] of KIT_EVFIT){if(tr&&!tr.test(t))continue;if(br&&!br.test(b))continue;if(!tr&&!br)continue;
   const G=typeof g==="function"?g(m):g;if(G&&typeof G==="object"&&G.src)return{art:G,rule};if(G&&evArtCat("cat:"+G))return{id:"cat:"+G,rule}}
@@ -30017,7 +30017,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="2830a2ab9bab";window.CTM_BUILD=BUILD;
+const BUILD="0c2f7471eeb8";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
