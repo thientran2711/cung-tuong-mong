@@ -55,6 +55,9 @@ document.addEventListener("click",e=>{const x=e.target&&e.target.closest&&e.targ
 /* stage tag line 1: centred above the rank line, tight; pop-up caption line 1 above the rank */
 html body .stage .tok .tag .kdh,html body .stage #j59metag .tag .kdh{display:flex;width:max-content;max-width:100%;margin:0 auto 2px;font-size:.7rem}
 html body .kdpcap .kdh,html body .kesf>.kpsn .kdh{display:flex;width:max-content;max-width:100%;margin:0 auto 3px}
+/* on a PAINTING (stage tag, pop-up figure caption) the plate glows in its tier colour (KIT 48.1e); her plate brighter */
+html body .stage .tok .tag .kdh,html body .stage #j59metag .tag .kdh,html body .kdpcap .kdh{box-shadow:0 0 0 1px #00000033,0 0 6px var(--dh),0 0 12px ${m("var(--dh)",70,"transparent")}}
+html body .stage #j59metag .tag .kdh,html body .stage .tok .tag.j59mine .kdh{box-shadow:0 0 0 1px #00000033,0 0 8px var(--dh),0 0 16px var(--dh),0 0 24px ${m("var(--dh)",70,"transparent")}}
 .kdh[data-kdh]{cursor:pointer}.stage .kdh[data-kdh]{cursor:inherit}
 .kt3{display:flex;flex-direction:column;align-items:center}`;document.head.appendChild(st)})();
 /* kit-page sample */
