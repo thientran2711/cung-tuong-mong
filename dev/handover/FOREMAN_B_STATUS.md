@@ -18,7 +18,7 @@ Connectors (account B): GitHub push OK · Magnific OK (project "Personal" ba4aec
 | C34 contest-ui | review/contest-ui @290129bd | sonnet | REVIEWING (review/contest-ui-r1, sonnet); new podium backdrop on CDN |
 | C35 pcard-fill | review/pcard-fill-r1 | sonnet | PASS 6975696c6af2ad22bd428e6435dd892d16f0a4b1 (KIT §73; contains actcard-small-r1) |
 | C37 panel-size | review/panel-size-r1 | sonnet | PASS a523531da8bbf3944c8f0afd2c122176405d4e88 (KIT KEEPER: §8.1) |
-| C26b stat-fx follow-up | review/stat-fx-2 | sonnet | QUEUED (also pcard-fill nits: 'Dạo này' log line may end with a stray word like 'gặp'; Phi tần tab mood tile shows a placeholder when no cause event — person card + status tiles re-render with innerHTML so they never glow; add diff-glow on re-render; also make the number turn red on a loss like green on a gain) |
+| C26b stat-fx follow-up | review/stat-fx-2 | sonnet | RUNNING (also pcard-fill nits: 'Dạo này' log line may end with a stray word like 'gặp'; Phi tần tab mood tile shows a placeholder when no cause event — person card + status tiles re-render with innerHTML so they never glow; add diff-glow on re-render; also make the number turn red on a loss like green on a gain) |
 | C46 map-labels | review/map-labels | sonnet | RUNNING |
 | D32 succession-port | review/succession-port @64f7579c | opus | REVIEWING (review/succession-port-r1, sonnet) |
 | D38 lost-items-port | review/lost-items-port @92ed78f6 | opus | REVIEWING (review/lost-items-port-r1, sonnet) |
@@ -28,7 +28,7 @@ Connectors (account B): GitHub push OK · Magnific OK (project "Personal" ba4aec
 | D34 scheme-games-port | review/scheme-games-port | sonnet | RUNNING |
 | D36 leaderboard + Bảng vàng | review/rank-port | sonnet | RUNNING |
 | D39 appearance-port | review/appearance-port-r1 | sonnet | PASS 86234a24c53da664bd75f34b34444751cd7c0e9f |
-| D40 weather-risk-port | review/weather-port @15c6ba39 | sonnet | REVIEWING (review/weather-port-r1, sonnet) |
+| D40 weather-risk-port | review/weather-port-r1 | sonnet | PASS 100bf8809a77b5a8f381ffac6e426a0c0d2b8a5f |
 | D41 promote-servants | review/promote-servants | opus | QUEUED (after Foreman C's D29 roster) |
 | D42 places-leftovers | review/places-port | sonnet | QUEUED (after D30) |
 
@@ -42,6 +42,7 @@ PASS review/rel-picker-r1 ce7c076a38d55c95901d19002832983f91560052 (C29; compact
 PASS review/pcard-fill-r1 6975696c6af2ad22bd428e6435dd892d16f0a4b1 (C35; person card right side filled from kit parts, KIT §73; includes review/actcard-small-r1)
 PASS review/appearance-port-r1 86234a24c53da664bd75f34b34444751cd7c0e9f (D39; illness/poison/slap/penalty/rash overlays + veil, weekly healing verified e2e; ancestry vs main 2afdafc3 re-checked by Foreman B)
 PASS review/panel-size-r1 a523531da8bbf3944c8f0afd2c122176405d4e88 (C37; one kpanel frame size per viewport, KIT §8.1 needs kit keeper; when review/stage-fig-size-r1 lands keep both its kitDpFit cap/crop and this dw=d.clientWidth line)
+PASS review/weather-port-r1 100bf8809a77b5a8f381ffac6e426a0c0d2b8a5f (D40; bad-weather outdoor risks + gear/servant/kiệu; reviewer fixed garbled risk line → kit kèm/Ghi chú rows, indoor exclusion)
 PASS review/stat-fx-r1 0eb3e4b4a41a9123ad7181b39fc14afc60f8ab11 (C26; descends from main 900ace7f; top-bar glow green/red + named slow labels + j19 whole-word colour fix)
 
 ## CDN
@@ -76,5 +77,5 @@ From now on Foreman B workers only use existing kit parts and file KIT REQUESTs 
 - Q11 (D39 appearance-port): her own ingredient-specific allergy in recipes (PM:L326) was not built — rash causes already include son phấn and bad-luck food. Owner wants a per-ingredient allergy in recipes (new feature), or is the current cause list enough?
 - Q12 (D32 succession-port): the 12 dedicated epilogue pictures in SUCCESSION_PLAN §7 were never approved; chapters reuse approved event art. Owner wants dedicated pictures? And ending cards show ev-quoc-tang (from main's code) — the right picture for succession endings?
 - Q13 (C33 weekbook): week-book entry wording is generic per person and direction ("Hoàng thượng để tâm đến ta hơn", "nàng bớt ghen"); per-act sentences would need act data — owner want that later? Also many "Mấy việc vặt…" lines until review/log-sync lands on main (missing log lines; honest, not a bug).
-- Q14 (D40 weather): rain gear (dù/áo tơi/giày) is a one-time purchase that halves one risk; the kiệu costs Bạc −6 per outing. Should gear wear out?
+- Q14 (D40 weather; reviewer: with one-off gear the per-trip kiệu is nearly pointless): rain gear (dù/áo tơi/giày) is a one-time purchase that halves one risk; the kiệu costs Bạc −6 per outing. Should gear wear out?
 - Q15 (C34 contest-ui): her contest titles (e.g. "Hoa khôi · Tết Thất tịch") show only in Sổ ân thưởng — enough? The cắm hoa board painting is an empty stage with pink curtains (no flowers) — want contest-specific paintings? Only one podium backdrop set was made (owner asked for variants by contest kind/season).
