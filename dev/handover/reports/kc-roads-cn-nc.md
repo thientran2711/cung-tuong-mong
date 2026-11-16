@@ -157,3 +157,16 @@ bribed off the list: a legal ending, the test then saw the next life); kc-lore r
 4. Co-op edge: if the friend is at home and my rolled origin has NO home road (cn "Cung nữ được sủng hạnh"), I still enter at once (the rule
    cannot hold without a home road for cn). Same if both press "Nhận thân phận" in the same instant with different roads.
 5. bd lives on review/origins-r1 (not on main): jkc2 carries its data; it was tested in a local scratch merge only.
+
+## HANDOVER (worker rollover, context 67 % > 60 % ceiling, 16/11 08:42Z)
+For the next worker who takes Foreman D's FAIL list on this branch:
+- Worktree pattern: `git worktree add /home/user/wt/<name> -B review/kc-roads-cn-nc origin/review/kc-roads-cn-nc` (sparse as PREAMBLE). Code: dev/build/jkc2.js only
+  (+ one line in assemble.py, after jkc.js). Rebuild: `bash dev/site/build_site.sh`; commit index.html/sw.js/assets.json with it.
+- Map of jkc2.js: KC2K kinds (dan=cnv, nc=nc/bd) → places/words → kc2Init → cards (kc2CardsDan / kc2CardsNc) → kc2Week (KC2CD cool-downs) /
+  kc2Month (chapters 4/10/16, sending at S.kc.due = kc2Due()) → KCE events d_* / n_* → selection kc2Exam/kc2Play (hook window.kcEntryExam) →
+  kc2Enter → kc2EnterSrv / kc2EnterNc → kc2Carry (BAL.kcv) → panels (kcFamHTML, kcMapHTML, hud …) → "Vào cung ngay" selection (PEND.kc2Sel,
+  kc2SelDo, nlAccept wrapper) → kc2R0 (j67 chapter-1 base rank).
+- Tests: dev/test/kc-roads/route.js (--origin=cnv|nc|bd), direct.js, coop-together.js (live Worker, --a/--b), scan.js; dev/test/kc-lore/route-td.js
+  (tt/td regression). Balance: dev/measure/kc2val.js <n> <origins> <out> [arms] + kc2val-sum.py (palace arm files kc2val-a/b.json, home arm a3/b3).
+  bd needs a local scratch merge of origin/review/origins-r1 (assemble order: … 'jkc.js', 'jorigins.js', 'jkc2.js'); never push that merge.
+- Open: art list (above), entry animation (Foreman D), bd dependency, the tt "Mạnh thái y ???" flag.
