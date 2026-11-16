@@ -13,3 +13,13 @@ Method: gpt-2-6 edit of the same-dir sang picture (ref = CDN nhat-cac-*-sang), p
 Result: mean ~114 (xuan) / ~128 (trungthu) vs current 45. Same framing, buildings, cranes, plum/pine, both maids. Self-check: no new people, no text.
 Caveat for owner: lantern windows are fairly vivid; can be toned down if she finds it too "AI".
 Waiting for owner verdict via Foreman C.
+
+## BATCH DONE (owner OK: "ảnh tối vẽ mới lại, ok duyệt")
+- 159/159 pl2 toi repainted with gpt-2-6: 149 from the same-dir sang picture (approved sample prompt), 10 festival toi without a sang sibling repainted from the current toi ("lighter, same picture"): can-chinh/duc-tho/duong-hoa giaothua+nguyentieu+thattich pairs, garden nguyentieu+thattich. Same file names, 1792x1003 webp, on the CDN (cdn_sync --check: same 159, 0 to upload). Names unchanged, so no hotspots.json / pl2_sync change.
+- Code wash: none in game code (no tint on pl2 toi in jpm.js/jmap/jkit). The (37,42,58)@0.45 wash was baked into the old pictures by PL nfix.py; new pictures carry none. CODE SHA: none (no code change).
+- Brightness (mean RGB): old toi 35-55 -> new min 92.8 / median 109 / max 141.7 (sang median ~150). Edge correlation vs the sang reference >=0.62 for all (layout kept). Size median 266 KB (111 over 250 KB; existing sang median 244 KB, max 582 KB).
+- Checked: all 159 looked at (4 workers on contact sheets, then me on 10 sheets of 16): buildings, people, festival decoration (tang drapes, lanterns, offering tables, snow) kept; no text/moon disc/weather.
+- Caveats: (1) spring/summer/autumn courts read pale blue-white (moonlit stone), a little like frost; (2) truong-mon ha/thu/xuan brightness 92-99, slightly yellow-green moss; (3) more vivid than PL's muted watercolour (owner approved the sample look).
+- Sheets: dev/handover/reports/pl-night-art/final_00..09.jpg (16 per sheet, name + mean brightness); table.csv (name, KB, brightness).
+- Untouched: 11 map-*-toi (PL originals, not washed).
+- SẴN SÀNG KIỂM.
