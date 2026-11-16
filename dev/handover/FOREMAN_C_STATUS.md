@@ -22,7 +22,8 @@ Base main at start: 900ace7fb.
 | C18 kit-popup-sample review | review/kit-popup-sample-r1 | sonnet | LIVE (train-2) |
 | C19 pic-dupes-r1 re-review | review/pic-dupes-r2 | sonnet | LIVE (train-2) |
 | D10 update-notes popup + Settings "Thông tin cập nhật" | review/update-notes-r1 | sonnet | PASS 8cc6ae7c8 |
-| D2 item-art | review/item-art-r4 @74c0dacb7 (7 keys redone, read at 1024, CDN + hashes OK) | sonnet | RUNNING: fix item-tp-tho-r08-b2 title 'triêu'→'triều' + short re-review (one worker does both) |
+| D2 item-art | review/item-art-r5 | sonnet | PASS aedcca1ed (all 44 poems read word by word; r08-b2/b3/b4 'triêu' + r02-b1, r07-b1 redone) |
+| D27 extra toilette reaction buttons (Ghi hận / Mách Hoàng hậu / Tặng lại / Hỏi bí quyết) | review/toil-react | sonnet | RUNNING (worker) |
 | C20 act-text resume | review/act-text @cef451ada → review/act-text-r1 | sonnet | REVIEWING text/scan/source fixes (brk 39→0, dots 8→0, kemgain→0, long 95→41); remaining 41 long rows + parser fixes BLOCKED on kit keeper (K8) |
 | C6 mk-colour + D28 reveal | review/mk-colour-r1 | sonnet | PASS b9e201845 — CONDITIONAL on kit keeper (K2: whole §60 + §60.5 new vs main) |
 | D16 Tứ đức sub-styles + CDNH works | review/tuduc-sub @40d05c25d (on main + recipes-r2; new jtds.js last; 4 work kinds × 10 recipes × 4 tiers, 328 pictures on CDN; teacher fee 8% of pay; consort teacher favour scaled) → review/tuduc-sub-r1 | opus | REVIEWING |
@@ -34,7 +35,7 @@ Base main at start: 900ace7fb.
 | D49 collection milestones (Sổ luân hồi titles at 20/50/100/200 items + Phúc duyên once per life; replace jearn stand-in) | review/collect-ms | sonnet | RUNNING (worker) |
 | D7 personality + 13 virtues + Thái hậu archetypes | review/personality @6f1ca343a | opus | RUNNING (resumed worker) |
 | D29 schedules/roster re-port | review/schedules3 (from review/schedules2 + wip/kit-j95) | opus | RUNNING (worker) |
-| D-list rest (D3, D6, D9, D11–D15, D17–D20, D22, D25–D27, D44, D51) | — | per item | QUEUED (D30–D34, D36, D38–D42 moved to Foreman B — not ours) |
+| D-list rest (D3, D6, D9, D11–D15, D17–D20, D22, D25, D26, D44, D51) | — | per item | QUEUED (D30–D34, D36, D38–D42 moved to Foreman B — not ours) |
 
 ## PASS (for the main coordinator to fast-forward)
 PASS review/pic-dupes-r2 bc0a1ba24ad4eba5ee186b110191ab3c4c3fdf56 (C19; descends from main 900ace7f; hanh-le-v2 on CDN, 0 different-act dupes; only generated index.html/sw.js/assets.json conflicts, rebuilt)
@@ -52,6 +53,7 @@ PASS review/result-sfx-r1 18926abcc9a0829643502a5e65751a61256f6b06 (D1; descends
 PASS review/placeholder-pics3-r1 696127b324f704c5473e498d2308dd85bb0d709d (D46b; descends from main 9b4f1697a; CONTAINS opt-pics2-r1 and placeholder-pics2-r1 → merge only this one for all three; live ACTS.json valid, no key lost; rule-steal scan 29,308 strings: only 'Thuê thợ thêu ngoài cung' moved off a real picture (padlock → embroidery); missing_pics: events 0/309, acts 0/110)
 PASS review/small-art-wire-r1 6bce72fa60b747a398cbd66776889c3622da282a (D45; descends from 4f5e5f3b3, main moved to 9b4f1697a → one more merge; CONDITIONAL K10; promo-rules 28/28 at 5 viewports after reviewer's chest-fit CSS fix; item-pics.js PASS on both; inv-grade.js fails identically on main (stale test); small-art-wire.js 'servant pouch' check flaky 1/3 at 755 — harden later; suggestion: ngocboi_r7 grade 4 → 3 (reads Ngự tứ though Nội vụ phủ issues it))
 PASS review/outside-art-r1 9b4a257d0db38bbaa0d649391e51d0269667d0da (D48; notes-only commit, art is CDN-only; descends from a3dbdc19f — main moved, trivial merge; all 13 scenes, 2 maps + hotspots, Huynh trưởng 2×4 ages checked by eye; cutcheck clean)
+PASS review/item-art-r5 aedcca1ed5cad2061a594a69f913c52f44da728a (D2; descends from main 9b4f1697a; art already live on CDN; site rebuilt so assets.json/sw.js hashes match the 338+21+15 replaced item pictures)
 PASS review/update-notes-r1 8cc6ae7c8f63f72436afceed38b4143aa3bc815b (D10; descends from main a523531da; update-notes.js 13/13 at 6 viewports; COORDINATOR: next merged release needs a NEW id in dev/build/jnotes.js CTM_NOTES (e.g. '2026-11-17'), never extra lines under an already-seen id; recipe in dev/PROGRESS_update-notes.md)
 (ON HOLD — do not merge yet, owner fixes pending on cycle-r2) review/cycle-r1 7ea3ec447a958971df7fedb41a5d784d4478bb3e (A7; descends from main a523531da AND contains thaiy-r1 f7c61f829 → one fast-forward ships A6+A7; cycle.js ALL OK on final sha at 5 viewports; thaiy 49/49 + coop-e2e 59/59 after 2afdafc39; reviewer raised Kính sự phòng bạc price to ~1/4 of bổng BAL.cyc.read=[10,14,18,24,31,41,54,70], peek odds 35→50, hideMaidO 35; note 2.5 MB of screenshots sit in branch history (commit 7ed80bbae), removed from tree)
 
