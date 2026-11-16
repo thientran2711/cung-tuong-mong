@@ -7,7 +7,9 @@ function start(){
      arts:{cam:0,ky:0,thi:0,hoa:0,vu:0,y:0},artp:{cam:0,ky:0,thi:0,hoa:0,vu:0,y:0},master:0,confined:0,shield:0,tablet:0,
      place:"home",visit:null,tonight:null,inv:[],an:0,nightLog:[],evm:{},rl:{},hieu:"",block:0,dress:null,asthma:false,shop:[],seen:{},emp:mkEmp(),st:{step:0,done:0,tag:""},recorded:false,nights:0,thDead:false,logs:[],caseEv:0,avenged:false};
   rivals=[];S.name=freshName();apply(o.o);if(o.art)Object.assign(S.arts,o.art);S.ally=o.ally?1:0;
-  for(const [r,q] of [[7,1],[5,0],[4,0],[4,0],[3,0],[3,0],[2,0],[2,0],[1,0],[1,0],[0,0],[0,0]])rivals.push(newRival(r,q));spreadTraits();
+  for(const [r,q] of BAL.ps.harem)rivals.push(newRival(r,q));
+  /* palace-start: a young harem (the Emperor's household from before the throne + the first draft), 3–5 small children (psSeedKids), court still weak (S.reign: hook for the Emperor's side story, D5) */
+  rivals.forEach(v=>{v.age=BAL.ps.consAge[0]+R(BAL.ps.consAge[1]+1)+(v.queen||v.rank>=4?BAL.ps.consAge[2]:0)});psSeedKids();S.ps=1;S.reign={y0:S.year,power:BAL.ps.power0,ch:0,side:null};/* D5 hook: Emperor side story chapters (ch) and her side road: side = "emp" | "th" | "quyen" */spreadTraits();
   Object.assign(S,drawFace());rivals.forEach(v=>Object.assign(v,drawFace()));S.emp.face=R(Math.max(1,(AV.emperor||[]).length));
   normAll();
   if(S.ally){const v=pick(liveRivals(false));if(v){relAdd(S,v,35);v.ghen=0;log(`${v.name} là người quen cũ, sẵn lòng che chở ngươi.`)}}
@@ -16,7 +18,7 @@ function start(){
   quiet=false;used=0;tab="act";
   const E=S.emp;
   pushModal({t:"Nhập cung",faces:[[pMe(),S.name],[pEmp(),"Hoàng thượng"],[pMaid(),S.maid.name]],h:`<p>${S.name}, ${S.age} tuổi, ${o.n}. ${o.t} Hôm nay ngươi được đưa vào cung, phong <b>${RANKS[S.rank].n}</b>. Cung nữ ${S.maid.name} theo hầu ngươi từ nhà.</p>
-   <p><b>${empName()}</b>, ${E.age} tuổi: ${E.traits.map(t=>ETRAITS[t][0]).join(", ")}.</p>
+   <p><b>${empName()}</b>, ${E.age} tuổi: ${E.traits.map(t=>ETRAITS[t][0]).join(", ")}. ${S.ps?psOpenText():""}</p>
    <p><b>Tuyến truyện: ${s.t}.</b> ${s.goal}${o.k==="td"?` Kẻ vu cho cha ngươi là ${S.foeDad}; con gái hắn, ${S.foe}, đang ở trong cung.`:""}</p>
    <p class="past">Mỗi tháng ba tuần; mỗi tuần bốn buổi (sáng, trưa, chiều, tối), mỗi buổi 4 khắc. Mở Bản đồ để đi gặp người, chạm vào người để nói chuyện hay ra tay.</p>`});
   flip();newLots();deal();render();
