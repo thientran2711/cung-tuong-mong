@@ -96,7 +96,9 @@ function ventNpc(p,n){try{const e=p&&p.emo;if(e&&e.v)e.v=Math.max(0,e.v-n);if(e&
 const sgn=n=>(n>0?"+":"−")+Math.abs(n);
 /* ======================= (1) HER EMOTION ACT CARDS ======================= */
 const EA_ART={"Đập đồ":"trut-gian-h","Mắng cung nữ":"phat-vo-co-h","Khóc thầm":"nhin-loi-mia-h","Viết thư nhà":"gui-thu-qua-con-h","Đàn hát tự thưởng":"dan-dem-trang","Thắp hương cầu an":"cau-tu"};
-(function(){if(typeof kitActArt!=="function")return;const k0=kitActArt;kitActArt=function(name){const r=k0.apply(this,arguments);try{const key=EA_ART[name];if(key&&!(KIT_ACTS.acts||{})[name])return Object.assign({},r,{src:`img/act-${key}.webp`})}catch(e){}return r}})();
+/* the card's group label (KIT §6.1 categories) by what the act is, not by the name's words ("tự thưởng" read as Ban thưởng) */
+const EA_CAT={"Đập đồ":["nghi-ngoi","Nghỉ ngơi"],"Mắng cung nữ":["giao-thiep","Giao thiệp"],"Khóc thầm":["nghi-ngoi","Nghỉ ngơi"],"Viết thư nhà":["giao-thiep","Giao thiệp"],"Đàn hát tự thưởng":["hoc-tap","Học tập"],"Thắp hương cầu an":["le-nghi","Lễ nghi"]};
+(function(){if(typeof kitActArt!=="function")return;const k0=kitActArt;kitActArt=function(name){const r=k0.apply(this,arguments);try{const key=EA_ART[name];if(key){const c=EA_CAT[name];return Object.assign({},r,{src:(KIT_ACTS.acts||{})[name]?r.src:`img/act-${key}.webp`,cat:c[0],label:(KIT_ACTS.cats||{})[c[0]]||c[1]})}}catch(e){}return r}})();
 function eaStamp(){return W()*10+(S.buoi||0)}
 function eaCards(){const M=eaMine();if(!M.g)return[];const g=M.g==="ghen"?"buon":M.g;const C=E().card,A=[];const mood=n=>`tâm trạng ${sgn(n)}`;
  const emoNm=()=>{try{const e=emoGet(S);return e&&e.k!=="binh"&&e.k!=="vui"?EMO[e.k]:""}catch(e){return""}};
@@ -109,7 +111,7 @@ function eaCards(){const M=eaMine();if(!M.g)return[];const g=M.g==="ghen"?"buon"
  else if(g==="buon"){const c=C.khoc,c2=C.thu;
   A.push(mk("khoc",{n:"Khóc thầm",dom:"Sức khỏe",t:"Đóng cửa tẩm cung, một mình khóc cho vơi nỗi lòng.",c:{suc:-c.suc},x:`${mood(c.mood)}${emoNm()?`, bớt ${emoNm()} ${c.emo}`:""}`,go:()=>{const d=ventMe(c.mood,"khóc cho vơi lòng",c.emo);log(`Ngươi khóc một hồi, lòng nhẹ đi (tâm trạng ${sgn(d||c.mood)}).`)}}));
   A.push(mk("thu",{n:"Viết thư nhà",dom:"Giao thiệp",t:"Viết thư gửi về nhà, nhờ thái giám mang ra ngoài cung.",c:{bac:-c2.bac},x:`${mood(c2.mood)}${emoNm()?`, bớt ${emoNm()} ${c2.emo}`:""}`,go:()=>{const d=ventMe(c2.mood,"viết thư nhà",c2.emo);log(`Ngươi viết thư gửi về nhà, kể nỗi nhớ mong; lòng ấm lại (tâm trạng ${sgn(d||c2.mood)}).`)}}))}
- else if(g==="vui"){const c=C.dan;A.push(mk("dan",{n:"Đàn hát tự thưởng",dom:"Tài nghệ",t:"Lòng đang vui, ôm đàn hát một khúc tự thưởng cho mình.",w:{tai:c.tai},x:`kèm: ${mood(c.mood)} (lòng lắng lại) · kẻ ganh nghe tiếng đàn, ghen +${c.ghen}`,
+ else if(g==="vui"){const c=C.dan;A.push(mk("dan",{n:"Đàn hát tự thưởng",dom:"Tài nghệ",t:"Lòng đang vui, ôm đàn hát một khúc tự thưởng cho mình.",w:{tai:c.tai},x:`kèm: ${mood(c.mood)} (lòng lắng lại) · kẻ ganh ghen +${c.ghen}`,
    go:()=>{try{ghenAll(c.ghen)}catch(e){}const d=ventMe(c.mood,"đàn hát tự thưởng");log(`Tiếng đàn vọng ra ngoài cung; lòng ngươi lắng lại (tâm trạng ${sgn(d||c.mood)}), kẻ ganh thì ghen thêm.`)}}))}
  else if(g==="so"){const c=C.huong;A.push(mk("huong",{n:"Thắp hương cầu an",dom:"Đức",t:"Thắp hương ở Phật đường, khấn cầu bình an cho lòng yên.",c:{bac:-c.bac},w:{duc:c.duc},x:`${mood(c.mood)}${emoNm()?`, bớt ${emoNm()} ${c.emo}`:""}`,
    go:()=>{const d=ventMe(c.mood,"thắp hương cầu an",c.emo);log(`Khói hương lượn lờ; lòng ngươi yên lại (tâm trạng ${sgn(d||c.mood)}).`)}}))}
