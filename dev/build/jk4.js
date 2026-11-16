@@ -131,12 +131,20 @@ function kitHdClash(hd,tc){try{const me=hd.querySelector(":scope>.me");if(!me||!
  const leaf=(root,f)=>{const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let n;while(n=w.nextNode()){if(!n.nodeValue.trim())continue;const rg=document.createRange();rg.selectNodeContents(n);for(const q of rg.getClientRects())if(q.width)f(q)}
   root.querySelectorAll("img,svg").forEach(e=>{const q=e.getBoundingClientRect();if(q.width)f(q)})};
  leaf(me,q=>{r=Math.max(r,q.right)});leaf(tc,q=>{l=Math.min(l,q.left)});return r>0&&l<1e9&&r+8>l}catch(e){return false}}
+/* one-row bar only from this width (1366 iPad Pro); 1000–1279 (iPad 1180, split views) = the two-row bar, always */
+const KHD1_MIN=1280;
 function kitHdFit(){try{const hd=document.querySelector("header.hud");if(!hd)return;kitHdMe(hd);const wide=matchMedia("(min-width:1000px)").matches;
- if(!wide){hd.classList.remove("khd2");return}const had=hd.classList.contains("khd2");hd.classList.remove("khd2");
+ if(!wide){hd.classList.remove("khd2");return}const had=hd.classList.contains("khd2");
+ /* review/stage-side (owner 16/11 "nó không có giữ cố định một chỗ"): the bar form is FIXED per viewport, never re-decided by content
+    (a dialog, a longer clothes / weather line). < KHD1_MIN px wide = always two rows; wider = one row, measured once per viewport size,
+    and once it needed two rows it keeps them for that size (one-way latch = hysteresis: it never flips back on shorter text). */
+ const vk=innerWidth+"x"+innerHeight;if(window.__khdVk!==vk){window.__khdVk=vk;window.__khd2=innerWidth<KHD1_MIN}
+ let bad=!!window.__khd2;
+ if(!bad){hd.classList.remove("khd2");
  /* the one-row bar always wears the seal in its right gutter (KIT 39 .kseal-pad: 1000–1179 px cells icon-only) — measure it in that form */
  if(hd.classList.contains("has-kseal"))hd.classList.add("kseal-pad");
  const tc=document.getElementById("k3tc"),tt=document.getElementById("k3tt");
- const bad=hd.scrollWidth>hd.clientWidth+1||!!(tc&&tt&&tc.offsetParent&&tt.scrollWidth>tc.clientWidth+1)||kitHdClash(hd,tc);
+ bad=hd.scrollWidth>hd.clientWidth+1||!!(tc&&tt&&tc.offsetParent&&tt.scrollWidth>tc.clientWidth+1)||kitHdClash(hd,tc);if(bad)window.__khd2=true}
  hd.classList.toggle("khd2",bad);try{window.kitSealHud&&kitSealHud()}catch(e){}if(had!==bad){try{const hb=hd.getBoundingClientRect();document.documentElement.style.setProperty("--k3hb",Math.round(hb.bottom)+"px");window.j59lay&&j59lay()}catch(e){}}}catch(e){}}
 window.kitHdFit=kitHdFit;
 if(typeof renderHUD==="function"){const r0=renderHUD;renderHUD=function(){const r=r0.apply(this,arguments);kitHdFit();return r}}
@@ -736,32 +744,40 @@ window.kitActCompactOn=kitActCompactOn;
  if(typeof kpActArt!=="function")return;const p0=kpActArt;kpActArt=function(b){const r=p0.apply(this,arguments);try{const kan=b.querySelector(".kan");const nm=kan?(typeof kpActName==="function"?kpActName(kan):kan.textContent.trim()):"";
   const own=!!(nm&&typeof kitActKey==="function"&&kitActKey(nm))||(typeof kitPhActReady==="function"&&kitPhActReady());/* KIT §59: the placeholder stands in */b.classList.toggle("kanoart",!own);if(!own){const a=b.querySelector(":scope > .kaart");if(a)a.remove();b.classList.remove("kart")}}catch(e){}return r};window.kpActArt=kpActArt})();
 (function(){if(typeof render!=="function")return;const r0=render;render=function(){const r=r0.apply(this,arguments);try{kitActCompactOn(document.getElementById("panel"))}catch(e){}return r};window.render=render})();
+/* KIT §43 + §6.2 (review/opt-pics): the compact card rules are ONE string (kitCompactCSS(B)) used twice: inside a narrow kpane, and ALWAYS for a
+   dialog option card (B = button.ka.kart.kopt, jopic) — the one compact act-card form game-wide. w × h = picture box: owner override 15/11 — the small card's picture is a 3:4 PORTRAIT RECTANGLE (84x112;
+   72x96 in a pane under 420 px), the act art's own aspect, never a square crop; the big Hành sự card is untouched. */
+function kitCompactCSS(B,w,h){w=w||84;h=h||w;return `
+ ${B}{--kaw:${w}px!important;--kah:${h}px!important;display:flex!important;flex-direction:row!important;align-items:flex-start!important;gap:10px!important;width:100%!important;min-width:0!important;max-width:none!important;padding:8px 10px!important}
+ ${B}>.kaart{flex:0 0 ${w}px!important;width:${w}px!important;height:${h}px!important;border-radius:6px!important;overflow:hidden!important;box-shadow:0 0 0 2px var(--kcc0,#b08a4a)!important;background:#efe4cc!important}
+ ${B}>.kaart>.ksart{width:100%!important;height:100%!important;margin:0!important;padding:0!important;border:0!important;background:none!important;box-shadow:none!important}
+ ${B}>.kaart>.ksart>:not(img){display:none!important}
+ ${B}>.kaart>.ksart>img{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-fit:cover!important;border:0!important;border-radius:0!important;margin:0!important}
+ ${B}>.kabody{flex:1 1 auto!important;min-width:0!important;gap:3px!important}
+ ${B} .kat{flex-wrap:nowrap!important;align-items:flex-start!important;gap:6px!important}
+ ${B} .kat>.kan{flex:1 1 auto!important;min-width:0!important}
+ ${B} .kat>:not(.kan){flex:0 0 auto!important;white-space:nowrap!important}
+ ${B} .klead{display:-webkit-box!important;-webkit-box-orient:vertical!important;-webkit-line-clamp:1!important;overflow:hidden!important}
+ /* KIT §51 (kit-table r6): the Cần/Tốn/Được rows stay ONE kit table (j63 .kb grid, rows display:contents) so every value starts at the
+    same x; only the value cell flows its chips. (Was a flex chip flow: short values sat beside the label, long ones under it.) */
+ ${B} small.kb{display:grid!important;grid-template-columns:fit-content(var(--kt-lab,max(34%,7rem))) minmax(0,1fr)!important;column-gap:6px!important;row-gap:2px!important}
+ ${B} small.kb>.kr>.krl{font-size:.66rem!important;align-self:baseline}
+ ${B} small.kb>.kr>.krv{display:flex!important;flex-wrap:wrap!important;gap:2px 4px!important;min-width:0!important}
+ ${B} small.kb>.kr>.krv>*{display:inline-block!important;white-space:normal!important;max-width:100%!important;overflow-wrap:anywhere}
+ ${B} small.kb>.kr>.krv>.ksep{display:none!important}
+
+`}
+window.kitCompactCSS=kitCompactCSS;
 (function(){const st=document.createElement("style");st.id="kit-act-compact";st.textContent=`
 button.ka.kanoart>.kaart{display:none!important}
 .pc>.pcr,.kpanec{container:kpane/inline-size}
 @container kpane (max-width:640px){
  button.ka.kanoart>.kaart{display:none!important}
  .pcb:has(> button.ka.kart),.cards:has(> button.ka.kart){display:flex!important;flex-direction:column!important;gap:8px!important;grid-template-columns:none!important}
- button.ka.kart{--kaw:84px!important;--kah:84px!important;display:flex!important;flex-direction:row!important;align-items:flex-start!important;gap:10px!important;width:100%!important;min-width:0!important;max-width:none!important;padding:8px 10px!important}
- button.ka.kart>.kaart{flex:0 0 84px!important;width:84px!important;height:84px!important;border-radius:6px!important;overflow:hidden!important;box-shadow:0 0 0 2px var(--kcc0,#b08a4a)!important;background:#efe4cc!important}
- button.ka.kart>.kaart>.ksart{width:100%!important;height:100%!important;margin:0!important;padding:0!important;border:0!important;background:none!important;box-shadow:none!important}
- button.ka.kart>.kaart>.ksart>:not(img){display:none!important}
- button.ka.kart>.kaart>.ksart>img{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-fit:cover!important;border:0!important;border-radius:0!important;margin:0!important}
- button.ka.kart>.kabody{flex:1 1 auto!important;min-width:0!important;gap:3px!important}
- button.ka.kart .kat{flex-wrap:nowrap!important;align-items:flex-start!important;gap:6px!important}
- button.ka.kart .kat>.kan{flex:1 1 auto!important;min-width:0!important}
- button.ka.kart .kat>:not(.kan){flex:0 0 auto!important;white-space:nowrap!important}
- button.ka.kart .klead{display:-webkit-box!important;-webkit-box-orient:vertical!important;-webkit-line-clamp:1!important;overflow:hidden!important}
- /* KIT §51 (kit-table r6): the Cần/Tốn/Được rows stay ONE kit table (j63 .kb grid, rows display:contents) so every value starts at the
-    same x; only the value cell flows its chips. (Was a flex chip flow: short values sat beside the label, long ones under it.) */
- button.ka.kart small.kb{display:grid!important;grid-template-columns:fit-content(var(--kt-lab,max(34%,7rem))) minmax(0,1fr)!important;column-gap:6px!important;row-gap:2px!important}
- button.ka.kart small.kb>.kr>.krl{font-size:.66rem!important;align-self:baseline}
- button.ka.kart small.kb>.kr>.krv{display:flex!important;flex-wrap:wrap!important;gap:2px 4px!important;min-width:0!important}
- button.ka.kart small.kb>.kr>.krv>*{display:inline-block!important;white-space:normal!important;max-width:100%!important;overflow-wrap:anywhere}
- button.ka.kart small.kb>.kr>.krv>.ksep{display:none!important}
+${kitCompactCSS("button.ka.kart",84,112)}
 }
 @container kpane (max-width:420px){
- button.ka.kart{--kaw:72px!important;--kah:72px!important}
- button.ka.kart>.kaart{flex-basis:72px!important;width:72px!important;height:72px!important}
+ button.ka.kart{--kaw:72px!important;--kah:96px!important}
+ button.ka.kart>.kaart{flex-basis:72px!important;width:72px!important;height:96px!important}
 }
 `;document.head.appendChild(st)})();
