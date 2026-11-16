@@ -173,7 +173,7 @@ function vlSrcTxt(e0){if(!e0)return"";const e=Object.assign({},e0,{from:e0.src||
  const v=typeof byKey==="function"&&e.from?byKey(e.from):null;return v&&v.name?`${v.name} tặng`:"đồ trong rương"}
 (function(){if(typeof invHTML!=="function")return;const i0=invHTML;invHTML=function(){const W=(S.inv||[]).filter(e=>vlIs(e)&&!e.h);W.forEach(e=>e.h=1);let h;try{h=i0.apply(this,arguments)}finally{W.forEach(e=>delete e.h)}
  let x="";try{x=vlInvHTML()}catch(e){console.error(e)}if(!x)return h;if(W.length)h=h.replace(/<p class="past">Rương trống\.[^<]*<\/p>/,"");
- if(vlNeed(S))return x+h;const j=h.indexOf('<div class="ph"><span>Đang đeo');return j<0?h+x:h.slice(0,j)+x+h.slice(j)}})();
+ if(vlNeed(S))return x+h;const j=h.indexOf('<div class="ph"><span>Đang mặc');return j<0?h+x:h.slice(0,j)+x+h.slice(j)}})();
 document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.closest("[data-vl],[data-vlpick]");if(!b||b.disabled)return;ev.stopPropagation();
  if(b.dataset.vlpick!=null){window.__vlPick=+b.dataset.vlpick;try{render()}catch(e){}return}
  const a=b.dataset.vl;if(a==="get")vlGetUI();else if(a==="off")vlOffUI();else if(a==="wear")vlWearUI(+b.dataset.ix)},true);

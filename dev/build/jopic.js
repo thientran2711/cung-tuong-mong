@@ -15,6 +15,21 @@
    A key whose file is not on the CDN (img/_index.json) is skipped (next rule).
    Tap / click on the picture = kitPicZoom(src) (does not choose the option). ============================================================ */
 const KIT_OPT_RULES=[
+ /* review/opt-pics2 (D53): meaning groups that had no picture (hands-only gpt-2-6 paintings, ids dev/figwork/optpics2/gens.txt) + reuse of existing act pictures */
+ [/^(thêu thật kỹ|thêu cờ)/i,"opt-theu-khuya"],[/(thêu chung|^cùng làm)/i,"opt-lam-chung"],
+ [/^(mang canh khuya|sang hầu ngài giữa đêm)/i,"opt-hau-dem"],[/^(ra hồ hầu|theo hầu trọn|tiếp chuyện cả buổi)/i,"opt-hau-ben"],
+ [/^(ngắt hoa dâng|làm thơ vịnh)/i,"opt-dang-hoa-tho"],[/^(chỉ bảo|tận tình chỉ bảo|nghiêm túc góp ý)/i,"opt-chi-bao"],
+ [/^(bỏ tiền mua bù|bỏ bạc may thêm|góp chút ít)/i,"opt-bo-bac"],[/^(bỏ bạc xin xem một quẻ|treo bùa)/i,"opt-bua-que"],
+ [/^(bớt nước cung|phát áo bông)/i,"opt-chia-cung-nhan"],[/^thay hết nước/i,"opt-thay-do"],
+ [/^(ra lệnh phòng bị)/i,"opt-canh-giu"],
+ [/^(cáo bận việc|hẹn hôm khác)/i,"opt-cao-ban"],[/^tránh mặt/i,"opt-tranh-mat"],[/^(giữ lễ, không|giữ phần mình)/i,"opt-giu-le"],
+ [/^(bắt tay với|sang thân thiết)/i,"opt-bat-tay"],[/^đi cùng nàng/i,"opt-di-cung"],[/^lặng lẽ báo cho/i,"opt-thi-tham"],
+ [/^can thái hậu/i,"opt-can-ngan"],[/^khắc dấu/i,"opt-gia-mao"],[/^ra tay trước/i,"opt-ra-tay"],[/^cho người mang đi xa/i,"opt-mang-di-xa"],
+ [/^bánh bột hấp/i,"opt-banh-la"],[/^thử tài trước sứ thần/i,"opt-trinh-dien"],
+ [/^hỏi .*(thái giám|người coi)/i,"do-la-h"],[/^thề thốt/i,"minh-oan-h"],[/^làm như không nghe/i,"lam-nhu-khong-thay-h"],
+ [/^tự tay vào bếp/i,"opt-vao-bep"],[/^thuê đầu bếp/i,"opt-thue-dau-bep"],[/^nhường .* phần đẹp/i,"opt-nhuong-phan-dep"],[/^cho nghỉ/i,"opt-nghi-viec"],
+ [/^bắt làm tiếp/i,"opt-bat-lam-tiep"],[/^nói thật món ăn/i,"opt-noi-that-mon"],[/^[^()]{4,40} \((liều|khó|năm ăn năm thua|khá|chắc|rất chắc|nắm chắc)\)$/i,"opt-mon-an"],
+ [/^nằm yên/i,"o-yen-nghi-h"],[/^ở nhà đọc sách/i,"doc-sach-giai-khuay"],[/^gắng chịu, che mặt/i,"deo-mang-che-h"],
  /* (meaning group → picture key; "opt-*" = painted for this group by review/opt-pics, every other key = an existing act / choice picture reused) */
  /* — leave it / not now — */
  [/^(thôi|bỏ qua|không mua|đóng$|để sau|nghĩ lại|đã rõ|thôi, để sau|thôi, ở lại|cảm ơn, không cần)/i,"opt-thoi"],
