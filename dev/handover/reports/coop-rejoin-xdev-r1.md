@@ -64,3 +64,9 @@ text, no page errors. Shots looked at (755x1000, 1180x820).
    phòng" takes the seat back. A "soft" reconnect flag (do not replace a live socket) would need a Worker + client change.
 2. Copy lag (from the worker's report): up to 3 s of acts can be lost if a device dies without pagehide.
 3. The flaky friend-stats check above.
+
+## LIVE SMOKE (after merge to main c4b0c58f): SMOKE PASS
+- Deploy co-op Worker run #4 (c4b0c58f): the production Worker answers {t:"seat"} with seatok, and the room reply carries msv (probe at 08:5x Z).
+- dev/test/coop-rejoin-stats.js vs https://ctm-coop.victoria-tntt.workers.dev: 83/83. Covers: same-device rejoin (host, guest), leave on
+  device A and rejoin from a NEW device B with empty storage (guest, host: exact khắc/tài/sắc/danh/buổi), old device returns (newest wins,
+  "moved", no seat fight), sleep/wake case W (woken device takes the newer copy, no seatold), next-week merges keep the gains, no page errors.
