@@ -33,7 +33,7 @@ Base main at start: 900ace7fb.
 | D6 econ-items | review/econ-items @467fe2193 (jeitem.js last; ice, skim by standing, servant pocketing, robe re-issue roads, girlhood chest) → review/econ-items-r1 | opus | REVIEWING (session session_011xDdVQ5xcrYDf3N1snQ5L1) |
 | C6 mk-colour + D28 reveal | review/mk-colour-r1 | sonnet | PASS b9e201845 — CONDITIONAL on kit keeper (K2: whole §60 + §60.5 new vs main) |
 | D16 Tứ đức sub-styles + CDNH works | review/tuduc-sub-r1 | opus | PASS adeb7de66 (reviewer capped Đức from handmade works at 1/month shared with Chép kinh — BAL.wkFinCap) |
-| D17 luxury / xa xỉ | review/luxury @86bca64e2 (jlux.js after jtoil; shared luxVerdict; occasion ranges; frugal edict; contest themes) → review/luxury-r1 | opus | REVIEWING (separate session) |
+| D17 luxury / xa xỉ | review/luxury @86bca64e2 (jlux.js after jtoil; shared luxVerdict; occasion ranges; frugal edict; contest themes) → review/luxury-r1 | opus | REVIEWING (session session_011xDdVSB4Ws7io5HBcz34c9) |
 | C7 balance-pass | review/balance-pass-r1 | opus | PASS 89ea80f78 (jbac.js reprice; reviewer fixed negative fair target that over-priced 25/48 'dearer' rows) |
 | D53b material-dialog pictures | review/opt-pics3-r1 | sonnet | PASS f02abdc41 |
 | C8 fig-bg step 2 | review/fig-bg @acc254846 | sonnet | BUILT, BLOCKED on KIT KEEPER (K1): 14 painted scrolls on CDN, jfigbg.js, KIT §61; tests 6 viewports (390x844 rival dialog img height 0 not investigated; 2-person dialog shows one scroll) |
