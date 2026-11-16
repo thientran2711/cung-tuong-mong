@@ -7,6 +7,8 @@
      1 point of thiện cảm / Lòng / Thái hậu / Hoàng hậu = BAL-free estimate: a talk act gives ~3 for 1 khắc → 1/3 khắc
      odds: E = p·V(success) − (1−p)·V(failure) − costs; V(success) = max(value of its gains, the silver price) (paying shows it is worth it)
    gap = (E_alt − E_silver) / (silver price in khắc): > +0.3 the free road is the obvious pick, < −0.3 the silver road is; |gap| ≤ 0.3 = hesitate.
+   Groups: j67 chapter beats, j72 phụ tuyến, jecon scheme pairs, jrest, monthly duty, j68 common events (EV6), act = Hành sự deck +
+   talk options + tài nghệ (value per khắc vs the best act without Bạc for the same main gain). Static census: dev/measure/bacsites.py.
    usage: NODE_PATH=$(npm root -g) node dev/measure/bacroad.js <page url> <out.json> [val.json]   → also prints a markdown table */
 const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT,VALF]=process.argv;
 const VAL=VALF?JSON.parse(fs.readFileSync(VALF,'utf8')):null;
@@ -58,15 +60,51 @@ const VAL=VALF?JSON.parse(fs.readFileSync(VALF,'utf8')):null;
    /* 5. monthly duty: Chu toàn lễ nghĩa (bạc) vs Bớt lễ nghĩa (Danh, Đức) */
    try{const d=econDuty(S),bt=econBan(S);if(d+bt>0){const sk=BAL.dutySkip.danh+Math.floor(Math.min(7,rk)/2);
     add('jecon','Chu toàn lễ nghĩa ↔ Bớt lễ nghĩa',road({n:'Chu toàn lễ nghĩa',bac:d+bt,p:100,Vw:0,Vl:0}),road({n:'Bớt lễ nghĩa',p:100,other:sk*vD+BAL.dutySkip.duc*vDuc,Vw:0,Vl:0}))}}catch(e){}
+   /* 6. common events (j68e–h EV6): every option paying Bạc vs the best option of the same card without Bạc (c6 spec captured) */
+   if(typeof E68!=='undefined'){const c0=window.__c6o||(window.__c6o=c6);c6=function(n,sp){const r=c0(n,sp);try{r.__s=sp}catch(e){}return r};
+    /* a gain/cost in words only (wt / lt / k tokens) = 3 khắc each (BAL.bacVal.tok) */
+    const tok=(L,cls)=>(L||[]).filter(t=>typeof t==='string'&&t.indexOf('class="'+cls+'"')>=0).length*((BAL.bacVal&&BAL.bacVal.tok)||3);
+    const relV=sp=>{let v=0;for(const [a,x] of (sp.r||[]))v+=(a&&a.k==='emp'?x*vSung:x*vRel);return v},relL=sp=>{let v=0;for(const [a,x] of (sp.lr||[]))v+=(a&&a.k==='emp'?x*vSung:x*vRel);return v};
+    const r6=(o)=>{const sp=o.__s||{};const c=o.fx||sp.c||{};return road({n:T(o.n),bac:-(c.bac<0?c.bac:0),p:sp.p==null?100:Math.max(5,Math.min(95,Math.round(sp.p))),suc:-(c.suc<0?c.suc:0),
+      other:Object.entries(c).filter(([k,x])=>k!=='bac'&&k!=='suc'&&x<0).reduce((a,[k,x])=>a-statV({[k]:x}),0)+tok(sp.k,'r'),Vw:statV(sp.w)+relV(sp)+(c.suc>0?c.suc*vSuc:0)+tok(sp.wt,'g')+tok(sp.k,'g'),Vl:-(statV(sp.l)+relL(sp))+tok(sp.lt,'r')})};
+    for(const ev of E68){let O=null;for(let t=0;t<6&&!O;t++){try{const pp=ev.pp?ev.pp():{};if(pp==null)continue;const X=e68X(ev,pp);if(!X)continue;O=ev.o(X)}catch(e){O=null}}
+     if(!O)continue;const sil=O.filter(o=>o&&o.fx&&o.fx.bac<0);if(!sil.length)continue;const alt=O.filter(o=>o&&!(o.fx&&o.fx.bac<0));
+     for(const s1 of sil){const S1=r6(s1);if(!alt.length){rows.push({src:'j68',id:ev.id,rank:rk,sil:S1,alt:null,gap:null,note:'NO ROAD WITHOUT SILVER'});continue}
+      /* different options = different outcomes: each road is valued by ITS OWN gains (E = p·Vw − (1−p)·Vl − costs); gap over max(price, 4 khắc = one buổi) */
+      const A=alt.map(r6);const price=S1.bac*vB(S.rank);const Eo=x=>E(x,x.Vw);const best=A.sort((a,b)=>Eo(b)-Eo(a))[0];const es=Eo(S1),ea=Eo(best);
+      rows.push({src:'j68',id:ev.id+' · '+S1.n,rank:rk,sil:S1,alt:best,price:+price.toFixed(2),Vs:+S1.Vw.toFixed(2),es:+es.toFixed(2),ea:+ea.toFixed(2),gap:+((ea-es)/Math.max(4,price)).toFixed(2),note:'own values'})}}
+    c6=c0}
+   /* 7. acts (Hành sự deck, talk options of the people she meets, tài nghệ): an act paying Bạc vs the best act WITHOUT Bạc giving the same main gain.
+      Unit cost C = khắc (cardCost) + Bạc + Sức + other costs + expected failure loss; U = p·value of gains. ratio = (U/C other) / (U/C silver):
+      gap = ratio − 1 (> +0.3 other act obvious, < −0.3 silver act obvious). Gains only in words (no numbers in w) are listed as UNPRICED. */
+   {const acts=[];const seen=new Set();const take=(a,from)=>{if(!a||typeof a!=='object'||!a.n)return;const nm=T(typeof a.n==='function'?a.n():a.n);if(seen.has(nm))return;seen.add(nm);acts.push(Object.assign({},a,{__n:nm,__f:from}))};
+    const r0=Math.random;for(let i=0;i<40;i++){try{deal();(deck||[]).forEach(a=>take(a,'deck'))}catch(e){}}
+    const ppl=[{kind:'emp'},{kind:'th'},{kind:'maid'},{kind:'ty'},{kind:'ksp'},{kind:'peddler'},{kind:'fallen'}];try{if(typeof queenP==='function'&&queenP())ppl.push({kind:'hh',ref:queenP()})}catch(e){}
+    try{liveRivals(true).slice(0,4).forEach(v=>ppl.push({kind:'rival',ref:v}))}catch(e){}
+    for(const q of ppl){try{(talkOpts(q)||[]).forEach(a=>take(a,'talk:'+q.kind))}catch(e){}}
+    try{(artActs()||[]).forEach(a=>take(a,'art'))}catch(e){}
+    const xV=a=>{/* gains written only in x ("Sủng +3", "Y thuật +1"): price the known names */let v=0;const x=T(a.x||'');const M=[[/Sủng \+(\d+)/,vSung],[/Danh \+(\d+)/,vD],[/Đức \+(\d+)/,vDuc],[/(?:Sắc|Tài|Tâm cơ|Tai mắt|thuật|nghệ)[^+·]{0,12}\+(\d+)/,2],[/(?:thiện cảm|quý ngươi|Lòng|thương)[^+·]{0,20}\+(\d+)/,vRel],[/Sức[^+·]{0,6}\+(\d+)/,vSuc]];for(const [re,u] of M){const m=x.match(re);if(m)v+=(+m[1])*u}return v};
+    const main=a=>{const w=Object.assign({},a.w||{});let best=null,bv=0;for(const [k,x] of Object.entries(w)){if(typeof x!=='number'||x<=0)continue;const v=statV({[k]:x});if(v>bv){bv=v;best=k}}
+      if(!best){const x=T(a.x||'');best=/Sủng/.test(x)?'sung':/Danh/.test(x)?'danh':/Đức/.test(x)?'duc':/thuật|nghệ/.test(x)?'art':/Sắc/.test(x)?'sac':/Tài/.test(x)?'tai':/thiện cảm|quý ngươi|Lòng|thương/.test(x)?'rel':null}return best};
+    const U=a=>{const p=Math.max(5,Math.min(95,typeof a.o==='number'?a.o:100))/100;const c=a.c||{};const vw=statV(a.w)+xV(a)+(c.suc>0?c.suc*vSuc:0);
+      const C=(typeof cardCost==='function'?cardCost(a):2)+(c.bac<0?-c.bac*vB(S.rank):0)+(c.suc<0?-c.suc*vSuc:0)+Object.entries(c).filter(([k,x])=>k!=='bac'&&k!=='suc'&&x<0).reduce((s,[k,x])=>s-statV({[k]:x}),0)+(1-p)*Math.max(0,-statV(a.l));
+      return{p:Math.round(p*100),vw,C,u:p*vw,eff:vw>0?p*vw/C:0}};
+    const A=acts.map(a=>Object.assign(a,{__m:main(a),__u:U(a)}));
+    for(const a of A){const c=a.c||{};if(!(c.bac<0))continue;const S1={n:a.__n,bac:-c.bac,p:a.__u.p,k:typeof cardCost==='function'?cardCost(a):2,suc:-(c.suc<0?c.suc:0),Vw:+a.__u.vw.toFixed(2),Vl:0};
+     if(!(a.__u.vw>0)){rows.push({src:'act',id:a.__f+' · '+a.__n,rank:rk,sil:S1,alt:null,gap:null,note:'UNPRICED (gain only in words: '+T(a.x||'').slice(0,60)+')'});continue}
+     const free=A.filter(b=>b!==a&&b.__m===a.__m&&!((b.c||{}).bac<0)&&b.__u.eff>0&&!b.lock).sort((x,y)=>y.__u.eff-x.__u.eff)[0];
+     if(!free){rows.push({src:'act',id:a.__f+' · '+a.__n,rank:rk,sil:S1,alt:null,gap:null,note:'NO ACT WITHOUT SILVER for '+a.__m});continue}
+     const A1={n:free.__n,bac:0,p:free.__u.p,k:typeof cardCost==='function'?cardCost(free):2,suc:-((free.c||{}).suc<0?free.c.suc:0),Vw:+free.__u.vw.toFixed(2),Vl:0};
+     rows.push({src:'act',id:a.__f+' · '+a.__n+' ['+a.__m+']',rank:rk,sil:S1,alt:A1,price:+(S1.bac*vB(S.rank)).toFixed(2),es:+a.__u.eff.toFixed(3),ea:+free.__u.eff.toFixed(3),gap:+(free.__u.eff/a.__u.eff-1).toFixed(2),note:'value per khắc'})}}
   }
   return out},[VAL]);
  R.errs=errs;fs.writeFileSync(OUT,JSON.stringify(R,null,1));
  const L=['| source | choice | rank | bạc | silver road (odds, khắc, Sức) | other road (odds, khắc, Sức, other) | price (khắc) | E silver | E other | gap | verdict |','|---|---|---|---|---|---|---|---|---|---|---|'];
  const vd=g=>g==null?'NO ROAD':g>0.3?'other road obvious':g<-0.3?'silver obvious':'ok (hesitate)';
- for(const r of R.rows)L.push(`| ${r.src} | ${r.id} | ${r.rank} | ${r.sil.bac} | ${r.sil.p}%, ${r.sil.k}k, Sức ${r.sil.suc} | ${r.alt?`${r.alt.p}%, ${r.alt.k}k, Sức ${r.alt.suc}${r.alt.other?`, +${r.alt.other.toFixed(1)}k`:''}`:'—'} | ${r.price??''} | ${r.es??''} | ${r.ea??''} | ${r.gap??''} | ${vd(r.gap)} |`);
+ for(const r of R.rows)L.push(`| ${r.src} | ${r.id} | ${r.rank} | ${r.sil.bac} | ${r.sil.p}%, ${r.sil.k}k, Sức ${r.sil.suc} | ${r.alt?`${r.alt.p}%, ${r.alt.k}k, Sức ${r.alt.suc}${r.alt.other?`, +${r.alt.other.toFixed(1)}k`:''}`:'—'} | ${r.price??''} | ${r.es??''} | ${r.ea??''} | ${r.gap??''} | ${r.gap==null?(r.note||'NO ROAD'):vd(r.gap)} |`);
  const n=R.rows.length,bad=R.rows.filter(r=>r.gap==null||Math.abs(r.gap)>0.3);
- const by={};for(const r of R.rows){const k=r.src+' r'+r.rank;by[k]=by[k]||{n:0,ok:0,alt:0,sil:0,none:0};by[k].n++;if(r.gap==null)by[k].none++;else if(r.gap>0.3)by[k].alt++;else if(r.gap<-0.3)by[k].sil++;else by[k].ok++}
- console.log('values (khắc):',JSON.stringify(R.vals));console.log('| group | pairs | ok | other road obvious | silver obvious | no road |\n|---|---|---|---|---|---|');
- for(const [k,v] of Object.entries(by))console.log(`| ${k} | ${v.n} | ${v.ok} | ${v.alt} | ${v.sil} | ${v.none} |`);
+ const by={};for(const r of R.rows){const k=r.src+' r'+r.rank;by[k]=by[k]||{n:0,ok:0,alt:0,sil:0,none:0,unp:0};by[k].n++;if(r.gap==null){if(/UNPRICED/.test(r.note))by[k].unp++;else by[k].none++}else if(r.gap>0.3)by[k].alt++;else if(r.gap<-0.3)by[k].sil++;else by[k].ok++}
+ console.log('values (khắc):',JSON.stringify(R.vals));console.log('| group | pairs | ok | other road obvious | silver obvious | no road | unpriced |\n|---|---|---|---|---|---|---|');
+ for(const [k,v] of Object.entries(by))console.log(`| ${k} | ${v.n} | ${v.ok} | ${v.alt} | ${v.sil} | ${v.none} | ${v.unp} |`);
  console.log(`total ${n}, off by >30%: ${bad.length}, errors ${JSON.stringify(errs.slice(0,3))}`);fs.writeFileSync(OUT.replace(/\.json$/,'.md'),L.join('\n')+'\n');
  await b.close()})().catch(e=>{console.error(e);process.exit(1)});

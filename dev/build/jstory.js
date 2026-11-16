@@ -109,9 +109,14 @@ window.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest('
    Sức −6, odds of the original −BAL.alt72Pen + Tai mắt (q72 skill "mat"). A branched step whose every branch costs Bạc gets the same extra
    branch built from its first silver branch. j72 deadlines already work the owner's way (fail only when the tuần deadline passes). */
 BAL.alt72Pen=10;
-function alt72(s,n){const AC=altCost(s.c&&s.c.bac,3,6,BAL.alt72Pen);/* built once at load: priced at the middle rank (Tiệp dư) */
- return{n:`${n} (nhờ người, không dùng bạc)`,p:Math.min(s.p!=null?s.p:(s.b==null?100:s.b),100)-AC.pen,sk:"mat",k:((s.k==null?1:s.k)+1+Math.round(bacK(s.c&&s.c.bac,3)*BAL.altK.k72)),c:{suc:-AC.suc},
- w:s.w,r:s.r,rb:s.rb,l:Object.assign({},s.l||{}),lr:s.lr,lrb:s.lrb,fn:s.fn,ok:s.ok,no:s.no,to:s.to,lto:s.lto||(s.f==="r"?"r":s.f)||"r",t:s.t,tw:s.tw,alt72:1}}
+/* built once at load, but priced when read: odds, khắc and Sức follow HER rank now (getters), as the silver is worth more to a low rank
+   (balance-pass: priced at the middle rank only, rank-1 roads were too cheap and rank-5 roads too dear, dev/review/bacroad-*.md) */
+function alt72(s,n){const bac=s.c&&s.c.bac,p0=Math.min(s.p!=null?s.p:(s.b==null?100:s.b),100),k0=(s.k==null?1:s.k)+1,rk=()=>(typeof S!=="undefined"&&S?S.rank|0:3);
+ const o={n:`${n} (nhờ người, không dùng bạc)`,sk:"mat",
+ w:s.w,r:s.r,rb:s.rb,l:Object.assign({},s.l||{}),lr:s.lr,lrb:s.lrb,fn:s.fn,ok:s.ok,no:s.no,to:s.to,lto:s.lto||(s.f==="r"?"r":s.f)||"r",t:s.t,tw:s.tw,alt72:1};
+ Object.defineProperty(o,"p",{get:()=>p0-altCost(bac,rk(),6,BAL.alt72Pen).pen,enumerable:true,configurable:true});
+ Object.defineProperty(o,"k",{get:()=>k0+Math.round(bacK(bac,rk())*BAL.altK.k72),enumerable:true,configurable:true});
+ Object.defineProperty(o,"c",{get:()=>({suc:-altCost(bac,rk(),6,BAL.alt72Pen).suc}),enumerable:true,configurable:true});return o}
 (function(){try{if(typeof T72==="undefined")return;for(const T of T72)for(const st of T.s||[]){if(st.w!=null&&!st.n)continue;
  if(!st.ch&&st.c&&st.c.bac<0){const o0={n:st.n,p:st.b<100?st.b:null,sk:st.sk,k:st.k,c:st.c,w:st.w,r:st.r,rb:st.rb,l:st.l,lr:st.lr,lrb:st.lrb,fn:st.fn,ok:st.ok,no:st.no,lto:st.f};
   st.ch=[o0,alt72(Object.assign({},st,{p:st.b}),st.n)]}

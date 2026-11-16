@@ -27467,9 +27467,14 @@ window.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest('
    Sức −6, odds of the original −BAL.alt72Pen + Tai mắt (q72 skill "mat"). A branched step whose every branch costs Bạc gets the same extra
    branch built from its first silver branch. j72 deadlines already work the owner's way (fail only when the tuần deadline passes). */
 BAL.alt72Pen=10;
-function alt72(s,n){const AC=altCost(s.c&&s.c.bac,3,6,BAL.alt72Pen);/* built once at load: priced at the middle rank (Tiệp dư) */
- return{n:`${n} (nhờ người, không dùng bạc)`,p:Math.min(s.p!=null?s.p:(s.b==null?100:s.b),100)-AC.pen,sk:"mat",k:((s.k==null?1:s.k)+1+Math.round(bacK(s.c&&s.c.bac,3)*BAL.altK.k72)),c:{suc:-AC.suc},
- w:s.w,r:s.r,rb:s.rb,l:Object.assign({},s.l||{}),lr:s.lr,lrb:s.lrb,fn:s.fn,ok:s.ok,no:s.no,to:s.to,lto:s.lto||(s.f==="r"?"r":s.f)||"r",t:s.t,tw:s.tw,alt72:1}}
+/* built once at load, but priced when read: odds, khắc and Sức follow HER rank now (getters), as the silver is worth more to a low rank
+   (balance-pass: priced at the middle rank only, rank-1 roads were too cheap and rank-5 roads too dear, dev/review/bacroad-*.md) */
+function alt72(s,n){const bac=s.c&&s.c.bac,p0=Math.min(s.p!=null?s.p:(s.b==null?100:s.b),100),k0=(s.k==null?1:s.k)+1,rk=()=>(typeof S!=="undefined"&&S?S.rank|0:3);
+ const o={n:`${n} (nhờ người, không dùng bạc)`,sk:"mat",
+ w:s.w,r:s.r,rb:s.rb,l:Object.assign({},s.l||{}),lr:s.lr,lrb:s.lrb,fn:s.fn,ok:s.ok,no:s.no,to:s.to,lto:s.lto||(s.f==="r"?"r":s.f)||"r",t:s.t,tw:s.tw,alt72:1};
+ Object.defineProperty(o,"p",{get:()=>p0-altCost(bac,rk(),6,BAL.alt72Pen).pen,enumerable:true,configurable:true});
+ Object.defineProperty(o,"k",{get:()=>k0+Math.round(bacK(bac,rk())*BAL.altK.k72),enumerable:true,configurable:true});
+ Object.defineProperty(o,"c",{get:()=>({suc:-altCost(bac,rk(),6,BAL.alt72Pen).suc}),enumerable:true,configurable:true});return o}
 (function(){try{if(typeof T72==="undefined")return;for(const T of T72)for(const st of T.s||[]){if(st.w!=null&&!st.n)continue;
  if(!st.ch&&st.c&&st.c.bac<0){const o0={n:st.n,p:st.b<100?st.b:null,sk:st.sk,k:st.k,c:st.c,w:st.w,r:st.r,rb:st.rb,l:st.l,lr:st.lr,lrb:st.lrb,fn:st.fn,ok:st.ok,no:st.no,lto:st.f};
   st.ch=[o0,alt72(Object.assign({},st,{p:st.b}),st.n)]}
@@ -27616,6 +27621,47 @@ function evbChance(o){const s=String((o&&(o.x||o.j67))||"")+" "+String((o&&o.n)|
 function evbGain(o){let s=0;try{const f=Object.assign({},o.w||{});for(const v of Object.values(f))if(v>0)s+=v;const x=String(o.x||o.j67||"").replace(/<[^>]+>/g,"");const m=x.split(/hỏng:|kèm:/)[0];
  (m.match(/\+\s?\d+/g)||[]).forEach(n=>s+=+n.replace(/\D/g,""))}catch(e){}return s}
 (function(){const s0=showModal;showModal=function(){try{if(Q[0])evbDedup(Q[0])}catch(e){}return s0.apply(this,arguments)}})();
+/* ================= jbac: BẠC ↔ ROAD WITHOUT SILVER in the common events (owner 15/11 20:30Z, balance-pass) =================
+   Rule: every choice that costs bạc has another road whose cost is EQUIVALENT in value, bạc valued by how hard it is to earn at HER rank;
+   neither road the obvious pick. The common events (j68e–h, EV6) were written with flat prices: dev/measure/bacroad.js found 28 of 35
+   silver options at rank 1 dominated by a free option of the same card (20 bạc for Sức +10 …) and a few the other way.
+   Fix, for the whole group, when a card is built: each option is valued in KHẮC (her real limit, 16 a tuần) with the same table the scan
+   uses — 1 bạc = 16 / BAL.bacTuan[rank] (jstory), 1 Sức = BAL.restLatK / BAL.restLatSuc, Danh / Đức / Sủng / a relation point / a stat
+   point = BAL.bacVal — E = p·gains − (1−p)·losses − costs. A silver option's price is moved toward the price at which its E equals the
+   best free option of the same card (rounded, between BAL.bacFair.lo and .hi × the written price); if even the lowest price leaves it
+   behind, its gains (w, relation r) are raised up to BAL.bacFair.gMax ×. Options whose gains are only words keep the written price.
+   The card shows the real numbers (c6 builds the text from the spec), the outcome uses them. dev/measure/bacroad.js → dev/review/bacroad-*.md */
+BAL.bacVal={danh:4.2,duc:8,sung:4,rel:.33,stat:2,an:.33,tok:3};
+BAL.bacFair={lo:.5,hi:3,gMax:3,band:.15};
+/* a gain or cost written only in words (wt / lt / k tokens: "biết sự thật", "lộ ra bị trách trái lệnh") = BAL.bacVal.tok khắc each */
+function bacTok(L,cls){return (L||[]).filter(t=>typeof t==="string"&&t.indexOf(`class="${cls}"`)>=0).length*BAL.bacVal.tok}
+function bacV1(k){const V=BAL.bacVal;if(k==="suc")return (BAL.restLatK||1)/(BAL.restLatSuc||6);if(k==="bac")return 16/BAL.bacTuan[Math.max(0,Math.min(7,(S&&S.rank)|0))];
+ if(k==="danh"||k==="duc"||k==="sung"||k==="an")return V[k];if(/^(sac|tai|tamco|mat)$/.test(k))return V.stat;if(/^(th|hh|maid|loyal|tin)$/.test(k))return V.rel;return 0}
+function bacFx(o){let v=0;for(const [k,x] of Object.entries(o||{}))if(typeof x==="number")v+=x*bacV1(k);return v}
+function bacRel(L){let v=0;for(const [a,x] of (L||[]))v+=x*(a&&a.k==="emp"?BAL.bacVal.sung:BAL.bacVal.rel);return v}
+/* E of one c6 spec (khắc), and its parts */
+function bacE(s){const c=s.c||{};const p=s.p==null?1:Math.max(5,Math.min(95,Math.round(s.p)))/100;
+ const gain=bacFx(s.w)+bacRel(s.r)+(c.suc>0?c.suc*bacV1("suc"):0)+bacTok(s.wt,"g")+bacTok(s.k,"g"),loss=-(bacFx(s.l)+bacRel(s.lr))+bacTok(s.lt,"r");
+ let cost=bacTok(s.k,"r");for(const [k,x] of Object.entries(c))if(typeof x==="number"&&x<0)cost-=x*bacV1(k);return{p,gain,loss,cost,e:p*gain-(1-p)*loss-cost}}
+function bacRound(b){return b>=10?Math.round(b/5)*5:Math.max(1,Math.round(b))}
+/* one card's specs [n,s] → the same list with fair silver options */
+function bacFairList(L){const F=BAL.bacFair,vb=bacV1("bac");const free=L.filter(([,s])=>!(s&&s.c&&s.c.bac<0));if(!free.length)return L;
+ const ea=Math.max(...free.map(([,s])=>bacE(s||{}).e));
+ return L.map(([n,s])=>{if(!s||!s.c||!(s.c.bac<0))return[n,s];const b0=-s.c.bac,E0=bacE(s);if(!(E0.gain>0))return[n,s];
+  const lo=Math.max(1,Math.ceil(b0*F.lo)),hi=Math.round(b0*F.hi);
+  /* price at which E(silver) = E(best free): b* = (E without the silver − ea) / value of 1 bạc */
+  const eNoB=E0.e+b0*vb;let b=bacRound(Math.max(lo,Math.min(hi,(eNoB-ea)/vb)));
+  const s2=Object.assign({},s,{c:Object.assign({},s.c,{bac:-b}),bac0:b0});
+  const e2=eNoB-b*vb;if(e2<ea-F.band*b*vb&&E0.p*E0.gain>0){/* still behind at the lowest price: raise its gains */
+   const f=Math.min(F.gMax,1+(ea-e2)/(E0.p*E0.gain));if(f>1.05){const up=o=>{const r={};for(const [k,x] of Object.entries(o||{}))r[k]=typeof x==="number"&&x>0&&k!=="bac"?Math.max(x+1,Math.round(x*f)):x;return r};
+    s2.w=up(s.w);if(s.r)s2.r=s.r.map(([a,x])=>[a,x>0?Math.max(x+1,Math.round(x*f)):x])}}
+  return[n,s2]})}
+(function(){if(typeof E68==="undefined"||typeof c6!=="function")return;
+ for(const ev of E68){const o0=ev.o;if(typeof o0!=="function")continue;
+  ev.o=function(X){if(window.__bacFairOff)return o0.apply(this,arguments);const real=c6;let L=null;
+   try{c6=(n,s)=>({__bac6:1,n,s});L=o0.apply(this,arguments)}catch(e){c6=real;return o0.apply(this,arguments)}finally{c6=real}
+   if(!Array.isArray(L))return L;try{const P=L.filter(x=>x&&x.__bac6).map(x=>[x.n,x.s]);const F=bacFairList(P);let i=0;
+    return L.map(x=>{if(!x||!x.__bac6)return x;const [n,s]=F[i++];return c6(n,s)})}catch(e){console.error("jbac",e);return L.map(x=>x&&x.__bac6?c6(x.n,x.s):x)}}}})();
 /* ================= jts: TOP 15 — LÔ A (sếp duyệt 15/11 02:00Z; dev/research/TRUNGSINH_COMPARE.md "Đào sâu" → Top 15)
    Ý 2 Hội phối đồ theo đề · ý 3 Hoàng thượng triệu riêng (đàn, cờ, du hồ; thích khách có điềm báo) · ý 4 Lễ tấn phong (khách chúc, lì xì)
    · ý 5 Ngưỡng xét phẩm hiện trước · ý 6 Nguy hiểm chung · ý 12 Ân thưởng sau sinh · ý 14 Thả đèn hoa đăng.
@@ -29003,7 +29049,7 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.2",title:"Th�
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="70e04a7f82f1";window.CTM_BUILD=BUILD;
+const BUILD="14f6642bea7f";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
