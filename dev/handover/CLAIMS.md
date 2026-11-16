@@ -142,4 +142,4 @@
 | SEATCAP over cap in long sims (rank 6 ×2, rank 5 ×3, rank 3 ×7; pre-existing; servant notes A) | review/seatcap | D | session_01DgYSWpxkS6i8grXTbHQnPF | RUNNING | 16/11 10:06Z |
 | D29 fix pass 2 (opus) from schedules3-r1 FAIL list | review/schedules3-r2 | C | session_011xDdVRRJzACvMmmuEuVbJq | RUNNING | 16/11 10:26Z |
 | item512-art review (sonnet) | review/item512-art-r1 | C | session_011xDdVPGrgbkaEq66QU6t5j | PASS f9d10956 | 16/11 10:26Z |
-| D21 co-op B1–B5 full review (part 1 + r1 fixes + part 2) (opus) | review/coop-b1b5-r2 | D | (opening, s3) | RUNNING | 16/11 10:32Z |
+| D21 co-op B1–B5 full review (part 1 + r1 fixes + part 2) (opus) | review/coop-b1b5-r2 | D | session_01DgYSWnmMmz35f4d6i6C3vQ | RUNNING | 16/11 10:32Z |
