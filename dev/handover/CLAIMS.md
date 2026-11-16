@@ -214,4 +214,4 @@
 | EMOTION ACTIONS + extreme-mood consequences + FORCED emotion events, player + all NPCs (OD 13:08Z, 13:25Z(B), 13:50Z) (opus) | review/emotion-acts | B | session_01N1tNP3dP2Jd2zhw72gV1uW | RUNNING | 16/11 13:55Z |
 | D25 veil-zoom fix: overlay offset vs main stage figure code at 1180x820 (sonnet) | review/veil-zoom-r2 | B | session_01N1tNP5D4rJRWvpDvFV93Kf | RUNNING | 16/11 13:55Z |
 | D36 rank-port fix pass: replace private krk-* parts with kit parts (sonnet; rows part waits on KIT REQUEST) | review/rank-port-r2 | B | session_01N1tNP6zPQNzSmyMgNCuSPj | RUNNING | 16/11 13:55Z |
-| tham-flip-ui: owner 14:00Z card flip tray too yellow (repaint game style) + rank+name under every card (kit) | review/tham-flip-ui | main s17 | (opening, sonnet) | RUNNING | 16/11 14:02Z |
+| tham-flip-ui: owner 14:00Z card flip tray too yellow (repaint game style) + rank+name under every card (kit) | review/tham-flip-ui | main s17 | session_01UV1SzhYN2Ensucb2ZqjeRX (sonnet) | RUNNING | 16/11 14:02Z |
