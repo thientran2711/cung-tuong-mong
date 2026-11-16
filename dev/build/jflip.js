@@ -52,6 +52,8 @@ function cycleOf(p){try{if(typeof inCycle==="function")return !!inCycle(p);if(ty
 function known(p){try{return typeof kitKnownName==="function"?kitKnownName(p):true}catch(e){return true}}
 function rankName(p){const r=rk(p);return r>=7?"Hoàng hậu":(RANKS[Math.max(0,r)]||{}).n||""}
 function nameOf(p){return p===S?S.name:known(p)?p.name||"":"???"}
+function tagOf(p,w){try{const r=rk(p),col=typeof kitRankCol==='function'?kitRankCol(r):'#7a5530',rn=rankName(p),nm=nameOf(p),me=p===S;
+  return `<div class="krs kcf-tag">${kitNameRank(esc(rn),esc(nm),col,me,w<112)}</div><div class="krs kcf-tag kcf-tag-l">${kitNameRank(esc(rn),esc(nm),col,me,false)}</div>`}catch(e){return""}}
 function face(p){try{return mdH(p===S?pMe():pv(p),"big")}catch(e){return""}}
 
 /* ---------- the deck: what SHE sees tonight (j75 S.nightWhy rows; + the co-op friend) ---------- */
@@ -61,10 +63,13 @@ function deckOf(d){const rows=(d&&d.rows)||[];const L=[];
  L.sort((a,b)=>rk(b.p)-rk(a.p));return L}
 
 /* ---------- layout: n cards in the tray floor (px), the biggest card that fits in r rows ---------- */
-function grid(n,W,H){let best=null;for(let r=1;r<=Math.max(1,Math.min(5,n));r++){const c=Math.ceil(n/r);const g=Math.max(4,W*.018);
-  const cw=Math.min((W-g*(c+1))/c,((H-g*(r+1))/r)*AR*.98);if(!best||cw>best.cw)best={r,c,cw,g}}
- const {r,c,cw,g}=best;const ch=cw/AR;const P=[];const top=(H-(r*ch+(r-1)*g))/2;
- for(let i=0;i<n;i++){const row=Math.floor(i/c),inRow=row<r-1?c:n-c*(r-1),col=i-row*c;const rowW=inRow*cw+(inRow-1)*g;P.push({x:(W-rowW)/2+col*(cw+g),y:top+row*(ch+g),w:cw,h:ch})}
+const TAGH=30;  /* px under every card for the kit name tag (rank over name, KIT §48): the slot = card + tag */
+const TAGW=98;  /* px a name tag needs across: a column is never narrower, so two names never overlap (the kit small tag: rank .66rem over name .72rem) */
+function grid(n,W,H){let best=null,fb=null;for(let r=1;r<=Math.max(1,Math.min(6,n));r++){const c=Math.ceil(n/r);const g=Math.max(4,W*.018);const pitch=W/c;
+  const cw=Math.min(pitch-g,((H-g*(r+1))/r-TAGH)*AR*.98);const cand={r,c,cw,g,pitch};
+  if(pitch>=TAGW&&(!best||cw>best.cw))best=cand;if(!fb||pitch>fb.pitch)fb=cand}
+ const {r,c,cw,g,pitch}=best||fb;const ch=cw/AR+TAGH;const P=[];const top=(H-(r*ch+(r-1)*g))/2;
+ for(let i=0;i<n;i++){const row=Math.floor(i/c),inRow=row<r-1?c:n-c*(r-1),col=i-row*c;P.push({x:(W-inRow*pitch)/2+col*pitch+(pitch-cw)/2,y:top+row*(ch+g),w:cw,h:ch})}
  return P}
 /* the plate box: the tray rim fits the screen (picture may run past the screen edge; its edge fades into the dark) */
 function plateBox(){const vw=innerWidth,vh=innerHeight;const P=PL(),R=P.rim;const top=Math.min(64,vh*.12),bot=Math.min(56,vh*.1);
@@ -79,7 +84,7 @@ function kitCardFlip(o){o=o||{};const deck=o.deck||[];if(!deck.length)return;
  const toB=()=>{F=P.fb;fx=B.W*F.x0;fy=B.H*F.y0;FW=B.W*(F.x1-F.x0);FH=B.H*(F.y1-F.y0);after=grid(Math.max(1,keep.length),FW,FH);keep.forEach((c,i)=>keepPos.set(c,after[i]))};
  const all=grid(deck.length,FW,FH);const keep=deck.filter(c=>!c.bar);let after=grid(Math.max(1,keep.length),FW,FH);
  const cards=deck.map((c,i)=>{const p=all[i];const lab=`${esc(rankName(c.p))} ${esc(nameOf(c.p))}`;
-  return `<div class="kcf-c${c.bar?" kcf-bar":""}${c.p===S?" kcf-me":""}" data-i="${i}" style="left:${(fx+p.x).toFixed(1)}px;top:${(fy+p.y).toFixed(1)}px;width:${p.w.toFixed(1)}px;--d:${(i*45)}ms" title="${lab}" aria-label="${lab}">${face(c.p)}</div>`}).join("");
+  return `<div class="kcf-c${c.bar?" kcf-bar":""}${c.p===S?" kcf-me":""}" data-i="${i}" style="left:${(fx+p.x).toFixed(1)}px;top:${(fy+p.y).toFixed(1)}px;width:${p.w.toFixed(1)}px;--d:${(i*45)}ms" title="${lab}" aria-label="${lab}"><div class="kcf-f">${face(c.p)}${c.p===S?`<i class="kcf-mine"></i>`:""}</div>${tagOf(c.p,p.w)}</div>`}).join("");
  ov.innerHTML=`<div class="kcf-w" style="left:${B.x.toFixed(1)}px;top:${B.y.toFixed(1)}px;width:${B.W.toFixed(1)}px;height:${B.H.toFixed(1)}px">
   <img class="kcf-pl kcf-a" src="${ART.a}" alt="" draggable="false"><img class="kcf-pl kcf-b" src="${ART.b}" alt="" draggable="false">
   <div class="kcf-cards">${cards}</div><div class="kcf-lamp"></div><div class="kcf-vig"></div></div>
@@ -223,13 +228,22 @@ const st=document.createElement("style");st.id="kcf-css";st.textContent=`
 .kcf-on-b .kcf-b{opacity:1}
 .kcf-cards{position:absolute;inset:0}
 /* every card state uses the SAME filter chain (grayscale sepia saturate brightness drop-shadow) so states interpolate smoothly and stay compositor-friendly */
-.kcf-c{position:absolute;z-index:2;filter:grayscale(0) sepia(.1) saturate(.96) brightness(.95) drop-shadow(3px 5px 3px #2a0d0480);transition:filter calc(.6s*var(--kcf-s,1)) ease-in-out,opacity calc(.45s*var(--kcf-s,1)) ease}
-.kcf-act .kcf-c{will-change:transform,filter}   /* promoted only while the scene runs (removed at the final still / close) */
+.kcf-c{container-type:inline-size}
+/* name tag under EVERY card (owner 16/11 14:00Z: rank + name, no title): the kit kitNameRank on the painted tray (.krs = the kit's painting hook: rank in its rank colour, name with the light halo, HER name the gold glow, KIT 48.1) */
+.kcf-tag{position:absolute;left:50%;top:100%;transform:translateX(-50%);width:max-content;max-width:160cqw;margin-top:3px;pointer-events:none;text-align:center}
+.kcf-tag.kcf-tag-l,.kcf-pick .kcf-tag{display:none}.kcf-pick .kcf-tag.kcf-tag-l{display:block;top:74%;margin-top:0}   /* the picked card is big: its tag sits right under the frame (over the tassel), never down at the tassel's end where the result chip stands */
+/* HER card on the tray (owner 16/11 14:05Z): a soft WHITE glow round the whole frame from the very start, so she knows her card at a glance; static (no running light, no motion), never over the portrait */
+.kcf-mine{position:absolute;left:8.5%;top:17.8%;width:83%;height:54.4%;border-radius:3cqw;pointer-events:none;box-shadow:0 0 3cqw .8cqw #ffffffd9,0 0 9cqw 2cqw #ffffff8c,0 0 18cqw 3cqw #ffffff40}
+.kcf-pick .kcf-mine{display:none}
+.kcf-c{position:absolute;z-index:2;transition:opacity calc(.45s*var(--kcf-s,1)) ease}
+/* the filter chain lives on the picture part only (.kcf-f), so the name tag under the card never gets the card's dark drop-shadow / dimming */
+.kcf-f{filter:grayscale(0) sepia(.1) saturate(.96) brightness(.95) drop-shadow(3px 5px 3px #2a0d0480);transition:filter calc(.6s*var(--kcf-s,1)) ease-in-out}
+.kcf-act .kcf-c{will-change:transform}.kcf-act .kcf-f{will-change:filter}   /* promoted only while the scene runs (removed at the final still / close) */
 .kcf-c span.md.kfc.kfc.kfc.kfc{width:100%!important;display:block}
-.kcf-c.kcf-grey{filter:grayscale(1) sepia(.1) saturate(.96) brightness(.62) drop-shadow(2px 3px 2px #0006)}
+.kcf-c.kcf-grey>.kcf-f{filter:grayscale(1) sepia(.1) saturate(.96) brightness(.62) drop-shadow(2px 3px 2px #0006)}
 .kcf-c.kcf-gone{display:none}
-.kcf-dim .kcf-c:not(.kcf-pick){filter:grayscale(0) sepia(.2) saturate(.96) brightness(.42) drop-shadow(2px 3px 2px #0006)}
-.kcf-c.kcf-pick{z-index:5;filter:grayscale(0) sepia(.1) saturate(.96) brightness(1.08) drop-shadow(3px 5px 3px #2a0d0480)}  /* the reveal light = the whole frame glowing (.kcf-halo, edgeLight, KIT §67), never a running light and never over the portrait */
+.kcf-dim .kcf-c:not(.kcf-pick)>.kcf-f{filter:grayscale(0) sepia(.2) saturate(.96) brightness(.42) drop-shadow(2px 3px 2px #0006)}
+.kcf-c.kcf-pick{z-index:5}.kcf-c.kcf-pick>.kcf-f{filter:grayscale(0) sepia(.1) saturate(.96) brightness(1.08) drop-shadow(3px 5px 3px #2a0d0480)}  /* the reveal light = the whole frame glowing (.kcf-halo, edgeLight, KIT §67), never a running light and never over the portrait */
 .kcf-halo{position:fixed;z-index:6;pointer-events:none;border:3px solid #fff0b8f0;box-shadow:0 0 calc(var(--hb)*.45) calc(var(--hs)*.7) #fff6cc,0 0 var(--hb) var(--hs) #ffd877f2,0 0 calc(var(--hb)*2.2) calc(var(--hs)*1.6) #ffb23fb0,0 0 calc(var(--hb)*4) calc(var(--hs)*2) #ff9a2e55;opacity:var(--ho,1)}
 .kcf-halo.kcf-breath{animation:kcfBreath var(--hd,3600ms) ease-in-out infinite}
 @keyframes kcfBreath{0%,100%{opacity:var(--hl,.62)}50%{opacity:var(--ho,.9)}}
@@ -247,7 +261,8 @@ const st=document.createElement("style");st.id="kcf-css";st.textContent=`
 .kcf-pts{position:absolute;inset:0;z-index:6;pointer-events:none;overflow:hidden}
 .kcf-pt{position:absolute;top:-8%;left:var(--x);width:calc(26px*var(--s));height:auto;opacity:0;animation:kcfFall calc(3.2s*var(--kcf-s,1)) linear var(--d) forwards}
 @keyframes kcfFall{0%{opacity:0;transform:translate(0,0) rotate(var(--r))}10%{opacity:.95}100%{opacity:0;transform:translate(var(--w),112vh) rotate(calc(var(--r) + 300deg))}}
-.kcf.kcf-fin .kcf-c{transition:none}
+.kcf.kcf-fin .kcf-c,.kcf.kcf-fin .kcf-f{transition:none}
+.kcf-grey .kcf-tag,.kcf-dim .kcf-c:not(.kcf-pick) .kcf-tag{opacity:.45}
 .kcf.km-red *{animation:none!important;transition:none!important}
 .kcf.km-red .kcf-res{opacity:1}
 @media (max-height:500px){.kcf-cap{font-size:.92rem}.kcf-res{bottom:calc(max(6px,env(safe-area-inset-bottom)) + 16px)}.kcf-res .kmres{padding:4px 10px}}

@@ -1,0 +1,35 @@
+/* cfglow2-r2: whole-frame glow check. usage: node dev/test/cfglow2-r2.js <url> <outdir> 755x1000,1180x820 [dpr] */
+const {chromium}=require('playwright');const fs=require('fs');
+const [,,BASE,OUT,VPS,DPR,SH]=process.argv;fs.mkdirSync(OUT,{recursive:true});
+const sleep=t=>new Promise(r=>setTimeout(r,t));const ALL=SH==='all';
+const SHOT=async(p,o)=>{for(let i=0;i<3;i++){try{await p.screenshot(Object.assign({timeout:150000,type:'jpeg',quality:62},o));return}catch(e){console.error('shot retry',o.path)}}};
+const CLEAN=()=>{Q.length=0;document.getElementById('modal').hidden=true;document.querySelectorAll('[id^=kroul],.kroul,#kload').forEach(e=>e.remove());const d=document.getElementById('dawn');if(d){d.classList.remove('on');d.hidden=true}document.querySelectorAll('.kmov').forEach(e=>e.remove());if(window.KMQ)KMQ.length=0;render()};
+const GEOM=()=>{const ov=document.querySelector('.kmov.kcf');if(!ov)return null;const w=ov.querySelector('.kcf-w').getBoundingClientRect();const C=BAL.cardFlip,Pl=C.plates[innerWidth/innerHeight<C.portraitBelow?'p':'l'];const F=ov.querySelector('.kcf-w').classList.contains('kcf-on-b')?Pl.fb:Pl.fa;
+ const fl={l:w.left+w.width*F.x0,t:w.top+w.height*F.y0,r:w.left+w.width*F.x1,b:w.top+w.height*F.y1};
+ const cs=[...ov.querySelectorAll('.kcf-c:not(.kcf-gone):not(.kcf-pick)')].map(e=>e.getBoundingClientRect());
+ const out=cs.filter(r=>r.left<fl.l-1||r.right>fl.r+1||r.top<fl.t-1||r.top+r.width*1037/550*0.72>fl.b+2).length;  /* the frame body (to the band) lies on the floor; the tassel may hang over the rim */
+ const pk=ov.querySelector('.kcf-pick');const pr=pk&&pk.getBoundingClientRect();
+ return{n:cs.length,out,cw:cs[0]?Math.round(cs[0].width):0,pick:pr?[pr.left,pr.top,pr.right,pr.bottom].map(Math.round):null,pickOff:pr?(pr.left<0||pr.top<0||pr.right>innerWidth+1||pr.bottom>innerHeight+1):null,
+  fin:ov.dataset.fin||'',t:Math.round(performance.now()-ov.__t0),hscroll:document.documentElement.scrollWidth>innerWidth+1,res:(ov.querySelector('.kcf-res')||{}).textContent||'',cap:(ov.querySelector('.kcf-cap')||{}).textContent||'',
+  resOverPick:(()=>{const r=ov.querySelector('.kcf-res .kmres');if(!r||!pr)return false;const q=r.getBoundingClientRect();return q.top<pr.bottom-pr.height*.12&&q.left<pr.right&&q.right>pr.left})()}};
+(async()=>{const b=await chromium.launch({args:['--use-gl=swiftshader','--enable-unsafe-swiftshader']});
+ const vps=(VPS||'755x1000').split(',');const R={};
+ for(const v of vps){const [W,H]=v.split('x').map(Number);const c=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:+(DPR||1),hasTouch:true,serviceWorkers:process.env.NEWPLATE?'block':'allow',recordVideo:process.env.VIDEO?{dir:OUT,size:{width:W,height:H}}:undefined});const p=await c.newPage();const errs=[];
+  if(process.env.NEWPLATE){const buf=require('fs').readFileSync(process.env.NEWPLATE);await p.route(/img\/kit\/cf-plate-(ksp|emp)(-p)?\.webp/,r=>r.fulfill({body:buf,contentType:process.env.NEWPLATE.endsWith('.png')?'image/png':'image/webp',headers:{'access-control-allow-origin':'*'}}))}
+  p.on('pageerror',e=>errs.push(e.message));p.on('console',m=>{if(m.type()==='error'&&!/Failed to load resource|net::ERR/.test(m.text()))errs.push('console: '+m.text())});
+  await p.goto(BASE,{waitUntil:'domcontentloaded',timeout:120000});await p.addStyleTag({content:'.modal.kload,#kload{display:none!important}'});await p.waitForFunction(()=>typeof start==='function',null,{timeout:120000});await sleep(2000);
+  await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;start()});
+  for(let i=0;i<40;i++){await p.waitForFunction(()=>typeof S!=="undefined"&&S&&S.name,null,{timeout:90000});if(!(await p.evaluate(()=>isSrv())))break;await p.evaluate(()=>{S=null;start()})}
+  /* the palace scene now waits for the Luân hồi identity card (review/flip-newlife): accept it like a player */
+  for(let i=0;i<60&&await p.evaluate(()=>typeof NLP!=='undefined'&&!!NLP);i++){await p.evaluate(()=>{const s=[...document.querySelectorAll('#kroul button,.kroul button')].find(x=>/Bỏ qua/.test(x.textContent));if(s)s.click();const b=document.querySelector('button[data-nl="ok"]');if(b)b.click()});await p.waitForTimeout(300)}
+  for(let i=0;i<30;i++){await sleep(600);const k=await p.evaluate(()=>{const r=document.querySelector('[id^=kroul],.kroul,.kbd-roulette');if(!r)return 0;const bs=[...r.querySelectorAll('button')];const b=bs.find(x=>/Bỏ qua/.test(x.textContent))||bs.find(x=>/Tiếp|Vào|Nhập/.test(x.textContent))||bs[0];if(b)b.click();else r.click();return 1});if(!k)break}
+  await sleep(600);await p.evaluate(([s,g])=>{window.CLEAN=eval('('+s+')');window.GEOM=eval('('+g+')')},[CLEAN.toString(),GEOM.toString()]);await p.evaluate(CLEAN);const res={};if(process.env.NEWGEOM)await p.evaluate(g=>{const P=BAL.cardFlip.plates;const j=JSON.parse(g);for(const k in j)Object.assign(P[k],j[k])},process.env.NEWGEOM);
+  for(let i=0;i<40;i++){const busy=await p.evaluate(()=>{const o=document.querySelector('.kmov');if(o){o.click();const kb=o.querySelector('.kmend');if(kb)kb.click()}const d=document.getElementById('dawn');if(d){d.classList.remove('on');d.hidden=true}return !!o||kmBusy||KMQ.length>0});if(!busy)break;await sleep(700)}await p.evaluate(CLEAN);
+  const WAITS=(process.env.WAITS||'2500,9000,14000').split(',').map(Number);
+  for(const [name,args] of [['me',[14,3,'me']],['other',[22,6,3]]]){
+   await p.evaluate(a=>cfDemo(...a),args);let t0=0;
+   for(const w of WAITS){await sleep(w-t0);t0=w;await p.evaluate(()=>{const o=document.querySelector('.kmov.kcf');if(!o)return;const t=[...o.querySelectorAll('.kcf-c:not(.kcf-gone):not(.kcf-pick) .kcf-tag:not(.kcf-tag-l)')].map(e=>e.getBoundingClientRect());let ov=0;for(let i=0;i<t.length;i++)for(let j=i+1;j<t.length;j++){const a=t[i],b=t[j];if(a.left<b.right-1&&b.left<a.right-1&&a.top<b.bottom-1&&b.top<a.bottom-1)ov++}const cut=t.filter(r=>r.left<0||r.right>innerWidth).length;window.__tagchk={n:t.length,overlap:ov,cut}});console.log(name,w,JSON.stringify(await p.evaluate(()=>window.__tagchk)));await SHOT(p,{path:OUT+'/'+name+'-'+v+'-'+w+'.jpg',type:'jpeg',quality:80})}
+   await p.evaluate(()=>{const o=document.querySelector('.kmov.kcf');if(o){o.click();const kb=o.querySelector('.kmend');if(kb)kb.click()}});await sleep(600);await p.evaluate(CLEAN);await sleep(500)}
+  if(errs.length)console.log('ERRS',errs.slice(0,5));
+  await c.close();console.log('done',v)}
+ await b.close()})();
