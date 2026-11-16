@@ -8,7 +8,7 @@
 const TSA={};
 function tsS(){S.ts=S.ts||{};return S.ts}
 function tsOn(){return !!(typeof S!=="undefined"&&S&&!S.dead&&!(typeof isSrv==="function"&&isSrv()))}
-function tsGoi(p){p=p||S;return rkOf(p)>=7?"Hoàng hậu nương nương":rkOf(p)>=3?"nương nương":"tiểu chủ"}
+function tsGoi(p){/* one address core (jvoice kAddr, VANPHONG §2) */return kSay({srv:"f"},p||S,"{goi}")}
 function tsNm(p){try{if(p===S)return"ngươi";return (p.queen?"Hoàng hậu":RANKS[cl(p.rank||0,0,7)].n)+" "+p.name}catch(e){return p&&p.name||""}}
 function tsBot(){return typeof window.__bot!=="undefined"}
 function tsLast(){return BUOI.length-1}

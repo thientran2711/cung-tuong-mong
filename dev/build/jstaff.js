@@ -112,9 +112,9 @@ if(typeof k61St==="function"){const k0=k61St;k61St=function(e){const v=k0.apply(
 function talkLine(st){const warm=((st.af&&st.af.me)||0)>=30;
  if(st.eid==="gt")return pick([`“Đi đứng chớ ngẩng cao đầu quá vai người trên. Cung quy là thế.”`,`“Gặp Hoàng hậu thì quỳ trước, thưa sau. Gặp Thái hậu thì chờ người cho đứng dậy.”`,`“Tú nữ mới năm nay có mấy người lanh lợi. Chớ để bị lấn.”`,`“Lời nói trong cung như nước đổ, không hốt lại được.”`]);
  if(st.eid==="tn"){if(S.thDead)return`“Từ ngày Thái hậu đi, Đức Thọ cung chỉ còn khói hương.”`;const t=S.th||0;
-  return (t>=30?`“Thái hậu dạo này hay nhắc đến ngươi.”`:t>=0?`“Thái hậu chưa nói gì về ngươi. Chăm thỉnh an thì hơn.”`:`“Thái hậu không vui khi nghe tên ngươi. Chớ để lỡ lễ nữa.”`)+(warm?` Thái hậu → ngươi: thiện cảm <b>${t}</b>.`:"")}
- if(st.eid==="kn"){const q=typeof queenP==="function"?queenP():null;if(!q)return`“Càn Ninh cung còn để trống. Việc lục cung tạm bẩm lên Thái hậu.”`;if(q===S)return`“Nương nương cứ dặn, sổ sách lục cung nô tỳ giữ đủ.”`;
-  const v=typeof rel==="function"?rel(q,S):0;return `“Hoàng hậu ${v>=10?"có lời khen ngươi biết giữ lễ":v>-10?"không nói gì về ngươi":"thấy ngươi chưa biết phận"}.”`+(warm?` Hoàng hậu → ngươi: thiện cảm <b>${v}</b>.`:"")}
+  const g=kSay({srv:"f"},S,"{goi}"),G=kSay({srv:"f"},S,"{Goi}");/* a servant never calls a consort "ngươi" (VANPHONG §2) */return (t>=30?`“Thái hậu dạo này hay nhắc đến ${g}.”`:t>=0?`“Thái hậu chưa nói gì về ${g}. ${G} chăm thỉnh an thì hơn.”`:`“Thái hậu không vui khi nghe nhắc đến ${g}. ${G} chớ để lỡ lễ nữa.”`)+(warm?` Thái hậu → ngươi: thiện cảm <b>${t}</b>.`:"")}
+ if(st.eid==="kn"){const q=typeof queenP==="function"?queenP():null;if(!q)return`“Càn Ninh cung còn để trống. Việc lục cung tạm bẩm lên Thái hậu.”`;if(q===S)return`“${kSay({srv:"f"},S,"{Goi}")} cứ dặn, sổ sách lục cung nô tỳ giữ đủ.”`;
+  const v=typeof rel==="function"?rel(q,S):0;const g=kSay({srv:"f"},S,"{goi}");return `“Hoàng hậu ${v>=10?`có lời khen ${g} biết giữ lễ`:v>-10?`chưa nói gì về ${g}`:`thấy ${g} chưa biết phận`}.”`+(warm?` Hoàng hậu → ngươi: thiện cảm <b>${v}</b>.`:"")}
  return""}
 function cardHTML(st){const p=postOf(st.eid);const f=staffFace(st);
  const lines=[typeof tuoi==="function"?tuoi(st.age):"",`Thiện cảm <b>${(st.af&&st.af.me)||0}</b>`].filter(Boolean);

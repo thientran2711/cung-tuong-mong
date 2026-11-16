@@ -118,7 +118,7 @@ PEND.nc1=p=>{const st=S.st;return {t:"Mật sứ Nam Chiếu trao thư của ph�
 PEND.td1=p=>{const st=S.st;return {t:`Lão thái giám họ Vương, nhân chứng còn sống của vụ án nhà ngươi, đang bị người của ${S.foeDad} truy sát.`,o:[
    {n:"Giấu ông ở Tân Giả Khố",fx:{bac:-40},x:"giữ được nhân chứng",go:()=>{st.wit=1}},
    {n:"Mặc kệ",fx:{},x:"chứng cứ -1",go:()=>{S.caseEv=Math.max(0,S.caseEv-1);log(`<span class="r">Xác lão Vương nổi trên sông Kim Thủy.</span>`)}}]}};
-PEND.ch1=p=>{const st=S.st,q=rivals[0];return {who:pTH(),t:'Thái hậu gọi ngươi vào Đức Thọ cung: “Hoàng hậu bất tài. Ngươi phải thay nàng. Trước hết, dò xem Càn Ninh cung giấu gì.”',o:[
+PEND.ch1=p=>{const st=S.st,q=rivals[0];return {who:pTH(),t:kSay("th",S,'Thái hậu gọi ngươi vào Đức Thọ cung: “Hoàng hậu bất tài. {Goi} phải thay nàng ta. Trước hết, dò xem Càn Ninh cung giấu gì.”'),o:[
    {n:"Vâng mệnh cô mẫu",fx:{th:8},x:"chứng cứ Hoàng hậu +1",go:()=>{evStory(q,1,"giấu chuyện riêng trong Càn Ninh cung");st.tool++;st.step=1}},{n:"Thoái thác",fx:{th:-15,duc:2},go:()=>{st.step=1}}]}};
 PEND.ch2=p=>{const st=S.st,q=rivals[0],o=p.o;return {who:pTH(),t:'Thái hậu dúi vào tay ngươi một gói thuốc: “Bỏ vào trà của Hoàng hậu.”',o:[
    {n:"Vâng mệnh",fx:{duc:-10},x:`${word(o)} · thành: Hoàng hậu băng hà, Thái hậu +10 · hỏng: bị ban chết`,go:()=>{S.schemes++;st.tool++;st.step=2;if(roll(o)){q.alive=false;apply({th:10,tamco:2});log(`<span class="r">Hoàng hậu ${q.name} băng hà sau chén trà chiều.</span>`)}else{stEnd(-1,"Bị Thái hậu phủi tay");deathSentence("Hạ độc Hoàng hậu bị bắt, Thái hậu phủi tay không nhận")}}},

@@ -347,3 +347,7 @@ BAL.dh={n0:[1,5,10],step:2,artLv:[3,4,5],
  hieu:{minRank:3,sung:10,danh:8,gapM:2,p:25,danhG:5},
  conf:{p:{cold:[100,100],giang:[50,35],cam:[0,40]},danh:5,sung:3,wait:3,kinh:3,cong:12,top:100},
  it:{lose:2,lostDanh:8,backW:[4,10]}};
+/* palace voice (jvoice, VANPHONG §2): mood of an address from the real relation (S.sung − sungMid, S.th / S.hh − favMid, aff()):
+   ≥ warm → warm words (ái phi, con, muội muội, tỷ tỷ), ≤ cold → "ngươi"; nuong = first rank called "nương nương" / allowed "bổn cung" (Tần);
+   noRepeat = tuần before a pooled line may come back */
+Object.assign(BAL,{voice:{warm:40,cold:-25,sungMid:0,favMid:0,nuong:3,noRepeat:6}});

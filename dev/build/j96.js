@@ -137,7 +137,7 @@ ARC67.tm96b={o:"tm",ok:ok96,t:"Thanh mai trúc mã: Lửa thử vàng",w:"lv",sj
  g:"Năm tháng trôi, {lvn} đã thành {lvr} có tiếng trong triều. Mối tình cũ vẫn nằm đó như than dưới tro: chàng có thể vì ngươi mà liều, kẻ thù có thể nhân đó giá họa, và Hoàng thượng không phải người dễ lừa.",
  ord:[["b1l","b1h","b1d"],["b2a","b2b"],["b3a","b3b"],["b4"],["b5"],["b6"]],
  B:{
- b1l:{h:"Kẻ nắm thóp đòi giá",w:"v",need:["v"],vf:v=>gate96(v,"blackmail"),if:()=>T96().endA==="a_lo"||(T96().ev||0)>0,t:"{v} hẹn gặp ngươi ở đình nghỉ, cười rất ngọt: “Chuyện của muội với {lv}, tỷ tỷ chưa nói với ai. Chỉ là dạo này tỷ tỷ thiếu một chỗ dựa.”",o:[
+ b1l:{h:"Kẻ nắm thóp đòi giá",w:"v",need:["v"],vf:v=>gate96(v,"blackmail"),if:()=>T96().endA==="a_lo"||(T96().ev||0)>0,t:"{v} hẹn gặp ngươi ở đình nghỉ, cười rất ngọt: “Chuyện của {goi} với {lv}, {xung} chưa nói với ai. Chỉ là dạo này {xung} thiếu một chỗ dựa.”",o:[
   {n:"Đưa bạc cho nàng ta im miệng",c:{bac:-80},w:{},go:A=>{const v=rv67(A,"v");if(v)relAdd(S,v,8)},rt:"{v} nhận bạc, nhưng kẻ nắm thóp hiếm khi chỉ đòi một lần."},
   {n:"Giả vờ không hiểu nàng nói gì",c:{suc:-2},o:()=>40+S.tamco/3-(T96().ev||0)*8,w:{tamco:2},l:{danh:-4},go:(A,ok)=>{if(!ok)adj96({sus:6})},rt:"{v} không moi được gì, đành bỏ đi.",rf:"{v} bỏ đi, ánh mắt như đã chắc chắn."},
   {n:"Thu thập chứng cứ nàng ta, nắm lại thóp",c:{suc:-4},o:()=>35+(S.mat||0)*6+S.tamco/5,w:{mat:1},l:{danh:-3},go:(A,ok)=>{const v=rv67(A,"v");if(v&&ok){evA(S,v,2);A96f("leverage")}},rt:"Ngươi có được chuyện riêng của {v}. Hai bên cùng nắm thóp nhau.",rf:"{v} phát hiện ngươi cho người theo dõi."}]},
@@ -159,7 +159,7 @@ ARC67.tm96b={o:"tm",ok:ok96,t:"Thanh mai trúc mã: Lửa thử vàng",w:"lv",sj
   {n:"Tạm ngừng mọi liên lạc với chàng",c:{},w:{duc:2},go:()=>adj96({t:-3,sus:-4}),rt:"Một tháng trôi qua, kẻ theo dõi không thấy gì."},
   {n:"Đánh lạc hướng: để lộ một chuyện vô hại",c:{suc:-3},o:()=>40+S.tamco/3,w:{tamco:2},l:{danh:-3},sc:1,go:(A,ok)=>{if(!ok)adj96({sus:5,ev:1})},rt:"{v} đuổi theo một cái bóng không có thật.",rf:"Mưu đánh lạc hướng vụng về, {v} càng chắc mình đúng."},
   {n:"Bỏ bạc mua người của nàng ta",c:{bac:-60},o:()=>45+(S.mat||0)*4,w:{mat:1},sc:1,go:(A,ok)=>{if(!ok)adj96({sus:4})},rt:"Kẻ theo dõi từ nay báo về cho cả hai bên.",rf:"Kẻ ấy nhận bạc rồi báo lại cho {v}."}]},
- b3b:{h:"Thái giám đánh hơi",w:"eun",t:"Một thái giám Nội vụ phủ nháy mắt với ngươi: “{Xung} với {lvn} là đồng hương nhỉ? Nô tài nghe nói nhiều chuyện lắm.” Hắn chỉ muốn bạc.",o:[
+ b3b:{h:"Thái giám đánh hơi",w:"eun",t:"Một thái giám Nội vụ phủ nháy mắt với ngươi: “{Nc} với {lvn} là đồng hương nhỉ? Nô tài nghe nói nhiều chuyện lắm.” Hắn chỉ muốn bạc.",o:[
   {n:"Đút bạc bịt miệng",c:{bac:-50},w:{},rt:"Hắn cười hì hì, cất bạc."},
   {n:"Dọa tố hắn với Tổng quản",c:{},o:()=>45+(S.mat||0)*5,w:{tamco:2},l:{danh:-4},go:(A,ok)=>{if(!ok)adj96({sus:6})},rt:"Hắn tái mặt, chuồn thẳng.",rf:"Hắn chạy đi kể khắp nơi."}]},
  b4:{h:"Tang vật trong cung ngươi",w:"maid",t:()=>hasEv96()?"{maid} hớt hải: có kẻ sắp dẫn người đến soát cung ngươi. Mà trong rương ngươi thật sự còn giữ đồ của {lvn}.":"{maid} hớt hải: có kẻ đã lén nhét một bức thư giả nét chữ {lvn} vào rương ngươi, sắp dẫn người đến soát.",o:[

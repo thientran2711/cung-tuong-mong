@@ -202,7 +202,7 @@ const R97L=[
  fx:{sung:12,danh:8},rw:"ngocboi",ti:"Người cứu ngự họa"},
 {a:"s_su",tag:"Tên vào sử nước Tây",w:"emp",p:.15,n:"Tặng sứ thần một bài thơ và nhờ ông dịch",c:{suc:-3},
  path:["Đáp lễ theo lối của họ","Dâng lên Thái hậu","Vạch ngay giữa yến","Lặng lẽ báo Lễ bộ","đổi lấy y thuật và lịch pháp","Mời sứ thần sửa","Đứng ra bảo đảm"],np:2,bad:["Giữ làm của riêng"],sc:2,x:[()=>S.tai>=45,"Tài từ 45"],
- t:"Sứ thần về nước mang theo bài thơ của ngươi và một bức chân dung do họa sĩ trong đoàn vẽ. Mười năm sau, sứ đoàn khác đến, dâng lên Hoàng thượng một cuốn sách in ở phương Tây: trang đầu là chân dung ngươi, chép rằng “Hoàng phi phương Đông, người thông tuệ nhất chúng tôi từng gặp”.",
+ t:"Sứ thần về nước mang theo bài thơ của ngươi và một bức chân dung do họa sĩ trong đoàn vẽ. Mười năm sau, sứ đoàn khác đến, dâng lên Hoàng thượng một cuốn sách in ở phương Tây: trang đầu là chân dung ngươi, chép rằng “Hoàng phi phương Đông, người thông tuệ nhất mà bọn ta từng gặp”.",
  fx:{danh:14,tai:3},rw:"nt_haiduong",ti:"Hoàng phi trong sử nước Tây"},
 {a:"s_dich",tag:"Miếu Dược Vương khắc tên",w:"doc",p:.15,n:"Tự chủng đậu cho mình trước để mọi người tin",c:{suc:-8},
  path:["Đóng cửa cung mình","Đến Thái y viện xin giúp","Dâng phương lên Thái y viện","Thử cho người trong cung mình","Gửi thuốc và người chăm","Mời Thái y khám công khai","Xin vào hầu","Đứng ra điều phối","Góp bạc mua thuốc"],np:2,bad:["Tránh xa"],sc:2,x:[()=>r97art("y")>=1||S.duc>=50,"Y thuật bậc 1 hoặc Đức từ 50"],
@@ -269,7 +269,7 @@ function r97After(A,d){let ex=[];try{if(d.go){const g=d.go(A);if(g)ex.push(g)}}c
  r97Meet(A.a,fill67(d.tag,A));return ex.join(" ")}
 /* leaving the palace when the rare ending allows it (nữ vương…) */
 PEND.j97x=p=>{const d=R97[p.a];if(!d||!d.exit||S.dead)return null;const A={act:{},a:p.a};
- return {who:who67(d.w,A),t:`<b>${ARC67[p.a].t}</b><br>${fill67(d.t,A)}`,o:[
+ return {who:who67(d.w,A),t:`<b>${ARC67[p.a].t}</b><br>${fill67(d.t,A,d.w)}`,o:[
   {n:d.exit[0],fx:{},x:"kết thúc kiếp này",go:()=>over(d.exit[2],fill67(d.exit[3],A),d.exit[4],true)},
   {n:d.exit[1],fx:{},x:"ở lại cung",go:()=>{apply({sung:5});log(`Ngươi ở lại. ${fill67(d.ti,A)}: Hoàng thượng thương ngươi hơn. Sủng +5.`)}}]}};
 /* ---------- Sổ luân hồi: rare endings met across lives (memory only, no carry-over) ---------- */

@@ -1,0 +1,85 @@
+/* ================= jvoice: PALACE VOICE — ONE address core + varied line pools (owner 16/11 19:38Z; VANPHONG §2; one core OD:L1267) =================
+   kAddr(sp, ls, o) → {goi, xung}: how speaker `sp` calls listener `ls` and calls itself. Every quoted line in the game takes its address
+   from here (no module types "tiểu chủ / nương nương / thần thiếp / bổn cung" by hand any more).
+     sp / ls: "emp" | "th" | "hh" | S (the player) | a consort (rivals[]) | a man of S.men (role) | {srv:"f"|"m", name?} (servant, eunuch) |
+              S.emp (= "emp"). A consort with .queen = Hoàng hậu.
+     o.m   mood: "warm" | "cool" | "cold" (angry). Missing → from the real relation (BAL.voice thresholds: S.sung, S.th, S.hh, aff()).
+     o.own true when a servant speaks to HER OWN mistress (default true when the listener is the player and the speaker a servant).
+     o.close (own servant, worried / pleading) → "chủ tử". o.full → "‹phẩm› tiểu chủ / nương nương" (formal greeting, another's servant).
+     kSpk(actor) maps an event / quest actor {k, o} (j68 evActor, j72 q72A) to a speaker.
+   kSay(sp, ls, s, o): fills {goi} {Goi} {xung} {Xung} {ten} (listener's title) {Ten} in s.
+   kLine(key, pool, o): picks a line from a pool without repeating any line used for that key in the last BAL.voice.noRepeat tuần
+     (least-recently-used when the pool is exhausted). pool = array of strings, or an object {warm:[…], cool:[…], cold:[…], any:[…]}
+     picked by o.m (falls back to any). Lines may carry the {goi}… tokens: pass o.sp / o.ls to fill them. Memory S.vl (personal, old saves
+     start empty, co-op safe). kLines(key) = the pool registry for the repetition audit (dev/test/voice-rep.js). */
+(function(){
+const V=()=>BAL.voice;
+const cap=s=>s?s.charAt(0).toUpperCase()+s.slice(1):s;
+function who(x){
+  if(x==null)return{k:"nar"};
+  if(x==="emp"||(typeof S!=="undefined"&&S&&x===S.emp)||x.kind==="emp")return{k:"emp",r:9};
+  if(x==="th"||x.kind==="th")return{k:"th",r:10};
+  if(x==="hh")return{k:"hh",r:7};
+  if(typeof S!=="undefined"&&x===S){const srv=typeof isSrv==="function"&&isSrv();return srv?{k:"srv",f:1,me:1,name:S.name}:{k:"con",r:S.rank|0,me:1,o:S,out:!!S.cold}}
+  if(x.srv)return{k:x.srv==="m"?"eun":"srv",name:x.name};
+  if(x.kid)return{k:"kid",name:x.name};
+  if(x.role&&x.rw)return{k:x.rw==="thị vệ"?"guard":"off",name:x.name};
+  if(x.rank!=null||x.queen)return{k:x.queen?"hh":"con",r:x.queen?7:x.rank|0,o:x,out:!!x.out};
+  return{k:"srv",name:x.name};
+}
+function title(w){if(!w||!w.o)return"";try{const r=w.o.queen?"Hoàng hậu":(RANKS[w.r]||{}).n||"";return typeof kitHieuJoin==="function"?kitHieuJoin(r,w.o):r}catch(e){return""}}
+function hon(w){return w.k==="hh"||w.r>=7?"Hoàng hậu nương nương":w.r>=V().nuong?"nương nương":"tiểu chủ"}
+function mood(sw,lw,sp,ls,o){if(o&&o.m)return o.m;const b=V();let n=null;
+  try{if(lw.me){if(sw.k==="emp")n=(S.sung||0)-b.sungMid;else if(sw.k==="th")n=(S.th||0)-b.favMid;else if(sw.k==="hh")n=(S.hh||0)-b.favMid;else if(sw.o)n=aff(sw.o,S)}
+   else if(sw.me&&lw.o)n=aff(S,lw.o);else if(sw.o&&lw.o)n=aff(sw.o,lw.o)}catch(e){}
+  if(n==null)return"cool";return n>=b.warm?"warm":n<=b.cold?"cold":"cool"}
+function kAddr(sp,ls,o){o=o||{};const s=who(sp),l=who(ls),m=mood(s,l,sp,ls,o),T=title(l);let goi="",xung="";
+  /* listener: the three above */
+  if(l.k==="emp")goi="Hoàng thượng";else if(l.k==="th")goi=s.k==="emp"?"mẫu hậu":"Thái hậu";
+  else if(l.k==="hh"&&!(s.k==="emp"||s.k==="th"))goi="Hoàng hậu nương nương";
+  else if(l.k==="srv"||l.k==="eun"||l.k==="off"||l.k==="guard")goi=o.name||l.name||"ngươi";
+  else{/* a consort (the player, a rival, the Empress heard by Emperor / Thái hậu) */
+    const H=l.k==="hh";
+    if(s.k==="emp")goi=H?"Hoàng hậu":m==="cold"?"ngươi":m==="warm"?"ái phi":T;
+    else if(s.k==="th")goi=H?"Hoàng hậu":m==="cold"?"ngươi":m==="warm"?"con":T;
+    else if(s.k==="hh")goi=m==="cold"?"ngươi":m==="warm"?"muội muội":T||"muội muội";
+    else if(s.k==="con"){const d=(s.r|0)-(l.r|0);
+      if(d>0)goi=m==="cold"?"ngươi":"muội muội";
+      else if(d<0)goi=m==="warm"?"tỷ tỷ":l.r>=V().nuong?T+" nương nương":T;
+      else goi=m==="warm"?(older(s.o,l.o)?"muội muội":"tỷ tỷ"):m==="cold"?T+" muội muội":(older(s.o,l.o)?"muội muội":"tỷ tỷ")}
+    else{/* servants, eunuchs, officials, guards */
+      const own=o.own!=null?o.own:!!l.me;if(l.out&&m==="cold")goi="ngươi";
+      else if(s.k==="kid")goi=H||l.r>=7?"mẫu hậu":"mẫu phi";
+      else goi=own&&o.close?"chủ tử":o.full&&!H?T+" "+hon(l):hon(l)}}
+  /* speaker's self word */
+  if(s.k==="emp")xung="trẫm";else if(s.k==="th")xung="ai gia";
+  else if(s.k==="srv")xung="nô tỳ";else if(s.k==="eun"||s.k==="guard")xung="nô tài";else if(s.k==="kid")xung="nhi thần";else if(s.k==="off")xung="vi thần";
+  else if(s.k==="hh")xung=l.k==="emp"||l.k==="th"?"thần thiếp":"bổn cung";
+  else if(s.k==="con"){if(l.k==="emp"||l.k==="th"||l.k==="hh")xung="thần thiếp";
+    else if(l.k==="con"){const d=(s.r|0)-(l.r|0);xung=d<0?(m==="warm"?"muội":"tần thiếp"):m==="warm"?(d>0||older(s.o,l.o)?"tỷ":"muội"):s.r>=V().nuong?"bổn cung":"ta"}
+    else xung=s.r>=V().nuong?"bổn cung":"ta"}
+  else xung="ta";
+  return{goi,xung,m,ten:T}}
+/* an event / quest actor ({k, o} of j68 evActor, j72 q72A) → a kAddr speaker */
+function kSpk(a){if(!a)return null;const k=a.k,o=a.o;try{
+  if(k==="emp")return"emp";if(k==="th")return"th";if(k==="hh")return o&&o.queen?o:"hh";
+  if(k==="sv"||k==="rsv"||k==="serv")return{srv:o&&o.role==="maid"?"f":"m",name:o&&o.name};
+  if(k==="maid"||k==="fam"||k==="mama")return{srv:"f",name:o&&o.name};if(k==="eun"||k==="ksp")return{srv:"m",name:o&&o.name};
+  if(k==="doc"||k==="off")return{role:"x",rw:"quan",name:o&&o.name};if(k==="ak"||k==="kid")return{kid:1,name:o&&o.name};
+  if(k==="man")return o;if(o&&(o.rank!=null||o.queen))return o}catch(e){}return null}
+function older(a,b){try{return (a&&a.age||0)>=(b&&b.age||0)}catch(e){return true}}
+function kSay(sp,ls,s,o){if(s==null)return s;s=String(s);if(!/\{(?:[Gg]oi|[Xx]ung|[Tt]en)\}/.test(s))return s;const a=kAddr(sp,ls,o);
+  return s.replace(/\{goi\}/g,a.goi).replace(/\{Goi\}/g,cap(a.goi)).replace(/\{xung\}/g,a.xung).replace(/\{Xung\}/g,cap(a.xung)).replace(/\{ten\}/g,a.ten).replace(/\{Ten\}/g,cap(a.ten))}
+/* ---- varied pools, no repeat within BAL.voice.noRepeat tuần ---- */
+const REG={};
+function now(){try{return typeof wk==="function"?wk():0}catch(e){return 0}}
+function kLine(key,pool,o){o=o||{};let L=pool;if(!Array.isArray(L)){const m=o.m||(o.sp!=null||o.ls!=null?kAddr(o.sp,o.ls,o).m:"cool");L=(L[m]&&L[m].length?L[m]:[]).concat(L.any||[]);if(!L.length)L=[].concat(...Object.values(pool))}
+  REG[key]=pool;if(!L.length)return"";let mem={};try{S.vl=S.vl||{};mem=S.vl[key]=S.vl[key]||{}}catch(e){}
+  const t=now(),gap=V().noRepeat;
+  const fresh=L.filter(x=>mem[x]==null||t-mem[x]>=gap);
+  const pickFrom=fresh.length?fresh:L.slice().sort((a,b)=>(mem[a]==null?-1e9:mem[a])-(mem[b]==null?-1e9:mem[b])).slice(0,1);
+  const line=pickFrom[Math.floor(Math.random()*pickFrom.length)];
+  try{mem[line]=t;const ks=Object.keys(mem);if(ks.length>40)for(const k of ks)if(t-mem[k]>gap*4)delete mem[k]}catch(e){}
+  return o.sp!=null||o.ls!=null?kSay(o.sp,o.ls,line,o):line}
+window.kAddr=kAddr;window.kSay=kSay;window.kLine=kLine;window.kLines=()=>REG;window.kVoiceWho=who;window.kSpk=kSpk;
+})();

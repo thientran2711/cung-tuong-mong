@@ -41,7 +41,7 @@ ev("pact",()=>qOn()&&liveRivals(false).length,()=>({v:rvTop((a,b)=>b.rel-a.rel).
  {n:"Mật báo Hoàng hậu",fx:{hh:12},x:`${v.name} thù -30`,go:()=>{v.rel-=30;v.ghen=cl(v.ghen+10,0,100)}},
  {n:"Từ chối khéo",fx:{duc:1}}]}});
 ev("eunuch",()=>S.mat<10,()=>({o:od(50+S.tamco/3)}),p=>({
- t:"Tiểu thái giám Tiểu Đức Tử quỳ ngoài thềm: “Nô tài nguyện làm chó săn cho nương nương.”<br>Hắn từng hầu ở Kính sự phòng.",o:[
+ t:"Tiểu thái giám Tiểu Đức Tử quỳ ngoài thềm: “Nô tài nguyện làm chó săn cho "+kSay({srv:"m"},S,"{goi}")+".”<br>Hắn từng hầu ở Kính sự phòng.",o:[
  {n:"Nhận làm tai mắt",fx:{bac:-30,mat:1}},
  {n:"Thử lòng hắn trước",fx:{},x:`${word(p.o)} · thành: Tai mắt +1 · hỏng: hắn là gián điệp`,go:()=>{if(roll(p.o))apply({mat:1});else{apply({danh:-3});log('<span class="r">Tiểu Đức Tử mang chuyện cung ngươi đi bán.</span>')}}},
  {n:"Đuổi đi",fx:{duc:1}}]}));
@@ -52,7 +52,7 @@ ev("empnight",()=>!S.preg&&S.sung>=20,()=>({o:od(40+bestArt().w*8+mm())}),p=>({w
  {n:`Phô tài: ${bestArt().n}`,fx:{suc:-5},x:`${word(p.o)} · thành: Sủng +6, Danh +2`,go:()=>{if(roll(p.o))apply({sung:6,danh:2})}},
  {n:"Khuyên ngài giữ long thể",fx:{duc:3,sung:-1}}]}));
 ev("minister",()=>S.rank>=2,()=>({o:od(40+S.tai/3+(has("chamchinh")?15:0))}),p=>({who:pEmp(),
- t:"Hoàng thượng đặt bản tấu xuống: “Thượng thư Hộ bộ xin tăng thuế muối. Ái phi nghĩ sao?”",o:[
+ t:"Hoàng thượng đặt bản tấu xuống: “Thượng thư Hộ bộ xin tăng thuế muối. "+kSay("emp",S,"{Goi}")+" nghĩ sao?”",o:[
  {n:"Can gián thẳng thắn",fx:{},x:`${word(p.o)} · thành: Danh +5, Sủng +3 · hỏng: Sủng -5`,go:()=>{if(roll(p.o))apply({danh:5,sung:3});else apply({sung:-5})}},
  {n:"“Hậu cung không bàn chính sự”",fx:{duc:3,sung:-1}},
  {n:"Nói đỡ cho viên quan",fx:{bac:60,duc:-4},x:"đã nhận bạc của Thượng thư"}]}));

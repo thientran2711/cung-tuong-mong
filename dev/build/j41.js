@@ -54,7 +54,7 @@ function accSneak(k){if(!S||S.dead||Q.length||S.out||S.confined)return;const tc=
  Q.push({t:"Bị bắt",h:`<p>Thị vệ ${nm} bắt được ngươi ở cửa hông. Chuyện truyền khắp lục cung.</p><p class="r">Danh -8 · ${S.confined?`cấm túc ${S.confined} tháng`:"bị phạt"}</p>`});showModal();render()}
 function accAsk(k){if(!S||S.dead||Q.length||!can(1))return;const st=accState(k);if(!st.ask||st.empAway)return;const nm=accName(k);const o=accAskO(k);spend(1);
  if(roll(o)){accGrant(S,k);log(`Xin vào ${nm}: được cho vào buổi này.`);Q.push({t:st.ask==="yk"?"Được yết kiến":"Được mời vào",h:`<p>${st.ask==="yk"?"Thái giám truyền khẩu dụ: Hoàng thượng cho ngươi vào.":"Cung nữ ra cửa mời ngươi vào."}</p><p class="g">Được vào ${nm} buổi này.</p>`});}
- else{log(`Xin vào ${nm}: bị từ chối.`);Q.push({t:"Bị từ chối",h:`<p>${st.ask==="yk"?`Thái giám ra cửa: “Hoàng thượng đang ${S.emp.mood>=2?"không vui":"bận"}, nương nương xin hồi cung.”`:"Cung nữ ra cửa: “Chủ tử nhà nô tỳ không tiện tiếp.”"}</p>`})}
+ else{log(`Xin vào ${nm}: bị từ chối.`);Q.push({t:"Bị từ chối",h:`<p>${st.ask==="yk"?`Thái giám ra cửa: “Hoàng thượng đang ${S.emp.mood>=2?"không vui":"bận"}, ${kSay({srv:"m"},S,"{goi}")} xin hồi cung.”`:"Cung nữ ra cửa: “Chủ tử nhà nô tỳ không tiện tiếp.”"}</p>`})}
  showModal();render()}
 document.addEventListener("click",e=>{const s=e.target.closest("[data-acsneak]");if(s){e.preventDefault();e.stopImmediatePropagation();if(!s.disabled)accSneak(s.dataset.acsneak);return}
  const a=e.target.closest("[data-acask]");if(a){e.preventDefault();e.stopImmediatePropagation();if(!a.disabled)accAsk(a.dataset.acask);return}

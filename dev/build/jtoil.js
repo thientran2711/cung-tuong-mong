@@ -339,24 +339,60 @@ const TOIL_EV={"th-scold":"Thái hậu chê dung nhan","th-praise":"Thái hậu 
  "rival-praise":"Phi tần khen giản dị","crowd-jealous":"Cả hậu cung để ý"};
 window.TOIL_EV=TOIL_EV;
 const TOIL_POP=[];let TOIL_POPT=0;
+/* palace voice (owner 16/11 19:38Z, VANPHONG §2): every reaction is a POOL of lines by look and mood, addressed through the one core
+   (jvoice kAddr: {goi} = how the speaker calls her, {xung} = the speaker's self word) and never repeated within BAL.voice.noRepeat tuần (kLine) */
+const TOIL_SAY={
+ "th-scold":{
+  moc:["“Mặt mộc mà đến thỉnh an ai gia sao? Thật chẳng ra thể thống.”","“Người trong cung mà để mặt trơn như cung nữ quét sân, {goi} không thấy thẹn ư?”","“Thỉnh an ai gia cũng là lễ. Lễ mà sơ sài thì lòng cũng sơ sài.”"],
+  vung:["“Phấn son lem nhem thế kia, cung nữ hầu {goi} không biết việc sao?”","“Son phấn chỗ đậm chỗ nhạt, nhìn như bức tranh vẽ dở. Về bảo người hầu học lại đi.”","“Trang điểm vụng về thế này, ra ngoài người ta cười cả cung của {goi}.”"],
+  diem:["“Son phấn đậm quá, trông chẳng giống con nhà nề nếp.”","“Đỏ thắm thế này, {goi} định đi thỉnh an hay đi hát tuồng?”","“Hoa diễm quá thì mau tàn. Người trong cung nên biết giữ chừng mực.”"],
+  plain:["“Ăn vận sơ sài như vậy mà dám đến trước mặt ai gia?”","“Áo vải mộc mạc đến thỉnh an, người ngoài lại tưởng ai gia bạc đãi {goi}.”","“Giản dị là đức, sơ sài là thất lễ. {Goi} phân không ra hai chữ ấy sao?”"],
+  showy:["“Lộng lẫy thế này, {goi} quên mất ai mới là chủ lục cung rồi chăng?”","“Châu ngọc đầy người, đi một bước kêu ba tiếng. Ai gia nghe mà nhức đầu.”","“Cây cao thì đón gió. {Goi} khoe ra như vậy, chẳng sợ gió to sao?”"]},
+ "th-praise":{
+  plain:["“Giản dị thế này mới phải đạo, ai gia thích.”","“Không châu ngọc mà vẫn sáng sủa, ấy là biết giữ mình.”","“{Goi} ăn vận nhã nhặn, chẳng tranh chẳng giành, ai gia nhìn cũng thấy yên lòng.”","“Mộc mạc mà đoan chính, đúng là người hiểu phép tiết kiệm của tổ tông.”"],
+  neat:["“Hôm nay ăn vận đoan trang, thật vừa mắt ai gia.”","“Đúng mực, đúng phẩm. Người trong cung nên như {goi} vậy.”","“Y phục chỉnh tề, dung nhan thanh tú. {Goi} có lòng, ai gia biết.”","“Đoan trang mà không phô trương, mới ra dáng người của hoàng gia.”","“Nhìn {goi} hôm nay, ai gia lại nhớ thời mình mới vào cung.”","“Phẩm phục chỉn chu, cử chỉ khoan thai. Tốt, tốt lắm.”"]},
+ "hh-scold":{
+  moc:["“{Goi} đến thỉnh an {xung} mà mặt mộc thế này ư?”","“Lục cung đều trang điểm chỉnh tề, chỉ mình {goi} để mặt trơn. Là coi nhẹ lễ hay coi nhẹ {xung}?”","“Mặt mộc thì thanh, nhưng thỉnh an không phải chỗ để thanh.”"],
+  diem:["“Son phấn của {goi} hôm nay… có phần quá tay.”","“Đậm thế này, khéo người ta tưởng hôm nay có yến lớn.”","“Môi đỏ như son, {goi} định để ai ngắm đây?”"],
+  plain:["“Y phục sơ sài quá, người ngoài nhìn vào lại bảo {xung} không dạy dỗ.”","“Giản dị là tốt, nhưng thể diện của lục cung cũng là thể diện của {xung}.”","“Áo này mặc ở cung mình thì được, đến Càn Ninh cung thì kém quá.”"],
+  showy:["“{Goi} ăn vận lộng lẫy như vậy, định át cả {xung} sao?”","“{Goi} hôm nay rực rỡ quá, hoa nở rộ thì e chẳng bền đâu.”","“Trâm vàng cài kín tóc. Phẩm của {goi} cài được bấy nhiêu thật ư?”"]},
+ "hh-praise":{
+  plain:["“Giản dị mà thanh nhã, {xung} rất thích.”","“Không phô trương mà vẫn có thần thái. {Goi} khéo lắm.”","“Lục cung mà ai cũng biết tiết kiệm như {goi} thì {xung} đỡ lo biết bao.”"],
+  neat:["“{Goi} hôm nay thật chỉn chu, đúng là biết lễ.”","“Phẩm phục ngay ngắn, trang điểm vừa phải. Đáng làm gương cho các cung.”","“Thấy {goi} chu đáo thế này, {xung} cũng yên tâm.”","“Biết lễ thì người kính. {Goi} cứ giữ như vậy.”"]},
+ "emp-like":{
+  fair:["“Hôm nay {goi} trông thật tươi tắn, {xung} nhìn mãi không chán.”","“Người đẹp như hoa đầu xuân. {Xung} đến đúng lúc rồi.”","“Lục cung bao nhiêu sắc, hôm nay {xung} chỉ thấy một.”"],
+  any:["“Ăn vận như vậy rất hợp ý {xung}.”","“Nhã nhặn mà có duyên. {Goi} hiểu {xung}.”","“Thế này là vừa, {xung} thích.”","“Không cầu kỳ mà dễ nhìn, {xung} ngồi thêm một lát.”"]},
+ "emp-dislike":{
+  moc:["“Sao hôm nay trông nhợt nhạt thế?”","“{Goi} ốm sao? Mặt mũi chẳng có chút sắc hồng.”","“Mộc mạc quá, {xung} nhìn chẳng ra người đang vui.”"],
+  diem:["“Son phấn đậm quá, {xung} không quen.”","“Rửa bớt phấn đi rồi hãy nói chuyện với {xung}.”","“Hoa lệ quá, lại không giống {goi} nữa.”"],
+  plain:["“Sao ăn vận sơ sài vậy?”","“Nội vụ phủ bớt xén của {goi} sao? Áo xống thế này.”","“Giản dị thì tốt, nhưng hôm nay {xung} đến cơ mà.”"],
+  showy:["“Lộng lẫy quá, {xung} lại thích vẻ thanh nhã hơn.”","“Vàng ngọc đầy đầu, {xung} nhìn cũng thấy nặng thay.”","“Đẹp thì đẹp, mà phô trương quá.”"]},
+ "rival-jealous":{
+  showy:["“Phô trương đến thế, {goi} không sợ người ta dị nghị sao?”","“{Goi} hôm nay châu ngọc đầy người, chắc là được ban thưởng nhiều lắm nhỉ?”","“Đẹp quá, đẹp đến mức đứng cạnh Hoàng hậu cũng chẳng kém. Thật đáng nể.”"],
+  any:["“{Goi} hôm nay đẹp quá, khéo Hoàng thượng chẳng rời mắt được.”","“Dung nhan thế này, chẳng trách có người ngày đêm nhắc đến {goi}.”","“{Xung} nhìn {goi} mà ghen tị. Phải chăng có bí quyết gì?”","“Hoa đẹp thì người hái nhiều, {goi} giữ mình cho khéo.”"]},
+ "rival-tease":{any:["“Ôi chao, phấn son của {goi} hôm nay… đậm đà thật đấy.” Nàng ta che miệng cười khúc khích.","“{Goi} trang điểm thế này là để mừng lễ gì vậy?” Nàng ta liếc mắt cười nhạt.","“Đậm như thế, đứng xa trăm bước cũng nhận ra {goi}.” Mấy người quanh đó cười khẽ.","“Phấn dày thế, gió thổi qua chắc bay mất một lớp.” Nàng ta phẩy quạt, giọng mát mẻ."]},
+ "rival-praise":{any:["“{Goi} ăn vận nhã nhặn, {xung} thích.”","“Thanh đạm mà dễ nhìn, {goi} khéo chọn quá.”","“Giữa một sân son phấn, chỉ {goi} là thanh tao.”","“Không tranh không giành mà vẫn nổi bật, {xung} phục {goi}.”"]},
+ "crowd-jealous":{showy:["Lúc thỉnh an, mấy phi tần cứ liếc nhìn y phục của ta rồi thì thầm với nhau.","Ta vừa bước vào, tiếng trò chuyện chợt ngưng; mấy đôi mắt dán lên trâm ngọc trên tóc ta.","Lúc cáo lui, sau lưng ta có tiếng cười khẽ: “Phô trương như thế, xem được mấy hôm.”"],
+  any:["Lúc thỉnh an, ánh mắt các phi tần cứ dừng trên dung nhan của ta.","Suốt buổi thỉnh an, có người nhìn ta rồi nhìn xuống tay áo mình, khẽ thở dài.","Ra khỏi điện, ta nghe phía sau có người khẽ hỏi: “Nàng ta dùng phấn của cung nào vậy?”"]}};
 function toilSay(k,ctx){const mk=ctx.mk,dv=ctx.dress;const plain=dv==="giandi",showy=dv==="photruong"||dv==="vuot"||dv==="tang";
- switch(k){
-  case"th-scold":return mk==="moc"?"“Mặt mộc mà đến thỉnh an ai gia sao? Thật chẳng ra thể thống.”":mk==="vung"?"“Phấn son lem nhem thế kia, cung nữ của ngươi không biết hầu hạ sao?”":mk==="diem"?"“Son phấn đậm quá, trông chẳng giống con nhà nề nếp.”":plain?"“Ăn vận sơ sài như vậy mà dám đến trước mặt ai gia?”":"“Ăn vận phô trương quá, chẳng hợp lễ chút nào.”";
-  case"th-praise":return plain||mk==="moc"?"“Giản dị thế này mới phải đạo, ai gia thích.”":"“Hôm nay ăn vận đoan trang, thật vừa mắt ai gia.”";
-  case"hh-scold":return mk==="moc"?"“Muội đến thỉnh an bổn cung mà mặt mộc thế này ư?”":mk==="diem"?"“Son phấn của muội hôm nay… có phần quá tay.”":plain?"“Y phục sơ sài quá, người ngoài nhìn vào lại bảo bổn cung không dạy dỗ.”":"“Muội ăn vận lộng lẫy như vậy, định át cả bổn cung sao?”";
-  case"hh-praise":return plain||mk==="moc"?"“Giản dị mà thanh nhã, bổn cung rất thích.”":"“Muội hôm nay thật chỉn chu, đúng là biết lễ.”";
-  case"emp-like":return mk==="tuyet"||mk==="dep"?"“Hôm nay ái phi trông thật tươi tắn, trẫm nhìn mãi không chán.”":"“Ăn vận như vậy rất hợp ý trẫm.”";
-  case"emp-dislike":return mk==="moc"?"“Sao hôm nay trông nhợt nhạt thế?”":mk==="diem"?"“Son phấn đậm quá, trẫm không quen.”":plain?"“Sao ăn vận sơ sài vậy?”":"“Lộng lẫy quá, trẫm lại thích vẻ thanh nhã hơn.”";
-  case"rival-jealous":return showy?"“Phô trương đến thế, muội không sợ người ta dị nghị sao?”":"“Muội muội hôm nay đẹp quá, khéo Hoàng thượng chẳng rời mắt được.”";
-  case"rival-tease":return"“Ôi chao, phấn son của muội hôm nay… đậm đà thật đấy.” Nàng ta che miệng cười khúc khích.";
-  case"rival-praise":return"“Muội ăn vận nhã nhặn, tỷ thích.”";
-  case"crowd-jealous":return showy?"Lúc thỉnh an, mấy phi tần cứ liếc nhìn y phục của ta rồi thì thầm với nhau.":"Lúc thỉnh an, ánh mắt các phi tần cứ dừng trên dung nhan của ta.";}return""}
+ const P=TOIL_SAY[k];if(!P)return"";const host=ctx.host;
+ const sp=host==="th"?"th":host==="emp"?"emp":host&&host.queen?"hh":host&&typeof host==="object"?host:null;
+ let sub;switch(k){
+  case"th-scold":case"hh-scold":sub=mk==="moc"?"moc":mk==="vung"&&P.vung?"vung":mk==="diem"?"diem":plain?"plain":"showy";break;
+  case"th-praise":case"hh-praise":sub=plain||mk==="moc"?"plain":"neat";break;
+  case"emp-like":sub=mk==="tuyet"||mk==="dep"?"fair":"any";break;
+  case"emp-dislike":sub=mk==="moc"?"moc":mk==="diem"?"diem":plain?"plain":"showy";break;
+  case"rival-jealous":case"crowd-jealous":sub=showy?"showy":"any";break;
+  default:sub="any"}
+ /* a scolding never uses the warm words (no "con" / "ái phi" while she is being told off); praise follows the real relation */
+ const bad=/scold|dislike|jealous|tease/.test(k);let m;try{m=sp?kAddr(sp,S).m:"cool"}catch(e){m="cool"}if(bad&&m==="warm")m="cool";if(!bad&&m==="cold")m="cool";
+ return kLine("toil:"+k+":"+sub,P[sub]||P.any,{sp,ls:S,m})}
 /* r = {k, who (face), host ("th" | "emp" | consort), n (signed change shown in words), line (numbers), ctx} */
 function toilReact(r){TOIL_POP.push(r);clearTimeout(TOIL_POPT);TOIL_POPT=setTimeout(toilFlush,0)}
 function toilBack(host,n){if(!n)return;if(host==="th")apply({th:n});else if(host==="emp")apply({sung:n>0?1:-1});else if(host&&host!==S)affAdd(host,S,n)}
 function toilFlush(){if(!TOIL_POP.length||!S||S.dead)return;const L=TOIL_POP.splice(0).sort((a,b)=>Math.abs(b.n)-Math.abs(a.n));const top=L.slice(0,BAL.toil.popMax),rest=L.slice(BAL.toil.popMax);
  top.forEach((r,i)=>{const bad=r.n<0;const who=toilWho(r.host==null?null:r.host)||"";const more=i===top.length-1&&rest.length?`<p class="past">Còn: ${rest.map(x=>`${x.name||toilWho(x.host)} — ${x.line}`).join(" · ")}.</p>`:"";
-  const h=`<p>${toilSay(r.k,r.ctx)}</p><p class="past">${r.line}.</p>${more}`;
+  const h=`<p>${toilSay(r.k,Object.assign({host:r.host},r.ctx))}</p><p class="past">${r.line}.</p>${more}`;
   const back=Math.ceil(Math.abs(r.n)*BAL.toil.sorryBack);
   /* cost mode (KIT 28.6 / §53 kitHint): the options' fx are empty (the change happens in go), so each says its own true hint */
   const nm=r.name||who,boss=r.host==="th"||r.host==="emp"||(r.host&&r.host.queen),them=lv=>lv?nm:boss?"bề trên":"nàng ta";

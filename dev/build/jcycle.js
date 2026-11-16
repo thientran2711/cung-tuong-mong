@@ -111,7 +111,7 @@ function cyAsk(){if(!S||S.dead||S.out||(typeof isSrv==="function"&&isSrv())||!S.
  if(Array.isArray(Q)&&Q.some(m=>m&&m.t==="Nhập cung")){c.rk=wk();c.rv="dung";return false}
  c.df=wk();pushDil(mkP("cyrep"),"Kỳ nguyệt sự");return true}
 PEND.cyrep=()=>{if(!S||!S.maid||!cycOn(S))return null;const R=B().rep,c=cyb(),loyal=S.maid.loyal||50,po=cyLieO(),
-  lo=cl_(od(B().backO+Math.round((S.tamco||0)/B().backTc)+Math.round(loyal/5)),5,95),xg=S.rank>=7?"Hoàng hậu nương nương":S.rank>=3?"nương nương":"tiểu chủ";
+  lo=cl_(od(B().backO+Math.round((S.tamco||0)/B().backTc)+Math.round(loyal/5)),5,95),xg=kSay({srv:"f"},S,"{goi}")/* one address core (jvoice) */;
  const done=k=>{c.rk=wk();c.rv=k;try{cyNoFriend(flip)}catch(e){console.error(e)}try{render()}catch(e){}};
  const mk=(n,s,k,pre)=>{const o=c6(n,s);const g=o.go;o.go=()=>{try{if(pre)pre()}catch(e){console.error(e)}g();done(k)};return o};
  const risk=`được lật thẻ mà bị ma ma soát ra (${chanceW(100-po)}): mất đêm ấy, Sủng -${R.lieSung} Danh -${R.lieDanh}`,evi="kẻ thù tra sổ có thể nắm chứng cứ";

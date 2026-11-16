@@ -453,7 +453,7 @@ PEND.taintpick=p=>{const e=S.inv[p.ix];if(!e)return null;const L=Object.entries(
  return{t:`<p>Lén làm gì với <b>${iname(e)}</b>?</p>`,o:L.map(([k,T])=>({n:T.n[0].toUpperCase()+T.n.slice(1),fx:T.c?{bac:-T.c,duc:-3}:{duc:-3},x:T.hurt+(T.need?" · tốn "+IT[T.need].n:""),go:()=>log(taintItem(S,p.ix,k))})).concat([{n:"Thôi",fx:{}}])}};
 PEND.evpick=p=>({t:"<p>Tập chứng cứ này nói về ai?</p>",o:liveRivals(true).map(v=>({kgt:v,n:v.name,fx:{},go:()=>log(useItem(S,p.ix,v))})).concat([{n:"Thôi",fx:{}}])});
 PEND.itarget=p=>({t:`<p>Dùng ${IT[p.k].n} với ai?</p>`,o:liveRivals(true).map(v=>({kgt:v,n:v.name,fx:{},go:()=>{spend(2);log(useItem(S,p.ix,v))}})).concat([{n:"Thôi",fx:{}}])});
-PEND.shop=()=>({who:pEunCourt("ped"),t:"<p>Thái giám Nội vụ phủ bưng vào một khay đồ mua từ ngoài cung, dâng lên cho nương nương chọn: “Đồ mới mang vào, xin nương nương xem qua.”</p>",o:S.shop.map(k=>({n:iic(k,20)+IT[k].n,fx:{bac:-IT[k].pr},x:`${IT[k].kd} · ${IT[k].d}`,go:()=>{S.inv.push({k});log(`Mua ${IT[k].n}.`)}})).concat([{n:"Thôi",fx:{}}])});
+PEND.shop=()=>({who:pEunCourt("ped"),t:"<p>Thái giám Nội vụ phủ bưng vào một khay đồ mua từ ngoài cung, dâng lên cho ngươi chọn: “Đồ mới mang vào, xin "+kSay({srv:"m"},S,"{goi}")+" xem qua.”</p>",o:S.shop.map(k=>({n:iic(k,20)+IT[k].n,fx:{bac:-IT[k].pr},x:`${IT[k].kd} · ${IT[k].d}`,go:()=>{S.inv.push({k});log(`Mua ${IT[k].n}.`)}})).concat([{n:"Thôi",fx:{}}])});
 PEND.giftin=p=>{const f=byKey(p.f),e=p.e;if(!f)return null;const it=IT[e.k],hi=rkOf(f)>S.rank;
  return{who:pv(f),t:`<p>${f.name} sai người mang <b>${it.n}</b> sang tặng ngươi.</p><p class="past">${it.d}</p>`,o:[
  {n:"Nhận",fx:{},x:"cất vào rương",go:()=>S.inv.push(Object.assign({},e))},
