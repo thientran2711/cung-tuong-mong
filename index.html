@@ -29537,7 +29537,9 @@ function bacE(s){const c=s.c||{};const p=s.p==null?1:Math.max(5,Math.min(95,Math
 function bacRound(b){return b>=10?Math.round(b/5)*5:Math.max(1,Math.round(b))}
 /* one card's specs [n,s] → the same list with fair silver options */
 function bacFairList(L){const F=BAL.bacFair,vb=bacV1("bac");const free=L.filter(([,s])=>!(s&&s.c&&s.c.bac<0));if(!free.length)return L;
- const ea=Math.max(...free.map(([,s])=>bacE(s||{}).e));
+ /* target = the best free option, but never below 0: when every free road is a loss (rumorEmpLove "Lan thêm lời đồn" E −20 khắc, stormNight,
+    proudVisit) matching it would charge more silver than the gain is worth (review r1: 45 bạc for Tai mắt +1); price it at its worth instead */
+ const ea=Math.max(0,...free.map(([,s])=>bacE(s||{}).e));
  return L.map(([n,s])=>{if(!s||!s.c||!(s.c.bac<0))return[n,s];const b0=-s.c.bac,E0=bacE(s);if(!(E0.gain>0))return[n,s];
   const lo=Math.max(1,Math.ceil(b0*F.lo)),hi=Math.round(b0*F.hi);
   /* price at which E(silver) = E(best free): b* = (E without the silver − ea) / value of 1 bạc */
@@ -31683,7 +31685,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="9d41825c9502";window.CTM_BUILD=BUILD;
+const BUILD="e5b9a74920ce";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
