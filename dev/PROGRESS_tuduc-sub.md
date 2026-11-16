@@ -87,3 +87,30 @@ See the table appended below (before = origin/main build, after = this build).
 - Đức +10 in this heavy driver comes from Hạnh works (Đức +1 each, same as chép kinh); a normal player makes far fewer. Tune by
   removing `fin` from WK.phucthien if reviewers find it too strong.
 - NPCs now carry Tứ đức works (≈0.5 each after 2 years), which feed their gifts through wkNpcUse.
+
+## Review r1 (reviewer, branch review/tuduc-sub-r1)
+- Merged origin/main 9b4f1697a (conflicts: generated files + assemble list → main's list + `jstaff.js`, then `jrcp.js`, `jtds.js` last).
+  recipes-r2 is still not on main; this branch carries it.
+- Checked vs owner rulings: 4 kinds × 10 recipes × 4 tiers × 4 lối; lối 1 known, bậc 2/4/5 open lối 2/3/4 (player + NPC); fee 8% of bổng
+  [3,4,6,8,10,13,17,22]; NPC study pays its own fee; lesson → work, material paid only when made; NPC works cap 4; old saves (ts-oldsave ok).
+- `BAL.rcp.tFavor` getter: only callers are jrcp tchPaid + rcpTchAsk text (both use S at the same moment) → art-teacher text and charge
+  agree (3..8 by rank instead of flat 4). OK.
+- Favour vs fee (bạc-equivalence): j8 gift scale turns the fee into round(fee/12)+2 = 2..4 thiện cảm; the favour 3..8 is never below that
+  and at most ~2×, and the consort road also blocks chân tình gifts to her for askW weeks and teaches only lối she knows. Judged
+  EQUIVALENT ENOUGH (the bạc road is 8% of a month's pay at every rank, so neither road is free). Kept.
+- FIX (Đức farm, LUẬT SỬA CẢ NHÓM: whole family = every work with `WK.fin` = Chép kinh + Vật cầu phúc): Đức from handmade works is now at
+  most `BAL.wkFinCap` = 1 per month (j83 `wkFinLeft/wkFinTxt`; `S.wkFin`). Before, a bậc-5 "Tự luyện" (Thi kinh or Hạnh) gave Đức +1 per
+  2 khắc without limit. All 5 text sites (j83 ×2, jwkr, jtds ×2) show "Đức +1, mỗi tháng một lần" / "tháng này Đức đã tăng rồi"; log says
+  "Tháng này Đức đã tăng rồi, món này không thêm Đức." The work is still made.
+  | heavy driver, 24 months | main | tuduc-sub | tuduc-sub-r1 |
+  |---|---|---|---|
+  | Đức at end | 52 | 62–63 | 55–56 |
+  | Hạnh works | 0 | ≈10–19 | 8–9 |
+- FIX: consort-taught Tứ đức lesson logged "Theo <giáo tập ma ma> … học Ngôn" (jstaff name) though a consort taught → now "Học Ngôn." and
+  tdsFinish names the consort.
+- Art: contact sheets (r01/r07/r10 × 4 tiers × 4 kinds + 4 covers; r02–r09 tiers 1+4): transparent 256 px, tiers rise clearly, no people.
+  Note only: phấn son r03/r07 tier 1 (son giấy) reads a little like a stained paper; several tier-1 pieces look worn (by design "Thường").
+- Kit: Tứ đức cards / Tác phẩm cards / "Các lối, sách phổ" = the same pbtn / kitSkillCard / kitModal parts as the art cards (identical
+  "Các lối, sách phổ" pbtn as jrcp's). No CSS added. Consistent.
+- Pre-existing on main (not this branch): material-choice option cards clip their last Được line vertically at 755x1000 (art kinds too:
+  Cầm/Thi "Tuyệt phẩm: chỉ vật liệu quý", "quà giá trị +1"); ranges "+2..3", "(0..10)" in card text → review/act-text net covers them.
