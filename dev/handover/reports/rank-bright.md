@@ -17,6 +17,9 @@ Sheet: dev/handover/reports/rank-bright/before-after.jpg (Fold, seeded, bg loade
 ## Rework 13:30Z (main s17: change was too subtle)
 Jewel-tone bases (RCOL #c4861a #12b84a #1f6cff #ff3d8f #a23cff #ff1f3d #ff6a00 #ffc400, MRCOL/ERCOL brighter), tone floor 4.0->2.8:1, readability = ONE kit rank-text edge (KIT 48.1h: .45px same-hue deep stroke + soft shadow) on every rank text. NOTE: this adds an edge in framed UI, which OD 15/11 22:25Z said should be plain text; done on the coordinator's instruction, revert 48.1h if the owner objects. New sheet: before-after2.jpg (zoomed crops).
 
+## Rework 2 (owner 13:35Z: Đáp ứng bronze / gold too pale on paper)
+Tone floor 2.8->3.6:1 (deeper, same hue, still saturated); sheet before-after3.jpg (all ranks on paper + zoomed crops).
+
 ## Honest limits
 - Text on LIGHT paper is limited by contrast: gold/bronze can only get so bright; I lowered the floor 4.5->4.0 (bold serif). Đáp ứng (bronze) is still the dullest.
 - Painted frame/gem/brocade art is not recoloured (art task).
