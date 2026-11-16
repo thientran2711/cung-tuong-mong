@@ -39,3 +39,15 @@ dev/handover/reports/review-emotion-acts-r1.md.
 ## Known (not this branch)
 - KIT bug seen in Tuần lục "Sổ này ghi": kitFaceH(S.maid) treats her maid object as a ready face (the maid record has a `src` field =
   origin "home") → "undefined" text instead of the maid's face. Kit part (j79 kitFaceH) → KIT REQUEST to the kit keeper.
+
+## Measurements (life bots, runb.js sens, INP=inpage6.js, HHSTOP=1, INP2=inmood.js,inemoact.js, cap 3300 s; build c0d77857)
+| arm | lives | HH | early death |
+|---|---|---|---|
+| ON | 36 | 3 % | 28 % |
+| OFF (`window.__eaOff=1`) | 36 | 3 % | 56 % |
+Not worse (early death SE ≈ 11 points at n 36). Her outbursts 1.88 / 100 tuần, extremes 0.02. Per kind (outbursts / acts / extremes /
+lines seen / hidden by fog): c 7497/8604/3126/16224/3003 · e 270/2131/86/2487/0 · k 220/467/143/735/95 · q 0/440/0/440/0 ·
+s 25/527/12/564/0 · t 0/570/0/570/0; m and o: 0 (jemo seeds men / court feelings at 25–30 only, under the act line 40: their reactions
+exist and are tested (test case kinds) but rarely fire in a life). Quở trách: +1 month 53, −1 month 19; pillow grades moved 2017;
+tablets not turned (Emperor venting) 174.
+First run (build 4e1e0d94, ministers' feelings never faded): q 2142 outbursts / 1276 extremes, angry-Emperor +1 month 1210 → fixed (c0d77857).
