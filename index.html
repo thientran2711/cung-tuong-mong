@@ -27662,6 +27662,11 @@ function bacFairList(L){const F=BAL.bacFair,vb=bacV1("bac");const free=L.filter(
    try{c6=(n,s)=>({__bac6:1,n,s});L=o0.apply(this,arguments)}catch(e){c6=real;return o0.apply(this,arguments)}finally{c6=real}
    if(!Array.isArray(L))return L;try{const P=L.filter(x=>x&&x.__bac6).map(x=>[x.n,x.s]);const F=bacFairList(P);let i=0;
     return L.map(x=>{if(!x||!x.__bac6)return x;const [n,s]=F[i++];return c6(n,s)})}catch(e){console.error("jbac",e);return L.map(x=>x&&x.__bac6?c6(x.n,x.s):x)}}}})();
+/* Dưỡng sức (jrest): the silver for the tonic is priced at her rank too (BAL.restDsBac0 at the middle rank, BAL.bacTuan[3]):
+   6 bạc at rank 1 cost more than four "Nghỉ ngơi một lát" (scan: other road obvious) */
+(function(){if(BAL.restDsBac==null)return;const b0=BAL.restDsBac;BAL.restDsBac0=b0;
+ try{Object.defineProperty(BAL,"restDsBac",{get:()=>Math.max(2,Math.round(BAL.restDsBac0*BAL.bacTuan[Math.max(0,Math.min(7,(typeof S!=="undefined"&&S?S.rank|0:3)))]/BAL.bacTuan[3])),
+  set:v=>{BAL.restDsBac0=v},enumerable:true,configurable:true})}catch(e){console.error("jbac rest",e)}})();
 /* ================= jts: TOP 15 — LÔ A (sếp duyệt 15/11 02:00Z; dev/research/TRUNGSINH_COMPARE.md "Đào sâu" → Top 15)
    Ý 2 Hội phối đồ theo đề · ý 3 Hoàng thượng triệu riêng (đàn, cờ, du hồ; thích khách có điềm báo) · ý 4 Lễ tấn phong (khách chúc, lì xì)
    · ý 5 Ngưỡng xét phẩm hiện trước · ý 6 Nguy hiểm chung · ý 12 Ân thưởng sau sinh · ý 14 Thả đèn hoa đăng.
@@ -29049,7 +29054,7 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.2",title:"Th�
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="14f6642bea7f";window.CTM_BUILD=BUILD;
+const BUILD="77760e9fac61";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

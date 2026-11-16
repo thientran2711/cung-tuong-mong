@@ -12,7 +12,9 @@
    usage: NODE_PATH=$(npm root -g) node dev/measure/bacroad.js <page url> <out.json> [val.json]   → also prints a markdown table */
 const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT,VALF]=process.argv;
 const VAL=VALF?JSON.parse(fs.readFileSync(VALF,'utf8')):null;
-(async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:900,height:900}});const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
+(async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:900,height:900}});
+ /* seeded Math.random (BACSEED, default 7): the same start every run, so before/after differ only by the code */
+ await p.addInitScript(([sd])=>{let s=sd*7919+12345;Math.random=()=>{s|=0;s=s+0x6D2B79F5|0;let t=Math.imul(s^s>>>15,1|s);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}},[+(process.env.BACSEED||7)]);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
  await p.route(/\.(webp|png|jpe?g|mp3|ogg|m4a)(\?|$)/i,r=>r.abort());
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function',null,{timeout:120000});await p.waitForTimeout(2000);
  await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;window.__forceOrigin='tt';document.getElementById('title').hidden=true;start()});

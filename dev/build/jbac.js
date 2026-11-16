@@ -39,3 +39,8 @@ function bacFairList(L){const F=BAL.bacFair,vb=bacV1("bac");const free=L.filter(
    try{c6=(n,s)=>({__bac6:1,n,s});L=o0.apply(this,arguments)}catch(e){c6=real;return o0.apply(this,arguments)}finally{c6=real}
    if(!Array.isArray(L))return L;try{const P=L.filter(x=>x&&x.__bac6).map(x=>[x.n,x.s]);const F=bacFairList(P);let i=0;
     return L.map(x=>{if(!x||!x.__bac6)return x;const [n,s]=F[i++];return c6(n,s)})}catch(e){console.error("jbac",e);return L.map(x=>x&&x.__bac6?c6(x.n,x.s):x)}}}})();
+/* Dưỡng sức (jrest): the silver for the tonic is priced at her rank too (BAL.restDsBac0 at the middle rank, BAL.bacTuan[3]):
+   6 bạc at rank 1 cost more than four "Nghỉ ngơi một lát" (scan: other road obvious) */
+(function(){if(BAL.restDsBac==null)return;const b0=BAL.restDsBac;BAL.restDsBac0=b0;
+ try{Object.defineProperty(BAL,"restDsBac",{get:()=>Math.max(2,Math.round(BAL.restDsBac0*BAL.bacTuan[Math.max(0,Math.min(7,(typeof S!=="undefined"&&S?S.rank|0:3)))]/BAL.bacTuan[3])),
+  set:v=>{BAL.restDsBac0=v},enumerable:true,configurable:true})}catch(e){console.error("jbac rest",e)}})();
