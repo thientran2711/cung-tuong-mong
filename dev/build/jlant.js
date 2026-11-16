@@ -3,7 +3,7 @@
    Three short rounds (raw 0–10 like every contest game): 1 "Cùng kiểu" (tap every lantern like the sample card: shape + colour) · 2 "Thắp theo hình"
    (light the lanterns so the grid matches the sample grid) · 3 "Treo theo dải" (tap the tray lanterns in the order of the sample string).
    Same easy rules as mg-easy: Gợi ý button (a little score), idle auto-hint at tiers 0/1, a wrong tap bounces back at tiers 0/1, first-time demo card.
-   Every number is BAL.lantern (tier 0/1/2 columns). Difficulty tier: window.mgTier (review/mg-balance) when it exists, else kg82Tier(player level).
+   Every number is BAL.lantern (tier 0/1/2 columns). Difficulty tier: mgTierOf(env) (jmgt: KG82.tier set by mgSet, else kg82Tier(env.lv)); BAL.lantern.tier forces one for tests.
    Uses only existing kit parts: j82 game frame + canvas, k91Btns / k91DemoCard / k91Pointer / k91Loop, the doden-bg painting. KIT REQUEST: none.
    Registers KG82_ENG.lamp; KG82_KIND.doden (j82) points at it. Old saves: key "doden" unchanged; the demo flag is the new key "doden2". */
 BAL.lantern={field:[8,10,12],same:[3,3,4],lit:[3,4,5],rows:[2,3,3],seq:[3,4,5],lim:[32000,28000,24000],idle:[9000,14000,0],
@@ -11,8 +11,8 @@ BAL.lantern={field:[8,10,12],same:[3,3,4],lit:[3,4,5],rows:[2,3,3],seq:[3,4,5],l
  timeout:.6,autoHint:.5,bad:[1300,1300,500],glow:3500,pause:[900,1100],short:{h:520,min:240}};
 const LM_COL=[["#c23b22","#ff8a6a","#6e1608"],["#d99a1b","#ffe08a","#7a5206"],["#2f9d78","#8ff0c8","#0f5a40"]];
 function lmTier(env){const T=BAL.lantern.tier;if(T!=null)return cl(+T||0,0,2);
- try{if(typeof window.mgTier==="function"){const t=window.mgTier(env.kind||"doden",env.ctx||KG82.ctx);if(typeof t==="number"&&isFinite(t))return cl(Math.round(t),0,2)}}catch(e){}
- return kg82Tier(env.lv)}
+ /* review/mg-train: the tier mgSet() set for this play (occasion stakes), via jmgt mgTierOf; else the aid tier of the ease */
+ return typeof mgTierOf==="function"?mgTierOf(env):kg82Tier(env.lv)}
 /* one lantern: shape 0 tròn · 1 bầu · 2 lục giác · 3 trụ dài; col 0 đỏ · 1 vàng · 2 ngọc; lit = glowing; st n|ok|bad|dim */
 function lmDraw(g,cx,cy,w,h,shape,col,lit,st,sway){const C=LM_COL[col];g.save();g.translate(cx,cy);if(sway)g.rotate(sway);
  const bw=w*.92,bh=h*.7,top=-h/2,by=-bh/2+h*.03;g.strokeStyle="#7a5a20";g.lineWidth=1.5;g.beginPath();g.moveTo(0,top-3);g.lineTo(0,by);g.stroke();
