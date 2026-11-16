@@ -32088,13 +32088,13 @@ function plxPlaceMsg(k,n){if(n)return"";return({cnh:"Dãy nhà vắng, cung nhâ
 /* arriving: the people there */
 (function(){const g0=goTo;goTo=function(k){const r=g0.apply(this,arguments);try{if(!PLX[k]||S.dead||S.place!==k||!S.visit||S.visit.k!==k)return r;
   if(typeof isSrv==="function"&&isSrv())return r;
-  const L=plxPeople(k);S.visit.people=(k==="tgk"?S.visit.people.filter(p=>p.kind!=="npc"):[]).concat(L);
-  const m=plxPlaceMsg(k,S.visit.people.length);S.visit.msg=m||(S.visit.people.length?`Ở đây có ${S.visit.people.length} người.`:"Không gặp ai.");
+  const m0=S.visit.msg,E=S.visit.people.filter(p=>p.kind==="elder"),L=E.concat(plxPeople(k));S.visit.people=L;
+  const m=k==="tgk"&&E.length&&m0?m0:plxPlaceMsg(k,S.visit.people.length);S.visit.msg=m||(S.visit.people.length?`Ở đây có ${S.visit.people.length} người.`:"Không gặp ai.");
   render()}catch(e){console.error(e)}return r}})();
 /* faces of servants shown here */
 (function(){if(typeof pFaceOf!=="function")return;const f0=pFaceOf;pFaceOf=function(p){try{if(p&&p.kind==="npc"&&p.sid){const s=servById(p.sid);if(s)return pServ(s)}}catch(e){}return f0.apply(this,arguments)}})();
 /* the Dư đồ count of these places = the people she meets on arrival (outermost wrap: after j59's own, which is queued at load) */
-setTimeout(()=>{try{const c0=countAt;countAt=function(k){try{if(PLX[k]&&!(S&&S.visit&&k===S.place&&S.visit.k===k)&&!(typeof isSrv==="function"&&isSrv()))return plxPeople(k).filter(p=>p.kind!=="task").length}catch(e){}return c0.apply(this,arguments)}}catch(e){}},0);
+setTimeout(()=>{try{const c0=countAt;countAt=function(k){try{if(PLX[k]&&!(S&&S.visit&&k===S.place&&S.visit.k===k)&&!(typeof isSrv==="function"&&isSrv()))return plxPeople(k).filter(p=>p.kind!=="task").length+(k==="tgk"&&typeof elderBy==="function"&&elderBy("tn")?1:0)}catch(e){}return c0.apply(this,arguments)}}catch(e){}},0);
 
 /* ---------- who may enter (j41 ACC_ROLE; the servant road keeps j42's hook, patched for her own quarters) ---------- */
 (function(){
@@ -32145,7 +32145,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="7acf444c16b4";window.CTM_BUILD=BUILD;
+const BUILD="ef89e61f056a";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
