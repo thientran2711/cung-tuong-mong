@@ -158,3 +158,4 @@ OWNER ASLEEP since 07:40Z: NO messages until her 8 AM; then ONE report with ever
 - (09:20Z s12) ROLLOVER FIX: box at top of START_MAIN/START_FOREMAN (context via get_session, 30-turn counter is display only); foremen told; s13 told.
 - (09:25Z s12) npc-mind SẴN SÀNG KIỂM 7fd289cd → review + BALANCE BLOCKER (HH 0–4 %, early death 50 % on main) moved to Foreman B. NVP v4 finals on CDN img/nvp-v4-*.webp, review/nvp-v4 holds NVP_V4.md (not wired).
 - (09:28Z s12) one-core SẴN SÀNG KIỂM 7b9d022f → B reviews. All bots agree: HH reach ~5 % on main (target ~32 %) → B balance pass, 8 AM report.
+- (09:32Z s12) coop-rejoin-xdev SẴN SÀNG KIỂM 53b7b4f6 → D opus reviewer (urgent owner bug). On PASS: ff + post-deploy smoke + tell owner co-op cross-device rejoin is fixed.
