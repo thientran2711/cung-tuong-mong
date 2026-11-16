@@ -719,16 +719,44 @@ function kitInfoArt(title){const k=kitInfoKey(title);const have=KIT_INFOM.have||
    the figure follows her current look, so a face picked in the panel (j86) shows on the standing figure at the next build */
 function kpIdFig(M,tries){let src="";try{src=typeof figFor==="function"?figFor(S):""}catch(e){}let im=M.querySelector(":scope > img.kidfig2");
  /* review/stage-fig-size (owner 15/11: the identity card showed NO figure): the figure list (FIGURES.json, CDN) can arrive seconds after the
-    card opens — 6 × 400 ms gave up. Now: the kit's unknown-lady silhouette stands in her place while it loads, retried every 400 ms for
-    up to 30 s; a picture that fails to load is retried once, then the silhouette stays. */
- if(!src){const ph=(typeof KIT_DIR==="string"?KIT_DIR:"img/kit/")+"unknown-fig-f.webp";if((tries||0)<75){src=ph;setTimeout(()=>{if(!M.hidden&&M.classList.contains("kpscene")&&$("mb").querySelector(".kpid"))kpIdFig(M,(tries||0)+1)},400)}
-  else{if(im)im.remove();M.classList.remove("kpfig");return}}
- if(!im){im=document.createElement("img");im.className="kidfig2";im.alt="";M.prepend(im)}
-if(!im.dataset.kerr){im.dataset.kerr=1;im.addEventListener("error",()=>{if(im.dataset.kerr==="1"){im.dataset.kerr="2";const s0=im.getAttribute("src");setTimeout(()=>{if(im.isConnected)im.src=s0+(s0.includes("?")?"&":"?")+"r=1"},600)}})}
- if(im.getAttribute("src")!==src)im.src=src;M.classList.add("kpfig");
- const id=$("mb").querySelector(".kpid");if(id)id.classList.add("kpidf");
- const fit=()=>{try{const d=M.querySelector(".dlg");if(!d)return;const r=d.getBoundingClientRect();if(innerWidth<600&&innerHeight>innerWidth){M.style.setProperty("--kidh",Math.max(120,Math.round(r.top-10))+"px")}else M.style.removeProperty("--kidh")}catch(e){}};
- requestAnimationFrame(fit);setTimeout(fit,300)}
+    card opens. The kit's unknown-lady silhouette stands in her place while it loads, retried every 400 ms for up to 30 s; a picture that
+    fails to load is retried once. review/newgame-ui: the silhouette STAYS after 30 s (the card never loses its layout / kpfig class). */
+ const ph=(typeof KIT_DIR==="string"?KIT_DIR:"img/kit/")+"unknown-fig-f.webp";
+ if(!src){src=ph;if((tries||0)<75)setTimeout(()=>{if(!M.hidden&&M.classList.contains("kpscene")&&$("mb").querySelector(".kpid"))kpIdFig(M,(tries||0)+1)},400)}
+ if(!im){im=document.createElement("img");im.className="kidfig2";im.alt="";im.decoding="async";M.prepend(im)}
+ if(!im.dataset.kerr){im.dataset.kerr=1;im.addEventListener("error",()=>{const s0=im.getAttribute("src")||"";if(/\/tn\//.test(s0))return;if(im.dataset.kerr==="1"){im.dataset.kerr="2";setTimeout(()=>{if(im.isConnected)im.src=s0+(s0.includes("?")?"&":"?")+"r=1"},600)}})}
+ M.classList.add("kpfig");const id=$("mb").querySelector(".kpid");if(id)id.classList.add("kpidf");
+ /* review/newgame-ui (owner 15/11 "mỗi người 1 chiều cao … che cả nhân vật … 1 lúc sau mới thấy hình"):
+    1) ONE standard figure tier: every face is drawn with the same BODY height (head top → feet, kitFigBody, as KIT 33.6) on the same floor
+       line, whatever the picture's margins or width (was object-fit:contain in a fixed box: wide robes came out shorter);
+    2) a FIXED column left of the panel, the panel a fixed width per viewport (kpIdLay); robe / sleeve wider than the column is cut with a
+       soft fade at the column edge, so the panel never covers her;
+    3) the low-res copy (kitTn, ~4 KB, prefetched with the page of faces) shows at once, the crisp figure swaps in once decoded. */
+ const lo=kitTn(src);const crisp=src;M.__kidWant=crisp;
+ const show=s1=>{if(M.__kidWant!==crisp)return;if(im.getAttribute("src")!==s1){im.src=s1}im.classList.toggle("kidlo",s1!==crisp);kpIdLay(M)};
+ if(KPID_OK[crisp]||!lo)show(crisp);
+ else{show(lo);const pre=new Image();pre.decoding="async";pre.src=crisp;const fin=()=>{KPID_OK[crisp]=1;show(crisp)};(pre.decode?pre.decode().then(fin,()=>{pre.complete&&pre.naturalWidth?fin():0}):(pre.onload=fin))}
+ if(!M.__kidRes){M.__kidRes=1;addEventListener("resize",()=>{clearTimeout(M.__kidT);M.__kidT=setTimeout(()=>{if(M.classList.contains("kpfig"))kpIdLay(M)},60)})}}
+const KPID_OK={};
+/* the geometry (screen px, from the modal box — the design canvas): phone portrait keeps the figure-on-top layout (CSS, --kidh) */
+function kpIdLay(M){try{const im=M.querySelector(":scope > img.kidfig2"),d=M.querySelector(".dlg");if(!im||!d)return;const W=M.clientWidth||innerWidth,H=M.clientHeight||innerHeight;
+ const phone=W<600&&H>W;if(phone){["left","top","width","height","bottom","-webkit-mask-image","mask-image"].forEach(k=>im.style.removeProperty(k));d.style.removeProperty("width");d.style.removeProperty("max-width");
+  const r=d.getBoundingClientRect();M.style.setProperty("--kidh",Math.max(120,Math.round(r.top-10))+"px");return}
+ M.style.removeProperty("--kidh");
+ /* fixed panel width per viewport (never wider on the Cung nữ tab): portrait 58 % · landscape min(560 px, 54 %) */
+ const port=H>W;const dw=Math.round(port?W*.58:Math.min(560,W*.54));d.style.setProperty("width",dw+"px","important");d.style.setProperty("max-width",dw+"px","important");
+ const pad=Math.round(W*(port?.03:.025));const colR=W-pad-dw-8,colL=port?0:Math.round(W*.01);const colW=colR-colL;
+ const want=M.__kidWant||im.getAttribute("src")||"";const s1=kitTn(want)||want;/* measured on the small copy (same fractions, tiny canvas) */
+ const fb=kitFigBody(s1,()=>{if((M.__kidWant||"")===want)kpIdLay(M)});
+ if(!fb){im.style.visibility="hidden";return}im.style.visibility="";
+ const floor=H-Math.round(H*.012);let Hs=H*(port?.80:.84);/* the standard body height: same for every face on this screen */
+ const ar=fb.ar||.35,bf=Math.max(.3,fb.b-fb.ht);let ih=Hs/bf,iw=ih*ar;
+ /* KIT 32.2a width test (head → waist must fit the column); only then is she drawn smaller (rare: a very wide headdress) */
+ const k=10,wl=(fb.wl||[])[k],wr=(fb.wr||[])[k];if(wl!=null&&wr!=null){const need=(wr-wl)*iw;if(need>colW*.98){const f=colW*.98/need;ih*=f;iw*=f}}
+ const cx=((fb.cl!=null?(fb.cl+fb.cr)/2:(fb.l+fb.r)/2));let left=Math.round((colL+colW/2)-cx*iw);const top=Math.round(floor-fb.b*ih);
+ Object.assign(im.style,{left:left+"px",top:top+"px",bottom:"auto",width:Math.round(iw)+"px",height:Math.round(ih)+"px",objectFit:"fill"});
+ const fe=Math.round(colR-left);const mk=`linear-gradient(to right,#000 ${fe-24}px,transparent ${fe}px)`;im.style.setProperty("-webkit-mask-image",mk);im.style.setProperty("mask-image",mk);
+ M.dataset.kidcol=colL+","+colR}catch(e){console.error("kpIdLay",e)}}
 (function(){const c0=closeModal;if(typeof c0!=="function")return;closeModal=function(){const r=c0.apply(this,arguments);try{const M=$("modal");if(M&&!M.classList.contains("kpscene")){const im=M.querySelector(":scope > img.kidfig2");if(im)im.remove();M.classList.remove("kpfig")}}catch(e){}return r}})();
 (function(){const b0=kpBuild;kpBuild=function(M,m){b0.apply(this,arguments);try{if(!(m&&m.nl)){const im=M.querySelector(":scope > img.kidfig2");if(im)im.remove();M.classList.remove("kpfig")}}catch(e){}}})();
 (function(){const b0=kpBuild;kpBuild=function(M,m){b0.apply(this,arguments);try{if(kpIsScene(m)){const t=$("rtoast");if(t)t.classList.remove("on")}}catch(e){}}})();
@@ -931,11 +959,26 @@ function kitPicker(o){o=o||{};KIT_PICK[o.id]=o;const items=o.items||[];
 function kitPickerLayout(root,keepPage){try{const g=root.querySelector(".kpkgrid");const B=[...g.querySelectorAll(".kpki")];if(!B.length)return;B.forEach(b=>b.hidden=false);
  const cs=getComputedStyle(g);const gap=parseFloat(cs.columnGap)||6;const iw=B[0].getBoundingClientRect().width||58;const cols=Math.max(3,Math.floor((g.clientWidth+gap)/(iw+gap)));const rows=+root.dataset.rows||2;const per=cols*rows;
  const pages=Math.max(1,Math.ceil(B.length/per));let pg=keepPage&&root.dataset.pg!=null?+root.dataset.pg:Math.floor(Math.max(0,B.findIndex(b=>b.classList.contains("on")))/per);pg=Math.min(Math.max(0,pg),pages-1);root.dataset.pg=pg;
- g.style.setProperty("--kpcols",cols);B.forEach((b,i)=>b.hidden=!(i>=pg*per&&i<(pg+1)*per));
- const [pv,nx]=root.querySelectorAll(".kpkpg");pv.disabled=pg<=0;nx.disabled=pg>=pages-1;pv.hidden=nx.hidden=pages<2;root.querySelector(".kpkpn").textContent=pages>1?`trang ${pg+1}/${pages} · ${B.length} dung mạo`:"";}catch(e){}}
+ g.style.setProperty("--kpcols",cols);root.__kpc={cols,per,pages,B};kitPickerShow(root,pg)}catch(e){}}
+/* review/newgame-ui (owner 15/11 "bấm nút trái phải … lag cực kỳ"): paging never measures the layout again (cols/per kept from the last
+   kitPickerLayout); the next page's pictures are decoded BEFORE the swap (≤ 80 ms wait, then swap anyway), and the pages either side are
+   decoded in idle time, so a page turn is one class toggle on already-decoded thumbnails (small WebP, kitTn). */
+function kitPickerShow(root,pg){const c=root.__kpc;if(!c)return;const {per,pages,B}=c;pg=Math.min(Math.max(0,pg),pages-1);root.dataset.pg=pg;
+ B.forEach((b,i)=>{const on=i>=pg*per&&i<(pg+1)*per;if(b.hidden===on)b.hidden=!on});
+ const [pv,nx]=root.querySelectorAll(".kpkpg");pv.disabled=pg<=0;nx.disabled=pg>=pages-1;pv.hidden=nx.hidden=pages<2;root.querySelector(".kpkpn").textContent=pages>1?`trang ${pg+1}/${pages} · ${B.length} dung mạo`:"";
+ const idle=window.requestIdleCallback||(f=>setTimeout(f,60));idle(()=>{[pg+1,pg-1].forEach(q=>kitPickerDecode(root,q))});try{const o=KIT_PICK[root.dataset.pick];o&&o.onPage&&o.onPage(kitPickerPage(root,pg))}catch(e){}}
+function kitPickerPage(root,pg){const c=root.__kpc;if(!c||pg<0||pg>=c.pages)return[];return c.B.slice(pg*c.per,(pg+1)*c.per)}
+function kitPickerDecode(root,pg){return Promise.all(kitPickerPage(root,pg).flatMap(b=>[...b.querySelectorAll("img")]).map(im=>im.decode?im.decode().catch(()=>0):0))}
+function kitPickerGo(root,pg){const c=root.__kpc;if(!c){root.dataset.pg=pg;kitPickerLayout(root,true);return}pg=Math.min(Math.max(0,pg),c.pages-1);if(pg===+root.dataset.pg)return;
+ root.dataset.want=pg;let done=false;const go=()=>{if(done||+root.dataset.want!==pg)return;done=true;kitPickerShow(root,pg)};kitPickerDecode(root,pg).then(go);setTimeout(go,80)}
+/* KIT 28.11a kitTn(src): the small pre-sized copy of a face picture (img/tn/<por|fig>-….webp, dev/art/tn_make.py) when img/TN.json lists it,
+   else "" — pickers show the thumbnail, the identity card shows the low-res figure at once and swaps in the crisp one when decoded */
+let KIT_TN=null;try{fetch("img/TN.json").then(r=>r.ok?r.json():null).then(j=>{if(j&&j.have){KIT_TN=new Set(j.have);try{window.dispatchEvent(new Event("kittn"))}catch(e){}}}).catch(()=>{})}catch(e){}
+function kitTn(src){try{if(!KIT_TN||!src)return"";const m=/^(.*\/)(por|fig)-([^/]+)\.webp$/.exec(src);if(!m||!KIT_TN.has(m[3]))return"";return m[1]+"tn/"+m[2]+"-"+m[3]+".webp"}catch(e){return""}}
+window.kitTn=kitTn;
 function kitPickerInit(scope){(scope||document).querySelectorAll(".kpick").forEach(r=>kitPickerLayout(r,false))}
 document.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest(".kpick [data-pk],.kpick [data-pkpg],.kpick [data-pkf]");if(!t)return;const root=t.closest(".kpick");const o=KIT_PICK[root.dataset.pick]||{};e.preventDefault();e.stopPropagation();
- if(t.dataset.pkpg){root.dataset.pg=(+root.dataset.pg||0)+(+t.dataset.pkpg);kitPickerLayout(root,true);return}
+ if(t.dataset.pkpg){kitPickerGo(root,(+root.dataset.pg||0)+(+t.dataset.pkpg));return}
  if(t.dataset.pkf){if(o.onFilter)o.onFilter(t.dataset.pkf);return}
  if(t.dataset.pk&&o.onPick)o.onPick(t.dataset.pk)},true);
 document.addEventListener("keydown",e=>{const b=e.target.closest&&e.target.closest(".kpick .kpki");if(!b)return;const V=[...b.parentNode.querySelectorAll(".kpki:not([hidden])")];const i=V.indexOf(b);const cols=+getComputedStyle(b.parentNode).getPropertyValue("--kpcols")||4;
