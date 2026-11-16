@@ -77,6 +77,34 @@ in short samples come from survivorship (runs cut mid-life keep only the lives t
 Diagnosis on main: HH 0 % in other bots = harness (trung y loop, no makeup, pond pushes ~26/life, no exam in inpage4) + exam bars;
 poison deaths: most are NOT ACT.poison (1 of 18 landed ones killed) but poisoned food gifts accepted with a hint that hid the death risk.
 
+## C7 resume (16/11, Foreman C) — merged origin/main 900ace7fb
+### (1) "Bots reach HH 0 %" — root cause
+- Not the game: the runners. `run5b.sh`, `run1b.sh`, `run5e.sh`, `run3full.sh` load `INP2=inx.js,inpz.js` WITHOUT `inty.js`, so the bot never
+  dresses: once robbed of her robe every walk shows "Ra ngoài khi mặc trung y?", inpage4/6 retry the same place, the buổi never ends →
+  TIMEOUT lives, max rank stuck, "HH 0 %" (same as `eb7886c bot v1` 0/17 above). Plus the older bot faults fixed earlier on this branch
+  (pond / trip pushes ~26 a life, no makeup, inpage4 never sat the exam).
+- Fix (family): `runb.js` and `run_par.js` now ALWAYS load `inty.js` (unless the INP file has it, or NOTY=1) — every runner script built on
+  them is fixed at once. inpage5-based tools (htbal, men, runpets, runq, runbal, succ, run_url) still lack makeup / exam / pond rules:
+  do not use them for HH rates; use the sensible bot (inpage6 via run_par + mkinp.sh, or pass/sensloop.sh) or evbot (inpage4).
+- Exam gate: BAL.ex.bar [22,27,31] → [22,25,28] (already on this branch, 9ddd66eb6): high-tier pass at a sensible level 27–40 % → 64–72 %.
+- Measured on the merged build (see "C7 measures" below).
+### (2) Bạc ↔ road without silver, whole game
+- New group in the scan: j68 common events (EV6, 35 silver options × 3 ranks), acts (Hành sự deck + talk options + tài nghệ, value per khắc).
+  Census of every `bac:-` site: `python3 dev/measure/bacsites.py [--md]` (602 sites; 358 in a scanned group).
+- Fix j68 (new module `dev/build/jbac.js`, loaded after jevb): when an EV6 card is built, each silver option's price moves toward the price at
+  which its E (khắc) equals the best free option of the card, at HER rank (BAL.bacTuan), clamped BAL.bacFair.lo/hi × the written price;
+  still behind at the floor → its gains raised up to BAL.bacFair.gMax ×. Value table BAL.bacVal (= the scan's). Gains only in words
+  (wt/k tokens) = BAL.bacVal.tok khắc. Switch off: window.__bacFairOff=1.
+- Fix j72: the roads without silver (jstory alt72) were priced at rank 3 for everyone; now getters price odds / khắc / Sức at her rank.
+- Fix jrest: Dưỡng sức tonic silver priced at her rank (BAL.restDsBac0 = 6 at rank 3; 3 at rank 1, 8 at rank 5).
+- Tables: dev/review/bacroad-c7-before.md (merged build before C7) → dev/review/bacroad-after.md. Seeded (BACSEED); j67 rows still move ±5
+  between runs (some state is not seeded).
+- Left (not scanned, in bacsites.py): j7 old intrigue events (24), j71 festivals/merit (25), j70 (17), j96, j42, j97, j29, j54, jtsb, … —
+  gains live in go() closures / words, so they need hand pricing per event. Acts: 11 of 25 silver acts have gains only in words (lật thẻ,
+  cầu tự, thái y tâm phúc, shop items) → unpriced; 10 have no free act with the same main gain (Đức: Tụng kinh, Đưa cơm áo; relation:
+  Giúp đỡ nàng). j68 residue: silver options that buy information (wt tokens) vs free options giving Đức (8 khắc a point) stay
+  "other road obvious" even at half price — that is an event-dilemma issue (Đức-giving free options dominate), not only a price.
+
 ## NEXT (resume here)
 1. Rerun both arms longer (≥40 lives each): `bash dev/measure/pass/mkinp.sh` then
    `node dev/measure/run_par.js http://127.0.0.1:<port>/<main build>.html sens 80 out_main.json ../tmp/sensall.js 5 <seed>` and the same
