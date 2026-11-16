@@ -447,3 +447,5 @@
 | WAITING NEXT BATCH (add): names-unique-r1 PASS dcb2ea96 (CHANGE "Mỗi người một tên riêng, toàn tên cổ trang Trung Hoa."; reviewer archived) | — | main s25 | — | QUEUED | 16/11 21:59Z |
 | CO-OP ITEM (pre-existing on main): dev/test/coop-chat.js 'both players are in the shared world' fails (main fails 2 more) → assign at next load check | — | main s25 | — | QUEUED | 16/11 21:59Z |
 | night-final FIX brief CHANGED to owner 22:25Z final rule (immediate resolve on press; success = thị tẩm now + day ends) — sent to session_01UV1SzmDJB3ATP9ffVSmFoc | review/night-final | main s25 | session_01UV1SzmDJB3ATP9ffVSmFoc | RUNNING | 16/11 21:59Z |
+| diemtrang-coop-look F5 review r1 (opus, BIG co-op) of 8ed1228a | review/diemtrang-coop-look-r1 | main s25 | session_01UV1SziXRVy5vqBiRRbSKnh | RUNNING | 16/11 22:01Z |
+| diemtrang-score BUILD (owner answered: no palette warning, no dotted guides + freehand strict scoring, brow guide anchor per portrait) on top of minigame-frame bd223466 | review/diemtrang-score | main s25 | session_01UV1SzhX2fKGhGXpNLonvo5 | RUNNING | 16/11 22:01Z |
