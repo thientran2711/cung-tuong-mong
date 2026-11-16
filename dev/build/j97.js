@@ -163,7 +163,7 @@ const R97L=[
  t:"Hoàng thượng đọc bộ sách ba đêm liền. Kẻ quyền thế bị chỉ mặt bị cách chức tra xét; sách cha ngươi được khắc in, đem dạy ở Quốc Tử Giám, cha được truy tặng Thái phó. Trên trang đầu, cạnh tên cha, có thêm một dòng: “Con gái chú giải.”",
  fx:{danh:14,tai:3,duc:3},rw:"bienngu",ti:"Người chú giải sách Thái phó"},
 {a:"thd_tro",tag:"Học trò đỗ Trạng nguyên ân khoa",w:"emp",p:.15,n:"Xin Hoàng thượng mở một kỳ ân khoa, tự ngài ra đề",c:{suc:-4},
- path:["Gửi bạc giúp hắn","Dò xem lời hắn có thật","Khuyên Hoàng thượng phúc khảo","Giữ kín, gom chứng cứ","Mua chuộc người giữ kho","Nhờ học sĩ Hàn lâm","Mời thầy thuốc, giấu hắn","Gửi lời động viên"],np:2,bad:["Khuyên hắn về quê","Không xen vào"],sc:2,x:[()=>S.danh>=40,"Danh từ 40"],
+ path:["Gửi bạc giúp hắn","Dò xem lời hắn có thật","Khuyên Hoàng thượng phúc khảo","Giữ kín, gom chứng cứ","Mua chuộc người giữ kho","Nhờ học sĩ Hàn lâm","Mời thầy thuốc, giấu hắn","Gửi lời động viên"],np:2,bad:["Khuyên hắn về quê","Không xen vào"],sc:2,x:[()=>S.danh>=BAL.danhG.thdBook,`Danh từ ${BAL.danhG.thdBook}`],
  t:"Kỳ ân khoa do chính Hoàng thượng ra đề. {n1} đỗ Trạng nguyên, cưỡi ngựa dạo phố ba ngày. Ngày vào triều, hắn quỳ hướng về hậu cung mà lạy, và cả triều biết vị Trạng nguyên mới là người của ai. Kẻ mua đề năm trước bị lưu đày.",
  fx:{danh:12,mat:2,sung:4},rw:"nt_haiduong",ti:"Ân sư của Trạng nguyên"},
 {a:"thd_hoc",tag:"Nữ sư của Đông cung",w:"emp",p:.15,n:"Dẫn bọn trẻ ra Ngự hoa viên, học bằng những gì chúng thấy",c:{suc:-4},
