@@ -13,8 +13,8 @@ Base: review/kc-lore merged with origin/main (ce54872).
 - nc/bd entry: rank = ceiling (j1/jorigins r) − 0/1/2 by the Lễ ra mắt score; dowry, maid, intel carried.
 - Endings at home: Ở lại quê nhà, Làm thiếp nhà phú hộ, Làm người ở nhà lý trưởng, Công chúa ở lại cố quốc.
 - kitName caption at home (all home roads): her home word, never "Đáp ứng".
-- CO-OP (OD:L1263): road choice follows the friend; kd sending month follows the friend's selection month; entry barrier (S.kc.gate) so both
-  enter in the same merged week (tiểu thư roads too).
+- Round 2: "Vào cung ngay" through the selection (every origin). Round 3 (OD:L1288): co-op free choice (forced joint entry removed), all home
+  roads end at the tiểu thư tuyển tú month, BAL.kcv home-years carry measured with dev/measure/kc2val.js.
 - Tests: dev/test/kc-roads/route.js (cnv, nc, bd at 755x1000 + 1180x820), scan.js (lore), coop-together.js (cnv+nc, tt+cnv, live Worker).
 
 ## Not done / notes

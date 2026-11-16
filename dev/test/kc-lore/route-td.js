@@ -74,7 +74,7 @@ const sleep=ms=>new Promise(r=>setTimeout(r,ms));
     intel:S.kc&&S.kc.intel.length,fig:figFor(S),tabs:[...document.querySelectorAll('#tabs button')].filter(b=>b.offsetParent).map(b=>b.textContent.trim()),title:(document.getElementById('me-r')||{}).textContent}});
   if(R.pal.dead||R.pal.end)R.note='life ended at home: '+(R.pal.end||'dead');
   else{if(R.pal.isKc||!R.pal.inPal)F('did not enter the palace');if(!(R.pal.rank>=0&&R.pal.rank<=2))F('entry rank '+R.pal.rank);if(!R.pal.inCons)F('not in consorts()');
-   if(/-(kc|ngheo)-a18/.test(R.pal.fig||''))F('home dress in the palace');if(R.pal.danh>30)F('Danh carry-over '+R.pal.danh);if(R.pal.bac>400+200)F('Bạc carry-over '+R.pal.bac);
+   if(/-(kc|ngheo)-a18/.test(R.pal.fig||''))F('home dress in the palace');if(R.pal.danh>30+90)F('Danh carry-over '+R.pal.danh);/* old rule ≤30 + the home-years carry BAL.kcv (OD:L1288) */if(R.pal.bac>400+200)F('Bạc carry-over '+R.pal.bac);
    if(!R.pal.tabs.some(t=>/Hậu cung/.test(t)))F('palace tabs not back: '+R.pal.tabs);
    for(let i=0;i<4;i++){if(!await p.evaluate(()=>document.body.classList.contains('kbk-open')))break;await p.keyboard.press('Escape');await sleep(600)}/* Tuần lục of the first palace week */
    await p.evaluate(()=>{tab='act';render()});await sleep(1500);
