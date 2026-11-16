@@ -124,7 +124,8 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
   const t0=Date.now();let y;while(Date.now()-t0<20000){y=await Ok(Y);if(!y.fz&&!y.frozen&&!y.hold&&y.v&&y.k===y.rk)break;await sleep(400)}
   ok(!y.fz&&!y.frozen&&!y.hold,tag+': '+Y.name+' drops the wait by itself (no reload)',y);
   const x=await Ok(X);ok(y.v&&x.v&&y.v.key===x.v.key&&y.k===x.k,tag+': same buổi + same clock on both',[x.k,y.k,x.v&&x.v.key,y.v&&y.v.key]);return k0}
- async function stepBoth(tag,k){for(let i=0;i<2;i++){await clear(A);await clear(B)}const a=await press(A),c=await press(B);ok(a&&c,tag+': both can press Sẵn sàng',[await Ok(A),await Ok(B)]);
+ async function stepBoth(tag,k){for(let i=0;i<2;i++){await clear(A);await clear(B)}const rd=o=>o.p.evaluate(()=>!!(COOPW.bend||COOPW.nReady()));/* a restored seat may already be ready (its bend survived the rejoin) */
+  const a=await rd(A)||await press(A),c=await rd(B)||await press(B);ok(a&&c,tag+': both can press Sẵn sàng',[await Ok(A),await Ok(B)]);
   const ms=await bothPast(A,B,k,30000);ok(ms>=0,tag+': the buổi steps for both',[await Ok(A),await Ok(B)])}
  async function toDay(){for(let g=0;g<6;g++){const a=await D(A);if(a.b<LAST)return;await clear(A);await clear(B);if(a.b>=LAST){await press(A);await press(B);await merged('day',a.w)}}}
  await setTm(A,{buoiMs:120000,pauseCapMs:6000});await reset(A);await toDay();
