@@ -51,9 +51,10 @@ function trRes(p){if(!p)return null;if(p===S||p==="me")return S;if(p==="th"||p==
 const P_TR=["Hiền lành","Kiêu ngạo","Đa nghi","Tham vọng","Nhu mì","Thẳng thắn","Trọng nghĩa","Khéo léo"];
 (function(){const t0=traitsOf;traitsOf=function(p){try{if(p===S&&S)return[S.pTr||(S.pTr=P_TR[trHash("me:"+(S.name||""))%P_TR.length])];
  if(p&&(p==="th"||p.kind==="th"))return[thArch().trait]}catch(e){}return t0.apply(this,arguments)}})();
-function trTraits(p){if(p===S.emp)return S.emp.traits||[];if(p&&p.tr&&!p.trait)return[p.tr,p.tr2].filter(Boolean);return traitsOf(p)}
+/* co-op friend (id/sid 901/902, .coop): her seat's nết is P_TR[hash("me:"+name)] (S.pTr), so both seats compute the same trọng (reviewer r1) */
+function trTraits(p){if(p&&p.coop&&p!==S)return[P_TR[trHash("me:"+(p.name||""))%P_TR.length]];if(p===S.emp)return S.emp.traits||[];if(p&&p.tr&&!p.trait)return[p.tr,p.tr2].filter(Boolean);return traitsOf(p)}
 function trongOf(p0){const p=trRes(p0);if(!p)return[];if(p==="th")return thArch().tr;if(Array.isArray(p.trong)&&p.trong.length===2)return p.trong;
- const key=p===S||p.id===901||p.id===902?"me:"+(p.name||""):p===S.emp?"emp:"+(p.name||S.empName||""):p.sid!=null?"s:"+p.sid:p.id!=null?"id:"+p.id+":"+(p.name||""):"n:"+(p.name||"");
+ const key=p===S||p.coop||p.id===901||p.id===902?"me:"+(p.name||""):p===S.emp?"emp:"+(p.name||S.empName||""):p.sid!=null?"s:"+p.sid:p.id!=null?"id:"+p.id+":"+(p.name||""):"n:"+(p.name||"");
  const T=trTraits(p);const ban=new Set();T.forEach(t=>(TR_BAN[t]||[]).forEach(x=>ban.add(x)));const out=[];const f=T.map(t=>TR_V[t]).find(v=>v&&!ban.has(v));if(f)out.push(f);
  let h=trHash(key);for(let i=0;out.length<2&&i<40;i++){const v=VIRT[h%13];if(!out.includes(v)&&!ban.has(v))out.push(v);h=(Math.floor(h/13)*31+17+i)>>>0}
  try{p.trong=out}catch(e){}return out}

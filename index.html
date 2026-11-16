@@ -27173,9 +27173,10 @@ function trRes(p){if(!p)return null;if(p===S||p==="me")return S;if(p==="th"||p==
 const P_TR=["Hiền lành","Kiêu ngạo","Đa nghi","Tham vọng","Nhu mì","Thẳng thắn","Trọng nghĩa","Khéo léo"];
 (function(){const t0=traitsOf;traitsOf=function(p){try{if(p===S&&S)return[S.pTr||(S.pTr=P_TR[trHash("me:"+(S.name||""))%P_TR.length])];
  if(p&&(p==="th"||p.kind==="th"))return[thArch().trait]}catch(e){}return t0.apply(this,arguments)}})();
-function trTraits(p){if(p===S.emp)return S.emp.traits||[];if(p&&p.tr&&!p.trait)return[p.tr,p.tr2].filter(Boolean);return traitsOf(p)}
+/* co-op friend (id/sid 901/902, .coop): her seat's nết is P_TR[hash("me:"+name)] (S.pTr), so both seats compute the same trọng (reviewer r1) */
+function trTraits(p){if(p&&p.coop&&p!==S)return[P_TR[trHash("me:"+(p.name||""))%P_TR.length]];if(p===S.emp)return S.emp.traits||[];if(p&&p.tr&&!p.trait)return[p.tr,p.tr2].filter(Boolean);return traitsOf(p)}
 function trongOf(p0){const p=trRes(p0);if(!p)return[];if(p==="th")return thArch().tr;if(Array.isArray(p.trong)&&p.trong.length===2)return p.trong;
- const key=p===S||p.id===901||p.id===902?"me:"+(p.name||""):p===S.emp?"emp:"+(p.name||S.empName||""):p.sid!=null?"s:"+p.sid:p.id!=null?"id:"+p.id+":"+(p.name||""):"n:"+(p.name||"");
+ const key=p===S||p.coop||p.id===901||p.id===902?"me:"+(p.name||""):p===S.emp?"emp:"+(p.name||S.empName||""):p.sid!=null?"s:"+p.sid:p.id!=null?"id:"+p.id+":"+(p.name||""):"n:"+(p.name||"");
  const T=trTraits(p);const ban=new Set();T.forEach(t=>(TR_BAN[t]||[]).forEach(x=>ban.add(x)));const out=[];const f=T.map(t=>TR_V[t]).find(v=>v&&!ban.has(v));if(f)out.push(f);
  let h=trHash(key);for(let i=0;out.length<2&&i<40;i++){const v=VIRT[h%13];if(!out.includes(v)&&!ban.has(v))out.push(v);h=(Math.floor(h/13)*31+17+i)>>>0}
  try{p.trong=out}catch(e){}return out}
@@ -33880,7 +33881,8 @@ function pcfTaste(e){try{const rows=[];
  if(isEmp(e)){const E=S.emp,K=E.known||{},L=E.likes||{};const like=[["flower","hoa"],["music","khúc nhạc"],["dish","món ăn"]].filter(([k])=>K[k]).map(([k,w])=>`${w} ${L[k]}`);
   rows.push(["Ngài thích",like.length?like.join(" · "):"chưa biết (trò chuyện với ngài để biết)",like.length?"":"n"]);
   const T=(E.traits||[]).map(t=>PERS[t]&&PERS[t].tend?PERS[t].tend:"").filter(Boolean);if(T.length)rows.push(["Ngài hay",T.join("; ")])}
- else if(isTh(e)){rows.push(["Tính nết",traitsOf("th").join(" · ")||"chưa rõ"])}
+ else if(isTh(e)){/* jtrong (D7 r1): the same answer as the card chip — her archetype once met at thỉnh an, else "chưa rõ" (stranger rule) */
+  if(typeof thArch==="function"){const k=S.thO&&S.thO.archK;rows.push(["Tính nết",k?thArch().n:"chưa rõ",k?"":"n"])}else rows.push(["Tính nết",traitsOf("th").join(" · ")||"chưa rõ"])}
  else if(typeof trKnown==="function"&&e.id!=null){const K=trKnown(e),T=typeof traitsOf==="function"?traitsOf(e):[];const un=T.filter(t=>!K.includes(t)).length;
   rows.push(["Tính nết",K.length?K.join(" · ")+(un?` (còn ${un} nết chưa rõ)`:""):"chưa rõ",K.length?"":"n"]);
   const tend=K.map(t=>PERS[t]&&PERS[t].tend).filter(Boolean);if(tend.length)rows.push(["Hay",tend.join("; ")])}
@@ -34459,7 +34461,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="3d152605861e";window.CTM_BUILD=BUILD;
+const BUILD="20268eae5214";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
