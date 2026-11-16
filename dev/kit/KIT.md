@@ -3655,10 +3655,7 @@ kpmRoomImg(k, part)// = jres residenceArt(palSlot(k), part) without "img/" / ".w
   8 names are labels) — lookup `rankDir` in hotspots.json: Hoàng hậu → can-ninh · Hoàng quý phi → vinh-hoa · Quý phi → quy-cung · Phi → phi-cung
   · Tần → cac · no chủ vị → spare-cung. It changes as soon as the head is promoted, demoted or replaced; same-rank palaces share a picture
   (accepted). An empty palace opens its (empty) courtyard too; a hall tap there = the "Cung trống" card. Rooms = OUR residence paintings only.
-- Other places (owner 11/15): Ngọc Thanh các (her home before she heads a palace) → cac, Dưỡng Hòa điện → duong-hoa, Đức Thọ cung → duc-tho,
-  Trường Môn viện → truong-mon, Ngự hoa viên → garden, Kính sự phòng → noi-thi (`places` in hotspots.json, slot `"p:<key>"`). They open the same
-  courtyard view with ONE hotspot (the place's main building, chip = countAt) that enters the place as before: its existing room painting and
-  everyone present. (Đông cung is not a place in the game yet; Cần Chính điện / Thái y viện keep the direct tap.)
+- COURTYARD RULE (owner 11/16, OD:L1422; overwrites the 11/15 "other places" line): a courtyard picture exists ONLY for places with SEVERAL halls (`kpmParts(slot,k).length>=2` in jpm.js, one rule, no per-place list): consort palaces (by rank dir) and Ngọc Thanh các (home, form cac + dãy nhà cung nhân). A place with exactly ONE hotspot (Cần Chính điện, Nội vụ phủ, Ngự hoa viên, Dưỡng Hòa điện, Đức Thọ cung, Trường Môn viện, Kính sự phòng, Càn Ninh cung) goes STRAIGHT from the Dư đồ tap to the place (`kpmEnter(slot,"chinh")`: its existing room painting and everyone present; the room's back button is the plain "‹ Dư đồ"). KPM_DATA.places[k] = {label} only (no form, no spots, no `have`); the unused single-hall courtyard files stay on the CDN, nothing references them (pl2_sync.py keeps `have` only for dirs with >=2 spots). Test: dev/test/single-hall.js.
 - Fit: the courtyard picture takes the height the hall rows leave (container units, aspect kept, hotspots stay on the picture): nothing clipped
   at 686x880, 755x1000, 1180x820, 1366x1024.
 - Room header: in a hall the visit line reads only "Ở đây có N người. Người ở: <this hall's residents>." (not the whole palace).

@@ -1,4 +1,4 @@
-/* Phượng Lệnh courtyards (kitPalaceMap L2) for every Dư đồ place: matrix check + sample screenshots + image URL check.
+/* Phượng Lệnh courtyards (kitPalaceMap L2) for the multi-hall place that has a form (home; single-hall places have no courtyard, owner 11/16 — see single-hall.js): matrix check + sample screenshots + image URL check.
    usage: node dev/test/pl-courtyards.js <url of built index.html> <W>x<H>@dpr <outdir> <tag> [full]
    - matrix: every place x month(12) x tuần(3) x buổi(4): kpmArt() must return a picture that is in KPM_DATA.have; festival days must
      give the festival state when PL has it (else the season x buổi state); prints which festival keys fell back per place.
@@ -15,7 +15,7 @@ const [,,BASE,SZ,OUT,TAG,FULL]=process.argv;const [WH,DPR]=SZ.split('@');const [
  await p.waitForTimeout(1500);
  await p.evaluate(()=>{Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;S.pal=null;S.place='home';used=0;tab='go';window.__mapZ=1;render();setTimeout(()=>{Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true},50)});
  /* 1. matrix */
- const mx=await p.evaluate(()=>{const keys=["vuon","thu","dtd","tn","lc","ksp","nvp","home"],R={},bad=[],urls=new Set();const sv=[S.month,S.tuan,S.buoi];
+ const mx=await p.evaluate(()=>{const keys=["home"],R={},bad=[],urls=new Set();const sv=[S.month,S.tuan,S.buoi];
   const FE={};
   for(const k of keys){const slot="p:"+k;const o={dir:null,states:new Set(),fest:{},noart:0,n:0};R[k]=o;
    for(let m=1;m<=12;m++)for(let t=0;t<3;t++)for(let bu=0;bu<4;bu++){S.month=m;S.tuan=t;S.buoi=bu;const A=kpmArt(slot);o.n++;
@@ -25,7 +25,7 @@ const [,,BASE,SZ,OUT,TAG,FULL]=process.argv;const [WH,DPR]=SZ.split('@');const [
    o.states=[...o.states].sort().length}
   [S.month,S.tuan,S.buoi]=sv;return{R,bad,urls:[...urls],FESTKEYS:Object.keys(FEST)}});
  /* 2. samples */
- const SM=[["thu",1,0,0],["thu",5,0,0],["thu",3,0,0],["thu",12,2,3],["thu",7,1,3],["nvp",6,1,1],["nvp",1,0,1],["vuon",9,0,2],["vuon",8,1,3],["ksp",12,2,3],["tn",2,1,0],["dtd",10,1,3],["lc",4,2,2],["home",8,1,0]];
+ const SM=[["home",8,1,0],["home",1,0,1],["home",12,2,3],["home",5,0,0],["home",7,1,3]];
  const out=[];
  for(const [k,m,t,bu] of SM){const r=await p.evaluate(async([k,m,t,bu])=>{Q.length=0;const md=document.getElementById('modal');if(md)md.hidden=true;S.month=m;S.tuan=t;S.buoi=bu;S.place='home';window.__kpm=null;tab='go';window.__mapZ=1;render();
    const slot="p:"+k;kpmOpenSlot(slot,kpmKeyOf(slot));await new Promise(r=>setTimeout(r,800));const im=document.querySelector('#panel .kpmv .mapimg');
