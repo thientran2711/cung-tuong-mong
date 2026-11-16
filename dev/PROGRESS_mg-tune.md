@@ -18,3 +18,7 @@ Base: review/mg-train @7e52cb1c, + review/mg-train-r1 @8f476f6f merged. Full rep
 ## Resume
 Calibration helpers were scratch scripts (what-if: raw × mean pace_new(u) / mean pace_old(u), grid over fast / keep). Re-measure with
 `node dev/measure/mg-bots.js <url> tho,doi,doden,le,tc,xa,thq,co hoc/0/2,hoc/4/2,hoc/6/1 skilled,random 30 4 out.json` (graded ≥ 9 uses BAL.mgTier.kG).
+
+## review/mg-tune-r1 (reviewer)
+- Whole-family scan found ONE more typed time/score formula: j91 k91Untangle (kim, Khéo tay gỡ rối chỉ) `per*(.6+.4*left/LIM)`. Now `mgPace(env,"kim",t-t0,LIM)`
+  with BAL.mgTier.lev.kim {fast:[0,0], keep:[.6,.6]} = the same curve (no balance change); kim how text + "Làm nhanh thì được trọn phần.".
