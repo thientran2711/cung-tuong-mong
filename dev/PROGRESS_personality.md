@@ -56,13 +56,41 @@ thỉnh an no longer flat +8 (depends on the target's personality/virtues, her s
     60% per touch; she always knows her own). Thái hậu's archetype is shown after her first greeting.
 - `dev/test/trong-check.js` (old save from main build → load, migration, greeting curves, neglect, card chips at 6 viewports).
 
+## Measures (sens bot, `EXTRA=inpers.js,inth.js node dev/measure/runpers.js sens 30 out.json`, CAP 2400–2700 s; box overloaded, so lives are few)
+| | lives | HH (rank 7) | Thái hậu regard y1 / y2 / y3 / end / max | NPC consorts' Thái hậu | maxRank |
+|---|---|---|---|---|---|
+| main (base) | 11 | 3/11 (+4/11 in an earlier run) | 61.8 / 92.7 / 96.5 / 93.8 / 100 | 55.2 | 5.5 |
+| this branch (final numbers) | 28 | 6/28 | 30.3 / 50.7 / 65.1 / 78.7 / 89.9 | 46.0 | 5.1 |
+- Where her Thái hậu regard came from on main (inth.js): "Vẽ chân dung tặng Thái hậu" +9.1 per use (1126 uses / 11 lives), Thỉnh an +5.6 per
+  greeting, thiếu lễ (dress under rank, jaudit) −2.8 per greeting. After: portrait +5.1 per use, greeting rule +0.8 per greeting
+  (the bot greets every morning and sits near the ceiling), thiếu lễ unchanged. → LUẬT SỬA CẢ NHÓM: deck acts raising Thái hậu
+  regard now share the family rule (`trThDeed`: trọng × repetition × saturation).
+- End regard by archetype (after): Nghiêm khắc 55, Đa nghi 72, Từ ái 85, Sùng Phật 88, Quyền uy 92 (2 lives).
+- HH rate 21% vs main ~27–32% (small samples, within noise but lower; C7 balance-pass should take it into account). The HH gate
+  BAL.hhTh 55 is untouched. rand-bot lives die within ~1 year (no HH either side), not informative here.
+- Greeting curve probe (trong-check.js, 36 mornings, toil included): every morning → Từ ái 100, Sùng Phật 79, Nghiêm khắc 74,
+  Quyền uy 71, Đa nghi 62; every third morning → 74 / 48 / 58 / 49 / 25 (Đa nghi rewards spacing).
+- Tests: `node dev/test/trong-check.js <main build> <this build> <shotdir>` — old save (made with main) loads, Thái hậu archetype
+  mapped from S.thTrait, everyone has 2 virtues (deterministic), month without thỉnh an = −3 (Nghiêm khắc), person cards at 755x1000,
+  1000x755, 1180x820, 1366x1024, 844x390, 390x844: no page error, no horizontal overflow, "Trọng" / "Tính nết" kit chips present.
+
+## Owner questions
+1. Her own nết is now given from her name (8 nết, no Hiểm độc). Should she instead CHOOSE it at the start of a life?
+2. Thái hậu archetype names (Từ ái / Nghiêm khắc / Đa nghi / Quyền uy / Sùng Phật) and whether it is shown after the first thỉnh an (now) or only after more contact.
+3. Thiếu lễ at thỉnh an (−3 ×1.5 strict hosts) now outweighs a routine greeting when she is under-dressed; keep?
+
+## Not done / next
+- Emperor's trọng is shown on his card and judges nothing yet (Sủng numbers are C7's balance area; left alone on purpose).
+- Event choices that move Thái hậu regard (EV6 etc., ~10% of her regard) are not scaled by trọng yet.
+- No new KIT part used or needed (ONE KIT KEEPER rule): card lines → kitPcGrid chips, Kèm/Ghi chú row via `risk`, "Vì sao" via `why`.
+
 ## Done
 - Worktree, sparse checkout, main builds (`python3 dev/build/assemble.py`).
 - Measure tools: `dev/measure/inpers.js` (per-life regard recorder: th/hh end+max+years, consorts' rel, NPC th,
   greet count/avg) and `dev/measure/runpers.js` (= runbal.js + EXTRA env for extra in-page files).
   Usage: `EXTRA=inpers.js node dev/measure/runpers.js sens 40 out.json` (not yet run).
 
-## Left / next step
+## Left / next step (old plan, done)
 1. Run baseline on main (sens + rand, ~40 lives) with inpers.js; record table.
 2. Code jtrong.js + BAL.trong, migration in deser, Thái hậu archetypes, thỉnh an function.
 3. Re-measure, compare (th avg/max, hhTurn rate, consort rel), tests at 5 viewports, PROGRESS update, push.
