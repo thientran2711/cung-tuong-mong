@@ -44,12 +44,17 @@ function mapMe(o,toCanon,pid){if(!o||typeof o!=="object")return o;
 
 /* ---------- friend entry ---------- */
 function friendSrv(P){return !!(P&&P.S&&P.S.srv&&!P.S.srv.risen)}
-function buildFriend(P,mine){if(!P||!P.S||P.dead||P.S.dead)return null;const s=J(P.S),mp=me();
+/* the friend on the tiểu thư road (jkc) lives at her father's house until the tuyển tú: no palace entry for her until S.kc.inPal */
+function friendHome(P){return !!(P&&P.S&&P.S.kc&&!P.S.kc.inPal&&!P.dead&&!P.S.dead)}
+function buildFriend(P,mine){if(!P||!P.S||P.dead||P.S.dead||friendHome(P))return null;const s=J(P.S),mp=me();
  const rl=Object.assign({},s.rl||{}),ro=Object.assign({},s.ro||{});const rel=rl[mp]||0,oan=ro[mp]||0;delete rl[mp];delete ro[mp];
  const cev=s.cev||{};
  const v={id:fp(),coop:true,name:P.name||s.name,rank:s.rank||0,queen:(s.rank||0)>=7,trait:"Nhu mì",malice:15,rel,oan,rl,ro,ev:((mine||S||{}).cev||{})[fp()]||0,
   evm:{me:cev[mp]||0},alive:true,out:!!s.out,kids:[],ghen:0,pg:0,nights:0,inv:[],staff:[],nightLog:[]};
  for(const k of STAT)if(s[k]!=null)v[k]=s[k];for(const k of LOOK)if(s[k]!=null)v[k]=s[k];
+ /* jtruth (reviewer r1): her own wrongs ledger travels with her, so true evidence on her is capped by what SHE really did (an empty
+    ledger here made every piece on the friend a rumour each week, and NPC spies could never find a guilty friend); read-only copy */
+ for(const k of ["wrongs","dw","dws","dkeys","schemes"])if(s[k]!=null)v[k]=J(s[k]);
  mapMe(v,false,mp);v.id=fp();
  v.__b=J(Object.assign({},...STAT.map(k=>({[k]:v[k]})),{rel:v.rel,oan:v.oan,rl:v.rl,ro:v.ro,em:v.evm.me,out:v.out,rank:v.rank}));
  return v}
@@ -99,7 +104,7 @@ function toCanon(){const L=(CW.pulled||[]).concat(pullFriend());let d;try{S.cev=
 function fromCanon(C,opt){opt=opt||{};const mp=me(),Pm=C.P&&C.P[CW.seat];if(!Pm)return false;
  const sS=J(Pm.S);Object.assign(sS,J(C.W.S||{}));if(sS.emp)sS.emp.known=Pm.S.empKnown||{};delete sS.empKnown;delete sS.cnews;
  const R=J(C.W.R||[]).map(r=>{r.rl=r.rl||{};r.ro=r.ro||{};r.gp=r.gp||{};r.ep=r.ep||{};
-  r.rel=r.rl[mp]||0;r.oan=r.ro[mp]||0;r.ghen=r.gp[mp]||0;r.ev=r.ep[mp]||0;delete r.rl[mp];delete r.ro[mp];delete r.gp[mp];delete r.ep[mp];
+  r.rel=r.rl[mp]||0;r.oan=r.ro[mp]||0;r.ghen=r.gp[mp]||0;/*evok: co-op sync*/r.ev=r.ep[mp]||0;delete r.rl[mp];delete r.ro[mp];delete r.gp[mp];delete r.ep[mp];
   return mapMe(r,false,mp)});
  const qs=(typeof serQ==="function"&&opt.keepQ)?serQ():[];
  const fP=C.P[fs()];if(fP)freshFriend(fP,sS);
@@ -109,7 +114,7 @@ function fromCanon(C,opt){opt=opt||{};const mp=me(),Pm=C.P&&C.P[CW.seat];if(!Pm)
  if(!opt.keepUsed)used=0;else used=keepUsed;
  /* guard enums/levels that a numeric merge could push out of range */
  const ci=(v,a,b)=>typeof v==="number"?Math.max(a,Math.min(b,Math.round(v))):v;
- if(S.emp)S.emp.mood=ci(S.emp.mood,0,3);S.rank=ci(S.rank,0,7);S.tuan=ci(S.tuan,0,2);S.month=ci(S.month,1,12);S.buoi=ci(S.buoi||0,0,2);
+ if(S.emp)S.emp.mood=ci(S.emp.mood,0,3);S.rank=ci(S.rank,0,7);S.tuan=ci(S.tuan,0,2);S.month=ci(S.month,1,12);S.buoi=ci(S.buoi||0,0,3);
  for(const v of rivals){v.rank=ci(v.rank,0,7);try{ap(v,{})}catch(e){}}
  if(friendSrv(fP))placeFriend(fP);CW.life=Pm.life||0;return true}
 
@@ -133,6 +138,7 @@ function attach(C){T("attach");if(!C||!C.W)return;const mp=me();
  S.place="home";S.visit={k:"home",people:homePeople(),talked:false};
  try{if(typeof sidN!=="undefined")sidN=Math.max(sidN,...allServ().map(s=>+s.sid||0).filter(n=>n<900),0)}catch(e){}}
 CW.attach=()=>{const C=CW.dying||CW.base;if(C)attach(C)};
+CW.sendMe=()=>sendMe();CW.friendHome=friendHome;
 
 /* ---------- sending ---------- */
 function sendEnd(){if(!CW.on||!S||S.dead||CW.sent===wk())return;const C=toCanon();CW.sent=wk();CW.pend=false;CW.mine=snapStats();
@@ -143,6 +149,9 @@ function sendMe(){T("sendMe "+(S&&S.dead));if(!CW.on||!S||S.dead)return;
  const C=toCanon();CW.dying=null;
  if(!CW.base){/* host's first world */COOP.send({t:"init",state:C,nb:typeof B4N==="number"?B4N:3});CW.base=C}else{COOP.send({t:"me",P:C.P[CW.seat]});CW.base.P=CW.base.P||{};CW.base.P[CW.seat]=J(C.P[CW.seat])}
  try{if(CW.base&&CW.base.P&&CW.base.P[fs()]&&!friendEntry())placeFriend(CW.base.P[fs()])}catch(e){console.error(e)}
+ /* jkc: the friend chose first and is at home: say so once (her entry into the palace is told by onWeek) */
+ try{const fP=CW.base&&CW.base.P&&CW.base.P[fs()];if(fP&&!fP.dead){const home=friendHome(fP);CW.fWasHome=home;const fk=(fP.name||"")+"#"+(fP.life||0)+"h";
+  if(home&&CW.fNote!==fk){CW.fNote=fk;pushModal({t:"Hảo hữu chọn thân phận",h:`<p>Hảo hữu ngươi đã chọn xong thân phận, nay còn ở nhà cha chờ kỳ tuyển tú, chưa vào cung. Mặt mũi, tên tuổi kiếp này ra sao, phải gặp mới biết.</p><p class="past">Qua kỳ tuyển tú, nàng sẽ vào cung; khi ấy hai người mới gặp được nhau.</p>`});try{showModal()}catch(e){}}}}catch(e){console.error(e)}
  /* a new life starts in the room's CURRENT buổi (the friend may already be in buổi chiều / tối) */
  if(CW.p2&&typeof CW.rbuoi==="number"&&(S.buoi||0)!==CW.rbuoi&&CW.rweek===wk()){S.buoi=CW.rbuoi;used=0;try{placeWhere()}catch(e){console.error(e)}}
  if(host())sendWhere();else if(CW.lastWhere)applyWhere(CW.lastWhere);CW.posKey="";sendPos();render()}
@@ -280,6 +289,8 @@ function onWeek(m){T("week "+m.week+" in "+CW.wkIn);if(!CW.on||!m.state)return;i
  const P=C.P[CW.seat];
  if(!wasDead&&S.dead){S.dead=false;try{die(P.S.coopWhy||"Bị hại trong cung")}catch(e){console.error(e)}return}
  if(S.coopCold){S.coopCold=0;if(!S.out)try{cold("Bị đày vào lãnh cung")}catch(e){console.error(e)}}
+ /* jkc: the friend passed the tuyển tú this week and entered the palace */
+ const fP=C.P[fs()];if(fP&&!fP.dead){const home=friendHome(fP);if(CW.fWasHome&&!home&&fP.S&&fP.S.kc&&fP.S.kc.inPal)pushModal({t:"Hảo hữu nhập cung",h:`<p>Hảo hữu ngươi qua kỳ tuyển tú, nay vào cung, phong ${esc(RANKS[fP.rank]?RANKS[fP.rank].n:"")}. Mặt mũi, tên tuổi ra sao, phải gặp mới biết.</p><p class="past">Muốn gặp nhau: hai người cùng đến một nơi trên Dư đồ trong cùng một buổi, rồi chạm vào người kia và chọn Chào hỏi.</p>`});CW.fWasHome=home}
  const h=newsHTML()+(worldNews(C)?`<p>${worldNews(C)}</p>`:"");CW.mine=null;
  if(h)pushModal({t:"Tuần mới",h:`<p class="past">${when()}</p>${h}`});
  CW.bend=false;CW.posKey="";if(CW.p2&&S&&(S.buoi||0)!==0){S.buoi=0;used=0}/* every week starts at buổi sáng for both */
@@ -290,12 +301,14 @@ function onState(m){T("state");if(!CW.on||!m.state)return;const C=m.state;
  /* the friend's character changed (first character / reborn): keep my week, take the new base and her new entry */
  const had=CW.base;CW.base=J(C);if(had&&had.P&&had.P[CW.seat]&&C.P&&!C.P[CW.seat])CW.base.P[CW.seat]=had.P[CW.seat];
  if(S&&!S.dead&&!CW.inLife){const old=friendEntry();placeFriend(C.P[fs()]);
-  const P=C.P[fs()];if(P&&(!old||old.name!==P.name)&&!P.dead)pushModal({t:"Hảo hữu vào cung",h:`<p>Hảo hữu ngươi ${old?"đã đầu thai, ":"đã chọn xong thân phận, "}nay ở trong cung${friendSrv(P)?", làm cung nữ":", phong "+esc(RANKS[P.rank]?RANKS[P.rank].n:"")}. Mặt mũi, tên tuổi kiếp này ra sao, phải gặp mới biết.</p><p class="past">Muốn gặp nhau: hai người cùng đến một nơi trên Dư đồ trong cùng một buổi, rồi chạm vào người kia và chọn Chào hỏi.</p>`});
+  const P=C.P[fs()];const fk=P&&((P.name||"")+"#"+(P.life||0)+(friendHome(P)?"h":""));if(P)CW.fWasHome=friendHome(P);
+  if(P&&!P.dead&&(old?old.name!==P.name:CW.fNote!==fk)){CW.fNote=fk;const home=friendHome(P);
+   pushModal({t:home?"Hảo hữu chọn thân phận":"Hảo hữu vào cung",h:`<p>Hảo hữu ngươi ${old?"đã đầu thai, ":"đã chọn xong thân phận, "}${home?"nay còn ở nhà cha chờ kỳ tuyển tú, chưa vào cung":"nay ở trong cung"+(friendSrv(P)?", làm cung nữ":", phong "+esc(RANKS[P.rank]?RANKS[P.rank].n:""))}. Mặt mũi, tên tuổi kiếp này ra sao, phải gặp mới biết.</p>`+(home?`<p class="past">Qua kỳ tuyển tú, nàng sẽ vào cung; khi ấy hai người mới gặp được nhau.</p>`:`<p class="past">Muốn gặp nhau: hai người cùng đến một nơi trên Dư đồ trong cùng một buổi, rồi chạm vào người kia và chọn Chào hỏi.</p>`)})}
   showModal();render()}}
 function newLife(){CW.inLife=true;CW.newLife=true;try{start()}catch(e){console.error(e)}}
 function begin(d){T("begin");CW.on=true;CW.seat=d.you||COOP.state.you;const C=d.state||COOP.state.C;CW.base=C?J(C):null;CW.sent=-1;CW.pend=false;CW.wkIn=C&&typeof C.week==="number"?C.week:undefined;
  const s=COOP.state;
- if(C&&C.P&&C.P[CW.seat]&&!C.P[CW.seat].dead){fromCanon(C);/* a fresh page (came back by link / reload) has no hand of cards yet: deal it, as loading a sổ does */if(!deck||!deck.length)try{deal()}catch(e){console.error(e)}if(s.ended&&s.ended[CW.seat])CW.sent=wk();try{$("title").hidden=true}catch(e){}syncRoom(CW.roomMsg);showModal();render();lockNext();return}
+ if(C&&C.P&&C.P[CW.seat]&&!C.P[CW.seat].dead){fromCanon(C);CW.fWasHome=friendHome(C.P[fs()]);/* a fresh page (came back by link / reload) has no hand of cards yet: deal it, as loading a sổ does */if(!deck||!deck.length)try{deal()}catch(e){console.error(e)}if(s.ended&&s.ended[CW.seat])CW.sent=wk();try{$("title").hidden=true}catch(e){}syncRoom(CW.roomMsg);showModal();render();lockNext();return}
  if(!C&&!host()){CW.waitWorld=true;/* the lobby keeps the title backdrop up with a kit panel "Đợi bạn chọn thân phận" (no empty game frame) */try{COOP_LOBBY.hostPick(true)}catch(e){console.error(e)}return}
  newLife()}
 COOP.on("start",begin);
@@ -327,7 +340,7 @@ const mute=n=>{const f=window[n];if(typeof f!=="function")return;window[n]=funct
 (function(){const f=pickTarget;pickTarget=function(v){if(CW.on&&isF(v))return null;const t=f.apply(this,arguments);if(CW.on&&!host()&&t!==S)return null;return t}})();
 (function(){const f=rivalsBuoi;rivalsBuoi=function(){return withoutFriend(()=>f.apply(this,arguments))}})();
 (function(){const f=endTurn;endTurn=function(){if(CW.on){if(waiting()||frozen()||CW.pend||!CW.base)return;CW.news=""}
- if(!CW.on)return f.apply(this,arguments);let r;CW.inTurn=true;try{r=withoutFriend(()=>f.apply(this,arguments))}finally{CW.inTurn=false}if(S){CW.pend=true;try{render()}catch(e){}lockNext()}return r}})();
+ if(!CW.on)return f.apply(this,arguments);let r;CW.inTurn=true;const alt=typeof CW.altTurn==="function"?CW.altTurn():null;/* a route with its own week (jkc at home: kcEndTurn) */try{r=withoutFriend(()=>(alt||f).apply(this,arguments))}finally{CW.inTurn=false}if(S){CW.pend=true;try{render()}catch(e){}lockNext()}return r};CW.weekEnd=endTurn/* a route with its own week (jkc) calls this directly, past the palace-only wrappers made after it */})();
 (function(){const f=nextBuoi;nextBuoi=function(){if(!CW.on)return f.apply(this,arguments);if(waiting()||frozen()||CW.pend||!CW.base)return;
  /* same buổi for both: buổi sáng / chiều end with `bend`; the server's `buoi` runs the real step (CW.allow); buổi tối ends the week (`end`) */
  if(CW.p2&&!CW.allow&&(S.buoi||0)<(typeof B4L==="number"?B4L:2)){if(!S||S.dead||Q.length||S.mg||needWhere())return;bend();return}
@@ -348,7 +361,7 @@ let qT=0;function reshowQ(){qT=0;try{const M=$("modal");if(CW.on&&S&&Q.length&&M
 COOP.on("status",()=>{if(CW.on){lockNext();soonEnd()}});
 /* the rebirth / first-life flow: Luân hồi builds the life (nlRun), she accepts it (nlAccept) */
 if(typeof nlRun==="function"){const f=nlRun;nlRun=function(){const r=f.apply(this,arguments);try{if(CW.on){const C=CW.dying||CW.base;if(C)attach(C);CW.inLife=true}}catch(e){console.error(e)}return r};}
-if(typeof nlAccept==="function"){const f=nlAccept;nlAccept=function(){const r=f.apply(this,arguments);try{if(CW.on&&CW.inLife&&S&&!S.dead){CW.inLife=false;sendMe()}}catch(e){console.error(e)}return r};}
+if(typeof nlAccept==="function"){const f=nlAccept;nlAccept=function(){const r=f.apply(this,arguments);try{if(CW.on&&CW.inLife&&S&&!S.dead){CW.inLife=false;if(CW.holdMe)CW.heldMe=true;else sendMe()}}catch(e){console.error(e)}return r};}
 /* a start() that bypasses Luân hồi (window.__nlInner): attach + send at once */
 (function(){const f=start;start=function(){const r=f.apply(this,arguments);try{if(CW.on&&window.__nlInner&&S&&!S.dead){const C=CW.dying||CW.base;if(C)attach(C);CW.inLife=false;sendMe()}}catch(e){console.error(e)}return r}})();
 CW.toCanon=toCanon;CW.fromCanon=fromCanon;CW.friend=friendEntry;CW.sendEnd=sendEnd;
@@ -365,7 +378,7 @@ CW.forceBend=()=>{if(!CW.on||!S||S.dead||CW.inLife||CW.bend||waiting()||frozen()
 CW.snap=()=>{if(!CW.on||!S||S.dead||!CW.base)return null;let d;try{d=ser()}catch(e){return null}
  return {room:COOP.state.room,seat:CW.seat,week:wk(),buoi:S.buoi||0,used,d,c:{sent:CW.sent,pend:CW.pend,whereKey:CW.whereKey,lastWhere:CW.lastWhere,fpos:CW.fpos,mine:CW.mine||null,life:CW.life||0,p2:CW.p2,news:CW.news||""}}};
 CW.restore=o=>{if(!o||!o.d||!CW.on||o.seat!==CW.seat||o.week!==wk()||o.c.pend||o.c.sent===wk()||(CW.rweek===wk()&&typeof CW.rbuoi==="number"&&CW.rbuoi<o.buoi))return false;
- quiet=true;try{deser(o.d)}finally{quiet=false}used=o.used||0;try{deal()}catch(e){}  /* the hand of acts is not in a sổ: dealt again, as the title's Tiếp tục does */
+ quiet=true;try{if(o.d)o.d.tab="act";/* owner 16/11: rejoin opens her room (Hành sự) */deser(o.d)}finally{quiet=false}used=o.used||0;try{deal()}catch(e){}  /* the hand of acts is not in a sổ: dealt again, as the title's Tiếp tục does */
  Object.assign(CW,o.c);CW.bend=false;CW.pendBuoi=null;CW.posKey="";CW.inLife=false;
  try{keepFriendPos();refreshHere()}catch(e){}syncRoom(CW.roomMsg);try{$("title").hidden=true}catch(e){}
  if(Q.length)showModal();render();lockNext();return true};

@@ -216,8 +216,21 @@ function kitEvCat(m,a){try{const src=String(a&&a.src||"");const mm=/\/ev-([a-z-]
   if(!k&&typeof evArtCat==="function"){const c=evArtCat(m.evId||m.pid||"");if(c)k=KIT_EVCAT[c]}
   if(!k)k="giao-thiep";const C=typeof KIT_CAT==="object"&&KIT_CAT[k];return {col:C?C[1]:"#8a6a3a",cls:"kcat-"+k}}catch(e){return {}}}
 window.kitEvCat=kitEvCat;
+/* KIT §8.2 ONE PICTURE · EVENT FRAME (owner 16/11 "Má nó, kit chung đâu", review/kit-sweep): a dialog with NO person (no stage figure, no
+   person portrait) shows ONE picture, in the event-frame slot LEFT of its rows (.kpb.kpinfo > .kpsubj.kpiart.kpev), never a wide band on
+   top PLUS a second tall picture. The item's own picture (headArt band) wins over the generic fallback (kitEvArt room / kitInfoArt).
+   One rule for the whole family: place cards, chapter detail, pet / tsb / fire notices, any headArt dialog without people. */
+function kitOnePic(m){try{const mb=document.getElementById("mb");const body=mb&&mb.querySelector(":scope > .kpb");if(!body||body.classList.contains("kpid"))return;
+ const band=mb.querySelector(":scope > .kdlgart:not(.kesband)");if(!band)return;const sj=body.querySelector(":scope > .kpsubj");
+ if(sj&&!sj.matches(".kpiart,.kpev"))return;/* a person portrait (info about a person) keeps its own approved layout */
+ const im=band.querySelector("img");const src=im&&im.getAttribute("src");if(!src)return;const fc=band.querySelector("figcaption");const lab=fc?fc.textContent.trim():"";
+ const mk=band.querySelector(".ksart-mark,.kmark");
+ if(sj)sj.remove();band.remove();body.classList.remove("kpshort");body.classList.add("kphas","kpinfo");
+ body.insertAdjacentHTML("afterbegin",`<div class="kpsubj kpiart kpev">${kitSceneArt(src,lab,{shape:"tall",cap:!!lab})}</div>`);
+ if(mk){const f=body.querySelector(":scope > .kpsubj .ksart");if(f)f.appendChild(mk)}}catch(e){console.error("kitOnePic",e)}}
+window.kitOnePic=kitOnePic;
 (function(){if(typeof showModal!=="function")return;const s0=showModal;showModal=function(){const m=typeof Q!=="undefined"?Q[0]:null;const r=s0.apply(this,arguments);
- try{if(m&&!kitEventStage(m)){/* no person: the event picture keeps its tall slot, framed by its type */const ev=document.querySelector("#mb > .kpb > .kpsubj.kpev .ksart, #mb > .kdlgart > .ksart");
+ try{if(m&&!kitEventStage(m)){kitOnePic(m);/* no person: the event picture keeps its tall slot, framed by its type */const ev=document.querySelector("#mb > .kpb > .kpsubj.kpev .ksart, #mb > .kdlgart > .ksart");
   if(ev&&!ev.classList.contains("ksart-cat")){const im=ev.querySelector("img");const c=kitEvCat(m,{src:im&&im.getAttribute("src")});if(c.col){ev.classList.add("ksart-cat",c.cls);ev.style.setProperty("--kcc",c.col)}}}}catch(e){}return r}})();
 (function(){const st=document.createElement("style");st.id="kit-evstage";st.textContent=`
 .kpb.kphas.kesb{grid-template-columns:clamp(130px,40%,260px) minmax(0,1fr);gap:12px;align-items:start}
