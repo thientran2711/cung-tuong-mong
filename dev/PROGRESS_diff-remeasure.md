@@ -49,17 +49,28 @@ eba64ead4 +0.30, fix −0.02. Loss/gain mix per 100 tuần (ranks 1–4), eba �
 Starting stats by origin are identical on both builds (dev/measure/pass/startprobe.js); origin mix differs (muoi 30 % of lives now).
 => the charity gap is only part of it; a second drain remains. NOT yet found.
 
-## ROLLOVER HANDOVER (worker context limit reached, 16/11 ~17:40Z)
-Raw lives: dev/measure/pass/data/dr/*.json (names = bot_build_mode). Build a bot copy: `bash dev/measure/pass/mkgame.sh fix.html`;
-INP: `PRE='window.__diffO="vua";' EXTRA="<move first life>;$(cat dev/measure/indiff.js);$(cat dev/measure/indanh.js)" bash dev/measure/pass/mkinp.sh $PWD/dev/tmp/inp.js`
-(move first life = `if(S&&!S.dead&&S.diff!=="vua"){S.diff="vua";if(S.bac0==null)S.bac0=S.bac;diffBac();diffApply()}`), then
-`node dev/measure/run_par.js root/dev/tmp/fix.html sens 30 dev/tmp/out.json ../tmp/inp.js 4 <seed>`; `python3 dev/measure/anpass.py sens <label> out.json`.
-~4 pages ≈ 15–25 lives an hour on 4 CPUs (memory: ≤ 8 pages in total).
-NEXT:
-1. Find the second drain: bisect 92668096 (0/7, stalls) vs its parents back to eba64ead4 (9/12) on the first-parent chain
-   (merge-train-4 merges 05:23–09:23Z: cycle-r3, tuduc-sub-r1, ua-test, reign-road-r1, goal-strip, scheme-games, act-split w1 …),
-   with BAL.charity applied by EXTRA on the old builds (`BAL.charity={bac:40,duc:3,danh:7}` has no effect where jact is absent).
-   Suspects from the Danh table: "Nói thật lòng" losses ×3.5, "Sang buổi mới … bị chê trách" (trung y / etiquette, jty / jaudit), "Nhún nhường".
-2. Then Vừa to HH ~32 % (n ≥ 30); only after that the jdiff DIFF table for Dễ / Khó (n ≥ 30 each; owner targets OD:L85 Dễ ~50 % / 20 %,
-   Khó 15–20 % / 55 %). Mortality stays as the owner set it (report the Thái phi / lifespan shares only).
-3. Tests still to run on the final build: dev/test/difficulty.js (71 checks), dev/test/wx-gear.js (done, ALL OK), opt-render at 5 sizes.
+## Successor session (session_01N1tNP3F65YoGjUoBixheuW) — DONE, ready for review
+### Finding 4 — the SECOND drain: promotion exams (harness, not a game bug)
+- Arm "head + the old Phát chẩn card put back in Hành sự" (charity any week): still HH 0/8 → charity was not the rest of the gap.
+- Exam recorder `dev/measure/inexam.js` (x.ix.exr per exam: to, vir, art, sh, play, total, bar, pass, arts sum, vir sum, hh, Danh):
+  eba64ead4 pass 86–91 %, her arts sum at the exams 13–26; head pass ~50 %, arts sum ~2 (Tứ đức 0 on both).
+- Cause: since merge-train-4 (tuduc-sub-r1) every lesson (Tài nghệ self / teacher) opens a kit pick dialog ("Học X: làm gì?", then the
+  material); the bot closed it (no opts) → no study at all. On eba64ead4 the bot studied through the Hành sự card "Tự học X: <work>"
+  (j83 wkDeckCard, no dialog), which act-dedupe w1 (jact AD_OUT /^Tự học /) removed. For a player the study is in Tài nghệ → no game bug.
+  review/danh-balance (Foreman D, now on main) reached the same two causes (its P2 "needs a Tài nghệ bot").
+- Harness fix (inpage6.js): modalStep taps the first item of a kit pick dialog (window.__noPick turns it off); the sensible bot self-studies
+  arts (lessonMode "self") and Tứ đức (lessonVir "self") when Sức ≥ 60 (window.__noSelf turns both off). Exams then pass 96 %.
+### Merge with main fb367740
+- BAL.charity: main (danh-balance) has the ONE copy `{khac:1,bac:20,duc:3,danh:1}`; my 40/7 is dropped (danh-balance P1 35/5 + a Hành sự
+  door waits for the owner). j85 = main's text (khac). My Danh-by-log recorder → `dev/measure/indanhlog.js` (main owns indanh.js).
+### Final measures (merged build, fixed bot, n ≥ 30 each; data dev/measure/pass/data/dr2/after_<mode>.json)
+| mode | HH | early death | HH pace (median tuần) | owner target (OD:L85) |
+|---|---|---|---|---|
+| Dễ | 67 % (20/30; 49–81) | 0 % (0/30; 0–11) | 196 | HH ~50 %, early death ~20 % → too easy |
+| Vừa | 37 % (11/30; 22–54) | 50 % (15/30; 33–67) | 229 | HH ~32 %, early death ~40–45 % → OK |
+| Khó | 16 % (5/32; 7–32) | 53 % (17/32; 36–69) | 355 | HH 15–20 %, early death ~55 % → OK |
+No BAL value changed for Vừa: with the bot fixed, Vừa is back on target. Rank curve: `python3 dev/measure/rankcurve.py`.
+Exam pass: Vừa 247/258, Dễ 254/264, Khó 369/376. Tests: dev/test/difficulty.js ALL OK (5 sizes; one flaky FAIL under bot CPU load,
+re-run clean), dev/test/wx-gear.js ALL OK (6 sizes). Site rebuilt.
+Open (proposal, not applied — Dễ mortality knobs are the owner's mortality rules): Dễ early death 0 % vs ~20 % (DIFF.de illDie ×0.5,
+poisonNow off); Dễ HH 67 % vs ~50 % (DIFF.de hhTh −5 could go to 0).
