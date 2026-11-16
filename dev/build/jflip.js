@@ -124,7 +124,10 @@ function kitCardFlip(o){o=o||{};const deck=o.deck||[];if(!deck.length)return;
   Object.assign(h.style,{left:(r.left+r.width*P.x0)+"px",top:(r.top+r.height*P.y0)+"px",width:(r.width*(P.x1-P.x0))+"px",height:(r.height*(P.y1-P.y0))+"px",borderRadius:(r.width*E.rad)+"px"});
   for(const [k,v] of [["--hb",(r.width*E.blur).toFixed(1)+"px"],["--hs",(r.width*E.spread).toFixed(1)+"px"],["--ho",E.op],["--hl",E.lo],["--hd",(E.breath*SL)+"ms"]])h.style.setProperty(k,v);
   ov.appendChild(h);edgeH.push({stop(){try{h.remove()}catch(e){}}})}
- function showRes(now){if(shown)return;shown=true;edgeLight();res.innerHTML=o.resHTML||"";res.classList.add("on");
+ /* the picked card is big and its tassel + tag stand over the row: hide the tag of any OTHER card the picked tag / tassel column would cross (its card is under the big one, the result chip names the pick) */
+ function coverTags(){if(!tel)return;try{const r=centreRect(),cx=r.x+r.w/2,half=Math.max(r.w*.3,40),y0=r.y+r.h*.9;
+  ov.querySelectorAll(".kcf-c:not(.kcf-pick) .kcf-tag:not(.kcf-tag-l)").forEach(t=>{const b=t.getBoundingClientRect();if(b.width&&b.right>cx-half&&b.left<cx+half&&b.bottom>y0)t.style.visibility="hidden"})}catch(e){}}
+ function showRes(now){if(shown)return;shown=true;coverTags();edgeLight();res.innerHTML=o.resHTML||"";res.classList.add("on");
   if(me){ov.classList.add("kcf-mine");stamp();if(!still)petals();snd("sfx-win");snd("sfx-buoi-bell",now?0:350)}
   cap.textContent=o.cap2||"Hoàng thượng lật thẻ bài"}
  function petals(){try{if(typeof kitFxBurst==="function"){kitFxBurst("petal-peach",null,18);return}}catch(e){}
@@ -231,7 +234,7 @@ const st=document.createElement("style");st.id="kcf-css";st.textContent=`
 .kcf-c{container-type:inline-size}
 /* name tag under EVERY card (owner 16/11 14:00Z: rank + name, no title): the kit kitNameRank (KIT 48): rank in its jewel rank colour over the name, plain vivid text, no glow (the tray floor is a pale silk surface, = paper rule 48.1h) */
 .kcf-tag{position:absolute;left:50%;top:100%;transform:translateX(-50%);width:max-content;max-width:160cqw;margin-top:3px;pointer-events:none;text-align:center}
-.kcf-tag.kcf-tag-l,.kcf-pick .kcf-tag{display:none}.kcf-pick .kcf-tag.kcf-tag-l{display:block;top:74%;margin-top:0}   /* the picked card is big: its tag sits right under the frame (over the tassel), never down at the tassel's end where the result chip stands */
+.kcf-tag.kcf-tag-l,.kcf-pick .kcf-tag{display:none}.kcf-pick .kcf-tag.kcf-tag-l{display:block;top:79%;margin-top:0}   /* the picked card is big: its tag sits right under the frame (over the tassel), never down at the tassel's end where the result chip stands */
 /* HER card on the tray (owner 16/11 14:05Z): a soft WHITE glow round the whole frame from the very start, so she knows her card at a glance; static (no running light, no motion), never over the portrait */
 .kcf-mine{position:absolute;left:8.5%;top:17.8%;width:83%;height:54.4%;border-radius:3cqw;pointer-events:none;box-shadow:0 0 3cqw .8cqw #ffffffd9,0 0 9cqw 2cqw #ffffff8c,0 0 18cqw 3cqw #ffffff40}
 .kcf-pick .kcf-mine{display:none}
