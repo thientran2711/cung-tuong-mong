@@ -26,7 +26,7 @@ const KPG={
 const KPC={
  /* triều chính: bad news vs good news vs rites */
  "lu-lut":{sfx:"alarm",mus:"bgm-tension"},"han-han":{sfx:"alarm",mus:"bgm-tension"},"bien-ai":{sfx:"alarm",mus:"bgm-tension"},"tham-quan":{sfx:"gloom",mus:"bgm-tension"},
- "thang-tran":{sfx:"win",fx:{px:["petal-gold",8]}},"duoc-mua":{sfx:"win"},"dai-xa":{sfx:"decree",fx:{px:["petal-gold",8]}},
+ "thang-tran":{sfx:"win",fx:{px:["petal-peach",8]}},"duoc-mua":{sfx:"win"},"dai-xa":{sfx:"decree",fx:{px:["petal-peach",8]}},
  "su-than":{sfx:"visitor"},"hoa-than":{sfx:"gloom",mus:"bgm-sorrow"},
  "quoc-tang":{sfx:"death",mus:"bgm-sorrow",vo:"f-sigh"},"tang-le":{sfx:"death",mus:"bgm-sorrow",vo:"f-sigh"},
  /* sủng ái */
@@ -38,7 +38,7 @@ const KPC={
  "le-xuan":{sfx:"festival",mus:"bgm-festival",fx:{px:["petal-plum",8]}},"le-ha":{sfx:"festival",mus:"bgm-festival",fx:{px:["petal-lotus",6]}},
  "le-thu":{sfx:"festival",mus:"bgm-festival",fx:{px:["leaf",6]}},"le-dong":{sfx:"festival",mus:"bgm-festival",fx:{px:["snow",8]}},
  "te-le":{sfx:"rite",mus:"bgm-sorrow"},"yen-tiec":{sfx:"banquet",mus:"bgm-festival",vo:"crowd-gossip"},
- "tan-phong":{sfx:"edict",fx:{px:["petal-gold",8]}},"tuyen-tu":{sfx:"visitor",mus:"bgm-day"},"thinh-an":{sfx:"kneel",mus:"bgm-day"},"hh-viec":{sfx:"rite",mus:"bgm-day"},
+ "tan-phong":{sfx:"edict",fx:{px:["petal-peach",8]}},"tuyen-tu":{sfx:"visitor",mus:"bgm-day"},"thinh-an":{sfx:"kneel",mus:"bgm-day"},"hh-viec":{sfx:"rite",mus:"bgm-day"},
  /* chăm con */
  "sinh-no":{sfx:"bloom",fx:{px:["petal-lotus",6]}},"con-tre":{sfx:"bloom",vo:"child-laugh"},
  /* giao thiệp */

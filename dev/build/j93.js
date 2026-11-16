@@ -76,7 +76,7 @@ function kmStage(cls,html,o){o=o||{};const red=kmReduced();const ov=document.cre
    21:00Z: effects are painted (Magnific), code only moves them — the old code-drawn coloured dots are gone. root / cols / spread kept for the
    callers' signature; Gọn / reduced motion / no fxkit = nothing (kitFxBurst's own switches). */
 function kmSpark(root,x,y,n,cols,spread){if(kmReduced()||typeof kitFxBurst!=="function")return;const at={x,y};const sc=Math.max(.7,Math.min(1.3,(spread||140)/140));
- try{kitFxBurst("spark",at,Math.max(6,Math.round(n*.6)),{scale:sc});if(n>=26&&cols&&/f0d070|e0a526/i.test(cols.join(",")))kitFxBurst("petal-gold",at,Math.round(n/3),{motion:"burst",scale:sc})}catch(e){}}
+ try{kitFxBurst("spark",at,Math.max(6,Math.round(n*.6)),{scale:sc});if(n>=26&&cols&&/f0d070|e0a526/i.test(cols.join(",")))kitFxBurst("petal-peach",at,Math.round(n/3),{motion:"burst",scale:sc})}catch(e){}}
 function kmFace(p,size){try{return typeof kitFaceH==="function"?kitFaceH(p,size||"big"):mdH(pv(p),size||"big")}catch(e){return""}}
 function kmRankName(r){return r>=7?"Hoàng hậu":RANKS[Math.max(0,r)].n}
 
