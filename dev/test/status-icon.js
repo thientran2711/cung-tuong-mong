@@ -26,6 +26,13 @@ const {chromium}=require('playwright');const [,,URL,OUT,SZ]=process.argv;const s
   await p.evaluate(()=>{KLOAD.paused=true;KLOAD.testChip(120e6,635e6)});await p.waitForTimeout(300);R.paused=await geo();
   await p.evaluate(()=>{KLOAD.paused=false;KLOAD.fig.have=KLOAD.fig.total;KLOAD.fig.left=0;KLOAD.testChip(635e6,635e6)});await p.waitForTimeout(400);R.done=await geo();await p.screenshot({path:`${OUT}/si-${sz}-done.png`});
   await p.waitForTimeout(5600);R.gone=await geo();
+  /* tabs that hide the stage (portrait): the status icon stays visible in the corner dock above the tab bar, 44 px, over nothing of the tab bar */
+  await p.evaluate(()=>KLOAD.testChip(120e6,635e6));
+  const tk=await p.evaluate(()=>[...document.querySelectorAll('#tabs [data-tab]')].map(b=>b.dataset.tab).filter(k=>k!=='act'));R.tabsDock={};
+  for(const k of tk.slice(0,4)){await p.evaluate(k=>document.querySelector('#tabs [data-tab="'+k+'"]').click(),k);await p.waitForTimeout(900);
+   R.tabsDock[k]=await p.evaluate(()=>{const b=document.querySelector('#krail [data-rail="st-dl"]'),tb=document.getElementById('tabs');if(!b)return null;const r=b.getBoundingClientRect(),q=tb.getBoundingClientRect();return{vis:r.width>0&&r.top>=0&&r.bottom<=innerHeight,size:[Math.round(r.width),Math.round(r.height)],aboveTabs:r.bottom<=q.top+1,left:Math.round(r.left),stageH:Math.round(document.getElementById('stage').getBoundingClientRect().height)}})}
+  if(tk.length){await p.screenshot({path:`${OUT}/si-${sz}-othertab.png`})}
+  await p.evaluate(()=>document.querySelector('#tabs [data-tab="act"]').click());await p.waitForTimeout(900);
   /* "Có bản mới" = the same kit part (swreg): icon in the rail with the red dot, tap → its own card #kupd, no #kupdchip anywhere */
   await p.evaluate(()=>{if(window.KSW){KSW.showChip()}});await p.waitForTimeout(1300);
   R.upd=await p.evaluate(()=>{const b=document.querySelector('#krail [data-rail="st-upd"]');return b?{label:b.getAttribute('aria-label'),badge:b.classList.contains('kbadge'),size:[b.offsetWidth,b.offsetHeight],oldChip:!!document.getElementById('kupdchip')}:null});
@@ -35,6 +42,6 @@ const {chromium}=require('playwright');const [,,URL,OUT,SZ]=process.argv;const s
   R.errs=errs;
   const fails=[];if(R.idle.icon)fails.push('icon visible while idle');if(!R.busy.icon||!R.busy.busy)fails.push('no busy icon');if(R.busy.icon&&R.busy.icon[2]!==44)fails.push('icon not 44px');if(R.busy.icon&&!R.busy.inside)fails.push('icon outside stage');if(R.busy.overFace)fails.push('icon over face');
   if(R.busy.chip||R.busy.dockClass)fails.push('old chip / dock band still there');if(R.busy.padB&&parseFloat(R.busy.padB)>8)fails.push('game bottom padding '+R.busy.padB);
-  if(!R.panel||!R.panel.x||!R.panel.prog||R.panel.daHieu)fails.push('panel wrong');if(!R.escClosed)fails.push('Esc does not close');if(!R.paused.badge||R.paused.busy)fails.push('paused state wrong');if(!R.done.done||R.done.busy)fails.push('done state wrong');if(R.gone.icon)fails.push('icon not gone after done');if(!R.upd||!R.upd.badge||R.upd.oldChip||R.upd.size[0]!==44)fails.push('upd icon wrong');if(!R.updCard||!/Có bản mới/.test(R.updCard))fails.push('upd card not opened');if(errs.length)fails.push('page errors');
+  if(!R.panel||!R.panel.x||!R.panel.prog||R.panel.daHieu)fails.push('panel wrong');if(!R.escClosed)fails.push('Esc does not close');if(!R.paused.badge||R.paused.busy)fails.push('paused state wrong');if(!R.done.done||R.done.busy)fails.push('done state wrong');if(R.gone.icon)fails.push('icon not gone after done');for(const[k,v]of Object.entries(R.tabsDock||{})){if(!v||!v.vis||v.size[0]!==44)fails.push('icon not visible on tab '+k);else if(v.stageH<=40&&!v.aboveTabs)fails.push('icon over tab bar on '+k)}if(!R.upd||!R.upd.badge||R.upd.oldChip||R.upd.size[0]!==44)fails.push('upd icon wrong');if(!R.updCard||!/Có bản mới/.test(R.updCard))fails.push('upd card not opened');if(errs.length)fails.push('page errors');
   R.fails=fails;if(fails.length)bad++;all[sz]=R;await ctx.close()}
  console.log(JSON.stringify(all,null,1));await b.close();process.exit(bad?1:0)})();

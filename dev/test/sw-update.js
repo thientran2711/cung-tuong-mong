@@ -35,7 +35,7 @@ function box(p,sel){return ev(p,s=>{const vw=innerWidth,vh=innerHeight,bad=[];co
 /* a full-page shot at @2 takes longer than the 4.5 s line lives: the shots redraw the same line (KSW.line) first */
 /* the chip sits on the top bar and covers no other part of it */
 const chipBox=p=>ev(p,()=>{const c=document.querySelector('#krail [data-rail="st-upd"]');if(!c)return{shown:false};const q=c.getBoundingClientRect(),st=document.getElementById('stage').getBoundingClientRect();
- return{shown:true,text:(c.getAttribute('aria-label')||'').replace(/ \(có mới\)$/,''),inHud:q.top>=st.top-1&&q.bottom<=st.bottom+1&&q.left>=st.left-1&&q.right<=st.right+1,covers:[],box:[q.left,q.top,q.width,q.height].map(Math.round)}});
+ return{shown:true,text:(c.getAttribute('aria-label')||'').replace(/ \(có mới\)$/,''),inHud:q.width===44&&q.top>=0&&q.bottom<=innerHeight&&q.left>=0&&q.right<=innerWidth,/* in the stage rail, or in the corner dock above the tab bar on tabs that hide the stage */covers:[],box:[q.left,q.top,q.width,q.height].map(Math.round)}});
 const mark=p=>ev(p,()=>window.__CTM_MARK||'A');
 const where=p=>ev(p,()=>typeof S!=='undefined'&&S?{name:S.name,k:[S.year,S.month,S.tuan,S.buoi||0].join(':'),used,tab,title:!document.getElementById('title').hidden}:null);
 /* a fresh life in sổ 1, no Luân hồi, no opening dialogs */
@@ -74,6 +74,8 @@ const tapIn=(p,sel,re)=>until(p,([s,r])=>{const b=[...document.querySelectorAll(
   await setVer('B');const t0=Date.now();await bgShort(p);
   ok(await until(p,()=>window.KSW&&KSW.pending,60000),'new build found after a return to the foreground',Date.now()-t0);
   await sleep(7000);ok(await mark(p)==='A'&&!await ev(p,()=>!!document.getElementById('kupd')),'mid-buổi: no reload, no card over the game');
+  /* a finished card-flip overlay (.kmov, review/tham-flip-ui) is a motion moment: the icon waits behind it by design — dismiss it like she would */
+  await ev(p,()=>document.querySelectorAll('.kmov').forEach(e=>e.remove()));await sleep(1600);
   const c0=await chipBox(p);R.chip=c0;ok(c0.shown&&c0.inHud&&!c0.covers.length&&c0.text==='Có bản mới','status icon "Có bản mới" in the stage rail',c0);
   await p.screenshot({path:`${OUT}/${SC}-1-chip-${tag}.png`});
   if(SC==='play'){
