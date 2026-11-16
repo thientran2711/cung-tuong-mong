@@ -31,7 +31,7 @@
 | D26 memories + hook ledger | review/memories | C | session_011xDdVPYyJVKrkdKtDKo6f9 | RUNNING | 05:29Z 16/11 |
 | coop-night-sync REVIEW (urgent) | review/coop-night-sync-r1 | main s9 | session_01UV1SzhQrqEEYDtLXNUvhdo | RUNNING | 16/11 05:31Z |
 | modal-scroll-r1 + log-sync-r2 (an-tinh) + book-fig-r1 re-merge on main | review/merge-hot-1 | main s9 | session_01UV1Szkb26qWiEe1bacAQvL | RUNNING | 16/11 05:36Z |
-| kit-sweep REVIEW (owner-urgent) | review/kit-sweep-r1 | main s9 | session_01UV1SziYTkPQjJKnWcb8GoX | RUNNING | 16/11 05:39Z |
+| kit-sweep REVIEW (owner-urgent) | review/kit-sweep-r1 | main s9 | session_01UV1SziYTkPQjJKnWcb8GoX | LIVE 0c23da40 | 16/11 05:39Z |
 | C43 coop-invite-ux review | review/coop-invite-ux-r1 | D | session_01DgYSWo9bFK5NRcy5Hrr3UX | RUNNING | 16/11 05:41Z |
 | facefx-all-r2 re-merge + kitPortrait main bug (jbook.js overrides j60 kitPortrait, breaks j90 podium fallback) | review/merge-hot-2 | main s9 | session_01UV1SzjMYTh2Gz2tanxwTrD | LIVE ba07c65e | 16/11 05:43Z |
 | C9 huadian review r3 | review/huadian-size-r3 | C | session_011xDdVShMB5Qb9z7oyaRK2z | FAIL → fix queued (art pause) | 05:45Z 16/11 |
