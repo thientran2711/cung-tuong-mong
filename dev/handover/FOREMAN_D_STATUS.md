@@ -1,8 +1,9 @@
 # FOREMAN D STATUS
 ORDER 16/11 applied (separate worker sessions, repo reports, hourly self-wake, claims).
-last wake: 16/11 14:45Z (s6 = session_01DgYSWkUCM7ZUmRkGFwQvQu — Foreman D is now s6; send result lines here)
+last wake: 16/11 15:35Z (s6 = session_01DgYSWkUCM7ZUmRkGFwQvQu — Foreman D is now s6; send result lines here)
 s6 START_CTX ≈ 6 % of 1M window (get_session reads 0; own estimate ~60k after start reading); rollover at 31 %, ceiling 60 %.
 s6 hourly wake = trig_01NSVCPThLJEaiZfkZzfES3w (xx:30). 5 running sessions told s6 id at 14:45Z. Free slots: 7, but no unclaimed real D item (cloud-del waits KIT READY; follow-ups not yet real) → none opened (OD:L1286).
+- 15:35Z (hourly): 4 alive — item-ledger-r1 (tracing 5 vanished items), kc-roads fix2 (bd +4/±12 tweak, full tests), ghen-shown (pushed 7b97d64c, finishing tests), danh-p1-r1 (sims). No new D INBOX; OD 15:00Z/15:10Z kit review = main kit keeper (not D). Main = s19. No unclaimed real D item → no new worker.
 s5 START_CTX ≈ 5 % of 1M window (get_session reads 0; own estimate ~50k after start reading); rollover at 30 %, ceiling 60 %.
 s4 START_CTX ≈ 5 % of 1M window (get_session reads 0; own estimate ~50k after start reading); rollover at 30 %, ceiling 60 %.
 s3 START_CTX ≈ 6 % of 1M window (get_session 08:30Z: 11.8 % used); rollover at 31 % (START_CTX + 25 %), ceiling 60 %.
