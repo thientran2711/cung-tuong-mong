@@ -44,7 +44,7 @@ function kitChatBubble(m,mine){css();return `<div class="kcm ${mine?"mine":"fr"}
 function kitChatList(msgs,seat){return (msgs&&msgs.length)?msgs.map(m=>kitChatBubble(m,m.s===seat)).join(""):`<p class="kpnote kchat-empty">Chưa có thư nào. Viết đôi dòng gửi hảo hữu.</p>`}
 function kitChatPanel(o){css();o=o||{};const nm=o.name?esc(String(o.name).slice(0,24)):"hảo hữu";
  const inp=typeof kitInput==="function"?kitInput({id:"kchat-in",label:"Thư",placeholder:"Viết thư gửi hảo hữu…"}):`<input class="kinput" id="kchat-in" placeholder="Viết thư gửi hảo hữu…">`;
- return `<div class="dlg kpanel kpsc" data-kind="notice">${typeof kpHeader==="function"?kpHeader("notice","Thư từ","Truyền tin cùng "+nm):""}<div class="kchat-list" id="kchat-list" data-k61skip="1">${kitChatList(o.msgs,o.seat)}</div><div class="kchat-row">${inp}<button type="button" class="kbtn" id="kchat-go">Gửi</button></div></div>`}
+ return `<div class="dlg kpanel kpsc" data-kind="notice">${typeof kpHeader==="function"?kpHeader("notice","Thư từ","Truyền tin cùng "+nm):""}<div class="kchat-list" id="kchat-list" data-k61skip="1" data-krn-skip="1">${kitChatList(o.msgs,o.seat)}</div><div class="kchat-row">${inp}<button type="button" class="kbtn" id="kchat-go">Gửi</button></div></div>`}
 window.kitChatPanel=kitChatPanel;window.kitChatList=kitChatList;window.kitChatBubble=kitChatBubble;window.kitChatWhen=kitChatWhen;
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§80",title:"kitChatPanel · Thư từ (nhắn tin cho hảo hữu; biểu tượng nằm ở cột nút §77)",
  html:()=>{const g={y:1,m:3,t:2,b:1};const ms=[{i:1,s:"b",n:"Lan Nhi",x:"Chào muội, hôm nay muội ra vườn ngự hoa chăng?",g},{i:2,s:"a",n:"Mai Hương",x:"Có chứ. Hẹn gặp ở đình nghỉ mát nhé!",g},{i:3,s:"b",n:"Lan Nhi",x:"<b>Được</b> thôi.",g:{y:1,m:3,t:2,b:2}}];
@@ -69,7 +69,7 @@ let P=null;
 function listEl(){return P&&P.querySelector("#kchat-list")}
 function fillList(){const l=listEl();if(!l)return;const near=l.scrollHeight-l.scrollTop-l.clientHeight<80;l.innerHTML=kitChatList(ST.msgs,seat());if(near||!l.dataset.sc){l.scrollTop=l.scrollHeight;l.dataset.sc="1"}}
 function openPanel(){if(!live())return false;css();if(P)return true;ST.open=true;markSeen();
- P=document.createElement("div");P.id="kchatp";P.className="modal kpscene";P.setAttribute("data-k61skip","1");P.setAttribute("role","dialog");P.setAttribute("aria-label","Thư từ");document.body.appendChild(P);
+ P=document.createElement("div");P.id="kchatp";P.className="modal kpscene";P.setAttribute("data-k61skip","1");P.setAttribute("data-krn-skip","1");P.setAttribute("role","dialog");P.setAttribute("aria-label","Thư từ");document.body.appendChild(P);
  P.innerHTML=kitChatPanel({msgs:ST.msgs,seat:seat(),name:frName()});
  const seal=P.querySelector(".kpseal");if(seal)seal.remove();
  const dlg=P.querySelector(".dlg");try{if(typeof kitXAdd==="function")kitXAdd(dlg,closePanel)}catch(e){}

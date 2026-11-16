@@ -40,7 +40,7 @@ window.kitChiTonMet=kitChiTonMet;window.kitCourtKnown=kitChiTonMet;
 function isKnown61(e){if(k61ChiTon(e))return true;if(k61St(e)<1)return false;if(S&&e&&e!==S&&(rivals||[]).includes(e))return met61(e);return true}
 /* public figures (kit review): Hoàng thượng, Thái hậu and the reigning Hoàng hậu are known by name and title (stage 2) from the first
    day; their face (grey silhouette until then) shows after the first meeting / thỉnh an */
-function k61Pub(e){if(!e||!S)return false;if(e===S.emp)return true;if(S.thO&&e===S.thO)return true;if(k61IsKid(e))return true;return !!((rivals||[]).includes(e)&&e.queen&&!e.out&&e.alive!==false)}
+function k61Pub(e){if(!e||!S)return false;if(e.coop)return true;/* the co-op friend is a real player whose name the room shows from the lobby on: always named (face still follows met61) */if(e===S.emp)return true;if(S.thO&&e===S.thO)return true;if(k61IsKid(e))return true;return !!((rivals||[]).includes(e)&&e.queen&&!e.out&&e.alive!==false)}
 /* the Emperor's children are announced at birth: every name is public; the FACE only after she has met the child (owner 11/15, jht) */
 function k61IsKid(e){return !!(e&&typeof e==="object"&&(e.sex==="m"||e.sex==="f")&&"fond" in e&&allKids().some(([k])=>k===e))}
 function k61SeedChiTon(){try{if(!S||!S.known)return;if(S.emp){const k=kOf61(S.emp);if((+S.known[k]||0)<2)S.known[k]=2}if(!S.thDead){S.thO=S.thO||{};const k=kOf61(S.thO);if((+S.known[k]||0)<2)S.known[k]=2}}catch(e){}}
