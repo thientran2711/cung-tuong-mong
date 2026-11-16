@@ -91,6 +91,7 @@ if __name__=='__main__':
         p=line.split()
         if len(p)<4:continue
         f,bid,n,idx=p[0],p[1],int(p[2]),int(p[3]);out=os.path.join(outd,f)
+        if not os.path.exists(os.path.join(curd,f)):print(f"{f}\tnocur");continue
         if os.path.exists(out):print(f"{f}\tdone");continue
         sp=os.path.join(cache,bid+".png")
         if not os.path.exists(sp):
