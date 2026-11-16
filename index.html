@@ -40378,7 +40378,9 @@ window.mbS=mbS;window.mbBand=mbBand;window.mbOdPts=mbOdPts;window.mbAdd=mbAdd;wi
 /* thiện cảm toward her: gains scaled by her mood (people warm to a bright face, keep away from a dark one) */
 (function(){if(typeof affAdd!=="function")return;const a0=affAdd;affAdd=function(x,y,n){try{if(y===S&&x&&x!==S&&n>0&&mbOn()){const k=mbAffK();if(k){const n2=Math.max(0,Math.round(n*(1+k)));if(n2!==n){MOOD_N.aff+=n2-n;n=n2;arguments[2]=n}}}}catch(e){}return a0.apply(this,arguments)}})();
 /* a joyful mood shows: rivals grow more jealous of her (the loss side of a high mood) */
-(function(){if(typeof ghenAll!=="function")return;const g0=ghenAll;ghenAll=function(n){try{if(n>0&&mbOn()&&mbBand().i>=2){const n2=Math.round(n*(1+B().ghen));MOOD_N.ghen+=n2-n;n=n2;arguments[0]=n}}catch(e){}return g0.apply(this,arguments)}})();
+/* ONE CORE (OD:L1267): the factor lives in ghenN (j1), so every text that prints ghenN(n) shows what ghenAll really adds; ghenAll only counts it */
+(function(){if(typeof ghenN!=="function"||typeof ghenAll!=="function")return;const n0=ghenN,g0=ghenAll;const mk=n=>{try{if(n>0&&mbOn()&&mbBand().i>=2)return Math.round(n*(1+B().ghen))}catch(e){}return n};
+ ghenN=function(n){return n0(mk(n))};ghenAll=function(n){try{const n2=mk(n);if(n2!==n)MOOD_N.ghen+=n2-n}catch(e){}return g0.apply(this,arguments)}})();
 /* ---------- inputs ---------- */
 /* every feeling that lands on her moves the bar (even when a stronger feeling keeps the seal) */
 (function(){if(typeof emoSet!=="function")return;const s0=emoSet;emoSet=function(p,k,v,why){try{if(mbOn()&&p&&(p===S||(typeof emoRes==="function"&&emoRes(p)===S))&&v>0&&typeof emoOn==="function"&&emoOn()){const c=B().emo[k]||0;
@@ -41496,7 +41498,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="b7dba643b1f3";window.CTM_BUILD=BUILD;
+const BUILD="98344cf78034";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

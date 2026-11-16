@@ -29,6 +29,8 @@ const {chromium}=require('playwright');const fs=require('fs'),path=require('path
    /* 1. unit */
    const K=Object.assign({},BAL.ghen);delete K.datinh;Object.assign(K,{night:BAL.night.ghen,visit:BAL.visit.ghen,psk:BAL.psk.ghen,giau:BAL.cyc&&BAL.cyc.rep?BAL.cyc.rep.giauGhen:4});
    for(const k in K){const n=K[k],want=Math.round(n*(dt?BAL.ghen.datinh:1));if(ghenN(n)!==want)F(`ghenN ${k} dt${dt}: ${ghenN(n)} != ${want}`);const L=base();ghenAll(n);const d=delta(L);if(d!==want)F(`ghenAll ${k} dt${dt}: ${d} != ${want}`)}
+   /* 1b. her mood Hân hoan (jmood ×(1+BAL.mood.ghen)) rides inside ghenN too: shown == applied (review r1) */
+   if(typeof mbS==="function"&&mbS()){const M=mbS(),v0=M.v;M.v=BAL.mood.band[3]+5;try{for(const k in K){const n=K[k],want=Math.round(Math.round(n*(1+BAL.mood.ghen))*(dt?BAL.ghen.datinh:1));if(ghenN(n)!==want)F(`mood ghenN ${k} dt${dt}: ${ghenN(n)} != ${want}`);const L=base();ghenAll(n);const d=delta(L);if(d!==want)F(`mood ghenAll ${k} dt${dt}: ${d} != ${want}`)}}finally{M.v=v0}}else F("mood: no mbS")
    /* 2. live */
    {const a=pool().find(x=>x.n==="Múa trong yến tiệc");if(!a)F("pool: no Múa trong yến tiệc");else chk(dt,"j2 pool Múa trong yến tiệc",a.x,()=>a.go())}
    {const v0=S.arts.vu;S.arts.vu=3;const a=artActs().find(x=>x.n==="Kinh hồng vũ");S.arts.vu=v0;if(!a)F("artActs: no Kinh hồng vũ");else chk(dt,"j2 artActs Kinh hồng vũ",a.x,()=>a.go())}
