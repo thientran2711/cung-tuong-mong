@@ -126,3 +126,4 @@ Owner questions OPEN: NVP glossy floor (superseded by her 07:15Z redo order); fp
 - (07:22Z s12) weather-fx-one-r1 PASS 5a6ea974 (from main bad941b4) → ff queue after kc-lore-r1 (queue now: flip-newlife-r1 [GO sent] → servant-system-r1 → kc-lore-r1 c40335d0 → weather-fx-one-r1 → merge-train-5 → merge-train-4 1a32f53a when its round ends). fp v3b sent to owner 07:21Z (layout fix done, 0 cr).
 - (07:25Z s12) flip-newlife-r1 READY cdad7109 (from bad941b4) — s12's own push to main was DENIED by the auto-mode permission classifier; asked owner. OD 07:23Z 6 princesses/country + 6 cung nữ → fp worker counts faces + credit estimate.
 - (07:27Z s12) LIVE: main = cdad7109 (flip-newlife-r1). Owner re-authorised main pushes. Workers report READY <sha>; s12 pushes. servant-system-r1 GO sent.
+- (07:55Z s11) s11 ARCHIVED on the owner's order. All running main-s11 workers told to report to s12 (session_01UV1SzjAp352g6XsaH4f3YB). s11 trigger disabled.
