@@ -191,13 +191,13 @@ function exRun(P,e,done){e.pend={raws:[]};const raws=e.pend.raws;let i=0;const n
    `<div class="kg82act"><button class="${kg82Btn()}" id="kg82go">Bắt đầu thi</button><button class="${kg82Btn(true)}" id="kg82skip">Để tài nghệ quyết định<small>môn này tính ${SK}/10, như người cùng bậc</small></button></div>`;
   $("kg82go").onclick=()=>kg82Play(k,raw=>after(raw,false));$("kg82skip").onclick=()=>after(SK,true)};
  const after=(raw,sk)=>{raws.push(raw);i++;const last=i>=n;try{save()}catch(x){}
-  kg82ShowRes(kg82Rows([[`Môn ${i}`,`${raw}/10 · ${kg82Word(raw)}${sk?" (để tài nghệ quyết định)":""}`,"t"]])+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82ok">${last?"Xem kết quả":"Môn kế tiếp"}</button></div>`);
+  kg82ShowRes(kg82Rows([[`Môn ${i}`,`${raw}/10 · ${kg82Word(raw)}${sk?" (để tài nghệ quyết định)":""}`,"t"]])+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82ok">${last?"Xem kết quả":"Môn kế tiếp"}</button></div>`,raw>=5);
   kg82Set("score",`${raw}/10`);kg82Set("round",`${i}/${n}`);$("kg82ok").onclick=()=>{if(last)result();else round()}};
  const result=()=>{const sc=exScore(P,raws);const r=Object.assign(sc,{P,raws});
   kg82Open({art:"Khảo hạch",round:"Môn",pic:kg82Pic(P.rounds[P.rounds.length-1]||"tho"),title:`Kết quả · ${P.rk}`,how:"Tổng phần = phần thi các môn + Tứ đức + tài nghệ. Đạt mức đỗ của giám khảo thì đỗ."});
   const parts=[["Các môn",raws.map((x,j)=>`${KG82_KIND[P.rounds[j]].n} ${x}/10`).join(" · ")],[`Phần thi (trung bình ${String(sc.avg).replace(".",",")} × ${BAL.ex.wPlay})`,`+${sc.play}`],[`Tứ đức (${P.virL})`,`+${P.vir}`],[P.artL,`+${P.art}`],["Mức đỗ","cần "+exBarTxt(P)]];
   const note=sc.pass?`Đỗ. ${P.passTxt}`:`Trượt. Chờ ${P.cdN} tháng mới được thi lại.`;
-  kg82ShowRes(kitGameResult({parts,total:`${sc.total} phần · cần ${P.bar}`,note})+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82ok">Đã hiểu</button></div>`);
+  kg82ShowRes(kitGameResult({parts,total:`${sc.total} phần · cần ${P.bar}`,note})+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82ok">Đã hiểu</button></div>`,P.srv?!!sc.pass:null);/* final: player exam = null (exDone plays examPass / examFail); servant exam has no exDone sound, so the panel plays it */
   kg82Set("score",String(sc.total));kg82Set("round",`${n}/${n}`);kg82Set("time","đã hết");try{$("kg82ok").scrollIntoView({block:"nearest"})}catch(x){}
   $("kg82ok").onclick=()=>{e.pend=null;kg82Close();done(r);try{save()}catch(x){}render()}};
  round()}
