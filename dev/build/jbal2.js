@@ -180,6 +180,20 @@ BAL.col={ms:[[20,5,"Tích bảo"],[50,10,"Tàng bảo"],[100,20,"Bách bảo"],[
 Object.assign(BAL,{rg:{at:[1,5,10,18,27,37],decideAfter:2,decideWait:3,catchUp:2,drift:.65,noise:[40,3],qs:.4,npcS:45,npcP:.08,A:48,B:60,thK:.1,pk:.46,pkQ:1.25,tr0:30,
  swDanh:5,swLead:8,swRel:8,swTr:10,swCd:6,swMax:2,joinRel:4,famAf:12,erCd:3,erP:30,ngoai:3,winSung:14,winDanh:6,rankCap:6,rankSung:0,
  winTh:24,winShield:6,bacWin:160,loseSung:8,loseTh:12,loseDanh:6,loseHouse:30,winHouse:15,npcWin:6,npcLose:8,lnCd:2,lnRetry:4}});
+/* review/emperor-visit (owner OD:L603): the Emperor comes to HER palace and stays the night (event "empnight", j7 + jvisit).
+   visit: a daily roll after the tablet flip, % = base + slope × (Sủng − minSung) + anK × Ân tình, × the Emperor's nature (datinh / lanhlung),
+   capped; none within gap days of the last visit, none while she is pregnant, in lãnh cung, or he is gravely ill. On top of the night
+   (BAL.night): Sủng + sung, Danh + danh, every consort ghen + ghen, the consort whose tablet was flipped ghen + lostGhen and quý ngươi − lostRel,
+   the Hoàng hậu − hh; Thái hậu displeased at thP + neg × thNeg % (neg = her archetype, jtrong TH_ARCH), Thái hậu quý ngươi − thLoss × her trọng.
+   show: "Phô tài" on the visit card (odds o + w × her best art's level, Sức − suc, Sủng / Danh on success).
+   Advising him to rest: Đức + adviseDuc, Sủng − adviseSung, Thái hậu + adviseTh. q = the night's prep quality (no bath, no wrapping: he came).
+   tea: the short visit "Hoàng thượng ghé cung uống chén trà" (j24 Có người đến pool): gate Sủng ≥ minSung, p %, Sủng / Ân tình gains.
+   night: the one night rule (j8 nightGain / nightFx) for every road into a night (tablet, Tranh sủng, Chặn ngự giá, the visit) and every NPC night (j75 rivalNight);
+   stealS = the night score the Tranh sủng / Chặn ngự giá line (j79 stealX) prices the reward chance at. */
+Object.assign(BAL,{visit:{minSung:20,base:.3,slope:.07,anK:.01,cap:8,datinh:1.5,lanhlung:.5,gap:9,illSt:2,q:2,
+ sung:3,danh:3,ghen:6,lostGhen:15,lostRel:8,hh:3,thP:25,thNeg:15,thLoss:4,adviseDuc:3,adviseSung:1,adviseTh:2,
+ show:{o:40,w:8,suc:5,sung:6,danh:2},tea:{minSung:60,p:50,sung:2,an:2}},
+ night:{sung:3,an:2,ghen:8,bestow:10,bestowS:4,stealS:3}});
 /* ACTIVE MAID LINE (jmline.js, review/servant-system, owner 16/11): % per month unless named. eye[rank] = the Emperor's eye by servant rank
    (thô sử, cung nữ, đại cung nữ, chưởng sự, nữ quan; was 0/0/1.2/1.2/1.2), eyeSung = ×(1 + master Sủng/100 × eyeSung), eyeAge = ages that can rise;
    seekStart (× nết: tham 2, lanh 1.5, trung/nhát 0.3) for seekMonths months, maids up to seekAge, seekMul on the eye while seeking;
