@@ -396,3 +396,4 @@ Foreman C inbox (s20): Thái hậu full redraw (slimmer robes), download glyph, 
 Unassigned owner-bug candidate: tutorial replay "Xem lại lời dặn" from title menu fails ~1 in 4 (menu modal stays open, jtut.js l.401-404) → sonnet worker.
 Self-wake: create_trigger denied twice (s19, s20) — don't retry; rely on notifications.
 - (17:10Z) MAIN SESSION 21 = session_01UV1SzkBh9FhY36EqiUowuZ; START_CTX ≈ 7 % of window (used_tokens read 0; own estimate) → rollover at ≥ 32 %, ceiling 60 %.
+- (17:12Z s21) npc-agent report @301332a23 self-checked (12 % slip = OD:L1248 ok; NOTE AG2 'flip() becomes his choice' must keep OD 18:10Z 90 %/65 % summon odds — Emperor agent picks WHO, not whether) → presented to owner; AG1–AG6 go to FOREMAN_C inbox only after her OK; audit session archived. Owner queue (one at a time): vượt phẩm 1/2 → npc-agent go AG1→AG3 → its Q1–Q3 → pet lifespan 1/2/3. Night package DONE (10 nights, OD 18:10Z).
