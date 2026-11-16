@@ -1,12 +1,35 @@
-# percent-measure (s12/s13 worker, 11/16/2026)
+# percent-measure (re-run 11/16/2026 ~20:00Z, worker for s22)
 
-Base: origin/main bd6342c73 (2160 commits). Method and raw evidence below. Nothing on main was changed.
+History: 08:21Z base bd6342c73: ~42% xong / ~66% playable (later ~46% / ~68%). THIS RUN base origin/main 098fecf3 (same 70-row table and weights, W=253). Nothing on main was changed.
 
 ## RESULT
-- **% xong (features live on origin/main vs planned): ~42%** weighted (unweighted 40%). If every PASS waiting for merge (merge-train-4/5 etc.) lands: ~57%.
-- **% choi duoc (test runs passing on origin/main, Fold 755x1000 + iPad 1180x820): ~66% verified** (105 of 160 valid runs). Upper bound ~83% if the 34 timed-out runs are not counted. No confirmed blocking bug in the core play loop; the unverified third is mostly test-harness drift and timeouts (details in part B).
+- **~67% xong** (169.6 / 253 weighted; was 42%). If the branches now in review/fix all land: **~77%** (upper estimate, see below).
+- **Playable: 44% verified (19 of 43 valid runs), upper 76% (19 of 25 not counting 18 timeouts)**. NOT comparable to 66%/83%: one device only (script viewport), 90 s cap (was 120-150 s), 4 parallel on 4 cores, and 43 of 86 scripts failed on harness/args (need file path or other args), excluded. No confirmed blocking play bug. Real play bots all PASS on main: reign, story-deadline, hint-dedup, stranger-sweep, promo-next-rank, stat-fx-scan, rel-words-scan, minigames-j71, act-split-scan, ap-week.
 
-## A. Method (% xong)
+## Change per category (live weight / total)
+| Group | before | now | why |
+|---|---|---|---|
+| Story W=91 | 29.6 (33%) | 42.6 (47%) | jst14 (14-chapter frame) y +8; jchap y +2; tutorial P2 partial 0.5 +3 (frame + no-free-reward rule live, per-feature quests not found) |
+| Systems W=111 | 56.6 (51%) | 101 (91%) | live now: coop invite UX, coop chat, econ items, mortality, difficulty, routes, scheme games, schedules j95/j95b/jk95, personality (jtrong+jdis; npc-mind only inside coop, 0.7), memories, collection, cycle, household, promote servants, toilette reactions, luxury, Tu duc x4, slap; mg balance partial 0.5 (mgTier live, mg-tune in review) |
+| UI W=18 | 8 (44%) | 14 (78%) | log-sync/an-tinh y, modal-scroll 0.67, newgame-ui y, row/flip/mood group 0.4 (jfigbg, row-align, header-own absent) |
+| Art W=33 | 12 (36%) | 12 (36%) | unchanged; img/ is out of git (CDN), art not re-verifiable here; 299 courtyard paintings are NOT in the 70 rows |
+
+Not in the 70 rows (tonight's extras, not counted): care-overlap, pet-lifespan, flip-hand, status-icons, chonso-tabs, tut-replay, ios-install-first, map-labels-2-b, go-live-kit, dress-offence, two-way-acts, fest-fx, pl-courtyards art.
+
+## 5 biggest remaining gaps (by remaining weight)
+1. P3 four full roads x 9 origins: 17 left of 20 (road-b1/b3 in FAIL-fix, none on main; no jrd_*/jend14 modules on main).
+2. Origin intros (code jentry in review/entry-exam, not on main; 10) + painted panels (5, no approved art): 15.
+3. NPC own roads: 10 (npc-roads U0+U1 in review, U2-U4 running).
+4. Art-complete figures part 2 (paused): 4 left; then P4 endgame ch12-14: 3.9.
+5. Next: online leaderboard jrank 3, foreign-princess art 3, P5 story bot balance 3, P2 tutorial quests 3 left.
+
+## If review/fix branches land (upper estimate, +25.4 = ~77%)
+P3 +10.4 (road-b1+b3 cover 6 of 9 origins, pro-rata), NPC roads +4 (2 of 5 units), origin intros +5 (code half), mg-tune +1.5, kc-roads-cn-nc +1.5, weather-fx3 +1, buoi-art +2.
+
+## Playable run detail
+86 dev/test scripts (the 46 named in the previous report + 40 more that take a URL), 1 run each, 90 s cap: 19 PASS, 6 BAD (int-stats and rest-cards print errs [] and exit 1; overlay-close 8/35 openers do not open, same as before; load-migrate and care-oldsave and chap-label-oldsave are harness/arg), 18 TIMEOUT, 43 harness/arg errors excluded. Needs a person check as before: new-game roulette tap path, tutorial first-run tour.
+
+## A. Method (unchanged; row table below is the 08:21Z base, kept for evidence) (% xong)
 Planned = features named in dev/STORY_ROADS_PLAN.md, dev/IDEAS_OPEN.md, HANDOVER_SESSION9 open items, OWNER_DECISIONS 1241-end, FOREMAN_B/C/D slices, SESSION8_QUEUE, CLAIMS.md: 70 rows. Live = (a) review branch tip is an ancestor of origin/main (git merge-base --is-ancestor) and/or (b) the feature module in dev/build/*.js exists on main (git ls-tree) / key identifier found by git grep. A module absent on main = not live. Weight = rough size (1 small fix .. 20 for the 4 roads x 9 origins). Partial credit only where a smaller live part is shown (evidence column). PASS = reviewer PASS but not on main.
 
 Weights by group: Story W=91 live 33% (with PASS 35%); Systems W=111 live 51% (with PASS 76%); UI W=18 live 44% (with PASS 83%); Art W=33 live 36% (with PASS 41%); total W=253.
