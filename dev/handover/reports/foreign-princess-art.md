@@ -42,3 +42,11 @@ Line check (OD):
 Credits v11: 4 x 40 = 160 (+2 ref uploads 0). Total v8-v11 = 1,040. Ids (gpt-2-6): BD Quý phi A LwoO1OfswO, B 9ZFGOzzNYZ (base p8Om8o4ehw); NC Quý phi A UPhNsZPwny, B xSX7K4MjfW (base s78ybjAl8e); refs vQ2q8dZa47 (c05-t6), JNf3gloOq4 (c03-t6).
 Caveat: BD Đáp ứng (approved opt 1) not on this sheet (approved earlier, v7 sheet crop); BD Phi/NC home figures unchanged from v10.
 STATUS: WAIT for the owner's verdict. STEP 2 not started.
+
+## v12 SAMPLE (set H = bigger heads, foreman s7: every figure into the c01 band 13.5-14 % head)
+File: `foreign-princess-art/sample-v12.jpg` (c01 reference left of each row; BD Đáp ứng(opt 1 braids) | Tần | Phi | Quý phi court robe; NC same). `sample-v11.jpg` = set L (head 12.2-13.0 %) stays as the alternative.
+Measured (pixel-read, crown>chin / crown>sole, headdress excluded): c01 13.5 %. Set H: BD Đáp ứng 15.7, Tần 14.9, Phi 14.1; NC Đáp ứng 15.5, Tần 15.5, Phi 14.7; Quý phi: crown hidden by the crown headdress (chin>sole aligned). Set L (v11): BD Tần 12.8 (approved fig.), NC 12.2-13.0. The target band 13.5-14.0 sits BETWEEN the two sets; gpt-2-6 does not obey a % head size (asked 14.5 % got 12.2-13.0; asked 13.8 % from set H got ~15.4 %), so I could not land inside the band in the credits spent. Options: (a) show her both sets L and H, she picks; (b) more tries (40 cr each, ~1 in 3 chance per try).
+IDs gpt-2-6: BD set H lineup Ifiu8b6tvE (base LwoO1OfswO + c01 ref KLDgbFzkqp + 1lpkMb1r4r for Đáp ứng braids); NC set H 8a6Eo1pIrU (base UPhNsZPwny). Rejected tries: aFAbvrmfSh N2Hz9TY6D9 Xm4adFwBfo tC3QIjHmZJ Sym9gnMUb8 kspSK6I16B (same family), 8%-smaller-head tries fHG5fvmCDY w4v6wUp7EI aFAbavWfSh 6AqY3R2iJO p8OhdX6ehw N2Hni3P6D9 (heads ~15.4 %, no gain).
+OD line per figure: Đáp ứng/Tần/Phi = L1207 home costume + colour/richness steps (+owner ticks 16/11 19:20Z: BD Đáp ứng opt 1, Tần kept, Phi opt-2 hair); Quý phi = L1207 + L1212(a) own court robe + L1256(2) in-game Quý phi language; L1238 right hand holds a prop, own faces (BD vs NC differ). Tần BD changed: the approved Tần figure is redrawn with a bigger head (face/costume same).
+Credits: 14 x 40 = 560 (v8-v12 total 1,600).
+STATUS: WAIT for the owner's verdict. STEP 2 not started.
