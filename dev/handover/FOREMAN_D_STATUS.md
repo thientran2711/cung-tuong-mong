@@ -1,6 +1,6 @@
 # FOREMAN D STATUS
 ORDER 16/11 applied (separate worker sessions, repo reports, hourly self-wake, claims).
-last wake: 16/11 13:45Z (s5 = session_01DgYSWow5x77Z2u52vVJQ9f; Foreman D is s5 — workers send result lines here) · s5 wake trig_01F8KntmXAMD8Qv2nmzjZDMf (hourly :58)
+last wake: 16/11 14:00Z (s5 = session_01DgYSWow5x77Z2u52vVJQ9f; Foreman D is s5 — workers send result lines here) · s5 wake trig_01F8KntmXAMD8Qv2nmzjZDMf (hourly :58)
 s5 START_CTX ≈ 5 % of 1M window (get_session reads 0; own estimate ~50k after start reading); rollover at 30 %, ceiling 60 %.
 s4 START_CTX ≈ 5 % of 1M window (get_session reads 0; own estimate ~50k after start reading); rollover at 30 %, ceiling 60 %.
 s3 START_CTX ≈ 6 % of 1M window (get_session 08:30Z: 11.8 % used); rollover at 31 % (START_CTX + 25 %), ceiling 60 %.
@@ -152,6 +152,7 @@ READY review/coop-guest-maid-r1 3a875687518f3492f24ce8bd2bfe825076c32513 (co-op 
 - Main coordinator = main session 15 session_01UV1SzisvHjTamjSXck6FLz (other account: send_message fails → write in this file). Archive finished sessions every wake (OD:L1287).
 
 ## s4 wake log
+- 14:00Z (hourly): no new D inbox/OD for D; 8 running (reviewers seatcap-r1, emperor-visit-r1, coop-b1b5-fix-r1, npc-death-r1; workers danh-p1, mem-upgrade, item-ledger, kc-roads-fix2), long tests in progress; no stale sessions.
 - 13:45Z: PASS name-mask-r1 571dc15e + preg-rate-r1 1c31bd79 (READY, reviewers archived); seatcap SẴN SÀNG KIỂM → reviewer seatcap-r1 session_01DgYSWoAxb67pTNnGiGEUTw; s17 inbox 13:50Z → workers mem-upgrade session_01DgYSWnbZAx5XWMeN9VzwiE + item-ledger session_01DgYSWoSdvBQtzpXxCDVUPh (opus). Running 7/12.
 - 13:12Z (s5 takeover): 9 running sessions told the s5 id; hourly wake trig_01F8KntmXAMD8Qv2nmzjZDMf; cloud-del BLOCKED (KIT REQUEST danger button + confirm) → archived; no new reports from the other 8 yet; slice has no unassigned item (D52 = C, art = C, #3 PASS, #7 live) → no refill. Running 8/12.
 - 12:58Z (hourly + s16 inbox 12:55Z): mortality-r1 LIVE → D4 + D57 started; s16 answers taken: Danh P1 approved (+P2 bot, P3 NO) → danh-p1 worker; cloud-del worker; coop-b1b5-fix SẴN SÀNG KIỂM 7c7fcc45 → final opus reviewer. D8 poison stays PARKED (s16). Context 28 % → rollover to s5 now.
