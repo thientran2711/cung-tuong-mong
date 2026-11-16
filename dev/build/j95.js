@@ -253,7 +253,7 @@ function j95view(R,kh){const W={};W.emp=R.P.emp?R.P.emp[kh][0]:"dtd";W.th=R.P.th
 function j95vis(id,k){if(!id||!k||k===J95OUT_||id==="me")return false;const c=id[0];
  if(c==="v"){const v=RV(+id.slice(1));return !!(v&&v.alive&&!(k==="home"&&sameHouse(S,v)))}
  if(id==="emp")return k!=="home"&&!(k==="dtd"&&(S.sung||0)<50);if(id==="th")return true;
- if(c==="m"&&id[1]!=="m")return true;if(c==="q")return true;if(J95.eld&&J95.eld[id]){/* a named elder counts only where jstaff addStage draws her */const e=J95.eld[id];return e==="kn"?k==="kn":e==="tn"?(k==="tn"&&!S.thDead)||k==="tgk":e==="gt"?k==="home"&&(S.turn||0)<=4&&!S.out:false}if(id==="c:ty"||id==="c:ksp")return true;if(id==="c:ped")return k==="nvp";/* jplx places draw the servants and children their lists put there (not on the maid road: jplx skips it) */if(typeof isSrv==="function"&&isSrv()&&(id==="c:tgk"||id==="c:ttp"||(c==="s"&&J95.px&&J95.px[id])||(c==="k"&&(k==="ttp"||k==="acs"||k==="dc"))))return false;if(id==="c:tgk"||id==="c:ttp")return true;if(c==="s"&&J95.px&&J95.px[id]===k)return true;if(c==="k"&&(k==="ttp"||k==="acs"||k==="dc"))return true;
+ if(c==="m"&&id[1]!=="m")return true;if(c==="q")return true;if(J95.eld&&J95.eld[id]){/* a named elder counts only where jstaff addStage draws her */const e=J95.eld[id];return e==="kn"?k==="kn":e==="tn"?(k==="tn"&&!S.thDead)||k==="tgk":e==="gt"?k==="home"&&(S.turn||0)<=4&&!S.out:false}if(id==="c:ty"||id==="c:ksp")return true;if(id==="c:ped")return k==="nvp"&&j95nvp();/* jplx places draw the servants and children their lists put there (not on the maid road: jplx skips it) */if(typeof isSrv==="function"&&isSrv()&&(id==="c:tgk"||id==="c:ttp"||(c==="s"&&J95.px&&J95.px[id])||(c==="k"&&(k==="ttp"||k==="acs"||k==="dc"))))return false;if(id==="c:tgk"||id==="c:ttp")return true;if(c==="s"&&J95.px&&J95.px[id]===k)return true;if(c==="k"&&(k==="ttp"||k==="acs"||k==="dc"))return true;
  /* her own household servants: jhouse (main, servant-system) draws them on her room / lãnh cung stage (r1 16/11) */if(c==="s"&&(k==="home"||k==="lc")&&j95hsv(id))return true;
  if(k==="home")return id==="mm:me"||id.indexOf("k:me:")===0;return false}
 function j95nvp(){try{return typeof adSrv==="function"&&!adSrv()&&!!(S&&S.court&&S.court.ped&&S.court.ped.name)}catch(e){return false}}
@@ -284,6 +284,8 @@ function j95sync(watch,plan){if(!j95on())return;let R=S.roster;if(!R||R.key!==j9
   for(let i=kh;i<4;i++){const x=e[i];if(p.kind==="px"){if(x[0]!==p.home)e[i]=p.home==="tgk"?["tgk","laundry",oid,"bị phạt giặt giũ ở Tân Giả khố"]:["cnh","offduty",oid,"đến lượt nghỉ tay"]}
    else if(x[1]==="offduty"||x[1]==="laundry")e[i]=[p.home,i%2?"clean":"serve",oid,p.home==="lc"?"hầu chủ ở lãnh cung":"phận sự trong cung"]}}
  for(const p of ppl)if(p.kind==="rv"){const v=p.ref,e=R.P[p.id];for(let i=kh;i<4;i++){const un=()=>{if(typeof j95cUnsay==="function")j95cUnsay(p.id,R.key,i)};if(v.out){if(e[i][0]!=="lc"){un();e[i]=["lc","cold",null,"bị đày vào lãnh cung"]}}else if(v.confined&&e[i][0]!==palaceOf(v)&&e[i][1]!=="tryst"){un();e[i]=[palaceOf(v),"confined",null,`bị cấm túc ${v.confined} tháng`]}}}
+ /* r2: the Nội vụ phủ eunuch stands at Nội vụ phủ only while that place exists (jact: not in lãnh cung, not on the maid road) */
+ {const e=R.P["c:ped"];if(e){const on=j95nvp();for(let i=kh;i<4;i++){if(on&&e[i][0]!=="nvp")e[i]=["nvp","sell",null,"bày hàng mua từ ngoài cung ở Nội vụ phủ"];else if(!on&&e[i][0]==="nvp")e[i]=["ksp","sell",null,"đi bán hàng rong kiếm lời"]}}}
  try{j95fixHouse(R,kh,ppl)}catch(e){j95err("house",e)}
  const W=j95view(R,kh);S.where=W;const MW={};for(const m of S.men||[]){const e=R.P[m.id];if(m.alive&&e&&e[kh][0]&&e[kh][0]!==J95OUT_)MW[m.id]=e[kh][0]}S.menW=MW;
  R.m[kh]=j95counts(R,kh);R.kh=kh;
@@ -331,7 +333,7 @@ function j95stage(R,kh){const V=S.visit;if(!V||!V.people||V.k!==S.place||S.dead)
  for(let i=V.people.length-1;i>=0;i--){const p=V.people[i];let id=null;
   if((p.kind==="rival"||p.kind==="hh")&&p.ref)id="v"+p.ref.id;else if(p.kind==="emp")id="emp";else if(p.kind==="th")id="th";else if(p.kind==="man"&&p.ref)id=p.ref.id;else if(p.kind==="ty")id="c:ty";else if(p.kind==="ksp")id="c:ksp";else if(p.kind==="min"&&p.ref&&p.ref.c!=null)id="q:"+p.ref.c;else if(p.kind==="serv"&&p.sid!=null)id="s"+p.sid;else if(p.kind==="peddler"&&R.P["c:ped"])id="c:ped";
   else if(p.kind==="fallen"){if(!p.ref||!here("v"+p.ref.id)){V.people.splice(i,1);popIdx=null;ch=true}continue}
-  if(id&&R.P[id]&&!here(id)){V.people.splice(i,1);popIdx=null;ch=true}}
+  if(id&&(R.P[id]||p.kind==="man")&&!here(id)){V.people.splice(i,1);popIdx=null;ch=true}}
  for(const v of liveRivals(true)){const id="v"+v.id;if(!here(id))continue;if(V.people.some(p=>p.ref===v&&(p.kind==="rival"||p.kind==="hh")))continue;
   if(k==="home"&&sameHouse(S,v))continue;try{V.people.push(v.queen&&qOn()?{...rp(v),kind:"hh",name:`Hoàng hậu ${v.name}`,ini:"鳳"}:rp(v));ch=true}catch(e){}}
  /* jplx places: the people jplx's lists put here (servants, children, the fixtures) are on the stage (a walk that crosses into the next buổi
@@ -483,7 +485,7 @@ function j95menSigns(){const out={};if(!j95men())return out;const MY=S.menWhy||{
  const wo0=whereOf;whereOf=function(p){try{if(j95on()&&p&&p!==S&&p.rel!=null&&S.roster&&S.roster.key===j95key()){const e=S.roster.P["v"+p.id];if(e)return e[j95kh()][0]}}catch(e){}return wo0.apply(this,arguments)};
  const g0=goTo;goTo=function(k){const r=g0.apply(this,arguments);try{if(j95on()&&S&&!S.dead){if(S.place===k&&k&&k!=="home"&&k!==palaceOf(S)){const z=j95z();const key=j95c()+":"+k;const bk=j95key();if(z.meLast!==bk+key){z.meLast=bk+key;z.me[key]=(z.me[key]||0)+1}}
    if(S.roster){j95sync(true);if(S.visit){const n0=S.visit.people&&S.visit.people.length;j95dedupe(S.visit);if(S.visit.people&&S.visit.people.length!==n0)J95.stageCh=1}if(J95.stageCh&&S.visit&&S.visit.k===S.place)render()}}}catch(e){j95err("wrap",e)}return r};
- const c0=countAt;countAt=function(k){if(!j95on()||!S.roster||S.roster.key!==j95key())return c0.apply(this,arguments);const R=S.roster,kh=j95arrKh(k);let n=0;for(const id in R.P)if(R.P[id][kh][0]===k&&j95vis(id,k))n++;/* jact (loaded later) adds its Nội vụ phủ eunuch +1 on top: the record counts him itself (r1) */if(k==="nvp"&&j95nvp()&&n>0&&R.P["c:ped"]&&R.P["c:ped"][kh][0]==="nvp")n--;return n};
+ const c0=countAt;countAt=function(k){if(!j95on()||!S.roster||S.roster.key!==j95key())return c0.apply(this,arguments);const R=S.roster,kh=j95arrKh(k);let n=0;for(const id in R.P)if(R.P[id][kh][0]===k&&j95vis(id,k))n++;/* jact (loaded later) adds its Nội vụ phủ eunuch +1 on top: the record counts him itself (r1) */if(k==="nvp"&&typeof adSrv==="function")n--;return n};
  const p0=places;places=function(){const L=p0.apply(this,arguments);try{if(j95on()){const sg=j95mapSigns();for(const x of L)if(sg[x.k]&&!(x.d||"").includes(sg[x.k]))x.d=(x.d||"")+` Có ${sg[x.k]}.`}}catch(e){}return L};
  if(typeof tryst==="function"){const t0=tryst;tryst=function(m,risk){const r=t0.apply(this,arguments);try{/* jmen catches her talking with a man in the hậu cung (its talk wrapper) */if(j95on()&&!j95men()&&!S.dead&&!S.out&&m&&m.alive)j95npcCatch(m)}catch(e){}return r}}
  /* the motive gate on every NPC act aimed at someone */
@@ -521,3 +523,23 @@ function j95menSigns(){const out={};if(!j95men())return out;const MY=S.menWhy||{
  /* old saves / a fresh life: build the record on the first render */
  const r0=render;render=function(){try{if(j95on()&&!S.dead&&S.where&&(!S.roster||S.roster.key!==j95key()||S.roster.kh!==j95kh()))j95sync(false,true)}catch(e){}return r0.apply(this,arguments)};
 })();
+
+/* ===== r2 (16/11): ONE final reconcile, outermost (OD:L34 map = stage = record). Main modules loaded after j95 (jact, jhouse, jkc, jtds,
+   jwkpics) and older ones (jstaff addStage, j22 men) add people to the stage on their own paths; instead of chasing each path, the last
+   wrapper of renderStage (every stage draw) and of homePeople (her room stage AND the map number of her room, j59) makes the stage follow
+   the record. Installed with setTimeout 0 like j59's outermost countAt, so it wraps every module whatever the load order. ===== */
+function j95elderEntry(st){try{return{kind:"elder",ref:st,eid:st.eid,name:st.call,ini:String(st.call).split(" ")[0],col:(typeof staffFace==="function"?staffFace(st).col:"#9a8a7a"),info:typeof elderOffice==="function"?elderOffice(st):""}}catch(e){return null}}
+/* the named elders (jstaff) on a stage follow the record: drop one the record puts elsewhere now, add one it puts here (visible) */
+function j95elderFix(L,k,R,kh){let ch=false;if(!Array.isArray(L)||!R||!J95.eld)return false;
+ for(let i=L.length-1;i>=0;i--){const p=L[i];if(!p||p.kind!=="elder"||!p.ref||p.ref.sid==null)continue;const id="s"+p.ref.sid,e=R.P[id];if(e&&e[kh]&&(e[kh][0]!==k||!j95vis(id,k))){L.splice(i,1);ch=true}}
+ for(const id in J95.eld){const e=R.P[id];if(!e||!e[kh]||e[kh][0]!==k||!j95vis(id,k))continue;if(L.some(p=>p&&p.kind==="elder"&&p.ref&&"s"+p.ref.sid===id))continue;
+  const st=typeof elderBy==="function"?elderBy(J95.eld[id]):null;if(!st||"s"+st.sid!==id)continue;const q=j95elderEntry(st);if(q){L.push(q);ch=true}}
+ return ch}
+function j95final(){try{if(!j95on()||!S||S.dead||!S.roster||S.roster.key!==j95key())return false;/* a trip outside the palace (jkc) has its own stage */if(typeof isKc==="function"&&isKc())return false;const V=S.visit;if(!V||!V.people||V.k!==S.place)return false;
+ const R=S.roster,kh=j95kh();let ch=false;try{ch=!!j95stage(R,kh)}catch(e){j95err("final",e)}
+ if(!(typeof isSrv==="function"&&isSrv())){if(j95elderFix(V.people,S.place,R,kh)){ch=true;popIdx=null}}
+ const n0=V.people.length;j95dedupe(V);if(V.people.length!==n0)ch=true;return ch}catch(e){j95err("final",e);return false}}
+setTimeout(()=>{try{
+ if(typeof renderStage==="function"){const rs0=renderStage;renderStage=function(){j95final();return rs0.apply(this,arguments)}}
+ if(typeof homePeople==="function"){const hp0=homePeople;homePeople=function(){const L=hp0.apply(this,arguments);try{if(j95on()&&S&&!S.dead&&S.roster&&S.roster.key===j95key()&&!(typeof isSrv==="function"&&isSrv())&&Array.isArray(L))j95elderFix(L,"home",S.roster,j95kh())}catch(e){j95err("home",e)}return L}}
+}catch(e){j95err("finalwrap",e)}},0);

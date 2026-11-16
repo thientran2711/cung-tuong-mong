@@ -36,7 +36,7 @@ const vis=r=>{const id=r.id,k=r.place;if(!k||k==='ngoai'||id==='me')return false
  if(ELD[id]){const e=ELD[id];return e==='kn'?k==='kn':e==='tn'?(k==='tn'&&!S.thDead)||k==='tgk':e==='gt'?k==='home'&&(S.turn||0)<=4&&!S.out:false}
  /* jplx places (main): the fixtures, servants resting / punished there, children 6+ at the study and their halls */
  if(id==='c:tgk'||id==='c:ttp')return true;if(id[0]==='s'&&(k==='cnh'||k==='tgk'))return /nghỉ tay|giặt giũ/.test(r.act||'');if(id[0]==='k'&&/^(ttp|acs|dc)$/.test(k))return true;if(id[0]==='v')return k!=='home'||r.tgt===S.name||/sang chơi|gây sự|hẹn hò/.test(r.act||'');
- if(id==='emp')return k!=='home'&&!(k==='dtd'&&(S.sung||0)<50);if(id==='th'||id[0]==='q'||id==='c:ty'||id==='c:ksp')return true;if(id==='c:ped')return k==='nvp';
+ if(id==='emp')return k!=='home'&&!(k==='dtd'&&(S.sung||0)<50);if(id==='th'||id[0]==='q'||id==='c:ty'||id==='c:ksp')return true;if(id==='c:ped')return k==='nvp'&&!(S.out||S.srv||(typeof isSrv==='function'&&isSrv()));/* r2: no Nội vụ phủ in lãnh cung / on the maid road (jact adSrv) */
  /* her household servants (jhouse, main): on her room / lãnh cung stage (r1) */if(id[0]==='s'&&(k==='home'||k==='lc')&&!S.dead&&!SRV&&(S.staff||[]).some(x=>x&&x.sid!=null&&'s'+x.sid===id))return true;if(id[0]==='m'&&id[1]!=='m')return true;
  if(k==='home')return id==='mm:me'||id.indexOf('k:me:')===0;return false};
 if(JSONOUT){const err0=[];const ids0=new Set();for(const r of rows){if(ids0.has(r.id))err0.push('trùng '+r.id);ids0.add(r.id)}const C0={};for(const r of rows)if(r.place&&vis(r))C0[r.place]=(C0[r.place]||0)+1;console.log(JSON.stringify({at,total:rows.length,counts:C0,map,rows,err:err0}));process.exit(0)}
