@@ -318,3 +318,24 @@ Self-wake: s17 trigger trig_01BRGhrPtrU9hJda11i33Cts DELETED at handover → s18
 - (14:45Z s18) LIVE: merge-train-8 2232ea32 (veil-zoom + fig-bg out; promo-reveal-fix in). Next: design-scale-p2-r1 (PASS, re-merging) → phone-bars-r1 (in review) → title-tag-r1 (FAIL fix in progress).
 - (15:12Z s18) LIVE: title-tag-r1 5d6de0d9 (rank-bright + title-tag; glow-aware contrast). rank-bright worker archived. Queue: design-scale-p2-r1 (re-merging) → phone-bars-r1 (reviewing) → tut-place (option c). New s18 workers: history-maid-nights, square-icons, anim-pace, lag-play (CLAIMS).
 - (15:20Z s18) LIVE: design-scale-p2-r1 5682ce6f. history-maid-nights report in (ed5bbd113), expert archived; owner told summary + 2-step build, final numbers with night-time report.
+
+## S18 → S19 HANDOVER (15:30Z real; s18 ctx 31 % of window = START 6 % + 25 % → rollover)
+Read: dev/rules/START_CORE.md + START_FOREMAN.md + START_MAIN.md IN FULL; OWNER_DECISIONS from "(16/11 14:45Z" to the end (14:45Z night stealing, 15:00Z s17 KIT REVIEW (big), 15:05Z s18 batch); CLAIMS.md last 30 rows; this block. Push recipe HANDOVER_TO_SESSION8.md §1 (verify branch head == READY sha; flock fetch; main moves often).
+OWNER AWAKE, now writing in the s18 chat → tell her to continue in s19 (push notification). She is irritated by vague proposals and by having to review the kit herself: check code first, numbers, gain/risk, ONE recommendation; pictures/videos via SendUserFile after self-check.
+main = 5682ce6f. s18 put live (all SMOKE PASS, sessions archived): merge-train-8 2232ea32, title-tag-r1 5d6de0d9 (rank-bright + title-tag), design-scale-p2-r1 5682ce6f.
+RUNNING (all report to main; re-point to s19 with send_message):
+- merge-train-9 session_01UV1SzhR7Tb1NFJYg1HjaXd: all foreman PASS/READY branches not on main (D: coop-guest-maid, danh-balance, close-maid, entry-exam, preg-rate, npc-death, seatcap, mem-upgrade, …) → READY → push → smoke.
+- phone-bars-r1 reviewer session_01UV1SzivoRHdnDUDwc6UZKt (3a022369, Fold tabs 2 rows; told to merge main 5682ce6f) → PASS → push.
+- tut-place worker session_01UV1SzkUFJmikqECkuFxtPn (decision: OD:L963 stays; narrow spotlight hole to the actual tap target = option c; merge 5682ce6f) → re-review by session_01UV1Szjoc74qzY1ffJ45Mrv.
+- tham-flip-ui-r1 reviewer session_01UV1SzhgZtmqQ7d2jmf5wDs (a27f525b2 new gilt-lacquer tray, rank+name under cards, her white glow; owner was sent the full-res shot + 12 s video at 15:22Z, no verdict yet; worker archived) → PASS → push.
+- night-time analyst (opus) session_01UV1SzhuYF9iVGubAH5xsE6 → reports/night-time.md: 3 flips/month vs 12 consorts; flip() 90 % (65 % chamchinh); NPC stealing by ambition (14:45Z); player squeeze; + MAID NIGHTS (OD 15:05Z (3)). History report reports/history-maid-nights.md DONE (ed5bbd113; owner already got the summary: 10 % of flip-days a maid instead, 50 % raised if a seat is free, unranked pregnancy 12 %, lowborn child; build in 2 steps). When night-time.md lands: present ONE combined decision to the owner (plain words, numbers, gain/risk, ONE recommendation), then 1st/15th D1 (parked), D2 Empress off tray, D3 vacant throne — one at a time.
+- square-icons session_01UV1SzgoYoth94RALW92Jg4 (OD 15:05Z (1): round icon buttons → square kit button, whole game) → sheet to owner → reviewer.
+- anim-pace session_01UV1SzjsxJomT3ov3kXyta3 (OD 15:05Z (5)(6): jbuoi full-screen in landscape, clearer, ~3 s; whole-game animation pace constant; season + festival variants, 1 sample each, rest → C) → videos to owner → reviewer.
+- lag-play (opus) session_01UV1SzhF1ExMpqSUL9vigZu (OD 15:05Z (4) LAG = FIRST PRIORITY: play-time + co-op lag, fixes, play-perf.js budget test in every review) → interim findings ~1 h.
+- kit-size (opus, kit keeper) session_01UV1Szk9smUkxoioTZMD7KJ (OD 15:00Z kit review: 4 sizes frames/figures/pictures/buttons, button layouts, VIỆC DÀI, catalogue WHERE+SIZE) → SAMPLE SHEETS first → owner OK → mass change.
+- kit-marks session_01UV1SzjfpYasXCkBCSB3ais (gold Emperor/Thái hậu, text-line one colour, ink ✓/✗, relations 2 columns no bars, seal orange, icons above names, one Tinh phẩm chip, empty samples; + danger button/kitConfirm for D's C44 cloud-del, §72 clash, K3) → sample sheet → owner; "KIT READY: danger button + kitConfirm" → tell Foreman D.
+- fp v7 worker session_01UV1SzhXgLn4WHG9rL1BT7L idle waiting for the owner's fp v7 hair / NC v7 answer (sheets sent 13:22Z s16; ask her once when calm). Weather-fx2 videos: no verdict yet.
+Foreman C inbox 15:25Z: figure-proportion audit + backs-only night/transition art (3 "Gối đầu" rejected).
+Known bug to assign: promo-rules.js 755 "reveal shown" 15/16 (pre-existing on main).
+Kit requests logged (KIT_REQUESTS.md 14:30Z): toilette one-page + per-mode modal rules → folded into kit-size.
+Self-wake: s18 trigger trig_01FU9oLkWxGaw2Xup9hZZvMa DELETED at handover → s19 creates its own.
