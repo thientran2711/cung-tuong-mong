@@ -1,0 +1,40 @@
+# Magnific gpt-2-6 (folder ba4aecfe) — painted-fx sources
+rgev9wHxtc plum petals sheet (slate bg) -> cut
+aF2VjKjfSh peach petals sheet (slate) -> cut
+rgev9yNxtc lotus petals sheet (slate) -> cut
+u5negleQLD osmanthus sheet (slate) -> cut
+aF2VjLUfSh autumn leaves sheet (white) -> cut
+Do73EQzpcl ash flakes sheet (white) -> cut
+If6YKLatvE paper scraps sheet (slate) -> cut
+xSdaNApjfW silver coins sheet (slate) -> cut
+fHAMLOVCDY ink blots sheet (white) -> inverse-luma alpha
+YMLytHRWeC snow sheet (black) -> luma alpha
+fHAMLNdCDY gold sparks sheet (black) -> luma alpha
+JNa5nIDOq4 embers sheet (black) -> luma alpha
+s7oE3ddl8e orbs/streaks/smoke sheet (black) -> luma alpha
+fHAMLZICDY sky lanterns 2x2 (slate) -> cut
+tCiWkiTmZJ candle flame still (black) -> video start frame
+u5negW1QLD gold glow still (black) -> video start frame
+p8JRQImehw autumn leaves sheet redo (slate) -> cut WDsPfuLcXe
+gOIQ25uSXO moonlight shaft still (black)
+KLMtPEIkqp red palace lantern still (black)
+yiCkcUNPW9 divine light still (black)
+xSda6kwjfW white silk sash still (slate) -> video -> video_remove_background
+gOIQ2skSXO red thread still (slate) -> video -> video_remove_background
+cuts: plum Bh4G5IxoQR peach 0eg9fDqTfW lotus lJ8u27Ygv9 osman huR0juivqL ash s7oEZJml8e paper SytFG48Ub8 coin YMLyhexWeC lantern tCiWrFLmZJ
+# videos (kling-25)
+YMLymJdWeC candle flicker loop 1080p start=end
+dty2H2sXSL gold glow loop 1080p start=end
+p8JRbCaehw moonlight loop; MBwiHCTDCm palace lantern sway loop; mE3csjkhJQ divine light loop
+SytFYYaUb8 silk falling 720p; LwBCAz4swO red thread snapping 720p
+# round 2 (owner 22:45Z painted animations for all events)
+P3E1EcK42C edge-blood portrait 3:4 (white, ink alpha) ; JNa5aWrOq4 edge-blood landscape 4:3
+eIOZOb9dqL edge-poison portrait ; jUXfXAxLD0 edge-poison landscape
+O6fKfpuynm edge-inkwisp portrait ; TdSNS52VNR edge-inkwisp landscape
+4Rurutc9Aa brush strokes 3x3 (white, ink alpha)
+6AHLHfFiJO jade shards 3x3 (slate cut) ; XmPAP7YBfo gold-leaf petals 3x3 (slate cut)
+bxT8TcX5Y2 incense wisps 3x3 (black luma)
+KLMtMpUkqp gift objects 2x2 (slate cut) ; cpl4lUP0eP letters 2x2 (slate cut)
+dty2y6oXSL lotus light still (black luma) ; fHAMAccCDY fireworks still (black) -> video
+silk/thread alpha: ov9zslf829 (silk webm alpha) ; w4hqMp97EI (thread webm alpha)
+vQZTAZxa47 jade cut; jUXfoB4LD0 goldpetal cut; KLMtppgkqp gift cut; vQZTAGsa47 letter cut; 79vbfuGJAL fireworks loop video

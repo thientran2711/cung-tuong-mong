@@ -612,7 +612,8 @@ window.kcDressSrc=kcDressSrc;
 /* ---------- re-port onto the 11/15 main (review/outside-r2): palace-only parts of today's UI stay off while she is at home ---------- */
 /* bottom tabs: the home road has its own 8 tabs (KCTABS), like the servant road: no Hậu cung / Giao tình / Mệnh truyện groups */
 (function(){if(typeof kgOn!=="function")return;const k0=kgOn;kgOn=function(){if(isKc())return false;return k0.apply(this,arguments)}})();
-/* stage right column: the Ân sủng facts (Tai mắt, Có thai, Lật thẻ, Ân tình) belong to a consort: jk3 k3AsRows reads isKc() */
+/* stage right column: the Ân sủng facts (Tai mắt, Có thai, Lật thẻ, Ân tình) and the Đức "!" goal belong to a consort: jk3 reads kitRoad() (j79), which says "kc" at home */
+(function(){if(typeof kitRoad!=="function")return;const r0=kitRoad;kitRoad=function(){try{if(isKc())return"kc"}catch(e){}return r0.apply(this,arguments)};window.kitRoad=kitRoad})();
 /* family members are kit people (kitStagePeople / kitEventDp §50, kitName §48, figures §33): role, title, face, full-body figure */
 function kcIsFam(p){return !!(p&&typeof S!=="undefined"&&S&&S.kc&&S.kc.fam&&S.kc.fam.includes(p))}
 (function(){if(typeof personRoleRank!=="function")return;const p0=personRoleRank;personRoleRank=function(p){try{if(kcIsFam(p)){const role=p.r==="cha"?"official":p.r==="huynh"?"man":"other";

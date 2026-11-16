@@ -34,26 +34,53 @@ window.ctxOdds=ctxOdds;
   let d=p?ctxOdds(p,o.n):0;if(w==="emp"&&S.emp)d+=BAL.ctxEmp[S.emp.mood|0]||0;if(!p&&w!=="emp")d+=Math.round(ctxTaste({id:"arc:"+A.a+":"+(b.h||"")},o.n)*BAL.ctxTaste*.6);
   return od(cl((typeof o.o==="function"?o.o(A):o.o)+((o.e||b.x)?(A.sc||0)*7:0)+d,1,99))}catch(e){return r}}})();
 /* ---------- (3) mood causes ---------- */
+let EVB_ART="";  /* the picture of the event whose choice is resolving now (evbMood): stored on each cause it sets (x.a) */
 (function(){if(typeof emoSet!=="function")return;const s0=emoSet;emoSet=function(p,k,v,why,t){const r=s0.apply(this,arguments);try{const q=emoRes(p);if(q&&EMO[k]&&v>0&&why){const W=emoW();
-  const H=(q.emoH||[]).filter(x=>W-x.w<=BAL.moodKeep&&x.why!==why);H.unshift({k,v:Math.round(v),why:String(why).slice(0,90),w:W});q.emoH=H.slice(0,6)}}catch(e){}return r}})();
+  const H=(q.emoH||[]).filter(x=>W-x.w<=BAL.moodKeep&&x.why!==why);const x={k,v:Math.round(v),why:String(why).slice(0,90),w:W};if(EVB_ART)x.a=EVB_ART;H.unshift(x);q.emoH=H.slice(0,6)}}catch(e){}return r}})();
 function emoCauses(p){const q=emoRes(p);if(!q)return[];const W=emoW();const L=(q.emoH||[]).filter(x=>W-x.w<=BAL.moodKeep);const e=q.emo;
  if(e&&e.why&&e.v>=15&&!L.some(x=>x.why===e.why))L.unshift({k:e.k,v:e.v,why:e.why,w:e.w||W});return L.sort((a,b)=>b.w-a.w||b.v-a.v)}
 window.emoCauses=emoCauses;
 (function(){if(typeof emoBadge!=="function")return;const b0=emoBadge;emoBadge=function(p){const h=b0.apply(this,arguments);try{const q=emoRes(p);if(h&&q)return h.replace("<img ",`<img data-emo="${emoKey(q)}" role="button" tabindex="0" `)}catch(e){}return h}})();
-function emoBox(k){const p=emoByKey(k);if(!p||!S||S.dead)return;const m=window.kitEmotion(p);if(!m)return;const nm=p===S?"Ngươi":emoName(p);
+/* MOOD BOX PICTURE (owner 15/11 "ảnh khung tâm trạng là hiện sự việc liên quan", review/mood-dialog): the picture shows the EVENT that
+   caused the current mood (Khương Lạc Anh được tấn phong → the tấn phong picture), never the "Có người đến chơi" visitor default of person
+   dialogs (jk4). Order: the event's own picture recorded when the cause was set (evbMood, x.a) → EMO_CAUSE_EV (mood-cause words) → the week
+   book's event table KBK_EVRE → a picture made for that line (kbkSpecific) → the mood's own scene img/ev-mood-<k>[-2].webp (no cause / no
+   picture). Corner: the same mood seal as on the portrait (img/kit/emo-[m-|mo-]<k>.webp, kitSceneArt o.mark, KIT 28.19b). */
+const EMO_CAUSE_EV=[[/yểu mệnh|qua đời|mất con|^mất |tạ thế|băng hà/i,"sys:qua-doi"],[/sinh hạ|mẹ tròn con vuông|có hoàng tự|chào đời/i,"sys:sinh-con"],
+ [/lãnh cung/i,"sys:lanh-cung"],[/giáng|cấm túc|bị phạt/i,"sys:giang-chuc"],[/tấn phong/i,"sys:tan-phong"],[/lật thẻ|thị tẩm/i,"sys:thi-tam"],
+ [/sức khỏe|ốm|bệnh/i,"sys:om"],[/việc triều/i,"qs:yen"],[/làm nhục|phật ý|«/i,"j7:rvquarrel"],[/đối đãi tử tế|tặng|quà/i,"j24:co-nguoi-den"],
+ [/chơi đùa/i,"e68:kidGift"]];
+function emoCauseArt(c){try{if(!c)return"";if(c.a)return c.a;if(typeof evArtCat!=="function"||typeof evArtOf!=="function")return"";const t=String(c.why||"");
+  const salt=(c.w|0)*7+t.length;const hit=EMO_CAUSE_EV.find(([re])=>re.test(t))||(typeof KBK_EVRE!=="undefined"?KBK_EVRE.find(([re])=>re.test(t)):null);
+  if(hit&&evArtCat(hit[1]))return evArtOf(hit[1],salt)||"";
+  if(typeof kbkSpecific==="function"){const s=kbkSpecific(t);const f=s&&s.replace(/^.*?(?=img\/)/,"");if(f&&typeof KIT_CDNHAVE!=="undefined"&&KIT_CDNHAVE&&KIT_CDNHAVE.has(f))return s}}catch(e){}return""}
+function emoBoxArt(p,m,L){const k=m.known?m.k:"an";const c=m.known?(L.find(x=>x.k===m.k)||(m.k==="binh"?null:L[0])):null;
+ let set="";try{set=typeof emoArtSet==="function"?emoArtSet(p):""}catch(e){}
+ const own=emoCauseArt(c);const w=typeof emoW==="function"?emoW():0;
+ const src=own||`img/ev-mood-${EMO[k]||k==="an"?k:"binh"}${w%2?"-2":""}.webp`;
+ const cap=c?String(c.why).replace(/\s*«[^»]*»/g,"").replace(/[,.]\s*$/,"").trim():m.known?(EMO[k]||""):"Chưa rõ lòng người";
+ return{src,label:cap,mark:`img/kit/emo-${set}${k}.webp`,markAlt:`Tâm trạng: ${m.known?m.name:"chưa rõ"}`}}
+function emoBox(k){const p=emoByKey(k);if(!p||!S||S.dead)return;const m=window.kitEmotion(p);if(!m)return;let nm=p===S?"Ngươi":emoName(p);/* rank + name always together (owner 15/11, OD L820-821): same plain title+name as Đã biết về X */try{if(p!==S&&typeof kitName==="function"&&typeof kpPlain==="function"){const t=kpPlain(kitName(p)).trim();if(t)nm=t}}catch(e){}
  const cls=x=>x==="vui"?"g":["gian","buon","dau","so","lo","ghen"].includes(x)?"r":"";const W=emoW();const ago=w=>W-w<=0?"tuần này":`${W-w} tuần trước`;
  const L=m.known?emoCauses(p):[];
  const rows=m.known?(L.length?L.map(x=>[EMO[x.k]||x.k,`${x.why} · ${ago(x.w)}`,cls(x.k)]):[["Nguyên nhân","không có chuyện gì đáng kể gần đây"]]):[["Nguyên nhân","chưa rõ: ngươi chưa gặp, chưa có tai mắt bên người này"]];
- kitModal({kind:"info",title:`Tâm trạng · ${nm}`,sub:m.known?`Hiện nay: ${m.name}`:"chưa rõ",subject:p,
+ let art=null;try{art=emoBoxArt(p,m,L)}catch(e){}
+ kitModal({kind:"info",look:1,title:`Tâm trạng · ${nm}`,sub:m.known?`Hiện nay: ${m.name}`:"chưa rõ",subject:p,headArt:art||undefined,
   sections:[{h:"Đang tác động",rows},{h:"",rows:[["Ảnh hưởng",p===S?"tâm trạng của ngươi đổi cơ may của mọi việc một chút":"vui thì dễ chịu nghe, giận hay ghen thì khó nói chuyện, dễ ra tay hơn"]]}],btn:"Đã rõ"})}
-window.emoBox=emoBox;
+window.emoBox=emoBox;window.emoCauseArt=emoCauseArt;
+/* LOOK-UP PANELS (kit.look: Tâm trạng · X, Đã biết về X, Chứng cứ về X — panels she opens herself) are not visits: they show only the picture
+   they bring (headArt), never the person-dialog default "Có người đến chơi" (jk4) or a room picture (whole family, review/mood-dialog) */
+(function(){if(typeof kitEvArt!=="function")return;const k0=kitEvArt;kitEvArt=function(m){try{if(m&&m.kit&&m.kit.look){const h=m.kit.headArt;
+  if(!h)return null;return typeof h==="string"?{src:h,lab:""}:{src:h.src,lab:h.label||"",mark:h.mark||"",markAlt:h.markAlt||""}}}catch(e){}return k0.apply(this,arguments)};window.kitEvArt=kitEvArt})();
 window.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest("img.kemo[data-emo]");if(!t||(typeof Q!=="undefined"&&Q.length&&!$("modal").hidden&&!t.closest("#modal")))return;e.stopPropagation();e.preventDefault();try{emoBox(t.dataset.emo)}catch(x){console.error(x)}},true);
 /* ---------- (2) mood from event results ---------- */
 function evbIsEvent(m){return !!(m&&(m.pid||m.pp||(m.kit&&m.kit.kind==="choice")))}
 function evbSnap(){const b=rsnap();if(!b)return null;b.rel={};for(const v of rivals||[]){if(!v.alive)continue;try{b.rel[v.id]={a:aff(v,S),m:aff(S,v),e:v.ev||0,g:v.ghen||0,o:Math.round(oan(v,S))}}catch(e){}}b.rank=S.rank;return b}
 (function(){const c0=chooseM;chooseM=function(i){let m=null,c=null,b=null;try{m=Q[0];c=m&&m.opts&&m.opts[i];if(evbIsEvent(m)&&c&&!c.pl67)b=evbSnap()}catch(e){}
  const r=c0.apply(this,arguments);try{if(b&&S&&!S.dead)evbMood(m,c,b)}catch(e){console.error("evb mood",e)}return r}})();
-function evbMood(m,c,b){const nm=String(c.n||"").replace(/<[^>]+>/g,"").split(":")[0].slice(0,40);const tt=String(m.t||"").replace(/^(Chính tuyến|Phụ tuyến) · /,"").split(" · ")[0];
+function evbMood(m,c,b){try{const a=typeof kitEvArt==="function"?kitEvArt(m):null;EVB_ART=a&&/img\/(ev|act)-/.test(a.src||"")?String(a.src):""}catch(e){EVB_ART=""}
+ try{return evbMood0(m,c,b)}finally{EVB_ART=""}}
+function evbMood0(m,c,b){const nm=String(c.n||"").replace(/<[^>]+>/g,"").split(":")[0].slice(0,40);const tt=String(m.t||"").replace(/^(Chính tuyến|Phụ tuyến) · /,"").split(" · ")[0];
  const D={};let g=0,l=0;for(const [k] of (typeof RKEYS!=="undefined"?RKEYS:[])){const d=(S[k]||0)-(b[k]||0);if(!d||k==="bac"||k==="suc")continue;D[k]=d;const bad=(k==="ghen"||k==="oan")?d>0:d<0;if(bad)l+=Math.abs(d);else g+=Math.abs(d)}
  if(S.rank<b.rank)l+=20;let resent=0;
  for(const v of rivals||[]){const o=b.rel[v.id];if(!o||!v.alive)continue;const da=aff(v,S)-o.a,dO=Math.round(oan(v,S))-o.o;
