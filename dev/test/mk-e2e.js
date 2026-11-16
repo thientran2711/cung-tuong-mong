@@ -55,6 +55,8 @@ fs.mkdirSync(DIR,{recursive:true});
  await p.waitForTimeout(1300);await p.screenshot({path:`${DIR}/toil-${tag}-5-result.jpg`,quality:70});
  out.rec=await p.evaluate(()=>S.toilette);
  /* reveal e2e: real minigame -> real preset -> the reveal appears; the close card names the preset; tap skips */
+ /* main's kit scenes now end with the KIT 81 button: tap any .kmend that stands in front of the reveal */
+ for(let i=0;i<60&&!(await p.$('.ktrv'));i++){await p.evaluate(()=>{const b=document.querySelector('.kmov .kmend,.kmend');if(b)b.click()});await p.waitForTimeout(400)}
  await p.waitForSelector('.ktrv',{timeout:60000});out.revShown=true;
  await p.waitForTimeout(1500);await p.screenshot({path:`${DIR}/e2e-${tag}-rev1.jpg`,quality:60});
  await p.click('.ktrv-ov');await p.waitForTimeout(2500);
