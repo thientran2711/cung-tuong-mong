@@ -251,7 +251,7 @@
 | (d) calendar icon cổ trang + square-icons art + placeholder picture sets per orientation/size (OD 15:10Z 7.3 / group 8) (sonnet art) | review/icon-art | C | session_011xDdVRMa18LU3fiFyq7ksS | RUNNING | 16/11 15:48Z |
 | ORIGIN INTROS (story roads split s19 15:45Z: C = origin intros, text + picture each origin) (opus) | review/origin-intros | C | session_011xDdVSMZ3apRHJfX25BwAb | RUNNING | 16/11 15:48Z |
 | kit-marks review (sonnet; 5c594381) | review/kit-marks-r1 | main s19 | session_01UV1SzhB7MAai7Gx72awNbj | RUNNING | 16/11 15:47Z |
-| TITLE SYSTEM phase 2 (opus; plan dev/PROGRESS_title-sys.md PHASE 2: emperor hiệu by BAL thresholds, sắc phong book+seal items, confiscation, atonement, theft via Foreman D item ledger) | review/title-sys2 | C | session_011xDdVQSRBz9pNSrPaW5KF5 | RUNNING | 16/11 15:52Z |
+| TITLE SYSTEM phase 2 (opus; plan dev/PROGRESS_title-sys.md PHASE 2: emperor hiệu by BAL thresholds, sắc phong book+seal items, confiscation, atonement, theft via Foreman D item ledger) | review/title-sys2 | C | session_011xDdVQSRBz9pNSrPaW5KF5 (archived) | SẴN SÀNG KIỂM 21b9df01 | 16/11 15:52Z |
 | STORY ROADS PLAN OWNER (s19 15:45Z): master road map dev/story/ROAD_MAP.md first (for C + D), then B's full player roads (opus lead) | review/road-map | B | session_01N1tNP4TguHSiLpDgAN6EDF | RUNNING | 16/11 15:58Z |
 | ghen-shown review (opus) | review/ghen-shown-r1 | D | session_01DgYSWow8vFRane8N6zVBKh | DONE (PASS 81f86655) | 16/11 15:57Z |
 | kit-size #2 (opus, kit keeper; OD 16:00Z (1)–(9)) | review/kit-size | main s19 | session_01UV1SzhfEWsjainSgb3FHP9 | RUNNING | 16/11 15:57Z |
@@ -262,3 +262,4 @@
 | status-icons (sonnet; owner-bug fast lane; OD 16/11 16:25Z): 'Thỉnh tranh' download chip → small kit square download icon in a corner + downloading animation + tap → detail panel; whole group: every status chip that fits in an icon | review/status-icons | main s20 | session_01UV1Szh7JPiQw9nJJ8XwPbe | RUNNING | 16/11 16:24Z |
 | story14-p1 review (opus) of r2 @f5305341 | review/story14-p1-r3 | C | session_011xDdVSfRLPar78kg13jMBC | RUNNING | 16/11 16:22Z |
 | go-live-kit (opus; OD:L1370): tier classifier script, 5–10 min pre-push quick check, build number + 'what changed' line in game menu, one-step rollback, nightly full suite | review/go-live-kit | main s20 | (spawning) | RUNNING | 16/11 16:36Z |
+| TITLE SYSTEM phase 2 review (opus) of 21b9df01 | review/title-sys2-r1 | C | (opening) | RUNNING | 16/11 16:34Z |
