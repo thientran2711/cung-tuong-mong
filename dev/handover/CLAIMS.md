@@ -449,3 +449,4 @@
 | night-final FIX brief CHANGED to owner 22:25Z final rule (immediate resolve on press; success = thị tẩm now + day ends) — sent to session_01UV1SzmDJB3ATP9ffVSmFoc | review/night-final | main s25 | session_01UV1SzmDJB3ATP9ffVSmFoc | RUNNING | 16/11 21:59Z |
 | diemtrang-coop-look F5 review r1 (opus, BIG co-op) of 8ed1228a | review/diemtrang-coop-look-r1 | main s25 | session_01UV1SziXRVy5vqBiRRbSKnh | RUNNING | 16/11 22:01Z |
 | diemtrang-score BUILD (owner answered: no palette warning, no dotted guides + freehand strict scoring, brow guide anchor per portrait) on top of minigame-frame bd223466 | review/diemtrang-score | main s25 | session_01UV1SzhX2fKGhGXpNLonvo5 | RUNNING | 16/11 22:01Z |
+| kit-size #8 SUCCESSOR keeper (sonnet): 4 MIXED places, kit samples, tests; grade-chip overlay = owner question (not built) | review/kit-size-8 | main s25 | session_01UV1SzkSQRtUsXoy2TJVcQG (prev session_01UV1SzhXp2nPad8V7gu3hSj archived) | RUNNING | 16/11 22:05Z |
