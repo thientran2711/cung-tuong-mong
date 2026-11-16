@@ -50,3 +50,17 @@ OWNER_DECISIONS 22:45Z #4/#5 (painted gift animations), 22:35Z perf budget.
 ## Resume
 `bash dev/site/build_site.sh`; serve the worktree (`python3 -m http.server <free port>`), run the tests above. When review/item-info
 (KIT §70 item detail) lands: put its detail block above the option card in `kipDetail` (jgpick.js), coordinator note 15/11.
+
+## Review r1 (session-8 reviewer, review/gift-pick-r1)
+- Merged review/gift-pick 6158af34f onto origin/main d34b5116a. fxkit (§68) is already on main (fxkit-r1 f012058f3); the merge only adds
+  `kitFxGiftCarry`, the `gift-hands` sprite row and `.kfxk-catch` to jfxkit.js (one definition each in the built index.html, no duplicate).
+  assemble.py = main's list + `jgpick.js` last (after jph.js). Site rebuilt.
+- Fix: tile "what it is" line used IT.d, which ends with the grade word ("Mặc: Sắc +2 · Thường") — the grade showed twice on the tile.
+  Now the trailing grade word is dropped (grade stays on its own line).
+- Test fix: gift-pick.js skip check counted `.kgpc` (old class, always 0); now counts `.kfxk,.kfxk-catch`.
+- Results (local build, CDN images): gift-pick.js at 755x1000@2, 1000x755, 1180x820@2, 1366x1024@2, 844x390, 390x844@2: grid in all 3 pickers,
+  spread 0, no overflow / cut text, confirm gives the item (inv −1) and logs giftcarry:give, Gọn 0 fx, 0 page errors, 0 HTTP errors.
+  Probe: tap skip removes the catcher at once and every fx node within 1.5 s (dialog stays closed); natural end leaves 0 nodes;
+  tainted gift with detection forced → giftcarry:refuse; "Nhận" on giftin → gift:open; plantpick confirm reachable (hit-test) at 1000x755
+  and 844x390. 390x844 direct mode (tests only; the real host rotates the 1180x820 frame) clips the plantpick confirm under #mb.
+- KIT §70 item detail (review/item-info 50a0f22) is NOT on main yet: not wired; hook point stays `kipDetail` (jgpick.js).

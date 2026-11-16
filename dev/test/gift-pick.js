@@ -55,7 +55,7 @@ for(const SZ of L){const [WH,DPR]=SZ.split('@');const [W,H]=WH.split('x').map(Nu
  await p.evaluate(()=>{const g=document.querySelector('#modal .kipgo');g&&g.click()});if(process.env.SEQ){for(const t of [350,500,500,600,600,700,800]){await p.waitForTimeout(t);await p.screenshot({path:`${OUT}/${W}x${H}-seq-${Date.now()%100000}.jpg`,type:'jpeg',quality:60})}}else{await p.waitForTimeout(700);await shot('3-givefx')}
  R.after=await p.evaluate(()=>({inv:S.inv.length,fx:window.__fxlog||[],kfk:typeof KFK!=="undefined"?(KFK.log||[]).slice(-4):null,live:document.querySelectorAll('.kfxk').length,carry:document.querySelectorAll('.kgpc').length}));
  await p.mouse.click(Math.round(W/2),Math.round(H/2));await p.waitForTimeout(400);
- R.skip=await p.evaluate(()=>({live:document.querySelectorAll('.kgpc').length}));
+ R.skip=await p.evaluate(()=>({live:document.querySelectorAll('.kfxk,.kfxk-catch,.kgpc').length}));
  await p.waitForTimeout(2500);await close();
  /* 2. giftto Hoàng thượng */
  await p.evaluate(()=>{pushDil(mkP("giftto",{t:"emp"}),"Dâng quà lên Hoàng thượng");showModal();render()});await p.waitForTimeout(900);

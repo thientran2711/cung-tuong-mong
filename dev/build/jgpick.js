@@ -18,7 +18,7 @@ function kipE(s){return String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;",
 function kipItem(e){const a=typeof giftArt==="function"?giftArt(e):{src:"",grade:0,gradeName:"Thường"};const g=Math.max(0,Math.min(4,a.grade|0));
  const G=(typeof KIT_GRADE!=="undefined"&&KIT_GRADE[g])||{};const it=(e&&IT[e.k])||{};
  const name=typeof giftName==="function"?giftName(e):(it.n||"");const kind=e&&e.wk?((typeof WK!=="undefined"&&WK[e.wk.kind])?WK[e.wk.kind].n:"Tác phẩm"):(it.kd||"Vật phẩm");
- const use=e&&e.wk?(typeof WTIER!=="undefined"?WTIER[e.wk.ti]:""):(it.d||"");
+ const use=e&&e.wk?(typeof WTIER!=="undefined"?WTIER[e.wk.ti]:""):String(it.d||"").replace(/\s*·\s*(Thường|Tinh phẩm|Trân phẩm|Tuyệt phẩm|Ngự tứ)\s*$/,"");/* reviewer r1: IT.d ends with the grade word, already on the tile's grade line (was shown twice) */
  return{src:a.src||(typeof kitItemSrc==="function"?kitItemSrc(e.k):""),grade:g,gname:a.gradeName||G.n||"",col:G.c||"",name,kind,use,silk:it.kd==="Vải vóc"||/lụa|gấm|vải|sa\b/i.test(name)}}
 function kipLocked(c){return !!(c&&(c.lock||(c.fx&&c.fx.bac&&S.bac+c.fx.bac<0)))}
 function kipTile(c,i,on){const e=S.inv[c.ik],I=kipItem(e),lock=kipLocked(c);
