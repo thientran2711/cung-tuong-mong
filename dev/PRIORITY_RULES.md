@@ -16,18 +16,18 @@ Owner rule OD:L1241 (low context): every session starts small. Do NOT read the w
 - dev/rules/START_CORE.md (10.5 KB): binding laws for EVERY role (kit first, fix the whole group, priority rule #1, canon overwrite, verbatim rules, low context, devices)
 - dev/rules/START_FOREMAN.md (6.8 KB): main chat + foremen (sessions, claims, rollover, models, agent caps, work sizing)
 - dev/rules/START_MAIN.md (6.8 KB): main chat only (what the main chat does itself, how it talks to the owner)
-- dev/rules/START_REVIEWER.md (2.7 KB): reviewers only
-- dev/rules/START_WORKER.md (10.5 KB): every worker and reviewer (worker brief + preamble lines)
+- dev/rules/START_REVIEWER.md (2.9 KB): reviewers only
+- dev/rules/START_WORKER.md (10.7 KB): every worker and reviewer (worker brief + preamble lines)
 
 ## Topic files (read only when the task touches the topic)
 
 - dev/rules/topic/balance-economy.md (19.7 KB): gain and loss, bạc, prices, odds, difficulty, promotion, rewards
 - dev/rules/topic/coop.md (3.6 KB): co-op / playing with a friend
-- dev/rules/topic/handover-restatements.md (67.9 KB): owner rules as restated in handover/foreman/queue/ledger files (OD lines win where they differ)
+- dev/rules/topic/handover-restatements.md (68.4 KB): owner rules as restated in handover/foreman/queue/ledger files (OD lines win where they differ)
 - dev/rules/topic/kit-ui.md (20.3 KB): shared kit, layout, panels, cards, tabs, dialogs, Fold/iPad screens
-- dev/rules/topic/people-life.md (5.1 KB): NPC behaviour, personality, servants, children, death, pregnancy, nights
+- dev/rules/topic/people-life.md (5.8 KB): NPC behaviour, personality, servants, children, death, pregnancy, nights
 - dev/rules/topic/process-history.md (12.1 KB): older process rulings and session history (main chat reads when needed)
-- dev/rules/topic/story-roads.md (5.7 KB): main/side stories, chapters, roads, origins, endings, tutorial
+- dev/rules/topic/story-roads.md (6.5 KB): main/side stories, chapters, roads, origins, endings, tutorial
 - dev/rules/topic/systems-other.md (4.4 KB): other game systems (items rules, map, sound, stat logs, minigame limits)
 - dev/rules/topic/time-calendar.md (3.7 KB): khắc, buổi, calendar, festivals, seasons (game rules)
 - dev/rules/topic/wording.md (8.3 KB): player-visible words, VANPHONG, no %, names of acts

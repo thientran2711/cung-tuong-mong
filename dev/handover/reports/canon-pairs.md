@@ -126,3 +126,7 @@ Start-set totals: Main 24.1 KB; Foreman 17.3 KB; Worker 21.1 KB; Reviewer 24.0 K
 MANDATORY read lines updated (line 1) in WORKER_BRIEF.md, REVIEWER.txt, FOREMAN_B/C/D.md; PREAMBLE.txt got the MANDATORY line as new line 1 (its [HO/PREAMBLE.txt:Lnn] tags in dev/rules shifted +1 and re-checked). The copies of those line-1 texts inside dev/rules were updated to the new text.
 NOT done: CLAUDE.md lives on main only (workers never push main) — coordinator to add: 'Main chat: read dev/rules/START_CORE.md + START_FOREMAN.md + START_MAIN.md in full, then only the dev/rules/topic files the task touches; never the whole canon (OD:L1241).' Also dev/handover/HANDOVER_SESSION9.md:80 still says 'Read PRIORITY_RULES.md in full' (old handover, left as is).
 Topic routing was by old section + keywords; a few lines may sit in a near topic (e.g. a UI line in an art topic). Nothing is lost: grep the tag.
+
+## Follow-up 2 (s11: OD:L1247-1250)
+- No older line on entry rank per origin exists in the canon (grep of dev/rules and OWNER_DECISIONS.md for entry/start rank, origin rank, Cháu gái, tuyển tú found none), so OD:L1250 is added, nothing overwritten.
+- Added verbatim: OD:L1247 + OD:L1250 -> dev/rules/topic/story-roads.md (end); OD:L1248 + OD:L1249 -> dev/rules/topic/people-life.md right after [HANDOVER.md:L46] ("NPCs act by traits, human not optimal"), which L1248 sharpens (both stand). Indexes regenerated. Check: 0 duplicate tags, 0 mismatches.
