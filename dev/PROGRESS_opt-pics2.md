@@ -11,3 +11,10 @@ Before/after (fresh life, dev/tools/missing_pics.js): option cards on placeholde
 Other lives show other titles (run-time templates); rerun the tool and add a regex line to KIT_OPT_RULES (+ paint) as needed.
 Smoke 755x1000: page loads, 0 page errors, kitOptPic on all 47 non-person titles resolves (only the 2 NPC-name titles stay on placeholder).
 Resume: bash dev/site/build_site.sh; node dev/tools/missing_pics.js <url> out.json dev/art/MISSING_PICS.md.
+
+## Reviewer r1 (2026-11-16)
+All 30 act-opt-*.webp looked at (contact sheet): fit meanings, hands-only style, no men in pink/purple, nobody poor; sizes 24.8-51.4 KB.
+Title scan (13254 string literals from dev/build/j*.js, old vs new KIT_OPT_RULES): 48 titles changed picture, ALL were on the placeholder before; none stolen from an existing group.
+missing_pics on branch base: option cards on placeholder 61 -> 18 (person names + 2 titles of another life). Layout: picture left / info right at 755x1000 and 844x390, no page errors.
+Non-blocking: "Thuê thợ thêu ngoài cung" shows opt-canh-giu (padlock door) via the older "thuê thợ" rule (pre-existing); bo-bac is close in meaning to dut-bac-rut-loi-h (accepted, different files/compositions).
+Merged onto origin/main 4f5e5f3b3: conflicts in jevban.js (kept main's map + e68:flowerBloom), generated index/sw/assets rebuilt.
