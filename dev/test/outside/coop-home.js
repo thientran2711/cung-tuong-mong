@@ -90,7 +90,7 @@ async function weekBoth(A,B,w){const n=await A.p.evaluate(()=>typeof B4N==='numb
  const st=async o=>o.p.evaluate(()=>{const f=rivals.find(v=>v.coop)||null;return{kc:typeof isKc==='function'&&isKc(),end:S.kc&&S.kc.end,fam:S.kc?S.kc.fam.length:0,name:S.name,d:[S.year,S.month,S.tuan],era:S.emp.era,fr:f&&f.name,R:rivals.filter(v=>!v.coop).map(v=>v.id+v.name).join(),tabs:[...document.querySelectorAll('#tabs button')].filter(b=>b.offsetParent).map(b=>b.textContent.trim()).join('|')}});
  {const a=await st(A),c=await st(B);ok(a.kc&&a.fam>0,'A is at home on the tiểu thư road',a);ok(!c.kc,'B is in the palace');
   ok(a.era===c.era&&a.R===c.R,'same Emperor and consorts');ok(String(a.d)===String(c.d),'same date',[a.d,c.d]);
-  ok(!c.fr,'B has no palace entry for A while A is at home',c.fr);ok(a.fr===c.name,'A sees B as a palace person',[a.fr,c.name]);
+  ok(!c.fr,'B has no palace entry for A while A is at home',c.fr);ok(a.fr===c.name,'A sees B as a palace person',[a.fr,c.name,await A.p.evaluate(()=>({P:Object.keys((COOPW.base&&COOPW.base.P)||{}),seat:COOPW.seat,inLife:COOPW.inLife,rc:rivals.filter(v=>v.coop).length,fh:COOPW.friendHome(COOPW.base.P.b),bkc:JSON.stringify(COOPW.base.P.b.S.kc||null).slice(0,80),bd:[COOPW.base.P.b.dead,COOPW.base.P.b.S.dead],brank:COOPW.base.P.b.rank,qOn:qOn(),n:rivals.length}))]);
   ok(/Khuê phòng/.test(a.tabs),'A has the home tabs',a.tabs);
   const n=await B.p.evaluate(()=>[...document.querySelectorAll('#modal *')].some(e=>/ở nhà cha chờ kỳ tuyển tú/.test(e.textContent||''))||COOPW.fWasHome===true);ok(n,'B is told the friend is at home');}
  await clear(A);await clear(B);await shot(A,'05-home');await shot(B,'05-palace');
@@ -98,13 +98,14 @@ async function weekBoth(A,B,w){const n=await A.p.evaluate(()=>typeof B4N==='numb
   for(const o of [A,B]){const r=await untilC(o,x=>__co().week===x+1,wk,90000);ok(r,`week ${w+1}: ${o.name} advanced`,r?undefined:await o.p.evaluate(()=>({co:__co(),sent:COOPW.sent,pend:COOPW.pend,bend:COOPW.bend,buoi:S.buoi,Q:Q.map(m=>(m.pid||'')+':'+String(m.t||'').slice(0,30)),tr:COOPW.tr.slice(-20)})))}
   await clear(A);await clear(B);const a=await st(A),c=await st(B);
   if(a.end){ok(true,'A\'s home life ended in week '+(w+1)+': '+a.end);break}
-  ok(a.kc&&a.fam>0,`week ${w+1}: A still at home with her family`,a);ok(String(a.d)===String(c.d),`week ${w+1}: same date`,[a.d,c.d]);ok(!c.fr,`week ${w+1}: B still has no entry for A`,c.fr)}
+  ok(a.kc&&a.fam>0,`week ${w+1}: A still at home with her family`,a);ok(String(a.d)===String(c.d),`week ${w+1}: same date`,[a.d,c.d]);ok(!c.fr,`week ${w+1}: B still has no entry for A`,c.fr);ok(a.fr===c.name,`week ${w+1}: A sees B`,[a.fr,c.name])}
  await shot(A,'07-home-after3');
  /* 4 A passes the tuyển tú (entry forced) → next merged week B sees her */
  const ent=await A.p.evaluate(()=>{if(!isKc())return{skip:S.kc&&S.kc.end};for(let i=0;i<20&&Q.length&&!S.dead;i++){const m=Q[0];if(m.opts&&m.opts.length)chooseM(0);else closeModal()}if(!isKc())return{skip:'ended'};S.kc.soOk=1;S.kc.tt={early:false,raw:5};kcEnter(1);return{kc:isKc(),rank:S.rank,name:S.name}});
  if(!ent.skip){ok(!ent.kc&&ent.rank===1,'A entered the palace',ent);await clear(A);
+  await B.p.evaluate(()=>{window.__notes=[];const pm=pushModal;pushModal=function(m){try{__notes.push(m&&m.t)}catch(e){}return pm.apply(this,arguments)}});
   const wk=(await C(A)).week;await weekBoth(A,B,9);for(const o of [A,B])ok(await untilC(o,x=>__co().week===x+1,wk,90000),'entry week: '+o.name+' advanced');
-  let seen=false,note=false;const t0=Date.now();while(Date.now()-t0<30000){note=note||await B.p.evaluate(()=>[...document.querySelectorAll('#modal *')].some(e=>/Hảo hữu ngươi qua kỳ tuyển tú/.test(e.textContent||'')));
+  let seen=false,note=false;const t0=Date.now();while(Date.now()-t0<30000){note=note||await B.p.evaluate(()=>(window.__notes||[]).includes('Hảo hữu nhập cung'));
    const c=await st(B);if(c.fr===ent.name){seen=true;break}await clear(A);await clear(B);await sleep(500)}
   ok(seen,'B sees A in the palace after her entry');ok(note,'B gets "Hảo hữu nhập cung"');const a=await st(A);ok(!a.kc&&/Hậu cung/.test(a.tabs),'A has the palace tabs',a.tabs)}
  await clear(A);await clear(B);await shot(A,'08-entered');await shot(B,'08-friend-in');
