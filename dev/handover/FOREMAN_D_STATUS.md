@@ -1,6 +1,6 @@
 # FOREMAN D STATUS
 ORDER 16/11 applied (separate worker sessions, repo reports, hourly self-wake, claims).
-last wake: 16/11 09:29Z (s3 = session_01DgYSWmJqZEbu2bHw5WQjne; hourly wake trig_01PRsThQpzLFrogWwG2N6DLK at :28)
+last wake: 16/11 09:33Z (s3 = session_01DgYSWmJqZEbu2bHw5WQjne; hourly wake trig_01PRsThQpzLFrogWwG2N6DLK at :28)
 s3 START_CTX ≈ 6 % of 1M window (get_session 08:30Z: 11.8 % used); rollover at 31 % (START_CTX + 25 %), ceiling 60 %.
 s2 start context ≈ 45k tokens; budget ≈ 56k → rollover per FOREMAN_D.md.
 Session start 16/11. Starting context ≈ 60k tokens after the required reading; budget (start + 25%) ≈ 75k → rollover per FOREMAN_D.md when reached or on compaction.
@@ -13,7 +13,7 @@ main at start = eba64ead4.
 | C43 coop-invite-ux | review/coop-invite-ux-r1 @727b6112 | sonnet | PASS |
 | C44 cloud-save (Sổ mây) | review/cloud-save-r1 @7e187abe | opus | PASS (see ## PASS) |
 | D50 dialog fig placeholder | review/dlg-fig-ph-r1 @fd7768b3 | sonnet | PASS |
-| balance-after-truth re-run | review/balance-after-truth @14fdce0c → review/balance-after-truth-r1 | opus | SẴN SÀNG KIỂM (measures only) → opus reviewer session_01DgYSWp8zZ1eyzXhLPpAj3x RUNNING |
+| balance-after-truth re-run | review/balance-after-truth-r1 | opus | PASS 614138eb (measures only; numbers re-run on main bad941b4: HH 20 %, childbirth death 17 % — see report) |
 | reign-road review | review/reign-road-r1b @3eb2c956d | opus | STOPPED: DUPLICATE (main's r1 fa201bbe0 PASS came first); 2 extra findings → QUESTIONS |
 | C3 art-complete part 2 | review/art-complete | — | MOVED to Foreman C (owner Q-D1 answer, s9) |
 | D51 fxkit follow-ups | — | — | MOVED to main (owner 07:25Z s10: one worker paints + wires) |
@@ -27,21 +27,23 @@ main at start = eba64ead4.
 | act-split waves 2–3 + Emperor-stroll first "!" slot | review/act-split-w2 | opus | SẴN SÀNG KIỂM 30c0931d (archived) → r1 reviewer |
 | Danh balance recheck (act-dedupe flag 1) | review/danh-balance | opus | worker session_01DgYSWoB9ztxCwmdBUbbxDS RUNNING (audit + proposal; no number change without owner OK) |
 
-| act-split-w2 review | review/act-split-w2-r1 | opus | reviewer session_01DgYSWm7L1NRRbPgisEAL4E RUNNING (worker done SẴN SÀNG KIỂM 30c0931d) |
+| act-split-w2 review | review/act-split-w2-r1 | opus | PASS 072687e2 |
 | servant-mline FAIL fixes → then D58 close-maid | review/servant-mline-r2 → review/close-maid | opus | worker session_01DgYSWoCA2uzCCm4WDVxEAA RUNNING |
 | slap-mg FAIL fixes (code; art → ART NEEDED) | review/slap-mg-r2 @dd0b618f | opus | SẴN SÀNG KIỂM (includes B's mg-balance 96736fff → ship with/after it; skilled nặng 24 %, random 4 %) → reviewer session_01DgYSWoEfbFL74QqJ1ySvjK RUNNING (review/slap-mg-r3) |
 | ENTRY EXAM + origin intros (main s12 07:55Z) | review/entry-exam | opus | worker session_01DgYSWowhQ6xMD6E52HDA3H RUNNING |
 | D8 Emperor visits + poison roads (orphan #19) | review/emperor-visit | opus | worker session_01DgYSWnVJ8zy6Hr7QeM3HD1 RUNNING (on mortality-r1) |
 | D21 co-op B1–B5 (orphan #20) | review/coop-b1b5 @d0f2260a | opus | FAIL 6 (2 BLOCKING: pos >4000 chars dropped by live Worker; NPC acts on guest duplicate items) — reports/review-coop-b1b5-r1.md, r1 @8dd1626a; fixes handed to the part-2 worker |
 | D21 part 2 (maid acts, shared heir, j99succ co-op, NPC acts on guest, coop-pets.js) | review/coop-b1b5-p2 | opus | worker session_01DgYSWnjWQExva4hE6H8RyB RUNNING |
-| reign-road-r1b 2 findings (orphan #33) | review/reign-road-fix | sonnet | worker session_01DgYSWqEhdCoCY3dvQCAGz8 RUNNING |
+| reign-road-r1b 2 findings (orphan #33) | review/reign-road-fix @9f4e8bf9 | sonnet | SẴN SÀNG KIỂM (kitNameList, 10 sites; overflow not on main) → reviewer session_01DgYSWoxLbnCcR7gE2i3QKu RUNNING |
 | D4 NPC death/new faces + Phế phi Lý (orphan #18) | — | opus | WAITING: mortality-r1 (PASS 2d3428f8) on main |
 | D57 preg-rate (orphan #2) | review/preg-rate | opus | WAITING: mortality + cycle-r3 on main |
-| kc-roads-cn-nc review (main s12 08:20Z) | — | opus | WAITING: worker's SẴN SÀNG KIỂM in reports/kc-roads-cn-nc.md (against OD:L1288) |
-| scene-end button sweep (main s12 08:10Z) | — | sonnet | WAITING: kit-keeper-2-r1 PASS + live (main s14 tells D) |
+| kc-roads-cn-nc round 3 review (main s14 08:41Z) | review/kc-roads-cn-nc-r1 | opus | reviewer session_01DgYSWnY5pFVmEYGWvruZFs RUNNING (FAIL list → main s14) |
+| scene-end button sweep (KIT §81 live 9a4da876) | review/scene-end-sweep | sonnet | worker session_01DgYSWmAiQTHkmu8eoKhvWT RUNNING |
 | coop-rejoin-xdev review | — | — | CANCELLED for D (main s13 has it) |
 
 ## PASS (for the main coordinator to fast-forward)
+- READY review/act-split-w2-r1 072687e2cd549536374db37fe393f1b077464c39 (act-split waves 2–3 + Emperor-stroll first "!" slot; main 399483e3 is an ancestor → ff OK; report reports/review-act-split-w2-r1.md)
+- READY review/balance-after-truth-r1 614138eb3eabd947efde7d9c5d9c23818b1e6e0f (measures/tools only, no BAL or game code; numbers on record; report reports/review-balance-after-truth-r1.md)
 - READY review/coop-chat-r1 24578406f31621373e65bded2d37a102a456f05a (coop-chat 47/47; NEEDS coop/worker DEPLOY — live Worker has no chat; reviewer did not deploy; report reports/review-coop-chat-r1.md)
 - PASS review/coop-invite-ux-r1 727b6112b330eb8b96e621b0368f5cacccd1788f (C43 invite waiting state + 1-2-3 steps + auto-continue; coop-e2e 59/59; ff when written — main has moved since (bd6342c7), re-merge needed)
 - PASS review/row-align-r2 69e6d56f18c555763acd3dd0eb291b3736ad022e (C14 row-align; contains main ba07c65e; main moved since, re-merge needed)
@@ -74,6 +76,7 @@ main at start = eba64ead4.
 - ANSWER Q-D1 (s9, owner): art items + Worker deploy moved to Foreman C (see FOREMAN_C.md "MOVED FROM FOREMAN D"). Drop them from your slice; keep D51 wiring + C44 code.
 
 ## s3 wake log
+- 09:33Z (hourly): PASS act-split-w2-r1 + balance-after-truth-r1 → READY. reign-road-fix SẴN SÀNG KIỂM → reviewer. kc-roads-cn-nc r3 review (s14 08:41Z) and scene-end sweep (KIT §81 live 09:10Z) opened. 3 finished sessions archived. danh-balance worker (session_01DgYSWoB9ztxCwmdBUbbxDS): no report yet. 11 D sessions running.
 - 09:29Z: coop-b1b5-r1 FAIL (6) → send_message to part-2 worker session_01DgYSWnjWQExva4hE6H8RyB: fixes first, then part 2, one reviewer for both. Reviewer archived.
 - 09:20Z: slap-mg-r2 SẴN SÀNG KIỂM dd0b618f → opus reviewer; worker archived. ART NEEDED for slap (sprites + intro pic) in reports/slap-mg-r2.md → art owner (C / main samples).
 - 09:09Z: coop-b1b5 SẴN SÀNG KIỂM d0f2260a → opus reviewer + part-2 worker opened; worker archived. 10 D sessions running.
