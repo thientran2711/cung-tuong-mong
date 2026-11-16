@@ -127,8 +127,8 @@ const INP=fs.readFileSync(path.join(__dirname,'../measure/inpage4.js'),'utf8');
  chk('r1 item 5: neutral context leans neither way (BAL.st14.shift.base both ways)',await p.evaluate(()=>{const Z=BAL.st14.shift;return Z.base-0*Z.slope===Z.base+0*Z.slope}),null);
  await p.context().close();
  /* ---- 2) old saves ---- */
- const mk=async(url,pre)=>{const q=await boot(url,pre);const s=await q.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;window.__forceOrigin='dtq';document.getElementById('title').hidden=true;start();
-   for(let i=0;i<8;i++){Q.length=0;used=0;nextBuoi()}Q.length=0;return{save:JSON.stringify(ser()),f14:!!S.st.f14,v2:S.st.v2,plan:S.st.ch&&S.st.ch.plan.join(',')}});await q.context().close();return s};
+ const mk=async(url,pre,tries)=>{const q=await boot(url,pre);const s=await q.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;window.__forceOrigin='dtq';document.getElementById('title').hidden=true;start();
+   for(let i=0;i<8;i++){Q.length=0;used=0;nextBuoi()}Q.length=0;if(typeof S==='undefined'||!S){return{retry:1}}/* the life ended inside the 8 buổi (rebirth screen): build the save again */return{save:JSON.stringify(ser()),f14:!!S.st.f14,v2:S.st.v2,plan:S.st.ch&&S.st.ch.plan.join(',')}});await q.context().close();if(s.retry&&(tries||0)<3)return mk(url,pre,(tries||0)+1);return s};
  const olds=[];if(MAIN)olds.push(['main build',await mk(MAIN)]);olds.push(['frame off',await mk(URL,()=>{window.F14_ON=false})]);
  const q=await boot(URL);
  for(const [nm,o] of olds){const r=await q.evaluate(s=>{const kl=document.getElementById('kload');if(kl)kl.remove();document.getElementById('title').hidden=true;Q.length=0;deser(JSON.parse(s));const plan=S.st.ch&&S.st.ch.plan.join(',');
