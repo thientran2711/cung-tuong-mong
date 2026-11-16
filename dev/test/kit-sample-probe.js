@@ -1,0 +1,7 @@
+/* kit-marks: list every kit-page sample whose body is empty (or has an error) when the page opens before any game. usage: node dev/test/kit-sample-probe.js <url> [WxH@dpr] */
+const {chromium}=require('playwright');const URL=process.argv[2];const [wh,d]=(process.argv[3]||'755x1000@2').split('@');const [W,H]=wh.split('x').map(Number);
+(async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:+d,reducedMotion:'reduce',serviceWorkers:'block'});const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,160)));
+ await p.goto(URL+'#kit',{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof kitSamplePage==='function',null,{timeout:60000});await p.waitForTimeout(1500);
+ await p.evaluate(()=>{for(const id of ['kload','kroul']){const x=document.getElementById(id);if(x)x.remove()}kitSamplePage()});await p.waitForTimeout(1500);
+ const r=await p.evaluate(()=>[...document.querySelectorAll('#kitpage .kitpg-s')].map(s=>{const b=s.querySelector('.kitpg-b');return{id:s.dataset.kit,t:s.querySelector('.kpst').textContent.slice(0,60),h:Math.round(b.getBoundingClientRect().height),txt:b.textContent.trim().length,img:b.querySelectorAll('img,svg,canvas,.pcp').length,err:!!b.querySelector("em.r")&&b.querySelector("em.r").textContent}}));
+ const bad=r.filter(x=>x.err||(x.txt<2&&!x.img)||x.h<40);console.log(JSON.stringify({n:r.length,bad,errs},null,1));await b.close()})();
