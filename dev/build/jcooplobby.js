@@ -39,7 +39,7 @@ function body(pg){const s=COOP.state;
    (R?`<div class="kcol-rooms">${R.html()}</div>`+(full?`<div class="kpnote">Đã đủ ba phòng. Lập hay vào phòng mới thì phòng cũ nhất rời khỏi danh sách; muốn giữ, bỏ trước một phòng khác.</div>`:""):"")}
  if(pg==="wait"){const c=s.room||CODE;const pw=peerWord();
   return `<div class="kcol-code">${kitRows([["Ám hiệu",esc(c),"t"],["Hảo hữu",pw[0],pw[1]]])}</div>`+
-   kitInput({id:"coop-link",label:"Đường dẫn mời",value:link(c),readonly:true})+
+   kitInput({id:"coop-link",label:"Đường dẫn mời",value:link(c),readonly:true})+(s.you!=="b"&&typeof kitCoopLenRow==="function"?kitCoopLenRow():"")+/* the host picks the buổi length (jcooptimer, KIT §69) */
    `<div class="kcol-act"><button class="kbtn k1" data-coop="share">Gửi đường dẫn cho hảo hữu<small>qua Zalo, Messenger, tin nhắn</small></button><button class="kbtn alt" data-coop="copy">Chép đường dẫn</button><button class="kbtn alt" data-coop="copycode">Chép mã ${esc(c)}</button></div>`+
    `<div class="kpnote">${s.status==="open"?"Hảo hữu chạm vào đường dẫn (hay chọn Cùng hảo hữu, Nhập ám hiệu, gõ ám hiệu) là vào phòng. Giữ màn này mở: hảo hữu vào là cuộc chơi bắt đầu.":"Đang nối với phòng."}</div>`}
  if(pg==="join")return kitInput({id:"coop-code",label:"Ám hiệu",value:CODE,placeholder:"bốn chữ hảo hữu gửi"})+
@@ -98,7 +98,7 @@ COOP.on("error",e=>{if(LM&&(PG==="wait"||PG==="join")){ERR=errText(e);open("err"
 COOP.on("both",()=>{if(!LM)return;drop();PG="";try{T.hidden=true}catch(e){}const s=COOP.state;COOP.emit("start",{room:s.room,you:s.you,host:s.you==="a",week:s.week,state:s.C})});
 /* freeze overlay: kit panel markup (.modal.kpscene > .dlg.kpanel with kpHeader), above everything, no way around it but waiting or leaving */
 let FZ=null;
-const FZT={me:["Đợi hảo hữu trở lại","Đường mạng của ngươi vừa đứt. Đang nối lại."],peer:["Đợi hảo hữu trở lại","Hảo hữu đã rời cuộc. Hậu cung dừng lại cho đến khi hảo hữu trở lại."],
+const FZT={me:["Đợi hảo hữu trở lại","Đường mạng của ngươi vừa đứt. Đang tự nối lại, không mất gì."],peer:["Đợi hảo hữu trở lại","Hảo hữu đang vắng (máy ngủ hay chuyển sang việc khác). Hảo hữu mở lại trò chơi là tự vào lại; hậu cung dừng lại cho đến lúc ấy."],
  week:["Đợi hảo hữu xong tuần","Ngươi đã sang ngày mới. Khi hảo hữu cũng xong tuần, tuần mới bắt đầu cho cả hai."]};
 function fz(on,why){if(!on){if(FZ){FZ.remove();FZ=null}return}
  const [ttl,sub]=FZT[why]||FZT.peer;const pw=peerWord();
