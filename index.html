@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"1e53ffc3+","t":"2026-11-16T20:55Z","c":"coop-contest-r1: ONE CORE for festival contests (BAL.fest) + disconnect test","b":"5eebd169836a","h":[{"s":"59812a63+","t":"2026-11-16T20:41Z","c":"Khung chung: khoảng cách đều nhau ở sổ tuần và thẻ thân phận; hàng sổ gọn, thẻ lật không đè chữ."},{"s":"ab12d6fc","t":"2026-11-16T20:53Z","c":"Tuyết và đom đóm mới, mượt hơn; nền tranh không còn vẽ lại mỗi khung hình."},{"s":"8adfd886+","t":"2026-11-16T20:33Z","c":"Tư trang: các trang đều nhau, ô đồ đeo gọn trên Fold và iPad."},{"s":"b77d3250+","t":"2026-11-16T20:20Z","c":"Chơi cùng bạn: lời đáp Kỳ nguyệt sự của bạn đến kịp trước khi rút thẻ đêm; ghế đã đủ người báo gọn một lần."},{"s":"4a43ded3","t":"2026-11-16T20:23Z","c":"Tranh sủng đêm: NPC giành đêm theo luật chung, cả khi chơi chung."},{"s":"313f1063+","t":"2026-11-16T19:53Z","c":"Các trò thi tài: làm nhanh và khéo mới được trọn phần."},{"s":"66381c48+","t":"2026-11-16T20:04Z","c":"Dọn kho tranh thử khỏi bản game: tải nhẹ hơn, tranh trong cung vẫn đủ."},{"s":"8bd0095a+","t":"2026-11-16T19:58Z","c":"stage-counts: LEDCNT=arrive|now sets the people-ledger switch BAL.led.cnt (QUESTION FOR MAIN)"},{"s":"caae9e92","t":"2026-11-16T19:57Z","c":"Khung hộp thoại trên Fold: nút ✕ không còn đè lên chữ."},{"s":"3bb5ed2c","t":"2026-11-16T19:48Z","c":"buoi-art: painted moon phase on the tối band by lunar tuần (no double moon), test"}]};
+window.CTM_BI={"s":"dea1d445+","t":"2026-11-16T21:32Z","c":"golive lag-play-2: CHANGE line + site rebuilt","b":"e0453471964d","h":[{"s":"674f3af4","t":"2026-11-16T21:21Z","c":"Chơi cùng bạn: bạn chơi chung chưa gặp mặt nay hiện tên gọi chung “Hảo hữu của ta” ở mọi nơi, không còn ẩn thành dấu hỏi."},{"s":"923567d5+","t":"2026-11-16T21:03Z","c":"Hình nhân vật: hết vệt xám ở cổ và viền tối quanh người."},{"s":"59812a63+","t":"2026-11-16T20:41Z","c":"Khung chung: khoảng cách đều nhau ở sổ tuần và thẻ thân phận; hàng sổ gọn, thẻ lật không đè chữ."},{"s":"ab12d6fc","t":"2026-11-16T20:53Z","c":"Tuyết và đom đóm mới, mượt hơn; nền tranh không còn vẽ lại mỗi khung hình."},{"s":"8adfd886+","t":"2026-11-16T20:33Z","c":"Tư trang: các trang đều nhau, ô đồ đeo gọn trên Fold và iPad."},{"s":"b77d3250+","t":"2026-11-16T20:20Z","c":"Chơi cùng bạn: lời đáp Kỳ nguyệt sự của bạn đến kịp trước khi rút thẻ đêm; ghế đã đủ người báo gọn một lần."},{"s":"4a43ded3","t":"2026-11-16T20:23Z","c":"Tranh sủng đêm: NPC giành đêm theo luật chung, cả khi chơi chung."},{"s":"313f1063+","t":"2026-11-16T19:53Z","c":"Các trò thi tài: làm nhanh và khéo mới được trọn phần."},{"s":"66381c48+","t":"2026-11-16T20:04Z","c":"Dọn kho tranh thử khỏi bản game: tải nhẹ hơn, tranh trong cung vẫn đủ."},{"s":"8bd0095a+","t":"2026-11-16T19:58Z","c":"stage-counts: LEDCNT=arrive|now sets the people-ledger switch BAL.led.cnt (QUESTION FOR MAIN)"}]};
 /* KBOOT — BOOT COVER (owner 15/11 "Khi vừa bấm vào game, có chừng ít hơn 1 giây hiện khung này"; KIT §14.1).
    Before: while the 4 MB page parsed, the browser painted the bare static markup of p1.html (HUD box, a vertical stat label list, empty
    panels, the old 11-tab bar) for ~1 s on a warm open and many seconds on a cold one, before any kit CSS/JS existed.
@@ -1231,7 +1231,7 @@ function makeDil(){const pool=liveRivals(false),L=[];
 function endTurn(){
   if(S.dead||Q.length||S.mg)return;S.buoi=0;const qStart=Q.length;let ev=resolveTonight();const lsB=typeof lsSnap==="function"?lsSnap():null;
   S.sung=cl(S.sung-((has("lanhlung")&&S.tuan===1)||(S.rank>=7&&S.tuan!==0)?0:1),0,100);
-  const rg=harsh()?1:4;S.suc=cl(S.suc+rg,0,100);liveRivals(true).forEach(v=>v.suc=cl(v.suc+rg,0,100));if(S.tablet)S.tablet--;liveRivals(true).forEach(v=>{if(v.tablet)v.tablet--});
+  const rg=harsh()?1:4;S.suc=cl(S.suc+rg,0,100);if(worldOn())liveRivals(true).forEach(v=>v.suc=cl(v.suc+rg,0,100));if(S.tablet)S.tablet--;if(worldOn())liveRivals(true).forEach(v=>{if(v.tablet)v.tablet--});/* NPC ticks: host only (worldOn, jcoopworld) */
   if(lsB)lsNote(lsB,{sung:"ân sủng nhạt dần",suc:"nghỉ ngơi qua tuần"},true)/* Sức: dropped again when folded into j76 "Ngủ một đêm: Sức +N", which already counts this +4 */;
   ev+=rivalsTurn();if(S.dead)return;
   if(S.suc<=0)return die("Bệnh nặng, không qua khỏi");
@@ -2029,7 +2029,7 @@ function maidMonthP(p){if(!p.maid)p.maid=p===S?newMaid(pick(MAIDS),45):{name:pic
  if(me){S.maid=newMaid(pick(MAIDS.filter(x=>x!==m.name)),BAL.cmaid.newLoy);return ev+`Nội vụ phủ đưa cung nữ ${S.maid.name} đến hầu thay (thiện cảm ${S.maid.loyal}). `}
  p.maid={name:pick(MAIDS),loyal:40};return S.mat>=3?ev:""}
 function maidMonth(){return maidMonthP(S)}
-function kidsMonth(){let ev="";const moms=[[S,S.kids]].concat(rivals.map(v=>[v,v.kids]));
+function kidsMonth(){let ev="";const moms=[[S,S.kids]].concat(worldOn()?rivals.map(v=>[v,v.kids]):[]);/* NPC kids: host only */
  for(const [p,ks] of moms)for(const k of ks)if(k.alive){k.hp=Math.min(100,k.hp+4);
   if(roll((k.age<3?3:1.5)*(1+(S.storms||0)*.5))){let d=30+R(40);const doc=p===S?S.doctor:(p.alive&&!p.out&&p.doctor);if(doc)d=Math.round(d/2);k.hp-=d;const sk=pick(["lên đậu mùa","sốt cao co giật","mắc kiết lỵ","nhiễm phong hàn nặng"]);
    if(p===S)ev+=k.hp<=0?kidDie(k,`${sk} rồi không qua khỏi`,true):`<span class="r">${k.name} ${sk}.</span> Sức khỏe còn ${k.hp}. `;else if(k.hp<=0)ev+=kidDie(k,`${sk} rồi không qua khỏi`,false)}}
@@ -2101,8 +2101,8 @@ function rivalsMonth(){let ev="";
  return ev}
 function festival(title,k,lbl){const C=consorts();if(C.length<2)return"";const art=p=>k==="sac"?artW2(p,"vu")*6:(artW2(p,"cam")+artW2(p,"thi"))*3;
  const sc=C.map(p=>(k==="sac"?effSac(p):p[k])+art(p)+R(wet()?40:30)+(wet()&&k==="sac"?-artW2(p,"vu")*3:0));const wi=sc.indexOf(Math.max(...sc)),w=C[wi];
- ap(w,BAL.fest.fxWin);if(roll(BAL.fest.fxBestow))bestow(w,"contest");
- if(w===S){ghenAll(BAL.fest.fxGhen);return `<span class="g">${title}: ${lbl} của ngươi át cả hậu cung, Hoàng thượng ban thưởng.</span> ${pzd7(BAL.fest.fxWin)}. `}
+ ap(w,{sung:8,danh:3});if(roll(50))bestow(w,"contest");
+ if(w===S){ghenAll(8);return `<span class="g">${title}: ${lbl} của ngươi át cả hậu cung, Hoàng thượng ban thưởng.</span> Sủng +8 · Danh +3. `}
  apply({danh:-2});return `<span class="r">${title}: ${w.name} chiếm hết phong quang, ngươi lu mờ.</span> Danh -2. `}
 function artW2(p,k){const l=p.arts[k];return l*(((["cam","ky","thi","hoa"].includes(k)&&has("trongtai"))||(k==="vu"&&has("mesac")))?2:1)}
 
@@ -2602,7 +2602,7 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
  W("openMG",o=>function(k,lv,cb){return o.call(this,k,lv,g=>{feedback(g>=2?"good":"bad");cb(g)})});
  const P=ACT.poison.f;ACT.poison.f=function(a,t){const r=P.apply(this,arguments);if(t===S||a===S)feedback(t===S?"poison":"ink");return r};
  for(const k of ["frame","kframe","kpoison","musk"]){const F=ACT[k].f;ACT[k].f=function(a,t){const r=F.apply(this,arguments);if(a===S&&/thành|tìm thấy|sảy|trúng|đào được/.test(r)&&!/bị lộ|phát giác|chặn kịp/.test(r))feedback("ink");if(t===S&&!/chặn kịp/.test(r))feedback("hit");return r}}
- W("render",o=>function(){const r=o.apply(this,arguments);try{auTick();pxScene();hudTween();tokAnim()}catch(e){}return r})})();
+ W("render",o=>function(){const r=o.apply(this,arguments);try{auTick();pxScene();hudTween();tokAnim();if(S&&!S.dead&&!pxPreload.done)pxPreload()}catch(e){}return r})})();
 function inkWipe(){if(!OPT.fxon||RM)return;fxOver("inkwipe")}
 function nightFade(){if(!OPT.fxon||RM)return;fxOver("nightf")}
 /* HUD numbers count smoothly */
@@ -2625,6 +2625,14 @@ function pxLoad(){if(PX.loading||PX.app||PX.failed||RM)return;PX.loading=true;
   {const r0=app.resize;if(typeof r0==="function")app.resize=function(){try{const e=this.resizeTo||st,w=e.clientWidth,h=e.clientHeight;if(!w||!h)return;const sc=this.screen;if(sc&&Math.round(sc.width)===Math.round(w)&&Math.round(sc.height)===Math.round(h))return}catch(x){}return r0.apply(this,arguments)}}
   const c=app.canvas;c.className="pxc";st.insertBefore(c,$("stop")&&$("stop").parentNode===st?$("stop"):null);PX.app=app;PX.layer=new PIXI.Container();PX.fxl=new PIXI.Container();app.stage.addChild(PX.layer,PX.fxl);
   app.ticker.add(pxTick);PX.loading=false;PX.key="";pxScene()}catch(err){PX.failed=true;PX.loading=false}}).catch(()=>{PX.failed=true;PX.loading=false})}
+/* review/lag-play-2: the first Pixi load (script parse + WebGL init, ~1-4 s on a slow phone) used to land inside her first tab / act tap.
+   Once a life is in play, at the first idle moment (~2.5 s after), fetch + run the library, then open the stage layer if the stage is on
+   screen. Same loader (kitPixi), same layer (pxLoad); nothing new is drawn. Skipped when effects are off / reduced motion. */
+function pxPreload(){if(pxPreload.done||RM||typeof OPT!=="object"||!OPT.fxon)return;pxPreload.done=1;
+ const ric=window.requestIdleCallback||(f=>setTimeout(f,1));
+ setTimeout(()=>ric(()=>{kitPixi().then(()=>ric(()=>{try{const st=$("stage");if(S&&!S.dead&&st&&st.clientWidth>0&&st.clientHeight>0)pxLoad()}catch(e){}
+  /* the FX overlay app (jfx kfApp: hidden canvas, ticker stopped until an effect plays) */
+  ric(()=>{try{if(typeof kfApp==="function"&&!(typeof kfStill==="function"&&kfStill()))kfApp().catch(()=>{})}catch(e){}},{timeout:3000})},{timeout:3000})).catch(()=>{})},{timeout:4000}),2500)}
 function pxCap(){return kitView().pages===1?60:120}
 function pxKind(){const P=placeOf(S.place),night=(S.buoi||0)===B4L,out=["vuon","lc","home","tgk","maid"].includes(P.sc),w=S.wx?S.wx.k:"dust";
  if(out){const m={petal:"petal",rain:"rain",mist:"smoke",dust:night?"fly":"dust",sun:"dust",storm:"rain",leaf:"leaf",wind:"leaf",snow:"snow",snowh:"snow",frost:"snow",snowp:"snow"}[w]||"dust";return m}
@@ -2716,9 +2724,10 @@ function epidemic(){const P=consorts().filter(p=>p===S||p.alive&&!p.out);if(!rol
  for(const p of P)if(houseOf(p)===hk){if(roll(35))ev+=catchIll(p,"daumua")||(p!==S?`${p.name} nhiễm bệnh. `:"");p.confined=Math.max(p.confined||0,1);for(const k of kidsOf(p))if(roll(45)){k.hp-=40;if(k.hp<=0)ev+=kidDie(k,"mất vì đậu mùa",p===S)}(p.staff||[]).slice().forEach(s=>{if(roll(10))p.staff.splice(p.staff.indexOf(s),1)})}
  return ev}
 function illMonth(){let ev="";for(const p of consorts())ev+=illMonthP(p);ev+=epidemic();
+ if(worldOn()){/* Emperor + Thái hậu illness: world facts, rolled on the host only (jcoopworld worldOn) */
  if(S.emp.age>50&&!illOf(S.emp)&&roll(3)){S.emp.ill={k:"longthe",st:1,known:true};S.emp.mood=2;ev+="Long thể bất an, Hoàng thượng ít vào hậu cung. "}
  else if(illOf(S.emp)){if(roll(35)){S.emp.ill=null;ev+="Long thể đã an. "}else if(S.emp.ill.st<3&&roll(30))S.emp.ill.st++}
- if(!S.thDead){if(!S.thIll&&roll(2))S.thIll={k:pick(["phonghan","lao"]),st:1,known:true};else if(S.thIll){if(roll(30))S.thIll=null;else if(S.thIll.st<3)S.thIll.st++;else if(roll(20)){S.thDead=true;S.th=0;ev+="<b>Thái hậu băng hà vì bệnh.</b> "}}}
+ if(!S.thDead){if(!S.thIll&&roll(2))S.thIll={k:pick(["phonghan","lao"]),st:1,known:true};else if(S.thIll){if(roll(30))S.thIll=null;else if(S.thIll.st<3)S.thIll.st++;else if(roll(20)){S.thDead=true;S.th=0;ev+="<b>Thái hậu băng hà vì bệnh.</b> "}}}}
  for(const p of consorts())if(p.fakeIll){p.fakeIll--;if(roll(15)){p.fakeIll=0;ap(p,{danh:-6});punish(p,"giả bệnh khi quân",1);if(p===S)ev+=`<span class="r">Thái y khác bắt mạch: ngươi giả bệnh.</span> `}}
  return ev}
 /* the Emperor avoids the sick; quarantine blocks nights */
@@ -2757,7 +2766,7 @@ function lotEffect(l){if(!l)return"";if(l.dom==="Hung")return l.lv>=3?"Tuần n�
  const st=Math.abs(b)>=10?"khoảng một bậc":"nửa bậc";const ex=b<0?(Math.abs(b)>=10?"Chắc → Khá chắc":"có khi Chắc → Khá chắc"):(b>=10?"Khá chắc → Chắc":"có khi Khá chắc → Chắc");
  return `Tuần này: các việc thuộc «${l.dom}» ${b<0?"khó":"dễ"} thành hơn ${st} (${ex}).${names.length?` Gồm: ${names.join(", ")}${names.length>=5?"…":""}.`:""}`}
 function lotHTML(l){const L=LOTS[l.i];return `<div class="xam"><div class="tube">Xăm</div><div class="stick">${LV[l.lv]}</div></div><p style="text-align:center"><b>Quẻ ${LV[l.lv]}</b> · ${l.dom}</p><p style="text-align:center;font-style:italic">${L[1].replace("\n","<br>")}</p><p class="past" style="text-align:center">${L[2]}</p><p style="text-align:center"><span class="ef ${LVB[l.lv]<0||(l.dom==="Hung"&&l.lv>=3)?"r":LVB[l.lv]>0?"g":"n"}">${lotEffect(l)}</span></p>`}
-function newLots(){const l=drawLot(S,false);S.relot=0;for(const v of liveRivals(true))drawLot(v,false);log(`Xin xăm: quẻ ${LV[l.lv]} · ${l.dom}.`);if(!window.__dawnOn)Q.push({t:"Gieo quẻ đầu tuần",h:lotHTML(l)})}
+function newLots(){const l=drawLot(S,false);S.relot=0;if(worldOn())for(const v of liveRivals(true))drawLot(v,false);/* NPC lots: host only */log(`Xin xăm: quẻ ${LV[l.lv]} · ${l.dom}.`);if(!window.__dawnOn)Q.push({t:"Gieo quẻ đầu tuần",h:lotHTML(l)})}
 function reLot(better){if(S.dead||Q.length)return;if(!better){if(S.relot||S.bac<10||!can(1))return;apply({bac:-10});spend(1);S.relot=1}const l=drawLot(S,!!better);log(`Gieo lại: quẻ ${LV[l.lv]} · ${l.dom}.`);Q.push({t:better?"Xin xăm ở Phật đường":"Gieo lại quẻ",h:lotHTML(l)});render()}
 /* which domain an act belongs to */
 const ACTDOM={spy:"Mưu kế",frame:"Mưu kế",poison:"Mưu kế",rumor:"Mưu kế",bribe:"Mưu kế",block:"Mưu kế",musk:"Mưu kế",catswap:"Mưu kế",ksab:"Mưu kế",kpoison:"Mưu kế",pond:"Mưu kế",kframe:"Mưu kế",plant:"Mưu kế",accuse:"Danh",vp:"Danh",takeaway:"Con cái",ally:"Giao thiệp",gift:"Giao thiệp",steal:"Sủng",road:"Sủng"};
@@ -3999,19 +4008,17 @@ function myBetween(){if(quiet)return;const c=ct();const R2=c.c.map(byKey).filter
 function scoreTable(){const c=ct();if(!c)return"";return kitRows(c.c.map(byKey).filter(Boolean).map(p=>{const s=c.sc[key(p)]||[];const tot=s.reduce((a,b,i)=>a+b*crW(i),0);return [`${mdH(p===S?pMe():pv(p),"xs")}${p===S?"Ngươi":p.name}${c.dq.includes(key(p))?' <span class="ef r">bị loại</span>':""}`,`${s.map((x,i)=>`${CR[i][0]}${x}`).join(" · ")||"-"}${s.length?` = ${Math.round(tot*10)/10}`:""}`,"t"]}))}
 function runRound(){const c=ct();const i=c.round;const C=c.c.map(byKey).filter(p=>p&&(p===S||p.alive)&&!c.dq.includes(key(p)));
  for(const p of C){if(p===S)continue;const s=c.sc[key(p)]=c.sc[key(p)]||[];s[i]=i===0?tScore(p,bestArtOf(p)):i===1?dScore(p,roll(40+(p.tamco||0)/2)?judgeVirtue():pick(["nhan","le","tri"])):fScore(p)}
- if(C.includes(S))myRound(i);
- c.round++}
-/* her own part of round i (split out for co-op: the guest plays her rounds on the host's shared contest, jcoopcontest.js) */
-function myRound(i){const c=ct();const s=c.sc.me=c.sc.me||[];
+ if(C.includes(S)){const s=c.sc.me=c.sc.me||[];
   if(i===0){const arts=["cam","ky","thi","hoa","vu"].sort((a,b)=>(S.arts[b]||0)-(S.arts[a]||0));if(quiet){s[0]=tScore(S,arts[0]);}else Q.push({ev:1,t:"Vòng 1: Tài nghệ",who:pEmp(),h:`<p>Trước Hoàng thượng, ngươi trình diễn môn nào?</p>`,opts:arts.map(a=>({n:(ARTS.find(x=>x.k===a)||{n:a}).n,fx:{},x:`bậc ${S.arts[a]||0} · phần = bậc + màn diễn${(c.pr.me||0)?` + luyện tập ${c.pr.me}`:""}`,go:()=>{const done=g=>{s[0]=tScore(S,a,Math.min(3,g));log(`Vòng Tài nghệ: ngươi được ${s[0]}/10.`);};if(window.__bot||typeof openMG!=="function")done(R(4));else openMG(a,S.arts[a]||0,g=>done(g))}}))});}
   else if(i===1){const D=pick(DILEMMAS);const hint=c.hint?`<p class="past">Ngươi đoán người xét trọng ${({nhan:"lòng nhân",le:"lễ phép",tri:"sự sáng suốt"})[judgeVirtue()]}.</p>`:`<p class="past">Chưa rõ người xét trọng điều gì (chuyện trò với Hoàng thượng hoặc Thái hậu trước để đoán).</p>`;
    if(quiet)s[1]=dScore(S,pick(["nhan","le","tri"]));else Q.push({ev:1,t:"Vòng 2: Đức hạnh",who:pTH(),h:`<p>${D[0]}</p>${hint}`,opts:D[1].map(([v,n])=>({n,fx:{},x:`phần theo ý người xét + Đức ${S.duc}, Tâm cơ ${S.tamco}`,go:()=>{s[1]=dScore(S,v);log(`Vòng Đức hạnh: ngươi được ${s[1]}/10.`)}}))})}
   else{s[2]=fScore(S);log(`Vòng Thế lực: ${backers(S).join(", ")||"không ai"} đứng sau ngươi: ${s[2]}/10.`)}}
+ c.round++}
 function contestEnd(){const c=ct();const C=c.c.map(byKey).filter(p=>p&&(p===S||p.alive)&&!p.out&&!c.dq.includes(key(p))&&rkOf(p)===c.r-1);S.contest=null;if(!C.length)return"";
  const tot=p=>(c.sc[key(p)]||[]).reduce((a,b,i)=>a+(b||0)*crW(i),0);C.sort((a,b)=>tot(b)-tot(a)||(b.sung||0)-(a.sung||0));const w=C[0];
- let res;if(c.r===7){if(w===S){S.rank=7;S.justCrowned=1;S.lastPromo=S.turn;ghenAll(BAL.fest.ctGhen)}else{w.rank=6;w.queen=true;rivals.splice(rivals.indexOf(w),1);rivals.unshift(w)}w.lastPromo=S.turn;res=`${w===S?"Ngươi":w.name} được lập làm Hoàng hậu`}else{window.__seatPick=1;try{res=promoteP(w)}finally{window.__seatPick=0}if(!res){if(w===S){S.rank++;S.lastPromo=S.turn}else{w.rank++;w.lastPromo=S.turn}}res=`${w===S?"Ngươi":w.name} được phong ${RANKS[Math.min(6,rkOf(w))].n}`}
- for(const p of C.slice(1)){oanAdd(p,w,BAL.fest.ctOan);if(p!==S&&w===S)p.ghen=cl(p.ghen+BAL.fest.ctGhen,0,100)}
- const txt=`<b>Tranh ghế xong: ${res}.</b>`;log(txt);if(!quiet&&c.c.includes("me"))Q.push({t:"Kết quả tranh ghế",who:w===S?pMe():pv(w),h:`<p>${res}.</p>${(()=>{S.contest=c;const h=scoreTable();S.contest=null;return h})()}<p class="past">Người thua thêm Oán với người thắng (+${BAL.fest.ctOan})${w===S?"; các phi tần ghen thêm":""}.</p>`});return txt}
+ let res;if(c.r===7){if(w===S){S.rank=7;S.justCrowned=1;S.lastPromo=S.turn;ghenAll(10)}else{w.rank=6;w.queen=true;rivals.splice(rivals.indexOf(w),1);rivals.unshift(w)}w.lastPromo=S.turn;res=`${w===S?"Ngươi":w.name} được lập làm Hoàng hậu`}else{window.__seatPick=1;try{res=promoteP(w)}finally{window.__seatPick=0}if(!res){if(w===S){S.rank++;S.lastPromo=S.turn}else{w.rank++;w.lastPromo=S.turn}}res=`${w===S?"Ngươi":w.name} được phong ${RANKS[Math.min(6,rkOf(w))].n}`}
+ for(const p of C.slice(1)){oanAdd(p,w,10);if(p!==S&&w===S)p.ghen=cl(p.ghen+10,0,100)}
+ const txt=`<b>Tranh ghế xong: ${res}.</b>`;log(txt);if(!quiet&&c.c.includes("me"))Q.push({t:"Kết quả tranh ghế",who:w===S?pMe():pv(w),h:`<p>${res}.</p>${(()=>{S.contest=c;const h=scoreTable();S.contest=null;return h})()}<p class="past">Người thua thêm Oán với người thắng (+10)${w===S?"; các phi tần ghen thêm":""}.</p>`});return txt}
 /* weekly driver: one round per tuần (Hoàng hậu seat: one per month), acts between */
 function contestWeek(){const c=ct();if(!c)return;if(!c.c.map(byKey).some(p=>p&&(p===S||p.alive)))return void(S.contest=null);const gap=c.len;if((wk()-c.t0)%gap!==0||wk()===c.t0)return;
  if(c.round<3){for(const k of c.c){const p=byKey(k);if(p&&p!==S&&p.alive&&!c.dq.includes(k))npcContestAct(p)}runRound();if(c.round<3&&c.c.includes("me")&&!c.dq.includes("me"))myBetween();if(c.round>=3)contestEnd()}else contestEnd()}
@@ -4355,15 +4362,6 @@ Object.assign(BAL,{st14:{max:14,parts:[[1,3],[4,11],[12,14]],lim:{nhap:6,nhapCnv
    Đáp ứng = nt / div − sub (j42 roll, the Thân phận row, the j67 / jst14 «Từ kẻ hầu thành tiểu chủ» step all read this) */
  ntRise:{at:45,div:2,sub:10}});
 function ntRiseOdds(){return Math.max(0,(S.nt||0)/BAL.ntRise.div-BAL.ntRise.sub)}
-/* ONE CORE for festival contests (review/coop-contest-r1): read by j71 (solo), j8 festival(), j34 Tranh ghế and jcoopcontest (co-op), never typed twice.
-   gift (Dâng lễ, P): an NPC gift weighs rich (bạc >= richBac: richV, she pays cost) else max(min, Tài*kTai + Họa*kHoa + người hầu*kHelp);
-   her three gifts = [richV (ngọc quý, cost bạc), her own weight, plain]; every gift + luck*rand. praise/small to the best gift, miss if she gives none.
-   fxWin = the feast-contest winner (Yến tiệc đầu xuân / Thất tịch, j8 festival); fxGhen / winGhen = rivals' jealousy when she wins a feast /
-   a festival contest; giftGhen = when her gift wins; fxBestow / winBestow = odds (word ladder) of the Emperor's gift to the winner.
-   ctOan / ctGhen = Tranh ghế: Oán of each loser toward the winner; jealousy when she is crowned. */
-Object.assign(BAL,{fest:{gift:{richBac:100,richV:55,cost:60,min:15,plain:15,luck:25,kTai:.3,kHoa:8,kHelp:.8,
-  praise:{th:{th:4,danh:1},emp:{sung:3,danh:1}},small:{th:{th:1},emp:{sung:1}},miss:{th:{th:-2},emp:{sung:-2}}},
- fxWin:{sung:8,danh:3},fxGhen:8,winGhen:4,giftGhen:3,fxBestow:50,winBestow:30,ctOan:10,ctGhen:10}});
 /* ================= KIT 33 · ONE FIGURE SCALE — KIT_FIG (owner 11/15 "people on the stage are too small") =================
    The single source of truth for how big full-body people are drawn: h = figure (visible body, head to feet) / stage-or-picture height;
    man = men's height factor; kid(age) = children's factor by age; fac(src,age) = the factor of one figure file for one person.
@@ -6076,16 +6074,22 @@ if(typeof porOf==="function")(function(){const p0=porOf;porOf=function(who,fb){c
  "/* kv3:unwrap */"+X+"{font-size:0!important}"+X+"::after{content:attr(data-s)!important;font-size:var(--tfs,.8rem)!important;white-space:nowrap!important}"+
  "/* kv3:.kv1 */:where(.kv1) "+X+"::after{font-size:var(--tfs,.86rem)!important}";document.head.appendChild(st)})();
 let TFS_CV=null;
-function tabsFit(){try{const T=$("tabs");if(!T)return;const short=true;const one=kitView().pages===1,base=one?.86:.8;
- T.style.setProperty("--tfs",base+"rem");const B=[...T.querySelectorAll("button")].filter(b=>b.offsetParent);if(!B.length)return;
+/* review/lag-play-2: tabsFit ran 2x per render, each time resetting --tfs and measuring every tab (forced layout). It now re-measures only
+   when something it depends on changed: viewport / design canvas, the tab buttons (labels, shown / hidden), the classes of the bar and the game shell.
+   A call with an argument (fonts ready, resize) always measures. */
+let TFS_SIG="";
+function tabsFit(force){try{const T=$("tabs");if(!T)return;{const gm=document.querySelector(".game");
+  const sg=innerWidth+"x"+innerHeight+"|"+kitView().pages+"|"+T.className+"|"+(gm?gm.className:"")+"|"+document.documentElement.className+"|"+[...T.children].map(b=>b.style.cssText+"/"+b.hidden+"/"+b.className+"/"+(b.dataset?b.dataset.s||"":"")+"/"+b.textContent).join(";");
+  if(!force&&sg===TFS_SIG)return;TFS_SIG="";tabsFit.sg=sg}const short=true;const one=kitView().pages===1,base=one?.86:.8;
+ T.style.setProperty("--tfs",base+"rem");const B=[...T.querySelectorAll("button")].filter(b=>b.offsetParent);if(!B.length)return;TFS_SIG=tabsFit.sg;
  const n=B.length,cols=one?Math.ceil(n/2):n;/* KIT §0: the spread = ONE row of tabs; the one page = TWO rows of ceil(n/2) big buttons (8 tabs → 4+4; phone-bars) */T.style.setProperty("grid-template-columns",`repeat(${cols},minmax(0,1fr))`,"important");
  TFS_CV=TFS_CV||document.createElement("canvas").getContext("2d");let k=1;
  B.forEach(b=>{const cs=getComputedStyle(b,short?"::after":null);TFS_CV.font=`${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`;const txt=short?(b.dataset.s||b.textContent):b.textContent;
   const w=TFS_CV.measureText(txt.trim()).width+1;const room=b.clientWidth-parseFloat(getComputedStyle(b).paddingLeft)-parseFloat(getComputedStyle(b).paddingRight);if(w>room&&room>0)k=Math.min(k,room/w)});
  if(k<1)T.style.setProperty("--tfs",(base*k).toFixed(3)+"rem")}catch(e){}}
-addEventListener("resize",()=>{clearTimeout(window.__tfsT);window.__tfsT=setTimeout(tabsFit,80)});
+addEventListener("resize",()=>{clearTimeout(window.__tfsT);window.__tfsT=setTimeout(()=>tabsFit(1),80)});
 (function(){const r0=render;render=function(){const r=r0.apply(this,arguments);tabsFit();return r}})();
-try{if(document.fonts&&document.fonts.ready)document.fonts.ready.then(tabsFit)}catch(e){}
+try{if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>tabsFit(1))}catch(e){}
 setTimeout(tabsFit,0);
 /* status panel toggle (owner, Fold): the ▾ was display:none from 1200px up (and a 22px box below), so on a wide screen it could
    not be tapped and "col" never changed anything there. Now one toggle at every width: a 36px kit button with icon + word as the
@@ -9584,12 +9588,6 @@ const WT7={ngua:["ngựa Xích Thố","ngựa Ô Truy","ngựa Bạch Long","ng�
 function form7(s){return s>=65?"phong độ rất tốt":s>=50?"phong độ tốt":s>=35?"phong độ thường":"phong độ kém"}
 function prize7(k){return FBIG7.includes(k)?{sung:3,danh:3}:{sung:2,danh:2}}
 function pz7(o){return Object.entries(o).map(([k,v])=>`${NAMES[k]} +${v}`).join(", ")}
-/* ONE CORE (BAL.fest): the gift weights and the feast prize, read by solo (here, j8) and co-op (jcoopcontest) alike */
-function giftW7(v){const g=BAL.fest.gift;return Math.max(g.min,(v.tai||0)*g.kTai+aw7(v,"hoa")*g.kHoa+help7(v)*g.kHelp)}
-function gift7(v){const g=BAL.fest.gift;return (v.bac||0)>=g.richBac?g.richV:giftW7(v)}
-function myGifts7(){const g=BAL.fest.gift;return [g.richV,Math.round((S.tai||0)*g.kTai+aw7(S,"hoa")*g.kHoa+help7(S)*g.kHelp),g.plain]}
-function giftPay7(v){const g=BAL.fest.gift;if((v.bac||0)>=g.richBac)ap(v,{bac:-g.cost})}
-function pzd7(o){return Object.entries(o).map(([k,v])=>`${NAMES[k]} ${v>0?"+":""}${v}`).join(" · ")}
 /* pick a variant: unused this life first, then least seen in the last five lives */
 function fvPick(k,noC){const j=j7s(),L=FV7[k]||[];const ok=i=>{const t=L[i][0];if(noC&&t==="C")return false;if(S.thDead&&(L[i][1]==="th"||/Thái hậu/.test(L[i][2])))return false;if(t==="G"&&!liveRivals(true).some(v=>present7(v)&&(v.bac||0)>=25))return false;return true};
  let idx=[...L.keys()].filter(ok);const used=j.vu["f:"+k]||[];let pool=idx.filter(i=>!used.includes(i));if(!pool.length){j.vu["f:"+k]=[];pool=idx}
@@ -9612,8 +9610,8 @@ function det7(kind,p){return SC7[kind].by.split(", ").map(n=>ST7[n]?`${n} ${Math
 function cScore7(E,kindOf,prep,meB,her){return E.map(p=>{const kind=kindOf(p);if(p===S&&her&&her.score!=null)return{p,kind,t:Math.round(her.score),pr:0,lk:0,s:Math.round(her.score),mg:1};const t=Math.round(SC7[kind].f(p));let pr=0;if(p===S)pr=meB;else if(prep.includes(p.id)&&(p.bac||0)>=20){ap(p,{bac:-20});pr=J71.prep}const lk=Math.round(Math.random()*J71.luck);return{p,kind,t,pr,lk,s:t+pr+lk}}).sort((a,b)=>b.s-a.s)}
 function rowsH7(L,title){return `<p class="past">${title}</p>`+L.map((x,i)=>x.mg?`<p><b>${i+1}. Ngươi — ${SC7[x.kind].n}: ${x.s} phần tự chơi (đã cộng tài nghệ: ${det7(x.kind,x.p)}, và chuẩn bị)</b></p>`:`<p>${x.p===S?"<b>":""}${i+1}. ${x.p===S?"Ngươi":x.p.name} — ${SC7[x.kind].n}: ${x.s} phần = ${x.t} tài nghệ (${det7(x.kind,x.p)})${x.pr?` + ${x.pr} chuẩn bị`:""} + ${x.lk} may rủi${x.p===S?"</b>":""}</p>`).join("")+`<p class="past">Phần tài nghệ tính theo tài sắc thật của mỗi người vào ngày hội; may rủi từ 0 đến ${J71.luck}, như nhau cho mọi người.</p>`}
 function cRun7(k,kind,E,prep,meB,meIn,her){const L=cScore7(E.filter(p=>meIn||p!==S),()=>kind,prep,meB,her);
- if(!L.length)return"";const w=L[0].p,pz=prize7(k);ap(w,pz);if(w!==S&&roll(BAL.fest.winBestow))try{bestow(w,"contest")}catch(e){}
- const j=j7s();j.fn++;if(w===S){j.win++;ghenAll(BAL.fest.winGhen);try{if(roll(BAL.fest.winBestow))bestow(S,"contest")}catch(e){}}
+ if(!L.length)return"";const w=L[0].p,pz=prize7(k);ap(w,pz);if(w!==S&&roll(30))try{bestow(w,"contest")}catch(e){}
+ const j=j7s();j.fn++;if(w===S){j.win++;ghenAll(4);try{if(roll(30))bestow(S,"contest")}catch(e){}}
  const top=L.slice(0,3).map((x,i)=>`${["Nhất","Nhì","Ba"][i]} ${gn7(x.p)} (${x.s})`).join(", ");const mi=L.findIndex(x=>x.p===S);
  let me="";if(mi>=0){me=mi<3?"":` · ngươi hạng ${mi+1}/${L.length}`;if(mi===1||mi===2){apply({danh:1});me+=` · ngươi hạng ${mi+1}: Danh +1`}if(mi===L.length-1&&L.length>2){apply({danh:-1});me+=", đứng chót: Danh -1"}}
  const head=w===S?G7(`Ngươi đoạt giải ${SC7[kind].n}: ${pz7(pz)}.`):`${meIn?R7("Không thành:")+" ":""}${w.name} đoạt giải ${SC7[kind].n} (${pz7(pz)}).`;
@@ -9624,7 +9622,7 @@ PEND.j71f=pp=>{if(!S)return null;const k=pp.k,V=(FV7[k]||[])[pp.vi];if(!V)return
  const fill=s=>s.replace(/\{A\}/g,A?A.name:"một phi tần");let o=[];let who=pEmp();let h=`<p class="past">${fn}</p><p>${fill(txt)}</p>`;
  if(t==="C"){const E=[S].concat(ents7(pp)),c=SC7[sub],pz=prize7(k);const p1=cOdds7(sub,E,pp.pr||[],0,pp.sd),p2=cOdds7(sub,E,pp.pr||[],J71.prep,pp.sd+7);
   h+=`<p>Chấm theo ${c.by}. Dự thi: ngươi và ${E.length-1} phi tần${(pp.pr||[]).length?`; ${(pp.pr||[]).length} người đã bỏ bạc chuẩn bị trước`:""}.</p>`;
-  const gain=`thành: đoạt giải, ${pz7(pz)}, có thể được ban thưởng, hạng nhì hoặc ba: Danh +1`,kem=`kèm: thắng thì các phi tần ghen +${BAL.fest.winGhen}`,lose=`hỏng: đứng chót thì Danh -1`;
+  const gain=`thành: đoạt giải, ${pz7(pz)}, có thể được ban thưởng, hạng nhì hoặc ba: Danh +1`,kem=`kèm: thắng thì các phi tần ghen +4`,lose=`hỏng: đứng chót thì Danh -1`;
   const run=(b)=>()=>{log(`${fn}: ${cRun7(k,sub,E,pp.pr||[],b,true)}`)};
   o.push({n:`Dự thi ${c.n}`,fx:{suc:-J71.cost},x:`${word(p1)} · ${gain} · ${lose} · ${kem}`,go:run(0)});
   o.push({n:`Chuẩn bị kỹ rồi dự thi`,fx:{suc:-J71.cost,bac:-20},x:`${word(p2)} · ${gain} · ${lose} · ${kem}`,go:run(J71.prep)});
@@ -9633,8 +9631,8 @@ PEND.j71f=pp=>{if(!S)return null;const k=pp.k,V=(FV7[k]||[])[pp.vi];if(!V)return
   else o.push({n:"Không dự, đứng xem",fx:{},x:"không được không mất",go:()=>log(`${fn}: ${cRun7(k,sub,E,pp.pr||[],0,false)}`)})}
  else if(t==="W"){const N=WT7[sub]||WT7.thuyen,s=pp.s||[50,50,50,50],sum=s.reduce((a,b)=>a+b,0);const P=s.map(x=>x/sum);const hi=s.indexOf(Math.max(...s)),lo=s.indexOf(Math.min(...s));
   h+=`<p>${N.map((n,i)=>`${i?n:n[0].toUpperCase()+n.slice(1)}: ${form7(s[i])}`).join(" · ")}.</p>`;const pay=i=>Math.round(20/P[i]*.9);
-  const bet=i=>({n:`Cược ${N[i]}`,fx:{bac:-20},x:`${word(P[i]*100)} · thành: Bạc +${pay(i)} · hỏng: mất tiền cược`,go:()=>{let r=(pp.sd?rng7(pp.sd+3)():Math.random())*sum,wi=0;while(wi<3&&r>s[wi]){r-=s[wi];wi++}if(wi===i){apply({bac:pay(i)});log(`${fn}: ${N[wi]} về nhất; ngươi thắng cược, Bạc +${pay(i)}.`)}else log(`${R7("Không thành:")} ${fn}: ${N[wi]} về nhất; ngươi cược ${N[i]}, mất 20 bạc.`)}});
-  o.push(bet(hi));if(lo!==hi)o.push(bet(lo));o.push({n:"Không cược, chỉ xem",fx:{},x:"không được không mất",go:()=>{let r=(pp.sd?rng7(pp.sd+3)():Math.random())*sum,wi=0;while(wi<3&&r>s[wi]){r-=s[wi];wi++}log(`${fn}: ${N[wi]} về nhất.`)}})}
+  const bet=i=>({n:`Cược ${N[i]}`,fx:{bac:-20},x:`${word(P[i]*100)} · thành: Bạc +${pay(i)} · hỏng: mất tiền cược`,go:()=>{let r=Math.random()*sum,wi=0;while(wi<3&&r>s[wi]){r-=s[wi];wi++}if(wi===i){apply({bac:pay(i)});log(`${fn}: ${N[wi]} về nhất; ngươi thắng cược, Bạc +${pay(i)}.`)}else log(`${R7("Không thành:")} ${fn}: ${N[wi]} về nhất; ngươi cược ${N[i]}, mất 20 bạc.`)}});
+  o.push(bet(hi));if(lo!==hi)o.push(bet(lo));o.push({n:"Không cược, chỉ xem",fx:{},x:"không được không mất",go:()=>{let r=Math.random()*sum,wi=0;while(wi<3&&r>s[wi]){r-=s[wi];wi++}log(`${fn}: ${N[wi]} về nhất.`)}})}
  else if(t==="G"){if(!A)return null;who=pv(A);const st=Math.min(50,Math.floor((A.bac||0)/2));const g=n=>({n:`Chơi ván ${n>=40?"lớn":"nhỏ"} (${n} bạc)`,fx:{bac:-n},x:`${word(50)} · thành: Bạc +${n*2} (lấy lại tiền cược và ${n} của ${A.name}), ${A.name} thiện cảm +2 · hỏng: mất tiền cược, ${A.name} thiện cảm +2`,
    go:()=>{relAdd(S,A,2);if(roll(50)){apply({bac:n*2});ap(A,{bac:-n});log(`${fn}: ngươi thắng ${A.name} ván ${n} bạc.`)}else{ap(A,{bac:n});log(`${R7("Không thành:")} ${fn}: ${A.name} thắng ngươi ván ${n} bạc.`)}}});
   o.push(g(20));if(st>=40)o.push(g(40));o.push({n:"Từ chối khéo",fx:{},x:"không được không mất",go:()=>log(`${fn}: ngươi từ chối khéo lời rủ của ${A.name}.`)})}
@@ -9646,17 +9644,17 @@ PEND.j71f=pp=>{if(!S)return null;const k=pp.k,V=(FV7[k]||[])[pp.vi];if(!V)return
    o.push({n:"Bày tiệc lớn",fx:{bac:-cost},x:`${word(po)} · thành: Danh +4, Sủng +2${gt?", "+gt:""} · hỏng: món ăn hỏng, khách chê: Danh -2`,go:()=>{if(roll(po)){apply({danh:4,sung:2});G.forEach(v=>relAdd(S,v,6));log(`${fn}: tiệc của ngươi được khen, Hoàng thượng ghé qua.`)}else{apply({danh:-2});log(`${R7("Không thành:")} ${fn}: tiệc của ngươi trục trặc, món ăn hỏng, khách chê.`)}}});
    if(G[0])o.push({n:`Tiệc trà nhỏ mời ${G[0].name}`,fx:{bac:-15},x:`${G7(`${G[0].name} thiện cảm +4`)}, Danh +1`,go:()=>{relAdd(S,G[0],4);apply({danh:1});log(`${fn}: ngươi mời ${G[0].name} uống trà.`)}});
    o.push({n:"Không bày tiệc, nghỉ ngơi",fx:{},x:"Sức +4",go:()=>{apply({suc:4});log(`${fn}: ngươi nghỉ trong cung.`)}})}}
- else if(t==="P"){const th=sub==="th"&&!S.thDead;who=th?pTH():pEmp();const R2=ents7(pp);const GL=BAL.fest.gift.luck;
-  const mine=myGifts7();const rv=R2.map(gift7);
-  const odds=mv=>{const r=rng7(pp.sd);let w=0;for(let t=0;t<500;t++){const m=mv+r()*GL;if(rv.every(x=>x+r()*GL<m))w++}return cl(Math.round(w/5),3,97)};
-  const GF=BAL.fest.gift,praise=GF.praise[th?"th":"emp"],small=GF.small[th?"th":"emp"];const tg=th?"Thái hậu":"Hoàng thượng";
-  const run=(i)=>()=>{const L=R2.map((v,ix)=>({p:v,s:rv[ix]+Math.random()*GL}));L.push({p:S,s:mine[i]+Math.random()*GL});L.sort((a,b)=>b.s-a.s);R2.forEach(giftPay7);const w=L[0].p;
-   if(w===S){apply(praise);ghenAll(BAL.fest.giftGhen);log(`${fn}: ${tg} khen lễ của ngươi nhất: ${pz7(praise)}.`)}else{ap(w,praise);if(i<2)apply(small);log(`${R7("Không thành:")} ${fn}: ${tg} khen lễ của ${w.name} nhất (${pz7(praise)}).${i<2?` Lễ của ngươi cũng được nhận: ${pz7(small)}.`:""}`)}};
+ else if(t==="P"){const th=sub==="th"&&!S.thDead;who=th?pTH():pEmp();const R2=ents7(pp);const gift=v=>(v.bac||0)>=100?55:Math.max(15,(v.tai||0)*.3+aw7(v,"hoa")*8+help7(v)*.8);
+  const mine=[55,Math.round((S.tai||0)*.3+aw7(S,"hoa")*8+help7(S)*.8),15];const rv=R2.map(gift);
+  const odds=mv=>{const r=rng7(pp.sd);let w=0;for(let t=0;t<500;t++){const m=mv+r()*25;if(rv.every(x=>x+r()*25<m))w++}return cl(Math.round(w/5),3,97)};
+  const praise=th?{th:4,danh:1}:{sung:3,danh:1},small=th?{th:1}:{sung:1};const tg=th?"Thái hậu":"Hoàng thượng";
+  const run=(i)=>()=>{const L=R2.map((v,ix)=>({p:v,s:rv[ix]+Math.random()*25}));L.push({p:S,s:mine[i]+Math.random()*25});L.sort((a,b)=>b.s-a.s);R2.forEach(v=>{if((v.bac||0)>=100)ap(v,{bac:-60})});const w=L[0].p;
+   if(w===S){apply(praise);ghenAll(3);log(`${fn}: ${tg} khen lễ của ngươi nhất: ${pz7(praise)}.`)}else{ap(w,praise);if(i<2)apply(small);log(`${R7("Không thành:")} ${fn}: ${tg} khen lễ của ${w.name} nhất (${pz7(praise)}).${i<2?` Lễ của ngươi cũng được nhận: ${pz7(small)}.`:""}`)}};
   h+=`<p>${R2.length} phi tần khác cũng dâng lễ.</p>`;
-  o.push({n:"Dâng ngọc quý",fx:{bac:-GF.cost},x:`${word(odds(mine[0]))} · thành: lễ được khen nhất, ${pz7(praise)} · hỏng: ${pz7(small)} · kèm: được khen thì các phi tần ghen +${BAL.fest.giftGhen}`,go:run(0)});
-  o.push({n:"Tự tay làm lễ vật (theo Họa, Tài, người hầu)",fx:{suc:-10},x:`${word(odds(mine[1]))} · thành: lễ được khen nhất, ${pz7(praise)} · hỏng: ${pz7(small)} · kèm: được khen thì các phi tần ghen +${BAL.fest.giftGhen}`,go:run(1)});
+  o.push({n:"Dâng ngọc quý",fx:{bac:-60},x:`${word(odds(mine[0]))} · thành: lễ được khen nhất, ${pz7(praise)} · hỏng: ${pz7(small)} · kèm: được khen thì các phi tần ghen +3`,go:run(0)});
+  o.push({n:"Tự tay làm lễ vật (theo Họa, Tài, người hầu)",fx:{suc:-10},x:`${word(odds(mine[1]))} · thành: lễ được khen nhất, ${pz7(praise)} · hỏng: ${pz7(small)} · kèm: được khen thì các phi tần ghen +3`,go:run(1)});
   o.push({n:"Lễ mọn cho phải phép",fx:{bac:-10},x:`${word(odds(mine[2]))} · thành: lễ được khen nhất, ${pz7(praise)} · hỏng: không được gì`,go:run(2)});
-  const miss=GF.miss[th?"th":"emp"];o.push({n:"Không dâng lễ",fx:miss,x:"không tốn bạc, không tốn sức",go:()=>{const L=R2.map((v,ix)=>({p:v,s:rv[ix]+Math.random()*GL})).sort((a,b)=>b.s-a.s);R2.forEach(giftPay7);if(L[0]){ap(L[0].p,praise);log(`${fn}: ngươi không dâng lễ; ${tg} khen lễ của ${L[0].p.name} nhất (${pz7(praise)}).`)}else log(`${fn}: ngươi không dâng lễ.`)}})}
+  const miss=th?{th:-2}:{sung:-2};o.push({n:"Không dâng lễ",fx:miss,x:"không tốn bạc, không tốn sức",go:()=>{const L=R2.map((v,ix)=>({p:v,s:rv[ix]+Math.random()*25})).sort((a,b)=>b.s-a.s);R2.forEach(v=>{if((v.bac||0)>=100)ap(v,{bac:-60})});if(L[0]){ap(L[0].p,praise);log(`${fn}: ngươi không dâng lễ; ${tg} khen lễ của ${L[0].p.name} nhất (${pz7(praise)}).`)}else log(`${fn}: ngươi không dâng lễ.`)}})}
  else if(t==="R"){const lead=S.rank>=4;const po=cl(Math.round((lead?50:35)+(S.duc||0)/3),10,92);who=S.thDead?pEmp():pTH();
   o.push({n:lead?"Đứng hàng đầu dâng hương":"Xin đứng hầu gần hương án",fx:{suc:-5},x:`${word(po)} · thành: Danh +3, ${S.thDead?"Sủng +2":"Thái hậu với ngươi +3"} · hỏng: sơ suất nghi lễ, Danh -2`,go:()=>{if(roll(po)){apply(S.thDead?{danh:3,sung:2}:{danh:3,th:3});log(`${fn}: ngươi hành lễ chu đáo, được khen.`)}else{apply({danh:-2});log(`${R7("Không thành:")} ${fn}: ngươi sơ suất trong lúc hành lễ, bị chê.`)}}});
   o.push({n:"Cúng dường bạc dầu đèn",fx:{bac:-15},x:"Đức +2, Lòng cung nữ +3",go:()=>{apply({duc:2,maid:3});log(`${fn}: ngươi cúng dường dầu đèn.`)}});
@@ -9860,7 +9858,7 @@ function fDay7(k){const j=j7s();const P=j.plans&&j.plans[k];if(P&&P.y===S.year){
   if(V[0]!=="C")return fMake7(k,null,false,pp);
   const E=[S].concat(ents7(pp));const meIn=P.me>0&&present7(S);const meB=(P.me===2?J71.prep:0)+(P.pb||0);
   if(meIn&&mgOn7())return{t:`${fShort7(k)} · ${fTitle7(k,pp.vi)}`,h:`<p>${V[2]}</p><p>Ngươi đã ghi tên. Phần của ngươi = phần tự chơi, cộng thêm theo tài nghệ (${det7(V[1],S)}) và chuẩn bị +${meB}.</p>`,who:pEmp(),must:1,
-   opts:[{n:"Vào thi (tự chơi phần thi)",fx:{suc:-J71.cost},x:`đoạt giải, ${pz7(prize7(k))}, kèm vật quý và bạc theo hạng · hạng nhì hoặc ba: Danh +1 và quà nhỏ · hỏng: đứng chót thì Danh -1 · kèm: thắng thì các phi tần ghen +${BAL.fest.winGhen}`,go:()=>mgRun7({title:fName7(k),big:FBIG7.includes(k),fk:k,art:V[1],E,kindOf:()=>V[1],pr:pp.pr||[],meB,stakes:stk7(prize7(k),BAL.fest.winBestow),done:(L,sh)=>cFin7(k,V[1],L,sh)})},
+   opts:[{n:"Vào thi (tự chơi phần thi)",fx:{suc:-J71.cost},x:`đoạt giải, ${pz7(prize7(k))}, kèm vật quý và bạc theo hạng · hạng nhì hoặc ba: Danh +1 và quà nhỏ · hỏng: đứng chót thì Danh -1 · kèm: thắng thì các phi tần ghen +4`,go:()=>mgRun7({title:fName7(k),big:FBIG7.includes(k),fk:k,art:V[1],E,kindOf:()=>V[1],pr:pp.pr||[],meB,stakes:stk7(prize7(k),30),done:(L,sh)=>cFin7(k,V[1],L,sh)})},
     {n:"Bỏ thi",fx:{},x:"không được không mất",go:()=>{const L=cScore7(E.filter(p=>p!==S),()=>V[1],pp.pr||[],0);if(L.length)cFin7(k,V[1],L)}}]};
   if(meIn)apply({suc:-J71.cost});window.__j71rows="";const r=cRun7(k,V[1],E,pp.pr||[],meB,meIn);if(!r)return null;log(`${fName7(k)}: ${r}`);
   return{t:`${fShort7(k)} · ${fTitle7(k,pp.vi)}`,h:`<p>${V[2]}</p>${meIn?"":"<p>Ngươi không ghi tên, chỉ đứng xem.</p>"}${window.__j71rows||""}`,who:pEmp(),must:1}}
@@ -9876,13 +9874,13 @@ function mgRun7(o){/* o: {title, art, E (incl. S), kindOf, pr, meB, done(L)} */c
  const fin=res=>{try{const sc=res&&typeof res.score==="number"?res.score:null;const her=sc!=null?{p:S,kind:o.art,t:Math.round(sc),pr:0,lk:0,s:Math.round(sc),mg:1}:cScore7([S],()=>o.art,[],o.meB)[0];const L=L0.concat([her]).sort((a,b)=>b.s-a.s);o.done(L,!!(res&&res.shown));showModal();render()}catch(e){console.error(e)}};
  try{startContest({art:o.art,artName:SC7[o.art].n,title:o.title,rivals:L0.map(x=>({id:x.p.id,name:x.p.name,face:pv(x.p),score:x.s,talent:x.t,prep:x.pr,luck:x.lk})),prep:o.meB,talent:Math.round(SC7[o.art].f(S)),talentBy:det7(o.art,S),luck:J71.luck,stakes:o.stakes,big:o.big,fk:o.fk,onDone:fin})}catch(e){console.error(e);fin(null)}}
 /* apply a finished contest (any source): prize to the winner, her rank effects, rows */
-function cFin7(k,kind,L,shown){const w=L[0].p,pz=prize7(k);ap(w,pz);const cu=window.CU&&CU.did;if(window.CU)CU.did=false;if(!cu&&w!==S&&roll(BAL.fest.winBestow))try{bestow(w,"contest")}catch(e){}const j=j7s();j.fn++;if(w===S){j.win++;ghenAll(BAL.fest.winGhen);try{if(!cu&&roll(BAL.fest.winBestow))bestow(S,"contest")}catch(e){}}
+function cFin7(k,kind,L,shown){const w=L[0].p,pz=prize7(k);ap(w,pz);const cu=window.CU&&CU.did;if(window.CU)CU.did=false;if(!cu&&w!==S&&roll(30))try{bestow(w,"contest")}catch(e){}const j=j7s();j.fn++;if(w===S){j.win++;ghenAll(4);try{if(!cu&&roll(30))bestow(S,"contest")}catch(e){}}
  const mi=L.findIndex(x=>x.p===S);let me="";if(mi>0){if(mi<=2){apply({danh:1});me=` Ngươi hạng ${mi+1}: Danh +1.`}else me=` Ngươi hạng ${mi+1}/${L.length}.`;if(mi===L.length-1&&L.length>2){apply({danh:-1});me+=" Đứng chót: Danh -1."}}
  log(`${fName7(k)}: ${w===S?G7(`Ngươi đoạt giải ${SC7[kind].n}: ${pz7(pz)}.`):`${R7("Không thành:")} ${w.name} đoạt giải ${SC7[kind].n} (${pz7(pz)}).`}${me}`);
  if(!shown)Q.push({t:`${fShort7(k)} · Hội thi ${SC7[kind].n}: kết quả`,h:rowsH7(L,`${fName7(k)} · bảng phần thi`),who:pEmp(),must:1})}
-function fxFin7(title,L,shown){if(!L.length)return;const w=L[0].p;ap(w,BAL.fest.fxWin);const cu=window.CU&&CU.did;if(window.CU)CU.did=false;if(!cu&&roll(BAL.fest.fxBestow))try{bestow(w,"contest")}catch(e){}const mi=L.findIndex(x=>x.p===S);if(cu&&mi>=1&&mi<=2){apply({danh:1})}
- if(w===S){ghenAll(BAL.fest.fxGhen);log(`<span class="g">${title}: ${SC7[L[0].kind].n} của ngươi đứng đầu, Hoàng thượng ban thưởng.</span> ${pzd7(BAL.fest.fxWin)}.`)}
- else{let r=`${mi>=0?R7("Không thành:")+" ":""}${title}: ${w.name} dâng ${SC7[L[0].kind].n} đứng đầu (${pz7(BAL.fest.fxWin)}).${mi>=0?` Ngươi hạng ${mi+1}/${L.length}.`:""}`;if(mi>=0&&mi===L.length-1&&L.length>2){apply({danh:-1});r+=" Ngươi đứng chót: Danh -1."}log(r)}
+function fxFin7(title,L,shown){if(!L.length)return;const w=L[0].p;ap(w,{sung:8,danh:3});const cu=window.CU&&CU.did;if(window.CU)CU.did=false;if(!cu&&roll(50))try{bestow(w,"contest")}catch(e){}const mi=L.findIndex(x=>x.p===S);if(cu&&mi>=1&&mi<=2){apply({danh:1})}
+ if(w===S){ghenAll(8);log(`<span class="g">${title}: ${SC7[L[0].kind].n} của ngươi đứng đầu, Hoàng thượng ban thưởng.</span> Sủng +8 · Danh +3.`)}
+ else{let r=`${mi>=0?R7("Không thành:")+" ":""}${title}: ${w.name} dâng ${SC7[L[0].kind].n} đứng đầu (Sủng +8, Danh +3).${mi>=0?` Ngươi hạng ${mi+1}/${L.length}.`:""}`;if(mi>=0&&mi===L.length-1&&L.length>2){apply({danh:-1});r+=" Ngươi đứng chót: Danh -1."}log(r)}
  if(mi>=0&&!shown)Q.push({t:`${title}: kết quả`,h:rowsH7(L,`${title}: bảng phần thi`),who:pEmp(),must:1})}
 /* ---------- the old automatic feast contests (Yến tiệc đầu xuân, Thi tài ngày Thất tịch): now an invitation a month before, her talent of choice ---------- */
 const FX7={sac:{f:"xuan",n:"Yến tiệc đầu xuân",m:1,arts:["mua","hat","dan"]},tai:{f:"tt",n:"Thi tài ngày Thất tịch",m:7,arts:["dan","tho","kim"]}};
@@ -9890,7 +9888,7 @@ function fxBest7(p,A){let b=A[0],v=-1;for(const a of A){const x=SC7[a].f(p);if(x
 function fxOdds7(F,art,meB,seed){const E=[S].concat(liveRivals(true).filter(present7));const r=rng7(seed);let w=0;const N=500;const base=E.map(p=>p===S?SC7[art].f(S)+meB:SC7[fxBest7(p,F.arts)].f(p));
  for(let t=0;t<N;t++){let b=-1,bi=-1;for(let i=0;i<E.length;i++){const x=base[i]+r()*J71.luck;if(x>b){b=x;bi=i}}if(bi===0)w++}return cl(Math.round(100*w/N),3,97)}
 PEND.j71x=pp=>{if(!S)return null;const F=FX7[pp.kk];if(!F)return null;const n=liveRivals(true).filter(present7).length;const best=fxBest7(S,F.arts);
- const gain=`thành: đứng đầu, ${pz7(BAL.fest.fxWin)}, có thể được ban thưởng`,lose="hỏng: đứng chót thì Danh -1",kem=`kèm: ngày hội tốn Sức -6, đứng đầu thì các phi tần ghen +${BAL.fest.fxGhen}`;
+ const gain="thành: đứng đầu, Sủng +8, Danh +3, có thể được ban thưởng",lose="hỏng: đứng chót thì Danh -1",kem="kèm: ngày hội tốn Sức -6, đứng đầu thì các phi tần ghen +8";
  const set=(a,pr)=>()=>{const j=j7s();j.fx=j.fx||{};j.fx[F.f]={y:pp.y,a,pr};log(a?`${F.n}: ngươi ghi tên dâng ${SC7[a].n}${pr?", bỏ bạc mời thầy kèm":""}.`:`${F.n}: ngươi không ghi tên.`)};
  const o=F.arts.map(a=>({n:`Ghi tên dâng ${SC7[a].n} (theo ${SC7[a].by})`,fx:{},od:fxOdds7(F,a,0,pp.sd),x:`${word(fxOdds7(F,a,0,pp.sd))} · ${gain} · ${lose} · ${kem}`,go:set(a,0)}));
  o.push({n:`Dâng ${SC7[best].n}, bỏ bạc mời thầy kèm trước`,fx:{bac:-30},od:fxOdds7(F,best,J71.prep,pp.sd),x:`${word(fxOdds7(F,best,J71.prep,pp.sd))} · ${gain} · ${lose} · ${kem}`,go:set(best,1)});
@@ -9903,13 +9901,13 @@ function fxInvite7(){const j=j7s();for(const kk in FX7){const F=FX7[kk];const m0
   const E=liveRivals(true).filter(present7);if(me)E.unshift(S);if(E.length<2)return "";if(me)me.done=1;
   const meB=me?(me.pr?J71.prep:0)+(me.pb||0):0;
   if(me&&mgOn7()){Q.push({ev:1,t:`${title}`,h:`<p>Ngày ${title}. Ngươi đã ghi tên dâng ${SC7[me.a].n}; phần của ngươi = phần tự chơi, cộng thêm theo tài nghệ (${det7(me.a,S)}) và chuẩn bị +${meB}.</p>`,who:pEmp(),must:1,
-    opts:[{n:"Vào thi (tự chơi phần thi)",fx:{suc:-J71.cost},x:`đứng đầu, ${pz7(BAL.fest.fxWin)}, kèm vật quý và bạc theo hạng · hạng nhì hoặc ba: Danh +1 và quà nhỏ · hỏng: đứng chót thì Danh -1 · kèm: đứng đầu thì các phi tần ghen +${BAL.fest.fxGhen}`,go:()=>mgRun7({title,big:true,fk:F.f,art:me.a,E,kindOf:p=>p===S?me.a:fxBest7(p,F.arts),pr:[],meB,stakes:stk7(BAL.fest.fxWin,BAL.fest.fxBestow),done:(L,sh)=>fxFin7(title,L,sh)})},
+    opts:[{n:"Vào thi (tự chơi phần thi)",fx:{suc:-J71.cost},x:"đứng đầu, Sủng +8, Danh +3, kèm vật quý và bạc theo hạng · hạng nhì hoặc ba: Danh +1 và quà nhỏ · hỏng: đứng chót thì Danh -1 · kèm: đứng đầu thì các phi tần ghen +8",go:()=>mgRun7({title,big:true,fk:F.f,art:me.a,E,kindOf:p=>p===S?me.a:fxBest7(p,F.arts),pr:[],meB,stakes:stk7({sung:8,danh:3},50),done:(L,sh)=>fxFin7(title,L,sh)})},
      {n:"Bỏ thi",fx:{},x:"không được không mất",go:()=>fxFin7(title,cScore7(E.filter(p=>p!==S),p=>fxBest7(p,F.arts),[],0))}]});return ""}
   if(me)apply({suc:-J71.cost});
-  const L=cScore7(E,p=>p===S?me.a:fxBest7(p,F.arts),[],meB);const w=L[0].p;ap(w,BAL.fest.fxWin);if(roll(BAL.fest.fxBestow))try{bestow(w,"contest")}catch(e){}
+  const L=cScore7(E,p=>p===S?me.a:fxBest7(p,F.arts),[],meB);const w=L[0].p;ap(w,{sung:8,danh:3});if(roll(50))try{bestow(w,"contest")}catch(e){}
   let r="";const mi=L.findIndex(x=>x.p===S);
-  if(w===S){ghenAll(BAL.fest.fxGhen);r=`<span class="g">${title}: ${SC7[me.a].n} của ngươi đứng đầu, Hoàng thượng ban thưởng.</span> ${pzd7(BAL.fest.fxWin)}. `}
-  else{r=`${title}: ${w.name} dâng ${SC7[L[0].kind].n} đứng đầu (${pz7(BAL.fest.fxWin)}).${mi>=0?` Ngươi hạng ${mi+1}/${L.length}.`:""} `;if(mi>=0&&mi===L.length-1&&L.length>2){apply({danh:-1});r+="Ngươi đứng chót: Danh -1. "}}
+  if(w===S){ghenAll(8);r=`<span class="g">${title}: ${SC7[me.a].n} của ngươi đứng đầu, Hoàng thượng ban thưởng.</span> Sủng +8 · Danh +3. `}
+  else{r=`${title}: ${w.name} dâng ${SC7[L[0].kind].n} đứng đầu (Sủng +8, Danh +3).${mi>=0?` Ngươi hạng ${mi+1}/${L.length}.`:""} `;if(mi>=0&&mi===L.length-1&&L.length>2){apply({danh:-1});r+="Ngươi đứng chót: Danh -1. "}}
   if(me)Q.push({t:`${title}: kết quả`,h:rowsH7(L,`${title}: bảng phần thi`),who:pEmp(),must:1});
   /* j54: married daughters come back, princesses perform (same as before) */
   try{const V=[];h54Daus().forEach(([k,p])=>{if(k.hW&&k.hW.kind!=="hoa"&&h54Live(p)){k.hM=cl(k.hM+2,0,100);if((k.hW.joy||50)>=40){ap(p,{sung:1});if(p===S)V.push(h54Name(k))}}});
@@ -11422,6 +11420,13 @@ function k61Pub(e){if(!e||!S)return false;if(e===S.emp)return true;if(S.thO&&e==
 function k61IsKid(e){return !!(e&&typeof e==="object"&&(e.sex==="m"||e.sex==="f")&&"fond" in e&&allKids().some(([k])=>k===e))}
 function k61SeedChiTon(){try{if(!S||!S.known)return;if(S.emp){const k=kOf61(S.emp);if((+S.known[k]||0)<2)S.known[k]=2}if(!S.thDead){S.thO=S.thO||{};const k=kOf61(S.thO);if((+S.known[k]||0)<2)S.known[k]=2}}catch(e){}}
 function k61Named(e){return k61St(e)>=2||k61Pub(e)}
+/* co-op friend (owner OD:L165: "Người lạ" until met, reborn = unknown again; OD:L1061 header chip): while she has not met the friend, ONE label everywhere —
+   the owner's wording (OD:L1060 "hảo hữu của ta", = the header chip + panel title in jcooptimer): "Hảo hữu của ta" (no rank, no "???"); met -> her real name (k61Named) */
+const K61FR="Hảo hữu của ta";
+function k61Coop(e){try{return !!(e&&e.coop&&!k61Named(e))}catch(x){return false}}
+/* the friend can sit in rivals OR in a consort's staff (guest maid): look in the whole world, not only rivals */
+function k61CoopEnt(){try{return k61All().find(e=>e&&e.coop)||null}catch(x){return null}}
+window.k61Coop=k61Coop;window.k61CoopEnt=k61CoopEnt;window.K61FR=K61FR;
 function kitKnown(p){try{const e=k61PortEnt(p);return e?isKnown61(e):true}catch(e){return true}}
 function kitKnownName(p){try{const e=k61PortEnt(p);return e?k61Named(e):true}catch(e){return true}}
 /* the ONE helper for a list of people printed in a line: names she knows (fmt(v), default the name) + "thêm N vị chưa quen biết" for the rest -
@@ -11510,14 +11515,14 @@ function k61StChip(st){const w=K61STW[st]||K61STN[st];return chip(typeof kitGlos
   if(!pop)G.unshift(["Làm quen",[k61AskBtn(e)]]);
   const chips=[k61StChip(st)].concat((o.chips||[]).filter(c=>c&&/class="chip loc/.test(c)));
   const how=st===0?"Chào hỏi khi gặp mặt, hỏi người hầu, hoặc sai tai mắt dò la thì mới biết.":"Đã thấy mặt, chưa biết tên: hỏi danh tính khi gặp, hỏi người hầu hoặc dò la.";
-  return c0.call(this,Object.assign({},o,{name:"???",rank:k61Cap(k61Desc(e)),ghen:null,lines:[`<span class="past">${K61WHY}. ${how}</span>`],chips,groups:G,note:o.note&&pop?o.note:"",empty:o.empty}))}
+  return c0.call(this,Object.assign({},o,{name:k61Coop(e)?K61FR:"???",rank:k61Cap(k61Desc(e)),ghen:null,lines:[`<span class="past">${K61WHY}. ${how}</span>`],chips,groups:G,note:o.note&&pop?o.note:"",empty:o.empty}))}
  if(e&&st<=2&&e!==S)return k61Pass(o.f,()=>c0.call(this,Object.assign({},o,{ghen:null,lines:[`<span class="past">Mới biết tên: tính nết, sủng ái, quan hệ chưa rõ. Trò chuyện thêm hoặc dò la để quen biết.</span>`],chips:[k61StChip(2)].concat((o.chips||[]).filter(c=>c&&/class="chip loc/.test(c)))})));
  if(e&&e!==S&&S&&S.known&&e!==S.maid&&!(S.staff||[]).includes(e)&&!(S.kids||[]).includes(e))return c0.call(this,Object.assign({},o,{chips:[k61StChip(3)].concat(o.chips||[])}))}catch(x){console.error(x)}return c0.apply(this,arguments)}})();
 /* face strips: the label is the descriptor */
-(function(){const p0=pager;pager=function(key,items,mk){try{items=items.map(t=>{const e=t&&k61PortEnt(t.f);return e&&!k61Named(e)?Object.assign({},t,{name:isKnown61(e)?"???":"Người lạ"}):t})}catch(x){}return p0.call(this,key,items,mk)}})();
+(function(){const p0=pager;pager=function(key,items,mk){try{items=items.map(t=>{const e=t&&k61PortEnt(t.f);return e&&!k61Named(e)?Object.assign({},t,{name:k61Coop(e)?K61FR:isKnown61(e)?"???":"Người lạ"}):t})}catch(x){}return p0.call(this,key,items,mk)}})();
 /* place screen tags */
 function k61VisEnt(p){if(!p||p.kind==="chest")return null;try{return k61PortEnt(pFaceOf(p))}catch(e){return null}}
-(function(){const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);try{const ppl=curPeople();document.querySelectorAll("#tokens .tok").forEach(b=>{const p=ppl[+b.dataset.p];const e=k61VisEnt(p);if(e&&!k61Named(e)){const t=b.querySelector(".tag");if(t)t.textContent=isKnown61(e)?"???":"Người lạ"}else if(e&&k61NoFace(e)){const t=b.querySelector(".tag");if(t&&t.textContent==="Người lạ"&&p.name)t.textContent=p.name}})}catch(e){}return r}})();
+(function(){const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);try{const ppl=curPeople();document.querySelectorAll("#tokens .tok").forEach(b=>{const p=ppl[+b.dataset.p];const e=k61VisEnt(p);if(e&&!k61Named(e)){const t=b.querySelector(".tag");if(t)t.textContent=k61Coop(e)?K61FR:isKnown61(e)?"???":"Người lạ"}else if(e&&k61NoFace(e)){const t=b.querySelector(".tag");if(t&&t.textContent==="Người lạ"&&p.name)t.textContent=p.name}})}catch(e){}return r}})();
 /* talking face to face: a stranger first; greeting (1 khắc, sure) reveals both ways and leaves the talk open */
 let K61RAW=false;(function(){const d0=directActs;directActs=function(){K61RAW=true;try{return d0.apply(this,arguments)}finally{K61RAW=false}}})();
 (function(){const t0=talkOpts;talkOpts=function(p){const A=t0.apply(this,arguments);if(K61RAW)return A;try{const e=k61VisEnt(p);const st=e?k61St(e):3;if(e&&st<2){const k=k61Kind(e);const big=k==="emp"||k==="th";const riv=(rivals||[]).includes(e);
@@ -11612,7 +11617,7 @@ function k61MaskT(e){const k=k61Kind(e);if(k==="consort")return e.out?"Phế phi
  if(k==="tq")return"Tổng quản thái giám";if(k==="eun")return"thái giám";if(k==="phys")return"thái y";if(k==="maid")return"cung nữ";if(k==="mama")return"ma ma";
  if(k==="off")return(typeof TDOFF!=="undefined"&&TDOFF[e.c])||"quan";if(k==="kid")return e.sex==="m"?"Hoàng tử":"Công chúa";
  if(k==="man"){const r=e.role;return r&&!/^(Công tử|Nam nhân)$/i.test(r)?r:"công tử"}return"người"}
-function k61Mask(e,before,plain){const t=k61MaskT(e);if(plain)return `một vị ${t} chưa quen biết`;/* plain = prose/log wording (no literal ???; name-mask) */const b=String(before||"").replace(/\s+$/,"").toLowerCase();return b.endsWith(t.toLowerCase())?"???":`${t} ???`}
+function k61Mask(e,before,plain){if(k61Coop(e))return K61FR;const t=k61MaskT(e);if(plain)return `một vị ${t} chưa quen biết`;/* plain = prose/log wording (no literal ???; name-mask) */const b=String(before||"").replace(/\s+$/,"").toLowerCase();return b.endsWith(t.toLowerCase())?"???":`${t} ???`}
 /* public announcements (thẻ bài lật, sớ hặc tội at court, thánh chỉ, tấn phong / giáng / phế, births): everyone named in them
    becomes known by name and title (stage 2) the moment it is announced */
 const K61ANN=/thẻ bài của|sớ hặc tội|thánh chỉ|sắc phong|tấn phong|được phong|phong (?:Hoàng quý phi|Quý phi|Phi|Tần|Quý nhân|Thường tại|Đáp ứng) |lập .{1,60}? làm (Hoàng hậu|Thái tử|Hoàng quý phi)|bị giáng|giáng xuống|bị phế|xướng tên|hạ sinh|băng hà/i;
@@ -11648,7 +11653,7 @@ function k61SilChip(k,n){const L=k61SexAt(k);while(L.length<n)L.push("f");const 
 
 /* kit names for strangers: j79's kitName/kitPersonLine draw "<title> ???" (rank colour kept: the dress shows the rank) */
 setTimeout(()=>{try{if(typeof kitName!=="function")return;const n0=kitName;kitName=function(p,o){try{if(p&&p!==S&&S&&S.known){const e=k61PortEnt(p)||p;
-  if(e&&k61All().includes(e)&&!k61Named(e)){const t=o&&o.noTitle?"":k61MaskT(e);return `<b class="kname" style="--rc:${typeof kitPersonCol==="function"?kitPersonCol(e):"#8a7350"}">${t?`<span class="kti" style="--rt:${kitRtOf(t)}">${k61Cap(t)}</span> `:""}???</b>`}}}catch(x){}return n0.apply(this,arguments)}}catch(e){}},0);
+  if(e&&k61All().includes(e)&&!k61Named(e)){if(k61Coop(e))return `<b class="kname" style="--rc:${typeof kitPersonCol==="function"?kitPersonCol(e):"#8a7350"}">${K61FR}</b>`;const t=o&&o.noTitle?"":k61MaskT(e);return `<b class="kname" style="--rc:${typeof kitPersonCol==="function"?kitPersonCol(e):"#8a7350"}">${t?`<span class="kti" style="--rt:${kitRtOf(t)}">${k61Cap(t)}</span> `:""}???</b>`}}}catch(x){}return n0.apply(this,arguments)}}catch(e){}},0);
 /* ---- kit review (FAIL 11/14): a NAME she knows is never hidden. Stage 2 "Biết tên" and the public figures (Hoàng thượng, Thái hậu,
    Hoàng hậu) whose face she has not seen yet: grey silhouette in the grey stone frame (j60), but the name stays (card name, strip,
    stage tag, kitName, podium) and the frame label is the title (tước) instead of "Người lạ". Only stage 0 reads "Người lạ" (j60) or
@@ -12982,6 +12987,9 @@ function kpIdLay(M){try{const im=M.querySelector(":scope > img.kidfig2"),d=M.que
  let left=Math.round((colL+colW/2)-((fb.l+fb.r)/2)*iw);const top=Math.round(floor-fb.b*ih);
  Object.assign(im.style,{left:left+"px",top:top+"px",bottom:"auto",width:Math.round(iw)+"px",height:Math.round(ih)+"px",objectFit:"fill"});
  im.style.removeProperty("-webkit-mask-image");im.style.removeProperty("mask-image");
+ /* review/fig-cutout-code: the HD twin is picked from `sizes` (jfighd kitFigHD); refresh it to the width just set, or a stale smaller
+    width left from an earlier layout keeps the 900 px file and the browser upscales her face */
+ try{if(typeof kitFigHD==="function")kitFigHD(im)}catch(e){}
  M.dataset.kidcol=colL+","+colR}catch(e){console.error("kpIdLay",e)}}
 /* review/newgame-ui (perf budget 22:35Z "one shared Pixi layer, paused when hidden"): while a full-screen scene panel (identity card,
    opening story, title — .modal.kpscene with its painted backdrop) or the Luân hồi deck covers the stage, the stage Pixi layer stops
@@ -13329,8 +13337,9 @@ function kitRankText(h){try{const re=kitRpRx();if(!re||!h)return h;return kpMapT
 window.kitRankText=kitRankText;
 function kitRankPaint(root){try{if(!root||typeof S==="undefined"||!S)return 0;const re=kitRpRx();if(!re)return 0;
  if(root.nodeType===3)root=root.parentElement;if(!root||root.nodeType!==1||!root.isConnected)return 0;if(root.closest(KIT_RP_SKIP))return 0;
- const W=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:n=>{const p=n.parentElement;if(!p||/^(SCRIPT|STYLE|TEXTAREA|INPUT|OPTION|SELECT|TITLE)$/.test(p.tagName)||p.closest(KIT_RP_SKIP))return NodeFilter.FILTER_REJECT;
-  re.lastIndex=0;return re.test(n.nodeValue)?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT}});
+ const W=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:n=>{/* review/lag-play-2: the cheap name test first; the ancestor walk (closest) only for the few text nodes that hold a name */
+  re.lastIndex=0;if(!re.test(n.nodeValue))return NodeFilter.FILTER_REJECT;const p=n.parentElement;
+  return !p||/^(SCRIPT|STYLE|TEXTAREA|INPUT|OPTION|SELECT|TITLE)$/.test(p.tagName)||p.closest(KIT_RP_SKIP)?NodeFilter.FILTER_REJECT:NodeFilter.FILTER_ACCEPT}});
  const L=[];while(W.nextNode())L.push(W.currentNode);let k=0;
  for(const n of L){const v=n.nodeValue;re.lastIndex=0;let m,last=0;const f=document.createDocumentFragment();
   while((m=re.exec(v))){const h=kitRpOne(m[1],m[2],m[3],m[4]);if(!h)continue;if(m.index>last)f.appendChild(document.createTextNode(v.slice(last,m.index)));
@@ -13362,7 +13371,7 @@ window.kitMarkPaint=kitMarkPaint;
 function kitNameTone(root){try{if(!root||root.nodeType!==1)return;const L=root.matches&&root.matches(".kname")?[root]:[];root.querySelectorAll&&L.push(...root.querySelectorAll(".kname"));
  for(const n of L){if(n.style.getPropertyValue("--rtn")||n.classList.contains("kmy")||n.classList.contains("kme"))continue;const t=n.querySelector(":scope>.kti");const v=t&&t.style.getPropertyValue("--rt");if(v)n.style.setProperty("--rtn",v)}}catch(e){}}
 window.kitNameTone=kitNameTone;
-(function(){let q=0;const R=new Set();const run=()=>{q=0;const L=[...R];R.clear();for(const r of L){kitRankPaint(r);kitNameTone(r);kitMarkPaint(r)}};
+(function(){let q=0;const R=new Set();const run=()=>{q=0;const L=[...R].filter(n=>n&&n.isConnected);R.clear();/* review/lag-play-2: a root inside another queued root is walked once */for(const r of L)if(!L.some(m=>m!==r&&m.contains(r))){kitRankPaint(r);kitNameTone(r);kitMarkPaint(r)}};
  const mo=new MutationObserver(ms=>{for(const m of ms){if(m.type==="characterData")R.add(m.target.parentElement);else m.addedNodes.forEach(x=>R.add(x.nodeType===3?x.parentElement:x))}
   if(!q&&R.size)q=requestAnimationFrame(run)});
  const go=()=>{try{mo.observe(document.body,{childList:true,subtree:true,characterData:true})}catch(e){}kitRankPaint(document.body);kitNameTone(document.body);kitMarkPaint(document.body)};
@@ -15501,18 +15510,17 @@ function startContest(o){o=o||{};if(typeof S==="undefined"||!S){if(o.onDone)o.on
   all.push({who:S,p:S,me:1,id:"me",name:S.name,score,sub:`màn thi ${raw}/10 (${skill}) + tài nghệ ${talent}${prep?` + chuẩn bị ${prep}`:""}`});
   const ord=all.filter(x=>!x.me).sort((a,b)=>b.score-a.score);ord.splice(place-1,0,all[all.length-1]);
   /* real prizes by place (jcui, BAL.cp): themed item + bạc + chest + title + Emperor's gift; NPC winners are paid the same */
-  /* co-op shared board (jcoopcontest.js, o.hold): the host ranks both players + NPCs once; no prize and no place here until that one list comes */
-  let cup=null;if(!o.hold)try{if(typeof cuAward==="function")cup=cuAward(o,ord,place,of,kind)}catch(e){console.error(e)}
-  const st=o.hold?null:(o.stakes||null);let gains=[],losses=[];if(st){if(place===1)gains=kg82Norm(st.win);else if(place<=3)gains=kg82Norm(st.top3);if(place===of&&of>2)losses=kg82Norm(st.last);losses=losses.concat(kg82Norm(st.paid));
+  let cup=null;try{if(typeof cuAward==="function")cup=cuAward(o,ord,place,of,kind)}catch(e){console.error(e)}
+  const st=o.stakes||null;let gains=[],losses=[];if(st){if(place===1)gains=kg82Norm(st.win);else if(place<=3)gains=kg82Norm(st.top3);if(place===of&&of>2)losses=kg82Norm(st.last);losses=losses.concat(kg82Norm(st.paid));
    const neg=gains.filter(x=>x[1]<0);gains=gains.filter(x=>x[1]>0);losses=losses.concat(neg);
    if(o.applyStakes){const ob={};const add=s=>{if(s&&!Array.isArray(s))for(const k in s)ob[k]=(ob[k]||0)+s[k]};if(place===1)add(st.win);else if(place<=3)add(st.top3);if(place===of&&of>2)add(st.last);try{apply(ob)}catch(e){}}}
   if(cup&&cup.mine&&cup.mine.bac)gains.push(["Bạc",cup.mine.bac]);
-  const pw=o.hold?`Tạm đứng thứ ${place}`:(["Nhất","Nhì","Ba"][place-1]||`Hạng ${place}`);
+  const pw=["Nhất","Nhì","Ba"][place-1]||`Hạng ${place}`;
   const sRows=[["Màn thi",skipped?`${raw}/10 (để tài nghệ quyết định) → ${kg82Plain(kg82Chip("cộng",skill,"g"))}`:`${raw}/10 · ${kg82Word(raw)} → cộng ${skill}`,"t"]].concat(tRows,prep?[["Chuẩn bị",kg82Chip("cộng",prep,"g")]]:[],[["Tổng",`<b>${score}</b> phần`,"t"]]);
   const stand=kg82Facts(ord.map((x,i)=>({who:x.who,auto:false,text:`<span class="kgrow"><span><b class="kgpl">${i+1}.</b> ${kg82Name(x.p,x.name)}</span><b>${x.score}</b></span><small>${x.sub}</small>`})));
   const tail=typeof kitGameResult==="function"?kitGameResult({place:pw,of,gains,losses,note:st&&st.note?st.note:(!st?"Thưởng phạt của hội thi ghi ở bảng kế tiếp.":"")}):
    kg82Rows([["Hạng",`${pw} / ${of}`,"t"],["Được",gains.map(x=>kg82Chip(x[0],x[1],"g"))],["Mất",losses.map(x=>kg82Chip(x[0],x[1],"r"))]]);
-  const note=o.hold?(o.holdNote||"Bảng định thứ chung và thưởng phạt báo ở bảng kế tiếp."):st&&st.note?st.note:(!st?"Thưởng phạt của hội thi ghi ở bảng kế tiếp.":"");
+  const note=st&&st.note?st.note:(!st?"Thưởng phạt của hội thi ghi ở bảng kế tiếp.":"");
   const tParts=partsOk?me.parts:[[`Tài nghệ${o.talentBy?` (${o.talentBy})`:""}`,talent]];
   const kitRes=typeof kitGameResult==="function"?kitGameResult({parts:[["Màn thi",skipped?`Để tài nghệ quyết định, ${raw}/10 → +${skill}`:`${kg82Word(raw)} ${raw}/10 → +${skill}`]].concat(tParts.map(([l,v])=>[l,`+${v}`]),prep?[["Chuẩn bị",`+${prep}`]]:[]),
    total:`${score} phần`,place:pw,of,rivals:ord.map(x=>({who:x.p||x.who,score:x.score,sub:x.sub})),gains,losses,note,extra:cup&&cup.html}):null;
@@ -17153,9 +17161,14 @@ function onePop(h,ttl,b){if(!h)return h;const seg=h.split("<br>");if(seg.length<
  return out.join("<br>")}
 /* pop card: numbers read live (the visit list keeps a snapshot "lòng 97") */
 try{const pc0=popCard;popCard=function(p){try{if(p&&p.info){if(p.kind==="maid"&&S.maid)p.info=p.info.replace(/lòng -?\d+/,"lòng "+S.maid.loyal);if(p.kind==="th")p.info=p.info.replace(/lòng -?\d+/,"lòng "+S.th)}}catch(e){}return pc0.apply(this,arguments)}}catch(e){}
-function nrDOM(){try{fixTitles()}catch(e){}try{fixHud2()}catch(e){console.error(e)}try{fixStage()}catch(e){console.error(e)}try{fixPanel()}catch(e){console.error(e)}try{fixModal()}catch(e){console.error(e)}}
+/* review/lag-play-2: fixTitles only drops tooltips (no visible change) but reads scrollWidth = a forced layout in the middle of a render;
+   it now runs once in the next frame, after every write of the render is done (one layout, the one the paint needs anyway). */
+let nrTT=0;function fixTitlesSoon(){if(nrTT)return;nrTT=requestAnimationFrame(()=>{nrTT=0;try{fixTitles()}catch(e){}})}
+function nrDOM(){try{fixTitlesSoon()}catch(e){}try{fixHud2()}catch(e){console.error(e)}try{fixStage()}catch(e){console.error(e)}try{fixPanel()}catch(e){console.error(e)}try{fixModal()}catch(e){console.error(e)}}
 window.nrDOM=nrDOM;
-const W=o=>function(){const r=o.apply(this,arguments);nrDOM();return r};
+/* review/lag-play-2: nrDOM ran after renderHUD, renderHud2, renderStage, renderPanel AND render (5x per render, each a full DOM pass).
+   Nested calls now only count; the outermost wrapped call runs it once, when everything inside has been drawn (same end state). */
+let nrDepth=0;const W=o=>function(){nrDepth++;let r;try{r=o.apply(this,arguments)}finally{nrDepth--}if(!nrDepth)nrDOM();return r};
 try{renderHUD=W(renderHUD)}catch(e){}try{if(typeof renderHud2==="function")renderHud2=W(renderHud2)}catch(e){}
 try{renderStage=W(renderStage)}catch(e){}try{renderPanel=W(renderPanel)}catch(e){}try{showModal=W(showModal)}catch(e){}try{render=W(render)}catch(e){}
 /* tab / strip clicks re-render through these, but some handlers patch the DOM afterwards */
@@ -24596,12 +24609,13 @@ function kitHdFit(){try{const hd=document.querySelector("header.hud");if(!hd)ret
  bad=hd.scrollWidth>hd.clientWidth+1||!!(tc&&tt&&tc.offsetParent&&tt.scrollWidth>tc.clientWidth+1)||kitHdClash(hd,tc);if(bad)window.__khd2=true}
  hd.classList.toggle("khd2",bad);try{window.kitSealHud&&kitSealHud()}catch(e){}if(had!==bad){try{const hb=hd.getBoundingClientRect();document.documentElement.style.setProperty("--k3hb",Math.round(hb.bottom)+"px");window.j59lay&&j59lay()}catch(e){}}}catch(e){}}
 window.kitHdFit=kitHdFit;
+/* review/lag-play-2: inside a render (window.__rdep, jlag2) the fit runs once at the end of render (next line), not mid-render */
 /* KIT §0 one page (design-scale p2): the time block (one wrapping row of whole items, CSS above) must not be taller than her name block, else
    the top bar — and so the page box under it — would be taller than the spread's. When a long day (state chips, a long weather or quẻ)
    still overflows, the whole block is scaled down together (zoom steps of 5 %, never below 80 %), like the tab bar's one font size. */
 function kitTcFit(hd){try{const tc=document.getElementById("k3tc"),me=hd.querySelector(":scope>.me");if(!tc||!me||!tc.offsetParent)return;
  tc.style.zoom="";const lim=me.offsetHeight+1;let z=1;while(tc.offsetHeight>lim&&z>.8){z=+(z-.05).toFixed(2);tc.style.zoom=String(z)}}catch(e){}}
-if(typeof renderHUD==="function"){const r0=renderHUD;renderHUD=function(){const r=r0.apply(this,arguments);kitHdFit();return r}}
+if(typeof renderHUD==="function"){const r0=renderHUD;renderHUD=function(){const r=r0.apply(this,arguments);if(!window.__rdep)kitHdFit();return r}}
 if(typeof render==="function"){const r1=render;render=function(){const r=r1.apply(this,arguments);kitHdFit();return r}}
 addEventListener("resize",()=>{clearTimeout(window.__khdf);window.__khdf=setTimeout(kitHdFit,40)});
 try{document.fonts&&document.fonts.ready.then(kitHdFit)}catch(e){}
@@ -26913,7 +26927,7 @@ window.thyNpcMonth=npcMonth;
      COOP.join(code) → Promise {room}   check (GET /api/room/<code>) + connect; rejects {code:"noroom"|"full"|"net"}
      COOP.resume()   → Promise|null     reconnect to the last room of this browser (localStorage "ctm-coop-room")
      COOP.leave(keep)                   close (no reconnect); forgets the room unless keep (then "Trở lại phòng" offers it)
-     COOP.send(obj) or COOP.send(t, fields)   one protocol message; gzip binary frame above 200 KB. false if not open.
+     COOP.send(obj) or COOP.send(t, fields)   one protocol message; gzip binary frame above 8 KB, sent in order. false if not open.
      COOP.on(t, fn) / COOP.off(t, fn)   server messages by their t: room presence state week said error pong;
                                         local events: "status" (COOP.state changed), "both" (both seats online, first time
                                         per connection), "start" (lobby hands over to the game), "peer" (friend online flag
@@ -26927,7 +26941,7 @@ window.thyNpcMonth=npcMonth;
 (function(){try{
 const LS={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}},del(k){try{localStorage.removeItem(k)}catch(e){}}};
 const DEF_URL="https://ctm-coop.victoria-tntt.workers.dev";
-const BIG=200000,PING=10000,SILENT=25000,BACK=[1000,2000,4000,8000,10000];
+const PING=10000,SILENT=25000,BACK=[1000,2000,4000,8000,10000];
 const H={};
 const st={status:"off",room:"",you:"",seats:null,week:0,ended:{a:false,b:false},C:null,mine:null,msv:0,peerOnline:false,bothIn:false,playing:false};
 let ws=null,want=false,tries=0,tmr=0,pinger=0,lastRx=0,pend=null,both=false;
@@ -26954,7 +26968,7 @@ async function gunz(buf){const ds=new DecompressionStream("gzip");const w=ds.wri
 async function rx(ev){lastRx=Date.now();let m;
  try{const txt=typeof ev.data==="string"?ev.data:await gunz(ev.data instanceof Blob?await ev.data.arrayBuffer():ev.data);m=JSON.parse(txt)}catch(e){console.error("COOP bad frame",e);return}
  if(!m||!m.t)return;
- if(m.t==="room"){tries=0;LS.set("ctm-coop-room",m.code||st.room);set({status:"open",room:m.code||st.room,you:m.you,seats:m.seats,week:m.week||0,ended:m.ended||st.ended,C:m.state===undefined?st.C:m.state,mine:m.mine||null,msv:m.msv||0});
+ if(m.t==="room"){tries=0;LS.set("ctm-coop-room",m.code||st.room);set({status:"open",room:m.code||st.room,you:m.you,seats:m.seats,week:m.week||0,ended:m.ended||st.ended,C:m.state===undefined?st.C:m.state,mine:m.mine||null,msv:m.msv||0,caps:Array.isArray(m.caps)?m.caps:[]});
   if(pend){pend.res({room:st.room,you:st.you});pend=null}}
  else if(m.t==="presence")set({seats:m.seats,ended:m.ended||st.ended,week:m.week!=null?m.week:st.week});
  else if(m.t==="state")set({C:m.state,week:m.week!=null?m.week:st.week});
@@ -26997,8 +27011,17 @@ function leave(keep){want=false;clearTimeout(tmr);clearInterval(pinger);if(!keep
  const was=st.playing;both=false;set({status:"off",room:"",you:"",seats:null,week:0,ended:{a:false,b:false},C:null,mine:null,msv:0,playing:false});
  /* the co-op game is over on this device (Về màn đầu / ‹ Lui): the world module must hand save() etc. back to single-player */
  if(was)emit("stop",{})}
+/* review/lag-play-2: frames above GZ (8 KB) go gzip (the Worker gunzips any binary frame), and every send goes through ONE ordered queue,
+   so a small message never overtakes a bigger one still being compressed (end → unend, seat → bend keep their order). */
+/* review/lag-play-2-r1: COOP.send(obj,true) = URGENT (page hide / close): no gzip (compression is async and a page being hidden or closed may
+   never get to the send); when nothing is queued it goes out at once, in this call, like before (frames up to 200 KB went plain). */
+const GZ=8000,BIG=200000;let sendQ=Promise.resolve(),sendN=0;
 async function send(t,f){const o=typeof t==="string"?Object.assign({t},f||{}):t;if(!ws||ws.readyState!==1)return false;
- const s=JSON.stringify(o);try{if(s.length>BIG&&typeof CompressionStream!=="undefined")ws.send(await gz(s));else ws.send(s);return true}catch(e){return false}}
+ const s=JSON.stringify(o),w=ws,now=typeof t!=="string"&&f===true;
+ if(now&&!sendN&&s.length<=BIG){try{w.send(s);return true}catch(e){return false}}
+ sendN++;const job=sendQ.then(async()=>{if(w!==ws||w.readyState!==1)return false;
+  try{if(s.length>(now?BIG:GZ)&&typeof CompressionStream!=="undefined"){const z=await gz(s);if(w!==ws||w.readyState!==1)return false;w.send(z)}else w.send(s);return true}catch(e){return false}});
+ sendQ=job.catch(()=>false).then(r=>{sendN--;return r});return job}
 /* coming back to the tab (phone woke up): reconnect at once instead of waiting out the backoff */
 /* owner 16/11 ("không thấy sang buổi"): a phone that slept keeps a socket that LOOKS open (readyState 1) but is dead — a `bend` sent on it
    is lost and the server drops the seat after 45 s ("Hảo hữu đã rời cuộc"). On return: reconnect at once when the socket is closed, she was
@@ -27168,11 +27191,17 @@ window.COOP_LOBBY={open,fz,check,hostPick};
    COOPW.attach() can be called by any route that builds a fresh S (e.g. tiểu thư ngoài cung) to drop it into the shared world.
    Save: in co-op, save() keeps the slots untouched and stores the canonical C in localStorage "ctm-coop-last" (the room's DO is
    the real save). */
+/* ONE WORLD (owner co-op rule OD:L96; audit dev/handover/reports/coop-one-world.md): every shared world fact is computed ONCE, on the host.
+   worldOn() = true in single player and on the host seat, false on the co-op guest seat. EVERY world loop checks it (the guard table is
+   jcoopone.js, the last script; a few inline checks in j3/j8/j13). The guest computes only HER OWN person; the world comes from the host. */
+window.worldOn=function(){const c=window.COOPW;return !(c&&c.on&&c.seat!=="a")};
 (function(){try{
 if(typeof COOP!=="object")return;
-const W_KEYS=["year","month","tuan","turn","emp","thDead","thAge","thO","thF","court","wx","vacSince","trieu","storms","festDone","usedFaces","fidUsed","kidUsed","luxEdict","tn",  /* tn: B2 the Emperor's night (host) */
- /* coop-contest (jcoopcontest.js): the host's shared contest records — festival plans, boards + results, answers, the Tranh ghế mirror */
- "cfp","cfb","cfa","ctc","ctcRes"];
+/* thIll (Thái hậu illness), cm (Thái hậu / Hoàng hậu mood; her own "seen"/spy/drop part stays personal, CM_P), men (palace men; her own
+   ties to each man stay personal, MEN_P) + menG2 are WORLD keys since review/coop-one-world. Old rooms: the host's copy wins (HOST_ONLY). */
+const W_KEYS=["year","month","tuan","turn","emp","thDead","thAge","thO","thF","court","wx","vacSince","trieu","storms","festDone","usedFaces","fidUsed","kidUsed","luxEdict","tn","thIll","cm","men","menG2"];  /* tn: B2 the Emperor's night (host) */
+const HOST_ONLY=["tn","thIll","cm","men","menG2"];  /* tn: B2 the Emperor's night (host) */   /* the guest never writes these: her toCanon copies them from the room base */
+const CM_P=["seen","spy","thDrop","hhDrop"],MEN_P=["tinh","letters","trysts","knowsMe","af","grudge","grudgeN","debt","seen"];
 const REFF=["resHead","spyFor","lover","mid","owner","by","who","tgt","from","to"];   /* fields whose "me" value names the viewer */
 const STAT=["sung","danh","bac","suc","sac","tai","tamco","duc","th","hh","mat","confined","shield","block"];
 const LOOK=["face","fc","fk","fcKeep","fid","pid","age","sac","tai","tamco","duc","arts","pal","resHead","dress","ill","maid","lot","hieu","titleWorn","dh"];  /* hieu + titleWorn + dh: her hiệu and worn title show on the friend too (review/title-sys) */
@@ -27213,7 +27242,7 @@ function buildFriend(P,mine){if(!P||!P.S||P.dead||P.S.dead||friendHome(P))return
     Display copies only: what an act does to them goes to her through `res` (item / kid ops), never through the week write-back. */
  v.inv=bagOf(s.inv);v.kids=kidsCopy(s.kids);if(s.preg&&!s.hidden){v.preg=s.preg;if(s.fake)v.fake=s.fake}v.fx7=J((s.j71&&s.j71.fx)||null);
  mapMe(v,false,mp);v.id=fp();
- v.__b=J(Object.assign({},...STAT.map(k=>({[k]:v[k]})),{rel:v.rel,oan:v.oan,rl:v.rl,ro:v.ro,em:v.evm.me,out:v.out,rank:v.rank,queen:!!v.queen}));
+ v.__b=J(Object.assign({},...STAT.map(k=>({[k]:v[k]})),{rel:v.rel,oan:v.oan,rl:v.rl,ro:v.ro,em:v.evm.me,out:v.out,rank:v.rank,ill:v.ill||null}));
  return v}
 function buildFriendSrv(P){const s=P.S;return {sid:fp(),coop:true,name:P.name||s.name,role:"maid",fc:s.fc,fk:s.fk,face:0,hue:0,age:s.age||18,tr:"trung",loyal:60,
  spyFor:s.srv&&s.srv.spyFor!=null?(s.srv.spyFor===me()?"me":s.srv.spyFor):null/* p2 B1: whom she spies for (me = bought by me) */,lover:null,af:{},kn:1,imp:"hảo hữu chơi cùng",org:"hảo hữu chơi cùng"}}
@@ -27233,11 +27262,20 @@ function placeFriend(P){T("placeFriend "+(P&&P.name));pullFriend();if(!P)return;
  if(v.queen&&!qOn()){rivals.unshift(v)}else{if(v.queen)v.queen=false,v.rank=Math.min(v.rank,6);rivals.push(v)}}
 
 /* ---------- local game → canonical ---------- */
+/* split / join the personal part of the world keys cm and men (her own knowledge of the court mood, her own ties to each man) */
+function splitP(sS,P){if(sS.cm){const c={};for(const k of CM_P)if(sS.cm[k]!=null)c[k]=J(sS.cm[k]);P.cmP=c}
+ if(Array.isArray(sS.men)){const m={};for(const x of sS.men){if(!x||x.id==null)continue;const o={};for(const k of MEN_P)if(x[k]!=null)o[k]=J(x[k]);m[x.id]=o}P.menP=m}}
+function worldPart(k,v){v=J(v);if(k==="cm"&&v){for(const f of CM_P)delete v[f]}else if(k==="men"&&Array.isArray(v)){for(const x of v)if(x)for(const f of MEN_P)delete x[f]}return v}
+function joinP(sS,Pm){const c=Pm.cmP;if(sS.cm&&c)Object.assign(sS.cm,J(c));
+ const m=Pm.menP;if(Array.isArray(sS.men)&&m)for(const x of sS.men){const o=x&&m[x.id];if(o)Object.assign(x,J(o))}
+ if(Array.isArray(sS.men))for(const x of sS.men)if(x){/* defaults of her own ties to a man she never met */if(x.tinh==null)x.tinh=0;if(x.letters==null)x.letters=0;if(x.trysts==null)x.trysts=0;if(x.af==null)x.af=0;if(!x.knowsMe)x.knowsMe=[]}
+ delete sS.cmP;delete sS.menP}
 function myBlob(sS){const P={pid:me(),ok:S.origin&&S.origin.k,name:S.name,rank:S.rank,dead:!!S.dead,srv:!!(S.srv&&!S.srv.risen),life:CW.life,S:{}};
- for(const k in sS)if(!W_KEYS.includes(k))P.S[k]=sS[k];
+ for(const k in sS)if(!W_KEYS.includes(k))P.S[k]=sS[k];splitP(sS,P.S);
  if(sS.emp)P.S.empKnown=sS.emp.known||{};delete P.S.heir;/* p2 B2: the heir is the world key hr, resolved again on every rebuild */return P}
-function toCanon(){try{CW.hrSync&&CW.hrSync()}catch(e){console.error(e)}try{(CW.preCanon||[]).forEach(f=>f())}catch(e){console.error(e)}const L=(CW.pulled||[]).concat(pullFriend());let d;try{S.cev=S.cev||{};const f=L.find(x=>x[0]>=0);if(f)S.cev[fp()]=f[1].ev||0;d=ser()}finally{pushFriend(L.filter(x=>!(CW.pulled||[]).includes(x)))}
- const mp=me(),sS=d.S;const WS={};for(const k of W_KEYS)if(k in sS)WS[k]=J(sS[k]);if(WS.emp)delete WS.emp.known;
+function toCanon(){try{CW.hrSync&&CW.hrSync()}catch(e){console.error(e)}const L=(CW.pulled||[]).concat(pullFriend());let d;try{S.cev=S.cev||{};const f=L.find(x=>x[0]>=0);if(f)S.cev[fp()]=f[1].ev||0;d=ser()}finally{pushFriend(L.filter(x=>!(CW.pulled||[]).includes(x)))}
+ const mp=me(),sS=d.S;const WS={};for(const k of W_KEYS)if(k in sS)WS[k]=worldPart(k,sS[k]);if(WS.emp)delete WS.emp.known;
+ if(!host()){const bS=(CW.base&&CW.base.W&&CW.base.W.S)||{};for(const k of HOST_ONLY){if(k in bS)WS[k]=J(bS[k]);else delete WS[k]}}
  if(host())WS.cnews={w:wk(),h:CW.news||""};else if(CW.base&&CW.base.W&&CW.base.W.S)WS.cnews=J(CW.base.W.S.cnews);
  const R=d.R.filter(r=>!r.coop).map(r=>{r.rl=r.rl||{};r.ro=r.ro||{};r.gp=r.gp||{};r.ep=r.ep||{};r.evm=r.evm||{};
   r.rl[mp]=r.rel||0;r.ro[mp]=r.oan||0;r.gp[mp]=r.ghen||0;r.ep[mp]=r.ev||0;delete r.rel;delete r.oan;delete r.ghen;delete r.ev;
@@ -27254,14 +27292,13 @@ function toCanon(){try{CW.hrSync&&CW.hrSync()}catch(e){console.error(e)}try{(CW.
    for(const id in v.ro||{})if(v.ro[id]!==(b.ro||{})[id]&&id!=="me")s.ro[id]=v.ro[id];
    if(!v.alive||(v.out&&!b.out)){if(!v.alive){fP.dead=true;s.dead=true;s.coopWhy="Mất trong cung"}else{s.coopCold=1}}
    if(v.rank!==b.rank&&!v.out){s.rank=v.rank}
-   /* coop-contest: crowned by the host (Tranh ghế, NPC-style entry rank 6 + queen) = her rank 7 */
-   if(v.queen&&!b.queen&&!v.out&&(b.rank||0)<7)s.rank=7}
+   if("ill" in b&&JSON.stringify(v.ill||null)!==JSON.stringify(b.ill))s.ill=v.ill?Object.assign(J(v.ill),{known:true}):null/* r1 (her own illness: she knows it): the host's epidemic caught her (one world) */}
   P[fs()]=fP}
  return {v:1,week:wk(),W:{S:WS,R,rid:Math.max(rid,...R.map(r=>+r.id||0).filter(n=>n<900),0)},P}}
 
 /* ---------- canonical → local game ---------- */
 function fromCanon(C,opt){opt=opt||{};const mp=me(),Pm=C.P&&C.P[CW.seat];if(!Pm)return false;
- const sS=J(Pm.S);Object.assign(sS,J(C.W.S||{}));if(sS.emp)sS.emp.known=Pm.S.empKnown||{};delete sS.empKnown;delete sS.cnews;
+ const sS=J(Pm.S);Object.assign(sS,J(C.W.S||{}));joinP(sS,Pm.S);if(sS.emp)sS.emp.known=Pm.S.empKnown||{};delete sS.empKnown;delete sS.cnews;
  const R=J(C.W.R||[]).map(r=>{r.rl=r.rl||{};r.ro=r.ro||{};r.gp=r.gp||{};r.ep=r.ep||{};
   r.rel=r.rl[mp]||0;r.oan=r.ro[mp]||0;r.ghen=r.gp[mp]||0;/*evok: co-op sync*/r.ev=r.ep[mp]||0;delete r.rl[mp];delete r.ro[mp];delete r.gp[mp];delete r.ep[mp];
   return mapMe(r,false,mp)});
@@ -27285,7 +27322,7 @@ function attach(C){T("attach");if(!C||!C.W)return;const mp=me();
  keep.rl={};keep.ro={};keep.tonight=null;keep.toMorning=0;keep.heir=null;keep.evd={};keep.chat={};keep.cev={};keep.resHead=null;keep.where=null;keep.dead=false;
  S=keep;const sS=J(ser().S);
  const P={pid:mp,ok:S.origin&&S.origin.k,name:S.name,rank:S.rank,dead:false,srv:!!(S.srv&&!S.srv.risen),life:(CW.life||0)+1,S:{}};
- for(const k in sS)if(!W_KEYS.includes(k))P.S[k]=sS[k];P.S.empKnown={};
+ for(const k in sS)if(!W_KEYS.includes(k))P.S[k]=sS[k];splitP(sS,P.S);P.S.empKnown={};if(P.S.menP)for(const id in P.S.menP)P.S.menP[id]={};if(P.S.cmP)P.S.cmP={seen:{}};
  const C2=J(C);C2.P=C2.P||{};C2.P[CW.seat]=P;
  /* NPCs start fresh toward the new face */
  (C2.W.R||[]).forEach(r=>{for(const m of ["rl","ro","gp","ep"]){r[m]=r[m]||{};r[m][mp]=m==="gp"?R(15):0}if(r.evm)r.evm[mp]=0;if(r.resHead===mp)r.resHead=null});
@@ -27298,14 +27335,40 @@ function attach(C){T("attach");if(!C||!C.W)return;const mp=me();
  try{if(typeof sidN!=="undefined")sidN=Math.max(sidN,...allServ().map(s=>+s.sid||0).filter(n=>n<900),0)}catch(e){}}
 CW.attach=()=>{const C=CW.dying||CW.base;if(C)attach(C)};
 CW.sendMe=()=>sendMe();CW.friendHome=friendHome;
-/* coop-contest helpers: who pays a shared prize — her own client pays her; NPCs are paid by the host only; the friend entry never (her client pays her) */
-CW.isHost=()=>host();CW.pidMe=()=>me();CW.pidF=()=>fp();CW.isF=isF;CW.fEntry=()=>friendEntry();CW.wk=()=>wk();
-CW.pay=p=>!CW.on||p===S||(host()&&!isF(p));
-/* run f with the friend entry back in rivals while endTurn has her pulled out (the host's Tranh ghế: she is a real candidate) */
-CW.withFriend=f=>{const L=CW.pulled;if(!CW.on||!L||!L.length)return f();const back=L.filter(x=>x[0]>=0);pushFriend(back.slice());try{return f()}finally{for(const x of back){const i=rivals.indexOf(x[1]);if(i>=0)rivals.splice(i,1)}}};
 
 /* ---------- sending ---------- */
-function sendEnd(){if(!CW.on||!S||S.dead||CW.sent===wk()||CW.cyHold!=null/* the host's night waits for her cycle answer (B2 × jcycle) */)return;const C=toCanon();CW.sent=wk();CW.pend=false;CW.mine=snapStats();
+/* ONE WORLD safety net (guest only): whatever world change her endTurn still rolled (a loop the guard table missed, an inline tick)
+   is taken back before her week goes to the server, so a missed guard shows as "guest roll lost", never as a double count.
+   c0 = her world just before endTurn, c1 = just after it (the guest's own rolls), c2 = now (after she answered the dawn dialogs):
+   a path the endTurn changed and nothing changed since → c0; changed again later (her own act in a dialog) → numbers keep only the
+   later delta (c0 + c2 − c1), anything else keeps c2. Her own rows on each NPC (rl/ro/gp/ep/evm[her pid]) are hers: always c2.
+   Date keys roll the same on both seats (c2). The server merge (PROTOCOL §4) then adds only her real acts to the host's world. */
+const NET_OWN=["rl","ro","gp","ep","evm"],NET_DATE=["year","month","tuan","turn","cnews"];
+const nNum=x=>typeof x==="number"&&isFinite(x),nObj=x=>x!==null&&typeof x==="object"&&!Array.isArray(x);
+const nEq=(a,b)=>a===b||JSON.stringify(a)===JSON.stringify(b);
+const nIdArr=x=>Array.isArray(x)&&x.length>0&&x.every(e=>nObj(e)&&e.id!=null);
+function unroll(c0,c1,c2,own){if(own)return c2;if(nEq(c1,c0))return c2;if(nEq(c2,c1))return J(c0);
+ if(nNum(c0)&&nNum(c1)&&nNum(c2))return c0+(c2-c1);
+ if(nObj(c0)&&nObj(c1)&&nObj(c2)){const o={};for(const k of new Set([...Object.keys(c0),...Object.keys(c1),...Object.keys(c2)])){const v=unroll(c0[k],c1[k],c2[k],false);if(v!==undefined)o[k]=v}return o}
+ if((nIdArr(c0)||nIdArr(c2))&&Array.isArray(c0)&&Array.isArray(c1)&&Array.isArray(c2)){const m0=new Map(c0.map(e=>[String(e.id),e])),m1=new Map(c1.map(e=>[String(e.id),e]));const out=[],seen=new Set();
+  for(const e of c2){const id=String(e.id);seen.add(id);if(m0.has(id))out.push(m1.has(id)?unroll(m0.get(id),m1.get(id),e,false):e);else if(!m1.has(id))out.push(e)}
+  for(const e of c0){const id=String(e.id);if(!seen.has(id)&&!m1.has(id))out.push(J(e))}   /* taken out by her endTurn roll: back */
+  return out}
+ return c2}   /* both changed and not mergeable: her act stands (the server's host-wins rule settles a clash) */
+function unrollR(r0,r1,r2,mp){const o=unroll(r0,r1,r2,false);if(!nObj(o))return o;const own=String(mp);
+ for(const m of NET_OWN){const a=r2&&r2[m];if(a&&own in a){o[m]=nObj(o[m])?o[m]:{};o[m][own]=a[own]}else if(o[m]&&nObj(o[m]))delete o[m][own]}return o}
+function guestNet(C){const n=CW.net;if(host()||!n||n.week!==C.week||!n.c1||!C.W)return C;const mp=me(),W0=n.c0.W,W1=n.c1.W,W2=C.W;
+ const S0=W0.S||{},S1=W1.S||{},S2=W2.S||{},SO={};
+ for(const k of new Set([...Object.keys(S0),...Object.keys(S1),...Object.keys(S2)])){const v=NET_DATE.includes(k)||HOST_ONLY.includes(k)?S2[k]:unroll(S0[k],S1[k],S2[k],false);if(v!==undefined)SO[k]=v}
+ const m0=new Map((W0.R||[]).map(r=>[String(r.id),r])),m1=new Map((W1.R||[]).map(r=>[String(r.id),r]));const R=[],seen=new Set();let back=0;
+ for(const r of W2.R||[]){const id=String(r.id);seen.add(id);if(m0.has(id))R.push(unrollR(m0.get(id),m1.has(id)?m1.get(id):r,r,mp)/* missing right after the week end: treat all of it as the roll */);else if(!m1.has(id))R.push(r)}
+ for(const r of W0.R||[]){const id=String(r.id);if(!seen.has(id)&&!m1.has(id)){R.push(J(r));back++}}
+ C.W={S:SO,R,rid:W0.rid!=null?Math.max(W0.rid,W2.rid||0):W2.rid};return C}
+CW.unroll=unroll;CW.guestNet=guestNet;
+/* her world just before and just after her whole week end: called by jcoopone.js around the OUTERMOST endTurn (every module's wrapper inside) */
+CW.netWrap=function(f,self,args){if(!CW.on||host()){return f.apply(self,args)}const p0=CW.pend;let c0=null;try{c0=toCanon()}catch(e){}
+ const r=f.apply(self,args);try{if(!p0&&CW.pend&&c0)CW.net={week:wk(),c0,c1:toCanon()}}catch(e){CW.net=null}return r};
+function sendEnd(){if(!CW.on||!S||S.dead||CW.sent===wk()||CW.cyHold!=null/* the host's night waits for her cycle answer (B2 × jcycle) */)return;const C=guestNet(toCanon());CW.sent=wk();CW.pend=false;CW.mine=snapStats();
  COOP.send({t:"end",week:wk(),state:C});try{localStorage.setItem("ctm-coop-last",JSON.stringify({room:COOP.state.room,C}))}catch(e){}lockNext()}
 function sendMe(){T("sendMe "+(S&&S.dead));if(!CW.on||!S||S.dead)return;
  /* a new life: the old life's pending / sent week end is void (the server drops my sent end on `me`); she ends this week herself */
@@ -27589,7 +27652,6 @@ function onWeek(m){T("week "+m.week+" in "+CW.wkIn);if(!CW.on||!m.state)return;i
  try{CW.seatWeek()}catch(e){console.error(e)}
  const h=newsHTML()+(worldNews(C)?`<p>${worldNews(C)}</p>`:"");CW.mine=null;
  if(h)pushModal({t:"Tuần mới",h:`<p class="past">${when()}</p>${h}`});
- try{(CW.onBuilt||[]).forEach(f=>f(C))}catch(e){console.error(e)}  /* coop-contest: shared invitations / contest boards / results */
  CW.bend=false;CW.posKey="";if(CW.p2&&S&&(S.buoi||0)!==0){S.buoi=0;used=0}/* every week starts at buổi sáng for both */
  if(host())sendWhere();else if(CW.lastWhere)applyWhere(CW.lastWhere);keepFriendPos();refreshHere();
  showModal();render();lockNext()}
@@ -27644,7 +27706,7 @@ function nAtNight(){return !!(S&&!S.dead&&(S.buoi||0)>=LASTB())}
 function nReady(){return CW.on&&CW.nrdy===wk()&&nAtNight()&&CW.sent!==wk()&&!CW.pend}
 function nOtherEnded(){const e=COOP.state.ended||{};return !!e[fs()]}
 function nOtherGone(){const s=COOP.state.seats;return !!(s&&typeof s==="object"&&(fs() in s)&&!s[fs()])}
-function nightReady(){if(CW.nrdy===wk()){nCheck();return}CW.nrdy=wk();T("nready "+wk());try{(CW.beforeReady||[]).forEach(f=>f())}catch(e){console.error(e)}if(!host())nsay("rd");nCheck();lockNext();try{render()}catch(e){}}
+function nightReady(){if(CW.nrdy===wk()){nCheck();return}CW.nrdy=wk();T("nready "+wk());if(!host())nsay("rd");nCheck();lockNext();try{render()}catch(e){}}
 function nGoNow(){if(!host()||CW.ngo===wk())return;CW.ngo=wk();T("ngo "+wk());nsay("go");CW.ngoW=wk()}
 /* host: commit when both are ready (or forced); every seat: run the committed night once free */
 function nCheck(){if(!CW.on||!S)return;const w=wk();
@@ -27749,6 +27811,13 @@ const mute=n=>{const f=window[n];if(typeof f!=="function")return;window[n]=funct
    into her blob by toCanon, so the merge lands it on HER own S; the lines about her reach her in the week's news (cnews). */
 ["rivalsTurn","rivalsMonth","festival"].forEach(n=>{const f=window[n];if(typeof f!=="function")return;window[n]=function(){if(!CW.on||!host())return f.apply(this,arguments);
  const L=CW.pulled;if(!L||!L.length)return f.apply(this,arguments);pushFriend(L.slice());(CW.b4=CW.b4||[]).push(n);if(CW.b4.length>20)CW.b4.shift();try{return f.apply(this,arguments)}finally{pullFriend()}}});
+/* ONE WORLD r1 (review/coop-one-world-r1): the palace epidemic is a world fact rolled on the host only (jcoopone MUTE on the guest).
+   The host's roll runs WITH the friend's entry in the harem (same pattern as B4), so she can catch it / be quarantined like anyone in
+   that palace (her entry's ill + confined go back to her blob by toCanon), and its news line goes into the week's world news (cnews). */
+(function(){const f=window.epidemic;if(typeof f!=="function")return;window.epidemic=function(){if(!CW.on||!host())return f.apply(this,arguments);
+ const L=CW.pulled;let r;if(L&&L.length){pushFriend(L.slice());const fe=friendEntry(),ks=fe&&fe.kids;if(fe)fe.kids=[];/* her children are display copies here: their illness rolls on her own seat */
+  try{r=f.apply(this,arguments)}finally{if(fe)fe.kids=ks;pullFriend()}}else r=f.apply(this,arguments);
+ if(typeof r==="string"&&r)CW.news+=r;return r}})();
 /* B3 (review/coop-b1b5): the Emperor's death in co-op, host-authoritative. The month roll only counts on the HOST and only for the
    reigning Emperor's own years (emp.y0 = the year he came to the throne); it writes emp.dead = {w} into the world (emp is a world key)
    and the week goes on. When the merged week w arrives, BOTH clients run the normal ending of the reign (heir → Thái hậu / Thái phi /
@@ -27768,7 +27837,8 @@ const mute=n=>{const f=window[n];if(typeof f!=="function")return;window[n]=funct
 (function(){const f=pickTarget;pickTarget=function(v){if(CW.on&&isF(v))return null;const t=f.apply(this,arguments);if(CW.on&&!host()&&t!==S)return null;return t}})();
 (function(){const f=rivalsBuoi;rivalsBuoi=function(){return withoutFriend(()=>f.apply(this,arguments))}})();
 (function(){const f=endTurn;endTurn=function(){if(CW.on){if(waiting()||frozen()||CW.pend||!CW.base)return;CW.news=""}
- if(!CW.on)return f.apply(this,arguments);let r;CW.inTurn=true;const alt=typeof CW.altTurn==="function"?CW.altTurn():null;/* a route with its own week (jkc at home: kcEndTurn) */try{r=withoutFriend(()=>(alt||f).apply(this,arguments))}finally{CW.inTurn=false}if(S){CW.pend=true;try{render()}catch(e){}lockNext()}return r};CW.weekEnd=endTurn/* a route with its own week (jkc) calls this directly, past the palace-only wrappers made after it */})();
+ if(!CW.on)return f.apply(this,arguments);let r;CW.inTurn=true;const alt=typeof CW.altTurn==="function"?CW.altTurn():null;/* a route with its own week (jkc at home: kcEndTurn) */
+ try{r=withoutFriend(()=>(alt||f).apply(this,arguments))}finally{CW.inTurn=false}if(S){CW.pend=true;try{render()}catch(e){}lockNext()}return r};CW.weekEnd=endTurn/* a route with its own week (jkc) calls this directly, past the palace-only wrappers made after it */})();
 (function(){const f=nextBuoi;nextBuoi=function(){if(!CW.on)return f.apply(this,arguments);if(waiting()||frozen()||CW.pend||!CW.base)return;
  /* same buổi for both: buổi sáng / chiều end with `bend`; the server's `buoi` runs the real step (CW.allow); buổi tối ends the week (`end`) */
  if(CW.p2&&!CW.allow&&(S.buoi||0)<(typeof B4L==="number"?B4L:2)){if(!S||S.dead||Q.length||S.mg||needWhere())return;bend();return}
@@ -27812,17 +27882,32 @@ const SNK="ctm-coop-wk",SEAT_MS=3000;let svT=0,seatT=0,seatAt=0,seatLast="";
 const DEV=(()=>{try{let d=localStorage.getItem("ctm-coop-dev");if(!d){d=Math.random().toString(36).slice(2,12)+Date.now().toString(36);localStorage.setItem("ctm-coop-dev",d)}return d}catch(e){return "x"+Math.random().toString(36).slice(2,10)}})();
 function snapSave(now){svT=0;try{const o=CW.snap&&CW.snap();if(o){o.dev=DEV;o.sv=CW.ssv||0;localStorage.setItem(SNK,JSON.stringify(o));seatPush(o,now)}}catch(e){}}
 function snapSoon(){if(CW.on&&!svT)svT=setTimeout(snapSave,1000)}
+/* review/lag-play-2: the seat copy is ~40 KB; when the server can (room reply caps "seatd") only the PARTS that changed since the copy
+   the server confirmed (seatok) are sent: {t:"seatd",sv,set,del}. The server applies them on top of exactly version sv, else answers
+   "seatresync" and the next push is the full copy again. Parts = buoi, used, c, d.<key>, d.S.<key> (one JSON string each). */
+let seatBase=null,seatPend=null,seatBusy=0;
+function seatParts(o){const P={buoi:JSON.stringify(o.buoi),used:JSON.stringify(o.used),c:JSON.stringify(o.c)};const d=o.d||{};
+ for(const k in d){if(k==="S"&&d.S&&typeof d.S==="object"){for(const j in d.S)if(d.S[j]!==undefined)P["d.S."+j]=JSON.stringify(d.S[j])}else if(d[k]!==undefined)P["d."+k]=JSON.stringify(d[k])}return P}
+function seatDelta(P,B){const set={},del=[];let n=0;for(const k in P)if(B[k]!==P[k]){set[k]=JSON.parse(P[k]);n++}
+ for(const k in B)if(!(k in P))del.push(k);return {set,del,n:n+del.length}}
 function seatPush(o,now){if(!CW.on||CW.seatOld||!o||COOP.state.status!=="open")return;
- if(!now&&Date.now()-seatAt<SEAT_MS){if(!seatT)seatT=setTimeout(()=>{seatT=0;snapSave()},SEAT_MS-(Date.now()-seatAt));return}
- const k=JSON.stringify([o.week,o.buoi,o.used,o.d,o.c]);if(k===seatLast)return;
- seatAt=Date.now();COOP.send({t:"seat",sv:CW.ssv||0,o}).then(ok=>{if(ok)seatLast=k})}
-COOP.on("seatok",m=>{if(typeof m.sv==="number"){CW.ssv=Math.max(CW.ssvWk===wk()?CW.ssv||0:0,m.sv);CW.ssvWk=wk()}});
-COOP.on("error",m=>{if(m&&m.code==="seatold"){CW.seatOld=true;T("seatold "+m.sv)}});
-COOP.on("week",m=>{seatLast="";CW.seatOld=false;CW.ssv=0;CW.ssvWk=m&&m.week});  /* the server starts the seat versions again each week */
+ if(seatBusy&&Date.now()-seatBusy>10000)seatBusy=0;  /* no seatok within 10 s (socket dropped): give up waiting */
+ if(!now&&(seatBusy||Date.now()-seatAt<SEAT_MS)){if(!seatT)seatT=setTimeout(()=>{seatT=0;snapSave()},Math.max(400,SEAT_MS-(Date.now()-seatAt)));return}
+ const P=seatParts(o);const k=JSON.stringify([o.week,P]);if(k===seatLast)return;
+ const caps=COOP.state.caps||[];let msg;
+ if(caps.indexOf("seatd")>=0&&!Object.keys(P).some(x=>x.split(".").length>(x.startsWith("d.S.")?3:2))&&seatBase&&seatBase.wk===o.week&&seatBase.sv===(CW.ssv||0)&&!seatBusy){const D=seatDelta(P,seatBase.P);
+  msg={t:"seatd",sv:CW.ssv||0,set:D.set,del:D.del,dev:o.dev}}
+ else msg={t:"seat",sv:CW.ssv||0,o};
+ seatAt=Date.now();seatBusy=Date.now();seatPend={P,wk:o.week};COOP.send(msg,!!now).then(ok=>{if(ok)seatLast=k;else{seatBusy=0;seatPend=null}})}
+COOP.on("seatok",m=>{if(typeof m.sv==="number"){CW.ssv=Math.max(CW.ssvWk===wk()?CW.ssv||0:0,m.sv);CW.ssvWk=wk();
+ if(seatPend&&CW.ssv===m.sv)seatBase={P:seatPend.P,wk:seatPend.wk,sv:m.sv};else seatBase=null}seatBusy=0;seatPend=null});
+COOP.on("error",m=>{if(!m)return;if(m.code==="seatold"){CW.seatOld=true;seatBase=null;seatBusy=0;T("seatold "+m.sv)}
+ if(m.code==="seatresync"||m.code==="seatbig"||m.code==="badseat"){seatBase=null;seatBusy=0;seatPend=null;seatLast="";if(m.code==="seatresync"){T("seatresync "+m.sv);snapSoon()}}});
+COOP.on("week",m=>{seatLast="";seatBase=null;seatBusy=0;seatPend=null;CW.seatOld=false;CW.ssv=0;CW.ssvWk=m&&m.week});  /* the server starts the seat versions again each week */
 /* review/coop-rejoin-xdev-r1: a device that was only ASLEEP (socket gone, page kept, e.g. the Fold locked) while she played on another
    device reconnects by itself (no begin): when the room's copy of her seat is newer and was written by another device, take it, so this
    device does not go on with its stale week (and its own copies are accepted again instead of "seatold"). */
-COOP.on("room",m=>{if(!CW.on||!CW.base||!m||!m.state)return;const R=m.mine;
+COOP.on("room",m=>{seatBase=null;seatBusy=0;seatPend=null;seatLast="";if(!CW.on||!CW.base||!m||!m.state)return;const R=m.mine;
  if(!R||!R.dev||R.dev===DEV||(R.sv||0)<=(CW.ssvWk===R.week?CW.ssv||0:0)||!snapOk(R,m.state))return;T("snap wake server sv"+(R.sv||0));
  if(CW.restore(R)){CW.ssv=m.msv||R.sv||0;CW.ssvWk=R.week;CW.seatOld=false;seatLast="";T("restored "+R.week+"."+R.buoi+" u"+R.used)}});
 function snapOk(o,C){const P=C&&C.P&&C.P[CW.seat];
@@ -30145,7 +30230,7 @@ document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.clos
  const a0=accAsk;accAsk=function(k){let yk=false;try{const st=accState(k);if(st.ask==="yk"){if(st.dayDone)return;yk=true}}catch(e){}
   const c=used;const r=a0.apply(this,arguments);try{if(yk&&S&&used!==c)S.kmEmpDay=wk()}catch(e){}return r}})();
 /* NPC consorts: the same acts, a small chance each tuần (BAL.empDay.p), the one their arts suit */
-(function(){if(typeof nextBuoi!=="function")return;const n0=nextBuoi;nextBuoi=function(){const r=n0.apply(this,arguments);try{if(S&&!S.dead&&(S.buoi||0)===1)for(const v of liveRivals(false)){if(!v||v.out||v.confined||!roll(BAL.empDay.p*100))continue;
+(function(){if(typeof nextBuoi!=="function")return;const n0=nextBuoi;nextBuoi=function(){const r=n0.apply(this,arguments);try{if(S&&!S.dead&&(S.buoi||0)===1&&worldOn()/* one world (coop-one-world-r1): NPCs' day with the Emperor rolls on the host only */)for(const v of liveRivals(false)){if(!v||v.coop||v.out||v.confined||!roll(BAL.empDay.p*100))continue;
    const kind=(v.arts&&v.arts.ky>=1&&roll(40))?"ky":(v.arts&&v.arts.cam>=1&&roll(50))?"cam":"walk";kmEmpAct(v,kind)}}catch(e){}return r}})();
 /* ================= jpoison: QUÀ ĂN UỐNG CÓ THỂ BỎ ĐỘC · CHÂN TÌNH CÓ NGUYÊN CỚ · ÂN TÌNH (owner 15/11 12:25Z, 13:15Z, 14:05Z; review/poison-gift)
    Loads after jgift (the kit gift dialog of main, gift-ui): it only ADDS to that dialog, never replaces it. Numbers in BAL.pg / BAL.gift.
@@ -30812,7 +30897,10 @@ let KRN_C={k:"",rx:null,m:null};
    person's title is read once. */
 let KRN_TM=null;
 function krnT(p){if(!KRN_TM)return kitTitle(p);if(KRN_TM.has(p))return KRN_TM.get(p);const t=kitTitle(p);KRN_TM.set(p,t);return t}
-function krnTable(){let L=[];try{L=kpPeople().filter(([n,p])=>p&&p!==S&&n.split(" ").length>=2&&krnT(p))}catch(e){return null}if(!L.length)return null;
+/* review/lag-play-2: the table (every person's name + title through kitTitle → kitFace, ~100-250 ms at 4x) is rebuilt only after a render
+   (titles change only through game actions, which render): window.__rendN is the render counter (jlag2.js). */
+function krnTable(){if(KRN_C&&KRN_C.rn!=null&&KRN_C.rn===window.__rendN&&KRN_C.S===S)return KRN_C;const t=krnTable0();if(t){t.rn=window.__rendN;t.S=S}return t}
+function krnTable0(){let L=[];try{L=kpPeople().filter(([n,p])=>p&&p!==S&&n.split(" ").length>=2&&krnT(p))}catch(e){return null}if(!L.length)return null;
  const k=L.map(x=>x[0]).join("|");if(KRN_C.k===k)return KRN_C;const esc=s=>s.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
  KRN_C={k,m:new Map(L),rx:new RegExp(`(?<![\\p{L}\\p{M}])(${L.map(x=>esc(x[0])).join("|")})(?![\\p{L}\\p{M}])`,"gu")};return KRN_C}
 function krnPrevText(n){try{return typeof k61PrevText==="function"?k61PrevText(n):""}catch(e){return""}}
@@ -30820,7 +30908,7 @@ function krnTitled(before,t,nm,blkPre){const b=String(before||"");if(t&&(kpTitle
  if(KP_TITLE_RX.test(b.slice(-40)))return true;/* any title word just before ("Phi Ôn Mạn Châu" with a stale rank is still a titled name) */
  return !!blkPre&&blkPre.includes(kitTitled(t,nm))}
 function kitRankNamePaint(root,dry){if(!KRN_TM){KRN_TM=new Map();try{return kitRankNamePaint(root,dry)}finally{KRN_TM=null}}const out=[];if(!root||!S||!document.createTreeWalker)return out;const T=krnTable();if(!T)return out;
- const W=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:n=>{const p=n.parentElement;if(!p||p.closest(KRN_SKIP))return NodeFilter.FILTER_REJECT;T.rx.lastIndex=0;return T.rx.test(n.nodeValue)?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT}});
+ const W=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:n=>{/* review/lag-play-2: name test first, ancestor walk only for hits */T.rx.lastIndex=0;if(!T.rx.test(n.nodeValue))return NodeFilter.FILTER_REJECT;const p=n.parentElement;return !p||p.closest(KRN_SKIP)?NodeFilter.FILTER_REJECT:NodeFilter.FILTER_ACCEPT}});
  const L=[];while(W.nextNode())L.push(W.currentNode);
  for(const n of L){const v=n.nodeValue;const blk=n.parentElement.closest(KRN_BLK)||n.parentElement;let blkPre="";
   try{const r=document.createRange();r.setStart(blk,0);r.setEnd(n,0);blkPre=r.toString()}catch(e){}
@@ -31422,11 +31510,13 @@ function kitPane(){try{const P=$("panel");if(!P)return;let bar=P.querySelector("
  want.forEach((r,i)=>{const w=r.parentElement;if(bar.children[i]!==r)bar.insertBefore(r,bar.children[i]||null);
   if(w&&w!==bar&&w!==P&&!w.children.length&&!w.textContent.trim())w.remove()});
  [...bar.children].forEach(c=>{if(!want.includes(c))c.remove()});
- P.classList.add("kpane");const cs=getComputedStyle(P),pl=cs.paddingLeft,pr=cs.paddingRight;bar.style.setProperty("margin-left","-"+pl,"important");bar.style.setProperty("margin-right","-"+pr,"important");bar.style.paddingLeft=pl;bar.style.paddingRight=pr;const h=Math.round(bar.getBoundingClientRect().height);if(h)P.style.setProperty("--kpbarh",h+"px")}catch(e){console.error("kitPane",e)}}
+ P.classList.add("kpane");const cs=getComputedStyle(P),pl=cs.paddingLeft,pr=cs.paddingRight;/* lag-play-2: write only what changed (an equal write still dirties style) */if(bar.style.marginLeft!=="-"+pl)bar.style.setProperty("margin-left","-"+pl,"important");if(bar.style.marginRight!=="-"+pr)bar.style.setProperty("margin-right","-"+pr,"important");if(bar.style.paddingLeft!==pl)bar.style.paddingLeft=pl;if(bar.style.paddingRight!==pr)bar.style.paddingRight=pr;const h=Math.round(bar.getBoundingClientRect().height);if(h&&P.style.getPropertyValue("--kpbarh")!==h+"px")P.style.setProperty("--kpbarh",h+"px")}catch(e){console.error("kitPane",e)}}
 window.kitPane=kitPane;
 (function(){const r0=renderPanel;renderPanel=function(){const r=r0.apply(this,arguments);kitPane();return r};
  if(typeof k3CatTabs==="function"){const k0=k3CatTabs;k3CatTabs=function(){const r=k0.apply(this,arguments);kitPane();return r}}
- try{const P=$("panel");if(P)new MutationObserver(()=>kitPane()).observe(P,{childList:true})}catch(e){}
+ /* review/lag-play-2: the observer fired right after every renderPanel (which had just run kitPane) and after kitPane's own prepend, each time
+   reading computed style + layout mid-task; it now runs once in the next frame (before paint), for changes made outside renderPanel. */
+ let kpQ=0;try{const P=$("panel");if(P)new MutationObserver(()=>{if(!kpQ)kpQ=requestAnimationFrame(()=>{kpQ=0;kitPane()})}).observe(P,{childList:true})}catch(e){}
  addEventListener("resize",()=>{clearTimeout(window.__kpT);window.__kpT=setTimeout(kitPane,60)})})();
 (function(){const st=document.createElement("style");st.id="kit-pane";st.textContent=`
 #panel.kpane{padding-top:0!important;scroll-padding-top:calc(var(--kpbarh,0px) + 6px)}
@@ -32327,7 +32417,7 @@ function css(){if(document.getElementById("kctm-css"))return;const st=document.c
 header.hud.kctm-pad{padding-bottom:calc(var(--kctm-pb,6px) + 28px)!important}
 #kctmf[hidden]{display:none}
 .kctmf .kctmf-sh{display:none}
-/* kv3:.kv1 */:where(.kv1) .kctmf .kctmf-n{max-width:6.5em}:where(.kv1) .kctmf .kctmf-s{font-size:.68rem}:where(.kv1) .kctmf .kctmf-l{display:none}:where(.kv1) .kctmf .kctmf-sh{display:inline}
+/* kv3:.kv1 */:where(.kv1) .kctmf .kctmf-n{max-width:9em}:where(.kv1) .kctmf .kctmf-s{font-size:.68rem}
 #kctmh .dlg #kctmhb{padding:8px 12px 2px}
 #kctmh .dlg #kctmhr{padding:4px 14px 12px;margin:0;display:flex;justify-content:flex-end;gap:8px}`;document.head.appendChild(st)}
 /* o = {left ms, len ms, state "run"|"pz"|"up"|"stop", fr "ready"|"busy"|"", btn bool}; one row of kit chips, right aligned */
@@ -32488,11 +32578,14 @@ function css(){if(document.getElementById("kchat-css"))return;const st=document.
 const BU=b=>{try{const n=(typeof BUOI!=="undefined"&&BUOI[b])||"";return n}catch(e){return""}};
 /* game-style time: "hạ tuần, tháng 3 · Buổi chiều" */
 function kitChatWhen(g){g=g||{};try{const t=typeof TUAN!=="undefined"&&TUAN[g.t]||"";return `${t?t+", ":""}tháng ${g.m||1}${BU(g.b)?" · "+BU(g.b):""}`}catch(e){return""}}
-function kitChatBubble(m,mine){css();return `<div class="kcm ${mine?"mine":"fr"}" data-i="${+m.i||0}"><div class="kcm-h"><b>${esc(m.n||(mine?"Ta":"Hảo hữu"))}</b><span>${esc(kitChatWhen(m.g))}</span></div><span class="kcm-x">${esc(m.x)}</span></div>`}
+/* the friend's signature: her real name once she has met the friend, else the ONE label of the header chip ("Hảo hữu", j61 k61Coop; OD:L165) */
+function frUnmet(){try{const W=window.COOPW;if(!W||!W.on||typeof k61Coop!=="function")return false;const f=k61CoopEnt();return !f||k61Coop(f)}catch(e){return false}}
+function frSign(n){return frUnmet()?K61FR:(n||"Hảo hữu")}
+function kitChatBubble(m,mine){css();return `<div class="kcm ${mine?"mine":"fr"}" data-i="${+m.i||0}"><div class="kcm-h"><b>${esc(mine?(m.n||"Ta"):frSign(m.n))}</b><span>${esc(kitChatWhen(m.g))}</span></div><span class="kcm-x">${esc(m.x)}</span></div>`}
 function kitChatList(msgs,seat){return (msgs&&msgs.length)?msgs.map(m=>kitChatBubble(m,m.s===seat)).join(""):`<p class="kpnote kchat-empty">Chưa có thư nào. Viết đôi dòng gửi hảo hữu.</p>`}
 function kitChatPanel(o){css();o=o||{};const nm=o.name?esc(String(o.name).slice(0,24)):"hảo hữu";
  const inp=typeof kitInput==="function"?kitInput({id:"kchat-in",label:"Thư",placeholder:"Viết thư gửi hảo hữu…"}):`<input class="kinput" id="kchat-in" placeholder="Viết thư gửi hảo hữu…">`;
- return `<div class="dlg kpanel kpsc" data-kind="notice">${typeof kpHeader==="function"?kpHeader("notice","Thư từ","Truyền tin cùng "+nm):""}<div class="kchat-list" id="kchat-list" data-k61skip="1">${kitChatList(o.msgs,o.seat)}</div><div class="kchat-row">${inp}<button type="button" class="kbtn" id="kchat-go">Gửi</button></div></div>`}
+ return `<div class="dlg kpanel kpsc" data-kind="notice">${typeof kpHeader==="function"?kpHeader("notice","Thư từ","Truyền tin cùng "+nm):""}<div class="kchat-list" id="kchat-list" data-k61skip="1" data-krn-skip="1">${kitChatList(o.msgs,o.seat)}</div><div class="kchat-row">${inp}<button type="button" class="kbtn" id="kchat-go">Gửi</button></div></div>`}
 window.kitChatPanel=kitChatPanel;window.kitChatList=kitChatList;window.kitChatBubble=kitChatBubble;window.kitChatWhen=kitChatWhen;
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§80",title:"kitChatPanel · Thư từ (nhắn tin cho hảo hữu; biểu tượng nằm ở cột nút §77)",
  html:()=>{const g={y:1,m:3,t:2,b:1};const ms=[{i:1,s:"b",n:"Lan Nhi",x:"Chào muội, hôm nay muội ra vườn ngự hoa chăng?",g},{i:2,s:"a",n:"Mai Hương",x:"Có chứ. Hẹn gặp ở đình nghỉ mát nhé!",g},{i:3,s:"b",n:"Lan Nhi",x:"<b>Được</b> thôi.",g:{y:1,m:3,t:2,b:2}}];
@@ -32502,7 +32595,7 @@ const ST={msgs:[],seen:0,open:false,sounds:0,shakes:0,max:0};
 function seat(){return COOP.state.you||COOP.seat||""}
 function unread(){const s=seat();return ST.msgs.filter(m=>m.s!==s&&m.i>ST.seen).length}
 function markSeen(){const mx=ST.msgs.length?ST.msgs[ST.msgs.length-1].i:0;if(mx>ST.seen){ST.seen=mx;LS.set(SK(),String(mx))}}
-function frName(){const s=seat();for(let i=ST.msgs.length-1;i>=0;i--)if(ST.msgs[i].s!==s&&ST.msgs[i].n)return ST.msgs[i].n;
+function frName(){if(frUnmet())return K61FR;const s=seat();for(let i=ST.msgs.length-1;i>=0;i--)if(ST.msgs[i].s!==s&&ST.msgs[i].n)return ST.msgs[i].n;
  try{const o=COOP.other(),so=(COOP.state.seats||{})[o];if(so&&so.name)return so.name}catch(e){}return""}
 /* ---------- icon: ONE place = the kitStageRail column (KIT §77, owner 16/11); no own button / frame on the stage ---------- */
 let railOn=false;
@@ -32517,7 +32610,7 @@ let P=null;
 function listEl(){return P&&P.querySelector("#kchat-list")}
 function fillList(){const l=listEl();if(!l)return;const near=l.scrollHeight-l.scrollTop-l.clientHeight<80;l.innerHTML=kitChatList(ST.msgs,seat());if(near||!l.dataset.sc){l.scrollTop=l.scrollHeight;l.dataset.sc="1"}}
 function openPanel(){if(!live())return false;css();if(P)return true;ST.open=true;markSeen();
- P=document.createElement("div");P.id="kchatp";P.className="modal kpscene";P.setAttribute("data-k61skip","1");P.setAttribute("role","dialog");P.setAttribute("aria-label","Thư từ");document.body.appendChild(P);
+ P=document.createElement("div");P.id="kchatp";P.className="modal kpscene";P.setAttribute("data-k61skip","1");P.setAttribute("data-krn-skip","1");P.setAttribute("role","dialog");P.setAttribute("aria-label","Thư từ");document.body.appendChild(P);
  P.innerHTML=kitChatPanel({msgs:ST.msgs,seat:seat(),name:frName()});
  const seal=P.querySelector(".kpseal");if(seal)seal.remove();
  const dlg=P.querySelector(".dlg");try{if(typeof kitXAdd==="function")kitXAdd(dlg,closePanel)}catch(e){}
@@ -39318,13 +39411,11 @@ function cuAward(o,ord,place,of,kind){o=o||{};const big=!!o.big,res={mine:null,h
  const title=o.title||"Hội thi";
  ord.slice(0,3).forEach((x,i)=>{const p=x.p||null;if(!p||typeof p!=="object"){res.places.push({prize:[]});return}
   const z=cuPrize(kind,i,p,big);const chips=[];
-  /* co-op (jcoopcontest.js): each prize is paid once — her client pays her, the host pays NPCs, nobody pays the friend entry */
-  const pay=!(window.COOPW&&COOPW.on)||COOPW.pay(p);
-  if(z.k){if(pay){p.inv=p.inv||[];p.inv.push({k:z.k,from:"thi"})}chips.push(cuItemChip(z.k))}
-  if(z.bac){if(pay){if(p===S)apply({bac:z.bac});else ap(p,{bac:z.bac})}chips.push(["Bạc",z.bac])}
+  if(z.k){p.inv=p.inv||[];p.inv.push({k:z.k,from:"thi"});chips.push(cuItemChip(z.k))}
+  if(z.bac){if(p===S)apply({bac:z.bac});else ap(p,{bac:z.bac});chips.push(["Bạc",z.bac])}
   const ent={prize:chips,k:z.k,bac:z.bac,place:i+1};
   if(i===0){/* the Emperor's own gift: guaranteed at the big festivals and the feasts he attends */
-   if(big&&typeof bestow==="function"){ent.emp=true;if(pay)try{bestow(p,"contest")}catch(e){console.error(e)}}else if(p!==S&&pay&&roll(30))try{bestow(p,"contest")}catch(e){}else if(p===S&&roll(30)){ent.emp=true;try{bestow(S,"contest")}catch(e){}}}
+   if(big&&typeof bestow==="function"){ent.emp=true;try{bestow(p,"contest")}catch(e){console.error(e)}}else if(p!==S&&roll(30))try{bestow(p,"contest")}catch(e){}else if(p===S&&roll(30)){ent.emp=true;try{bestow(S,"contest")}catch(e){}}}
   if(p===S){S.honors=S.honors||[];const hn=(i===0&&CU_KHOI[kind]?CU_KHOI[kind]+" · ":CU_PLACE[i]+" · ")+title;S.honors.unshift({d:`T${S.month}/${S.year}`,t:hn,p:i+1});if(S.honors.length>40)S.honors.length=40;ent.title=hn;res.mine=ent}
   res.places.push(ent)});
  const m=res.mine;if(m){const rows=[];const ch=[];if(m.k)ch.push(cuItemChip(m.k));if(m.bac)ch.push(kitChip("Bạc",m.bac,"g"));rows.push(["Phần thưởng",ch,"t"]);
@@ -40425,7 +40516,11 @@ window.disLikeRow=likeRow;window.disLikeLearn=likeLearn;
  addEventListener("resize",()=>{clearTimeout(window.__kfhdT);window.__kfhdT=setTimeout(all,150)});
  document.addEventListener("load",e=>{const t=e.target;if(t&&t.tagName==="IMG"&&RE.test(t.src||"")&&!t.dataset.kfhdw){t.dataset.kfhdw=1;fit(t)}},true);
 })();
-/* ---- kitAlphaClean (#kfa) — glows follow the figure, never a rectangle (owner 15/11 "Tại sao vẫn có ô chữ nhật vàng khi chọn") ----
+/* review/fig-cutout-code (owner 16/11 "vệt đen trên cổ", "tách nền … hư hết"): #kfa now HARDENS the cut-out edge (alpha 3a-1.2:
+   a<0.40 -> 0, a>0.73 -> 1). Many cut-outs carry a wide feathered edge and translucent smoke/veil residue (scan dev/handover/reports/
+   fig-cutout-root.md); every figure's drop-shadow showed THROUGH those translucent pixels as a grey band along the robe and a dark streak
+   at the neck. The old 1.07/-0.065 only cut alpha<0.06. Sheer sleeves painted opaque are untouched; whole group = every url(#kfa) user.
+   ---- kitAlphaClean (#kfa) — glows follow the figure, never a rectangle (owner 15/11 "Tại sao vẫn có ô chữ nhật vàng khi chọn") ----
    The cut-out figures keep a faint alpha haze (alpha 1–12) over much of their box (background removal + lossy WebP alpha). Every
    drop-shadow (her rank halo, the selection glow, the ground shadow) also shadows that haze, so the glow showed as a yellow / grey
    RECTANGLE. url(#kfa) comes FIRST in every people-picture filter (p1 #mefig / .tok.fig .figimg, j59 HG/SG, jk4 .kesimg, j79 .kidfig2,
@@ -40433,7 +40528,7 @@ window.disLikeRow=likeRow;window.disLikeLearn=likeLearn;
    Static (no animation: KIT motion rule STILL PEOPLE). */
 (function(){try{if(document.getElementById("kfa"))return;const d=document.createElementNS("http://www.w3.org/2000/svg","svg");d.setAttribute("width","0");d.setAttribute("height","0");
  d.setAttribute("aria-hidden","true");d.style.cssText="position:absolute;width:0;height:0;overflow:hidden";
- d.innerHTML='<defs><filter id="kfa" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB"><feComponentTransfer><feFuncA type="linear" slope="1.07" intercept="-0.065"/></feComponentTransfer></filter></defs>';
+ d.innerHTML='<defs><filter id="kfa" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB"><feComponentTransfer><feFuncA type="linear" slope="3" intercept="-1.2"/></feComponentTransfer></filter></defs>';
  (document.body||document.documentElement).appendChild(d)}catch(e){}})();
 /* kit page sample (§71): one figure drawn large (HD twin when drawn above 900 px) with the static rank halo and the static selection glow */
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§71",title:"kitFigHD · #kfa (người sắc nét, viền sáng theo dáng)",
@@ -44762,226 +44857,74 @@ function girlChestShow(c){if(!c||!c.L.length||window.__bot)return;try{if(typeof 
 window.girlChest=girlChest;window.girlChestShow=girlChestShow;
 (function(){const s0=start;start=function(){const r=s0.apply(this,arguments);try{if(window.__nlInner&&S&&!S.dead&&!S.girl&&!S.kc&&!S.srv&&(S.turn||0)<=1){const c=girlChest(S,{});girlChestShow(c)}}catch(e){console.error("girlChest start",e)}return r}})();
 window.eitPilfer=eitPilfer;window.eitReOpts=eitReOpts;window.eitReDialog=eitReDialog;window.eitWeek=eitWeek;
-/* jcoopcontest: CO-OP SHARED CONTESTS (review/coop-contest, owner 16/11: "những cái sự kiện chung như thi thố ... khi mà chơi hai người là
-   cả hai đều được báo dự thi hay như thế nào?"). Facts: dev/handover/reports/coop-contest-check.md. Rules: dev/coop/PROTOCOL.md §11.
-   Single-player never runs any of this (every hook checks COOPW.on).
-   ONE contest for the room, host-authoritative:
-   - The host rolls ONE festival plan (variant, NPC entrants, seed) in its endTurn and publishes it in the shared world (S.cfp, a W key).
-     The guest rolls none (fPlan7 muted); after the week merge she gets the SAME invitation (same text, same entrants, same seed) plus
-     the line that her friend is invited too. Each answers Enter / Skip; the answer is relayed to the other (act k "ctm-cc", mode "ans").
-   - Contest day: the host scores the NPC entrants once (one formula, one luck roll) into a board (S.cfb, W key). Each player who entered
-     plays her own mini-game against those same NPC rows and sends her score to the host (mode "sc"). The host ranks everyone (both
-     players + NPCs) and publishes ONE result list (mode "res" + S.cfb[...].res). Each client applies the result once: her own place
-     effects; NPC prizes only on the host; the friend's prize only on the friend's own client (COOPW.pay). Nobody is simulated: a player
-     who entered but never played by the host's next week end gets the formula score ("Để tài nghệ quyết định" rule, same as NPCs).
-   - Same pipeline for the feast contests (Yến tiệc đầu xuân / Thi tài Thất tịch, FX7; was muted on the guest) and the gift contest
-     (Dâng lễ, P variant: one "best gift" for the whole room).
-   - Tranh ghế (S.contest): host only (contestOpen / contestWeek / fillSeats muted on the guest). The host mirrors its contest into
-     S.ctc (W key); a guest candidate plays her own rounds and between-round choices on the mirror and sends them before her night
-     "Sẵn sàng" (mode "tg"); the host's rounds use them instead of the NPC-style auto score. One winner, crowned by the host
-     (S.ctcRes); a crowned guest takes rank 7 from it. */
-(function(){try{
-if(typeof COOPW!=="object"||typeof FV7==="undefined")return;
-const CW=COOPW,CK="ctm-cc";
-const on=()=>!!(CW.on&&typeof S!=="undefined"&&S&&!S.dead);
-const host=()=>CW.isHost();
-const J=x=>x==null?x:JSON.parse(JSON.stringify(x));
-const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"})[c]);
-let seq=0;const seen=new Set();
-function say(o){try{COOP.send(Object.assign({t:"act",k:CK,id:CW.pidMe()+":"+Date.now().toString(36)+":"+(seq++),week:CW.wk()},o))}catch(e){}}
-function sw(m){if(typeof $==="function"&&$("modal")&&$("modal").hidden)try{showModal()}catch(e){}if(m)try{render()}catch(e){}}
-function fName(){const f=CW.fEntry();return (f&&f.name)||"Hảo hữu"}
-/* a row's person on this client: me, the friend entry, an NPC, or a stand-in when that NPC is gone */
-function who(r){const id=+r.id;if(id===CW.pidMe())return S;if(id===CW.pidF())return CW.fEntry()||{id,name:r.nm||"Hảo hữu",alive:true,coop:true};return RV(id)||{id,name:r.nm||"",alive:false}}
-function fPresent(){const f=CW.fEntry();return !!(f&&present7(f))}
-function boards(){S.cfb=S.cfb||{};return S.cfb}
-function pruneB(){const B=boards();for(const id in B){const b=B[id];if((b.y||0)<S.year-1||(b.res&&(CW.wk()-(b.w||0))>8))delete B[id]}
- const A=S.cfa||{};for(const id in A)if((A[id].y||0)<S.year-1)delete A[id]}
-function rowOf(x,kind){return{id:x.p===S?CW.pidMe():x.p.id,nm:x.p===S?S.name:x.p.name,kind:x.kind||kind,t:x.t,pr:x.pr||0,lk:x.lk||0,s:x.s,mg:x.mg?1:0}}
-
-/* ---------- answers (both ways; the host keeps the friend's in S.cfa) ---------- */
-function ans(id,y,o){if(!on())return;say(Object.assign({mode:"ans",b:id,y},o))}
-function onAns(m){if(host()){S.cfa=S.cfa||{};S.cfa[m.b]={y:m.y,me:m.me||0,a:m.a||null,pr:m.pr||0}}
- const yes=m.me>0||!!m.a;try{log(`Hảo hữu ${yes?"đã ghi tên dự":"không ghi tên dự"} ${esc(m.n||"hội thi")}.`)}catch(e){}}
-
-/* ---------- invitations: one plan for the room ---------- */
-(function(){const p0=fPlan7;fPlan7=function(){if(!on())return p0.apply(this,arguments);if(!host())return null;/* the guest gets the host's plan after the merge */
- const r=p0.apply(this,arguments);try{const j=j7s();S.cfp=S.cfp||{};for(const k in (j.plans||{})){const P=j.plans[k];if(P.y>=S.year&&P.pp)S.cfp[k]={y:P.y,pp:J(P.pp)}}
-  for(const k in S.cfp)if(S.cfp[k].y<S.year)delete S.cfp[k]}catch(e){console.error(e)}return r}})();
-(function(){const i0=fInv7;fInv7=function(k,pp,view){const m=i0.apply(this,arguments);if(!m||!on())return m;
- const line=`<p class="past">Hảo hữu của ngươi cũng nhận được lời mời này; hai người thi chung một bảng với các phi tần, Hoàng thượng chấm một lần.</p>`;
- if(view)m.h=(m.h||"")+line;else m.t=(m.t||"")+line;
- const L=view?m.opts:m.o;const c=SC7[FV7[k][pp.vi][1]];
- (L||[]).forEach(o=>{const g=o.go;o.go=function(){const r=g&&g.apply(this,arguments);try{const P=(j7s().plans||{})[k];ans("f:"+k,pp.y||S.year,{me:P?P.me:0,n:`thi ${c?c.n:""}`})}catch(e){}return r}});
- return m}})();
-/* feast invitations (FX7): each client gets them from the shared calendar; the answer goes to the host */
-(function(){const x0=PEND.j71x;PEND.j71x=pp=>{const d=x0(pp);if(!d||!on())return d;const F=FX7[pp.kk];
- d.t+=`<p class="past">Hảo hữu của ngươi cũng được mời; hai người thi chung một bảng, Hoàng thượng chấm một lần.</p>`;
- d.o.forEach(o=>{const g=o.go;o.go=function(){const r=g&&g.apply(this,arguments);try{const e=(j7s().fx||{})[F.f]||{};ans("x:"+F.f,pp.y,{a:e.a||null,pr:e.pr||0,n:F.n})}catch(e){}return r}});return d}})();
-
-/* ---------- boards (host) ---------- */
-function gEnt(id,y){const a=(S.cfa||{})[id];return a&&a.y===y?a:null}
-function mkBoard(o){const B=boards();o.sc={};o.res=null;o.w=CW.wk();B[o.id]=o;pruneB();return o}
-function hostScore(id,pid,row){const B=boards()[id];if(!B||B.res)return;B.sc[pid]=row||0;tryFin(B,false)}
-function need(B){return Object.keys(B.ent).filter(p=>B.ent[p])}
-function tryFin(B,force){if(!host()||B.res)return;const N=need(B);
- if(!force&&N.some(p=>B.sc[p]===undefined))return;
- for(const p of N)if(B.sc[p]===undefined){/* entered but never played: the formula score, same rule as an NPC */
-  const pr=+p===CW.pidMe()?S:CW.fEntry();if(!pr||!present7(pr)){B.sc[p]=0;continue}
-  if(B.ty==="p"){const GF=BAL.fest.gift;B.sc[p]={id:+p,nm:pr.name,kind:"gift",t:Math.round(giftW7(pr)),pr:0,lk:0,s:Math.round(GF.plain+Math.random()*GF.luck),gi:2};continue}
-  const kind=B.ty==="x"?(B.ent[p].a||fxBest7(pr,FX7[B.kk].arts)):B.kind;const x=cScore7([pr],()=>kind,[],0)[0];if(x)B.sc[p]=rowOf(x,kind)}
- const L=B.rows.concat(N.map(p=>B.sc[p]).filter(Boolean)).sort((a,b)=>b.s-a.s);
- B.res=L;say({mode:"res",b:B.id,B:J(B)});applyRes(B)}
-/* host's next week end: nobody waits forever */
-(function(){const e0=endTurn;endTurn=function(){try{if(on()&&host()){const B=boards();for(const id in B)if(!B[id].res&&(B[id].w||0)<CW.wk())tryFin(B[id],true)}}catch(e){console.error(e)}return e0.apply(this,arguments)}})();
-
-/* ---------- the day ---------- */
-function headArt(m,k){if(m&&!m.headArt){m.headArt={src:`https://ctm-img.victoria-tntt.workers.dev/img/ev-fest-${k}-b.webp`,label:fName7(k)};m.evId=m.evId||("fest:"+k)}return m}
-(function(){const d0=fDay7;fDay7=function(k){if(!on())return d0.apply(this,arguments);
- const j=j7s();const P=j.plans&&j.plans[k];const V=P&&P.y===S.year&&FV7[k][P.pp.vi];
- if(!V||(V[0]!=="C"&&V[0]!=="P"))return d0.apply(this,arguments);
- P.y=-1;if(!host())return null;/* the guest plays this day from the host's board after the merge */
- const pp=P.pp,y=S.year;
- if(V[0]==="C"){const kind=V[1];const E=ents7(pp).filter(v=>!CW.isF(v));const rows=cScore7(E,()=>kind,pp.pr||[],0).map(x=>rowOf(x,kind));
-  const g=gEnt("f:"+k,y);const ent={};ent[CW.pidMe()]=P.me>0&&present7(S)?P.me:0;ent[CW.pidF()]=g&&g.me>0&&fPresent()?g.me:0;
-  const B=mkBoard({id:`f:${k}:${y}`,ty:"f",k,vi:pp.vi,y,kind,title:fName7(k),big:FBIG7.includes(k),rows,ent});
-  if(ent[CW.pidMe()])return headArt(playMsg(B),k);
-  tryFin(B,false);if(!B.res)log(`${fName7(k)}: ngươi không ghi tên; hội thi chờ hảo hữu thi xong mới định thứ.`);return null}
- /* P: every NPC gift is weighed once, here */
- const R2=ents7(pp).filter(v=>!CW.isF(v));const rows=R2.map(v=>{const g=gift7(v);return{id:v.id,nm:v.name,kind:"gift",t:Math.round(g),pr:0,lk:0,s:Math.round(g+Math.random()*BAL.fest.gift.luck)}});
- R2.forEach(giftPay7);
- const ent={};ent[CW.pidMe()]=present7(S)?1:0;ent[CW.pidF()]=fPresent()?1:0;
- mkBoard({id:`p:${k}:${y}`,ty:"p",k,vi:pp.vi,y,kind:"gift",title:fName7(k),sub:V[1],rows,ent,pp:J(pp)});
- if(!ent[CW.pidMe()])return null;
- const d=mkP("j71f",Object.assign(J(pp),{y}));if(!d)return null;return headArt({t:fShort7(k)+" · Dâng lễ",h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp,must:1},k)}})();
-/* the gift modal in co-op: her gift is weighed on her client, the host ranks the room once */
-(function(){const f0=PEND.j71f;PEND.j71f=pp=>{const d=f0(pp);if(!d||!on())return d;const V=(FV7[pp.k]||[])[pp.vi];if(!V||V[0]!=="P")return d;
- const id=`p:${pp.k}:${pp.y||S.year}`;if(!boards()[id])return d;const th=V[1]==="th"&&!S.thDead;const GF=BAL.fest.gift,miss=GF.miss[th?"th":"emp"];
- const mine=myGifts7();
- d.t+=`<p class="past">Hảo hữu của ngươi cũng dâng lễ; ${th?"Thái hậu":"Hoàng thượng"} chọn một lễ hay nhất cho cả hậu cung.</p>`;
- d.o.forEach((o,i)=>{o.go=i<3?()=>{submit(boards()[id],{t:mine[i],pr:0,lk:0,s:Math.round(mine[i]+Math.random()*GF.luck),gi:i,kind:"gift"})}:()=>{apply(miss);submit(boards()[id],null);log(`${fName7(pp.k)}: ngươi không dâng lễ.`)}});return d}})();
-/* the feast contest day (FX7): host builds the board; the guest's festival() is muted and she plays from the board */
-(function(){const f0=festival;festival=function(title,kk){if(!on()||!host()||!FX7[kk]||!j7On()||window.__j71off)return f0.apply(this,arguments);
- try{const F=FX7[kk],j=j7s(),y=S.year;const e=j.fx&&j.fx[F.f]&&j.fx[F.f].y===y&&j.fx[F.f].a&&present7(S)?j.fx[F.f]:null;if(e)e.done=1;
-  const g=gEnt("x:"+F.f,y);const E=liveRivals(true).filter(present7).filter(v=>!CW.isF(v));const ent={};ent[CW.pidMe()]=e?{a:e.a}:0;ent[CW.pidF()]=g&&g.a&&fPresent()?{a:g.a}:0;
-  if(E.length+(ent[CW.pidMe()]?1:0)+(ent[CW.pidF()]?1:0)<2)return "";
-  const rows=cScore7(E,p=>fxBest7(p,F.arts),[],0).map(x=>rowOf(x));
-  const B=mkBoard({id:`x:${F.f}:${y}`,ty:"x",k:F.f,kk,y,title,big:true,rows,ent});
-  if(e){Q.push(playMsg(B));sw()}else tryFin(B,false)}catch(e){console.error(e)}return ""}})();
-
-/* ---------- playing (both clients) ---------- */
-function myEnt(B){const j=j7s();if(B.ty==="f"){const P=(j.plans||{})[B.k];return P&&P.me>0?{kind:B.kind,meB:(P.me===2?J71.prep:0)+(P.pb||0)}:null}
- if(B.ty==="x"){const e=(j.fx||{})[B.k];return e&&e.a&&e.y===B.y?{kind:e.a,meB:(e.pr?J71.prep:0)+(e.pb||0)}:null}return null}
-function playMsg(B){const d=mkP("ccplay",{b:B.id});return d?{t:B.ty==="x"?B.title:`${fShort7(B.k)} · ${fTitle7(B.k,B.vi)}`,h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp,must:1}:null}
-PEND.ccplay=pp=>{if(!S)return null;const B=boards()[pp.b];if(!B||B.res)return null;const me=myEnt(B);if(!me)return null;const kind=me.kind;
- const other=B.ent[CW.pidF()];const txt=B.ty==="f"?FV7[B.k][B.vi][2]:`Ngày ${B.title}.`;
- const h=`<p>${txt}</p><p>Ngươi đã ghi tên${B.ty==="x"?` dâng ${SC7[kind].n}`:""}. Phần của ngươi = phần tự chơi, cộng thêm theo tài nghệ (${det7(kind,S)}) và chuẩn bị +${me.meB}.</p><p class="past">${other?"Hảo hữu của ngươi cũng dự thi; ":""}cả bảng chấm một lần, xong thì báo kết quả.</p>`;
- const win=B.ty==="x"?`đứng đầu, ${pz7(BAL.fest.fxWin)}`:`đoạt giải, ${pz7(prize7(B.k))}`;
- const play=()=>{if(mgOn7()){const R0=B.rows.map(x=>{const p=RV(x.id);return{id:x.id,name:x.nm,face:p?pv(p):null,score:x.s,talent:x.t,prep:x.pr,luck:x.lk}});
-   const fr=B.sc&&B.sc[CW.pidF()];if(fr)R0.push({id:fr.id,name:fName(),face:CW.fEntry()?pv(CW.fEntry()):null,score:fr.s,talent:fr.t,prep:fr.pr,luck:fr.lk});
-   const wait=other&&!fr;
-   try{startContest({art:kind,artName:SC7[kind].n,title:B.title,rivals:R0,prep:me.meB,talent:Math.round(SC7[kind].f(S)),talentBy:det7(kind,S),luck:J71.luck,big:B.big,fk:B.k,hold:true,
-    holdNote:wait?"Hảo hữu chưa thi xong; bảng định thứ chung và thưởng phạt sẽ báo khi mọi người dự thi xong.":"Bảng định thứ chung và thưởng phạt báo ở bảng kế tiếp.",
-    onDone:res=>{const sc=res&&typeof res.score==="number"?Math.round(res.score):null;const r=sc!=null?{t:sc,pr:0,lk:0,s:sc,mg:1}:rowOf(cScore7([S],()=>kind,[],me.meB)[0],kind);submit(B,Object.assign(r,{kind}));sw(1)}})}
-   catch(e){console.error(e);submit(B,Object.assign(rowOf(cScore7([S],()=>kind,[],me.meB)[0],kind),{kind}))}}
-  else submit(B,Object.assign(rowOf(cScore7([S],()=>kind,[],me.meB)[0],kind),{kind}))};
- return{who:pEmp(),t:h,o:[{n:"Vào thi (tự chơi phần thi)",fx:{suc:-J71.cost},x:`${win}, kèm vật quý và bạc theo hạng · hạng nhì hoặc ba: Danh +1 và quà nhỏ · hỏng: đứng chót thì Danh -1 · kèm: thắng thì các phi tần ghen +${B.ty==="x"?BAL.fest.fxGhen:BAL.fest.winGhen}`,go:play},
-  {n:"Bỏ thi",fx:{},x:"không được không mất",go:()=>{submit(B,null);log(`${B.title}: ngươi bỏ thi.`)}}]}};
-function submit(B,row){if(!B)return;const j=j7s();const r=row?Object.assign({id:CW.pidMe(),nm:S.name},row,{id:CW.pidMe(),nm:S.name}):null;
- j.cpl=j.cpl||{};j.cpl[B.id]={row:r,w:CW.wk()};if(r&&B.ty!=="p")log(`${B.title}: phần thi của ngươi ${r.s} phần, đã nộp; đợi định thứ.`);
- if(host())hostScore(B.id,CW.pidMe(),r);else say({mode:"sc",b:B.id,row:r})}
-
-/* ---------- results (both clients, once each) ---------- */
-function applyRes(B){if(!on()||!B||!B.res)return;const j=j7s();j.cdone=j.cdone||{};if(j.cdone[B.id])return;j.cdone[B.id]=1;
- const L=B.res.map(r=>({p:who(r),kind:r.kind||B.kind,t:r.t,pr:r.pr||0,lk:r.lk||0,s:r.s,mg:r.mg&&+r.id===CW.pidMe()?1:0,gi:r.gi}));if(!L.length)return;
- const w=L[0].p,mi=L.findIndex(x=>x.p===S),pay=p=>CW.pay(p);
- let cup="";const cu0=()=>{if(B.ty==="p"||!mgOn7()||typeof cuAward!=="function")return false;try{const r=cuAward({title:B.title,big:B.big},L.map(x=>({p:x.p,score:x.s})),mi+1,L.length,L[0].kind);cup=(r&&r.mine&&r.html)||"";}catch(e){console.error(e)}if(window.CU)CU.did=false;return true};
- if(B.ty==="f"){const kind=B.kind,pz=prize7(B.k);if(pay(w))ap(w,pz);const cu=cu0();if(!cu&&w!==S&&pay(w)&&roll(BAL.fest.winBestow))try{bestow(w,"contest")}catch(e){}
-  j.fn++;if(w===S){j.win++;ghenAll(BAL.fest.winGhen);try{if(!cu&&roll(BAL.fest.winBestow))bestow(S,"contest")}catch(e){}}
-  let me="";if(mi>0){if(mi<=2){apply({danh:1});me=` Ngươi hạng ${mi+1}: Danh +1.`}else me=` Ngươi hạng ${mi+1}/${L.length}.`;if(mi===L.length-1&&L.length>2){apply({danh:-1});me+=" Đứng chót: Danh -1."}}
-  log(`${fName7(B.k)}: ${w===S?G7(`Ngươi đoạt giải ${SC7[kind].n}: ${pz7(pz)}.`):`${mi>=0?R7("Không thành:")+" ":""}${w.name} đoạt giải ${SC7[kind].n} (${pz7(pz)}).`}${me}`);
-  Q.push(headArt({t:`${fShort7(B.k)} · Hội thi ${SC7[kind].n}: kết quả`,h:`${mi<0?"<p>Ngươi không dự, chỉ đứng xem.</p>":""}${rowsH7(L,`${fName7(B.k)} · bảng phần thi (cả hậu cung, chấm một lần)`)}${cup}`,who:pEmp(),must:1},B.k))}
- else if(B.ty==="x"){const FW=BAL.fest.fxWin;if(pay(w))ap(w,FW);const cu=cu0();if(!cu&&pay(w)&&roll(BAL.fest.fxBestow))try{bestow(w,"contest")}catch(e){}
-  if(w===S){ghenAll(BAL.fest.fxGhen);log(`<span class="g">${B.title}: ${SC7[L[0].kind].n} của ngươi đứng đầu, Hoàng thượng ban thưởng.</span> ${pzd7(FW)}.`)}
-  else{let r=`${mi>=0?R7("Không thành:")+" ":""}${B.title}: ${w.name} dâng ${SC7[L[0].kind].n} đứng đầu (${pz7(FW)}).${mi>=0?` Ngươi hạng ${mi+1}/${L.length}.`:""}`;if(mi>=1&&mi<=2&&cu)apply({danh:1});if(mi>=0&&mi===L.length-1&&L.length>2){apply({danh:-1});r+=" Ngươi đứng chót: Danh -1."}log(r)}
-  if(mi>=0)Q.push({t:`${B.title}: kết quả`,h:rowsH7(L,`${B.title}: bảng phần thi (cả hậu cung, chấm một lần)`)+cup,who:pEmp(),must:1})}
- else if(B.ty==="p"){const th=B.sub==="th"&&!S.thDead,tg=th?"Thái hậu":"Hoàng thượng";const GF=BAL.fest.gift,praise=GF.praise[th?"th":"emp"],small=GF.small[th?"th":"emp"];const fn=fName7(B.k);
-  if(w===S){apply(praise);ghenAll(BAL.fest.giftGhen);log(`${fn}: ${tg} khen lễ của ngươi nhất: ${pz7(praise)}.`)}
-  else{if(pay(w))ap(w,praise);const mine=mi>=0?L[mi]:null;const sm=mine&&mine.gi!=null&&mine.gi<2;if(sm)apply(small);
-   if(mine)log(`${R7("Không thành:")} ${fn}: ${tg} khen lễ của ${w.name} nhất (${pz7(praise)}).${sm?` Lễ của ngươi cũng được nhận: ${pz7(small)}.`:""}`);else log(`${fn}: ${tg} khen lễ của ${w.name} nhất.`)}
-  if(mi>=0)Q.push(headArt({t:`${fShort7(B.k)} · Dâng lễ: kết quả`,h:`<p>${tg} xem lễ của cả hậu cung một lượt, khen lễ của ${w===S?"ngươi":esc(w.name)} nhất.</p>`+kitRows(L.map((x,i)=>[`${i+1}. ${x.p===S?"Ngươi":esc(x.p.name)}`,`${x.s} phần`,"t"])),who:th?pTH():pEmp(),must:1},B.k))}
- sw(1)}
-
-/* ---------- after every week merge (both): plans → invitations, boards → play / results ---------- */
-function built(){if(!on())return;const j=j7s();
- if(!host()&&S.cfp){j.plans=j.plans||{};for(const k in S.cfp){const c=S.cfp[k];if(!c||c.y<S.year||!FV7[k]||!FV7[k][c.pp.vi])continue;const P=j.plans[k];if(P&&P.pp&&P.pp.sd===c.pp.sd)continue;
-  j.plans[k]={y:c.y,pp:J(c.pp),me:0,co:1};try{fMark7(k,c.pp.vi)}catch(e){}
-  if(FV7[k][c.pp.vi][0]==="C"&&!S.confined&&j7On()){const m=fInv7(k,j.plans[k].pp,true);if(m)Q.push(m)}}}
- const B=boards();j.cpl=j.cpl||{};
- for(const id in B){const b=B[id];if(b.res){applyRes(b);continue}if(host())continue;
-  if(j.cpl[id]){if(j.cpl[id].row!==undefined&&j.cpl[id].w!==undefined&&!j.cpl[id].q)say({mode:"sc",b:id,row:j.cpl[id].row});continue}
-  if(b.ty==="p"){if(present7(S)&&b.pp){const d=mkP("j71f",Object.assign(J(b.pp),{y:b.y}));if(d){Q.push(headArt({t:fShort7(b.k)+" · Dâng lễ",h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp,must:1},b.k));j.cpl[id]={q:1}}}continue}
-  if(myEnt(b)&&present7(S)){const m=playMsg(b);if(m){Q.push(b.ty==="f"?headArt(m,b.k):m);j.cpl[id]={q:1}}}}
- try{tgBuilt()}catch(e){console.error(e)}}
-(CW.onBuilt=CW.onBuilt||[]).push(built);
-/* reconnect: the guest re-sends a score the host may have missed */
-COOP.on("room",()=>setTimeout(()=>{try{if(!on()||host())return;const j=j7s(),B=boards();for(const id in (j.cpl||{})){const c=j.cpl[id];if(B[id]&&!B[id].res&&c&&!c.q)say({mode:"sc",b:id,row:c.row})}tgSend()}catch(e){}},600));
-
-/* ---------- the relay ---------- */
-COOP.on("act",m=>{if(!m||m.k!==CK||!CW.on||m.from===CW.seat||!S||seen.has(m.id))return;seen.add(m.id);
- try{if(m.mode==="ans")onAns(m);
-  else if(m.mode==="sc"&&host())hostScore(m.b,CW.pidF(),m.row);
-  else if(m.mode==="res"&&!host()&&m.B){boards()[m.b]=m.B;applyRes(m.B)}
-  else if(m.mode==="tg"&&host())tgHost(m);
-  render()}catch(e){console.error(e)}});
-
-/* ================= TRANH GHẾ: one contest, host-run ================= */
-const ckey=(x,mp)=>x==="me"?String(mp):String(x);
-function rnK(o,f){const r={};for(const k in (o||{}))r[f(k)]=J(o[k]);return r}
-function toC(c){const mp=CW.pidMe(),f=x=>ckey(x,mp);return{id:c.r+":"+c.t0,r:c.r,c:c.c.map(f),t0:c.t0,len:c.len,round:c.round,sc:rnK(c.sc,f),bk:rnK(c.bk,f),pr:rnK(c.pr,f),sab:rnK(c.sab,f),dq:(c.dq||[]).map(f)}}
-function toL(cc){const mp=String(CW.pidMe()),f=x=>String(x)===mp?"me":(isNaN(+x)?x:+x),g=x=>String(x)===mp?"me":String(x);
- return{co:1,id:cc.id,r:cc.r,c:cc.c.map(f),t0:cc.t0,len:cc.len,round:cc.round,sc:rnK(cc.sc,g),bk:rnK(cc.bk,g),pr:rnK(cc.pr,g),sab:rnK(cc.sab,g),dq:(cc.dq||[]).map(f),hint:0}}
-/* host: publish the mirror; the friend never acts by AI in a contest (she plays her own part) */
-(CW.preCanon=CW.preCanon||[]).push(()=>{if(!CW.on||!host()||!S)return;S.ctc=S.contest?toC(S.contest):null});
-(function(){const n0=npcContestAct;npcContestAct=function(p){if(CW.on&&CW.isF(p))return;return n0.apply(this,arguments)}})();
-(function(){const e0=contestEnd;contestEnd=function(){if(!on()||!host()||!S.contest)return e0.apply(this,arguments);
- const c=S.contest,cc=toC(c);const before=c.c.map(k=>{const p=byKey(k);return[k,p,p?rkOf(p):-1,!!(p&&p.queen)]});
- const r=e0.apply(this,arguments);let win=null;for(const [k,p,rk,q] of before){if(!p)continue;if(rkOf(p)>rk||(!q&&p.queen)||(p===S&&S.rank===7&&rk<7)){win=ckey(k,CW.pidMe());break}}
- S.ctcRes={id:cc.id,r:c.r,win,c:cc.c,tbl:cc,txt:String(r||"").replace(/<[^>]+>/g,"")};return r}})();
-function tgHost(m){const c=S.contest;if(!c||(c.r+":"+c.t0)!==m.cid)return;const fk=CW.pidF(),sk=String(fk);
- c.sc[sk]=c.sc[sk]||[];for(const i in (m.sc||{})){const v=m.sc[i];if(v!=null&&+i<c.round)c.sc[sk][i]=v}
- c.pr[sk]=Math.max(c.pr[sk]||0,m.pr||0);if(Array.isArray(m.bk))c.bk[sk]=m.bk.slice(0,6);
- for(const t in (m.sab||{})){const lk=t===String(CW.pidMe())?"me":t;c.sab[lk]=(c.sab[lk]||0)+(+m.sab[t]||0)}
- if(m.dq&&!c.dq.includes(fk))c.dq.push(fk)}
-/* host: the week's rounds run inside endTurn, where the friend entry is pulled out: put her back so she is scored and can win */
-(function(){const w0=contestWeek;contestWeek=function(){if(on()&&host()&&S.contest)return CW.withFriend(()=>w0.apply(this,arguments));return w0.apply(this,arguments)}})();
-/* guest: no contest of her own (the host's is the room's) */
-["contestOpen","contestWeek","fillSeats"].forEach(n=>{const f=window[n];if(typeof f!=="function")return;window[n]=function(){if(on()&&!host())return "";return f.apply(this,arguments)}});
-function tgBuilt(){if(host())return;const cc=S.ctc;
- if(!cc){if(S.contest&&S.contest.co)S.contest=null}
- else{const old=S.contest&&S.contest.co&&S.contest.id===cc.id?S.contest:null;const c=toL(cc);c.hint=old?old.hint:0;
-  const mine=S.ctcMine&&S.ctcMine.id===cc.id?S.ctcMine:null;if(mine){c.sc.me=c.sc.me||[];for(const i in (mine.sc||{}))if(mine.sc[i]!=null)c.sc.me[i]=mine.sc[i];if(mine.pr)c.pr.me=Math.max(c.pr.me||0,mine.pr);if(mine.bk)c.bk.me=mine.bk.slice()}
-  S.contest=c;S.ctcBase=J(c);
-  const cand=c.c.includes("me")&&!c.dq.includes("me");const sn=S.ctcSeen&&S.ctcSeen.id===cc.id?S.ctcSeen:{id:cc.id,round:0,open:0};
-  if(cand&&!sn.open){sn.open=1;Q.push({t:"Tranh ghế",who:pEmp(),h:`<p>Khuyết ghế ${c.r>=7?"Hoàng hậu":RANKS[c.r].n}; ngươi có tên trong danh sách ứng viên. Ba vòng: <b>Tài nghệ</b> trước Hoàng thượng, <b>Đức hạnh</b> trước Thái hậu, <b>Thế lực</b> (ai đứng sau ngươi).</p>${scoreTable()}<p class="past">Cả hậu cung một cuộc tranh ghế; hảo hữu và các phi tần chấm cùng một luật, chỉ một người được ghế.</p>`})}
-  if(cand)for(let i=sn.round;i<c.round;i++){if(i<2)myRound(i)}
-  if(cand&&c.round>sn.round&&c.round<3)myBetween();
-  sn.round=c.round;S.ctcSeen=sn}
- const R2=S.ctcRes;if(R2&&S.ctcResSeen!==R2.id){S.ctcResSeen=R2.id;const mp=String(CW.pidMe());
-  if(R2.win===mp&&R2.r===7&&S.rank<7){S.rank=7;S.justCrowned=1;S.lastPromo=S.turn;ghenAll(BAL.fest.ctGhen)}
-  if((R2.c||[]).includes(mp)){const keep=S.contest;S.contest=toL(R2.tbl);const tbl=scoreTable();S.contest=keep&&keep.co&&keep.id!==R2.id?keep:null;
-   const wn=R2.win===mp?"Ngươi":R2.win?(who({id:R2.win}).name||""):"";
-   Q.push({t:"Kết quả tranh ghế",who:R2.win===mp?pMe():pEmp(),h:`<p>${esc(R2.txt||"Tranh ghế xong.")}</p>${tbl}<p class="past">${wn?`${wn===`Ngươi`?"Ngươi":esc(wn)} được ghế; `:""}người thua thêm Oán với người thắng (+${BAL.fest.ctOan}).</p>`})}
-  if(S.contest&&S.contest.co&&S.contest.id===R2.id)S.contest=null}}
-function tgSend(){if(!on()||host())return;const c=S.contest;if(!c||!c.co)return;const b=S.ctcBase||{};const mp=String(CW.pidF());
- const sab={};for(const k in (c.sab||{})){const d=(c.sab[k]||0)-((b.sab||{})[k]||0);if(d>0)sab[k==="me"?String(CW.pidMe()):k]=d}
- const dq=c.dq.includes("me")&&!(b.dq||[]).includes("me");
- S.ctcMine={id:c.id,sc:J(c.sc.me||[]),pr:c.pr.me||0,bk:J(c.bk.me||[])};
- say({mode:"tg",cid:c.id,sc:J(c.sc.me||[]),pr:c.pr.me||0,bk:J(c.bk.me||[]),sab,dq});S.ctcBase=J(c);void mp}
-(CW.beforeReady=CW.beforeReady||[]).push(tgSend);
-
-window.CCO={boards,tryFin,applyRes,built,toC,toL};
-}catch(e){console.error(e)}})();
+/* ================= jcoopone: ONE WORLD — the co-op guard table (review/coop-one-world) =================
+   Owner co-op rule OD:L96 (one shared world, one truth) + one-core law OD:L1267; audit dev/handover/reports/coop-one-world.md.
+   Every shared world fact is computed ONCE, on the host. worldOn() (jcoopworld.js) is false only on the co-op guest seat; there each world
+   loop below is muted or runs for HER OWN person only. This is the LAST script (assemble.py), so each guard wraps the outermost layer of
+   the function (every module's wrapper inside it is skipped too). Single player and the host: every guard is a pass-through.
+   Kinds:  MUTE  = whole-world function, the guest returns "" (the host's result arrives in the merged week);
+           ONLY_ME = mixed function (her + every NPC): on the guest the people lists hold only her while it runs;
+           PERSON = per-person function: on the guest it does nothing for anyone but her.
+   Inline checks (same helper): j3 endTurn NPC Sức/tablet ticks, j8 kidsMonth NPC moms, j13 Emperor/Thái hậu illness + NPC fortune lots.
+   Safety net for anything missed: jcoopworld guestNet() takes back her endTurn's world rolls before her week goes to the server.
+   Not here: the night flip (review/night-final) and contests (review/coop-contest) use the same worldOn(). Shop stock is personal (kept).
+   Palace men (S.men) are the host's: the guest may build a throwaway set (menInit) but never writes it (jcoopworld HOST_ONLY) and every
+   rebuild takes the host's set. */
+(function(){
+const guest=()=>!worldOn();
+const wrap=(n,mk)=>{const f=window[n];if(typeof f!=="function")return;window[n]=mk(f)};
+/* MUTE: NPC–NPC meetings, quarrels and oán, triều đình month + news, Emperor mood month, epidemics, Tết/den visits of NPCs, NPC danger in thu săn */
+const MUTE=["npcEncounters","q72Npc","epidemic","tdMonth","tdNews","moodMonth","tsDenNpc","tsNpcDanger"];
+for(const n of MUTE)wrap(n,f=>function(){if(guest())return "";return f.apply(this,arguments)});
+/* ONLY_ME: arts/virtue study (v85Month), pets care + gifts (petWeek, petMonth), lost items (loMonth), servants' loyalty from mood (emoMonth),
+   NPC affairs with palace men (affairMonth): on the guest the people lists (liveRivals / consorts / emoPeople) hold only her while it runs
+   (the rivals array itself is untouched, so the queen, RV(id) and refs still resolve). */
+const ONLY_ME=["v85Month","petWeek","petMonth","loMonth","emoMonth","affairMonth","facMonth","servMonth","queenRewards","maidLoveMonth","ktMonth","fxServMonth"];
+/* her own people: herself, her maid, her servants, her children */
+const mine=x=>!!x&&(x===S||x===S.maid||(S.staff||[]).includes(x)||(S.kids||[]).includes(x));
+let solo=0;
+wrap("liveRivals",f=>function(){if(solo)return [];return f.apply(this,arguments)});
+wrap("consorts",f=>function(){const L=f.apply(this,arguments);return solo?L.filter(p=>p===S):L});
+wrap("emoPeople",f=>function(){const L=f.apply(this,arguments);return solo?L.filter(p=>p===S):L});
+wrap("allServ",f=>function(){const L=f.apply(this,arguments);return solo?L.filter(mine):L});
+wrap("allKids",f=>function(){const L=f.apply(this,arguments);return solo?L.filter(([k,v])=>!v||v===S):L});
+wrap("fxServants",f=>function(){const L=f.apply(this,arguments);return solo?L.filter(mine):L});
+function onlyMe(f,self,args){solo++;try{return f.apply(self,args)}finally{solo--}}
+for(const n of ONLY_ME)wrap(n,f=>function(){if(guest())return onlyMe(f,this,arguments);return f.apply(this,arguments)});
+/* the rest of the monthly world (stipends, illness, kids growth) is per person: PERSON below + inline checks in j8/j13 */
+/* PERSON: any of these called for an NPC (from any loop) does nothing on the guest */
+const PERSON={stipend:"",illMonthP:"",fireServ:"",npcStudy:undefined,loLose:null,ktGrow:undefined};
+for(const n in PERSON)wrap(n,f=>function(p){if(guest()&&p!==S&&n!=="ktGrow")return PERSON[n];if(guest()&&n==="ktGrow"&&arguments[1]!==S)return;return f.apply(this,arguments)});
+/* illness of servants / children / court people, NPC dress: only her own people on the guest */
+wrap("fxIllMonth",f=>function(p){if(guest()&&!mine(p))return;return f.apply(this,arguments)});
+wrap("wdNpcDress",f=>function(v){if(guest()&&v!==S)return;return f.apply(this,arguments)});
+/* fortune lots: an NPC's lot stays the host's */
+wrap("drawLot",f=>function(p){if(guest()&&p!==S)return p.lot||{i:0,lv:0,dom:""};return f.apply(this,arguments)});
+/* Thái hậu / Hoàng hậu mood (S.cm, a world key): the host rolls it; the guest keeps only her own spy line and resets her own offence count */
+wrap("cmMonth",f=>function(){if(guest()){try{if(!S||S.dead)return;const C=cmSt();C.thDrop=0;C.hhDrop=0;if((S.mat||0)>=3)C.spy=wk()}catch(e){}return}return f.apply(this,arguments)});
+/* the safety net's snapshots (jcoopworld guestNet) around the outermost endTurn, so every module's week-end work counts as her roll */
+wrap("endTurn",f=>function(){if(window.COOPW&&COOPW.netWrap)return COOPW.netWrap(f,this,arguments);return f.apply(this,arguments)});
+window.COOP_ONE={MUTE,ONLY_ME,PERSON:Object.keys(PERSON).concat(["drawLot","cmMonth","fxIllMonth","wdNpcDress"])};
+})();
+/* ================= jlag2 (review/lag-play-2, owner 16/11 15:05Z: no lag in play, first priority) =================
+   Pure speed: nothing here draws, styles or words anything; every change keeps the same end state, it only skips repeated work.
+   1. window.__rendN — render counter; window.__rdep = render depth (>0 while a render runs: per-part fits wait for the end of render).
+      __rendN (outermost render call), the "state may have changed" stamp for per-render caches (jaudit krnTable).
+   2. kaNorm1 memo — the act/option button normaliser chain (j63 kaNorm1 + j79 kpActArt + jk2b kitHideOut + jopic kpOptArt + jstory/jts/jbac
+      wrappers) ran on EVERY matching button of the page twice per render (renderPanel kitFix + the kaNorm observer), ~150 ms at 4x each.
+      Every step of that chain is idempotent (each marks the button and returns early); a button whose content and class are unchanged
+      since its last full pass is skipped. Buttons inside the dialog (#modal) always run (their wrappers read the open dialog's Q[0]). */
+(function(){
+ window.__rendN=0;
+ setTimeout(()=>{try{
+  if(typeof render==="function"){const r0=render;let d=0;render=function(){d++;window.__rdep=d;try{return r0.apply(this,arguments)}finally{d--;window.__rdep=d;if(!d)window.__rendN++}};window.render=render}
+  if(typeof kaNorm1==="function"){const n0=kaNorm1;const SIG=new WeakMap();
+   const sig=b=>b.className+"|"+b.childElementCount+"|"+b.textContent.length+"|"+(b.disabled?1:0)+"|"+b.attributes.length;
+   kaNorm1=function(b){if(!b||!b.nodeType)return n0.apply(this,arguments);const inDlg=!!(b.closest&&b.closest("#modal"));
+    if(!inDlg){const s=SIG.get(b);if(s!==undefined&&s===sig(b))return}
+    const r=n0.apply(this,arguments);if(!inDlg)try{SIG.set(b,sig(b))}catch(e){}return r}}
+ }catch(e){console.error("jlag2",e)}},0);
+})();
 
 window.__ctmBuilt=1;
 </script>
@@ -45010,7 +44953,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="5eebd169836a";window.CTM_BUILD=BUILD;
+const BUILD="e0453471964d";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

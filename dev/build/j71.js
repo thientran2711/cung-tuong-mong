@@ -377,7 +377,7 @@ function fxBest7(p,A){let b=A[0],v=-1;for(const a of A){const x=SC7[a].f(p);if(x
 function fxOdds7(F,art,meB,seed){const E=[S].concat(liveRivals(true).filter(present7));const r=rng7(seed);let w=0;const N=500;const base=E.map(p=>p===S?SC7[art].f(S)+meB:SC7[fxBest7(p,F.arts)].f(p));
  for(let t=0;t<N;t++){let b=-1,bi=-1;for(let i=0;i<E.length;i++){const x=base[i]+r()*J71.luck;if(x>b){b=x;bi=i}}if(bi===0)w++}return cl(Math.round(100*w/N),3,97)}
 PEND.j71x=pp=>{if(!S)return null;const F=FX7[pp.kk];if(!F)return null;const n=liveRivals(true).filter(present7).length;const best=fxBest7(S,F.arts);
- const gain=`thành: đứng đầu, ${pz7(BAL.fest.fxWin)}, có thể được ban thưởng`,lose="hỏng: đứng chót thì Danh -1",kem=`kèm: ngày hội tốn Sức -6, đứng đầu thì các phi tần ghen +${BAL.fest.fxGhen}`;
+ const gain=`thành: đứng đầu, ${pz7(BAL.fest.fxWin)}, có thể được ban thưởng`,lose="hỏng: đứng chót thì Danh -1",kem=`kèm: ngày hội tốn Sức -${J71.cost}, đứng đầu thì các phi tần ghen +${BAL.fest.fxGhen}`;
  const set=(a,pr)=>()=>{const j=j7s();j.fx=j.fx||{};j.fx[F.f]={y:pp.y,a,pr};log(a?`${F.n}: ngươi ghi tên dâng ${SC7[a].n}${pr?", bỏ bạc mời thầy kèm":""}.`:`${F.n}: ngươi không ghi tên.`)};
  const o=F.arts.map(a=>({n:`Ghi tên dâng ${SC7[a].n} (theo ${SC7[a].by})`,fx:{},od:fxOdds7(F,a,0,pp.sd),x:`${word(fxOdds7(F,a,0,pp.sd))} · ${gain} · ${lose} · ${kem}`,go:set(a,0)}));
  o.push({n:`Dâng ${SC7[best].n}, bỏ bạc mời thầy kèm trước`,fx:{bac:-30},od:fxOdds7(F,best,J71.prep,pp.sd),x:`${word(fxOdds7(F,best,J71.prep,pp.sd))} · ${gain} · ${lose} · ${kem}`,go:set(best,1)});

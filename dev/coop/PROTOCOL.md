@@ -37,13 +37,14 @@ as binary gzip when the JSON is over 200 KB (client must handle binary: `Decompr
 | `me` | `P` (personal blob) | set **my** `C.P[seat]` now (guest's first character after joining, or her reborn character). Server stores, broadcasts `state`; also drops my pending `end` and rewrites the OTHER seat's pending `end` so its view of me = the new blob (her old view of my dead character cannot overwrite the new one). Clients must rebuild local on `state`. |
 | `end` | `week`, `state` (C) | I finished week `week` (already ran my `endTurn()`); `state` = my canonical after it. Ignored if `week` ≠ room week. |
 | `unend` | `week` | take back my `end` (only while the other seat has not ended). Optional. |
+| `seatd` | `sv, set:{path:value}, del:[path], dev` | (review/lag-play-2) her seat copy as a DELTA on top of the stored copy of version `sv` (paths `buoi`, `used`, `c`, `d.<key>`, `d.S.<key>`). Applied only when the stored copy is exactly version `sv`, else `error seatresync` and the client sends the full `seat`. Answer `seatok`. Sent only to a server whose `room` reply lists `caps:["seatd"]`. Any client frame above 8 KB is gzip (binary). |
 | `ping` | – | keep-alive; server answers `pong`. Send every 20 s. |
 | `say` | `text` (≤ 200 chars) | optional short message to the friend, relayed as `said`. |
 
 ### server → client
 | t | fields | meaning |
 |---|---|---|
-| `room` | `code, you:"a"|"b", seats, week, ended:{a:bool,b:bool}, state` (C or null) | first reply after connect / reconnect; full snapshot. |
+| `room` | `code, you:"a"|"b", seats, week, ended:{a:bool,b:bool}, state` (C or null), `caps` (server features, e.g. `["seatd"]`) | first reply after connect / reconnect; full snapshot. |
 | `presence` | `seats, ended` | someone connected / disconnected / ended. `seats.<x>.online` drives the freeze. |
 | `state` | `state, week, by` | C changed outside the week tick (`init` / `me`). Rebuild local. |
 | `week` | `week, state` | the merged C for the new week. Rebuild local, unfreeze, play on. |
@@ -200,6 +201,13 @@ each player who entered plays her mini-game against those rows (`startContest({h
 host → the host ranks when every entered player is in, or at its next week end (missing player = the formula score, the NPC rule) →
 ONE list. Prize rule (`COOPW.pay`): her own client pays her; NPC prizes are paid by the host only; nobody pays the friend entry.
 The feast contests (FX7, festival() is muted on the guest) and the gift contest ("Dâng lễ", one best gift for the room) use the same board.
+Feast board placement (review/coop-contest-fix): the board is the BOTTOM layer of `festival()` (`COOPW.festBoard`, jcoopworld hooks): under the
+guest mute, the host's news line, B4's friend-in-harem and `b4Wrap` (which still sends what NPCs did to her items). Her entry on the board =
+her live registration `fEntry().fx7[f]` (same year, not done, valid art; with teacher prep `pr` and practice `pb`) or her `cfa["x:"+f]`
+answer, so ANY registration path enters her. The old B4 scoring (`CW.f7`, `f7Done`, cScore7/fxBest7/fxFin7 hooks) is retired.
+Sức rule (same as solo): an entrant on the ranked list pays `J71.cost` exactly once — on "Vào thi", or when the result applies if she
+was scored by formula because she never played (`j71.cpay[board]`); "Bỏ thi" pays nothing. Her feast registration closes (`fx[f].done`)
+when the result applies on her own client. The feast invitation odds use one seed per feast and year in co-op (same wording basis).
 The wager race (W variant) is drawn from the plan seed, so both see the same winner. Other variants (game with a consort, banquet, rite) are
 personal acts on the shared plan (NPC money moved by each player's own game adds by merge rule 2).
 Tranh ghế: host only (`contestOpen`, `contestWeek`, `fillSeats` muted on the guest; `npcContestAct` never acts for the friend). The guest's

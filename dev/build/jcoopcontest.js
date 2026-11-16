@@ -20,7 +20,7 @@
 if(typeof COOPW!=="object"||typeof FV7==="undefined")return;
 const CW=COOPW,CK="ctm-cc";
 const on=()=>!!(CW.on&&typeof S!=="undefined"&&S&&!S.dead);
-const host=()=>CW.isHost();
+const host=()=>typeof worldOn==="function"?worldOn():CW.isHost();/* ONE WORLD: host-only decisions read worldOn() (true solo / host seat) */
 const J=x=>x==null?x:JSON.parse(JSON.stringify(x));
 const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"})[c]);
 let seq=0;const seen=new Set();
@@ -29,7 +29,13 @@ function sw(m){if(typeof $==="function"&&$("modal")&&$("modal").hidden)try{showM
 function fName(){const f=CW.fEntry();return (f&&f.name)||"Hảo hữu"}
 /* a row's person on this client: me, the friend entry, an NPC, or a stand-in when that NPC is gone */
 function who(r){const id=+r.id;if(id===CW.pidMe())return S;if(id===CW.pidF())return CW.fEntry()||{id,name:r.nm||"Hảo hữu",alive:true,coop:true};return RV(id)||{id,name:r.nm||"",alive:false}}
-function fPresent(){const f=CW.fEntry();return !!(f&&present7(f))}
+/* the friend's entry, also while the host's endTurn has her pulled out of the harem */
+function fEnt(){return CW.withFriend?CW.withFriend(()=>CW.fEntry()):CW.fEntry()}
+function fPresent(){const f=fEnt();return !!(f&&present7(f))}
+/* her feast entry on the host: her live registration (fx7 on her entry: same year, not done, a valid art; main's f7reg rule) or her answer
+   to the j71x invitation (S.cfa) — ANY registration path puts her on the ONE board, with her chosen art and her preparation */
+function fxEntF(F,y){const v=fEnt();if(!v||!present7(v))return 0;const r=CW.f7reg?CW.f7reg(v,F.kk):null;
+ if(r&&r.X)return{a:r.X.a,mb:(r.X.pr?J71.prep:0)+(r.X.pb||0)};const g=gEnt("x:"+F.f,y);return g&&g.a&&SC7[g.a]?{a:g.a,mb:g.pr?J71.prep:0}:0}
 function boards(){S.cfb=S.cfb||{};return S.cfb}
 function pruneB(){const B=boards();for(const id in B){const b=B[id];if((b.y||0)<S.year-1||(b.res&&(CW.wk()-(b.w||0))>8))delete B[id]}
  const A=S.cfa||{};for(const id in A)if((A[id].y||0)<S.year-1)delete A[id]}
@@ -51,7 +57,7 @@ function onAns(m){if(host()){S.cfa=S.cfa||{};S.cfa[m.b]={y:m.y,me:m.me||0,a:m.a|
  (L||[]).forEach(o=>{const g=o.go;o.go=function(){const r=g&&g.apply(this,arguments);try{const P=(j7s().plans||{})[k];ans("f:"+k,pp.y||S.year,{me:P?P.me:0,n:`thi ${c?c.n:""}`})}catch(e){}return r}});
  return m}})();
 /* feast invitations (FX7): each client gets them from the shared calendar; the answer goes to the host */
-(function(){const x0=PEND.j71x;PEND.j71x=pp=>{const d=x0(pp);if(!d||!on())return d;const F=FX7[pp.kk];
+(function(){const x0=PEND.j71x;PEND.j71x=pp=>{if(on()&&pp&&FX7[pp.kk]){let h=7;for(const c of FX7[pp.kk].f+":"+pp.y)h=(h*31+c.charCodeAt(0))%999983;pp.sd=1+h}/* one seed for the room */const d=x0(pp);if(!d||!on())return d;const F=FX7[pp.kk];
  d.t+=`<p class="past">Hảo hữu của ngươi cũng được mời; hai người thi chung một bảng, Hoàng thượng chấm một lần.</p>`;
  d.o.forEach(o=>{const g=o.go;o.go=function(){const r=g&&g.apply(this,arguments);try{const e=(j7s().fx||{})[F.f]||{};ans("x:"+F.f,pp.y,{a:e.a||null,pr:e.pr||0,n:F.n})}catch(e){}return r}});return d}})();
 
@@ -65,9 +71,12 @@ function tryFin(B,force){if(!host()||B.res)return;const N=need(B);
  for(const p of N)if(B.sc[p]===undefined){/* entered but never played: the formula score, same rule as an NPC */
   const pr=+p===CW.pidMe()?S:CW.fEntry();if(!pr||!present7(pr)){B.sc[p]=0;continue}
   if(B.ty==="p"){const GF=BAL.fest.gift;B.sc[p]={id:+p,nm:pr.name,kind:"gift",t:Math.round(giftW7(pr)),pr:0,lk:0,s:Math.round(GF.plain+Math.random()*GF.luck),gi:2};continue}
-  const kind=B.ty==="x"?(B.ent[p].a||fxBest7(pr,FX7[B.kk].arts)):B.kind;const x=cScore7([pr],()=>kind,[],0)[0];if(x)B.sc[p]=rowOf(x,kind)}
+  const en=B.ent[p],kind=B.ty==="x"?(en.a||fxBest7(pr,FX7[B.kk].arts)):B.kind,mb=B.ty==="x"?(en.mb||0):(en===2?J71.prep:0);
+  const x=cScore7([pr],()=>kind,[],pr===S?mb:0)[0];if(x){if(pr!==S){x.pr=(x.pr||0)+mb;x.s+=mb}B.sc[p]=rowOf(x,kind)}}
  const L=B.rows.concat(N.map(p=>B.sc[p]).filter(Boolean)).sort((a,b)=>b.s-a.s);
  B.res=L;say({mode:"res",b:B.id,B:J(B)});applyRes(B)}
+/* test hook (dev/test/coop-p2.js B4): rank a board now, as the host's next week end would */
+CW.ccFin=id=>{const B=boards()[id];if(B)tryFin(B,true);return B?J(B):null};
 /* host's next week end: nobody waits forever */
 (function(){const e0=endTurn;endTurn=function(){try{if(on()&&host()){const B=boards();for(const id in B)if(!B[id].res&&(B[id].w||0)<CW.wk())tryFin(B[id],true)}}catch(e){console.error(e)}return e0.apply(this,arguments)}})();
 
@@ -96,24 +105,26 @@ function headArt(m,k){if(m&&!m.headArt){m.headArt={src:`img/ev-fest-${k}-b.webp`
  const mine=myGifts7();
  d.t+=`<p class="past">Hảo hữu của ngươi cũng dâng lễ; ${th?"Thái hậu":"Hoàng thượng"} chọn một lễ hay nhất cho cả hậu cung.</p>`;
  d.o.forEach((o,i)=>{o.go=i<3?()=>{submit(boards()[id],{t:mine[i],pr:0,lk:0,s:Math.round(mine[i]+Math.random()*GF.luck),gi:i,kind:"gift"})}:()=>{apply(miss);submit(boards()[id],null);log(`${fName7(pp.k)}: ngươi không dâng lễ.`)}});return d}})();
-/* the feast contest day (FX7): host builds the board; the guest's festival() is muted and she plays from the board */
-(function(){const f0=festival;festival=function(title,kk){if(!on()||!host()||!FX7[kk]||!j7On()||window.__j71off)return f0.apply(this,arguments);
- try{const F=FX7[kk],j=j7s(),y=S.year;const e=j.fx&&j.fx[F.f]&&j.fx[F.f].y===y&&j.fx[F.f].a&&present7(S)?j.fx[F.f]:null;if(e)e.done=1;
-  const g=gEnt("x:"+F.f,y);const E=liveRivals(true).filter(present7).filter(v=>!CW.isF(v));const ent={};ent[CW.pidMe()]=e?{a:e.a}:0;ent[CW.pidF()]=g&&g.a&&fPresent()?{a:g.a}:0;
+/* the feast contest day (FX7): the host builds the ONE board as the bottom layer of festival() (jcoopworld: under the guest mute, the news
+   line, B4's friend-in-harem and b4Wrap). undefined = not a shared feast here, festival() runs on as before. */
+CW.festBoard=function(title,kk){if(!on()||!host()||!FX7[kk]||!j7On()||window.__j71off)return undefined;
+ try{const F=Object.assign({kk},FX7[kk]),j=j7s(),y=S.year;const e=j.fx&&j.fx[F.f]&&j.fx[F.f].y===y&&j.fx[F.f].a&&present7(S)?j.fx[F.f]:null;if(e)e.done=1;
+  const E=liveRivals(true).filter(present7).filter(v=>!CW.isF(v));const ent={};ent[CW.pidMe()]=e?{a:e.a,mb:(e.pr?J71.prep:0)+(e.pb||0)}:0;ent[CW.pidF()]=fxEntF(F,y);
   if(E.length+(ent[CW.pidMe()]?1:0)+(ent[CW.pidF()]?1:0)<2)return "";
   const rows=cScore7(E,p=>fxBest7(p,F.arts),[],0).map(x=>rowOf(x));
   const B=mkBoard({id:`x:${F.f}:${y}`,ty:"x",k:F.f,kk,y,title,big:true,rows,ent});
-  if(e){Q.push(playMsg(B));sw()}else tryFin(B,false)}catch(e){console.error(e)}return ""}})();
+  if(e){Q.push(playMsg(B));sw()}else tryFin(B,false);
+  return `${title}: cả hậu cung thi chung một bảng${ent[CW.pidF()]?", có cả hảo hữu":""}. `}catch(e){console.error(e);return ""}};
 
 /* ---------- playing (both clients) ---------- */
-function myEnt(B){const j=j7s();if(B.ty==="f"){const P=(j.plans||{})[B.k];return P&&P.me>0?{kind:B.kind,meB:(P.me===2?J71.prep:0)+(P.pb||0)}:null}
+function myEnt(B){const j=j7s();if(!B.ent||!B.ent[CW.pidMe()])return null;if(B.ty==="f"){const P=(j.plans||{})[B.k];return P&&P.me>0?{kind:B.kind,meB:(P.me===2?J71.prep:0)+(P.pb||0)}:null}
  if(B.ty==="x"){const e=(j.fx||{})[B.k];return e&&e.a&&e.y===B.y?{kind:e.a,meB:(e.pr?J71.prep:0)+(e.pb||0)}:null}return null}
 function playMsg(B){const d=mkP("ccplay",{b:B.id});return d?{t:B.ty==="x"?B.title:`${fShort7(B.k)} · ${fTitle7(B.k,B.vi)}`,h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp,must:1}:null}
 PEND.ccplay=pp=>{if(!S)return null;const B=boards()[pp.b];if(!B||B.res)return null;const me=myEnt(B);if(!me)return null;const kind=me.kind;
  const other=B.ent[CW.pidF()];const txt=B.ty==="f"?FV7[B.k][B.vi][2]:`Ngày ${B.title}.`;
  const h=`<p>${txt}</p><p>Ngươi đã ghi tên${B.ty==="x"?` dâng ${SC7[kind].n}`:""}. Phần của ngươi = phần tự chơi, cộng thêm theo tài nghệ (${det7(kind,S)}) và chuẩn bị +${me.meB}.</p><p class="past">${other?"Hảo hữu của ngươi cũng dự thi; ":""}cả bảng chấm một lần, xong thì báo kết quả.</p>`;
  const win=B.ty==="x"?`đứng đầu, ${pz7(BAL.fest.fxWin)}`:`đoạt giải, ${pz7(prize7(B.k))}`;
- const play=()=>{if(mgOn7()){const R0=B.rows.map(x=>{const p=RV(x.id);return{id:x.id,name:x.nm,face:p?pv(p):null,score:x.s,talent:x.t,prep:x.pr,luck:x.lk}});
+ const play=()=>{const jj=j7s();jj.cpay=jj.cpay||{};jj.cpay[B.id]=1;/* "Vào thi" took her Sức (option fx) */if(mgOn7()){const R0=B.rows.map(x=>{const p=RV(x.id);return{id:x.id,name:x.nm,face:p?pv(p):null,score:x.s,talent:x.t,prep:x.pr,luck:x.lk}});
    const fr=B.sc&&B.sc[CW.pidF()];if(fr)R0.push({id:fr.id,name:fName(),face:CW.fEntry()?pv(CW.fEntry()):null,score:fr.s,talent:fr.t,prep:fr.pr,luck:fr.lk});
    const wait=other&&!fr;
    try{startContest({art:kind,artName:SC7[kind].n,title:B.title,rivals:R0,prep:me.meB,talent:Math.round(SC7[kind].f(S)),talentBy:det7(kind,S),luck:J71.luck,big:B.big,fk:B.k,hold:true,
@@ -131,6 +142,10 @@ function submit(B,row){if(!B)return;const j=j7s();const r=row?Object.assign({id:
 function applyRes(B){if(!on()||!B||!B.res)return;const j=j7s();j.cdone=j.cdone||{};if(j.cdone[B.id])return;j.cdone[B.id]=1;
  const L=B.res.map(r=>({p:who(r),kind:r.kind||B.kind,t:r.t,pr:r.pr||0,lk:r.lk||0,s:r.s,mg:r.mg&&+r.id===CW.pidMe()?1:0,gi:r.gi}));if(!L.length)return;
  const w=L[0].p,mi=L.findIndex(x=>x.p===S),pay=p=>CW.pay(p);
+ /* plan b — ONE rule, same as solo: her feast registration closes once the board is ranked; an entrant on the list pays the contest Sức
+    exactly once (on "Vào thi", or here when she was scored by formula because she never played — solo's no-minigame road) */
+ if(B.ty==="x"&&B.ent&&B.ent[CW.pidMe()]){const e=(j.fx||{})[B.k];if(e&&e.y===B.y)e.done=1}
+ if(B.ty!=="p"&&mi>=0){j.cpay=j.cpay||{};if(!j.cpay[B.id]){j.cpay[B.id]=1;apply({suc:-J71.cost})}}
  let cup="";const cu0=()=>{if(B.ty==="p"||!mgOn7()||typeof cuAward!=="function")return false;try{const r=cuAward({title:B.title,big:B.big},L.map(x=>({p:x.p,score:x.s})),mi+1,L.length,L[0].kind);cup=(r&&r.mine&&r.html)||"";}catch(e){console.error(e)}if(window.CU)CU.did=false;return true};
  if(B.ty==="f"){const kind=B.kind,pz=prize7(B.k);if(pay(w))ap(w,pz);const cu=cu0();if(!cu&&w!==S&&pay(w)&&roll(BAL.fest.winBestow))try{bestow(w,"contest")}catch(e){}
   j.fn++;if(w===S){j.win++;ghenAll(BAL.fest.winGhen);try{if(!cu&&roll(BAL.fest.winBestow))bestow(S,"contest")}catch(e){}}

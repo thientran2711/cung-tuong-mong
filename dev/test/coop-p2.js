@@ -130,11 +130,17 @@ const forceFlip=(o,who)=>o.p.evaluate(who=>{window.__fw=who;if(!window.__ff){win
   /* festival with her own registration */
   const fk=await B.p.evaluate(()=>{const kk=Object.keys(FX7)[0],F=FX7[kk];const j=j7s();j.fx=j.fx||{};const a=F.arts[F.arts.length-1];j.fx[F.f]={y:S.year,a,pr:1};S.suc=Math.max(S.suc,60);render();return {kk,f:F.f,a,suc:S.suc}});
   ok(await until(A,f=>{const e=COOPW.friend();return e&&e.fx7&&e.fx7[f.f]&&e.fx7[f.f].a===f.a},fk,15000),'B4 host: her festival entry reached her entry (live)');
-  const fl=await A.p.evaluate(f=>{COOPW.b4Fest('Hội thi thử',f.kk);return COOPW.f7last||null},fk);
-  ok(fl&&fl.reg&&fl.kind===fk.a,'B4 host: her score used HER chosen art + registration',[fl,fk.a]);
+  /* coop-contest-fix: her registration puts her on the ONE shared board (jcoopcontest), scored once by the host */
+  const fl=await A.p.evaluate(f=>{COOPW.b4Fest('Hội thi thử',f.kk);const id=`x:${f.f}:${S.year}`,B=(S.cfb||{})[id];return B?{id,ent:B.ent[COOPW.pidF()],me:COOPW.pidF()}:null},fk);
+  ok(fl&&fl.ent&&fl.ent.a===fk.a&&fl.ent.mb===await A.p.evaluate(()=>J71.prep),'B4 host: her board entry uses HER chosen art + registration (teacher prep)',[fl,fk.a]);
+  const rb=await A.p.evaluate(id=>COOPW.ccFin(id),fl&&fl.id);
+  ok(rb&&rb.res&&rb.res.some(r=>+r.id===fl.me&&r.kind===fk.a),'B4 host: one ranked list holds her row with her art',rb&&rb.res&&rb.res.map(r=>[r.id,r.kind,r.s]));
   ok(await until(B,f=>S.j71.fx[f.f].done===1,fk,15000),'B4 guest: her registration closed');
-  ok(await B.p.evaluate(f=>S.suc===f.suc-J71.cost,fk),'B4 guest: she pays the same Sức as playing it herself',[fk.suc,await B.p.evaluate(()=>S.suc)]);
-  ok(/Hội thi thử/.test(await MT(B)+await B.p.evaluate(()=>JSON.stringify(Q.map(q=>q.t)))),'B4 guest: her result card',await MT(B));
+  ok(await until(B,f=>S.suc===f.suc-J71.cost,fk,15000),'B4 guest: she pays the same Sức as playing it herself (once)',[fk.suc,await B.p.evaluate(()=>S.suc)]);
+  ok(await until(B,()=>/Hội thi thử: kết quả/.test((document.getElementById('modal')||{}).textContent+JSON.stringify(Q.map(q=>q.t))),null,15000),'B4 guest: her result card',await MT(B));
+  /* the same result again (relay repeat / week merge) changes nothing */
+  await A.p.evaluate(id=>{const B=S.cfb[id];COOP.send({t:"act",k:"ctm-cc",id:"rep:"+Date.now(),week:COOPW.wk(),mode:"res",b:id,B:JSON.parse(JSON.stringify(B))})},fl&&fl.id);await sleep(2500);
+  ok(await B.p.evaluate(f=>S.suc===f.suc-J71.cost&&Q.filter(q=>/Hội thi thử: kết quả/.test(q.t||'')).length<=1,fk),'B4 guest: no second Sức, no second result card');
   await B.p.screenshot({path:OUT+'/b4-guest-fest-1180x820.png'});for(let i=0;i<3;i++){await clear(A);await clear(B)}}
  /* ================= (3) B3 j99succ in co-op: her son is the heir when the Emperor dies ================= */
  {const y0=await A.p.evaluate(()=>S.year);await A.p.evaluate(()=>{COOPW.inTurn=true;try{emperorDies('')}finally{COOPW.inTurn=false}});

@@ -3,6 +3,7 @@
    1 one invitation: the host's plan reaches the guest after the week (same variant, entrants, seed) + the 'friend also invited' line; answers relay.
    2 one board: both play against the same NPC rows; the host ranks both + NPCs once; both clients hold the SAME result list.
    3 prize once: the friend entry is never paid on the other client; an NPC winner is paid on the host only.
+   5 feast (FX7): same invitation, any registration path puts her on the ONE board, Sức once, registration closed.
    4 Tranh ghế: host-only; the guest plays her rounds on the mirror; her real round scores are used; exactly one crown, both agree.
    usage: node dev/test/coop-contest.js [outdir] [workerURL] */
 const {chromium}=require('playwright');const fs=require('fs'),path=require('path');const {execSync}=require('child_process');
@@ -145,6 +146,27 @@ const head=o=>o.p.evaluate(()=>Q[0]?{t:Q[0].t,pid:Q[0].pid||null,sd:Q[0].pp&&Q[0
  {const g=await B.p.evaluate(id=>RV(id).sung,nv);ok(g===gS0,'3 guest: NPC NOT paid on the guest (the merge brings the host payment once)',{gS0,g})}
  for(const o of [A,B]){while(await o.p.evaluate(()=>!!(Q[0]&&window.__mine(Q[0])))){await o.p.evaluate(()=>{const m=document.getElementById('modal');const b=m&&[...m.querySelectorAll('button:not([disabled])')].find(x=>x.offsetParent!==null);if(b)b.click();else Q.shift()});await sleep(200)}}
  await clear(A);await clear(B);
+ /* ---- 5 feast (FX7, coop-contest-fix): the same invitation on both seats + friend line, any registration puts her on the ONE board, Sức once ---- */
+ {const mkInv=o=>o.p.evaluate(()=>{const kk=Object.keys(FX7)[0],F=FX7[kk];const d=mkP("j71x",{kk,y:S.year,sd:1+R(1e6)});if(!d)return null;
+    Q.unshift({t:F.n+' · Lời mời',h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp,must:1});showModal();return{kk,f:F.f,y:S.year,sd:d.pp.sd,fl:/Hảo hữu của ngươi cũng được mời/.test(d.t),n:F.n}});
+  const iA=await mkInv(A),iB=await mkInv(B);
+  ok(iA&&iB&&iA.sd===iB.sd&&iA.fl&&iB.fl,'5 both: the same feast invitation (one seed) + the friend line',{iA,iB});
+  await shot(A,'5-fx-invite');await shot(B,'5-fx-invite');
+  ok(await answer(A,/^Ghi tên dâng/),'5 host: registers');ok(await answer(B,/^Ghi tên dâng/),'5 guest: registers');
+  ok(await until(A,f=>{const v=COOPW.fEntry(),r=v&&COOPW.f7reg(v,f.kk);return !!(r&&r.X.a)},iA,15000),'5 host: her live registration (fx7) reached her entry');
+  const bx=await A.p.evaluate(f=>{const r=COOPW.b4Fest(f.n,f.kk);const id=`x:${f.f}:${f.y}`,B0=(S.cfb||{})[id];if(!B0)return{r};B0.w=COOPW.wk()+1;
+    return{id,ent:B0.ent,rows:B0.rows.map(x=>x.id+':'+x.s),q:Q.some(m=>m.pid==='ccplay')}},iA);
+  ok(bx.id&&bx.ent['901']&&bx.ent['902']&&bx.ent['902'].a&&bx.q,'5 host: ONE feast board with both players (her chosen art) + host play card',bx);
+  await A.p.evaluate(()=>{window.__score=50});ok(await answer(A,/^Vào thi/),'5 host: plays');
+  await weekAll(A,B,'5');
+  const sb=await B.p.evaluate(()=>S.suc);await B.p.evaluate(()=>{window.__score=60});ok(await answer(B,/^Vào thi/),'5 guest: plays her own part');
+  ok(await until(B,id=>{const b=(S.cfb||{})[id];return b&&b.res&&(j7s().cdone||{})[id]},bx.id,20000),'5 guest: result arrived and applied');
+  const rA=await A.p.evaluate(id=>(S.cfb[id].res||[]).map(r=>r.id+':'+r.s),bx.id),rB=await B.p.evaluate(id=>(S.cfb[id].res||[]).map(r=>r.id+':'+r.s),bx.id);
+  ok(JSON.stringify(rA)===JSON.stringify(rB)&&rA.length===bx.rows.length+2&&rA[0]==='902:60','5 both: ONE result list (both players + NPCs), her real score first',{rA,rB});
+  const gx=await B.p.evaluate(f=>({suc:S.suc,done:(j7s().fx||{})[f.f]&&j7s().fx[f.f].done,q:Q.filter(m=>/: kết quả$/.test(m.t||'')&&m.t.startsWith(f.n)).length}),iA);
+  ok(sb-gx.suc===await B.p.evaluate(()=>J71.cost)&&gx.done===1&&gx.q===1,'5 guest: Sức paid once, registration closed, one result card',{sb,gx});
+  ok(await A.p.evaluate(f=>Q.filter(m=>/: kết quả$/.test(m.t||'')&&m.t.startsWith(f.n)).length===1,iA),'5 host: one result card');
+  for(const o of [A,B]){await o.p.evaluate(()=>{const i=Q.findIndex(m=>/: kết quả$/.test(m.t||''));if(i>0)Q.unshift(Q.splice(i,1)[0]);if(Q.length)showModal()});await shot(o,'5-fx-result')}}
  /* ---- 4 Tranh ghế ---- */
  await B.p.evaluate(()=>{S.rank=6});await weekAll(A,B,'4 prep');
  const tg=await A.p.evaluate(()=>{for(const v of rivals)if(v.queen&&!v.coop){v.queen=false;v.rank=Math.min(v.rank,5)}const v=liveRivals(false).find(x=>!x.coop&&present7(x));v.rank=6;S.rank=6;const f=COOPW.fEntry();
