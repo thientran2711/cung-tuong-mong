@@ -104,9 +104,9 @@ function tdsTchAsk(k,then){const V=VIR.find(x=>x.k===k),fee=virCost(virLv(S,k),S
  Q.push({act:1,t:`${r.n}: dùng vật liệu gì?`,who:pMe(),h:`<p>Phẩm = phần chơi (0..10) + ${V.n} bậc ${l}: +${l} + vật liệu (thường +${WMAT[0]}, tốt +${WMAT[1]}, quý +${WMAT[2]}).</p><p class="past">Thường dưới 6 · Khá 6 · Tinh xảo 10 · Tuyệt phẩm 14</p><p>Chỉ vật liệu quý mới thành Tuyệt phẩm.${fee?` Phí thầy ${fee} bạc trả riêng.`:""}</p>`,opts:O})}})();
 /* run the lesson itself (j85 lessonVir, or review/tuduc-mg tdPlay); the work is made once the lesson really happened */
 function tdsRun(k,mode,pick){TDV.pend=Object.assign({k,mode},pick);TDV.hit=null;
- if(mode==="prac"){if(!tdsOK(k,"prac")){tdsReset();return}apply({suc:-10});spend(2);TDV.hit={k};tdsFinish("tự luyện");save();render();return}
+ if(mode==="prac"){if(!tdsOK(k,"prac")){tdsReset();return}apply({suc:-10});spend(2);TDV.hit={k};tdsFinish("tự học");save();render();return}
  /* a consort teaches: j85's "Theo ma ma giáo tập học …" log becomes "Học …" (tdsFinish names her; review r1) */
- const tv=mode==="master"&&TDV.tch?RV(+TDV.tch):null,lg=log;if(tv)log=function(h){return lg.call(this,typeof h==="string"?h.replace(/[Tt]heo ma ma giáo tập học ([^.]+)\./,(m,a)=>`Học ${a}.`):h)};
+ const tv=mode==="master"&&TDV.tch?RV(+TDV.tch):null,lg=log;if(tv)log=function(h){return lg.call(this,typeof h==="string"?h.replace(/[Tt]heo ma ma giáo tập học ([^.]+)\./,(m,a)=>`Học ${a}.`).replace(/Học ([^ .]+) với ma ma giáo tập([^.]*)\./,(m,a,b)=>`Học ${a}${b}.`):h)};
  TDV.go=1;try{window.__tdsL0(k,mode)}finally{TDV.go=0;if(tv)log=lg}
  if(TDV.hit)tdsFinish(mode==="self"?"tự học":"học");save();render()}
 /* review/tuduc-mg: its result (raw, skipped) decides the work; a skipped game makes no work (the "Học nhanh" rule) */
@@ -145,7 +145,7 @@ document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.clos
 /* ---------- Tài nghệ › Tác phẩm: one card per course (what it makes, lối learnt, practice when mastered) ---------- */
 (function(){if(typeof ktWorksHTML!=="function")return;const w0=ktWorksHTML;ktWorksHTML=function(){let h=w0.apply(this,arguments);try{const why=whyTime(2)||(S.suc<15?"Sức dưới 15":"");
   const C=VIR.filter(V=>TDS_KIND[V.k]).map(V=>{const k=V.k,l=virLv(S,k),kind=TDS_KIND[k],K=WK[kind],kn=rcpKnown()[kind].length;
-   const acts=l>=5?[pbtn(`data-tdsprac="${k}"`,"Tự luyện, làm đồ",`Chắc chắn · tốn: Sức -10, 2 khắc · thành: một món ${K.w.toLowerCase()}, ${wkOddsTxt(S,kind,0)}`,why)]:[];
+   const acts=l>=5?[pbtn(`data-tdsprac="${k}"`,"Tự học, làm đồ",`Chắc chắn · tốn: Sức -10, 2 khắc · thành: một món ${K.w.toLowerCase()}, ${wkOddsTxt(S,kind,0)}`,why)]:[];
    return{kind:"wk",k,name:`${V.n} · ${V.full}`,level:l,prog:S.virp[k],need:l+2,desc:`<span class="kchip n">lối đã học ${kn}/${RCP_ST[kind].length}</span> <span class="kchip n">${K.w}${K.fin?" · "+wkFinTxt(K):""}</span> <span class="kchip g">phẩm +${l}</span><br>${wkOddsTxt(S,kind,0)}`,next:"",acts,img:kitSkillArt("vir",k,V.n),can:!!(acts.length&&!why)}});
   const tail=h.indexOf(`data-skill="wk-taste"`);const cards=C.map(kitSkillCard).join("");
   if(tail>0){const i=h.lastIndexOf("<div",tail);h=h.slice(0,i)+cards+h.slice(i)}else h+=cards}catch(e){console.error("tds works",e)}return h}})();
