@@ -175,9 +175,7 @@ function kitStagePeople(m){if(!m)return[];let L=[];const sp=m.stage||(m.kit&&m.k
  return L.filter(p=>p&&typeof p==="object").slice(0,2)}
 function kitEventStage(m){try{const M=$("modal"),mb=$("mb");const dlg=M&&M.querySelector(".dlg.kpanel");const body=mb&&mb.querySelector(":scope > .kpb");
  if(!dlg||!body||body.classList.contains("kpid")||body.querySelector(":scope > .kes"))return false;
- /* KIT §8 / 32.2 (coordinator 15/11, kit-sample audit): an INFO panel about a person (ĐIỀU · info / LUẬT · rule / NGƯỜI · person report)
-    keeps the small 3:4 portrait (.kpsubj); the full-body stage column is for EVENTS with a main actor (VIỆC, BÁO, ĐÊM, KẾT QUẢ …) */
- if(/^(info|rule|person)$/.test(dlg.dataset.kind||"")&&!Array.isArray(m&&(m.stage||(m.kit&&m.kit.stage))))return false;/* a panel that names its stage itself (the Nội vụ phủ shop, pet care) keeps it */
+ /* owner 16/11 07:35Z (OD:L448): EVERY pop-up with a person — events AND info / rule / person reports — shows the person FULL-BODY on the left; the small 3:4 portrait (.kpsubj) is retired for people (a person pop-up outside #modal: kitPersonDlg, jpdlg.js) */
  const P=kitStagePeople(m);if(!P.length)return false;const figs=P.map(p=>kitStageFig(p)).filter(Boolean);if(!figs.length)return false;
  /* wide band on top: headArt (jk3 .kdlgart) or the event picture moved from the tall left slot */
  if(!mb.querySelector(":scope > .kdlgart")){let a=null;const ev=body.querySelector(":scope > .kpsubj.kpev");
