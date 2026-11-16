@@ -22,11 +22,14 @@ const HOME=`window.__kc2Home=function(){const P=kc2Pre();const pri=S.kc.kd==="da
   mv=0;nextBuoi()}
  return g};`;
 const SNAP=`window.__kc2Snap=function(t0){const ar=Object.values(S.arts||{});let known=0;try{known=liveRivals(true).filter(v=>k61St(v)>=2).length}catch(e){}
- return{o:S.origin.k,dead:!!S.dead,mo:S.turn-t0,rank:S.rank,srv:!!(S.srv&&!S.srv.risen),risen:!!(S.srv&&S.srv.risen),srk:S.srv?S.srv.rk:null,lau:S.srv?S.srv.lau:null,tin:S.tin,out:!!S.out,maxRank:window.__maxRank,home:!!(S.kc&&!S.kc.inPal),end:S.kc&&S.kc.end,sung:S.sung,danh:S.danh,bac:S.bac,stats:S.sac+S.tai+S.tamco+S.duc,arts:ar.reduce((a,x)=>a+x,0),known,tier:(S.kc&&S.kc.ex&&S.kc.ex.tier)!=null?S.kc.ex.tier:(S.selx&&S.selx.tier)}}`;
+ return{o:S.origin.k,dead:!!S.dead,mo:S.turn-t0,rank:S.rank,srv:!!(S.srv&&!S.srv.risen),risen:!!(S.srv&&S.srv.risen),srk:S.srv?S.srv.rk:null,lau:S.srv?S.srv.lau:null,tin:S.tin,out:!!S.out,maxRank:window.__maxRank,home:!!(S.kc&&!S.kc.inPal),end:S.kc&&S.kc.end,sung:S.sung,danh:S.danh,bac:S.bac,stats:S.sac+S.tai+S.tamco+S.duc,arts:ar.reduce((a,x)=>a+x,0),known,sc:(S.kc&&S.kc.ex&&S.kc.ex.sc!=null)?S.kc.ex.sc:(S.selx&&S.selx.sc),tier:(S.kc&&S.kc.ex&&S.kc.ex.tier)!=null?S.kc.ex.tier:(S.selx&&S.selx.tier)}}`;
 (async()=>{const b=await chromium.launch({args:['--disable-dev-shm-usage','--disable-gpu']});const c=await b.newContext({viewport:{width:390,height:844}});
  await c.route('http://game.local/**',r=>{const u=decodeURIComponent(new URL(r.request().url()).pathname);if(/\.(webp|png|jpg|mp3|ogg)$/.test(u))return r.abort();const f=path.join(ROOT,u);if(!f.startsWith(ROOT)||!fs.existsSync(f)||fs.statSync(f).isDirectory())return r.fulfill({status:404,body:''});r.fulfill({status:200,body:fs.readFileSync(f),contentType:/\.html$/.test(f)?'text/html':/\.json$/.test(f)?'application/json':'text/plain'})});
  const rows=[],errs=[];const t0=Date.now();
- async function life(o,arm){const p=await c.newPage();p.on('pageerror',e=>errs.push(String(e.message).slice(0,160)));
+ async function life(o,arm,i){const p=await c.newPage();
+  /* fix2: SEED=<n> makes every life reproducible (seeded Math.random per life: seed, life index, origin, arm) */
+  if(process.env.SEED){const s=(+process.env.SEED*100003+i*7919+[...o].reduce((a,ch)=>a*31+ch.charCodeAt(0),0)+(arm==='nha'?17:0))>>>0;
+   await p.addInitScript(s=>{let a=s>>>0;Math.random=function(){a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}},s)}p.on('pageerror',e=>errs.push(String(e.message).slice(0,160)));
   await p.goto(GAME,{waitUntil:'domcontentloaded'});await p.waitForTimeout(1500);await p.evaluate(()=>localStorage.clear());await p.reload({waitUntil:'domcontentloaded'});await p.waitForTimeout(1500);
   await p.evaluate(()=>document.querySelector('#slots button[data-new="1"]').click());await p.waitForTimeout(800);
   await p.evaluate(`window.__origO=${JSON.stringify(o)};window.__hhStop=1;try{PX.app.ticker.stop()}catch(e){}`);
@@ -37,7 +40,7 @@ const SNAP=`window.__kc2Snap=function(t0){const ar=Object.values(S.arts||{});let
     let k=0;while(!S.dead&&S.turn-t0<D+1&&k++<4000){window.__bot.step("sens",40);if(window.__res.length)break}}
    const s=window.__kc2Snap(t0);s.D=D;s.arm=arm;s.res=window.__res.length?window.__res[0].title:null;return s},arm);
   try{await p.close()}catch(e){}return r}
- for(let i=0;i<N;i++)for(const o of ORIG)for(const arm of ARMS){let r;try{r=await life(o,arm)}catch(e){errs.push('life '+String(e).slice(0,160));continue}rows.push(r);fs.writeFileSync(OUT,JSON.stringify({rows,errs}));process.stderr.write(`${o} ${arm} ${JSON.stringify(r)}\n`)}
+ for(let i=0;i<N;i++)for(const o of ORIG)for(const arm of ARMS){let r;try{r=await life(o,arm,i)}catch(e){errs.push('life '+String(e).slice(0,160));continue}rows.push(r);fs.writeFileSync(OUT,JSON.stringify({rows,errs}));process.stderr.write(`${o} ${arm} ${JSON.stringify(r)}\n`)}
  const avg=(L,k)=>+(L.reduce((a,x)=>a+(+x[k]||0),0)/Math.max(1,L.length)).toFixed(1);const sum={};
  for(const o of ORIG)for(const arm of ['cung','nha']){const L=rows.filter(r=>r.o===o&&r.arm===arm);const al=L.filter(r=>!r.dead&&!r.res&&!r.home&&!r.end);sum[o+'/'+arm]={n:L.length,dead:L.filter(r=>r.dead||r.res).length,outside:L.filter(r=>r.end&&!r.dead).length,mo:avg(al,'mo'),rank:avg(al,'rank'),risen:al.filter(r=>r.risen).length,srk:avg(al,'srk'),sung:avg(al,'sung'),danh:avg(al,'danh'),bac:avg(al,'bac'),stats:avg(al,'stats'),arts:avg(al,'arts'),known:avg(al,'known')}}
  console.log(JSON.stringify({sum,errs:errs.slice(0,5),secs:Math.round((Date.now()-t0)/1000)},null,1));await b.close()})().catch(e=>{console.error(e);process.exit(1)});
