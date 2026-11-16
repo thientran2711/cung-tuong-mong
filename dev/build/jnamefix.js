@@ -10,12 +10,13 @@
 function nmEsc(s){return String(s).replace(/[.*+?^${}()|[\]\\]/g,"\\$&")}
 /* rewrite old -> neu in every string of the save, whole words only; other people's longer names that contain old are protected */
 function nmRewrite(old,neu,protect){if(!old||old===neu)return 0;const re=new RegExp("(?<![\\p{L}\\p{N}])"+nmEsc(old)+"(?![\\p{L}\\p{N}])","gu");
- const P=(protect||[]).filter(p=>p&&p!==old&&p.indexOf(old)>=0).sort((a,b)=>b.length-a.length);let n=0;const seen=new Set();
+ const rk=new RegExp("(?<![\\p{L}])"+nmEsc(old)+"$","u");/* keys like S.rcpK "v12<name>" */const P=(protect||[]).filter(p=>p&&p!==old&&p.indexOf(old)>=0).sort((a,b)=>b.length-a.length);let n=0;const seen=new Set();
  const fix=s=>{if(s.indexOf(old)<0)return s;let t=s;P.forEach((p,i)=>{t=t.split(p).join("\u0001"+i+"\u0001")});const u=t.replace(re,()=>{n++;return neu});
   return P.length?u.replace(/\u0001(\d+)\u0001/g,(m,i)=>P[+i]):u};
  const walk=o=>{if(!o||typeof o!=="object"||seen.has(o))return;seen.add(o);
   if(Array.isArray(o)){for(let i=0;i<o.length;i++){const v=o[i];if(typeof v==="string")o[i]=fix(v);else walk(v)}return}
-  for(const k in o){const v=o[k];if(typeof v==="string")o[k]=fix(v);else if(v&&typeof v==="object")walk(v)}};
+  for(const k of Object.keys(o)){const v=o[k];if(typeof v==="string")o[k]=fix(v);else if(v&&typeof v==="object")walk(v);
+   if(k.indexOf(old)>=0){const k2=k.replace(rk,neu);if(k2!==k&&!(k2 in o)){o[k2]=o[k];delete o[k]}}}};/* keys too (S.rcpK "v12<name>") */
  try{walk(S);walk(rivals)}catch(e){console.error("nmRewrite",e)}return n}
 const NM_FIX={runs:0,renamed:[]};
 function nmFix(why){if(typeof S==="undefined"||!S||!nmOwner())return null;const out=[];
