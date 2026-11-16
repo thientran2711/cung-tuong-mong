@@ -116,7 +116,7 @@ function agTick(){if(!agOn())return;const z=agZ();const key=agKey();if(z.key===k
   for(const v of liveRivals(true)){if(!v.alive||v.out)continue;let N;const tn0=performance.now();try{N=agNeedsC(v)}catch(e){agErr("needs",e);continue}AG.tm.needs+=performance.now()-tn0;
    /* first WHAT she wants this buổi (one of her needs, or keeping her schedule), then HOW (the deeds that serve it) — a person, not a solver */
    const rt=BAL.ag.routine*(1+BAL.ag.restW*N.rest);const NL=[[null,rt]];for(const n of AGNEED)if(N[n]>0)NL.push([n,N[n]*BAL.ag.needW]);
-   const need=mindPick(NL,v);if(!need)continue;
+   const need=agPw(NL);if(!need)continue;/* her slip (jmind) is in the second step, once */
    const ta=performance.now();const O=agOpts(v,N,need);AG.tm.opts+=performance.now()-ta;if(!O.length)continue;
    const c=mindPick(O.map(o=>[o,o.u]),v);if(!c)continue;c.need=need;
    const sl=agSlot(v,c.at,c.t);if(!sl)continue;agPlan(v,c,N,sl[0],sl[1]);acts++}}
