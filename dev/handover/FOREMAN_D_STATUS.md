@@ -50,7 +50,7 @@ main at start = eba64ead4.
 | kc-roads-cn-nc round 3 review (main s14 08:41Z) | review/kc-roads-cn-nc-r1 @ef6e7a05 | opus | FAIL 4 (1 BLOCKING) → FOR MAIN s14 (see QUESTIONS) |
 | scene-end button sweep (KIT §81 live 9a4da876) | review/scene-end-sweep @67db47f6 | sonnet | PASS 67db47f6 (whole-game rescan: no scene closes by itself; buổi transition = not a scene) |
 | coop-rejoin-xdev review | — | — | CANCELLED for D (main s13 has it) |
-| MEMORY UPGRADE + CAUSE ledger (s17) | review/mem-upgrade @06e4179e | opus | SẴN SÀNG KIỂM (worker archived) → reviewer mem-upgrade-r1 RUNNING 14:15Z |
+| MEMORY UPGRADE + CAUSE ledger (s17) | review/mem-upgrade @06e4179e | opus | SẴN SÀNG KIỂM (worker archived) → reviewer mem-upgrade-r1 session_01DgYSWot4sNs4TrG8fUm2of RUNNING 14:15Z |
 | ITEM CONSERVATION + ITEM ledger (s17) | review/item-ledger | opus | worker session_01DgYSWoSdvBQtzpXxCDVUPh RUNNING 13:45Z |
 
 ## PASS (for the main coordinator to fast-forward)

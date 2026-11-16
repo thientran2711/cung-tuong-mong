@@ -219,4 +219,4 @@
 | D13 spread-events-r2 reviewer (opus) | review/spread-events-r3 | B | session_01N1tNP3wvFLuxbHBhMw3hMx | RUNNING | 16/11 14:05Z |
 | mg-balance-2 reviewer (opus) | review/mg-balance-2-r1 | B | session_01N1tNP6z6YihnVHKFcdrurC | RUNNING | 16/11 14:10Z |
 | title-tag-r1 review (rank-bright 9043c173 + title-tag 0dc3afa8) | review/title-tag-r1 | main s17 | session_01UV1SzmFFVNQ3K1RGgtZK3p | RUNNING | 16/11 14:12Z |
-| mem-upgrade review | review/mem-upgrade-r1 | D | (reviewer opening) | RUNNING | 16/11 14:15Z |
+| mem-upgrade review | review/mem-upgrade-r1 | D | session_01DgYSWot4sNs4TrG8fUm2of | RUNNING | 16/11 14:15Z |
