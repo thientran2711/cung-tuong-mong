@@ -76,7 +76,7 @@
 | pre-palace home roads for cn + nc (all branches), td pattern (OD:L1251) | review/kc-roads-cn-nc | main s11 | session_01UV1Szk5QsvVYvw2L45Qpqa (opus) | RUNNING | 16/11 06:59Z |
 | D17 review | review/luxury-r1 | C | session_011xDdVSB4Ws7io5HBcz34c9 | RUNNING | 07:06Z 16/11 |
 | cardflip-glow: reveal light on frame border, not over face; slower (owner bug) | review/cardflip-glow | main s11 | session_01UV1Szki5WiXQ1nthXM98EG (sonnet) | RUNNING | 16/11 07:12Z |
-| percent-measure: real % xong (features built vs planned) + % chơi được (bot playthroughs on main) | (report only) | main s12 | session_01UV1SzjKGmuHQwVQXwNQ4LE (sonnet) | RUNNING | 16/11 07:20Z |
+| percent-measure: real % xong (features built vs planned) + % chơi được (bot playthroughs on main) | (report only) | main s12 | session_01UV1SzjKGmuHQwVQXwNQ4LE (sonnet) | DONE (xong ~42% / choi duoc ~66%, reports/percent-measure.md) | 16/11 07:20Z |
 | balance-after-truth review | review/balance-after-truth-r1 | D | session_01DgYSWp8zZ1eyzXhLPpAj3x | RUNNING | 16/11 07:17Z |
 | one-core: every rule number from BAL + guard test (owner ONE CORE) | review/one-core | main s11→s12 | session_01UV1Szm1iPxyYyr6JpCfpnd (opus) | RUNNING | 16/11 07:21Z |
 | D15 review | review/perf-r1 | C | session_011xDdVSxy2NRrKa7UvyR112 | RUNNING | 07:23Z 16/11 |
