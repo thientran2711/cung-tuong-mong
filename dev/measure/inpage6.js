@@ -34,7 +34,7 @@ function cardOK(a){return !a.done&&!S.dead&&canPay(a)&&!a.lock&&(typeof j76win==
 function placeOK(p){return p.k!=="home"&&S.place!==p.k&&!S.confined&&!S.out&&can(travel(S.place,p.k)+1)&&(typeof accessOf!=="function"||accessOf(S,p.k).ok)}
 function talkCands(){const out=[];if(!S.visit||S.visit.talked===true)return out;const tk=S.visit.tk||{};
   curPeople().forEach((p,pi)=>{if(tk[pi])return;talkOpts(p).forEach((a,oi)=>{if(!canPay(a)||a.lock)return;const c=a.act?2:1;if(!can(c))return;out.push({p,pi,a,oi})})});return out}
-function lessonCands(){return ARTS.filter(a=>S.arts[a.k]<5&&S.bac>=5+S.arts[a.k]*5&&can(2)&&!S.mg)}
+function lessonCands(){return ARTS.filter(a=>S.arts[a.k]<5&&S.bac>=(typeof tchFee==="function"?tchFee(a.k):5+S.arts[a.k]*5)&&can(2)&&!S.mg)}
 function fire(f){f()}
 // ---- RANDOM
 function randomStep(){
@@ -92,7 +92,7 @@ function sensibleStep(){
   if(qOn()&&S.rank>=5&&can(2)&&S.bac>=20&&rvBtns(0).includes("spy")){const o=ACT.spy.o?ACT.spy.o(S,rivals[0]):50;if(o>=40)opts.push({s:3.6,f:()=>{note("spyQueen");doAct(0,"spy")}})}
   deck.forEach((a,i)=>{if(!cardOK(a))return;const c=cardCost(a);opts.push({L:"c"+a.n,s:scoreAct(a,N,c),f:()=>{note("card",a.n);act(i)}})});
   talkCands().forEach(t=>{const s=talkScore(t,N);opts.push({L:"t"+t.pi+t.a.n,s,f:()=>{note("talk",t.a.n);popIdx=t.pi;talk(t.oi)}})});
-  const L=lessonCands().filter(a=>S.suc>=45&&S.bac>=5+S.arts[a.k]*5+20).sort((a,b)=>S.arts[a.k]-S.arts[b.k]);
+  const L=lessonCands().filter(a=>S.suc>=45&&S.bac>=(typeof tchFee==="function"?tchFee(a.k):5+S.arts[a.k]*5)+20).sort((a,b)=>S.arts[a.k]-S.arts[b.k]);
   if(L.length){const x=L[0];opts.push({s:2.0+(S.sung>=40?.5:0)-(S.suc<55?1.5:0),f:()=>{note("lesson");if(S.bac>=150&&!S.master)hireMaster();lesson(x.k)}})}
   const sea=SEASON[S.month-1];const W=S.where||{};
   const pls=[];
