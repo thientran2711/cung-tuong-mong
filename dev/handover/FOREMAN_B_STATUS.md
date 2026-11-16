@@ -5,7 +5,7 @@ Connectors (account B): GitHub push OK · Magnific OK (project "Personal" ba4aec
 | Item | Branch | Model | State |
 |---|---|---|---|
 | C23 mg-easy | review/mg-easy-r1 | sonnet | PASS 94644c1e6342eb7ea1003aae090cd5310a9597e5 |
-| C41 tuduc-mg | review/tuduc-mg | sonnet | RUNNING (resumed) |
+| C41 tuduc-mg | review/tuduc-mg @c859d8b4 | sonnet | RUNNING (finisher: Dung scores 0 under bot, missing viewports) |
 | C24 chapter-detail | review/chapter-detail | sonnet | RUNNING (resumed; told to GROW kitGoalDetail from review/tutorial-r2 per coordinator note) |
 | C26 stat-fx | review/stat-fx-r1 | sonnet | PASS 0eb3e4b4a41a9123ad7181b39fc14afc60f8ab11 (follow-up C26b QUEUED) |
 | C27 buoi-transition | review/buoi-transition-r1 | sonnet | PASS c91bfdc4629fbf4ebf84307f543d44a394ff138b (images on CDN) |
@@ -71,6 +71,7 @@ All 6 pending images UPLOADED by Foreman B (11/16): img/fx/buoi-{wash,mist,hills
 - map-labels-r1 (PASS): re-skins existing kit §34.1d .mspot .mlab (paper chip 13px, wrap, no opacity cuts) + mapFit floor zoom (no touching labels); when D30 lands, drop its own .kpm-spot .mlab font/padding (12.5px nowrap) so it inherits the chip; mapFit floor-zoom rule is a new kit behaviour to document; at 1180x820 neighbouring .mmeta rows ("N bóng · K khắc") overlap — including them in the floor rule zooms the iPad map to ×2.75, so keeper/owner decide; .mspot .mwhy and .acb in j41 still use the old tiny dark style (probably unused).
 - KIT REQUEST (C26b stat-fx-2): in §57.1 jstatfx.js the glowing number never takes the gain/loss colour because jk4's `.kst:not(.kst-tile):not(.kst-chip)>.kstv{color:var(--ink)}` (0,4,0) beats `.ksf-g>.kstv`/`.ksf-r>.kstv` (0,2,0). Proposed: `.kst.ksf-g:not(.kst-tile):not(.kst-chip)>.kstv{color:#1f6b2f}`, `.kst.ksf-r:not(.kst-tile):not(.kst-chip)>.kstv{color:#a3291c}`, plus `.krt-v.ksf-g` / `.krt-v.ksf-r` for relation-table numbers (verified live by the worker; not applied).
 - page-curl2 (reviewing): portrait paper slide kitSlideSheet = new variant of the page-turn kit part (§34, reuses .ksht*); global swipe-to-change-tab removed; keeper may add a line to KIT.md §34.
+- KIT REQUEST (C41 tuduc-mg): a kit-owned "hint ring" part for canvas mini-games (Gợi ý marker is now a position-fixed div with .ksel); mini-game frame picture-left/info-right is a frame-level change (contest-ui's kitGameFrame({pic}) covers it once approved).
 From now on Foreman B workers only use existing kit parts and file KIT REQUESTs here.
 
 ## QUESTIONS
@@ -98,3 +99,4 @@ From now on Foreman B workers only use existing kit parts and file KIT REQUESTs 
 - Q17 (C46 map-labels): to keep 13px labels from touching, the default map zoom on a portrait phone (390 wide) is now ~×3.8 (was ×2.5); Fold ×2. Owner OK, or prefer a smaller map with fewer labels shown? (Reviewer: at 390 wide only ~5 palace slots are visible at once; at 844x390 the +/−/Ra vào/Danh sách buttons cover a label, as before.)
 - (16/11) LIVE on main 4f5e5f3b3: C23, C26, C27, C28, C29, C35, C37, C39, C40, D39. Rebase any open work on main.
 - Q18 (C32 page-curl2): in landscape the ‹ › buttons keep the slow 1.3 s curl (unchanged) — keep or speed up? Portrait slide is 300 ms.
+- Q19 (C41 Tứ đức minigames): in these 4 games a higher level makes the game EASIER (wider bands, fewer wrong choices) — opposite of mg-easy's knowledge games (harder at higher level). OK? And "Để trời định" (skip) counts as 5/10 — fine?
