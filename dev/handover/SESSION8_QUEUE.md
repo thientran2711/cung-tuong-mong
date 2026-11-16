@@ -10,7 +10,7 @@ CDN uploads OK again (owner saved the Cloudflare token; R2 verified). Use CLOUDF
 | A2 | review/fxkit → r1 PASS f012058f3 | LIVE |
 | A3 | review/small-bugs-3 → r1 PASS d34b5116a | LIVE |
 | A4 | review/fix-float → r9 PASS 7ba53114d | LIVE (main fast-forwarded) |
-| A5 | review/coop-timer | REVIEWING (coop-timer-r1, HIGH + waiting UX) |
+| A5 | review/coop-timer | REVIEWING (coop-timer-r1, HIGH: stuck-buổi fix + reconnect + countdown + friend chip) — NOTIFY OWNER WHEN LIVE |
 | A6 | review/thaiy | QUEUED |
 | A7 | review/cycle (after A6; keep jcycle last) | QUEUED |
 | A8 | review/cal-plus | QUEUED |
