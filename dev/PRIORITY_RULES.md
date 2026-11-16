@@ -21,7 +21,7 @@ Owner rule OD:L1241 (low context): every session starts small. Do NOT read the w
 
 ## Topic files (read only when the task touches the topic)
 
-- dev/rules/topic/balance-economy.md (19.8 KB): gain and loss, bạc, prices, odds, difficulty, promotion, rewards
+- dev/rules/topic/balance-economy.md (20.8 KB): gain and loss, bạc, prices, odds, difficulty, promotion, rewards
 - dev/rules/topic/coop.md (3.6 KB): co-op / playing with a friend
 - dev/rules/topic/handover-restatements.md (68.4 KB): owner rules as restated in handover/foreman/queue/ledger files (OD lines win where they differ)
 - dev/rules/topic/kit-ui.md (20.3 KB): shared kit, layout, panels, cards, tabs, dialogs, Fold/iPad screens
