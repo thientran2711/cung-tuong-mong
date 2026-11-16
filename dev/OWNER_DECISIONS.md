@@ -1136,3 +1136,7 @@ All must work in co-op.
 
 ## 16/11 (session 8) — Hành sự vs Dư đồ: owner's answer
 - Owner: players are used to Hành sự. Every daily task stays there, so they focus on one place: usable acts in colour, unusable in grey, and time-bound acts in view (e.g. Thỉnh an Thái hậu in the morning). Nobody remembers who lives in which of 10+ palaces, so the map must NOT be where daily tasks hide. Dư đồ = go to a place to see who is there and talk or interact (social first). Every place name carries an icon that shows its purpose (e.g. Nội vụ phủ = shopping). She hardly ever opens Dư đồ now; it must become worth opening without making the player remember anything. AGREED: Tài nghệ study removed from Hành sự (Tài nghệ tab only). Wants a balanced split proposed.
+
+## 16/11 (session 8) — Lifespan answers; Dư đồ purpose unclear (owner)
+- Lifespan HIDDEN (knowing it kills the surprise). Sudden death is accepted as luck; it is not "the game cheating". The dice are bell-shaped: early death rare, average life most common, long life rare. Sent to review/mortality: adult mean ~55, sd ~11, clipped 18–90; rolls conditioned above current age; separate child-risk curve (~12–18% before 10); care up to about +3 years; poison, illness, childbirth and epidemics shorten it.
+- Dư đồ: the owner notes that Hậu cung already has interactions with the characters, so she is unsure what Dư đồ is for. Coordinator to propose a distinct purpose.
