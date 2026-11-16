@@ -19,7 +19,7 @@ Connectors (account B): GitHub push OK · Magnific OK (project "Personal" ba4aec
 | C35 pcard-fill | review/pcard-fill-r1 | sonnet | PASS 6975696c6af2ad22bd428e6435dd892d16f0a4b1 (KIT §73; contains actcard-small-r1) |
 | C37 panel-size | review/panel-size @6e1be2c4 | sonnet | REVIEWING (review/panel-size-r1, sonnet) — merge note: kitDpFit in jk4 conflicts with review/stage-fig-size-r1 (keep its cap/crop + this branch's dw=d.clientWidth line) |
 | C26b stat-fx follow-up | review/stat-fx-2 | sonnet | QUEUED (also pcard-fill nits: 'Dạo này' log line may end with a stray word like 'gặp'; Phi tần tab mood tile shows a placeholder when no cause event — person card + status tiles re-render with innerHTML so they never glow; add diff-glow on re-render; also make the number turn red on a loss like green on a gain) |
-| C46 map-labels | review/map-labels | sonnet | QUEUED |
+| C46 map-labels | review/map-labels | sonnet | RUNNING |
 | D32 succession-port | review/succession-port @64f7579c | opus | REVIEWING (review/succession-port-r1, sonnet) |
 | D38 lost-items-port | review/lost-items-port | opus | RUNNING |
 | D30 palace-map-port | review/palace-map-port @e1e15a4b | sonnet | REVIEWING (review/palace-map-port-r1, sonnet); 675 images uploaded to CDN; D42 must build on this branch |
@@ -27,7 +27,7 @@ Connectors (account B): GitHub push OK · Magnific OK (project "Personal" ba4aec
 | D33 routes-port | review/routes-port | opus | QUEUED (re-measure with C7) |
 | D34 scheme-games-port | review/scheme-games-port | sonnet | RUNNING |
 | D36 leaderboard + Bảng vàng | review/rank-port | sonnet | RUNNING |
-| D39 appearance-port | review/appearance-port @00ff5a35 | sonnet | REVIEWING (review/appearance-port-r1, sonnet) |
+| D39 appearance-port | review/appearance-port-r1 | sonnet | PASS 86234a24c53da664bd75f34b34444751cd7c0e9f |
 | D40 weather-risk-port | review/weather-port | sonnet | RUNNING |
 | D41 promote-servants | review/promote-servants | opus | QUEUED (after Foreman C's D29 roster) |
 | D42 places-leftovers | review/places-port | sonnet | QUEUED (after D30) |
@@ -40,6 +40,7 @@ PASS review/buoi-transition-r1 c91bfdc4629fbf4ebf84307f543d44a394ff138b (C27; in
 PASS review/room-btn-r1 c80e5df978eaffb29ce218b4431e17b415232750 (C28; KIT §72 kitBackBtnHtml, painted room/map icons already on CDN; 'Bản đồ'→'Dư đồ' per VANPHONG)
 PASS review/rel-picker-r1 ce7c076a38d55c95901d19002832983f91560052 (C29; compact Giao tình pickers, kitNameRank face labels, pager arrows only on overflow game-wide; KIT §49.2c + sample)
 PASS review/pcard-fill-r1 6975696c6af2ad22bd428e6435dd892d16f0a4b1 (C35; person card right side filled from kit parts, KIT §73; includes review/actcard-small-r1)
+PASS review/appearance-port-r1 86234a24c53da664bd75f34b34444751cd7c0e9f (D39; illness/poison/slap/penalty/rash overlays + veil, weekly healing verified e2e; ancestry vs main 2afdafc3 re-checked by Foreman B)
 PASS review/stat-fx-r1 0eb3e4b4a41a9123ad7181b39fc14afc60f8ab11 (C26; descends from main 900ace7f; top-bar glow green/red + named slow labels + j19 whole-word colour fix)
 
 ## CDN
@@ -55,7 +56,7 @@ All 6 pending images UPLOADED by Foreman B (11/16): img/fx/buoi-{wash,mist,hills
 - tab-underline-r1: KIT §46 no-scrollbar + edge fade (kitTabFade), sliding line only on bottom nav
 - panel-size (reviewing): KIT §8.1 one-size kpanel frame tokens
 - palace-map-port (reviewing): kitPalaceMap (worker labelled it §71 — clashes; needs a number)
-- appearance-port (reviewing): KIT 28.8b kitFaceFx restored, kitFxLayers carries all face layers
+- appearance-port-r1 (PASS): KIT 28.8b kitFaceFx/KIT_FACEFX registry + kitFxLayers as the single face-layer hook; 28.8b text stale (still lists expr z5 + .kfxf transform copy — expressions removed 22:50Z); shared overlays rash-1..3.png, fx-slap.png (on CDN) for the keeper's art list
 From now on Foreman B workers only use existing kit parts and file KIT REQUESTs here.
 
 ## QUESTIONS
