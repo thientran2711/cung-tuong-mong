@@ -12,7 +12,7 @@ Base main at start: 900ace7fb.
 | A9 promo-rules review | review/promo-rules-r1 | opus | LIVE (train-2) |
 | D46 placeholder pictures | review/placeholder-pics2-r1 | sonnet | PASS 81af8e412 |
 | D47 small-bugs-4 | review/small-bugs-4-r1 | sonnet | PASS 42e4038f7 (reviewer ruled arcReveal67 correct: stage-2 name only, same text she reads) |
-| D18 foreign princess origin visible + one more origin | review/origins | sonnet | RUNNING (worker) |
+| D18 foreign princess origin + one more | review/origins @b6cbcc4fe (nc Nam Chiếu existed (weight 6/130, 1 blurb line); NEW 'bd' Công chúa Bắc Địch hòa thân, jorigins.js last; lore lines for all 10 origins) → review/origins-r1 | opus | REVIEWING |
 | D53 opt-pics leftovers | review/opt-pics2-r1 | sonnet | PASS 1fa7f46ac (includes placeholder-pics2-r1) |
 | D46b new placeholders + Tứ đức/arts self-study pictures | review/placeholder-pics3-r1 | sonnet | PASS 696127b32 (contains opt-pics2-r1 + placeholder-pics2-r1) |
 | D50 consort full-body placeholders | — | sonnet | DONE — NO ART NEEDED: audit of 8744 manifest entries vs CDN = 0 missing; 400-turn soak 0 empty figFor. Cause is code (see NOTE) |
@@ -106,6 +106,8 @@ PASS review/update-notes-r1 8cc6ae7c8f63f72436afceed38b4143aa3bc815b (D10; desce
 - Q11 (owner, D7): thiếu lễ at thỉnh an (−2.8 per greeting when under-dressed) now outweighs a routine greeting — keep that weight?
 - Q12 (owner, A7): if she lies (báo sớm / giấu), is flipped and passes the mama check, the night goes ahead normally — including a chance to conceive during her period. Keep, or make such a night unable to lead to pregnancy?
 - Q13 (owner, A7): should 'báo lùi' also leave forgery evidence for foes who read the book (báo sớm and giấu do)?
+- KIT REQUEST K12 (D18 origins): (1) origin seal emblem img/kit/origin-bd.webp + 'bd' in KIT_ORIGINS (j60) — without it bd shows no seal (no break); (2) roulette grid jk2b .krgrid: 10 origin cards = 3+3+3+1 in portrait, last card alone on the left → centre the last row (flex-wrap + justify-content:center) or 4 columns.
+- Q14 (owner, D18): a distinct foreign-princess LOOK (dress + face) per origin would need 8 ranks × 4 ages = 32 figures + 32 portraits ≈ 2000+ Magnific credits per origin (nc and bd now use the shared consort faces). Draw for nc and bd?
 - K3 (FYI): C18 kit-popup-sample-r1 PASS adds kit page §8 pop-up samples (sample registration only, no new part) — passed before the rule; kit keeper please confirm.
 - Q1 (D1 result-sfx): sound is OFF by default (OPT.snd=false in j11.js), so new players never hear the win/fail sounds. Turn sound ON by default for new games (old saves keep their choice)? Foreman C recommends ON for new games only.
 
