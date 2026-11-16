@@ -100,7 +100,7 @@ Object.assign(BAL,{itd:{allow:false}});
    life.care   SWITCH 3 (owner 16/11: care lengthens a little, ≈ +3 years): 1 on · each new year Sức ≥ careSuc / own thái y / Y thuật ≥ 2 give careP % each
                of +1 year; curing the omen illness with the thái y +careAdd; HARD CEILING careMax years in all per person (owner 16/11, never more);
                a year with no source and Sức < careLapse takes a gained year back; a source kept up shakes off a new illness careIll % each
-   playerFloorYears = every player life lasts at least this many game years before any RANDOM death (owner 16/11; her own choices still kill)
+   playerFloorYears = 0: NO play floor (owner 16/11, final: the roll decides; poison, assassination, childbirth, epidemics can kill her at any time). Not read by code.
    thIllKeep = % of months the old j13 Thái hậu illness (nguy kịch) still rolls its own death (her lifespan carries the rest)
    pre = the last `mo` months before a natural death (not the sudden ones): +ill % monthly illness, −suc Sức a month, one Thái y report (owner 16/11: omens approved)
    sudden = % of lifespan deaths with no omen; omen = [min,max] months of omen illness before the others
@@ -110,7 +110,7 @@ Object.assign(BAL,{itd:{allow:false}});
    tired = sleep regen −1 per `per` years over `from` (never below min); griefMo / griefIll = months and monthly % tâm bệnh after losing her child
    fate (Emperor dies, her son not the heir): phiRank+ or a daughter → Thái phi; a son → theo con ra phủ; childless: rank ≤ homeRank, age < homeAge → về quê (homeP %),
         else xuất gia; childless favourite (Sủng ≥ tuanSung) faces tuẫn táng (tuanP %), averted by Đức ≥ tuanDuc or Thái hậu ≥ tuanTh */
-BAL.mort={on:1,playerFloorYears:2,
+BAL.mort={on:1,playerFloorYears:0,
  life:{show:0,care:1,careAdd:1,careMax:3,careSuc:70,careP:12,careLapse:40,careIll:15,floorMe:0,floorEmp:0,minMo:3,
   dice:{adult:{mean:45,sd:15,lo:15,hi:85},me:"adult",emp:"adult",
         kid:{risk:15,early:[[1,3,5],[3,6,3],[6,10,2]],adult:"adult"}}},

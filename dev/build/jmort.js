@@ -41,7 +41,7 @@ function grpOf(p,K){return p===S?"me":p===S.emp?"emp":K.has(p)?"kid":"adult"}
 function nm(p){return p===S.emp?"Hoàng thượng":p===S.thO?"Thái hậu":p.name||"người hầu"}
 /* give p a lifespan once */
 function assign(p,K,oldSave){if(!p||typeof p!=="object"||p.tho>0)return;const a=ageOf(p);if(!(a>=0))return;const g=grpOf(p,K);
- let fl=g==="me"?Math.max(M.life.floorMe,oldSave?0:M.playerFloorYears):g==="emp"?M.life.floorEmp:0;if(oldSave&&(g==="me"||g==="emp"))fl=Math.max(fl,M.oldFloor);
+ let fl=g==="me"?M.life.floorMe:g==="emp"?M.life.floorEmp:0;if(oldSave&&(g==="me"||g==="emp"))fl=Math.max(fl,M.oldFloor);
  p.tho=mortRoll(g,a,fl);p.thoM=1+R(12);if((p.tho-a)*12+(p.thoM-(S.month||1))<M.life.minMo)p.tho=a+1;p.thoO=Math.random()*100<M.sudden?0:M.omen[0]+R(M.omen[1]-M.omen[0]+1);
  if(p===S&&M.life.show){const w=p.tho<40?"yểu mệnh":p.tho<60?"trung thọ":p.tho<75?"thượng thọ":"hạc thọ";
   log(`Thầy tướng xem tay ngươi, phán: số ${w}${M.life.show>=2?`, thọ chừng ${p.tho} tuổi`:""}.`)}}
@@ -49,7 +49,7 @@ function worldPeople(){const L=[S.emp];if(!S.thDead&&S.thO)L.push(S.thO);(rivals
  const C=S.court||{};for(const k in C)L.push(C[k]);(S.men||[]).forEach(m=>m.alive!==false&&L.push(m));return L}
 function myPeople(){const L=[S];if(S.maid)L.push(S.maid);(S.staff||[]).forEach(s=>!s.coop&&L.push(s));(S.kids||[]).forEach(k=>k.alive&&L.push(k));return L}
 function people(){return (host()?worldPeople():[]).concat(myPeople())}
-function initAll(){if(!S||!M.on)return;const old=!S.mort;if(!S.mort)S.mort={v:1,old:old&&S.turn>0?1:0,mo:S.turn||0};const K=kidSet();for(const p of people())assign(p,K,S.mort.old)}
+function initAll(){if(!S||!M.on)return;const old=!S.mort;if(!S.mort)S.mort={v:1,old:old&&S.turn>0?1:0};const K=kidSet();for(const p of people())assign(p,K,S.mort.old)}
 const left=p=>(p.tho-ageOf(p))*12+(p.thoM-S.month);
 const OFFICIAL={tq:"Tổng quản thái giám",ksp:"Thái giám Kính sự phòng",ped:"Thái giám Nội vụ phủ",ty:"Thái y"},HEIRN=["Vương","Trần","Phùng","Tô","Cao","Lưu","Hà","Đỗ"];
 /* a person reaches the end of the lifespan (or an accident): remove them the way the game already does for that kind of person */
@@ -95,7 +95,7 @@ function empPlot(){if(cw())return "";const P=S.mort;let ev="";
  for(const k of ["ass","poi"])if(roll(mortPlotY(k,pw())/12)){P.plot={k,mo:1+R(2)};
   if(S.mat>=2||roll(50))ev+=k==="ass"?"Trong cung có tin đồn: có kẻ mưu hành thích. Cấm quân tăng canh. ":"Ngự thiện phòng xuất hiện người lạ; thái giám thử món phải nếm từng món. ";break}
  return ev}
-function monthMort(){if(!S||!M.on||S.dead)return "";initAll();S.mort.mo=(S.mort.mo||0)+1;let ev="";const K=kidSet();
+function monthMort(){if(!S||!M.on||S.dead)return "";initAll();let ev="";const K=kidSet();
  for(const p of people()){if(S.dead)break;if(!(p.tho>0))continue;if(p===S.emp&&cw())continue;if(p.alive===false)continue;
   const ml=left(p);const show=p===S||p===S.emp||p===S.thO||rivals.includes(p);
   if(ml<=0){ev+=kill(p,p===S?`Tuổi trời đã tận, ${ILL[ageOf(p)>=55?"laobenh":"trongbenh"].n.toLowerCase()} không qua khỏi, thọ ${S.age} tuổi`:"",K);continue}
@@ -140,17 +140,6 @@ function careN(p){return p?(p.suc>=M.life.careSuc?1:0)+(p.doctor?1:0)+(p.arts&&p
 /* grief: losing her child weighs on her health (illness easier for griefMo months) */
 (function(){const k0=kidDie;kidDie=function(k,why,mine){if(mine&&S)S.mortGrief=M.griefMo;return k0.apply(this,arguments)}})();
 (function(){const p0=illMonthP;illMonthP=function(p){if(p===S&&S.mortGrief>0){S.mortGrief--;if(!illOf(S)&&roll(M.griefIll))return catchIll(S,"tambenh")+p0.apply(this,arguments)}return p0.apply(this,arguments)}})();
-/* PLAYER FLOOR (owner 16/11): every player life (solo and each co-op player) lasts at least BAL.mort.playerFloorYears before any RANDOM death:
-   lifespan (rolled ≥ start age + floor), illness, epidemics, childbirth, accidents, poison / assassination / violence by NPCs — they can hurt
-   her, not kill her. Deaths from her OWN choices still happen (caught in a crime, punishment, abortion drink, a stated deadly risk).
-   S.mort.mo = months this life has lived (personal, so co-op lives each count their own; an old save starts at its S.turn). */
-window.mortFloor=function(){return !!(M.on&&S&&S.mort&&(S.mort.mo||0)<12*M.playerFloorYears)};
-const OWN=/Uống thuốc phá thai|tội trộm|quả tang|tra khảo|Quỳ phạt|ban chết|tru di|phản|tư thông|gián điệp|Mưu nghịch|binh biến/i;
-const RANDOM=/nguy kịch|không qua khỏi|Khó sinh|băng huyết|Trúng độc|Bệnh nặng|đậu mùa|Chết rét|Tuổi trời|trượt chân|ngã|nghẹn|ngất|đẩy ngươi|dìm ngươi|diệt khẩu|sai đánh|sai người|đánh chết|Thích khách|tuẫn táng/i;
-(function(){const d0=die;die=function(why){if(mortFloor()&&!OWN.test(String(why))&&RANDOM.test(String(why))){
-  S.suc=Math.max(1,Math.min(S.suc,10));const i=illOf(S);if(i)i.st=Math.min(i.st,2);(S.mort.saved=S.mort.saved||[]).push(String(why).slice(0,60));
-  log(`<span class="r">${why}: ngươi thập tử nhất sinh, may mà qua khỏi.</span> Sức còn ${S.suc}.`);return ""}return d0.apply(this,arguments)}})();
-(function(){const b0=birthRisk;birthRisk=function(p){if(p===S&&mortFloor())return 0;return b0.apply(this,arguments)}})();
 /* the legacy roll in j3 asks here: the Emperor dies when his lifespan / a plot / an accident says so */
 window.mortEmpDue=function(){if(!M.on)return S.year>12&&roll((S.year-12)*1.5+Math.max(0,S.emp.age-50)*.5);if(cw())return false;
  const w=S.mort&&S.mort.empDue;if(!w)return false;S.mort.empWhy=w;S.mort.empDue=null;return true};
@@ -162,13 +151,13 @@ window.mortEmpDue=function(){if(!M.on)return S.year>12&&roll((S.year-12)*1.5+Mat
  const sons=mySons(),daus=myDaus(),F=M.fate;const pre=String(t).match(why?/^.*?băng hà, thọ \d+ tuổi\.(?: [^.]*\.){0,2}/:/^.*?băng hà, thọ \d+ tuổi\.(?: [^.]*\.)?/);const P=pre?pre[0]+" ":"";
  let Q=P;if(!sons.length&&!daus.length&&S.sung>=F.tuanSung&&roll(F.tuanP)){
   const save=S.duc>=F.tuanDuc?"Ngươi xưa nay nhân đức, triều thần dâng sớ can":(!S.thDead&&S.th>=F.tuanTh)?"Thái hậu đứng ra xin cho ngươi":"";
-  if(!save&&!mortFloor())return o0.call(this,"Tuẫn táng",P+"Di chiếu muốn người được sủng ái theo hầu nơi Hoàng lăng. Ngươi uống chén rượu tiễn biệt, theo tiên đế về chốn suối vàng.","Tuẫn táng theo tiên đế",false);
-  Q=P+`Di chiếu muốn người được sủng ái theo hầu nơi Hoàng lăng. ${save||"Tân đế thương ngươi tuổi còn non"}, ngươi được miễn. `;t=P?String(t).replace(P,Q):Q+t}
+  if(!save)return o0.call(this,"Tuẫn táng",P+"Di chiếu muốn người được sủng ái theo hầu nơi Hoàng lăng. Ngươi uống chén rượu tiễn biệt, theo tiên đế về chốn suối vàng.","Tuẫn táng theo tiên đế",false);
+  Q=P+`Di chiếu muốn người được sủng ái theo hầu nơi Hoàng lăng. ${save}, ngươi được miễn. `;t=P?String(t).replace(P,Q):Q+t}
  if(sons.length)return o0.call(this,"Thái phi",Q+`${sons[0].name} được phong vương, đón mẹ về vương phủ phụng dưỡng. Ngươi thành Thái phi, an hưởng tuổi già bên con cháu.`,"Thái phi theo con ra phủ",true);
  if(daus.length||S.rank>=F.phiRank)return o0.call(this,h,t,fate,alive);
  if(S.rank<=F.homeRank&&S.age<F.homeAge&&roll(F.homeP))return o0.call(this,"Xuất cung",Q+"Tân đế ân xá, cho các cung tần chưa có con được về quê. Ngươi rời cung, sống nốt đời ở quê nhà.","Xuất cung về quê",true);
  return o0.call(this,"Xuất gia",Q+"Ngươi không con cái, phẩm vị thấp; theo lệ cũ, cùng các cung tần khác cạo tóc vào chùa Cảm Nghiệp làm ni cô, sớm hôm kinh kệ.","Xuất gia làm ni cô",true)}})();
 /* a new game: everyone rolls at the start; an old save rolls once at load */
-(function(){const s0=start;start=function(){const r=s0.apply(this,arguments);try{if(S&&M.on){S.mort=null;delete S.tho;initAll();S.mort.old=0;S.mort.mo=0}}catch(e){console.error(e)}return r}})();
+(function(){const s0=start;start=function(){const r=s0.apply(this,arguments);try{if(S&&M.on){S.mort=null;delete S.tho;initAll();S.mort.old=0}}catch(e){console.error(e)}return r}})();
 (function(){const d0=deser;deser=function(){const r=d0.apply(this,arguments);try{initAll()}catch(e){console.error(e)}return r}})();
 })();

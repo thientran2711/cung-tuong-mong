@@ -40,7 +40,7 @@ const R=path.resolve(__dirname,'../..');const LIVES=+process.argv[2]||20,YEARS=+
      if(S.dead&&ending&&/băng hà, thọ/.test(ending.t))empDied={age:S.emp.age,why:S.mort.empWhy||"lifespan"};}
     if(S.dead&&ending&&!/băng hà, thọ/.test(ending.t)&&style!=="world"){const c=/Tuổi trời/.test(ending.fate)?"lifespan":/khó sinh|băng huyết/i.test(ending.fate)?"childbirth":/nguy kịch|bệnh|đậu mùa/i.test(ending.fate)?"illness":/ngã|nghẹn|ngất|trượt/.test(ending.fate)?"accident":ending.alive?"ending(alive)":"other death";
      out.deaths.push({g:"me",a:ending.age,c,y:ending.year})}
-    out.lives.push({end:S.dead?ending:{h:"alive"},years:S.year,age:S.age,emp0,empDied,births,saved:((S.mort&&S.mort.saved)||[]).length,mo:(S.mort&&S.mort.mo)||0})}
+    out.lives.push({end:S.dead?ending:{h:"alive"},years:S.year,age:S.age,emp0,empDied,births})}
    over=o0;die=die0;return out},[style,LIVES,YEARS]);
   console.error(style,"done",all[style].lives.length,all[style].errs.slice(0,2))}
  all.pageErrors=errs.slice(0,10);if(OUT)fs.writeFileSync(OUT,JSON.stringify(all));
@@ -48,8 +48,8 @@ const R=path.resolve(__dirname,'../..');const LIVES=+process.argv[2]||20,YEARS=+
  const pct=(a,n)=>n?(100*a/n).toFixed(0)+"%":"-";
  for(const st of STY.filter(x=>x!=="world")){const L=all[st].lives,n=L.length;const dead=L.filter(l=>l.end&&l.end.h!=="alive");
   const herDeath=dead.filter(l=>!l.end.alive&&!/băng hà, thọ/.test(l.end.t||""));const emp=L.filter(l=>l.empDied);
-  const sv=L.reduce((a,l)=>a+(l.saved||0),0),early=herDeath.filter(l=>(l.end.year||9)<=2).length;
-  console.log(`\n## ${st}: ${n} lives × ${YEARS} y — she died: ${pct(herDeath.length,n)} (inside the 2-year floor: ${early}; random deaths stopped by the floor: ${sv}) · Emperor died: ${pct(emp.length,n)} · other endings: ${pct(dead.length-herDeath.length-emp.length,n)}`);
+  const early=herDeath.filter(l=>(l.end.year||9)<=2).length;
+  console.log(`\n## ${st}: ${n} lives × ${YEARS} y — she died: ${pct(herDeath.length,n)} (of them in years 1–2: ${early}) · Emperor died: ${pct(emp.length,n)} · other endings: ${pct(dead.length-herDeath.length-emp.length,n)}`);
   const by={};dead.forEach(l=>{const k=l.end.h+" · "+l.end.fate;by[k]=(by[k]||0)+1});Object.entries(by).sort((a,b)=>b[1]-a[1]).forEach(([k,v])=>console.log("  ",v,k))}
  const D=[].concat(...STY.map(s=>all[s].deaths.map(d=>Object.assign({s},d))));
  const G={};D.forEach(d=>{const g=G[d.g]=G[d.g]||{n:0,c:{},h:{}};g.n++;g.c[d.c]=(g.c[d.c]||0)+1;const bin=d.a<10?"0-9":d.a<20?"10-19":d.a<30?"20-29":d.a<40?"30-39":d.a<50?"40-49":d.a<60?"50-59":d.a<70?"60-69":d.a<80?"70-79":"80+";g.h[bin]=(g.h[bin]||0)+1});
