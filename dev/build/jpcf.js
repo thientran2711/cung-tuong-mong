@@ -22,9 +22,10 @@ function pcfEnt(o){try{const f=o&&o.f;let e=f&&f.__kp&&typeof f.__kp==="object"?
 const isEmp=e=>S&&e===S.emp, isTh=e=>S&&(e===S.thO||e.kind==="th");
 function pcfName(e){try{if(isEmp(e))return"Hoàng thượng";if(isTh(e))return"Thái hậu";return plain(e.name||"")}catch(x){return""}}
 function pcfMood(e){try{if(typeof kitEmotion!=="function"||typeof emoBoxArt!=="function")return"";const m=kitEmotion(e);if(!m)return"";
- if(!m.known)return `<div class="kpsec">${kitSkillCard({kind:"mood",name:"Tâm trạng: chưa rõ",max:0,img:emoBoxArt(e,m,[]).src,desc:"Ngươi chưa gặp, chưa có tai mắt bên người này"})}</div>`;
+ if(!m.known)return `<div class="kpsec">${kitSkillCard({kind:"mood",name:"Tâm trạng: chưa rõ",max:0,img:"",desc:"Ngươi chưa gặp, chưa có tai mắt bên người này"})}</div>`;
  const L=typeof emoCauses==="function"?emoCauses(e):[];const a=emoBoxArt(e,m,L);const key=typeof emoKey==="function"?emoKey(e):"";
- const card=kitSkillCard({kind:"mood",name:`Tâm trạng: ${m.name}`,max:0,img:a.src,desc:a.label&&a.label!==m.name?a.label:"Không có chuyện gì đáng kể gần đây"});
+ /* no cause event = no event picture: the plain mood card (no stand-in picture; stat-fx-2) */const own=typeof emoCauseArt==="function"?emoCauseArt(L.find(x=>x.k===m.k)||(m.k==="binh"?null:L[0])):"";
+ const card=kitSkillCard({kind:"mood",name:`Tâm trạng: ${m.name}`,max:0,img:own?a.src:"",desc:a.label&&a.label!==m.name?a.label:"Không có chuyện gì đáng kể gần đây"});
  return `<div class="kpsec pcf-mood" data-emo-open="${key}" role="button" tabindex="0" title="Xem vì sao">${card}</div>`}catch(x){return""}}
 function pcfRel(e){try{if(typeof kitRelRows!=="function"||typeof kitRelTable!=="function")return"";const R=kitRelRows(e);if(!R.length||R.every(r=>r.unk!=null))return"";
  return `<div class="kpsec"><h4 class="kpst">Lòng người với ta</h4>${kitRelTable(R,{head:false})}</div>`}catch(x){return""}}
@@ -64,6 +65,30 @@ if(typeof pcard==="function"){const p0=pcard;pcard=function(o){let e=null;try{if
   const h=p0.apply(this,arguments);const at=h.lastIndexOf("</div></div>");
   return at<0?h:h.slice(0,at)+`<div class="pcf">${body}</div>`+h.slice(at)}catch(x){console.error("pcf",x);return p0.apply(this,arguments)}}}
 document.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest("[data-emo-open]");if(!t||e.target.closest("button,a"))return;const k=t.dataset.emoOpen;if(k&&typeof emoBox==="function"){e.stopPropagation();try{emoBox(k)}catch(x){console.error(x)}}},true);
+/* stat-fx-2: the person card and the status sheet are re-drawn with innerHTML, so kitStatSet never sees their numbers change. A call-site watcher (uses the
+   existing kitStatDelta -> kitStatGlow, no new kit part): when a card/tile/relation number is drawn again with another value than the one drawn for the same
+   cell a moment ago, that cell glows GREEN for a rise / RED for a fall. Key = card/sheet name + cell label; memory lasts 20 s. HUD cells keep their own path. */
+(function(){if(typeof MutationObserver!=="function"||typeof kitStatDelta!=="function")return;
+ const SEL=".kst-tile,.kst-chip,.krt-v",MEM=new Map(),TTL=20000;
+ const num=t=>{const m=/^\s*([−-]?)\s*(\d+(?:[.,]\d+)?)/.exec(String(t||"").replace(/ /g," "));return m?(m[1]?-1:1)*parseFloat(m[2].replace(",",".")):null};
+ const still=()=>{try{return typeof ksfStill==="function"&&ksfStill()}catch(e){return false}};
+ const txt=e=>e?e.textContent.replace(/\s+/g," ").trim():"";
+ function ckey(c){const h=c.closest(".pc,.kpsc,.kpstats,#modal,.dlg");if(!h)return null;
+  const who=txt(h.querySelector(".pcname"))||txt(h.querySelector(".kpidn"))||(h.id||h.className);
+  let lab,val;if(c.classList.contains("krt-v")){const l=c.previousElementSibling&&c.previousElementSibling.classList.contains("krt-d")?c.previousElementSibling.previousElementSibling:c.previousElementSibling;lab=txt(l);val=txt(c)}
+  else{lab=txt(c.querySelector(".kstl"));val=txt(c.querySelector(".kstv"))}
+  return lab?who+"|"+lab:null}
+ function scan(root){const L=root.matches&&root.matches(SEL)?[root]:[];if(root.querySelectorAll)root.querySelectorAll(SEL).forEach(x=>L.push(x));
+  const now=Date.now();for(const c of L){if((c.id||"").startsWith("hud-")||c.closest("header.hud"))continue;const k=ckey(c);if(!k)continue;
+   const v=num(c.classList.contains("krt-v")?c.textContent:txt(c.querySelector(".kstv")));if(v==null)continue;const o=MEM.get(k),n={v,t:now};MEM.set(k,n);
+   if(o&&now-o.t<TTL&&o.v!==v){const bad=/oán|ghen|hận|thù|ghét/i.test(k.split("|").pop());/* a rise in grudge / jealousy is a loss for her: colour by meaning */const dv=bad?o.v-v:v-o.v;n.g=dv;n.gt=now;try{if(!still())kitStatGlow(c,dv)}catch(e){}}
+   /* the card is often drawn 2-3 times in a row (render + shell): the glow of the first draw must survive into the next one while its pulse is still running */
+   else if(o&&o.g&&o.v===v&&now-o.gt<KSF.PULSE){n.g=o.g;n.gt=o.gt;try{if(!still())kitStatGlow(c,o.g)}catch(e){}}}
+  if(MEM.size>400)for(const[k,o]of MEM)if(now-o.t>TTL)MEM.delete(k)}
+ let pend=new Set(),raf=0;new MutationObserver(ms=>{for(const m of ms)for(const n of m.addedNodes)if(n.nodeType===1)pend.add(n);
+  if(document.hidden&&pend.size>300)pend.clear();/* hidden tab: rAF does not run, do not hold detached nodes */
+  if(!raf&&pend.size)raf=requestAnimationFrame(()=>{raf=0;const P=[...pend];pend=new Set();for(const n of P)if(n.isConnected)try{scan(n)}catch(e){console.error(e)}})}).observe(document.body,{childList:true,subtree:true});
+ window.pcfStatWatch={scan,MEM}})();
 /* kit sample (KIT §73) */
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§73",title:"Thẻ người: phần bên phải được lấp đầy (tâm trạng, lòng người, sở trọng, đã biết, dạo này)",html:()=>{
  try{if(!S)return"";const v=(typeof rivals!=="undefined"&&rivals[0])||null;if(!v)return"";return `<div class="kitpg-row" style="width:min(100%,520px)">${pcfBlocks(v,{},true)}</div>`}catch(e){return""}}})}catch(e){}
