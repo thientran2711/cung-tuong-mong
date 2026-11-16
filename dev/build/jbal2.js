@@ -164,7 +164,7 @@ Object.assign(BAL,{rg:{at:[1,5,10,18,27,37],decideAfter:2,decideWait:3,catchUp:2
    wk = works (j83): lvQ[art level] added to the play, th = Khá / Tinh xảo / Tuyệt phẩm score thresholds, cong = [Công level that adds +1 tier, highest tier that lift can reach (2 Tinh xảo: Tuyệt phẩm needs the score)] (material bonus BAL.wk.matQ, cap BAL.wk.cap). */
 Object.assign(BAL,{mgTier:{occ:{hoc:[0,.5],hoi:[1,.5],trieu:[1.5,.5],exam:[1,.5],tuyen:[1.5,0]},big:1,stakeMax:6,mid:2,slope:.8,band:1.5,easeMin:-2,
  kAdj:{ban:3,dan:0,den:0,duho:-1,hat:0,hoa:-2,huong:-2,kim:0,kinh:-1.5,may:-1.7,ve:-1.6,mua:-2,theu:0,co:-2,banh:-2,dauho:0},
- kG:{td_cong:1.6,ban:.8,dan:2.3,den:.9,duho:1.5,hoa:2.3,huong:3.65,kim:1.8,kinh:1.5,may:1.5,ve:1.5,mua:8,theu:5.5,co:4},
+ kG:{td_cong:1.6,ban:.8,dan:2.8,den:1.05,hat:.85,duho:1.5,hoa:2.3,huong:3.65,kim:1.8,kinh:1.5,may:1.5,ve:1.7,mua:8,theu:5.5,co:4},
  word:[3,5,7,9],aid:[3.5,1.5],lesson:[5,8],lessonPts:[2,5,8],fullAt:4,gamma:1,tol:[.45,1,.4],more:2,npc:[4,.4],wk:{lvQ:[0,0,1,1,2,2],th:[6,10,15],cong:[3,2]}}});
 /* BAL.psk = PROMO-SKIP (jexam promoReward, owner 16/11 06:20Z/06:45Z/07:15Z): long-road rewards = direct rank; every reward has a gain AND a loss.
    son1 (first prince): Hoàng hậu oán +hhOan, every other mother of a prince oán +momOan.

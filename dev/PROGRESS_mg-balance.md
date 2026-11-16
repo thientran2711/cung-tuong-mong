@@ -59,3 +59,11 @@ OUT OF TARGET (open, honest):
 ## Tests (11/16/2026, merged origin/main 9ddb3f6c)
 `node dev/test/mg-balance-vp.js <old main build> <new build>`: old save (slot 3, made on the main build) loads; 28 minigame kinds (every KG82_KIND with an engine, incl. exam quiz kinds, Tứ đức games, Chải chuốt) open and FINISH
 at 755x1000@2, 1000x755@1, 1180x820@2, 1366x1024@2, 844x390@2, 390x844@2; the "Độ khó" tier row shows on the contest intro; 0 page errors; 0 horizontal overflow. Site rebuilt (dev/site/build_site.sh).
+
+## Reviewer r1 (review/mg-balance-r1, 11/16/2026)
+- Re-measured (dev/measure/mg-bots.js, skilled + random, Vừa = hoc/4/2): graded ≥9 at Vừa — ban 27, hat 8 (n=60), hoa 20, kinh 36 (n=28), theu 34 (n=29), duho 20, kim 27, ve 45 (n=60), huong 27, den 35 (n=60), mua 33, dan 43 (n=60); random 0 % everywhere.
+  Dễ/Khó (hoc/0/2, hoc/6/1): order Dễ > Vừa > Khó holds for dan, hat, kim, ve, duho.
+- Grade curves re-trimmed on the pooled n=60 raws (grading is post-hoc, raws unchanged): `kG` dan 2.3→2.8 (43→28 %), ve 1.5→1.7 (45→27 %), den .9→1.05 (35→25 %), hat (none)→.85 (8→25 %).
+- ONE CORE fixes: every work card prints the tier line from `BAL.mgTier.wk.th` (`wkThTxt`, was a typed "Tuyệt phẩm 14" in j83 / jwkr / jtds) and the art-level add from `wkLvQ`
+  (jwkr / jtds showed "+level"); rival / "Để tài nghệ quyết định" mean play = `BAL.mgTier.npc`.
+- Công lift (+1 tier at Công bậc 3) now stops at Tinh xảo (`BAL.mgTier.wk.cong`): with it, quý material + Công 3 gave Tuyệt phẩm at play 3 (automatic); now play 8 at Thêu 4.
