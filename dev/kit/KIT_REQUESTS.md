@@ -31,3 +31,7 @@ Method: read each branch diff against its merge-base with main (KIT.md, build JS
 - Duplicate number on main: two sections are numbered §39 (`TOP 15 · LÔ A (review/ts-a)` and `ẤN TRÂN NỮ · kitSeal`). Registry §39 = kitSeal; Top 15 becomes §44 (the free slot between §43 and §45). Rename the heading and every "KIT §39" that means Top 15 (jts.js comments, PROGRESS_ts-a). See KIT_NUMBERS.md.
 - review/recipes-r1 (registry §63) adds NO KIT.md text although it adds `jrcp.js` (298 lines): LUẬT KIT TRƯỚC wants §63 written before merge (what parts it reuses: wkrOpen/kitItemRows/…; what it adds).
 - Stale KIT.md copies on unmerged old branches still use numbers main has moved on (palace-map §33, kit-j95 §31, person-acts §37, kit-podium §20, title-screen §28, emotion §31, close-bugs §40, kit-table §41, tabs-kit §42, promo-exam §48): they must take the next free number at merge time (§76+); none is on main (jpm.js / jk95.js / jpa.js are absent from main), so nothing is broken today.
+
+## Kit keeper (main session) 16/11 — act-dedupe wave 1
+- kitPlaceIcon + kitHapMark: SIGNED as §76 (replace the provisional §71 label; record it in KIT_NUMBERS.md). The "!" look (light-gold disc, dark "!") is APPROVED (the owner approved the gold "!").
+- Missing glyphs (Kính sự phòng card tablets, Lãnh cung, palace roof for her and the consort palaces, a garden glyph for Ngự hoa viên) and a Nội vụ phủ scene (4 buổi): ART REQUEST → Foreman D (D56).
