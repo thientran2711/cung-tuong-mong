@@ -78,7 +78,7 @@ if(typeof kidAct==="function"){const k0=kidAct;kidAct=function(a,name){if(a!=="h
 window.addEventListener("click",e=>{const R=window.__adGreyR;if(R&&Date.now()-(window.__adGreyT||0)<1500&&e.clientX>=R.left&&e.clientX<=R.right&&e.clientY>=R.top&&e.clientY<=R.bottom){e.stopPropagation();e.preventDefault()}},true);
 document.addEventListener("pointerup",e=>{try{const b=e.target.closest&&e.target.closest("#panel .kcard[disabled]");if(!b||typeof kpPop!=="function"||!S||S.dead)return;
  const a=deck&&deck[+b.dataset.i];if(!a)return;const w=cardWhy(a)||(a.lock&&a.t)||"Chưa làm được lúc này";window.__adGreyT=Date.now();window.__adGreyR=b.getBoundingClientRect();
- kpPop(b,`<div class="kpopt">${a.n}</div><div class="kpopx"><span class="ef n">${w}</span></div>`)}catch(x){}},true);
+ kpPop(b,`<div class="kpopt">${a.n}</div><div class="kpopx"><span class="ef n">${w}</span></div>`,{inside:true})}catch(x){}},true);
 /* ---------- 5. Nội vụ phủ: a place (map spot on the office court west of the inner palace; scene = the office picture) ---------- */
 try{PLNAME.nvp=["Nội vụ phủ","mua sắm, đồ dùng"];if(typeof MAPH==="object"&&MAPH.places&&!MAPH.places.nvp)MAPH.places.nvp={box:{x:.085,y:.575,w:.13,h:.075},anchor:{x:.15,y:.6}};if(typeof ACC_DAY==="object")ACC_DAY.nvp=1}catch(e){}
 (function(){const p0=places;places=function(){const L=p0.apply(this,arguments);try{if(Array.isArray(L)&&!L.some(x=>x.k==="nvp")&&!adSrv())L.push({k:"nvp",n:"Nội vụ phủ",fn:"mua sắm, đồ dùng",d:"Thái giám Nội vụ phủ lo đồ dùng các cung, nhận mua đồ ngoài cung.",sc:"ksp"})}catch(e){}return L}})();
@@ -94,14 +94,15 @@ function adRare(){if(!S||adSrv())return null;const w=wk();if(S.adRare&&S.adRare.
  S.adRare={w,k:L.length?pick(L):null,sold:0};return S.adRare.k?S.adRare:null}
 if(typeof kitShop==="function"){const ks0=kitShop;kitShop=function(o){try{const R=o&&o.key==="nvp"&&S&&S.place==="nvp"?adRare():null;
   if(R&&Array.isArray(o.items)&&!o.items.some(x=>x.k===R.k)&&IT[R.k]){const k=R.k,it=IT[k];const a=typeof itemArt==="function"?itemArt(k):null;
-   o.items.unshift({k,src:kitItemSrc(k,""),src512:a&&a.src512||"",name:it.n,sub:`Hàng hiếm tuần này · ${it.kd||""}`,grade:a?a.grade|0:0,lux:it.sl||it.dr?luxVal(k):0,price:it.pr||0,
+   o.items.unshift({k,src:kitItemSrc(k,""),src512:a&&a.src512||"",name:it.n,sub:`Hàng hiếm tuần này · ${it.kd||""}`,grade:a?a.grade|0:0,lux:it.sl||it.dr?luxVal(k):0,price:it.pr||0,mark:["hàng hiếm","g"],/* kitItem corner tag on the tile (KIT §28.13) */
     eff:kitShopEff(k),rows:kitItemRows(k),stock:1,have:()=>S.inv.filter(e=>e.k===k&&!e.h).length,
     onBuy:(x,q)=>{if(!S.adRare||S.adRare.sold)return;apply({bac:-x.price});S.inv.push({k});S.adRare.sold=1;x.stock=0;x.why="Đã mua; tuần sau có món khác";log(`Mua ${it.n} (hàng hiếm). Bạc -${x.price}`)}})}}catch(e){console.error("jact rare",e)}
  return ks0.apply(this,arguments)}}
 /* ---------- 6. place icons (kit icon set) + happening mark ---------- */
-const KIT_PLACE_IC={nvp:"bac",tyv:"y-thuat",vuon:"hoa",thu:"sung",dtd:"sung",tn:"duc",kn:"danh"};
-/* missing in the kit icon set (KIT REQUEST 16/11): ksp (thẻ bài), lc (lãnh cung), home / consort palaces (cung phi tần) — no icon until drawn */
-function kitPlaceIcon(k,s){const n=KIT_PLACE_IC[k];return n&&typeof ic==="function"?ic(n,s||14).replace('class="ic"','class="ic kplic"'):""}
+const KIT_PLACE_IC={nvp:"bac",tyv:"y-thuat",vuon:"place-vuon",thu:"sung",dtd:"sung",tn:"duc",kn:"danh",
+ ksp:"place-ksp",lc:"place-lc",home:"place-cung",cnh:"place-cnh",tgk:"place-tgk",ttp:"place-ttp",acs:"place-acs",dc:"place-dc"};
+/* every place has a glyph (D56): the consort palaces r<N> (and her own home) share the palace-roof glyph */
+function kitPlaceIcon(k,s){const n=KIT_PLACE_IC[k]||(/^r\d+$/.test(k||"")?"place-cung":"");return n&&typeof ic==="function"?ic(n,s||14).replace('class="ic"','class="ic kplic"'):""}
 function kitHapMark(k){const h=adHapAt(k);return h?`<i class="khap" role="img" aria-label="Có chuyện buổi này" title="Có chuyện buổi này">!</i>`:""}
 (function(){const m0=mapHTML;mapHTML=function(){let h=m0.apply(this,arguments);try{if(!S||adSrv())return h;
   h=h.replace(/(<(?:button|div) class="mspot[^"]*" data-(?:go|ak)="([^"]+)"[^>]*>(?:(?!class="mspot)[\s\S])*?<span class="mlab">)([\s\S]*?)(<\/span>)/g,(all,open,k,lab,end)=>open+kitPlaceIcon(k)+lab+kitHapMark(k)+end)}catch(e){console.error("jact map",e)}return h}})();
@@ -139,6 +140,8 @@ PEND.adStroll=()=>{const K=S.emp.known,L=S.emp.likes,tt=has("trongtai")?2:1;cons
   {n:"Lánh đi lối khác",fx:{},x:"không được không mất"}]}};
 (function(){const st=document.createElement("style");st.textContent=`
 .ic.kplic{vertical-align:-2px;margin-right:3px;flex:none}
+/* the 4.4em floor of a map chip counts the glyph (14 px + 3 px gap): a narrow chip (Trường Môn viện) must not push its text out of the border (OD:L1033) */
+.mspot .mlab:has(>.kplic){max-width:max(100%,calc(4.4em + 17px))}
 .khap{display:inline-block;font-style:normal;font-weight:800;font-size:.62rem;line-height:13px;color:var(--ink);background:var(--trim);border-radius:50%;width:13px;height:13px;text-align:center;margin-left:4px;vertical-align:1px;box-shadow:0 0 0 1.5px #fff8e6,0 0 6px var(--trim)}
 .mspot.sm .khap{width:12px;height:12px;line-height:12px;font-size:.56rem}`;document.head.appendChild(st)})();
 /* kit page samples */
