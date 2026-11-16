@@ -3,7 +3,14 @@ const RANKS=[
  {n:"Phi",s:52,d:42},{n:"Quý phi",s:66,d:55},{n:"Hoàng quý phi",s:78,d:68},{n:"Hoàng hậu",s:85,d:78}];
 /* palace heads (chủ vị): Tần, Phi, Quý phi, Hoàng quý phi (owner 11/14, OWNER_DECISIONS) — rank index ≥ PAL_HEAD */
 const PAL_HEAD=3;
-const RCOL=["#9c8f74","#a8946a","#6a8aa0","#7aa07a","#a07ab0","#c06a6a","#d98a3a","#f0d070"];
+/* KIT 1.3 · THE ONE RANK PALETTE (owner 11/16 13:00Z "nhạt nhòa quá → tươi hơn"; jewel tones): every rank colour in the game is read from here (ring, halo, chips, card colour, portrait ground
+   .rk-cN, text tone via kitToneOf in jk4). Vivid bases, same colour family per rank; text on paper is DERIVED (kitToneOf), never typed again. Nobody keeps a copy. */
+const RCOL=["#c4861a","#12b84a","#1f6cff","#ff3d8f","#a23cff","#ff1f3d","#ff6a00","#ffc400"];/* Đáp ứng champagne-bronze, Thường tại green, Quý nhân blue, Tần pink, Phi purple, Quý phi red, Hoàng quý phi orange, Hoàng hậu gold */
+const RCOL_COLD="#8fa3b8";/* Lãnh cung / Phế phi: cool steel grey */
+window.MRCOL=["#3aa38f","#00bf94","#2f6fff","#ff4a1c","#9b4dff"];/* maids: thô sử grey-jade, cung nữ jade, đại cung nữ blue, chưởng sự cô cô terracotta, nữ quan violet */
+window.ERCOL=["#6fb03a","#12b35a","#1f8fe0","#d9601a"];/* eunuchs: tiểu thái giám sage, thái giám green, thủ lĩnh steel blue, tổng quản bronze */
+const KIT_IMP="#ffd400";/* ONE imperial yellow token (owner 11/16 16:10Z: "màu vàng của hoàng gia, màu vàng tươi") for Hoàng thượng AND Hoàng thái hậu; kitToneOf keeps it as is, the ink edge is in jk4 */
+const KIT_ROLE={emp:KIT_IMP,th:KIT_IMP,ty:"#12b5ac",prince:"#1f9be8",princess:"#f0543c",stranger:"#6e7681",official:"#3a6fe0",guard:"#5879a8",mama:"#b97a2a",slate:"#5a7a9a"};/* non-rank roles (never pink/purple for men) */
 const ORIGINS=[
  {k:"tt",n:"Con gái Tể tướng",r:2,o:{danh:25,bac:150},hh:-15,th:5,art:{cam:1},t:"Nhà quyền thế. Hoàng hậu coi ngươi là mối lo."},
  {k:"dtq",n:"Con gái Đại tướng quân",r:1,o:{danh:15,suc:100,bac:80},hh:0,th:0,t:"Cha giữ binh quyền biên ải. Thân thể khỏe mạnh."},

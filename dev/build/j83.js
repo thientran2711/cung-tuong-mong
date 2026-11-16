@@ -25,16 +25,19 @@ Object.defineProperty(WK.theu,"a",{get:()=>wkHasArt("theu")?"theu":"hoa"});Objec
 const WMAT=BAL.wk.matQ;/* material bonus to the score (BAL.wk) */
 function wkLv(p,a){return typeof artLv==="function"?(artLv(p,a)||0):((p&&p.arts)||{})[a]||0}
 function wkTier(q){const T=BAL.mgTier.wk.th;return q>=T[2]?3:q>=T[1]?2:q>=T[0]?1:0}/* mg-balance: thresholds in BAL.mgTier.wk.th */
+/* the tier line printed on every work card (j83 / jwkr / jtds): ONE CORE, reads BAL.mgTier.wk.th (mg-balance-r1) */
+function wkThTxt(){const T=BAL.mgTier.wk.th;return `Thường dưới ${T[0]} · Khá ${T[0]} · Tinh xảo ${T[1]} · Tuyệt phẩm ${T[2]}`}
 /* score = mini-game raw 0..10 + grade + material; shown plainly */
 /* Công (Tứ đức, j85): its quality bonus (0..100 scale, 10 per phần here) and +1 tier from Công bậc 3 */
 function wkCong(p){if(typeof virtueBonus!=="function")return{lv:0,q:0};let v;try{v=virtueBonus(p,"cong")}catch(e){return{lv:0,q:0}}if(v==null)return{lv:0,q:0};if(typeof v==="number")return{lv:v,q:0};return{lv:+(v.lv!=null?v.lv:v.level!=null?v.level:0)||0,q:+(v.q||0)||0}}
 function wkCongPh(p){return Math.round(wkCong(p).q/10)}
 function wkLvQ(p,a){const L=BAL.mgTier.wk.lvQ;return L[cl(Math.round(wkLv(p,a)),0,L.length-1)]}/* mg-balance: her art level adds a little (BAL), the play decides */
 function wkScore(p,kind,mat,raw){return raw+wkLvQ(p,WK[kind].a)+WMAT[mat]+wkCongPh(p)}
-function wkTierP(p,q,mat){const t=Math.min(3,wkTier(q)+(wkCong(p).lv>=3?1:0));return mat==null?t:Math.min(t,BAL.wk.cap[mat])}
+function wkCongUp(p,t){const C=BAL.mgTier.wk.cong;return wkCong(p).lv>=C[0]&&t<C[1]?1:0}/* mg-balance-r1: the Công lift (+1 tier) stops at BAL.mgTier.wk.cong[1] (Tinh xảo), so Tuyệt phẩm always needs the play score */
+function wkTierP(p,q,mat){const t0=wkTier(q),t=Math.min(3,t0+wkCongUp(p,t0));return mat==null?t:Math.min(t,BAL.wk.cap[mat])}
 /* lowest play score (0..10) that reaches tier t with this material, or -1 (out of reach) */
 function wkNeedRaw(p,kind,mat,t){for(let r=0;r<=10;r++)if(wkTierP(p,wkScore(p,kind,mat,r),mat)>=t)return r;return -1}
-function wkParts(p,kind,mat,raw){const K=WK[kind],a=ARTS.find(x=>x.k===K.a),c=wkCong(p),cp=wkCongPh(p);return `phần chơi ${raw}${wkLvQ(p,K.a)?` + ${a.n} bậc ${wkLv(p,K.a)}: +${wkLvQ(p,K.a)}`:""}${WMAT[mat]?` + vật liệu: +${WMAT[mat]}`:""}${cp?` + Công: +${cp}`:""} = ${wkScore(p,kind,mat,raw)} phần${c.lv>=3?`; Công bậc ${c.lv}: +1 bậc`:""}${wkTierP(p,wkScore(p,kind,mat,raw))>wkTierP(p,wkScore(p,kind,mat,raw),mat)?`; ${WK[kind].mn[mat]} chỉ tới ${WTIER[BAL.wk.cap[mat]]}`:""}`}
+function wkParts(p,kind,mat,raw){const K=WK[kind],a=ARTS.find(x=>x.k===K.a),c=wkCong(p),cp=wkCongPh(p);return `phần chơi ${raw}${wkLvQ(p,K.a)?` + ${a.n} bậc ${wkLv(p,K.a)}: +${wkLvQ(p,K.a)}`:""}${WMAT[mat]?` + vật liệu: +${WMAT[mat]}`:""}${cp?` + Công: +${cp}`:""} = ${wkScore(p,kind,mat,raw)} phần${wkCongUp(p,wkTier(wkScore(p,kind,mat,raw)))?`; Công bậc ${c.lv}: +1 bậc`:""}${wkTierP(p,wkScore(p,kind,mat,raw))>wkTierP(p,wkScore(p,kind,mat,raw),mat)?`; ${WK[kind].mn[mat]} chỉ tới ${WTIER[BAL.wk.cap[mat]]}`:""}`}
 /* act-text (owner 15/11): the quality tiers in ONE clear line, no code-like signs: "chơi 5 phần ra Khá, 9 phần ra Tinh xảo, Tuyệt phẩm cần vật liệu quý" */
 function wkTierTxt(p,kind,mat){const lo=wkTierP(p,wkScore(p,kind,mat,WAVG),mat),N=[1,2,3].filter(t=>t>lo).map(t=>{const r=wkNeedRaw(p,kind,mat,t);return r<0?(t===3&&BAL.wk.cap[mat]<3?`${WTIER[t]} cần vật liệu quý`:`${WTIER[t]} chưa với tới`):`${r} phần ra ${WTIER[t]}`});
  const L=(lo>0?[`${WAVG} phần đã ra ${WTIER[lo]}`]:[]).concat(N);return L.length?(/^\d/.test(L[0])?"chơi ":"")+L.join(", "):`chơi ${WAVG} phần đã ra ${WTIER[lo]}`}
@@ -141,7 +144,7 @@ function wkLessonOK(k,mode){const l=S.arts[k],cost=tchFee(k);if(!S||S.dead||Q.le
 function wkAsk(k,mode,run){const a=ARTS.find(x=>x.k===k),l=S.arts[k],fee=mode==="teacher"?tchFee(k):0;const O=[];
  for(const kind of wkKindsOf(k)){const K=WK[kind];for(let m=0;m<3;m++)O.push({n:`${K.w} · ${K.mn[m]}`,fx:K.mat[m]?{bac:-K.mat[m]}:{},x:`${wkOddsTxt(S,kind,m)}${K.per?" · phải dâng trong tuần":""}${K.fin?" · "+wkFinTxt(K):""}`,go:()=>{wkPend={kind,mat:m};run();if(!S.mg){wkPend=null;if(K.mat[m])apply({bac:K.mat[m]})}}})}
  O.push({n:"Thôi",fx:{}});
- Q.push({act:1,t:`${mode==="prac"?"Tự học":"Học"} ${a.n}: làm ra tác phẩm gì?`,who:pMe(),h:`<p>Tự tay làm (chơi trò tài nghệ): ra thành phẩm. Học nhanh: ${mode==="prac"?"":"vẫn tiến bộ, "}không ra thành phẩm. Phẩm = phần chơi trò tài nghệ (từ 0 đến 10) + ${a.n} bậc ${l}: +${BAL.mgTier.wk.lvQ[cl(Math.round(l),0,5)]} + vật liệu (thường +${WMAT[0]}, tốt +${WMAT[1]}, quý +${WMAT[2]}).</p><p class="past">Thường dưới 6 · Khá 6 · Tinh xảo 10 · Tuyệt phẩm 14</p><p>Chỉ vật liệu quý mới thành Tuyệt phẩm. Vật liệu tốt, quý còn làm quà giá trị hơn và bán được giá hơn.${fee?` Phí thầy ${fee} bạc trả riêng.`:""}</p>`,opts:O});showModal();render()}
+ Q.push({act:1,t:`${mode==="prac"?"Tự học":"Học"} ${a.n}: làm ra tác phẩm gì?`,who:pMe(),h:`<p>Tự tay làm (chơi trò tài nghệ): ra thành phẩm. Học nhanh: ${mode==="prac"?"":"vẫn tiến bộ, "}không ra thành phẩm. Phẩm = phần chơi trò tài nghệ (từ 0 đến 10) + ${a.n} bậc ${l}: +${wkLvQ(S,k)} + vật liệu (thường +${WMAT[0]}, tốt +${WMAT[1]}, quý +${WMAT[2]}).</p><p class="past">${wkThTxt()}</p><p>Chỉ vật liệu quý mới thành Tuyệt phẩm. Vật liệu tốt, quý còn làm quà giá trị hơn và bán được giá hơn.${fee?` Phí thầy ${fee} bạc trả riêng.`:""}</p>`,opts:O});showModal();render()}
 (function(){const l0=lessonMode;lessonMode=function(k,mode){if(wkPend||!wkLessonOK(k,mode))return l0.apply(this,arguments);wkAsk(k,mode,()=>l0.call(this,k,mode))}})();
 /* practice once mastered: j82's playArt gives the raw score directly when present; otherwise the art's lesson game */
 function wkPractice(k){if(!wkLessonOK(k,"prac"))return;wkAsk(k,"prac",()=>{if(!wkLessonOK(k,"prac"))return;apply({suc:-10});spend(2);
@@ -190,7 +193,7 @@ document.addEventListener("click",ev=>{const b=ev.target.closest("[data-wk]");if
 function wkTabHTML(){const why=whyTime(2)||(S.suc<15?"Sức dưới 15":"");
  let h=`<div class="ph"><span>Mỗi buổi học hay tự học mà tự tay chơi trò tài nghệ thì ra một tác phẩm (Học nhanh: không ra thành phẩm), cất vào rương để dâng, tặng, bán, bày ở yến tiệc. Phẩm = phần chơi trò tài nghệ (từ 0 đến 10) + chút bậc tài nghệ + vật liệu.</span><span>Đồ mua bằng bạc vẫn quý hơn</span></div><div class="arts">`;
  h+=ARTS.map(a=>{const l=S.arts[a.k],ks=wkKindsOf(a.k);if(!ks.length)return"";const B=l>=5?[pbtn(`data-wk="prac" data-art="${a.k}"`,"Tự học, làm tác phẩm",`Chắc chắn · tốn: Sức -10, 2 khắc · thành: một tác phẩm, ${wkOddsTxt(S,ks[0],0)}`,why)]:[];
-  return `<div class="art"><b>${ic(AIMG[a.k],20)}${a.n} · bậc ${l}: +${l}</b><span class="u">${ks.map(k=>`${WK[k].w}${WK[k].per?" (để 1 tuần)":""}${WK[k].fin?" ("+wkFinTxt(WK[k])+")":""}`).join(" · ")}</span><span class="u">${wkTierTxt(S,ks[0],0)}</span>${B.length?`<div class="pcb">${B.join("")}</div>`:""}</div>`}).join("")+`</div>`;
+  return `<div class="art"><b>${ic(AIMG[a.k],20)}${a.n} · bậc ${l}: +${wkLvQ(S,a.k)}</b><span class="u">${ks.map(k=>`${WK[k].w}${WK[k].per?" (để 1 tuần)":""}${WK[k].fin?" ("+wkFinTxt(WK[k])+")":""}`).join(" · ")}</span><span class="u">${wkTierTxt(S,ks[0],0)}</span>${B.length?`<div class="pcb">${B.join("")}</div>`:""}</div>`}).join("")+`</div>`;
  return h}
 (function(){const a0=artTabHTML;artTabHTML=function(){return a0.apply(this,arguments)+wkTabHTML()}})();
 /* ---- incoming gift dialog shows the work's real name ---- */

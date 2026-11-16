@@ -184,7 +184,7 @@ function kaSentence(before){const n=Math.max(0,Math.min(S.logs.length,(S.logSeq|
 function kaNamed(v){try{return v===S||typeof k61Named!=="function"||k61Named(v)}catch(e){return true}}
 function kaResultRows(before){const G=[],B=[];const K=[];const skip=new Set();
  const q=typeof queenP==="function"?queenP():null;const R=before.rel||{};
- const per=[];/* [who, goodParts, badParts] */
+ const per=[];const U={g:[],b:[]};/* [who, goodParts, badParts] */
  for(const v of (typeof rivals!=="undefined"?rivals:[])){const b=R[v.id];if(!b)continue;const a=aff(v,S),m=aff(S,v),e=v.ev||0,g=v.ghen||0,o=Math.round(oan(v,S));const gp=[],bp=[];
   let da=a-b.a,lo=b.a,hi=a;if(v===q&&q!==S&&before.hh!=null){const dh=(S.hh||0)-before.hh;if(dh){skip.add("hh");if(!da){da=dh;lo=before.hh;hi=S.hh||0}}}
   /* hotfix 11/15: the real before→after, never the bare word "thiện cảm" */
@@ -192,7 +192,8 @@ function kaResultRows(before){const G=[],B=[];const K=[];const skip=new Set();
   if(g!==b.g)K.push({v,k:"ghen",d:g-b.g});
   if(o!==b.o)K.push({v,k:"oán",d:o-b.o});
   if(e!==b.e)(e>b.e?gp:bp).push(`chứng cứ về nàng ${kaN(e-b.e)}`);
-  if(gp.length||bp.length)per.push([kaWho(v),gp,bp])}
+  if(gp.length||bp.length){if(kaNamed(v))per.push([kaWho(v),gp,bp]);else{/* name-mask: strangers are ONE aggregate row per direction, never "<tước> ???" rows */if(gp.some(t=>/^(quý ngươi|ngươi quý)/.test(t)))U.g.push(v);if(bp.some(t=>/^(ghét ngươi|ngươi bớt)/.test(t)))U.b.push(v)}}}
+ {/* the ONE shared list helper kitNameList: all strangers -> "N vị chưa quen biết" */if(U.g.length)per.push([kitNameList(U.g),["quý ngươi hơn"],[]]);if(U.b.length)per.push([kitNameList(U.b),[],["ghét ngươi hơn"]])}
  for(const [k,nm] of RKEYS){if(skip.has(k))continue;const now=S[k]||0,d=now-(before[k]||0);if(!d)continue;
   if(k==="th"||k==="hh"){const who=k==="th"?"Thái hậu":(q&&q!==S?kaWho(q):"Hoàng hậu");per.push([who,d>0?[`quý ngươi hơn (${before[k]}→${now}, ${kaN(d)})`]:[],d<0?[`ghét ngươi hơn (${before[k]}→${now}, ${kaN(d)})`]:[]]);continue}
   {const up=typeof kGood==="function"?kGood(k,d):d>0;(up?G:B).push(`<span class="ef ${up?"g":"r"}">${nm} ${before[k]}→${now} (${kaN(d)})</span>`)}}
