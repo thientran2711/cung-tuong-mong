@@ -93,6 +93,9 @@ function menMakePlans(t){const add=P=>{P.id=(S.menPS=(S.menPS||0)+1);P.w=t;S.men
 function menEye(p){return p===S?(S.mat||0)*8+(S.tamco||0)/3:(p.mat||0)*8+(p.tamco||0)/3}
 function menTip(P){try{if(!menRoad()||P.opp)return;if(menEye(S)<P.hide+40)return;P.tip=1;const t=P.w-wk();const when=`${t<=0?"tuần này":"tuần tới"}, ${BUOI[P.b].toLowerCase()}`;
  log(`<span class="g">Tai mắt báo: nghe nói ${when}, có nam nhân sẽ lẻn vào ${placeName(P.k)}${menEye(S)>=P.hide+30&&P.v!=null&&RV(P.v)?`, gặp ${menVT(RV(P.v))}`:""}. Muốn thấy tận mắt thì có mặt ở đó lúc ấy.</span>`);menStat("tip")}catch(e){}}
+/* she becomes a maid after the consort start ran (j42 srvInit): this buổi's schedule is read again for her road (the consort start's court
+   roster must not linger for a buổi) */
+(function(){if(typeof srvInit!=="function")return;const s0=srvInit;srvInit=function(){const r=s0.apply(this,arguments);try{if(menSchedRoad()&&!menRoad())menSched()}catch(e){console.error("menSched",e)}return r}})();
 (function(){const pw=placeWhere;placeWhere=function(){const r=pw.apply(this,arguments);try{if(menRoad())menPlace();else if(menSchedRoad())menSched()}catch(e){console.error("menPlace",e)}return r}})();
 (function(){const c0=countAt;countAt=function(k){let n=c0(k);try{if(menRoad())for(const c in (S.minW||{}))if(S.minW[c]===k)n++}catch(e){}return n}})();
 
