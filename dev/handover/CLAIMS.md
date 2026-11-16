@@ -392,6 +392,5 @@
 | night-final successor (opus): merge main, multi-steal resolve-once rule, worldOn, coop-night live, then 10-night ledger hook | review/night-final | main s23 | (opening:nf) | RUNNING | 16/11 20:32Z |
 | kit-size #5 successor keeper (opus): reports/kit-size.md items 1-7 incl. owner TIN fixes | review/kit-size | main s23 | (opening:ks) | RUNNING | 16/11 20:32Z |
 | kit-fit ROUND 3 keeper (sonnet): Luân hồi cards bigger + face picker one list (reports/kit-fit.md §HANDOVER) | review/kit-fit-r3 | main s23 | (opening:k3) | RUNNING | 16/11 20:32Z |
-| road-b3-fix review r1 (opus, BIG roads) of 68067fe1 | review/road-b3-fix-r1 | B | session_01N1tNP2bUuTx3dm594CtR4n | RUNNING | 16/11 20:33Z |
 | P2 tutorial quests ch1–3 (opus; main s23 20:10Z; ROAD_MAP Part 1; OD:L1233/L1242/L1259; story14 frame live) | review/tut-quests | B | session_01N1tNP3J9spJbci5SDSfsaU | RUNNING | 16/11 20:40Z |
 | ROAD_MAP §4.10 men-road canon check (opus; Foreman D 20:05Z, reports/npc-roads.md 'proposed ROAD_MAP §4.10') | review/road-map-410 | B | session_01N1tNP5MEELAspgvPEdzAdh | RUNNING | 16/11 20:40Z |
