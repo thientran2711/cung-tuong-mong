@@ -12,7 +12,7 @@ const URL=/^https?:/.test(URL0)?URL0:'file://'+path.resolve(URL0);
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof rgMonth==='function',null,{timeout:120000});await p.waitForTimeout(1500);
  await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}document.getElementById('title').hidden=true;window.__nlInner=1;
   for(let i=0;i<40;i++){start();if(S.ps&&!(typeof isSrv==='function'&&isSrv())&&S.origin.k!=='tt')break}Q.length=0;$("modal").hidden=true});
- await p.waitForTimeout(800);await p.addStyleTag({content:'#kroul,#kroulw{display:none!important}'});
+ await p.waitForTimeout(800);await p.addStyleTag({content:'#kroul,#kroulw,.kmov{display:none!important}'});
  const fails=[];const ok=(c,m)=>{if(!c)fails.push(m)};
  const clear=()=>p.evaluate(()=>{const md=document.getElementById('modal');md.hidden=true;md.className='modal';Q.length=0});
  const shot=async n=>{if(SHOT){await p.waitForTimeout(400);await p.screenshot({path:`${SHOT}-${W}x${H}-${n}.png`})}};
