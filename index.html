@@ -1982,7 +1982,7 @@ function invAct(a){if(S.dead||Q.length)return;
 function invHTML(){const wb=wearBonus(S),vp=vpItems(S);const vis=S.inv.map((e,i)=>[e,i]).filter(([e])=>!e.h);
  const groups=[];for(const [e,i] of vis){const g=groups.find(x=>x.k===e.k&&!!x.t===!!(e.by==="me"&&e.t)&&!x.w&&!e.w);if(g)g.n++;else groups.push({k:e.k,t:e.by==="me"?e.t:null,w:e.w,i,n:1,ext:e.t&&e.by!=="me",from:e.from})}
  const dress=S.dress&&S.dress.until>S.turn?`${IT[S.dress.k].n} (đến tháng ${S.dress.until-S.turn} nữa)`:"không";
- let h=`<div class="ph"><span>Đang đeo: Sắc +${wb.sac}${wb.danh?`, Danh +${wb.danh}`:""} · áo mới: ${dress}${vp.length?` · <span class="r">vượt phẩm!</span>`:""}</span><span>Bạc ${S.bac}</span></div>
+ let h=`<div class="ph"><span>Đang mặc: Sắc +${wb.sac}${wb.danh?`, Danh +${wb.danh}`:""} · áo mới: ${dress}${vp.length?` · <span class="r">vượt phẩm!</span>`:""}</span><span>Bạc ${S.bac}</span></div>
  <div class="rbtn" style="margin-bottom:6px"><button data-inv="shop">Nhờ thái giám mua đồ<small>thành: xem hàng, mua đồ từ ngoài cung qua thái giám Nội vụ phủ</small></button><button data-inv="inspect" ${!can(2)?"disabled":""}>Kiểm tra đồ<small>${word(oSee(S,true))} · tốn: 2 khắc · thành: tìm ra đồ bị tẩm, cài · hỏng: không thấy gì</small></button></div>`;
  if(!groups.length)return h+`<p class="past">Rương trống. Nhờ thái giám mua đồ, hoặc chờ được ban thưởng.</p>`;
  h+=`<div class="cards">`+groups.map(g=>{const it=IT[g.k],i=g.i;const B=[];
@@ -1993,7 +1993,7 @@ function invHTML(){const wb=wearBonus(S),vp=vpItems(S);const vis=S.inv.map((e,i)
   if(it.pr)B.push(`<button data-it="sell" data-ix="${i}">Bán<small>Bạc +${Math.floor(it.pr/2)}</small></button>`);
   if(Object.values(TAINT).some(T=>T.on.includes(g.k))&&!g.t)B.push(`<button data-it="taint" data-ix="${i}">Tẩm<small>mưu kế</small></button>`);
   if(g.from&&g.from!=="me"&&g.from!=="emp"&&g.from!=="th")B.push(`<button data-it="test" data-ix="${i}" ${S.bac<10?"disabled":""}>Xét nghiệm<small>Bạc -10</small></button>`);
-  return `<div class="card"><h4>${iic(g.k)}${it.n}${g.n>1?` ×${g.n}`:""}${g.w?" · đang đeo":""}</h4><p>${it.kd} · ${it.d}${g.t?` · <span class="r">đã ${TAINT[g.t].n}</span>`:""}${it.rk?` · bậc ${RANKS[Math.min(7,it.rk)].n}`:""}</p><div class="rbtn">${B.join("")}</div></div>`}).join("")+`</div>`;return h}
+  return `<div class="card"><h4>${iic(g.k)}${it.n}${g.n>1?` ×${g.n}`:""}${g.w?" · Đang mặc":""}</h4><p>${it.kd} · ${it.d}${g.t?` · <span class="r">đã ${TAINT[g.t].n}</span>`:""}${it.rk?` · bậc ${RANKS[Math.min(7,it.rk)].n}`:""}</p><div class="rbtn">${B.join("")}</div></div>`}).join("")+`</div>`;return h}
 /* the tablet: every consort weighted by the same night formula; others may steal it by the same act */
 function flip(){S.tonight=null;if(S.dead)return;if(!roll(has("chamchinh")?65:90))return;
  const C=consorts().filter(p=>nightCh(p)>0);if(!C.length)return;const w=C.map(p=>nightCh(p));let r=Math.random()*w.reduce((a,b)=>a+b),i=0;while(r>w[i]&&i<w.length-1){r-=w[i];i++}let t=C[i];
@@ -6512,7 +6512,9 @@ const TOK67={
  eun:()=>eun67(),k:()=>{const s=son67();return s?s.name:"hoàng tử"},d:()=>{const d=dau67();return d?d.name:"công chúa"},
  mis:()=>{const m=srvMis67();return m?m.name:"chủ nhân"},foe:()=>S.foe||"kẻ thù",foed:()=>S.foeDad||"kẻ thù của cha",
  sj:A=>A.sj||"chuyện này",xung:()=>S.rank>=3?"nương nương":"tiểu chủ",Xung:()=>S.rank>=3?"Nương nương":"Tiểu chủ",n1:A=>A.n1||"",n2:A=>A.n2||"",emp:()=>"Hoàng thượng"};
-function fill67(s,A){return String(typeof s==="function"?s(A):s||"").replace(/\{(\w+)\}/g,(m,k)=>TOK67[k]?TOK67[k](A):m)}
+/* a goal / step text that names the arc's people tells HER who they are (D47: the Mục tiêu row showed "Quý nhân ???" for the very woman the chapter says she found out): name + face known (j61 stage 2), nothing logged */
+function arcReveal67(t,A){try{if(typeof k61Know!=="function"||!A||typeof t!=="string")return;const L=[];for(const k of ["v","v2"])if(t.includes("{"+k+"}")){const v=rv67(A,k);if(v)L.push(v)}if(t.includes("{foe}")){const v=foe67();if(v)L.push(v)}if(L.length)k61Know(L,"",true,2)}catch(e){}}
+function fill67(s,A){if(typeof s==="string")arcReveal67(s,A);return String(typeof s==="function"?s(A):s||"").replace(/\{(\w+)\}/g,(m,k)=>TOK67[k]?TOK67[k](A):m)}
 function who67(w,A){try{switch(w){
  case"v":case"v2":{const v=rv67(A,w);return v?pv(v):null}
  case"th":return S.thDead?null:pTH();case"emp":return pEmp();case"hh":return qOn()?pv(rivals[0]):null;case"maid":return S.maid?pMaid():null;case"me":return pMe();
@@ -10408,7 +10410,7 @@ function accEtqCard(k,then){const h=accEtq(S,k);if(!h){then();return}if(!S||S.de
  opts.push({n:"Thôi",fx:{},x:""});Q.push({t:nm,h:L.join(""),opts});showModal()}
 function accEtqGo(k,h,greet,then){if(!S||S.dead||Q.length)return;const sh=h.name.split(" ").pop();const bf=typeof rsnap==="function"?rsnap():null;
  const C=ACC_ETQ,sg=n=>(n>0?"+":"")+n;
- if(greet){if(!j77Kh(travel(S.place,k)+C.khac))return;spend(C.khac);relAdd(S,h,C.okAff);log(`Ngươi cúi chào, bái kiến ${accRkName(h)} ${h.name} ở ${accName(k)}: chủ vị quý ngươi ${sg(C.okAff)}.`)}
+ if(greet){if(!j77Kh(travel(S.place,k)+C.khac))return;spend(C.khac);relAdd(S,h,C.okAff);log(`Ngươi cúi chào, bái kiến ${accRkName(h)} ${h.name} ở ${accName(k)}: chủ vị quý ngươi ${sg(C.okAff)}.`);/* bowing to her face to face = she sees her (j61: a greeting reveals the face, not the name) */try{if(typeof k61Meet==="function")k61Meet(h,"",1)}catch(e){}}
  else{if(C.mode==="required")return;const a=accSkipAff(h,S);relAdd(S,h,a);if(C.skipDanh)apply({danh:C.skipDanh});log(`<span class="r">Vào ${accName(k)} không chào chủ vị ${h.name}: thiếu lễ, chủ vị quý ngươi ${sg(a)}${C.skipDanh?`, Danh ${sg(C.skipDanh)}`:""}.</span>`)}
  accGrant(S,k);then();
  /* act audit: the change came after the dialog had closed, and the arrival card ("không đổi gì") covered it: show it after arriving */
@@ -18953,7 +18955,7 @@ function vlSrcTxt(e0){if(!e0)return"";const e=Object.assign({},e0,{from:e0.src||
  const v=typeof byKey==="function"&&e.from?byKey(e.from):null;return v&&v.name?`${v.name} tặng`:"đồ trong rương"}
 (function(){if(typeof invHTML!=="function")return;const i0=invHTML;invHTML=function(){const W=(S.inv||[]).filter(e=>vlIs(e)&&!e.h);W.forEach(e=>e.h=1);let h;try{h=i0.apply(this,arguments)}finally{W.forEach(e=>delete e.h)}
  let x="";try{x=vlInvHTML()}catch(e){console.error(e)}if(!x)return h;if(W.length)h=h.replace(/<p class="past">Rương trống\.[^<]*<\/p>/,"");
- if(S.scar)return x+h;const j=h.indexOf('<div class="ph"><span>Đang đeo');return j<0?h+x:h.slice(0,j)+x+h.slice(j)}})();
+ if(S.scar)return x+h;const j=h.indexOf('<div class="ph"><span>Đang mặc');return j<0?h+x:h.slice(0,j)+x+h.slice(j)}})();
 document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.closest("[data-vl],[data-vlpick]");if(!b||b.disabled)return;ev.stopPropagation();
  if(b.dataset.vlpick!=null){window.__vlPick=+b.dataset.vlpick;try{render()}catch(e){}return}
  const a=b.dataset.vl;if(a==="get")vlGetUI();else if(a==="off")vlOffUI();else if(a==="wear")vlWearUI(+b.dataset.ix)},true);
@@ -19927,7 +19929,7 @@ function kinvOpen(x){if(x&&x.g&&x.g.wk)return kinvOpenWork(x);const g=x.g,it=IT[
  if(it.pr)B.push(pbtn(`data-kinvact="sell" data-ix="${i}"`,"Bán",`thành: Bạc +${Math.floor(it.pr/2)}`,""));
  if(typeof TAINT==="object"&&Object.values(TAINT).some(T=>T.on.includes(g.k))&&!g.t)B.push(pbtn(`data-kinvact="taint" data-ix="${i}"`,"Tẩm","thành: chọn cách tẩm, giữ làm mưu kế · kèm: Đức -3",""));
  if(g.from&&g.from!=="me"&&g.from!=="emp"&&g.from!=="th")B.push(pbtn(`data-kinvact="test" data-ix="${i}"`,"Nghiệm độc","tốn: Bạc 10 · thành: Thái y xem đồ có bị tẩm không",S.bac<10?"thiếu bạc (cần 10)":""));
- const F=[];if(g.n>1)F.push(`Trong rương: ${g.n} món.`);if(g.w)F.push(it.sl?"Ngươi đang đeo.":"Ngươi đang dùng.");
+ const F=[];if(g.n>1)F.push(`Trong rương: ${g.n} món.`);if(g.w)F.push("Ngươi đang mặc.");
  /* origin (kinvFrom) is the "Lai lịch" row of the item detail (KIT §70) */
  kitModal({kind:"info",title:it.n,sub:`${it.kd} · ${KIT_GRADE[x.grade|0].n}`,
   itemPic:kitItem({src:x.src512||x.src,name:"",grade:x.grade,size:"lg",qty:g.n,lux:x.lux}).replace('<span class="kitn"></span>',''),
@@ -20366,7 +20368,7 @@ try{const t=KINV_CATS.find(c=>c[0]==="trang");if(t&&!t[2].includes("Trâm cài")
 function wdBagItem(k,extra){const w=WD_ITEMS[k];return Object.assign({cat:w.sl==="tram"?"trang":"y",src:w.icon,src512:w.icon,name:w.n,grade:w.g|0,qty:1,lux:wdLux(k),
  tip:`${w.n} · ${w.sl==="tram"?"Trâm cài":"Y phục"}`},extra)}
 (function(){const k0=kinvItems;kinvItems=function(){const L=k0.apply(this,arguments).map(x=>WD_ITEMS[x.g.k]?Object.assign(x,wdBagItem(x.g.k,{qty:x.qty,tip:`${WD_ITEMS[x.g.k].n}${x.qty>1?" ×"+x.qty:""} · ${WD_ITEMS[x.g.k].sl==="tram"?"Trâm cài":"Y phục"}`})):x);
-  try{const w=wdOf(S);const W=["tram","y"].filter(sl=>w[sl]&&WD_ITEMS[w[sl].k]).map(sl=>wdBagItem(w[sl].k,{id:-1,g:{k:w[sl].k,i:-1,n:1,w:1,wdSlot:sl},on:true,onText:sl==="tram"?"Đang cài":"Đang mặc"}));
+  try{const w=wdOf(S);const W=["tram","y"].filter(sl=>w[sl]&&WD_ITEMS[w[sl].k]).map(sl=>wdBagItem(w[sl].k,{id:-1,g:{k:w[sl].k,i:-1,n:1,w:1,wdSlot:sl},on:true,onText:"Đang mặc"}));
    const P=(S.wdPawn||[]).map((x,i)=>x&&x.e&&WD_ITEMS[x.e.k]?wdBagItem(x.e.k,{id:-1,g:{k:x.e.k,i:-1,n:1,wdPawn:i},mark:["đang cầm","n"]}):null).filter(Boolean);
    return W.concat(L,P)}catch(e){console.error(e);return L}}})();
 /* the item panel of a WD item / a fabric */
@@ -20392,7 +20394,7 @@ function wdActBtns(e,g){const w=wdItem(e);if(!w)return[];const B=[];const ag=wdA
  B.push(pbtn(`data-wd="pawn" data-ix="${ix}"`,"Cầm cố",`${word(100-wdLeak(S,ag,true))} · tốn: 1 khắc · thành: Bạc +${Math.round(pr*WD.pawnPct/100)}, chuộc lại ${Math.round(pr*WD.redeemPct/100)} bạc trong ${WD.pawnWeeks} tuần · kèm: lộ ra thì Danh -${WD.sellDanh}`,ntWhy||agWhy||whyTime(1)));
  return B}
 function wdOpen(x){const g=x.g,e=wdEntryOf(g),w=wdItem(e);if(!w)return;const B=wdActBtns(e,g);const pawn=g.wdPawn!=null?S.wdPawn[g.wdPawn]:null;
- const F=[];if(g.n>1)F.push(`Trong rương: ${g.n} món.`);if(g.wdSlot)F.push(g.wdSlot==="tram"?"Ngươi đang cài.":"Ngươi đang mặc.");if(g.wdSlot==="y")F.push("Muốn thay, chạm ô Y phục ở Đang mang rồi chọn bộ khác.");
+ const F=[];if(g.n>1)F.push(`Trong rương: ${g.n} món.`);if(g.wdSlot)F.push("Ngươi đang mặc.");if(g.wdSlot==="y")F.push("Muốn thay, chạm ô Y phục ở Đang mang rồi chọn bộ khác.");
  kitModal({kind:"info",title:w.n,sub:`${w.sl==="tram"?"Trâm cài":"Y phục"} · ${KIT_GRADE[w.g|0].n}`,
   itemPic:kitItem({src:w.icon,name:"",grade:w.g,size:"lg",qty:g.n,lux:wdLux(w.k)}).replace('<span class="kitn"></span>',''),
   html:`<div class="kinvrows">${wdItemRowsE(e,{pawn})}</div>${F.length?kitFacts(F):""}${B.length?`<div class="rbtn kinvacts">${B.join("")}</div>`:""}`,btn:"Lui"})}
@@ -23701,7 +23703,7 @@ PEND.tsbOmen=pp=>{if(!S)return null;const a=byKey(pp.a);if(!a)return null;const 
 /* the bully card (Giao / Không giao + more after the first time), both kinds: batnat (rank) and uyhiep (evidence, j78) */
 PEND.tsbBul=pp=>{if(!S)return null;const a=RV(pp.a);if(!a||!a.alive)return null;const ev=pp.k==="uyhiep";const e=pp.ix>=0?S.inv[pp.ix]:null;const want=e&&!e.h?e:null;const g=tsbBulPay(a,S);
  if(!want&&g<5&&!ev)return null;const o0=tsbBulO(a,S,ev);const nm=tsbNm(a);const hate=[];if((a.ghen||0)>=30)hate.push("ghen với ngươi");if(oan(a,S)>=15)hate.push("ôm oán ngươi");
- const what=want?`<b>${tsbItemN(want)}</b>${want.w?" (ngươi đang đeo)":""}`:`${g} lượng bạc`;
+ const what=want?`<b>${tsbItemN(want)}</b>${want.w?" (ngươi đang mặc)":""}`:`${g} lượng bạc`;
  const tile=want&&typeof kitItem==="function"?`<div class="tsbtile">${kitItem({src:tsbItemSrc(want),name:tsbItemN(want),grade:tsbItemGrade(want),size:"md",data:typeof kitItemTap==="function"?kitItemTap({e:want}):""})}</div>`:"";
  const why=ev?`${tsbCap(nm)} nắm ${evG(a,S)} chứng cứ của ngươi, sai người đến nói: muốn chuyện yên thì nộp ${what}.`:`${tsbCap(nm)} cậy phẩm cao hơn ngươi${hate.length?` (nàng ${hate.join(", ")})`:""}, ${together(a,S)?"chặn ngươi giữa đường":"sai cung nữ đến tận cung ngươi"}, đòi ngươi nộp ${what}.`;
  const rep=pp.n>=2?`<p class="past">Đây là lần thứ ${pp.n} nàng làm khó ngươi.</p>`:"";
@@ -24458,7 +24460,7 @@ function kitOtherItem(v,x,sl){try{/* KIT §70: the shared item detail card (who 
   "hặc ăn mặc sai phẩm: thẻ người của nàng ta, nhóm Hại nặng"]}))return;const W=typeof WD_ITEMS==="object"&&WD_ITEMS[x.k];const g=x.grade|0,gr=KIT_GRADE[g]||KIT_GRADE[0];
  const src=typeof kitItemSrc==="function"?kitItemSrc(x.k,x.icon):(x.icon||"");
  let rows="";try{rows=W&&typeof wdItemRowsE==="function"?wdItemRowsE({k:x.k},{}):typeof kitItemRows==="function"?kitItemRows(x.k,{}):""}catch(e){rows=""}
- const own=`<div class="kgiftown">${typeof mdH==="function"?mdH(pv(v),"sm"):""}<span>${sl==="tram"?"Đang cài":"Đang mặc"}: ${typeof kitName==="function"?kitName(v):giftE(v.name)}</span></div>`;
+ const own=`<div class="kgiftown">${typeof mdH==="function"?mdH(pv(v),"sm"):""}<span>Đang mặc: ${typeof kitName==="function"?kitName(v):giftE(v.name)}</span></div>`;
  const F=[x.label?`Ngươi đã biết: ${x.label}.`:"Đúng phẩm hay không: chưa rõ (chưa ai nhận xét).",x.giver?`${x.giver} ban.`:"","Hặc ăn mặc sai phẩm: thẻ người của nàng, nhóm Hại nặng."].filter(Boolean);
  kitModal({kind:"info",title:x.name,sub:`${sl==="tram"?"Trâm cài":"Y phục"} · ${gr.n}`,kx:1,
   itemPic:kitItem({src,name:"",grade:g,size:"lg"}).replace('<span class="kitn"></span>',''),
@@ -25084,9 +25086,16 @@ function aaThieuLeApply(host,f0){if(!f0&&!aaThieuLe(S))return;const f=f0||aaThie
  log(`<span class="r">Thiếu lễ: y phục của ngươi dưới phẩm ${RANKS[S.rank]?RANKS[S.rank].n:""}. ${aaThieuLeTxt(host).replace(/^thiếu lễ \(y phục dưới phẩm\): /,"")}.</span>`)}
 (function(){const t0=talkOpts;talkOpts=function(p){const A=t0.apply(this,arguments);try{if(!p)return A;const host=p.kind==="th"?"th":p.kind==="emp"?"emp":p.kind==="hh"?p.ref:null;if(!host)return A;const LA=leAttire(S,"thỉnh an",host);if(!LA.delta.danh&&!LA.delta.duc&&!LA.delta.aff)return A;
  return A.map(a=>{if(!a||(p.kind!=="emp"&&!/^Thỉnh an/.test(a.n)))return a;const w0=a.why,go0=a.go,run0=a.run;const FX=aaThieuLeFx(host);const add=aaThieuLeTxt(host,FX);
-  const o=Object.assign({},a,{risk:[a.risk,add].filter(Boolean).join(" · "),why:()=>{const F=w0?w0():[];F.push(["Y phục dưới phẩm: thiếu lễ (không đổi cơ may, mất Danh/Đức)",0]);return F}});
+  const o=Object.assign({},a,{risk:[a.risk,add].filter(Boolean).join(" · "),why:()=>{const F=w0?w0():[];F.push([aaThieuLeWhy(host),0]);return F}});
   const fail0=a.fail;if(run0)o.run=function(){aaThieuLeApply(host,FX);return run0.apply(this,arguments)};
   else{o.go=function(){aaThieuLeApply(host,FX);return go0?go0.apply(this,arguments):undefined};o.fail=function(){aaThieuLeApply(host,FX);return fail0?fail0.apply(this,arguments):undefined}}return o})}catch(e){console.error(e);return A}}})();
+/* the "Vì sao" line of the thiếu lễ rider is read from leAttire's real verdict (D47): in trung y the Danh/Đức price is the robe rule's (charged when she
+   leaves her palace), so the line never claims "mất Danh/Đức" there; a frugal host pleased by plain dress is not "thiếu lễ" either */
+function aaThieuLeWhy(host){try{const L=leAttire(S,"thỉnh an",host),who=host==="th"?"Thái hậu":host==="emp"?"Hoàng thượng":host&&host.queen?"Hoàng hậu":"chủ nhà",d=L.delta;
+ if(d.aff>0)return`Y phục giản dị hợp ý ${who} (không đổi cơ may)`;
+ if(L.ty)return`Đang mặc trung y trước bề trên: thiếu lễ, ${who} phật ý (không đổi cơ may; Danh/Đức đã tính theo lệ mặc trung y ra khỏi tẩm cung)`;
+ const lose=[d.danh?"Danh":"",d.duc?"Đức":""].filter(Boolean).join("/");
+ return`Y phục dưới phẩm: thiếu lễ, ${who} phật ý (không đổi cơ may${lose?`, mất ${lose}`:""})`}catch(e){return"Y phục dưới phẩm: thiếu lễ (không đổi cơ may)"}}
 /* NPCs: the same rule when they wait on Thái hậu */
 (function(){try{if(typeof SOC==="object"&&SOC.serveTH){const r0=SOC.serveTH.run;SOC.serveTH.run=function(v){const r=r0.apply(this,arguments);try{if(aaThieuLe(v)){const f=aaThieuLeFx("th");ap(v,{danh:f.danh});v.th=cl((v.th||0)+f.aff,-100,100)}}catch(e){}return r}}}catch(e){}})();
 
@@ -25328,7 +25337,7 @@ function cbGreetCard(k){const h=cbGreetTodo(k);if(!h)return false;const C=ACC_ET
  opts.push({n:"Thôi",fx:{},x:"",go:()=>setTimeout(()=>{S.acSeen=S.acSeen||{};S.acSeen[k]=bkey();window.__fromMap=1;tab="act";render()},0)});
  Q.push({t:nm,h:L.join(""),opts});const m=Q[Q.length-1];try{if(typeof kitPlaceDress==="function")kitPlaceDress(m,k)}catch(e){}showModal();return true}
 function cbGreetGo(k){const h=cbGreetTodo(k);if(!h||Q.length||!j77Kh(ACC_ETQ.khac))return;const C=ACC_ETQ,sg=n=>(n>0?"+":"")+n;const bf=typeof rsnap==="function"?rsnap():null;
- spend(C.khac);relAdd(S,h,C.okAff);cbGreetMark(k);log(`Ngươi cúi chào, bái kiến ${accRkName(h)} ${h.name} ở ${accName(k)}: chủ vị quý ngươi ${sg(C.okAff)}.`);render();
+ spend(C.khac);relAdd(S,h,C.okAff);cbGreetMark(k);log(`Ngươi cúi chào, bái kiến ${accRkName(h)} ${h.name} ở ${accName(k)}: chủ vị quý ngươi ${sg(C.okAff)}.`);try{if(typeof k61Meet==="function")k61Meet(h,"",1)}catch(e){}render();
  setTimeout(()=>{try{if(bf)resultShow(`Bái kiến ${accRkName(h)} ${h.name}`,bf,true)}catch(e){}},30)}
 /* the gate's own greeting / walk-in marks the buổi */
 (function(){if(typeof accEtqGo!=="function")return;const g0=accEtqGo;accEtqGo=function(k,h,greet){const r=g0.apply(this,arguments);try{if(S&&!S.dead){if(greet)cbGreetMark(k);else{S.acSkip=S.acSkip||{};S.acSkip[k]=bkey()}}}catch(e){}return r}})();
@@ -25511,7 +25520,7 @@ function kmmCheck(){try{if(!S||S.dead)return;const r=kmmRankNow();if(r==null)ret
 /* ---------- Tư trang: "Dấu ấn" tab ---------- */
 try{if(typeof KINV_CATS!=="undefined"&&!KINV_CATS.some(c=>c[0]==="dau"))KINV_CATS.push(["dau","Dấu ấn",[]])}catch(e){}
 (function(){if(typeof kinvItems!=="function")return;const k0=kinvItems;kinvItems=function(){const L=k0.apply(this,arguments);try{const cur=kmmCur();
-  for(const r of kmmOwned())L.push({id:"mme"+r,cat:"dau",mme:r,src:kmmSrc(r),src512:kmmSrc(r),name:KMM_NAMES[r],grade:Math.min(4,r>>1),qty:1,on:r===cur,onText:"Đang dùng",lux:0,
+  for(const r of kmmOwned())L.push({id:"mme"+r,cat:"dau",mme:r,src:kmmSrc(r),src512:kmmSrc(r),name:KMM_NAMES[r],grade:Math.min(4,r>>1),qty:1,on:r===cur,onText:"Đang mặc",lux:0,
    tip:`Dấu ấn ${RANKS[r]?RANKS[r].n:""}${r===cur?" · đang dùng":""}`})}catch(e){}return L}})();
 (function(){if(typeof kinvOpen!=="function")return;const o0=kinvOpen;kinvOpen=function(x){if(!x||x.mme==null)return o0.apply(this,arguments);try{const r=x.mme,on=r===kmmCur();
   kitModal({kind:"info",title:KMM_NAMES[r],sub:`Dấu ấn · ${RANKS[r]?RANKS[r].n:""}`,itemPic:kitItem({src:x.src,name:"",grade:x.grade,size:"lg"}).replace('<span class="kitn"></span>',''),
@@ -27490,7 +27499,7 @@ if(typeof leAttire==="function"){const la0=leAttire;
   /* thỉnh an Thái hậu / Hoàng hậu, Hoàng thượng: jaudit's hook put the line on the card; give "Vì sao" the real reasons */
   if(p.kind==="th"||p.kind==="hh"||p.kind==="emp"){const host=p.kind==="th"?"th":p.kind==="emp"?"emp":p.ref;const L=leAttire(S,"",host);
    return A.map(a=>{if(!a||!L.toil||typeof a.why!=="function"||(p.kind!=="emp"&&!/^Thỉnh an/.test(a.n)))return a;const w0=a.why;
-    const o=Object.assign({},a,{why:()=>{const F=w0().filter(x=>!/^Y phục dưới phẩm: thiếu lễ/.test(x[0]));const hk=TOIL_HK[L.toil.hk];
+    const o=Object.assign({},a,{why:()=>{const F=w0().filter(x=>!/^(Y phục dưới phẩm: thiếu lễ|Y phục giản dị hợp ý)/.test(x[0]));const hk=TOIL_HK[L.toil.hk];
      L.toil.why.forEach(([t,n])=>F.push([`${t[0].toUpperCase()+t.slice(1)}: ${toilWho(host)}${hk?" "+hk:""} ${n>0?"ưng ý":"phật ý"} (thiện cảm ${n>0?"+":""}${n}; không đổi cơ may)`,0]));return F}});
     /* everyone at Thỉnh an Hoàng hậu sees her: a showy dress / a perfect face makes the jealous ones jealous */
     if(p.kind==="hh"){const g=toilCrowd(false);if(g.n){o.risk=[o.risk,`phi tần thấy ta ${g.why}: ghen +${g.n}`].filter(Boolean).join(" · ");const r0=o.run,g0=o.go;
@@ -28333,7 +28342,7 @@ function tsDressGame(th,done){const T=TS_THEME[th];const P={};const inv=S.inv.ma
   box.innerHTML=`<div class="ts-slots">${TS_SLOT.map(([sl,lab])=>`<div class="ts-slot"><small>${lab}</small>${P[sl]?kitItem({name:IT[P[sl]].n,src:src(P[sl]),grade:grade(P[sl]),size:"sm"}):kitItem({empty:true,name:"trống",size:"sm"})}</div>`).join("")}</div>`+
    `<div class="ts-items">${inv.length?inv.map(({e,i})=>{const on=Object.values(P).includes(e.k);return `<button type="button" class="ts-it${on?" ts-on":""}" aria-pressed="${on}" data-tsi="${i}">${kitItem({name:IT[e.k].n,src:src(e.k),grade:grade(e.k),size:"sm",sel:selI===i})}</button>`}).join(""):`<p class="past">Rương chưa có trang sức, vải vóc hay hương phấn nào.</p>`}</div>`+
    `<div class="ts-det">${detHTML()}</div>`+
-   `<div class="kg82act"><button class="kbtn" id="tsdgo">Ra mắt</button><button class="kbtn alt" id="tsdskip">Bỏ qua<small>${S.maid?S.maid.name:"cung nữ"} chọn giúp (theo lòng nàng: ${word(S.maid?S.maid.loyal:50)})</small></button></div>`;
+   `<div class="kg82act"><button class="kbtn" id="tsdgo">Ra mắt</button><button class="kbtn alt" id="tsdskip">Bỏ qua<small>${S.maid?S.maid.name:"cung nữ"} chọn giúp (có hợp ý hay không tùy thiện cảm của ${S.maid?S.maid.name:"cung nữ"} với ngươi: ${word(S.maid?S.maid.loyal:50)})</small></button></div>`;
   /* KIT §70 (owner 15/11): a tap shows the piece (kitItemDetail) with "Đặt vào …" / "Bỏ ra"; nothing is placed on a blind tap */
   box.querySelectorAll("[data-tsi]").forEach(b=>b.onclick=()=>{const i=+b.dataset.tsi;selI=selI===i?null:i;try{sfx("tap")}catch(x){}paint()});
   box.querySelectorAll("[data-tsact]").forEach(b=>b.onclick=()=>{if(b.disabled)return;const e=S.inv[selI];if(!e)return;const s=TS_SLOT.find(([,,fit])=>fit(e.k));if(!s)return;P[s[0]]=b.dataset.tsact==="off"?null:e.k;paint()});
@@ -29506,7 +29515,7 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.2",title:"Th�
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="16fe268662a2";window.CTM_BUILD=BUILD;
+const BUILD="756d7eb8f44b";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
