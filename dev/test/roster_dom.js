@@ -24,7 +24,7 @@ const [,,BASE,OUT,SZ]=process.argv;const [WH,DPR]=(SZ||'755x1000@2').split('@');
    out.place=S.place;out.drawn=drawn.length;out.ov=document.documentElement.scrollWidth>innerWidth+1;return out});
   if(i%5===0)await p.screenshot({path:`${OUT}/stage-${i}.png`});
   /* map */
-  const mp=await p.evaluate(()=>{tab="go";render();const R=window.__roster();const C={};for(const r of R.rows)C[r.place]=(C[r.place]||0)+1;const bad=[];let n=0;
+  const mp=await p.evaluate(()=>{tab="go";render();const R=window.__roster();const C={};for(const r of R.rows)if(j95vis(r.id,r.place))C[r.place]=(C[r.place]||0)+1;const bad=[];let n=0;
    for(const el of document.querySelectorAll('[data-go]')){const k=el.dataset.go;const s=el.querySelector('.msil');const shown=s?+(s.getAttribute('aria-label')||'0').split(' ')[0]:0;if(!el.closest('#panel,#stage,body'))continue;n++;
     if(shown!==(C[k]||0))bad.push(`${k}: bản đồ ${shown}, sổ ${C[k]||0}`)}
    return{n,bad,ov:document.documentElement.scrollWidth>innerWidth+1}});

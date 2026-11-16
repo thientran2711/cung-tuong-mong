@@ -27,7 +27,12 @@ else{const L=S.rlog&&S.rlog.e&&S.rlog.e[(t==null?wk:t)+'-'+(b||0)];if(!L){consol
  const k2=kh||0;at={wk:L.wk,b:L.b,kh:k2};log=L;rows=L.ids.map((id,i)=>{const q=L.s[i].length===8?L.s[i]:L.s[i].slice(k2*8,k2*8+8);const g=j=>parseInt(q.slice(j*2,j*2+2),36);const P=L.D.P[g(0)],Tg=L.D.T[g(2)];
   return{id,name:(S.rlog.who[id]||[id])[0],role:(S.rlog.who[id]||['',''])[1],place:P,placeName:L.pn[P]||pn(P),act:L.D.A[g(1)],tgt:Tg?((S.rlog.who[Tg]||[Tg])[0]):'',why:L.D.W[g(3)]}});
  if(L.m[k2]){map={};L.m[k2].split(',').filter(Boolean).forEach(x=>{const [k,n]=x.split(':');map[k]=+n})}}
-if(JSONOUT){const err0=[];const ids0=new Set();for(const r of rows){if(ids0.has(r.id))err0.push('trùng '+r.id);ids0.add(r.id)}const C0={};for(const r of rows)if(r.place)C0[r.place]=(C0[r.place]||0)+1;console.log(JSON.stringify({at,total:rows.length,counts:C0,map,rows,err:err0}));process.exit(0)}
+/* the map counts only the people she would meet there (j95vis in the game, port 16/11): consorts (at her palace only visitors), the Emperor
+   (not at Dưỡng Hòa điện when Sủng < 50), Thái hậu, men, officials, the court physician, the Kính sự phòng eunuch; at her palace also her maid and children */
+const vis=r=>{const id=r.id,k=r.place;if(!k||k==='ngoai'||id==='me')return false;if(id[0]==='v')return k!=='home'||r.tgt===S.name||/sang chơi|gây sự|hẹn hò/.test(r.act||'');
+ if(id==='emp')return k!=='home'&&!(k==='dtd'&&(S.sung||0)<50);if(id==='th'||id[0]==='q'||id==='c:ty'||id==='c:ksp')return true;if(id[0]==='m'&&id[1]!=='m')return true;
+ if(k==='home')return id==='mm:me'||id.indexOf('k:me:')===0;return false};
+if(JSONOUT){const err0=[];const ids0=new Set();for(const r of rows){if(ids0.has(r.id))err0.push('trùng '+r.id);ids0.add(r.id)}const C0={};for(const r of rows)if(r.place&&vis(r))C0[r.place]=(C0[r.place]||0)+1;console.log(JSON.stringify({at,total:rows.length,counts:C0,map,rows,err:err0}));process.exit(0)}
 const BN=(b2)=>{const nb=(log&&log.nb)||(R&&R.nb)||3;return (nb>=4?["Sáng","Trưa","Chiều","Tối"]:["Sáng","Chiều","Tối"])[b2]||b2};
 console.log(`Sổ vị trí · tuần ${at.wk} (tháng ${S.month}/${S.year} khi lưu) · buổi ${BN(at.b)} · khắc ${at.kh+1}`);
 const w=(s,n)=>{s=String(s||'');return s.length>n?s.slice(0,n-1)+'…':s.padEnd(n)};
@@ -35,11 +40,6 @@ console.log(w('Tên',24)+' — '+w('Chức',28)+' — '+w('Nơi',28)+' — '+w('
 for(const r of rows.slice().sort((a,b)=>a.place<b.place?-1:a.place>b.place?1:0))console.log(w(r.name,24)+' — '+w(r.role,28)+' — '+w(r.placeName,28)+' — '+w(r.act,22)+' — '+w(r.tgt,18)+' — '+(r.why||''));
 /* self-checks */
 const err=[];const ids=new Set();for(const r of rows){if(ids.has(r.id))err.push('trùng: '+r.id);ids.add(r.id);if(!r.place)err.push('thiếu nơi: '+r.name)}
-/* the map counts only the people she would meet there (j95vis in the game, port 16/11): consorts (at her palace only visitors), the Emperor
-   (not at Dưỡng Hòa điện when Sủng < 50), Thái hậu, men, officials, the court physician, the Kính sự phòng eunuch; at her palace also her maid and children */
-const vis=r=>{const id=r.id,k=r.place;if(!k||k==='ngoai'||id==='me')return false;if(id[0]==='v')return k!=='home'||r.tgt===S.name||/sang chơi|gây sự|hẹn hò/.test(r.act||'');
- if(id==='emp')return k!=='home'&&!(k==='dtd'&&(S.sung||0)<50);if(id==='th'||id[0]==='q'||id==='c:ty'||id==='c:ksp')return true;if(id[0]==='m'&&id[1]!=='m')return true;
- if(k==='home')return id==='mm:me'||id.indexOf('k:me:')===0;return false};
 const C={};for(const r of rows)if(r.place&&vis(r))C[r.place]=(C[r.place]||0)+1;
 if(map)for(const k of new Set(Object.keys(C).concat(Object.keys(map))))if((C[k]||0)!==(map[k]||0))err.push(`bản đồ lệch ở ${pn(k)}: sổ ${C[k]||0}, bản đồ ${map[k]||0}`);
 if(!log){/* the current record against the people in the save */

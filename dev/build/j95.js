@@ -287,9 +287,17 @@ function j95fixHouse(R,kh,ppl){let n=0;const st=J95.stat;
    if(x[0]!==p.home||x[1]==="follow"||x[1]==="errand"){e[i]=[p.home,i%2?"clean":"serve",oid,home[3]];n++}}}
  if(n)st.fix=(st.fix||0)+n;return n}
 /* the stage where she stands follows the record (people leave / arrive between khắc). Returns true when it changed. */
+/* maid road stage (j42 srvVisitOf: at most 4 consorts) follows the record when people come and go between khắc (port 16/11) */
+function j95srvStage(R,kh,V){const k=S.place;const m=srvM();const mk=m?palaceOf(m):null;let ch=false;
+ const at=v=>{const e=R.P["v"+v.id];if(!e)return false;const w=e[kh][0];return w===k||(k==="home"&&(w==="home"||w===mk))};
+ for(let i=V.people.length-1;i>=0;i--){const p=V.people[i];if(p.kind==="srv"&&p.ref&&p.ref.rel!=null&&(p.sk==="rv"||p.sk==="hh"||p.sk==="mis")&&!at(p.ref)){V.people.splice(i,1);popIdx=null;ch=true}}
+ if(k!=="tgk"&&k!=="lc"){let n=V.people.filter(p=>p.kind==="srv"&&(p.sk==="rv"||p.sk==="hh"||p.sk==="mis")).length;const cap=k==="home"?1:4;
+  for(const v of liveRivals(true)){if(n>=cap)break;if(v===S||!at(v)||(k==="home"&&v!==m)||V.people.some(p=>p.ref===v))continue;
+   V.people.push({kind:"srv",sk:v.queen?"hh":v===m?"mis":"rv",ref:v,name:(v.queen?"Hoàng hậu ":"")+v.name,ini:v.name.split(" ").pop()[0],col:RCOL[rkOf(v)],info:`${rkName(v)}${v===m?" · chủ nhân của ngươi":""} · ${v.trait}`});n++;ch=true}}
+ return ch}
 /* one figure per person on the stage: an inner render can reconcile before an older goTo wrapper (j22 men) adds its own (port 16/11) */
 function j95dedupe(V){if(!V||!V.people)return;const seen=new Set();for(let i=0;i<V.people.length;i++){const p=V.people[i];const r=p&&p.ref;if(!r)continue;const k=p.kind+":"+(p.kind==="min"?(r.c!=null?r.c:r.name):r.id!=null?r.id:r.c!=null?r.c:r.name);if(seen.has(k)){V.people.splice(i,1);i--;popIdx=null}else seen.add(k)}}
-function j95stage(R,kh){const V=S.visit;if(!V||!V.people||V.k!==S.place||S.dead)return false;j95dedupe(V);/* the maid road fills its stage by its own rules (j42 srvVisitOf reads whereOf = the record; j59srvCount) */if(typeof isSrv==="function"&&isSrv())return false;const k=S.place;let ch=false;
+function j95stage(R,kh){const V=S.visit;if(!V||!V.people||V.k!==S.place||S.dead)return false;j95dedupe(V);/* the maid road fills its stage by its own rules (j42 srvVisitOf reads whereOf = the record; j59srvCount) */if(typeof isSrv==="function"&&isSrv())return j95srvStage(R,kh,V);const k=S.place;let ch=false;
  const here=id=>R.P[id]&&R.P[id][kh][0]===k;
  for(let i=V.people.length-1;i>=0;i--){const p=V.people[i];let id=null;
   if((p.kind==="rival"||p.kind==="hh")&&p.ref)id="v"+p.ref.id;else if(p.kind==="emp")id="emp";else if(p.kind==="th")id="th";else if(p.kind==="man"&&p.ref)id=p.ref.id;else if(p.kind==="ty")id="c:ty";else if(p.kind==="ksp")id="c:ksp";else if(p.kind==="min"&&p.ref&&p.ref.c!=null)id="q:"+p.ref.c;
@@ -459,6 +467,10 @@ function j95menSigns(){const out={};if(!j95men())return out;const MY=S.menWhy||{
  /* her palace while she is away: j59 counts "home" from homePeople() (the stage she would see on coming back); her maid may be out with her,
     so while she is not at home the record answers (registered after j59's own late wrap, so it is the outer one) */
  setTimeout(()=>{try{const c1=countAt;countAt=function(k){try{if(k==="home"&&j95on()&&S&&!S.dead&&S.place!=="home"&&!S.out&&!(typeof isSrv==="function"&&isSrv())&&S.roster&&S.roster.key===j95key()){const R=S.roster,kh=j95kh();let n=0;for(const id in R.P)if(R.P[id][kh][0]==="home"&&j95vis(id,"home"))n++;return n}}catch(e){}return c1.apply(this,arguments)}}catch(e){}},0);
+ /* maid road (j42): srvWhere sent a consort standing somewhere not on the maid's own map back to her palace, so the maid met her at home while
+    the record had her elsewhere; with the record current it answers exactly (her mistress's palace = the maid's "home") (port 16/11) */
+ if(typeof srvWhere==="function"){const sw0=srvWhere;srvWhere=function(v){try{if(j95on()&&v&&v.rel!=null&&typeof isSrv==="function"&&isSrv()&&S.roster&&S.roster.key===j95key()){const e=S.roster.P["v"+v.id];
+   if(e){const w=e[j95kh()][0];if(w==="home"){const m=srvM();return m?palaceOf(m):palaceOf(v)}if(w&&w!==J95OUT_)return w}}}catch(e){}return sw0.apply(this,arguments)}}
  /* old saves / a fresh life: build the record on the first render */
  const r0=render;render=function(){try{if(j95on()&&!S.dead&&S.where&&(!S.roster||S.roster.key!==j95key()||S.roster.kh!==j95kh()))j95sync(false,true)}catch(e){}return r0.apply(this,arguments)};
 })();
