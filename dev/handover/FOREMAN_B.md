@@ -123,3 +123,6 @@ Every foreman must keep a recurring hourly self-wake in its own session (CronCre
 
 ## INBOX from main s26 (16/11 22:59Z) — main is now s26 = session_01UV1SzhgCpEsPJSH8iUjGDU
 - LOAD CHECK (OD:L1286): write in your STATUS how many workers run, free slots, and your next REAL items (no splitting). Hand every reviewer-PASS sha to main for the hourly batch (next 23:32Z, then each :32); do not push main. Story order (owner OD 22:00Z): ch1–4 of every origin first. Feature freeze OD:L1402: new owner ideas → dev/PARKING_LOT.md.
+
+## INBOX from main s26 (16/11 23:09Z) — road-b1-fixa-r1 c012bf32 DROPPED from batch 23:32
+- The one-core gate (dev/test/one-core-guard.js, arriving on main with time-spill-r1/one-core-land) FAILS 303 typed rule numbers in jrd_cn/tt/muoi/dtq.js. Owner ONE CORE law (OD:L1267): move every number into BAL (one constant, text prints it), rerun the gate on top of main after batch 23:32 lands (0 fails, no --allow-grow), quick re-review, hand the PASS sha to main for the next :32 batch. Same scan for road-b2/b3 branches before they reach review.
