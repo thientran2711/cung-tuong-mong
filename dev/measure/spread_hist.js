@@ -10,10 +10,10 @@
 const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
 const mode=process.argv[2]||'sens',LIVES=+process.argv[3]||5,OUT=process.argv[4]||'/dev/stdout',SH=+process.argv[5]||0,WEEKS=+process.argv[6]||36;
 const M=__dirname,GAME=process.env.GAME||path.join(__dirname,'..','index.html');
-const PRE=`(function(){${process.env.OFF?'window.__spreadOff=1;':''}const O=['tt','dtq','muoi','cn','nc','td','ch','thd','cnv'];window.__hOi=${SH};const s0=start;start=function(){window.__forceOrigin=O[(window.__hOi++)%O.length];return s0.apply(this,arguments)}})();`;
+const PRE=`(function(){${process.env.OFF?'window.__spreadOff=1;':''}${process.env.CW?'BAL.spread.codeWait='+(+process.env.CW)+';':''}const O=['tt','dtq','muoi','cn','nc','td','ch','thd','cnv'];window.__hOi=${SH};const s0=start;start=function(){window.__forceOrigin=O[(window.__hOi++)%O.length];return s0.apply(this,arguments)}})();`;
 const HOOK=`(function(){
  const H=window.__H={lives:0,weeks:0,slot:[[],[],[],[]],slotEv:[[],[],[],[]],max:0,maxAt:"",lost:0,lostEx:[],optDrop:0,early:0,late:0,lateEx:[],wait:[],carried:0,
-   tt:{},per:{},cur:null,lifeWk0:0,shown:0,pushed:0,errs:[]};
+   tt:{},dropWhy:{},per:{},cur:null,lifeWk0:0,shown:0,pushed:0,errs:[]};
  const bk=()=>wk()*B4N+(S.buoi||0);
  function flush(){/* close the life: count every buổi from its first tuần to now (zeros included) */const c=H.cur;if(!c)return;
   for(let k=c.k0;k<=c.k1;k++){const a=c.n[k]||0,e=c.e[k]||0,s=((k%B4N)+B4N)%B4N;if(e>=3&&(H.heavy=H.heavy||[]).length<40)H.heavy.push(s+": "+(c.L[k]||[]).join(" | "));H.slot[s].push(a);H.slotEv[s].push(e);if(a>H.max){H.max=a;H.maxAt=(c.o||"")+" b"+k}}
@@ -24,7 +24,7 @@ const HOOK=`(function(){
  function sp13c(m){try{return typeof jqSaveable==="function"&&!jqSaveable(m)?"C":""}catch(e){return""}}
  function begin(){H.cur={L:{},k0:bk(),k1:bk(),n:{},e:{},all:new Set(),o:S.origin&&S.origin.k}}
  function stampAll(src){for(const m of Q){if(!m||typeof m!=="object")continue;if(!m.__h13){m.__h13=src;m.__h13b=bk();H.pushed++}if(H.cur)H.cur.all.add(m)}}
- const sm0=showModal;showModal=function(){const r=sm0.apply(this,arguments);try{try{for(const h of EVHOLD)if(h&&h.m)h.m.__h13j68=1}catch(e){}if(S&&!S.dead&&H.cur){stampAll(H.inNB?"ev":"act");const m=Q[0];if(m&&!m.__h13s&&!$("modal").hidden){m.__h13s=1;H.shown++;const k=bk();H.cur.k1=Math.max(H.cur.k1,k);
+ const sm0=showModal;showModal=function(){try{if(S&&!S.dead&&H.cur)stampAll(H.inNB?"ev":"act")}catch(e){}/* stamp before too: cards j68 drops inside this call are counted */const r=sm0.apply(this,arguments);try{try{for(const h of EVHOLD)if(h&&h.m)h.m.__h13j68=1}catch(e){}if(S&&!S.dead&&H.cur){stampAll(H.inNB?"ev":"act");const m=Q[0];if(m&&!m.__h13s&&!$("modal").hidden){m.__h13s=1;H.shown++;const k=bk();H.cur.k1=Math.max(H.cur.k1,k);
     H.cur.n[k]=(H.cur.n[k]||0)+1;if(m.__h13==="ev"){H.cur.e[k]=(H.cur.e[k]||0)+1;(H.cur.L[k]=H.cur.L[k]||[]).push(String(m.t||"").slice(0,26)+(m.__sp13?(m.__sp13.due!=null?"*":"p"):"")+(m.must?"M":"")+(sp13c(m)))}{const t=String(m.t||m.title||"").replace(/<[^>]+>/g,"").replace(/[0-9]+/g,"#").slice(0,34)+"|"+m.__h13+"|"+(m.pid?"P:"+m.pid:"")+(m.opts?"o":"")+(typeof jqSaveable==="function"&&!jqSaveable(m)?"C":"")+(m.must?"M":"")+(m.kind?"k:"+m.kind:"")+(m.cls?"c:"+m.cls:"");const T=H.tt[t]=H.tt[t]||[0,0,0,0];T[k%B4N]++}
     if(m.__sp13&&m.__sp13.due>k){H.early++}
     const w=k-(m.__h13b==null?k:m.__h13b);H.wait.push(w);if(w>0)H.carried++;const mx=(typeof BAL!=="undefined"&&BAL.spread&&BAL.spread.maxWait)||8;if(w>mx&&m.__h13j68){H.j68late=(H.j68late||0)+1}else if(w>mx){H.late++;if(H.lateEx.length<10)H.lateEx.push(String(m.t||"").slice(0,40)+" w"+w)}}}}catch(e){H.errs.push(String(e).slice(0,120))}return r};
@@ -34,7 +34,9 @@ const HOOK=`(function(){
  if(typeof j95bPurgeWarn==="function"){const p0=j95bPurgeWarn;j95bPurgeWarn=function(){const b=Q.slice();const r=p0.apply(this,arguments);try{for(const m of b)if(!Q.includes(m)&&m&&typeof m==="object")m.__h13purge=1}catch(e){}return r}}
  /* j70 merges several warnings into one card (by design) */
  if(typeof thrify70==="function"){const t0=thrify70;thrify70=function(){const b=Q.slice();const r=t0.apply(this,arguments);try{for(const m of b)if(!Q.includes(m)&&m&&typeof m==="object")m.__h13purge=1}catch(e){}return r}}
- if(typeof evDropInfo==="function"){const d0=evDropInfo;evDropInfo=function(m){try{if(m)m.__h13opt=1}catch(e){}return d0.apply(this,arguments)}}
+ if(typeof evDropInfo==="function"){const d0=evDropInfo;evDropInfo=function(m){try{if(m){m.__h13opt=1;const st=String(new Error().stack).split("\\n")[2]||"";const f=(st.match(/at (\\S+)/)||[])[1]||"?";let why=f;
+   if(f==="evGate"){try{const sc=evS(),K=evKeys(m),now=wk(),tl=sc.tpl[K.tpl],kl=sc.key[K.key];why+=((tl!=null&&now-tl<E68S.tpl)||(kl!=null&&now-kl<E68S.key))?":cooldown":(EVHOLD.length>=E68S.hold?":holdfull":":dayfull")}catch(e){}}
+   H.dropWhy[why]=(H.dropWhy[why]||0)+1}}catch(e){}return d0.apply(this,arguments)}}
  const st0=start;start=function(){flush();const r=st0.apply(this,arguments);try{begin()}catch(e){}return r};
  const ov0=over;over=function(){try{if(H.cur)H.cur.k1=Math.max(H.cur.k1,bk())}catch(e){}flush();return ov0.apply(this,arguments)};
  window.__H13end=function(){/* life cap: close at WEEKS tuần */if(S&&!S.dead&&H.cur&&wk()-Math.floor(H.cur.k0/B4N)>=${WEEKS}){H.cur.k1=bk()-1;flush();Q=[];try{if(typeof SP13!=="undefined")SP13.reset()}catch(e){}start()}};
@@ -51,7 +53,7 @@ const HOOK=`(function(){
  const t0=Date.now();let n=0;
  while(true){n=await page.evaluate(([m])=>{for(let i=0;i<10;i++){window.__bot.step(m,20);window.__H13end()}return window.__H.lives},[mode]);if(n>=LIVES)break;if(Date.now()-t0>(+process.env.CAP||2400)*1e3){console.log('time cap');break}}
  const out=await page.evaluate(()=>{const H=window.__H;const st=a=>{const n=a.length||1,s=a.reduce((x,y)=>x+y,0);const h=[0,0,0,0,0,0];a.forEach(v=>h[Math.min(5,v)]++);return{n:a.length,mean:+(s/n).toFixed(3),hist:h,p95:a.slice().sort((x,y)=>x-y)[Math.floor(a.length*.95)]||0}};
-  return{lives:H.lives,weeks:H.weeks,slot:H.slot.map(st),slotEv:H.slotEv.map(st),max:H.max,maxAt:H.maxAt,shown:H.shown,pushed:H.pushed,lost:H.lost,lostEx:H.lostEx,optDrop:H.optDrop,j68late:H.j68late||0,heavy:H.heavy||[],purge:H.purge||0,early:H.early,late:H.late,lateEx:H.lateEx,
+  return{lives:H.lives,weeks:H.weeks,slot:H.slot.map(st),slotEv:H.slotEv.map(st),max:H.max,maxAt:H.maxAt,shown:H.shown,pushed:H.pushed,lost:H.lost,lostEx:H.lostEx,optDrop:H.optDrop,dropWhy:H.dropWhy,j68late:H.j68late||0,heavy:H.heavy||[],purge:H.purge||0,early:H.early,late:H.late,lateEx:H.lateEx,
    carried:H.carried,titles:Object.entries(H.tt).sort((a,b)=>b[1].reduce((x,y)=>x+y)-a[1].reduce((x,y)=>x+y)).slice(0,80),waitMax:Math.max(0,...H.wait),errs:H.errs.slice(0,10),sp:typeof SP13!=="undefined"?SP13.stat:null,off:!!window.__spreadOff,
    ends:window.__res.slice(-60).map(r=>(r.origin||"")+":"+(r.title||"").slice(0,20))}});
  out.pageErrors=errs.slice(0,20);out.pageErrorN=errs.length;out.mode=mode;

@@ -39,7 +39,10 @@ function sp13Cap(){return (BAL.spread&&BAL.spread.cap)||2}
 /* the fitting slot of a card, or null (no preference: now if there is room) */
 function sp13Slot(m){const t=String(m.t||m.title||"").replace(/<[^>]+>/g,""),p=m.pid||"";for(const [s,rt,rp] of SP13SLOT)if(rt.test(t)||(p&&rp&&rp.test(p)))return s;return null}
 function sp13Movable(m){if(!m||typeof m!=="object"||m.nl||m.mg||m.__held||m.kind==="news"||m.kind==="end")return false;
- if(/end|pcm|nlcard|death|tut/.test(m.cls||""))return false;const t=String(m.t||"");if(SP13KEEP.test(t))return false;
+ if(/end|pcm|nlcard|death|tut/.test(m.cls||""))return false;
+ /* OPTIONAL cards (j68 evOptional: visits, j68 events, merit, rewards …) are paced by the j68 scheduler (one at a time, 1 per buổi, 2 per day,
+    held at day start); moving them too made j68 hold / drop many more of them, so D13 leaves them to j68 and only counts them in the cap */
+ try{if(!window.__e68off&&typeof evOptional==="function"&&evOptional(m))return false}catch(e){}const t=String(m.t||"");if(SP13KEEP.test(t))return false;
  return true}
 /* one card as save data (the same rule as serQ + jqsave), or null when it runs code */
 function sp13Ser(m){try{const q0=Q;Q=[m];let r;try{r=serQ()}finally{Q=q0}return r&&r.length===1?r[0]:null}catch(e){return null}}
@@ -51,14 +54,14 @@ function sp13Alive(m){try{const w=m.who&&m.who.w;if(!w||w[0]!=="r")return true;c
 function sp13Sync(){try{const z=SP13.st();z.q=SP13.L.filter(x=>!x.code).map(x=>{const e=x.ser||(x.ser=sp13Ser(x.m));return e?{e,b0:x.b0,due:x.due,end:x.end}:null}).filter(Boolean)}catch(e){}}
 function sp13Load(){const z=SP13.st(),k=SP13.now();if(z.k!==k){z.k=k;z.n=0}return z}
 /* cards already in Q at the front that count for this buổi */
-function sp13Count(m){const z=sp13Load();if(m.__sp13c)return;m.__sp13c=1;z.n++}
+function sp13Count(m){const z=sp13Load(),k=SP13.now();if(m.__sp13c===k)return;m.__sp13c=k;z.n++}
 /* release waiting cards that are due, oldest first, while the buổi has room; a card that waited maxWait (code: codeWait) goes now anyway */
 function sp13Release(){if(SP13.off()||!SP13.L.length)return 0;const now=SP13.now(),z=sp13Load(),cap=sp13Cap(),B=BAL.spread||{};let n=0;
  SP13.L.sort((a,b)=>(b.code?1:0)-(a.code?1:0)||a.due-b.due||a.b0-b.b0);/* code cards first: they cannot be saved, so they never wait long */const keep=[];
  for(const x of SP13.L){if(x.due>now){keep.push(x);continue}
   if(!sp13Alive(x.m)){x.m.__sp13r="void";SP13.stat.void++;try{if(typeof evDropInfo==="function")evDropInfo(x.m)}catch(e){}continue}
   const lim=x.code?(B.codeWait!=null?B.codeWait:1):(B.maxWait||4);const force=now-x.b0>=lim||(x.end!=null&&now>=x.end);
-  if(z.n<cap||force){if(force&&z.n>=cap)SP13.stat.forced++;if(now>x.slotDue)SP13.stat.carried++;x.m.__sp13c=1;x.m.__sp13r="rel"+now;z.n++;Q.push(x.m);SP13.stat.released++;n++}
+  if(z.n<cap||force){if(force&&z.n>=cap)SP13.stat.forced++;if(now>x.slotDue)SP13.stat.carried++;x.m.__sp13c=now;x.m.__sp13r="rel"+now;z.n++;Q.push(x.m);SP13.stat.released++;n++}
   else{x.due=now+1;keep.push(x)}}
  SP13.L=keep;sp13Sync();return n}
 /* plan the world cards that just entered Q (called inside a buổi change) */
@@ -76,7 +79,8 @@ function sp13Plan(){if(SP13.off())return;const now=SP13.now(),cs=S.buoi||0,cap=s
 function sp13Tick(){/* inside / right after a buổi change: this buổi's own unmovable cards (news…) first, then the waiting cards that are due
    (older first), then the new movable cards (planned against what is left of the cap) */
  if(SP13.off())return;const z=SP13.st(),now=SP13.now();const fresh=Q.filter(m=>m&&typeof m==="object"&&!m.__sp13);if(z.rk===now&&!fresh.length)return;
- const old=Q.filter(m=>!fresh.includes(m));Q=old.concat(fresh.filter(m=>!sp13Movable(m)));sp13Plan();
+ const old=Q.filter(m=>!fresh.includes(m));Q=old.concat(fresh.filter(m=>!sp13Movable(m)));
+ for(const m of old)if(m&&typeof m==="object"&&m.__sp13)sp13Count(m);/* planned earlier, back in Q now (a card j68 held and released): counts here */sp13Plan();
  if(z.rk!==now){z.rk=now;sp13Release()}const mv=fresh.filter(m=>sp13Movable(m));Q=Q.concat(mv.filter(m=>sp13Code(m)),mv.filter(m=>!sp13Code(m)));sp13Plan()}
 (function(){
  const nb0=nextBuoi;nextBuoi=function(){if(SP13.off())return nb0.apply(this,arguments);const k0=S&&SP13.now();SP13.nb++;let r;
