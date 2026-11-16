@@ -74,7 +74,7 @@ Dependencies: D29 before D13 (events/places read the ledger); D30 + D42 share j1
 ## E. Open owner questions (§6) — ask one at a time
 j72 bước vs Hồi · stage paper halo · Thái hậu title bronze vs plum · HT vs HH gold alike · Đáp ứng muted on paintings
 | C18 | review/kit-popup-sample @ b6242dea (screens sent to owner) | SẴN SÀNG KIỂM → reviewer QUEUED-NEXT |
-| C19 | review/pic-dupes @ dcdd16ef4 (37 act pics live, quilt redraw) | REVIEWING (pic-dupes-r1) |
+| C19 | review/pic-dupes → r1 FAIL (hanh-le picture) → worker fixing on pic-dupes-r1 | RUNNING |
 | C20 | review/act-text (owner s8: broken/unclear act card text, whole family) | RUNNING |
 | C21 | review/khac-day @ 0ce947402 (j76need one source) | REVIEWING (khac-day-r1) |
 | C22 | review/boot-flash (owner s8: raw old skeleton flashes on launch) | RUNNING |
