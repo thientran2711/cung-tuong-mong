@@ -481,3 +481,4 @@
 | tut-followups review r1 (opus, BIG) of aa391edf | review/tut-followups-r1 | B | session_01N1tNP54HW3RMjDu7rXSHce | RUNNING | 16/11 23:26Z |
 | emotion-acts-3 review r1 (opus, BIG) of 99a7eb84 | review/emotion-acts-3-r1 | B | session_01N1tNP2S1tTXpLvLnFrpHP2 | RUNNING | 16/11 23:31Z |
 | road-b2 one-core successor (opus): jrd_nc/td/ch typed numbers → BAL (gate 0), from bda971a2; then SẴN SÀNG | review/road-b2-fix | B | session_01N1tNP2boznW7SbhZfGfvpp | RUNNING | 16/11 23:33Z |
+| WHOLE FIGURE REPAINT lead #4 (sonnet art; successor of #3 session_011xDdVSheHFnhXPEAMEEfZT; HANDOVER #4 349cfeb7; 5 pilots HOLD for owner GO + 2k/4k) | review/fig-cutout-clean | C | session_011xDdVSWqu69NuYMoAK4SaC | RUNNING | 16/11 23:37Z |
