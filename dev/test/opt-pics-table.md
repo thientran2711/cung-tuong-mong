@@ -96,3 +96,14 @@ BEFORE (main f012058f3): no option card had a picture; options naming a person h
 - Tiểu Lộ Tử (thái giám)
 - Bảo hắn giả vờ nhận, làm phản
 - Góp chút ít cho phải lễ
+
+## r1 (reviewer) — meaning fixes, before → after
+| title | before | after |
+|---|---|---|
+| Đi · Vẫn đi · Đi (đến nơi vào buổi sau) | opt-thoi | den-ngay-h |
+| Ở lại | opt-thoi | o-yen-nghi-h |
+| Viết một dòng: “Hãy lập công danh” | do-la-h ("dò" inside "dòng") | placeholder |
+| Đánh lạc hướng: để lộ một chuyện vô hại | phat-vi-h | placeholder |
+| Gật đầu chào chàng một lần | hen-gap | bai-kien-h |
+| Xin ngài ban hôn cho chàng · Xin Hoàng thượng phục chức cho chàng | hen-gap | xin-an-dien-h |
+| Nhận phần nhỏ, che phần lớn | cui-dau-tuan-lenh-h | giau-trong-ruong-h |
