@@ -1,0 +1,15 @@
+fig-kid-f21-a20 | bxVsSws5Y2 -> redo s78yRq9l8e | u5Y1J2JQLD | 0.294 | slim, just under .30
+fig-kid-p01-a36 | 8a6EF53IrU | mERFKAChJQ | 0.35 | ok
+fig-kid-p03-a20 | xSX72sKjfW | 6Aqn8fYiJO | 0.41 slightly wide | ok (3rd try)
+fig-kid-p03-a26 | eIyhfkldqL | cpgXtOj0eP | 0.348 | ok
+fig-kid-p03-a36 | P3u2zBH42C | 8a6E5agIrU | 0.321 | ok
+fig-kid-p06-a20 | eIyhfsJdqL | dtPvuRYXSL | 0.323 | ok
+fig-kid-p07-a20 | LwoO4DqswO | nVLpIDcYQD | 0.391 | ok
+fig-kid-p10-a20 | MB7IhSRDCm | jUBJ9axLD0 | 0.348 | ok
+fig-kid-p14-a20 | aFAbj1nfSh | 8a6EKzmIrU | 0.361 | ok
+fig-kid-p15-a20 | iGbYTnu3uK | N2HzVzl6D9 | 0.374 | ok
+fig-kid-p16-a20 | JNf3AZBOq4 | Xm4aHCCBfo | 0.379 | ok
+fig-kid-p17-a20 | dtPvFFKXSL | bxVsO8T5Y2 | 0.327 | ok
+fig-kid-p20-a20 | IfiuKrgtvE | 9ZFGVLtNYZ | 0.398 | ok
+fig-kid-p22-a20 | kspSPTB16B | Sym9z2gUb8 | 0.369 | ok
+fig-kid-p24-a20 | iGbYddb3uK | DoJtq3Jpcl | 0.377 | ok

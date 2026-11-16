@@ -1,0 +1,15 @@
+fig-consort-c30-t1-a18 | gen WDldE8PcXe | bg gOt4WMmSXO | .354 | ok (3rd try)
+fig-consort-c30-t4-a26 | gen TdUotfrVNR | bg gOt4RrXSXO | .322 | ok (old forehead dot kept)
+fig-consort-c30-t4-a36 | gen w4v6RWm7EI | bg VXw8aW4MMU | .311 | ok
+fig-consort-c30-t4-a51 | gen 3z5WTtNREY | bg yiEZYJmPW9 | .313 | ok
+fig-kid-f01-a20 | gen YMsefAUWeC/slim try | bg cpgXQHp0eP? (slim=3z5WdrWREY->WDldCVgcXe) | .286 | slightly thin, natural
+fig-kid-f01-a26 | gen gOt46p5SXO | bg UPhNAJmwny | .371 | slightly wide
+fig-kid-f01-a36 | gen yiEZGvZPW9 | bg 1leU4sor4r | .386 | slightly wide
+fig-kid-f02-a20 | gen gOt4AqcSXO | bg yiEZMZCPW9 | .254 | thin but natural (wide try .41)
+fig-kid-f02-a26 | gen VXw8aEeMMU | bg MB7IuLJDCm | .362 | ok
+fig-kid-f02-a36 | gen u5Y1lJlQLD | bg gOt4AdFSXO | .370 | slightly wide
+fig-kid-f03-a26 | gen VXw8abIMMU | bg YMsehjEWeC | .371 | slightly wide
+fig-kid-f03-a36 | gen P3u2WoQ42C | bg p8OmFJDehw | .377 | slightly wide
+fig-kid-f04-a20 | gen s78yiMTl8e | bg MB7IuJiDCm | .380 | slightly wide
+fig-kid-f04-a36 | gen huZHgFBvqL | bg rgdwAX5xtc | .376 | colour greyer blue than old
+fig-kid-f05-a20 | gen YMseovXWeC | bg LwoOiipswO | .349 | ok

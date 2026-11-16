@@ -1,0 +1,9 @@
+fig-thaihau-1 | gen lJIPiCVgv9 (try1 .249 rejected), N2HzDRk6D9 | bg P3u2M0d42C | .289 | try2 frontal, borderline
+fig-thaihau-2 | gen lJIPiuDgv9 (try1 .269), Sym9GPkUb8 | bg lJIPGcSgv9 | .292
+fig-thaihau-3 | DoJtfZ3pcl | aFAbLPofSh | .297 | 3/4 pose slightly
+fig-thaihau-h1-a18 | UPhNZ1Dwny | 3z5WeC6REY | .349
+fig-thaihau-h1-a36 | rgdwPqLxtc | Bh9fqxhoQR | .313
+fig-thaihau-h2-a36 | Xm4auCQBfo | s78y33Il8e | .330
+fig-thaihau-h2-a51 | 0eSBtt0TfW | P3u2cTI42C | .336
+fig-thaihau-h3-a36 | 3z5WVewREY | lJIPRAlgv9 | .323
+fig-thaihau-h3-a51 | O6CRGVMynm | 79aiz0CJAL | .329
