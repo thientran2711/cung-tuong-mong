@@ -421,7 +421,7 @@ html body .pc:has(>.pcr>.pcx)>.pcl>.kpnm{padding-right:46px}
 /* KIT 32.10: the ✕ owns the card's top-right corner — the first act card starts under it, never under the ✕ */
 html body .pc>.pcr>.pcx+*{margin-top:42px!important}
 /* kit panels (report / story / info dialogs): the close row "Đã hiểu" is pinned at the dialog's bottom, the body scrolls under it */
-html body .dlg.kpanel>.mr{position:sticky;bottom:0;z-index:4;background:linear-gradient(rgba(255,250,240,0),var(--k-card,#fffaf0) 10px);padding-top:8px}
+html body .dlg.kpanel>.mr{position:sticky;bottom:0;z-index:9;background:linear-gradient(rgba(255,250,240,0),var(--k-card,#fffaf0) 10px);padding-top:8px}
 `;document.head.appendChild(st)})();
 /* the card's ✕ stays in the card's top-right corner while the card's own body scrolls (owner 16/11 "Nút tắt bị che": on a phone the room card
    .pc scrolls inside itself and the absolute ✕ scrolled away with the acts) — it is moved down by the card's scrollTop (--kpcxy) */
