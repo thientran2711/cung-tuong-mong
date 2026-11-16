@@ -52,3 +52,29 @@ html body .pc[class]>.pcl>.pcp.kit.kfx>.kin>img.kpor:not([src*="face-"]):not([sr
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§36.4",title:"pcard · ô chân dung khung rộng (khung -w, sát tên)",html:()=>{
  const P=[rivals&&rivals[0],S&&S.maid,S&&S.emp].filter(Boolean);
  return `<div class="kitpg-row" style="align-items:flex-start">${P.map(p=>`<div style="width:240px">${pcard({f:kitFace(p),name:p.name||"",col:"var(--gold)",groups:[]})}</div>`).join("")}</div>`}})}catch(e){}
+/* review/hc-portrait-r1 (reviewer): the person switch stays smooth with per-frame box tops.
+   (a) the strip's frames are the NARROW files, so the card's -w file was fetched only on the click: the new portrait showed without its frame
+       for 150-500 ms on a first visit. Every frame shown in the panel now warms its -w file (once per file).
+   (b) the cell's top differs per frame (up to ~35 px at 1180 between consort frames): the new cell and everything under it in the left
+       column slide from the old place to the new one in 180 ms (FLIP; the old portrait fading out on top moves with it). None with reduced
+       motion / Cảnh động off. */
+const KFRW_WARM=new Set();
+function kitFrwWarm(root){try{(root||document).querySelectorAll('img.kfr,img[src*="/kit/frame-"]').forEach(i=>{const F=kitFrw(i.getAttribute("src"));if(!F||!F[1][0])return;
+ const u=i.getAttribute("src").replace(/frame-[a-z0-9-]+?(?:-w)?\.webp/,F[0]+"-w.webp");if(KFRW_WARM.has(u))return;KFRW_WARM.add(u);const im=new Image();im.decoding="async";im.src=u})}catch(e){}}
+window.kitFrwWarm=kitFrwWarm;
+(function(){if(typeof renderPanel!=="function")return;const r0=renderPanel;
+ const cell=P=>P&&P.querySelector(".pc>.pcl>.pcp.kit");
+ /* the cell's place inside its column, measured on the laid-out page (the wide-card classes land after the render, so the new place is read
+    in the next animation frame, before it is painted) */
+ const rel=c=>{const L=c.parentElement;return c.getBoundingClientRect().top-L.getBoundingClientRect().top+L.scrollTop};
+ renderPanel=function(){const P=document.getElementById("panel");const t0=P&&P.dataset.tab;const o=cell(P);let y0=null;
+  try{if(o)y0=rel(o)}catch(e){y0=null}
+  const r=r0.apply(this,arguments);
+  try{kitFrwWarm(P)}catch(e){}
+  try{const rm=(typeof reducedMotion==="function"&&reducedMotion())||(typeof kitCurlOff==="function"&&kitCurlOff());
+   if(!rm&&y0!=null&&P.dataset.tab===t0)requestAnimationFrame(()=>{try{const n=cell(P);if(!n)return;const y1=rel(n),d=y0-y1;if(Math.abs(d)<=0.5||Math.abs(d)>=120)return;
+    /* the cell and whatever sits under it in the left column (the name above stays put) */
+    const L=n.parentElement,top=n.getBoundingClientRect().top-1;
+    [...L.children].filter(x=>x===n||(x.offsetParent&&!x.classList.contains("pcname")&&x.getBoundingClientRect().top>=top))
+     .forEach(x=>{const a=x.animate([{transform:`translateY(${d}px)`},{transform:"translateY(0)"}],{duration:180,easing:"ease-out"});a.id="kfwSlide"})}catch(e){}})}catch(e){}
+  return r}})();
