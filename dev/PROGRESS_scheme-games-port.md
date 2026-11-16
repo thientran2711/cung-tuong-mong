@@ -37,3 +37,10 @@ Not done: 844x390 / 390x844 for schemegames.js (only the wiring test, which open
 ## Open questions for the owner
 1. Servant bribery and Nghe lén now ask the same "Tự ra tay / Giao cho người làm / Thôi" question (owner 11/15 said scheme acts get games with a skip; confirm these two count).
 2. Thời cơ has no auto-hint (waiting is the point); only the Gợi ý button.
+
+## Reviewer r1 (Foreman B review, 16/11)
+- Merged onto origin/main 7f20b751be (conflicts in assemble.py / index.html / sw.js / assets.json resolved: main's list + jsgame.js before j84; site rebuilt).
+- Fix 1 (jopic.js rule "one option card per row"): grid-auto-rows auto -> max-content. In the scrolling person dialog the two choice cards were squeezed to half the area (189 px) and the Mất / Ghi chú rows were clipped. Now cards keep full height and the options area scrolls (kit-wide rule, KIT KEEPER to confirm).
+- Fix 2 (jsgame.js): first-time card Cơ may row read "Chắc | nay; khéo thì..." (word cut) -> "hiện nay; khéo thì lên ..., vụng thì xuống ...".
+- Runs: schemegames.js 755x1000@2, 1180x820@2, 1000x755, 1366x1024, 844x390 (spy/rumor/bribe/poison x win/lose/skip: odds exactly one step, silver equal, 0 page errors; one oracle flake each: poison win click timeout at 755 under load, rumor win raw 6 at 844x390). Thời cơ full play through the place route (win up one, lose down one, same silver). coop-timer.js 43/43. schemesave.js (main build save -> new build, pending sgpick) ok.
+- Note (main, not fixed): "Kiếp này chưa trọn" warning fires once per life on the Tự ra tay / Giao cho người làm options of rumor, bribe and every Thời cơ act (regex over option n/x/j67 matches words in the act card line), i.e. a warning the player meets in these dialogs.

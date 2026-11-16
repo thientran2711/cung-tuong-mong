@@ -276,7 +276,7 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 function sgPlay(J){const G=J.G;if(typeof S==="undefined"||!S||S.dead){try{render()}catch(e){}return}
  KG82.ctx="muu";kg82Preload(G.g).then(()=>{});const d=kg82Open({art:J.art,title:G.t,how:G.how});if(!d)return;const box=kg82Box();const p0=J.p0();const v=J.v,k=J.gk;
  const seenK="sg:"+G.t;
- const rows=[["Cơ may",kitOdds(p0)+`<small class="kpnote"> nay; khéo thì lên ${word(sgShift(p0,1))}, vụng thì xuống ${word(sgShift(p0,-1))}</small>`]];
+ const rows=[["Cơ may",kitOdds(p0)+`<small class="kpnote"> hiện nay; khéo thì lên ${word(sgShift(p0,1))}, vụng thì xuống ${word(sgShift(p0,-1))}</small>`]];
  if(G.g==="mac"){const m=v.maid||{};rows.push(["Cung nữ",`tính ${sgTemper(m)[0]}, lòng trung với chủ ${sgLoyW(m.loyal==null?50:m.loyal)}`]);
   rows.push(["Tốn",`${J.cost} · như thẻ việc, mặc cả chỉ đổi cơ may`])}
  /* mg-easy: a one-screen how-to card the first time (S.mgSeen), then only the Gợi ý button + a quiet nudge when she stalls */
