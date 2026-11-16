@@ -420,3 +420,4 @@ Self-wake: create_trigger denied twice (s19, s20) — don't retry; rely on notif
 - (18:02Z s21) lag-play 7200e7d2 (instant tabs everywhere, freeze 16–21 s → 2.5 s) → opus BIG reviewer + lag-play-2 follow-up worker; lag-play worker archived. Open: Dư đồ leather unroll animation kept (ask owner only if she mentions it).
 - (18:04Z s21) care-overlap 7c02ff56 (one kit rule jinv.js; carries pet-lifespan-r1) → SMALL reviewer; worker archived.
 - (18:15Z s21) stage-pets A|B REJECTED by owner (figures too small vs kit figure scale 85–90 %) → worker r2 told to redo at full scale (overlap/stagger + fold column), full-screen labelled shots. LESSON: self-check figure scale rule before sending any stage/figure sample.
+- (18:22Z s21) Owner SWIPE STAGE spec (OD last line) → sent to stage-pets r3 worker (replaces 3-on-one-stage). Courtyard map level: check what is live (review/palace-map not live; palace-map-port live).
