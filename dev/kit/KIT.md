@@ -647,6 +647,33 @@ Markup: dev/handover/refs/owner-option-picture-left.jpg (docs branch). Owner rul
 - Tests: `dev/test/opt-pics.js` (every option kind → its picture source; layout at the design sizes: picture left 84x112, nothing wider than
   its box, zoom opens and does not choose). Scan of every option title (static + bot): dev/test/opt-pics-table.md (before/after).
 
+## 6.3 PERSON-CARD ACT ROWS — every act a person card offers is the LONG HORIZONTAL ROW (owner 16/11, iPad 755x1000 shot of Tiểu Hoa's card; review/pcard-actrow) — `dev/build/jk4.js` (after the §43 compact block)
+Owner: "this button does not follow the shared kit; if the text is long we HAVE a kit part for that, the long horizontal option row — why not use it?"
+Fault: the person-card acts (Tâm sự / Sai đi dò la / Nghe ngóng chung…) of the stage pop-up were big §6 cards in a 2-column `.pcb` grid — tall boxes, uneven
+heights, text clipped at top and edges, rows overlapping. Causes: (1) the pop-up (`#popw .pcpop`) is not inside `#panel`, so `kitActCompactOn` never ran for it (no
+picture slot, no compact form); (2) the compact card form (§43 / §6.2 `kitCompactCSS`) only applied inside the `kpane` container query (≤ 640 px), so on a wider pcr
+the `.pcb` / `.rbtn` / `.kskacts` auto-fill grids won.
+- RULE: an act on a person card (`.pc > .pcr`: stage pop-up, Hậu cung, Giao tình, court, staff, kids, servants) is the §6.2 long row = compact act card
+  (`kitCompactCSS(".pc>.pcr button.ka.kart",84,112)`): 3:4 picture LEFT (the act's own picture, else the §59 placeholder), title + odds ladder, Cần / Tốn / Được /
+  Mất / Kèm rows RIGHT, ONE card per line, full width, at EVERY viewport width and in EVERY host (pop-up or tab). A card with more text grows; nothing clips, no
+  fixed height, no grid cell, no per-act variant. The group container (`.pcb`, `.rbtn`) is a one-column flex stack with an 8 px gap.
+- HOW (one place): CSS `#kit-pcard-actrow` (jk4) + `kaNorm` now ends with `kitActCompactOn(root)`, so any host that normalises its cards (pop-up, tabs, dialogs
+  that embed a person card) gets the picture slot and the row form with no call of its own. Nobody writes act markup / grid CSS for a person card by hand.
+- NOT in this rule (own approved kit parts): the Hành sự deck (`.cards` in #panel, §6/§6.1 big card and its category tabs), dialog options (`.kopt`, §6.2), the
+  Tài nghệ `.ktacts` rows. Reviewers FAIL any `.pcb` / `.rbtn` / `.srvb` act drawn as a grid cell.
+- SAME FAMILY — gift / work-gift recipient rows (Tư trang → Dâng, tặng tác phẩm / Tặng quà, `jgift`, owner 16/11 iPad landscape): the recipient rows are §6.2 option
+  rows, so (a) a row hidden by its sub-tab (Chí tôn / Phi tần / Cung nhân) must STAY hidden: the hide rule now out-ranks the compact-card `display:flex`
+  (`html body #modal .kgiftdlg .opt[hidden]`), and the filter runs on every draw, not only when the tab row is first built (Chí tôn showed the whole harem);
+  (b) the LEFT picture of a recipient row is that person's own kit portrait (`face:gift`; strangers = the kit silhouette from `pv`), never the generic scene picture
+  + a silhouette chip; (c) the tab count = rows of that tab. Chí tôn = Hoàng thượng, Thái hậu, Hoàng hậu only (j61 known-name rule for her name: "Hoàng hậu ???").
+- SAME FAMILY — PERSON-TARGET PICKERS (spy target "Sai … đi dò la", gift recipient, evidence / item target, plant servant, any "chọn người"): the option's LEFT picture is
+  THAT person's kit portrait (stranger: the kit silhouette from `pv`), never a scene / meaning-group picture. How: the option carries `kgt: <person>` (rival object / "emp" /
+  "th" / "maid") — `kitOptPic` (jopic) reads it first; an option whose title starts with a portrait chip (`.md`) is treated the same. New picker = set `kgt`, nothing else.
+- PERSON DIALOG OPTION LIST (kdper): the option rows are a flex column (rows grow to their text; the old grid rows stayed at the 130 px floor and cut long rows). When
+  picture + text leave the list under ~280 px (tiny nested scroll box) the WHOLE right column scrolls as one list (`kdpall`, jk4 `kitDpAll`), the person pinned left.
+- Test: `dev/test/pcard-actrow.js` (every person-card host × 5 design sizes: every act is a row ≥ 90 % of its group, one per line, no clipped child, equal
+  treatment). Before/after table: `dev/test/pcard-actrow-table.md`. Kit sample page §47: "§6.3".
+
 ## 15. STAGE OVERLAYS (j79) — nothing on the stage covers a figure
 **15.1 Place subtitle (review/small-bugs-3):** the subtitle after the place name (`.stop .scene-t .rmsg`, "· Ở đây còn 1 người.") never shrinks under its
 longest word (`min-width:min-content`; the title row wraps): 390x844 direct mode set it one letter per line. Test `dev/test/small-bugs-3.js` wrap.
