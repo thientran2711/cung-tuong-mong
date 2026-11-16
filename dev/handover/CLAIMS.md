@@ -33,3 +33,4 @@
 | modal-scroll-r1 + log-sync-r2 (an-tinh) + book-fig-r1 re-merge on main | review/merge-hot-1 | main s9 | session_01UV1Szkb26qWiEe1bacAQvL | RUNNING | 16/11 05:36Z |
 | kit-sweep REVIEW (owner-urgent) | review/kit-sweep-r1 | main s9 | session_01UV1SziYTkPQjJKnWcb8GoX | RUNNING | 16/11 05:39Z |
 | C43 coop-invite-ux review | review/coop-invite-ux-r1 | D | session_01DgYSWo9bFK5NRcy5Hrr3UX | RUNNING | 16/11 05:41Z |
+| facefx-all-r2 re-merge + kitPortrait main bug (jbook.js overrides j60 kitPortrait, breaks j90 podium fallback) | review/merge-hot-2 | main s9 | (opening) | RUNNING | 16/11 05:43Z |
