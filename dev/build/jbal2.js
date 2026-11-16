@@ -272,3 +272,30 @@ Object.assign(BAL,{mem:{cap:5,fadeMo:2,keepFloor:.35,modDiv:8,modMax:10,recallMi
    psk.ghen = the jealousy of the other consorts when she is raised by a direct decree or a passed grace exam (jexam exDirectUp / exGraceUp). */
 Object.assign(BAL,{psk:{ghen:10,son1:{hhOan:15,momOan:8},emp:{th:8,oan:10},th:{sung:6,errN:2,errAt:3,errGap:6},
  quyen:{danh:6,after:24,p:6,max:1,hitSung:10,hitDanh:6},seat:{bacM:4,hieuBac:120,danh:6,gifts:2,pow:8,dad:5,ghen:10,oan:6}}});
+/* DANH HIỆU (jdh, owner 16/11 13:00Z/13:15Z/13:20Z/13:25Z D, 13:55Z s17, 14:10Z; FOREMAN_C 14:15Z/14:35Z/14:45Z s17; review/title-sys): achievement titles.
+   n0 = the counts that open the 3 steps of a title (1 / 5 / 10 times = the same name, a higher colour tier); step = tiers added per step (tier = b + i*step, max 8).
+   T[id] = per title: b base tier, n own counts, st own step, ch = the bonus TYPES this title may give (the PLAYER picks ONE while it is worn; NPCs pick by need).
+   B[type] = the bonus catalogue, v = value per step [s1,s2,s3] (0 = not offered at that step). Kinds:
+     flat  sac/danh/sung/duc/tai/tamco: +v while worn (sac via wearBonus; others applied on wear, taken back exactly on removal)
+     gain  gSung/gDanh/gBac/gTren/gHau/gTrung: v = denominator d, every gain of that kind gets +1/d more (expected value; fractions rolled)
+           hooks: sg (her Sủng), apply (her Danh/bạc/Thái hậu+Hoàng hậu/cung nữ), ap (NPC), affAdd (phi tần → wearer liking)
+     phuc  LUCK "Phúc khí": +v on the odds of every rolled act (lotB, the one odds modifier; never conception)
+     thai  conception +v points on conceiveCh (the final chance; max 2, only on hard titles)
+     nghe  self-study: chance v/100 of +1 extra progress (addArt / addArtP)
+     thi   contest: +v phần of talent (SC7[kind].f, so the shown odds and the real score agree)
+     suc   Sức +v on each night's sleep (j76sleep)
+     don   rumour resistance: a rumour (ACT.rumor) against the wearer has v fewer odds (oRumor) */
+BAL.dh={n0:[1,5,10],step:2,artLv:[3,4,5],
+ B:{sac:{v:[1,1,2]},danh:{v:[1,1,2]},sung:{v:[1,1,2]},duc:{v:[1,1,2]},tai:{v:[1,1,2]},tamco:{v:[1,1,2]},
+  gSung:{v:[20,14,10]},gDanh:{v:[20,14,10]},gBac:{v:[12,8,6]},gTren:{v:[12,8,6]},gHau:{v:[12,8,6]},gTrung:{v:[10,7,5]},
+  phuc:{v:[2,3,4]},thai:{v:[0,1,2]},nghe:{v:[15,25,35]},thi:{v:[2,3,5]},suc:{v:[1,2,3]},don:{v:[5,8,12]}},
+ T:{w_doden:{b:3,ch:["tamco","phuc","thi"]},w_tho:{b:3,ch:["tai","danh","thi"]},w_doi:{b:3,ch:["tai","gDanh","thi"]},w_dan:{b:3,ch:["sac","nghe","thi"]},
+  w_mua:{b:3,ch:["sac","danh","thi"]},w_hat:{b:3,ch:["sac","gTren","thi"]},w_theu:{b:3,ch:["danh","gBac","thi"]},w_kim:{b:3,ch:["sac","phuc","thi"]},
+  w_hoa:{b:3,ch:["sac","gHau","thi"]},w_ve:{b:3,ch:["tai","danh","thi"]},w_co:{b:3,ch:["tamco","phuc","thi"]},w_banh:{b:3,ch:["sung","gTren","thi"]},
+  w_ban:{b:3,ch:["suc","danh","thi"]},w_dauho:{b:3,ch:["phuc","gHau","thi"]},w_huong:{b:3,ch:["sac","sung","thi"]},
+  meta:{b:6,st:1,n:[3,6,10],ch:["gSung","gDanh","phuc"]},podium:{b:2,ch:["danh","thi"]},
+  nights:{b:2,n:[1,10,30],ch:["sung","gSung","thai"]},kids:{b:3,n:[1,3,5],ch:["danh","gTren","thai"]},
+  a_thinh:{b:1,n:[5,20,50],ch:["duc","gTren"]},a_doc:{b:1,n:[5,20,50],ch:["tai","nghe"]},a_nhan:{b:1,n:[5,20,50],ch:["sac","suc"]},
+  l_cam:{b:2,st:1,ch:["suc","nghe"]},l_ky:{b:2,st:1,ch:["tamco","nghe","don"]},l_thi:{b:2,st:1,ch:["tai","nghe"]},l_hoa:{b:2,st:1,ch:["danh","nghe"]},
+  l_vu:{b:2,st:1,ch:["sac","nghe"]},l_y:{b:2,st:1,ch:["suc","nghe"]},l_theu:{b:2,st:1,ch:["gBac","nghe"]},l_nau:{b:2,st:1,ch:["gTrung","nghe"]},
+  m_mon:{b:1,ch:["sung","gTrung"]},m_kinh:{b:1,ch:["duc","don"]},m_theu:{b:1,ch:["gBac","sac"]},m_tranh:{b:1,ch:["tai","danh"]},m_khuc:{b:1,ch:["sac","gHau"]}}};
