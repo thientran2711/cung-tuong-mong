@@ -1,17 +1,11 @@
 /* ================= jhcpor: KIT §36.5 person-card portrait cell — STANDARD frame, no empty headroom (owner 15/11; wide -w frames REVERTED 16/11, review/hc-portrait-revert) =================
-   Owner: "Ảnh 1 phía trên này còn dư chỗ nhiều nè, ảnh 2, 2 bên trái phải còn dư kìa, kéo giãn cạnh trái và phải cho khung avatar to bề ngang xíu đi."
-   ONE rule for the framed portrait in every person card (pcard: Hậu cung Chí tôn / Phi tần / Nam nhân / Cung nhân, the stage pop-up card,
-   every other pcard), known people and "Người lạ" alike:
-   1. WIDTH: the card cell shows the frame's wide variant img/kit/frame-<x>-w.webp (dev/tools/frame_wide.py: content-aware seams through the plain
-      parts of the top/bottom bars; corners, side bars, crest and pendant untouched, nothing stretched) so every frame spans ~536 of the 550
-      canvas units = the full column. Its opening is 2s units wider (s per frame, KIT_FRW); the opening's top/bottom do not move.
-      The picture is NOT zoomed for it (KIT_POR face size unchanged): the window ground (.kbg, cover) widens with the opening, the portrait's
-      clip widens to the new opening and its own left/right edges fade out (no hard vertical cut where a garment meets the picture border).
-   2. HEADROOM: the cell starts where THIS frame's art starts (its first opaque row, KIT_FRW) and ends under its tassel, a fixed 4 px from the
+   Owner 16/11 (revert): "trả về như ban đầu ... chỉ cần dịch hình đi lên sát với cái tên". The card shows the SAME standard frame file and proportion
+   (550x1037, frame-<x>.webp) as the header avatar, roster strip and dialogs; the 15/11 wide card-only frame (-w files, frame_wide.py) is retired and never requested.
+   ONE rule left, for the framed portrait in every person card (pcard: Hậu cung Chí tôn / Phi tần / Nam nhân / Cung nhân, the stage pop-up card), known people and "Người lạ" alike:
+   HEADROOM: the cell starts where THIS frame's art starts (its first opaque row, KIT_FRW) and ends under its tassel, a fixed 4 px from the
       name block above — no empty band between the name and the crest. Numbers are constants per frame file (no measuring), so the first frame
       is the settled frame; a person switch still cross-fades (jhc).
-   Small frames (mdH avatars, strips, stage, week book) keep the narrow frame. If a -w picture fails to load the cell falls back to the
-   normal frame (class kfw removed). KIT_FRW: {frame name: [s, opaque top, opaque bottom]} in canvas units (550x1037). ========== */
+   KIT_FRW: {frame name: [s, opaque top, opaque bottom]} in canvas units (550x1037). ========== */
 window.KIT_FRW={"frame-cold":[44,95,987],"frame-consort-0":[47,184,974],"frame-consort-1":[44,182,974],"frame-consort-2":[36,176,975],"frame-consort-3":[30,174,977],"frame-consort-4":[25,159,973],"frame-consort-5":[17,150,993],"frame-consort-6":[5,104,984],"frame-consort-7":[10,20,991],"frame-emp":[0,8,1035],"frame-eunuch-0":[36,134,986],"frame-eunuch-1":[36,134,986],"frame-eunuch-2":[36,134,986],"frame-eunuch-3":[46,107,988],"frame-guard":[30,100,984],"frame-heir":[24,52,992],"frame-maid-0":[35,144,986],"frame-maid-1":[35,144,986],"frame-maid-2":[35,144,986],"frame-maid-3":[35,144,986],"frame-maid-4":[35,144,986],"frame-mama-0":[34,130,994],"frame-mama-1":[34,130,994],"frame-mama-2":[34,130,994],"frame-mama-3":[34,130,994],"frame-mama-4":[34,130,994],"frame-man":[28,108,995],"frame-official":[34,101,1002],"frame-physician":[24,146,973],"frame-prince":[32,85,987],"frame-princess":[36,118,977],"frame-royal":[36,95,997],"frame-thaihau":[0,2,1016],"frame-unknown":[46,164,988]};
 function kitFrw(src){const m=/(frame-[a-z0-9-]+?)(?:-w)?\.webp/.exec(src||"");return m&&KIT_FRW[m[1]]?[m[1],KIT_FRW[m[1]]]:null}
 /* the card's own portrait cell = the first .pcp right after <div class="pcl"> */
@@ -37,7 +31,7 @@ html body .pc[class][class]>.pcl:has(>.pcp.kfw)>.pcname{min-height:auto!importan
 /* 1. wide opening: ground, badge and origin emblem move with the widened frame */
 `;document.head.appendChild(st)})();
 /* kit page sample (#kit): the card cell for a stranger, a maid and the Emperor (s = 0: frame already full width) */
-try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§36.4",title:"pcard · ô chân dung khung rộng (khung -w, sát tên)",html:()=>{
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§36.4",title:"pcard · ô chân dung khung chuẩn (sát tên)",html:()=>{
  const P=[rivals&&rivals[0],S&&S.maid,S&&S.emp].filter(Boolean);
  return `<div class="kitpg-row" style="align-items:flex-start">${P.map(p=>`<div style="width:240px">${pcard({f:kitFace(p),name:p.name||"",col:"var(--gold)",groups:[]})}</div>`).join("")}</div>`}})}catch(e){}
 /* review/hc-portrait-r1 (reviewer): the person switch stays smooth with per-frame box tops.
