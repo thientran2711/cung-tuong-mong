@@ -3739,7 +3739,7 @@ function npcSocial(v){const T=others(v);if(!T.length)return"";const t=pick(T);co
 /* the weekly news feed: deeds that show character; seen deeds may reveal a trait */
 function newsAdd(v,k,txt,toMe){S.news=S.news||[];const seen=toMe||roll(25+(S.mat||0)*8)||(S.staff||[]).some(s=>s.tr==="chuyen"&&roll(30));if(!seen)return;S.news.unshift({w:wk(),id:v.id,k,t:txt});if(S.news.length>40)S.news.length=40;
  S.trK=S.trK||{};const T=traitsOf(v);const which=T.find(t=>PERS[t]&&PERS[t].w&&PERS[t].w[k]>1.5);if(which){const K=S.trK[v.id]=S.trK[v.id]||[];if(!K.includes(which)&&roll(35)){K.push(which);noteAdd(v.id,`Qua việc ${txt.replace(v.name+" ","")}: lộ nết ${which}`)}}}
-function trKnown(v){S.trK=S.trK||{};if(typeof k61Kin==="function"&&k61Kin(v))return[v.tr,v.tr2].filter(Boolean);/* home family: she knows their nature */return S.trK[v.id]||[]}
+function trKnown(v){S.trK=S.trK||{};if(typeof k61Kin==="function"&&k61Kin(v))return[v.tr,v.tr2].filter(Boolean).map(s=>s[0].toUpperCase()+s.slice(1));/* home family: she knows their nature */return S.trK[v.id]||[]}
 function learnTrait(v,why){const T=traitsOf(v).filter(t=>!trKnown(v).includes(t));if(!T.length)return"";const t=T[0];(S.trK[v.id]=S.trK[v.id]||[]).push(t);noteAdd(v.id,`${why}: biết nàng ${t}`);return t}
 (function(){const r0=rivalsTurn;rivalsTurn=function(){let ev=r0.apply(this,arguments);try{if(S.dead)return ev;for(const v of liveRivals(true)){if(v.confined)continue;if(roll(60)){const t=npcSocial(v);if(t)ev+=t}}}catch(e){}return ev}})();
 /* talking to someone, her servants' reports and watching them reveal traits */
@@ -24675,7 +24675,7 @@ function rtCaughtEsc(k){const T=rtS();rtStat("tc_caught");rtEnd("tc_bat");T.tc=n
  log(`<span class="r">Ngươi bị bắt ngay ở cổng. Nhà ngươi bị liên lụy.</span>`);
  const mercy=cl(15+S.sung/3+(S.th||0)/4,10,70);if(S.out||!roll(mercy))deathSentence("Bị ban chết vì trốn khỏi cung");else cold("Trốn khỏi cung không thành")}
 /* ---------- 3. RỜI CUNG HỢP LỆ ---------- */
-function rtHlCards(){const T=rtS(),A=[],H=T.hl;const kidsSmall=rtKidsAlive().filter(k=>(k.age||0)<15).length;const cd=k=>H["cd_"+k]&&H["cd_"+k]>S.turn;const cdN=k=>[[`đợi qua cơn giận của Hoàng thượng (còn ${H["cd_"+k]-S.turn} tháng)`,!cd(k)]];
+function rtHlCards(){const T=rtS(),A=[],H=T.hl;const kidsSmall=rtKidsAlive().filter(k=>(k.age||0)<15).length;const cd=k=>H["cd_"+k]&&H["cd_"+k]>S.turn;const cdN=k=>[[`đợi qua cơn giận của Hoàng thượng${cd(k)?` (còn ${H["cd_"+k]-S.turn} tháng)`:""}`,!cd(k)]];/* kc-roads-fix: no "(còn NaN tháng)" when there is no cooldown */
  const nights=(S.nightLog||[]).length;
  if(!S.out){A.push(rtCard({id:"hl_tu",r:3,n:"Dâng biểu xin xuất gia",t:"Xin cạo tóc vào chùa Hộ Quốc, cầu phúc cho xã tắc.",art:RT_ART.tu,o:od(-12+(S.th||0)/3+(S.duc-50)/3-S.sung/3+(H.plead?8:0)+rtDf().o),k:2,
    need:[["không có con nhỏ dưới 15 tuổi",!kidsSmall],["không mang thai",!S.preg],[`Đức 50 (có ${S.duc})`,S.duc>=50],[`ở cung đủ 2 năm (đã ${Math.floor(S.turn/12)} năm)`,S.turn>=24],[`Thái hậu thương ngươi (có ${S.th||0}/40)`,(S.th||0)>=40&&!S.thDead]].concat(cdN("tu")),
@@ -25091,7 +25091,7 @@ function doc(){return S&&S.court&&S.court.ty||null}
 function off(){return !S||S.dead||S.out||(typeof isSrv==="function"&&isSrv())}
 function rk(){try{return Math.max(0,Math.min(7,typeof rkOf==="function"?rkOf(S):S.rank|0))}catch(e){return 0}}
 function cost(){return T().cost[rk()]}
-function docName(){const c=doc();return c&&c.name?c.name:"Thái y"}
+function docName(){const c=doc();if(c&&c.name){try{if(typeof k61Named==="function"&&!k61Named(c))return"Thái y"}catch(e){}return c.name}return"Thái y"}/* j61 name rule: a physician she has not learnt the name of is his title alone, never "thái y ???" (the "Mạnh thái y ???" side flag) */
 function rv(v){return v&&v!==S&&v.alive!==false&&!v.out&&!v.coop}
 /* ---------- trust and bribes (one rule: her, NPCs, treat()) ---------- */
 function bribers(p){const c=doc();if(!c||!c.af)return[];return liveRivals(true).filter(v=>rv(v)&&v!==p&&(c.af[v.id]||0)>=T().bribeAf&&(()=>{try{return hostility(v,p)>=T().bribeHost}catch(e){return false}})()).sort((a,b)=>(c.af[b.id]||0)-(c.af[a.id]||0))}
@@ -39027,7 +39027,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="9fa0fac67b56";window.CTM_BUILD=BUILD;
+const BUILD="d0a4a68c77d3";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

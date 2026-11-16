@@ -1,11 +1,11 @@
-/* kc-roads-cn-nc-fix item 3: her own family at home is never shown as strangers. For each of the nine home roads (tiểu thư tt dtq muoi cn thd ch td,
-   cnv, nc): new life → "Ở nhà" → for every living family member: kitEmotion known (mood, no "?" badge), nature known (trKnown), the Gia tộc person
+/* kc-roads-cn-nc-fix item 3: her own family at home is never shown as strangers. For each home road in the game data (tiểu thư tt dtq muoi thd ch td,
+   cnv, nc; bd with KIN_BD=1 once its origin data is in — review/origins-r1): new life → "Ở nhà" → for every living family member: kitEmotion known (mood, no "?" badge), nature known (trKnown), the Gia tộc person
    card has no "chưa rõ" / "chưa gặp" / "???" / "Người lạ", and the Gia tộc pager strip names are not masked. Then (cnv, nc) after entering the palace
    nothing is asserted about the family (they are outside: the old rule applies again). usage: node kin-known.js <url> [WxH@dpr] */
 const {chromium}=require('playwright');const URL=process.argv[2];const sz=process.argv[3]||'755x1000@2';const [wh,d]=sz.split('@');const [W,H]=wh.split('x').map(Number);
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 (async()=>{const b=await chromium.launch();const out=[];let bad=0;
- for(const o of ['tt','dtq','muoi','cn','thd','ch','td','cnv','nc']){const c=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:+d,serviceWorkers:'block'});
+ for(const o of ['tt','dtq','muoi','thd','ch','td','cnv','nc'].concat(process.env.KIN_BD?['bd']:[])){const c=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:+d,serviceWorkers:'block'});
   await c.addInitScript(()=>{try{localStorage.setItem('ctm-bgpause','1')}catch(e){}setInterval(()=>{document.querySelectorAll('.krskip').forEach(b=>b.click())},300)});
   const p=await c.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
   await p.goto(URL);await sleep(2500);await p.evaluate(()=>localStorage.clear());await p.reload();await sleep(3000);
@@ -26,4 +26,4 @@ const sleep=ms=>new Promise(r=>setTimeout(r,ms));
    R.kin=r;if(r.err)F(r.err);else{if(r.strip)F('pager strip masked: '+r.strip);for(const x of r.T){if(!x.known)F(x.t+': mood unknown');if(!x.nature)F(x.t+': nature unknown');if(x.card)F(x.t+': card "'+x.card+'"');if(x.pop)F(x.t+': popup "'+x.pop+'"')}}
    await p.screenshot({path:`/home/user/wt/kcfix/.tmp/kin-${o}-${wh}.jpg`,type:'jpeg',quality:55}).catch(()=>{})}
   if(errs.length)F('errors '+errs.join(' | '));if(R.fail.length)bad++;out.push(R);await c.close()}
- console.log(JSON.stringify(out.map(r=>({o:r.o,fail:r.fail,kin:r.kin&&r.kin.T&&r.kin.T.map(x=>`${x.t}:${x.known?x.mood:'?'}/${x.nature||'?'}`).join(' ')})),null,1));console.log(bad?`FAIL ${bad}/9`:'PASS 9/9');await b.close();process.exit(bad?1:0)})();
+ console.log(JSON.stringify(out.map(r=>({o:r.o,fail:r.fail,kin:r.kin&&r.kin.T&&r.kin.T.map(x=>`${x.t}:${x.known?x.mood:'?'}/${x.nature||'?'}`).join(' ')})),null,1));console.log(bad?`FAIL ${bad}/${out.length}`:`PASS ${out.length}/${out.length}`);await b.close();process.exit(bad?1:0)})();
