@@ -3,7 +3,7 @@
    - Player: eligibility opens a window of BAL.ex.win tuần; she takes the exam with the act card «Khảo hạch tấn phong» (Hành sự, honest odds,
      Cần/Tốn). Missing the window: eligibility lapses for BAL.ex.cd[to] months. Pass: the existing decree (promoteP, edict animation, and the
      rank chest of review/gift-chest when merged). Fail: no promotion, cooldown BAL.ex.cd[to] months.
-   - Exam = 2–3 rounds of the game's existing mini-games (j82/j91 engines; quiz engine with question banks for lễ nghi / trị cung / xử án /
+   - Exam = 2–3 rounds of the game's existing mini-games (j82/j91 engines; jnwq skill games for lễ nghi / trị cung / xử án /
      Thái hậu hỏi) chosen by the target rank: low ranks lễ nghi + nữ công, middle cầm kỳ thi họa + câu đối, high trị cung + xử án + Thái hậu hỏi.
      Score = mean of rounds × BAL.ex.wPlay + two Tứ đức courses × BAL.ex.wVir + one tài nghệ × BAL.ex.wArt. The bar BAL.ex.bar[tier] moves with
      the examiner's attitude (Hoàng hậu for low/middle ranks, Thái hậu for high ranks; the other one when absent).
@@ -18,54 +18,13 @@
    - Old saves: p.ex is created on first read; a save made before this rule gets one notice line.
    State p.ex = {to, pass, cd (turn), w0/w1 (tuần, player), lapse, grace, n, last:{s,b,ok,t}, pend (player, exam in progress)}. */
 const EXK={
- le:{e:"quiz",b:"le",vir:"dung",n:"Lễ nghi",t:"Vấn lễ",how:"Ma ma Nội vụ phủ hỏi phép tắc trong cung. Chọn lời đáp đúng lễ. 5 câu, mỗi câu 10–20 giây tùy bậc; không rành thì chạm Gợi ý."},
- tc:{e:"quiz",b:"tc",vir:"hanh",n:"Trị cung",t:"Việc lục cung",how:"Giám khảo đưa việc của lục cung ra hỏi. Chọn cách xử phải nhất. 5 câu, mỗi câu 10–20 giây tùy bậc; không rành thì chạm Gợi ý."},
- xa:{e:"quiz",b:"xa",vir:"ngon",n:"Xử án",t:"Xét án trong cung",how:"Một vụ án trong cung được đem ra. Chọn cách xét đúng lẽ. 5 câu, mỗi câu 10–20 giây tùy bậc; không rành thì chạm Gợi ý."},
- thq:{e:"quiz",b:"thq",vir:"ngon",n:"Đối đáp",t:"Thái hậu hỏi",how:"Thái hậu hỏi chuyện lục cung. Chọn lời đáp đúng mực. 5 câu, mỗi câu 10–20 giây tùy bậc; không rành thì chạm Gợi ý."}};
-const EXQ={
- le:[{q:"Gặp Thái hậu giữa hành lang, phi tần phải làm gì?",a:"Đứng nép bên đường, cúi mình vấn an",w:["Đi tiếp cho kịp giờ","Gật đầu chào","Hỏi Thái hậu đi đâu"]},
-  {q:"Thỉnh an Hoàng hậu vào lúc nào?",a:"Sáng sớm, theo giờ Hoàng hậu định",w:["Lúc nào rảnh thì sang","Chiều tối trước giờ ngủ","Chỉ ngày lễ Tết"]},
-  {q:"Dâng trà lên bậc trên, tay đặt thế nào?",a:"Hai tay nâng chén, mắt nhìn xuống",w:["Một tay đưa chén","Đặt chén lên bàn rồi lui","Nhìn thẳng mà dâng"]},
-  {q:"Hoàng thượng ban thưởng, phi tần đáp lễ ra sao?",a:"Quỳ tạ ân, xưng thần thiếp",w:["Nhận rồi cất đi","Đứng nhận, cười tươi","Từ chối cho khiêm nhường"]},
-  {q:"Ngày giỗ tiên đế, trong cung phải giữ điều gì?",a:"Mặc đồ nhạt màu, không ca hát",w:["Bày yến cho vui","Cài trâm đỏ lấy may","Mở hội đánh cờ"]},
-  {q:"Đi trong cung gặp phi tần phẩm cao hơn thì sao?",a:"Nhường đường, hành lễ trước",w:["Chờ người kia chào trước","Giả như không thấy","Đi nhanh qua cho xong"]},
-  {q:"Phi tần tự xưng thế nào trước Hoàng thượng?",a:"Thần thiếp",w:["Nô tỳ","Bản cung","Ta"]},
-  {q:"Hầu yến, khi Hoàng thượng chưa động đũa thì?",a:"Ngồi ngay ngắn, chờ ngài dùng trước",w:["Ăn trước cho nóng","Gắp cho mình món ngon","Rót rượu tự uống"]},
-  {q:"Phi tần muốn về thăm nhà phải làm gì?",a:"Dâng lời xin Hoàng hậu, đợi chuẩn",w:["Tự đi rồi về sớm","Nhờ thái giám mở cửa","Sai cung nữ báo sau"]},
-  {q:"Được Hoàng thượng gọi hầu ở Dưỡng Hòa điện, việc đầu tiên?",a:"Tắm gội, thay áo, theo thái giám Kính sự phòng",w:["Đi ngay kẻo ngài đợi","Mang theo cung nữ thân tín vào điện","Sang báo Hoàng hậu trước"]}],
- tc:[{q:"Bổng lộc lục cung cuối năm bị hụt, việc đầu tiên nên làm?",a:"Đối chiếu sổ sách Nội vụ phủ",w:["Cắt bổng lộc phi tần phẩm thấp","Xin thêm bạc Hộ bộ","Bỏ qua cho êm chuyện"]},
-  {q:"Hai cung nữ cãi nhau ầm ĩ, nên xử thế nào?",a:"Gọi cả hai hỏi rõ rồi mới phạt",w:["Đánh cả hai cho sợ","Đuổi người nói to hơn","Mặc kệ cho tự hết"]},
-  {q:"Mùa đông than sưởi không đủ chia, ưu tiên ai?",a:"Thái hậu, người ốm và trẻ nhỏ trước",w:["Người phẩm cao nhất","Ai đến lấy trước","Chia đều không xét"]},
-  {q:"Kho lụa mất mấy tấm gấm, người giữ kho chối không biết. Nên?",a:"Kiểm sổ nhập xuất, hỏi người canh đêm",w:["Phạt ngay người giữ kho","Lờ đi kẻo mang tiếng","Phạt cả cung nữ quét dọn"]},
-  {q:"Thánh thọ Thái hậu sắp tới, việc chuẩn bị nên giao thế nào?",a:"Chia việc từng cục, hẹn ngày báo lại",w:["Tự tay làm hết","Giao cả cho một người","Để sát ngày mới lo"]},
-  {q:"Dịch bệnh lan ở viện cung nữ, việc trước tiên?",a:"Tách người ốm, mời thái y, đốt ngải",w:["Đóng cửa không cho ai ra","Giấu đi kẻo Hoàng thượng lo","Đuổi người ốm ra ngoài"]},
-  {q:"Phi tần mới vào cung chưa biết lễ, nên làm gì?",a:"Cử ma ma dạy lễ trong mười ngày",w:["Phạt cho nhớ","Bỏ mặc tự học","Không cho ra khỏi cung"]},
-  {q:"Thái giám thu bạc của người hầu để chia việc nhẹ. Xử thế nào?",a:"Tra rõ, trả bạc, giao Thận hình ty",w:["Nhận phần chia cho êm","Đổi việc cho hắn","Chỉ nhắc nhở"]},
-  {q:"Yến Trung thu, chỗ ngồi các phi tần xếp theo gì?",a:"Theo phẩm vị, cùng phẩm theo ngày sắc phong",w:["Theo tuổi","Ai được sủng ngồi gần","Bốc thăm"]},
-  {q:"Cung điện cũ dột nát, bạc sửa chưa đủ. Nên?",a:"Sửa chỗ hỏng nặng trước, tâu xin phần còn lại",w:["Bỏ đó không sửa","Bắt phi tần ở đó tự bỏ bạc","Dời người sang lãnh cung"]}],
- xa:[{q:"Cung nữ bị tố trộm trâm, chỉ có một người làm chứng. Nên?",a:"Tìm thêm chứng, khám nơi cất giấu",w:["Phạt ngay theo lời chứng","Tha vì chỉ có một người","Hỏi qua loa rồi thôi"]},
-  {q:"Hai người cùng khai, lời lệch nhau về giờ giấc. Nên?",a:"Hỏi riêng từng người, đối chiếu sổ trực",w:["Tin người phẩm cao","Phạt cả hai","Cho hai người cãi trước mặt"]},
-  {q:"Thuốc của phi tần có độc, người sắc thuốc đã chết. Nên?",a:"Tra nguồn thuốc ở Thái y viện và người đưa thuốc",w:["Kết án người sắc thuốc rồi thôi","Đổ cho phi tần tự hại","Giấu đi cho êm"]},
-  {q:"Người tố cáo lại là người được lợi nhất nếu kẻ bị tố ngã. Nên?",a:"Xét kỹ cả lời người tố",w:["Tin ngay vì đã đứng ra tố","Phạt người tố","Bỏ vụ án"]},
-  {q:"Chứng cứ là một bức thư không ký tên. Nên?",a:"So nét chữ, giấy mực, hỏi người chuyển thư",w:["Coi là đủ chứng","Đốt đi","Đọc trước cả cung"]},
-  {q:"Kẻ bị tố quỳ khóc kêu oan, không còn chứng nào khác. Nên?",a:"Chưa kết án, giam lỏng chờ tra thêm",w:["Tha ngay cho nhân từ","Phạt nặng vì khóc là có tật","Giao cho người tố tự xử"]},
-  {q:"Một thái giám nhận tội quá nhanh, lời khai trơn tru. Nên?",a:"Ngờ có người sai khiến, tra thêm",w:["Kết án ngay","Thưởng vì thành thật","Đổi hắn sang cung khác"]},
-  {q:"Cung nữ phạm lỗi nhỏ lần đầu, nên phạt thế nào?",a:"Phạt nhẹ, ghi sổ, răn lần sau",w:["Đánh ba mươi trượng","Đuổi khỏi cung","Bỏ qua không ghi"]},
-  {q:"Vụ án dính đến người nhà của chính mình. Nên?",a:"Tâu xin người khác xét cho công bằng",w:["Tự xét cho nhanh","Bỏ vụ án","Xét nhẹ tay"]},
-  {q:"Vật chứng tìm thấy trong phòng mà ai cũng ra vào được. Nên?",a:"Tra xem ai vào phòng hôm ấy",w:["Kết tội chủ phòng","Bỏ vật chứng","Phạt cả cung"]}],
- thq:[{q:"«Lục cung đông người, ngươi lấy gì giữ yên?»",a:"Lấy công bằng làm gốc, lấy khoan dung giữ lòng người",w:["Lấy uy mà trị","Mặc họ tự lo","Việc gì cũng tâu Hoàng thượng"]},
-  {q:"«Nếu Hoàng thượng sủng một người quá mức, ngươi làm sao?»",a:"Nhẹ lời khuyên ngài, chăm lo các cung khác",w:["Tìm cách hạ người ấy","Giận dỗi với ngài","Không nói gì"]},
-  {q:"«Ai gia già rồi, ngươi định hiếu thuận thế nào?»",a:"Sớm tối vấn an, thuốc thang tự tay dâng",w:["Sai người hầu lo","Dâng nhiều vàng bạc","Đợi Thái hậu gọi mới đến"]},
-  {q:"«Hoàng tự nhỏ dại phạm lỗi, ngươi dạy ra sao?»",a:"Dạy bằng lời phải, nghiêm mà không ác",w:["Đánh cho nhớ","Chiều cho vui","Để thầy lo hết"]},
-  {q:"«Nhà mẹ đẻ ngươi xin chức, ngươi tính sao?»",a:"Việc triều chính thần thiếp không dám xen",w:["Xin Hoàng thượng ngay","Lén nhờ quan quen","Nài ngài đồng ý"]},
-  {q:"«Phi tần cũ thất sủng, ngươi đối đãi thế nào?»",a:"Vẫn giữ lễ, cấp đủ bổng lộc",w:["Cắt bớt cho đỡ tốn","Không đoái hoài","Đưa vào lãnh cung"]},
-  {q:"«Ngày Tết, việc trước nhất của chủ lục cung là gì?»",a:"Dâng lễ tông miếu, vấn an Thái hậu",w:["Bày yến cho mình","Ban thưởng người thân tín","Nghỉ ngơi cho khỏe"]},
-  {q:"«Người hầu thân tín của ngươi phạm lỗi, ngươi xử sao?»",a:"Xử như người khác, không thiên vị",w:["Che giấu cho nàng","Đuổi ngay không hỏi","Đổ cho người khác"]},
-  {q:"«Ngươi biết chữ, đọc sách gì cho phải đạo?»",a:"Nữ huấn, Nữ giới và sử sách người xưa",w:["Truyện tình","Binh thư","Sách bói"]},
-  {q:"«Hoàng thượng giận một đại thần, hỏi ý ngươi. Ngươi đáp?»",a:"Xin ngài nguôi giận rồi hãy xét",w:["Xin chém ngay","Bênh đại thần","Kể thêm lỗi của đại thần"]}]};
-/* the quiz engine (j82) reads these banks; the kinds join KG82_KIND (they are not festival contest subjects: j71 SC7 is unchanged) */
-(function(){if(typeof KG82_KIND==="undefined")return;for(const k in EXK)if(!KG82_KIND[k])KG82_KIND[k]=EXK[k];
- if(typeof kg82Bank!=="function")return;const b0=kg82Bank;kg82Bank=function(b){if(EXQ[b])return kg82Shuf(EXQ[b]).slice(0,5).map(x=>({l:"Câu hỏi",q:x.q,a:x.a,w:kg82Shuf(x.w).slice(0,3)}));return b0.apply(this,arguments)}})();
+ le:{e:"lay",vir:"dung",n:"Lễ nghi",t:"Bày lễ",how:"Ma ma Nội vụ phủ bày một bàn lễ làm mẫu. Kéo từng vật đến đúng chỗ như mẫu. Chưa rõ thì chạm Gợi ý."},
+ tc:{e:"sort",vir:"hanh",n:"Trị cung",t:"Phân kho",how:"Hàng hóa của lục cung về kho. Kéo từng món vào kho có hàng mẫu cùng loại. Chưa rõ thì chạm Gợi ý."},
+ xa:{e:"clue",vir:"ngon",n:"Xử án",t:"Khám vật chứng",how:"Vụ án để lại vật chứng. Chạm vào người có áo và vật mang theo khớp vật chứng. Chưa rõ thì chạm Gợi ý."},
+ thq:{e:"seat",vir:"ngon",n:"Thái hậu hỏi",t:"Xếp chỗ ngồi yến",how:"Thái hậu bảo xếp chỗ ngồi yến. Nhiều ngọc ghim là phẩm cao, ngồi gần Thái hậu. Kéo từng người vào ghế. Chưa rõ thì chạm Gợi ý."}};
+/* family C (owner 16/11 07:20Z, no word games): the exam games are skill games of jnwq (lay / sort / clue / seat); no question banks remain.
+   The kinds join KG82_KIND (they are not festival contest subjects: j71 SC7 is unchanged) */
+(function(){if(typeof KG82_KIND==="undefined")return;for(const k in EXK)if(!KG82_KIND[k])KG82_KIND[k]=EXK[k]})();
 
 /* ---------- rules (numbers in BAL.ex, jbal2) ---------- */
 const EX_VIR=[["cong","dung"],["dung","ngon"],["ngon","hanh"]];
