@@ -25,6 +25,13 @@ A life = 14 chapters (chương) in three parts. Each chapter has several hồi (
 | Phần cuối · Ngôi Trung cung | 12–14 | endgame: con đường của con / ngôi Đông cung, Tranh ngôi Trung cung, Mẫu nghi thiên hạ | P1 (existing), P4 (full) |
 
 Rules that hold in every phase:
+- OD:L1247: anyone a road involves REALLY exists in the palace with the same name and identity, and a hostile role is REAL in the
+  relationship system (thiện cảm down, oán up both ways, j9 relAdd) — set when the person is cast. Phase 1 does this (jst14 castRv67 wrap;
+  td family enemy S.foe = the same live consort, hostile both ways).
+- OD:L1253: the same identity + road + option must NOT always give the same result across lives. Outcomes read THIS life's context
+  (cast person's thiện cảm/oán and nature, her Tâm cơ/Đức, how many consorts bear her a grudge, earlier choices / Lợi thế) — never a
+  fixed table. Phase 1: every chancy story option's odds move up to 15 either way by that context (jst14 f14Ctx); bot check: one fixed
+  choice path over many lives → outcome spread, no single dominant answer. P3 writes context into the branch results too.
 - Roles are cast from REAL people of this life (rivals, men, servants, family, officials); story-only named NPCs are allowed when a road needs
   them (e.g. the old steward of her ruined house), created for that road and shown with an existing face.
 - A hồi fires only for a real in-game reason (a person's goal, grudge, debt, faction move, an event, a deadline) — never a daily dice.
@@ -63,7 +70,11 @@ State per task: counters written by the feature itself (S.tu14.{sold,bought,gift
 (jtut kitCoach) may point at the button but never completes the task. Replay: tasks reset per life, rewards only when done again (no skip-with-reward).
 Servant life (cnv) gets its own three chapters (phận sự, Đồng liêu, chủ tin).
 
-Origin intros (OD:L1244): every origin (incl. cung nữ and hòa thân, who go straight into the palace without a home road) gets
+Pre-palace home roads (OD:L1251, replaces the "no home road" part of OD:L1244): cn and nc (every country branch incl. Bắc Địch) get a
+home road like td — built by a separate worker on `review/kc-roads-cn-nc`; this plan only references it. cnv starts as a palace maid, no home road.
+Entry rank (OD:L1250): an origin's entry rank is only its CEILING; she earns it by passing the tuyển tú selection (minigame score from tài,
+đức, abilities); a weaker result gives a lower rank; patronage (the Thái hậu's person …) opens the higher ceiling. Every origin.
+Origin intros (OD:L1244): every origin gets
 - a NARRATED intro with ILLUSTRATIONS (3–4 painted panels, kit scene panel kitPanel({scene:true}) + kitTiles), and
 - an ENTRY animation (palace gate → selection hall, kit §67/§68 painted FX parts), and
 - a tuyển tú MINIGAME that decides the entry rank by score: high score → the highest rank of that selection; fail → a lower rank
@@ -96,13 +107,15 @@ Ch12 child road / Đông cung (with a road for childless lives: nuôi con nuôi 
 Same harness and target band as the origin balance (OD:L19 + L43): Hoàng hậu ~20–40 % per origin; per-road win/lose spread;
 chapter length (months) per part; reward value vs cost per rank (BALANCE rule 15/11 20:30Z). Report table; no new rules.
 
-## 3. PENDING — NPC roads (OD:L1243). NOT APPROVED, DO NOT BUILD
-Proposal (owner asked for a recommendation): consorts (and maids) get their OWN origin + one of the 4 roads of that origin, 14 chapters like
-hers, so they live with goals. Parts of an NPC's road can be HER side quest (helping them), but not every chapter asks her: her help = ONE
-hồi (one task), where her own chapters have 3–5 hồi. Otherwise NPCs need no extra side quests.
-Recommendation draft for the coordinator: NPC roads run as light state (chapter n, road id, flags) advanced by the existing NPC month
-simulation, no dialogs; only the hồi that names her becomes a j72-style Việc nhờ with gain and loss; cap 1 open NPC request at a time.
-Waits for the owner's answer.
+## 3. Phase 6 — NPC roads (OD:L1243, APPROVED by OD:L1252)
+Consorts (and maids) get their OWN origin + one of the 4 roads of that origin, on the SAME chapter/hồi frame as hers (jst14), so they live
+with goals. Parts of an NPC's road become HER side quest: her help = ONE hồi drawn from A's road (her own chapters have 3–5 hồi); not every
+chapter asks her. Variety (OD:L1252): the same person A with the same identity in two lives brings a DIFFERENT request at a DIFFERENT hồi
+of A's road (this life hồi 1, another life hồi 4); tasks and choices vary per life; never repeat A's last request (history like ctm-arcs,
+keyed by identity). Replaces D5 "side quests for every NPC". Outcomes read context (OD:L1253).
+Build sketch: NPC road = light state on the person {road, ch, h, flags}, advanced by the NPC month simulation for a real reason (her goal,
+grudge, debt, faction, event), no dialogs; the hồi that names the player becomes a j72-style Việc nhờ card with gain and loss; at most one
+open NPC request at a time. Starts after phase 1 is on main (needs the frame), can run beside phases 2–4.
 
 ## Appendix — owner decisions, copied verbatim from dev/OWNER_DECISIONS.md
 [OD:L1223] - (16/11 06:30Z, s10) OWNER STANDING RULING (from her s9 words 05:51–05:52Z; original ruling lost, history search reports/owner-history-chapters.md): EVERY origin has 4 DIFFERENT story roads (tuyến truyện) for variety; she recalls 12–14 chapters per origin. Today main has ONE road per origin with n:3 steps (td n:5). Meaning of "12–14 chương" (per road vs total over the 4 roads) asked to the owner 06:30Z — do not build until answered. Scope later: content plan per origin → Foreman (content), not main.
@@ -112,3 +125,8 @@ Waits for the owner's answer.
 [OD:L1242] - (16/11 08:30Z, s10) OWNER: "Ok, chọn hướng tuyến truyện 14 chương đi" → coordinator picks option 1 of the 07:05Z recommendation: chapters 1–3 = tutorial (quests must be DONE for the reward, no skip-with-reward), 4–11 = one of the origin's 4 roads, 12–14 = endgame; roles cast from real NPCs; hồi fire only for real in-game reasons; story-only NPCs allowed; phased build (1 frame + port j67, 2 tutorial, 3 extend roads per origin, 4 endgame, 5 bot balance).
 [OD:L1243] - (16/11 08:30Z, s10) OWNER (NPC roads, asks for a recommendation): instead of side quests for every NPC, give NPCs (esp. consorts, also maids) their OWN origin + one of the 4 roads of that origin, 14 chapters like hers, so they live with goals; parts of an NPC's main road can be HER side quest (helping them) — but not every chapter asks her; her help = ONE hồi (one task) where her own chapters have 3–5 hồi. Otherwise NPCs need no extra side quests.
 [OD:L1244] - (16/11 08:30Z, s10) OWNER (origins without a home road): cung nữ and hòa thân going straight into the palace is fine (no extra home road). BUT every origin needs its own NARRATED intro with ILLUSTRATIONS, and an ENTRY animation; the entry rank must have a REASON like real tuyển tú (catching the Emperor's / Thái hậu's eye gives a higher rank) with a MINIGAME exam: high score → the highest rank of that selection, fail → lower rank (not "the highest rank the origin allows").
+[OD:L1247] - (16/11 08:40Z, s10) OWNER RULE (story cast, real people): when a road (hers or an NPC's) involves another person — e.g. "the daughter of the family's enemy" — that person must REALLY exist in the palace with the SAME name and identity, and the hatred between them is REAL in the relationship system (they truly hate each other, act on it), not just quest text.
+[OD:L1250] - (16/11 08:40Z, s10) OWNER RULE (entry rank): an origin's entry rank (e.g. Cháu gái Thái hậu → Quý nhân) is only the HIGHEST rank that origin can get at entry; she gets it only by PASSING the selection exam (minigame/score from tài, đức, abilities); a weaker result gives a lower rank. Patronage (being the Thái hậu's person) opens the higher ceiling, but the rank itself is earned by ability — like real life. Applies to every origin.
+[OD:L1251] - (16/11 07:00Z, s11) OWNER (replaces the "no home road" part of OD:L1244): build a PRE-PALACE road for the two remaining origins Cung nữ tuyển vào cung (cn) and Công chúa hòa thân (nc, every country branch incl. Bắc Địch), the same way as the td fix (home life before the event that sends her into the palace; that event shown as a kit event card, then the palace road). "Bạn linh động." Coordinator: cnv (cung nữ được sủng hạnh) already starts as a palace maid → no home road. Narrated intro + illustrations + entry animation + selection minigame (OD:L1244, L1250) still apply to every origin.
+[OD:L1252] - (16/11 07:00Z, s11) OWNER RULE (variety across lives): an NPC who comes to ask her help must NOT bring the same task every life. Same person A with the same identity in two lives → a DIFFERENT request, at a DIFFERENT point of A's own road (this life A comes at hồi 1, another life at hồi 4). Tasks and their choices vary per life. → NPC roads (OD:L1243) are the way: her help = one hồi drawn from A's road. Treated as the owner's approval of NPC roads; D5 "side quests for every NPC" is replaced by it.
+[OD:L1253] - (16/11 07:00Z, s11) OWNER RULE (no memorised outcomes, main story too): the same identity + same road + same option chosen must NOT always give the same result across lives. Outcomes depend on the context of that life (people's traits, relations, abilities, who is watching, earlier choices), so players cannot learn the story by heart and always pick "the best". Reaffirms OD:L478 for EVERY story choice (main road, NPC requests, events).
