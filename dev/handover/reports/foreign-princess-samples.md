@@ -36,3 +36,8 @@ State: v3 sheets done. Files: `foreign-princess-samples/foreign-princess-sample-
 5. Side-by-side: viewed the 8-tier ladders of c03/c12/c20 next to the v3 figures; same richness progression. Maids unchanged from v2 except bd low maid fur removed.
 Credits v3: 4 faces (2 per country, pick 1 each) 160 + 2 lineups 130 + 1 maid redo 65 = 355. Total all rounds 955.
 Caveat: nc maid pair and the two high maids kept from v2 (dark green); bd/nc maid faces not re-checked against existing faces.
+
+## v3b (self-check requested by main s12)
+Both points were TRUE and are fixed: (a) v3 Nam Chiếu had lost the silver ethnic ornaments (v1 had them) → NC lineup redrawn: silver hairpins/flower headdress with tiny bells, silver collar necklace (torque) with pendants, bell earrings, silver waist chain, bracelets on every rank, growing richer by rank; blue palette, per-rank hair and Quý phi gown kept. (b) maid faces had not been checked → both maid pairs redrawn with NEW faces (no face ref; nc: round soft face, wide-set eyes; bd: narrow oval, straight nose), looked at, differ from the princesses; high maid now pale teal/sage like existing palace maid m01 (the dark-green caveat is gone); bd low maid still fur-free. bd princess lineup and both princess faces unchanged from v3.
+Files: `...-nc-v3b.webp`, `...-bd-v3b.webp` (v3 kept). Credits v3b: 65 (nc lineup) + 2 × 65 (maids) = 195. Total all rounds 1150.
+Caveat: maid faces were checked against the 78-face contact sheet by eye only for the princesses earlier; the new maid faces are only compared by eye at figure scale.
