@@ -400,8 +400,8 @@ rdDef("ch_benh",6,{t:"Kẻ rục rịch",w:"v",sj:"những người đổi chỗ
   {n:"Kể thật",c:{suc:-3},w:{th:3},wx:"bà biết ai trung",lx:"bà buồn",rt:"Thái hậu lặng đi."},
   {n:"Nói còn nhiều người đến",c:{duc:-2},w:{th:3},wx:"bà yên lòng",lx:"dối bà",rt:"Thái hậu cười, ngủ thiếp đi."},
   {n:"Kể và xin bà cho ngươi đứng thay ở lễ tế",c:{},o:()=>35+S.th/4,w:{th:2},sc:2,f:"stand",wx:"bà gật đầu cho ngươi đứng",l:{th:-4},lx:"bà thấy ngươi đòi",rt:"Thái hậu bảo: “Đi đi.”",rf:"Thái hậu không đáp."}]},
- t2:{h:"Bài vị cần người dâng hương",w:"me",if:()=>S.thDead,t:"Lễ tế tổ năm nay, bài vị Thái hậu được rước vào Phụng Tiên điện lần đầu. Ai dâng hương đầu là việc lớn.",o:[
-  {n:"Xin Hoàng thượng cho dâng hương đầu",c:{},o:()=>35+S.sung/4+S.danh/6,sc:2,f:"stand",wx:"ngươi được đứng trước",l:{sung:-3},lx:"ngài thấy ngươi đòi",rt:"Hoàng thượng chuẩn.",rf:()=>`Hoàng thượng giao cho ${CHR_H()}.`},
+ t2:{h:"Bài vị cần người dâng hương",w:"me",if:()=>S.thDead,t:"Lễ tế tổ năm nay, bài vị Thái hậu được rước vào Phụng Tiên điện lần đầu. Ai dâng hương thay Thái hậu trong hàng nội mệnh phụ là việc lớn.",o:[
+  {n:"Xin dâng hương thay Thái hậu trong hàng nội mệnh phụ",c:{},o:()=>35+S.sung/4+S.danh/6,sc:2,f:"stand",wx:"ngươi được đứng trước",l:{sung:-3},lx:"ngài thấy ngươi đòi",rt:"Hoàng thượng chuẩn.",rf:()=>`Hoàng thượng giao cho ${CHR_H()}.`},
   {n:"Không xin",c:{danh:-2},w:{duc:2},wx:"giữ phép",lx:"người khác đứng trước",rt:"Ngươi đứng hàng sau."}]},
  x1:{h:"Lễ tế tổ",w:"emp",t:A=>`Lễ tế tổ ở Phụng Tiên điện. ${S.thDead?"Bài vị Thái hậu lần đầu được rước vào.":"Chỗ của Thái hậu bỏ trống."} ${qOn()?"Hoàng hậu {hh} và {v}":"{v}"} cùng nhìn chỗ ấy.`,o:[
   {n:"Bước lên đứng thay Đức Thọ cung",c:{suc:-4},o:A=>30+(A.f.stand?15:0)+S.danh/6,e:["win","lose"],rt:"Ngươi bước lên, không ai cản. Hoàng thượng gật đầu: đó là chỗ của cháu Thái hậu.",rf:"Lễ quan bước ra ngăn: phép không cho phi tần đứng hàng ấy."},
