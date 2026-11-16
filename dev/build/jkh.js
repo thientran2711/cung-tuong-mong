@@ -22,7 +22,7 @@ function khOf(p){const K=khB();if(!K||!p||typeof p!=="object")return 100;khInit(
 /* the Sức ceiling every clamp reads */
 function sucCap(p){const K=khB();if(!K||!p||typeof p!=="object")return 100;return Math.min(100,Math.round(K.maxBase+K.maxPer*khOf(p)))}
 /* ở cữ: no conception for BAL.kh.ocuMo month(s) after a birth (everyone) */
-function khOcu(p){p=p||S;const n=khB()?khB().ocuMo:1;return p.lastBirth!=null&&S.turn-p.lastBirth<=n}
+function khOcu(p){p=p||S;const n=khB()?khB().ocuMo:1;return p.lastBirth!=null&&S.turn-p.lastBirth<n}/* lastBirth = the month the birth fell in; months 0..n-1 after it = n months (review r1: was <=, 2 months) */
 function khFit(p){if(p&&typeof p.suc==="number")p.suc=Math.min(p.suc,sucCap(p))}
 function khHit(p,tmp,scar){const K=khB();if(!K||!p)return;khInit(p);if(tmp)p.khTmp=Math.max(0,Math.min(K.tmpMax,(p.khTmp||0)+tmp));if(scar)p.khScar=(p.khScar||0)+scar;khFit(p)}
 function khTonic(p){const K=khB();if(!K||!p)return;if(p.khTon===S.turn&&(p.khTonN||0)>=K.tonicMo)return;if(p.khTon!==S.turn){p.khTon=S.turn;p.khTonN=0}p.khTonN++;khHit(p,-K.tonic,0)}

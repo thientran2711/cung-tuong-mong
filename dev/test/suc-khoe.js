@@ -28,7 +28,7 @@ const IDX=process.argv[2];const LIVE='https://thientran2711.'+'github.io/cung-tu
   S.age=40;S.khScar=10;info.cap40scar10=sucCap(S);S.khScar=0;S.age=20;
   /* 2 ở cữ */
   S.preg=0;S.fake=0;S.barren=0;S.lastBirth=null;const c0=conceiveCh(S);S.lastBirth=S.turn;if(conceiveCh(S)!==0)f.push('ở cữ not blocking');
-  S.lastBirth=S.turn-K.ocuMo-1;const c1=conceiveCh(S);if(c1!==c0)f.push('after ở cữ '+c1+' vs '+c0+' (×0.7 still?)');S.lastBirth=null;info.conc=[c0,c1];
+  S.lastBirth=S.turn-(K.ocuMo-1);if(conceiveCh(S)!==0)f.push('ở cữ not blocking its last month');S.lastBirth=S.turn-K.ocuMo;const c1=conceiveCh(S);/* exactly ocuMo months blocked (review r1) */if(c1!==c0)f.push('after ở cữ '+c1+' vs '+c0+' (×0.7 still?)');S.lastBirth=null;info.conc=[c0,c1];
   /* 3 preterm */
   BAL.preT.m8=100;BAL.preT.die8=0;S.preg=7;S.trueFather=null;S.pregMismatch=false;S.age=24;S.suc=90;const n0=S.kids.length,sc0=S.khScar||0;
   let ev=pregMonthP(S);const kid=S.kids[n0];if(!kid)f.push('preterm: no birth '+ev.slice(0,120));else{if(kid.pre!==8)f.push('kid.pre '+kid.pre);if(kid.dateOff!=="pre")f.push('no lệch sổ on innocent preterm');}

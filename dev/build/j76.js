@@ -120,7 +120,7 @@ function j76sleep(p){let n=(typeof harsh==="function"&&harsh())?8:14;if(p.suc<30
 (function(){const e0=endTurn;endTurn=function(){if(!S||S.dead||Q.length||S.mg||(typeof isSrv==="function"&&isSrv()))return e0.apply(this,arguments);
  const t0=S.turn,tu=S.tuan,s0=S.suc;S.suc=cl(S.suc+j76sleep(S),0,sucCap(S));try{liveRivals(true).forEach(v=>v.suc=cl(v.suc+j76sleep(v),0,sucCap(v)))}catch(e){}const mid=S.suc;
  const r=e0.apply(this,arguments);
- try{if(S&&!S.dead&&(S.turn!==t0||S.tuan!==tu)){const g=Math.min(100,mid+((typeof harsh==="function"&&harsh())?1:4))-s0;if(g>0){
+ try{if(S&&!S.dead&&(S.turn!==t0||S.tuan!==tu)){const g=Math.min(typeof sucCap==="function"?sucCap(S):100,mid+((typeof harsh==="function"&&harsh())?1:4))-s0;if(g>0){
   log(`<span class="g">Ngủ một đêm: Sức +${g}</span>`);const line=`<p>Ngươi ngủ một đêm: <span class="g">Sức +${g}</span>${S.doctor?" (có thái y tâm phúc)":""}</p>`;
   const m=Q.find(x=>x&&/^Tin trong cung/.test(x.t||"")&&typeof x.h==="string");if(m)m.h+=line;else{try{popNum&&popNum("suc",g)}catch(e){}}}
   if(Q.length&&$("modal").hidden)showModal();render()}}catch(e){}return r}})();
