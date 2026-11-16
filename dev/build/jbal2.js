@@ -279,7 +279,9 @@ Object.assign(BAL,{road:{get first(){return BAL.st14.parts[1][0]+1},get last(){r
  cap:{tt_mat:4},
  /* B2 roads (jrd_td.js, jrd_ch.js): td_an rank = the rank index (RANKS[i]) from which her own petition is read; ch_co trust = Thái hậu favour (S.th) from which she treats her as a partner; ch_benh heir = S.th from which the dying
     Thái hậu hands her people to her; ch_bi shield = months of shelter (S.shield) won by the .11 win */
- td_an:{rank:3},ch_co:{trust:50},ch_benh:{heir:40},ch_bi:{shield:3},
+ td_an:{rank:3},
+ /* nc roads: months of cấm túc (S.confined) a lost nc_gian / nc_tuc / nc_vuong beat puts her under */
+ ncConf:{gian:3,tuc:1,vuong:1},ch_co:{trust:50},ch_benh:{heir:40},ch_bi:{shield:3},
  /* Lợi thế the tt_mat rare «Hoàng hậu tiến lời» (S.st.f14.tienloi) gives at chapter 13 «Tranh ngôi Trung cung»;
     read by the ch13 hồi form (B3, review/road-b3) — today hau is a milestone checklist with no Lợi thế */
  tienSc:2,
