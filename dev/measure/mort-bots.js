@@ -9,17 +9,19 @@
    Deaths are counted per group and cause: lifespan / accident / plot (jmort ledger S.mort.dl) and illness / childbirth / punishment / other
    (people who died that month and are not in the ledger, classified from the month's text). Her ending = over() title + fate. */
 const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
-const R=path.resolve(__dirname,'../..');const LIVES=+process.argv[2]||20,YEARS=+process.argv[3]||5,OUT=process.argv[4];
+const R=path.resolve(__dirname,'../..');const CH=+process.env.CHUNK||5;const LIVES=+process.argv[2]||20,YEARS=+process.argv[3]||5,OUT=process.argv[4];
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:1000,height:755},reducedMotion:'reduce'});
  await ctx.route('http://ts.local/**',r=>{const u=decodeURIComponent(new URL(r.request().url()).pathname);const f=R+u;if(!fs.existsSync(f)||fs.statSync(f).isDirectory())return r.fulfill({status:404,body:''});
   r.fulfill({status:200,contentType:/\.html$/.test(f)?'text/html; charset=utf-8':/\.json$/.test(f)?'application/json':'application/octet-stream',body:fs.readFileSync(f)})});
- const page=await ctx.newPage();const errs=[];page.on('pageerror',e=>errs.push(e.message.slice(0,200)));
- await page.route(/^https?:\/\/(?!ts\.local)/,r=>/image|media|font/.test(r.request().resourceType())?r.abort():r.continue());await page.goto('http://ts.local/dev/index.html',{waitUntil:'domcontentloaded',timeout:120000});await page.waitForTimeout(2500);
- if(process.env.MORT_OFF)await page.evaluate(()=>{BAL.mort.on=0});
+ const errs=[];
  const all={};
  const STY=(process.env.STYLES||"sensible,random,reckless,world").split(",");
- for(const style of STY){
-  all[style]=await page.evaluate(([style,LIVES,YEARS])=>{const quiet=()=>{try{Q.length=0}catch(e){}};const out={lives:[],deaths:[],errs:[]};
+ for(const style of STY){all[style]={lives:[],deaths:[],errs:[]};
+  for(let done=0;done<LIVES;done+=CH){
+  const page=await ctx.newPage();page.on('pageerror',e=>errs.push(e.message.slice(0,200)));
+  await page.route(/^https?:\/\/(?!ts\.local)/,r=>/image|media|font/.test(r.request().resourceType())?r.abort():r.continue());await page.goto('http://ts.local/dev/index.html',{waitUntil:'domcontentloaded',timeout:120000});await page.waitForTimeout(2500);
+  if(process.env.MORT_OFF)await page.evaluate(()=>{BAL.mort.on=0});
+  let part;try{part=await page.evaluate(([style,LIVES,YEARS])=>{const quiet=()=>{try{Q.length=0}catch(e){}};const out={lives:[],deaths:[],errs:[]};
    const strip=x=>String(x).replace(/<[^>]+>/g,'');let ending=null;const o0=over;over=function(h,t,fate,alive){ending={h,fate:strip(fate),t:strip(t).slice(0,160),alive:!!alive,age:S.age,year:S.year};return o0.apply(this,arguments)};
    const die0=die;if(style==="world")die=function(){};
    for(let l=0;l<LIVES;l++){SLOT=3;try{store.set(NL_KEY,null)}catch(e){}ending=null;start();quiet();if(style==="world"){S.tho=999}if(style==="mother"){const k=mkKid("m",1);k.heir=true;S.kids.push(k);S.heir={k,v:null};S.rank=Math.max(S.rank,3)}if(!S.mort)S.mort={}
@@ -46,7 +48,8 @@ const R=path.resolve(__dirname,'../..');const LIVES=+process.argv[2]||20,YEARS=+
     const npcMom=out.deaths.filter(d=>d.g==="consort"&&d.c==="childbirth"&&d._l===l).length;
     out.lives.push({end:S.dead?ending:{h:"alive"},years:S.year,age:S.age,emp0,empDied,births,pregs,kidsBorn:S.kids.length,kidsAlive:S.kids.filter(k=>k.alive).length,
      mis:S.misN||0,still:S.stillN||0,hard:S.hardN||0,choice:S.choiceN||0,barren:!!S.barren,momDied:!!(ending&&/Khó sinh|băng huyết|Giữ con|giữ con/i.test(ending.fate||"")),stillPreg:!!S.preg,npcB})}
-   over=o0;die=die0;return out},[style,LIVES,YEARS]);
+   over=o0;die=die0;return out},[style,Math.min(CH,LIVES-done),YEARS])}catch(e){part={lives:[],deaths:[],errs:[String(e).slice(0,120)]}}
+  await page.close();for(const k of ["lives","deaths","errs"])all[style][k].push(...part[k]);}
   console.error(style,"done",all[style].lives.length,all[style].errs.slice(0,2))}
  all.pageErrors=errs.slice(0,10);if(OUT)fs.writeFileSync(OUT,JSON.stringify(all));
  /* tables */
