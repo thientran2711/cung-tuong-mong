@@ -277,5 +277,8 @@ Object.assign(BAL,{psk:{ghen:10,son1:{hhOan:15,momOan:8},emp:{th:8,oan:10},th:{s
 Object.assign(BAL,{road:{get first(){return BAL.st14.parts[1][0]+1},get last(){return BAL.st14.parts[1][1]},finTier:{win:3,mid:1,lose:-1},
  /* tt_mat .6: the rank index the pact with the Hoàng hậu holds her under (RANKS[cap].n is printed) */
  cap:{tt_mat:4},
+ /* Lợi thế the tt_mat rare «Hoàng hậu tiến lời» (S.st.f14.tienloi) gives at chapter 13 «Tranh ngôi Trung cung»;
+    read by the ch13 hồi form (B3, review/road-b3) — today hau is a milestone checklist with no Lợi thế */
+ tienSc:2,
  /* a full-road life opens the Thanh mai trúc mã side story chapters a/b/c once the main story reaches these chapter numbers */
  tm:[2,6,10]}});
