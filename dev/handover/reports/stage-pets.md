@@ -35,3 +35,16 @@ The room stage on the page keeps the right plaque column (iPad 148 px, Fold 181 
 - Own-room order: homePeople() already lists the maid before others; a maid's pet follows the maid; eunuchs etc. come after → next swipe (not separately testable here: no eunuchs in the test state).
 - Old-save: no save field touched. Dư đồ locks untouched.
 ## Shots (FULL screen, device + size in the file name): dev/handover/reports/stage-pets-r4/ {ipad-1180x820,fold-755x1000}-{n1-view1,n2-view1,n2-view2,n6-view1,n6-view3,n6-swipe2-drag,n6-swipe2-anim}.jpg
+
+# ROUND 5 (owner rulings 16/11 18:35Z via s21/s22) — own room, fixed spots, Fold .79
+- Group-photo stagger/overlap: gone (r4). People NEVER overlap: j59 now uses N fixed EQUAL COLUMNS (KIT 33.7b `kitSlotCxE/kitSlotSwE` in jkit.js): person i stands at the centre of column i of the free width, fits when art ≤ column; pets may overlap a person's legs only (pet clamped inside the free area, torso cover ≤ 8 % checked).
+- Fold ratio: the maxPx 542 cap was applied on every device (`capOn=true` always) — the KIT canon says iPad-wide layouts only. Now `capOn = viewport ≥ 1000` and the cap fallback only happens when even ONE person does not fit. Fold stage 771 → body 609 px = .79 (was 542 = 70.3 %); iPad 492 = .79.
+## Numbers (own room "Ngọc Thanh các", her + maid + pet, real art)
+| device | people per view | body px (ratio) | overlap | chips | swipe |
+|---|---|---|---|---|---|
+| iPad 1180x820 | 2 (her + pet, maid) | 492 (.79) | none | right +2 (kids etc.), left after swipe | OK, back OK |
+| Fold 755x1000 | 2 | 609 (.79) | none | same | OK, back OK |
+Outdoor demo (garden, unknown NPCs = wide man silhouettes 267/330 px, so 1 per view there; the real full-screen place would give more): body 492 / 609, 6 people → 5 swipes, chips +1/+4 … +5/hidden, 0 arrows. stage-pets.js 16/16 pass both devices (0 page errors).
+## NOT done (needs main)
+Rule "Hành sự stage = ONLY her room; outdoor / other places only at the last Dư đồ level (full-screen place painting)": the Dư đồ courtyard-map level and the full-screen painting are not on main, and today other places still render on the Hành sự stage via goTo(). I did not change navigation (Dư đồ is another worker's area). The outdoor shots are the same stage layer used on a garden backdrop as a stand-in. Maid's pet: none in the test state (her pet only), the layout reserves it by the same rule.
+## Shots (full screen, device + size + kind in file name): dev/handover/reports/stage-pets-r4/{ipad-1180x820,fold-755x1000}-{ROOM-view1,ROOM-swipe-drag,ROOM-view2,OUTDOOR-n6-view1,OUTDOOR-n6-swipe-drag}.jpg

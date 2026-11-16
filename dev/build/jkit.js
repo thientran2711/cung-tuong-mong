@@ -75,7 +75,10 @@ function kitSlotSw(k,avail){return k>1?avail/(k+1):avail}
 function kitSlotCx(i,k,x0,avail){return x0+avail*(i+1)/(k+1)}
 function kitSlotScale(vis,avail){const k=vis.length,m=Math.max(0,...vis),sw=kitSlotSw(k,avail);return m>sw&&m>0?sw/m:1}
 function kitSlotNeed(vis){const k=vis.length,m=Math.max(0,...vis);return k>1?m*(k+1):m}
-window.kitSlotSw=kitSlotSw;window.kitSlotCx=kitSlotCx;window.kitSlotScale=kitSlotScale;window.kitSlotNeed=kitSlotNeed;
+/* KIT 33.7b (owner 16/11 18:35Z, own-room stage): N fixed spots = N equal columns of the free width (centre of column i); people NEVER overlap (art ≤ column), pets may overlap a person's legs only */
+function kitSlotSwE(k,avail){return avail/Math.max(1,k)}
+function kitSlotCxE(i,k,x0,avail){return x0+avail*(i+.5)/Math.max(1,k)}
+window.kitSlotSwE=kitSlotSwE;window.kitSlotCxE=kitSlotCxE;window.kitSlotSw=kitSlotSw;window.kitSlotCx=kitSlotCx;window.kitSlotScale=kitSlotScale;window.kitSlotNeed=kitSlotNeed;
 function kitBookFig(b,fac,H,o){const bt=b.ht>b.t?b.ht:b.t,span=Math.max(.2,b.b-bt),rel=o&&o.stage?Math.min(KIT_FIG.h*H,KIT_FIG.maxPx):H/KIT_FIG.man,body=Math.min(rel*(fac||1),H*.98),ih=body/span;return{ih,iw:ih*(b.ar||.45),dy:ih*(1-b.b),body,span}}
 window.kitBookFig=kitBookFig;
 /* KIT 33.4 · kitImgErr — the ONE null-safe fallback for inline <img onerror>: a picture that fails after a re-render detached it

@@ -115,9 +115,9 @@ function j59fill(tk){if(!tk)return;const ppl=typeof curPeople==="function"?curPe
 function j59clear(tk){const st=document.getElementById("stage");try{if(st){st.querySelectorAll(".kspet").forEach(e=>e.remove());delete st.dataset.j59pg;delete st.dataset.j59slots;st.querySelectorAll(".j59more").forEach(c=>c.remove())}}catch(e){}
  if(tk){["left","right","top","bottom","width","height"].forEach(k=>tk.style.removeProperty(k));tk.querySelectorAll(".tok").forEach(t=>{["left","bottom","display","width"].forEach(k=>t.style.removeProperty(k))})}}
 /* KIT 33.8: put the stage pets (one <img.kspet> each, static; reused between layouts) at their fixed spot: visible left edge = person's visible right edge - ov x pet width, feet on the floor line */
-function j59petPut(st,L,H,fo,pVH){const keep=new Set();
+function j59petPut(st,L,H,fo,pVH,limR){const keep=new Set();
  for(const [r,cx,cw,key] of L){if(!r)continue;const vh=pVH(r,H),ih=vh/Math.max(.05,r.b.b-r.b.t),iw=ih*r.b.ar,vw=iw*(r.b.r-r.b.l);
-  const left=cx+cw/2-KIT_PET.ov*vw-iw*r.b.l,bottom=fo-(1-r.b.b)*ih;
+  let left=cx+cw/2-KIT_PET.ov*vw-iw*r.b.l;if(limR!=null&&left+iw*r.b.r>limR)left=limR-iw*r.b.r;/* a pet may overlap its owner's legs, never leave the free area */const bottom=fo-(1-r.b.b)*ih;
   let im=st.querySelector('.kspet[data-pk="'+key+'"]');if(!im){im=document.createElement("img");im.className="kspet";im.alt="";im.decoding="async";im.draggable=false;im.dataset.pk=key;st.appendChild(im)}
   if(im.getAttribute("src")!==r.a.src){im.setAttribute("src",r.a.src);im.crossOrigin="anonymous"}
   im.dataset.pet=r.a.k;im.dataset.cls=r.a.cls;if(r.a.ph)im.dataset.ph="1";else delete im.dataset.ph;/* ph = PLACEHOLDER picture (no img/pet-stage art for this species yet) */
@@ -161,7 +161,7 @@ function j59lay(){const st=document.getElementById("stage");if(!st||!S)return;co
  const meX=me?{f:1,b:mb||{t:0,b:1,l:0,r:1},ar:mar}:null;
  const F=E.filter(x=>!x.nf);const nfW=Math.max(0,...E.filter(x=>x.nf).map(x=>x.tok.offsetWidth));
  const KA=st.__kfa;/* KIT_FLOOR anchor (jk2b kitFloorFit): feet on the painted floor line while the figure keeps its kit height */
- let capOn=true;/* KIT §0: the left page in the spread and the one-page room are the same page */
+ let capOn=innerWidth>=1000;/* KIT §33 (canon): the maxPx cap applies to iPad-wide layouts only; Fold / phones keep the full .79 of their taller stage *//* KIT §0: the left page in the spread and the one-page room are the same page */
  const size=(tagH)=>{const fo0=Math.max(sH*.03,tagH+8);const foA=KA&&KA.feet?sH-KA.feet:0;
   const fo=Math.max(fo0,Math.min(foA,sH-topR-KF.h*sH));CAP=sH-fo-topR;return{fo,H:Math.max(sH*.2,Math.min(KF.h*sH,CAP,(KF.maxPx&&capOn)?KF.maxPx:1e9))}};
  const maxF=Math.max(1,...F.map(x=>x.f));
@@ -175,22 +175,22 @@ function j59lay(){const st=document.getElementById("stage");if(!st||!S)return;co
  {}
  const leftFor=(z)=>{let ll=8+gL;try{const kL=document.getElementById("kshL");const head=sH-z.fo-Math.min(z.H*maxF,sH-z.fo-topR);
    if(kL&&!kL.hidden&&kL.offsetHeight>4){const q=kL.getBoundingClientRect();if(q.bottom-R.top+4>=head&&(q.left+q.right)/2<R.left+sW*.5)ll=Math.max(ll,q.right-R.left+6)}}catch(e){}return ll};
- const geo=(N,z)=>{const paged=nAll>N;const CW=0;/* page-chip gutters: 46 px, 34 on phones so two slots still hold a man (KIT 33.7) */const rr=widthFor(z);const lf=leftFor(z);const pL=lf>8+gL,pR=rr>rightR;const x0=lf+CW;/* a reserved right column that ends above the name row holds the "+N" chip under it: no second gutter */const CWR=paged&&z.rsv&&rr>=CW+8?0:CW;const avail=Math.max(40,sW-x0-rr-CWR);/* review/stage-side (owner 16/11): k people stand at 1/(k+1), 2/(k+1)… of the free width, so N people per page need a spacing of avail/(N+1) (1 person = the whole width) */const sw=kitSlotSw(N,avail);/* KIT 33.7 slot function (jkit) */return{N,paged,CW,rr,xl:lf,pL,pR,limL:x0,limR:x0+avail,x0R:CWR?rr:rr-CW,x0,avail,sw}};
+ const geo=(N,z)=>{const paged=nAll>N;const CW=0;/* page-chip gutters: 46 px, 34 on phones so two slots still hold a man (KIT 33.7) */const rr=widthFor(z);const lf=leftFor(z);const pL=lf>8+gL,pR=rr>rightR;const x0=lf+CW;/* a reserved right column that ends above the name row holds the "+N" chip under it: no second gutter */const CWR=paged&&z.rsv&&rr>=CW+8?0:CW;const avail=Math.max(40,sW-x0-rr-CWR);/* review/stage-side (owner 16/11): k people stand at 1/(k+1), 2/(k+1)… of the free width, so N people per page need a spacing of avail/(N+1) (1 person = the whole width) */const sw=kitSlotSwE(N,avail);/* KIT 33.7b fixed spots: N equal columns (jkit) — people never overlap, pets may overlap legs */return{N,paged,CW,rr,xl:lf,pL,pR,limL:x0,limR:x0+avail,x0R:CWR?rr:rr-CW,x0,avail,sw}};
  /* a figure fits its slot when its whole visible art (kitFigBody l..r) is within the slot spacing — no neighbour overlap, ever (OD:L1049, KIT 33.7 slot function in jkit) */
  /* review/j59-fix: a slot is never narrower than a name chip (min 60 px + 8): beside a reserved plaque column (844x390, 2-column plaques)
     the page holds fewer people instead of squeezing two into the gap with overlapping names */
  const J59SWMIN=68;
  const mxW=h=>Math.max(me?coreW(meX,h):0,...F.map(x=>coreW(x,h)));/* a pet on the right must end before the right neighbour's art begins: w/2 + pet + widest/2 <= spacing */
- const fits=(g,h,nomin)=>(nomin||g.sw>=J59SWMIN)&&(!me||coreW(meX,h)<=g.sw)&&F.every(x=>coreW(x,h)<=g.sw)&&nfW<=g.sw&&(!mePet||coreW(meX,h)/2+pEx(mePet,h)+mxW(h)/2<=g.sw)&&F.every(x=>!x.pet||coreW(x,h)/2+pEx(x.pet,h)+mxW(h)/2<=g.sw);
+ const fits=(g,h,nomin)=>(nomin||g.sw>=J59SWMIN)&&(!me||coreW(meX,h)<=g.sw)&&F.every(x=>coreW(x,h)<=g.sw)&&nfW<=g.sw;
  /* measure EVERY name chip (all pages), not only the page on screen: a hidden chip reads 0 px and the floor band (fo) would shift between pages (reviewer, 844x390 page 3) */
   E.forEach(x=>{x.tok.style.display=""});if(mt)mt.classList.remove("j59off");
   let tagH=Math.max(14,mt&&mt.firstChild?mt.firstChild.offsetHeight:0,...E.map(x=>x.tag?x.tag.offsetHeight:0));
  /* review/stage-side (owner 16/11 fixed slots): a page holds at most as many slots as there are people (2 people = 1/3 · 2/3, not 2 of 3 slots);
     when they do not fit at full height, EVERYONE is scaled down together (same scale, J59HMIN at least) before the page drops a slot */
  let Z=size(tagH),N=Math.max(1,Math.min(MAXN,nAll)),G=geo(N,Z);
- if(!fits(G,Z.H)&&!capOn&&KF.maxPx){capOn=true;Z=size(tagH);G=geo(N,Z)}
  /* KIT 33.9 (owner 16/11 18:22Z): people NEVER shrink — a view holds as many as fit at the kit figure height (up to 6), the rest are reached by swiping */
  while(N>1&&!fits(G,Z.H)){N--;G=geo(N,Z)}
+ if(!fits(G,Z.H)&&!capOn&&KF.maxPx){capOn=true;Z=size(tagH);G=geo(N,Z)}/* only ONE person that still does not fit falls back to the maxPx cap */
  if(!fits(G,Z.H,1)){/* a stage narrower than ONE whole person: that one person scales down to fit */
   let lo=sH*.15,hi=Z.H;for(let k=0;k<22;k++){const m=(lo+hi)/2;if(fits(G,m,1))lo=m;else hi=m}Z.H=lo}
  /* the name chips are at most one slot wide (they wrap, never cut); measure them at that width, then size the floor band for them */
@@ -210,7 +210,7 @@ function j59lay(){const st=document.getElementById("stage");if(!st||!S)return;co
  const persons=E.filter(x=>j59person(x.p)).length,after=E.slice(s1).filter(x=>j59person(x.p)).length,before=(showMe?0:1)+E.slice(0,s0).filter(x=>j59person(x.p)).length;
  if(pages>1)st.dataset.j59pg=[pg,pages,s0,s1,M].join(",");else delete st.dataset.j59pg;
  /* fixed slots (owner 16/11): 1 → centre, 2 → 1/3 · 2/3, 3 → 1/4 · 2/4 · 3/4 of the free width (stage minus the side column) */
- const kOn=(showMe?1:0)+vis.length;const cxOf=i=>kitSlotCx(i,kOn,G.x0,G.avail);st.dataset.j59free=G.x0.toFixed(1)+","+G.avail.toFixed(1);const floorY=st.clientHeight-fo;
+ const kOn=(showMe?1:0)+vis.length;const cxOf=i=>kitSlotCxE(i,N,G.x0,G.avail);st.dataset.j59free=G.x0.toFixed(1)+","+G.avail.toFixed(1);const floorY=st.clientHeight-fo;
  if(tk){tk.style.setProperty("left","0px","important");tk.style.setProperty("right","0px","important");tk.style.setProperty("top","0px","important");tk.style.setProperty("bottom","0px","important");
   ["paddingLeft","paddingRight","paddingBottom","columnGap","justifyContent"].forEach(k=>tk.style[k]="")}
  const centres=[];let slot=0;const usedPets=[];
@@ -231,7 +231,7 @@ function j59lay(){const st=document.getElementById("stage");if(!st||!S)return;co
   x.im.style.setProperty("margin-bottom",(-(1-x.b.b)*ih).toFixed(1)+"px","important");x.im.classList.add("j59sz");x.im.style.translate="";
   t.style.left=(cx-cw/2).toFixed(1)+"px";t.style.bottom=fo.toFixed(1)+"px";t.style.zIndex="";if(x.tag)x.tag.style.translate=""}
  st.dataset.j59slots=centres.map(c=>(c+st.clientLeft).toFixed(1)).join(",");st.dataset.j59n=String(N);
- j59petPut(st,usedPets,H,fo,pVH);
+ j59petPut(st,usedPets,H,fo,pVH,G.limR);
  j59chips(st,R,pages>1?{pg,pages,before,after,xl:G.xl,xr:G.rr}:null);j59swipe(st);
  st.__j59here=persons}
 /* KIT element "rank outline": thin edge glow in --halo (her rank colour) along her own figure only; never an aura; pulse only with Hiệu ứng hình and no reduced motion.
