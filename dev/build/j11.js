@@ -96,7 +96,7 @@ function kitPixi(){if(window.PIXI&&window.PIXI.Application)return Promise.resolv
  kitPixi.p=new Promise((ok,no)=>{const s=document.createElement("script");s.src=PIXI_SRC;s.async=true;s.onload=()=>window.PIXI?ok(window.PIXI):no(new Error("pixi"));s.onerror=()=>{kitPixi.p=null;s.remove();no(new Error("pixi load"))};document.head.appendChild(s)});return kitPixi.p}
 function pxLoad(){if(PX.loading||PX.app||PX.failed||RM)return;PX.loading=true;
  kitPixi().then(async()=>{try{const app=new PIXI.Application();const st=$("stage");await app.init({backgroundAlpha:0,resizeTo:st,antialias:false,autoDensity:true,resolution:Math.min(2,devicePixelRatio||1)});
-  app.ticker.maxFPS=60;
+  app.ticker.maxFPS=15;/* PERF (owner 16/11 lag): the backdrop only breathes ±0.3 %, so 15 fps is invisible; every frame of this canvas costs a full-stage WebGL composite, double with the weather canvas */
   /* lag-play (owner 16/11 15:05Z): the stage collapses to 0 px under other tabs; resizing the WebGL canvas to 0 and back reallocated its
      buffers twice per tab switch (0.5-5 s on a slow phone). A hidden (0-size) stage keeps its canvas; same size = nothing to do. */
   {const r0=app.resize;if(typeof r0==="function")app.resize=function(){try{const e=this.resizeTo||st,w=e.clientWidth,h=e.clientHeight;if(!w||!h)return;const sc=this.screen;if(sc&&Math.round(sc.width)===Math.round(w)&&Math.round(sc.height)===Math.round(h))return}catch(x){}return r0.apply(this,arguments)}}
@@ -106,7 +106,7 @@ function pxCap(){return kitView().pages===1?60:120}
 function pxKind(){const P=placeOf(S.place),night=(S.buoi||0)===B4L,out=["vuon","lc","home","tgk","maid"].includes(P.sc),w=S.wx?S.wx.k:"dust";
  if(out){const m={petal:"petal",rain:"rain",mist:"smoke",dust:night?"fly":"dust",sun:"dust",storm:"rain",leaf:"leaf",wind:"leaf",snow:"snow",snowh:"snow",frost:"snow",snowp:"snow"}[w]||"dust";return m}
  if(P.sc==="tn")return"smoke";if(P.sc==="thu")return"dust";if(night)return"fly";return w==="rain"||w==="storm"?"rain":"dust"}
-async function pxScene(){if(!S||RM||!OPT.fxon){if(PX.app)PX.app.canvas.style.display="none";return}if(!PX.app){pxLoad();return}PX.app.canvas.style.display="";
+async function pxScene(){if(!S||RM||!OPT.fxon){if(PX.app)PX.app.canvas.style.display="none";return}if(!PX.app){pxLoad();return}PX.app.canvas.style.display="";pxWake();
  lightTick();const P=placeOf(S.place),k=P.sc+"|"+pxKind()+"|"+(S.wx?S.wx.k:"")+"|"+(S.buoi||0);if(PX.key===k)return;PX.key=k;
  for(const p of PX.parts)p.destroy();PX.parts=[];if(PX.bg){PX.bg.destroy({texture:false});PX.bg=null}
  /* ONE backdrop (owner 11/15): the Pixi room copy uses the very picture #scimg shows (kitFloorFit may swap in the portrait painting) */
@@ -130,7 +130,11 @@ function pxTick(tk){const d=tk.deltaTime,W=PX.app.screen.width,H=PX.app.screen.h
  if(S&&S.wx&&S.wx.k==="storm"&&Math.random()<.003*d){sfx("sfx-thunder");if(typeof kfBolt==="function")kfBolt()}  /* lightning = kit weather layer kfBolt (jfx): flashes the WHOLE stage frame */
  for(const p of PX.parts){const v=p.v;if(v.kind==="lamp"){if(v.on>0){v.on-=d}else p.alpha=Math.min(.55,p.alpha+.01*d)*(RM?1:.85+.15*Math.sin(PX.t*9+v.ph));p.x=v.fx*W;p.y=v.fy*H;continue}if(v.kind==="star"){p.y=v.fy*H;p.alpha=.5+.4*Math.sin(PX.t*2+v.ph);continue}v.ph+=.02*d;if(S&&S.wx&&S.wx.k==="wind")p.x+=1.2*d;p.x+=(v.vx+Math.sin(v.ph)*.3)*d;p.y+=v.vy*d;if(v.kind==="fly"){p.alpha=.4+.5*Math.sin(v.ph*3);p.x+=Math.sin(v.ph*1.3)*.4*d;p.y+=Math.cos(v.ph)*.4*d}if(v.kind==="petal"||v.kind==="leaf")p.rotation+=.02*d;
   if(p.y>H+12){p.y=-10;p.x=Math.random()*W}if(p.y<-20){p.y=H+10;p.x=Math.random()*W}if(p.x<-20)p.x=W+10;if(p.x>W+20)p.x=-10}
- for(const p of PX.fxl.children.slice()){const v=p.v;v.vy+=.15*d;p.x+=v.vx*d;p.y+=v.vy*d;p.rotation+=.05*d;v.life-=d;p.alpha=Math.max(0,v.life/90);if(v.life<=0)p.destroy()}}
+ for(const p of PX.fxl.children.slice()){const v=p.v;v.vy+=.15*d;p.x+=v.vx*d;p.y+=v.vy*d;p.rotation+=.05*d;v.life-=d;p.alpha=Math.max(0,v.life/90);if(v.life<=0)p.destroy()}
+ /* PERF (owner 16/11 lag): the backdrop is a still painting; nothing moves on this canvas (weather is the jfx canvas). Once laid out, draw it ONCE and stop the ticker; pxWake() draws again on scene change / resize. Two live full-stage WebGL canvases made weather scenes lag. */
+ if(PX.bg&&!PX.parts.length&&!PX.fxl.children.length){PX.idle=(PX.idle||0)+1;if(PX.idle>3){PX.idle=0;PX.app.ticker.stop()}}else PX.idle=0}
+function pxWake(){try{if(PX.app&&!PX.app.ticker.started&&!(typeof kitStageCovered==="function"&&kitStageCovered()))PX.app.ticker.start()}catch(e){}}
+window.addEventListener("resize",()=>{pxWake();setTimeout(pxWake,300)});
 /* ---- settings pop-over on the title screen ---- */
 function optHTML(){return `<div class="optbox"><button class="btn" id="o-snd">${OPT.snd?"Tắt âm thanh":"Bật âm thanh"}</button>
  <label>Nhạc <input type="range" id="o-mus" min="0" max="1" step=".05" value="${OPT.mus}"></label><label>Hiệu ứng âm <input type="range" id="o-sfx" min="0" max="1" step=".05" value="${OPT.sfx}"></label><label>Giọng <input type="range" id="o-vo" min="0" max="1" step=".05" value="${OPT.vo==null?.7:OPT.vo}"></label>

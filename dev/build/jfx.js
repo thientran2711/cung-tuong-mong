@@ -134,13 +134,15 @@ function kfTick(tk){const d=Math.min(3,tk.deltaTime),H=innerHeight,W=innerWidth,
  for(let i=L.length-1;i>=0;i--){const s=L[i],v=s.v;v.life-=d;
   if(v.life<=0||(v.amb&&(v.lay==="wx"&&KFX.sr?(s.y>KFX.sr.y+KFX.sr.h+20||s.y<KFX.sr.y-90||s.x<KFX.sr.x-90||s.x>KFX.sr.x+KFX.sr.w+90):(s.y>H+20||s.y<-90||s.x<-90||s.x>W+90)))){kfkFree(s);L.splice(i,1);continue}
   if(v.fx!=null){if(KFX.sr){s.x=KFX.sr.x+v.fx*KFX.sr.w;s.y=KFX.sr.y+v.fy*KFX.sr.h}v.ph+=.03*d;s.alpha=v.a0*(.7+.3*Math.sin(v.ph*3));continue}
-  v.ph+=.03*d;if(v.gust)s.x+=KFX.gust*v.gust*d;v.vx*=Math.pow(v.drag,d);v.vy=v.vy*Math.pow(v.drag,d)+v.g*d;s.x+=(v.vx+(v.sway?Math.sin(v.ph)*v.sway:0))*d;s.y+=v.vy*d;
+  v.ph+=.03*d;if(v.gust)s.x+=KFX.gust*v.gust*d;if(v.drag!==1){const k=Math.pow(v.drag,d);v.vx*=k;v.vy=v.vy*k+v.g*d}else if(v.g)v.vy+=v.g*d;s.x+=(v.vx+(v.sway?Math.sin(v.ph)*v.sway:0))*d;s.y+=v.vy*d;
   if(v.spin)s.rotation+=v.spin*d;if(v.coin)s.scale.x=v.sc*Math.cos(v.ph*3);if(v.grow)s.scale.set(s.scale.y+v.grow*d);
   const f=v.life/v.max;let a=v.a0;if(v.fade==="out")a=v.a0*Math.min(1,f*2.2);else if(v.fade==="inout")a=v.a0*Math.min(1,f*4,(1-f)*6);if(v.tw)a*=.55+.45*Math.sin(v.ph*v.tw*40);if(v.bl){const q=.5+.5*Math.sin(v.ph*v.bl);a*=.3+.7*Math.sqrt(q)}s.alpha=Math.max(0,a);
   if(v.amb)amb++}
  KFX.live=L.length;KFX.amb=amb;kfBoltTick(d);
+ /* PERF (owner 16/11 lag): ambient-only weather (snow / fireflies / petals / mist) runs at 30 fps (motion is dt-based, so speed is unchanged); bursts and lightning get 60; rain streaks are dt-based too */
+ {let fast=KFX.bt!=null;if(!fast)for(let i=0;i<L.length;i++){const v=L[i].v;if(!v.amb){fast=true;break}}const mf=fast?60:30;if(KFX.app.ticker.maxFPS!==mf){KFX.app.ticker.maxFPS=mf;KFX.tgt=mf}}
  /* quality: frames slower than ~48 fps for half a second → fewer particles; steady 58+ for 4 s → back up */
- const fps=KFX.app.ticker.FPS;KFX.fps=KFX.fps*.9+fps*.1;if(L.length>8){if(KFX.fps<48){if(++KFX.slow>30){KFX.q=Math.max(.3,KFX.q*.7);KFX.slow=0;KFX.fps=55}}else KFX.slow=0;if(KFX.fps>58){if(++KFX.fast>240&&KFX.q<1){KFX.q=Math.min(1,KFX.q*1.15);KFX.fast=0}}else KFX.fast=0}
+ const fps=KFX.app.ticker.FPS;KFX.fps=KFX.fps*.9+fps*.1;if(L.length>8){if(KFX.fps<(KFX.tgt||60)*.8){if(++KFX.slow>30){KFX.q=Math.max(.3,KFX.q*.7);KFX.slow=0;KFX.fps=55}}else KFX.slow=0;if(KFX.fps>(KFX.tgt||60)*.96){if(++KFX.fast>240&&KFX.q<1){KFX.q=Math.min(1,KFX.q*1.15);KFX.fast=0}}else KFX.fast=0}
  if(!L.length&&!KFX.ambOn&&KFX.bt==null){KFX.app.ticker.stop();KFX.app.renderer.render(KFX.app.stage);KFX.app.canvas.style.display="none"}}
 /* TWO kit layers on the ONE jfx Pixi canvas (#kfxcv: painted sprites only, pointer-events none; owner 16/11):
    (1) WEATHER ("wx"): today's weather S.wx (j12 WX) — rain, snow, mist, weather petals / leaves, night fireflies — clipped to the STAGE rectangle (Pixi mask),
