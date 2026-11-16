@@ -23,5 +23,5 @@ function dawn(){const sum=wkSummary();S.wkSnap=wkSnap();let w=$("dawn");if(!w){w
  w.innerHTML=`<div class="dsky"><i class="lan l1"></i><i class="lan l2"></i><i class="lan l3"></i><i class="sun"></i></div><div class="dbox"><p class="dsea">${SEASON[S.month-1]} · ${S.wx?S.wx.n:""}</p><h2>Năm ${S.year} · Tháng ${S.month} · ${TUAN[S.tuan][0].toUpperCase()+TUAN[S.tuan].slice(1)}</h2>${lot}
   <div class="dcard"><h4>Tuần qua</h4><div class="ddelta">${d}</div>${sum.rank?`<p class="g"><b>${sum.rank}</b></p>`:""}${sum.kids>0?`<p class="g">Thêm ${sum.kids} con</p>`:""}${G||'<p class="past">Một tuần yên ả.</p>'}</div>
   <button class="main" id="dawn-go">Vào ngày mới</button></div>`;
- w.hidden=false;w.classList.toggle("rm",reducedMotion());void w.offsetWidth;w.classList.add("on");setTimeout(bell,reducedMotion()?0:1400);
+ w.hidden=false;w.classList.toggle("rm",reducedMotion());void w.offsetWidth;w.classList.add("on");setTimeout(bell,reducedMotion()?0:kitPace(1400));
  const close=()=>{w.classList.remove("on");setTimeout(()=>{w.hidden=true},reducedMotion()?0:350);w.onclick=null};w.onclick=close;const b=$("dawn-go");if(b)b.focus({preventScroll:true})}

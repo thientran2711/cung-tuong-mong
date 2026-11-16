@@ -16,19 +16,21 @@
    Labels are written already in the final words (KIT_REL, VANPHONG §1) and carry data-vp-skip, so the on-screen word fixer never
    turns "Nàng oán ta" into "Nàng ta oán ta". */
 const KRT_INT=v=>v==null||v===""||isNaN(+v)?null:Math.round(+v);
+/* KIT §52 / §49 (rewrite, owner 11/16 15:00Z 4.6–4.8): the SHORT word of a relation row — "Nàng → ta: thiện cảm" → Thiện cảm, "Nàng oán ta" → Oán, "Nàng ghen" → Ghen, "Hoàng thượng → ta: sủng" → Sủng, "Ta tin cậy" → Tin cậy */
+function KR2_W(l){l=String(l||"").toLowerCase();return /oán/.test(l)?"Oán":/ghen/.test(l)?"Ghen":/sủng/.test(l)?"Sủng":/ân tình/.test(l)?"Ân tình":/tin cậy/.test(l)?"Tin cậy":"Thiện cảm"}
 function kitRelSubj(p){try{if(!p)return"Nàng";if(S&&p===S.emp)return"Hoàng thượng";if(S&&(p===S.thO||p.kind==="th"))return"Thái hậu";if(p.queen)return"Hoàng hậu";
  /* the kit's own reading of who a person is (j60 personRoleRank: eunuch, guard, physician, men → "m") */
  let man=p.sex==="m"||!!p.male;try{if(typeof personRoleRank==="function")man=personRoleRank(p).sex==="m"}catch(e){}return man?"Hắn":"Nàng"}catch(e){return"Nàng"}}
 function kitRelLab(dir,text){return `<span class="krel krel-${dir==="me"?"me":"them"}" data-vp-skip>${text}</span>`}
 function kitRelRows(p,snap){const R=[];if(!p)return R;const sj=kitRelSubj(p),ob=sj==="Nàng"?"nàng":sj==="Hắn"?"hắn":sj;const s=snap||{};
  const dd=(now,was)=>now==null||was==null?null:KRT_INT(now)-KRT_INT(was);
- const row=(dir,label,now,was,kind)=>R.push({dir,label,now:KRT_INT(now),d:dd(now,was),kind:kind||"good"});
+ const row=(dir,label,now,was,kind,w)=>R.push({dir,label,w:w||KR2_W(label),sj,ob,now:KRT_INT(now),d:dd(now,was),kind:kind||"good"});
  try{
   const isRv=typeof rivals!=="undefined"&&rivals.includes(p);
-  if(S&&p===S.emp){row("them","Hoàng thượng → ta: sủng",S.sung,s.sung);return R}
+  if(S&&p===S.emp){row("them","Hoàng thượng → ta: sủng",S.sung,s.sung,"pos");return R}
   if(S&&(p===S.thO||p.kind==="th")){row("them","Thái hậu → ta: thiện cảm",S.th,s.th);return R}
   if(isRv){const known=(typeof knows!=="function"||knows(p))&&(typeof kitKnownName!=="function"||kitKnownName(p));/* a stranger ("Phi ???") shows no numbers */const o=s.pp&&s.pp[p.id]||null;
-   if(!known){R.push({dir:"them",label:`${sj} → ta: thiện cảm`,now:null,d:null,kind:"good",unk:(typeof KIT_REL==="object"&&KIT_REL.unknown)||"chưa rõ"});return R}
+   if(!known){R.push({dir:"them",label:`${sj} → ta: thiện cảm`,w:"Thiện cảm",sj,ob,now:null,d:null,kind:"good",unk:(typeof KIT_REL==="object"&&KIT_REL.unknown)||"chưa rõ"});return R}
    row("them",`${sj} → ta: ${(typeof KIT_REL==="object"&&KIT_REL.aff)||"thiện cảm"}`,aff(p,S),o&&o[0]);
    row("them",`${sj} ${(typeof KIT_REL==="object"&&KIT_REL.oan)||"oán ta"}`,oan(p,S),o&&o[2],"bad");
    row("them",`${sj} ghen`,p.ghen||0,o&&o[1],"bad");
@@ -36,40 +38,54 @@ function kitRelRows(p,snap){const R=[];if(!p)return R;const sj=kitRelSubj(p),ob=
   if(typeof p.loyal==="number"){const o=s.sp&&s.sp[p.sid!=null?p.sid:p.name]||null;
    row("them",`${sj} → ta: thiện cảm`,p.loyal,o&&o[0]);if(typeof tinOf==="function")row("me",(typeof KIT_REL==="object"&&KIT_REL.srvTrust)||"Ta tin cậy",tinOf(p),o&&o[1]);return R}
  }catch(e){console.error("kitRelRows",e)}
- R.push({dir:"them",label:`${sj} → ta: thiện cảm`,now:null,d:null,kind:"good",unk:"chưa rõ"});return R}
+ R.push({dir:"them",label:`${sj} → ta: thiện cảm`,w:"Thiện cảm",sj,ob,now:null,d:null,kind:"good",unk:"chưa rõ"});return R}
 function kitRelSign(d){return d>0?"+"+d:d<0?"−"+Math.abs(d):"0"}
 function kitRelCls(d,kind){return !d?"n":(kind==="bad"?d<0:d>0)?"g":"r"}
-function kitRelTable(rows,o){o=o||{};if(!rows||!rows.length)return"";/* review r6: a stranger's table has no numbers → no Hiện nay / Tuần này heads (they sat over the label in the narrow layout) */const head=o.head!==false&&rows.some(r=>r.unk==null);
- return `<div class="krtw"><div class="krt" role="table">${head?`<span class="krt-h" role="columnheader"></span><span class="krt-h krt-n" role="columnheader">Hiện nay</span><span class="krt-h krt-n" role="columnheader">${o.dHead||"Tuần này"}</span>`:""}`+
-  rows.map(r=>`<span class="krt-l" role="cell">${kitRelLab(r.dir,r.label)}</span>`+(r.unk!=null?`<span class="krt-u" role="cell">${r.unk}</span>`:
-   `<span class="krt-v" role="cell">${r.now==null?"—":r.now<0?"−"+Math.abs(r.now):r.now}</span><span class="krt-d ${kitRelCls(r.d,r.kind)}" role="cell">${r.d?kitRelSign(r.d):"—"}</span>`)).join("")+`</div></div>`}
+const kr2Num=r=>r.now==null?"—":r.now<0?"−"+Math.abs(r.now):String(r.now);
+/* the number's colour = its meaning (no bars): thiện cảm > 10 green / < −10 red; oán, ghen ≥ 20 red; sủng, ân tình green when > 0; else dim ink */
+const kr2Cls=r=>{const v=r.now;if(v==null)return"n";if(r.kind==="bad")return v>=20?"r":"n";if(r.kind==="pos")return v>0?"g":"n";return v>10?"g":v<-10?"r":"n"};
+/* KIT §52 kitRel2 — THE relation component, used by EVERY screen (owner 11/16 15:00Z 4.6 / 4.7 / 4.8): TWO column boxes, LEFT = that person → me ("Nàng → ta"),
+   RIGHT = me → that person ("Ta → nàng"); a header tab on each box; rows are SHORT words only (Thiện cảm / Oán / Ghen / Sủng / Tin cậy), the number in its meaning colour, NO bars;
+   o.week → inside each box the "Hiện nay" and "Tuần này" columns are aligned. cols = [{head, dir:"them"|"me"|"x", rows:[{w, now, d, kind:"good"|"bad"|"pos", gloss?, unk?}]}] (one or two boxes). */
+function kitRel2(cols,o){o=o||{};const wk=!!o.week;cols=(cols||[]).filter(c=>c&&c.rows&&c.rows.length);if(!cols.length)return"";
+ const box=c=>{const known=c.rows.some(r=>r.unk==null);const hd=wk&&known?`<span class="kr2-c"></span><span class="kr2-c kr2-n">Hiện nay</span><span class="kr2-c kr2-n">Tuần này</span>`:"";
+  return `<div class="kr2b kr2-${c.dir||"x"}"><div class="kr2h" data-vp-skip>${c.head}</div><div class="kr2g${wk&&known?" kr2k":""}" role="table">${hd}`+c.rows.map(r=>{
+    const g=r.gloss!==false&&typeof kitGloss==="function"&&typeof KIT_GLOSS==="object"&&KIT_GLOSS[r.gloss||r.w]?kitGloss(r.gloss||r.w,r.w):r.w;
+    return `<span class="kr2-l" role="cell" data-vp-skip>${g}</span>`+(r.unk!=null?`<span class="kr2-u" role="cell">${r.unk}</span>`:`<span class="kr2-v ${kr2Cls(r)}" role="cell">${kr2Num(r)}</span>`+(wk?`<span class="kr2-d ${kitRelCls(r.d,r.kind)}" role="cell">${r.d?kitRelSign(r.d):"—"}</span>`:""))}).join("")+`</div></div>`};
+ return `<div class="kr2w"><div class="kr2 kr2-n${cols.length}">${cols.map(box).join("")}</div></div>`}
+/* rows from kitRelRows(p,snap) → the two columns */
+function kitRelTable(rows,o){o=o||{};if(!rows||!rows.length)return"";const L=rows.filter(r=>r.dir!=="me"),M=rows.filter(r=>r.dir==="me");const f=rows[0],sj=f.sj||"Nàng",ob=f.ob||"nàng";
+ const wk=o.head!==false&&rows.some(r=>r.unk==null&&r.d!==undefined);
+ return kitRel2([{head:`${sj} → ta`,dir:"them",rows:L},{head:`Ta → ${ob}`,dir:"me",rows:M}],{week:wk})}
 function kitRelDelta(label,dir,d,kind){d=KRT_INT(d)||0;return `<span class="krd">${label?(dir==="none"?`<span class="krd-l" data-vp-skip>${label}</span>`:kitRelLab(dir||"them",label))+" ":""}<b class="${kitRelCls(d,kind)}">${kitRelSign(d)}</b></span>`}
 /* week snapshot: also "ta → nàng" and every servant (so their row shows the week's change) */
 (function(){if(typeof wkSnap!=="function")return;const s0=wkSnap;wkSnap=function(){const s=s0.apply(this,arguments);try{
   (typeof rivals!=="undefined"?rivals:[]).forEach(v=>{if(v&&v.id!=null&&s.pp){const a=s.pp[v.id]||(s.pp[v.id]=[v.rel||0,v.ghen||0,v.oan||0]);a[3]=aff(S,v)}});
   s.sung=S.sung;s.th=S.th;s.sp={};[S.maid].concat(S.staff||[]).forEach(x=>{if(x&&typeof x.loyal==="number")s.sp[x.sid!=null?x.sid:x.name]=[x.loyal,typeof tinOf==="function"?tinOf(x):0]})}catch(e){}return s}})();
-window.kitRelRows=kitRelRows;window.kitRelTable=kitRelTable;window.kitRelDelta=kitRelDelta;window.kitRelSubj=kitRelSubj;
+window.kitRelRows=kitRelRows;window.kitRelTable=kitRelTable;window.kitRel2=kitRel2;window.kitRelDelta=kitRelDelta;window.kitRelSubj=kitRelSubj;
 (function(){const st=document.createElement("style");st.id="kit-krt";st.textContent=`
-/* KIT §52 relation table: one grid, three aligned columns */
-.krtw{container-type:inline-size;min-width:0;max-width:100%} /* .krt alone is also the origin-roulette tile (jk2b .kroul .krt): always scope through .krtw */
-.krtw>.krt{display:grid;grid-template-columns:minmax(min(8.5em,46%),1fr) max-content max-content;column-gap:.7em;row-gap:.18em;align-items:baseline;
- margin:.2em 0 .45em;padding:.35em .55em;border:1px solid var(--k-hair,#e6d3ac);border-radius:var(--k-rad,8px);background:var(--k-card,#fffaf0);
- font-size:.86em;line-height:1.25;font-variant-numeric:tabular-nums}
-.krt-h{font-size:.68em;font-weight:600;letter-spacing:.02em;text-transform:uppercase;color:var(--k-lab,#8a7350);padding-bottom:.1em;border-bottom:1px solid var(--k-hair,#e6d3ac)}
-.krt-n,.krt-v,.krt-d{text-align:right;white-space:nowrap}
-.krt-l{min-width:0;overflow-wrap:anywhere}.krt-l .krel{font-weight:600}
-.krt-v{font-weight:700;color:var(--ink,#3a2a1a)}
-.krt-d{font-weight:700}.krt-d.g{color:var(--good,#2f7a46)}.krt-d.r{color:var(--bad,#b0332a)}.krt-d.n{color:var(--k-lab,#8a7350);font-weight:400}
-.krt-u{grid-column:1 / -1;min-width:0;text-align:left;padding-left:.8em;white-space:normal;overflow-wrap:anywhere;color:var(--k-lab,#8a7350);font-style:italic}
-/* a narrow column (phone page, iPad spread): the label takes its own line, the two numbers stay in their aligned columns under it */
-@container (max-width:240px){.krtw>.krt{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.krtw>.krt>.krt-h:first-child{display:none}.krt-l{grid-column:1 / -1;padding-top:.15em}.krt-n,.krt-v,.krt-d{text-align:left}.krt-u{grid-column:1 / -1;text-align:left}}
+/* KIT §52 kitRel2: two column boxes (that person → me | me → that person), short words, no bars; Hiện nay / Tuần này aligned inside each box */
+.kr2w{container-type:inline-size;min-width:0;max-width:100%;margin:.2em 0 .45em}
+.kr2{display:grid;gap:.5em;align-items:stretch;grid-auto-rows:1fr}.kr2-n2{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.kr2-n1{grid-template-columns:minmax(0,calc(50% - .25em))}/* boxes shown together = SAME width and height, tops aligned; a lone box is one column wide, never the whole row (owner 16:10Z) */
+.kr2b{min-width:0;border:1px solid var(--k-hair,#e6d3ac);border-radius:var(--k-rad,8px);background:var(--k-card,#fffaf0);overflow:hidden;--krc:#6a5040}
+.kr2-them{--krc:#7a4fa0}.kr2-me{--krc:#3f62a8}
+.kr2h{padding:.28em .55em;font-size:.76em;font-weight:700;letter-spacing:.02em;color:var(--krc);background:color-mix(in srgb,var(--krc) 12%,#fffaf0);border-bottom:1px solid var(--k-hair,#e6d3ac);overflow-wrap:anywhere}
+.kr2g{display:grid;grid-template-columns:minmax(0,1fr) max-content;column-gap:.6em;row-gap:.16em;align-items:baseline;padding:.3em .55em .4em;font-size:.86em;line-height:1.25;font-variant-numeric:tabular-nums}
+.kr2g.kr2k{grid-template-columns:minmax(0,1fr) max-content max-content}
+.kr2-c{font-size:.62em;font-weight:600;letter-spacing:.02em;text-transform:uppercase;color:var(--k-lab,#8a7350);padding-bottom:.1em;border-bottom:1px solid var(--k-hair,#e6d3ac)}
+.kr2-n,.kr2-v,.kr2-d{text-align:right;white-space:nowrap}
+.kr2-l{min-width:0;overflow-wrap:anywhere;font-weight:600;color:var(--ink,#2a1a12)}
+.kr2-v{font-weight:700}.kr2-v.g,.kr2-d.g{color:var(--good,#2d7a52)}.kr2-v.r,.kr2-d.r{color:var(--bad,#c23b22)}.kr2-v.n{color:var(--ink,#2a1a12)}
+.kr2-d{font-weight:700}.kr2-d.n{color:var(--k-lab,#8a7350);font-weight:400}
+.kr2-u{grid-column:1 / -1;min-width:0;white-space:normal;overflow-wrap:anywhere;color:var(--k-lab,#8a7350);font-style:italic}
+@container (max-width:260px){.kr2-n2,.kr2-n1{grid-template-columns:minmax(0,1fr)}.kr2g{font-size:.82em}}
 .krd{white-space:nowrap;font-weight:600}.krd .krel{font-weight:600}.krd b.g{color:var(--good,#2f7a46)}.krd b.r{color:var(--bad,#b0332a)}.krd b.n{color:var(--ink,#3a2a1a)}
 `;document.head.appendChild(st)})();
 /* KIT SAMPLE PAGE §47 (jkitpage loads later in the same script): §52 relation table + inline deltas, §57 number deltas */
-function kitRelSamples(){const R=(dir,label,now,d,kind)=>({dir,label,now,d,kind:kind||"good"});
+function kitRelSamples(){const R=(dir,label,now,d,kind)=>{const sj=/^Hoàng thượng/.test(label)?"Hoàng thượng":/^Thái hậu/.test(label)?"Thái hậu":/^Hắn/.test(label)||/tin cậy/.test(label)?"Hắn":"Nàng";return{dir,label,w:KR2_W(label),sj,ob:sj==="Nàng"?"nàng":sj==="Hắn"?"hắn":sj,now,d,kind:kind||(/sủng/.test(label)?"pos":"good")}};
  const rows={"Phi tần":[R("them","Nàng → ta: thiện cảm",-13,2),R("them","Nàng oán ta",3,3,"bad"),R("them","Nàng ghen",11,-4,"bad"),R("me","Ta → nàng: thiện cảm",0,null)],
   "Hoàng thượng":[R("them","Hoàng thượng → ta: sủng",42,5)],"Thái hậu":[R("them","Thái hậu → ta: thiện cảm",18,-2)],
-  "Kẻ hầu":[R("them","Hắn → ta: thiện cảm",64,1),R("me","Ta tin cậy",52,null)],"Người lạ":[{dir:"them",label:"Nàng → ta: thiện cảm",unk:"chưa rõ nàng nghĩ gì"}]};
+  "Kẻ hầu":[R("them","Hắn → ta: thiện cảm",64,1),R("me","Ta tin cậy",52,null)],"Người lạ":[{dir:"them",label:"Nàng → ta: thiện cảm",w:"Thiện cảm",sj:"Nàng",ob:"nàng",unk:"chưa rõ nàng nghĩ gì"}]};
  return [{id:"§52",title:"kitRelTable · phi tần · Hoàng thượng · Thái hậu · kẻ hầu · người lạ",html:()=>Object.values(rows).map(r=>kitRelTable(r)).join("")},
   {id:"§52",title:"kitRelTable · cột hẹp (< 240px)",html:()=>`<div style="max-width:220px">${kitRelTable(rows["Phi tần"])}</div>`},
   {id:"§52",title:"kitRelDelta · trong dòng sự việc",html:()=>`<p>Phi Tống Phương Hoa nhờ người đưa thư. ${kitRelDelta("Nàng oán ta","them",2,"bad")}, ${kitRelDelta("Nàng → ta: thiện cảm","them",-15)}; hai người khác: ${kitRelDelta("thiện cảm","none",7)}.</p>`},

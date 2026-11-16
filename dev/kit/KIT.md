@@ -30,6 +30,7 @@ IS the iPad page scaled (iPad s 1.0, iPad Pro 1.157, Fold 1.2195).
 - TOP BAR on the one page (jk4, design-scale p2): the time block flows as ONE wrapping row of whole items (18 px lines) and `kitTcFit` scales it
   down together (zoom 5 % steps, min 80 %) when it would be taller than her name block — so the bar has the spread's height and the page box
   under it is the spread's (582x623 both modes).
+- BOTTOM BAR on the one page (owner 16/11 13:25Z (C), review/phone-bars; sample §0b): the 8 tabs are TWO ROWS OF 4 big buttons (36 px rows, label .86 rem via j57 `--tfs`; `tabsFit` sets `cols = ceil(n/2)` when `kitView().pages===1`, the spread keeps ONE row) and Sang buổi is ONE tall 84 px button spanning both rows at the right (p1 `:where(.kv1) .bar .main`). One rule in the kit bar, no per-screen CSS. The page box under the bars is ~25 px shorter than the spread's — the price of the bigger buttons (see the phone-bars report).
 - TAB MODE (j6 `KIT_TABMODE` = maptab, cardtab): every tab-dependent class of `.game` is reset before EVERY panel render; the open tab's renderer
   sets its own. Test: `dev/test/tab-pairs.js` (every tab→tab pair, real taps, 1180x820 + 755x1000).
 - OPEN (design-scale-p2 review, phase 4): kit modals / page content still carry per-mode `:where(.kv1/.kv2)` rules carried over by the phase-3 codemod, which this RULE forbids: jpdlg `.kpdlg` grid, j79 dawn `.kpanel` paddings + `.kpsc` scene-person card (kpid grid, kstgrid, kpfaces, modal placement), j93 kitReward `.kmtabs/.kmbloom/.kmbox`, jpm `.kpm-list`, jgpick `.kipd2` two-column, p1 `.art .pcb` (kv2), jtoil `.toilw` (KIT REQUEST: one-page toilette), jcooptimer chip. Each must become ONE rule for both modes (the spread's); `grep -n 'kv3:.kv' dev/build` lists them.
@@ -2483,21 +2484,13 @@ the name sits left-aligned beside it and wraps inside its own cell; a list title
 
 ### 36.2 THẺ QUAN HỆ 3 CỘT — `kitRel3(face, rank, name, col, middleHTML, rightHTML, extra)` (`.krel3`)
 One card per person: LEFT = the kit portrait (`pcPort`, full column 120–170 px, the person-card frame) with rank (small, rank colour) over the
-name (never cut); MIDDLE = relation bars (`kitRelBar`, 36.3) + small notes + the act card that is possible there (e.g. Đến gặp);
+name (never cut); MIDDLE = the two-column relation box (`kitRel2`, §49.1) + small notes + the act card that is possible there (e.g. Đến gặp);
 RIGHT = "Đã biết" bullets (`kitKnownList(v)`: intel + notes, newest first, one fact per line, the person's own name dropped, source · date
 as a small dim line, max 4, then "Xem thêm N điều ›" → the intel panel). Container ≤ 560 px: the three blocks stack in the same card
 (portrait ≤ 180 px centred). Used by Giao tình › Ân oán for "Ngươi", for another consort, for Hoàng thượng and Thái hậu.
 
-### 36.3 RELATION WORDS (owner 05:15Z + 05:25Z) — subject + verb + object, both directions side by side, same bar
-`Nàng quý ngươi: <mức> · n` · `Nàng oán ngươi: n` · `Ngươi quý nàng: <mức> · n` · `Ngươi oán nàng: n` (role where natural: "Hoàng hậu quý ngươi",
-"Hắn quý ngươi"; unknown: "chưa rõ"). Mức (`quyW`): Ghét ≤ -30 · Không ưa < -10 · Bình thường ≤ 10 · Có cảm tình < 30 · Quý mến < 60 · Thân thiết.
-Labels are `kitGloss("Quý"|"Oán", label)`: a tap shows one line. Person cards (jk2b `kitPcGrid` chips, order: Nàng quý · Nàng oán · Ngươi quý ·
-Ngươi oán · Ghen), Ân oán rows, week-book "Hiện nay" rows and delta chips all use these words; the bare word "Thiện cảm" is never shown.
-
-- **Review 11/15 (signed bar, card columns):** "quý" (−100…100) and "Thái hậu thương" use `kitSignedBar(v)` (`.ksbar`): a track with a clear
-  midline at 0, the fill grows FROM the midline toward the sign (right green = liking, left red = dislike), length ∝ |v|; "oán" (0…100) keeps the
-  one-sided bar. A card with nothing for the right column is TWO columns (`.kr3two`), never an empty third column; the "Ngươi" card in another
-  person's view shows "Đã biết" about that person.
+### 36.3 RELATION WORDS (owner 11/16 15:00Z, replaces the 11/15 sentence + bar rules) — see §49.1 kitRel2
+Relations are TWO columns (that person → me | me → that person), short words Thiện cảm / Oán / Ghen / Sủng, number in its colour, no bars; the longer "Nàng quý ngươi: …" sentences are retired. Labels are `kitGloss` terms: a tap shows one line.
 
 ### 36.4 PORTRAIT BOX (owner 05:45Z "khung nhảy", "muốn đặt đâu là đặt") — person card left column
 - ONE box for every person and rank: the `.pcp.kit` cell at the full left-column width (left edge = the name/rank's left edge, width = the chips
@@ -2694,7 +2687,7 @@ margin-bottom (falls back to `.ksub` when no bar). Before → after (scan rt/sca
 Open the game with `#kit` at the end of the address (or `kitSamplePage()` in the console): a full-screen page draws every registered kit part
 with the REAL kit functions at the current screen size; ✕ closes. Every new / changed kit part pushes its sample in the same commit as its
 KIT.md section: `KIT_SAMPLES.push({id:"§nn", title, html:()=>…})`. Now: §28.19 wide/tall/thumb, §21 card (skill with acts, chapter, empty),
-§46 kitChecks + kitInfo, §43 compact act in a `.kpanec`, §48 kitNameRank, §49.1 kitRelRow, §53 kitChip tones + kitRisk + an event option in cost mode + kitResultSeal + kitKemRow, §52 kitRelTable + kitRelDelta, §57 kitNumDelta. Test: `node dev/test/kit-page.js <url> [outdir] [sizes]` (every sample renders, no
+§46 kitChecks + kitInfo, §43 compact act in a `.kpanec`, §48 kitNameRank, §49.1 kitRel2, §53 kitChip tones + kitRisk + an event option in cost mode + kitResultSeal + kitKemRow, §52 kitRelTable + kitRelDelta, §57 kitNumDelta. Test: `node dev/test/kit-page.js <url> [outdir] [sizes]` (every sample renders, no
 error, no horizontal overflow, 0 page errors).
 
 _(Numbers: review/kit-fig2 used 37-40, then 42-45; main took 37-43 and tabs-kit 45-47, so kitNameRank = §48, Ân oán = §49, kitEventDp = §50; kitActCompact is main's §43 (one copy, the tabs-kit superset).)_
@@ -2783,16 +2776,13 @@ so the shop and a full person dialog share the same box; a two-choice visit is a
 (doable first). Test: `dev/test/fig-fill.js` (dialog size + fill), `dev/test/shop-fix.js`.
 
 ## 49. ÂN OÁN · RELATIONS (owner 11/15) — `dev/build/jhc.js`
-### 49.1 kitRelRow — ONE relation row everywhere
-`kitRelRow({kind:"quy"|"oan"|"pos", a, b, v, what, word, gloss, signed, max, good})` → `.krr`:
-- line 1 `.krrl` = "<A> → <B>: thiện cảm" / "…: oán" (player = "ta"), colour `KIT_REL`: purple `#7a4fa0` someone → ta, blue `#3f62a8`
-  ta → someone, ink `#6a5040` between two others; tap = the kit gloss (VANPHONG: Thiện cảm "có chịu giúp, kết giao với ta không",
-  Oán "mối hận vì việc ta đã làm, có muốn trả đũa ta không; nguôi dần mỗi tháng"). Thiện cảm and oán stay TWO stats.
-- line 2 `.krr2` = a grid [word · number (8.2rem, never wraps)] [bar (84 px)] → every row's bar starts and ends at the same x.
-  Thiện cảm (−100..100): `kitSignedBar` — midline at the centre, green fill right / red fill left, marker `.ksb-mk` centred on the bar.
-  Oán (0..100): `kitPosBar` — same size and place, fills from the left, no midline, marker at the value; word ladder `oanW`
-  (BAL.oanLv [5,20,45,75]: Không oán · Chút oán · Oán · Oán sâu · Oán hận). "pos" = sủng / ân tình (number, green).
-  Unknown value → "chưa rõ" + an empty bar in the same place.
+### 49.1 kitRel2 — ONE relation component everywhere (owner 11/16 15:00Z 4.6–4.8; replaces kitRelRow + the 3-column kitRelTable; bars are gone)
+`kitRel2([{head, dir:"them"|"me"|"x", rows:[{w, now, d, kind:"good"|"bad"|"pos", gloss?, unk?}]}, …], {week})` (jkrel.js) → `.kr2`: TWO column boxes side by side —
+LEFT = that person → me ("Nàng → ta", purple tab), RIGHT = me → that person ("Ta → nàng", blue tab); one box when only one direction exists (Hoàng thượng → ta: Sủng, Ân tình; Thái hậu → ta).
+Rows use SHORT words only (Thiện cảm / Oán / Ghen / Sủng / Ân tình / Tin cậy; tap = kit gloss), the NUMBER in its meaning colour (thiện cảm > 10 green, < −10 red; oán/ghen ≥ 20 red; sủng green), NO bars, no mixed rows.
+`week:true` adds the "Hiện nay" and "Tuần này" columns, aligned inside each box (Tuần này = green/red change or "—"). Unknown value → "chưa rõ". Container < 260 px: the two boxes stack (left first).
+`kitRelTable(kitRelRows(p,snap),{head})` builds the two columns from the fixed rows of §52. Callers (the full list, all via kitRel2): Ân oán pair view (`relRows`, jhc), week-book person pages (j87), person-card "Lòng người với ta" (pcfRel), Gia tộc card (jkc), kit sample §49.1 / §52.
+Never draw a relation any other way; `kitRelDelta` (a change inside a sentence, §52) stays.
 ### 49.2 Picker + pair — "Xem quan hệ của X" · "với Y"
 Two strips = the Hậu cung pager strip (`pager`, j15: ‹ ›, N/M, selected highlight), groups Ta · Chí tôn · Phi tần (k61Hide still lists
 only consorts she knows by name), labels = the name only (`PG.rel`, `PG.relY`; an outside link that sets `relSel` still selects X).
@@ -3002,16 +2992,11 @@ kitRelRows(person, snap)   // → the FIXED rows for that kind of person, same o
 //   kẻ hầu              : "<Nàng|Hắn> → ta: thiện cảm" · "Ta tin cậy"
 //   stranger ("Phi ???") or anyone else: one row "<…> → ta: thiện cảm" = "chưa rõ nàng nghĩ gì" (no numbers)
 //   row = {dir:"them"|"me", label, now:int, d:int|null, kind:"good"|"bad"}; snap = S.wkSnap (pp[id]=[rel,ghen,oan,ta→nàng], sp, sung, th)
-kitRelTable(rows, {head:true, dHead:"Tuần này"})   // → .krtw > .krt
+kitRelTable(rows, {head:true})   // → kitRel2 (§49.1): TWO column boxes, left = that person → me, right = me → that person; rows carry w (short word), sj, ob
 kitRelDelta(label, "them"|"me"|"none", d, kind)    // → .krd: one relation change inside running text (a fact line)
 ```
-- ONE grid for the whole table: label | **Hiện nay** | **Tuần này**. Every row shares the columns: numbers right-aligned on the same x
-  (±1 px, tabular figures), never wrap; labels wrap inside their column (min `min(8.5em,46%)`), never one word per line, never cut.
-- Label = direction colour (§11.2 `kitRel`, purple them→ta, blue ta→them), weight 600, written in the final words (`KIT_REL`, VANPHONG §1)
-  and marked `data-vp-skip` so the word fixer never makes "Nàng ta oán ta". Number = ink. Change = Được/Mất colour (green good for her,
-  red bad: more oán/ghen is red), "—" when nothing moved. Whole numbers only; negative with "−".
-- Narrow column (container < 240 px: phone pages): the label takes its own line, the two numbers stay in two aligned columns
-  under it (container query on `.krtw`).
+- TWO column boxes (owner 11/16 15:00Z): LEFT "Nàng → ta" (that person → me), RIGHT "Ta → nàng"; short words (Thiện cảm / Oán / Ghen / Sủng / Tin cậy), NO bars; inside each box the **Hiện nay** and **Tuần này** columns are aligned (numbers right-aligned, tabular, never wrap).
+  Number colour = meaning (§49.1); change = Được/Mất colour, "—" when nothing moved; whole numbers, negative with "−". Container < 260 px: the boxes stack. Words carry `data-vp-skip`.
 - `kitRelDelta` inside facts: the same look as a table row, no chip box, never wraps; between two other people (`"none"`) no direction
   colour ("thiện cảm +7"). The week book redraws every relation chip of a log line with it (`kbkRelInline`, j87), and the on-screen word
   fixer turns "thân ±N" into "thiện cảm ±N" everywhere.
@@ -3104,7 +3089,7 @@ Every rank-up, on every road, gives the new rank's FULL SET as real items (conso
 ## 66. RANK-CHANGE FX (owner 15/11 20:05Z #13) — `dev/build/j93.js` kitEdict / kitGloom
 - **66.1 rank up** = `kitEdict` (edict, frame swap, chip old → new); the light gold glow on the new frame is PAINTED (KIT §68):
   `kitFxBurst("glowburst", frame)` + `kitFxLight("glow-gold", frame)` (screen blend on the dark stage); the sparks at the new chip are painted
-  `spark` + `petal-gold` (j93 `kmSpark` now calls kitFxBurst for every caller: edict, tablet, reward chest). The old CSS gradient sweep and the
+  `spark` + `petal-peach` (j93 `kmSpark` now calls kitFxBurst for every caller: edict, tablet, reward chest). The old CSS gradient sweep and the
   code-drawn dots are removed (reviewer r1: owner rule "effects painted, code only animates"). The chest's inner light (`.kmlight`), the bloom
   glow (`.kmglow`) and the incense ember / smoke of the day shift are the painted `orb` / `ember` / `smoke` atlases (CSS only scales / fades / warms them).
 - **66.2 rank down / cold palace** = `kitGloom({title, sub, who, from, to})` (to = -2 → cold palace): `kmRankDownHTML(p,from,to)` adds her portrait
@@ -3413,9 +3398,7 @@ mood (liked / did not like) and the rewards; sound + light by mood; a new-day pi
 ## 67. LẬT THẺ BÀI · kitCardFlip — the end-of-day card-flip scene (owner 15/11 20:50Z, review/cardflip) — `dev/build/jflip.js` (after jsfx, before j84)
 Replaces j93 piece 1 (kitFlipTablet / kitFlipNote: muted while `flip()` runs). Played once per week after the tablet is decided
 (j8 `flip` → j75 `S.nightWhy` → j93), through the kit motion queue `kmPush`, after the week panel / Tuần lục book / title (never over them).
-- Painted art only (gpt-2-6, folder ba4aecfe, CDN `img/kit/`): `cf-plate-ksp` (Kính sự phòng, empty lacquer tray, lamplight) → `cf-plate-emp`
-  (same tray on the Emperor's desk), each as a landscape 1600x1200 and a portrait 1200x1600 picture (`-p`, used when screen w/h < .95);
-  `cf-hand-emp` (his hand, yellow dragon sleeve, no face, cut out); `cf-seal-thitam` (cinnabar seal THỊ TẨM). Code only moves / fades / filters them.
+- Painted art only (gpt-2-6, folder ba4aecfe, CDN `img/kit/`): `cf-gplate-ksp` (Kính sự phòng, the Emperor's tray: vermilion lacquer rim with gilded gold peonies, pale champagne-gold silk floor, soft lamplight; owner 16/11 15:05Z: gold is allowed but natural lacquer + gilt in the game's painting style, never flat yellow) → `cf-gplate-emp` (same tray on the Emperor's desk), each as a landscape 1600x1200 and a portrait 1200x1600 picture (`-p`, used when screen w/h < .95; the portrait tray is taller so 20+ cards plus name tags fit); `cf-hand-emp` (his hand, yellow dragon sleeve, no face, cut out); `cf-seal-thitam` (cinnabar seal THỊ TẨM). The older yellow `cf-plate-*` files stay on the CDN only for builds that predate review/tham-flip-ui. Code only moves / fades / filters them.
 - Geometry: `BAL.cardFlip.plates.{l,p}` = per picture the tray FLOOR (measured from the pixels) + the tray RIM (safe zone). The plate box is
   fitted so the rim stays on screen; card slots are computed in the same box → cards sit on the floor at every aspect (2..20+ cards: the
   biggest card that fits in 1–5 rows). The plate's own picture lies over the cards in soft-light (painted lamplight on them) + a soft shadow.
@@ -3445,6 +3428,7 @@ Replaces j93 piece 1 (kitFlipTablet / kitFlipNote: muted while `flip()` runs). P
   Timing = `BAL.cardFlip.turn` {lift 400, move 750 → the flip is 1.15 s (others' nights ×.82), ease cubic-bezier(.45,0,.55,1) = soft ease-in-out, pause 600 = the face rests
   before the reveal words / seal / burst / glow}; `t.centre`, `t.res`, `t.end` are derived from it (change `turn` only).
 - REVEAL LIGHT = THE WHOLE FRAME GLOWS + SLOWER (owner 16/11 12:00Z, review/cardflip-glow2; replaces the running ring light of cardflip-glow): the old reveal sat on the portrait and hid the face, the next one ran painted glows round the ring ("như chơi casino"). Now `edgeLight()` (only caller: `showRes`) adds ONE `.kcf-halo` div hugging the frame ring's rectangle (`BAL.cardFlip.edge.path`, fractions of the card; `rad` corner, `blur`/`spread` glow size, `op` / `lo` opacity range): a soft warm gold box-shadow glow + thin bright rim around the WHOLE frame at once, nothing moving along it, no sparks. It breathes slowly (`edge.breath` 3600 ms ×`slow`, opacity only, until the scene closes). Nothing is drawn over the portrait window. Gọn / reduced motion: the same glow stands still. RULE for the whole game: a frame light is always the whole frame glowing, never a light that runs / chases / orbits a frame. Timing ≈1.75× cardflip-smooth: `BAL.cardFlip.slow` 1.75 scales every hard-coded motion (arrive, lift-out, arrange, carry, drift, hand, CSS fades via `--kcf-s`); `t`, `turn` {lift 700, move 1300, pause 1100, tail 4200}, are the slowed numbers. Her card: reveal at ≈10.7 s, animation ends ≈14.9 s, then waits for the button (others' nights ×.82).
+- NAME UNDER EVERY CARD + HER CARD'S WHITE GLOW (owner 16/11 14:00Z + 14:05Z, review/tham-flip-ui): under every card the kit name tag `kitNameRank(rank, name, rankColour, me, small)` (KIT §48: rank in its jewel tone over the name, no title, plain vivid text, no glow: the tray floor is a pale silk surface = the paper rule 48.1h; HER name = bold black `.kmy`; unknown = rank + "???"). The tag is `.kcf-tag` inside the card box (`.kcf-c`, container `cqw`), outside the filter part (`.kcf-f`) so it never gets the card's dark drop-shadow; the picked card shows the larger kit size right under its frame. (review/tham-flip-ui-r1: top 79 % of its box, below the frame; `coverTags()` in jflip hides the tag of any other card that the picked tag / tassel column would cross, because the result chip already names the pick.) `grid()` reserves `TAGH` px under every card and never makes a column narrower than `TAGW` (so two names never overlap). One card per person: `cfDemo` caps n at the roster. HER card on the tray (`.kcf-mine`, from the very start, static, whole frame, never over the portrait, hidden when it becomes the gold reveal halo): a soft WHITE glow so she knows it at a glance; co-op: each player's own card (`c.p===S`).
 - Test: `node dev/test/cardflip.js <url> <outdir> 755x1000,1000x755,1180x820,1366x1024,844x390 2 few|all` (real week end, beats measured in
   page time, cards inside the floor, picked card on screen, chip never over it, 22 + 2 cards, reduced motion, old save, page errors).
 
@@ -3494,7 +3478,7 @@ content the first time it plays). Sources + recipes: `dev/fxwork/` (gens.txt = e
 ### 68.2 Registry (sizes = one download each)
 | kind | name | source / alpha | size |
 |---|---|---|---|
-| sprite | petal-plum, petal-peach, petal-lotus, osmanthus, leaf, ash, paper, coin, lantern, jade, petal-gold, gift (4: box closed/open, silk bundle, ribbon), letter (4), gift-hands (3, 288 px, 37.7 KB: hands holding the ribboned box / untied box / silk bundle; gpt-2-6 YMLPpsoWeC→O6fk3CMynm, Bh4zaXUoQR, iGqlYRY3uK, bg removed) | gpt-2-6 sheet on slate → images_remove_background | 10–22 KB |
+| sprite | petal-plum, petal-peach, petal-lotus, osmanthus, leaf, ash, paper, coin, lantern, jade, gift (4: box closed/open, silk bundle, ribbon), letter (4), gift-hands (3, 288 px, 37.7 KB: hands holding the ribboned box / untied box / silk bundle; gpt-2-6 YMLPpsoWeC→O6fk3CMynm, Bh4zaXUoQR, iGqlYRY3uK, bg removed) | gpt-2-6 sheet on slate → images_remove_background | 10–22 KB |
 | sprite | snow, spark, ember, orb, streak, smoke, incense, glowburst, lotuslight | painted on black → luma alpha (slice.py) | 4–16 KB |
 | sprite | ink, brush | painted on white → ink alpha | 34–42 KB |
 | light | candle, glow-gold, moonlight, lantern-red, divine, fireworks | gpt-2-6 still on black → Kling 2.5 loop (start = end frame) → light.sh | 6–45 KB per clip (fireworks 180 KB) |
@@ -3551,6 +3535,9 @@ Dress pick (jtoil Hồi 1: tap = select + strip, buttons Cài / Mặc / Đeo / T
 Bên mình pick tiles (card + act) · shop picture card (price row + detail) · reward box rows / shelf (j93) · event item tag (§64) · bully demand tile (jtsb) ·
 Hội phối đồ board (jts: tap = select + "Đặt vào …" / "Bỏ ra") · veil picker (jveil) · other people's worn slots (jk2b kitWearSlots → card with who).
 Tests: `node dev/test/item-info.js <url> <outdir> [sizes]`. Kit page: sample §70.
+## 83. ONE ANIMATION PACE · BAL.pace (owner 16/11 15:05Z "mấy cái animation là tôi muốn nó chậm thôi"; review/anim-pace)
+`BAL.pace` (jbal2.js, = 1.75) is the ONLY speed knob for key-moment animations (OD:L1267 one core). JS: `kitPace(ms)` (Gọn / reduced motion keep the old ms); CSS: `var(--pace)` on :root (set from BAL.pace). Scaled: the whole j93 motion kit (`animation` durations/delays >= 0.3 s, `kmStage.later`, scene timers), BAL.reveal (box/chest/item reveals), BAL.cardFlip.slow, night-end beats (BAL.nightEnd), kpromo preview, podium j90, week dawn (p1 .dsky/.lan/.sun/.dbox + bell + calendar), gloom/bloom/alarm fx, kfx red/night/dark, srvToast, jbuoi. NOT scaled: micro feedback (< 0.3 s: taps, dialog open/close, hover, ripples), infinite loops, stat-fx (already 2.7 s), map unroll (KIT_MAP_MS), result toasts (already 7-9 s). New animations: write the old-speed number and multiply by BAL.pace / var(--pace); never hard-code a second speed.
+
 ## 74. BUỔI TRANSITION · buoiShift (owner 15/11 "Animation qua buổi … lật trang sách. Kỳ quá", review/buoi-transition) — `dev/build/jbuoi.js` (last module)
 Registry: §74 (KIT_NUMBERS.md; was "§71 to confirm"). Replaces the old buổi change (dark ink wipe + paper-page sound + incense curtain). Page turn now exists ONLY in Tuần lục (review/page-curl2).
 `curtain()` → `buoiShift()` (called after the state changed, never awaited, never in sync): one fixed overlay `#buoitr` (z 36, pointer-events none), ~1.7 s (dawn 2 s):
@@ -3558,6 +3545,7 @@ tinted ink-wash veil thins out over the scene that already holds the next buổi
 to the new buổi position) · brush-calligraphy title "Buổi trưa" on an ink-wash plate + kit seal (§39 kitSeal) · night→morning = dawn variant (painted mist + first light + glowburst).
 Tap anywhere = skip (listener only; the tap still reaches the game). Gọn / reduced motion / weak device (`kfStill`) = one quick tint fade (260 ms), bots / quiet = nothing. The buổi bell / night-watch sfx stays.
 Art (Magnific gpt-2-6, recipes `dev/fxwork/buoi/slice_buoi.py`, CDN `img/fx/`, on demand, group fx): `buoi-wash` (ink alpha, used as CSS mask so one file serves all colours, 38 KB), `buoi-mist` (luma alpha, 42 KB), `buoi-hills` (ink alpha, 35 KB), `buoi-orb` (sun | moon, 15 KB) = 130 KB, downloaded the first time a buổi changes.
+UPDATE 16/11 (anim-pace): FULL SCREEN at every size (tint + ink wash + vignette cover the viewport; sky band + title centred, sized by vmin), clearer, pace x BAL.pace (~3 s, dawn ~3.5 s). SEASON variants (SEAK: xuan petals / ha lotus + warm haze / thu maple leaves / dong snow + cold haze) and FESTIVAL variants (the game's own FEST table: newyear, nguyentieu, thanhminh, doanngo, phoenix, thattich, trungthu, trungcuu, dongchi, giaothua; name shown under the title) use the kit particle layer's painted sprites + a tint; optional painted band skin `img/fx/buoi-band-<key>.webp` (BTR_ART lists existing: thu, trungthu); missing = today's per-buổi look. Test hook `window.__btrVar={sea,fest}`.
 Test: `node dev/test/buoi-transition.js <url> <out>` (6 viewports). Kit page sample §74 (a button per buổi). Test hook `window.__btrHold` stops the auto end.
 
 
@@ -3833,3 +3821,16 @@ Sample: kit page §82. Test: `dev/test/title-tag.js` (stage 3 lines in order, po
 
 ## 61. FIG-BG · NOT SHIPPED (owner 16/11 13:30Z, OD:L1314)
 The C8 painted-scroll background behind full-body figures is switched off everywhere: figures stand directly on the frame's own background. The art stays in storage (img/), unused; no jfigbg module in the build.
+
+
+## 83. KIT MARKS (owner 11/16 15:00Z kit review, review/kit-marks) — gold imperial rank · text-line colour · ink-brush ✓/✗ · seals · place icon · grade chip
+- **83.1 Imperial gold (2.4)**: Hoàng thượng and Thái hậu rank + name = imperial gold everywhere, never black (`KIT_ROLE.emp/th` in j1 → `kitRankTone`; a person whose NAME is the title is painted as a title by `kitNameRank`, `.knr-only`). Glow only on paintings (§48.1h).
+- **83.2 Text lines (2.6)**: inside a sentence / list row the rank AND the name are the SAME rank tone (`kitNameTone`, j79 → `--rtn` on `.kname`); her own name (.kmy) and "ngươi" keep ink. Only on PAINTINGS the stage rule applies (rank tone + glow, name ink + gold glow).
+- **83.3 ✓ / ✗ (4.5)**: ONE bare ink-brush mark, no circle/box: `kitMark(ok)` → `.kmk.y|n` (SVG mask in the row's own colour; the glyph stays inside hidden so textContent is unchanged); `kitMarkPaint(root)` wraps every ✓ ✗ ✔ ✘ typed by older builders (same observer pass as kitRankPaint). `kitChecks` uses `.kchm` + kitMark. (The earlier in-game tick could not be found in the shallow history; this is a fresh brush stroke in the same spirit — owner to confirm.)
+- **83.4 Number deltas in the person card (4.11)**: no square boxes around +3 / −3 (the boxes in the catalogue were the sample's demo `.btn` triggers; now bare `.lnk` text). The number beside the stat is enough.
+- **83.5 KẾT QUẢ seal (5.2)**: amber-orange `#b8650a` (`.rtoast.sure .seal`), never grey.
+- **83.6 Grade chips (5.3, 5.4)**: ONE part `kitGradeChip(grade,{size,name,extra})`: normal size under the item name on the reveal card / detail / lists; `size:"sm"` = the grade tag over an item picture or in a tight row. Not two parts. 5.4 `kitGloom` = the demotion scene (old chip cracks, frame turns grey), shown once in the rank-down screen — now labelled on its sample.
+- **83.7 Place icon (5.6)**: `kitPlaceIcon` sits ABOVE the place name, centred: map chips, map tiles, the stage title (jact CSS `.ic.kplic{display:block}`).
+- **83.8 Kit sample page**: a sample may carry `where:"…"` (shown under its heading: where it is used + size). Samples 2.2 (§36.4) and 3.6 (§73) no longer render empty when the page opens before a game. Still erroring without a game (outside this branch): §58, §58.1, §58.3, §28.13e, §76. Tests: `node dev/test/kit-sample-probe.js <url>`, `dev/test/kit-marks.js <url> <out.jpg> <WxH@dpr> <ids>`.
+- **83.9 Danger button + kitConfirm** (kit request cloud-del / Foreman D): `.kbtn.kdanger` (charcoal with a cinnabar rim, same size as `.kbtn`, never lacquer red) for irreversible actions; `kitConfirm({title, lines:[…], yes, no, type?, onYes, onNo})` (j79) = centre pop-up on kitModal: the lines, optional type-to-confirm field (kitInput; the danger button stays disabled until it matches), the panel's own quiet button = no, `.kbtn.kdanger` = yes. Sample §83.9 on the kit page. Replaces the inline two-tap "Chắc chắn?" wherever the action deletes data.
+- **83.10 Mood mark on picture corners (owner 15:10Z 7.2)**: `.ksart-mark` is bigger: `clamp(46px,24%,88px)` (thumb 52 %).
