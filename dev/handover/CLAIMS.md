@@ -77,7 +77,7 @@
 | D17 review | review/luxury-r1 | C | session_011xDdVSB4Ws7io5HBcz34c9 | PASS a84d31c2d | 07:06Z 16/11 |
 | cardflip-glow: reveal light on frame border, not over face; slower (owner bug) | review/cardflip-glow | main s11 | session_01UV1Szki5WiXQ1nthXM98EG (sonnet) | RUNNING | 16/11 07:12Z |
 | percent-measure: real % xong (features built vs planned) + % chơi được (bot playthroughs on main) | (report only) | main s12 | session_01UV1SzjKGmuHQwVQXwNQ4LE (sonnet) | DONE (xong ~42% / choi duoc ~66%, reports/percent-measure.md) | 16/11 07:20Z |
-| balance-after-truth review | review/balance-after-truth-r1 | D | session_01DgYSWp8zZ1eyzXhLPpAj3x | RUNNING | 16/11 07:17Z |
+| balance-after-truth review | review/balance-after-truth-r1 | D | session_01DgYSWp8zZ1eyzXhLPpAj3x | DONE PASS 614138eb | 16/11 07:17Z |
 | one-core: every rule number from BAL + guard test (owner ONE CORE) | review/one-core | main s11→s12 | session_01UV1Szm1iPxyYyr6JpCfpnd (opus) | RUNNING | 16/11 07:21Z |
 | D15 review | review/perf-r1 | C | session_011xDdVSxy2NRrKa7UvyR112 | PASS d2221602f | 07:23Z 16/11 |
 | servant-system part C (jmline.js, BAL.mline) review | review/servant-mline-r1 | D | session_01DgYSWnPWsFwg4R6LHZTKjr | DONE FAIL → r2 | 16/11 07:27Z |
@@ -117,13 +117,13 @@
 | kit-keeper-2 REVIEW (scene-end button §81, event scroll, curl, podium, pcard-land) | review/kit-keeper-2-r1 | main s14 | session_01UV1SzinSdpLGmoSPVk15M2 (sonnet) | RUNNING | 16/11 08:27Z |
 | D29 review (opus) | review/schedules3-r1 | C | session_011xDdVQQoCYSxtUpobZT8YJ | RUNNING | 16/11 08:26Z |
 | story14-p1 review (opus, main s12 → C) | review/story14-p1-r1 | C | session_011xDdVPn9oVRYe6dLkGFrUb | FAIL → fix list in reports/story14-p1-r1.md | 16/11 08:26Z |
-| act-split-w2 review (opus) | review/act-split-w2-r1 | D | session_01DgYSWm7L1NRRbPgisEAL4E | RUNNING | 16/11 08:40Z |
+| act-split-w2 review (opus) | review/act-split-w2-r1 | D | session_01DgYSWm7L1NRRbPgisEAL4E | DONE PASS 072687e2 | 16/11 08:40Z |
 | servant-mline FAIL fixes + D58 close-maid-by-origin v2 (one opus worker) | review/servant-mline-r2 → review/close-maid | D | session_01DgYSWoCA2uzCCm4WDVxEAA | RUNNING | 16/11 08:40Z |
 | slap-mg FAIL fixes (code parts; art parts → art owner) | review/slap-mg-r2 | D | session_01DgYSWoJV2a7xRimqwRhf5L | DONE SẴN SÀNG KIỂM dd0b618f | 16/11 08:40Z |
 | ENTRY SELECTION EXAM + narrated intro/entry animation per origin (main s12 07:55Z) | review/entry-exam | D | session_01DgYSWowhQ6xMD6E52HDA3H | RUNNING | 16/11 08:40Z |
 | D8 Emperor visits + stays the night; poison Emperor/Thái hậu roads (orphan #19) | review/emperor-visit | D | session_01DgYSWnVJ8zy6Hr7QeM3HD1 | RUNNING | 16/11 08:40Z |
 | D21 co-op B1–B5 audit + build (orphan #20) | review/coop-b1b5 | D | session_01DgYSWmCuNWK9uTD5oZFEFw | DONE SẴN SÀNG KIỂM d0f2260a | 16/11 08:40Z |
-| reign-road-r1b 2 findings follow-up (orphan #33) | review/reign-road-fix | D | session_01DgYSWqEhdCoCY3dvQCAGz8 | RUNNING | 16/11 08:40Z |
+| reign-road-r1b 2 findings follow-up (orphan #33) | review/reign-road-fix | D | session_01DgYSWqEhdCoCY3dvQCAGz8 | DONE SẴN SÀNG KIỂM 9f4e8bf9 | 16/11 08:40Z |
 | popup-fullbody REVIEW (owner bug; person pop-up template + one frame size) | review/popup-fullbody-r1 | main s14 | session_01UV1SzjPACDs1NPKpLJvee1 (sonnet) | RUNNING | 16/11 08:32Z |
 | cardflip-glow REVIEW (owner bug; frame-ring light, slower, scene-end button) | review/cardflip-glow-r1 | main s14 | session_01UV1SzggxfoaRwYDvYoEu4Q (sonnet) | LIVE dd87e0eb, smoke PASS (archived) | 16/11 08:36Z |
 | design-scale REVIEW (opus; one page 590x820, uniform scale) | review/design-scale-r1 | main s14 | session_01UV1SzkHA4ScRWkoirdEoSn (opus) | RUNNING | 16/11 08:40Z |
@@ -131,3 +131,6 @@
 | D21 co-op B1–B5 part 2 (maid acts, shared heir, j99succ in co-op, NPC acts on guest, coop-pets.js) | review/coop-b1b5-p2 | D | session_01DgYSWnjWQExva4hE6H8RyB | RUNNING | 16/11 09:08Z |
 | slap-mg-r2 review (opus; diff on top of B's mg-balance 96736fff) | review/slap-mg-r3 | D | session_01DgYSWoEfbFL74QqJ1ySvjK | RUNNING | 16/11 09:19Z |
 | item512 art: 22 items without item512 (+ pet/veil/mark big pictures, list in reports/item-big.md) | review/item512-art | C | session_011xDdVP6DUKfEQP1er7RbtD (sonnet) | RUNNING | 16/11 09:27Z |
+| reign-road-fix review (sonnet) | review/reign-road-fix-r1 | D | (opening, s3) | RUNNING | 16/11 09:31Z |
+| kc-roads-cn-nc round 3 review (opus; main s14 08:41Z) | review/kc-roads-cn-nc-r1 | D | (opening, s3) | RUNNING | 16/11 09:31Z |
+| scene-end button SWEEP, whole game (KIT §81; main s14 09:10Z) | review/scene-end-sweep | D | (opening, s3) | RUNNING | 16/11 09:31Z |
