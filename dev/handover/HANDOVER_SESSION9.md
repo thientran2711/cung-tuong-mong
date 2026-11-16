@@ -250,3 +250,4 @@ Self-wake: s15 trigger trig_01QtP4CohaEq6uN3d5auPm7Q is DELETED at handover → 
 - (12:17Z s16) LIVE promo-skip-r1 b85cdb1e (main a5d9d2bc..b85cdb1e). Regression found on main: rank-up chest + servant reveal screens no longer show → promo-reveal-fix (same session). GO merge-train-6 next.
 - (12:19Z s16) cardflip-glow2 SẴN SÀNG KIỂM ab6cf3e0 → reviewer session_01UV1Szk2fgA2KyKg3zrmLgn; videos sent to owner.
 - (12:20Z s16) s15 opened worker weather-fx2 (sonnet; owner weather notes OD 12:08Z: storm whole-frame flash, denser snow, visible wind, spring pink peach petals, summer distinct, visible fireflies) → reports to s16; on SẴN SÀNG KIỂM open reviewer + send the 8 videos to the owner.
+- (12:23Z s16) Owner answered v5 in s15 (OD 12:20Z): maids APPROVED; BD hair on Đáp ứng only, Tần/Phi/Quý phi back to v4; NC princess taller/slimmer → fp v6 (reports to s16). skin-light: test image (player without rosy layer vs current vs maid on Ngọc Thanh các) → s16 sends to owner.
