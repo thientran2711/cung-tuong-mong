@@ -31,3 +31,11 @@ Owner 15/11: "Ảnh 1 phía trên này còn dư chỗ nhiều nè, ảnh 2, 2 b�
 
 ## Not done / notes
 - assets.json (offline precache list) not regenerated for the -w files (coordinator's site build owns it); they load on demand like any img.
+
+## Review r1 (reviewer, review/hc-portrait-r1, merged onto main 2d038139e)
+- Looked at all 32 -w frames vs originals (full + close-ups of crest/top bar/pendant): no visible seam, stretch or doubled ornament.
+- Fixed here: (1) -w frames warmed on panel render (first switch showed a frameless portrait); (2) 180 ms FLIP slide of the cell + column
+  when the per-frame box top changes (measured shifts 3–21 px at 1180x820); (3) fallback: kitFrwErr never ran for a -w already broken
+  in the cache — sweep after render + KFRW_BAD; tested with -w routed to 404 (SW blocked): normal frame, old layout.
+- Owner 16/11 "Mất chữ" (roster labels cut under the sub-tab bar): KIT 45.2 in jk2b kitPcSize (pane bar bottom + gap). Table in KIT.md §45.2.
+- Old save made with the pre-change build loads; all Hậu cung sub-tabs render the card.

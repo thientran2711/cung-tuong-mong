@@ -2162,6 +2162,10 @@ Ngươi oán · Ghen), Ân oán rows, week-book "Hiện nay" rows and delta chip
   book) keep the narrow frame. A -w picture that fails to load falls back to the normal frame (`kitFrwErr`).
   New frame art ⇒ `python3 dev/tools/frame_wide.py <dir> <out> frame-<x>`, look at it, push the -w file with cdn_sync, add its `KIT_FRW`
   entry (dev/tools/frame_wide.json). Kit page sample §36.4.
+  Reviewer r1 additions (jhcpor): every frame shown in the panel warms its -w file once (the strip draws the narrow files, so without it a first
+  switch showed the portrait frameless for 150–500 ms); when the box top differs between two people the cell and everything under it in the
+  left column slide from the old place in 180 ms (FLIP; none with reduced motion / Cảnh động off); a -w file that failed once (also from the
+  cache) falls back at once and is not asked for again (`KFRW_BAD`).
 - Swap: the old portrait (`.kin`) fades out over the new one in 180 ms (`.kpxf`); none with reduced motion / Cảnh động off. The strip's small
   frames are the same pictures, so the next portrait is already loaded.
 - Crests (§28.0, `KIT_CREST`): each crest's SOLID base (lowest row ≥ 25 % of its widest row, measured from the webp) sits 6 canvas units BELOW
@@ -2306,6 +2310,13 @@ Việc nhờ act area, Nợ ân rows). `kitActCompactOn(root)` runs after `rende
 cut off above the frames).** `kitPcSize` fit (jk2b) scrolls a newly opened person card flush under the sub-tab bar; when the scroll cannot carry the
 `.pstrip` fully under the bar, the strip is shown whole (labels included). The fit also re-runs after a re-render of the same person until the player
 scrolls herself (`__kpcUser`). Test `dev/test/small-bugs-3.js` strip.
+**45.2 The sticky edge is the PANE BAR's bottom + its gap (owner 16/11 "Mất chữ", ref dev/handover/refs/owner-roster-cut.jpg; review/hc-portrait-r1).**
+Since §45 the sub-tabs sit inside `.kpbar` (+ 6 px bottom padding, 1 px hair line, 10 px kit gap). `kitPcSize` still measured the `.ksub` row's bottom,
+so on narrow portrait screens (755x1000, 820x1180, Fold) the fit scrolled every face strip 17 px under the bar: palace labels ("Khải Tường cung",
+"Chung Tú cung"…) cut in half under Chí tôn / Phi tần / Nam nhân / Cung nhân. Now the card's room and the fit's edge are the bar's bottom + its
+margin-bottom (falls back to `.ksub` when no bar). Before → after (scan rt/scan.js, every strip tab, picks first + second-last person):
+755x1000 and 820x1180: panel scroll 17 → 0, strip under the bar 7 px → 0, clipped labels 4–6 per tab (57 total at 820x1180) → 0; 1000x755,
+1180x820, 1366x1024 unchanged (0); 844x390 the strip is carried fully under the bar as before (never half).
 - Every tab pane is one layout: the **pane bar** (`.kpbar`) holds the page's sub-tabs (`.ksub`) and its first filter row (`.kcattabs`, Hành sự categories, Tư trang item filters, the jtabs sub-tabs); everything else is the list.
 - The bar sits flush at the top of the pane, directly under the header frame (the pane's own border is the kit gap), full width, opaque, no shadow; it never moves. The list scrolls below it and is cut off at the bar's bottom edge; nothing shows above or behind the bar (pane top padding is 0 while a bar is present). `scroll-padding-top` = bar height, so anchored scrolling stops below it.
 - Tabs keep drawing their own rows where they always did; `kitPane()` (after every panel render, on panel child changes and on resize) moves them into the bar. k3CatTabs finds its row by `data-g`, kgSub finds `.ksub` inside the bar. No other code may make a row sticky.
