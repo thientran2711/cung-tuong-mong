@@ -407,3 +407,4 @@
 | stage-figsize HOTFIX (opus, URGENT owner bug 21:20Z): people tiny on the stage after page-scale live 1aa0edb2; giant clipped eunuch + label overlap; blank side-card portraits | review/stage-figsize | main s24 | session_01UV1SziFt6yExRxFGSGFA24 | RUNNING | 16/11 21:20Z |
 | fig-cutout HELPER scan maid/eunuch/kid (sonnet art) | review/fig-cutout-clean | C | session_011xDdVNeDXtnshFoPTHBjHg | RUNNING | 16/11 20:56Z |
 | fig-cutout-code review r1 (sonnet, SMALL+art; + iPad WebKit filter:url() 1x check; + Nhập cung feet crop) of 04ec6425 | review/fig-cutout-code-r1 | main s24 | session_01UV1SzmJWhZHz6G55tgfdnH | RUNNING | 16/11 21:30Z |
+| coop-one-world review r1 (opus, BIG co-op, FIRST in line) of 008ed0b9 | review/coop-one-world-r1 | main s24 | (s24 opening) | RUNNING | 16/11 21:35Z |
