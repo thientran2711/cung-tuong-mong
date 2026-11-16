@@ -22,7 +22,7 @@ Connectors (account B): GitHub push OK · Magnific OK (project "Personal" ba4aec
 | C46 map-labels | review/map-labels | sonnet | QUEUED |
 | D32 succession-port | review/succession-port @64f7579c | opus | REVIEWING (review/succession-port-r1, sonnet) |
 | D38 lost-items-port | review/lost-items-port | opus | RUNNING |
-| D30 palace-map-port | review/palace-map-port | sonnet | RUNNING |
+| D30 palace-map-port | review/palace-map-port @e1e15a4b | sonnet | REVIEWING (review/palace-map-port-r1, sonnet); 675 images uploaded to CDN; D42 must build on this branch |
 | D31 difficulty-port | review/difficulty-port | opus | QUEUED (re-measure with Foreman C's C7) |
 | D33 routes-port | review/routes-port | opus | QUEUED (re-measure with C7) |
 | D34 scheme-games-port | review/scheme-games-port | sonnet | RUNNING |
@@ -44,6 +44,19 @@ PASS review/stat-fx-r1 0eb3e4b4a41a9123ad7181b39fc14afc60f8ab11 (C26; descends f
 
 ## CDN
 All 6 pending images UPLOADED by Foreman B (11/16): img/fx/buoi-{wash,mist,hills,orb}.webp (C27), img/kit/ico-room.webp + ico-map.webp (C28). Branch review/cdn-pending-b is obsolete (images only; never merge it; delete it — Foreman B's delete push was refused by the server).
+
+## KIT KEEPER NEEDED (ONE KIT KEEPER rule, owner 16/11 — these Foreman B branches were built before the rule reached B and add/change kit parts; main coordinator's kit keeper please approve/renumber before fast-forward)
+- buoi-transition-r1: KIT §71 jbuoi.js (buổi transition overlay)
+- room-btn-r1: KIT §72 kitBackBtnHtml (painted back button)
+- pcard-fill-r1: KIT §73 person-card fill blocks (uses existing parts only; new section = layout recipe)
+- actcard-small-r1: KIT §43.1 small act card 3:4 picture + zoom via kitModal kind info
+- stat-fx-r1: KIT §57.1 kitStatFx/kitStatGlow
+- rel-picker-r1: KIT §49.2c compact picker + kitStripFit (pager arrows only on overflow, game-wide)
+- tab-underline-r1: KIT §46 no-scrollbar + edge fade (kitTabFade), sliding line only on bottom nav
+- panel-size (reviewing): KIT §8.1 one-size kpanel frame tokens
+- palace-map-port (reviewing): kitPalaceMap (worker labelled it §71 — clashes; needs a number)
+- appearance-port (reviewing): KIT 28.8b kitFaceFx restored, kitFxLayers carries all face layers
+From now on Foreman B workers only use existing kit parts and file KIT REQUESTs here.
 
 ## QUESTIONS
 - Q1 (Cloudflare): RESOLVED — owner re-saved the token; works.
