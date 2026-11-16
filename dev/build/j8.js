@@ -421,8 +421,8 @@ function rivalsMonth(){let ev="";
  const qq=queenP();
  for(const p of consorts()){if(p!==S&&(!p.alive||p.out))continue;
   if(!S.thDead&&p.th>=60&&roll(8)){const k=pick(["nhansam","yensao","vongngoc","huongtram"]);p.inv.push({k,from:"th"});if(p===S)Q.push({t:"Thái hậu ban thưởng",who:pTH(),h:`<p>Đức Thọ cung sai người mang đến <b>${IT[k].n}</b>.</p><p class="past">${IT[k].d}</p>`});else log(`Thái hậu ban ${IT[k].n} cho ${p.name}.`)}
-  if(qq&&qq!==S&&qq!==p&&p.hh<=-40&&roll(10)){const i=p.inv.findIndex(e=>IT[e.k].kd==="Trang sức"&&!e.h);if(i>=0){const n=iname(p.inv[i]);/* two-way: the same act as hers (empAct conf): unfounded = Danh/Thái hậu cost, relation and regard fall */if(evG(qq,p)<1&&!vpItems(p).length)ap(qq,BAL.tw.confNo);relAdd(qq,p,-20);p.hh-=15;p.inv.splice(i,1);ev+=p===S?`<span class="r">Hoàng hậu sai người tịch thu ${n} của ngươi, trách ngươi xa xỉ.</span> `:"";if(p!==S)log(`Hoàng hậu tịch thu ${n} của ${p.name}.`)}}
-  if(qq&&qq!==S&&qq!==p&&p.hh>=50&&roll(6)&&(qq.bac||0)>=-BAL.tw.reward.bac){/* two-way: the same Ban thưởng as hers (empAct reward): her bạc, relation +20, regard +10, Danh +3 */ap(qq,BAL.tw.reward);relAdd(qq,p,20);p.hh+=10;ap(p,{danh:3});if(p===S)ev+=`Hoàng hậu ${qq.name} ban thưởng cho ngươi. Danh +3. `}
+  if(qq&&qq!==S&&qq!==p&&p.hh<=-40&&roll(10)){const i=p.inv.findIndex(e=>IT[e.k].kd==="Trang sức"&&!e.h);if(i>=0){const n=iname(p.inv[i]);/* two-way: the same act as hers (empAct conf): unfounded = Danh/Thái hậu cost, relation and regard fall */if(evG(qq,p)<1&&!vpItems(p).length)ap(qq,BAL.tw.confNo);relAdd(qq,p,-BAL.tw.g.conf[0]);p.hh-=BAL.tw.g.conf[1];p.inv.splice(i,1);ev+=p===S?`<span class="r">Hoàng hậu sai người tịch thu ${n} của ngươi, trách ngươi xa xỉ.</span> `:"";if(p!==S)log(`Hoàng hậu tịch thu ${n} của ${p.name}.`)}}
+  if(qq&&qq!==S&&qq!==p&&p.hh>=50&&roll(6)&&(qq.bac||0)>=-BAL.tw.reward.bac){/* two-way: the same Ban thưởng as hers (empAct reward): her bạc, relation +20, regard +10, Danh +3 */ap(qq,BAL.tw.reward);relAdd(qq,p,BAL.tw.g.reward[0]);p.hh+=BAL.tw.g.reward[1];ap(p,{danh:BAL.tw.g.reward[2]});if(p===S)ev+=`Hoàng hậu ${qq.name} ban thưởng cho ngươi. Danh +${BAL.tw.g.reward[2]}. `}
   if(roll(4)){const s=search(p);if(s)ev+=p===S||S.mat>=2?s:""}}
  return ev}
 function festival(title,k,lbl){const C=consorts();if(C.length<2)return"";const art=p=>k==="sac"?artW2(p,"vu")*6:(artW2(p,"cam")+artW2(p,"thi"))*3;
@@ -439,8 +439,8 @@ function doAct(i,k){const v=rivals[i],a=ACT[k];if(!v||!a||!can(2)||S.dead||Q.len
  spend(2);const r=runAct(S,v,k);if(r)log(r);render()}
 function empAct(i,k){const v=rivals[i];if(!v||S.rank<7||!can(2)||S.dead||Q.length)return;let r="";if(k==="cutpay"){spend(2);v.cutPay=1;v.cutBy="Hoàng hậu";relAdd(S,v,-15);log(`Ngươi sai Nội vụ phủ khất bổng lộc của ${v.name} tháng tới.`);render();return}
  if(k==="judge"){if(evG(S,v)<2)return;r=judge(S,v)}
- else if(k==="conf"){const j=v.inv.findIndex(e=>IT[e.k].kd==="Trang sức"&&!e.h);if(j<0)return;if(evG(S,v)<1&&!vpItems(v).length){apply(BAL.tw.confNo);log(`Tịch thu vô cớ: Danh ${BAL.tw.confNo.danh}, Thái hậu ${BAL.tw.confNo.th}.`)}const n=iname(v.inv[j]);v.inv.splice(j,1);relAdd(S,v,-20);v.hh-=15;r=`Ngươi tịch thu ${n} của ${v.name}.`}
- else if(k==="reward"){if(S.bac<-BAL.tw.reward.bac)return;apply(BAL.tw.reward);relAdd(S,v,20);v.hh+=10;ap(v,{danh:3});r=`Ngươi ban thưởng cho ${v.name}.`}
+ else if(k==="conf"){const j=v.inv.findIndex(e=>IT[e.k].kd==="Trang sức"&&!e.h);if(j<0)return;if(evG(S,v)<1&&!vpItems(v).length){apply(BAL.tw.confNo);log(`Tịch thu vô cớ: Danh ${BAL.tw.confNo.danh}, Thái hậu ${BAL.tw.confNo.th}.`)}const n=iname(v.inv[j]);v.inv.splice(j,1);relAdd(S,v,-BAL.tw.g.conf[0]);v.hh-=BAL.tw.g.conf[1];r=`Ngươi tịch thu ${n} của ${v.name}.`}
+ else if(k==="reward"){if(S.bac<-BAL.tw.reward.bac)return;apply(BAL.tw.reward);relAdd(S,v,BAL.tw.g.reward[0]);v.hh+=BAL.tw.g.reward[1];ap(v,{danh:BAL.tw.g.reward[2]});r=`Ngươi ban thưởng cho ${v.name}.`}
  else if(k==="pardon"){if(!v.confined&&!v.out)return;if(v.out){v.out=false;v.rank=0}v.confined=0;relAdd(S,v,30);apply({duc:2});r=`Ngươi ân xá cho ${v.name}.`}
  else return;spend(2);log(r);render()}
 function giftTargets(){const L=[["emp","Hoàng thượng"]];if(!S.thDead)L.push(["th","Thái hậu"]);liveRivals(true).forEach(v=>L.push([v.id,(v.queen?"Hoàng hậu ":"")+v.name]));return L}
