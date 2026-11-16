@@ -294,7 +294,10 @@ Object.assign(BAL,{nroad:{
  oan:{win:8,lose:5},onMe:{win:{danh:-2,sung:-2},lose:{danh:1}},
  /* the help hồi: the chapter index range it may fall on (one per road per life), the bond or shared side she needs to ask,
     the deadline (weeks), the costs of the two roads (bạc road vs Sức road of equal weight), the bond she gives back */
- helpN:[5,10],askRel:20,dl:6,bac:[30,45,70,100],suc:8,rel:6,relBad:-12,relB:8,
+ helpN:[5,10],askRel:20,dl:6,bac:[30,45,70,100],suc:8,rel:6,relBad:-12,relB:8,no:4,
+ /* help options (r1, ONE CORE): odds of the Sức road / bạc road / dò la / che chở / tự sắc thuốc, the loss sizes l2/l3 on a failed try,
+    the Đức a betrayal costs, the bond the dò-la target loses */
+ op:{pS:55,pB:75,pDo:70,pChe:60,pY:50,l2:2,l3:3,betray:3,rbDo:4},
  /* rank thresholds of the bạc cost: index = how many of these ranks her rank reaches (RANKS index) */
  bacRk:[2,4,6],
  /* palace news lines a month (NPC chapter ends), at most */
