@@ -1,6 +1,6 @@
-# status-icons (owner 16/11 16:25Z, "Thỉnh tranh" download chip) — report
+# status-icons (owner 16/11 16:25Z, "Thỉnh tranh" download chip) — report (r2: + Có bản mới)
 
-Branch: `review/status-icons` @ 3c68b657c (from origin/main 0ce59361). Pushed. READY FOR REVIEW ("SẴN SÀNG KIỂM").
+Branch: `review/status-icons` (r2: merged origin/main 2e9615fb; sha in the coordinator message). Pushed. READY FOR REVIEW ("SẴN SÀNG KIỂM").
 START_CTX ≈ 10 % of the window; finished well under the roll-over line (no handover needed).
 
 ## What changed (kit first)
@@ -38,3 +38,10 @@ No other persistent on-screen status chip/strip found (grep: kchip, banner, stri
 - game-feel.js (sw-serve with old main overlay): exit 0; fold/ipad/phone effects run, `errs` [] everywhere; OLD SAVE made by main's build loads in this build (oldLoad ok, inv 2); offline ok.
 - media-check (no @media in the design canvas): OK, built by build_site.sh. perf.js: see note below.
 - Shots (branch `review/status-icons`, dev/handover/reports/status-icons/): `si-755x1000-{idle,busy,done,panel}.jpg`, `si-1180x820-{idle,busy,done,panel}.jpg` (@2).
+
+## r2 (coordinator order: also convert #kupdchip)
+- `#kupdchip` "Có bản mới" → status icon `st-upd` (swreg.js `chip()`/`place()` now call `kitStatusIcon`; glyph ⟳ placeholder + seal-red dot; `onTap` opens the existing card #kupd; the top-bar placement code and `.kupdchip` css are gone). KIT.md §35.2 + §77.1 updated. ART REQUEST: update icon (same request as the download icon).
+- co-op clock `#kctm` / `#kctmf` left as is (coordinator).
+- BUG FOUND + FIXED (affects the download icon too): on portrait tabs other than Hành sự the stage collapses to height 0, so the stage rail is invisible there. Status icons now fall back to the fixed corner dock (bottom-left, just above the tab bar) whenever the stage is not visible (`jrail.paint`, re-checked 450 ms after a tab change). Calendar/goal/chat stay stage-only as before. Test: status-icon.js walks 4 tabs (icon visible, 44 px, above the tab bar).
+- sw-update.js (play) updated to the icon: 23/24. The one FAIL ("sổ written before the reload == sổ after it", `reading 'slice'`) also FAILS on plain origin/main 2e9615fb (baseline run 17/24: there the chip is hidden by the finished card-flip overlay `.kmov`, plus same-tab and 0-lost fails) → not caused by this branch. The test now dismisses a finished `.kmov` before checking the icon (the icon waits behind motion moments by design, as the chip did). brand-seal.js: chip lookups are null-safe, not re-run.
+- perf.js --devices fold: aborted ("browserContext.close", exit 124) in this sandbox; not a result either way. Animation is CSS transform/opacity only.
