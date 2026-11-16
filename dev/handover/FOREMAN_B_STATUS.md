@@ -27,7 +27,7 @@ Connectors (account B): GitHub push OK · Magnific OK (project "Personal" ba4aec
 | D33 routes-port | review/routes-port | opus | QUEUED (re-measure with C7) |
 | D34 scheme-games-port | review/scheme-games-port | sonnet | RUNNING |
 | D36 leaderboard + Bảng vàng | review/rank-port | sonnet | QUEUED |
-| D39 appearance-port | review/appearance-port | sonnet | RUNNING |
+| D39 appearance-port | review/appearance-port @00ff5a35 | sonnet | REVIEWING (review/appearance-port-r1, sonnet) |
 | D40 weather-risk-port | review/weather-port | sonnet | QUEUED |
 | D41 promote-servants | review/promote-servants | opus | QUEUED (after Foreman C's D29 roster) |
 | D42 places-leftovers | review/places-port | sonnet | QUEUED (after D30) |
@@ -54,3 +54,4 @@ All 6 pending images UPLOADED by Foreman B (11/16): img/fx/buoi-{wash,mist,hills
 - Q8 (C23 follow-up, for Foreman C's C7 balance pass): rival NPC minigame scores (kg82NpcMean) unchanged, so low-level players now beat rivals far more easily; and in the lễ/trị cung/xử án quiz banks the right answer is often the longest option (guessable). Suggest C7 or a small worker rebalance/rewrite.
 - Q9 (C35 pcard-fill): the game has no per-person 'ghét' (dislike) data — the card shows only known traits/tendencies and the Emperor's known likes. Add dislike data as a design item? Also Thỉnh an stays a talk option of the visit (no free shortcut that would bypass one-talk-per-visit).
 - Q10 (C37 panel-size): with one frame size per viewport, short one-line notices now sit in a full-size frame with empty paper (as the rule asks). Owner may want to see it before it goes live.
+- Q11 (D39 appearance-port): her own ingredient-specific allergy in recipes (PM:L326) was not built — rash causes already include son phấn and bad-luck food. Owner wants a per-ingredient allergy in recipes (new feature), or is the current cause list enough?
