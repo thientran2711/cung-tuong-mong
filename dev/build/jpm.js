@@ -31,7 +31,7 @@ function kpmDir(slot){if(kpmIsPlace(slot)){const P=kpmPlace(slot.slice(2));retur
 /* the L2 picture for now: festival state of this buổi if drawn, else season × buổi, else the nearest buổi of the season */
 function kpmArt(slot){const dir=kpmDir(slot);if(!dir)return null;const have=(KPM_DATA.have||{})[dir]||[];const b=kpmBuoiW(),se=kpmSeason();
  let f=null;try{f=typeof festToday==="function"&&festToday()}catch(e){}
- const L=[];if(f&&f.k){L.push(f.k+"-"+b);const ff=f.files&&f.files[b],mm=ff&&/map-fest-(.+)\.webp/.exec(ff);if(mm)L.push(mm[1])} /* same festival state as the Dư đồ map (Đoan ngọ / Trùng cửu: the noon picture serves sáng + chiều) */const near={sang:["sang","trua","chieu"],trua:["trua","sang","chieu"],chieu:["chieu","trua","sang"],toi:["toi"]}[b]||[b];
+ const L=[];try{if(typeof wdTang==="function"&&wdTang())L.push("tang-"+b)}catch(e){} /* quốc tang: painted mourning state tang-<buổi> when Foreman C has drawn it (OD:L1415), else the festival / season picture */if(f&&f.k){L.push(f.k+"-"+b);const ff=f.files&&f.files[b],mm=ff&&/map-fest-(.+)\.webp/.exec(ff);if(mm)L.push(mm[1])} /* same festival state as the Dư đồ map (Đoan ngọ / Trùng cửu: the noon picture serves sáng + chiều) */const near={sang:["sang","trua","chieu"],trua:["trua","sang","chieu"],chieu:["chieu","trua","sang"],toi:["toi"]}[b]||[b];
  near.forEach(x=>L.push(se+"-"+x));L.push("xuan-sang");const st=L.find(x=>have.includes(x));return st?{src:`img/pl2/${dir}-${st}.webp`,dir}:null}
 
 /* who is where inside the palace, from the one ledger (S.where) and the map's own count (countAt) */
