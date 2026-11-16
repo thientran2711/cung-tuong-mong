@@ -86,8 +86,8 @@ window.kitLose=kitLose;window.kitCoins=kitCoins;
 .krevn{position:relative;font-family:var(--display,serif);font-size:1.18rem;line-height:1.25;text-shadow:0 2px 6px #000a;animation:krevUp .4s calc(var(--krise)*.6) ease-out both}
 .krev>.kgchip{position:relative;animation:krevUp .4s calc(var(--krise)*.8) ease-out both}
 .krevf{position:relative;font-size:.76rem;color:#f6ead6c0}
-.krevok{position:relative;margin-top:6px;min-width:120px;animation:krevUp .4s var(--kok,900ms) ease-out both}
-.krev.krev-out{animation:krevOut var(--kshelf,380ms) ease-in forwards}
+.krevok{position:relative;margin-top:6px;min-width:120px;animation:krevUp calc(.4s*var(--pace)) var(--kok,calc(900ms*var(--pace))) ease-out both}
+.krev.krev-out{animation:krevOut var(--kshelf,calc(380ms*var(--pace))) ease-in forwards}
 @keyframes krevBurst{0%{transform:scale(.2);opacity:0}35%{transform:scale(1.15);opacity:1}100%{transform:scale(1);opacity:.85}}
 @keyframes krevBreath{0%,100%{opacity:.85;transform:scale(1)}50%{opacity:1;transform:scale(1.06)}}
 @keyframes krevRise{from{transform:translateY(60px) scale(.35);opacity:0}to{transform:none;opacity:1}}
@@ -98,7 +98,7 @@ window.kitLose=kitLose;window.kitCoins=kitCoins;
 .kcoinfly{position:fixed;left:0;top:0;width:24px;height:auto;z-index:9470;pointer-events:none;will-change:transform,opacity}
 /* §54.2 lose card: the item(s) fade, grey and fall a little inside the notice card */
 .klspic{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
-.klsfall{animation:klsFall var(--klfall,1.3s) ease-in .35s both}
+.klsfall{animation:klsFall var(--klfall,calc(1.3s*var(--pace))) ease-in calc(.35s*var(--pace)) both}
 @keyframes klsFall{0%{transform:none;opacity:1;filter:none}100%{transform:translateY(16px) rotate(7deg);opacity:.42;filter:grayscale(1)}}
 @media (prefers-reduced-motion:reduce){.krev *,.krev,.klsfall,.krevok{animation:none!important}.klsfall{opacity:.5;filter:grayscale(1)}.krevfly,.klsfly,.kcoinfly{display:none!important}}
 .kf-still .krev *,.kf-still .krev,.kf-still .klsfall,.kf-still .krevok{animation:none!important}

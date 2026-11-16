@@ -59,3 +59,4 @@ Why this order: face-sharp (§71) and tutorial (§72) were already registered by
 | §20 / §28 / §31 / §33 / §36 / §37 / §40 / §41 / §42 | stale copies on unmerged old branches (kit-podium, title-screen, emotion, kit-j95, palace-map, tutorial, person-acts, rank0-ivory, close-bugs, kit-table, tabs-kit) | not on main; renumber to §76+ at merge time (see KIT_REQUESTS.md) |
 | §60–§70, §73 | no collision | — |
 - (16/11, kit keeper 2) §81 = SCENE-END BUTTON (kitSceneEnd / kitSceneEndLabel, j93, review/kit-keeper-2). Next free: §82.
+- (16/11, anim-pace) §82 = ONE ANIMATION PACE (BAL.pace / kitPace / --pace, review/anim-pace); coordinator to confirm the number. Next free: §83.
