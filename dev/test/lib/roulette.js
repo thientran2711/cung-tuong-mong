@@ -65,6 +65,9 @@ async function passNewLifePopups(page,opt){
   for(let i=0;i<o.max;i++){
     const st=await page.evaluate(()=>({q:Q.length,m:!document.getElementById('modal').hidden}));
     if(!st.q&&!st.m)break;
+    /* KIT 81 scenes (flip card, edict, bloom...) end with ONE kit button .kmend outside #modal */
+    const km=page.locator('.kmend:visible').first();
+    if(await km.count()){await km.tap({timeout:3000}).catch(()=>{});await page.waitForTimeout(700);continue}
     const bt=await page.locator('#modal button').all();let hit=null;
     for(const t of o.pri){for(const x of bt){if(!(await x.isVisible()))continue;if((((await x.textContent())||'').trim()).startsWith(t)){hit=x;break}}if(hit)break}
     if(!hit)for(const x of bt){if(await x.isVisible()&&/mclose|kit-x/.test((await x.getAttribute('class'))||(await x.getAttribute('id'))||'')){hit=x;break}}
