@@ -7,3 +7,4 @@ Tests (merged build, 755x1000/1000x755/1180x820/1366x1024/844x390): modal-swipe 
 Also merged review/log-sync-r2 deabc2aa32 (an-tinh fix + 5 log fixes) and origin/main 02a0d3f1 (reign-road, jact). assemble.py conflicts resolved by hand: main's module list + jlogsync.js after jtruth.js (jrail.js kept). Generated files rebuilt, not hand-merged.
 Re-tests on final build: modal-swipe 0 STUCK; stage-rail 5/5 PASS; book-fig-scale + book-figwide ALL OK; panel-size errs 0 at 5 sizes; log-sync-night PASS x4; log-sync-week 0 leaks; log-sync audit drift 2 (log-sync-r2 alone: 28).
 Final: also merged origin/main c4e89f89 (rebuilt); same tests re-run green (stage-rail 5/5, modal 0 STUCK, book-fig ALL OK, log-sync-night 4/4).
+Last: merged origin/main feba37e5 (rebuilt); stage-rail 5/5, modal 0 STUCK at 5 sizes, book-fig ALL OK, log-sync-night 4/4.
