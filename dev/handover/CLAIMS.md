@@ -195,3 +195,10 @@
 | ITEM CONSERVATION + ITEM ledger (s17 13:50Z/13:55Z; OD 13:30Z (3) + 13:40Z (a)) | review/item-ledger | D | session_01DgYSWoSdvBQtzpXxCDVUPh | RUNNING | 16/11 13:45Z |
 | merge-train-8 successor c (sonnet) | review/merge-train-8 | main s17 | session_01UV1SzhTCE7SXbum6V4ghBh | RUNNING | 16/11 13:39Z |
 | D4 npc-death review | review/npc-death-r1 | D | session_01DgYSWocL5CmLHseB9i8sEn | RUNNING | 16/11 13:42Z |
+| D4 npc-death review | review/npc-death-r1 | D | (reviewer opening) | RUNNING | 16/11 13:42Z |
+| story14-p1 fix worker (opus) from r1 FAIL list (main s16 12:55Z) | review/story14-p1-r2 | C | (opening) | RUNNING | 16/11 13:45Z |
+| A12 eunuch picker code review + art-complete part 2 state (sonnet, orphan #29) | review/art-complete-r2 | C | (opening) | RUNNING | 16/11 13:45Z |
+| TITLE SYSTEM phase 1 logic (opus; on review/title-tag) | review/title-sys | C | (opening) | RUNNING | 16/11 13:45Z |
+| TITLE PLATE art SAMPLE sheet (sonnet, Magnific; sample to main first) | review/title-plate-art | C | (opening) | RUNNING | 16/11 13:45Z |
+| ITEM ART AUDIT (sonnet; OD 13:50Z; report + sample sheet first) | review/item-art-audit | C | (opening) | RUNNING | 16/11 13:45Z |
+| B-answers art: cắm hoa board+podium SAMPLE, 3 D50 full-body figures, 'Sáng hôm sau' banner (sonnet) | review/b-answers-art | C | (opening) | RUNNING | 16/11 13:45Z |
