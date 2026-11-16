@@ -17357,11 +17357,11 @@ BAL.dh={n0:[1,5,10],step:2,artLv:[3,4,5],
    hieu  the Emperor's hiệu (Thục, Hiền… TITLES): rank ≥ minRank (3 = Tần), Sủng ≥ RANKS[rank].s + sung, Danh ≥ RANKS[rank].d + danh, gapM months
          at the rank; eligible → p % each month (bestow on son / promo / contest: at once); Danh +danhG on the grant. Book + seal come with it.
    conf  punishment → confiscation: p[kind] = [% the hiệu (+ book + seal) is taken, % the worn achievement title is taken]; Danh −danh, Sủng −sung.
-         Atonement opens wait months later (out of lãnh cung, no cấm túc): kinh copies of Chép kinh, or Danh +cong (lập công).
+         Atonement opens wait months later (out of lãnh cung, no cấm túc): kinh copies of Chép kinh, or Danh +cong (lập công; never above top = the Danh ceiling of ap/apply).
    it    the book / seal: lose = % per month per piece held (a jlost case); lostDanh = Danh lost when the case closes and it is not back;
          backW = weeks before a piece the Nội vụ phủ found (census) goes home. */
  hieu:{minRank:3,sung:10,danh:8,gapM:2,p:25,danhG:5},
- conf:{p:{cold:[100,100],giang:[50,35],cam:[0,40]},danh:5,sung:3,wait:3,kinh:3,cong:12},
+ conf:{p:{cold:[100,100],giang:[50,35],cam:[0,40]},danh:5,sung:3,wait:3,kinh:3,cong:12,top:100},
  it:{lose:2,lostDanh:8,backW:[4,10]}};
 /* ================= jnwq: NO WORD GAMES, family C (owner 16/11 07:20Z + 07:25Z, s11, review/nw-quiz) =================
    The four vấn đáp / quiz kinds of the promotion exam (jexam EXK: le, tc, xa, thq) are now SKILL games of the same subject, winnable by what is SHOWN
@@ -37994,12 +37994,14 @@ window.dhCheck=dhCheck;
 function kinhN(p){const e=p&&p.dh&&p.dh.m_kinh;return e?(e.n|0):0}
 function confOpenOK(p){const c=p&&p.dhConf;return !!c&&(c.hieu||(c.titles||[]).length)&&!p.out&&!((p.confined||0)>0)&&S.turn-(c.at|0)>=C().wait}
 function confState(p){const c=p.dhConf;if(!c)return null;const B=C();if(!c.open)return{open:0,left:Math.max(0,B.wait-(S.turn-(c.at|0))),blocked:p.out?"đang ở lãnh cung":(p.confined||0)>0?"đang bị cấm túc":""};
- const kn=kinhN(p)-(c.kn|0),dn=(p.danh|0)-(c.d0|0);return{open:1,kn:Math.max(0,kn),kNeed:B.kinh,dn:Math.max(0,dn),dNeed:B.cong,done:kn>=B.kinh||dn>=B.cong}}
+ const kn=kinhN(p)-(c.kn|0),dn=(p.danh|0)-(c.d0|0),dN=congNeed(c.d0);return{open:1,kn:Math.max(0,kn),kNeed:B.kinh,dn:Math.max(0,dn),dNeed:dN,done:kn>=B.kinh||dn>=dN}}
+/* road B never asks for more Danh than the ceiling leaves (reviewer r1: Danh at opening ≥ top − cong could never finish) */
+function congNeed(d0){const B=C();return Math.max(0,Math.min(B.cong,B.top-(d0|0)))}
 window.dhConfState=confState;
 function confOpen(p){const c=p.dhConf;c.open=1;c.kn=kinhN(p);c.d0=p.danh|0;
  if(p===S){log(`Thái giám Nội vụ phủ ngầm báo: chép kinh sám hối hoặc lập công thì có thể xin lại hiệu ban.`);
   if(typeof kitPanel==="function")kitPanel({kind:"notice",title:"Đường sám hối",subject:typeof pEunCourt==="function"?pEunCourt("ped"):null,
-   sections:[{h:"",rows:[["Chép kinh sám hối",`chép đủ ${C().kinh} quyển kinh từ nay (Tài nghệ › Chép kinh)`],["Hoặc lập công",`Danh thêm ${C().cong} so với hôm nay (đang ${S.danh|0})`],
+   sections:[{h:"",rows:[["Chép kinh sám hối",`chép đủ ${C().kinh} quyển kinh từ nay (Tài nghệ › Chép kinh)`],["Hoặc lập công",`Danh thêm ${congNeed(c.d0)} so với hôm nay (đang ${S.danh|0})`],
     ["Xem tiến độ","Nhiệm vụ › Danh hiệu"]]}],btn:"Đã hiểu"})}}
 function dhRestore(p,how){const c=p.dhConf;if(!c)return null;const got=[];
  if(c.hieu){if(!p.hieu&&!(rivals||[]).some(v=>v&&v!==p&&v.hieu===c.hieu)&&!(p!==S&&S.hieu===c.hieu))p.hieu=c.hieu;got.push(`hiệu «${c.hieu}»`)
@@ -41880,7 +41882,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="59285ee75dcd";window.CTM_BUILD=BUILD;
+const BUILD="a790091f01e8";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

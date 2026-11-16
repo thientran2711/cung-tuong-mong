@@ -112,12 +112,14 @@ window.dhCheck=dhCheck;
 function kinhN(p){const e=p&&p.dh&&p.dh.m_kinh;return e?(e.n|0):0}
 function confOpenOK(p){const c=p&&p.dhConf;return !!c&&(c.hieu||(c.titles||[]).length)&&!p.out&&!((p.confined||0)>0)&&S.turn-(c.at|0)>=C().wait}
 function confState(p){const c=p.dhConf;if(!c)return null;const B=C();if(!c.open)return{open:0,left:Math.max(0,B.wait-(S.turn-(c.at|0))),blocked:p.out?"đang ở lãnh cung":(p.confined||0)>0?"đang bị cấm túc":""};
- const kn=kinhN(p)-(c.kn|0),dn=(p.danh|0)-(c.d0|0);return{open:1,kn:Math.max(0,kn),kNeed:B.kinh,dn:Math.max(0,dn),dNeed:B.cong,done:kn>=B.kinh||dn>=B.cong}}
+ const kn=kinhN(p)-(c.kn|0),dn=(p.danh|0)-(c.d0|0),dN=congNeed(c.d0);return{open:1,kn:Math.max(0,kn),kNeed:B.kinh,dn:Math.max(0,dn),dNeed:dN,done:kn>=B.kinh||dn>=dN}}
+/* road B never asks for more Danh than the ceiling leaves (reviewer r1: Danh at opening ≥ top − cong could never finish) */
+function congNeed(d0){const B=C();return Math.max(0,Math.min(B.cong,B.top-(d0|0)))}
 window.dhConfState=confState;
 function confOpen(p){const c=p.dhConf;c.open=1;c.kn=kinhN(p);c.d0=p.danh|0;
  if(p===S){log(`Thái giám Nội vụ phủ ngầm báo: chép kinh sám hối hoặc lập công thì có thể xin lại hiệu ban.`);
   if(typeof kitPanel==="function")kitPanel({kind:"notice",title:"Đường sám hối",subject:typeof pEunCourt==="function"?pEunCourt("ped"):null,
-   sections:[{h:"",rows:[["Chép kinh sám hối",`chép đủ ${C().kinh} quyển kinh từ nay (Tài nghệ › Chép kinh)`],["Hoặc lập công",`Danh thêm ${C().cong} so với hôm nay (đang ${S.danh|0})`],
+   sections:[{h:"",rows:[["Chép kinh sám hối",`chép đủ ${C().kinh} quyển kinh từ nay (Tài nghệ › Chép kinh)`],["Hoặc lập công",`Danh thêm ${congNeed(c.d0)} so với hôm nay (đang ${S.danh|0})`],
     ["Xem tiến độ","Nhiệm vụ › Danh hiệu"]]}],btn:"Đã hiểu"})}}
 function dhRestore(p,how){const c=p.dhConf;if(!c)return null;const got=[];
  if(c.hieu){if(!p.hieu&&!(rivals||[]).some(v=>v&&v!==p&&v.hieu===c.hieu)&&!(p!==S&&S.hieu===c.hieu))p.hieu=c.hieu;got.push(`hiệu «${c.hieu}»`)

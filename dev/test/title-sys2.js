@@ -62,6 +62,8 @@ const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT,S
   if(v.hieu||!v.dhConf||v.dhConf.hieu!==hv)F.push('NPC demote not confiscated');if(has(v,'sacphong'))F.push('NPC book not taken');
   v.out=false;v.confined=0;S.turn+=B.conf.wait;dhMonth();if(!v.dhConf||!v.dhConf.open)F.push('NPC atonement not opened');v.danh=Math.min(100,(v.dhConf.d0|0)+B.conf.cong);dhMonth();
   if(v.hieu!==hv||v.dhConf){F.push('NPC lập công did not restore');o.npcDbg={hv,hieu:v.hieu,conf:v.dhConf,danh:v.danh,out:v.out,cf:v.confined,alive:v.alive,st:dhConfState(v),turn:S.turn}}if(has(v,'sacphong')!==1){F.push('NPC book not back');o.npcBook=[has(v,'sacphong'),findIn(String(v.id),'sacphong'),JSON.stringify((S.il.box||[]).filter(x=>x.e&&x.e.own===String(v.id)).map(x=>[x.e.k,x.why])),JSON.stringify((S.lost||[]).filter(c=>c.e&&c.e.own===String(v.id)).map(c=>[c.k,c.st,c.at]))]}
+  /* reviewer r1: road B near the Danh ceiling (Danh at opening ≥ top − cong) must still finish */
+  {const P1=JSON.stringify(B.conf.p);B.conf.p.giang=[100,0];dhWeek();if(v.hieu){v.danh=B.conf.top-2;demote(v,'phạm cung quy');dhWeek();B.conf.p=JSON.parse(P1);v.out=false;v.confined=0;S.turn+=B.conf.wait;dhMonth();if(v.dhConf&&v.dhConf.open){v.danh=B.conf.top;dhMonth()}if(v.dhConf)F.push('road B stuck near the Danh ceiling')}else B.conf.p=JSON.parse(P1)}
   /* inline rank drop (a route with no punisher function) + cấm túc (punish sev 1) — odds forced */
   dhWeek();B.conf.p.giang=[100,0];const hw=w.hieu;w.rank=Math.max(0,w.rank-1);dhWeek();if(w.hieu||!w.dhConf)F.push('inline rank drop not caught');B.conf.p=JSON.parse(P0);
   dhWeek();S.dh.w_kim={n:1,i:0};dhSync(S,true);dhWear(S,'w_kim');B.conf.p.cam=[0,100];punish(S,'vô lễ',1);dhWeek();B.conf.p=JSON.parse(P0);
