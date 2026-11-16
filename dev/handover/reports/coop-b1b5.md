@@ -1,7 +1,7 @@
-SẴN SÀNG KIỂM 49c9573847e3baede3cf53f9674385ba5c167888
+SẴN SÀNG KIỂM d0f2260ac0a945c5ce862bec3df58e8649c333c5
 
 # coop-b1b5 — D21 co-op B1–B5 (orphan #20) — worker report
-Branch: review/coop-b1b5 @ 49c95738 (base origin/main 399483e3). START_CTX ≈ 3 % of the window; finished at ≈ 25 %.
+Branch: review/coop-b1b5 @ d0f2260a (code 49c95738 + PROGRESS) (base origin/main 399483e3). START_CTX ≈ 3 % of the window; finished at ≈ 25 %.
 Spec read verbatim: dev/coop/COOP_AUDIT.md "Big items" B1–B5 (lives on review/coop-pets, H7:L80).
 **Note for the reviewer/coordinator:** this branch MERGES review/coop-pets (A10, queued, never reviewed) because B1 extends its `res.pet`/`pos`
 relay (LUẬT ƯU TIÊN SỐ 1: reuse). Reviewing this branch therefore also reviews coop-pets. Its conflicts with main were resolved
