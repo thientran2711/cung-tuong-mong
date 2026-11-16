@@ -20,7 +20,8 @@ One branch at a time, right after its reviewer PASS, by the foreman who owns it.
 | tool | what | time on this box |
 |---|---|---|
 | `dev/tools/tier.js [ref] [--base origin/main] [--json]` | SMALL/BIG per changed line (text-only and layout-number edits stay SMALL; BAL words, save/co-op/time words, game numbers, numbers inside text, logic in core modules → BIG; unsure → BIG). Exit 0 SMALL, 2 BIG | ~1 s |
-| `dev/tools/quickcheck.sh [sha] [--net] [--cpu N]` | sha holds its own build (fresh build = committed index.html, build line aside) · Fold open, 0 page errors · old save made by the LIVE build loads + plays a buổi · iPad perf smoke (4x CPU: new life, 3 tabs, 1 buổi, long tasks) against the live build measured the same way | 35–40 s (budget 5–10 min) |
+| `dev/tools/quickcheck.sh [sha] [--net] [--cpu N] [--runs N]` | sha holds its own build (fresh build = committed index.html, build line aside) · Fold open, 0 page errors · old save made by the LIVE build loads + plays a buổi · iPad perf GATE (4x CPU): 3 runs of new AND live, alternating, cold-start outliers dropped, MEDIANS compared — render() ms (fastest of 12 calls), tab-change ms (4 tabs x 2 visits), buổi ms, tasks > 200 ms, worst task; each must stay under live + max(addMs, live x ratio) and under absolute ceilings. All perf numbers in ONE file `dev/tools/perfgate.json`. `--inject-render-ms N` = self-test (adds N ms to every render() of the new build; must FAIL) | 2.5–3 min (budget 5–10 min) |
+| `dev/tools/gate-selftest.sh <live main> <READY sha> [--perf]` | proves the gate on a scratch origin (no real push): first go-live tags the old main, rollback previous with/without tags, real rollback, no toggle-forward, newer build then rollback, bad targets refused; `--perf` adds normal PASS + injected +250 ms FAIL. Run it when tier.js says 'go-live gate' (any dev/tools/* change is BIG) | ~20 s (+6 min with --perf) |
 | `dev/tools/shots.js <dir> [device…] [--no-net]` | title, home, every tab on Fold + iPad (HOST mode, real profiles), overflow + page errors | ~80 s |
 | `dev/tools/golive.sh <sha> [--yes]` | FF check → tier → quickcheck → push → live tag | ~1 min + push |
 | `dev/tools/rollback.sh previous\|<sha> [--yes]` | one-step rollback (below) | ~1 min + push |
@@ -36,7 +37,15 @@ It is written after V, so a rebuild that changes only this line never makes play
 ## Rollback — what it does
 - main is NEVER reset or force-pushed. A new commit is made on top of live main whose files are exactly the good build's files
   (`git commit-tree <good>^{tree} -p <main>`), main is fast-forwarded to it and tagged `live/…-rollback`. All commits stay.
-- `previous` = newest `live/*` tag whose files differ from main; without tags, the build named first in the build-line history.
+- Target rules (any target, `previous` or a named sha): it must be an ANCESTOR of live main AND a KNOWN live build (a `live/*` tag or
+  an entry of main's build line `CTM_BI.h`), else STOP. A kit-branch commit is inside main's history once the branch went live, but it
+  was never live and does not contain the old main (review r1 blocker: 126 files / 4339 lines). `--known-live` lifts only the
+  "known" rule for an old main from before the build line existed; the ancestor rule is never lifted.
+- `previous` = newest `live/*` tag that is an ancestor of main, has other files than main, and was not rolled away earlier (a
+  `rollback: live <bad> -> …` commit on main marks <bad>); so a second `previous` goes one build further back, never forward to the
+  bad build. No such tag → main's build line `CTM_BI.h[0]` (what was live when this build was made) → else STOP, name a sha.
+- `golive.sh` tags the build that is live NOW (`live/…-<sha>-baseline`) BEFORE its push when it has no `live/*` tag yet (first go-live,
+  or main moved without golive), so `previous` always has a target. The dry run lists the commits whose changes are undone.
 - Site: Pages serves main's root → old index.html + sw.js live in ~1–2 min; players get "Có bản mới" and reopen on the good build at a
   natural break. CDN pictures untouched (content-keyed, only added) → the old build finds its pictures.
 - After: the broken branch merges main (its change is now undone), `git revert <rollback commit>` on the branch, fix, review, go live.
