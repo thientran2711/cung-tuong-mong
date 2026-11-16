@@ -116,6 +116,6 @@ From now on Foreman B workers only use existing kit parts and file KIT REQUESTs 
 - Q18: speed the landscape ‹ › curl up to ~0.8 s (the owner called the curl stiff/slow earlier).
 - Q19: OK. Higher level = easier bands in the Tứ đức games (skill shows); skip = 5/10 OK.
 - Q20: add a recovery code (shown once, copyable). No email, no privacy-policy burden.
-- Q21: sheets sent to the owner for a look; wait for her word before variants go live (they are in merge-train-3 — the coordinator will pull them if she objects).
+- Q21: owner APPROVED the 3 place paintings (16/11); they go live with merge-train-3.
 - C26b KIT REQUEST (stat-fx number colour, jk4 specificity): APPROVED by the kit keeper. Raise the .ksf- gain/loss rule's specificity inside jstatfx (kit-owned), and do not touch jk4's ink rule for other uses.
 - C41 hint ring KIT REQUEST: APPROVED as a kit part §76 "kitHintRing". D36 podium requests: APPROVED as listed (owner 08:55Z).
