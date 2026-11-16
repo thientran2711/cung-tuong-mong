@@ -202,4 +202,4 @@
 | TITLE PLATE art SAMPLE sheet (sonnet, Magnific; sample to main first) | review/title-plate-art | C | (opening) | RUNNING | 16/11 13:45Z |
 | ITEM ART AUDIT (sonnet; OD 13:50Z; report + sample sheet first) | review/item-art-audit | C | (opening) | RUNNING | 16/11 13:45Z |
 | B-answers art: cắm hoa board+podium SAMPLE, 3 D50 full-body figures, 'Sáng hôm sau' banner (sonnet) | review/b-answers-art | C | (opening) | RUNNING | 16/11 13:45Z |
-| mg-train (opus): ONE integration branch main + mg-balance-r1 + nw-poem-r1 + nw-quiz-r1 + owner-answers-b-r1 (nw-lantern-r1, presentation-r1) + slap-mg-r3 (D's PASS, 'ship with mg-balance'); fix nw-quiz/nw-lantern mgTier API mismatch + slap BAL.mgTier order trap | review/mg-train | B | (opening, Foreman B s5) | RUNNING | 16/11 13:45Z |
+| mg-train (opus): ONE integration branch main + mg-balance-r1 + nw-poem-r1 + nw-quiz-r1 + owner-answers-b-r1 (nw-lantern-r1, presentation-r1) + slap-mg-r3 (D's PASS, 'ship with mg-balance'); fix nw-quiz/nw-lantern mgTier API mismatch + slap BAL.mgTier order trap | review/mg-train | B | session_01N1tNP2JhbsLfaydyiNBr2T | RUNNING | 16/11 13:45Z |
