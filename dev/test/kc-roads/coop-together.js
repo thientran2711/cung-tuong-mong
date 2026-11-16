@@ -85,8 +85,10 @@ async function weekBoth(A,B,w){const n=await A.p.evaluate(()=>typeof B4N==='numb
  ok(await until(B,()=>__co().seat==='b'&&__co().online&&__co().online.a&&__co().online.b&&!__co().frozen,null,40000),'B joined seat b, both online');
  /* B's identity card: wait for it, look, accept it as shown */
  {const t0=Date.now();let card=null;while(Date.now()-t0<90000){await clear(A);card=await B.p.evaluate(()=>window.__cardSeen);if(card)break;await sleep(400)}
-  ok(card&&card.find(x=>x.k==='cung')&&card.find(x=>x.k==='cung').dis,'B card: "Vào cung ngay" closed while A is at home',card);
-  ok(card&&card.find(x=>x.k==='nha')&&card.find(x=>x.k==='nha').sel,'B card: home road preselected',card);await shot(B,'01-card-locked')}
+  if(OB==='cn'){/* no home road for cn: no road choice on her card; she waits (kd "cho") after accepting */await B.p.evaluate(()=>{const b=document.querySelector('#modal button[data-nl="ok"]');if(b)b.click()});await sleep(1500);
+   const w=await B.p.evaluate(()=>({kd:S.kc&&S.kc.kd,kc:isKc(),title:kcTitle()}));ok(w.kd==='cho'&&w.kc,'B (no home road) waits outside the palace while A is at home',w)}
+  else{ok(card&&card.find(x=>x.k==='cung')&&card.find(x=>x.k==='cung').dis,'B card: "Vào cung ngay" closed while A is at home',card);
+  ok(card&&card.find(x=>x.k==='nha')&&card.find(x=>x.k==='nha').sel,'B card: home road preselected',card)}await shot(B,'01-card-locked')}
  {const t0=Date.now();while(Date.now()-t0<60000){await clear(A);await clear(B);const a=await A.p.evaluate(()=>__co().world),c=await B.p.evaluate(()=>__co().world);if(a&&c)break;await sleep(500)}}
  const st=async o=>o.p.evaluate(()=>{const f=rivals.find(v=>v.coop)||rivals.flatMap(v=>v.staff||[]).find(x=>x.coop)||null;return{o:S.origin.k,kd:S.kc&&S.kc.kd,kc:typeof isKc==='function'&&isKc(),inPal:!!(S.kc&&S.kc.inPal),gate:!!(S.kc&&S.kc.gate),wIn:S.kc&&S.kc.wIn,due:S.kc&&S.kc.due,end:S.kc&&S.kc.end,name:S.name,d:[S.year,S.month,S.tuan],turn:S.turn,week:__co().week,fr:f&&f.name,srv:!!(S.srv&&!S.srv.risen),rank:S.rank}});
  {const a=await st(A),c=await st(B);ok(a.kc,'A at home',a);ok(c.kc,'B at home',c);ok(a.o!==c.o,'different origins',[a.o,c.o]);ok(String(a.d)===String(c.d),'same date',[a.d,c.d])}
@@ -95,8 +97,8 @@ async function weekBoth(A,B,w){const n=await A.p.evaluate(()=>typeof B4N==='numb
  /* the sending month follows the friend */
  {const a=await st(A),c=await st(B);if(a.kd&&c.kd)ok(a.due===c.due,'same sending month (due)',[a.due,c.due]);else ok((a.kd?a.due:c.due)>=10,'kd due follows the tiểu thư selection month',[a.due,c.due,a.turn])}
  /* A passes first → waits at the gate */
- const pass=o=>o.p.evaluate(()=>{for(let i=0;i<20&&Q.length&&!S.dead;i++){const m=Q[0];if(m.opts&&m.opts.length)chooseM(0);else closeModal()}if(!isKc())return 'not home';
-   if(S.kc.kd){S.kc.ex={art:'',play:1,done:1};kc2Enter(6)}else{S.kc.soOk=1;S.kc.tt={early:false,raw:5,done:1};kcEnter(1)}return{gate:!!S.kc.gate,kc:isKc()}});
+ const pass=o=>o.p.evaluate(()=>{for(let i=0;i<20&&Q.length&&!S.dead;i++){const m=Q[0];if(m.opts&&m.opts.length)chooseM(m.opts.length-1);else closeModal()}if(S.kc&&S.kc.gate)return{gate:true,kc:isKc()};if(!isKc())return 'not home';
+   if(S.kc.kd){S.kc.ex={art:'',play:1,done:1};S.selx=S.selx||{art:''};kc2Enter(6)}else{S.kc.soOk=1;S.kc.tt={early:false,raw:5,done:1};kcEnter(1)}return{gate:!!S.kc.gate,kc:isKc()}});
  ok((await pass(A)).gate,'A passed the selection: waits at the gate');await clear(A);await shot(A,'03-gate');
  {const wk=(await C(A)).week;await weekBoth(A,B,5);for(const o of [A,B])ok(await untilC(o,x=>__co().week===x+1,wk,90000),'gate week: '+o.name+' advanced');await clear(A);await clear(B);
   const a=await st(A),c=await st(B);ok(a.kc&&!a.inPal,'A still at home while B is at home',a);ok(c.kc,'B at home',c)}

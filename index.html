@@ -36382,16 +36382,18 @@ function kc2Enter(raw){const K=S.kc;const sc=Math.round(kc2Score(raw));K.ex.sc=s
  for(let i=Q.length-1;i>=0;i--){const m=Q[i];if(m&&m.pid==="kcE")Q.splice(i,1)}try{if(typeof kg82Close==="function"&&document.getElementById("kg82"))kg82Close(true)}catch(e){}
  K.inPal=1;K.yIn=S.year;S.kpTron=1;S.out=0;S.pal=null;
  if(K.kd==="dan")kc2EnterSrv(tier,sc,raw);else kc2EnterNc(tier,sc,raw);
- kcSnapReset();try{kcHook("enter",{rank:S.rank,tier})}catch(e){}tab="act";render()}
+ kc2R0();kcSnapReset();try{kcHook("enter",{rank:S.rank,tier})}catch(e){}tab="act";render()}
 const KC2SW=["kém","khá","tốt"];
+/* the placement IS the rank of a cung nữ start: the mistress she serves (Nội vụ phủ gives the best girls to the high palaces); tier 0 adds Tân Giả khố after (caller).
+   j42 srvInit with the candidate list narrowed; srvInit's own "Nhập cung làm cung nữ" card is dropped (the caller writes one with the result). */
+function kc2Place(tier,keepNew){const lr=liveRivals;const pickL=L0=>{const L=L0.filter(v=>!v.coop&&RANKS[v.rank]);const hi=L.filter(v=>v.rank>=3),lo=L.filter(v=>v.rank>=1&&v.rank<=2);return tier===2?(hi.length?hi:L):(lo.length?lo:L)};
+ const keep=Q.filter(m=>m.t!=="Nhập cung làm cung nữ");liveRivals=function(){const L=lr.apply(this,arguments);try{const P=pickL(L);return P.length?P:L}catch(e){return L}};
+ try{quiet=true;srvInit()}catch(e){console.error("kc2 srvInit",e)}finally{liveRivals=lr;quiet=false}Q=(keepNew?Q:Q.filter(m=>m.t!=="Nhập cung làm cung nữ")).concat(keep.filter(m=>!Q.includes(m)))}
+/* j67 chapter 1 ("Nhập cung, đứng vững": promoted one step) counts from the rank she really enters with */
+function kc2R0(){try{if(S.st&&S.st.ms&&S.st.ms.id==="nhap"){S.st.ms.r0=S.rank;S.st.ms.t0=S.turn}}catch(e){}}
 const kc2RkN=p=>{try{return p?`${rkName(p)} ${p.name}`:""}catch(e){return p&&p.name||""}};
 function kc2EnterSrv(tier,sc,raw){const K=S.kc;const age=S.age,sac=S.sac,tai=S.tai,duc=S.duc,tam=S.tamco,bac=S.bac;
- /* the placement IS the rank of a cung nữ start: the mistress she serves (Nội vụ phủ gives the best girls to the high palaces), or Tân Giả khố first */
- const lr=liveRivals;const pickL=L0=>{const L=L0.filter(v=>!v.coop&&RANKS[v.rank]);const hi=L.filter(v=>v.rank>=3),lo=L.filter(v=>v.rank>=1&&v.rank<=2);return tier===2?(hi.length?hi:L):(lo.length?lo:L)};
- liveRivals=function(){const L=lr.apply(this,arguments);try{const P=pickL(L);return P.length?P:L}catch(e){return L}};
- try{quiet=true;srvInit()}catch(e){console.error("kc2 srvInit",e)}finally{liveRivals=lr;quiet=false}
- /* srvInit's own "Nhập cung làm cung nữ" card is replaced by the one below (same facts + the selection result) */
- Q=Q.filter(m=>m.t!=="Nhập cung làm cung nữ");
+ kc2Place(tier);
  Object.assign(S,{age,sac,tai,duc,tamco:tam});S.bac=Math.min(bac,25)+(K.angia?0:2);
  if(!S.srv){/* no consort to serve (should not happen): stay a commoner at the gate */return}
  if(tier===2)S.tin=cl((S.tin||40)+8,0,100);if(tier===0){S.srv.lau=4;S.place="tgk";try{S.visit=srvVisitOf("tgk")}catch(e){}}
@@ -36491,7 +36493,7 @@ function kc2Co(){try{const W=window.COOPW;if(!W||!W.on||!W.base||!W.base.P)retur
 function kc2CoMe(){try{const W=window.COOPW;return W.base.P[W.seat]||null}catch(e){return null}}
 function kc2CoHome(P){try{return !!(P&&window.COOPW.friendHome(P))}catch(e){return false}}
 function kc2CoDue(P){const K=P.S.kc;if(K.kd)return K.due;return (S.turn||0)+(KC.ty-S.year)*12+(KC.tm-1-S.month)}
-function kc2CoDueSync(){const K=S&&S.kc;if(!K||!K.kd||K.sent)return;const P=kc2Co();if(!P||!kc2CoHome(P))return;const d=kc2CoDue(P);if(typeof d==="number"&&isFinite(d))K.due=Math.max(K.t0+10,Math.round(d))}
+function kc2CoDueSync(){const K=S&&S.kc;if(!K||!K.kd||K.sent)return;const P=kc2Co();if(!P||!kc2CoHome(P))return;const d=kc2CoDue(P);if(typeof d==="number"&&isFinite(d))K.due=Math.max(K.t0+(K.kd==="cho"?1:10),Math.round(d))}
 /* 1. the road choice */
 function kc2CoLock(){const P=kc2Co();if(!P)return null;const home=kc2CoHome(P);return home?{k:"cung",to:"nha",why:"Hảo hữu đang ở nhà chờ vào cung: hai người vào cung cùng lúc"}:{k:"nha",to:"cung",why:"Hảo hữu đã ở trong cung: ngươi vào cung ngay, cùng lúc với hảo hữu"}}
 (function(){const p0=kcPathHTML;kcPathHTML=function(){let h=p0.apply(this,arguments);try{const L=kc2CoLock();if(!L)return h;
@@ -36509,6 +36511,93 @@ function kc2GateReady(){const K=S&&S.kc;if(!K||!K.gate||K.inPal)return false;if(
  const M=kc2CoMe();const mine=!!(M&&M.S&&M.S.kc&&M.S.kc.gate);const hers=!!(P.S.kc&&P.S.kc.gate);return mine&&hers}
 function kc2GateGo(){const K=S.kc;const g=K.gate;K.gateGo=1;try{K.wIn=(window.COOP&&COOP.state&&COOP.state.week)||0}catch(e){}K.gate=null;Q=Q.filter(m=>m.t!=="Chờ hảo hữu");try{if(g.f==="kc")kcEnter.apply(null,g.a);else kc2Enter.apply(null,g.a)}catch(e){console.error("kc2 gate go",e)}try{showModal();render()}catch(e){}}
 (function(){const e0=kcEndTurn;kcEndTurn=function(){const r=e0.apply(this,arguments);try{if(S&&S.kc&&isKc()&&!S.dead&&kc2GateReady())kc2GateGo()}catch(e){console.error("kc2 gate check",e)}return r}})();
+(function(){const e0=kcEnter;kcEnter=function(){const r=e0.apply(this,arguments);try{if(S&&S.kc&&S.kc.inPal&&!S.kc.r0Fix){S.kc.r0Fix=1;kc2R0()}}catch(e){}return r}})();
+
+/* ---------- "Vào cung ngay" (main s12, 16/11, OD:L1250): the direct road never gives the origin rank outright either ----------
+   A new life entering the palace at once meets the same selection right after "Nhận thân phận": one round of the existing mini-games
+   (the hook window.kcEntryExam for Foreman D's exam mini-game, else playArt) + her numbers → the ceiling, one step lower, or two.
+   A consort start: the rank (origin rank = ceiling; an origin whose ceiling is Đáp ứng has nothing to lose and skips it). A cung nữ start
+   (cnv): the placement (palace head's maid / low consort's maid / Tân Giả khố first). The "Nhập cung" card is corrected to the real result.
+   New lives only (S.selx); every save made before this build is untouched. */
+const KC2DART={cnv:[["kim","Làm bài khéo tay"],["le","Đáp lời ma ma về lễ nghi"]],nc:[["mua","Dâng điệu múa cố quốc"],["le","Hành lễ theo phép Đại Hy"]],bd:[["mua","Dâng điệu múa thảo nguyên"],["le","Hành lễ theo phép Đại Hy"]],
+ cn:[["le","Đáp lời ma ma về lễ nghi"],["","Dâng một chén trà"]]};
+function kc2SelArts(){const k=S.origin.k;if(KC2DART[k])return KC2DART[k];const a=kcBestArt();const A=ARTS.find(x=>x.k===a);return [[a,`Dâng ${A?A.n:"tài nghệ"}`],["le","Đáp lời về lễ nghi"]]}
+function kc2SelOn(){return !!(S&&S.origin&&(S.origin.k==="cnv"?!!S.srv:(S.origin.r||0)>0))}
+PEND.kc2Sel=pp=>{if(!S||S.dead||!S.selx||S.selx.done)return null;const srv=S.origin.k==="cnv";const top=RANKS[S.origin.r||0].n;
+ const o=kc2SelArts().map(([art,n])=>kc2H(kcO(n,{suc:-5},()=>kc2SelPlay(art)),art?"chơi một màn; làm tốt thì được trọng":"lấy phần giữa của màn chơi","có rủi ro"));
+ o.push(kc2H(kcO("Cúi đầu chờ xét",{suc:-5},()=>kc2SelPlay("")),"lấy phần giữa của màn chơi","an toàn"));
+ return{who:srv?pMe():pEmp(),t:srv?`<p>Nội vụ phủ chọn cung nữ. Ma ma xem dung mạo, khéo tay, lễ nghi; người tốt được chia về hầu các vị nương nương bậc cao, người kém phải giặt đồ ở Tân Giả khố trước.</p>`
+  :`<p>Trước ngày phong, Hoàng thượng và Thái hậu cho gọi ngươi ra mắt. Thân phận cho ngươi được phong tới <b>${top}</b>; được hay không là ở buổi hôm nay.</p>`,o}};
+function kc2SelPlay(art){if(!S.selx||S.selx.done)return;S.selx.art=art;const fin=raw=>{if(!S.selx||S.selx.done)return;S.selx.done=1;S.selx.raw=raw;try{kc2SelDo(raw)}catch(e){console.error("kc2Sel",e)}try{showModal();render()}catch(e){}};
+ if(!art){fin(5);return}kc2Play(art,"Tuyển chọn","Điểm màn chơi quyết định phẩm vị",fin)}
+function kc2SelDo(raw){const X=S.selx;const g=X.art;const sc=Math.round(S.sac*.15+S.duc*.15+S.tai*.1+raw*3+((S.arts||{})[g]||0)*1.5+8+(S.th||0)/6+R(9)-4);const tier=sc>=KC2CUT[1]?2:sc>=KC2CUT[0]?1:0;X.sc=sc;X.tier=tier;
+ const note=`kỳ tuyển chọn: ${KC2SW[tier]}, màn chơi ${raw}/10`;
+ if(S.origin.k==="cnv"){const st=[S.age,S.sac,S.tai,S.duc,S.tamco,S.bac];kc2Place(tier,true);[S.age,S.sac,S.tai,S.duc,S.tamco,S.bac]=st;if(S.srv){if(tier===2)S.tin=cl((S.tin||40)+8,0,100);if(tier===0){S.srv.lau=4;S.place="tgk";try{S.visit=srvVisitOf("tgk")}catch(e){}}}
+  const c=Q.find(m=>m.t==="Nhập cung làm cung nữ");if(c){c.h=String(c.h).replace(/\.\s*<\/p>/,`${tier===0?" (trước hết phải giặt đồ ở Tân Giả khố bốn tuần)":""}. Kết quả ${note}.</p>`)}
+  log(`Tuyển cung nữ (${KC2SW[tier]}): ${tier===0?"Tân Giả khố, rồi ":""}hầu ${kc2RkN(srvM())}.`)}
+ else{const top=S.origin.r||0;const rank=Math.max(0,top-(2-tier));const was=S.rank;S.rank=rank;if(rank<was){S.sung=Math.max(0,(S.sung||0)-(was-rank)*5)}S.lastPromo=S.turn;try{palFix()}catch(e){}kc2R0();
+  const c=Q.find(m=>m.t==="Nhập cung");if(c)c.h=String(c.h).replace(`phong <b>${RANKS[was].n}</b>`,`phong <b>${RANKS[rank].n}</b> (${note}${rank<top?`; thân phận cho tới ${RANKS[top].n}`:""})`);
+  log(`Tuyển chọn (${KC2SW[tier]}): phong ${RANKS[rank].n}${rank<top?`, thân phận cho tới ${RANKS[top].n}`:""}.`)}
+ try{kcSnapReset()}catch(e){}deal()}
+(function(){const a0=nlAccept;nlAccept=function(){const was=typeof NLP!=="undefined"&&NLP;const r=a0.apply(this,arguments);
+ try{if(was&&S&&!S.dead&&!S.kc&&!S.selx&&kc2SelOn()){S.selx={};const d=mkP("kc2Sel",{});if(d){const m={t:"Tuyển chọn",h:d.t,opts:d.o,who:d.who,pid:"kc2Sel",pp:{}};const i=Q.findIndex(x=>/^Nhập cung/.test(x.t||""));if(i>=0)Q.splice(i,0,m);else Q.unshift(m);showModal();render()}}}catch(e){console.error("kc2Sel start",e)}return r}})();
+
+/* ---------- CO-OP: an origin with NO home road while the friend is at home (main s12 answer 4, OD:L1263): she never enters first ----------
+   She waits outside the harem as what she was before her entry (kd "cho": cn = a tea maid at Càn Thanh cung not yet favoured; any other origin
+   without a road = waiting at the Nội vụ phủ lodge). Her own small deck (rest, serve, learn), no chapters; her selection comes in the
+   friend's selection month (kc2CoDueSync) and the entry barrier makes both enter in the same week. */
+Object.assign(KCPL,{cw_tra:["Trà phòng Càn Thanh cung","cwTra",1,"Phòng pha trà sau ngự thư phòng; cung nữ hầu trà chờ gọi ở đây."],cw_hl:["Hành lang Càn Thanh cung","cwHl",1,"Hành lang dài, nơi cung nữ đứng hầu chờ lệnh."],
+ cw_nv:["Nội vụ phủ","cwNv",0,"Nơi các ma ma giao việc, xét lỗi, chia người."]});
+Object.assign(SCIMG,{cwTra:"ngu-thu-phong",cwHl:"duong-tam-dien",cwNv:"origin-wide-cnv"});
+KC2W.cho={kgt:"Lòng cung nhân",kap:"Ngày chờ",khm:"Của dành dụm",kty:"Ngày vào cung",rw:"Cung nữ",road:"Chờ ngày vào cung",tabs:{act:"Trà phòng",rv:"Người quen",staff:"Cung nhân",kid:"Tin tức"},
+ hx:{kgt:"Lòng cung nhân (0–100): đám cung nhân quanh ngươi nghĩ gì về ngươi.",kap:"Ngày chờ: còn chờ hảo hữu.",khm:"Của dành dụm.",kty:"Ngày vào cung: cùng ngày với hảo hữu (hai người vào cung cùng lúc)."}};
+KC2HAB.cho={co:[["tra",3],["hl",2],["nv",1]]};
+(function(){const p0=kc2Pre;kc2Pre=function(){return kc2D()==="cho"?"cw_":p0.apply(this,arguments)}})();
+(function(){const p0=kc2P;kc2P=function(k){return kc2D()==="cho"?"cw_"+k:p0.apply(this,arguments)}})();
+function kc2InitWait(){const fam=[kc2T("co","Chưởng sự cô cô",`${pick(SURN)} cô cô`,44+R(8),"mama",pick(["Nghiêm khắc","Hiền lành","Đa nghi"]),25+R(25))];
+ S.kc={v:3,kd:"cho",fam,at:{},once:{},ev:{},ch:{o:0},suit:[],intel:[],proof:{},le:0,kim:0,ds:0,g7:-99,ldSeen:0,r0:S.rank,staff0:S.staff||[],y0:S.year,t0:S.turn||0,end:null,tt:null,log:[]};
+ S.kc.due=S.kc.t0+1;kc2CoDueSync();kc2Words();S.kgt=40;S.kap=0;S.khm=0;S.kld=0;S.place="cw_tra";S.pal=null;S.tonight=null;
+ kcWhere();Q=Q.filter(m=>m.nl);Q.push({t:"Chờ ngày vào cung",who:pMe(),h:`<p>${S.origin.k==="cn"?"Ngươi vẫn còn là cung nữ hầu trà ở Càn Thanh cung; đêm định mệnh chưa đến.":"Ngươi đã đến kinh thành, chờ ở Nội vụ phủ."} Hảo hữu còn ở nhà; hai người sẽ vào cung cùng một ngày.</p>`+kitRows([["Ngày vào cung",`còn chừng ${kcMonthsLeft()} tháng`,"t"]])});
+ kcSnapReset();tab="act";S.visit=kcVisit(S.place);deal();log("Kiếp này ngươi chờ hảo hữu để cùng vào cung.")}
+(function(){const c0=kcCards;kcCards=function(){if(S&&S.kc&&S.kc.kd==="cho"){const co=kcR("co");const X=[];
+  X.push(kcNeed(kcCard({g:"khue",n:"Nghỉ ngơi",t:"Ngả lưng trong phòng cung nhân.",k:2,w:{suc:25},rep:1}),null,"cw_tra"));
+  X.push(kcNeed(kcCard({g:"khue",n:"Pha trà",t:"Pha trà theo đúng mùa, đúng giờ.",k:2,c:{suc:-10},o:od(60+S.tai/5),w:{tai:1},l:{},x:"",fail:()=>{if(co)kcAf(co,-3)}}),null,"cw_tra"));
+  if(co)X.push(kcNeed(kcCard({g:"fam",who:co.id,n:"Hầu cô cô",t:"Đấm lưng, rót trà cho cô cô, nghe dạy phép tắc.",k:2,c:{suc:-10},w:{duc:1},x:"Cô cô với ngươi +5",go:()=>kcAf(co,5)}),co));
+  X.push(kcNeed(kcCard({g:"art",n:"Tập lễ nghi",t:"Tập đi đứng, quỳ lạy, đáp lời.",k:3,c:{suc:-15},lock:S.kc.le>=5,w:{duc:1},x:`Lễ nghi +1 (nay ${S.kc.le}/5)`,go:()=>{S.kc.le++}}),null,"cw_hl"));
+  X.push(kcNeed(kcCard({g:"soc",n:"Trò chuyện với cung nhân",t:"Nghe chuyện các cung.",k:1,c:{suc:-5},w:{kgt:2},x:"biết sơ một phi tần",go:()=>kcIntel(1,2)}),null,"cw_nv"));
+  return kc2Twin(X)}return c0.apply(this,arguments)}})();
+(function(){const w0=kcWeek;kcWeek=function(){if(S&&S.kc&&S.kc.kd==="cho")return;return w0.apply(this,arguments)}})();
+(function(){const m0=kcMonth;kcMonth=function(){if(!(S&&S.kc&&S.kc.kd==="cho"))return m0.apply(this,arguments);const K=S.kc;S.turn++;
+ kcW(()=>{for(const v of liveRivals(true))stipend(v);rivalsMonth();servRanks();servMonth();oanMonth();restock();heirMonth();moodMonth();try{tdMonth()}catch(e){}return""});if(S.dead)return;
+ try{kc2CoDueSync()}catch(e){}if(S.turn>=K.due&&!K.sent&&!S.dead){K.sent=1;S.selx={};const d=mkP("kc2Sel",{});if(d)pushDil(d,"Tuyển chọn")}
+ S.month++;S.tuan=0;if(S.month>12){S.month=1;S.year++;S.age++;try{S.emp.age++;ageYear()}catch(e){}try{allKids().forEach(([kk])=>{if(kk.alive)kk.age++})}catch(e){}}}})();
+/* her selection at the end of the wait: the same kc2Sel card; its result goes through the gate, then she enters (rank under the ceiling) */
+(function(){const d0=kc2SelDo;kc2SelDo=function(raw){if(!(S&&S.kc&&S.kc.kd==="cho"&&isKc()))return d0.apply(this,arguments);S.kc.ex={art:S.selx.art,play:1,done:1};return kc2Enter(raw)}})();
+(function(){const e0=kc2EnterNc;kc2EnterNc=function(tier,sc,raw){if(!(S.kc&&S.kc.kd==="cho"))return e0.apply(this,arguments);const top=S.origin.r||0;const rank=Math.max(0,top-(2-tier));
+ S.rank=rank;S.sung=Math.max(S.sung||0,8+rank*5);S.lastPromo=S.turn;S.staff=S.kc.staff0||[];S.place="home";try{palFix()}catch(e){}deal();
+ Q.push({t:"Nhập cung",who:pMe(),art:"https://ctm-img.victoria-tntt.workers.dev/img/ev-nhap-cung.webp",h:`<p>Cùng ngày với hảo hữu, ${S.name} vào cung, phong <b>${RANKS[rank].n}</b> (kỳ tuyển chọn: ${KC2SW[tier]}, màn chơi ${raw}/10${rank<top?`; thân phận cho tới ${RANKS[top].n}`:""}).</p>`});
+ log(`<b class="g">Vào cung cùng hảo hữu: ${RANKS[rank].n}.</b>`)}})();
+(function(){const s0=kc2Score;kc2Score=function(raw){if(S.kc&&S.kc.kd==="cho")return S.sac*.15+S.duc*.15+S.tai*.1+raw*3+S.kc.le*2+8+(S.th||0)/6+R(9)-4;return s0.apply(this,arguments)}})();
+/* start: in co-op, an origin without a home road while the friend is at home → the wait (whatever the card said) */
+(function(){const a0=nlAccept;nlAccept=function(){const was=typeof NLP!=="undefined"&&NLP;const W=window.COOPW;const hold=!!(W&&W.on&&was);if(hold)W.holdMe=true;let r;
+ try{r=a0.apply(this,arguments);try{if(was&&S&&!S.dead&&!S.kc&&!kcOk(S.origin.k)){const P=kc2Co();if(P&&kc2CoHome(P)){S.selx=null;Q=Q.filter(m=>m.pid!=="kc2Sel");if(S.srv)S.srv=null;kc2InitWait();showModal();render();if(W&&W.on&&!hold)try{W.sendMe()}catch(e){};if(hold)W.heldMe=true}}}catch(e){console.error("kc2 wait",e)}}
+ finally{if(hold){W.holdMe=false;if(W.heldMe){W.heldMe=false;try{W.sendMe()}catch(e){console.error("kc2 coop send",e)}}}}return r}})();
+
+/* the waiting life's own words on the jkc panels (kd "cho") */
+function kc2Cho(){return !!(S&&S.kc&&S.kc.kd==="cho")}
+(function(){const t0=kcTitle;kcTitle=function(){if(kc2Cho())return S.origin.k==="cn"?"Cung nữ hầu trà Càn Thanh cung":"Chờ ngày vào cung";return t0.apply(this,arguments)}})();
+(function(){const h0=kcFamHTML;kcFamHTML=function(){if(!kc2Cho())return h0.apply(this,arguments);const L=kcFamList("nha");return L.length?`<div class="pgwrap">`+pager("kcfam",L.map(m=>({f:kcFace(m),name:m.t})),i=>kcFamCard(L[i]))+`</div>`:kitEmpty("Người quen","Chưa quen ai.")}})();
+(function(){const s0=kcSocHTML;kcSocHTML=function(){if(!kc2Cho())return s0.apply(this,arguments);return kitRows([[kitInfo(NAMES.kgt),S.kgt,"t"]])+kcGroupHTML("soc")}})();
+(function(){const a0=kcArtHTML;kcArtHTML=function(){if(!kc2Cho())return a0.apply(this,arguments);const L=deck.map((a,i)=>[a,i]).filter(([a])=>a.g==="art");if(!L.length)return"";
+ return kitSkillCard({kind:"info",k:"le",name:"Tập lễ nghi",kicker:"Chờ ngày vào cung",level:S.kc.le,max:5,word:"Lễ nghi",desc:"Lễ nghi cộng vào kỳ tuyển chọn ngày vào cung.",bar:false,next:"",acts:L.map(([a,i])=>cardH(a,i))})}})();
+(function(){const s0=kcStoryHTML;kcStoryHTML=function(){if(!kc2Cho())return s0.apply(this,arguments);
+ return kitSkillCard({kind:"story",k:"kty",name:"Chờ hảo hữu",kicker:`Còn ${kcMonthsLeft()} tháng`,level:S.kc.sent?1:0,max:1,word:"Vòng",bar:false,next:"",desc:`Hai người vào cung cùng một ngày. Ngày ấy có kỳ tuyển chọn: làm tốt thì phong tới ${RANKS[S.origin.r||0].n}.`})+kitRows([["Lễ nghi",`${S.kc.le}/5`,"t"]])}})();
+(function(){const h0=kcHud2;kcHud2=function(){const r=h0.apply(this,arguments);try{if(kc2Cho())document.querySelectorAll('#hud2 [data-hx="kap"],#hud2 [data-hx="khm"]').forEach(e=>e.remove())}catch(e){}return r}})();
+(function(){const m0=kcMapHTML;kcMapHTML=function(){const h=m0.apply(this,arguments);if(!kc2Cho())return h;const L=KC2LAND[kc2Br()].sub;return h.replace(`>${L[0]}<`,">Càn Thanh cung<").replace(`>${L[1]}<`,">Nội vụ phủ<")}})();
+(function(){const s0=selfCardHTML;selfCardHTML=function(){const h=s0.apply(this,arguments);return kc2Cho()?String(h).replace("Hòa ước","Chờ ngày vào cung").replace("Lễ nghi Đại Hy","Lễ nghi"):h}})();
+(function(){const g0=window.kitGoalAlt;window.kitGoalAlt=function(){try{if(typeof S!=="undefined"&&S&&!S.dead&&isKc()&&kc2Cho())return{kind:"v1",home:1,n:1,max:1,t:"Chờ ngày vào cung",road:"Chờ hảo hữu",g:"Vào cung cùng ngày với hảo hữu; tập lễ nghi cho kỳ tuyển chọn",next:`Ngày vào cung còn ${kcMonthsLeft()} tháng`,
+ todo:[{t:"Tập lễ nghi",why:"kỳ tuyển chọn xét lễ nghi",tab:"art",tl:KCTABS.art}]}}catch(e){}return g0?g0.apply(this,arguments):null}})();
+(function(){const t0=showTitle;showTitle=function(){const r=t0.apply(this,arguments);try{document.querySelectorAll("#slots .slot .past").forEach(sp=>{sp.textContent=sp.textContent.replace("Công chúa chờ hòa thân · Chờ ngày","Chờ ngày")})}catch(e){}return r}})();
 
 window.__ctmBuilt=1;
 </script>
@@ -36537,7 +36626,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="628822b1401d";window.CTM_BUILD=BUILD;
+const BUILD="a086eef825c3";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

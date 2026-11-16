@@ -91,7 +91,28 @@ Event pictures (KIT §50.1: only a picture that means the event; these show none
    Lễ hội đuốc (nc) / Hội đua ngựa (bd) · the sister's bid to the envoy · the uncle's banquet · hồi 2/3 talks with the father.
 8. Entry animation per origin (OD:L1244) — not built here (no kit part for it yet; see question 3).
 
-## Questions / limits for main
+## Round 2 (main s12 answers, 16/11)
+1. cnv confirmed.
+2. **"Vào cung ngay" goes through the selection too** (every origin): after "Nhận thân phận" a "Tuyển chọn" card comes BEFORE "Nhập cung":
+   one round (window.kcEntryExam hook for Foreman D's exam mini-game, else playArt: the origin's art — cnv khéo tay, nc/bd múa, others their
+   best art — or Vấn lễ, or wait = 5/10) + Sắc/Đức/Tài + art level + Thái hậu attitude → ceiling / −1 / −2. The "Nhập cung" card is rewritten
+   with the real rank ("kỳ tuyển chọn: khá …; thân phận cho tới Quý nhân"). cnv: placement (palace head's maid / low consort / Tân Giả khố first),
+   the srvInit card rewritten. Ceiling Đáp ứng (muoi, thd, td) → no card (nothing to lose). j67 chapter 1 "promoted one step" now counts from
+   the rank she really enters with (all entries, tiểu thư roads too: S.st.ms.r0). New lives only (S.selx). Test dev/test/kc-roads/direct.js:
+   all 9 origins PASS, 0 errors.
+3. Entry animation: hook left (kcHook("enter",…) at every entry), Foreman D builds it.
+4. **Co-op, origin without a home road while the friend is at home** (cn today): she does NOT enter. She waits outside the harem (kd "cho": cn =
+   still the tea maid of Càn Thanh cung; small deck: rest, pha trà, hầu cô cô, tập lễ nghi, chuyện cung nhân), her selection comes in the
+   friend's selection month, and the entry barrier makes both enter in the same week (rank under her ceiling by the selection).
+5. bd: DEPENDENCY on review/origins-r1 (jorigins.js: the bd origin). jkc2 carries all bd data and wakes when that branch merges; not merged
+   here (it is another reviewed scope). Tested in a local scratch merge only.
+
+Round 2 tests: direct.js 9/9 origins PASS; coop-together cnv+cn 36/36 (cn waits, both enter the same week), cnv+nc 37/37; route.js nc 755+1180
+PASS, cnv 1180 PASS and 755 PASS on rerun (the first 755 run ended the life at home by a random "Ở lại quê nhà" choice after the name was
+bribed off the list: a legal ending, the test then saw the next life); kc-lore route td regression PASS.
+
+## Questions / limits for main (round 1, kept)
+
 1. cn vs cnv key naming (top of this report).
 2. "Vào cung ngay" still enters at the origin rank directly; OD:L1250 says every origin earns its rank at a selection. Should the direct
    road get a selection too (out of this task's scope)?
