@@ -215,3 +215,4 @@
 | D25 veil-zoom fix: overlay offset vs main stage figure code at 1180x820 (sonnet) | review/veil-zoom-r2 | B | session_01N1tNP5D4rJRWvpDvFV93Kf | RUNNING | 16/11 13:55Z |
 | D36 rank-port fix pass: replace private krk-* parts with kit parts (sonnet; rows part waits on KIT REQUEST) | review/rank-port-r2 | B | session_01N1tNP6zPQNzSmyMgNCuSPj | RUNNING | 16/11 13:55Z |
 | tham-flip-ui: owner 14:00Z card flip tray too yellow (repaint game style) + rank+name under every card (kit) | review/tham-flip-ui | main s17 | session_01UV1SzhYN2Ensucb2ZqjeRX (sonnet) | RUNNING | 16/11 14:02Z |
+| history-thitam expert (sonnet): lật thẻ bài / mùng 1 & rằm / ngự giá — history, dramas, games → rule proposal | (report only) | main s17 | session_01UV1Szgg8KB5ye6NWizPmHd | RUNNING | 16/11 14:03Z |
