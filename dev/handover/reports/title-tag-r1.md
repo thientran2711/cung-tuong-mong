@@ -10,3 +10,7 @@ START_CTX ~12% (handover line). Merge conflicts fixed: assemble.py (jtitle.js ke
 5. KIT.md 48.1h/d/e + §82 + kit sample §82 (jtitle.js KIT_SAMPLES): PASS.
 6. Page errors: title-tag.js 755+1180 0 errs 0 fails; rank-title 0; kit-conform 85/15 both (= main), floats none; kit-page only the 5 known sample errors (lot/rcpL...) as on main; boot-flash 755+1180 ready, 0 skeleton; game-feel errs 0 (fps "fail" flags are headless software GL, same class as main).
 Branch review/title-tag-r1 pushed; NOT fast-forward-ready until item 3 is fixed.
+
+## Re-check (worker fix 6ef40464, merged with main 2232ea32 -> READY 5d6de0d97)
+Verdict: PASS. My first FAIL measure was flawed (transparent letters lost to the kit's !important colour); worker's -webkit-text-fill-color fix verified by eye (g3 shows halo only, t3 shows crisp letters). Glow-aware scan: rank lines 3.6-4.0:1 (HER 3.97), names 14-17:1, 0 below 3:1, day + night 1180x820@2. 
+Sweep on merged build, 755x1000@2 + 1180x820@2: title-tag.js 0 errs/0 fails/0 list plates; rank-title day/night/cold/dp/kit bad [] errs []; kit-conform 91/15 and 90/15, floats none; kit-page 0 page errors. Merge conflicts again in assemble.py (jtitle.js kept), KIT.md (§61 + §82 both kept), generated files rebuilt. 5d6de0d97 contains origin/main 2232ea32 (fast-forward ok).
