@@ -78,3 +78,6 @@ setTimeout(()=>{try{if(window.RARE97)for(const d of RD97L)if(!RARE97.defs[d.a])R
   if(q.length&&!busy&&S.st.ch.n>=BAL.road.tm[Math.min(i,BAL.road.tm.length-1)]){const id=q[0];if(ARC67[id]&&arcOk67(ARC67[id])){const A=newThread67(id,"tm");
     if(A){q.shift();A.due=S.turn+1;pickNext67(A);X.push(A)}}else q.shift()}}}catch(e){console.error(e)}
  return m0.apply(this,arguments)}})();
+/* origins whose STORY slot is created after j67 loads (jorigins.js STORY.bd, Bắc Địch branch of hòa thân) get the same chapter frame:
+   without it a bd life never runs a67init (no 14-chapter frame, no road). Runs once every script has loaded (B2 finding). */
+setTimeout(()=>{try{if(typeof wrap67==="function")Object.keys(STORY).forEach(wrap67)}catch(e){console.error(e)}},0);
