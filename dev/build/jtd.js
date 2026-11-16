@@ -117,7 +117,7 @@ function kgTdTalk(box,env){const C=kg82Canvas(box,.78,400),{g,W,H}=C;const BH=mg
   g.save();k91RR(g,cx-70,y0+h*.2,140,h*.5,14);g.fillStyle="#fffdf6";g.fill();g.strokeStyle=K91C.hair;g.lineWidth=2;g.stroke();
   if(k<.35){for(let i=0;i<3;i++){g.globalAlpha=.35+.65*Math.max(0,Math.sin(now/170-i*.9));g.fillStyle=K91C.ink;g.beginPath();g.arc(cx-20+i*20,y0+h*.45,5,0,Math.PI*2);g.fill()}g.globalAlpha=1}
   else{g.strokeStyle=K91C.good();g.lineWidth=5;g.beginPath();g.arc(cx+80,y0+h*.2,16,-Math.PI/2,-Math.PI/2+Math.PI*2*(1-Math.min(1,(k-.35)/.65)));g.stroke()}
-  const vx=W*.68,vw=24,lv=k<.45?0:Math.min(.4,(k-.45)*1.2);g.fillStyle="#fffdf6";g.fillRect(vx,y0,vw,h);g.strokeStyle=K91C.hair;g.strokeRect(vx,y0,vw,h);g.fillStyle="rgba(45,122,82,.42)";g.fillRect(vx,y0+h*(1-.38),vw,h*.16);
+  const vx=W*.68,vw=24,lv=k<.45?0:Math.min(.4,(k-.45)*1.2);g.fillStyle="#fffdf6";g.fillRect(vx,y0,vw,h);g.strokeStyle=K91C.hair;g.strokeRect(vx,y0,vw,h);g.fillStyle="#2d7a5244";g.fillRect(vx,y0+h*(1-.38),vw,h*.16);
   g.fillStyle="#c23b22";g.fillRect(vx+3,y0+h*(1-lv),vw-6,h*lv);g.restore();return y0+h+22},done:()=>{bt.hidden=false;next()}});
  if(dm)bt.hidden=true;
  function next(){r++;if(r>=Q.length){done=true;return setTimeout(()=>env.end(pts),400)}const q=Q[r];lvl=0;held=false;cut=false;res=null;phase="talk";t0=performance.now();
@@ -152,9 +152,9 @@ function kgTdTalk(box,env){const C=kg82Canvas(box,.78,400),{g,W,H}=C;const BH=mg
   if(phase==="calm")ring("#8a7350",Math.min(1,k/calm));if(phase==="win"){ring(good,1-Math.min(1,k/WIN));g.save();g.globalAlpha=.5+.5*Math.sin(now/120);g.fillStyle=good;g.beginPath();g.arc(rx,ry,rg*.2,0,Math.PI*2);g.fill();g.restore()}
   g.fillStyle=K91C.ink;g.font=k91F(700,W<420?12:13,1);g.textAlign="center";g.textBaseline="middle";
   kg82Lbl(g,phase==="talk"?"đang nói…":phase==="calm"?"chờ người ấy nguôi":phase==="win"?"tới lúc thưa":phase==="say"?"đang thưa":"",bx,by+bh/2+30,bw);
-  /* her voice bar: green band by who listens */
+  /* her voice bar: green band by who listens (same gauge colours as the Nấu ăn fire gauge, j91 kgCook) */
   const vx=W*.8,vw=Math.max(26,W*.07),vy=H*.1,vh=H*.74,[a,b]=band();g.fillStyle="#fffdf6";g.fillRect(vx,vy,vw,vh);g.strokeStyle=K91C.hair;g.lineWidth=2;g.strokeRect(vx,vy,vw,vh);
-  g.fillStyle="rgba(45,122,82,.42)";g.fillRect(vx,vy+vh*(1-b),vw,vh*(b-a));const ly=vy+vh*(1-lvl);const gr=g.createLinearGradient(0,vy+vh,0,vy);gr.addColorStop(0,"#e8c06a");gr.addColorStop(1,"#c23b22");g.fillStyle=gr;g.fillRect(vx+4,ly,vw-8,vy+vh-ly);
+  g.fillStyle="#2d7a5244";g.fillRect(vx,vy+vh*(1-b),vw,vh*(b-a));const ly=vy+vh*(1-lvl);const gr=g.createLinearGradient(0,vy+vh,0,vy);gr.addColorStop(0,"#f0b040");gr.addColorStop(1,"#c23b22");g.fillStyle=gr;g.fillRect(vx+4,ly,vw-8,vy+vh-ly);
   g.fillStyle=lvl>=a&&lvl<=b?good:K91C.ink;g.beginPath();g.moveTo(vx-3,ly);g.lineTo(vx-13,ly-6);g.lineTo(vx-13,ly+6);g.fill();
   g.fillStyle=K91C.ink;g.font=k91F(700,11,1);kg82Lbl(g,"lớn",vx+vw/2,vy-9,70);kg82Lbl(g,"khẽ",vx+vw/2,vy+vh+10,70);g.textAlign="right";kg82Lbl(g,TD_VOICE[q.c][1],vx-16,vy+vh*(1-(a+b)/2),W*.3);
   kg82DrawPops(g,pops,now);
@@ -208,7 +208,7 @@ function tdWrap(eng,ek){return function(box,env){let hints=0,last=performance.no
  act.querySelector("button").onclick=()=>show(false);
  const act0=()=>{last=performance.now()};box.addEventListener("pointerdown",act0);box.addEventListener("pointermove",act0);
  const iv=IDLE?setInterval(()=>{if(dead)return;if(performance.now()-last>IDLE)show(true)},800):0;
- env.end=raw=>end0(Math.max(0,Math.round(raw-Math.min(2,hints))));
+ env.end=raw=>end0(Math.max(0,raw-Math.min(2,hints)));/* review/mg-balance-2-r1: keep the float (kg82Play grades it with mgGrade); rounding here made the 4 Tứ đức grades jump 9→10 */
  const stop=eng(box,env);return()=>{dead=true;clearInterval(iv);document.querySelectorAll(".tdring").forEach(e=>e.remove());if(stop)stop()}}}
 Object.assign(KG82_ENG,{tdthread:tdWrap(kgTdThread,"tdthread"),tdwalk:tdWrap(kgTdWalk,"tdwalk"),tdtalk:tdWrap(kgTdTalk,"tdtalk"),tdalms:tdWrap(kgTdAlms,"tdalms")});
 
