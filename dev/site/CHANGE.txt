@@ -1,1 +1,1 @@
-Chọn sổ có thẻ Sổ mây (giữ sổ trên mây, nối sổ); nút Chơi một mình mở Chọn sổ.
+Chọn sổ: sửa nhỏ cho thẻ Sổ mây và nút Kiếp mới.
