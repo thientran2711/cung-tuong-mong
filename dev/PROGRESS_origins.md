@@ -48,3 +48,8 @@ Fixes made by the reviewer:
 - Balance rule: bd_hoang c1 "Nhận ngọc, hứa suông" was +80 bạc for free (obvious pick); now costs Đức -3 like the nc twin ("Nhận vàng", Đức -3).
 - Pre-rolled lives (j69): a life rolled before bd existed (ow=1) now keeps its origin (ow69Pick(seed,noBd) uses the old table order without bd);
   new rolls are marked ow=2 and include bd. So the update re-rolls nobody.
+Reviewer checks: dev/test/origins.js 20/20 at 755x1000@2 and 1180x820@2 (10-card roulette, bd + nc cards with lore, every bd arc ends, fam_bd, save round trip), 0 page errors.
+Pre-roll check: 5000 seeds, ow69Pick(seed,true) == old table 5000/5000; new table bd 6.8 %, nc 5.7 %.
+Bots (run_par + inpage6 + inx/inpz + inty from review/balance-pass-r1, alternating bd/nc, 28 lives on main+this branch):
+bd 11 lives: HH 0, avg max rank 4.45 (start 2); nc 13 lives: HH 0, avg max rank 4.23 (start 3). Main itself gives 0 HH with this bot now
+(poison / Thái phi endings), so the 20-40 % target cannot be judged here: re-measure bd vs nc after balance-pass lands.
