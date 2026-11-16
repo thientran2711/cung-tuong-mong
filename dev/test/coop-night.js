@@ -19,7 +19,7 @@ const DCL={waitUntil:'domcontentloaded'};
 async function mk(b,name,vp){const ctx=await b.newContext({viewport:{width:vp[0],height:vp[1]},deviceScaleFactor:vp[2],hasTouch:true,isMobile:vp[0]<1100,reducedMotion:'reduce'});
   await serve(ctx);await ctx.addInitScript(u=>{window.COOP_URL=u},WURL);
   const o={ctx,name,errs:[]};o.page=async()=>{const p=await ctx.newPage();p.setDefaultTimeout(30000);p.setDefaultNavigationTimeout(120000);
-    p.on('pageerror',e=>o.errs.push(e.message));p.on('console',m=>{if(m.type()==='error'&&!/Failed to load resource|favicon/.test(m.text()))o.errs.push('console: '+m.text())});o.p=p;return p};return o}
+    p.on('pageerror',e=>o.errs.push(e.message));p.on('console',m=>{if(m.type()==='error'&&!/Failed to load resource|favicon|navigator.vibrate/.test(m.text()))o.errs.push('console: '+m.text())});o.p=p;return p};return o}
 async function until(o,fn,arg,ms=30000){try{await o.p.waitForFunction(fn,arg,{timeout:ms,polling:250});return true}catch(e){return false}}
 async function tapText(o,re,ms=8000){const t0=Date.now();while(Date.now()-t0<ms){const h=await o.p.evaluateHandle(src=>{const R=new RegExp(src);
   return [...document.querySelectorAll('button,a,[role=button]')].find(b=>b.offsetParent!==null&&!b.disabled&&R.test(b.textContent.trim()))||null},re.source);
@@ -143,6 +143,34 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
  {await toNight('9');const w0=(await D(A)).w;await clear(B);await press(B);await sleep(1500);await leaveBack(B,A,'9 guest at tối');
   for(let i=0;i<3;i++){await clear(B);await sleep(300)}const c=await D(B);if(c.b>=LAST&&!c.ready){await clear(B);await press(B)}
   await clear(A);ok(await press(A),'9: host presses');await merged('9',w0)}
+ /* 10 per-buổi progress survives a reload / rejoin (owner 16/11): 2 acts → reload → khắc + effects kept, not reset, not doubled */
+ async function actsReload(X,Y,tag){await toDay();for(let i=0;i<2;i++){await clear(A);await clear(B)}
+  const x0=await X.p.evaluate(()=>({u:used,tai:S.tai,k:COOPW.tm.myKey(),n:(S.log||[]).length}));
+  await X.p.evaluate(()=>{for(let i=0;i<2;i++){spend(1);S.tai+=2;log('Việc thử '+(i+1)+'.')}render()});await sleep(1800);
+  const x1=await X.p.evaluate(()=>({u:used,tai:S.tai}));ok(x1.u===x0.u+2&&x1.tai===x0.tai+4,tag+': 2 acts done',[x0,x1]);
+  await leaveBack(X,Y,tag);for(let i=0;i<3;i++){await clear(X);await sleep(300)}
+  const x2=await X.p.evaluate(()=>({u:used,tai:S.tai,k:COOPW.tm.myKey()}));
+  ok(x2.u===x1.u&&x2.tai===x1.tai&&x2.k===x0.k,tag+': after the reload khắc and the acts\' effects are kept (not reset, not doubled)',[x0,x1,x2]);
+  await stepBoth(tag,x0.k)}
+ await setTm(A,{buoiMs:120000,pauseCapMs:6000});await reset(A);
+ await actsReload(B,A,'10 guest');for(let i=0;i<3;i++){await clear(A);await clear(B);await sleep(300)}
+ await actsReload(A,B,'11 host');
+ /* 12 the clock ran out at tối while the host had a choice open; the host reloads (clock restored already "up"): it must not freeze */
+ {for(let i=0;i<3;i++){await clear(A);await clear(B);await sleep(300)}
+  if(await toNight('12')){const w0=(await D(A)).w;await setTm(A,{buoiMs:6000,pauseCapMs:1000});await reset(A);
+  await A.p.evaluate(()=>{pushModal({t:'Biến cố đêm',h:'<p>Chọn một.</p>',opts:[{n:'Ra xem',fx:{},x:'',go:()=>{}},{n:'Mặc kệ',fx:{},x:'',go:()=>{}}]});showModal();render()});
+  await clear(B);await press(B);
+  ok(await until(A,()=>{const v=COOPW.tm.view();return v&&v.up},null,30000),'12: the clock runs out (host still in the choice)');await sleep(1500);
+  await leaveBack(A,B,'12 host');
+  const t0=Date.now();let up=null;while(Date.now()-t0<8000){up=await A.p.evaluate(()=>({v:COOPW.tm.view(),due:COOPW.tm.due()}));if(up.v&&up.v.up&&up.due)break;await sleep(300)}
+  ok(up&&((up.v&&up.v.up&&up.due===up.v.key)||up.due===w0+':'+LAST),'12: host clock restored "up" fires its time-up again',up);
+  await merged('12',w0,60000)}}
+ /* 13 stats raised by acts, then a buổi change, then a reload (owner: "23 shows 10 after rejoining"): newest copy wins */
+ for(const [X,Y,tag] of [[B,A,'13 guest'],[A,B,'14 host']]){for(let i=0;i<3;i++){await clear(A);await clear(B);await sleep(300)}await toDay();
+  const k=await X.p.evaluate(()=>COOPW.tm.myKey());await X.p.evaluate(()=>{spend(1);S.tai+=3;S.sac+=2;render()});
+  await stepBoth(tag+' step',k);for(let i=0;i<3;i++){await clear(X);await sleep(300)}await X.p.evaluate(()=>{spend(1);S.tai+=1;render()});await sleep(1800);
+  const x1=await X.p.evaluate(()=>({u:used,tai:S.tai,sac:S.sac,k:COOPW.tm.myKey()}));await leaveBack(X,Y,tag);for(let i=0;i<3;i++){await clear(X);await sleep(300)}
+  const x2=await X.p.evaluate(()=>({u:used,tai:S.tai,sac:S.sac,k:COOPW.tm.myKey()}));ok(JSON.stringify(x1)===JSON.stringify(x2),tag+': stats + khắc identical after a buổi change and a rejoin',[x1,x2])}
  for(const o of [A,B])ok(!o.errs.length,o.name+': no page errors',o.errs.slice(0,5));
  const bad=res.filter(r=>!r[0]);console.log(`\n${res.length-bad.length}/${res.length} passed`);fs.writeFileSync(OUT+'/result.txt',res.map(r=>(r[0]?'ok  ':'FAIL')+' '+r[1]).join('\n')+'\n');
  await b.close();process.exit(bad.length?1:0)})().catch(e=>{console.error(e);process.exit(2)});
