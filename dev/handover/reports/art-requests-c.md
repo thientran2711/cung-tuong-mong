@@ -16,3 +16,15 @@ OPEN (foreman s9 ask 23:13Z): đàn sample must be shown with a REAL game screen
  1. Fetch tools/fit_fig.py from origin/review/fig-cutout-clean (sparse, --depth=30, under flock /home/user/wt/fetch.lock); fit img/_review/art-requests-c/fig-player-look1-t1-a18-dan.webp (511x900 RGBA; source png in my scratch is gone, download from the CDN review path) so the PERSON (not the đàn stand) is the old figure's height (old file img/fig-player-look1-t1-a18.webp is 389x900, person fills it); report scale numbers if the column would shrink her.
  2. Real build of review/minigame-frame @bd223466 (assemble.py + dev/site/build_site.sh), swap the figure in locally, Playwright (pre-installed Chromium, --no-sandbox) iPad 1180x820 deviceScaleFactor 2, open the đàn mini-game, screenshot + a large native crop. Send both paths to foreman s9.
  3. Tools: Magnific MCP (gpt-2-6, images_remove_background); R2 uploads via PUT https://api.cloudflare.com/client/v4/accounts/7fc1b88a522c6a91b40051536fa02cae/r2/buckets/ctm-img/objects/<urlencoded key> (proxy injects the token); review files under img/_review/.
+
+## UPDATE 17/11 (art worker successor): REAL game shot of the đàn pose
+Base: review/minigame-frame @bd223466 built with assemble.py + build_site.sh, served locally, Playwright Chromium iPad 1180x820 @2, the đàn mini-game opened via kg82Open (fig:true) + play phase; the CDN figure URL of the left column (kgfig) routed to the new file. Real browser, not a mock.
+Links (CDN):
+- https://ctm-img.victoria-tntt.workers.dev/img/_review/art-requests-c/dan-real-ipad-1180x820@2.png (full 2360x1640)
+- https://ctm-img.victoria-tntt.workers.dev/img/_review/art-requests-c/dan-real-column-crop-native.png (left column, native 2x)
+- https://ctm-img.victoria-tntt.workers.dev/img/_review/art-requests-c/dan-real-old-vs-new-column.png (same game, old bare figure | new đàn figure)
+Findings:
+1. tools/fit_fig.py and branch review/fig-cutout-clean do NOT exist on origin (only fig-cutout-code*). Measured instead: in both files the person spans the full 900 px (head ~0, shoes ~885), so fit scale = 1.00, no refit needed.
+2. The left column (kgfig) is ~259 x 534 CSS px. The sample is 511x900 (aspect 0.57; old 0.43) so it is width-limited: displayed 249x438 vs old 231x526 => the PERSON shrinks to ~0.83 of her old on-screen height (measured 845 vs ~1020 device px). Fix options: widen kgfig to ~300 CSS px (then scale 1.0) or accept 0.83. Needs a kit decision (KIT_REQUESTS).
+3. BIG: the current build draws the player from fig-consort-c<NN>-t<tier>-a<age> (12 faces x 8 tiers x 4 ages = 384 files, plus hd/ twins), NOT fig-player-look*. The sample was made on the obsolete fig-player-look1 base (the shot swaps it in whatever face she has). A real set must be made per consort face.
+Full-set estimate (per instrument/pose): 384 files x ~43 cr = ~16,500 cr; 1 age x 12 faces x 8 tiers = 96 files = ~4,100 cr (age bands can reuse a pose with fewer files); minimum sensible = 12 faces x current tier = 12 files ~520 cr. With 8 art types (dan, co, tho, ve, mua, huong, theu, banh) multiply accordingly; recommend asking the owner to pick the subset (e.g. dan only, 96 files).
