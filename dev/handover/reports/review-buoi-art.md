@@ -1,4 +1,4 @@
-MOON SAMPLE READY — dev/handover/reports/buoi-art/moon-sample.jpg (mock tối band: thượng tuần / rằm / hạ tuần)
+SẴN SÀNG KIỂM 70fcddacc46ad249865426483ba909f08aea7d76 (branch review/buoi-art, descends from origin/main) — 17 bands + 4 icons + MOON on tối band
 
 SAMPLE READY v2 — dev/handover/reports/buoi-art/sample-sheet.jpg (icons redone as SQUARE tiles with thin gold-red border, 128 px, ~5 KB each; bands unchanged; +40 credits = 160 total)
 
@@ -13,3 +13,8 @@ Calendar in code: a month = 3 tuần (S.tuan 0/1/2), festivals use it (nguyentie
 Painted sprites (gpt-2-6 on black, luma-cut, 192 px WebP 9-17 KB, 40 credits for the sheet): buoi-moon-{crescent,half,gibbous,full}.webp (local only until she OKs).
 Proposed mapping at tối (S.buoi==3): tuần 0 = waxing crescent; tuần 1 = full moon; tuần 2 = waning half (mirrored sprite; lit on the left). gibbous spare (could mark day variation later). Giaothua tối (m12 t2): NO moon (stars + lanterns band). Bands that already paint a moon keep it, no sprite: trungthu, nguyentieu, vulan. thattich (m7 t0) gets the crescent by the rule (band has no moon).
 Code only places/fades the sprite in the band (replaces nothing painted). Waiting for her verdict before wiring.
+
+
+## MOON wired (SẴN SÀNG KIỂM 70fcddac)
+jbuoi.js btrMoon(b,V,tuan): only at tối; S.tuan 0 = crescent, 1 = full, 2 = halfL (mirrored half, lit left). Festival bands trungthu / nguyentieu / vulan (own painted moon) and giaothua (no moon): no sprite, orb moon hidden (no double moon). thattich (m7 t0) gets crescent. Sprites on CDN img/fx/buoi-moon-{crescent,full,halfL}.webp (192 px, 9-17 KB); a thin dark glow keeps the crescent readable on pale bands. Test hook window.__btrVar.tuan.
+Tests: dev/test/buoi-moon.js (10 cases: 3 tuần, other season, non-tối buổi none, 4 festivals none, thattich) at 755x1000 + 1180x820 FAIL 0; dev/test/buoi-art.js (17 bands + icons) FAIL 0; 0 page errors; 755x1000 screens viewed (crescent / full / half). Credits: +40 (moon sheet) = 720 total. Gibbous/half sprites made but not shipped (spare).
