@@ -102,7 +102,7 @@ function close(){if(!el)return;const e=el;el=null;e.classList.add("out");setTime
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-kl]");if(!b)return;e.stopPropagation();
  const kl=b.dataset.kl;
  if(kl==="a2hs"){askMode="guide";paint();return}if(kl==="back"){askMode="ask";paint();return}
- if(kl==="peek"){KLOAD.phase="deferred";close();return}  /* into the game with no download: she opens Sổ mây first; the notice returns on the next visit */
+ if(kl==="peek"){KLOAD.phase="deferred";close();let n=0;const t=setInterval(()=>{const g=document.querySelector('#modal [data-tgo="opt"]');if(g){clearInterval(t);g.click();setTimeout(()=>{const c=document.querySelector(".cloudwrap");if(c)c.scrollIntoView({block:"start"})},350)}else if(++n>40)clearInterval(t)},150);return}  /* into the game with no download: she opens Sổ mây first; the notice returns on the next visit */
  if(kl==="web"){try{localStorage.setItem(CHOICE,"1")}catch(x){}head("Lần đầu nhập cung · thỉnh tranh vẽ, tiếng nhạc về máy");runCore();return}
  if(b.dataset.kl==="go"){KLOAD.phase="skipped";close();startBg()}else if(b.dataset.kl==="retry"){KLOAD.err="";paint();runCore()}},true);
 
