@@ -122,7 +122,7 @@ function promoCost(p,src){const B=BAL.psk,me=p===S;let t="";try{
    thượng's bestow), an honorific name character (phong hiệu, no rank change; silver instead if she already has one), an office / favour for her
    family (house power). Loss: the other consorts' jealousy. Her rank stays; the next one goes through the normal exam. Numbers BAL.psk.seat. */
 function promoFullSeat(p,src,o){const B=BAL.psk.seat,me=p===S,to=rkOf(p)+1,rk=RANKS[to].n;const parts=[];
- let bac=Math.round(B.bacM*(BAL.pay[Math.min(7,to)]||100));let hieu="";if(!p.hieu){const used=[S.hieu].concat(rivals.map(v=>v.hieu));const f=(typeof TITLES!=="undefined"?TITLES:[]).filter(x=>!used.includes(x));if(f.length){hieu=pick(f);p.hieu=hieu}}
+ let bac=Math.round(B.bacM*(BAL.pay[Math.min(7,to)]||100));let hieu="";if(!p.hieu&&typeof dhHieuGrant==="function")hieu=dhHieuGrant(p,"seat",{quiet:1});/* the ONE grant (jdh2): book + seal, Danh +BAL.dh.hieu.danhG; none if her hiệu is confiscated */
  if(!hieu)bac+=B.hieuBac;ap(p,{bac,danh:B.danh});parts.push(`Bạc +${bac}`);if(hieu)parts.push(`phong hiệu «${hieu}»`);
  for(let i=0;i<B.gifts;i++)try{bestow(p,"promo")}catch(e){}if(B.gifts)parts.push(`${B.gifts} món ngự ban`);
  try{const c=clanOf(p);if(c&&typeof tdPowAdd==="function"&&typeof CLANS!=="undefined"&&CLANS.includes(c))tdPowAdd(c,B.pow);if(me)S.dad=cl((S.dad||40)+B.dad,0,100)}catch(e){}parts.push("nhà ngoại được ân");
@@ -198,10 +198,10 @@ function exAbort(){const e=exS(S),pd=e.pend;if(!pd)return;exDone(S,exFinish(exPl
 function exStart(){const P=exPlan(S);P.rk=exRk(P.to);P.passTxt=P.to>=7?"Được dự chọn ngôi Hoàng hậu.":`Thánh chỉ tấn phong ${P.rk}.`;P.cdN=exCd(P.to);
  if(window.__exAuto||typeof kg82Open!=="function"||!document.getElementById("ov")){exDone(S,exSim(S));return}exRun(P,exS(S),r=>exDone(S,r))}
 function exRun(P,e,done){e.pend={raws:[]};const raws=e.pend.raws;let i=0;const n=P.rounds.length;
- const round=()=>{const k=P.rounds[i],K=KG82_KIND[k];KG82.ctx="thi";const lv=exLv(S,k);KG82.lv=lv;try{kg82Preload(k)}catch(x){}
+ const round=()=>{const k=P.rounds[i],K=KG82_KIND[k];KG82.ctx="thi";const lv=exLv(S,k);mgSet(k,{occ:"exam",rank:P.to,lv});/* mg-balance: board ease from the tier; skip keeps her level */try{kg82Preload(k)}catch(x){}
   const d=kg82Open({art:"Khảo hạch",title:`Môn ${i+1}/${n} · ${K.n}`,how:K.how,round:"Môn",roundV:`${i+1}/${n}`,pic:kg82Pic(k)});if(!d){e.pend=null;done(exFinish(P,{raws}));return}
   const box=kg82Box();const SK=Math.round(kg82NpcMean(lv));
-  box.innerHTML=`<h4 class="kpst">Khảo hạch ${P.srv?"lên":"tấn phong"} ${P.rk}</h4>`+kg82Rows([["Giám khảo",exExTxt(P),"t"],["Môn thi",`${i+1}/${n}: ${K.n} · ${K.t}`,"t"],["Độ khó",`${kg82DiffWord(lv,k)} · theo bậc ${lv}`,"n"],["Mức đỗ",`${exBarTxt(P)}, tính cả ${n} môn cùng Tứ đức và tài nghệ`,"n"]])+
+  box.innerHTML=`<h4 class="kpst">Khảo hạch ${P.srv?"lên":"tấn phong"} ${P.rk}</h4>`+kg82Rows([["Giám khảo",exExTxt(P),"t"],["Môn thi",`${i+1}/${n}: ${K.n} · ${K.t}`,"t"],["Độ khó",mgDiffTxt(KG82.tier,k),"n"],["Mức đỗ",`${exBarTxt(P)}, tính cả ${n} môn cùng Tứ đức và tài nghệ`,"n"]])+
    `<div class="kg82act"><button class="${kg82Btn()}" id="kg82go">Bắt đầu thi</button><button class="${kg82Btn(true)}" id="kg82skip">Để tài nghệ quyết định<small>môn này tính ${SK}/10, như người cùng bậc</small></button></div>`;
   $("kg82go").onclick=()=>kg82Play(k,raw=>after(raw,false));$("kg82skip").onclick=()=>after(SK,true)};
  const after=(raw,sk)=>{raws.push(raw);i++;const last=i>=n;try{save()}catch(x){}
