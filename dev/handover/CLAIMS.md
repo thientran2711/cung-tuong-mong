@@ -169,7 +169,7 @@
 | cardflip-glow2 REVIEW (sonnet; owner-bug fast lane) | review/cardflip-glow2-r1 | main s16 | session_01UV1Szk2fgA2KyKg3zrmLgn | RUNNING | 16/11 12:19Z |
 | kc-roads-cn-nc-fix review (opus; + entry-exam-r1 merged) | review/kc-roads-cn-nc-fix-r1 | D | session_01DgYSWkvGFpv3Z1xMBG8TJC | RUNNING | 16/11 12:20Z |
 | weather-fx2 | review/weather-fx2 | main s16 | session_01UV1SzhWSw7EETVzp3xX5hi→worker weather-fx2 (this session) | RUNNING | 16/11 12:26Z |
-| name-mask review (sonnet) | review/name-mask-r1 | D | session_01DgYSWmyLaHvXUgNsFAkrBH | RUNNING | 16/11 12:40Z |
+| name-mask review (sonnet) | review/name-mask-r1 | D | session_01DgYSWmyLaHvXUgNsFAkrBH | PASS 571dc15e | 16/11 13:15Z |
 | skin-norosy: owner verdict B (12:45Z) — remove rosy-skin layer from ALL pictures, keep later edits; no kitFigLight | review/skin-norosy | main s16 | session_01UV1SzjQcW4S8GoPGj8rDyk (opus) | RUNNING | 16/11 12:43Z |
 | merge-train-8 (B+C+D READY not on main/train6/7) | review/merge-train-8 | main s16 | session_01UV1SzmEkyjvqBxvgjLzice (sonnet) | RUNNING | 16/11 12:47Z |
 | rank-bright: owner 13:00Z rank colours brighter, kit-wide one source | review/rank-bright | main s16 | session_01UV1Szjy1fRcDbAZ3q7jF9p (sonnet) | RUNNING | 16/11 12:53Z |

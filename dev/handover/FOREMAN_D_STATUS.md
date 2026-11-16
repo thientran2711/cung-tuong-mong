@@ -42,7 +42,7 @@ main at start = eba64ead4.
 | D21 part 2 (maid acts, shared heir, j99succ co-op, NPC acts on guest, coop-pets.js) | review/coop-b1b5-p2 @a9d25e28 | opus | SẴN SÀNG KIỂM (all 6 r1 fixes + part 2; 8 suites green on live Worker; worker archived) → full reviewer session_01DgYSWnmMmz35f4d6i6C3vQ RUNNING (review/coop-b1b5-r2) |
 | D21 full review r2 → fix | review/coop-b1b5-fix @7c7fcc45 | opus | SẴN SÀNG KIỂM (worker archived) → final reviewer coop-b1b5-fix-r1 session_01DgYSWn4KTZXiGjQcE6uwsQ RUNNING |
 | reign-road-r1b 2 findings (orphan #33) | review/reign-road-fix @9f4e8bf9 | sonnet | PASS 90c5b9e5 (r1; reviewer fixed 2 more leaks; k3rows overflow not present) |
-| unmet-name leak family residue | review/name-mask @8b911c73 | sonnet | SẴN SÀNG KIỂM (worker archived) → reviewer name-mask-r1 session_01DgYSWmyLaHvXUgNsFAkrBH RUNNING |
+| unmet-name leak family residue | review/name-mask @8b911c73 | sonnet | PASS 571dc15e (review/name-mask-r1; reviewer archived) |
 | D4 NPC death/new faces + Phế phi Lý (orphan #18) | review/npc-death | opus | worker session_01DgYSWoy8UWVPrve6HEjZfR RUNNING (12:58Z; mortality live) |
 | D57 preg-rate (orphan #2) | review/preg-rate | opus | worker session_01DgYSWnxBe741HPgNbrkYjF RUNNING (12:58Z; checks cycle-r3 on main first) |
 | Danh P1 apply + P2 Tài-nghệ bot (s16 answers) | review/danh-p1 | opus | worker session_01DgYSWmtmVG7yFfTVZxCumE RUNNING (P3 = NO) |
@@ -52,6 +52,7 @@ main at start = eba64ead4.
 | coop-rejoin-xdev review | — | — | CANCELLED for D (main s13 has it) |
 
 ## PASS (for the main coordinator to fast-forward)
+- READY review/name-mask-r1 571dc15e5855bf529449086c03ee7b840784ff7a (unmet-name leak family residue; report reports/review-name-mask-r1.md; ancestor = origin/main at review time). Follow-up (not blocking, wording): "Một vị Thường tại chưa quen biết là người quen cũ" reads oddly.
 READY review/entry-exam-r1 d7364cb2e21d6d19451bae2f98458e1a8e170bb6 (entry selection exam + origin intros; SHIP ORDER: after review/kc-roads-cn-nc-fix (D, running) and B's mg-balance; BAL.mgTier.occ.tuyen 1.5→1; tests entry-exam 9/9+5/5+3/3, kc-roads direct 9/9, coop-together 26/26, coop-e2e 59/59; report reports/review-entry-exam-r1.md)
 READY review/close-maid-r1 ebc85f78446186a4a990024b17c73091c700f218 (D58 close maid by origin v2, BAL.cmaid; also carries READY servant-mline-r3; reviewer fixed S.cm clash with jcmood → S.cmaid (monthly crash), ONE CORE newLoy/spyDanh; main 9ddb3f6c ancestor; report reports/review-close-maid-r1.md)
 READY review/danh-balance-r1 9a1133f0bdeb1c649e5fb9d1546d779f59154b80 (Danh gates/succession/charity numbers now read BAL.danhG/succN/charity — value-neutral, proven by literal-vs-BAL table + runtime probe; no BAL value changed; report reports/review-danh-balance-r1.md)
