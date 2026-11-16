@@ -8,6 +8,10 @@
 const TSA={};
 function tsS(){S.ts=S.ts||{};return S.ts}
 function tsOn(){return !!(typeof S!=="undefined"&&S&&!S.dead&&!(typeof isSrv==="function"&&isSrv()))}
+/* palace voice: the maid's warning is a pool (jvoice kLine, no repeat within BAL.voice.noRepeat tuần); {V} = who asks around */
+const TS_WARN=["“Dạo này người các cung nhìn {goi} không thiện ý. Nô tỳ nghe bên {V} hỏi giờ giấc cung ta.”","“{Goi}, người bên {V} cứ lảng vảng quanh cửa cung mình. Nô tỳ thấy không yên.”",
+ "“Tai vách mạch rừng, {goi} ạ. Bên {V} vừa dò hỏi chuyện ăn uống của cung ta.”","“Nô tỳ nghe phong thanh, {V} đang để mắt đến {goi}. Mấy hôm nay {goi} nên cẩn trọng.”",
+ "“Cung nữ bên {V} hỏi han nô tỳ đủ điều, nô tỳ chẳng dám hé răng. {Goi} phải đề phòng.”","“Cây cao thì đón gió, {goi} ạ. Bên {V} xì xào về cung mình đã mấy hôm.”"];
 function tsGoi(p){/* one address core (jvoice kAddr, VANPHONG §2) */return kSay({srv:"f"},p||S,"{goi}")}
 function tsNm(p){try{if(p===S)return"ngươi";return (p.queen?"Hoàng hậu":RANKS[cl(p.rank||0,0,7)].n)+" "+p.name}catch(e){return p&&p.name||""}}
 function tsBot(){return typeof window.__bot!=="undefined"}
@@ -131,7 +135,7 @@ if(window.K3_RIGHT)window.K3_RIGHT.push("tsnh");
   el.insertAdjacentHTML("beforeend",`<button class="hc ${D.n>=30?"hot":D.n<10?"ok":""}" data-hx="tsnh">Nguy hiểm chung: ${D.n}</button>`)}}catch(e){}return r}})();
 document.addEventListener("click",e=>{const b=e.target.closest('[data-hx="tsnh"],[data-k3="tsnh"]');if(!b||!tsOn())return;e.stopPropagation();e.preventDefault();if(Q.length)return;tsDangerPanel()},true);
 function tsDangerOmen(){const s=tsS();const D=tsDangerOf(S,true);const st=TS_DW.filter(x=>D.n>=x[0]).length-1;const was=s.dStep||0;s.dStep=st;if(st<=was||st<2||!D.top.length)return;
- const x=D.top[0];tsPanel({t:"Lời cảnh báo",who:pMaid(),h:`<p>${S.maid.name} khẽ thưa: “Dạo này người các cung nhìn ${tsGoi()} không thiện ý. Nô tỳ nghe bên ${x.v.name} hỏi giờ giấc cung ta.”</p>${tsRows([["Nguy hiểm chung",`${D.n} · ${tsDWord(D.n)}`,"r"]])}`,
+ const x=D.top[0];tsPanel({t:"Lời cảnh báo",who:pMaid(),h:`<p>${S.maid.name} khẽ thưa: ${kLine("ts:warn",TS_WARN,{sp:{srv:"f"},ls:S}).replace(/\{V\}/g,x.v.name)}</p>${tsRows([["Nguy hiểm chung",`${D.n} · ${tsDWord(D.n)}`,"r"]])}`,
   opts:[tsOptGuard(),tsOptGifts(D),tsOpt({n:"Ghi nhớ, cứ như thường",duoc:["không tốn gì"],kem:["kẻ muốn hại vẫn rình"]})].filter(Boolean)})}
 
 /* =============== Ý 5 · NGƯỠNG XÉT PHẨM HIỆN TRƯỚC (promoReqP j8: cùng điều kiện cho mọi phi tần) =============== */

@@ -118,7 +118,7 @@ Nguồn đối chiếu (chuyên gia, sếp OD:L1327): bản lồng tiếng / ph�
 | Thái y, quan, sứ thần, họa sư, nhạc sư → phi tần | vi thần | tiểu chủ / nương nương như kẻ hầu | thị vệ: "nô tài"/"ti chức" |
 | Chế độ cung nữ (người chơi là kẻ hầu) | nô tỳ | chủ gọi: tên / ngươi | |
 
-**Quy tắc phẩm:** Đáp ứng, Thường tại, Quý nhân = **tiểu chủ**; Tần, Phi, Quý phi, Hoàng quý phi = **nương nương**; Hoàng hậu = **Hoàng hậu nương nương**. Bị biếm vào lãnh cung: kẻ hầu vẫn gọi theo phẩm cũ nếu còn trung, kẻ bạc bẽo gọi trống "ngươi" (chỉ trong cảnh lãnh cung). Không bao giờ dùng: bạn, tôi, em, anh, chị (trừ "chị em" kết nghĩa), mình (trừ "một mình", phản thân trong lời kể).
+**Quy tắc phẩm:** Đáp ứng, Thường tại, Quý nhân = **tiểu chủ**; Tần, Phi, Quý phi, Hoàng quý phi = **nương nương**; Hoàng hậu = **Hoàng hậu nương nương**. Gọi bằng phẩm: có phong hiệu thì hiệu + phẩm ("Hy tần", "Uyển quý nhân"); phẩm một chữ không có hiệu thì họ + phẩm ("Từ phi", "Âu Dương tần"), không gọi trống "Phi", "Tần". Bị biếm vào lãnh cung: kẻ hầu vẫn gọi theo phẩm cũ nếu còn trung, kẻ bạc bẽo gọi trống "ngươi" (chỉ trong cảnh lãnh cung). Không bao giờ dùng: bạn, tôi, em, anh, chị (trừ "chị em" kết nghĩa), mình (trừ "một mình", phản thân trong lời kể).
 
 ### 2.3 Lời lễ (dùng trong thỉnh an, nhận chỉ, tạ tội)
 - Thỉnh an: "Thần thiếp thỉnh an Hoàng hậu nương nương, nương nương vạn phúc kim an." — đáp: "Đứng lên đi." / "Bình thân."

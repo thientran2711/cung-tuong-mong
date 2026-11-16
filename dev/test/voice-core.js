@@ -25,7 +25,8 @@ function serve(){return new Promise(r=>{const s=http.createServer((q,a)=>{const 
    T('srv→other consort',kAddr({srv:"f"},v,{own:false,full:1}).goi,kAddr({srv:"f"},v).ten+" tiểu chủ");v.rank=vr}
   T('kSay',kSay("th",S,"“{Goi} lui đi, {xung} mệt rồi.”",{m:"cool"}),null);
   /* kLine: a 4-line pool never repeats inside the window */
-  const P=["a","b","c","d"];const seen=[];const t0=S.tuan,turn0=S.turn;for(let i=0;i<4;i++)seen.push(kLine("test:x",P));
+  const P=["a","b","c","d"];const seen=[];const t0=S.tuan,turn0=S.turn;for(let i=0;i<4;i++){S.buoi=i%4;seen.push(kLine("test:x",P))}
+  T('kLine same buổi = same line (a rebuilt dialog keeps its line)',kLine("test:x",P),seen[3]);
   T('kLine 4 distinct',new Set(seen).size,4);
   /* toilSay: praise pool across 6 tuần → 6 distinct */
   const said=[];for(let i=0;i<6;i++){S.tuan=(S.tuan+1)%3;if(S.tuan===0)S.turn++;said.push(toilSay("th-praise",{mk:"vua",dress:"doan",host:"th"}))}

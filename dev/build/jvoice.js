@@ -27,7 +27,9 @@ function who(x){
   if(x.rank!=null||x.queen)return{k:x.queen?"hh":"con",r:x.queen?7:x.rank|0,o:x,out:!!x.out};
   return{k:"srv",name:x.name};
 }
-function title(w){if(!w||!w.o)return"";try{const r=w.o.queen?"Hoàng hậu":(RANKS[w.r]||{}).n||"";return typeof kitHieuJoin==="function"?kitHieuJoin(r,w.o):r}catch(e){return""}}
+function title(w){if(!w||!w.o)return"";try{const r=w.o.queen?"Hoàng hậu":(RANKS[w.r]||{}).n||"";const t=typeof kitHieuJoin==="function"?kitHieuJoin(r,w.o):r;
+  /* a bare one-word rank ("Tần", "Phi") is called with the family name, as the court does: "Từ phi", "Âu Dương tần" */
+  if(t===r&&/^(Tần|Phi)$/.test(r)){const n=String(w.o.name||"").trim().split(/\s+/);if(n.length>=2)return n.slice(0,n.length>=4?2:1).join(" ")+" "+r.toLowerCase()}return t}catch(e){return""}}
 function hon(w){return w.k==="hh"||w.r>=7?"Hoàng hậu nương nương":w.r>=V().nuong?"nương nương":"tiểu chủ"}
 function mood(sw,lw,sp,ls,o){if(o&&o.m)return o.m;const b=V();let n=null;
   try{if(lw.me){if(sw.k==="emp")n=(S.sung||0)-b.sungMid;else if(sw.k==="th")n=(S.th||0)-b.favMid;else if(sw.k==="hh")n=(S.hh||0)-b.favMid;else if(sw.o)n=aff(sw.o,S)}
@@ -76,10 +78,13 @@ function now(){try{return typeof wk==="function"?wk():0}catch(e){return 0}}
 function kLine(key,pool,o){o=o||{};let L=pool;if(!Array.isArray(L)){const m=o.m||(o.sp!=null||o.ls!=null?kAddr(o.sp,o.ls,o).m:"cool");L=(L[m]&&L[m].length?L[m]:[]).concat(L.any||[]);if(!L.length)L=[].concat(...Object.values(pool))}
   REG[key]=pool;if(!L.length)return"";let mem={};try{S.vl=S.vl||{};mem=S.vl[key]=S.vl[key]||{}}catch(e){}
   const t=now(),gap=V().noRepeat;
+  /* a dialog rebuilt several times for ONE occurrence (PEND builders run on queue, show and reload) keeps its line: same key in the same buổi
+     → the same line, so a rebuild does not use up the pool */
+  let bu="";try{bu=t+"."+(S.buoi||0)}catch(e){}if(mem.__b===bu&&mem.__l&&L.includes(mem.__l)){const l0=mem.__l;return o.sp!=null||o.ls!=null?kSay(o.sp,o.ls,l0,o):l0}
   const fresh=L.filter(x=>mem[x]==null||t-mem[x]>=gap||t<mem[x]);
   const pickFrom=fresh.length?fresh:L.slice().sort((a,b)=>(mem[a]==null?-1e9:mem[a])-(mem[b]==null?-1e9:mem[b])).slice(0,1);
   const line=pickFrom[Math.floor(Math.random()*pickFrom.length)];
-  try{mem[line]=t;const ks=Object.keys(mem);if(ks.length>40)for(const k of ks)if(t-mem[k]>gap*4)delete mem[k]}catch(e){}
+  try{mem[line]=t;mem.__b=bu;mem.__l=line;const ks=Object.keys(mem);if(ks.length>40)for(const k of ks)if(k.slice(0,2)!=="__"&&t-mem[k]>gap*4)delete mem[k]}catch(e){}
   return o.sp!=null||o.ls!=null?kSay(o.sp,o.ls,line,o):line}
 /* ---- outcome flavour (VANPHONG §2.5): one short court-voice sentence before the plain numbers of a talk / visit result ----
    kOutcome(kind, ok): kind = the person's kind on the stage (th, emp, hh, rival, fallen, maid, ksp, ty, elder, man, kid); pooled, no repeat */
