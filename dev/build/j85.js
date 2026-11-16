@@ -109,13 +109,13 @@ function addVir(p,k,g){vNorm(p);const V=VIR.find(x=>x.k===k);if(!V)return;p.virp
   if(p===S)log(`<span class="g">${V.n} (${V.full}) lên bậc ${l}.</span> ${VIRFX[k][l-1]}`)}
  if(p.vir[k]>=5)p.virp[k]=0}
 function lessonVir(k,mode){if(!S||S.dead||Q.length||S.mg)return;vNorm(S);const l=S.vir[k],cost=virCost(l),V=VIR.find(x=>x.k===k);if(!V||l>=5)return;
- if(mode==="self"){if(!can(2)||S.suc<25)return;apply({suc:-15});spend(2);addVir(S,k,1);log(`Tự rèn ${V.n}. Tiến bộ +1.`)}
- else{if(!can(2)||S.bac<cost)return;apply({suc:-10,bac:-cost});spend(2);const g=2+R(2);addVir(S,k,g);log(`Theo ma ma giáo tập học ${V.n}. Tiến bộ +${g}.`)}
+ if(mode==="self"){if(!can(2)||S.suc<25)return;apply({suc:-15});spend(2);addVir(S,k,1);log(`Tự học ${V.n}. Tiến bộ +1.`)}
+ else{if(!can(2)||S.bac<cost)return;apply({suc:-10,bac:-cost});spend(2);const g=2+R(2);addVir(S,k,g);log(`Học ${V.n} với ma ma giáo tập. Tiến bộ +${g}.`)}
  save();render()}
 window.lessonVir=lessonVir;
 function charity(){if(!S||S.dead||Q.length||!can(1)||S.bac<20||S.charM===S.turn)return;S.charM=S.turn;withDeed("phát bạc cứu giúp cung nhân nghèo",()=>apply({bac:-20,duc:3,danh:1}));spend(1);save();render()}
 window.charity=charity;
-try{wrapR("lessonVir",(k,m)=>`${m==="self"?"Tự rèn":"Học"} ${(VIR.find(x=>x.k===k)||{}).n||""}`);wrapR("charity",()=>"Phát bạc cứu giúp cung nhân")}catch(e){}
+try{wrapR("lessonVir",(k,m)=>`${m==="self"?"Tự học":"Học"} ${(VIR.find(x=>x.k===k)||{}).n||""}`);wrapR("charity",()=>"Phát bạc cứu giúp cung nhân")}catch(e){}
 document.addEventListener("click",e=>{const b=e.target.closest("[data-vlearn],[data-charity],[data-v85tab]");if(!b||b.disabled)return;e.stopPropagation();
  if(b.dataset.vlearn)lessonVir(b.dataset.vlearn,b.dataset.mode);else if(b.dataset.charity)charity();else v85Table(b.dataset.v85tab)},true);
 /* ---- the same rules for every NPC: study by trait, a teacher when the purse allows ---- */
@@ -165,15 +165,15 @@ artTabHTML=function(){vNormAll();const t2=whyTime(2);
  let h=`<div class="ph"><span>Mỗi buổi học tốn 2 khắc. Học với thầy tốn bạc, tiến nhanh; tự học không tốn bạc, tiến chậm. Phi tần khác cũng học theo cùng luật.</span>${S.master?`<span class="g">Danh sư còn dạy ${S.master} tháng</span>`:""}</div>`;
  h+=`<div class="ph"><span><b>Tứ đức</b> · bốn môn của nữ nhi trong cung, không phải thanh số: mỗi bậc đổ vào Sắc, Đức, phần thắng và phẩm đồ tự làm.</span><span>Đức ngươi: <b>${S.duc}</b> <button class="lnk ladi" data-v85tab="duc" title="Luật Đức" aria-label="Xem luật Đức">ⓘ luật Đức</button></span></div><div>`;
  h+=VIR.map(V=>{const l=S.vir[V.k],cost=virCost(l);const B=l>=5?[`<span class="ef g">Đã tinh thông</span>`]:[
-   pbtn(`data-vlearn="${V.k}" data-mode="self"`,"Tự rèn",`Chắc chắn · tốn: 2 khắc, Sức -15 · thành: tiến bộ +1`,t2||(S.suc<25?"Sức dưới 25":"")),
-   pbtn(`data-vlearn="${V.k}" data-mode="master"`,"Theo ma ma giáo tập",`Chắc chắn · tốn: 2 khắc, Bạc -${cost}, Sức -10 · thành: tiến bộ +2..3`,t2||(S.bac<cost?`thiếu bạc (cần ${cost})`:""))];
+   pbtn(`data-vlearn="${V.k}" data-mode="self"`,"Tự học",`Chắc chắn · tốn: 2 khắc, Sức -15 · thành: tiến bộ một phần`,t2||(S.suc<25?"Sức dưới 25":"")),
+   pbtn(`data-vlearn="${V.k}" data-mode="master"`,"Học với ma ma",`Chắc chắn · tốn: 2 khắc, Bạc -${cost}, Sức -10 · thành: tiến bộ hai ba phần`,t2||(S.bac<cost?`thiếu bạc (cần ${cost})`:""))];
   if(V.k==="hanh")B.push(pbtn(`data-charity="1"`,"Phát bạc cứu giúp cung nhân nghèo",`Chắc chắn · tốn: 1 khắc, Bạc -20 · thành: Đức +3, Danh +1 (mỗi tháng một lần)`,whyTime(1)||(S.bac<20?"thiếu bạc (cần 20)":S.charM===S.turn?"tháng này đã làm":"")));
   return card(`${V.n} · ${V.full}`,"",l,S.virp[V.k],l+2,V.d,VIRFX[V.k],B,V.k)}).join("")+`</div>`;
  h+=`<div class="ph"><span><b>Tài nghệ</b> · cầm, kỳ, thi, họa, vũ, y, thêu, nấu.</span></div><div>`;
  h+=ARTS.map(a=>{const l=S.arts[a.k],need=l+2,cost=5+l*5;
-  const B=l>=5?[`<span class="ef g">Đã tinh thông</span>`]:[pbtn(`data-learn="${a.k}" data-mode="self"`,"Tự học",`Chắc chắn · tốn: 2 khắc, Sức -15 · thành: tiến bộ +1..2`,t2||(S.suc<25?"Sức dưới 25":"")),
-   pbtn(`data-learn="${a.k}" data-mode="teacher"`,"Học với thầy",`Chắc chắn · tốn: 2 khắc, Bạc -${cost}, Sức -10 · thành: tiến bộ +2..3, luôn hơn tự học 1, có khi nghe chuyện`,t2||(S.bac<cost?`thiếu bạc (cần ${cost})`:"")),
-   S.thDead?"":pbtn(`data-learn="${a.k}" data-mode="th"`,"Xin Thái hậu cho học cùng",`Chắc chắn · tốn: 2 khắc, Sức -10 · thành: tiến bộ +1..3, Thái hậu +3`,t2||(S.th<40?"cần Thái hậu thương 40":(S.buoi||0)!==0?"chỉ buổi sáng":""))];
+  const B=l>=5?[`<span class="ef g">Đã tinh thông</span>`]:[pbtn(`data-learn="${a.k}" data-mode="self"`,"Tự học",`Chắc chắn · tốn: 2 khắc, Sức -15 · thành: tiến bộ một hai phần`,t2||(S.suc<25?"Sức dưới 25":"")),
+   pbtn(`data-learn="${a.k}" data-mode="teacher"`,"Học với thầy",`Chắc chắn · tốn: 2 khắc, Bạc -${cost}, Sức -10 · thành: tiến bộ hai ba phần, luôn hơn tự học 1, có khi nghe chuyện`,t2||(S.bac<cost?`thiếu bạc (cần ${cost})`:"")),
+   S.thDead?"":pbtn(`data-learn="${a.k}" data-mode="th"`,"Học với Thái hậu",`Chắc chắn · tốn: 2 khắc, Sức -10 · thành: tiến bộ một đến ba phần, Thái hậu +3`,t2||(S.th<40?"cần Thái hậu thương 40":(S.buoi||0)!==0?"chỉ buổi sáng":""))];
   const extra=(a.k==="theu"||a.k==="nau")?` · phẩm đồ tự làm ${artBonus(S,a.k).q}/100, bậc phẩm ${artBonus(S,a.k).tier}`:"";
   return card(a.n,AIMG[a.k],l,S.artp[a.k],need,(ARTDO[a.k]||"")+extra,ARTFX[a.k]||[],B,a.k)}).join("")+`</div>`;
  return h};

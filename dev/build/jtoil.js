@@ -141,7 +141,7 @@ function toilCrowd(doIt){const L=toilLook();if(!L.showy&&L.mk!=="tuyet")return{n
 function toilCanStart(){return toilOn(S)&&(S.buoi||0)===0&&!toilToday(S)&&!Q.length}
 function toilCard(){const occ=toilOcc().map(o=>o.n.toLowerCase()).join(", ");
  return{n:"Điểm trang",t:"Ngồi trước gương: chọn y phục theo dịp hôm nay, kẻ mày, đánh phấn, chấm son.",k:BAL.toil.khac,c:{},o:100,w:{},b:0,toil:1,
-  x:`hôm nay ${occ}: ai gặp ta cũng nhìn y phục, dung nhan theo nết người (thẻ thỉnh an, gặp Hoàng thượng ghi trước) · kèm: phô trương dễ bị ghen, mặt mộc trước người trọng lễ bị chê (không điểm trang: mặc như hôm qua, mặt mộc)`,
+  x:`hôm nay ${occ}: người gặp ta xét y phục và dung nhan · kèm: phô trương dễ bị ghen, mặt mộc bị chê (bỏ qua: mặc như hôm qua)`,
   go:()=>setTimeout(toilOpen,0)}}
 (function(){const d0=deal;deal=function(){const r=d0.apply(this,arguments);try{if(Array.isArray(deck)&&toilOn(S)&&(S.buoi||0)===0&&!toilToday(S)&&!deck.some(a=>a.toil))deck.unshift(toilCard())}catch(e){console.error(e)}return r}})();
 /* the chip "Hôm nay: y phục hợp dịp · trang điểm đẹp" (k3 top bar row, from #hud2) */

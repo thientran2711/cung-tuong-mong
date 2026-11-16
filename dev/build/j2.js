@@ -145,9 +145,9 @@ function talkOpts(p){const E=S.emp,K=E.known,L=E.likes,b=bestArt(),v=p.ref;
  if(p.kind==="chest"){if(sameHouse(S,v))return[];return[{n:"Cài đồ vào rương nàng",o:cl(oPlant(S,v)+15,5,95),x:"chọn món đồ · tại chỗ, dễ hơn sai người",open:()=>{if(S.inv.some(e=>!e.h)&&can(2))pushDil(mkP("plantpick",{v:v.id,here:1}),"Cài đồ vào rương")}},
   {n:"Lục rương tìm chứng cứ",o:od(45+S.mat*5),act:1,x:"chứng cứ +1 nếu nàng có làm điều sai · lộ: bị phạt",run:()=>{if(roll(od(45+S.mat*5))){return evA(S,v,1)?`Lục được thư từ của ${v.name}: chứng cứ +1.`:`Lục rương ${v.name}: không thấy điều gì sai trái.`}relAdd(S,v,-15);punish("lục lọi cung phi tần",1);return "Bị cung nhân bắt gặp."}}]}
  if(p.kind==="ty"){const A=[];if(illOf(S))A.push({n:"Xin chữa bệnh",c:{bac:-30},o:100,x:illName(S),run:()=>treat(S,"ty")});A.push({n:"Bài thuốc dễ thụ thai",c:{bac:-40},o:100,x:"3 tháng dễ có thai hơn",go:()=>S.fert=3});
-  if(!S.doctor)A.push({n:"Mời làm thái y tâm phúc",c:{bac:-50},o:100,x:"dễ phát hiện xạ hương, độc; bệnh của con nhẹ hơn",go:()=>S.doctor=1});
+  if(!S.doctor)A.push({n:"Mời làm thái y tâm phúc",c:{bac:-50},o:100,x:"dễ phát hiện xạ hương và độc; bệnh của con nhẹ hơn",go:()=>S.doctor=1});
   const k=S.kids.filter(x=>x.alive&&x.hp<80).sort((a,c)=>a.hp-c.hp)[0];if(k)A.push({n:`Xin thuốc cho ${k.name}`,c:{bac:-30},o:100,x:"Sức khỏe +25",go:()=>{k.hp=Math.min(100,k.hp+25)}});
-  A.push({n:"Học hỏi y lý",c:{bac:-10},o:100,x:"Y thuật tiến bộ +1",go:()=>addArt("y",1)});return A}
+  A.push({n:"Học hỏi y lý",c:{bac:-10},o:100,x:"Y thuật tiến bộ một phần",go:()=>addArt("y",1)});return A}
  if(p.kind==="ksp"){const A=[{n:"Đút lót lật thẻ",c:{bac:-30},o:100,lock:S.tablet>0,t:`đang có hiệu lực ${S.tablet} tuần`,x:`2 tuần tới dễ được lật thẻ: ${chanceW(nightCh())} → dễ hơn một bậc`,go:()=>S.tablet=2}];
   if(Object.keys(LIKES).some(k=>!K[k]))A.push({n:"Hỏi sở thích Hoàng thượng",c:{bac:-15},o:od(80),x:"biết thêm một điều ngài thích",go:()=>discover()});
   A.push({n:"Xem sổ thị tẩm",o:100,x:"biết ai đang được sủng",go:()=>log("Sổ thị tẩm: "+liveRivals(true).map(x=>`${x.name} ${x.nights} lần`).join(", ")+`; ngươi ${S.nights} lần.`)});return A}
@@ -176,5 +176,5 @@ function resumeMG(){const m=S.mg;if(!m)return;const a=ARTS.find(x=>x.k===m.k);op
 function hireMaster(){if(S.bac<60||S.master||S.dead)return;apply({bac:-60});S.master=3;log("Mời danh sư vào cung dạy: 3 tháng tiến bộ gấp đôi.");render()}
 
 /* what a won night is worth, in numbers: a full thị tẩm (Sủng, Ân tình, a chance of a child and of a gift); the cost to the rival on a red 'kèm' line */
-function stealX(v,road){let c=0;try{c=conceiveCh(S)}catch(e){}return `Sủng +3..8 · Ân tình +2..7${S.preg?"":` · thai: ${chanceW(c)}`} · có thể được thưởng · kèm: ${typeof stealKem==="function"?stealKem(v):v.name+" ghen +25, quý ngươi -15, oán ngươi +9"}`}
+function stealX(v,road){let c=0;try{c=conceiveCh(S)}catch(e){}return `Sủng +3 đến +8 · Ân tình +2 đến +7${S.preg?"":` · thai: ${chanceW(c)}`} · có thể được thưởng · kèm: ${typeof stealKem==="function"?stealKem(v):v.name+" ghen +25, quý ngươi -15, oán ngươi +9"}`}
 function stealKem(v){let o=9;try{o=Math.round(9*persF(v,"slight",1))}catch(e){}return `${v.name} ghen +25, quý ngươi -15, oán ngươi +${o}`}

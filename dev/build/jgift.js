@@ -170,7 +170,7 @@ document.addEventListener("click",ev=>{const g=ev.target.closest&&ev.target.clos
   }}catch(e){}return r}})();
 (function(){const st=document.createElement("style");st.textContent=`.kgiftdlg .opt>.kitem{float:left;width:44px;margin:0 8px 0 0}`;document.head.appendChild(st)})();
 /* ---------- three daytime acts with the Emperor (coordinator 11/15, one rule for her and every consort) ----------
-   hầu cờ (Kỳ ≥ 1) · đánh đàn hầu ngài (Cầm ≥ 1): odds odA(Kỳ/Cầm bậc, his mood mm(), Sủng); thành: Sủng +2..4, Ân tình +1, then her choice
+   hầu cờ (Kỳ ≥ 1) · đánh đàn hầu ngài (Cầm ≥ 1): odds odA(Kỳ/Cầm bậc, his mood mm(), Sủng); thành: Sủng +2 đến +4, Ân tình +1, then her choice
    inside the result (thắng khéo / cố ý thua, Tâm cơ); hỏng: ngài chán, Sủng −1. 2 khắc, Sức −5.
    mời ngài dạo ngự hoa viên: not in a storm; odds Sủng + Sắc + mood; thành: Sủng +2, a better chance of the tablet tonight (shown as a
    ladder word); hỏng: ngài từ chối khéo; consorts already in the garden see it (ghen +3).
@@ -191,7 +191,7 @@ function kmEmpLine(kind){const o=kmEmpO(S,kind);if(kind==="walk"){const n0=night
   /* reviewer r6: never "Liều → Liều"; the walk only helps when she can be picked tonight at all (nightCh wrapper: r > 0) */
   const night=n0<=0||n1<=n0?"":w0===w1?`, tối nay dễ được lật thẻ hơn (vẫn ${w0})`:`, tối nay được lật thẻ: ${w0} → ${w1}`;
   return `${word(o)} · tốn: 2 khắc, Sức -${BAL.empDay.suc} · thành: Sủng +2${night} · hỏng: ngài từ chối khéo · kèm: phi tần đang ở vườn thấy, ghen +3`}
- return `${word(o)} · tốn: 2 khắc, Sức -${BAL.empDay.suc} · thành: Sủng +2..4, Ân tình +1, rồi chọn thắng khéo hay cố ý thua · hỏng: ngài chán, Sủng -1`}
+ return `${word(o)} · tốn: 2 khắc, Sức -${BAL.empDay.suc} · thành: Sủng +2 đến +4, Ân tình +1, rồi chọn thắng khéo hay cố ý thua · hỏng: ngài chán, Sủng -1`}
 /* the act itself — the same function for her and for every consort */
 function kmEmpAct(a,kind){const why=kmEmpWhy(a,kind);if(why)return null;a.kmEmpDay=wk();if(a===S)spend(2);ap(a,{suc:-BAL.empDay.suc});const ok=roll(kmEmpO(a,kind));const me=a===S;const nm=me?"Ngươi":`${rkName(a)} ${a.name}`;
  if(kind==="walk"){if(ok){ap(a,{sung:2});a.kmWalk=wk();const seen=liveRivals(true).filter(v=>v!==a&&(S.where||{})[v.id]==="vuon");seen.forEach(v=>{v.ghen=cl((v.ghen||0)+3,0,100)});

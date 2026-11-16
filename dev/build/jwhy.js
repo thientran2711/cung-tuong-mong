@@ -70,10 +70,10 @@ function spyPick(refund){const m=whyMaidInit(S.maid),L=spyList();const cur=spyTa
  Q.push({t:`Sai ${m.name} đi dò la`,who:typeof pMaid==="function"?pMaid():null,h:`<p>Ngươi muốn ${m.name} dò la ai? ${spyHint(m)}</p>`,opts});showModal()}
 (function(){const t0=talkOpts;talkOpts=function(p){const A=t0.apply(this,arguments);if(!p||p.kind!=="maid"||!S.maid)return A;const i=A.findIndex(a=>a.n==="Sai đi dò la");if(i<0)return A;
  const m=whyMaidInit(S.maid),t=spyTarget();if(!t){A[i]=Object.assign({},A[i],{lock:true,t:"không còn phi tần nào để dò"});return A}
- A[i]={n:"Sai đi dò la",dom:"Mưu kế",o:spyO(S,t,m),x:`nhắm: ${spyWho(t)} (chạm để chọn người khác) · biết 2 điều thật về nàng · chứng cứ +1`,l:{maid:-5},risk:`nàng đoán ra: ${typeof pvOan==="function"?pvOan(t,5):"oán ta +5"}`,
+ A[i]={n:"Sai đi dò la",dom:"Mưu kế",o:spyO(S,t,m),x:`nhắm: ${spyWho(t)} (chạm để đổi) · biết 2 điều thật về nàng · chứng cứ +1`,l:{maid:-5},risk:`nàng đoán ra: ${typeof pvOan==="function"?pvOan(t,5):"oán ta +5"}`,
   why:()=>spyFactors(S,t,m),act:1,open:()=>spyPick(2)};
  /* (2) "Nghe ngóng chung": no target, 1 khắc, one true piece of palace news; who it is about is weighted by real causes */
- A.splice(i+1,0,{n:"Nghe ngóng chung",o:100,x:`${m.name} đi nghe ngóng: biết 1 điều thật trong cung (hay về người đang gây chuyện, người ${m.name} quen bên ấy)${(S.mat||0)>=3?" · Tai mắt nhiều: thêm 1 điều":""}`,
+ A.splice(i+1,0,{n:"Nghe ngóng chung",o:100,x:`${m.name} đi nghe ngóng: biết 1 điều thật trong cung (về kẻ gây chuyện hoặc người ${m.name} quen)${(S.mat||0)>=3?" · Tai mắt nhiều: thêm 1 điều":""}`,
   run:()=>{const r=spyNews(m);return r}});return A}})();
 function spyNewsW(v,m){return 1+Math.max(0,danger(v,S))/15+(whyKnows(m,v)?3:0)+((v.sung||0)>=50?1:0)+(v.preg?1:0)+((S.met&&S.met[v.id]!=null)?0:.5)}
 function spyNews(m){const L=spyList();if(!L.length)return`${m.name} đi một vòng, trong cung yên ắng.`;const W=L.map(v=>spyNewsW(v,m));let r=Math.random()*W.reduce((a,b)=>a+b,0),i=0;while(r>W[i]&&i<L.length-1){r-=W[i];i++}
