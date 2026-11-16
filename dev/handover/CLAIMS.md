@@ -393,7 +393,7 @@
 | night-final successor (opus): merge main, multi-steal resolve-once rule, worldOn, coop-night live, then 10-night ledger hook | review/night-final | main s23 | session_01UV1Szj7YLUcLKMH5ncGTcL | RUNNING | 16/11 20:32Z |
 | kit-size #5 successor keeper (opus): reports/kit-size.md items 1-7 incl. owner TIN fixes | review/kit-size | main s23 | session_01UV1SzkzVyZp7J7XKbMkV7H | DONE #6b 25ae41e3 → successor (s24) | 16/11 20:32Z |
 | kit-fit ROUND 3 keeper (sonnet): Luân hồi cards bigger + face picker one list (reports/kit-fit.md §HANDOVER) | review/kit-fit-r3 | main s23 | session_01UV1SzkDzZdLkrtJC5W6o5T | RUNNING | 16/11 20:32Z |
-| P2 tutorial quests ch1–3 (opus; main s23 20:10Z; ROAD_MAP Part 1; OD:L1233/L1242/L1259; story14 frame live) | review/tut-quests | B | session_01N1tNP3J9spJbci5SDSfsaU | RUNNING | 16/11 20:40Z |
+| P2 tutorial quests ch1–3 (opus; main s23 20:10Z; ROAD_MAP Part 1; OD:L1233/L1242/L1259; story14 frame live) | review/tut-quests | B | session_01N1tNP3J9spJbci5SDSfsaU | DONE SẴN SÀNG KIỂM 36e7b0e6 (archived) | 16/11 20:40Z |
 | npc-roads merge-fix (opus): merge r1 83d84225 into U2–U4 02405da5, apply the 6 r1 fault families to maids/eunuchs/men | review/npc-roads-fx (review/npc-roads-fix = session-start placeholder, unused) | D | session_01DgYSWmVoMyem8RKtKb9T19 | RUNNING | 16/11 20:37Z |
 | P5 STORY BOT balance (opus; main s23 20:10Z): sens/D57 bots play whole lives through roads + chapters, balance per origin/difficulty, report only | review/story-bot + reports/story-bot.md | D | session_01DgYSWknF3zCGUsx9BmG3ub | RUNNING | 16/11 20:40Z |
 | ROAD_MAP §4.10 men-road canon check (opus; Foreman D 20:05Z, reports/npc-roads.md 'proposed ROAD_MAP §4.10') | review/road-map-410 | B | session_01N1tNP5MEELAspgvPEdzAdh | DONE fb84b698 (archived) | 16/11 20:40Z |
@@ -450,3 +450,4 @@
 | diemtrang-coop-look F5 review r1 (opus, BIG co-op) of 8ed1228a | review/diemtrang-coop-look-r1 | main s25 | session_01UV1SziXRVy5vqBiRRbSKnh | RUNNING | 16/11 22:01Z |
 | diemtrang-score BUILD (owner answered: no palette warning, no dotted guides + freehand strict scoring, brow guide anchor per portrait) on top of minigame-frame bd223466 | review/diemtrang-score | main s25 | session_01UV1SzhX2fKGhGXpNLonvo5 | RUNNING | 16/11 22:01Z |
 | kit-size #8 SUCCESSOR keeper (sonnet): 4 MIXED places, kit samples, tests; grade-chip overlay = owner question (not built) | review/kit-size-8 | main s25 | session_01UV1SzkSQRtUsXoy2TJVcQG (prev session_01UV1SzhXp2nPad8V7gu3hSj archived) | RUNNING | 16/11 22:05Z |
+| tut-quests review r1 (opus, BIG progression) of 36e7b0e6 | review/tut-quests-r1 | B | session_01N1tNP3JmqXB54dZmfEik59 | RUNNING | 16/11 22:07Z |
