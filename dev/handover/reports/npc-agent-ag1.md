@@ -68,3 +68,21 @@ where many consorts choose a need at once); next step: spread scoring (half the 
   night steals, sendMaid, dress-offence hatred gate (FOREMAN_C 19:28Z), two-way rows 24/27–30/33–36. Emperor / maids options = AG2 / AG3.
 - fakeIll is chosen often (17/yr over 10 consorts): its sure Đức cost is weighed only by the Đức need; AG4 may add a Danh risk if wanted.
 - No new kit part; no player-visible numbers typed (all from BAL.ag / BAL.tw).
+
+## HANDOVER (worker rollover, 16/11 22:35Z) — r1 FAIL fixes NOT started
+Reason: context ≈ 28 % ≥ START_CTX 4 % + 25 % (owner OD:L1217 / 16/11 08:22Z s14). Coordinator opens the successor.
+Successor: work ON review/npc-agent-r1 @2298416f (reviewer merged current main). Read dev/handover/reports/npc-agent-ag1-r1.md (7 families) + this file.
+Pointers for the fixes:
+1. PERF (blocking): jagent.js agTick. Per tick at x4 ≈ needs 1.1 + options 1.6 + landing 0.6 + resync 0.4 ms. Ideas: score only half the
+   consorts per call and run the rest on the first spend()/j95sync of the buổi (khắc 0 acts then shift to khắc ≥1), cache SOC target lists per
+   tuần (invalidate on relAdd/oanAdd), drop the j95sync in agTick (AG.now path) by updating S.where for the one id directly. Measure with
+   `node dev/test/agent_probe.js index.html 160 755x1000 on 4` ALONE on the machine (parallel load doubles p95).
+2. khắc: agReact Nghe lén / Tham gia call spend(1) only `if(can(1))` → must refuse the option when !can(BAL.ag.kh) and spend BAL.ag.kh;
+   agSeeHer join should only happen if the witness has budget (one deed per buổi: skip if she already has a pend this key).
+3. ONE CORE: typed weights in jagent (agSeeHer ho/50, AGHOST scores, 1+… in mindPickBy) + jmind sites/menDecide → BAL.ag / BAL.mind;
+   move BAL.mind Object.assign from jmind.js to jbal2.js.
+4. jdis vs jmind likes/dislikes: one system (jmind defers to jdis disOf/disKnown for Emperor/consorts/Thái hậu; check gift path for double charge).
+5. KIT: the 4 reaction rows must share one kit form (currently Nghe lén/Mặc kệ get art pictures, Tham gia/Bỏ đi none) — check KIT option rows.
+6. Servant-start player: agWatch returns early when isSrv() → remove that and use the record's mistress-palace mapping (j95 srvWhere).
+7. Sủng deck numbers: j75 npcEffortKind typed values (40+A.vu*8, suc costs, gains 15/12/5/3) and j2 deck cards → one BAL table read by both.
+Co-op first: rerun coop-e2e + the one-world probe after the fixes. Tests to keep green: dev/test/agent_check.js, ledger_shadows/hours, roster_audit.
