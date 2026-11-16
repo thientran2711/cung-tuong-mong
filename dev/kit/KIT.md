@@ -365,7 +365,12 @@ at a given viewport; only the seal word and the content differ. Nothing sizes th
   Exempt: the person card (`.modal.pcm`, `pcard` §3), the picture zoom lightbox, mini-game frame `#ov .mg` (§13), the week flip-book (§27).
 - Scan: `node dev/test/panel-size.js <url> <out.json> [WxH@dpr,...]` opens 51 panel cases (every kind + every PEND dialog) and reports width / height per viewport; FAIL when they differ.
 
-- **Short notice (kit keeper decision):** a panel body with only facts (≤ 3), ≤ 220 characters in all, no `sections` / `rows` / `opts` / `subject` gets `.kpb.kpshort` from `kpBuild` and is centred in the frame (`#mb` flex column, `margin:auto 0`, text-align centre); the frame size is unchanged; long panels, person panels and event dialogs are untouched.
+- **COMPACT SIZE (owner 16/11, iPad title menu in a near-full-screen frame; review/kpanel-compact, `dev/build/jkpc.js`) — §8.1 amendment.** The one big size is for INFORMATION panels only. A panel with little content gets ONE compact size: the same width (`--kpw`), height fitted to its content up to `--kph`, centred (`.dlg.kpanel.kpcompact`, `.modal.kpcompactm`). One rule, decided by content, never per place: `kitPanelCompact(dlg)` runs after every `showModal` and on every change of `#mb` (j74 mounts the title sub-screens after showModal) and says compact when `#mb` holds no section / row table / `.kmlist` / table / subject / person / faces / picture (`.kpsubj .kpiart .kdlgart .kaart .ksart img figure`) / stage figure / identity / info art, AND is either the title menu (`.kpmenu`) or a title sub-screen (`.kpt-mount`: Chọn sổ, Thiết lập, Sổ luân hồi), or has at most 3 facts and at most 220 characters outside its option list (menus, confirms, short notices, pickers with a few options; options may scroll inside the max). Nobody adds `kpcompact` or a height by hand; no per-place override.
+  The title menu (`.modal.kpthome`) sits small at the bottom centre so the painting stays visible (portrait and landscape).
+  **Layout is deterministic:** a menu panel never receives a picture slot from load timing. The §59 event placeholder (jph `kitEvArt`) skips panels whose `cls` has `kptitle` or whose spec has `kit.scene` / `kit.menu`; before this, the title menu got a placeholder room picture on the left (buttons squeezed to the right) only when EVART had finished loading, and none otherwise (owner shots 10:36 vs 10:39). Rule for new code: a layout choice reads structure, never "is the data loaded yet".
+  Entering the game (title Tiếp tục, any reload, co-op rejoin) always opens Hành sự (her room), never the last tab (`d.tab="act"` in the slot load, j6, and the rejoin deser, jcoopworld).
+  Scan: `node dev/test/panel-size.js <url> <out.json>` now also prints per case compact / frame height / content height / empty%, and FAILs when big frames differ, widths differ, or a compact frame is taller than the big one.
+- **Short notice (kit keeper decision; superseded by the compact size above, its centring stays for the big frame):** a panel body with only facts (≤ 3), ≤ 220 characters in all, no `sections` / `rows` / `opts` / `subject` gets `.kpb.kpshort` from `kpBuild` and is centred in the frame (`#mb` flex column, `margin:auto 0`, text-align centre); the frame size is unchanged; long panels, person panels and event dialogs are untouched.
 ## 9. FACTS, ROWS, CHIPS, PEOPLE (j79)
 - `kitFacts(facts,{group})`: `facts` = array of strings (split into sentences) or objects `{who, text, chips:[[label,n]], why, when, kind:"me"|"person"|"world"}`.
   Row = small face (or a gold dot for court/world facts) + the fact, the first mention of each person drawn as **rank title + name in rank colour**
@@ -3526,4 +3531,16 @@ legends), buttons `.kbtn` / `.kbtn.alt`. No private frame, no new art.
   old save: no card, no tour). Shots `dev/shots/goal/` (few, small).
 
 
-
+## 77. kitStageRail · THE stage icon rail (owner 16/11, shot 1b571e3a; review/goal-strip-fix) — `dev/build/jrail.js` (after jgoal, before j84)
+ONE vertical column of small round kit icon buttons at the LEFT edge of every stage (her room, every place, co-op), under the scene title
+(`#sc-t`), never over a face (left gutter only: 40 px buttons, 34 px when the screen is ≤ 430 px high, 6 px apart). Kit look: card paper,
+gold hairline, inner hair ring, soft shadow, painted icon; a kit seal-red dot = something new.
+- Order: (1) **Lịch tháng** `img/kit/mo-calendar.webp` → `kitMonthCalOpen()` (§58; the desk calendar in her room's corner is retired: one place).
+  (2) **Chat** (co-op only) — added by review/coop-chat through the API, `order:20`, icon `img/kit/ico-chat.webp`.
+  (3) **Mục tiêu chương** `img/kit/mo-edict-closed.webp` → `kitGoalDetail()` (§72.3); dot while the chapter goal / step changed since she
+  last opened it (`S.goalSeen`, optional, old saves fine). It REPLACES the goal strip (§72.2): no strip on the stage, none on top of Hành sự.
+- API: `kitStageRail.add({id, icon, title, onTap, badge:()=>bool, when:()=>bool, order})` · `kitStageRail.remove(id)` · `kitStageRail.paint()`.
+  Re-drawn after every `renderStage` / `render` and on resize. Nobody draws another floating stage button; new ones go into the rail.
+- The chapter detail closes like every kit modal: ✕ in the header, tap outside, Esc (a "Đóng" close option → 32.10 kit ✕).
+- Sample: kit page §77. Test: `node dev/test/stage-rail.js <url> <outdir> [WxH,...]` (rail inside the stage, no button over a face box,
+  no goal strip, no desk calendar, goal → detail with ✕ / Esc / outside close, calendar → LỊCH panel).
