@@ -263,4 +263,4 @@
 | story14-p1 review (opus) of r2 @f5305341 | review/story14-p1-r3 | C | session_011xDdVSfRLPar78kg13jMBC | RUNNING | 16/11 16:22Z |
 | go-live-kit (opus; OD:L1370): tier classifier script, 5–10 min pre-push quick check, build number + 'what changed' line in game menu, one-step rollback, nightly full suite | review/go-live-kit | main s20 | session_01UV1SziX5AtFSgrnkfGWXgw | RUNNING | 16/11 16:36Z |
 | TITLE SYSTEM phase 2 review (opus) of 21b9df01 | review/title-sys2-r1 | C | session_011xDdVNMjqyAEQPc7T7HLVd | RUNNING | 16/11 16:34Z |
-| emotion-acts fix (opus; r1 FAIL 2 items, base review/emotion-acts-r1 af2e5ce5) | review/emotion-acts-2 | B | (opening) | RUNNING | 16/11 16:41Z |
+| emotion-acts fix (opus; r1 FAIL 2 items, base review/emotion-acts-r1 af2e5ce5) | review/emotion-acts-2 | B | session_01N1tNP4rzrYu4SQFefLuo3A | RUNNING | 16/11 16:41Z |
