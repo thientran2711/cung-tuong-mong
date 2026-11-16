@@ -39,3 +39,6 @@ Options (2nd/3rd arg `extra`): any Playwright context option (default `serviceWo
 ## What desktop-style tests never exercise (UA / device branches in game code)
 See `dev/PROGRESS_ua-test.md` for the list (iOS "add to home screen" note, hover glow, pointer:coarse hint, vibrate, standalone, safe-area, old-Safari regex).
 Rule: a fix that touches one of these needs one run of the matching profile (`iphone14` / `ipadAir` / `fold`) in HOST mode.
+
+## KIT §81 scene end in tests (`dev/test/lib/kmscene.js`)
+A kit scene (card flip, edict, bloom, gloom, ink…) waits for its end button `.kmov.km-endon > .kmend`. A test that clicks through the motion queue (edict → reward chest → person reveal) must press it: `const KM=require('./lib/kmscene'); await KM.use(ctx)` before goto, then `__kmNext()` in page code. Without it the queue stays on the first scene (e.g. the Kính sự phòng flip at life start).
