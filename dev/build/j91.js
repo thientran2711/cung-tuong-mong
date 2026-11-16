@@ -43,7 +43,7 @@ function k91SegX(a,b,c,d){const o=(p,q,r)=>Math.sign((q[0]-p[0])*(r[1]-p[1])-(q[
 
 /* =============== 1. HOLD (Hát): keep a finger down to raise the voice, lift to lower; follow the melody ribbon =============== */
 const K91_CA=["Gió đưa cành trúc la đà","Tiếng chuông Trấn Vũ canh gà Thọ Xương","Mịt mù khói tỏa ngàn sương","Nhịp chày Yên Thái mặt gương Tây Hồ"];
-function k91Hold(box,env){const C=kg82Canvas(box,.9,430),{g,W,H}=C;const lv=env.lv||0;const DUR=20000,SPD=W*.2/1000,MX=W*.24,band=H*(.075+.007*lv),V=H*.72/1000;
+function k91Hold(box,env){const C=kg82Canvas(box,.9,430),{g,W,H}=C;const lv=env.lv||0;const DUR=20000,SPD=W*.2/1000,MX=W*.24,band=H*(.075+.007*lv)*mgTol(env),V=H*.72/1000;
  const ph=[Math.random()*6,Math.random()*6,Math.random()*6];const cy=t=>H*.5+H*.19*Math.sin(t/1000*1.05+ph[0])+H*.08*Math.sin(t/1000*2.2+ph[1])+H*.035*Math.sin(t/1000*3.5+ph[2]);
  const words=[];K91_CA.forEach((l,i)=>{const w=l.split(" ");w.forEach((x,j)=>words.push({x,t:i*5000+300+j*(4400/w.length),c:i}))});
  let y=H*.5,vy=0,held=new Set(),t0=performance.now()+1600,last=performance.now(),inb=0,tot=0,done=false;const pops=[];
@@ -304,7 +304,7 @@ const K91_SH=[["Cành trúc",[t=>[.47+.04*Math.sin(t*3),.92-.84*t],t=>[.5+.35*t,
  ["Sóng nước",[t=>[.08+.84*t,.5+.13*Math.sin(t*Math.PI*3)]]],
  ["Trăng khuyết",[t=>{const a=(-100+260*t)*Math.PI/180;return[.5+.33*Math.cos(a),.5+.33*Math.sin(a)]}]],
  ["Chữ Nhân",[t=>[.52-.02*t-.3*t*t,.12+.76*t],t=>[.47+.38*t,.45+.43*t]]]];
-function k91Trace(box,env){const C=kg82Canvas(box,1,460),{g,W,H}=C;const lv=env.lv||0;const NR=4;const Figs=kg82Shuf(K91_SH).slice(0,NR);const S0=Math.min(W,H)-30,ox=(W-S0)/2,oy=(H-S0)/2+12,tol=S0*.04*(1+.1*lv);
+function k91Trace(box,env){const C=kg82Canvas(box,1,460),{g,W,H}=C;const lv=env.lv||0;const NR=4;const Figs=kg82Shuf(K91_SH).slice(0,NR);const S0=Math.min(W,H)-30,ox=(W-S0)/2,oy=(H-S0)/2+12,tol=S0*.04*(1+.1*lv)*mgTol(env);
  let r=-1,sum=0,F=null,si=0,ink=null,inks=[],sc=[],phase="",t0=0,LIM=0,done=false;const pops=[];
  const toC=([u,v])=>[ox+u*S0,oy+v*S0];
  const sample=f=>{const P=[];let pr=null;for(let k=0;k<=400;k++){const p=toC(f(k/400));if(!pr||k91Dist(p[0],p[1],pr[0],pr[1])>=4||k===400){P.push(p);pr=p}}return P};
@@ -385,7 +385,7 @@ function k91Untangle(box,env){const C=kg82Canvas(box,1,460),{g,W,H}=C;const lv=e
  function next(){r++;if(r>=NR){done=true;return setTimeout(()=>env.end((pts)),300)}const n=NS[r];const home=[...Array(n).keys()].map(i=>({x:cx+RAD*Math.cos(i/n*Math.PI*2-Math.PI/2),y:cy+RAD*Math.sin(i/n*Math.PI*2-Math.PI/2)}));
   const E=[...Array(n).keys()].map(i=>[i,(i+1)%n]).concat(kg82Shuf(tri([...Array(n).keys()])).slice(0,Math.ceil(n/2)));let N;
   for(let t=0;t<200;t++){N=[];for(let i=0;i<n;i++){let p,k=0;do{p={x:HR+Math.random()*(W-2*HR),y:HR+Math.random()*(H-2*HR)};k++}while(k<50&&N.some(q=>k91Dist(p.x,p.y,q.x,q.y)<HR*2.2));N.push(p)}if(cross(N,E).c>=n-2)break}
-  P={n,E,N,home,c0:Math.max(1,cross(N,E).c)};LIM=30000+lv*2500;phase="play";t0=performance.now();drag=null}
+  P={n,E,N,home,c0:Math.max(1,cross(N,E).c)};LIM=(30000+lv*2500)*mgTol(env);phase="play";t0=performance.now();drag=null}
  function finish(ok,t){phase="judge";const left=Math.max(0,LIM-(t-t0));const per=10/NR;let got;if(ok)got=per*(.6+.4*left/LIM);else got=per*.5*(1-cross(P.N,P.E).c/P.c0);pts+=Math.max(0,got);
   kg82Pop(pops,W/2,H*.08+10,ok?"Gỡ xong mối rối!":"Hết giờ",ok?K91C.good():K91C.red());setTimeout(next,1200)}
  const stop=k91Loop(now=>{if(!P)return;const left=LIM-(now-t0);if(phase==="play"&&left<=0)finish(false,now);kg82Bg(g,W,H,"kim",.06,.7);
@@ -411,7 +411,7 @@ const K91_ING={"Nước giếng":"nuoc","Hạt sen":"sen","Long nhãn":"nhan","�
  "Yến sào":"yen","Xương ống":"xuong","Củ sen":"cusen","Hành ngò":"hanh","Ớt hiểm":"ot","Giấm chua":"giam","Mắm tôm":"mam","Rượu nặng":"ruou","Muối hột":"muoi"};
 function k91Ing(g,t,x,y,w,h,st,fs){k91Tile(g,x,y,w,h,"",st,fs,"tho-slip");const ic=h*1.02;kg82Spr(g,"banh-"+K91_ING[t.n],x+6+ic/2,y+h/2,ic,ic);
  g.save();g.fillStyle=K91C.ink;g.font=k91F(700,fs);g.textAlign="center";g.textBaseline="middle";g.fillText(t.n,x+ic+6+(w-ic-6)/2,y+h/2+1);g.restore()}
-function k91Cook(box,env){const C=kg82Canvas(box,(box.clientWidth||300)<420?1.25:.95,470),{g,W,H}=C;const lv=env.lv||0;const [nm,steps]=kg82Shuf(K91_RC)[0];const Z=[[.14,.36],[.42,.62],[.68,.88]].map(([a,b])=>[a-.015*lv,b+.015*lv]);const ZN=["lửa nhỏ","lửa vừa","lửa lớn"];
+function k91Cook(box,env){const C=kg82Canvas(box,(box.clientWidth||300)<420?1.25:.95,470),{g,W,H}=C;const lv=env.lv||0;const [nm,steps]=kg82Shuf(K91_RC)[0];const Z=[[.14,.36],[.42,.62],[.68,.88]].map(([a,b])=>{const c=(a+b)/2,h=((b-a)/2+.015*lv)*mgTol(env);return[c-h,c+h]});const ZN=["lửa nhỏ","lửa vừa","lửa lớn"];
  const DUR=55000,SIM=3200;let heat=.3,fan=new Set(),si=0,simAt=0,inz=0,qual=[],miss=0,t0=performance.now()+1200,last=performance.now(),drag=null,done=false,msg="";const pops=[];
  const nd=lv>=3?1:2;const tiles=kg82Shuf(steps.map(([n],i)=>({n,i})).concat(kg82Shuf(K91_RX).slice(0,nd).map(n=>({n,i:-1}))));
  const bt=k91Btns(box,[["k91fan","Quạt lửa","giữ để lửa lên"]]);const fb=bt.querySelector("#k91fan");
@@ -464,7 +464,7 @@ function k91Blend(box,env){const C=kg82Canvas(box,1,460),{g,W,H}=C;const lv=env.
  function next(){r++;if(r>=NR){done=true;bd.disabled=true;return setTimeout(()=>env.end((10*sum/NR)),300)}const E=pick3();let tv;do tv=[0,1,2].map(()=>1+Math.floor(Math.random()*6));while(Math.max(...tv)-Math.min(...tv)<2);
   P={E,tv,v:[.5,.5,.5]};phase="play";t0=performance.now();bd.disabled=false}
  const SL=()=>{const top=H*.47,bot=H*.93,cw=W/3;return[0,1,2].map(i=>({x:cw*(i+.5),top,bot}))};
- function judge(){phase="judge";bd.disabled=true;const d=dist(P.v,P.tv);const s=cl(1-d/.32,0,1);sum+=s;/* the verdict takes the hint line's place (never drawn over it) */P.verdict=[s>.85?"Khớp hương mẫu!":s>.55?"Gần giống":"Lệch hương",s>.85?K91C.good():s>.55?K91C.gold():K91C.red()];setTimeout(next,1500)}
+ function judge(){phase="judge";bd.disabled=true;const d=dist(P.v,P.tv);const s=cl(1-d/(.32*mgTol(env)),0,1);sum+=s;/* the verdict takes the hint line's place (never drawn over it) */P.verdict=[s>.85?"Khớp hương mẫu!":s>.55?"Gần giống":"Lệch hương",s>.85?K91C.good():s>.55?K91C.gold():K91C.red()];setTimeout(next,1500)}
  function smoke(x,y,R,c,lab){/* the painted censer under its live smoke */kg82Spr(g,"huong-censer",x,y+R*.42,R*1.35,null,{ay:0});g.save();const gr=g.createRadialGradient(x,y,R*.1,x,y,R);gr.addColorStop(0,`rgba(${c},1)`);gr.addColorStop(.7,`rgba(${c},.85)`);gr.addColorStop(1,`rgba(${c},0)`);g.fillStyle=gr;g.beginPath();g.arc(x,y,R,0,Math.PI*2);g.fill();
   g.fillStyle=K91C.ink;g.font=k91F(700,12,1);g.textAlign="center";g.textBaseline="alphabetic";kg82Lbl(g,lab,x,y+R*1.85+12);g.restore()}
  const stop=k91Loop(now=>{if(!P)return;const left=LIM-(now-t0);if(phase==="play"&&left<=0)judge();kg82Bg(g,W,H,"huong",.08,.8);

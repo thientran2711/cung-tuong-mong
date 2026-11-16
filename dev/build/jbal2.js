@@ -120,5 +120,7 @@ Object.assign(BAL,{rg:{at:[1,5,10,18,27,37],decideAfter:2,decideWait:3,catchUp:2
    into Dễ / Khó; kAdj = per-engine ease trim from the bot calibration (dev/PROGRESS_mg-balance.md); word = raw thresholds Tạm được/Khá/Giỏi/Xuất sắc;
    aid = ease thresholds of the aid tiers (hints on the board / fewer / on the button); lesson = raw for lesson grade 2 / 3;
    wk = works (j83): lvQ[art level] added to the play, th = Khá / Tinh xảo / Tuyệt phẩm score thresholds (material bonus BAL.wk.matQ, cap BAL.wk.cap). */
-Object.assign(BAL,{mgTier:{occ:{hoc:[0,.5],hoi:[1,.5],trieu:[1.5,.5],exam:[1,.5],tuyen:[1.5,0]},big:1,stakeMax:6,mid:2,slope:.8,band:1.5,kAdj:{},
- word:[3,5,7,9],aid:[3.5,1.5],lesson:[5,8],lessonPts:[2,5,8],fullAt:4,gamma:1,wk:{lvQ:[0,0,1,1,2,2],th:[6,10,14]}}});
+Object.assign(BAL,{mgTier:{occ:{hoc:[0,.5],hoi:[1,.5],trieu:[1.5,.5],exam:[1,.5],tuyen:[1.5,0]},big:1,stakeMax:6,mid:2,slope:.8,band:1.5,easeMin:-2,
+ kAdj:{ban:2,dan:0,den:0,duho:-1,hat:.5,hoa:-2,huong:-2,kim:0,kinh:-1.5,may:-1.5,ve:-1.3,mua:-2,theu:0,co:-2,banh:-2,dauho:0},
+ kG:{dan:1.5,den:2,duho:1.5,hoa:1.7,huong:3.5,kim:1.75,kinh:1.5,may:1.5,ve:1.5,mua:4,theu:4,co:4},
+ word:[3,5,7,9],aid:[3.5,1.5],lesson:[5,8],lessonPts:[2,5,8],fullAt:4,gamma:1,tol:[.45,1,.3],more:2,wk:{lvQ:[0,0,1,1,2,2],th:[6,10,14]}}});

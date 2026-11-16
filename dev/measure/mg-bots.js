@@ -13,7 +13,7 @@ const {chromium}=require('playwright');const fs=require('fs');
 const [,,BASE,KL,TL,BL,NN,PG,OUT]=process.argv;
 const ALL='dan,hat,co,dauho,ban,ve,hoa,theu,kim,mua,banh,huong,kinh,may,duho,den';
 const KINDS=(KL&&KL!=='all'?KL:ALL).split(',');const TIERS=(TL||'e2').split(',');const BOTS=(BL||'skilled,random').split(',');const N=+(NN||30);const PAGES=+(PG||3);
-const BOT={rt:70,px:.018,think:450,slip:.06};
+const BOT={rt:70,px:.018,think:450,slip:.06,thinkD:900,slipD:.12,timing:'dan,ban,duho,hat,den,dauho,banh'};
 const VCLOCK=()=>{const rP=performance.now.bind(performance),rST=window.setTimeout.bind(window),rCT=window.clearTimeout.bind(window);
  let vt=rP(),seq=1;const T=new Map(),RAF=new Map();const ch=new MessageChannel();let pumping=false;
  const fire=()=>{const due=[...T.entries()].filter(([,t])=>t.at<=vt).sort((a,b)=>a[1].at-b[1].at||a[0]-b[0]);
@@ -24,9 +24,9 @@ const VCLOCK=()=>{const rP=performance.now.bind(performance),rST=window.setTimeo
  window.setTimeout=(fn,d,...a)=>{if(typeof fn!=="function")return 0;const id=seq++;T.set(id,{fn,a,at:vt+Math.max(0,+d||0)});return id};
  window.setInterval=(fn,d,...a)=>{const id=seq++;T.set(id,{fn,a,at:vt+Math.max(1,+d||0),iv:Math.max(1,+d||0)});return id};
  window.clearTimeout=window.clearInterval=id=>{T.delete(id)};
- window.requestAnimationFrame=cb=>{const id=seq++;RAF.set(id,cb);return id};window.cancelAnimationFrame=id=>{RAF.delete(id)};
+ window.requestAnimationFrame=cb=>{if(window.__mgQuiet&&/^t=>\{this\._requestId/.test(String(cb).slice(0,30)))return 0;/* measuring: the Pixi ticker (visual only) */const id=seq++;RAF.set(id,cb);return id};window.cancelAnimationFrame=id=>{RAF.delete(id)};
  window.__vclock={now:()=>vt};
- /* measuring only: skip picture blits (the GPU cost); game logic never reads pixels */{const P=CanvasRenderingContext2D.prototype;for(const k of ['drawImage','fill','stroke','fillRect','strokeRect','fillText','strokeText','clearRect','putImageData'])P[k]=function(){};}ch.port2.postMessage(0)};
+ /* measuring only: skip picture blits (the GPU cost); game logic never reads pixels */{const P=CanvasRenderingContext2D.prototype;for(const k of ['drawImage','fill','stroke','fillRect','strokeRect','fillText','strokeText','clearRect','putImageData','beginPath','closePath','moveTo','lineTo','arc','arcTo','ellipse','rect','roundRect','quadraticCurveTo','bezierCurveTo','setLineDash','clip'])P[k]=function(){};const G={addColorStop(){}};P.createLinearGradient=P.createRadialGradient=P.createConicGradient=function(){return G};P.createPattern=function(){return null};}ch.port2.postMessage(0)};
 /* in-page bots: start once the game is in phase "play"; return when it leaves it */
 const BOTS_SRC=(BOT)=>{
  const G=()=>{let s=0;for(let i=0;i<6;i++)s+=Math.random();return (s-3)/Math.sqrt(.5)};
@@ -38,7 +38,7 @@ const BOTS_SRC=(BOT)=>{
  const tap=(x,y)=>{const el=at(x,y);if(el){pe(el,'pointerdown',x,y,5);pe(el,'pointerup',x,y,5);try{if(el.tagName==='BUTTON'||el.closest('button'))(el.closest('button')||el).click()}catch(e){}}};
  const randomMove=(done)=>{const r=boxR();const rx=()=>r.left+Math.random()*r.width,ry=()=>r.top+Math.random()*r.height;
   if(Math.random()<.5){tap(rx(),ry());done()}else drag([[rx(),ry()],[rx(),ry()]],done)};
- window.__mgBot=(kind)=>new Promise(res=>{let busy=false,nx=0,hold=null,holdWant=null,holdAt=0;
+ window.__mgBot=(kind,kind0)=>new Promise(res=>{let busy=false,nx=0,hold=null,holdWant=null,holdAt=0;
   const sc=()=>{const r=boxR();return Math.min(r.width,r.height)};
   const end=()=>{if(hold){pe(hold.el,'pointerup',hold.x,hold.y,7);hold=null}res()};
   const tick=()=>{if(KG82.phase!=='play'){end();return}const now=performance.now();
@@ -52,7 +52,8 @@ const BOTS_SRC=(BOT)=>{
      if(now>=holdAt){let el=pk.hsel?document.querySelector(pk.hsel):at(pk.x,pk.y),x=pk.x,y=pk.y;if(pk.hsel&&el){const r=el.getBoundingClientRect();x=r.left+r.width/2;y=r.top+r.height/2}
       if(holdWant&&!hold&&el){pe(el,'pointerdown',x,y,7);hold={el,x,y}}else if(!holdWant&&hold){pe(hold.el,'pointerup',hold.x,hold.y,7);hold=null}}
      if(!pk.drag&&!pk.sel){setTimeout(tick,16);return}}
-   if(pk&&!busy&&now>nx){busy=true;const slip=Math.random()<BOT.slip;const s=sc()*BOT.px;
+   const timing=BOT.timing.split(',').includes(kind0);
+   if(pk&&!busy&&now>nx){busy=true;const slip=Math.random()<(timing?BOT.slip:BOT.slipD);const s=sc()*BOT.px;
     const go=()=>{if(KG82.phase!=='play'){busy=false;return}
      if(slip){randomMove(()=>{busy=false;nx=performance.now()+BOT.think*(.5+Math.random())});return}
      const q=KG82.peek()||pk;
@@ -61,7 +62,8 @@ const BOTS_SRC=(BOT)=>{
      else if(q.x!=null){tap(q.x+G()*s,q.y+G()*s);busy=false;nx=performance.now()+120}
      else busy=false};
     /* timing moves (taps) fire after a reaction delay; deliberate moves after think time */
-    setTimeout(go,(pk.drag||pk.sel)?BOT.think*(.3+.4*Math.random()):Math.abs(G())*BOT.rt)}
+    /* timing taps fire after a reaction delay; deliberate moves (drag / button, and every tap of a puzzle or memory game) after think time */
+    setTimeout(go,(pk.drag||pk.sel)?BOT.think*(.3+.4*Math.random()):timing?Math.abs(G())*BOT.rt:BOT.thinkD*(.5+Math.random()))}
    setTimeout(tick,16)};tick()});};
 (async()=>{const b=await chromium.launch();const jobs=[];for(const kind of KINDS)for(const tier of TIERS)for(const bot of BOTS)for(let i=0;i<N;i++)jobs.push({kind,tier,bot});
  const out={};const errs=[];let done=0;const t0=Date.now();
@@ -70,6 +72,7 @@ const BOTS_SRC=(BOT)=>{
   const p=await ctx.newPage();p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
   await p.goto(BASE,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>window.__ctmBuilt&&typeof start==='function',null,{timeout:60000,polling:200});
   await p.evaluate(()=>{try{SLOT=3;document.getElementById('title').hidden=true;start();Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true}catch(e){}
+   /* measuring only: freeze the rest of the game (whole-UI render loops) — the minigame engines do not use them */window.__mgQuiet=1;for(const f of ['render','kmmAll','k3CatTabs','kitBdBox','kitRankPaint','kmmSweep'])try{if(typeof window[f]==='function')window[f]=function(){}}catch(e){}
    const st=document.createElement('style');st.textContent='#kroul,#title{display:none!important} *,*::before,*::after{animation:none!important;transition:none!important} body *{visibility:hidden!important} #ov,#ov *{visibility:visible!important}';document.head.appendChild(st)});
   await p.waitForTimeout(800);return{ctx,p}};
  const worker=async(wi)=>{let {ctx,p}=await open();
@@ -78,9 +81,10 @@ const BOTS_SRC=(BOT)=>{
      const K=KG82_KIND[J.kind];if(!K)return{err:'no kind '+J.kind};
      let lv=0,tw='';if(/^e-?[\d.]/.test(J.tier))lv=+J.tier.slice(1);else{const [occ,rank,alv]=J.tier.split('/');const t=mgTier(J.kind,{occ,rank:+rank,lv:+alv});lv=t.ease;tw=t.word}
      KG82.mgBot=1;const d=kg82Open({art:K.n,title:'đo',how:K.how||''});if(!d)return{err:'no frame'};
-     KG82.lv=lv;KG82.ctx='hoc';const r=await new Promise(res=>{kg82Play(J.kind,raw=>res(KG82.rawF!=null?+KG82.rawF:raw));const w=()=>{if(KG82.phase==='play')__mgBot(J.bot);else setTimeout(w,16)};w()});
+     KG82.lv=lv;KG82.ctx='hoc';const r=await new Promise(res=>{kg82Play(J.kind,raw=>res(KG82.rawF!=null?+KG82.rawF:raw));const w=()=>{if(KG82.phase==='play')__mgBot(J.bot,J.kind);else setTimeout(w,16)};w()});
      kg82Close(true);return{raw:r,lv,tw}},J)])}catch(e){raw={err:'crash '+String(e.message).slice(0,60)};try{await ctx.close()}catch(x){}({ctx,p}=await open())}
    const key=`${J.kind}|${J.tier}|${J.bot}`;(out[key]=out[key]||[]).push(raw.err?null:raw.raw);if(raw.err)errs.push(key+' '+raw.err);
+   if(OUT)fs.appendFileSync(OUT+'.jsonl',JSON.stringify({kind:J.kind,tier:J.tier,bot:J.bot,raw:raw.err?null:raw.raw})+'\n');
    if(++done%20===0)process.stderr.write(`${done} plays, ${((Date.now()-t0)/1000)|0}s\n`)}
   await ctx.close()};
  await Promise.all([...Array(PAGES)].map((_,i)=>worker(i)));await b.close();
