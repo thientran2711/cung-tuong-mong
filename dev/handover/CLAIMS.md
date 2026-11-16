@@ -30,3 +30,4 @@
 | C35b pcard-dislikes | review/pcard-dislikes | B | session_01N1tNP6oudZkvfTX5H98ZMF | RUNNING | 16/11 05:27Z |
 | D26 memories + hook ledger | review/memories | C | session_011xDdVPYyJVKrkdKtDKo6f9 | RUNNING | 05:29Z 16/11 |
 | coop-night-sync REVIEW (urgent) | review/coop-night-sync-r1 | main s9 | session_01UV1SzhQrqEEYDtLXNUvhdo | RUNNING | 16/11 05:31Z |
+| modal-scroll-r1 + book-fig-r1 re-merge on main | review/merge-hot-1 | main s9 | (opening) | RUNNING | 16/11 05:36Z |
