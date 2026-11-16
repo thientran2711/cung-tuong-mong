@@ -39,6 +39,11 @@ const KIT_EVFIT=[
  /* her clothes */
  ["underwear-out",{src:"img/ev-toil-rival-tease.webp",lab:"Y phục chưa chỉnh tề"},/^Ra ngoài khi mặc trung y/i,null],
  ["clothes-snatched","tai-mat",/^Bị giật y phục/i,null],
+ ["omen","chuyen-la",/^(Điềm báo|Điềm lạ)/i,null],
+ /* side quests / chapters with no picture of their own: by what they ask */
+ ["q-money","bac-tien",/Mượn tiền|gửi bạc|túng thiếu/i,null],
+ ["q-hh","hh-viec",/Lời Hoàng hậu|Hoàng hậu giao/i,null],
+ ["q-rescue","hinh-phat",/^Cứu .* khỏi/i,null],
  ["accused-theft","vu-oan",/^Bị tố ăn cắp/i,null],
  /* co-op: the friend in the palace */
  ["coop-friend","hao-huu",/^Hảo hữu (vào cung|tìm đến|nhận lời|từ chối)/i,null],
@@ -93,6 +98,9 @@ const KIT_EVFIT=[
  ["b-frame","vu-oan",null,/vu oan|vu cáo|vu khống|bùa|hình nhân/i],
  ["b-bribe","hoi-lo",null,/hối lộ|đút lót|uy hiếp|tống tiền/i],
  ["b-plot","am-muu",null,/âm mưu|mưu hại|hãm hại|lập mưu|bày mưu/i],
+ ["b-humiliate","tranh-sung",null,/quỳ dâng trà|bắt ngươi quỳ|làm nhục|sỉ nhục/i],
+ ["b-oldlove","tu-tinh",null,/thanh mai|trúc mã|người cũ|ngày từ biệt/i],
+ ["b-origin","thu-nha",null,/thân thế|miếng ngọc cũ|cha mẹ ruột/i],
  ["b-rumor","tin-don",null,/tin đồn|đồn rằng|lời đồn|đồn đại/i],
  ["b-loan","bac-tien",null,/mượn .{0,12}bạc|vay .{0,12}bạc|bổng lộc|cắt xén/i],
  ["b-mock","tranh-sung",null,/mỉa mai|khiêu khích|cười nhạo|chèn ép|ghen tức/i],
@@ -112,7 +120,17 @@ const KIT_EVFIT_WHY=new WeakMap();
    Not: rule / info (ĐIỀU) / person cards, look-up, shop and pick lists, the identity card, night panels (review/night-end), Nhập cung (review/newgame-ui). */
 const KIT_EVFIT_KINDS=/^(notice|news|result|choice|reward|intel|threat|evidence)$/;
 function kitEvFitWant(m,kind){try{if(!m||!KIT_EVFIT_KINDS.test(kind||""))return false;if(m.kit&&(m.kit.look||m.kit.shop||m.kit.pick))return false;
- if(m.shop)return false;if(m.pid&&typeof KIT_ACT_PIDS!=="undefined"&&KIT_ACT_PIDS.has(m.pid))return false;if(/^Nhập cung/.test(kitEvFitText(m).t))return false;return true}catch(e){return false}}
+ if(m.shop)return false;if(m.pid&&typeof KIT_ACT_PIDS!=="undefined"&&KIT_ACT_PIDS.has(m.pid))return false;const T=kitEvFitText(m);if(/^Nhập cung/.test(T.t)||/^Không vào được lúc này/.test(T.b))return false;  /* a closed-door notice belongs to its place (jplace) */return true}catch(e){return false}}
 window.kitEvFitWant=kitEvFitWant;
 /* titles whose meaning group beats a shared own banner (the j70 "threat" banner ev-j70thr shows a court audience, not a whispered warning) */
 const KIT_EVFIT_OVER=/^(Lời cảnh báo|Tai mắt báo tin|Mật báo)$/;
+/* a panel that already shows a PORTRAIT subject but nobody on the stage (MẬT BÁO "Tai mắt báo tin" with the unknown-man frame, a BÁO with a
+   small portrait): the event picture goes in the wide band on top (the same .kdlgart band as headArt / kitEventStage), never skipped */
+(function(){if(typeof showModal!=="function")return;const s0=showModal;showModal=function(){const m=typeof Q!=="undefined"?Q[0]:null;const r=s0.apply(this,arguments);try{
+ const M=document.getElementById("modal"),mb=document.getElementById("mb"),dlg=M&&M.querySelector(".dlg.kpanel");if(!m||!dlg||!mb||M.hidden)return r;
+ if(mb.querySelector(":scope > .kdlgart")||mb.querySelector(".kpsubj.kpev")||mb.querySelector(".kpid"))return r;
+ const kind=dlg.dataset.kind||"";if(!kitEvFitWant(m,kind)||!mb.querySelector(".kpsubj"))return r;
+ if(typeof kitStagePeople==="function"&&kitStagePeople(m).length)return r;  /* kitEventStage (jk4) lays the band itself */
+ const a=typeof kitEvArt==="function"?kitEvArt(Object.assign({kind},m)):null;if(!a||!a.src)return r;
+ const d=document.createElement("div");d.className="kdlgart kesband";
+ d.innerHTML=kitSceneArt(a.src,a.lab,Object.assign({shape:"wide",cap:!!a.lab},typeof kitEvCat==="function"?kitEvCat(m,a):{},a.mark?{mark:a.mark,markAlt:a.markAlt||""}:{}));mb.prepend(d)}catch(e){console.error("kitEvFit band",e)}return r}})();
