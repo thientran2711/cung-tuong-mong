@@ -44,3 +44,31 @@ Sample sheet: dev/handover/reports/place-glyphs-v2-sample.png (old | new | game 
 Prompts: gpt-2-6, 1k, 1:1, transparent, refs = 3 game item pictures (chenthuoc, cocngoc, bangda), 1 candidate each. Credits: 3 x 40 = 120.
 Verdict: new ones sit with the game items (palette, light, detail). At 14 px the pale tablets (ksp) are less punchy than v1 but still read as tablets; flag if she wants stronger contrast.
 Next if approved: redo the other 6 (cung, vuon, cnh, ttp, acs, dc) the same way (mass production -> Foreman C), then replace img/place-*.webp on the CDN.
+
+## PALETTE GUIDE for sáng / trưa / chiều / tối (from the APPROVED 16-sets; use for NVP v2 and the 38 festival pictures)
+Measured on 8 approved sets x 4 seasons (canh-phuc-cung, kinh-su-phong, thai-y-vien, lanh-cung, tam-cung-dem, phi-tan-cung, khon-ninh-cung, ngu-hoa-vien), 32 images per buổi. HSV on a 256x170 downscale; "warm" = mean(R-B) 0-255; "vivid" = % of pixels with S>0.6 and V>0.6; contrast = std of luma.
+| buổi | mean sat | mean value | warm | contrast | vivid px |
+| sáng  | 0.28 | 0.66 | 39 | 42 | 2.6 % |
+| trưa  | 0.32 | 0.72 | 50 | 44 | 3.3 % |
+| chiều | 0.44 | 0.63 | 68 | 40 | 4.6 % |
+| tối   | 0.40 | 0.44 | 29 | 35 | 1.5 % |
+How each buổi is treated (looked at all 4 buổi of 4 approved sets):
+- sáng: pale, slightly cool, fresh light; low saturation; soft lattice shadows; lanterns unlit; sky pale blue/white.
+- trưa: brightest and most neutral (near-white light), short soft shadows, same low saturation; NOT warmer than sáng by much.
+- chiều: one gentle amber wash over the whole room (warm 68, the only warm-tilted buổi), long soft light shafts through the lattice as patches on the floor, sky pale peach; reds stay dusty brick; lanterns unlit; no orange hot spots (vivid px <= ~5 %).
+- tối: whole room dark and dusky blue-grey (value ~0.44, about 60 % of trưa), deep navy window with a moon, lanterns lit as SMALL warm glows with limited light pools on furniture; no blown-out orange; the warm light is local, the ambient stays cool.
+- Floor: the approved sets have polished/glossy floors (Cảnh Phúc marble, Kính sự phòng wood). The owner's later rule (OD:L86 + 16/11 Nội vụ phủ ruling) is MATTE painted floor for new pictures: do not copy the approved gloss; soft painted texture, light patches as flat painted shapes, no mirror reflections.
+- What made my v1 NVP set "AI" (measured vs approved): chiều vivid px 23 % vs 4.6 %, warm 85 vs 68, sat 0.51 vs 0.44; tối value 0.58 vs 0.44, vivid 18.6 % vs 1.5 %, warm 63 vs 29 (blown-out orange lantern light, hot floor).
+Prompt wording that worked (gpt-2-6, 2k, 3:2, edit of the matte base + for chiều/tối a second reference = approved same-buổi scene, "colour and light reference only"):
+  base edit: "...floor becomes a MATTE hand-painted floor ... NO reflections, NO gloss ...; lower overall saturation by about 25 percent ... dusty and calm like the second reference".
+  chiều: "a gentle warm amber wash over the room like the second reference, soft long light shafts through the lattice as soft painted patches on the matte floor, colours stay muted and dusty, NO hot orange, NO glow, lanterns unlit."
+  tối: "the whole room is dark and dusky blue-grey (about half the daytime brightness), deep navy moonlit window with a soft moon, lanterns lit as small soft warm glows with gentle warm light pools, a few small candle flames, NO blown-out orange light, NO strong glare, colours muted and cool."
+  sáng/trưa: "pale, soft, slightly cool fresh light, low saturation" / "bright soft neutral-white light, short soft shadows, low saturation".
+
+## NVP v2 set (redone, NOT wired) — SẴN SÀNG XEM
+Base = matte edit of the v1 spring-morning (creation xSdQHxgjfW) + 15 edits. 16 x 65 = 1,040 credits. All 16 tiles looked at on the sheet, side by side with the approved Kính sự phòng same season + buổi.
+Sheet (1560 wide): CDN https://ctm-img.victoria-tntt.workers.dev/img/nvp-scene-v2-vs-approved-sheet.jpg (also reports/place-glyphs-nvp-v2-vs-approved.jpg). Top row of each pair = approved, bottom = new.
+Measured NEW vs approved (mean of 4 seasons): sáng sat .28/.28 val .63/.66 warm 43/39; trưa sat .29/.32 val .66/.72 warm 47/50; chiều sat .41/.44 val .60/.63 warm 63/68; tối sat .27/.40 val .31/.44 warm 13/29; vivid px 0.2-0.3 % everywhere (approved 1.5-4.6 %).
+Honest findings: (1) sáng/trưa/chiều colour matches the approved sets closely; floors are matte. (2) The new set is FLATTER: contrast ~30 vs ~41 approved (and 21 vs 35 at tối). (3) tối is darker and cooler than approved (val .31 vs .44) and the lanterns give less warm glow than approved; it reads gloomy rather than cosy. (4) Floor colour is a mauve-grey, less rich than the approved warm wood/marble. Suggested if she wants closer: one more pass on the 4 tối tiles only (about 260 credits) asking for brighter lantern pools, or a light grade in code; her call. Not redone without asking.
+Mapping (season-buổi -> Magnific creation): xuan-sang xSdQHxgjfW, xuan-trua eIOnTtCdqL, xuan-chieu huRpoqEvqL, xuan-toi lJ8br64gv9, ha-sang ksDCHZV16B, ha-trua w4h1spE7EI, ha-chieu KLMfFWakqp, ha-toi LwBHkdIswO, thu-sang jUXF1gYLD0, thu-trua eIOnMtadqL, thu-chieu xSdQk77jfW, thu-toi ksDCb7i16B, dong-sang fHAXhxhCDY, dong-trua SytKsA4Ub8, dong-chieu JNaxUchOq4, dong-toi lJ8bjnZgv9. (v1 set ids stay in this file above; superseded.)
+Credits total this session so far: ~1,890 (glyph v1 + v1 scene) + 120 (glyph v2 samples) + 1,040 (NVP v2) = ~3,050.
