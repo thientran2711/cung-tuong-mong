@@ -12057,7 +12057,7 @@ function kitInfoKey(title){const t=kpPlain(String(title||"")).trim();for(const [
 function kitInfoArt(title){const k=kitInfoKey(title);const have=KIT_INFOM.have||[];const cat=KIT_INFO_CAT[k]||kitActCat(kpPlain(String(title||"")));const ah=(KIT_ACTS.have||[]);
  const src=k&&have.includes(k)?`https://ctm-img.victoria-tntt.workers.dev/img/info-${k}.webp`:ah.includes("act-cat-"+cat)?`https://ctm-img.victoria-tntt.workers.dev/img/act-cat-${cat}.webp`:"";return{key:k,src,label:kpPlain(String(title||"")).replace(/\s*[·:].*$/,"")}}
 (function(){const b0=kpBuild;kpBuild=function(M,m){b0.apply(this,arguments);try{const dlg=M.querySelector(".dlg");if(!dlg||!/^(rule|info)$/.test(dlg.dataset.kind||""))return;
- const body=M.querySelector("#mb > .kpb");if(!body||body.querySelector(":scope > .kpsubj"))return;const a=m.kit&&m.kit.art?{key:"",src:m.kit.art,label:m.kit.artLabel||""}:kitInfoArt(m.t);/* spec.art = the picture of THIS subject (e.g. a chapter cover, review/chapter-detail), else the topic picture */
+ const body=M.querySelector("#mb > .kpb");if(!body||body.querySelector(":scope > .kpsubj"))return;const a=kitInfoArt(m.t);
  body.classList.add("kphas","kpinfo");body.insertAdjacentHTML("afterbegin",`<div class="kpsubj kpiart" data-info="${a.key}">${kitArtFrame(a.src,a.label)}</div>`)}catch(e){console.error("kpInfo",e)}}})();
 /* the HUD help panels use the same structured layout as the rule panel: what it is · what you have now */
 (function(){const s0=showModal;showModal=function(){try{const m=Q[0];if(m&&!m.kit&&!m.opts&&typeof m.h==="string"&&/^<p>[^<]*<\/p>$/.test(m.h)&&typeof HX==="object"){
@@ -25690,7 +25690,7 @@ function chapOpen(){const M=chapModel();if(!M||Q.some(m=>m.kit&&m.kit.chap))retu
  else if(M.mode!=="all")S1.push({h:"Chuyện đã qua",html:`<p class="kpnote">Chương này chưa có hồi nào khép lại.</p>`});
  if(M.risks.length)S1.push({h:"Cần lưu ý",rows:M.risks.map(r=>[r[0],r[1],r[2]||""])});
  if(M.go)S1.push({h:"",html:chapGoBtn(M)});
- kitModal({kind:"info",title:`${M.kicker} · ${M.title}`,sub:M.sub,sections:S1,btn:"Lui",chap:1,art:M.cover,artLabel:M.title})}
+ kitModal({kind:"info",title:`${M.kicker} · ${M.title}`,sub:M.sub,sections:S1,btn:"Lui",chap:1})}
 /* the rank card: what is still needed for the next rank */
 function chapRankOpen(){if(Q.some(m=>m.kit&&m.kit.chap))return;if(S.rank>=7||S.out||typeof promoReq!=="function")return;const R=promoReq().slice().sort((a,b)=>a[0]-b[0]);const ok=R.filter(x=>x[0]).length;
  kitModal({kind:"info",title:`Sắc phong: ${chapRank(S.rank+1)}`,sub:`Đạt ${ok}/${R.length} điều`,sections:[{h:"Điều kiện",html:kitReqRows(R)},{h:"",html:`<p class="chapgo"><button type="button" class="kbtn alt" data-chapgo="1">Đi làm: Hành sự</button></p>`}],btn:"Lui",chap:1})}
@@ -29146,7 +29146,7 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.2",title:"Th�
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="120c81d6c212";window.CTM_BUILD=BUILD;
+const BUILD="8ce73d993a95";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

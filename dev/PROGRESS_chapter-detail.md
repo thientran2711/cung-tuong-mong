@@ -11,11 +11,11 @@ origin/main and origin/review/tutorial: no chapter detail (git grep for chapterD
   - `chapInline()` = the same progress inline under the card (steps, risks, Đi làm), so the page is no longer empty.
   - Tap-through (one delegated handler): chapter chip, "còn khoảng N chương" chip, card, picture, check lines -> chapOpen; Sắc phong card/picture -> chapRankOpen (kitReqRows + Đi làm); Sắc phong chips (Đức, khảo hạch) and Việc nhờ counter chips -> kit popup (kpPop) saying what the number means.
 - `jtabs.js` ktStoryHTML: chips get data-chap, inline block appended.
-- `j79.js` kpInfo art: `spec.art` (+ `artLabel`) overrides the topic picture with the picture of the subject (KIT note below).
+- (reverted per ONE KIT KEEPER rule 16/11: no kpInfo `art` override; panel uses the existing topic picture. KIT REQUEST below.)
 - Texts per VANPHONG (no %, "Lui", cổ trang).
 
-## KIT note (for KIT.md, docs branch)
-kitPanel/kitModal spec gains optional `art` (+`artLabel`): the left picture of a rule/info panel is the subject's own picture (chapter cover), default stays the topic picture.
+## KIT REQUEST
+kitModal kind info: optional subject picture (chapter cover) in place of the topic picture on the left (cover exists via kitOriginArt/stArtOf). Used by chapter detail panel. Not built; panel shows the existing topic picture.
 
 ## Tests
 - `dev/test/chapter-detail.js`: 3 states x (chip, card, picture, check line) -> panel; v1 td lines; Đi làm; rank picture; Việc nhờ chip popup; no page errors.

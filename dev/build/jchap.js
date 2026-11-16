@@ -47,7 +47,7 @@ function chapOpen(){const M=chapModel();if(!M||Q.some(m=>m.kit&&m.kit.chap))retu
  else if(M.mode!=="all")S1.push({h:"Chuyện đã qua",html:`<p class="kpnote">Chương này chưa có hồi nào khép lại.</p>`});
  if(M.risks.length)S1.push({h:"Cần lưu ý",rows:M.risks.map(r=>[r[0],r[1],r[2]||""])});
  if(M.go)S1.push({h:"",html:chapGoBtn(M)});
- kitModal({kind:"info",title:`${M.kicker} · ${M.title}`,sub:M.sub,sections:S1,btn:"Lui",chap:1,art:M.cover,artLabel:M.title})}
+ kitModal({kind:"info",title:`${M.kicker} · ${M.title}`,sub:M.sub,sections:S1,btn:"Lui",chap:1})}
 /* the rank card: what is still needed for the next rank */
 function chapRankOpen(){if(Q.some(m=>m.kit&&m.kit.chap))return;if(S.rank>=7||S.out||typeof promoReq!=="function")return;const R=promoReq().slice().sort((a,b)=>a[0]-b[0]);const ok=R.filter(x=>x[0]).length;
  kitModal({kind:"info",title:`Sắc phong: ${chapRank(S.rank+1)}`,sub:`Đạt ${ok}/${R.length} điều`,sections:[{h:"Điều kiện",html:kitReqRows(R)},{h:"",html:`<p class="chapgo"><button type="button" class="kbtn alt" data-chapgo="1">Đi làm: Hành sự</button></p>`}],btn:"Lui",chap:1})}
