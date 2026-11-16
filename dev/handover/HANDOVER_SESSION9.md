@@ -118,3 +118,4 @@ Owner questions OPEN: NVP glossy floor (superseded by her 07:15Z redo order); fp
 - (07:12Z) MAIN SESSION 12 = session_01UV1SzjAp352g6XsaH4f3YB (opened by s11). Workers report there from now on.
 - (07:13Z) MAIN SESSION 12 = session_01UV1SzjAp352g6XsaH4f3YB took over. Hourly self-wake trig_01HGkAgurzHcaQzWo7uFLLfT (:12, human_request); s11 trigger trig_018KeLcdXKabaXpFYzAiCYxf DISABLED. All running main-s9/s11 workers messaged to report to s12.
 - (07:13Z s11 final) LIVE: main = bd6342c7 (coop-night-sync-r1: friend no longer jumps to the new day while she is in buổi tối). s12 informed; merge-hot-1 re-merging bd6342c7.
+- (07:17Z s12) main = bd6342c7 (coop-night-sync-r1 landed 07:10Z, before s12; ff queue #5 done). merge-hot-1 told to re-merge bd6342c7. Opened percent-measure (sonnet) session_01UV1SzjKGmuHQwVQXwNQ4LE.
