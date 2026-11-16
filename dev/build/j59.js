@@ -78,7 +78,7 @@ function j59sel(st,tk,me){let pi=null;try{pi=typeof popIdx==="number"?popIdx:nul
      The next chip reads "+N" (N = people not shown yet), the back chip "‹"; both stand in their own gutters at the stage's bottom
      corners (the name row), so they never cover a figure or a name.
    - the head count is ONE number (kitHereCount): the stage title, the page chips and the Dư đồ label of the place she stands in. */
-const OVX=.2;
+const OVX=0;/* review/stage-slots-fix (owner 16/11): figures NEVER overlap — no neighbour allowance; the whole visible art (sleeves included) must fit its slot */
 function j59person(p){return !!p&&p.kind!=="chest"&&p.kind!=="task"&&!(p.kind==="srv"&&p.sk==="task")}
 function j59chips(st,R,P){/* P: {pg, pages, before, after, fo, CW, x0L, x0R} */
  for(const side of ["l","r"]){let c=st.querySelector(".j59more.j59m"+side);const on=P&&P.pages>1&&(side==="r"?P.pg<P.pages-1:P.pg>0);
@@ -129,7 +129,7 @@ function j59lay(){const st=document.getElementById("stage");if(!st||!S)return;co
  /* KIT 33: women stand KIT_FIG.h; a taller figure (man ×KIT_FIG.man) is CAPPED under the place ribbon (CAP) — it never shrinks the others */
  let CAP=Infinity;const ef=(x,h)=>Math.min(h*x.f,CAP);
  const imgH=(x,h)=>ef(x,h)/(x.b.b-j59bt(x.b)),boxW=(x,h)=>imgH(x,h)*x.ar;
- const kCL=b=>b.cl!=null?b.cl:b.l,kCR=b=>b.cr!=null?b.cr:b.r;
+ const kCL=b=>b.l,kCR=b=>b.r;/* review/stage-slots-fix: the slot box is the figure's WHOLE visible art (kitFigBody l..r, wide sleeves included), centred on the slot; was the torso core, which let robes overlap */
  const coreW=(x,h)=>boxW(x,h)*Math.max(.2,kCR(x.b)-kCL(x.b));
  const meX=me?{f:1,b:mb||{t:0,b:1,l:0,r:1},ar:mar}:null;
  const F=E.filter(x=>!x.nf);const nfW=Math.max(0,...E.filter(x=>x.nf).map(x=>x.tok.offsetWidth));
@@ -160,8 +160,8 @@ function j59lay(){const st=document.getElementById("stage");if(!st||!S)return;co
     when they do not fit at full height, EVERYONE is scaled down together (same scale, J59HMIN at least) before the page drops a slot */
  let Z=size(tagH),N=Math.max(1,Math.min(MAXN,nAll)),G=geo(N,Z);
  if(!fits(G,Z.H)&&!capOn&&KF.maxPx){capOn=true;Z=size(tagH);G=geo(N,Z)}
- const J59HMIN=.62;
- while(N>1&&!fits(G,Z.H)){if(fits(G,Z.H*J59HMIN)){let lo=Z.H*J59HMIN,hi=Z.H;for(let k=0;k<18;k++){const m=(lo+hi)/2;if(fits(G,m))lo=m;else hi=m}Z.H=lo;break}N--;G=geo(N,Z)}
+ const J59HMIN=()=>N<=2?.32:.62;/* two slots are kept (owner: phone shows 2) by scaling everyone down together further than for 3 */
+ while(N>1&&!fits(G,Z.H)){if(fits(G,Z.H*J59HMIN())){let lo=Z.H*J59HMIN(),hi=Z.H;for(let k=0;k<18;k++){const m=(lo+hi)/2;if(fits(G,m))lo=m;else hi=m}Z.H=lo;break}N--;G=geo(N,Z)}
  if(!fits(G,Z.H,1)){/* a stage narrower than ONE whole person: that one person scales down to fit */
   let lo=sH*.15,hi=Z.H;for(let k=0;k<22;k++){const m=(lo+hi)/2;if(fits(G,m,1))lo=m;else hi=m}Z.H=lo}
  /* the name chips are at most one slot wide (they wrap, never cut); measure them at that width, then size the floor band for them */

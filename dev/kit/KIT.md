@@ -2302,24 +2302,26 @@ neighbours whose chips would touch go to two staggered rows (j59 crowd), and the
 
 ### 33.7 STAGE SLOT TEMPLATE · khuôn ô sân khấu (owner 11/15 06:55Z + 07:30Z + 08:00Z, review/stage-slots) — `dev/build/j59.js` j59lay
 Every stage that shows full-body people (room, place, her palace, servant road, lãnh cung, co-op — all go through j59lay) uses ONE template:
-1. **Slots.** N = **3** on iPad-wide layouts (viewport ≥ 1000 px), **2** on Fold / phones, her included. The open floor
-   (stage − left plaque gutter − right reserve − page-chip gutters) is cut into N equal slots; slot i has a FIXED centre
-   `x0 + w·(i + ½)` that does not move between pages or with who stands there (an empty slot stays empty).
+1. **Slots.** At most **3** on iPad-wide layouts (viewport ≥ 1000 px), **2** on Fold / phones, her included. The FREE width (stage − left plaque gutter −
+   right side column − page-chip gutters; `st.dataset.j59free = x0,avail`) holds k people at `x0 + avail·i/(k+1)`: 1 → centre, 2 → 1/3 · 2/3, 3 → 1/4 · 2/4 · 3/4
+   (owner OD:L1049, 16/11).
    Right column (kit review 11/15, supersedes rule 2 here): when the right plaque column (court chips, maid, Ân sủng) reaches down to the
    heads, the slots stop at its left edge + 6 px — no face and no name is ever under it; a column that ends above the heads leaves the
    full width; the "+N" chip then stands in that reserved zone under the column (no second right gutter). On iPad this gives
    3 slots while everyone fits on one page and 2 per page when paged (her + 3 or more). Compact stages (phone landscape 844x390, `.j59c`) keep rule 2 until the scaled iPad layout lands (review/game-feel). On **phones (< 600 px, `.j59ph`)** the right
    chip column (court chips, maid, "Ân sủng ›") folds into ONE compact row (no thumbnails, one line each) along the top edge under the
    place title, and the heads stand under that row (topR, up to 30 % of the stage) — two slots keep their width, no chip on a head.
-2. **One figure per slot**, its BODY core column (kitFigBody cl..cr) centred on the slot centre (transparent margins of the art never
-   count), feet on ONE floor line (the margin under the feet is pulled out with a negative margin — no per-figure translate), at the
-   KIT_FIG scale (woman .79 / maxPx, man ×1.07 capped under the ribbon, child by age). Never shrunk to fit: when a figure's core
-   (less the 20 % a neighbour may overlap) is wider than a slot, Fold falls back to the maxPx cap, then the screen uses fewer slots;
-   only a stage narrower than ONE person scales that one person down. She stands still (no idle sway: KIT motion rule STILL PEOPLE).
+2. **One figure per slot, NEVER overlapping (owner 16/11 OWNER BUG, review/stage-slots-fix)**: the figure's WHOLE visible art (kitFigBody l..r, wide sleeves and
+   flared skirts included; transparent margins never count) is centred on the slot centre and must be no wider than the slot spacing `avail/(k+1)`.
+   There is NO neighbour overlap allowance (the old torso-core + 20 % rule is gone). When the art is wider, EVERYONE scales down by one common factor
+   (down to .62, .32 when only two slots are asked for), then the page holds fewer people. Test: `dev/test/stage-slots-fix.js` (bounding boxes of every
+   figure on real stages with 1/2/3 people at Fold 755x1000, iPad 1180x820 / 1366x1024, 412x1058, 390x844, 844x390: no intersection, centres within 2 px). Feet on ONE floor line (the margin under the feet is pulled out with a negative margin — no per-figure translate), at the
+   KIT_FIG scale (woman .79 / maxPx, man ×1.07 capped under the ribbon, child by age). Shrunk (all together, one factor) only when the whole art is wider than the slot spacing: Fold falls back to the maxPx cap, then the common factor, then the page uses fewer slots;
+   only a stage narrower than ONE person scales that one person further down. She stands still (no idle sway: KIT motion rule STILL PEOPLE).
    **No figure under a stage panel, any size (review/small-bugs-2, supersedes the compact-stage exception above):** the right column
    (#kshR) is reserved on compact stages (844x390 `.j59c`) too, and a left plaque column (#kshL) that reaches the heads moves the first slot
-   to its right edge + 6 px. A wide robe that steps over its slot (the 20 % neighbour allowance) beside a reserved panel is pulled in
-   so its core ends at the panel edge (j59 `inLim`; the slot count is unchanged). Test: `dev/test/small-bugs-2.js` check 4 (lãnh cung, home, vườn with 1–3 people).
+   to its right edge + 6 px. A figure beside a reserved panel is pulled in (never needed now that the whole art fits its slot)
+   so its art ends at the panel edge (j59 `inLim`; the slot count is unchanged). Test: `dev/test/small-bugs-2.js` check 4 (lãnh cung, home, vườn with 1–3 people).
 3. **Never a mini portrait on the stage** (owner 08:00Z): a person without figure art stands as the kit's full-size soft silhouette
    (`img/kit/unknown-fig-f|m|k.webp`, `.j59sil`, man silhouette ×1.07) in a slot, with the real chip; a stranger is the grey silhouette
    with "Người lạ". Only things that are not people (a chest) keep their small token, still in a slot.
