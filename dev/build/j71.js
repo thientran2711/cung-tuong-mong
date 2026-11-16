@@ -110,22 +110,22 @@ PEND.j71f=pp=>{if(!S)return null;const k=pp.k,V=(FV7[k]||[])[pp.vi];if(!V)return
   o.push({n:`Dự thi ${c.n}`,fx:{suc:-6},x:`${word(p1)} · ${gain} · ${lose} · ${kem}`,go:run(0)});
   o.push({n:`Chuẩn bị kỹ rồi dự thi`,fx:{suc:-6,bac:-20},x:`${word(p2)} · ${gain} · ${lose} · ${kem}`,go:run(J71.prep)});
   const al=E.filter(p=>p!==S).sort((a,b)=>(aff(S,b)||0)-(aff(S,a)||0))[0];
-  if(al)o.push({n:`Không dự, cổ vũ ${al.name}`,fx:{},x:`${G7(`${al.name} thân +4`)} · kèm: không có phần thưởng`,go:()=>{relAdd(S,al,4);log(`${fn}: ${cRun7(k,sub,E,pp.pr||[],0,false)} Ngươi đứng xem, cổ vũ ${al.name}.`)}});
+  if(al)o.push({n:`Không dự, cổ vũ ${al.name}`,fx:{},x:`${G7(`${al.name} thiện cảm +4`)} · kèm: không có phần thưởng`,go:()=>{relAdd(S,al,4);log(`${fn}: ${cRun7(k,sub,E,pp.pr||[],0,false)} Ngươi đứng xem, cổ vũ ${al.name}.`)}});
   else o.push({n:"Không dự, đứng xem",fx:{},x:"không được không mất",go:()=>log(`${fn}: ${cRun7(k,sub,E,pp.pr||[],0,false)}`)})}
  else if(t==="W"){const N=WT7[sub]||WT7.thuyen,s=pp.s||[50,50,50,50],sum=s.reduce((a,b)=>a+b,0);const P=s.map(x=>x/sum);const hi=s.indexOf(Math.max(...s)),lo=s.indexOf(Math.min(...s));
   h+=`<p>${N.map((n,i)=>`${i?n:n[0].toUpperCase()+n.slice(1)}: ${form7(s[i])}`).join(" · ")}.</p>`;const pay=i=>Math.round(20/P[i]*.9);
   const bet=i=>({n:`Cược ${N[i]}`,fx:{bac:-20},x:`${word(P[i]*100)} · thành: Bạc +${pay(i)} · hỏng: mất tiền cược`,go:()=>{let r=Math.random()*sum,wi=0;while(wi<3&&r>s[wi]){r-=s[wi];wi++}if(wi===i){apply({bac:pay(i)});log(`${fn}: ${N[wi]} về nhất; ngươi thắng cược, Bạc +${pay(i)}.`)}else log(`${R7("Không thành:")} ${fn}: ${N[wi]} về nhất; ngươi cược ${N[i]}, mất 20 bạc.`)}});
   o.push(bet(hi));if(lo!==hi)o.push(bet(lo));o.push({n:"Không cược, chỉ xem",fx:{},x:"không được không mất",go:()=>{let r=Math.random()*sum,wi=0;while(wi<3&&r>s[wi]){r-=s[wi];wi++}log(`${fn}: ${N[wi]} về nhất.`)}})}
- else if(t==="G"){if(!A)return null;who=pv(A);const st=Math.min(50,Math.floor((A.bac||0)/2));const g=n=>({n:`Chơi ván ${n>=40?"lớn":"nhỏ"} (${n} bạc)`,fx:{bac:-n},x:`${word(50)} · thành: Bạc +${n*2} (lấy lại tiền cược và ${n} của ${A.name}), ${A.name} thân +2 · hỏng: mất tiền cược, ${A.name} thân +2`,
+ else if(t==="G"){if(!A)return null;who=pv(A);const st=Math.min(50,Math.floor((A.bac||0)/2));const g=n=>({n:`Chơi ván ${n>=40?"lớn":"nhỏ"} (${n} bạc)`,fx:{bac:-n},x:`${word(50)} · thành: Bạc +${n*2} (lấy lại tiền cược và ${n} của ${A.name}), ${A.name} thiện cảm +2 · hỏng: mất tiền cược, ${A.name} thiện cảm +2`,
    go:()=>{relAdd(S,A,2);if(roll(50)){apply({bac:n*2});ap(A,{bac:-n});log(`${fn}: ngươi thắng ${A.name} ván ${n} bạc.`)}else{ap(A,{bac:n});log(`${R7("Không thành:")} ${fn}: ${A.name} thắng ngươi ván ${n} bạc.`)}}});
   o.push(g(20));if(st>=40)o.push(g(40));o.push({n:"Từ chối khéo",fx:{},x:"không được không mất",go:()=>log(`${fn}: ngươi từ chối khéo lời rủ của ${A.name}.`)})}
  else if(t==="B"){if(pp.host!=null){const H=RV(pp.host);if(!H||!H.alive||H.out)return null;who=pv(H);h=`<p class="past">${fn}</p><p>${H.name} bày tiệc mừng ${fn} ở cung mình, sai người sang mời ngươi.</p>`;
-   o.push({n:"Mang lễ sang dự",fx:{bac:-10},x:`${G7(`${H.name} thân +5`)}, Danh +1`,go:()=>{relAdd(S,H,5);apply({danh:1});log(`${fn}: ngươi sang dự tiệc của ${H.name}.`)}});
+   o.push({n:"Mang lễ sang dự",fx:{bac:-10},x:`${G7(`${H.name} thiện cảm +5`)}, Danh +1`,go:()=>{relAdd(S,H,5);apply({danh:1});log(`${fn}: ngươi sang dự tiệc của ${H.name}.`)}});
    o.push({n:"Cáo mệt, không đi",fx:{},x:`Sức +4 · kèm: ${H.name} mất thiện cảm -3`,go:()=>{apply({suc:4});relAdd(S,H,-3);log(`${fn}: ngươi không sang dự tiệc của ${H.name}.`)}})}
   else{const G=(pp.g||[]).map(RV).filter(v=>v&&v.alive&&!v.out);const cost=40+S.rank*8,po=cl(Math.round(40+help7(S)*3+(S.tamco||0)/4),15,92);
-   const gt=G.map(v=>G7(`${v.name} thân +6`)).join(", ");
+   const gt=G.map(v=>G7(`${v.name} thiện cảm +6`)).join(", ");
    o.push({n:"Bày tiệc lớn",fx:{bac:-cost},x:`${word(po)} · thành: Danh +4, Sủng +2${gt?", "+gt:""} · hỏng: món ăn hỏng, khách chê: Danh -2`,go:()=>{if(roll(po)){apply({danh:4,sung:2});G.forEach(v=>relAdd(S,v,6));log(`${fn}: tiệc của ngươi được khen, Hoàng thượng ghé qua.`)}else{apply({danh:-2});log(`${R7("Không thành:")} ${fn}: tiệc của ngươi trục trặc, món ăn hỏng, khách chê.`)}}});
-   if(G[0])o.push({n:`Tiệc trà nhỏ mời ${G[0].name}`,fx:{bac:-15},x:`${G7(`${G[0].name} thân +4`)}, Danh +1`,go:()=>{relAdd(S,G[0],4);apply({danh:1});log(`${fn}: ngươi mời ${G[0].name} uống trà.`)}});
+   if(G[0])o.push({n:`Tiệc trà nhỏ mời ${G[0].name}`,fx:{bac:-15},x:`${G7(`${G[0].name} thiện cảm +4`)}, Danh +1`,go:()=>{relAdd(S,G[0],4);apply({danh:1});log(`${fn}: ngươi mời ${G[0].name} uống trà.`)}});
    o.push({n:"Không bày tiệc, nghỉ ngơi",fx:{},x:"Sức +4",go:()=>{apply({suc:4});log(`${fn}: ngươi nghỉ trong cung.`)}})}}
  else if(t==="P"){const th=sub==="th"&&!S.thDead;who=th?pTH():pEmp();const R2=ents7(pp);const gift=v=>(v.bac||0)>=100?55:Math.max(15,(v.tai||0)*.3+aw7(v,"hoa")*8+help7(v)*.8);
   const mine=[55,Math.round((S.tai||0)*.3+aw7(S,"hoa")*8+help7(S)*.8),15];const rv=R2.map(gift);

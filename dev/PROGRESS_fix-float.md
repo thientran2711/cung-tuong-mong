@@ -139,8 +139,33 @@ Root causes and fixes (all in dev/build, site rebuilt with dev/site/build_site.s
 3. Harness (coop-e2e): COOP_OLD_REF env for the old-save build (the shared checkout's origin/main ref was moved to an item-events
    merge; use COOP_OLD_REF=ed7271deb); week-advance wait 90 s; old page waits for its code and uses __nlInner (start() left S unset
    behind Luân hồi → "reading 'buoi'"); tapText retries a detached button. night-day.js: new 5th case "stale".
-Tests so far (load 37–66): night-day 5 cases ok (stale: day stays, buổi sáng not ended, stale=1). coop-e2e plain on 0ef282c1e:
-run 1 59/59, run 4 59/59; runs 2, 3 aborted by harness (old.html S unset; detached click) — both harness fixes are now in.
-NEXT: finish plain coop-e2e to ≥5 complete runs, COOP_NIGHTS=1 ×2, book-person 5 sizes, sheet-turn 5 sizes; then push
-fast-forward to review/fix-float (it is an ancestor of 78c9106d4) and report. Runner: dev worktree .ce/run.sh (not committed):
-`COOP_OLD_REF=ed7271deb COOP_NIGHTS=0|1 node dev/test/coop-e2e.js <outdir>`.
+Tests on 677e54e6b (build = 0ef282c1e; load 37–66):
+- night-day: 5 cases ok (steal, road, ksp, morning: day 0 → 1; stale: the day stays, its buổi sáng is not ended, stale=1).
+- coop-e2e plain (COOP_OLD_REF=ed7271deb): 5 complete runs, all 59/59. 2 more runs were aborted by the harness (old.html left S unset;
+  a button detached before the click); both are fixed in the harness. Before the fixes (724d6841a / e38280c07): plain run 1 = week 3
+  "same date [[1,3,2],[1,4,0]]" (stale room replay), and a stall at buổi 0:0 with both seats bended locally (lost bend).
+- coop-e2e COOP_NIGHTS=1: 2 runs, 59/59 (8 and 10 forced nights).
+- book-person at 755x1000, 1000x755, 1180x820, 1366x1024 and 844x390: ok, bad [] at every size, errs [].
+- sheet-turn at the same 5 sizes: exit 0, one #panel, ids 0, errs [].
+RESULT r8: ready for review.
+
+## Review r9 (review/fix-float-r9, on origin/main f53bdade0; reviewer)
+- Merged 922818a21 (= r8) onto main f53bdade0 (176 main commits). Conflicts:
+  - assemble: main list + jkrel after jaudit, jint + jnight after jsfx, before j84.
+  - j84 relation rules: main's ts-a rules ("quý ngươi hơn" sentence; label-only lookaheads: "với ngươi" only before a number or ":",
+    "quý ngươi" also before ≥ ≤ dưới từ "(") + this branch's subject labels ("Nàng → ta: thiện cảm", "Ta → nàng: thiện cảm") with the
+    same lookaheads, and "thân ±N" → "thiện cảm ±N". Probe: "Nàng ra tay với ngươi, …" / "hẹn ước với ngươi, …" stay sentences.
+  - KIT.md: this branch §57 + main §58/§64/§59 (both kept). assets.json / index.html / sw.js rebuilt (build_site.sh; no CDN sync).
+- Code review of r8: jnight pp.nd stamp (mkP + chooseM wrappers, nightFx reads the answered dialog's stamp), jcoopworld CW.wkIn
+  (week applied once; room handler only catches up), syncRoom rebend / re-end. Server (coop/worker) week only increases, room snapshot
+  carries buoi/bended/ended, so the resend checks are sound. No pp iteration anywhere, so the extra pp.nd is harmless.
+- Harness: coop-e2e "week N: <seat> advanced" failure now dumps sent/pend/pendBuoi/bend/buoi/Q/mg/toMorning/stale/modal + COOPW.tr.
+- Results (load avg 40–48, other workers running):
+  - coop-e2e plain: 3/3 runs 59/59 (old save = origin/main build).
+  - coop-e2e COOP_NIGHTS=1: 6 of 7 runs 59/59 (5–12 forced nights). Run 1 (10 nights): week 3 did not advance within 90 s —
+    fold had ended week 2 (waiting), ipad had run its tối locally (S.buoi 0, CW.pend true, CW.sent 1) but its `end` was not out yet;
+    it went out later by itself (after week 3 both seats on the same date [1,4,0], rebirth week advanced, 56/59 incl. a follow-on
+    "A frozen when B left" timing miss). No split / rewind like r7. Not reproduced in 6 more runs; the old harness had no dump then.
+  - book-person 5 sizes: ok, bad [] everywhere, errs []. night-day 5 cases ok (stale case: stale=1, day kept).
+  - rel-words-scan 1180x820: all counts 0 (11 screens). Viewport shots 755x1000, 1000x755, 1180x820, 1366x1024, 844x390, 390x844
+    (?khost=1: rotated 1180x820 design, s 0.476): no horizontal overflow, no page errors.

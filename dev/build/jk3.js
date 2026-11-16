@@ -26,7 +26,7 @@ function k3Hud(){try{if(!S)return;const d=$$("me-d");if(d){const t=k3Date();if(d
  /* lãnh cung: the rank chip says what the figure label says (rkOfFace "Phế phi · lãnh cung"), not her old rank (review fold-layout) */
  if(S.out){const r=$$("me-r"),w="Phế phi · lãnh cung";if(r&&r.textContent.trim()!==w)r.textContent=w}
  /* her Tư chất: the kit stat cells in the top bar's kitStatRow (jk4) */
- k3TopRow();if(typeof kitStatSet!=="function")return;const nd=hhNeed(S).duc,hq=S.rank<7&&S.duc<nd,dw=`Cần Đức ${BAL.hhDuc} mới được lập Hoàng hậu (mẹ Thái tử: ${BAL.hhDucHeir})`;
+ k3TopRow();try{window.kitHxRoad&&kitHxRoad()}catch(e){}if(typeof kitStatSet!=="function")return;/* the Đức "!" (lập Hoàng hậu) is a consort goal: never on the cung nữ road or in lãnh cung */const nd=hhNeed(S).duc,hq=S.rank<7&&S.duc<nd&&!(window.kitRoad&&kitRoad()),dw=`Cần Đức ${BAL.hhDuc} mới được lập Hoàng hậu (mẹ Thái tử: ${BAL.hhDucHeir})`;
  [["sac","Sắc"],["tai","Tài"],["tamco","Tâm cơ"],["duc","Đức"]].forEach(([k,l])=>{const c=$$("hud-"+k);if(c)kitStatSet(c,S[k],{title:`${l} ${S[k]}${k==="duc"&&hq?" · "+dw:""} · chạm để xem đủ`,warn:k==="duc"&&hq?dw:""})});
  /* Danh · Sủng · Bạc · Sức: tooltip = name + value + "chạm để xem đủ" (the label line's own text, so the servant road's "Chủ tin" reads right) */
  ["danh","sung","bac","suc"].forEach(k=>{const c=$$("hud-"+k);if(!c)return;const l=T((c.querySelector(".kstl")||c).textContent),v=k3CellKey(k)==="tin"?S.tin:S[k];kitStatSet(c,v,{title:`${l} ${v} · chạm để xem đủ`})})}catch(e){}}
@@ -57,7 +57,7 @@ function k3maid(){const b=k3hc("maid");if(!b||!S.maid||(typeof isSrv==="function
  const v=k3val(b),n=+v;return `<button type="button" class="k3c" data-k3go="staff" title="Cung nữ thân tín · chạm để xem">${f}<span class="k3ct"><b>${esc(S.maid.name)}</b><span class="k3v"><small>Lòng</small> <span class="ef ${n>=60?"g":n<45?"r":"n"}">${esc(v)}</span></span></span></button>`}
 /* Ân sủng chips (owner 11/15 04:05Z): Tai mắt + the Ân sủng facts under the court chips, same plaque card and column width, one value per line,
    labels never cut. Có thai / Lật thẻ on the chance scale (chanceLvl, j1: Rất thấp…Rất cao), never the act ladder. Bổng lộc lives only here. */
-function k3AsRows(){if(!S||S.dead||(typeof isSrv==="function"&&isSrv()))return[];const L=[];const hv=k=>{const b=k3hc(k);return b?k3val(b):""};
+function k3AsRows(){/* consort-only facts (Lật thẻ, Có thai, Bổng lộc…): none on the cung nữ road nor in lãnh cung (review/small-bugs-2) */if(!S||S.dead||(window.kitRoad&&kitRoad()))return[];const L=[];const hv=k=>{const b=k3hc(k);return b?k3val(b):""};
  L.push(["mat","Tai mắt",S.mat|0]);
  let c="",n="";try{c=chanceLvl(conceiveCh())}catch(e){}try{n=chanceLvl(nightCh())}catch(e){}
  if(c)L.push(["con","Có thai",c]);if(n)L.push(["dem","Lật thẻ",n]);
@@ -131,7 +131,7 @@ document.addEventListener("click",e=>{const p=e.target.closest&&e.target.closest
  k3Explain(k)},true);
 /* owner 11/15 04:05Z: the "Tư chất · trạng thái" sheet is GONE — every fact lives in the top bar, the stage plaques or the court / Ân sủng
    chips. A tap on a fact opens its own explanation (the j19 status-cell card: HX text, Bổng lộc card, Ân thưởng card), never a sheet. */
-function k3Explain(k){try{if(!S||S.dead||Q.length)return;const b=k3hc(k);
+function k3Explain(k){try{if(!S||S.dead||Q.length)return;try{window.kitHxRoad&&kitHxRoad()}catch(e){}const b=k3hc(k);
  if(b&&!b.classList.contains("keep")){b.click();return}
  const t=typeof HX==="object"&&HX[k];if(t){const hc=$$("hud-"+k),hl=hc&&hc.querySelector(".kstl");Q.unshift({t:b?k3lab(b)||T(b.textContent):hl?T(hl.textContent):k,h:`<p>${t}</p>`});showModal()}}catch(e){}}
 window.k3Explain=k3Explain;
@@ -465,7 +465,7 @@ function k3OptCols(){try{const W=innerWidth;const m=typeof Q!=="undefined"?Q[0]:
   const sh=B.filter((x,i)=>!L[i]);const cols=g.classList.contains("k3g3")?3:2;B.forEach(x=>x.classList.remove("k3odd"));if(sh.length%cols)sh[sh.length-1].classList.add("k3odd")})}catch(e){}}
 (function(){if(typeof showModal!=="function")return;const s0=showModal;showModal=function(){const m=typeof Q!=="undefined"?Q[0]:null;const r=s0.apply(this,arguments);
  try{const mb=document.getElementById("mb");const ha=m&&(m.headArt||(m.kit&&m.kit.headArt));if(mb&&ha&&!mb.querySelector(":scope > .kdlgart")){const src=typeof ha==="string"?ha:ha.src,lab=typeof ha==="string"?"":(ha.label||"");
-  const d=document.createElement("div");d.className="kdlgart";d.innerHTML=kitSceneArt(src,lab,{shape:"wide",cap:!!lab});mb.prepend(d)}}catch(e){}
+  const d=document.createElement("div");d.className="kdlgart";d.innerHTML=kitSceneArt(src,lab,{shape:"wide",cap:!!lab,mark:typeof ha==="string"?"":ha.mark||"",markAlt:typeof ha==="string"?"":ha.markAlt||""});mb.prepend(d)}}catch(e){}
  requestAnimationFrame(k3OptCols);setTimeout(k3OptCols,300);return r}
  addEventListener("resize",()=>setTimeout(k3OptCols,60));
  const st=document.createElement("style");st.id="k3-opts";st.textContent=`
