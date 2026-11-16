@@ -1,5 +1,5 @@
 # PROGRESS · review/balance-after-truth-r1 (reviewer, opus) — review of review/balance-after-truth @14fdce0c
-Base: latest origin/main bad941b4 + merge of review/balance-after-truth (no conflicts). Measures only: no BAL, no game code changed.
+Base: origin/main bad941b4 (re-run build), then merged up to origin/main c4b0c58f (main moved during the run: 41 game files; numbers below are for bad941b4; BAD scan re-run on c4b0c58f: no leak) + merge of review/balance-after-truth (no conflicts). Measures only: no BAL, no game code changed.
 
 ## 1. Harness check
 - Plays the real build: `python3 dev/build/assemble.py` on bad941b4 gives a byte-identical dev/index.html, and that file is inside root
