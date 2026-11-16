@@ -288,8 +288,10 @@ Object.assign(BAL,{nroad:{
  d0:[2,6],gap:[4,7],
  /* her chapter odds = odA(her, base + her test stat / div + sc after a won chapter + help when the player helped) */
  base:30,div:3,sc:8,help:15,
- /* real gains and losses of a chapter end (her own fields; pow = her house's power, j55) */
- fx:{win:{danh:4,sung:3,suc:-6,pow:2},mid:{danh:1,suc:-4},lose:{danh:-4,sung:-3,suc:-3,pow:-2}},
+ /* real gains and losses of a chapter end (her own fields; pow = her house's power, j55). U4 balance (npc-roads-bal.js): her odds give more
+    won than lost chapters (≈ 50 : 37), so a win pays less than a loss costs — the expected Danh/Sủng of a chapter is about zero and NPC
+    roads do not inflate the harem (first numbers 4/3 vs −4/−3 doubled the lives with an NPC Hoàng hậu, 17.5 % → 42.5 %) */
+ fx:{win:{danh:3,sung:2,suc:-4,pow:2},mid:{suc:-2,danh:-1},lose:{danh:-4,sung:-3,suc:-2,pow:-2}},
  /* the loser's grudge toward the winner (oán), and the player's share when SHE is the NPC's rival */
  oan:{win:8,lose:5},onMe:{win:{danh:-2,sung:-2},lose:{danh:1}},
  /* the help hồi: the chapter index range it may fall on (one per road per life), the bond or shared side she needs to ask,

@@ -51,7 +51,7 @@ const [,,URL,NL,NM]=process.argv;const NLIV=+NL||2,MON=+NM||120;
    out.push({tid,k:e.a[0],vg:e.p.role==='Vương gia',oi,title,intro,hb:e.p.nr.hb,done:!q.a.includes(x),hist:q.h[0]&&q.h[0].res})}
   let hz=null;try{const v=liveRivals(false)[0];const kd=mkKid('m',nrB().men.kidAge);v.kids=v.kids||[];v.kids.push(kd);const e=nrMenL().find(z=>z.p===kd);
    if(e){nrMenInit(e);const f0=[kd.fond,kd.tal,kd.hp];for(let i=0;i<8;i++){kd.nr.t=0;nrMenMonth(0)}hz={r:kd.nr.r,k:NRM[kd.nr.r]&&NRM[kd.nr.r].k,l:kd.nr.l,x:kd.nr.x,f0,f1:[kd.fond,kd.tal,kd.hp]}}else hz={err:'no entry'}}catch(x){hz={err:x.message}}
-  let card='';try{const m=(S.men||[]).find(m=>m.id!=='m96');nrMenInit(L.find(e=>e.p===m));m.nr.l=[[4,1]];m.nr.e='x';try{k61Know(m,'meet',true)}catch(e){}card=manCard(m)}catch(e){card='ERR '+e.message}
+  let card='';try{const m=(S.men||[]).find(m=>m.id!=='m96');nrMenInit(L.find(e=>e.p===m));m.nr.l=[[4,1]];m.nr.e='x';try{k61Know([m],'meet',true,3)}catch(e){}card=manCard(m)}catch(e){card='ERR '+e.message}
   /* co-op guest: nothing plays */
   let guest=-1;try{const e=L[0];e.p.nr=null;nrMenInit(e);e.p.nr.t=0;const n0=e.p.nr.l.length;window.COOPW={on:1,seat:'b'};nrMonth();guest=e.p.nr.l.length-n0;window.COOPW=null}catch(x){guest='ERR '+x.message;window.COOPW=null}
   return{out,card:/Tuyến truyện: «/.test(card),goi:tsGoi(S),guest,hz}});

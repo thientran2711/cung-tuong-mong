@@ -23,7 +23,8 @@ const [,,URL,NL,NM]=process.argv;const NLIV=+NL||2,MON=+NM||120;
     const M=[...seen.keys()].map(s=>({name:s.name,o:s.nr.o,r:s.nr.r,l:s.nr.l,x:s.nr.x,own:nrMis(s)===S,valid:!!ARC67[s.nr.r]&&ARC67[s.nr.r].o==='cnv',chs:[4,5,6,7,8,9,10,11].filter(n=>nrCh(s.nr.r,n))}));
     const raised=rivals.filter(v=>v.nr&&v.nr.pr).map(v=>({name:v.name,o:v.nr.o,r:v.nr.r,pr:v.nr.pr,l:v.nr.l,ok:ARC67[v.nr.r]&&ARC67[v.nr.r].o==='cn'}));
     const logs=S.logs.filter(l=>/Tin trong cung · [^·]*người hầu/.test(l)).length;
-    return{k,M,raised,bad,err,mon,logs,maids:nrMaidL().length,bytes:JSON.stringify(nrMaidL().map(s=>s.nr||null)).length}}})};
+    const eun=nrServL('eunuch').map(s=>({n:s.name,r:s.nr&&s.nr.r,l:s.nr?s.nr.l.length:-1,ok:!!(s.nr&&NRM[s.nr.r]&&NRM[s.nr.r].k==='eun')}));
+    return{k,M,raised,bad,err,mon,logs,eun,maids:nrMaidL().length,bytes:JSON.stringify(nrMaidL().map(s=>s.nr||null)).length}}})};
  for(let L=0;L<NLIV;L++){await open();const k=['muoi','thd','tt'][L%3];const R=await p.evaluate(([k,m])=>window.__life(k,m),[k,MON]);
   if(!R.M){chk(`life ${L+1}: ran`,false,R);continue}
   console.log(`life ${L+1} ${k} · ${R.mon} months · maids now ${R.maids} · maid roads seen ${R.M.length} · maid news ${R.logs} · bytes ${R.bytes} · raised ${R.raised.length}`);
@@ -34,6 +35,7 @@ const [,,URL,NL,NM]=process.argv;const NLIV=+NL||2,MON=+NM||120;
   chk(`life ${L+1}: maid chapters in order, registered`,R.M.every(x=>x.l.every((z,i)=>x.chs.includes(z[0])&&(i===0||z[0]>x.l[i-1][0]))),R.M.map(x=>[x.r,x.l]));
   chk(`life ${L+1}: some maid chapters played`,R.M.some(x=>x.l.length>0),R.M.length);
   chk(`life ${L+1}: rival maid always from another house`,!R.bad.length,R.bad);
+  chk(`life ${L+1}: staff eunuchs live «Từ tiểu thái giám đi lên» (U3 template on the servant engine)`,R.eun.length>0&&R.eun.every(x=>x.ok)&&R.eun.some(x=>x.l>0),R.eun);
   chk(`life ${L+1}: raised maids go on as cn roads`,R.raised.every(x=>x.ok&&x.o==='cn'),R.raised)}
  await open();
  const H=await p.evaluate(()=>{if(!__boot('muoi'))return{err:'boot'};const out=[];

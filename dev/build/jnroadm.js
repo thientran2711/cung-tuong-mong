@@ -26,7 +26,7 @@
  /* ty — Thái y (S.men Thái y and the court Thái y) */
  def("ty_thu","ty","Y thư thất truyền","loyal",[["Cuốn sách nát","man","giữ được cuốn sách","sách mất mấy trang"],["Phương thuốc lạ","man","đọc ra phương thuốc","đọc sai một vị"],
   ["Thử thuốc","bac","thuốc có hiệu","thuốc vô hiệu"],["Đồng liêu dị nghị","off","thuyết phục được Thái y viện","bị chê là tà thuật"],["Bệnh dịch ngoài thành","emp","cứu được nhiều người","dịch lan rộng"],
-  ["Tranh công","off","giữ được công mình","bị kẻ khác nhận công"],["Dâng sách","emp","sách được dâng lên","sách bị gác xó"],["Y thư thất truyền","emp","y thư được chép vào Thái y viện","giữ riêng một bản","sách cháy, chỉ còn trong trí nhớ"]]);
+  ["Tranh công","off","giữ được công lao","bị kẻ khác nhận công"],["Dâng sách","emp","sách được dâng lên","sách bị gác xó"],["Y thư thất truyền","emp","y thư được chép vào Thái y viện","giữ riêng một bản","sách cháy, chỉ còn trong trí nhớ"]]);
  def("ty_tra","ty","Đơn thuốc bị tráo","loyal",[["Thang thuốc khác màu","man","nhận ra kịp","không nhận ra"],["Ai chạm vào thuốc","eun","lần ra người chạm thuốc","dấu vết đứt"],
   ["Lời đe dọa","v","đứng vững trước lời dọa","im lặng vì sợ"],["Bệnh nhân trở nặng","bac","cứu được bệnh nhân","bệnh nhân nguy kịch"],["Thái y viện xét việc","off","được tin","bị nghi"],
   ["Chứng cứ","v","giữ được chứng cứ","chứng cứ bị lấy mất"],["Trước mặt Hoàng hậu","hh","lời khai được tin","bị buộc tội"],["Đơn thuốc bị tráo","hh","rửa oan, kẻ tráo thuốc lộ mặt","giữ được tiếng, mất lòng tin","mang tiếng oan, vẫn bị nghi"]]);
@@ -42,7 +42,7 @@
   ["Đàn bị hỏng","bac","sửa được đàn","đàn hỏng hẳn"],["Nhạc công bỏ đi","man","giữ được nhạc công","thiếu người tấu"],["Tập trước Thái hậu","th","Thái hậu gật đầu","Thái hậu nhíu mày"],
   ["Kẻ chép trộm","man","giữ được khúc nhạc","khúc nhạc bị chép trộm"],["Đêm trước tiệc thọ","th","mọi thứ sẵn sàng","còn dở dang"],["Khúc nhạc mừng thọ","th","khúc nhạc vang khắp Đức Thọ cung","tấu xong, không ai nhắc","lạc một nhịp trước Thái hậu"]]);
  def("st_uoc","st","Điều ước hai nước","loyal",[["Quốc thư","envoy","trao quốc thư đúng lễ","sai lễ khi trao quốc thư"],["Lễ bộ tiếp sứ","off","được tiếp đãi chu đáo","bị Lễ bộ làm khó"],
-  ["Điều khoản đầu","off","giữ được lợi cho nước mình","phải nhượng một điều"],["Quà dâng Thái hậu","th","quà được nhận","quà bị trả lại"],["Tai mắt quanh sứ quán","gd","thoát được tai mắt","bị theo dõi sát"],
+  ["Điều khoản đầu","off","giữ được lợi cho bản quốc","phải nhượng một điều"],["Quà dâng Thái hậu","th","quà được nhận","quà bị trả lại"],["Tai mắt quanh sứ quán","gd","thoát được tai mắt","bị theo dõi sát"],
   ["Hội đàm","emp","hội đàm êm thấm","hội đàm căng thẳng"],["Đóng ấn","emp","ấn được đóng","việc đóng ấn bị hoãn"],["Điều ước hai nước","emp","điều ước thành, hai nước giao hảo","điều ước tạm hoãn","hội đàm đổ vỡ"]]);
  def("hs_hoa","hs","Bức họa mỹ nhân","loyal",[["Lệnh vẽ chân dung","emp","nhận lệnh vẽ","nhận lệnh trong lo sợ"],["Phi tần ngồi họa","v","nét vẽ được khen","bị chê vẽ không giống"],
   ["Bạc lót tay","bac","từ chối bạc lót tay","nhận bạc, vẽ đẹp thêm"],["Bức họa bị đổi","eun","giữ được bức thật","bức họa bị tráo"],["Hoàng thượng xem tranh","emp","Hoàng thượng khen","Hoàng thượng phật ý"],
@@ -73,7 +73,7 @@
  NRM.off_thong.ally=1;/* this road's other house is the partner, not the foe: a win binds the two houses (j55 rel +), a loss splits them */
  /* hz — sons of NPC consorts (BAL.nroad.men.kidAge) */
  def("hz_hoc","hz","Thái phó và học vấn","tal",[["Ngày đầu ở Thượng thư phòng","off","được Thái phó khen","bị Thái phó phạt"],["Kinh sử","off","thuộc làu kinh sử","học trước quên sau"],
-  ["Bạn học","off","kết được bạn học","bất hòa với bạn học"],["Phụ hoàng khảo bài","emp","trả lời trôi chảy","ấp úng trước phụ hoàng"],["Cưỡi ngựa bắn cung","gd","bắn trúng hồng tâm","ngã ngựa"],
+  ["Đồng môn","off","kết thân với đồng môn","bất hòa với đồng môn"],["Phụ hoàng khảo bài","emp","trả lời trôi chảy","ấp úng trước phụ hoàng"],["Cưỡi ngựa bắn cung","gd","bắn trúng hồng tâm","ngã ngựa"],
   ["Bài văn đầu tay","off","bài văn được truyền tay","bài văn bị chê"],["Kỳ khảo cuối","emp","đứng đầu các hoàng tử","đứng sau các hoàng tử"],["Thái phó và học vấn","emp","văn võ song toàn, phụ hoàng đẹp lòng","học hành bình thường","bị phụ hoàng chê lười"]]);
  def("hz_le","hz","Lễ trưởng thành","tal",[["Lễ đội mũ","emp","được ban áo mũ","lễ bị hoãn"],["Phủ đệ đầu tiên","bac","phủ đệ chu toàn","phủ đệ thiếu thốn"],
   ["Người hầu cận","eun","chọn được người hầu tin cẩn","người hầu ăn bớt"],["Ra mắt tông thân","th","tông thân khen","tông thân chê"],["Việc triều đầu tiên","off","làm tròn việc","làm hỏng việc"],
