@@ -21,9 +21,9 @@ Connectors (account B): GitHub push OK · Magnific OK (project "Personal" ba4aec
 | C26b stat-fx follow-up | review/stat-fx-2 | sonnet | RUNNING (also pcard-fill nits: 'Dạo này' log line may end with a stray word like 'gặp'; Phi tần tab mood tile shows a placeholder when no cause event — person card + status tiles re-render with innerHTML so they never glow; add diff-glow on re-render; also make the number turn red on a loss like green on a gain) |
 | C46 map-labels | review/map-labels | sonnet | RUNNING |
 | D32 succession-port | review/succession-port-r1 | opus | PASS 0d9b49b9202c663ef4151c01e890a05ffd62aa30 — hook for review/mortality: j99succ.js wraps emperorDies() (j99succ.js ~line 56; skipped when COOPW.on) |
-| D38 lost-items-port | review/lost-items-port @92ed78f6 | opus | REVIEWING (review/lost-items-port-r1, sonnet) |
+| D38 lost-items-port | review/lost-items-port-r1 | opus | PASS 1d51bbf1ea55c70de7b2b46d136601c97c30a60e |
 | D30 palace-map-port | review/palace-map-port-r1 | sonnet | PASS 306de247abcc3c9cf0bbab9fbddb91e6946131c3 |
-| D31 difficulty-port | review/difficulty-port | opus | QUEUED (re-measure with Foreman C's C7) |
+| D31 difficulty-port | review/difficulty-port | opus | RUNNING (port only; numbers within spec; bot table for C7 re-measure) |
 | D33 routes-port | review/routes-port | opus | RUNNING (route numbers within spec; bot table for C7) |
 | D34 scheme-games-port | review/scheme-games-port | sonnet | RUNNING |
 | D36 leaderboard + Bảng vàng | review/rank-port | sonnet | RUNNING |
@@ -45,6 +45,7 @@ PASS review/panel-size-r1 a523531da8bbf3944c8f0afd2c122176405d4e88 (C37; one kpa
 PASS review/weather-port-r1 100bf8809a77b5a8f381ffac6e426a0c0d2b8a5f (D40; bad-weather outdoor risks + gear/servant/kiệu; reviewer fixed garbled risk line → kit kèm/Ghi chú rows, indoor exclusion)
 PASS review/succession-port-r1 0d9b49b9202c663ef4151c01e890a05ffd62aa30 (D32; succession choice + epilogues + 17 living endings no longer say "Chết vì")
 PASS review/palace-map-port-r1 306de247abcc3c9cf0bbab9fbddb91e6946131c3 (D30; palace courtyard → hall rows → residence room paintings; 675 images on CDN; courtyard pl2 images ~500 KB each = over budget, re-encode follow-up)
+PASS review/lost-items-port-r1 1d51bbf1ea55c70de7b2b46d136601c97c30a60e (D38; lost items + rivalry/steal acts; 0 unfair penalties in bot runs; ancestry vs main a523531d re-checked by Foreman B)
 PASS review/stat-fx-r1 0eb3e4b4a41a9123ad7181b39fc14afc60f8ab11 (C26; descends from main 900ace7f; top-bar glow green/red + named slow labels + j19 whole-word colour fix)
 
 ## CDN
@@ -62,7 +63,7 @@ All 6 pending images UPLOADED by Foreman B (11/16): img/fx/buoi-{wash,mist,hills
 - palace-map-port-r1 (PASS): kitPalaceMap new kit part labelled "§71" (clash; renumber, incl. KIT_SAMPLES id in jpm.js + PROGRESS); pieces .kpm-* hall rows, .kpm-spot hotspots reusing .mspot/.mlab/.msil, .kpm-t, short-landscape fallback — CSS injected in jpm.js, absorb into kit; room back button "‹ <cung>" overrides label in jpm.js and overlaps the bottom-left name label at 1180/844 → should use KIT §72 back button once room-btn-r1 lands; note residence-room painting pipeline under stage in KIT.md
 - appearance-port-r1 (PASS): KIT 28.8b kitFaceFx/KIT_FACEFX registry + kitFxLayers as the single face-layer hook; 28.8b text stale (still lists expr z5 + .kfxf transform copy — expressions removed 22:50Z); shared overlays rash-1..3.png, fx-slap.png (on CDN) for the keeper's art list
 - contest-ui (FAIL→r2): also sticky .kg82act row, kg-run class, reviewer's kitGameFrame onerror removing kgpic-on, kg82Pic no-painting list [duho, den, may]; board paintings needed for pet care, Du hồ, Hoa đăng, Phối đồ (tsDressGame). kitGameFrame({pic}) picture-left/info-right (.kgbody/.kgpic/.kginfo, CSS in jcui.js #kcu-css), kg82Open/kg82Pic, #kg82.kg-idle, .kgrv self-scrolling list, podium equal figure heights + kpodPrize chips, KIT_BD.podium → new shared art img/kit/podium-bg2(-p).webp. KIT REQUEST: pet-care game box (jpetcare) needs a board painting (e.g. mg-chamthu-bg) + pic in petcGameBox.
-- lost-items-port (reviewing): no new kit parts. Note: live j92 Giá họa hearing choices say "an toàn · không được mất gì" though the hearing can go against her — kit-wide wording fix for the keeper.
+- lost-items-port-r1 (PASS): no new kit parts. Also: text-only notices show an empty/generic scene frame ("Có người đến chơi" placeholder) — generic pic decision or per-notice art. Note: live j92 Giá họa hearing choices say "an toàn · không được mất gì" though the hearing can go against her — kit-wide wording fix for the keeper.
 - (found by succession reviewer, exists on main today) the sticky .kpbar kcattabs strip ("Tất cả 0/16 …") draws on top of the modal on the 1180x820 end card ("Kiếp này") — z-index/stacking, kit keeper.
 - §72 CLASH: review/room-btn-r1 (PASS c80e5df9) used KIT §72 for kitBackBtnHtml, and review/tutorial-r2's kitGoalDetail (jgoal.js) is also §72 — keeper please assign one of them a new number.
 From now on Foreman B workers only use existing kit parts and file KIT REQUESTs here.
