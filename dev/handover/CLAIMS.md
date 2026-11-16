@@ -117,11 +117,11 @@
 | kit-keeper-2 REVIEW (scene-end button §81, event scroll, curl, podium, pcard-land) | review/kit-keeper-2-r1 | main s14 | session_01UV1SzinSdpLGmoSPVk15M2 (sonnet) | RUNNING | 16/11 08:27Z |
 | D29 review (opus) | review/schedules3-r1 | C | session_011xDdVQQoCYSxtUpobZT8YJ | RUNNING | 16/11 08:26Z |
 | story14-p1 review (opus, main s12 → C) | review/story14-p1-r1 | C | session_011xDdVPn9oVRYe6dLkGFrUb | RUNNING | 16/11 08:26Z |
-| act-split-w2 review (opus) | review/act-split-w2-r1 | D | (opening, s3) | RUNNING | 16/11 08:40Z |
-| servant-mline FAIL fixes + D58 close-maid-by-origin v2 (one opus worker) | review/servant-mline-r2 → review/close-maid | D | (opening, s3) | RUNNING | 16/11 08:40Z |
-| slap-mg FAIL fixes (code parts; art parts → art owner) | review/slap-mg-r2 | D | (opening, s3) | RUNNING | 16/11 08:40Z |
-| ENTRY SELECTION EXAM + narrated intro/entry animation per origin (main s12 07:55Z) | review/entry-exam | D | (opening, s3) | RUNNING | 16/11 08:40Z |
-| D8 Emperor visits + stays the night; poison Emperor/Thái hậu roads (orphan #19) | review/emperor-visit | D | (opening, s3) | RUNNING | 16/11 08:40Z |
-| D21 co-op B1–B5 audit + build (orphan #20) | review/coop-b1b5 | D | (opening, s3) | RUNNING | 16/11 08:40Z |
-| reign-road-r1b 2 findings follow-up (orphan #33) | review/reign-road-fix | D | (opening, s3) | RUNNING | 16/11 08:40Z |
+| act-split-w2 review (opus) | review/act-split-w2-r1 | D | session_01DgYSWm7L1NRRbPgisEAL4E | RUNNING | 16/11 08:40Z |
+| servant-mline FAIL fixes + D58 close-maid-by-origin v2 (one opus worker) | review/servant-mline-r2 → review/close-maid | D | session_01DgYSWoCA2uzCCm4WDVxEAA | RUNNING | 16/11 08:40Z |
+| slap-mg FAIL fixes (code parts; art parts → art owner) | review/slap-mg-r2 | D | session_01DgYSWoJV2a7xRimqwRhf5L | RUNNING | 16/11 08:40Z |
+| ENTRY SELECTION EXAM + narrated intro/entry animation per origin (main s12 07:55Z) | review/entry-exam | D | session_01DgYSWowhQ6xMD6E52HDA3H | RUNNING | 16/11 08:40Z |
+| D8 Emperor visits + stays the night; poison Emperor/Thái hậu roads (orphan #19) | review/emperor-visit | D | session_01DgYSWnVJ8zy6Hr7QeM3HD1 | RUNNING | 16/11 08:40Z |
+| D21 co-op B1–B5 audit + build (orphan #20) | review/coop-b1b5 | D | session_01DgYSWmCuNWK9uTD5oZFEFw | RUNNING | 16/11 08:40Z |
+| reign-road-r1b 2 findings follow-up (orphan #33) | review/reign-road-fix | D | session_01DgYSWqEhdCoCY3dvQCAGz8 | RUNNING | 16/11 08:40Z |
 | popup-fullbody REVIEW (owner bug; person pop-up template + one frame size) | review/popup-fullbody-r1 | main s14 | session_01UV1SzjPACDs1NPKpLJvee1 (sonnet) | RUNNING | 16/11 08:32Z |

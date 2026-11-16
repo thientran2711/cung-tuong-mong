@@ -1,7 +1,7 @@
 # FOREMAN D STATUS
 ORDER 16/11 applied (separate worker sessions, repo reports, hourly self-wake, claims).
-last wake: 16/11 07:29Z (s3 = session_01DgYSWmJqZEbu2bHw5WQjne; hourly wake trig_01PRsThQpzLFrogWwG2N6DLK at :28)
-s3 start context ≈ 40k tokens; budget ≈ 50k → rollover per FOREMAN_D.md.
+last wake: 16/11 08:36Z (s3 = session_01DgYSWmJqZEbu2bHw5WQjne; hourly wake trig_01PRsThQpzLFrogWwG2N6DLK at :28)
+s3 START_CTX ≈ 6 % of 1M window (get_session 08:30Z: 11.8 % used); rollover at 31 % (START_CTX + 25 %), ceiling 60 %.
 s2 start context ≈ 45k tokens; budget ≈ 56k → rollover per FOREMAN_D.md.
 Session start 16/11. Starting context ≈ 60k tokens after the required reading; budget (start + 25%) ≈ 75k → rollover per FOREMAN_D.md when reached or on compaction.
 main at start = eba64ead4.
@@ -21,13 +21,27 @@ main at start = eba64ead4.
 | D54 buổi paintings | — | — | MOVED to Foreman C |
 | D56 icons + Nội vụ phủ art | — | — | MOVED to Foreman C |
 | fig-hd-upscale + face-sharp-hd2 | review/fig-hd-upscale | — | MOVED to Foreman C |
-| slap-mg review 3c4f1c81b | review/slap-mg-r1 | sonnet | facefx-all-r2 on main → reviewer session_01DgYSWpbGcGGy33MK9zBq4u RUNNING |
-| coop-chat review bdd2b6b53 | review/coop-chat-r1 | sonnet | kitStageRail (jrail.js §77) now on main → reviewer session_01DgYSWnc7QSik7k9buMTQwK RUNNING |
-| servant-system part C (jmline.js) review | review/servant-system b897bcf2 → review/servant-mline-r1 | opus | reviewer RUNNING (main s10 inbox 06:00Z; part A PASS e82a9bcf by main); session_01DgYSWnPWsFwg4R6LHZTKjr |
-| act-split waves 2–3 + Emperor-stroll first "!" slot | review/act-split-w2 | opus | GO (main s10 06:50Z) → worker session_01DgYSWkZteXgU6WAkpJc2qr RUNNING |
+| slap-mg review 3c4f1c81b | review/slap-mg-r1 | sonnet | FAIL 8 items → slap-mg-r2 (archived) |
+| coop-chat review bdd2b6b53 | review/coop-chat-r1 | sonnet | PASS 24578406 (archived) |
+| servant-system part C (jmline.js) review | review/servant-system b897bcf2 → review/servant-mline-r1 | opus | FAIL 3 items → servant-mline-r2 (archived) |
+| act-split waves 2–3 + Emperor-stroll first "!" slot | review/act-split-w2 | opus | SẴN SÀNG KIỂM 30c0931d (archived) → r1 reviewer |
 | Danh balance recheck (act-dedupe flag 1) | review/danh-balance | opus | worker session_01DgYSWoB9ztxCwmdBUbbxDS RUNNING (audit + proposal; no number change without owner OK) |
 
+| act-split-w2 review | review/act-split-w2-r1 | opus | reviewer session_01DgYSWm7L1NRRbPgisEAL4E RUNNING (worker done SẴN SÀNG KIỂM 30c0931d) |
+| servant-mline FAIL fixes → then D58 close-maid | review/servant-mline-r2 → review/close-maid | opus | worker session_01DgYSWoCA2uzCCm4WDVxEAA RUNNING |
+| slap-mg FAIL fixes (code; art → ART NEEDED) | review/slap-mg-r2 | opus | worker session_01DgYSWoJV2a7xRimqwRhf5L RUNNING (reuses B's mg-balance tiers) |
+| ENTRY EXAM + origin intros (main s12 07:55Z) | review/entry-exam | opus | worker session_01DgYSWowhQ6xMD6E52HDA3H RUNNING |
+| D8 Emperor visits + poison roads (orphan #19) | review/emperor-visit | opus | worker session_01DgYSWnVJ8zy6Hr7QeM3HD1 RUNNING (on mortality-r1) |
+| D21 co-op B1–B5 (orphan #20) | review/coop-b1b5 | opus | worker session_01DgYSWmCuNWK9uTD5oZFEFw RUNNING |
+| reign-road-r1b 2 findings (orphan #33) | review/reign-road-fix | sonnet | worker session_01DgYSWqEhdCoCY3dvQCAGz8 RUNNING |
+| D4 NPC death/new faces + Phế phi Lý (orphan #18) | — | opus | WAITING: mortality-r1 (PASS 2d3428f8) on main |
+| D57 preg-rate (orphan #2) | review/preg-rate | opus | WAITING: mortality + cycle-r3 on main |
+| kc-roads-cn-nc review (main s12 08:20Z) | — | opus | WAITING: worker's SẴN SÀNG KIỂM in reports/kc-roads-cn-nc.md (against OD:L1288) |
+| scene-end button sweep (main s12 08:10Z) | — | sonnet | WAITING: kit-keeper-2-r1 PASS + live (main s14 tells D) |
+| coop-rejoin-xdev review | — | — | CANCELLED for D (main s13 has it) |
+
 ## PASS (for the main coordinator to fast-forward)
+- READY review/coop-chat-r1 24578406f31621373e65bded2d37a102a456f05a (coop-chat 47/47; NEEDS coop/worker DEPLOY — live Worker has no chat; reviewer did not deploy; report reports/review-coop-chat-r1.md)
 - PASS review/coop-invite-ux-r1 727b6112b330eb8b96e621b0368f5cacccd1788f (C43 invite waiting state + 1-2-3 steps + auto-continue; coop-e2e 59/59; ff when written — main has moved since (bd6342c7), re-merge needed)
 - PASS review/row-align-r2 69e6d56f18c555763acd3dd0eb291b3736ad022e (C14 row-align; contains main ba07c65e; main moved since, re-merge needed)
 - PASS review/dlg-fig-ph-r1 fd7768b30966f4dfa5adc6d217feb9696995b3ec (D50 silhouette fallback in dialog/stage figures; contains main ba07c65; main moved since, re-merge needed)
@@ -59,6 +73,7 @@ main at start = eba64ead4.
 - ANSWER Q-D1 (s9, owner): art items + Worker deploy moved to Foreman C (see FOREMAN_C.md "MOVED FROM FOREMAN D"). Drop them from your slice; keep D51 wiring + C44 code.
 
 ## s3 wake log
+- 08:36Z: main s12/s13/s14 inbox read (07:55 entry exam, 08:00 orphan audit D = #2 #3 #7 #18 #19 #20 #33, 08:10 scene-end sweep, 08:20 kc-roads review, 08:45 OD:L1288, 09:32 coop-rejoin cancelled, 08:23 worker rollover, 08:27 kit §81). PICKUP: #7 mortality = already PASS by main s12 (mortality-r1 2d3428f8) → not D; #3 D58 folded into servant-mline-r2 worker (same servant system, one worker); #19, #20, #33 opened; #2 + #18 wait for mortality/cycle-r3 on main. coop-chat PASS → READY. servant-mline + slap-mg FAIL → fix workers. 7 sessions opened, 5 finished sessions archived (incl. s1). 9 D sessions running.
 - 07:29Z: s3 took over. 6 D sessions RUNNING (no new reports yet). mg-balance (07:10Z s11 inbox line) was pasted into FOREMAN_B/C/D.md alike, but OD:L1255/L1265 and HANDOVER_SESSION9 assign it to Foreman B (B has the scope extensions 07:20/07:25Z) → D does NOT take it (no double work); main chat: confirm, or write "mg-balance → D" here and D starts at once.
 
 ## s2 wake log
