@@ -84,3 +84,7 @@
   "Trong lúc đợi: xem các tab, Tư trang, Sổ ghi" + kitLine once.
 - New test dev/test/coop-sleep.js (dead socket → lost bend → wake; room steps while away + dialog open; server STALE → freeze panel;
   friend chip states + shots at 755x1000 / 1180x820 / 1366x1024 / 1000x755 / 844x390).
+- r1 results (merged onto main 2d038139e, build 6864793d2+): coop-timer.js 43/43 · coop-sleep.js 36/36 (reconnect on wake 7 s, catch-up
+  with dialog, freeze panel words, chip in every state at 755x1000 / 1180x820 / 1366x1024 / 1000x755 / 844x390 / 390x844, no overflow) ·
+  coop-e2e COOP_NIGHTS=1 ×3: 57/59, 57/59, 59/59 — the only misses are the known presence flake "A frozen when B left" (main's
+  PROGRESS_fix-float / khac-day note it; lobby probe: presence arrives in < 5 s); e2e now waits 90 s and dumps COOP state + presence log on a miss.
