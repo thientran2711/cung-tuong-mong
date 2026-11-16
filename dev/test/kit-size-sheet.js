@@ -23,5 +23,5 @@ const [,,URL,SZ,OUT,AS='frames,buttons,long',INJ]=process.argv;const [W,H]=SZ.sp
   const h=await p.evaluate(()=>document.getElementById('kszsheet').scrollHeight);
   await p.evaluate(h=>{const s=document.getElementById('kszsheet');s.style.position='absolute';s.style.height=h+'px';document.body.style.height=h+'px'},h);
   await p.setViewportSize({width:W,height:Math.min(h+30,6000)});await p.waitForTimeout(1500);await p.waitForFunction(()=>[...document.querySelectorAll('#kszsheet img')].every(i=>i.complete),null,{timeout:30000}).catch(()=>{});
-  await p.screenshot({path:`${OUT}/sample-${a}-${process.env.TAGSZ||(W+'x'+H)}.jpg`,type:'jpeg',quality:80,fullPage:true});await p.setViewportSize({width:W,height:H});await p.evaluate(()=>{document.body.style.height=''})}
+  await p.screenshot({path:`${OUT}/sample-${a}-${process.env.TAGSZ||(W+'x'+H)}.jpg`,type:'jpeg',quality:80,clip:{x:0,y:0,width:W,height:h}});await p.setViewportSize({width:W,height:H});await p.evaluate(()=>{document.body.style.height=''})}
  console.log(JSON.stringify({W,H,out,errs}));await b.close()})().catch(e=>{console.error(e);process.exit(1)});

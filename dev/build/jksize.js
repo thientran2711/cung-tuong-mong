@@ -62,6 +62,8 @@ window.kitBtnSize=kitBtnSize;window.kitFrameSize=kitFrameSize;window.kitFrameApp
 .kszban>.ksart{aspect-ratio:auto;height:calc(var(--kszbw) * .47)}
 .kszll{flex:none;margin:10px 12px 0;height:var(--kszll)}.kszll>.ksart{height:100%;aspect-ratio:auto}
 .kszf.kszlong>.kszbody{flex-direction:column;align-items:stretch;max-height:calc(var(--kszcap) - var(--kszll,0px) - 10px)}
+.kpkb .krv>.kchip+.kchip{margin-left:4px}
+.kszf.kszper>.kszbody{align-items:center}
 .kszopts{display:flex;flex-wrap:wrap;gap:6px;align-content:flex-start}
 .kszfoot{display:flex;justify-content:center;padding:0 12px 12px}
 /* ---- BUTTONS (every button: picture LEFT, info RIGHT) ---- */
@@ -104,7 +106,7 @@ function kszFrame(sp){const right=[];if(sp.long==null)sp.long=!sp.who&&(sp.facts
  if(sp.opts)right.push(`<div class="kszopts">${sp.opts.map(kszBtn).join("")}</div>`);
  const left=sp.who?kszFigHtml(sp.who):sp.pic&&!sp.long?`<div class="kszpic">${kitSceneArt(kszImg(sp.pic),"",{shape:"tall",cap:false})}</div>`:"";
  const top=sp.long&&sp.pic?`<div class="kszll">${kitSceneArt(kszImg(sp.pic),"",{shape:"wide",cap:false})}</div>`:"";
- return `<div class="dlg kszf kpanel${sp.long?" kszlong":""}" data-kind="${sp.kind}">${kpHeader(sp.kind,sp.title,sp.sub)}${top}<div class="kszbody">${left}<div class="kszright">${right.join("")}</div></div>${sp.btn?`<div class="kszfoot"><button class="kbtn">${sp.btn}</button></div>`:""}</div>`}
+ return `<div class="dlg kszf kpanel${sp.long?" kszlong":""}${sp.who?" kszper":""}" data-kind="${sp.kind}">${kpHeader(sp.kind,sp.title,sp.sub)}${top}<div class="kszbody">${left}<div class="kszright">${right.join("")}</div></div>${sp.btn?`<div class="kszfoot"><button class="kbtn">${sp.btn}</button></div>`:""}</div>`}
 window.kszFrame=kszFrame;window.kszBtn=kszBtn;
 
 /* ---- SAMPLE SHEET (kit page §84 + dev/test/kit-size-sheet.js): kitSizeSheet(area) area = "frames" | "buttons" | "long" ---- */
