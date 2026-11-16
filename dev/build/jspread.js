@@ -28,14 +28,16 @@ const SP13SLOT=[ /* [slot 0 sáng | 1 trưa | 2 chiều | 3 tối, regex on titl
 /* never moved: the buổi's own news card */
 const SP13KEEP=/^Tin trong cung/;
 /* moved only inside the same tuần (a warning must come before the plot it warns of, which resolves at the turn of the tuần) */
-const SP13DAY=/^(Lời cảnh báo|Mưu hại|Sau vụ mưu hại|Điềm báo|Tai mắt báo tin)/;
+const SP13DAY=/^(Lời cảnh báo|Mưu hại|Sau vụ mưu hại|Điềm báo|Tai mắt báo tin)|( · Lời mời| · Lễ$| · Dâng lễ| · Trò vui| · Đặt cược| · Thi |^(Tết|Tiết|Lễ|Hội) [^·]+$)/;
+/* review r1: the last buổi of this tuần, for a card that must stay in its tuần (warnings / plots / festival-day cards), else null */
+function sp13End(m,now,cs){const t=String(m.t||m.title||"").replace(/<[^>]+>/g,"");return SP13DAY.test(t)?now-cs+B4N-1:null}
 const SP13={L:[],stat:{plan:0,moved:0,carried:0,released:0,forced:0,void:0,held:0,flushed:0,load:0,keep:0},nb:0,held:0,
  off(){return !!(window.__spreadOff||(window.COOPW&&COOPW.on)||!S||S.dead)},
  now(){return wk()*B4N+(S.buoi||0)},
  st(){const z=S.sp13=S.sp13||{q:[],k:-1,n:0};if(!Array.isArray(z.q))z.q=[];return z},
  waiting(m){return SP13.L.some(x=>x.m===m)},
  reset(){SP13.L=[];SP13.held=0;try{if(S)S.sp13={q:[],k:-1,n:0}}catch(e){}}};
-function sp13Cap(){return (BAL.spread&&BAL.spread.cap)||2}
+function sp13Cap(){return BAL.spread.cap}
 /* the fitting slot of a card, or null (no preference: now if there is room) */
 function sp13Slot(m){const t=String(m.t||m.title||"").replace(/<[^>]+>/g,""),p=m.pid||"";for(const [s,rt,rp] of SP13SLOT)if(rt.test(t)||(p&&rp&&rp.test(p)))return s;return null}
 function sp13Movable(m){if(!m||typeof m!=="object"||m.nl||m.mg||m.__held||m.kind==="news"||m.kind==="end")return false;
@@ -56,11 +58,11 @@ function sp13Load(){const z=SP13.st(),k=SP13.now();if(z.k!==k){z.k=k;z.n=0}retur
 /* cards already in Q at the front that count for this buổi */
 function sp13Count(m){const z=sp13Load(),k=SP13.now();if(m.__sp13c===k)return;m.__sp13c=k;z.n++}
 /* release waiting cards that are due, oldest first, while the buổi has room; a card that waited maxWait (code: codeWait) goes now anyway */
-function sp13Release(){if(SP13.off()||!SP13.L.length)return 0;const now=SP13.now(),z=sp13Load(),cap=sp13Cap(),B=BAL.spread||{};let n=0;
+function sp13Release(){if(SP13.off()||!SP13.L.length)return 0;const now=SP13.now(),z=sp13Load(),cap=sp13Cap(),B=BAL.spread;let n=0;
  SP13.L.sort((a,b)=>(b.code?1:0)-(a.code?1:0)||a.due-b.due||a.b0-b.b0);/* code cards first: they cannot be saved, so they never wait long */const keep=[];
  for(const x of SP13.L){if(x.due>now){keep.push(x);continue}
   if(!sp13Alive(x.m)){x.m.__sp13r="void";SP13.stat.void++;try{if(typeof evDropInfo==="function")evDropInfo(x.m)}catch(e){}continue}
-  const lim=x.code?(B.codeWait!=null?B.codeWait:2):(B.maxWait||4);const force=now-x.b0>=lim||(x.end!=null&&now>=x.end);
+  const lim=x.code?B.codeWait:B.maxWait;const force=now-x.b0>=lim||(x.end!=null&&now>=x.end);
   if(z.n<cap||force){if(force&&z.n>=cap)SP13.stat.forced++;if(now>x.slotDue)SP13.stat.carried++;x.m.__sp13c=now;x.m.__sp13r="rel"+now;z.n++;Q.push(x.m);SP13.stat.released++;n++}
   else{x.due=now+1;keep.push(x)}}
  SP13.L=keep;sp13Sync();return n}
@@ -71,10 +73,10 @@ function sp13Plan(){if(SP13.off())return;const now=SP13.now(),cs=S.buoi||0,cap=s
  for(let i=0;i<Q.length;i++){const m=Q[i];if(!m||typeof m!=="object"||m.__sp13||m===shown)continue;m.__sp13={b0:now};SP13.stat.plan++;
   if(!sp13Movable(m)){sp13Count(m);SP13.stat.keep++;continue}
   const ps=sp13Slot(m);const due=ps!=null&&ps>cs?now+(ps-cs):now;
-  const code=sp13Code(m);const lim=code?((BAL.spread&&BAL.spread.codeWait!=null)?BAL.spread.codeWait:2):((BAL.spread&&BAL.spread.maxWait)||4);
+  const code=sp13Code(m);const lim=code?BAL.spread.codeWait:BAL.spread.maxWait;
   if(due===now&&z.n<cap){sp13Count(m);continue}
-  const d=due===now?now+1:Math.min(due,now+lim);if(d<=now){sp13Count(m);continue}
-  out.push(i);m.__sp13.due=d;SP13.L.push({m,b0:now,due:d,slotDue:d,code,ser:code?null:sp13Ser(m)});SP13.stat.moved++}
+  const end=sp13End(m,now,cs);let d=due===now?now+1:Math.min(due,now+lim);if(end!=null&&d>end)d=end;if(d<=now){sp13Count(m);continue}
+  out.push(i);m.__sp13.due=d;SP13.L.push({m,b0:now,due:d,slotDue:d,code,end,ser:code?null:sp13Ser(m)});SP13.stat.moved++}
  for(let j=out.length-1;j>=0;j--)Q.splice(out[j],1);if(out.length)sp13Sync()}
 function sp13Tick(){/* inside / right after a buổi change: this buổi's own unmovable cards (news…) first, then the waiting cards that are due
    (older first), then the new movable cards (planned against what is left of the cap) */

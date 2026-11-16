@@ -98,3 +98,12 @@ None (no UI).
    send "hold full" drops to the D13 queue.)
 3. Festival days still show 3–5 cards in the morning-to-noon (fixed-day cards: invite, rite, games, contest, banquet). They are spread
    inside the day by slot; fine, or should a festival day get a higher cap?
+
+## Review r1 (independent reviewer, review/spread-events-r1)
+Merged onto origin/main 9ddb3f6c together with review/schedules3-r2 4ea772f3 (the current D29 fix pass; schedules3-r1 was FAIL).
+Reviewer fixes in dev/build/jspread.js:
+- SP13DAY was declared but never used, and `end` was never set: warnings / plots / aftermath / tells / festival-day cards could be carried
+  into the next tuần (bots, sens 8 lives: 8 of 67 such cards shown one tuần late, e.g. "Sau vụ mưu hại b36->40", "Mưu hại b48->52").
+  Now such a card gets end = the last buổi of its tuần (due never later; forced at that buổi). After: 0 of 83 (sens 8), 0 (rand 8).
+  Festival-day titles (" · Lời mời", " · Lễ", " · Thi ", "Tết/Tiết/Lễ/Hội …") are in SP13DAY too.
+- Fallback numbers (||2, ||4, :2) removed: the cap / maxWait / codeWait read BAL.spread only (OD:L1267 one core).
