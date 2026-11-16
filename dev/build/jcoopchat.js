@@ -41,7 +41,8 @@ const BU=b=>{try{const n=(typeof BUOI!=="undefined"&&BUOI[b])||"";return n}catch
 /* game-style time: "hạ tuần, tháng 3 · Buổi chiều" */
 function kitChatWhen(g){g=g||{};try{const t=typeof TUAN!=="undefined"&&TUAN[g.t]||"";return `${t?t+", ":""}tháng ${g.m||1}${BU(g.b)?" · "+BU(g.b):""}`}catch(e){return""}}
 /* the friend's signature: her real name once she has met the friend, else the ONE label of the header chip ("Hảo hữu", j61 k61Coop; OD:L165) */
-function frSign(n){try{const f=window.COOPW&&COOPW.friend&&COOPW.friend();if(f&&typeof k61Coop==="function"&&k61Coop(f))return K61FR}catch(e){}return n||"Hảo hữu"}
+function frUnmet(){try{const W=window.COOPW;if(!W||!W.on||typeof k61Coop!=="function")return false;const f=W.friend&&W.friend();return !f||k61Coop(f)}catch(e){return false}}
+function frSign(n){return frUnmet()?"Hảo hữu":(n||"Hảo hữu")}
 function kitChatBubble(m,mine){css();return `<div class="kcm ${mine?"mine":"fr"}" data-i="${+m.i||0}"><div class="kcm-h"><b>${esc(mine?(m.n||"Ta"):frSign(m.n))}</b><span>${esc(kitChatWhen(m.g))}</span></div><span class="kcm-x">${esc(m.x)}</span></div>`}
 function kitChatList(msgs,seat){return (msgs&&msgs.length)?msgs.map(m=>kitChatBubble(m,m.s===seat)).join(""):`<p class="kpnote kchat-empty">Chưa có thư nào. Viết đôi dòng gửi hảo hữu.</p>`}
 function kitChatPanel(o){css();o=o||{};const nm=o.name?esc(String(o.name).slice(0,24)):"hảo hữu";
@@ -56,7 +57,7 @@ const ST={msgs:[],seen:0,open:false,sounds:0,shakes:0,max:0};
 function seat(){return COOP.state.you||COOP.seat||""}
 function unread(){const s=seat();return ST.msgs.filter(m=>m.s!==s&&m.i>ST.seen).length}
 function markSeen(){const mx=ST.msgs.length?ST.msgs[ST.msgs.length-1].i:0;if(mx>ST.seen){ST.seen=mx;LS.set(SK(),String(mx))}}
-function frName(){try{const f=window.COOPW&&COOPW.friend&&COOPW.friend();if(f&&typeof k61Coop==="function"&&k61Coop(f))return K61FR}catch(e){}const s=seat();for(let i=ST.msgs.length-1;i>=0;i--)if(ST.msgs[i].s!==s&&ST.msgs[i].n)return ST.msgs[i].n;
+function frName(){if(frUnmet())return "Hảo hữu";const s=seat();for(let i=ST.msgs.length-1;i>=0;i--)if(ST.msgs[i].s!==s&&ST.msgs[i].n)return ST.msgs[i].n;
  try{const o=COOP.other(),so=(COOP.state.seats||{})[o];if(so&&so.name)return so.name}catch(e){}return""}
 /* ---------- icon: ONE place = the kitStageRail column (KIT §77, owner 16/11); no own button / frame on the stage ---------- */
 let railOn=false;
