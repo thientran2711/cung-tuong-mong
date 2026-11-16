@@ -153,6 +153,8 @@ function cyRep(p,k){const mi=cyCur()+k,t=cyBase(p).t;if(cyAge(p)>=50)return{s:"o
  const cw=wk()-(S.tuan||0)+3*k+t;const preg=cyPreg(p)&&p.pregWk!=null&&cw>p.pregWk;
  if(preg&&p===S&&cyCover()&&cw-p.pregWk<=((B().rep||{}).luiCover||3))return{s:"ok",d:cyDaysM(p,mi)}; /* báo lùi: the first missed cycle still reads as reported (late) */
  if(preg&&!cyHideOf(p))return{s:"miss"};return{s:"ok",d:cyDaysM(p,mi),fake:!!(p.preg&&p.fake)}}
+/* evidence-truth (main, jtruth): evidence only for a real wrong in the ledger; write the deed first, announce what evA really gave */
+function cyDeed(p,id,k,x){try{if(typeof deedOnce==="function")deedOnce(p,id,k,1,x)}catch(e){}}
 function cyCover(){const c=S.cyb||{};return c.back!=null&&S.pregWk!=null&&S.pregWk-c.back>=0&&S.pregWk-c.back<=((B().rep||{}).luiCover||3)}
 function cyRepText(r){if(r.s==="old")return kitChip("đã dứt kỳ","n");if(r.s==="wait")return `chưa tới kỳ (${TU[r.t]})`;if(r.s==="miss")return kitChip("không báo","r");return `đã báo, ${dName(r.d)}`}
 function cyNights(p){const m0=wk()-(S.tuan||0);return (p.nightLog||[]).filter(w=>w>=m0&&w<=wk()).length}
@@ -161,12 +163,12 @@ function cyBook(how){const c=cyb();c.read=cyCur();const F=[];const L=consorts().
   F.push({who:p,kind:p===S?"me":"person",text:`${p===S?"Ta":p.name}: tháng này ${cyRepText(a)} · tháng trước: ${cyRepText(b)}${n?` · ${n} đêm thị tẩm`:""}`});
   if(p===S)continue;
   if(a.s==="miss"||b.s==="miss"){if(cyPreg(p)&&S.cyKnow[p.id]!==p.pregWk){S.cyKnow[p.id]=p.pregWk;try{noteAdd(p.id,"Sổ nguyệt sự: tháng này không báo; e là đã có tin vui")}catch(e){}found.push(`${p.name} tháng này không báo nguyệt sự: e là đã có tin vui.`)}}
-  if(p.preg&&p.pregMismatch&&!p.fake&&p.cyEvi!==p.pregWk){p.cyEvi=p.pregWk;evA(S,p,2);try{noteAdd(p.id,"Sổ nguyệt sự: ngày nàng ta có thai không khớp đêm thị tẩm nào (chứng cứ +2)")}catch(e){}found.push(`Ngày ${p.name} có thai không khớp đêm thị tẩm nào trong sổ: chứng cứ +2.`)}
-  if(p.preg&&p.fake&&a.s==="ok"&&p.cyEvi!=="f"+p.pregWk){p.cyEvi="f"+p.pregWk;evA(S,p,1);found.push(`${p.name} báo có thai mà ma ma cung ấy vẫn báo nguyệt sự: chứng cứ +1.`)}}
+  if(p.preg&&p.pregMismatch&&!p.fake&&p.cyEvi!==p.pregWk){p.cyEvi=p.pregWk;const g=evA(S,p,2);if(g){try{noteAdd(p.id,`Sổ nguyệt sự: ngày nàng ta có thai không khớp đêm thị tẩm nào (chứng cứ +${g})`)}catch(e){}found.push(`Ngày ${p.name} có thai không khớp đêm thị tẩm nào trong sổ: chứng cứ +${g}.`)}}
+  if(p.preg&&p.fake&&a.s==="ok"&&p.cyEvi!=="f"+p.pregWk){p.cyEvi="f"+p.pregWk;cyDeed(p,"cyfk:"+p.pregWk,"cyfake","báo có thai giả mà ma ma cung ấy vẫn báo nguyệt sự");const g=evA(S,p,1);if(g)found.push(`${p.name} báo có thai mà ma ma cung ấy vẫn báo nguyệt sự: chứng cứ +${g}.`)}}
  const opts=[];const rum=c.rum;
  if(rum&&rum.m===cyCur()&&!rum.fixed&&!rum.self){const fx=rum;opts.push({n:"Xin Kính sự phòng chép lại cho đúng",fx:{},x:`sổ ghi đúng, tin đồn tắt · biết kẻ sửa sổ: ${typeof chanceW==="function"?chanceW(((S.court&&S.court.ksp&&S.court.ksp.af.me)||0)>=B().fixAf?90:40):""}`,
   go:()=>{fx.fixed=1;const v=(rivals||[]).find(x=>x.id===fx.by);const af=(S.court&&S.court.ksp&&S.court.ksp.af.me)||0;
-   if(v&&roll(af>=B().fixAf?90:40)){evA(S,v,1);try{noteAdd(v.id,"Đút lót Kính sự phòng ghi sai sổ nguyệt sự của ta (chứng cứ +1)")}catch(e){}log(`Kính sự phòng chép lại sổ nguyệt sự cho ngươi; Tổng quản khai ${v.name} đã đút lót ghi sai. Chứng cứ +1.`)}
+   if(v&&roll(af>=B().fixAf?90:40)){cyDeed(v,"cyfo:"+fx.m,"cyforge","đút lót Kính sự phòng ghi sai sổ nguyệt sự của người khác");const g=evA(S,v,1);if(g)try{noteAdd(v.id,`Đút lót Kính sự phòng ghi sai sổ nguyệt sự của ta (chứng cứ +${g})`)}catch(e){}log(`Kính sự phòng chép lại sổ nguyệt sự cho ngươi; Tổng quản khai ${v.name} đã đút lót ghi sai.${g?` Chứng cứ +${g}.`:""}`)}
    else log("Kính sự phòng chép lại sổ nguyệt sự cho ngươi; không rõ ai đã ghi sai.")}})}
  const facts=F.concat(found.map(t=>({text:t,kind:"world"})));
  if(rum&&rum.m===cyCur()&&!rum.fixed&&!rum.self)facts.push({text:`Sổ ghi ngươi tháng này ${kitChip("không báo","r")}, mà ngươi đã báo: có kẻ sửa sổ.`,kind:"world"});
@@ -215,10 +217,10 @@ const mp0=monthPay;monthPay=function(){let ev=mp0.apply(this,arguments)||"";try{
   if(cyPreg(S)&&S.hidden&&(cyLateSeen(S)>=1||c.giauM===mi-1)&&!cyHideOf(S))for(const v of F){if(v.cyKnowMe===S.pregWk||!roll(B().npcRead))continue;v.cyKnowMe=S.pregWk;
    if((S.mat||0)>=1){const t=`Tai mắt báo: ${v.name} cho người tra sổ nguyệt sự ở Kính sự phòng, đã đoán ra ngươi có tin vui.`;log(t);ev+=t+" "}break}
   /* her own false line last month (báo sớm / giấu) is forgery evidence for a foe who reads the book */
-  if(c.lieM===mi-1&&!c.lieEv){c.lieEv=1;for(const v of F){if(!roll(B().npcRead))continue;evA(v,S,1);
+  if(c.lieM===mi-1&&!c.lieEv){c.lieEv=1;cyDeed(S,"cyl:"+c.lieM,"cylie","khai man ngày nguyệt sự với Kính sự phòng");for(const v of F){if(!roll(B().npcRead))continue;if(!evA(v,S,1))continue;
     if((S.mat||0)>=1){const t=`Tai mắt báo: ${v.name} tra sổ nguyệt sự, thấy ngày ma ma ngươi báo không khớp: nàng ta nắm chứng cứ ngươi khai man.`;log(t);ev+=t+" "}}}
   /* a foe forges a "không báo" against her (this month) */
-  if(!cyPreg(S)&&cyAge(S)<50&&!(c.rum&&c.rum.m===mi)){const v=F.find(x=>(x.bac||0)>=B().forgeBac);if(v&&roll(B().npcForge)){ap(v,{bac:-B().forgeBac});c.rum={by:v.id,m:mi};
+  if(!cyPreg(S)&&cyAge(S)<50&&!(c.rum&&c.rum.m===mi)){const v=F.find(x=>(x.bac||0)>=B().forgeBac);if(v&&roll(B().npcForge)){ap(v,{bac:-B().forgeBac});c.rum={by:v.id,m:mi};cyDeed(v,"cyfo:"+mi,"cyforge","đút lót Kính sự phòng ghi sai sổ nguyệt sự của người khác");
     const t="Trong cung xì xào: sổ Kính sự phòng ghi ngươi tháng này không báo nguyệt sự.";log(t);ev+=t+" "}}
  }catch(e){console.error(e)}return ev};
 /* rival vs rival (world; host only in co-op because rivalsMonth is muted on the guest) */

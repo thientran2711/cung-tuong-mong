@@ -117,3 +117,8 @@ Branch `review/cycle` from origin/main e3fc5f61. Module `dev/build/jcycle.js` (a
   in other currencies, not dominant.
 - Tests (site build): cycle.js ALL OK at 755x1000, 1000x755, 1180x820, 1366x1024, 844x390 (+390x844 rotate) incl. new f/g;
   test setup now starts with `__nlInner` (was stuck on a seeded servant life at 844); thaiy.js 29/29 (755); coop-e2e 59/59.
+- Second merge: origin/main moved to 7f20b751b (evidence-truth-r1 + palace-start-r1). assemble = main's list (… jstaff, jtruth) + `jcycle.js` LAST.
+  6. Evidence-truth family (jtruth: evidence only for a real wrong; scan dev/test/evtruth-scan.py flagged 3 jcycle sites): every jcycle
+     evidence site now writes its deed first (`cyDeed` → deedOnce: cyfake, cyforge (also when an NPC forges), cylie) and announces the
+     value evA really gave (pm deed comes from jtruth's deedSync). Scan: 3 unchecked → 0.
+  Re-run after the merge: cycle.js ALL OK (6 sizes), coop-e2e 59/59.
