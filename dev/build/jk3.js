@@ -79,13 +79,15 @@ document.addEventListener("click",e=>{const a=e.target.closest&&e.target.closest
  /* short stages (844x390): the opened card is scrolled into view inside the column */
  const R2=$$("kshR");if(R2&&window.__kasOpen)R2.scrollTop=R2.scrollHeight},true);
 function k3Stage(){try{const st=$$("stage");if(!st)return;{const pk=S?(S.place||"")+"|"+(S.buoi|0)+"|"+(S.month|0):"";if(window.__kasKey!==pk){window.__kasKey=pk;if(window.__kasOpen){window.__kasOpen=false;const kr=$$("kshR");if(kr)kr.dataset.full=""}}}const stop=st.querySelector(".stop");const gm=document.querySelector(".game");
- let L=$$("kshL"),R=$$("kshR");const off=!S||S.dead||!stop||(gm&&gm.classList.contains("maptab"));
- /* KIT 33.10: the full-screen place painting has no plaque columns (people use the whole width) */
- const fs=!off&&typeof window.kplAway==="function"&&window.kplAway();st.classList.toggle("kplfs",!!fs);
- if(off||fs){if(L)L.hidden=true;if(R)R.hidden=true;st.classList.remove("k3g");if(fs)k3Gut();return}
- if(!L){L=document.createElement("div");L.id="kshL";L.className="ksh kshL"}if(L.parentNode!==stop)stop.appendChild(L);
- if(!R){R=document.createElement("div");R.id="kshR";R.className="ksh kshR";st.appendChild(R)}
- L.hidden=false;R.hidden=false;st.classList.add("k3g");k3RW(st);
+ let L=$$("kshL"),R=$$("kshR");/* KIT 33.11 SIDE COLUMNS EVERYWHERE (owner 16/11 ~19:20Z via s22: "bất kỳ cái nào … dư đồ, màn hình cảnh phòng, nơi chốn … đều sẽ có những
+    cái thông tin cột trái và cột phải y chang giống như cái phòng ngủ"): the SAME right column (#kshR) and left rail (#krail, jrail) as her room
+    stand on every Dư đồ level too — kitSideHost() = the map leather (.mapv: plan + courtyard) on the Dư đồ tab, else the stage. */
+ const mvh=kitSideHost(),mv=mvh!==st?mvh:null;st.classList.toggle("kplfs",!!(typeof window.kplAway==="function"&&window.kplAway()));
+ const off=!S||S.dead||!stop||(gm&&gm.classList.contains("maptab")&&!mv);
+ if(off){if(L)L.hidden=true;if(R)R.hidden=true;st.classList.remove("k3g");return}
+ if(mv){if(L)L.hidden=true}else{if(!L){L=document.createElement("div");L.id="kshL";L.className="ksh kshL"}if(L.parentNode!==stop)stop.appendChild(L)}
+ if(!R){R=document.createElement("div");R.id="kshR";R.className="ksh kshR"}const host=mv||st;if(R.parentNode!==host)host.appendChild(R);
+ if(!mv)L.hidden=false;R.hidden=false;if(mv){mv.classList.add("kside");k3RW(mv)}else{st.classList.add("k3g");k3RW(st)}
  /* left: time · tư chất · tình trạng */
  const bu=k3hc("buoi"),lot=k3hc("lot"),wx=$$("hud2")&&$$("hud2").querySelector(".kmwx");
  let t="";if(bu){const w=String(BUOI[S.buoi||0]);{const left=typeof used!=="undefined"?Math.max(0,4-used):4;t+=`<button type="button" class="k3r k3time" data-k3="buoi" title="Còn ${left} khắc trong buổi" aria-label="${esc(w)}, còn ${left} khắc"><span class="k3l">${esc(w)}</span><span class="k3dots">${[0,1,2,3].map(i=>`<i class="${i<left?"on":""}"></i>`).join("")}</span></button>`}}
@@ -110,7 +112,8 @@ function k3Stage(){try{const st=$$("stage");if(!st)return;{const pk=S?(S.place||
      scrolls inside itself (.kasx) */}
  R.classList.add("kasx");
  k3Gut()}catch(e){console.error("k3Stage",e)}}
-window.k3Stage=k3Stage;window.k3row=k3row;/* the top-bar row builder, for modules that add a row (jtoil "Hôm nay: …") */
+function kitSideHost(){try{const gm=document.querySelector(".game");if(gm&&gm.classList.contains("maptab")){const m=document.querySelector("#panel .mapv");if(m&&m.getClientRects().length)return m}}catch(e){}return $$("stage")}
+window.kitSideHost=kitSideHost;window.k3Stage=k3Stage;window.k3row=k3row;/* the top-bar row builder, for modules that add a row (jtoil "Hôm nay: …") */
 /* name tags are one-line text now: re-run the stage layout once the tags have their final width (fonts, new labels), so neighbours that
    would touch drop to the second tag row (j59 crowd rule) */
 function k3Relay(){clearTimeout(window.__k3rl);window.__k3rl=setTimeout(()=>{try{window.j59lay&&j59lay()}catch(e){}},250)}
@@ -119,7 +122,7 @@ if(typeof renderStage==="function"){const r1=renderStage;renderStage=function(){
 /* gutter widths: from the stage width, then grown to the plaques' real width; j59 keeps the figures between them */
 /* review/stage-side: the side column's width comes from the stage width only (never from its content), so it is the same narrow column
    on every screen and every render: 24 % of the stage, 132–172 px */
-function k3RW(st){const W=st.clientWidth;if(!W)return;const v=Math.round(Math.max(132,Math.min(172,W*.24)))+"px";if(st.style.getPropertyValue("--kgrw")!==v)st.style.setProperty("--kgrw",v)}
+function k3RW(st){/* one column width for every host: from the PAGE width (the map leather spans the spread on iPad = 2 pages) */let W=st.clientWidth;try{if(st.classList.contains("mapv")&&kitView().pages===2)W=W/2}catch(e){}if(!W)return;const v=Math.round(Math.max(132,Math.min(172,W*.24)))+"px";if(st.style.getPropertyValue("--kgrw")!==v)st.style.setProperty("--kgrw",v)}
 function k3Gut(){const st=$$("stage");if(!st)return;const W=st.clientWidth;if(!W)return;k3RW(st);
  const g=Math.round(Math.max(W<520?96:116,Math.min(190,W*.2)));st.classList.toggle("k3n",g<116);const L=$$("kshL"),R=$$("kshR");
  st.style.setProperty("--kgw",g+"px");st.style.setProperty("--k3stw",W+"px");

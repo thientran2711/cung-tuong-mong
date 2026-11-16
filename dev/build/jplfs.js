@@ -19,13 +19,24 @@ window.kplAway=kplAway;
  if(typeof goTo==="function"){const g0=goTo;goTo=function(k){const p0=S&&S.place;const r=g0.apply(this,arguments);
    try{if(S&&!S.dead&&S.place!==p0&&typeof k3Shell==="function"){if(kplAway()&&typeof k3ShowPlace==="function")k3ShowPlace();else k3Shell();setTimeout(()=>{try{window.j59lay&&j59lay()}catch(e){}},60)}}catch(e){}return r}}
 })();
-/* kit CSS (component-owned): the painting fills the page; the right column, left plaques and the split are off */
+/* KIT 33.11 · the way back to the map = ONE button in the LEFT column (the stage rail, jrail kitStageRail, same spot on the room stage, the
+   place painting and every Dư đồ level): it replaces the old "‹ Dư đồ" pill at the stage's bottom-left (j38 #tomap, over her name chip) and
+   the courtyard's "‹ Dư đồ" button on the picture (jpm .kpm-back, over the "Tây phối điện" label, pl-courtyards-r2 review) — whole group */
+function kplBack(){try{if(typeof tab!=="undefined"&&tab==="go"&&window.__kpm)return{t:"Về Dư đồ",go:()=>{window.__kpm=null;render()}};
+ const b=document.getElementById("tomap");if(b&&typeof tab!=="undefined"&&tab!=="go"){const lab=(b.getAttribute("aria-label")||"Về Dư đồ").replace(/^Về bản đồ hoàng cung$/,"Về Dư đồ").replace(/^Về bản đồ /,"Về ");return{t:lab,go:()=>b.click()}}}catch(e){}return null}
+try{if(window.kitStageRail)kitStageRail.add({id:"back",order:1,icon:"img/kit/ico-map.webp",title:"Về Dư đồ",when:()=>!!kplBack(),onTap:()=>{const x=kplBack();if(x)x.go()}});
+ /* the rail item's label follows the level (Về Dư đồ / Về <cung>) */
+ const t0=renderStage;renderStage=function(){const r=t0.apply(this,arguments);try{const x=kplBack(),e=document.querySelector('#krail [data-rail="back"]');if(x&&e&&e.title!==x.t){e.title=x.t;e.setAttribute("aria-label",x.t)}}catch(e){}return r}}catch(e){}
+/* kit CSS (component-owned): the painting fills the page; the side columns sit on it exactly as in her room (33.11) */
 (function(){const css=document.createElement("style");css.id="kplfs-css";css.textContent=`
-html body .stage.kplfs>#kshR,html body .stage.kplfs #kshL{display:none!important}
-/* the way back (KIT §75 painted back button) sits in the free top-right corner: the bottom-left corner is her name chip's */
-html body .stage.kplfs>#tomap.kbackb{left:auto!important;right:8px!important;top:8px!important;bottom:auto!important}
+html body #tomap{display:none!important}
+html body .mapv .kpm-back{display:none!important}
 html body .game#game.kplfs.k3ph.k3home:not(.maptab)>#stage{border-radius:var(--r,10px)}
+/* 33.11 Dư đồ levels: the right column + left rail stand inside the leather like on the room stage; the map and the hall rows use the space between */
+html body .mapv.kside>#kshR{top:34px;right:34px;z-index:9}html body .mapv.kside>#krail{z-index:9}
+html body .mapv.kside>#krail{left:34px!important;top:34px!important}
+html body .mapv.kside>:not(#kshR):not(#krail):not(.kl-tone){margin-left:56px!important;margin-right:calc(var(--kgrw,150px) + 8px)!important}
 `;document.head.appendChild(css)})();
 /* kit sample page: the rule text (the view itself needs a live place) */
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§33.10",title:"Nơi chốn toàn màn hình · tầng cuối Dư đồ",
- html:()=>`<p style="max-width:52em">Ở mọi nơi không phải phòng mình: tranh nơi chốn chiếm trọn trang (không cột bảng phải), người đứng theo tỉ lệ chuẩn, cột cố định, vuốt sang trái/phải, chip "+N" hai bên; chạm người → thẻ người ấy; "Hành sự" = trang thẻ việc riêng. Phòng mình giữ sân khấu Hành sự (iPad: sân khấu | thẻ).</p>`})}catch(e){}
+ html:()=>`<p style="max-width:52em">Ở mọi nơi không phải phòng mình: tranh nơi chốn chiếm trọn trang, cột trái (lối tắt + nút về Dư đồ) và cột phải y như phòng ngủ, người đứng theo tỉ lệ chuẩn, cột cố định, vuốt sang trái/phải, chip "+N" hai bên; chạm người → thẻ người ấy; "Hành sự" = trang thẻ việc riêng. Phòng mình giữ sân khấu Hành sự (iPad: sân khấu | thẻ).</p>`})}catch(e){}
