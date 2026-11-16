@@ -35,8 +35,8 @@ function entScore(road,raw,art){const n=BAL.entry.noise;return entBase(road,raw,
 function entTier(sc){const C=BAL.entry.cut;return sc>=C[1]?2:sc>=C[0]?1:0}
 /* chance (0..100) that the result reaches tier t with this mini-game mark (the noise is the only unknown) → shown as ladder words only */
 function entOdds(road,raw,art,t){const b=entBase(road,raw,art),n=BAL.entry.noise;let c=0;for(let i=-n;i<=n;i++)if(entTier(Math.round(b+i))>=t)c++;return Math.round(c*100/(2*n+1))}
-function entWord(p){const L=typeof LADW!=="undefined"?LADW:["Liều","Khó","Năm ăn năm thua","Khá chắc","Chắc","Rất chắc","Nắm chắc"];
- return p>=91?L[6]:p>=81?L[5]:p>=66?L[4]:p>=56?L[3]:p>=46?L[2]:p>=31?L[1]:L[0]}
+/* reviewer r1 (ONE CORE): the shared odds ladder j1 word(), not a copy of its thresholds */
+function entWord(p){return word(p)}
 /* no game played: the mark of a girl of her level in her best art (= the frame's "Để tài nghệ quyết định") */
 function entSkipRaw(){try{return Math.round(kg82NpcMean(entArtLv(entKind(entBest()))))}catch(e){return 4}}
 function entFx(t){const f=BAL.entry.fx[t];if(f&&Object.keys(f).length)try{apply(f)}catch(e){console.error(e)}}
@@ -69,7 +69,7 @@ window.entExam=entExam;window.entScore=entScore;window.entTier=entTier;
 kcBestArt=function(){return entBest()};
 kcPhucPlay=function(k,skip){if(!isKc()||!S.kc.tt||S.kc.tt.done)return;S.kc.tt.play=1;
  const fin=raw=>{if(S.kc.tt.done)return;S.kc.tt.done=1;S.kc.tt.raw=raw;S.kc.tt.art=k;pushDil(mkP("kcE",{e:"dien"}),"Điện tuyển");try{showModal()}catch(e){}};
- if(skip||window.__bot||typeof kg82Open!=="function"){fin(skip?5:cl(3+R(6),0,10));return}
+ if(skip||window.__bot||typeof kg82Open!=="function"){fin(skip?entSkipRaw():cl(3+R(6),0,10));return}/* reviewer r1: one "not playing" value (entSkipRaw) on every road */
  try{window.kcEntryExam("kc",raw=>fin(raw),{art:k,origin:S.origin&&S.origin.k,title:"Phúc tuyển",note:"điểm màn chơi cộng vào Điện tuyển",phuc:1})}catch(e){console.error(e);fin(5)}};
 /* the result's own gain / loss on every road (rank is set by jkc2), and no "demotion" scene for a rank set at entry */
 function entSnap(){try{if(typeof kmSnap==="function"){KMS=S;KMSNAP=kmSnap()}}catch(e){}}
