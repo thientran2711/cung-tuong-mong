@@ -203,8 +203,11 @@ function kitResultSfx(ok,o){o=o||{};const now=performance.now();
 function ksfxMgOnce(){return KSFX.mgShown&&performance.now()-KSFX.mgShown<120000}
 window.kitResultSfx=kitResultSfx;
 (function(){const W=(n,f)=>{const o=window[n];if(typeof o!=="function"||o.__ksfx)return false;const w=f(o);w.__ksfx=1;window[n]=w;return true};
- W("resultShow",o=>function(){const t0=window.__rtT;const r=o.apply(this,arguments);try{const t=document.getElementById("rtoast");
-   if(t&&t.classList.contains("on")&&window.__rtT!==t0&&!window.__bot)kitResultSfx(t.classList.contains("ok"),{text:t.textContent,src:"card"})}catch(e){console.error(e)}return r});
+ const RS=o=>function(){const t0=window.__rtT;const r=o.apply(this,arguments);try{const t=document.getElementById("rtoast");
+   if(t&&t.classList.contains("on")&&window.__rtT!==t0&&!window.__bot)kitResultSfx(t.classList.contains("ok"),{text:t.textContent,src:"card"})}catch(e){console.error(e)}return r};
+ W("resultShow",RS);
+ /* jaudit (loaded before this file) replays a held / late result card through window.__aaR0 = the resultShow it wrapped, i.e. BELOW the wrapper above: wrap that entry too (its own closure keeps the unwrapped one, so no card is wrapped twice) */
+ W("__aaR0",RS);
  W("kg82ShowRes",o=>function(html,ok){const p0=KSFX.podAt||0;const r=o.apply(this,arguments);try{if(ok===true||ok===false){if((KSFX.podAt||0)!==p0)KSFX.rs=performance.now();/* the podium sounded: it is this contest's result sound */
     else if(kitResultSfx(ok,{mg:1,src:"mg"}))KSFX.mgShown=performance.now()}}catch(e){console.error(e)}return r});
 })();

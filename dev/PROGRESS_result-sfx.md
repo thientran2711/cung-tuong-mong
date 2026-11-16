@@ -25,3 +25,7 @@ No kit part touched or needed (audio logic only). KIT REQUEST: none.
 - dev/test/result-sfx-scan.js: 7/7 kg82ShowRes call sites pass ok (before: 0/7); every resultShow wrapper goes through the one jsfx wrapper.
 - dev/test/sfx.js at 755x1000@2: 96/104 steps; the 8 misses are reward-box / lot-tube steps that fail by the 3-voice cap ("full"/"twice" drops) when the box runs after other long sounds under load; re-run alone: lot and chest steps pass, only "mâm sơn son" misses decree/coin (night reward, not result-related). Not compared against a pre-change baseline run - a reviewer may want that.
 - Not done / open: sound-on default (SND_DEFAULT, owner question); voices (VO) not gain-routed on iOS; real iPhone not available (WebAudio verified in Chromium only).
+
+## Reviewer r1 (16/11)
+- Fix: jaudit replays held/late result cards through window.__aaR0 (below the jsfx resultShow wrapper) -> they were silent after the change (main had the sound via the j93 wrapper). jsfx now wraps __aaR0 too (same function, no double: jaudit closure keeps the unwrapped one).
+- Voices (j36 VO) not gain-routed: follow-up.
