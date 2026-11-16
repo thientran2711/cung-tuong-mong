@@ -17,7 +17,7 @@
 | reign-road reviewer | review/reign-road-r1 | main s8 (subagent, relays to reports/) | session_01UV1SzjqkbFYiPYgkC2jdvx | RUNNING | 16/11 05:19Z |
 | mortality | review/mortality | main s8 (subagent, relays to reports/) | session_01UV1SzjqkbFYiPYgkC2jdvx | RUNNING | 16/11 05:19Z |
 | outside-r2-r2 reviewer | review/outside-r2-r2 | main s8 (subagent, relays to reports/) | session_01UV1SzjqkbFYiPYgkC2jdvx | RUNNING | 16/11 05:19Z |
-| C41b tuduc-pic | review/tuduc-pic | B | session_01N1tNP49iueFUdHKedRCLBF (B1 in-session agent) | RUNNING | 16/11 05:19Z |
+| C41b tuduc-pic | review/tuduc-pic | B | session_01N1tNP49iueFUdHKedRCLBF (B1 in-session agent) | SẴN SÀNG KIỂM 2954ff9f | 16/11 05:19Z |
 | D34 review | review/scheme-games-port-r1 | B | session_01N1tNP49iueFUdHKedRCLBF (B1 in-session agent) | PASS e25486e0 | 16/11 05:19Z |
 | D-R1 newgame-ui-r2 review | review/newgame-ui-r3 | D | in-session agent of Foreman D s1 (started 05:1xZ, before the separate-session rule) | RUNNING | 05:19Z |
 | D-R2 row-align re-review | review/row-align-r2 | D | in-session agent of Foreman D s1 (started 05:1xZ, before the separate-session rule) | RUNNING | 05:19Z |
