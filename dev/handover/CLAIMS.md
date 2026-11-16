@@ -287,7 +287,7 @@
 | night-steal BUILD (opus; OD 14:10Z L1329 + 14:45Z L1332 + L1386; ruled, never built): agent steal via Tranh sủng/Chặn ngự giá, symmetric, bot-measured, 10-night ledger fit | review/night-steal | main s21 | session_01UV1SzgeCydcDMrs45qdQaf | RUNNING | 16/11 17:18Z |
 | PET STAGE cut-outs, all 22 pets (FOREMAN_C 18:00Z s20; OD 16/11 18:00Z; 3 samples S/M/L to owner first) (sonnet art) | review/pet-stage-art | C | session_011xDdVQmHkEoHRLjnTR3KPB | RUNNING | 16/11 17:22Z |
 | go-live-kit review r1 (sonnet, BIG tier) of 49f19f1c — FAIL (3 items) reports/go-live-kit-r1.md | review/go-live-kit | main s21 | session_01UV1Sziqerw2LafzSqMsfcB | DONE | 16/11 17:26Z |
-| flip-hand review r1 (sonnet, SMALL) of 745e1ab8 | review/flip-hand | main s21 | session_01UV1SzhQEsHLJz1pK4VbSsS | RUNNING | 16/11 17:32Z |
+| flip-hand review r1 (sonnet, SMALL) of 745e1ab8 | review/flip-hand | main s21 | session_01UV1SzhQEsHLJz1pK4VbSsS | DONE PASS 673dafc09 (review/flip-hand-r1; flag: 1180x820 touch moment = mostly bare forearm) | 16/11 17:32Z |
 | stage-pets r2 successor (sonnet): backdrop wait, S pet size, 3-people samples A (narrow right column) | B (shrink) for owner | review/stage-pets | main s21 | session_01UV1Szi6MsAMKHyAGi1WvNc | RUNNING | 16/11 17:35Z |
 | pet-lifespan review r1 (sonnet, BIG) of fe766e6a | review/pet-lifespan | main s21 | session_01UV1SzjbJCVgqPdNyMRtGHq | RUNNING | 16/11 17:36Z |
 | D GO-LIVE prep (worker merges+tests; Foreman D runs golive.sh --yes itself) | review/<each>-golive | D | session_01DgYSWnvC5ntuJ6oLspAoXu | RUNNING | 16/11 17:45Z |
