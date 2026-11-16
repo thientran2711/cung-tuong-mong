@@ -63,3 +63,9 @@ File `dev/build/jmgt.js` (assembled right after j91), numbers in `BAL.mgTier` (`
 - Intro row "Độ khó": `mgDiffTxt(KG82.tier, kind)`. Result word: `kg82Word(raw)` = `mgWord(raw)` (BAL.mgTier.word).
 - Keep the kind key (`tho`, `doi`, `doden`, `le`, `tc`, `xa`, `thq`) and expose `KG82.peek()` (the right move: `{x,y}` tap, `{drag:[[x,y],…]}`, `{sel:"css"}`, `{hold:bool,x,y}`) — the balance bot `dev/measure/mg-bots.js` plays every engine through it.
 - Measure your engine: `node dev/measure/mg-bots.js <url>/index.html <kind> e1,e2,e3 skilled,random 30 3 out.json` (virtual clock, fast). Target at the matching level (ease = mid): skilled raw ≥ BAL.mgTier.word[3] ("Xuất sắc" ≈ Tuyệt phẩm) in 20–30 % of plays, random ≈ 0 %; if off, add a trim in `BAL.mgTier.kAdj[kind]` (not in your engine).
+
+### Progress 11/16/2026 (mg-balance)
+- Finding: the boards' ease (old env.lv = her art level) hardly moves a skilled player — the bot that follows the right move with human reaction/tap scatter scores 9–10 on 13 of 16 engines even at the hardest ease, because many engines cap a run at "85 % = full marks". That (plus works adding the full art level) is why she gets Tuyệt phẩm almost every time.
+- Fix (whole family): every engine now passes a FLOAT 0..10 to `env.end` (no internal rounding); the capped engines (trace/kinh/may `.85`, arrange `.88`, hold `.82`, jts pluck `.62`) read `mgFull(env, b)` — the old generosity at easy ease, a full run needed at ease 0; `kg82Play` grades with `mgGrade(raw)` (curve BAL.mgTier.gamma). nw-* engines: pass a float to env.end and use `mgFull(env,b)` if you cap a score.
+- Bug fixed on the way: k91Trace (Vẽ, Chép kinh, May áo) threw "G is not iterable" when a stroke ended after the last one (before the figure closed).
+- Calibration bot run in progress (16 engines × ease 0/2/4, n=10, then n=30 at the chosen tiers).
