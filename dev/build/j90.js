@@ -22,10 +22,11 @@ function kitFigOf(p){try{if(!p)return"";if(S&&p.kind==="th"&&!p.ref&&p!==S.thO&&
 function kpodNorm(list){const L=(list||[]).filter(x=>x&&x.who).map(x=>Object.assign({},x));
  if(L.every(x=>x.place))L.sort((a,b)=>a.place-b.place);else{L.sort((a,b)=>(parseFloat(b.score)||0)-(parseFloat(a.score)||0));L.forEach((x,i)=>x.place=i+1)}return L}
 function kpodPrize(pz){if(!pz)return"";if(typeof pz==="string")return `<span class="kpod-pz">${pz}</span>`;
- if(Array.isArray(pz))return `<span class="kchips">${pz.filter(x=>x&&x[1]).map(x=>kitChip(x[0],x[1])).join("")}</span>`;return""}
+ if(Array.isArray(pz))return `<span class="kchips">${pz.filter(x=>x&&(typeof x==="string"||x[1])).map(x=>typeof x==="string"?x:kitChip(x[0],x[1])).join("")}</span>`;return""}
 function kpodName(p){if(!p)return"";if(!kitIsKnown(p))return `<b class="kname" style="--rc:#7a7e84">Người lạ</b>`;return p===S?kitName(S,{named:true}):kitName(p)}
 function kpodCol(x){const p=x.who,i=x.place-1,known=kitIsKnown(p),src=kitFigOf(p);
- const fig=src?`<img class="kpod-img${known?"":" kpod-unk"}" src="${src}" alt="" draggable="false" onerror="kitImgErr(this,{sel:'.kpod-fig',cls:'kpod-nofig'})">`:"";
+ const kf=(()=>{try{const f=KIT_FIG.fac(src,p&&typeof p.age==="number"?p.age:undefined);return Math.min(1,f/KIT_FIG.man).toFixed(3)}catch(e){return 1}})();
+ const fig=src?`<img class="kpod-img${known?"":" kpod-unk"}" style="--kf:${kf}" src="${src}" alt="" draggable="false" onerror="kitImgErr(this,{sel:'.kpod-fig',cls:'kpod-nofig'})">`:"";
  const fb=`<span class="kpod-fb">${kitPortrait(p,{size:"lg"})}</span>`;
  const sc=x.score==null||x.score===""?"":typeof x.score==="number"?`${x.score} phần`:x.score;
  return `<div class="kpod-col kpod-p${i+1}${p===S||x.mine?" kpod-me":""}" style="--d:${[1.8,1.0,.3][i]}s">`+
@@ -65,6 +66,7 @@ function kpodRain(root,place,ms){const fx=root.querySelector(".kpod-fx");const c
   const R=root.getBoundingClientRect(),r=c.getBoundingClientRect();const s=document.createElement("i");s.className="kpc kpc-pet";s.style.background=P.pet[Math.floor(Math.random()*P.pet.length)];const sz=8+Math.random()*6;s.style.width=s.style.height=sz+"px";
   s.style.left=(r.left-R.left+Math.random()*r.width)+"px";s.style.top="-12px";fx.appendChild(s);const an=s.animate([{transform:"translate(0,0) rotate(0deg)",opacity:.95},{transform:`translate(${(Math.random()-.5)*60}px,${r.bottom-R.top+20}px) rotate(${(Math.random()-.5)*540}deg)`,opacity:.15}],{duration:4200+Math.random()*2000,easing:"linear",fill:"forwards"});an.onfinish=()=>s.remove()},420)}
 function kitPodiumShow(list,o){o=o||{};const L=kpodNorm(list);if(L.length<2)return null;kitPodiumClose(true);
+ try{if(typeof cuMeet==="function")cuMeet(L.map(x=>x.who))}catch(e){}/* everyone on the dais is known (owner 15/11): face + name, never a silhouette */
  const ov=document.createElement("div");ov.id="kpodov";ov.innerHTML=kitPodium(L,o);document.body.appendChild(ov);const root=ov.firstElementChild;
  const red=kpodReduced();if(red)root.classList.add("kpod-skip","kpod-red");const fit=()=>kpodFit(root);fit();
  [...root.querySelectorAll("img")].forEach(im=>{if(!im.complete)im.addEventListener("load",fit,{once:true})});try{document.fonts.ready.then(fit)}catch(e){}setTimeout(fit,400);
@@ -88,9 +90,9 @@ window.kitPodium=kitPodium;window.kitPodiumShow=kitPodiumShow;window.kitPodiumCl
  if(typeof kg82ShowRes!=="function")return;const h0=kg82ShowRes;kg82ShowRes=function(){const out=h0.apply(this,arguments);try{if(pend&&KG82.phase==="result"){const {r,o}=pend;pend=null;
   const st=o.stakes||null,nm=x=>typeof kg82Norm==="function"?kg82Norm(x).filter(y=>y[1]>0):[];
   const list=r.rivals.slice().sort((a,b)=>b.score-a.score).map((x,i)=>({who:x.who,score:x.score,place:i+1,
-   prize:st?(i===0?nm(st.win):i<3?nm(st.top3):null):(x.who===S&&r.gains&&r.gains.length?r.gains:null)}));
+   prize:(()=>{const a=st?(i===0?nm(st.win):i<3?nm(st.top3):[]):(x.who===S&&r.gains&&r.gains.length?r.gains.filter(g=>g[0]!=="Bạc"):[]);const c=window.CU&&CU.last&&CU.last.places[i];return a.concat(c?c.prize:[])})()}));
   const t=document.querySelector("#kg82 .kptitle");kitPodiumShow(list,{title:t?t.textContent:(o.title||"Hội thi"),sub:o.artName?`Môn ${o.artName}`:"",
-   onNext:()=>{const b=document.getElementById("kg82ok");if(b)try{b.focus({preventScroll:true})}catch(e){}}})}}catch(e){console.error(e)}return out};
+   onNext:()=>{try{if(typeof cuChest==="function")cuChest()}catch(e){}const b=document.getElementById("kg82ok");if(b)try{b.focus({preventScroll:true})}catch(e){}}})}}catch(e){console.error(e)}return out};
  const c0=typeof kg82Close==="function"?kg82Close:null;if(c0){kg82Close=function(){kitPodiumClose(true);return c0.apply(this,arguments)}}})();
 
 /* ---------- wiring 2: Q items (Tranh ghế, hoàng tự exams, công chúa dâng nghệ): podium first, then the panel ---------- */
@@ -124,10 +126,10 @@ function kpodFromItem(m){if(!m||typeof m.h!=="string"||!/class="(ktlist|h54list)
 .kpod-col{position:relative;flex:1 1 0;min-width:0;max-width:300px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;
  animation:kpodRise .7s cubic-bezier(.2,.9,.3,1.25) var(--d) both}
 .kpod-p1{max-width:330px;z-index:2}.kpod-p2,.kpod-p3{z-index:1}
-.kpod-fig{position:relative;width:100%;height:calc(var(--kfh,300px) * .84);display:flex;justify-content:center;align-items:flex-end;margin-bottom:-6px;z-index:2;
+.kpod-fig{position:relative;width:100%;height:var(--kfh,300px);display:flex;justify-content:center;align-items:flex-end;margin-bottom:-6px;z-index:2;
  animation:kpodFig .8s ease-out calc(var(--d) + .25s) both}
+.kpod-img{height:calc(100% * var(--kf,1));width:100%;object-fit:contain;object-position:50% 100%;filter:url(#kfa) drop-shadow(0 6px 10px #5a3a2050);pointer-events:none}
 .kpod-p1 .kpod-fig{height:var(--kfh,300px)}
-.kpod-img{height:100%;width:100%;object-fit:contain;object-position:50% 100%;filter:url(#kfa) drop-shadow(0 6px 10px #5a3a2050);pointer-events:none}
 .kpod-img.kpod-unk{opacity:.92}
 .kpod-fb{display:none;height:100%;align-items:flex-end;justify-content:center}.kpod-nofig .kpod-img{display:none}.kpod-nofig .kpod-fb{display:flex}
 .kpod-fb .pfwrap{height:96%;display:flex;flex-direction:column;align-items:center}.kpod-fb .pcp.kit{height:100%;width:auto!important;max-width:100%}.kpod-fb .pfrw{display:none}
