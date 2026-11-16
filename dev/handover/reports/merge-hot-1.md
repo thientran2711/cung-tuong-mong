@@ -1,7 +1,6 @@
-# merge-hot-1 — SẴN SÀNG KIỂM
-Branch review/merge-hot-1, final sha aa3a4863c30003a00687c117bd3a00b17bbf54f5 (merge commits: modal-scroll 'e6630898', book-fig '79d52f4f').
-In (--no-ff, on origin/main a363cc14a): review/modal-scroll-r1 f6cddf761d, review/book-fig-r1 251d62276. Both fully in.
-Conflicts: only generated files (index.html, sw.js, assets.json) — took main's side and rebuilt with dev/site/build_site.sh after each merge. No source conflicts, nothing guessed.
-Tests at 755x1000, 1000x755, 1180x820, 1366x1024, 844x390: modal-swipe 0 STUCK (Hoc Cam picker scrolls by touch swipe at all sizes); panel-size ok (btnOut PEND:plantpick at 1000x755/1180x820 is pre-existing); stage-rail 5/5 PASS; book-fig-scale ALL OK; book-figwide ALL OK (844x390 passes too, not worse than main). Boot: every test boots the page without errors; boot-flash not run.
-origin/main (a363cc14a) is an ancestor of the sha: confirmed.
-Ready for main fast-forward.
+# merge-hot-1 — SẴN SÀNG KIỂM (supersedes earlier version of this file)
+Branch review/merge-hot-1, final sha c749c93caa164398e481ea86a2e0daf21e5d2797.
+In (--no-ff): review/modal-scroll-r1 f6cddf761d, review/book-fig-r1 251d62276, review/log-sync-r2 deabc2aa32 (an-tinh fix + 5 log fixes; an-tinh-fix-r1 not needed). Also merged origin/main feba37e5 (includes reign-road, cardflip-smooth, facefx-all, merge-hot-2/3).
+Conflicts: generated files (index.html, sw.js, assets.json) rebuilt with dev/site/build_site.sh, never hand-merged. dev/build/assemble.py conflicted twice: took main's module list + jlogsync.js after jtruth.js (jrail.js kept; main's jreign/jact kept).
+Tests (5 sizes 755x1000/1000x755/1180x820/1366x1024/844x390 unless noted): modal-swipe 0 STUCK (Hoc Cam picker swipes on touch); stage-rail 5/5 PASS; book-fig-scale ALL OK; book-figwide ALL OK incl. 844x390; panel-size errs 0 (run on the c4e89f89 merge; btnOut PEND:plantpick pre-existing on some sizes); log-sync-night 4/4 PASS; log-sync-week 0 leaks and log-sync audit drift 2 (log-sync-r2 alone 28) on the 02a0d3f1 merge. coop-e2e not run. Boot: every test boots clean; boot-flash not run.
+origin/main (feba37e5) is an ancestor of the sha: confirmed at push time. Main moves fast: re-check with git merge-base --is-ancestor origin/main <sha> before ff.
