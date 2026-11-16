@@ -309,4 +309,12 @@ Object.assign(BAL,{nroad:{
     (mp = merit toward the next servant rank, j14; loyal = to her mistress: a maid who wins her own fight leans a little less on her
     mistress), her mistress's share (Danh), the grudge (af) between her and the rival maid, the loyalty her own maid needs to ask */
  m:{st:40,tr:{lanh:15,trung:8,tham:5,nhat:-5,chuyen:0},rk:5,
-  fx:{win:{mp:4,loyal:-2},mid:{mp:1,loyal:-1},lose:{mp:-2,loyal:-4}},mis:{win:{danh:1},lose:{danh:-1}},af:8,askLoy:60}}});
+  fx:{win:{mp:4,loyal:-2},mid:{mp:1,loyal:-1},lose:{mp:-2,loyal:-4}},mis:{win:{danh:1},lose:{danh:-1}},af:8,askLoy:60},
+ /* U3 men (jnroadm.js; staff eunuchs use m above): st = test stat of a man with none (court men); kidAge = a son of an NPC consort gets
+    his road from this age; S.men loyal (jmen bribe odds) and the rival man's share; court men lean (af) toward their patron consort
+    and away from the other side, a lost chapter costs the patron Danh; house heads pow (j55) + the rival house's share + the house
+    relation (rel: enmity of every fight, ally: the marriage road binds or splits); princes fond/tal/hp + the rival prince's fond;
+    the bond a man / court man / allied house needs to ask the player */
+ men:{st:40,kidAge:15,men:{fx:{win:{loyal:3},mid:{loyal:-1},lose:{loyal:-4}},rv:{win:-2,lose:1}},court:{af:4,danh:1},
+  off:{pow:{win:2,lose:-2},rv:{win:-1,lose:1},rel:3,ally:5},hz:{fx:{win:{fond:3,tal:2,hp:-2},mid:{tal:1,hp:-1},lose:{fond:-3,hp:-1}},rv:{win:-1,lose:1}},
+  askTinh:30,askAf:10,askRel:25}}});

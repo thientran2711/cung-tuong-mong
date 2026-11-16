@@ -16,10 +16,12 @@ function nrGuest(){const C=window.COOPW;return !!(C&&C.on&&C.seat&&C.seat!=="a")
 function nrOn(){return !!(typeof S==="object"&&S&&!S.dead&&!window.__nroff&&typeof ARC67==="object")}
 const nrB=()=>BAL.nroad;
 const nrR=a=>a[0]+R(a[1]-a[0]+1);
-/* the four roads of an origin (j67 premise arcs) */
-function nrRoads(o){return Object.keys(ARC67).filter(id=>ARC67[id]&&ARC67[id].o===o&&!ARC67[id].fu)}
+/* men road templates (U3, jnroadm.js): NRM[id] = {k kind, t title, sk test stat, c: {4..11: chapter {t, w, sk, E}}} */
+const NRM={};
+/* the four roads of an origin (j67 premise arcs); a man's kind → his templates */
+function nrRoads(o){const L=Object.keys(ARC67).filter(id=>ARC67[id]&&ARC67[id].o===o&&!ARC67[id].fu);for(const id in NRM)if(NRM[id].k===o)L.push(id);return L}
 /* chapter n of a road: .4 = the premise arc, .5–.11 = jroad chapters registered in this build (null = not built yet → skipped) */
-function nrCh(r,n){if(n===BAL.road.first-1)return ARC67[r]||null;const R0=typeof ROAD14==="object"&&ROAD14[r];const id=R0&&R0[n];return id&&ARC67[id]||null}
+function nrCh(r,n){if(NRM[r])return NRM[r].c[n]||null;if(n===BAL.road.first-1)return ARC67[r]||null;const R0=typeof ROAD14==="object"&&ROAD14[r];const id=R0&&R0[n];return id&&ARC67[id]||null}
 function nrNext(r,n){for(let i=n;i<=BAL.road.last;i++)if(nrCh(r,i))return i;return 0}
 /* origin of an NPC woman (canon ROAD_MAP §5.2: one father = one record) */
 function nrOrigin(v){if(v.fromMaid||v.wasMaid)return "cn";let c="";try{c=clanOf(v)}catch(e){}const me=S.origin&&S.origin.k;
@@ -41,11 +43,11 @@ function nrRival(v){const N=v.nr;const ok=p=>p===S?!S.dead&&!S.out:p&&p.alive&&!
  L.sort((a,b)=>aff(v,a)-aff(v,b));const p=L[Math.min(L.length-1,R(Math.min(3,L.length)))];N.c=key(p);return p}
 /* the stat the chapter's climax rewards (tamco, danh, duc, tai, sac, sung …) — read from the chapter data */
 const NRSK={tamco:"tamco",mat:"tamco",danh:"danh",duc:"duc",an:"duc",tai:"tai",thi:"tai",cam:"tai",ky:"tai",hoa:"tai",vu:"sac",sac:"sac",sung:"sung"};
-function nrStat(A){const cnt={};try{const P=A.p&&A.p[A.p.length-1]||[];for(const b of P){const d=A.B&&A.B[b];for(const o of(d&&d.o||[]))for(const k in(o.w||{})){const s=NRSK[k];if(s)cnt[s]=(cnt[s]||0)+1}}}catch(e){}
+function nrStat(A){if(A&&A.sk)return A.sk;const cnt={};try{const P=A.p&&A.p[A.p.length-1]||[];for(const b of P){const d=A.B&&A.B[b];for(const o of(d&&d.o||[]))for(const k in(o.w||{})){const s=NRSK[k];if(s)cnt[s]=(cnt[s]||0)+1}}}catch(e){}
  const k=Object.keys(cnt).sort((a,b)=>cnt[b]-cnt[a])[0];return k||"tamco"}
 /* the ending of a chapter by its sign: the arc's own ending tag (E[*].tag) */
 function nrEnd(A,k){const E=A&&A.E||{};const ks=Object.keys(E).filter(x=>(E[x].k||0)===k);const x=ks.length?E[pick(ks)]:null;return x&&x.tag?plain(x.tag):""}
-function nrTitle(r){const A=ARC67[r];return A?plain(A.t):""}
+function nrTitle(r){const A=NRM[r]||ARC67[r];return A?plain(A.t):""}
 /* play one chapter off-screen (same odds shape as the player's climax: base + stat/div, Lợi thế only after a won chapter like hers — a lost chapter
    gives no malus, so no losing spiral — and her help) */
 function nrPlay(v){const N=v.nr,A=nrCh(N.r,N.n);if(!A){N.n=nrNext(N.r,N.n+1);return""}const B=nrB();const sk=nrStat(A);
@@ -136,7 +138,7 @@ window.nrRoads=nrRoads;window.nrCh=nrCh;window.nrInit=nrInit;window.nrMonth=nrMo
 })();
 
 /* ---------- her road on her person card (Hậu cung): one more row of the kit person card (.pcinfo span, the j85/j24 pattern) ---------- */
-function nrLine(v){const N=v&&v.nr;if(!N||!N.r||!ARC67[N.r])return"";const T=nrTitle(N.r);
+function nrLine(v){const N=v&&v.nr;if(!N||!N.r||!(ARC67[N.r]||NRM[N.r]))return"";const T=nrTitle(N.r);
  if(N.x)return `Tuyến truyện: «${T}» <span class="past">· đã khép${N.e?`: ${N.e}`:""}</span>`;
  const n=N.l.length?N.l[N.l.length-1][0]:0;return n?`Tuyến truyện: «${T}» <span class="past">· qua chương ${n}${N.e?`: ${N.e}`:""}</span>`:`Tuyến truyện: «${T}» <span class="past">· chưa mở</span>`}
 (function(){if(typeof rvCard!=="function")return;const c0=rvCard;/* same row pattern as j85 ducLine / j24 danger line: one <span> in the card's .pcinfo */
@@ -150,15 +152,18 @@ window.nrLine=nrLine;
    gain AND loss on her real fields (mp merit → servant rank, j14 servRanks; loyal to her mistress) + a small share for her mistress,
    real rival = the maid of another house she is coldest with (af both ways). A maid raised to consort (j8 sendMaid, j14/jmline eye; both
    go through j88 f88Carry) keeps her road state and goes on as origin cn (Cung nữ được sủng hạnh) from her next chapter. */
-function nrMaidL(){const L=[];try{for(const s of allServ())if(s&&s.role==="maid")L.push(s)}catch(e){}if(S.maid&&S.maid.name&&!L.includes(S.maid))L.push(S.maid);return L}
+function nrMaidL(){return nrServL("maid")}
+/* staff servants of one role (maid: + the trusted maid S.maid; eunuch: staff eunuchs, U3 «Từ tiểu thái giám đi lên») */
+function nrServL(role){const L=[];try{for(const s of allServ())if(s&&s.role===role)L.push(s)}catch(e){}if(role==="maid"&&S.maid&&S.maid.name&&!L.includes(S.maid))L.push(S.maid);return L}
+const nrRole=s=>s===S.maid?"maid":s.role||"maid";
 function nrMis(s){if(s===S.maid)return S;try{return ownerOf(s)}catch(e){return null}}
 const nrMid=s=>s===S.maid?"pm":s.sid;
 /* her j72 asker kind: own staff sv, another house's staff rsv, the trusted maid maid (q72A) */
 function nrMK(s){return s===S.maid?["maid",null]:nrMis(s)===S?["sv",s.sid]:["rsv",s.sid]}
-function nrMInit(s){if(s.nr)return s.nr;const held=nrMaidL().filter(x=>x!==s&&x.nr&&!x.nr.x).map(x=>x.nr.r);const r=nrPickRoad("cnv",held);if(!r)return null;s.nr=nrNew("cnv",r);return s.nr}
+function nrMInit(s){if(s.nr)return s.nr;const role=nrRole(s),o=role==="maid"?"cnv":"eun";const held=nrServL(role).filter(x=>x!==s&&x.nr&&!x.nr.x).map(x=>x.nr.r);const r=nrPickRoad(o,held);if(!r)return null;s.nr=nrNew(o,r);return s.nr}
 function nrMStat(s){const M=nrB().m;let rk=0;try{if(s.sid!=null&&typeof srk==="function")rk=srk(s)}catch(e){}return M.st+(M.tr[s.tr]||0)+rk*M.rk}
 function nrAf(x,y,n){if(!x||!y||y.sid==null||!n)return;x.af=x.af||{};x.af[y.sid]=cl(Math.round((x.af[y.sid]||0)+n),-100,100)}
-function nrMRival(s){const N=s.nr;const ms=nrMis(s);const L=nrMaidL().filter(x=>x!==s&&nrMis(x)!==ms);
+function nrMRival(s){const N=s.nr;const ms=nrMis(s);const L=nrServL(nrRole(s)).filter(x=>x!==s&&nrMis(x)!==ms);
  if(N.c!=null){const p=L.find(x=>nrMid(x)===N.c);if(p)return p;N.rc=N.cn||"";N.c=null}
  if(!L.length)return null;const af=x=>(s.af&&x.sid!=null&&s.af[x.sid])||0;L.sort((a,b)=>af(a)-af(b));
  const p=L[Math.min(L.length-1,R(Math.min(3,L.length)))];N.c=nrMid(p);N.cn=p.name;return p}
@@ -181,7 +186,7 @@ function nrMOffer(s){const N=s.nr,A=nrCh(N.r,N.n);if(!A||typeof q72!=="function"
  const riv=nrMRival(s);const bb=riv?nrMK(riv):[null,null];
  q.ch.push({tid:"nr_"+hk,at:wk(),rk,ri,bk:bb[0],bi:bb[1],p:{nr:N.r,nn:N.n}});N.hk=hk;N.hs=1;N.t=Math.max(N.t,S.turn+Math.ceil((nrB().dl+2)/3));return true}
 function nrMMonth(news){const B=nrB();let n=news||0;
- for(const s of nrMaidL()){try{const N=s.nr||nrMInit(s);if(!N||N.x||!N.n||S.turn<N.t)continue;
+ for(const s of nrMaidL().concat(nrServL("eunuch"))){try{const N=s.nr||nrMInit(s);if(!N||N.x||!N.n||S.turn<N.t)continue;
   if(N.h&&N.n===N.h&&!N.hs&&nrMAsk(s)&&nrMOffer(s))continue;
   const r=nrMPlay(s);if(!r)continue;const mine=r.ms===S;
   const who=mine?`${s.name}, người hầu của ngươi`:r.ms?`${s.name}, người hầu của ${r.ms.name}`:s.name;
@@ -190,7 +195,7 @@ function nrMMonth(news){const B=nrB();let n=news||0;
  return n}
 /* the voice of the asker in the help hồi (VANPHONG §2): maids nô tỳ + tiểu chủ/nương nương; men are added by U3 (nrVoiceM) */
 function nrVoice(X){const k=X&&X.A&&X.A.k;const goi=()=>{try{return tsGoi(S)}catch(e){return S.rank>=3?"nương nương":"tiểu chủ"}};
- if(k==="sv"||k==="rsv"||k==="maid")return{me:"nô tỳ",call:goi(),sv:1};
+ if(k==="sv"||k==="rsv"||k==="maid")return{me:X.A.o&&X.A.o.role==="eunuch"?"nô tài":"nô tỳ",call:goi(),sv:1};
  if(typeof nrVoiceM==="function")return nrVoiceM(X,goi);return null}
 /* a maid raised to consort keeps who she was: her road state goes on as a cn road from her next chapter (same help chapter, same log) */
 (function(){if(typeof f88Carry!=="function")return;const c0=f88Carry;
@@ -200,5 +205,5 @@ function nrVoice(X){const k=X&&X.A&&X.A.k;const goi=()=>{try{return tsGoi(S)}cat
 window.nrMaidL=nrMaidL;window.nrMInit=nrMInit;window.nrMPlay=nrMPlay;
 /* her road on her card (Kẻ hầu tab): one more line of the kit person card (pcard lines → .pcinfo spans; the j70 staff-tab pattern) */
 (function(){if(typeof pcard!=="function")return;const p0=pcard;pcard=function(o){try{if(S&&!window.__nroff&&o&&o.name&&typeof tab!=="undefined"&&tab==="staff"){
-  const s=nrMaidL().find(x=>x.nr&&(x.name===o.name||(typeof shortN==="function"&&shortN(x.name)===o.name)));
+  const s=nrMaidL().concat(nrServL("eunuch")).find(x=>x.nr&&(x.name===o.name||(typeof shortN==="function"&&shortN(x.name)===o.name)));
   if(s){const l=nrLine(s);if(l){o=Object.assign({},o);o.lines=(o.lines||[]).concat([l])}}}}catch(e){console.error(e)}return p0.call(this,o)}})();
