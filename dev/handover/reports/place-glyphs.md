@@ -112,3 +112,6 @@ Final tone-passed PNGs are only in this worker's scratchpad (nothing wired yet);
 Sheet (1560 wide: old | new raw | new + tone, landscape row, then portrait row): https://ctm-img.victoria-tntt.workers.dev/img/podium-bg3-sample-sheet.jpg (also reports/podium-bg3-sample.jpg).
 Not uploaded as game files, nothing wired (KIT_BD.podium in jbd.js still points to podium-bg2); on approval: download both creations, save as img/kit/podium-bg3.webp / podium-bg3-p.webp, point KIT_BD.podium at them.
 Session credits total ~4,480.
+
+## NVP v4 finals are on the CDN + branch review/nvp-v4 (manifest only)
+Repo law (CLAUDE.md, dev/art/CDN.md): images live on the CDN, never in git, so instead of pushing PNGs: 16 tone-passed + 16 raw edits (3072x2048 webp q90, 53.8 MB) uploaded to https://ctm-img.victoria-tntt.workers.dev/img/nvp-v4-<season>-<buoi>.webp and img/nvp-v4-raw-<season>-<buoi>.webp. Branch review/nvp-v4 (from origin/main) holds only dev/art/NVP_V4.md: URLs, creation ids, md5s and the wiring steps. Not wired.
