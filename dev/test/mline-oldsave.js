@@ -10,7 +10,8 @@ async function boot(p,u){await p.goto(u,{waitUntil:'domcontentloaded'});for(let 
  const LS=await p.evaluate(()=>JSON.stringify(Object.assign({},localStorage)));await p.close();
  p=await ctx.newPage();p.on('pageerror',e=>errs.push('new:'+e.message.slice(0,160)));p.setDefaultTimeout(600000);
  await p.addInitScript(ls=>{if(!sessionStorage.getItem('__ld')){sessionStorage.setItem('__ld','1');const o=JSON.parse(ls);for(const k in o)localStorage.setItem(k,o[k])}},LS);await boot(p,NEW);
- const out=await p.evaluate((MON)=>{window.__mlN={};let ok=true;try{loadSlot(3)}catch(e){ok='load:'+e.message}quiet=true;const r0=render;render=()=>{};
+ await p.evaluate(()=>{try{showTitle()}catch(e){}const b=document.querySelector('#slots [data-load="3"]');if(b)b.click()});await sleep(2500);
+ const out=await p.evaluate((MON)=>{window.__mlN={};let ok=S?true:'no S after load';if(!S)return {ok};Q.length=0;quiet=true;const r0=render;render=()=>{};
   const t0=S.turn,maids=(S.staff||[]).filter(s=>s.role==='maid').length;let g=0;while(S.turn<t0+MON&&g++<MON*8){Q.length=0;S.mg=null;try{const md=document.getElementById('modal');if(md)md.hidden=true}catch(e){}if(S.dead)S.dead=false;try{endTurn()}catch(e){ok='turn:'+e.message;break}}
   render=r0;quiet=false;try{render()}catch(e){ok='render:'+e.message}return {ok,turn0:t0,turn:S.turn,maids,mlN:window.__mlN,seekers:(S.staff||[]).filter(s=>s.seek).length}},+MON);
  console.log(JSON.stringify({saved,out,errs:errs.slice(0,6)}));await b.close();process.exit(errs.length||out.ok!==true?1:0)})().catch(e=>{console.error(e);process.exit(1)});
