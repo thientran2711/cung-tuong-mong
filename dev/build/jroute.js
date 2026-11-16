@@ -171,7 +171,7 @@ function rtCaughtEsc(k){const T=rtS();rtStat("tc_caught");rtEnd("tc_bat");T.tc=n
  log(`<span class="r">Ngươi bị bắt ngay ở cổng. Nhà ngươi bị liên lụy.</span>`);
  const mercy=cl(15+S.sung/3+(S.th||0)/4,10,70);if(S.out||!roll(mercy))deathSentence("Bị ban chết vì trốn khỏi cung");else cold("Trốn khỏi cung không thành")}
 /* ---------- 3. RỜI CUNG HỢP LỆ ---------- */
-function rtHlCards(){const T=rtS(),A=[],H=T.hl;const kidsSmall=rtKidsAlive().filter(k=>(k.age||0)<BAL.route.kidAge).length;const cd=k=>H["cd_"+k]&&H["cd_"+k]>S.turn;const cdN=k=>[[`đợi qua cơn giận của Hoàng thượng (còn ${H["cd_"+k]-S.turn} tháng)`,!cd(k)]];
+function rtHlCards(){const T=rtS(),A=[],H=T.hl;const kidsSmall=rtKidsAlive().filter(k=>(k.age||0)<BAL.route.kidAge).length;const cd=k=>H["cd_"+k]&&H["cd_"+k]>S.turn;const cdN=k=>[[`đợi qua cơn giận của Hoàng thượng${cd(k)?` (còn ${H["cd_"+k]-S.turn} tháng)`:""}`,!cd(k)]];/* kc-roads-fix: no "(còn NaN tháng)" when there is no cooldown */
  const nights=(S.nightLog||[]).length;
  if(!S.out){A.push(rtCard({id:"hl_tu",r:3,n:"Dâng biểu xin xuất gia",t:"Xin cạo tóc vào chùa Hộ Quốc, cầu phúc cho xã tắc.",art:RT_ART.tu,o:od(-12+(S.th||0)/3+(S.duc-50)/3-S.sung/3+(H.plead?8:0)+rtDf().o),k:2,
    need:[[`không có con nhỏ dưới ${BAL.route.kidAge} tuổi`,!kidsSmall],["không mang thai",!S.preg],[`Đức ${BAL.route.tuDuc} (có ${S.duc})`,S.duc>=BAL.route.tuDuc],[`ở cung đủ 2 năm (đã ${Math.floor(S.turn/12)} năm)`,S.turn>=24],[`Thái hậu thương ngươi (có ${S.th||0}/40)`,(S.th||0)>=40&&!S.thDead]].concat(cdN("tu")),
