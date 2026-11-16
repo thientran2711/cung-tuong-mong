@@ -9,6 +9,9 @@ Rollover at ~30 % (START_CTX + 25 %), ceiling 60 %. Branches: `review/road-b1` (
 - a85f3321: late STORY keys get the j67 frame (j67 wrapper named wrap67(k), jroad runs it at load end) → Bắc Địch (jorigins STORY.bd) lives run
   a67init + full roads (B2 browser-verified bd_ngua 5–11); road-option-scan ignores {n1}/{n2}/{v2} + function texts; road-full reports __run errors.
 - 33b8789a: tt pilot fix (r1 items 1–3, 5 + road-history pass 1), see below. d49926ed / eeb80516: scan + road-full test fixes.
+- d69d6d24: origin ending fallback — when a road's .11 cannot run (cast gone → jst14 puts a shared arc in its slot), once the main story
+  passes chapter BAL.road.last the «Kết cục xuất thân» is told from the last road chapter that ran (S.st.ch.fin set; B3 finding, every origin).
+  Verified: tt_co with .10/.11 cast forced to fail → fin = the .9 ending tag. FINAL ENGINE SHA = d69d6d24.
 All engine shas sent to B2 + B3 with the 3 r1 pattern rules.
 
 ## tt pilot fix — review/road-map-next (r1 FAIL items + road-history pass 1) → SẴN SÀNG KIỂM eeb80516
@@ -25,9 +28,11 @@ All engine shas sent to B2 + B3 with the 3 r1 pattern rules.
   tt_co .8 «hộp tấu niêm phong», Emperor away at the Giao rite; tt_co .11 the Emperor asks her father, not her; tt_tranh «gia ấn»; tt_mat rare =
   «Hoàng hậu tiến lời, Hoàng thượng ghi nhớ», gated on the Hoàng hậu ill or childless, reward hh/danh + flag S.st.f14.tienloi (BAL.road.tienSc = 2
   Lợi thế for the ch13 hồi form — B3 to read it; today ch13 hau is a milestone).
-- Recast + ONE CORE items 4/5 in the engine (above). Tests: tt road-full being re-run on eeb80516 (result line added below when done).
+- Recast + ONE CORE items 4/5 in the engine (above).
+- Tests (road-map-next d69d6d24 build, @755x1000): road-full tt_co / tt_oan / tt_tranh / tt_mat each 10/10 PASS (1..14 in order, finale
+  Phủ Tể tướng sa sút / Nhà yên, quyền mất / Một nhà một lòng / Trung cung là chỗ dựa, same rival, 0 page errors); road-option-scan 0/0/0/[].
 
-## B1 roads — review/road-b1 (84 chapters + 12 rare finales) → SẴN SÀNG KIỂM 5dbacee3
+## B1 roads — review/road-b1 (84 chapters + 12 rare finales) → SẴN SÀNG KIỂM 5dbacee3 (now 81787d43 = + engine d69d6d24, scan still 0/0/0/[])
 Files: dev/build/jrd_dtq.js (dtq_bien, dtq_vu, dtq_binh, dtq_huynh), jrd_muoi.js (muoi_tuoc, muoi_lau, muoi_doi, muoi_no), jrd_cn.js (cn_chu,
 cn_tinh, cn_ban, cn_than); BAL.road.<road> keys in jbal2.js (deadlines in months, rank indexes, thresholds — each commented); assemble.py lists
 them after jrd_tt.js; ROAD_MAP §4.2–4.4 rewritten to the built chapters (on review/road-b1; docs copy untouched per brief). Branch carries
@@ -48,6 +53,14 @@ no typed rank names (RANKS[BAL.road…].n); road endings never kill, never lãnh
 Test notes: start() now sets S a tick later on fresh storage → road-full/road-saves wait for S (fixed on both branches). Six parallel
 bot browsers hit the container memory limit (one page holding ~57 game months of pictures grows to ~5.8 GB RSS; JS heap stays ~57 MB) —
 run ≤3 bots at a time.
+
+### KIT REQUEST (Foreman B s7 asked to root-cause «no beat text on the j67 event card at 1180x820»)
+- Root cause: the beat text IS in the card, but the shared event dialog (div.dlg.kesdlg.kdpbanner.kpanel.kdscroll; body = grid, overflow auto)
+  renders it as story-fact rows (DIV.kfacts > DIV.kfact.kfworld > SPAN.kft, one sentence per row) placed AFTER the option list: at 1180x820 the
+  first fact row sits at y≈995 inside a 574 px dialog, at 755x1000 also below the options → the player sees speaker, picture and options
+  but must scroll past the options to read what happened. Not road code: every j67 arc (main premises, shared arcs, tt pilot, all roads) and
+  every PEND dialog using this layout. KIT REQUEST: the kit event card shows the story facts (beat text) ABOVE the options (or beside the
+  picture), visible without scrolling at 755x1000 + 1180x820; kit keeper change only (no per-road variant).
 
 ### Observations for the reviewer (not B1 code)
 - Card title «Chính tuyến · <origin> · Chương n · Hồi i/n» wraps to 2 lines at 755 and 1180 (shared j67 card header; same on main arcs).
