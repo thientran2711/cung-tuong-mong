@@ -11,7 +11,7 @@ const GAME=process.argv[2]||path.join(__dirname,'..','index.html');
   try{localStorage.clear()}catch(e){}const kl=document.getElementById('kload');if(kl)kl.remove();SLOT=3;
   for(let i=0;i<40;i++){start();if(!(typeof isSrv==="function"&&isSrv())&&!S.out)break}save=()=>{};Q.length=0;
   const RND=Math.random;/* accusations are made face to face here (j29: a loyal servant may refuse a 'dirty' errand sent from afar — vp and xx alike) */together=()=>true;const force=v=>{Math.random=()=>v};const unforce=()=>{Math.random=RND};
-  const L=liveRivals(true).filter(v=>v.alive&&!v.out&&!v.confined).sort((a,b)=>rkOf(a)-rkOf(b));const v=L[0],w=L[1];
+  const L=liveRivals(true).filter(v=>v.alive&&!v.out&&!v.confined).sort((a,b)=>rkOf(a)-rkOf(b));const v=L[0],w=L.find(x=>x!==v&&!sameHouse(x,v))||L[1];/* r1: runAct blocks acts inside one house (j9), so the NPC→NPC target must live in another one */
   const jw=Object.keys(IT).filter(k=>IT[k].sl&&["wrist","waist","scent"].includes(IT[k].sl)&&IT[k].rk!=null);
   const lavish=(p)=>{/* within-rank jewellery until Xa xỉ > allowance; never above her rank */const r=rkOf(p);const ok=jw.filter(k=>IT[k].rk<=r).sort((a,b)=>luxVal(b)-luxVal(a));
    p.inv=(p.inv||[]).filter(e=>!(e.w&&IT[e.k]&&IT[e.k].sl));let i=0;while(luxOf(p).sc<=luxOf(p).bud&&i<12){p.inv.push({k:ok[i%ok.length],w:1});i++}return luxOf(p)};
@@ -43,7 +43,7 @@ const GAME=process.argv[2]||path.join(__dirname,'..','index.html');
   plain(v);plain(S);noCd(S,v);delete S.dsn[wdKey(v)];const kv=over(v);
   if(kv){ok("6a vp jewellery: no cause unseen",!wdCause(S,v));dressLook(S,v,"cùng chỗ");ok("6b vp cause once seen",!!wdCause(S,v)&&ACT.vp.ok(S,v),wdCause(S,v));
    force(.001);const r=runAct(S,v,"vp");unforce();ok("6c vp jewellery proven: item taken",!v.inv.some(e=>e.k===kv)&&/thành/.test(r),r.slice(0,160))}else ok("6 (skipped: v at top rank)",true);
-  noCd(S,v);const ks=over(S);if(ks){v.ghen=100;dressLook(v,S,"cùng chỗ");ok("6d NPC vp cause on her",!!wdCause(v,S));force(.001);const r=runAct(v,S,"vp");unforce();ok("6e NPC→player vp proven",!S.inv.some(e=>e.k===ks),r.slice(0,160))}
+  noCd(S,v);const ks=over(S);if(ks){try{emoGet(v).k="binh"}catch(e){}/* r1: 6c just punished v for vp → jemo 'đang sợ' would gate her motive */v.ghen=100;dressLook(v,S,"cùng chỗ");ok("6d NPC vp cause on her",!!wdCause(v,S));force(.001);const r=runAct(v,S,"vp");unforce();ok("6e NPC→player vp proven",!S.inv.some(e=>e.k===ks),r.slice(0,160))}
   /* 7. same place: placeWhere makes everyone in one place see each other */
   plain(S);lavish(S);liveRivals(true).forEach(p=>{p.dsn={}});S.dsn={};placeWhere();
   {const here=liveRivals(true).filter(p=>p.alive&&!p.out&&whereOf(p)===whereOf(S));const away=liveRivals(true).filter(p=>p.alive&&!p.out&&whereOf(p)!==whereOf(S));
@@ -56,9 +56,16 @@ const GAME=process.argv[2]||path.join(__dirname,'..','index.html');
   /* 9. wear row: 7 cells; marks/Xa xỉ only when seen */
   {plain(v);const k=over(v);delete S.dsn[wdKey(v)];const d=document.createElement('div');d.innerHTML=kitWearSlots(v,{size:"sm"});
    const c=d.querySelectorAll('.kitem').length;ok("9a 7 cells",c===7,c);ok("9b unseen: no Vượt phẩm mark, no Xa xỉ label",!/Vượt phẩm/.test(d.textContent)&&!/Xa xỉ \d+ \//.test(d.textContent),d.textContent.slice(0,200));
-   dressLook(S,v,"cùng chỗ");d.innerHTML=kitWearSlots(v,{size:"sm"});ok("9c seen: Xa xỉ N / M label",/Xa xỉ \d+ \/ \d+/.test(d.textContent),d.textContent.slice(0,240));
+   dressLook(S,v,"cùng chỗ");d.innerHTML=kitWearSlots(v,{size:"sm"});ok("9c seen: worn total only, 'Xa xỉ N' — NO allowance (OD line 187)",/Xa xỉ \d+/.test(d.textContent)&&!/Xa xỉ \d+ ?\/|mức|hạn/.test(d.textContent)&&BAL.lux.xx.showBud===false,d.textContent.slice(0,240));
    ok("9d seen: red Vượt phẩm mark when an item is above rank",!k||!!d.querySelector('.kitm-r'),k);
    d.innerHTML=kitWearSlots(S,{size:"sm"});ok("9e her own row 7 cells",d.querySelectorAll('.kitem').length===7)}
+  /* 9f (r1). the allowance is never shown in any result text: proven / waved / false xx, Dò la dress line */
+  {const T=[];plain(S);noCd(S,v,w);const o=window.rank;
+   lavish(v);dressLook(S,v,"cùng chỗ");force(.001);T.push(runAct(S,v,"xx"));unforce();
+   noCd(S,v);lavish(v);dressLook(S,v,"cùng chỗ");force(.999);T.push(runAct(S,v,"xx"));unforce();
+   noCd(S,v);plain(v);v.inv.push({k:jw.filter(k=>IT[k].rk<=rkOf(v))[0],w:1});v.__f=1;try{dressLook(S,v,"cùng chỗ");S.dsn[wdKey(v)].sc=luxOf(v).bud+5;S.dsn[wdKey(v)].sig=dsSig(v)}catch(e){}force(.001);T.push(runAct(S,v,"xx"));unforce();
+   T.push(dressSpyTxt(S,v,"dò la"));const all=T.join(" | ").replace(/<[^>]+>/g,"");
+   ok("9f no allowance in xx / dò la texts (no 'mức của', 'hạn mức')",T.every(x=>x)&&!/mức của|hạn mức|\/ ?\d+/.test(all),all.slice(0,400))}
   /* 10. old save without dsn / xxA loads and plays a month */
   {const D=JSON.parse(JSON.stringify(ser()));delete D.S.dsn;for(const r of D.R){delete r.dsn;delete r.xxA;delete r.xxT}deser(D);let err="";
    try{const m0=S.turn;for(let i=0;i<60&&S.turn===m0;i++){Q.length=0;S.mg=null;endTurn()}}catch(x){err=String(x)}ok("10 old save plays a month",!err&&S.turn>0,err)}

@@ -42893,7 +42893,7 @@ Object.assign(BAL.lux,{xx:{
  danhA:2,rel:-10,   /* proven: accuser Danh +2, the target's feeling for the accuser −10 */
  waveDanhA:-2,      /* the judge waves it off: accuser Danh −2 */
  falseDanhA:-5,falseDanhT:2,falseRel:-12,/* not above her allowance after all: accuser Danh −5, target Danh +2, −12 */
- showBud:true}});   /* person card shows "Xa xỉ N / M" (M = her allowance). Owner 11/15 jinv note hid the allowance — main to confirm */
+ showBud:false}});   /* OD 08:10Z (line 187): NEVER show the rank allowance — only "Xa xỉ N" per item and the worn total; the player learns the limit from consequences. true = debug only */
 
 /* ---------- what people see of a dress ---------- */
 function dsVj(p){try{const r=rkOf(p);return (p.inv||[]).filter(e=>e&&e.w&&!e.h&&IT[e.k]&&IT[e.k].sl&&IT[e.k].rk>r).map(e=>e.k)}catch(e){return[]}}
@@ -42953,7 +42953,7 @@ function xxStrip(t){const C=[];for(const e of (t.inv||[]))if(e&&e.w&&!e.h&&IT[e.
  if(!C.length)return"";const b=C.sort((x,y)=>y.v-x.v)[0];if(b.tram)wdTakeOff(t,"tram");else delete b.e.w;return b.n}
 function xxAccuse(a,t){const B=BAL.lux.xx;const c=xxCause(a,t);let x;try{x=luxOf(t)}catch(e){x={sc:0,bud:1}}const judge=judgeName(t),A0=wdNmC(a),T0=wdNm(t);
  for(const o of consorts()){try{dressLook(o,t,judge)}catch(e){}}/* the inquiry makes it public */
- const lux=`Xa xỉ ${x.sc}, mức của ${t===S?"ngươi":"nàng"} ${x.bud}`;
+ const lux=`Xa xỉ ${x.sc}${BAL.lux.xx.showBud?`, mức của ${t===S?"ngươi":"nàng"} ${x.bud}`:""}`;
  if(x.sc<=x.bud){ap(a,{danh:B.falseDanhA});ap(t,{danh:B.falseDanhT});relAdd(a,t,B.falseRel);
   return `${A0} tố ${T0} ăn mặc xa xỉ; <span class="${a===S?"r":"g"}">tra xét ra ${T0} không quá mức</span> (${lux}), ${a===S?"ngươi":wdNm(a)} bị quở vì tố bừa. Danh ${B.falseDanhA}, ${T0} Danh +${B.falseDanhT}. `}
  if(!roll(oVP(a))){ap(a,{danh:B.waveDanhA});relAdd(a,t,B.rel);return `${A0} tố ${T0} ăn mặc xa xỉ (${lux}), ${judge} bỏ qua, chỉ dặn lần sau giữ ý. ${a===S?"Danh "+B.waveDanhA+". ":""}`}
@@ -43003,7 +43003,7 @@ window.dressView=dressView;
  const cells=V.L.map(c=>kitItem({src:c.empty?"":c.src,name:c.name,grade:c.grade,empty:!!c.empty,size:(opts&&opts.size)||"sm",mark:c.mark||null,lux:c.empty?0:(V.seen?c.lux:0),
    data:`data-kwear="${c.slot}" data-kwho="${who}" role="button" tabindex="0"`,tip:`${c.label}: ${c.empty?"trống":c.name}${c.mark?" · Vượt phẩm":""}`})).join("");
  const labs=[];if(lab)labs.push(`<span class="kitl kitl-${lab[1]}">${lab[0]}</span>`);
- if(V.lux)labs.push(`<span class="kitl kitl-${V.lux.sc>V.lux.bud?"no":"n"}">Xa xỉ ${V.lux.sc}${BAL.lux.xx.showBud?" / "+V.lux.bud:""}</span>`);
+ if(V.lux)labs.push(`<span class="kitl kitl-${BAL.lux.xx.showBud&&V.lux.sc>V.lux.bud?"no":"n"}">Xa xỉ ${V.lux.sc}${BAL.lux.xx.showBud?" / "+V.lux.bud:""}</span>`);
  return `<div class="kwear kwear7${opts&&opts.cls?" "+opts.cls:""}">${cells}${labs.length?`<span class="kwearl">${labs.join(" ")}</span>`:""}</div>`}catch(e){console.error("kitWearSlots7",e);return""}}})();
 /* tap a cell of someone else's row (the j92 handler covers Trâm cài / Y phục): the item, and what she knows */
 document.addEventListener("click",ev=>{const t=ev.target.closest&&ev.target.closest("[data-kwear]");if(!t)return;const sl=t.dataset.kwear,who=t.dataset.kwho;if(who==="me"||sl==="tram"||sl==="y")return;
@@ -43039,7 +43039,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="d0df7cd5e026";window.CTM_BUILD=BUILD;
+const BUILD="aa694539847a";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
