@@ -123,7 +123,7 @@ const INP=fs.readFileSync(path.join(__dirname,'../measure/inpage4.js'),'utf8');
   const A=newThread67('tt_oan','m');S.st.M=A;A.s14=1;const r0=rnd67;rnd67=()=>0;const cards=[];const c0=card67;card67=function(kind,t,rows){cards.push([kind,t,rows]);return c0.apply(this,arguments)};
   try{end67(A,'win')}finally{rnd67=r0;card67=c0}const rc=cards.find(c=>c[0]==='result');out.turned={end:A.end,row:rc&&rc[2].find(x=>x&&x[0]==='Xoay chiều')};Q.length=0;return out});
  const wBad=pv.words.filter(x=>!x[3]);console.log('preview fixed endings:',pv.words.length,'missing word:',JSON.stringify(wBad.slice(0,5)),'turned:',JSON.stringify(pv.turned));
- chk('r1 item 5: every fixed-ending option preview shows the chance it turns (chance scale Rất thấp…Rất cao, never the act ladder: VANPHONG; and the story dialog's kit hint keeps it, r3)',pv.words.length>0&&!wBad.length,wBad.slice(0,8));
+ chk('r1 item 5: every fixed-ending option preview shows the chance it turns (chance scale Rất thấp…Rất cao, never the act ladder: VANPHONG; and the story dialog kit hint keeps it, r3)',pv.words.length>0&&!wBad.length,wBad.slice(0,8));
  chk('r1 item 5: an ending that turned says why on the result card',pv.turned.end!=='win'&&pv.turned.row&&/Tưởng đã định/.test(pv.turned.row[1]),pv.turned);
  chk('r1 item 5: neutral context leans neither way (BAL.st14.shift.base both ways)',await p.evaluate(()=>{const Z=BAL.st14.shift;return Z.base-0*Z.slope===Z.base+0*Z.slope}),null);
  await p.context().close();
