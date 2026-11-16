@@ -103,7 +103,7 @@
 | promo-skip report + reviewer (orphan #10) | review/promo-skip-r1 | main s12 | session_01UV1SzixY6z6k4yg5Fc3gvp (opus) | DONE PASS 7453911c3 (report dev/handover/reports/promo-skip-r1.md) | 16/11 08:00Z |
 | merge-train-6: 9 PASS branches (orphan #8) | review/merge-train-6 | main s12 | session_01UV1Szj48hcWvSPrgC92zTH (sonnet) | READY 7d6d3514 | 16/11 08:00Z |
 | mg-balance: minigame difficulty tiers (rank/occasion/skill), medium, Tuyệt phẩm 20–30 % + replacement list | review/mg-balance | B | session_01N1tNP4yBvmQ6Gd69aHoWJR (opus) | RUNNING | 16/11 07:58Z |
-| no-word-games family A: thơ fill-in + câu đối → non-word games | review/nw-poem | B | session_01N1tNP6akcFFA3AcqEfs5hk (sonnet) | RUNNING | 16/11 07:58Z |
+| no-word-games family A: thơ fill-in + câu đối → non-word games | review/nw-poem | B | session_01N1tNP6akcFFA3AcqEfs5hk (sonnet) | DONE SẴN SÀNG KIỂM eb5f2239 | 16/11 07:58Z |
 | no-word-games family B: đố đèn → non-word lantern game | review/nw-lantern | B | session_01N1tNP3ykt4KbnfNeocJZ3W (sonnet) | RUNNING | 16/11 07:58Z |
 | no-word-games family C: vấn đáp/khảo hạch + lễ/trị cung/xử án quiz banks → subject skill games | review/nw-quiz | B | session_01N1tNP2boFYsfpf9ZAuvbwW (sonnet) | RUNNING | 16/11 07:58Z |
 | D9 header-own reviewer | review/header-own-r1 | B | session_01N1tNP4c1TN9m7n8JPAjyqC (sonnet) | PASS 0d48819b (READY) | 16/11 08:12Z |
@@ -159,3 +159,4 @@
 | D11 presentation reviewer | review/presentation-r1 | B | session_01N1tNP3n1wWhij5S5HiR3RM (sonnet) | RUNNING | 16/11 11:38Z |
 | D13 spread-events reviewer | review/spread-events-r1 | B | session_01N1tNP32fy3Murvkg4579tq (opus) | RUNNING | 16/11 11:38Z |
 | D29 review (opus) of schedules3-r2 @4ea772f3 | review/schedules3-r3 | C | session_011xDdVSrR85tR6K2xGkaryw | RUNNING | 16/11 11:40Z |
+| nw-poem reviewer | review/nw-poem-r1 | B | (opening, Foreman B s5) (sonnet) | RUNNING | 16/11 11:47Z |
