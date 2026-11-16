@@ -1,5 +1,5 @@
 # FOREMAN_C_STATUS (written ONLY by Foreman C)
-Updated: 11/16/2026 03:52Z — 13 agents running (one over cap by a counting slip; next free slot is NOT refilled). Load ~46 on 4 CPUs. Disk 8.3 GB free (shared .git packs 13.6 GB; watch — repack only if <5 GB and no fetches running).
+Updated: 11/16/2026 03:58Z — 12 agents running (back at cap).
 Connectors (account C): GitHub push OK · Magnific OK (project "Personal" ba4aecfe…) · Cloudflare OK (owner saved token 16/11; verified active, R2 ctm-img listing OK) → workers upload with cdn_sync.py.
 Base main at start: 900ace7fb.
 
@@ -20,7 +20,7 @@ Base main at start: 900ace7fb.
 | C18 kit-popup-sample review | review/kit-popup-sample-r1 | sonnet | LIVE (train-2) |
 | C19 pic-dupes-r1 re-review | review/pic-dupes-r2 | sonnet | LIVE (train-2) |
 | D10 update-notes popup + Settings "Thông tin cập nhật" | review/update-notes-r1 | sonnet | PASS 8cc6ae7c8 |
-| D2 item-art | review/item-art-r3 @58e26986f (game side OK) | sonnet | FAIL (art) → fix worker RUNNING on review/item-art-r4: redo tho-r06-b4 'Tông biệt', tho-r08-b1 garbled; + r01-b1, r03-b1, pet-cuuvi-tn / sutu-tn / linhmieu-tn poses |
+| D2 item-art | review/item-art-r4 @74c0dacb7 (7 keys redone, read at 1024, CDN + hashes OK) | sonnet | QUEUED-NEXT: fix item-tp-tho-r08-b2 title 'triêu'→'triều' + short re-review (one worker does both) |
 | C20 act-text resume | review/act-text @cef451ada → review/act-text-r1 | sonnet | REVIEWING text/scan/source fixes (brk 39→0, dots 8→0, kemgain→0, long 95→41); remaining 41 long rows + parser fixes BLOCKED on kit keeper (K8) |
 | C6 mk-colour + D28 reveal | review/mk-colour-r1 | sonnet | PASS b9e201845 — CONDITIONAL on kit keeper (K2: whole §60 + §60.5 new vs main) |
 | D16 Tứ đức sub-styles + CDNH works (10 items × 4 tiers with art) + A13 teacher-fee notes | review/tuduc-sub | opus | RUNNING (worker; D17/D19 wait for it) |
