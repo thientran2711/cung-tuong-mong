@@ -36476,7 +36476,7 @@ function kcFreeFid(role,pref){const U=new Set(figUsed());const keys=Object.keys(
 /* ---------- start: the identity card choice, then the home life ---------- */
 function kcPick(){return (S&&S.kcPick)||"cung"}
 function kcPathHTML(){const k=kcPick();const lock=!!window.__kcO;const r0=RANKS[(S.origin&&S.origin.r)||0].n;
- const O=[["cung","Vào cung ngay",`thành: vào cung ngay, phong ${r0} theo thân phận; thêm khoảng hai năm trong cung để leo · hỏng: không hồi môn, không biết trước gì về các phi tần, không có cơ duyên ngoài cung`],
+ const O=[["cung","Vào cung ngay",`thành: vào cung ngay${(S.origin&&S.origin.r)?`; thân phận cho tới ${r0}, phẩm vị định ở kỳ tuyển chọn`:`, phong ${r0}`}; thêm khoảng hai năm trong cung để leo · hỏng: không hồi môn, không biết trước gì về các phi tần, không có cơ duyên ngoài cung`],
   ["nha","Ở nhà chờ tuyển tú",`thành: hai năm học tài nghệ, nâng Tư chất; hồi môn và tỳ nữ hồi môn một lòng; thế lực nhà cha; tin về các phi tần trong cung; qua tuyển tú có thể phong tới Quý nhân; Thanh mai trúc mã, kết hiếm ngoài cung; Phúc duyên khi qua tuyển tú · hỏng: vào cung muộn hai năm, lúc hai mươi tuổi · kèm: có thể bị trả thẻ bài hay bị ép gả; kế mẫu, thứ muội ngáng chân; có thể chết ở nhà`]];
  if(S.origin&&S.origin.k==="td"&&kcLore())O[1][2]=O[1][2].replace("hồi môn và tỳ nữ hồi môn một lòng; thế lực nhà cha;","thế lực nhà cha, nhưng nhà ngươi sụp đổ đúng ngày ngươi rời nhà vào cung (hồi môn bị tịch thu); tỳ nữ hồi môn một lòng;");
  return `<div class="kpsec kkcp"><h4 class="kpst">${typeof kitGloss==="function"?kitGloss("Con đường"):"Con đường"}</h4><div class="opts kcpo">`+
@@ -37217,7 +37217,7 @@ function kc2Words(){try{const W=(S&&S.kc&&S.kc.kd)?KC2W[S.kc.kd]:(typeof NLP!=="
 (function(){const p0=kcPathHTML;kcPathHTML=function(){const d=kc2D();if(!d)return p0.apply(this,arguments);const k=kcPick();const lock=!!window.__kcO;const r0=RANKS[(S.origin&&S.origin.r)||0].n;const L=d==="nc"?kc2L():null;
  const O=d==="dan"?[["cung","Vào cung ngay","thành: vào cung ngay làm cung nữ; thêm hơn hai năm trong cung để leo · hỏng: không ai cùng quê, chưa biết lễ nghi trong cung"],
    ["nha","Ở quê chờ lệnh tuyển","thành: hơn hai năm ở nhà: học khéo tay, học lễ nghi với bà cung nữ cũ, lo cho cha mẹ; ngày tuyển làm tốt thì về hầu một vị nương nương bậc cao; vào cung mang theo hành trang những năm ở nhà (Danh, Tư chất, Chủ tin, người đã biết) · hỏng: vào cung muộn hơn hai năm; tuyển kém thì phải giặt đồ ở Tân Giả khố trước · kèm: nợ nhà, lũ lụt, có thể bị gả làm thiếp hay ở lại quê; có thể chết ở nhà"]]
-  :[["cung","Vào cung ngay",`thành: sang Đại Hy ngay, phong ${r0} theo hòa ước · hỏng: chưa biết lễ nghi, tiếng nói Đại Hy`],
+  :[["cung","Vào cung ngay",`thành: sang Đại Hy ngay; hòa ước cho thân phận tới ${r0}, phẩm vị định ở kỳ tuyển chọn · hỏng: chưa biết lễ nghi, tiếng nói Đại Hy`],
    ["nha","Ở cố quốc chờ hòa ước",`thành: hơn hai năm ở ${L.court}: học lễ nghi Đại Hy, giữ lòng ${L.dad.toLowerCase()}, giữ hòa ước; Lễ ra mắt làm tốt thì phong tới ${r0}; vào cung mang theo hành trang những năm ở nhà (Danh, Tư chất, người đã biết, hồi môn) · hỏng: sang Đại Hy muộn hơn hai năm; ra mắt kém thì phong thấp hơn · kèm: phe chủ chiến, người trong nhà tranh phần; có thể ở lại cố quốc; có thể chết ở nhà`]];
  return `<div class="kpsec kkcp"><h4 class="kpst">${typeof kitGloss==="function"?kitGloss("Con đường"):"Con đường"}</h4><div class="opts kcpo">`+
   O.map(([x,n,l])=>`<button type="button" class="opt${x===k?" ksel":""}" data-kcp="${x}" aria-pressed="${x===k}"${lock?" disabled":""}>${n}<small>${l}</small></button>`).join("")+`</div></div>`}})();
@@ -37754,7 +37754,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="e79013ee3101";window.CTM_BUILD=BUILD;
+const BUILD="a0c901fb9f8e";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

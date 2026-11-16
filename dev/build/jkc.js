@@ -87,7 +87,7 @@ function kcFreeFid(role,pref){const U=new Set(figUsed());const keys=Object.keys(
 /* ---------- start: the identity card choice, then the home life ---------- */
 function kcPick(){return (S&&S.kcPick)||"cung"}
 function kcPathHTML(){const k=kcPick();const lock=!!window.__kcO;const r0=RANKS[(S.origin&&S.origin.r)||0].n;
- const O=[["cung","Vào cung ngay",`thành: vào cung ngay, phong ${r0} theo thân phận; thêm khoảng hai năm trong cung để leo · hỏng: không hồi môn, không biết trước gì về các phi tần, không có cơ duyên ngoài cung`],
+ const O=[["cung","Vào cung ngay",`thành: vào cung ngay${(S.origin&&S.origin.r)?`; thân phận cho tới ${r0}, phẩm vị định ở kỳ tuyển chọn`:`, phong ${r0}`}; thêm khoảng hai năm trong cung để leo · hỏng: không hồi môn, không biết trước gì về các phi tần, không có cơ duyên ngoài cung`],
   ["nha","Ở nhà chờ tuyển tú",`thành: hai năm học tài nghệ, nâng Tư chất; hồi môn và tỳ nữ hồi môn một lòng; thế lực nhà cha; tin về các phi tần trong cung; qua tuyển tú có thể phong tới Quý nhân; Thanh mai trúc mã, kết hiếm ngoài cung; Phúc duyên khi qua tuyển tú · hỏng: vào cung muộn hai năm, lúc hai mươi tuổi · kèm: có thể bị trả thẻ bài hay bị ép gả; kế mẫu, thứ muội ngáng chân; có thể chết ở nhà`]];
  if(S.origin&&S.origin.k==="td"&&kcLore())O[1][2]=O[1][2].replace("hồi môn và tỳ nữ hồi môn một lòng; thế lực nhà cha;","thế lực nhà cha, nhưng nhà ngươi sụp đổ đúng ngày ngươi rời nhà vào cung (hồi môn bị tịch thu); tỳ nữ hồi môn một lòng;");
  return `<div class="kpsec kkcp"><h4 class="kpst">${typeof kitGloss==="function"?kitGloss("Con đường"):"Con đường"}</h4><div class="opts kcpo">`+
