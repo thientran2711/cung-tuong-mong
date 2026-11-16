@@ -52,6 +52,7 @@ Follow-up (not started): title Q3 — seal (Ngọc ấn) from Phi up only (histo
 - 17:00Z fig-proportion Thái hậu sample (old | new | 2 consorts same scale) → SENT to owner. origin-intros worker rolled over @ef815769 (ships AFTER kc-roads-cn-nc-fix-r1) → archived; sonnet successor session_011xDdVSzL8F7w8e9XVKKjR4 (re-runs + coop + SẴN SÀNG KIỂM). ORIGIN INTRO ART sonnet session_011xDdVP2RGQi9JdcYahCJxx (review/intro-art; 51 panels + 7 gates; sample = tt set + G1). KIT REQUEST K-OI-1 kitEntryGate (origin-intros) → main kit keeper. Running C: 12 (cap).
 - 17:00Z SENT to owner: icon-art v2 (download + update glyphs), intro-art sample (tt set + G1, 390 cr). PASS title-sys2-r1 5f710161 → quick check by go-live worker, then Foreman C FF main. Waiting owner verdicts: buoi-art, icon-art v2, night-backs, fig-proportion (+Thái hậu), intro-art, + s3 samples (title plates, item-art audit, cắm hoa).
 GO-LIVE PUSHES (sha, branch, what changed):
+- 16/11 18:31Z c19b25eb review/title-sys-live — Title system phase 1+2 (Danh hiệu + Emperor hiệu) live (C s6).
 - 17:18Z main fb367740 → 12f52db7 (FF) review/schedules3-r5 — D29: daily schedules / roster re-port on the one people ledger (who is where each khắc matches the record; witnesses inside the record). Old-save + 6 viewports run by the reviewer on this exact sha.
 - PENDING for next wake: owner verdicts on the 15:45Z samples (title plates, item art audit, cắm hoa) → mass-production workers.
 
