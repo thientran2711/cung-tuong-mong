@@ -249,10 +249,10 @@ function k61Scrub(s,lead,prev,ann,plain){const rx=k61Table();if(!rx||!s)return s
   const before=(ti?"":(prev||""))+str.slice(0,off);let d=k61Mask(e,before,plain);
   const capit=/^(\s|<[^>]+>)*$/.test(str.slice(0,off))?lead:/[.!?:(“"]\s*$/.test(str.slice(0,off));return capit?k61Cap(d):d})}
 function k61PrevText(n){let x=n;for(let i=0;i<6&&x;i++){let p=x.previousSibling;while(p){const t=p.textContent;if(t&&t.trim())return t;p=p.previousSibling}x=x.parentNode;if(!x||/^(DIV|P|LI|BUTTON|H\d|FIGCAPTION|SECTION|TD)$/.test(x.nodeName))return""}return""}
-function k61Node(n){if(n.nodeType===3){const t=n.nodeValue;if(!t||t.length<4)return;const p=n.parentNode;if(!p||/^(SCRIPT|STYLE|TEXTAREA|INPUT)$/.test(p.nodeName))return;
+function k61Node(n){if(n.nodeType===3){const t=n.nodeValue;if(!t||t.length<4)return;const p=n.parentNode;if(!p||/^(SCRIPT|STYLE|TEXTAREA|INPUT)$/.test(p.nodeName))return;if(p.closest&&p.closest("[data-k61skip]"))return;/* co-op chat Thư từ (KIT §76): real players' names are shown as they are */
   const pv=k61PrevText(n);const lead=!pv.trim()||/[.!?:]\s*$/.test(pv);const blk=p.closest&&p.closest(".kft,.kitem,.logs > div,p,li,.rt,.spkt,.krv,.tag,figcaption");
   const s=k61Scrub(t,lead,pv,blk?blk.textContent:t);if(s!==t)n.nodeValue=s;return}
- if(n.nodeType!==1||/^(SCRIPT|STYLE|TEXTAREA|INPUT)$/.test(n.nodeName))return;
+ if(n.nodeType!==1||/^(SCRIPT|STYLE|TEXTAREA|INPUT)$/.test(n.nodeName)||(n.closest&&n.closest("[data-k61skip]")))return;
  for(const a of ["title","aria-label"]){const v=n.getAttribute&&n.getAttribute(a);if(v){const s=k61Scrub(v,true);if(s!==v)n.setAttribute(a,s)}}
  const w=document.createTreeWalker(n,NodeFilter.SHOW_TEXT|NodeFilter.SHOW_ELEMENT);let c;const L=[];while((c=w.nextNode()))L.push(c);for(const x of L){if(x.nodeType===3)k61Node(x);else for(const a of ["title","aria-label"]){const v=x.getAttribute(a);if(v){const s=k61Scrub(v,true);if(s!==v)x.setAttribute(a,s)}}}}
 (function(){try{if(typeof MutationObserver!=="function")return;const ob=new MutationObserver(ms=>{if(!S||!S.known||!k61Table())return;for(const m of ms){if(m.type==="characterData")k61Node(m.target);else if(m.type==="attributes")k61Node(m.target);else m.addedNodes.forEach(k61Node)}});

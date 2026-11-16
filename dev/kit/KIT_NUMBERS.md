@@ -44,7 +44,9 @@ Rule: a new kit part gets its number HERE first (ask the coordinator); a worker 
 | **76** | **kitPalaceMap · palace detail map** (was a second "§71") | review/palace-map-port-r1 | RENUMBERED in merge-train-3 |
 | **77** | **kitStageRail · stage icon rail (Lịch · Chat · Mục tiêu)** (owner 16/11) | review/goal-strip-fix-r1 | — |
 | **78** | **PLACE ICON kitPlaceIcon + HAPPENING MARK kitHapMark** (was provisional "§71") | review/act-dedupe-r1 | FINAL (kit keeper 16/11) |
-| 79+ | free | | next free number is 79 |
+| 79 | (reserved by another branch) | | — |
+| **80** | **CO-OP CHAT "Thư từ" (kitChatPanel / kitChatList / kitChatBubble; the icon is the §77 rail)** | review/coop-chat | FINAL (renumbered from §76 in coop-chat-r1) |
+| 81+ | free | | next free number is 81 |
 
 Why this order: face-sharp (§71) and tutorial (§72) were already registered by the coordinator in their own branch text ("§72 = coordinator registry; §71 = kitFigHD"), pcard-fill moved itself to §73 to get out of the way; buoi-transition and room-btn only had "to confirm / provisional" labels, so they move.
 
