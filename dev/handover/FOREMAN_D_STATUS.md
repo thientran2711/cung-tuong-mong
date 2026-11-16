@@ -147,6 +147,7 @@ READY review/coop-guest-maid-r1 3a875687518f3492f24ce8bd2bfe825076c32513 (co-op 
 - Main coordinator = main session 15 session_01UV1SzisvHjTamjSXck6FLz (other account: send_message fails → write in this file). Archive finished sessions every wake (OD:L1287).
 
 ## s4 wake log
+- 13:12Z (s5 takeover): 9 running sessions told the s5 id; hourly wake trig_01F8KntmXAMD8Qv2nmzjZDMf; cloud-del BLOCKED (KIT REQUEST danger button + confirm) → archived; no new reports from the other 8 yet; slice has no unassigned item (D52 = C, art = C, #3 PASS, #7 live) → no refill. Running 8/12.
 - 12:58Z (hourly + s16 inbox 12:55Z): mortality-r1 LIVE → D4 + D57 started; s16 answers taken: Danh P1 approved (+P2 bot, P3 NO) → danh-p1 worker; cloud-del worker; coop-b1b5-fix SẴN SÀNG KIỂM 7c7fcc45 → final opus reviewer. D8 poison stays PARKED (s16). Context 28 % → rollover to s5 now.
 - 12:40Z: name-mask SẴN SÀNG KIỂM 8b911c73 → sonnet reviewer; worker archived.
 - 12:20Z: kc-roads-cn-nc-fix SẴN SÀNG KIỂM de331af6 (Chờ gap cnv +47→−7, nc +94→+17) → opus reviewer, tests it merged with entry-exam-r1; worker archived.
