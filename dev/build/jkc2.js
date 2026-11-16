@@ -516,7 +516,9 @@ function kc2SelDo(raw){const X=S.selx;const g=X.art;const sc=Math.round(entScore
 /* fix2 (r1 FAIL 1, OD:L1288): re-measured on main ee5d33de + entry-exam (4 seeds x 4 lives per arm, both arms fresh; report kc-roads-cn-nc-fix2.md):
    cnv +8 and nc +3 now inside the spread (unchanged); bd (Bắc Địch, ran the nc row) home −28 → own row bd (the Emperor's curiosity for the steppe
    princess, her name at the treaty); tiểu thư (kc: muoi +47, tt +67) home too strong → the kc carry halved. A row per origin key wins over its road kind. */
-BAL.kcv={kc:{dn:18,sung:14,st:4,kn:3,art:1,bac:0,tin:0},nc:{dn:8,sung:10,st:3,kn:6,art:1,bac:10,tin:0},bd:{dn:12,sung:18,st:3,kn:6,art:1,bac:10,tin:0},dan:{dn:50,sung:0,st:10,kn:10,art:1,bac:40,tin:25}};
+BAL.kcv={kc:{dn:18,sung:14,st:4,kn:3,art:1,bac:0,tin:0},nc:{dn:8,sung:10,st:3,kn:6,art:1,bac:10,tin:0},bd:{dn:12,sung:18,st:3,kn:6,art:1,bac:10,tin:0},
+ /* tiểu thư rows per origin (the home Phúc tuyển already lifts ch / dtq above the palace arm; td / thd enter low): measured gaps on the kc row ch +65, dtq +43, td −72, thd −21 */
+ ch:{dn:4,sung:0,st:1,kn:1,art:0,bac:0,tin:0},dtq:{dn:8,sung:6,st:2,kn:2,art:0,bac:0,tin:0},td:{dn:45,sung:35,st:10,kn:8,art:1,bac:0,tin:0},thd:{dn:24,sung:18,st:5,kn:4,art:1,bac:0,tin:0},dan:{dn:50,sung:0,st:10,kn:10,art:1,bac:40,tin:25}};
 function kc2Carry(kind,tier){const ok=S&&S.origin&&BAL.kcv[S.origin.k]?S.origin.k:kind;/* a row per origin key (bd) wins over its road kind */const B=BAL.kcv[ok];if(!B||!S||S.dead||(S.kc&&S.kc.carry))return null;const f=[.8,1,1.2][tier==null?1:tier]||1;const n=x=>Math.round(x*f);const was=rsnap();
  S.danh=Math.min(100,(S.danh||0)+n(B.dn));if(B.sung&&!(S.srv&&!S.srv.risen))S.sung=Math.min(100,(S.sung||0)+n(B.sung));for(const k of ["sac","tai","tamco","duc"])S[k]=Math.min(100,(S[k]||0)+n(B.st));
  if(B.art){const a=kcBestArt();try{addArt(a,n(B.art)*3)}catch(e){}}if(B.bac)S.bac=(S.bac||0)+n(B.bac);if(B.tin&&S.srv)S.tin=cl((S.tin||40)+n(B.tin),0,100);
