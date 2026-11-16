@@ -8287,7 +8287,7 @@ ARC67.s_ban={o:"*",ok:nsrv67,t:"Kẻ thù hóa tri kỷ",w:"v",sj:"mối thù v�
  const walk=b=>{if(b&&Array.isArray(b.o))b.o.forEach(h)};Object.values(GB67).forEach(walk);Object.values(ARC67).forEach(a=>Object.values(a.B).forEach(walk))})();
 
 /* one-line objective of the main quest on the Hành sự tab */
-(function(){const p0=renderPanel0;renderPanel0=function(){const r=p0.apply(this,arguments);try{if(tab==="act"&&v267()&&S.st.ch){const el=$("panel");if(el&&!el.querySelector(".obj67")){const o=obj67();/* KIT §72 (owner 16/11 "Không bấm xem được"): the line is the kit goal strip, tap → chapter detail (jgoal) */const g=typeof kitGoalStrip==="function"?kitGoalStrip():"";if(g)el.insertAdjacentHTML("afterbegin",`<div class="obj67">${g}</div>`);else if(o)el.insertAdjacentHTML("afterbegin",`<div class="srvhead obj67"><span><b>Mệnh truyện</b> · ${o}</span></div>`)}}}catch(e){console.error(e)}return r}})();
+(function(){const p0=renderPanel0;renderPanel0=function(){const r=p0.apply(this,arguments);try{if(tab==="act"&&v267()&&S.st.ch&&!window.kitStageRail){/* owner 16/11: the goal lives in the stage rail icon (§77), no strip here */const el=$("panel");if(el&&!el.querySelector(".obj67")){const o=obj67();/* KIT §72 (owner 16/11 "Không bấm xem được"): the line is the kit goal strip, tap → chapter detail (jgoal) */const g=typeof kitGoalStrip==="function"?kitGoalStrip():"";if(g)el.insertAdjacentHTML("afterbegin",`<div class="obj67">${g}</div>`);else if(o)el.insertAdjacentHTML("afterbegin",`<div class="srvhead obj67"><span><b>Mệnh truyện</b> · ${o}</span></div>`)}}}catch(e){console.error(e)}return r}})();
 const QUEST67={
  tt:{t:"Ván cờ phủ Tể tướng",e:[["Phủ Tể tướng đứng sau ngôi Trung cung",{danh:10,th:6,bac:80},"Qua ba chương, nhà Tể tướng thành chỗ dựa vững nhất của ngươi trong triều."],["Giữ được nhà, giữ được mình",{danh:4},"Ngươi đi qua sóng gió của phủ Tể tướng, không mất mà cũng không được bao nhiêu."],["Một mình giữa triều đình",{tamco:3},"Phủ Tể tướng không còn đỡ được ngươi; từ nay ngươi tự đi đường mình."]]},
  dtq:{t:"Vinh nhục nhà tướng",e:[["Nhà tướng môn vững như núi",{danh:10,sung:6,th:4},"Binh quyền, chiến công và lòng vua đều đứng về phía nhà ngươi."],["Nhà tướng còn đứng",{danh:4},"Nhà ngươi qua được bão tố, vinh có, nhục có."],["Tướng môn sa sút",{tamco:3},"Nhà tướng sa sút, ngươi phải tự gây dựng chỗ đứng."]]},
@@ -22426,8 +22426,21 @@ function kitEvCat(m,a){try{const src=String(a&&a.src||"");const mm=/\/ev-([a-z-]
   if(!k&&typeof evArtCat==="function"){const c=evArtCat(m.evId||m.pid||"");if(c)k=KIT_EVCAT[c]}
   if(!k)k="giao-thiep";const C=typeof KIT_CAT==="object"&&KIT_CAT[k];return {col:C?C[1]:"#8a6a3a",cls:"kcat-"+k}}catch(e){return {}}}
 window.kitEvCat=kitEvCat;
+/* KIT §8.2 ONE PICTURE · EVENT FRAME (owner 16/11 "Má nó, kit chung đâu", review/kit-sweep): a dialog with NO person (no stage figure, no
+   person portrait) shows ONE picture, in the event-frame slot LEFT of its rows (.kpb.kpinfo > .kpsubj.kpiart.kpev), never a wide band on
+   top PLUS a second tall picture. The item's own picture (headArt band) wins over the generic fallback (kitEvArt room / kitInfoArt).
+   One rule for the whole family: place cards, chapter detail, pet / tsb / fire notices, any headArt dialog without people. */
+function kitOnePic(m){try{const mb=document.getElementById("mb");const body=mb&&mb.querySelector(":scope > .kpb");if(!body||body.classList.contains("kpid"))return;
+ const band=mb.querySelector(":scope > .kdlgart:not(.kesband)");if(!band)return;const sj=body.querySelector(":scope > .kpsubj");
+ if(sj&&!sj.matches(".kpiart,.kpev"))return;/* a person portrait (info about a person) keeps its own approved layout */
+ const im=band.querySelector("img");const src=im&&im.getAttribute("src");if(!src)return;const fc=band.querySelector("figcaption");const lab=fc?fc.textContent.trim():"";
+ const mk=band.querySelector(".ksart-mark,.kmark");
+ if(sj)sj.remove();band.remove();body.classList.remove("kpshort");body.classList.add("kphas","kpinfo");
+ body.insertAdjacentHTML("afterbegin",`<div class="kpsubj kpiart kpev">${kitSceneArt(src,lab,{shape:"tall",cap:!!lab})}</div>`);
+ if(mk){const f=body.querySelector(":scope > .kpsubj .ksart");if(f)f.appendChild(mk)}}catch(e){console.error("kitOnePic",e)}}
+window.kitOnePic=kitOnePic;
 (function(){if(typeof showModal!=="function")return;const s0=showModal;showModal=function(){const m=typeof Q!=="undefined"?Q[0]:null;const r=s0.apply(this,arguments);
- try{if(m&&!kitEventStage(m)){/* no person: the event picture keeps its tall slot, framed by its type */const ev=document.querySelector("#mb > .kpb > .kpsubj.kpev .ksart, #mb > .kdlgart > .ksart");
+ try{if(m&&!kitEventStage(m)){kitOnePic(m);/* no person: the event picture keeps its tall slot, framed by its type */const ev=document.querySelector("#mb > .kpb > .kpsubj.kpev .ksart, #mb > .kdlgart > .ksart");
   if(ev&&!ev.classList.contains("ksart-cat")){const im=ev.querySelector("img");const c=kitEvCat(m,{src:im&&im.getAttribute("src")});if(c.col){ev.classList.add("ksart-cat",c.cls);ev.style.setProperty("--kcc",c.col)}}}}catch(e){}return r}})();
 (function(){const st=document.createElement("style");st.id="kit-evstage";st.textContent=`
 .kpb.kphas.kesb{grid-template-columns:clamp(130px,40%,260px) minmax(0,1fr);gap:12px;align-items:start}
@@ -32083,7 +32096,7 @@ window.intAll=intAll;
    The guide = staffGuide() of review/elder-staff (a real named palace elder: name, title, the same face); fallback Quế ma ma (a ma ma portrait already drawn, img/FIGURES-servants.json role mama; never a new drawing, never a face used by
    someone in this kiếp). She says "nô tỳ" and calls the player "tiểu chủ" (Tần and up: "nương nương"; cung nữ road: "ta" / "ngươi").
    Lượt dẫn đầu kiếp (KTUT_STEPS, ≤12 steps): first kiếp on this device, or "Xem lại lời dặn" in ☰. It starts after the Nhập cung card and the
-   "Mệnh truyện kiếp này" goal card (jgoal), and one step shows the goal strip (kitGoalStrip). Old players (an older sổ or a Sổ luân hồi
+   "Mệnh truyện kiếp này" goal card (jgoal), and one step shows the goal icon of the stage rail (§77). Old players (an older sổ or a Sổ luân hồi
    entry, no record on this device) are asked once; a sổ past its 2nd week never starts the tour nor asks, and gives no tips (S.tutOld)
    unless she turns "Lời dặn tân thủ" on again in Thiết lập or picks "Xem lại lời dặn". State: device `hclh-tut` {tour, asked, seen{}} + OPT.tut (Thiết lập "Lời dặn tân thủ")
    + S.tutTour in the sổ (a sổ copied to another device does not start the tour again).
@@ -32257,7 +32270,7 @@ function goRoom(){try{if($q(".game.k3ph")&&!$q(".game.k3home")&&typeof k3Home===
 function shown(k){const b=tabBtn(k);return !!b&&vis(b)}
 /* the group button that holds a hidden member tab (Sổ ghi is inside Mệnh truyện) */
 function groupBtn(k){const b=tabBtn(k);if(b&&vis(b))return b;try{for(const g in KG)if(KG[g].keys.includes(k)){const gb=KG[g].keys.map(tabBtn).find(x=>x&&vis(x));if(gb)return gb}}catch(e){}return null}
-function goalEl(){const L=[...document.querySelectorAll("#kgoalst .kgoal, #panel .kgoal")].filter(e=>{if(!vis(e))return false;const r=e.getBoundingClientRect();return r.width>40&&r.height>20&&r.bottom>0&&r.top<innerHeight});return L[0]||null}
+function goalEl(){const L=[...document.querySelectorAll("#krail [data-rail=goal]")].filter(e=>{if(!vis(e))return false;const r=e.getBoundingClientRect();return r.width>=24&&r.height>=24&&r.bottom>0&&r.top<innerHeight});return L[0]||null}
 function panelBox(){const p=$q("#panel");return p&&vis(p)?p:null}
 /* the act card for the "đọc thẻ / làm thử" steps: a quiet act she can do now (no harm, no scheme) */
 let PICK=null;
@@ -32308,7 +32321,7 @@ const INTRO=[
    srv()?["Đi lên","từ thân cung nữ, được chủ tin và Hoàng thượng để mắt thì được phong Đáp ứng, rồi leo như phi tần"]
     :["Đi lên",`từ ${RANKS[0].n}, Thường tại, Quý nhân, Tần, Phi, Quý phi, Hoàng quý phi tới Hoàng hậu; con lên ngôi thì thành Hoàng thái hậu`],
    ["Nhà và con","nhà mẹ đẻ có vinh có nhục theo {x}; con được trọng thì mẫu thân được nể"],
-   ["Mệnh truyện","truyện riêng của thân phận, mở từng chương; dải mục tiêu trên màn luôn cho biết chương này cần gì"],
+   ["Mệnh truyện","truyện riêng của thân phận, mở từng chương; cuộn chiếu Mục tiêu ở cột nút bên trái màn luôn cho biết chương này cần gì"],
    ["Kết cục","mỗi kiếp khép lại bằng một kết: kết hay, kết dở, và những kết hiếm khó gặp"]])},
  {t:"Chơi thế nào",h:()=>pic(ia("Hành sự"),"")+rows([["Buổi · khắc","mỗi tuần bốn buổi (sáng, trưa, chiều, tối), mỗi tháng ba tuần; mỗi buổi 4 khắc, việc nào cũng tốn khắc"],
    [srv()?"Phận sự":"Hành sự","chọn việc mà làm; thẻ ghi cơ may, cái giá, cái được"],["Dư đồ","đi tới các nơi trong cung, gặp người"],
@@ -32352,7 +32365,7 @@ const STEPS=[
  {id:"tutrang",title:"Tư trang",when:()=>!!groupBtn("inv"),target:()=>panelBox(),pad:0,prep(){goTab("inv")},marks:[()=>groupBtn("inv")],
   html:()=>say(`<p>Tư trang là rương đồ của {x}: trâm cài, y phục, quà được ban.</p><p>Mặc hợp phẩm thì yên; vượt phẩm hay quá giản dị đều có người để ý. Đồ ngự tứ không được bán.</p>`)},
  {id:"muctieu",title:"Mục tiêu chương",when:()=>typeof kitGoalNow==="function"&&!!kitGoalNow(),target:()=>goalEl(),pad:4,prep(){goRoom();if(!goalEl())goTab("act")},marks:[()=>groupBtn("story")],
-  html:()=>say(`<p>Dải này là mục tiêu của chương đang đi: việc phải làm và tiến độ. {X} chạm vào dải để xem chi tiết chương và những việc nên làm, có lối "Đi làm" dẫn thẳng tới chỗ.</p><p>Truyện riêng của thân phận {x} nằm ở mục <b>${grpLabel("story")}</b>; Sổ ghi chép mọi việc đã qua cũng ở đó.</p>`)},
+  html:()=>say(`<p>Cuộn chiếu này là mục tiêu của chương đang đi: việc phải làm và tiến độ. {X} chạm vào để xem chi tiết chương và những việc nên làm, có lối "Đi làm" dẫn thẳng tới chỗ.</p><p>Truyện riêng của thân phận {x} nằm ở mục <b>${grpLabel("story")}</b>; Sổ ghi chép mọi việc đã qua cũng ở đó.</p>`)},
  {id:"so",title:"Ghi sổ · Nạp sổ",target:"#menu",pad:4,prep(){goRoom()},
   html:()=>say(`<p>Sổ tự ghi sau mỗi việc. Chạm ☰ để về màn đầu: chọn sổ, nạp lại kiếp đang chơi, xem Sổ luân hồi.</p><p>Chép sổ và Nạp sổ nằm trong Thiết lập; muốn nghe {m} dặn lại thì chọn <b>Xem lại lời dặn</b>.</p>`)},
  {id:"quabuoi",title:"Sang buổi",target:"#next",pad:4,side:"above",prep(){goRoom()},last:true,
@@ -32487,7 +32500,7 @@ document.getElementById("modal").addEventListener("click",e=>{const b=e.target.c
    lạc lối." + "Không bấm xem được" on the Hành sự goal strip) — KIT.md §72. One data source, three kit pieces:
    - kitGoalNow(): the main road of this life (QUEST67 + milestone chapters of j67), the current chapter goal in plain words, its steps with
      live progress, and 2–3 concrete next things to do, each with WHERE to tap ({tab, act} → "Đi làm").
-   - kitGoalStrip(): THE goal strip = the old Hành sự line ".obj67" (j67) made a real button (kit seal edge + "›"); also laid on the main
+   - (16/11) the goal strip is gone: the goal is the "Mục tiêu chương" icon of the stage rail (kitStageRail, KIT §77, jrail). Was laid on the main
      stage (room view) under the scene title. Tap → kitGoalDetail().
    - kitGoalDetail(): chapter detail (kit panel, event frame: origin picture band + her figure): goal, steps ✓/✗, tấn phong requirements for
      the rank chapter, acts of a story chapter, next things with "Đi làm" options. MINIMAL view of review/chapter-detail (C24, queued):
@@ -32532,11 +32545,6 @@ function nextSteps(C){const L=[];const when=(S.buoi||0)===0?"sáng nay":"sáng m
 function kitGoalNow(){if(typeof S==="undefined"||!S||S.dead)return null;const C=chapter();if(!C)return null;
  let step="";if(C.kind==="ms"){const nx=C.steps.find(x=>!x.ok);step=nx?nx.t:"sắp xong"}else step=plain(C.next||C.g);
  return{road:road(),C,kicker:`Chương ${C.n}`,title:C.t,goal:C.g,step,next:nextSteps(C)}}
-/* ---------- THE goal strip (kit part) ---------- */
-function kitGoalStrip(o){o=o||{};const G=o.G||kitGoalNow();if(!G)return"";const nx=G.next&&G.next[0];
- return `<button type="button" class="kgoal${o.cls?" "+o.cls:""}" data-kgoal="1" title="Chạm để xem chi tiết chương">`+
-  `<span class="kgoal-k">Mệnh truyện · ${esc(G.kicker)} «${esc(G.title)}»</span><span class="kgoal-t">${esc(G.step)}</span>`+
-  `${nx&&o.next!==false?`<span class="kgoal-n">Việc kế: ${esc(nx.t)}</span>`:""}<span class="kgoal-go" aria-hidden="true">›</span></button>`}
 /* ---------- "Đi làm": open the tab, ring the act card with the guide's spotlight (kitCoach, jtut) when it is on screen ---------- */
 function goWhere(x){try{if(!x||!x.tab)return;const b=document.querySelector(`#tabs [data-tab="${x.tab}"]`);
  /* tapping the tab that is already open sends a phone back to the room (jk3), so only tap another tab */
@@ -32560,14 +32568,14 @@ function kitGoalDetail(){const G=kitGoalNow();if(!G)return;const C=G.C;
   if(C.dl!=null)R.push(["Hạn",`còn ${Math.max(0,C.dl-S.turn)} tháng`,C.dl-S.turn<=1?"r":""]);if(C.hist.length)R.push(["Đã qua",C.hist.map(esc).join("<br>")]);sec.push({h:"Tiến độ",rows:R})}
  if(C.kind==="v1"&&C.next)sec.push({h:"Tiến độ",rows:[["Kế tiếp",esc(plain(C.next))]]});
  sec.push({h:"Việc nên làm",rows:nextRows(G.next)});
- kitPanel({kind:"info",title:`${G.kicker} · ${C.t}`,sub:G.road?`Mệnh truyện: ${G.road}`:"",headArt:art(),subject:pMe(),stage:[S],sections:sec,opts:nextOpts(G.next),btn:"Đóng"},true);showModal()}
+ kitPanel({kind:"info",title:`${G.kicker} · ${C.t}`,sub:G.road?`Mệnh truyện: ${G.road}`:"",headArt:art(),sections:sec,opts:nextOpts(G.next).concat([{n:"Đóng",fx:{},go:()=>{}}])},true);showModal()}  /* "Đóng" = the close option → kit ✕ + tap outside + Esc (32.10) */
 /* ---------- "Mệnh truyện kiếp này": right after Nhập cung ---------- */
 function kitGoalCard(){const G=kitGoalNow();if(!G)return null;const C=G.C;
  const life=isS()?"Từ thân cung nữ, đi lên bằng lòng tin của chủ và ánh mắt của Hoàng thượng.":`Từ ${RANKS[S.rank].n} leo dần lên Hoàng hậu, rồi Hoàng thái hậu; giữ mình, giữ nhà.`;
  const sec=[{h:"Đường đời kiếp này",rows:[["Đường lớn",life],G.road?["Truyện riêng",`«${esc(G.road)}» · từng chương mở dần theo thời gian`]:null,["Chương này",`${G.kicker} · ${esc(C.t)}`],["Mục tiêu",esc(C.g)]].filter(Boolean)},
   {h:"Việc nên làm trước",rows:nextRows(G.next)},
-  {h:"Xem lại",rows:[["Dải mục tiêu",`ở đầu mục ${tabName("act")} và trên màn chính; chạm vào để xem chi tiết chương`],["Mệnh truyện",`mục ${tabName("story")} ở hàng dưới`]]}];
- return {kind:"notice",title:"Mệnh truyện kiếp này",sub:`${G.kicker} · ${C.t}`,headArt:art(),subject:pMe(),stage:[S],sections:sec,btn:"Đã hiểu"}}
+  {h:"Xem lại",rows:[["Mục tiêu chương","cuộn chiếu ở cột nút bên trái màn; chạm vào để xem chi tiết chương"],["Mệnh truyện",`mục ${tabName("story")} ở hàng dưới`]]}];
+ return {kind:"notice",title:"Mệnh truyện kiếp này",sub:`${G.kicker} · ${C.t}`,headArt:art(),sections:sec,btn:"Đã hiểu"}}
 /* queued right after the Nhập cung card of a new life (each machine, own life; co-op guest too). The new life is made inside Luân hồi
    (j52 nlBegin → the inner start, maybe after the figures load), so this watches the queue: a "Nhập cung" card with no goal card yet. */
 function nhapAt(){return Q.findIndex(x=>x&&(/^Nhập cung/.test(String(x.t||""))||(x.kit&&/^Nhập cung/.test(String(x.kit.title||"")))))}
@@ -32575,40 +32583,65 @@ function queueCard(){try{if(bot()||typeof S==="undefined"||!S||S.dead||S.goalCar
  const spec=kitGoalCard();if(!spec)return;S.goalCard=1;const m=kitPanel(spec);m.goal=1;const i0=Q.indexOf(m);if(i0>=0)Q.splice(i0,1);Q.splice(nhapAt()+1,0,m)}catch(e){console.error("goal card",e)}}
 setInterval(queueCard,300);
 try{const sm0=showModal;showModal=function(){queueCard();return sm0.apply(this,arguments)};window.showModal=showModal}catch(e){}
-/* ---------- the strip on the main stage (room view), under the scene title, never over a figure's face (KIT §15) ---------- */
-function stageStrip(){try{const st=document.getElementById("stage");if(!st)return;let el=document.getElementById("kgoalst");
- const ps=document.querySelector("#panel .kgoal");const both=!!(ps&&ps.getClientRects().length&&!document.querySelector(".game.k3home"));
- const G=(typeof S!=="undefined"&&S&&!S.dead&&!both)?kitGoalNow():null;
- if(!G){if(el)el.remove();return}const h=kitGoalStrip({G,cls:"kgoal-st",next:false});
- if(!el){el=document.createElement("div");el.id="kgoalst";el.className="kgoalst";st.appendChild(el)}if(el.__h!==h){el.innerHTML=h;el.__h=h}
- /* KIT §15: never over the stage chips (Hoàng thượng / Thái hậu / … column, .k3cs/.k3c): the strip takes the free width left of them */
- const sr=st.getBoundingClientRect();let R=sr.right-8;st.querySelectorAll(".k3cs,.k3c").forEach(c=>{const r=c.getBoundingClientRect();if(r.width&&r.left>sr.left+sr.width*.4)R=Math.min(R,r.left-8)});
- const L=12,W=Math.max(200,Math.min(440,R-sr.left-L));el.style.left=L+"px";el.style.width=W+"px";el.style.translate="0 0"}catch(e){console.error("goal strip",e)}}
-try{const r0=render;render=function(){const r=r0.apply(this,arguments);stageStrip();return r};window.render=render}catch(e){}
-document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-kgoal]");if(!b)return;e.stopPropagation();e.preventDefault();
- try{if(typeof sfx==="function")sfx("sfx-tap")}catch(x){}kitGoalDetail()},true);
+/* owner 16/11 (shot 1b571e3a): the goal strip is REPLACED by the goal icon of the stage rail (kitStageRail §77, jrail): no strip on the
+   stage, none on top of Hành sự (the strip and its CSS are deleted); a stale #kgoalst is removed. */
+try{const r0=render;render=function(){const r=r0.apply(this,arguments);try{const el=document.getElementById("kgoalst");if(el)el.remove()}catch(e){}return r};window.render=render}catch(e){}
 /* the chapter card on Mệnh truyện › Chương này opens the same detail (no dead taps) */
 document.addEventListener("click",e=>{try{if(typeof tab==="undefined"||tab!=="story")return;const c=e.target.closest&&e.target.closest('#panel .kskill[data-skill^="story-"]');if(!c||e.target.closest("button,a,[data-v85tab]"))return;kitGoalDetail()}catch(x){}});
-/* ---------- kit CSS (tokens KIT §1/§8) ---------- */
-const css=document.createElement("style");css.id="kit-goal";css.textContent=`
-.kgoal{display:grid;grid-template-columns:1fr auto;grid-template-areas:"k go" "t go" "n go";gap:1px 10px;align-items:center;width:100%;box-sizing:border-box;margin:0 0 8px;padding:6px 8px 7px 12px;
- text-align:left;font:inherit;color:var(--ink,#3a2a1a);background:var(--k-card,#fffaf0);border:1px solid var(--k-hair,#e6d3ac);border-left:4px solid var(--k-seal,#9a2c1c);border-radius:var(--k-rad,8px);
- box-shadow:0 1px 3px #0001;cursor:pointer;min-height:44px}
-.kgoal:hover{background:var(--k-card2,#f6ead6)}.kgoal:active{transform:translateY(1px)}
-.kgoal-k{grid-area:k;font-size:.7rem;color:var(--k-lab,#8a7350);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.kgoal-t{grid-area:t;font-size:.88rem;font-weight:600;line-height:1.3;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
-.kgoal-n{grid-area:n;font-size:.76rem;color:var(--k-lab,#8a7350)}
-.kgoal-go{grid-area:go;display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:var(--k-seal,#9a2c1c);color:#fff6e0;font-size:1.15rem;line-height:1;font-weight:700}
-.kgoalst{position:absolute;left:12px;top:var(--kgoal-top,46px);z-index:6;width:min(420px,calc(100% - 24px));pointer-events:none}
-.kgoalst .kgoal{pointer-events:auto;margin:0;padding:3px 6px 4px 10px;min-height:40px;background:color-mix(in srgb,var(--k-card,#fffaf0) 92%,transparent);box-shadow:0 2px 8px #0003}
-.kgoalst .kgoal-t{-webkit-line-clamp:1;font-size:.82rem}
-.kgoalst .kgoal-go{width:24px;height:24px}
-@media (max-width:599px){.kgoal-t{font-size:.8rem}.kgoalst{width:calc(100% - 16px)}}
-`;document.head.appendChild(css);
-try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§72",title:"kitGoalStrip · kitGoalDetail · kitGoalCard (mục tiêu chương, việc kế, chạm xem)",
- html:()=>`<div class="kitpg-row" style="max-width:480px">${kitGoalStrip()||kitGoalStrip({G:{kicker:"Chương 1",title:"Nhập cung, đứng vững",step:"Được tấn phong một bậc (nay Đáp ứng)",next:[{t:"Đi thỉnh an Hoàng hậu sáng mai"}]}})}</div>`})}catch(e){}
-window.kitGoalNow=kitGoalNow;window.kitGoalStrip=kitGoalStrip;window.kitGoalDetail=kitGoalDetail;window.kitGoalCard=kitGoalCard;window.kitGoalGo=goWhere;
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§72",title:"kitGoalDetail · chi tiết chương (khung sự kiện: tranh trái, hàng kit phải) — mở từ nút Mục tiêu của cột §77",
+ html:()=>`<div class="kitpg-row"><button type="button" class="kbtn" onclick="kitGoalDetail()">Mở chi tiết chương</button></div>`})}catch(e){}
+window.kitGoalNow=kitGoalNow;window.kitGoalDetail=kitGoalDetail;window.kitGoalCard=kitGoalCard;window.kitGoalGo=goWhere;
 }catch(e){console.error("jgoal",e)}})();
+/* ================= jrail: kitStageRail — THE stage icon rail (KIT §77, owner 16/11, shot 1b571e3a: "one column of small round icon buttons,
+   top-left of the stage") =================
+   ONE kit part, the same on every stage (her room, every place, co-op): a vertical column of small round kit buttons at the LEFT edge of
+   #stage, under the scene title, never over a face (it only takes the left gutter: 40 px buttons, 6 px apart). Order = `order` (small first).
+   Built-in: (1) Lịch tháng (kitMonthCalOpen, replaces the desk calendar in her room's corner, §58), (3) Mục tiêu chương (kitGoalDetail, replaces
+   the goal strip on the stage and on top of Hành sự, §72.2; a small dot while the goal changed and she has not opened it).
+   (2) Chat is added by co-op chat (review/coop-chat) through the API:
+     kitStageRail.add({id, icon:"https://ctm-img.victoria-tntt.workers.dev/img/kit/….webp", title:"Tên", onTap:fn, badge:()=>bool, when:()=>bool, order:20})
+     kitStageRail.remove(id) · kitStageRail.paint() (re-draw now; it also re-draws after every renderStage / render and on resize).
+   Kit look: the round kit button (card paper, gold hairline, soft shadow) with a painted icon; the badge = the kit seal-red dot.
+   Old saves load unchanged: S.goalSeen is new and optional. */
+(function(){try{
+const R=[];const byId=id=>R.find(x=>x.id===id);
+function add(o){if(!o||!o.id)return;const i=R.findIndex(x=>x.id===o.id);const it=Object.assign({order:50},o);if(i>=0)R[i]=it;else R.push(it);R.sort((a,b)=>a.order-b.order);paint()}
+function remove(id){const i=R.findIndex(x=>x.id===id);if(i>=0)R.splice(i,1);paint()}
+const val=(f,d)=>{try{return typeof f==="function"?f():(f==null?d:f)}catch(e){return d}};
+function place(el,st){try{const t=st.querySelector("#sc-t");const R0=st.getBoundingClientRect();let top=8;
+  if(t&&t.offsetParent){const q=t.getBoundingClientRect();if(q.bottom>R0.top&&q.top<R0.top+80)top=Math.max(top,Math.round(q.bottom-R0.top+6))}
+  el.style.top=top+"px"}catch(e){}}
+function paint(){try{const st=document.getElementById("stage");let el=document.getElementById("krail");
+ const live=typeof S!=="undefined"&&S&&!S.dead;if(!st||!live){if(el)el.remove();return}
+ const L=R.filter(x=>val(x.when,true));if(!L.length){if(el)el.remove();return}
+ if(!el){el=document.createElement("nav");el.id="krail";el.className="krail";el.setAttribute("aria-label","Lối tắt")}
+ const h=L.map(x=>{const b=val(x.badge,false);return `<button type="button" class="krailb${b?" kbadge":""}" data-rail="${x.id}" aria-label="${x.title}${b?" (có mới)":""}" title="${x.title}"><img src="${x.icon}" alt="" decoding="async"></button>`}).join("");
+ if(el.__h!==h){el.innerHTML=h;el.__h=h}if(el.parentNode!==st)st.appendChild(el);place(el,st)}catch(e){console.error("kitStageRail",e)}}
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("#krail [data-rail]");if(!b)return;e.stopPropagation();e.preventDefault();
+ const x=byId(b.dataset.rail);if(!x||typeof x.onTap!=="function")return;try{if(typeof sfx==="function")sfx("sfx-tap")}catch(y){}try{x.onTap()}catch(y){console.error("rail tap",y)}paint()},true);
+try{if(typeof renderStage==="function"){const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);paint();return r}}}catch(e){}
+try{const r1=render;render=function(){const r=r1.apply(this,arguments);paint();return r};window.render=render}catch(e){}
+let rt=0;addEventListener("resize",()=>{clearTimeout(rt);rt=setTimeout(paint,80)});
+window.kitStageRail={add,remove,paint,items:()=>R.slice()};
+/* (1) Lịch tháng — §58 kitMonthCalOpen; the desk calendar in the room corner is retired (one place: the rail) */
+add({id:"cal",order:10,icon:"https://ctm-img.victoria-tntt.workers.dev/img/kit/mo-calendar.webp",title:"Lịch tháng",when:()=>typeof kitMonthCalOpen==="function",onTap:()=>kitMonthCalOpen()});
+try{if(typeof kitDeskCal==="function"){window.kitDeskCal=kitDeskCal=function(){const b=document.getElementById("kmcdesk");if(b)b.remove()};const b=document.getElementById("kmcdesk");if(b)b.remove()}}catch(e){}
+/* (3) Mục tiêu chương — §72 kitGoalDetail; dot = the goal changed since she last opened it */
+const gSig=()=>{try{const G=typeof kitGoalNow==="function"?kitGoalNow():null;return G?[G.kicker,G.title,G.step].join("|"):""}catch(e){return""}};
+add({id:"goal",order:30,icon:"https://ctm-img.victoria-tntt.workers.dev/img/kit/mo-edict-closed.webp",title:"Mục tiêu chương",when:()=>!!gSig(),badge:()=>{const s=gSig();return !!s&&S.goalSeen!==s},
+ onTap:()=>{S.goalSeen=gSig();if(typeof kitGoalDetail==="function")kitGoalDetail()}});
+const css=document.createElement("style");css.id="kit-rail";css.textContent=`
+.krail{position:absolute;left:8px;top:44px;z-index:7;display:flex;flex-direction:column;gap:6px;pointer-events:none}
+.krailb{pointer-events:auto;position:relative;width:40px;height:40px;min-width:40px;padding:4px;margin:0;border-radius:50%;box-sizing:border-box;cursor:pointer;
+ background:var(--k-card,#fffaf0);border:1px solid var(--gold,#b8892b);box-shadow:inset 0 0 0 2px var(--k-card,#fffaf0),inset 0 0 0 3px var(--k-hair,#e6d3ac),0 2px 6px #0003;display:flex;align-items:center;justify-content:center}
+.krailb img{width:100%;height:100%;object-fit:contain;display:block;pointer-events:none}
+.krailb:active{transform:scale(.94)}
+.krailb.kbadge:after{content:"";position:absolute;top:1px;right:1px;width:10px;height:10px;border-radius:50%;background:var(--k-seal,#9a2c1c);box-shadow:0 0 0 2px var(--k-card,#fffaf0)}
+@media (max-height:430px){.krailb{width:34px;height:34px;min-width:34px;padding:3px}.krail{gap:4px}}
+`;document.head.appendChild(css);
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§77",title:"kitStageRail · cột nút tròn bên trái sân khấu (Lịch · Chat · Mục tiêu)",
+ html:()=>`<div class="kitpg-row" style="position:relative;height:150px"><nav class="krail" style="position:static">${[["mo-calendar","Lịch tháng",0],["ico-chat","Chat",0],["mo-edict-closed","Mục tiêu chương",1]].map(([i,t,b])=>`<button type="button" class="krailb${b?" kbadge":""}" title="${t}"><img src="https://ctm-img.victoria-tntt.workers.dev/img/kit/${i}.webp" alt=""></button>`).join("")}</nav></div>`})}catch(e){}
+}catch(e){console.error("jrail",e)}})();
 /* j84 — VĂN PHONG: every player-visible word in one classical (cổ trang) register. Style guide: dev/kit/VANPHONG.md.
    Must stay the LAST module. It changes no rule or number: (1) data patches (tab names, tooltips); (2) one replacement
    table window.VP applied to text nodes and to title/aria-label/placeholder/data-s attributes as they appear on screen
@@ -34739,7 +34772,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="178c02bc4735";window.CTM_BUILD=BUILD;
+const BUILD="e7ff6c440f3f";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

@@ -4,7 +4,7 @@ Reviewer (session 8 subagent), 16/11. Branch: Emperor side story "Tân quân l�
 Mệnh truyện › Triều cục / Tâm nguyện.
 
 ## Merge
-- origin/main 63cf7b12a merged (merge base 3ac727833 = palace-start), then main eba64ead43 (kpanel-compact, evidence-truth, elder-staff) merged again; reign.js PASS at all 5 sizes and kit scan 87/87 CONFORMS after both merges. Conflicts: assemble.py (main's list + `jreign.js` after `jstory.js`),
+- origin/main 63cf7b12a merged (merge base 3ac727833 = palace-start), then main eba64ead43 and a363cc14a6 (kpanel-compact, evidence-truth, elder-staff, goal-strip-fix) merged again; reign.js PASS at all 5 sizes and kit scan 87/87 CONFORMS after both merges. Conflicts: assemble.py (main's list + `jreign.js` after `jstory.js`),
   index.html / sw.js (rebuilt with dev/site/build_site.sh). BAL.rg merged cleanly into jbal2.js.
 
 ## Reviewer fixes (on r1)
