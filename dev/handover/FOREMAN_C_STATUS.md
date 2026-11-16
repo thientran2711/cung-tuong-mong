@@ -42,7 +42,7 @@ Base main at start: 900ace7fb.
 | D48 outside-route art | review/outside-art-r1 | sonnet | PASS 9b4a257d0 (art on CDN; maps recompressed to 1536x857, 385/408 KB; wiring = session 8 B2) |
 | D49 collection milestones | review/collect-ms-r1 | sonnet | PASS 94591de58 (per-life count, titles persist in the book — matches OD L45–46; reviewer added unique S.colLid per life) |
 | D22 real-phone UA test mode | review/ua-test-r1 | sonnet | PASS cad6e04c0 (test infra only; 13 device profiles verified; rotate-prompt 18/18) |
-| D15 download-size (129 MB first load) + perf test | review/perf | sonnet | RUNNING (worker) |
+| D15 download-size + perf test | review/perf @ef6bc7d54 (first load 912 MB → 43 MB, title 746 s → 30 s; assets.py core/fig/lazy/fx; perf.js + budget) → review/perf-r1 | opus | REVIEWING (separate session) |
 | D7 personality + 13 virtues + Thái hậu archetypes | review/personality-r1 | opus | PASS 99b5e3157 (reviewer fixed co-op friend trọng mismatch + stranger rule in jpcf 'Sở trọng') |
 | D29 schedules/roster re-port | review/schedules3 @10517412e (85%: ported, merged-build re-runs left) | opus | RUNNING (finishing session session_011xDdVRcAbEJXh2PekTYPF4) |
 | D26 idea builds: memories + hook ledger first (dev/ideas/DESIGN_IDEAS_1115.md + HISTORY_IDEAS_1115.md) | review/memories | opus | RUNNING (session session_011xDdVPYyJVKrkdKtDKo6f9) |
@@ -135,6 +135,7 @@ PASS review/update-notes-r1 8cc6ae7c8f63f72436afceed38b4143aa3bc815b (D10; desce
 - Q19 (owner, D18): origin odds — keep Nam Chiếu at weight 6 (~5.6%) and Bắc Địch at 7 (~6.8%)? Every other origin drops ~7%. Q20: redraw Bắc Địch's wide picture so it looks less like Nam Chiếu's (same gate/parasol, Miao-like silver costumes)? (Q14 distinct foreign look still open.)
 - KIT REQUEST K15 (D17 luxury): the contest board frame (C34 kitGameFrame) hides the header score/round field, so the running outfit total written via kg82Set('round') is invisible → needs a visible line 'Bộ đồ: Xa xỉ N · đề chuộng A đến B'. (Art, morning: event picture for 'Ý chỉ tiết kiệm'.)
 - Q21 (owner, D17): (1) show the contest theme's luxury range on the announcement? (2) over her allowance = vượt phẩm even inside the theme range? (3) Đức −1 per formal meeting when too lavish — keep? (4) frugal edict about once per 5 years — OK? (5) contests are harder now that NPCs really dress — OK?
+- KIT REQUEST K16 (D15 perf): a first visit fetches index.html 3× (host page, rot.js iframe ?khost=1&krot=1 = different URL so HTTP cache misses, SW install precache cache:'reload') — 5.6 MB of the 43 MB. Proposal: rot.js loads the iframe from the SAME URL (frame flag in hash/window.name) and swreg hands the shell its index from the HTTP cache → ~37 MB. rot.js/host canvas is the kit keeper's area. Also (VANPHONG owner): the loading note 'không cần mạng' is now true only for art already seen + the first-hour set.
 - K3 (FYI): C18 kit-popup-sample-r1 PASS adds kit page §8 pop-up samples (sample registration only, no new part) — passed before the rule; kit keeper please confirm.
 - Q1 (D1 result-sfx): sound is OFF by default (OPT.snd=false in j11.js), so new players never hear the win/fail sounds. Turn sound ON by default for new games (old saves keep their choice)? Foreman C recommends ON for new games only.
 
