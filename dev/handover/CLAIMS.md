@@ -216,7 +216,7 @@
 | D36 rank-port fix pass: replace private krk-* parts with kit parts (sonnet; rows part waits on KIT REQUEST) | review/rank-port-r2 | B | session_01N1tNP6zPQNzSmyMgNCuSPj | BLOCKED on KIT REQUEST A/B/C (items 1,3,4,5 done d8636053; worker archived) | 16/11 13:55Z |
 | tham-flip-ui: owner 14:00Z card flip tray too yellow (repaint game style) + rank+name under every card (kit) | review/tham-flip-ui | main s17 | session_01UV1SzhYN2Ensucb2ZqjeRX (sonnet) | RUNNING | 16/11 14:02Z |
 | history-thitam expert (sonnet): lật thẻ bài / mùng 1 & rằm / ngự giá — history, dramas, games → rule proposal | (report only) | main s17 | session_01UV1Szgg8KB5ye6NWizPmHd | RUNNING | 16/11 14:03Z |
-| D13 spread-events-r2 reviewer (opus) | review/spread-events-r3 | B | session_01N1tNP3wvFLuxbHBhMw3hMx | RUNNING | 16/11 14:05Z |
+| D13 spread-events-r2 reviewer (opus) | review/spread-events-r3 | B | session_01N1tNP3wvFLuxbHBhMw3hMx | DONE PASS 1c4ea581 (archived) | 16/11 14:05Z |
 | mg-balance-2 reviewer (opus) | review/mg-balance-2-r1 | B | session_01N1tNP6z6YihnVHKFcdrurC | DONE PASS 961c1f8b (archived) | 16/11 14:10Z |
 | title-tag-r1 review (rank-bright 9043c173 + title-tag 0dc3afa8) | review/title-tag-r1 | main s17 | session_01UV1SzmFFVNQ3K1RGgtZK3p | RUNNING | 16/11 14:12Z |
 | mem-upgrade review | review/mem-upgrade-r1 | D | session_01DgYSWot4sNs4TrG8fUm2of | PASS 64b40270 | 16/11 14:29Z |
