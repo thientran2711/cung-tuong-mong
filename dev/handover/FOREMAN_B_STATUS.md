@@ -6,7 +6,7 @@ Connectors (account B): GitHub push OK · Magnific OK (project "Personal" ba4aec
 |---|---|---|---|
 | C23 mg-easy | review/mg-easy-r1 | sonnet | LIVE (main 4f5e5f3b, train 1/2) — was PASS 94644c1e6342eb7ea1003aae090cd5310a9597e5 |
 | C41 tuduc-mg | review/tuduc-mg @c859d8b4 | sonnet | RUNNING (finisher: Dung scores 0 under bot, missing viewports) |
-| C24 chapter-detail | review/chapter-detail | sonnet | RUNNING (resumed; told to GROW kitGoalDetail from review/tutorial-r2 per coordinator note) |
+| C24 chapter-detail | review/chapter-detail @e46ea012 (contains tutorial-r2) | sonnet | REVIEWING (review/chapter-detail-r1, sonnet) |
 | C26 stat-fx | review/stat-fx-r1 | sonnet | LIVE (main 4f5e5f3b, train 1/2) — was PASS 0eb3e4b4a41a9123ad7181b39fc14afc60f8ab11 (follow-up C26b QUEUED) |
 | C27 buoi-transition | review/buoi-transition-r1 | sonnet | LIVE (main 4f5e5f3b, train 1/2) — was PASS c91bfdc4629fbf4ebf84307f543d44a394ff138b (images on CDN) |
 | C39 tab-underline | review/tab-underline-r1 | sonnet | LIVE (main 4f5e5f3b, train 1/2) — was PASS d8b54d0970ac8591d07163650058485f4bceb818 |
@@ -79,6 +79,7 @@ All 6 pending images UPLOADED by Foreman B (11/16): img/fx/buoi-{wash,mist,hills
 - KIT REQUEST (C41 tuduc-mg): a kit-owned "hint ring" part for canvas mini-games (Gợi ý marker is now a position-fixed div with .ksel); mini-game frame picture-left/info-right is a frame-level change (contest-ui's kitGameFrame({pic}) covers it once approved).
 - KIT REQUEST (D36 rank-port, blocks it): (1) podium j90 per owner 08:55Z — characters big/most prominent, podium shrunk to the name-plate under the feet, medal at the plate's top-right, "Ta" tag, optional entry fields fig/face/nameH/you; used by Bảng vàng and other podium users; must match C34 contest-ui podium + KIT_FIG (old implementation: origin/review/rank-ui 895c898ef j90 diff); (2) person dialog jk4: her own chip shows rank+name via kitName(q,{cap:true,named:q===S}) in kitStageFig; figure column sticky for dialogs without options so the full figure shows at 844x390 (895c898ef jk4 + CSS `#modal .dlg.kdper:not(.kdnarrow)>#mb:not(:has(>.opts))`); (3) KIT.md text podium §26 and 32.7b from that commit.
 - places-port-r1 (PASS): KIT §76 kitPalaceMap number to confirm; KIT_FLOOR .62 for the new rooms; new shared art thuong-thu-phong-*, a-ca-so-*, dong-cung-* (16 season/buổi + fallback each, gpt-2-6 edits of approved scenes); no kit parts changed.
+- KIT REQUEST (C24 chapter-detail, optional): kitGoalDetail/kitModal head art can't show the chapter's own cover or each hồi's picture (head = tutorial-r2 art(); hồi pictures are in kitSkillCard cards) — add if the owner wants the chapter cover in the head.
 From now on Foreman B workers only use existing kit parts and file KIT REQUESTs here.
 
 ## QUESTIONS
